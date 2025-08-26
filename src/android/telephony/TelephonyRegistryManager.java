@@ -11,7 +11,6 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.telephony.TelephonyRegistryManager;
 import android.telephony.emergency.EmergencyNumber;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.MediaQualityStatus;
@@ -90,18 +89,18 @@ public class TelephonyRegistryManager {
 
         @Override // com.android.internal.telephony.IOnSubscriptionsChangedListener
         public void onSubscriptionsChanged() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final SubscriptionManager.OnSubscriptionsChangedListener onSubscriptionsChangedListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SubscriptionManager.OnSubscriptionsChangedListener.this.onSubscriptionsChanged();
+                        onSubscriptionsChangedListener.onSubscriptionsChanged();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -144,7 +143,7 @@ public class TelephonyRegistryManager {
 
         @Override // com.android.internal.telephony.IOnSubscriptionsChangedListener
         public void onSubscriptionsChanged() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Log.d(TelephonyRegistryManager.TAG, "onOpportunisticSubscriptionsChanged callback received.");
                 Executor executor = this.val$executor;
@@ -152,11 +151,11 @@ public class TelephonyRegistryManager {
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SubscriptionManager.OnOpportunisticSubscriptionsChangedListener.this.onOpportunisticSubscriptionsChanged();
+                        onOpportunisticSubscriptionsChangedListener.onOpportunisticSubscriptionsChanged();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -181,9 +180,7 @@ public class TelephonyRegistryManager {
             int[] array = getEventsFromBitmask(i2).stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda2
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
+                    return ((Integer) obj).intValue();
                 }
             }).toArray();
             if (Compatibility.isChangeEnabled(LISTEN_CODE_CHANGE)) {
@@ -508,9 +505,7 @@ public class TelephonyRegistryManager {
             sRegistry.notifySimultaneousCellularCallingSubscriptionsChanged(set.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda1
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
+                    return ((Integer) obj).intValue();
                 }
             }).toArray());
         } catch (RemoteException e) {
@@ -858,9 +853,7 @@ public class TelephonyRegistryManager {
         listenFromCallback(z, z2, i, str, str2, telephonyCallback, getEventsFromCallback(telephonyCallback).stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda0
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray(), z3);
     }
@@ -935,8 +928,8 @@ public class TelephonyRegistryManager {
         public void onSatelliteEnabledStateChanged(final boolean z) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyRegistryManager$SatelliteStateChangeListenerWrapper$$ExternalSyntheticLambda2
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TelephonyRegistryManager.SatelliteStateChangeListenerWrapper.this.lambda$onSatelliteEnabledStateChanged$1(z);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onSatelliteEnabledStateChanged$1(z);
                 }
             });
         }
@@ -972,12 +965,12 @@ public class TelephonyRegistryManager {
 
         @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
         public void onCarrierPrivilegesChanged(List<String> list, int[] iArr) {
-            final Set copyOf = Set.copyOf(list);
+            final Set setCopyOf = Set.copyOf(list);
             final Set set = (Set) Arrays.stream(iArr).boxed().collect(Collectors.toSet());
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda4
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this.lambda$onCarrierPrivilegesChanged$1(copyOf, set);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCarrierPrivilegesChanged$1(setCopyOf, set);
                 }
             });
         }
@@ -999,8 +992,8 @@ public class TelephonyRegistryManager {
         public void onCarrierServiceChanged(final String str, final int i) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this.lambda$onCarrierServiceChanged$3(str, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCarrierServiceChanged$3(str, i);
                 }
             });
         }
@@ -1046,11 +1039,11 @@ public class TelephonyRegistryManager {
         }
         WeakHashMap<TelephonyManager.CarrierPrivilegesCallback, WeakReference<CarrierPrivilegesCallbackWrapper>> weakHashMap = sCarrierPrivilegeCallbacks;
         synchronized (weakHashMap) {
-            WeakReference<CarrierPrivilegesCallbackWrapper> remove = weakHashMap.remove(carrierPrivilegesCallback);
-            if (remove == null) {
+            WeakReference<CarrierPrivilegesCallbackWrapper> weakReferenceRemove = weakHashMap.remove(carrierPrivilegesCallback);
+            if (weakReferenceRemove == null) {
                 return;
             }
-            CarrierPrivilegesCallbackWrapper carrierPrivilegesCallbackWrapper = remove.get();
+            CarrierPrivilegesCallbackWrapper carrierPrivilegesCallbackWrapper = weakReferenceRemove.get();
             if (carrierPrivilegesCallbackWrapper == null) {
                 return;
             }
@@ -1110,18 +1103,18 @@ public class TelephonyRegistryManager {
         @Override // com.android.internal.telephony.ICarrierConfigChangeListener
         public void onCarrierConfigChanged(final int i, final int i2, final int i3, final int i4) {
             Log.d(TelephonyRegistryManager.TAG, "onCarrierConfigChanged call in ICarrierConfigChangeListener callback");
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CarrierConfigManager.CarrierConfigChangeListener carrierConfigChangeListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CarrierConfigManager.CarrierConfigChangeListener.this.onCarrierConfigChanged(i, i2, i3, i4);
+                        carrierConfigChangeListener.onCarrierConfigChanged(i, i2, i3, i4);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

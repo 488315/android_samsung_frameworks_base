@@ -93,9 +93,9 @@ public class IntArray implements Cloneable {
             if (i4 > i3) {
                 i3 = i4;
             }
-            int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i3);
-            System.arraycopy(this.mValues, 0, newUnpaddedIntArray, 0, i2);
-            this.mValues = newUnpaddedIntArray;
+            int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i3);
+            System.arraycopy(this.mValues, 0, iArrNewUnpaddedIntArray, 0, i2);
+            this.mValues = iArrNewUnpaddedIntArray;
         }
     }
 
@@ -104,7 +104,7 @@ public class IntArray implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public IntArray m5502clone() {
+    public IntArray m5509clone() {
         return new IntArray((int[]) this.mValues.clone(), this.mSize);
     }
 

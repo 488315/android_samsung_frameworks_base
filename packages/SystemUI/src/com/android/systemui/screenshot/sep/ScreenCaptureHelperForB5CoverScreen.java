@@ -2,7 +2,6 @@ package com.android.systemui.screenshot.sep;
 
 import android.graphics.Rect;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenCaptureHelperForB5CoverScreen extends ScreenCaptureHelper {
     @Override // com.android.systemui.screenshot.sep.ScreenCaptureHelper
@@ -19,14 +18,14 @@ public final class ScreenCaptureHelperForB5CoverScreen extends ScreenCaptureHelp
 
     @Override // com.android.systemui.screenshot.sep.ScreenCaptureHelper
     public final Rect getScreenshotRectToCapture() {
-        boolean isExcludeSystemUI = ScreenshotUtils.isExcludeSystemUI(this.displayContext);
+        boolean zIsExcludeSystemUI = ScreenshotUtils.isExcludeSystemUI(this.displayContext);
         if (!isB5ScreenEffect()) {
             this.screenNativeHeight -= this.safeInsetTop + this.safeInsetBottom;
         } else if (ScreenshotUtils.isExcludeSystemUI(this.displayContext) && this.isNavigationBarVisible) {
             this.screenNativeHeight -= this.navigationBarHeight;
         }
         Rect rect = this.rectToCapture;
-        if (isB5CoverScreenInReverseMode() && isExcludeSystemUI) {
+        if (isB5CoverScreenInReverseMode() && zIsExcludeSystemUI) {
             rect.set(0, this.navigationBarHeight, (int) this.screenNativeWidth, (int) this.screenNativeHeight);
             return rect;
         }

@@ -65,9 +65,9 @@ public class TACommandResponse implements Parcelable {
     public void readFromParcel(Parcel parcel) {
         this.mResponseCode = parcel.readInt();
         this.mErrorMsg = parcel.readString();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.mResponse = bArr;
             parcel.readByteArray(bArr);
         }

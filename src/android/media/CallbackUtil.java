@@ -106,7 +106,7 @@ class CallbackUtil {
             if (arrayList != null) {
                 if (arrayList.size() != 0) {
                     ArrayList arrayList2 = (ArrayList) arrayList.clone();
-                    SafeCloseable create = ClearCallingIdentityContext.create();
+                    SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
                     try {
                         Iterator it = arrayList2.iterator();
                         while (it.hasNext()) {
@@ -114,17 +114,17 @@ class CallbackUtil {
                             listenerInfo.mExecutor.execute(new Runnable() { // from class: android.media.CallbackUtil$$ExternalSyntheticLambda0
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    CallbackUtil.CallbackMethod.this.callbackMethod(listenerInfo.mListener);
+                                    callbackMethod.callbackMethod(listenerInfo.mListener);
                                 }
                             });
                         }
-                        if (create != null) {
-                            create.close();
+                        if (safeCloseableCreate != null) {
+                            safeCloseableCreate.close();
                         }
                     } catch (Throwable th) {
-                        if (create != null) {
+                        if (safeCloseableCreate != null) {
                             try {
-                                create.close();
+                                safeCloseableCreate.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
@@ -147,28 +147,28 @@ class CallbackUtil {
         /* JADX WARN: Multi-variable type inference failed */
         void addListener(Executor executor, T t, String str, Supplier<DispatcherStub> supplier) {
             synchronized (this.mListenerLock) {
-                Pair addListener = CallbackUtil.addListener(str, executor, t, this.mListeners, this.mDispatcherStub, supplier, new Consumer() { // from class: android.media.CallbackUtil$LazyListenerManager$$ExternalSyntheticLambda1
+                Pair pairAddListener = CallbackUtil.addListener(str, executor, t, this.mListeners, this.mDispatcherStub, supplier, new Consumer() { // from class: android.media.CallbackUtil$LazyListenerManager$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         ((CallbackUtil.DispatcherStub) obj).register(true);
                     }
                 });
-                this.mListeners = (ArrayList) addListener.first;
-                this.mDispatcherStub = (DispatcherStub) addListener.second;
+                this.mListeners = (ArrayList) pairAddListener.first;
+                this.mDispatcherStub = (DispatcherStub) pairAddListener.second;
             }
         }
 
         /* JADX WARN: Multi-variable type inference failed */
         void removeListener(T t, String str) {
             synchronized (this.mListenerLock) {
-                Pair removeListener = CallbackUtil.removeListener(str, t, this.mListeners, this.mDispatcherStub, new Consumer() { // from class: android.media.CallbackUtil$LazyListenerManager$$ExternalSyntheticLambda0
+                Pair pairRemoveListener = CallbackUtil.removeListener(str, t, this.mListeners, this.mDispatcherStub, new Consumer() { // from class: android.media.CallbackUtil$LazyListenerManager$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         ((CallbackUtil.DispatcherStub) obj).register(false);
                     }
                 });
-                this.mListeners = (ArrayList) removeListener.first;
-                this.mDispatcherStub = (DispatcherStub) removeListener.second;
+                this.mListeners = (ArrayList) pairRemoveListener.first;
+                this.mDispatcherStub = (DispatcherStub) pairRemoveListener.second;
             }
         }
 

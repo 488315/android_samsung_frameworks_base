@@ -2,7 +2,6 @@ package androidx.compose.ui.node;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class IntStack {
     public int lastIndex;
@@ -14,30 +13,30 @@ final class IntStack {
 
     public final void pushDiagonal(int i, int i2, int i3) {
         int i4 = this.lastIndex;
-        int[] iArr = this.stack;
+        int[] iArrCopyOf = this.stack;
         int i5 = i4 + 3;
-        if (i5 >= iArr.length) {
-            iArr = Arrays.copyOf(iArr, iArr.length * 2);
-            this.stack = iArr;
+        if (i5 >= iArrCopyOf.length) {
+            iArrCopyOf = Arrays.copyOf(iArrCopyOf, iArrCopyOf.length * 2);
+            this.stack = iArrCopyOf;
         }
-        iArr[i4] = i + i3;
-        iArr[i4 + 1] = i2 + i3;
-        iArr[i4 + 2] = i3;
+        iArrCopyOf[i4] = i + i3;
+        iArrCopyOf[i4 + 1] = i2 + i3;
+        iArrCopyOf[i4 + 2] = i3;
         this.lastIndex = i5;
     }
 
     public final void pushRange(int i, int i2, int i3, int i4) {
         int i5 = this.lastIndex;
-        int[] iArr = this.stack;
+        int[] iArrCopyOf = this.stack;
         int i6 = i5 + 4;
-        if (i6 >= iArr.length) {
-            iArr = Arrays.copyOf(iArr, iArr.length * 2);
-            this.stack = iArr;
+        if (i6 >= iArrCopyOf.length) {
+            iArrCopyOf = Arrays.copyOf(iArrCopyOf, iArrCopyOf.length * 2);
+            this.stack = iArrCopyOf;
         }
-        iArr[i5] = i;
-        iArr[i5 + 1] = i2;
-        iArr[i5 + 2] = i3;
-        iArr[i5 + 3] = i4;
+        iArrCopyOf[i5] = i;
+        iArrCopyOf[i5 + 1] = i2;
+        iArrCopyOf[i5 + 2] = i3;
+        iArrCopyOf[i5 + 3] = i4;
         this.lastIndex = i6;
     }
 

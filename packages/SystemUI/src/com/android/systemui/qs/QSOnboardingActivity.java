@@ -1,6 +1,8 @@
 package com.android.systemui.qs;
 
 import android.animation.ValueAnimator;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -33,7 +35,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.StringCompanionObject;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSOnboardingActivity extends SuwBaseActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -53,11 +54,10 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
     public final QSOnboardingActivity$onBackInvokedCallback$1 onBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.qs.QSOnboardingActivity$onBackInvokedCallback$1
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            QSOnboardingActivity.this.onBackPressed();
+            this.this$0.onBackPressed();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -113,10 +113,10 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
 
     /* JADX WARN: Type inference failed for: r4v3, types: [android.view.View$OnClickListener, com.android.systemui.qs.QSOnboardingActivity$onCreate$1] */
     @Override // com.sec.android.secsetupwizardlib.SuwBaseActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         FooterBarMixin footerBarMixin;
         LinearLayout linearLayout;
-        View findViewById;
+        View viewFindViewById;
         SuwBaseActivity suwBaseActivity = this.mContext;
         super.onCreate(bundle);
         this.isSplit = ((SettingsHelper) this.settingsHelper$delegate.getValue()).isPanelSplit();
@@ -126,11 +126,11 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         ViewGroup viewGroup = (ViewGroup) findViewById(R.id.sswl_scroll_view);
         if (!this.mIsNeedScrollView) {
             viewGroup = (ViewGroup) findViewById(R.id.sswl_layout_content);
-            View findViewById2 = this.mRootLayout.findViewById(R.id.sud_landscape_content_area);
-            if (findViewById2 != null && (findViewById = this.mRootLayout.findViewById(R.id.sud_layout_content)) != null) {
-                int paddingTop = findViewById.getPaddingTop();
-                findViewById.setPadding(findViewById.getPaddingStart(), 0, findViewById.getPaddingEnd(), findViewById.getPaddingBottom());
-                findViewById2.setPadding(findViewById2.getPaddingStart(), paddingTop, findViewById2.getPaddingEnd(), findViewById2.getPaddingBottom());
+            View viewFindViewById2 = this.mRootLayout.findViewById(R.id.sud_landscape_content_area);
+            if (viewFindViewById2 != null && (viewFindViewById = this.mRootLayout.findViewById(R.id.sud_layout_content)) != null) {
+                int paddingTop = viewFindViewById.getPaddingTop();
+                viewFindViewById.setPadding(viewFindViewById.getPaddingStart(), 0, viewFindViewById.getPaddingEnd(), viewFindViewById.getPaddingBottom());
+                viewFindViewById2.setPadding(viewFindViewById2.getPaddingStart(), paddingTop, viewFindViewById2.getPaddingEnd(), viewFindViewById2.getPaddingBottom());
             }
         }
         if (viewGroup != null) {
@@ -139,7 +139,7 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         LayoutInflater.from(this).inflate(R.layout.qs_onboarding_page, viewGroup);
         setHeaderIcon(getResources().getDrawable(R.drawable.ic_suw_quickpanel_separated));
         int i = isScrollBottomReached() ? R.string.next_description : R.string.qs_onboarding_more;
-        ?? r4 = new View.OnClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$onCreate$1
+        ?? r4 = new View.OnClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity.onCreate.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 QSOnboardingActivity qSOnboardingActivity = QSOnboardingActivity.this;
@@ -197,12 +197,12 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         linearLayout3.setVisibility(8);
         this.separateStroke = (FrameLayout) requireViewById(R.id.separate_stroke_background);
         this.togetherStroke = (FrameLayout) requireViewById(R.id.together_stroke_background);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.strokeAnimator = ofFloat;
-        if (ofFloat == null) {
-            ofFloat = null;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.strokeAnimator = valueAnimatorOfFloat;
+        if (valueAnimatorOfFloat == null) {
+            valueAnimatorOfFloat = null;
         }
-        ofFloat.setDuration(500L);
+        valueAnimatorOfFloat.setDuration(500L);
         ValueAnimator valueAnimator = this.strokeAnimator;
         if (valueAnimator == null) {
             valueAnimator = null;
@@ -210,25 +210,25 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initStrokeAnimator$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                QSOnboardingActivity qSOnboardingActivity = QSOnboardingActivity.this;
+                float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                QSOnboardingActivity qSOnboardingActivity = this.this$0;
                 if (qSOnboardingActivity.isSplit) {
                     FrameLayout frameLayout = qSOnboardingActivity.separateStroke;
                     if (frameLayout == null) {
                         frameLayout = null;
                     }
-                    frameLayout.setAlpha(floatValue);
-                    FrameLayout frameLayout2 = QSOnboardingActivity.this.togetherStroke;
-                    (frameLayout2 != null ? frameLayout2 : null).setAlpha(1.0f - floatValue);
+                    frameLayout.setAlpha(fFloatValue);
+                    FrameLayout frameLayout2 = this.this$0.togetherStroke;
+                    (frameLayout2 != null ? frameLayout2 : null).setAlpha(1.0f - fFloatValue);
                     return;
                 }
                 FrameLayout frameLayout3 = qSOnboardingActivity.separateStroke;
                 if (frameLayout3 == null) {
                     frameLayout3 = null;
                 }
-                frameLayout3.setAlpha(1.0f - floatValue);
-                FrameLayout frameLayout4 = QSOnboardingActivity.this.togetherStroke;
-                (frameLayout4 != null ? frameLayout4 : null).setAlpha(floatValue);
+                frameLayout3.setAlpha(1.0f - fFloatValue);
+                FrameLayout frameLayout4 = this.this$0.togetherStroke;
+                (frameLayout4 != null ? frameLayout4 : null).setAlpha(fFloatValue);
             }
         });
         if (this.isSplit) {
@@ -270,11 +270,11 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         }
         textView.setText(this.isSplit ? R.string.qs_edit_separate_description : R.string.qs_edit_together_description);
         String string2 = getResources().getString(R.string.qs_onboarding_together_description);
-        String substringBefore$default = StringsKt__StringsKt.substringBefore$default(StringsKt__StringsKt.substringAfter$default(string2, "%1$s"), "%2$s");
+        String strSubstringBefore$default = StringsKt__StringsKt.substringBefore$default(StringsKt__StringsKt.substringAfter$default(string2, "%1$s"), "%2$s");
         ClickableSpan clickableSpan = new ClickableSpan() { // from class: com.android.systemui.qs.QSOnboardingActivity$formatClickableText$clickableSpan$1
             @Override // android.text.style.ClickableSpan
             public final void onClick(View view) {
-                QSOnboardingActivity qSOnboardingActivity = QSOnboardingActivity.this;
+                QSOnboardingActivity qSOnboardingActivity = this.this$0;
                 LinearLayout linearLayout4 = qSOnboardingActivity.firstPage;
                 if (linearLayout4 == null) {
                     linearLayout4 = null;
@@ -291,10 +291,10 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         };
         int i2 = StringCompanionObject.$r8$clinit;
         SpannableString spannableString = new SpannableString(String.format(string2, Arrays.copyOf(new Object[]{"", ""}, 2)));
-        int indexOf$default = StringsKt__StringsKt.indexOf$default(spannableString, substringBefore$default, 0, false, 6);
-        int length = substringBefore$default.length() + indexOf$default;
-        spannableString.setSpan(new StyleSpan(1), indexOf$default, length, 33);
-        spannableString.setSpan(clickableSpan, indexOf$default, length, 33);
+        int iIndexOf$default = StringsKt__StringsKt.indexOf$default(spannableString, strSubstringBefore$default, 0, false, 6);
+        int length = strSubstringBefore$default.length() + iIndexOf$default;
+        spannableString.setSpan(new StyleSpan(1), iIndexOf$default, length, 33);
+        spannableString.setSpan(clickableSpan, iIndexOf$default, length, 33);
         TextView textView2 = (TextView) requireViewById(R.id.next_page_link_text);
         textView2.setText(spannableString);
         textView2.setMovementMethod(LinkMovementMethod.getInstance());
@@ -306,7 +306,7 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initScrollView$1$1
             @Override // android.view.View.OnScrollChangeListener
             public final void onScrollChange(View view, int i3, int i4, int i5, int i6) {
-                QSOnboardingActivity qSOnboardingActivity = QSOnboardingActivity.this;
+                QSOnboardingActivity qSOnboardingActivity = this.this$0;
                 int i7 = QSOnboardingActivity.$r8$clinit;
                 int i8 = qSOnboardingActivity.isScrollBottomReached() ? R.string.next_description : R.string.qs_onboarding_more;
                 FooterButton footerButton2 = qSOnboardingActivity.mPrimaryButton;
@@ -319,9 +319,9 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10) {
                 float measuredWidth = scrollView.getMeasuredWidth() * 0.9f;
-                View requireViewById = scrollView.requireViewById(R.id.qs_onboarding_page);
+                View viewRequireViewById = scrollView.requireViewById(R.id.qs_onboarding_page);
                 QSOnboardingActivity qSOnboardingActivity = this;
-                FrameLayout frameLayout5 = (FrameLayout) requireViewById;
+                FrameLayout frameLayout5 = (FrameLayout) viewRequireViewById;
                 int i11 = QSOnboardingActivity.$r8$clinit;
                 qSOnboardingActivity.getClass();
                 SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = (SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class);
@@ -343,13 +343,13 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         frameLayout5.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initClickListeners$1$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSOnboardingActivity.access$updatePanelSplit(QSOnboardingActivity.this, z2);
+                QSOnboardingActivity.access$updatePanelSplit(this.this$0, z2);
             }
         });
         frameLayout5.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initClickListeners$1$2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSOnboardingActivity.access$updatePanelSplit(QSOnboardingActivity.this, z2);
+                QSOnboardingActivity.access$updatePanelSplit(this.this$0, z2);
                 return true;
             }
         });
@@ -357,13 +357,13 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         frameLayout6.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initClickListeners$1$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSOnboardingActivity.access$updatePanelSplit(QSOnboardingActivity.this, z);
+                QSOnboardingActivity.access$updatePanelSplit(this.this$0, z);
             }
         });
         frameLayout6.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.QSOnboardingActivity$initClickListeners$1$2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSOnboardingActivity.access$updatePanelSplit(QSOnboardingActivity.this, z);
+                QSOnboardingActivity.access$updatePanelSplit(this.this$0, z);
                 return true;
             }
         });
@@ -454,7 +454,7 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
         if (scrollView == null) {
             scrollView = null;
         }
-        scrollView.animate().alpha(0.0f).setDuration(150L).withEndAction(new Runnable() { // from class: com.android.systemui.qs.QSOnboardingActivity$transitionToPage$1
+        scrollView.animate().alpha(0.0f).setDuration(150L).withEndAction(new Runnable() { // from class: com.android.systemui.qs.QSOnboardingActivity.transitionToPage.1
             @Override // java.lang.Runnable
             public final void run() {
                 view.setVisibility(8);
@@ -477,10 +477,10 @@ public final class QSOnboardingActivity extends SuwBaseActivity {
                 ScrollView scrollView3 = this.fullScreenScrollView;
                 ViewPropertyAnimator duration = (scrollView3 != null ? scrollView3 : null).animate().alpha(1.0f).setDuration(150L);
                 final QSOnboardingActivity qSOnboardingActivity = this;
-                duration.withEndAction(new Runnable() { // from class: com.android.systemui.qs.QSOnboardingActivity$transitionToPage$1.1
+                duration.withEndAction(new Runnable() { // from class: com.android.systemui.qs.QSOnboardingActivity.transitionToPage.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        QSOnboardingActivity qSOnboardingActivity2 = QSOnboardingActivity.this;
+                        QSOnboardingActivity qSOnboardingActivity2 = qSOnboardingActivity;
                         int i = QSOnboardingActivity.$r8$clinit;
                         qSOnboardingActivity2.playLottieAnimation();
                     }

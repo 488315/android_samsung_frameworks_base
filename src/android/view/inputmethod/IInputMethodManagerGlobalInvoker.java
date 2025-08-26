@@ -38,14 +38,14 @@ final class IInputMethodManagerGlobalInvoker {
     }
 
     static IInputMethodManager getService() {
-        IInputMethodManager iInputMethodManager = sServiceCache;
-        if (iInputMethodManager == null) {
-            if (InputMethodManager.isInEditModeInternal() || (iInputMethodManager = IInputMethodManager.Stub.asInterface(ServiceManager.getService(Context.INPUT_METHOD_SERVICE))) == null) {
+        IInputMethodManager iInputMethodManagerAsInterface = sServiceCache;
+        if (iInputMethodManagerAsInterface == null) {
+            if (InputMethodManager.isInEditModeInternal() || (iInputMethodManagerAsInterface = IInputMethodManager.Stub.asInterface(ServiceManager.getService(Context.INPUT_METHOD_SERVICE))) == null) {
                 return null;
             }
-            sServiceCache = iInputMethodManager;
+            sServiceCache = iInputMethodManagerAsInterface;
         }
-        return iInputMethodManager;
+        return iInputMethodManagerAsInterface;
     }
 
     private static void handleRemoteExceptionOrRethrow(RemoteException remoteException, Consumer<RemoteException> consumer) {

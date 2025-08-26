@@ -27,7 +27,7 @@ public class SyncFilter extends DecorateFilter {
         List list = (List) mediaBuffer.stream().map(new Function() { // from class: com.samsung.android.sume.core.filter.SyncFilter$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return SyncFilter.this.m9554lambda$run$0$comsamsungandroidsumecorefilterSyncFilter((MediaBuffer) obj);
+                return this.f$0.m9567lambda$run$0$comsamsungandroidsumecorefilterSyncFilter((MediaBuffer) obj);
             }
         }).collect(Collectors.toList());
         if (list.size() == 1) {
@@ -40,7 +40,7 @@ public class SyncFilter extends DecorateFilter {
     }
 
     /* renamed from: lambda$run$0$com-samsung-android-sume-core-filter-SyncFilter, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9554lambda$run$0$comsamsungandroidsumecorefilterSyncFilter(MediaBuffer mediaBuffer) {
+    /* synthetic */ MediaBuffer m9567lambda$run$0$comsamsungandroidsumecorefilterSyncFilter(MediaBuffer mediaBuffer) {
         return super.run(mediaBuffer, MediaBuffer.mutableOf()).reset();
     }
 }

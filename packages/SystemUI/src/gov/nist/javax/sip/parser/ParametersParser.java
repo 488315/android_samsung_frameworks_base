@@ -3,8 +3,8 @@ package gov.nist.javax.sip.parser;
 import gov.nist.core.NameValue;
 import gov.nist.javax.sip.header.AddressParametersHeader;
 import gov.nist.javax.sip.header.ParametersHeader;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ParametersParser extends HeaderParser {
     public ParametersParser(Lexer lexer) {
@@ -21,7 +21,7 @@ public abstract class ParametersParser extends HeaderParser {
         }
     }
 
-    public final void parseNameValueList(AddressParametersHeader addressParametersHeader) {
+    public final void parseNameValueList(AddressParametersHeader addressParametersHeader) throws ParseException {
         addressParametersHeader.removeParameters();
         while (true) {
             this.lexer.SPorHT();

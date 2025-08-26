@@ -11,7 +11,6 @@ import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NowBarItem {
     public static final int COLOR_INVALID = 1;

@@ -10,7 +10,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ObjectAnimator extends ValueAnimator {
     public final Property mProperty;
@@ -42,8 +41,8 @@ public final class ObjectAnimator extends ValueAnimator {
 
     @Override // androidx.core.animation.ValueAnimator, androidx.core.animation.Animator
     /* renamed from: clone */
-    public final Animator mo890clone() {
-        return (ObjectAnimator) super.mo890clone();
+    public final Animator mo892clone() {
+        return (ObjectAnimator) super.mo892clone();
     }
 
     public final Object getTarget() {
@@ -83,8 +82,7 @@ public final class ObjectAnimator extends ValueAnimator {
                         Log.w("PropertyValuesHolder", "No such property (" + propertyValuesHolder.mProperty.getName() + ") on target object " + target + ". Trying reflection instead");
                         propertyValuesHolder.mProperty = null;
                     }
-                }
-                if (propertyValuesHolder.mProperty == null) {
+                } else if (propertyValuesHolder.mProperty == null) {
                     Class<?> cls = target.getClass();
                     if (propertyValuesHolder.mSetter == null) {
                         propertyValuesHolder.mSetter = propertyValuesHolder.setupSetterOrGetter(cls, PropertyValuesHolder.sSetterPropertyMap, "set", propertyValuesHolder.mValueType);
@@ -169,15 +167,15 @@ public final class ObjectAnimator extends ValueAnimator {
 
     @Override // androidx.core.animation.ValueAnimator
     public final String toString() {
-        String str = "ObjectAnimator@" + Integer.toHexString(hashCode()) + ", target " + getTarget();
+        String string = "ObjectAnimator@" + Integer.toHexString(hashCode()) + ", target " + getTarget();
         if (this.mValues != null) {
             for (int i = 0; i < this.mValues.length; i++) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "\n    ");
-                m.append(this.mValues[i].toString());
-                str = m.toString();
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "\n    ");
+                sbM.append(this.mValues[i].toString());
+                string = sbM.toString();
             }
         }
-        return str;
+        return string;
     }
 
     private ObjectAnimator(Object obj, String str) {
@@ -196,8 +194,8 @@ public final class ObjectAnimator extends ValueAnimator {
 
     @Override // androidx.core.animation.ValueAnimator, androidx.core.animation.Animator
     /* renamed from: clone */
-    public final ValueAnimator mo890clone() {
-        return (ObjectAnimator) super.mo890clone();
+    public final ValueAnimator mo892clone() {
+        return (ObjectAnimator) super.mo892clone();
     }
 
     @Override // androidx.core.animation.ValueAnimator, androidx.core.animation.Animator
@@ -214,12 +212,12 @@ public final class ObjectAnimator extends ValueAnimator {
 
     @Override // androidx.core.animation.ValueAnimator, androidx.core.animation.Animator
     /* renamed from: clone */
-    public final Object mo890clone() {
-        return (ObjectAnimator) super.mo890clone();
+    public final Object mo892clone() {
+        return (ObjectAnimator) super.mo892clone();
     }
 
     /* renamed from: setDuration, reason: collision with other method in class */
-    public final void m894setDuration(long j) {
+    public final void m896setDuration(long j) {
         super.setDuration(j);
     }
 

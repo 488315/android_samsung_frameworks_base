@@ -7,7 +7,6 @@ import android.widget.ImageButton;
 import com.android.systemui.R;
 import com.android.wm.shell.windowdecor.TaskFocusStateConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CaptionButton extends ImageButton implements TaskFocusStateConsumer {
     public static final int[] TASK_FOCUSED_STATE = {R.attr.state_task_focused};
@@ -27,9 +26,9 @@ public class CaptionButton extends ImageButton implements TaskFocusStateConsumer
         if (!this.mIsTaskFocused) {
             return super.onCreateDrawableState(i);
         }
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
-        ImageButton.mergeDrawableStates(onCreateDrawableState, TASK_FOCUSED_STATE);
-        return onCreateDrawableState;
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
+        ImageButton.mergeDrawableStates(iArrOnCreateDrawableState, TASK_FOCUSED_STATE);
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.view.View

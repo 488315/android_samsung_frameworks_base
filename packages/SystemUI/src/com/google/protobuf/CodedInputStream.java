@@ -2,12 +2,12 @@ package com.google.protobuf;
 
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import com.google.protobuf.ByteString;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CodedInputStream {
     public int recursionDepth;
@@ -15,7 +15,6 @@ public abstract class CodedInputStream {
     public final int sizeLimit;
     public CodedInputStreamReader wrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ArrayDecoder extends CodedInputStream {
         public final byte[] buffer;
         public int bufferSizeAfterLimit;
@@ -26,7 +25,7 @@ public abstract class CodedInputStream {
         public final int startPos;
 
         @Override // com.google.protobuf.CodedInputStream
-        public final void checkLastTagWas(int i) {
+        public final void checkLastTagWas(int i) throws InvalidProtocolBufferException {
             if (this.lastTag != i) {
                 throw new InvalidProtocolBufferException("Protocol message end-group tag did not match expected tag.");
             }
@@ -49,7 +48,7 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final int pushLimit(int i) {
+        public final int pushLimit(int i) throws InvalidProtocolBufferException {
             if (i < 0) {
                 throw InvalidProtocolBufferException.negativeSize();
             }
@@ -71,43 +70,46 @@ public abstract class CodedInputStream {
             return readRawVarint64() != 0;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
         @Override // com.google.protobuf.CodedInputStream
-        public final ByteString readBytes() {
-            byte[] bArr;
-            int readRawVarint32 = readRawVarint32();
-            byte[] bArr2 = this.buffer;
-            if (readRawVarint32 > 0) {
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final ByteString readBytes() throws InvalidProtocolBufferException {
+            byte[] bArrCopyOfRange;
+            int rawVarint32 = readRawVarint32();
+            byte[] bArr = this.buffer;
+            if (rawVarint32 > 0) {
                 int i = this.limit;
                 int i2 = this.pos;
-                if (readRawVarint32 <= i - i2) {
-                    ByteString copyFrom = ByteString.copyFrom(i2, readRawVarint32, bArr2);
-                    this.pos += readRawVarint32;
-                    return copyFrom;
+                if (rawVarint32 <= i - i2) {
+                    ByteString byteStringCopyFrom = ByteString.copyFrom(i2, rawVarint32, bArr);
+                    this.pos += rawVarint32;
+                    return byteStringCopyFrom;
                 }
             }
-            if (readRawVarint32 == 0) {
+            if (rawVarint32 == 0) {
                 return ByteString.EMPTY;
             }
-            if (readRawVarint32 > 0) {
+            if (rawVarint32 > 0) {
                 int i3 = this.limit;
                 int i4 = this.pos;
-                if (readRawVarint32 <= i3 - i4) {
-                    int i5 = readRawVarint32 + i4;
+                if (rawVarint32 <= i3 - i4) {
+                    int i5 = rawVarint32 + i4;
                     this.pos = i5;
-                    bArr = Arrays.copyOfRange(bArr2, i4, i5);
-                    ByteString byteString = ByteString.EMPTY;
-                    return new ByteString.LiteralByteString(bArr);
+                    bArrCopyOfRange = Arrays.copyOfRange(bArr, i4, i5);
+                } else {
+                    if (rawVarint32 > 0) {
+                        throw InvalidProtocolBufferException.truncatedMessage();
+                    }
+                    if (rawVarint32 != 0) {
+                        throw InvalidProtocolBufferException.negativeSize();
+                    }
+                    bArrCopyOfRange = Internal.EMPTY_BYTE_ARRAY;
                 }
             }
-            if (readRawVarint32 > 0) {
-                throw InvalidProtocolBufferException.truncatedMessage();
-            }
-            if (readRawVarint32 != 0) {
-                throw InvalidProtocolBufferException.negativeSize();
-            }
-            bArr = Internal.EMPTY_BYTE_ARRAY;
-            ByteString byteString2 = ByteString.EMPTY;
-            return new ByteString.LiteralByteString(bArr);
+            ByteString byteString = ByteString.EMPTY;
+            return new ByteString.LiteralByteString(bArrCopyOfRange);
         }
 
         @Override // com.google.protobuf.CodedInputStream
@@ -145,7 +147,7 @@ public abstract class CodedInputStream {
             return readRawVarint64();
         }
 
-        public final int readRawLittleEndian32() {
+        public final int readRawLittleEndian32() throws InvalidProtocolBufferException {
             int i = this.pos;
             if (this.limit - i < 4) {
                 throw InvalidProtocolBufferException.truncatedMessage();
@@ -155,7 +157,7 @@ public abstract class CodedInputStream {
             return ((bArr[i + 3] & 255) << 24) | (bArr[i] & 255) | ((bArr[i + 1] & 255) << 8) | ((bArr[i + 2] & 255) << 16);
         }
 
-        public final long readRawLittleEndian64() {
+        public final long readRawLittleEndian64() throws InvalidProtocolBufferException {
             int i = this.pos;
             if (this.limit - i < 8) {
                 throw InvalidProtocolBufferException.truncatedMessage();
@@ -309,7 +311,7 @@ public abstract class CodedInputStream {
             return readRawVarint64SlowPath();
         }
 
-        public final long readRawVarint64SlowPath() {
+        public final long readRawVarint64SlowPath() throws InvalidProtocolBufferException {
             long j = 0;
             for (int i = 0; i < 64; i += 7) {
                 int i2 = this.pos;
@@ -346,57 +348,57 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final String readString() {
-            int readRawVarint32 = readRawVarint32();
-            if (readRawVarint32 > 0) {
+        public final String readString() throws InvalidProtocolBufferException {
+            int rawVarint32 = readRawVarint32();
+            if (rawVarint32 > 0) {
                 int i = this.limit;
                 int i2 = this.pos;
-                if (readRawVarint32 <= i - i2) {
-                    String str = new String(this.buffer, i2, readRawVarint32, Internal.UTF_8);
-                    this.pos += readRawVarint32;
+                if (rawVarint32 <= i - i2) {
+                    String str = new String(this.buffer, i2, rawVarint32, Internal.UTF_8);
+                    this.pos += rawVarint32;
                     return str;
                 }
             }
-            if (readRawVarint32 == 0) {
+            if (rawVarint32 == 0) {
                 return "";
             }
-            if (readRawVarint32 < 0) {
+            if (rawVarint32 < 0) {
                 throw InvalidProtocolBufferException.negativeSize();
             }
             throw InvalidProtocolBufferException.truncatedMessage();
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final String readStringRequireUtf8() {
-            int readRawVarint32 = readRawVarint32();
-            if (readRawVarint32 > 0) {
+        public final String readStringRequireUtf8() throws InvalidProtocolBufferException {
+            int rawVarint32 = readRawVarint32();
+            if (rawVarint32 > 0) {
                 int i = this.limit;
                 int i2 = this.pos;
-                if (readRawVarint32 <= i - i2) {
-                    String decodeUtf8 = Utf8.decodeUtf8(i2, readRawVarint32, this.buffer);
-                    this.pos += readRawVarint32;
-                    return decodeUtf8;
+                if (rawVarint32 <= i - i2) {
+                    String strDecodeUtf8 = Utf8.decodeUtf8(i2, rawVarint32, this.buffer);
+                    this.pos += rawVarint32;
+                    return strDecodeUtf8;
                 }
             }
-            if (readRawVarint32 == 0) {
+            if (rawVarint32 == 0) {
                 return "";
             }
-            if (readRawVarint32 <= 0) {
+            if (rawVarint32 <= 0) {
                 throw InvalidProtocolBufferException.negativeSize();
             }
             throw InvalidProtocolBufferException.truncatedMessage();
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final int readTag() {
+        public final int readTag() throws InvalidProtocolBufferException {
             if (isAtEnd()) {
                 this.lastTag = 0;
                 return 0;
             }
-            int readRawVarint32 = readRawVarint32();
-            this.lastTag = readRawVarint32;
-            if ((readRawVarint32 >>> 3) != 0) {
-                return readRawVarint32;
+            int rawVarint32 = readRawVarint32();
+            this.lastTag = rawVarint32;
+            if ((rawVarint32 >>> 3) != 0) {
+                return rawVarint32;
             }
             throw InvalidProtocolBufferException.invalidTag();
         }
@@ -426,8 +428,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final boolean skipField(int i) {
-            int readTag;
+        public final boolean skipField(int i) throws InvalidProtocolBufferException {
+            int tag;
             int i2 = i & 7;
             int i3 = 0;
             if (i2 == 0) {
@@ -475,16 +477,16 @@ public abstract class CodedInputStream {
                 return true;
             }
             do {
-                readTag = readTag();
-                if (readTag == 0) {
+                tag = readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (skipField(readTag));
+            } while (skipField(tag));
             checkLastTagWas(((i >>> 3) << 3) | 4);
             return true;
         }
 
-        public final void skipRawBytes(int i) {
+        public final void skipRawBytes(int i) throws InvalidProtocolBufferException {
             if (i >= 0) {
                 int i2 = this.limit;
                 int i3 = this.pos;
@@ -509,7 +511,6 @@ public abstract class CodedInputStream {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamDecoder extends CodedInputStream {
         public final byte[] buffer;
         public int bufferSize;
@@ -521,7 +522,7 @@ public abstract class CodedInputStream {
         public int totalBytesRetired;
 
         @Override // com.google.protobuf.CodedInputStream
-        public final void checkLastTagWas(int i) {
+        public final void checkLastTagWas(int i) throws InvalidProtocolBufferException {
             if (this.lastTag != i) {
                 throw new InvalidProtocolBufferException("Protocol message end-group tag did not match expected tag.");
             }
@@ -544,7 +545,7 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final int pushLimit(int i) {
+        public final int pushLimit(int i) throws InvalidProtocolBufferException {
             if (i < 0) {
                 throw InvalidProtocolBufferException.negativeSize();
             }
@@ -564,42 +565,42 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final ByteString readBytes() {
-            int readRawVarint32 = readRawVarint32();
+        public final ByteString readBytes() throws IOException {
+            int rawVarint32 = readRawVarint32();
             int i = this.bufferSize;
             int i2 = this.pos;
             int i3 = i - i2;
             byte[] bArr = this.buffer;
-            if (readRawVarint32 <= i3 && readRawVarint32 > 0) {
-                ByteString copyFrom = ByteString.copyFrom(i2, readRawVarint32, bArr);
-                this.pos += readRawVarint32;
-                return copyFrom;
+            if (rawVarint32 <= i3 && rawVarint32 > 0) {
+                ByteString byteStringCopyFrom = ByteString.copyFrom(i2, rawVarint32, bArr);
+                this.pos += rawVarint32;
+                return byteStringCopyFrom;
             }
-            if (readRawVarint32 == 0) {
+            if (rawVarint32 == 0) {
                 return ByteString.EMPTY;
             }
-            byte[] readRawBytesSlowPathOneChunk = readRawBytesSlowPathOneChunk(readRawVarint32);
-            if (readRawBytesSlowPathOneChunk != null) {
-                return ByteString.copyFrom(0, readRawBytesSlowPathOneChunk.length, readRawBytesSlowPathOneChunk);
+            byte[] rawBytesSlowPathOneChunk = readRawBytesSlowPathOneChunk(rawVarint32);
+            if (rawBytesSlowPathOneChunk != null) {
+                return ByteString.copyFrom(0, rawBytesSlowPathOneChunk.length, rawBytesSlowPathOneChunk);
             }
             int i4 = this.pos;
             int i5 = this.bufferSize;
-            int i6 = i5 - i4;
+            int length = i5 - i4;
             this.totalBytesRetired += i5;
             this.pos = 0;
             this.bufferSize = 0;
-            List readRawBytesSlowPathRemainingChunks = readRawBytesSlowPathRemainingChunks(readRawVarint32 - i6);
-            byte[] bArr2 = new byte[readRawVarint32];
-            System.arraycopy(bArr, i4, bArr2, 0, i6);
-            ArrayList arrayList = (ArrayList) readRawBytesSlowPathRemainingChunks;
+            List rawBytesSlowPathRemainingChunks = readRawBytesSlowPathRemainingChunks(rawVarint32 - length);
+            byte[] bArr2 = new byte[rawVarint32];
+            System.arraycopy(bArr, i4, bArr2, 0, length);
+            ArrayList arrayList = (ArrayList) rawBytesSlowPathRemainingChunks;
             int size = arrayList.size();
-            int i7 = 0;
-            while (i7 < size) {
-                Object obj = arrayList.get(i7);
-                i7++;
+            int i6 = 0;
+            while (i6 < size) {
+                Object obj = arrayList.get(i6);
+                i6++;
                 byte[] bArr3 = (byte[]) obj;
-                System.arraycopy(bArr3, 0, bArr2, i6, bArr3.length);
-                i6 += bArr3.length;
+                System.arraycopy(bArr3, 0, bArr2, length, bArr3.length);
+                length += bArr3.length;
             }
             ByteString byteString = ByteString.EMPTY;
             return new ByteString.LiteralByteString(bArr2);
@@ -640,34 +641,34 @@ public abstract class CodedInputStream {
             return readRawVarint64();
         }
 
-        public final byte[] readRawBytesSlowPath(int i) {
-            byte[] readRawBytesSlowPathOneChunk = readRawBytesSlowPathOneChunk(i);
-            if (readRawBytesSlowPathOneChunk != null) {
-                return readRawBytesSlowPathOneChunk;
+        public final byte[] readRawBytesSlowPath(int i) throws IOException {
+            byte[] rawBytesSlowPathOneChunk = readRawBytesSlowPathOneChunk(i);
+            if (rawBytesSlowPathOneChunk != null) {
+                return rawBytesSlowPathOneChunk;
             }
             int i2 = this.pos;
             int i3 = this.bufferSize;
-            int i4 = i3 - i2;
+            int length = i3 - i2;
             this.totalBytesRetired += i3;
             this.pos = 0;
             this.bufferSize = 0;
-            List readRawBytesSlowPathRemainingChunks = readRawBytesSlowPathRemainingChunks(i - i4);
+            List rawBytesSlowPathRemainingChunks = readRawBytesSlowPathRemainingChunks(i - length);
             byte[] bArr = new byte[i];
-            System.arraycopy(this.buffer, i2, bArr, 0, i4);
-            ArrayList arrayList = (ArrayList) readRawBytesSlowPathRemainingChunks;
+            System.arraycopy(this.buffer, i2, bArr, 0, length);
+            ArrayList arrayList = (ArrayList) rawBytesSlowPathRemainingChunks;
             int size = arrayList.size();
-            int i5 = 0;
-            while (i5 < size) {
-                Object obj = arrayList.get(i5);
-                i5++;
+            int i4 = 0;
+            while (i4 < size) {
+                Object obj = arrayList.get(i4);
+                i4++;
                 byte[] bArr2 = (byte[]) obj;
-                System.arraycopy(bArr2, 0, bArr, i4, bArr2.length);
-                i4 += bArr2.length;
+                System.arraycopy(bArr2, 0, bArr, length, bArr2.length);
+                length += bArr2.length;
             }
             return bArr;
         }
 
-        public final byte[] readRawBytesSlowPathOneChunk(int i) {
+        public final byte[] readRawBytesSlowPathOneChunk(int i) throws IOException {
             if (i == 0) {
                 return Internal.EMPTY_BYTE_ARRAY;
             }
@@ -704,12 +705,12 @@ public abstract class CodedInputStream {
             this.bufferSize = 0;
             while (i6 < i) {
                 try {
-                    int read = this.input.read(bArr, i6, i - i6);
-                    if (read == -1) {
+                    int i8 = this.input.read(bArr, i6, i - i6);
+                    if (i8 == -1) {
                         throw InvalidProtocolBufferException.truncatedMessage();
                     }
-                    this.totalBytesRetired += read;
-                    i6 += read;
+                    this.totalBytesRetired += i8;
+                    i6 += i8;
                 } catch (InvalidProtocolBufferException e2) {
                     e2.setThrownFromInputStream();
                     throw e2;
@@ -718,27 +719,27 @@ public abstract class CodedInputStream {
             return bArr;
         }
 
-        public final List readRawBytesSlowPathRemainingChunks(int i) {
+        public final List readRawBytesSlowPathRemainingChunks(int i) throws IOException {
             ArrayList arrayList = new ArrayList();
             while (i > 0) {
-                int min = Math.min(i, 4096);
-                byte[] bArr = new byte[min];
+                int iMin = Math.min(i, 4096);
+                byte[] bArr = new byte[iMin];
                 int i2 = 0;
-                while (i2 < min) {
-                    int read = this.input.read(bArr, i2, min - i2);
-                    if (read == -1) {
+                while (i2 < iMin) {
+                    int i3 = this.input.read(bArr, i2, iMin - i2);
+                    if (i3 == -1) {
                         throw InvalidProtocolBufferException.truncatedMessage();
                     }
-                    this.totalBytesRetired += read;
-                    i2 += read;
+                    this.totalBytesRetired += i3;
+                    i2 += i3;
                 }
-                i -= min;
+                i -= iMin;
                 arrayList.add(bArr);
             }
             return arrayList;
         }
 
-        public final int readRawLittleEndian32() {
+        public final int readRawLittleEndian32() throws InvalidProtocolBufferException {
             int i = this.pos;
             if (this.bufferSize - i < 4) {
                 refillBuffer(4);
@@ -749,7 +750,7 @@ public abstract class CodedInputStream {
             return ((bArr[i + 3] & 255) << 24) | (bArr[i] & 255) | ((bArr[i + 1] & 255) << 8) | ((bArr[i + 2] & 255) << 16);
         }
 
-        public final long readRawLittleEndian64() {
+        public final long readRawLittleEndian64() throws InvalidProtocolBufferException {
             int i = this.pos;
             if (this.bufferSize - i < 8) {
                 refillBuffer(8);
@@ -904,7 +905,7 @@ public abstract class CodedInputStream {
             return readRawVarint64SlowPath();
         }
 
-        public final long readRawVarint64SlowPath() {
+        public final long readRawVarint64SlowPath() throws InvalidProtocolBufferException {
             long j = 0;
             for (int i = 0; i < 64; i += 7) {
                 if (this.pos == this.bufferSize) {
@@ -941,64 +942,64 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final String readString() {
-            int readRawVarint32 = readRawVarint32();
+        public final String readString() throws InvalidProtocolBufferException {
+            int rawVarint32 = readRawVarint32();
             byte[] bArr = this.buffer;
-            if (readRawVarint32 > 0) {
+            if (rawVarint32 > 0) {
                 int i = this.bufferSize;
                 int i2 = this.pos;
-                if (readRawVarint32 <= i - i2) {
-                    String str = new String(bArr, i2, readRawVarint32, Internal.UTF_8);
-                    this.pos += readRawVarint32;
+                if (rawVarint32 <= i - i2) {
+                    String str = new String(bArr, i2, rawVarint32, Internal.UTF_8);
+                    this.pos += rawVarint32;
                     return str;
                 }
             }
-            if (readRawVarint32 == 0) {
+            if (rawVarint32 == 0) {
                 return "";
             }
-            if (readRawVarint32 > this.bufferSize) {
-                return new String(readRawBytesSlowPath(readRawVarint32), Internal.UTF_8);
+            if (rawVarint32 > this.bufferSize) {
+                return new String(readRawBytesSlowPath(rawVarint32), Internal.UTF_8);
             }
-            refillBuffer(readRawVarint32);
-            String str2 = new String(bArr, this.pos, readRawVarint32, Internal.UTF_8);
-            this.pos += readRawVarint32;
+            refillBuffer(rawVarint32);
+            String str2 = new String(bArr, this.pos, rawVarint32, Internal.UTF_8);
+            this.pos += rawVarint32;
             return str2;
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final String readStringRequireUtf8() {
-            int readRawVarint32 = readRawVarint32();
+        public final String readStringRequireUtf8() throws IOException {
+            int rawVarint32 = readRawVarint32();
             int i = this.pos;
             int i2 = this.bufferSize;
             int i3 = i2 - i;
-            byte[] bArr = this.buffer;
-            if (readRawVarint32 <= i3 && readRawVarint32 > 0) {
-                this.pos = i + readRawVarint32;
+            byte[] rawBytesSlowPath = this.buffer;
+            if (rawVarint32 <= i3 && rawVarint32 > 0) {
+                this.pos = i + rawVarint32;
             } else {
-                if (readRawVarint32 == 0) {
+                if (rawVarint32 == 0) {
                     return "";
                 }
                 i = 0;
-                if (readRawVarint32 <= i2) {
-                    refillBuffer(readRawVarint32);
-                    this.pos = readRawVarint32;
+                if (rawVarint32 <= i2) {
+                    refillBuffer(rawVarint32);
+                    this.pos = rawVarint32;
                 } else {
-                    bArr = readRawBytesSlowPath(readRawVarint32);
+                    rawBytesSlowPath = readRawBytesSlowPath(rawVarint32);
                 }
             }
-            return Utf8.decodeUtf8(i, readRawVarint32, bArr);
+            return Utf8.decodeUtf8(i, rawVarint32, rawBytesSlowPath);
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final int readTag() {
+        public final int readTag() throws InvalidProtocolBufferException {
             if (isAtEnd()) {
                 this.lastTag = 0;
                 return 0;
             }
-            int readRawVarint32 = readRawVarint32();
-            this.lastTag = readRawVarint32;
-            if ((readRawVarint32 >>> 3) != 0) {
-                return readRawVarint32;
+            int rawVarint32 = readRawVarint32();
+            this.lastTag = rawVarint32;
+            if ((rawVarint32 >>> 3) != 0) {
+                return rawVarint32;
             }
             throw InvalidProtocolBufferException.invalidTag();
         }
@@ -1027,7 +1028,7 @@ public abstract class CodedInputStream {
             this.bufferSize = i - i4;
         }
 
-        public final void refillBuffer(int i) {
+        public final void refillBuffer(int i) throws InvalidProtocolBufferException {
             if (tryRefillBuffer(i)) {
                 return;
             }
@@ -1038,8 +1039,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.google.protobuf.CodedInputStream
-        public final boolean skipField(int i) {
-            int readTag;
+        public final boolean skipField(int i) throws InvalidProtocolBufferException {
+            int tag;
             int i2 = i & 7;
             int i3 = 0;
             if (i2 == 0) {
@@ -1087,16 +1088,16 @@ public abstract class CodedInputStream {
                 return true;
             }
             do {
-                readTag = readTag();
-                if (readTag == 0) {
+                tag = readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (skipField(readTag));
+            } while (skipField(tag));
             checkLastTagWas(((i >>> 3) << 3) | 4);
             return true;
         }
 
-        public final void skipRawBytes(int i) {
+        public final void skipRawBytes(int i) throws InvalidProtocolBufferException {
             int i2 = this.bufferSize;
             int i3 = this.pos;
             if (i <= i2 - i3 && i >= 0) {
@@ -1122,14 +1123,14 @@ public abstract class CodedInputStream {
                 try {
                     long j = i - i8;
                     try {
-                        long skip = this.input.skip(j);
-                        if (skip < 0 || skip > j) {
-                            throw new IllegalStateException(this.input.getClass() + "#skip returned invalid result: " + skip + "\nThe InputStream implementation is buggy.");
+                        long jSkip = this.input.skip(j);
+                        if (jSkip < 0 || jSkip > j) {
+                            throw new IllegalStateException(this.input.getClass() + "#skip returned invalid result: " + jSkip + "\nThe InputStream implementation is buggy.");
                         }
-                        if (skip == 0) {
+                        if (jSkip == 0) {
                             break;
                         } else {
-                            i8 += (int) skip;
+                            i8 += (int) jSkip;
                         }
                     } catch (InvalidProtocolBufferException e) {
                         e.setThrownFromInputStream();
@@ -1164,7 +1165,7 @@ public abstract class CodedInputStream {
             }
         }
 
-        public final boolean tryRefillBuffer(int i) {
+        public final boolean tryRefillBuffer(int i) throws IOException {
             int i2 = this.pos;
             int i3 = i2 + i;
             int i4 = this.bufferSize;
@@ -1186,12 +1187,12 @@ public abstract class CodedInputStream {
                 InputStream inputStream = this.input;
                 int i7 = this.bufferSize;
                 try {
-                    int read = inputStream.read(bArr, i7, Math.min(bArr.length - i7, (i6 - this.totalBytesRetired) - i7));
-                    if (read == 0 || read < -1 || read > bArr.length) {
-                        throw new IllegalStateException(this.input.getClass() + "#read(byte[]) returned invalid result: " + read + "\nThe InputStream implementation is buggy.");
+                    int i8 = inputStream.read(bArr, i7, Math.min(bArr.length - i7, (i6 - this.totalBytesRetired) - i7));
+                    if (i8 == 0 || i8 < -1 || i8 > bArr.length) {
+                        throw new IllegalStateException(this.input.getClass() + "#read(byte[]) returned invalid result: " + i8 + "\nThe InputStream implementation is buggy.");
                     }
-                    if (read > 0) {
-                        this.bufferSize += read;
+                    if (i8 > 0) {
+                        this.bufferSize += i8;
                         recomputeBufferSizeAfterLimit$1();
                         if (this.bufferSize >= i) {
                             return true;

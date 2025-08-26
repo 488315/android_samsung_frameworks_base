@@ -114,7 +114,7 @@ public class ProgramVertexFixedFunction extends ProgramVertex {
             this.mShader += ShaderAssembler.SHADER_MAIN_CODE_END;
         }
 
-        public ProgramVertexFixedFunction create() {
+        public ProgramVertexFixedFunction create() throws IllegalStateException {
             buildShaderString();
             InternalBuilder internalBuilder = new InternalBuilder(this.mRS);
             internalBuilder.setShader(this.mShader);

@@ -11,7 +11,6 @@ import kotlin.Pair;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.MapsKt___MapsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumeStateConverter {
     public static final int $stable = 0;
@@ -34,22 +33,22 @@ public final class VolumeStateConverter {
             if (str == null) {
                 str = "";
             }
-            VolumeStreamState.Builder max = streamType.nameRes(str).isDynamic(((VolumeDialogController.StreamState) pair.getSecond()).dynamic).isMuted(((VolumeDialogController.StreamState) pair.getSecond()).muted).isMuteSupport(((VolumeDialogController.StreamState) pair.getSecond()).muteSupported).isRoutedToBt(((VolumeDialogController.StreamState) pair.getSecond()).routedToBluetooth).isRoutedToAppMirroring(((VolumeDialogController.StreamState) pair.getSecond()).appMirroring).isRoutedToRemoteSpeaker(((VolumeDialogController.StreamState) pair.getSecond()).remoteSpeaker).isRoutedToBuds(((VolumeDialogController.StreamState) pair.getSecond()).routedToBuds).isRoutedToBuds3(((VolumeDialogController.StreamState) pair.getSecond()).routedToBuds3).isRoutedToHomeMini(((VolumeDialogController.StreamState) pair.getSecond()).routedToHomeMini).isRoutedToMusicFrame(((VolumeDialogController.StreamState) pair.getSecond()).routedToMusicFrame).isRoutedToHearingAid(((VolumeDialogController.StreamState) pair.getSecond()).routedToHearingAid).isRoutedToHeadset(((VolumeDialogController.StreamState) pair.getSecond()).routedToHeadset).isDisabledFixedSession(((VolumeDialogController.StreamState) pair.getSecond()).remoteFixedVolume).level(((VolumeDialogController.StreamState) pair.getSecond()).level).min(((VolumeDialogController.StreamState) pair.getSecond()).levelMin).max(((VolumeDialogController.StreamState) pair.getSecond()).levelMax);
+            VolumeStreamState.Builder builderMax = streamType.nameRes(str).isDynamic(((VolumeDialogController.StreamState) pair.getSecond()).dynamic).isMuted(((VolumeDialogController.StreamState) pair.getSecond()).muted).isMuteSupport(((VolumeDialogController.StreamState) pair.getSecond()).muteSupported).isRoutedToBt(((VolumeDialogController.StreamState) pair.getSecond()).routedToBluetooth).isRoutedToAppMirroring(((VolumeDialogController.StreamState) pair.getSecond()).appMirroring).isRoutedToRemoteSpeaker(((VolumeDialogController.StreamState) pair.getSecond()).remoteSpeaker).isRoutedToBuds(((VolumeDialogController.StreamState) pair.getSecond()).routedToBuds).isRoutedToBuds3(((VolumeDialogController.StreamState) pair.getSecond()).routedToBuds3).isRoutedToHomeMini(((VolumeDialogController.StreamState) pair.getSecond()).routedToHomeMini).isRoutedToMusicFrame(((VolumeDialogController.StreamState) pair.getSecond()).routedToMusicFrame).isRoutedToHearingAid(((VolumeDialogController.StreamState) pair.getSecond()).routedToHearingAid).isRoutedToHeadset(((VolumeDialogController.StreamState) pair.getSecond()).routedToHeadset).isDisabledFixedSession(((VolumeDialogController.StreamState) pair.getSecond()).remoteFixedVolume).level(((VolumeDialogController.StreamState) pair.getSecond()).level).min(((VolumeDialogController.StreamState) pair.getSecond()).levelMin).max(((VolumeDialogController.StreamState) pair.getSecond()).levelMax);
             String str3 = ((VolumeDialogController.StreamState) pair.getSecond()).remoteLabel;
             if (str3 == null) {
                 str3 = "";
             }
-            VolumeStreamState.Builder remoteLabel = max.remoteLabel(str3);
+            VolumeStreamState.Builder builderRemoteLabel = builderMax.remoteLabel(str3);
             String str4 = ((VolumeDialogController.StreamState) pair.getSecond()).bluetoothDeviceAddress;
             if (str4 == null) {
                 str4 = "";
             }
-            VolumeStreamState.Builder dualBtDeviceAddress = remoteLabel.dualBtDeviceAddress(str4);
+            VolumeStreamState.Builder builderDualBtDeviceAddress = builderRemoteLabel.dualBtDeviceAddress(str4);
             String str5 = ((VolumeDialogController.StreamState) pair.getSecond()).bluetoothDeviceName;
             if (str5 != null) {
                 str2 = str5;
             }
-            arrayList.add(dualBtDeviceAddress.dualBtDeviceName(str2).build());
+            arrayList.add(builderDualBtDeviceAddress.dualBtDeviceName(str2).build());
         }
         return arrayList;
     }

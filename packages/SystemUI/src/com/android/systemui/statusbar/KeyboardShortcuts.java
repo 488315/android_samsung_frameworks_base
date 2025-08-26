@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.hardware.input.InputManager;
 import android.os.Handler;
@@ -42,7 +43,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyboardShortcuts {
     public static long mShowTime;
@@ -198,39 +198,39 @@ public final class KeyboardShortcuts {
     }
 
     public static void show(Context context, int i, WindowManagerProvider windowManagerProvider) {
-        int i2;
+        int topFocusedDisplayId;
         Display[] displays;
-        long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis - mShowTime < 500) {
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (jCurrentTimeMillis - mShowTime < 500) {
             return;
         }
-        mShowTime = currentTimeMillis;
+        mShowTime = jCurrentTimeMillis;
         MetricsLogger.visible(context, 500);
         synchronized (sLock) {
             KeyboardShortcuts keyboardShortcuts = sInstance;
             if (keyboardShortcuts != null && !keyboardShortcuts.mContext.equals(context)) {
                 dismiss();
             }
-            int i3 = 0;
+            int i2 = 0;
             try {
-                i2 = WindowManagerGlobal.getWindowManagerService().getTopFocusedDisplayId();
+                topFocusedDisplayId = WindowManagerGlobal.getWindowManagerService().getTopFocusedDisplayId();
             } catch (RemoteException unused) {
                 Log.w("KeyboardShortcuts", "Unable to get focusedDisplayId");
-                i2 = 0;
+                topFocusedDisplayId = 0;
             }
             DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
-            if (displayManager != null && i2 != 0 && (displays = displayManager.getDisplays()) != null) {
+            if (displayManager != null && topFocusedDisplayId != 0 && (displays = displayManager.getDisplays()) != null) {
                 int length = displays.length;
                 while (true) {
-                    if (i3 >= length) {
+                    if (i2 >= length) {
                         break;
                     }
-                    Display display = displays[i3];
-                    if (display.getDisplayId() == i2) {
+                    Display display = displays[i2];
+                    if (display.getDisplayId() == topFocusedDisplayId) {
                         context = context.createDisplayContext(display);
                         break;
                     }
-                    i3++;
+                    i2++;
                 }
             }
             if (sInstance == null) {
@@ -264,7 +264,7 @@ public final class KeyboardShortcuts {
         kshPresenter.mHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.KshPresenter$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                KshPresenter kshPresenter2 = KshPresenter.this;
+                KshPresenter kshPresenter2 = kshPresenter;
                 KshView kshView = kshPresenter2.mKshView;
                 Dialog dialog = kshView.mKeyboardShortcutsDialog;
                 if (dialog != null) {
@@ -340,8 +340,8 @@ public final class KeyboardShortcuts {
                 kshPresenter3.mKshData.mKshGroups = list;
                 kshPresenter3.mHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.KshPresenter$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        KshPresenter kshPresenter4 = KshPresenter.this;
+                    public final void run() throws Resources.NotFoundException {
+                        KshPresenter kshPresenter4 = kshPresenter3;
                         List list3 = list;
                         KshView kshView = kshPresenter4.mKshView;
                         if (kshView == null) {

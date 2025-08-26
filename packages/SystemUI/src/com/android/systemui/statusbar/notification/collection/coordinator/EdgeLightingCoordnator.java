@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class EdgeLightingCoordnator implements Coordinator {
     public static final int $stable = 8;
@@ -17,13 +16,8 @@ public final class EdgeLightingCoordnator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
         public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
-            boolean disableDesktopLauncher;
             StatusBarNotification statusBarNotification = notificationEntry.mSbn;
-            if (("com.android.systemui".equals(statusBarNotification.getPackageName()) || "com.samsung.android.app.cocktailbarservice".equals(statusBarNotification.getPackageName())) && notificationEntry.mRanking.getChannel() != null && Intrinsics.areEqual(notificationEntry.mRanking.getChannel().getId(), "edge_lighting_chnnel_id") && (statusBarNotification.getNotification().flags & 64) != 0) {
-                return true;
-            }
-            disableDesktopLauncher = EdgeLightingCoordnator.this.disableDesktopLauncher(notificationEntry);
-            return disableDesktopLauncher;
+            return (("com.android.systemui".equals(statusBarNotification.getPackageName()) || "com.samsung.android.app.cocktailbarservice".equals(statusBarNotification.getPackageName())) && notificationEntry.mRanking.getChannel() != null && Intrinsics.areEqual(notificationEntry.mRanking.getChannel().getId(), "edge_lighting_chnnel_id") && (statusBarNotification.getNotification().flags & 64) != 0) || this.this$0.disableDesktopLauncher(notificationEntry);
         }
     };
 

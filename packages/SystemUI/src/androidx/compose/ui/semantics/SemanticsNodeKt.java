@@ -7,9 +7,13 @@ import androidx.compose.ui.node.DelegatingNode;
 import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.SemanticsModifierNode;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SemanticsNodeKt {
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0062 A[LOOP:0: B:4:0x000b->B:35:0x0062, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0065 A[EDGE_INSN: B:43:0x0065->B:36:0x0065 BREAK  A[LOOP:0: B:4:0x000b->B:35:0x0062], SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final SemanticsNode SemanticsNode(LayoutNode layoutNode, boolean z) {
         Modifier.Node node = layoutNode.nodes.head;
         Object obj = null;
@@ -19,53 +23,59 @@ public abstract class SemanticsNodeKt {
                     break;
                 }
                 if ((node.kindSet & 8) != 0) {
-                    Modifier.Node node2 = node;
+                    Modifier.Node nodeAccess$pop = node;
                     MutableVector mutableVector = null;
-                    while (node2 != null) {
-                        if (node2 instanceof SemanticsModifierNode) {
-                            obj = node2;
+                    while (nodeAccess$pop != null) {
+                        if (nodeAccess$pop instanceof SemanticsModifierNode) {
+                            obj = nodeAccess$pop;
                             break loop0;
                         }
-                        if ((node2.kindSet & 8) != 0 && (node2 instanceof DelegatingNode)) {
+                        if ((nodeAccess$pop.kindSet & 8) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                             int i = 0;
-                            for (Modifier.Node node3 = ((DelegatingNode) node2).delegate; node3 != null; node3 = node3.child) {
-                                if ((node3.kindSet & 8) != 0) {
+                            for (Modifier.Node node2 = ((DelegatingNode) nodeAccess$pop).delegate; node2 != null; node2 = node2.child) {
+                                if ((node2.kindSet & 8) != 0) {
                                     i++;
                                     if (i == 1) {
-                                        node2 = node3;
+                                        nodeAccess$pop = node2;
                                     } else {
                                         if (mutableVector == null) {
                                             mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                         }
-                                        if (node2 != null) {
-                                            mutableVector.add(node2);
-                                            node2 = null;
+                                        if (nodeAccess$pop != null) {
+                                            mutableVector.add(nodeAccess$pop);
+                                            nodeAccess$pop = null;
                                         }
-                                        mutableVector.add(node3);
+                                        mutableVector.add(node2);
                                     }
                                 }
                             }
                             if (i == 1) {
                             }
                         }
-                        node2 = DelegatableNodeKt.access$pop(mutableVector);
+                        nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                     }
+                    if ((node.aggregateChildKindSet & 8) != 0) {
+                        break;
+                    }
+                    node = node.child;
+                } else if ((node.aggregateChildKindSet & 8) != 0) {
                 }
-                if ((node.aggregateChildKindSet & 8) == 0) {
-                    break;
-                }
-                node = node.child;
             }
         }
         obj.getClass();
-        Modifier.Node node4 = ((Modifier.Node) ((SemanticsModifierNode) obj)).node;
+        Modifier.Node node3 = ((Modifier.Node) ((SemanticsModifierNode) obj)).node;
         SemanticsConfiguration semanticsConfiguration = layoutNode.getSemanticsConfiguration();
         if (semanticsConfiguration == null) {
             semanticsConfiguration = new SemanticsConfiguration();
         }
-        return new SemanticsNode(node4, z, layoutNode, semanticsConfiguration);
+        return new SemanticsNode(node3, z, layoutNode, semanticsConfiguration);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:37:0x006b A[LOOP:0: B:4:0x000b->B:37:0x006b, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x006e A[EDGE_INSN: B:42:0x006e->B:38:0x006e BREAK  A[LOOP:0: B:4:0x000b->B:37:0x006b], SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final SemanticsModifierNode getOuterMergingSemantics(LayoutNode layoutNode) {
         Modifier.Node node = layoutNode.nodes.head;
         Object obj = null;
@@ -75,43 +85,44 @@ public abstract class SemanticsNodeKt {
                     break;
                 }
                 if ((node.kindSet & 8) != 0) {
-                    Modifier.Node node2 = node;
+                    Modifier.Node nodeAccess$pop = node;
                     MutableVector mutableVector = null;
-                    while (node2 != null) {
-                        if (node2 instanceof SemanticsModifierNode) {
-                            if (((SemanticsModifierNode) node2).getShouldMergeDescendantSemantics()) {
-                                obj = node2;
+                    while (nodeAccess$pop != null) {
+                        if (nodeAccess$pop instanceof SemanticsModifierNode) {
+                            if (((SemanticsModifierNode) nodeAccess$pop).getShouldMergeDescendantSemantics()) {
+                                obj = nodeAccess$pop;
                                 break loop0;
                             }
-                        } else if ((node2.kindSet & 8) != 0 && (node2 instanceof DelegatingNode)) {
+                        } else if ((nodeAccess$pop.kindSet & 8) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                             int i = 0;
-                            for (Modifier.Node node3 = ((DelegatingNode) node2).delegate; node3 != null; node3 = node3.child) {
-                                if ((node3.kindSet & 8) != 0) {
+                            for (Modifier.Node node2 = ((DelegatingNode) nodeAccess$pop).delegate; node2 != null; node2 = node2.child) {
+                                if ((node2.kindSet & 8) != 0) {
                                     i++;
                                     if (i == 1) {
-                                        node2 = node3;
+                                        nodeAccess$pop = node2;
                                     } else {
                                         if (mutableVector == null) {
                                             mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                         }
-                                        if (node2 != null) {
-                                            mutableVector.add(node2);
-                                            node2 = null;
+                                        if (nodeAccess$pop != null) {
+                                            mutableVector.add(nodeAccess$pop);
+                                            nodeAccess$pop = null;
                                         }
-                                        mutableVector.add(node3);
+                                        mutableVector.add(node2);
                                     }
                                 }
                             }
                             if (i == 1) {
                             }
                         }
-                        node2 = DelegatableNodeKt.access$pop(mutableVector);
+                        nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                     }
+                    if ((node.aggregateChildKindSet & 8) != 0) {
+                        break;
+                    }
+                    node = node.child;
+                } else if ((node.aggregateChildKindSet & 8) != 0) {
                 }
-                if ((node.aggregateChildKindSet & 8) == 0) {
-                    break;
-                }
-                node = node.child;
             }
         }
         return (SemanticsModifierNode) obj;

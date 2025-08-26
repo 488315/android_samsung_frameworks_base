@@ -171,29 +171,29 @@ public final class CellInfoRatSpecificInfo implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, (CellInfoGsm) parcel.readTypedObject(CellInfoGsm.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, (CellInfoGsm) parcel.readTypedObject(CellInfoGsm.CREATOR));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (CellInfoWcdma) parcel.readTypedObject(CellInfoWcdma.CREATOR));
+        if (i == 1) {
+            _set(i, (CellInfoWcdma) parcel.readTypedObject(CellInfoWcdma.CREATOR));
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, (CellInfoTdscdma) parcel.readTypedObject(CellInfoTdscdma.CREATOR));
+        if (i == 2) {
+            _set(i, (CellInfoTdscdma) parcel.readTypedObject(CellInfoTdscdma.CREATOR));
             return;
         }
-        if (readInt == 3) {
-            _set(readInt, (CellInfoLte) parcel.readTypedObject(CellInfoLte.CREATOR));
+        if (i == 3) {
+            _set(i, (CellInfoLte) parcel.readTypedObject(CellInfoLte.CREATOR));
             return;
         }
-        if (readInt == 4) {
-            _set(readInt, (CellInfoNr) parcel.readTypedObject(CellInfoNr.CREATOR));
-        } else if (readInt == 5) {
-            _set(readInt, (CellInfoCdma) parcel.readTypedObject(CellInfoCdma.CREATOR));
+        if (i == 4) {
+            _set(i, (CellInfoNr) parcel.readTypedObject(CellInfoNr.CREATOR));
+        } else if (i == 5) {
+            _set(i, (CellInfoCdma) parcel.readTypedObject(CellInfoCdma.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

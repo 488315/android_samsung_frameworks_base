@@ -81,13 +81,13 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     public KeyPair generateKeyPair() {
         DSAParametersGenerator dSAParametersGenerator;
         if (!this.initialised) {
-            Integer valueOf = Integers.valueOf(this.strength);
-            if (params.containsKey(valueOf)) {
-                this.param = (DSAKeyGenerationParameters) params.get(valueOf);
+            Integer numValueOf = Integers.valueOf(this.strength);
+            if (params.containsKey(numValueOf)) {
+                this.param = (DSAKeyGenerationParameters) params.get(numValueOf);
             } else {
                 synchronized (lock) {
-                    if (params.containsKey(valueOf)) {
-                        this.param = (DSAKeyGenerationParameters) params.get(valueOf);
+                    if (params.containsKey(numValueOf)) {
+                        this.param = (DSAKeyGenerationParameters) params.get(numValueOf);
                     } else {
                         int defaultCertainty = PrimeCertaintyCalculator.getDefaultCertainty(this.strength);
                         int i = this.strength;
@@ -109,14 +109,14 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
                         }
                         DSAKeyGenerationParameters dSAKeyGenerationParameters = new DSAKeyGenerationParameters(this.random, dSAParametersGenerator.generateParameters());
                         this.param = dSAKeyGenerationParameters;
-                        params.put(valueOf, dSAKeyGenerationParameters);
+                        params.put(numValueOf, dSAKeyGenerationParameters);
                     }
                 }
             }
             this.engine.init(this.param);
             this.initialised = true;
         }
-        AsymmetricCipherKeyPair generateKeyPair = this.engine.generateKeyPair();
-        return new KeyPair(new BCDSAPublicKey((DSAPublicKeyParameters) generateKeyPair.getPublic()), new BCDSAPrivateKey((DSAPrivateKeyParameters) generateKeyPair.getPrivate()));
+        AsymmetricCipherKeyPair asymmetricCipherKeyPairGenerateKeyPair = this.engine.generateKeyPair();
+        return new KeyPair(new BCDSAPublicKey((DSAPublicKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPublic()), new BCDSAPrivateKey((DSAPrivateKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPrivate()));
     }
 }

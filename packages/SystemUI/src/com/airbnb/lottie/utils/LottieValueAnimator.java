@@ -7,7 +7,6 @@ import com.airbnb.lottie.LottieComposition;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LottieValueAnimator extends BaseLottieAnimator implements Choreographer.FrameCallback {
     public LottieComposition composition;
@@ -43,12 +42,12 @@ public class LottieValueAnimator extends BaseLottieAnimator implements Choreogra
         if (lottieComposition == null || !this.running) {
             return;
         }
-        float abs = (this.lastFrameTimeNs != 0 ? j - r2 : 0L) / ((1.0E9f / lottieComposition.frameRate) / Math.abs(this.speed));
+        float fAbs = (this.lastFrameTimeNs != 0 ? j - r2 : 0L) / ((1.0E9f / lottieComposition.frameRate) / Math.abs(this.speed));
         float f = this.frameRaw;
         if (isReversed()) {
-            abs = -abs;
+            fAbs = -fAbs;
         }
-        float f2 = f + abs;
+        float f2 = f + fAbs;
         float minFrame = getMinFrame();
         float maxFrame = getMaxFrame();
         PointF pointF = MiscUtils.pathFromDataCurrentPoint;
@@ -56,12 +55,12 @@ public class LottieValueAnimator extends BaseLottieAnimator implements Choreogra
             z = true;
         }
         float f3 = this.frameRaw;
-        float clamp = MiscUtils.clamp(f2, getMinFrame(), getMaxFrame());
-        this.frameRaw = clamp;
+        float fClamp = MiscUtils.clamp(f2, getMinFrame(), getMaxFrame());
+        this.frameRaw = fClamp;
         if (this.useCompositionFrameRate) {
-            clamp = (float) Math.floor(clamp);
+            fClamp = (float) Math.floor(fClamp);
         }
-        this.frame = clamp;
+        this.frame = fClamp;
         this.lastFrameTimeNs = j;
         if (!this.useCompositionFrameRate || this.frameRaw != f3) {
             notifyUpdate();
@@ -181,12 +180,12 @@ public class LottieValueAnimator extends BaseLottieAnimator implements Choreogra
         if (this.frameRaw == f) {
             return;
         }
-        float clamp = MiscUtils.clamp(f, getMinFrame(), getMaxFrame());
-        this.frameRaw = clamp;
+        float fClamp = MiscUtils.clamp(f, getMinFrame(), getMaxFrame());
+        this.frameRaw = fClamp;
         if (this.useCompositionFrameRate) {
-            clamp = (float) Math.floor(clamp);
+            fClamp = (float) Math.floor(fClamp);
         }
-        this.frame = clamp;
+        this.frame = fClamp;
         this.lastFrameTimeNs = 0L;
         notifyUpdate();
     }
@@ -198,14 +197,14 @@ public class LottieValueAnimator extends BaseLottieAnimator implements Choreogra
         LottieComposition lottieComposition = this.composition;
         float f3 = lottieComposition == null ? -3.4028235E38f : lottieComposition.startFrame;
         float f4 = lottieComposition == null ? Float.MAX_VALUE : lottieComposition.endFrame;
-        float clamp = MiscUtils.clamp(f, f3, f4);
-        float clamp2 = MiscUtils.clamp(f2, f3, f4);
-        if (clamp == this.minFrame && clamp2 == this.maxFrame) {
+        float fClamp = MiscUtils.clamp(f, f3, f4);
+        float fClamp2 = MiscUtils.clamp(f2, f3, f4);
+        if (fClamp == this.minFrame && fClamp2 == this.maxFrame) {
             return;
         }
-        this.minFrame = clamp;
-        this.maxFrame = clamp2;
-        setFrame((int) MiscUtils.clamp(this.frame, clamp, clamp2));
+        this.minFrame = fClamp;
+        this.maxFrame = fClamp2;
+        setFrame((int) MiscUtils.clamp(this.frame, fClamp, fClamp2));
     }
 
     @Override // android.animation.ValueAnimator

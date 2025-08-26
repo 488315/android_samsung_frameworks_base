@@ -225,13 +225,13 @@ public class BackDropperFilter extends Filter {
         this.mMirrorBg = false;
         this.mOrientation = 0;
         this.startTime = -1L;
-        boolean isLoggable = Log.isLoggable(TAG, 2);
-        this.mLogVerbose = isLoggable;
+        boolean zIsLoggable = Log.isLoggable(TAG, 2);
+        this.mLogVerbose = zIsLoggable;
         String str2 = SystemProperties.get("ro.media.effect.bgdropper.adj");
         if (str2.length() > 0) {
             try {
                 this.mAcceptStddev += Float.parseFloat(str2);
-                if (isLoggable) {
+                if (zIsLoggable) {
                     Log.v(TAG, "Adjusting accept threshold by " + str2 + ", now " + this.mAcceptStddev);
                 }
             } catch (NumberFormatException unused) {
@@ -242,9 +242,9 @@ public class BackDropperFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        MutableFrameFormat create = ImageFormat.create(3, 0);
+        MutableFrameFormat mutableFrameFormatCreate = ImageFormat.create(3, 0);
         for (String str : mInputNames) {
-            addMaskedInputPort(str, create);
+            addMaskedInputPort(str, mutableFrameFormatCreate);
         }
         for (String str2 : mOutputNames) {
             addOutputBasedOnInput(str2, "video");
@@ -258,11 +258,11 @@ public class BackDropperFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public FrameFormat getOutputFormat(String str, FrameFormat frameFormat) {
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
         if (!Arrays.asList(mOutputNames).contains(str)) {
-            mutableCopy.setDimensions(0, 0);
+            mutableFrameFormatMutableCopy.setDimensions(0, 0);
         }
-        return mutableCopy;
+        return mutableFrameFormatMutableCopy;
     }
 
     private boolean createMemoryFormat(FrameFormat frameFormat) {
@@ -273,26 +273,26 @@ public class BackDropperFilter extends Filter {
             throw new RuntimeException("Attempting to process input frame with unknown size");
         }
         this.mMaskFormat = frameFormat.mutableCopy();
-        int pow = (int) Math.pow(2.0d, this.mMaskWidthExp);
-        int pow2 = (int) Math.pow(2.0d, this.mMaskHeightExp);
-        this.mMaskFormat.setDimensions(pow, pow2);
+        int iPow = (int) Math.pow(2.0d, this.mMaskWidthExp);
+        int iPow2 = (int) Math.pow(2.0d, this.mMaskHeightExp);
+        this.mMaskFormat.setDimensions(iPow, iPow2);
         this.mPyramidDepth = Math.max(this.mMaskWidthExp, this.mMaskHeightExp);
         this.mMemoryFormat = this.mMaskFormat.mutableCopy();
-        int max = Math.max(this.mMaskWidthExp, pyramidLevel(frameFormat.getWidth()));
-        int max2 = Math.max(this.mMaskHeightExp, pyramidLevel(frameFormat.getHeight()));
-        this.mPyramidDepth = Math.max(max, max2);
-        int max3 = Math.max(pow, (int) Math.pow(2.0d, max));
-        int max4 = Math.max(pow2, (int) Math.pow(2.0d, max2));
-        this.mMemoryFormat.setDimensions(max3, max4);
+        int iMax = Math.max(this.mMaskWidthExp, pyramidLevel(frameFormat.getWidth()));
+        int iMax2 = Math.max(this.mMaskHeightExp, pyramidLevel(frameFormat.getHeight()));
+        this.mPyramidDepth = Math.max(iMax, iMax2);
+        int iMax3 = Math.max(iPow, (int) Math.pow(2.0d, iMax));
+        int iMax4 = Math.max(iPow2, (int) Math.pow(2.0d, iMax2));
+        this.mMemoryFormat.setDimensions(iMax3, iMax4);
         this.mSubsampleLevel = this.mPyramidDepth - Math.max(this.mMaskWidthExp, this.mMaskHeightExp);
         if (this.mLogVerbose) {
-            Log.v(TAG, "Mask frames size " + pow + " x " + pow2);
-            Log.v(TAG, "Pyramid levels " + max + " x " + max2);
-            Log.v(TAG, "Memory frames size " + max3 + " x " + max4);
+            Log.v(TAG, "Mask frames size " + iPow + " x " + iPow2);
+            Log.v(TAG, "Pyramid levels " + iMax + " x " + iMax2);
+            Log.v(TAG, "Memory frames size " + iMax3 + " x " + iMax4);
         }
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
-        this.mAverageFormat = mutableCopy;
-        mutableCopy.setDimensions(1, 1);
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
+        this.mAverageFormat = mutableFrameFormatMutableCopy;
+        mutableFrameFormatMutableCopy.setDimensions(1, 1);
         return true;
     }
 
@@ -388,9 +388,9 @@ public class BackDropperFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("video");
-        Frame pullInput2 = pullInput("background");
-        allocateFrames(pullInput.getFormat(), filterContext);
+        Frame framePullInput = pullInput("video");
+        Frame framePullInput2 = pullInput("background");
+        allocateFrames(framePullInput.getFormat(), filterContext);
         if (this.mStartLearning) {
             if (this.mLogVerbose) {
                 Log.v(TAG, "Starting learning");
@@ -404,10 +404,10 @@ public class BackDropperFilter extends Filter {
         boolean z = this.mPingPong;
         int i = !z ? 1 : 0;
         this.mPingPong = !z;
-        updateBgScaling(pullInput, pullInput2, this.mBackgroundFitModeChanged);
+        updateBgScaling(framePullInput, framePullInput2, this.mBackgroundFitModeChanged);
         this.mBackgroundFitModeChanged = false;
-        this.copyShaderProgram.process(pullInput, this.mVideoInput);
-        this.copyShaderProgram.process(pullInput2, this.mBgInput);
+        this.copyShaderProgram.process(framePullInput, this.mVideoInput);
+        this.copyShaderProgram.process(framePullInput2, this.mBgInput);
         this.mVideoInput.generateMipMap();
         this.mVideoInput.setTextureParameter(10241, 9985);
         this.mBgInput.generateMipMap();
@@ -424,7 +424,7 @@ public class BackDropperFilter extends Filter {
         this.mMask.setTextureParameter(10241, 9985);
         this.mAutomaticWhiteBalanceProgram.process(new Frame[]{this.mVideoInput, this.mBgInput}, this.mAutoWB);
         if (this.mFrameCount <= this.mLearningDuration) {
-            pushOutput("video", pullInput);
+            pushOutput("video", framePullInput);
             int i2 = this.mFrameCount;
             int i3 = this.mLearningDuration;
             int i4 = this.mLearningVerifyDuration;
@@ -459,10 +459,10 @@ public class BackDropperFilter extends Filter {
                 }
             }
         } else {
-            Frame newFrame = filterContext.getFrameManager().newFrame(pullInput.getFormat());
-            this.mBgSubtractProgram.process(new Frame[]{pullInput, pullInput2, this.mMask, this.mAutoWB}, newFrame);
-            pushOutput("video", newFrame);
-            newFrame.release();
+            Frame frameNewFrame = filterContext.getFrameManager().newFrame(framePullInput.getFormat());
+            this.mBgSubtractProgram.process(new Frame[]{framePullInput, framePullInput2, this.mMask, this.mAutoWB}, frameNewFrame);
+            pushOutput("video", frameNewFrame);
+            frameNewFrame.release();
         }
         if (this.mFrameCount < this.mLearningDuration - this.mLearningVerifyDuration || this.mAdaptRateBg > SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || this.mAdaptRateFg > SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
             GLFrame[] gLFrameArr2 = this.mBgMean;
@@ -475,14 +475,14 @@ public class BackDropperFilter extends Filter {
             this.mBgVariance[z ? 1 : 0].setTextureParameter(10241, 9985);
         }
         if (this.mProvideDebugOutputs) {
-            Frame newFrame2 = filterContext.getFrameManager().newFrame(pullInput.getFormat());
-            this.mCopyOutProgram.process(pullInput, newFrame2);
-            pushOutput("debug1", newFrame2);
-            newFrame2.release();
-            Frame newFrame3 = filterContext.getFrameManager().newFrame(this.mMemoryFormat);
-            this.mCopyOutProgram.process(this.mMask, newFrame3);
-            pushOutput("debug2", newFrame3);
-            newFrame3.release();
+            Frame frameNewFrame2 = filterContext.getFrameManager().newFrame(framePullInput.getFormat());
+            this.mCopyOutProgram.process(framePullInput, frameNewFrame2);
+            pushOutput("debug1", frameNewFrame2);
+            frameNewFrame2.release();
+            Frame frameNewFrame3 = filterContext.getFrameManager().newFrame(this.mMemoryFormat);
+            this.mCopyOutProgram.process(this.mMask, frameNewFrame3);
+            pushOutput("debug2", frameNewFrame3);
+            frameNewFrame3.release();
         }
         int i6 = this.mFrameCount + 1;
         this.mFrameCount = i6;
@@ -495,9 +495,9 @@ public class BackDropperFilter extends Filter {
             }
             filterContext.getGLEnvironment().activate();
             GLES20.glFinish();
-            long elapsedRealtime = SystemClock.elapsedRealtime();
-            Log.v(TAG, "Avg. frame duration: " + String.format("%.2f", Double.valueOf((elapsedRealtime - this.startTime) / 30.0d)) + " ms. Avg. fps: " + String.format("%.2f", Double.valueOf(1000.0d / ((elapsedRealtime - this.startTime) / 30.0d))));
-            this.startTime = elapsedRealtime;
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
+            Log.v(TAG, "Avg. frame duration: " + String.format("%.2f", Double.valueOf((jElapsedRealtime - this.startTime) / 30.0d)) + " ms. Avg. fps: " + String.format("%.2f", Double.valueOf(1000.0d / ((jElapsedRealtime - this.startTime) / 30.0d))));
+            this.startTime = jElapsedRealtime;
         }
     }
 

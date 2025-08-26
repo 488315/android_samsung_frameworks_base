@@ -4,7 +4,6 @@ import com.google.zxing.BarcodeFormat;
 import java.util.Collection;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CodaBarWriter extends OneDimensionalCodeWriter {
     public static final char[] ALT_START_END_CHARS = {'T', 'N', '*', 'E'};
@@ -29,21 +28,21 @@ public final class CodaBarWriter extends OneDimensionalCodeWriter {
             char upperCase = Character.toUpperCase(str.charAt(0));
             char upperCase2 = Character.toUpperCase(str.charAt(str.length() - 1));
             char[] cArr = START_END_CHARS;
-            boolean arrayContains = CodaBarReader.arrayContains(cArr, upperCase);
-            boolean arrayContains2 = CodaBarReader.arrayContains(cArr, upperCase2);
+            boolean zArrayContains = CodaBarReader.arrayContains(cArr, upperCase);
+            boolean zArrayContains2 = CodaBarReader.arrayContains(cArr, upperCase2);
             char[] cArr2 = ALT_START_END_CHARS;
-            boolean arrayContains3 = CodaBarReader.arrayContains(cArr2, upperCase);
-            boolean arrayContains4 = CodaBarReader.arrayContains(cArr2, upperCase2);
-            if (arrayContains) {
-                if (!arrayContains2) {
+            boolean zArrayContains3 = CodaBarReader.arrayContains(cArr2, upperCase);
+            boolean zArrayContains4 = CodaBarReader.arrayContains(cArr2, upperCase2);
+            if (zArrayContains) {
+                if (!zArrayContains2) {
                     throw new IllegalArgumentException("Invalid start/end guards: ".concat(str));
                 }
-            } else if (!arrayContains3) {
-                if (arrayContains2 || arrayContains4) {
+            } else if (!zArrayContains3) {
+                if (zArrayContains2 || zArrayContains4) {
                     throw new IllegalArgumentException("Invalid start/end guards: ".concat(str));
                 }
                 str = c + str + c;
-            } else if (!arrayContains4) {
+            } else if (!zArrayContains4) {
                 throw new IllegalArgumentException("Invalid start/end guards: ".concat(str));
             }
         }

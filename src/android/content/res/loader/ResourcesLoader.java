@@ -22,12 +22,12 @@ public class ResourcesLoader {
     }
 
     public List<ResourcesProvider> getProviders() {
-        List<ResourcesProvider> asList;
+        List<ResourcesProvider> listAsList;
         synchronized (this.mLock) {
             ResourcesProvider[] resourcesProviderArr = this.mProviders;
-            asList = resourcesProviderArr == null ? Collections.EMPTY_LIST : Arrays.asList(resourcesProviderArr);
+            listAsList = resourcesProviderArr == null ? Collections.EMPTY_LIST : Arrays.asList(resourcesProviderArr);
         }
-        return asList;
+        return listAsList;
     }
 
     public void addProvider(ResourcesProvider resourcesProvider) {

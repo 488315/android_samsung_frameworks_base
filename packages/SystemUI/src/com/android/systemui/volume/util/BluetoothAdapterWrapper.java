@@ -19,7 +19,6 @@ import kotlin.Result;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BluetoothAdapterWrapper {
     public BluetoothA2dp a2dp;
@@ -37,36 +36,36 @@ public final class BluetoothAdapterWrapper {
             @Override // android.bluetooth.BluetoothProfile.ServiceListener
             public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
                 if (i == 1) {
-                    BluetoothAdapterWrapper.this.hfp = (BluetoothHeadset) bluetoothProfile;
+                    this.this$0.hfp = (BluetoothHeadset) bluetoothProfile;
                     return;
                 }
                 if (i == 2) {
-                    BluetoothAdapterWrapper.this.a2dp = (BluetoothA2dp) bluetoothProfile;
+                    this.this$0.a2dp = (BluetoothA2dp) bluetoothProfile;
                 } else if (i == 21) {
-                    BluetoothAdapterWrapper.this.getClass();
+                    this.this$0.getClass();
                 } else {
                     if (i != 22) {
                         return;
                     }
-                    BluetoothAdapterWrapper.this.leAudio = (BluetoothLeAudio) bluetoothProfile;
+                    this.this$0.leAudio = (BluetoothLeAudio) bluetoothProfile;
                 }
             }
 
             @Override // android.bluetooth.BluetoothProfile.ServiceListener
             public final void onServiceDisconnected(int i) {
                 if (i == 1) {
-                    BluetoothAdapterWrapper.this.hfp = null;
+                    this.this$0.hfp = null;
                     return;
                 }
                 if (i == 2) {
-                    BluetoothAdapterWrapper.this.a2dp = null;
+                    this.this$0.a2dp = null;
                 } else if (i == 21) {
-                    BluetoothAdapterWrapper.this.getClass();
+                    this.this$0.getClass();
                 } else {
                     if (i != 22) {
                         return;
                     }
-                    BluetoothAdapterWrapper.this.leAudio = null;
+                    this.this$0.leAudio = null;
                 }
             }
         };
@@ -90,37 +89,37 @@ public final class BluetoothAdapterWrapper {
     }
 
     public final String getActiveBTDeviceName() {
-        String str;
-        int semGetCurrentDeviceType = this.audioManager.am.semGetCurrentDeviceType();
-        if (semGetCurrentDeviceType == 23) {
+        String strSemGetAliasName;
+        int iSemGetCurrentDeviceType = this.audioManager.am.semGetCurrentDeviceType();
+        if (iSemGetCurrentDeviceType == 23) {
             BluetoothCommonUtil bluetoothCommonUtil = BluetoothCommonUtil.INSTANCE;
             List hearingAidDevices = getHearingAidDevices();
             bluetoothCommonUtil.getClass();
-            str = (String) CollectionsKt___CollectionsKt.firstOrNull(BluetoothCommonUtil.mapNames(hearingAidDevices));
-        } else if (semGetCurrentDeviceType == 26 || semGetCurrentDeviceType == 27) {
+            strSemGetAliasName = (String) CollectionsKt___CollectionsKt.firstOrNull(BluetoothCommonUtil.mapNames(hearingAidDevices));
+        } else if (iSemGetCurrentDeviceType == 26 || iSemGetCurrentDeviceType == 27) {
             BluetoothCommonUtil bluetoothCommonUtil2 = BluetoothCommonUtil.INSTANCE;
             List connectedLeDevices = getConnectedLeDevices();
             bluetoothCommonUtil2.getClass();
-            str = (String) CollectionsKt___CollectionsKt.firstOrNull(BluetoothCommonUtil.mapNames(connectedLeDevices));
+            strSemGetAliasName = (String) CollectionsKt___CollectionsKt.firstOrNull(BluetoothCommonUtil.mapNames(connectedLeDevices));
         } else {
             BluetoothA2dp bluetoothA2dp = this.a2dp;
             if (bluetoothA2dp != null) {
                 BluetoothA2dpUtil.INSTANCE.getClass();
                 BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
-                if (activeDevice == null || (str = activeDevice.semGetAliasName()) == null) {
-                    str = "";
+                if (activeDevice == null || (strSemGetAliasName = activeDevice.semGetAliasName()) == null) {
+                    strSemGetAliasName = "";
                 }
             } else {
-                str = null;
+                strSemGetAliasName = null;
             }
         }
-        return str == null ? "" : str;
+        return strSemGetAliasName == null ? "" : strSemGetAliasName;
     }
 
     public final String getBtCallDeviceName() {
-        String semGetAliasName;
-        Object obj;
-        String semGetAliasName2;
+        String strSemGetAliasName;
+        Object next;
+        String strSemGetAliasName2;
         BluetoothHeadset bluetoothHeadset = this.hfp;
         if (bluetoothHeadset == null) {
             BluetoothLeAudio bluetoothLeAudio = this.leAudio;
@@ -134,7 +133,7 @@ public final class BluetoothAdapterWrapper {
                 connectedDevices = EmptyList.INSTANCE;
             }
             BluetoothDevice bluetoothDevice = (BluetoothDevice) CollectionsKt___CollectionsKt.firstOrNull((List) connectedDevices);
-            return (bluetoothDevice == null || (semGetAliasName = bluetoothDevice.semGetAliasName()) == null) ? "" : semGetAliasName;
+            return (bluetoothDevice == null || (strSemGetAliasName = bluetoothDevice.semGetAliasName()) == null) ? "" : strSemGetAliasName;
         }
         BluetoothHeadsetUtil.INSTANCE.getClass();
         BluetoothCommonUtil.INSTANCE.getClass();
@@ -145,27 +144,27 @@ public final class BluetoothAdapterWrapper {
         Iterator<T> it = connectedDevices2.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (bluetoothHeadset.isAudioConnected((BluetoothDevice) obj)) {
+            next = it.next();
+            if (bluetoothHeadset.isAudioConnected((BluetoothDevice) next)) {
                 break;
             }
         }
-        BluetoothDevice bluetoothDevice2 = (BluetoothDevice) obj;
-        return (bluetoothDevice2 == null || (semGetAliasName2 = bluetoothDevice2.semGetAliasName()) == null) ? "" : semGetAliasName2;
+        BluetoothDevice bluetoothDevice2 = (BluetoothDevice) next;
+        return (bluetoothDevice2 == null || (strSemGetAliasName2 = bluetoothDevice2.semGetAliasName()) == null) ? "" : strSemGetAliasName2;
     }
 
     public final List getConnectedDevices(boolean z) {
         if (z) {
             return getConnectedLeDevices();
         }
-        int semGetCurrentDeviceType = this.audioManager.am.semGetCurrentDeviceType();
-        if (semGetCurrentDeviceType == 23) {
+        int iSemGetCurrentDeviceType = this.audioManager.am.semGetCurrentDeviceType();
+        if (iSemGetCurrentDeviceType == 23) {
             return getHearingAidDevices();
         }
-        if (semGetCurrentDeviceType == 26 || semGetCurrentDeviceType == 27) {
+        if (iSemGetCurrentDeviceType == 26 || iSemGetCurrentDeviceType == 27) {
             return getConnectedLeDevices();
         }
         BluetoothA2dp bluetoothA2dp = this.a2dp;
@@ -204,9 +203,9 @@ public final class BluetoothAdapterWrapper {
             return EmptyList.INSTANCE;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(new Result.Failure(th));
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
             return EmptyList.INSTANCE;
         }
@@ -222,9 +221,9 @@ public final class BluetoothAdapterWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            m3422exceptionOrNullimpl.printStackTrace();
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            thM3442exceptionOrNullimpl.printStackTrace();
         }
         List list = (List) (failure instanceof Result.Failure ? null : failure);
         if (list == null) {
@@ -275,9 +274,9 @@ public final class BluetoothAdapterWrapper {
             return EmptyList.INSTANCE;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(new Result.Failure(th));
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
             return EmptyList.INSTANCE;
         }

@@ -13,10 +13,12 @@ import android.widget.ImageButton;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.wm.shell.desktopmode.DesktopModeUiEventLogger;
+import com.android.wm.shell.shared.desktopmode.DesktopState;
+import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.AppHandleAnimator;
 import com.android.wm.shell.windowdecor.CaptionGlobalState;
 import com.android.wm.shell.windowdecor.HandleHideAnimator;
-import com.android.wm.shell.windowdecor.HandleHideAnimator$$ExternalSyntheticLambda0;
+import com.android.wm.shell.windowdecor.HandleImageButton;
 import com.android.wm.shell.windowdecor.WindowManagerWrapper;
 import com.android.wm.shell.windowdecor.additionalviewcontainer.AdditionalSystemViewContainer;
 import com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder;
@@ -26,7 +28,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHolder {
     public final AppHandleAnimator animator;
@@ -38,16 +39,16 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
     public boolean handleTouchEnabled;
     public final Handler handler;
     public final InputManager inputManager;
+    public boolean isHandleTouching;
     public boolean isKeepScreenOn;
     public final MultiWindowManager multiWindowManager;
     public AdditionalSystemViewContainer statusBarInputLayer;
     public boolean statusBarInputLayerExists;
-    public boolean statusBarVisibility;
+    public boolean statusBarVisible;
     public ActivityManager.RunningTaskInfo taskInfo;
     public final UiModeManager uiModeManager;
     public final WindowManagerWrapper windowManagerWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HandleData extends WindowDecorationViewHolder.Data {
         public final int height;
         public final boolean isCaptionVisible;
@@ -111,19 +112,19 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
         this.windowManagerWrapper = windowManagerWrapper;
         this.handler = handler;
         this.desktopModeUiEventLogger = desktopModeUiEventLogger;
-        View requireViewById = view.requireViewById(R.id.desktop_mode_caption);
-        this.captionView = requireViewById;
+        View viewRequireViewById = view.requireViewById(R.id.desktop_mode_caption);
+        this.captionView = viewRequireViewById;
         ImageButton imageButton = (ImageButton) view.requireViewById(R.id.caption_handle);
         this.captionHandle = imageButton;
         this.inputManager = (InputManager) this.context.getSystemService(InputManager.class);
         this.animator = new AppHandleAnimator(view, imageButton);
         this.multiWindowManager = MultiWindowManager.getInstance();
         this.handleTouchEnabled = true;
-        this.statusBarVisibility = true;
+        this.statusBarVisible = true;
         this.handleInputBounds = new Rect();
-        this.handleHideAnimator = new HandleHideAnimator(handler, requireViewById);
+        this.handleHideAnimator = new HandleHideAnimator(handler, viewRequireViewById);
         this.uiModeManager = (UiModeManager) this.context.getSystemService("uimode");
-        requireViewById.setOnTouchListener(onTouchListener);
+        viewRequireViewById.setOnTouchListener(onTouchListener);
         imageButton.setOnTouchListener(onTouchListener);
         imageButton.setOnClickListener(onClickListener);
         imageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.windowdecor.viewholder.MultiTaskingHandleViewHolder.1
@@ -153,8 +154,7 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
         if (CoreRune.MW_CAPTION_HANDLE_ANIM) {
             HandleHideAnimator handleHideAnimator = this.handleHideAnimator;
             handleHideAnimator.cancelAllHandleAnim();
-            handleHideAnimator.mHandleView.setVisibility(0);
-            handleHideAnimator.mIsHandleViewVisible = true;
+            handleHideAnimator.setHandleVisibility(true);
             handleHideAnimator.mHandleView.setAlpha(1.0f);
         }
     }
@@ -167,7 +167,7 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
             if (additionalSystemViewContainer != null && (view = additionalSystemViewContainer.view) != null) {
                 view.setOnTouchListener(null);
             }
-            this.handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.viewholder.MultiTaskingHandleViewHolder$disposeStatusBarInputLayer$1
+            this.handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.viewholder.MultiTaskingHandleViewHolder.disposeStatusBarInputLayer.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     AdditionalSystemViewContainer additionalSystemViewContainer2 = MultiTaskingHandleViewHolder.this.statusBarInputLayer;
@@ -185,34 +185,30 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
             ActivityManager.TaskDescription taskDescription = runningTaskInfo.taskDescription;
             return (taskDescription == null || (Color.alpha(taskDescription.getStatusBarColor()) == 0 || runningTaskInfo.getWindowingMode() != 5 ? (taskDescription.getSystemBarsAppearance() & 8) != 0 : ((double) Color.valueOf(taskDescription.getStatusBarColor()).luminance()) >= 0.5d)) ? this.context.getColor(R.color.desktop_mode_caption_handle_bar_dark) : this.context.getColor(R.color.desktop_mode_caption_handle_bar_light);
         }
-        boolean isNightModeActive = runningTaskInfo.configuration.isNightModeActive();
+        boolean z2 = false;
+        boolean z3 = runningTaskInfo.configuration.isNightModeActive() || (runningTaskInfo.getWindowingMode() == 1 && runningTaskInfo.isDisplayCutoutHide);
         ComponentName componentName = runningTaskInfo.realActivity;
         UiModeManager uiModeManager = this.uiModeManager;
         if (uiModeManager != null && componentName != null) {
-            isNightModeActive = isNightModeActive || (uiModeManager.getPackageNightMode(componentName.getPackageName()) == 32);
+            z3 = z3 || (uiModeManager.getPackageNightMode(componentName.getPackageName()) == 32);
         }
+        this.handleHideAnimator.mIsNightMode = z3;
         if (runningTaskInfo.isFocused && (runningTaskInfo.getWindowingMode() != 1 || this.multiWindowManager.getMultiWindowModeStates(0) == 1)) {
-            return CaptionGlobalState.COLOR_THEME_ENABLED ? isNightModeActive ? this.context.getColor(17171428) : this.context.getColor(17171426) : this.context.getColor(R.color.mw_handle_color_focused);
+            z2 = true;
         }
-        if (CoreRune.MW_CAPTION_DESKTOP && runningTaskInfo.getWindowingMode() == 1 && z) {
-            if (isNightModeActive) {
-                this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_dark);
-            } else {
-                this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_light);
-            }
-        }
-        return this.context.getColor(R.color.mw_handle_color_unfocused);
+        this.handleHideAnimator.mIsFocusedTask = z2;
+        return z2 ? CaptionGlobalState.COLOR_THEME_ENABLED ? z3 ? this.context.getColor(17171428) : this.context.getColor(17171426) : this.context.getColor(R.color.mw_handle_color_focused) : (CoreRune.MW_CAPTION_DESKTOP && runningTaskInfo.getWindowingMode() == 1 && z) ? z3 ? this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_dark) : this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_light) : this.context.getColor(R.color.mw_handle_color_unfocused);
     }
 
     @Override // com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder
     public final void onHandleMenuClosed() {
         if (!CoreRune.MW_CAPTION_HANDLE) {
             this.animator.animateCaptionHandleAlpha(0.0f, 1.0f);
-            return;
+        } else if (this.statusBarVisible) {
+            HandleHideAnimator handleHideAnimator = this.handleHideAnimator;
+            handleHideAnimator.cancelAllHandleAnim();
+            handleHideAnimator.show(handleHideAnimator.isHandleHideEnabled() ? handleHideAnimator.mDelayedHideWithoutTouchRunnable : null, true, false, false);
         }
-        HandleHideAnimator handleHideAnimator = this.handleHideAnimator;
-        handleHideAnimator.cancelAllHandleAnim();
-        handleHideAnimator.show(handleHideAnimator.mIsHandleHideEnabled ? new HandleHideAnimator$$ExternalSyntheticLambda0(handleHideAnimator, 1) : null, true);
     }
 
     @Override // com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder
@@ -225,6 +221,51 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
         handleHideAnimator.mIsHandleMenuActive = true;
         handleHideAnimator.cancelAllHandleAnim();
         handleHideAnimator.hide(true);
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00a6  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void setupHandleVerticalPadding(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, DesktopState desktopState, boolean z2) {
+        int iLoadDimensionPixelSize;
+        int iLoadDimensionPixelSize2;
+        ImageButton imageButton = this.captionHandle;
+        if (imageButton instanceof HandleImageButton) {
+            HandleImageButton handleImageButton = (HandleImageButton) imageButton;
+            handleImageButton.getClass();
+            if (CoreRune.MW_CAPTION_SPLIT_PARALLEL && z) {
+                if (runningTaskInfo.configuration.windowConfiguration.getBounds().top == 0) {
+                    iLoadDimensionPixelSize = handleImageButton.initVerticalPaddingTop;
+                    iLoadDimensionPixelSize2 = handleImageButton.initVerticalPaddingBottom;
+                } else {
+                    iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_split_bottom_padding_top);
+                    iLoadDimensionPixelSize2 = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_split_bottom_padding_bottom);
+                }
+            } else if (runningTaskInfo.isFreeform()) {
+                iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_freeform_padding_top);
+                iLoadDimensionPixelSize2 = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_freeform_padding_bottom);
+            } else if (runningTaskInfo.isSplitScreen() && (runningTaskInfo.getConfiguration().windowConfiguration.getStagePosition() & 64) != 0) {
+                iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_split_bottom_padding_top);
+                iLoadDimensionPixelSize2 = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_split_bottom_padding_bottom);
+            } else if (runningTaskInfo.getWindowingMode() == 1) {
+                if (((DesktopStateImpl) desktopState).isDesktopModeSupportedOnDisplay(handleImageButton.getContext().getDisplay())) {
+                    if (!CoreRune.IS_TABLET_DEVICE) {
+                        iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_desktop_full_screen_vertical_padding);
+                    } else if (CoreRune.MW_CAPTION_FULL_SCREEN_CUTOUT && z2) {
+                        iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_desktop_full_screen_tablet_cutout_padding_top);
+                        iLoadDimensionPixelSize2 = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_desktop_full_screen_tablet_cutout_padding_bottom);
+                    } else {
+                        iLoadDimensionPixelSize = handleImageButton.loadDimensionPixelSize(R.dimen.mw_handle_desktop_full_screen_tablet_vertical_padding);
+                    }
+                    iLoadDimensionPixelSize2 = iLoadDimensionPixelSize;
+                } else {
+                    iLoadDimensionPixelSize = handleImageButton.initVerticalPaddingTop;
+                    iLoadDimensionPixelSize2 = handleImageButton.initVerticalPaddingBottom;
+                }
+            }
+            handleImageButton.setPadding(handleImageButton.getPaddingLeft(), iLoadDimensionPixelSize, handleImageButton.getPaddingRight(), iLoadDimensionPixelSize2);
+        }
     }
 
     public final boolean updateHandleInputBounds(Point point, int i, int i2) {

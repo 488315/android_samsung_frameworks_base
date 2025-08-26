@@ -11,13 +11,11 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$1 implements ActivityStarter.OnDismissAction {
     public final /* synthetic */ Function1 $action;
     public final /* synthetic */ ShortcutHelperCoreStartable this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyboard.shortcut.ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Function1 $action;
@@ -47,7 +45,7 @@ public final class ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcu
                 ResultKt.throwOnFailure(obj);
                 Function1 function1 = this.$action;
                 this.label = 1;
-                if (function1.mo779invoke(this) == coroutineSingletons) {
+                if (function1.mo781invoke(this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

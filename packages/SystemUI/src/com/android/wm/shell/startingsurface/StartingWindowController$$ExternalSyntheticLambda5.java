@@ -9,7 +9,6 @@ import com.android.wm.shell.sysui.ConfigurationChangeListener;
 import com.android.wm.shell.sysui.ShellController;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class StartingWindowController$$ExternalSyntheticLambda5 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -42,7 +41,7 @@ public final /* synthetic */ class StartingWindowController$$ExternalSyntheticLa
                 Supplier supplier = new Supplier() { // from class: com.android.wm.shell.startingsurface.StartingWindowController$$ExternalSyntheticLambda9
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        StartingWindowController startingWindowController2 = StartingWindowController.this;
+                        StartingWindowController startingWindowController2 = startingWindowController;
                         startingWindowController2.getClass();
                         return new StartingWindowController.IStartingWindowImpl(startingWindowController2);
                     }
@@ -57,12 +56,12 @@ public final /* synthetic */ class StartingWindowController$$ExternalSyntheticLa
                     public final void onConfigurationChanged(Configuration configuration) {
                         SplashscreenContentDrawer splashscreenContentDrawer = StartingWindowController.this.mStartingSurfaceDrawer.mSplashscreenContentDrawer;
                         splashscreenContentDrawer.getClass();
-                        boolean isNightModeActive = configuration.isNightModeActive();
-                        if (SplashscreenContentDrawer.mIsNightMode != isNightModeActive) {
+                        boolean zIsNightModeActive = configuration.isNightModeActive();
+                        if (SplashscreenContentDrawer.mIsNightMode != zIsNightModeActive) {
                             int i2 = SplashscreenContentDrawer.SettingObserver.$r8$clinit;
                             splashscreenContentDrawer.mSettingObserver.updateSettings(true);
                         }
-                        SplashscreenContentDrawer.mIsNightMode = isNightModeActive;
+                        SplashscreenContentDrawer.mIsNightMode = zIsNightModeActive;
                     }
                 });
                 return;

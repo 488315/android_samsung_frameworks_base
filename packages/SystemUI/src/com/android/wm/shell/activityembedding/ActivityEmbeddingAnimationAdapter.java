@@ -9,7 +9,6 @@ import android.view.animation.Transformation;
 import android.window.TransitionInfo;
 import com.android.wm.shell.shared.TransitionUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ActivityEmbeddingAnimationAdapter {
     public final Animation mAnimation;
@@ -22,7 +21,6 @@ public class ActivityEmbeddingAnimationAdapter {
     public final Transformation mTransformation;
     public final Rect mWholeAnimationBounds;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BoundsChangeAdapter extends ActivityEmbeddingAnimationAdapter {
         public BoundsChangeAdapter(Animation animation, TransitionInfo.Change change, TransitionInfo.Root root) {
             super(animation, change, root);
@@ -39,7 +37,6 @@ public class ActivityEmbeddingAnimationAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnapshotAdapter extends ActivityEmbeddingAnimationAdapter {
         public SnapshotAdapter(Animation animation, TransitionInfo.Change change, SurfaceControl surfaceControl, TransitionInfo.Root root) {
             super(animation, change, surfaceControl, change.getEndAbsBounds(), root);
@@ -88,11 +85,11 @@ public class ActivityEmbeddingAnimationAdapter {
         float[] fArr = this.mMatrix;
         transaction.setMatrix(surfaceControl, matrix2, fArr);
         transaction.setAlpha(this.mLeash, this.mTransformation.getAlpha());
-        int round = Math.round(fArr[2]);
-        int round2 = Math.round(fArr[5]);
+        int iRound = Math.round(fArr[2]);
+        int iRound2 = Math.round(fArr[5]);
         Rect rect = new Rect(this.mContentBounds);
         Point point2 = this.mContentRelOffset;
-        rect.offset(round - point2.x, round2 - point2.y);
+        rect.offset(iRound - point2.x, iRound2 - point2.y);
         int i = rect.left;
         int i2 = rect.top;
         if (!rect.intersect(this.mWholeAnimationBounds)) {

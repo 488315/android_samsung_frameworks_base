@@ -1,6 +1,7 @@
 package com.android.systemui.controls.management.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -12,7 +13,6 @@ import com.android.systemui.controls.SecControlInterface;
 import com.android.systemui.controls.util.ControlsUtil;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlHolder extends SecControlCommonHolder {
     public LottieAnimationView animationView;
@@ -38,7 +38,7 @@ public final class SecControlHolder extends SecControlCommonHolder {
     }
 
     @Override // com.android.systemui.controls.management.adapter.SecControlCommonHolder
-    public final void resetForReuse() {
+    public final void resetForReuse() throws Resources.NotFoundException {
         super.resetForReuse();
         ImageView imageView = this.icon;
         imageView.setVisibility(0);

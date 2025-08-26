@@ -44,9 +44,9 @@ public interface IPackageLoadingProgressCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPackageLoadingProgressCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPackageLoadingProgressCallback)) {
-                return (IPackageLoadingProgressCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPackageLoadingProgressCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPackageLoadingProgressCallback)) {
+                return (IPackageLoadingProgressCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IPackageLoadingProgressCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                float readFloat = parcel.readFloat();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                onPackageLoadingProgressChanged(readFloat);
+                onPackageLoadingProgressChanged(f);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IPackageLoadingProgressCallback extends IInterface {
 
             @Override // android.content.pm.IPackageLoadingProgressCallback
             public void onPackageLoadingProgressChanged(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPackageLoadingProgressCallback.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPackageLoadingProgressCallback.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

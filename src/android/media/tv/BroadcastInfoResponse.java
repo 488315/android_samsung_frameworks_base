@@ -11,8 +11,8 @@ public abstract class BroadcastInfoResponse implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public BroadcastInfoResponse createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            switch (readInt) {
+            int i = parcel.readInt();
+            switch (i) {
                 case 1:
                     return TsResponse.createFromParcelBody(parcel);
                 case 2:
@@ -32,7 +32,7 @@ public abstract class BroadcastInfoResponse implements Parcelable {
                 case 9:
                     return SignalingDataResponse.createFromParcelBody(parcel);
                 default:
-                    throw new IllegalStateException("Unexpected broadcast info response type (value " + readInt + ") in parcel.");
+                    throw new IllegalStateException("Unexpected broadcast info response type (value " + i + ") in parcel.");
             }
         }
 

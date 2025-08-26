@@ -55,6 +55,7 @@ import android.view.translation.ViewTranslationResponse;
 import android.widget.AbsoluteLayout;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -262,8 +263,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     protected WebView(Context context, AttributeSet attributeSet, int i, int i2, Map<String, Object> map, boolean z) {
         super(context, attributeSet, i, i2);
-        Looper myLooper = Looper.myLooper();
-        this.mWebViewThread = myLooper;
+        Looper looperMyLooper = Looper.myLooper();
+        this.mWebViewThread = looperMyLooper;
         if (getImportantForAutofill() == 0) {
             setImportantForAutofill(1);
         }
@@ -273,7 +274,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         if (context == null) {
             throw new IllegalArgumentException("Invalid context argument");
         }
-        if (myLooper == null) {
+        if (looperMyLooper == null) {
             throw new RuntimeException("WebView cannot be initialized on a thread that has no Looper.");
         }
         sEnforceThreadChecking = context.getApplicationInfo().targetSdkVersion >= 18;
@@ -761,11 +762,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Deprecated
     public static synchronized PluginList getPluginList() {
-        PluginList pluginList;
-        synchronized (WebView.class) {
-            pluginList = new PluginList();
-        }
-        return pluginList;
+        return new PluginList();
     }
 
     public static void setDataDirectorySuffix(String str) {
@@ -1295,8 +1292,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     protected void onSizeChanged(int i, int i2, int i3, int i4) {
         super.onSizeChanged(i, i2, i3, i4);
         this.mProvider.getViewDelegate().onSizeChanged(i, i2, i3, i4);
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        if (currentActivityThread == null || currentActivityThread.getCompatInfo() == null || !currentActivityThread.getCompatInfo().hasOverrideScaling()) {
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        if (activityThreadCurrentActivityThread == null || activityThreadCurrentActivityThread.getCompatInfo() == null || !activityThreadCurrentActivityThread.getCompatInfo().hasOverrideScaling()) {
             return;
         }
         getSettings().setLoadWithOverviewMode(true);
@@ -1403,7 +1400,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
         super.encodeProperties(viewHierarchyEncoder);
         checkThread();
         viewHierarchyEncoder.addProperty("webview:contentHeight", this.mProvider.getContentHeight());
@@ -1416,13 +1413,13 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Override // android.view.View
     public WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
-        WindowInsets onApplyWindowInsets = this.mProvider.getViewDelegate().onApplyWindowInsets(windowInsets);
-        return onApplyWindowInsets == null ? super.onApplyWindowInsets(windowInsets) : onApplyWindowInsets;
+        WindowInsets windowInsetsOnApplyWindowInsets = this.mProvider.getViewDelegate().onApplyWindowInsets(windowInsets);
+        return windowInsetsOnApplyWindowInsets == null ? super.onApplyWindowInsets(windowInsets) : windowInsetsOnApplyWindowInsets;
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public PointerIcon onResolvePointerIcon(MotionEvent motionEvent, int i) {
-        PointerIcon onResolvePointerIcon = this.mProvider.getViewDelegate().onResolvePointerIcon(motionEvent, i);
-        return onResolvePointerIcon != null ? onResolvePointerIcon : super.onResolvePointerIcon(motionEvent, i);
+        PointerIcon pointerIconOnResolvePointerIcon = this.mProvider.getViewDelegate().onResolvePointerIcon(motionEvent, i);
+        return pointerIconOnResolvePointerIcon != null ? pointerIconOnResolvePointerIcon : super.onResolvePointerIcon(motionEvent, i);
     }
 }

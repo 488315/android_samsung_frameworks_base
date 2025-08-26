@@ -32,26 +32,26 @@ public class BERTaggedObject extends ASN1TaggedObject {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength(boolean z) throws IOException {
         ASN1Primitive aSN1Primitive = this.obj.toASN1Primitive();
-        boolean isExplicit = isExplicit();
-        int encodedLength = aSN1Primitive.encodedLength(isExplicit);
-        if (isExplicit) {
-            encodedLength += 3;
+        boolean zIsExplicit = isExplicit();
+        int iEncodedLength = aSN1Primitive.encodedLength(zIsExplicit);
+        if (zIsExplicit) {
+            iEncodedLength += 3;
         }
-        return encodedLength + (z ? ASN1OutputStream.getLengthOfIdentifier(this.tagNo) : 0);
+        return iEncodedLength + (z ? ASN1OutputStream.getLengthOfIdentifier(this.tagNo) : 0);
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream aSN1OutputStream, boolean z) throws IOException {
         ASN1Primitive aSN1Primitive = this.obj.toASN1Primitive();
-        boolean isExplicit = isExplicit();
+        boolean zIsExplicit = isExplicit();
         if (z) {
             int i = this.tagClass;
-            if (isExplicit || aSN1Primitive.encodeConstructed()) {
+            if (zIsExplicit || aSN1Primitive.encodeConstructed()) {
                 i |= 32;
             }
             aSN1OutputStream.writeIdentifier(true, i, this.tagNo);
         }
-        if (isExplicit) {
+        if (zIsExplicit) {
             aSN1OutputStream.write(128);
             aSN1Primitive.encode(aSN1OutputStream, true);
             aSN1OutputStream.write(0);

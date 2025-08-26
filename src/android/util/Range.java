@@ -65,13 +65,13 @@ public final class Range<T extends Comparable<? super T>> {
 
     public Range<T> intersect(Range<T> range) {
         Preconditions.checkNotNull(range, "range must not be null");
-        int compareTo = range.mLower.compareTo(this.mLower);
-        int compareTo2 = range.mUpper.compareTo(this.mUpper);
-        if (compareTo <= 0 && compareTo2 >= 0) {
+        int iCompareTo = range.mLower.compareTo(this.mLower);
+        int iCompareTo2 = range.mUpper.compareTo(this.mUpper);
+        if (iCompareTo <= 0 && iCompareTo2 >= 0) {
             return this;
         }
-        if (compareTo < 0 || compareTo2 > 0) {
-            return create(compareTo <= 0 ? this.mLower : range.mLower, compareTo2 >= 0 ? this.mUpper : range.mUpper);
+        if (iCompareTo < 0 || iCompareTo2 > 0) {
+            return create(iCompareTo <= 0 ? this.mLower : range.mLower, iCompareTo2 >= 0 ? this.mUpper : range.mUpper);
         }
         return range;
     }
@@ -79,15 +79,15 @@ public final class Range<T extends Comparable<? super T>> {
     public Range<T> intersect(T t, T t2) {
         Preconditions.checkNotNull(t, "lower must not be null");
         Preconditions.checkNotNull(t2, "upper must not be null");
-        int compareTo = t.compareTo(this.mLower);
-        int compareTo2 = t2.compareTo(this.mUpper);
-        if (compareTo <= 0 && compareTo2 >= 0) {
+        int iCompareTo = t.compareTo(this.mLower);
+        int iCompareTo2 = t2.compareTo(this.mUpper);
+        if (iCompareTo <= 0 && iCompareTo2 >= 0) {
             return this;
         }
-        if (compareTo <= 0) {
+        if (iCompareTo <= 0) {
             t = this.mLower;
         }
-        if (compareTo2 >= 0) {
+        if (iCompareTo2 >= 0) {
             t2 = this.mUpper;
         }
         return create(t, t2);
@@ -95,13 +95,13 @@ public final class Range<T extends Comparable<? super T>> {
 
     public Range<T> extend(Range<T> range) {
         Preconditions.checkNotNull(range, "range must not be null");
-        int compareTo = range.mLower.compareTo(this.mLower);
-        int compareTo2 = range.mUpper.compareTo(this.mUpper);
-        if (compareTo <= 0 && compareTo2 >= 0) {
+        int iCompareTo = range.mLower.compareTo(this.mLower);
+        int iCompareTo2 = range.mUpper.compareTo(this.mUpper);
+        if (iCompareTo <= 0 && iCompareTo2 >= 0) {
             return range;
         }
-        if (compareTo < 0 || compareTo2 > 0) {
-            return create(compareTo >= 0 ? this.mLower : range.mLower, compareTo2 <= 0 ? this.mUpper : range.mUpper);
+        if (iCompareTo < 0 || iCompareTo2 > 0) {
+            return create(iCompareTo >= 0 ? this.mLower : range.mLower, iCompareTo2 <= 0 ? this.mUpper : range.mUpper);
         }
         return this;
     }
@@ -109,15 +109,15 @@ public final class Range<T extends Comparable<? super T>> {
     public Range<T> extend(T t, T t2) {
         Preconditions.checkNotNull(t, "lower must not be null");
         Preconditions.checkNotNull(t2, "upper must not be null");
-        int compareTo = t.compareTo(this.mLower);
-        int compareTo2 = t2.compareTo(this.mUpper);
-        if (compareTo >= 0 && compareTo2 <= 0) {
+        int iCompareTo = t.compareTo(this.mLower);
+        int iCompareTo2 = t2.compareTo(this.mUpper);
+        if (iCompareTo >= 0 && iCompareTo2 <= 0) {
             return this;
         }
-        if (compareTo >= 0) {
+        if (iCompareTo >= 0) {
             t = this.mLower;
         }
-        if (compareTo2 <= 0) {
+        if (iCompareTo2 <= 0) {
             t2 = this.mUpper;
         }
         return create(t, t2);

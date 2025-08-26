@@ -70,17 +70,17 @@ public final class ApkSigningBlockUtils {
     private ApkSigningBlockUtils() {
     }
 
-    static SignatureInfo findSignature(RandomAccessFile randomAccessFile, int i) throws IOException, SignatureNotFoundException {
+    static SignatureInfo findSignature(RandomAccessFile randomAccessFile, int i) throws SignatureNotFoundException, IOException {
         Pair<ByteBuffer, Long> eocd = getEocd(randomAccessFile);
         ByteBuffer byteBuffer = eocd.first;
-        long longValue = eocd.second.longValue();
-        if (ZipUtils.isZip64EndOfCentralDirectoryLocatorPresent(randomAccessFile, longValue)) {
+        long jLongValue = eocd.second.longValue();
+        if (ZipUtils.isZip64EndOfCentralDirectoryLocatorPresent(randomAccessFile, jLongValue)) {
             throw new SignatureNotFoundException("ZIP64 APK not supported");
         }
-        long centralDirOffset = getCentralDirOffset(byteBuffer, longValue);
-        Pair<ByteBuffer, Long> findApkSigningBlock = findApkSigningBlock(randomAccessFile, centralDirOffset);
-        ByteBuffer byteBuffer2 = findApkSigningBlock.first;
-        return new SignatureInfo(findApkSignatureSchemeBlock(byteBuffer2, i), findApkSigningBlock.second.longValue(), centralDirOffset, longValue, byteBuffer);
+        long centralDirOffset = getCentralDirOffset(byteBuffer, jLongValue);
+        Pair<ByteBuffer, Long> pairFindApkSigningBlock = findApkSigningBlock(randomAccessFile, centralDirOffset);
+        ByteBuffer byteBuffer2 = pairFindApkSigningBlock.first;
+        return new SignatureInfo(findApkSignatureSchemeBlock(byteBuffer2, i), pairFindApkSigningBlock.second.longValue(), centralDirOffset, jLongValue, byteBuffer);
     }
 
     static void verifyIntegrity(Map<Integer, byte[]> map, RandomAccessFile randomAccessFile, SignatureInfo signatureInfo) throws SecurityException {
@@ -124,10 +124,10 @@ public final class ApkSigningBlockUtils {
             i++;
         }
         try {
-            byte[][] computeContentDigestsPer1MbChunk = computeContentDigestsPer1MbChunk(iArr, fileDescriptor, signatureInfo);
+            byte[][] bArrComputeContentDigestsPer1MbChunk = computeContentDigestsPer1MbChunk(iArr, fileDescriptor, signatureInfo);
             for (int i2 = 0; i2 < size; i2++) {
                 int i3 = iArr[i2];
-                if (!MessageDigest.isEqual(map.get(Integer.valueOf(i3)), computeContentDigestsPer1MbChunk[i2])) {
+                if (!MessageDigest.isEqual(map.get(Integer.valueOf(i3)), bArrComputeContentDigestsPer1MbChunk[i2])) {
                     throw new SecurityException(getContentDigestAlgorithmJcaDigestAlgorithm(i3) + " digest of contents did not verify");
                 }
             }
@@ -137,25 +137,25 @@ public final class ApkSigningBlockUtils {
     }
 
     public static byte[][] computeContentDigestsPer1MbChunk(int[] iArr, FileDescriptor fileDescriptor, SignatureInfo signatureInfo) throws DigestException {
-        DataSource create = DataSource.create(fileDescriptor, 0L, signatureInfo.apkSigningBlockOffset);
-        DataSource create2 = DataSource.create(fileDescriptor, signatureInfo.centralDirOffset, signatureInfo.eocdOffset - signatureInfo.centralDirOffset);
-        ByteBuffer duplicate = signatureInfo.eocd.duplicate();
-        duplicate.order(ByteOrder.LITTLE_ENDIAN);
-        ZipUtils.setZipEocdCentralDirectoryOffset(duplicate, signatureInfo.apkSigningBlockOffset);
-        return computeContentDigestsPer1MbChunk(iArr, new DataSource[]{create, create2, new ByteBufferDataSource(duplicate)});
+        DataSource dataSourceCreate = DataSource.create(fileDescriptor, 0L, signatureInfo.apkSigningBlockOffset);
+        DataSource dataSourceCreate2 = DataSource.create(fileDescriptor, signatureInfo.centralDirOffset, signatureInfo.eocdOffset - signatureInfo.centralDirOffset);
+        ByteBuffer byteBufferDuplicate = signatureInfo.eocd.duplicate();
+        byteBufferDuplicate.order(ByteOrder.LITTLE_ENDIAN);
+        ZipUtils.setZipEocdCentralDirectoryOffset(byteBufferDuplicate, signatureInfo.apkSigningBlockOffset);
+        return computeContentDigestsPer1MbChunk(iArr, new DataSource[]{dataSourceCreate, dataSourceCreate2, new ByteBufferDataSource(byteBufferDuplicate)});
     }
 
     private static byte[][] computeContentDigestsPer1MbChunk(int[] iArr, DataSource[] dataSourceArr) throws DigestException {
         char c;
         DataSource[] dataSourceArr2 = dataSourceArr;
-        long j = 0;
+        long chunkCount = 0;
         for (DataSource dataSource : dataSourceArr2) {
-            j += getChunkCount(dataSource.size());
+            chunkCount += getChunkCount(dataSource.size());
         }
-        if (j >= 2097151) {
-            throw new DigestException("Too many chunks: " + j);
+        if (chunkCount >= 2097151) {
+            throw new DigestException("Too many chunks: " + chunkCount);
         }
-        int i = (int) j;
+        int i = (int) chunkCount;
         byte[][] bArr = new byte[iArr.length][];
         int i2 = 0;
         while (true) {
@@ -190,18 +190,18 @@ public final class ApkSigningBlockUtils {
             DataSource dataSource2 = dataSourceArr2[i5];
             byte[][] bArr4 = bArr;
             long size = dataSource2.size();
-            long j2 = 0;
+            long j = 0;
             while (size > 0) {
                 char c2 = c;
-                int min = (int) Math.min(size, 1048576L);
-                setUnsignedInt32LittleEndian(min, bArr3, 1);
+                int iMin = (int) Math.min(size, 1048576L);
+                setUnsignedInt32LittleEndian(iMin, bArr3, 1);
                 for (int i7 = 0; i7 < length; i7++) {
                     messageDigestArr[i7].update(bArr3);
                 }
                 byte[] bArr5 = bArr3;
-                long j3 = j2;
+                long j2 = j;
                 try {
-                    dataSource2.feedIntoDataDigester(multipleDigestDataDigester, j3, min);
+                    dataSource2.feedIntoDataDigester(multipleDigestDataDigester, j2, iMin);
                     int i8 = 0;
                     while (i8 < iArr.length) {
                         int i9 = iArr[i8];
@@ -209,18 +209,18 @@ public final class ApkSigningBlockUtils {
                         int contentDigestAlgorithmOutputSizeBytes = getContentDigestAlgorithmOutputSizeBytes(i9);
                         DataSource dataSource3 = dataSource2;
                         MessageDigest messageDigest = messageDigestArr[i8];
-                        long j4 = size;
-                        int digest = messageDigest.digest(bArr6, (i6 * contentDigestAlgorithmOutputSizeBytes) + 5, contentDigestAlgorithmOutputSizeBytes);
-                        if (digest != contentDigestAlgorithmOutputSizeBytes) {
-                            throw new RuntimeException("Unexpected output size of " + messageDigest.getAlgorithm() + " digest: " + digest);
+                        long j3 = size;
+                        int iDigest = messageDigest.digest(bArr6, (i6 * contentDigestAlgorithmOutputSizeBytes) + 5, contentDigestAlgorithmOutputSizeBytes);
+                        if (iDigest != contentDigestAlgorithmOutputSizeBytes) {
+                            throw new RuntimeException("Unexpected output size of " + messageDigest.getAlgorithm() + " digest: " + iDigest);
                         }
                         i8++;
                         dataSource2 = dataSource3;
-                        size = j4;
+                        size = j3;
                     }
-                    long j5 = min;
-                    j2 = j3 + j5;
-                    size -= j5;
+                    long j4 = iMin;
+                    j = j2 + j4;
+                    size -= j4;
                     i6++;
                     c = c2;
                     bArr3 = bArr5;
@@ -252,9 +252,9 @@ public final class ApkSigningBlockUtils {
         if (bArr.length != 40) {
             throw new SecurityException("Verity digest size is wrong: " + bArr.length);
         }
-        ByteBuffer order = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
-        order.position(32);
-        if (order.getLong() != j - (signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset)) {
+        ByteBuffer byteBufferOrder = ByteBuffer.wrap(bArr).order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferOrder.position(32);
+        if (byteBufferOrder.getLong() != j - (signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset)) {
             throw new SecurityException("APK content size did not verify");
         }
         return Arrays.copyOfRange(bArr, 0, 32);
@@ -276,10 +276,10 @@ public final class ApkSigningBlockUtils {
         }
     }
 
-    static Pair<ByteBuffer, Long> getEocd(RandomAccessFile randomAccessFile) throws IOException, SignatureNotFoundException {
-        Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord = ZipUtils.findZipEndOfCentralDirectoryRecord(randomAccessFile);
-        if (findZipEndOfCentralDirectoryRecord != null) {
-            return findZipEndOfCentralDirectoryRecord;
+    static Pair<ByteBuffer, Long> getEocd(RandomAccessFile randomAccessFile) throws SignatureNotFoundException, IOException {
+        Pair<ByteBuffer, Long> pairFindZipEndOfCentralDirectoryRecord = ZipUtils.findZipEndOfCentralDirectoryRecord(randomAccessFile);
+        if (pairFindZipEndOfCentralDirectoryRecord != null) {
+            return pairFindZipEndOfCentralDirectoryRecord;
         }
         throw new SignatureNotFoundException("Not an APK file: ZIP End of Central Directory record not found");
     }
@@ -455,23 +455,23 @@ public final class ApkSigningBlockUtils {
         if (i2 < i) {
             throw new IllegalArgumentException("end < start: " + i2 + " < " + i);
         }
-        int capacity = byteBuffer.capacity();
+        int iCapacity = byteBuffer.capacity();
         if (i2 > byteBuffer.capacity()) {
-            throw new IllegalArgumentException("end > capacity: " + i2 + " > " + capacity);
+            throw new IllegalArgumentException("end > capacity: " + i2 + " > " + iCapacity);
         }
-        int limit = byteBuffer.limit();
-        int position = byteBuffer.position();
+        int iLimit = byteBuffer.limit();
+        int iPosition = byteBuffer.position();
         try {
             byteBuffer.position(0);
             byteBuffer.limit(i2);
             byteBuffer.position(i);
-            ByteBuffer slice = byteBuffer.slice();
-            slice.order(byteBuffer.order());
-            return slice;
+            ByteBuffer byteBufferSlice = byteBuffer.slice();
+            byteBufferSlice.order(byteBuffer.order());
+            return byteBufferSlice;
         } finally {
             byteBuffer.position(0);
-            byteBuffer.limit(limit);
-            byteBuffer.position(position);
+            byteBuffer.limit(iLimit);
+            byteBuffer.position(iPosition);
         }
     }
 
@@ -479,20 +479,20 @@ public final class ApkSigningBlockUtils {
         if (i < 0) {
             throw new IllegalArgumentException("size: " + i);
         }
-        int limit = byteBuffer.limit();
-        int position = byteBuffer.position();
-        int i2 = i + position;
-        if (i2 < position || i2 > limit) {
+        int iLimit = byteBuffer.limit();
+        int iPosition = byteBuffer.position();
+        int i2 = i + iPosition;
+        if (i2 < iPosition || i2 > iLimit) {
             throw new BufferUnderflowException();
         }
         byteBuffer.limit(i2);
         try {
-            ByteBuffer slice = byteBuffer.slice();
-            slice.order(byteBuffer.order());
+            ByteBuffer byteBufferSlice = byteBuffer.slice();
+            byteBufferSlice.order(byteBuffer.order());
             byteBuffer.position(i2);
-            return slice;
+            return byteBufferSlice;
         } finally {
-            byteBuffer.limit(limit);
+            byteBuffer.limit(iLimit);
         }
     }
 
@@ -530,19 +530,19 @@ public final class ApkSigningBlockUtils {
         bArr[i2 + 3] = (byte) ((i >>> 24) & 255);
     }
 
-    static Pair<ByteBuffer, Long> findApkSigningBlock(RandomAccessFile randomAccessFile, long j) throws IOException, SignatureNotFoundException {
+    static Pair<ByteBuffer, Long> findApkSigningBlock(RandomAccessFile randomAccessFile, long j) throws SignatureNotFoundException, IOException {
         if (j < 32) {
             throw new SignatureNotFoundException("APK too small for APK Signing Block. ZIP Central Directory offset: " + j);
         }
-        ByteBuffer allocate = ByteBuffer.allocate(24);
-        allocate.order(ByteOrder.LITTLE_ENDIAN);
-        randomAccessFile.seek(j - allocate.capacity());
-        randomAccessFile.readFully(allocate.array(), allocate.arrayOffset(), allocate.capacity());
-        if (allocate.getLong(8) != APK_SIG_BLOCK_MAGIC_LO || allocate.getLong(16) != APK_SIG_BLOCK_MAGIC_HI) {
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(24);
+        byteBufferAllocate.order(ByteOrder.LITTLE_ENDIAN);
+        randomAccessFile.seek(j - byteBufferAllocate.capacity());
+        randomAccessFile.readFully(byteBufferAllocate.array(), byteBufferAllocate.arrayOffset(), byteBufferAllocate.capacity());
+        if (byteBufferAllocate.getLong(8) != APK_SIG_BLOCK_MAGIC_LO || byteBufferAllocate.getLong(16) != APK_SIG_BLOCK_MAGIC_HI) {
             throw new SignatureNotFoundException("No APK Signing Block before ZIP Central Directory");
         }
-        long j2 = allocate.getLong(0);
-        if (j2 < allocate.capacity() || j2 > 2147483639) {
+        long j2 = byteBufferAllocate.getLong(0);
+        if (j2 < byteBufferAllocate.capacity() || j2 > 2147483639) {
             throw new SignatureNotFoundException("APK Signing Block size out of range: " + j2);
         }
         int i = (int) (8 + j2);
@@ -550,39 +550,39 @@ public final class ApkSigningBlockUtils {
         if (j3 < 0) {
             throw new SignatureNotFoundException("APK Signing Block offset out of range: " + j3);
         }
-        ByteBuffer allocate2 = ByteBuffer.allocate(i);
-        allocate2.order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer byteBufferAllocate2 = ByteBuffer.allocate(i);
+        byteBufferAllocate2.order(ByteOrder.LITTLE_ENDIAN);
         randomAccessFile.seek(j3);
-        randomAccessFile.readFully(allocate2.array(), allocate2.arrayOffset(), allocate2.capacity());
-        long j4 = allocate2.getLong(0);
+        randomAccessFile.readFully(byteBufferAllocate2.array(), byteBufferAllocate2.arrayOffset(), byteBufferAllocate2.capacity());
+        long j4 = byteBufferAllocate2.getLong(0);
         if (j4 != j2) {
             throw new SignatureNotFoundException("APK Signing Block sizes in header and footer do not match: " + j4 + " vs " + j2);
         }
-        return Pair.create(allocate2, Long.valueOf(j3));
+        return Pair.create(byteBufferAllocate2, Long.valueOf(j3));
     }
 
     static ByteBuffer findApkSignatureSchemeBlock(ByteBuffer byteBuffer, int i) throws SignatureNotFoundException {
         checkByteOrderLittleEndian(byteBuffer);
-        ByteBuffer sliceFromTo = sliceFromTo(byteBuffer, 8, byteBuffer.capacity() - 24);
+        ByteBuffer byteBufferSliceFromTo = sliceFromTo(byteBuffer, 8, byteBuffer.capacity() - 24);
         int i2 = 0;
-        while (sliceFromTo.hasRemaining()) {
+        while (byteBufferSliceFromTo.hasRemaining()) {
             i2++;
-            if (sliceFromTo.remaining() < 8) {
+            if (byteBufferSliceFromTo.remaining() < 8) {
                 throw new SignatureNotFoundException("Insufficient data to read size of APK Signing Block entry #" + i2);
             }
-            long j = sliceFromTo.getLong();
+            long j = byteBufferSliceFromTo.getLong();
             if (j < 4 || j > 2147483647L) {
                 throw new SignatureNotFoundException("APK Signing Block entry #" + i2 + " size out of range: " + j);
             }
             int i3 = (int) j;
-            int position = sliceFromTo.position() + i3;
-            if (i3 > sliceFromTo.remaining()) {
-                throw new SignatureNotFoundException("APK Signing Block entry #" + i2 + " size out of range: " + i3 + ", available: " + sliceFromTo.remaining());
+            int iPosition = byteBufferSliceFromTo.position() + i3;
+            if (i3 > byteBufferSliceFromTo.remaining()) {
+                throw new SignatureNotFoundException("APK Signing Block entry #" + i2 + " size out of range: " + i3 + ", available: " + byteBufferSliceFromTo.remaining());
             }
-            if (sliceFromTo.getInt() == i) {
-                return getByteBuffer(sliceFromTo, i3 - 4);
+            if (byteBufferSliceFromTo.getInt() == i) {
+                return getByteBuffer(byteBufferSliceFromTo, i3 - 4);
             }
-            sliceFromTo.position(position);
+            byteBufferSliceFromTo.position(iPosition);
         }
         throw new SignatureNotFoundException("No block with ID " + i + " in APK Signing Block.");
     }
@@ -602,15 +602,15 @@ public final class ApkSigningBlockUtils {
 
         @Override // android.util.apk.DataDigester
         public void consume(ByteBuffer byteBuffer) {
-            ByteBuffer slice = byteBuffer.slice();
+            ByteBuffer byteBufferSlice = byteBuffer.slice();
             for (MessageDigest messageDigest : this.mMds) {
-                slice.position(0);
-                messageDigest.update(slice);
+                byteBufferSlice.position(0);
+                messageDigest.update(byteBufferSlice);
             }
         }
     }
 
-    static VerifiedProofOfRotation verifyProofOfRotationStruct(ByteBuffer byteBuffer, CertificateFactory certificateFactory) throws SecurityException, IOException {
+    static VerifiedProofOfRotation verifyProofOfRotationStruct(ByteBuffer byteBuffer, CertificateFactory certificateFactory) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, IOException, SecurityException, InvalidAlgorithmParameterException {
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         int i = 0;
@@ -625,7 +625,7 @@ public final class ApkSigningBlockUtils {
                 ByteBuffer lengthPrefixedSlice2 = getLengthPrefixedSlice(lengthPrefixedSlice);
                 int i3 = lengthPrefixedSlice.getInt();
                 int i4 = lengthPrefixedSlice.getInt();
-                byte[] readLengthPrefixedByteArray = readLengthPrefixedByteArray(lengthPrefixedSlice);
+                byte[] lengthPrefixedByteArray = readLengthPrefixedByteArray(lengthPrefixedSlice);
                 if (verbatimX509Certificate != null) {
                     Pair<String, ? extends AlgorithmParameterSpec> signatureAlgorithmJcaSignatureAlgorithm = getSignatureAlgorithmJcaSignatureAlgorithm(i2);
                     PublicKey publicKey = verbatimX509Certificate.getPublicKey();
@@ -635,17 +635,17 @@ public final class ApkSigningBlockUtils {
                         signature.setParameter((AlgorithmParameterSpec) signatureAlgorithmJcaSignatureAlgorithm.second);
                     }
                     signature.update(lengthPrefixedSlice2);
-                    if (!signature.verify(readLengthPrefixedByteArray)) {
+                    if (!signature.verify(lengthPrefixedByteArray)) {
                         throw new SecurityException("Unable to verify signature of certificate #" + i + " using " + signatureAlgorithmJcaSignatureAlgorithm.first + " when verifying Proof-of-rotation record");
                     }
                 }
                 lengthPrefixedSlice2.rewind();
-                byte[] readLengthPrefixedByteArray2 = readLengthPrefixedByteArray(lengthPrefixedSlice2);
+                byte[] lengthPrefixedByteArray2 = readLengthPrefixedByteArray(lengthPrefixedSlice2);
                 int i5 = lengthPrefixedSlice2.getInt();
                 if (verbatimX509Certificate != null && i2 != i5) {
                     throw new SecurityException("Signing algorithm ID mismatch for certificate #" + i + " when verifying Proof-of-rotation record");
                 }
-                verbatimX509Certificate = new VerbatimX509Certificate((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(readLengthPrefixedByteArray2)), readLengthPrefixedByteArray2);
+                verbatimX509Certificate = new VerbatimX509Certificate((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(lengthPrefixedByteArray2)), lengthPrefixedByteArray2);
                 if (hashSet.contains(verbatimX509Certificate)) {
                     throw new SecurityException("Encountered duplicate entries in Proof-of-rotation record at certificate #" + i + ".  All signing certificates should be unique");
                 }

@@ -11,7 +11,6 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FillContentLayout extends FrameLayout {
     public final int maxHeight;
@@ -22,15 +21,15 @@ public class FillContentLayout extends FrameLayout {
     }
 
     public static int getMaxSizeMeasureSpec(int i, int i2, int i3) {
-        int max = Math.max(0, i - i2);
+        int iMax = Math.max(0, i - i2);
         if (i3 >= 0) {
             return View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
         }
         if (i3 == -1) {
-            return View.MeasureSpec.makeMeasureSpec(max, 1073741824);
+            return View.MeasureSpec.makeMeasureSpec(iMax, 1073741824);
         }
         if (i3 == -2) {
-            return View.MeasureSpec.makeMeasureSpec(max, Integer.MIN_VALUE);
+            return View.MeasureSpec.makeMeasureSpec(iMax, Integer.MIN_VALUE);
         }
         return 0;
     }
@@ -57,21 +56,21 @@ public class FillContentLayout extends FrameLayout {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudFillContentLayout, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudFillContentLayout, i, 0);
         PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig = PartnerConfig.CONFIG_ILLUSTRATION_MAX_HEIGHT;
         if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
             this.maxHeight = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f);
         } else {
-            this.maxHeight = obtainStyledAttributes.getDimensionPixelSize(1, -1);
+            this.maxHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, -1);
         }
         PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_ILLUSTRATION_MAX_WIDTH;
         if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2)) {
             this.maxWidth = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f);
         } else {
-            this.maxWidth = obtainStyledAttributes.getDimensionPixelSize(0, -1);
+            this.maxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

@@ -2,6 +2,7 @@ package com.android.systemui.accessibility.data.repository;
 
 import android.hardware.display.ColorDisplayManager;
 import android.os.UserHandle;
+import com.android.systemui.accessibility.data.model.NightDisplayChangeEvent;
 import com.android.systemui.accessibility.data.model.NightDisplayState;
 import com.android.systemui.dagger.NightDisplayListenerModule$Builder;
 import com.android.systemui.statusbar.policy.LocationController;
@@ -15,11 +16,14 @@ import com.android.systemui.util.settings.SettingsProxyExt;
 import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
@@ -34,7 +38,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$runningFold$$inlined$unsafeFl
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NightDisplayRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,13 +51,82 @@ public final class NightDisplayRepository {
     public final SecureSettings secureSettings;
     public final Map stateFlowUserMap = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$setNightDisplayActivated$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $activated;
+        final /* synthetic */ UserHandle $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(UserHandle userHandle, boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$user = userHandle;
+            this.$activated = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return NightDisplayRepository.this.new AnonymousClass2(this.$user, this.$activated, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ((ColorDisplayManager) ((UserScopedServiceImpl) NightDisplayRepository.this.colorDisplayManagerUserScopedService).forUser(this.$user)).setNightDisplayActivated(this.$activated);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$setNightDisplayAutoMode$2, reason: invalid class name and case insensitive filesystem */
+    final class C07842 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $autoMode;
+        final /* synthetic */ UserHandle $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C07842(UserHandle userHandle, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$user = userHandle;
+            this.$autoMode = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return NightDisplayRepository.this.new C07842(this.$user, this.$autoMode, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C07842) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ((ColorDisplayManager) ((UserScopedServiceImpl) NightDisplayRepository.this.colorDisplayManagerUserScopedService).forUser(this.$user)).setNightDisplayAutoMode(this.$autoMode);
+            return Unit.INSTANCE;
         }
     }
 
@@ -73,7 +145,6 @@ public final class NightDisplayRepository {
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$isForceAutoModeAvailable$1(null), SettingsProxyExt.INSTANCE.observerFlow(globalSettings, "night_display_forced_auto_mode_available"));
         this.isForceAutoModeAvailable = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -102,106 +173,80 @@ public final class NightDisplayRepository {
                     this.this$0 = nightDisplayRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2$1 r0 = (com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2$1 r0 = new com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L53
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Unit r5 = (kotlin.Unit) r5
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository r5 = r4.this$0
-                        com.android.systemui.util.settings.GlobalSettings r5 = r5.globalSettings
-                        java.lang.String r6 = "night_display_forced_auto_mode_available"
-                        java.lang.String r5 = r5.getString(r6)
-                        java.lang.String r6 = "1"
-                        boolean r5 = kotlin.jvm.internal.Intrinsics.areEqual(r5, r6)
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L53
-                        return r1
-                    L53:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.data.repository.NightDisplayRepository$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(Intrinsics.areEqual(this.this$0.globalSettings.getString("night_display_forced_auto_mode_available"), "1"));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:8:0x003e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final NightDisplayState initialState(UserHandle userHandle) {
         boolean z;
         ColorDisplayManager colorDisplayManager = (ColorDisplayManager) ((UserScopedServiceImpl) this.colorDisplayManagerUserScopedService).forUser(userHandle);
         int nightDisplayAutoMode = colorDisplayManager.getNightDisplayAutoMode();
-        boolean isNightDisplayActivated = colorDisplayManager.isNightDisplayActivated();
+        boolean zIsNightDisplayActivated = colorDisplayManager.isNightDisplayActivated();
         LocalTime nightDisplayCustomStartTime = colorDisplayManager.getNightDisplayCustomStartTime();
         LocalTime nightDisplayCustomEndTime = colorDisplayManager.getNightDisplayCustomEndTime();
         if (Intrinsics.areEqual(this.globalSettings.getString("night_display_forced_auto_mode_available"), "1")) {
-            if (this.secureSettings.getIntForUser("night_display_auto_mode", -1, userHandle.getIdentifier()) == -1) {
-                z = true;
-                return new NightDisplayState(nightDisplayAutoMode, isNightDisplayActivated, nightDisplayCustomStartTime, nightDisplayCustomEndTime, z, ((LocationControllerImpl) this.locationController).isLocationEnabled$1());
-            }
+            z = this.secureSettings.getIntForUser("night_display_auto_mode", -1, userHandle.getIdentifier()) == -1;
         }
-        z = false;
-        return new NightDisplayState(nightDisplayAutoMode, isNightDisplayActivated, nightDisplayCustomStartTime, nightDisplayCustomEndTime, z, ((LocationControllerImpl) this.locationController).isLocationEnabled$1());
+        return new NightDisplayState(nightDisplayAutoMode, zIsNightDisplayActivated, nightDisplayCustomStartTime, nightDisplayCustomEndTime, z, ((LocationControllerImpl) this.locationController).isLocationEnabled$1());
     }
 
     public final Flow nightDisplayState(final UserHandle userHandle) {
-        Flow flow;
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         Object obj = ((LinkedHashMap) this.stateFlowUserMap).get(Integer.valueOf(userHandle.getIdentifier()));
         if (obj != null) {
             return (Flow) obj;
         }
-        CallbackFlowBuilder callbackFlow = FlowKt.callbackFlow(new NightDisplayRepository$colorDisplayManagerChangeEventFlow$1(this, userHandle, null));
+        CallbackFlowBuilder callbackFlowBuilderCallbackFlow = FlowKt.callbackFlow(new NightDisplayRepository$colorDisplayManagerChangeEventFlow$1(this, userHandle, null));
         if (userHandle.getIdentifier() == -10000) {
-            flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
+            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
         } else {
             final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$isDisplayAutoModeRawNotSet$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.secureSettings, userHandle.getIdentifier(), "night_display_auto_mode"));
-            flow = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1
+            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -232,86 +277,54 @@ public final class NightDisplayRepository {
                         this.$userHandle$inlined = userHandle;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                        /*
-                            r5 = this;
-                            boolean r0 = r7 instanceof com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                            if (r0 == 0) goto L13
-                            r0 = r7
-                            com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2$1 r0 = (com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                            int r1 = r0.label
-                            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r3 = r1 & r2
-                            if (r3 == 0) goto L13
-                            int r1 = r1 - r2
-                            r0.label = r1
-                            goto L18
-                        L13:
-                            com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2$1 r0 = new com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1$2$1
-                            r0.<init>(r7)
-                        L18:
-                            java.lang.Object r7 = r0.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r2 = r0.label
-                            r3 = 1
-                            if (r2 == 0) goto L2f
-                            if (r2 != r3) goto L27
-                            kotlin.ResultKt.throwOnFailure(r7)
-                            goto L5b
-                        L27:
-                            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                            r5.<init>(r6)
-                            throw r5
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r7)
-                            kotlin.Unit r6 = (kotlin.Unit) r6
-                            android.os.UserHandle r6 = r5.$userHandle$inlined
-                            int r6 = r6.getIdentifier()
-                            int r7 = com.android.systemui.accessibility.data.repository.NightDisplayRepository.$r8$clinit
-                            com.android.systemui.accessibility.data.repository.NightDisplayRepository r7 = r5.this$0
-                            com.android.systemui.util.settings.SecureSettings r7 = r7.secureSettings
-                            java.lang.String r2 = "night_display_auto_mode"
-                            r4 = -1
-                            int r6 = r7.getIntForUser(r2, r4, r6)
-                            if (r6 != r4) goto L4b
-                            r6 = r3
-                            goto L4c
-                        L4b:
-                            r6 = 0
-                        L4c:
-                            java.lang.Boolean r6 = java.lang.Boolean.valueOf(r6)
-                            r0.label = r3
-                            kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                            java.lang.Object r5 = r5.emit(r6, r0)
-                            if (r5 != r1) goto L5b
-                            return r1
-                        L5b:
-                            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                            return r5
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.data.repository.NightDisplayRepository$isDisplayAutoModeRawNotSet$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            int identifier = this.$userHandle$inlined.getIdentifier();
+                            int i3 = NightDisplayRepository.$r8$clinit;
+                            Boolean boolValueOf = Boolean.valueOf(this.this$0.secureSettings.getIntForUser("night_display_auto_mode", -1, identifier) == -1);
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this, userHandle), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this, userHandle), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
         }
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.isForceAutoModeAvailable, FlowKt.distinctUntilChanged(flow), new NightDisplayRepository$shouldForceAutoMode$1(null));
-        Flow flow2 = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.isForceAutoModeAvailable, FlowKt.distinctUntilChanged(flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2), new NightDisplayRepository$shouldForceAutoMode$1(null));
+        Flow flow = new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -338,73 +351,51 @@ public final class NightDisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2$1 r0 = (com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2$1 r0 = new com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        com.android.systemui.accessibility.data.model.NightDisplayChangeEvent$OnForceAutoModeChanged r6 = new com.android.systemui.accessibility.data.model.NightDisplayChangeEvent$OnForceAutoModeChanged
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        NightDisplayChangeEvent.OnForceAutoModeChanged onForceAutoModeChanged = new NightDisplayChangeEvent.OnForceAutoModeChanged(((Boolean) obj).booleanValue());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(onForceAutoModeChanged, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        final Flow isLocationEnabledFlow = LocationControllerExtKt.isLocationEnabledFlow(this.locationController);
-        return FlowKt.stateIn(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$nightDisplayState$1$4(this, userHandle, null), FlowKt.buffer$default(new FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1(initialState(userHandle), FlowKt.merge(callbackFlow, flow2, new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2
+        final Flow flowIsLocationEnabledFlow = LocationControllerExtKt.isLocationEnabledFlow(this.locationController);
+        return FlowKt.stateIn(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new NightDisplayRepository$nightDisplayState$1$4(this, userHandle, null), FlowKt.buffer$default(new FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1(initialState(userHandle), FlowKt.merge(callbackFlowBuilderCallbackFlow, flow, new Flow() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -431,78 +422,57 @@ public final class NightDisplayRepository {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2$1 r0 = (com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2$1 r0 = new com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        com.android.systemui.accessibility.data.model.NightDisplayChangeEvent$OnLocationEnabledChanged r6 = new com.android.systemui.accessibility.data.model.NightDisplayChangeEvent$OnLocationEnabledChanged
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.data.repository.NightDisplayRepository$nightDisplayState$lambda$2$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        NightDisplayChangeEvent.OnLocationEnabledChanged onLocationEnabledChanged = new NightDisplayChangeEvent.OnLocationEnabledChanged(((Boolean) obj).booleanValue());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(onLocationEnabledChanged, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowIsLocationEnabledFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new NightDisplayRepository$nightDisplayState$1$3(null)), -1, 2)), this.bgCoroutineContext), this.scope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), new NightDisplayState(0, false, null, null, false, false, 63, null));
     }
 
-    public final Object setNightDisplayActivated(UserHandle userHandle, Continuation continuation, boolean z) {
-        Object withContext = BuildersKt.withContext(this.bgCoroutineContext, new NightDisplayRepository$setNightDisplayActivated$2(this, userHandle, z, null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+    public final Object setNightDisplayActivated(UserHandle userHandle, Continuation continuation, boolean z) throws Throwable {
+        Object objWithContext = BuildersKt.withContext(this.bgCoroutineContext, new AnonymousClass2(userHandle, z, null), continuation);
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 
-    public final Object setNightDisplayAutoMode(UserHandle userHandle, Continuation continuation) {
-        Object withContext = BuildersKt.withContext(this.bgCoroutineContext, new NightDisplayRepository$setNightDisplayAutoMode$2(this, userHandle, 1, null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+    public final Object setNightDisplayAutoMode(UserHandle userHandle, Continuation continuation) throws Throwable {
+        Object objWithContext = BuildersKt.withContext(this.bgCoroutineContext, new C07842(userHandle, 1, null), continuation);
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 }

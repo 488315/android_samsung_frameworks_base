@@ -53,9 +53,9 @@ public interface ISLocationSystemCallV1 extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISLocationSystemCallV1.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISLocationSystemCallV1)) {
-                return (ISLocationSystemCallV1) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISLocationSystemCallV1.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISLocationSystemCallV1)) {
+                return (ISLocationSystemCallV1) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,18 +85,18 @@ public interface ISLocationSystemCallV1 extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean isProviderEnabledForUser = isProviderEnabledForUser(readString, readInt);
+                boolean zIsProviderEnabledForUser = isProviderEnabledForUser(string, i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isProviderEnabledForUser);
+                parcel2.writeBoolean(zIsProviderEnabledForUser);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean isUidForeground = isUidForeground(readInt2);
+                boolean zIsUidForeground = isUidForeground(i4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isUidForeground);
+                parcel2.writeBoolean(zIsUidForeground);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -121,34 +121,34 @@ public interface ISLocationSystemCallV1 extends IInterface {
 
             @Override // com.samsung.android.location.ISLocationSystemCallV1
             public boolean isProviderEnabledForUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISLocationSystemCallV1.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISLocationSystemCallV1.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.location.ISLocationSystemCallV1
             public boolean isUidForeground(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISLocationSystemCallV1.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISLocationSystemCallV1.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

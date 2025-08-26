@@ -11,11 +11,20 @@ import androidx.compose.runtime.RecomposeScopeImpl;
 import androidx.compose.runtime.RecomposeScopeImplKt;
 import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import androidx.compose.runtime.internal.ComposableLambdaKt;
+import androidx.compose.ui.Modifier;
+import androidx.compose.ui.semantics.SemanticsModifierKt;
+import androidx.compose.ui.semantics.SemanticsPropertiesKt;
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
 import androidx.lifecycle.DefaultLifecycleObserver;
+import com.android.compose.PlatformButtonsKt;
 import com.android.compose.theme.PlatformThemeKt;
+import com.android.systemui.R;
 import com.android.systemui.animation.ActivityTransitionAnimator;
+import com.android.systemui.animation.DialogCuj;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
+import com.android.systemui.animation.Expandable;
+import com.android.systemui.animation.TransitionAnimator;
+import com.android.systemui.dialog.ui.composable.AlertDialogContentKt;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.qs.QSModesEvent;
 import com.android.systemui.shade.domain.interactor.ShadeDialogContextInteractor;
@@ -24,19 +33,27 @@ import com.android.systemui.statusbar.phone.ComponentSystemUIDialog;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.phone.SystemUIDialogFactory;
 import com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt;
+import com.android.systemui.statusbar.policy.ui.dialog.composable.ModeTileGridKt;
+import com.android.systemui.statusbar.policy.ui.dialog.viewmodel.ModesDialogViewModel;
 import com.android.systemui.util.Assert;
 import javax.inject.Provider;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ModesDialogDelegate implements SystemUIDialog.Delegate {
     public static final Intent ZEN_MODE_SETTINGS_INTENT;
@@ -53,13 +70,219 @@ public final class ModesDialogDelegate implements SystemUIDialog.Delegate {
     public final SystemUIDialogFactory sysuiDialogFactory;
     public final Provider viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$launchFromDialog$1, reason: invalid class name and case insensitive filesystem */
+    final class C11131 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Intent $intent;
+        int label;
+
+        /* renamed from: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$launchFromDialog$1$1, reason: invalid class name and collision with other inner class name */
+        final class C06011 extends SuspendLambda implements Function2 {
+            final /* synthetic */ Intent $intent;
+            int label;
+            final /* synthetic */ ModesDialogDelegate this$0;
+
+            /* renamed from: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$launchFromDialog$1$1$1, reason: invalid class name and collision with other inner class name */
+            final class C06021 extends SuspendLambda implements Function2 {
+                final /* synthetic */ Intent $intent;
+                int label;
+                final /* synthetic */ ModesDialogDelegate this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public C06021(ModesDialogDelegate modesDialogDelegate, Intent intent, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = modesDialogDelegate;
+                    this.$intent = intent;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new C06021(this.this$0, this.$intent, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((C06021) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    ComponentSystemUIDialog componentSystemUIDialog;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    if (this.label != 0) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    ModesDialogDelegate modesDialogDelegate = this.this$0;
+                    Intent intent = this.$intent;
+                    Intent intent2 = ModesDialogDelegate.ZEN_MODE_SETTINGS_INTENT;
+                    modesDialogDelegate.getClass();
+                    Assert.isMainThread();
+                    if (modesDialogDelegate.currentDialog == null) {
+                        Log.w("ModesDialogDelegate", "Cannot launch from dialog, the dialog is not present. Will launch activity without animating.");
+                    }
+                    ComponentSystemUIDialog componentSystemUIDialog2 = modesDialogDelegate.currentDialog;
+                    DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = componentSystemUIDialog2 != null ? DialogTransitionAnimator.createActivityTransitionController$default(componentSystemUIDialog2, modesDialogDelegate.dialogTransitionAnimator) : null;
+                    if (anonymousClass1CreateActivityTransitionController$default == null && (componentSystemUIDialog = modesDialogDelegate.currentDialog) != null) {
+                        componentSystemUIDialog.dismiss();
+                    }
+                    modesDialogDelegate.activityStarter.startActivity(intent, true, (ActivityTransitionAnimator.Controller) anonymousClass1CreateActivityTransitionController$default);
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C06011(ModesDialogDelegate modesDialogDelegate, Intent intent, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = modesDialogDelegate;
+                this.$intent = intent;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C06011(this.this$0, this.$intent, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C06011) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    ModesDialogDelegate modesDialogDelegate = this.this$0;
+                    CoroutineContext coroutineContext = modesDialogDelegate.mainCoroutineContext;
+                    C06021 c06021 = new C06021(modesDialogDelegate, this.$intent, null);
+                    this.label = 1;
+                    if (BuildersKt.withContext(coroutineContext, c06021, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11131(Intent intent, Continuation continuation) {
+            super(2, continuation);
+            this.$intent = intent;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ModesDialogDelegate.this.new C11131(this.$intent, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C11131) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ModesDialogDelegate modesDialogDelegate = ModesDialogDelegate.this;
+                CoroutineContext coroutineContext = modesDialogDelegate.bgContext;
+                C06011 c06011 = new C06011(modesDialogDelegate, this.$intent, null);
+                this.label = 1;
+                if (BuildersKt.withContext(coroutineContext, c06011, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1, reason: invalid class name and case insensitive filesystem */
+    final class C11141 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C11141(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ModesDialogDelegate.this.showDialog(null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$2, reason: invalid class name and case insensitive filesystem */
+    final class C11152 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Expandable $expandable;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11152(Expandable expandable, Continuation continuation) {
+            super(2, continuation);
+            this.$expandable = expandable;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ModesDialogDelegate.this.new C11152(this.$expandable, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C11152) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            DialogTransitionAnimator.Controller controllerDialogTransitionController;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ModesDialogDelegate modesDialogDelegate = ModesDialogDelegate.this;
+            if (modesDialogDelegate.currentDialog == null) {
+                modesDialogDelegate.createDialog();
+            }
+            Expandable expandable = this.$expandable;
+            if (expandable == null || (controllerDialogTransitionController = expandable.dialogTransitionController(new DialogCuj(58, "configure_priority_modes"))) == null) {
+                ComponentSystemUIDialog componentSystemUIDialog = ModesDialogDelegate.this.currentDialog;
+                componentSystemUIDialog.getClass();
+                componentSystemUIDialog.show();
+            } else {
+                ModesDialogDelegate modesDialogDelegate2 = ModesDialogDelegate.this;
+                DialogTransitionAnimator dialogTransitionAnimator = modesDialogDelegate2.dialogTransitionAnimator;
+                ComponentSystemUIDialog componentSystemUIDialog2 = modesDialogDelegate2.currentDialog;
+                componentSystemUIDialog2.getClass();
+                TransitionAnimator.Timings timings = DialogTransitionAnimator.TIMINGS;
+                dialogTransitionAnimator.show(componentSystemUIDialog2, controllerDialogTransitionController, false);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -99,114 +322,190 @@ public final class ModesDialogDelegate implements SystemUIDialog.Delegate {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent (ModesDialogDelegate.kt:114)");
             }
-            boolean isSystemInDarkTheme = DarkThemeKt.isSystemInDarkTheme(composerImpl);
+            boolean zIsSystemInDarkTheme = DarkThemeKt.isSystemInDarkTheme(composerImpl);
             composerImpl.startReplaceGroup(-234256559);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
-                rememberedValue = Boolean.valueOf(isSystemInDarkTheme);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = Boolean.valueOf(zIsSystemInDarkTheme);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            boolean booleanValue = ((Boolean) rememberedValue).booleanValue();
+            boolean zBooleanValue = ((Boolean) objRememberedValue).booleanValue();
             composerImpl.end(false);
-            PlatformThemeKt.PlatformTheme(booleanValue, ComposableLambdaKt.rememberComposableLambda(-1782855818, new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1
-                /* JADX WARN: Code restructure failed: missing block: B:15:0x0045, code lost:
-                
-                    if (r1 == androidx.compose.runtime.Composer.Companion.Empty) goto L15;
-                 */
+            PlatformThemeKt.PlatformTheme(zBooleanValue, ComposableLambdaKt.rememberComposableLambda(-1782855818, new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.1
+                /* JADX WARN: Removed duplicated region for block: B:15:0x0047  */
+                /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
                 @Override // kotlin.jvm.functions.Function2
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invoke(java.lang.Object r10, java.lang.Object r11) {
-                    /*
-                        r9 = this;
-                        androidx.compose.runtime.Composer r10 = (androidx.compose.runtime.Composer) r10
-                        java.lang.Number r11 = (java.lang.Number) r11
-                        int r11 = r11.intValue()
-                        r11 = r11 & 3
-                        r0 = 2
-                        if (r11 != r0) goto L1c
-                        r11 = r10
-                        androidx.compose.runtime.ComposerImpl r11 = (androidx.compose.runtime.ComposerImpl) r11
-                        boolean r0 = r11.getSkipping()
-                        if (r0 != 0) goto L17
-                        goto L1c
-                    L17:
-                        r11.skipToGroupEnd()
-                        goto L98
-                    L1c:
-                        boolean r11 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r11 == 0) goto L27
-                        java.lang.String r11 = "com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.<anonymous> (ModesDialogDelegate.kt:122)"
-                        androidx.compose.runtime.ComposerKt.traceEventStart(r11)
-                    L27:
-                        androidx.compose.ui.Modifier$Companion r11 = androidx.compose.ui.Modifier.Companion
-                        r6 = r10
-                        androidx.compose.runtime.ComposerImpl r6 = (androidx.compose.runtime.ComposerImpl) r6
-                        r10 = -1489003334(0xffffffffa73f9cba, float:-2.6591536E-15)
-                        r6.startReplaceGroup(r10)
-                        com.android.systemui.statusbar.phone.SystemUIDialog r10 = com.android.systemui.statusbar.phone.SystemUIDialog.this
-                        boolean r0 = r6.changedInstance(r10)
-                        java.lang.Object r1 = r6.rememberedValue()
-                        if (r0 != 0) goto L47
-                        androidx.compose.runtime.Composer$Companion r0 = androidx.compose.runtime.Composer.Companion
-                        r0.getClass()
-                        androidx.compose.runtime.Composer$Companion$Empty$1 r0 = androidx.compose.runtime.Composer.Companion.Empty
-                        if (r1 != r0) goto L4f
-                    L47:
-                        com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$$ExternalSyntheticLambda0 r1 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$$ExternalSyntheticLambda0
-                        r1.<init>()
-                        r6.updateRememberedValue(r1)
-                    L4f:
-                        kotlin.jvm.functions.Function1 r1 = (kotlin.jvm.functions.Function1) r1
-                        r0 = 0
-                        r6.end(r0)
-                        androidx.compose.ui.Modifier r2 = androidx.compose.ui.semantics.SemanticsModifierKt.semantics(r11, r0, r1)
-                        com.android.systemui.statusbar.policy.ui.dialog.ComposableSingletons$ModesDialogDelegateKt r11 = com.android.systemui.statusbar.policy.ui.dialog.ComposableSingletons$ModesDialogDelegateKt.INSTANCE
-                        r11.getClass()
-                        androidx.compose.runtime.internal.ComposableLambdaImpl r0 = com.android.systemui.statusbar.policy.ui.dialog.ComposableSingletons$ModesDialogDelegateKt.f109lambda1
-                        com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$2 r11 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$2
-                        com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate r9 = r2
-                        r11.<init>()
-                        r1 = 129037721(0x7b0f599, float:2.6625886E-34)
-                        androidx.compose.runtime.internal.ComposableLambdaImpl r1 = androidx.compose.runtime.internal.ComposableLambdaKt.rememberComposableLambda(r1, r11, r6)
-                        com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$3 r11 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$3
-                        r11.<init>()
-                        r3 = -854074596(0xffffffffcd17db1c, float:-1.5923245E8)
-                        androidx.compose.runtime.internal.ComposableLambdaImpl r3 = androidx.compose.runtime.internal.ComposableLambdaKt.rememberComposableLambda(r3, r11, r6)
-                        com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$4 r11 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$4
-                        r11.<init>()
-                        r9 = -77827042(0xfffffffffb5c741e, float:-1.14466045E36)
-                        androidx.compose.runtime.internal.ComposableLambdaImpl r5 = androidx.compose.runtime.internal.ComposableLambdaKt.rememberComposableLambda(r9, r11, r6)
-                        r7 = 1597494(0x186036, float:2.238566E-39)
-                        r8 = 40
-                        r4 = 0
-                        com.android.systemui.dialog.ui.composable.AlertDialogContentKt.AlertDialogContent(r0, r1, r2, r3, r4, r5, r6, r7, r8)
-                        boolean r9 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r9 == 0) goto L98
-                        androidx.compose.runtime.ComposerKt.traceEventEnd()
-                    L98:
-                        kotlin.Unit r9 = kotlin.Unit.INSTANCE
-                        return r9
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1.invoke(java.lang.Object, java.lang.Object):java.lang.Object");
+                public final Object invoke(Object obj, Object obj2) {
+                    Composer composer2 = (Composer) obj;
+                    if ((((Number) obj2).intValue() & 3) == 2) {
+                        ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                        if (composerImpl2.getSkipping()) {
+                            composerImpl2.skipToGroupEnd();
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.<anonymous> (ModesDialogDelegate.kt:122)");
+                            }
+                            Modifier.Companion companion = Modifier.Companion;
+                            ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                            composerImpl3.startReplaceGroup(-1489003334);
+                            final SystemUIDialog systemUIDialog2 = systemUIDialog;
+                            boolean zChangedInstance = composerImpl3.changedInstance(systemUIDialog2);
+                            Object objRememberedValue2 = composerImpl3.rememberedValue();
+                            if (!zChangedInstance) {
+                                Composer.Companion.getClass();
+                                if (objRememberedValue2 == Composer.Companion.Empty) {
+                                    objRememberedValue2 = new Function1() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$$ExternalSyntheticLambda0
+                                        @Override // kotlin.jvm.functions.Function1
+                                        /* renamed from: invoke */
+                                        public final Object mo781invoke(Object obj3) {
+                                            SemanticsPropertiesKt.setPaneTitle((SemanticsPropertyReceiver) obj3, systemUIDialog2.getContext().getString(R.string.accessibility_desc_quick_settings));
+                                            return Unit.INSTANCE;
+                                        }
+                                    };
+                                    composerImpl3.updateRememberedValue(objRememberedValue2);
+                                }
+                                composerImpl3.end(false);
+                                Modifier modifierSemantics = SemanticsModifierKt.semantics(companion, false, (Function1) objRememberedValue2);
+                                ComposableSingletons$ModesDialogDelegateKt.INSTANCE.getClass();
+                                ComposableLambdaImpl composableLambdaImpl = ComposableSingletons$ModesDialogDelegateKt.f109lambda1;
+                                final ModesDialogDelegate modesDialogDelegate = this;
+                                AlertDialogContentKt.AlertDialogContent(composableLambdaImpl, ComposableLambdaKt.rememberComposableLambda(129037721, new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.1.2
+                                    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                                    @Override // kotlin.jvm.functions.Function2
+                                    /*
+                                        Code decompiled incorrectly, please refer to instructions dump.
+                                    */
+                                    public final Object invoke(Object obj3, Object obj4) {
+                                        Composer composer3 = (Composer) obj3;
+                                        if ((((Number) obj4).intValue() & 3) == 2) {
+                                            ComposerImpl composerImpl4 = (ComposerImpl) composer3;
+                                            if (composerImpl4.getSkipping()) {
+                                                composerImpl4.skipToGroupEnd();
+                                            } else {
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.<anonymous>.<anonymous> (ModesDialogDelegate.kt:135)");
+                                                }
+                                                ModeTileGridKt.ModeTileGrid((ModesDialogViewModel) modesDialogDelegate.viewModel.get(), composer3, 0);
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventEnd();
+                                                }
+                                            }
+                                        }
+                                        return Unit.INSTANCE;
+                                    }
+                                }, composerImpl3), modifierSemantics, ComposableLambdaKt.rememberComposableLambda(-854074596, new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.1.3
+                                    /* JADX WARN: Removed duplicated region for block: B:15:0x0044  */
+                                    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                                    @Override // kotlin.jvm.functions.Function2
+                                    /*
+                                        Code decompiled incorrectly, please refer to instructions dump.
+                                    */
+                                    public final Object invoke(Object obj3, Object obj4) {
+                                        Composer composer3 = (Composer) obj3;
+                                        if ((((Number) obj4).intValue() & 3) == 2) {
+                                            ComposerImpl composerImpl4 = (ComposerImpl) composer3;
+                                            if (composerImpl4.getSkipping()) {
+                                                composerImpl4.skipToGroupEnd();
+                                            } else {
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.<anonymous>.<anonymous> (ModesDialogDelegate.kt:142)");
+                                                }
+                                                ComposerImpl composerImpl5 = (ComposerImpl) composer3;
+                                                composerImpl5.startReplaceGroup(-1008763488);
+                                                SystemUIDialog systemUIDialog3 = systemUIDialog2;
+                                                boolean zChangedInstance2 = composerImpl5.changedInstance(systemUIDialog3);
+                                                Object objRememberedValue3 = composerImpl5.rememberedValue();
+                                                if (!zChangedInstance2) {
+                                                    Composer.Companion.getClass();
+                                                    if (objRememberedValue3 == Composer.Companion.Empty) {
+                                                        objRememberedValue3 = new ModesDialogDelegate$$ExternalSyntheticLambda0(systemUIDialog3, 1);
+                                                        composerImpl5.updateRememberedValue(objRememberedValue3);
+                                                    }
+                                                    composerImpl5.end(false);
+                                                    ComposableSingletons$ModesDialogDelegateKt.INSTANCE.getClass();
+                                                    PlatformButtonsKt.PlatformButton((Function0) objRememberedValue3, null, false, null, null, null, ComposableSingletons$ModesDialogDelegateKt.f110lambda2, composerImpl5, 1572864, 62);
+                                                    if (ComposerKt.isTraceInProgress()) {
+                                                        ComposerKt.traceEventEnd();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        return Unit.INSTANCE;
+                                    }
+                                }, composerImpl3), null, ComposableLambdaKt.rememberComposableLambda(-77827042, new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.1.4
+                                    /* JADX WARN: Removed duplicated region for block: B:15:0x004b  */
+                                    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                                    @Override // kotlin.jvm.functions.Function2
+                                    /*
+                                        Code decompiled incorrectly, please refer to instructions dump.
+                                    */
+                                    public final Object invoke(Object obj3, Object obj4) {
+                                        Composer composer3 = (Composer) obj3;
+                                        if ((((Number) obj4).intValue() & 3) == 2) {
+                                            ComposerImpl composerImpl4 = (ComposerImpl) composer3;
+                                            if (composerImpl4.getSkipping()) {
+                                                composerImpl4.skipToGroupEnd();
+                                            } else {
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.ModesDialogContent.<anonymous>.<anonymous> (ModesDialogDelegate.kt:137)");
+                                                }
+                                                ComposerImpl composerImpl5 = (ComposerImpl) composer3;
+                                                composerImpl5.startReplaceGroup(-1008770844);
+                                                final ModesDialogDelegate modesDialogDelegate2 = modesDialogDelegate;
+                                                boolean zChangedInstance2 = composerImpl5.changedInstance(modesDialogDelegate2);
+                                                final SystemUIDialog systemUIDialog3 = systemUIDialog2;
+                                                boolean zChangedInstance3 = zChangedInstance2 | composerImpl5.changedInstance(systemUIDialog3);
+                                                Object objRememberedValue3 = composerImpl5.rememberedValue();
+                                                if (!zChangedInstance3) {
+                                                    Composer.Companion.getClass();
+                                                    if (objRememberedValue3 == Composer.Companion.Empty) {
+                                                        objRememberedValue3 = new Function0() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$ModesDialogContent$1$4$$ExternalSyntheticLambda0
+                                                            @Override // kotlin.jvm.functions.Function0
+                                                            public final Object invoke() {
+                                                                modesDialogDelegate2.openSettings(systemUIDialog3);
+                                                                return Unit.INSTANCE;
+                                                            }
+                                                        };
+                                                        composerImpl5.updateRememberedValue(objRememberedValue3);
+                                                    }
+                                                    composerImpl5.end(false);
+                                                    ComposableSingletons$ModesDialogDelegateKt.INSTANCE.getClass();
+                                                    PlatformButtonsKt.PlatformOutlinedButton((Function0) objRememberedValue3, null, false, null, null, ComposableSingletons$ModesDialogDelegateKt.f111lambda3, composerImpl5, 196608);
+                                                    if (ComposerKt.isTraceInProgress()) {
+                                                        ComposerKt.traceEventEnd();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        return Unit.INSTANCE;
+                                    }
+                                }, composerImpl3), composerImpl3, 1597494, 40);
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventEnd();
+                                }
+                            }
+                        }
+                    }
+                    return Unit.INSTANCE;
                 }
             }, composerImpl), composerImpl, 54, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$$ExternalSyntheticLambda1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();
                     Intent intent = ModesDialogDelegate.ZEN_MODE_SETTINGS_INTENT;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    ModesDialogDelegate.this.ModesDialogContent(systemUIDialog, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.ModesDialogContent(systemUIDialog, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -223,25 +522,25 @@ public final class ModesDialogDelegate implements SystemUIDialog.Delegate {
                 componentSystemUIDialog.dismiss();
             }
         }
-        ComponentSystemUIDialog create$default = SystemUIDialogFactoryExtKt.create$default(this.sysuiDialogFactory, ((ShadeDialogContextInteractorImpl) this.shadeDisplayContextRepository).getContext(), null, null, new ComposableLambdaImpl(-1413719250, true, new Function3() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$createDialog$1
+        ComponentSystemUIDialog componentSystemUIDialogCreate$default = SystemUIDialogFactoryExtKt.create$default(this.sysuiDialogFactory, ((ShadeDialogContextInteractorImpl) this.shadeDisplayContextRepository).getContext(), null, null, new ComposableLambdaImpl(-1413719250, true, new Function3() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.createDialog.1
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 SystemUIDialog systemUIDialog = (SystemUIDialog) obj;
                 Composer composer = (Composer) obj2;
-                int intValue = ((Number) obj3).intValue();
+                int iIntValue = ((Number) obj3).intValue();
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.createDialog.<anonymous> (ModesDialogDelegate.kt:97)");
                 }
                 Intent intent = ModesDialogDelegate.ZEN_MODE_SETTINGS_INTENT;
-                ModesDialogDelegate.this.ModesDialogContent(systemUIDialog, composer, intValue & 14);
+                ModesDialogDelegate.this.ModesDialogContent(systemUIDialog, composer, iIntValue & 14);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
                 return Unit.INSTANCE;
             }
         }), 30);
-        this.currentDialog = create$default;
-        create$default.getLifecycleRegistry$1().addObserver(new DefaultLifecycleObserver() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$createDialog$2
+        this.currentDialog = componentSystemUIDialogCreate$default;
+        componentSystemUIDialogCreate$default.getLifecycleRegistry$1().addObserver(new DefaultLifecycleObserver() { // from class: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.createDialog.2
             @Override // androidx.lifecycle.DefaultLifecycleObserver
             public final void onStop$1() {
                 Assert.isMainThread();
@@ -254,74 +553,54 @@ public final class ModesDialogDelegate implements SystemUIDialog.Delegate {
     }
 
     public final void launchFromDialog(Intent intent) {
-        BuildersKt.launch$default(this.applicationCoroutineScope, null, null, new ModesDialogDelegate$launchFromDialog$1(this, intent, null), 3);
+        BuildersKt.launch$default(this.applicationCoroutineScope, null, null, new C11131(intent, null), 3);
     }
 
     public final void openSettings(SystemUIDialog systemUIDialog) {
         this.dialogEventLogger.uiEventLogger.log(QSModesEvent.QS_MODES_SETTINGS);
-        DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(systemUIDialog, this.dialogTransitionAnimator);
-        if (createActivityTransitionController$default == null) {
+        DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(systemUIDialog, this.dialogTransitionAnimator);
+        if (anonymousClass1CreateActivityTransitionController$default == null) {
             systemUIDialog.dismiss();
         }
-        this.activityStarter.startActivity(ZEN_MODE_SETTINGS_INTENT, true, (ActivityTransitionAnimator.Controller) createActivityTransitionController$default);
+        this.activityStarter.startActivity(ZEN_MODE_SETTINGS_INTENT, true, (ActivityTransitionAnimator.Controller) anonymousClass1CreateActivityTransitionController$default);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object showDialog(com.android.systemui.animation.Expandable r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1 r0 = (com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1 r0 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate r4 = (com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L49
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$2 r6 = new com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate$showDialog$2
-            r2 = 0
-            r6.<init>(r4, r5, r2)
-            r0.L$0 = r4
-            r0.label = r3
-            kotlin.coroutines.CoroutineContext r5 = r4.mainCoroutineContext
-            java.lang.Object r5 = kotlinx.coroutines.BuildersKt.withContext(r5, r6, r0)
-            if (r5 != r1) goto L49
-            return r1
-        L49:
-            com.android.systemui.statusbar.phone.ComponentSystemUIDialog r4 = r4.currentDialog
-            r4.getClass()
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.ui.dialog.ModesDialogDelegate.showDialog(com.android.systemui.animation.Expandable, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object showDialog(Expandable expandable, ContinuationImpl continuationImpl) {
+        C11141 c11141;
+        if (continuationImpl instanceof C11141) {
+            c11141 = (C11141) continuationImpl;
+            int i = c11141.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c11141.label = i - Integer.MIN_VALUE;
+            } else {
+                c11141 = new C11141(continuationImpl);
+            }
+        }
+        Object obj = c11141.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c11141.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            C11152 c11152 = new C11152(expandable, null);
+            c11141.L$0 = this;
+            c11141.label = 1;
+            if (BuildersKt.withContext(this.mainCoroutineContext, c11152, c11141) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (ModesDialogDelegate) c11141.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        ComponentSystemUIDialog componentSystemUIDialog = this.currentDialog;
+        componentSystemUIDialog.getClass();
+        return componentSystemUIDialog;
     }
 
     public static /* synthetic */ void getCurrentDialog$annotations() {

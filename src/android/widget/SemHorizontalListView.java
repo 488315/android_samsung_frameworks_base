@@ -4,6 +4,7 @@ import android.app.slice.Slice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -20,8 +21,10 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
+import android.view.ViewRootImpl;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeProvider;
 import android.widget.RemoteViews;
 import android.widget.SemHorizontalAbsListView;
 import com.android.internal.R;
@@ -129,30 +132,30 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         this.mTempRect = new Rect();
         this.mIsFolderTypeFeature = false;
         this.mArrowScrollFocusResult = new ArrowScrollFocusResult();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListView, i, i2);
-        CharSequence[] textArray = obtainStyledAttributes.getTextArray(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListView, i, i2);
+        CharSequence[] textArray = typedArrayObtainStyledAttributes.getTextArray(0);
         if (textArray != null) {
             setAdapter((ListAdapter) new ArrayAdapter(context, 17367043, textArray));
         }
-        Drawable drawable = obtainStyledAttributes.getDrawable(1);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
         if (drawable != null) {
             setDivider(drawable);
         }
-        Drawable drawable2 = obtainStyledAttributes.getDrawable(5);
+        Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(5);
         if (drawable2 != null) {
             setOverscrollHeader(drawable2);
         }
-        Drawable drawable3 = obtainStyledAttributes.getDrawable(6);
+        Drawable drawable3 = typedArrayObtainStyledAttributes.getDrawable(6);
         if (drawable3 != null) {
             setOverscrollFooter(drawable3);
         }
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(2, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0);
         if (dimensionPixelSize != 0) {
             setDividerHeight(dimensionPixelSize);
         }
-        this.mHeaderDividersEnabled = obtainStyledAttributes.getBoolean(3, true);
-        this.mFooterDividersEnabled = obtainStyledAttributes.getBoolean(4, true);
-        obtainStyledAttributes.recycle();
+        this.mHeaderDividersEnabled = typedArrayObtainStyledAttributes.getBoolean(3, true);
+        this.mFooterDividersEnabled = typedArrayObtainStyledAttributes.getBoolean(4, true);
+        typedArrayObtainStyledAttributes.recycle();
         if (attributeSet != null) {
             this.mFixedSizeItems = attributeSet.getAttributeBooleanValue(XML_SEC_ANDROID_NAMESPACE, XML_FIXED_SIZE_ITEMS_ATTRIBUTE, false);
         } else {
@@ -169,29 +172,29 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         int right;
         int width;
         int left;
-        int i;
+        int width2;
         int childCount = getChildCount();
         if (childCount > 0) {
-            int i2 = 0;
+            int i = 0;
             if (!this.mStackFromBottom) {
                 View childAt = getChildAt(0);
                 if (this.mIsRTL) {
                     left = childAt.getRight();
-                    i = getWidth() - this.mListPadding.right;
+                    width2 = getWidth() - this.mListPadding.right;
                 } else {
                     left = childAt.getLeft();
-                    i = this.mListPadding.left;
+                    width2 = this.mListPadding.left;
                 }
-                int i3 = left - i;
+                int i2 = left - width2;
                 if (this.mFirstPosition != 0) {
                     if (this.mIsRTL) {
-                        i3 += this.mDividerHeight;
+                        i2 += this.mDividerHeight;
                     } else {
-                        i3 -= this.mDividerHeight;
+                        i2 -= this.mDividerHeight;
                     }
                 }
-                if (!this.mIsRTL ? i3 >= 0 : i3 <= 0) {
-                    i2 = i3;
+                if (!this.mIsRTL ? i2 >= 0 : i2 <= 0) {
+                    i = i2;
                 }
             } else {
                 View childAt2 = getChildAt(childCount - 1);
@@ -202,20 +205,20 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
                     right = childAt2.getRight();
                     width = getWidth() - this.mListPadding.right;
                 }
-                int i4 = right - width;
+                int i3 = right - width;
                 if (this.mFirstPosition + childCount < this.mItemCount) {
                     if (this.mIsRTL) {
-                        i4 -= this.mDividerHeight;
+                        i3 -= this.mDividerHeight;
                     } else {
-                        i4 += this.mDividerHeight;
+                        i3 += this.mDividerHeight;
                     }
                 }
-                if (!this.mIsRTL ? i4 <= 0 : i4 >= 0) {
-                    i2 = i4;
+                if (!this.mIsRTL ? i3 <= 0 : i3 >= 0) {
+                    i = i3;
                 }
             }
-            if (i2 != 0) {
-                semOffsetChildrenLeftAndRight(-i2);
+            if (i != 0) {
+                semOffsetChildrenLeftAndRight(-i);
             }
         }
     }
@@ -334,7 +337,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     @Override // android.widget.AdapterView
     @Deprecated
     public void setAdapter(ListAdapter listAdapter) {
-        int lookForSelectablePosition;
+        int iLookForSelectablePosition;
         if (this.mAdapter != null && this.mDataSetObserver != null) {
             this.mAdapter.unregisterDataSetObserver(this.mDataSetObserver);
         }
@@ -357,17 +360,17 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
             this.mRecycler.setViewTypeCount(this.mAdapter.getViewTypeCount());
             if (this.mStackFromBottom) {
                 if (this.mIsRTL) {
-                    lookForSelectablePosition = lookForSelectablePosition(this.mItemCount - 1, true);
+                    iLookForSelectablePosition = lookForSelectablePosition(this.mItemCount - 1, true);
                 } else {
-                    lookForSelectablePosition = lookForSelectablePosition(this.mItemCount - 1, false);
+                    iLookForSelectablePosition = lookForSelectablePosition(this.mItemCount - 1, false);
                 }
             } else if (this.mIsRTL) {
-                lookForSelectablePosition = lookForSelectablePosition(0, false);
+                iLookForSelectablePosition = lookForSelectablePosition(0, false);
             } else {
-                lookForSelectablePosition = lookForSelectablePosition(0, true);
+                iLookForSelectablePosition = lookForSelectablePosition(0, true);
             }
-            setSelectedPositionInt(lookForSelectablePosition);
-            setNextSelectedPositionInt(lookForSelectablePosition);
+            setSelectedPositionInt(iLookForSelectablePosition);
+            setNextSelectedPositionInt(iLookForSelectablePosition);
             if (this.mItemCount == 0) {
                 checkSelectionChanged();
             }
@@ -415,44 +418,44 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
 
     @Override // android.view.ViewGroup, android.view.ViewParent
     @Deprecated
-    public boolean requestChildRectangleOnScreen(View view, Rect rect, boolean z) {
+    public boolean requestChildRectangleOnScreen(View view, Rect rect, boolean z) throws Resources.NotFoundException {
+        int iMax;
         int i;
         int i2;
-        int i3;
-        int i4 = rect.left;
+        int i3 = rect.left;
         rect.offset(view.getLeft(), view.getTop());
         rect.offset(-view.getScrollX(), -view.getScrollY());
         int width = getWidth();
         int scrollX = getScrollX();
-        int i5 = scrollX + width;
+        int i4 = scrollX + width;
         int horizontalFadingEdgeLength = getHorizontalFadingEdgeLength();
-        if (showingLeftFadingEdge() && (this.mSelectedPosition > 0 || i4 > horizontalFadingEdgeLength)) {
+        if (showingLeftFadingEdge() && (this.mSelectedPosition > 0 || i3 > horizontalFadingEdgeLength)) {
             scrollX += horizontalFadingEdgeLength;
         }
         int right = getChildAt(getChildCount() - 1).getRight();
         if (showingRightFadingEdge() && (this.mSelectedPosition < this.mItemCount - 1 || rect.right < right - horizontalFadingEdgeLength)) {
-            i5 -= horizontalFadingEdgeLength;
+            i4 -= horizontalFadingEdgeLength;
         }
-        if (rect.right > i5 && rect.left > scrollX) {
+        if (rect.right > i4 && rect.left > scrollX) {
             if (rect.width() > width) {
-                i3 = rect.left - scrollX;
+                i2 = rect.left - scrollX;
             } else {
-                i3 = rect.right - i5;
+                i2 = rect.right - i4;
             }
-            i = Math.min(i3, right - i5);
-        } else if (rect.left >= scrollX || rect.right >= i5) {
-            i = 0;
+            iMax = Math.min(i2, right - i4);
+        } else if (rect.left >= scrollX || rect.right >= i4) {
+            iMax = 0;
         } else {
             if (rect.width() > width) {
-                i2 = 0 - (i5 - rect.right);
+                i = 0 - (i4 - rect.right);
             } else {
-                i2 = 0 - (scrollX - rect.left);
+                i = 0 - (scrollX - rect.left);
             }
-            i = Math.max(i2, getChildAt(0).getLeft() - scrollX);
+            iMax = Math.max(i, getChildAt(0).getLeft() - scrollX);
         }
-        boolean z2 = i != 0;
+        boolean z2 = iMax != 0;
         if (z2) {
-            scrollListItemsBy(-i);
+            scrollListItemsBy(-iMax);
             positionSelector(-1, view);
             this.mSelectedLeft = view.getLeft();
             invalidate();
@@ -461,7 +464,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     @Override // android.widget.SemHorizontalAbsListView
-    void fillGap(boolean z) {
+    void fillGap(boolean z) throws Resources.NotFoundException {
         int width;
         int childCount = getChildCount();
         if (z) {
@@ -484,7 +487,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     @Override // android.widget.SemHorizontalAbsListView
-    void fillGapRTL(boolean z) {
+    void fillGapRTL(boolean z) throws Resources.NotFoundException {
         int width;
         int childCount = getChildCount();
         if (z) {
@@ -507,7 +510,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         correctTooHighRTL(getChildCount());
     }
 
-    private View fillRight(int i, int i2) {
+    private View fillRight(int i, int i2) throws Resources.NotFoundException {
         int i3 = this.mRight - this.mLeft;
         View view = null;
         if ((this.mGroupFlags & 34) == 34) {
@@ -521,11 +524,11 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
             }
             boolean z = i4 == this.mSelectedPosition;
             SemHorizontalListView semHorizontalListView = this;
-            View makeAndAddView = semHorizontalListView.makeAndAddView(i4, i5, true, this.mListPadding.top, z);
-            if (makeAndAddView != null) {
-                int right = makeAndAddView.getRight() + semHorizontalListView.mDividerHeight;
+            View viewMakeAndAddView = semHorizontalListView.makeAndAddView(i4, i5, true, this.mListPadding.top, z);
+            if (viewMakeAndAddView != null) {
+                int right = viewMakeAndAddView.getRight() + semHorizontalListView.mDividerHeight;
                 if (z) {
-                    view = makeAndAddView;
+                    view = viewMakeAndAddView;
                 }
                 i5 = right;
             }
@@ -537,7 +540,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return view;
     }
 
-    private View fillRightRTL(int i, int i2) {
+    private View fillRightRTL(int i, int i2) throws Resources.NotFoundException {
         int i3 = this.mRight - this.mLeft;
         if ((this.mGroupFlags & 34) == 34) {
             i3 -= this.mListPadding.right;
@@ -551,11 +554,11 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
             }
             boolean z = i4 == this.mSelectedPosition;
             SemHorizontalListView semHorizontalListView = this;
-            View makeAndAddView = semHorizontalListView.makeAndAddView(i4, i5, true, this.mListPadding.top, z);
-            if (makeAndAddView != null) {
-                int right = makeAndAddView.getRight() + semHorizontalListView.mDividerHeight;
+            View viewMakeAndAddView = semHorizontalListView.makeAndAddView(i4, i5, true, this.mListPadding.top, z);
+            if (viewMakeAndAddView != null) {
+                int right = viewMakeAndAddView.getRight() + semHorizontalListView.mDividerHeight;
                 if (z) {
-                    view = makeAndAddView;
+                    view = viewMakeAndAddView;
                 }
                 i5 = right;
             }
@@ -568,7 +571,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return view;
     }
 
-    private View fillLeft(int i, int i2) {
+    private View fillLeft(int i, int i2) throws Resources.NotFoundException {
         int i3;
         int i4;
         int i5;
@@ -585,11 +588,11 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         while (i4 > i5 && i3 >= 0) {
             boolean z = i3 == this.mSelectedPosition;
             SemHorizontalListView semHorizontalListView = this;
-            View makeAndAddView = semHorizontalListView.makeAndAddView(i3, i4, false, this.mListPadding.top, z);
-            if (makeAndAddView != null) {
-                int left = makeAndAddView.getLeft() - semHorizontalListView.mDividerHeight;
+            View viewMakeAndAddView = semHorizontalListView.makeAndAddView(i3, i4, false, this.mListPadding.top, z);
+            if (viewMakeAndAddView != null) {
+                int left = viewMakeAndAddView.getLeft() - semHorizontalListView.mDividerHeight;
                 if (z) {
-                    view = makeAndAddView;
+                    view = viewMakeAndAddView;
                 }
                 i4 = left;
             }
@@ -602,7 +605,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return view;
     }
 
-    private View fillLeftRTL(int i, int i2) {
+    private View fillLeftRTL(int i, int i2) throws Resources.NotFoundException {
         int i3;
         int i4;
         int i5;
@@ -619,11 +622,11 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         while (i4 > i5 && i3 < this.mItemCount) {
             boolean z = i3 == this.mSelectedPosition;
             SemHorizontalListView semHorizontalListView = this;
-            View makeAndAddView = semHorizontalListView.makeAndAddView(i3, i4, false, this.mListPadding.top, z);
-            if (makeAndAddView != null) {
-                int left = makeAndAddView.getLeft() - semHorizontalListView.mDividerHeight;
+            View viewMakeAndAddView = semHorizontalListView.makeAndAddView(i3, i4, false, this.mListPadding.top, z);
+            if (viewMakeAndAddView != null) {
+                int left = viewMakeAndAddView.getLeft() - semHorizontalListView.mDividerHeight;
                 if (z) {
-                    view = makeAndAddView;
+                    view = viewMakeAndAddView;
                 }
                 i4 = left;
             }
@@ -653,33 +656,33 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return fillLeftRTL(this.mFirstPosition, i);
     }
 
-    private View fillFromMiddle(int i, int i2) {
+    private View fillFromMiddle(int i, int i2) throws Resources.NotFoundException {
         int i3 = i2 - i;
-        int reconcileSelectedPosition = reconcileSelectedPosition();
-        View makeAndAddView = makeAndAddView(reconcileSelectedPosition, i, true, this.mListPadding.top, true);
-        this.mFirstPosition = reconcileSelectedPosition;
-        int measuredWidth = makeAndAddView.getMeasuredWidth();
+        int iReconcileSelectedPosition = reconcileSelectedPosition();
+        View viewMakeAndAddView = makeAndAddView(iReconcileSelectedPosition, i, true, this.mListPadding.top, true);
+        this.mFirstPosition = iReconcileSelectedPosition;
+        int measuredWidth = viewMakeAndAddView.getMeasuredWidth();
         if (measuredWidth <= i3) {
-            makeAndAddView.offsetLeftAndRight((i3 - measuredWidth) / 2);
+            viewMakeAndAddView.offsetLeftAndRight((i3 - measuredWidth) / 2);
         }
-        fillLeftAndRight(makeAndAddView, reconcileSelectedPosition);
+        fillLeftAndRight(viewMakeAndAddView, iReconcileSelectedPosition);
         if (!this.mStackFromBottom) {
             if (this.mIsRTL) {
                 correctTooHighRTL(getChildCount());
-                return makeAndAddView;
+                return viewMakeAndAddView;
             }
             correctTooHigh(getChildCount());
-            return makeAndAddView;
+            return viewMakeAndAddView;
         }
         if (this.mIsRTL) {
             correctTooLowRTL(getChildCount());
-            return makeAndAddView;
+            return viewMakeAndAddView;
         }
         correctTooLow(getChildCount());
-        return makeAndAddView;
+        return viewMakeAndAddView;
     }
 
-    private void fillLeftAndRight(View view, int i) {
+    private void fillLeftAndRight(View view, int i) throws Resources.NotFoundException {
         int i2 = this.mDividerHeight;
         if (this.mIsRTL) {
             if (!this.mStackFromBottom) {
@@ -705,32 +708,32 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    private View fillFromSelection(int i, int i2, int i3) {
+    private View fillFromSelection(int i, int i2, int i3) throws Resources.NotFoundException {
         int horizontalFadingEdgeLength = getHorizontalFadingEdgeLength();
         int i4 = this.mSelectedPosition;
         int leftSelectionPixel = getLeftSelectionPixel(i2, horizontalFadingEdgeLength, i4);
         int rightSelectionPixel = getRightSelectionPixel(i3, horizontalFadingEdgeLength, i4);
-        View makeAndAddView = makeAndAddView(i4, i, true, this.mListPadding.top, true);
-        if (makeAndAddView.getRight() > rightSelectionPixel) {
-            makeAndAddView.offsetLeftAndRight(-Math.min(makeAndAddView.getLeft() - leftSelectionPixel, makeAndAddView.getRight() - rightSelectionPixel));
-        } else if (makeAndAddView.getLeft() < leftSelectionPixel) {
-            makeAndAddView.offsetLeftAndRight(Math.min(leftSelectionPixel - makeAndAddView.getLeft(), rightSelectionPixel - makeAndAddView.getRight()));
+        View viewMakeAndAddView = makeAndAddView(i4, i, true, this.mListPadding.top, true);
+        if (viewMakeAndAddView.getRight() > rightSelectionPixel) {
+            viewMakeAndAddView.offsetLeftAndRight(-Math.min(viewMakeAndAddView.getLeft() - leftSelectionPixel, viewMakeAndAddView.getRight() - rightSelectionPixel));
+        } else if (viewMakeAndAddView.getLeft() < leftSelectionPixel) {
+            viewMakeAndAddView.offsetLeftAndRight(Math.min(leftSelectionPixel - viewMakeAndAddView.getLeft(), rightSelectionPixel - viewMakeAndAddView.getRight()));
         }
-        fillLeftAndRight(makeAndAddView, i4);
+        fillLeftAndRight(viewMakeAndAddView, i4);
         if (!this.mStackFromBottom) {
             if (this.mIsRTL) {
                 correctTooLowRTL(getChildCount());
-                return makeAndAddView;
+                return viewMakeAndAddView;
             }
             correctTooHigh(getChildCount());
-            return makeAndAddView;
+            return viewMakeAndAddView;
         }
         if (this.mIsRTL) {
             correctTooHighRTL(getChildCount());
-            return makeAndAddView;
+            return viewMakeAndAddView;
         }
         correctTooLow(getChildCount());
-        return makeAndAddView;
+        return viewMakeAndAddView;
     }
 
     private int getRightSelectionPixel(int i, int i2, int i3) {
@@ -769,51 +772,51 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         super.smoothScrollByOffset(i);
     }
 
-    private View moveSelection(View view, View view2, int i, int i2, int i3) {
-        View makeAndAddView;
+    private View moveSelection(View view, View view2, int i, int i2, int i3) throws Resources.NotFoundException {
+        View viewMakeAndAddView;
         int horizontalFadingEdgeLength = getHorizontalFadingEdgeLength();
         int i4 = this.mSelectedPosition;
         int leftSelectionPixel = getLeftSelectionPixel(i2, horizontalFadingEdgeLength, i4);
         int rightSelectionPixel = getRightSelectionPixel(i2, horizontalFadingEdgeLength, i4);
         if (i > 0) {
-            View makeAndAddView2 = makeAndAddView(i4 - 1, view.getLeft(), true, this.mListPadding.top, false);
+            View viewMakeAndAddView2 = makeAndAddView(i4 - 1, view.getLeft(), true, this.mListPadding.top, false);
             int i5 = this.mDividerHeight;
-            View makeAndAddView3 = makeAndAddView(i4, makeAndAddView2.getRight() + i5, true, this.mListPadding.top, true);
-            if (makeAndAddView3.getRight() > rightSelectionPixel) {
-                int i6 = -Math.min(Math.min(makeAndAddView3.getLeft() - leftSelectionPixel, makeAndAddView3.getRight() - rightSelectionPixel), (i3 - i2) / 2);
-                makeAndAddView2.offsetLeftAndRight(i6);
-                makeAndAddView3.offsetLeftAndRight(i6);
+            View viewMakeAndAddView3 = makeAndAddView(i4, viewMakeAndAddView2.getRight() + i5, true, this.mListPadding.top, true);
+            if (viewMakeAndAddView3.getRight() > rightSelectionPixel) {
+                int i6 = -Math.min(Math.min(viewMakeAndAddView3.getLeft() - leftSelectionPixel, viewMakeAndAddView3.getRight() - rightSelectionPixel), (i3 - i2) / 2);
+                viewMakeAndAddView2.offsetLeftAndRight(i6);
+                viewMakeAndAddView3.offsetLeftAndRight(i6);
             }
             if (!this.mStackFromBottom) {
-                fillLeft(this.mSelectedPosition - 2, makeAndAddView3.getLeft() - i5);
+                fillLeft(this.mSelectedPosition - 2, viewMakeAndAddView3.getLeft() - i5);
                 adjustViewsLeftOrRight();
-                fillRight(this.mSelectedPosition + 1, makeAndAddView3.getRight() + i5);
-                return makeAndAddView3;
+                fillRight(this.mSelectedPosition + 1, viewMakeAndAddView3.getRight() + i5);
+                return viewMakeAndAddView3;
             }
-            fillRight(this.mSelectedPosition + 1, makeAndAddView3.getRight() + i5);
+            fillRight(this.mSelectedPosition + 1, viewMakeAndAddView3.getRight() + i5);
             adjustViewsLeftOrRight();
-            fillLeft(this.mSelectedPosition - 2, makeAndAddView3.getLeft() - i5);
-            return makeAndAddView3;
+            fillLeft(this.mSelectedPosition - 2, viewMakeAndAddView3.getLeft() - i5);
+            return viewMakeAndAddView3;
         }
         if (i < 0) {
             if (view2 != null) {
-                makeAndAddView = makeAndAddView(i4, view2.getLeft(), true, this.mListPadding.top, true);
+                viewMakeAndAddView = makeAndAddView(i4, view2.getLeft(), true, this.mListPadding.top, true);
             } else {
-                makeAndAddView = makeAndAddView(i4, view.getLeft(), false, this.mListPadding.top, true);
+                viewMakeAndAddView = makeAndAddView(i4, view.getLeft(), false, this.mListPadding.top, true);
             }
-            if (makeAndAddView.getLeft() < leftSelectionPixel) {
-                makeAndAddView.offsetLeftAndRight(Math.min(Math.min(leftSelectionPixel - makeAndAddView.getLeft(), rightSelectionPixel - makeAndAddView.getRight()), (i3 - i2) / 2));
+            if (viewMakeAndAddView.getLeft() < leftSelectionPixel) {
+                viewMakeAndAddView.offsetLeftAndRight(Math.min(Math.min(leftSelectionPixel - viewMakeAndAddView.getLeft(), rightSelectionPixel - viewMakeAndAddView.getRight()), (i3 - i2) / 2));
             }
-            fillLeftAndRight(makeAndAddView, i4);
-            return makeAndAddView;
+            fillLeftAndRight(viewMakeAndAddView, i4);
+            return viewMakeAndAddView;
         }
         int left = view.getLeft();
-        View makeAndAddView4 = makeAndAddView(i4, left, true, this.mListPadding.top, true);
-        if (left < i2 && makeAndAddView4.getRight() < i2 + 20) {
-            makeAndAddView4.offsetLeftAndRight(i2 - makeAndAddView4.getLeft());
+        View viewMakeAndAddView4 = makeAndAddView(i4, left, true, this.mListPadding.top, true);
+        if (left < i2 && viewMakeAndAddView4.getRight() < i2 + 20) {
+            viewMakeAndAddView4.offsetLeftAndRight(i2 - viewMakeAndAddView4.getLeft());
         }
-        fillLeftAndRight(makeAndAddView4, i4);
-        return makeAndAddView4;
+        fillLeftAndRight(viewMakeAndAddView4, i4);
+        return viewMakeAndAddView4;
     }
 
     private class FocusSelector implements Runnable {
@@ -840,12 +843,12 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     protected void onSizeChanged(int i, int i2, int i3, int i4) {
         View focusedChild;
         if (getChildCount() > 0 && (focusedChild = getFocusedChild()) != null) {
-            int indexOfChild = this.mFirstPosition + indexOfChild(focusedChild);
+            int iIndexOfChild = this.mFirstPosition + indexOfChild(focusedChild);
             int right = this.mIsRTL ? focusedChild.getRight() : focusedChild.getLeft() - Math.max(0, focusedChild.getRight() - (i - this.mPaddingLeft));
             if (this.mFocusSelector == null) {
                 this.mFocusSelector = new FocusSelector();
             }
-            post(this.mFocusSelector.setup(indexOfChild, right));
+            post(this.mFocusSelector.setup(iIndexOfChild, right));
         }
         super.onSizeChanged(i, i2, i3, i4);
     }
@@ -853,49 +856,49 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     @Override // android.widget.SemHorizontalAbsListView, android.view.View
     @Deprecated
     protected void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
+        int measuredWidth;
+        int measuredHeight;
         SemHorizontalListView semHorizontalListView;
-        int i5;
+        int i3;
         super.onMeasure(i, i2);
         int mode = View.MeasureSpec.getMode(i);
         int mode2 = View.MeasureSpec.getMode(i2);
         int size = View.MeasureSpec.getSize(i);
         int size2 = View.MeasureSpec.getSize(i2);
-        int i6 = 0;
+        int iCombineMeasuredStates = 0;
         this.mItemCount = this.mAdapter == null ? 0 : this.mAdapter.getCount();
         if (this.mItemCount <= 0 || !(mode == 0 || mode2 == 0)) {
-            i3 = 0;
-            i4 = 0;
+            measuredWidth = 0;
+            measuredHeight = 0;
         } else {
-            View obtainView = obtainView(0, this.mIsScrap);
-            measureScrapChild(obtainView, 0, i2);
-            i3 = obtainView.getMeasuredWidth();
-            i4 = obtainView.getMeasuredHeight();
-            i6 = combineMeasuredStates(0, obtainView.getMeasuredState());
-            if (recycleOnMeasure() && this.mRecycler.shouldRecycleViewType(((SemHorizontalAbsListView.LayoutParams) obtainView.getLayoutParams()).viewType)) {
-                this.mRecycler.addScrapView(obtainView, -1);
+            View viewObtainView = obtainView(0, this.mIsScrap);
+            measureScrapChild(viewObtainView, 0, i2);
+            measuredWidth = viewObtainView.getMeasuredWidth();
+            measuredHeight = viewObtainView.getMeasuredHeight();
+            iCombineMeasuredStates = combineMeasuredStates(0, viewObtainView.getMeasuredState());
+            if (recycleOnMeasure() && this.mRecycler.shouldRecycleViewType(((SemHorizontalAbsListView.LayoutParams) viewObtainView.getLayoutParams()).viewType)) {
+                this.mRecycler.addScrapView(viewObtainView, -1);
             }
         }
-        int horizontalScrollbarHeight = mode2 == 0 ? this.mListPadding.top + this.mListPadding.bottom + i4 + getHorizontalScrollbarHeight() : ((-16777216) & i6) | size2;
+        int horizontalScrollbarHeight = mode2 == 0 ? this.mListPadding.top + this.mListPadding.bottom + measuredHeight + getHorizontalScrollbarHeight() : ((-16777216) & iCombineMeasuredStates) | size2;
         if (mode == 0) {
-            size = this.mListPadding.left + this.mListPadding.right + i3 + (getHorizontalFadingEdgeLength() * 2);
+            size = this.mListPadding.left + this.mListPadding.right + measuredWidth + (getHorizontalFadingEdgeLength() * 2);
         }
-        int i7 = size;
+        int iMeasureWidthOfChildren = size;
         if (mode == Integer.MIN_VALUE) {
             semHorizontalListView = this;
-            i5 = i2;
-            i7 = semHorizontalListView.measureWidthOfChildren(i5, 0, -1, i7, -1);
+            i3 = i2;
+            iMeasureWidthOfChildren = semHorizontalListView.measureWidthOfChildren(i3, 0, -1, iMeasureWidthOfChildren, -1);
         } else {
             semHorizontalListView = this;
-            i5 = i2;
+            i3 = i2;
         }
-        semHorizontalListView.setMeasuredDimension(i7, horizontalScrollbarHeight);
-        semHorizontalListView.mHeightMeasureSpec = i5;
+        semHorizontalListView.setMeasuredDimension(iMeasureWidthOfChildren, horizontalScrollbarHeight);
+        semHorizontalListView.mHeightMeasureSpec = i3;
     }
 
     private void measureScrapChild(View view, int i, int i2) {
-        int makeMeasureSpec;
+        int iMakeMeasureSpec;
         SemHorizontalAbsListView.LayoutParams layoutParams = (SemHorizontalAbsListView.LayoutParams) view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = (SemHorizontalAbsListView.LayoutParams) generateDefaultLayoutParams();
@@ -906,11 +909,11 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         int childMeasureSpec = ViewGroup.getChildMeasureSpec(i2, this.mListPadding.top + this.mListPadding.bottom, layoutParams.height);
         int i3 = layoutParams.width;
         if (i3 > 0) {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
         } else {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
         }
-        view.measure(makeMeasureSpec, childMeasureSpec);
+        view.measure(iMakeMeasureSpec, childMeasureSpec);
     }
 
     final int measureWidthOfChildren(int i, int i2, int i3, int i4, int i5) {
@@ -918,37 +921,37 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (listAdapter == null) {
             return this.mListPadding.left + this.mListPadding.right;
         }
-        int i6 = this.mListPadding.left + this.mListPadding.right;
-        int i7 = this.mDividerHeight;
-        int i8 = 0;
-        if (i7 <= 0 || this.mDivider == null) {
-            i7 = 0;
+        int measuredWidth = this.mListPadding.left + this.mListPadding.right;
+        int i6 = this.mDividerHeight;
+        int i7 = 0;
+        if (i6 <= 0 || this.mDivider == null) {
+            i6 = 0;
         }
         if (i3 == -1) {
             i3 = listAdapter.getCount() - 1;
         }
         SemHorizontalAbsListView.RecycleBin recycleBin = this.mRecycler;
-        boolean recycleOnMeasure = recycleOnMeasure();
+        boolean zRecycleOnMeasure = recycleOnMeasure();
         boolean[] zArr = this.mIsScrap;
         while (i2 <= i3) {
-            View obtainView = obtainView(i2, zArr);
-            measureScrapChild(obtainView, i2, i);
+            View viewObtainView = obtainView(i2, zArr);
+            measureScrapChild(viewObtainView, i2, i);
             if (i2 > 0) {
-                i6 = this.mIsRTL ? i6 - i7 : i6 + i7;
+                measuredWidth = this.mIsRTL ? measuredWidth - i6 : measuredWidth + i6;
             }
-            if (recycleOnMeasure && recycleBin.shouldRecycleViewType(((SemHorizontalAbsListView.LayoutParams) obtainView.getLayoutParams()).viewType)) {
-                recycleBin.addScrapView(obtainView, -1);
+            if (zRecycleOnMeasure && recycleBin.shouldRecycleViewType(((SemHorizontalAbsListView.LayoutParams) viewObtainView.getLayoutParams()).viewType)) {
+                recycleBin.addScrapView(viewObtainView, -1);
             }
-            i6 += obtainView.getMeasuredWidth();
-            if (i6 >= i4) {
-                return (i5 < 0 || i2 <= i5 || i8 <= 0 || i6 == i4) ? i4 : i8;
+            measuredWidth += viewObtainView.getMeasuredWidth();
+            if (measuredWidth >= i4) {
+                return (i5 < 0 || i2 <= i5 || i7 <= 0 || measuredWidth == i4) ? i4 : i7;
             }
             if (i5 >= 0 && i2 >= i5) {
-                i8 = i6;
+                i7 = measuredWidth;
             }
             i2++;
         }
-        return i6;
+        return measuredWidth;
     }
 
     @Override // android.widget.SemHorizontalAbsListView
@@ -992,65 +995,65 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return -1;
     }
 
-    private View fillSpecific(int i, int i2) {
-        View view;
-        View view2;
+    private View fillSpecific(int i, int i2) throws Resources.NotFoundException {
+        View viewFillLeft;
+        View viewFillRight;
         boolean z = i == this.mSelectedPosition;
-        View makeAndAddView = makeAndAddView(i, i2, true, this.mListPadding.top, z);
+        View viewMakeAndAddView = makeAndAddView(i, i2, true, this.mListPadding.top, z);
         this.mFirstPosition = i;
         int i3 = this.mDividerHeight;
         if (!this.mStackFromBottom) {
-            view = fillLeft(i - 1, makeAndAddView.getLeft() - i3);
+            viewFillLeft = fillLeft(i - 1, viewMakeAndAddView.getLeft() - i3);
             adjustViewsLeftOrRight();
-            view2 = fillRight(i + 1, makeAndAddView.getRight() + i3);
+            viewFillRight = fillRight(i + 1, viewMakeAndAddView.getRight() + i3);
             int childCount = getChildCount();
             if (childCount > 0) {
                 correctTooHigh(childCount);
             }
         } else {
-            View fillRight = fillRight(i + 1, makeAndAddView.getRight() + i3);
+            View viewFillRight2 = fillRight(i + 1, viewMakeAndAddView.getRight() + i3);
             adjustViewsLeftOrRight();
-            View fillLeft = fillLeft(i - 1, makeAndAddView.getLeft() - i3);
+            View viewFillLeft2 = fillLeft(i - 1, viewMakeAndAddView.getLeft() - i3);
             int childCount2 = getChildCount();
             if (childCount2 > 0) {
                 correctTooLow(childCount2);
             }
-            view = fillLeft;
-            view2 = fillRight;
+            viewFillLeft = viewFillLeft2;
+            viewFillRight = viewFillRight2;
         }
-        return z ? makeAndAddView : view != null ? view : view2;
+        return z ? viewMakeAndAddView : viewFillLeft != null ? viewFillLeft : viewFillRight;
     }
 
-    private View fillSpecificRTL(int i, int i2) {
-        View view;
-        View view2;
+    private View fillSpecificRTL(int i, int i2) throws Resources.NotFoundException {
+        View viewFillRightRTL;
+        View viewFillLeftRTL;
         boolean z = i == this.mSelectedPosition;
-        View makeAndAddView = makeAndAddView(i, i2, false, this.mListPadding.top, z);
+        View viewMakeAndAddView = makeAndAddView(i, i2, false, this.mListPadding.top, z);
         this.mFirstPosition = i;
         int i3 = this.mDividerHeight;
         if (!this.mStackFromBottom) {
-            view = fillRightRTL(i - 1, makeAndAddView.getRight() + i3);
+            viewFillRightRTL = fillRightRTL(i - 1, viewMakeAndAddView.getRight() + i3);
             adjustViewsLeftOrRight();
-            view2 = fillLeftRTL(i + 1, makeAndAddView.getLeft() - i3);
+            viewFillLeftRTL = fillLeftRTL(i + 1, viewMakeAndAddView.getLeft() - i3);
             int childCount = getChildCount();
             if (childCount > 0) {
                 correctTooHighRTL(childCount);
             }
         } else {
-            View fillLeftRTL = fillLeftRTL(i + 1, makeAndAddView.getLeft() - i3);
+            View viewFillLeftRTL2 = fillLeftRTL(i + 1, viewMakeAndAddView.getLeft() - i3);
             adjustViewsLeftOrRight();
-            View fillRightRTL = fillRightRTL(i - 1, makeAndAddView.getRight() + i3);
+            View viewFillRightRTL2 = fillRightRTL(i - 1, viewMakeAndAddView.getRight() + i3);
             int childCount2 = getChildCount();
             if (childCount2 > 0) {
                 correctTooLowRTL(childCount2);
             }
-            view = fillRightRTL;
-            view2 = fillLeftRTL;
+            viewFillRightRTL = viewFillRightRTL2;
+            viewFillLeftRTL = viewFillLeftRTL2;
         }
-        return z ? makeAndAddView : view2 != null ? view2 : view;
+        return z ? viewMakeAndAddView : viewFillLeftRTL != null ? viewFillLeftRTL : viewFillRightRTL;
     }
 
-    private void correctTooHigh(int i) {
+    private void correctTooHigh(int i) throws Resources.NotFoundException {
         if ((this.mFirstPosition + i) - 1 != this.mItemCount - 1 || i <= 0) {
             return;
         }
@@ -1071,22 +1074,22 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    private void correctTooHighRTL(int i) {
+    private void correctTooHighRTL(int i) throws Resources.NotFoundException {
         if ((this.mFirstPosition + i) - 1 != this.mItemCount - 1 || i <= 0) {
             return;
         }
         int left = getChildAt(i - 1).getLeft();
         int i2 = this.mListPadding.left;
         int i3 = (this.mRight - this.mLeft) - this.mListPadding.right;
-        int i4 = left - i2;
+        int iMin = left - i2;
         View childAt = getChildAt(0);
         int right = childAt.getRight();
-        if (i4 > 0) {
+        if (iMin > 0) {
             if (this.mFirstPosition > 0 || right > i3) {
                 if (this.mFirstPosition == 0) {
-                    i4 = Math.min(i4, right - i3);
+                    iMin = Math.min(iMin, right - i3);
                 }
-                semOffsetChildrenLeftAndRight(-i4);
+                semOffsetChildrenLeftAndRight(-iMin);
                 if (this.mFirstPosition > 0) {
                     fillRightRTL(this.mFirstPosition - 1, childAt.getRight() + this.mDividerHeight);
                     adjustViewsLeftOrRight();
@@ -1095,38 +1098,38 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    private void correctTooLow(int i) {
+    private void correctTooLow(int i) throws Resources.NotFoundException {
         if (this.mFirstPosition != 0 || i <= 0) {
             return;
         }
         int left = getChildAt(0).getLeft();
         int i2 = this.mListPadding.left;
         int i3 = (this.mRight - this.mLeft) - this.mListPadding.right;
-        int i4 = left - i2;
+        int iMin = left - i2;
         View childAt = getChildAt(i - 1);
         int right = childAt.getRight();
-        int i5 = this.mFirstPosition + i;
-        int i6 = i5 - 1;
-        if (i4 > 0) {
-            if (i6 < this.mItemCount - 1 || right > i3) {
-                if (i6 == this.mItemCount - 1) {
-                    i4 = Math.min(i4, right - i3);
+        int i4 = this.mFirstPosition + i;
+        int i5 = i4 - 1;
+        if (iMin > 0) {
+            if (i5 < this.mItemCount - 1 || right > i3) {
+                if (i5 == this.mItemCount - 1) {
+                    iMin = Math.min(iMin, right - i3);
                 }
-                semOffsetChildrenLeftAndRight(-i4);
-                if (i6 < this.mItemCount - 1) {
-                    fillRight(i5, childAt.getRight() + this.mDividerHeight);
+                semOffsetChildrenLeftAndRight(-iMin);
+                if (i5 < this.mItemCount - 1) {
+                    fillRight(i4, childAt.getRight() + this.mDividerHeight);
                     adjustViewsLeftOrRight();
                     return;
                 }
                 return;
             }
-            if (i6 == this.mItemCount - 1) {
+            if (i5 == this.mItemCount - 1) {
                 adjustViewsLeftOrRight();
             }
         }
     }
 
-    private void correctTooLowRTL(int i) {
+    private void correctTooLowRTL(int i) throws Resources.NotFoundException {
         if (this.mFirstPosition != 0 || i <= 0) {
             return;
         }
@@ -1181,40 +1184,396 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return semDragAndDropHorizontalListAnimator != null ? semDragAndDropHorizontalListAnimator.getChildDrawingOrder(i, i2) : super.getChildDrawingOrder(i, i2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:127:0x03a8 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x03ba A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x03d1 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x03d9 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:140:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:148:0x02e3 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x0159 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:209:0x0163 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:213:0x017b A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:217:0x0197 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:222:0x01b1  */
-    /* JADX WARN: Removed duplicated region for block: B:226:0x01c5 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:231:0x013f A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:235:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0093 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x009a A[Catch: all -> 0x0412, TRY_LEAVE, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00a5 A[Catch: all -> 0x0412, TRY_ENTER, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00fe  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x02a0 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x032a A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:5:0x0014, B:7:0x001e, B:13:0x0029, B:22:0x004c, B:25:0x0055, B:26:0x005b, B:28:0x0063, B:29:0x006a, B:30:0x008f, B:32:0x0093, B:33:0x0096, B:35:0x009a, B:40:0x00a5, B:42:0x00af, B:44:0x00ba, B:46:0x00c0, B:51:0x00cf, B:53:0x00d5, B:55:0x00db, B:59:0x00e7, B:60:0x00f8, B:63:0x0100, B:67:0x0114, B:68:0x011b, B:72:0x0126, B:75:0x0146, B:76:0x014e, B:79:0x0155, B:81:0x01e0, B:83:0x01e4, B:84:0x029b, B:86:0x02a0, B:88:0x02a4, B:90:0x02aa, B:94:0x02b4, B:96:0x02c0, B:97:0x02dc, B:99:0x032a, B:102:0x0332, B:104:0x0338, B:107:0x0340, B:108:0x034f, B:111:0x0356, B:113:0x036c, B:116:0x0373, B:118:0x0385, B:119:0x0396, B:122:0x039e, B:124:0x03a3, B:125:0x0392, B:127:0x03a8, B:129:0x03ae, B:130:0x03b1, B:132:0x03ba, B:133:0x03c2, B:135:0x03d1, B:136:0x03d4, B:141:0x02ba, B:143:0x02ca, B:145:0x02d0, B:146:0x02d3, B:147:0x02d8, B:148:0x02e3, B:150:0x02e8, B:153:0x02ee, B:155:0x02f3, B:157:0x02fe, B:158:0x031d, B:161:0x0325, B:162:0x0304, B:163:0x030d, B:165:0x0318, B:166:0x01f2, B:167:0x0208, B:169:0x020c, B:170:0x021b, B:171:0x0233, B:173:0x0237, B:175:0x023b, B:177:0x0241, B:180:0x024a, B:181:0x0246, B:182:0x024f, B:184:0x0255, B:187:0x025e, B:188:0x025a, B:189:0x0263, B:191:0x0269, B:193:0x026d, B:195:0x0273, B:198:0x027c, B:199:0x0278, B:200:0x0281, B:202:0x0287, B:205:0x0290, B:206:0x028c, B:207:0x0295, B:208:0x0159, B:209:0x0163, B:211:0x0167, B:212:0x0171, B:213:0x017b, B:215:0x017f, B:216:0x018b, B:217:0x0197, B:219:0x019b, B:220:0x01ac, B:221:0x01a4, B:224:0x01b5, B:225:0x01bf, B:226:0x01c5, B:228:0x01c9, B:229:0x01d9, B:230:0x01d2, B:231:0x013f, B:232:0x010b, B:234:0x0111, B:236:0x00e3, B:241:0x03dd, B:242:0x0411, B:245:0x007a, B:248:0x0083), top: B:4:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x017b A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:104:0x0197 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:109:0x01b1  */
+    /* JADX WARN: Removed duplicated region for block: B:113:0x01c5 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:166:0x02a0 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:185:0x02e3 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:204:0x032a A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:237:0x03ba A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:240:0x03d1 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:243:0x03d9 A[DONT_GENERATE] */
+    /* JADX WARN: Removed duplicated region for block: B:255:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x00fe  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x0118  */
+    /* JADX WARN: Removed duplicated region for block: B:85:0x0123  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x013f A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x0151  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x0159 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0163 A[Catch: all -> 0x0412, TryCatch #0 {all -> 0x0412, blocks: (B:6:0x0014, B:8:0x001e, B:12:0x0029, B:21:0x004c, B:24:0x0055, B:26:0x005b, B:28:0x0063, B:30:0x006a, B:37:0x008f, B:39:0x0093, B:40:0x0096, B:42:0x009a, B:46:0x00a5, B:48:0x00af, B:50:0x00ba, B:52:0x00c0, B:58:0x00cf, B:60:0x00d5, B:62:0x00db, B:67:0x00e7, B:71:0x00f8, B:74:0x0100, B:81:0x0114, B:83:0x011b, B:87:0x0126, B:90:0x0146, B:91:0x014e, B:94:0x0155, B:119:0x01e0, B:121:0x01e4, B:164:0x029b, B:166:0x02a0, B:168:0x02a4, B:170:0x02aa, B:174:0x02b4, B:178:0x02c0, B:184:0x02dc, B:204:0x032a, B:207:0x0332, B:209:0x0338, B:212:0x0340, B:213:0x034f, B:216:0x0356, B:218:0x036c, B:221:0x0373, B:223:0x0385, B:225:0x0396, B:228:0x039e, B:230:0x03a3, B:224:0x0392, B:232:0x03a8, B:234:0x03ae, B:235:0x03b1, B:237:0x03ba, B:238:0x03c2, B:240:0x03d1, B:241:0x03d4, B:176:0x02ba, B:179:0x02ca, B:181:0x02d0, B:182:0x02d3, B:183:0x02d8, B:185:0x02e3, B:187:0x02e8, B:190:0x02ee, B:192:0x02f3, B:194:0x02fe, B:199:0x031d, B:202:0x0325, B:195:0x0304, B:196:0x030d, B:198:0x0318, B:122:0x01f2, B:123:0x0208, B:125:0x020c, B:126:0x021b, B:127:0x0233, B:129:0x0237, B:131:0x023b, B:133:0x0241, B:137:0x024a, B:136:0x0246, B:138:0x024f, B:140:0x0255, B:144:0x025e, B:143:0x025a, B:145:0x0263, B:146:0x0269, B:148:0x026d, B:150:0x0273, B:154:0x027c, B:153:0x0278, B:155:0x0281, B:157:0x0287, B:161:0x0290, B:160:0x028c, B:162:0x0295, B:95:0x0159, B:96:0x0163, B:98:0x0167, B:99:0x0171, B:100:0x017b, B:102:0x017f, B:103:0x018b, B:104:0x0197, B:106:0x019b, B:108:0x01ac, B:107:0x01a4, B:111:0x01b5, B:112:0x01bf, B:113:0x01c5, B:115:0x01c9, B:117:0x01d9, B:116:0x01d2, B:89:0x013f, B:78:0x010b, B:80:0x0111, B:66:0x00e3, B:245:0x03dd, B:246:0x0411, B:31:0x007a, B:34:0x0083), top: B:251:0x0014 }] */
     @Override // android.widget.SemHorizontalAbsListView
-    @java.lang.Deprecated
+    @Deprecated
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     protected void layoutChildren() {
-        /*
-            Method dump skipped, instructions count: 1066
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalListView.layoutChildren():void");
+        int i;
+        View view;
+        View childAt;
+        View view2;
+        boolean z;
+        boolean z2;
+        int positionForView;
+        AccessibilityNodeInfo accessibilityFocusedVirtualView;
+        View accessibilityFocusedHost;
+        boolean z3;
+        View focusedChild;
+        View viewFindFocus;
+        View view3;
+        View view4;
+        View viewFillFromLeft;
+        View childAt2;
+        View viewFillSpecific;
+        boolean z4 = this.mBlockLayoutRequests;
+        if (z4) {
+            return;
+        }
+        this.mIsRTL = isLayoutRtl();
+        this.mBlockLayoutRequests = true;
+        try {
+            super.layoutChildren();
+            invalidate();
+            if (this.mAdapter == null) {
+                resetList();
+                invokeOnItemScrollListener();
+                if (z4) {
+                    return;
+                }
+                this.mBlockLayoutRequests = false;
+                return;
+            }
+            int left = this.mListPadding.left;
+            int right = (this.mRight - this.mLeft) - this.mListPadding.right;
+            int childCount = getChildCount();
+            int i2 = this.mLayoutMode;
+            if (i2 == 1) {
+                i = 0;
+                view = null;
+                childAt = null;
+                view2 = null;
+            } else {
+                if (i2 == 2) {
+                    int i3 = this.mNextSelectedPosition - this.mFirstPosition;
+                    if (i3 >= 0 && i3 < childCount) {
+                        childAt = getChildAt(i3);
+                        i = 0;
+                        view = null;
+                    }
+                    view2 = null;
+                } else if (i2 != 3 && i2 != 4 && i2 != 5) {
+                    int i4 = this.mSelectedPosition - this.mFirstPosition;
+                    View childAt3 = (i4 < 0 || i4 >= childCount) ? null : getChildAt(i4);
+                    View childAt4 = getChildAt(0);
+                    int i5 = this.mNextSelectedPosition >= 0 ? this.mNextSelectedPosition - this.mSelectedPosition : 0;
+                    View view5 = childAt3;
+                    childAt = getChildAt(i4 + i5);
+                    view = view5;
+                    int i6 = i5;
+                    view2 = childAt4;
+                    i = i6;
+                }
+                i = 0;
+                view = null;
+                childAt = null;
+                view2 = null;
+            }
+            boolean z5 = this.mDataChanged;
+            if (z5) {
+                handleDataChanged();
+            }
+            if (this.mItemCount == 0) {
+                resetList();
+                invokeOnItemScrollListener();
+                if (z4) {
+                    return;
+                }
+                this.mBlockLayoutRequests = false;
+                return;
+            }
+            if (this.mItemCount != this.mAdapter.getCount()) {
+                throw new IllegalStateException("The content of the adapter has changed but SemHorizontalListView did not receive a notification. Make sure the content of your adapter is not modified from a background thread, but only from the UI thread. Make sure your adapter calls notifyDataSetChanged() when its content changes. [in SemHorizontalListView(" + getId() + ", " + getClass() + ") with Adapter(" + this.mAdapter.getClass() + ")]");
+            }
+            setSelectedPositionInt(this.mNextSelectedPosition);
+            ViewRootImpl viewRootImpl = getViewRootImpl();
+            if (viewRootImpl == null || (accessibilityFocusedHost = viewRootImpl.getAccessibilityFocusedHost()) == null) {
+                z = true;
+                z2 = false;
+            } else {
+                View accessibilityFocusedChild = getAccessibilityFocusedChild(accessibilityFocusedHost);
+                boolean z6 = accessibilityFocusedHost != accessibilityFocusedChild;
+                if (accessibilityFocusedChild != null) {
+                    if (!z5 || isDirectChildHeaderOrFooter(accessibilityFocusedChild) || accessibilityFocusedChild.hasTransientState() || this.mAdapterHasStableIds) {
+                        accessibilityFocusedVirtualView = viewRootImpl.getAccessibilityFocusedVirtualView();
+                    } else {
+                        accessibilityFocusedVirtualView = null;
+                        accessibilityFocusedHost = null;
+                    }
+                    positionForView = getPositionForView(accessibilityFocusedChild);
+                    z = true;
+                    z3 = z6;
+                    focusedChild = getFocusedChild();
+                    if (focusedChild == null) {
+                        if (!z5 || isDirectChildHeaderOrFooter(focusedChild)) {
+                            viewFindFocus = findFocus();
+                            if (viewFindFocus != null) {
+                                viewFindFocus.onStartTemporaryDetach();
+                            }
+                        } else {
+                            focusedChild = null;
+                            viewFindFocus = null;
+                        }
+                        requestFocus();
+                    } else {
+                        focusedChild = null;
+                        viewFindFocus = null;
+                    }
+                    int i7 = this.mFirstPosition;
+                    SemHorizontalAbsListView.RecycleBin recycleBin = this.mRecycler;
+                    if (z5) {
+                        view3 = view;
+                        view4 = childAt;
+                        recycleBin.fillActiveViews(childCount, i7);
+                    } else {
+                        int i8 = 0;
+                        while (i8 < childCount) {
+                            recycleBin.addScrapView(getChildAt(i8), i7 + i8);
+                            i8++;
+                            view = view;
+                            childAt = childAt;
+                        }
+                        view3 = view;
+                        view4 = childAt;
+                    }
+                    detachAllViewsFromParent();
+                    recycleBin.removeSkippedScrap();
+                    switch (this.mLayoutMode) {
+                        case 1:
+                            if (this.mIsRTL) {
+                                this.mFirstPosition = 0;
+                                viewFillFromLeft = fillFromRight(right);
+                            } else {
+                                this.mFirstPosition = 0;
+                                viewFillFromLeft = fillFromLeft(left);
+                            }
+                            adjustViewsLeftOrRight();
+                            break;
+                        case 2:
+                            View view6 = view4;
+                            if (view6 == null) {
+                                viewFillFromLeft = fillFromMiddle(left, right);
+                                break;
+                            } else {
+                                viewFillFromLeft = fillFromSelection(view6.getLeft(), left, right);
+                                break;
+                            }
+                        case 3:
+                            viewFillFromLeft = this.mIsRTL ? fillRightRTL(this.mItemCount - 1, left) : fillLeft(this.mItemCount - 1, right);
+                            adjustViewsLeftOrRight();
+                            break;
+                        case 4:
+                            if (!this.mIsRTL) {
+                                viewFillFromLeft = fillSpecific(reconcileSelectedPosition(), this.mSpecificTop);
+                                break;
+                            } else {
+                                viewFillFromLeft = fillSpecificRTL(reconcileSelectedPosition(), this.mSpecificTop);
+                                break;
+                            }
+                        case 5:
+                            if (!this.mIsRTL) {
+                                viewFillFromLeft = fillSpecific(this.mSyncPosition, this.mSpecificTop);
+                                break;
+                            } else {
+                                viewFillFromLeft = fillSpecificRTL(this.mSyncPosition, this.mSpecificTop);
+                                break;
+                            }
+                        case 6:
+                            viewFillFromLeft = moveSelection(view3, view4, i, left, right);
+                            break;
+                        default:
+                            View view7 = view3;
+                            if (childCount != 0) {
+                                if (!this.mIsRTL) {
+                                    if (this.mSelectedPosition >= 0 && this.mSelectedPosition < this.mItemCount) {
+                                        int i9 = this.mSelectedPosition;
+                                        if (view7 != null) {
+                                            left = view7.getLeft();
+                                        }
+                                        viewFillFromLeft = fillSpecific(i9, left);
+                                        break;
+                                    } else if (this.mFirstPosition < this.mItemCount) {
+                                        int i10 = this.mFirstPosition;
+                                        if (view2 != null) {
+                                            left = view2.getLeft();
+                                        }
+                                        viewFillFromLeft = fillSpecific(i10, left);
+                                        break;
+                                    } else {
+                                        viewFillSpecific = fillSpecific(0, left);
+                                        viewFillFromLeft = viewFillSpecific;
+                                    }
+                                } else if (this.mSelectedPosition >= 0 && this.mSelectedPosition < this.mItemCount) {
+                                    int i11 = this.mSelectedPosition;
+                                    if (view7 != null) {
+                                        right = view7.getRight();
+                                    }
+                                    viewFillFromLeft = fillSpecificRTL(i11, right);
+                                    break;
+                                } else if (this.mFirstPosition >= this.mItemCount) {
+                                    viewFillSpecific = fillSpecificRTL(0, right);
+                                    viewFillFromLeft = viewFillSpecific;
+                                    break;
+                                } else {
+                                    int i12 = this.mFirstPosition;
+                                    if (view2 != null) {
+                                        right = view2.getRight();
+                                    }
+                                    viewFillFromLeft = fillSpecificRTL(i12, right);
+                                    break;
+                                }
+                            } else if (!this.mIsRTL) {
+                                if (!this.mStackFromBottom) {
+                                    setSelectedPositionInt(lookForSelectablePosition(0, true));
+                                    viewFillFromLeft = fillFromLeft(left);
+                                    break;
+                                } else {
+                                    setSelectedPositionInt(lookForSelectablePosition(this.mItemCount - 1, false));
+                                    viewFillFromLeft = fillLeft(this.mItemCount - 1, right);
+                                    break;
+                                }
+                            } else if (!this.mStackFromBottom) {
+                                setSelectedPositionInt(lookForSelectablePosition(0, false));
+                                viewFillFromLeft = fillFromRight(right);
+                                break;
+                            } else {
+                                boolean z7 = z;
+                                setSelectedPositionInt(lookForSelectablePosition(this.mItemCount - 1, z7));
+                                viewFillFromLeft = fillRightRTL(this.mItemCount - (z7 ? 1 : 0), left);
+                                break;
+                            }
+                            break;
+                    }
+                    recycleBin.scrapActiveViews();
+                    if (viewFillFromLeft == null) {
+                        if (!this.mItemsCanFocus || !hasFocus() || viewFillFromLeft.hasFocus()) {
+                            positionSelector(-1, viewFillFromLeft);
+                        } else if ((viewFillFromLeft == focusedChild && viewFindFocus != null && viewFindFocus.requestFocus()) || viewFillFromLeft.requestFocus()) {
+                            viewFillFromLeft.setSelected(false);
+                            this.mSelectorRect.setEmpty();
+                        } else {
+                            View focusedChild2 = getFocusedChild();
+                            if (focusedChild2 != null) {
+                                focusedChild2.clearFocus();
+                            }
+                            positionSelector(-1, viewFillFromLeft);
+                        }
+                        this.mSelectedLeft = viewFillFromLeft.getLeft();
+                    } else {
+                        if (this.mTouchMode == 1 || this.mTouchMode == 2) {
+                            View childAt5 = getChildAt(this.mMotionPosition - this.mFirstPosition);
+                            if (childAt5 != null) {
+                                positionSelector(this.mMotionPosition, childAt5);
+                            }
+                        } else if (this.mSelectorPosition != -1) {
+                            View childAt6 = getChildAt(this.mSelectorPosition - this.mFirstPosition);
+                            if (childAt6 != null) {
+                                positionSelector(this.mSelectorPosition, childAt6);
+                            }
+                        } else {
+                            this.mSelectedLeft = 0;
+                            this.mSelectorRect.setEmpty();
+                        }
+                        if (hasFocus() && viewFindFocus != null) {
+                            viewFindFocus.requestFocus();
+                        }
+                    }
+                    if (viewRootImpl != null) {
+                        View accessibilityFocusedHost2 = viewRootImpl.getAccessibilityFocusedHost();
+                        if (accessibilityFocusedHost2 == null) {
+                            if (accessibilityFocusedHost != null && accessibilityFocusedHost.isAttachedToWindow()) {
+                                AccessibilityNodeProvider accessibilityNodeProvider = accessibilityFocusedHost.getAccessibilityNodeProvider();
+                                if (accessibilityFocusedVirtualView == null || accessibilityNodeProvider == null) {
+                                    accessibilityFocusedHost.requestAccessibilityFocus();
+                                } else {
+                                    accessibilityNodeProvider.performAction(AccessibilityNodeInfo.getVirtualDescendantId(accessibilityFocusedVirtualView.getSourceNodeId()), 64, null);
+                                }
+                            } else if (positionForView != -1 && (childAt2 = getChildAt(MathUtils.constrain(positionForView - this.mFirstPosition, 0, getChildCount() - 1))) != null) {
+                                childAt2.requestAccessibilityFocus();
+                            }
+                        } else if (positionForView != -1) {
+                            int iConstrain = MathUtils.constrain(positionForView - this.mFirstPosition, 0, getChildCount() - 1);
+                            View viewFindViewById = z3 ? getChildAt(iConstrain).findViewById(accessibilityFocusedHost2.getId()) : getChildAt(iConstrain);
+                            if (accessibilityFocusedHost2.isAccessibilityFocused() && accessibilityFocusedHost2 != viewFindViewById) {
+                                accessibilityFocusedHost2.clearAccessibilityFocus();
+                                if (viewFindViewById != null) {
+                                    viewFindViewById.requestAccessibilityFocus();
+                                }
+                            }
+                        }
+                    }
+                    if (viewFindFocus != null && viewFindFocus.getWindowToken() != null) {
+                        viewFindFocus.onFinishTemporaryDetach();
+                    }
+                    this.mLayoutMode = 0;
+                    this.mDataChanged = false;
+                    if (this.mPositionScrollAfterLayout != null) {
+                        post(this.mPositionScrollAfterLayout);
+                        this.mPositionScrollAfterLayout = null;
+                    }
+                    this.mNeedSync = false;
+                    setNextSelectedPositionInt(this.mSelectedPosition);
+                    updateScrollIndicators();
+                    if (this.mItemCount > 0) {
+                        checkSelectionChanged();
+                    }
+                    invokeOnItemScrollListener();
+                    if (z4) {
+                        return;
+                    } else {
+                        return;
+                    }
+                }
+                z = true;
+                z2 = z6;
+            }
+            positionForView = -1;
+            accessibilityFocusedVirtualView = null;
+            accessibilityFocusedHost = null;
+            z3 = z2;
+            focusedChild = getFocusedChild();
+            if (focusedChild == null) {
+            }
+            int i72 = this.mFirstPosition;
+            SemHorizontalAbsListView.RecycleBin recycleBin2 = this.mRecycler;
+            if (z5) {
+            }
+            detachAllViewsFromParent();
+            recycleBin2.removeSkippedScrap();
+            switch (this.mLayoutMode) {
+            }
+            recycleBin2.scrapActiveViews();
+            if (viewFillFromLeft == null) {
+            }
+            if (viewRootImpl != null) {
+            }
+            if (viewFindFocus != null) {
+                viewFindFocus.onFinishTemporaryDetach();
+            }
+            this.mLayoutMode = 0;
+            this.mDataChanged = false;
+            if (this.mPositionScrollAfterLayout != null) {
+            }
+            this.mNeedSync = false;
+            setNextSelectedPositionInt(this.mSelectedPosition);
+            updateScrollIndicators();
+            if (this.mItemCount > 0) {
+            }
+            invokeOnItemScrollListener();
+        } finally {
+            if (!z4) {
+                this.mBlockLayoutRequests = false;
+            }
+        }
     }
 
     private boolean isDirectChildHeaderOrFooter(View view) {
@@ -1235,29 +1594,29 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return false;
     }
 
-    private View makeAndAddView(int i, int i2, boolean z, int i3, boolean z2) {
+    private View makeAndAddView(int i, int i2, boolean z, int i3, boolean z2) throws Resources.NotFoundException {
         View activeView;
         if (!this.mDataChanged && (activeView = this.mRecycler.getActiveView(i)) != null) {
             setupChild(activeView, i, i2, z, i3, z2, true);
             return activeView;
         }
-        View obtainView = obtainView(i, this.mIsScrap);
-        if (obtainView != null) {
-            setupChild(obtainView, i, i2, z, i3, z2, this.mIsScrap[0]);
+        View viewObtainView = obtainView(i, this.mIsScrap);
+        if (viewObtainView != null) {
+            setupChild(viewObtainView, i, i2, z, i3, z2, this.mIsScrap[0]);
         }
-        return obtainView;
+        return viewObtainView;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private void setupChild(View view, int i, int i2, boolean z, int i3, boolean z2, boolean z3) {
-        int makeMeasureSpec;
+    private void setupChild(View view, int i, int i2, boolean z, int i3, boolean z2, boolean z3) throws Resources.NotFoundException {
+        int iMakeMeasureSpec;
         Trace.traceBegin(8L, "setupListItem");
         boolean z4 = z2 && shouldShowSelector();
         boolean z5 = z4 != view.isSelected();
         int i4 = this.mTouchMode;
         boolean z6 = i4 > 0 && i4 < 3 && this.mMotionPosition == i;
         boolean z7 = z6 != view.isPressed();
-        boolean needToMeasureChild = needToMeasureChild(view, z5, z3);
+        boolean zNeedToMeasureChild = needToMeasureChild(view, z5, z3);
         SemHorizontalAbsListView.LayoutParams layoutParams = (SemHorizontalAbsListView.LayoutParams) view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = (SemHorizontalAbsListView.LayoutParams) generateDefaultLayoutParams();
@@ -1296,15 +1655,15 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
                 view.setActivated(this.mCheckStates.get(i));
             }
         }
-        if (needToMeasureChild) {
+        if (zNeedToMeasureChild) {
             int childMeasureSpec = ViewGroup.getChildMeasureSpec(this.mHeightMeasureSpec, this.mListPadding.top + this.mListPadding.bottom, layoutParams.height);
             int i5 = layoutParams.width;
             if (i5 > 0) {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i5, 1073741824);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i5, 1073741824);
             } else {
-                makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+                iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
             }
-            view.measure(makeMeasureSpec, childMeasureSpec);
+            view.measure(iMakeMeasureSpec, childMeasureSpec);
         } else {
             cleanupLayoutState(view);
         }
@@ -1313,7 +1672,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (this.mIsRTL) {
             int i6 = z ? i2 + measuredWidth : i2;
             int i7 = z ? i2 : i2 - measuredWidth;
-            if (needToMeasureChild) {
+            if (zNeedToMeasureChild) {
                 view.layout(i7, i3, i6, measuredHeight + i3);
             } else {
                 view.offsetLeftAndRight(i7 - view.getLeft());
@@ -1322,7 +1681,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         } else {
             int i8 = z ? i2 : i2 - measuredWidth;
             int i9 = measuredWidth + i8;
-            if (needToMeasureChild) {
+            if (zNeedToMeasureChild) {
                 view.layout(i8, i3, i9, measuredHeight + i3);
             } else {
                 view.offsetLeftAndRight(i8 - view.getLeft());
@@ -1412,47 +1771,28 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x000e, code lost:
-    
-        if (r4 == (r0 + 1)) goto L11;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0020  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0016  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0011  */
     @Override // android.widget.SemHorizontalAbsListView
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void setSelectionInt(int r4) {
-        /*
-            r3 = this;
-            r3.setNextSelectedPositionInt(r4)
-            int r0 = r3.mSelectedPosition
-            if (r0 < 0) goto L11
-            int r1 = r0 + (-1)
-            r2 = 1
-            if (r4 != r1) goto Ld
-            goto L12
-        Ld:
-            int r0 = r0 + r2
-            if (r4 != r0) goto L11
-            goto L12
-        L11:
-            r2 = 0
-        L12:
-            android.widget.SemHorizontalAbsListView$AbsPositionScroller r4 = r3.mPositionScroller
-            if (r4 == 0) goto L1b
-            android.widget.SemHorizontalAbsListView$AbsPositionScroller r4 = r3.mPositionScroller
-            r4.stop()
-        L1b:
-            r3.layoutChildren()
-            if (r2 == 0) goto L23
-            r3.awakenScrollBars()
-        L23:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalListView.setSelectionInt(int):void");
+    void setSelectionInt(int i) {
+        boolean z;
+        setNextSelectedPositionInt(i);
+        int i2 = this.mSelectedPosition;
+        if (i2 >= 0) {
+            z = true;
+            if (i != i2 - 1 && i != i2 + 1) {
+                z = false;
+            }
+        }
+        if (this.mPositionScroller != null) {
+            this.mPositionScroller.stop();
+        }
+        layoutChildren();
+        if (z) {
+            awakenScrollBars();
+        }
     }
 
     @Override // android.widget.AdapterView
@@ -1497,50 +1837,50 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (listAdapter == null || isInTouchMode()) {
             return -1;
         }
-        int lookForSelectablePosition = lookForSelectablePosition(i2, z);
-        if (lookForSelectablePosition != -1) {
-            return lookForSelectablePosition;
+        int iLookForSelectablePosition = lookForSelectablePosition(i2, z);
+        if (iLookForSelectablePosition != -1) {
+            return iLookForSelectablePosition;
         }
         int count = listAdapter.getCount() - 1;
-        int constrain = MathUtils.constrain(i, -1, count);
+        int iConstrain = MathUtils.constrain(i, -1, count);
         if (this.mIsRTL) {
             if (z) {
-                int max = Math.max(0, i2 + 1);
-                while (max < constrain && !listAdapter.isEnabled(max)) {
-                    max++;
+                int iMax = Math.max(0, i2 + 1);
+                while (iMax < iConstrain && !listAdapter.isEnabled(iMax)) {
+                    iMax++;
                 }
-                if (max >= constrain) {
+                if (iMax >= iConstrain) {
                     return -1;
                 }
-                return max;
+                return iMax;
             }
-            int min = Math.min(i2 - 1, count);
-            while (min > constrain && !listAdapter.isEnabled(min)) {
-                min--;
+            int iMin = Math.min(i2 - 1, count);
+            while (iMin > iConstrain && !listAdapter.isEnabled(iMin)) {
+                iMin--;
             }
-            if (min <= constrain) {
+            if (iMin <= iConstrain) {
                 return -1;
             }
-            return min;
+            return iMin;
         }
         if (z) {
-            int min2 = Math.min(i2 - 1, count);
-            while (min2 > constrain && !listAdapter.isEnabled(min2)) {
-                min2--;
+            int iMin2 = Math.min(i2 - 1, count);
+            while (iMin2 > iConstrain && !listAdapter.isEnabled(iMin2)) {
+                iMin2--;
             }
-            if (min2 <= constrain) {
+            if (iMin2 <= iConstrain) {
                 return -1;
             }
-            return min2;
+            return iMin2;
         }
-        int max2 = Math.max(0, i2 + 1);
-        while (max2 < constrain && !listAdapter.isEnabled(max2)) {
-            max2++;
+        int iMax2 = Math.max(0, i2 + 1);
+        while (iMax2 < iConstrain && !listAdapter.isEnabled(iMax2)) {
+            iMax2++;
         }
-        if (max2 >= constrain) {
+        if (iMax2 >= iConstrain) {
             return -1;
         }
-        return max2;
+        return iMax2;
     }
 
     @Deprecated
@@ -1559,8 +1899,8 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     @Override // android.view.ViewGroup, android.view.View
     @Deprecated
     public boolean dispatchKeyEvent(KeyEvent keyEvent) {
-        boolean dispatchKeyEvent = super.dispatchKeyEvent(keyEvent);
-        return (dispatchKeyEvent || getFocusedChild() == null || keyEvent.getAction() != 0) ? dispatchKeyEvent : onKeyDown(keyEvent.getKeyCode(), keyEvent);
+        boolean zDispatchKeyEvent = super.dispatchKeyEvent(keyEvent);
+        return (zDispatchKeyEvent || getFocusedChild() == null || keyEvent.getAction() != 0) ? zDispatchKeyEvent : onKeyDown(keyEvent.getKeyCode(), keyEvent);
     }
 
     @Override // android.widget.SemHorizontalAbsListView, android.view.View, android.view.KeyEvent.Callback
@@ -1582,59 +1922,149 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:102:0x0109, code lost:
-    
-        if (fullScroll(17) != false) goto L142;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x005c, code lost:
-    
-        if (fullScroll(66) != false) goto L142;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:70:0x0097, code lost:
-    
-        if (fullScroll(17) != false) goto L142;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:96:0x00f5, code lost:
-    
-        if (fullScroll(66) != false) goto L142;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x01b3  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x01c2  */
+    /* JADX WARN: Removed duplicated region for block: B:119:0x015b  */
+    /* JADX WARN: Removed duplicated region for block: B:142:0x01a4  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x01a6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean commonKey(int r8, int r9, android.view.KeyEvent r10) {
-        /*
-            Method dump skipped, instructions count: 470
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalListView.commonKey(int, int, android.view.KeyEvent):boolean");
+    private boolean commonKey(int i, int i2, KeyEvent keyEvent) {
+        boolean zResurrectSelectionIfNeeded;
+        int i3;
+        int i4;
+        if (this.mAdapter == null || !isAttachedToWindow()) {
+            return false;
+        }
+        if (this.mDataChanged) {
+            layoutChildren();
+        }
+        int action = keyEvent.getAction();
+        if (action == 1) {
+            zResurrectSelectionIfNeeded = false;
+        } else if (i == 62) {
+            if (this.mPopup == null || !this.mPopup.isShowing()) {
+                if (keyEvent.hasNoModifiers()) {
+                    if (!resurrectSelectionIfNeeded()) {
+                        pageScroll(66);
+                    }
+                } else if (keyEvent.hasModifiers(1) && !resurrectSelectionIfNeeded()) {
+                    pageScroll(17);
+                }
+                zResurrectSelectionIfNeeded = true;
+            }
+            zResurrectSelectionIfNeeded = false;
+        } else if (i == 66 || i == 160) {
+            if (keyEvent.hasNoModifiers()) {
+                zResurrectSelectionIfNeeded = resurrectSelectionIfNeeded();
+                if (!zResurrectSelectionIfNeeded && keyEvent.getRepeatCount() == 0 && getChildCount() > 0) {
+                    keyPressed();
+                    zResurrectSelectionIfNeeded = true;
+                }
+            }
+        } else if (i != 92) {
+            if (i != 93) {
+                if (i != 122) {
+                    if (i != 123) {
+                        switch (i) {
+                            case 19:
+                                if (keyEvent.hasNoModifiers() || keyEvent.hasModifiers(1)) {
+                                    this.mSemCurrentFocusPosition = this.mSelectedPosition;
+                                    zResurrectSelectionIfNeeded = handleVerticalFocusWithinListItem(33);
+                                    break;
+                                }
+                                break;
+                            case 20:
+                                if (keyEvent.hasNoModifiers() || keyEvent.hasModifiers(1)) {
+                                    this.mSemCurrentFocusPosition = this.mSelectedPosition;
+                                    zResurrectSelectionIfNeeded = handleVerticalFocusWithinListItem(130);
+                                    break;
+                                }
+                                break;
+                            case 21:
+                                if (keyEvent.hasNoModifiers() || keyEvent.hasModifiers(1)) {
+                                    this.mSemCurrentFocusPosition = this.mSelectedPosition;
+                                    zResurrectSelectionIfNeeded = resurrectSelectionIfNeeded();
+                                    if (!zResurrectSelectionIfNeeded) {
+                                        while (true) {
+                                            i3 = i2 - 1;
+                                            if (i2 > 0 && arrowScroll(17)) {
+                                                zResurrectSelectionIfNeeded = true;
+                                                i2 = i3;
+                                            }
+                                        }
+                                        i2 = i3;
+                                        break;
+                                    }
+                                } else if (keyEvent.hasModifiers(2) && (resurrectSelectionIfNeeded() || fullScroll(17))) {
+                                    zResurrectSelectionIfNeeded = true;
+                                    break;
+                                }
+                                break;
+                            case 22:
+                                if (keyEvent.hasNoModifiers() || keyEvent.hasModifiers(1)) {
+                                    this.mSemCurrentFocusPosition = this.mSelectedPosition;
+                                    zResurrectSelectionIfNeeded = resurrectSelectionIfNeeded();
+                                    if (!zResurrectSelectionIfNeeded) {
+                                        while (true) {
+                                            i4 = i2 - 1;
+                                            if (i2 > 0 && arrowScroll(66)) {
+                                                zResurrectSelectionIfNeeded = true;
+                                                i2 = i4;
+                                            }
+                                        }
+                                        i2 = i4;
+                                        break;
+                                    }
+                                } else if (!keyEvent.hasModifiers(2) || (!resurrectSelectionIfNeeded() && !fullScroll(66))) {
+                                }
+                                break;
+                        }
+                    } else if (!keyEvent.hasNoModifiers() || (!resurrectSelectionIfNeeded() && !fullScroll(66))) {
+                    }
+                } else if (!keyEvent.hasNoModifiers() || (!resurrectSelectionIfNeeded() && !fullScroll(17))) {
+                }
+            } else if (!keyEvent.hasNoModifiers() ? !keyEvent.hasModifiers(2) || (!resurrectSelectionIfNeeded() && !fullScroll(66)) : !resurrectSelectionIfNeeded() && !pageScroll(66)) {
+            }
+        } else if (!keyEvent.hasNoModifiers() ? !keyEvent.hasModifiers(2) || (!resurrectSelectionIfNeeded() && !fullScroll(17)) : !resurrectSelectionIfNeeded() && !pageScroll(17)) {
+        }
+        if (zResurrectSelectionIfNeeded || sendToTextFilter(i, i2, keyEvent)) {
+            return true;
+        }
+        if (action == 0) {
+            return super.onKeyDown(i, keyEvent);
+        }
+        if (action == 1) {
+            return super.onKeyUp(i, keyEvent);
+        }
+        if (action != 2) {
+            return false;
+        }
+        return super.onKeyMultiple(i, i2, keyEvent);
     }
 
     boolean pageScroll(int i) {
-        int min;
+        int iMin;
         boolean z;
-        int lookForSelectablePositionAfter;
+        int iLookForSelectablePositionAfter;
         if (i != 17) {
             if (i == 66) {
-                min = Math.min(this.mItemCount - 1, (this.mSelectedPosition + getChildCount()) - 1);
+                iMin = Math.min(this.mItemCount - 1, (this.mSelectedPosition + getChildCount()) - 1);
                 z = true;
             }
             return false;
         }
-        min = Math.max(0, (this.mSelectedPosition - getChildCount()) - 1);
+        iMin = Math.max(0, (this.mSelectedPosition - getChildCount()) - 1);
         z = false;
-        if (min >= 0 && (lookForSelectablePositionAfter = lookForSelectablePositionAfter(this.mSelectedPosition, min, z)) >= 0) {
+        if (iMin >= 0 && (iLookForSelectablePositionAfter = lookForSelectablePositionAfter(this.mSelectedPosition, iMin, z)) >= 0) {
             this.mLayoutMode = 4;
             this.mSpecificTop = this.mPaddingLeft + getHorizontalFadingEdgeLength();
-            if (z && lookForSelectablePositionAfter > this.mItemCount - getChildCount()) {
+            if (z && iLookForSelectablePositionAfter > this.mItemCount - getChildCount()) {
                 this.mLayoutMode = 3;
             }
-            if (!z && lookForSelectablePositionAfter < getChildCount()) {
+            if (!z && iLookForSelectablePositionAfter < getChildCount()) {
                 this.mLayoutMode = 1;
             }
-            setSelectionInt(lookForSelectablePositionAfter);
+            setSelectionInt(iLookForSelectablePositionAfter);
             invokeOnItemScrollListener();
             if (!awakenScrollBars()) {
                 invalidate();
@@ -1644,29 +2074,31 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0038  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     boolean fullScroll(int i) {
         int i2;
         boolean z = true;
         if (i == 17) {
             if (this.mSelectedPosition != 0) {
-                int lookForSelectablePositionAfter = lookForSelectablePositionAfter(this.mSelectedPosition, 0, true);
-                if (lookForSelectablePositionAfter >= 0) {
+                int iLookForSelectablePositionAfter = lookForSelectablePositionAfter(this.mSelectedPosition, 0, true);
+                if (iLookForSelectablePositionAfter >= 0) {
                     this.mLayoutMode = 1;
-                    setSelectionInt(lookForSelectablePositionAfter);
+                    setSelectionInt(iLookForSelectablePositionAfter);
                     invokeOnItemScrollListener();
                 }
+            } else {
+                z = false;
             }
-            z = false;
-        } else {
-            if (i == 66 && this.mSelectedPosition < (i2 = this.mItemCount - 1)) {
-                int lookForSelectablePositionAfter2 = lookForSelectablePositionAfter(this.mSelectedPosition, i2, false);
-                if (lookForSelectablePositionAfter2 >= 0) {
-                    this.mLayoutMode = 3;
-                    setSelectionInt(lookForSelectablePositionAfter2);
-                    invokeOnItemScrollListener();
-                }
+        } else if (i == 66 && this.mSelectedPosition < (i2 = this.mItemCount - 1)) {
+            int iLookForSelectablePositionAfter2 = lookForSelectablePositionAfter(this.mSelectedPosition, i2, false);
+            if (iLookForSelectablePositionAfter2 >= 0) {
+                this.mLayoutMode = 3;
+                setSelectionInt(iLookForSelectablePositionAfter2);
+                invokeOnItemScrollListener();
             }
-            z = false;
         }
         if (z && !awakenScrollBars()) {
             awakenScrollBars();
@@ -1682,23 +2114,23 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
         int childCount = getChildCount();
         if (this.mItemsCanFocus && childCount > 0 && this.mSelectedPosition != -1 && (selectedView = getSelectedView()) != null && selectedView.hasFocus() && (selectedView instanceof ViewGroup)) {
-            View findFocus = selectedView.findFocus();
-            View findNextFocus = FocusFinder.getInstance().findNextFocus((ViewGroup) selectedView, findFocus, i);
-            if (findNextFocus != null) {
-                findFocus.getFocusedRect(this.mTempRect);
-                offsetDescendantRectToMyCoords(findFocus, this.mTempRect);
-                offsetRectIntoDescendantCoords(findNextFocus, this.mTempRect);
-                if (findNextFocus.requestFocus(i, this.mTempRect)) {
-                    if (findFocus != findNextFocus && this.mIsFolderTypeFeature) {
-                        findFocus.setSelected(false);
+            View viewFindFocus = selectedView.findFocus();
+            View viewFindNextFocus = FocusFinder.getInstance().findNextFocus((ViewGroup) selectedView, viewFindFocus, i);
+            if (viewFindNextFocus != null) {
+                viewFindFocus.getFocusedRect(this.mTempRect);
+                offsetDescendantRectToMyCoords(viewFindFocus, this.mTempRect);
+                offsetRectIntoDescendantCoords(viewFindNextFocus, this.mTempRect);
+                if (viewFindNextFocus.requestFocus(i, this.mTempRect)) {
+                    if (viewFindFocus != viewFindNextFocus && this.mIsFolderTypeFeature) {
+                        viewFindFocus.setSelected(false);
                     }
                     playSoundEffect(SoundEffectConstants.getContantForFocusDirection(i));
                     return true;
                 }
             }
-            View findNextFocus2 = FocusFinder.getInstance().findNextFocus((ViewGroup) getRootView(), findFocus, i);
-            if (findNextFocus2 != null) {
-                return isViewAncestorOf(findNextFocus2, this);
+            View viewFindNextFocus2 = FocusFinder.getInstance().findNextFocus((ViewGroup) getRootView(), viewFindFocus, i);
+            if (viewFindNextFocus2 != null) {
+                return isViewAncestorOf(viewFindNextFocus2, this);
             }
         }
         return false;
@@ -1707,156 +2139,104 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     boolean arrowScroll(int i) {
         try {
             this.mInLayout = true;
-            boolean arrowScrollImpl = arrowScrollImpl(i);
-            if (arrowScrollImpl) {
+            boolean zArrowScrollImpl = arrowScrollImpl(i);
+            if (zArrowScrollImpl) {
                 playSoundEffect(SoundEffectConstants.getContantForFocusDirection(i));
             }
-            return arrowScrollImpl;
+            return zArrowScrollImpl;
         } finally {
             this.mInLayout = false;
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0025, code lost:
-    
-        if (r7 <= r6) goto L12;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0027, code lost:
-    
-        r6 = r7 - 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x005b, code lost:
-    
-        if (r7 <= r6) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x006c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private final int nextSelectedPositionForDirection(android.view.View r6, int r7, int r8) {
-        /*
-            r5 = this;
-            r0 = 1
-            r1 = -1
-            r2 = 66
-            if (r8 != r2) goto L37
-            int r3 = r5.getWidth()
-            android.graphics.Rect r4 = r5.mListPadding
-            int r4 = r4.right
-            int r3 = r3 - r4
-            if (r6 == 0) goto L36
-            int r6 = r6.getRight()
-            if (r6 > r3) goto L36
-            int r6 = r5.mFirstPosition
-            int r3 = r5.getChildCount()
-            int r6 = r6 + r3
-            int r6 = r6 - r0
-            boolean r3 = r5.mIsRTL
-            if (r3 == 0) goto L2a
-            if (r7 == r1) goto L5e
-            if (r7 > r6) goto L5e
-        L27:
-            int r6 = r7 + (-1)
-            goto L5e
-        L2a:
-            if (r7 == r1) goto L33
-            int r6 = r5.mFirstPosition
-            if (r7 < r6) goto L33
-        L30:
-            int r7 = r7 + r0
-        L31:
-            r6 = r7
-            goto L5e
-        L33:
-            int r6 = r5.mFirstPosition
-            goto L5e
-        L36:
-            return r1
-        L37:
-            android.graphics.Rect r3 = r5.mListPadding
-            int r3 = r3.left
-            if (r6 == 0) goto L72
-            int r6 = r6.getLeft()
-            if (r6 < r3) goto L72
-            int r6 = r5.mFirstPosition
-            int r3 = r5.getChildCount()
-            int r6 = r6 + r3
-            int r6 = r6 - r0
-            boolean r3 = r5.mIsRTL
-            if (r3 == 0) goto L59
-            if (r7 == r1) goto L56
-            int r6 = r5.mFirstPosition
-            if (r7 < r6) goto L56
-            goto L30
-        L56:
-            int r7 = r5.mFirstPosition
-            goto L31
-        L59:
-            if (r7 == r1) goto L5e
-            if (r7 > r6) goto L5e
-            goto L27
-        L5e:
-            if (r6 < 0) goto L72
-            android.widget.ListAdapter r7 = r5.mAdapter
-            int r7 = r7.getCount()
-            if (r6 < r7) goto L69
-            goto L72
-        L69:
-            if (r8 != r2) goto L6c
-            goto L6d
-        L6c:
-            r0 = 0
-        L6d:
-            int r5 = r5.lookForSelectablePosition(r6, r0)
-            return r5
-        L72:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalListView.nextSelectedPositionForDirection(android.view.View, int, int):int");
+    private final int nextSelectedPositionForDirection(View view, int i, int i2) {
+        int childCount;
+        if (i2 == 66) {
+            int width = getWidth() - this.mListPadding.right;
+            if (view == null || view.getRight() > width) {
+                return -1;
+            }
+            childCount = (this.mFirstPosition + getChildCount()) - 1;
+            if (!this.mIsRTL) {
+                if (i == -1 || i < this.mFirstPosition) {
+                    childCount = this.mFirstPosition;
+                }
+                childCount = i;
+            } else if (i != -1 && i <= childCount) {
+                childCount = i - 1;
+            }
+            if (childCount >= 0 && childCount < this.mAdapter.getCount()) {
+                return lookForSelectablePosition(childCount, i2 == 66);
+            }
+        } else {
+            int i3 = this.mListPadding.left;
+            if (view != null && view.getLeft() >= i3) {
+                childCount = (this.mFirstPosition + getChildCount()) - 1;
+                if (this.mIsRTL) {
+                    int i4 = (i == -1 || i < this.mFirstPosition) ? this.mFirstPosition : i + 1;
+                    childCount = i4;
+                    if (childCount >= 0) {
+                        return lookForSelectablePosition(childCount, i2 == 66);
+                    }
+                } else {
+                    if (i != -1 && i <= childCount) {
+                    }
+                    if (childCount >= 0) {
+                    }
+                }
+            }
+        }
+        return -1;
     }
 
-    private boolean arrowScrollImpl(int i) {
+    private boolean arrowScrollImpl(int i) throws Resources.NotFoundException {
         View focusedChild;
         if (getChildCount() <= 0) {
             return false;
         }
         View selectedView = getSelectedView();
         int i2 = this.mSelectedPosition;
-        int nextSelectedPositionForDirection = nextSelectedPositionForDirection(selectedView, i2, i);
-        int amountToScroll = amountToScroll(i, nextSelectedPositionForDirection);
+        int iNextSelectedPositionForDirection = nextSelectedPositionForDirection(selectedView, i2, i);
+        int iAmountToScroll = amountToScroll(i, iNextSelectedPositionForDirection);
         View view = null;
-        ArrowScrollFocusResult arrowScrollFocused = this.mItemsCanFocus ? arrowScrollFocused(i) : null;
-        if (arrowScrollFocused != null) {
-            nextSelectedPositionForDirection = arrowScrollFocused.getSelectedPosition();
-            amountToScroll = arrowScrollFocused.getAmountToScroll();
+        ArrowScrollFocusResult arrowScrollFocusResultArrowScrollFocused = this.mItemsCanFocus ? arrowScrollFocused(i) : null;
+        if (arrowScrollFocusResultArrowScrollFocused != null) {
+            iNextSelectedPositionForDirection = arrowScrollFocusResultArrowScrollFocused.getSelectedPosition();
+            iAmountToScroll = arrowScrollFocusResultArrowScrollFocused.getAmountToScroll();
         }
-        boolean z = arrowScrollFocused != null;
-        if (nextSelectedPositionForDirection != -1) {
-            handleNewSelectionChange(selectedView, i, nextSelectedPositionForDirection, arrowScrollFocused != null);
-            setSelectedPositionInt(nextSelectedPositionForDirection);
-            setNextSelectedPositionInt(nextSelectedPositionForDirection);
+        boolean z = arrowScrollFocusResultArrowScrollFocused != null;
+        if (iNextSelectedPositionForDirection != -1) {
+            handleNewSelectionChange(selectedView, i, iNextSelectedPositionForDirection, arrowScrollFocusResultArrowScrollFocused != null);
+            setSelectedPositionInt(iNextSelectedPositionForDirection);
+            setNextSelectedPositionInt(iNextSelectedPositionForDirection);
             selectedView = getSelectedView();
-            if (this.mItemsCanFocus && arrowScrollFocused == null && (focusedChild = getFocusedChild()) != null) {
+            if (this.mItemsCanFocus && arrowScrollFocusResultArrowScrollFocused == null && (focusedChild = getFocusedChild()) != null) {
                 focusedChild.clearFocus();
             }
             checkSelectionChanged();
-            i2 = nextSelectedPositionForDirection;
+            i2 = iNextSelectedPositionForDirection;
             z = true;
         }
-        if (amountToScroll > 0) {
+        if (iAmountToScroll > 0) {
             if (i != 17) {
-                amountToScroll = -amountToScroll;
+                iAmountToScroll = -iAmountToScroll;
             }
-            scrollListItemsBy(amountToScroll);
+            scrollListItemsBy(iAmountToScroll);
             z = true;
         }
-        if (this.mItemsCanFocus && arrowScrollFocused == null && selectedView != null && selectedView.hasFocus()) {
-            View findFocus = selectedView.findFocus();
-            if (!isViewAncestorOf(findFocus, this) || distanceToView(findFocus) > 0) {
-                findFocus.clearFocus();
+        if (this.mItemsCanFocus && arrowScrollFocusResultArrowScrollFocused == null && selectedView != null && selectedView.hasFocus()) {
+            View viewFindFocus = selectedView.findFocus();
+            if (!isViewAncestorOf(viewFindFocus, this) || distanceToView(viewFindFocus) > 0) {
+                viewFindFocus.clearFocus();
             }
         }
-        if (nextSelectedPositionForDirection != -1 || selectedView == null || isViewAncestorOf(selectedView, this)) {
+        if (iNextSelectedPositionForDirection != -1 || selectedView == null || isViewAncestorOf(selectedView, this)) {
             view = selectedView;
         } else {
             this.mSelectorRect.setEmpty();
@@ -1877,7 +2257,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return true;
     }
 
-    private void handleNewSelectionChange(View view, int i, int i2, boolean z) {
+    private void handleNewSelectionChange(View view, int i, int i2, boolean z) throws Resources.NotFoundException {
         View childAt;
         boolean z2;
         if (i2 == -1) {
@@ -1906,7 +2286,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    private void measureAndAdjustRight(View view, int i, int i2) {
+    private void measureAndAdjustRight(View view, int i, int i2) throws Resources.NotFoundException {
         int width = view.getWidth();
         measureItem(view);
         if (view.getMeasuredWidth() == width) {
@@ -1925,7 +2305,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     private void measureItem(View view) {
-        int makeMeasureSpec;
+        int iMakeMeasureSpec;
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new ViewGroup.LayoutParams(-1, -2);
@@ -1933,14 +2313,14 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         int childMeasureSpec = ViewGroup.getChildMeasureSpec(this.mHeightMeasureSpec, this.mListPadding.top + this.mListPadding.bottom, layoutParams.height);
         int i = layoutParams.width;
         if (i > 0) {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i, 1073741824);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i, 1073741824);
         } else {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
         }
-        view.measure(makeMeasureSpec, childMeasureSpec);
+        view.measure(iMakeMeasureSpec, childMeasureSpec);
     }
 
-    private void relayoutMeasuredItem(View view) {
+    private void relayoutMeasuredItem(View view) throws Resources.NotFoundException {
         int measuredWidth = view.getMeasuredWidth();
         int measuredHeight = view.getMeasuredHeight();
         int left = view.getLeft();
@@ -1952,7 +2332,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return Math.max(2, getHorizontalFadingEdgeLength());
     }
 
-    private int amountToScroll(int i, int i2) {
+    private int amountToScroll(int i, int i2) throws Resources.NotFoundException {
         int width = getWidth() - this.mListPadding.right;
         int i3 = this.mListPadding.left;
         int childCount = getChildCount();
@@ -2106,12 +2486,12 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return -1;
     }
 
-    private ArrowScrollFocusResult arrowScrollFocused(int i) {
-        View findNextFocusFromRect;
-        int lookForSelectablePositionOnScreen;
+    private ArrowScrollFocusResult arrowScrollFocused(int i) throws Resources.NotFoundException {
+        View viewFindNextFocusFromRect;
+        int iLookForSelectablePositionOnScreen;
         View selectedView = getSelectedView();
         if (selectedView != null && selectedView.hasFocus()) {
-            findNextFocusFromRect = FocusFinder.getInstance().findNextFocus(this, selectedView.findFocus(), i);
+            viewFindNextFocusFromRect = FocusFinder.getInstance().findNextFocus(this, selectedView.findFocus(), i);
         } else {
             if (i == 66) {
                 int arrowScrollPreviewLength = this.mListPadding.left + (this.mFirstPosition > 0 ? getArrowScrollPreviewLength() : 0);
@@ -2126,23 +2506,23 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
                 }
                 this.mTempRect.set(width, 0, width, 0);
             }
-            findNextFocusFromRect = FocusFinder.getInstance().findNextFocusFromRect(this, this.mTempRect, i);
+            viewFindNextFocusFromRect = FocusFinder.getInstance().findNextFocusFromRect(this, this.mTempRect, i);
         }
-        if (findNextFocusFromRect != null) {
-            int positionOfNewFocus = positionOfNewFocus(findNextFocusFromRect);
-            if (this.mSelectedPosition != -1 && positionOfNewFocus != this.mSelectedPosition && (lookForSelectablePositionOnScreen = lookForSelectablePositionOnScreen(i)) != -1 && ((i == 66 && lookForSelectablePositionOnScreen < positionOfNewFocus) || (i == 17 && lookForSelectablePositionOnScreen > positionOfNewFocus))) {
+        if (viewFindNextFocusFromRect != null) {
+            int iPositionOfNewFocus = positionOfNewFocus(viewFindNextFocusFromRect);
+            if (this.mSelectedPosition != -1 && iPositionOfNewFocus != this.mSelectedPosition && (iLookForSelectablePositionOnScreen = lookForSelectablePositionOnScreen(i)) != -1 && ((i == 66 && iLookForSelectablePositionOnScreen < iPositionOfNewFocus) || (i == 17 && iLookForSelectablePositionOnScreen > iPositionOfNewFocus))) {
                 return null;
             }
-            int amountToScrollToNewFocus = amountToScrollToNewFocus(i, findNextFocusFromRect, positionOfNewFocus);
+            int iAmountToScrollToNewFocus = amountToScrollToNewFocus(i, viewFindNextFocusFromRect, iPositionOfNewFocus);
             int maxScrollAmount = getMaxScrollAmount();
-            if (amountToScrollToNewFocus < maxScrollAmount) {
-                findNextFocusFromRect.requestFocus(i);
-                this.mArrowScrollFocusResult.populate(positionOfNewFocus, amountToScrollToNewFocus);
+            if (iAmountToScrollToNewFocus < maxScrollAmount) {
+                viewFindNextFocusFromRect.requestFocus(i);
+                this.mArrowScrollFocusResult.populate(iPositionOfNewFocus, iAmountToScrollToNewFocus);
                 return this.mArrowScrollFocusResult;
             }
-            if (distanceToView(findNextFocusFromRect) < maxScrollAmount) {
-                findNextFocusFromRect.requestFocus(i);
-                this.mArrowScrollFocusResult.populate(positionOfNewFocus, maxScrollAmount);
+            if (distanceToView(viewFindNextFocusFromRect) < maxScrollAmount) {
+                viewFindNextFocusFromRect.requestFocus(i);
+                this.mArrowScrollFocusResult.populate(iPositionOfNewFocus, maxScrollAmount);
                 return this.mArrowScrollFocusResult;
             }
         }
@@ -2212,7 +2592,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         return 0;
     }
 
-    private void scrollListItemsBy(int i) {
+    private void scrollListItemsBy(int i) throws Resources.NotFoundException {
         int i2;
         View childAt;
         int i3;
@@ -2321,24 +2701,24 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         }
     }
 
-    private View addViewLeftSide(View view, int i) {
+    private View addViewLeftSide(View view, int i) throws Resources.NotFoundException {
         int i2 = this.mIsRTL ? i + 1 : i - 1;
-        View obtainView = obtainView(i2, this.mIsScrap);
+        View viewObtainView = obtainView(i2, this.mIsScrap);
         int left = view.getLeft() - this.mDividerHeight;
-        if (obtainView != null) {
-            setupChild(obtainView, i2, left, false, this.mListPadding.top, false, this.mIsScrap[0]);
+        if (viewObtainView != null) {
+            setupChild(viewObtainView, i2, left, false, this.mListPadding.top, false, this.mIsScrap[0]);
         }
-        return obtainView;
+        return viewObtainView;
     }
 
-    private View addViewRightSide(View view, int i) {
+    private View addViewRightSide(View view, int i) throws Resources.NotFoundException {
         int i2 = i + 1;
-        View obtainView = obtainView(i2, this.mIsScrap);
+        View viewObtainView = obtainView(i2, this.mIsScrap);
         int right = view != null ? view.getRight() + this.mDividerHeight : 0;
-        if (obtainView != null) {
-            setupChild(obtainView, i2, right, true, this.mListPadding.top, false, this.mIsScrap[0]);
+        if (viewObtainView != null) {
+            setupChild(viewObtainView, i2, right, true, this.mListPadding.top, false, this.mIsScrap[0]);
         }
-        return obtainView;
+        return viewObtainView;
     }
 
     @Deprecated
@@ -2408,8 +2788,12 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         canvas.restore();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:108:0x018f  */
     @Override // android.widget.SemHorizontalAbsListView, android.view.ViewGroup, android.view.View
     @Deprecated
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected void dispatchDraw(Canvas canvas) {
         boolean z;
         int i;
@@ -2469,82 +2853,81 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
                         drawDivider(canvas, rect, -1);
                     }
                 }
+                int right = 0;
                 int i11 = 0;
-                int i12 = 0;
-                while (i12 < childCount) {
-                    int i13 = i8 + i12;
-                    boolean z8 = i13 < size;
-                    boolean z9 = i13 >= size2;
+                while (i11 < childCount) {
+                    int i12 = i8 + i11;
+                    boolean z8 = i12 < size;
+                    boolean z9 = i12 >= size2;
                     if ((z4 || !z8) && (z5 || !z9)) {
-                        i11 = getChildAt(i12).getRight();
+                        right = getChildAt(i11).getRight();
                         i4 = i5;
-                        boolean z10 = i12 == childCount + (-1);
-                        if (z7 && i11 < i9 && (!z || !z10)) {
+                        boolean z10 = i11 == childCount + (-1);
+                        if (z7 && right < i9 && (!z || !z10)) {
                             boolean z11 = z10;
-                            int i14 = i13 + 1;
-                            if (listAdapter.isEnabled(i13) && ((z4 || (!z8 && i14 >= size)) && (z11 || (listAdapter.isEnabled(i14) && (z5 || (!z9 && i14 < size2)))))) {
-                                rect.left = i11;
-                                rect.right = i11 + i4;
-                                drawDivider(canvas, rect, i12);
+                            int i13 = i12 + 1;
+                            if (listAdapter.isEnabled(i12) && ((z4 || (!z8 && i13 >= size)) && (z11 || (listAdapter.isEnabled(i13) && (z5 || (!z9 && i13 < size2)))))) {
+                                rect.left = right;
+                                rect.right = right + i4;
+                                drawDivider(canvas, rect, i11);
                             } else if (z6) {
-                                rect.left = i11;
-                                rect.right = i11 + i4;
+                                rect.left = right;
+                                rect.right = right + i4;
                                 canvas.drawRect(rect, paint2);
                             }
                         }
                     } else {
                         i4 = i5;
                     }
-                    i12++;
+                    i11++;
                     i5 = i4;
                 }
-                int i15 = this.mRight + this.mScrollX;
-                if (z && i8 + childCount == i7 && i15 > i11) {
-                    rect.left = i11;
-                    rect.right = i15;
+                int i14 = this.mRight + this.mScrollX;
+                if (z && i8 + childCount == i7 && i14 > right) {
+                    rect.left = right;
+                    rect.right = i14;
                     drawOverscrollFooter(canvas, drawable2, rect);
                 }
             } else {
-                int i16 = this.mScrollX;
+                int i15 = this.mScrollX;
                 if (childCount > 0 && i6 != 0) {
-                    rect.left = i16;
+                    rect.left = i15;
                     rect.right = getChildAt(0).getLeft();
                     drawOverscrollHeader(canvas, drawable, rect);
                 }
-                int i17 = i6;
-                while (i17 < childCount) {
-                    int i18 = i8 + i17;
-                    boolean z12 = i18 < size;
-                    boolean z13 = i18 >= size2;
+                int i16 = i6;
+                while (i16 < childCount) {
+                    int i17 = i8 + i16;
+                    boolean z12 = i17 < size;
+                    boolean z13 = i17 >= size2;
                     if ((z4 || !z12) && (z5 || !z13)) {
-                        int left = getChildAt(i17).getLeft();
-                        if (z7 && left > i) {
-                            boolean z14 = i17 == i6;
-                            i3 = i16;
-                            int i19 = i18 - 1;
-                            if (listAdapter.isEnabled(i18) && ((z4 || (!z12 && i19 >= size)) && (z14 || (listAdapter.isEnabled(i19) && (z5 || (!z13 && i19 < size2)))))) {
+                        int left = getChildAt(i16).getLeft();
+                        if (!z7 || left <= i) {
+                            i3 = i15;
+                        } else {
+                            boolean z14 = i16 == i6;
+                            i3 = i15;
+                            int i18 = i17 - 1;
+                            if (listAdapter.isEnabled(i17) && ((z4 || (!z12 && i18 >= size)) && (z14 || (listAdapter.isEnabled(i18) && (z5 || (!z13 && i18 < size2)))))) {
                                 rect.left = left - i5;
                                 rect.right = left;
-                                drawDivider(canvas, rect, i17 - 1);
+                                drawDivider(canvas, rect, i16 - 1);
                             } else if (z6) {
                                 rect.left = left - i5;
                                 rect.right = left;
                                 canvas.drawRect(rect, paint2);
                             }
-                            i17++;
-                            i16 = i3;
                         }
                     }
-                    i3 = i16;
-                    i17++;
-                    i16 = i3;
+                    i16++;
+                    i15 = i3;
                 }
-                int i20 = i16;
-                if (childCount > 0 && i20 > 0) {
+                int i19 = i15;
+                if (childCount > 0 && i19 > 0) {
                     if (z) {
-                        int i21 = this.mRight;
-                        rect.left = i21;
-                        rect.right = i21 + i20;
+                        int i20 = this.mRight;
+                        rect.left = i20;
+                        rect.right = i20 + i19;
                         drawOverscrollFooter(canvas, drawable2, rect);
                     } else if (z7) {
                         rect.left = i9;
@@ -2572,7 +2955,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (semDragAndDropHorizontalListAnimator != null && !semDragAndDropHorizontalListAnimator.preDrawChild(canvas, view, j)) {
             return false;
         }
-        boolean drawChild = super.drawChild(canvas, view, j);
+        boolean zDrawChild = super.drawChild(canvas, view, j);
         if (this.mCachingActive && view.mCachingFailed) {
             this.mCachingActive = false;
         }
@@ -2580,7 +2963,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (semDragAndDropHorizontalListAnimator2 != null) {
             semDragAndDropHorizontalListAnimator2.postDrawChild(canvas, view, j);
         }
-        return drawChild;
+        return zDrawChild;
     }
 
     void drawDivider(Canvas canvas, Rect rect, int i) {
@@ -2682,7 +3065,7 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
             int childCount = getChildCount();
             int i4 = this.mFirstPosition;
             int i5 = Integer.MAX_VALUE;
-            int i6 = 0;
+            int left = 0;
             while (i3 < childCount) {
                 if (listAdapter.isEnabled(i4 + i3)) {
                     View childAt = getChildAt(i3);
@@ -2690,14 +3073,14 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
                     offsetDescendantRectToMyCoords(childAt, rect2);
                     int distance = getDistance(rect, rect2, i);
                     if (distance < i5) {
-                        i6 = childAt.getLeft();
+                        left = childAt.getLeft();
                         i2 = i3;
                         i5 = distance;
                     }
                 }
                 i3++;
             }
-            i3 = i6;
+            i3 = left;
         }
         if (i2 >= 0) {
             setSelectionFromStart(i2 + this.mFirstPosition, i3);
@@ -2754,15 +3137,15 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     View findViewInHeadersOrFooters(ArrayList<FixedViewInfo> arrayList, int i) {
-        View findViewById;
+        View viewFindViewById;
         if (arrayList == null) {
             return null;
         }
         int size = arrayList.size();
         for (int i2 = 0; i2 < size; i2++) {
             View view = arrayList.get(i2).view;
-            if (!view.isRootNamespace() && (findViewById = view.findViewById(i)) != null) {
-                return findViewById;
+            if (!view.isRootNamespace() && (viewFindViewById = view.findViewById(i)) != null) {
+                return viewFindViewById;
             }
         }
         return null;
@@ -2779,15 +3162,15 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     View findViewWithTagInHeadersOrFooters(ArrayList<FixedViewInfo> arrayList, Object obj) {
-        View findViewWithTag;
+        View viewFindViewWithTag;
         if (arrayList == null) {
             return null;
         }
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
             View view = arrayList.get(i).view;
-            if (!view.isRootNamespace() && (findViewWithTag = view.findViewWithTag(obj)) != null) {
-                return findViewWithTag;
+            if (!view.isRootNamespace() && (viewFindViewWithTag = view.findViewWithTag(obj)) != null) {
+                return viewFindViewWithTag;
             }
         }
         return null;
@@ -2804,15 +3187,15 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     View findViewByPredicateInHeadersOrFooters(ArrayList<FixedViewInfo> arrayList, Predicate<View> predicate, View view) {
-        View findViewByPredicate;
+        View viewFindViewByPredicate;
         if (arrayList == null) {
             return null;
         }
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
             View view2 = arrayList.get(i).view;
-            if (view2 != view && !view2.isRootNamespace() && (findViewByPredicate = view2.findViewByPredicate(predicate)) != null) {
-                return findViewByPredicate;
+            if (view2 != view && !view2.isRootNamespace() && (viewFindViewByPredicate = view2.findViewByPredicate(predicate)) != null) {
+                return viewFindViewByPredicate;
             }
         }
         return null;
@@ -2890,9 +3273,9 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
         if (!z2 || z) {
             return true;
         }
-        boolean isLayoutRequested = view.isLayoutRequested();
+        boolean zIsLayoutRequested = view.isLayoutRequested();
         if (!this.mFixedSizeItems) {
-            return isLayoutRequested;
+            return zIsLayoutRequested;
         }
         Object tag = view.getTag(268435456);
         if (tag == null) {
@@ -2923,22 +3306,22 @@ public class SemHorizontalListView extends SemHorizontalAbsListView {
     }
 
     private long getChildCountAndOrder(View view, byte[] bArr, int i) {
-        long j;
+        long childCountAndOrder;
         if (view == null) {
             return 0L;
         }
         if (!(view instanceof ViewGroup)) {
-            j = view.getVisibility() == i ? 1 << bArr[0] : 0L;
+            childCountAndOrder = view.getVisibility() == i ? 1 << bArr[0] : 0L;
             bArr[0] = (byte) (bArr[0] + 1);
-            return j;
+            return childCountAndOrder;
         }
         ViewGroup viewGroup = (ViewGroup) view;
-        j = viewGroup.getVisibility() == i ? 1 << bArr[0] : 0L;
+        childCountAndOrder = viewGroup.getVisibility() == i ? 1 << bArr[0] : 0L;
         bArr[0] = (byte) (bArr[0] + 1);
         for (int i2 = 0; i2 < viewGroup.getChildCount(); i2++) {
-            j |= getChildCountAndOrder(viewGroup.getChildAt(i2), bArr, i);
+            childCountAndOrder |= getChildCountAndOrder(viewGroup.getChildAt(i2), bArr, i);
         }
-        return j;
+        return childCountAndOrder;
     }
 
     private int getChildHeightSpec(View view) {

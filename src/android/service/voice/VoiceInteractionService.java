@@ -61,7 +61,7 @@ public class VoiceInteractionService extends Service {
     private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda2
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            VoiceInteractionService.this.lambda$new$1();
+            this.f$0.lambda$new$1();
         }
     };
 
@@ -193,12 +193,12 @@ public class VoiceInteractionService extends Service {
     }
 
     public static boolean isActiveService(Context context, ComponentName componentName) {
-        ComponentName unflattenFromString;
+        ComponentName componentNameUnflattenFromString;
         String string = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.VOICE_INTERACTION_SERVICE);
-        if (string == null || string.isEmpty() || (unflattenFromString = ComponentName.unflattenFromString(string)) == null) {
+        if (string == null || string.isEmpty() || (componentNameUnflattenFromString = ComponentName.unflattenFromString(string)) == null) {
             return false;
         }
-        return unflattenFromString.equals(componentName);
+        return componentNameUnflattenFromString.equals(componentName);
     }
 
     public void setDisabledShowContext(int i) {
@@ -240,9 +240,9 @@ public class VoiceInteractionService extends Service {
     }
 
     public void onReady() {
-        IVoiceInteractionManagerService asInterface = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
-        this.mSystemService = asInterface;
-        Objects.requireNonNull(asInterface);
+        IVoiceInteractionManagerService iVoiceInteractionManagerServiceAsInterface = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
+        this.mSystemService = iVoiceInteractionManagerServiceAsInterface;
+        Objects.requireNonNull(iVoiceInteractionManagerServiceAsInterface);
         try {
             this.mSystemService.asBinder().linkToDeath(this.mDeathRecipient, 0);
         } catch (RemoteException unused) {
@@ -491,16 +491,14 @@ public class VoiceInteractionService extends Service {
     }
 
     private final SoundTrigger.ModuleProperties getTestModuleProperties() {
-        SoundTrigger.ModuleProperties orElse = listModuleProperties().stream().filter(new Predicate() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda7
+        SoundTrigger.ModuleProperties modulePropertiesOrElse = listModuleProperties().stream().filter(new Predicate() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((SoundTrigger.ModuleProperties) obj).getSupportedModelArch().equals("injection");
-                return equals;
+                return ((SoundTrigger.ModuleProperties) obj).getSupportedModelArch().equals("injection");
             }
         }).findFirst().orElse(null);
-        if (orElse != null) {
-            return orElse;
+        if (modulePropertiesOrElse != null) {
+            return modulePropertiesOrElse;
         }
         throw new IllegalStateException("Fake ST HAL should always be available");
     }
@@ -515,7 +513,7 @@ public class VoiceInteractionService extends Service {
             this.mActiveDetectors.forEach(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda6
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    VoiceInteractionService.this.lambda$safelyShutdownAllHotwordDetectors$4(z, (HotwordDetector) obj);
+                    this.f$0.lambda$safelyShutdownAllHotwordDetectors$4(z, (HotwordDetector) obj);
                 }
             });
         }

@@ -12,13 +12,16 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Slog;
+import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+import android.util.proto.WireTypeMismatchException;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.util.XmlUtils;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.IllformedLocaleException;
 import java.util.Locale;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -302,10 +305,10 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         } else {
             int i5 = (i2 < 960 || i3 < 720) ? (i2 < 640 || i3 < 480) ? 2 : 3 : 4;
             z = i3 > 321 || i2 > 570;
-            r1 = (i2 * 3) / 5 >= i3 - 1;
+            z = (i2 * 3) / 5 >= i3 - 1;
             i4 = i5;
         }
-        if (!r1) {
+        if (!z) {
             i = (i & (-49)) | 16;
         }
         if (z) {
@@ -746,7 +749,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, boolean z, boolean z2) {
         WindowConfiguration windowConfiguration;
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         if (!z2) {
             protoOutputStream.write(1108101562369L, this.fontScale);
             protoOutputStream.write(1155346202626L, this.mcc);
@@ -775,7 +778,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         protoOutputStream.write(ConfigurationProto.SCREEN_WIDTH_DP, this.screenWidthDp);
         protoOutputStream.write(ConfigurationProto.SCREEN_HEIGHT_DP, this.screenHeightDp);
         protoOutputStream.write(1155346202646L, this.mGrammaticalGender);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
@@ -787,19 +790,304 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0245 A[Catch: IllformedLocaleException -> 0x026a, all -> 0x028f, TryCatch #7 {IllformedLocaleException -> 0x026a, blocks: (B:71:0x0225, B:73:0x0245, B:78:0x0266), top: B:70:0x0225, outer: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0266 A[Catch: IllformedLocaleException -> 0x026a, all -> 0x028f, TRY_LEAVE, TryCatch #7 {IllformedLocaleException -> 0x026a, blocks: (B:71:0x0225, B:73:0x0245, B:78:0x0266), top: B:70:0x0225, outer: #8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0301  */
+    /* JADX WARN: Removed duplicated region for block: B:127:0x0301  */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x0245 A[Catch: IllformedLocaleException -> 0x026a, all -> 0x028f, TryCatch #7 {IllformedLocaleException -> 0x026a, blocks: (B:91:0x0225, B:93:0x0245, B:94:0x0266), top: B:143:0x0225, outer: #8 }] */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x0266 A[Catch: IllformedLocaleException -> 0x026a, all -> 0x028f, TRY_LEAVE, TryCatch #7 {IllformedLocaleException -> 0x026a, blocks: (B:91:0x0225, B:93:0x0245, B:94:0x0266), top: B:143:0x0225, outer: #8 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void readFromProto(android.util.proto.ProtoInputStream r23, long r24) throws java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 842
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Configuration.readFromProto(android.util.proto.ProtoInputStream, long):void");
+    public void readFromProto(ProtoInputStream protoInputStream, long j) throws Throwable {
+        long j2;
+        long j3;
+        String str;
+        String str2;
+        String str3;
+        String str4;
+        int iIndexOf;
+        String str5;
+        String str6;
+        String str7;
+        String str8;
+        Configuration configuration = this;
+        ProtoInputStream protoInputStream2 = protoInputStream;
+        long jStart = protoInputStream.start(j);
+        ArrayList arrayList = new ArrayList();
+        while (true) {
+            try {
+                if (protoInputStream2.nextField() == -1) {
+                    long j4 = jStart;
+                    if (arrayList.size() > 0) {
+                        configuration.setLocales(new LocaleList((Locale[]) arrayList.toArray(new Locale[arrayList.size()])));
+                    }
+                    protoInputStream2.end(j4);
+                    return;
+                }
+                try {
+                    switch (protoInputStream2.getFieldNumber()) {
+                        case 1:
+                            j3 = jStart;
+                            configuration.fontScale = protoInputStream2.readFloat(1108101562369L);
+                            jStart = j3;
+                        case 2:
+                            j3 = jStart;
+                            configuration.mcc = protoInputStream2.readInt(1155346202626L);
+                            jStart = j3;
+                        case 3:
+                            j3 = jStart;
+                            protoInputStream2 = protoInputStream;
+                            configuration = this;
+                            try {
+                                configuration.mnc = protoInputStream2.readInt(1155346202627L);
+                                jStart = j3;
+                            } catch (Throwable th) {
+                                th = th;
+                                j2 = j3;
+                                if (arrayList.size() > 0) {
+                                    configuration.setLocales(new LocaleList((Locale[]) arrayList.toArray(new Locale[arrayList.size()])));
+                                }
+                                protoInputStream2.end(j2);
+                                throw th;
+                            }
+                        case 4:
+                            try {
+                                long jStart2 = protoInputStream2.start(2246267895812L);
+                                String string = "";
+                                String string2 = string;
+                                String string3 = string2;
+                                String string4 = string3;
+                                for (int i = -1; protoInputStream2.nextField() != i; i = -1) {
+                                    try {
+                                        int fieldNumber = protoInputStream2.getFieldNumber();
+                                        if (fieldNumber == 1) {
+                                            j3 = jStart;
+                                            string = protoInputStream2.readString(1138166333441L);
+                                        } else if (fieldNumber == 2) {
+                                            j3 = jStart;
+                                            string2 = protoInputStream2.readString(1138166333442L);
+                                        } else if (fieldNumber == 3) {
+                                            j3 = jStart;
+                                            string3 = protoInputStream2.readString(1138166333443L);
+                                        } else if (fieldNumber != 4) {
+                                            j3 = jStart;
+                                        } else {
+                                            j3 = jStart;
+                                            try {
+                                                string4 = protoInputStream2.readString(1138166333444L);
+                                            } catch (WireTypeMismatchException e) {
+                                                e = e;
+                                                str = string;
+                                                str2 = string2;
+                                                str3 = string3;
+                                                str4 = string4;
+                                                try {
+                                                    throw e;
+                                                } catch (Throwable th2) {
+                                                    th = th2;
+                                                    try {
+                                                        protoInputStream2.end(jStart2);
+                                                        try {
+                                                            Locale localeBuild = new Locale.Builder().setLanguage(str).setRegion(str2).setVariant(str3).setScript(str4).build();
+                                                            iIndexOf = arrayList.indexOf(localeBuild);
+                                                            if (iIndexOf == -1) {
+                                                                Slog.wtf(TAG, "Repeated locale (" + arrayList.get(iIndexOf) + ") found when trying to add: " + localeBuild.toString());
+                                                            } else {
+                                                                arrayList.add(localeBuild);
+                                                            }
+                                                        } catch (IllformedLocaleException unused) {
+                                                            Slog.e(TAG, "readFromProto error building locale with: language-" + str + ";country-" + str2 + ";variant-" + str3 + ";script-" + str4);
+                                                        }
+                                                        throw th;
+                                                    } catch (Throwable th3) {
+                                                        th = th3;
+                                                        configuration = this;
+                                                        protoInputStream2 = protoInputStream;
+                                                        j2 = j3;
+                                                        if (arrayList.size() > 0) {
+                                                        }
+                                                        protoInputStream2.end(j2);
+                                                        throw th;
+                                                    }
+                                                }
+                                            } catch (Throwable th4) {
+                                                th = th4;
+                                                str = string;
+                                                str2 = string2;
+                                                str3 = string3;
+                                                str4 = string4;
+                                                protoInputStream2.end(jStart2);
+                                                Locale localeBuild2 = new Locale.Builder().setLanguage(str).setRegion(str2).setVariant(str3).setScript(str4).build();
+                                                iIndexOf = arrayList.indexOf(localeBuild2);
+                                                if (iIndexOf == -1) {
+                                                }
+                                                throw th;
+                                            }
+                                        }
+                                        jStart = j3;
+                                    } catch (WireTypeMismatchException e2) {
+                                        e = e2;
+                                        j3 = jStart;
+                                    } catch (Throwable th5) {
+                                        th = th5;
+                                        j3 = jStart;
+                                    }
+                                }
+                                j3 = jStart;
+                                try {
+                                    protoInputStream2.end(jStart2);
+                                    try {
+                                        str5 = string;
+                                        try {
+                                            str6 = string2;
+                                            try {
+                                                str7 = string3;
+                                                try {
+                                                    str8 = string4;
+                                                    try {
+                                                        Locale localeBuild3 = new Locale.Builder().setLanguage(str5).setRegion(str6).setVariant(str7).setScript(str8).build();
+                                                        int iIndexOf2 = arrayList.indexOf(localeBuild3);
+                                                        if (iIndexOf2 != -1) {
+                                                            Slog.wtf(TAG, "Repeated locale (" + arrayList.get(iIndexOf2) + ") found when trying to add: " + localeBuild3.toString());
+                                                        } else {
+                                                            arrayList.add(localeBuild3);
+                                                        }
+                                                    } catch (IllformedLocaleException unused2) {
+                                                        Slog.e(TAG, "readFromProto error building locale with: language-" + str5 + ";country-" + str6 + ";variant-" + str7 + ";script-" + str8);
+                                                        configuration = this;
+                                                        jStart = j3;
+                                                    }
+                                                } catch (IllformedLocaleException unused3) {
+                                                    str8 = string4;
+                                                    Slog.e(TAG, "readFromProto error building locale with: language-" + str5 + ";country-" + str6 + ";variant-" + str7 + ";script-" + str8);
+                                                    configuration = this;
+                                                    jStart = j3;
+                                                }
+                                            } catch (IllformedLocaleException unused4) {
+                                                str7 = string3;
+                                                str8 = string4;
+                                                Slog.e(TAG, "readFromProto error building locale with: language-" + str5 + ";country-" + str6 + ";variant-" + str7 + ";script-" + str8);
+                                                configuration = this;
+                                                jStart = j3;
+                                            }
+                                        } catch (IllformedLocaleException unused5) {
+                                            str6 = string2;
+                                            str7 = string3;
+                                            str8 = string4;
+                                            Slog.e(TAG, "readFromProto error building locale with: language-" + str5 + ";country-" + str6 + ";variant-" + str7 + ";script-" + str8);
+                                            configuration = this;
+                                            jStart = j3;
+                                        }
+                                    } catch (IllformedLocaleException unused6) {
+                                        str5 = string;
+                                    }
+                                    configuration = this;
+                                    jStart = j3;
+                                } catch (Throwable th6) {
+                                    th = th6;
+                                    configuration = this;
+                                    j2 = j3;
+                                    if (arrayList.size() > 0) {
+                                    }
+                                    protoInputStream2.end(j2);
+                                    throw th;
+                                }
+                            } catch (Throwable th7) {
+                                th = th7;
+                                j3 = jStart;
+                            }
+                            break;
+                        case 5:
+                            configuration.screenLayout = protoInputStream2.readInt(1155346202629L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 6:
+                            configuration.colorMode = protoInputStream2.readInt(1155346202630L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 7:
+                            configuration.touchscreen = protoInputStream2.readInt(1155346202631L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 8:
+                            configuration.keyboard = protoInputStream2.readInt(1155346202632L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 9:
+                            configuration.keyboardHidden = protoInputStream2.readInt(ConfigurationProto.KEYBOARD_HIDDEN);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 10:
+                            configuration.hardKeyboardHidden = protoInputStream2.readInt(1155346202634L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 11:
+                            configuration.navigation = protoInputStream2.readInt(ConfigurationProto.NAVIGATION);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 12:
+                            configuration.navigationHidden = protoInputStream2.readInt(ConfigurationProto.NAVIGATION_HIDDEN);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 13:
+                            configuration.orientation = protoInputStream2.readInt(1155346202637L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 14:
+                            configuration.uiMode = protoInputStream2.readInt(ConfigurationProto.UI_MODE);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 15:
+                            configuration.screenWidthDp = protoInputStream2.readInt(ConfigurationProto.SCREEN_WIDTH_DP);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 16:
+                            configuration.screenHeightDp = protoInputStream2.readInt(ConfigurationProto.SCREEN_HEIGHT_DP);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 17:
+                            configuration.smallestScreenWidthDp = protoInputStream2.readInt(ConfigurationProto.SMALLEST_SCREEN_WIDTH_DP);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 18:
+                            configuration.densityDpi = protoInputStream2.readInt(ConfigurationProto.DENSITY_DPI);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 19:
+                            configuration.windowConfiguration.readFromProto(protoInputStream2, 1146756268051L);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 20:
+                            try {
+                                configuration.setLocales(LocaleList.forLanguageTags(protoInputStream2.readString(1138166333460L)));
+                            } catch (Exception e3) {
+                                Slog.e(TAG, "error parsing locale list in configuration.", e3);
+                            }
+                            j3 = jStart;
+                            jStart = j3;
+                        case 21:
+                            configuration.fontWeightAdjustment = protoInputStream2.readInt(ConfigurationProto.FONT_WEIGHT_ADJUSTMENT);
+                            j3 = jStart;
+                            jStart = j3;
+                        case 22:
+                            configuration.mGrammaticalGender = protoInputStream2.readInt(1155346202646L);
+                            j3 = jStart;
+                            jStart = j3;
+                        default:
+                            j3 = jStart;
+                            jStart = j3;
+                    }
+                } catch (Throwable th8) {
+                    th = th8;
+                    j3 = jStart;
+                }
+            } catch (Throwable th9) {
+                th = th9;
+                j2 = jStart;
+                if (arrayList.size() > 0) {
+                }
+                protoInputStream2.end(j2);
+                throw th;
+            }
+        }
     }
 
     public void writeResConfigToProto(ProtoOutputStream protoOutputStream, long j, DisplayMetrics displayMetrics) {
@@ -812,12 +1100,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             i = displayMetrics.heightPixels;
             i2 = displayMetrics.widthPixels;
         }
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         dumpDebug(protoOutputStream, 1146756268033L);
         protoOutputStream.write(1155346202626L, Build.VERSION.RESOURCES_SDK_INT);
         protoOutputStream.write(1155346202627L, i);
         protoOutputStream.write(1155346202628L, i2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static String uiModeToString(int i) {
@@ -1393,9 +1681,9 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         LocaleList localeList = (LocaleList) parcel.readTypedObject(LocaleList.CREATOR);
         this.mLocaleList = localeList;
         this.locale = localeList.get(0);
-        int readInt = parcel.readInt();
-        this.userSetLocale = (readInt & 1) != 0;
-        this.rilSetLocale = (readInt & 2) != 0;
+        int i = parcel.readInt();
+        this.userSetLocale = (i & 1) != 0;
+        this.rilSetLocale = (i & 2) != 0;
         this.userSetLocale = parcel.readInt() == 1;
         this.touchscreen = parcel.readInt();
         this.keyboard = parcel.readInt();
@@ -1469,25 +1757,25 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             if (configuration.mLocaleList.isEmpty()) {
                 return -1;
             }
-            int min = Math.min(this.mLocaleList.size(), configuration.mLocaleList.size());
-            for (int i3 = 0; i3 < min; i3++) {
+            int iMin = Math.min(this.mLocaleList.size(), configuration.mLocaleList.size());
+            for (int i3 = 0; i3 < iMin; i3++) {
                 Locale locale = this.mLocaleList.get(i3);
                 Locale locale2 = configuration.mLocaleList.get(i3);
-                int compareTo = locale.getLanguage().compareTo(locale2.getLanguage());
-                if (compareTo != 0) {
-                    return compareTo;
+                int iCompareTo = locale.getLanguage().compareTo(locale2.getLanguage());
+                if (iCompareTo != 0) {
+                    return iCompareTo;
                 }
-                int compareTo2 = locale.getCountry().compareTo(locale2.getCountry());
-                if (compareTo2 != 0) {
-                    return compareTo2;
+                int iCompareTo2 = locale.getCountry().compareTo(locale2.getCountry());
+                if (iCompareTo2 != 0) {
+                    return iCompareTo2;
                 }
-                int compareTo3 = locale.getVariant().compareTo(locale2.getVariant());
-                if (compareTo3 != 0) {
-                    return compareTo3;
+                int iCompareTo3 = locale.getVariant().compareTo(locale2.getVariant());
+                if (iCompareTo3 != 0) {
+                    return iCompareTo3;
                 }
-                int compareTo4 = locale.toLanguageTag().compareTo(locale2.toLanguageTag());
-                if (compareTo4 != 0) {
-                    return compareTo4;
+                int iCompareTo4 = locale.toLanguageTag().compareTo(locale2.toLanguageTag());
+                if (iCompareTo4 != 0) {
+                    return iCompareTo4;
                 }
             }
             int size = this.mLocaleList.size() - configuration.mLocaleList.size();
@@ -1559,9 +1847,9 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         if (i19 != 0) {
             return i19;
         }
-        int compareTo5 = this.windowConfiguration.compareTo(configuration.windowConfiguration);
-        if (compareTo5 != 0) {
-            return compareTo5;
+        int iCompareTo22 = this.windowConfiguration.compareTo(configuration.windowConfiguration);
+        if (iCompareTo22 != 0) {
+            return iCompareTo22;
         }
         int i20 = this.fontWeightAdjustment - configuration.fontWeightAdjustment;
         if (i20 != 0) {
@@ -1749,9 +2037,9 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             }
         }
         if (!configuration.mLocaleList.isEmpty()) {
-            String localesToResourceQualifier = localesToResourceQualifier(configuration.mLocaleList);
-            if (!localesToResourceQualifier.isEmpty()) {
-                arrayList.add(localesToResourceQualifier);
+            String strLocalesToResourceQualifier = localesToResourceQualifier(configuration.mLocaleList);
+            if (!strLocalesToResourceQualifier.isEmpty()) {
+                arrayList.add(strLocalesToResourceQualifier);
             }
         }
         int i3 = configuration.mGrammaticalGender;
@@ -2091,9 +2379,9 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         configuration.fontScale = Float.intBitsToFloat(XmlUtils.readIntAttribute(xmlPullParser, XML_ATTR_FONT_SCALE, 0));
         configuration.mcc = XmlUtils.readIntAttribute(xmlPullParser, "mcc", 0);
         configuration.mnc = XmlUtils.readIntAttribute(xmlPullParser, "mnc", 0);
-        LocaleList forLanguageTags = LocaleList.forLanguageTags(XmlUtils.readStringAttribute(xmlPullParser, XML_ATTR_LOCALES));
-        configuration.mLocaleList = forLanguageTags;
-        configuration.locale = forLanguageTags.get(0);
+        LocaleList localeListForLanguageTags = LocaleList.forLanguageTags(XmlUtils.readStringAttribute(xmlPullParser, XML_ATTR_LOCALES));
+        configuration.mLocaleList = localeListForLanguageTags;
+        configuration.locale = localeListForLanguageTags.get(0);
         configuration.touchscreen = XmlUtils.readIntAttribute(xmlPullParser, XML_ATTR_TOUCHSCREEN, 0);
         configuration.keyboard = XmlUtils.readIntAttribute(xmlPullParser, "key", 0);
         configuration.keyboardHidden = XmlUtils.readIntAttribute(xmlPullParser, XML_ATTR_KEYBOARD_HIDDEN, 0);

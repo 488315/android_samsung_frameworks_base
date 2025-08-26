@@ -81,20 +81,20 @@ public final class SessionConfiguration implements Parcelable {
         this.mExecutor = null;
         this.mInputConfig = null;
         this.mSessionParameters = null;
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        boolean readBoolean = parcel.readBoolean();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        boolean z = parcel.readBoolean();
         ArrayList arrayList = new ArrayList();
         parcel.readTypedList(arrayList, OutputConfiguration.CREATOR);
         if (parcel.readBoolean()) {
             new CameraMetadataNative().readFromParcel(parcel);
         }
-        if (readInt2 > 0 && readInt3 > 0 && readInt4 != -1) {
-            this.mInputConfig = new InputConfiguration(readInt2, readInt3, readInt4, readBoolean);
+        if (i2 > 0 && i3 > 0 && i4 != -1) {
+            this.mInputConfig = new InputConfiguration(i2, i3, i4, z);
         }
-        this.mSessionType = readInt;
+        this.mSessionType = i;
         this.mOutputConfigurations = arrayList;
     }
 

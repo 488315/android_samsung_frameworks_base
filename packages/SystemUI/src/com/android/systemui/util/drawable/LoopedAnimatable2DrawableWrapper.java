@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import androidx.appcompat.graphics.drawable.DrawableWrapperCompat;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompat implements Animatable2 {
     private final Animatable2 animatable2;
@@ -15,7 +14,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class LoopedCallback extends Animatable2.AnimationCallback {
         /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Animatable2.AnimationCallback
@@ -45,7 +42,6 @@ public final class LoopedAnimatable2DrawableWrapper extends DrawableWrapperCompa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class LoopedDrawableState extends Drawable.ConstantState {
         private final Drawable.ConstantState nestedState;
 

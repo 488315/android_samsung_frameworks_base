@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ComplicationLayoutParams extends ViewGroup.LayoutParams {
     public static final Map INVALID_DIRECTIONS;
@@ -19,12 +18,12 @@ public class ComplicationLayoutParams extends ViewGroup.LayoutParams {
     public final int mWeight;
 
     static {
-        HashMap hashMap = new HashMap();
-        INVALID_DIRECTIONS = hashMap;
-        hashMap.put(2, 2);
-        hashMap.put(1, 1);
-        hashMap.put(4, 4);
-        hashMap.put(8, 8);
+        HashMap map = new HashMap();
+        INVALID_DIRECTIONS = map;
+        map.put(2, 2);
+        map.put(1, 1);
+        map.put(4, 4);
+        map.put(8, 8);
     }
 
     public ComplicationLayoutParams(int i, int i2, int i3, int i4, int i5) {
@@ -63,8 +62,8 @@ public class ComplicationLayoutParams extends ViewGroup.LayoutParams {
             this.mPosition = i3;
             for (int i10 = 1; i10 <= 8; i10 <<= 1) {
                 if ((i3 & i10) == i10) {
-                    HashMap hashMap = (HashMap) INVALID_DIRECTIONS;
-                    if (hashMap.containsKey(Integer.valueOf(i10)) && (((Integer) hashMap.get(Integer.valueOf(i10))).intValue() & i4) != 0) {
+                    HashMap map = (HashMap) INVALID_DIRECTIONS;
+                    if (map.containsKey(Integer.valueOf(i10)) && (((Integer) map.get(Integer.valueOf(i10))).intValue() & i4) != 0) {
                         throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i4, "invalid direction:"));
                     }
                 }

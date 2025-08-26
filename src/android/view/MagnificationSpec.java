@@ -73,11 +73,11 @@ public class MagnificationSpec implements Parcelable {
 
     public int hashCode() {
         float f = this.scale;
-        int floatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
+        int iFloatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
         float f2 = this.offsetX;
-        int floatToIntBits2 = (floatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
+        int iFloatToIntBits2 = (iFloatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
         float f3 = this.offsetY;
-        return floatToIntBits2 + (f3 != 0.0f ? Float.floatToIntBits(f3) : 0);
+        return iFloatToIntBits2 + (f3 != 0.0f ? Float.floatToIntBits(f3) : 0);
     }
 
     public String toString() {

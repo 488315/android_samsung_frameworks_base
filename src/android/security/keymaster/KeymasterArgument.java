@@ -10,27 +10,27 @@ abstract class KeymasterArgument implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public KeymasterArgument createFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
-            int tagType = KeymasterDefs.getTagType(readInt);
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
+            int tagType = KeymasterDefs.getTagType(i);
             if (tagType != Integer.MIN_VALUE && tagType != -1879048192) {
                 if (tagType != -1610612736) {
                     if (tagType == 268435456 || tagType == 536870912 || tagType == 805306368 || tagType == 1073741824) {
-                        return new KeymasterIntArgument(readInt, parcel);
+                        return new KeymasterIntArgument(i, parcel);
                     }
                     if (tagType != 1342177280) {
                         if (tagType == 1610612736) {
-                            return new KeymasterDateArgument(readInt, parcel);
+                            return new KeymasterDateArgument(i, parcel);
                         }
                         if (tagType == 1879048192) {
-                            return new KeymasterBooleanArgument(readInt, parcel);
+                            return new KeymasterBooleanArgument(i, parcel);
                         }
-                        throw new ParcelFormatException("Bad tag: " + readInt + " at " + dataPosition);
+                        throw new ParcelFormatException("Bad tag: " + i + " at " + iDataPosition);
                     }
                 }
-                return new KeymasterLongArgument(readInt, parcel);
+                return new KeymasterLongArgument(i, parcel);
             }
-            return new KeymasterBlobArgument(readInt, parcel);
+            return new KeymasterBlobArgument(i, parcel);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

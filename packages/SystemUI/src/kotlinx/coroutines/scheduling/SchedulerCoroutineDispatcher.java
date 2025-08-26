@@ -5,7 +5,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.ExecutorCoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SchedulerCoroutineDispatcher extends ExecutorCoroutineDispatcher {
     public final CoroutineScheduler coroutineScheduler;
@@ -14,7 +13,7 @@ public class SchedulerCoroutineDispatcher extends ExecutorCoroutineDispatcher {
         this(0, 0, 0L, null, 15, null);
     }
 
-    public void close() {
+    public void close() throws InterruptedException {
         this.coroutineScheduler.close();
     }
 

@@ -153,27 +153,27 @@ public class ASN1Integer extends ASN1Primitive {
 
     static int intValue(byte[] bArr, int i, int i2) {
         int length = bArr.length;
-        int max = Math.max(i, length - 4);
-        int i3 = i2 & bArr[max];
+        int iMax = Math.max(i, length - 4);
+        int i3 = i2 & bArr[iMax];
         while (true) {
-            max++;
-            if (max >= length) {
+            iMax++;
+            if (iMax >= length) {
                 return i3;
             }
-            i3 = (i3 << 8) | (bArr[max] & 255);
+            i3 = (i3 << 8) | (bArr[iMax] & 255);
         }
     }
 
     static long longValue(byte[] bArr, int i, int i2) {
         int length = bArr.length;
-        int max = Math.max(i, length - 8);
-        long j = i2 & bArr[max];
+        int iMax = Math.max(i, length - 8);
+        long j = i2 & bArr[iMax];
         while (true) {
-            max++;
-            if (max >= length) {
+            iMax++;
+            if (iMax >= length) {
                 return j;
             }
-            j = (j << 8) | (bArr[max] & 255);
+            j = (j << 8) | (bArr[iMax] & 255);
         }
     }
 

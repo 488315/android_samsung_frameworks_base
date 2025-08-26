@@ -4,7 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RightSheetDelegate extends SheetDelegate {
     public final SideSheetBehavior sheetBehavior;
@@ -80,18 +79,18 @@ public final class RightSheetDelegate extends SheetDelegate {
         if (Math.abs(f) <= Math.abs(f2)) {
             return false;
         }
-        float abs = Math.abs(f);
+        float fAbs = Math.abs(f);
         this.sheetBehavior.getClass();
-        return abs > ((float) 500);
+        return fAbs > ((float) 500);
     }
 
     @Override // com.google.android.material.sidesheet.SheetDelegate
     public final boolean shouldHide(float f, View view) {
         float right = view.getRight();
         SideSheetBehavior sideSheetBehavior = this.sheetBehavior;
-        float abs = Math.abs((f * sideSheetBehavior.hideFriction) + right);
+        float fAbs = Math.abs((f * sideSheetBehavior.hideFriction) + right);
         sideSheetBehavior.getClass();
-        return abs > 0.5f;
+        return fAbs > 0.5f;
     }
 
     @Override // com.google.android.material.sidesheet.SheetDelegate

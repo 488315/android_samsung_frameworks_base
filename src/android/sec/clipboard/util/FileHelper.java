@@ -1,10 +1,16 @@
 package android.sec.clipboard.util;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.data.ClipboardConstants;
+import android.system.ErrnoException;
 import android.text.Html;
+import android.util.AtomicFile;
+import android.util.Base64;
+import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.content.clipboard.data.SemHtmlClipData;
 import com.samsung.android.content.clipboard.data.SemUriClipData;
 import java.io.File;
@@ -14,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
 
 /* loaded from: classes3.dex */
@@ -37,7 +44,7 @@ public class FileHelper {
         return instance;
     }
 
-    public boolean fileCopy(File file, File file2) {
+    public boolean fileCopy(File file, File file2) throws IOException, ErrnoException {
         FileInputStream fileInputStream;
         FileOutputStream fileOutputStream;
         try {
@@ -138,291 +145,351 @@ public class FileHelper {
     /* JADX WARN: Type inference failed for: r10v20 */
     /* JADX WARN: Type inference failed for: r10v21 */
     /* JADX WARN: Type inference failed for: r10v5, types: [java.io.FileOutputStream] */
-    public boolean fileCopy(ParcelFileDescriptor parcelFileDescriptor, File file) {
+    public boolean fileCopy(ParcelFileDescriptor parcelFileDescriptor, File file) throws Throwable {
         Throwable th;
         ?? r10;
         FileInputStream fileInputStream;
-        FileChannel fileChannel;
+        FileChannel channel;
         IOException iOException;
         FileOutputStream fileOutputStream;
         FileNotFoundException fileNotFoundException;
         FileOutputStream fileOutputStream2;
-        FileOutputStream fileOutputStream3;
-        FileChannel channel;
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        FileChannel fileChannel2 = null;
+        FileChannel fileChannel = null;
         try {
             try {
                 file.createNewFile();
                 FileUtils.setPermissions(file.getAbsolutePath(), 509, -1, -1);
                 fileInputStream = new FileInputStream(fileDescriptor);
                 try {
-                    fileOutputStream3 = new FileOutputStream(file);
+                    FileOutputStream fileOutputStream3 = new FileOutputStream(file);
                     try {
-                        channel = fileInputStream.getChannel();
+                        FileChannel channel2 = fileInputStream.getChannel();
                         try {
-                            fileChannel = fileOutputStream3.getChannel();
-                        } catch (FileNotFoundException e) {
-                            fileNotFoundException = e;
-                            fileChannel = null;
-                        } catch (IOException e2) {
-                            iOException = e2;
-                            fileChannel = null;
-                        } catch (Throwable th2) {
-                            th = th2;
-                            fileChannel = null;
+                            channel = fileOutputStream3.getChannel();
+                            try {
+                                channel2.transferTo(0L, channel2.size(), channel);
+                                if (channel2 != null) {
+                                    try {
+                                        channel2.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (channel != null) {
+                                    channel.close();
+                                }
+                                fileInputStream.close();
+                                fileOutputStream3.close();
+                                parcelFileDescriptor.close();
+                                return true;
+                            } catch (FileNotFoundException e2) {
+                                fileNotFoundException = e2;
+                                fileChannel = channel2;
+                                fileOutputStream2 = fileOutputStream3;
+                                fileNotFoundException.printStackTrace();
+                                if (fileChannel != null) {
+                                    try {
+                                        fileChannel.close();
+                                    } catch (IOException e3) {
+                                        e3.printStackTrace();
+                                        return false;
+                                    }
+                                }
+                                if (channel != null) {
+                                    channel.close();
+                                }
+                                if (fileInputStream != null) {
+                                    fileInputStream.close();
+                                }
+                                if (fileOutputStream2 != null) {
+                                    fileOutputStream2.close();
+                                }
+                                parcelFileDescriptor.close();
+                                return false;
+                            } catch (IOException e4) {
+                                iOException = e4;
+                                fileChannel = channel2;
+                                fileOutputStream = fileOutputStream3;
+                                iOException.printStackTrace();
+                                if (fileChannel != null) {
+                                    try {
+                                        fileChannel.close();
+                                    } catch (IOException e5) {
+                                        e5.printStackTrace();
+                                        return false;
+                                    }
+                                }
+                                if (channel != null) {
+                                    channel.close();
+                                }
+                                if (fileInputStream != null) {
+                                    fileInputStream.close();
+                                }
+                                if (fileOutputStream != null) {
+                                    fileOutputStream.close();
+                                }
+                                parcelFileDescriptor.close();
+                                return false;
+                            } catch (Throwable th2) {
+                                th = th2;
+                                fileChannel = channel2;
+                                r10 = fileOutputStream3;
+                                if (fileChannel != null) {
+                                    try {
+                                        fileChannel.close();
+                                    } catch (IOException e6) {
+                                        e6.printStackTrace();
+                                        throw th;
+                                    }
+                                }
+                                if (channel != null) {
+                                    channel.close();
+                                }
+                                if (fileInputStream != null) {
+                                    fileInputStream.close();
+                                }
+                                if (r10 != 0) {
+                                    r10.close();
+                                }
+                                parcelFileDescriptor.close();
+                                throw th;
+                            }
+                        } catch (FileNotFoundException e7) {
+                            fileNotFoundException = e7;
+                            channel = null;
+                        } catch (IOException e8) {
+                            iOException = e8;
+                            channel = null;
+                        } catch (Throwable th3) {
+                            th = th3;
+                            channel = null;
                         }
-                    } catch (FileNotFoundException e3) {
-                        fileNotFoundException = e3;
-                        fileChannel = null;
+                    } catch (FileNotFoundException e9) {
+                        fileNotFoundException = e9;
+                        channel = null;
                         fileOutputStream2 = fileOutputStream3;
-                    } catch (IOException e4) {
-                        iOException = e4;
-                        fileChannel = null;
+                    } catch (IOException e10) {
+                        iOException = e10;
+                        channel = null;
                         fileOutputStream = fileOutputStream3;
-                    } catch (Throwable th3) {
-                        th = th3;
-                        fileChannel = null;
+                    } catch (Throwable th4) {
+                        th = th4;
+                        channel = null;
                         r10 = fileOutputStream3;
                     }
-                } catch (FileNotFoundException e5) {
-                    fileNotFoundException = e5;
+                } catch (FileNotFoundException e11) {
+                    fileNotFoundException = e11;
                     fileOutputStream2 = null;
-                    fileChannel = null;
-                } catch (IOException e6) {
-                    iOException = e6;
+                    channel = null;
+                } catch (IOException e12) {
+                    iOException = e12;
                     fileOutputStream = null;
-                    fileChannel = null;
-                } catch (Throwable th4) {
-                    th = th4;
+                    channel = null;
+                } catch (Throwable th5) {
+                    th = th5;
                     r10 = 0;
-                    fileChannel = null;
+                    channel = null;
                 }
-            } catch (FileNotFoundException e7) {
-                fileNotFoundException = e7;
-                fileOutputStream2 = null;
-                fileInputStream = null;
-                fileChannel = null;
-            } catch (IOException e8) {
-                iOException = e8;
-                fileOutputStream = null;
-                fileInputStream = null;
-                fileChannel = null;
-            } catch (Throwable th5) {
-                th = th5;
-                r10 = 0;
-                fileInputStream = null;
-                fileChannel = null;
-            }
-            try {
-                channel.transferTo(0L, channel.size(), fileChannel);
-                if (channel != null) {
-                    try {
-                        channel.close();
-                    } catch (IOException e9) {
-                        e9.printStackTrace();
-                    }
-                }
-                if (fileChannel != null) {
-                    fileChannel.close();
-                }
-                fileInputStream.close();
-                fileOutputStream3.close();
-                parcelFileDescriptor.close();
-                return true;
-            } catch (FileNotFoundException e10) {
-                fileNotFoundException = e10;
-                fileChannel2 = channel;
-                fileOutputStream2 = fileOutputStream3;
-                fileNotFoundException.printStackTrace();
-                if (fileChannel2 != null) {
-                    try {
-                        fileChannel2.close();
-                    } catch (IOException e11) {
-                        e11.printStackTrace();
-                        return false;
-                    }
-                }
-                if (fileChannel != null) {
-                    fileChannel.close();
-                }
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-                if (fileOutputStream2 != null) {
-                    fileOutputStream2.close();
-                }
-                parcelFileDescriptor.close();
-                return false;
-            } catch (IOException e12) {
-                iOException = e12;
-                fileChannel2 = channel;
-                fileOutputStream = fileOutputStream3;
-                iOException.printStackTrace();
-                if (fileChannel2 != null) {
-                    try {
-                        fileChannel2.close();
-                    } catch (IOException e13) {
-                        e13.printStackTrace();
-                        return false;
-                    }
-                }
-                if (fileChannel != null) {
-                    fileChannel.close();
-                }
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-                parcelFileDescriptor.close();
-                return false;
             } catch (Throwable th6) {
                 th = th6;
-                fileChannel2 = channel;
-                r10 = fileOutputStream3;
-                if (fileChannel2 != null) {
-                    try {
-                        fileChannel2.close();
-                    } catch (IOException e14) {
-                        e14.printStackTrace();
-                        throw th;
-                    }
-                }
-                if (fileChannel != null) {
-                    fileChannel.close();
-                }
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-                if (r10 != 0) {
-                    r10.close();
-                }
-                parcelFileDescriptor.close();
-                throw th;
+                r10 = fileDescriptor;
             }
+        } catch (FileNotFoundException e13) {
+            fileNotFoundException = e13;
+            fileOutputStream2 = null;
+            fileInputStream = null;
+            channel = null;
+        } catch (IOException e14) {
+            iOException = e14;
+            fileOutputStream = null;
+            fileInputStream = null;
+            channel = null;
         } catch (Throwable th7) {
             th = th7;
-            r10 = fileDescriptor;
+            r10 = 0;
+            fileInputStream = null;
+            channel = null;
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x006b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x008a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x006b A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x008a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:52:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean saveObjectFile(java.io.File r7, java.lang.Object r8) {
-        /*
-            r6 = this;
-            java.lang.String r6 = "close : "
-            java.lang.String r0 = "saveObjectFile~IOException :"
-            r1 = 0
-            java.lang.String r2 = "FileHelper"
-            if (r8 != 0) goto L11
-            java.lang.String r6 = "obj == null"
-            android.sec.clipboard.util.Log.secI(r2, r6)
-            return r1
-        L11:
-            android.util.AtomicFile r3 = new android.util.AtomicFile
-            r3.<init>(r7)
-            r7 = 0
-            java.io.FileOutputStream r4 = r3.startWrite()     // Catch: java.lang.Throwable -> L48 java.io.IOException -> L4c
-            java.io.ObjectOutputStream r5 = new java.io.ObjectOutputStream     // Catch: java.io.IOException -> L45 java.lang.Throwable -> L48
-            r5.<init>(r4)     // Catch: java.io.IOException -> L45 java.lang.Throwable -> L48
-            r5.writeObject(r8)     // Catch: java.io.IOException -> L43 java.lang.Throwable -> L87
-            r3.finishWrite(r4)     // Catch: java.io.IOException -> L43 java.lang.Throwable -> L87
-            r5.close()     // Catch: java.io.IOException -> L2a
-            goto L41
-        L2a:
-            r7 = move-exception
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            r8.<init>(r6)
-            java.lang.String r6 = r7.getMessage()
-            r8.append(r6)
-            java.lang.String r6 = r8.toString()
-            android.sec.clipboard.util.Log.secD(r2, r6)
-            r7.printStackTrace()
-        L41:
-            r1 = 1
-            goto L86
-        L43:
-            r7 = move-exception
-            goto L50
-        L45:
-            r8 = move-exception
-            r5 = r7
-            goto L4f
-        L48:
-            r8 = move-exception
-            r5 = r7
-            r7 = r8
-            goto L88
-        L4c:
-            r8 = move-exception
-            r4 = r7
-            r5 = r4
-        L4f:
-            r7 = r8
-        L50:
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L87
-            r8.<init>(r0)     // Catch: java.lang.Throwable -> L87
-            java.lang.String r0 = r7.getMessage()     // Catch: java.lang.Throwable -> L87
-            r8.append(r0)     // Catch: java.lang.Throwable -> L87
-            java.lang.String r8 = r8.toString()     // Catch: java.lang.Throwable -> L87
-            android.sec.clipboard.util.Log.secD(r2, r8)     // Catch: java.lang.Throwable -> L87
-            r7.printStackTrace()     // Catch: java.lang.Throwable -> L87
-            r3.failWrite(r4)     // Catch: java.lang.Throwable -> L87
-            if (r5 == 0) goto L86
-            r5.close()     // Catch: java.io.IOException -> L6f
-            goto L86
-        L6f:
-            r7 = move-exception
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            r8.<init>(r6)
-            java.lang.String r6 = r7.getMessage()
-            r8.append(r6)
-            java.lang.String r6 = r8.toString()
-            android.sec.clipboard.util.Log.secD(r2, r6)
-            r7.printStackTrace()
-        L86:
-            return r1
-        L87:
-            r7 = move-exception
-        L88:
-            if (r5 == 0) goto La5
-            r5.close()     // Catch: java.io.IOException -> L8e
-            goto La5
-        L8e:
-            r8 = move-exception
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r6)
-            java.lang.String r6 = r8.getMessage()
-            r0.append(r6)
-            java.lang.String r6 = r0.toString()
-            android.sec.clipboard.util.Log.secD(r2, r6)
-            r8.printStackTrace()
-        La5:
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.FileHelper.saveObjectFile(java.io.File, java.lang.Object):boolean");
+    public boolean saveObjectFile(File file, Object obj) throws Throwable {
+        FileOutputStream fileOutputStreamStartWrite;
+        ObjectOutputStream objectOutputStream;
+        Throwable th;
+        IOException e;
+        if (obj == null) {
+            Log.secI(TAG, "obj == null");
+            return false;
+        }
+        AtomicFile atomicFile = new AtomicFile(file);
+        try {
+            try {
+                fileOutputStreamStartWrite = atomicFile.startWrite();
+                try {
+                    objectOutputStream = new ObjectOutputStream(fileOutputStreamStartWrite);
+                    try {
+                        try {
+                            objectOutputStream.writeObject(obj);
+                            atomicFile.finishWrite(fileOutputStreamStartWrite);
+                            try {
+                                objectOutputStream.close();
+                            } catch (IOException e2) {
+                                Log.secD(TAG, "close : " + e2.getMessage());
+                                e2.printStackTrace();
+                            }
+                            return true;
+                        } catch (IOException e3) {
+                            e = e3;
+                            Log.secD(TAG, "saveObjectFile~IOException :" + e.getMessage());
+                            e.printStackTrace();
+                            atomicFile.failWrite(fileOutputStreamStartWrite);
+                            if (objectOutputStream != null) {
+                            }
+                        }
+                    } catch (Throwable th2) {
+                        th = th2;
+                        if (objectOutputStream != null) {
+                            try {
+                                objectOutputStream.close();
+                            } catch (IOException e4) {
+                                Log.secD(TAG, "close : " + e4.getMessage());
+                                e4.printStackTrace();
+                            }
+                        }
+                        throw th;
+                    }
+                } catch (IOException e5) {
+                    e = e5;
+                    objectOutputStream = null;
+                    e = e;
+                    Log.secD(TAG, "saveObjectFile~IOException :" + e.getMessage());
+                    e.printStackTrace();
+                    atomicFile.failWrite(fileOutputStreamStartWrite);
+                    if (objectOutputStream != null) {
+                        return false;
+                    }
+                    try {
+                        objectOutputStream.close();
+                        return false;
+                    } catch (IOException e6) {
+                        Log.secD(TAG, "close : " + e6.getMessage());
+                        e6.printStackTrace();
+                        return false;
+                    }
+                }
+            } catch (Throwable th3) {
+                objectOutputStream = null;
+                th = th3;
+                if (objectOutputStream != null) {
+                }
+                throw th;
+            }
+        } catch (IOException e7) {
+            e = e7;
+            fileOutputStreamStartWrite = null;
+            objectOutputStream = null;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0021  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x016b  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x016b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String createThumnailFromData(android.content.Context r10, com.samsung.android.content.clipboard.data.SemClipData r11) {
-        /*
-            Method dump skipped, instructions count: 381
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.FileHelper.createThumnailFromData(android.content.Context, com.samsung.android.content.clipboard.data.SemClipData):java.lang.String");
+    public String createThumnailFromData(Context context, SemClipData semClipData) throws IOException, ErrnoException {
+        int thumbReqWidth;
+        int i;
+        Bitmap uriPathBitmap;
+        FileOutputStream fileOutputStream;
+        if (context == null) {
+            Log.secD(TAG, "createThumnailFromData(): context is null!");
+            return null;
+        }
+        int thumbReqHeigth = 384;
+        try {
+            thumbReqWidth = ClipboardDataBitmapUtil.getThumbReqWidth(context);
+        } catch (Exception e) {
+            e = e;
+            thumbReqWidth = 384;
+        }
+        try {
+            thumbReqHeigth = ClipboardDataBitmapUtil.getThumbReqHeigth(context);
+        } catch (Exception e2) {
+            e = e2;
+            e.printStackTrace();
+            if (semClipData == null) {
+            }
+        }
+        if (semClipData == null) {
+            if (semClipData.getClipType() == 4) {
+                SemHtmlClipData semHtmlClipData = (SemHtmlClipData) semClipData;
+                Log.secI(TAG, "Create preview image for html data in createThumnailFromData()");
+                String string = "";
+                try {
+                    string = Html.fromHtml(Uri.decode(ClipboardProcText.getImgFileNameFromHtml(semHtmlClipData.getHtml()))).toString();
+                } catch (Exception e3) {
+                    e3.printStackTrace();
+                }
+                if (string == null || string.length() < 1) {
+                    Log.secW(TAG, "getFirstImage : FileName is empty.");
+                    return null;
+                }
+                Log.secD(TAG, "name = " + string);
+                int length = string.length();
+                if (string.startsWith(PREFIX_DATA)) {
+                    int iIndexOf = string.indexOf(44);
+                    uriPathBitmap = (iIndexOf <= 0 || iIndexOf >= length || !string.substring(5, iIndexOf).contains(BASE_64_ENCODING)) ? null : ClipboardDataBitmapUtil.getResizeBitmap(Base64.decode(string.substring(iIndexOf + 1).getBytes(), 4), thumbReqWidth, thumbReqHeigth);
+                } else {
+                    int i2 = LENGTH_HTTP_URL;
+                    if ((length > i2 && string.substring(0, i2).compareTo(PREFIX_HTTP_URL) == 0) || (length > (i = LENGTH_HTTPS_URL) && string.substring(0, i).compareTo(PREFIX_HTTPS_URL) == 0)) {
+                        Log.secI(TAG, "downloadSimpleBitmap");
+                        try {
+                            Log.secD(TAG, "html : " + semHtmlClipData.getHtml());
+                            uriPathBitmap = ClipboardDataBitmapUtil.downloadSimpleBitmap(string, thumbReqWidth, thumbReqHeigth);
+                        } catch (Exception e4) {
+                            e4.printStackTrace();
+                            return null;
+                        }
+                    } else {
+                        int i3 = LENGTH_CONTENT_URI;
+                        if (length <= i3 || string.substring(0, i3).compareTo("content://") != 0) {
+                            Log.secD(TAG, "invalid data");
+                        } else {
+                            Log.secI(TAG, "getUriPathBitmap...");
+                            uriPathBitmap = ClipboardDataBitmapUtil.getUriPathBitmap(context, Uri.parse(string), thumbReqWidth, thumbReqHeigth);
+                        }
+                    }
+                }
+                if (uriPathBitmap == null) {
+                    return null;
+                }
+                getInstance().makeDir(new File(ClipboardConstants.CLIPBOARD_ROOT_PATH_TEMP));
+                String str = new File(ClipboardConstants.CLIPBOARD_ROOT_PATH_TEMP, ClipboardConstants.HTML_PREVIEW_IMAGE_NAME) + ClipboardConstants.THUMBNAIL_SUFFIX;
+                try {
+                    fileOutputStream = new FileOutputStream(str);
+                } catch (Exception e5) {
+                    e5.printStackTrace();
+                }
+                try {
+                    uriPathBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                    fileOutputStream.close();
+                    uriPathBitmap.recycle();
+                    return str;
+                } finally {
+                }
+            }
+            Log.secI(TAG, "createThumnailFromData() is false because clip is not html type. clip.GetFomat() :" + semClipData.getClipType());
+            return null;
+        }
+        Log.secI(TAG, "createThumnailFromData() is false because clip is invalid data. clip :" + semClipData);
+        return null;
     }
 
     public boolean setFirstImagePathFromHtmlData(SemHtmlClipData semHtmlClipData) {
@@ -430,44 +497,44 @@ public class FileHelper {
         if (semHtmlClipData == null) {
             return false;
         }
-        String str = "";
+        String string = "";
         try {
-            str = Html.fromHtml(Uri.decode(ClipboardProcText.getImgFileNameFromHtml(semHtmlClipData.getHtml().toString()))).toString();
+            string = Html.fromHtml(Uri.decode(ClipboardProcText.getImgFileNameFromHtml(semHtmlClipData.getHtml().toString()))).toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (str == null || str.length() < 1) {
+        if (string == null || string.length() < 1) {
             Log.secW(TAG, "getFirstImage : FileName is empty.");
             return true;
         }
-        Log.secD(TAG, "name = " + str);
-        int length = str.length();
-        if (str.startsWith(PREFIX_DATA)) {
-            int indexOf = str.indexOf(44);
-            if (indexOf <= 0 || indexOf >= length || !str.substring(5, indexOf).contains(BASE_64_ENCODING)) {
+        Log.secD(TAG, "name = " + string);
+        int length = string.length();
+        if (string.startsWith(PREFIX_DATA)) {
+            int iIndexOf = string.indexOf(44);
+            if (iIndexOf <= 0 || iIndexOf >= length || !string.substring(5, iIndexOf).contains(BASE_64_ENCODING)) {
                 return false;
             }
-            semHtmlClipData.setThumbnailImagePath(str);
+            semHtmlClipData.setThumbnailImagePath(string);
             return true;
         }
-        if (str.length() > 7 && str.substring(0, 7).compareTo(PREFIX_FILE) == 0) {
-            String substring = str.substring(7, str.length());
-            semHtmlClipData.setThumbnailImagePath(substring);
-            Log.secI(TAG, "setFirstImagePathFromData: Substring Filepath  - " + substring);
+        if (string.length() > 7 && string.substring(0, 7).compareTo(PREFIX_FILE) == 0) {
+            String strSubstring = string.substring(7, string.length());
+            semHtmlClipData.setThumbnailImagePath(strSubstring);
+            Log.secI(TAG, "setFirstImagePathFromData: Substring Filepath  - " + strSubstring);
             return true;
         }
-        if (str.contains(PREFIX_STORAGE)) {
-            semHtmlClipData.setThumbnailImagePath(str);
-            Log.secI(TAG, "directly use firstImagePath...getFilePathBitmap : Substring Filepath  - " + str);
+        if (string.contains(PREFIX_STORAGE)) {
+            semHtmlClipData.setThumbnailImagePath(string);
+            Log.secI(TAG, "directly use firstImagePath...getFilePathBitmap : Substring Filepath  - " + string);
             return true;
         }
         int i2 = LENGTH_HTTP_URL;
-        if ((length > i2 && str.substring(0, i2).compareTo(PREFIX_HTTP_URL) == 0) || (length > (i = LENGTH_HTTPS_URL) && str.substring(0, i).compareTo(PREFIX_HTTPS_URL) == 0)) {
+        if ((length > i2 && string.substring(0, i2).compareTo(PREFIX_HTTP_URL) == 0) || (length > (i = LENGTH_HTTPS_URL) && string.substring(0, i).compareTo(PREFIX_HTTPS_URL) == 0)) {
             semHtmlClipData.setThumbnailImagePath(null);
             return true;
         }
         int i3 = LENGTH_CONTENT_URI;
-        if (length <= i3 || str.substring(0, i3).compareTo("content://") != 0) {
+        if (length <= i3 || string.substring(0, i3).compareTo("content://") != 0) {
             return false;
         }
         semHtmlClipData.setThumbnailImagePath(null);
@@ -478,64 +545,127 @@ public class FileHelper {
         if (semUriClipData == null) {
             return false;
         }
-        String uri = semUriClipData.getUri().toString();
-        if (uri == null || uri.length() < 1) {
+        String string = semUriClipData.getUri().toString();
+        if (string == null || string.length() < 1) {
             Log.secW(TAG, "getThumbnailImage : FileName is empty.");
             return true;
         }
-        Log.secD(TAG, "name = " + uri);
-        int length = uri.length();
-        if (uri.startsWith(PREFIX_DATA)) {
-            int indexOf = uri.indexOf(44);
-            if (indexOf <= 0 || indexOf >= length || !uri.substring(5, indexOf).contains(BASE_64_ENCODING)) {
+        Log.secD(TAG, "name = " + string);
+        int length = string.length();
+        if (string.startsWith(PREFIX_DATA)) {
+            int iIndexOf = string.indexOf(44);
+            if (iIndexOf <= 0 || iIndexOf >= length || !string.substring(5, iIndexOf).contains(BASE_64_ENCODING)) {
                 return false;
             }
-            semUriClipData.setThumbnailPath(uri);
+            semUriClipData.setThumbnailPath(string);
             return true;
         }
-        if (uri.length() > 7 && uri.substring(0, 7).compareTo(PREFIX_FILE) == 0) {
-            String substring = uri.substring(7, uri.length());
-            semUriClipData.setThumbnailPath(substring);
-            Log.secI(TAG, "setThumbnailPathFromData: Substring Filepath  - " + substring);
+        if (string.length() > 7 && string.substring(0, 7).compareTo(PREFIX_FILE) == 0) {
+            String strSubstring = string.substring(7, string.length());
+            semUriClipData.setThumbnailPath(strSubstring);
+            Log.secI(TAG, "setThumbnailPathFromData: Substring Filepath  - " + strSubstring);
             return true;
         }
-        if (uri.contains(PREFIX_STORAGE)) {
-            semUriClipData.setThumbnailPath(uri);
-            Log.secI(TAG, "directly use ThumbnailPath...getFilePathBitmap : Substring Filepath  - " + uri);
+        if (string.contains(PREFIX_STORAGE)) {
+            semUriClipData.setThumbnailPath(string);
+            Log.secI(TAG, "directly use ThumbnailPath...getFilePathBitmap : Substring Filepath  - " + string);
             return true;
         }
         int i = LENGTH_CONTENT_URI;
-        if (length <= i || uri.substring(0, i).compareTo("content://") != 0) {
+        if (length <= i || string.substring(0, i).compareTo("content://") != 0) {
             return false;
         }
         semUriClipData.setThumbnailPath(null);
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x012a  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x001f  */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x012a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String createThumnailFromUriData(android.content.Context r8, com.samsung.android.content.clipboard.data.SemUriClipData r9) {
-        /*
-            Method dump skipped, instructions count: 316
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.FileHelper.createThumnailFromUriData(android.content.Context, com.samsung.android.content.clipboard.data.SemUriClipData):java.lang.String");
+    public String createThumnailFromUriData(Context context, SemUriClipData semUriClipData) throws IOException, ErrnoException {
+        int thumbReqWidth;
+        Bitmap filePathBitmap;
+        FileOutputStream fileOutputStream;
+        String str = null;
+        if (context == null) {
+            Log.secD(TAG, "createThumnailFromUriData(): context is null!");
+            return null;
+        }
+        int thumbReqHeigth = 384;
+        try {
+            thumbReqWidth = ClipboardDataBitmapUtil.getThumbReqWidth(context);
+        } catch (Exception e) {
+            e = e;
+            thumbReqWidth = 384;
+        }
+        try {
+            thumbReqHeigth = ClipboardDataBitmapUtil.getThumbReqHeigth(context);
+        } catch (Exception e2) {
+            e = e2;
+            e.printStackTrace();
+            if (semUriClipData == null) {
+            }
+        }
+        if (semUriClipData == null) {
+            if (semUriClipData.getClipType() == 16) {
+                Log.secI(TAG, "Create preview image for uri data in createThumnailFromData()");
+                String string = semUriClipData.getUri().toString();
+                if (string == null || string.length() < 1) {
+                    Log.secW(TAG, "getFirstImage : FileName is empty.");
+                    return null;
+                }
+                int length = string.length();
+                Log.secD(TAG, "name = " + string);
+                if (string.startsWith(PREFIX_DATA)) {
+                    int iIndexOf = string.indexOf(44);
+                    filePathBitmap = (iIndexOf <= 0 || iIndexOf >= length || !string.substring(5, iIndexOf).contains(BASE_64_ENCODING)) ? null : ClipboardDataBitmapUtil.getResizeBitmap(Base64.decode(string.substring(iIndexOf + 1).getBytes(), 4), thumbReqWidth, thumbReqHeigth);
+                } else if (string.startsWith(PREFIX_STORAGE) || string.startsWith(PREFIX_FILE)) {
+                    filePathBitmap = ClipboardDataBitmapUtil.getFilePathBitmap(string, thumbReqWidth, thumbReqHeigth);
+                } else {
+                    int i = LENGTH_CONTENT_URI;
+                    if (length <= i || string.substring(0, i).compareTo("content://") != 0) {
+                        Log.secD(TAG, "invalid data");
+                    } else {
+                        Log.secI(TAG, "getUriPathBitmap...");
+                        filePathBitmap = ClipboardDataBitmapUtil.getUriPathBitmap(context, Uri.parse(string), thumbReqWidth, thumbReqHeigth);
+                    }
+                }
+                if (filePathBitmap != null) {
+                    getInstance().makeDir(new File(ClipboardConstants.CLIPBOARD_ROOT_PATH_TEMP));
+                    str = new File(ClipboardConstants.CLIPBOARD_ROOT_PATH_TEMP, ClipboardConstants.HTML_PREVIEW_IMAGE_NAME) + ClipboardConstants.THUMBNAIL_SUFFIX;
+                    try {
+                        fileOutputStream = new FileOutputStream(str);
+                    } catch (Exception e3) {
+                        e3.printStackTrace();
+                    }
+                    try {
+                        filePathBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                        fileOutputStream.close();
+                        filePathBitmap.recycle();
+                    } finally {
+                    }
+                }
+                return str;
+            }
+            Log.secI(TAG, "createThumnailFromData() is false because clip is not uri type. clip.GetFomat() :" + semUriClipData.getClipType());
+            return null;
+        }
+        Log.secI(TAG, "createThumnailFromData() is false because clip is invalid data. clip :" + semUriClipData);
+        return null;
     }
 
-    public Object loadObjectFile(File file) {
+    public Object loadObjectFile(File file) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 try {
-                    Object readObject = objectInputStream.readObject();
+                    Object object = objectInputStream.readObject();
                     objectInputStream.close();
                     fileInputStream.close();
-                    return readObject;
+                    return object;
                 } finally {
                 }
             } catch (Throwable th) {
@@ -558,7 +688,7 @@ public class FileHelper {
         }
     }
 
-    public void makeDir(File file) {
+    public void makeDir(File file) throws ErrnoException {
         if (file.exists()) {
             return;
         }
@@ -575,15 +705,15 @@ public class FileHelper {
     }
 
     public void delete(File file) {
-        File[] listFiles;
+        File[] fileArrListFiles;
         if (file.isFile()) {
             file.delete();
             return;
         }
-        if (!file.isDirectory() || (listFiles = file.listFiles()) == null) {
+        if (!file.isDirectory() || (fileArrListFiles = file.listFiles()) == null) {
             return;
         }
-        for (File file2 : listFiles) {
+        for (File file2 : fileArrListFiles) {
             delete(file2);
         }
         file.delete();

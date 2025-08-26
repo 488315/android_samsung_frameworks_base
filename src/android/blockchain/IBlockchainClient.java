@@ -40,9 +40,9 @@ public interface IBlockchainClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBlockchainClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBlockchainClient)) {
-                return (IBlockchainClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBlockchainClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBlockchainClient)) {
+                return (IBlockchainClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

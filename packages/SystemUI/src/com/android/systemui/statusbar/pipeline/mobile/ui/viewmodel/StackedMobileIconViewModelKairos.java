@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.StackedMobile
 import com.android.systemui.util.composable.kairos.HydratedComposeStateOfKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StackedMobileIconViewModelKairos implements KairosBuilder, StackedMobileIconViewModel {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0 = new KairosBuilderImpl();
@@ -21,16 +20,15 @@ public final class StackedMobileIconViewModelKairos implements KairosBuilder, St
     public final StateInit iconList;
     public final State networkTypeIcon$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
     public StackedMobileIconViewModelKairos(MobileIconsViewModelKairos mobileIconsViewModelKairos) {
         HydratedComposeStateOfKt.hydratedComposeStateOf(this, ((MobileIconsInteractorKairosImpl) mobileIconsViewModelKairos.interactor).isStackable, Boolean.FALSE);
-        StateInit combine = CombineKt.combine(mobileIconsViewModelKairos.icons, StateKt.map(((MobileIconsInteractorKairosImpl) mobileIconsViewModelKairos.interactor).activeDataIconInteractor, new MobileIconsViewModelKairos$$ExternalSyntheticLambda0(1)), new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda0());
-        this.iconList = combine;
-        this.dualSim$delegate = HydratedComposeStateOfKt.hydratedComposeStateOf(this, StateKt.flatMap(combine, new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda1(this, 0)), null);
-        this.networkTypeIcon$delegate = HydratedComposeStateOfKt.hydratedComposeStateOf(this, StateKt.flatMap(combine, new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda2()), null);
+        StateInit stateInitCombine = CombineKt.combine(mobileIconsViewModelKairos.icons, StateKt.map(((MobileIconsInteractorKairosImpl) mobileIconsViewModelKairos.interactor).activeDataIconInteractor, new MobileIconsViewModelKairos$$ExternalSyntheticLambda0(1)), new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda0());
+        this.iconList = stateInitCombine;
+        this.dualSim$delegate = HydratedComposeStateOfKt.hydratedComposeStateOf(this, StateKt.flatMap(stateInitCombine, new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda1(this, 0)), null);
+        this.networkTypeIcon$delegate = HydratedComposeStateOfKt.hydratedComposeStateOf(this, StateKt.flatMap(stateInitCombine, new StackedMobileIconViewModelKairos$$ExternalSyntheticLambda2()), null);
     }
 
     @Override // com.android.systemui.KairosActivatable

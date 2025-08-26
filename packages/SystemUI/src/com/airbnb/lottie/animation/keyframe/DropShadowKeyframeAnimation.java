@@ -8,7 +8,6 @@ import com.airbnb.lottie.parser.DropShadowEffect;
 import com.airbnb.lottie.value.LottieFrameInfo;
 import com.airbnb.lottie.value.LottieValueCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DropShadowKeyframeAnimation implements BaseKeyframeAnimation.AnimationListener {
     public final ColorKeyframeAnimation color;
@@ -21,37 +20,37 @@ public class DropShadowKeyframeAnimation implements BaseKeyframeAnimation.Animat
 
     public DropShadowKeyframeAnimation(BaseKeyframeAnimation.AnimationListener animationListener, BaseLayer baseLayer, DropShadowEffect dropShadowEffect) {
         this.listener = animationListener;
-        BaseKeyframeAnimation createAnimation = dropShadowEffect.color.createAnimation();
-        this.color = (ColorKeyframeAnimation) createAnimation;
-        createAnimation.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation);
-        BaseKeyframeAnimation createAnimation2 = dropShadowEffect.opacity.createAnimation();
-        this.opacity = (FloatKeyframeAnimation) createAnimation2;
-        createAnimation2.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation2);
-        BaseKeyframeAnimation createAnimation3 = dropShadowEffect.direction.createAnimation();
-        this.direction = (FloatKeyframeAnimation) createAnimation3;
-        createAnimation3.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation3);
-        BaseKeyframeAnimation createAnimation4 = dropShadowEffect.distance.createAnimation();
-        this.distance = (FloatKeyframeAnimation) createAnimation4;
-        createAnimation4.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation4);
-        BaseKeyframeAnimation createAnimation5 = dropShadowEffect.radius.createAnimation();
-        this.radius = (FloatKeyframeAnimation) createAnimation5;
-        createAnimation5.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation5);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = dropShadowEffect.color.createAnimation();
+        this.color = (ColorKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = dropShadowEffect.opacity.createAnimation();
+        this.opacity = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation2;
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = dropShadowEffect.direction.createAnimation();
+        this.direction = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation4 = dropShadowEffect.distance.createAnimation();
+        this.distance = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation4;
+        baseKeyframeAnimationCreateAnimation4.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation4);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation5 = dropShadowEffect.radius.createAnimation();
+        this.radius = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation5;
+        baseKeyframeAnimationCreateAnimation5.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation5);
     }
 
     public final void applyTo(LPaint lPaint) {
         if (this.isDirty) {
             this.isDirty = false;
-            double floatValue = ((Float) this.direction.getValue()).floatValue() * 0.017453292519943295d;
-            float floatValue2 = ((Float) this.distance.getValue()).floatValue();
-            float sin = ((float) Math.sin(floatValue)) * floatValue2;
-            float cos = ((float) Math.cos(floatValue + 3.141592653589793d)) * floatValue2;
-            int intValue = ((Integer) this.color.getValue()).intValue();
-            lPaint.setShadowLayer(((Float) this.radius.getValue()).floatValue(), sin, cos, Color.argb(Math.round(((Float) this.opacity.getValue()).floatValue()), Color.red(intValue), Color.green(intValue), Color.blue(intValue)));
+            double dFloatValue = ((Float) this.direction.getValue()).floatValue() * 0.017453292519943295d;
+            float fFloatValue = ((Float) this.distance.getValue()).floatValue();
+            float fSin = ((float) Math.sin(dFloatValue)) * fFloatValue;
+            float fCos = ((float) Math.cos(dFloatValue + 3.141592653589793d)) * fFloatValue;
+            int iIntValue = ((Integer) this.color.getValue()).intValue();
+            lPaint.setShadowLayer(((Float) this.radius.getValue()).floatValue(), fSin, fCos, Color.argb(Math.round(((Float) this.opacity.getValue()).floatValue()), Color.red(iIntValue), Color.green(iIntValue), Color.blue(iIntValue)));
         }
     }
 

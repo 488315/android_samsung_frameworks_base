@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.system.ErrnoException;
 import android.util.AtomicFile;
 import android.util.AttributeSet;
 import android.util.IntArray;
@@ -27,6 +28,7 @@ import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ArrayUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -99,24 +101,24 @@ public abstract class RegisteredServicesCache<V> {
         AutoCloseable autoCloseable;
         UserServices<V> userServices = this.mUserServices.get(i);
         if (userServices == null) {
-            ?? r2 = 0;
-            r2 = 0;
+            ?? OpenRead = 0;
+            OpenRead = 0;
             userServices = new UserServices<>();
             this.mUserServices.put(i, userServices);
             if (z && this.mSerializerAndParser != null && (user = getUser(i)) != null) {
-                AtomicFile createFileForUser = createFileForUser(user.id);
-                if (createFileForUser.getBaseFile().exists()) {
+                AtomicFile atomicFileCreateFileForUser = createFileForUser(user.id);
+                if (atomicFileCreateFileForUser.getBaseFile().exists()) {
                     try {
                         try {
-                            r2 = createFileForUser.openRead();
-                            readPersistentServicesLocked(r2);
-                            autoCloseable = r2;
+                            OpenRead = atomicFileCreateFileForUser.openRead();
+                            readPersistentServicesLocked(OpenRead);
+                            autoCloseable = OpenRead;
                         } catch (Exception e) {
                             Log.w(TAG, "Error reading persistent services for user " + user.id, e);
-                            autoCloseable = r2;
+                            autoCloseable = OpenRead;
                         }
                     } finally {
-                        IoUtils.closeQuietly((AutoCloseable) r2);
+                        IoUtils.closeQuietly((AutoCloseable) OpenRead);
                     }
                 }
             }
@@ -128,7 +130,7 @@ public abstract class RegisteredServicesCache<V> {
         this(new Injector(context), str, str2, str3, xmlSerializerAndParser);
     }
 
-    public RegisteredServicesCache(Injector<V> injector, String str, String str2, String str3, XmlSerializerAndParser<V> xmlSerializerAndParser) {
+    public RegisteredServicesCache(Injector<V> injector, String str, String str2, String str3, XmlSerializerAndParser<V> xmlSerializerAndParser) throws IOException {
         this.mServicesLock = new Object();
         this.mUserServices = new SparseArray<>(2);
         this.mUserIdToServiceInfoCaches = new SparseArrayMap<>();
@@ -163,13 +165,13 @@ public abstract class RegisteredServicesCache<V> {
         this.mAttributesName = str3;
         this.mSerializerAndParser = xmlSerializerAndParser;
         migrateIfNecessaryLocked();
-        boolean isCore = UserHandle.isCore(Process.myUid());
+        boolean zIsCore = UserHandle.isCore(Process.myUid());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
         intentFilter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter.addDataScheme("package");
-        if (isCore) {
+        if (zIsCore) {
             intentFilter.setPriority(1000);
         }
         Handler backgroundHandler = injector.getBackgroundHandler();
@@ -178,13 +180,13 @@ public abstract class RegisteredServicesCache<V> {
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter2.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
         intentFilter2.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
-        if (isCore) {
+        if (zIsCore) {
             intentFilter2.setPriority(1000);
         }
         context.registerReceiver(broadcastReceiver2, intentFilter2, null, backgroundHandler);
         IntentFilter intentFilter3 = new IntentFilter();
         intentFilter3.addAction("android.intent.action.USER_REMOVED");
-        if (isCore) {
+        if (zIsCore) {
             intentFilter3.setPriority(1000);
         }
         context.registerReceiver(broadcastReceiver3, intentFilter3, null, backgroundHandler);
@@ -217,10 +219,10 @@ public abstract class RegisteredServicesCache<V> {
 
     public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, int i) {
         synchronized (this.mServicesLock) {
-            UserServices<V> findOrCreateUserLocked = findOrCreateUserLocked(i);
-            if (findOrCreateUserLocked.services != null) {
-                printWriter.println("RegisteredServicesCache: " + findOrCreateUserLocked.services.size() + " services");
-                Iterator<ServiceInfo<V>> it = findOrCreateUserLocked.services.values().iterator();
+            UserServices<V> userServicesFindOrCreateUserLocked = findOrCreateUserLocked(i);
+            if (userServicesFindOrCreateUserLocked.services != null) {
+                printWriter.println("RegisteredServicesCache: " + userServicesFindOrCreateUserLocked.services.size() + " services");
+                Iterator<ServiceInfo<V>> it = userServicesFindOrCreateUserLocked.services.values().iterator();
                 while (it.hasNext()) {
                     printWriter.println("  " + it.next());
                 }
@@ -261,7 +263,7 @@ public abstract class RegisteredServicesCache<V> {
         handler.post(new Runnable() { // from class: android.content.pm.RegisteredServicesCache$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                RegisteredServicesCache.lambda$notifyListener$0(RegisteredServicesCacheListener.this, v, i, z);
+                RegisteredServicesCache.lambda$notifyListener$0(registeredServicesCacheListener, v, i, z);
             }
         });
     }
@@ -297,43 +299,43 @@ public abstract class RegisteredServicesCache<V> {
     public ServiceInfo<V> getServiceInfo(V v, int i) {
         ServiceInfo<V> serviceInfo;
         synchronized (this.mServicesLock) {
-            UserServices<V> findOrCreateUserLocked = findOrCreateUserLocked(i);
-            if (findOrCreateUserLocked.services == null) {
+            UserServices<V> userServicesFindOrCreateUserLocked = findOrCreateUserLocked(i);
+            if (userServicesFindOrCreateUserLocked.services == null) {
                 generateServicesMap(null, i);
             }
-            serviceInfo = findOrCreateUserLocked.services.get(v);
+            serviceInfo = userServicesFindOrCreateUserLocked.services.get(v);
         }
         return serviceInfo;
     }
 
     public Collection<ServiceInfo<V>> getAllServices(int i) {
-        Collection<ServiceInfo<V>> unmodifiableCollection;
+        Collection<ServiceInfo<V>> collectionUnmodifiableCollection;
         synchronized (this.mServicesLock) {
-            UserServices<V> findOrCreateUserLocked = findOrCreateUserLocked(i);
-            if (findOrCreateUserLocked.services == null) {
+            UserServices<V> userServicesFindOrCreateUserLocked = findOrCreateUserLocked(i);
+            if (userServicesFindOrCreateUserLocked.services == null) {
                 generateServicesMap(null, i);
             }
-            unmodifiableCollection = Collections.unmodifiableCollection(new ArrayList(findOrCreateUserLocked.services.values()));
+            collectionUnmodifiableCollection = Collections.unmodifiableCollection(new ArrayList(userServicesFindOrCreateUserLocked.services.values()));
         }
-        return unmodifiableCollection;
+        return collectionUnmodifiableCollection;
     }
 
     public void updateServices(int i) {
-        ApplicationInfo applicationInfo;
+        ApplicationInfo applicationInfoAsUser;
         synchronized (this.mServicesLock) {
-            UserServices<V> findOrCreateUserLocked = findOrCreateUserLocked(i);
-            if (findOrCreateUserLocked.services == null) {
+            UserServices<V> userServicesFindOrCreateUserLocked = findOrCreateUserLocked(i);
+            if (userServicesFindOrCreateUserLocked.services == null) {
                 return;
             }
             IntArray intArray = null;
-            for (ServiceInfo serviceInfo : new ArrayList(findOrCreateUserLocked.services.values())) {
+            for (ServiceInfo serviceInfo : new ArrayList(userServicesFindOrCreateUserLocked.services.values())) {
                 long j = serviceInfo.componentInfo.applicationInfo.versionCode;
                 try {
-                    applicationInfo = this.mContext.getPackageManager().getApplicationInfoAsUser(serviceInfo.componentInfo.packageName, 0, i);
+                    applicationInfoAsUser = this.mContext.getPackageManager().getApplicationInfoAsUser(serviceInfo.componentInfo.packageName, 0, i);
                 } catch (PackageManager.NameNotFoundException unused) {
-                    applicationInfo = null;
+                    applicationInfoAsUser = null;
                 }
-                if (applicationInfo == null || applicationInfo.versionCode != j) {
+                if (applicationInfoAsUser == null || applicationInfoAsUser.versionCode != j) {
                     if (intArray == null) {
                         intArray = new IntArray();
                     }
@@ -387,26 +389,104 @@ public abstract class RegisteredServicesCache<V> {
         return packageManager.queryIntentServicesAsUser(new Intent(this.mInterfaceName), i2, i);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(7:4|(4:36|37|38|(4:42|43|44|22))|6|7|(3:30|31|32)(3:9|10|(6:12|13|88|19|20|21)(1:29))|22|2) */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0093, code lost:
-    
-        r4 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0094, code lost:
-    
-        android.util.Log.w(android.content.pm.RegisteredServicesCache.TAG, "Unable to load service info " + r3.toString(), r4);
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x005c A[EXC_TOP_SPLITTER, PHI: r7
+      0x005c: PHI (r7v17 long) = (r7v13 long), (r7v15 long), (r7v15 long) binds: [B:6:0x002b, B:12:0x0050, B:14:0x0056] A[DONT_GENERATE, DONT_INLINE], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void generateServicesMap(int[] r13, int r14) {
-        /*
-            Method dump skipped, instructions count: 458
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.RegisteredServicesCache.generateServicesMap(int[], int):void");
+    private void generateServicesMap(int[] iArr, int i) {
+        ServiceInfo serviceInfoFromServiceCache;
+        ArrayList arrayList = new ArrayList();
+        List<ResolveInfo> listQueryIntentServices = queryIntentServices(i);
+        PackageManager packageManager = this.mContext.getPackageManager();
+        for (ResolveInfo resolveInfo : listQueryIntentServices) {
+            android.content.pm.ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+            ComponentName componentName = serviceInfo.getComponentName();
+            long j = -1;
+            if (Flags.optimizeParsingInRegisteredServicesCache()) {
+                try {
+                    j = packageManager.getPackageInfoAsUser(serviceInfo.packageName, 786432, i).lastUpdateTime;
+                } catch (PackageManager.NameNotFoundException | SecurityException e) {
+                    Slog.d(TAG, "Fail to get the PackageInfo in generateServicesMap: " + e);
+                }
+                if (j >= 0 && (serviceInfoFromServiceCache = getServiceInfoFromServiceCache(i, componentName, j)) != null) {
+                    arrayList.add(serviceInfoFromServiceCache);
+                } else {
+                    try {
+                        ServiceInfo<V> serviceInfo2 = parseServiceInfo(resolveInfo, j);
+                        if (serviceInfo2 == null) {
+                            Log.w(TAG, "Unable to load service info " + resolveInfo.toString());
+                        } else {
+                            arrayList.add(serviceInfo2);
+                            if (Flags.optimizeParsingInRegisteredServicesCache()) {
+                                synchronized (this.mUserIdToServiceInfoCaches) {
+                                    this.mUserIdToServiceInfoCaches.add(i, componentName, serviceInfo2);
+                                }
+                            } else {
+                                continue;
+                            }
+                        }
+                    } catch (IOException | XmlPullParserException e2) {
+                        Log.w(TAG, "Unable to load service info " + resolveInfo.toString(), e2);
+                    }
+                }
+            }
+        }
+        if (Flags.optimizeParsingInRegisteredServicesCache()) {
+            synchronized (this.mUserIdToServiceInfoCaches) {
+                if (this.mUserIdToServiceInfoCaches.numElementsForKey(i) > 0) {
+                    Integer numValueOf = Integer.valueOf(i);
+                    this.mBackgroundHandler.removeCallbacksAndEqualMessages(numValueOf);
+                    this.mBackgroundHandler.postDelayed(new ClearServiceInfoCachesTimeoutRunnable(i), numValueOf, 30000L);
+                }
+            }
+        }
+        synchronized (this.mServicesLock) {
+            UserServices userServicesFindOrCreateUserLocked = findOrCreateUserLocked(i);
+            boolean z = userServicesFindOrCreateUserLocked.services == null;
+            if (z) {
+                userServicesFindOrCreateUserLocked.services = Maps.newHashMap();
+            }
+            Iterator it = arrayList.iterator();
+            boolean z2 = false;
+            while (it.hasNext()) {
+                ServiceInfo<V> serviceInfo3 = (ServiceInfo) it.next();
+                Integer num = userServicesFindOrCreateUserLocked.persistentServices.get(serviceInfo3.type);
+                if (num == null) {
+                    userServicesFindOrCreateUserLocked.services.put(serviceInfo3.type, serviceInfo3);
+                    userServicesFindOrCreateUserLocked.persistentServices.put(serviceInfo3.type, Integer.valueOf(serviceInfo3.uid));
+                    if (!userServicesFindOrCreateUserLocked.mPersistentServicesFileDidNotExist || !z) {
+                        notifyListener(serviceInfo3.type, i, false);
+                    }
+                } else if (num.intValue() == serviceInfo3.uid) {
+                    userServicesFindOrCreateUserLocked.services.put(serviceInfo3.type, serviceInfo3);
+                } else if (inSystemImage(serviceInfo3.uid) || !containsTypeAndUid(arrayList, serviceInfo3.type, num.intValue())) {
+                    userServicesFindOrCreateUserLocked.services.put(serviceInfo3.type, serviceInfo3);
+                    userServicesFindOrCreateUserLocked.persistentServices.put(serviceInfo3.type, Integer.valueOf(serviceInfo3.uid));
+                    notifyListener(serviceInfo3.type, i, false);
+                }
+                z2 = true;
+            }
+            ArrayList arrayListNewArrayList = Lists.newArrayList();
+            for (V v : userServicesFindOrCreateUserLocked.persistentServices.keySet()) {
+                if (!containsType(arrayList, v) && containsUid(iArr, userServicesFindOrCreateUserLocked.persistentServices.get(v).intValue())) {
+                    arrayListNewArrayList.add(v);
+                }
+            }
+            Iterator it2 = arrayListNewArrayList.iterator();
+            while (it2.hasNext()) {
+                Object next = it2.next();
+                userServicesFindOrCreateUserLocked.persistentServices.remove(next);
+                userServicesFindOrCreateUserLocked.services.remove(next);
+                notifyListener(next, i, true);
+                z2 = true;
+            }
+            if (z2) {
+                onServicesChangedLocked(i);
+                writePersistentServicesLocked(userServicesFindOrCreateUserLocked, i);
+            }
+        }
     }
 
     private boolean containsUid(int[] iArr, int i) {
@@ -434,8 +514,9 @@ public abstract class RegisteredServicesCache<V> {
         return false;
     }
 
-    protected ServiceInfo<V> parseServiceInfo(ResolveInfo resolveInfo, long j) throws XmlPullParserException, IOException {
+    protected ServiceInfo<V> parseServiceInfo(ResolveInfo resolveInfo, long j) throws Throwable {
         Throwable th;
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
         int next;
         android.content.pm.ServiceInfo serviceInfo = resolveInfo.serviceInfo;
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
@@ -443,73 +524,73 @@ public abstract class RegisteredServicesCache<V> {
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, this.mMetaDataName);
-                try {
-                    if (loadXmlMetaData == null) {
-                        throw new XmlPullParserException("No " + this.mMetaDataName + " meta-data");
-                    }
-                    AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
-                    do {
-                        next = loadXmlMetaData.next();
-                        if (next == 1) {
-                            break;
-                        }
-                    } while (next != 2);
-                    if (!this.mAttributesName.equals(loadXmlMetaData.getName())) {
-                        throw new XmlPullParserException("Meta-data does not start with " + this.mAttributesName + " tag");
-                    }
-                    V parseServiceAttributes = parseServiceAttributes(packageManager.getResourcesForApplication(serviceInfo.applicationInfo), serviceInfo.packageName, asAttributeSet);
-                    if (parseServiceAttributes == null) {
-                        if (loadXmlMetaData != null) {
-                            loadXmlMetaData.close();
-                        }
-                        return null;
-                    }
-                    ServiceInfo<V> serviceInfo2 = new ServiceInfo<>(parseServiceAttributes, serviceInfo, componentName, j);
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
-                    }
-                    return serviceInfo2;
-                } catch (PackageManager.NameNotFoundException unused) {
-                    xmlResourceParser = loadXmlMetaData;
-                    throw new XmlPullParserException("Unable to load resources for pacakge " + serviceInfo.packageName);
-                } catch (Throwable th2) {
-                    th = th2;
-                    xmlResourceParser = loadXmlMetaData;
-                    if (xmlResourceParser != null) {
-                        xmlResourceParser.close();
-                        throw th;
-                    }
-                    throw th;
-                }
-            } catch (Throwable th3) {
-                th = th3;
+                xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, this.mMetaDataName);
+            } catch (PackageManager.NameNotFoundException unused) {
             }
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        try {
+            if (xmlResourceParserLoadXmlMetaData == null) {
+                throw new XmlPullParserException("No " + this.mMetaDataName + " meta-data");
+            }
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+            do {
+                next = xmlResourceParserLoadXmlMetaData.next();
+                if (next == 1) {
+                    break;
+                }
+            } while (next != 2);
+            if (!this.mAttributesName.equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                throw new XmlPullParserException("Meta-data does not start with " + this.mAttributesName + " tag");
+            }
+            V serviceAttributes = parseServiceAttributes(packageManager.getResourcesForApplication(serviceInfo.applicationInfo), serviceInfo.packageName, attributeSetAsAttributeSet);
+            if (serviceAttributes == null) {
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    xmlResourceParserLoadXmlMetaData.close();
+                }
+                return null;
+            }
+            ServiceInfo<V> serviceInfo2 = new ServiceInfo<>(serviceAttributes, serviceInfo, componentName, j);
+            if (xmlResourceParserLoadXmlMetaData != null) {
+                xmlResourceParserLoadXmlMetaData.close();
+            }
+            return serviceInfo2;
         } catch (PackageManager.NameNotFoundException unused2) {
+            xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+            throw new XmlPullParserException("Unable to load resources for pacakge " + serviceInfo.packageName);
+        } catch (Throwable th3) {
+            th = th3;
+            xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+            if (xmlResourceParser != null) {
+                xmlResourceParser.close();
+                throw th;
+            }
+            throw th;
         }
     }
 
-    private void readPersistentServicesLocked(InputStream inputStream) throws XmlPullParserException, IOException {
-        TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(inputStream);
-        for (int eventType = resolvePullParser.getEventType(); eventType != 2 && eventType != 1; eventType = resolvePullParser.next()) {
+    private void readPersistentServicesLocked(InputStream inputStream) throws XmlPullParserException, IOException, ErrnoException {
+        TypedXmlPullParser typedXmlPullParserResolvePullParser = Xml.resolvePullParser(inputStream);
+        for (int eventType = typedXmlPullParserResolvePullParser.getEventType(); eventType != 2 && eventType != 1; eventType = typedXmlPullParserResolvePullParser.next()) {
         }
-        if ("services".equals(resolvePullParser.getName())) {
-            int next = resolvePullParser.next();
+        if ("services".equals(typedXmlPullParserResolvePullParser.getName())) {
+            int next = typedXmlPullParserResolvePullParser.next();
             do {
-                if (next == 2 && resolvePullParser.getDepth() == 2 && "service".equals(resolvePullParser.getName())) {
-                    V createFromXml = this.mSerializerAndParser.createFromXml(resolvePullParser);
-                    if (createFromXml == null) {
+                if (next == 2 && typedXmlPullParserResolvePullParser.getDepth() == 2 && "service".equals(typedXmlPullParserResolvePullParser.getName())) {
+                    V vCreateFromXml = this.mSerializerAndParser.createFromXml(typedXmlPullParserResolvePullParser);
+                    if (vCreateFromXml == null) {
                         return;
                     }
-                    int attributeInt = resolvePullParser.getAttributeInt(null, "uid");
-                    findOrCreateUserLocked(UserHandle.getUserId(attributeInt), false).persistentServices.put(createFromXml, Integer.valueOf(attributeInt));
+                    int attributeInt = typedXmlPullParserResolvePullParser.getAttributeInt(null, "uid");
+                    findOrCreateUserLocked(UserHandle.getUserId(attributeInt), false).persistentServices.put(vCreateFromXml, Integer.valueOf(attributeInt));
                 }
-                next = resolvePullParser.next();
+                next = typedXmlPullParserResolvePullParser.next();
             } while (next != 1);
         }
     }
 
-    private void migrateIfNecessaryLocked() {
+    private void migrateIfNecessaryLocked() throws IOException {
         if (this.mSerializerAndParser == null) {
             return;
         }
@@ -520,66 +601,65 @@ public abstract class RegisteredServicesCache<V> {
             if (file2.exists()) {
                 return;
             }
-            FileInputStream fileInputStream = null;
+            FileInputStream fileInputStreamOpenRead = null;
             try {
                 try {
-                    fileInputStream = atomicFile.openRead();
+                    fileInputStreamOpenRead = atomicFile.openRead();
                     this.mUserServices.clear();
-                    readPersistentServicesLocked(fileInputStream);
-                } catch (Exception e) {
-                    Log.w(TAG, "Error reading persistent services, starting from scratch", e);
+                    readPersistentServicesLocked(fileInputStreamOpenRead);
+                } finally {
+                    IoUtils.closeQuietly(fileInputStreamOpenRead);
                 }
-                try {
-                    for (UserInfo userInfo : getUsers()) {
-                        UserServices<V> userServices = this.mUserServices.get(userInfo.id);
-                        if (userServices != null) {
-                            writePersistentServicesLocked(userServices, userInfo.id);
-                        }
-                    }
-                    file2.createNewFile();
-                } catch (Exception e2) {
-                    Log.w(TAG, "Migration failed", e2);
-                }
-                this.mUserServices.clear();
-            } finally {
-                IoUtils.closeQuietly(fileInputStream);
+            } catch (Exception e) {
+                Log.w(TAG, "Error reading persistent services, starting from scratch", e);
             }
+            try {
+                for (UserInfo userInfo : getUsers()) {
+                    UserServices<V> userServices = this.mUserServices.get(userInfo.id);
+                    if (userServices != null) {
+                        writePersistentServicesLocked(userServices, userInfo.id);
+                    }
+                }
+                file2.createNewFile();
+            } catch (Exception e2) {
+                Log.w(TAG, "Migration failed", e2);
+            }
+            this.mUserServices.clear();
         }
     }
 
-    private void writePersistentServicesLocked(UserServices<V> userServices, int i) {
-        FileOutputStream startWrite;
+    private void writePersistentServicesLocked(UserServices<V> userServices, int i) throws IOException {
         if (this.mSerializerAndParser == null) {
             return;
         }
-        AtomicFile createFileForUser = createFileForUser(i);
+        AtomicFile atomicFileCreateFileForUser = createFileForUser(i);
         FileOutputStream fileOutputStream = null;
         try {
-            startWrite = createFileForUser.startWrite();
-        } catch (IOException e) {
-            e = e;
-        }
-        try {
-            TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
-            resolveSerializer.startDocument(null, true);
-            resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-            resolveSerializer.startTag(null, "services");
-            for (Map.Entry<V, Integer> entry : userServices.persistentServices.entrySet()) {
-                resolveSerializer.startTag(null, "service");
-                resolveSerializer.attributeInt(null, "uid", entry.getValue().intValue());
-                this.mSerializerAndParser.writeAsXml((XmlSerializerAndParser<V>) entry.getKey(), resolveSerializer);
-                resolveSerializer.endTag(null, "service");
+            FileOutputStream fileOutputStreamStartWrite = atomicFileCreateFileForUser.startWrite();
+            try {
+                TypedXmlSerializer typedXmlSerializerResolveSerializer = Xml.resolveSerializer(fileOutputStreamStartWrite);
+                typedXmlSerializerResolveSerializer.startDocument(null, true);
+                typedXmlSerializerResolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                typedXmlSerializerResolveSerializer.startTag(null, "services");
+                for (Map.Entry<V, Integer> entry : userServices.persistentServices.entrySet()) {
+                    typedXmlSerializerResolveSerializer.startTag(null, "service");
+                    typedXmlSerializerResolveSerializer.attributeInt(null, "uid", entry.getValue().intValue());
+                    this.mSerializerAndParser.writeAsXml((XmlSerializerAndParser<V>) entry.getKey(), typedXmlSerializerResolveSerializer);
+                    typedXmlSerializerResolveSerializer.endTag(null, "service");
+                }
+                typedXmlSerializerResolveSerializer.endTag(null, "services");
+                typedXmlSerializerResolveSerializer.endDocument();
+                atomicFileCreateFileForUser.finishWrite(fileOutputStreamStartWrite);
+            } catch (IOException e) {
+                e = e;
+                fileOutputStream = fileOutputStreamStartWrite;
+                Log.w(TAG, "Error writing accounts", e);
+                if (fileOutputStream != null) {
+                    atomicFileCreateFileForUser.failWrite(fileOutputStream);
+                }
             }
-            resolveSerializer.endTag(null, "services");
-            resolveSerializer.endDocument();
-            createFileForUser.finishWrite(startWrite);
         } catch (IOException e2) {
             e = e2;
-            fileOutputStream = startWrite;
-            Log.w(TAG, "Error writing accounts", e);
-            if (fileOutputStream != null) {
-                createFileForUser.failWrite(fileOutputStream);
-            }
         }
     }
 

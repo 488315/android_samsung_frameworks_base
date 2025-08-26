@@ -24,7 +24,6 @@ import com.android.systemui.statusbar.notification.stack.ViewState;
 import com.android.systemui.util.DumpUtilsKt;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FooterView extends StackScrollerDecorView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +31,6 @@ public class FooterView extends StackScrollerDecorView {
     public FooterViewButton mManageOrHistoryButton;
     public TextView mSeenNotifsFooterTextView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FooterViewState extends ExpandableViewState {
         public boolean hideContent;
 
@@ -55,7 +53,10 @@ public class FooterView extends StackScrollerDecorView {
 
         @Override // com.android.systemui.statusbar.notification.stack.ExpandableViewState, com.android.systemui.statusbar.notification.stack.ViewState
         public final void copyFrom(ViewState viewState) {
-            throw null;
+            super.copyFrom(viewState);
+            if (viewState instanceof FooterViewState) {
+                this.hideContent = ((FooterViewState) viewState).hideContent;
+            }
         }
     }
 
@@ -70,13 +71,13 @@ public class FooterView extends StackScrollerDecorView {
 
     @Override // com.android.systemui.statusbar.notification.row.ExpandableView, com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        final IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        super.dump(asIndenting, strArr);
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.footer.ui.view.FooterView$$ExternalSyntheticLambda0
+        final IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        super.dump(indentingPrintWriterAsIndenting, strArr);
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new Runnable() { // from class: com.android.systemui.statusbar.notification.footer.ui.view.FooterView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FooterView footerView = FooterView.this;
-                IndentingPrintWriter indentingPrintWriter = asIndenting;
+                FooterView footerView = this.f$0;
+                IndentingPrintWriter indentingPrintWriter = indentingPrintWriterAsIndenting;
                 int i = FooterView.$r8$clinit;
                 indentingPrintWriter.println("visibility: " + DumpUtilsKt.visibilityString(footerView.getVisibility()));
                 if (footerView.mManageOrHistoryButton != null) {
@@ -100,7 +101,7 @@ public class FooterView extends StackScrollerDecorView {
     }
 
     @Override // com.android.systemui.statusbar.notification.row.ExpandableView, android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         ColorUpdateLogger.Companion.getClass();
         super.onConfigurationChanged(configuration);
         updateColors$1();
@@ -109,7 +110,7 @@ public class FooterView extends StackScrollerDecorView {
     }
 
     @Override // com.android.systemui.statusbar.notification.row.StackScrollerDecorView, android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         ColorUpdateLogger.Companion.getClass();
         super.onFinishInflate();
         this.mClearAllButton = (FooterViewButton) findViewById(R.id.dismiss_text);
@@ -120,7 +121,7 @@ public class FooterView extends StackScrollerDecorView {
         updateColors$1();
     }
 
-    public final void updateColors$1() {
+    public final void updateColors$1() throws Resources.NotFoundException {
         Resources.Theme theme = ((FrameLayout) this).mContext.getTheme();
         int color = ((FrameLayout) this).mContext.getColor(android.R.color.search_url_text_material_light);
         Drawable drawable = theme.getDrawable(R.drawable.notif_footer_btn_background);

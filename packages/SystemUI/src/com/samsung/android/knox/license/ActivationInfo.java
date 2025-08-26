@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ActivationInfo implements Parcelable {
     public static final Parcelable.Creator<ActivationInfo> CREATOR = new Parcelable.Creator<ActivationInfo>() { // from class: com.samsung.android.knox.license.ActivationInfo.1
@@ -28,7 +27,6 @@ public class ActivationInfo implements Parcelable {
     private String sku;
     private State state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum State {
         ACTIVE,
         EXPIRED,
@@ -99,15 +97,15 @@ public class ActivationInfo implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.packageName = parcel.readString();
-        String readString = parcel.readString();
-        if (readString != null) {
-            this.state = State.valueOf(readString);
+        String string = parcel.readString();
+        if (string != null) {
+            this.state = State.valueOf(string);
         }
         this.maskedLicenseKey = parcel.readString();
         this.sku = parcel.readString();
         this.productType = parcel.readString();
-        long readLong = parcel.readLong();
-        this.activationDate = readLong == -1 ? null : new Date(readLong);
+        long j = parcel.readLong();
+        this.activationDate = j == -1 ? null : new Date(j);
     }
 
     public void setActivationDate(Date date) {

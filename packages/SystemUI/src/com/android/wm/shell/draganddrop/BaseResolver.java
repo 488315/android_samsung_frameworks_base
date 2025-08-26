@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class BaseResolver {
     public final Context mContext;
@@ -49,14 +48,14 @@ public abstract class BaseResolver {
 
     public final void resolveActivities(final Intent intent, int i, ArrayList arrayList, AppResultFactory.ResultExtra resultExtra) {
         arrayList.clear();
-        ResolveInfo resolveActivityAsUser = this.mPackageManager.resolveActivityAsUser(intent, 128, i);
-        if (resolveActivityAsUser == null) {
+        ResolveInfo resolveInfoResolveActivityAsUser = this.mPackageManager.resolveActivityAsUser(intent, 128, i);
+        if (resolveInfoResolveActivityAsUser == null) {
             return;
         }
-        if (ResolverActivity.class.getName().equals(resolveActivityAsUser.activityInfo.name)) {
+        if (ResolverActivity.class.getName().equals(resolveInfoResolveActivityAsUser.activityInfo.name)) {
             arrayList.addAll(this.mPackageManager.queryIntentActivitiesAsUser(intent, 192, i));
         } else {
-            arrayList.add(resolveActivityAsUser);
+            arrayList.add(resolveInfoResolveActivityAsUser);
         }
         final int i2 = 0;
         arrayList.removeIf(new Predicate() { // from class: com.android.wm.shell.draganddrop.BaseResolver$$ExternalSyntheticLambda0

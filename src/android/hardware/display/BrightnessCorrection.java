@@ -88,7 +88,7 @@ public final class BrightnessCorrection implements Parcelable {
         this.mImplementation.saveToXml(typedXmlSerializer);
     }
 
-    public static BrightnessCorrection loadFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public static BrightnessCorrection loadFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         int depth = typedXmlPullParser.getDepth();
         while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
             if (TAG_SCALE_AND_TRANSLATE_LOG.equals(typedXmlPullParser.getName())) {
@@ -165,7 +165,7 @@ public final class BrightnessCorrection implements Parcelable {
             return BrightnessCorrection.createScaleAndTranslateLog(parcel.readFloat(), parcel.readFloat());
         }
 
-        static BrightnessCorrection loadFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+        static BrightnessCorrection loadFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
             return BrightnessCorrection.createScaleAndTranslateLog(BrightnessCorrection.loadFloatFromXml(typedXmlPullParser, "scale"), BrightnessCorrection.loadFloatFromXml(typedXmlPullParser, ATTR_TRANSLATE));
         }
     }

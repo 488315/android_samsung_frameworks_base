@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SequencesKt__SequencesKt$flatMapIndexed$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ Function1 $iterator;
@@ -71,7 +70,7 @@ final class SequencesKt__SequencesKt$flatMapIndexed$1 extends RestrictedSuspendL
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
-            Iterator it2 = (Iterator) this.$iterator.mo779invoke(function2.invoke(new Integer(i), next));
+            Iterator it2 = (Iterator) this.$iterator.mo781invoke(function2.invoke(new Integer(i), next));
             this.L$0 = sequenceScope;
             this.L$1 = it;
             this.I$0 = i4;

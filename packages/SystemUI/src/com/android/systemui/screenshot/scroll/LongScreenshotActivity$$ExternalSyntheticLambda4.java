@@ -14,7 +14,6 @@ import com.android.systemui.screenshot.scroll.CropView;
 import com.android.systemui.screenshot.scroll.ScrollCaptureController;
 import com.android.systemui.screenshot.ui.ScreenshotAnimationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class LongScreenshotActivity$$ExternalSyntheticLambda4 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -55,11 +54,11 @@ public final /* synthetic */ class LongScreenshotActivity$$ExternalSyntheticLamb
                 final ScreenshotAnimationController screenshotAnimationController = screenshotShelfViewProxy.animationController;
                 screenshotAnimationController.getClass();
                 AnimatorSet animatorSet = new AnimatorSet();
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$1
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        ScreenshotAnimationController.this.scrollingScrim.setAlpha(1 - valueAnimator.getAnimatedFraction());
+                        screenshotAnimationController.scrollingScrim.setAlpha(1 - valueAnimator.getAnimatedFraction());
                     }
                 });
                 screenshotAnimationController.scrollTransitionPreview.setVisibility(0);
@@ -80,27 +79,27 @@ public final /* synthetic */ class LongScreenshotActivity$$ExternalSyntheticLamb
                 matrix.setScale(width2, width2);
                 matrix.postTranslate(imageTileSet.mRegion.getBounds().left * width2, imageTileSet.getTop() * width2);
                 screenshotAnimationController.scrollTransitionPreview.setImageMatrix(matrix);
-                final float width3 = rect.width() / screenshotAnimationController.scrollTransitionPreview.getWidth();
-                ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-                ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$2
+                final float fWidth = rect.width() / screenshotAnimationController.scrollTransitionPreview.getWidth();
+                ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+                valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$2
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         float animatedFraction = valueAnimator.getAnimatedFraction();
-                        float lerp = MathUtils.lerp(1.0f, width3, animatedFraction);
-                        screenshotAnimationController.scrollTransitionPreview.setScaleX(lerp);
-                        screenshotAnimationController.scrollTransitionPreview.setScaleY(lerp);
+                        float fLerp = MathUtils.lerp(1.0f, fWidth, animatedFraction);
+                        screenshotAnimationController.scrollTransitionPreview.setScaleX(fLerp);
+                        screenshotAnimationController.scrollTransitionPreview.setScaleY(fLerp);
                         screenshotAnimationController.scrollTransitionPreview.setX(MathUtils.lerp(x, rect.left, animatedFraction));
                         screenshotAnimationController.scrollTransitionPreview.setY(MathUtils.lerp(y, rect.top, animatedFraction));
                     }
                 });
-                ValueAnimator ofFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
-                ofFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$3
+                ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
+                valueAnimatorOfFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$3
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        ScreenshotAnimationController.this.scrollTransitionPreview.setAlpha(1 - valueAnimator.getAnimatedFraction());
+                        screenshotAnimationController.scrollTransitionPreview.setAlpha(1 - valueAnimator.getAnimatedFraction());
                     }
                 });
-                ofFloat2.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$$inlined$doOnEnd$1
+                valueAnimatorOfFloat2.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$runLongScreenshotTransition$$inlined$doOnEnd$1
                     @Override // android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         longScreenshotActivity$$ExternalSyntheticLambda4.run();
@@ -118,12 +117,12 @@ public final /* synthetic */ class LongScreenshotActivity$$ExternalSyntheticLamb
                     public final void onAnimationStart(Animator animator) {
                     }
                 });
-                animatorSet.play(ofFloat2).with(ofFloat).before(ofFloat3);
+                animatorSet.play(valueAnimatorOfFloat2).with(valueAnimatorOfFloat).before(valueAnimatorOfFloat3);
                 screenshotAnimationController.animator = animatorSet;
                 animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ScreenshotShelfViewProxy$startLongScreenshotTransition$$inlined$doOnEnd$1
                     @Override // android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        ScreenshotShelfViewProxy.ScreenshotViewCallback screenshotViewCallback = ScreenshotShelfViewProxy.this.callbacks;
+                        ScreenshotShelfViewProxy.ScreenshotViewCallback screenshotViewCallback = screenshotShelfViewProxy.callbacks;
                         if (screenshotViewCallback != null) {
                             screenshotViewCallback.onDismiss();
                         }
@@ -156,7 +155,7 @@ public final /* synthetic */ class LongScreenshotActivity$$ExternalSyntheticLamb
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.scroll.CropView$$ExternalSyntheticLambda0
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        CropView cropView2 = CropView.this;
+                        CropView cropView2 = cropView;
                         int i5 = CropView.$r8$clinit;
                         cropView2.getClass();
                         cropView2.mEntranceInterpolation = valueAnimator2.getAnimatedFraction();

@@ -58,7 +58,7 @@ public class Location implements Parcelable {
     private static final ThreadLocal<BearingDistanceCache> sBearingDistanceCache = ThreadLocal.withInitial(new Supplier() { // from class: android.location.Location$$ExternalSyntheticLambda0
         @Override // java.util.function.Supplier
         public final Object get() {
-            return Location.m2270$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o();
+            return Location.m2276$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o();
         }
     });
     public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() { // from class: android.location.Location.1
@@ -119,7 +119,7 @@ public class Location implements Parcelable {
     }
 
     /* renamed from: $r8$lambda$LCoyno7iOKo6n1w2mcfX-qv702o, reason: not valid java name */
-    public static /* synthetic */ BearingDistanceCache m2270$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o() {
+    public static /* synthetic */ BearingDistanceCache m2276$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o() {
         return new BearingDistanceCache();
     }
 
@@ -610,75 +610,75 @@ public class Location implements Parcelable {
         }
         DecimalFormat decimalFormat = new DecimalFormat("###.#####");
         if (i == 1 || i == 2) {
-            int floor = (int) Math.floor(d2);
-            sb.append(floor);
+            int iFloor = (int) Math.floor(d2);
+            sb.append(iFloor);
             sb.append(ShortcutConstants.SERVICES_SEPARATOR);
-            d2 = (d2 - floor) * 60.0d;
+            d2 = (d2 - iFloor) * 60.0d;
             if (i == 2) {
-                int floor2 = (int) Math.floor(d2);
-                sb.append(floor2);
+                int iFloor2 = (int) Math.floor(d2);
+                sb.append(iFloor2);
                 sb.append(ShortcutConstants.SERVICES_SEPARATOR);
-                d2 = (d2 - floor2) * 60.0d;
+                d2 = (d2 - iFloor2) * 60.0d;
             }
         }
         sb.append(decimalFormat.format(d2));
         return sb.toString();
     }
 
-    public static double convert(String str) {
-        String str2;
+    public static double convert(String str) throws NumberFormatException {
+        String strSubstring;
         boolean z;
-        double parseDouble;
-        boolean z2;
         double d;
+        boolean z2;
+        double d2;
         Objects.requireNonNull(str);
         boolean z3 = false;
         if (str.charAt(0) == '-') {
-            str2 = str.substring(1);
+            strSubstring = str.substring(1);
             z = true;
         } else {
-            str2 = str;
+            strSubstring = str;
             z = false;
         }
-        StringTokenizer stringTokenizer = new StringTokenizer(str2, ":");
-        int countTokens = stringTokenizer.countTokens();
-        if (countTokens < 1) {
-            throw new IllegalArgumentException("coordinate=" + str2);
+        StringTokenizer stringTokenizer = new StringTokenizer(strSubstring, ":");
+        int iCountTokens = stringTokenizer.countTokens();
+        if (iCountTokens < 1) {
+            throw new IllegalArgumentException("coordinate=" + strSubstring);
         }
         try {
-            String nextToken = stringTokenizer.nextToken();
-            if (countTokens == 1) {
-                double parseDouble2 = Double.parseDouble(nextToken);
-                return z ? -parseDouble2 : parseDouble2;
-            }
-            String nextToken2 = stringTokenizer.nextToken();
-            int parseInt = Integer.parseInt(nextToken);
-            if (stringTokenizer.hasMoreTokens()) {
-                parseDouble = Integer.parseInt(nextToken2);
-                d = Double.parseDouble(stringTokenizer.nextToken());
-                z2 = true;
-            } else {
-                parseDouble = Double.parseDouble(nextToken2);
-                z2 = false;
-                d = 0.0d;
-            }
-            if (z && parseInt == 180 && parseDouble == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && d == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-                z3 = true;
-            }
-            double d2 = parseInt;
-            if (d2 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || (parseInt > 179 && !z3)) {
-                throw new IllegalArgumentException("coordinate=" + str2);
-            }
-            if (parseDouble < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || parseDouble >= 60.0d || (z2 && parseDouble > 59.0d)) {
-                throw new IllegalArgumentException("coordinate=" + str2);
-            }
-            if (d >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && d < 60.0d) {
-                double d3 = (((d2 * 3600.0d) + (parseDouble * 60.0d)) + d) / 3600.0d;
+            String strNextToken = stringTokenizer.nextToken();
+            if (iCountTokens == 1) {
+                double d3 = Double.parseDouble(strNextToken);
                 return z ? -d3 : d3;
             }
-            throw new IllegalArgumentException("coordinate=" + str2);
+            String strNextToken2 = stringTokenizer.nextToken();
+            int i = Integer.parseInt(strNextToken);
+            if (stringTokenizer.hasMoreTokens()) {
+                d = Integer.parseInt(strNextToken2);
+                d2 = Double.parseDouble(stringTokenizer.nextToken());
+                z2 = true;
+            } else {
+                d = Double.parseDouble(strNextToken2);
+                z2 = false;
+                d2 = 0.0d;
+            }
+            if (z && i == 180 && d == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && d2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+                z3 = true;
+            }
+            double d4 = i;
+            if (d4 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || (i > 179 && !z3)) {
+                throw new IllegalArgumentException("coordinate=" + strSubstring);
+            }
+            if (d < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || d >= 60.0d || (z2 && d > 59.0d)) {
+                throw new IllegalArgumentException("coordinate=" + strSubstring);
+            }
+            if (d2 >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && d2 < 60.0d) {
+                double d5 = (((d4 * 3600.0d) + (d * 60.0d)) + d2) / 3600.0d;
+                return z ? -d5 : d5;
+            }
+            throw new IllegalArgumentException("coordinate=" + strSubstring);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("coordinate=" + str2, e);
+            throw new IllegalArgumentException("coordinate=" + strSubstring, e);
         }
     }
 
@@ -689,61 +689,61 @@ public class Location implements Parcelable {
         double d8 = d2 * 0.017453292519943295d;
         double d9 = 0.017453292519943295d * d4;
         double d10 = d9 - d8;
-        double atan = Math.atan(Math.tan(d6) * 0.996647189328169d);
-        double atan2 = Math.atan(0.996647189328169d * Math.tan(d7));
-        double cos = Math.cos(atan);
-        double cos2 = Math.cos(atan2);
-        double sin = Math.sin(atan);
-        double sin2 = Math.sin(atan2);
-        double d11 = cos * cos2;
-        double d12 = sin * sin2;
+        double dAtan = Math.atan(Math.tan(d6) * 0.996647189328169d);
+        double dAtan2 = Math.atan(0.996647189328169d * Math.tan(d7));
+        double dCos = Math.cos(dAtan);
+        double dCos2 = Math.cos(dAtan2);
+        double dSin = Math.sin(dAtan);
+        double dSin2 = Math.sin(dAtan2);
+        double d11 = dCos * dCos2;
+        double d12 = dSin * dSin2;
+        double dAtan22 = 0.0d;
         double d13 = 0.0d;
+        double dCos3 = 0.0d;
         double d14 = 0.0d;
-        double d15 = 0.0d;
-        double d16 = 0.0d;
-        double d17 = 0.0d;
+        double dSin3 = 0.0d;
         int i = 0;
-        double d18 = d10;
+        double d15 = d10;
         while (true) {
             if (i >= 20) {
-                d5 = sin2;
+                d5 = dSin2;
                 break;
             }
-            d15 = Math.cos(d18);
-            d17 = Math.sin(d18);
-            double d19 = cos2 * d17;
-            double d20 = (cos * sin2) - ((sin * cos2) * d15);
+            dCos3 = Math.cos(d15);
+            dSin3 = Math.sin(d15);
+            double d16 = dCos2 * dSin3;
+            double d17 = (dCos * dSin2) - ((dSin * dCos2) * dCos3);
             int i2 = i;
-            double sqrt = Math.sqrt((d19 * d19) + (d20 * d20));
-            d5 = sin2;
-            double d21 = d12 + (d11 * d15);
-            d13 = Math.atan2(sqrt, d21);
-            double d22 = sqrt == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? 0.0d : (d11 * d17) / sqrt;
-            double d23 = 1.0d - (d22 * d22);
-            double d24 = d23 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? 0.0d : d21 - ((d12 * 2.0d) / d23);
-            double d25 = 0.006739496756586903d * d23;
-            double d26 = ((d25 / 16384.0d) * (((((320.0d - (175.0d * d25)) * d25) - 768.0d) * d25) + 4096.0d)) + 1.0d;
-            double d27 = (d25 / 1024.0d) * ((d25 * (((74.0d - (47.0d * d25)) * d25) - 128.0d)) + 256.0d);
-            double d28 = 2.0955066698943685E-4d * d23 * (((4.0d - (d23 * 3.0d)) * 0.0033528106718309896d) + 4.0d);
-            double d29 = d24 * d24;
-            double d30 = d27 * sqrt * (d24 + ((d27 / 4.0d) * ((((d29 * 2.0d) - 1.0d) * d21) - ((((d27 / 6.0d) * d24) * (((sqrt * 4.0d) * sqrt) - 3.0d)) * ((d29 * 4.0d) - 3.0d)))));
-            double d31 = d10 + ((1.0d - d28) * 0.0033528106718309896d * d22 * (d13 + (sqrt * d28 * (d24 + (d28 * d21 * (((2.0d * d24) * d24) - 1.0d))))));
-            if (Math.abs((d31 - d18) / d31) < 1.0E-12d) {
-                d14 = d30;
-                d16 = d26;
+            double dSqrt = Math.sqrt((d16 * d16) + (d17 * d17));
+            d5 = dSin2;
+            double d18 = d12 + (d11 * dCos3);
+            dAtan22 = Math.atan2(dSqrt, d18);
+            double d19 = dSqrt == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? 0.0d : (d11 * dSin3) / dSqrt;
+            double d20 = 1.0d - (d19 * d19);
+            double d21 = d20 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? 0.0d : d18 - ((d12 * 2.0d) / d20);
+            double d22 = 0.006739496756586903d * d20;
+            double d23 = ((d22 / 16384.0d) * (((((320.0d - (175.0d * d22)) * d22) - 768.0d) * d22) + 4096.0d)) + 1.0d;
+            double d24 = (d22 / 1024.0d) * ((d22 * (((74.0d - (47.0d * d22)) * d22) - 128.0d)) + 256.0d);
+            double d25 = 2.0955066698943685E-4d * d20 * (((4.0d - (d20 * 3.0d)) * 0.0033528106718309896d) + 4.0d);
+            double d26 = d21 * d21;
+            double d27 = d24 * dSqrt * (d21 + ((d24 / 4.0d) * ((((d26 * 2.0d) - 1.0d) * d18) - ((((d24 / 6.0d) * d21) * (((dSqrt * 4.0d) * dSqrt) - 3.0d)) * ((d26 * 4.0d) - 3.0d)))));
+            double d28 = d10 + ((1.0d - d25) * 0.0033528106718309896d * d19 * (dAtan22 + (dSqrt * d25 * (d21 + (d25 * d18 * (((2.0d * d21) * d21) - 1.0d))))));
+            if (Math.abs((d28 - d15) / d28) < 1.0E-12d) {
+                d13 = d27;
+                d14 = d23;
                 break;
             } else {
-                d18 = d31;
+                d15 = d28;
                 i = i2 + 1;
-                d14 = d30;
-                d16 = d26;
-                sin2 = d5;
+                d13 = d27;
+                d14 = d23;
+                dSin2 = d5;
             }
         }
-        bearingDistanceCache.mDistance = (float) (6356752.3142d * d16 * (d13 - d14));
-        double d32 = cos * d5;
-        bearingDistanceCache.mInitialBearing = (float) (((float) Math.atan2(cos2 * d17, d32 - ((sin * cos2) * d15))) * 57.29577951308232d);
-        bearingDistanceCache.mFinalBearing = (float) (((float) Math.atan2(cos * d17, ((-sin) * cos2) + (d32 * d15))) * 57.29577951308232d);
+        bearingDistanceCache.mDistance = (float) (6356752.3142d * d14 * (dAtan22 - d13));
+        double d29 = dCos * d5;
+        bearingDistanceCache.mInitialBearing = (float) (((float) Math.atan2(dCos2 * dSin3, d29 - ((dSin * dCos2) * dCos3))) * 57.29577951308232d);
+        bearingDistanceCache.mFinalBearing = (float) (((float) Math.atan2(dCos * dSin3, ((-dSin) * dCos2) + (d29 * dCos3))) * 57.29577951308232d);
         bearingDistanceCache.mLat1 = d6;
         bearingDistanceCache.mLat2 = d7;
         bearingDistanceCache.mLon1 = d8;

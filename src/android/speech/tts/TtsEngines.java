@@ -6,11 +6,17 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Xml;
+import com.android.internal.R;
 import com.android.internal.accessibility.common.ShortcutConstants;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public class TtsEngines {
@@ -33,22 +40,22 @@ public class TtsEngines {
     private final Context mContext;
 
     static {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (String str : Locale.getISOLanguages()) {
             try {
-                hashMap.put(new Locale(str).getISO3Language(), str);
+                map.put(new Locale(str).getISO3Language(), str);
             } catch (MissingResourceException unused) {
             }
         }
-        sNormalizeLanguage = Collections.unmodifiableMap(hashMap);
-        HashMap hashMap2 = new HashMap();
+        sNormalizeLanguage = Collections.unmodifiableMap(map);
+        HashMap map2 = new HashMap();
         for (String str2 : Locale.getISOCountries()) {
             try {
-                hashMap2.put(new Locale("", str2).getISO3Country(), str2);
+                map2.put(new Locale("", str2).getISO3Country(), str2);
             } catch (MissingResourceException unused2) {
             }
         }
-        sNormalizeCountry = Collections.unmodifiableMap(hashMap2);
+        sNormalizeCountry = Collections.unmodifiableMap(map2);
     }
 
     public TtsEngines(Context context) {
@@ -72,21 +79,21 @@ public class TtsEngines {
         PackageManager packageManager = this.mContext.getPackageManager();
         Intent intent = new Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE);
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 65536);
-        if (queryIntentServices == null || queryIntentServices.size() != 1) {
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 65536);
+        if (listQueryIntentServices == null || listQueryIntentServices.size() != 1) {
             return null;
         }
-        return getEngineInfo(queryIntentServices.get(0), packageManager);
+        return getEngineInfo(listQueryIntentServices.get(0), packageManager);
     }
 
     public List<TextToSpeech.EngineInfo> getEngines() {
         PackageManager packageManager = this.mContext.getPackageManager();
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(new Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE), 65536);
-        if (queryIntentServices == null) {
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(new Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE), 65536);
+        if (listQueryIntentServices == null) {
             return Collections.EMPTY_LIST;
         }
-        ArrayList arrayList = new ArrayList(queryIntentServices.size());
-        Iterator<ResolveInfo> it = queryIntentServices.iterator();
+        ArrayList arrayList = new ArrayList(listQueryIntentServices.size());
+        Iterator<ResolveInfo> it = listQueryIntentServices.iterator();
         while (it.hasNext()) {
             TextToSpeech.EngineInfo engineInfo = getEngineInfo(it.next(), packageManager);
             if (engineInfo != null) {
@@ -112,8 +119,8 @@ public class TtsEngines {
         PackageManager packageManager = this.mContext.getPackageManager();
         Intent intent = new Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE);
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 65664);
-        if (queryIntentServices == null || queryIntentServices.size() != 1 || (serviceInfo = queryIntentServices.get(0).serviceInfo) == null || (str2 = settingsActivityFromServiceInfo(serviceInfo, packageManager)) == null) {
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 65664);
+        if (listQueryIntentServices == null || listQueryIntentServices.size() != 1 || (serviceInfo = listQueryIntentServices.get(0).serviceInfo) == null || (str2 = settingsActivityFromServiceInfo(serviceInfo, packageManager)) == null) {
             return null;
         }
         Intent intent2 = new Intent();
@@ -121,18 +128,94 @@ public class TtsEngines {
         return intent2;
     }
 
-    /* JADX WARN: Not initialized variable reg: 4, insn: 0x00e9: MOVE (r3 I:??[OBJECT, ARRAY]) = (r4 I:??[OBJECT, ARRAY]), block:B:49:0x00e9 */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00ec  */
+    /* JADX WARN: Not initialized variable reg: 4, insn: 0x00e9: MOVE (r3 I:??[OBJECT, ARRAY]) = (r4 I:??[OBJECT, ARRAY]), block:B:51:0x00e9 */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00ec  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String settingsActivityFromServiceInfo(android.content.pm.ServiceInfo r7, android.content.pm.PackageManager r8) {
-        /*
-            Method dump skipped, instructions count: 240
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.speech.tts.TtsEngines.settingsActivityFromServiceInfo(android.content.pm.ServiceInfo, android.content.pm.PackageManager):java.lang.String");
+    private String settingsActivityFromServiceInfo(ServiceInfo serviceInfo, PackageManager packageManager) throws Throwable {
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
+        XmlResourceParser xmlResourceParser;
+        int next;
+        XmlResourceParser xmlResourceParser2 = null;
+        try {
+            try {
+                xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, TextToSpeech.Engine.SERVICE_META_DATA);
+                try {
+                    if (xmlResourceParserLoadXmlMetaData == null) {
+                        Log.w(TAG, "No meta-data found for :" + serviceInfo);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        return null;
+                    }
+                    Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
+                    do {
+                        next = xmlResourceParserLoadXmlMetaData.next();
+                        if (next == 1) {
+                            if (xmlResourceParserLoadXmlMetaData != null) {
+                                xmlResourceParserLoadXmlMetaData.close();
+                            }
+                            return null;
+                        }
+                    } while (next != 2);
+                    if (XML_TAG_NAME.equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                        TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.TextToSpeechEngine);
+                        String string = typedArrayObtainAttributes.getString(0);
+                        typedArrayObtainAttributes.recycle();
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        return string;
+                    }
+                    Log.w(TAG, "Package " + serviceInfo + " uses unknown tag :" + xmlResourceParserLoadXmlMetaData.getName());
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
+                    }
+                    return null;
+                } catch (PackageManager.NameNotFoundException unused) {
+                    Log.w(TAG, "Could not load resources for : " + serviceInfo);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
+                    }
+                    return null;
+                } catch (IOException e) {
+                    e = e;
+                    Log.w(TAG, "Error parsing metadata for " + serviceInfo + ":" + e);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
+                    }
+                    return null;
+                } catch (XmlPullParserException e2) {
+                    e = e2;
+                    Log.w(TAG, "Error parsing metadata for " + serviceInfo + ":" + e);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
+                    }
+                    return null;
+                }
+            } catch (Throwable th) {
+                th = th;
+                xmlResourceParser2 = xmlResourceParser;
+                if (xmlResourceParser2 != null) {
+                    xmlResourceParser2.close();
+                }
+                throw th;
+            }
+        } catch (PackageManager.NameNotFoundException unused2) {
+            xmlResourceParserLoadXmlMetaData = null;
+        } catch (IOException e3) {
+            e = e3;
+            xmlResourceParserLoadXmlMetaData = null;
+        } catch (XmlPullParserException e4) {
+            e = e4;
+            xmlResourceParserLoadXmlMetaData = null;
+        } catch (Throwable th2) {
+            th = th2;
+            if (xmlResourceParser2 != null) {
+            }
+            throw th;
+        }
     }
 
     private TextToSpeech.EngineInfo getEngineInfo(ResolveInfo resolveInfo, PackageManager packageManager) {
@@ -142,8 +225,8 @@ public class TtsEngines {
         }
         TextToSpeech.EngineInfo engineInfo = new TextToSpeech.EngineInfo();
         engineInfo.name = serviceInfo.packageName;
-        CharSequence loadLabel = serviceInfo.loadLabel(packageManager);
-        engineInfo.label = TextUtils.isEmpty(loadLabel) ? engineInfo.name : loadLabel.toString();
+        CharSequence charSequenceLoadLabel = serviceInfo.loadLabel(packageManager);
+        engineInfo.label = TextUtils.isEmpty(charSequenceLoadLabel) ? engineInfo.name : charSequenceLoadLabel.toString();
         engineInfo.icon = serviceInfo.getIconResource();
         engineInfo.priority = resolveInfo.priority;
         engineInfo.system = isSystemEngine(serviceInfo);
@@ -172,16 +255,16 @@ public class TtsEngines {
         return getLocalePrefForEngine(str, Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE));
     }
 
-    public Locale getLocalePrefForEngine(String str, String str2) {
-        String parseEnginePrefFromList = parseEnginePrefFromList(str2, str);
-        if (TextUtils.isEmpty(parseEnginePrefFromList)) {
+    public Locale getLocalePrefForEngine(String str, String str2) throws MissingResourceException {
+        String enginePrefFromList = parseEnginePrefFromList(str2, str);
+        if (TextUtils.isEmpty(enginePrefFromList)) {
             return Locale.getDefault();
         }
-        Locale parseLocaleString = parseLocaleString(parseEnginePrefFromList);
-        if (parseLocaleString != null) {
-            return parseLocaleString;
+        Locale localeString = parseLocaleString(enginePrefFromList);
+        if (localeString != null) {
+            return localeString;
         }
-        Log.w(TAG, "Failed to parse locale " + parseEnginePrefFromList + ", returning en_US instead");
+        Log.w(TAG, "Failed to parse locale " + enginePrefFromList + ", returning en_US instead");
         return Locale.US;
     }
 
@@ -189,38 +272,38 @@ public class TtsEngines {
         return TextUtils.isEmpty(parseEnginePrefFromList(Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE), str));
     }
 
-    public Locale parseLocaleString(String str) {
+    public Locale parseLocaleString(String str) throws MissingResourceException {
         String str2;
         String str3;
-        String str4;
+        String upperCase;
         str2 = "";
         if (TextUtils.isEmpty(str)) {
             str3 = "";
-            str4 = str3;
+            upperCase = str3;
         } else {
-            String[] split = str.split("[-_]");
-            String lowerCase = split[0].toLowerCase();
-            if (split.length == 0) {
+            String[] strArrSplit = str.split("[-_]");
+            String lowerCase = strArrSplit[0].toLowerCase();
+            if (strArrSplit.length == 0) {
                 Log.w(TAG, "Failed to convert " + str + " to a valid Locale object. Only separators");
                 return null;
             }
-            if (split.length > 3) {
+            if (strArrSplit.length > 3) {
                 Log.w(TAG, "Failed to convert " + str + " to a valid Locale object. Too many separators");
                 return null;
             }
-            str4 = split.length >= 2 ? split[1].toUpperCase() : "";
-            str3 = split.length >= 3 ? split[2] : "";
+            upperCase = strArrSplit.length >= 2 ? strArrSplit[1].toUpperCase() : "";
+            str3 = strArrSplit.length >= 3 ? strArrSplit[2] : "";
             str2 = lowerCase;
         }
-        String str5 = sNormalizeLanguage.get(str2);
+        String str4 = sNormalizeLanguage.get(str2);
+        if (str4 != null) {
+            str2 = str4;
+        }
+        String str5 = sNormalizeCountry.get(upperCase);
         if (str5 != null) {
-            str2 = str5;
+            upperCase = str5;
         }
-        String str6 = sNormalizeCountry.get(str4);
-        if (str6 != null) {
-            str4 = str6;
-        }
-        Locale locale = new Locale(str2, str4, str3);
+        Locale locale = new Locale(str2, upperCase, str3);
         try {
             locale.getISO3Language();
             locale.getISO3Country();
@@ -262,9 +345,9 @@ public class TtsEngines {
             return null;
         }
         for (String str3 : str.split(",")) {
-            int indexOf = str3.indexOf(58);
-            if (indexOf > 0 && str2.equals(str3.substring(0, indexOf))) {
-                return str3.substring(indexOf + 1);
+            int iIndexOf = str3.indexOf(58);
+            if (iIndexOf > 0 && str2.equals(str3.substring(0, iIndexOf))) {
+                return str3.substring(iIndexOf + 1);
             }
         }
         return null;
@@ -284,9 +367,9 @@ public class TtsEngines {
             boolean z = true;
             boolean z2 = false;
             for (String str4 : str.split(",")) {
-                int indexOf = str4.indexOf(58);
-                if (indexOf > 0) {
-                    if (str2.equals(str4.substring(0, indexOf))) {
+                int iIndexOf = str4.indexOf(58);
+                if (iIndexOf > 0) {
+                    if (str2.equals(str4.substring(0, iIndexOf))) {
                         if (z) {
                             z = false;
                         } else {

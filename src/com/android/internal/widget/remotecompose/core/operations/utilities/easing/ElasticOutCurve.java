@@ -23,9 +23,9 @@ public class ElasticOutCurve extends Easing {
         if (f < 0.0f || f > 1.0f) {
             return 0.0f;
         }
-        double pow = Math.pow(2.0d, 1.0f - (10.0f * f)) * 5.0d;
+        double dPow = Math.pow(2.0d, 1.0f - (10.0f * f)) * 5.0d;
         double d = LOG_8;
         double d2 = (f * TWENTY_PI) / 3.0f;
-        return (float) ((pow * ((d * Math.cos(d2)) + (Math.sin(d2) * 6.2831854820251465d))) / 3.0d);
+        return (float) ((dPow * ((d * Math.cos(d2)) + (Math.sin(d2) * 6.2831854820251465d))) / 3.0d);
     }
 }

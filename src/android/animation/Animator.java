@@ -296,7 +296,7 @@ public abstract class Animator implements Cloneable {
             this.mPendingEndCallback = new Runnable() { // from class: android.animation.Animator$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Animator.this.lambda$notifyEndListenersFromEndAnimation$0(z);
+                    this.f$0.lambda$notifyEndListenersFromEndAnimation$0(z);
                 }
             };
             AnimationHandler.getInstance().postEndAnimationCallback(this.mPendingEndCallback);
@@ -375,9 +375,9 @@ public abstract class Animator implements Cloneable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.res.ConstantState
         public Animator newInstance() {
-            Animator mo76clone = this.mAnimator.mo76clone();
-            mo76clone.mConstantState = this;
-            return mo76clone;
+            Animator animatorMo76clone = this.mAnimator.mo76clone();
+            animatorMo76clone.mConstantState = this;
+            return animatorMo76clone;
         }
     }
 

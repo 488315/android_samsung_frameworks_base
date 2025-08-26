@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
 import android.os.UserManager;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
@@ -14,6 +15,8 @@ import android.widget.DateTimeView;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import com.android.internal.util.ContrastColorUtil;
+import com.android.internal.widget.NotificationRowIconView;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
@@ -22,13 +25,13 @@ import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.statusbar.notification.SubscreenNotificationController;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.util.DeviceState;
+import com.android.systemui.util.SettingsHelper;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.Arrays;
 import java.util.Iterator;
 import kotlin.text.StringsKt__StringNumberConversionsJVMKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingActivityLayoutUtil {
     public static final OngoingActivityLayoutUtil INSTANCE = new OngoingActivityLayoutUtil();
@@ -71,15 +74,15 @@ public final class OngoingActivityLayoutUtil {
 
     public static boolean isManagedProfile(StatusBarNotification statusBarNotification, Context context, int i) {
         UserManager userManager = (UserManager) statusBarNotification.getPackageContext(context).getSystemService(UserManager.class);
-        Boolean valueOf = userManager != null ? Boolean.valueOf(userManager.isManagedProfile(i)) : null;
-        valueOf.getClass();
-        if (valueOf.booleanValue()) {
+        Boolean boolValueOf = userManager != null ? Boolean.valueOf(userManager.isManagedProfile(i)) : null;
+        boolValueOf.getClass();
+        if (boolValueOf.booleanValue()) {
             return true;
         }
         UserManager userManager2 = (UserManager) statusBarNotification.getPackageContext(context).getSystemService(UserManager.class);
-        Boolean valueOf2 = userManager2 != null ? Boolean.valueOf(userManager2.isPrivateProfile()) : null;
-        valueOf2.getClass();
-        return valueOf2.booleanValue();
+        Boolean boolValueOf2 = userManager2 != null ? Boolean.valueOf(userManager2.isPrivateProfile()) : null;
+        boolValueOf2.getClass();
+        return boolValueOf2.booleanValue();
     }
 
     public static boolean isPrimaryChronometer(OngoingActivityData ongoingActivityData) {
@@ -93,20 +96,20 @@ public final class OngoingActivityLayoutUtil {
         Resources resources = context.getResources();
         float f = resources.getDisplayMetrics().density;
         if (z) {
-            remoteViews.setFloat(android.R.id.remote_input, "setTopLineExtraMarginEndDp", (resources.getDimension(17105810) / f) + (resources.getDimension(17105807) / f) + (resources.getDimension(android.R.dimen.toast_text_size) / f));
+            remoteViews.setFloat(android.R.id.remote_input, "setTopLineExtraMarginEndDp", (resources.getDimension(17105811) / f) + (resources.getDimension(17105808) / f) + (resources.getDimension(android.R.dimen.toast_width) / f));
         } else {
-            remoteViews.setFloat(android.R.id.remote_input, "setTopLineExtraMarginEndDp", resources.getDimension(android.R.dimen.toast_text_size) / f);
+            remoteViews.setFloat(android.R.id.remote_input, "setTopLineExtraMarginEndDp", resources.getDimension(android.R.dimen.toast_width) / f);
         }
         boolean z2 = notificationEntry.mSbn.getNotification().getLargeIcon() != null;
         Resources resources2 = context.getResources();
         float f2 = resources2.getDisplayMetrics().density;
         if (z2) {
-            remoteViews.setViewLayoutMargin(android.R.id.title, 5, (resources2.getDimension(17105810) / f2) + (resources2.getDimension(17105807) / f2) + (resources2.getDimension(android.R.dimen.toast_text_size) / f2), 1);
+            remoteViews.setViewLayoutMargin(android.R.id.title, 5, (resources2.getDimension(17105811) / f2) + (resources2.getDimension(17105808) / f2) + (resources2.getDimension(android.R.dimen.toast_width) / f2), 1);
         } else {
-            remoteViews.setViewLayoutMargin(android.R.id.title, 5, resources2.getDimension(android.R.dimen.toast_text_size) / f2, 1);
+            remoteViews.setViewLayoutMargin(android.R.id.title, 5, resources2.getDimension(android.R.dimen.toast_width) / f2, 1);
         }
         if (notificationEntry.mSbn.getNotification().getLargeIcon() != null) {
-            remoteViews.setViewLayoutMargin(android.R.id.tag_top_animator, 5, r12.getDimensionPixelSize(android.R.dimen.toast_text_size) / context.getResources().getDisplayMetrics().density, 1);
+            remoteViews.setViewLayoutMargin(android.R.id.tag_top_override, 5, r12.getDimensionPixelSize(android.R.dimen.toast_width) / context.getResources().getDisplayMetrics().density, 1);
         }
     }
 
@@ -117,106 +120,72 @@ public final class OngoingActivityLayoutUtil {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0046  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void setOngoingNotificationIcon(com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData r10, android.widget.RemoteViews r11, int r12, android.content.Context r13) {
-        /*
-            com.android.systemui.Dependency r0 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.util.SettingsHelper> r1 = com.android.systemui.util.SettingsHelper.class
-            java.lang.Object r0 = r0.getDependencyInner(r1)
-            com.android.systemui.util.SettingsHelper r0 = (com.android.systemui.util.SettingsHelper) r0
-            boolean r0 = r0.isShowNotificationAppIconEnabled()
-            com.android.systemui.statusbar.notification.collection.NotificationEntry r1 = r10.mNotificationEntry
-            android.service.notification.StatusBarNotification r2 = r1.mSbn
-            android.app.Notification r2 = r2.getNotification()
-            android.os.Bundle r2 = r2.extras
-            java.lang.String r3 = "android.showSmallIcon"
-            boolean r2 = r2.getBoolean(r3)
-            r3 = 0
-            if (r2 != 0) goto L3a
-            android.service.notification.StatusBarNotification r1 = r1.mSbn
-            java.lang.String r1 = r1.getPackageName()
-            java.lang.String r2 = "android"
-            boolean r2 = r1.startsWith(r2)
-            if (r2 != 0) goto L3a
-            java.lang.String r2 = "com.android.systemui"
-            boolean r1 = r1.startsWith(r2)
-            if (r1 == 0) goto L38
-            goto L3a
-        L38:
-            r1 = r3
-            goto L3b
-        L3a:
-            r1 = 1
-        L3b:
-            if (r0 == 0) goto L42
-            if (r1 != 0) goto L42
-            android.graphics.drawable.Icon r2 = r10.mAppIcon
-            goto L44
-        L42:
-            android.graphics.drawable.Icon r2 = r10.mCardIcon
-        L44:
-            if (r2 == 0) goto L77
-            r11.setImageViewIcon(r12, r2)
-            com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil r2 = com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil.INSTANCE
-            if (r0 != 0) goto L56
-            r2.getClass()
-            updateSmallIconView(r10, r11, r12, r13)
-        L53:
-            r4 = r11
-            r5 = r12
-            goto L74
-        L56:
-            java.lang.String r0 = "setBackgroundResource"
-            if (r1 == 0) goto L68
-            r1 = 2131235715(0x7f081383, float:1.8087632E38)
-            r11.setInt(r12, r0, r1)
-            r2.getClass()
-            updateSmallIconView(r10, r11, r12, r13)
-            goto L53
-        L68:
-            r11.setInt(r12, r0, r3)
-            r6 = 0
-            r7 = 0
-            r8 = 0
-            r9 = 0
-            r4 = r11
-            r5 = r12
-            r4.setViewPadding(r5, r6, r7, r8, r9)
-        L74:
-            r4.setViewVisibility(r5, r3)
-        L77:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil.setOngoingNotificationIcon(com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData, android.widget.RemoteViews, int, android.content.Context):void");
+    public static void setOngoingNotificationIcon(OngoingActivityData ongoingActivityData, RemoteViews remoteViews, int i, Context context) {
+        boolean z;
+        RemoteViews remoteViews2;
+        int i2;
+        boolean zIsShowNotificationAppIconEnabled = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isShowNotificationAppIconEnabled();
+        NotificationEntry notificationEntry = ongoingActivityData.mNotificationEntry;
+        if (!notificationEntry.mSbn.getNotification().extras.getBoolean("android.showSmallIcon")) {
+            String packageName = notificationEntry.mSbn.getPackageName();
+            z = packageName.startsWith("android") || packageName.startsWith("com.android.systemui");
+        }
+        Icon icon = (!zIsShowNotificationAppIconEnabled || z) ? ongoingActivityData.mCardIcon : ongoingActivityData.mAppIcon;
+        if (icon != null) {
+            remoteViews.setImageViewIcon(i, icon);
+            boolean zIsGrayscaleIcon = ContrastColorUtil.getInstance(context).isGrayscaleIcon(icon.loadDrawable(context));
+            OngoingActivityLayoutUtil ongoingActivityLayoutUtil = INSTANCE;
+            if (!zIsShowNotificationAppIconEnabled) {
+                ongoingActivityLayoutUtil.getClass();
+                updateSmallIconView(ongoingActivityData, remoteViews, i, context, zIsGrayscaleIcon);
+            } else {
+                if (!z) {
+                    remoteViews.setInt(i, "setBackgroundResource", 0);
+                    remoteViews2 = remoteViews;
+                    i2 = i;
+                    remoteViews2.setViewPadding(i2, 0, 0, 0, 0);
+                    remoteViews2.setViewVisibility(i2, 0);
+                }
+                if (zIsGrayscaleIcon) {
+                    remoteViews.setInt(i, "setBackgroundResource", R.drawable.squircle);
+                } else {
+                    remoteViews.setInt(i, "setBackgroundResource", R.drawable.nongrayscale_small_icon_outline_squirecle);
+                }
+                ongoingActivityLayoutUtil.getClass();
+                updateSmallIconView(ongoingActivityData, remoteViews, i, context, zIsGrayscaleIcon);
+            }
+            remoteViews2 = remoteViews;
+            i2 = i;
+            remoteViews2.setViewVisibility(i2, 0);
+        }
     }
 
     public static void updateNowbarSports(Context context, View view, OngoingActivityData ongoingActivityData, OngoingType ongoingType) {
-        String obj;
+        String string;
         int subScreenCardWidth = (NotiRune.NOTI_SUBSCREEN_NOTIFICATION_FIFTH && ongoingType == OngoingType.SUB) ? ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).getSubScreenCardWidth(context) : ongoingType == OngoingType.ENR ? getENRCardWidth(context) : getOngoingCardWidth(context);
         if (ongoingActivityData.mCustomExpandedCardView != null) {
             Iterator it = Arrays.asList("sports_expand_margin_start", "sports_expand_margin_end").iterator();
             while (it.hasNext()) {
-                View findViewWithTag = view.findViewWithTag((String) it.next());
-                if (findViewWithTag != null) {
-                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) findViewWithTag.getLayoutParams();
+                View viewFindViewWithTag = view.findViewWithTag((String) it.next());
+                if (viewFindViewWithTag != null) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) viewFindViewWithTag.getLayoutParams();
                     layoutParams.width = (int) (subScreenCardWidth * 0.06f);
-                    findViewWithTag.setLayoutParams(layoutParams);
+                    viewFindViewWithTag.setLayoutParams(layoutParams);
                 }
             }
             Iterator it2 = Arrays.asList("start_team_progress", "draw_progress", "end_team_progress").iterator();
             while (it2.hasNext()) {
-                View findViewWithTag2 = view.findViewWithTag((String) it2.next());
-                if (findViewWithTag2 != null) {
-                    CharSequence contentDescription = findViewWithTag2.getContentDescription();
-                    Float floatOrNull = (contentDescription == null || (obj = contentDescription.toString()) == null) ? null : StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(obj);
-                    LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) findViewWithTag2.getLayoutParams();
+                View viewFindViewWithTag2 = view.findViewWithTag((String) it2.next());
+                if (viewFindViewWithTag2 != null) {
+                    CharSequence contentDescription = viewFindViewWithTag2.getContentDescription();
+                    Float floatOrNull = (contentDescription == null || (string = contentDescription.toString()) == null) ? null : StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(string);
+                    LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) viewFindViewWithTag2.getLayoutParams();
                     layoutParams2.weight = floatOrNull != null ? floatOrNull.floatValue() : layoutParams2.weight;
-                    findViewWithTag2.setLayoutParams(layoutParams2);
+                    viewFindViewWithTag2.setLayoutParams(layoutParams2);
                 }
             }
         }
@@ -224,8 +193,8 @@ public final class OngoingActivityLayoutUtil {
 
     public static void updateOngoingChronometer(View view, OngoingActivityData ongoingActivityData, boolean z) {
         String str = ongoingActivityData.mChronometerTag;
-        boolean isPromotedState = ongoingActivityData.mNotificationEntry.isPromotedState();
-        boolean isActionStyle = isActionStyle(ongoingActivityData);
+        boolean zIsPromotedState = ongoingActivityData.mNotificationEntry.isPromotedState();
+        boolean zIsActionStyle = isActionStyle(ongoingActivityData);
         Context context = view.getContext();
         boolean z2 = view.findViewWithTag(str) instanceof Chronometer;
         int i = R.color.ongoing_activity_card_item_sub_text_color;
@@ -239,13 +208,13 @@ public final class OngoingActivityLayoutUtil {
                 if (isPrimaryChronometer(ongoingActivityData)) {
                     chronometer.setId(R.id.tag_for_ongoing_chronometer_expand_primary);
                     chronometer.setTextColor(context.getColor(R.color.ongoing_activity_card_item_main_text_color));
-                    updatePrimaryChronometerFont(context, chronometer, isPromotedState, isActionStyle, z);
+                    updatePrimaryChronometerFont(context, chronometer, zIsPromotedState, zIsActionStyle, z);
                 }
                 if (ongoingActivityData.mChronometerView == null || ongoingActivityData.mChronometerPosition != 2) {
                     return;
                 }
                 chronometer.setId(R.id.tag_for_ongoing_chronometer_expand_secondary);
-                if (isActionStyle) {
+                if (zIsActionStyle) {
                     i = R.color.ongoing_activity_action_style_secondary_text_color;
                 }
                 chronometer.setTextColor(context.getColor(i));
@@ -255,53 +224,62 @@ public final class OngoingActivityLayoutUtil {
             return;
         }
         if (isPrimaryChronometer(ongoingActivityData)) {
-            Chronometer findChronometer = findChronometer(view, "expandPrimaryContainer");
-            if (findChronometer == null) {
-                findChronometer = findChronometer(view, "collapsedPrimaryContainer");
+            Chronometer chronometerFindChronometer = findChronometer(view, "expandPrimaryContainer");
+            if (chronometerFindChronometer == null) {
+                chronometerFindChronometer = findChronometer(view, "collapsedPrimaryContainer");
             }
-            if (findChronometer != null) {
+            if (chronometerFindChronometer != null) {
                 ongoingActivityLayoutUtil.getClass();
-                findChronometer.getLayoutParams().width = -1;
-                findChronometer.setEllipsize(TextUtils.TruncateAt.END);
-                findChronometer.setId(R.id.tag_for_ongoing_chronometer_expand_primary);
-                findChronometer.setTextColor(context.getColor(R.color.ongoing_activity_card_item_main_text_color));
-                updatePrimaryChronometerFont(context, findChronometer, isPromotedState, isActionStyle, z);
+                chronometerFindChronometer.getLayoutParams().width = -1;
+                chronometerFindChronometer.setEllipsize(TextUtils.TruncateAt.END);
+                chronometerFindChronometer.setId(R.id.tag_for_ongoing_chronometer_expand_primary);
+                chronometerFindChronometer.setTextColor(context.getColor(R.color.ongoing_activity_card_item_main_text_color));
+                updatePrimaryChronometerFont(context, chronometerFindChronometer, zIsPromotedState, zIsActionStyle, z);
             }
         }
         if (ongoingActivityData.mChronometerView == null || ongoingActivityData.mChronometerPosition != 2) {
             return;
         }
-        Chronometer findChronometer2 = findChronometer(view, "expandSecondaryContainer");
-        if (findChronometer2 == null) {
-            findChronometer2 = findChronometer(view, "collapsedSecondaryContainer");
+        Chronometer chronometerFindChronometer2 = findChronometer(view, "expandSecondaryContainer");
+        if (chronometerFindChronometer2 == null) {
+            chronometerFindChronometer2 = findChronometer(view, "collapsedSecondaryContainer");
         }
-        if (findChronometer2 != null) {
+        if (chronometerFindChronometer2 != null) {
             ongoingActivityLayoutUtil.getClass();
-            findChronometer2.getLayoutParams().width = -1;
-            findChronometer2.setEllipsize(TextUtils.TruncateAt.END);
-            findChronometer2.setId(R.id.tag_for_ongoing_chronometer_expand_secondary);
-            if (isActionStyle) {
+            chronometerFindChronometer2.getLayoutParams().width = -1;
+            chronometerFindChronometer2.setEllipsize(TextUtils.TruncateAt.END);
+            chronometerFindChronometer2.setId(R.id.tag_for_ongoing_chronometer_expand_secondary);
+            if (zIsActionStyle) {
                 i = R.color.ongoing_activity_action_style_secondary_text_color;
             }
-            findChronometer2.setTextColor(context.getColor(i));
-            updateSecondaryChronometerFont(context, findChronometer2, z);
+            chronometerFindChronometer2.setTextColor(context.getColor(i));
+            updateSecondaryChronometerFont(context, chronometerFindChronometer2, z);
         }
     }
 
-    public static void updateOngoingHeader(View view) {
-        final View findViewById = view.findViewById(android.R.id.remote_input);
-        if (findViewById != null) {
+    public static void updateOngoingDescription(View view) {
+        TextView textView = (TextView) view.findViewWithTag("description");
+        if (textView != null) {
+            textView.setMaxLines(textView.getContext().getResources().getDimensionPixelSize(R.dimen.oa_expanded_view_big_text_max_height) / textView.getLineHeight());
+            textView.setEllipsize(TextUtils.TruncateAt.END);
+        }
+    }
+
+    public static void updateOngoingHeader(View view, final OngoingActivityData ongoingActivityData) throws Resources.NotFoundException {
+        final View viewFindViewById = view.findViewById(android.R.id.remote_input);
+        if (viewFindViewById != null) {
             final Context context = view.getContext();
-            final int dimensionPixelSize = view.getResources().getDimensionPixelSize(17105822);
-            final int dimensionPixelSize2 = view.getResources().getDimensionPixelSize(17105818);
-            final boolean isNightModeActive = context.getResources().getConfiguration().isNightModeActive();
-            findViewById.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil$updateOngoingHeader$1$1
+            final int dimensionPixelSize = view.getResources().getDimensionPixelSize(17105823);
+            final int dimensionPixelSize2 = view.getResources().getDimensionPixelSize(17105819);
+            final boolean zIsNightModeActive = context.getResources().getConfiguration().isNightModeActive();
+            viewFindViewById.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil$updateOngoingHeader$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    if (findViewById.getParent() == null || ((View) findViewById.getParent()).getId() != R.id.expandedPublic) {
+                    Icon icon;
+                    if (viewFindViewById.getParent() == null || ((View) viewFindViewById.getParent()).getId() != R.id.expandedPublic) {
                         return;
                     }
-                    TextView textView = (TextView) findViewById.findViewById(android.R.id.beforeDescendants);
+                    TextView textView = (TextView) viewFindViewById.findViewById(android.R.id.beforeDescendants);
                     if (textView != null) {
                         Context context2 = context;
                         int i = dimensionPixelSize;
@@ -310,17 +288,22 @@ public final class OngoingActivityLayoutUtil {
                         ongoingActivityLayoutUtil.getClass();
                         OngoingActivityLayoutUtil.updateOngoingNotificationFont(textView, i, null);
                     }
-                    DateTimeView findViewById2 = findViewById.findViewById(16909967);
-                    if (findViewById2 != null) {
+                    DateTimeView dateTimeViewFindViewById = viewFindViewById.findViewById(16909968);
+                    if (dateTimeViewFindViewById != null) {
                         Context context3 = context;
                         int i2 = dimensionPixelSize2;
-                        boolean z = isNightModeActive;
+                        boolean z = zIsNightModeActive;
                         OngoingActivityLayoutUtil ongoingActivityLayoutUtil2 = OngoingActivityLayoutUtil.INSTANCE;
                         context3.getClass();
                         ongoingActivityLayoutUtil2.getClass();
-                        OngoingActivityLayoutUtil.updateOngoingNotificationFont(findViewById2, i2, null);
-                        findViewById2.setTextColor(Color.parseColor(z ? "#B3FAFAFF" : "#B3252528"));
+                        OngoingActivityLayoutUtil.updateOngoingNotificationFont(dateTimeViewFindViewById, i2, null);
+                        dateTimeViewFindViewById.setTextColor(Color.parseColor(z ? "#B3FAFAFF" : "#B3252528"));
                     }
+                    NotificationRowIconView notificationRowIconViewFindViewById = viewFindViewById.findViewById(android.R.id.icon);
+                    if (notificationRowIconViewFindViewById == null || (icon = ongoingActivityData.mAodRemoteAppIcon) == null) {
+                        return;
+                    }
+                    notificationRowIconViewFindViewById.setImageIcon(icon);
                 }
             });
         }
@@ -334,13 +317,13 @@ public final class OngoingActivityLayoutUtil {
         }
     }
 
-    public static void updatePrimaryChronometerFont(Context context, Chronometer chronometer, boolean z, boolean z2, boolean z3) {
+    public static void updatePrimaryChronometerFont(Context context, Chronometer chronometer, boolean z, boolean z2, boolean z3) throws Resources.NotFoundException {
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(!z ? z3 ? R.dimen.ongoing_activity_sub_screen_card_item_main_text_size : R.dimen.ongoing_activity_card_item_main_text_size : z2 ? z3 ? R.dimen.ongoing_activity_sub_screen_card_item_promoted_main_chronometer_text_size : R.dimen.ongoing_activity_card_item_promoted_main_chronometer_text_size : z3 ? R.dimen.ongoing_activity_sub_screen_card_item_promoted_main_text_size : R.dimen.ongoing_activity_card_item_promoted_main_text_size);
-        Typeface create = Typeface.create(Typeface.create("sec-num-fixed", 0), (z && z2) ? 400 : VolteConstants.ErrorCode.BUSY_EVERYWHERE, false);
+        Typeface typefaceCreate = Typeface.create(Typeface.create("sec-num-fixed", 0), (z && z2) ? 400 : VolteConstants.ErrorCode.BUSY_EVERYWHERE, false);
         if (!z || !z2) {
-            updateOngoingNotificationFont(chronometer, dimensionPixelSize, create);
+            updateOngoingNotificationFont(chronometer, dimensionPixelSize, typefaceCreate);
         } else {
-            chronometer.setTypeface(create);
+            chronometer.setTypeface(typefaceCreate);
             chronometer.setTextSize(0, dimensionPixelSize * 1.0f);
         }
     }
@@ -349,16 +332,18 @@ public final class OngoingActivityLayoutUtil {
         updateOngoingNotificationFont(chronometer, context.getResources().getDimensionPixelSize(z ? R.dimen.ongoing_activity_sub_screen_card_item_sub_text_size : R.dimen.ongoing_activity_card_item_sub_text_size), Typeface.create(Typeface.create("sec", 0), 400, false));
     }
 
-    public static void updateSmallIconView(OngoingActivityData ongoingActivityData, RemoteViews remoteViews, int i, Context context) {
-        Integer num = ongoingActivityData.mCardIconBg;
-        if (num != null) {
-            int intValue = num.intValue();
-            if (intValue == 0) {
-                intValue = -1;
+    public static void updateSmallIconView(OngoingActivityData ongoingActivityData, RemoteViews remoteViews, int i, Context context, boolean z) {
+        if (z) {
+            Integer num = ongoingActivityData.mCardIconBg;
+            if (num != null) {
+                int iIntValue = num.intValue();
+                if (iIntValue == 0) {
+                    iIntValue = -1;
+                }
+                remoteViews.setDrawableTint(i, true, iIntValue, PorterDuff.Mode.SRC_IN);
             }
-            remoteViews.setDrawableTint(i, true, intValue, PorterDuff.Mode.SRC_IN);
+            int color = context.getColor(R.color.ongoing_activity_card_item_notification_icon_color);
+            remoteViews.setInt(i, "setColorFilter", Color.argb(255, Color.red(color), Color.green(color), Color.blue(color)));
         }
-        int color = context.getColor(R.color.ongoing_activity_card_item_notification_icon_color);
-        remoteViews.setInt(i, "setColorFilter", Color.argb(255, Color.red(color), Color.green(color), Color.blue(color)));
     }
 }

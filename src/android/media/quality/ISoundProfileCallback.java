@@ -69,9 +69,9 @@ public interface ISoundProfileCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISoundProfileCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundProfileCallback)) {
-                return (ISoundProfileCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISoundProfileCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundProfileCallback)) {
+                return (ISoundProfileCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,30 +86,30 @@ public interface ISoundProfileCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 SoundProfile soundProfile = (SoundProfile) parcel.readTypedObject(SoundProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSoundProfileAdded(readString, soundProfile);
+                onSoundProfileAdded(string, soundProfile);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 SoundProfile soundProfile2 = (SoundProfile) parcel.readTypedObject(SoundProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSoundProfileUpdated(readString2, soundProfile2);
+                onSoundProfileUpdated(string2, soundProfile2);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 SoundProfile soundProfile3 = (SoundProfile) parcel.readTypedObject(SoundProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSoundProfileRemoved(readString3, soundProfile3);
+                onSoundProfileRemoved(string3, soundProfile3);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ParameterCapability.CREATOR);
+                String string4 = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ParameterCapability.CREATOR);
                 parcel.enforceNoDataAvail();
-                onParameterCapabilitiesChanged(readString4, createTypedArrayList);
+                onParameterCapabilitiesChanged(string4, arrayListCreateTypedArrayList);
             } else if (i == 5) {
-                String readString5 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string5 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readString5, readInt);
+                onError(string5, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -134,66 +134,66 @@ public interface ISoundProfileCallback extends IInterface {
 
             @Override // android.media.quality.ISoundProfileCallback
             public void onSoundProfileAdded(String str, SoundProfile soundProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(soundProfile, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(soundProfile, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.ISoundProfileCallback
             public void onSoundProfileUpdated(String str, SoundProfile soundProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(soundProfile, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(soundProfile, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.ISoundProfileCallback
             public void onSoundProfileRemoved(String str, SoundProfile soundProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(soundProfile, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(soundProfile, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.ISoundProfileCallback
             public void onParameterCapabilitiesChanged(String str, List<ParameterCapability> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.ISoundProfileCallback
             public void onError(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

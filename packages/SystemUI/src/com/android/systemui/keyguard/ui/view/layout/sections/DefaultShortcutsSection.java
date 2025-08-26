@@ -13,7 +13,6 @@ import com.android.systemui.animation.view.LaunchableImageView;
 import com.android.systemui.keyguard.domain.interactor.KeyguardBlueprintInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder;
-import com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$1;
 import com.android.systemui.keyguard.ui.view.layout.blueprints.transitions.IntraBlueprintTransition;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel;
 import com.android.systemui.statusbar.KeyguardIndicationController;
@@ -24,7 +23,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultShortcutsSection extends BaseShortcutSection {
     public final KeyguardIndicationController indicationController;
@@ -45,7 +43,7 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void addViews(ConstraintLayout constraintLayout) {
+    public final void addViews(ConstraintLayout constraintLayout) throws Resources.NotFoundException {
         int dimensionPixelSize = constraintLayout.getResources().getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_padding);
         LaunchableImageView launchableImageView = new LaunchableImageView(constraintLayout.getContext(), null);
         launchableImageView.setId(R.id.start_button);
@@ -70,7 +68,7 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
             launchableImageView2.setPadding(dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2);
             constraintLayout.addView(launchableImageView2);
         }
-        ((LaunchableImageView) constraintLayout.requireViewById(R.id.start_button)).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection$addViews$1
+        ((LaunchableImageView) constraintLayout.requireViewById(R.id.start_button)).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection.addViews.1
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
                 DisplayCutout displayCutout = windowInsets.getDisplayCutout();
@@ -86,7 +84,7 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         int dimensionPixelSize = this.resources.getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_width);
         int dimensionPixelSize2 = this.resources.getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_height);
         int dimensionPixelSize3 = this.resources.getDimensionPixelSize(R.dimen.keyguard_affordance_horizontal_offset);
@@ -106,9 +104,9 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void bindData(ConstraintLayout constraintLayout) {
-        KeyguardQuickAffordanceViewBinder$bind$1 keyguardQuickAffordanceViewBinder$bind$1 = this.leftShortcutHandle;
-        if (keyguardQuickAffordanceViewBinder$bind$1 != null) {
-            keyguardQuickAffordanceViewBinder$bind$1.destroy();
+        KeyguardQuickAffordanceViewBinder.AnonymousClass1 anonymousClass1 = this.leftShortcutHandle;
+        if (anonymousClass1 != null) {
+            anonymousClass1.destroy();
         }
         LaunchableImageView launchableImageView = (LaunchableImageView) constraintLayout.requireViewById(R.id.start_button);
         KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel = this.keyguardQuickAffordancesCombinedViewModel;
@@ -123,15 +121,15 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i2 = i;
-                int intValue = ((Integer) obj).intValue();
+                int iIntValue = ((Integer) obj).intValue();
                 switch (i2) {
                     case 0:
-                        this.f$0.indicationController.showTransientIndication(intValue);
+                        this.f$0.indicationController.showTransientIndication(iIntValue);
                         break;
                     default:
-                        this.f$0.indicationController.showTransientIndication(intValue);
+                        this.f$0.indicationController.showTransientIndication(iIntValue);
                         break;
                 }
                 return Unit.INSTANCE;
@@ -140,9 +138,9 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
         KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder = this.keyguardQuickAffordanceViewBinder;
         ReadonlyStateFlow readonlyStateFlow = keyguardQuickAffordancesCombinedViewModel.transitionAlpha;
         this.leftShortcutHandle = keyguardQuickAffordanceViewBinder.bind(launchableImageView, flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, readonlyStateFlow, function1);
-        KeyguardQuickAffordanceViewBinder$bind$1 keyguardQuickAffordanceViewBinder$bind$12 = this.rightShortcutHandle;
-        if (keyguardQuickAffordanceViewBinder$bind$12 != null) {
-            keyguardQuickAffordanceViewBinder$bind$12.destroy();
+        KeyguardQuickAffordanceViewBinder.AnonymousClass1 anonymousClass12 = this.rightShortcutHandle;
+        if (anonymousClass12 != null) {
+            anonymousClass12.destroy();
         }
         final int i2 = 1;
         this.rightShortcutHandle = keyguardQuickAffordanceViewBinder.bind((LaunchableImageView) constraintLayout.requireViewById(R.id.end_button), keyguardQuickAffordancesCombinedViewModel.endButton, readonlyStateFlow, new Function1(this) { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection$$ExternalSyntheticLambda0
@@ -154,15 +152,15 @@ public final class DefaultShortcutsSection extends BaseShortcutSection {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i22 = i2;
-                int intValue = ((Integer) obj).intValue();
+                int iIntValue = ((Integer) obj).intValue();
                 switch (i22) {
                     case 0:
-                        this.f$0.indicationController.showTransientIndication(intValue);
+                        this.f$0.indicationController.showTransientIndication(iIntValue);
                         break;
                     default:
-                        this.f$0.indicationController.showTransientIndication(intValue);
+                        this.f$0.indicationController.showTransientIndication(iIntValue);
                         break;
                 }
                 return Unit.INSTANCE;

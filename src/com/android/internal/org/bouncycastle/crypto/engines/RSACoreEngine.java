@@ -27,25 +27,25 @@ class RSACoreEngine {
             this.key = (RSAKeyParameters) cipherParameters;
         }
         this.forEncryption = z;
-        int bitsOfSecurityFor = ConstraintUtils.bitsOfSecurityFor(this.key.getModulus());
+        int iBitsOfSecurityFor = ConstraintUtils.bitsOfSecurityFor(this.key.getModulus());
         RSAKeyParameters rSAKeyParameters = this.key;
-        CryptoServicesRegistrar.checkConstraints(new DefaultServiceProperties("RSA", bitsOfSecurityFor, rSAKeyParameters, getPurpose(rSAKeyParameters.isPrivate(), z)));
+        CryptoServicesRegistrar.checkConstraints(new DefaultServiceProperties("RSA", iBitsOfSecurityFor, rSAKeyParameters, getPurpose(rSAKeyParameters.isPrivate(), z)));
     }
 
     public int getInputBlockSize() {
-        int bitLength = this.key.getModulus().bitLength();
+        int iBitLength = this.key.getModulus().bitLength();
         if (this.forEncryption) {
-            return ((bitLength + 7) / 8) - 1;
+            return ((iBitLength + 7) / 8) - 1;
         }
-        return (bitLength + 7) / 8;
+        return (iBitLength + 7) / 8;
     }
 
     public int getOutputBlockSize() {
-        int bitLength = this.key.getModulus().bitLength();
+        int iBitLength = this.key.getModulus().bitLength();
         if (this.forEncryption) {
-            return (bitLength + 7) / 8;
+            return (iBitLength + 7) / 8;
         }
-        return ((bitLength + 7) / 8) - 1;
+        return ((iBitLength + 7) / 8) - 1;
     }
 
     public BigInteger convertInput(byte[] bArr, int i, int i2) {
@@ -108,11 +108,11 @@ class RSACoreEngine {
             BigInteger dp = rSAPrivateCrtKeyParameters.getDP();
             BigInteger dq = rSAPrivateCrtKeyParameters.getDQ();
             BigInteger qInv = rSAPrivateCrtKeyParameters.getQInv();
-            BigInteger modPow = bigInteger.remainder(p).modPow(dp, p);
-            BigInteger modPow2 = bigInteger.remainder(q).modPow(dq, q);
-            BigInteger add = modPow.subtract(modPow2).multiply(qInv).mod(p).multiply(q).add(modPow2);
-            if (add.modPow(publicExponent, rSAPrivateCrtKeyParameters.getModulus()).equals(bigInteger)) {
-                return add;
+            BigInteger bigIntegerModPow = bigInteger.remainder(p).modPow(dp, p);
+            BigInteger bigIntegerModPow2 = bigInteger.remainder(q).modPow(dq, q);
+            BigInteger bigIntegerAdd = bigIntegerModPow.subtract(bigIntegerModPow2).multiply(qInv).mod(p).multiply(q).add(bigIntegerModPow2);
+            if (bigIntegerAdd.modPow(publicExponent, rSAPrivateCrtKeyParameters.getModulus()).equals(bigInteger)) {
+                return bigIntegerAdd;
             }
             throw new IllegalStateException("RSA engine faulty decryption/signing detected");
         }

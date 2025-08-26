@@ -12,7 +12,6 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.autofill.AutofillId;
-import android.view.translation.UiTranslationManager;
 import android.view.translation.UiTranslationSpec;
 import com.android.internal.util.FunctionalUtils;
 import java.lang.annotation.Retention;
@@ -164,7 +163,7 @@ public final class UiTranslationManager {
             this.mExecutor.execute(new Runnable() { // from class: android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UiTranslationManager.UiTranslationStateRemoteCallback.this.lambda$sendResult$0(bundle);
+                    this.f$0.lambda$sendResult$0(bundle);
                 }
             });
         }
@@ -173,8 +172,8 @@ public final class UiTranslationManager {
         public void sendResult(final Bundle bundle) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    UiTranslationManager.UiTranslationStateRemoteCallback.this.lambda$sendResult$1(bundle);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$sendResult$1(bundle);
                 }
             });
         }

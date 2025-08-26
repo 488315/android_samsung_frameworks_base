@@ -17,10 +17,10 @@ import java.util.Hashtable;
 public abstract class AbstractX500NameStyle implements X500NameStyle {
     public static Hashtable copyHashTable(Hashtable hashtable) {
         Hashtable hashtable2 = new Hashtable();
-        Enumeration keys = hashtable.keys();
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            hashtable2.put(nextElement, hashtable.get(nextElement));
+        Enumeration enumerationKeys = hashtable.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            Object objNextElement = enumerationKeys.nextElement();
+            hashtable2.put(objNextElement, hashtable.get(objNextElement));
         }
         return hashtable2;
     }
@@ -32,18 +32,18 @@ public abstract class AbstractX500NameStyle implements X500NameStyle {
     @Override // com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle
     public int calculateHashCode(X500Name x500Name) {
         RDN[] rDNs = x500Name.getRDNs();
-        int i = 0;
-        for (int i2 = 0; i2 != rDNs.length; i2++) {
-            if (rDNs[i2].isMultiValued()) {
-                AttributeTypeAndValue[] typesAndValues = rDNs[i2].getTypesAndValues();
-                for (int i3 = 0; i3 != typesAndValues.length; i3++) {
-                    i = (i ^ typesAndValues[i3].getType().hashCode()) ^ calcHashCode(typesAndValues[i3].getValue());
+        int iHashCode = 0;
+        for (int i = 0; i != rDNs.length; i++) {
+            if (rDNs[i].isMultiValued()) {
+                AttributeTypeAndValue[] typesAndValues = rDNs[i].getTypesAndValues();
+                for (int i2 = 0; i2 != typesAndValues.length; i2++) {
+                    iHashCode = (iHashCode ^ typesAndValues[i2].getType().hashCode()) ^ calcHashCode(typesAndValues[i2].getValue());
                 }
             } else {
-                i = (i ^ rDNs[i2].getFirst().getType().hashCode()) ^ calcHashCode(rDNs[i2].getFirst().getValue());
+                iHashCode = (iHashCode ^ rDNs[i].getFirst().getType().hashCode()) ^ calcHashCode(rDNs[i].getFirst().getValue());
             }
         }
-        return i;
+        return iHashCode;
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle

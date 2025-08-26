@@ -8,15 +8,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IRecognitionListener extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.sivs.ai.sdkcommon.asr.IRecognitionListener";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static /* bridge */ /* synthetic */ Object m3306$$Nest$smreadTypedObject(Parcel parcel) {
+        public static /* bridge */ /* synthetic */ Object m3324$$Nest$smreadTypedObject(Parcel parcel) {
             return readTypedObject(parcel, Bundle.CREATOR);
         }
 
@@ -44,13 +42,11 @@ public interface IRecognitionListener extends IInterface {
 
     void onResults(Bundle bundle) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRecognitionListener {
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onPartialResults = 3;
         static final int TRANSACTION_onResults = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IRecognitionListener {
             private IBinder mRemote;
 
@@ -69,46 +65,46 @@ public interface IRecognitionListener extends IInterface {
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.asr.IRecognitionListener
             public void onError(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.asr.IRecognitionListener
             public void onPartialResults(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sivs.ai.sdkcommon.asr.IRecognitionListener
             public void onResults(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRecognitionListener.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -121,8 +117,8 @@ public interface IRecognitionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRecognitionListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IRecognitionListener)) ? new Proxy(iBinder) : (IRecognitionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRecognitionListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IRecognitionListener)) ? new Proxy(iBinder) : (IRecognitionListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -136,13 +132,13 @@ public interface IRecognitionListener extends IInterface {
             }
             if (i == 1) {
                 Parcelable.Creator creator = Bundle.CREATOR;
-                onError((Bundle) _Parcel.m3306$$Nest$smreadTypedObject(parcel));
+                onError((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
                 parcel2.writeNoException();
                 return true;
             }
             if (i == 2) {
                 Parcelable.Creator creator2 = Bundle.CREATOR;
-                onResults((Bundle) _Parcel.m3306$$Nest$smreadTypedObject(parcel));
+                onResults((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
                 parcel2.writeNoException();
                 return true;
             }
@@ -150,7 +146,7 @@ public interface IRecognitionListener extends IInterface {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
             Parcelable.Creator creator3 = Bundle.CREATOR;
-            onPartialResults((Bundle) _Parcel.m3306$$Nest$smreadTypedObject(parcel));
+            onPartialResults((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
             parcel2.writeNoException();
             return true;
         }
@@ -161,7 +157,6 @@ public interface IRecognitionListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IRecognitionListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

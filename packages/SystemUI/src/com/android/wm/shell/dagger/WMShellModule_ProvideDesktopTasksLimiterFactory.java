@@ -18,7 +18,6 @@ import com.android.wm.shell.transition.Transitions;
 import dagger.internal.Provider;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellModule_ProvideDesktopTasksLimiterFactory implements Provider {
     public final Provider contextProvider;
@@ -48,15 +47,15 @@ public final class WMShellModule_ProvideDesktopTasksLimiterFactory implements Pr
     }
 
     public static Optional provideDesktopTasksLimiter(Context context, Transitions transitions, DesktopUserRepositories desktopUserRepositories, ShellTaskOrganizer shellTaskOrganizer, DesksOrganizer desksOrganizer, InteractionJankMonitor interactionJankMonitor, Handler handler, DisplayController displayController, DesktopConfig desktopConfig, DesktopState desktopState, ShellExecutor shellExecutor) {
-        Optional empty;
+        Optional optionalEmpty;
         if (((DesktopStateImpl) desktopState).canEnterDesktopMode && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_TASK_LIMIT.isTrue()) {
             int i = ((DesktopConfigImpl) desktopConfig).maxTaskLimit;
-            empty = Optional.of(new DesktopTasksLimiter(transitions, desktopUserRepositories, shellTaskOrganizer, desksOrganizer, i <= 0 ? null : Integer.valueOf(i), interactionJankMonitor, context, handler, displayController, desktopConfig, shellExecutor));
+            optionalEmpty = Optional.of(new DesktopTasksLimiter(transitions, desktopUserRepositories, shellTaskOrganizer, desksOrganizer, i <= 0 ? null : Integer.valueOf(i), interactionJankMonitor, context, handler, displayController, desktopConfig, shellExecutor));
         } else {
-            empty = Optional.empty();
+            optionalEmpty = Optional.empty();
         }
-        empty.getClass();
-        return empty;
+        optionalEmpty.getClass();
+        return optionalEmpty;
     }
 
     @Override // javax.inject.Provider

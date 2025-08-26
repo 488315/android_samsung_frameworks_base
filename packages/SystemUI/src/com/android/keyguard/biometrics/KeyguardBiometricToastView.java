@@ -38,7 +38,6 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.vibrate.VibrationUtil;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardBiometricToastView extends FrameLayout {
     public static final PathInterpolator INTERPOLATOR = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
@@ -61,7 +60,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
     public int mToastViewMinWidth;
     public VibrationUtil mVibrationUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ToastType {
         Authenticating,
         /* JADX INFO: Fake field, exist only in values array */
@@ -84,15 +82,15 @@ public class KeyguardBiometricToastView extends FrameLayout {
 
     public final void changeTextAnim(float f, float f2, ToastType toastType) {
         final int i = this.mCurrentToastViewWidth - this.mToastViewMinWidth;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        this.mBodyAnimator = ofFloat;
-        ofFloat.setStartDelay(0L);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        this.mBodyAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setStartDelay(0L);
         this.mBodyAnimator.setDuration(350L);
         this.mBodyAnimator.setInterpolator(INTERPOLATOR);
         this.mBodyAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.biometrics.KeyguardBiometricToastView$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardBiometricToastView keyguardBiometricToastView = KeyguardBiometricToastView.this;
+                KeyguardBiometricToastView keyguardBiometricToastView = this.f$0;
                 float f3 = i;
                 keyguardBiometricToastView.mToastRoot.getLayoutParams().width = keyguardBiometricToastView.mToastViewMinWidth + ((int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * f3));
                 keyguardBiometricToastView.mToastBodyView.getLayoutParams().width = keyguardBiometricToastView.mToastViewMinWidth + ((int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * f3));
@@ -132,15 +130,15 @@ public class KeyguardBiometricToastView extends FrameLayout {
             changeTextAnim(1.0f, 0.0f, ToastType.Authenticating);
         }
         this.mIsBackgroundAuth = false;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mToastRoot, "alpha", 1.0f, 0.0f);
-        ofFloat.setDuration(200L);
-        ofFloat.setInterpolator(INTERPOLATOR);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mToastGuideText, "alpha", 1.0f, 0.0f);
-        ofFloat2.setDuration(100L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mToastRoot, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        objectAnimatorOfFloat.setInterpolator(INTERPOLATOR);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mToastGuideText, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat2.setDuration(100L);
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mAnimatorSet = animatorSet2;
         animatorSet2.setStartDelay(0L);
-        this.mAnimatorSet.playTogether(ofFloat, ofFloat2);
+        this.mAnimatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         this.mAnimatorSet.start();
     }
 
@@ -150,7 +148,7 @@ public class KeyguardBiometricToastView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mToastRoot = (FrameLayout) findViewById(R.id.toast_root);
         this.mToastBodyView = (LinearLayout) findViewById(R.id.toast_body_view);
@@ -185,38 +183,38 @@ public class KeyguardBiometricToastView extends FrameLayout {
     }
 
     public final void scaleIconAnim(float f, float f2) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mToastIcon, (Property<LottieAnimationView, Float>) View.SCALE_X, f, f2);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mToastIcon, (Property<LottieAnimationView, Float>) View.SCALE_Y, f, f2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mToastIcon, (Property<LottieAnimationView, Float>) View.SCALE_X, f, f2);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mToastIcon, (Property<LottieAnimationView, Float>) View.SCALE_Y, f, f2);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(shouldDisappearLockIcon() ? 200L : 350L);
         animatorSet.setInterpolator(INTERPOLATOR);
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         animatorSet.start();
     }
 
-    public final void setViewAttribution(boolean z) {
+    public final void setViewAttribution(boolean z) throws Resources.NotFoundException {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) this.mToastRoot.getLayoutParams();
         Resources resources = getResources();
         this.mToastGuideText.measure(0, 0);
         int measuredWidth = this.mToastGuideText.getMeasuredWidth();
         Resources resources2 = getResources();
         int screenWidth = DeviceState.getScreenWidth(getContext());
-        int min = Math.min(measuredWidth, ((((DeviceType.isTablet() || (LsRune.SECURITY_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened)) ? (int) (screenWidth * 0.7d) : screenWidth - (resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_outer_margin) * 2)) - this.mToastLockIconWidth) - resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_start_margin)) - resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_end_margin));
-        int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_end_margin) + resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_start_margin) + this.mToastLockIconWidth + min;
+        int iMin = Math.min(measuredWidth, ((((DeviceType.isTablet() || (LsRune.SECURITY_SUB_DISPLAY_LOCK && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened)) ? (int) (screenWidth * 0.7d) : screenWidth - (resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_outer_margin) * 2)) - this.mToastLockIconWidth) - resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_start_margin)) - resources2.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_end_margin));
+        int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_end_margin) + resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_inner_start_margin) + this.mToastLockIconWidth + iMin;
         this.mCurrentToastViewWidth = dimensionPixelSize;
         layoutParams.width = dimensionPixelSize;
         this.mToastGuideText.measure(0, 0);
         int measuredWidth2 = this.mToastGuideText.getMeasuredWidth();
-        int i = 1;
-        if (measuredWidth2 > min && (i = 1 + (measuredWidth2 / min)) > this.mToastGuideText.getMaxLines()) {
-            i = this.mToastGuideText.getMaxLines();
+        int maxLines = 1;
+        if (measuredWidth2 > iMin && (maxLines = 1 + (measuredWidth2 / iMin)) > this.mToastGuideText.getMaxLines()) {
+            maxLines = this.mToastGuideText.getMaxLines();
         }
         int measuredHeight = this.mToastGuideText.getMeasuredHeight();
         int dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.kg_biometric_toast_text_view_height);
         if (measuredHeight < dimensionPixelSize2) {
             measuredHeight = dimensionPixelSize2;
         }
-        layoutParams.height = (getResources().getDimensionPixelSize(R.dimen.kg_biometric_toast_text_view_margin) * 2) + (measuredHeight * i);
+        layoutParams.height = (getResources().getDimensionPixelSize(R.dimen.kg_biometric_toast_text_view_margin) * 2) + (measuredHeight * maxLines);
         int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.status_bar_height) + ((SecurityUtils.getLockIconTopMargin(getContext()) - resources.getDimensionPixelSize(R.dimen.status_bar_height)) - ((int) (((resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_image_height) / 2.0f) + resources.getDimensionPixelSize(R.dimen.kg_biometric_toast_image_view_margin)) - (resources.getDimensionPixelSize(R.dimen.kg_biometric_view_min_height) / 2.0f))));
         layoutParams.topMargin = dimensionPixelSize3;
         if (z) {
@@ -225,7 +223,7 @@ public class KeyguardBiometricToastView extends FrameLayout {
         this.mToastRoot.setLayoutParams(layoutParams);
         this.mToastBodyView.setLayoutParams(layoutParams);
         ViewGroup.LayoutParams layoutParams2 = this.mToastGuideText.getLayoutParams();
-        layoutParams2.width = min;
+        layoutParams2.width = iMin;
         this.mToastGuideText.setLayoutParams(layoutParams2);
     }
 
@@ -317,14 +315,14 @@ public class KeyguardBiometricToastView extends FrameLayout {
             if (hasGuideText()) {
                 setViewAttribution(z);
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mToastRoot, "alpha", 0.0f, 1.0f);
-            ofFloat.setDuration(200L);
-            ofFloat.setInterpolator(INTERPOLATOR);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mToastGuideText, "alpha", 0.0f, 1.0f);
-            ofFloat2.setDuration(100L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mToastRoot, "alpha", 0.0f, 1.0f);
+            objectAnimatorOfFloat.setDuration(200L);
+            objectAnimatorOfFloat.setInterpolator(INTERPOLATOR);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mToastGuideText, "alpha", 0.0f, 1.0f);
+            objectAnimatorOfFloat2.setDuration(100L);
             AnimatorSet animatorSet = new AnimatorSet();
             this.mAnimatorSet = animatorSet;
-            animatorSet.playTogether(ofFloat, ofFloat2);
+            animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
             this.mAnimatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.keyguard.biometrics.KeyguardBiometricToastView.2
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator) {
@@ -400,7 +398,6 @@ public class KeyguardBiometricToastView extends FrameLayout {
         this.mHandler = new Handler(Looper.getMainLooper());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.biometrics.KeyguardBiometricToastView$3, reason: invalid class name */
     public class AnonymousClass3 implements Animator.AnimatorListener {
         public final /* synthetic */ ToastType val$type;

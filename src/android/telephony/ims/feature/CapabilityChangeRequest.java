@@ -91,8 +91,8 @@ public final class CapabilityChangeRequest implements Parcelable {
     }
 
     private void addAllCapabilities(Set<CapabilityPair> set, int i, int i2) {
-        long highestOneBit = Long.highestOneBit(i);
-        for (int i3 = 1; i3 <= highestOneBit; i3 *= 2) {
+        long jHighestOneBit = Long.highestOneBit(i);
+        for (int i3 = 1; i3 <= jHighestOneBit; i3 *= 2) {
             if ((i3 & i) > 0) {
                 set.add(new CapabilityPair(i3, i2));
             }
@@ -100,14 +100,14 @@ public final class CapabilityChangeRequest implements Parcelable {
     }
 
     protected CapabilityChangeRequest(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mCapabilitiesToEnable = new ArraySet(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mCapabilitiesToEnable = new ArraySet(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mCapabilitiesToEnable.add(new CapabilityPair(parcel.readInt(), parcel.readInt()));
         }
-        int readInt2 = parcel.readInt();
-        this.mCapabilitiesToDisable = new ArraySet(readInt2);
-        for (int i2 = 0; i2 < readInt2; i2++) {
+        int i3 = parcel.readInt();
+        this.mCapabilitiesToDisable = new ArraySet(i3);
+        for (int i4 = 0; i4 < i3; i4++) {
             this.mCapabilitiesToDisable.add(new CapabilityPair(parcel.readInt(), parcel.readInt()));
         }
     }

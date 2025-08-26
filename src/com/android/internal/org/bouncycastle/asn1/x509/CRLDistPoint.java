@@ -53,13 +53,13 @@ public class CRLDistPoint extends ASN1Object {
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("CRLDistPoint:");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(strLineSeparator);
         DistributionPoint[] distributionPoints = getDistributionPoints();
         for (int i = 0; i != distributionPoints.length; i++) {
             stringBuffer.append("    ");
             stringBuffer.append(distributionPoints[i]);
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
         }
         return stringBuffer.toString();
     }

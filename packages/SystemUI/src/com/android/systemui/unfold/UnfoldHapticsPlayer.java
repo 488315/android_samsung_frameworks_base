@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.text.StringsKt__StringNumberConversionsJVMKt;
 import kotlin.text.StringsKt__StringNumberConversionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnfoldHapticsPlayer implements UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final Lazy effect$delegate;
@@ -44,16 +43,16 @@ public final class UnfoldHapticsPlayer implements UnfoldTransitionProgressProvid
         this.effect$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.unfold.UnfoldHapticsPlayer$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                VibrationEffect.Composition addPrimitive = VibrationEffect.startComposition().addPrimitive(7, 0.0f, 0);
-                UnfoldHapticsPlayer.this.getClass();
+                VibrationEffect.Composition compositionAddPrimitive = VibrationEffect.startComposition().addPrimitive(7, 0.0f, 0);
+                this.f$0.getClass();
                 Integer intOrNull = StringsKt__StringNumberConversionsKt.toIntOrNull(10, SystemProperties.get("persist.unfold.primitives_count", DATA.DM_FIELD_INDEX.SIP_TD_TIMER));
-                int intValue = intOrNull != null ? intOrNull.intValue() : 18;
-                for (int i = 0; i < intValue; i++) {
+                int iIntValue = intOrNull != null ? intOrNull.intValue() : 18;
+                for (int i = 0; i < iIntValue; i++) {
                     Float floatOrNull = StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(SystemProperties.get("persist.unfold.haptics_scale", "0.5"));
-                    addPrimitive.addPrimitive(8, floatOrNull != null ? floatOrNull.floatValue() : 0.5f, 0);
+                    compositionAddPrimitive.addPrimitive(8, floatOrNull != null ? floatOrNull.floatValue() : 0.5f, 0);
                 }
                 Float floatOrNull2 = StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(SystemProperties.get("persist.unfold.haptics_scale_end_tick", "1.0"));
-                return addPrimitive.addPrimitive(7, floatOrNull2 != null ? floatOrNull2.floatValue() : 1.0f).compose();
+                return compositionAddPrimitive.addPrimitive(7, floatOrNull2 != null ? floatOrNull2.floatValue() : 1.0f).compose();
             }
         });
     }

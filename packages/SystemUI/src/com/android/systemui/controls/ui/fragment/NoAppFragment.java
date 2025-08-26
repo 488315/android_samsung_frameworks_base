@@ -14,13 +14,11 @@ import com.android.systemui.R;
 import com.android.systemui.controls.util.SALogger;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoAppFragment extends Fragment {
     public View mView;
     public final SALogger saLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,12 +46,12 @@ public final class NoAppFragment extends Fragment {
     @Override // androidx.fragment.app.Fragment
     public final View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         Log.d("NoAppFragment", "onCreateView");
-        View inflate = layoutInflater.inflate(R.layout.fragment_controls_no_apps, viewGroup, false);
-        this.mView = inflate;
-        if (inflate == null) {
-            inflate = null;
+        View viewInflate = layoutInflater.inflate(R.layout.fragment_controls_no_apps, viewGroup, false);
+        this.mView = viewInflate;
+        if (viewInflate == null) {
+            viewInflate = null;
         }
-        TextView textView = (TextView) inflate.findViewById(R.id.no_apps_description);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.no_apps_description);
         if (textView != null) {
             Configuration configuration = textView.getResources().getConfiguration();
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) textView.getLayoutParams();

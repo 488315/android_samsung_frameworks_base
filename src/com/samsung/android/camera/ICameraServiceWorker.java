@@ -119,9 +119,9 @@ public interface ICameraServiceWorker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICameraServiceWorker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraServiceWorker)) {
-                return (ICameraServiceWorker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICameraServiceWorker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraServiceWorker)) {
+                return (ICameraServiceWorker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -170,60 +170,60 @@ public interface ICameraServiceWorker extends IInterface {
                     pingForUpdate();
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCameraState(readString, readInt, readInt2, readString2, readInt3);
+                    notifyCameraState(string, i3, i4, string2, i5);
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String queryPackageName = queryPackageName(readInt4, readInt5);
+                    String strQueryPackageName = queryPackageName(i6, i7);
                     parcel2.writeNoException();
-                    parcel2.writeString(queryPackageName);
+                    parcel2.writeString(strQueryPackageName);
                     return true;
                 case 4:
-                    IBinder acquireRequestInjector = acquireRequestInjector();
+                    IBinder iBinderAcquireRequestInjector = acquireRequestInjector();
                     parcel2.writeNoException();
-                    parcel2.writeStrongBinder(acquireRequestInjector);
+                    parcel2.writeStrongBinder(iBinderAcquireRequestInjector);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyCameraSessionEvent(readInt6, readString3);
+                    notifyCameraSessionEvent(i8, string3);
                     return true;
                 case 6:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDeviceOrientationListener(readBoolean);
+                    setDeviceOrientationListener(z);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString4 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int deviceOrientationForDeviceInjector = getDeviceOrientationForDeviceInjector(readString4, readInt7);
+                    int deviceOrientationForDeviceInjector = getDeviceOrientationForDeviceInjector(string4, i9);
                     parcel2.writeNoException();
                     parcel2.writeInt(deviceOrientationForDeviceInjector);
                     return true;
                 case 8:
-                    String readString5 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean deviceInjectorOverride = getDeviceInjectorOverride(readString5, readInt8);
+                    boolean deviceInjectorOverride = getDeviceInjectorOverride(string5, i10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(deviceInjectorOverride);
                     return true;
                 case 9:
-                    int readInt9 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    storeLoggingData(readInt9, readString6);
+                    storeLoggingData(i11, string6);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -248,135 +248,135 @@ public interface ICameraServiceWorker extends IInterface {
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public void pingForUpdate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public void notifyCameraState(String str, int i, int i2, String str2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public String queryPackageName(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public IBinder acquireRequestInjector() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public void notifyCameraSessionEvent(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public void setDeviceOrientationListener(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public int getDeviceOrientationForDeviceInjector(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public boolean getDeviceInjectorOverride(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
             public void storeLoggingData(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

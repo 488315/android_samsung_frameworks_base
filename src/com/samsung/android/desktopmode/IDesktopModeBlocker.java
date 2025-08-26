@@ -45,9 +45,9 @@ public interface IDesktopModeBlocker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDesktopModeBlocker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDesktopModeBlocker)) {
-                return (IDesktopModeBlocker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDesktopModeBlocker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDesktopModeBlocker)) {
+                return (IDesktopModeBlocker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IDesktopModeBlocker extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String onBlocked = onBlocked();
+                String strOnBlocked = onBlocked();
                 parcel2.writeNoException();
-                parcel2.writeString(onBlocked);
+                parcel2.writeString(strOnBlocked);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,16 +100,16 @@ public interface IDesktopModeBlocker extends IInterface {
 
             @Override // com.samsung.android.desktopmode.IDesktopModeBlocker
             public String onBlocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopModeBlocker.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDesktopModeBlocker.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

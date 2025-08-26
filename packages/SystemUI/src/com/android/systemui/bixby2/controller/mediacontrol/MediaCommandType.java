@@ -14,11 +14,9 @@ import com.android.systemui.bixby2.util.MediaModeInfoBixby;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MediaCommandType {
     public static final int $stable = 0;
@@ -30,7 +28,6 @@ public abstract class MediaCommandType {
     public static MediaModeInfoBixby mediaInfo;
     public static MediaSessionManager mediaSessionManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -131,7 +128,7 @@ public abstract class MediaCommandType {
             return stream.anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.controller.mediacontrol.MediaCommandType$sam$java_util_function_Predicate$0
                 @Override // java.util.function.Predicate
                 public final /* synthetic */ boolean test(Object obj) {
-                    return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                    return ((Boolean) mediaCommandType$Companion$$ExternalSyntheticLambda0.mo781invoke(obj)).booleanValue();
                 }
             });
         }

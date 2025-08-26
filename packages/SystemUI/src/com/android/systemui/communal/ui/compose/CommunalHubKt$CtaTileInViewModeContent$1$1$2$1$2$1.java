@@ -5,7 +5,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.AdaptedFunctionReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final /* synthetic */ class CommunalHubKt$CtaTileInViewModeContent$1$1$2$1$2$1 extends AdaptedFunctionReference implements Function0 {
     public CommunalHubKt$CtaTileInViewModeContent$1$1$2$1$2$1(Object obj) {

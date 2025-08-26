@@ -65,21 +65,21 @@ public class SemQuramDngBitmap {
     }
 
     public static void SetFileBlackLevel(double[] dArr, SemQrBitmapFactory.Options options) {
-        int i = 0;
-        for (int i2 = 0; i2 < 8; i2++) {
-            for (int i3 = 0; i3 < 8; i3++) {
-                System.arraycopy(dArr, i, options.FileBlackLevel[i2][i3], 0, options.FileBlackLevel[i2][i3].length);
-                i += options.FileBlackLevel[i2][i3].length;
+        int length = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int i2 = 0; i2 < 8; i2++) {
+                System.arraycopy(dArr, length, options.FileBlackLevel[i][i2], 0, options.FileBlackLevel[i][i2].length);
+                length += options.FileBlackLevel[i][i2].length;
             }
         }
     }
 
     public static void SetUserBlackLevel(double[] dArr, SemQrBitmapFactory.Options options) {
-        int i = 0;
-        for (int i2 = 0; i2 < 8; i2++) {
-            for (int i3 = 0; i3 < 8; i3++) {
-                System.arraycopy(options.UserBlackLevel[i2][i3], 0, dArr, i, options.UserBlackLevel[i2][i3].length);
-                i += options.UserBlackLevel[i2][i3].length;
+        int length = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int i2 = 0; i2 < 8; i2++) {
+                System.arraycopy(options.UserBlackLevel[i][i2], 0, dArr, length, options.UserBlackLevel[i][i2].length);
+                length += options.UserBlackLevel[i][i2].length;
             }
         }
     }
@@ -116,10 +116,10 @@ public class SemQuramDngBitmap {
         options2.outHeight = options2.height;
         if (!options2.inJustDecodeBounds && options2.width > 0 && options2.height > 0) {
             SetFileBlackLevel(dArr, options2);
-            Bitmap createBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
             double[] dArr2 = options2.UserWhiteLevel;
             SetUserBlackLevel(dArr, options2);
-            if (DecodeDNGImageBufferJNI(bArr, createBitmap, i2, dArr, dArr2, options2) < 0) {
+            if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, i2, dArr, dArr2, options2) < 0) {
                 return null;
             }
             float f = options2.width;
@@ -129,7 +129,7 @@ public class SemQuramDngBitmap {
             } else if (options2.inSampleSize < 0) {
                 return null;
             }
-            return 1 != options2.inSampleSize ? Bitmap.createScaledBitmap(createBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true) : createBitmap;
+            return 1 != options2.inSampleSize ? Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true) : bitmapCreateBitmap;
         }
         return null;
     }
@@ -166,10 +166,10 @@ public class SemQuramDngBitmap {
         options2.outHeight = options2.height;
         if (!options2.inJustDecodeBounds && options2.width > 0 && options2.height > 0) {
             SetFileBlackLevel(dArr, options2);
-            Bitmap createBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
             double[] dArr2 = options2.UserWhiteLevel;
             SetUserBlackLevel(dArr, options2);
-            if (DecodeDNGImageBufferJNI(bArr, createBitmap, i2, dArr, dArr2, options2) < 0) {
+            if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, i2, dArr, dArr2, options2) < 0) {
                 return null;
             }
             if (options2.inSampleSize == 0) {
@@ -177,7 +177,7 @@ public class SemQuramDngBitmap {
             } else if (options2.inSampleSize < 0) {
                 return null;
             }
-            return (i3 == options2.width && i4 == options2.height) ? createBitmap : Bitmap.createScaledBitmap(createBitmap, i3, i4, true);
+            return (i3 == options2.width && i4 == options2.height) ? bitmapCreateBitmap : Bitmap.createScaledBitmap(bitmapCreateBitmap, i3, i4, true);
         }
         return null;
     }
@@ -193,19 +193,19 @@ public class SemQuramDngBitmap {
             return null;
         }
         SetFileBlackLevel(dArr, options);
-        Bitmap createBitmap = Bitmap.createBitmap(options.width, options.height, config);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options.width, options.height, config);
         double[] dArr2 = options.UserWhiteLevel;
         SetUserBlackLevel(dArr, options);
-        if (DecodeDNGImageBufferJNI(bArr, createBitmap, i2, dArr, dArr2, options) < 0) {
+        if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, i2, dArr, dArr2, options) < 0) {
             return null;
         }
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static int cancelDecoding(SemQrBitmapFactory.Options options) throws IOException {
-        int cancelDecodingDNGImageBufferJNI = cancelDecodingDNGImageBufferJNI(options);
-        if (cancelDecodingDNGImageBufferJNI >= 0) {
-            return cancelDecodingDNGImageBufferJNI;
+        int iCancelDecodingDNGImageBufferJNI = cancelDecodingDNGImageBufferJNI(options);
+        if (iCancelDecodingDNGImageBufferJNI >= 0) {
+            return iCancelDecodingDNGImageBufferJNI;
         }
         Log.i("QURAM_DNG", "cancelDecoding fail ");
         return -1;
@@ -239,10 +239,10 @@ public class SemQuramDngBitmap {
         options.outHeight = options.height;
         if (options.width > 0 && options.height > 0 && !options.inJustDecodeBounds) {
             SetFileBlackLevel(dArr, options);
-            Bitmap createBitmap = Bitmap.createBitmap(options.width, options.height, config);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options.width, options.height, config);
             double[] dArr2 = options.UserWhiteLevel;
             SetUserBlackLevel(dArr, options);
-            if (DecodeDNGImageJNI(str, createBitmap, dArr, dArr2, options) < 0) {
+            if (DecodeDNGImageJNI(str, bitmapCreateBitmap, dArr, dArr2, options) < 0) {
                 return null;
             }
             float f = options.width;
@@ -252,7 +252,7 @@ public class SemQuramDngBitmap {
             } else if (options.inSampleSize < 0) {
                 return null;
             }
-            return 1 != options.inSampleSize ? Bitmap.createScaledBitmap(createBitmap, (int) (f / options.inSampleSize), (int) (f2 / options.inSampleSize), true) : createBitmap;
+            return 1 != options.inSampleSize ? Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (f / options.inSampleSize), (int) (f2 / options.inSampleSize), true) : bitmapCreateBitmap;
         }
         return null;
     }
@@ -346,9 +346,9 @@ public class SemQuramDngBitmap {
     public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, Rect rect, SemQrBitmapFactory.Options options) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         try {
-            int available = fileInputStream.available();
-            byte[] bArr = new byte[available];
-            if (fileInputStream.read(bArr, 0, available) == -1) {
+            int iAvailable = fileInputStream.available();
+            byte[] bArr = new byte[iAvailable];
+            if (fileInputStream.read(bArr, 0, iAvailable) == -1) {
                 fileInputStream.close();
                 fileInputStream.close();
                 return null;
@@ -359,19 +359,19 @@ public class SemQuramDngBitmap {
             }
             SemQrBitmapFactory.Options options2 = options;
             double[] dArr = new double[256];
-            if (parseDNGImageBufferJNI(bArr, available, dArr, options2.FileWhiteLevel, options2) < 0) {
+            if (parseDNGImageBufferJNI(bArr, iAvailable, dArr, options2.FileWhiteLevel, options2) < 0) {
                 fileInputStream.close();
                 return null;
             }
             SetFileBlackLevel(dArr, options2);
-            Bitmap createBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
             if (options2.inJustDecodeBounds) {
                 fileInputStream.close();
-                return createBitmap;
+                return bitmapCreateBitmap;
             }
             double[] dArr2 = options2.UserWhiteLevel;
             SetUserBlackLevel(dArr, options2);
-            if (DecodeDNGImageBufferJNI(bArr, createBitmap, available, dArr, dArr2, options2) < 0) {
+            if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, iAvailable, dArr, dArr2, options2) < 0) {
                 fileInputStream.close();
                 return null;
             }
@@ -384,10 +384,10 @@ public class SemQuramDngBitmap {
                 return null;
             }
             if (1 != options2.inSampleSize) {
-                createBitmap = Bitmap.createScaledBitmap(createBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
+                bitmapCreateBitmap = Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
             }
             fileInputStream.close();
-            return createBitmap;
+            return bitmapCreateBitmap;
         } catch (Throwable th) {
             try {
                 fileInputStream.close();
@@ -402,9 +402,9 @@ public class SemQuramDngBitmap {
     public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         try {
-            int available = fileInputStream.available();
-            byte[] bArr = new byte[available];
-            if (fileInputStream.read(bArr, 0, available) == -1) {
+            int iAvailable = fileInputStream.available();
+            byte[] bArr = new byte[iAvailable];
+            if (fileInputStream.read(bArr, 0, iAvailable) == -1) {
                 fileInputStream.close();
                 fileInputStream.close();
                 return null;
@@ -412,17 +412,17 @@ public class SemQuramDngBitmap {
             SemQrBitmapFactory.Options options = new SemQrBitmapFactory.Options(0);
             Bitmap.Config config = Bitmap.Config.ARGB_8888;
             double[] dArr = new double[256];
-            if (parseDNGImageBufferJNI(bArr, available, dArr, options.FileWhiteLevel, options) >= 0) {
+            if (parseDNGImageBufferJNI(bArr, iAvailable, dArr, options.FileWhiteLevel, options) >= 0) {
                 SetFileBlackLevel(dArr, options);
-                Bitmap createBitmap = Bitmap.createBitmap(options.width, options.height, config);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options.width, options.height, config);
                 double[] dArr2 = options.UserWhiteLevel;
                 SetUserBlackLevel(dArr, options);
-                if (DecodeDNGImageBufferJNI(bArr, createBitmap, available, dArr, dArr2, options) < 0) {
+                if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, iAvailable, dArr, dArr2, options) < 0) {
                     fileInputStream.close();
                     return null;
                 }
                 fileInputStream.close();
-                return createBitmap;
+                return bitmapCreateBitmap;
             }
             fileInputStream.close();
             return null;
@@ -438,9 +438,9 @@ public class SemQuramDngBitmap {
     }
 
     public static Bitmap decodeStream(InputStream inputStream, SemQrBitmapFactory.Options options) throws IOException {
-        int available = inputStream.available();
-        byte[] bArr = new byte[available];
-        if (inputStream.read(bArr, 0, available) == -1) {
+        int iAvailable = inputStream.available();
+        byte[] bArr = new byte[iAvailable];
+        if (inputStream.read(bArr, 0, iAvailable) == -1) {
             inputStream.close();
             return null;
         }
@@ -450,15 +450,15 @@ public class SemQuramDngBitmap {
         }
         SemQrBitmapFactory.Options options2 = options;
         double[] dArr = new double[256];
-        if (parseDNGImageBufferJNI(bArr, available, dArr, options2.FileWhiteLevel, options2) < 0) {
+        if (parseDNGImageBufferJNI(bArr, iAvailable, dArr, options2.FileWhiteLevel, options2) < 0) {
             return null;
         }
         SetFileBlackLevel(dArr, options2);
-        Bitmap createBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
         if (!options2.inJustDecodeBounds) {
             double[] dArr2 = options2.UserWhiteLevel;
             SetUserBlackLevel(dArr, options2);
-            if (DecodeDNGImageBufferJNI(bArr, createBitmap, available, dArr, dArr2, options2) < 0) {
+            if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, iAvailable, dArr, dArr2, options2) < 0) {
                 return null;
             }
             float f = options2.width;
@@ -469,16 +469,16 @@ public class SemQuramDngBitmap {
                 return null;
             }
             if (1 != options2.inSampleSize) {
-                return Bitmap.createScaledBitmap(createBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
+                return Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
             }
         }
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static Bitmap decodeStream(InputStream inputStream, Rect rect, SemQrBitmapFactory.Options options) throws IOException {
-        int available = inputStream.available();
-        byte[] bArr = new byte[available];
-        if (inputStream.read(bArr, 0, available) == -1) {
+        int iAvailable = inputStream.available();
+        byte[] bArr = new byte[iAvailable];
+        if (inputStream.read(bArr, 0, iAvailable) == -1) {
             inputStream.close();
             return null;
         }
@@ -488,15 +488,15 @@ public class SemQuramDngBitmap {
         }
         SemQrBitmapFactory.Options options2 = options;
         double[] dArr = new double[256];
-        if (parseDNGImageBufferJNI(bArr, available, dArr, options2.FileWhiteLevel, options2) < 0) {
+        if (parseDNGImageBufferJNI(bArr, iAvailable, dArr, options2.FileWhiteLevel, options2) < 0) {
             return null;
         }
         SetFileBlackLevel(dArr, options2);
-        Bitmap createBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(options2.width, options2.height, config);
         if (!options2.inJustDecodeBounds) {
             double[] dArr2 = options2.UserWhiteLevel;
             SetUserBlackLevel(dArr, options2);
-            if (DecodeDNGImageBufferJNI(bArr, createBitmap, available, dArr, dArr2, options2) < 0) {
+            if (DecodeDNGImageBufferJNI(bArr, bitmapCreateBitmap, iAvailable, dArr, dArr2, options2) < 0) {
                 return null;
             }
             float f = options2.width;
@@ -507,10 +507,10 @@ public class SemQuramDngBitmap {
                 return null;
             }
             if (1 != options2.inSampleSize) {
-                return Bitmap.createScaledBitmap(createBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
+                return Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (f / options2.inSampleSize), (int) (f2 / options2.inSampleSize), true);
             }
         }
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static byte[] getDNGPreviewImage(String str) {

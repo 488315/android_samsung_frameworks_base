@@ -11,17 +11,15 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface BuildScope extends KairosScope, StateScope {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class DefaultImpls {
         public static IncrementalInit applyLatestSpecForKey$default(BuildScope buildScope, IncrementalInit incrementalInit) {
             BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
             buildScopeImpl.getClass();
-            Pair applyLatestSpecForKey = buildScopeImpl.applyLatestSpecForKey(new EventsInit(new Init("patches", new IncrementalKt$$ExternalSyntheticLambda4(incrementalInit, 0))), buildScopeImpl.sampleDeferred(incrementalInit), null);
-            return buildScopeImpl.stateScope.foldStateMapIncrementally((Events) applyLatestSpecForKey.component1(), (DeferredValue) applyLatestSpecForKey.component2());
+            Pair pairApplyLatestSpecForKey = buildScopeImpl.applyLatestSpecForKey(new EventsInit(new Init("patches", new IncrementalKt$$ExternalSyntheticLambda4(incrementalInit, 0))), buildScopeImpl.sampleDeferred(incrementalInit), null);
+            return buildScopeImpl.stateScope.foldStateMapIncrementally((Events) pairApplyLatestSpecForKey.component1(), (DeferredValue) pairApplyLatestSpecForKey.component2());
         }
 
         public static /* synthetic */ BuildScopeImpl$observe$handle$1 observe$default(BuildScope buildScope, Events events, Function2 function2, int i) {

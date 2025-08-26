@@ -4,7 +4,6 @@ import com.android.systemui.plugins.qs.TileDetailsViewModel;
 import com.android.systemui.statusbar.policy.ui.dialog.viewmodel.ModesDialogViewModel;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ModesDetailsViewModel implements TileDetailsViewModel {
     public final Function0 onSettingsClick;

@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda9 implements Function2 {
     public final /* synthetic */ int $r8$classId = 0;
@@ -22,22 +21,22 @@ public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda9 imple
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                CommunalHubKt.DisclaimerBottomSheetContent((Function0) this.f$0, (Composer) obj, updateChangedFlags);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                CommunalHubKt.DisclaimerBottomSheetContent((Function0) this.f$0, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 PointerInputChange pointerInputChange = (PointerInputChange) obj;
                 ((Float) obj2).floatValue();
                 pointerInputChange.consume();
-                long uptimeMillis = SystemClock.uptimeMillis();
+                long jUptimeMillis = SystemClock.uptimeMillis();
                 long j = pointerInputChange.position;
-                MotionEvent obtain = MotionEvent.obtain(uptimeMillis, uptimeMillis, 2, Float.intBitsToFloat((int) (j >> 32)), Float.intBitsToFloat((int) (4294967295L & j)), 0);
+                MotionEvent motionEventObtain = MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 2, Float.intBitsToFloat((int) (j >> 32)), Float.intBitsToFloat((int) (4294967295L & j)), 0);
                 UniqueObjectHostView uniqueObjectHostView = ((BaseCommunalViewModel) this.f$0).mediaHost.hostView;
                 if (uniqueObjectHostView == null) {
                     uniqueObjectHostView = null;
                 }
-                uniqueObjectHostView.dispatchTouchEvent(obtain);
-                obtain.recycle();
+                uniqueObjectHostView.dispatchTouchEvent(motionEventObtain);
+                motionEventObtain.recycle();
                 break;
         }
         return Unit.INSTANCE;

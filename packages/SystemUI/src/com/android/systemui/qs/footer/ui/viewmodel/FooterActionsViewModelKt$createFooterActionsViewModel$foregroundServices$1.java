@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1 extends SuspendLambda implements Function4 {
     final /* synthetic */ ActivityStarter $activityStarter;
@@ -29,7 +28,6 @@ final class FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServ
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
         final /* synthetic */ ActivityStarter $activityStarter;
@@ -46,7 +44,7 @@ final class FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServ
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             final Expandable expandable = (Expandable) obj;
             FalsingManager falsingManager = this.$falsingManager;
             ActivityStarter activityStarter = this.$activityStarter;
@@ -55,7 +53,7 @@ final class FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServ
                 activityStarter.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction(expandable) { // from class: com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModelKt$createFooterActionsViewModel$onForegroundServiceButtonClicked$1
                     @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                     public final boolean onDismiss() {
-                        FooterActionsInteractor.this.getClass();
+                        this.$footerActionsInteractor.getClass();
                         return false;
                     }
                 }, null, true);
@@ -75,11 +73,11 @@ final class FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServ
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        int intValue = ((Number) obj).intValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj).intValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1 footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1 = new FooterActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1(this.$qsThemedContext, this.$falsingManager, this.$activityStarter, this.$footerActionsInteractor, (Continuation) obj4);
-        footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.I$0 = intValue;
-        footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.Z$0 = booleanValue;
+        footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.I$0 = iIntValue;
+        footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.Z$0 = zBooleanValue;
         footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.L$0 = (FooterActionsSecurityButtonViewModel) obj3;
         return footerActionsViewModelKt$createFooterActionsViewModel$foregroundServices$1.invokeSuspend(Unit.INSTANCE);
     }

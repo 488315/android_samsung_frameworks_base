@@ -36,20 +36,17 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MediaSessionCompat {
     public static int sMaxBitmapSize;
     public final MediaSessionImpl mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback {
         public CallbackHandler mCallbackHandler;
         public final Object mLock = new Object();
         public final MediaSessionCallbackApi21 mCallbackFwk = new MediaSessionCallbackApi21();
         public WeakReference mSessionImpl = new WeakReference(null);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class CallbackHandler extends Handler {
             public CallbackHandler(Looper looper) {
                 super(looper);
@@ -76,7 +73,6 @@ public class MediaSessionCompat {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class MediaSessionCallbackApi21 extends MediaSession.Callback {
             public MediaSessionCallbackApi21() {
             }
@@ -383,7 +379,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MediaSessionImpl {
         Callback getCallback();
 
@@ -392,7 +387,6 @@ public class MediaSessionCompat {
         void setCurrentControllerInfo(MediaSessionManager$RemoteUserInfo mediaSessionManager$RemoteUserInfo);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaSessionImplApi22 extends MediaSessionImplApi21 {
         public MediaSessionImplApi22(Context context, String str, VersionedParcelable versionedParcelable, Bundle bundle) {
             super(context, str, versionedParcelable, bundle);
@@ -403,7 +397,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaSessionImplApi28 extends MediaSessionImplApi22 {
         public MediaSessionImplApi28(Context context, String str, VersionedParcelable versionedParcelable, Bundle bundle) {
             super(context, str, versionedParcelable, bundle);
@@ -418,7 +411,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaSessionImplApi29 extends MediaSessionImplApi28 {
         public MediaSessionImplApi29(Context context, String str, VersionedParcelable versionedParcelable, Bundle bundle) {
             super(context, str, versionedParcelable, bundle);
@@ -435,7 +427,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QueueItem implements Parcelable {
         public static final Parcelable.Creator<QueueItem> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.session.MediaSessionCompat.QueueItem.1
             @Override // android.os.Parcelable.Creator
@@ -451,7 +442,6 @@ public class MediaSessionCompat {
         public final MediaDescriptionCompat mDescription;
         public final long mId;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Api21Impl {
             private Api21Impl() {
             }
@@ -524,7 +514,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Token implements Parcelable {
         public static final Parcelable.Creator<Token> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.session.MediaSessionCompat.Token.1
             @Override // android.os.Parcelable.Creator
@@ -627,7 +616,6 @@ public class MediaSessionCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ResultReceiverWrapper implements Parcelable {
         public static final Parcelable.Creator<ResultReceiverWrapper> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.media.session.MediaSessionCompat.ResultReceiverWrapper.1
             @Override // android.os.Parcelable.Creator
@@ -678,12 +666,12 @@ public class MediaSessionCompat {
                     int i = MediaButtonReceiver.$r8$clinit;
                     Intent intent = new Intent("android.intent.action.MEDIA_BUTTON");
                     intent.setPackage(context.getPackageName());
-                    List<ResolveInfo> queryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(intent, 0);
-                    if (queryBroadcastReceivers.size() == 1) {
-                        ActivityInfo activityInfo = queryBroadcastReceivers.get(0).activityInfo;
+                    List<ResolveInfo> listQueryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(intent, 0);
+                    if (listQueryBroadcastReceivers.size() == 1) {
+                        ActivityInfo activityInfo = listQueryBroadcastReceivers.get(0).activityInfo;
                         componentName = new ComponentName(activityInfo.packageName, activityInfo.name);
                     } else {
-                        if (queryBroadcastReceivers.size() > 1) {
+                        if (listQueryBroadcastReceivers.size() > 1) {
                             Log.w("MediaButtonReceiver", "More than one BroadcastReceiver that handles android.intent.action.MEDIA_BUTTON was found, returning null.");
                         }
                         componentName = null;
@@ -731,7 +719,6 @@ public class MediaSessionCompat {
         throw new IllegalArgumentException("context must not be null");
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaSessionImplApi21 implements MediaSessionImpl {
         public AnonymousClass1 mCallback;
         public final MediaSession mSessionFwk;
@@ -741,11 +728,11 @@ public class MediaSessionCompat {
         public final RemoteCallbackList mExtraControllerCallbacks = new RemoteCallbackList();
 
         public MediaSessionImplApi21(Context context, String str, VersionedParcelable versionedParcelable, Bundle bundle) {
-            MediaSession createFwkMediaSession = createFwkMediaSession(context, str, bundle);
-            this.mSessionFwk = createFwkMediaSession;
-            this.mToken = new Token(createFwkMediaSession.getSessionToken(), new ExtraSession(), versionedParcelable);
+            MediaSession mediaSessionCreateFwkMediaSession = createFwkMediaSession(context, str, bundle);
+            this.mSessionFwk = mediaSessionCreateFwkMediaSession;
+            this.mToken = new Token(mediaSessionCreateFwkMediaSession.getSessionToken(), new ExtraSession(), versionedParcelable);
             this.mSessionInfo = bundle;
-            createFwkMediaSession.setFlags(3);
+            mediaSessionCreateFwkMediaSession.setFlags(3);
         }
 
         public MediaSession createFwkMediaSession(Context context, String str, Bundle bundle) {
@@ -784,7 +771,6 @@ public class MediaSessionCompat {
             throw new IllegalArgumentException("mediaSession is not a valid MediaSession object");
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ExtraSession extends IMediaSession.Stub {
             public ExtraSession() {
             }

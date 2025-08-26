@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.policy.SensitiveNotificationProtectionCont
 import java.util.List;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class StackCoordinator implements Coordinator {
@@ -39,7 +38,7 @@ public final class StackCoordinator implements Coordinator {
     }
 
     private final NotifStats calculateNotifStats(List<? extends PipelineEntry> list) {
-        boolean isSensitiveStateActive = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).isSensitiveStateActive();
+        boolean zIsSensitiveStateActive = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).isSensitiveStateActive();
         boolean z = false;
         boolean z2 = false;
         boolean z3 = false;
@@ -54,7 +53,7 @@ public final class StackCoordinator implements Coordinator {
                 throw new IllegalStateException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Null notif entry for ", pipelineEntry.getKey()).toString());
             }
             boolean z5 = notifSection.bucket == 20;
-            boolean z6 = !isSensitiveStateActive && representativeEntry.isClearable();
+            boolean z6 = !zIsSensitiveStateActive && representativeEntry.isClearable();
             if (z5 && z6) {
                 z4 = true;
             } else if (z5 && !z6) {
@@ -70,8 +69,8 @@ public final class StackCoordinator implements Coordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderList(List<? extends PipelineEntry> list) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("StackCoordinator.onAfterRenderList");
         }
         try {
@@ -80,7 +79,7 @@ public final class StackCoordinator implements Coordinator {
             this.notificationIconAreaController.updateNotificationIcons(list);
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -88,7 +87,7 @@ public final class StackCoordinator implements Coordinator {
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.StackCoordinator$attach$1
+        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.StackCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener
             public final void onAfterRenderList(List<? extends PipelineEntry> list) {
                 StackCoordinator.this.onAfterRenderList(list);

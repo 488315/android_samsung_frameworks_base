@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.util.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StatusBarBackgroundLayout extends FrameLayout {
     public static final Logger LOG = new Logger("StatusBarBgLayout");

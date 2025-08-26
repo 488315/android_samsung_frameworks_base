@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -49,7 +51,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneInteractor {
     public final List allContentKeys;
@@ -71,7 +72,6 @@ public final class SceneInteractor {
     public final ReadonlyStateFlow transitionState;
     public final ReadonlyStateFlow transitioningTo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSceneAboutToChangeListener {
     }
 
@@ -94,11 +94,10 @@ public final class SceneInteractor {
         SharingStarted.Companion companion = SharingStarted.Companion;
         companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
-        final ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, startedEagerly, readonlyStateFlow.$$delegate_0.getValue());
-        this.transitionState = stateIn;
+        final ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, startedEagerly, readonlyStateFlow.$$delegate_0.getValue());
+        this.transitionState = readonlyStateFlowStateIn;
         this.transitioningTo = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -125,81 +124,58 @@ public final class SceneInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4d
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.compose.animation.scene.ObservableTransitionState r5 = (com.android.compose.animation.scene.ObservableTransitionState) r5
-                        boolean r6 = r5 instanceof com.android.compose.animation.scene.ObservableTransitionState.Idle
-                        if (r6 == 0) goto L3a
-                        r5 = 0
-                        goto L42
-                    L3a:
-                        boolean r6 = r5 instanceof com.android.compose.animation.scene.ObservableTransitionState.Transition
-                        if (r6 == 0) goto L50
-                        com.android.compose.animation.scene.ObservableTransitionState$Transition r5 = (com.android.compose.animation.scene.ObservableTransitionState.Transition) r5
-                        com.android.compose.animation.scene.ContentKey r5 = r5.toContent
-                    L42:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4d
-                        return r1
-                    L4d:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    L50:
-                        kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-                        r4.<init>()
-                        throw r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.domain.interactor.SceneInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    ContentKey contentKey;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ObservableTransitionState observableTransitionState = (ObservableTransitionState) obj;
+                        if (observableTransitionState instanceof ObservableTransitionState.Idle) {
+                            contentKey = null;
+                        } else {
+                            if (!(observableTransitionState instanceof ObservableTransitionState.Transition)) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            contentKey = ((ObservableTransitionState.Transition) observableTransitionState).toContent;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(contentKey, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.isTransitionUserInputOngoing = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new SceneInteractor$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.FALSE);
+        this.isTransitionUserInputOngoing = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new SceneInteractor$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.FALSE);
         SceneInteractor$isVisible$1 sceneInteractor$isVisible$1 = new SceneInteractor$isVisible$1(this, null);
         ReadonlyStateFlow readonlyStateFlow2 = sceneContainerRepository.isVisible;
         StateFlowImpl stateFlowImpl = sceneContainerRepository.isRemoteUserInputOngoing;
@@ -223,20 +199,20 @@ public final class SceneInteractor {
         SceneKey sceneKey3 = (SceneKey) sceneInteractor.currentScene.getValue();
         SceneResolver sceneResolver = (SceneResolver) ((Map) sceneInteractor.sceneFamilyResolvers.get()).get(sceneKey);
         SceneKey sceneKey4 = (sceneResolver == null || (readonlyStateFlow = ((HomeSceneFamilyResolver) sceneResolver).resolvedScene) == null || (sceneKey2 = (SceneKey) readonlyStateFlow.$$delegate_0.getValue()) == null) ? sceneKey : sceneKey2;
-        boolean contains = ((Set) sceneInteractor.currentOverlays.getValue()).contains(Overlays.Bouncer);
-        boolean areEqual = Intrinsics.areEqual(sceneKey4, sceneKey3);
+        boolean zContains = ((Set) sceneInteractor.currentOverlays.getValue()).contains(Overlays.Bouncer);
+        boolean zAreEqual = Intrinsics.areEqual(sceneKey4, sceneKey3);
         SceneContainerRepository sceneContainerRepository = sceneInteractor.repository;
-        if (areEqual && z) {
+        if (zAreEqual && z) {
             SceneLogger sceneLogger = sceneInteractor.logger;
             sceneLogger.getClass();
             LogLevel logLevel = LogLevel.INFO;
             SceneLogger$$ExternalSyntheticLambda0 sceneLogger$$ExternalSyntheticLambda0 = new SceneLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = sceneLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("SceneFramework", logLevel, sceneLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = sceneKey4.debugName;
             logMessageImpl.str2 = obj2 != null ? obj2.toString() : null;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             Iterator it = sceneInteractor.onSceneAboutToChangeListener.iterator();
             while (it.hasNext()) {
                 ((LockscreenSceneTransitionInteractor) ((OnSceneAboutToChangeListener) it.next())).onSceneAboutToChange(sceneKey4, obj2);
@@ -244,7 +220,7 @@ public final class SceneInteractor {
             sceneContainerRepository.dataSource.freezeAndAnimateToCurrentState();
         }
         if (!sceneInteractor.validateSceneChange(sceneKey3, sceneKey4, str)) {
-            if (contains) {
+            if (zContains) {
                 sceneInteractor.hideOverlay(Overlays.Bouncer, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Scene change cancelled but hiding bouncer for: (", str, ")"), null);
                 return;
             }
@@ -255,7 +231,7 @@ public final class SceneInteractor {
             ((LockscreenSceneTransitionInteractor) ((OnSceneAboutToChangeListener) it2.next())).onSceneAboutToChange(sceneKey4, obj2);
         }
         sceneInteractor.logger.logSceneChanged(sceneKey3, sceneKey4, obj2, str, false);
-        if (!contains) {
+        if (!zContains) {
             sceneContainerRepository.dataSource.changeScene(sceneKey4, transitionKey);
         } else {
             sceneContainerRepository.dataSource.snapToScene(sceneKey4);
@@ -307,7 +283,7 @@ public final class SceneInteractor {
     }
 
     public final ContentKey determineTopmostContent(SceneKey sceneKey, Set set) {
-        Object obj;
+        Object objPrevious;
         if (set.isEmpty()) {
             return sceneKey;
         }
@@ -315,16 +291,16 @@ public final class SceneInteractor {
         ListIterator listIterator = list.listIterator(list.size());
         while (true) {
             if (!listIterator.hasPrevious()) {
-                obj = null;
+                objPrevious = null;
                 break;
             }
-            obj = listIterator.previous();
-            if (set.contains((ContentKey) obj)) {
+            objPrevious = listIterator.previous();
+            if (set.contains((ContentKey) objPrevious)) {
                 break;
             }
         }
-        if (obj != null) {
-            return (ContentKey) obj;
+        if (objPrevious != null) {
+            return (ContentKey) objPrevious;
         }
         throw new IllegalStateException(("Could not find unknown content " + set + " in allContentKeys " + this.allContentKeys).toString());
     }
@@ -350,68 +326,30 @@ public final class SceneInteractor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003a A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void snapToScene(com.android.compose.animation.scene.SceneKey r8, java.lang.String r9) {
-        /*
-            r7 = this;
-            kotlinx.coroutines.flow.StateFlow r0 = r7.currentScene
-            java.lang.Object r0 = r0.getValue()
-            r2 = r0
-            com.android.compose.animation.scene.SceneKey r2 = (com.android.compose.animation.scene.SceneKey) r2
-            dagger.Lazy r0 = r7.sceneFamilyResolvers
-            java.lang.Object r0 = r0.get()
-            java.util.Map r0 = (java.util.Map) r0
-            java.lang.Object r0 = r0.get(r8)
-            com.android.systemui.scene.domain.resolver.SceneResolver r0 = (com.android.systemui.scene.domain.resolver.SceneResolver) r0
-            if (r0 == 0) goto L33
-            java.util.Set r1 = com.android.systemui.scene.domain.resolver.HomeSceneFamilyResolver.homeScenes
-            boolean r1 = r1.contains(r2)
-            if (r1 == 0) goto L22
-            goto L3a
-        L22:
-            com.android.systemui.scene.domain.resolver.HomeSceneFamilyResolver r0 = (com.android.systemui.scene.domain.resolver.HomeSceneFamilyResolver) r0
-            kotlinx.coroutines.flow.ReadonlyStateFlow r0 = r0.resolvedScene
-            kotlinx.coroutines.flow.StateFlow r0 = r0.$$delegate_0
-            java.lang.Object r0 = r0.getValue()
-            com.android.compose.animation.scene.SceneKey r0 = (com.android.compose.animation.scene.SceneKey) r0
-            if (r0 != 0) goto L31
-            goto L33
-        L31:
-            r3 = r0
-            goto L34
-        L33:
-            r3 = r8
-        L34:
-            boolean r8 = r7.validateSceneChange(r2, r3, r9)
-            if (r8 != 0) goto L3b
-        L3a:
-            return
-        L3b:
-            r6 = 1
-            com.android.systemui.scene.shared.logger.SceneLogger r1 = r7.logger
-            r4 = 0
-            r5 = r9
-            r1.logSceneChanged(r2, r3, r4, r5, r6)
-            com.android.systemui.scene.data.repository.SceneContainerRepository r8 = r7.repository
-            com.android.systemui.scene.shared.model.SceneDataSource r8 = r8.dataSource
-            r8.snapToScene(r3)
-            com.android.compose.animation.scene.OverlayKey r8 = com.android.systemui.scene.shared.model.Overlays.Bouncer
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r0 = "Hiding on snapToScene for: ("
-            r9.<init>(r0)
-            r9.append(r5)
-            java.lang.String r0 = ")"
-            r9.append(r0)
-            java.lang.String r9 = r9.toString()
-            r7.instantlyHideOverlay(r8, r9)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.domain.interactor.SceneInteractor.snapToScene(com.android.compose.animation.scene.SceneKey, java.lang.String):void");
+    public final void snapToScene(SceneKey sceneKey, String str) {
+        SceneKey sceneKey2;
+        SceneKey sceneKey3 = (SceneKey) this.currentScene.getValue();
+        SceneResolver sceneResolver = (SceneResolver) ((Map) this.sceneFamilyResolvers.get()).get(sceneKey);
+        if (sceneResolver == null) {
+            sceneKey2 = sceneKey;
+        } else {
+            if (HomeSceneFamilyResolver.homeScenes.contains(sceneKey3)) {
+                return;
+            }
+            SceneKey sceneKey4 = (SceneKey) ((HomeSceneFamilyResolver) sceneResolver).resolvedScene.$$delegate_0.getValue();
+            if (sceneKey4 != null) {
+                sceneKey2 = sceneKey4;
+            }
+        }
+        if (validateSceneChange(sceneKey3, sceneKey2, str)) {
+            this.logger.logSceneChanged(sceneKey3, sceneKey2, null, str, true);
+            this.repository.dataSource.snapToScene(sceneKey2);
+            instantlyHideOverlay(Overlays.Bouncer, "Hiding on snapToScene for: (" + str + ")");
+        }
     }
 
     public final boolean validateSceneChange(SceneKey sceneKey, SceneKey sceneKey2, String str) {
@@ -422,9 +360,9 @@ public final class SceneInteractor {
         if (shadeModeInteractor.isSplitShade() && Intrinsics.areEqual(sceneKey2, Scenes.QuickSettings)) {
             throw new IllegalStateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Can't change scene to ", sceneKey2.debugName, " in split shade mode!").toString());
         }
-        boolean areEqual = Intrinsics.areEqual(sceneKey, sceneKey2);
+        boolean zAreEqual = Intrinsics.areEqual(sceneKey, sceneKey2);
         SceneLogger sceneLogger = this.logger;
-        if (areEqual) {
+        if (zAreEqual) {
             sceneLogger.logSceneChangeRejection(sceneKey, sceneKey2, str, AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sceneKey.debugName, " is the same as ", sceneKey2.debugName));
             return false;
         }
@@ -441,8 +379,8 @@ public final class SceneInteractor {
         ObservableTransitionState.Transition transition = value instanceof ObservableTransitionState.Transition ? (ObservableTransitionState.Transition) value : null;
         ContentKey contentKey = transition != null ? transition.fromContent : null;
         SceneKey sceneKey3 = Scenes.Gone;
-        boolean areEqual2 = Intrinsics.areEqual(contentKey, sceneKey3);
-        if (!Intrinsics.areEqual(sceneKey2, sceneKey3) || areEqual2 || ((DeviceUnlockStatus) ((DeviceUnlockedInteractor) this.deviceUnlockedInteractor.get()).deviceUnlockStatus.$$delegate_0.getValue()).isUnlocked || !((Boolean) ((KeyguardEnabledInteractor) this.keyguardEnabledInteractor.get()).isKeyguardEnabled.$$delegate_0.getValue()).booleanValue()) {
+        boolean zAreEqual2 = Intrinsics.areEqual(contentKey, sceneKey3);
+        if (!Intrinsics.areEqual(sceneKey2, sceneKey3) || zAreEqual2 || ((DeviceUnlockStatus) ((DeviceUnlockedInteractor) this.deviceUnlockedInteractor.get()).deviceUnlockStatus.$$delegate_0.getValue()).isUnlocked || !((Boolean) ((KeyguardEnabledInteractor) this.keyguardEnabledInteractor.get()).isKeyguardEnabled.$$delegate_0.getValue()).booleanValue()) {
             return true;
         }
         throw new IllegalStateException(("Cannot change to the Gone scene while the device is locked and not currently transitioning from Gone. Current transition state is " + readonlyStateFlow.$$delegate_0.getValue() + ". Logging reason for scene change was: " + str).toString());

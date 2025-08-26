@@ -105,15 +105,15 @@ public final class InlinePresentationSpec implements Parcelable {
     }
 
     InlinePresentationSpec(Parcel parcel) {
-        Size readSize = parcel.readSize();
-        Size readSize2 = parcel.readSize();
-        Bundle readBundle = parcel.readBundle();
-        this.mMinSize = readSize;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readSize);
-        this.mMaxSize = readSize2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readSize2);
-        this.mStyle = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        Size size = parcel.readSize();
+        Size size2 = parcel.readSize();
+        Bundle bundle = parcel.readBundle();
+        this.mMinSize = size;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) size);
+        this.mMaxSize = size2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) size2);
+        this.mStyle = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 
     public static final class Builder extends BaseBuilder {

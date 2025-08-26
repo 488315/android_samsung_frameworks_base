@@ -22,6 +22,7 @@ import com.android.systemui.deviceentry.shared.model.SuccessFaceAuthenticationSt
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.keyguard.data.repository.BiometricSettingsRepository;
 import com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl;
+import com.android.systemui.keyguard.data.repository.BiometricType;
 import com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepository;
 import com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepositoryImpl;
 import com.android.systemui.keyguard.data.repository.KeyguardRepository;
@@ -32,6 +33,8 @@ import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInterac
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor$isFinishedInStateWhere$$inlined$map$1;
 import com.android.systemui.keyguard.shared.model.Edge;
 import com.android.systemui.keyguard.shared.model.KeyguardState;
+import com.android.systemui.keyguard.shared.model.TransitionState;
+import com.android.systemui.keyguard.shared.model.TransitionStep;
 import com.android.systemui.log.FaceAuthenticationLogger;
 import com.android.systemui.log.FaceAuthenticationLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.log.LogBuffer;
@@ -44,6 +47,8 @@ import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.power.domain.interactor.PowerInteractor$special$$inlined$map$2;
 import com.android.systemui.scene.shared.model.Scenes;
 import com.android.systemui.statusbar.phone.KeyguardBypassController;
+import com.android.systemui.user.data.model.SelectedUserModel;
+import com.android.systemui.user.data.model.SelectionStatus;
 import com.android.systemui.user.data.repository.UserRepository;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
@@ -52,16 +57,22 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.SpreadBuilder;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -75,7 +86,6 @@ import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceAuthRepository, Dumpable {
     public final StateFlowImpl _authenticationStatus;
@@ -115,13 +125,100 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
     public final UiEventLogger uiEventsLogger;
     public final UserRepository userRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$cancel$1, reason: invalid class name and case insensitive filesystem */
+    final class C08601 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C08601(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DeviceEntryFaceAuthRepositoryImpl.this.new C08601(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08601) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                this.label = 1;
+                if (DelayKt.delay(3000L, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl = DeviceEntryFaceAuthRepositoryImpl.this;
+            FaceAuthenticationLogger faceAuthenticationLogger = deviceEntryFaceAuthRepositoryImpl.faceAuthLogger;
+            boolean zBooleanValue = ((Boolean) deviceEntryFaceAuthRepositoryImpl._isAuthRunning.getValue()).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) DeviceEntryFaceAuthRepositoryImpl.this._isLockedOut.getValue()).booleanValue();
+            boolean zBooleanValue3 = ((Boolean) DeviceEntryFaceAuthRepositoryImpl.this.cancellationInProgress.getValue()).booleanValue();
+            AuthenticationRequest authenticationRequest = (AuthenticationRequest) DeviceEntryFaceAuthRepositoryImpl.this.pendingAuthenticateRequest.getValue();
+            FaceAuthUiEvent faceAuthUiEvent = authenticationRequest != null ? authenticationRequest.uiEvent : null;
+            faceAuthenticationLogger.getClass();
+            LogLevel logLevel = LogLevel.DEBUG;
+            FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(8);
+            LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
+            LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.bool1 = zBooleanValue;
+            logMessageImpl.bool2 = zBooleanValue2;
+            logMessageImpl.bool3 = zBooleanValue3;
+            logMessageImpl.str1 = String.valueOf(faceAuthUiEvent != null ? faceAuthUiEvent.getReason() : null);
+            logBuffer.commit(logMessageObtain);
+            StateFlowImpl stateFlowImpl = DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus;
+            ErrorFaceAuthenticationStatus.Companion.getClass();
+            stateFlowImpl.updateState(null, new ErrorFaceAuthenticationStatus(-1, "", 0L, 4, null));
+            DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(DeviceEntryFaceAuthRepositoryImpl.this);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C08611 extends FunctionReferenceImpl implements Function1 {
+        public C08611(Object obj) {
+            super(1, obj, KeyguardState.Companion.class, "deviceIsAwakeInState", "deviceIsAwakeInState(Lcom/android/systemui/keyguard/shared/model/KeyguardState;)Z", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((KeyguardState.Companion) this.receiver).getClass();
+            return Boolean.valueOf(KeyguardState.Companion.deviceIsAwakeInState((KeyguardState) obj));
+        }
+    }
+
+    /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$3, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function1 {
+        public AnonymousClass3(Object obj) {
+            super(1, obj, KeyguardState.Companion.class, "deviceIsAsleepInState", "deviceIsAsleepInState(Lcom/android/systemui/keyguard/shared/model/KeyguardState;)Z", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((KeyguardState.Companion) this.receiver).getClass();
+            return Boolean.valueOf(KeyguardState.Companion.deviceIsAsleepInState((KeyguardState) obj));
         }
     }
 
@@ -150,26 +247,26 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         this.alternateBouncerInteractor = alternateBouncerInteractor;
         this.keyguardTransitionInteractor = keyguardTransitionInteractor;
         this.displayStateInteractor = displayStateInteractor;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.pendingAuthenticateRequest = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.pendingAuthenticateRequest = stateFlowImplMutableStateFlow;
         this._authenticationStatus = StateFlowKt.MutableStateFlow(null);
         this._detectionStatus = StateFlowKt.MutableStateFlow(null);
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._isLockedOut = MutableStateFlow2;
-        this.isLockedOut = MutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._isLockedOut = stateFlowImplMutableStateFlow2;
+        this.isLockedOut = stateFlowImplMutableStateFlow2;
         this.isDetectionSupported = (faceManager == null || (sensorPropertiesInternal = faceManager.getSensorPropertiesInternal()) == null || (faceSensorPropertiesInternal = (FaceSensorPropertiesInternal) CollectionsKt___CollectionsKt.firstOrNull(sensorPropertiesInternal)) == null) ? false : faceSensorPropertiesInternal.supportsFaceDetection;
         this._isAuthRunning = StateFlowKt.MutableStateFlow(bool);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
-        this._isAuthenticated = MutableStateFlow3;
-        this.isAuthenticated = MutableStateFlow3;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
-        this.cancellationInProgress = MutableStateFlow4;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
+        this._isAuthenticated = stateFlowImplMutableStateFlow3;
+        this.isAuthenticated = stateFlowImplMutableStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
+        this.cancellationInProgress = stateFlowImplMutableStateFlow4;
         Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = (keyguardBypassController == null || (flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = FlowConflatedKt.conflatedCallbackFlow(new DeviceEntryFaceAuthRepositoryImpl$isBypassEnabled$1$1(keyguardBypassController, null))) == null) ? new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool) : flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         this.isBypassEnabled = flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         this.faceLockoutResetCallback = new FaceManager.LockoutResetCallback() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$faceLockoutResetCallback$1
             public final void onLockoutReset(int i) {
-                DeviceEntryFaceAuthRepositoryImpl.this._isLockedOut.updateState(null, Boolean.FALSE);
+                this.this$0._isLockedOut.updateState(null, Boolean.FALSE);
             }
         };
         executor.execute(new Runnable() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl.1
@@ -191,17 +288,17 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         dumpManager.registerCriticalDumpable("DeviceEntryFaceAuthRepositoryImpl", this);
         SpreadBuilder spreadBuilder = new SpreadBuilder(5);
         spreadBuilder.addSpread(gatingConditionsForAuthAndDetect());
-        spreadBuilder.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(MutableStateFlow2), "isNotInLockOutState"));
+        spreadBuilder.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(stateFlowImplMutableStateFlow2), "isNotInLockOutState"));
         KeyguardRepositoryImpl keyguardRepositoryImpl = (KeyguardRepositoryImpl) keyguardRepository;
         spreadBuilder.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(keyguardRepositoryImpl.isKeyguardDismissible), "keyguardIsNotDismissible"));
         BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl = (BiometricSettingsRepositoryImpl) biometricSettingsRepository;
         spreadBuilder.add(new Pair(biometricSettingsRepositoryImpl.isFaceAuthCurrentlyAllowed, "isFaceAuthCurrentlyAllowed"));
-        spreadBuilder.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(MutableStateFlow3), "faceNotAuthenticated"));
-        Flow flowOn = FlowKt.flowOn(DeviceEntryFaceAuthRepositoryKt.access$andAllFlows(CollectionsKt__CollectionsKt.listOf(spreadBuilder.list.toArray(new Pair[spreadBuilder.list.size()])), "canFaceAuthRun", tableLogBuffer2), coroutineDispatcher2);
+        spreadBuilder.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(stateFlowImplMutableStateFlow3), "faceNotAuthenticated"));
+        Flow flowFlowOn = FlowKt.flowOn(DeviceEntryFaceAuthRepositoryKt.access$andAllFlows(CollectionsKt__CollectionsKt.listOf(spreadBuilder.list.toArray(new Pair[spreadBuilder.list.size()])), "canFaceAuthRun", tableLogBuffer2), coroutineDispatcher2);
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowOn, coroutineScope, startedEagerly, bool);
-        this.canRunFaceAuth = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowFlowOn, coroutineScope, startedEagerly, bool);
+        this.canRunFaceAuth = readonlyStateFlowStateIn;
         SpreadBuilder spreadBuilder2 = new SpreadBuilder(4);
         spreadBuilder2.addSpread(gatingConditionsForAuthAndDetect());
         spreadBuilder2.add(new Pair(flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, "isBypassEnabled"));
@@ -210,7 +307,6 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         final Flow availableFpSensorType = deviceEntryFingerprintAuthRepositoryImpl.getAvailableFpSensorType();
         spreadBuilder2.add(new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new Flow() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -237,78 +333,52 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1$2$1 r0 = (com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1$2$1 r0 = new com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4a
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.keyguard.data.repository.BiometricType r5 = (com.android.systemui.keyguard.data.repository.BiometricType) r5
-                        com.android.systemui.keyguard.data.repository.BiometricType r6 = com.android.systemui.keyguard.data.repository.BiometricType.UNDER_DISPLAY_FINGERPRINT
-                        if (r5 != r6) goto L3a
-                        r5 = r3
-                        goto L3b
-                    L3a:
-                        r5 = 0
-                    L3b:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4a
-                        return r1
-                    L4a:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isUdfps$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((BiometricType) obj) == BiometricType.UNDER_DISPLAY_FINGERPRINT);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = availableFpSensorType.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, deviceEntryFingerprintAuthRepositoryImpl.isRunning(), new DeviceEntryFaceAuthRepositoryKt$and$1(null))), "udfpsAuthIsNotPossibleAnymore"));
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.flowOn(DeviceEntryFaceAuthRepositoryKt.access$andAllFlows(CollectionsKt__CollectionsKt.listOf(spreadBuilder2.list.toArray(new Pair[spreadBuilder2.list.size()])), "canFaceDetectRun", tableLogBuffer), coroutineDispatcher2), coroutineScope, startedEagerly, bool);
-        this.canRunDetection = stateIn2;
-        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(stateIn, new DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1(this, null)), coroutineDispatcher), coroutineScope);
-        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(stateIn2, new DeviceEntryFaceAuthRepositoryImpl$observeFaceDetectGatingChecks$1(this, null)), coroutineDispatcher), coroutineScope);
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.flowOn(DeviceEntryFaceAuthRepositoryKt.access$andAllFlows(CollectionsKt__CollectionsKt.listOf(spreadBuilder2.list.toArray(new Pair[spreadBuilder2.list.size()])), "canFaceDetectRun", tableLogBuffer), coroutineDispatcher2), coroutineScope, startedEagerly, bool);
+        this.canRunDetection = readonlyStateFlowStateIn2;
+        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(readonlyStateFlowStateIn, new DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1(this, null)), coroutineDispatcher), coroutineScope);
+        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(readonlyStateFlowStateIn2, new DeviceEntryFaceAuthRepositoryImpl$observeFaceDetectGatingChecks$1(this, null)), coroutineDispatcher), coroutineScope);
         PowerInteractor$special$$inlined$map$2 powerInteractor$special$$inlined$map$2 = powerInteractor.isAsleep;
         SceneKey sceneKey = Scenes.Gone;
         KeyguardState keyguardState = KeyguardState.GONE;
@@ -316,7 +386,6 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         final ReadonlyStateFlow readonlyStateFlow = ((UserRepositoryImpl) userRepository).selectedUser;
         FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.flowOn(FlowKt.merge(powerInteractor$special$$inlined$map$2, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new Flow() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -343,81 +412,53 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1$2$1 r0 = (com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1$2$1 r0 = new com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.user.data.model.SelectedUserModel r5 = (com.android.systemui.user.data.model.SelectedUserModel) r5
-                        com.android.systemui.user.data.model.SelectionStatus r5 = r5.selectionStatus
-                        com.android.systemui.user.data.model.SelectionStatus r6 = com.android.systemui.user.data.model.SelectionStatus.SELECTION_IN_PROGRESS
-                        if (r5 != r6) goto L3c
-                        r5 = r3
-                        goto L3d
-                    L3c:
-                        r5 = 0
-                    L3d:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((SelectedUserModel) obj).selectionStatus == SelectionStatus.SELECTION_IN_PROGRESS);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), coroutineDispatcher), new DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthResettingConditions$3(this, null)), coroutineScope);
         Edge.Companion companion = Edge.Companion;
         Edge.Companion.create$default(companion, sceneKey);
-        final Flow transition = keyguardTransitionInteractor.transition(Edge.Companion.create$default(companion, null, keyguardState, 1));
+        final Flow flowTransition = keyguardTransitionInteractor.transition(Edge.Companion.create$default(companion, null, keyguardState, 1));
         FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new Flow() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -445,96 +486,75 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1$2$1 r0 = (com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1$2$1 r0 = new com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L46
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.TransitionStep r6 = (com.android.systemui.keyguard.shared.model.TransitionStep) r6
-                        com.android.systemui.keyguard.shared.model.TransitionState r6 = r6.transitionState
-                        com.android.systemui.keyguard.shared.model.TransitionState r2 = com.android.systemui.keyguard.shared.model.TransitionState.FINISHED
-                        if (r6 != r2) goto L46
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L46
-                        return r1
-                    L46:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((TransitionStep) obj).transitionState == TransitionState.FINISHED) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new DeviceEntryFaceAuthRepositoryImpl$listenForSchedulingWatchdog$2(this, null)), coroutineScope);
-        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.combine(MutableStateFlow, stateIn, stateIn2, MutableStateFlow4, new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1(this, null)), new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2(this, null)), coroutineDispatcher), coroutineScope);
+        FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.combine(stateFlowImplMutableStateFlow, readonlyStateFlowStateIn, readonlyStateFlowStateIn2, stateFlowImplMutableStateFlow4, new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1(this, null)), new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2(this, null)), coroutineDispatcher), coroutineScope);
         this.faceAuthCallback = new FaceManager.AuthenticationCallback() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$faceAuthCallback$1
             public final void onAuthenticationAcquired(int i) {
-                DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus.updateState(null, new AcquiredFaceAuthenticationStatus(i, 0L, 2, null));
+                this.this$0._authenticationStatus.updateState(null, new AcquiredFaceAuthenticationStatus(i, 0L, 2, null));
             }
 
             public final void onAuthenticationError(int i, CharSequence charSequence) {
                 ErrorFaceAuthenticationStatus errorFaceAuthenticationStatus = new ErrorFaceAuthenticationStatus(i, String.valueOf(charSequence), 0L, 4, null);
                 if (errorFaceAuthenticationStatus.isLockoutError()) {
-                    DeviceEntryFaceAuthRepositoryImpl.this._isLockedOut.updateState(null, Boolean.TRUE);
+                    this.this$0._isLockedOut.updateState(null, Boolean.TRUE);
                 }
-                DeviceEntryFaceAuthRepositoryImpl.this._isAuthenticated.updateState(null, Boolean.FALSE);
-                DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus.updateState(null, errorFaceAuthenticationStatus);
+                this.this$0._isAuthenticated.updateState(null, Boolean.FALSE);
+                this.this$0._authenticationStatus.updateState(null, errorFaceAuthenticationStatus);
                 int i2 = errorFaceAuthenticationStatus.msgId;
                 if (i2 == 1 || i2 == 2) {
-                    FaceAuthenticationLogger faceAuthenticationLogger2 = DeviceEntryFaceAuthRepositoryImpl.this.faceAuthLogger;
+                    FaceAuthenticationLogger faceAuthenticationLogger2 = this.this$0.faceAuthLogger;
                     faceAuthenticationLogger2.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(11);
                     LogBuffer logBuffer = faceAuthenticationLogger2.logBuffer;
-                    LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.str1 = String.valueOf(errorFaceAuthenticationStatus.msg);
                     logMessageImpl.int1 = i2;
-                    logBuffer.commit(obtain);
-                    DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl = DeviceEntryFaceAuthRepositoryImpl.this;
+                    logBuffer.commit(logMessageObtain);
+                    DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl = this.this$0;
                     int i3 = deviceEntryFaceAuthRepositoryImpl.retryCount;
                     if (i3 < 5) {
                         deviceEntryFaceAuthRepositoryImpl.retryCount = i3 + 1;
@@ -545,61 +565,61 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
                         deviceEntryFaceAuthRepositoryImpl.halErrorRetryJob = CoroutineTracingKt.launchTraced$default(deviceEntryFaceAuthRepositoryImpl.applicationScope, null, null, new DeviceEntryFaceAuthRepositoryImpl$handleFaceHardwareError$1(deviceEntryFaceAuthRepositoryImpl, null), 7);
                     }
                 }
-                FaceAuthenticationLogger faceAuthenticationLogger3 = DeviceEntryFaceAuthRepositoryImpl.this.faceAuthLogger;
-                boolean isLockoutError = errorFaceAuthenticationStatus.isLockoutError();
+                FaceAuthenticationLogger faceAuthenticationLogger3 = this.this$0.faceAuthLogger;
+                boolean zIsLockoutError = errorFaceAuthenticationStatus.isLockoutError();
                 boolean z = i2 == 5;
                 faceAuthenticationLogger3.getClass();
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda02 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(6);
                 LogBuffer logBuffer2 = faceAuthenticationLogger3.logBuffer;
-                LogMessage obtain2 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel2, faceAuthenticationLogger$$ExternalSyntheticLambda02, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel2, faceAuthenticationLogger$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.int1 = i;
                 logMessageImpl2.str1 = String.valueOf(charSequence);
-                logMessageImpl2.bool1 = isLockoutError;
+                logMessageImpl2.bool1 = zIsLockoutError;
                 logMessageImpl2.bool2 = z;
-                logBuffer2.commit(obtain2);
-                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(DeviceEntryFaceAuthRepositoryImpl.this);
+                logBuffer2.commit(logMessageObtain2);
+                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(this.this$0);
             }
 
             public final void onAuthenticationFailed() {
-                DeviceEntryFaceAuthRepositoryImpl.this._isAuthenticated.updateState(null, Boolean.FALSE);
-                FaceAuthenticationLogger faceAuthenticationLogger2 = DeviceEntryFaceAuthRepositoryImpl.this.faceAuthLogger;
+                this.this$0._isAuthenticated.updateState(null, Boolean.FALSE);
+                FaceAuthenticationLogger faceAuthenticationLogger2 = this.this$0.faceAuthLogger;
                 faceAuthenticationLogger2.getClass();
                 LogBuffer.log$default(faceAuthenticationLogger2.logBuffer, "DeviceEntryFaceAuthRepositoryLog", LogLevel.DEBUG, "Face authentication failed");
-                DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus.updateState(null, new FailedFaceAuthenticationStatus(0L, 1, null));
-                if (((Boolean) DeviceEntryFaceAuthRepositoryImpl.this._isLockedOut.getValue()).booleanValue()) {
+                this.this$0._authenticationStatus.updateState(null, new FailedFaceAuthenticationStatus(0L, 1, null));
+                if (((Boolean) this.this$0._isLockedOut.getValue()).booleanValue()) {
                     return;
                 }
-                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(DeviceEntryFaceAuthRepositoryImpl.this);
+                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(this.this$0);
             }
 
             public final void onAuthenticationHelp(int i, CharSequence charSequence) {
-                DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus.updateState(null, new HelpFaceAuthenticationStatus(i, charSequence != null ? charSequence.toString() : null, 0L, 4, null));
+                this.this$0._authenticationStatus.updateState(null, new HelpFaceAuthenticationStatus(i, charSequence != null ? charSequence.toString() : null, 0L, 4, null));
             }
 
             public final void onAuthenticationSucceeded(FaceManager.AuthenticationResult authenticationResult) {
-                DeviceEntryFaceAuthRepositoryImpl.this._isAuthenticated.updateState(null, Boolean.TRUE);
-                DeviceEntryFaceAuthRepositoryImpl.this._authenticationStatus.updateState(null, new SuccessFaceAuthenticationStatus(authenticationResult, 0L, 2, null));
-                FaceAuthenticationLogger faceAuthenticationLogger2 = DeviceEntryFaceAuthRepositoryImpl.this.faceAuthLogger;
+                this.this$0._isAuthenticated.updateState(null, Boolean.TRUE);
+                this.this$0._authenticationStatus.updateState(null, new SuccessFaceAuthenticationStatus(authenticationResult, 0L, 2, null));
+                FaceAuthenticationLogger faceAuthenticationLogger2 = this.this$0.faceAuthLogger;
                 faceAuthenticationLogger2.getClass();
                 LogLevel logLevel = LogLevel.DEBUG;
                 FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer = faceAuthenticationLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.int1 = authenticationResult.getUserId();
                 logMessageImpl.bool1 = authenticationResult.isStrongBiometric();
-                logBuffer.commit(obtain);
-                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(DeviceEntryFaceAuthRepositoryImpl.this);
+                logBuffer.commit(logMessageObtain);
+                DeviceEntryFaceAuthRepositoryImpl.access$onFaceAuthRequestCompleted(this.this$0);
             }
         };
         this.detectionCallback = new FaceManager.FaceDetectionCallback() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$detectionCallback$1
             public final void onFaceDetected(int i, int i2, boolean z) {
-                FaceAuthenticationLogger faceAuthenticationLogger2 = DeviceEntryFaceAuthRepositoryImpl.this.faceAuthLogger;
+                FaceAuthenticationLogger faceAuthenticationLogger2 = this.this$0.faceAuthLogger;
                 faceAuthenticationLogger2.getClass();
                 LogBuffer.log$default(faceAuthenticationLogger2.logBuffer, "DeviceEntryFaceAuthRepositoryLog", LogLevel.DEBUG, "Face detected");
-                DeviceEntryFaceAuthRepositoryImpl.this._detectionStatus.updateState(null, new FaceDetectionStatus(i, i2, z, 0L, 8, null));
+                this.this$0._detectionStatus.updateState(null, new FaceDetectionStatus(i, i2, z, 0L, 8, null));
             }
         };
     }
@@ -609,19 +629,19 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         AuthenticationRequest authenticationRequest = (AuthenticationRequest) stateFlowImpl.getValue();
         FaceAuthUiEvent faceAuthUiEvent = authenticationRequest != null ? authenticationRequest.uiEvent : null;
         AuthenticationRequest authenticationRequest2 = (AuthenticationRequest) stateFlowImpl.getValue();
-        Boolean valueOf = authenticationRequest2 != null ? Boolean.valueOf(authenticationRequest2.fallbackToDetection) : null;
+        Boolean boolValueOf = authenticationRequest2 != null ? Boolean.valueOf(authenticationRequest2.fallbackToDetection) : null;
         FaceAuthenticationLogger faceAuthenticationLogger = deviceEntryFaceAuthRepositoryImpl.faceAuthLogger;
         faceAuthenticationLogger.getClass();
         if (faceAuthUiEvent != null) {
             LogLevel logLevel = LogLevel.DEBUG;
             FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(12);
             LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = faceAuthUiEvent.getReason();
-            logMessageImpl.str2 = String.valueOf(valueOf);
+            logMessageImpl.str2 = String.valueOf(boolValueOf);
             logMessageImpl.str3 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         stateFlowImpl.setValue(null);
     }
@@ -647,7 +667,7 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         if (standaloneCoroutine != null) {
             standaloneCoroutine.cancel(null);
         }
-        this.cancelNotReceivedHandlerJob = CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new DeviceEntryFaceAuthRepositoryImpl$cancel$1(this, null), 7);
+        this.cancelNotReceivedHandlerJob = CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new C08601(null), 7);
         this.cancellationInProgress.updateState(null, Boolean.TRUE);
         this._isAuthRunning.updateState(null, Boolean.FALSE);
     }
@@ -664,13 +684,13 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         printWriter.println("  FaceManager state:");
         printWriter.println("    faceManager: " + this.faceManager);
         FaceManager faceManager = this.faceManager;
-        Boolean bool = null;
+        Boolean boolValueOf = null;
         printWriter.println("    sensorPropertiesInternal: " + (faceManager != null ? faceManager.getSensorPropertiesInternal() : null));
         FaceManager faceManager2 = this.faceManager;
         if (faceManager2 != null && (sensorPropertiesInternal = faceManager2.getSensorPropertiesInternal()) != null && (faceSensorPropertiesInternal = (FaceSensorPropertiesInternal) CollectionsKt___CollectionsKt.firstOrNull(sensorPropertiesInternal)) != null) {
-            bool = Boolean.valueOf(faceSensorPropertiesInternal.supportsFaceDetection);
+            boolValueOf = Boolean.valueOf(faceSensorPropertiesInternal.supportsFaceDetection);
         }
-        printWriter.println("    supportsFaceDetection: " + bool);
+        printWriter.println("    supportsFaceDetection: " + boolValueOf);
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("  _pendingAuthenticateRequest: ", this.pendingAuthenticateRequest.getValue(), printWriter);
         printWriter.println("  authCancellationSignal: " + this.authCancellationSignal);
         printWriter.println("  detectCancellationSignal: " + this.detectCancellationSignal);
@@ -685,14 +705,14 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
     public final Pair[] gatingConditionsForAuthAndDetect() {
         Flow flow = ((DisplayStateInteractorImpl) this.displayStateInteractor).isDefaultDisplayOff;
         KeyguardState.Companion companion = KeyguardState.Companion;
-        DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$1 deviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$1 = new DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$1(companion);
+        C08611 c08611 = new C08611(companion);
         KeyguardTransitionInteractor keyguardTransitionInteractor = this.keyguardTransitionInteractor;
-        Pair pair = new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flow, FlowKt.distinctUntilChanged(new KeyguardTransitionInteractor$isFinishedInStateWhere$$inlined$map$1(keyguardTransitionInteractor.finishedKeyguardState, deviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$1)), new DeviceEntryFaceAuthRepositoryKt$and$1(null))), "displayIsNotOffWhileFullyTransitionedToAwake");
+        Pair pair = new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flow, FlowKt.distinctUntilChanged(new KeyguardTransitionInteractor$isFinishedInStateWhere$$inlined$map$1(keyguardTransitionInteractor.finishedKeyguardState, c08611)), new DeviceEntryFaceAuthRepositoryKt$and$1(null))), "displayIsNotOffWhileFullyTransitionedToAwake");
         BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl = (BiometricSettingsRepositoryImpl) this.biometricSettingsRepository;
         Pair pair2 = new Pair(biometricSettingsRepositoryImpl.isFaceAuthEnrolledAndEnabled, "isFaceAuthEnrolledAndEnabled");
         KeyguardRepositoryImpl keyguardRepositoryImpl = (KeyguardRepositoryImpl) this.keyguardRepository;
         Pair pair3 = new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(keyguardRepositoryImpl.isKeyguardGoingAway), "keyguardNotGoingAway");
-        Pair pair4 = new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(keyguardTransitionInteractor.isInTransitionWhere(new KeyguardTransitionInteractor$$ExternalSyntheticLambda0(), new DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$3(companion))), "deviceNotTransitioningToAsleepState");
+        Pair pair4 = new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(keyguardTransitionInteractor.isInTransitionWhere(new KeyguardTransitionInteractor$$ExternalSyntheticLambda0(), new AnonymousClass3(companion))), "deviceNotTransitioningToAsleepState");
         KeyguardInteractor keyguardInteractor = this.keyguardInteractor;
         Pair pair5 = new Pair(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(keyguardInteractor.isSecureCameraActive), new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.alternateBouncerInteractor.isVisible, keyguardInteractor.primaryBouncerShowing, new DeviceEntryFaceAuthRepositoryKt$or$1(null)), new DeviceEntryFaceAuthRepositoryKt$or$1(null)), "secureCameraNotActiveOrAnyBouncerIsShowing");
         Pair pair6 = new Pair(biometricSettingsRepositoryImpl.isFaceAuthSupportedInCurrentPosture, "isFaceAuthSupportedInCurrentPosture");
@@ -701,7 +721,6 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
         final ReadonlyStateFlow readonlyStateFlow = ((UserRepositoryImpl) this.userRepository).selectedUser;
         return new Pair[]{pair, pair2, pair3, pair4, pair5, pair6, pair7, pair8, new Pair(new DeviceEntryFaceAuthRepositoryKt$isFalse$$inlined$map$1(new Flow() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -728,73 +747,46 @@ public final class DeviceEntryFaceAuthRepositoryImpl implements DeviceEntryFaceA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3$2$1 r0 = (com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3$2$1 r0 = new com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.user.data.model.SelectedUserModel r5 = (com.android.systemui.user.data.model.SelectedUserModel) r5
-                        com.android.systemui.user.data.model.SelectionStatus r5 = r5.selectionStatus
-                        com.android.systemui.user.data.model.SelectionStatus r6 = com.android.systemui.user.data.model.SelectionStatus.SELECTION_IN_PROGRESS
-                        if (r5 != r6) goto L3c
-                        r5 = r3
-                        goto L3d
-                    L3c:
-                        r5 = 0
-                    L3d:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$gatingConditionsForAuthAndDetect$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((SelectedUserModel) obj).selectionStatus == SelectionStatus.SELECTION_IN_PROGRESS);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), "userSwitchingInProgress")};
     }

@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ProtoLogController implements ShellCommandHandler.ShellCommandActionHandler {
     public final ShellCommandHandler mShellCommandHandler;
@@ -22,7 +21,7 @@ public class ProtoLogController implements ShellCommandHandler.ShellCommandActio
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.ProtoLogController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ProtoLogController protoLogController = ProtoLogController.this;
+                ProtoLogController protoLogController = this.f$0;
                 protoLogController.mShellCommandHandler.addCommandCallback("protolog", protoLogController, protoLogController);
             }
         }, this);

@@ -3,6 +3,7 @@ package com.samsung.android.globalactions.presentation.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.view.IRotationWatcher;
@@ -10,7 +11,6 @@ import android.view.IWindowManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -22,7 +22,6 @@ import com.android.internal.R;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
 import com.samsung.android.globalactions.presentation.strategies.ViewInflateStrategy;
-import com.samsung.android.globalactions.presentation.view.GlobalActionsContentView;
 import com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator;
 import com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimatorFSM;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
@@ -138,7 +137,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             ((ImageView) frameLayout.findViewById(this.mResourceFactory.get(ResourceType.ID_ICON))).setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    GlobalActionsContentView.this.lambda$initLayouts$0(view);
+                    this.f$0.lambda$initLayouts$0(view);
                 }
             });
         }
@@ -344,7 +343,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
         }
 
         @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-        protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+        protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
             super.onLayout(z, i, i2, i3, i4);
             if (z || GlobalActionsContentView.this.mNeedToForceUpdate) {
                 GlobalActionsContentView.this.mLogWrapper.i(GlobalActionsContentView.TAG, "RootView onLayout");
@@ -384,8 +383,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             GlobalActionsContentView.this.mAnimatorFSM.handleAnimationEvent(SamsungGlobalActionsAnimatorFSM.Event.CONFIGURATION_CHANGED);
         }
 
-        private void setRootViewPadding() {
-            ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        private void setRootViewPadding() throws Resources.NotFoundException {
             if (this.mContext.getResources().getConfiguration().semMobileKeyboardCovered == 1) {
                 GlobalActionsContentView.this.mRootView.setPadding(0, 0, 0, 0);
                 return;
@@ -427,7 +425,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             }
         }
 
-        private void setGridViewMargin() {
+        private void setGridViewMargin() throws Resources.NotFoundException {
             if (GlobalActionsContentView.this.mBottomMsgView == null || GlobalActionsContentView.this.mBottomButtonView.getChildCount() == 0) {
                 return;
             }
@@ -479,7 +477,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             return GlobalActionsContentView.this.mConditionChecker.isEnabled(SystemConditions.IS_NAV_BAR_GESTURE_ENABLED);
         }
 
-        private void setBugReportViewMargin() {
+        private void setBugReportViewMargin() throws Resources.NotFoundException {
             if (GlobalActionsContentView.this.mBottomButtonView == null || GlobalActionsContentView.this.mBottomButtonView.getChildCount() <= 0) {
                 return;
             }
@@ -504,7 +502,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             }
         }
 
-        private void setSideKeySettingsViewMargin() {
+        private void setSideKeySettingsViewMargin() throws Resources.NotFoundException {
             if (GlobalActionsContentView.this.mBottomButtonView == null || GlobalActionsContentView.this.mBottomButtonView.getChildCount() <= 0) {
                 return;
             }
@@ -524,9 +522,6 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
                     int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.DIMEN_SIDEKEY_SETTINGS_BOTTOM_MARGIN_LAND));
                     if (GlobalActionsContentView.this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE) && GlobalActionsContentView.this.mConditionChecker.isEnabled(SystemConditions.IS_DESKTOP_MODE_STANDALONE)) {
                         dimensionPixelSize += this.mContext.getResources().getDimensionPixelSize(R.dimen.navigation_bar_frame_height);
-                    }
-                    if (isTaskBarEnabled() && isNavBarGestureType()) {
-                        dimensionPixelSize += this.mContext.getResources().getDimensionPixelSize(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.DIMEN_BUGREPORT_BOTTOM_MARGIN_TASK));
                     }
                     marginLayoutParams.bottomMargin = dimensionPixelSize;
                     if (frameLayout != null) {
@@ -554,44 +549,44 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
 
         private void setListViewHeight() {
             int i;
-            int i2;
+            int height;
             int verticalSpacing;
-            int i3 = 0;
+            int i2 = 0;
             boolean z = this.mContext.getResources().getConfiguration().orientation == 1;
             if (GlobalActionsContentView.this.mListView.getNumColumns() == 2) {
-                i2 = 0;
-                int i4 = 0;
-                int i5 = 0;
-                while (i3 < GlobalActionsContentView.this.mListView.getChildCount()) {
-                    if (i3 % 2 == 0) {
-                        i2 += GlobalActionsContentView.this.mListView.getChildAt(i3).getHeight();
-                        i5++;
+                height = 0;
+                int height2 = 0;
+                int i3 = 0;
+                while (i2 < GlobalActionsContentView.this.mListView.getChildCount()) {
+                    if (i2 % 2 == 0) {
+                        height += GlobalActionsContentView.this.mListView.getChildAt(i2).getHeight();
+                        i3++;
                     } else {
-                        i4 += GlobalActionsContentView.this.mListView.getChildAt(i3).getHeight();
+                        height2 += GlobalActionsContentView.this.mListView.getChildAt(i2).getHeight();
                     }
-                    i3++;
+                    i2++;
                 }
-                if (i2 <= i4) {
-                    i2 = i4;
+                if (height <= height2) {
+                    height = height2;
                 }
-                verticalSpacing = GlobalActionsContentView.this.mListView.getVerticalSpacing() * (i5 - 1);
+                verticalSpacing = GlobalActionsContentView.this.mListView.getVerticalSpacing() * (i3 - 1);
             } else if (z && GlobalActionsContentView.this.mListView.getNumColumns() == 1) {
-                i2 = 0;
-                int i6 = 0;
-                while (i3 < GlobalActionsContentView.this.mListView.getChildCount()) {
-                    i2 += GlobalActionsContentView.this.mListView.getChildAt(i3).getHeight();
-                    i6++;
-                    i3++;
+                height = 0;
+                int i4 = 0;
+                while (i2 < GlobalActionsContentView.this.mListView.getChildCount()) {
+                    height += GlobalActionsContentView.this.mListView.getChildAt(i2).getHeight();
+                    i4++;
+                    i2++;
                 }
-                verticalSpacing = GlobalActionsContentView.this.mListView.getVerticalSpacing() * (i6 - 1);
+                verticalSpacing = GlobalActionsContentView.this.mListView.getVerticalSpacing() * (i4 - 1);
             } else {
                 i = 0;
                 int childCount = GlobalActionsContentView.this.mListView.getChildCount();
-                if (i3 != 0 || childCount <= 0) {
+                if (i2 != 0 || childCount <= 0) {
                 }
-                int i7 = childCount - 1;
-                if (GlobalActionsContentView.this.mListView.getChildAt(i7) != null) {
-                    int bottom = GlobalActionsContentView.this.mListView.getChildAt(i7).getBottom();
+                int i5 = childCount - 1;
+                if (GlobalActionsContentView.this.mListView.getChildAt(i5) != null) {
+                    int bottom = GlobalActionsContentView.this.mListView.getChildAt(i5).getBottom();
                     if (bottom > i) {
                         i = bottom;
                     }
@@ -605,10 +600,10 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
                 }
                 return;
             }
-            i = verticalSpacing + i2;
-            i3 = 1;
+            i = verticalSpacing + height;
+            i2 = 1;
             int childCount2 = GlobalActionsContentView.this.mListView.getChildCount();
-            if (i3 != 0) {
+            if (i2 != 0) {
             }
         }
     }
@@ -644,7 +639,7 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
         }
 
         @Override // android.widget.Adapter
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             GlobalActionsContentItemView globalActionsContentItemView = new GlobalActionsContentItemView(this.mContext, this.mViewModelList.get(i), viewGroup, GlobalActionsContentView.this.mResourceFactory, GlobalActionsContentView.this.mIsVoiceAssistantMode, GlobalActionsContentView.this.mIsWhiteTheme, GlobalActionsContentView.this.mViewStateController);
             if (view == null) {
                 view = globalActionsContentItemView.inflateView();
@@ -772,14 +767,14 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
         }
 
         @Override // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.ViewUpdateCallback
-        public GlobalActionsContentItemView createConfirmView() {
+        public GlobalActionsContentItemView createConfirmView() throws Resources.NotFoundException {
             GlobalActionsContentItemView globalActionsContentItemView = new GlobalActionsContentItemView(GlobalActionsContentView.this.mContext, GlobalActionsContentView.this.mSelectedViewModel, GlobalActionsContentView.this.mConfirmationView, GlobalActionsContentView.this.mResourceFactory, GlobalActionsContentView.this.mIsVoiceAssistantMode, GlobalActionsContentView.this.mIsWhiteTheme, GlobalActionsContentView.this.mViewStateController);
             GlobalActionsContentView.this.mConfirmationView.removeAllViews();
             GlobalActionsContentView.this.mConfirmationView.addView(globalActionsContentItemView.createView(true));
-            View findViewById = GlobalActionsContentView.this.mConfirmationView.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_STATE));
+            View viewFindViewById = GlobalActionsContentView.this.mConfirmationView.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_STATE));
             GlobalActionsContentView.this.mConfirmationView.setVisibility(0);
             getConfirmDescriptionView(GlobalActionsContentView.this.mConfirmationView).setVisibility(0);
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
             return globalActionsContentItemView;
         }
 
@@ -803,19 +798,19 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             return new Runnable() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentView$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GlobalActionsContentView.AnonymousClass3.this.lambda$getDismissRunnable$0();
+                    this.f$0.lambda$getDismissRunnable$0();
                 }
             };
         }
 
         @Override // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.ViewUpdateCallback
-        public void requestFocusFor(ViewGroup viewGroup, ViewGroup viewGroup2) {
-            View findViewById = viewGroup.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_ICON));
-            View findViewById2 = viewGroup2.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_ICON));
-            if (GlobalActionsContentView.this.mIsVoiceAssistantMode && findViewById2 != null) {
-                if (findViewById2.isAccessibilityFocused()) {
-                    findViewById.performAccessibilityAction(64, null);
-                    findViewById.requestFocus();
+        public void requestFocusFor(ViewGroup viewGroup, ViewGroup viewGroup2) throws Resources.NotFoundException {
+            View viewFindViewById = viewGroup.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_ICON));
+            View viewFindViewById2 = viewGroup2.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_ICON));
+            if (GlobalActionsContentView.this.mIsVoiceAssistantMode && viewFindViewById2 != null) {
+                if (viewFindViewById2.isAccessibilityFocused()) {
+                    viewFindViewById.performAccessibilityAction(64, null);
+                    viewFindViewById.requestFocus();
                     return;
                 } else {
                     GlobalActionsContentView.this.mRootView.setDescendantFocusability(393216);
@@ -825,11 +820,11 @@ public class GlobalActionsContentView implements ContentView, ViewStateControlle
             if (GlobalActionsContentView.this.mIsVoiceAssistantMode) {
                 return;
             }
-            findViewById.requestFocus();
+            viewFindViewById.requestFocus();
         }
 
         @Override // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.ViewUpdateCallback
-        public ViewGroup getPowerOffViewForSafeModeVI(GlobalActionsContentItemView globalActionsContentItemView) {
+        public ViewGroup getPowerOffViewForSafeModeVI(GlobalActionsContentItemView globalActionsContentItemView) throws Resources.NotFoundException {
             ViewGroup viewGroup = (ViewGroup) globalActionsContentItemView.createView(false);
             ImageView imageView = (ImageView) viewGroup.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_ICON));
             ((TextView) viewGroup.findViewById(GlobalActionsContentView.this.mResourceFactory.get(ResourceType.ID_LABEL))).lambda$setTextAsync$0(GlobalActionsContentView.this.mContext.getResources().getText(R.string.samsung_global_action_power_off));

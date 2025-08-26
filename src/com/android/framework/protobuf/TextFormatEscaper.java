@@ -15,13 +15,13 @@ final class TextFormatEscaper {
     static String escapeBytes(ByteSequence byteSequence) {
         StringBuilder sb = new StringBuilder(byteSequence.size());
         for (int i = 0; i < byteSequence.size(); i++) {
-            byte byteAt = byteSequence.byteAt(i);
-            if (byteAt == 34) {
+            byte bByteAt = byteSequence.byteAt(i);
+            if (bByteAt == 34) {
                 sb.append("\\\"");
-            } else if (byteAt == 39) {
+            } else if (bByteAt == 39) {
                 sb.append("\\'");
-            } else if (byteAt != 92) {
-                switch (byteAt) {
+            } else if (bByteAt != 92) {
+                switch (bByteAt) {
                     case 7:
                         sb.append("\\a");
                         break;
@@ -44,17 +44,16 @@ final class TextFormatEscaper {
                         sb.append("\\r");
                         break;
                     default:
-                        if (byteAt >= 32 && byteAt <= 126) {
-                            sb.append((char) byteAt);
+                        if (bByteAt >= 32 && bByteAt <= 126) {
+                            sb.append((char) bByteAt);
                             break;
                         } else {
                             sb.append('\\');
-                            sb.append((char) (((byteAt >>> 6) & 3) + 48));
-                            sb.append((char) (((byteAt >>> 3) & 7) + 48));
-                            sb.append((char) ((byteAt & 7) + 48));
+                            sb.append((char) (((bByteAt >>> 6) & 3) + 48));
+                            sb.append((char) (((bByteAt >>> 3) & 7) + 48));
+                            sb.append((char) ((bByteAt & 7) + 48));
                             break;
                         }
-                        break;
                 }
             } else {
                 sb.append("\\\\");
@@ -67,12 +66,12 @@ final class TextFormatEscaper {
         return escapeBytes(new ByteSequence() { // from class: com.android.framework.protobuf.TextFormatEscaper.1
             @Override // com.android.framework.protobuf.TextFormatEscaper.ByteSequence
             public int size() {
-                return ByteString.this.size();
+                return byteString.size();
             }
 
             @Override // com.android.framework.protobuf.TextFormatEscaper.ByteSequence
             public byte byteAt(int i) {
-                return ByteString.this.byteAt(i);
+                return byteString.byteAt(i);
             }
         });
     }

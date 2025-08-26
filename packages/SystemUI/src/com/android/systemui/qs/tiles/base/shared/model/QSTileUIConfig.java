@@ -2,11 +2,9 @@ package com.android.systemui.qs.tiles.base.shared.model;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface QSTileUIConfig {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Empty implements QSTileUIConfig {
         public static final Empty INSTANCE = new Empty();
 
@@ -36,7 +34,6 @@ public interface QSTileUIConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resource implements QSTileUIConfig {
         public final int iconRes;
         public final int labelRes;

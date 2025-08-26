@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.notification.row;
 import android.R;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.util.Dumpable;
@@ -13,6 +14,7 @@ import com.android.internal.widget.NotificationDrawableConsumer;
 import com.android.internal.widget.NotificationIconManager;
 import com.android.systemui.broadcast.ActionReceiver$$ExternalSyntheticOutline0;
 import com.android.systemui.graphics.ImageLoader;
+import com.android.systemui.util.Assert;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import kotlin.Pair;
@@ -22,7 +24,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BigPictureIconManager implements NotificationIconManager, Dumpable {
     public final CoroutineDispatcher bgDispatcher;
@@ -37,14 +38,13 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
     public final CoroutineScope scope;
     public final BigPictureStatsManager statsManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class DrawableState {
         public final Icon icon;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Empty extends DrawableState {
             public static final Empty INSTANCE = new Empty();
 
+            /* JADX WARN: Multi-variable type inference failed */
             private Empty() {
                 super(null, 0 == true ? 1 : 0);
             }
@@ -62,7 +62,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class FullImage extends DrawableState {
             public final Size drawableSize;
             public final Icon icon;
@@ -93,10 +92,10 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Initial extends DrawableState {
             public static final Initial INSTANCE = new Initial();
 
+            /* JADX WARN: Multi-variable type inference failed */
             private Initial() {
                 super(null, 0 == true ? 1 : 0);
             }
@@ -114,7 +113,6 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class PlaceHolder extends DrawableState {
             public final Size drawableSize;
             public final Icon icon;
@@ -161,8 +159,8 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
         this.scope = coroutineScope;
         this.mainDispatcher = coroutineDispatcher;
         this.bgDispatcher = coroutineDispatcher2;
-        this.maxWidth = context.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.timepicker_selector_radius : R.dimen.timepicker_selector_dot_radius);
-        this.maxHeight = context.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.timepicker_radial_picker_top_margin : R.dimen.timepicker_radial_picker_horizontal_margin);
+        this.maxWidth = context.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.timepicker_selector_stroke : R.dimen.timepicker_selector_radius);
+        this.maxHeight = context.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.timepicker_selector_dot_radius : R.dimen.timepicker_radial_picker_top_margin);
     }
 
     @Override // android.util.Dumpable
@@ -184,8 +182,8 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
         int i2 = this.maxHeight;
         ImageLoader.Companion companion = ImageLoader.Companion;
         imageLoader.getClass();
-        Drawable loadDrawableSync = ImageLoader.loadDrawableSync(icon, context, i, i2, 0);
-        if (loadDrawableSync == null) {
+        Drawable drawableLoadDrawableSync = ImageLoader.loadDrawableSync(icon, context, i, i2, 0);
+        if (drawableLoadDrawableSync == null) {
             return null;
         }
         DrawableState drawableState = this.displayedState;
@@ -193,32 +191,95 @@ public final class BigPictureIconManager implements NotificationIconManager, Dum
             Size size = ((DrawableState.PlaceHolder) drawableState).drawableSize;
             int width = size.getWidth();
             int height = size.getHeight();
-            Size size2 = new Size(loadDrawableSync.getIntrinsicWidth(), loadDrawableSync.getIntrinsicHeight());
+            Size size2 = new Size(drawableLoadDrawableSync.getIntrinsicWidth(), drawableLoadDrawableSync.getIntrinsicHeight());
             int width2 = size2.getWidth();
             int height2 = size2.getHeight();
             if (width != width2 || height != height2) {
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(width, height, "Mismatch in dimensions, when replacing PlaceHolder ", " X ", " with Drawable ");
-                m.append(width2);
-                m.append(" X ");
-                m.append(height2);
-                m.append(".");
-                Log.e("BigPicImageLoader", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(width, height, "Mismatch in dimensions, when replacing PlaceHolder ", " X ", " with Drawable ");
+                sbM.append(width2);
+                sbM.append(" X ");
+                sbM.append(height2);
+                sbM.append(".");
+                Log.e("BigPicImageLoader", sbM.toString());
             }
         }
-        return new Pair(loadDrawableSync, new DrawableState.FullImage(icon, new Size(loadDrawableSync.getIntrinsicWidth(), loadDrawableSync.getIntrinsicHeight())));
+        return new Pair(drawableLoadDrawableSync, new DrawableState.FullImage(icon, new Size(drawableLoadDrawableSync.getIntrinsicWidth(), drawableLoadDrawableSync.getIntrinsicHeight())));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ef  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x0083  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00ef  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Runnable updateIcon(com.android.internal.widget.NotificationDrawableConsumer r5, android.graphics.drawable.Icon r6) {
-        /*
-            Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.row.BigPictureIconManager.updateIcon(com.android.internal.widget.NotificationDrawableConsumer, android.graphics.drawable.Icon):java.lang.Runnable");
+    public final Runnable updateIcon(NotificationDrawableConsumer notificationDrawableConsumer, Icon icon) {
+        Size size;
+        this.drawableConsumer = notificationDrawableConsumer;
+        StandaloneCoroutine standaloneCoroutine = this.lastLoadingJob;
+        final Pair pairLoadImageSync = null;
+        if (standaloneCoroutine != null) {
+            standaloneCoroutine.cancel(null);
+        }
+        if (icon != null) {
+            Integer numValueOf = icon != null ? Integer.valueOf(icon.getType()) : null;
+            boolean z = true;
+            if ((numValueOf == null || numValueOf.intValue() != 1) && ((numValueOf == null || numValueOf.intValue() != 5) && ((numValueOf == null || numValueOf.intValue() != 3) && numValueOf != null))) {
+                z = false;
+            }
+            if (z) {
+                pairLoadImageSync = loadImageSync(icon);
+            } else {
+                ImageLoader imageLoader = this.imageLoader;
+                Context context = this.context;
+                imageLoader.getClass();
+                int type = icon.getType();
+                if (type == 4 || type == 6) {
+                    ImageDecoder.Source sourceCreateSource = ImageDecoder.createSource(context.getContentResolver(), icon.getUri());
+                    try {
+                        size = ImageDecoder.decodeHeader(sourceCreateSource).getSize();
+                    } catch (Exception e) {
+                        Log.w("ImageLoader", "Failed to load source " + sourceCreateSource, e);
+                    }
+                    if (size != null) {
+                        int i = this.maxWidth;
+                        int i2 = this.maxHeight;
+                        if (size.getWidth() > i || size.getHeight() > i2) {
+                            float fMin = Math.min(i <= 0 ? 1.0f : i / size.getWidth(), i2 <= 0 ? 1.0f : i2 / size.getHeight());
+                            if (fMin < 1.0f) {
+                                size = new Size((int) (size.getWidth() * fMin), (int) (size.getHeight() * fMin));
+                            }
+                        }
+                        PlaceHolderDrawable placeHolderDrawable = new PlaceHolderDrawable(size.getWidth(), size.getHeight());
+                        pairLoadImageSync = new Pair(placeHolderDrawable, new DrawableState.PlaceHolder(icon, new Size(placeHolderDrawable.getIntrinsicWidth(), placeHolderDrawable.getIntrinsicHeight())));
+                    }
+                    if (pairLoadImageSync == null) {
+                        pairLoadImageSync = loadImageSync(icon);
+                    }
+                } else {
+                    size = null;
+                    if (size != null) {
+                    }
+                    if (pairLoadImageSync == null) {
+                    }
+                }
+            }
+        }
+        return new Runnable() { // from class: com.android.systemui.statusbar.notification.row.BigPictureIconManager.updateIcon.1
+            @Override // java.lang.Runnable
+            public final void run() {
+                DrawableState drawableState;
+                BigPictureIconManager bigPictureIconManager = BigPictureIconManager.this;
+                Pair pair = pairLoadImageSync;
+                bigPictureIconManager.getClass();
+                Assert.isMainThread();
+                NotificationDrawableConsumer notificationDrawableConsumer2 = bigPictureIconManager.drawableConsumer;
+                if (notificationDrawableConsumer2 != null) {
+                    notificationDrawableConsumer2.setImageDrawable(pair != null ? (Drawable) pair.getFirst() : null);
+                }
+                if (pair == null || (drawableState = (DrawableState) pair.getSecond()) == null) {
+                    drawableState = DrawableState.Empty.INSTANCE;
+                }
+                bigPictureIconManager.displayedState = drawableState;
+            }
+        };
     }
 }

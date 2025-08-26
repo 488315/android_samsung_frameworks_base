@@ -52,10 +52,10 @@ class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
                     try {
                         try {
                             this.mParser.parse(str2, this.mCurrentRunID.longValue());
-                        } catch (IOException e) {
+                        } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                    } catch (XmlPullParserException e2) {
+                    } catch (IOException e2) {
                         e2.printStackTrace();
                     }
                     finishedRun(j);
@@ -106,10 +106,10 @@ class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
 
     public TtmlCue getNextResult() {
         while (this.mTimeEvents.size() >= 2) {
-            long longValue = this.mTimeEvents.pollFirst().longValue();
-            long longValue2 = this.mTimeEvents.first().longValue();
-            if (!getActiveNodes(longValue, longValue2).isEmpty()) {
-                return new TtmlCue(longValue, longValue2, TtmlUtils.extractText(this.mRootNode, longValue, longValue2), null, this.mCurrentRunID.longValue());
+            long jLongValue = this.mTimeEvents.pollFirst().longValue();
+            long jLongValue2 = this.mTimeEvents.first().longValue();
+            if (!getActiveNodes(jLongValue, jLongValue2).isEmpty()) {
+                return new TtmlCue(jLongValue, jLongValue2, TtmlUtils.extractText(this.mRootNode, jLongValue, jLongValue2), null, this.mCurrentRunID.longValue());
             }
         }
         return null;

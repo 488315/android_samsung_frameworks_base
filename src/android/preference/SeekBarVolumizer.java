@@ -113,10 +113,10 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
                 if (SeekBarVolumizer.this.mHandler == null) {
                     return;
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = Integer.valueOf(i2);
-                obtain.arg2 = Integer.valueOf(i3);
-                SeekBarVolumizer.this.mVolumeHandler.sendMessage(SeekBarVolumizer.this.mHandler.obtainMessage(1, obtain));
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = Integer.valueOf(i2);
+                someArgsObtain.arg2 = Integer.valueOf(i3);
+                SeekBarVolumizer.this.mVolumeHandler.sendMessage(SeekBarVolumizer.this.mHandler.obtainMessage(1, someArgsObtain));
             }
         };
         this.mUiHandler = new H();
@@ -126,8 +126,8 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         this.mContext = context;
         AudioManager audioManager = (AudioManager) context.getSystemService(AudioManager.class);
         this.mAudioManager = audioManager;
-        boolean hasAudioProductStrategies = hasAudioProductStrategies();
-        this.mDeviceHasProductStrategies = hasAudioProductStrategies;
+        boolean zHasAudioProductStrategies = hasAudioProductStrategies();
+        this.mDeviceHasProductStrategies = zHasAudioProductStrategies;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
         this.mNotificationManager = notificationManager;
         NotificationManager.Policy consolidatedNotificationPolicy = notificationManager.getConsolidatedNotificationPolicy();
@@ -137,13 +137,13 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         this.mAllowRinger = !ZenModeConfig.areAllPriorityOnlyRingerSoundsMuted(this.mNotificationPolicy);
         this.mStreamType = i;
         this.mAffectedByRingerMode = audioManager.isStreamAffectedByRingerMode(i);
-        boolean isNotificationOrRing = isNotificationOrRing(i);
-        this.mNotificationOrRing = isNotificationOrRing;
-        if (isNotificationOrRing) {
+        boolean zIsNotificationOrRing = isNotificationOrRing(i);
+        this.mNotificationOrRing = zIsNotificationOrRing;
+        if (zIsNotificationOrRing) {
             this.mRingerMode = audioManager.getRingerModeInternal();
         }
         this.mZenMode = notificationManager.getZenMode();
-        if (hasAudioProductStrategies) {
+        if (zHasAudioProductStrategies) {
             this.mVolumeGroupId = getVolumeGroupIdForLegacyStreamType(i);
             this.mAttributes = getAudioAttributesForLegacyStreamType(i);
         }
@@ -151,11 +151,11 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         this.mCallback = callback;
         this.mOriginalStreamVolume = audioManager.getStreamVolume(i);
         this.mLastAudibleStreamVolume = audioManager.getLastAudibleStreamVolume(i);
-        boolean isStreamMute = audioManager.isStreamMute(i);
-        this.mMuted = isStreamMute;
+        boolean zIsStreamMute = audioManager.isStreamMute(i);
+        this.mMuted = zIsStreamMute;
         this.mPlaySample = z;
         if (callback != null) {
-            callback.onMuted(isStreamMute, isZenMuted());
+            callback.onMuted(zIsStreamMute, isZenMuted());
         }
         if (uri == null) {
             if (i == 2) {
@@ -185,9 +185,7 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         return ((Integer) AudioManager.getAudioProductStrategies().stream().map(new Function() { // from class: android.preference.SeekBarVolumizer$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(((AudioProductStrategy) obj).getVolumeGroupIdForAudioAttributes(AudioProductStrategy.getDefaultAttributes()));
-                return valueOf;
+                return Integer.valueOf(((AudioProductStrategy) obj).getVolumeGroupIdForAudioAttributes(AudioProductStrategy.getDefaultAttributes()));
             }
         }).filter(new Predicate() { // from class: android.preference.SeekBarVolumizer$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
@@ -239,9 +237,9 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
     }
 
     protected void updateSeekBar() {
-        boolean isZenMuted = isZenMuted();
-        this.mSeekBar.setEnabled(!isZenMuted);
-        if (isZenMuted) {
+        boolean zIsZenMuted = isZenMuted();
+        this.mSeekBar.setEnabled(!zIsZenMuted);
+        if (zIsZenMuted) {
             this.mSeekBar.setProgress(this.mLastAudibleStreamVolume, true);
             return;
         }
@@ -314,13 +312,13 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
         }
         handler.removeMessages(1);
         Handler handler2 = this.mHandler;
-        Message obtainMessage = handler2.obtainMessage(1);
+        Message messageObtainMessage = handler2.obtainMessage(1);
         if (isSamplePlaying()) {
             j = 1000;
         } else {
             j = isDelay() ? START_SAMPLE_DELAY_MS : 0L;
         }
-        handler2.sendMessageDelayed(obtainMessage, j);
+        handler2.sendMessageDelayed(messageObtainMessage, j);
     }
 
     private void onUpdateSliderMaybeLater() {
@@ -344,8 +342,8 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isDelay() {
-        long currentTimeMillis = System.currentTimeMillis() - sStopVolumeTime;
-        return currentTimeMillis >= 0 && currentTimeMillis < DURATION_TO_START_DELAYING;
+        long jCurrentTimeMillis = System.currentTimeMillis() - sStopVolumeTime;
+        return jCurrentTimeMillis >= 0 && jCurrentTimeMillis < DURATION_TO_START_DELAYING;
     }
 
     private void setStopVolumeTime() {
@@ -547,9 +545,9 @@ public class SeekBarVolumizer implements SeekBar.OnSeekBarChangeListener, Handle
             }
             SeekBarVolumizer.this.mLastProgress = message.arg1;
             SeekBarVolumizer.this.mLastAudibleStreamVolume = message.arg2;
-            boolean booleanValue = ((Boolean) message.obj).booleanValue();
-            if (booleanValue != SeekBarVolumizer.this.mMuted) {
-                SeekBarVolumizer.this.mMuted = booleanValue;
+            boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
+            if (zBooleanValue != SeekBarVolumizer.this.mMuted) {
+                SeekBarVolumizer.this.mMuted = zBooleanValue;
                 if (SeekBarVolumizer.this.mCallback != null) {
                     SeekBarVolumizer.this.mCallback.onMuted(SeekBarVolumizer.this.mMuted, SeekBarVolumizer.this.isZenMuted());
                 }

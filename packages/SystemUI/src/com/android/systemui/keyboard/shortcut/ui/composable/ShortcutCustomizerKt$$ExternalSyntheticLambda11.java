@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ShortcutCustomizerKt$$ExternalSyntheticLambda11 implements Function2 {
     public final /* synthetic */ int $r8$classId = 1;
@@ -42,11 +41,11 @@ public final /* synthetic */ class ShortcutCustomizerKt$$ExternalSyntheticLambda
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) this.f$4;
                 Modifier modifier = (Modifier) this.f$5;
                 String str = this.f$3;
-                ShortcutCustomizerKt.OutlinedInputField((ComposableLambdaImpl) this.f$1, (ComposableLambdaImpl) this.f$2, composableLambdaImpl, this.f$0, modifier, str, (Composer) obj, updateChangedFlags);
+                ShortcutCustomizerKt.OutlinedInputField((ComposableLambdaImpl) this.f$1, (ComposableLambdaImpl) this.f$2, composableLambdaImpl, this.f$0, modifier, str, (Composer) obj, iUpdateChangedFlags);
                 break;
         }
         return Unit.INSTANCE;

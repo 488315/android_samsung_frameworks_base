@@ -81,11 +81,11 @@ public final class Session {
         synchronized (this.mLock) {
             try {
                 try {
-                    ISecureElementChannel openBasicChannel = this.mSession.openBasicChannel(bArr, b, this.mReader.getSEService().getListener());
-                    if (openBasicChannel == null) {
+                    ISecureElementChannel iSecureElementChannelOpenBasicChannel = this.mSession.openBasicChannel(bArr, b, this.mReader.getSEService().getListener());
+                    if (iSecureElementChannelOpenBasicChannel == null) {
                         return null;
                     }
-                    return new Channel(this.mService, this, openBasicChannel);
+                    return new Channel(this.mService, this, iSecureElementChannelOpenBasicChannel);
                 } catch (RemoteException e) {
                     throw new IllegalStateException(e.getMessage());
                 } catch (ServiceSpecificException e2) {
@@ -114,11 +114,11 @@ public final class Session {
         synchronized (this.mLock) {
             try {
                 try {
-                    ISecureElementChannel openLogicalChannel = this.mSession.openLogicalChannel(bArr, b, this.mReader.getSEService().getListener());
-                    if (openLogicalChannel == null) {
+                    ISecureElementChannel iSecureElementChannelOpenLogicalChannel = this.mSession.openLogicalChannel(bArr, b, this.mReader.getSEService().getListener());
+                    if (iSecureElementChannelOpenLogicalChannel == null) {
                         return null;
                     }
-                    return new Channel(this.mService, this, openLogicalChannel);
+                    return new Channel(this.mService, this, iSecureElementChannelOpenLogicalChannel);
                 } catch (RemoteException e) {
                     throw new IllegalStateException(e.getMessage());
                 } catch (ServiceSpecificException e2) {

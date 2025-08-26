@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PromotedNotificationsInteractor$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -37,7 +36,7 @@ public final class PromotedNotificationsInteractor$special$$inlined$flatMapLates
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow distinctUntilChanged;
+        Flow flowDistinctUntilChanged;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -45,7 +44,7 @@ public final class PromotedNotificationsInteractor$special$$inlined$flatMapLates
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             ProjectionChipModel projectionChipModel = (ProjectionChipModel) this.L$1;
             if (projectionChipModel instanceof ProjectionChipModel.NotProjecting) {
-                distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+                flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
             } else {
                 if (!(projectionChipModel instanceof ProjectionChipModel.Projecting)) {
                     throw new NoWhenBranchMatchedException();
@@ -54,13 +53,13 @@ public final class PromotedNotificationsInteractor$special$$inlined$flatMapLates
                 String hostPackage = ((ProjectionChipModel.Projecting) projectionChipModel).projectionState.getHostPackage();
                 if (hostPackage == null) {
                     promotedNotificationsInteractor.getClass();
-                    distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+                    flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
                 } else {
-                    distinctUntilChanged = FlowKt.distinctUntilChanged(new PromotedNotificationsInteractor$createRecordingNotificationFlow$$inlined$map$1(promotedNotificationsInteractor.activeNotificationsInteractor.allRepresentativeNotifications, promotedNotificationsInteractor, hostPackage));
+                    flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new PromotedNotificationsInteractor$createRecordingNotificationFlow$$inlined$map$1(promotedNotificationsInteractor.activeNotificationsInteractor.allRepresentativeNotifications, promotedNotificationsInteractor, hostPackage));
                 }
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, distinctUntilChanged, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowDistinctUntilChanged, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

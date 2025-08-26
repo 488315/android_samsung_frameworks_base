@@ -15,7 +15,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
     protected static final float HOVERED_SCALE = 1.1f;
@@ -84,7 +83,7 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
             }
             return;
         }
-        int save = canvas.save();
+        int iSave = canvas.save();
         Rect bounds = getBounds();
         float f = this.mScale;
         canvas.scale(f, f, bounds.exactCenterX(), bounds.exactCenterY());
@@ -93,7 +92,7 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
         if (drawable2 != null) {
             drawable2.draw(canvas);
         }
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     public void drawInternal(Canvas canvas, Rect rect) {
@@ -116,13 +115,13 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
 
     @Override // android.graphics.drawable.Drawable
     public final Drawable.ConstantState getConstantState() {
-        FastBitmapConstantState newConstantState = newConstantState();
+        FastBitmapConstantState fastBitmapConstantStateNewConstantState = newConstantState();
         Drawable drawable = this.mBadge;
         if (drawable != null) {
-            newConstantState.mBadgeConstantState = drawable.getConstantState();
+            fastBitmapConstantStateNewConstantState.mBadgeConstantState = drawable.getConstantState();
         }
-        newConstantState.mCreationFlags = this.mCreationFlags;
-        return newConstantState;
+        fastBitmapConstantStateNewConstantState.mCreationFlags = this.mCreationFlags;
+        return fastBitmapConstantStateNewConstantState;
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -171,9 +170,9 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
         super.onBoundsChange(rect);
         Drawable drawable = this.mBadge;
         if (drawable != null) {
-            int width = rect.width();
+            int iWidth = rect.width();
             float f = BaseIconFactory.LEGACY_ICON_SCALE;
-            int i = (int) (width * 0.444f);
+            int i = (int) (iWidth * 0.444f);
             int i2 = rect.right;
             int i3 = rect.bottom;
             drawable.setBounds(i2 - i, i3 - i, i2, i3);
@@ -209,9 +208,9 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
                 boolean z2 = this.mIsPressed;
                 Interpolator interpolator = z != z2 ? z ? ACCEL : DEACCEL : HOVER_EMPHASIZED_DECELERATE_INTERPOLATOR;
                 int i2 = z != z2 ? 200 : 300;
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, SCALE, f);
-                this.mScaleAnimation = ofFloat;
-                ofFloat.setDuration(i2);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, SCALE, f);
+                this.mScaleAnimation = objectAnimatorOfFloat;
+                objectAnimatorOfFloat.setDuration(i2);
                 this.mScaleAnimation.setInterpolator(interpolator);
                 this.mScaleAnimation.start();
             } else {
@@ -270,7 +269,6 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
         invalidateSelf();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FastBitmapConstantState extends Drawable.ConstantState {
         public Drawable.ConstantState mBadgeConstantState;
         public final BitmapInfo mBitmapInfo;
@@ -291,32 +289,32 @@ public class FastBitmapDrawable extends Drawable implements Drawable.Callback {
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public final Drawable newDrawable() {
-            FastBitmapDrawable createDrawable = createDrawable();
+            FastBitmapDrawable fastBitmapDrawableCreateDrawable = createDrawable();
             Drawable.ConstantState constantState = this.mBadgeConstantState;
             if (constantState != null) {
-                Drawable newDrawable = constantState.newDrawable();
-                Drawable drawable = createDrawable.mBadge;
+                Drawable drawableNewDrawable = constantState.newDrawable();
+                Drawable drawable = fastBitmapDrawableCreateDrawable.mBadge;
                 if (drawable != null) {
                     drawable.setCallback(null);
                 }
-                createDrawable.mBadge = newDrawable;
-                if (newDrawable != null) {
-                    newDrawable.setCallback(createDrawable);
+                fastBitmapDrawableCreateDrawable.mBadge = drawableNewDrawable;
+                if (drawableNewDrawable != null) {
+                    drawableNewDrawable.setCallback(fastBitmapDrawableCreateDrawable);
                 }
-                Rect bounds = createDrawable.getBounds();
-                Drawable drawable2 = createDrawable.mBadge;
+                Rect bounds = fastBitmapDrawableCreateDrawable.getBounds();
+                Drawable drawable2 = fastBitmapDrawableCreateDrawable.mBadge;
                 if (drawable2 != null) {
-                    int width = bounds.width();
+                    int iWidth = bounds.width();
                     float f = BaseIconFactory.LEGACY_ICON_SCALE;
-                    int i = (int) (width * 0.444f);
+                    int i = (int) (iWidth * 0.444f);
                     int i2 = bounds.right;
                     int i3 = bounds.bottom;
                     drawable2.setBounds(i2 - i, i3 - i, i2, i3);
                 }
-                createDrawable.updateFilter();
+                fastBitmapDrawableCreateDrawable.updateFilter();
             }
-            createDrawable.mCreationFlags = this.mCreationFlags;
-            return createDrawable;
+            fastBitmapDrawableCreateDrawable.mCreationFlags = this.mCreationFlags;
+            return fastBitmapDrawableCreateDrawable;
         }
 
         public FastBitmapConstantState(BitmapInfo bitmapInfo) {

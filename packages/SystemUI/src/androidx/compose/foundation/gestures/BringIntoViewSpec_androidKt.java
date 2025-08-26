@@ -10,13 +10,12 @@ import androidx.compose.runtime.StaticProvidableCompositionLocal;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BringIntoViewSpec_androidKt {
     public static final ComputedProvidableCompositionLocal LocalBringIntoViewSpec = new ComputedProvidableCompositionLocal(new Function1() { // from class: androidx.compose.foundation.gestures.BringIntoViewSpec_androidKt$LocalBringIntoViewSpec$1
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             StaticProvidableCompositionLocal staticProvidableCompositionLocal = AndroidCompositionLocals_androidKt.LocalContext;
             PersistentCompositionLocalMap persistentCompositionLocalMap = (PersistentCompositionLocalMap) ((CompositionLocalAccessorScope) obj);
             persistentCompositionLocalMap.getClass();
@@ -30,11 +29,11 @@ public abstract class BringIntoViewSpec_androidKt {
     public static final BringIntoViewSpec_androidKt$PivotBringIntoViewSpec$1 PivotBringIntoViewSpec = new BringIntoViewSpec() { // from class: androidx.compose.foundation.gestures.BringIntoViewSpec_androidKt$PivotBringIntoViewSpec$1
         @Override // androidx.compose.foundation.gestures.BringIntoViewSpec
         public final float calculateScrollDistance(float f, float f2, float f3) {
-            float abs = Math.abs((f2 + f) - f);
-            float f4 = (0.3f * f3) - (0.0f * abs);
+            float fAbs = Math.abs((f2 + f) - f);
+            float f4 = (0.3f * f3) - (0.0f * fAbs);
             float f5 = f3 - f4;
-            if ((abs <= f3) && f5 < abs) {
-                f4 = f3 - abs;
+            if ((fAbs <= f3) && f5 < fAbs) {
+                f4 = f3 - fAbs;
             }
             return f - f4;
         }

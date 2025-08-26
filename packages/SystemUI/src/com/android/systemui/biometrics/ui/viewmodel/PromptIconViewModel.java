@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PromptIconViewModel {
     public final StateFlowImpl _previousIconWasError;
@@ -33,7 +32,6 @@ public final class PromptIconViewModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AuthType {
         public static final /* synthetic */ AuthType[] $VALUES;
         public static final AuthType Coex;
@@ -64,7 +62,6 @@ public final class PromptIconViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -119,12 +116,12 @@ public final class PromptIconViewModel {
         this.showingError = promptViewModel.showingError;
         this._previousIconWasError = StateFlowKt.MutableStateFlow(Boolean.FALSE);
         FlowKt.combine(promptViewModel.position, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, promptViewModel.legacyFingerprintSensorWidth, promptViewModel.legacyFingerprintSensorHeight, new PromptIconViewModel$iconSize$1(promptViewModel, null));
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new PromptIconViewModel$special$$inlined$flatMapLatest$1(null, this, promptSelectorInteractor, promptViewModel));
-        this.iconAsset = transformLatest;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new PromptIconViewModel$special$$inlined$flatMapLatest$1(null, this, promptSelectorInteractor, promptViewModel));
+        this.iconAsset = channelFlowTransformLatestTransformLatest;
         this.contentDescriptionId = FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new PromptIconViewModel$special$$inlined$flatMapLatest$2(null, promptSelectorInteractor, promptViewModel, this));
         this.shouldAnimateIconView = FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new PromptIconViewModel$special$$inlined$flatMapLatest$3(null, promptSelectorInteractor, promptViewModel, this));
         this.shouldLoopIconView = FlowKt.transformLatest(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, new PromptIconViewModel$special$$inlined$flatMapLatest$4(null, promptViewModel));
-        this.iconViewRotation = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(transformLatest, ((DisplayStateInteractorImpl) displayStateInteractor).currentRotation, new PromptIconViewModel$iconViewRotation$1(this, null));
+        this.iconViewRotation = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(channelFlowTransformLatestTransformLatest, ((DisplayStateInteractorImpl) displayStateInteractor).currentRotation, new PromptIconViewModel$iconViewRotation$1(this, null));
         this.assetsReusedAcrossRotations = Arrays.asList(Integer.valueOf(R.raw.biometricprompt_sfps_fingerprint_authenticating), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_authenticating), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_authenticating));
     }
 

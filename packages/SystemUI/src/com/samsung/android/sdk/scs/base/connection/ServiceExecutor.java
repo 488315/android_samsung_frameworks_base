@@ -5,9 +5,24 @@ import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
+import android.text.TextUtils;
+import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
+import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
+import com.samsung.android.emergencymode.SemEmergencyManager;
+import com.samsung.android.scs.ai.sdkcommon.feature.FeatureConfig;
+import com.samsung.android.sdk.scs.base.feature.Feature;
+import com.samsung.android.sdk.scs.base.feature.FeatureStatusCache;
+import com.samsung.android.sdk.scs.base.tasks.TaskRunnable;
+import com.samsung.android.sdk.scs.base.utils.FeatureHelper;
 import com.samsung.android.sdk.scs.base.utils.Log;
+import java.util.Map;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,7 +31,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ServiceExecutor extends ThreadPoolExecutor implements InternalServiceConnectionListener, Application.ActivityLifecycleCallbacks {
     private static final boolean CONNECTION_TIMER_ON = false;
@@ -31,7 +45,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
     private final AtomicInteger mTaskCount;
 
     /* renamed from: -$$Nest$munlockConnection, reason: not valid java name */
-    public static void m3305$$Nest$munlockConnection(ServiceExecutor serviceExecutor, boolean z, String str) {
+    public static void m3323$$Nest$munlockConnection(ServiceExecutor serviceExecutor, boolean z, String str) {
         serviceExecutor.mConnectionLock.lock();
         try {
             serviceExecutor.mIsConnected = z;
@@ -54,7 +68,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onConnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onConnected(componentName, iBinder);
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -62,7 +76,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onDisconnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onDisconnected(componentName);
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -70,7 +84,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onError");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onError();
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
             }
         };
         allowCoreThreadTimeOut(true);
@@ -88,94 +102,230 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
         Log.d(TAG, "afterExecute(). mTaskCount: " + this.mTaskCount);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x021f  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0225  */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x021f  */
+    /* JADX WARN: Removed duplicated region for block: B:104:0x0225  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x01be  */
     @Override // java.util.concurrent.ThreadPoolExecutor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void beforeExecute(java.lang.Thread r12, java.lang.Runnable r13) {
-        /*
-            Method dump skipped, instructions count: 823
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sdk.scs.base.connection.ServiceExecutor.beforeExecute(java.lang.Thread, java.lang.Runnable):void");
+    public void beforeExecute(Thread thread, Runnable runnable) throws PackageManager.NameNotFoundException {
+        boolean zIsEmergencyMode;
+        int iIntValue;
+        PackageInfo packageInfo;
+        String string;
+        FeatureConfig featureConfig;
+        int i = 1;
+        super.beforeExecute(thread, runnable);
+        Object[] objArr = {this, runnable};
+        StringBuilder sb = new StringBuilder("task");
+        for (int i2 = 0; i2 < 2; i2++) {
+            Object obj = objArr[i2];
+            if (obj != null) {
+                String simpleName = obj.getClass().getSimpleName();
+                String hexString = Integer.toHexString(obj.hashCode());
+                if (sb.length() > 0) {
+                    sb.append(" >> ");
+                }
+                sb.append(simpleName);
+                sb.append("@");
+                sb.append(hexString);
+            }
+        }
+        Log.i(TAG, sb.toString());
+        if (runnable instanceof TaskRunnable) {
+            String featureName = ((TaskRunnable) runnable).getFeatureName();
+            Integer num = (Integer) FeatureStatusCache.statusMap.get(featureName);
+            if ((num == null ? -1000 : num.intValue()) == -1000) {
+                Context context = this.mContext;
+                Map map = Feature.sinceVersionMap;
+                Log.i("ScsApi@Feature", "checkFeature() : " + featureName + ", sdk : 4.0.26");
+                if (context == null || featureName == null) {
+                    Log.e("ScsApi@Feature", "checkFeature(). input is null. context: " + context + ", feature: " + featureName);
+                    i = 300;
+                } else {
+                    try {
+                        zIsEmergencyMode = SemEmergencyManager.isEmergencyMode(context);
+                    } catch (Error | Exception e) {
+                        Log.e("ScsApi@FrameworkWrapper", e.getMessage());
+                        zIsEmergencyMode = false;
+                    }
+                    if (zIsEmergencyMode) {
+                        Log.e("ScsApi@Feature", "checkFeature(). not supported in emergency mode");
+                        i = 8;
+                        FeatureStatusCache.setStatus(8, featureName);
+                    } else {
+                        String str = (Feature.isSIVSAvailableOSVersion(context) && Feature.SUPPORTED_SIVS_FEATURES.contains(featureName)) ? "com.samsung.android.intellivoiceservice" : Feature.SUPPORTED_VISUAL_FEATURES.contains(featureName) ? "com.samsung.android.aicore" : Feature.SUPPORTED_VISUAL_CLOUD_FEATURES.contains(featureName) ? "com.samsung.android.visual.cloudcore" : "com.samsung.android.scs";
+                        try {
+                            if (context.getPackageManager().getApplicationInfo(str, 128).enabled) {
+                                String str2 = (Feature.isSIVSAvailableOSVersion(context) && Feature.SUPPORTED_SIVS_FEATURES.contains(featureName)) ? "scs_sivs_supported_feature_info" : (Feature.SUPPORTED_VISUAL_FEATURES.contains(featureName) || Feature.SUPPORTED_VISUAL_CLOUD_FEATURES.contains(featureName)) ? "scs_visual_supported_feature_info" : "scs_core_supported_feature_info";
+                                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("getFeatureVersionFromSettings(), serviceApp : ", str, ", feature : ", featureName, ", settingKey : ");
+                                sbM.append(str2);
+                                Log.d("ScsApi@FeatureHelper", sbM.toString());
+                                try {
+                                    packageInfo = context.getPackageManager().getPackageInfo(str, 128);
+                                    try {
+                                        string = Settings.Global.getString(context.getContentResolver(), str2);
+                                    } catch (Exception e2) {
+                                        android.util.Log.e(Log.concatPrefixTag("ScsApi@FeatureHelper"), "Failed to getString from global settings.", e2);
+                                    }
+                                } catch (PackageManager.NameNotFoundException e3) {
+                                    android.util.Log.e(Log.concatPrefixTag("ScsApi@FeatureHelper"), "Failed to get package info.", e3);
+                                }
+                                if (TextUtils.isEmpty(string)) {
+                                    iIntValue = -2;
+                                    if (iIntValue == -2) {
+                                        Uri uri = Uri.parse((Feature.isSIVSAvailableOSVersion(context) && Feature.SUPPORTED_SIVS_FEATURES.contains(featureName)) ? "content://com.samsung.android.intellivoiceservice.feature" : Feature.SUPPORTED_VISUAL_FEATURES.contains(featureName) ? "content://com.samsung.android.aicore.feature" : Feature.SUPPORTED_VISUAL_CLOUD_FEATURES.contains(featureName) ? "content://com.samsung.android.visual.cloudcore.feature" : "content://com.samsung.android.scs.feature");
+                                        Log.d("ScsApi@FeatureHelper", "getFeatureVersionFromProvider()");
+                                        Bundle bundleCall = null;
+                                        try {
+                                            bundleCall = context.getContentResolver().call(uri, "featureSupportRequest", featureName, (Bundle) null);
+                                        } catch (Exception e4) {
+                                            Log.e("ScsApi@FeatureHelper", "checkScsFeature(). " + e4.getMessage());
+                                        }
+                                        if (bundleCall == null) {
+                                            Log.e("ScsApi@FeatureHelper", "checkScsFeature(). retBundle == null!!!");
+                                            iIntValue = -2;
+                                        } else {
+                                            iIntValue = bundleCall.getInt("constVersion");
+                                        }
+                                    }
+                                    if (iIntValue == -2) {
+                                        Log.e("ScsApi@Feature", "checkScsFeature(). retBundle == null!!!");
+                                        i = 2000;
+                                    } else if (iIntValue == 0) {
+                                        android.util.Log.w(Log.concatPrefixTag("ScsApi@Feature"), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("checkScsFeature(). ", featureName, " is not available!!"));
+                                        i = 5;
+                                    } else {
+                                        if (iIntValue == -1) {
+                                            android.util.Log.w(Log.concatPrefixTag("ScsApi@Feature"), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("checkScsFeature(). SCS doesn't know ", featureName, ". SCS update might be required."));
+                                        } else {
+                                            Map map2 = Feature.sinceVersionMap;
+                                            int iIntValue2 = map2.containsKey(featureName) ? ((Integer) map2.get(featureName)).intValue() : Integer.MAX_VALUE;
+                                            if (iIntValue < iIntValue2) {
+                                                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(iIntValue, "checkScsFeature(). ", featureName, ", scsVersion: ", ", sinceVersion: ");
+                                                sbM890m.append(iIntValue2);
+                                                Log.e("ScsApi@Feature", sbM890m.toString());
+                                            } else {
+                                                i = 0;
+                                            }
+                                        }
+                                        i = 3;
+                                    }
+                                    FeatureStatusCache.setStatus(i, featureName);
+                                } else {
+                                    try {
+                                        featureConfig = FeatureHelper.getFeatureConfig(string);
+                                    } catch (Exception e5) {
+                                        android.util.Log.d(Log.concatPrefixTag("ScsApi@FeatureHelper"), "Unexpected behaviour when reading global settings", e5);
+                                    }
+                                    if (packageInfo.versionName.compareTo(featureConfig.getAppVersion()) != 0) {
+                                        iIntValue = -2;
+                                        if (iIntValue == -2) {
+                                        }
+                                        if (iIntValue == -2) {
+                                        }
+                                        FeatureStatusCache.setStatus(i, featureName);
+                                    } else {
+                                        Integer orDefault = featureConfig.getFeatures().getOrDefault(featureName, -2);
+                                        iIntValue = orDefault != null ? orDefault.intValue() : -2;
+                                        Log.d("ScsApi@FeatureHelper", "Get feature version from global settings. feature : " + featureName + ", version : " + iIntValue);
+                                        if (iIntValue == -2) {
+                                        }
+                                        if (iIntValue == -2) {
+                                        }
+                                        FeatureStatusCache.setStatus(i, featureName);
+                                    }
+                                }
+                            } else {
+                                android.util.Log.w(Log.concatPrefixTag("ScsApi@Feature"), "checkFeature(). " + str + " has disabled.");
+                                FeatureStatusCache.setStatus(2, featureName);
+                                i = 2;
+                            }
+                        } catch (PackageManager.NameNotFoundException unused) {
+                            android.util.Log.w(Log.concatPrefixTag("ScsApi@Feature"), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("dump(), ", str, " does not exist"));
+                            FeatureStatusCache.setStatus(1, featureName);
+                        }
+                    }
+                }
+                Log.d(TAG, "beforeExecute(). First check for " + featureName + ". status: " + i);
+            }
+        } else {
+            Log.e(TAG, "Unexpected runnable!!!!");
+        }
+        this.mConnectionLock.lock();
+        try {
+            try {
+                if (!this.mIsConnected) {
+                    Log.d(TAG, "beforeExecute() : not connected, try to connect");
+                    if (connect(this.mContext, getServiceIntent(), this.mConnectionListener)) {
+                        Log.d(TAG, "beforeExecute() : before wait");
+                        if (!this.mIsConnected) {
+                            this.mConnectionCondition.await();
+                        }
+                        Log.d(TAG, "beforeExecute() : after wait");
+                        if (!this.mIsConnected) {
+                            thread.interrupt();
+                        }
+                    } else {
+                        Log.e(TAG, "beforeExecute() : failed to bind service");
+                        thread.interrupt();
+                    }
+                }
+            } catch (InterruptedException | SecurityException e6) {
+                e6.printStackTrace();
+                thread.interrupt();
+            }
+            this.mConnectionLock.unlock();
+            this.mTaskCount.getAndIncrement();
+            Log.d(TAG, "beforeExecute(). mTaskCount: " + this.mTaskCount);
+        } catch (Throwable th) {
+            this.mConnectionLock.unlock();
+            throw th;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0072  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean connect(android.content.Context r4, android.content.Intent r5, com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener r6) {
-        /*
-            r3 = this;
-            java.lang.String r0 = "ScsApi@ServiceExecutor"
-            java.lang.String r1 = "connect"
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r1)
-            com.samsung.android.sdk.scs.base.connection.ConnectionManager r0 = r3.mConnectionManager
-            boolean r0 = r0.isServiceConnected()
-            r1 = 1
-            if (r0 == 0) goto L11
-            return r1
-        L11:
-            com.samsung.android.sdk.scs.base.connection.ConnectionManager r3 = r3.mConnectionManager
-            r3.mInternalServiceConnectionListener = r6
-            boolean r6 = r3.isServiceConnected()
-            java.lang.String r0 = "ScsApi@ConnectionManager"
-            if (r6 == 0) goto L23
-            java.lang.String r3 = "just return already bound service obj"
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r3)
-            return r1
-        L23:
-            r6 = 0
-            if (r4 != 0) goto L2d
-            java.lang.String r4 = "Context is null"
-            com.samsung.android.sdk.scs.base.utils.Log.e(r0, r4)
-        L2b:
-            r1 = r6
-            goto L5f
-        L2d:
-            if (r5 != 0) goto L35
-            java.lang.String r4 = "Intent is null"
-            com.samsung.android.sdk.scs.base.utils.Log.e(r0, r4)
-            goto L2b
-        L35:
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r2 = "connectToService mIsConnected = "
-            r6.<init>(r2)
-            boolean r2 = r3.mIsConnected
-            r6.append(r2)
-            java.lang.String r6 = r6.toString()
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r6)
-            boolean r6 = r3.mIsConnected
-            if (r6 != 0) goto L5a
-            java.lang.String r6 = "Binding service with app context"
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r6)
-            r3.mContext = r4
-            com.samsung.android.sdk.scs.base.connection.ConnectionManager$1 r6 = r3.mServiceConnection
-            boolean r1 = r4.bindService(r5, r6, r1)
-            goto L5f
-        L5a:
-            java.lang.String r4 = "already bound"
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r4)
-        L5f:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "connectToService result : "
-            r4.<init>(r5)
-            r4.append(r1)
-            java.lang.String r4 = r4.toString()
-            com.samsung.android.sdk.scs.base.utils.Log.d(r0, r4)
-            if (r1 != 0) goto L77
-            r4 = 3
-            r5 = 0
-            r3.notifyServiceConnection(r4, r5, r5)
-        L77:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sdk.scs.base.connection.ServiceExecutor.connect(android.content.Context, android.content.Intent, com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener):boolean");
+    public final boolean connect(Context context, Intent intent, InternalServiceConnectionListener internalServiceConnectionListener) {
+        Log.d(TAG, "connect");
+        boolean zBindService = true;
+        if (this.mConnectionManager.isServiceConnected()) {
+            return true;
+        }
+        ConnectionManager connectionManager = this.mConnectionManager;
+        connectionManager.mInternalServiceConnectionListener = internalServiceConnectionListener;
+        if (connectionManager.isServiceConnected()) {
+            Log.d("ScsApi@ConnectionManager", "just return already bound service obj");
+            return true;
+        }
+        if (context == null) {
+            Log.e("ScsApi@ConnectionManager", "Context is null");
+        } else {
+            if (intent != null) {
+                Log.d("ScsApi@ConnectionManager", "connectToService mIsConnected = " + connectionManager.mIsConnected);
+                if (connectionManager.mIsConnected) {
+                    Log.d("ScsApi@ConnectionManager", "already bound");
+                } else {
+                    Log.d("ScsApi@ConnectionManager", "Binding service with app context");
+                    connectionManager.mContext = context;
+                    zBindService = context.bindService(intent, connectionManager.mServiceConnection, 1);
+                }
+                Log.d("ScsApi@ConnectionManager", "connectToService result : " + zBindService);
+                if (!zBindService) {
+                    connectionManager.notifyServiceConnection(3, null, null);
+                }
+                return zBindService;
+            }
+            Log.e("ScsApi@ConnectionManager", "Intent is null");
+        }
+        zBindService = false;
+        Log.d("ScsApi@ConnectionManager", "connectToService result : " + zBindService);
+        if (!zBindService) {
+        }
+        return zBindService;
     }
 
     public void deInit() {
@@ -220,7 +370,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onConnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onConnected(componentName, iBinder);
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -228,7 +378,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onDisconnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onDisconnected(componentName);
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -236,7 +386,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onError");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onError();
-                ServiceExecutor.m3305$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
+                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
             }
         };
         allowCoreThreadTimeOut(true);

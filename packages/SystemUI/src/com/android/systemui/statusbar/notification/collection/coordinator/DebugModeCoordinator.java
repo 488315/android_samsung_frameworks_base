@@ -12,7 +12,6 @@ import com.android.systemui.util.Assert;
 import com.android.systemui.util.ListenerSet;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class DebugModeCoordinator implements Coordinator {
@@ -25,9 +24,7 @@ public final class DebugModeCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
         public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
-            DebugModeFilterProvider debugModeFilterProvider;
-            debugModeFilterProvider = DebugModeCoordinator.this.debugModeFilterProvider;
-            return debugModeFilterProvider.shouldFilterOut(notificationEntry);
+            return this.this$0.debugModeFilterProvider.shouldFilterOut(notificationEntry);
         }
     };
 
@@ -40,26 +37,24 @@ public final class DebugModeCoordinator implements Coordinator {
     public void attach(NotifPipeline notifPipeline) {
         notifPipeline.addPreGroupFilter(this.filter);
         final DebugModeFilterProvider debugModeFilterProvider = this.debugModeFilterProvider;
-        Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DebugModeCoordinator$attach$1
+        Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DebugModeCoordinator.attach.1
             @Override // java.lang.Runnable
             public final void run() {
-                DebugModeCoordinator$filter$1 debugModeCoordinator$filter$1;
-                debugModeCoordinator$filter$1 = DebugModeCoordinator.this.filter;
-                debugModeCoordinator$filter$1.invalidateList(null);
+                invalidateList(null);
             }
         };
         debugModeFilterProvider.getClass();
         Assert.isMainThread();
         if (Build.isDebuggable()) {
             ListenerSet listenerSet = debugModeFilterProvider.listeners;
-            boolean isEmpty = listenerSet.isEmpty();
+            boolean zIsEmpty = listenerSet.isEmpty();
             listenerSet.addIfAbsent(runnable);
-            if (isEmpty) {
+            if (zIsEmpty) {
                 debugModeFilterProvider.commandRegistry.registerCommand("notif-filter", new Function0() { // from class: com.android.systemui.statusbar.notification.collection.provider.DebugModeFilterProvider$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         int i = DebugModeFilterProvider.$r8$clinit;
-                        return DebugModeFilterProvider.this.new NotifFilterCommand();
+                        return debugModeFilterProvider.new NotifFilterCommand();
                     }
                 });
                 Log.d("DebugModeFilterProvider", "Registered notif-filter command");

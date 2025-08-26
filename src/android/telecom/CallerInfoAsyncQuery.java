@@ -97,10 +97,10 @@ public class CallerInfoAsyncQuery {
                     case 3:
                     case 4:
                     case 5:
-                        Message obtainMessage = workerArgs.handler.obtainMessage(message.what);
-                        obtainMessage.obj = workerArgs;
-                        obtainMessage.arg1 = message.arg1;
-                        obtainMessage.sendToTarget();
+                        Message messageObtainMessage = workerArgs.handler.obtainMessage(message.what);
+                        messageObtainMessage.obj = workerArgs;
+                        messageObtainMessage.arg1 = message.arg1;
+                        messageObtainMessage.sendToTarget();
                         break;
                     case 6:
                         handleGeoDescription(message);
@@ -116,10 +116,10 @@ public class CallerInfoAsyncQuery {
                     cookieWrapper.geoDescription = CallerInfo.getGeoDescription(CallerInfoAsyncQueryHandler.this.mContext, cookieWrapper.number);
                     SystemClock.elapsedRealtime();
                 }
-                Message obtainMessage = workerArgs.handler.obtainMessage(message.what);
-                obtainMessage.obj = workerArgs;
-                obtainMessage.arg1 = message.arg1;
-                obtainMessage.sendToTarget();
+                Message messageObtainMessage = workerArgs.handler.obtainMessage(message.what);
+                messageObtainMessage.obj = workerArgs;
+                messageObtainMessage.arg1 = message.arg1;
+                messageObtainMessage.sendToTarget();
             }
         }
 
@@ -182,9 +182,9 @@ public class CallerInfoAsyncQuery {
                         this.mCallerInfo = new CallerInfo().markAsVoiceMail(this.mContext, cookieWrapper.subId);
                     } else {
                         this.mCallerInfo = CallerInfo.getCallerInfo(this.mContext, this.mQueryUri, cursor);
-                        CallerInfo doSecondaryLookupIfNecessary = CallerInfo.doSecondaryLookupIfNecessary(this.mContext, cookieWrapper.number, this.mCallerInfo);
-                        if (doSecondaryLookupIfNecessary != null && doSecondaryLookupIfNecessary != this.mCallerInfo) {
-                            this.mCallerInfo = doSecondaryLookupIfNecessary;
+                        CallerInfo callerInfoDoSecondaryLookupIfNecessary = CallerInfo.doSecondaryLookupIfNecessary(this.mContext, cookieWrapper.number, this.mCallerInfo);
+                        if (callerInfoDoSecondaryLookupIfNecessary != null && callerInfoDoSecondaryLookupIfNecessary != this.mCallerInfo) {
+                            this.mCallerInfo = callerInfoDoSecondaryLookupIfNecessary;
                         }
                         if (!TextUtils.isEmpty(cookieWrapper.number)) {
                             this.mCallerInfo.setPhoneNumber(PhoneNumberUtils.formatNumber(cookieWrapper.number, this.mCallerInfo.normalizedNumber, CallerInfo.getCurrentCountryIso(this.mContext)));
@@ -237,7 +237,7 @@ public class CallerInfoAsyncQuery {
     }
 
     public static CallerInfoAsyncQuery startQuery(int i, Context context, Uri uri, String str, OnQueryCompleteListener onQueryCompleteListener, Object obj) {
-        boolean z;
+        boolean zIsLocalEmergencyNumber;
         int defaultSubscriptionId = SubscriptionManager.getDefaultSubscriptionId();
         CallerInfoAsyncQuery callerInfoAsyncQuery = new CallerInfoAsyncQuery();
         callerInfoAsyncQuery.allocate(context, uri);
@@ -246,22 +246,22 @@ public class CallerInfoAsyncQuery {
         cookieWrapper.cookie = obj;
         cookieWrapper.number = str;
         cookieWrapper.subId = defaultSubscriptionId;
-        boolean z2 = false;
+        boolean zIsVoiceMailNumber = false;
         try {
-            z = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).isEmergencyNumber(str);
+            zIsLocalEmergencyNumber = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).isEmergencyNumber(str);
         } catch (IllegalStateException | UnsupportedOperationException unused) {
-            z = PhoneNumberUtils.isLocalEmergencyNumber(context, str);
+            zIsLocalEmergencyNumber = PhoneNumberUtils.isLocalEmergencyNumber(context, str);
         } catch (RuntimeException e) {
             Log.d(LOG_TAG, "startQuery - isEmergencyNumber is fail. " + e, new Object[0]);
-            z = false;
+            zIsLocalEmergencyNumber = false;
         }
         try {
-            z2 = PhoneNumberUtils.isVoiceMailNumber(context, defaultSubscriptionId, str);
+            zIsVoiceMailNumber = PhoneNumberUtils.isVoiceMailNumber(context, defaultSubscriptionId, str);
         } catch (UnsupportedOperationException unused2) {
         }
-        if (z) {
+        if (zIsLocalEmergencyNumber) {
             cookieWrapper.event = 4;
-        } else if (z2) {
+        } else if (zIsVoiceMailNumber) {
             cookieWrapper.event = 5;
         } else {
             cookieWrapper.event = 1;
@@ -275,36 +275,36 @@ public class CallerInfoAsyncQuery {
     }
 
     public static CallerInfoAsyncQuery startQuery(int i, Context context, String str, OnQueryCompleteListener onQueryCompleteListener, Object obj, int i2) {
-        boolean z;
-        Uri build = ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon().appendPath(str).appendQueryParameter("sip", String.valueOf(PhoneNumberUtils.isUriNumber(str))).build();
+        boolean zIsLocalEmergencyNumber;
+        Uri uriBuild = ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon().appendPath(str).appendQueryParameter("sip", String.valueOf(PhoneNumberUtils.isUriNumber(str))).build();
         CallerInfoAsyncQuery callerInfoAsyncQuery = new CallerInfoAsyncQuery();
-        callerInfoAsyncQuery.allocate(context, build);
+        callerInfoAsyncQuery.allocate(context, uriBuild);
         CookieWrapper cookieWrapper = new CookieWrapper();
         cookieWrapper.listener = onQueryCompleteListener;
         cookieWrapper.cookie = obj;
         cookieWrapper.number = str;
         cookieWrapper.subId = i2;
-        boolean z2 = false;
+        boolean zIsVoiceMailNumber = false;
         try {
-            z = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).isEmergencyNumber(str);
+            zIsLocalEmergencyNumber = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).isEmergencyNumber(str);
         } catch (IllegalStateException | UnsupportedOperationException unused) {
-            z = PhoneNumberUtils.isLocalEmergencyNumber(context, str);
+            zIsLocalEmergencyNumber = PhoneNumberUtils.isLocalEmergencyNumber(context, str);
         } catch (RuntimeException e) {
             Log.d(LOG_TAG, "startQuery - isEmergencyNumber is fail. " + e, new Object[0]);
-            z = false;
+            zIsLocalEmergencyNumber = false;
         }
         try {
-            z2 = PhoneNumberUtils.isVoiceMailNumber(context, i2, str);
+            zIsVoiceMailNumber = PhoneNumberUtils.isVoiceMailNumber(context, i2, str);
         } catch (UnsupportedOperationException unused2) {
         }
-        if (z) {
+        if (zIsLocalEmergencyNumber) {
             cookieWrapper.event = 4;
-        } else if (z2) {
+        } else if (zIsVoiceMailNumber) {
             cookieWrapper.event = 5;
         } else {
             cookieWrapper.event = 1;
         }
-        callerInfoAsyncQuery.mHandler.startQuery(i, cookieWrapper, build, null, null, null, null);
+        callerInfoAsyncQuery.mHandler.startQuery(i, cookieWrapper, uriBuild, null, null, null, null);
         return callerInfoAsyncQuery;
     }
 
@@ -336,12 +336,12 @@ public class CallerInfoAsyncQuery {
     /* JADX INFO: Access modifiers changed from: private */
     public static String sanitizeUriToString(Uri uri) {
         if (uri != null) {
-            String uri2 = uri.toString();
-            int lastIndexOf = uri2.lastIndexOf(47);
-            if (lastIndexOf <= 0) {
-                return uri2;
+            String string = uri.toString();
+            int iLastIndexOf = string.lastIndexOf(47);
+            if (iLastIndexOf <= 0) {
+                return string;
             }
-            return uri2.substring(0, lastIndexOf) + "/xxxxxxx";
+            return string.substring(0, iLastIndexOf) + "/xxxxxxx";
         }
         return "";
     }

@@ -17,7 +17,6 @@ import com.android.systemui.R;
 import com.android.systemui.accessibility.WindowMagnificationSettings;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecSeekBarWithIconButtonsView extends LinearLayout {
     public final ImageView mIconEnd;
@@ -29,7 +28,6 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
     public final SeslSeekBar mSeekbar;
     public boolean mSetProgressFromButtonFlag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ AccessibilityDelegate(SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView, int i) {
             this();
@@ -50,11 +48,9 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSeekBarWithIconButtonsChangeListener extends SeslSeekBar.OnSeekBarChangeListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeekBarChangeListener implements SeslSeekBar.OnSeekBarChangeListener {
         public WindowMagnificationSettings.ZoomSeekbarChangeListener mOnSeekBarChangeListener;
         public boolean mSeekByTouch;
@@ -115,7 +111,7 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
     }
 
     /* renamed from: $r8$lambda$Ryx6DOIbVKj-7tZSU8RwyATh5A0, reason: not valid java name */
-    public static void m998$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView) {
+    public static void m1000$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView) {
         int progress = secSeekBarWithIconButtonsView.mSeekbar.getProgress();
         if (progress > 0) {
             int i = progress - secSeekBarWithIconButtonsView.mSeekBarChangeMagnitude;
@@ -187,25 +183,25 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
         SeslSeekBar seslSeekBar = (SeslSeekBar) findViewById(R.id.seekbar);
         this.mSeekbar = seslSeekBar;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarWithIconButtonsView_Layout, i, i2);
-            int i4 = obtainStyledAttributes.getInt(2, 7);
-            int i5 = obtainStyledAttributes.getInt(3, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarWithIconButtonsView_Layout, i, i2);
+            int i4 = typedArrayObtainStyledAttributes.getInt(2, 7);
+            int i5 = typedArrayObtainStyledAttributes.getInt(3, 0);
             seslSeekBar.setMax(i4);
             setProgress(i5);
             seslSeekBar.setMode(8);
-            int resourceId = obtainStyledAttributes.getResourceId(1, 0);
-            int resourceId2 = obtainStyledAttributes.getResourceId(0, 0);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+            int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(0, 0);
             if (resourceId != 0) {
                 viewGroup.setContentDescription(context.getString(resourceId));
             }
             if (resourceId2 != 0) {
                 viewGroup2.setContentDescription(context.getString(resourceId2));
             }
-            int resourceId3 = obtainStyledAttributes.getResourceId(5, 0);
+            int resourceId3 = typedArrayObtainStyledAttributes.getResourceId(5, 0);
             if (resourceId3 != 0) {
                 seslSeekBar.setTickMark(getResources().getDrawable(resourceId3));
             }
-            this.mSeekBarChangeMagnitude = obtainStyledAttributes.getInt(4, 1);
+            this.mSeekBarChangeMagnitude = typedArrayObtainStyledAttributes.getInt(4, 1);
         } else {
             seslSeekBar.setMax(7);
             setProgress(0);
@@ -225,7 +221,7 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
                 SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView = this.f$0;
                 switch (i7) {
                     case 0:
-                        SecSeekBarWithIconButtonsView.m998$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(secSeekBarWithIconButtonsView);
+                        SecSeekBarWithIconButtonsView.m1000$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(secSeekBarWithIconButtonsView);
                         break;
                     default:
                         SecSeekBarWithIconButtonsView.$r8$lambda$NXdfyFJWWSMlxhe0liHePata5KI(secSeekBarWithIconButtonsView);
@@ -247,7 +243,7 @@ public class SecSeekBarWithIconButtonsView extends LinearLayout {
                 SecSeekBarWithIconButtonsView secSeekBarWithIconButtonsView = this.f$0;
                 switch (i72) {
                     case 0:
-                        SecSeekBarWithIconButtonsView.m998$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(secSeekBarWithIconButtonsView);
+                        SecSeekBarWithIconButtonsView.m1000$r8$lambda$Ryx6DOIbVKj7tZSU8RwyATh5A0(secSeekBarWithIconButtonsView);
                         break;
                     default:
                         SecSeekBarWithIconButtonsView.$r8$lambda$NXdfyFJWWSMlxhe0liHePata5KI(secSeekBarWithIconButtonsView);

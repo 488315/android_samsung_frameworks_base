@@ -204,20 +204,20 @@ public class DownloadManager {
             Application initialApplication = AppGlobals.getInitialApplication();
             if (initialApplication.getApplicationInfo().targetSdkVersion >= 29 || !Environment.isExternalStorageLegacy()) {
                 try {
-                    ContentProviderClient acquireContentProviderClient = initialApplication.getContentResolver().acquireContentProviderClient("downloads");
+                    ContentProviderClient contentProviderClientAcquireContentProviderClient = initialApplication.getContentResolver().acquireContentProviderClient("downloads");
                     try {
-                        if (acquireContentProviderClient == null) {
+                        if (contentProviderClientAcquireContentProviderClient == null) {
                             Log.i("DownloadManager", "client is null maybe due to download provider disabled");
-                            if (acquireContentProviderClient != null) {
-                                acquireContentProviderClient.close();
+                            if (contentProviderClientAcquireContentProviderClient != null) {
+                                contentProviderClientAcquireContentProviderClient.close();
                             }
                             return null;
                         }
                         Bundle bundle = new Bundle();
                         bundle.putString(Downloads.DIR_TYPE, str);
-                        acquireContentProviderClient.call(Downloads.CALL_CREATE_EXTERNAL_PUBLIC_DIR, null, bundle);
-                        if (acquireContentProviderClient != null) {
-                            acquireContentProviderClient.close();
+                        contentProviderClientAcquireContentProviderClient.call(Downloads.CALL_CREATE_EXTERNAL_PUBLIC_DIR, null, bundle);
+                        if (contentProviderClientAcquireContentProviderClient != null) {
+                            contentProviderClientAcquireContentProviderClient.close();
                         }
                     } finally {
                     }
@@ -550,16 +550,16 @@ public class DownloadManager {
         }
 
         Cursor runQuery(ContentResolver contentResolver, String[] strArr, Uri uri) {
-            String[] strArr2;
+            String[] whereArgsForIds;
             ArrayList arrayList = new ArrayList();
             long[] jArr = this.mIds;
             if (jArr != null) {
                 arrayList.add(DownloadManager.getWhereClauseForIds(jArr));
-                strArr2 = DownloadManager.getWhereArgsForIds(this.mIds);
+                whereArgsForIds = DownloadManager.getWhereArgsForIds(this.mIds);
             } else {
-                strArr2 = null;
+                whereArgsForIds = null;
             }
-            String[] strArr3 = strArr2;
+            String[] strArr2 = whereArgsForIds;
             if (this.mStatusFlags != null) {
                 ArrayList arrayList2 = new ArrayList();
                 if ((this.mStatusFlags.intValue() & 1) != 0) {
@@ -586,7 +586,7 @@ public class DownloadManager {
                 arrayList.add("is_visible_in_downloads_ui != '0'");
             }
             arrayList.add("deleted != '1'");
-            return contentResolver.query(uri, strArr, joinStrings(" AND ", arrayList), strArr3, this.mOrderByColumn + " " + (this.mOrderDirection == 1 ? "ASC" : "DESC"));
+            return contentResolver.query(uri, strArr, joinStrings(" AND ", arrayList), strArr2, this.mOrderByColumn + " " + (this.mOrderDirection == 1 ? "ASC" : "DESC"));
         }
 
         private String joinStrings(String str, Iterable<String> iterable) {
@@ -634,11 +634,11 @@ public class DownloadManager {
     @SystemApi
     public void onMediaStoreDownloadsDeleted(LongSparseArray<String> longSparseArray) {
         try {
-            ContentProviderClient acquireUnstableContentProviderClient = this.mResolver.acquireUnstableContentProviderClient(this.mBaseUri);
+            ContentProviderClient contentProviderClientAcquireUnstableContentProviderClient = this.mResolver.acquireUnstableContentProviderClient(this.mBaseUri);
             try {
-                if (acquireUnstableContentProviderClient == null) {
+                if (contentProviderClientAcquireUnstableContentProviderClient == null) {
                     Log.i("DownloadManager", "client is null maybe due to download provider disabled");
-                    if (acquireUnstableContentProviderClient == null) {
+                    if (contentProviderClientAcquireUnstableContentProviderClient == null) {
                         return;
                     }
                 } else {
@@ -651,12 +651,12 @@ public class DownloadManager {
                     }
                     bundle.putLongArray(Downloads.EXTRA_IDS, jArr);
                     bundle.putStringArray("mime_types", strArr);
-                    acquireUnstableContentProviderClient.call(Downloads.CALL_MEDIASTORE_DOWNLOADS_DELETED, null, bundle);
-                    if (acquireUnstableContentProviderClient == null) {
+                    contentProviderClientAcquireUnstableContentProviderClient.call(Downloads.CALL_MEDIASTORE_DOWNLOADS_DELETED, null, bundle);
+                    if (contentProviderClientAcquireUnstableContentProviderClient == null) {
                         return;
                     }
                 }
-                acquireUnstableContentProviderClient.close();
+                contentProviderClientAcquireUnstableContentProviderClient.close();
             } finally {
             }
         } catch (RemoteException unused) {
@@ -664,9 +664,9 @@ public class DownloadManager {
     }
 
     public long enqueue(Request request) {
-        Uri insert = this.mResolver.insert(Downloads.Impl.CONTENT_URI, request.toContentValues(this.mPackageName));
-        if (insert != null) {
-            return Long.parseLong(insert.getLastPathSegment());
+        Uri uriInsert = this.mResolver.insert(Downloads.Impl.CONTENT_URI, request.toContentValues(this.mPackageName));
+        if (uriInsert != null) {
+            return Long.parseLong(uriInsert.getLastPathSegment());
         }
         return -1L;
     }
@@ -719,50 +719,50 @@ public class DownloadManager {
     }
 
     public Cursor query(Query query, String[] strArr) {
-        Cursor runQuery = query.runQuery(this.mResolver, strArr, this.mBaseUri);
-        if (runQuery == null) {
+        Cursor cursorRunQuery = query.runQuery(this.mResolver, strArr, this.mBaseUri);
+        if (cursorRunQuery == null) {
             return null;
         }
-        return new CursorTranslator(runQuery, this.mBaseUri, this.mAccessFilename);
+        return new CursorTranslator(cursorRunQuery, this.mBaseUri, this.mAccessFilename);
     }
 
     public Cursor secquery(SecQuery secQuery) {
-        Cursor runQuery = secQuery.runQuery(this.mResolver, SEC_UNDERLYING_COLUMNS, this.mSecBaseUri);
-        if (runQuery == null) {
+        Cursor cursorRunQuery = secQuery.runQuery(this.mResolver, SEC_UNDERLYING_COLUMNS, this.mSecBaseUri);
+        if (cursorRunQuery == null) {
             return null;
         }
-        return new SecCursorTranslator(runQuery, this.mSecBaseUri);
+        return new SecCursorTranslator(cursorRunQuery, this.mSecBaseUri);
     }
 
     public ParcelFileDescriptor openDownloadedFile(long j) throws FileNotFoundException {
         return this.mResolver.openFileDescriptor(getDownloadUri(j), "r");
     }
 
-    public Uri getUriForDownloadedFile(long j) {
+    public Uri getUriForDownloadedFile(long j) throws Throwable {
         Cursor cursor = null;
         try {
-            Cursor query = query(new Query().setFilterById(j));
-            if (query == null) {
-                if (query != null) {
-                    query.close();
+            Cursor cursorQuery = query(new Query().setFilterById(j));
+            if (cursorQuery == null) {
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 return null;
             }
             try {
-                if (!query.moveToFirst() || 8 != query.getInt(query.getColumnIndexOrThrow("status"))) {
-                    if (query != null) {
-                        query.close();
+                if (!cursorQuery.moveToFirst() || 8 != cursorQuery.getInt(cursorQuery.getColumnIndexOrThrow("status"))) {
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return null;
                 }
-                Uri withAppendedId = ContentUris.withAppendedId(Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, j);
-                if (query != null) {
-                    query.close();
+                Uri uriWithAppendedId = ContentUris.withAppendedId(Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, j);
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
-                return withAppendedId;
+                return uriWithAppendedId;
             } catch (Throwable th) {
                 th = th;
-                cursor = query;
+                cursor = cursorQuery;
                 if (cursor != null) {
                     cursor.close();
                 }
@@ -773,31 +773,31 @@ public class DownloadManager {
         }
     }
 
-    public String getMimeTypeForDownloadedFile(long j) {
+    public String getMimeTypeForDownloadedFile(long j) throws Throwable {
         Cursor cursor = null;
         try {
-            Cursor query = query(new Query().setFilterById(j));
-            if (query == null) {
-                if (query != null) {
-                    query.close();
+            Cursor cursorQuery = query(new Query().setFilterById(j));
+            if (cursorQuery == null) {
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 return null;
             }
             try {
-                if (!query.moveToFirst()) {
-                    if (query != null) {
-                        query.close();
+                if (!cursorQuery.moveToFirst()) {
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return null;
                 }
-                String string = query.getString(query.getColumnIndexOrThrow(COLUMN_MEDIA_TYPE));
-                if (query != null) {
-                    query.close();
+                String string = cursorQuery.getString(cursorQuery.getColumnIndexOrThrow(COLUMN_MEDIA_TYPE));
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 return string;
             } catch (Throwable th) {
                 th = th;
-                cursor = query;
+                cursor = cursorQuery;
                 if (cursor != null) {
                     cursor.close();
                 }
@@ -809,17 +809,17 @@ public class DownloadManager {
     }
 
     public boolean restartDownload(long... jArr) {
-        Cursor query = query(new Query().setFilterById(jArr));
+        Cursor cursorQuery = query(new Query().setFilterById(jArr));
         try {
-            query.moveToFirst();
-            while (!query.isAfterLast()) {
-                int i = query.getInt(query.getColumnIndex("status"));
+            cursorQuery.moveToFirst();
+            while (!cursorQuery.isAfterLast()) {
+                int i = cursorQuery.getInt(cursorQuery.getColumnIndex("status"));
                 if (i != 8 && i != 16) {
                     return false;
                 }
-                query.moveToNext();
+                cursorQuery.moveToNext();
             }
-            query.close();
+            cursorQuery.close();
             ContentValues contentValues = new ContentValues();
             contentValues.put(Downloads.Impl.COLUMN_CURRENT_BYTES, (Integer) 0);
             contentValues.put(Downloads.Impl.COLUMN_TOTAL_BYTES, (Integer) (-1));
@@ -833,7 +833,7 @@ public class DownloadManager {
             this.mResolver.update(this.mBaseUri, contentValues, getWhereClauseForIds(jArr), getWhereArgsForIds(jArr));
             return true;
         } finally {
-            query.close();
+            cursorQuery.close();
         }
     }
 
@@ -850,20 +850,20 @@ public class DownloadManager {
     }
 
     public boolean secrestartDownload(long... jArr) {
-        Cursor secquery = secquery(new SecQuery().setFilterById(jArr));
-        if (secquery == null) {
+        Cursor cursorSecquery = secquery(new SecQuery().setFilterById(jArr));
+        if (cursorSecquery == null) {
             return false;
         }
         try {
-            secquery.moveToFirst();
-            while (!secquery.isAfterLast()) {
-                int i = secquery.getInt(secquery.getColumnIndex("status"));
+            cursorSecquery.moveToFirst();
+            while (!cursorSecquery.isAfterLast()) {
+                int i = cursorSecquery.getInt(cursorSecquery.getColumnIndex("status"));
                 if (i != 8 && i != 16) {
                     return false;
                 }
-                secquery.moveToNext();
+                cursorSecquery.moveToNext();
             }
-            secquery.close();
+            cursorSecquery.close();
             ContentValues contentValues = new ContentValues();
             contentValues.put(Downloads.Impl.COLUMN_CURRENT_BYTES, (Integer) 0);
             contentValues.put(Downloads.Impl.COLUMN_TOTAL_BYTES, (Integer) (-1));
@@ -874,7 +874,7 @@ public class DownloadManager {
             this.mResolver.update(this.mSecBaseUri, contentValues, getWhereClauseForIds(jArr), getWhereArgsForIds(jArr));
             return true;
         } finally {
-            secquery.close();
+            cursorSecquery.close();
         }
     }
 
@@ -898,24 +898,24 @@ public class DownloadManager {
         if (!FileUtils.isValidFatFilename(str)) {
             throw new SecurityException(str + " is not a valid filename");
         }
-        Cursor query = query(new Query().setFilterById(j));
+        Cursor cursorQuery = query(new Query().setFilterById(j));
         try {
-            if (query == null) {
+            if (cursorQuery == null) {
                 throw new IllegalStateException("Missing cursor for download id=" + j);
             }
-            if (query.moveToFirst()) {
-                if (query.getInt(query.getColumnIndexOrThrow("status")) != 8) {
-                    throw new IllegalStateException("Download is not completed yet: " + DatabaseUtils.dumpCurrentRowToString(query));
+            if (cursorQuery.moveToFirst()) {
+                if (cursorQuery.getInt(cursorQuery.getColumnIndexOrThrow("status")) != 8) {
+                    throw new IllegalStateException("Download is not completed yet: " + DatabaseUtils.dumpCurrentRowToString(cursorQuery));
                 }
-                String string = query.getString(query.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
+                String string = cursorQuery.getString(cursorQuery.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
                 if (string == null) {
-                    throw new IllegalStateException("Download doesn't have a valid file path: " + DatabaseUtils.dumpCurrentRowToString(query));
+                    throw new IllegalStateException("Download doesn't have a valid file path: " + DatabaseUtils.dumpCurrentRowToString(cursorQuery));
                 }
                 if (!new File(string).exists()) {
-                    throw new IllegalStateException("Downloaded file doesn't exist anymore: " + DatabaseUtils.dumpCurrentRowToString(query));
+                    throw new IllegalStateException("Downloaded file doesn't exist anymore: " + DatabaseUtils.dumpCurrentRowToString(cursorQuery));
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 File file = new File(string);
                 File file2 = new File(file.getParentFile(), str);
@@ -936,9 +936,9 @@ public class DownloadManager {
             }
             throw new IllegalStateException("Missing download id=" + j);
         } catch (Throwable th) {
-            if (query != null) {
+            if (cursorQuery != null) {
                 try {
-                    query.close();
+                    cursorQuery.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -999,17 +999,17 @@ public class DownloadManager {
         contentValues.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(z ? 0 : 2));
         contentValues.put("visibility", Integer.valueOf(z2 ? 3 : 2));
         contentValues.put("allow_write", Integer.valueOf(z3 ? 1 : 0));
-        Uri insert = this.mResolver.insert(Downloads.Impl.CONTENT_URI, contentValues);
-        if (insert == null) {
+        Uri uriInsert = this.mResolver.insert(Downloads.Impl.CONTENT_URI, contentValues);
+        if (uriInsert == null) {
             return -1L;
         }
-        return Long.parseLong(insert.getLastPathSegment());
+        return Long.parseLong(uriInsert.getLastPathSegment());
     }
 
     private static String resolveMimeType(File file) {
         String mimeTypeFromExtension;
-        String extractFileExtension = extractFileExtension(file.getPath());
-        return (extractFileExtension == null || (mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extractFileExtension.toLowerCase(Locale.ROOT))) == null) ? "application/octet-stream" : mimeTypeFromExtension;
+        String strExtractFileExtension = extractFileExtension(file.getPath());
+        return (strExtractFileExtension == null || (mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(strExtractFileExtension.toLowerCase(Locale.ROOT))) == null) ? "application/octet-stream" : mimeTypeFromExtension;
     }
 
     private static String extractDisplayName(String str) {
@@ -1026,12 +1026,12 @@ public class DownloadManager {
     }
 
     private static String extractFileExtension(String str) {
-        String extractDisplayName;
-        int lastIndexOf;
-        if (str == null || (lastIndexOf = (extractDisplayName = extractDisplayName(str)).lastIndexOf(46)) == -1) {
+        String strExtractDisplayName;
+        int iLastIndexOf;
+        if (str == null || (iLastIndexOf = (strExtractDisplayName = extractDisplayName(str)).lastIndexOf(46)) == -1) {
             return null;
         }
-        return extractDisplayName.substring(lastIndexOf + 1);
+        return strExtractDisplayName.substring(iLastIndexOf + 1);
     }
 
     public long secAddCompletedDownload(String str, String str2, boolean z, String str3, String str4, long j, boolean z2) {
@@ -1042,20 +1042,20 @@ public class DownloadManager {
         if (j < 0) {
             throw new IllegalArgumentException(" invalid value for param: totalBytes");
         }
-        ContentValues sectoContentValues = new Request(NON_DOWNLOADMANAGER_DOWNLOAD).setTitle(str).setDescription(str2).setMimeType(str3).sectoContentValues(null);
-        sectoContentValues.put("destination", (Integer) 0);
-        sectoContentValues.put("_data", str4);
-        sectoContentValues.put("status", (Integer) 200);
-        sectoContentValues.put("state", (Integer) 10);
-        sectoContentValues.put(Downloads.Impl.COLUMN_STORAGE_TYPE, (Integer) 1);
-        sectoContentValues.put(Downloads.Impl.COLUMN_TOTAL_BYTES, Long.valueOf(j));
-        sectoContentValues.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(z ? 0 : 2));
-        sectoContentValues.put("visibility", Integer.valueOf(z2 ? 1 : 2));
-        Uri insert = this.mResolver.insert(Downloads.Impl.CONTENT_CDURI, sectoContentValues);
-        if (insert == null) {
+        ContentValues contentValuesSectoContentValues = new Request(NON_DOWNLOADMANAGER_DOWNLOAD).setTitle(str).setDescription(str2).setMimeType(str3).sectoContentValues(null);
+        contentValuesSectoContentValues.put("destination", (Integer) 0);
+        contentValuesSectoContentValues.put("_data", str4);
+        contentValuesSectoContentValues.put("status", (Integer) 200);
+        contentValuesSectoContentValues.put("state", (Integer) 10);
+        contentValuesSectoContentValues.put(Downloads.Impl.COLUMN_STORAGE_TYPE, (Integer) 1);
+        contentValuesSectoContentValues.put(Downloads.Impl.COLUMN_TOTAL_BYTES, Long.valueOf(j));
+        contentValuesSectoContentValues.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(z ? 0 : 2));
+        contentValuesSectoContentValues.put("visibility", Integer.valueOf(z2 ? 1 : 2));
+        Uri uriInsert = this.mResolver.insert(Downloads.Impl.CONTENT_CDURI, contentValuesSectoContentValues);
+        if (uriInsert == null) {
             return -1L;
         }
-        return Long.parseLong(insert.getLastPathSegment());
+        return Long.parseLong(uriInsert.getLastPathSegment());
     }
 
     private static void validateArgumentIsNonEmpty(String str, String str2) {
@@ -1225,11 +1225,11 @@ public class DownloadManager {
         }
 
         private long getReason(int i) {
-            int translateStatus = translateStatus(i);
-            if (translateStatus == 4) {
+            int iTranslateStatus = translateStatus(i);
+            if (iTranslateStatus == 4) {
                 return getPausedReason(i);
             }
-            if (translateStatus != 16) {
+            if (iTranslateStatus != 16) {
                 return 0L;
             }
             return getErrorCode(i);
@@ -1490,11 +1490,11 @@ public class DownloadManager {
         }
 
         public long getReason(int i) {
-            int translateStatus = translateStatus(i);
-            if (translateStatus == 4) {
+            int iTranslateStatus = translateStatus(i);
+            if (iTranslateStatus == 4) {
                 return getPausedReason(i);
             }
-            if (translateStatus != 16) {
+            if (iTranslateStatus != 16) {
                 return 0L;
             }
             return getErrorCode(i);

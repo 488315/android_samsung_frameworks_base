@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelGlobalStateRepository implements Dumpable {
     public final ReadonlyStateFlow globalState;
@@ -20,9 +19,9 @@ public final class VolumePanelGlobalStateRepository implements Dumpable {
 
     public VolumePanelGlobalStateRepository(DumpManager dumpManager, VolumePanelLogger volumePanelLogger) {
         this.logger = volumePanelLogger;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new VolumePanelGlobalState(false));
-        this.mutableGlobalState = MutableStateFlow;
-        this.globalState = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new VolumePanelGlobalState(false));
+        this.mutableGlobalState = stateFlowImplMutableStateFlow;
+        this.globalState = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         dumpManager.registerNormalDumpable("VolumePanelGlobalStateRepository", this);
     }
 

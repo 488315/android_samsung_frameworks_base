@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
@@ -20,6 +21,7 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.policy.HotspotController;
+import com.android.systemui.util.DeviceType;
 import com.samsung.android.wifi.SemWifiManager;
 import com.sec.ims.extensions.WiFiManagerExt;
 import com.sec.ims.settings.ImsProfile;
@@ -27,7 +29,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HotspotControllerImpl implements HotspotController, WifiManager.SoftApCallback {
     public static final boolean DEBUG = Log.isLoggable("HotspotController", 3);
@@ -48,7 +49,6 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
     public int mHotspotState = 11;
     public boolean isReceiverRegistered = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HotspotControllerReceiver extends BroadcastReceiver {
         public /* synthetic */ HotspotControllerReceiver(HotspotControllerImpl hotspotControllerImpl, int i) {
             this();
@@ -68,7 +68,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
     }
 
     /* renamed from: -$$Nest$mfireHotspotAvailabilityChanged, reason: not valid java name */
-    public static void m3086$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl hotspotControllerImpl) {
+    public static void m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl hotspotControllerImpl) {
         ArrayList arrayList;
         synchronized (hotspotControllerImpl.mCallbacks) {
             arrayList = new ArrayList(hotspotControllerImpl.mCallbacks);
@@ -83,14 +83,14 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
     }
 
     /* JADX WARN: Type inference failed for: r0v4, types: [android.net.TetheringManager$TetheringEventCallback, com.android.systemui.statusbar.policy.HotspotControllerImpl$1] */
-    public HotspotControllerImpl(Context context, UserTracker userTracker, Handler handler, Handler handler2, DumpManager dumpManager) {
+    public HotspotControllerImpl(Context context, UserTracker userTracker, Handler handler, Handler handler2, DumpManager dumpManager) throws Resources.NotFoundException {
         ?? r0 = new TetheringManager.TetheringEventCallback() { // from class: com.android.systemui.statusbar.policy.HotspotControllerImpl.1
             public final void onTetherableInterfaceRegexpsChanged(TetheringManager.TetheringInterfaceRegexps tetheringInterfaceRegexps) {
                 boolean z = tetheringInterfaceRegexps.getTetherableWifiRegexs().size() != 0;
                 if (HotspotControllerImpl.this.mHasTetherableWifiRegexs != z) {
                     HotspotControllerImpl.this.mHasTetherableWifiRegexs = z;
                     KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(new StringBuilder("mHasTetherableWifiRegexs:"), HotspotControllerImpl.this.mHasTetherableWifiRegexs, "HotspotController");
-                    HotspotControllerImpl.m3086$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
+                    HotspotControllerImpl.m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
                 }
             }
 
@@ -98,7 +98,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
                 if (HotspotControllerImpl.this.mIsTetheringSupported != z) {
                     HotspotControllerImpl.this.mIsTetheringSupported = z;
                     KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(new StringBuilder("mIsTetheringSupported:"), HotspotControllerImpl.this.mIsTetheringSupported, "HotspotController");
-                    HotspotControllerImpl.m3086$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
+                    HotspotControllerImpl.m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
                 }
             }
         };
@@ -137,7 +137,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
                                 this.mMainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.policy.HotspotControllerImpl$$ExternalSyntheticLambda0
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        HotspotControllerImpl hotspotControllerImpl = HotspotControllerImpl.this;
+                                        HotspotControllerImpl hotspotControllerImpl = this.f$0;
                                         HotspotController.Callback callback2 = callback;
                                         boolean z = HotspotControllerImpl.DEBUG;
                                         callback2.onHotspotChanged(hotspotControllerImpl.getNumConnectedDevices(), hotspotControllerImpl.isHotspotEnabled());
@@ -224,7 +224,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
     }
 
     public final boolean isHotspotSupported() {
-        return this.mIsTetheringSupportedConfig && this.mIsTetheringSupported && this.mHasTetherableWifiRegexs && UserManager.get(this.mContext).isUserAdmin(((UserTrackerImpl) this.mUserTracker).getUserId());
+        return this.mIsTetheringSupportedConfig && this.mIsTetheringSupported && this.mHasTetherableWifiRegexs && UserManager.get(this.mContext).isUserAdmin(((UserTrackerImpl) this.mUserTracker).getUserId()) && !DeviceType.isWiFiOnlyDevice();
     }
 
     public final void onStateChanged(int i, int i2) {

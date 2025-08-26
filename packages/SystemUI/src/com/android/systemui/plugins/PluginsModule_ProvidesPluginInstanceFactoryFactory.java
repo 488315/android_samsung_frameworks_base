@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginsModule_ProvidesPluginInstanceFactoryFactory implements Provider {
     private final Provider isDebugProvider;
@@ -21,9 +20,9 @@ public final class PluginsModule_ProvidesPluginInstanceFactoryFactory implements
     }
 
     public static PluginInstance.Factory providesPluginInstanceFactory(List<String> list, boolean z) {
-        PluginInstance.Factory providesPluginInstanceFactory = PluginsModule.providesPluginInstanceFactory(list, z);
-        providesPluginInstanceFactory.getClass();
-        return providesPluginInstanceFactory;
+        PluginInstance.Factory factoryProvidesPluginInstanceFactory = PluginsModule.providesPluginInstanceFactory(list, z);
+        factoryProvidesPluginInstanceFactory.getClass();
+        return factoryProvidesPluginInstanceFactory;
     }
 
     public static PluginsModule_ProvidesPluginInstanceFactoryFactory create(Provider provider, Provider provider2) {

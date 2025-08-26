@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiRepositoryImpl$wifiActivity$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -53,16 +52,16 @@ final class WifiRepositoryImpl$wifiActivity$1 extends SuspendLambda implements F
             final WifiRepositoryImpl wifiRepositoryImpl = this.this$0;
             WifiManager.TrafficStateCallback trafficStateCallback = new WifiManager.TrafficStateCallback() { // from class: com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl$wifiActivity$1$callback$1
                 public final void onStateChanged(int i2) {
-                    WifiRepositoryImpl wifiRepositoryImpl2 = WifiRepositoryImpl.this;
+                    WifiRepositoryImpl wifiRepositoryImpl2 = wifiRepositoryImpl;
                     WifiRepositoryImpl.Companion companion = WifiRepositoryImpl.Companion;
                     wifiRepositoryImpl2.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
-                    WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(6);
+                    WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(7);
                     LogBuffer logBuffer = wifiRepositoryImpl2.inputLogger;
-                    LogMessage obtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
-                    ((LogMessageImpl) obtain).str1 = i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? "INVALID" : "INOUT" : "OUT" : "IN" : PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE;
-                    logBuffer.commit(obtain);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(i2 != 1 ? i2 != 2 ? i2 != 3 ? new DataActivityModel(false, false) : new DataActivityModel(true, true) : new DataActivityModel(false, true) : new DataActivityModel(true, false));
+                    LogMessage logMessageObtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
+                    ((LogMessageImpl) logMessageObtain).str1 = i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? "INVALID" : "INOUT" : "OUT" : "IN" : PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE;
+                    logBuffer.commit(logMessageObtain);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(i2 != 1 ? i2 != 2 ? i2 != 3 ? new DataActivityModel(false, false) : new DataActivityModel(true, true) : new DataActivityModel(false, true) : new DataActivityModel(true, false));
                 }
             };
             WifiRepositoryImpl wifiRepositoryImpl2 = this.this$0;

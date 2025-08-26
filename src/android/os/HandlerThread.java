@@ -35,7 +35,7 @@ public class HandlerThread extends Thread {
     }
 
     @Override // java.lang.Thread, java.lang.Runnable
-    public void run() {
+    public void run() throws SecurityException, IllegalArgumentException {
         this.mTid = Process.myTid();
         Looper.prepare();
         synchronized (this) {

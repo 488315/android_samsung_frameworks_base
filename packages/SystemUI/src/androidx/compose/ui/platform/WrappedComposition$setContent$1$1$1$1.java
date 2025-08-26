@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class WrappedComposition$setContent$1$1$1$1 extends SuspendLambda implements Function2 {
     int label;
@@ -31,18 +30,18 @@ final class WrappedComposition$setContent$1$1$1$1 extends SuspendLambda implemen
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             AndroidComposeView androidComposeView = this.this$0.owner;
             this.label = 1;
-            Object boundsUpdatesEventLoop$ui_release = androidComposeView.composeAccessibilityDelegate.boundsUpdatesEventLoop$ui_release(this);
-            if (boundsUpdatesEventLoop$ui_release != coroutineSingletons) {
-                boundsUpdatesEventLoop$ui_release = Unit.INSTANCE;
+            Object objBoundsUpdatesEventLoop$ui_release = androidComposeView.composeAccessibilityDelegate.boundsUpdatesEventLoop$ui_release(this);
+            if (objBoundsUpdatesEventLoop$ui_release != coroutineSingletons) {
+                objBoundsUpdatesEventLoop$ui_release = Unit.INSTANCE;
             }
-            if (boundsUpdatesEventLoop$ui_release == coroutineSingletons) {
+            if (objBoundsUpdatesEventLoop$ui_release == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

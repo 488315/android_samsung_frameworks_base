@@ -276,7 +276,7 @@ public interface TextClassifier {
             public EntityConfig build() {
                 List arrayList;
                 List arrayList2;
-                List unmodifiableList;
+                List listUnmodifiableList;
                 if (this.mIncludedTypes == null) {
                     arrayList = Collections.EMPTY_LIST;
                 } else {
@@ -288,11 +288,11 @@ public interface TextClassifier {
                     arrayList2 = new ArrayList(this.mExcludedTypes);
                 }
                 if (this.mHints == null) {
-                    unmodifiableList = Collections.EMPTY_LIST;
+                    listUnmodifiableList = Collections.EMPTY_LIST;
                 } else {
-                    unmodifiableList = Collections.unmodifiableList(new ArrayList(this.mHints));
+                    listUnmodifiableList = Collections.unmodifiableList(new ArrayList(this.mHints));
                 }
-                return new EntityConfig(arrayList, arrayList2, unmodifiableList, this.mIncludeTypesFromTextClassifier);
+                return new EntityConfig(arrayList, arrayList2, listUnmodifiableList, this.mIncludeTypesFromTextClassifier);
             }
         }
     }
@@ -313,7 +313,7 @@ public interface TextClassifier {
         }
 
         public static String getSubString(String str, int i, int i2, int i3) {
-            String substring;
+            String strSubstring;
             Preconditions.checkArgument(i >= 0);
             Preconditions.checkArgument(i2 <= str.length());
             Preconditions.checkArgument(i <= i2);
@@ -324,35 +324,35 @@ public interface TextClassifier {
             if (i4 >= i3) {
                 return str.substring(i, i2);
             }
-            int max = Math.max(0, Math.min(i - ((i3 - i4) / 2), str.length() - i3));
-            int min = Math.min(str.length(), i3 + max);
+            int iMax = Math.max(0, Math.min(i - ((i3 - i4) / 2), str.length() - i3));
+            int iMin = Math.min(str.length(), i3 + iMax);
             BreakIterator breakIterator = WORD_ITERATOR;
             synchronized (breakIterator) {
                 breakIterator.setText(str);
-                if (!breakIterator.isBoundary(max)) {
-                    max = Math.max(0, breakIterator.preceding(max));
+                if (!breakIterator.isBoundary(iMax)) {
+                    iMax = Math.max(0, breakIterator.preceding(iMax));
                 }
-                if (!breakIterator.isBoundary(min)) {
-                    min = Math.max(min, breakIterator.following(min));
+                if (!breakIterator.isBoundary(iMin)) {
+                    iMin = Math.max(iMin, breakIterator.following(iMin));
                 }
                 breakIterator.setText("");
-                substring = str.substring(max, min);
+                strSubstring = str.substring(iMax, iMin);
             }
-            return substring;
+            return strSubstring;
         }
 
         public static TextLinks generateLegacyLinks(TextLinks.Request request) {
-            String charSequence = request.getText().toString();
-            TextLinks.Builder builder = new TextLinks.Builder(charSequence);
-            Collection<String> resolveEntityListModifications = request.getEntityConfig().resolveEntityListModifications(Collections.EMPTY_LIST);
-            if (resolveEntityListModifications.contains("url")) {
-                addLinks(builder, charSequence, "url");
+            String string = request.getText().toString();
+            TextLinks.Builder builder = new TextLinks.Builder(string);
+            Collection<String> collectionResolveEntityListModifications = request.getEntityConfig().resolveEntityListModifications(Collections.EMPTY_LIST);
+            if (collectionResolveEntityListModifications.contains("url")) {
+                addLinks(builder, string, "url");
             }
-            if (resolveEntityListModifications.contains("phone")) {
-                addLinks(builder, charSequence, "phone");
+            if (collectionResolveEntityListModifications.contains("phone")) {
+                addLinks(builder, string, "phone");
             }
-            if (resolveEntityListModifications.contains("email")) {
-                addLinks(builder, charSequence, "email");
+            if (collectionResolveEntityListModifications.contains("email")) {
+                addLinks(builder, string, "email");
             }
             return builder.build();
         }

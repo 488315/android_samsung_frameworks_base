@@ -1,6 +1,7 @@
 package androidx.room.util;
 
 import androidx.sqlite.SQLiteStatement;
+import java.io.IOException;
 import java.util.ArrayList;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
@@ -8,13 +9,13 @@ import kotlin.jvm.internal.Intrinsics;
 /* loaded from: classes.dex */
 public abstract class SQLiteStatementUtil {
     public static final int columnIndexOf(SQLiteStatement sQLiteStatement, String str) {
-        int columnIndexOfCommon = columnIndexOfCommon(sQLiteStatement, str);
-        if (columnIndexOfCommon >= 0) {
-            return columnIndexOfCommon;
+        int iColumnIndexOfCommon = columnIndexOfCommon(sQLiteStatement, str);
+        if (iColumnIndexOfCommon >= 0) {
+            return iColumnIndexOfCommon;
         }
-        int columnIndexOfCommon2 = columnIndexOfCommon(sQLiteStatement, "`" + str + '`');
-        if (columnIndexOfCommon2 >= 0) {
-            return columnIndexOfCommon2;
+        int iColumnIndexOfCommon2 = columnIndexOfCommon(sQLiteStatement, "`" + str + '`');
+        if (iColumnIndexOfCommon2 >= 0) {
+            return iColumnIndexOfCommon2;
         }
         return -1;
     }
@@ -36,10 +37,10 @@ public abstract class SQLiteStatementUtil {
         return -1;
     }
 
-    public static final int getColumnIndexOrThrow(SQLiteStatement sQLiteStatement, String str) {
-        int columnIndexOf = columnIndexOf(sQLiteStatement, str);
-        if (columnIndexOf >= 0) {
-            return columnIndexOf;
+    public static final int getColumnIndexOrThrow(SQLiteStatement sQLiteStatement, String str) throws IOException {
+        int iColumnIndexOf = columnIndexOf(sQLiteStatement, str);
+        if (iColumnIndexOf >= 0) {
+            return iColumnIndexOf;
         }
         int columnCount = sQLiteStatement.getColumnCount();
         ArrayList arrayList = new ArrayList(columnCount);

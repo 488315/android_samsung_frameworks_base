@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SingleIntentAppResult extends BaseAppResult {
     public final Icon mActionIcon;
@@ -36,7 +35,7 @@ public class SingleIntentAppResult extends BaseAppResult {
         return this.mResolveInfos.stream().filter(new Predicate() { // from class: com.android.wm.shell.draganddrop.SingleIntentAppResult$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                SingleIntentAppResult.this.getClass();
+                this.f$0.getClass();
                 return (MultiWindowManager.getInstance().getSupportedMultiWindowModes(((ResolveInfo) obj).activityInfo) & 3) != 0;
             }
         }).findFirst().isPresent();

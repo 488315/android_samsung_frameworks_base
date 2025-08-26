@@ -9,14 +9,13 @@ import android.widget.FrameLayout;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, AdapterView.OnItemClickListener {
     public Rect mEpicenterBounds;
 
     public static int measureIndividualMenuWidth(ListAdapter listAdapter, Context context, int i) {
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
         int count = listAdapter.getCount();
         int i2 = 0;
         int i3 = 0;
@@ -32,7 +31,7 @@ public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, Adap
                 frameLayout = new FrameLayout(context);
             }
             view = listAdapter.getView(i4, view, frameLayout);
-            view.measure(makeMeasureSpec, makeMeasureSpec2);
+            view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
             int measuredWidth = view.getMeasuredWidth();
             if (measuredWidth >= i) {
                 return i;

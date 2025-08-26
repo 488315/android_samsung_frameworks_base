@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MapsKt__MapsKt extends MapsKt__MapsJVMKt {
     public static Map emptyMap() {
@@ -22,7 +21,7 @@ public class MapsKt__MapsKt extends MapsKt__MapsJVMKt {
             MapWithDefaultImpl mapWithDefaultImpl = (MapWithDefaultImpl) map;
             Map map2 = mapWithDefaultImpl.map;
             Object obj2 = map2.get(obj);
-            return (obj2 != null || map2.containsKey(obj)) ? obj2 : mapWithDefaultImpl.f131default.mo779invoke(obj);
+            return (obj2 != null || map2.containsKey(obj)) ? obj2 : mapWithDefaultImpl.f131default.mo781invoke(obj);
         }
         Object obj3 = map.get(obj);
         if (obj3 != null || map.containsKey(obj)) {
@@ -32,9 +31,9 @@ public class MapsKt__MapsKt extends MapsKt__MapsJVMKt {
     }
 
     public static HashMap hashMapOf(Pair... pairArr) {
-        HashMap hashMap = new HashMap(MapsKt__MapsJVMKt.mapCapacity(pairArr.length));
-        putAll(hashMap, pairArr);
-        return hashMap;
+        HashMap map = new HashMap(MapsKt__MapsJVMKt.mapCapacity(pairArr.length));
+        putAll(map, pairArr);
+        return map;
     }
 
     public static Map mapOf(Pair... pairArr) {

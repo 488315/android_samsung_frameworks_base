@@ -70,7 +70,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                 DeviceInjectorSessionImpl.this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$StopDrainListener$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DeviceInjectorSessionImpl.StopDrainListener.this.lambda$onDrained$0();
+                        this.f$0.lambda$onDrained$0();
                     }
                 });
             }
@@ -114,14 +114,14 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                         this.mInjectorSession.asBinder().unlinkToDeath(this, 0);
                     }
                     taskSingleDrainer = this.mPendingDrainer;
-                } catch (Throwable th) {
-                    this.mPendingDrainer.beginDrain();
-                    throw th;
+                } catch (RemoteException unused) {
+                    taskSingleDrainer = this.mPendingDrainer;
                 }
-            } catch (RemoteException unused) {
-                taskSingleDrainer = this.mPendingDrainer;
+                taskSingleDrainer.beginDrain();
+            } catch (Throwable th) {
+                this.mPendingDrainer.beginDrain();
+                throw th;
             }
-            taskSingleDrainer.beginDrain();
         }
     }
 
@@ -162,14 +162,14 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             Runnable runnable = new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DeviceInjectorSessionImpl.this.lambda$binderDied$0();
+                    this.f$0.lambda$binderDied$0();
                 }
             };
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(runnable);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -208,27 +208,27 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                 return;
             }
             this.mInjectorSession = iDeviceInjectorSession;
-            IBinder asBinder = iDeviceInjectorSession.asBinder();
-            if (asBinder == null) {
+            IBinder iBinderAsBinder = iDeviceInjectorSession.asBinder();
+            if (iBinderAsBinder == null) {
                 Log.e(TAG, "The device injector session has encountered a serious error");
                 scheduleNotifyError(0);
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    asBinder.linkToDeath(this, 0);
+                    iBinderAsBinder.linkToDeath(this, 0);
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            DeviceInjectorSessionImpl.this.lambda$setRemoteInjectorSession$1();
+                            this.f$0.lambda$setRemoteInjectorSession$1();
                         }
                     });
                 } catch (RemoteException unused) {
                     scheduleNotifyError(0);
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -249,16 +249,16 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             this.mLastPackageName = str;
             this.mLastTargetId = str2;
             this.mLastSourceId = str3;
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DeviceInjectorSessionImpl.this.lambda$onInjectionStarted$2(str, str2, str3);
+                        this.f$0.lambda$onInjectionStarted$2(str, str2, str3);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -278,16 +278,16 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                 this.mStopDrainer.taskFinished();
             }
             this.mInjectionStarted = false;
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DeviceInjectorSessionImpl.this.lambda$onInjectionStopped$3(str, str2, str3);
+                        this.f$0.lambda$onInjectionStopped$3(str, str2, str3);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -308,16 +308,16 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             this.mLastPackageName = str;
             this.mLastTargetId = str2;
             this.mLastSourceId = "";
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DeviceInjectorSessionImpl.this.lambda$onInjectionPendingStarted$4(str, str2);
+                        this.f$0.lambda$onInjectionPendingStarted$4(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -337,16 +337,16 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                 this.mPendingDrainer.taskFinished();
             }
             this.mInjectionPending = false;
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DeviceInjectorSessionImpl.this.lambda$onInjectionPendingStopped$5(str, str2);
+                        this.f$0.lambda$onInjectionPendingStopped$5(str, str2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -373,7 +373,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
     }
 
     private void scheduleNotifyError(int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$$ExternalSyntheticLambda2
                 @Override // java.util.function.BiConsumer
@@ -382,7 +382,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                 }
             }, this, Integer.valueOf(i)).recycleOnUse());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -452,7 +452,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
 
         private <T> T executeWithCleanIdentity(final Callable<T> callable) {
             final CompletableFuture completableFuture = new CompletableFuture();
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 BINDER_EXECUTOR.execute(new Runnable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
@@ -467,7 +467,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
                     throw android.util.ExceptionUtils.propagate(th);
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -489,9 +489,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             return (String) executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda5
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    String lambda$open$1;
-                    lambda$open$1 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$open$1(str, i);
-                    return lambda$open$1;
+                    return this.f$0.lambda$open$1(str, i);
                 }
             });
         }
@@ -513,9 +511,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             return (CameraMetadataNative) executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda3
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    CameraMetadataNative lambda$getCameraCharacteristic$2;
-                    lambda$getCameraCharacteristic$2 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$getCameraCharacteristic$2(characteristicBuilderImpl);
-                    return lambda$getCameraCharacteristic$2;
+                    return this.f$0.lambda$getCameraCharacteristic$2(characteristicBuilderImpl);
                 }
             });
         }
@@ -531,9 +527,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             return ((Integer) executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda0
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Integer lambda$createStream$3;
-                    lambda$createStream$3 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$createStream$3(surface);
-                    return lambda$createStream$3;
+                    return this.f$0.lambda$createStream$3(surface);
                 }
             })).intValue();
         }
@@ -548,9 +542,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda4
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Object lambda$deleteStream$4;
-                    lambda$deleteStream$4 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$deleteStream$4(i);
-                    return lambda$deleteStream$4;
+                    return this.f$0.lambda$deleteStream$4(i);
                 }
             });
         }
@@ -577,9 +569,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             return (CameraMetadataNative) executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda7
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    CameraMetadataNative lambda$createDefaultRequest$5;
-                    lambda$createDefaultRequest$5 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$createDefaultRequest$5(builder);
-                    return lambda$createDefaultRequest$5;
+                    return this.f$0.lambda$createDefaultRequest$5(builder);
                 }
             });
         }
@@ -595,9 +585,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda9
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Object lambda$submitRequest$6;
-                    lambda$submitRequest$6 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$submitRequest$6(builder, iArr, z);
-                    return lambda$submitRequest$6;
+                    return this.f$0.lambda$submitRequest$6(builder, iArr, z);
                 }
             });
         }
@@ -613,9 +601,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda1
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Object lambda$clearRequest$7;
-                    lambda$clearRequest$7 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$clearRequest$7();
-                    return lambda$clearRequest$7;
+                    return this.f$0.lambda$clearRequest$7();
                 }
             });
         }
@@ -631,9 +617,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda8
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Object lambda$setCallback$8;
-                    lambda$setCallback$8 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$setCallback$8(iRemoteDeviceCallback);
-                    return lambda$setCallback$8;
+                    return this.f$0.lambda$setCallback$8(iRemoteDeviceCallback);
                 }
             });
         }
@@ -672,9 +656,7 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             executeWithCleanIdentity(new Callable() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$DeviceInjectorRemoteDevice$$ExternalSyntheticLambda2
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    Object lambda$close$9;
-                    lambda$close$9 = DeviceInjectorSessionImpl.DeviceInjectorRemoteDevice.this.lambda$close$9();
-                    return lambda$close$9;
+                    return this.f$0.lambda$close$9();
                 }
             });
         }
@@ -922,13 +904,15 @@ public class DeviceInjectorSessionImpl extends DeviceInjectorSession implements 
             this.mStreamingSizes.stream().forEach(new Consumer() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$CharacteristicBuilderImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    arrayList.add(new StreamConfiguration(35, r1.getWidth(), ((Size) obj).getHeight(), false));
+                    Size size = (Size) obj;
+                    arrayList.add(new StreamConfiguration(35, size.getWidth(), size.getHeight(), false));
                 }
             });
             this.mCaptureSizes.stream().forEach(new Consumer() { // from class: android.hardware.camera2.impl.DeviceInjectorSessionImpl$CharacteristicBuilderImpl$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    arrayList.add(new StreamConfiguration(35, r1.getWidth(), ((Size) obj).getHeight(), true));
+                    Size size = (Size) obj;
+                    arrayList.add(new StreamConfiguration(35, size.getWidth(), size.getHeight(), true));
                 }
             });
             cameraMetadataNative.set((CameraCharacteristics.Key<CameraCharacteristics.Key<StreamConfiguration[]>>) CameraCharacteristics.SCALER_AVAILABLE_STREAM_CONFIGURATIONS, (CameraCharacteristics.Key<StreamConfiguration[]>) arrayList.toArray(new StreamConfiguration[0]));

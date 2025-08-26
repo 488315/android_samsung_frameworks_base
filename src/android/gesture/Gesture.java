@@ -27,21 +27,21 @@ public class Gesture implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Gesture createFromParcel(Parcel parcel) {
-            Gesture gesture;
-            long readLong = parcel.readLong();
+            Gesture gestureDeserialize;
+            long j = parcel.readLong();
             DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(parcel.createByteArray()));
             try {
                 try {
-                    gesture = Gesture.deserialize(dataInputStream);
+                    gestureDeserialize = Gesture.deserialize(dataInputStream);
                 } catch (IOException e) {
                     Log.e(GestureConstants.LOG_TAG, "Error reading Gesture from parcel:", e);
                     GestureUtils.closeStream(dataInputStream);
-                    gesture = null;
+                    gestureDeserialize = null;
                 }
-                if (gesture != null) {
-                    gesture.mGestureID = readLong;
+                if (gestureDeserialize != null) {
+                    gestureDeserialize.mGestureID = j;
                 }
-                return gesture;
+                return gestureDeserialize;
             } finally {
                 GestureUtils.closeStream(dataInputStream);
             }
@@ -141,8 +141,8 @@ public class Gesture implements Parcelable {
     }
 
     public Bitmap toBitmap(int i, int i2, int i3, int i4, int i5) {
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         float f = i3;
         canvas.translate(f, f);
         Paint paint = new Paint();
@@ -159,12 +159,12 @@ public class Gesture implements Parcelable {
             int i7 = i3 * 2;
             canvas.drawPath(arrayList.get(i6).toPath(i - i7, i2 - i7, i4), paint);
         }
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public Bitmap toBitmap(int i, int i2, int i3, int i4) {
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
@@ -177,18 +177,18 @@ public class Gesture implements Parcelable {
         RectF rectF = new RectF();
         path.computeBounds(rectF, true);
         int i5 = i3 * 2;
-        float width = (i - i5) / rectF.width();
-        float height = (i2 - i5) / rectF.height();
-        if (width > height) {
-            width = height;
+        float fWidth = (i - i5) / rectF.width();
+        float fHeight = (i2 - i5) / rectF.height();
+        if (fWidth > fHeight) {
+            fWidth = fHeight;
         }
-        paint.setStrokeWidth(2.0f / width);
-        path.offset((-rectF.left) + ((i - (rectF.width() * width)) / 2.0f), (-rectF.top) + ((i2 - (rectF.height() * width)) / 2.0f));
+        paint.setStrokeWidth(2.0f / fWidth);
+        path.offset((-rectF.left) + ((i - (rectF.width() * fWidth)) / 2.0f), (-rectF.top) + ((i2 - (rectF.height() * fWidth)) / 2.0f));
         float f = i3;
         canvas.translate(f, f);
-        canvas.scale(width, width);
+        canvas.scale(fWidth, fWidth);
         canvas.drawPath(path, paint);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     void serialize(DataOutputStream dataOutputStream) throws IOException {
@@ -204,8 +204,8 @@ public class Gesture implements Parcelable {
     static Gesture deserialize(DataInputStream dataInputStream) throws IOException {
         Gesture gesture = new Gesture();
         gesture.mGestureID = dataInputStream.readLong();
-        int readInt = dataInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = dataInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             gesture.addStroke(GestureStroke.deserialize(dataInputStream));
         }
         return gesture;

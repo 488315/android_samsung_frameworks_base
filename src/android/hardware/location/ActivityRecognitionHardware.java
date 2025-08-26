@@ -60,9 +60,9 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     private ActivityRecognitionHardware(Context context) {
         nativeInitialize();
         this.mContext = context;
-        String[] fetchSupportedActivities = fetchSupportedActivities();
-        this.mSupportedActivities = fetchSupportedActivities;
-        int length = fetchSupportedActivities.length;
+        String[] strArrFetchSupportedActivities = fetchSupportedActivities();
+        this.mSupportedActivities = strArrFetchSupportedActivities;
+        int length = strArrFetchSupportedActivities.length;
         this.mSupportedActivitiesCount = length;
         this.mSupportedActivitiesEnabledEvents = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, length, 3);
     }
@@ -83,31 +83,31 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public String[] getSupportedActivities() {
+    public String[] getSupportedActivities() throws SecurityException {
         super.getSupportedActivities_enforcePermission();
         return this.mSupportedActivities;
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean isActivitySupported(String str) {
+    public boolean isActivitySupported(String str) throws SecurityException {
         super.isActivitySupported_enforcePermission();
         return getActivityType(str) != -1;
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean registerSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) {
+    public boolean registerSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws SecurityException {
         super.registerSink_enforcePermission();
         return this.mSinks.register(iActivityRecognitionHardwareSink);
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean unregisterSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) {
+    public boolean unregisterSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws SecurityException {
         super.unregisterSink_enforcePermission();
         return this.mSinks.unregister(iActivityRecognitionHardwareSink);
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean enableActivityEvent(String str, int i, long j) {
+    public boolean enableActivityEvent(String str, int i, long j) throws SecurityException {
         super.enableActivityEvent_enforcePermission();
         int activityType = getActivityType(str);
         if (activityType == -1 || nativeEnableActivityEvent(activityType, i, j) != 0) {
@@ -118,7 +118,7 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean disableActivityEvent(String str, int i) {
+    public boolean disableActivityEvent(String str, int i) throws SecurityException {
         super.disableActivityEvent_enforcePermission();
         int activityType = getActivityType(str);
         if (activityType == -1 || nativeDisableActivityEvent(activityType, i) != 0) {
@@ -129,7 +129,7 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     @Override // android.hardware.location.IActivityRecognitionHardware
-    public boolean flush() {
+    public boolean flush() throws SecurityException {
         super.flush_enforcePermission();
         return nativeFlush() == 0;
     }
@@ -149,8 +149,8 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
             activityRecognitionEventArr[i] = new ActivityRecognitionEvent(getActivityName(event.activity), event.type, event.timestamp);
         }
         ActivityChangedEvent activityChangedEvent = new ActivityChangedEvent(activityRecognitionEventArr);
-        int beginBroadcast = this.mSinks.beginBroadcast();
-        for (int i2 = 0; i2 < beginBroadcast; i2++) {
+        int iBeginBroadcast = this.mSinks.beginBroadcast();
+        for (int i2 = 0; i2 < iBeginBroadcast; i2++) {
             try {
                 this.mSinks.getBroadcastItem(i2).onActivityChanged(activityChangedEvent);
             } catch (RemoteException e) {
@@ -189,8 +189,8 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     private String[] fetchSupportedActivities() {
-        String[] nativeGetSupportedActivities = nativeGetSupportedActivities();
-        return nativeGetSupportedActivities != null ? nativeGetSupportedActivities : new String[0];
+        String[] strArrNativeGetSupportedActivities = nativeGetSupportedActivities();
+        return strArrNativeGetSupportedActivities != null ? strArrNativeGetSupportedActivities : new String[0];
     }
 
     private class SinkList extends RemoteCallbackList<IActivityRecognitionHardwareSink> {
@@ -217,9 +217,9 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
             if (ActivityRecognitionHardware.this.mSupportedActivitiesEnabledEvents[i][i2] != 1) {
                 return;
             }
-            int nativeDisableActivityEvent = ActivityRecognitionHardware.this.nativeDisableActivityEvent(i, i2);
+            int iNativeDisableActivityEvent = ActivityRecognitionHardware.this.nativeDisableActivityEvent(i, i2);
             ActivityRecognitionHardware.this.mSupportedActivitiesEnabledEvents[i][i2] = 0;
-            Log.e(ActivityRecognitionHardware.TAG, String.format("DisableActivityEvent: activityType=%d, eventType=%d, result=%d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(nativeDisableActivityEvent)));
+            Log.e(ActivityRecognitionHardware.TAG, String.format("DisableActivityEvent: activityType=%d, eventType=%d, result=%d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(iNativeDisableActivityEvent)));
         }
     }
 }

@@ -47,9 +47,9 @@ public class AndroidKeyStoreKeyFactorySpi extends KeyFactorySpi {
             }
             throw new InvalidKeySpecException("Cannot export key material of public key in PKCS#8 format. Only X.509 format (X509EncodedKeySpec) supported for public keys.");
         }
-        boolean equals = RSAPublicKeySpec.class.equals(cls);
+        boolean zEquals = RSAPublicKeySpec.class.equals(cls);
         String str = VolumeInfo.ID_PRIVATE_INTERNAL;
-        if (equals) {
+        if (zEquals) {
             if (key instanceof AndroidKeyStoreRSAPublicKey) {
                 AndroidKeyStoreRSAPublicKey androidKeyStoreRSAPublicKey = (AndroidKeyStoreRSAPublicKey) key;
                 return new RSAPublicKeySpec(androidKeyStoreRSAPublicKey.getModulus(), androidKeyStoreRSAPublicKey.getPublicExponent());

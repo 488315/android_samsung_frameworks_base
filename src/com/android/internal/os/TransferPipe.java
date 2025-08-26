@@ -64,20 +64,20 @@ public class TransferPipe implements Runnable, Closeable {
     }
 
     public static byte[] dumpAsync(IBinder iBinder, String... strArr) throws IOException, RemoteException {
-        ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
+        ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe = ParcelFileDescriptor.createPipe();
         try {
-            dumpAsync(iBinder, createPipe[1].getFileDescriptor(), strArr);
-            createPipe[1].close();
-            createPipe[1] = null;
+            dumpAsync(iBinder, parcelFileDescriptorArrCreatePipe[1].getFileDescriptor(), strArr);
+            parcelFileDescriptorArrCreatePipe[1].close();
+            parcelFileDescriptorArrCreatePipe[1] = null;
             byte[] bArr = new byte[4096];
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             try {
-                FileInputStream fileInputStream = new FileInputStream(createPipe[0].getFileDescriptor());
+                FileInputStream fileInputStream = new FileInputStream(parcelFileDescriptorArrCreatePipe[0].getFileDescriptor());
                 while (true) {
                     try {
-                        int read = fileInputStream.read(bArr);
-                        if (read != -1) {
-                            byteArrayOutputStream.write(bArr, 0, read);
+                        int i = fileInputStream.read(bArr);
+                        if (i != -1) {
+                            byteArrayOutputStream.write(bArr, 0, i);
                         } else {
                             fileInputStream.close();
                             byte[] byteArray = byteArrayOutputStream.toByteArray();
@@ -90,8 +90,8 @@ public class TransferPipe implements Runnable, Closeable {
             } finally {
             }
         } finally {
-            createPipe[0].close();
-            IoUtils.closeQuietly(createPipe[1]);
+            parcelFileDescriptorArrCreatePipe[0].close();
+            IoUtils.closeQuietly(parcelFileDescriptorArrCreatePipe[1]);
         }
     }
 
@@ -155,8 +155,18 @@ public class TransferPipe implements Runnable, Closeable {
         go(fileDescriptor, 5000L);
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x0039, code lost:
+    
+        if (r3 != null) goto L19;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0047, code lost:
+    
+        throw new java.io.IOException(r2.mFailure);
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void go(FileDescriptor fileDescriptor, long j) throws IOException {
-        String str;
         try {
             synchronized (this) {
                 this.mOutFd = fileDescriptor;
@@ -164,22 +174,19 @@ public class TransferPipe implements Runnable, Closeable {
                 closeFd(1);
                 this.mThread.start();
                 while (true) {
-                    str = this.mFailure;
+                    String str = this.mFailure;
                     if (str != null || this.mComplete) {
                         break;
                     }
-                    long uptimeMillis = this.mEndTime - SystemClock.uptimeMillis();
-                    if (uptimeMillis <= 0) {
+                    long jUptimeMillis = this.mEndTime - SystemClock.uptimeMillis();
+                    if (jUptimeMillis <= 0) {
                         this.mThread.interrupt();
                         throw new IOException("Timeout");
                     }
                     try {
-                        wait(uptimeMillis);
+                        wait(jUptimeMillis);
                     } catch (InterruptedException unused) {
                     }
-                }
-                if (str != null) {
-                    throw new IOException(this.mFailure);
                 }
             }
         } finally {
@@ -215,7 +222,7 @@ public class TransferPipe implements Runnable, Closeable {
     }
 
     @Override // java.lang.Runnable
-    public void run() {
+    public void run() throws IOException {
         byte[] bArr = new byte[1024];
         synchronized (this) {
             ParcelFileDescriptor readFd = getReadFd();
@@ -230,8 +237,8 @@ public class TransferPipe implements Runnable, Closeable {
             boolean z = true;
             while (true) {
                 try {
-                    int read = fileInputStream.read(bArr);
-                    if (read <= 0) {
+                    int i = fileInputStream.read(bArr);
+                    if (i <= 0) {
                         this.mThread.isInterrupted();
                         synchronized (this) {
                             this.mComplete = true;
@@ -240,39 +247,39 @@ public class TransferPipe implements Runnable, Closeable {
                         return;
                     }
                     if (bytes == null) {
-                        newOutputStream.write(bArr, 0, read);
+                        newOutputStream.write(bArr, 0, i);
                     } else {
-                        int i = 0;
                         int i2 = 0;
-                        while (i < read) {
-                            if (bArr[i] != 10) {
-                                if (i > i2) {
-                                    newOutputStream.write(bArr, i2, i - i2);
+                        int i3 = 0;
+                        while (i2 < i) {
+                            if (bArr[i2] != 10) {
+                                if (i2 > i3) {
+                                    newOutputStream.write(bArr, i3, i2 - i3);
                                 }
                                 if (z) {
                                     newOutputStream.write(bytes);
                                     z = false;
                                 }
-                                int i3 = i;
+                                int i4 = i2;
                                 do {
-                                    i3++;
-                                    if (i3 >= read) {
+                                    i4++;
+                                    if (i4 >= i) {
                                         break;
                                     }
-                                } while (bArr[i3] != 10);
-                                if (i3 < read) {
-                                    i2 = i;
-                                    i = i3;
+                                } while (bArr[i4] != 10);
+                                if (i4 < i) {
+                                    i3 = i2;
+                                    i2 = i4;
                                     z = true;
                                 } else {
-                                    i2 = i;
-                                    i = i3;
+                                    i3 = i2;
+                                    i2 = i4;
                                 }
                             }
-                            i++;
+                            i2++;
                         }
-                        if (read > i2) {
-                            newOutputStream.write(bArr, i2, read - i2);
+                        if (i > i3) {
+                            newOutputStream.write(bArr, i3, i - i3);
                         }
                     }
                 } catch (IOException e) {

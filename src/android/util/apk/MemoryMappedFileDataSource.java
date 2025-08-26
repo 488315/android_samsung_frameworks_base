@@ -1,8 +1,11 @@
 package android.util.apk;
 
+import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import java.io.FileDescriptor;
+import java.io.IOException;
+import java.nio.DirectByteBuffer;
 
 /* loaded from: classes4.dex */
 class MemoryMappedFileDataSource implements DataSource {
@@ -22,79 +25,49 @@ class MemoryMappedFileDataSource implements DataSource {
         return this.mSize;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0067 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0067 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // android.util.apk.DataSource
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void feedIntoDataDigester(android.util.apk.DataDigester r20, long r21, int r23) throws java.io.IOException, java.security.DigestException {
-        /*
-            r19 = this;
-            r0 = r19
-            java.lang.String r1 = "Failed to mmap "
-            long r2 = r0.mFilePosition
-            long r2 = r2 + r21
-            long r4 = android.util.apk.MemoryMappedFileDataSource.MEMORY_PAGE_SIZE_BYTES
-            long r6 = r2 / r4
-            long r15 = r6 * r4
-            long r2 = r2 - r15
-            int r2 = (int) r2
-            int r3 = r23 + r2
-            long r10 = (long) r3
-            r3 = 0
-            int r12 = android.system.OsConstants.PROT_READ     // Catch: java.lang.Throwable -> L46 android.system.ErrnoException -> L49
-            int r5 = android.system.OsConstants.MAP_SHARED     // Catch: java.lang.Throwable -> L46 android.system.ErrnoException -> L49
-            int r6 = android.system.OsConstants.MAP_POPULATE     // Catch: java.lang.Throwable -> L46 android.system.ErrnoException -> L49
-            r13 = r5 | r6
-            java.io.FileDescriptor r14 = r0.mFd     // Catch: java.lang.Throwable -> L46 android.system.ErrnoException -> L49
-            r8 = 0
-            long r5 = android.system.Os.mmap(r8, r10, r12, r13, r14, r15)     // Catch: java.lang.Throwable -> L46 android.system.ErrnoException -> L49
-            java.nio.DirectByteBuffer r12 = new java.nio.DirectByteBuffer     // Catch: android.system.ErrnoException -> L44 java.lang.Throwable -> L62
-            long r7 = (long) r2     // Catch: android.system.ErrnoException -> L44 java.lang.Throwable -> L62
-            long r14 = r5 + r7
-            java.io.FileDescriptor r0 = r0.mFd     // Catch: android.system.ErrnoException -> L44 java.lang.Throwable -> L62
-            r17 = 0
-            r18 = 1
-            r13 = r23
-            r16 = r0
-            r12.<init>(r13, r14, r16, r17, r18)     // Catch: android.system.ErrnoException -> L44 java.lang.Throwable -> L62
-            r0 = r20
-            r0.consume(r12)     // Catch: android.system.ErrnoException -> L44 java.lang.Throwable -> L62
-            int r0 = (r5 > r3 ? 1 : (r5 == r3 ? 0 : -1))
-            if (r0 == 0) goto L43
-            android.system.Os.munmap(r5, r10)     // Catch: android.system.ErrnoException -> L43
-        L43:
-            return
-        L44:
-            r0 = move-exception
-            goto L4b
-        L46:
-            r0 = move-exception
-            r5 = r3
-            goto L63
-        L49:
-            r0 = move-exception
-            r5 = r3
-        L4b:
-            java.io.IOException r2 = new java.io.IOException     // Catch: java.lang.Throwable -> L62
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L62
-            r7.<init>(r1)     // Catch: java.lang.Throwable -> L62
-            r7.append(r10)     // Catch: java.lang.Throwable -> L62
-            java.lang.String r1 = " bytes"
-            r7.append(r1)     // Catch: java.lang.Throwable -> L62
-            java.lang.String r1 = r7.toString()     // Catch: java.lang.Throwable -> L62
-            r2.<init>(r1, r0)     // Catch: java.lang.Throwable -> L62
-            throw r2     // Catch: java.lang.Throwable -> L62
-        L62:
-            r0 = move-exception
-        L63:
-            int r1 = (r5 > r3 ? 1 : (r5 == r3 ? 0 : -1))
-            if (r1 == 0) goto L6a
-            android.system.Os.munmap(r5, r10)     // Catch: android.system.ErrnoException -> L6a
-        L6a:
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.apk.MemoryMappedFileDataSource.feedIntoDataDigester(android.util.apk.DataDigester, long, int):void");
+    public void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws Throwable {
+        long j2 = this.mFilePosition + j;
+        long j3 = MEMORY_PAGE_SIZE_BYTES;
+        long j4 = (j2 / j3) * j3;
+        int i2 = (int) (j2 - j4);
+        long j5 = i + i2;
+        try {
+            try {
+                long jMmap = Os.mmap(0L, j5, OsConstants.PROT_READ, OsConstants.MAP_SHARED | OsConstants.MAP_POPULATE, this.mFd, j4);
+                try {
+                    dataDigester.consume(new DirectByteBuffer(i, jMmap + i2, this.mFd, (Runnable) null, true));
+                    if (jMmap != 0) {
+                        try {
+                            Os.munmap(jMmap, j5);
+                        } catch (ErrnoException unused) {
+                        }
+                    }
+                } catch (ErrnoException e) {
+                    e = e;
+                    throw new IOException("Failed to mmap " + j5 + " bytes", e);
+                }
+            } catch (Throwable th) {
+                th = th;
+                if (0 != 0) {
+                    try {
+                        Os.munmap(0L, j5);
+                    } catch (ErrnoException unused2) {
+                    }
+                }
+                throw th;
+            }
+        } catch (ErrnoException e2) {
+            e = e2;
+        } catch (Throwable th2) {
+            th = th2;
+            if (0 != 0) {
+            }
+            throw th;
+        }
     }
 }

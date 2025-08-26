@@ -18,9 +18,12 @@ import com.sec.android.allshare.iface.IHandlerHolder;
 import com.sec.android.allshare.iface.message.AllShareAction;
 import com.sec.android.allshare.iface.message.AllShareEvent;
 import com.sec.android.allshare.iface.message.AllShareKey;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHolder {
@@ -47,9 +50,9 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         private HashMap<String, AVPlayer.AVPlayerState> mAVStateMap;
 
         {
-            HashMap<String, AVPlayer.AVPlayerState> hashMap = new HashMap<>();
-            this.mAVStateMap = hashMap;
-            hashMap.put(AllShareEvent.EVENT_RENDERER_STATE_BUFFERING, AVPlayer.AVPlayerState.BUFFERING);
+            HashMap<String, AVPlayer.AVPlayerState> map = new HashMap<>();
+            this.mAVStateMap = map;
+            map.put(AllShareEvent.EVENT_RENDERER_STATE_BUFFERING, AVPlayer.AVPlayerState.BUFFERING);
             this.mAVStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_PAUSED, AVPlayer.AVPlayerState.PAUSED);
             this.mAVStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_STOPPED, AVPlayer.AVPlayerState.STOPPED);
             this.mAVStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_PLAYING, AVPlayer.AVPlayerState.PLAYING);
@@ -62,7 +65,7 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         public void handleEventMessage(CVMessage cVMessage) {
             try {
                 Bundle bundle = cVMessage.getBundle();
-                ERROR stringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+                ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
                 String actionID = cVMessage.getActionID();
                 AVPlayer.AVPlayerState aVPlayerState = this.mAVStateMap.get(actionID);
                 if (aVPlayerState == null) {
@@ -70,7 +73,7 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
                     if (actionID == null || string == null) {
                         return;
                     }
-                    notifyExtensionEvent(actionID, string, stringToEnum);
+                    notifyExtensionEvent(actionID, string, errorStringToEnum);
                     return;
                 }
                 if (aVPlayerState.equals(AVPlayer.AVPlayerState.CONTENT_CHANGED)) {
@@ -107,7 +110,7 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
                     DLog.d_api(AVPlayerImpl.TAG_CLASS, "do not notify CONTENT_CHANGED event, currentTrackUri is null");
                     return;
                 }
-                notifyEvent(aVPlayerState, stringToEnum);
+                notifyEvent(aVPlayerState, errorStringToEnum);
             } catch (Error e) {
                 DLog.w_api(AVPlayerImpl.TAG_CLASS, "handleEventMessage Error", e);
             } catch (Exception unused) {
@@ -150,45 +153,201 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
     };
     private AllShareResponseHandler mAllShareRespHandler = new AllShareResponseHandler(ServiceConnector.getMainLooper()) { // from class: com.samsung.android.allshare.AVPlayerImpl.2
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Code restructure failed: missing block: B:166:0x0258, code lost:
-        
-            if (r1.equals(com.sec.android.allshare.iface.message.AllShareAction.ACTION_AV_PLAYER_MOVE_360_VIEW) == false) goto L124;
-         */
         /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+        /* JADX WARN: Removed duplicated region for block: B:124:0x020c  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0075  */
+        /* JADX WARN: Removed duplicated region for block: B:96:0x018c  */
         @Override // com.samsung.android.allshare.AllShareResponseHandler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void handleResponseMessage(com.sec.android.allshare.iface.CVMessage r19) {
-            /*
-                Method dump skipped, instructions count: 1024
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.allshare.AVPlayerImpl.AnonymousClass2.handleResponseMessage(com.sec.android.allshare.iface.CVMessage):void");
+        public void handleResponseMessage(CVMessage cVMessage) throws XmlPullParserException, IOException {
+            String actionID = cVMessage.getActionID();
+            Bundle bundle = cVMessage.getBundle();
+            if (actionID == null || bundle == null) {
+                return;
+            }
+            ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+            boolean z = false;
+            if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_URI) || actionID.equals(AllShareAction.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_FILEPATH_WITH_METADATA) || actionID.equals(AllShareAction.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_FILEPATH) || actionID.equals(AllShareAction.ACTION_AV_PLAYER_PLAY_URI) || actionID.equals(AllShareAction.ACTION_AV_PLAYER_PLAY)) {
+                if (errorStringToEnum.equals(ERROR.SUCCESS)) {
+                    AVPlayerImpl.this.mContentChangedNotified = false;
+                } else {
+                    AVPlayerImpl.this.mPlayingContentUris.clear();
+                }
+            }
+            if (AVPlayerImpl.this.mAVPlaybackResponseListener != null) {
+                actionID.hashCode();
+                switch (actionID) {
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_URI":
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_FILEPATH_WITH_METADATA":
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_FILEPATH":
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY_URI":
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY":
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PLAY_WEB_CONTENTS":
+                        notifyPlaybackEvent(bundle, errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_RESUME":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onResumeResponseReceived(errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_GET_MEDIA_INFO":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onGetMediaInfoResponseReceived(ERROR.SUCCESS.equals(errorStringToEnum) ? new MediaInfoImpl(bundle) : null, errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_SEEK":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onSeekResponseReceived(bundle.getLong(AllShareKey.BUNDLE_LONG_POSITION), errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_STOP":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onStopResponseReceived(errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_PAUSE":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onPauseResponseReceived(errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_GET_PLAYER_STATE":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onGetStateResponseReceived(AVPlayer.AVPlayerState.stringToEnum(bundle.getString(AllShareKey.BUNDLE_STRING_AV_PLAER_STATE)), errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_PLAY_POSITION":
+                        AVPlayerImpl.this.mAVPlaybackResponseListener.onGetPlayPositionResponseReceived(bundle.getLong(AllShareKey.BUNDLE_LONG_POSITION), errorStringToEnum);
+                        break;
+                }
+            }
+            if (AVPlayerImpl.this.mAVPlayerVolumeResponseListener != null) {
+                actionID.hashCode();
+                switch (actionID) {
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_SET_MUTE":
+                        AVPlayerImpl.this.mAVPlayerVolumeResponseListener.onSetMuteResponseReceived(bundle.getBoolean(AllShareKey.BUNDLE_BOOLEAN_MUTE), errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_GET_VOLUME":
+                        AVPlayerImpl.this.mAVPlayerVolumeResponseListener.onGetVolumeResponseReceived(bundle.getInt(AllShareKey.BUNDLE_INT_VOLUME), errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_GET_MUTE":
+                        AVPlayerImpl.this.mAVPlayerVolumeResponseListener.onGetMuteResponseReceived(bundle.getBoolean(AllShareKey.BUNDLE_BOOLEAN_MUTE), errorStringToEnum);
+                        break;
+                    case "com.sec.android.allshare.action.ACTION_AV_PLAYER_REQUEST_SET_VOLUME":
+                        AVPlayerImpl.this.mAVPlayerVolumeResponseListener.onSetVolumeResponseReceived(bundle.getInt(AllShareKey.BUNDLE_INT_VOLUME), errorStringToEnum);
+                        break;
+                }
+            }
+            if (AVPlayerImpl.this.mAVPlayerExtensionResponseListener != null) {
+                actionID.hashCode();
+                switch (actionID.hashCode()) {
+                    case -2046630951:
+                        if (!actionID.equals(AllShareAction.ACTION_AV_PLAYER_MOVE_360_VIEW)) {
+                            z = -1;
+                            break;
+                        }
+                        break;
+                    case -1826863324:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_ORIGIN_360_VIEW)) {
+                            z = true;
+                            break;
+                        }
+                        break;
+                    case -1717516936:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_CONTROL_CAPTION)) {
+                            z = 2;
+                            break;
+                        }
+                        break;
+                    case -1031151239:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_GET_ASPECT_RATIO)) {
+                            z = 3;
+                            break;
+                        }
+                        break;
+                    case 850714135:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_ZOOM_360_VIEW)) {
+                            z = 4;
+                            break;
+                        }
+                        break;
+                    case 933211939:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_GET_CAPTION_STATE)) {
+                            z = 5;
+                            break;
+                        }
+                        break;
+                    case 1432373229:
+                        if (actionID.equals(AllShareAction.ACTION_AV_PLAYER_SET_ASPECT_RATIO)) {
+                            z = 6;
+                            break;
+                        }
+                        break;
+                }
+                switch (z) {
+                    case false:
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onMove360ViewResponseReceived(errorStringToEnum);
+                        break;
+                    case true:
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onReset360ViewResponseReceived(errorStringToEnum);
+                        break;
+                    case true:
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onControlCaptionResponseReceived(errorStringToEnum);
+                        break;
+                    case true:
+                        String string = bundle.getString(AllShareKey.BUNDLE_STRING_ASPECT_RATIO);
+                        DLog.i_api(AVPlayerImpl.TAG_CLASS, "ACTION_AV_PLAYER_GET_ASPECT_RATIO : " + string);
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onAspectRatioStateResponseReceived(string, errorStringToEnum);
+                        break;
+                    case true:
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onZoom360ViewResponseReceived(errorStringToEnum);
+                        break;
+                    case true:
+                        String string2 = bundle.getString(AllShareKey.BUNDLE_STRING_CAPTION_CAPTIONS);
+                        String string3 = bundle.getString(AllShareKey.BUNDLE_STRING_CAPTION_ENABLEDCAPTIONS);
+                        List<Caption> caption = Caption.parseCaption(string2);
+                        List<Caption> caption2 = Caption.parseCaption(string3);
+                        ArrayList arrayList = new ArrayList();
+                        ArrayList arrayList2 = new ArrayList();
+                        if (caption != null) {
+                            for (Caption caption3 : caption) {
+                                String captionFilePathFromURI = AVPlayerImpl.this.getCaptionFilePathFromURI(caption3.getCaptionUri());
+                                if (captionFilePathFromURI != null && !captionFilePathFromURI.isEmpty()) {
+                                    caption3.setCaptionUri(captionFilePathFromURI);
+                                }
+                                arrayList.add(caption3);
+                                DLog.i_api(AVPlayerImpl.TAG_CLASS, "ACTION_AV_PLAYER_GET_CAPTION_STATE : [available caption]" + caption3.toString());
+                            }
+                        }
+                        if (caption2 != null) {
+                            for (Caption caption4 : caption2) {
+                                String captionFilePathFromURI2 = AVPlayerImpl.this.getCaptionFilePathFromURI(caption4.getCaptionUri());
+                                if (captionFilePathFromURI2 != null && !captionFilePathFromURI2.isEmpty()) {
+                                    caption4.setCaptionUri(captionFilePathFromURI2);
+                                }
+                                arrayList2.add(caption4);
+                                DLog.i_api(AVPlayerImpl.TAG_CLASS, "ACTION_AV_PLAYER_GET_CAPTION_STATE : [enabled caption]" + caption4.toString());
+                            }
+                        }
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onCaptionStateResponseReceived(arrayList, arrayList2, errorStringToEnum);
+                        break;
+                    case true:
+                        AVPlayerImpl.this.mAVPlayerExtensionResponseListener.onSetAspectRatioResponseReceived(errorStringToEnum);
+                        break;
+                }
+            }
         }
 
         private void notifyPlaybackEvent(Bundle bundle, ERROR error) {
             Bundle bundle2 = (Bundle) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM);
-            ContentInfo build = new ContentInfo.Builder().setStartingPosition(bundle.getLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION)).build();
-            Item fromBundle = ItemCreator.fromBundle(bundle2);
+            ContentInfo contentInfoBuild = new ContentInfo.Builder().setStartingPosition(bundle.getLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION)).build();
+            Item itemFromBundle = ItemCreator.fromBundle(bundle2);
             String string = bundle2.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY);
-            if (string != null && string.equals("WEB_CONTENT") && build != null) {
+            if (string != null && string.equals("WEB_CONTENT") && contentInfoBuild != null) {
                 ContentInfo.Builder builder = new ContentInfo.Builder();
-                builder.setStartingPosition((int) (build.getStartingPosition() / 1000));
-                build = builder.build();
+                builder.setStartingPosition((int) (contentInfoBuild.getStartingPosition() / 1000));
+                contentInfoBuild = builder.build();
             }
-            if (fromBundle == null) {
+            if (itemFromBundle == null) {
                 DLog.w_api(AVPlayerImpl.TAG_CLASS, "notifyPlaybackEvent : item is null");
-                AVPlayerImpl.this.mAVPlaybackResponseListener.onPlayResponseReceived(fromBundle, build, ERROR.ITEM_NOT_EXIST);
+                AVPlayerImpl.this.mAVPlaybackResponseListener.onPlayResponseReceived(itemFromBundle, contentInfoBuild, ERROR.ITEM_NOT_EXIST);
                 return;
             }
-            if (build != null) {
-                DLog.d_api(AVPlayerImpl.TAG_CLASS, "notifyPlaybackEvent : " + fromBundle + " position[" + build.getStartingPosition() + "]=" + error);
+            if (contentInfoBuild != null) {
+                DLog.d_api(AVPlayerImpl.TAG_CLASS, "notifyPlaybackEvent : " + itemFromBundle + " position[" + contentInfoBuild.getStartingPosition() + "]=" + error);
             } else {
-                DLog.d_api(AVPlayerImpl.TAG_CLASS, "notifyPlaybackEvent : " + fromBundle + " = " + error);
+                DLog.d_api(AVPlayerImpl.TAG_CLASS, "notifyPlaybackEvent : " + itemFromBundle + " = " + error);
             }
-            AVPlayerImpl.this.mAVPlaybackResponseListener.onPlayResponseReceived(fromBundle, build, error);
+            AVPlayerImpl.this.mAVPlaybackResponseListener.onPlayResponseReceived(itemFromBundle, contentInfoBuild, error);
         }
     };
 
@@ -334,14 +493,14 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
     private String parseUriFilePath(Uri uri) {
         Context context;
         ContentResolver contentResolver;
-        Cursor query;
-        if (uri != null && (context = ServiceConnector.getContext()) != null && (contentResolver = context.getContentResolver()) != null && (query = contentResolver.query(uri, null, null, null, null)) != null) {
-            if (query.moveToFirst()) {
-                String string = query.getString(1);
-                query.close();
+        Cursor cursorQuery;
+        if (uri != null && (context = ServiceConnector.getContext()) != null && (contentResolver = context.getContentResolver()) != null && (cursorQuery = contentResolver.query(uri, null, null, null, null)) != null) {
+            if (cursorQuery.moveToFirst()) {
+                String string = cursorQuery.getString(1);
+                cursorQuery.close();
                 return string;
             }
-            query.close();
+            cursorQuery.close();
         }
         return null;
     }
@@ -565,8 +724,8 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
             Bundle bundle2 = new Bundle();
             bundle2.putString("BUNDLE_STRING_ID", getID());
             cVMessage.setBundle(bundle2);
-            CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-            if (requestCVMSync != null && (bundle = requestCVMSync.getBundle()) != null) {
+            CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+            if (cVMessageRequestCVMSync != null && (bundle = cVMessageRequestCVMSync.getBundle()) != null) {
                 return AVPlayer.AVPlayerState.stringToEnum(bundle.getString(AllShareKey.BUNDLE_STRING_AV_PLAER_STATE));
             }
         }
@@ -725,15 +884,15 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
     }
 
     private void playWebContent(Uri uri, Item item, ContentInfo contentInfo, String str) {
-        ContentInfo contentInfo2;
+        ContentInfo contentInfoBuild;
         if (contentInfo != null) {
             ContentInfo.Builder builder = new ContentInfo.Builder();
             builder.setStartingPosition(contentInfo.getStartingPosition() * 1000);
-            contentInfo2 = builder.build();
+            contentInfoBuild = builder.build();
         } else {
-            contentInfo2 = null;
+            contentInfoBuild = null;
         }
-        playUri(uri, item, contentInfo2, str, AllShareAction.ACTION_AV_PLAYER_PLAY_URI);
+        playUri(uri, item, contentInfoBuild, str, AllShareAction.ACTION_AV_PLAYER_PLAY_URI);
     }
 
     private void playItem(Item item, ContentInfo contentInfo) {
@@ -743,10 +902,10 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         }
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_AV_PLAYER_PLAY);
-        Bundle extractBundle = extractBundle(item);
-        extractBundle.putString("BUNDLE_STRING_ID", getID());
-        extractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
-        cVMessage.setBundle(extractBundle);
+        Bundle bundleExtractBundle = extractBundle(item);
+        bundleExtractBundle.putString("BUNDLE_STRING_ID", getID());
+        bundleExtractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
+        cVMessage.setBundle(bundleExtractBundle);
         this.mAllShareConnector.requestCVMAsync(cVMessage, this.mAllShareRespHandler);
     }
 
@@ -758,12 +917,12 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         String title = item.getTitle();
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(str2);
-        Bundle extractBundle = extractBundle(item);
-        extractBundle.putString(AllShareKey.BUNDLE_STRING_TITLE, title);
-        extractBundle.putString("BUNDLE_STRING_ID", getID());
-        extractBundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_URI, uri);
-        extractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
-        cVMessage.setBundle(extractBundle);
+        Bundle bundleExtractBundle = extractBundle(item);
+        bundleExtractBundle.putString(AllShareKey.BUNDLE_STRING_TITLE, title);
+        bundleExtractBundle.putString("BUNDLE_STRING_ID", getID());
+        bundleExtractBundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_URI, uri);
+        bundleExtractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
+        cVMessage.setBundle(bundleExtractBundle);
         this.mAllShareConnector.requestCVMAsync(cVMessage, this.mAllShareRespHandler);
     }
 
@@ -775,11 +934,11 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         String title = item.getTitle();
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_AV_PLAYER_PLAY_LOCAL_CONTENS_FILEPATH_WITH_METADATA);
-        Bundle extractBundle = extractBundle(item);
-        extractBundle.putString(AllShareKey.BUNDLE_STRING_TITLE, title);
-        extractBundle.putString("BUNDLE_STRING_ID", getID());
-        extractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
-        cVMessage.setBundle(extractBundle);
+        Bundle bundleExtractBundle = extractBundle(item);
+        bundleExtractBundle.putString(AllShareKey.BUNDLE_STRING_TITLE, title);
+        bundleExtractBundle.putString("BUNDLE_STRING_ID", getID());
+        bundleExtractBundle.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
+        cVMessage.setBundle(bundleExtractBundle);
         this.mAllShareConnector.requestCVMAsync(cVMessage, this.mAllShareRespHandler);
     }
 
@@ -822,8 +981,8 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         Bundle bundle2 = new Bundle();
         bundle2.putString("BUNDLE_STRING_ID", getID());
         cVMessage.setBundle(bundle2);
-        CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-        if (requestCVMSync == null || (bundle = requestCVMSync.getBundle()) == null) {
+        CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+        if (cVMessageRequestCVMSync == null || (bundle = cVMessageRequestCVMSync.getBundle()) == null) {
             return false;
         }
         if (ERROR.NOT_SUPPORTED_FRAMEWORK_VERSION.enumToString().equals(bundle.getString("BUNDLE_ENUM_ERROR"))) {
@@ -888,8 +1047,8 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         Bundle bundle2 = new Bundle();
         bundle2.putString("BUNDLE_STRING_ID", getID());
         cVMessage.setBundle(bundle2);
-        CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-        if (requestCVMSync == null || (bundle = requestCVMSync.getBundle()) == null) {
+        CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+        if (cVMessageRequestCVMSync == null || (bundle = cVMessageRequestCVMSync.getBundle()) == null) {
             return false;
         }
         try {
@@ -1114,7 +1273,7 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
             caption = new Caption();
         }
         DLog.i_api(TAG_CLASS, "controlCaption to [operation]" + captionOperation.enumToString() + " [caption]" + caption.toString());
-        String join = TextUtils.join(",", caption.getLanguageList());
+        String strJoin = TextUtils.join(",", caption.getLanguageList());
         Bundle bundle = new Bundle();
         bundle.putString("BUNDLE_STRING_ID", getID());
         bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_OPERATION, captionOperation.enumToString());
@@ -1122,7 +1281,7 @@ final class AVPlayerImpl extends AVPlayer implements IBundleHolder, IHandlerHold
         bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_RES_URI, caption.getResourceUri());
         bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_URI, caption.getCaptionUri());
         bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_TYPE, caption.getCaptionType().enumToString());
-        bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_LANGUAGE, join);
+        bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_LANGUAGE, strJoin);
         bundle.putString(AllShareKey.BUNDLE_STRING_CAPTION_ENCODING, caption.getEncoding());
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_AV_PLAYER_CONTROL_CAPTION);

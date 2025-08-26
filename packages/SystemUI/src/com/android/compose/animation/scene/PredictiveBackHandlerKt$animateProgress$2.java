@@ -13,7 +13,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PredictiveBackHandlerKt$animateProgress$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ SwipeAnimation $animation;
@@ -25,7 +24,6 @@ final class PredictiveBackHandlerKt$animateProgress$2 extends SuspendLambda impl
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.compose.animation.scene.PredictiveBackHandlerKt$animateProgress$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ SwipeAnimation $animation;
@@ -103,15 +101,15 @@ final class PredictiveBackHandlerKt$animateProgress$2 extends SuspendLambda impl
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            StandaloneCoroutine launch$default = BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new PredictiveBackHandlerKt$animateProgress$2$collectionJob$1(this.$progress, this.$animation, this.$commitSpec, this.$cancelSpec, this.$state, null), 3);
+            StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new PredictiveBackHandlerKt$animateProgress$2$collectionJob$1(this.$progress, this.$animation, this.$commitSpec, this.$cancelSpec, this.$state, null), 3);
             CoroutineScope coroutineScope = this.$animationScope;
             if (coroutineScope != null) {
-                return BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(this.$state, this.$animation, launch$default, null), 3);
+                return BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(this.$state, this.$animation, standaloneCoroutineLaunch$default, null), 3);
             }
             MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = this.$state;
             SwipeAnimation swipeAnimation = this.$animation;
             this.label = 1;
-            if (PredictiveBackHandlerKt.access$startTransition(mutableSceneTransitionLayoutStateImpl, swipeAnimation, launch$default, this) == coroutineSingletons) {
+            if (PredictiveBackHandlerKt.access$startTransition(mutableSceneTransitionLayoutStateImpl, swipeAnimation, standaloneCoroutineLaunch$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

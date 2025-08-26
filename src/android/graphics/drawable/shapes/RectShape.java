@@ -17,8 +17,8 @@ public class RectShape extends Shape {
 
     @Override // android.graphics.drawable.shapes.Shape
     public void getOutline(Outline outline) {
-        RectF rect = rect();
-        outline.setRect((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom));
+        RectF rectFRect = rect();
+        outline.setRect((int) Math.ceil(rectFRect.left), (int) Math.ceil(rectFRect.top), (int) Math.floor(rectFRect.right), (int) Math.floor(rectFRect.bottom));
     }
 
     @Override // android.graphics.drawable.shapes.Shape
@@ -32,8 +32,8 @@ public class RectShape extends Shape {
 
     @Override // android.graphics.drawable.shapes.Shape
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public RectShape mo1487clone() throws CloneNotSupportedException {
-        RectShape rectShape = (RectShape) super.mo1487clone();
+    public RectShape mo1491clone() throws CloneNotSupportedException {
+        RectShape rectShape = (RectShape) super.mo1491clone();
         rectShape.mRect = new RectF(this.mRect);
         return rectShape;
     }

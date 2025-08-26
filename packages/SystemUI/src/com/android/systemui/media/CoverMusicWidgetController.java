@@ -16,7 +16,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverMusicWidgetController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +31,6 @@ public final class CoverMusicWidgetController {
     public final SubScreenManager subScreenManager;
     public final CoverMusicWidgetController$widgetDisableRunnable$1 widgetDisableRunnable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,13 +51,13 @@ public final class CoverMusicWidgetController {
         this.removeVisibilityListenerConsumer = consumer2;
         this.subScreenManager = subScreenManager;
         this.lifecycle = wakefulnessLifecycle;
-        Looper myLooper = Looper.myLooper();
-        myLooper.getClass();
-        this.mediaPauseTimerHandler = new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        looperMyLooper.getClass();
+        this.mediaPauseTimerHandler = new Handler(looperMyLooper);
         this.widgetDisableRunnable = new Runnable() { // from class: com.android.systemui.media.CoverMusicWidgetController$widgetDisableRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                CoverMusicWidgetController coverMusicWidgetController = CoverMusicWidgetController.this;
+                CoverMusicWidgetController coverMusicWidgetController = this.this$0;
                 int i = CoverMusicWidgetController.$r8$clinit;
                 coverMusicWidgetController.enableWidget(false);
             }
@@ -69,11 +67,11 @@ public final class CoverMusicWidgetController {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = CoverMusicWidgetController.$r8$clinit;
-                final CoverMusicWidgetController coverMusicWidgetController = CoverMusicWidgetController.this;
+                final CoverMusicWidgetController coverMusicWidgetController = this.f$0;
                 return new SecMediaHost.MediaPanelVisibilityListener() { // from class: com.android.systemui.media.CoverMusicWidgetController$onPlayerVisibilityListener$2$1
                     @Override // com.android.systemui.media.SecMediaHost.MediaPanelVisibilityListener
                     public final void onMediaVisibilityChanged(boolean z) {
-                        CoverMusicWidgetController coverMusicWidgetController2 = CoverMusicWidgetController.this;
+                        CoverMusicWidgetController coverMusicWidgetController2 = coverMusicWidgetController;
                         KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onPlayerVisibilityChanged before: ", " after: ", "CoverMusicWidgetController", coverMusicWidgetController2.playerVisible, z);
                         if (coverMusicWidgetController2.playerVisible == z) {
                             return;
@@ -91,17 +89,17 @@ public final class CoverMusicWidgetController {
         this.observer = new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.media.CoverMusicWidgetController$observer$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onFinishedWakingUp() {
-                CoverMusicWidgetController coverMusicWidgetController = CoverMusicWidgetController.this;
+                CoverMusicWidgetController coverMusicWidgetController = this.this$0;
                 if (coverMusicWidgetController.pauseTimerStartedTime == 0) {
                     return;
                 }
-                long currentTimeMillis = System.currentTimeMillis() - coverMusicWidgetController.pauseTimerStartedTime;
-                if (currentTimeMillis > 120000) {
+                long jCurrentTimeMillis = System.currentTimeMillis() - coverMusicWidgetController.pauseTimerStartedTime;
+                if (jCurrentTimeMillis > 120000) {
                     Log.d("CoverMusicWidgetController", "Timer is exceed during sleep");
                     coverMusicWidgetController.enableWidget(false);
                     return;
                 }
-                long j = 120000 - currentTimeMillis;
+                long j = 120000 - jCurrentTimeMillis;
                 Log.d("CoverMusicWidgetController", "Timer should be set, " + (j / 1000) + "sec is left");
                 Handler handler = coverMusicWidgetController.mediaPauseTimerHandler;
                 handler.removeCallbacksAndMessages(null);
@@ -116,22 +114,22 @@ public final class CoverMusicWidgetController {
             return;
         }
         this.enabled = z;
-        Bundle m = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("com.samsung.android.widgetProviderName", "MusicTile");
+        Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("com.samsung.android.widgetProviderName", "MusicTile");
         SubScreenManager subScreenManager = this.subScreenManager;
         if (z) {
             if (subScreenManager.mSubScreenPlugin == null) {
                 Log.w("SubScreenManager", "enableTask() no plugin");
                 return;
             }
-            Log.i("SubScreenManager", "enableTask() " + m);
-            subScreenManager.mSubScreenPlugin.enableTask(m);
+            Log.i("SubScreenManager", "enableTask() " + bundleM);
+            subScreenManager.mSubScreenPlugin.enableTask(bundleM);
             return;
         }
         if (subScreenManager.mSubScreenPlugin == null) {
             Log.w("SubScreenManager", "disableTask() no plugin");
         } else {
-            Log.i("SubScreenManager", "disableTask() " + m);
-            subScreenManager.mSubScreenPlugin.disableTask(m);
+            Log.i("SubScreenManager", "disableTask() " + bundleM);
+            subScreenManager.mSubScreenPlugin.disableTask(bundleM);
         }
         Bundle bundle = new Bundle();
         bundle.putString("com.samsung.android.widgetComponentName", "com.samsung.android.app.aodservice/MusicTile");

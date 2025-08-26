@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AssistContentRequester {
     public final String mAttributionTag;
@@ -25,7 +24,6 @@ public class AssistContentRequester {
     public final Map mPendingCallbacks = Collections.synchronizedMap(new WeakHashMap());
     public final IActivityTaskManager mActivityTaskManager = ActivityTaskManager.getService();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onAssistContentAvailable(AssistContent assistContent);
     }
@@ -37,7 +35,6 @@ public class AssistContentRequester {
         this.mAttributionTag = context.getAttributionTag();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AssistDataReceiver extends IAssistDataReceiver.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Object mCallbackKey;
@@ -62,7 +59,7 @@ public class AssistContentRequester {
                 assistContentRequester.mSystemInteractionExecutor.execute(new Runnable() { // from class: com.android.systemui.screenshot.AssistContentRequester$AssistDataReceiver$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AssistContentRequester.Callback callback2 = AssistContentRequester.Callback.this;
+                        AssistContentRequester.Callback callback2 = callback;
                         AssistContent assistContent2 = assistContent;
                         int i = AssistContentRequester.AssistDataReceiver.$r8$clinit;
                         callback2.onAssistContentAvailable(assistContent2);

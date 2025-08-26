@@ -5,7 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.media.session.MediaController;
+import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
@@ -19,27 +23,41 @@ import com.android.systemui.media.mediaoutput.controller.media.SessionController
 import com.android.systemui.media.mediaoutput.dagger.MediaSessionControllerFactory;
 import com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel;
 import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.settings.UserTracker;
+import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.notification.collection.notifcollection.CommonNotifCollection;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.collections.EmptyList;
+import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
+import kotlin.sequences.DistinctSequence;
+import kotlin.sequences.SequencesKt___SequencesKt;
+import kotlin.sequences.SequencesKt___SequencesKt$sortedWith$1;
+import kotlin.sequences.TransformingSequence;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
@@ -52,7 +70,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaSessionViewModel extends ViewModel implements MediaInteraction {
     public static final Companion Companion = new Companion(null);
@@ -66,7 +83,7 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
             MediaSessionViewModel.Companion companion = MediaSessionViewModel.Companion;
-            MediaSessionViewModel mediaSessionViewModel = MediaSessionViewModel.this;
+            MediaSessionViewModel mediaSessionViewModel = this.f$0;
             return new NoSessionController(mediaSessionViewModel.context, mediaSessionViewModel.audioManager);
         }
     });
@@ -75,19 +92,17 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
     public final MediaSessionViewModel$special$$inlined$map$1 sessionControllersFlow;
     public final StateFlowImpl updateAction;
     public final StateFlowImpl updateCurrent;
+    public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1, reason: invalid class name */
         public final class AnonymousClass1 implements FlowCollector {
             public final /* synthetic */ Ref$ObjectRef $actionJob;
             public final /* synthetic */ MediaSessionViewModel this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1$6, reason: invalid class name */
             final class AnonymousClass6 extends SuspendLambda implements Function2 {
                 final /* synthetic */ LinkedHashSet<MediaSession> $newSessionController;
@@ -126,7 +141,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                         final Flow[] flowArr = (Flow[]) CollectionsKt___CollectionsKt.toList(arrayList).toArray(new Flow[0]);
                         Flow flow = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1$6$invokeSuspend$$inlined$combine$1
 
-                            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                             /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1$6$invokeSuspend$$inlined$combine$1$3, reason: invalid class name */
                             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                                 private /* synthetic */ Object L$0;
@@ -170,20 +184,20 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                             @Override // kotlinx.coroutines.flow.Flow
                             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                                 final Flow[] flowArr2 = flowArr;
-                                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1$6$invokeSuspend$$inlined$combine$1.2
+                                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$3$1$6$invokeSuspend$$inlined$combine$1.2
                                     @Override // kotlin.jvm.functions.Function0
                                     public final Object invoke() {
                                         return new Long[flowArr2.length];
                                     }
                                 }, new AnonymousClass3(null), flowCollector, continuation);
-                                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                             }
                         };
                         final MediaSessionViewModel mediaSessionViewModel = this.this$0;
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel.3.1.6.3
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                MediaSessionViewModel.this.updateAction.updateState(null, new Long(System.currentTimeMillis()));
+                                mediaSessionViewModel.updateAction.updateState(null, new Long(System.currentTimeMillis()));
                                 Unit unit = Unit.INSTANCE;
                                 CoroutineSingletons coroutineSingletons2 = CoroutineSingletons.COROUTINE_SUSPENDED;
                                 return unit;
@@ -208,21 +222,148 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                 this.$actionJob = ref$ObjectRef;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:12:0x0135  */
-            /* JADX WARN: Removed duplicated region for block: B:18:0x003b  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
             /* JADX WARN: Type inference failed for: r12v11, types: [T, kotlinx.coroutines.StandaloneCoroutine] */
             @Override // kotlinx.coroutines.flow.FlowCollector
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final java.lang.Object emit(java.util.List r12, kotlin.coroutines.Continuation r13) {
-                /*
-                    Method dump skipped, instructions count: 335
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel.AnonymousClass3.AnonymousClass1.emit(java.util.List, kotlin.coroutines.Continuation):java.lang.Object");
+            public final Object emit(List list, Continuation continuation) {
+                MediaSessionViewModel$3$1$emit$1 mediaSessionViewModel$3$1$emit$1;
+                LinkedHashSet linkedHashSet;
+                if (continuation instanceof MediaSessionViewModel$3$1$emit$1) {
+                    mediaSessionViewModel$3$1$emit$1 = (MediaSessionViewModel$3$1$emit$1) continuation;
+                    int i = mediaSessionViewModel$3$1$emit$1.label;
+                    if ((i & Integer.MIN_VALUE) != 0) {
+                        mediaSessionViewModel$3$1$emit$1.label = i - Integer.MIN_VALUE;
+                    } else {
+                        mediaSessionViewModel$3$1$emit$1 = new MediaSessionViewModel$3$1$emit$1(this, continuation);
+                    }
+                }
+                Object obj = mediaSessionViewModel$3$1$emit$1.result;
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i2 = mediaSessionViewModel$3$1$emit$1.label;
+                if (i2 == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Log.d("MediaSessionViewModel", "emit() - media session changed");
+                    MediaSessionViewModel mediaSessionViewModel = this.this$0;
+                    List list2 = (List) mediaSessionViewModel._sessionControllersFlow.getValue();
+                    linkedHashSet = new LinkedHashSet();
+                    Companion companion = MediaSessionViewModel.Companion;
+                    MediaSessionManager mediaSessionManager = mediaSessionViewModel.mediaSessionManager;
+                    final List listPlus = CollectionsKt___CollectionsKt.plus((Iterable) linkedHashSet, (Collection) list2);
+                    companion.getClass();
+                    DistinctSequence distinctSequence = new DistinctSequence(new SequencesKt___SequencesKt$sortedWith$1(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaSessionManager.getActiveSessionsForUser(null, ((UserTrackerImpl) mediaSessionViewModel.userTracker).getUserHandle())), new Comparator() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$newSessionControllerWith$$inlined$sortedBy$1
+                        /* JADX WARN: Removed duplicated region for block: B:10:0x0020  */
+                        @Override // java.util.Comparator
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final int compare(Object obj2, Object obj3) {
+                            Integer num;
+                            PlaybackState playbackState = ((MediaController) obj2).getPlaybackState();
+                            Integer num2 = 1;
+                            if (playbackState == null) {
+                                num = num2;
+                            } else {
+                                if (playbackState.getState() != 3) {
+                                    playbackState = null;
+                                }
+                                if (playbackState != null) {
+                                    num = 0;
+                                }
+                            }
+                            PlaybackState playbackState2 = ((MediaController) obj3).getPlaybackState();
+                            if (playbackState2 != null) {
+                                if ((playbackState2.getState() == 3 ? playbackState2 : null) != null) {
+                                    num2 = 0;
+                                }
+                            }
+                            return ComparisonsKt__ComparisonsKt.compareValues(num, num2);
+                        }
+                    }), new MediaSessionViewModel$Companion$$ExternalSyntheticLambda0());
+                    final MediaSessionControllerFactory mediaSessionControllerFactory = mediaSessionViewModel.sessionControllerFactory;
+                    CollectionsKt__MutableCollectionsKt.addAll(SequencesKt___SequencesKt.toList(new TransformingSequence(distinctSequence, new Function1() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$Companion$$ExternalSyntheticLambda1
+                        @Override // kotlin.jvm.functions.Function1
+                        /* renamed from: invoke */
+                        public final Object mo781invoke(Object obj2) {
+                            List list3 = listPlus;
+                            MediaController mediaController = (MediaController) obj2;
+                            Log.d("MediaSessionViewModel", "MediaSessionManager - " + mediaController.getSessionToken() + ", " + mediaController.getPackageName() + ", " + mediaController.getMetadata() + ", " + mediaController.getPlaybackState());
+                            MediaSessionViewModel.Companion companion2 = MediaSessionViewModel.Companion;
+                            MediaSession.Token sessionToken = mediaController.getSessionToken();
+                            companion2.getClass();
+                            Object obj3 = null;
+                            if (sessionToken != null) {
+                                Iterator it = list3.iterator();
+                                while (true) {
+                                    if (!it.hasNext()) {
+                                        break;
+                                    }
+                                    Object next = it.next();
+                                    if (((com.android.systemui.media.mediaoutput.controller.media.MediaSession) next).isSameToken(sessionToken)) {
+                                        obj3 = next;
+                                        break;
+                                    }
+                                }
+                                obj3 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) obj3;
+                            }
+                            return obj3 == null ? mediaSessionControllerFactory.create(mediaController) : obj3;
+                        }
+                    })), linkedHashSet);
+                    ArrayList arrayList = new ArrayList();
+                    for (Object obj2 : linkedHashSet) {
+                        com.android.systemui.media.mediaoutput.controller.media.MediaSession mediaSession = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) obj2;
+                        if (!mediaSession.isClosed()) {
+                            SessionController.Companion companion2 = SessionController.Companion;
+                            String packageName = mediaSession.getPackageName();
+                            companion2.getClass();
+                            if (SessionController.Companion.MEDIA_SESSION_BLOCKED_LIST.contains(packageName)) {
+                            }
+                        }
+                        arrayList.add(obj2);
+                    }
+                    int size = arrayList.size();
+                    int i3 = 0;
+                    while (i3 < size) {
+                        Object obj3 = arrayList.get(i3);
+                        i3++;
+                        ((com.android.systemui.media.mediaoutput.controller.media.MediaSession) obj3).close();
+                    }
+                    linkedHashSet.removeAll(CollectionsKt___CollectionsKt.toSet(arrayList));
+                    Iterator it = linkedHashSet.iterator();
+                    while (it.hasNext()) {
+                        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("\t", ((com.android.systemui.media.mediaoutput.controller.media.MediaSession) it.next()).toLogText(), "MediaSessionViewModel");
+                    }
+                    Iterator it2 = CollectionsKt___CollectionsKt.minus((Iterable) list2, (Iterable) linkedHashSet).iterator();
+                    while (it2.hasNext()) {
+                        ((com.android.systemui.media.mediaoutput.controller.media.MediaSession) it2.next()).close();
+                    }
+                    List list3 = CollectionsKt___CollectionsKt.toList(linkedHashSet);
+                    mediaSessionViewModel$3$1$emit$1.L$0 = this;
+                    mediaSessionViewModel$3$1$emit$1.L$1 = linkedHashSet;
+                    mediaSessionViewModel$3$1$emit$1.label = 1;
+                    mediaSessionViewModel._sessionControllersFlow.setValue(list3);
+                    if (Unit.INSTANCE == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i2 != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    LinkedHashSet linkedHashSet2 = (LinkedHashSet) mediaSessionViewModel$3$1$emit$1.L$1;
+                    AnonymousClass1 anonymousClass1 = (AnonymousClass1) mediaSessionViewModel$3$1$emit$1.L$0;
+                    ResultKt.throwOnFailure(obj);
+                    linkedHashSet = linkedHashSet2;
+                    this = anonymousClass1;
+                }
+                Job job = (Job) this.$actionJob.element;
+                if (job != null) {
+                    job.cancel(null);
+                }
+                MediaSessionViewModel mediaSessionViewModel2 = this.this$0;
+                this.$actionJob.element = BuildersKt.launch$default(androidx.lifecycle.ViewModelKt.getViewModelScope(mediaSessionViewModel2), null, null, new AnonymousClass6(linkedHashSet, mediaSessionViewModel2, null), 3);
+                return Unit.INSTANCE;
             }
         }
 
@@ -250,10 +391,10 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                 Companion companion = MediaSessionViewModel.Companion;
                 MediaSessionManager mediaSessionManager = MediaSessionViewModel.this.mediaSessionManager;
                 companion.getClass();
-                Flow buffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaSessionViewModel$Companion$activeMediaChanges$1(mediaSessionManager, null)), -1, 2);
+                Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new MediaSessionViewModel$Companion$activeMediaChanges$1(mediaSessionManager, null)), -1, 2);
                 AnonymousClass1 anonymousClass1 = new AnonymousClass1(MediaSessionViewModel.this, ref$ObjectRef);
                 this.label = 1;
-                if (buffer$default.collect(anonymousClass1, this) == coroutineSingletons) {
+                if (flowBuffer$default.collect(anonymousClass1, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -266,7 +407,6 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -278,20 +418,20 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
 
     /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2] */
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1, kotlinx.coroutines.flow.Flow] */
-    public MediaSessionViewModel(Context context, CommonNotifCollection commonNotifCollection, MediaSessionManager mediaSessionManager, AudioManager audioManager, ActivityStarter activityStarter, MediaSessionControllerFactory mediaSessionControllerFactory, SavedStateHandle savedStateHandle) {
+    public MediaSessionViewModel(UserTracker userTracker, Context context, CommonNotifCollection commonNotifCollection, MediaSessionManager mediaSessionManager, AudioManager audioManager, ActivityStarter activityStarter, MediaSessionControllerFactory mediaSessionControllerFactory, SavedStateHandle savedStateHandle) {
+        this.userTracker = userTracker;
         this.context = context;
         this.mediaSessionManager = mediaSessionManager;
         this.audioManager = audioManager;
         this.activityStarter = activityStarter;
         this.sessionControllerFactory = mediaSessionControllerFactory;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(0L);
-        this.updateAction = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._sessionControllersFlow = MutableStateFlow2;
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow, MutableStateFlow2, new MediaSessionViewModel$sessionControllersFlow$1(null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(0L);
+        this.updateAction = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._sessionControllersFlow = stateFlowImplMutableStateFlow2;
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow, stateFlowImplMutableStateFlow2, new MediaSessionViewModel$sessionControllersFlow$1(null));
         ?? r2 = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -320,118 +460,68 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                     this.this$0 = mediaSessionViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r9, kotlin.coroutines.Continuation r10) {
-                    /*
-                        r8 = this;
-                        boolean r0 = r10 instanceof com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r10
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r10)
-                    L18:
-                        java.lang.Object r10 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L30
-                        if (r2 != r3) goto L28
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        goto La1
-                    L28:
-                        java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-                        java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-                        r8.<init>(r9)
-                        throw r8
-                    L30:
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        java.util.List r9 = (java.util.List) r9
-                        java.lang.Iterable r9 = (java.lang.Iterable) r9
-                        java.util.ArrayList r10 = new java.util.ArrayList
-                        r10.<init>()
-                        java.util.Iterator r9 = r9.iterator()
-                    L40:
-                        boolean r2 = r9.hasNext()
-                        if (r2 == 0) goto L7e
-                        java.lang.Object r2 = r9.next()
-                        r4 = r2
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r4 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r4
-                        boolean r5 = r4.isClosed()
-                        if (r5 != 0) goto L40
-                        r5 = 4
-                        boolean r5 = r4.isSupportAction(r5)
-                        r6 = 2
-                        boolean r6 = r4.isSupportAction(r6)
-                        r5 = r5 | r6
-                        r6 = 512(0x200, double:2.53E-321)
-                        boolean r6 = r4.isSupportAction(r6)
-                        r5 = r5 | r6
-                        if (r5 != 0) goto L7a
-                        r5 = 32
-                        boolean r5 = r4.isSupportAction(r5)
-                        if (r5 != 0) goto L7a
-                        r5 = 16
-                        boolean r4 = r4.isSupportAction(r5)
-                        if (r4 != 0) goto L7a
-                        goto L40
-                    L7a:
-                        r10.add(r2)
-                        goto L40
-                    L7e:
-                        boolean r9 = r10.isEmpty()
-                        if (r9 != 0) goto L85
-                        goto L86
-                    L85:
-                        r10 = 0
-                    L86:
-                        if (r10 != 0) goto L96
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel r9 = r8.this$0
-                        kotlin.Lazy r9 = r9.noSessionController$delegate
-                        java.lang.Object r9 = r9.getValue()
-                        com.android.systemui.media.mediaoutput.controller.media.NoSessionController r9 = (com.android.systemui.media.mediaoutput.controller.media.NoSessionController) r9
-                        java.util.List r10 = java.util.Collections.singletonList(r9)
-                    L96:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r8 = r8.$this_unsafeFlow
-                        java.lang.Object r8 = r8.emit(r10, r0)
-                        if (r8 != r1) goto La1
-                        return r1
-                    La1:
-                        kotlin.Unit r8 = kotlin.Unit.INSTANCE
-                        return r8
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ArrayList arrayList = new ArrayList();
+                        for (Object obj3 : (List) obj) {
+                            com.android.systemui.media.mediaoutput.controller.media.MediaSession mediaSession = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) obj3;
+                            if (!mediaSession.isClosed() && ((mediaSession.isSupportAction(4L) | mediaSession.isSupportAction(2L) | mediaSession.isSupportAction(512L)) || mediaSession.isSupportAction(32L) || mediaSession.isSupportAction(16L))) {
+                                arrayList.add(obj3);
+                            }
+                        }
+                        boolean zIsEmpty = arrayList.isEmpty();
+                        List listSingletonList = arrayList;
+                        if (zIsEmpty) {
+                            listSingletonList = null;
+                        }
+                        if (listSingletonList == null) {
+                            listSingletonList = Collections.singletonList((NoSessionController) this.this$0.noSessionController$delegate.getValue());
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(listSingletonList, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.sessionControllersFlow = r2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(0L);
-        this.updateCurrent = MutableStateFlow3;
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$12 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow3, r2, new MediaSessionViewModel$currentSessionController$1(null));
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(0L);
+        this.updateCurrent = stateFlowImplMutableStateFlow3;
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$12 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow3, r2, new MediaSessionViewModel$currentSessionController$1(null));
         this.currentSessionController = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -460,125 +550,103 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
                     this.this$0 = mediaSessionViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r9, kotlin.coroutines.Continuation r10) {
-                    /*
-                        r8 = this;
-                        boolean r0 = r10 instanceof com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r10
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2$2$1 r0 = (com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2$2$1 r0 = new com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2$2$1
-                        r0.<init>(r10)
-                    L18:
-                        java.lang.Object r10 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L30
-                        if (r2 != r3) goto L28
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        goto Lae
-                    L28:
-                        java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-                        java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-                        r8.<init>(r9)
-                        throw r8
-                    L30:
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        java.util.List r9 = (java.util.List) r9
-                        java.lang.Iterable r9 = (java.lang.Iterable) r9
-                        java.util.Iterator r10 = r9.iterator()
-                    L3b:
-                        boolean r2 = r10.hasNext()
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel r4 = r8.this$0
-                        r5 = 0
-                        if (r2 == 0) goto L58
-                        java.lang.Object r2 = r10.next()
-                        r6 = r2
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r6 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r6
-                        java.lang.String r6 = r6.getPackageName()
-                        java.lang.String r7 = r4.packageName
-                        boolean r6 = kotlin.jvm.internal.Intrinsics.areEqual(r6, r7)
-                        if (r6 == 0) goto L3b
-                        goto L59
-                    L58:
-                        r2 = r5
-                    L59:
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r2 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r2
-                        if (r2 != 0) goto La3
-                        java.util.Iterator r10 = r9.iterator()
-                    L61:
-                        boolean r2 = r10.hasNext()
-                        if (r2 == 0) goto L75
-                        java.lang.Object r2 = r10.next()
-                        r6 = r2
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r6 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r6
-                        boolean r6 = r6.isPlaying()
-                        if (r6 == 0) goto L61
-                        goto L76
-                    L75:
-                        r2 = r5
-                    L76:
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r2 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r2
-                        if (r2 != 0) goto La3
-                        java.util.Iterator r9 = r9.iterator()
-                    L7e:
-                        boolean r10 = r9.hasNext()
-                        if (r10 == 0) goto L92
-                        java.lang.Object r10 = r9.next()
-                        r2 = r10
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r2 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r2
-                        boolean r2 = r2.isError()
-                        if (r2 == 0) goto L7e
-                        r5 = r10
-                    L92:
-                        r2 = r5
-                        com.android.systemui.media.mediaoutput.controller.media.MediaSession r2 = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) r2
-                        if (r2 != 0) goto La3
-                        kotlin.Lazy r9 = r4.noSessionController$delegate
-                        java.lang.Object r9 = r9.getValue()
-                        r2 = r9
-                        com.android.systemui.media.mediaoutput.controller.media.NoSessionController r2 = (com.android.systemui.media.mediaoutput.controller.media.NoSessionController) r2
-                        r2.run()
-                    La3:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r8 = r8.$this_unsafeFlow
-                        java.lang.Object r8 = r8.emit(r2, r0)
-                        if (r8 != r1) goto Lae
-                        return r1
-                    Lae:
-                        kotlin.Unit r8 = kotlin.Unit.INSTANCE
-                        return r8
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaSessionViewModel$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    MediaSessionViewModel mediaSessionViewModel;
+                    Object obj2;
+                    Object next;
+                    Object next2;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj3 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj3);
+                        List list = (List) obj;
+                        Iterator it = list.iterator();
+                        while (true) {
+                            boolean zHasNext = it.hasNext();
+                            mediaSessionViewModel = this.this$0;
+                            obj2 = null;
+                            if (!zHasNext) {
+                                next = null;
+                                break;
+                            }
+                            next = it.next();
+                            if (Intrinsics.areEqual(((com.android.systemui.media.mediaoutput.controller.media.MediaSession) next).getPackageName(), mediaSessionViewModel.packageName)) {
+                                break;
+                            }
+                        }
+                        SessionController sessionController = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) next;
+                        if (sessionController == null) {
+                            Iterator it2 = list.iterator();
+                            while (true) {
+                                if (!it2.hasNext()) {
+                                    next2 = null;
+                                    break;
+                                }
+                                next2 = it2.next();
+                                if (((com.android.systemui.media.mediaoutput.controller.media.MediaSession) next2).isPlaying()) {
+                                    break;
+                                }
+                            }
+                            sessionController = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) next2;
+                            if (sessionController == null) {
+                                Iterator it3 = list.iterator();
+                                while (true) {
+                                    if (!it3.hasNext()) {
+                                        break;
+                                    }
+                                    Object next3 = it3.next();
+                                    if (((com.android.systemui.media.mediaoutput.controller.media.MediaSession) next3).isError()) {
+                                        obj2 = next3;
+                                        break;
+                                    }
+                                }
+                                sessionController = (com.android.systemui.media.mediaoutput.controller.media.MediaSession) obj2;
+                                if (sessionController == null) {
+                                    sessionController = (NoSessionController) mediaSessionViewModel.noSessionController$delegate.getValue();
+                                    sessionController.run();
+                                }
+                            }
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(sessionController, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj3);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$12.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         String str = "";
         this.packageName = "";
         Log.d("MediaSessionViewModel", "init()");
-        if (savedStateHandle != null && (r3 = (String) savedStateHandle.get("packageName")) != null) {
+        if (savedStateHandle != null && (str = (String) savedStateHandle.get("packageName")) != null) {
             String str2 = StringsKt__StringsKt.isBlank(str2) ? null : str2;
             if (str2 != null) {
                 str2 = str2.length() <= 5 ? null : str2;
@@ -606,7 +674,7 @@ public final class MediaSessionViewModel extends ViewModel implements MediaInter
         Log.d("MediaSessionViewModel", "onCleared()");
         Iterator it = ((Iterable) this._sessionControllersFlow.getValue()).iterator();
         while (it.hasNext()) {
-            ((MediaSession) it.next()).close();
+            ((com.android.systemui.media.mediaoutput.controller.media.MediaSession) it.next()).close();
         }
     }
 

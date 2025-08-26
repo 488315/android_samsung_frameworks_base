@@ -6,14 +6,23 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
 import java.util.List;
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.security.auth.x500.X500Principal;
@@ -96,7 +105,7 @@ public class MdfUtils {
         }
     }
 
-    public static String getName() {
+    public static String getName() throws Throwable {
         FileReader fileReader;
         Throwable th;
         BufferedReader bufferedReader;
@@ -104,73 +113,73 @@ public class MdfUtils {
             fileReader = new FileReader("/proc/" + getPid() + "/cmdline");
             try {
                 bufferedReader = new BufferedReader(fileReader);
-                try {
-                    StringBuffer stringBuffer = new StringBuffer();
-                    while (true) {
-                        int read = bufferedReader.read();
-                        if (read > 0) {
-                            stringBuffer.append((char) read);
-                        } else {
-                            String str = new String(stringBuffer);
-                            try {
-                                bufferedReader.close();
-                                fileReader.close();
-                                return str;
-                            } catch (IOException e) {
-                                System.err.println("MdfUtils::getName encountered an exception: " + e.getMessage());
-                                return str;
-                            }
-                        }
-                    }
-                } catch (Exception unused) {
-                    if (bufferedReader != null) {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e2) {
-                            System.err.println("MdfUtils::getName encountered an exception: " + e2.getMessage());
-                            return null;
-                        }
-                    }
-                    if (fileReader != null) {
-                        fileReader.close();
-                    }
-                    return null;
-                } catch (Throwable th2) {
-                    th = th2;
-                    if (bufferedReader != null) {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e3) {
-                            System.err.println("MdfUtils::getName encountered an exception: " + e3.getMessage());
-                            throw th;
-                        }
-                    }
-                    if (fileReader != null) {
-                        fileReader.close();
-                    }
-                    throw th;
-                }
-            } catch (Exception unused2) {
+            } catch (Exception unused) {
                 bufferedReader = null;
-            } catch (Throwable th3) {
-                th = th3;
+            } catch (Throwable th2) {
+                th = th2;
                 bufferedReader = null;
             }
+        } catch (Exception unused2) {
+            bufferedReader = null;
+            fileReader = null;
+        } catch (Throwable th3) {
+            fileReader = null;
+            th = th3;
+            bufferedReader = null;
+        }
+        try {
+            StringBuffer stringBuffer = new StringBuffer();
+            while (true) {
+                int i = bufferedReader.read();
+                if (i > 0) {
+                    stringBuffer.append((char) i);
+                } else {
+                    String str = new String(stringBuffer);
+                    try {
+                        bufferedReader.close();
+                        fileReader.close();
+                        return str;
+                    } catch (IOException e) {
+                        System.err.println("MdfUtils::getName encountered an exception: " + e.getMessage());
+                        return str;
+                    }
+                }
+            }
         } catch (Exception unused3) {
-            bufferedReader = null;
-            fileReader = null;
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e2) {
+                    System.err.println("MdfUtils::getName encountered an exception: " + e2.getMessage());
+                    return null;
+                }
+            }
+            if (fileReader != null) {
+                fileReader.close();
+            }
+            return null;
         } catch (Throwable th4) {
-            fileReader = null;
             th = th4;
-            bufferedReader = null;
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e3) {
+                    System.err.println("MdfUtils::getName encountered an exception: " + e3.getMessage());
+                    throw th;
+                }
+            }
+            if (fileReader != null) {
+                fileReader.close();
+            }
+            throw th;
         }
     }
 
-    public static void logMdf(boolean z, String str, boolean z2, int i, String str2) {
+    public static void logMdf(boolean z, String str, boolean z2, int i, String str2) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         logMdf(z, str, null, z2, i, str2);
     }
 
-    public static void logMdf(boolean z, String str, String str2, boolean z2, int i, String str3) {
+    public static void logMdf(boolean z, String str, String str2, boolean z2, int i, String str3) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         if (z) {
             try {
                 Class.forName("android.sec.enterprise.EnterpriseDeviceManager");
@@ -181,15 +190,15 @@ public class MdfUtils {
         }
     }
 
-    public static void logMdf(String str, boolean z, int i, String str2) {
+    public static void logMdf(String str, boolean z, int i, String str2) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         logMdf(str, (String) null, z, i, str2);
     }
 
-    public static void logMdf(String str, String str2, boolean z, int i, String str3) {
+    public static void logMdf(String str, String str2, boolean z, int i, String str3) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         logMdf(isMdfEnforced(), str, str2, z, i, str3);
     }
 
-    public static String buildHostnameLog(String str, X509Certificate x509Certificate) {
+    public static String buildHostnameLog(String str, X509Certificate x509Certificate) throws CertificateParsingException {
         if (x509Certificate == null) {
             return "Certificate not presented";
         }
@@ -250,27 +259,27 @@ public class MdfUtils {
         return false;
     }
 
-    public static byte[] encryptMdf(byte[] bArr, String str) {
+    public static byte[] encryptMdf(byte[] bArr, String str) throws IllegalAccessException, NoSuchMethodException, IllegalBlockSizeException, IOException, KeyStoreException, CertificateException, IllegalArgumentException, InvocationTargetException, InvalidAlgorithmParameterException, BadPaddingException, NoSuchPaddingException, NoSuchAlgorithmException, InstantiationException, ClassNotFoundException, SecurityException, InvalidKeyException, NoSuchProviderException {
         try {
             KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
             keyStore.load(null);
-            SecretKey secretKey = (SecretKey) keyStore.getKey(str, null);
-            if (secretKey == null) {
+            SecretKey secretKeyGenerateKey = (SecretKey) keyStore.getKey(str, null);
+            if (secretKeyGenerateKey == null) {
                 Class<?> cls = Class.forName("android.security.keystore.KeyGenParameterSpec$Builder");
                 AlgorithmParameterSpec algorithmParameterSpec = (AlgorithmParameterSpec) cls.getMethod("build", null).invoke(cls.getMethod("setEncryptionPaddings", String[].class).invoke(cls.getMethod("setKeySize", Integer.TYPE).invoke(cls.getMethod("setBlockModes", String[].class).invoke(cls.getDeclaredConstructor(String.class, Integer.TYPE).newInstance(str, 3), new String[]{"GCM"}), 256), new String[]{"NoPadding"}), null);
                 KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", AndroidKeyStoreSpi.NAME);
                 keyGenerator.init(algorithmParameterSpec);
-                secretKey = keyGenerator.generateKey();
+                secretKeyGenerateKey = keyGenerator.generateKey();
             }
             Cipher cipher = Cipher.getInstance(MDF_CIPHER_MODE);
-            cipher.init(1, secretKey);
-            byte[] doFinal = cipher.doFinal(bArr);
-            byte[] bArr2 = new byte[doFinal.length + 12];
+            cipher.init(1, secretKeyGenerateKey);
+            byte[] bArrDoFinal = cipher.doFinal(bArr);
+            byte[] bArr2 = new byte[bArrDoFinal.length + 12];
             for (int i = 0; i < 12; i++) {
                 bArr2[i] = cipher.getIV()[i];
             }
-            for (int i2 = 0; i2 < doFinal.length; i2++) {
-                bArr2[i2 + 12] = doFinal[i2];
+            for (int i2 = 0; i2 < bArrDoFinal.length; i2++) {
+                bArr2[i2 + 12] = bArrDoFinal[i2];
             }
             return bArr2;
         } catch (Exception e) {
@@ -279,7 +288,7 @@ public class MdfUtils {
         }
     }
 
-    public static byte[] decryptMdf(byte[] bArr, String str) {
+    public static byte[] decryptMdf(byte[] bArr, String str) throws NoSuchPaddingException, NoSuchAlgorithmException, IOException, InvalidKeyException, KeyStoreException, CertificateException, InvalidAlgorithmParameterException {
         if (bArr.length <= 28) {
             System.err.println("MDFUtils::MDF decryption failed, invalid encryption length");
             return null;

@@ -36,7 +36,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UnfoldTransitionHandler implements Transitions.TransitionHandler, ShellUnfoldProgressProvider.UnfoldListener {
     static final int FINISH_ANIMATION_TIMEOUT_MILLIS = 5000;
@@ -181,7 +180,7 @@ public class UnfoldTransitionHandler implements Transitions.TransitionHandler, S
     public final void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, IBinder iBinder2, Transitions.TransitionFinishCallback transitionFinishCallback) {
         char c;
         boolean z;
-        TaskViewTransitions.PendingTransition findPending;
+        TaskViewTransitions.PendingTransition pendingTransitionFindPending;
         BubbleViewProvider bubbleViewProvider;
         if (transitionInfo.getType() == 6 && (transitionInfo.getFlags() & 47360) == 0) {
             boolean z2 = false;
@@ -199,14 +198,14 @@ public class UnfoldTransitionHandler implements Transitions.TransitionHandler, S
                         ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
                         SurfaceControl leash = change.getLeash();
                         TaskViewTransitions taskViewTransitions = bubbleTransitions.mTaskViewTransitions;
-                        TaskViewTaskController findTaskView = taskViewTransitions.findTaskView(taskInfo2);
-                        if (findTaskView == null || (findPending = taskViewTransitions.findPending(findTaskView, 6)) == null) {
+                        TaskViewTaskController taskViewTaskControllerFindTaskView = taskViewTransitions.findTaskView(taskInfo2);
+                        if (taskViewTaskControllerFindTaskView == null || (pendingTransitionFindPending = taskViewTransitions.findPending(taskViewTaskControllerFindTaskView, 6)) == null) {
                             z = false;
                         } else {
-                            taskViewTransitions.mPending.remove(findPending);
-                            transaction.reparent(leash, findTaskView.mSurfaceControl).setPosition(leash, 0.0f, 0.0f).setWindowCrop(leash, endAbsBounds.width(), endAbsBounds.height()).show(leash);
-                            transaction2.reparent(leash, findTaskView.mSurfaceControl).setPosition(leash, 0.0f, 0.0f).setWindowCrop(leash, endAbsBounds.width(), endAbsBounds.height());
-                            TaskViewRepository.TaskViewState taskViewState = (TaskViewRepository.TaskViewState) ((WeakHashMap) taskViewTransitions.mTaskViews).get(findTaskView);
+                            taskViewTransitions.mPending.remove(pendingTransitionFindPending);
+                            transaction.reparent(leash, taskViewTaskControllerFindTaskView.mSurfaceControl).setPosition(leash, 0.0f, 0.0f).setWindowCrop(leash, endAbsBounds.width(), endAbsBounds.height()).show(leash);
+                            transaction2.reparent(leash, taskViewTaskControllerFindTaskView.mSurfaceControl).setPosition(leash, 0.0f, 0.0f).setWindowCrop(leash, endAbsBounds.width(), endAbsBounds.height());
+                            TaskViewRepository.TaskViewState taskViewState = (TaskViewRepository.TaskViewState) ((WeakHashMap) taskViewTransitions.mTaskViews).get(taskViewTaskControllerFindTaskView);
                             if (taskViewState != null) {
                                 taskViewState.mBounds.set(endAbsBounds);
                             }
@@ -277,7 +276,7 @@ public class UnfoldTransitionHandler implements Transitions.TransitionHandler, S
         if (this.mTransition == null) {
             return;
         }
-        SurfaceControl.Transaction transaction = null;
+        SurfaceControl.Transaction transactionAcquire = null;
         int i = 0;
         while (true) {
             int size = ((ArrayList) this.mAnimators).size();
@@ -287,71 +286,87 @@ public class UnfoldTransitionHandler implements Transitions.TransitionHandler, S
             }
             UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) ((ArrayList) this.mAnimators).get(i);
             if (unfoldTaskAnimator.hasActiveTasks()) {
-                if (transaction == null) {
-                    transaction = transactionPool.acquire();
+                if (transactionAcquire == null) {
+                    transactionAcquire = transactionPool.acquire();
                 }
-                unfoldTaskAnimator.applyAnimationProgress(f, transaction);
+                unfoldTaskAnimator.applyAnimationProgress(f, transactionAcquire);
             }
             i++;
         }
-        if (transaction != null) {
-            transaction.apply();
-            transactionPool.release(transaction);
+        if (transactionAcquire != null) {
+            transactionAcquire.apply();
+            transactionPool.release(transactionAcquire);
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0034  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00a2  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00a6  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
+        int iM;
         if (iBinder == this.mTransition) {
             if (CoreRune.MW_EMBED_ACTIVITY) {
-                for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+                for (int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM2 >= 0; iM2--) {
+                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM2);
                     if (change.getMode() == 6 && change.hasFlags(512)) {
                         break;
                     }
                 }
-            }
-            for (int m2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m2 >= 0; m2--) {
-                TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m2);
-                if (change2.getMode() != 6 || !change2.hasFlags(33554432) || (!change2.hasFlags(67108864) && !change2.getConfiguration().windowConfiguration.isPopOver())) {
+                for (iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                    TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
+                    if (change2.getMode() != 6 || !change2.hasFlags(64) || (!change2.hasFlags(67108864) && !change2.getConfiguration().windowConfiguration.isPopOver())) {
+                    }
                 }
-            }
-            for (int i = 0; i < ((ArrayList) this.mAnimators).size(); i++) {
-                final UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) ((ArrayList) this.mAnimators).get(i);
-                unfoldTaskAnimator.clearTasks();
-                transitionInfo.getChanges().forEach(new Consumer() { // from class: com.android.wm.shell.unfold.UnfoldTransitionHandler$$ExternalSyntheticLambda2
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        UnfoldTaskAnimator unfoldTaskAnimator2 = UnfoldTaskAnimator.this;
-                        TransitionInfo.Change change3 = (TransitionInfo.Change) obj;
-                        int i2 = UnfoldTransitionHandler.FINISH_ANIMATION_TIMEOUT_MILLIS;
-                        if (change3.getTaskInfo() != null && ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
-                            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7334717703168078630L, 0, String.valueOf(change3.getTaskInfo()), String.valueOf(TransitionInfo.modeToString(change3.getMode())), String.valueOf(unfoldTaskAnimator2.isApplicableTask(change3.getTaskInfo())));
-                        }
-                        if (change3.getTaskInfo() != null) {
-                            if ((change3.getMode() == 6 || TransitionUtil.isOpeningType(change3.getMode())) && unfoldTaskAnimator2.isApplicableTask(change3.getTaskInfo())) {
-                                unfoldTaskAnimator2.onTaskAppeared(change3.getTaskInfo(), change3.getLeash());
+                for (int i = 0; i < ((ArrayList) this.mAnimators).size(); i++) {
+                    final UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) ((ArrayList) this.mAnimators).get(i);
+                    unfoldTaskAnimator.clearTasks();
+                    transitionInfo.getChanges().forEach(new Consumer() { // from class: com.android.wm.shell.unfold.UnfoldTransitionHandler$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            UnfoldTaskAnimator unfoldTaskAnimator2 = unfoldTaskAnimator;
+                            TransitionInfo.Change change3 = (TransitionInfo.Change) obj;
+                            int i2 = UnfoldTransitionHandler.FINISH_ANIMATION_TIMEOUT_MILLIS;
+                            if (change3.getTaskInfo() != null && ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7334717703168078630L, 0, String.valueOf(change3.getTaskInfo()), String.valueOf(TransitionInfo.modeToString(change3.getMode())), String.valueOf(unfoldTaskAnimator2.isApplicableTask(change3.getTaskInfo())));
+                            }
+                            if (change3.getTaskInfo() != null) {
+                                if ((change3.getMode() == 6 || TransitionUtil.isOpeningType(change3.getMode())) && unfoldTaskAnimator2.isApplicableTask(change3.getTaskInfo())) {
+                                    unfoldTaskAnimator2.onTaskAppeared(change3.getTaskInfo(), change3.getLeash());
+                                }
                             }
                         }
+                    });
+                    if (unfoldTaskAnimator.hasActiveTasks()) {
+                        unfoldTaskAnimator.prepareStartTransaction(transaction);
+                        unfoldTaskAnimator.prepareFinishTransaction(transaction2);
+                        unfoldTaskAnimator.start();
                     }
-                });
-                if (unfoldTaskAnimator.hasActiveTasks()) {
-                    unfoldTaskAnimator.prepareStartTransaction(transaction);
-                    unfoldTaskAnimator.prepareFinishTransaction(transaction2);
-                    unfoldTaskAnimator.start();
                 }
+                transaction.apply();
+                this.mFinishCallback = transitionFinishCallback;
+                if (!this.mAnimationFinished) {
+                    finishTransitionIfNeeded();
+                    return true;
+                }
+                Handler handler = this.mHandler;
+                UnfoldTransitionHandler$$ExternalSyntheticLambda0 unfoldTransitionHandler$$ExternalSyntheticLambda0 = this.mAnimationPlayingTimeoutRunnable;
+                handler.removeCallbacks(unfoldTransitionHandler$$ExternalSyntheticLambda0);
+                handler.postDelayed(unfoldTransitionHandler$$ExternalSyntheticLambda0, 5000L);
+                return true;
+            }
+            while (iM >= 0) {
+            }
+            while (i < ((ArrayList) this.mAnimators).size()) {
             }
             transaction.apply();
             this.mFinishCallback = transitionFinishCallback;
-            if (this.mAnimationFinished) {
-                finishTransitionIfNeeded();
-                return true;
+            if (!this.mAnimationFinished) {
             }
-            Handler handler = this.mHandler;
-            UnfoldTransitionHandler$$ExternalSyntheticLambda0 unfoldTransitionHandler$$ExternalSyntheticLambda0 = this.mAnimationPlayingTimeoutRunnable;
-            handler.removeCallbacks(unfoldTransitionHandler$$ExternalSyntheticLambda0);
-            handler.postDelayed(unfoldTransitionHandler$$ExternalSyntheticLambda0, 5000L);
-            return true;
         }
         return false;
     }

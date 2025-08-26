@@ -21,7 +21,6 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RecordingInputConnection implements InputConnection {
     public final boolean autoCorrect;
@@ -145,7 +144,7 @@ public final class RecordingInputConnection implements InputConnection {
         int i = this.batchDepth - 1;
         this.batchDepth = i;
         if (i == 0 && !((ArrayList) this.editCommands).isEmpty()) {
-            ((TextInputServiceAndroid$createInputConnection$1) this.eventCallback).this$0.onEditCommand.mo779invoke(new ArrayList(this.editCommands));
+            ((TextInputServiceAndroid$createInputConnection$1) this.eventCallback).this$0.onEditCommand.mo781invoke(new ArrayList(this.editCommands));
             ((ArrayList) this.editCommands).clear();
         }
         return this.batchDepth > 0;
@@ -164,7 +163,7 @@ public final class RecordingInputConnection implements InputConnection {
     @Override // android.view.inputmethod.InputConnection
     public final int getCursorCapsMode(int i) {
         TextFieldValue textFieldValue = this.mTextFieldValue;
-        return TextUtils.getCapsMode(textFieldValue.annotatedString.text, TextRange.m750getMinimpl(textFieldValue.selection), i);
+        return TextUtils.getCapsMode(textFieldValue.annotatedString.text, TextRange.m752getMinimpl(textFieldValue.selection), i);
     }
 
     @Override // android.view.inputmethod.InputConnection
@@ -184,7 +183,7 @@ public final class RecordingInputConnection implements InputConnection {
 
     @Override // android.view.inputmethod.InputConnection
     public final CharSequence getSelectedText(int i) {
-        if (TextRange.m747getCollapsedimpl(this.mTextFieldValue.selection)) {
+        if (TextRange.m749getCollapsedimpl(this.mTextFieldValue.selection)) {
             return null;
         }
         return TextFieldValueKt.getSelectedText(this.mTextFieldValue).text;
@@ -269,7 +268,7 @@ public final class RecordingInputConnection implements InputConnection {
             ImeAction.Companion.getClass();
             i2 = ImeAction.Default;
         }
-        ((TextInputServiceAndroid$createInputConnection$1) this.eventCallback).this$0.onImeActionPerformed.mo779invoke(ImeAction.m772boximpl(i2));
+        ((TextInputServiceAndroid$createInputConnection$1) this.eventCallback).this$0.onImeActionPerformed.mo781invoke(ImeAction.m774boximpl(i2));
         return true;
     }
 

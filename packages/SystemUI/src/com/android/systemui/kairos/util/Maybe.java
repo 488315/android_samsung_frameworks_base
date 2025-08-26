@@ -2,12 +2,10 @@ package com.android.systemui.kairos.util;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface Maybe {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Absent implements Maybe {
         public static final Absent INSTANCE = new Absent();
 
@@ -27,7 +25,6 @@ public interface Maybe {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final Absent absent = Absent.INSTANCE;
@@ -36,7 +33,6 @@ public interface Maybe {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Present implements Maybe {
         public final Object value;
 
@@ -45,7 +41,7 @@ public interface Maybe {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Present m2573boximpl(Object obj) {
+        public static final /* synthetic */ Present m2590boximpl(Object obj) {
             return new Present(obj);
         }
 

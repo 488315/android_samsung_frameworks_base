@@ -1,6 +1,7 @@
 package com.android.systemui.controls.ui;
 
 import android.app.PendingIntent;
+import android.content.res.Resources;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
 import android.graphics.drawable.ClipDrawable;
@@ -24,7 +25,6 @@ import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ThumbnailBehavior implements Behavior, SecBehavior, SecActionButtonBehavior {
     public final CanUseIconPredicate canUseIconPredicate;
@@ -43,7 +43,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
     }
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void bind(ControlWithState controlWithState, final int i) {
+    public final void bind(ControlWithState controlWithState, final int i) throws Resources.NotFoundException {
         Control control = controlWithState.control;
         control.getClass();
         this.control = control;
@@ -82,7 +82,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
         if (controlViewHolder3 == null) {
             controlViewHolder3 = null;
         }
-        controlViewHolder3.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$bind$1
+        controlViewHolder3.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior.bind.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 ControlViewHolder controlViewHolder4 = ThumbnailBehavior.this.cvh;
@@ -112,7 +112,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
         }
         ControlsActionButton controlsActionButton = controlViewHolder4.getSecControlViewHolder().actionIcon;
         if (controlsActionButton != null) {
-            controlsActionButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$bind$2
+            controlsActionButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior.bind.2
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     ControlViewHolder controlViewHolder5 = ThumbnailBehavior.this.cvh;
@@ -161,48 +161,48 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
             if (controlViewHolder8 == null) {
                 controlViewHolder8 = null;
             }
-            controlViewHolder8.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$bind$3
+            controlViewHolder8.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior.bind.3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final Drawable drawable;
+                    final Drawable drawableLoadDrawableCheckingUriGrant;
                     ThumbnailTemplate thumbnailTemplate4 = ThumbnailBehavior.this.template;
                     if (thumbnailTemplate4 == null) {
                         thumbnailTemplate4 = null;
                     }
                     Icon thumbnail = thumbnailTemplate4.getThumbnail();
-                    if (!((Boolean) ThumbnailBehavior.this.canUseIconPredicate.mo779invoke(thumbnail)).booleanValue()) {
+                    if (!((Boolean) ThumbnailBehavior.this.canUseIconPredicate.mo781invoke(thumbnail)).booleanValue()) {
                         thumbnail = null;
                     }
                     if (thumbnail != null) {
                         SafeIconLoader safeIconLoader = ThumbnailBehavior.this.safeIconLoader;
-                        drawable = thumbnail.loadDrawableCheckingUriGrant(safeIconLoader.serviceContext, safeIconLoader.iUriGrantsManager, safeIconLoader.serviceUid, safeIconLoader.packageName);
+                        drawableLoadDrawableCheckingUriGrant = thumbnail.loadDrawableCheckingUriGrant(safeIconLoader.serviceContext, safeIconLoader.iUriGrantsManager, safeIconLoader.serviceUid, safeIconLoader.packageName);
                     } else {
-                        drawable = null;
+                        drawableLoadDrawableCheckingUriGrant = null;
                     }
                     final ThumbnailBehavior thumbnailBehavior = ThumbnailBehavior.this;
                     ControlViewHolder controlViewHolder9 = thumbnailBehavior.cvh;
                     DelayableExecutor delayableExecutor = (controlViewHolder9 != null ? controlViewHolder9 : null).uiExecutor;
                     final ClipDrawable clipDrawable2 = clipDrawable;
                     final int i2 = i;
-                    delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$bind$3.1
+                    delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior.bind.3.1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            ControlViewHolder controlViewHolder10 = ThumbnailBehavior.this.cvh;
+                        public final void run() throws Resources.NotFoundException {
+                            ControlViewHolder controlViewHolder10 = thumbnailBehavior.cvh;
                             if (controlViewHolder10 == null) {
                                 controlViewHolder10 = null;
                             }
                             float dimensionPixelSize = controlViewHolder10.context.getResources().getDimensionPixelSize(R.dimen.control_corner_radius);
-                            Drawable drawable2 = drawable;
-                            if (drawable2 != null) {
-                                clipDrawable2.setDrawable(new CornerDrawable(drawable2, dimensionPixelSize));
+                            Drawable drawable = drawableLoadDrawableCheckingUriGrant;
+                            if (drawable != null) {
+                                clipDrawable2.setDrawable(new CornerDrawable(drawable, dimensionPixelSize));
                             }
                             ClipDrawable clipDrawable3 = clipDrawable2;
-                            ControlViewHolder controlViewHolder11 = ThumbnailBehavior.this.cvh;
+                            ControlViewHolder controlViewHolder11 = thumbnailBehavior.cvh;
                             if (controlViewHolder11 == null) {
                                 controlViewHolder11 = null;
                             }
                             clipDrawable3.setColorFilter(new BlendModeColorFilter(controlViewHolder11.context.getResources().getColor(R.color.control_thumbnail_tint), BlendMode.LUMINOSITY));
-                            ThumbnailBehavior thumbnailBehavior2 = ThumbnailBehavior.this;
+                            ThumbnailBehavior thumbnailBehavior2 = thumbnailBehavior;
                             ControlViewHolder controlViewHolder12 = thumbnailBehavior2.cvh;
                             if (controlViewHolder12 == null) {
                                 controlViewHolder12 = null;
@@ -272,14 +272,14 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
         if (controlViewHolder6 == null) {
             controlViewHolder6 = null;
         }
-        Pair initClipLayerAndBaseLayer = controlViewHolder6.getSecControlViewHolder().initClipLayerAndBaseLayer();
+        Pair pairInitClipLayerAndBaseLayer = controlViewHolder6.getSecControlViewHolder().initClipLayerAndBaseLayer();
         ControlViewHolder controlViewHolder7 = this.cvh;
         if (controlViewHolder7 == null) {
             controlViewHolder7 = null;
         }
-        controlViewHolder7.clipLayer = (ClipDrawable) initClipLayerAndBaseLayer.getFirst();
+        controlViewHolder7.clipLayer = (ClipDrawable) pairInitClipLayerAndBaseLayer.getFirst();
         ControlViewHolder controlViewHolder8 = this.cvh;
-        (controlViewHolder8 != null ? controlViewHolder8 : null).baseLayer = (GradientDrawable) initClipLayerAndBaseLayer.getSecond();
+        (controlViewHolder8 != null ? controlViewHolder8 : null).baseLayer = (GradientDrawable) pairInitClipLayerAndBaseLayer.getSecond();
     }
 
     @Override // com.android.systemui.controls.ui.SecActionButtonBehavior
@@ -292,7 +292,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
     }
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void initialize(final ControlViewHolder controlViewHolder) {
+    public final void initialize(final ControlViewHolder controlViewHolder) throws Resources.NotFoundException {
         this.cvh = controlViewHolder;
         TypedValue typedValue = new TypedValue();
         controlViewHolder.context.getResources().getValue(R.dimen.controls_thumbnail_shadow_x, typedValue, true);
@@ -302,10 +302,10 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
         controlViewHolder.context.getResources().getValue(R.dimen.controls_thumbnail_shadow_radius, typedValue, true);
         this.shadowRadius = typedValue.getFloat();
         this.shadowColor = controlViewHolder.context.getResources().getColor(R.color.control_thumbnail_shadow_color);
-        controlViewHolder.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior$initialize$1
+        controlViewHolder.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ThumbnailBehavior.initialize.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                final ControlViewHolder controlViewHolder2 = ControlViewHolder.this;
+                final ControlViewHolder controlViewHolder2 = controlViewHolder;
                 ControlActionCoordinator controlActionCoordinator = controlViewHolder2.controlActionCoordinator;
                 ThumbnailTemplate thumbnailTemplate = this.template;
                 if (thumbnailTemplate == null) {
@@ -318,7 +318,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
                 }
                 final ControlActionCoordinatorImpl controlActionCoordinatorImpl = (ControlActionCoordinatorImpl) controlActionCoordinator;
                 controlActionCoordinatorImpl.controlsMetricsLogger.touch(controlViewHolder2, controlActionCoordinatorImpl.isLocked());
-                boolean usePanel = controlViewHolder2.usePanel();
+                boolean zUsePanel = controlViewHolder2.usePanel();
                 ControlWithState controlWithState = controlViewHolder2.cws;
                 String str = (controlWithState != null ? controlWithState : null).ci.controlId;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.controls.ui.ControlActionCoordinatorImpl$$ExternalSyntheticLambda3
@@ -326,7 +326,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
                     public final Object invoke() {
                         Control control2 = control;
                         int i = ControlActionCoordinatorImpl.$r8$clinit;
-                        ControlViewHolder controlViewHolder3 = ControlViewHolder.this;
+                        ControlViewHolder controlViewHolder3 = controlViewHolder2;
                         controlViewHolder3.layout.performHapticFeedback(6);
                         if (controlViewHolder3.usePanel()) {
                             PendingIntent appIntent = control2.getAppIntent();
@@ -340,7 +340,7 @@ public final class ThumbnailBehavior implements Behavior, SecBehavior, SecAction
                     }
                 };
                 Control control2 = (controlWithState != null ? controlWithState : null).control;
-                controlActionCoordinatorImpl.bouncerOrRun(controlActionCoordinatorImpl.createAction(str, function0, usePanel, control2 != null ? control2.isAuthRequired() : true));
+                controlActionCoordinatorImpl.bouncerOrRun(controlActionCoordinatorImpl.createAction(str, function0, zUsePanel, control2 != null ? control2.isAuthRequired() : true));
             }
         });
     }

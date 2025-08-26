@@ -7,7 +7,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.systemui.R;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardContinuityLockscreenAffordanceArea extends LinearLayout {
     public LottieAnimationView mContinuityLottieView;

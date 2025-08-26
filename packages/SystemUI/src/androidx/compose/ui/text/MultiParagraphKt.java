@@ -9,7 +9,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MultiParagraphKt {
     public static final int findParagraphByIndex(int i, List list) {
@@ -40,15 +39,15 @@ public abstract class MultiParagraphKt {
         if (i2 >= 0 && i2 < list.size()) {
             return i2;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Found paragraph index ", " should be in range [0, ");
-        m.append(list.size());
-        m.append(").\nDebug info: index=");
-        m.append(i);
-        m.append(", paragraphs=[");
-        m.append(ListUtilsKt.fastJoinToString$default(list, null, new Function1() { // from class: androidx.compose.ui.text.MultiParagraphKt$findParagraphByIndex$2$1
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Found paragraph index ", " should be in range [0, ");
+        sbM.append(list.size());
+        sbM.append(").\nDebug info: index=");
+        sbM.append(i);
+        sbM.append(", paragraphs=[");
+        sbM.append(ListUtilsKt.fastJoinToString$default(list, null, new Function1() { // from class: androidx.compose.ui.text.MultiParagraphKt$findParagraphByIndex$2$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ParagraphInfo paragraphInfo2 = (ParagraphInfo) obj;
                 StringBuilder sb = new StringBuilder("[");
                 sb.append(paragraphInfo2.startIndex);
@@ -56,8 +55,8 @@ public abstract class MultiParagraphKt {
                 return BackEventCompat$$ExternalSyntheticOutline0.m(sb, paragraphInfo2.endIndex, ')');
             }
         }, 31));
-        m.append(']');
-        InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+        sbM.append(']');
+        InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
         return i2;
     }
 
@@ -107,16 +106,16 @@ public abstract class MultiParagraphKt {
     }
 
     /* renamed from: findParagraphsByRange-Sb-Bc2M, reason: not valid java name */
-    public static final void m736findParagraphsByRangeSbBc2M(List list, long j, Function1 function1) {
+    public static final void m738findParagraphsByRangeSbBc2M(List list, long j, Function1 function1) {
         ArrayList arrayList = (ArrayList) list;
         int size = arrayList.size();
-        for (int findParagraphByIndex = findParagraphByIndex(TextRange.m750getMinimpl(j), list); findParagraphByIndex < size; findParagraphByIndex++) {
-            ParagraphInfo paragraphInfo = (ParagraphInfo) arrayList.get(findParagraphByIndex);
-            if (paragraphInfo.startIndex >= TextRange.m749getMaximpl(j)) {
+        for (int iFindParagraphByIndex = findParagraphByIndex(TextRange.m752getMinimpl(j), list); iFindParagraphByIndex < size; iFindParagraphByIndex++) {
+            ParagraphInfo paragraphInfo = (ParagraphInfo) arrayList.get(iFindParagraphByIndex);
+            if (paragraphInfo.startIndex >= TextRange.m751getMaximpl(j)) {
                 return;
             }
             if (paragraphInfo.startIndex != paragraphInfo.endIndex) {
-                function1.mo779invoke(paragraphInfo);
+                function1.mo781invoke(paragraphInfo);
             }
         }
     }

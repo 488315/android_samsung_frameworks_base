@@ -12,12 +12,10 @@ import android.graphics.drawable.VectorDrawable;
 import com.samsung.android.graphics.spr.SemPathRenderingDrawable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GestureHintDrawable extends LayerDrawable {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,11 +36,11 @@ public final class GestureHintDrawable extends LayerDrawable {
                 bitmap2 = ((SemPathRenderingDrawable) drawable).getBitmap();
             } else {
                 if ((drawable instanceof VectorDrawable) || (drawable instanceof GradientDrawable)) {
-                    Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(createBitmap);
+                    Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmapCreateBitmap);
                     drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                     drawable.draw(canvas);
-                    bitmap = createBitmap;
+                    bitmap = bitmapCreateBitmap;
                     bitmap.getClass();
                     return new BitmapDrawable(resources, Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true));
                 }

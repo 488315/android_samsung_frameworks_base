@@ -1,6 +1,7 @@
 package com.android.systemui.wallpaper.engines.theme;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
@@ -14,7 +15,6 @@ import com.android.systemui.wallpapers.ImageWallpaper;
 import com.samsung.android.wallpaper.Rune;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MotionEngine extends WallpaperEngine {
     public final String TAG;
@@ -36,31 +36,31 @@ public class MotionEngine extends WallpaperEngine {
         this.mMotionWallpaper = new MotionWallpaper(this.mContext, getWhich(), (Consumer<Integer>) new Consumer() { // from class: com.android.systemui.wallpaper.engines.theme.MotionEngine$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MotionEngine motionEngine = MotionEngine.this;
+                MotionEngine motionEngine = this.f$0;
                 ((Integer) obj).intValue();
                 if (motionEngine.mVisible) {
-                    Canvas lockHardwareCanvas = motionEngine.mSurfaceHolder.lockHardwareCanvas();
-                    if (lockHardwareCanvas == null) {
+                    Canvas canvasLockHardwareCanvas = motionEngine.mSurfaceHolder.lockHardwareCanvas();
+                    if (canvasLockHardwareCanvas == null) {
                         Log.e(motionEngine.TAG, "onDrawFrame: canvas is null");
                     } else {
-                        motionEngine.mMotionWallpaper.draw(lockHardwareCanvas);
-                        motionEngine.mSurfaceHolder.unlockCanvasAndPost(lockHardwareCanvas);
+                        motionEngine.mMotionWallpaper.draw(canvasLockHardwareCanvas);
+                        motionEngine.mSurfaceHolder.unlockCanvasAndPost(canvasLockHardwareCanvas);
                     }
                 }
             }
         });
         this.mSource = new MotionSource(getWhich(), this.mMotionWallpaper);
-        boolean isValid = surfaceHolder.getSurface().isValid();
+        boolean zIsValid = surfaceHolder.getSurface().isValid();
         MotionSource motionSource = this.mSource;
         motionSource.getClass();
         boolean z = Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE;
-        boolean isFlagEnabled = z ? WhichChecker.isFlagEnabled(motionSource.mWhich, 16) : true;
-        Log.i(motionSource.TAG, "isFixedOrientation: , isFold=" + z + ", isFixedOrientation=" + isFlagEnabled);
-        ImageWallpaper.IntegratedEngine.this.semSetFixedOrientation(isFlagEnabled, isValid);
+        boolean zIsFlagEnabled = z ? WhichChecker.isFlagEnabled(motionSource.mWhich, 16) : true;
+        Log.i(motionSource.TAG, "isFixedOrientation: , isFold=" + z + ", isFixedOrientation=" + zIsFlagEnabled);
+        ImageWallpaper.IntegratedEngine.this.semSetFixedOrientation(zIsFlagEnabled, zIsValid);
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
-    public final void onSurfaceRedrawNeeded(SurfaceHolder surfaceHolder) {
+    public final void onSurfaceRedrawNeeded(SurfaceHolder surfaceHolder) throws Resources.NotFoundException {
         this.mSurfaceHolder = surfaceHolder;
         Rect surfaceFrame = surfaceHolder.getSurfaceFrame();
         this.mMotionWallpaper.measure(View.MeasureSpec.makeMeasureSpec(surfaceFrame.width(), 1073741824), View.MeasureSpec.makeMeasureSpec(surfaceFrame.height(), 1073741824));
@@ -69,7 +69,7 @@ public class MotionEngine extends WallpaperEngine {
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
-    public final void onVisibilityChanged(boolean z) {
+    public final void onVisibilityChanged(boolean z) throws Resources.NotFoundException {
         this.mVisible = z;
         if (z) {
             MotionWallpaper motionWallpaper = this.mMotionWallpaper;

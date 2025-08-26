@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SipError implements Parcelable {
     public static final Parcelable.Creator<SipError> CREATOR = new Parcelable.Creator<SipError>() { // from class: com.sec.ims.util.SipError.1
@@ -70,9 +69,9 @@ public class SipError implements Parcelable {
     }
 
     public int hashCode() {
-        Integer valueOf = Integer.valueOf(this.mCode);
+        Integer numValueOf = Integer.valueOf(this.mCode);
         String str = this.mReasonHeader;
-        return Objects.hash(valueOf, str, str);
+        return Objects.hash(numValueOf, str, str);
     }
 
     public void setCode(int i) {

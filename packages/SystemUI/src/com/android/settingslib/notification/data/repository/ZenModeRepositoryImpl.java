@@ -14,14 +14,18 @@ import com.android.settingslib.notification.modes.ZenModesBackend;
 import java.time.Duration;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -33,7 +37,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ZenModeRepositoryImpl implements ZenModeRepository {
     public final CoroutineScope applicationScope;
@@ -47,6 +50,52 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
     public final StateFlowImpl modes;
     public final Lazy notificationBroadcasts$delegate;
     public final NotificationManager notificationManager;
+
+    /* renamed from: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Function1 $mapper;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass3(Function1 function1, Continuation continuation) {
+            super(2, continuation);
+            this.$mapper = function1;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass3 anonymousClass3 = new AnonymousClass3(this.$mapper, continuation);
+            anonymousClass3.L$0 = obj;
+            return anonymousClass3;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass3) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                Object objMo781invoke = this.$mapper.mo781invoke(null);
+                this.label = 1;
+                if (flowCollector.emit(objMo781invoke, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public ZenModeRepositoryImpl(Context context, NotificationManager notificationManager, ZenModesBackend zenModesBackend, ContentResolver contentResolver, CoroutineScope coroutineScope, CoroutineContext coroutineContext, Handler handler) {
         this.context = context;
@@ -76,7 +125,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl2.flowFromBroadcast("android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -94,7 +143,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl3.flowFromBroadcast("android.app.action.INTERRUPTION_FILTER_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -129,7 +178,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl2.flowFromBroadcast("android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -147,7 +196,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl3.flowFromBroadcast("android.app.action.INTERRUPTION_FILTER_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -182,7 +231,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl2.flowFromBroadcast("android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -200,7 +249,7 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                         return zenModeRepositoryImpl3.flowFromBroadcast("android.app.action.INTERRUPTION_FILTER_CHANGED", new Function1() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$$ExternalSyntheticLambda4
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Bundle extras;
                                 NotificationManager.Policy policy;
                                 Intent intent = (Intent) obj;
@@ -236,7 +285,6 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
         final SharedFlow sharedFlow = (SharedFlow) this.notificationBroadcasts$delegate.getValue();
         final Flow flow = new Flow() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ String $intentAction$inlined;
@@ -266,74 +314,51 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                     this.$intentAction$inlined = str;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1$2$1 r0 = (com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1$2$1 r0 = new com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        android.content.Intent r6 = (android.content.Intent) r6
-                        java.lang.String r2 = r4.$intentAction$inlined
-                        java.lang.String r6 = r6.getAction()
-                        boolean r6 = kotlin.jvm.internal.Intrinsics.areEqual(r2, r6)
-                        if (r6 == 0) goto L4c
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (Intrinsics.areEqual(this.$intentAction$inlined, ((Intent) obj).getAction())) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, str), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = sharedFlow.collect(new AnonymousClass2(flowCollector, str), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        return FlowKt.stateIn(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new ZenModeRepositoryImpl$flowFromBroadcast$3(function1, null), new Flow() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1
+        return FlowKt.stateIn(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass3(function1, null), new Flow() { // from class: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ Function1 $mapper$inlined;
@@ -362,66 +387,46 @@ public final class ZenModeRepositoryImpl implements ZenModeRepository {
                     this.$mapper$inlined = function1;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1$2$1 r0 = (com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1$2$1 r0 = new com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.content.Intent r5 = (android.content.Intent) r5
-                        kotlin.jvm.functions.Function1 r6 = r4.$mapper$inlined
-                        java.lang.Object r5 = r6.mo779invoke(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.notification.data.repository.ZenModeRepositoryImpl$flowFromBroadcast$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Object objMo781invoke = this.$mapper$inlined.mo781invoke((Intent) obj);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(objMo781invoke, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, function1), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector, function1), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), this.backgroundCoroutineContext), this.applicationScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), null);
     }

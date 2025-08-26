@@ -46,17 +46,14 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
-import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.GlobalScope;
-import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.android.HandlerDispatcherKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractComposeView extends ViewGroup {
     public WeakReference cachedViewTreeCompositionContext;
@@ -112,17 +109,13 @@ public abstract class AbstractComposeView extends ViewGroup {
         if (this.composition == null) {
             try {
                 this.creatingComposition = true;
-                this.composition = Wrapper_androidKt.setContent(this, resolveParentCompositionContext(), new ComposableLambdaImpl(-656146368, true, new Function2() { // from class: androidx.compose.ui.platform.AbstractComposeView$ensureCompositionCreated$1
-                    {
-                        super(2);
-                    }
-
+                this.composition = Wrapper_androidKt.setContent(this, resolveParentCompositionContext(), new ComposableLambdaImpl(-656146368, true, new Function2() { // from class: androidx.compose.ui.platform.AbstractComposeView.ensureCompositionCreated.1
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj, Object obj2) {
                         Composer composer = (Composer) obj;
-                        int intValue = ((Number) obj2).intValue();
+                        int iIntValue = ((Number) obj2).intValue();
                         ComposerImpl composerImpl = (ComposerImpl) composer;
-                        if (composerImpl.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+                        if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.ui.platform.AbstractComposeView.ensureCompositionCreated.<anonymous> (ComposeView.android.kt:249)");
                             }
@@ -259,8 +252,8 @@ public abstract class AbstractComposeView extends ViewGroup {
                                 throw new IllegalStateException("no AndroidUiDispatcher for this thread");
                             }
                         }
-                        CoroutineContext plus = coroutineContext.plus(emptyCoroutineContext);
-                        MonotonicFrameClock monotonicFrameClock = (MonotonicFrameClock) plus.get(MonotonicFrameClock.Key);
+                        CoroutineContext coroutineContextPlus = coroutineContext.plus(emptyCoroutineContext);
+                        MonotonicFrameClock monotonicFrameClock = (MonotonicFrameClock) coroutineContextPlus.get(MonotonicFrameClock.Key);
                         if (monotonicFrameClock != null) {
                             PausableMonotonicFrameClock pausableMonotonicFrameClock2 = new PausableMonotonicFrameClock(monotonicFrameClock);
                             Latch latch = pausableMonotonicFrameClock2.latch;
@@ -273,7 +266,7 @@ public abstract class AbstractComposeView extends ViewGroup {
                             pausableMonotonicFrameClock = 0;
                         }
                         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-                        MotionDurationScale motionDurationScale = (MotionDurationScale) plus.get(MotionDurationScale.Key);
+                        MotionDurationScale motionDurationScale = (MotionDurationScale) coroutineContextPlus.get(MotionDurationScale.Key);
                         MotionDurationScale motionDurationScale2 = motionDurationScale;
                         if (motionDurationScale == null) {
                             ?? motionDurationScaleImpl = new MotionDurationScaleImpl();
@@ -283,13 +276,13 @@ public abstract class AbstractComposeView extends ViewGroup {
                         if (pausableMonotonicFrameClock != 0) {
                             emptyCoroutineContext = pausableMonotonicFrameClock;
                         }
-                        CoroutineContext plus2 = plus.plus(emptyCoroutineContext).plus(motionDurationScale2);
-                        recomposer = new Recomposer(plus2);
+                        CoroutineContext coroutineContextPlus2 = coroutineContextPlus.plus(emptyCoroutineContext).plus(motionDurationScale2);
+                        recomposer = new Recomposer(coroutineContextPlus2);
                         synchronized (recomposer.stateLock) {
                             recomposer.frameClockPaused = true;
                             Unit unit2 = Unit.INSTANCE;
                         }
-                        final ContextScope CoroutineScope = CoroutineScopeKt.CoroutineScope(plus2);
+                        final ContextScope contextScopeCoroutineScope = CoroutineScopeKt.CoroutineScope(coroutineContextPlus2);
                         LifecycleOwner lifecycleOwner = ViewTreeLifecycleOwner.get(view);
                         Lifecycle lifecycle = lifecycleOwner != null ? lifecycleOwner.getLifecycle() : null;
                         if (lifecycle == null) {
@@ -309,7 +302,6 @@ public abstract class AbstractComposeView extends ViewGroup {
                         });
                         lifecycle.addObserver(new LifecycleEventObserver() { // from class: androidx.compose.ui.platform.WindowRecomposer_androidKt$createLifecycleAwareWindowRecomposer$2
 
-                            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                             public abstract /* synthetic */ class WhenMappings {
                                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -351,9 +343,9 @@ public abstract class AbstractComposeView extends ViewGroup {
                             public final void onStateChanged(LifecycleOwner lifecycleOwner2, Lifecycle.Event event) {
                                 boolean z;
                                 int i = WhenMappings.$EnumSwitchMapping$0[event.ordinal()];
-                                CancellableContinuation cancellableContinuation = null;
+                                CancellableContinuation cancellableContinuationDeriveStateLocked = null;
                                 if (i == 1) {
-                                    BuildersKt.launch$default(CoroutineScope.this, null, CoroutineStart.UNDISPATCHED, new WindowRecomposer_androidKt$createLifecycleAwareWindowRecomposer$2$onStateChanged$1(ref$ObjectRef, recomposer, lifecycleOwner2, this, view, null), 1);
+                                    BuildersKt.launch$default(contextScopeCoroutineScope, null, CoroutineStart.UNDISPATCHED, new WindowRecomposer_androidKt$createLifecycleAwareWindowRecomposer$2$onStateChanged$1(ref$ObjectRef, recomposer, lifecycleOwner2, this, view, null), 1);
                                     return;
                                 }
                                 if (i != 2) {
@@ -404,12 +396,12 @@ public abstract class AbstractComposeView extends ViewGroup {
                                 synchronized (recomposer3.stateLock) {
                                     if (recomposer3.frameClockPaused) {
                                         recomposer3.frameClockPaused = false;
-                                        cancellableContinuation = recomposer3.deriveStateLocked();
+                                        cancellableContinuationDeriveStateLocked = recomposer3.deriveStateLocked();
                                     }
                                 }
-                                if (cancellableContinuation != null) {
+                                if (cancellableContinuationDeriveStateLocked != null) {
                                     int i4 = Result.$r8$clinit;
-                                    ((CancellableContinuationImpl) cancellableContinuation).resumeWith(Unit.INSTANCE);
+                                    ((CancellableContinuationImpl) cancellableContinuationDeriveStateLocked).resumeWith(Unit.INSTANCE);
                                 }
                             }
                         });
@@ -417,12 +409,12 @@ public abstract class AbstractComposeView extends ViewGroup {
                         GlobalScope globalScope = GlobalScope.INSTANCE;
                         Handler handler = view.getHandler();
                         int i = HandlerDispatcherKt.$r8$clinit;
-                        final StandaloneCoroutine launch$default = BuildersKt.launch$default(globalScope, new HandlerContext(handler, "windowRecomposer cleanup").immediate, null, new WindowRecomposerPolicy$createAndInstallWindowRecomposer$unsetJob$1(recomposer, view, null), 2);
+                        final StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default(globalScope, new HandlerContext(handler, "windowRecomposer cleanup").immediate, null, new WindowRecomposerPolicy$createAndInstallWindowRecomposer$unsetJob$1(recomposer, view, null), 2);
                         view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: androidx.compose.ui.platform.WindowRecomposerPolicy$createAndInstallWindowRecomposer$1
                             @Override // android.view.View.OnAttachStateChangeListener
                             public final void onViewDetachedFromWindow(View view3) {
                                 view3.removeOnAttachStateChangeListener(this);
-                                Job.this.cancel(null);
+                                standaloneCoroutineLaunch$default.cancel(null);
                             }
 
                             @Override // android.view.View.OnAttachStateChangeListener
@@ -473,10 +465,10 @@ public abstract class AbstractComposeView extends ViewGroup {
     /* JADX WARN: Type inference failed for: r0v1, types: [android.view.View$OnAttachStateChangeListener, androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnViewTreeLifecycleDestroyed$installFor$listener$1] */
     /* JADX WARN: Type inference failed for: r1v0, types: [T, androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnViewTreeLifecycleDestroyed$installFor$1] */
     public final void setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed disposeOnViewTreeLifecycleDestroyed) {
-        Function0 function0;
-        Function0 function02 = this.disposeViewCompositionStrategy;
-        if (function02 != null) {
-            function02.invoke();
+        Function0 function0Access$installForLifecycle;
+        Function0 function0 = this.disposeViewCompositionStrategy;
+        if (function0 != null) {
+            function0.invoke();
         }
         disposeOnViewTreeLifecycleDestroyed.getClass();
         if (isAttachedToWindow()) {
@@ -485,18 +477,18 @@ public abstract class AbstractComposeView extends ViewGroup {
                 InlineClassHelperKt.throwIllegalStateExceptionForNullCheck("View tree for " + this + " has no ViewTreeLifecycleOwner");
                 throw new KotlinNothingValueException();
             }
-            function0 = ViewCompositionStrategy_androidKt.access$installForLifecycle(this, lifecycleOwner.getLifecycle());
+            function0Access$installForLifecycle = ViewCompositionStrategy_androidKt.access$installForLifecycle(this, lifecycleOwner.getLifecycle());
         } else {
             final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
             final ?? r0 = new View.OnAttachStateChangeListener() { // from class: androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnViewTreeLifecycleDestroyed$installFor$listener$1
                 /* JADX WARN: Type inference failed for: r3v6, types: [T, kotlin.jvm.functions.Function0] */
                 @Override // android.view.View.OnAttachStateChangeListener
                 public final void onViewAttachedToWindow(View view) {
-                    LifecycleOwner lifecycleOwner2 = ViewTreeLifecycleOwner.get(AbstractComposeView.this);
-                    AbstractComposeView abstractComposeView = AbstractComposeView.this;
+                    LifecycleOwner lifecycleOwner2 = ViewTreeLifecycleOwner.get(this.$view);
+                    AbstractComposeView abstractComposeView = this.$view;
                     if (lifecycleOwner2 != null) {
                         ref$ObjectRef.element = ViewCompositionStrategy_androidKt.access$installForLifecycle(abstractComposeView, lifecycleOwner2.getLifecycle());
-                        AbstractComposeView.this.removeOnAttachStateChangeListener(this);
+                        this.$view.removeOnAttachStateChangeListener(this);
                     } else {
                         InlineClassHelperKt.throwIllegalStateExceptionForNullCheck("View tree for " + abstractComposeView + " has no ViewTreeLifecycleOwner");
                         throw new KotlinNothingValueException();
@@ -516,11 +508,11 @@ public abstract class AbstractComposeView extends ViewGroup {
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    AbstractComposeView.this.removeOnAttachStateChangeListener(r0);
+                    this.$view.removeOnAttachStateChangeListener(r0);
                     return Unit.INSTANCE;
                 }
             };
-            function0 = new Function0() { // from class: androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnViewTreeLifecycleDestroyed$installFor$2
+            function0Access$installForLifecycle = new Function0() { // from class: androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnViewTreeLifecycleDestroyed$installFor$2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
@@ -533,7 +525,7 @@ public abstract class AbstractComposeView extends ViewGroup {
                 }
             };
         }
-        this.disposeViewCompositionStrategy = function0;
+        this.disposeViewCompositionStrategy = function0Access$installForLifecycle;
     }
 
     @Override // android.view.ViewGroup
@@ -573,10 +565,10 @@ public abstract class AbstractComposeView extends ViewGroup {
         final ?? r1 = new View.OnAttachStateChangeListener() { // from class: androidx.compose.ui.platform.ViewCompositionStrategy$DisposeOnDetachedFromWindowOrReleasedFromPool$installFor$listener$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
-                if (PoolingContainer.isWithinPoolingContainer(AbstractComposeView.this)) {
+                if (PoolingContainer.isWithinPoolingContainer(this.$view)) {
                     return;
                 }
-                AbstractComposeView.this.disposeComposition();
+                this.$view.disposeComposition();
             }
 
             @Override // android.view.View.OnAttachStateChangeListener
@@ -588,7 +580,7 @@ public abstract class AbstractComposeView extends ViewGroup {
             @Override // androidx.customview.poolingcontainer.PoolingContainerListener
             public final void onRelease() {
                 ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool disposeOnDetachedFromWindowOrReleasedFromPool = ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool.INSTANCE;
-                AbstractComposeView.this.disposeComposition();
+                this.f$0.disposeComposition();
             }
         };
         PoolingContainer.addPoolingContainerListener(this, poolingContainerListener);
@@ -600,8 +592,8 @@ public abstract class AbstractComposeView extends ViewGroup {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                AbstractComposeView.this.removeOnAttachStateChangeListener(r1);
-                PoolingContainer.removePoolingContainerListener(AbstractComposeView.this, poolingContainerListener);
+                this.$view.removeOnAttachStateChangeListener(r1);
+                PoolingContainer.removePoolingContainerListener(this.$view, poolingContainerListener);
                 return Unit.INSTANCE;
             }
         };

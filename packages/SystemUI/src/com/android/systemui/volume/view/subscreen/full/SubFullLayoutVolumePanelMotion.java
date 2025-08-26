@@ -21,7 +21,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubFullLayoutVolumePanelMotion {
     public static final PathInterpolator HIDE_INTERPOLATOR;
@@ -32,7 +31,6 @@ public final class SubFullLayoutVolumePanelMotion {
     public SpringAnimation singleShowSpringAnimation;
     public final StoreInteractor storeInteractor = new StoreInteractor(null, null, 3, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,10 +77,10 @@ public final class SubFullLayoutVolumePanelMotion {
     }
 
     public static Animator getVibrationAnimator(View view, float f, float f2, int i) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
-        ofFloat.setDuration(i);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "translationX", f, f2 != 0.0f ? (-f) + f2 : 0.0f);
+        objectAnimatorOfFloat.setDuration(i);
+        objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        return objectAnimatorOfFloat;
     }
 
     public static void startSeekBarTouchDownAnimation(SpringAnimation springAnimation, SpringAnimation springAnimation2, boolean z) {
@@ -153,20 +151,20 @@ public final class SubFullLayoutVolumePanelMotion {
             Context context5 = this.context;
             dimenFloat3 = ContextUtils.getDimenFloat(R.dimen.sub_full_volume_sound_icon_wave_l_max_x, context5 != null ? context5 : null);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.5f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(150L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat2);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenFloat3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat2);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenFloat3);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
-        animatorSet2.playTogether(ofFloat4);
-        animatorSet2.playTogether(ofFloat5);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat5);
         animatorSet2.setDuration(200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet3 = new AnimatorSet();
@@ -209,20 +207,20 @@ public final class SubFullLayoutVolumePanelMotion {
             Context context5 = this.context;
             dimenFloat3 = ContextUtils.getDimenFloat(R.dimen.sub_full_volume_sound_icon_wave_l_mid_x, context5 != null ? context5 : null);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat2);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenFloat3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat2);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenFloat3);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
-        animatorSet2.playTogether(ofFloat4);
-        animatorSet2.playTogether(ofFloat5);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat5);
         animatorSet2.setDuration(200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet3 = new AnimatorSet();
@@ -231,7 +229,7 @@ public final class SubFullLayoutVolumePanelMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startMidAnimation$2$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(2).build(), false);
+                this.this$0.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(2).build(), false);
             }
         });
         animatorSet3.start();
@@ -263,16 +261,16 @@ public final class SubFullLayoutVolumePanelMotion {
         } else {
             f = 0.0f;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         if (VolumePanelValues.isRing(i)) {
             Context context3 = this.context;
             animatorSet2.playTogether(ObjectAnimator.ofFloat(view2, "x", view2.getX(), ContextUtils.getDimenFloat(R.dimen.sub_full_volume_sound_icon_wave_s_min_x, context3 != null ? context3 : null)));
@@ -285,7 +283,7 @@ public final class SubFullLayoutVolumePanelMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startMinAnimation$2$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(1).build(), false);
+                this.this$0.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_ANIMATION_FINISHED).stream(i).iconTargetState(i2).iconCurrentState(1).build(), false);
             }
         });
         animatorSet3.start();
@@ -309,19 +307,19 @@ public final class SubFullLayoutVolumePanelMotion {
             Context context2 = this.context;
             dimenFloat = ContextUtils.getDimenFloat(R.dimen.sub_full_volume_media_icon_note_min_x, context2 != null ? context2 : null);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
-        ofFloat3.setDuration(200L);
-        ofFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenFloat);
+        objectAnimatorOfFloat3.setDuration(200L);
+        objectAnimatorOfFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.start();
         startSplashAnimation(view6);
     }
@@ -339,19 +337,19 @@ public final class SubFullLayoutVolumePanelMotion {
             context = null;
         }
         float dimenFloat = ContextUtils.getDimenFloat(R.dimen.sub_full_volume_sound_icon_spk_min_x, context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view4, "alpha", view4.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view4, "alpha", view4.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(50L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat);
-        ofFloat3.setDuration(200L);
-        ofFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenFloat);
+        objectAnimatorOfFloat3.setDuration(200L);
+        objectAnimatorOfFloat3.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.start();
         startVibrationAnimation(view);
     }
@@ -367,9 +365,9 @@ public final class SubFullLayoutVolumePanelMotion {
         float f = -dimenFloat;
         float f2 = dimenFloat - dimenFloat2;
         float f3 = -(dimenFloat - (dimenFloat2 * 2));
-        List<Animator> mutableListOf = CollectionsKt__CollectionsKt.mutableListOf(getVibrationAnimator(view, 0.0f, f, 60), getVibrationAnimator(view, f, f2, 80), getVibrationAnimator(view, f2, f3, 100), getVibrationAnimator(view, f3, 0.0f, 120));
+        List<Animator> listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(getVibrationAnimator(view, 0.0f, f, 60), getVibrationAnimator(view, f, f2, 80), getVibrationAnimator(view, f2, f3, 100), getVibrationAnimator(view, f3, 0.0f, 120));
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playSequentially(mutableListOf);
+        animatorSet.playSequentially(listMutableListOf);
         animatorSet.start();
     }
 }

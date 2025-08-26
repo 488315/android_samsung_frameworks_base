@@ -44,9 +44,9 @@ public interface ICameraInjectionSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICameraInjectionSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraInjectionSession)) {
-                return (ICameraInjectionSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICameraInjectionSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraInjectionSession)) {
+                return (ICameraInjectionSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface ICameraInjectionSession extends IInterface {
 
             @Override // android.hardware.camera2.ICameraInjectionSession
             public void stopInjection() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICameraInjectionSession.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICameraInjectionSession.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

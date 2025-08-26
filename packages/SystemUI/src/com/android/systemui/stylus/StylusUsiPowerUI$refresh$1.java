@@ -15,10 +15,10 @@ import java.text.NumberFormat;
 import kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4;
 import kotlin.jvm.internal.Reflection;
 import kotlin.sequences.EmptySequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StylusUsiPowerUI$refresh$1 implements Runnable {
     public final /* synthetic */ StylusUsiPowerUI this$0;
@@ -35,10 +35,10 @@ public final class StylusUsiPowerUI$refresh$1 implements Runnable {
         if (!stylusUsiPowerUI2.suppressed) {
             InputManager inputManager = stylusUsiPowerUI2.inputManager;
             int[] inputDeviceIds = inputManager.getInputDeviceIds();
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)));
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)).new AnonymousClass1();
             while (true) {
-                if (filteringSequence$iterator$1.hasNext()) {
-                    InputDevice inputDevice = (InputDevice) filteringSequence$iterator$1.next();
+                if (anonymousClass1.hasNext()) {
+                    InputDevice inputDevice = (InputDevice) anonymousClass1.next();
                     if (inputDevice.supportsSource(16386) && inputDevice.getBluetoothAddress() != null) {
                         break;
                     }
@@ -54,12 +54,12 @@ public final class StylusUsiPowerUI$refresh$1 implements Runnable {
                     notificationCompat$Builder.mLocalOnly = true;
                     notificationCompat$Builder.setFlag(8, true);
                     notificationCompat$Builder.setFlag(16, true);
-                    Notification build = notificationCompat$Builder.build();
+                    Notification notificationBuild = notificationCompat$Builder.build();
                     DebugLogger debugLogger = DebugLogger.INSTANCE;
                     boolean z2 = Build.IS_DEBUGGABLE;
                     Reflection.getOrCreateKotlinClass(StylusUsiPowerUI.class).getSimpleName();
                     stylusUsiPowerUI3.logUiEvent(StylusUiEvent.STYLUS_LOW_BATTERY_NOTIFICATION_SHOWN);
-                    stylusUsiPowerUI3.notificationManager.notify(StylusUsiPowerUI.USI_NOTIFICATION_ID, build);
+                    stylusUsiPowerUI3.notificationManager.notify(StylusUsiPowerUI.USI_NOTIFICATION_ID, notificationBuild);
                     return;
                 }
             }

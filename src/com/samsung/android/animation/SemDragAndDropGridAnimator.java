@@ -83,11 +83,11 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         if (!checkDndGrabHandle(i, i2, i3)) {
             return false;
         }
-        boolean canDrag = this.mDndController.canDrag(i3);
-        if (!canDrag) {
+        boolean zCanDrag = this.mDndController.canDrag(i3);
+        if (!zCanDrag) {
             speakNotDraggableForAccessibility(i3);
         }
-        return canDrag;
+        return zCanDrag;
     }
 
     private boolean checkDndGrabHandle(int i, int i2, int i3) {
@@ -101,95 +101,44 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         return this.mTempRect.contains(i, i2);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x000e, code lost:
-    
-        if (r0 != 3) goto L46;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r5) {
-        /*
-            r4 = this;
-            int r0 = r5.getAction()
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L39
-            if (r0 == r2) goto L2b
-            r3 = 2
-            if (r0 == r3) goto L12
-            r2 = 3
-            if (r0 == r2) goto L2b
-            goto L99
-        L12:
-            boolean r5 = r4.isDraggable()
-            if (r5 == 0) goto L99
-            int r5 = r4.mDndTouchMode
-            if (r5 != r2) goto L99
-            android.widget.GridView r5 = r4.mGridView
-            int r5 = r5.getCount()
-            if (r5 <= r2) goto L99
-            boolean r4 = r4.activatedByLongPress()
-            if (r4 == 0) goto L99
-            return r2
-        L2b:
-            boolean r0 = r4.isDraggable()
-            if (r0 == 0) goto L99
-            int r0 = r4.mDndTouchMode
-            if (r0 == 0) goto L99
-            r4.onTouchUpCancel(r5)
-            goto L99
-        L39:
-            android.widget.GridView r0 = r4.mGridView
-            boolean r0 = r0.isEnabled()
-            if (r0 != 0) goto L42
-            return r1
-        L42:
-            int r0 = r4.mDndTouchX
-            r4.mFirstTouchX = r0
-            int r0 = r4.mDndTouchY
-            r4.mFirstTouchY = r0
-            float r0 = r5.getX()
-            int r0 = (int) r0
-            r4.mDndTouchX = r0
-            float r5 = r5.getY()
-            int r5 = (int) r5
-            r4.mDndTouchY = r5
-            boolean r5 = r4.isDraggable()
-            if (r5 == 0) goto L99
-            android.widget.GridView r5 = r4.mGridView
-            int r5 = r5.getCount()
-            if (r5 <= r2) goto L99
-            android.widget.GridView r5 = r4.mGridView
-            int r0 = r4.mDndTouchX
-            int r3 = r4.mDndTouchY
-            int r5 = r5.pointToPosition(r0, r3)
-            r0 = -1
-            if (r5 != r0) goto L74
-            return r1
-        L74:
-            boolean r0 = r4.activatedByLongPress()
-            if (r0 == 0) goto L7b
-            return r1
-        L7b:
-            if (r5 < 0) goto L96
-            android.widget.GridView r0 = r4.mGridView
-            int r0 = r0.getCount()
-            if (r5 >= r0) goto L96
-            int r0 = r4.mDndTouchX
-            int r3 = r4.mDndTouchY
-            boolean r0 = r4.checkStartDnd(r0, r3, r5)
-            if (r0 == 0) goto L96
-            boolean r4 = r4.initDrag(r5)
-            if (r4 == 0) goto L99
-            return r2
-        L96:
-            r4.resetDndState()
-        L99:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropGridAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        int iPointToPosition;
+        int action = motionEvent.getAction();
+        if (action != 0) {
+            if (action == 1) {
+                if (isDraggable() && this.mDndTouchMode != 0) {
+                    onTouchUpCancel(motionEvent);
+                }
+            } else if (action != 2) {
+                if (action == 3) {
+                }
+            } else if (isDraggable() && this.mDndTouchMode == 1 && this.mGridView.getCount() > 1 && activatedByLongPress()) {
+                return true;
+            }
+        } else {
+            if (!this.mGridView.isEnabled()) {
+                return false;
+            }
+            this.mFirstTouchX = this.mDndTouchX;
+            this.mFirstTouchY = this.mDndTouchY;
+            this.mDndTouchX = (int) motionEvent.getX();
+            this.mDndTouchY = (int) motionEvent.getY();
+            if (!isDraggable() || this.mGridView.getCount() <= 1 || (iPointToPosition = this.mGridView.pointToPosition(this.mDndTouchX, this.mDndTouchY)) == -1 || activatedByLongPress()) {
+                return false;
+            }
+            if (iPointToPosition >= 0 && iPointToPosition < this.mGridView.getCount() && checkStartDnd(this.mDndTouchX, this.mDndTouchY, iPointToPosition)) {
+                if (initDrag(iPointToPosition)) {
+                    return true;
+                }
+            } else {
+                resetDndState();
+            }
+        }
+        return false;
     }
 
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long j) {
@@ -254,49 +203,28 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         this.mItemAnimator.start();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0016, code lost:
-    
-        if (r0 != 3) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onTouchEvent(android.view.MotionEvent r4) {
-        /*
-            r3 = this;
-            boolean r0 = r3.isDraggable()
-            if (r0 == 0) goto L21
-            int r0 = r3.mDndTouchMode
-            if (r0 != 0) goto Lb
-            goto L21
-        Lb:
-            int r0 = r4.getAction()
-            r1 = 1
-            if (r0 == r1) goto L1d
-            r2 = 2
-            if (r0 == r2) goto L19
-            r2 = 3
-            if (r0 == r2) goto L1d
-            goto L20
-        L19:
-            r3.onTouchMove(r4)
-            goto L20
-        L1d:
-            r3.onTouchUpCancel(r4)
-        L20:
-            return r1
-        L21:
-            r3 = 0
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropGridAnimator.onTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        if (!isDraggable() || this.mDndTouchMode == 0) {
+            return false;
+        }
+        int action = motionEvent.getAction();
+        if (action == 1) {
+            onTouchUpCancel(motionEvent);
+        } else if (action == 2) {
+            onTouchMove(motionEvent);
+        } else if (action == 3) {
+        }
+        return true;
     }
 
     private void onTouchUpCancel(MotionEvent motionEvent) {
         final int left;
         int height;
-        final int height2;
+        final int iHeight;
         if (this.mDndTouchMode == 1) {
             resetDndState();
             if (this.mDndListener != null) {
@@ -326,18 +254,18 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                 }
                 if (this.mDragPos < firstVisiblePosition) {
                     left = this.mGridView.getChildAt(this.mDragPos % numColumns).getLeft() - i;
-                    height2 = ((-this.mGridView.getPaddingTop()) - i2) - this.mDragViewRect.height();
-                    Log.v(TAG, "dndListener.onTouchUp() dragView == null, distanceX=" + left + ", distanceY=" + height2);
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.3
+                    iHeight = ((-this.mGridView.getPaddingTop()) - i2) - this.mDragViewRect.height();
+                    Log.v(TAG, "dndListener.onTouchUp() dragView == null, distanceX=" + left + ", distanceY=" + iHeight);
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.3
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
                             SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateX = (int) (left * valueAnimator.getAnimatedFraction());
-                            SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY = (int) (height2 * valueAnimator.getAnimatedFraction());
+                            SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY = (int) (iHeight * valueAnimator.getAnimatedFraction());
                             SemDragAndDropGridAnimator.this.mGridView.invalidate();
                         }
                     });
-                    ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.4
+                    valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.4
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public void onAnimationEnd(Animator animator) {
                             if (SemDragAndDropGridAnimator.this.mFirstDragPos != SemDragAndDropGridAnimator.this.mDragPos) {
@@ -353,26 +281,26 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                             }
                         }
                     });
-                    ofFloat.setDuration(210L);
-                    ofFloat.setInterpolator(SINE_IN_OUT_70);
-                    ofFloat.start();
+                    valueAnimatorOfFloat.setDuration(210L);
+                    valueAnimatorOfFloat.setInterpolator(SINE_IN_OUT_70);
+                    valueAnimatorOfFloat.start();
                 } else {
                     left = this.mGridView.getChildAt((this.mGridView.getChildCount() + (this.mDragPos % numColumns)) - numColumns).getLeft() - i;
                     height = this.mGridView.getHeight();
                 }
             }
-            height2 = height - i2;
-            Log.v(TAG, "dndListener.onTouchUp() dragView == null, distanceX=" + left + ", distanceY=" + height2);
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.3
+            iHeight = height - i2;
+            Log.v(TAG, "dndListener.onTouchUp() dragView == null, distanceX=" + left + ", distanceY=" + iHeight);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.3
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateX = (int) (left * valueAnimator.getAnimatedFraction());
-                    SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY = (int) (height2 * valueAnimator.getAnimatedFraction());
+                    SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY = (int) (iHeight * valueAnimator.getAnimatedFraction());
                     SemDragAndDropGridAnimator.this.mGridView.invalidate();
                 }
             });
-            ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.4
+            valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.4
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animator) {
                     if (SemDragAndDropGridAnimator.this.mFirstDragPos != SemDragAndDropGridAnimator.this.mDragPos) {
@@ -388,9 +316,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                     }
                 }
             });
-            ofFloat2.setDuration(210L);
-            ofFloat2.setInterpolator(SINE_IN_OUT_70);
-            ofFloat2.start();
+            valueAnimatorOfFloat2.setDuration(210L);
+            valueAnimatorOfFloat2.setInterpolator(SINE_IN_OUT_70);
+            valueAnimatorOfFloat2.start();
         } else if (this.mListItemSelectionAnimating) {
             resetDndState();
             if (this.mDndListener != null) {
@@ -470,27 +398,27 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator
     void reorderIfNeeded() {
         int i = this.mDragPos;
-        int pointToPosition = this.mGridView.pointToPosition((this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2), (this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2));
-        if (pointToPosition != -1) {
-            if (this.mDndController.canDrop(this.mFirstDragPos, pointToPosition)) {
-                this.mDragPos = pointToPosition;
-            } else if (this.mDragPos > pointToPosition) {
+        int iPointToPosition = this.mGridView.pointToPosition((this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2), (this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2));
+        if (iPointToPosition != -1) {
+            if (this.mDndController.canDrop(this.mFirstDragPos, iPointToPosition)) {
+                this.mDragPos = iPointToPosition;
+            } else if (this.mDragPos > iPointToPosition) {
                 while (true) {
-                    pointToPosition++;
-                    if (pointToPosition >= this.mDragPos) {
+                    iPointToPosition++;
+                    if (iPointToPosition >= this.mDragPos) {
                         break;
-                    } else if (this.mDndController.canDrop(this.mFirstDragPos, pointToPosition)) {
-                        this.mDragPos = pointToPosition;
+                    } else if (this.mDndController.canDrop(this.mFirstDragPos, iPointToPosition)) {
+                        this.mDragPos = iPointToPosition;
                         break;
                     }
                 }
             } else {
                 while (true) {
-                    pointToPosition--;
-                    if (pointToPosition <= this.mDragPos) {
+                    iPointToPosition--;
+                    if (iPointToPosition <= this.mDragPos) {
                         break;
-                    } else if (this.mDndController.canDrop(this.mFirstDragPos, pointToPosition)) {
-                        this.mDragPos = pointToPosition;
+                    } else if (this.mDndController.canDrop(this.mFirstDragPos, iPointToPosition)) {
+                        this.mDragPos = iPointToPosition;
                         break;
                     }
                 }
@@ -508,8 +436,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     }
 
     private int findMovedItemIndex(View view) {
-        int i;
-        int i2;
+        int destOffsetX;
+        int destOffsetY;
         int viewCenterX = SemAnimatorUtils.getViewCenterX(view);
         int viewCenterY = SemAnimatorUtils.getViewCenterY(view);
         int childCount = this.mGridView.getChildCount();
@@ -517,20 +445,20 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         if (childCount <= 0) {
             return -1;
         }
-        for (int i3 = childCount - 1; i3 >= 0; i3--) {
-            this.mGridView.getChildAt(i3).getHitRect(this.mTempRect);
-            int i4 = i3 + firstVisiblePosition;
-            SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(i4);
+        for (int i = childCount - 1; i >= 0; i--) {
+            this.mGridView.getChildAt(i).getHitRect(this.mTempRect);
+            int i2 = i + firstVisiblePosition;
+            SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(i2);
             if (itemAnimation instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
                 SemDragAndDropAnimationCore.TranslateItemAnimation translateItemAnimation = (SemDragAndDropAnimationCore.TranslateItemAnimation) itemAnimation;
-                i = translateItemAnimation.getDestOffsetX();
-                i2 = translateItemAnimation.getDestOffsetY();
+                destOffsetX = translateItemAnimation.getDestOffsetX();
+                destOffsetY = translateItemAnimation.getDestOffsetY();
             } else {
-                i = 0;
-                i2 = 0;
+                destOffsetX = 0;
+                destOffsetY = 0;
             }
-            if (i3 != this.mFirstDragPos - firstVisiblePosition && this.mTempRect.contains(viewCenterX - i, viewCenterY - i2)) {
-                return i4;
+            if (i != this.mFirstDragPos - firstVisiblePosition && this.mTempRect.contains(viewCenterX - destOffsetX, viewCenterY - destOffsetY)) {
+                return i2;
             }
         }
         return -1;
@@ -573,7 +501,7 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         int i4;
         int firstVisiblePosition = this.mGridView.getFirstVisiblePosition();
         int numColumns = this.mGridView.getNumColumns();
-        boolean isLayoutRtl = this.mGridView.isLayoutRtl();
+        boolean zIsLayoutRtl = this.mGridView.isLayoutRtl();
         if (i2 <= i) {
             for (int i5 = i - 1; i5 >= i2; i5--) {
                 if (i5 < this.mFirstDragPos) {
@@ -586,7 +514,7 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                         int i9 = i6 + i7;
                         int i10 = (i9 / numColumns) - (i5 / numColumns);
                         int i11 = (i9 % numColumns) - (i5 % numColumns);
-                        if (isLayoutRtl) {
+                        if (zIsLayoutRtl) {
                             i3 = i11 * this.mItemWidth * (-1);
                         } else {
                             i3 = i11 * this.mItemWidth;
@@ -621,7 +549,7 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                     int i15 = i12 - i13;
                     int i16 = (i15 / numColumns) - (i / numColumns);
                     int i17 = (i15 % numColumns) - (i % numColumns);
-                    if (isLayoutRtl) {
+                    if (zIsLayoutRtl) {
                         i4 = i17 * this.mItemWidth * (-1);
                     } else {
                         i4 = i17 * this.mItemWidth;
@@ -643,8 +571,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
 
     private void addNewTranslation(int i, int i2, int i3) {
         SemDragAndDropAnimationCore.TranslateItemAnimation translateItemAnimation;
-        int i4;
-        int i5;
+        int currentTranslateX;
+        int currentTranslateY;
         SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(i);
         if (itemAnimation instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
             translateItemAnimation = (SemDragAndDropAnimationCore.TranslateItemAnimation) itemAnimation;
@@ -654,38 +582,38 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         int destOffsetX = translateItemAnimation.getDestOffsetX();
         int destOffsetY = translateItemAnimation.getDestOffsetY();
         if (translateItemAnimation.isFinished()) {
-            i4 = 0;
-            i5 = 0;
+            currentTranslateX = 0;
+            currentTranslateY = 0;
         } else {
-            i4 = (int) translateItemAnimation.getCurrentTranslateX();
-            i5 = (int) translateItemAnimation.getCurrentTranslateY();
+            currentTranslateX = (int) translateItemAnimation.getCurrentTranslateX();
+            currentTranslateY = (int) translateItemAnimation.getCurrentTranslateY();
         }
         if (!translateItemAnimation.isFinished()) {
             translateItemAnimation.setStartAndDuration(translateItemAnimation.getProgress());
         } else {
             translateItemAnimation.setStartAndDuration(0);
         }
-        int i6 = i2 + destOffsetX;
-        int i7 = i3 + destOffsetY;
-        translateItemAnimation.translate(i6, i6 - i4, i7, i7 - i5);
+        int i4 = i2 + destOffsetX;
+        int i5 = i3 + destOffsetY;
+        translateItemAnimation.translate(i4, i4 - currentTranslateX, i5, i5 - currentTranslateY);
         this.mItemAnimator.putItemAnimation(i, translateItemAnimation);
     }
 
     private void addReturningTranslation(int i) {
         SemDragAndDropAnimationCore.TranslateItemAnimation translateItemAnimation;
-        int i2;
-        int i3;
+        int currentTranslateX;
+        int currentTranslateY;
         SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(i);
         if (itemAnimation instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
             translateItemAnimation = (SemDragAndDropAnimationCore.TranslateItemAnimation) itemAnimation;
-            i2 = (int) translateItemAnimation.getCurrentTranslateX();
-            i3 = (int) translateItemAnimation.getCurrentTranslateY();
+            currentTranslateX = (int) translateItemAnimation.getCurrentTranslateX();
+            currentTranslateY = (int) translateItemAnimation.getCurrentTranslateY();
         } else {
             translateItemAnimation = new SemDragAndDropAnimationCore.TranslateItemAnimation();
-            i2 = 0;
-            i3 = 0;
+            currentTranslateX = 0;
+            currentTranslateY = 0;
         }
-        translateItemAnimation.translate(0, -i2, 0, -i3);
+        translateItemAnimation.translate(0, -currentTranslateX, 0, -currentTranslateY);
         translateItemAnimation.setStartAndDuration(translateItemAnimation.getProgress());
         this.mItemAnimator.putItemAnimation(i, translateItemAnimation);
     }
@@ -722,11 +650,11 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     }
 
     public boolean preDrawChild(Canvas canvas, View view, long j) {
-        int indexOfChild = this.mGridView.indexOfChild(view) + this.mGridView.getFirstVisiblePosition();
-        if (isDraggable() && indexOfChild == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
+        int iIndexOfChild = this.mGridView.indexOfChild(view) + this.mGridView.getFirstVisiblePosition();
+        if (isDraggable() && iIndexOfChild == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
             return false;
         }
-        SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(indexOfChild);
+        SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(iIndexOfChild);
         this.mCanvasSaveCount = 0;
         if (itemAnimation == null) {
             return true;
@@ -746,10 +674,10 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
 
     private void drawDragHandlerIfNeeded(Canvas canvas, View view, long j) {
         if (isDraggable()) {
-            int indexOfChild = this.mGridView.indexOfChild(view) + this.mGridView.getFirstVisiblePosition();
-            if (this.mGridView.getAdapter().isEnabled(indexOfChild)) {
+            int iIndexOfChild = this.mGridView.indexOfChild(view) + this.mGridView.getFirstVisiblePosition();
+            if (this.mGridView.getAdapter().isEnabled(iIndexOfChild)) {
                 view.getHitRect(this.mTempRect);
-                drawDragHandle(canvas, this.mTempRect, false, this.mDndController.canDrag(indexOfChild));
+                drawDragHandle(canvas, this.mTempRect, false, this.mDndController.canDrag(iIndexOfChild));
             }
         }
     }

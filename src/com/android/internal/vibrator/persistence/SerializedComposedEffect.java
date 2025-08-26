@@ -31,11 +31,11 @@ final class SerializedComposedEffect implements XmlSerializedVibration<Vibration
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.android.internal.vibrator.persistence.XmlSerializedVibration
     public VibrationEffect.Composed deserialize() {
-        VibrationEffect.Composition startComposition = VibrationEffect.startComposition();
+        VibrationEffect.Composition compositionStartComposition = VibrationEffect.startComposition();
         for (SerializedSegment serializedSegment : this.mSegments) {
-            serializedSegment.deserializeIntoComposition(startComposition);
+            serializedSegment.deserializeIntoComposition(compositionStartComposition);
         }
-        return (VibrationEffect.Composed) startComposition.compose();
+        return (VibrationEffect.Composed) compositionStartComposition.compose();
     }
 
     @Override // com.android.internal.vibrator.persistence.XmlSerializedVibration

@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import com.android.wm.shell.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CustomWheelView extends View {
     public final float[] mIntervals;
@@ -23,13 +22,13 @@ public class CustomWheelView extends View {
 
     public CustomWheelView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.DividerView, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.DividerView, 0, 0);
         try {
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(0, 5);
-            int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(1, 5);
-            int dimensionPixelSize3 = obtainStyledAttributes.getDimensionPixelSize(2, 3);
-            this.mSplitOrientation = obtainStyledAttributes.getInt(4, 0);
-            obtainStyledAttributes.recycle();
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 5);
+            int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 5);
+            int dimensionPixelSize3 = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 3);
+            this.mSplitOrientation = typedArrayObtainStyledAttributes.getInt(4, 0);
+            typedArrayObtainStyledAttributes.recycle();
             float f = dimensionPixelSize2;
             float f2 = dimensionPixelSize;
             float f3 = dimensionPixelSize3;
@@ -42,7 +41,7 @@ public class CustomWheelView extends View {
             path.addRoundRect(rectF, f4, f4, Path.Direction.CW);
             paint.setPathEffect(new PathDashPathEffect(path, f2, 0.0f, PathDashPathEffect.Style.MORPH));
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

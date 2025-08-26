@@ -18,7 +18,6 @@ import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UcmKeyPairGenerator extends KeyPairGeneratorSpi {
     public String mAlgorithm;
@@ -57,8 +56,8 @@ public class UcmKeyPairGenerator extends KeyPairGeneratorSpi {
             throw new IllegalStateException("Must call initialize with an android.security.KeyPairGeneratorSpec or android.security.keystore.KeyGenParameterSpec first");
         }
         UniversalCredentialUtil universalCredentialUtil = UniversalCredentialUtil.getInstance();
-        String build = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(this.mAlias).build();
-        universalCredentialUtil.delete(build);
+        String strBuild = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(this.mAlias).build();
+        universalCredentialUtil.delete(strBuild);
         Bundle bundle = new Bundle();
         bundle.putInt(UcmAgentProviderImpl.KEY_EXTRA_PURPOSE, this.mPurpose);
         String[] strArr = this.mBlockModes;
@@ -77,9 +76,9 @@ public class UcmKeyPairGenerator extends KeyPairGeneratorSpi {
         if (str != null) {
             bundle.putString(UcmAgentProviderImpl.KEY_EXTRA_EC_CURVE_NAME, str);
         }
-        PublicKey publicKey = (PublicKey) universalCredentialUtil.generateKeyPair(build, this.mAlgorithm, this.mKeySize, bundle).getSerializable(UcmAgentService.PLUGIN_PUBLIC_KEY);
+        PublicKey publicKey = (PublicKey) universalCredentialUtil.generateKeyPair(strBuild, this.mAlgorithm, this.mKeySize, bundle).getSerializable(UcmAgentService.PLUGIN_PUBLIC_KEY);
         if (publicKey != null) {
-            return new KeyPair(publicKey, universalCredentialUtil.getPrivateKey(build));
+            return new KeyPair(publicKey, universalCredentialUtil.getPrivateKey(strBuild));
         }
         throw new IllegalStateException("generateKeyPair returns null public key");
     }

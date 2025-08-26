@@ -46,17 +46,16 @@
         <match overlay="ksh_subheader_divider_bg_color">
             <original>ksh_subheader_divider_color</original>
         </match>
-        <match overlay="sesl_action_bar_background_color_light">
-            <original>sec_wifi_icon_blue_color</original>
-        </match>
         <match overlay="sesl_action_bar_text_color_title_light">
             <original>control_no_apps_title</original>
             <original>basic_interaction_main_switch_on_background</original>
             <original>basic_interaction_no_item_text</original>
+            <original>sec_wifi_icon_blue_color</original>
         </match>
         <match overlay="sesl_action_bar_text_color_subtitle_light">
             <original>control_activity_subtitle</original>
             <original>control_manage_apps_description</original>
+            <original>sec_wifi_icon_gray_color</original>
         </match>
         <match overlay="sesl_list_divider_color_light">
             <original>basic_interaction_thumbnail_list_divider</original>
@@ -73,7 +72,6 @@
         </match>
         <match overlay="sesl_background_color_light">
             <original>control_activity_contents_background</original>
-            <original>sec_wifi_icon_gray_color</original>
         </match>
         <match overlay="sesl_switchbar_off_background_color_light">
             <original>control_settings_activity_background</original>

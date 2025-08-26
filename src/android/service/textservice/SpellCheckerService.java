@@ -55,9 +55,9 @@ public abstract class SpellCheckerService extends Service {
             int length = textInfoArr.length;
             SuggestionsInfo[] suggestionsInfoArr = new SuggestionsInfo[length];
             for (int i2 = 0; i2 < length; i2++) {
-                SuggestionsInfo onGetSuggestions = onGetSuggestions(textInfoArr[i2], i);
-                suggestionsInfoArr[i2] = onGetSuggestions;
-                onGetSuggestions.setCookieAndSequence(textInfoArr[i2].getCookie(), textInfoArr[i2].getSequence());
+                SuggestionsInfo suggestionsInfoOnGetSuggestions = onGetSuggestions(textInfoArr[i2], i);
+                suggestionsInfoArr[i2] = suggestionsInfoOnGetSuggestions;
+                suggestionsInfoOnGetSuggestions.setCookieAndSequence(textInfoArr[i2].getCookie(), textInfoArr[i2].getSequence());
             }
             return suggestionsInfoArr;
         }
@@ -124,7 +124,7 @@ public abstract class SpellCheckerService extends Service {
         }
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onGetSuggestionsMultiple(TextInfo[] textInfoArr, int i, boolean z) {
+        public void onGetSuggestionsMultiple(TextInfo[] textInfoArr, int i, boolean z) throws SecurityException, IllegalArgumentException {
             int threadPriority = Process.getThreadPriority(Process.myTid());
             try {
                 Process.setThreadPriority(10);
@@ -144,7 +144,7 @@ public abstract class SpellCheckerService extends Service {
         }
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onCancel() {
+        public void onCancel() throws SecurityException, IllegalArgumentException {
             int threadPriority = Process.getThreadPriority(Process.myTid());
             try {
                 Process.setThreadPriority(10);
@@ -155,7 +155,7 @@ public abstract class SpellCheckerService extends Service {
         }
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onClose() {
+        public void onClose() throws SecurityException, IllegalArgumentException {
             int threadPriority = Process.getThreadPriority(Process.myTid());
             try {
                 Process.setThreadPriority(10);
@@ -193,9 +193,9 @@ public abstract class SpellCheckerService extends Service {
             if (spellCheckerService == null) {
                 internalISpellCheckerSession = null;
             } else {
-                Session createSession = spellCheckerService.createSession();
-                InternalISpellCheckerSession internalISpellCheckerSession2 = new InternalISpellCheckerSession(str, iSpellCheckerSessionListener, bundle, createSession, i);
-                createSession.onCreate();
+                Session sessionCreateSession = spellCheckerService.createSession();
+                InternalISpellCheckerSession internalISpellCheckerSession2 = new InternalISpellCheckerSession(str, iSpellCheckerSessionListener, bundle, sessionCreateSession, i);
+                sessionCreateSession.onCreate();
                 internalISpellCheckerSession = internalISpellCheckerSession2;
             }
             try {
@@ -246,19 +246,19 @@ public abstract class SpellCheckerService extends Service {
             int length = text.length();
             ArrayList arrayList = new ArrayList();
             wordIterator.setCharSequence(text, 0, text.length());
-            int following = wordIterator.following(0);
-            int i = following;
-            int beginning = following == -1 ? -1 : wordIterator.getBeginning(following);
-            while (beginning <= length && i != -1 && beginning != -1) {
-                if (i >= 0 && i > beginning) {
-                    CharSequence subSequence = text.subSequence(beginning, i);
-                    arrayList.add(new SentenceWordItem(new TextInfo(subSequence, 0, subSequence.length(), cookie, subSequence.hashCode()), beginning, i));
+            int iFollowing = wordIterator.following(0);
+            int iFollowing2 = iFollowing;
+            int beginning = iFollowing == -1 ? -1 : wordIterator.getBeginning(iFollowing);
+            while (beginning <= length && iFollowing2 != -1 && beginning != -1) {
+                if (iFollowing2 >= 0 && iFollowing2 > beginning) {
+                    CharSequence charSequenceSubSequence = text.subSequence(beginning, iFollowing2);
+                    arrayList.add(new SentenceWordItem(new TextInfo(charSequenceSubSequence, 0, charSequenceSubSequence.length(), cookie, charSequenceSubSequence.hashCode()), beginning, iFollowing2));
                 }
-                i = wordIterator.following(i);
-                if (i == -1) {
+                iFollowing2 = wordIterator.following(iFollowing2);
+                if (iFollowing2 == -1) {
                     break;
                 }
-                beginning = wordIterator.getBeginning(i);
+                beginning = wordIterator.getBeginning(iFollowing2);
             }
             return new SentenceTextInfoParams(textInfo, arrayList);
         }

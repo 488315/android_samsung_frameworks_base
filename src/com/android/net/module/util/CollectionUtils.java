@@ -122,44 +122,24 @@ public final class CollectionUtils {
         return -1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0015, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:10:0x0015, code lost:
     
         r1 = r1 + 1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int indexOfSubArray(byte[] r5, byte[] r6) {
-        /*
-            r0 = 0
-            r1 = r0
-        L2:
-            int r2 = r5.length
-            int r3 = r6.length
-            int r2 = r2 - r3
-            int r2 = r2 + 1
-            if (r1 >= r2) goto L1c
-            r2 = r0
-        La:
-            int r3 = r6.length
-            if (r2 >= r3) goto L1b
-            int r3 = r1 + r2
-            r3 = r5[r3]
-            r4 = r6[r2]
-            if (r3 == r4) goto L18
-            int r1 = r1 + 1
-            goto L2
-        L18:
-            int r2 = r2 + 1
-            goto La
-        L1b:
-            return r1
-        L1c:
-            r5 = -1
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.net.module.util.CollectionUtils.indexOfSubArray(byte[], byte[]):int");
+    public static int indexOfSubArray(byte[] bArr, byte[] bArr2) {
+        int i = 0;
+        while (i < (bArr.length - bArr2.length) + 1) {
+            for (int i2 = 0; i2 < bArr2.length; i2++) {
+                if (bArr[i + i2] != bArr2[i2]) {
+                    break;
+                }
+            }
+            return i;
+        }
+        return -1;
     }
 
     public static <T> ArrayList<T> filter(Collection<T> collection, Predicate<T> predicate) {
@@ -259,13 +239,13 @@ public final class CollectionUtils {
     public static <T> int getIndexForValue(SparseArray<T> sparseArray, T t) {
         int size = sparseArray.size();
         for (int i = 0; i < size; i++) {
-            T valueAt = sparseArray.valueAt(i);
-            if (valueAt == null) {
+            T tValueAt = sparseArray.valueAt(i);
+            if (tValueAt == null) {
                 if (t == null) {
                     return i;
                 }
             } else {
-                if (valueAt.equals(t)) {
+                if (tValueAt.equals(t)) {
                     return i;
                 }
             }
@@ -274,29 +254,29 @@ public final class CollectionUtils {
     }
 
     public static byte[] concatArrays(byte[]... bArr) {
-        int i = 0;
+        int length = 0;
         for (byte[] bArr2 : bArr) {
-            i += bArr2.length;
+            length += bArr2.length;
         }
-        byte[] bArr3 = new byte[i];
-        int i2 = 0;
+        byte[] bArr3 = new byte[length];
+        int length2 = 0;
         for (byte[] bArr4 : bArr) {
-            System.arraycopy(bArr4, 0, bArr3, i2, bArr4.length);
-            i2 += bArr4.length;
+            System.arraycopy(bArr4, 0, bArr3, length2, bArr4.length);
+            length2 += bArr4.length;
         }
         return bArr3;
     }
 
     public static <T> T[] concatArrays(Class<T> cls, T[]... tArr) {
-        int i = 0;
+        int length = 0;
         for (T[] tArr2 : tArr) {
-            i += tArr2.length;
+            length += tArr2.length;
         }
-        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, i));
-        int i2 = 0;
+        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, length));
+        int length2 = 0;
         for (T[] tArr4 : tArr) {
-            System.arraycopy(tArr4, 0, tArr3, i2, tArr4.length);
-            i2 += tArr4.length;
+            System.arraycopy(tArr4, 0, tArr3, length2, tArr4.length);
+            length2 += tArr4.length;
         }
         return tArr3;
     }

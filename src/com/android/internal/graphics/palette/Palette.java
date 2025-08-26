@@ -69,12 +69,12 @@ public final class Palette {
 
     private Swatch findDominantSwatch() {
         int size = this.mSwatches.size();
-        int i = Integer.MIN_VALUE;
+        int population = Integer.MIN_VALUE;
         Swatch swatch = null;
-        for (int i2 = 0; i2 < size; i2++) {
-            Swatch swatch2 = this.mSwatches.get(i2);
-            if (swatch2.getPopulation() > i) {
-                i = swatch2.getPopulation();
+        for (int i = 0; i < size; i++) {
+            Swatch swatch2 = this.mSwatches.get(i);
+            if (swatch2.getPopulation() > population) {
+                population = swatch2.getPopulation();
                 swatch = swatch2;
             }
         }
@@ -187,30 +187,30 @@ public final class Palette {
         }
 
         public Palette generate() {
-            List<Swatch> list;
+            List<Swatch> quantizedColors;
             Bitmap bitmap = this.mBitmap;
             if (bitmap != null) {
-                Bitmap scaleBitmapDown = scaleBitmapDown(bitmap);
+                Bitmap bitmapScaleBitmapDown = scaleBitmapDown(bitmap);
                 Rect rect = this.mRegion;
-                if (scaleBitmapDown != this.mBitmap && rect != null) {
-                    double width = scaleBitmapDown.getWidth() / this.mBitmap.getWidth();
+                if (bitmapScaleBitmapDown != this.mBitmap && rect != null) {
+                    double width = bitmapScaleBitmapDown.getWidth() / this.mBitmap.getWidth();
                     rect.left = (int) Math.floor(rect.left * width);
                     rect.top = (int) Math.floor(rect.top * width);
-                    rect.right = Math.min((int) Math.ceil(rect.right * width), scaleBitmapDown.getWidth());
-                    rect.bottom = Math.min((int) Math.ceil(rect.bottom * width), scaleBitmapDown.getHeight());
+                    rect.right = Math.min((int) Math.ceil(rect.right * width), bitmapScaleBitmapDown.getWidth());
+                    rect.bottom = Math.min((int) Math.ceil(rect.bottom * width), bitmapScaleBitmapDown.getHeight());
                 }
-                this.mQuantizer.quantize(getPixelsFromBitmap(scaleBitmapDown), this.mMaxColors);
-                if (scaleBitmapDown != this.mBitmap) {
-                    scaleBitmapDown.recycle();
+                this.mQuantizer.quantize(getPixelsFromBitmap(bitmapScaleBitmapDown), this.mMaxColors);
+                if (bitmapScaleBitmapDown != this.mBitmap) {
+                    bitmapScaleBitmapDown.recycle();
                 }
-                list = this.mQuantizer.getQuantizedColors();
+                quantizedColors = this.mQuantizer.getQuantizedColors();
             } else {
-                list = this.mSwatches;
-                if (list == null) {
+                quantizedColors = this.mSwatches;
+                if (quantizedColors == null) {
                     throw new AssertionError();
                 }
             }
-            return new Palette(list);
+            return new Palette(quantizedColors);
         }
 
         @Deprecated
@@ -244,29 +244,29 @@ public final class Palette {
             if (rect == null) {
                 return iArr;
             }
-            int width2 = rect.width();
-            int height2 = this.mRegion.height();
-            int[] iArr2 = new int[width2 * height2];
-            for (int i = 0; i < height2; i++) {
-                System.arraycopy(iArr, ((this.mRegion.top + i) * width) + this.mRegion.left, iArr2, i * width2, width2);
+            int iWidth = rect.width();
+            int iHeight = this.mRegion.height();
+            int[] iArr2 = new int[iWidth * iHeight];
+            for (int i = 0; i < iHeight; i++) {
+                System.arraycopy(iArr, ((this.mRegion.top + i) * width) + this.mRegion.left, iArr2, i * iWidth, iWidth);
             }
             return iArr2;
         }
 
         private Bitmap scaleBitmapDown(Bitmap bitmap) {
-            int max;
+            int iMax;
             int i;
-            double d = -1.0d;
+            double dSqrt = -1.0d;
             if (this.mResizeArea > 0) {
                 int width = bitmap.getWidth() * bitmap.getHeight();
                 int i2 = this.mResizeArea;
                 if (width > i2) {
-                    d = Math.sqrt(i2 / width);
+                    dSqrt = Math.sqrt(i2 / width);
                 }
-            } else if (this.mResizeMaxDimension > 0 && (max = Math.max(bitmap.getWidth(), bitmap.getHeight())) > (i = this.mResizeMaxDimension)) {
-                d = i / max;
+            } else if (this.mResizeMaxDimension > 0 && (iMax = Math.max(bitmap.getWidth(), bitmap.getHeight())) > (i = this.mResizeMaxDimension)) {
+                dSqrt = i / iMax;
             }
-            return d <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? bitmap : Bitmap.createScaledBitmap(bitmap, (int) Math.ceil(bitmap.getWidth() * d), (int) Math.ceil(bitmap.getHeight() * d), false);
+            return dSqrt <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? bitmap : Bitmap.createScaledBitmap(bitmap, (int) Math.ceil(bitmap.getWidth() * dSqrt), (int) Math.ceil(bitmap.getHeight() * dSqrt), false);
         }
     }
 }

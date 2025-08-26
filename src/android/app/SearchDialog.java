@@ -135,9 +135,9 @@ public class SearchDialog extends Dialog {
         this.mSearchView.setOnQueryTextListener(this.mOnQueryChangeListener);
         this.mSearchView.setOnSuggestionListener(this.mOnSuggestionSelectionListener);
         this.mSearchView.onActionViewExpanded();
-        View findViewById = findViewById(16908327);
-        this.mCloseSearch = findViewById;
-        findViewById.setOnClickListener(new View.OnClickListener() { // from class: android.app.SearchDialog.2
+        View viewFindViewById = findViewById(16908327);
+        this.mCloseSearch = viewFindViewById;
+        viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: android.app.SearchDialog.2
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 SearchDialog.this.dismiss();
@@ -154,11 +154,11 @@ public class SearchDialog extends Dialog {
     }
 
     public boolean show(String str, boolean z, ComponentName componentName, Bundle bundle) {
-        boolean doShow = doShow(str, z, componentName, bundle);
-        if (doShow) {
+        boolean zDoShow = doShow(str, z, componentName, bundle);
+        if (zDoShow) {
             this.mSearchAutoComplete.showDropDownAfterLayout();
         }
-        return doShow;
+        return zDoShow;
     }
 
     private boolean doShow(String str, boolean z, ComponentName componentName, Bundle bundle) {
@@ -301,7 +301,7 @@ public class SearchDialog extends Dialog {
             defaultActivityIcon = packageManager.getDefaultActivityIcon();
             Log.w(LOG_TAG, this.mLaunchComponent + " not found, using generic app icon");
         }
-        this.mAppIcon.lambda$setImageURIAsync$0(defaultActivityIcon);
+        this.mAppIcon.lambda$setImageURIAsync$2(defaultActivityIcon);
         this.mAppIcon.setVisibility(0);
         View view = this.mSearchPlate;
         view.setPadding(7, view.getPaddingTop(), this.mSearchPlate.getPaddingRight(), this.mSearchPlate.getPaddingBottom());
@@ -310,22 +310,22 @@ public class SearchDialog extends Dialog {
     private void updateSearchBadge() {
         int i;
         Drawable drawable;
-        String str;
+        String string;
         if (this.mSearchable.useBadgeIcon()) {
             drawable = this.mActivityContext.getDrawable(this.mSearchable.getIconId());
             i = 0;
-            str = null;
+            string = null;
         } else if (this.mSearchable.useBadgeLabel()) {
             i = 0;
-            str = this.mActivityContext.getResources().getText(this.mSearchable.getLabelId()).toString();
+            string = this.mActivityContext.getResources().getText(this.mSearchable.getLabelId()).toString();
             drawable = null;
         } else {
             i = 8;
             drawable = null;
-            str = null;
+            string = null;
         }
         this.mBadgeLabel.setCompoundDrawablesWithIntrinsicBounds(drawable, (Drawable) null, (Drawable) null, (Drawable) null);
-        this.mBadgeLabel.lambda$setTextAsync$0(str);
+        this.mBadgeLabel.lambda$setTextAsync$0(string);
         this.mBadgeLabel.setVisibility(i);
     }
 

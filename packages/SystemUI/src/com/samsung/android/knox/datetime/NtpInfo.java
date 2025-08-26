@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NtpInfo implements Parcelable {
     public static final Parcelable.Creator<NtpInfo> CREATOR = new Parcelable.Creator<NtpInfo>() { // from class: com.samsung.android.knox.datetime.NtpInfo.1
@@ -98,7 +97,7 @@ public class NtpInfo implements Parcelable {
         parcel.writeLong(this.mPollingIntervalShorter);
     }
 
-    public NtpInfo(Context context) {
+    public NtpInfo(Context context) throws Resources.NotFoundException {
         this.mServer = null;
         this.mTimeout = 0L;
         this.mMaxAttempts = 0;
@@ -107,12 +106,12 @@ public class NtpInfo implements Parcelable {
         this.mTimeErrorThreshold = 0;
         Resources resources = context.getResources();
         ContentResolver contentResolver = context.getContentResolver();
-        String[] stringArray = resources.getStringArray(17236280);
-        String replace = stringArray.length > 0 ? stringArray[0].replace("ntp://", "") : "";
+        String[] stringArray = resources.getStringArray(17236281);
+        String strReplace = stringArray.length > 0 ? stringArray[0].replace("ntp://", "") : "";
         long integer = resources.getInteger(Resources.getSystem().getIdentifier("config_ntpTimeout", "integer", "android"));
         String string = Settings.Global.getString(contentResolver, "ntp_server");
         this.mTimeout = Settings.Global.getLong(contentResolver, "ntp_timeout", integer);
-        this.mServer = string != null ? string : replace;
+        this.mServer = string != null ? string : strReplace;
         this.mPollingInterval = context.getResources().getInteger(Resources.getSystem().getIdentifier("config_ntpPollingInterval", "integer", "android"));
         this.mPollingIntervalShorter = context.getResources().getInteger(Resources.getSystem().getIdentifier("config_ntpPollingIntervalShorter", "integer", "android"));
         this.mMaxAttempts = context.getResources().getInteger(Resources.getSystem().getIdentifier("config_ntpRetry", "integer", "android"));

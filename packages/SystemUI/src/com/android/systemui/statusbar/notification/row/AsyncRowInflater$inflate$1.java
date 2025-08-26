@@ -14,7 +14,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AsyncRowInflater$inflate$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BasicRowInflater $inflater;
@@ -24,7 +23,6 @@ final class AsyncRowInflater$inflate$1 extends SuspendLambda implements Function
     int label;
     final /* synthetic */ AsyncRowInflater this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.AsyncRowInflater$inflate$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ BasicRowInflater $inflater;
@@ -61,13 +59,13 @@ final class AsyncRowInflater$inflate$1 extends SuspendLambda implements Function
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            View view = this.$view;
-            if (view == null) {
-                view = this.$inflater.inflate(this.$resId, this.$parent, false);
+            View viewInflate = this.$view;
+            if (viewInflate == null) {
+                viewInflate = this.$inflater.inflate(this.$resId, this.$parent, false);
             }
             AsyncRowInflater.OnInflateFinishedListener onInflateFinishedListener = this.$listener;
-            view.getClass();
-            ((RowInflaterTask) onInflateFinishedListener).onInflateFinished(this.$resId, view, this.$parent);
+            viewInflate.getClass();
+            ((RowInflaterTask) onInflateFinishedListener).onInflateFinished(this.$resId, viewInflate, this.$parent);
             return Unit.INSTANCE;
         }
     }
@@ -94,20 +92,20 @@ final class AsyncRowInflater$inflate$1 extends SuspendLambda implements Function
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        View view;
+        View viewInflate;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             try {
-                view = this.$inflater.inflate(this.$resId, this.$parent, false);
+                viewInflate = this.$inflater.inflate(this.$resId, this.$parent, false);
             } catch (RuntimeException e) {
                 Log.w("AsyncRowInflater", "Failed to inflate resource in the background! Retrying on the UI thread", e);
-                view = null;
+                viewInflate = null;
             }
-            View view2 = view;
+            View view = viewInflate;
             CoroutineDispatcher coroutineDispatcher = this.this$0.mainCoroutineDispatcher;
-            AnonymousClass1 anonymousClass1 = new AnonymousClass1(view2, this.$inflater, this.$resId, this.$parent, this.$listener, null);
+            AnonymousClass1 anonymousClass1 = new AnonymousClass1(view, this.$inflater, this.$resId, this.$parent, this.$listener, null);
             this.label = 1;
             if (BuildersKt.withContext(coroutineDispatcher, anonymousClass1, this) == coroutineSingletons) {
                 return coroutineSingletons;

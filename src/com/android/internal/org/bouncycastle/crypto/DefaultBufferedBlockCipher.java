@@ -26,14 +26,14 @@ public class DefaultBufferedBlockCipher extends BufferedBlockCipher {
         boolean z = false;
         this.bufOff = 0;
         String algorithmName = blockCipher.getAlgorithmName();
-        int indexOf = algorithmName.indexOf(47) + 1;
-        boolean z2 = indexOf > 0 && algorithmName.startsWith("PGP", indexOf);
+        int iIndexOf = algorithmName.indexOf(47) + 1;
+        boolean z2 = iIndexOf > 0 && algorithmName.startsWith("PGP", iIndexOf);
         this.pgpCFB = z2;
         if (z2 || (blockCipher instanceof StreamCipher)) {
             this.partialBlockOkay = true;
             return;
         }
-        if (indexOf > 0 && algorithmName.startsWith("OpenPGP", indexOf)) {
+        if (iIndexOf > 0 && algorithmName.startsWith("OpenPGP", iIndexOf)) {
             z = true;
         }
         this.partialBlockOkay = z;
@@ -60,12 +60,8 @@ public class DefaultBufferedBlockCipher extends BufferedBlockCipher {
     public int getUpdateOutputSize(int i) {
         int length;
         int i2 = i + this.bufOff;
-        if (this.pgpCFB) {
-            if (this.forEncryption) {
-                length = (i2 % this.buf.length) - (this.cipher.getBlockSize() + 2);
-            } else {
-                length = i2 % this.buf.length;
-            }
+        if (this.pgpCFB && this.forEncryption) {
+            length = (i2 % this.buf.length) - (this.cipher.getBlockSize() + 2);
         } else {
             length = i2 % this.buf.length;
         }
@@ -74,18 +70,18 @@ public class DefaultBufferedBlockCipher extends BufferedBlockCipher {
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
     public int getOutputSize(int i) {
-        int i2;
+        int blockSize;
         if (this.pgpCFB && this.forEncryption) {
             i += this.bufOff;
-            i2 = this.cipher.getBlockSize() + 2;
+            blockSize = this.cipher.getBlockSize() + 2;
         } else {
-            i2 = this.bufOff;
+            blockSize = this.bufOff;
         }
-        return i + i2;
+        return i + blockSize;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processByte(byte b, byte[] bArr, int i) throws DataLengthException, IllegalStateException {
+    public int processByte(byte b, byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         byte[] bArr2 = this.buf;
         int i2 = this.bufOff;
         int i3 = i2 + 1;
@@ -94,14 +90,14 @@ public class DefaultBufferedBlockCipher extends BufferedBlockCipher {
         if (i3 != bArr2.length) {
             return 0;
         }
-        int processBlock = this.cipher.processBlock(bArr2, 0, bArr, i);
+        int iProcessBlock = this.cipher.processBlock(bArr2, 0, bArr, i);
         this.bufOff = 0;
-        return processBlock;
+        return iProcessBlock;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException, IllegalStateException {
-        int i4;
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
+        int iProcessBlock;
         if (i2 < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -112,49 +108,49 @@ public class DefaultBufferedBlockCipher extends BufferedBlockCipher {
         }
         byte[] bArr3 = this.buf;
         int length = bArr3.length;
-        int i5 = this.bufOff;
-        int i6 = length - i5;
-        if (i2 > i6) {
-            System.arraycopy(bArr, i, bArr3, i5, i6);
-            i4 = this.cipher.processBlock(this.buf, 0, bArr2, i3);
+        int i4 = this.bufOff;
+        int i5 = length - i4;
+        if (i2 > i5) {
+            System.arraycopy(bArr, i, bArr3, i4, i5);
+            iProcessBlock = this.cipher.processBlock(this.buf, 0, bArr2, i3);
             this.bufOff = 0;
-            i2 -= i6;
-            int i7 = i6 + i;
+            i2 -= i5;
+            int i6 = i5 + i;
             MultiBlockCipher multiBlockCipher = this.mbCipher;
             if (multiBlockCipher != null) {
                 int multiBlockSize = i2 / multiBlockCipher.getMultiBlockSize();
                 if (multiBlockSize > 0) {
-                    i4 += this.mbCipher.processBlocks(bArr, i7, multiBlockSize, bArr2, i3 + i4);
+                    iProcessBlock += this.mbCipher.processBlocks(bArr, i6, multiBlockSize, bArr2, i3 + iProcessBlock);
                     int multiBlockSize2 = multiBlockSize * this.mbCipher.getMultiBlockSize();
                     i2 -= multiBlockSize2;
-                    i7 += multiBlockSize2;
+                    i6 += multiBlockSize2;
                 }
-                i = i7;
+                i = i6;
             } else {
-                i = i7;
+                i = i6;
                 while (i2 > this.buf.length) {
-                    i4 += this.cipher.processBlock(bArr, i, bArr2, i3 + i4);
+                    iProcessBlock += this.cipher.processBlock(bArr, i, bArr2, i3 + iProcessBlock);
                     i2 -= blockSize;
                     i += blockSize;
                 }
             }
         } else {
-            i4 = 0;
+            iProcessBlock = 0;
         }
         System.arraycopy(bArr, i, this.buf, this.bufOff, i2);
-        int i8 = this.bufOff + i2;
-        this.bufOff = i8;
+        int i7 = this.bufOff + i2;
+        this.bufOff = i7;
         byte[] bArr4 = this.buf;
-        if (i8 != bArr4.length) {
-            return i4;
+        if (i7 != bArr4.length) {
+            return iProcessBlock;
         }
-        int processBlock = i4 + this.cipher.processBlock(bArr4, 0, bArr2, i3 + i4);
+        int iProcessBlock2 = iProcessBlock + this.cipher.processBlock(bArr4, 0, bArr2, i3 + iProcessBlock);
         this.bufOff = 0;
-        return processBlock;
+        return iProcessBlock2;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int doFinal(byte[] bArr, int i) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         try {
             int i2 = this.bufOff;
             if (i + i2 > bArr.length) {

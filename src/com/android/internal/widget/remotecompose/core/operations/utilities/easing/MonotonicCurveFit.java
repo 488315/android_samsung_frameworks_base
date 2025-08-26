@@ -65,9 +65,9 @@ public class MonotonicCurveFit {
                     double d4 = dArr4[i5][i6] / d3;
                     int i7 = i5 + 1;
                     double d5 = dArr4[i7][i6] / d3;
-                    double hypot = Math.hypot(d4, d5);
-                    if (hypot > 9.0d) {
-                        double d6 = 3.0d / hypot;
+                    double dHypot = Math.hypot(d4, d5);
+                    if (dHypot > 9.0d) {
+                        double d6 = 3.0d / dHypot;
                         double[] dArr6 = dArr4[i5];
                         double[] dArr7 = dArr3[i5];
                         dArr6[i6] = d4 * d6 * dArr7[i6];
@@ -339,16 +339,16 @@ public class MonotonicCurveFit {
 
     public static MonotonicCurveFit buildWave(String str) {
         double[] dArr = new double[str.length() / 2];
-        int indexOf = str.indexOf(40) + 1;
-        int indexOf2 = str.indexOf(44, indexOf);
+        int iIndexOf = str.indexOf(40) + 1;
+        int iIndexOf2 = str.indexOf(44, iIndexOf);
         int i = 0;
-        while (indexOf2 != -1) {
-            dArr[i] = Double.parseDouble(str.substring(indexOf, indexOf2).trim());
-            indexOf = indexOf2 + 1;
-            indexOf2 = str.indexOf(44, indexOf);
+        while (iIndexOf2 != -1) {
+            dArr[i] = Double.parseDouble(str.substring(iIndexOf, iIndexOf2).trim());
+            iIndexOf = iIndexOf2 + 1;
+            iIndexOf2 = str.indexOf(44, iIndexOf);
             i++;
         }
-        dArr[i] = Double.parseDouble(str.substring(indexOf, str.indexOf(41, indexOf)).trim());
+        dArr[i] = Double.parseDouble(str.substring(iIndexOf, str.indexOf(41, iIndexOf)).trim());
         return buildWave(Arrays.copyOf(dArr, i + 1));
     }
 

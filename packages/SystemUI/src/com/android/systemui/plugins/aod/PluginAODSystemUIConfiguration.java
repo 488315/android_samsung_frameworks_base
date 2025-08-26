@@ -3,7 +3,6 @@ package com.android.systemui.plugins.aod;
 import android.util.SparseArray;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginAODSystemUIConfiguration {
     public static final int KEY_EMERGENCY_MODE = 1;
@@ -52,9 +51,9 @@ public class PluginAODSystemUIConfiguration {
         }
     }
 
-    public void setNotiMap(HashMap hashMap) {
+    public void setNotiMap(HashMap map) {
         synchronized (this.mData) {
-            this.mData.put(8, hashMap);
+            this.mData.put(8, map);
         }
     }
 

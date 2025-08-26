@@ -51,10 +51,10 @@ public final class FontUpdateRequest implements Parcelable {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public Font createFromParcel(Parcel parcel) {
-                String readString8 = parcel.readString8();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                return new Font(readString8, new FontStyle(readInt, readInt2), parcel.readInt(), parcel.readString8());
+                String string8 = parcel.readString8();
+                int i = parcel.readInt();
+                int i2 = parcel.readInt();
+                return new Font(string8, new FontStyle(i, i2), parcel.readInt(), parcel.readString8());
             }
 
             /* JADX WARN: Can't rename method to resolve collision */

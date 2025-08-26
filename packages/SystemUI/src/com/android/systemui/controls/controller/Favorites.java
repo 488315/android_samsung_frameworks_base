@@ -14,12 +14,12 @@ import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt__MutableCollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class Favorites {
     public static final Favorites INSTANCE = new Favorites();
@@ -28,17 +28,86 @@ public final class Favorites {
     private Favorites() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0090  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0056  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean addFavorite(android.content.ComponentName r11, java.lang.CharSequence r12, com.android.systemui.controls.controller.ControlInfo r13) {
-        /*
-            Method dump skipped, instructions count: 272
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.controller.Favorites.addFavorite(android.content.ComponentName, java.lang.CharSequence, com.android.systemui.controls.controller.ControlInfo):boolean");
+    public static boolean addFavorite(ComponentName componentName, CharSequence charSequence, ControlInfo controlInfo) {
+        boolean z;
+        StructureInfo structureInfo;
+        Object next;
+        ArrayList arrayList = (ArrayList) getControlsForComponent(componentName);
+        boolean z2 = false;
+        if (!arrayList.isEmpty()) {
+            int size = arrayList.size();
+            int i = 0;
+            while (i < size) {
+                Object obj = arrayList.get(i);
+                i++;
+                if (Intrinsics.areEqual(((ControlInfo) obj).controlId, controlInfo.controlId)) {
+                    return false;
+                }
+            }
+        }
+        List list = (List) favMap.get(componentName);
+        if (list != null) {
+            Iterator it = list.iterator();
+            while (true) {
+                if (!it.hasNext()) {
+                    next = null;
+                    break;
+                }
+                next = it.next();
+                if (Intrinsics.areEqual(((StructureInfo) next).structure, charSequence)) {
+                    break;
+                }
+            }
+            structureInfo = (StructureInfo) next;
+            if (structureInfo != null) {
+                z = false;
+            } else {
+                StructureInfo structureInfo2 = new StructureInfo(componentName, charSequence, EmptyList.INSTANCE, false, 8, null);
+                structureInfo2.active = true;
+                z = true;
+                structureInfo = structureInfo2;
+            }
+        }
+        StructureInfo structureInfoCopy$default = StructureInfo.copy$default(structureInfo, CollectionsKt___CollectionsKt.plus(structureInfo.controls, controlInfo));
+        List list2 = structureInfoCopy$default.controls;
+        if ((list2 instanceof Collection) && list2.isEmpty()) {
+            z2 = true;
+        } else {
+            Iterator it2 = list2.iterator();
+            while (it2.hasNext()) {
+                if (((ControlInfo) it2.next()).layoutType != 1) {
+                    break;
+                }
+            }
+            z2 = true;
+        }
+        if (!z || !z2) {
+            replaceControls(structureInfoCopy$default);
+            return true;
+        }
+        LinkedHashMap linkedHashMap = new LinkedHashMap(favMap);
+        ArrayList arrayList2 = new ArrayList();
+        ComponentName componentName2 = structureInfoCopy$default.componentName;
+        List structuresForComponent = getStructuresForComponent(componentName2);
+        List list3 = structuresForComponent;
+        if (!(list3 instanceof Collection) || !list3.isEmpty()) {
+            Iterator it3 = list3.iterator();
+            while (it3.hasNext()) {
+                if (Intrinsics.areEqual(((StructureInfo) it3.next()).structure, structureInfoCopy$default.structure)) {
+                    return true;
+                }
+            }
+        }
+        arrayList2.add(structureInfoCopy$default);
+        arrayList2.addAll(structuresForComponent);
+        linkedHashMap.put(componentName2, arrayList2);
+        favMap = linkedHashMap;
+        Log.d("Favorites", "addNewStructureFirst favMap.size = " + linkedHashMap.size() + ", favMap = " + favMap);
+        return true;
     }
 
     public static boolean addFavorites(ComponentName componentName, ArrayList arrayList) {
@@ -50,12 +119,12 @@ public final class Favorites {
             Object obj = arrayList.get(i);
             i++;
             CharSequence structure = ((Control) obj).getStructure();
-            Object obj2 = linkedHashMap.get(structure);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(structure, obj2);
+            Object arrayList2 = linkedHashMap.get(structure);
+            if (arrayList2 == null) {
+                arrayList2 = new ArrayList();
+                linkedHashMap.put(structure, arrayList2);
             }
-            ((List) obj2).add(obj);
+            ((List) arrayList2).add(obj);
         }
         for (Map.Entry entry : linkedHashMap.entrySet()) {
             CharSequence charSequence = (CharSequence) entry.getKey();
@@ -125,9 +194,9 @@ public final class Favorites {
         }
         int size = favMap.size();
         Map map = favMap;
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("removeStructures isUpdateFlag = ", size, ", favMap.size = ", z, ", favMap = ");
-        m.append(map);
-        Log.d("Favorites", m.toString());
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("removeStructures isUpdateFlag = ", size, ", favMap.size = ", z, ", favMap = ");
+        sbM.append(map);
+        Log.d("Favorites", sbM.toString());
         return z2;
     }
 
@@ -167,11 +236,11 @@ public final class Favorites {
     public static boolean updateControls(ComponentName componentName, List list) {
         Pair pair;
         List list2 = list;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
         for (Object obj : list2) {
             linkedHashMap.put(((Control) obj).getControlId(), obj);
         }
@@ -199,28 +268,28 @@ public final class Favorites {
                 }
                 CharSequence charSequence = (CharSequence) pair.component1();
                 ControlInfo controlInfo2 = (ControlInfo) pair.component2();
-                Object obj2 = linkedHashMap2.get(charSequence);
-                if (obj2 == null) {
-                    obj2 = new ArrayList();
-                    linkedHashMap2.put(charSequence, obj2);
+                Object arrayList = linkedHashMap2.get(charSequence);
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    linkedHashMap2.put(charSequence, arrayList);
                 }
-                ((List) obj2).add(controlInfo2);
+                ((List) arrayList).add(controlInfo2);
                 linkedHashMap3.put(charSequence, Boolean.TRUE);
             }
         }
         if (!z) {
             return false;
         }
-        ArrayList arrayList = new ArrayList(linkedHashMap2.size());
+        ArrayList arrayList2 = new ArrayList(linkedHashMap2.size());
         for (Map.Entry entry : linkedHashMap2.entrySet()) {
             CharSequence charSequence2 = (CharSequence) entry.getKey();
             StructureInfo structureInfo2 = new StructureInfo(componentName, charSequence2, (List) entry.getValue(), false, 8, null);
             Boolean bool = (Boolean) linkedHashMap3.get(charSequence2);
             structureInfo2.active = bool != null ? bool.booleanValue() : false;
-            arrayList.add(structureInfo2);
+            arrayList2.add(structureInfo2);
         }
         LinkedHashMap linkedHashMap4 = new LinkedHashMap(favMap);
-        linkedHashMap4.put(componentName, arrayList);
+        linkedHashMap4.put(componentName, arrayList2);
         favMap = linkedHashMap4;
         Log.d("Favorites", "updateControls favMap.size = " + linkedHashMap4.size() + ", favMap = " + favMap);
         return true;

@@ -3,7 +3,6 @@ package com.samsung.android.knox.application;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NetworkStats implements Parcelable {
     public static final Parcelable.Creator<NetworkStats> CREATOR = new Parcelable.Creator<NetworkStats>() { // from class: com.samsung.android.knox.application.NetworkStats.1

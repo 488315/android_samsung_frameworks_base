@@ -11,7 +11,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class PrivacyChipRepositoryImpl$isLocationIndicationEnabled$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -46,7 +45,7 @@ final class PrivacyChipRepositoryImpl$isLocationIndicationEnabled$1 extends Susp
             PrivacyConfig.Callback callback = new PrivacyConfig.Callback() { // from class: com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$isLocationIndicationEnabled$1$callback$1
                 @Override // com.android.systemui.privacy.PrivacyConfig.Callback
                 public final void onFlagLocationChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             this.this$0.privacyConfig.addCallback(callback);

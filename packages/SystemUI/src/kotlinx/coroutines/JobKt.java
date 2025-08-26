@@ -21,8 +21,8 @@ public abstract class JobKt {
 
     public static final Object cancelAndJoin(Job job, ContinuationImpl continuationImpl) {
         job.cancel(null);
-        Object join = job.join(continuationImpl);
-        return join == CoroutineSingletons.COROUTINE_SUSPENDED ? join : Unit.INSTANCE;
+        Object objJoin = job.join(continuationImpl);
+        return objJoin == CoroutineSingletons.COROUTINE_SUSPENDED ? objJoin : Unit.INSTANCE;
     }
 
     public static final void ensureActive(CoroutineContext coroutineContext) {

@@ -156,9 +156,9 @@ public interface IMbmsDownloadService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsDownloadService)) {
-                return (IMbmsDownloadService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMbmsDownloadService)) {
+                return (IMbmsDownloadService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -214,109 +214,109 @@ public interface IMbmsDownloadService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    IMbmsDownloadSessionCallback asInterface = IMbmsDownloadSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    IMbmsDownloadSessionCallback iMbmsDownloadSessionCallbackAsInterface = IMbmsDownloadSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int initialize = initialize(readInt, asInterface);
+                    int iInitialize = initialize(i3, iMbmsDownloadSessionCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(initialize);
+                    parcel2.writeInt(iInitialize);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    int i4 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int requestUpdateFileServices = requestUpdateFileServices(readInt2, createStringArrayList);
+                    int iRequestUpdateFileServices = requestUpdateFileServices(i4, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeInt(requestUpdateFileServices);
+                    parcel2.writeInt(iRequestUpdateFileServices);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int tempFileRootDirectory = setTempFileRootDirectory(readInt3, readString);
+                    int tempFileRootDirectory = setTempFileRootDirectory(i5, string);
                     parcel2.writeNoException();
                     parcel2.writeInt(tempFileRootDirectory);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i6 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int addServiceAnnouncement = addServiceAnnouncement(readInt4, createByteArray);
+                    int iAddServiceAnnouncement = addServiceAnnouncement(i6, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addServiceAnnouncement);
+                    parcel2.writeInt(iAddServiceAnnouncement);
                     return true;
                 case 5:
                     DownloadRequest downloadRequest = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int download = download(downloadRequest);
+                    int iDownload = download(downloadRequest);
                     parcel2.writeNoException();
-                    parcel2.writeInt(download);
+                    parcel2.writeInt(iDownload);
                     return true;
                 case 6:
                     DownloadRequest downloadRequest2 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadStatusListener asInterface2 = IDownloadStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDownloadStatusListener iDownloadStatusListenerAsInterface = IDownloadStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int addStatusListener = addStatusListener(downloadRequest2, asInterface2);
+                    int iAddStatusListener = addStatusListener(downloadRequest2, iDownloadStatusListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addStatusListener);
+                    parcel2.writeInt(iAddStatusListener);
                     return true;
                 case 7:
                     DownloadRequest downloadRequest3 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadStatusListener asInterface3 = IDownloadStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDownloadStatusListener iDownloadStatusListenerAsInterface2 = IDownloadStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int removeStatusListener = removeStatusListener(downloadRequest3, asInterface3);
+                    int iRemoveStatusListener = removeStatusListener(downloadRequest3, iDownloadStatusListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeStatusListener);
+                    parcel2.writeInt(iRemoveStatusListener);
                     return true;
                 case 8:
                     DownloadRequest downloadRequest4 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadProgressListener asInterface4 = IDownloadProgressListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDownloadProgressListener iDownloadProgressListenerAsInterface = IDownloadProgressListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int addProgressListener = addProgressListener(downloadRequest4, asInterface4);
+                    int iAddProgressListener = addProgressListener(downloadRequest4, iDownloadProgressListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addProgressListener);
+                    parcel2.writeInt(iAddProgressListener);
                     return true;
                 case 9:
                     DownloadRequest downloadRequest5 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadProgressListener asInterface5 = IDownloadProgressListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDownloadProgressListener iDownloadProgressListenerAsInterface2 = IDownloadProgressListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int removeProgressListener = removeProgressListener(downloadRequest5, asInterface5);
+                    int iRemoveProgressListener = removeProgressListener(downloadRequest5, iDownloadProgressListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeProgressListener);
+                    parcel2.writeInt(iRemoveProgressListener);
                     return true;
                 case 10:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<DownloadRequest> listPendingDownloads = listPendingDownloads(readInt5);
+                    List<DownloadRequest> listListPendingDownloads = listPendingDownloads(i7);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(listPendingDownloads, 1);
+                    parcel2.writeTypedList(listListPendingDownloads, 1);
                     return true;
                 case 11:
                     DownloadRequest downloadRequest6 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int cancelDownload = cancelDownload(downloadRequest6);
+                    int iCancelDownload = cancelDownload(downloadRequest6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(cancelDownload);
+                    parcel2.writeInt(iCancelDownload);
                     return true;
                 case 12:
                     DownloadRequest downloadRequest7 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
                     FileInfo fileInfo = (FileInfo) parcel.readTypedObject(FileInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int requestDownloadState = requestDownloadState(downloadRequest7, fileInfo);
+                    int iRequestDownloadState = requestDownloadState(downloadRequest7, fileInfo);
                     parcel2.writeNoException();
-                    parcel2.writeInt(requestDownloadState);
+                    parcel2.writeInt(iRequestDownloadState);
                     return true;
                 case 13:
                     DownloadRequest downloadRequest8 = (DownloadRequest) parcel.readTypedObject(DownloadRequest.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int resetDownloadKnowledge = resetDownloadKnowledge(downloadRequest8);
+                    int iResetDownloadKnowledge = resetDownloadKnowledge(downloadRequest8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetDownloadKnowledge);
+                    parcel2.writeInt(iResetDownloadKnowledge);
                     return true;
                 case 14:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    dispose(readInt6);
+                    dispose(i8);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -342,233 +342,233 @@ public interface IMbmsDownloadService extends IInterface {
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int initialize(int i, IMbmsDownloadSessionCallback iMbmsDownloadSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iMbmsDownloadSessionCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iMbmsDownloadSessionCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int requestUpdateFileServices(int i, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int setTempFileRootDirectory(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int addServiceAnnouncement(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int download(DownloadRequest downloadRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int addStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    obtain.writeStrongInterface(iDownloadStatusListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    parcelObtain.writeStrongInterface(iDownloadStatusListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int removeStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    obtain.writeStrongInterface(iDownloadStatusListener);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    parcelObtain.writeStrongInterface(iDownloadStatusListener);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int addProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    obtain.writeStrongInterface(iDownloadProgressListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    parcelObtain.writeStrongInterface(iDownloadProgressListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int removeProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    obtain.writeStrongInterface(iDownloadProgressListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    parcelObtain.writeStrongInterface(iDownloadProgressListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public List<DownloadRequest> listPendingDownloads(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DownloadRequest.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DownloadRequest.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int cancelDownload(DownloadRequest downloadRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    obtain.writeTypedObject(fileInfo, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    parcelObtain.writeTypedObject(fileInfo, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public int resetDownloadKnowledge(DownloadRequest downloadRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(downloadRequest, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(downloadRequest, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
             public void dispose(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

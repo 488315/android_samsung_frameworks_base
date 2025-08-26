@@ -27,7 +27,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DetailDialog extends Dialog {
     public final Context activityContext;
@@ -43,7 +42,6 @@ public final class DetailDialog extends Dialog {
     public final View taskViewContainer;
     public final float taskWidthPercentWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,12 +75,12 @@ public final class DetailDialog extends Dialog {
         ?? r2 = new TaskView.Listener() { // from class: com.android.systemui.controls.ui.DetailDialog$stateCallback$1
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onBackPressedOnTaskRoot(int i) {
-                DetailDialog.this.dismiss();
+                this.this$0.dismiss();
             }
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onInitialized() {
-                DetailDialog detailDialog = DetailDialog.this;
+                DetailDialog detailDialog = this.this$0;
                 View view = detailDialog.taskViewContainer;
                 if (view == null) {
                     view = null;
@@ -90,21 +88,21 @@ public final class DetailDialog extends Dialog {
                 ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
                 layoutParams.width = (int) (view.getWidth() * detailDialog.taskWidthPercentWidth);
                 view.setLayoutParams(layoutParams);
-                ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(detailDialog.activityContext, 0, 0);
-                makeCustomAnimation.setPendingIntentBackgroundActivityStartMode(3);
-                makeCustomAnimation.setTaskAlwaysOnTop(true);
+                ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(detailDialog.activityContext, 0, 0);
+                activityOptionsMakeCustomAnimation.setPendingIntentBackgroundActivityStartMode(3);
+                activityOptionsMakeCustomAnimation.setTaskAlwaysOnTop(true);
                 TaskView taskView2 = detailDialog.taskView;
-                taskView2.startActivity(detailDialog.pendingIntent, detailDialog.fillInIntent, makeCustomAnimation, ConvenienceExtensionsKt.getBoundsOnScreen(taskView2));
+                taskView2.startActivity(detailDialog.pendingIntent, detailDialog.fillInIntent, activityOptionsMakeCustomAnimation, ConvenienceExtensionsKt.getBoundsOnScreen(taskView2));
             }
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskCreated(int i, ComponentName componentName) {
-                ((ViewGroup) DetailDialog.this.requireViewById(R.id.controls_activity_view)).setAlpha(1.0f);
+                ((ViewGroup) this.this$0.requireViewById(R.id.controls_activity_view)).setAlpha(1.0f);
             }
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskRemovalStarted(int i) {
-                TaskView taskView2 = DetailDialog.this.taskView;
+                TaskView taskView2 = this.this$0.taskView;
                 taskView2.getHolder().removeCallback(taskView2);
                 taskView2.mTaskViewTaskController.performRelease();
             }
@@ -120,32 +118,32 @@ public final class DetailDialog extends Dialog {
         }
         setContentView(R.layout.sec_controls_detail_dialog);
         this.taskViewContainer = requireViewById(R.id.control_task_view_container);
-        View requireViewById = requireViewById(R.id.control_detail_root);
-        requireViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.DetailDialog$1$1
+        View viewRequireViewById = requireViewById(R.id.control_detail_root);
+        viewRequireViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.DetailDialog$1$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                DetailDialog.this.dismiss();
+                this.this$0.dismiss();
             }
         });
-        this.controlDetailRoot = requireViewById;
+        this.controlDetailRoot = viewRequireViewById;
         ViewGroup viewGroup = (ViewGroup) requireViewById(R.id.controls_activity_view);
         viewGroup.addView(taskView);
         viewGroup.setAlpha(0.0f);
         ((ImageView) requireViewById(R.id.control_detail_close)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.DetailDialog$3$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                DetailDialog.this.dismiss();
+                this.this$0.dismiss();
             }
         });
         ((ImageView) requireViewById(R.id.control_detail_open_in_app)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.DetailDialog$4$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                DetailDialog.this.dismiss();
-                final DetailDialog detailDialog = DetailDialog.this;
+                this.this$0.dismiss();
+                final DetailDialog detailDialog = this.this$0;
                 ActivityStarter.OnDismissAction onDismissAction = new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.controls.ui.DetailDialog$4$1$action$1
                     @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                     public final boolean onDismiss() {
-                        DetailDialog detailDialog2 = DetailDialog.this;
+                        DetailDialog detailDialog2 = detailDialog;
                         BroadcastSender broadcastSender2 = detailDialog2.broadcastSender;
                         broadcastSender2.getClass();
                         broadcastSender2.sendInBackground("closeSystemDialogs", new BroadcastSender$$ExternalSyntheticLambda1(broadcastSender2));
@@ -153,12 +151,12 @@ public final class DetailDialog extends Dialog {
                         return false;
                     }
                 };
-                if (DetailDialog.this.keyguardStateController.isUnlocked()) {
+                if (this.this$0.keyguardStateController.isUnlocked()) {
                     onDismissAction.onDismiss();
                 } else {
-                    DetailDialog.this.activityStarter.dismissKeyguardThenExecute(onDismissAction, null, true);
+                    this.this$0.activityStarter.dismissKeyguardThenExecute(onDismissAction, null, true);
                 }
-                DetailDialog.this.saLogger.sendEvent(SALogger.Event.LaunchFullController.INSTANCE);
+                this.this$0.saLogger.sendEvent(SALogger.Event.LaunchFullController.INSTANCE);
             }
         });
         Window window3 = getWindow();
@@ -184,14 +182,14 @@ public final class DetailDialog extends Dialog {
     public final void dismiss() {
         if (isShowing()) {
             TaskView taskView = this.taskView;
-            Boolean bool = null;
+            Boolean boolValueOf = null;
             taskView.mTaskViewController.removeTaskView(taskView.mTaskViewTaskController, null);
             Context context = this.activityContext;
             Activity activity = context instanceof Activity ? (Activity) context : null;
             if (activity != null) {
-                bool = Boolean.valueOf(activity.isFinishing() || activity.isDestroyed());
+                boolValueOf = Boolean.valueOf(activity.isFinishing() || activity.isDestroyed());
             }
-            if (Intrinsics.areEqual(bool, Boolean.TRUE)) {
+            if (Intrinsics.areEqual(boolValueOf, Boolean.TRUE)) {
                 return;
             }
             super.dismiss();

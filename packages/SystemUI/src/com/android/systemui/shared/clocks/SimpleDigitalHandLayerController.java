@@ -39,7 +39,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SimpleDigitalHandLayerController implements SimpleClockLayerController {
     public final SimpleDigitalHandLayerController$animations$1 animations;
@@ -57,7 +56,7 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
     /* JADX WARN: Type inference failed for: r12v18, types: [com.android.systemui.shared.clocks.SimpleDigitalHandLayerController$animations$1] */
     /* JADX WARN: Type inference failed for: r12v19, types: [com.android.systemui.shared.clocks.SimpleDigitalHandLayerController$faceEvents$1] */
     public SimpleDigitalHandLayerController(ClockContext clockContext, LayerConfig layerConfig, boolean z) {
-        String str;
+        String strValueOf;
         this.clockCtx = clockContext;
         this.layerCfg = layerConfig;
         SimpleDigitalClockTextView simpleDigitalClockTextView = new SimpleDigitalClockTextView(clockContext, z, null, 4, null);
@@ -101,13 +100,13 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
         DigitalTimespec digitalTimespec = DigitalTimespec.TIME_FULL_FORMAT;
         DigitalTimespec digitalTimespec2 = layerConfig.timespec;
         if (digitalTimespec2 == digitalTimespec) {
-            str = String.valueOf(digitalTimespec2);
+            strValueOf = String.valueOf(digitalTimespec2);
         } else if (StringsKt__StringsKt.contains(layerConfig.dateTimeFormat, "h", false)) {
-            str = "HOUR_" + digitalTimespec2;
+            strValueOf = "HOUR_" + digitalTimespec2;
         } else {
-            str = "MINUTE_" + digitalTimespec2;
+            strValueOf = "MINUTE_" + digitalTimespec2;
         }
-        simpleDigitalClockTextView.setId(resources.getIdentifier(str, "id", clockContext.context.getPackageName()));
+        simpleDigitalClockTextView.setId(resources.getIdentifier(strValueOf, "id", clockContext.context.getPackageName()));
         this.events = new ClockEvents() { // from class: com.android.systemui.shared.clocks.SimpleDigitalHandLayerController$events$1
             public boolean isReactiveTouchInteractionEnabled;
 
@@ -118,12 +117,12 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onLocaleChanged(Locale locale) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 DigitalTimespecHandler digitalTimespecHandler = simpleDigitalHandLayerController.timespec;
                 digitalTimespecHandler.getClass();
-                boolean equals = locale.getLanguage().equals(Locale.ENGLISH.getLanguage());
-                String str2 = digitalTimespecHandler.timeFormat;
-                digitalTimespecHandler.dateFormat = equals ? new SimpleDateFormat(str2, str2, ULocale.forLocale(locale)) : SimpleDateFormat.getInstanceForSkeleton(str2, locale);
+                boolean zEquals = locale.getLanguage().equals(Locale.ENGLISH.getLanguage());
+                String str = digitalTimespecHandler.timeFormat;
+                digitalTimespecHandler.dateFormat = zEquals ? new SimpleDateFormat(str, str, ULocale.forLocale(locale)) : SimpleDateFormat.getInstanceForSkeleton(str, locale);
                 digitalTimespecHandler.contentDescriptionFormat = DigitalTimespecHandler.WhenMappings.$EnumSwitchMapping$0[digitalTimespecHandler.timespec.ordinal()] == 1 ? SimpleDateFormat.getInstanceForSkeleton("hh:mm", locale) : null;
                 digitalTimespecHandler.onTimeZoneChanged();
                 simpleDigitalHandLayerController.refreshTime$1();
@@ -131,7 +130,7 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onTimeFormatChanged(boolean z2) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 DigitalTimespecHandler digitalTimespecHandler = simpleDigitalHandLayerController.timespec;
                 digitalTimespecHandler.is24Hr = z2;
                 digitalTimespecHandler.applyPattern();
@@ -140,7 +139,7 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
 
             @Override // com.android.systemui.plugins.clocks.ClockEvents
             public final void onTimeZoneChanged(TimeZone timeZone) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 DigitalTimespecHandler digitalTimespecHandler = simpleDigitalHandLayerController.timespec;
                 digitalTimespecHandler.cal.setTimeZone(timeZone);
                 digitalTimespecHandler.onTimeZoneChanged();
@@ -169,12 +168,12 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void charge() {
-                SimpleDigitalHandLayerController.this.view.animateCharge();
+                this.this$0.view.animateCharge();
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void doze(float f2) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 DefaultClockController.AnimationState animationState = simpleDigitalHandLayerController.dozeState;
                 SimpleDigitalClockTextView simpleDigitalClockTextView2 = simpleDigitalHandLayerController.view;
                 if (animationState == null) {
@@ -182,13 +181,13 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
                     simpleDigitalHandLayerController.dozeState = animationState2;
                     simpleDigitalClockTextView2.animateDoze(animationState2.isActive, false);
                 } else {
-                    Pair update = animationState.update(f2);
-                    boolean booleanValue = ((Boolean) update.component1()).booleanValue();
-                    boolean booleanValue2 = ((Boolean) update.component2()).booleanValue();
-                    if (booleanValue) {
+                    Pair pairUpdate = animationState.update(f2);
+                    boolean zBooleanValue = ((Boolean) pairUpdate.component1()).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) pairUpdate.component2()).booleanValue();
+                    if (zBooleanValue) {
                         DefaultClockController.AnimationState animationState3 = simpleDigitalHandLayerController.dozeState;
                         animationState3.getClass();
-                        simpleDigitalClockTextView2.animateDoze(animationState3.isActive, !booleanValue2);
+                        simpleDigitalClockTextView2.animateDoze(animationState3.isActive, !zBooleanValue2);
                     }
                 }
                 simpleDigitalClockTextView2.dozeFraction = f2;
@@ -196,27 +195,27 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
-            public final void enter() {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+            public final void enter() throws Exception {
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 SimpleDigitalHandLayerController.access$applyLayout(simpleDigitalHandLayerController);
                 simpleDigitalHandLayerController.refreshTime$1();
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
-            public final void fold(float f2) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+            public final void fold(float f2) throws Exception {
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 SimpleDigitalHandLayerController.access$applyLayout(simpleDigitalHandLayerController);
                 simpleDigitalHandLayerController.refreshTime$1();
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void onFidgetTap(float f2, float f3) {
-                SimpleDigitalHandLayerController.this.view.animateFidget(0L);
+                this.this$0.view.animateFidget(0L);
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockAnimations
             public final void onFontAxesChanged(ClockAxisStyle clockAxisStyle) {
-                SimpleDigitalHandLayerController.this.view.updateAxes(clockAxisStyle, this.hasFontAxes);
+                this.this$0.view.updateAxes(clockAxisStyle, this.hasFontAxes);
                 this.hasFontAxes = true;
             }
 
@@ -235,19 +234,19 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
         this.faceEvents = new ClockFaceEvents() { // from class: com.android.systemui.shared.clocks.SimpleDigitalHandLayerController$faceEvents$1
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onFontSettingChanged(float f2) {
-                SimpleDigitalClockTextView.applyTextSize$default(SimpleDigitalHandLayerController.this.view, Float.valueOf(f2));
+                SimpleDigitalClockTextView.applyTextSize$default(this.this$0.view, Float.valueOf(f2));
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onThemeChanged(ThemeConfig themeConfig) {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 simpleDigitalHandLayerController.view.updateColor(themeConfig.getDefaultColor(simpleDigitalHandLayerController.clockCtx.context));
                 simpleDigitalHandLayerController.refreshTime$1();
             }
 
             @Override // com.android.systemui.plugins.clocks.ClockFaceEvents
             public final void onTimeTick() {
-                SimpleDigitalHandLayerController simpleDigitalHandLayerController = SimpleDigitalHandLayerController.this;
+                SimpleDigitalHandLayerController simpleDigitalHandLayerController = this.this$0;
                 simpleDigitalHandLayerController.refreshTime$1();
                 if (simpleDigitalHandLayerController.layerCfg.timespec == DigitalTimespec.TIME_FULL_FORMAT) {
                     simpleDigitalHandLayerController.view.setContentDescription(simpleDigitalHandLayerController.timespec.getContentDescription());
@@ -264,7 +263,7 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
         };
     }
 
-    public static final void access$applyLayout(SimpleDigitalHandLayerController simpleDigitalHandLayerController) {
+    public static final void access$applyLayout(SimpleDigitalHandLayerController simpleDigitalHandLayerController) throws Exception {
         SimpleDigitalClockTextView simpleDigitalClockTextView = simpleDigitalHandLayerController.view;
         if (simpleDigitalClockTextView.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) simpleDigitalClockTextView.getLayoutParams();
@@ -306,28 +305,28 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
     }
 
     public final void refreshTime$1() {
-        String str;
+        String string;
         DigitalTimespecHandler digitalTimespecHandler = this.timespec;
         digitalTimespecHandler.getClass();
         digitalTimespecHandler.cal.setTimeInMillis((long) (System.currentTimeMillis() * 1.0d));
         int i = DigitalTimespecHandler.WhenMappings.$EnumSwitchMapping$0[digitalTimespecHandler.timespec.ordinal()];
         if (i == 1) {
-            str = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString();
+            string = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString();
         } else if (i == 2) {
-            str = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString().substring(0, 1);
+            string = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString().substring(0, 1);
         } else if (i == 3) {
-            str = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString().substring(1, 2);
+            string = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString().substring(1, 2);
         } else {
             if (i != 4) {
                 throw new NoWhenBranchMatchedException();
             }
-            str = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString();
+            string = digitalTimespecHandler.dateFormat.format(digitalTimespecHandler.cal.getTime()).toString();
         }
         SimpleDigitalClockTextView simpleDigitalClockTextView = this.view;
-        if (Intrinsics.areEqual(simpleDigitalClockTextView.getText(), str)) {
+        if (Intrinsics.areEqual(simpleDigitalClockTextView.getText(), string)) {
             return;
         }
-        simpleDigitalClockTextView.setText(str);
+        simpleDigitalClockTextView.setText(string);
         simpleDigitalClockTextView.getLogger().refreshTime();
         simpleDigitalClockTextView.textBounds = SimpleDigitalClockTextViewKt.access$getTextBounds(simpleDigitalClockTextView.lockScreenPaint, simpleDigitalClockTextView.getText());
         simpleDigitalClockTextView.updateAnimationTextBounds();
@@ -341,9 +340,9 @@ public class SimpleDigitalHandLayerController implements SimpleClockLayerControl
             textAnimator.updateLayout(simpleDigitalClockTextView.getLayout(), -1.0f);
         }
         Logger logger = this.logger;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new SimpleDigitalHandLayerController$$ExternalSyntheticLambda0(), null);
-        obtain.setStr1(str);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new SimpleDigitalHandLayerController$$ExternalSyntheticLambda0(), null);
+        logMessageObtain.setStr1(string);
+        logger.getBuffer().commit(logMessageObtain);
     }
 
     @Override // com.android.systemui.shared.clocks.SimpleClockLayerController

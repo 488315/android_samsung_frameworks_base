@@ -18,7 +18,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MusicShareDeviceController$Companion$castEventChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LocalBluetoothManager $this_castEventChanges;
@@ -56,25 +55,29 @@ final class MusicShareDeviceController$Companion$castEventChanges$1 extends Susp
                 @Override // com.samsung.android.settingslib.bluetooth.bluetoothcast.BluetoothCastCallback
                 public final void onCastDeviceAdded() {
                     Log.d("MusicShareDeviceController", "onCastDeviceAdded()");
-                    BuildersKt.launch$default(r0, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(ProducerScope.this, localBluetoothManager, null), 3);
+                    ProducerScope producerScope2 = producerScope;
+                    BuildersKt.launch$default(producerScope2, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(producerScope2, localBluetoothManager, null), 3);
                 }
 
                 @Override // com.samsung.android.settingslib.bluetooth.bluetoothcast.BluetoothCastCallback
                 public final void onCastDeviceRemoved() {
                     Log.d("MusicShareDeviceController", "onCastDeviceRemoved()");
-                    BuildersKt.launch$default(r0, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(ProducerScope.this, localBluetoothManager, null), 3);
+                    ProducerScope producerScope2 = producerScope;
+                    BuildersKt.launch$default(producerScope2, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(producerScope2, localBluetoothManager, null), 3);
                 }
 
                 @Override // com.samsung.android.settingslib.bluetooth.bluetoothcast.BluetoothCastCallback
                 public final void onCastDiscoveryStateChanged(boolean z) {
                     EmergencyButtonController$$ExternalSyntheticOutline0.m("onCastDiscoveryStateChanged() - ", "MusicShareDeviceController", z);
-                    BuildersKt.launch$default(r3, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(ProducerScope.this, localBluetoothManager, null), 3);
+                    ProducerScope producerScope2 = producerScope;
+                    BuildersKt.launch$default(producerScope2, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(producerScope2, localBluetoothManager, null), 3);
                 }
 
                 @Override // com.samsung.android.settingslib.bluetooth.bluetoothcast.BluetoothCastCallback
                 public final void onCastProfileStateChanged(CachedBluetoothCastDevice cachedBluetoothCastDevice) {
                     Log.d("MusicShareDeviceController", "onCastProfileStateChanged()");
-                    BuildersKt.launch$default(r2, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(ProducerScope.this, localBluetoothManager, null), 3);
+                    ProducerScope producerScope2 = producerScope;
+                    BuildersKt.launch$default(producerScope2, null, null, new MusicShareDeviceController$Companion$castEventChanges$1$updateDevices$1(producerScope2, localBluetoothManager, null), 3);
                 }
             };
             BluetoothCastEventManager bluetoothCastEventManager = this.$this_castEventChanges.mCastEventManager;
@@ -85,7 +88,7 @@ final class MusicShareDeviceController$Companion$castEventChanges$1 extends Susp
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.MusicShareDeviceController$Companion$castEventChanges$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    LocalBluetoothManager localBluetoothManager3 = LocalBluetoothManager.this;
+                    LocalBluetoothManager localBluetoothManager3 = localBluetoothManager2;
                     MusicShareDeviceController$Companion$castEventChanges$1$callback$1 musicShareDeviceController$Companion$castEventChanges$1$callback$1 = r1;
                     Log.d("MusicShareDeviceController", "unregisterCallback");
                     BluetoothCastEventManager bluetoothCastEventManager2 = localBluetoothManager3.mCastEventManager;

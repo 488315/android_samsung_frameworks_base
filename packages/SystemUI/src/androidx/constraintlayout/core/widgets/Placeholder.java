@@ -3,7 +3,6 @@ package androidx.constraintlayout.core.widgets;
 import androidx.constraintlayout.core.LinearSystem;
 import androidx.constraintlayout.core.widgets.ConstraintAnchor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Placeholder extends VirtualLayout {
     @Override // androidx.constraintlayout.core.widgets.ConstraintWidget
@@ -27,19 +26,19 @@ public class Placeholder extends VirtualLayout {
 
     @Override // androidx.constraintlayout.core.widgets.VirtualLayout
     public final void measure(int i, int i2, int i3, int i4) {
-        int i5 = this.mResolvedPaddingLeft + this.mResolvedPaddingRight;
-        int i6 = this.mPaddingTop + this.mPaddingBottom;
+        int width = this.mResolvedPaddingLeft + this.mResolvedPaddingRight;
+        int height = this.mPaddingTop + this.mPaddingBottom;
         if (this.mWidgetsCount > 0) {
-            i5 += this.mWidgets[0].getWidth();
-            i6 += this.mWidgets[0].getHeight();
+            width += this.mWidgets[0].getWidth();
+            height += this.mWidgets[0].getHeight();
         }
-        int max = Math.max(this.mMinWidth, i5);
-        int max2 = Math.max(this.mMinHeight, i6);
+        int iMax = Math.max(this.mMinWidth, width);
+        int iMax2 = Math.max(this.mMinHeight, height);
         if (i != 1073741824) {
-            i2 = i == Integer.MIN_VALUE ? Math.min(max, i2) : i == 0 ? max : 0;
+            i2 = i == Integer.MIN_VALUE ? Math.min(iMax, i2) : i == 0 ? iMax : 0;
         }
         if (i3 != 1073741824) {
-            i4 = i3 == Integer.MIN_VALUE ? Math.min(max2, i4) : i3 == 0 ? max2 : 0;
+            i4 = i3 == Integer.MIN_VALUE ? Math.min(iMax2, i4) : i3 == 0 ? iMax2 : 0;
         }
         this.mMeasuredWidth = i2;
         this.mMeasuredHeight = i4;

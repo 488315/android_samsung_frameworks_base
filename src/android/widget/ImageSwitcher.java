@@ -26,7 +26,7 @@ public class ImageSwitcher extends ViewSwitcher {
     }
 
     public void setImageDrawable(Drawable drawable) {
-        ((ImageView) getNextView()).lambda$setImageURIAsync$2(drawable);
+        ((ImageView) getNextView()).setImageDrawable(drawable);
         showNext();
     }
 

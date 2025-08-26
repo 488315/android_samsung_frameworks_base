@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardWakeDirectlyToGoneInteractor$listenForWakeToClearCanIgnoreAuth$1 extends SuspendLambda implements Function2 {
     int label;
@@ -39,19 +38,19 @@ final class KeyguardWakeDirectlyToGoneInteractor$listenForWakeToClearCanIgnoreAu
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            Flow isInTransitionWhere = this.this$0.transitionInteractor.isInTransitionWhere(new KeyguardWakeDirectlyToGoneInteractor$setOrCancelAlarmFromWakefulness$1$$ExternalSyntheticLambda0(1), new KeyguardWakeDirectlyToGoneInteractor$setOrCancelAlarmFromWakefulness$1$$ExternalSyntheticLambda0(2));
+            Flow flowIsInTransitionWhere = this.this$0.transitionInteractor.isInTransitionWhere(new KeyguardWakeDirectlyToGoneInteractor$setOrCancelAlarmFromWakefulness$1$$ExternalSyntheticLambda0(1), new KeyguardWakeDirectlyToGoneInteractor$setOrCancelAlarmFromWakefulness$1$$ExternalSyntheticLambda0(2));
             final KeyguardWakeDirectlyToGoneInteractor keyguardWakeDirectlyToGoneInteractor = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardWakeDirectlyToGoneInteractor$listenForWakeToClearCanIgnoreAuth$1.3
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    KeyguardRepositoryImpl keyguardRepositoryImpl = (KeyguardRepositoryImpl) KeyguardWakeDirectlyToGoneInteractor.this.repository;
+                    KeyguardRepositoryImpl keyguardRepositoryImpl = (KeyguardRepositoryImpl) keyguardWakeDirectlyToGoneInteractor.repository;
                     keyguardRepositoryImpl._canIgnoreAuthAndReturnToGone.updateState(null, Boolean.FALSE);
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (isInTransitionWhere.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowIsInTransitionWhere.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

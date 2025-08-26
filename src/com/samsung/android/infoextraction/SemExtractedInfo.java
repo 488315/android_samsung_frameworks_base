@@ -2,6 +2,7 @@ package com.samsung.android.infoextraction;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 
 /* loaded from: classes6.dex */
 public class SemExtractedInfo implements Parcelable {
@@ -104,7 +105,7 @@ public class SemExtractedInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mResultType);
         parcel.writeString(this.mSrc);
         parcel.writeValue(this.mResult);

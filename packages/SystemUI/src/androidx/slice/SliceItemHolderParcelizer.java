@@ -5,9 +5,9 @@ import android.os.Parcelable;
 import androidx.slice.SliceItemHolder;
 import androidx.versionedparcelable.VersionedParcel;
 import androidx.versionedparcelable.VersionedParcelable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SliceItemHolderParcelizer {
     private static SliceItemHolder.SliceItemPool sBuilder = new SliceItemHolder.SliceItemPool();
@@ -42,7 +42,7 @@ public final class SliceItemHolderParcelizer {
         return sliceItemHolder;
     }
 
-    public static void write(SliceItemHolder sliceItemHolder, VersionedParcel versionedParcel) {
+    public static void write(SliceItemHolder sliceItemHolder, VersionedParcel versionedParcel) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         versionedParcel.getClass();
         VersionedParcelable versionedParcelable = sliceItemHolder.mVersionedParcelable;
         if (versionedParcelable != null) {

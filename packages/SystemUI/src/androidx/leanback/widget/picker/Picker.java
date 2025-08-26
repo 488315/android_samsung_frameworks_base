@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Picker extends FrameLayout {
     public final int mAlphaAnimDuration;
@@ -41,7 +40,6 @@ public class Picker extends FrameLayout {
     public final float mVisibleColumnAlpha;
     public final float mVisibleItemsActivated;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PickerScrollArrayAdapter extends RecyclerView.Adapter {
         public final int mColIndex;
         public final PickerColumn mData;
@@ -83,9 +81,9 @@ public class Picker extends FrameLayout {
 
         @Override // androidx.recyclerview.widget.RecyclerView.Adapter
         public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(this.mResource, viewGroup, false);
+            View viewInflate = LayoutInflater.from(viewGroup.getContext()).inflate(this.mResource, viewGroup, false);
             int i2 = this.mTextViewResourceId;
-            return new ViewHolder(inflate, i2 != 0 ? (TextView) inflate.findViewById(i2) : (TextView) inflate);
+            return new ViewHolder(viewInflate, i2 != 0 ? (TextView) viewInflate.findViewById(i2) : (TextView) viewInflate);
         }
 
         @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -94,7 +92,6 @@ public class Picker extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView textView;
 
@@ -165,10 +162,10 @@ public class Picker extends FrameLayout {
             return;
         }
         super.setActivated(z);
-        boolean hasFocus = hasFocus();
+        boolean zHasFocus = hasFocus();
         int i = this.mSelectedColumn;
         setDescendantFocusability(131072);
-        if (!z && hasFocus && isFocusable()) {
+        if (!z && zHasFocus && isFocusable()) {
             requestFocus();
         }
         int i2 = 0;
@@ -189,7 +186,7 @@ public class Picker extends FrameLayout {
             updateColumnSize((VerticalGridView) ((ArrayList) this.mColumnViews).get(i3));
             i3++;
         }
-        boolean isActivated = isActivated();
+        boolean zIsActivated = isActivated();
         int i4 = 0;
         while (true) {
             ArrayList arrayList3 = this.mColumns;
@@ -198,11 +195,11 @@ public class Picker extends FrameLayout {
             }
             VerticalGridView verticalGridView = (VerticalGridView) ((ArrayList) this.mColumnViews).get(i4);
             for (int i5 = 0; i5 < verticalGridView.getChildCount(); i5++) {
-                verticalGridView.getChildAt(i5).setFocusable(isActivated);
+                verticalGridView.getChildAt(i5).setFocusable(zIsActivated);
             }
             i4++;
         }
-        if (z && hasFocus && i >= 0) {
+        if (z && zHasFocus && i >= 0) {
             ((VerticalGridView) ((ArrayList) this.mColumnViews).get(i)).requestFocus();
         }
         setDescendantFocusability(262144);
@@ -241,9 +238,9 @@ public class Picker extends FrameLayout {
         int i2 = verticalGridView.mLayoutManager.mFocusPosition;
         int i3 = 0;
         while (i3 < verticalGridView.mAdapter.getItemCount()) {
-            View findViewByPosition = verticalGridView.getLayoutManager().findViewByPosition(i3);
-            if (findViewByPosition != null) {
-                setOrAnimateAlpha(findViewByPosition, i2 == i3, i, true);
+            View viewFindViewByPosition = verticalGridView.getLayoutManager().findViewByPosition(i3);
+            if (viewFindViewByPosition != null) {
+                setOrAnimateAlpha(viewFindViewByPosition, i2 == i3, i, true);
             }
             i3++;
         }
@@ -267,20 +264,20 @@ public class Picker extends FrameLayout {
             @Override // androidx.leanback.widget.OnChildViewHolderSelectedListener
             public final void onChildViewHolderSelected(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int i2) {
                 Picker picker = Picker.this;
-                int indexOf = ((ArrayList) picker.mColumnViews).indexOf((VerticalGridView) recyclerView);
-                picker.updateColumnAlpha(indexOf);
+                int iIndexOf = ((ArrayList) picker.mColumnViews).indexOf((VerticalGridView) recyclerView);
+                picker.updateColumnAlpha(iIndexOf);
                 if (viewHolder != null) {
-                    picker.onColumnValueChanged(indexOf, ((PickerColumn) picker.mColumns.get(indexOf)).mMinValue + i2);
+                    picker.onColumnValueChanged(iIndexOf, ((PickerColumn) picker.mColumns.get(iIndexOf)).mMinValue + i2);
                 }
             }
         };
         int[] iArr = R$styleable.lbPicker;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, obtainStyledAttributes, i, 0);
-        this.mPickerItemLayoutId = obtainStyledAttributes.getResourceId(0, R.layout.lb_picker_item);
-        this.mPickerItemTextViewId = obtainStyledAttributes.getResourceId(1, 0);
-        obtainStyledAttributes.recycle();
+        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, 0);
+        this.mPickerItemLayoutId = typedArrayObtainStyledAttributes.getResourceId(0, R.layout.lb_picker_item);
+        this.mPickerItemTextViewId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         setEnabled(true);
         setDescendantFocusability(262144);
         this.mFocusedAlpha = 1.0f;

@@ -71,9 +71,9 @@ public interface IPermissionController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPermissionController)) {
-                return (IPermissionController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPermissionController)) {
+                return (IPermissionController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -112,38 +112,38 @@ public interface IPermissionController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean checkPermission = checkPermission(readString, readInt, readInt2);
+                boolean zCheckPermission = checkPermission(string, i3, i4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(checkPermission);
+                parcel2.writeBoolean(zCheckPermission);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt3 = parcel.readInt();
-                String readString3 = parcel.readString();
+                String string2 = parcel.readString();
+                int i5 = parcel.readInt();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int noteOp = noteOp(readString2, readInt3, readString3);
+                int iNoteOp = noteOp(string2, i5, string3);
                 parcel2.writeNoException();
-                parcel2.writeInt(noteOp);
+                parcel2.writeInt(iNoteOp);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                String[] packagesForUid = getPackagesForUid(readInt4);
+                String[] packagesForUid = getPackagesForUid(i6);
                 parcel2.writeNoException();
                 parcel2.writeStringArray(packagesForUid);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isRuntimePermission = isRuntimePermission(readString4);
+                boolean zIsRuntimePermission = isRuntimePermission(string4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isRuntimePermission);
+                parcel2.writeBoolean(zIsRuntimePermission);
             } else if (i == 5) {
-                String readString5 = parcel.readString();
-                int readInt5 = parcel.readInt();
+                String string5 = parcel.readString();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int packageUid = getPackageUid(readString5, readInt5);
+                int packageUid = getPackageUid(string5, i7);
                 parcel2.writeNoException();
                 parcel2.writeInt(packageUid);
             } else {
@@ -170,86 +170,86 @@ public interface IPermissionController extends IInterface {
 
             @Override // android.os.IPermissionController
             public boolean checkPermission(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IPermissionController
             public int noteOp(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IPermissionController
             public String[] getPackagesForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IPermissionController
             public boolean isRuntimePermission(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IPermissionController
             public int getPackageUid(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -24,7 +24,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesksTransitionObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -33,7 +32,6 @@ public final class DesksTransitionObserver {
     public final Map deskTransitions = new LinkedHashMap();
     public final Map activeDeskTransitions = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,76 +75,86 @@ public final class DesksTransitionObserver {
 
     public static void logD(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesksTransitionObserver", objArr);
-        ProtoLog.d(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesksTransitionObserver", objArr);
+        ProtoLog.d(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public final void addPendingTransition(DeskTransition deskTransition) {
         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-            Collection collection = (Set) ((LinkedHashMap) this.deskTransitions).get(deskTransition.getToken());
-            if (collection == null) {
-                collection = new LinkedHashSet();
+            Collection linkedHashSet = (Set) ((LinkedHashMap) this.deskTransitions).get(deskTransition.getToken());
+            if (linkedHashSet == null) {
+                linkedHashSet = new LinkedHashSet();
             }
-            collection.add(deskTransition);
-            this.deskTransitions.put(deskTransition.getToken(), collection);
+            linkedHashSet.add(deskTransition);
+            this.deskTransitions.put(deskTransition.getToken(), linkedHashSet);
             logD("Added pending desk transition: %s", deskTransition);
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x005c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void handleDeactivateDeskTransition(TransitionInfo transitionInfo, DeskTransition.DeactivateDesk deactivateDesk) {
-        List<TransitionInfo.Change> list;
-        Object obj;
+        List changes;
         int i;
+        Object next;
+        int i2;
         Integer deskIdForTask;
         logD("handleDeactivateDeskTransition: %s", deactivateDesk);
-        DesktopRepository current = this.desktopUserRepositories.getCurrent();
-        if (transitionInfo == null || (list = transitionInfo.getChanges()) == null) {
-            list = EmptyList.INSTANCE;
+        int i3 = deactivateDesk.userId;
+        DesktopUserRepositories desktopUserRepositories = this.desktopUserRepositories;
+        DesktopRepository profile = i3 != -1 ? desktopUserRepositories.getProfile(i3) : desktopUserRepositories.getCurrent();
+        if (transitionInfo == null || (changes = transitionInfo.getChanges()) == null) {
+            changes = EmptyList.INSTANCE;
         }
+        Iterator it = changes.iterator();
         boolean z = false;
-        for (TransitionInfo.Change change : list) {
+        while (true) {
+            boolean zHasNext = it.hasNext();
+            i = deactivateDesk.deskId;
+            if (!zHasNext) {
+                break;
+            }
+            TransitionInfo.Change change = (TransitionInfo.Change) it.next();
             change.getClass();
-            int i2 = deactivateDesk.deskId;
             RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) this.desksOrganizer;
             SparseArray sparseArray = rootTaskDesksOrganizer.deskRootsByDeskId;
             ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
             if (sparseArray.contains(taskInfo != null ? taskInfo.taskId : -1)) {
                 ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
-                if ((taskInfo2 != null ? taskInfo2.taskId : -1) == i2) {
-                    z = true;
+                if ((taskInfo2 != null ? taskInfo2.taskId : -1) != i) {
                 }
-            }
-            Iterator it = ((LinkedHashMap) rootTaskDesksOrganizer.deskMinimizationRootsByDeskId).values().iterator();
-            while (true) {
-                if (!it.hasNext()) {
-                    obj = null;
-                    break;
-                }
-                obj = it.next();
-                int i3 = ((RootTaskDesksOrganizer.DeskMinimizationRoot) obj).taskInfo.taskId;
-                ActivityManager.RunningTaskInfo taskInfo3 = change.getTaskInfo();
-                if (i3 == (taskInfo3 != null ? taskInfo3.taskId : -1)) {
-                    break;
-                }
-            }
-            RootTaskDesksOrganizer.DeskMinimizationRoot deskMinimizationRoot = (RootTaskDesksOrganizer.DeskMinimizationRoot) obj;
-            if (deskMinimizationRoot == null || deskMinimizationRoot.deskId != i2) {
-                ActivityManager.RunningTaskInfo taskInfo4 = change.getTaskInfo();
-                if (taskInfo4 != null && (deskIdForTask = current.getDeskIdForTask((i = taskInfo4.taskId))) != null) {
-                    int intValue = deskIdForTask.intValue();
-                    int i4 = deactivateDesk.deskId;
-                    if (intValue == i4 && rootTaskDesksOrganizer.getDeskAtEnd(change) == null) {
-                        current.removeTaskFromDesk(i4, i);
+                z = true;
+            } else {
+                Iterator it2 = ((LinkedHashMap) rootTaskDesksOrganizer.deskMinimizationRootsByDeskId).values().iterator();
+                while (true) {
+                    if (!it2.hasNext()) {
+                        next = null;
+                        break;
+                    }
+                    next = it2.next();
+                    int i4 = ((RootTaskDesksOrganizer.DeskMinimizationRoot) next).taskInfo.taskId;
+                    ActivityManager.RunningTaskInfo taskInfo3 = change.getTaskInfo();
+                    if (i4 == (taskInfo3 != null ? taskInfo3.taskId : -1)) {
+                        break;
                     }
                 }
-            } else {
-                z = true;
+                RootTaskDesksOrganizer.DeskMinimizationRoot deskMinimizationRoot = (RootTaskDesksOrganizer.DeskMinimizationRoot) next;
+                if (deskMinimizationRoot == null || deskMinimizationRoot.deskId != i) {
+                    ActivityManager.RunningTaskInfo taskInfo4 = change.getTaskInfo();
+                    if (taskInfo4 != null && (deskIdForTask = profile.getDeskIdForTask((i2 = taskInfo4.taskId))) != null && deskIdForTask.intValue() == i && rootTaskDesksOrganizer.getDeskAtEnd(change) == null) {
+                        profile.removeTaskFromDesk(i, i2);
+                    }
+                } else {
+                    z = true;
+                }
             }
         }
         if (!z) {
             logD("Deactivating desk without transition change", new Object[0]);
         }
-        current.setDeskInactive(deactivateDesk.deskId);
+        profile.setDeskInactive(i);
     }
 }

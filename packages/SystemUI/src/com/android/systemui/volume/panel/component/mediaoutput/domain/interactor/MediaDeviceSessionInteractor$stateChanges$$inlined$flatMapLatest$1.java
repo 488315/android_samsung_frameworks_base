@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Function3 $onStart$inlined;
@@ -50,13 +49,13 @@ public final class MediaDeviceSessionInteractor$stateChanges$$inlined$flatMapLat
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            MediaController access$findControllerForSession = MediaDeviceSessionInteractor.access$findControllerForSession(this.this$0, (List) this.L$1, this.$session$inlined);
-            if (access$findControllerForSession == null) {
+            MediaController mediaControllerAccess$findControllerForSession = MediaDeviceSessionInteractor.access$findControllerForSession(this.this$0, (List) this.L$1, this.$session$inlined);
+            if (mediaControllerAccess$findControllerForSession == null) {
                 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
             } else {
                 MediaControllerInteractorImpl mediaControllerInteractorImpl = (MediaControllerInteractorImpl) this.this$0.mediaControllerInteractor;
                 mediaControllerInteractorImpl.getClass();
-                flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MediaDeviceSessionInteractor$stateChanges$1$1(this.$onStart$inlined, access$findControllerForSession, null), FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MediaControllerInteractorImpl$stateChanges$1(access$findControllerForSession, mediaControllerInteractorImpl, null)), mediaControllerInteractorImpl.backgroundCoroutineContext));
+                flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MediaDeviceSessionInteractor$stateChanges$1$1(this.$onStart$inlined, mediaControllerAccess$findControllerForSession, null), FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new MediaControllerInteractorImpl$stateChanges$1(mediaControllerAccess$findControllerForSession, mediaControllerInteractorImpl, null)), mediaControllerInteractorImpl.backgroundCoroutineContext));
             }
             this.label = 1;
             if (FlowKt.emitAll(flowCollector, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, this) == coroutineSingletons) {

@@ -12,7 +12,6 @@ import com.android.systemui.qs.SecQSSwitchPreference;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class QuickBarBrightnessExtraBrightness {
     public final Context context;
@@ -21,7 +20,6 @@ public final class QuickBarBrightnessExtraBrightness {
     public TextView extraBrightnessSummary;
     public SwitchCompat extraBrightnessSwitch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +46,7 @@ public final class QuickBarBrightnessExtraBrightness {
     public final void setExtraBrightnessLayoutClickListener() {
         SecQSSwitchPreference secQSSwitchPreference = this.extraBrightnessContainer;
         if (secQSSwitchPreference != null) {
-            secQSSwitchPreference.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.settings.brightness.QuickBarBrightnessExtraBrightness$setExtraBrightnessLayoutClickListener$1
+            secQSSwitchPreference.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.settings.brightness.QuickBarBrightnessExtraBrightness.setExtraBrightnessLayoutClickListener.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     QuickBarBrightnessExtraBrightness quickBarBrightnessExtraBrightness = QuickBarBrightnessExtraBrightness.this;
@@ -71,7 +69,7 @@ public final class QuickBarBrightnessExtraBrightness {
                     if (switchCompat2 != null && switchCompat2.isChecked()) {
                         z = true;
                     }
-                    SwitchCompat switchCompat3 = SwitchCompat.this;
+                    SwitchCompat switchCompat3 = switchCompat;
                     QuickBarBrightnessExtraBrightness quickBarBrightnessExtraBrightness = this;
                     switchCompat3.setChecked(z);
                     QuickBarBrightnessExtraBrightness.access$putExtraBrightness(quickBarBrightnessExtraBrightness, z);
@@ -80,17 +78,17 @@ public final class QuickBarBrightnessExtraBrightness {
             switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.settings.brightness.QuickBarBrightnessExtraBrightness$setExtraBrightnessLayoutClickListener$2$2
                 @Override // android.widget.CompoundButton.OnCheckedChangeListener
                 public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                    SwitchCompat.this.setChecked(z);
+                    switchCompat.setChecked(z);
                     QuickBarBrightnessExtraBrightness.access$putExtraBrightness(this, z);
-                    SwitchCompat.this.announceForAccessibility(SwitchCompat.this.getContext().getString(z ? R.string.switch_bar_on : R.string.switch_bar_off));
+                    switchCompat.announceForAccessibility(switchCompat.getContext().getString(z ? R.string.switch_bar_on : R.string.switch_bar_off));
                 }
             });
         }
     }
 
     public final void setExtraBrightnessLayoutVisibilityLogic(Boolean bool) {
-        View requireViewById;
-        View requireViewById2;
+        View viewRequireViewById;
+        View viewRequireViewById2;
         if (Intrinsics.areEqual(bool, Boolean.FALSE)) {
             setExtraBrightnessLayoutClickListener();
             SecQSSwitchPreference secQSSwitchPreference = this.extraBrightnessContainer;
@@ -98,8 +96,8 @@ public final class QuickBarBrightnessExtraBrightness {
                 secQSSwitchPreference.setClickable(true);
             }
             SecQSSwitchPreference secQSSwitchPreference2 = this.extraBrightnessContainer;
-            if (secQSSwitchPreference2 != null && (requireViewById2 = secQSSwitchPreference2.requireViewById(R.id.title)) != null) {
-                requireViewById2.setAlpha(1.0f);
+            if (secQSSwitchPreference2 != null && (viewRequireViewById2 = secQSSwitchPreference2.requireViewById(R.id.title)) != null) {
+                viewRequireViewById2.setAlpha(1.0f);
             }
             SwitchCompat switchCompat = this.extraBrightnessSwitch;
             if (switchCompat != null) {
@@ -117,8 +115,8 @@ public final class QuickBarBrightnessExtraBrightness {
             secQSSwitchPreference4.setClickable(false);
         }
         SecQSSwitchPreference secQSSwitchPreference5 = this.extraBrightnessContainer;
-        if (secQSSwitchPreference5 != null && (requireViewById = secQSSwitchPreference5.requireViewById(R.id.title)) != null) {
-            requireViewById.setAlpha(0.4f);
+        if (secQSSwitchPreference5 != null && (viewRequireViewById = secQSSwitchPreference5.requireViewById(R.id.title)) != null) {
+            viewRequireViewById.setAlpha(0.4f);
         }
         SwitchCompat switchCompat2 = this.extraBrightnessSwitch;
         if (switchCompat2 != null) {

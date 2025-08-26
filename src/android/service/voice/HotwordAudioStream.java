@@ -148,12 +148,12 @@ public final class HotwordAudioStream implements Parcelable {
     }
 
     HotwordAudioStream(Parcel parcel) {
-        byte readByte = parcel.readByte();
+        byte b = parcel.readByte();
         AudioFormat audioFormat = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
         ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-        AudioTimestamp audioTimestamp = (readByte & 4) == 0 ? null : (AudioTimestamp) parcel.readTypedObject(AudioTimestamp.CREATOR);
+        AudioTimestamp audioTimestamp = (b & 4) == 0 ? null : (AudioTimestamp) parcel.readTypedObject(AudioTimestamp.CREATOR);
         PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-        byte[] createByteArray = parcel.createByteArray();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
         this.mAudioFormat = audioFormat;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) audioFormat);
         this.mAudioStreamParcelFileDescriptor = parcelFileDescriptor;
@@ -161,8 +161,8 @@ public final class HotwordAudioStream implements Parcelable {
         this.mTimestamp = audioTimestamp;
         this.mMetadata = persistableBundle;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) persistableBundle);
-        this.mInitialAudio = createByteArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray);
+        this.mInitialAudio = bArrCreateByteArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray);
     }
 
     public static final class Builder extends BaseBuilder {

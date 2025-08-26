@@ -134,7 +134,7 @@ public class ProgressUpdateClient {
         return (bundle == null || bundle.getSerializable("exception", Exception.class) == null) ? false : true;
     }
 
-    private Bundle getServiceReturnValue() {
+    private Bundle getServiceReturnValue() throws ExecutionException, InterruptedException, TimeoutException {
         try {
             Bundle bundle = this.mServiceReturnValue.get(BIND_TIME_OUT_SECOND, TimeUnit.SECONDS);
             this.mServiceReturnValue = new CompletableFuture<>();
@@ -205,10 +205,10 @@ public class ProgressUpdateClient {
             public void run() {
                 try {
                     LogUtil.d(ProgressUpdateClient.TAG, "Send message to service...");
-                    Message obtain = Message.obtain((Handler) null, 14);
-                    obtain.setData(null);
-                    obtain.replyTo = ProgressUpdateClient.this.mIncomingMessenger;
-                    ProgressUpdateClient.this.mServiceMessenger.send(obtain);
+                    Message messageObtain = Message.obtain((Handler) null, 14);
+                    messageObtain.setData(null);
+                    messageObtain.replyTo = ProgressUpdateClient.this.mIncomingMessenger;
+                    ProgressUpdateClient.this.mServiceMessenger.send(messageObtain);
                 } catch (RemoteException e) {
                     LogUtil.e(ProgressUpdateClient.TAG, "Exception at sending message. - " + e);
                 }

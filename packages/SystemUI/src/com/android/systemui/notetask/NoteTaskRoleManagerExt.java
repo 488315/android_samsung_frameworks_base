@@ -15,7 +15,6 @@ import com.android.systemui.notetask.shortcut.LaunchNoteTaskActivity;
 import kotlin.Result;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskRoleManagerExt {
     public static final NoteTaskRoleManagerExt INSTANCE = new NoteTaskRoleManagerExt();
@@ -33,7 +32,7 @@ public final class NoteTaskRoleManagerExt {
         }
         String string2 = context.getString(R.string.note_task_button_label);
         PackageManager packageManager = context.getPackageManager();
-        String str2 = null;
+        String string3 = null;
         if (str != null) {
             try {
                 int i = Result.$r8$clinit;
@@ -48,20 +47,20 @@ public final class NoteTaskRoleManagerExt {
             }
             ApplicationInfo applicationInfo = (ApplicationInfo) failure;
             if (applicationInfo != null) {
-                str2 = packageManager.getApplicationLabel(applicationInfo).toString();
+                string3 = packageManager.getApplicationLabel(applicationInfo).toString();
             }
         }
-        if (str2 == null) {
+        if (string3 == null) {
             string = string2;
         } else {
-            string = context.getString(R.string.note_task_shortcut_long_label, str2);
+            string = context.getString(R.string.note_task_shortcut_long_label, string3);
             string.getClass();
         }
-        Icon createWithResource = Icon.createWithResource(context, R.drawable.ic_note_task_shortcut_widget);
+        Icon iconCreateWithResource = Icon.createWithResource(context, R.drawable.ic_note_task_shortcut_widget);
         ShortcutInfo.Builder builder = new ShortcutInfo.Builder(context, "note_task_shortcut_id");
         LaunchNoteTaskActivity.Companion.getClass();
         Intent intent = new Intent(context, (Class<?>) LaunchNoteTaskActivity.class);
         intent.setAction("android.intent.action.CREATE_NOTE");
-        return builder.setIntent(intent).setActivity(new ComponentName(context, (Class<?>) LaunchNoteTaskActivity.class)).setShortLabel(string2).setLongLabel(string).setLongLived(true).setIcon(createWithResource).setExtras(persistableBundle).build();
+        return builder.setIntent(intent).setActivity(new ComponentName(context, (Class<?>) LaunchNoteTaskActivity.class)).setShortLabel(string2).setLongLabel(string).setLongLived(true).setIcon(iconCreateWithResource).setExtras(persistableBundle).build();
     }
 }

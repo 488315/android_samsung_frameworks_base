@@ -111,7 +111,7 @@ class ZygoteServer {
         return new ZygoteConnection(localSocket, str);
     }
 
-    void closeServerSocket() {
+    void closeServerSocket() throws ErrnoException {
         try {
             LocalServerSocket localServerSocket = this.mZygoteSocket;
             if (localServerSocket != null) {
@@ -149,10 +149,10 @@ class ZygoteServer {
     }
 
     private void fetchUsapPoolPolicyPropsWithMinInterval() {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (this.mIsFirstPropertyCheck || elapsedRealtime - this.mLastPropCheckTimestamp >= 60000) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (this.mIsFirstPropertyCheck || jElapsedRealtime - this.mLastPropCheckTimestamp >= 60000) {
             this.mIsFirstPropertyCheck = false;
-            this.mLastPropCheckTimestamp = elapsedRealtime;
+            this.mLastPropCheckTimestamp = jElapsedRealtime;
             fetchUsapPoolPolicyProps();
         }
     }
@@ -166,7 +166,7 @@ class ZygoteServer {
 
     Runnable fillUsapPool(int[] iArr, boolean z) {
         int i;
-        Runnable forkUsap;
+        Runnable runnableForkUsap;
         Trace.traceBegin(64L, "Zygote:FillUsapPool");
         fetchUsapPoolPolicyPropsIfUnfetched();
         int usapPoolCount = Zygote.getUsapPoolCount();
@@ -181,15 +181,15 @@ class ZygoteServer {
         do {
             i--;
             if (i >= 0) {
-                forkUsap = Zygote.forkUsap(this.mUsapPoolSocket, iArr, z);
+                runnableForkUsap = Zygote.forkUsap(this.mUsapPoolSocket, iArr, z);
             } else {
                 ZygoteHooks.postForkCommon();
                 resetUsapRefillState();
                 Trace.traceEnd(64L);
                 return null;
             }
-        } while (forkUsap == null);
-        return forkUsap;
+        } while (runnableForkUsap == null);
+        return runnableForkUsap;
     }
 
     Runnable setUsapPoolStatus(boolean z, LocalSocket localSocket) {
@@ -215,9 +215,9 @@ class ZygoteServer {
     }
 
     /* JADX WARN: Finally extract failed */
-    Runnable runSelectLoop(String str) {
+    Runnable runSelectLoop(String str) throws IOException, ErrnoException {
         StructPollfd[] structPollfdArr;
-        int[] iArr;
+        int[] usapPipeFDs;
         int i;
         int i2;
         int i3;
@@ -226,22 +226,22 @@ class ZygoteServer {
         int i5;
         boolean z2;
         ZygoteConnection zygoteConnection;
-        Runnable processCommand;
+        Runnable runnableProcessCommand;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         arrayList.add(this.mZygoteSocket.getFileDescriptor());
-        int[] iArr2 = null;
+        int[] iArr = null;
         arrayList2.add(null);
         this.mUsapPoolRefillTriggerTimestamp = -1L;
         while (true) {
             fetchUsapPoolPolicyPropsWithMinInterval();
             this.mUsapPoolRefillAction = UsapPoolRefillAction.NONE;
             if (this.mUsapPoolEnabled) {
-                iArr = Zygote.getUsapPipeFDs();
-                structPollfdArr = new StructPollfd[arrayList.size() + 1 + iArr.length];
+                usapPipeFDs = Zygote.getUsapPipeFDs();
+                structPollfdArr = new StructPollfd[arrayList.size() + 1 + usapPipeFDs.length];
             } else {
                 structPollfdArr = new StructPollfd[arrayList.size()];
-                iArr = iArr2;
+                usapPipeFDs = iArr;
             }
             Iterator it = arrayList.iterator();
             int i6 = 0;
@@ -259,7 +259,7 @@ class ZygoteServer {
                 structPollfd2.fd = this.mUsapPoolEventFD;
                 structPollfdArr[i6].events = (short) OsConstants.POLLIN;
                 i = i6 + 1;
-                for (int i7 : iArr) {
+                for (int i7 : usapPipeFDs) {
                     FileDescriptor fileDescriptor2 = new FileDescriptor();
                     fileDescriptor2.setInt$(i7);
                     StructPollfd structPollfd3 = new StructPollfd();
@@ -277,15 +277,15 @@ class ZygoteServer {
                 i2 = -1;
             } else {
                 i2 = -1;
-                long currentTimeMillis = System.currentTimeMillis() - this.mUsapPoolRefillTriggerTimestamp;
+                long jCurrentTimeMillis = System.currentTimeMillis() - this.mUsapPoolRefillTriggerTimestamp;
                 i3 = this.mUsapPoolRefillDelayMs;
                 i4 = i6;
-                if (currentTimeMillis >= i3) {
+                if (jCurrentTimeMillis >= i3) {
                     this.mUsapPoolRefillTriggerTimestamp = -1L;
                     this.mUsapPoolRefillAction = UsapPoolRefillAction.DELAYED;
                     i3 = 0;
-                } else if (currentTimeMillis > 0) {
-                    i3 = (int) (i3 - currentTimeMillis);
+                } else if (jCurrentTimeMillis > 0) {
+                    i3 = (int) (i3 - jCurrentTimeMillis);
                 }
             }
             try {
@@ -298,76 +298,74 @@ class ZygoteServer {
                     while (true) {
                         i += i2;
                         if (i >= 0) {
-                            if ((structPollfdArr[i].revents & OsConstants.POLLIN) != 0) {
-                                if (i == 0) {
-                                    ZygoteConnection acceptCommandPeer = acceptCommandPeer(str);
-                                    arrayList2.add(acceptCommandPeer);
-                                    arrayList.add(acceptCommandPeer.getFileDescriptor());
-                                } else {
-                                    i5 = i4;
-                                    if (i < i5) {
+                            if ((structPollfdArr[i].revents & OsConstants.POLLIN) == 0) {
+                                i5 = i4;
+                            } else if (i == 0) {
+                                ZygoteConnection zygoteConnectionAcceptCommandPeer = acceptCommandPeer(str);
+                                arrayList2.add(zygoteConnectionAcceptCommandPeer);
+                                arrayList.add(zygoteConnectionAcceptCommandPeer.getFileDescriptor());
+                                i5 = i4;
+                            } else {
+                                i5 = i4;
+                                if (i < i5) {
+                                    try {
                                         try {
-                                            try {
-                                                zygoteConnection = (ZygoteConnection) arrayList2.get(i);
-                                                processCommand = zygoteConnection.processCommand(this, !isUsapPoolEnabled() && ZygoteHooks.isIndefiniteThreadSuspensionSafe());
-                                            } catch (Exception e) {
-                                                if (!this.mIsForkChild) {
-                                                    Slog.e(TAG, "Exception executing zygote command: ", e);
-                                                    ((ZygoteConnection) arrayList2.remove(i)).closeSocket();
-                                                    arrayList.remove(i);
-                                                    z2 = false;
-                                                } else {
-                                                    Log.e(TAG, "Caught post-fork exception in child process.", e);
-                                                    throw e;
-                                                }
-                                            }
-                                            if (this.mIsForkChild) {
-                                                if (processCommand == null) {
-                                                    throw new IllegalStateException("command == null");
-                                                }
-                                                this.mIsForkChild = false;
-                                                return processCommand;
-                                            }
-                                            if (processCommand != null) {
-                                                throw new IllegalStateException("command != null");
-                                            }
-                                            if (zygoteConnection.isClosedByPeer()) {
-                                                zygoteConnection.closeSocket();
-                                                arrayList2.remove(i);
+                                            zygoteConnection = (ZygoteConnection) arrayList2.get(i);
+                                            runnableProcessCommand = zygoteConnection.processCommand(this, !isUsapPoolEnabled() && ZygoteHooks.isIndefiniteThreadSuspensionSafe());
+                                        } catch (Exception e) {
+                                            if (!this.mIsForkChild) {
+                                                Slog.e(TAG, "Exception executing zygote command: ", e);
+                                                ((ZygoteConnection) arrayList2.remove(i)).closeSocket();
                                                 arrayList.remove(i);
+                                                z2 = false;
+                                            } else {
+                                                Log.e(TAG, "Caught post-fork exception in child process.", e);
+                                                throw e;
                                             }
-                                            z2 = false;
-                                            this.mIsForkChild = z2;
-                                            i4 = i5;
-                                        } catch (Throwable th) {
+                                        }
+                                        if (this.mIsForkChild) {
+                                            if (runnableProcessCommand == null) {
+                                                throw new IllegalStateException("command == null");
+                                            }
                                             this.mIsForkChild = false;
-                                            throw th;
+                                            return runnableProcessCommand;
                                         }
-                                    } else {
-                                        try {
-                                            byte[] bArr = new byte[8];
-                                            int read = Os.read(structPollfdArr[i].fd, bArr, 0, 8);
-                                            if (read != 8) {
-                                                Log.e(TAG, "Incomplete read from USAP management FD of size " + read);
-                                            } else {
-                                                long readLong = new DataInputStream(new ByteArrayInputStream(bArr)).readLong();
-                                                if (i > i5) {
-                                                    Zygote.removeUsapTableEntry((int) readLong);
-                                                }
-                                                z3 = true;
-                                            }
-                                        } catch (Exception e2) {
-                                            if (i == i5) {
-                                                Log.e(TAG, "Failed to read from USAP pool event FD: " + e2.getMessage());
-                                            } else {
-                                                Log.e(TAG, "Failed to read from USAP reporting pipe: " + e2.getMessage());
-                                            }
+                                        if (runnableProcessCommand != null) {
+                                            throw new IllegalStateException("command != null");
                                         }
-                                        i4 = i5;
+                                        if (zygoteConnection.isClosedByPeer()) {
+                                            zygoteConnection.closeSocket();
+                                            arrayList2.remove(i);
+                                            arrayList.remove(i);
+                                        }
+                                        z2 = false;
+                                        this.mIsForkChild = z2;
+                                    } catch (Throwable th) {
+                                        this.mIsForkChild = false;
+                                        throw th;
+                                    }
+                                } else {
+                                    try {
+                                        byte[] bArr = new byte[8];
+                                        int i8 = Os.read(structPollfdArr[i].fd, bArr, 0, 8);
+                                        if (i8 != 8) {
+                                            Log.e(TAG, "Incomplete read from USAP management FD of size " + i8);
+                                        } else {
+                                            long j = new DataInputStream(new ByteArrayInputStream(bArr)).readLong();
+                                            if (i > i5) {
+                                                Zygote.removeUsapTableEntry((int) j);
+                                            }
+                                            z3 = true;
+                                        }
+                                    } catch (Exception e2) {
+                                        if (i == i5) {
+                                            Log.e(TAG, "Failed to read from USAP pool event FD: " + e2.getMessage());
+                                        } else {
+                                            Log.e(TAG, "Failed to read from USAP reporting pipe: " + e2.getMessage());
+                                        }
                                     }
                                 }
                             }
-                            i5 = i4;
                             i4 = i5;
                         } else {
                             z = false;
@@ -390,15 +388,15 @@ class ZygoteServer {
                         }
                     }).toArray();
                     boolean z4 = this.mUsapPoolRefillAction != UsapPoolRefillAction.IMMEDIATE ? z : true;
-                    Runnable fillUsapPool = fillUsapPool(array, z4);
-                    if (fillUsapPool != null) {
-                        return fillUsapPool;
+                    Runnable runnableFillUsapPool = fillUsapPool(array, z4);
+                    if (runnableFillUsapPool != null) {
+                        return runnableFillUsapPool;
                     }
                     if (z4) {
                         this.mUsapPoolRefillTriggerTimestamp = System.currentTimeMillis();
                     }
                 }
-                iArr2 = null;
+                iArr = null;
             } catch (ErrnoException e3) {
                 throw new RuntimeException("poll failed", e3);
             }

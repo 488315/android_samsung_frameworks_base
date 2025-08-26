@@ -269,15 +269,15 @@ public class CameraLightSensorManager {
             int i = message.what;
             if (i == 1) {
                 synchronized (CameraLightSensorManager.this.mLockIPC) {
-                    Message obtain = Message.obtain(null, 4, 0, (int) Math.random());
-                    obtain.replyTo = CameraLightSensorManager.this.mSystemMessenger;
+                    Message messageObtain = Message.obtain(null, 4, 0, (int) Math.random());
+                    messageObtain.replyTo = CameraLightSensorManager.this.mSystemMessenger;
                     if (CameraLightSensorManager.this.mSystemIPC != null) {
                         try {
                             Log.d("CameraLightSensor_Manager", "IPC_SERVICE_START_CAMERA -> MSG_SERVICE_START_CAMERA");
                             Bundle bundle = new Bundle();
                             bundle.putShort("respAlreadyRegister", CameraLightSensorManager.this.listenerRegistered);
-                            obtain.setData(bundle);
-                            CameraLightSensorManager.this.mSystemIPC.send(obtain);
+                            messageObtain.setData(bundle);
+                            CameraLightSensorManager.this.mSystemIPC.send(messageObtain);
                             this.retry = 5;
                         } catch (Exception e) {
                             Log.d("CameraLightSensor_Manager", "IPC_SERVICE_START_CAMERA -> Dead Object");
@@ -314,12 +314,12 @@ public class CameraLightSensorManager {
             if (i == 3) {
                 synchronized (CameraLightSensorManager.this.mLockIPC) {
                     CameraLightSensorManager.this.mConnectionFailed = false;
-                    Message obtain2 = Message.obtain(null, 5, 0, (int) Math.random());
-                    obtain2.replyTo = CameraLightSensorManager.this.mSystemMessenger;
+                    Message messageObtain2 = Message.obtain(null, 5, 0, (int) Math.random());
+                    messageObtain2.replyTo = CameraLightSensorManager.this.mSystemMessenger;
                     if (CameraLightSensorManager.this.mSystemIPC != null) {
                         try {
                             Log.d("CameraLightSensor_Manager", "IPC_SERVICE_UNREGISTER_CONNECTION -> MSG_SERVICE_STOP_CAMERA");
-                            CameraLightSensorManager.this.mSystemIPC.send(obtain2);
+                            CameraLightSensorManager.this.mSystemIPC.send(messageObtain2);
                         } catch (Exception e2) {
                             Log.d("CameraLightSensor_Manager", "IPC_SERVICE_UNREGISTER_CONNECTION -> Dead Object");
                             e2.printStackTrace();

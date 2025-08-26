@@ -40,9 +40,9 @@ public interface INativeAudioVolumeGroupCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INativeAudioVolumeGroupCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INativeAudioVolumeGroupCallback)) {
-                return (INativeAudioVolumeGroupCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INativeAudioVolumeGroupCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INativeAudioVolumeGroupCallback)) {
+                return (INativeAudioVolumeGroupCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,13 +83,13 @@ public interface INativeAudioVolumeGroupCallback extends IInterface {
 
             @Override // android.media.INativeAudioVolumeGroupCallback
             public void onAudioVolumeGroupChanged(AudioVolumeGroupChangeEvent audioVolumeGroupChangeEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INativeAudioVolumeGroupCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(audioVolumeGroupChangeEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INativeAudioVolumeGroupCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioVolumeGroupChangeEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

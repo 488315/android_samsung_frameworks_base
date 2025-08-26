@@ -118,17 +118,17 @@ public final class RequestInfo implements Parcelable {
     }
 
     private RequestInfo(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        String readString8 = parcel.readString8();
-        String readString82 = parcel.readString8();
+        IBinder strongBinder = parcel.readStrongBinder();
+        String string8 = parcel.readString8();
+        String string82 = parcel.readString8();
         CreateCredentialRequest createCredentialRequest = (CreateCredentialRequest) parcel.readTypedObject(CreateCredentialRequest.CREATOR);
         GetCredentialRequest getCredentialRequest = (GetCredentialRequest) parcel.readTypedObject(GetCredentialRequest.CREATOR);
-        this.mToken = readStrongBinder;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readStrongBinder);
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mPackageName = readString82;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString82);
+        this.mToken = strongBinder;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) strongBinder);
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mPackageName = string82;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string82);
         this.mCreateCredentialRequest = createCredentialRequest;
         this.mGetCredentialRequest = getCredentialRequest;
         this.mHasPermissionToOverrideDefault = parcel.readBoolean();

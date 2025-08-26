@@ -201,23 +201,23 @@ public class RemoteComposeBuffer {
 
     public int mapLookup(int i, int i2) {
         int i3 = (i2 * 33) + i;
-        int dataGetId = this.mRemoteComposeState.dataGetId(Integer.valueOf(i3));
-        if (dataGetId != -1) {
-            return dataGetId;
+        int iDataGetId = this.mRemoteComposeState.dataGetId(Integer.valueOf(i3));
+        if (iDataGetId != -1) {
+            return iDataGetId;
         }
-        int cacheData = this.mRemoteComposeState.cacheData(Integer.valueOf(i3));
-        DataMapLookup.apply(this.mBuffer, cacheData, i, i2);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(Integer.valueOf(i3));
+        DataMapLookup.apply(this.mBuffer, iCacheData, i, i2);
+        return iCacheData;
     }
 
     public int addText(String str) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(str);
-        if (dataGetId != -1) {
-            return dataGetId;
+        int iDataGetId = this.mRemoteComposeState.dataGetId(str);
+        if (iDataGetId != -1) {
+            return iDataGetId;
         }
-        int cacheData = this.mRemoteComposeState.cacheData(str);
-        TextData.apply(this.mBuffer, cacheData, str);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(str);
+        TextData.apply(this.mBuffer, iCacheData, str);
+        return iCacheData;
     }
 
     public void addClickArea(int i, String str, float f, float f2, float f3, float f4, String str2) {
@@ -261,9 +261,9 @@ public class RemoteComposeBuffer {
     }
 
     public int addBitmapFont(BitmapFontData.Glyph[] glyphArr) {
-        int nextId = this.mRemoteComposeState.nextId();
-        BitmapFontData.apply(this.mBuffer, nextId, glyphArr);
-        return nextId;
+        int iNextId = this.mRemoteComposeState.nextId();
+        BitmapFontData.apply(this.mBuffer, iNextId, glyphArr);
+        return iNextId;
     }
 
     public void setBitmapName(int i, String str) {
@@ -287,23 +287,23 @@ public class RemoteComposeBuffer {
     }
 
     public void addDrawPath(Object obj) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(obj);
-        if (dataGetId == -1) {
-            dataGetId = addPathData(obj);
+        int iDataGetId = this.mRemoteComposeState.dataGetId(obj);
+        if (iDataGetId == -1) {
+            iDataGetId = addPathData(obj);
         }
-        addDrawPath(dataGetId);
+        addDrawPath(iDataGetId);
     }
 
     public int pathTween(int i, int i2, float f) {
-        int nextId = this.mRemoteComposeState.nextId();
-        PathTween.apply(this.mBuffer, nextId, i, i2, f);
-        return nextId;
+        int iNextId = this.mRemoteComposeState.nextId();
+        PathTween.apply(this.mBuffer, iNextId, i, i2, f);
+        return iNextId;
     }
 
     public int pathCreate(float f, float f2) {
-        int nextId = this.mRemoteComposeState.nextId();
-        PathCreate.apply(this.mBuffer, nextId, f, f2);
-        return nextId;
+        int iNextId = this.mRemoteComposeState.nextId();
+        PathCreate.apply(this.mBuffer, iNextId, f, f2);
+        return iNextId;
     }
 
     public void pathAppend(int i, float... fArr) {
@@ -323,19 +323,19 @@ public class RemoteComposeBuffer {
     }
 
     public void addDrawTextOnPath(String str, Object obj, float f, float f2) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(obj);
-        if (dataGetId == -1) {
-            dataGetId = addPathData(obj);
+        int iDataGetId = this.mRemoteComposeState.dataGetId(obj);
+        if (iDataGetId == -1) {
+            iDataGetId = addPathData(obj);
         }
-        DrawTextOnPath.apply(this.mBuffer, addText(str), dataGetId, f, f2);
+        DrawTextOnPath.apply(this.mBuffer, addText(str), iDataGetId, f, f2);
     }
 
     public void addDrawTextOnPath(int i, Object obj, float f, float f2) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(obj);
-        if (dataGetId == -1) {
-            dataGetId = addPathData(obj);
+        int iDataGetId = this.mRemoteComposeState.dataGetId(obj);
+        if (iDataGetId == -1) {
+            iDataGetId = addPathData(obj);
         }
-        DrawTextOnPath.apply(this.mBuffer, i, dataGetId, f, f2);
+        DrawTextOnPath.apply(this.mBuffer, i, iDataGetId, f, f2);
     }
 
     public void addDrawTextRun(String str, int i, int i2, int i3, int i4, float f, float f2, boolean z) {
@@ -359,18 +359,18 @@ public class RemoteComposeBuffer {
     }
 
     public int textMerge(int i, int i2) {
-        int nextId = nextId();
-        TextMerge.apply(this.mBuffer, nextId, i, i2);
-        return nextId;
+        int iNextId = nextId();
+        TextMerge.apply(this.mBuffer, iNextId, i, i2);
+        return iNextId;
     }
 
     public int createTextFromFloat(float f, short s, short s2, int i) {
         String str = Utils.floatToString(f) + NavigationBarInflaterView.KEY_CODE_START + ((int) s) + "," + ((int) s2) + "," + i + NavigationBarInflaterView.KEY_CODE_END;
-        int dataGetId = this.mRemoteComposeState.dataGetId(str);
-        if (dataGetId == -1) {
-            dataGetId = this.mRemoteComposeState.cacheData(str);
+        int iDataGetId = this.mRemoteComposeState.dataGetId(str);
+        if (iDataGetId == -1) {
+            iDataGetId = this.mRemoteComposeState.cacheData(str);
         }
-        int i2 = dataGetId;
+        int i2 = iDataGetId;
         TextFromFloat.apply(this.mBuffer, i2, f, s, s2, i);
         return i2;
     }
@@ -380,16 +380,16 @@ public class RemoteComposeBuffer {
     }
 
     public void addDrawTweenPath(Object obj, Object obj2, float f, float f2, float f3) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(obj);
-        if (dataGetId == -1) {
-            dataGetId = addPathData(obj);
+        int iDataGetId = this.mRemoteComposeState.dataGetId(obj);
+        if (iDataGetId == -1) {
+            iDataGetId = addPathData(obj);
         }
-        int i = dataGetId;
-        int dataGetId2 = this.mRemoteComposeState.dataGetId(obj2);
-        if (dataGetId2 == -1) {
-            dataGetId2 = addPathData(obj2);
+        int i = iDataGetId;
+        int iDataGetId2 = this.mRemoteComposeState.dataGetId(obj2);
+        if (iDataGetId2 == -1) {
+            iDataGetId2 = addPathData(obj2);
         }
-        addDrawTweenPath(i, dataGetId2, f, f2, f3);
+        addDrawTweenPath(i, iDataGetId2, f, f2, f3);
     }
 
     public void addDrawTweenPath(int i, int i2, float f, float f2, float f3) {
@@ -397,10 +397,10 @@ public class RemoteComposeBuffer {
     }
 
     public int addPathData(Object obj) {
-        float[] pathToFloatArray = this.mPlatform.pathToFloatArray(obj);
-        int cacheData = this.mRemoteComposeState.cacheData(obj);
-        PathData.apply(this.mBuffer, cacheData, pathToFloatArray);
-        return cacheData;
+        float[] fArrPathToFloatArray = this.mPlatform.pathToFloatArray(obj);
+        int iCacheData = this.mRemoteComposeState.cacheData(obj);
+        PathData.apply(this.mBuffer, iCacheData, fArrPathToFloatArray);
+        return iCacheData;
     }
 
     public void addPaint(PaintBundle paintBundle) {
@@ -410,20 +410,20 @@ public class RemoteComposeBuffer {
     public void inflateFromBuffer(ArrayList<Operation> arrayList) {
         this.mBuffer.setIndex(0);
         while (this.mBuffer.available()) {
-            int readByte = this.mBuffer.readByte();
-            CompanionOperation companionOperation = Operations.map.get(readByte);
+            int i = this.mBuffer.readByte();
+            CompanionOperation companionOperation = Operations.map.get(i);
             if (companionOperation == null) {
-                throw new RuntimeException("Unknown operation encountered " + readByte);
+                throw new RuntimeException("Unknown operation encountered " + i);
             }
             companionOperation.read(this.mBuffer, arrayList);
         }
     }
 
     public static void readNextOperation(WireBuffer wireBuffer, ArrayList<Operation> arrayList) {
-        int readByte = wireBuffer.readByte();
-        CompanionOperation companionOperation = Operations.map.get(readByte);
+        int i = wireBuffer.readByte();
+        CompanionOperation companionOperation = Operations.map.get(i);
         if (companionOperation == null) {
-            throw new RuntimeException("Unknown operation encountered " + readByte);
+            throw new RuntimeException("Unknown operation encountered " + i);
         }
         companionOperation.read(wireBuffer, arrayList);
     }
@@ -468,7 +468,7 @@ public class RemoteComposeBuffer {
         return remoteComposeBuffer;
     }
 
-    public void write(RemoteComposeBuffer remoteComposeBuffer, File file) {
+    public void write(RemoteComposeBuffer remoteComposeBuffer, File file) throws IOException {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             fileOutputStream.write(remoteComposeBuffer.mBuffer.getBuffer(), 0, remoteComposeBuffer.mBuffer.getSize());
@@ -485,27 +485,27 @@ public class RemoteComposeBuffer {
 
     public static void read(InputStream inputStream, RemoteComposeBuffer remoteComposeBuffer) {
         try {
-            byte[] readAllBytes = readAllBytes(inputStream);
-            remoteComposeBuffer.reset(readAllBytes.length);
-            System.arraycopy(readAllBytes, 0, remoteComposeBuffer.mBuffer.mBuffer, 0, readAllBytes.length);
-            remoteComposeBuffer.mBuffer.mSize = readAllBytes.length;
+            byte[] allBytes = readAllBytes(inputStream);
+            remoteComposeBuffer.reset(allBytes.length);
+            System.arraycopy(allBytes, 0, remoteComposeBuffer.mBuffer.mBuffer, 0, allBytes.length);
+            remoteComposeBuffer.mBuffer.mSize = allBytes.length;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private static byte[] readAllBytes(InputStream inputStream) throws IOException {
-        byte[] bArr = new byte[32768];
+        byte[] bArrCopyOf = new byte[32768];
         int i = 0;
         while (true) {
-            int read = inputStream.read(bArr, i, bArr.length - i);
-            if (read == -1) {
+            int i2 = inputStream.read(bArrCopyOf, i, bArrCopyOf.length - i);
+            if (i2 == -1) {
                 inputStream.close();
-                return Arrays.copyOf(bArr, i);
+                return Arrays.copyOf(bArrCopyOf, i);
             }
-            i += read;
-            if (i == bArr.length) {
-                bArr = Arrays.copyOf(bArr, bArr.length * 2);
+            i += i2;
+            if (i == bArrCopyOf.length) {
+                bArrCopyOf = Arrays.copyOf(bArrCopyOf, bArrCopyOf.length * 2);
             }
         }
     }
@@ -547,9 +547,9 @@ public class RemoteComposeBuffer {
     }
 
     public float addFloat(float f) {
-        int cacheFloat = this.mRemoteComposeState.cacheFloat(f);
-        FloatConstant.apply(this.mBuffer, cacheFloat, f);
-        return Utils.asNan(cacheFloat);
+        int iCacheFloat = this.mRemoteComposeState.cacheFloat(f);
+        FloatConstant.apply(this.mBuffer, iCacheFloat, f);
+        return Utils.asNan(iCacheFloat);
     }
 
     public float reserveFloatVariable() {
@@ -557,21 +557,21 @@ public class RemoteComposeBuffer {
     }
 
     public int addInteger(int i) {
-        int cacheInteger = this.mRemoteComposeState.cacheInteger(i);
-        IntegerConstant.apply(this.mBuffer, cacheInteger, i);
-        return cacheInteger;
+        int iCacheInteger = this.mRemoteComposeState.cacheInteger(i);
+        IntegerConstant.apply(this.mBuffer, iCacheInteger, i);
+        return iCacheInteger;
     }
 
     public int addLong(long j) {
-        int nextId = this.mRemoteComposeState.nextId();
-        LongConstant.apply(this.mBuffer, nextId, j);
-        return nextId;
+        int iNextId = this.mRemoteComposeState.nextId();
+        LongConstant.apply(this.mBuffer, iNextId, j);
+        return iNextId;
     }
 
     public int addBoolean(boolean z) {
-        int nextId = this.mRemoteComposeState.nextId();
-        BooleanConstant.apply(this.mBuffer, nextId, z);
-        return nextId;
+        int iNextId = this.mRemoteComposeState.nextId();
+        BooleanConstant.apply(this.mBuffer, iNextId, z);
+        return iNextId;
     }
 
     public float asFloatId(int i) {
@@ -579,9 +579,9 @@ public class RemoteComposeBuffer {
     }
 
     public float addAnimatedFloat(float... fArr) {
-        int cacheData = this.mRemoteComposeState.cacheData(fArr);
-        FloatExpression.apply(this.mBuffer, cacheData, fArr, null);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(fArr);
+        FloatExpression.apply(this.mBuffer, iCacheData, fArr, null);
+        return Utils.asNan(iCacheData);
     }
 
     public void addTouchExpression(float f, float f2, float f3, float f4, float f5, int i, float[] fArr, int i2, float[] fArr2, float[] fArr3) {
@@ -589,50 +589,50 @@ public class RemoteComposeBuffer {
     }
 
     public float addTouchExpression(float f, float f2, float f3, float f4, int i, float[] fArr, int i2, float[] fArr2, float[] fArr3) {
-        float asNan = Utils.asNan(this.mRemoteComposeState.nextId());
-        addTouchExpression(asNan, f, f2, f3, f4, i, fArr, i2, fArr2, fArr3);
-        return asNan;
+        float fAsNan = Utils.asNan(this.mRemoteComposeState.nextId());
+        addTouchExpression(fAsNan, f, f2, f3, f4, i, fArr, i2, fArr2, fArr3);
+        return fAsNan;
     }
 
     public float addAnimatedFloat(float[] fArr, float[] fArr2) {
-        int cacheData = this.mRemoteComposeState.cacheData(fArr);
-        FloatExpression.apply(this.mBuffer, cacheData, fArr, fArr2);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(fArr);
+        FloatExpression.apply(this.mBuffer, iCacheData, fArr, fArr2);
+        return Utils.asNan(iCacheData);
     }
 
     public float textMeasure(int i, int i2) {
-        int cacheData = this.mRemoteComposeState.cacheData(Integer.valueOf((i2 * 31) + i));
-        TextMeasure.apply(this.mBuffer, cacheData, i, i2);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(Integer.valueOf((i2 * 31) + i));
+        TextMeasure.apply(this.mBuffer, iCacheData, i, i2);
+        return Utils.asNan(iCacheData);
     }
 
     public float textLength(int i) {
-        int cacheData = this.mRemoteComposeState.cacheData(Integer.valueOf((TextLength.id() << 16) + i));
-        TextLength.apply(this.mBuffer, cacheData, i);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(Integer.valueOf((TextLength.id() << 16) + i));
+        TextLength.apply(this.mBuffer, iCacheData, i);
+        return Utils.asNan(iCacheData);
     }
 
     public float addFloatArray(float[] fArr) {
-        int cacheData = this.mRemoteComposeState.cacheData(fArr, 2);
-        DataListFloat.apply(this.mBuffer, cacheData, fArr);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(fArr, 2);
+        DataListFloat.apply(this.mBuffer, iCacheData, fArr);
+        return Utils.asNan(iCacheData);
     }
 
     public float addFloatList(float[] fArr) {
         int length = fArr.length;
         int[] iArr = new int[length];
         for (int i = 0; i < length; i++) {
-            int cacheFloat = this.mRemoteComposeState.cacheFloat(fArr[i]);
-            iArr[i] = cacheFloat;
-            FloatConstant.apply(this.mBuffer, cacheFloat, fArr[i]);
+            int iCacheFloat = this.mRemoteComposeState.cacheFloat(fArr[i]);
+            iArr[i] = iCacheFloat;
+            FloatConstant.apply(this.mBuffer, iCacheFloat, fArr[i]);
         }
         return addList(iArr);
     }
 
     public float addList(int[] iArr) {
-        int cacheData = this.mRemoteComposeState.cacheData(iArr, 2);
-        DataListIds.apply(this.mBuffer, cacheData, iArr);
-        return Utils.asNan(cacheData);
+        int iCacheData = this.mRemoteComposeState.cacheData(iArr, 2);
+        DataListIds.apply(this.mBuffer, iCacheData, iArr);
+        return Utils.asNan(iCacheData);
     }
 
     public float addFloatMap(String[] strArr, float[] fArr) {
@@ -640,100 +640,100 @@ public class RemoteComposeBuffer {
         int[] iArr = new int[length];
         byte[] bArr = new byte[fArr.length];
         for (int i = 0; i < length; i++) {
-            int cacheFloat = this.mRemoteComposeState.cacheFloat(fArr[i]);
-            iArr[i] = cacheFloat;
-            FloatConstant.apply(this.mBuffer, cacheFloat, fArr[i]);
+            int iCacheFloat = this.mRemoteComposeState.cacheFloat(fArr[i]);
+            iArr[i] = iCacheFloat;
+            FloatConstant.apply(this.mBuffer, iCacheFloat, fArr[i]);
             bArr[i] = 2;
         }
         return addMap(strArr, bArr, iArr);
     }
 
     public int addMap(String[] strArr, byte[] bArr, int[] iArr) {
-        int cacheData = this.mRemoteComposeState.cacheData(iArr, 2);
-        DataMapIds.apply(this.mBuffer, cacheData, strArr, bArr, iArr);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(iArr, 2);
+        DataMapIds.apply(this.mBuffer, iCacheData, strArr, bArr, iArr);
+        return iCacheData;
     }
 
     public int textLookup(float f, float f2) {
-        int cacheData = this.mRemoteComposeState.cacheData(Long.valueOf((Float.floatToRawIntBits(f) << 32) + Float.floatToRawIntBits(f2)));
-        TextLookup.apply(this.mBuffer, cacheData, Utils.idFromNan(f), f2);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(Long.valueOf((Float.floatToRawIntBits(f) << 32) + Float.floatToRawIntBits(f2)));
+        TextLookup.apply(this.mBuffer, iCacheData, Utils.idFromNan(f), f2);
+        return iCacheData;
     }
 
     public int textLookup(float f, int i) {
-        int cacheData = this.mRemoteComposeState.cacheData(Long.valueOf((Float.floatToRawIntBits(f) << 32) + Float.floatToRawIntBits(i)));
-        TextLookupInt.apply(this.mBuffer, cacheData, Utils.idFromNan(f), i);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(Long.valueOf((Float.floatToRawIntBits(f) << 32) + Float.floatToRawIntBits(i)));
+        TextLookupInt.apply(this.mBuffer, iCacheData, Utils.idFromNan(f), i);
+        return iCacheData;
     }
 
     public int addIntegerExpression(int i, int[] iArr) {
-        int cacheData = this.mRemoteComposeState.cacheData(iArr);
-        IntegerExpression.apply(this.mBuffer, cacheData, i, iArr);
-        return cacheData;
+        int iCacheData = this.mRemoteComposeState.cacheData(iArr);
+        IntegerExpression.apply(this.mBuffer, iCacheData, i, iArr);
+        return iCacheData;
     }
 
     public int addColor(int i) {
         ColorConstant colorConstant = new ColorConstant(0, i);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorConstant);
-        colorConstant.mColorId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorConstant);
+        colorConstant.mColorId = sCacheData;
         colorConstant.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(int i, int i2, float f) {
         ColorExpression colorExpression = new ColorExpression(0, 0, i, i2, f);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(short s, int i, float f) {
         ColorExpression colorExpression = new ColorExpression(0, 1, s, i, f);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(int i, short s, float f) {
         ColorExpression colorExpression = new ColorExpression(0, 2, i, s, f);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(short s, short s2, float f) {
         ColorExpression colorExpression = new ColorExpression(0, 3, s, s2, f);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(float f, float f2, float f3) {
         ColorExpression colorExpression = new ColorExpression(0, f, f2, f3);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(int i, float f, float f2, float f3) {
         ColorExpression colorExpression = new ColorExpression(0, (byte) 4, i, f, f2, f3);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public short addColorExpression(float f, float f2, float f3, float f4) {
         ColorExpression colorExpression = new ColorExpression(0, (byte) 5, f, f2, f3, f4);
-        short cacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
-        colorExpression.mId = cacheData;
+        short sCacheData = (short) this.mRemoteComposeState.cacheData(colorExpression);
+        colorExpression.mId = sCacheData;
         colorExpression.write(this.mBuffer);
-        return cacheData;
+        return sCacheData;
     }
 
     public static float[] packAnimation(float f, int i, float[] fArr, float f2, float f3) {
@@ -768,20 +768,20 @@ public class RemoteComposeBuffer {
     }
 
     public void addModifierScroll(int i, float f, int i2) {
-        float reserveFloatVariable = reserveFloatVariable();
-        float reserveFloatVariable2 = reserveFloatVariable();
+        float fReserveFloatVariable = reserveFloatVariable();
+        float fReserveFloatVariable2 = reserveFloatVariable();
         float f2 = i != 0 ? RemoteContext.FLOAT_TOUCH_POS_X : RemoteContext.FLOAT_TOUCH_POS_Y;
-        ScrollModifierOperation.apply(this.mBuffer, i, f, reserveFloatVariable, reserveFloatVariable2);
-        addTouchExpression(f, 0.0f, 0.0f, reserveFloatVariable, 0.0f, 3, new float[]{f2, -1.0f, AnimatedFloatExpression.MUL}, 3, new float[]{i2, reserveFloatVariable2}, null);
+        ScrollModifierOperation.apply(this.mBuffer, i, f, fReserveFloatVariable, fReserveFloatVariable2);
+        addTouchExpression(f, 0.0f, 0.0f, fReserveFloatVariable, 0.0f, 3, new float[]{f2, -1.0f, AnimatedFloatExpression.MUL}, 3, new float[]{i2, fReserveFloatVariable2}, null);
         ContainerEnd.apply(this.mBuffer);
     }
 
     public void addModifierScroll(int i, float f) {
-        float reserveFloatVariable = reserveFloatVariable();
-        float reserveFloatVariable2 = reserveFloatVariable();
+        float fReserveFloatVariable = reserveFloatVariable();
+        float fReserveFloatVariable2 = reserveFloatVariable();
         float f2 = i != 0 ? RemoteContext.FLOAT_TOUCH_POS_X : RemoteContext.FLOAT_TOUCH_POS_Y;
-        ScrollModifierOperation.apply(this.mBuffer, i, f, reserveFloatVariable, reserveFloatVariable2);
-        addTouchExpression(f, 0.0f, 0.0f, reserveFloatVariable, 0.0f, 3, new float[]{f2, -1.0f, AnimatedFloatExpression.MUL}, 0, null, null);
+        ScrollModifierOperation.apply(this.mBuffer, i, f, fReserveFloatVariable, fReserveFloatVariable2);
+        addTouchExpression(f, 0.0f, 0.0f, fReserveFloatVariable, 0.0f, 3, new float[]{f2, -1.0f, AnimatedFloatExpression.MUL}, 0, null, null);
         ContainerEnd.apply(this.mBuffer);
     }
 
@@ -818,8 +818,8 @@ public class RemoteComposeBuffer {
         MarqueeModifierOperation.apply(this.mBuffer, i, i2, f, f2, f3, f4);
     }
 
-    public void addModifierGraphicsLayer(HashMap<Integer, Object> hashMap) {
-        GraphicsLayerModifierOperation.apply(this.mBuffer, hashMap);
+    public void addModifierGraphicsLayer(HashMap<Integer, Object> map) {
+        GraphicsLayerModifierOperation.apply(this.mBuffer, map);
     }
 
     public void addRoundClipRectModifier(float f, float f2, float f3, float f4) {
@@ -975,21 +975,21 @@ public class RemoteComposeBuffer {
     }
 
     public float bitmapAttribute(int i, short s) {
-        int nextId = this.mRemoteComposeState.nextId();
-        ImageAttribute.apply(this.mBuffer, nextId, i, s, null);
-        return Utils.asNan(nextId);
+        int iNextId = this.mRemoteComposeState.nextId();
+        ImageAttribute.apply(this.mBuffer, iNextId, i, s, null);
+        return Utils.asNan(iNextId);
     }
 
     public float textAttribute(int i, short s) {
-        int nextId = this.mRemoteComposeState.nextId();
-        TextAttribute.apply(this.mBuffer, nextId, i, s);
-        return Utils.asNan(nextId);
+        int iNextId = this.mRemoteComposeState.nextId();
+        TextAttribute.apply(this.mBuffer, iNextId, i, s);
+        return Utils.asNan(iNextId);
     }
 
     public float timeAttribute(int i, short s, int... iArr) {
-        int nextId = this.mRemoteComposeState.nextId();
-        TimeAttribute.apply(this.mBuffer, nextId, i, s, iArr);
-        return Utils.asNan(nextId);
+        int iNextId = this.mRemoteComposeState.nextId();
+        TimeAttribute.apply(this.mBuffer, iNextId, i, s, iArr);
+        return Utils.asNan(iNextId);
     }
 
     public void drawComponentContent() {
@@ -997,20 +997,20 @@ public class RemoteComposeBuffer {
     }
 
     private int storeBitmap(Object obj) {
-        int dataGetId = this.mRemoteComposeState.dataGetId(obj);
-        if (dataGetId != -1) {
-            return dataGetId;
+        int iDataGetId = this.mRemoteComposeState.dataGetId(obj);
+        if (iDataGetId != -1) {
+            return iDataGetId;
         }
-        int cacheData = this.mRemoteComposeState.cacheData(obj);
-        byte[] imageToByteArray = this.mPlatform.imageToByteArray(obj);
+        int iCacheData = this.mRemoteComposeState.cacheData(obj);
+        byte[] bArrImageToByteArray = this.mPlatform.imageToByteArray(obj);
         short imageWidth = (short) this.mPlatform.getImageWidth(obj);
         short imageHeight = (short) this.mPlatform.getImageHeight(obj);
         if (this.mPlatform.isAlpha8Image(obj)) {
-            BitmapData.apply(this.mBuffer, cacheData, (short) 4, imageWidth, (short) 0, imageHeight, imageToByteArray);
-            return cacheData;
+            BitmapData.apply(this.mBuffer, iCacheData, (short) 4, imageWidth, (short) 0, imageHeight, bArrImageToByteArray);
+            return iCacheData;
         }
-        BitmapData.apply(this.mBuffer, cacheData, imageWidth, imageHeight, imageToByteArray);
-        return cacheData;
+        BitmapData.apply(this.mBuffer, iCacheData, imageWidth, imageHeight, bArrImageToByteArray);
+        return iCacheData;
     }
 
     public void pathCombine(int i, int i2, int i3, byte b) {
@@ -1030,8 +1030,8 @@ public class RemoteComposeBuffer {
     }
 
     public float getColorAttribute(int i, short s) {
-        int nextId = this.mRemoteComposeState.nextId();
-        ColorAttribute.apply(this.mBuffer, nextId, i, s);
-        return Utils.asNan(nextId);
+        int iNextId = this.mRemoteComposeState.nextId();
+        ColorAttribute.apply(this.mBuffer, iNextId, i, s);
+        return Utils.asNan(iNextId);
     }
 }

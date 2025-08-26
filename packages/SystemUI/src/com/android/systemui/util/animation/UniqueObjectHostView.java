@@ -5,13 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UniqueObjectHostView extends FrameLayout {
     public static final int $stable = 8;
     public MeasurementManager measurementManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MeasurementManager {
         MeasurementOutput onMeasure(MeasurementInput measurementInput);
     }
@@ -53,9 +51,9 @@ public final class UniqueObjectHostView extends FrameLayout {
     public void onMeasure(int i, int i2) {
         int paddingEnd = getPaddingEnd() + getPaddingStart();
         int paddingBottom = getPaddingBottom() + getPaddingTop();
-        MeasurementOutput onMeasure = getMeasurementManager().onMeasure(new MeasurementInput(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i) - paddingEnd, View.MeasureSpec.getMode(i)), View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i2) - paddingBottom, View.MeasureSpec.getMode(i2))));
-        int component1 = onMeasure.component1();
-        int component2 = onMeasure.component2();
+        MeasurementOutput measurementOutputOnMeasure = getMeasurementManager().onMeasure(new MeasurementInput(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i) - paddingEnd, View.MeasureSpec.getMode(i)), View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i2) - paddingBottom, View.MeasureSpec.getMode(i2))));
+        int iComponent1 = measurementOutputOnMeasure.component1();
+        int iComponent2 = measurementOutputOnMeasure.component2();
         if (isCurrentHost()) {
             super.onMeasure(i, i2);
             View childAt = getChildAt(0);
@@ -63,7 +61,7 @@ public final class UniqueObjectHostView extends FrameLayout {
                 UniqueObjectHostViewKt.setRequiresRemeasuring(childAt, false);
             }
         }
-        setMeasuredDimension(component1 + paddingEnd, component2 + paddingBottom);
+        setMeasuredDimension(iComponent1 + paddingEnd, iComponent2 + paddingBottom);
     }
 
     public final void setMeasurementManager(MeasurementManager measurementManager) {

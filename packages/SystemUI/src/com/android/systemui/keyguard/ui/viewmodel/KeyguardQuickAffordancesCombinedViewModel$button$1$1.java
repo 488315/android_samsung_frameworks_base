@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function6;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends SuspendLambda implements Function6 {
     final /* synthetic */ KeyguardQuickAffordancePosition $position;
@@ -38,15 +37,15 @@ final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends Suspend
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj5).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj5).booleanValue();
         KeyguardQuickAffordancesCombinedViewModel$button$1$1 keyguardQuickAffordancesCombinedViewModel$button$1$1 = new KeyguardQuickAffordancesCombinedViewModel$button$1$1(this.$position, this.this$0, this.$previewMode, (Continuation) obj6);
         keyguardQuickAffordancesCombinedViewModel$button$1$1.L$0 = (KeyguardQuickAffordanceModel) obj;
-        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$0 = booleanValue;
-        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$1 = booleanValue2;
+        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$0 = zBooleanValue;
+        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$1 = zBooleanValue2;
         keyguardQuickAffordancesCombinedViewModel$button$1$1.L$1 = (String) obj4;
-        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$2 = booleanValue3;
+        keyguardQuickAffordancesCombinedViewModel$button$1$1.Z$2 = zBooleanValue3;
         return keyguardQuickAffordancesCombinedViewModel$button$1$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -64,7 +63,7 @@ final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends Suspend
         String str = (String) this.L$1;
         boolean z4 = this.Z$2;
         String slotId = this.$position.toSlotId();
-        boolean areEqual = Intrinsics.areEqual(str, slotId);
+        boolean zAreEqual = Intrinsics.areEqual(str, slotId);
         final KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel = this.this$0;
         KeyguardQuickAffordancesCombinedViewModel.PreviewMode previewMode = this.$previewMode;
         boolean z5 = previewMode.isInPreviewMode;
@@ -77,8 +76,8 @@ final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends Suspend
         }
         boolean z7 = (!z3 || z5) ? z : true;
         boolean z8 = previewMode.shouldHighlightSelectedAffordance;
-        boolean z9 = (z5 && z8 && areEqual) ? true : z;
-        boolean z10 = (z5 && z8 && !areEqual) ? true : z;
+        boolean z9 = (z5 && z8 && zAreEqual) ? true : z;
+        boolean z10 = (z5 && z8 && !zAreEqual) ? true : z;
         int i = KeyguardQuickAffordancesCombinedViewModel.$r8$clinit;
         keyguardQuickAffordancesCombinedViewModel.getClass();
         if (keyguardQuickAffordanceModel instanceof KeyguardQuickAffordanceModel.Visible) {
@@ -86,9 +85,9 @@ final class KeyguardQuickAffordancesCombinedViewModel$button$1$1 extends Suspend
             return new KeyguardQuickAffordanceViewModel(visible.configKey, false, z6, visible.icon, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     KeyguardQuickAffordanceViewModel.OnClickedParameters onClickedParameters = (KeyguardQuickAffordanceViewModel.OnClickedParameters) obj2;
-                    KeyguardQuickAffordancesCombinedViewModel.this.quickAffordanceInteractor.onQuickAffordanceTriggered(onClickedParameters.configKey, onClickedParameters.expandable, onClickedParameters.slotId);
+                    keyguardQuickAffordancesCombinedViewModel.quickAffordanceInteractor.onQuickAffordanceTriggered(onClickedParameters.configKey, onClickedParameters.expandable, onClickedParameters.slotId);
                     return Unit.INSTANCE;
                 }
             }, z7, (z5 || !(visible.activationState instanceof ActivationState.Active)) ? z : true, z9, z4, z10, slotId);

@@ -13,7 +13,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelAction;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeSeekBar extends SeekBar implements VolumeObserver<VolumePanelState> {
     public int currentProgress;
@@ -25,7 +24,6 @@ public final class VolumeSeekBar extends SeekBar implements VolumeObserver<Volum
     public int stream;
     public float touchedX;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +33,6 @@ public final class VolumeSeekBar extends SeekBar implements VolumeObserver<Volum
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeSeekbarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public VolumeSeekbarChangeListener() {
         }
@@ -60,7 +57,6 @@ public final class VolumeSeekBar extends SeekBar implements VolumeObserver<Volum
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

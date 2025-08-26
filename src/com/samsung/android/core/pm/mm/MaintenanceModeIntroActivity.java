@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.android.internal.R;
-import com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity;
 import com.samsung.android.core.pm.mm.MaintenanceModeUtils;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -74,7 +73,7 @@ public class MaintenanceModeIntroActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         Context applicationContext = getApplicationContext();
         this.mContext = applicationContext;
@@ -101,13 +100,13 @@ public class MaintenanceModeIntroActivity extends Activity {
             ((TextView) findViewById(R.id.maintenance_mode_intro_description_need_to_unlock_textview)).lambda$setTextAsync$0(this.mResources.getString(R.string.maintenance_mode_intro_description_need_to_unlock_tablet));
             ((TextView) findViewById(R.id.maintenance_mode_intro_recommendation_textview)).lambda$setTextAsync$0(this.mResources.getString(R.string.maintenance_mode_intro_recommendation_textview_message_tablet));
         }
-        View findViewById = findViewById(R.id.maintenance_mode_intro_backup_menu_cloud);
-        this.mColudBackupMenu = findViewById;
-        findViewById.setBackgroundResource(R.drawable.shape_maintenance_mode_focus_block_top);
+        View viewFindViewById = findViewById(R.id.maintenance_mode_intro_backup_menu_cloud);
+        this.mColudBackupMenu = viewFindViewById;
+        viewFindViewById.setBackgroundResource(R.drawable.shape_maintenance_mode_focus_block_top);
         this.mColudBackupMenu.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$2(view);
+                this.f$0.lambda$setContentView$2(view);
             }
         });
         ((TextView) findViewById(R.id.maintenance_mode_intro_backup_menu_cloud_main_textview)).setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_focus_block_main_text_size));
@@ -115,13 +114,13 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mColudBackupMenuSubTextView = textView;
         textView.setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_focus_block_sub_text_size));
         this.mColudBackupMenuDivider = findViewById(R.id.maintenance_mode_intro_backup_menu_divider_cloud);
-        View findViewById2 = findViewById(R.id.maintenance_mode_intro_backup_menu_external_storage);
-        this.mExternalStorageBackupMenu = findViewById2;
-        findViewById2.setBackgroundResource(R.drawable.shape_maintenance_mode_focus_block_alone);
+        View viewFindViewById2 = findViewById(R.id.maintenance_mode_intro_backup_menu_external_storage);
+        this.mExternalStorageBackupMenu = viewFindViewById2;
+        viewFindViewById2.setBackgroundResource(R.drawable.shape_maintenance_mode_focus_block_alone);
         this.mExternalStorageBackupMenu.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$4(view);
+                this.f$0.lambda$setContentView$4(view);
             }
         });
         ((TextView) findViewById(R.id.maintenance_mode_intro_backup_menu_external_storage_main_textview)).setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_focus_block_main_text_size));
@@ -137,7 +136,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mTurnOnButton.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$8(view);
+                this.f$0.lambda$setContentView$8(view);
             }
         });
     }
@@ -147,13 +146,13 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mButtonExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda12
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$0();
+                this.f$0.lambda$setContentView$0();
             }
         });
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda13
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$1();
+                this.f$0.lambda$setContentView$1();
             }
         });
     }
@@ -174,7 +173,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda22
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$3();
+                this.f$0.lambda$setContentView$3();
             }
         });
     }
@@ -197,13 +196,13 @@ public class MaintenanceModeIntroActivity extends Activity {
             this.mButtonExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda30
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$setContentView$6();
+                    this.f$0.lambda$setContentView$6();
                 }
             });
             this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda31
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$setContentView$7();
+                    this.f$0.lambda$setContentView$7();
                 }
             });
         }
@@ -214,14 +213,14 @@ public class MaintenanceModeIntroActivity extends Activity {
         final String statusOfBackupInProgress = MaintenanceModeUtils.getStatusOfBackupInProgress(this.mContext);
         runOnUiThread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda26
             @Override // java.lang.Runnable
-            public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$setContentView$5(statusOfBackupInProgress);
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.lambda$setContentView$5(statusOfBackupInProgress);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$setContentView$5(String str) {
+    public /* synthetic */ void lambda$setContentView$5(String str) throws Resources.NotFoundException {
         if ("NOT_IN_PROGRESS".equals(str)) {
             showDialogToConfirmRestart();
         } else {
@@ -235,7 +234,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         MaintenanceModeUtils.sendLoggingDataToSA(this.mContext, "7066", null);
     }
 
-    private void init() {
+    private void init() throws Resources.NotFoundException {
         this.mRootView = getWindow().getDecorView();
         this.mWm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         registerCloudBackupReceiver();
@@ -243,7 +242,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         prepareWaitingView();
     }
 
-    private void prepareWaitingView() {
+    private void prepareWaitingView() throws Resources.NotFoundException {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, -1, 0, 0, 2024, 131328, -3);
         this.mViewWindowParams = layoutParams;
         layoutParams.gravity = 17;
@@ -251,15 +250,15 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mViewWindowParams.screenOrientation = 1;
         this.mViewWindowParams.layoutInDisplayCutoutMode = 1;
         this.mViewWindowParams.setFitInsetsSides(0);
-        View inflate = LayoutInflater.from(this).inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
-        this.mWaitingView = inflate;
-        inflate.findViewById(R.id.maintenance_mode_view_dump_progressbar_container).setVisibility(8);
+        View viewInflate = LayoutInflater.from(this).inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
+        this.mWaitingView = viewInflate;
+        viewInflate.findViewById(R.id.maintenance_mode_view_dump_progressbar_container).setVisibility(8);
         TextView textView = (TextView) this.mWaitingView.findViewById(R.id.maintenance_mode_view_dump_textview);
         textView.lambda$setTextAsync$0(this.mResources.getString(this.mIsTablet ? R.string.maintenance_mode_view_waiting_textview_message_tablet : R.string.maintenance_mode_view_waiting_textview_message_phone));
         textView.setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_common_text_size));
-        View inflate2 = LayoutInflater.from(this).inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
-        this.mDumpView = inflate2;
-        TextView textView2 = (TextView) inflate2.findViewById(R.id.maintenance_mode_view_dump_textview);
+        View viewInflate2 = LayoutInflater.from(this).inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
+        this.mDumpView = viewInflate2;
+        TextView textView2 = (TextView) viewInflate2.findViewById(R.id.maintenance_mode_view_dump_textview);
         StringBuilder sb = new StringBuilder();
         sb.append(this.mResources.getString(R.string.maintenance_mode_view_dump_textview_message_creating));
         sb.append("\n\n");
@@ -302,7 +301,7 @@ public class MaintenanceModeIntroActivity extends Activity {
                     MaintenanceModeIntroActivity.this.mSingleThreadExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MaintenanceModeIntroActivity.AnonymousClass1.this.lambda$run$0();
+                            this.f$0.lambda$run$0();
                         }
                     });
                 } catch (Exception unused) {
@@ -348,7 +347,7 @@ public class MaintenanceModeIntroActivity extends Activity {
     }
 
     @Override // android.app.Activity, android.content.ComponentCallbacks
-    public void onConfigurationChanged(Configuration configuration) {
+    public void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         setContentView(configuration);
         adjustDialogLayout(configuration);
@@ -358,7 +357,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mSingleThreadExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda32
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$checkAndUpdateCloudBackupMenu$10();
+                this.f$0.lambda$checkAndUpdateCloudBackupMenu$10();
             }
         });
     }
@@ -366,14 +365,14 @@ public class MaintenanceModeIntroActivity extends Activity {
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkAndUpdateCloudBackupMenu$10() {
         updateCloudBackupStatusFromProvider();
-        MaintenanceModeUtils.CloudInfo checkCloudBackupSupport = MaintenanceModeUtils.checkCloudBackupSupport(this.mContext);
-        this.mIsCloudBackupSupported = checkCloudBackupSupport.isSupported;
-        this.mCloudBackupRetentionPeriod = checkCloudBackupSupport.retentionPeriod;
-        this.mCloudBackupIntroDescription = checkCloudBackupSupport.introDescription;
+        MaintenanceModeUtils.CloudInfo cloudInfoCheckCloudBackupSupport = MaintenanceModeUtils.checkCloudBackupSupport(this.mContext);
+        this.mIsCloudBackupSupported = cloudInfoCheckCloudBackupSupport.isSupported;
+        this.mCloudBackupRetentionPeriod = cloudInfoCheckCloudBackupSupport.retentionPeriod;
+        this.mCloudBackupIntroDescription = cloudInfoCheckCloudBackupSupport.introDescription;
         runOnUiThread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda16
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$checkAndUpdateCloudBackupMenu$9();
+                this.f$0.lambda$checkAndUpdateCloudBackupMenu$9();
             }
         });
     }
@@ -455,7 +454,7 @@ public class MaintenanceModeIntroActivity extends Activity {
                     MaintenanceModeIntroActivity.this.mSingleThreadExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$CloudBackupReceiver$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MaintenanceModeIntroActivity.CloudBackupReceiver.this.lambda$onReceive$0(action);
+                            this.f$0.lambda$onReceive$0(action);
                         }
                     });
                 } catch (Exception unused) {
@@ -480,39 +479,39 @@ public class MaintenanceModeIntroActivity extends Activity {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0032  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private String convertActionToStatusForCloudBackup(String str) {
         char c;
         switch (str.hashCode()) {
             case 365973607:
-                if (str.equals("com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_CANCELED")) {
+                if (!str.equals("com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_CANCELED")) {
+                    c = 65535;
+                    break;
+                } else {
                     c = 3;
                     break;
                 }
-                c = 65535;
-                break;
             case 750993107:
                 if (str.equals("com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_STARTED")) {
                     c = 0;
                     break;
                 }
-                c = 65535;
                 break;
             case 875734045:
                 if (str.equals("com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_COMPLETED")) {
                     c = 1;
                     break;
                 }
-                c = 65535;
                 break;
             case 1579405644:
                 if (str.equals("com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_NOT_FINISHED")) {
                     c = 2;
                     break;
                 }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
                 break;
         }
         if (c == 0) {
@@ -528,10 +527,10 @@ public class MaintenanceModeIntroActivity extends Activity {
     }
 
     private void showDialogToInformSecureLockIsNeeded() {
-        AlertDialog create = new AlertDialog.Builder(this).setMessage(R.string.maintenance_mode_intro_dialog_message_set_screen_lock_first).setPositiveButton(R.string.maintenance_mode_intro_dialog_button_text_set_screen_lock, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda8
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setMessage(R.string.maintenance_mode_intro_dialog_message_set_screen_lock_first).setPositiveButton(R.string.maintenance_mode_intro_dialog_button_text_set_screen_lock, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda8
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToInformSecureLockIsNeeded$11(dialogInterface, i);
+                this.f$0.lambda$showDialogToInformSecureLockIsNeeded$11(dialogInterface, i);
             }
         }).setNegativeButton(R.string.maintenance_mode_dialog_button_text_cancel, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda9
             @Override // android.content.DialogInterface.OnClickListener
@@ -539,8 +538,8 @@ public class MaintenanceModeIntroActivity extends Activity {
                 MaintenanceModeIntroActivity.lambda$showDialogToInformSecureLockIsNeeded$12(dialogInterface, i);
             }
         }).create();
-        create.getWindow().setGravity(80);
-        create.show();
+        alertDialogCreate.getWindow().setGravity(80);
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -550,14 +549,14 @@ public class MaintenanceModeIntroActivity extends Activity {
 
     private void showDialogToNotifyLowOnStorage() {
         Log.i("MaintenanceMode", "Low on storage");
-        AlertDialog create = new AlertDialog.Builder(this).setTitle(R.string.maintenance_mode_intro_low_storage_dialog_title).setMessage(this.mIsTablet ? R.string.maintenance_mode_intro_low_storage_dialog_message_tablet : R.string.maintenance_mode_intro_low_storage_dialog_message_phone).setPositiveButton(R.string.maintenance_mode_intro_low_storage_dialog_button_text, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda15
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setTitle(R.string.maintenance_mode_intro_low_storage_dialog_title).setMessage(this.mIsTablet ? R.string.maintenance_mode_intro_low_storage_dialog_message_tablet : R.string.maintenance_mode_intro_low_storage_dialog_message_phone).setPositiveButton(R.string.maintenance_mode_intro_low_storage_dialog_button_text, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda15
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToNotifyLowOnStorage$13(dialogInterface, i);
+                this.f$0.lambda$showDialogToNotifyLowOnStorage$13(dialogInterface, i);
             }
         }).create();
-        create.getWindow().setGravity(80);
-        create.show();
+        alertDialogCreate.getWindow().setGravity(80);
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -565,6 +564,10 @@ public class MaintenanceModeIntroActivity extends Activity {
         MaintenanceModeUtils.startMyFilesActivity(this);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0041  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void showDialogToReconfirmCancelingBackup(String str) {
         int i;
         final boolean z = false;
@@ -583,54 +586,38 @@ public class MaintenanceModeIntroActivity extends Activity {
                     i = R.string.maintenance_mode_stop_backup_dialog_message_backing_up;
                     z = true;
                     break;
+                default:
+                    i = R.string.maintenance_mode_stop_backup_dialog_message;
+                    break;
             }
-            AlertDialog create = new AlertDialog.Builder(this).setMessage(i).setPositiveButton(R.string.maintenance_mode_dialog_button_text_ok, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda18
-                @Override // android.content.DialogInterface.OnClickListener
-                public final void onClick(DialogInterface dialogInterface, int i2) {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$16(z, dialogInterface, i2);
-                }
-            }).setNegativeButton(R.string.maintenance_mode_dialog_button_text_cancel, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda19
-                @Override // android.content.DialogInterface.OnClickListener
-                public final void onClick(DialogInterface dialogInterface, int i2) {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$18(dialogInterface, i2);
-                }
-            }).setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda20
-                @Override // android.content.DialogInterface.OnCancelListener
-                public final void onCancel(DialogInterface dialogInterface) {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$20(dialogInterface);
-                }
-            }).create();
-            create.getWindow().setGravity(80);
-            create.show();
         }
-        i = R.string.maintenance_mode_stop_backup_dialog_message;
-        AlertDialog create2 = new AlertDialog.Builder(this).setMessage(i).setPositiveButton(R.string.maintenance_mode_dialog_button_text_ok, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda18
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setMessage(i).setPositiveButton(R.string.maintenance_mode_dialog_button_text_ok, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda18
             @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i2) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$16(z, dialogInterface, i2);
+            public final void onClick(DialogInterface dialogInterface, int i2) throws Resources.NotFoundException {
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$16(z, dialogInterface, i2);
             }
         }).setNegativeButton(R.string.maintenance_mode_dialog_button_text_cancel, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda19
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i2) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$18(dialogInterface, i2);
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$18(dialogInterface, i2);
             }
         }).setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda20
             @Override // android.content.DialogInterface.OnCancelListener
             public final void onCancel(DialogInterface dialogInterface) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$20(dialogInterface);
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$20(dialogInterface);
             }
         }).create();
-        create2.getWindow().setGravity(80);
-        create2.show();
+        alertDialogCreate.getWindow().setGravity(80);
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$16(boolean z, DialogInterface dialogInterface, int i) {
+    public /* synthetic */ void lambda$showDialogToReconfirmCancelingBackup$16(boolean z, DialogInterface dialogInterface, int i) throws Resources.NotFoundException {
         if (z) {
             this.mButtonExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$14();
+                    this.f$0.lambda$showDialogToReconfirmCancelingBackup$14();
                 }
             });
         } else {
@@ -639,7 +626,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$15();
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$15();
             }
         });
     }
@@ -664,7 +651,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda29
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$17();
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$17();
             }
         });
     }
@@ -679,29 +666,29 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda14
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToReconfirmCancelingBackup$19();
+                this.f$0.lambda$showDialogToReconfirmCancelingBackup$19();
             }
         });
     }
 
-    private void showDialogToConfirmRestart() {
+    private void showDialogToConfirmRestart() throws Resources.NotFoundException {
         this.mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_maintenance_mode_intro, (ViewGroup) null);
         adjustDialogLayout(getResources().getConfiguration());
         final CheckedTextView checkedTextView = (CheckedTextView) this.mDialogView.findViewById(R.id.maintenance_mode_intro_dialog_checked_textview);
         checkedTextView.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda10
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                CheckedTextView.this.toggle();
+                checkedTextView.toggle();
             }
         });
         checkedTextView.setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_common_checkbox_text_size, 1.1f));
-        AlertDialog create = new AlertDialog.Builder(this).setView(this.mDialogView).setPositiveButton(R.string.maintenance_mode_dialog_button_text_restart, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda11
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setView(this.mDialogView).setPositiveButton(R.string.maintenance_mode_dialog_button_text_restart, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda11
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$27(checkedTextView, dialogInterface, i);
+                this.f$0.lambda$showDialogToConfirmRestart$27(checkedTextView, dialogInterface, i);
             }
         }).create();
-        create.getWindow().setGravity(80);
+        alertDialogCreate.getWindow().setGravity(80);
         TextView textView = (TextView) this.mDialogView.findViewById(R.id.maintenance_mode_intro_dialog_textview);
         StringBuilder sb = new StringBuilder();
         sb.append(this.mResources.getString(this.mIsTablet ? R.string.maintenance_mode_intro_dialog_message_tablet : R.string.maintenance_mode_intro_dialog_message_phone));
@@ -709,7 +696,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         sb.append(this.mResources.getString(this.mIsTablet ? R.string.maintenance_mode_intro_dialog_textview_message_tablet : R.string.maintenance_mode_intro_dialog_textview_message_phone));
         textView.lambda$setTextAsync$0(sb.toString());
         textView.setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_common_text_size));
-        create.show();
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -721,7 +708,7 @@ public class MaintenanceModeIntroActivity extends Activity {
             MaintenanceModeUtils.confirmSecureLock(this, new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda17
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$26(z);
+                    this.f$0.lambda$showDialogToConfirmRestart$26(z);
                 }
             });
         }
@@ -739,7 +726,7 @@ public class MaintenanceModeIntroActivity extends Activity {
             new Thread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$23();
+                    this.f$0.lambda$showDialogToConfirmRestart$23();
                 }
             }).start();
         } else {
@@ -749,13 +736,13 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$24(z);
+                this.f$0.lambda$showDialogToConfirmRestart$24(z);
             }
         });
         this.mLoggingExecutor.submit(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$25();
+                this.f$0.lambda$showDialogToConfirmRestart$25();
             }
         });
     }
@@ -767,7 +754,7 @@ public class MaintenanceModeIntroActivity extends Activity {
             runOnUiThread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda21
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$showDialogToConfirmRestart$22();
+                    this.f$0.lambda$showDialogToConfirmRestart$22();
                 }
             });
         }
@@ -819,7 +806,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         }
     }
 
-    private void adjustDialogLayout(Configuration configuration) {
+    private void adjustDialogLayout(Configuration configuration) throws Resources.NotFoundException {
         View view;
         if (this.mIsTablet) {
             return;
@@ -827,21 +814,21 @@ public class MaintenanceModeIntroActivity extends Activity {
         if ((!this.mIsFold || configuration.semDisplayDeviceType == 5) && (view = this.mDialogView) != null) {
             ScrollView scrollView = (ScrollView) view.findViewById(R.id.maintenance_mode_intro_dialog_scrollview);
             ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) scrollView.getLayoutParams();
-            View findViewById = this.mDialogView.findViewById(R.id.maintenance_mode_intro_dialog_checkbox_layout);
-            ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) findViewById.getLayoutParams();
+            View viewFindViewById = this.mDialogView.findViewById(R.id.maintenance_mode_intro_dialog_checkbox_layout);
+            ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) viewFindViewById.getLayoutParams();
             if (configuration.orientation == 2) {
                 marginLayoutParams.topMargin = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_margin_top_land);
                 int dimensionPixelSize = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_checkbox_padding_top_bottom_land);
-                findViewById.setPadding(0, dimensionPixelSize, 0, dimensionPixelSize);
+                viewFindViewById.setPadding(0, dimensionPixelSize, 0, dimensionPixelSize);
                 marginLayoutParams2.bottomMargin = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_checkbox_margin_bottom_land);
             } else {
                 marginLayoutParams.topMargin = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_margin_top);
                 int dimensionPixelSize2 = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_checkbox_padding_top_bottom);
-                findViewById.setPadding(0, dimensionPixelSize2, 0, dimensionPixelSize2);
+                viewFindViewById.setPadding(0, dimensionPixelSize2, 0, dimensionPixelSize2);
                 marginLayoutParams2.bottomMargin = this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_dialog_checkbox_margin_bottom);
             }
             scrollView.setLayoutParams(marginLayoutParams);
-            findViewById.setLayoutParams(marginLayoutParams2);
+            viewFindViewById.setLayoutParams(marginLayoutParams2);
         }
     }
 
@@ -852,7 +839,7 @@ public class MaintenanceModeIntroActivity extends Activity {
         this.mRootView.postDelayed(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda24
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeIntroActivity.this.lambda$triggerDump$28();
+                this.f$0.lambda$triggerDump$28();
             }
         }, 10000L);
     }
@@ -864,14 +851,14 @@ public class MaintenanceModeIntroActivity extends Activity {
             this.mRootView.postDelayed(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda27
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$checkPendingDump$29();
+                    this.f$0.lambda$checkPendingDump$29();
                 }
             }, 1000L);
         } else {
             new Thread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda28
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$checkPendingDump$31();
+                    this.f$0.lambda$checkPendingDump$31();
                 }
             }).start();
         }
@@ -884,7 +871,7 @@ public class MaintenanceModeIntroActivity extends Activity {
             runOnUiThread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeIntroActivity$$ExternalSyntheticLambda25
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MaintenanceModeIntroActivity.this.lambda$checkPendingDump$30();
+                    this.f$0.lambda$checkPendingDump$30();
                 }
             });
         }

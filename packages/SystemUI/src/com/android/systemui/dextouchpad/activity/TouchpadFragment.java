@@ -2,13 +2,18 @@ package com.android.systemui.dextouchpad.activity;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
+import android.view.Display;
+import android.view.DisplayInfo;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +29,8 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.dextouchpad.activity.ButtonWindow;
 import com.android.systemui.dextouchpad.activity.TouchpadWindow;
@@ -46,13 +53,52 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TouchpadFragment extends Fragment {
     public FragmentActivity mActivity;
     public Context mApplicationContext;
+    public DisplayManager mDisplayManager;
     public Handler mHandler;
-    public final AnonymousClass2 mRemoveSpenRecognitionAreaRunnable = new Runnable() { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.2
+    public SettingsObserver mSettingsObserver;
+    public SettingsRepository mSettingsRepo;
+    public ImageView mSpenIcon;
+    public ViewHideScheduler mSpenIconViewHideScheduler;
+    public View mSpenRecognitionArea;
+    public TextView mTouchpadAutoRunTextView;
+    public TouchpadNotificationManager mTouchpadNotificationManager;
+    public TouchpadViewModel mViewModel;
+    public int mDexDisplayRotation = 0;
+    public final AnonymousClass1 mDisplayListener = new DisplayManager.DisplayListener() { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.1
+        @Override // android.hardware.display.DisplayManager.DisplayListener
+        public final void onDisplayChanged(int i) {
+            DisplayManager displayManager = TouchpadFragment.this.mDisplayManager;
+            if (displayManager == null) {
+                return;
+            }
+            Display display = displayManager.getDisplay(i);
+            DisplayInfo displayInfo = new DisplayInfo();
+            display.getDisplayInfo(displayInfo);
+            if ((displayInfo.flags & 131072) == 0 || TouchpadFragment.this.mDexDisplayRotation == display.getRotation()) {
+                return;
+            }
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onDisplayChanged: id=", ", orientation: ");
+            sbM.append(TouchpadFragment.this.mDexDisplayRotation);
+            sbM.append("->");
+            sbM.append(display.getRotation());
+            Log.d("DexTouchpadFragment", sbM.toString());
+            TouchpadFragment.this.mDexDisplayRotation = display.getRotation();
+            TouchpadFragment.this.mActivity.recreate();
+        }
+
+        @Override // android.hardware.display.DisplayManager.DisplayListener
+        public final void onDisplayAdded(int i) {
+        }
+
+        @Override // android.hardware.display.DisplayManager.DisplayListener
+        public final void onDisplayRemoved(int i) {
+        }
+    };
+    public final AnonymousClass5 mRemoveSpenRecognitionAreaRunnable = new Runnable() { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.5
         @Override // java.lang.Runnable
         public final void run() {
             View view = TouchpadFragment.this.mSpenRecognitionArea;
@@ -63,16 +109,7 @@ public class TouchpadFragment extends Fragment {
             TouchpadFragment.this.mViewModel.mButtonWindowController.setRotationButtonVisibility(true);
         }
     };
-    public SettingsObserver mSettingsObserver;
-    public SettingsRepository mSettingsRepo;
-    public ImageView mSpenIcon;
-    public ViewHideScheduler mSpenIconViewHideScheduler;
-    public View mSpenRecognitionArea;
-    public TextView mTouchpadAutoRunTextView;
-    public TouchpadNotificationManager mTouchpadNotificationManager;
-    public TouchpadViewModel mViewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettingsObserver extends ContentObserver {
         public final ContentResolver mResolver;
 
@@ -112,10 +149,11 @@ public class TouchpadFragment extends Fragment {
         this.mActivity = activity;
         Context applicationContext = activity.getApplicationContext();
         this.mApplicationContext = applicationContext;
-        this.mTouchpadNotificationManager = TouchpadNotificationManager.getsInstance(applicationContext);
+        this.mDisplayManager = (DisplayManager) applicationContext.getSystemService("display");
+        this.mTouchpadNotificationManager = TouchpadNotificationManager.getsInstance(this.mApplicationContext);
         this.mSettingsRepo = SettingsRepository.getInstance(this.mApplicationContext);
         TouchpadWindow touchpadWindow = new TouchpadWindow(1000, "TouchpadActivity", VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS, new AtomicBoolean(false), this.mApplicationContext);
-        Lazy lazy = new Lazy(this) { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.1
+        Lazy lazy = new Lazy(this) { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.2
             @Override // dagger.Lazy
             public final Object get() {
                 return new FloatingWindow(1002, "SPenRecognitionArea", 1073741824);
@@ -173,19 +211,47 @@ public class TouchpadFragment extends Fragment {
             Log.d("DexTouchpadFragment", "onResume()");
         }
         this.mCalled = true;
-        TouchpadNotificationManager touchpadNotificationManager = this.mTouchpadNotificationManager;
-        if (((HashMap) touchpadNotificationManager.mActiveNotifications).containsKey(NotificationType.TOUCHPAD)) {
-            this.mHandler.post(new TouchpadFragment$$ExternalSyntheticLambda0(this, 0));
-        }
+        this.mHandler.post(new Runnable() { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.3
+            @Override // java.lang.Runnable
+            public final void run() {
+                TouchpadNotificationManager touchpadNotificationManager = TouchpadFragment.this.mTouchpadNotificationManager;
+                NotificationType notificationType = NotificationType.TOUCHPAD;
+                if (((HashMap) touchpadNotificationManager.mActiveNotifications).containsKey(notificationType)) {
+                    TouchpadFragment.this.mTouchpadNotificationManager.remove(notificationType);
+                }
+            }
+        });
     }
 
     @Override // androidx.fragment.app.Fragment
     public final void onStart() {
-        boolean z = Features.DEBUG;
-        if (z) {
+        if (Features.DEBUG) {
             Log.d("DexTouchpadFragment", "onStart()");
         }
         this.mCalled = true;
+        DisplayManager displayManager = this.mDisplayManager;
+        if (displayManager != null) {
+            displayManager.registerDisplayListener(this.mDisplayListener, null);
+            Display[] displays = this.mDisplayManager.getDisplays();
+            int length = displays.length;
+            int i = 0;
+            while (true) {
+                if (i >= length) {
+                    break;
+                }
+                Display display = displays[i];
+                DisplayInfo displayInfo = new DisplayInfo();
+                display.getDisplayInfo(displayInfo);
+                if ((displayInfo.flags & 131072) != 0) {
+                    Log.d("DexTouchpadFragment", "DeX display id=" + display.getDisplayId() + " rotation=" + display.getRotation());
+                    this.mDexDisplayRotation = display.getRotation();
+                    break;
+                }
+                i++;
+            }
+        } else {
+            Log.w("DexTouchpadFragment", "DisplayManager is null");
+        }
         Window window = this.mActivity.getWindow();
         if (window != null) {
             window.setDecorFitsSystemWindows(false);
@@ -195,15 +261,16 @@ public class TouchpadFragment extends Fragment {
                 insetsController.setSystemBarsBehavior(2);
             }
         }
+        boolean z = Features.DEBUG;
         if (z) {
             Log.d("DexTouchpadFragment", "setScreenRotation()");
         }
         Context context = this.mApplicationContext;
         if (Features.IS_SUPPORT_WINNER && context.getResources().getConfiguration().semDisplayDeviceType == 5) {
-            int i = this.mActivity.getResources().getConfiguration().orientation;
-            if (i == 2) {
+            int i2 = this.mActivity.getResources().getConfiguration().orientation;
+            if (i2 == 2) {
                 this.mActivity.setRequestedOrientation(6);
-            } else if (i == 1) {
+            } else if (i2 == 1) {
                 this.mActivity.setRequestedOrientation(1);
             }
         }
@@ -231,14 +298,14 @@ public class TouchpadFragment extends Fragment {
         }
         SettingsRepository settingsRepository = this.mSettingsRepo;
         Settings$Key settings$Key = SettingsKeys.TOUCHPAD_AUTO_RUN_GUIDE_COUNT;
-        int i2 = settingsRepository.getInt(settings$Key);
+        int i3 = settingsRepository.getInt(settings$Key);
         if (z) {
-            ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "updateTouchpadAutoRunTextView, count=", "DexTouchpadFragment");
+            ListPopupWindow$$ExternalSyntheticOutline0.m(i3, "updateTouchpadAutoRunTextView, count=", "DexTouchpadFragment");
         }
         boolean z2 = this.mViewModel.mIsTouchpadAutoRunShown;
-        if (z2 || i2 == 3) {
+        if (z2 || i3 == 3) {
             if (!z2) {
-                this.mSettingsRepo.putInt(settings$Key, i2 + 1);
+                this.mSettingsRepo.putInt(settings$Key, i3 + 1);
                 this.mViewModel.mIsTouchpadAutoRunShown = true;
             }
             this.mTouchpadAutoRunTextView.setVisibility(0);
@@ -255,7 +322,7 @@ public class TouchpadFragment extends Fragment {
             Log.d("DexTouchpadFragment", "onStop()");
         }
         this.mCalled = true;
-        int intForUser = Settings.Secure.getIntForUser(requireContext().getContentResolver(), SettingsHelper.INDEX_NAVIGATION_MODE, 0, -2);
+        final int intForUser = Settings.Secure.getIntForUser(requireContext().getContentResolver(), SettingsHelper.INDEX_NAVIGATION_MODE, 0, -2);
         if (!this.mActivity.isChangingConfigurations() && this.mViewModel.mIsTouchpadEnabled) {
             Settings.System.putIntForUser(this.mApplicationContext.getContentResolver(), "touchpad_enabled", 0, -2);
             this.mViewModel.mIsTouchpadEnabled = false;
@@ -284,13 +351,28 @@ public class TouchpadFragment extends Fragment {
         View view = this.mSpenRecognitionArea;
         if (view != null) {
             view.removeCallbacks(this.mRemoveSpenRecognitionAreaRunnable);
-        }
-        if (QuickStepContract.isGesturalMode(intForUser)) {
-            TouchpadNotificationManager touchpadNotificationManager = this.mTouchpadNotificationManager;
-            if (!((HashMap) touchpadNotificationManager.mActiveNotifications).containsKey(NotificationType.TOUCHPAD)) {
-                this.mHandler.post(new TouchpadFragment$$ExternalSyntheticLambda0(this, 1));
+            FloatingWindow floatingWindow = this.mViewModel.mSpenRecognitionWindow;
+            if (floatingWindow != null) {
+                floatingWindow.tearDown();
             }
         }
+        DisplayManager displayManager = this.mDisplayManager;
+        if (displayManager != null) {
+            displayManager.unregisterDisplayListener(this.mDisplayListener);
+        }
+        this.mHandler.post(new Runnable() { // from class: com.android.systemui.dextouchpad.activity.TouchpadFragment.4
+            @Override // java.lang.Runnable
+            public final void run() {
+                if (QuickStepContract.isGesturalMode(intForUser)) {
+                    TouchpadNotificationManager touchpadNotificationManager = TouchpadFragment.this.mTouchpadNotificationManager;
+                    NotificationType notificationType = NotificationType.TOUCHPAD;
+                    if (((HashMap) touchpadNotificationManager.mActiveNotifications).containsKey(notificationType)) {
+                        return;
+                    }
+                    TouchpadFragment.this.mTouchpadNotificationManager.show(notificationType);
+                }
+            }
+        });
         SettingsObserver settingsObserver = this.mSettingsObserver;
         settingsObserver.mResolver.unregisterContentObserver(settingsObserver);
     }
@@ -308,15 +390,15 @@ public class TouchpadFragment extends Fragment {
         FragmentActivity fragmentActivity = this.mActivity;
         buttonWindowController.mActivity = fragmentActivity;
         buttonWindowController.mContext = view.getContext();
-        View findViewById = view.findViewById(R.id.touchpad_rotation_button);
-        if (findViewById != null) {
+        View viewFindViewById = view.findViewById(R.id.touchpad_rotation_button);
+        if (viewFindViewById != null) {
             if (buttonWindowController.mRotationButtonWindow == null) {
                 buttonWindowController.mRotationButtonWindow = new RotationButtonWindow(buttonWindowController.mSpenNotSupportedToastBlocked);
             }
-            buttonWindowController.mRotationButtonWindow.setup(fragmentActivity, findViewById);
+            buttonWindowController.mRotationButtonWindow.setup(fragmentActivity, viewFindViewById);
         }
-        View findViewById2 = view.findViewById(R.id.touchpad_guide_button);
-        if (findViewById2 != null) {
+        View viewFindViewById2 = view.findViewById(R.id.touchpad_guide_button);
+        if (viewFindViewById2 != null) {
             if (buttonWindowController.mGuideButtonWindow == null) {
                 buttonWindowController.mGuideButtonWindow = new ButtonWindow(TouchpadButtonItems.GUIDE, buttonWindowController.mSpenNotSupportedToastBlocked);
             }
@@ -346,11 +428,11 @@ public class TouchpadFragment extends Fragment {
                     }
                 }
             };
-            buttonWindow.setup(fragmentActivity, findViewById2);
+            buttonWindow.setup(fragmentActivity, viewFindViewById2);
             buttonWindowController.itemList = new TouchpadGesturesGuideItems(buttonWindowController.mContext);
         }
-        View findViewById3 = view.findViewById(R.id.touchpad_close_button);
-        if (findViewById3 != null) {
+        View viewFindViewById3 = view.findViewById(R.id.touchpad_close_button);
+        if (viewFindViewById3 != null) {
             if (buttonWindowController.mCloseButtonWindow == null) {
                 buttonWindowController.mCloseButtonWindow = new ButtonWindow(TouchpadButtonItems.CLOSE, buttonWindowController.mSpenNotSupportedToastBlocked);
             }
@@ -380,32 +462,34 @@ public class TouchpadFragment extends Fragment {
                     }
                 }
             };
-            buttonWindow2.setup(fragmentActivity, findViewById3);
+            buttonWindow2.setup(fragmentActivity, viewFindViewById3);
         }
         TouchpadViewMover touchpadViewMover = this.mViewModel.mTouchpadViewMover;
-        View findViewById4 = view.findViewById(R.id.touchpad);
+        View viewFindViewById4 = view.findViewById(R.id.touchpad);
         touchpadViewMover.getClass();
-        touchpadViewMover.mView = new WeakReference(findViewById4);
+        touchpadViewMover.mView = new WeakReference(viewFindViewById4);
     }
 
     public final void updateSpenRecognitionArea() {
+        int i;
+        int i2;
         TouchpadNotificationManager touchpadNotificationManager;
         boolean z = Features.DEBUG;
         if (z) {
             Log.d("DexTouchpadFragment", "updateSpenRecognitionArea()");
         }
         boolean z2 = Settings.System.getIntForUser(this.mApplicationContext.getContentResolver(), "pen_digitizer_enabled", 0, -2) == 1;
-        int i = Settings.Global.getInt(this.mApplicationContext.getContentResolver(), "SPEN_INPUT_MODE_DEX", 0);
+        int i3 = Settings.Global.getInt(this.mApplicationContext.getContentResolver(), "SPEN_INPUT_MODE_DEX", 0);
         if (z2) {
             final TouchpadWindow touchpadWindow = this.mViewModel.mTouchpadWindow;
-            touchpadWindow.mSpenMode = i;
+            touchpadWindow.mSpenMode = i3;
             if (Utils.mIsSpenDetached && (touchpadNotificationManager = touchpadWindow.mTouchpadNotificationManager) != null) {
                 touchpadNotificationManager.show(NotificationType.SPEN);
             }
             touchpadWindow.mWindowView.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.dextouchpad.activity.TouchpadWindow$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnHoverListener
-                public final boolean onHover(View view, MotionEvent motionEvent) {
-                    TouchpadWindow touchpadWindow2 = TouchpadWindow.this;
+                public final boolean onHover(View view, MotionEvent motionEvent) throws Resources.NotFoundException {
+                    TouchpadWindow touchpadWindow2 = touchpadWindow;
                     touchpadWindow2.getClass();
                     if (motionEvent.getAction() == 9 && motionEvent.isFromSource(16386)) {
                         if (!touchpadWindow2.mSpenNotSupportedToastBlocked.get() && touchpadWindow2.mSpenMode == 0) {
@@ -418,9 +502,9 @@ public class TouchpadFragment extends Fragment {
                                     touchpadWindow2.mSpenNotSupportedToast.cancel();
                                 }
                                 touchpadWindow2.mSpenNotSupportedToastShown.set(false);
-                                Toast makeText = Toast.makeText(fragmentActivity, R.string.dex_spen_unsupported, 1);
-                                touchpadWindow2.mSpenNotSupportedToast = makeText;
-                                makeText.addCallback(anonymousClass1);
+                                Toast toastMakeText = Toast.makeText(fragmentActivity, touchpadWindow2.mActivity.getResources().getConfiguration().orientation == 1 ? R.string.dex_spen_unsupported : R.string.dex_spen_unsupported_portrait, 1);
+                                touchpadWindow2.mSpenNotSupportedToast = toastMakeText;
+                                toastMakeText.addCallback(anonymousClass1);
                                 touchpadWindow2.mSpenNotSupportedToast.show();
                                 CoreSaLogger.logForDexWithScreenId("704", "7005");
                             }
@@ -437,22 +521,18 @@ public class TouchpadFragment extends Fragment {
         } else {
             this.mViewModel.mTouchpadWindow.unsetOnHoverListener();
         }
-        if (this.mSpenRecognitionArea == null || this.mApplicationContext.getResources().getConfiguration().semDisplayDeviceType == 5 || !Utils.mIsSpenDetached) {
+        int i4 = this.mActivity.getResources().getConfiguration().orientation;
+        boolean z3 = i4 != 2 ? (i = this.mDexDisplayRotation) == 1 || i == 3 : (i2 = this.mDexDisplayRotation) == 0 || i2 == 2;
+        RecyclerView$$ExternalSyntheticOutline0.m(this.mDexDisplayRotation, "DexTouchpadFragment", KeyguardFMMViewController$$ExternalSyntheticOutline0.m("rotationMatch=", i4, ", orientation=", z3, ", mDexDisplayRotation="));
+        if (this.mSpenRecognitionArea == null || this.mApplicationContext.getResources().getConfiguration().semDisplayDeviceType == 5 || !z3) {
             if (this.mViewModel.mSpenStartTime > 0) {
                 CoreSaLogger.logForDexWithScreenId("701", "7003", (System.currentTimeMillis() - this.mViewModel.mSpenStartTime) / 1000);
                 this.mViewModel.mSpenStartTime = 0L;
             }
-            this.mViewModel.mTouchpadViewMover.setSpenEnabled(false);
-            return;
-        }
-        this.mViewModel.mTouchpadWindow.unsetOnHoverListener();
-        this.mSpenRecognitionArea.removeCallbacks(this.mRemoveSpenRecognitionAreaRunnable);
-        if (!z2 || i != 0) {
-            if (this.mViewModel.mSpenStartTime > 0) {
-                CoreSaLogger.logForDexWithScreenId("701", "7003", (System.currentTimeMillis() - this.mViewModel.mSpenStartTime) / 1000);
-                this.mViewModel.mSpenStartTime = 0L;
+            View view = this.mSpenRecognitionArea;
+            if (view != null) {
+                view.setVisibility(8);
             }
-            this.mSpenRecognitionArea.setVisibility(8);
             if (this.mTouchpadAutoRunTextView.getVisibility() == 0) {
                 this.mTouchpadAutoRunTextView.setBackgroundResource(R.color.touchpad_auto_run_background);
             }
@@ -469,6 +549,30 @@ public class TouchpadFragment extends Fragment {
             this.mViewModel.mButtonWindowController.setRotationButtonVisibility(true);
             return;
         }
+        this.mViewModel.mTouchpadWindow.unsetOnHoverListener();
+        this.mSpenRecognitionArea.removeCallbacks(this.mRemoveSpenRecognitionAreaRunnable);
+        if (!z2 || i3 != 0) {
+            if (this.mViewModel.mSpenStartTime > 0) {
+                CoreSaLogger.logForDexWithScreenId("701", "7003", (System.currentTimeMillis() - this.mViewModel.mSpenStartTime) / 1000);
+                this.mViewModel.mSpenStartTime = 0L;
+            }
+            this.mSpenRecognitionArea.setVisibility(8);
+            if (this.mTouchpadAutoRunTextView.getVisibility() == 0) {
+                this.mTouchpadAutoRunTextView.setBackgroundResource(R.color.touchpad_auto_run_background);
+            }
+            FloatingWindow floatingWindow2 = this.mViewModel.mSpenRecognitionWindow;
+            if (floatingWindow2 != null) {
+                floatingWindow2.tearDown();
+            }
+            ViewHideScheduler viewHideScheduler2 = this.mSpenIconViewHideScheduler;
+            if (viewHideScheduler2 != null) {
+                viewHideScheduler2.cancel();
+                this.mSpenIconViewHideScheduler = null;
+            }
+            this.mViewModel.mTouchpadViewMover.setSpenEnabled(false);
+            this.mViewModel.mButtonWindowController.setRotationButtonVisibility(true);
+            return;
+        }
         this.mViewModel.mSpenStartTime = System.currentTimeMillis();
         CoreSaLogger.logForDexWithScreenId("701", "7002");
         this.mSpenRecognitionArea.setVisibility(0);
@@ -476,34 +580,34 @@ public class TouchpadFragment extends Fragment {
             this.mTouchpadAutoRunTextView.setBackground(null);
         }
         TouchpadViewModel touchpadViewModel = this.mViewModel;
-        FloatingWindow floatingWindow2 = (FloatingWindow) touchpadViewModel.mSpenRecognitionWindowLazy.get();
-        touchpadViewModel.mSpenRecognitionWindow = floatingWindow2;
-        floatingWindow2.setup(this.mActivity, this.mSpenRecognitionArea);
+        FloatingWindow floatingWindow3 = (FloatingWindow) touchpadViewModel.mSpenRecognitionWindowLazy.get();
+        touchpadViewModel.mSpenRecognitionWindow = floatingWindow3;
+        floatingWindow3.setup(this.mActivity, this.mSpenRecognitionArea);
         if (this.mSpenIcon != null && this.mSpenIconViewHideScheduler == null) {
-            final ViewHideScheduler viewHideScheduler2 = new ViewHideScheduler(this.mSpenIcon, "SpenIcon");
-            this.mSpenIconViewHideScheduler = viewHideScheduler2;
+            final ViewHideScheduler viewHideScheduler3 = new ViewHideScheduler(this.mSpenIcon, "SpenIcon");
+            this.mSpenIconViewHideScheduler = viewHideScheduler3;
             if (z) {
-                ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendDelayedRemoveIcon(), "), viewHideScheduler2.mTitle, "DexTouchpadViewHideScheduler");
+                ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("sendDelayedRemoveIcon(), "), viewHideScheduler3.mTitle, "DexTouchpadViewHideScheduler");
             }
-            ImageView imageView = viewHideScheduler2.mIcon;
+            ImageView imageView = viewHideScheduler3.mIcon;
             if (imageView != null) {
                 imageView.setVisibility(0);
-                Handler handler = viewHideScheduler2.mHandler;
+                Handler handler = viewHideScheduler3.mHandler;
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(new Runnable() { // from class: com.android.systemui.dextouchpad.activity.ViewHideScheduler$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewHideScheduler viewHideScheduler3 = ViewHideScheduler.this;
-                        int i2 = ViewHideScheduler.$r8$clinit;
-                        viewHideScheduler3.getClass();
+                        ViewHideScheduler viewHideScheduler4 = viewHideScheduler3;
+                        int i5 = ViewHideScheduler.$r8$clinit;
+                        viewHideScheduler4.getClass();
                         if (Features.DEBUG) {
-                            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("removeIcon(), "), viewHideScheduler3.mTitle, "DexTouchpadViewHideScheduler");
+                            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("removeIcon(), "), viewHideScheduler4.mTitle, "DexTouchpadViewHideScheduler");
                         }
-                        ImageView imageView2 = viewHideScheduler3.mIcon;
+                        ImageView imageView2 = viewHideScheduler4.mIcon;
                         if (imageView2 == null || !imageView2.isShown()) {
                             return;
                         }
-                        viewHideScheduler3.mIcon.setVisibility(8);
+                        viewHideScheduler4.mIcon.setVisibility(8);
                     }
                 }, ViewHideScheduler.ICON_REMOVE_DELAY);
             }

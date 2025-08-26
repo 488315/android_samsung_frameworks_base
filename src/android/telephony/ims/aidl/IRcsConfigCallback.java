@@ -72,9 +72,9 @@ public interface IRcsConfigCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRcsConfigCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRcsConfigCallback)) {
-                return (IRcsConfigCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRcsConfigCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRcsConfigCallback)) {
+                return (IRcsConfigCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,22 +113,22 @@ public interface IRcsConfigCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onConfigurationChanged(createByteArray);
+                onConfigurationChanged(bArrCreateByteArray);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onAutoConfigurationErrorReceived(readInt, readString);
+                onAutoConfigurationErrorReceived(i3, string);
             } else if (i == 3) {
                 onConfigurationReset();
             } else if (i == 4) {
                 onRemoved();
             } else if (i == 5) {
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onPreProvisioningReceived(createByteArray2);
+                onPreProvisioningReceived(bArrCreateByteArray2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -153,60 +153,60 @@ public interface IRcsConfigCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onConfigurationChanged(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onAutoConfigurationErrorReceived(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onConfigurationReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onRemoved() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onPreProvisioningReceived(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

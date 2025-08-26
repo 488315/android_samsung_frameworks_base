@@ -61,9 +61,9 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssBatching)) {
-            return (IGnssBatching) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IGnssBatching)) {
+            return (IGnssBatching) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -293,13 +293,13 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -454,9 +454,9 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
             switch (i) {
                 case 1:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnssBatching.kInterfaceName);
-                    boolean init = init(android.hardware.gnss.V1_0.IGnssBatchingCallback.asInterface(hwParcel.readStrongBinder()));
+                    boolean zInit = init(android.hardware.gnss.V1_0.IGnssBatchingCallback.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(init);
+                    hwParcel2.writeBool(zInit);
                     hwParcel2.send();
                     return;
                 case 2:
@@ -470,9 +470,9 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnssBatching.kInterfaceName);
                     IGnssBatching.Options options = new IGnssBatching.Options();
                     options.readFromParcel(hwParcel);
-                    boolean start = start(options);
+                    boolean zStart = start(options);
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(start);
+                    hwParcel2.writeBool(zStart);
                     hwParcel2.send();
                     return;
                 case 4:
@@ -483,9 +483,9 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnssBatching.kInterfaceName);
-                    boolean stop = stop();
+                    boolean zStop = stop();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(stop);
+                    hwParcel2.writeBool(zStop);
                     hwParcel2.send();
                     return;
                 case 6:
@@ -496,18 +496,18 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
                     return;
                 case 7:
                     hwParcel.enforceInterface(IGnssBatching.kInterfaceName);
-                    boolean init_2_0 = init_2_0(IGnssBatchingCallback.asInterface(hwParcel.readStrongBinder()));
+                    boolean zInit_2_0 = init_2_0(IGnssBatchingCallback.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(init_2_0);
+                    hwParcel2.writeBool(zInit_2_0);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -518,9 +518,9 @@ public interface IGnssBatching extends android.hardware.gnss.V1_0.IGnssBatching 
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

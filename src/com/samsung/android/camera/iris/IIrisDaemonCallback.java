@@ -100,9 +100,9 @@ public interface IIrisDaemonCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIrisDaemonCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIrisDaemonCallback)) {
-                return (IIrisDaemonCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIrisDaemonCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIrisDaemonCallback)) {
+                return (IIrisDaemonCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -148,78 +148,78 @@ public interface IIrisDaemonCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEnrollResult(readLong, readInt, readInt2, readInt3);
+                    onEnrollResult(j, i3, i4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     EyeInfo eyeInfo = (EyeInfo) parcel.readTypedObject(EyeInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onAcquired(readLong2, eyeInfo);
+                    onAcquired(j2, eyeInfo);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    long readLong3 = parcel.readLong();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    long j3 = parcel.readLong();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    onAuthenticated(readLong3, readInt4, readInt5, createByteArray, createByteArray2);
+                    onAuthenticated(j3, i6, i7, bArrCreateByteArray, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    long readLong4 = parcel.readLong();
-                    int readInt6 = parcel.readInt();
+                    long j4 = parcel.readLong();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onError(readLong4, readInt6);
+                    onError(j4, i8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    long readLong5 = parcel.readLong();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    long j5 = parcel.readLong();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRemoved(readLong5, readInt7, readInt8);
+                    onRemoved(j5, i9, i10);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    long readLong6 = parcel.readLong();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    long j6 = parcel.readLong();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onIRPropertyChanged(readLong6, readString, readString2);
+                    onIRPropertyChanged(j6, string, string2);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    long readLong7 = parcel.readLong();
-                    int[] createIntArray = parcel.createIntArray();
-                    int[] createIntArray2 = parcel.createIntArray();
+                    long j7 = parcel.readLong();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    onEnumerate(readLong7, createIntArray, createIntArray2);
+                    onEnumerate(j7, iArrCreateIntArray, iArrCreateIntArray2);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    long readLong8 = parcel.readLong();
-                    int readInt9 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    long j8 = parcel.readLong();
+                    int i11 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onImageProcessed(readLong8, readInt9, createByteArray3, readInt10, readInt11);
+                    onImageProcessed(j8, i11, bArrCreateByteArray3, i12, i13);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    long readLong9 = parcel.readLong();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    long j9 = parcel.readLong();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onGeneralParameterChanged(readLong9, readString3, readString4);
+                    onGeneralParameterChanged(j9, string3, string4);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -245,157 +245,157 @@ public interface IIrisDaemonCallback extends IInterface {
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onEnrollResult(long j, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onAcquired(long j, EyeInfo eyeInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(eyeInfo, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(eyeInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onAuthenticated(long j, int i, int i2, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onError(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onRemoved(long j, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onIRPropertyChanged(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onEnumerate(long j, int[] iArr, int[] iArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onImageProcessed(long j, int i, byte[] bArr, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
             public void onGeneralParameterChanged(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisDaemonCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

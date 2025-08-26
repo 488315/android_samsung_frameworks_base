@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.cert.Certificate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ParcelableCertificate implements Parcelable {
     public static final Parcelable.Creator<ParcelableCertificate> CREATOR = new Parcelable.Creator<ParcelableCertificate>() { // from class: com.samsung.android.knox.zt.service.ParcelableCertificate.1
@@ -41,7 +40,7 @@ public class ParcelableCertificate implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);

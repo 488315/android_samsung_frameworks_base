@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardUpdateMonitor$$ExternalSyntheticLambda24 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -79,9 +78,9 @@ public final /* synthetic */ class KeyguardUpdateMonitor$$ExternalSyntheticLambd
                         LogLevel logLevel = LogLevel.DEBUG;
                         SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda0 = new SimLogger$$ExternalSyntheticLambda0(6);
                         LogBuffer logBuffer = simLogger2.logBuffer;
-                        LogMessage obtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).str1 = String.valueOf((SubscriptionInfo) obj);
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf((SubscriptionInfo) obj);
+                        logBuffer.commit(logMessageObtain);
                     }
                 }
                 ArrayList arrayList2 = new ArrayList();
@@ -107,10 +106,10 @@ public final /* synthetic */ class KeyguardUpdateMonitor$$ExternalSyntheticLambd
                                 LogLevel logLevel2 = LogLevel.INFO;
                                 SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda02 = new SimLogger$$ExternalSyntheticLambda0(2);
                                 LogBuffer logBuffer2 = simLogger3.logBuffer;
-                                LogMessage obtain2 = logBuffer2.obtain("SimLog", logLevel2, simLogger$$ExternalSyntheticLambda02, null);
-                                ((LogMessageImpl) obtain2).int1 = i6;
-                                ((LogMessageImpl) obtain2).int2 = i7;
-                                logBuffer2.commit(obtain2);
+                                LogMessage logMessageObtain2 = logBuffer2.obtain("SimLog", logLevel2, simLogger$$ExternalSyntheticLambda02, null);
+                                ((LogMessageImpl) logMessageObtain2).int1 = i6;
+                                ((LogMessageImpl) logMessageObtain2).int2 = i7;
+                                logBuffer2.commit(logMessageObtain2);
                                 Log.d("KeyguardUpdateMonitor", "    onSubscriptionInfoChanged(): Previously active sub id " + simData.subId + " is now invalid, will remove");
                                 it.remove();
                             }

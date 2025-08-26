@@ -37,8 +37,8 @@ public final class ProxyUtils {
         return TextUtils.join(",", strArr);
     }
 
-    public static int validate(String str, String str2, String str3) {
-        int parseInt;
+    public static int validate(String str, String str2, String str3) throws NumberFormatException {
+        int i;
         Matcher matcher = HOSTNAME_PATTERN.matcher(str);
         Matcher matcher2 = EXCLLIST_PATTERN.matcher(str3);
         if (!matcher.matches()) {
@@ -57,9 +57,9 @@ public final class ProxyUtils {
             return 1;
         }
         try {
-            parseInt = Integer.parseInt(str2);
+            i = Integer.parseInt(str2);
         } catch (NumberFormatException unused) {
         }
-        return (parseInt <= 0 || parseInt > 65535) ? 4 : 0;
+        return (i <= 0 || i > 65535) ? 4 : 0;
     }
 }

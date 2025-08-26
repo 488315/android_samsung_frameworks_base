@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.phone;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
@@ -34,7 +35,6 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationIconContainer extends ViewGroup {
     public static final AnonymousClass4 ADD_ICON_PROPERTIES;
@@ -60,7 +60,6 @@ public class NotificationIconContainer extends ViewGroup {
     public boolean mIsStaticLayout;
     public StatusBarIconView mIsolatedIcon;
     public StatusBarIconView mIsolatedIconForAnimation;
-    public final int mMaxIcons;
     public int mMaxIconsOnLockscreen;
     public int mMaxStaticIcons;
     public boolean mOnKeyguardStatusBar;
@@ -72,7 +71,6 @@ public class NotificationIconContainer extends ViewGroup {
     public int mThemedTextColorPrimary;
     public float mVisualOverflowStart;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.NotificationIconContainer$2, reason: invalid class name */
     public class AnonymousClass2 extends AnimationProperties {
         public final AnimationFilter mAnimationFilter;
@@ -93,7 +91,6 @@ public class NotificationIconContainer extends ViewGroup {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.NotificationIconContainer$3, reason: invalid class name */
     public class AnonymousClass3 extends AnimationProperties {
         public final AnimationFilter mAnimationFilter = new AnimationFilter();
@@ -104,7 +101,6 @@ public class NotificationIconContainer extends ViewGroup {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IconState extends ViewState {
         public static final /* synthetic */ int $r8$clinit = 0;
         public float clampedAppearAmount;
@@ -129,7 +125,7 @@ public class NotificationIconContainer extends ViewGroup {
             this.mCannedAnimationEndListener = new Consumer() { // from class: com.android.systemui.statusbar.phone.NotificationIconContainer$IconState$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    NotificationIconContainer.IconState iconState = NotificationIconContainer.IconState.this;
+                    NotificationIconContainer.IconState iconState = this.f$0;
                     Property property = (Property) obj;
                     int i = NotificationIconContainer.IconState.$r8$clinit;
                     iconState.getClass();
@@ -319,10 +315,9 @@ public class NotificationIconContainer extends ViewGroup {
         UNISOLATION_PROPERTY = r04;
     }
 
-    public NotificationIconContainer(Context context, AttributeSet attributeSet) {
+    public NotificationIconContainer(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mSpeedBumpIndex = -1;
-        this.mMaxIcons = Integer.MAX_VALUE;
         this.mIsStaticLayout = true;
         this.mIconStates = new HashMap();
         this.mActualLayoutWidth = Integer.MIN_VALUE;
@@ -350,6 +345,10 @@ public class NotificationIconContainer extends ViewGroup {
         this.mIsolatedIconForAnimation = null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0082  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void calculateIconXTranslations() {
         IconState iconState;
         boolean z;
@@ -372,7 +371,7 @@ public class NotificationIconContainer extends ViewGroup {
             }
             View childAt = getChildAt(i3);
             IconState iconState2 = (IconState) this.mIconStates.get(childAt);
-            float f = 1.0f;
+            float iconScaleIncreased = 1.0f;
             if (iconState2.iconAppearAmount == 1.0f) {
                 iconState2.setXTranslation(leftBound);
             }
@@ -380,54 +379,43 @@ public class NotificationIconContainer extends ViewGroup {
                 this.mFirstVisibleIconState = iconState2;
             }
             iconState2.visibleState = iconState2.hidden ? 2 : 0;
-            if (!shouldForceOverflow(i3, this.mSpeedBumpIndex, iconState2.iconAppearAmount, i2)) {
-                if (!isOverflowing(i3 == childCount + (-1), leftBound, rightBound, this.mIconSize)) {
-                    z = false;
-                    if (i4 == -1 && z) {
-                        this.mVisualOverflowStart = leftBound;
-                        i4 = i3;
-                    }
-                    int i5 = NotificationIconContainerRefactor.$r8$clinit;
-                    if (this.mOnKeyguardStatusBar && (childAt instanceof StatusBarIconView)) {
-                        f = ((StatusBarIconView) childAt).getIconScaleIncreased();
-                    }
-                    leftBound += iconState2.iconAppearAmount * childAt.getWidth() * f;
-                    i3++;
-                }
+            if (shouldForceOverflow(i3, this.mSpeedBumpIndex, iconState2.iconAppearAmount, i2)) {
+                z = true;
+            } else if (!isOverflowing(i3 == childCount + (-1), leftBound, rightBound, this.mIconSize)) {
+                z = false;
             }
-            z = true;
-            if (i4 == -1) {
+            if (i4 == -1 && z) {
                 this.mVisualOverflowStart = leftBound;
                 i4 = i3;
             }
-            int i52 = NotificationIconContainerRefactor.$r8$clinit;
-            if (this.mOnKeyguardStatusBar) {
-                f = ((StatusBarIconView) childAt).getIconScaleIncreased();
+            int i5 = NotificationIconContainerRefactor.$r8$clinit;
+            if (this.mOnKeyguardStatusBar && (childAt instanceof StatusBarIconView)) {
+                iconScaleIncreased = ((StatusBarIconView) childAt).getIconScaleIncreased();
             }
-            leftBound += iconState2.iconAppearAmount * childAt.getWidth() * f;
+            leftBound += iconState2.iconAppearAmount * childAt.getWidth() * iconScaleIncreased;
             i3++;
         }
         this.mIsShowingOverflowDot = false;
         if (i4 != -1) {
-            float f2 = this.mVisualOverflowStart;
+            float f = this.mVisualOverflowStart;
             while (i4 < childCount) {
                 View childAt2 = getChildAt(i4);
                 IconState iconState3 = (IconState) this.mIconStates.get(childAt2);
                 int i6 = this.mStaticDotDiameter + this.mDotPadding;
-                iconState3.setXTranslation(f2);
+                iconState3.setXTranslation(f);
                 if (this.mIsShowingOverflowDot) {
                     iconState3.visibleState = 2;
                     childAt2.setImportantForAccessibility(2);
                 } else {
-                    float f3 = iconState3.iconAppearAmount;
-                    if (f3 < 0.8f) {
+                    float f2 = iconState3.iconAppearAmount;
+                    if (f2 < 0.8f) {
                         iconState3.visibleState = 0;
                     } else {
                         iconState3.visibleState = 1;
                         this.mIsShowingOverflowDot = true;
                     }
                     childAt2.setImportantForAccessibility(1);
-                    f2 = (i6 * f3) + f2;
+                    f = (i6 * f2) + f;
                 }
                 i4++;
             }
@@ -458,16 +446,16 @@ public class NotificationIconContainer extends ViewGroup {
     }
 
     public float getRightBound() {
-        int i = this.mActualLayoutWidth;
-        if (i == Integer.MIN_VALUE) {
-            i = getWidth();
+        int width = this.mActualLayoutWidth;
+        if (width == Integer.MIN_VALUE) {
+            width = getWidth();
         }
-        float f = i;
-        float f2 = this.mActualPaddingEnd;
-        if (f2 == -2.1474836E9f) {
-            f2 = getPaddingEnd();
+        float f = width;
+        float paddingEnd = this.mActualPaddingEnd;
+        if (paddingEnd == -2.1474836E9f) {
+            paddingEnd = getPaddingEnd();
         }
-        return f - f2;
+        return f - paddingEnd;
     }
 
     @Override // android.view.View
@@ -475,7 +463,7 @@ public class NotificationIconContainer extends ViewGroup {
         return false;
     }
 
-    public void initResources() {
+    public void initResources() throws Resources.NotFoundException {
         getResources().getInteger(R.integer.max_notif_icons_on_aod);
         this.mMaxIconsOnLockscreen = getResources().getInteger(R.integer.max_notif_icons_on_lockscreen);
         this.mMaxStaticIcons = getResources().getInteger(R.integer.max_notif_static_icons);
@@ -513,7 +501,7 @@ public class NotificationIconContainer extends ViewGroup {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         initResources();
     }
@@ -528,7 +516,7 @@ public class NotificationIconContainer extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    public void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         float height = getHeight() / 2.0f;
         this.mIconSize = 0;
         for (int i5 = 0; i5 < getChildCount(); i5++) {
@@ -552,44 +540,45 @@ public class NotificationIconContainer extends ViewGroup {
     @Override // android.view.View
     public void onMeasure(int i, int i2) {
         int childCount = getChildCount();
-        int i3 = this.mMaxIcons;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i), 0);
+        int i3 = NotificationIconContainerRefactor.$r8$clinit;
+        int i4 = this.mOnKeyguardStatusBar ? 0 : this.mIsStaticLayout ? this.mMaxStaticIcons : childCount;
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.getSize(i), 0);
         float actualPaddingStart = getActualPaddingStart();
-        float f = this.mActualPaddingEnd;
-        if (f == -2.1474836E9f) {
-            f = getPaddingEnd();
+        float paddingEnd = this.mActualPaddingEnd;
+        if (paddingEnd == -2.1474836E9f) {
+            paddingEnd = getPaddingEnd();
         }
-        int i4 = (int) (f + actualPaddingStart);
+        int measuredWidth = (int) (paddingEnd + actualPaddingStart);
         for (int i5 = 0; i5 < childCount; i5++) {
             View childAt = getChildAt(i5);
-            measureChild(childAt, makeMeasureSpec, i2);
-            if (i5 <= i3) {
-                i4 = childAt.getMeasuredWidth() + i4;
+            measureChild(childAt, iMakeMeasureSpec, i2);
+            if (i5 <= i4) {
+                measuredWidth = childAt.getMeasuredWidth() + measuredWidth;
             }
         }
-        setMeasuredDimension(ViewGroup.resolveSize(i4, i), View.MeasureSpec.getSize(i2));
+        setMeasuredDimension(ViewGroup.resolveSize(measuredWidth, i), View.MeasureSpec.getSize(i2));
     }
 
     @Override // android.view.ViewGroup
     public final void onViewAdded(View view) {
         AnimationDrawable animationDrawable;
         super.onViewAdded(view);
-        boolean isReplacingIcon = isReplacingIcon(view);
+        boolean zIsReplacingIcon = isReplacingIcon(view);
         if (!this.mChangingViewPositions) {
             IconState iconState = new IconState(view);
-            if (isReplacingIcon) {
+            if (zIsReplacingIcon) {
                 iconState.justAdded = false;
                 iconState.justReplaced = true;
             }
             this.mIconStates.put(view, iconState);
         }
-        int indexOfChild = indexOfChild(view);
-        if (indexOfChild < getChildCount() - 1 && !isReplacingIcon && ((IconState) this.mIconStates.get(getChildAt(indexOfChild + 1))).iconAppearAmount > 0.0f) {
+        int iIndexOfChild = indexOfChild(view);
+        if (iIndexOfChild < getChildCount() - 1 && !zIsReplacingIcon && ((IconState) this.mIconStates.get(getChildAt(iIndexOfChild + 1))).iconAppearAmount > 0.0f) {
             int i = this.mAddAnimationStartIndex;
             if (i < 0) {
-                this.mAddAnimationStartIndex = indexOfChild;
+                this.mAddAnimationStartIndex = iIndexOfChild;
             } else {
-                this.mAddAnimationStartIndex = Math.min(i, indexOfChild);
+                this.mAddAnimationStartIndex = Math.min(i, iIndexOfChild);
             }
         }
         if (view instanceof StatusBarIconView) {
@@ -624,42 +613,42 @@ public class NotificationIconContainer extends ViewGroup {
     public final void onViewRemoved(View view) {
         super.onViewRemoved(view);
         if (view instanceof StatusBarIconView) {
-            boolean isReplacingIcon = isReplacingIcon(view);
+            boolean zIsReplacingIcon = isReplacingIcon(view);
             StatusBarIconView statusBarIconView = (StatusBarIconView) view;
-            if ((this.mAnimationsEnabled || statusBarIconView == this.mIsolatedIcon) && statusBarIconView.mVisibleState != 2 && view.getVisibility() == 0 && isReplacingIcon) {
+            if ((this.mAnimationsEnabled || statusBarIconView == this.mIsolatedIcon) && statusBarIconView.mVisibleState != 2 && view.getVisibility() == 0 && zIsReplacingIcon) {
                 float translationX = statusBarIconView.getTranslationX();
-                int i = 0;
+                int childCount = 0;
                 while (true) {
-                    if (i >= getChildCount()) {
-                        i = getChildCount();
+                    if (childCount >= getChildCount()) {
+                        childCount = getChildCount();
                         break;
-                    } else if (getChildAt(i).getTranslationX() > translationX) {
+                    } else if (getChildAt(childCount).getTranslationX() > translationX) {
                         break;
                     } else {
-                        i++;
+                        childCount++;
                     }
                 }
-                int i2 = this.mAddAnimationStartIndex;
-                if (i2 < 0) {
-                    this.mAddAnimationStartIndex = i;
+                int i = this.mAddAnimationStartIndex;
+                if (i < 0) {
+                    this.mAddAnimationStartIndex = childCount;
                 } else {
-                    this.mAddAnimationStartIndex = Math.min(i2, i);
+                    this.mAddAnimationStartIndex = Math.min(i, childCount);
                 }
             }
             if (this.mChangingViewPositions) {
                 return;
             }
             this.mIconStates.remove(view);
-            if ((this.mAnimationsEnabled || statusBarIconView == this.mIsolatedIcon) && !isReplacingIcon) {
+            if ((this.mAnimationsEnabled || statusBarIconView == this.mIsolatedIcon) && !zIsReplacingIcon) {
                 addTransientView(statusBarIconView, 0);
                 boolean z = view == this.mIsolatedIcon;
-                int i3 = StatusBarNoHunBehavior.$r8$clinit;
+                int i2 = StatusBarNoHunBehavior.$r8$clinit;
                 statusBarIconView.setVisibleState(2, true, new NotificationIconContainer$$ExternalSyntheticLambda0(this, statusBarIconView), z ? 110L : 0L);
             }
         }
     }
 
-    public final void resetViewStates() {
+    public final void resetViewStates() throws Resources.NotFoundException {
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
             ViewState viewState = (ViewState) this.mIconStates.get(childAt);

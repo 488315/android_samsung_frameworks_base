@@ -47,7 +47,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DozeParameters implements TunerService.Tunable, com.android.systemui.plugins.statusbar.DozeParameters, Dumpable, ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener, FoldAodAnimationController.FoldAodAnimationStatus {
     public final AODParameters mAODParameters;
@@ -95,15 +94,15 @@ public class DozeParameters implements TunerService.Tunable, com.android.systemu
         boolean z = true;
         this.mControlScreenOffAnimation = !getDisplayNeedsBlanking();
         this.mPowerManager = powerManager;
-        boolean equals = Process.myUserHandle().equals(UserHandle.SYSTEM);
+        boolean zEquals = Process.myUserHandle().equals(UserHandle.SYSTEM);
         if (!LsRune.AOD_DISABLE_CLOCK_TRANSITION && !LsRune.AOD_SAFEMODE) {
-            boolean isLockScreenDisabled = lockPatternUtils.isLockScreenDisabled(selectedUserInteractor != null ? selectedUserInteractor.getSelectedUserId() : 0);
-            boolean isAODShowLockWallpaper = settingsHelper.isAODShowLockWallpaper();
+            boolean zIsLockScreenDisabled = lockPatternUtils.isLockScreenDisabled(selectedUserInteractor != null ? selectedUserInteractor.getSelectedUserId() : 0);
+            boolean zIsAODShowLockWallpaper = settingsHelper.isAODShowLockWallpaper();
             StringBuilder sb = new StringBuilder(" mControlScreenOffAnimation=");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mControlScreenOffAnimation, " isLockScreenDisabled=", isLockScreenDisabled, " isAODShowLockScreenWallpaper=");
-            KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb, isAODShowLockWallpaper, "DozeParameters");
-            if (equals) {
-                if (this.mControlScreenOffAnimation && (!isLockScreenDisabled || (LsRune.AOD_FULLSCREEN && isAODShowLockWallpaper))) {
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mControlScreenOffAnimation, " isLockScreenDisabled=", zIsLockScreenDisabled, " isAODShowLockScreenWallpaper=");
+            KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb, zIsAODShowLockWallpaper, "DozeParameters");
+            if (zEquals) {
+                if (this.mControlScreenOffAnimation && (!zIsLockScreenDisabled || (LsRune.AOD_FULLSCREEN && zIsAODShowLockWallpaper))) {
                     z = false;
                 }
                 powerManager.setDozeAfterScreenOff(z);
@@ -119,7 +118,7 @@ public class DozeParameters implements TunerService.Tunable, com.android.systemu
         this.mDozeInteractor = dozeInteractor;
         this.mTransitionInteractor = keyguardTransitionInteractor;
         this.mSecureSettings = secureSettings;
-        this.mAODParameters = new AODParameters(settingsHelper, lazy, statusBarStateController, equals, unlockedScreenOffAnimationController);
+        this.mAODParameters = new AODParameters(settingsHelper, lazy, statusBarStateController, zEquals, unlockedScreenOffAnimationController);
     }
 
     public final boolean canControlUnlockedScreenOff() {
@@ -157,21 +156,21 @@ public class DozeParameters implements TunerService.Tunable, com.android.systemu
     }
 
     public final boolean getAlwaysOn() {
-        boolean needDozeAlwaysOn;
+        boolean zNeedDozeAlwaysOn;
         AODParameters aODParameters = this.mAODParameters;
         if (aODParameters != null) {
             PluginAODManager pluginAODManager = (PluginAODManager) aODParameters.mPluginAODManagerLazy.get();
             PluginAOD pluginAOD = pluginAODManager.mAODPlugin;
             if (pluginAOD != null) {
-                needDozeAlwaysOn = pluginAOD.needDozeAlwaysOn();
+                zNeedDozeAlwaysOn = pluginAOD.needDozeAlwaysOn();
             } else {
                 PluginClockPack pluginClockPack = pluginAODManager.mClockPackPlugin;
-                needDozeAlwaysOn = pluginClockPack != null ? pluginClockPack.needDozeAlwaysOn() : false;
+                zNeedDozeAlwaysOn = pluginClockPack != null ? pluginClockPack.needDozeAlwaysOn() : false;
             }
-            if (!needDozeAlwaysOn) {
-                needDozeAlwaysOn = aODParameters.mDozeAlwaysOn;
+            if (!zNeedDozeAlwaysOn) {
+                zNeedDozeAlwaysOn = aODParameters.mDozeAlwaysOn;
             }
-            if (needDozeAlwaysOn) {
+            if (zNeedDozeAlwaysOn) {
                 return true;
             }
         }

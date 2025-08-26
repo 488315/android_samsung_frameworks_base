@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.statusbar.window.StatusBarWindowControllerStore;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarPhoneModule_Companion_StatusBarInitializerImplFactory implements Provider {
     public final Provider darkIconDispatcherStoreProvider;
@@ -30,13 +29,13 @@ public final class StatusBarPhoneModule_Companion_StatusBarInitializerImplFactor
         this.darkIconDispatcherStoreProvider = provider5;
     }
 
-    public static StatusBarInitializerImpl statusBarInitializerImpl(DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass120 anonymousClass120, StatusBarWindowControllerStore statusBarWindowControllerStore, StatusBarModeRepositoryStore statusBarModeRepositoryStore, StatusBarConfigurationControllerStore statusBarConfigurationControllerStore, DarkIconDispatcherStore darkIconDispatcherStore) {
+    public static StatusBarInitializerImpl statusBarInitializerImpl(DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass121 anonymousClass121, StatusBarWindowControllerStore statusBarWindowControllerStore, StatusBarModeRepositoryStore statusBarModeRepositoryStore, StatusBarConfigurationControllerStore statusBarConfigurationControllerStore, DarkIconDispatcherStore darkIconDispatcherStore) {
         StatusBarPhoneModule.Companion.getClass();
-        return anonymousClass120.create((StatusBarWindowController) statusBarWindowControllerStore.getDefaultDisplay(), (StatusBarModePerDisplayRepository) statusBarModeRepositoryStore.getDefaultDisplay(), (StatusBarConfigurationController) statusBarConfigurationControllerStore.getDefaultDisplay(), (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) darkIconDispatcherStore).getDefaultDisplay());
+        return anonymousClass121.create((StatusBarWindowController) statusBarWindowControllerStore.getDefaultDisplay(), (StatusBarModePerDisplayRepository) statusBarModeRepositoryStore.getDefaultDisplay(), (StatusBarConfigurationController) statusBarConfigurationControllerStore.getDefaultDisplay(), (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) darkIconDispatcherStore).getDefaultDisplay());
     }
 
     @Override // javax.inject.Provider
     public final Object get() {
-        return statusBarInitializerImpl((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass120) this.implFactoryProvider.get(), (StatusBarWindowControllerStore) this.statusBarWindowControllerStoreProvider.get(), (StatusBarModeRepositoryStore) this.statusBarModeRepositoryStoreProvider.get(), (StatusBarConfigurationControllerStore) this.statusBarConfigurationControllerStoreProvider.get(), (DarkIconDispatcherStore) this.darkIconDispatcherStoreProvider.get());
+        return statusBarInitializerImpl((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass121) this.implFactoryProvider.get(), (StatusBarWindowControllerStore) this.statusBarWindowControllerStoreProvider.get(), (StatusBarModeRepositoryStore) this.statusBarModeRepositoryStoreProvider.get(), (StatusBarConfigurationControllerStore) this.statusBarConfigurationControllerStoreProvider.get(), (DarkIconDispatcherStore) this.darkIconDispatcherStoreProvider.get());
     }
 }

@@ -3,7 +3,6 @@ package com.google.dexmaker.dx.util;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExceptionWithContext extends RuntimeException {
     private StringBuffer context;
@@ -25,10 +24,10 @@ public class ExceptionWithContext extends RuntimeException {
     public ExceptionWithContext(String str, Throwable th) {
         super(str == null ? th != null ? th.getMessage() : null : str, th);
         if (th instanceof ExceptionWithContext) {
-            String stringBuffer = ((ExceptionWithContext) th).context.toString();
-            StringBuffer stringBuffer2 = new StringBuffer(stringBuffer.length() + 200);
-            this.context = stringBuffer2;
-            stringBuffer2.append(stringBuffer);
+            String string = ((ExceptionWithContext) th).context.toString();
+            StringBuffer stringBuffer = new StringBuffer(string.length() + 200);
+            this.context = stringBuffer;
+            stringBuffer.append(string);
             return;
         }
         this.context = new StringBuffer(200);

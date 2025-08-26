@@ -98,17 +98,17 @@ public class ArrayUtils {
         return true;
     }
 
-    public static <T> T[] emptyArray(Class<T> cls) {
+    public static <T> T[] emptyArray(Class<T> cls) throws NegativeArraySizeException {
         if (cls == Object.class) {
             return (T[]) EmptyArray.OBJECT;
         }
-        int hashCode = (cls.hashCode() & Integer.MAX_VALUE) % 73;
-        Object obj = sCache[hashCode];
-        if (obj == null || obj.getClass().getComponentType() != cls) {
-            obj = Array.newInstance((Class<?>) cls, 0);
-            sCache[hashCode] = obj;
+        int iHashCode = (cls.hashCode() & Integer.MAX_VALUE) % 73;
+        Object objNewInstance = sCache[iHashCode];
+        if (objNewInstance == null || objNewInstance.getClass().getComponentType() != cls) {
+            objNewInstance = Array.newInstance((Class<?>) cls, 0);
+            sCache[iHashCode] = objNewInstance;
         }
-        return (T[]) ((Object[]) obj);
+        return (T[]) ((Object[]) objNewInstance);
     }
 
     public static <T> T[] emptyIfNull(T[] tArr, Class<T> cls) {
@@ -295,21 +295,21 @@ public class ArrayUtils {
         if (tArr == null || tArr.length == 0) {
             return (T[]) createEmptyArray(cls);
         }
-        int i = 0;
+        int length = 0;
         for (T[] tArr2 : tArr) {
             if (tArr2 != null) {
-                i += tArr2.length;
+                length += tArr2.length;
             }
         }
-        if (i == 0) {
+        if (length == 0) {
             return (T[]) createEmptyArray(cls);
         }
-        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, i));
-        int i2 = 0;
+        T[] tArr3 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, length));
+        int length2 = 0;
         for (T[] tArr4 : tArr) {
             if (tArr4 != null && tArr4.length != 0) {
-                System.arraycopy(tArr4, 0, tArr3, i2, tArr4.length);
-                i2 += tArr4.length;
+                System.arraycopy(tArr4, 0, tArr3, length2, tArr4.length);
+                length2 += tArr4.length;
             }
         }
         return tArr3;
@@ -330,18 +330,18 @@ public class ArrayUtils {
         if (bArr == null) {
             return new byte[0];
         }
-        int i = 0;
+        int length = 0;
         for (byte[] bArr2 : bArr) {
             if (bArr2 != null) {
-                i += bArr2.length;
+                length += bArr2.length;
             }
         }
-        byte[] bArr3 = new byte[i];
-        int i2 = 0;
+        byte[] bArr3 = new byte[length];
+        int length2 = 0;
         for (byte[] bArr4 : bArr) {
             if (bArr4 != null) {
-                System.arraycopy(bArr4, 0, bArr3, i2, bArr4.length);
-                i2 += bArr4.length;
+                System.arraycopy(bArr4, 0, bArr3, length2, bArr4.length);
+                length2 += bArr4.length;
             }
         }
         return bArr3;
@@ -680,16 +680,16 @@ public class ArrayUtils {
         if (i == 0) {
             return tArr;
         }
-        T[] apply = intFunction.apply(size - i);
+        T[] tArrApply = intFunction.apply(size - i);
         int i3 = 0;
         for (int i4 = 0; i4 < size; i4++) {
             T t = tArr[i4];
             if (t != null) {
-                apply[i3] = t;
+                tArrApply[i3] = t;
                 i3++;
             }
         }
-        return apply;
+        return tArrApply;
     }
 
     public static <T> T[] filter(T[] tArr, IntFunction<T[]> intFunction, Predicate<T> predicate) {
@@ -698,24 +698,24 @@ public class ArrayUtils {
             boolean[] zArr = new boolean[size];
             int i = 0;
             for (int i2 = 0; i2 < size; i2++) {
-                boolean test = predicate.test(tArr[i2]);
-                zArr[i2] = test;
-                if (test) {
+                boolean zTest = predicate.test(tArr[i2]);
+                zArr[i2] = zTest;
+                if (zTest) {
                     i++;
                 }
             }
             if (i != tArr.length) {
-                T[] apply = intFunction.apply(i);
+                T[] tArrApply = intFunction.apply(i);
                 if (i != 0) {
                     int i3 = 0;
                     for (int i4 = 0; i4 < size; i4++) {
                         if (zArr[i4]) {
-                            apply[i3] = tArr[i4];
+                            tArrApply[i3] = tArr[i4];
                             i3++;
                         }
                     }
                 }
-                return apply;
+                return tArrApply;
             }
         }
         return tArr;

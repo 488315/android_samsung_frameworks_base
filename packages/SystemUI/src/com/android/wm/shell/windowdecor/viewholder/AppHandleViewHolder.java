@@ -17,7 +17,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AppHandleViewHolder extends WindowDecorationViewHolder {
     public final AppHandleAnimator animator;
@@ -31,11 +30,9 @@ public final class AppHandleViewHolder extends WindowDecorationViewHolder {
     public ActivityManager.RunningTaskInfo taskInfo;
     public final WindowManagerWrapper windowManagerWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HandleData extends WindowDecorationViewHolder.Data {
         public final int height;
         public final boolean isCaptionVisible;
@@ -91,13 +88,13 @@ public final class AppHandleViewHolder extends WindowDecorationViewHolder {
         this.windowManagerWrapper = windowManagerWrapper;
         this.handler = handler;
         this.desktopModeUiEventLogger = desktopModeUiEventLogger;
-        View requireViewById = view.requireViewById(R.id.desktop_mode_caption);
-        this.captionView = requireViewById;
+        View viewRequireViewById = view.requireViewById(R.id.desktop_mode_caption);
+        this.captionView = viewRequireViewById;
         ImageButton imageButton = (ImageButton) view.requireViewById(R.id.caption_handle);
         this.captionHandle = imageButton;
         this.inputManager = (InputManager) this.context.getSystemService(InputManager.class);
         this.animator = new AppHandleAnimator(view, imageButton);
-        requireViewById.setOnTouchListener(onTouchListener);
+        viewRequireViewById.setOnTouchListener(onTouchListener);
         imageButton.setOnTouchListener(onTouchListener);
         imageButton.setOnClickListener(onClickListener);
         imageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.windowdecor.viewholder.AppHandleViewHolder.1
@@ -130,7 +127,7 @@ public final class AppHandleViewHolder extends WindowDecorationViewHolder {
             if (additionalSystemViewContainer != null && (view = additionalSystemViewContainer.view) != null) {
                 view.setOnTouchListener(null);
             }
-            this.handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.viewholder.AppHandleViewHolder$disposeStatusBarInputLayer$1
+            this.handler.post(new Runnable() { // from class: com.android.wm.shell.windowdecor.viewholder.AppHandleViewHolder.disposeStatusBarInputLayer.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     AdditionalSystemViewContainer additionalSystemViewContainer2 = AppHandleViewHolder.this.statusBarInputLayer;

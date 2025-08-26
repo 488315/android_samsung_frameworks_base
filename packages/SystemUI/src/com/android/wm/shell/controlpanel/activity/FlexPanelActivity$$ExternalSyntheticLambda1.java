@@ -3,8 +3,8 @@ package com.android.wm.shell.controlpanel.activity;
 import android.provider.Settings;
 import com.android.systemui.R;
 import com.android.wm.shell.controlpanel.utils.CheckControlWindowState;
+import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FlexPanelActivity$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -16,7 +16,7 @@ public final /* synthetic */ class FlexPanelActivity$$ExternalSyntheticLambda1 i
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws JSONException {
         int i = this.$r8$classId;
         FlexPanelActivity flexPanelActivity = this.f$0;
         switch (i) {

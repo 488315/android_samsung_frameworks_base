@@ -11,7 +11,6 @@ import android.os.RemoteException;
 import android.service.translation.ITranslationCallback;
 import android.util.Log;
 import android.view.translation.ITranslationDirectManager;
-import android.view.translation.Translator;
 import com.android.internal.os.IResultReceiver;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -65,7 +64,7 @@ public class Translator {
 
         @Override // com.android.internal.os.IResultReceiver
         public void send(int i, Bundle bundle) {
-            IBinder iBinder = null;
+            IBinder binder = null;
             if (i == 2) {
                 this.mLatch.countDown();
                 Consumer<Translator> consumer = this.mCallback;
@@ -77,13 +76,13 @@ public class Translator {
             }
             if (bundle != null) {
                 this.mSessionId = bundle.getInt("sessionId");
-                iBinder = bundle.getBinder("binder");
-                if (iBinder == null) {
+                binder = bundle.getBinder("binder");
+                if (binder == null) {
                     Log.wtf(Translator.TAG, "No binder extra result");
                     return;
                 }
             }
-            this.mTranslator.setServiceBinder(iBinder);
+            this.mTranslator.setServiceBinder(binder);
             this.mLatch.countDown();
             Consumer<Translator> consumer2 = this.mCallback;
             if (consumer2 != null) {
@@ -184,7 +183,7 @@ public class Translator {
     }
 
     public void translate(TranslationRequest translationRequest, CancellationSignal cancellationSignal, Executor executor, Consumer<TranslationResponse> consumer) {
-        ICancellationSignal iCancellationSignal;
+        ICancellationSignal iCancellationSignalCreateTransport;
         Objects.requireNonNull(translationRequest, "Translation request cannot be null");
         Objects.requireNonNull(executor, "Executor cannot be null");
         Objects.requireNonNull(consumer, "Callback cannot be null");
@@ -192,13 +191,13 @@ public class Translator {
             throw new IllegalStateException("This translator has been destroyed");
         }
         if (cancellationSignal != null) {
-            iCancellationSignal = CancellationSignal.createTransport();
-            cancellationSignal.setRemote(iCancellationSignal);
+            iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+            cancellationSignal.setRemote(iCancellationSignalCreateTransport);
         } else {
-            iCancellationSignal = null;
+            iCancellationSignalCreateTransport = null;
         }
         try {
-            this.mDirectServiceBinder.onTranslationRequest(translationRequest, this.mId, iCancellationSignal, new TranslationResponseCallbackImpl(consumer, executor));
+            this.mDirectServiceBinder.onTranslationRequest(translationRequest, this.mId, iCancellationSignalCreateTransport, new TranslationResponseCallbackImpl(consumer, executor));
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling requestTranslate(): " + e);
         }
@@ -258,14 +257,14 @@ public class Translator {
             Runnable runnable = new Runnable() { // from class: android.view.translation.Translator$TranslationResponseCallbackImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Translator.TranslationResponseCallbackImpl.this.lambda$onTranslationResponse$0(translationResponse);
+                    this.f$0.lambda$onTranslationResponse$0(translationResponse);
                 }
             };
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(runnable);
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

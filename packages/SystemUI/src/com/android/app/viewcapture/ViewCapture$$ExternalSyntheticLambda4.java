@@ -8,13 +8,12 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ViewCapture$$ExternalSyntheticLambda4 implements Function {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ArrayList f$0;
 
-    public /* synthetic */ ViewCapture$$ExternalSyntheticLambda4(ArrayList arrayList, int i) {
+    public /* synthetic */ ViewCapture$$ExternalSyntheticLambda4(int i, ArrayList arrayList) {
         this.$r8$classId = i;
         this.f$0 = arrayList;
     }
@@ -26,17 +25,17 @@ public final /* synthetic */ class ViewCapture$$ExternalSyntheticLambda4 impleme
         switch (i) {
             case 0:
                 LooperExecutor looperExecutor = ViewCapture.MAIN_EXECUTOR;
-                return ((List) obj).stream().findFirst().map(new ViewCapture$$ExternalSyntheticLambda4(arrayList, 1));
+                return ((List) obj).stream().findFirst().map(new ViewCapture$$ExternalSyntheticLambda4(1, arrayList));
             default:
                 LooperExecutor looperExecutor2 = ViewCapture.MAIN_EXECUTOR;
-                MotionWindowData.Builder newBuilder = MotionWindowData.newBuilder();
+                MotionWindowData.Builder builderNewBuilder = MotionWindowData.newBuilder();
                 Internal.ProtobufList frameDataList = ((WindowData) obj).getFrameDataList();
-                newBuilder.copyOnWrite();
-                MotionWindowData.access$400((MotionWindowData) newBuilder.instance, frameDataList);
+                builderNewBuilder.copyOnWrite();
+                MotionWindowData.access$400((MotionWindowData) builderNewBuilder.instance, frameDataList);
                 List list = (List) arrayList.stream().map(new ViewCapture$$ExternalSyntheticLambda6()).collect(Collectors.toList());
-                newBuilder.copyOnWrite();
-                MotionWindowData.access$900((MotionWindowData) newBuilder.instance, list);
-                return (MotionWindowData) newBuilder.build();
+                builderNewBuilder.copyOnWrite();
+                MotionWindowData.access$900((MotionWindowData) builderNewBuilder.instance, list);
+                return (MotionWindowData) builderNewBuilder.build();
         }
     }
 }

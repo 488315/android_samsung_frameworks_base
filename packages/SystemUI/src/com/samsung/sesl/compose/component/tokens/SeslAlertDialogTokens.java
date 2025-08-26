@@ -1,23 +1,22 @@
 package com.samsung.sesl.compose.component.tokens;
 
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
-import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.Color;
+import com.android.systemui.bixby2.controller.NotificationController$$ExternalSyntheticOutline0;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslAlertDialogTokens {
     public static final Companion Companion = new Companion(null);
     public static final SeslAlertDialogTokens darkAlertDialogTokens;
     public static final SeslAlertDialogTokens lightAlertDialogTokens;
     public final long buttonTextColor;
+    public final long listTextColor;
     public final long messageTextColor;
     public final long titleTextColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,7 +26,6 @@ public final class SeslAlertDialogTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -45,6 +43,10 @@ public final class SeslAlertDialogTokens {
                 iArr[SeslAlertDialogColorSchemeKeyTokens.ButtonTextColor.ordinal()] = 3;
             } catch (NoSuchFieldError unused3) {
             }
+            try {
+                iArr[SeslAlertDialogColorSchemeKeyTokens.ListTextColor.ordinal()] = 4;
+            } catch (NoSuchFieldError unused4) {
+            }
             $EnumSwitchMapping$0 = iArr;
         }
     }
@@ -56,17 +58,19 @@ public final class SeslAlertDialogTokens {
         seslPaletteTokens.getClass();
         long j2 = SeslPaletteTokens.GRAY_TEXT_L2;
         seslPaletteTokens.getClass();
-        lightAlertDialogTokens = new SeslAlertDialogTokens(j, j2, j, null);
+        seslPaletteTokens.getClass();
+        lightAlertDialogTokens = new SeslAlertDialogTokens(j, j2, j, j, null);
         seslPaletteTokens.getClass();
         long j3 = SeslPaletteTokens.GRAY_TEXT_D1;
         seslPaletteTokens.getClass();
         long j4 = SeslPaletteTokens.GRAY_TEXT_D2;
         seslPaletteTokens.getClass();
-        darkAlertDialogTokens = new SeslAlertDialogTokens(j3, j4, j3, null);
+        seslPaletteTokens.getClass();
+        darkAlertDialogTokens = new SeslAlertDialogTokens(j3, j4, j3, j3, null);
     }
 
-    public /* synthetic */ SeslAlertDialogTokens(long j, long j2, long j3, DefaultConstructorMarker defaultConstructorMarker) {
-        this(j, j2, j3);
+    public /* synthetic */ SeslAlertDialogTokens(long j, long j2, long j3, long j4, DefaultConstructorMarker defaultConstructorMarker) {
+        this(j, j2, j3, j4);
     }
 
     public final boolean equals(Object obj) {
@@ -79,24 +83,25 @@ public final class SeslAlertDialogTokens {
         SeslAlertDialogTokens seslAlertDialogTokens = (SeslAlertDialogTokens) obj;
         long j = seslAlertDialogTokens.titleTextColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.titleTextColor, j) && ULong.m3427equalsimpl0(this.messageTextColor, seslAlertDialogTokens.messageTextColor) && ULong.m3427equalsimpl0(this.buttonTextColor, seslAlertDialogTokens.buttonTextColor);
+        return ULong.m3447equalsimpl0(this.titleTextColor, j) && ULong.m3447equalsimpl0(this.messageTextColor, seslAlertDialogTokens.messageTextColor) && ULong.m3447equalsimpl0(this.buttonTextColor, seslAlertDialogTokens.buttonTextColor) && ULong.m3447equalsimpl0(this.listTextColor, seslAlertDialogTokens.listTextColor);
     }
 
     public final int hashCode() {
         Color.Companion companion = Color.Companion;
         int i = ULong.$r8$clinit;
-        return Long.hashCode(this.buttonTextColor) + MoveResult$$ExternalSyntheticOutline0.m(Long.hashCode(this.titleTextColor) * 31, 31, this.messageTextColor);
+        return Long.hashCode(this.listTextColor) + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(Long.hashCode(this.titleTextColor) * 31, 31, this.messageTextColor), 31, this.buttonTextColor);
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.titleTextColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.messageTextColor);
-        return TransitionKt$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslAlertDialogTokens(titleTextColor=", m462toStringimpl, ", messageTextColor=", m462toStringimpl2, ", buttonTextColor="), Color.m462toStringimpl(this.buttonTextColor), ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.titleTextColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.messageTextColor);
+        return NotificationController$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslAlertDialogTokens(titleTextColor=", strM464toStringimpl, ", messageTextColor=", strM464toStringimpl2, ", buttonTextColor="), Color.m464toStringimpl(this.buttonTextColor), ", listTextColor=", Color.m464toStringimpl(this.listTextColor), ")");
     }
 
-    private SeslAlertDialogTokens(long j, long j2, long j3) {
+    private SeslAlertDialogTokens(long j, long j2, long j3, long j4) {
         this.titleTextColor = j;
         this.messageTextColor = j2;
         this.buttonTextColor = j3;
+        this.listTextColor = j4;
     }
 }

@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LSOAttributeSet implements Parcelable {
     public static final Parcelable.Creator<LSOAttributeSet> CREATOR = new Parcelable.Creator<LSOAttributeSet>() { // from class: com.samsung.android.knox.lockscreen.LSOAttributeSet.1
@@ -37,11 +36,11 @@ public final class LSOAttributeSet implements Parcelable {
     }
 
     public static HashMap<String, Object> convertBundleToValues(Bundle bundle) {
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         for (String str : bundle.keySet()) {
-            hashMap.put(str, bundle.get(str));
+            map.put(str, bundle.get(str));
         }
-        return hashMap;
+        return map;
     }
 
     public static LSOAttributeSet createFromParcel(Parcel parcel) {
@@ -293,22 +292,22 @@ public final class LSOAttributeSet implements Parcelable {
         return this.mValues.size();
     }
 
-    public byte[] toByteArray() {
+    public byte[] toByteArray() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream;
         ByteArrayOutputStream byteArrayOutputStream2 = null;
         try {
             byteArrayOutputStream = new ByteArrayOutputStream();
-            try {
-                new ObjectOutputStream(byteArrayOutputStream).writeObject(this.mValues);
-            } catch (IOException e) {
-                e = e;
-                byteArrayOutputStream2 = byteArrayOutputStream;
-                Log.e("LSO", "Exception: " + e);
-                byteArrayOutputStream = byteArrayOutputStream2;
-                return byteArrayOutputStream.toByteArray();
-            }
+        } catch (IOException e) {
+            e = e;
+        }
+        try {
+            new ObjectOutputStream(byteArrayOutputStream).writeObject(this.mValues);
         } catch (IOException e2) {
             e = e2;
+            byteArrayOutputStream2 = byteArrayOutputStream;
+            Log.e("LSO", "Exception: " + e);
+            byteArrayOutputStream = byteArrayOutputStream2;
+            return byteArrayOutputStream.toByteArray();
         }
         return byteArrayOutputStream.toByteArray();
     }
@@ -362,8 +361,8 @@ public final class LSOAttributeSet implements Parcelable {
         this.mValues.put(str, f);
     }
 
-    public LSOAttributeSet(HashMap<String, Object> hashMap) {
-        this.mValues = hashMap;
+    public LSOAttributeSet(HashMap<String, Object> map) {
+        this.mValues = map;
     }
 
     public void put(String str, Double d) {

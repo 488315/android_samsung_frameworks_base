@@ -20,14 +20,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityDelegateCompat {
     public static final View.AccessibilityDelegate DEFAULT_DELEGATE = new View.AccessibilityDelegate();
     public final AccessibilityDelegateAdapter mBridge;
     public final View.AccessibilityDelegate mOriginalDelegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AccessibilityDelegateAdapter extends View.AccessibilityDelegate {
         public final AccessibilityDelegateCompat mCompat;
 
@@ -56,7 +54,7 @@ public class AccessibilityDelegateCompat {
 
         @Override // android.view.View.AccessibilityDelegate
         public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
-            AccessibilityNodeInfoCompat wrap = AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo);
+            AccessibilityNodeInfoCompat accessibilityNodeInfoCompatWrap = AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo);
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             Boolean bool = (Boolean) new ViewCompat.AccessibilityViewProperty(R.id.tag_screen_reader_focusable, Boolean.class, 28) { // from class: androidx.core.view.ViewCompat.1
                 public AnonymousClass1(int i, Class cls, int i2) {
@@ -80,19 +78,19 @@ public class AccessibilityDelegateCompat {
                     return true ^ ((bool2 != null && bool2.booleanValue()) == (bool3 != null && bool3.booleanValue()));
                 }
             }.get(view);
-            wrap.mInfo.setScreenReaderFocusable(bool != null && bool.booleanValue());
+            accessibilityNodeInfoCompatWrap.mInfo.setScreenReaderFocusable(bool != null && bool.booleanValue());
             Boolean bool2 = (Boolean) new ViewCompat.AnonymousClass4(R.id.tag_accessibility_heading, Boolean.class, 28).get(view);
-            wrap.mInfo.setHeading(bool2 != null && bool2.booleanValue());
-            wrap.mInfo.setPaneTitle(ViewCompat.getAccessibilityPaneTitle(view));
-            wrap.mInfo.setStateDescription((CharSequence) new ViewCompat.AnonymousClass3(R.id.tag_state_description, CharSequence.class, 64, 30).get(view));
-            this.mCompat.onInitializeAccessibilityNodeInfo(view, wrap);
+            accessibilityNodeInfoCompatWrap.mInfo.setHeading(bool2 != null && bool2.booleanValue());
+            accessibilityNodeInfoCompatWrap.mInfo.setPaneTitle(ViewCompat.getAccessibilityPaneTitle(view));
+            accessibilityNodeInfoCompatWrap.mInfo.setStateDescription((CharSequence) new ViewCompat.AnonymousClass3(R.id.tag_state_description, CharSequence.class, 64, 30).get(view));
+            this.mCompat.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompatWrap);
             accessibilityNodeInfo.getText();
             List list = (List) view.getTag(R.id.tag_accessibility_actions);
             if (list == null) {
                 list = Collections.EMPTY_LIST;
             }
             for (int i = 0; i < list.size(); i++) {
-                wrap.addAction((AccessibilityNodeInfoCompat.AccessibilityActionCompat) list.get(i));
+                accessibilityNodeInfoCompatWrap.addAction((AccessibilityNodeInfoCompat.AccessibilityActionCompat) list.get(i));
             }
         }
 
@@ -155,14 +153,14 @@ public class AccessibilityDelegateCompat {
     }
 
     public boolean performAccessibilityAction(View view, int i, Bundle bundle) {
-        boolean z;
+        boolean zPerformAccessibilityAction;
         WeakReference weakReference;
         ClickableSpan clickableSpan;
         List list = (List) view.getTag(R.id.tag_accessibility_actions);
         if (list == null) {
             list = Collections.EMPTY_LIST;
         }
-        boolean z2 = false;
+        boolean z = false;
         int i2 = 0;
         while (true) {
             if (i2 >= list.size()) {
@@ -182,18 +180,18 @@ public class AccessibilityDelegateCompat {
                             Log.e("A11yActionCompat", "Failed to execute command with argument class ViewCommandArgument: ".concat(cls2 == null ? "null" : cls2.getName()), e);
                         }
                     }
-                    z = accessibilityViewCommand.perform(view);
+                    zPerformAccessibilityAction = accessibilityViewCommand.perform(view);
                 }
             } else {
                 i2++;
             }
         }
-        z = false;
-        if (!z) {
-            z = this.mOriginalDelegate.performAccessibilityAction(view, i, bundle);
+        zPerformAccessibilityAction = false;
+        if (!zPerformAccessibilityAction) {
+            zPerformAccessibilityAction = this.mOriginalDelegate.performAccessibilityAction(view, i, bundle);
         }
-        if (z || i != R.id.accessibility_action_clickable_span || bundle == null) {
-            return z;
+        if (zPerformAccessibilityAction || i != R.id.accessibility_action_clickable_span || bundle == null) {
+            return zPerformAccessibilityAction;
         }
         int i3 = bundle.getInt("ACCESSIBILITY_CLICKABLE_SPAN_ID", -1);
         SparseArray sparseArray = (SparseArray) view.getTag(R.id.tag_accessibility_clickable_spans);
@@ -207,13 +205,13 @@ public class AccessibilityDelegateCompat {
                 }
                 if (clickableSpan.equals(clickableSpanArr[i4])) {
                     clickableSpan.onClick(view);
-                    z2 = true;
+                    z = true;
                     break;
                 }
                 i4++;
             }
         }
-        return z2;
+        return z;
     }
 
     public void sendAccessibilityEvent(View view, int i) {

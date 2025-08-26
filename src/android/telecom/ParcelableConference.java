@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.android.internal.telecom.IVideoProvider;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,15 +15,15 @@ public final class ParcelableConference implements Parcelable {
     public static final Parcelable.Creator<ParcelableConference> CREATOR = new Parcelable.Creator<ParcelableConference>() { // from class: android.telecom.ParcelableConference.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public ParcelableConference createFromParcel(Parcel parcel) {
+        public ParcelableConference createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
             ClassLoader classLoader = ParcelableConference.class.getClassLoader();
             PhoneAccountHandle phoneAccountHandle = (PhoneAccountHandle) parcel.readParcelable(classLoader, PhoneAccountHandle.class);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             ArrayList arrayList = new ArrayList(2);
             parcel.readList(arrayList, classLoader, String.class);
-            long readLong = parcel.readLong();
-            return new ParcelableConference(phoneAccountHandle, readInt, readInt2, parcel.readInt(), arrayList, IVideoProvider.Stub.asInterface(parcel.readStrongBinder()), parcel.readInt(), readLong, parcel.readLong(), (StatusHints) parcel.readParcelable(classLoader, StatusHints.class), parcel.readBundle(classLoader), (Uri) parcel.readParcelable(classLoader, Uri.class), parcel.readInt(), parcel.readString(), parcel.readInt(), (DisconnectCause) parcel.readParcelable(classLoader, DisconnectCause.class), parcel.readInt() == 1, parcel.readInt());
+            long j = parcel.readLong();
+            return new ParcelableConference(phoneAccountHandle, i, i2, parcel.readInt(), arrayList, IVideoProvider.Stub.asInterface(parcel.readStrongBinder()), parcel.readInt(), j, parcel.readLong(), (StatusHints) parcel.readParcelable(classLoader, StatusHints.class), parcel.readBundle(classLoader), (Uri) parcel.readParcelable(classLoader, Uri.class), parcel.readInt(), parcel.readString(), parcel.readInt(), (DisconnectCause) parcel.readParcelable(classLoader, DisconnectCause.class), parcel.readInt() == 1, parcel.readInt());
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

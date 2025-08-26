@@ -1,17 +1,28 @@
 package com.android.systemui.notification;
 
+import android.app.INotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.ServiceManager;
 import android.util.Log;
+import android.util.Slog;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0;
 import com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
+import com.android.systemui.plugins.subscreen.SubRoom;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,7 +34,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationBackupRestoreManager {
     public static Cipher mCipher;
@@ -31,7 +41,6 @@ public class NotificationBackupRestoreManager {
     public static SecretKeySpec mSecretKey;
     public static String mSecurityPassword;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ERR_CODE {
         SUCCESS(0),
         UNKNOWN_ERROR(1),
@@ -52,7 +61,6 @@ public class NotificationBackupRestoreManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationBnRReceiver extends BroadcastReceiver {
         public Thread mBackupThread;
 
@@ -84,7 +92,7 @@ public class NotificationBackupRestoreManager {
                     if (intExtra != 2) {
                         Thread thread = new Thread(new Runnable(this) { // from class: com.android.systemui.notification.NotificationBackupRestoreManager.NotificationBnRReceiver.1
                             @Override // java.lang.Runnable
-                            public final void run() {
+                            public final void run() throws Throwable {
                                 ((NotificationBackupRestoreManager) Dependency.sDependency.getDependencyInner(NotificationBackupRestoreManager.class)).startBackup(context, "com.samsung.android.intent.action.RESPONSE_BACKUP_NOTIFICATION", stringExtra, stringExtra2, intExtra2, "", stringExtra3, list);
                             }
                         }, "REQUEST_BACKUP_NOTIFICATION");
@@ -114,35 +122,127 @@ public class NotificationBackupRestoreManager {
         new LinkedHashMap();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x014c A[Catch: IOException -> 0x0155, TRY_LEAVE, TryCatch #3 {IOException -> 0x0155, blocks: (B:33:0x0134, B:35:0x014c), top: B:32:0x0134 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0133  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:63:0x00e9 -> B:26:0x0121). Please report as a decompilation issue!!! */
+    /* JADX WARN: Can't wrap try/catch for region: R(26:0|2|(3:81|3|(1:5))|9|(1:11)|12|(1:14)|66|15|19|(3:77|21|(1:23))|26|27|(2:74|(2:69|28))|(3:83|29|30)|68|73|52|(1:54)(1:55)|71|56|(1:58)|62|64|65|(1:(0))) */
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x0155, code lost:
+    
+        r9 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x0159, code lost:
+    
+        r9.printStackTrace();
+     */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x012c  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x0133  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x014c A[Catch: IOException -> 0x0155, TRY_LEAVE, TryCatch #3 {IOException -> 0x0155, blocks: (B:56:0x0134, B:58:0x014c), top: B:71:0x0134 }] */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:33:0x00e9 -> B:68:0x0121). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int createBackupFile(int r9, java.lang.String r10, java.util.List r11) {
-        /*
-            Method dump skipped, instructions count: 351
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.notification.NotificationBackupRestoreManager.createBackupFile(int, java.lang.String, java.util.List):int");
+    public static int createBackupFile(int i, String str, List list) throws Throwable {
+        int i2;
+        FileOutputStream fileOutputStream;
+        Log.d("NotifBnRManager", "create backup file basePath=" + str);
+        try {
+            File file = new File(str + "notification_policy.xml");
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("NotifBnRManager", "basePath=" + str);
+        File file2 = new File(str);
+        if (!file2.exists()) {
+            Log.i("NotifBnRManager", file2.mkdir() + ", folder created last");
+        }
+        String str2 = file2.getPath() + "/notification_policy.xml";
+        File file3 = new File(file2.getPath() + "/notification_policy.xml");
+        if (file3.exists()) {
+            file3.delete();
+        }
+        try {
+            file3.createNewFile();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        Slog.d("NotifBnRManager", "copyBackupFile path=" + str2);
+        INotificationManager iNotificationManagerAsInterface = INotificationManager.Stub.asInterface(ServiceManager.getService(SubRoom.EXTRA_VALUE_NOTIFICATION));
+        int i3 = 0;
+        if (list != null) {
+            try {
+                if (list.size() > 0) {
+                    iNotificationManagerAsInterface.setRestoreBlockListForSS(list);
+                }
+            } catch (Exception e3) {
+                Slog.d("NotifBnRManager", "copyBackupFile Failed");
+                e3.printStackTrace();
+            }
+        }
+        byte[] backupPayload = iNotificationManagerAsInterface.getBackupPayload(0);
+        FileOutputStream fileOutputStream2 = null;
+        try {
+            try {
+                try {
+                    fileOutputStream = new FileOutputStream(str2);
+                } catch (Throwable th) {
+                    th = th;
+                }
+            } catch (Exception e4) {
+                e = e4;
+            }
+        } catch (Exception e5) {
+            e5.printStackTrace();
+        }
+        try {
+            fileOutputStream.write(backupPayload);
+            fileOutputStream.close();
+        } catch (Exception e6) {
+            e = e6;
+            fileOutputStream2 = fileOutputStream;
+            Slog.d("NotifBnRManager", "copyBackupFile Exception!! fout:" + fileOutputStream2);
+            e.printStackTrace();
+            if (fileOutputStream2 != null) {
+                fileOutputStream2.close();
+            }
+            if (file3.length() > 0) {
+            }
+            encrypt(file3, str + "/encrypt_notification_policy.xml", i);
+            if (file3.exists()) {
+            }
+            i3 = i2;
+            return i3 ^ 1;
+        } catch (Throwable th2) {
+            th = th2;
+            fileOutputStream2 = fileOutputStream;
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (Exception e7) {
+                    e7.printStackTrace();
+                }
+            }
+            throw th;
+        }
+        if (file3.length() > 0) {
+            Log.e("NotifBnRManager", "Backup file size error");
+            i2 = 0;
+        } else {
+            i2 = 1;
+        }
+        encrypt(file3, str + "/encrypt_notification_policy.xml", i);
+        if (file3.exists()) {
+            file3.delete();
+            Log.e("NotifBnRManager", "file delete!!!");
+        }
+        i3 = i2;
+        return i3 ^ 1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00cf, code lost:
-    
-        if (r3 != 0) goto L60;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00b8, code lost:
-    
-        r3.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00b6, code lost:
-    
-        if (r3 != 0) goto L60;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00b8 A[PHI: r2 r3 r10
+      0x00b8: PHI (r2v10 ??) = (r2v8 ??), (r2v11 ??) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]
+      0x00b8: PHI (r3v8 ??) = (r3v6 ??), (r3v9 ??) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]
+      0x00b8: PHI (r10v7 java.io.InputStream) = (r10v5 java.io.InputStream), (r10v8 java.io.InputStream) binds: [B:59:0x00b6, B:68:0x00cf] A[DONT_GENERATE, DONT_INLINE]] */
     /* JADX WARN: Type inference failed for: r2v10 */
     /* JADX WARN: Type inference failed for: r2v11, types: [java.io.OutputStream] */
     /* JADX WARN: Type inference failed for: r2v14 */
@@ -181,17 +281,147 @@ public class NotificationBackupRestoreManager {
     /* JADX WARN: Type inference failed for: r3v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.io.File decrypt(int r9, java.lang.String r10) {
-        /*
-            Method dump skipped, instructions count: 227
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.notification.NotificationBackupRestoreManager.decrypt(int, java.lang.String):java.io.File");
+    public static File decrypt(int i, String str) throws Throwable {
+        OutputStream outputStream;
+        InputStream inputStream;
+        File file = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/decrypt_notification_policy.xml"));
+        ?? fileInputStream = "/encrypt_notification_policy.xml";
+        ?? file2 = new File(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/encrypt_notification_policy.xml"));
+        InputStream inputStream2 = null;
+        try {
+            try {
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (IOException e) {
+            e = e;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Exception e2) {
+            e = e2;
+            file2 = 0;
+            fileInputStream = 0;
+        } catch (Throwable th2) {
+            th = th2;
+            file2 = 0;
+            fileInputStream = 0;
+        }
+        if (!file2.exists()) {
+            Log.e("NotifBnRManager", "decrypt: file is not found.encrypt_notification_policy.xml");
+            return null;
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        if (file2.length() > 0) {
+            fileInputStream = new FileInputStream((File) file2);
+            try {
+                InputStream inputStreamDecryptStream = decryptStream(fileInputStream, i);
+                try {
+                    file2 = new FileOutputStream(file);
+                    try {
+                        byte[] bArr = new byte[1024];
+                        while (true) {
+                            int i2 = inputStreamDecryptStream.read(bArr, 0, 1024);
+                            if (i2 == -1) {
+                                break;
+                            }
+                            file2.write(bArr, 0, i2);
+                        }
+                        inputStream2 = inputStreamDecryptStream;
+                        outputStream = file2;
+                        inputStream = fileInputStream;
+                    } catch (IOException e3) {
+                        inputStream2 = inputStreamDecryptStream;
+                        e = e3;
+                        file2 = file2;
+                        fileInputStream = fileInputStream;
+                        Log.d("NotifBnRManager", e.toString());
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                            fileInputStream.close();
+                        }
+                        return file;
+                    } catch (Exception e4) {
+                        inputStream2 = inputStreamDecryptStream;
+                        e = e4;
+                        file2 = file2;
+                        fileInputStream = fileInputStream;
+                        Log.d("NotifBnRManager", e.toString());
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                        }
+                        return file;
+                    } catch (Throwable th3) {
+                        inputStream2 = inputStreamDecryptStream;
+                        th = th3;
+                        if (inputStream2 != null) {
+                            inputStream2.close();
+                        }
+                        if (file2 != 0) {
+                            file2.close();
+                        }
+                        if (fileInputStream != 0) {
+                            fileInputStream.close();
+                        }
+                        throw th;
+                    }
+                } catch (IOException e5) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e5;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Exception e6) {
+                    inputStream2 = inputStreamDecryptStream;
+                    e = e6;
+                    file2 = 0;
+                    fileInputStream = fileInputStream;
+                } catch (Throwable th4) {
+                    file2 = 0;
+                    inputStream2 = inputStreamDecryptStream;
+                    th = th4;
+                }
+            } catch (IOException e7) {
+                e = e7;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Exception e8) {
+                e = e8;
+                file2 = 0;
+                fileInputStream = fileInputStream;
+            } catch (Throwable th5) {
+                th = th5;
+                file2 = 0;
+            }
+        } else {
+            outputStream = null;
+            inputStream = null;
+        }
+        if (inputStream2 != null) {
+            inputStream2.close();
+        }
+        if (outputStream != null) {
+            outputStream.close();
+        }
+        if (inputStream != null) {
+            inputStream.close();
+            return file;
+        }
+        return file;
     }
 
-    public static InputStream decryptStream(InputStream inputStream, int i) {
+    public static InputStream decryptStream(InputStream inputStream, int i) throws IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArr = new byte[mCipher.getBlockSize()];
         inputStream.read(bArr);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(bArr);
@@ -207,23 +437,11 @@ public class NotificationBackupRestoreManager {
         return new CipherInputStream(inputStream, mCipher);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00a8, code lost:
-    
-        if (r1 != 0) goto L51;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x0091, code lost:
-    
-        r1.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00ab, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x008f, code lost:
-    
-        if (r1 != 0) goto L51;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x0091 A[PHI: r1 r7 r8
+      0x0091: PHI (r1v8 ??) = (r1v6 ??), (r1v9 ??) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r7v6 java.io.FileInputStream) = (r7v4 java.io.FileInputStream), (r7v7 java.io.FileInputStream) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]
+      0x0091: PHI (r8v8 ??) = (r8v6 ??), (r8v9 ??) binds: [B:50:0x008f, B:59:0x00a8] A[DONT_GENERATE, DONT_INLINE]] */
     /* JADX WARN: Type inference failed for: r1v0, types: [java.io.File] */
     /* JADX WARN: Type inference failed for: r1v1 */
     /* JADX WARN: Type inference failed for: r1v10 */
@@ -256,17 +474,142 @@ public class NotificationBackupRestoreManager {
     /* JADX WARN: Type inference failed for: r8v9, types: [java.io.OutputStream] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void encrypt(java.io.File r6, java.lang.String r7, int r8) {
-        /*
-            Method dump skipped, instructions count: 188
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.notification.NotificationBackupRestoreManager.encrypt(java.io.File, java.lang.String, int):void");
+    public static void encrypt(File file, String str, int i) throws Throwable {
+        OutputStream outputStream;
+        FileOutputStream fileOutputStream;
+        OutputStream outputStream2;
+        FileOutputStream fileOutputStream2;
+        OutputStream outputStream3;
+        FileOutputStream fileOutputStream3;
+        ?? file2 = new File(str);
+        FileInputStream fileInputStream = null;
+        outputStreamEncryptStream = null;
+        outputStreamEncryptStream = null;
+        OutputStream outputStreamEncryptStream = null;
+        FileInputStream fileInputStream2 = null;
+        fileInputStream = null;
+        fileInputStream = null;
+        fileInputStream = null;
+        try {
+            try {
+                if (!file2.exists()) {
+                    file2.createNewFile();
+                }
+                if (file.length() > 0) {
+                    FileInputStream fileInputStream3 = new FileInputStream(file);
+                    try {
+                        FileOutputStream fileOutputStream4 = new FileOutputStream((File) file2);
+                        try {
+                            outputStreamEncryptStream = encryptStream(fileOutputStream4, i);
+                            byte[] bArr = new byte[1024];
+                            while (true) {
+                                int i2 = fileInputStream3.read(bArr, 0, 1024);
+                                if (i2 == -1) {
+                                    break;
+                                } else {
+                                    outputStreamEncryptStream.write(bArr, 0, i2);
+                                }
+                            }
+                            fileOutputStream = fileOutputStream4;
+                            outputStream = outputStreamEncryptStream;
+                            fileInputStream2 = fileInputStream3;
+                        } catch (IOException e) {
+                            fileOutputStream3 = fileOutputStream4;
+                            e = e;
+                            outputStream3 = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            file2 = fileOutputStream3;
+                            i = outputStream3;
+                            Log.d("NotifBnRManager", e.toString());
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                                file2.close();
+                            }
+                            return;
+                        } catch (Exception e2) {
+                            fileOutputStream2 = fileOutputStream4;
+                            e = e2;
+                            outputStream2 = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            file2 = fileOutputStream2;
+                            i = outputStream2;
+                            Log.d("NotifBnRManager", e.toString());
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                            }
+                            return;
+                        } catch (Throwable th) {
+                            file2 = fileOutputStream4;
+                            th = th;
+                            i = outputStreamEncryptStream;
+                            fileInputStream = fileInputStream3;
+                            if (fileInputStream != null) {
+                                fileInputStream.close();
+                            }
+                            if (i != 0) {
+                                i.close();
+                            }
+                            if (file2 != 0) {
+                                file2.close();
+                            }
+                            throw th;
+                        }
+                    } catch (IOException e3) {
+                        e = e3;
+                        outputStream3 = null;
+                        fileOutputStream3 = null;
+                    } catch (Exception e4) {
+                        e = e4;
+                        outputStream2 = null;
+                        fileOutputStream2 = null;
+                    } catch (Throwable th2) {
+                        th = th2;
+                        i = 0;
+                        file2 = 0;
+                    }
+                } else {
+                    outputStream = null;
+                    fileOutputStream = null;
+                }
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            } catch (Throwable th3) {
+                th = th3;
+            }
+        } catch (IOException e5) {
+            e = e5;
+            i = 0;
+            file2 = 0;
+        } catch (Exception e6) {
+            e = e6;
+            i = 0;
+            file2 = 0;
+        } catch (Throwable th4) {
+            th = th4;
+            i = 0;
+            file2 = 0;
+        }
     }
 
-    public static OutputStream encryptStream(OutputStream outputStream, int i) {
+    public static OutputStream encryptStream(OutputStream outputStream, int i) throws IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArr = new byte[mCipher.getBlockSize()];
         new SecureRandom().nextBytes(bArr);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(bArr);
@@ -288,7 +631,7 @@ public class NotificationBackupRestoreManager {
         return new SecretKeySpec(SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new PBEKeySpec(mSecurityPassword.toCharArray(), mSalt, 1000, 256)).getEncoded(), "AES");
     }
 
-    public static SecretKeySpec generateSHA256SecretKey() {
+    public static SecretKeySpec generateSHA256SecretKey() throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(mSecurityPassword.getBytes("UTF-8"));
         byte[] bArr = new byte[16];
@@ -296,107 +639,86 @@ public class NotificationBackupRestoreManager {
         return new SecretKeySpec(bArr, "AES");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006e A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x006e A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean loadRestoreFile(java.io.File r7, java.util.List r8) {
-        /*
-            java.lang.String r0 = "loadRestoreFile failed"
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = " filename="
-            r1.<init>(r2)
-            r1.append(r7)
-            java.lang.String r1 = r1.toString()
-            java.lang.String r2 = "NotifBnRManager"
-            android.util.Log.d(r2, r1)
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r3 = " filename path="
-            r1.<init>(r3)
-            java.lang.String r3 = r7.getPath()
-            r1.append(r3)
-            java.lang.String r1 = r1.toString()
-            android.util.Log.d(r2, r1)
-            r1 = 0
-            java.io.FileInputStream r3 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L4f java.lang.Exception -> L51
-            java.lang.String r4 = r7.getPath()     // Catch: java.lang.Throwable -> L4f java.lang.Exception -> L51
-            r3.<init>(r4)     // Catch: java.lang.Throwable -> L4f java.lang.Exception -> L51
-            long r4 = r7.length()     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            int r7 = (int) r4     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            byte[] r1 = new byte[r7]     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            r3.read(r1)     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            r3.close()     // Catch: java.lang.Exception -> L42
-            goto L61
-        L42:
-            r7 = move-exception
-            android.util.Log.d(r2, r0, r7)
-            goto L61
-        L47:
-            r7 = move-exception
-            r1 = r3
-            goto L83
-        L4a:
-            r7 = move-exception
-            r6 = r3
-            r3 = r1
-            r1 = r6
-            goto L53
-        L4f:
-            r7 = move-exception
-            goto L83
-        L51:
-            r7 = move-exception
-            r3 = r1
-        L53:
-            r7.printStackTrace()     // Catch: java.lang.Throwable -> L4f
-            if (r1 == 0) goto L60
-            r1.close()     // Catch: java.lang.Exception -> L5c
-            goto L60
-        L5c:
-            r7 = move-exception
-            android.util.Log.d(r2, r0, r7)
-        L60:
-            r1 = r3
-        L61:
-            java.lang.String r7 = "notification"
-            android.os.IBinder r7 = android.os.ServiceManager.getService(r7)
-            android.app.INotificationManager r7 = android.app.INotificationManager.Stub.asInterface(r7)
-            r0 = 0
-            if (r8 == 0) goto L7a
-            int r2 = r8.size()     // Catch: java.lang.Exception -> L78
-            if (r2 <= 0) goto L7a
-            r7.setRestoreBlockListForSS(r8)     // Catch: java.lang.Exception -> L78
-            goto L7a
-        L78:
-            r7 = move-exception
-            goto L7f
-        L7a:
-            r7.applyRestore(r1, r0)     // Catch: java.lang.Exception -> L78
-            r0 = 1
-            goto L82
-        L7f:
-            r7.printStackTrace()
-        L82:
-            return r0
-        L83:
-            if (r1 == 0) goto L8d
-            r1.close()     // Catch: java.lang.Exception -> L89
-            goto L8d
-        L89:
-            r8 = move-exception
-            android.util.Log.d(r2, r0, r8)
-        L8d:
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.notification.NotificationBackupRestoreManager.loadRestoreFile(java.io.File, java.util.List):boolean");
+    public static boolean loadRestoreFile(File file, List list) throws Throwable {
+        byte[] bArr;
+        FileInputStream fileInputStream;
+        Log.d("NotifBnRManager", " filename=" + file);
+        Log.d("NotifBnRManager", " filename path=" + file.getPath());
+        FileInputStream fileInputStream2 = null;
+        byte[] bArr2 = null;
+        fileInputStream2 = null;
+        try {
+            try {
+                fileInputStream = new FileInputStream(file.getPath());
+            } catch (Exception e) {
+                e = e;
+                bArr = null;
+            }
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            bArr2 = new byte[(int) file.length()];
+            fileInputStream.read(bArr2);
+            try {
+                fileInputStream.close();
+            } catch (Exception e2) {
+                Log.d("NotifBnRManager", "loadRestoreFile failed", e2);
+            }
+        } catch (Exception e3) {
+            e = e3;
+            bArr = bArr2;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (Exception e4) {
+                    Log.d("NotifBnRManager", "loadRestoreFile failed", e4);
+                }
+            }
+            bArr2 = bArr;
+            INotificationManager iNotificationManagerAsInterface = INotificationManager.Stub.asInterface(ServiceManager.getService(SubRoom.EXTRA_VALUE_NOTIFICATION));
+            if (list != null) {
+            }
+            iNotificationManagerAsInterface.applyRestore(bArr2, 0);
+            return true;
+        } catch (Throwable th2) {
+            th = th2;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (Exception e5) {
+                    Log.d("NotifBnRManager", "loadRestoreFile failed", e5);
+                }
+            }
+            throw th;
+        }
+        INotificationManager iNotificationManagerAsInterface2 = INotificationManager.Stub.asInterface(ServiceManager.getService(SubRoom.EXTRA_VALUE_NOTIFICATION));
+        if (list != null) {
+            try {
+                if (list.size() > 0) {
+                    iNotificationManagerAsInterface2.setRestoreBlockListForSS(list);
+                }
+            } catch (Exception e6) {
+                e6.printStackTrace();
+                return false;
+            }
+        }
+        iNotificationManagerAsInterface2.applyRestore(bArr2, 0);
+        return true;
     }
 
     public static void sendResponse(Context context, String str, int i, ERR_CODE err_code, String str2, String str3) {
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, " action=", str, " resultCode=", " errorCode=");
-        m888m.append(err_code);
-        m888m.append(" requiredSize=0");
-        Log.d("NotifBnRManager", m888m.toString());
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, " action=", str, " resultCode=", " errorCode=");
+        sbM890m.append(err_code);
+        sbM890m.append(" requiredSize=0");
+        Log.d("NotifBnRManager", sbM890m.toString());
         Intent intent = new Intent();
         intent.setAction(str);
         intent.putExtra("RESULT", i);
@@ -410,7 +732,7 @@ public class NotificationBackupRestoreManager {
         Log.d("NotifBnRManager", "sendBroadcast. ");
     }
 
-    public static void streamCrypt(String str) {
+    public static void streamCrypt(String str) throws NoSuchAlgorithmException {
         mSecurityPassword = str;
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(mSecurityPassword.getBytes("UTF-8"));
@@ -420,18 +742,18 @@ public class NotificationBackupRestoreManager {
         mSecretKey = new SecretKeySpec(bArr, "AES");
     }
 
-    public void startBackup(Context context, String str, String str2, String str3, int i, String str4, String str5, List<String> list) {
+    public void startBackup(Context context, String str, String str2, String str3, int i, String str4, String str5, List<String> list) throws Throwable {
         MediaSessions$H$$ExternalSyntheticOutline0.m("start backup basePath=", str2, " source=", str3, "NotifBnRManager");
         ERR_CODE err_code = ERR_CODE.SUCCESS;
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "/");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "/");
         try {
             streamCrypt(str5);
-            int createBackupFile = createBackupFile(i, m, list);
-            Log.d("NotifBnRManager", "resultCode=" + createBackupFile);
-            if (createBackupFile == 1) {
+            int iCreateBackupFile = createBackupFile(i, strM, list);
+            Log.d("NotifBnRManager", "resultCode=" + iCreateBackupFile);
+            if (iCreateBackupFile == 1) {
                 err_code = ERR_CODE.INVALID_DATA;
             }
-            sendResponse(context, str, createBackupFile, err_code, str3, str4);
+            sendResponse(context, str, iCreateBackupFile, err_code, str3, str4);
         } catch (Exception e) {
             sendResponse(context, "com.samsung.android.intent.action.RESPONSE_BACKUP_NOTIFICATION", 1, ERR_CODE.INVALID_DATA, str3, str4);
             e.printStackTrace();
@@ -442,10 +764,10 @@ public class NotificationBackupRestoreManager {
         int i2;
         MediaSessions$H$$ExternalSyntheticOutline0.m("start restore basePath=", str2, " source=", str3, "NotifBnRManager");
         ERR_CODE err_code = ERR_CODE.SUCCESS;
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "/");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "/");
         try {
             streamCrypt(str4);
-            if (loadRestoreFile(decrypt(i, m), list)) {
+            if (loadRestoreFile(decrypt(i, strM), list)) {
                 i2 = 0;
             } else {
                 err_code = ERR_CODE.INVALID_DATA;

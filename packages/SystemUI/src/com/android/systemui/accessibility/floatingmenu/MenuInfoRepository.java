@@ -17,7 +17,6 @@ import com.android.systemui.Prefs;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuInfoRepository {
     public static final boolean DEBUG;
@@ -34,14 +33,13 @@ public class MenuInfoRepository {
     public final MenuInfoRepository$$ExternalSyntheticLambda0 mA11yServicesStateChangeListener = new AccessibilityManager.AccessibilityServicesStateChangeListener() { // from class: com.android.systemui.accessibility.floatingmenu.MenuInfoRepository$$ExternalSyntheticLambda0
         @Override // android.view.accessibility.AccessibilityManager.AccessibilityServicesStateChangeListener
         public final void onAccessibilityServicesStateChanged(AccessibilityManager accessibilityManager) {
-            MenuInfoRepository menuInfoRepository = MenuInfoRepository.this;
+            MenuInfoRepository menuInfoRepository = this.f$0;
             boolean z = MenuInfoRepository.DEBUG;
             menuInfoRepository.mSettingsContentsCallback.onTargetFeaturesChanged(AccessibilityTargetHelper.getTargets(menuInfoRepository.mContext, 1));
         }
     };
     public final MenuInfoRepository$$ExternalSyntheticLambda1 mHearingDeviceStatusListener = new MenuInfoRepository$$ExternalSyntheticLambda1(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnContentsChanged {
         void onDevicesConnectionStatusChanged(int i);
 
@@ -86,11 +84,11 @@ public class MenuInfoRepository {
         this.mComponentCallbacks = new ComponentCallbacks() { // from class: com.android.systemui.accessibility.floatingmenu.MenuInfoRepository.4
             @Override // android.content.ComponentCallbacks
             public final void onConfigurationChanged(Configuration configuration) {
-                int diff = configuration.diff(MenuInfoRepository.this.mConfiguration);
+                int iDiff = configuration.diff(MenuInfoRepository.this.mConfiguration);
                 if (MenuInfoRepository.DEBUG) {
-                    Log.d("MenuInfoRepository", "onConfigurationChanged = " + Configuration.configurationDiffToString(diff));
+                    Log.d("MenuInfoRepository", "onConfigurationChanged = " + Configuration.configurationDiffToString(iDiff));
                 }
-                if ((diff & 4) != 0) {
+                if ((iDiff & 4) != 0) {
                     MenuInfoRepository menuInfoRepository = MenuInfoRepository.this;
                     menuInfoRepository.mSettingsContentsCallback.onTargetFeaturesChanged(AccessibilityTargetHelper.getTargets(menuInfoRepository.mContext, 1));
                 }
@@ -102,14 +100,14 @@ public class MenuInfoRepository {
             }
         };
         this.mContext = context;
-        Context createContextAsUser = context.createContextAsUser(UserHandle.of(secureSettings.getRealUserHandle(-2)), 0);
+        Context contextCreateContextAsUser = context.createContextAsUser(UserHandle.of(secureSettings.getRealUserHandle(-2)), 0);
         this.mAccessibilityManager = accessibilityManager;
         Configuration configuration = new Configuration(context.getResources().getConfiguration());
         this.mConfiguration = configuration;
         this.mSettingsContentsCallback = onContentsChanged;
         this.mSecureSettings = secureSettings;
         this.mHearingAidDeviceManager = hearingAidDeviceManager;
-        String string = Prefs.get(createContextAsUser).getString("AccessibilityFloatingMenuPosition", null);
+        String string = Prefs.get(contextCreateContextAsUser).getString("AccessibilityFloatingMenuPosition", null);
         float f = configuration.getLayoutDirection() == 1 ? 0.0f : 1.0f;
         if (TextUtils.isEmpty(string)) {
             new Position(f, 0.77f);

@@ -2,10 +2,10 @@ package com.android.keyguard;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.widget.Switch;
 import com.android.systemui.widget.SystemUIImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PasswordSwitch extends SystemUIImageView {
     public PasswordSwitch(Context context) {
@@ -15,6 +15,15 @@ public class PasswordSwitch extends SystemUIImageView {
     @Override // android.widget.ImageView, android.view.View
     public final CharSequence getAccessibilityClassName() {
         return Switch.class.getName();
+    }
+
+    @Override // android.view.View, android.view.KeyEvent.Callback
+    public final boolean onKeyDown(int i, KeyEvent keyEvent) {
+        if (i != 66) {
+            return super.onKeyDown(i, keyEvent);
+        }
+        performClick();
+        return true;
     }
 
     public PasswordSwitch(Context context, AttributeSet attributeSet) {

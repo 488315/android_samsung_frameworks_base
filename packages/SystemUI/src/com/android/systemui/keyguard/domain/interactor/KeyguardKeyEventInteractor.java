@@ -12,7 +12,6 @@ import com.android.systemui.power.shared.model.WakefulnessModel;
 import com.android.systemui.shade.ShadeController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardKeyEventInteractor {
     public final Integer[] IGNORED_EXT_KEYCODE = {26, 27, 126, 85, 85, 91, 79, 86, 87, 88, 89, 130, 90, 222, 24, 25, 164};
@@ -48,7 +47,7 @@ public final class KeyguardKeyEventInteractor {
         if (!statusBarKeyguardViewManager.shouldDismissOnMenuPressed()) {
             return false;
         }
-        statusBarKeyguardViewManager.dismissWithAction(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardKeyEventInteractor$dispatchMenuKeyEvent$1
+        statusBarKeyguardViewManager.dismissWithAction(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardKeyEventInteractor.dispatchMenuKeyEvent.1
             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
             public final boolean onDismiss() {
                 return false;

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingAidAudioRoutingHelper {
     public final AudioManager mAudioManager;
@@ -47,14 +46,14 @@ public class HearingAidAudioRoutingHelper {
 
     public final boolean removePreferredDeviceForStrategies(List list) {
         Iterator it = list.iterator();
-        boolean z = true;
+        boolean zRemovePreferredDeviceForStrategy = true;
         while (it.hasNext()) {
             AudioProductStrategy audioProductStrategy = (AudioProductStrategy) it.next();
             if (this.mAudioManager.getPreferredDeviceForStrategy(audioProductStrategy) != null) {
-                z &= this.mAudioManager.removePreferredDeviceForStrategy(audioProductStrategy);
+                zRemovePreferredDeviceForStrategy &= this.mAudioManager.removePreferredDeviceForStrategy(audioProductStrategy);
             }
         }
-        return z;
+        return zRemovePreferredDeviceForStrategy;
     }
 
     public final boolean setPreferredInputDeviceForCalls(CachedBluetoothDevice cachedBluetoothDevice, int i) {

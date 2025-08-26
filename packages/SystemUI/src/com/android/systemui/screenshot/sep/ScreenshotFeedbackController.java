@@ -13,7 +13,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.samsung.android.feature.SemCscFeature;
 import com.sec.ims.presence.ServiceTuple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenshotFeedbackController {
     public final ScreenshotCaptureSound mCaptureSound;
@@ -43,19 +42,19 @@ public class ScreenshotFeedbackController {
     }
 
     public final void semPlayCameraSound() {
-        boolean equals = SystemProperties.get("service.camera.running", "0").equals("1");
-        boolean equals2 = SystemProperties.get("service.camera.rec.running", "0").equals("1");
-        boolean equals3 = SystemProperties.get("service.camera.sfs.running", "0").equals("1");
-        boolean equals4 = SystemProperties.get("service.bioface.authenticating", "0").equals("1");
+        boolean zEquals = SystemProperties.get("service.camera.running", "0").equals("1");
+        boolean zEquals2 = SystemProperties.get("service.camera.rec.running", "0").equals("1");
+        boolean zEquals3 = SystemProperties.get("service.camera.sfs.running", "0").equals("1");
+        boolean zEquals4 = SystemProperties.get("service.bioface.authenticating", "0").equals("1");
         boolean z = Settings.Secure.getInt(this.mContext.getContentResolver(), "skip_adaptive_sound", 0) == 1;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("isCameraRunning = ", ", isRecordRunning = ", ", isSmartStayRunning = ", equals, equals2);
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, equals3, ", isVtCallRunning = false, isBioFaceRunning = ", equals4, ", isAdaptiveBrightness = ");
-        m.append(z);
-        Log.i("Screenshot", m.toString());
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("isCameraRunning = ", ", isRecordRunning = ", ", isSmartStayRunning = ", zEquals, zEquals2);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zEquals3, ", isVtCallRunning = false, isBioFaceRunning = ", zEquals4, ", isAdaptiveBrightness = ");
+        sbM.append(z);
+        Log.i("Screenshot", sbM.toString());
         boolean z2 = SemCscFeature.getInstance().getBoolean("CscFeature_Framework_EnableScrCaptureSoundOnlyInCamera", false);
         ScreenshotCaptureSound screenshotCaptureSound = this.mCaptureSound;
         if (z2) {
-            if (!equals || (!((!equals2) & (!equals3)) || !(!equals4)) || z) {
+            if (!zEquals || (!((!zEquals2) & (!zEquals3)) || !(!zEquals4)) || z) {
                 return;
             }
             Log.i("Screenshot", "Camera is running. Play capture sound!");
@@ -63,7 +62,7 @@ public class ScreenshotFeedbackController {
             return;
         }
         int ringerMode = ((AudioManager) this.mContext.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO)).getRingerMode();
-        if (Settings.System.getInt(this.mContext.getContentResolver(), "csc_pref_camera_forced_shuttersound_key", 0) == 1 && equals && !equals3 && !equals4 && !z) {
+        if (Settings.System.getInt(this.mContext.getContentResolver(), "csc_pref_camera_forced_shuttersound_key", 0) == 1 && zEquals && !zEquals3 && !zEquals4 && !z) {
             Log.i("Screenshot", "[forcedShutterSound] Camera is running!!!!");
             screenshotCaptureSound.play(true);
             return;

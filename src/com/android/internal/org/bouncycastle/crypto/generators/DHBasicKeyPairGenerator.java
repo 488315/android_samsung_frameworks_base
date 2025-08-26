@@ -28,7 +28,7 @@ public class DHBasicKeyPairGenerator implements AsymmetricCipherKeyPairGenerator
     public AsymmetricCipherKeyPair generateKeyPair() {
         DHKeyGeneratorHelper dHKeyGeneratorHelper = DHKeyGeneratorHelper.INSTANCE;
         DHParameters parameters = this.param.getParameters();
-        BigInteger calculatePrivate = dHKeyGeneratorHelper.calculatePrivate(parameters, this.param.getRandom());
-        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DHPublicKeyParameters(dHKeyGeneratorHelper.calculatePublic(parameters, calculatePrivate), parameters), (AsymmetricKeyParameter) new DHPrivateKeyParameters(calculatePrivate, parameters));
+        BigInteger bigIntegerCalculatePrivate = dHKeyGeneratorHelper.calculatePrivate(parameters, this.param.getRandom());
+        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DHPublicKeyParameters(dHKeyGeneratorHelper.calculatePublic(parameters, bigIntegerCalculatePrivate), parameters), (AsymmetricKeyParameter) new DHPrivateKeyParameters(bigIntegerCalculatePrivate, parameters));
     }
 }

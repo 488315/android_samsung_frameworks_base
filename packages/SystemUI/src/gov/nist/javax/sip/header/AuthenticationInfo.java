@@ -5,7 +5,6 @@ import gov.nist.core.NameValue;
 import java.text.ParseException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AuthenticationInfo extends ParametersHeader implements Header {
     private static final long serialVersionUID = -4371927900917127057L;
@@ -21,7 +20,7 @@ public final class AuthenticationInfo extends ParametersHeader implements Header
     }
 
     @Override // gov.nist.javax.sip.header.ParametersHeader
-    public final void setParameter(String str, String str2) {
+    public final void setParameter(String str, String str2) throws ParseException {
         if (str == null) {
             throw new NullPointerException("null name");
         }

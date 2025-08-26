@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BrightLineFalsingManager implements FalsingManager {
     public static final boolean DEBUG = Log.isLoggable("FalsingManager", 3);
@@ -52,28 +51,24 @@ public class BrightLineFalsingManager implements FalsingManager {
     public final SingleTapClassifier mSingleTapClassifier;
     public final boolean mTestHarness;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.classifier.BrightLineFalsingManager$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DebugSwipeRecord {
         public final int mInteractionType;
         public final boolean mIsFalse;
@@ -86,7 +81,6 @@ public class BrightLineFalsingManager implements FalsingManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class XYDt {
         public final int mDT;
         public final int mX;
@@ -230,10 +224,10 @@ public class BrightLineFalsingManager implements FalsingManager {
         HistoryTracker historyTracker = this.mHistoryTracker;
         historyTracker.falseBelief();
         historyTracker.falseConfidence();
-        FalsingClassifier.Result calculateFalsingResult = this.mDoubleTapClassifier.calculateFalsingResult(7);
-        this.mPriorResults = Collections.singleton(calculateFalsingResult);
-        calculateFalsingResult.getReason();
-        return calculateFalsingResult.mFalsed;
+        FalsingClassifier.Result resultCalculateFalsingResult = this.mDoubleTapClassifier.calculateFalsingResult(7);
+        this.mPriorResults = Collections.singleton(resultCalculateFalsingResult);
+        resultCalculateFalsingResult.getReason();
+        return resultCalculateFalsingResult.mFalsed;
     }
 
     @Override // com.android.systemui.plugins.FalsingManager
@@ -254,9 +248,9 @@ public class BrightLineFalsingManager implements FalsingManager {
             }
         }
         FalsingDataProvider falsingDataProvider = this.mDataProvider;
-        FalsingClassifier.Result isTap = this.mLongTapClassifier.isTap(falsingDataProvider.getRecentMotionEvents().isEmpty() ? falsingDataProvider.mPriorMotionEvents : falsingDataProvider.getRecentMotionEvents(), d);
-        this.mPriorResults = Collections.singleton(isTap);
-        boolean z = isTap.mFalsed;
+        FalsingClassifier.Result resultIsTap = this.mLongTapClassifier.isTap(falsingDataProvider.getRecentMotionEvents().isEmpty() ? falsingDataProvider.mPriorMotionEvents : falsingDataProvider.getRecentMotionEvents(), d);
+        this.mPriorResults = Collections.singleton(resultIsTap);
+        boolean z = resultIsTap.mFalsed;
         if (z) {
             return z;
         }
@@ -268,100 +262,48 @@ public class BrightLineFalsingManager implements FalsingManager {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00a2 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0044  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0026  */
     @Override // com.android.systemui.plugins.FalsingManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isFalseTap(int r13) {
-        /*
-            r12 = this;
-            r12.checkDestroyed()
-            r0 = 7
-            boolean r0 = r12.skipFalsing(r0)
-            r1 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-            r3 = 0
-            if (r0 == 0) goto L14
-            java.util.Collection r13 = getPassedResult(r1)
-            r12.mPriorResults = r13
-            return r3
-        L14:
-            r4 = 4591870180066957722(0x3fb999999999999a, double:0.1)
-            r0 = 1
-            r6 = 0
-            if (r13 == 0) goto L26
-            if (r13 == r0) goto L34
-            r8 = 2
-            if (r13 == r8) goto L2e
-            r8 = 3
-            if (r13 == r8) goto L28
-        L26:
-            r8 = r6
-            goto L35
-        L28:
-            r8 = 4603579539098121011(0x3fe3333333333333, double:0.6)
-            goto L35
-        L2e:
-            r8 = 4599075939470750515(0x3fd3333333333333, double:0.3)
-            goto L35
-        L34:
-            r8 = r4
-        L35:
-            com.android.systemui.classifier.FalsingDataProvider r13 = r12.mDataProvider
-            java.util.List r10 = r13.getRecentMotionEvents()
-            boolean r10 = r10.isEmpty()
-            if (r10 == 0) goto L44
-            java.util.List r10 = r13.mPriorMotionEvents
-            goto L48
-        L44:
-            java.util.List r10 = r13.getRecentMotionEvents()
-        L48:
-            com.android.systemui.classifier.SingleTapClassifier r11 = r12.mSingleTapClassifier
-            com.android.systemui.classifier.FalsingClassifier$Result r8 = r11.isTap(r10, r8)
-            java.util.Set r9 = java.util.Collections.singleton(r8)
-            r12.mPriorResults = r9
-            boolean r8 = r8.mFalsed
-            if (r8 != 0) goto La2
-            boolean r13 = r13.mJustUnlockedWithFace
-            if (r13 == 0) goto L63
-            java.util.Collection r13 = getPassedResult(r1)
-            r12.mPriorResults = r13
-            return r3
-        L63:
-            boolean r13 = r12.isFalseDoubleTap()
-            if (r13 != 0) goto L6a
-            return r3
-        L6a:
-            com.android.systemui.classifier.HistoryTracker r13 = r12.mHistoryTracker
-            double r1 = r13.falseBelief()
-            r8 = 4604480259023595110(0x3fe6666666666666, double:0.7)
-            int r13 = (r1 > r8 ? 1 : (r1 == r8 ? 0 : -1))
-            if (r13 <= 0) goto L9b
-            java.lang.Class r13 = r12.getClass()
-            java.lang.String r13 = r13.getSimpleName()
-            java.lang.String r1 = "bad history"
-            com.android.systemui.classifier.FalsingClassifier$Result r13 = com.android.systemui.classifier.FalsingClassifier.Result.falsed(r6, r13, r1)
-            java.util.Set r13 = java.util.Collections.singleton(r13)
-            r12.mPriorResults = r13
-            java.util.List r12 = r12.mFalsingTapListeners
-            com.android.systemui.classifier.BrightLineFalsingManager$$ExternalSyntheticLambda0 r13 = new com.android.systemui.classifier.BrightLineFalsingManager$$ExternalSyntheticLambda0
-            r1 = 0
-            r13.<init>(r1)
-            java.util.ArrayList r12 = (java.util.ArrayList) r12
-            r12.forEach(r13)
-            return r0
-        L9b:
-            java.util.Collection r13 = getPassedResult(r4)
-            r12.mPriorResults = r13
-            return r3
-        La2:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.classifier.BrightLineFalsingManager.isFalseTap(int):boolean");
+    public final boolean isFalseTap(int i) {
+        double d;
+        checkDestroyed();
+        if (skipFalsing(7)) {
+            this.mPriorResults = getPassedResult(1.0d);
+            return false;
+        }
+        if (i == 0) {
+            d = 0.0d;
+        } else if (i == 1) {
+            d = 0.1d;
+        } else if (i == 2) {
+            d = 0.3d;
+        } else if (i == 3) {
+            d = 0.6d;
+        }
+        FalsingDataProvider falsingDataProvider = this.mDataProvider;
+        FalsingClassifier.Result resultIsTap = this.mSingleTapClassifier.isTap(falsingDataProvider.getRecentMotionEvents().isEmpty() ? falsingDataProvider.mPriorMotionEvents : falsingDataProvider.getRecentMotionEvents(), d);
+        this.mPriorResults = Collections.singleton(resultIsTap);
+        boolean z = resultIsTap.mFalsed;
+        if (z) {
+            return z;
+        }
+        if (falsingDataProvider.mJustUnlockedWithFace) {
+            this.mPriorResults = getPassedResult(1.0d);
+            return false;
+        }
+        if (!isFalseDoubleTap()) {
+            return false;
+        }
+        if (this.mHistoryTracker.falseBelief() <= 0.7d) {
+            this.mPriorResults = getPassedResult(0.1d);
+            return false;
+        }
+        this.mPriorResults = Collections.singleton(FalsingClassifier.Result.falsed(0.0d, getClass().getSimpleName(), "bad history"));
+        ((ArrayList) this.mFalsingTapListeners).forEach(new BrightLineFalsingManager$$ExternalSyntheticLambda0(0));
+        return true;
     }
 
     @Override // com.android.systemui.plugins.FalsingManager
@@ -376,15 +318,15 @@ public class BrightLineFalsingManager implements FalsingManager {
         this.mPriorResults = (Collection) this.mClassifiers.stream().map(new Function() { // from class: com.android.systemui.classifier.BrightLineFalsingManager$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                BrightLineFalsingManager brightLineFalsingManager = BrightLineFalsingManager.this;
+                BrightLineFalsingManager brightLineFalsingManager = this.f$0;
                 int i2 = i;
                 boolean[] zArr2 = zArr;
                 HistoryTracker historyTracker = brightLineFalsingManager.mHistoryTracker;
                 historyTracker.falseBelief();
                 historyTracker.falseConfidence();
-                FalsingClassifier.Result calculateFalsingResult = ((FalsingClassifier) obj).calculateFalsingResult(i2);
-                zArr2[0] = zArr2[0] | calculateFalsingResult.mFalsed;
-                return calculateFalsingResult;
+                FalsingClassifier.Result resultCalculateFalsingResult = ((FalsingClassifier) obj).calculateFalsingResult(i2);
+                zArr2[0] = zArr2[0] | resultCalculateFalsingResult.mFalsed;
+                return resultCalculateFalsingResult;
             }
         }).collect(Collectors.toList());
         if (i == 18) {
@@ -422,7 +364,7 @@ public class BrightLineFalsingManager implements FalsingManager {
         this.mClassifiers.forEach(new Consumer() { // from class: com.android.systemui.classifier.BrightLineFalsingManager$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                FalsingManager.ProximityEvent proximityEvent2 = FalsingManager.ProximityEvent.this;
+                FalsingManager.ProximityEvent proximityEvent2 = proximityEvent;
                 boolean z = BrightLineFalsingManager.DEBUG;
                 ((FalsingClassifier) obj).onProximityEvent(proximityEvent2);
             }

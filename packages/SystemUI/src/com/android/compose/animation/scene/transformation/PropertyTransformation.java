@@ -2,14 +2,11 @@ package com.android.compose.animation.scene.transformation;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface PropertyTransformation extends Transformation {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Property {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Alpha extends Property {
             public static final Alpha INSTANCE = new Alpha();
 
@@ -30,7 +27,6 @@ public interface PropertyTransformation extends Transformation {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Offset extends Property {
             public static final Offset INSTANCE = new Offset();
 
@@ -51,7 +47,6 @@ public interface PropertyTransformation extends Transformation {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Scale extends Property {
             public static final Scale INSTANCE = null;
 
@@ -76,7 +71,6 @@ public interface PropertyTransformation extends Transformation {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Size extends Property {
             public static final Size INSTANCE = null;
 

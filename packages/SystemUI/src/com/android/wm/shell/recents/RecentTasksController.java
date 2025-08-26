@@ -5,12 +5,15 @@ import android.app.ActivityTaskManager;
 import android.app.KeyguardManager;
 import android.app.TaskInfo;
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.IInterface;
 import android.os.RemoteException;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseIntArray;
+import android.window.DesktopExperienceFlags;
 import android.window.DesktopModeFlags;
 import android.window.WindowContainerToken;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
@@ -22,6 +25,7 @@ import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.common.TaskStackListenerCallback;
 import com.android.wm.shell.common.TaskStackListenerImpl;
 import com.android.wm.shell.desktopmode.DesktopRepository;
+import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.desktopmode.DesktopUserRepositories;
 import com.android.wm.shell.desktopmode.DesktopWallpaperActivity;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
@@ -50,18 +54,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RecentTasksController implements TaskStackListenerCallback, RemoteCallable, DesktopRepository.ActiveTasksListener, TaskStackTransitionObserver.TaskStackTransitionObserverListener, UserChangeListener {
     public final ActivityTaskManager mActivityTaskManager;
     public final Context mContext;
     public final DesktopState mDesktopState;
+    public DesktopTasksController mDesktopTasksController;
     public final Optional mDesktopUserRepositories;
     public boolean mIsSplitTaskIdValidationChecked;
     public IRecentTasksListener mListener;
@@ -84,14 +89,12 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
     public final RecentTasksImpl mImpl = new RecentTasksImpl(this, 0);
     public RecentsTransitionHandler mTransitionHandler = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IRecentTasksImpl extends IRecentTasks$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public RecentTasksController mController;
         public final SingleInstanceRemoteListener mListener;
         public final AnonymousClass1 mRecentTasksListener = new AnonymousClass1();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.recents.RecentTasksController$IRecentTasksImpl$1, reason: invalid class name */
         public class AnonymousClass1 extends IRecentTasksListener.Stub {
             public static final /* synthetic */ int $r8$clinit = 0;
@@ -191,7 +194,7 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
 
         public IRecentTasksImpl(RecentTasksController recentTasksController) {
             this.mController = recentTasksController;
-            this.mListener = new SingleInstanceRemoteListener(recentTasksController, new RecentTasksController$IRecentTasksImpl$$ExternalSyntheticLambda3(this, 0), new RecentTasksController$IRecentTasksImpl$$ExternalSyntheticLambda4());
+            this.mListener = new SingleInstanceRemoteListener(recentTasksController, new RecentTasksController$$ExternalSyntheticLambda7(this, 1), new RecentTasksController$IRecentTasksImpl$$ExternalSyntheticLambda4());
         }
 
         @Override // com.android.wm.shell.common.ExternalInterfaceBinder
@@ -201,7 +204,6 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RecentTasksImpl implements RecentTasks {
         public /* synthetic */ RecentTasksImpl(RecentTasksController recentTasksController, int i) {
             this();
@@ -216,8 +218,8 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
         this.mSplitTasks = sparseIntArray;
         SparseIntArray sparseIntArray2 = new SparseIntArray();
         this.mMultiSplitTasks = sparseIntArray2;
-        HashMap hashMap = new HashMap();
-        this.mTaskSplitBoundsMap = hashMap;
+        HashMap map = new HashMap();
+        this.mTaskSplitBoundsMap = map;
         this.mIsSplitTaskIdValidationChecked = false;
         this.mVisibleTasks = new ArrayList();
         this.mVisibleTasksMap = new HashMap();
@@ -237,19 +239,19 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                final RecentTasksController recentTasksController = RecentTasksController.this;
-                recentTasksController.mShellController.addExternalInterface("com.android.wm.shell.recents.IRecentTasks", new Supplier() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda4
+                final RecentTasksController recentTasksController = this.f$0;
+                recentTasksController.mShellController.addExternalInterface("com.android.wm.shell.recents.IRecentTasks", new Supplier() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda5
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        RecentTasksController recentTasksController2 = RecentTasksController.this;
+                        RecentTasksController recentTasksController2 = recentTasksController;
                         recentTasksController2.getClass();
                         return new RecentTasksController.IRecentTasksImpl(recentTasksController2);
                     }
                 }, recentTasksController);
-                BiConsumer biConsumer = new BiConsumer() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda5
+                BiConsumer biConsumer = new BiConsumer() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda6
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        RecentTasksController recentTasksController2 = RecentTasksController.this;
+                        RecentTasksController recentTasksController2 = recentTasksController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
                         recentTasksController2.getClass();
@@ -262,17 +264,17 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
                         printWriter.println(sb.toString());
                         ArrayList<GroupedTaskInfo> recentTasks = recentTasksController2.getRecentTasks(Integer.MAX_VALUE, 2, ActivityManager.getCurrentUser());
                         for (int i = 0; i < recentTasks.size(); i++) {
-                            StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str2);
-                            m.append(recentTasks.get(i));
-                            printWriter.println(m.toString());
+                            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str2);
+                            sbM.append(recentTasks.get(i));
+                            printWriter.println(sbM.toString());
                         }
-                        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "SplitMap=");
-                        m2.append(recentTasksController2.mSplitTasks.toString());
-                        printWriter.println(m2.toString());
+                        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "SplitMap=");
+                        sbM2.append(recentTasksController2.mSplitTasks.toString());
+                        printWriter.println(sbM2.toString());
                         if (CoreRune.MW_MULTI_SPLIT_RECENT_TASKS) {
-                            StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "MultiSplitMap=");
-                            m3.append(recentTasksController2.mMultiSplitTasks.toString());
-                            printWriter.println(m3.toString());
+                            StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "MultiSplitMap=");
+                            sbM3.append(recentTasksController2.mMultiSplitTasks.toString());
+                            printWriter.println(sbM3.toString());
                         }
                         GroupedRecentTaskSaveController groupedRecentTaskSaveController = recentTasksController2.mSaveController;
                         groupedRecentTaskSaveController.getClass();
@@ -295,15 +297,15 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
                 shellCommandHandler2.addDumpCallback(biConsumer, recentTasksController);
                 shellCommandHandler2.addCommandCallback("recents", recentTasksController.mRecentsShellCommandHandler, recentTasksController);
                 recentTasksController.mUserId = ActivityManager.getCurrentUser();
-                recentTasksController.mDesktopUserRepositories.ifPresent(new RecentTasksController$$ExternalSyntheticLambda6(recentTasksController, 0));
+                recentTasksController.mDesktopUserRepositories.ifPresent(new RecentTasksController$$ExternalSyntheticLambda7(recentTasksController, 0));
                 recentTasksController.mTaskStackListener.addListener(recentTasksController);
                 ArrayMap arrayMap = recentTasksController.mTaskStackTransitionObserver.taskStackTransitionObserverListeners;
                 ShellExecutor shellExecutor2 = recentTasksController.mMainExecutor;
                 arrayMap.put(recentTasksController, shellExecutor2);
-                ((KeyguardManager) recentTasksController.mContext.getSystemService(KeyguardManager.class)).addKeyguardLockedStateListener(shellExecutor2, new KeyguardManager.KeyguardLockedStateListener() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda7
+                ((KeyguardManager) recentTasksController.mContext.getSystemService(KeyguardManager.class)).addKeyguardLockedStateListener(shellExecutor2, new KeyguardManager.KeyguardLockedStateListener() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda8
                     @Override // android.app.KeyguardManager.KeyguardLockedStateListener
                     public final void onKeyguardLockedStateChanged(boolean z) {
-                        RecentTasksController.this.notifyRecentTasksChanged();
+                        recentTasksController.notifyRecentTasksChanged();
                     }
                 });
             }
@@ -315,22 +317,22 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
             public final /* synthetic */ SparseIntArray val$splitTasks;
             public final /* synthetic */ Map val$taskSplitBoundsMap;
 
-            public AnonymousClass1(SparseIntArray sparseIntArray3, SparseIntArray sparseIntArray22, Map hashMap2) {
-                r2 = sparseIntArray3;
-                r3 = sparseIntArray22;
-                r4 = hashMap2;
+            public AnonymousClass1(SparseIntArray sparseIntArray3, SparseIntArray sparseIntArray22, Map map2) {
+                sparseIntArray = sparseIntArray3;
+                sparseIntArray = sparseIntArray22;
+                map = map2;
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws IOException {
                 int i;
                 SplitBounds splitBounds;
                 int i2;
                 int i3;
                 GroupedRecentTaskSaveController groupedRecentTaskSaveController2 = GroupedRecentTaskSaveController.this;
-                SparseIntArray sparseIntArray3 = r2;
-                SparseIntArray sparseIntArray4 = r3;
-                Map map = r4;
+                SparseIntArray sparseIntArray3 = sparseIntArray;
+                SparseIntArray sparseIntArray4 = sparseIntArray;
+                Map map2 = map;
                 groupedRecentTaskSaveController2.getClass();
                 ArrayList arrayList = new ArrayList();
                 StringBuilder sb = new StringBuilder();
@@ -338,11 +340,11 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(groupedRecentTaskSaveController2.mGroupedRecentSaveFile));
                     while (true) {
                         try {
-                            String readLine = bufferedReader.readLine();
-                            if (readLine == null) {
+                            String line = bufferedReader.readLine();
+                            if (line == null) {
                                 break;
                             } else {
-                                sb.append(readLine);
+                                sb.append(line);
                             }
                         } finally {
                         }
@@ -350,9 +352,9 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
                     JSONArray jSONArray = new JSONObject(sb.toString()).getJSONArray("grouped_recent_tasks");
                     int i4 = 0;
                     for (int i5 = 0; i5 < jSONArray.length(); i5++) {
-                        GroupedRecentTaskSaveInfo jsonToGroupedRecentTaskSaveInfo = GroupedRecentTaskSaveInfo.jsonToGroupedRecentTaskSaveInfo(jSONArray.getJSONObject(i5));
-                        groupedRecentTaskSaveController2.addGroupedRecentTaskSaveInfo(jsonToGroupedRecentTaskSaveInfo);
-                        arrayList.add(jsonToGroupedRecentTaskSaveInfo);
+                        GroupedRecentTaskSaveInfo groupedRecentTaskSaveInfoJsonToGroupedRecentTaskSaveInfo = GroupedRecentTaskSaveInfo.jsonToGroupedRecentTaskSaveInfo(jSONArray.getJSONObject(i5));
+                        groupedRecentTaskSaveController2.addGroupedRecentTaskSaveInfo(groupedRecentTaskSaveInfoJsonToGroupedRecentTaskSaveInfo);
+                        arrayList.add(groupedRecentTaskSaveInfoJsonToGroupedRecentTaskSaveInfo);
                     }
                     if (!arrayList.isEmpty()) {
                         int size = arrayList.size();
@@ -390,10 +392,10 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
                                 i = size;
                                 splitBounds = new SplitBounds(groupedRecentTaskSaveInfo.mLeftTopBounds, groupedRecentTaskSaveInfo.mRightBottomBounds, groupedRecentTaskSaveInfo.mLeftTopTaskId, groupedRecentTaskSaveInfo.mRightBottomTaskId, 8);
                             }
-                            map.put(Integer.valueOf(groupedRecentTaskSaveInfo.mLeftTopTaskId), splitBounds);
-                            map.put(Integer.valueOf(groupedRecentTaskSaveInfo.mRightBottomTaskId), splitBounds);
+                            map2.put(Integer.valueOf(groupedRecentTaskSaveInfo.mLeftTopTaskId), splitBounds);
+                            map2.put(Integer.valueOf(groupedRecentTaskSaveInfo.mRightBottomTaskId), splitBounds);
                             if (z && (i2 = groupedRecentTaskSaveInfo.mCellTaskId) != -1) {
-                                map.put(Integer.valueOf(i2), splitBounds);
+                                map2.put(Integer.valueOf(i2), splitBounds);
                             }
                             size = i;
                             i4 = 0;
@@ -502,6 +504,33 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
         return this.mContext;
     }
 
+    public final GroupedTaskInfo getDeskForSnapshot() {
+        DesktopTasksController desktopTasksController;
+        if (!this.mDesktopUserRepositories.isPresent()) {
+            return null;
+        }
+        Integer lastUsedDeskIdInDefaultDisplay = ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().getLastUsedDeskIdInDefaultDisplay();
+        if (lastUsedDeskIdInDefaultDisplay == null && (desktopTasksController = this.mDesktopTasksController) != null) {
+            lastUsedDeskIdInDefaultDisplay = desktopTasksController.getOrCreateDefaultDeskId(0, true);
+        }
+        if (lastUsedDeskIdInDefaultDisplay == null) {
+            return null;
+        }
+        getRecentTasks(Integer.MAX_VALUE, 66, ActivityManager.getCurrentUser());
+        Desk orCreateDesk = getOrCreateDesk(lastUsedDeskIdInDefaultDisplay.intValue());
+        return GroupedTaskInfo.forDeskTasks(orCreateDesk.mDeskId, orCreateDesk.mDisplayId, orCreateDesk.mDeskTasks, orCreateDesk.mMinimizedDeskTasks);
+    }
+
+    public final Integer getDeskLabel(int i) {
+        if (!this.mDesktopUserRepositories.isPresent()) {
+            return null;
+        }
+        DesktopUserRepositories desktopUserRepositories = (DesktopUserRepositories) this.mDesktopUserRepositories.get();
+        DesktopRepository.Desk desk = desktopUserRepositories.getCurrent().desktopData.getDesk(i);
+        Integer numValueOf = desk != null ? Integer.valueOf(desk.deskLabel) : null;
+        return (numValueOf == null || numValueOf.intValue() != 0) ? numValueOf : Integer.valueOf(desktopUserRepositories.getCurrent().nextDeskLabel());
+    }
+
     public final Desk getOrCreateDesk(int i) {
         Desk desk = (Desk) ((HashMap) this.mTmpDesks).get(Integer.valueOf(i));
         if (desk == null) {
@@ -598,13 +627,13 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
     }
 
     @Override // com.android.wm.shell.common.TaskStackListenerCallback
-    public final void onRecentTaskRemovedForAddTask(final int i) {
-        this.mDesktopUserRepositories.ifPresent(new Consumer() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((DesktopUserRepositories) obj).getCurrent().removeTask(-1, i);
-            }
-        });
+    public final void onRecentTaskRemoved(int i) {
+        this.mDesktopUserRepositories.ifPresent(new RecentTasksController$$ExternalSyntheticLambda0(i, 1));
+    }
+
+    @Override // com.android.wm.shell.common.TaskStackListenerCallback
+    public final void onRecentTaskRemovedForAddTask(int i) {
+        this.mDesktopUserRepositories.ifPresent(new RecentTasksController$$ExternalSyntheticLambda0(i, 0));
     }
 
     @Override // com.android.wm.shell.common.TaskStackListenerCallback
@@ -721,21 +750,167 @@ public class RecentTasksController implements TaskStackListenerCallback, RemoteC
         this.mListener = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:127:0x02f8  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x010e  */
+    /* JADX WARN: Removed duplicated region for block: B:115:0x02cc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.util.ArrayList generateList(int r17, java.util.List r18) {
-        /*
-            Method dump skipped, instructions count: 798
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.recents.RecentTasksController.generateList(int, java.util.List):java.util.ArrayList");
+    public final ArrayList generateList(int i, List list) {
+        int i2;
+        boolean z = (i & 32) != 0;
+        boolean z2 = (i & 64) != 0;
+        if (list.isEmpty()) {
+            if (!z) {
+                initializeDesksMap(true);
+                ArrayList arrayList = new ArrayList();
+                for (Desk desk : ((HashMap) this.mTmpDesks).values()) {
+                    if (desk.mUsedDesk != -1) {
+                        arrayList.add(GroupedTaskInfo.forDeskTasks(desk.mDeskId, desk.mDisplayId, desk.mDeskTasks, desk.mMinimizedDeskTasks));
+                    }
+                }
+                if (!arrayList.isEmpty()) {
+                    return arrayList;
+                }
+            }
+            return new ArrayList();
+        }
+        if (this.mIsSplitTaskIdValidationChecked) {
+            if (list.size() == 0 && this.mSplitTasks.size() != 0) {
+                clearAllSplitTaskIdsInfo();
+                Slog.d("RecentTasksController", "init split taskIds for sync with rawList");
+                this.mSaveController.scheduleSaveGroupedRecentTasks();
+                break;
+            }
+        } else {
+            this.mIsSplitTaskIdValidationChecked = true;
+            ArrayList arrayList2 = new ArrayList();
+            int[] iArrCopyKeys = this.mSplitTasks.copyKeys();
+            if (iArrCopyKeys != null) {
+                if (list.size() == 0) {
+                    clearAllSplitTaskIdsInfo();
+                } else {
+                    Iterator it = list.iterator();
+                    while (it.hasNext()) {
+                        arrayList2.add(Integer.valueOf(((TaskInfo) it.next()).taskId));
+                    }
+                    for (int i3 : iArrCopyKeys) {
+                        if (!arrayList2.contains(Integer.valueOf(i3))) {
+                            clearAllSplitTaskIdsInfo();
+                        }
+                    }
+                }
+                Slog.d("RecentTasksController", "init split taskIds for sync with rawList");
+                this.mSaveController.scheduleSaveGroupedRecentTasks();
+                break;
+            }
+        }
+        boolean zIsTrue = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
+        initializeDesksMap(zIsTrue);
+        boolean z3 = zIsTrue && !z;
+        ((HashMap) this.mTmpRemaining).clear();
+        final int i4 = 0;
+        final int i5 = 1;
+        ((HashMap) this.mTmpRemaining).putAll((Map) list.stream().collect(Collectors.toMap(new Function() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda3
+            @Override // java.util.function.Function
+            public final Object apply(Object obj) {
+                TaskInfo taskInfo = (TaskInfo) obj;
+                switch (i4) {
+                    case 0:
+                        return Integer.valueOf(taskInfo.getTaskId());
+                    default:
+                        return taskInfo;
+                }
+            }
+        }, new Function() { // from class: com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda3
+            @Override // java.util.function.Function
+            public final Object apply(Object obj) {
+                TaskInfo taskInfo = (TaskInfo) obj;
+                switch (i5) {
+                    case 0:
+                        return Integer.valueOf(taskInfo.getTaskId());
+                    default:
+                        return taskInfo;
+                }
+            }
+        })));
+        ArrayList arrayList3 = new ArrayList(list.size());
+        new ArrayList();
+        for (int i6 = 0; i6 < list.size(); i6++) {
+            TaskInfo taskInfo = (TaskInfo) list.get(i6);
+            int i7 = taskInfo.taskId;
+            if (((HashMap) this.mTmpRemaining).containsKey(Integer.valueOf(i7))) {
+                if (excludeTaskFromGeneratedList(taskInfo)) {
+                    ((HashMap) this.mTmpRemaining).remove(Integer.valueOf(i7));
+                } else if (((DesktopStateImpl) this.mDesktopState).canEnterDesktopMode && this.mDesktopUserRepositories.isPresent() && ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().isActiveTask(i7) && !z) {
+                    if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue() && taskInfo.configuration.windowConfiguration.getAppBounds() == null) {
+                        taskInfo.getDisplayId();
+                        Rect rect = taskInfo.lastNonFullscreenBounds;
+                        if (rect == null) {
+                            Slog.e("RecentTasksController", "generateList. lastNonFullscreenBounds is null. taskInfo=" + taskInfo);
+                        } else {
+                            taskInfo.configuration.windowConfiguration.setAppBounds(rect);
+                            Rect rect2 = taskInfo.lastNonFullscreenBounds;
+                            taskInfo.positionInParent = new Point(rect2.left, rect2.top);
+                        }
+                    }
+                    Desk orCreateDesk = getOrCreateDesk(zIsTrue ? ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().getDeskIdForTask(i7).intValue() : -1);
+                    boolean zIsMinimizedTask = ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().isMinimizedTask(i7);
+                    ((HashMap) this.mVisibleTasksMap).containsKey(Integer.valueOf(i7));
+                    orCreateDesk.mDeskTasks.add(taskInfo);
+                    if (zIsMinimizedTask) {
+                        ((HashSet) orCreateDesk.mMinimizedDeskTasks).add(Integer.valueOf(taskInfo.taskId));
+                    }
+                    ((HashMap) this.mTmpRemaining).remove(Integer.valueOf(i7));
+                } else {
+                    boolean z4 = this.mDesktopUserRepositories.isPresent() && ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().isActiveTask(i7) && z;
+                    if (!z2) {
+                        Map map = this.mTmpRemaining;
+                        int i8 = this.mSplitTasks.get(taskInfo.taskId, -1);
+                        if (CoreRune.MW_MULTI_SPLIT_RECENT_TASKS) {
+                            i2 = this.mMultiSplitTasks.get(taskInfo.taskId, -1);
+                            if (i8 != -1 && i2 == -1) {
+                                i2 = this.mMultiSplitTasks.get(i8, -1);
+                            } else if (i8 == -1 && i2 != -1) {
+                                i8 = this.mSplitTasks.get(i2, -1);
+                            }
+                        } else {
+                            i2 = -1;
+                        }
+                        if (i8 != -1) {
+                            HashMap map2 = (HashMap) map;
+                            if (map2.containsKey(Integer.valueOf(i8))) {
+                                TaskInfo taskInfo2 = (TaskInfo) map2.get(Integer.valueOf(i8));
+                                map2.remove(Integer.valueOf(taskInfo.taskId));
+                                map2.remove(Integer.valueOf(i8));
+                                if (i2 == -1) {
+                                    arrayList3.add(GroupedTaskInfo.forSplitTasks(taskInfo, taskInfo2, (SplitBounds) ((HashMap) this.mTaskSplitBoundsMap).get(Integer.valueOf(i8))));
+                                } else if (map2.containsKey(Integer.valueOf(i2))) {
+                                    TaskInfo taskInfo3 = (TaskInfo) map2.get(Integer.valueOf(i2));
+                                    map2.remove(Integer.valueOf(i2));
+                                    arrayList3.add(GroupedTaskInfo.forSplitTasks(taskInfo, taskInfo2, taskInfo3, (SplitBounds) ((HashMap) this.mTaskSplitBoundsMap).get(Integer.valueOf(i2))));
+                                } else {
+                                    arrayList3.add(GroupedTaskInfo.forFullscreenTasks(taskInfo));
+                                    arrayList3.add(GroupedTaskInfo.forFullscreenTasks(taskInfo2));
+                                }
+                            } else if (z4) {
+                                arrayList3.add(GroupedTaskInfo.forDesktopChild(taskInfo));
+                            } else if (taskInfo.isFreeform()) {
+                                arrayList3.add(GroupedTaskInfo.forFreeformTasks(taskInfo));
+                            } else {
+                                arrayList3.add(GroupedTaskInfo.forFullscreenTasks(taskInfo));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (Desk desk2 : ((HashMap) this.mTmpDesks).values()) {
+            if (desk2.mUsedDesk != -1 && (!desk2.mDeskTasks.isEmpty() || z3)) {
+                arrayList3.add(GroupedTaskInfo.forDeskTasks(desk2.mDeskId, desk2.mDisplayId, desk2.mDeskTasks, desk2.mMinimizedDeskTasks));
+            }
+        }
+        return arrayList3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Desk {
         public final int mDeskId;
         public final ArrayList mDeskTasks;

@@ -26,7 +26,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import javax.inject.Provider;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FontScalingTile extends QSTileImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -37,7 +36,6 @@ public final class FontScalingTile extends QSTileImpl {
     public final Handler mainHandler;
     public final QSSettingsPackageRepository settingsPackageRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,23 +74,23 @@ public final class FontScalingTile extends QSTileImpl {
         final Runnable runnable = new Runnable() { // from class: com.android.systemui.qs.tiles.FontScalingTile$handleClick$runnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                SystemUIDialog createDialog = ((FontScalingDialogDelegate) FontScalingTile.this.fontScalingDialogDelegateProvider.get()).createDialog();
+                SystemUIDialog systemUIDialogCreateDialog = ((FontScalingDialogDelegate) this.this$0.fontScalingDialogDelegateProvider.get()).createDialog();
                 if (!z) {
-                    createDialog.show();
+                    systemUIDialogCreateDialog.show();
                     return;
                 }
                 Expandable expandable2 = expandable;
-                DialogTransitionAnimator.Controller dialogTransitionController = expandable2 != null ? expandable2.dialogTransitionController(new DialogCuj(58, "font_scaling")) : null;
-                if (dialogTransitionController == null) {
-                    createDialog.show();
+                DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable2 != null ? expandable2.dialogTransitionController(new DialogCuj(58, "font_scaling")) : null;
+                if (controllerDialogTransitionController == null) {
+                    systemUIDialogCreateDialog.show();
                     return;
                 }
-                DialogTransitionAnimator dialogTransitionAnimator = FontScalingTile.this.dialogTransitionAnimator;
+                DialogTransitionAnimator dialogTransitionAnimator = this.this$0.dialogTransitionAnimator;
                 TransitionAnimator.Timings timings = DialogTransitionAnimator.TIMINGS;
-                dialogTransitionAnimator.show(createDialog, dialogTransitionController, false);
+                dialogTransitionAnimator.show(systemUIDialogCreateDialog, controllerDialogTransitionController, false);
             }
         };
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.FontScalingTile$handleClick$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.FontScalingTile.handleClick.1
             @Override // java.lang.Runnable
             public final void run() {
                 FontScalingTile fontScalingTile = FontScalingTile.this;

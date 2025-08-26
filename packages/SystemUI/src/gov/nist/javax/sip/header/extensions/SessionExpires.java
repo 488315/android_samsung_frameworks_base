@@ -5,7 +5,6 @@ import gov.nist.javax.sip.header.ParametersHeader;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SessionExpires extends ParametersHeader implements Header {
     private static final long serialVersionUID = 8765762413224043300L;
@@ -17,16 +16,16 @@ public final class SessionExpires extends ParametersHeader implements Header {
 
     @Override // gov.nist.javax.sip.header.SIPHeader
     public final String encodeBody() {
-        String num = Integer.toString(this.expires);
+        String string = Integer.toString(this.expires);
         if (this.parameters.isEmpty()) {
-            return num;
+            return string;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(num, ";");
-        m.append(this.parameters.encode());
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ";");
+        sbM.append(this.parameters.encode());
+        return sbM.toString();
     }
 
-    public final void setExpires(int i) {
+    public final void setExpires(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "bad argument "));
         }

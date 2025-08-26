@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnterpriseContainerObject implements EnterpriseContainerConstants, Parcelable {
     public static final Parcelable.Creator<EnterpriseContainerObject> CREATOR = new Parcelable.Creator<EnterpriseContainerObject>() { // from class: com.samsung.android.knox.container.EnterpriseContainerObject.1

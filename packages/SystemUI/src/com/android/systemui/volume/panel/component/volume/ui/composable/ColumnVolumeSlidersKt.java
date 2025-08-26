@@ -1,47 +1,434 @@
 package com.android.systemui.volume.panel.component.volume.ui.composable;
 
+import androidx.compose.animation.AnimatedContentKt$$ExternalSyntheticOutline0;
 import androidx.compose.animation.AnimatedVisibilityKt;
+import androidx.compose.animation.AnimatedVisibilityScope;
 import androidx.compose.animation.EnterExitTransitionKt;
+import androidx.compose.animation.EnterTransition;
+import androidx.compose.animation.core.AnimateAsStateKt;
 import androidx.compose.animation.core.AnimationSpecKt;
+import androidx.compose.animation.core.TweenSpec;
+import androidx.compose.foundation.layout.Arrangement;
+import androidx.compose.foundation.layout.Arrangement$Top$1;
+import androidx.compose.foundation.layout.BoxKt;
+import androidx.compose.foundation.layout.BoxScopeInstance;
+import androidx.compose.foundation.layout.ColumnKt;
+import androidx.compose.foundation.layout.ColumnMeasurePolicy;
+import androidx.compose.foundation.layout.ColumnScopeInstance;
+import androidx.compose.foundation.layout.SizeKt;
+import androidx.compose.material3.IconButtonColors;
+import androidx.compose.material3.IconButtonDefaults;
+import androidx.compose.material3.IconButtonKt;
+import androidx.compose.material3.IconKt;
+import androidx.compose.material3.MaterialTheme;
+import androidx.compose.runtime.ComposablesKt;
 import androidx.compose.runtime.Composer;
 import androidx.compose.runtime.ComposerImpl;
 import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.MutableState;
+import androidx.compose.runtime.PersistentCompositionLocalMap;
 import androidx.compose.runtime.RecomposeScopeImpl;
 import androidx.compose.runtime.RecomposeScopeImplKt;
+import androidx.compose.runtime.State;
+import androidx.compose.runtime.Updater;
 import androidx.compose.runtime.internal.ComposableLambdaKt;
+import androidx.compose.ui.Alignment;
+import androidx.compose.ui.BiasAlignment;
+import androidx.compose.ui.ComposedModifierKt;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.graphics.Color;
+import androidx.compose.ui.layout.MeasurePolicy;
+import androidx.compose.ui.node.ComposeUiNode;
+import androidx.compose.ui.res.PainterResources_androidKt;
 import androidx.compose.ui.res.StringResources_androidKt;
+import androidx.compose.ui.semantics.Role;
+import androidx.compose.ui.semantics.SemanticsModifierKt;
+import androidx.compose.ui.semantics.SemanticsPropertiesKt;
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
+import androidx.compose.ui.unit.Density;
+import androidx.compose.ui.unit.Dp;
+import androidx.lifecycle.compose.FlowExtKt;
 import com.android.compose.PlatformSliderColors;
+import com.android.compose.modifiers.PaddingKt;
 import com.android.systemui.R;
+import com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel;
+import com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderState;
+import com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderViewModel;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+import java.util.List;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ColumnVolumeSlidersKt {
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0225  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x028f A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x02ce  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x01d9  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x0207  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x022f  */
     /* JADX WARN: Type inference failed for: r6v29, types: [com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ColumnVolumeSliders$1$1$1$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void ColumnVolumeSliders(final java.util.List r18, final boolean r19, final kotlin.jvm.functions.Function1 r20, final com.android.compose.PlatformSliderColors r21, final boolean r22, final androidx.compose.ui.Modifier r23, androidx.compose.runtime.Composer r24, final int r25) {
-        /*
-            Method dump skipped, instructions count: 761
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt.ColumnVolumeSliders(java.util.List, boolean, kotlin.jvm.functions.Function1, com.android.compose.PlatformSliderColors, boolean, androidx.compose.ui.Modifier, androidx.compose.runtime.Composer, int):void");
+    public static final void ColumnVolumeSliders(final List list, final boolean z, final Function1 function1, final PlatformSliderColors platformSliderColors, final boolean z2, final Modifier modifier, Composer composer, final int i) {
+        float f;
+        boolean z3;
+        boolean z4;
+        boolean z5;
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startRestartGroup(338998927);
+        int i2 = i | (composerImpl.changedInstance(list) ? 4 : 2) | (composerImpl.changed(z) ? 32 : 16) | (composerImpl.changedInstance(function1) ? 256 : 128) | (composerImpl.changed(platformSliderColors) ? 2048 : 1024) | (composerImpl.changed(z2) ? NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT : 8192) | (composerImpl.changed(modifier) ? 131072 : 65536);
+        if ((74899 & i2) == 74898 && composerImpl.getSkipping()) {
+            composerImpl.skipToGroupEnd();
+        } else {
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSliders (ColumnVolumeSliders.kt:80)");
+            }
+            if (list.isEmpty()) {
+                throw new IllegalArgumentException("Failed requirement.");
+            }
+            Arrangement.INSTANCE.getClass();
+            Arrangement$Top$1 arrangement$Top$1 = Arrangement.Top;
+            Alignment.Companion.getClass();
+            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(arrangement$Top$1, Alignment.Companion.Start, composerImpl, 0);
+            int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
+            ComposeUiNode.Companion.getClass();
+            Function0 function0 = ComposeUiNode.Companion.Constructor;
+            if (composerImpl.applier == null) {
+                ComposablesKt.invalidApplier();
+                throw null;
+            }
+            composerImpl.startReusableNode();
+            if (composerImpl.inserting) {
+                composerImpl.createNode(function0);
+            } else {
+                composerImpl.useNode();
+            }
+            Function2 function2 = ComposeUiNode.Companion.SetMeasurePolicy;
+            Updater.m337setimpl(composerImpl, columnMeasurePolicy, function2);
+            Function2 function22 = ComposeUiNode.Companion.SetResolvedCompositionLocals;
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, function22);
+            Function2 function23 = ComposeUiNode.Companion.SetCompositeKeyHash;
+            if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
+                AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function23);
+            }
+            Function2 function24 = ComposeUiNode.Companion.SetModifier;
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, function24);
+            ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
+            Modifier.Companion companion = Modifier.Companion;
+            Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(companion, 1.0f);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, modifierFillMaxWidth);
+            composerImpl.startReusableNode();
+            if (composerImpl.inserting) {
+                composerImpl.createNode(function0);
+            } else {
+                composerImpl.useNode();
+            }
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, function2);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope2, function22);
+            if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash2))) {
+                AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash2, composerImpl, currentCompositeKeyHash2, function23);
+            }
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier2, function24);
+            BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
+            SliderViewModel sliderViewModel = (SliderViewModel) CollectionsKt___CollectionsKt.first(list);
+            MutableState mutableStateCollectAsStateWithLifecycle = FlowExtKt.collectAsStateWithLifecycle(((SliderViewModel) CollectionsKt___CollectionsKt.first(list)).getSlider(), composerImpl);
+            composerImpl.startReplaceGroup(-734902023);
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.topSliderPadding (ColumnVolumeSliders.kt:330)");
+            }
+            TweenSpec tweenSpecTween$default = z2 ? AnimationSpecKt.tween$default(400, 300, null, 4) : AnimationSpecKt.tween$default(400, 500, null, 4);
+            if (z2) {
+                f = 72;
+                Dp.Companion companion2 = Dp.Companion;
+            } else {
+                Dp.Companion companion3 = Dp.Companion;
+                f = 0;
+            }
+            final State stateM8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(f, tweenSpecTween$default, "TopVolumeSliderPadding", composerImpl, 384, 8);
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventEnd();
+            }
+            composerImpl.end(false);
+            Modifier modifierFillMaxWidth2 = SizeKt.fillMaxWidth(PaddingKt.padding$default(companion, null, new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ColumnVolumeSliders$1$1$1$1
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj) {
+                    return Integer.valueOf(((Density) obj).mo52roundToPx0680j_4(((Dp) stateM8animateDpAsStateAjpBEmI.getValue()).value));
+                }
+            }, null, 11), 1.0f);
+            SliderState sliderState = (SliderState) mutableStateCollectAsStateWithLifecycle.getValue();
+            SliderHapticsViewModel.Factory sliderHapticsViewModelFactory = sliderViewModel.getSliderHapticsViewModelFactory();
+            composerImpl.startReplaceGroup(-1268761861);
+            composerImpl.end(false);
+            composerImpl.startReplaceGroup(-1268776891);
+            boolean zChangedInstance = composerImpl.changedInstance(sliderViewModel) | composerImpl.changed(mutableStateCollectAsStateWithLifecycle);
+            Object objRememberedValue = composerImpl.rememberedValue();
+            Composer.Companion companion4 = Composer.Companion;
+            if (!zChangedInstance) {
+                companion4.getClass();
+                if (objRememberedValue == Composer.Companion.Empty) {
+                    z3 = false;
+                    objRememberedValue = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda0(sliderViewModel, mutableStateCollectAsStateWithLifecycle, 0);
+                    composerImpl.updateRememberedValue(objRememberedValue);
+                } else {
+                    z3 = false;
+                }
+                Function1 function12 = (Function1) objRememberedValue;
+                composerImpl.end(z3);
+                composerImpl.startReplaceGroup(-1268769599);
+                boolean zChangedInstance2 = composerImpl.changedInstance(sliderViewModel) | composerImpl.changed(mutableStateCollectAsStateWithLifecycle);
+                Object objRememberedValue2 = composerImpl.rememberedValue();
+                if (!zChangedInstance2) {
+                    companion4.getClass();
+                    if (objRememberedValue2 == Composer.Companion.Empty) {
+                        z4 = false;
+                        objRememberedValue2 = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda1(sliderViewModel, mutableStateCollectAsStateWithLifecycle, 0);
+                        composerImpl.updateRememberedValue(objRememberedValue2);
+                    } else {
+                        z4 = false;
+                    }
+                    Function0 function02 = (Function0) objRememberedValue2;
+                    composerImpl.end(z4);
+                    composerImpl.startReplaceGroup(-1268772032);
+                    boolean zChangedInstance3 = composerImpl.changedInstance(sliderViewModel);
+                    Object objRememberedValue3 = composerImpl.rememberedValue();
+                    if (!zChangedInstance3) {
+                        companion4.getClass();
+                        if (objRememberedValue3 == Composer.Companion.Empty) {
+                            z5 = false;
+                            objRememberedValue3 = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda2(sliderViewModel, 0);
+                            composerImpl.updateRememberedValue(objRememberedValue3);
+                        } else {
+                            z5 = false;
+                        }
+                        composerImpl.end(z5);
+                        int i3 = i2 & 7168;
+                        VolumeSliderKt.VolumeSlider(sliderState, function12, function02, platformSliderColors, modifierFillMaxWidth2, sliderHapticsViewModelFactory, (Function0) objRememberedValue3, null, composerImpl, i3, 0);
+                        composerImpl.startReplaceGroup(-1268747483);
+                        ExpandButtonLegacy(z, z2, function1, platformSliderColors, boxScopeInstance.align(companion, Alignment.Companion.CenterEnd), composerImpl, ((i2 >> 3) & 14) | ((i2 >> 9) & 112) | (i2 & 896) | i3);
+                        composerImpl.end(false);
+                        composerImpl.end(true);
+                        AnimatedVisibilityKt.AnimatedVisibility(columnScopeInstance, z || !z2, (Modifier) null, EnterExitTransitionKt.expandVertically$default(AnimationSpecKt.tween$default(500, 0, null, 6), null, null, 14), EnterExitTransitionKt.shrinkVertically$default(AnimationSpecKt.tween$default(300, 0, null, 6), null, null, 14), "CollapsableSliders", ComposableLambdaKt.rememberComposableLambda(536411649, new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ColumnVolumeSliders$1$2
+                            /* JADX WARN: Removed duplicated region for block: B:42:0x01b2  */
+                            /* JADX WARN: Removed duplicated region for block: B:47:0x01dd  */
+                            /* JADX WARN: Removed duplicated region for block: B:52:0x0203  */
+                            @Override // kotlin.jvm.functions.Function3
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object invoke(Object obj, Object obj2, Object obj3) {
+                                boolean z6;
+                                ComposerImpl composerImpl2;
+                                int i4 = 1;
+                                AnimatedVisibilityScope animatedVisibilityScope = (AnimatedVisibilityScope) obj;
+                                Composer composer2 = (Composer) obj2;
+                                ((Number) obj3).intValue();
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSliders.<anonymous>.<anonymous> (ColumnVolumeSliders.kt:136)");
+                                }
+                                Modifier.Companion companion5 = Modifier.Companion;
+                                Modifier modifierFillMaxWidth3 = SizeKt.fillMaxWidth(companion5, 1.0f);
+                                Alignment.Companion.getClass();
+                                BiasAlignment biasAlignment = Alignment.Companion.BottomCenter;
+                                List list2 = list;
+                                MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy2 = BoxKt.maybeCachedBoxMeasurePolicy(biasAlignment, false);
+                                int currentCompositeKeyHash3 = ComposablesKt.getCurrentCompositeKeyHash(composer2);
+                                ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                                PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope3 = composerImpl3.currentCompositionLocalScope();
+                                Modifier modifierMaterializeModifier3 = ComposedModifierKt.materializeModifier(composer2, modifierFillMaxWidth3);
+                                ComposeUiNode.Companion.getClass();
+                                Function0 function03 = ComposeUiNode.Companion.Constructor;
+                                if (composerImpl3.applier == null) {
+                                    ComposablesKt.invalidApplier();
+                                    throw null;
+                                }
+                                composerImpl3.startReusableNode();
+                                if (composerImpl3.inserting) {
+                                    composerImpl3.createNode(function03);
+                                } else {
+                                    composerImpl3.useNode();
+                                }
+                                Function2 function25 = ComposeUiNode.Companion.SetMeasurePolicy;
+                                Updater.m337setimpl(composer2, measurePolicyMaybeCachedBoxMeasurePolicy2, function25);
+                                Function2 function26 = ComposeUiNode.Companion.SetResolvedCompositionLocals;
+                                Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope3, function26);
+                                Function2 function27 = ComposeUiNode.Companion.SetCompositeKeyHash;
+                                if (composerImpl3.inserting || !Intrinsics.areEqual(composerImpl3.rememberedValue(), Integer.valueOf(currentCompositeKeyHash3))) {
+                                    AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash3, composerImpl3, currentCompositeKeyHash3, function27);
+                                }
+                                Function2 function28 = ComposeUiNode.Companion.SetModifier;
+                                Updater.m337setimpl(composer2, modifierMaterializeModifier3, function28);
+                                BoxScopeInstance boxScopeInstance2 = BoxScopeInstance.INSTANCE;
+                                Arrangement.INSTANCE.getClass();
+                                ColumnMeasurePolicy columnMeasurePolicy2 = ColumnKt.columnMeasurePolicy(Arrangement.Top, Alignment.Companion.Start, composer2, 0);
+                                int currentCompositeKeyHash4 = ComposablesKt.getCurrentCompositeKeyHash(composer2);
+                                PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope4 = composerImpl3.currentCompositionLocalScope();
+                                Modifier modifierMaterializeModifier4 = ComposedModifierKt.materializeModifier(composer2, companion5);
+                                composerImpl3.startReusableNode();
+                                if (composerImpl3.inserting) {
+                                    composerImpl3.createNode(function03);
+                                } else {
+                                    composerImpl3.useNode();
+                                }
+                                Updater.m337setimpl(composer2, columnMeasurePolicy2, function25);
+                                Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope4, function26);
+                                if (composerImpl3.inserting || !Intrinsics.areEqual(composerImpl3.rememberedValue(), Integer.valueOf(currentCompositeKeyHash4))) {
+                                    AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash4, composerImpl3, currentCompositeKeyHash4, function27);
+                                }
+                                Updater.m337setimpl(composer2, modifierMaterializeModifier4, function28);
+                                ColumnScopeInstance columnScopeInstance2 = ColumnScopeInstance.INSTANCE;
+                                composerImpl3.startReplaceGroup(-1113978252);
+                                int lastIndex = CollectionsKt__CollectionsKt.getLastIndex(list2);
+                                if (1 <= lastIndex) {
+                                    int i5 = 1;
+                                    while (true) {
+                                        SliderViewModel sliderViewModel2 = (SliderViewModel) list2.get(i5);
+                                        MutableState mutableStateCollectAsStateWithLifecycle2 = FlowExtKt.collectAsStateWithLifecycle(sliderViewModel2.getSlider(), composer2);
+                                        Modifier modifierFillMaxWidth4 = SizeKt.fillMaxWidth(Modifier.Companion, 1.0f);
+                                        int size = ((list2.size() - i5) + i4) * 10;
+                                        if (size < 0) {
+                                            size = 0;
+                                        }
+                                        int i6 = 500 - size;
+                                        if (i6 < 100) {
+                                            i6 = 100;
+                                        }
+                                        final int i7 = 1;
+                                        List list3 = list2;
+                                        EnterTransition enterTransitionPlus = EnterExitTransitionKt.m5scaleInL8ZKhE$default(AnimationSpecKt.tween$default(i6, size, null, 4), 0.9f, 4).plus(EnterExitTransitionKt.expandVertically$default(AnimationSpecKt.tween$default(i6, size, null, 4), null, new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$$ExternalSyntheticLambda5
+                                            @Override // kotlin.jvm.functions.Function1
+                                            /* renamed from: invoke */
+                                            public final Object mo781invoke(Object obj4) {
+                                                Integer num = (Integer) obj4;
+                                                switch (i7) {
+                                                }
+                                                return Integer.valueOf((int) (num.intValue() * 0.55f));
+                                            }
+                                        }, 2)).plus(EnterExitTransitionKt.fadeIn$default(AnimationSpecKt.tween$default(i6, size, null, 4), 2));
+                                        int size2 = 300 - (((list3.size() - i5) + 1) * 10);
+                                        int i8 = size2 < 100 ? 100 : size2;
+                                        final int i9 = 0;
+                                        Composer composer3 = composer2;
+                                        Dp.Companion companion6 = Dp.Companion;
+                                        Modifier modifierM129paddingqDBjuR0$default = androidx.compose.foundation.layout.PaddingKt.m129paddingqDBjuR0$default(animatedVisibilityScope.animateEnterExit(modifierFillMaxWidth4, enterTransitionPlus, EnterExitTransitionKt.m6scaleOutL8ZKhE$default(AnimationSpecKt.tween$default(i8, 0, null, 6), 0.9f, 4).plus(EnterExitTransitionKt.shrinkVertically$default(AnimationSpecKt.tween$default(i8, 0, null, 6), null, new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$$ExternalSyntheticLambda5
+                                            @Override // kotlin.jvm.functions.Function1
+                                            /* renamed from: invoke */
+                                            public final Object mo781invoke(Object obj4) {
+                                                Integer num = (Integer) obj4;
+                                                switch (i9) {
+                                                }
+                                                return Integer.valueOf((int) (num.intValue() * 0.55f));
+                                            }
+                                        }, 2)).plus(EnterExitTransitionKt.fadeOut$default(AnimationSpecKt.tween$default(i8, 0, null, 6), 2))), 0.0f, 16, 0.0f, 0.0f, 13);
+                                        SliderState sliderState2 = (SliderState) mutableStateCollectAsStateWithLifecycle2.getValue();
+                                        SliderHapticsViewModel.Factory sliderHapticsViewModelFactory2 = sliderViewModel2.getSliderHapticsViewModelFactory();
+                                        composerImpl3.startReplaceGroup(-1113940645);
+                                        boolean zChangedInstance4 = composerImpl3.changedInstance(sliderViewModel2) | composerImpl3.changed(mutableStateCollectAsStateWithLifecycle2);
+                                        Object objRememberedValue4 = composerImpl3.rememberedValue();
+                                        Composer.Companion companion7 = Composer.Companion;
+                                        if (!zChangedInstance4) {
+                                            companion7.getClass();
+                                            if (objRememberedValue4 == Composer.Companion.Empty) {
+                                                objRememberedValue4 = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda0(sliderViewModel2, mutableStateCollectAsStateWithLifecycle2, 1);
+                                                composerImpl3.updateRememberedValue(objRememberedValue4);
+                                            }
+                                            Function1 function13 = (Function1) objRememberedValue4;
+                                            composerImpl3.end(false);
+                                            composerImpl3.startReplaceGroup(-1113931841);
+                                            boolean zChangedInstance5 = composerImpl3.changedInstance(sliderViewModel2) | composerImpl3.changed(mutableStateCollectAsStateWithLifecycle2);
+                                            Object objRememberedValue5 = composerImpl3.rememberedValue();
+                                            if (!zChangedInstance5) {
+                                                companion7.getClass();
+                                                if (objRememberedValue5 == Composer.Companion.Empty) {
+                                                    objRememberedValue5 = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda1(sliderViewModel2, mutableStateCollectAsStateWithLifecycle2, 1);
+                                                    composerImpl3.updateRememberedValue(objRememberedValue5);
+                                                }
+                                                Function0 function04 = (Function0) objRememberedValue5;
+                                                composerImpl3.end(false);
+                                                composerImpl3.startReplaceGroup(-1113934658);
+                                                boolean zChangedInstance6 = composerImpl3.changedInstance(sliderViewModel2);
+                                                Object objRememberedValue6 = composerImpl3.rememberedValue();
+                                                if (!zChangedInstance6) {
+                                                    companion7.getClass();
+                                                    if (objRememberedValue6 == Composer.Companion.Empty) {
+                                                        objRememberedValue6 = new ColumnVolumeSlidersKt$$ExternalSyntheticLambda2(sliderViewModel2, 1);
+                                                        composerImpl3.updateRememberedValue(objRememberedValue6);
+                                                    }
+                                                    composerImpl3.end(false);
+                                                    composerImpl2 = composerImpl3;
+                                                    composer2 = composer3;
+                                                    VolumeSliderKt.VolumeSlider(sliderState2, function13, function04, platformSliderColors, modifierM129paddingqDBjuR0$default, sliderHapticsViewModelFactory2, (Function0) objRememberedValue6, null, composer2, 0, 128);
+                                                    z6 = true;
+                                                    if (i5 == lastIndex) {
+                                                        break;
+                                                    }
+                                                    i5++;
+                                                    composerImpl3 = composerImpl2;
+                                                    i4 = 1;
+                                                    list2 = list3;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    z6 = true;
+                                    composerImpl2 = composerImpl3;
+                                }
+                                composerImpl2.end(false);
+                                composerImpl2.end(z6);
+                                composerImpl2.end(z6);
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventEnd();
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }, composerImpl), composerImpl, 1797126, 2);
+                        composerImpl = composerImpl;
+                        composerImpl.end(true);
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventEnd();
+                        }
+                    }
+                }
+            }
+        }
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(list, z, function1, platformSliderColors, z2, modifier, i) { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$$ExternalSyntheticLambda3
+                public final /* synthetic */ List f$0;
+                public final /* synthetic */ boolean f$1;
+                public final /* synthetic */ Function1 f$2;
+                public final /* synthetic */ PlatformSliderColors f$3;
+                public final /* synthetic */ boolean f$4;
+                public final /* synthetic */ Modifier f$5;
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    ((Integer) obj2).getClass();
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    PlatformSliderColors platformSliderColors2 = this.f$3;
+                    boolean z6 = this.f$4;
+                    Modifier modifier2 = this.f$5;
+                    ColumnVolumeSlidersKt.ColumnVolumeSliders(this.f$0, this.f$1, this.f$2, platformSliderColors2, z6, modifier2, (Composer) obj, iUpdateChangedFlags);
+                    return Unit.INSTANCE;
+                }
+            };
+        }
     }
 
     public static final void ExpandButtonLegacy(final boolean z, boolean z2, final Function1 function1, final PlatformSliderColors platformSliderColors, Modifier modifier, Composer composer, final int i) {
         int i2;
-        final String stringResource;
+        final String strStringResource;
         boolean z3;
         final Modifier modifier2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -73,140 +460,125 @@ public abstract class ColumnVolumeSlidersKt {
             }
             if (z) {
                 composerImpl.startReplaceGroup(793949332);
-                stringResource = StringResources_androidKt.stringResource(R.string.volume_panel_expanded_sliders, composerImpl);
+                strStringResource = StringResources_androidKt.stringResource(R.string.volume_panel_expanded_sliders, composerImpl);
                 composerImpl.end(false);
             } else {
                 composerImpl.startReplaceGroup(794032691);
-                stringResource = StringResources_androidKt.stringResource(R.string.volume_panel_collapsed_sliders, composerImpl);
+                strStringResource = StringResources_androidKt.stringResource(R.string.volume_panel_collapsed_sliders, composerImpl);
                 composerImpl.end(false);
             }
             z3 = z2;
-            AnimatedVisibilityKt.AnimatedVisibility(z3, modifier, EnterExitTransitionKt.fadeIn$default(AnimationSpecKt.tween$default(350, 350, null, 4), 2).plus(EnterExitTransitionKt.m5scaleInL8ZKhE$default(AnimationSpecKt.tween$default(350, 350, null, 4), 0.8f, 4)), EnterExitTransitionKt.fadeOut$default(AnimationSpecKt.tween$default(350, 500, null, 4), 2).plus(EnterExitTransitionKt.m6scaleOutL8ZKhE$default(AnimationSpecKt.tween$default(350, 500, null, 4), 0.8f, 4)), null, ComposableLambdaKt.rememberComposableLambda(-1830541852, new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1
-                /* JADX WARN: Code restructure failed: missing block: B:20:0x00bf, code lost:
-                
-                    if (r4 == androidx.compose.runtime.Composer.Companion.Empty) goto L23;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:7:0x0044, code lost:
-                
-                    if (r5 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-                 */
+            AnimatedVisibilityKt.AnimatedVisibility(z3, modifier, EnterExitTransitionKt.fadeIn$default(AnimationSpecKt.tween$default(350, 350, null, 4), 2).plus(EnterExitTransitionKt.m5scaleInL8ZKhE$default(AnimationSpecKt.tween$default(350, 350, null, 4), 0.8f, 4)), EnterExitTransitionKt.fadeOut$default(AnimationSpecKt.tween$default(350, 500, null, 4), 2).plus(EnterExitTransitionKt.m6scaleOutL8ZKhE$default(AnimationSpecKt.tween$default(350, 500, null, 4), 0.8f, 4)), null, ComposableLambdaKt.rememberComposableLambda(-1830541852, new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt.ExpandButtonLegacy.1
+                /* JADX WARN: Removed duplicated region for block: B:23:0x00c1  */
+                /* JADX WARN: Removed duplicated region for block: B:9:0x0046  */
                 @Override // kotlin.jvm.functions.Function3
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invoke(java.lang.Object r20, java.lang.Object r21, java.lang.Object r22) {
-                    /*
-                        r19 = this;
-                        r0 = r19
-                        r1 = 0
-                        r2 = r20
-                        androidx.compose.animation.AnimatedVisibilityScope r2 = (androidx.compose.animation.AnimatedVisibilityScope) r2
-                        r2 = r21
-                        androidx.compose.runtime.Composer r2 = (androidx.compose.runtime.Composer) r2
-                        r3 = r22
-                        java.lang.Number r3 = (java.lang.Number) r3
-                        r3.intValue()
-                        boolean r3 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r3 == 0) goto L1d
-                        java.lang.String r3 = "com.android.systemui.volume.panel.component.volume.ui.composable.ExpandButtonLegacy.<anonymous> (ColumnVolumeSliders.kt:195)"
-                        androidx.compose.runtime.ComposerKt.traceEventStart(r3)
-                    L1d:
-                        androidx.compose.ui.Modifier$Companion r3 = androidx.compose.ui.Modifier.Companion
-                        r4 = 64
-                        float r4 = (float) r4
-                        androidx.compose.ui.unit.Dp$Companion r5 = androidx.compose.ui.unit.Dp.Companion
-                        androidx.compose.ui.Modifier r3 = androidx.compose.foundation.layout.SizeKt.m139size3ABfNKs(r3, r4)
-                        r8 = r2
-                        androidx.compose.runtime.ComposerImpl r8 = (androidx.compose.runtime.ComposerImpl) r8
-                        r2 = 927431229(0x37477a3d, float:1.1889785E-5)
-                        r8.startReplaceGroup(r2)
-                        java.lang.String r2 = r1
-                        boolean r4 = r8.changed(r2)
-                        java.lang.Object r5 = r8.rememberedValue()
-                        androidx.compose.runtime.Composer$Companion r6 = androidx.compose.runtime.Composer.Companion
-                        if (r4 != 0) goto L46
-                        r6.getClass()
-                        androidx.compose.runtime.Composer$Companion$Empty$1 r4 = androidx.compose.runtime.Composer.Companion.Empty
-                        if (r5 != r4) goto L4e
-                    L46:
-                        com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda0 r5 = new com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda0
-                        r5.<init>()
-                        r8.updateRememberedValue(r5)
-                    L4e:
-                        kotlin.jvm.functions.Function1 r5 = (kotlin.jvm.functions.Function1) r5
-                        r8.end(r1)
-                        androidx.compose.ui.Modifier r9 = androidx.compose.ui.semantics.SemanticsModifierKt.semantics(r3, r1, r5)
-                        androidx.compose.material3.IconButtonDefaults r2 = androidx.compose.material3.IconButtonDefaults.INSTANCE
-                        com.android.compose.PlatformSliderColors r3 = r2
-                        long r4 = r3.indicatorColor
-                        r2.getClass()
-                        long r13 = r3.iconColor
-                        r2 = 12
-                        r2 = r2 & 1
-                        if (r2 == 0) goto L6f
-                        androidx.compose.ui.graphics.Color$Companion r2 = androidx.compose.ui.graphics.Color.Companion
-                        r2.getClass()
-                        long r4 = androidx.compose.ui.graphics.Color.Unspecified
-                    L6f:
-                        r11 = r4
-                        androidx.compose.ui.graphics.Color$Companion r2 = androidx.compose.ui.graphics.Color.Companion
-                        r2.getClass()
-                        long r15 = androidx.compose.ui.graphics.Color.Unspecified
-                        r2.getClass()
-                        boolean r2 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r2 == 0) goto L85
-                        java.lang.String r2 = "androidx.compose.material3.IconButtonDefaults.filledIconButtonColors (IconButtonDefaults.kt:323)"
-                        androidx.compose.runtime.ComposerKt.traceEventStart(r2)
-                    L85:
-                        androidx.compose.material3.MaterialTheme r2 = androidx.compose.material3.MaterialTheme.INSTANCE
-                        r2.getClass()
-                        androidx.compose.material3.ColorScheme r2 = androidx.compose.material3.MaterialTheme.getColorScheme(r8)
-                        androidx.compose.material3.IconButtonColors r10 = androidx.compose.material3.IconButtonDefaults.getDefaultFilledIconButtonColors$material3_release(r2)
-                        r17 = r15
-                        androidx.compose.material3.IconButtonColors r7 = r10.m264copyjRlVdoo(r11, r13, r15, r17)
-                        boolean r2 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r2 == 0) goto La1
-                        androidx.compose.runtime.ComposerKt.traceEventEnd()
-                    La1:
-                        r2 = 927435937(0x37478ca1, float:1.1894067E-5)
-                        r8.startReplaceGroup(r2)
-                        kotlin.jvm.functions.Function1 r2 = r3
-                        boolean r3 = r8.changed(r2)
-                        boolean r0 = r4
-                        boolean r4 = r8.changed(r0)
-                        r3 = r3 | r4
-                        java.lang.Object r4 = r8.rememberedValue()
-                        if (r3 != 0) goto Lc1
-                        r6.getClass()
-                        androidx.compose.runtime.Composer$Companion$Empty$1 r3 = androidx.compose.runtime.Composer.Companion.Empty
-                        if (r4 != r3) goto Lc9
-                    Lc1:
-                        com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda1 r4 = new com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda1
-                        r4.<init>()
-                        r8.updateRememberedValue(r4)
-                    Lc9:
-                        r11 = r4
-                        kotlin.jvm.functions.Function0 r11 = (kotlin.jvm.functions.Function0) r11
-                        r8.end(r1)
-                        com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$3 r1 = new com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$3
-                        r1.<init>()
-                        r0 = 242978822(0xe7b9006, float:3.1007483E-30)
-                        androidx.compose.runtime.internal.ComposableLambdaImpl r12 = androidx.compose.runtime.internal.ComposableLambdaKt.rememberComposableLambda(r0, r1, r8)
-                        r4 = 1572864(0x180000, float:2.204052E-39)
-                        r5 = 52
-                        r13 = 0
-                        r6 = 0
-                        r10 = 0
-                        androidx.compose.material3.IconButtonKt.IconButton(r4, r5, r6, r7, r8, r9, r10, r11, r12, r13)
-                        boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                        if (r0 == 0) goto Lee
-                        androidx.compose.runtime.ComposerKt.traceEventEnd()
-                    Lee:
-                        kotlin.Unit r0 = kotlin.Unit.INSTANCE
-                        return r0
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1.invoke(java.lang.Object, java.lang.Object, java.lang.Object):java.lang.Object");
+                public final Object invoke(Object obj, Object obj2, Object obj3) {
+                    Composer composer2 = (Composer) obj2;
+                    ((Number) obj3).intValue();
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.ExpandButtonLegacy.<anonymous> (ColumnVolumeSliders.kt:195)");
+                    }
+                    Dp.Companion companion = Dp.Companion;
+                    Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(Modifier.Companion, 64);
+                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                    composerImpl2.startReplaceGroup(927431229);
+                    final String str = strStringResource;
+                    boolean zChanged = composerImpl2.changed(str);
+                    Object objRememberedValue = composerImpl2.rememberedValue();
+                    Composer.Companion companion2 = Composer.Companion;
+                    if (!zChanged) {
+                        companion2.getClass();
+                        if (objRememberedValue == Composer.Companion.Empty) {
+                            objRememberedValue = new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda0
+                                @Override // kotlin.jvm.functions.Function1
+                                /* renamed from: invoke */
+                                public final Object mo781invoke(Object obj4) {
+                                    SemanticsPropertyReceiver semanticsPropertyReceiver = (SemanticsPropertyReceiver) obj4;
+                                    Role.Companion.getClass();
+                                    SemanticsPropertiesKt.m719setRolekuIjeqM(semanticsPropertyReceiver, Role.Switch);
+                                    SemanticsPropertiesKt.setStateDescription(semanticsPropertyReceiver, str);
+                                    return Unit.INSTANCE;
+                                }
+                            };
+                            composerImpl2.updateRememberedValue(objRememberedValue);
+                        }
+                    }
+                    composerImpl2.end(false);
+                    Modifier modifierSemantics = SemanticsModifierKt.semantics(modifierM140size3ABfNKs, false, (Function1) objRememberedValue);
+                    IconButtonDefaults iconButtonDefaults = IconButtonDefaults.INSTANCE;
+                    PlatformSliderColors platformSliderColors2 = platformSliderColors;
+                    long j = platformSliderColors2.indicatorColor;
+                    iconButtonDefaults.getClass();
+                    long j2 = platformSliderColors2.iconColor;
+                    if ((12 & 1) != 0) {
+                        Color.Companion.getClass();
+                        j = Color.Unspecified;
+                    }
+                    long j3 = j;
+                    Color.Companion companion3 = Color.Companion;
+                    companion3.getClass();
+                    long j4 = Color.Unspecified;
+                    companion3.getClass();
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventStart("androidx.compose.material3.IconButtonDefaults.filledIconButtonColors (IconButtonDefaults.kt:323)");
+                    }
+                    MaterialTheme.INSTANCE.getClass();
+                    IconButtonColors iconButtonColorsM265copyjRlVdoo = IconButtonDefaults.getDefaultFilledIconButtonColors$material3_release(MaterialTheme.getColorScheme(composerImpl2)).m265copyjRlVdoo(j3, j2, j4, j4);
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventEnd();
+                    }
+                    composerImpl2.startReplaceGroup(927435937);
+                    final Function1 function12 = function1;
+                    boolean zChanged2 = composerImpl2.changed(function12);
+                    final boolean z4 = z;
+                    boolean zChanged3 = zChanged2 | composerImpl2.changed(z4);
+                    Object objRememberedValue2 = composerImpl2.rememberedValue();
+                    if (!zChanged3) {
+                        companion2.getClass();
+                        if (objRememberedValue2 == Composer.Companion.Empty) {
+                            objRememberedValue2 = new Function0() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ExpandButtonLegacy$1$$ExternalSyntheticLambda1
+                                @Override // kotlin.jvm.functions.Function0
+                                public final Object invoke() {
+                                    function12.mo781invoke(Boolean.valueOf(!z4));
+                                    return Unit.INSTANCE;
+                                }
+                            };
+                            composerImpl2.updateRememberedValue(objRememberedValue2);
+                        }
+                    }
+                    composerImpl2.end(false);
+                    IconButtonKt.IconButton(1572864, 52, null, iconButtonColorsM265copyjRlVdoo, composerImpl2, modifierSemantics, null, (Function0) objRememberedValue2, ComposableLambdaKt.rememberComposableLambda(242978822, new Function2() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt.ExpandButtonLegacy.1.3
+                        /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
+                        @Override // kotlin.jvm.functions.Function2
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object invoke(Object obj4, Object obj5) {
+                            Composer composer3 = (Composer) obj4;
+                            if ((((Number) obj5).intValue() & 3) == 2) {
+                                ComposerImpl composerImpl3 = (ComposerImpl) composer3;
+                                if (composerImpl3.getSkipping()) {
+                                    composerImpl3.skipToGroupEnd();
+                                } else {
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.ExpandButtonLegacy.<anonymous>.<anonymous> (ColumnVolumeSliders.kt:208)");
+                                    }
+                                    IconKt.m270Iconww6aTOc(PainterResources_androidKt.painterResource(z4 ? R.drawable.ic_filled_arrow_down : R.drawable.ic_filled_arrow_up, composer3, 0), (String) null, (Modifier) null, 0L, composer3, 48, 12);
+                                    if (ComposerKt.isTraceInProgress()) {
+                                        ComposerKt.traceEventEnd();
+                                    }
+                                }
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }, composerImpl2), false);
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventEnd();
+                    }
+                    return Unit.INSTANCE;
                 }
             }, composerImpl), composerImpl, ((i2 >> 3) & 14) | 196608 | ((i2 >> 9) & 112), 16);
             modifier2 = modifier;
@@ -214,17 +586,17 @@ public abstract class ColumnVolumeSlidersKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final boolean z4 = z3;
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$$ExternalSyntheticLambda4
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$$ExternalSyntheticLambda4
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     PlatformSliderColors platformSliderColors2 = platformSliderColors;
                     Modifier modifier3 = modifier2;
-                    ColumnVolumeSlidersKt.ExpandButtonLegacy(z, z4, function1, platformSliderColors2, modifier3, (Composer) obj, updateChangedFlags);
+                    ColumnVolumeSlidersKt.ExpandButtonLegacy(z, z4, function1, platformSliderColors2, modifier3, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

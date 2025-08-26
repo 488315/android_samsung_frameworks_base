@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WindowDecorLinearLayout extends LinearLayout implements TaskFocusStateConsumer {
     public static final int[] TASK_FOCUSED_STATE = {R.attr.state_task_focused};
@@ -22,9 +21,9 @@ public class WindowDecorLinearLayout extends LinearLayout implements TaskFocusSt
         if (!this.mIsTaskFocused) {
             return super.onCreateDrawableState(i);
         }
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
-        LinearLayout.mergeDrawableStates(onCreateDrawableState, TASK_FOCUSED_STATE);
-        return onCreateDrawableState;
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
+        LinearLayout.mergeDrawableStates(iArrOnCreateDrawableState, TASK_FOCUSED_STATE);
+        return iArrOnCreateDrawableState;
     }
 
     @Override // com.android.wm.shell.windowdecor.TaskFocusStateConsumer
@@ -32,9 +31,9 @@ public class WindowDecorLinearLayout extends LinearLayout implements TaskFocusSt
         this.mIsTaskFocused = z;
         refreshDrawableState();
         if (CoreRune.MW_CAPTION_HANDLE) {
-            KeyEvent.Callback findViewById = findViewById(R.id.caption_handle);
-            if (findViewById instanceof TaskFocusStateConsumer) {
-                ((TaskFocusStateConsumer) findViewById).setTaskFocusState(z);
+            KeyEvent.Callback callbackFindViewById = findViewById(R.id.caption_handle);
+            if (callbackFindViewById instanceof TaskFocusStateConsumer) {
+                ((TaskFocusStateConsumer) callbackFindViewById).setTaskFocusState(z);
             }
         }
     }

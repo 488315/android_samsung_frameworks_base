@@ -5,6 +5,7 @@ import android.app.admin.WifiSsidPolicy;
 import android.content.Context;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.wifi.MloLink;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -24,11 +25,13 @@ import android.util.ArraySet;
 import android.util.Log;
 import androidx.core.os.BuildCompat;
 import com.android.systemui.R;
+import com.android.wifitrackerlib.WifiEntry;
 import com.samsung.android.knox.ex.knoxAI.KnoxAiManagerInternal;
 import com.samsung.android.wifi.SemWifiConfiguration;
 import com.samsung.android.wifi.SemWifiManager;
 import com.samsung.android.wifitrackerlib.SemWifiEntryFlags;
 import com.samsung.android.wifitrackerlib.SemWifiUtils;
+import com.samsung.android.wifitrackerlib.WifiIssueDetectorUtil;
 import com.samsung.android.wifitrackerlib.WifiQoSScoredCache;
 import com.samsung.android.wifitrackerlib.WifiScoredNetwork;
 import com.sec.ims.extensions.WiFiManagerExt;
@@ -52,7 +55,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StandardWifiEntry extends WifiEntry {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -73,7 +75,6 @@ public class StandardWifiEntry extends WifiEntry {
     public WifiConfiguration mTargetWifiConfig;
     public final UserManager mUserManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StandardWifiEntryKey {
         public final boolean mIsNetworkRequest;
         public final boolean mIsTargetingNewNetworks;
@@ -101,7 +102,7 @@ public class StandardWifiEntry extends WifiEntry {
             return Objects.hash(this.mScanResultKey, this.mSuggestionProfileKey, Boolean.valueOf(this.mIsNetworkRequest));
         }
 
-        public final String toString() {
+        public final String toString() throws JSONException {
             JSONObject jSONObject = new JSONObject();
             try {
                 ScanResultKey scanResultKey = this.mScanResultKey;
@@ -277,36 +278,140 @@ public class StandardWifiEntry extends WifiEntry {
         while (i2 < size) {
             Object obj = arrayList.get(i2);
             i2++;
-            int intValue = ((Integer) obj).intValue();
-            if (intValue == 0 || intValue == 1 || intValue == 2 || intValue == 4 || intValue == 6) {
+            int iIntValue = ((Integer) obj).intValue();
+            if (iIntValue == 0 || iIntValue == 1 || iIntValue == 2 || iIntValue == 4 || iIntValue == 6) {
                 return true;
             }
         }
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0015  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized boolean canSignIn() {
         boolean z;
         NetworkCapabilities networkCapabilities;
-        if (this.mNetwork != null && (networkCapabilities = this.mNetworkCapabilities) != null) {
-            z = networkCapabilities.hasCapability(17);
+        if (this.mNetwork == null || (networkCapabilities = this.mNetworkCapabilities) == null) {
+            z = false;
+        } else if (networkCapabilities.hasCapability(17)) {
+            z = true;
         }
         return z;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x016e  */
     @Override // com.android.wifitrackerlib.WifiEntry
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public synchronized void connect(final com.android.wifitrackerlib.WifiEntry.ConnectCallback r9) {
-        /*
-            Method dump skipped, instructions count: 440
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.StandardWifiEntry.connect(com.android.wifitrackerlib.WifiEntry$ConnectCallback):void");
+    public synchronized void connect(final WifiEntry.ConnectCallback connectCallback) {
+        List<SubscriptionInfo> activeSubscriptionInfoList;
+        boolean zAnyMatch = true;
+        final int i = 0;
+        synchronized (this) {
+            try {
+                this.mConnectCallback = connectCallback;
+                this.mWifiManager.stopRestrictingAutoJoinToSubscriptionId();
+                if (isSaved() || isSuggestion()) {
+                    WifiConfiguration wifiConfiguration = this.mTargetWifiConfig;
+                    List list = Utils.defaultSsidList;
+                    WifiEnterpriseConfig wifiEnterpriseConfig = wifiConfiguration.enterpriseConfig;
+                    if (wifiEnterpriseConfig != null && wifiEnterpriseConfig.isAuthenticationSimBased()) {
+                        Context context = this.mContext;
+                        final int i2 = this.mTargetWifiConfig.carrierId;
+                        SubscriptionManager subscriptionManager = (SubscriptionManager) context.getSystemService("telephony_subscription_service");
+                        if (subscriptionManager == null || (activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList()) == null || activeSubscriptionInfoList.isEmpty()) {
+                            zAnyMatch = false;
+                        } else if (i2 != -1) {
+                            zAnyMatch = activeSubscriptionInfoList.stream().anyMatch(new Predicate() { // from class: com.android.wifitrackerlib.Utils$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i3 = i2;
+                                    List list2 = Utils.defaultSsidList;
+                                    return ((SubscriptionInfo) obj).getCarrierId() == i3;
+                                }
+                            });
+                        }
+                        if (!zAnyMatch) {
+                            if (connectCallback != null) {
+                                this.mCallbackHandler.post(new Runnable() { // from class: com.android.wifitrackerlib.StandardWifiEntry$$ExternalSyntheticLambda5
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        int i3 = i;
+                                        WifiEntry.ConnectCallback connectCallback2 = connectCallback;
+                                        switch (i3) {
+                                            case 0:
+                                                int i4 = StandardWifiEntry.$r8$clinit;
+                                                connectCallback2.onConnectResult(3);
+                                                break;
+                                            default:
+                                                int i5 = StandardWifiEntry.$r8$clinit;
+                                                connectCallback2.onConnectResult(1);
+                                                break;
+                                        }
+                                    }
+                                });
+                            }
+                            return;
+                        }
+                    }
+                    if (this.mTargetWifiConfig.networkId < 0) {
+                        Log.d("StandardWifiEntry", "failed to connect - invalid network ID");
+                        return;
+                    }
+                    new WifiIssueDetectorUtil(this.mContext).reportConnectNetwork(this.mTargetWifiConfig);
+                    this.mWifiManager.connect(this.mTargetWifiConfig.networkId, new WifiEntry.ConnectActionListener());
+                    SemWifiManager semWifiManager$2 = getSemWifiManager$2();
+                    WifiConfiguration wifiConfiguration2 = this.mTargetWifiConfig;
+                    semWifiManager$2.notifyConnect(wifiConfiguration2.networkId, wifiConfiguration2.getKey());
+                } else if (((ArrayList) this.mTargetSecurityTypes).contains(6)) {
+                    WifiConfiguration wifiConfiguration3 = new WifiConfiguration();
+                    wifiConfiguration3.SSID = "\"" + this.mKey.mScanResultKey.mSsid + "\"";
+                    wifiConfiguration3.setSecurityParams(6);
+                    wifiConfiguration3.hiddenSSID = Utils.shouldSetHiddenSsid(wifiConfiguration3.SSID, this.mWifiManager);
+                    new WifiIssueDetectorUtil(this.mContext).reportConnectNetwork(this.mTargetWifiConfig);
+                    this.mWifiManager.connect(wifiConfiguration3, new WifiEntry.ConnectActionListener());
+                    this.mTargetWifiConfig = wifiConfiguration3;
+                    getSemWifiManager$2().notifyConnect(wifiConfiguration3.networkId, wifiConfiguration3.getKey());
+                    if (((ArrayList) this.mTargetSecurityTypes).contains(0)) {
+                        WifiConfiguration wifiConfiguration4 = new WifiConfiguration();
+                        wifiConfiguration4.SSID = "\"" + this.mKey.mScanResultKey.mSsid + "\"";
+                        wifiConfiguration4.setSecurityParams(0);
+                        wifiConfiguration4.hiddenSSID = Utils.shouldSetHiddenSsid(wifiConfiguration4.SSID, this.mWifiManager);
+                        this.mWifiManager.save(wifiConfiguration4, null);
+                    }
+                } else if (((ArrayList) this.mTargetSecurityTypes).contains(0)) {
+                    WifiConfiguration wifiConfiguration5 = new WifiConfiguration();
+                    wifiConfiguration5.SSID = "\"" + this.mKey.mScanResultKey.mSsid + "\"";
+                    wifiConfiguration5.setSecurityParams(0);
+                    wifiConfiguration5.hiddenSSID = Utils.shouldSetHiddenSsid(wifiConfiguration5.SSID, this.mWifiManager);
+                    new WifiIssueDetectorUtil(this.mContext).reportConnectNetwork(wifiConfiguration5);
+                    this.mWifiManager.connect(wifiConfiguration5, new WifiEntry.ConnectActionListener());
+                    this.mTargetWifiConfig = wifiConfiguration5;
+                    getSemWifiManager$2().notifyConnect(wifiConfiguration5.networkId, wifiConfiguration5.getKey());
+                } else if (connectCallback != null) {
+                    Handler handler = this.mCallbackHandler;
+                    final char c = 1 == true ? 1 : 0;
+                    handler.post(new Runnable() { // from class: com.android.wifitrackerlib.StandardWifiEntry$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i3 = c;
+                            WifiEntry.ConnectCallback connectCallback2 = connectCallback;
+                            switch (i3) {
+                                case 0:
+                                    int i4 = StandardWifiEntry.$r8$clinit;
+                                    connectCallback2.onConnectResult(3);
+                                    break;
+                                default:
+                                    int i5 = StandardWifiEntry.$r8$clinit;
+                                    connectCallback2.onConnectResult(1);
+                                    break;
+                            }
+                        }
+                    });
+                }
+            } finally {
+            }
+        }
     }
 
     @Override // com.android.wifitrackerlib.WifiEntry
@@ -328,7 +433,7 @@ public class StandardWifiEntry extends WifiEntry {
     }
 
     public final String getBandSummary$1(int i, WifiInfo wifiInfo) {
-        String stringJoiner;
+        String string;
         if (i == 2) {
             setBand(wifiInfo.getFrequency());
             return getBandString();
@@ -341,7 +446,7 @@ public class StandardWifiEntry extends WifiEntry {
         List list = Utils.defaultSsidList;
         synchronized (Utils.class) {
             try {
-                StringJoiner stringJoiner2 = new StringJoiner(" + ");
+                StringJoiner stringJoiner = new StringJoiner(" + ");
                 int wifiStandard = scanResult.getWifiStandard();
                 int i2 = BuildCompat.$r8$clinit;
                 if (wifiStandard == 8) {
@@ -354,15 +459,15 @@ public class StandardWifiEntry extends WifiEntry {
                         } else if (band != 2) {
                             i3 = band != 8 ? band != 16 ? -1 : 3 : 2;
                         }
-                        stringJoiner2.add(Utils.getBandString(i3, context));
+                        stringJoiner.add(Utils.getBandString(i3, context));
                     }
                 }
-                stringJoiner = stringJoiner2.toString();
+                string = stringJoiner.toString();
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return TextUtils.isEmpty(stringJoiner) ? getBandString() : stringJoiner;
+        return TextUtils.isEmpty(string) ? getBandString() : string;
     }
 
     @Override // com.android.wifitrackerlib.WifiEntry
@@ -403,11 +508,11 @@ public class StandardWifiEntry extends WifiEntry {
             return "";
         }
         if (((ArrayList) this.mTargetSecurityTypes).size() == 1) {
-            int intValue = ((Integer) ((ArrayList) this.mTargetSecurityTypes).get(0)).intValue();
-            if (intValue == 9) {
+            int iIntValue = ((Integer) ((ArrayList) this.mTargetSecurityTypes).get(0)).intValue();
+            if (iIntValue == 9) {
                 return this.mContext.getString(R.string.wifitrackerlib_wifi_security_short_eap_wpa3);
             }
-            switch (intValue) {
+            switch (iIntValue) {
                 case 0:
                     return "";
                 case 1:
@@ -468,18 +573,143 @@ public class StandardWifiEntry extends WifiEntry {
         return Utils.getStandardString(((ScanResult) ((ArrayList) this.mTargetScanResults).get(0)).getWifiStandard(), this.mContext);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:82:0x016c A[Catch: all -> 0x0014, TryCatch #0 {, blocks: (B:4:0x0003, B:6:0x0009, B:10:0x0017, B:14:0x0031, B:15:0x0081, B:17:0x0085, B:18:0x008e, B:20:0x0094, B:22:0x009d, B:24:0x00a9, B:25:0x00ac, B:28:0x00b2, B:30:0x00b8, B:32:0x00c4, B:33:0x00c7, B:35:0x00cd, B:37:0x00d7, B:39:0x00dd, B:41:0x00e3, B:43:0x00e7, B:45:0x00ed, B:48:0x00f2, B:57:0x0103, B:58:0x010b, B:59:0x0113, B:60:0x011b, B:62:0x0122, B:64:0x0128, B:65:0x012b, B:67:0x0131, B:69:0x0137, B:71:0x013d, B:73:0x0141, B:75:0x0145, B:79:0x014c, B:80:0x0166, B:82:0x016c, B:83:0x0158, B:86:0x0171, B:88:0x0177, B:90:0x018b, B:91:0x018f, B:93:0x0195, B:94:0x0199, B:96:0x01a5, B:97:0x01a8, B:99:0x01b0, B:101:0x01b6, B:104:0x01bd, B:106:0x01c6, B:107:0x01cb, B:109:0x01d1, B:110:0x01d9, B:112:0x01df, B:113:0x01e3, B:115:0x01e9, B:117:0x01ef, B:118:0x0205, B:120:0x0211, B:121:0x0214, B:124:0x0044, B:125:0x0051, B:129:0x005e, B:131:0x0074, B:133:0x0077), top: B:3:0x0003 }] */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x016c A[Catch: all -> 0x0014, TryCatch #0 {, blocks: (B:4:0x0003, B:6:0x0009, B:11:0x0017, B:15:0x0031, B:26:0x0081, B:28:0x0085, B:29:0x008e, B:31:0x0094, B:33:0x009d, B:35:0x00a9, B:36:0x00ac, B:39:0x00b2, B:41:0x00b8, B:43:0x00c4, B:44:0x00c7, B:46:0x00cd, B:48:0x00d7, B:50:0x00dd, B:52:0x00e3, B:54:0x00e7, B:57:0x00ed, B:60:0x00f2, B:69:0x0103, B:70:0x010b, B:71:0x0113, B:72:0x011b, B:73:0x0122, B:75:0x0128, B:76:0x012b, B:78:0x0131, B:80:0x0137, B:82:0x013d, B:84:0x0141, B:86:0x0145, B:90:0x014c, B:93:0x0166, B:95:0x016c, B:91:0x0158, B:97:0x0171, B:99:0x0177, B:101:0x018b, B:102:0x018f, B:104:0x0195, B:105:0x0199, B:107:0x01a5, B:108:0x01a8, B:110:0x01b0, B:112:0x01b6, B:115:0x01bd, B:117:0x01c6, B:118:0x01cb, B:120:0x01d1, B:121:0x01d9, B:123:0x01df, B:124:0x01e3, B:126:0x01e9, B:128:0x01ef, B:129:0x0205, B:131:0x0211, B:132:0x0214, B:16:0x0044, B:17:0x0051, B:21:0x005e, B:24:0x0074, B:25:0x0077), top: B:137:0x0003 }] */
     @Override // com.android.wifitrackerlib.WifiEntry
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public synchronized java.lang.String getSummary(boolean r11) {
-        /*
-            Method dump skipped, instructions count: 540
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.StandardWifiEntry.getSummary(boolean):java.lang.String");
+    public synchronized String getSummary(boolean z) {
+        String disconnectedDescription;
+        String string;
+        int i;
+        if (hasAdminRestrictions()) {
+            return this.mContext.getString(R.string.wifitrackerlib_admin_restricted_network);
+        }
+        StringJoiner stringJoiner = new StringJoiner(this.mContext.getString(R.string.wifitrackerlib_summary_separator));
+        int connectedState = getConnectedState();
+        if (connectedState == 0) {
+            disconnectedDescription = Utils.getDisconnectedDescription(this.mContext, this.mTargetWifiConfig, this.mSemFlags);
+        } else if (connectedState == 1) {
+            Context context = this.mContext;
+            NetworkInfo networkInfo = this.mNetworkInfo;
+            List list = Utils.defaultSsidList;
+            if (context == null || networkInfo == null) {
+                disconnectedDescription = "";
+            } else {
+                String[] stringArray = context.getResources().getStringArray(R.array.wifitrackerlib_wifi_status);
+                int iOrdinal = NetworkInfo.DetailedState.CONNECTING.ordinal();
+                if (iOrdinal < stringArray.length) {
+                    disconnectedDescription = stringArray[iOrdinal];
+                }
+            }
+        } else if (connectedState != 2) {
+            Log.e("StandardWifiEntry", "getConnectedState() returned unknown state: " + connectedState);
+            disconnectedDescription = null;
+        } else {
+            disconnectedDescription = Utils.getConnectedDescription(this.mContext, this.mWifiInfo, this.mTargetWifiConfig, this.mNetworkCapabilities);
+        }
+        if (this.mShowBandSummary) {
+            stringJoiner.add(getBandSummary$1(connectedState, this.mWifiInfo));
+        }
+        if (!TextUtils.isEmpty(disconnectedDescription)) {
+            stringJoiner.add(disconnectedDescription);
+            if (semIsEphemeral()) {
+                String verboseLoggingDescription = Utils.getVerboseLoggingDescription(this, this.mSemFlags);
+                if (!TextUtils.isEmpty(verboseLoggingDescription)) {
+                    stringJoiner.add(verboseLoggingDescription);
+                }
+                return stringJoiner.toString();
+            }
+        }
+        if (getConnectedState() == 2) {
+            String warningDescription = Utils.getWarningDescription(this.mContext, this);
+            if (!TextUtils.isEmpty(warningDescription)) {
+                stringJoiner.add(warningDescription);
+            }
+        }
+        SemWifiEntryFlags semWifiEntryFlags = this.mSemFlags;
+        if (semWifiEntryFlags.networkScoringUiEnabled) {
+            Context context2 = this.mContext;
+            List list2 = Utils.defaultSsidList;
+            String string2 = "";
+            if (context2 != null && getConnectedState() == 0 && !isSaved()) {
+                SemWifiConfiguration semWifiConfiguration = semWifiEntryFlags.semConfig;
+                if ((semWifiConfiguration != null ? semWifiConfiguration.networkDisableReason : 0) != 5 && semWifiEntryFlags.networkType != 2) {
+                    int i2 = this.mSpeed;
+                    if (i2 == 5) {
+                        string2 = context2.getString(R.string.wifitrackerlib_speed_label_slow);
+                    } else if (i2 == 10) {
+                        string2 = context2.getString(R.string.wifitrackerlib_speed_label_okay);
+                    } else if (i2 == 20) {
+                        string2 = context2.getString(R.string.wifitrackerlib_speed_label_fast);
+                    } else if (i2 == 30) {
+                        string2 = context2.getString(R.string.wifitrackerlib_speed_label_very_fast);
+                    }
+                }
+            }
+            if (!TextUtils.isEmpty(string2)) {
+                stringJoiner.add(string2);
+            }
+            Context context3 = this.mContext;
+            SemWifiEntryFlags semWifiEntryFlags2 = this.mSemFlags;
+            if (context3 == null || getConnectedState() != 0 || isSaved() || (i = semWifiEntryFlags2.networkType) == 0) {
+                string = "";
+                if (!TextUtils.isEmpty(string)) {
+                    stringJoiner.add(string);
+                }
+            } else {
+                SemWifiConfiguration semWifiConfiguration2 = semWifiEntryFlags2.semConfig;
+                if ((semWifiConfiguration2 != null ? semWifiConfiguration2.networkDisableReason : 0) == 5) {
+                    string = "";
+                    if (!TextUtils.isEmpty(string)) {
+                    }
+                } else {
+                    string = i == 1 ? context3.getResources().getString(R.string.wifi_disabled_captive_portal) : context3.getResources().getString(R.string.wifi_disabled_no_internet);
+                    if (!TextUtils.isEmpty(string)) {
+                    }
+                }
+            }
+        }
+        if (connectedState == 0) {
+            if (this.mSemFlags.isCarrierNetwork) {
+                String carrierNetworkOffloadDescription = Utils.getCarrierNetworkOffloadDescription(this.mContext, this, this.mWifiManager);
+                String autoConnectDescription = Utils.getAutoConnectDescription(this.mContext, this);
+                if (!TextUtils.isEmpty(carrierNetworkOffloadDescription)) {
+                    stringJoiner.add(carrierNetworkOffloadDescription);
+                } else if (!TextUtils.isEmpty(autoConnectDescription)) {
+                    stringJoiner.add(autoConnectDescription);
+                }
+            } else {
+                String autoConnectDescription2 = Utils.getAutoConnectDescription(this.mContext, this);
+                if (!TextUtils.isEmpty(autoConnectDescription2)) {
+                    stringJoiner.add(autoConnectDescription2);
+                }
+            }
+        }
+        Context context4 = this.mContext;
+        List list3 = Utils.defaultSsidList;
+        String string3 = "";
+        if (context4 != null && (canSetMeteredChoice() || getMeteredChoice() == 1)) {
+            if (getMeteredChoice() == 1) {
+                string3 = context4.getString(R.string.wifitrackerlib_wifi_metered_label);
+            } else if (getMeteredChoice() == 2) {
+                string3 = context4.getString(R.string.wifitrackerlib_wifi_unmetered_label);
+            } else if (isMetered()) {
+                string3 = context4.getString(R.string.wifitrackerlib_wifi_metered_label);
+            }
+        }
+        if (stringJoiner.length() != 0 && !TextUtils.isEmpty(string3)) {
+            StringJoiner stringJoiner2 = new StringJoiner(this.mContext.getString(R.string.wifitrackerlib_summary_separator));
+            stringJoiner2.add(string3);
+            stringJoiner2.add(stringJoiner.toString());
+            stringJoiner = stringJoiner2;
+        }
+        String verboseLoggingDescription2 = Utils.getVerboseLoggingDescription(this, this.mSemFlags);
+        if (!TextUtils.isEmpty(verboseLoggingDescription2)) {
+            stringJoiner.add(verboseLoggingDescription2);
+        }
+        return stringJoiner.toString();
     }
 
     @Override // com.android.wifitrackerlib.WifiEntry
@@ -495,15 +725,10 @@ public class StandardWifiEntry extends WifiEntry {
     @Override // com.android.wifitrackerlib.WifiEntry
     public final synchronized boolean hasAdminRestrictions() {
         try {
-            if (this.mHasAddConfigUserRestriction) {
-                if (!isSaved()) {
-                    if (isSuggestion()) {
-                    }
-                    return true;
+            if (!this.mHasAddConfigUserRestriction || isSaved() || isSuggestion()) {
+                if (!this.mIsAdminRestricted) {
+                    return false;
                 }
-            }
-            if (!this.mIsAdminRestricted) {
-                return false;
             }
             return true;
         } catch (Throwable th) {
@@ -520,40 +745,23 @@ public class StandardWifiEntry extends WifiEntry {
         return wifiConfiguration.allowAutojoin;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000e, code lost:
-    
-        if (r0.meteredHint != false) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0013  */
     @Override // com.android.wifitrackerlib.WifiEntry
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public synchronized boolean isMetered() {
-        /*
-            r2 = this;
-            monitor-enter(r2)
-            int r0 = r2.getMeteredChoice()     // Catch: java.lang.Throwable -> L11
-            r1 = 1
-            if (r0 == r1) goto L14
-            android.net.wifi.WifiConfiguration r0 = r2.mTargetWifiConfig     // Catch: java.lang.Throwable -> L11
-            if (r0 == 0) goto L13
-            boolean r0 = r0.meteredHint     // Catch: java.lang.Throwable -> L11
-            if (r0 == 0) goto L13
-            goto L14
-        L11:
-            r0 = move-exception
-            goto L16
-        L13:
-            r1 = 0
-        L14:
-            monitor-exit(r2)
-            return r1
-        L16:
-            monitor-exit(r2)     // Catch: java.lang.Throwable -> L11
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.StandardWifiEntry.isMetered():boolean");
+        boolean z;
+        z = true;
+        if (getMeteredChoice() != 1) {
+            WifiConfiguration wifiConfiguration = this.mTargetWifiConfig;
+            if (wifiConfiguration != null) {
+                if (!wifiConfiguration.meteredHint) {
+                    z = false;
+                }
+            }
+        }
+        return z;
     }
 
     @Override // com.android.wifitrackerlib.WifiEntry
@@ -561,7 +769,11 @@ public class StandardWifiEntry extends WifiEntry {
         return this.mTargetWifiConfig != null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x000d  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public synchronized boolean isSuggestion() {
         boolean z;
         WifiConfiguration wifiConfiguration = this.mTargetWifiConfig;
@@ -623,57 +835,30 @@ public class StandardWifiEntry extends WifiEntry {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0031, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0031, code lost:
     
         if (r0.getDisableReasonCounter(5) > 0) goto L24;
      */
     @Override // com.android.wifitrackerlib.WifiEntry
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final synchronized boolean shouldEditBeforeConnect() {
-        /*
-            r3 = this;
-            monitor-enter(r3)
-            android.net.wifi.WifiConfiguration r0 = r3.getWifiConfiguration()     // Catch: java.lang.Throwable -> L1b
-            r1 = 0
-            if (r0 != 0) goto La
-            monitor-exit(r3)
-            return r1
-        La:
-            android.net.wifi.WifiConfiguration$NetworkSelectionStatus r0 = r0.getNetworkSelectionStatus()     // Catch: java.lang.Throwable -> L1b
-            int r2 = r0.getNetworkSelectionStatus()     // Catch: java.lang.Throwable -> L1b
-            if (r2 != 0) goto L1d
-            boolean r2 = r0.hasEverConnected()     // Catch: java.lang.Throwable -> L1b
-            if (r2 != 0) goto L34
-            goto L1d
-        L1b:
-            r0 = move-exception
-            goto L39
-        L1d:
-            r2 = 2
-            int r2 = r0.getDisableReasonCounter(r2)     // Catch: java.lang.Throwable -> L1b
-            if (r2 > 0) goto L36
-            r2 = 8
-            int r2 = r0.getDisableReasonCounter(r2)     // Catch: java.lang.Throwable -> L1b
-            if (r2 > 0) goto L36
-            r2 = 5
-            int r0 = r0.getDisableReasonCounter(r2)     // Catch: java.lang.Throwable -> L1b
-            if (r0 <= 0) goto L34
-            goto L36
-        L34:
-            monitor-exit(r3)
-            return r1
-        L36:
-            monitor-exit(r3)
-            r3 = 1
-            return r3
-        L39:
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> L1b
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.StandardWifiEntry.shouldEditBeforeConnect():boolean");
+        try {
+            WifiConfiguration wifiConfiguration = getWifiConfiguration();
+            if (wifiConfiguration == null) {
+                return false;
+            }
+            WifiConfiguration.NetworkSelectionStatus networkSelectionStatus = wifiConfiguration.getNetworkSelectionStatus();
+            if (networkSelectionStatus.getNetworkSelectionStatus() != 0 || !networkSelectionStatus.hasEverConnected()) {
+                if (networkSelectionStatus.getDisableReasonCounter(2) <= 0 && networkSelectionStatus.getDisableReasonCounter(8) <= 0) {
+                }
+                return true;
+            }
+            return false;
+        } catch (Throwable th) {
+            throw th;
+        }
     }
 
     public final void updateAdminRestrictions() {
@@ -693,9 +878,9 @@ public class StandardWifiEntry extends WifiEntry {
                 while (i3 < size) {
                     Object obj = arrayList.get(i3);
                     i3++;
-                    int intValue = ((Integer) obj).intValue();
+                    int iIntValue = ((Integer) obj).intValue();
                     List list = Utils.defaultSsidList;
-                    switch (intValue) {
+                    switch (iIntValue) {
                         case 0:
                         case 6:
                             i = 0;
@@ -766,12 +951,12 @@ public class StandardWifiEntry extends WifiEntry {
                     throw new IllegalArgumentException("Attempted to update with wrong SSID! Expected: " + str + ", Actual: " + WifiInfo.sanitizeSsid(wifiConfiguration.SSID) + ", Config: " + wifiConfiguration);
                 }
                 for (Integer num : Utils.getSecurityTypesFromWifiConfiguration(wifiConfiguration)) {
-                    int intValue = num.intValue();
+                    int iIntValue = num.intValue();
                     ArraySet arraySet = (ArraySet) set;
                     if (!arraySet.contains(num)) {
-                        throw new IllegalArgumentException("Attempted to update with wrong security! Expected one of: " + arraySet + ", Actual: " + intValue + ", Config: " + wifiConfiguration);
+                        throw new IllegalArgumentException("Attempted to update with wrong security! Expected one of: " + arraySet + ", Actual: " + iIntValue + ", Config: " + wifiConfiguration);
                     }
-                    if (intValue != 4 ? intValue != 5 ? intValue != 6 ? true : this.mIsEnhancedOpenSupported : this.mIsWpa3SuiteBSupported : this.mIsWpa3SaeSupported) {
+                    if (iIntValue != 4 ? iIntValue != 5 ? iIntValue != 6 ? true : this.mIsEnhancedOpenSupported : this.mIsWpa3SuiteBSupported : this.mIsWpa3SaeSupported) {
                         ((ArrayMap) this.mMatchingWifiConfigs).put(num, wifiConfiguration);
                     }
                 }
@@ -830,9 +1015,9 @@ public class StandardWifiEntry extends WifiEntry {
                 Object obj = arrayList.get(i4);
                 i4++;
                 Integer num = (Integer) obj;
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 if (((ArraySet) set).contains(num)) {
-                    if (intValue != 4 ? intValue != 5 ? intValue != 6 ? true : this.mIsEnhancedOpenSupported : this.mIsWpa3SuiteBSupported : this.mIsWpa3SaeSupported) {
+                    if (iIntValue != 4 ? iIntValue != 5 ? iIntValue != 6 ? true : this.mIsEnhancedOpenSupported : this.mIsWpa3SuiteBSupported : this.mIsWpa3SaeSupported) {
                         if (!((ArrayMap) this.mMatchingScanResults).containsKey(num)) {
                             ((ArrayMap) this.mMatchingScanResults).put(num, new ArrayList());
                         }
@@ -854,24 +1039,24 @@ public class StandardWifiEntry extends WifiEntry {
             if (wifiInfo != null && wifiInfo.getCurrentSecurityType() != -1) {
                 this.mTargetSecurityTypes.add(Integer.valueOf(this.mWifiInfo.getCurrentSecurityType()));
             }
-            Set keySet = this.mMatchingWifiConfigs.keySet();
+            Set setKeySet = this.mMatchingWifiConfigs.keySet();
             if (this.mTargetSecurityTypes.isEmpty() && this.mKey.mIsTargetingNewNetworks) {
-                Set keySet2 = this.mMatchingScanResults.keySet();
-                Iterator it = keySet.iterator();
+                Set setKeySet2 = this.mMatchingScanResults.keySet();
+                Iterator it = setKeySet.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        this.mTargetSecurityTypes.addAll(keySet2);
+                        this.mTargetSecurityTypes.addAll(setKeySet2);
                         break;
                     }
                     Integer num = (Integer) it.next();
                     num.intValue();
-                    if (keySet2.contains(num)) {
+                    if (setKeySet2.contains(num)) {
                         break;
                     }
                 }
             }
             if (this.mTargetSecurityTypes.isEmpty()) {
-                this.mTargetSecurityTypes.addAll(keySet);
+                this.mTargetSecurityTypes.addAll(setKeySet);
             }
             if (this.mTargetSecurityTypes.isEmpty()) {
                 this.mTargetSecurityTypes.addAll(this.mKey.mScanResultKey.mSecurityTypes);
@@ -899,9 +1084,9 @@ public class StandardWifiEntry extends WifiEntry {
                 this.mBssid = bestScanResultByLevel.BSSID;
             }
             if (getConnectedState() == 0) {
-                int calculateSignalLevel = bestScanResultByLevel != null ? SemWifiUtils.calculateSignalLevel(this.mRssi) : -1;
-                this.mScanResultLevel = calculateSignalLevel;
-                if (calculateSignalLevel == -1) {
+                int iCalculateSignalLevel = bestScanResultByLevel != null ? SemWifiUtils.calculateSignalLevel(this.mRssi) : -1;
+                this.mScanResultLevel = iCalculateSignalLevel;
+                if (iCalculateSignalLevel == -1) {
                     this.mRssi = -127;
                 }
             }
@@ -911,7 +1096,6 @@ public class StandardWifiEntry extends WifiEntry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScanResultKey {
         public final Set mSecurityTypes;
         public final String mSsid;
@@ -937,7 +1121,7 @@ public class StandardWifiEntry extends WifiEntry {
             return Objects.hash(this.mSsid, this.mSecurityTypes);
         }
 
-        public final String toString() {
+        public final String toString() throws JSONException {
             JSONObject jSONObject = new JSONObject();
             try {
                 String str = this.mSsid;
@@ -962,59 +1146,40 @@ public class StandardWifiEntry extends WifiEntry {
             this.mSecurityTypes = new ArraySet();
             this.mSsid = str;
             for (Integer num : list) {
-                int intValue = num.intValue();
-                if (intValue == 0) {
+                int iIntValue = num.intValue();
+                if (iIntValue == 0) {
                     this.mSecurityTypes.add(6);
-                } else if (intValue == 6) {
+                } else if (iIntValue == 6) {
                     this.mSecurityTypes.add(0);
-                } else if (intValue == 9) {
+                } else if (iIntValue == 9) {
                     this.mSecurityTypes.add(3);
-                } else if (intValue == 2) {
+                } else if (iIntValue == 2) {
                     this.mSecurityTypes.add(4);
-                } else if (intValue == 3) {
+                } else if (iIntValue == 3) {
                     this.mSecurityTypes.add(9);
-                } else if (intValue == 4) {
+                } else if (iIntValue == 4) {
                     this.mSecurityTypes.add(2);
-                } else if (intValue != 11 && intValue != 12) {
+                } else if (iIntValue == 11 || iIntValue == 12) {
                 }
                 this.mSecurityTypes.add(num);
             }
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public ScanResultKey(android.net.wifi.ScanResult r6) {
-            /*
-                r5 = this;
-                java.lang.String r0 = r6.SSID
-                java.util.List r1 = com.android.wifitrackerlib.Utils.defaultSsidList
-                java.util.ArrayList r1 = new java.util.ArrayList
-                r1.<init>()
-                int[] r6 = r6.getSecurityTypes()
-                int r2 = r6.length
-                r3 = 0
-            Lf:
-                if (r3 >= r2) goto L1d
-                r4 = r6[r3]
-                java.lang.Integer r4 = java.lang.Integer.valueOf(r4)
-                r1.add(r4)
-                int r3 = r3 + 1
-                goto Lf
-            L1d:
-                r5.<init>(r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.StandardWifiEntry.ScanResultKey.<init>(android.net.wifi.ScanResult):void");
+        public ScanResultKey(ScanResult scanResult) {
+            String str = scanResult.SSID;
+            List list = Utils.defaultSsidList;
+            ArrayList arrayList = new ArrayList();
+            for (int i : scanResult.getSecurityTypes()) {
+                arrayList.add(Integer.valueOf(i));
+            }
+            this(str, arrayList);
         }
 
         public ScanResultKey(WifiConfiguration wifiConfiguration) {
             this(WifiInfo.sanitizeSsid(wifiConfiguration.SSID), Utils.getSecurityTypesFromWifiConfiguration(wifiConfiguration));
         }
 
-        public ScanResultKey(String str) {
+        public ScanResultKey(String str) throws JSONException {
             this.mSecurityTypes = new ArraySet();
             try {
                 JSONObject jSONObject = new JSONObject(str);
@@ -1082,39 +1247,39 @@ public class StandardWifiEntry extends WifiEntry {
             sb.append(asInt);
             sb.append(",");
         }
-        final long elapsedRealtime = SystemClock.elapsedRealtime();
+        final long jElapsedRealtime = SystemClock.elapsedRealtime();
         list.forEach(new Consumer() { // from class: com.android.wifitrackerlib.StandardWifiEntry$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                String sb2;
-                StandardWifiEntry standardWifiEntry = StandardWifiEntry.this;
-                StringBuilder sb3 = sb;
-                long j = elapsedRealtime;
+                String string;
+                StandardWifiEntry standardWifiEntry = this.f$0;
+                StringBuilder sb2 = sb;
+                long j = jElapsedRealtime;
                 ScanResult scanResult = (ScanResult) obj;
                 int i5 = StandardWifiEntry.$r8$clinit;
                 synchronized (standardWifiEntry) {
                     try {
-                        StringBuilder sb4 = new StringBuilder();
-                        sb4.append(" \n{");
-                        sb4.append(scanResult.BSSID);
+                        StringBuilder sb3 = new StringBuilder();
+                        sb3.append(" \n{");
+                        sb3.append(scanResult.BSSID);
                         WifiInfo wifiInfo = standardWifiEntry.mWifiInfo;
                         if (wifiInfo != null && scanResult.BSSID.equals(wifiInfo.getBSSID())) {
-                            sb4.append("*");
+                            sb3.append("*");
                         }
-                        sb4.append("=");
-                        sb4.append(scanResult.frequency);
-                        sb4.append(",");
-                        sb4.append(scanResult.level);
+                        sb3.append("=");
+                        sb3.append(scanResult.frequency);
+                        sb3.append(",");
+                        sb3.append(scanResult.level);
                         int wifiStandard = scanResult.getWifiStandard();
-                        sb4.append(",");
-                        sb4.append(Utils.getStandardString(wifiStandard, standardWifiEntry.mContext));
+                        sb3.append(",");
+                        sb3.append(Utils.getStandardString(wifiStandard, standardWifiEntry.mContext));
                         int i6 = BuildCompat.$r8$clinit;
                         if (wifiStandard == 8) {
-                            sb4.append(",mldMac=");
-                            sb4.append(scanResult.getApMldMacAddress());
-                            sb4.append(",linkId=");
-                            sb4.append(scanResult.getApMloLinkId());
-                            sb4.append(",affLinks=");
+                            sb3.append(",mldMac=");
+                            sb3.append(scanResult.getApMldMacAddress());
+                            sb3.append(",linkId=");
+                            sb3.append(scanResult.getApMloLinkId());
+                            sb3.append(",affLinks=");
                             StringJoiner stringJoiner = new StringJoiner(",", "[", "]");
                             for (MloLink mloLink : scanResult.getAffiliatedMloLinks()) {
                                 int band = mloLink.getBand();
@@ -1135,19 +1300,19 @@ public class StandardWifiEntry extends WifiEntry {
                                 }
                                 stringJoiner.add(new StringJoiner(",", "{", "}").add("apMacAddr=" + mloLink.getApMacAddress()).add("freq=" + ScanResult.convertChannelToFrequencyMhzIfSupported(mloLink.getChannel(), i7)).toString());
                             }
-                            sb4.append(stringJoiner.toString());
+                            sb3.append(stringJoiner.toString());
                         }
                         int i8 = ((int) (j - (scanResult.timestamp / 1000))) / 1000;
-                        sb4.append(",");
-                        sb4.append(i8);
-                        sb4.append("s");
-                        sb4.append("}");
-                        sb2 = sb4.toString();
+                        sb3.append(",");
+                        sb3.append(i8);
+                        sb3.append("s");
+                        sb3.append("}");
+                        string = sb3.toString();
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                sb3.append(sb2);
+                sb2.append(string);
             }
         });
         return sb.toString();

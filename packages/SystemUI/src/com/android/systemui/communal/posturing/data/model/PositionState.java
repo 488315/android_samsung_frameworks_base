@@ -4,16 +4,13 @@ import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PositionState {
     public final OrientationState orientation;
     public final StationaryState stationary;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OrientationState {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Postured implements OrientationState {
             public final float confidence;
 
@@ -37,7 +34,6 @@ public final class PositionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Unknown implements OrientationState {
             public static final Unknown INSTANCE = new Unknown();
 
@@ -58,10 +54,8 @@ public final class PositionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface StationaryState {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Stationary implements StationaryState {
             public final float confidence;
 
@@ -85,7 +79,6 @@ public final class PositionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Unknown implements StationaryState {
             public static final Unknown INSTANCE = new Unknown();
 
@@ -106,6 +99,7 @@ public final class PositionState {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public PositionState() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }

@@ -81,11 +81,11 @@ public class SoundEffectConstants {
     }
 
     public static int nextNavigationRepeatSoundEffectId() {
-        int nextInt = NAVIGATION_REPEAT_RANDOMIZER.nextInt(3);
-        if (nextInt >= sLastNavigationRepeatSoundEffectId) {
-            nextInt++;
+        int iNextInt = NAVIGATION_REPEAT_RANDOMIZER.nextInt(3);
+        if (iNextInt >= sLastNavigationRepeatSoundEffectId) {
+            iNextInt++;
         }
-        sLastNavigationRepeatSoundEffectId = nextInt;
-        return AudioManager.getNthNavigationRepeatSoundEffect(nextInt);
+        sLastNavigationRepeatSoundEffectId = iNextInt;
+        return AudioManager.getNthNavigationRepeatSoundEffect(iNextInt);
     }
 }

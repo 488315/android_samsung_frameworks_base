@@ -1,24 +1,37 @@
 package androidx.compose.foundation.gestures;
 
 import androidx.compose.animation.BoundsAnimationElement$$ExternalSyntheticOutline0;
-import androidx.compose.foundation.gestures.MouseWheelScrollingLogic;
+import androidx.compose.animation.core.AnimationStateKt;
+import androidx.compose.foundation.MutatePriority;
 import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource;
 import androidx.compose.ui.unit.Density;
+import androidx.compose.ui.unit.Velocity;
+import androidx.compose.ui.unit.VelocityKt;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Ref$FloatRef;
+import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.sequences.SequenceBuilderIterator;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
+import kotlinx.coroutines.SupervisorCoroutine;
+import kotlinx.coroutines.TimeoutKt;
 import kotlinx.coroutines.channels.BufferedChannel;
-import kotlinx.coroutines.channels.Channel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.channels.ChannelResult;
+import kotlinx.coroutines.intrinsics.UndispatchedKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MouseWheelScrollingLogic {
     public Density density;
@@ -30,7 +43,6 @@ public final class MouseWheelScrollingLogic {
     public final BufferedChannel channel = ChannelKt.Channel$default(Integer.MAX_VALUE, null, null, 6);
     public final MouseWheelVelocityTracker velocityTracker = new MouseWheelVelocityTracker();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class MouseWheelScrollDelta {
         public final boolean shouldApplyImmediately;
         public final long timeMillis;
@@ -48,7 +60,7 @@ public final class MouseWheelScrollingLogic {
                 return false;
             }
             MouseWheelScrollDelta mouseWheelScrollDelta = (MouseWheelScrollDelta) obj;
-            return Offset.m396equalsimpl0(this.value, mouseWheelScrollDelta.value) && this.timeMillis == mouseWheelScrollDelta.timeMillis && this.shouldApplyImmediately == mouseWheelScrollDelta.shouldApplyImmediately;
+            return Offset.m398equalsimpl0(this.value, mouseWheelScrollDelta.value) && this.timeMillis == mouseWheelScrollDelta.timeMillis && this.shouldApplyImmediately == mouseWheelScrollDelta.shouldApplyImmediately;
         }
 
         public final int hashCode() {
@@ -57,12 +69,12 @@ public final class MouseWheelScrollingLogic {
         }
 
         public final MouseWheelScrollDelta plus(MouseWheelScrollDelta mouseWheelScrollDelta) {
-            return new MouseWheelScrollDelta(Offset.m401plusMKHz9U(this.value, mouseWheelScrollDelta.value), Math.max(this.timeMillis, mouseWheelScrollDelta.timeMillis), this.shouldApplyImmediately, null);
+            return new MouseWheelScrollDelta(Offset.m403plusMKHz9U(this.value, mouseWheelScrollDelta.value), Math.max(this.timeMillis, mouseWheelScrollDelta.timeMillis), this.shouldApplyImmediately, null);
         }
 
         public final String toString() {
             StringBuilder sb = new StringBuilder("MouseWheelScrollDelta(value=");
-            sb.append((Object) Offset.m403toStringimpl(this.value));
+            sb.append((Object) Offset.m405toStringimpl(this.value));
             sb.append(", timeMillis=");
             sb.append(this.timeMillis);
             sb.append(", shouldApplyImmediately=");
@@ -76,6 +88,70 @@ public final class MouseWheelScrollingLogic {
         }
     }
 
+    /* renamed from: androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1, reason: invalid class name and case insensitive filesystem */
+    final class C06961 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C06961(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return MouseWheelScrollingLogic.this.userScroll(null, null, this);
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Function2 $block;
+        final /* synthetic */ ScrollingLogic $this_userScroll;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(ScrollingLogic scrollingLogic, Function2 function2, Continuation continuation) {
+            super(2, continuation);
+            this.$this_userScroll = scrollingLogic;
+            this.$block = function2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass2(this.$this_userScroll, this.$block, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ScrollingLogic scrollingLogic = this.$this_userScroll;
+                MutatePriority mutatePriority = MutatePriority.UserInput;
+                Function2 function2 = this.$block;
+                this.label = 1;
+                if (scrollingLogic.scroll(mutatePriority, function2, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     public MouseWheelScrollingLogic(ScrollingLogic scrollingLogic, ScrollConfig scrollConfig, Function2 function2, Density density) {
         this.scrollingLogic = scrollingLogic;
         this.mouseWheelScrollConfig = scrollConfig;
@@ -83,168 +159,191 @@ public final class MouseWheelScrollingLogic {
         this.density = density;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0127, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x0127, code lost:
     
-        if (r4.onScrollStopped.invoke(r0, r9) != r10) goto L41;
+        if (r4.onScrollStopped.invoke(r0, r9) == r10) goto L40;
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0030  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x001f  */
     /* JADX WARN: Type inference failed for: r0v13, types: [T, androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta] */
     /* JADX WARN: Type inference failed for: r0v8, types: [T, androidx.compose.animation.core.AnimationState] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$dispatchMouseWheelScroll(androidx.compose.foundation.gestures.MouseWheelScrollingLogic r16, androidx.compose.foundation.gestures.ScrollingLogic r17, androidx.compose.foundation.gestures.MouseWheelScrollingLogic.MouseWheelScrollDelta r18, float r19, float r20, kotlin.coroutines.jvm.internal.ContinuationImpl r21) {
-        /*
-            Method dump skipped, instructions count: 301
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.MouseWheelScrollingLogic.access$dispatchMouseWheelScroll(androidx.compose.foundation.gestures.MouseWheelScrollingLogic, androidx.compose.foundation.gestures.ScrollingLogic, androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta, float, float, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$dispatchMouseWheelScroll(MouseWheelScrollingLogic mouseWheelScrollingLogic, ScrollingLogic scrollingLogic, MouseWheelScrollDelta mouseWheelScrollDelta, float f, float f2, ContinuationImpl continuationImpl) {
+        MouseWheelScrollingLogic$dispatchMouseWheelScroll$1 mouseWheelScrollingLogic$dispatchMouseWheelScroll$1;
+        Ref$FloatRef ref$FloatRef;
+        MouseWheelScrollingLogic mouseWheelScrollingLogic2;
+        float f3;
+        ScrollingLogic scrollingLogic2;
+        mouseWheelScrollingLogic.getClass();
+        if (continuationImpl instanceof MouseWheelScrollingLogic$dispatchMouseWheelScroll$1) {
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$1 = (MouseWheelScrollingLogic$dispatchMouseWheelScroll$1) continuationImpl;
+            int i = mouseWheelScrollingLogic$dispatchMouseWheelScroll$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                mouseWheelScrollingLogic$dispatchMouseWheelScroll$1.label = i - Integer.MIN_VALUE;
+            } else {
+                mouseWheelScrollingLogic$dispatchMouseWheelScroll$1 = new MouseWheelScrollingLogic$dispatchMouseWheelScroll$1(mouseWheelScrollingLogic, continuationImpl);
+            }
+        }
+        MouseWheelScrollingLogic$dispatchMouseWheelScroll$1 mouseWheelScrollingLogic$dispatchMouseWheelScroll$12 = mouseWheelScrollingLogic$dispatchMouseWheelScroll$1;
+        Object obj = mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
+            ref$ObjectRef.element = mouseWheelScrollDelta;
+            mouseWheelScrollingLogic.trackVelocity(mouseWheelScrollDelta);
+            MouseWheelScrollDelta mouseWheelScrollDeltaSumOrNull = sumOrNull(mouseWheelScrollingLogic.channel);
+            if (mouseWheelScrollDeltaSumOrNull != null) {
+                mouseWheelScrollingLogic.trackVelocity(mouseWheelScrollDeltaSumOrNull);
+                ref$ObjectRef.element = ((MouseWheelScrollDelta) ref$ObjectRef.element).plus(mouseWheelScrollDeltaSumOrNull);
+            }
+            Ref$FloatRef ref$FloatRef2 = new Ref$FloatRef();
+            float fM85toFloatk4lQ0M = scrollingLogic.m85toFloatk4lQ0M(scrollingLogic.m84reverseIfNeededMKHz9U(((MouseWheelScrollDelta) ref$ObjectRef.element).value));
+            ref$FloatRef2.element = fM85toFloatk4lQ0M;
+            if (MouseWheelScrollableKt.access$isLowScrollingDelta(fM85toFloatk4lQ0M)) {
+                return Unit.INSTANCE;
+            }
+            Ref$ObjectRef ref$ObjectRef2 = new Ref$ObjectRef();
+            ref$ObjectRef2.element = AnimationStateKt.AnimationState$default(0.0f, 0.0f, 30);
+            MouseWheelScrollingLogic$dispatchMouseWheelScroll$3 mouseWheelScrollingLogic$dispatchMouseWheelScroll$3 = new MouseWheelScrollingLogic$dispatchMouseWheelScroll$3(ref$FloatRef2, ref$ObjectRef2, ref$ObjectRef, f, mouseWheelScrollingLogic, f2, scrollingLogic, null);
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$0 = mouseWheelScrollingLogic;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$1 = scrollingLogic;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$2 = ref$FloatRef2;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.F$0 = f2;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.label = 1;
+            if (mouseWheelScrollingLogic.userScroll(scrollingLogic, mouseWheelScrollingLogic$dispatchMouseWheelScroll$3, mouseWheelScrollingLogic$dispatchMouseWheelScroll$12) != coroutineSingletons) {
+                ref$FloatRef = ref$FloatRef2;
+                mouseWheelScrollingLogic2 = mouseWheelScrollingLogic;
+                f3 = f2;
+                scrollingLogic2 = scrollingLogic;
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        f3 = mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.F$0;
+        ref$FloatRef = (Ref$FloatRef) mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$2;
+        scrollingLogic2 = (ScrollingLogic) mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$1;
+        mouseWheelScrollingLogic2 = (MouseWheelScrollingLogic) mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$0;
+        ResultKt.throwOnFailure(obj);
+        MouseWheelVelocityTracker mouseWheelVelocityTracker = mouseWheelScrollingLogic2.velocityTracker;
+        long jVelocity = VelocityKt.Velocity(mouseWheelVelocityTracker.xVelocityTracker.calculateVelocity(Float.MAX_VALUE), mouseWheelVelocityTracker.yVelocityTracker.calculateVelocity(Float.MAX_VALUE));
+        Velocity.Companion.getClass();
+        if (jVelocity == 0) {
+            float fReverseIfNeeded = scrollingLogic2.reverseIfNeeded(Math.signum(ref$FloatRef.element)) * Math.min(Math.abs(ref$FloatRef.element) / 100, f3) * 1000;
+            if (fReverseIfNeeded == 0.0f) {
+                jVelocity = 0;
+            } else {
+                jVelocity = scrollingLogic2.orientation == Orientation.Horizontal ? VelocityKt.Velocity(fReverseIfNeeded, 0.0f) : VelocityKt.Velocity(0.0f, fReverseIfNeeded);
+            }
+        }
+        Velocity velocityM878boximpl = Velocity.m878boximpl(jVelocity);
+        mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$0 = null;
+        mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$1 = null;
+        mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.L$2 = null;
+        mouseWheelScrollingLogic$dispatchMouseWheelScroll$12.label = 2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
     /* JADX WARN: Type inference failed for: r0v7, types: [T, androidx.compose.animation.core.AnimationState] */
     /* JADX WARN: Type inference failed for: r3v3, types: [T, androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$dispatchMouseWheelScroll$waitNextScrollDelta(androidx.compose.foundation.gestures.MouseWheelScrollingLogic r14, kotlin.jvm.internal.Ref$ObjectRef r15, kotlin.jvm.internal.Ref$FloatRef r16, androidx.compose.foundation.gestures.ScrollingLogic r17, kotlin.jvm.internal.Ref$ObjectRef r18, long r19, kotlin.coroutines.jvm.internal.ContinuationImpl r21) {
-        /*
-            r0 = r19
-            r2 = r21
-            boolean r3 = r2 instanceof androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1
-            if (r3 == 0) goto L17
-            r3 = r2
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1 r3 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1) r3
-            int r4 = r3.label
-            r5 = -2147483648(0xffffffff80000000, float:-0.0)
-            r6 = r4 & r5
-            if (r6 == 0) goto L17
-            int r4 = r4 - r5
-            r3.label = r4
-            goto L1c
-        L17:
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1 r3 = new androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1
-            r3.<init>(r2)
-        L1c:
-            java.lang.Object r2 = r3.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r4 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r5 = r3.label
-            r6 = 1
-            if (r5 == 0) goto L4a
-            if (r5 != r6) goto L42
-            java.lang.Object r14 = r3.L$4
-            kotlin.jvm.internal.Ref$ObjectRef r14 = (kotlin.jvm.internal.Ref$ObjectRef) r14
-            java.lang.Object r0 = r3.L$3
-            androidx.compose.foundation.gestures.ScrollingLogic r0 = (androidx.compose.foundation.gestures.ScrollingLogic) r0
-            java.lang.Object r1 = r3.L$2
-            kotlin.jvm.internal.Ref$FloatRef r1 = (kotlin.jvm.internal.Ref$FloatRef) r1
-            java.lang.Object r4 = r3.L$1
-            kotlin.jvm.internal.Ref$ObjectRef r4 = (kotlin.jvm.internal.Ref$ObjectRef) r4
-            java.lang.Object r3 = r3.L$0
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic r3 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic) r3
-            kotlin.ResultKt.throwOnFailure(r2)
-            r9 = r14
-            r8 = r0
-            r14 = r3
-            goto L77
-        L42:
-            java.lang.IllegalStateException r14 = new java.lang.IllegalStateException
-            java.lang.String r0 = "call to 'resume' before 'invoke' with coroutine"
-            r14.<init>(r0)
-            throw r14
-        L4a:
-            kotlin.ResultKt.throwOnFailure(r2)
-            r7 = 0
-            int r2 = (r0 > r7 ? 1 : (r0 == r7 ? 0 : -1))
-            if (r2 >= 0) goto L56
-            java.lang.Boolean r14 = java.lang.Boolean.FALSE
-            return r14
-        L56:
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2 r2 = new androidx.compose.foundation.gestures.MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2
-            r5 = 0
-            r2.<init>(r14, r5)
-            r3.L$0 = r14
-            r3.L$1 = r15
-            r7 = r16
-            r3.L$2 = r7
-            r8 = r17
-            r3.L$3 = r8
-            r9 = r18
-            r3.L$4 = r9
-            r3.label = r6
-            java.lang.Object r2 = kotlinx.coroutines.TimeoutKt.withTimeoutOrNull(r0, r2, r3)
-            if (r2 != r4) goto L75
-            return r4
-        L75:
-            r4 = r15
-            r1 = r7
-        L77:
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta r2 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic.MouseWheelScrollDelta) r2
-            if (r2 == 0) goto Lb7
-            T r0 = r4.element
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta r0 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic.MouseWheelScrollDelta) r0
-            boolean r0 = r0.shouldApplyImmediately
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta r3 = new androidx.compose.foundation.gestures.MouseWheelScrollingLogic$MouseWheelScrollDelta
-            long r10 = r2.timeMillis
-            r5 = 0
-            long r12 = r2.value
-            r20 = r0
-            r15 = r3
-            r21 = r5
-            r18 = r10
-            r16 = r12
-            r15.<init>(r16, r18, r20, r21)
-            r0 = r15
-            r4.element = r0
-            long r3 = r0.value
-            long r3 = r8.m83reverseIfNeededMKHz9U(r3)
-            float r0 = r8.m84toFloatk4lQ0M(r3)
-            r1.element = r0
-            r0 = 30
-            r3 = 0
-            androidx.compose.animation.core.AnimationState r0 = androidx.compose.animation.core.AnimationStateKt.AnimationState$default(r3, r3, r0)
-            r9.element = r0
-            r14.trackVelocity(r2)
-            float r14 = r1.element
-            boolean r14 = androidx.compose.foundation.gestures.MouseWheelScrollableKt.access$isLowScrollingDelta(r14)
-            r14 = r14 ^ r6
-            goto Lb8
-        Lb7:
-            r14 = 0
-        Lb8:
-            java.lang.Boolean r14 = java.lang.Boolean.valueOf(r14)
-            return r14
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.MouseWheelScrollingLogic.access$dispatchMouseWheelScroll$waitNextScrollDelta(androidx.compose.foundation.gestures.MouseWheelScrollingLogic, kotlin.jvm.internal.Ref$ObjectRef, kotlin.jvm.internal.Ref$FloatRef, androidx.compose.foundation.gestures.ScrollingLogic, kotlin.jvm.internal.Ref$ObjectRef, long, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$dispatchMouseWheelScroll$waitNextScrollDelta(MouseWheelScrollingLogic mouseWheelScrollingLogic, Ref$ObjectRef ref$ObjectRef, Ref$FloatRef ref$FloatRef, ScrollingLogic scrollingLogic, Ref$ObjectRef ref$ObjectRef2, long j, ContinuationImpl continuationImpl) throws Throwable {
+        MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1 mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1;
+        ScrollingLogic scrollingLogic2;
+        Ref$ObjectRef ref$ObjectRef3;
+        Ref$ObjectRef ref$ObjectRef4;
+        Ref$FloatRef ref$FloatRef2;
+        boolean z;
+        if (continuationImpl instanceof MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1) {
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1 = (MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1) continuationImpl;
+            int i = mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.label = i - Integer.MIN_VALUE;
+            } else {
+                mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1 = new MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1(continuationImpl);
+            }
+        }
+        Object objWithTimeoutOrNull = mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithTimeoutOrNull);
+            if (j < 0) {
+                return Boolean.FALSE;
+            }
+            MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2 mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2 = new MouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2(mouseWheelScrollingLogic, null);
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$0 = mouseWheelScrollingLogic;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$1 = ref$ObjectRef;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$2 = ref$FloatRef;
+            scrollingLogic2 = scrollingLogic;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$3 = scrollingLogic2;
+            ref$ObjectRef3 = ref$ObjectRef2;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$4 = ref$ObjectRef3;
+            mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.label = 1;
+            objWithTimeoutOrNull = TimeoutKt.withTimeoutOrNull(j, mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$2, mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1);
+            if (objWithTimeoutOrNull == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            ref$ObjectRef4 = ref$ObjectRef;
+            ref$FloatRef2 = ref$FloatRef;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            Ref$ObjectRef ref$ObjectRef5 = (Ref$ObjectRef) mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$4;
+            ScrollingLogic scrollingLogic3 = (ScrollingLogic) mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$3;
+            ref$FloatRef2 = (Ref$FloatRef) mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$2;
+            ref$ObjectRef4 = (Ref$ObjectRef) mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$1;
+            MouseWheelScrollingLogic mouseWheelScrollingLogic2 = (MouseWheelScrollingLogic) mouseWheelScrollingLogic$dispatchMouseWheelScroll$waitNextScrollDelta$1.L$0;
+            ResultKt.throwOnFailure(objWithTimeoutOrNull);
+            ref$ObjectRef3 = ref$ObjectRef5;
+            scrollingLogic2 = scrollingLogic3;
+            mouseWheelScrollingLogic = mouseWheelScrollingLogic2;
+        }
+        MouseWheelScrollDelta mouseWheelScrollDelta = (MouseWheelScrollDelta) objWithTimeoutOrNull;
+        if (mouseWheelScrollDelta != null) {
+            ?? mouseWheelScrollDelta2 = new MouseWheelScrollDelta(mouseWheelScrollDelta.value, mouseWheelScrollDelta.timeMillis, ((MouseWheelScrollDelta) ref$ObjectRef4.element).shouldApplyImmediately, null);
+            ref$ObjectRef4.element = mouseWheelScrollDelta2;
+            ref$FloatRef2.element = scrollingLogic2.m85toFloatk4lQ0M(scrollingLogic2.m84reverseIfNeededMKHz9U(mouseWheelScrollDelta2.value));
+            ref$ObjectRef3.element = AnimationStateKt.AnimationState$default(0.0f, 0.0f, 30);
+            mouseWheelScrollingLogic.trackVelocity(mouseWheelScrollDelta);
+            z = !MouseWheelScrollableKt.access$isLowScrollingDelta(ref$FloatRef2.element);
+        } else {
+            z = false;
+        }
+        return Boolean.valueOf(z);
     }
 
     public static MouseWheelScrollDelta sumOrNull(final BufferedChannel bufferedChannel) {
         MouseWheelScrollDelta mouseWheelScrollDelta = null;
-        SequenceBuilderIterator it = SequencesKt__SequenceBuilderKt.iterator(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new MouseWheelScrollingLogic$untilNull$1(new Function0() { // from class: androidx.compose.foundation.gestures.MouseWheelScrollingLogic$sumOrNull$1
+        SequenceBuilderIterator it = SequencesKt__SequenceBuilderKt.iterator(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new MouseWheelScrollingLogic$untilNull$1(new Function0() { // from class: androidx.compose.foundation.gestures.MouseWheelScrollingLogic.sumOrNull.1
             {
                 super(0);
             }
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return (MouseWheelScrollingLogic.MouseWheelScrollDelta) ChannelResult.m3459getOrNullimpl(Channel.this.mo3455tryReceivePtdJZtk());
+                return (MouseWheelScrollDelta) ChannelResult.m3479getOrNullimpl(bufferedChannel.mo3475tryReceivePtdJZtk());
             }
         }, null)).$block$inlined);
         while (it.hasNext()) {
-            MouseWheelScrollDelta mouseWheelScrollDelta2 = (MouseWheelScrollDelta) it.next();
+            MouseWheelScrollDelta mouseWheelScrollDeltaPlus = (MouseWheelScrollDelta) it.next();
             if (mouseWheelScrollDelta != null) {
-                mouseWheelScrollDelta2 = mouseWheelScrollDelta.plus(mouseWheelScrollDelta2);
+                mouseWheelScrollDeltaPlus = mouseWheelScrollDelta.plus(mouseWheelScrollDeltaPlus);
             }
-            mouseWheelScrollDelta = mouseWheelScrollDelta2;
+            mouseWheelScrollDelta = mouseWheelScrollDeltaPlus;
         }
         return mouseWheelScrollDelta;
     }
@@ -258,74 +357,51 @@ public final class MouseWheelScrollingLogic {
         mouseWheelVelocityTracker.yVelocityTracker.addDataPoint(Float.intBitsToFloat((int) (j2 & 4294967295L)), j);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object userScroll(androidx.compose.foundation.gestures.ScrollingLogic r5, kotlin.jvm.functions.Function2 r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r4 = this;
-            boolean r0 = r7 instanceof androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1 r0 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1 r0 = new androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$1
-            r0.<init>(r4, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic r4 = (androidx.compose.foundation.gestures.MouseWheelScrollingLogic) r4
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L52
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r7)
-            r4.isScrolling = r3
-            androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$2 r7 = new androidx.compose.foundation.gestures.MouseWheelScrollingLogic$userScroll$2
-            r2 = 0
-            r7.<init>(r5, r6, r2)
-            r0.L$0 = r4
-            r0.label = r3
-            kotlinx.coroutines.SupervisorCoroutine r5 = new kotlinx.coroutines.SupervisorCoroutine
-            kotlin.coroutines.CoroutineContext r6 = r0.getContext()
-            r5.<init>(r6, r0)
-            java.lang.Object r5 = kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(r5, r5, r7)
-            if (r5 != r1) goto L52
-            return r1
-        L52:
-            r5 = 0
-            r4.isScrolling = r5
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.MouseWheelScrollingLogic.userScroll(androidx.compose.foundation.gestures.ScrollingLogic, kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object userScroll(ScrollingLogic scrollingLogic, Function2 function2, ContinuationImpl continuationImpl) {
+        C06961 c06961;
+        if (continuationImpl instanceof C06961) {
+            c06961 = (C06961) continuationImpl;
+            int i = c06961.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c06961.label = i - Integer.MIN_VALUE;
+            } else {
+                c06961 = new C06961(continuationImpl);
+            }
+        }
+        Object obj = c06961.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c06961.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            this.isScrolling = true;
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(scrollingLogic, function2, null);
+            c06961.L$0 = this;
+            c06961.label = 1;
+            SupervisorCoroutine supervisorCoroutine = new SupervisorCoroutine(c06961.getContext(), c06961);
+            if (UndispatchedKt.startUndispatchedOrReturn(supervisorCoroutine, supervisorCoroutine, anonymousClass2) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (MouseWheelScrollingLogic) c06961.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        this.isScrolling = false;
+        return Unit.INSTANCE;
     }
 
     public static final float access$dispatchMouseWheelScroll(MouseWheelScrollingLogic mouseWheelScrollingLogic, NestedScrollScope nestedScrollScope, float f) {
         ScrollingLogic scrollingLogic = mouseWheelScrollingLogic.scrollingLogic;
-        long m85toOffsettuRUvjQ = scrollingLogic.m85toOffsettuRUvjQ(scrollingLogic.reverseIfNeeded(f));
+        long jM86toOffsettuRUvjQ = scrollingLogic.m86toOffsettuRUvjQ(scrollingLogic.reverseIfNeeded(f));
         NestedScrollSource.Companion.getClass();
         int i = NestedScrollSource.UserInput;
         ScrollingLogic scrollingLogic2 = ((ScrollingLogic$nestedScrollScope$1) nestedScrollScope).this$0;
-        return scrollingLogic.m84toFloatk4lQ0M(scrollingLogic.m83reverseIfNeededMKHz9U(ScrollingLogic.m80access$performScroll3eAAhYA(scrollingLogic2, scrollingLogic2.outerStateScope, m85toOffsettuRUvjQ, i)));
+        return scrollingLogic.m85toFloatk4lQ0M(scrollingLogic.m84reverseIfNeededMKHz9U(ScrollingLogic.m81access$performScroll3eAAhYA(scrollingLogic2, scrollingLogic2.outerStateScope, jM86toOffsettuRUvjQ, i)));
     }
 }

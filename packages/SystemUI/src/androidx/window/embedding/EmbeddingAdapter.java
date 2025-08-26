@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmbeddingAdapter {
     public static final String TAG;
@@ -24,7 +23,6 @@ public final class EmbeddingAdapter {
     public final VendorApiLevel2Impl api2Impl = new VendorApiLevel2Impl();
     public final VendorApiLevel3Impl api3Impl = new VendorApiLevel3Impl();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +32,6 @@ public final class EmbeddingAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VendorApiLevel1Impl {
         public VendorApiLevel1Impl(EmbeddingAdapter embeddingAdapter, PredicateAdapter predicateAdapter) {
         }
@@ -44,13 +41,11 @@ public final class EmbeddingAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VendorApiLevel2Impl {
         public VendorApiLevel2Impl() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VendorApiLevel3Impl {
         public VendorApiLevel3Impl() {
         }
@@ -75,28 +70,28 @@ public final class EmbeddingAdapter {
             int i = WindowSdkExtensions.Companion.getInstance().extensionVersion;
             if (i == 1) {
                 this.api1Impl.getClass();
-                ActivityStack translateCompat = VendorApiLevel1Impl.translateCompat(splitInfo2.getPrimaryActivityStack());
-                ActivityStack translateCompat2 = VendorApiLevel1Impl.translateCompat(splitInfo2.getSecondaryActivityStack());
+                ActivityStack activityStackTranslateCompat = VendorApiLevel1Impl.translateCompat(splitInfo2.getPrimaryActivityStack());
+                ActivityStack activityStackTranslateCompat2 = VendorApiLevel1Impl.translateCompat(splitInfo2.getSecondaryActivityStack());
                 SplitAttributes.Builder builder = new SplitAttributes.Builder();
                 SplitAttributes.SplitType.Companion companion = SplitAttributes.SplitType.Companion;
                 float splitRatio = splitInfo2.getSplitRatio();
                 companion.getClass();
-                SplitAttributes.SplitType splitType = SplitAttributes.SplitType.SPLIT_TYPE_EXPAND;
-                if (splitRatio != splitType.value) {
-                    splitType = SplitAttributes.SplitType.Companion.ratio(splitRatio);
+                SplitAttributes.SplitType splitTypeRatio = SplitAttributes.SplitType.SPLIT_TYPE_EXPAND;
+                if (splitRatio != splitTypeRatio.value) {
+                    splitTypeRatio = SplitAttributes.SplitType.Companion.ratio(splitRatio);
                 }
-                builder.splitType = splitType;
+                builder.splitType = splitTypeRatio;
                 builder.layoutDirection = SplitAttributes.LayoutDirection.LOCALE;
-                splitInfo = new SplitInfo(translateCompat, translateCompat2, new SplitAttributes(builder.splitType, builder.layoutDirection, builder.animationBackground, builder.dividerAttributes));
+                splitInfo = new SplitInfo(activityStackTranslateCompat, activityStackTranslateCompat2, new SplitAttributes(builder.splitType, builder.layoutDirection, builder.animationBackground, builder.dividerAttributes));
             } else if (i == 2) {
                 EmbeddingAdapter embeddingAdapter = EmbeddingAdapter.this;
                 VendorApiLevel1Impl vendorApiLevel1Impl = embeddingAdapter.api1Impl;
                 androidx.window.extensions.embedding.ActivityStack primaryActivityStack = splitInfo2.getPrimaryActivityStack();
                 vendorApiLevel1Impl.getClass();
-                ActivityStack translateCompat3 = VendorApiLevel1Impl.translateCompat(primaryActivityStack);
+                ActivityStack activityStackTranslateCompat3 = VendorApiLevel1Impl.translateCompat(primaryActivityStack);
                 androidx.window.extensions.embedding.ActivityStack secondaryActivityStack = splitInfo2.getSecondaryActivityStack();
                 embeddingAdapter.api1Impl.getClass();
-                splitInfo = new SplitInfo(translateCompat3, VendorApiLevel1Impl.translateCompat(secondaryActivityStack), translate$window_release(splitInfo2.getSplitAttributes()));
+                splitInfo = new SplitInfo(activityStackTranslateCompat3, VendorApiLevel1Impl.translateCompat(secondaryActivityStack), translate$window_release(splitInfo2.getSplitAttributes()));
             } else if (3 > i || i >= 5) {
                 splitInfo = new SplitInfo(translate$window_release(splitInfo2.getPrimaryActivityStack()), translate$window_release(splitInfo2.getSecondaryActivityStack()), translate$window_release(splitInfo2.getSplitAttributes()), splitInfo2.getSplitInfoToken());
             } else {
@@ -104,10 +99,10 @@ public final class EmbeddingAdapter {
                 VendorApiLevel1Impl vendorApiLevel1Impl2 = embeddingAdapter2.api1Impl;
                 androidx.window.extensions.embedding.ActivityStack primaryActivityStack2 = splitInfo2.getPrimaryActivityStack();
                 vendorApiLevel1Impl2.getClass();
-                ActivityStack translateCompat4 = VendorApiLevel1Impl.translateCompat(primaryActivityStack2);
+                ActivityStack activityStackTranslateCompat4 = VendorApiLevel1Impl.translateCompat(primaryActivityStack2);
                 androidx.window.extensions.embedding.ActivityStack secondaryActivityStack2 = splitInfo2.getSecondaryActivityStack();
                 embeddingAdapter2.api1Impl.getClass();
-                splitInfo = new SplitInfo(translateCompat4, VendorApiLevel1Impl.translateCompat(secondaryActivityStack2), translate$window_release(splitInfo2.getSplitAttributes()), splitInfo2.getToken());
+                splitInfo = new SplitInfo(activityStackTranslateCompat4, VendorApiLevel1Impl.translateCompat(secondaryActivityStack2), translate$window_release(splitInfo2.getSplitAttributes()), splitInfo2.getToken());
             }
             arrayList.add(splitInfo);
         }
@@ -125,27 +120,27 @@ public final class EmbeddingAdapter {
     }
 
     public static SplitAttributes translate$window_release(androidx.window.extensions.embedding.SplitAttributes splitAttributes) {
-        SplitAttributes.SplitType ratio;
+        SplitAttributes.SplitType splitTypeRatio;
         SplitAttributes.LayoutDirection layoutDirection;
         DividerAttributes fixedDividerAttributes;
         DividerAttributes.DragRange splitRatioDragRange;
-        EmbeddingAnimationBackground embeddingAnimationBackground;
+        EmbeddingAnimationBackground colorBackground;
         SplitAttributes.Builder builder = new SplitAttributes.Builder();
         SplitAttributes.SplitType.RatioSplitType splitType = splitAttributes.getSplitType();
         if (splitType instanceof SplitAttributes.SplitType.HingeSplitType) {
-            ratio = SplitAttributes.SplitType.SPLIT_TYPE_HINGE;
+            splitTypeRatio = SplitAttributes.SplitType.SPLIT_TYPE_HINGE;
         } else if (splitType instanceof SplitAttributes.SplitType.ExpandContainersSplitType) {
-            ratio = SplitAttributes.SplitType.SPLIT_TYPE_EXPAND;
+            splitTypeRatio = SplitAttributes.SplitType.SPLIT_TYPE_EXPAND;
         } else {
             if (!(splitType instanceof SplitAttributes.SplitType.RatioSplitType)) {
                 throw new IllegalArgumentException("Unknown split type: " + splitType);
             }
             SplitAttributes.SplitType.Companion companion = SplitAttributes.SplitType.Companion;
-            float ratio2 = splitType.getRatio();
+            float ratio = splitType.getRatio();
             companion.getClass();
-            ratio = SplitAttributes.SplitType.Companion.ratio(ratio2);
+            splitTypeRatio = SplitAttributes.SplitType.Companion.ratio(ratio);
         }
-        builder.splitType = ratio;
+        builder.splitType = splitTypeRatio;
         int layoutDirection2 = splitAttributes.getLayoutDirection();
         if (layoutDirection2 == 0) {
             layoutDirection = SplitAttributes.LayoutDirection.LEFT_TO_RIGHT;
@@ -169,11 +164,11 @@ public final class EmbeddingAdapter {
                 EmbeddingAnimationBackground.Companion companion3 = EmbeddingAnimationBackground.Companion;
                 int color = animationBackground.getColor();
                 companion3.getClass();
-                embeddingAnimationBackground = new EmbeddingAnimationBackground.ColorBackground(color);
+                colorBackground = new EmbeddingAnimationBackground.ColorBackground(color);
             } else {
-                embeddingAnimationBackground = EmbeddingAnimationBackground.DEFAULT;
+                colorBackground = EmbeddingAnimationBackground.DEFAULT;
             }
-            builder.animationBackground = embeddingAnimationBackground;
+            builder.animationBackground = colorBackground;
         }
         companion2.getClass();
         if (WindowSdkExtensions.Companion.getInstance().extensionVersion >= 6) {

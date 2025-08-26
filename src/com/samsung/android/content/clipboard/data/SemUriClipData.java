@@ -16,6 +16,7 @@ import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /* loaded from: classes6.dex */
 public class SemUriClipData extends SemClipData {
@@ -166,7 +167,7 @@ public class SemUriClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "Uri write to parcel");
         parcel.writeInt(16);
         super.writeToParcel(parcel, i);
@@ -178,11 +179,11 @@ public class SemUriClipData extends SemClipData {
         StringBuilder sb = new StringBuilder("SemUriClipData class. Value is ");
         int length = this.mValue.length();
         String str = this.mValue;
-        CharSequence charSequence = str;
+        CharSequence charSequenceSubSequence = str;
         if (length > 20) {
-            charSequence = str.subSequence(0, 20);
+            charSequenceSubSequence = str.subSequence(0, 20);
         }
-        sb.append((Object) charSequence);
+        sb.append((Object) charSequenceSubSequence);
         return sb.toString();
     }
 
@@ -201,7 +202,7 @@ public class SemUriClipData extends SemClipData {
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void insertContentUri(Context context, String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("_data", str);
@@ -209,7 +210,7 @@ public class SemUriClipData extends SemClipData {
         } catch (Exception e) {
             Log.e(TAG, "Exception occurs because " + e.getMessage());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

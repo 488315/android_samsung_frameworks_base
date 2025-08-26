@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ThresholdSensorImpl implements ThresholdSensor {
     private final Execution mExecution;
@@ -34,7 +33,6 @@ public class ThresholdSensorImpl implements ThresholdSensor {
     private static final String TAG = "ThresholdSensor";
     private static final boolean DEBUG = Log.isLoggable(TAG, 3);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         private final Execution mExecution;
         private final Resources mResources;
@@ -99,9 +97,9 @@ public class ThresholdSensorImpl implements ThresholdSensor {
         }
 
         public Builder setSensorType(String str, boolean z) {
-            Sensor findSensorByType = findSensorByType(str, z);
-            if (findSensorByType != null) {
-                setSensor(findSensorByType);
+            Sensor sensorFindSensorByType = findSensorByType(str, z);
+            if (sensorFindSensorByType != null) {
+                setSensor(sensorFindSensorByType);
             }
             return this;
         }
@@ -138,7 +136,6 @@ public class ThresholdSensorImpl implements ThresholdSensor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BuilderFactory {
         private final Execution mExecution;
         private final Resources mResources;
@@ -287,19 +284,19 @@ public class ThresholdSensorImpl implements ThresholdSensor {
     }
 
     public String toString() {
-        boolean isLoaded = isLoaded();
+        boolean zIsLoaded = isLoaded();
         boolean z = this.mRegistered;
         boolean z2 = this.mPaused;
         float f = this.mThreshold;
         Sensor sensor = this.mSensor;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("{isLoaded=", ", registered=", ", paused=", isLoaded, z);
-        m.append(z2);
-        m.append(", threshold=");
-        m.append(f);
-        m.append(", sensor=");
-        m.append(sensor);
-        m.append("}");
-        return m.toString();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("{isLoaded=", ", registered=", ", paused=", zIsLoaded, z);
+        sbM.append(z2);
+        sbM.append(", threshold=");
+        sbM.append(f);
+        sbM.append(", sensor=");
+        sbM.append(sensor);
+        sbM.append("}");
+        return sbM.toString();
     }
 
     @Override // com.android.systemui.util.sensors.ThresholdSensor

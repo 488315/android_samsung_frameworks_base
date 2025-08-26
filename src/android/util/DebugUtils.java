@@ -16,20 +16,20 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes4.dex */
 public class DebugUtils {
-    public static boolean isObjectSelected(Object obj) {
+    public static boolean isObjectSelected(Object obj) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Method declaredMethod;
         String str = System.getenv("ANDROID_OBJECT_FILTER");
         if (str != null && str.length() > 0) {
-            String[] split = str.split("@");
-            if (obj.getClass().getSimpleName().matches(split[0])) {
-                boolean z = false;
-                for (int i = 1; i < split.length; i++) {
-                    String[] split2 = split[i].split("=");
+            String[] strArrSplit = str.split("@");
+            if (obj.getClass().getSimpleName().matches(strArrSplit[0])) {
+                boolean zMatches = false;
+                for (int i = 1; i < strArrSplit.length; i++) {
+                    String[] strArrSplit2 = strArrSplit[i].split("=");
                     Class<?> cls = obj.getClass();
                     Class<?> cls2 = cls;
                     while (true) {
                         try {
-                            declaredMethod = cls2.getDeclaredMethod("get" + split2[0].substring(0, 1).toUpperCase(Locale.ROOT) + split2[0].substring(1), null);
+                            declaredMethod = cls2.getDeclaredMethod("get" + strArrSplit2[0].substring(0, 1).toUpperCase(Locale.ROOT) + strArrSplit2[0].substring(1), null);
                             Class<? super Object> superclass = cls.getSuperclass();
                             if (superclass == null || declaredMethod != null) {
                                 break;
@@ -44,25 +44,25 @@ public class DebugUtils {
                         }
                     }
                     if (declaredMethod != null) {
-                        Object invoke = declaredMethod.invoke(obj, null);
-                        z |= (invoke != null ? invoke.toString() : PerfettoProtoLogImpl.NULL_STRING).matches(split2[1]);
+                        Object objInvoke = declaredMethod.invoke(obj, null);
+                        zMatches |= (objInvoke != null ? objInvoke.toString() : PerfettoProtoLogImpl.NULL_STRING).matches(strArrSplit2[1]);
                     }
                 }
-                return z;
+                return zMatches;
             }
         }
         return false;
     }
 
     public static void buildShortClassTag(Object obj, StringBuilder sb) {
-        int lastIndexOf;
+        int iLastIndexOf;
         if (obj == null) {
             sb.append(PerfettoProtoLogImpl.NULL_STRING);
             return;
         }
         String simpleName = obj.getClass().getSimpleName();
-        if ((simpleName == null || simpleName.isEmpty()) && (lastIndexOf = (simpleName = obj.getClass().getName()).lastIndexOf(46)) > 0) {
-            simpleName = simpleName.substring(lastIndexOf + 1);
+        if ((simpleName == null || simpleName.isEmpty()) && (iLastIndexOf = (simpleName = obj.getClass().getName()).lastIndexOf(46)) > 0) {
+            simpleName = simpleName.substring(iLastIndexOf + 1);
         }
         sb.append(simpleName);
         sb.append('{');
@@ -71,7 +71,7 @@ public class DebugUtils {
 
     public static void printSizeValue(PrintWriter printWriter, long j) {
         String str;
-        String format;
+        String str2;
         float f = j;
         if (f <= 900.0f) {
             str = "";
@@ -96,19 +96,19 @@ public class DebugUtils {
             str = "PB";
         }
         if (f < 1.0f) {
-            format = String.format("%.2f", Float.valueOf(f));
+            str2 = String.format("%.2f", Float.valueOf(f));
         } else if (f < 10.0f) {
-            format = String.format("%.1f", Float.valueOf(f));
+            str2 = String.format("%.1f", Float.valueOf(f));
         } else {
-            format = f < 100.0f ? String.format("%.0f", Float.valueOf(f)) : String.format("%.0f", Float.valueOf(f));
+            str2 = f < 100.0f ? String.format("%.0f", Float.valueOf(f)) : String.format("%.0f", Float.valueOf(f));
         }
-        printWriter.print(format);
+        printWriter.print(str2);
         printWriter.print(str);
     }
 
     public static String sizeValueToString(long j, StringBuilder sb) {
         String str;
-        String format;
+        String str2;
         if (sb == null) {
             sb = new StringBuilder(32);
         }
@@ -136,13 +136,13 @@ public class DebugUtils {
             str = "PB";
         }
         if (f < 1.0f) {
-            format = String.format("%.2f", Float.valueOf(f));
+            str2 = String.format("%.2f", Float.valueOf(f));
         } else if (f < 10.0f) {
-            format = String.format("%.1f", Float.valueOf(f));
+            str2 = String.format("%.1f", Float.valueOf(f));
         } else {
-            format = f < 100.0f ? String.format("%.0f", Float.valueOf(f)) : String.format("%.0f", Float.valueOf(f));
+            str2 = f < 100.0f ? String.format("%.0f", Float.valueOf(f)) : String.format("%.0f", Float.valueOf(f));
         }
-        sb.append(format);
+        sb.append(str2);
         sb.append(str);
         return sb.toString();
     }
@@ -167,7 +167,7 @@ public class DebugUtils {
         return Integer.toString(i);
     }
 
-    public static String flagsToString(Class<?> cls, String str, long j) {
+    public static String flagsToString(Class<?> cls, String str, long j) throws IllegalAccessException, IllegalArgumentException {
         StringBuilder sb = new StringBuilder();
         boolean z = j == 0;
         for (Field field : cls.getDeclaredFields()) {
@@ -192,7 +192,7 @@ public class DebugUtils {
         return sb.toString();
     }
 
-    private static long getFieldValue(Field field) {
+    private static long getFieldValue(Field field) throws IllegalAccessException, IllegalArgumentException {
         try {
             long j = field.getLong(null);
             if (j != 0) {
@@ -214,11 +214,8 @@ public class DebugUtils {
         for (int i2 = 0; i2 < length; i2++) {
             Field field = declaredFields[i2];
             int modifiers = field.getModifiers();
-            try {
-                if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && field.getType().equals(Integer.TYPE) && field.getName().startsWith(str) && field.getInt(null) == i) {
-                    return constNameWithoutPrefix(str, field);
-                }
-            } catch (IllegalAccessException unused) {
+            if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && field.getType().equals(Integer.TYPE) && field.getName().startsWith(str) && field.getInt(null) == i) {
+                return constNameWithoutPrefix(str, field);
             }
         }
         return str + Integer.toString(i);
@@ -232,9 +229,7 @@ public class DebugUtils {
         List<String> list = (List) Arrays.stream(Thread.currentThread().getStackTrace()).skip(i + 3).filter(new Predicate() { // from class: android.util.DebugUtils$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean startsWith;
-                startsWith = ((StackTraceElement) obj).getClassName().startsWith(cls.getName());
-                return startsWith;
+                return ((StackTraceElement) obj).getClassName().startsWith(cls.getName());
             }
         }).map(new Function() { // from class: android.util.DebugUtils$$ExternalSyntheticLambda1
             @Override // java.util.function.Function

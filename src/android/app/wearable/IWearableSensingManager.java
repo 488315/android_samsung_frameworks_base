@@ -131,9 +131,9 @@ public interface IWearableSensingManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWearableSensingManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWearableSensingManager)) {
-                return (IWearableSensingManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWearableSensingManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWearableSensingManager)) {
+                return (IWearableSensingManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -191,28 +191,28 @@ public interface IWearableSensingManager extends IInterface {
                     return true;
                 case 2:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback asInterface = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideConnection(parcelFileDescriptor, asInterface, remoteCallback);
+                    provideConnection(parcelFileDescriptor, iWearableSensingCallbackAsInterface, remoteCallback);
                     parcel2.writeNoException();
                     return true;
                 case 3:
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-                    IWearableSensingCallback asInterface2 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface2 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int provideConcurrentConnection = provideConcurrentConnection(parcelFileDescriptor2, persistableBundle, asInterface2, remoteCallback2);
+                    int iProvideConcurrentConnection = provideConcurrentConnection(parcelFileDescriptor2, persistableBundle, iWearableSensingCallbackAsInterface2, remoteCallback2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(provideConcurrentConnection);
+                    parcel2.writeInt(iProvideConcurrentConnection);
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeConnection = removeConnection(readInt);
+                    boolean zRemoveConnection = removeConnection(i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeConnection);
+                    parcel2.writeBoolean(zRemoveConnection);
                     return true;
                 case 5:
                     removeAllConnections();
@@ -228,10 +228,10 @@ public interface IWearableSensingManager extends IInterface {
                     return true;
                 case 7:
                     ParcelFileDescriptor parcelFileDescriptor4 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback asInterface3 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface3 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback4 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideDataStream(parcelFileDescriptor4, asInterface3, remoteCallback4);
+                    provideDataStream(parcelFileDescriptor4, iWearableSensingCallbackAsInterface3, remoteCallback4);
                     parcel2.writeNoException();
                     return true;
                 case 8:
@@ -243,19 +243,19 @@ public interface IWearableSensingManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     RemoteCallback remoteCallback6 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerDataRequestObserver(readInt2, pendingIntent, remoteCallback6);
+                    registerDataRequestObserver(i4, pendingIntent, remoteCallback6);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     RemoteCallback remoteCallback7 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    unregisterDataRequestObserver(readInt3, pendingIntent2, remoteCallback7);
+                    unregisterDataRequestObserver(i5, pendingIntent2, remoteCallback7);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -294,198 +294,198 @@ public interface IWearableSensingManager extends IInterface {
 
             @Override // android.app.wearable.IWearableSensingManager
             public int getAvailableConnectionCount() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void provideConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public int provideConcurrentConnection(ParcelFileDescriptor parcelFileDescriptor, PersistableBundle persistableBundle, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public boolean removeConnection(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void removeAllConnections() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void provideReadOnlyParcelFileDescriptor(ParcelFileDescriptor parcelFileDescriptor, PersistableBundle persistableBundle, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void provideData(PersistableBundle persistableBundle, SharedMemory sharedMemory, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void registerDataRequestObserver(int i, PendingIntent pendingIntent, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void unregisterDataRequestObserver(int i, PendingIntent pendingIntent, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void startHotwordRecognition(ComponentName componentName, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.wearable.IWearableSensingManager
             public void stopHotwordRecognition(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWearableSensingManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -36,8 +36,8 @@ public class Audio extends Content implements AudioSegmentInterface<Audio> {
     }
 
     @Override // com.samsung.vekit.Interface.AudioSegmentInterface
-    public void setAudioSegmentMap(HashMap<String, AudioSegment> hashMap) {
-        this.audioSegmentMap = hashMap;
+    public void setAudioSegmentMap(HashMap<String, AudioSegment> map) {
+        this.audioSegmentMap = map;
     }
 
     @Override // com.samsung.vekit.Interface.AudioSegmentInterface

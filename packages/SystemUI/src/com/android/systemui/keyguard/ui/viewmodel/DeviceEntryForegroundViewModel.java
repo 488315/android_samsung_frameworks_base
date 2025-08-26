@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryForegroundViewModel {
     public final Context context;
@@ -24,7 +23,6 @@ public final class DeviceEntryForegroundViewModel {
     public final ChannelFlowTransformLatest useAodIconVariant;
     public final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ForegroundIconViewModel {
         public final int padding;
         public final int tint;
@@ -68,11 +66,11 @@ public final class DeviceEntryForegroundViewModel {
     public DeviceEntryForegroundViewModel(Context context, ConfigurationInteractor configurationInteractor, DeviceEntryUdfpsInteractor deviceEntryUdfpsInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, DeviceEntryIconViewModel deviceEntryIconViewModel, UdfpsOverlayInteractor udfpsOverlayInteractor) {
         this.context = context;
         this.isShowingAodOrDozing = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardTransitionInteractor.startedKeyguardTransitionStep, keyguardTransitionInteractor.getTransitionValueFlow(KeyguardState.DOZING), new DeviceEntryForegroundViewModel$isShowingAodOrDozing$1(null));
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsEnrolledAndEnabled, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$1(null, this));
-        this.useAodIconVariant = transformLatest;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.transformLatest(transformLatest, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$2(null, deviceEntryIconViewModel, configurationInteractor, this)));
-        ChannelFlowTransformLatest transformLatest2 = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsSupported, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$3(null, udfpsOverlayInteractor, this, configurationInteractor));
-        this.padding = transformLatest2;
-        this.viewModel = FlowKt.combine(deviceEntryIconViewModel.iconType, transformLatest, distinctUntilChanged, transformLatest2, new DeviceEntryForegroundViewModel$viewModel$1(null));
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsEnrolledAndEnabled, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$1(null, this));
+        this.useAodIconVariant = channelFlowTransformLatestTransformLatest;
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.transformLatest(channelFlowTransformLatestTransformLatest, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$2(null, deviceEntryIconViewModel, configurationInteractor, this)));
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsSupported, new DeviceEntryForegroundViewModel$special$$inlined$flatMapLatest$3(null, udfpsOverlayInteractor, this, configurationInteractor));
+        this.padding = channelFlowTransformLatestTransformLatest2;
+        this.viewModel = FlowKt.combine(deviceEntryIconViewModel.iconType, channelFlowTransformLatestTransformLatest, flowDistinctUntilChanged, channelFlowTransformLatestTransformLatest2, new DeviceEntryForegroundViewModel$viewModel$1(null));
     }
 }

@@ -21,7 +21,6 @@ import java.util.Map;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconsViewModelKairos implements KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -33,7 +32,6 @@ public final class MobileIconsViewModelKairos implements KairosBuilder {
     public final MobileViewLogger logger;
     public final StateInit subscriptionIds;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Module {
         public static final Module INSTANCE = new Module();
 
@@ -60,7 +58,7 @@ public final class MobileIconsViewModelKairos implements KairosBuilder {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i) {
                     case 0:
@@ -69,14 +67,14 @@ public final class MobileIconsViewModelKairos implements KairosBuilder {
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 Map.Entry entry = (Map.Entry) obj3;
-                                final int intValue = ((Number) entry.getKey()).intValue();
+                                final int iIntValue = ((Number) entry.getKey()).intValue();
                                 final MobileIconInteractorKairos mobileIconInteractorKairos = (MobileIconInteractorKairos) entry.getValue();
-                                final MobileIconsViewModelKairos mobileIconsViewModelKairos2 = MobileIconsViewModelKairos.this;
+                                final MobileIconsViewModelKairos mobileIconsViewModelKairos2 = mobileIconsViewModelKairos;
                                 return new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconsViewModelKairos$$ExternalSyntheticLambda7
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj4) {
-                                        MobileIconsViewModelKairos$commonViewModel$1 mobileIconsViewModelKairos$commonViewModel$1 = new MobileIconsViewModelKairos$commonViewModel$1(intValue, mobileIconInteractorKairos, mobileIconsViewModelKairos2);
+                                    public final Object mo781invoke(Object obj4) {
+                                        MobileIconsViewModelKairos$commonViewModel$1 mobileIconsViewModelKairos$commonViewModel$1 = new MobileIconsViewModelKairos$commonViewModel$1(iIntValue, mobileIconInteractorKairos, mobileIconsViewModelKairos2);
                                         MobileIconsViewModelKairos mobileIconsViewModelKairos3 = mobileIconsViewModelKairos$commonViewModel$1.this$0;
                                         MobileIconViewModelKairos mobileIconViewModelKairos = new MobileIconViewModelKairos(mobileIconsViewModelKairos$commonViewModel$1.$subId, mobileIconsViewModelKairos$commonViewModel$1.$iconInteractor, mobileIconsViewModelKairos3.airplaneModeInteractor, mobileIconsViewModelKairos3.constants, mobileIconsViewModelKairos3.flags);
                                         mobileIconViewModelKairos.activate((BuildScope) obj4);
@@ -101,7 +99,7 @@ public final class MobileIconsViewModelKairos implements KairosBuilder {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
@@ -110,14 +108,14 @@ public final class MobileIconsViewModelKairos implements KairosBuilder {
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 Map.Entry entry = (Map.Entry) obj3;
-                                final int intValue = ((Number) entry.getKey()).intValue();
+                                final int iIntValue = ((Number) entry.getKey()).intValue();
                                 final MobileIconInteractorKairos mobileIconInteractorKairos = (MobileIconInteractorKairos) entry.getValue();
-                                final MobileIconsViewModelKairos mobileIconsViewModelKairos2 = MobileIconsViewModelKairos.this;
+                                final MobileIconsViewModelKairos mobileIconsViewModelKairos2 = mobileIconsViewModelKairos;
                                 return new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconsViewModelKairos$$ExternalSyntheticLambda7
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj4) {
-                                        MobileIconsViewModelKairos$commonViewModel$1 mobileIconsViewModelKairos$commonViewModel$1 = new MobileIconsViewModelKairos$commonViewModel$1(intValue, mobileIconInteractorKairos, mobileIconsViewModelKairos2);
+                                    public final Object mo781invoke(Object obj4) {
+                                        MobileIconsViewModelKairos$commonViewModel$1 mobileIconsViewModelKairos$commonViewModel$1 = new MobileIconsViewModelKairos$commonViewModel$1(iIntValue, mobileIconInteractorKairos, mobileIconsViewModelKairos2);
                                         MobileIconsViewModelKairos mobileIconsViewModelKairos3 = mobileIconsViewModelKairos$commonViewModel$1.this$0;
                                         MobileIconViewModelKairos mobileIconViewModelKairos = new MobileIconViewModelKairos(mobileIconsViewModelKairos$commonViewModel$1.$subId, mobileIconsViewModelKairos$commonViewModel$1.$iconInteractor, mobileIconsViewModelKairos3.airplaneModeInteractor, mobileIconsViewModelKairos3.constants, mobileIconsViewModelKairos3.flags);
                                         mobileIconViewModelKairos.activate((BuildScope) obj4);

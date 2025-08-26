@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnterpriseDeviceAdminReceiver extends DeviceAdminReceiver {
     public ComponentName mWho;
@@ -50,9 +49,9 @@ public class EnterpriseDeviceAdminReceiver extends DeviceAdminReceiver {
                 onDisabled(context, intent);
             }
         } else {
-            CharSequence onDisableRequested = onDisableRequested(context, intent);
-            if (onDisableRequested != null) {
-                getResultExtras(true).putCharSequence("android.app.extra.DISABLE_WARNING", onDisableRequested);
+            CharSequence charSequenceOnDisableRequested = onDisableRequested(context, intent);
+            if (charSequenceOnDisableRequested != null) {
+                getResultExtras(true).putCharSequence("android.app.extra.DISABLE_WARNING", charSequenceOnDisableRequested);
             }
         }
     }

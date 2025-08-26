@@ -8,6 +8,7 @@ import android.app.ActivityManager;
 import android.app.PictureInPictureParams;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -22,7 +23,6 @@ import com.android.wm.shell.pip2.phone.PipAppIconOverlay;
 import com.android.wm.shell.pip2.phone.PipTransition$$ExternalSyntheticLambda4;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipEnterAnimator extends ValueAnimator {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,7 +48,6 @@ public class PipEnterAnimator extends ValueAnimator {
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
     public final Matrix mTransformTensor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipAppIconOverlaySupplier {
         PipAppIconOverlay get(Context context, Rect rect, Rect rect2, ActivityInfo activityInfo, int i);
     }
@@ -56,7 +55,7 @@ public class PipEnterAnimator extends ValueAnimator {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v6, types: [android.animation.Animator$AnimatorListener, com.android.wm.shell.pip2.animation.PipEnterAnimator$1] */
     /* JADX WARN: Type inference failed for: r3v0, types: [android.animation.ValueAnimator$AnimatorUpdateListener, com.android.wm.shell.pip2.animation.PipEnterAnimator$2] */
-    public PipEnterAnimator(Context context, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Rect rect, int i) {
+    public PipEnterAnimator(Context context, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Rect rect, int i) throws Resources.NotFoundException {
         Rect rect2 = new Rect();
         this.mAnimatedRect = rect2;
         Rect rect3 = new Rect();
@@ -117,7 +116,7 @@ public class PipEnterAnimator extends ValueAnimator {
             @Override // com.android.wm.shell.pip2.animation.PipEnterAnimator.PipAppIconOverlaySupplier
             public final PipAppIconOverlay get(Context context2, Rect rect4, Rect rect5, ActivityInfo activityInfo, int i2) {
                 int i3 = PipEnterAnimator.$r8$clinit;
-                PipEnterAnimator.this.getClass();
+                this.f$0.getClass();
                 return new PipAppIconOverlay(context2, rect4, rect5, new IconProvider(context2).getIcon(activityInfo), i2);
             }
         };
@@ -137,12 +136,12 @@ public class PipEnterAnimator extends ValueAnimator {
         Rect rect = this.mInitCrop;
         float f2 = 1.0f - f;
         float f3 = ((pointF.x - 1.0f) * f2) + 1.0f;
-        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF.y, 1.0f, f2, 1.0f);
+        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF.y, 1.0f, f2, 1.0f);
         float f4 = pointF2.x;
         Rect rect2 = this.mEndBounds;
-        float m$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect2.left, f4, f, f4);
+        float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect2.left, f4, f, f4);
         float f5 = pointF2.y;
-        float m$13 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect2.top, f5, f, f5);
+        float fM$13 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect2.top, f5, f, f5);
         int i = this.mRotation;
         if (i == 3) {
             i = -1;
@@ -152,8 +151,8 @@ public class PipEnterAnimator extends ValueAnimator {
         this.mRectEvaluator.evaluate(f, rect, rect3);
         transaction.setCrop(this.mLeash, this.mAnimatedRect);
         this.mTransformTensor.reset();
-        this.mTransformTensor.setScale(f3, m$1);
-        this.mTransformTensor.postTranslate(m$12, m$13);
+        this.mTransformTensor.setScale(f3, fM$1);
+        this.mTransformTensor.postTranslate(fM$12, fM$13);
         this.mTransformTensor.postRotate((-i) * 90.0f * f);
         transaction.setMatrix(this.mLeash, this.mTransformTensor, this.mMatrixTmp);
         transaction.setCornerRadius(this.mLeash, this.mCornerRadius).setShadowRadius(this.mLeash, this.mShadowRadius);
@@ -194,18 +193,18 @@ public class PipEnterAnimator extends ValueAnimator {
             sourceRectHint = new Rect(startAbsBounds);
             sourceRectHint.offsetTo(0, 0);
         }
-        float width = endAbsBounds.width() / sourceRectHint.width();
-        float height = endAbsBounds.height() / sourceRectHint.height();
-        float f = 1.0f / width;
-        float f2 = 1.0f / height;
+        float fWidth = endAbsBounds.width() / sourceRectHint.width();
+        float fHeight = endAbsBounds.height() / sourceRectHint.height();
+        float f = 1.0f / fWidth;
+        float f2 = 1.0f / fHeight;
         float f3 = 0;
         pointF.set(f, f2);
         pointF2.set((f3 * f) + startAbsBounds.left + sourceRectHint.left, (f3 * f2) + startAbsBounds.top + sourceRectHint.top);
         PipUtils.INSTANCE.getClass();
-        rect.left = PipUtils.roundOut(f3 - (sourceRectHint.left * width));
-        rect.top = PipUtils.roundOut(f3 - (sourceRectHint.top * height));
-        rect.right = PipUtils.roundOut((startAbsBounds.width() * width) + rect.left);
-        rect.bottom = PipUtils.roundOut((startAbsBounds.height() * height) + rect.top);
+        rect.left = PipUtils.roundOut(f3 - (sourceRectHint.left * fWidth));
+        rect.top = PipUtils.roundOut(f3 - (sourceRectHint.top * fHeight));
+        rect.right = PipUtils.roundOut((startAbsBounds.width() * fWidth) + rect.left);
+        rect.bottom = PipUtils.roundOut((startAbsBounds.height() * fHeight) + rect.top);
     }
 
     public void setPipAppIconOverlaySupplier(PipAppIconOverlaySupplier pipAppIconOverlaySupplier) {

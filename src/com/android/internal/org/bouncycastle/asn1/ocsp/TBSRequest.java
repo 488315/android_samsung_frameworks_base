@@ -38,14 +38,10 @@ public class TBSRequest extends ASN1Object {
 
     private TBSRequest(ASN1Sequence aSN1Sequence) {
         int i = 0;
-        if (aSN1Sequence.getObjectAt(0) instanceof ASN1TaggedObject) {
-            if (((ASN1TaggedObject) aSN1Sequence.getObjectAt(0)).getTagNo() == 0) {
-                this.versionSet = true;
-                this.version = ASN1Integer.getInstance((ASN1TaggedObject) aSN1Sequence.getObjectAt(0), true);
-                i = 1;
-            } else {
-                this.version = V1;
-            }
+        if ((aSN1Sequence.getObjectAt(0) instanceof ASN1TaggedObject) && ((ASN1TaggedObject) aSN1Sequence.getObjectAt(0)).getTagNo() == 0) {
+            this.versionSet = true;
+            this.version = ASN1Integer.getInstance((ASN1TaggedObject) aSN1Sequence.getObjectAt(0), true);
+            i = 1;
         } else {
             this.version = V1;
         }

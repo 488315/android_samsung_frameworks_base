@@ -37,13 +37,13 @@ public final class DevicePolicyState implements Parcelable {
 
     private DevicePolicyState(Parcel parcel) {
         this.mPolicies = new HashMap();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            UserHandle of = UserHandle.of(parcel.readInt());
-            this.mPolicies.put(of, new HashMap());
-            int readInt2 = parcel.readInt();
-            for (int i2 = 0; i2 < readInt2; i2++) {
-                this.mPolicies.get(of).put((PolicyKey) parcel.readParcelable(PolicyKey.class.getClassLoader()), (PolicyState) parcel.readParcelable(PolicyState.class.getClassLoader()));
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            UserHandle userHandleOf = UserHandle.of(parcel.readInt());
+            this.mPolicies.put(userHandleOf, new HashMap());
+            int i3 = parcel.readInt();
+            for (int i4 = 0; i4 < i3; i4++) {
+                this.mPolicies.get(userHandleOf).put((PolicyKey) parcel.readParcelable(PolicyKey.class.getClassLoader()), (PolicyState) parcel.readParcelable(PolicyState.class.getClassLoader()));
             }
         }
     }

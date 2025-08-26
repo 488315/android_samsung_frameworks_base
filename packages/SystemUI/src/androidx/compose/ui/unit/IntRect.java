@@ -5,7 +5,6 @@ import androidx.compose.ui.unit.IntOffset;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class IntRect {
     public static final Companion Companion = new Companion(null);
@@ -15,7 +14,6 @@ public final class IntRect {
     public final int right;
     public final int top;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,7 @@ public final class IntRect {
     }
 
     /* renamed from: contains--gyyYBs, reason: not valid java name */
-    public final boolean m855containsgyyYBs(long j) {
+    public final boolean m857containsgyyYBs(long j) {
         int i;
         IntOffset.Companion companion = IntOffset.Companion;
         int i2 = (int) (j >> 32);
@@ -52,7 +50,7 @@ public final class IntRect {
     }
 
     /* renamed from: getCenter-nOcc-ac, reason: not valid java name */
-    public final long m856getCenternOccac() {
+    public final long m858getCenternOccac() {
         long height = (((getHeight() / 2) + this.top) & 4294967295L) | (((getWidth() / 2) + this.left) << 32);
         IntOffset.Companion companion = IntOffset.Companion;
         return height;
@@ -63,7 +61,7 @@ public final class IntRect {
     }
 
     /* renamed from: getTopLeft-nOcc-ac, reason: not valid java name */
-    public final long m857getTopLeftnOccac() {
+    public final long m859getTopLeftnOccac() {
         long j = (this.left << 32) | (this.top & 4294967295L);
         IntOffset.Companion companion = IntOffset.Companion;
         return j;

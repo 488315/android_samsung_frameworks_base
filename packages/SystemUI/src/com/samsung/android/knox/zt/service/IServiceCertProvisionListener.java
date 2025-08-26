@@ -8,12 +8,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IServiceCertProvisionListener extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.service.IServiceCertProvisionListener";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static <T> T readTypedObject(Parcel parcel, Parcelable.Creator<T> creator) {
             if (parcel.readInt() != 0) {
@@ -46,7 +44,6 @@ public interface IServiceCertProvisionListener extends IInterface {
 
     boolean setCertificateChain(String str, ParcelableCertificate[] parcelableCertificateArr) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IServiceCertProvisionListener {
         public static final int TRANSACTION_attestKey = 4;
         public static final int TRANSACTION_getCertificateChain = 5;
@@ -56,7 +53,6 @@ public interface IServiceCertProvisionListener extends IInterface {
         public static final int TRANSACTION_onSuccess = 1;
         public static final int TRANSACTION_setCertificateChain = 6;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IServiceCertProvisionListener {
             public IBinder mRemote;
 
@@ -71,34 +67,34 @@ public interface IServiceCertProvisionListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public boolean attestKey(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public ParcelableCertificate[] getCertificateChain(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelableCertificate[]) obtain2.createTypedArray(ParcelableCertificate.CREATOR);
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelableCertificate[]) parcelObtain2.createTypedArray(ParcelableCertificate.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -108,82 +104,82 @@ public interface IServiceCertProvisionListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public byte[] getSignature(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public void onError(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public void onStatusChange(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public void onSuccess(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceCertProvisionListener
             public boolean setCertificateChain(String str, ParcelableCertificate[] parcelableCertificateArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedArray(parcelableCertificateArr, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(IServiceCertProvisionListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedArray(parcelableCertificateArr, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -196,8 +192,8 @@ public interface IServiceCertProvisionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IServiceCertProvisionListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IServiceCertProvisionListener)) ? new Proxy(iBinder) : (IServiceCertProvisionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IServiceCertProvisionListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IServiceCertProvisionListener)) ? new Proxy(iBinder) : (IServiceCertProvisionListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -223,9 +219,9 @@ public interface IServiceCertProvisionListener extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean attestKey = attestKey(parcel.readString(), parcel.createByteArray());
+                    boolean zAttestKey = attestKey(parcel.readString(), parcel.createByteArray());
                     parcel2.writeNoException();
-                    parcel2.writeInt(attestKey ? 1 : 0);
+                    parcel2.writeInt(zAttestKey ? 1 : 0);
                     return true;
                 case 5:
                     ParcelableCertificate[] certificateChain = getCertificateChain(parcel.readString());
@@ -253,7 +249,6 @@ public interface IServiceCertProvisionListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IServiceCertProvisionListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -9,29 +9,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class TouchInsetManager$$ExternalSyntheticLambda1 implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ HashMap f$0;
 
-    public /* synthetic */ TouchInsetManager$$ExternalSyntheticLambda1(int i, HashMap hashMap) {
+    public /* synthetic */ TouchInsetManager$$ExternalSyntheticLambda1(int i, HashMap map) {
         this.$r8$classId = i;
-        this.f$0 = hashMap;
+        this.f$0 = map;
     }
 
     @Override // java.util.function.Consumer
     public final void accept(Object obj) {
         int i = this.$r8$classId;
-        HashMap hashMap = this.f$0;
+        HashMap map = this.f$0;
         switch (i) {
             case 0:
-                ((HashMap) obj).entrySet().stream().forEach(new TouchInsetManager$$ExternalSyntheticLambda1(2, hashMap));
+                ((HashMap) obj).entrySet().stream().forEach(new TouchInsetManager$$ExternalSyntheticLambda1(2, map));
                 break;
             case 1:
                 Map.Entry entry = (Map.Entry) obj;
                 AttachedSurfaceControl attachedSurfaceControl = (AttachedSurfaceControl) entry.getKey();
-                if (!hashMap.containsKey(attachedSurfaceControl)) {
+                if (!map.containsKey(attachedSurfaceControl)) {
                     attachedSurfaceControl.setTouchableRegion(null);
                 }
                 ((Region) entry.getValue()).recycle();
@@ -39,22 +38,22 @@ public final /* synthetic */ class TouchInsetManager$$ExternalSyntheticLambda1 i
             case 2:
                 Map.Entry entry2 = (Map.Entry) obj;
                 AttachedSurfaceControl attachedSurfaceControl2 = (AttachedSurfaceControl) entry2.getKey();
-                if (!hashMap.containsKey(attachedSurfaceControl2)) {
-                    hashMap.put(attachedSurfaceControl2, Region.obtain());
+                if (!map.containsKey(attachedSurfaceControl2)) {
+                    map.put(attachedSurfaceControl2, Region.obtain());
                 }
-                ((Region) hashMap.get(attachedSurfaceControl2)).op((Region) entry2.getValue(), Region.Op.UNION);
+                ((Region) map.get(attachedSurfaceControl2)).op((Region) entry2.getValue(), Region.Op.UNION);
                 break;
             default:
                 View view = (View) obj;
                 AttachedSurfaceControl rootSurfaceControl = view.getRootSurfaceControl();
                 if (rootSurfaceControl != null) {
-                    if (!hashMap.containsKey(rootSurfaceControl)) {
-                        hashMap.put(rootSurfaceControl, Region.obtain());
+                    if (!map.containsKey(rootSurfaceControl)) {
+                        map.put(rootSurfaceControl, Region.obtain());
                     }
                     Rect rect = new Rect();
                     view.getDrawingRect(rect);
                     ((ViewGroup) view.getRootView()).offsetDescendantRectToMyCoords(view, rect);
-                    ((Region) hashMap.get(rootSurfaceControl)).op(rect, Region.Op.UNION);
+                    ((Region) map.get(rootSurfaceControl)).op(rect, Region.Op.UNION);
                     break;
                 }
                 break;

@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MiniSViewCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
@@ -52,7 +51,6 @@ public class MiniSViewCoverContentView implements ContentView, ViewStateControll
     public final ToastController mToastController;
     public Rect mVisibleRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.globalactions.presentation.view.MiniSViewCoverContentView$1, reason: invalid class name */
     public class AnonymousClass1 {
         public String toastMessage;
@@ -61,7 +59,6 @@ public class MiniSViewCoverContentView implements ContentView, ViewStateControll
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentAdapter extends BaseAdapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
@@ -88,22 +85,21 @@ public class MiniSViewCoverContentView implements ContentView, ViewStateControll
         @Override // android.widget.Adapter
         public final View getView(int i, View view, ViewGroup viewGroup) {
             MiniSViewCoverContentItemView miniSViewCoverContentItemView = new MiniSViewCoverContentItemView(MiniSViewCoverContentView.this.mContext, (ActionViewModel) ((ArrayList) this.mViewModelList).get(i), viewGroup, MiniSViewCoverContentView.this.mResourceFactory);
-            View inflateView = miniSViewCoverContentItemView.inflateView();
-            miniSViewCoverContentItemView.setViewAttrs(inflateView);
+            View viewInflateView = miniSViewCoverContentItemView.inflateView();
+            miniSViewCoverContentItemView.setViewAttrs(viewInflateView);
             miniSViewCoverContentItemView.mViewModel.getActionInfo().setViewIndex(i);
             ActionViewModel actionViewModel = MiniSViewCoverContentView.this.mSelectedViewModel;
             if (actionViewModel != null && actionViewModel.getActionInfo().getStateLabel().equals("confirm_dismiss") && ((ActionViewModel) ((ArrayList) this.mViewModelList).get(i)).getActionInfo().getName().equals(MiniSViewCoverContentView.this.mSelectedViewModel.getActionInfo().getName())) {
-                this.mLastAnimatedView = inflateView;
+                this.mLastAnimatedView = viewInflateView;
                 View view2 = MiniSViewCoverContentView.this.mAdapter.mLastAnimatedView;
                 if (view2 != null) {
                     view2.setVisibility(8);
                 }
             }
-            return inflateView;
+            return viewInflateView;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentGridView extends GridView {
         public ContentGridView(Context context) {
             super(context);
@@ -120,7 +116,6 @@ public class MiniSViewCoverContentView implements ContentView, ViewStateControll
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);
@@ -231,7 +226,7 @@ public class MiniSViewCoverContentView implements ContentView, ViewStateControll
         this.mToastController.setInterceptor(new Consumer() { // from class: com.android.systemui.globalactions.presentation.view.MiniSViewCoverContentView$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MiniSViewCoverContentView miniSViewCoverContentView = MiniSViewCoverContentView.this;
+                MiniSViewCoverContentView miniSViewCoverContentView = this.f$0;
                 miniSViewCoverContentView.getClass();
                 miniSViewCoverContentView.mSelectedViewModel = (ActionViewModel) miniSViewCoverContentView.mAdapter.getItem(0);
                 miniSViewCoverContentView.mMiniSViewCoverAnimatorCallback.toastMessage = (String) obj;

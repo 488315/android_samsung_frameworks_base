@@ -59,7 +59,7 @@ public class NotificationHistoryImageProvider extends ContentProvider {
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
-        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
+        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) throws SQLException {
             Log.w(TAG, "Upgrading database from version " + i + " to " + i2 + ", which will destroy all old data");
             sQLiteDatabase.execSQL("DROP TABLE IF EXISTS suggestions");
             onCreate(sQLiteDatabase);
@@ -80,9 +80,9 @@ public class NotificationHistoryImageProvider extends ContentProvider {
                     Slog.d(TAG, "Failed to delete db.");
                     return -1;
                 }
-                int delete = writableDatabase.delete(SETTINGS_TABLE, str, strArr);
+                int iDelete = writableDatabase.delete(SETTINGS_TABLE, str, strArr);
                 getContext().getContentResolver().notifyChange(uri, null);
-                return delete;
+                return iDelete;
             } catch (Exception e) {
                 Slog.d(TAG, "Failed to delete due to unknown reason. " + e);
                 return -1;
@@ -121,11 +121,11 @@ public class NotificationHistoryImageProvider extends ContentProvider {
             Slog.d(TAG, "Error getting DB in getCachedImage");
             return null;
         }
-        Cursor query = readableDatabase.query(SETTINGS_TABLE, strArr, str, strArr2, null, null, str2, null);
-        if (query != null) {
-            query.setNotificationUri(getContext().getContentResolver(), uri);
+        Cursor cursorQuery = readableDatabase.query(SETTINGS_TABLE, strArr, str, strArr2, null, null, str2, null);
+        if (cursorQuery != null) {
+            cursorQuery.setNotificationUri(getContext().getContentResolver(), uri);
         }
-        return query;
+        return cursorQuery;
     }
 
     @Override // android.content.ContentProvider
@@ -155,16 +155,16 @@ public class NotificationHistoryImageProvider extends ContentProvider {
             contentValues.put("image", bArr);
             contentValues.put("time", Long.valueOf(j));
             Slog.d(TAG, "uri= " + str + ", image= " + bArr.length + ", postedTime= " + j);
-            long insert = writableDatabase.insert(SETTINGS_TABLE, null, contentValues);
-            if (insert != -1) {
-                return insert;
+            long jInsert = writableDatabase.insert(SETTINGS_TABLE, null, contentValues);
+            if (jInsert != -1) {
+                return jInsert;
             }
             try {
                 Slog.d(TAG, "Failed to cache image");
-                return insert;
+                return jInsert;
             } catch (Exception e) {
                 e = e;
-                j2 = insert;
+                j2 = jInsert;
                 Slog.e(TAG, e.getMessage());
                 return j2;
             }
@@ -175,7 +175,7 @@ public class NotificationHistoryImageProvider extends ContentProvider {
 
     private long addImageToCache(ContentValues contentValues) {
         Exception e;
-        long j;
+        long jInsert;
         DatabaseHelper databaseHelper = this.mOpenHelper;
         if (databaseHelper == null) {
             Slog.d(TAG, "Error getting mOpenHelper in addImageToCache");
@@ -188,21 +188,21 @@ public class NotificationHistoryImageProvider extends ContentProvider {
         }
         try {
             Slog.d(TAG, "Added to cache image");
-            j = writableDatabase.insert(SETTINGS_TABLE, null, contentValues);
-            if (j != -1) {
-                return j;
+            jInsert = writableDatabase.insert(SETTINGS_TABLE, null, contentValues);
+            if (jInsert != -1) {
+                return jInsert;
             }
             try {
                 Slog.d(TAG, "Failed to cache image");
-                return j;
+                return jInsert;
             } catch (Exception e2) {
                 e = e2;
                 Slog.e(TAG, e.getMessage());
-                return j;
+                return jInsert;
             }
         } catch (Exception e3) {
             e = e3;
-            j = -1;
+            jInsert = -1;
         }
     }
 

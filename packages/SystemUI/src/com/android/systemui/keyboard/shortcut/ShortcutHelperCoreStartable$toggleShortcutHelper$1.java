@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutHelperCoreStartable$toggleShortcutHelper$1 extends SuspendLambda implements Function1 {
     final /* synthetic */ Integer $deviceId;
@@ -30,13 +29,13 @@ final class ShortcutHelperCoreStartable$toggleShortcutHelper$1 extends SuspendLa
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((ShortcutHelperCoreStartable$toggleShortcutHelper$1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
-        Object obj2;
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        Object objShow;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -45,15 +44,15 @@ final class ShortcutHelperCoreStartable$toggleShortcutHelper$1 extends SuspendLa
             Integer num = this.$deviceId;
             this.label = 1;
             if (shortcutHelperStateRepository._state.getValue() instanceof ShortcutHelperState.Inactive) {
-                obj2 = shortcutHelperStateRepository.show(num, this);
-                if (obj2 != coroutineSingletons) {
-                    obj2 = Unit.INSTANCE;
+                objShow = shortcutHelperStateRepository.show(num, this);
+                if (objShow != coroutineSingletons) {
+                    objShow = Unit.INSTANCE;
                 }
             } else {
                 shortcutHelperStateRepository._state.setValue(ShortcutHelperState.Inactive.INSTANCE);
-                obj2 = Unit.INSTANCE;
+                objShow = Unit.INSTANCE;
             }
-            if (obj2 == coroutineSingletons) {
+            if (objShow == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

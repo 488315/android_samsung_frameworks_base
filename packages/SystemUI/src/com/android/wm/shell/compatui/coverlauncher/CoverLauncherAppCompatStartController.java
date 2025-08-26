@@ -17,7 +17,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.view.SemWindowManager;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CoverLauncherAppCompatStartController {
     public final Context mContext;
@@ -27,7 +26,6 @@ public class CoverLauncherAppCompatStartController {
     public final CoverLauncherHandler mHandler = new CoverLauncherHandler(this, 0);
     public final SemWindowManager mWindowManager = SemWindowManager.getInstance();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CoverLauncherHandler extends Handler {
         public /* synthetic */ CoverLauncherHandler(CoverLauncherAppCompatStartController coverLauncherAppCompatStartController, int i) {
             this();

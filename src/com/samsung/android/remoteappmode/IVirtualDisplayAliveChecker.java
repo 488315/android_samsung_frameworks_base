@@ -51,9 +51,9 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDisplayAliveChecker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDisplayAliveChecker)) {
-                return (IVirtualDisplayAliveChecker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDisplayAliveChecker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDisplayAliveChecker)) {
+                return (IVirtualDisplayAliveChecker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,14 +83,14 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onVirtualDisplayCreated(readInt);
+                onVirtualDisplayCreated(i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onVirtualDisplayReleased(readInt2);
+                onVirtualDisplayReleased(i4);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -116,31 +116,31 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
 
             @Override // com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker
             public void onVirtualDisplayCreated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDisplayAliveChecker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDisplayAliveChecker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker
             public void onVirtualDisplayReleased(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDisplayAliveChecker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDisplayAliveChecker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

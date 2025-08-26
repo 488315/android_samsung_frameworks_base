@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.notification.collection.coordinator;
 
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
+import com.android.systemui.statusbar.notification.collection.coordinator.OriginalUnseenKeyguardCoordinator;
 import java.util.Map;
 import java.util.Set;
 import kotlin.KotlinNothingValueException;
@@ -16,7 +17,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.MutableSharedFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Set<NotificationEntry> $notificationsSeenWhileLocked;
@@ -42,19 +42,17 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedA
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        MutableSharedFlow mutableSharedFlow;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            mutableSharedFlow = this.this$0.unseenEntryAdded;
+            MutableSharedFlow mutableSharedFlow = this.this$0.unseenEntryAdded;
             final OriginalUnseenKeyguardCoordinator originalUnseenKeyguardCoordinator = this.this$0;
             final Map<NotificationEntry, Job> map = this.$trackingJobsByEntry;
             final Set<NotificationEntry> set = this.$notificationsSeenWhileLocked;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2.1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2$trackNewUnseenNotifs$2$1$2, reason: invalid class name */
                 final class AnonymousClass2 extends SuspendLambda implements Function2 {
                     final /* synthetic */ NotificationEntry $entry;
@@ -79,7 +77,6 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedA
 
                     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                     public final Object invokeSuspend(Object obj) {
-                        Object invokeSuspend$trackSeenDurationThreshold;
                         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
                         int i = this.label;
                         if (i == 0) {
@@ -89,8 +86,7 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedA
                             Map<NotificationEntry, Job> map = this.$trackingJobsByEntry;
                             NotificationEntry notificationEntry = this.$entry;
                             this.label = 1;
-                            invokeSuspend$trackSeenDurationThreshold = OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedAndNotDozing$2.invokeSuspend$trackSeenDurationThreshold(set, originalUnseenKeyguardCoordinator, map, notificationEntry, this);
-                            if (invokeSuspend$trackSeenDurationThreshold == coroutineSingletons) {
+                            if (OriginalUnseenKeyguardCoordinator.C10752.invokeSuspend$trackSeenDurationThreshold(set, originalUnseenKeyguardCoordinator, map, notificationEntry, this) == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
                         } else {
@@ -110,19 +106,15 @@ final class OriginalUnseenKeyguardCoordinator$trackSeenNotificationsWhileLockedA
 
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(NotificationEntry notificationEntry, Continuation continuation) {
-                    KeyguardCoordinatorLogger keyguardCoordinatorLogger;
-                    KeyguardCoordinatorLogger keyguardCoordinatorLogger2;
-                    keyguardCoordinatorLogger = OriginalUnseenKeyguardCoordinator.this.logger;
-                    keyguardCoordinatorLogger.logTrackingLockscreenSeenDuration(notificationEntry);
+                    originalUnseenKeyguardCoordinator.logger.logTrackingLockscreenSeenDuration(notificationEntry);
                     Job job = map.get(notificationEntry);
                     if (job != null) {
-                        OriginalUnseenKeyguardCoordinator originalUnseenKeyguardCoordinator2 = OriginalUnseenKeyguardCoordinator.this;
+                        OriginalUnseenKeyguardCoordinator originalUnseenKeyguardCoordinator2 = originalUnseenKeyguardCoordinator;
                         job.cancel(null);
-                        keyguardCoordinatorLogger2 = originalUnseenKeyguardCoordinator2.logger;
-                        keyguardCoordinatorLogger2.logResetSeenOnLockscreen(notificationEntry);
+                        originalUnseenKeyguardCoordinator2.logger.logResetSeenOnLockscreen(notificationEntry);
                     }
                     Map<NotificationEntry, Job> map2 = map;
-                    map2.put(notificationEntry, CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(notificationEntry, set, OriginalUnseenKeyguardCoordinator.this, map2, null), 7));
+                    map2.put(notificationEntry, CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(notificationEntry, set, originalUnseenKeyguardCoordinator, map2, null), 7));
                     return Unit.INSTANCE;
                 }
             };

@@ -7,6 +7,7 @@ import android.internal.aconfig.storage.PackageTable;
 import android.internal.aconfig.storage.TableUtils;
 import android.util.Log;
 import java.io.Closeable;
+import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
@@ -32,15 +33,15 @@ public class PlatformAconfigPackage {
     }
 
     static {
-        Set<String> of = Set.of("system.package.map", "system_ext.package.map", "vendor.package.map", "product.package.map");
-        PLATFORM_PACKAGE_MAP_FILES = of;
-        Iterator<String> it = of.iterator();
+        Set<String> setOf = Set.of("system.package.map", "system_ext.package.map", "vendor.package.map", "product.package.map");
+        PLATFORM_PACKAGE_MAP_FILES = setOf;
+        Iterator<String> it = setOf.iterator();
         while (it.hasNext()) {
             try {
-                PackageTable fromBytes = PackageTable.fromBytes(mapStorageFile(MAP_PATH + it.next()));
-                String container = fromBytes.getHeader().getContainer();
-                TableUtils.StorageFilesBundle storageFilesBundle = new TableUtils.StorageFilesBundle(fromBytes, FlagTable.fromBytes(mapStorageFile(MAP_PATH + container + ".flag.map")), FlagValueList.fromBytes(mapStorageFile(BOOT_PATH + container + ".val")));
-                Iterator<String> it2 = fromBytes.getPackageList().iterator();
+                PackageTable packageTableFromBytes = PackageTable.fromBytes(mapStorageFile(MAP_PATH + it.next()));
+                String container = packageTableFromBytes.getHeader().getContainer();
+                TableUtils.StorageFilesBundle storageFilesBundle = new TableUtils.StorageFilesBundle(packageTableFromBytes, FlagTable.fromBytes(mapStorageFile(MAP_PATH + container + ".flag.map")), FlagValueList.fromBytes(mapStorageFile(BOOT_PATH + container + ".val")));
+                Iterator<String> it2 = packageTableFromBytes.getPackageList().iterator();
                 while (it2.hasNext()) {
                     sStorageFilesCache.put(it2.next(), storageFilesBundle);
                 }
@@ -50,7 +51,8 @@ public class PlatformAconfigPackage {
         }
     }
 
-    public static PlatformAconfigPackage load(String str) {
+    /* JADX INFO: Thrown type has an unknown type hierarchy: android.os.flagging.AconfigStorageReadException */
+    public static PlatformAconfigPackage load(String str) throws AconfigStorageReadException {
         try {
             PlatformAconfigPackage platformAconfigPackage = new PlatformAconfigPackage();
             TableUtils.StorageFilesBundle storageFilesBundle = sStorageFilesCache.get(str);
@@ -75,36 +77,37 @@ public class PlatformAconfigPackage {
         return node == null ? z : this.mFlagValueList.getBoolean(node.getFlagIndex() + this.mPackageBooleanStartOffset);
     }
 
-    private static MappedByteBuffer mapStorageFile(String str) {
+    private static MappedByteBuffer mapStorageFile(String str) throws Throwable {
         Throwable th;
         Exception exc;
+        FileChannel fileChannelOpen;
         FileChannel fileChannel = null;
         try {
             try {
-                FileChannel open = FileChannel.open(Paths.get(str, new String[0]), StandardOpenOption.READ);
-                try {
-                    MappedByteBuffer map = open.map(FileChannel.MapMode.READ_ONLY, 0L, open.size());
-                    quietlyDispose(open);
-                    return map;
-                } catch (Exception e) {
-                    exc = e;
-                    fileChannel = open;
-                    throw new AconfigStorageReadException(4, "Fail to mmap storage", exc);
-                } catch (Throwable th2) {
-                    th = th2;
-                    fileChannel = open;
-                    quietlyDispose(fileChannel);
-                    throw th;
-                }
-            } catch (Throwable th3) {
-                th = th3;
+                fileChannelOpen = FileChannel.open(Paths.get(str, new String[0]), StandardOpenOption.READ);
+            } catch (Exception e) {
+                exc = e;
             }
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        try {
+            MappedByteBuffer map = fileChannelOpen.map(FileChannel.MapMode.READ_ONLY, 0L, fileChannelOpen.size());
+            quietlyDispose(fileChannelOpen);
+            return map;
         } catch (Exception e2) {
             exc = e2;
+            fileChannel = fileChannelOpen;
+            throw new AconfigStorageReadException(4, "Fail to mmap storage", exc);
+        } catch (Throwable th3) {
+            th = th3;
+            fileChannel = fileChannelOpen;
+            quietlyDispose(fileChannel);
+            throw th;
         }
     }
 
-    private static void quietlyDispose(Closeable closeable) {
+    private static void quietlyDispose(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();

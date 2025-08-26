@@ -1,6 +1,5 @@
 package kotlin.ranges;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ClosedFloatRange implements ClosedFloatingPointRange {
     public final float _endInclusive;
@@ -13,8 +12,8 @@ public final class ClosedFloatRange implements ClosedFloatingPointRange {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final boolean contains(Comparable comparable) {
-        float floatValue = ((Number) comparable).floatValue();
-        return floatValue >= this._start && floatValue <= this._endInclusive;
+        float fFloatValue = ((Number) comparable).floatValue();
+        return fFloatValue >= this._start && fFloatValue <= this._endInclusive;
     }
 
     public final boolean equals(Object obj) {

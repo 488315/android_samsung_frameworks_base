@@ -21,7 +21,6 @@ import kotlin.collections.AbstractList;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MSDLModule_ProvideMSDLPlayerFactory implements Provider {
     public final Provider vibratorProvider;
@@ -34,7 +33,7 @@ public final class MSDLModule_ProvideMSDLPlayerFactory implements Provider {
         boolean z;
         MSDLModule.INSTANCE.getClass();
         MSDLPlayer.Companion companion = MSDLPlayer.Companion;
-        ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
+        ExecutorService executorServiceNewSingleThreadExecutor = Executors.newSingleThreadExecutor();
         companion.getClass();
         if (vibrator == null) {
             Log.w("MSDLPlayer", "A null vibrator was used to create a MSDLPlayer. An empty player was created");
@@ -43,21 +42,21 @@ public final class MSDLModule_ProvideMSDLPlayerFactory implements Provider {
         MSDLRepositoryImpl mSDLRepositoryImpl = new MSDLRepositoryImpl();
         MSDLPlayerImpl.Companion.getClass();
         List list = MSDLPlayerImpl.REQUIRED_PRIMITIVES;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
         for (Object obj : list) {
-            boolean[] arePrimitivesSupported = vibrator.arePrimitivesSupported(((Number) obj).intValue());
-            if (arePrimitivesSupported.length == 0) {
+            boolean[] zArrArePrimitivesSupported = vibrator.arePrimitivesSupported(((Number) obj).intValue());
+            if (zArrArePrimitivesSupported.length == 0) {
                 throw new NoSuchElementException("Array is empty.");
             }
-            linkedHashMap.put(obj, Boolean.valueOf(arePrimitivesSupported[0]));
+            linkedHashMap.put(obj, Boolean.valueOf(zArrArePrimitivesSupported[0]));
         }
         List list2 = MSDLToken.$ENTRIES;
-        int mapCapacity2 = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
-        LinkedHashMap linkedHashMap2 = new LinkedHashMap(mapCapacity2 >= 16 ? mapCapacity2 : 16);
+        int iMapCapacity2 = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+        LinkedHashMap linkedHashMap2 = new LinkedHashMap(iMapCapacity2 >= 16 ? iMapCapacity2 : 16);
         Iterator it = ((AbstractList) list2).iterator();
         while (it.hasNext()) {
             Object next = it.next();
@@ -73,11 +72,13 @@ public final class MSDLModule_ProvideMSDLPlayerFactory implements Provider {
                         break;
                     }
                 }
+                z = false;
+            } else {
+                z = false;
             }
-            z = false;
             linkedHashMap2.put(next, Boolean.valueOf(z));
         }
-        return new MSDLPlayerImpl(mSDLRepositoryImpl, vibrator, newSingleThreadExecutor, linkedHashMap2);
+        return new MSDLPlayerImpl(mSDLRepositoryImpl, vibrator, executorServiceNewSingleThreadExecutor, linkedHashMap2);
     }
 
     @Override // javax.inject.Provider

@@ -69,9 +69,9 @@ public interface IPictureProfileCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPictureProfileCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPictureProfileCallback)) {
-                return (IPictureProfileCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPictureProfileCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPictureProfileCallback)) {
+                return (IPictureProfileCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,30 +86,30 @@ public interface IPictureProfileCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 PictureProfile pictureProfile = (PictureProfile) parcel.readTypedObject(PictureProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onPictureProfileAdded(readString, pictureProfile);
+                onPictureProfileAdded(string, pictureProfile);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 PictureProfile pictureProfile2 = (PictureProfile) parcel.readTypedObject(PictureProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onPictureProfileUpdated(readString2, pictureProfile2);
+                onPictureProfileUpdated(string2, pictureProfile2);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 PictureProfile pictureProfile3 = (PictureProfile) parcel.readTypedObject(PictureProfile.CREATOR);
                 parcel.enforceNoDataAvail();
-                onPictureProfileRemoved(readString3, pictureProfile3);
+                onPictureProfileRemoved(string3, pictureProfile3);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ParameterCapability.CREATOR);
+                String string4 = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ParameterCapability.CREATOR);
                 parcel.enforceNoDataAvail();
-                onParameterCapabilitiesChanged(readString4, createTypedArrayList);
+                onParameterCapabilitiesChanged(string4, arrayListCreateTypedArrayList);
             } else if (i == 5) {
-                String readString5 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string5 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readString5, readInt);
+                onError(string5, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -134,66 +134,66 @@ public interface IPictureProfileCallback extends IInterface {
 
             @Override // android.media.quality.IPictureProfileCallback
             public void onPictureProfileAdded(String str, PictureProfile pictureProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pictureProfile, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pictureProfile, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IPictureProfileCallback
             public void onPictureProfileUpdated(String str, PictureProfile pictureProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pictureProfile, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pictureProfile, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IPictureProfileCallback
             public void onPictureProfileRemoved(String str, PictureProfile pictureProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pictureProfile, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pictureProfile, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IPictureProfileCallback
             public void onParameterCapabilitiesChanged(String str, List<ParameterCapability> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IPictureProfileCallback
             public void onError(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPictureProfileCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

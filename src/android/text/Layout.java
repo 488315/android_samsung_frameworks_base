@@ -22,6 +22,7 @@ import android.text.style.TabStopSpan;
 import com.android.graphics.hwui.flags.Flags;
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.util.ArrayUtils;
+import com.android.internal.util.GrowingArrayUtils;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
 import java.lang.annotation.Retention;
@@ -100,17 +101,13 @@ public abstract class Layout {
     public static final TextInclusionStrategy INCLUSION_STRATEGY_CONTAINS_CENTER = new TextInclusionStrategy() { // from class: android.text.Layout$$ExternalSyntheticLambda3
         @Override // android.text.Layout.TextInclusionStrategy
         public final boolean isSegmentInside(RectF rectF, RectF rectF2) {
-            boolean contains;
-            contains = rectF2.contains(rectF.centerX(), rectF.centerY());
-            return contains;
+            return rectF2.contains(rectF.centerX(), rectF.centerY());
         }
     };
     public static final TextInclusionStrategy INCLUSION_STRATEGY_CONTAINS_ALL = new TextInclusionStrategy() { // from class: android.text.Layout$$ExternalSyntheticLambda4
         @Override // android.text.Layout.TextInclusionStrategy
         public final boolean isSegmentInside(RectF rectF, RectF rectF2) {
-            boolean contains;
-            contains = rectF2.contains(rectF);
-            return contains;
+            return rectF2.contains(rectF);
         }
     };
     private static final Rect sTempRect = new Rect();
@@ -214,24 +211,24 @@ public abstract class Layout {
         return getDesiredWidthWithLimit(charSequence, i, i2, textPaint, textDirectionHeuristic, Float.MAX_VALUE, false);
     }
 
-    public static float getDesiredWidthWithLimit(CharSequence charSequence, int i, int i2, TextPaint textPaint, TextDirectionHeuristic textDirectionHeuristic, float f, boolean z) {
+    public static float getDesiredWidthWithLimit(CharSequence charSequence, int i, int i2, TextPaint textPaint, TextDirectionHeuristic textDirectionHeuristic, float f, boolean z) throws Throwable {
         textPaint.set(textPaint);
         float f2 = 0.0f;
         int i3 = i;
         while (i3 <= i2) {
-            int indexOf = TextUtils.indexOf(charSequence, '\n', i3, i2);
-            int i4 = indexOf < 0 ? i2 : indexOf;
+            int iIndexOf = TextUtils.indexOf(charSequence, '\n', i3, i2);
+            int i4 = iIndexOf < 0 ? i2 : iIndexOf;
             CharSequence charSequence2 = charSequence;
             TextPaint textPaint2 = textPaint;
             TextDirectionHeuristic textDirectionHeuristic2 = textDirectionHeuristic;
             boolean z2 = z;
-            float measurePara = measurePara(textPaint2, charSequence2, i3, i4, textDirectionHeuristic2, z2);
+            float fMeasurePara = measurePara(textPaint2, charSequence2, i3, i4, textDirectionHeuristic2, z2);
             int i5 = i4;
-            if (measurePara > f) {
+            if (fMeasurePara > f) {
                 return f;
             }
-            if (measurePara > f2) {
-                f2 = measurePara;
+            if (fMeasurePara > f2) {
+                f2 = fMeasurePara;
             }
             i3 = i5 + 1;
             textPaint = textPaint2;
@@ -319,72 +316,40 @@ public abstract class Layout {
         draw(canvas, null, null, path, paint, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002b  */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x001b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void draw(android.graphics.Canvas r12, java.util.List<android.graphics.Path> r13, java.util.List<android.graphics.Paint> r14, android.graphics.Path r15, android.graphics.Paint r16, int r17) {
-        /*
-            r11 = this;
-            boolean r2 = r11.mUseBoundsForWidth
-            r9 = 0
-            if (r2 == 0) goto L1b
-            boolean r2 = r11.mShiftDrawingOffsetForStartOverhang
-            if (r2 == 0) goto L1b
-            android.graphics.RectF r2 = r11.computeDrawingBoundingBox()
-            float r3 = r2.left
-            int r3 = (r3 > r9 ? 1 : (r3 == r9 ? 0 : -1))
-            if (r3 >= 0) goto L1b
-            float r2 = r2.left
-            float r2 = -r2
-            r12.translate(r2, r9)
-            r10 = r2
-            goto L1c
-        L1b:
-            r10 = r9
-        L1c:
-            long r2 = r11.getLineRangeForDraw(r12)
-            int r7 = android.text.TextUtils.unpackRangeStartFromLong(r2)
-            int r8 = android.text.TextUtils.unpackRangeEndFromLong(r2)
-            if (r8 >= 0) goto L2b
-            goto L5e
-        L2b:
-            boolean r2 = shouldDrawHighlightsOnTop(r12)
-            if (r2 == 0) goto L35
-            r11.drawBackground(r12, r7, r8)
-            goto L41
-        L35:
-            r0 = r11
-            r1 = r12
-            r2 = r13
-            r3 = r14
-            r4 = r15
-            r5 = r16
-            r6 = r17
-            r0.drawWithoutText(r1, r2, r3, r4, r5, r6, r7, r8)
-        L41:
-            r11.drawText(r12, r7, r8)
-            boolean r2 = shouldDrawHighlightsOnTop(r12)
-            if (r2 == 0) goto L56
-            r0 = r11
-            r1 = r12
-            r2 = r13
-            r3 = r14
-            r4 = r15
-            r5 = r16
-            r6 = r17
-            r0.drawHighlights(r1, r2, r3, r4, r5, r6, r7, r8)
-        L56:
-            int r0 = (r10 > r9 ? 1 : (r10 == r9 ? 0 : -1))
-            if (r0 == 0) goto L5e
-            float r0 = -r10
-            r12.translate(r0, r9)
-        L5e:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.draw(android.graphics.Canvas, java.util.List, java.util.List, android.graphics.Path, android.graphics.Paint, int):void");
+    public void draw(Canvas canvas, List<Path> list, List<Paint> list2, Path path, Paint paint, int i) {
+        float f;
+        if (this.mUseBoundsForWidth && this.mShiftDrawingOffsetForStartOverhang) {
+            RectF rectFComputeDrawingBoundingBox = computeDrawingBoundingBox();
+            if (rectFComputeDrawingBoundingBox.left < 0.0f) {
+                float f2 = -rectFComputeDrawingBoundingBox.left;
+                canvas.translate(f2, 0.0f);
+                f = f2;
+            }
+        } else {
+            f = 0.0f;
+        }
+        long lineRangeForDraw = getLineRangeForDraw(canvas);
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
+        if (iUnpackRangeEndFromLong < 0) {
+            return;
+        }
+        if (shouldDrawHighlightsOnTop(canvas)) {
+            drawBackground(canvas, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
+        } else {
+            drawWithoutText(canvas, list, list2, path, paint, i, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
+        }
+        drawText(canvas, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
+        if (shouldDrawHighlightsOnTop(canvas)) {
+            drawHighlights(canvas, list, list2, path, paint, i, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
+        }
+        if (f != 0.0f) {
+            canvas.translate(-f, 0.0f);
+        }
     }
 
     private static boolean shouldDrawHighlightsOnTop(Canvas canvas) {
@@ -403,22 +368,22 @@ public abstract class Layout {
 
     public void drawText(Canvas canvas) {
         long lineRangeForDraw = getLineRangeForDraw(canvas);
-        int unpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
-        int unpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
-        if (unpackRangeEndFromLong < 0) {
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
+        if (iUnpackRangeEndFromLong < 0) {
             return;
         }
-        drawText(canvas, unpackRangeStartFromLong, unpackRangeEndFromLong);
+        drawText(canvas, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
     }
 
     public void drawBackground(Canvas canvas) {
         long lineRangeForDraw = getLineRangeForDraw(canvas);
-        int unpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
-        int unpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
-        if (unpackRangeEndFromLong < 0) {
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
+        if (iUnpackRangeEndFromLong < 0) {
             return;
         }
-        drawBackground(canvas, unpackRangeStartFromLong, unpackRangeEndFromLong);
+        drawBackground(canvas, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
     }
 
     public void drawWithoutText(Canvas canvas, List<Path> list, List<Paint> list2, Path path, Paint paint, int i, int i2, int i3) {
@@ -434,7 +399,7 @@ public abstract class Layout {
             canvas.translate(0.0f, i);
         }
         try {
-            BlendMode determineHighContrastHighlightBlendMode = determineHighContrastHighlightBlendMode(canvas);
+            BlendMode blendModeDetermineHighContrastHighlightBlendMode = determineHighContrastHighlightBlendMode(canvas);
             if (list != null) {
                 if (list2 == null) {
                     throw new IllegalArgumentException("if highlight is specified, highlightPaint must be specified.");
@@ -444,18 +409,18 @@ public abstract class Layout {
                 }
                 for (int i4 = 0; i4 < list.size(); i4++) {
                     Path path2 = list.get(i4);
-                    Paint paint2 = list2.get(i4);
+                    Paint toHighlightPaint = list2.get(i4);
                     if (shouldDrawHighlightsOnTop(canvas)) {
-                        paint2 = setToHighlightPaint(paint2, determineHighContrastHighlightBlendMode, this.mWorkPlainPaint);
+                        toHighlightPaint = setToHighlightPaint(toHighlightPaint, blendModeDetermineHighContrastHighlightBlendMode, this.mWorkPlainPaint);
                     }
                     if (path2 != null) {
-                        canvas.drawPath(path2, paint2);
+                        canvas.drawPath(path2, toHighlightPaint);
                     }
                 }
             }
             if (path != null) {
                 if (shouldDrawHighlightsOnTop(canvas)) {
-                    paint = setToHighlightPaint(paint, determineHighContrastHighlightBlendMode, this.mWorkPlainPaint);
+                    paint = setToHighlightPaint(paint, blendModeDetermineHighContrastHighlightBlendMode, this.mWorkPlainPaint);
                 }
                 canvas.drawPath(path, paint);
             }
@@ -490,10 +455,10 @@ public abstract class Layout {
         int indentAdjust;
         int indentAdjust2;
         Alignment alignment = this.mAlignment;
-        int i2 = this.mWidth;
+        int leadingMargin = this.mWidth;
         int paragraphDirection = getParagraphDirection(i);
         ParagraphStyle[] paragraphStyleArr = NO_PARA_SPANS;
-        int i3 = 0;
+        int i2 = 0;
         if (this.mSpannedText) {
             Spanned spanned = (Spanned) this.mText;
             int lineStart = getLineStart(i);
@@ -514,34 +479,34 @@ public abstract class Layout {
                 }
             }
             int length2 = paragraphStyleArr.length;
-            int i4 = 0;
+            int i3 = 0;
             while (true) {
-                if (i4 >= length2) {
+                if (i3 >= length2) {
                     break;
                 }
-                ParagraphStyle paragraphStyle2 = paragraphStyleArr[i4];
+                ParagraphStyle paragraphStyle2 = paragraphStyleArr[i3];
                 if (paragraphStyle2 instanceof LeadingMarginSpan.LeadingMarginSpan2) {
-                    if (i < getLineForOffset(spanned.getSpanStart(paragraphStyleArr[i4])) + ((LeadingMarginSpan.LeadingMarginSpan2) paragraphStyle2).getLeadingMarginLineCount()) {
+                    if (i < getLineForOffset(spanned.getSpanStart(paragraphStyleArr[i3])) + ((LeadingMarginSpan.LeadingMarginSpan2) paragraphStyle2).getLeadingMarginLineCount()) {
                         z = true;
                         break;
                     }
                 }
-                i4++;
+                i3++;
             }
-            int i5 = 0;
-            while (i3 < length2) {
-                ParagraphStyle paragraphStyle3 = paragraphStyleArr[i3];
+            int leadingMargin2 = 0;
+            while (i2 < length2) {
+                ParagraphStyle paragraphStyle3 = paragraphStyleArr[i2];
                 if (paragraphStyle3 instanceof LeadingMarginSpan) {
                     LeadingMarginSpan leadingMarginSpan = (LeadingMarginSpan) paragraphStyle3;
                     if (paragraphDirection == -1) {
-                        i2 -= leadingMarginSpan.getLeadingMargin(z);
+                        leadingMargin -= leadingMarginSpan.getLeadingMargin(z);
                     } else {
-                        i5 += leadingMarginSpan.getLeadingMargin(z);
+                        leadingMargin2 += leadingMarginSpan.getLeadingMargin(z);
                     }
                 }
-                i3++;
+                i2++;
             }
-            i3 = i5;
+            i2 = leadingMargin2;
         }
         if (alignment == Alignment.ALIGN_LEFT) {
             alignment = paragraphDirection == 1 ? Alignment.ALIGN_NORMAL : Alignment.ALIGN_OPPOSITE;
@@ -563,38 +528,478 @@ public abstract class Layout {
         } else {
             indentAdjust = getIndentAdjust(i, Alignment.ALIGN_LEFT);
         }
-        return (i2 - i3) - indentAdjust;
+        return (leadingMargin - i2) - indentAdjust;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x00ec A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00cd  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01fc  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0293  */
+    /* JADX WARN: Removed duplicated region for block: B:107:0x00ec A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00f4  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x01fc  */
     /* JADX WARN: Removed duplicated region for block: B:79:0x0211  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x026a  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0293  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void drawText(android.graphics.Canvas r34, int r35, int r36) {
-        /*
-            Method dump skipped, instructions count: 707
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.drawText(android.graphics.Canvas, int, int):void");
+    public void drawText(Canvas canvas, int i, int i2) {
+        Alignment alignment;
+        int i3;
+        int i4;
+        TextPaint textPaint;
+        TabStops tabStops;
+        int i5;
+        int i6;
+        boolean z;
+        int i7;
+        ParagraphStyle[] paragraphStyleArr;
+        int i8;
+        boolean z2;
+        int i9;
+        int i10;
+        TextPaint textPaint2;
+        Alignment alignment2;
+        Alignment alignment3;
+        int indentAdjust;
+        int i11;
+        int i12;
+        Directions lineDirections;
+        TabStops tabStops2;
+        int i13;
+        int i14;
+        ParagraphStyle[] paragraphStyleArr2;
+        int i15;
+        boolean z3;
+        boolean z4;
+        int length;
+        int i16;
+        boolean z5;
+        int i17;
+        int i18;
+        int i19;
+        int i20;
+        int i21;
+        int i22;
+        boolean z6;
+        int i23;
+        TextPaint textPaint3;
+        TabStops tabStops3;
+        ParagraphStyle[] paragraphStyleArr3;
+        int i24;
+        int i25;
+        Layout layout = this;
+        int i26 = i;
+        int lineTop = layout.getLineTop(i26);
+        int lineStart = layout.getLineStart(i26);
+        ParagraphStyle[] paragraphStyleArr4 = NO_PARA_SPANS;
+        TextPaint textPaint4 = layout.mWorkPaint;
+        textPaint4.set(layout.mPaint);
+        CharSequence charSequence = layout.mText;
+        Alignment alignment4 = layout.mAlignment;
+        TextLine textLineObtain = TextLine.obtain();
+        boolean z7 = false;
+        int i27 = lineTop;
+        TabStops tabStops4 = null;
+        int i28 = lineStart;
+        int iNextSpanTransition = 0;
+        boolean z8 = false;
+        int i29 = i26;
+        while (i29 <= i2) {
+            int i30 = i29 + 1;
+            TextLine textLine = textLineObtain;
+            int lineStart2 = layout.getLineStart(i30);
+            boolean zIsJustificationRequired = layout.isJustificationRequired(i29);
+            TabStops tabStops5 = tabStops4;
+            int lineVisibleEnd = layout.getLineVisibleEnd(i29, i28, lineStart2, true);
+            textPaint4.setStartHyphenEdit(layout.getStartHyphenEdit(i29));
+            textPaint4.setEndHyphenEdit(layout.getEndHyphenEdit(i29));
+            int lineTop2 = layout.getLineTop(i30);
+            int lineDescent = lineTop2 - layout.getLineDescent(i29);
+            int paragraphDirection = layout.getParagraphDirection(i29);
+            int i31 = layout.mWidth;
+            if (layout.mSpannedText) {
+                Spanned spanned = (Spanned) charSequence;
+                int length2 = charSequence.length();
+                if (i28 != 0) {
+                    paragraphStyleArr2 = paragraphStyleArr4;
+                    alignment = alignment4;
+                    if (charSequence.charAt(i28 - 1) != '\n') {
+                        i15 = i30;
+                        z3 = false;
+                    }
+                    if (i28 >= iNextSpanTransition || !(i29 == i26 || z3)) {
+                        i3 = i15;
+                        z4 = z8;
+                    } else {
+                        iNextSpanTransition = spanned.nextSpanTransition(i28, length2, ParagraphStyle.class);
+                        ParagraphStyle[] paragraphStyleArr5 = (ParagraphStyle[]) getParagraphSpans(spanned, i28, iNextSpanTransition, ParagraphStyle.class);
+                        Alignment alignment5 = layout.mAlignment;
+                        int length3 = paragraphStyleArr5.length - 1;
+                        while (true) {
+                            paragraphStyleArr2 = paragraphStyleArr5;
+                            if (length3 < 0) {
+                                i3 = i15;
+                                break;
+                            }
+                            ParagraphStyle paragraphStyle = paragraphStyleArr2[length3];
+                            i3 = i15;
+                            if (paragraphStyle instanceof AlignmentSpan) {
+                                alignment5 = ((AlignmentSpan) paragraphStyle).getAlignment();
+                                break;
+                            } else {
+                                length3--;
+                                paragraphStyleArr5 = paragraphStyleArr2;
+                                i15 = i3;
+                            }
+                        }
+                        alignment = alignment5;
+                        z4 = false;
+                    }
+                    ParagraphStyle[] paragraphStyleArr6 = paragraphStyleArr2;
+                    int i32 = iNextSpanTransition;
+                    length = paragraphStyleArr6.length;
+                    i16 = 0;
+                    while (true) {
+                        if (i16 < length) {
+                            z5 = z3;
+                            break;
+                        }
+                        ParagraphStyle paragraphStyle2 = paragraphStyleArr6[i16];
+                        if (paragraphStyle2 instanceof LeadingMarginSpan.LeadingMarginSpan2) {
+                            if (i29 < layout.getLineForOffset(spanned.getSpanStart(paragraphStyleArr6[i16])) + ((LeadingMarginSpan.LeadingMarginSpan2) paragraphStyle2).getLeadingMarginLineCount()) {
+                                z5 = true;
+                                break;
+                            }
+                        }
+                        i16++;
+                    }
+                    int leadingMargin = i31;
+                    i17 = 0;
+                    int leadingMargin2 = 0;
+                    while (i17 < length) {
+                        ParagraphStyle paragraphStyle3 = paragraphStyleArr6[i17];
+                        boolean z9 = z5;
+                        if (paragraphStyle3 instanceof LeadingMarginSpan) {
+                            LeadingMarginSpan leadingMarginSpan = (LeadingMarginSpan) paragraphStyle3;
+                            if (paragraphDirection == -1) {
+                                i18 = i29;
+                                i19 = i17;
+                                i20 = lineStart2;
+                                int i33 = lineVisibleEnd;
+                                int i34 = lineDescent;
+                                int i35 = lineTop2;
+                                z6 = z9;
+                                i23 = length;
+                                textPaint3 = textPaint4;
+                                tabStops3 = tabStops5;
+                                paragraphStyleArr3 = paragraphStyleArr6;
+                                leadingMarginSpan.drawLeadingMargin(canvas, textPaint3, leadingMargin, paragraphDirection, i27, i34, i35, charSequence, i28, i33, z3, layout);
+                                leadingMargin -= leadingMarginSpan.getLeadingMargin(z6);
+                                layout = this;
+                                i24 = i34;
+                                i22 = i35;
+                                i21 = i33;
+                                i17 = i19 + 1;
+                                lineTop2 = i22;
+                                lineDescent = i24;
+                                z5 = z6;
+                                paragraphStyleArr6 = paragraphStyleArr3;
+                                lineStart2 = i20;
+                                tabStops5 = tabStops3;
+                                textPaint4 = textPaint3;
+                                length = i23;
+                                lineVisibleEnd = i21;
+                                i29 = i18;
+                            } else {
+                                i18 = i29;
+                                i19 = i17;
+                                i20 = lineStart2;
+                                int i36 = lineVisibleEnd;
+                                int i37 = lineDescent;
+                                int i38 = lineTop2;
+                                z6 = z9;
+                                i23 = length;
+                                i25 = leadingMargin;
+                                textPaint3 = textPaint4;
+                                tabStops3 = tabStops5;
+                                int i39 = leadingMargin2;
+                                paragraphStyleArr3 = paragraphStyleArr6;
+                                leadingMarginSpan.drawLeadingMargin(canvas, textPaint3, i39, paragraphDirection, i27, i37, i38, charSequence, i28, i36, z3, layout);
+                                i24 = i37;
+                                i21 = i36;
+                                i22 = i38;
+                                leadingMargin2 = i39 + leadingMarginSpan.getLeadingMargin(z6);
+                            }
+                        } else {
+                            i18 = i29;
+                            i19 = i17;
+                            i20 = lineStart2;
+                            i21 = lineVisibleEnd;
+                            i22 = lineTop2;
+                            z6 = z9;
+                            i23 = length;
+                            textPaint3 = textPaint4;
+                            tabStops3 = tabStops5;
+                            paragraphStyleArr3 = paragraphStyleArr6;
+                            i24 = lineDescent;
+                            i25 = leadingMargin;
+                        }
+                        leadingMargin = i25;
+                        i17 = i19 + 1;
+                        lineTop2 = i22;
+                        lineDescent = i24;
+                        z5 = z6;
+                        paragraphStyleArr6 = paragraphStyleArr3;
+                        lineStart2 = i20;
+                        tabStops5 = tabStops3;
+                        textPaint4 = textPaint3;
+                        length = i23;
+                        lineVisibleEnd = i21;
+                        i29 = i18;
+                    }
+                    i4 = lineStart2;
+                    textPaint = textPaint4;
+                    tabStops = tabStops5;
+                    ParagraphStyle[] paragraphStyleArr7 = paragraphStyleArr6;
+                    i5 = lineDescent;
+                    i8 = leadingMargin2;
+                    paragraphStyleArr = paragraphStyleArr7;
+                    i7 = leadingMargin;
+                    z = z4;
+                    i6 = i32;
+                } else {
+                    paragraphStyleArr2 = paragraphStyleArr4;
+                    alignment = alignment4;
+                }
+                i15 = i30;
+                z3 = true;
+                if (i28 >= iNextSpanTransition) {
+                    i3 = i15;
+                    z4 = z8;
+                    ParagraphStyle[] paragraphStyleArr62 = paragraphStyleArr2;
+                    int i322 = iNextSpanTransition;
+                    length = paragraphStyleArr62.length;
+                    i16 = 0;
+                    while (true) {
+                        if (i16 < length) {
+                        }
+                        i16++;
+                    }
+                    int leadingMargin3 = i31;
+                    i17 = 0;
+                    int leadingMargin22 = 0;
+                    while (i17 < length) {
+                    }
+                    i4 = lineStart2;
+                    textPaint = textPaint4;
+                    tabStops = tabStops5;
+                    ParagraphStyle[] paragraphStyleArr72 = paragraphStyleArr62;
+                    i5 = lineDescent;
+                    i8 = leadingMargin22;
+                    paragraphStyleArr = paragraphStyleArr72;
+                    i7 = leadingMargin3;
+                    z = z4;
+                    i6 = i322;
+                }
+            } else {
+                ParagraphStyle[] paragraphStyleArr8 = paragraphStyleArr4;
+                alignment = alignment4;
+                i3 = i30;
+                i4 = lineStart2;
+                textPaint = textPaint4;
+                tabStops = tabStops5;
+                i5 = lineDescent;
+                i6 = iNextSpanTransition;
+                z = z8;
+                i7 = i31;
+                paragraphStyleArr = paragraphStyleArr8;
+                i8 = 0;
+            }
+            int i40 = i29;
+            int i41 = lineVisibleEnd;
+            int i42 = lineTop2;
+            Alignment alignment6 = alignment;
+            boolean lineContainsTab = layout.getLineContainsTab(i40);
+            if (!lineContainsTab || z) {
+                z2 = z;
+            } else {
+                if (tabStops == null) {
+                    tabStops = new TabStops(TAB_INCREMENT, paragraphStyleArr);
+                } else {
+                    tabStops.reset(TAB_INCREMENT, paragraphStyleArr);
+                }
+                z2 = true;
+            }
+            if (alignment6 == Alignment.ALIGN_LEFT) {
+                i10 = 1;
+                alignment3 = paragraphDirection == 1 ? Alignment.ALIGN_NORMAL : Alignment.ALIGN_OPPOSITE;
+                i9 = i42;
+            } else {
+                i9 = i42;
+                i10 = 1;
+                if (alignment6 == Alignment.ALIGN_RIGHT) {
+                    alignment3 = paragraphDirection == 1 ? Alignment.ALIGN_OPPOSITE : Alignment.ALIGN_NORMAL;
+                } else {
+                    textPaint2 = textPaint;
+                    alignment2 = alignment6;
+                    if (alignment2 == Alignment.ALIGN_NORMAL) {
+                        int lineExtent = (int) layout.getLineExtent(i40, tabStops, false);
+                        if (alignment2 != Alignment.ALIGN_OPPOSITE) {
+                            indentAdjust = layout.getIndentAdjust(i40, Alignment.ALIGN_CENTER);
+                            i11 = ((i7 + i8) - (lineExtent & (-2))) >> 1;
+                        } else if (paragraphDirection == 1) {
+                            indentAdjust = -layout.getIndentAdjust(i40, Alignment.ALIGN_RIGHT);
+                            i12 = (i7 - lineExtent) - indentAdjust;
+                        } else {
+                            indentAdjust = layout.getIndentAdjust(i40, Alignment.ALIGN_LEFT);
+                            i11 = i8 - lineExtent;
+                        }
+                        i12 = i11 + indentAdjust;
+                    } else if (paragraphDirection == i10) {
+                        indentAdjust = layout.getIndentAdjust(i40, Alignment.ALIGN_LEFT);
+                        i12 = i8 + indentAdjust;
+                    } else {
+                        indentAdjust = -layout.getIndentAdjust(i40, Alignment.ALIGN_RIGHT);
+                        i12 = i7 - indentAdjust;
+                    }
+                    lineDirections = layout.getLineDirections(i40);
+                    int i43 = indentAdjust;
+                    if (lineDirections != DIRS_ALL_LEFT_TO_RIGHT && !layout.mSpannedText && !lineContainsTab && !zIsJustificationRequired) {
+                        CharSequence charSequence2 = charSequence;
+                        int i44 = i28;
+                        TextPaint textPaint5 = textPaint2;
+                        canvas.drawText(charSequence2, i44, i41, i12, i5, textPaint5);
+                        charSequence = charSequence2;
+                        tabStops2 = tabStops;
+                        i13 = i4;
+                        i14 = i9;
+                        textPaint4 = textPaint5;
+                        textLineObtain = textLine;
+                    } else {
+                        tabStops2 = tabStops;
+                        textLineObtain = textLine;
+                        textPaint4 = textPaint2;
+                        i13 = i4;
+                        textLineObtain.set(textPaint4, charSequence, i28, i41, paragraphDirection, lineDirections, lineContainsTab, tabStops2, layout.getEllipsisStart(i40), layout.getEllipsisStart(i40) + layout.getEllipsisCount(i40), layout.isFallbackLineSpacingEnabled());
+                        if (zIsJustificationRequired) {
+                            textLineObtain.justify(layout.mJustificationMode, (i7 - i8) - i43);
+                        }
+                        int i45 = i9;
+                        textLineObtain.draw(canvas, i12, i27, i5, i45);
+                        i14 = i45;
+                    }
+                    i26 = i;
+                    i28 = i13;
+                    i27 = i14;
+                    paragraphStyleArr4 = paragraphStyleArr;
+                    alignment4 = alignment6;
+                    tabStops4 = tabStops2;
+                    i29 = i3;
+                    iNextSpanTransition = i6;
+                    z8 = z2;
+                    z7 = false;
+                }
+            }
+            alignment2 = alignment3;
+            textPaint2 = textPaint;
+            if (alignment2 == Alignment.ALIGN_NORMAL) {
+            }
+            lineDirections = layout.getLineDirections(i40);
+            int i432 = indentAdjust;
+            if (lineDirections != DIRS_ALL_LEFT_TO_RIGHT) {
+                tabStops2 = tabStops;
+                textLineObtain = textLine;
+                textPaint4 = textPaint2;
+                i13 = i4;
+                textLineObtain.set(textPaint4, charSequence, i28, i41, paragraphDirection, lineDirections, lineContainsTab, tabStops2, layout.getEllipsisStart(i40), layout.getEllipsisStart(i40) + layout.getEllipsisCount(i40), layout.isFallbackLineSpacingEnabled());
+                if (zIsJustificationRequired) {
+                }
+                int i452 = i9;
+                textLineObtain.draw(canvas, i12, i27, i5, i452);
+                i14 = i452;
+            }
+            i26 = i;
+            i28 = i13;
+            i27 = i14;
+            paragraphStyleArr4 = paragraphStyleArr;
+            alignment4 = alignment6;
+            tabStops4 = tabStops2;
+            i29 = i3;
+            iNextSpanTransition = i6;
+            z8 = z2;
+            z7 = false;
+        }
+        TextLine.recycle(textLineObtain);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0097 A[LOOP:1: B:18:0x0095->B:19:0x0097, LOOP_END] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void drawBackground(android.graphics.Canvas r21, int r22, int r23) {
-        /*
-            Method dump skipped, instructions count: 197
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.drawBackground(android.graphics.Canvas, int, int):void");
+    public void drawBackground(Canvas canvas, int i, int i2) {
+        int i3;
+        drawHighContrastBackground(canvas, i, i2);
+        if (this.mSpannedText) {
+            if (this.mLineBackgroundSpans == null) {
+                this.mLineBackgroundSpans = new SpanSet<>(LineBackgroundSpan.class);
+            }
+            Spanned spanned = (Spanned) this.mText;
+            int length = spanned.length();
+            int i4 = 0;
+            this.mLineBackgroundSpans.init(spanned, 0, length);
+            if (this.mLineBackgroundSpans.numberOfSpans > 0) {
+                int lineTop = getLineTop(i);
+                int lineStart = getLineStart(i);
+                ParagraphStyle[] paragraphStyleArr = NO_PARA_SPANS;
+                TextPaint textPaint = this.mPaint;
+                int i5 = this.mWidth;
+                int i6 = i;
+                int i7 = lineTop;
+                int i8 = lineStart;
+                int nextTransition = 0;
+                int i9 = 0;
+                while (i6 <= i2) {
+                    int i10 = i6 + 1;
+                    int lineStart2 = getLineStart(i10);
+                    int lineTop2 = getLineTop(i10);
+                    int lineDescent = lineTop2 - getLineDescent(i6);
+                    if (lineStart2 >= nextTransition) {
+                        nextTransition = this.mLineBackgroundSpans.getNextTransition(i8, length);
+                        if (i8 != lineStart2 || i8 == 0) {
+                            i9 = i4;
+                            while (i4 < this.mLineBackgroundSpans.numberOfSpans) {
+                                if (this.mLineBackgroundSpans.spanStarts[i4] < lineStart2 && this.mLineBackgroundSpans.spanEnds[i4] > i8) {
+                                    ParagraphStyle[] paragraphStyleArr2 = (ParagraphStyle[]) GrowingArrayUtils.append((LineBackgroundSpan[]) paragraphStyleArr, i9, this.mLineBackgroundSpans.spans[i4]);
+                                    i9++;
+                                    paragraphStyleArr = paragraphStyleArr2;
+                                }
+                                i4++;
+                            }
+                            i3 = nextTransition;
+                            i4 = i9;
+                        } else {
+                            i3 = nextTransition;
+                        }
+                    } else {
+                        i3 = nextTransition;
+                        i4 = i9;
+                    }
+                    ParagraphStyle[] paragraphStyleArr3 = paragraphStyleArr;
+                    int i11 = 0;
+                    while (i11 < i4) {
+                        int i12 = lineDescent;
+                        ((LineBackgroundSpan) paragraphStyleArr3[i11]).drawBackground(canvas, textPaint, 0, i5, i7, i12, lineTop2, spanned, i8, lineStart2, i6);
+                        i11++;
+                        lineDescent = i12;
+                        i10 = i10;
+                    }
+                    nextTransition = i3;
+                    i7 = lineTop2;
+                    i8 = lineStart2;
+                    i9 = i4;
+                    i6 = i10;
+                    paragraphStyleArr = paragraphStyleArr3;
+                    i4 = 0;
+                }
+            }
+            this.mLineBackgroundSpans.recycle();
+        }
     }
 
     private void drawHighContrastBackground(Canvas canvas, int i, int i2) {
@@ -603,21 +1008,21 @@ public abstract class Layout {
             if ((!this.mSpannedText || this.mSpanColors == null) && this.mPaint.getAlpha() == 0) {
                 return;
             }
-            float max = Math.max(0.0f, this.mPaint.getTextSize() * 0.0f);
-            float max2 = Math.max(this.mPaint.density * HIGH_CONTRAST_TEXT_BACKGROUND_CORNER_RADIUS_MIN_DP, this.mPaint.getTextSize() * 0.5f);
-            int argb = Color.argb(HIGH_CONTRAST_TEXT_BACKGROUND_ALPHA_PERCENTAGE, 1.0f, 1.0f, 1.0f);
-            int argb2 = Color.argb(HIGH_CONTRAST_TEXT_BACKGROUND_ALPHA_PERCENTAGE, 0.0f, 0.0f, 0.0f);
+            float fMax = Math.max(0.0f, this.mPaint.getTextSize() * 0.0f);
+            float fMax2 = Math.max(this.mPaint.density * HIGH_CONTRAST_TEXT_BACKGROUND_CORNER_RADIUS_MIN_DP, this.mPaint.getTextSize() * 0.5f);
+            int iArgb = Color.argb(HIGH_CONTRAST_TEXT_BACKGROUND_ALPHA_PERCENTAGE, 1.0f, 1.0f, 1.0f);
+            int iArgb2 = Color.argb(HIGH_CONTRAST_TEXT_BACKGROUND_ALPHA_PERCENTAGE, 0.0f, 0.0f, 0.0f);
             int color = this.mPaint.getColor();
             Paint paint = this.mWorkPlainPaint;
             paint.reset();
-            paint.setColor(isHighContrastTextDark(color) ? argb : argb2);
+            paint.setColor(isHighContrastTextDark(color) ? iArgb : iArgb2);
             paint.setStyle(Paint.Style.FILL);
             int lineStart = getLineStart(i);
             int lineEnd = getLineEnd(i2);
             if (this.mSpannedText && (spanColors = this.mSpanColors) != null) {
                 spanColors.init(this.mWorkPaint, (Spanned) this.mText, lineStart, lineEnd);
             }
-            forEachCharacterBounds(lineStart, lineEnd, i, i2, new CharacterBoundsListener(color, paint, max, canvas, max2, argb, argb2) { // from class: android.text.Layout.1
+            forEachCharacterBounds(lineStart, lineEnd, i, i2, new CharacterBoundsListener(color, paint, fMax, canvas, fMax2, iArgb, iArgb2) { // from class: android.text.Layout.1
                 int mLastColor;
                 int mLastLineNum = -1;
                 final RectF mLineBackground = new RectF();
@@ -632,11 +1037,11 @@ public abstract class Layout {
                 {
                     this.val$originalTextColor = color;
                     this.val$bgPaint = paint;
-                    this.val$padding = max;
+                    this.val$padding = fMax;
                     this.val$canvas = canvas;
-                    this.val$cornerRadius = max2;
-                    this.val$white = argb;
-                    this.val$black = argb2;
+                    this.val$cornerRadius = fMax2;
+                    this.val$white = iArgb;
+                    this.val$black = iArgb2;
                     this.mLastColor = color;
                 }
 
@@ -645,10 +1050,10 @@ public abstract class Layout {
                     if (TextLine.isLineEndSpace(Layout.this.mText.charAt(i3))) {
                         return;
                     }
-                    int determineContrastingBackgroundColor = determineContrastingBackgroundColor(i3);
-                    boolean z = determineContrastingBackgroundColor != this.val$bgPaint.getColor();
-                    int codePointAt = Character.codePointAt(Layout.this.mText, i3);
-                    if ((Character.isEmojiComponent(codePointAt) || Character.isExtendedPictographic(codePointAt)) && !isStandardNumber(i3)) {
+                    int iDetermineContrastingBackgroundColor = determineContrastingBackgroundColor(i3);
+                    boolean z = iDetermineContrastingBackgroundColor != this.val$bgPaint.getColor();
+                    int iCodePointAt = Character.codePointAt(Layout.this.mText, i3);
+                    if ((Character.isEmojiComponent(iCodePointAt) || Character.isExtendedPictographic(iCodePointAt)) && !isStandardNumber(i3)) {
                         return;
                     }
                     if (i4 != this.mLastLineNum || z) {
@@ -656,7 +1061,7 @@ public abstract class Layout {
                         this.mLineBackground.set(f, f2, f3, f4);
                         this.mLastLineNum = i4;
                         if (z) {
-                            this.val$bgPaint.setColor(determineContrastingBackgroundColor);
+                            this.val$bgPaint.setColor(iDetermineContrastingBackgroundColor);
                             return;
                         }
                         return;
@@ -670,9 +1075,9 @@ public abstract class Layout {
                 }
 
                 private boolean isStandardNumber(int i3) {
-                    int codePointAt = Character.codePointAt(Layout.this.mText, i3);
+                    int iCodePointAt = Character.codePointAt(Layout.this.mText, i3);
                     int i4 = i3 + 1;
-                    return ((codePointAt >= 48 && codePointAt <= 57) || codePointAt == 35 || codePointAt == 42) && !(i4 < Layout.this.mText.length() && Character.codePointAt(Layout.this.mText, i4) == 65039);
+                    return ((iCodePointAt >= 48 && iCodePointAt <= 57) || iCodePointAt == 35 || iCodePointAt == 42) && !(i4 < Layout.this.mText.length() && Character.codePointAt(Layout.this.mText, i4) == 65039);
                 }
 
                 private void drawRect() {
@@ -718,107 +1123,59 @@ public abstract class Layout {
             }
             int i = rect.top;
             int i2 = rect.bottom;
-            int max = Math.max(i, 0);
-            int min = Math.min(getLineTop(getLineCount()), i2);
-            if (max >= min) {
+            int iMax = Math.max(i, 0);
+            int iMin = Math.min(getLineTop(getLineCount()), i2);
+            if (iMax >= iMin) {
                 return TextUtils.packRangeInLong(0, -1);
             }
-            return TextUtils.packRangeInLong(getLineForVertical(max), getLineForVertical(min));
+            return TextUtils.packRangeInLong(getLineForVertical(iMax), getLineForVertical(iMin));
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0082  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int getLineStartPos(int r8, int r9, int r10) {
-        /*
-            r7 = this;
-            android.text.Layout$Alignment r0 = r7.getParagraphAlignment(r8)
-            int r1 = r7.getParagraphDirection(r8)
-            android.text.Layout$Alignment r2 = android.text.Layout.Alignment.ALIGN_LEFT
-            r3 = 1
-            if (r0 != r2) goto L15
-            if (r1 != r3) goto L12
-            android.text.Layout$Alignment r0 = android.text.Layout.Alignment.ALIGN_NORMAL
-            goto L20
-        L12:
-            android.text.Layout$Alignment r0 = android.text.Layout.Alignment.ALIGN_OPPOSITE
-            goto L20
-        L15:
-            android.text.Layout$Alignment r2 = android.text.Layout.Alignment.ALIGN_RIGHT
-            if (r0 != r2) goto L20
-            if (r1 != r3) goto L1e
-            android.text.Layout$Alignment r0 = android.text.Layout.Alignment.ALIGN_OPPOSITE
-            goto L20
-        L1e:
-            android.text.Layout$Alignment r0 = android.text.Layout.Alignment.ALIGN_NORMAL
-        L20:
-            android.text.Layout$Alignment r2 = android.text.Layout.Alignment.ALIGN_NORMAL
-            if (r0 != r2) goto L36
-            if (r1 != r3) goto L2e
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_LEFT
-            int r7 = r7.getIndentAdjust(r8, r10)
-        L2c:
-            int r9 = r9 + r7
-            return r9
-        L2e:
-            android.text.Layout$Alignment r9 = android.text.Layout.Alignment.ALIGN_RIGHT
-            int r7 = r7.getIndentAdjust(r8, r9)
-        L34:
-            int r10 = r10 + r7
-            return r10
-        L36:
-            boolean r2 = r7.mSpannedText
-            if (r2 == 0) goto L65
-            boolean r2 = r7.getLineContainsTab(r8)
-            if (r2 == 0) goto L65
-            java.lang.CharSequence r2 = r7.mText
-            android.text.Spanned r2 = (android.text.Spanned) r2
-            int r4 = r7.getLineStart(r8)
-            int r5 = r2.length()
-            java.lang.Class<android.text.style.TabStopSpan> r6 = android.text.style.TabStopSpan.class
-            int r5 = r2.nextSpanTransition(r4, r5, r6)
-            java.lang.Class<android.text.style.TabStopSpan> r6 = android.text.style.TabStopSpan.class
-            java.lang.Object[] r2 = getParagraphSpans(r2, r4, r5, r6)
-            android.text.style.TabStopSpan[] r2 = (android.text.style.TabStopSpan[]) r2
-            int r4 = r2.length
-            if (r4 <= 0) goto L65
-            android.text.Layout$TabStops r4 = new android.text.Layout$TabStops
-            r5 = 1101004800(0x41a00000, float:20.0)
-            r4.<init>(r5, r2)
-            goto L66
-        L65:
-            r4 = 0
-        L66:
-            r2 = 0
-            float r2 = r7.getLineExtent(r8, r4, r2)
-            int r2 = (int) r2
-            android.text.Layout$Alignment r4 = android.text.Layout.Alignment.ALIGN_OPPOSITE
-            if (r0 != r4) goto L82
-            if (r1 != r3) goto L7a
-            int r10 = r10 - r2
-            android.text.Layout$Alignment r9 = android.text.Layout.Alignment.ALIGN_RIGHT
-            int r7 = r7.getIndentAdjust(r8, r9)
-            goto L34
-        L7a:
-            int r9 = r9 - r2
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_LEFT
-            int r7 = r7.getIndentAdjust(r8, r10)
-            goto L2c
-        L82:
-            r0 = r2 & (-2)
-            int r9 = r9 + r10
-            int r9 = r9 - r0
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_CENTER
-            int r7 = r7.getIndentAdjust(r8, r10)
-            int r7 = r7 + r3
-            int r7 = r9 >> r7
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getLineStartPos(int, int, int):int");
+    private int getLineStartPos(int i, int i2, int i3) {
+        int indentAdjust;
+        int indentAdjust2;
+        Alignment paragraphAlignment = getParagraphAlignment(i);
+        int paragraphDirection = getParagraphDirection(i);
+        if (paragraphAlignment == Alignment.ALIGN_LEFT) {
+            paragraphAlignment = paragraphDirection == 1 ? Alignment.ALIGN_NORMAL : Alignment.ALIGN_OPPOSITE;
+        } else if (paragraphAlignment == Alignment.ALIGN_RIGHT) {
+            paragraphAlignment = paragraphDirection == 1 ? Alignment.ALIGN_OPPOSITE : Alignment.ALIGN_NORMAL;
+        }
+        if (paragraphAlignment == Alignment.ALIGN_NORMAL) {
+            if (paragraphDirection == 1) {
+                indentAdjust = getIndentAdjust(i, Alignment.ALIGN_LEFT);
+                return i2 + indentAdjust;
+            }
+            indentAdjust2 = getIndentAdjust(i, Alignment.ALIGN_RIGHT);
+            return i3 + indentAdjust2;
+        }
+        if (this.mSpannedText && getLineContainsTab(i)) {
+            Spanned spanned = (Spanned) this.mText;
+            int lineStart = getLineStart(i);
+            TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans(spanned, lineStart, spanned.nextSpanTransition(lineStart, spanned.length(), TabStopSpan.class), TabStopSpan.class);
+            TabStops tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+            int lineExtent = (int) getLineExtent(i, tabStops, false);
+            if (paragraphAlignment == Alignment.ALIGN_OPPOSITE) {
+                return ((i2 + i3) - (lineExtent & (-2))) >> (getIndentAdjust(i, Alignment.ALIGN_CENTER) + 1);
+            }
+            if (paragraphDirection == 1) {
+                i3 -= lineExtent;
+                indentAdjust2 = getIndentAdjust(i, Alignment.ALIGN_RIGHT);
+                return i3 + indentAdjust2;
+            }
+            i2 -= lineExtent;
+            indentAdjust = getIndentAdjust(i, Alignment.ALIGN_LEFT);
+            return i2 + indentAdjust;
+        }
+        int lineExtent2 = (int) getLineExtent(i, tabStops, false);
+        if (paragraphAlignment == Alignment.ALIGN_OPPOSITE) {
+        }
     }
 
     public final void increaseWidthTo(int i) {
@@ -836,18 +1193,77 @@ public abstract class Layout {
         return getHeight();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004e  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0040  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.graphics.RectF computeDrawingBoundingBox() {
-        /*
-            Method dump skipped, instructions count: 256
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.computeDrawingBoundingBox():android.graphics.RectF");
+    public RectF computeDrawingBoundingBox() {
+        TabStops tabStops;
+        int i;
+        float lineBaseline;
+        TextLine textLineObtain = TextLine.obtain();
+        RectF rectF = new RectF();
+        float f = 0.0f;
+        float f2 = 0.0f;
+        float f3 = 0.0f;
+        float f4 = 0.0f;
+        int i2 = 0;
+        while (i2 < getLineCount()) {
+            float f5 = f3;
+            int lineStart = getLineStart(i2);
+            int lineVisibleEnd = getLineVisibleEnd(i2);
+            boolean lineContainsTab = getLineContainsTab(i2);
+            if (lineContainsTab) {
+                CharSequence charSequence = this.mText;
+                if (charSequence instanceof Spanned) {
+                    TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans((Spanned) charSequence, lineStart, lineVisibleEnd, TabStopSpan.class);
+                    tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+                }
+            }
+            Directions lineDirections = getLineDirections(i2);
+            if (lineDirections == null) {
+                i = i2;
+                f3 = f5;
+                lineBaseline = f;
+            } else {
+                int paragraphDirection = getParagraphDirection(i2);
+                float f6 = f;
+                TextPaint textPaint = this.mWorkPaint;
+                textPaint.set(this.mPaint);
+                textPaint.setStartHyphenEdit(getStartHyphenEdit(i2));
+                textPaint.setEndHyphenEdit(getEndHyphenEdit(i2));
+                float f7 = f2;
+                i = i2;
+                float f8 = f4;
+                textLineObtain.set(textPaint, this.mText, lineStart, lineVisibleEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i2), getEllipsisStart(i2) + getEllipsisCount(i2), isFallbackLineSpacingEnabled());
+                if (isJustificationRequired(i)) {
+                    textLineObtain.justify(this.mJustificationMode, getJustifyWidth(i));
+                }
+                textLineObtain.metrics(null, rectF, false, null);
+                float fMin = rectF.left;
+                float fMax = rectF.right;
+                lineBaseline = rectF.top + getLineBaseline(i);
+                float lineBaseline2 = rectF.bottom + getLineBaseline(i);
+                if (getParagraphDirection(i) == -1) {
+                    fMin += getWidth();
+                    fMax += getWidth();
+                }
+                if (i != 0) {
+                    fMin = Math.min(f8, fMin);
+                    fMax = Math.max(f7, fMax);
+                    lineBaseline = Math.min(f6, lineBaseline);
+                    lineBaseline2 = Math.max(f5, lineBaseline2);
+                }
+                f4 = fMin;
+                f2 = fMax;
+                f3 = lineBaseline2;
+            }
+            f = lineBaseline;
+            i2 = i + 1;
+        }
+        float f9 = f4;
+        TextLine.recycle(textLineObtain);
+        return new RectF(f9, f, f2, f3);
     }
 
     public int getLineBounds(int i, Rect rect) {
@@ -1039,169 +1455,88 @@ public abstract class Layout {
         return getHorizontal(i, z, getLineForOffset(i), z2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0035  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private float getHorizontal(int r18, boolean r19, int r20, boolean r21) {
-        /*
-            r17 = this;
-            r0 = r17
-            r1 = r20
-            int r5 = r0.getLineStart(r1)
-            int r6 = r0.getLineEnd(r1)
-            int r7 = r0.getParagraphDirection(r1)
-            boolean r9 = r0.getLineContainsTab(r1)
-            android.text.Layout$Directions r8 = r0.getLineDirections(r1)
-            if (r9 == 0) goto L35
-            java.lang.CharSequence r2 = r0.mText
-            boolean r3 = r2 instanceof android.text.Spanned
-            if (r3 == 0) goto L35
-            android.text.Spanned r2 = (android.text.Spanned) r2
-            java.lang.Class<android.text.style.TabStopSpan> r3 = android.text.style.TabStopSpan.class
-            java.lang.Object[] r2 = getParagraphSpans(r2, r5, r6, r3)
-            android.text.style.TabStopSpan[] r2 = (android.text.style.TabStopSpan[]) r2
-            int r3 = r2.length
-            if (r3 <= 0) goto L35
-            android.text.Layout$TabStops r3 = new android.text.Layout$TabStops
-            r4 = 1101004800(0x41a00000, float:20.0)
-            r3.<init>(r4, r2)
-            goto L36
-        L35:
-            r3 = 0
-        L36:
-            r10 = r3
-            android.text.TextLine r11 = android.text.TextLine.obtain()
-            android.text.TextPaint r3 = r0.mPaint
-            java.lang.CharSequence r4 = r0.mText
-            r2 = r11
-            int r11 = r0.getEllipsisStart(r1)
-            int r12 = r0.getEllipsisStart(r1)
-            int r13 = r0.getEllipsisCount(r1)
-            int r12 = r12 + r13
-            boolean r13 = r0.isFallbackLineSpacingEnabled()
-            r2.set(r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13)
-            int r12 = r18 - r5
-            r15 = 0
-            r16 = 0
-            r14 = 0
-            r13 = r19
-            r11 = r2
-            float r2 = r11.measure(r12, r13, r14, r15, r16)
-            android.text.TextLine.recycle(r11)
-            if (r21 == 0) goto L6e
-            int r3 = r0.mWidth
-            float r4 = (float) r3
-            int r4 = (r2 > r4 ? 1 : (r2 == r4 ? 0 : -1))
-            if (r4 <= 0) goto L6e
-            float r2 = (float) r3
-        L6e:
-            int r3 = r0.getParagraphLeft(r1)
-            int r4 = r0.getParagraphRight(r1)
-            int r0 = r0.getLineStartPos(r1, r3, r4)
-            float r0 = (float) r0
-            float r0 = r0 + r2
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getHorizontal(int, boolean, int, boolean):float");
+    private float getHorizontal(int i, boolean z, int i2, boolean z2) {
+        TabStops tabStops;
+        int lineStart = getLineStart(i2);
+        int lineEnd = getLineEnd(i2);
+        int paragraphDirection = getParagraphDirection(i2);
+        boolean lineContainsTab = getLineContainsTab(i2);
+        Directions lineDirections = getLineDirections(i2);
+        if (lineContainsTab) {
+            CharSequence charSequence = this.mText;
+            if (charSequence instanceof Spanned) {
+                TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans((Spanned) charSequence, lineStart, lineEnd, TabStopSpan.class);
+                tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+            }
+        }
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(this.mPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i2), getEllipsisStart(i2) + getEllipsisCount(i2), isFallbackLineSpacingEnabled());
+        float fMeasure = textLineObtain.measure(i - lineStart, z, null, null, null);
+        TextLine.recycle(textLineObtain);
+        if (z2) {
+            int i3 = this.mWidth;
+            if (fMeasure > i3) {
+                fMeasure = i3;
+            }
+        }
+        return getLineStartPos(i2, getParagraphLeft(i2), getParagraphRight(i2)) + fMeasure;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0093 A[LOOP:2: B:28:0x0091->B:29:0x0093, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public float[] getLineHorizontals(int r14, boolean r15, boolean r16) {
-        /*
-            r13 = this;
-            int r3 = r13.getLineStart(r14)
-            int r4 = r13.getLineEnd(r14)
-            int r5 = r13.getParagraphDirection(r14)
-            boolean r7 = r13.getLineContainsTab(r14)
-            android.text.Layout$Directions r6 = r13.getLineDirections(r14)
-            r12 = 0
-            if (r7 == 0) goto L33
-            java.lang.CharSequence r0 = r13.mText
-            boolean r1 = r0 instanceof android.text.Spanned
-            if (r1 == 0) goto L33
-            android.text.Spanned r0 = (android.text.Spanned) r0
-            java.lang.Class<android.text.style.TabStopSpan> r1 = android.text.style.TabStopSpan.class
-            java.lang.Object[] r0 = getParagraphSpans(r0, r3, r4, r1)
-            android.text.style.TabStopSpan[] r0 = (android.text.style.TabStopSpan[]) r0
-            int r1 = r0.length
-            if (r1 <= 0) goto L33
-            android.text.Layout$TabStops r1 = new android.text.Layout$TabStops
-            r2 = 1101004800(0x41a00000, float:20.0)
-            r1.<init>(r2, r0)
-            r8 = r1
-            goto L34
-        L33:
-            r8 = r12
-        L34:
-            android.text.TextLine r0 = android.text.TextLine.obtain()
-            android.text.TextPaint r1 = r13.mPaint
-            java.lang.CharSequence r2 = r13.mText
-            int r9 = r13.getEllipsisStart(r14)
-            int r10 = r13.getEllipsisStart(r14)
-            int r11 = r13.getEllipsisCount(r14)
-            int r10 = r10 + r11
-            boolean r11 = r13.isFallbackLineSpacingEnabled()
-            r0.set(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)
-            boolean[] r1 = r13.primaryIsTrailingPreviousAllLineOffsets(r14)
-            r2 = 0
-            if (r16 != 0) goto L64
-            r5 = r2
-        L58:
-            int r6 = r1.length
-            if (r5 >= r6) goto L64
-            boolean r6 = r1[r5]
-            r6 = r6 ^ 1
-            r1[r5] = r6
-            int r5 = r5 + 1
-            goto L58
-        L64:
-            float[] r1 = r0.measureAllOffsets(r1, r12)
-            android.text.TextLine.recycle(r0)
-            if (r15 == 0) goto L80
-            r0 = r2
-        L6e:
-            int r5 = r1.length
-            if (r0 >= r5) goto L80
-            r5 = r1[r0]
-            int r6 = r13.mWidth
-            float r7 = (float) r6
-            int r5 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
-            if (r5 <= 0) goto L7d
-            float r5 = (float) r6
-            r1[r0] = r5
-        L7d:
-            int r0 = r0 + 1
-            goto L6e
-        L80:
-            int r0 = r13.getParagraphLeft(r14)
-            int r5 = r13.getParagraphRight(r14)
-            int r13 = r13.getLineStartPos(r14, r0, r5)
-            int r4 = r4 - r3
-            int r4 = r4 + 1
-            float[] r14 = new float[r4]
-        L91:
-            if (r2 >= r4) goto L9c
-            float r0 = (float) r13
-            r3 = r1[r2]
-            float r0 = r0 + r3
-            r14[r2] = r0
-            int r2 = r2 + 1
-            goto L91
-        L9c:
-            return r14
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getLineHorizontals(int, boolean, boolean):float[]");
+    public float[] getLineHorizontals(int i, boolean z, boolean z2) {
+        TabStops tabStops;
+        int lineStart = getLineStart(i);
+        int lineEnd = getLineEnd(i);
+        int paragraphDirection = getParagraphDirection(i);
+        boolean lineContainsTab = getLineContainsTab(i);
+        Directions lineDirections = getLineDirections(i);
+        if (lineContainsTab) {
+            CharSequence charSequence = this.mText;
+            if (charSequence instanceof Spanned) {
+                TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans((Spanned) charSequence, lineStart, lineEnd, TabStopSpan.class);
+                tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+            }
+        }
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(this.mPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
+        boolean[] zArrPrimaryIsTrailingPreviousAllLineOffsets = primaryIsTrailingPreviousAllLineOffsets(i);
+        if (!z2) {
+            for (int i2 = 0; i2 < zArrPrimaryIsTrailingPreviousAllLineOffsets.length; i2++) {
+                zArrPrimaryIsTrailingPreviousAllLineOffsets[i2] = !zArrPrimaryIsTrailingPreviousAllLineOffsets[i2];
+            }
+        }
+        float[] fArrMeasureAllOffsets = textLineObtain.measureAllOffsets(zArrPrimaryIsTrailingPreviousAllLineOffsets, null);
+        TextLine.recycle(textLineObtain);
+        if (z) {
+            for (int i3 = 0; i3 < fArrMeasureAllOffsets.length; i3++) {
+                float f = fArrMeasureAllOffsets[i3];
+                int i4 = this.mWidth;
+                if (f > i4) {
+                    fArrMeasureAllOffsets[i3] = i4;
+                }
+            }
+        }
+        int lineStartPos = getLineStartPos(i, getParagraphLeft(i), getParagraphRight(i));
+        int i5 = (lineEnd - lineStart) + 1;
+        float[] fArr = new float[i5];
+        for (int i6 = 0; i6 < i5; i6++) {
+            fArr[i6] = lineStartPos + fArrMeasureAllOffsets[i6];
+        }
+        return fArr;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0039  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void fillHorizontalBoundsForLine(int i, float[] fArr) {
         TabStops tabStops;
         int lineStart = getLineStart(i);
@@ -1214,20 +1549,13 @@ public abstract class Layout {
             CharSequence charSequence = this.mText;
             if (charSequence instanceof Spanned) {
                 TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans((Spanned) charSequence, lineStart, lineEnd, TabStopSpan.class);
-                if (tabStopSpanArr.length > 0) {
-                    tabStops = new TabStops(TAB_INCREMENT, tabStopSpanArr);
-                    TextLine obtain = TextLine.obtain();
-                    obtain.set(this.mPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
-                    obtain.measureAllBounds((fArr != null || fArr.length < i2 * 2) ? new float[i2 * 2] : fArr, null);
-                    TextLine.recycle(obtain);
-                }
+                tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
             }
         }
-        tabStops = null;
-        TextLine obtain2 = TextLine.obtain();
-        obtain2.set(this.mPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
-        obtain2.measureAllBounds((fArr != null || fArr.length < i2 * 2) ? new float[i2 * 2] : fArr, null);
-        TextLine.recycle(obtain2);
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(this.mPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
+        textLineObtain.measureAllBounds((fArr == null || fArr.length < i2 * 2) ? new float[i2 * 2] : fArr, null);
+        TextLine.recycle(textLineObtain);
     }
 
     public void fillCharacterBounds(final int i, int i2, final float[] fArr, final int i3) {
@@ -1274,12 +1602,12 @@ public abstract class Layout {
             int lineStartPos = getLineStartPos(i5, getParagraphLeft(i5), getParagraphRight(i5));
             int lineTop = getLineTop(i5);
             int lineBottom = getLineBottom(i5);
-            int max = Math.max(i, lineStart);
-            for (int min = Math.min(i2, lineEnd); max < min; min = min) {
-                int i7 = (max - lineStart) * 2;
+            int iMax = Math.max(i, lineStart);
+            for (int iMin = Math.min(i2, lineEnd); iMax < iMin; iMin = iMin) {
+                int i7 = (iMax - lineStart) * 2;
                 float f = lineStartPos;
-                characterBoundsListener.onCharacterBounds(max, i5, fArr[i7] + f, lineTop, f + fArr[i7 + 1], lineBottom);
-                max++;
+                characterBoundsListener.onCharacterBounds(iMax, i5, fArr[i7] + f, lineTop, f + fArr[i7 + 1], lineBottom);
+                iMax++;
             }
         }
         characterBoundsListener.onEnd();
@@ -1292,23 +1620,23 @@ public abstract class Layout {
         if (paragraphAlignment == null) {
             paragraphAlignment = Alignment.ALIGN_CENTER;
         }
-        int ordinal = paragraphAlignment.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = paragraphAlignment.ordinal();
+        if (iOrdinal == 0) {
             alignment = paragraphDirection == -1 ? Alignment.ALIGN_RIGHT : Alignment.ALIGN_LEFT;
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             alignment = paragraphDirection == -1 ? Alignment.ALIGN_LEFT : Alignment.ALIGN_RIGHT;
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             alignment = Alignment.ALIGN_CENTER;
-        } else if (ordinal == 4) {
+        } else if (iOrdinal == 4) {
             alignment = Alignment.ALIGN_RIGHT;
         } else {
             alignment = Alignment.ALIGN_LEFT;
         }
-        int ordinal2 = alignment.ordinal();
-        if (ordinal2 == 2) {
+        int iOrdinal2 = alignment.ordinal();
+        if (iOrdinal2 == 2) {
             return (float) Math.floor(getParagraphLeft(i) + ((this.mWidth - getLineMax(i)) / 2.0f));
         }
-        if (ordinal2 != 4) {
+        if (iOrdinal2 != 4) {
             return 0.0f;
         }
         return this.mWidth - getLineMax(i);
@@ -1321,23 +1649,23 @@ public abstract class Layout {
         if (paragraphAlignment == null) {
             paragraphAlignment = Alignment.ALIGN_CENTER;
         }
-        int ordinal = paragraphAlignment.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = paragraphAlignment.ordinal();
+        if (iOrdinal == 0) {
             alignment = paragraphDirection == -1 ? Alignment.ALIGN_RIGHT : Alignment.ALIGN_LEFT;
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             alignment = paragraphDirection == -1 ? Alignment.ALIGN_LEFT : Alignment.ALIGN_RIGHT;
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             alignment = Alignment.ALIGN_CENTER;
-        } else if (ordinal == 4) {
+        } else if (iOrdinal == 4) {
             alignment = Alignment.ALIGN_RIGHT;
         } else {
             alignment = Alignment.ALIGN_LEFT;
         }
-        int ordinal2 = alignment.ordinal();
-        if (ordinal2 == 2) {
+        int iOrdinal2 = alignment.ordinal();
+        if (iOrdinal2 == 2) {
             return (float) Math.ceil(getParagraphRight(i) - ((this.mWidth - getLineMax(i)) / 2.0f));
         }
-        if (ordinal2 == 4) {
+        if (iOrdinal2 == 4) {
             return this.mWidth;
         }
         return getLineMax(i);
@@ -1361,76 +1689,39 @@ public abstract class Layout {
         return paragraphLeadingMargin + lineExtent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x003a A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003c  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private float getLineExtent(int r13, boolean r14) {
-        /*
-            r12 = this;
-            int r3 = r12.getLineStart(r13)
-            if (r14 == 0) goto Lb
-            int r14 = r12.getLineEnd(r13)
-            goto Lf
-        Lb:
-            int r14 = r12.getLineVisibleEnd(r13)
-        Lf:
-            r4 = r14
-            boolean r7 = r12.getLineContainsTab(r13)
-            r14 = 0
-            if (r7 == 0) goto L33
-            java.lang.CharSequence r0 = r12.mText
-            boolean r1 = r0 instanceof android.text.Spanned
-            if (r1 == 0) goto L33
-            android.text.Spanned r0 = (android.text.Spanned) r0
-            java.lang.Class<android.text.style.TabStopSpan> r1 = android.text.style.TabStopSpan.class
-            java.lang.Object[] r0 = getParagraphSpans(r0, r3, r4, r1)
-            android.text.style.TabStopSpan[] r0 = (android.text.style.TabStopSpan[]) r0
-            int r1 = r0.length
-            if (r1 <= 0) goto L33
-            android.text.Layout$TabStops r1 = new android.text.Layout$TabStops
-            r2 = 1101004800(0x41a00000, float:20.0)
-            r1.<init>(r2, r0)
-            r8 = r1
-            goto L34
-        L33:
-            r8 = r14
-        L34:
-            android.text.Layout$Directions r6 = r12.getLineDirections(r13)
-            if (r6 != 0) goto L3c
-            r12 = 0
-            return r12
-        L3c:
-            int r5 = r12.getParagraphDirection(r13)
-            android.text.TextLine r0 = android.text.TextLine.obtain()
-            android.text.TextPaint r1 = r12.mWorkPaint
-            android.text.TextPaint r2 = r12.mPaint
-            r1.set(r2)
-            int r2 = r12.getStartHyphenEdit(r13)
-            r1.setStartHyphenEdit(r2)
-            int r2 = r12.getEndHyphenEdit(r13)
-            r1.setEndHyphenEdit(r2)
-            java.lang.CharSequence r2 = r12.mText
-            int r9 = r12.getEllipsisStart(r13)
-            int r10 = r12.getEllipsisStart(r13)
-            int r11 = r12.getEllipsisCount(r13)
-            int r10 = r10 + r11
-            boolean r11 = r12.isFallbackLineSpacingEnabled()
-            r0.set(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)
-            boolean r1 = r12.isJustificationRequired(r13)
-            if (r1 == 0) goto L7e
-            int r1 = r12.mJustificationMode
-            float r13 = r12.getJustifyWidth(r13)
-            r0.justify(r1, r13)
-        L7e:
-            boolean r12 = r12.mUseBoundsForWidth
-            float r12 = r0.metrics(r14, r14, r12, r14)
-            android.text.TextLine.recycle(r0)
-            return r12
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getLineExtent(int, boolean):float");
+    private float getLineExtent(int i, boolean z) {
+        TabStops tabStops;
+        int lineStart = getLineStart(i);
+        int lineEnd = z ? getLineEnd(i) : getLineVisibleEnd(i);
+        boolean lineContainsTab = getLineContainsTab(i);
+        if (lineContainsTab) {
+            CharSequence charSequence = this.mText;
+            if (charSequence instanceof Spanned) {
+                TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans((Spanned) charSequence, lineStart, lineEnd, TabStopSpan.class);
+                tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+            }
+        }
+        Directions lineDirections = getLineDirections(i);
+        if (lineDirections == null) {
+            return 0.0f;
+        }
+        int paragraphDirection = getParagraphDirection(i);
+        TextLine textLineObtain = TextLine.obtain();
+        TextPaint textPaint = this.mWorkPaint;
+        textPaint.set(this.mPaint);
+        textPaint.setStartHyphenEdit(getStartHyphenEdit(i));
+        textPaint.setEndHyphenEdit(getEndHyphenEdit(i));
+        textLineObtain.set(textPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
+        if (isJustificationRequired(i)) {
+            textLineObtain.justify(this.mJustificationMode, getJustifyWidth(i));
+        }
+        float fMetrics = textLineObtain.metrics(null, null, this.mUseBoundsForWidth, null);
+        TextLine.recycle(textLineObtain);
+        return fMetrics;
     }
 
     public int getLineLetterSpacingUnitCount(int i, boolean z) {
@@ -1447,18 +1738,18 @@ public abstract class Layout {
             return 0;
         }
         int paragraphDirection = getParagraphDirection(i);
-        TextLine obtain = TextLine.obtain();
+        TextLine textLineObtain = TextLine.obtain();
         TextPaint textPaint = this.mWorkPaint;
         textPaint.set(this.mPaint);
         textPaint.setStartHyphenEdit(getStartHyphenEdit(i));
         textPaint.setEndHyphenEdit(getEndHyphenEdit(i));
-        obtain.set(textPaint, this.mText, lineStart, i2, paragraphDirection, lineDirections, false, null, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
+        textLineObtain.set(textPaint, this.mText, lineStart, i2, paragraphDirection, lineDirections, false, null, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
         if (this.mLineInfo == null) {
             this.mLineInfo = new TextLine.LineInfo();
         }
         this.mLineInfo.setClusterCount(0);
-        obtain.metrics(null, null, this.mUseBoundsForWidth, this.mLineInfo);
-        TextLine.recycle(obtain);
+        textLineObtain.metrics(null, null, this.mUseBoundsForWidth, this.mLineInfo);
+        TextLine.recycle(textLineObtain);
         return this.mLineInfo.getClusterCount();
     }
 
@@ -1468,18 +1759,18 @@ public abstract class Layout {
         boolean lineContainsTab = getLineContainsTab(i);
         Directions lineDirections = getLineDirections(i);
         int paragraphDirection = getParagraphDirection(i);
-        TextLine obtain = TextLine.obtain();
+        TextLine textLineObtain = TextLine.obtain();
         TextPaint textPaint = this.mWorkPaint;
         textPaint.set(this.mPaint);
         textPaint.setStartHyphenEdit(getStartHyphenEdit(i));
         textPaint.setEndHyphenEdit(getEndHyphenEdit(i));
-        obtain.set(textPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
+        textLineObtain.set(textPaint, this.mText, lineStart, lineEnd, paragraphDirection, lineDirections, lineContainsTab, tabStops, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), isFallbackLineSpacingEnabled());
         if (isJustificationRequired(i)) {
-            obtain.justify(this.mJustificationMode, getJustifyWidth(i));
+            textLineObtain.justify(this.mJustificationMode, getJustifyWidth(i));
         }
-        float metrics = obtain.metrics(null, null, this.mUseBoundsForWidth, null);
-        TextLine.recycle(obtain);
-        return metrics;
+        float fMetrics = textLineObtain.metrics(null, null, this.mUseBoundsForWidth, null);
+        TextLine.recycle(textLineObtain);
+        return fMetrics;
     }
 
     public int getLineForVertical(int i) {
@@ -1521,19 +1812,89 @@ public abstract class Layout {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00e8  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00fd A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00e3  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00eb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int getOffsetForHorizontal(int r18, float r19, boolean r20) {
-        /*
-            Method dump skipped, instructions count: 282
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getOffsetForHorizontal(int, float, boolean):int");
+    public int getOffsetForHorizontal(int i, float f, boolean z) {
+        Layout layout = this;
+        int lineEnd = getLineEnd(i);
+        int lineStart = getLineStart(i);
+        Directions lineDirections = getLineDirections(i);
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(layout.mPaint, layout.mText, lineStart, lineEnd, getParagraphDirection(i), lineDirections, false, null, getEllipsisStart(i), getEllipsisStart(i) + getEllipsisCount(i), layout.isFallbackLineSpacingEnabled());
+        HorizontalMeasurementProvider horizontalMeasurementProvider = layout.new HorizontalMeasurementProvider(i, z);
+        int i2 = 1;
+        if (i != layout.getLineCount() - 1) {
+            lineEnd = textLineObtain.getOffsetToLeftRightOf(lineEnd - lineStart, !layout.isRtlCharAt(lineEnd - 1)) + lineStart;
+        }
+        float fAbs = Math.abs(horizontalMeasurementProvider.get(lineStart) - f);
+        int i3 = lineStart;
+        int i4 = 0;
+        while (i4 < lineDirections.mDirections.length) {
+            int i5 = lineDirections.mDirections[i4] + lineStart;
+            int i6 = i4 + 1;
+            int i7 = (lineDirections.mDirections[i6] & RUN_LENGTH_MASK) + i5;
+            boolean z2 = (lineDirections.mDirections[i6] & 67108864) != 0 ? i2 : 0;
+            int i8 = z2 != 0 ? -1 : i2;
+            if (i7 > lineEnd) {
+                i7 = lineEnd;
+            }
+            int i9 = i5 + 1;
+            float f2 = fAbs;
+            int i10 = i5;
+            int i11 = i7;
+            while (i11 - i10 > i2) {
+                int i12 = (i11 + i10) / 2;
+                float f3 = horizontalMeasurementProvider.get(layout.getOffsetAtStartOf(i12));
+                float f4 = i8;
+                if (f3 * f4 >= f4 * f) {
+                    i11 = i12;
+                } else {
+                    i10 = i12;
+                }
+                i2 = 1;
+                layout = this;
+            }
+            if (i10 >= i9) {
+                i9 = i10;
+            }
+            if (i9 < i7) {
+                int offsetToLeftRightOf = textLineObtain.getOffsetToLeftRightOf(i9 - lineStart, z2) + lineStart;
+                int offsetToLeftRightOf2 = textLineObtain.getOffsetToLeftRightOf(offsetToLeftRightOf - lineStart, !z2) + lineStart;
+                if (offsetToLeftRightOf2 < i5 || offsetToLeftRightOf2 >= i7) {
+                    fAbs = f2;
+                } else {
+                    float fAbs2 = Math.abs(horizontalMeasurementProvider.get(offsetToLeftRightOf2) - f);
+                    if (offsetToLeftRightOf < i7) {
+                        float fAbs3 = Math.abs(horizontalMeasurementProvider.get(offsetToLeftRightOf) - f);
+                        if (fAbs3 < fAbs2) {
+                            fAbs2 = fAbs3;
+                        } else {
+                            offsetToLeftRightOf = offsetToLeftRightOf2;
+                        }
+                        if (fAbs2 < f2) {
+                            i3 = offsetToLeftRightOf;
+                            fAbs = fAbs2;
+                        }
+                    }
+                }
+            }
+            float fAbs4 = Math.abs(horizontalMeasurementProvider.get(i5) - f);
+            if (fAbs4 < fAbs) {
+                fAbs = fAbs4;
+                i3 = i5;
+            }
+            i4 += 2;
+            i2 = 1;
+            layout = this;
+        }
+        if (Math.abs(horizontalMeasurementProvider.get(lineEnd) - f) > fAbs) {
+            lineEnd = i3;
+        }
+        TextLine.recycle(textLineObtain);
+        return lineEnd;
     }
 
     private class HorizontalMeasurementProvider {
@@ -1597,137 +1958,85 @@ public abstract class Layout {
         return new int[]{segmentFinder.previousStartBoundary(startOrEndOffsetForAreaWithinLine + 1), segmentFinder.nextEndBoundary(startOrEndOffsetForAreaWithinLine2 - 1)};
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00ba, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00ba, code lost:
     
         return -1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int getStartOrEndOffsetForAreaWithinLine(int r19, android.graphics.RectF r20, android.text.SegmentFinder r21, android.text.Layout.TextInclusionStrategy r22, boolean r23) {
-        /*
-            r18 = this;
-            r0 = r18
-            r1 = r19
-            int r2 = r18.getLineTop(r19)
-            r3 = 0
-            r4 = r2
-            int r2 = r0.getLineBottom(r1, r3)
-            r5 = r3
-            int r3 = r18.getLineStart(r19)
-            int r6 = r18.getLineEnd(r19)
-            r13 = -1
-            if (r3 != r6) goto L1b
-            return r13
-        L1b:
-            int r14 = r6 - r3
-            int r6 = r14 * 2
-            float[] r6 = new float[r6]
-            r0.fillHorizontalBoundsForLine(r1, r6)
-            int r7 = r18.getParagraphLeft(r19)
-            int r8 = r18.getParagraphRight(r19)
-            int r7 = r0.getLineStartPos(r1, r7, r8)
-            android.text.Layout$Directions r15 = r18.getLineDirections(r19)
-            r16 = 1
-            if (r23 == 0) goto L3a
-            r0 = r5
-            goto L40
-        L3a:
-            int r0 = r15.getRunCount()
-            int r0 = r0 + (-1)
-        L40:
-            if (r23 == 0) goto L4b
-            int r1 = r15.getRunCount()
-            if (r0 < r1) goto L49
-            goto L4b
-        L49:
-            r5 = r6
-            goto L50
-        L4b:
-            if (r23 != 0) goto Lba
-            if (r0 < 0) goto Lba
-            goto L49
-        L50:
-            int r6 = r15.getRunStart(r0)
-            int r1 = r15.getRunLength(r0)
-            int r1 = r1 + r6
-            int r1 = java.lang.Math.min(r1, r14)
-            boolean r10 = r15.isRunRtl(r0)
-            float r8 = (float) r7
-            if (r10 == 0) goto L6b
-            int r9 = r1 + (-1)
-            int r9 = r9 * 2
-            r9 = r5[r9]
-            goto L6f
-        L6b:
-            int r9 = r6 * 2
-            r9 = r5[r9]
-        L6f:
-            float r9 = r9 + r8
-            if (r10 == 0) goto L79
-            int r11 = r6 * 2
-            int r11 = r11 + 1
-            r11 = r5[r11]
-            goto L81
-        L79:
-            int r11 = r1 + (-1)
-            int r11 = r11 * 2
-            int r11 = r11 + 1
-            r11 = r5[r11]
-        L81:
-            float r8 = r8 + r11
-            if (r23 == 0) goto L98
-            r11 = r7
-            r7 = r1
-            r1 = r4
-            r4 = r11
-            r11 = r9
-            r9 = r8
-            r8 = r11
-            r11 = r21
-            r12 = r22
-            r17 = r0
-            r0 = r20
-            int r6 = getStartOffsetForAreaWithinRun(r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
-            goto Lab
-        L98:
-            r11 = r7
-            r7 = r1
-            r1 = r4
-            r4 = r11
-            r11 = r9
-            r9 = r8
-            r8 = r11
-            r11 = r21
-            r12 = r22
-            r17 = r0
-            r0 = r20
-            int r6 = getEndOffsetForAreaWithinRun(r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
-        Lab:
-            if (r6 < 0) goto Lae
-            return r6
-        Lae:
-            if (r23 == 0) goto Lb3
-            r0 = r16
-            goto Lb4
-        Lb3:
-            r0 = r13
-        Lb4:
-            int r0 = r17 + r0
-            r7 = r4
-            r6 = r5
-            r4 = r1
-            goto L40
-        Lba:
-            return r13
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getStartOrEndOffsetForAreaWithinLine(int, android.graphics.RectF, android.text.SegmentFinder, android.text.Layout$TextInclusionStrategy, boolean):int");
+    private int getStartOrEndOffsetForAreaWithinLine(int i, RectF rectF, SegmentFinder segmentFinder, TextInclusionStrategy textInclusionStrategy, boolean z) {
+        float f;
+        float f2;
+        int i2;
+        int i3;
+        int i4;
+        int endOffsetForAreaWithinRun;
+        int lineTop = getLineTop(i);
+        int lineBottom = getLineBottom(i, false);
+        int lineStart = getLineStart(i);
+        int lineEnd = getLineEnd(i);
+        if (lineStart == lineEnd) {
+            return -1;
+        }
+        int i5 = lineEnd - lineStart;
+        float[] fArr = new float[i5 * 2];
+        fillHorizontalBoundsForLine(i, fArr);
+        int lineStartPos = getLineStartPos(i, getParagraphLeft(i), getParagraphRight(i));
+        Directions lineDirections = getLineDirections(i);
+        int runCount = z ? 0 : lineDirections.getRunCount() - 1;
+        while (true) {
+            if ((!z || runCount >= lineDirections.getRunCount()) && (z || runCount < 0)) {
+                break;
+            }
+            float[] fArr2 = fArr;
+            int runStart = lineDirections.getRunStart(runCount);
+            int iMin = Math.min(lineDirections.getRunLength(runCount) + runStart, i5);
+            boolean zIsRunRtl = lineDirections.isRunRtl(runCount);
+            float f3 = lineStartPos;
+            if (zIsRunRtl) {
+                f = fArr2[(iMin - 1) * 2];
+            } else {
+                f = fArr2[runStart * 2];
+            }
+            float f4 = f + f3;
+            if (zIsRunRtl) {
+                f2 = fArr2[(runStart * 2) + 1];
+            } else {
+                f2 = fArr2[((iMin - 1) * 2) + 1];
+            }
+            float f5 = f3 + f2;
+            if (z) {
+                i2 = lineTop;
+                i3 = lineStartPos;
+                i4 = runCount;
+                endOffsetForAreaWithinRun = getStartOffsetForAreaWithinRun(rectF, i2, lineBottom, lineStart, i3, fArr2, runStart, iMin, f4, f5, zIsRunRtl, segmentFinder, textInclusionStrategy);
+            } else {
+                i2 = lineTop;
+                i3 = lineStartPos;
+                i4 = runCount;
+                endOffsetForAreaWithinRun = getEndOffsetForAreaWithinRun(rectF, i2, lineBottom, lineStart, i3, fArr2, runStart, iMin, f4, f5, zIsRunRtl, segmentFinder, textInclusionStrategy);
+            }
+            if (endOffsetForAreaWithinRun >= 0) {
+                return endOffsetForAreaWithinRun;
+            }
+            runCount = i4 + (z ? 1 : -1);
+            lineStartPos = i3;
+            fArr = fArr2;
+            lineTop = i2;
+        }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:44:0x0089, code lost:
+    
+        return -1;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private static int getStartOffsetForAreaWithinRun(RectF rectF, int i, int i2, int i3, int i4, float[] fArr, int i5, int i6, float f, float f2, boolean z, SegmentFinder segmentFinder, TextInclusionStrategy textInclusionStrategy) {
         int i7;
-        int previousStartBoundary;
+        int iPreviousStartBoundary;
         int i8;
         if (f2 >= rectF.left && f <= rectF.right) {
             if ((z || rectF.left > f) && (!z || rectF.right < f2)) {
@@ -1748,53 +2057,98 @@ public abstract class Layout {
             } else {
                 i7 = i5;
             }
-            int nextEndBoundary = segmentFinder.nextEndBoundary(i7 + i3);
-            if (nextEndBoundary == -1 || (previousStartBoundary = segmentFinder.previousStartBoundary(nextEndBoundary)) >= (i8 = i3 + i6)) {
+            int iNextEndBoundary = segmentFinder.nextEndBoundary(i7 + i3);
+            if (iNextEndBoundary == -1 || (iPreviousStartBoundary = segmentFinder.previousStartBoundary(iNextEndBoundary)) >= (i8 = i3 + i6)) {
                 return -1;
             }
-            int max = Math.max(previousStartBoundary, i3 + i5);
-            int min = Math.min(nextEndBoundary, i8);
+            int iMax = Math.max(iPreviousStartBoundary, i3 + i5);
+            int iMin = Math.min(iNextEndBoundary, i8);
             RectF rectF2 = new RectF(0.0f, i, 0.0f, i2);
             while (true) {
                 float f4 = i4;
-                float f5 = fArr[((max - i3) * 2) + (z ? 1 : 0)] + f4;
-                if ((z || f5 <= rectF.right) && (!z || f5 >= rectF.left)) {
-                    float f6 = f4 + fArr[(((min - i3) - 1) * 2) + (!z ? 1 : 0)];
-                    rectF2.left = z ? f6 : f5;
-                    if (!z) {
-                        f5 = f6;
-                    }
-                    rectF2.right = f5;
-                    if (!textInclusionStrategy.isSegmentInside(rectF2, rectF)) {
-                        max = segmentFinder.nextStartBoundary(max);
-                        if (max == -1 || max >= i8) {
-                            break;
-                        }
-                        min = Math.min(segmentFinder.nextEndBoundary(max), i8);
-                    } else {
-                        return max;
-                    }
+                float f5 = fArr[((iMax - i3) * 2) + (z ? 1 : 0)] + f4;
+                if ((!z && f5 > rectF.right) || (z && f5 < rectF.left)) {
+                    break;
                 }
+                float f6 = f4 + fArr[(((iMin - i3) - 1) * 2) + (!z ? 1 : 0)];
+                rectF2.left = z ? f6 : f5;
+                if (!z) {
+                    f5 = f6;
+                }
+                rectF2.right = f5;
+                if (textInclusionStrategy.isSegmentInside(rectF2, rectF)) {
+                    return iMax;
+                }
+                iMax = segmentFinder.nextStartBoundary(iMax);
+                if (iMax == -1 || iMax >= i8) {
+                    break;
+                }
+                iMin = Math.min(segmentFinder.nextEndBoundary(iMax), i8);
             }
-            return -1;
         }
         return -1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x008d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:44:0x008d, code lost:
     
         return -1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int getEndOffsetForAreaWithinRun(android.graphics.RectF r8, int r9, int r10, int r11, int r12, float[] r13, int r14, int r15, float r16, float r17, boolean r18, android.text.SegmentFinder r19, android.text.Layout.TextInclusionStrategy r20) {
-        /*
-            Method dump skipped, instructions count: 190
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.Layout.getEndOffsetForAreaWithinRun(android.graphics.RectF, int, int, int, int, float[], int, int, float, float, boolean, android.text.SegmentFinder, android.text.Layout$TextInclusionStrategy):int");
+    private static int getEndOffsetForAreaWithinRun(RectF rectF, int i, int i2, int i3, int i4, float[] fArr, int i5, int i6, float f, float f2, boolean z, SegmentFinder segmentFinder, TextInclusionStrategy textInclusionStrategy) {
+        int i7;
+        int iNextEndBoundary;
+        int i8;
+        if (f2 >= rectF.left && f <= rectF.right) {
+            if ((z || rectF.right < f2) && (!z || rectF.left > f)) {
+                int i9 = i5;
+                i7 = i6;
+                while (i7 - i9 > 1) {
+                    int i10 = (i7 + i9) / 2;
+                    float f3 = i4 + fArr[i10 * 2];
+                    if ((z || f3 <= rectF.right) && (!z || f3 >= rectF.left)) {
+                        i9 = i10;
+                    } else {
+                        i7 = i10;
+                    }
+                }
+                if (!z) {
+                    i7 = i9;
+                }
+            } else {
+                i7 = i6 - 1;
+            }
+            int iPreviousStartBoundary = segmentFinder.previousStartBoundary(i7 + i3 + 1);
+            if (iPreviousStartBoundary == -1 || (iNextEndBoundary = segmentFinder.nextEndBoundary(iPreviousStartBoundary)) <= (i8 = i3 + i5)) {
+                return -1;
+            }
+            int iMax = Math.max(iPreviousStartBoundary, i8);
+            int iMin = Math.min(iNextEndBoundary, i3 + i6);
+            RectF rectF2 = new RectF(0.0f, i, 0.0f, i2);
+            while (true) {
+                float f4 = i4;
+                float f5 = fArr[(((iMin - i3) - 1) * 2) + (!z ? 1 : 0)] + f4;
+                if ((!z && f5 < rectF.left) || (z && f5 > rectF.right)) {
+                    break;
+                }
+                float f6 = f4 + fArr[((iMax - i3) * 2) + (z ? 1 : 0)];
+                rectF2.left = z ? f5 : f6;
+                if (z) {
+                    f5 = f6;
+                }
+                rectF2.right = f5;
+                if (textInclusionStrategy.isSegmentInside(rectF2, rectF)) {
+                    return iMin;
+                }
+                iMin = segmentFinder.previousEndBoundary(iMin);
+                if (iMin == -1 || iMin <= i8) {
+                    break;
+                }
+                iMax = Math.max(segmentFinder.previousStartBoundary(iMin), i8);
+            }
+        }
+        return -1;
     }
 
     public final int getLineEnd(int i) {
@@ -1812,11 +2166,11 @@ public abstract class Layout {
         }
         while (i3 > i2) {
             int i4 = i3 - 1;
-            char charAt = charSequence.charAt(i4);
-            if (charAt == '\n') {
+            char cCharAt = charSequence.charAt(i4);
+            if (cCharAt == '\n') {
                 return i4;
             }
-            if (!TextLine.isLineEndSpace(charAt)) {
+            if (!TextLine.isLineEndSpace(cCharAt)) {
                 break;
             }
             i3--;
@@ -1851,6 +2205,13 @@ public abstract class Layout {
         return getOffsetToLeftRightOf(i, false);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0045 A[PHI: r1 r2
+      0x0045: PHI (r1v1 int) = (r1v0 int), (r1v3 int) binds: [B:16:0x002f, B:18:0x003d] A[DONT_GENERATE, DONT_INLINE]
+      0x0045: PHI (r2v1 int) = (r2v0 int), (r2v3 int) binds: [B:16:0x002f, B:18:0x003d] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int getOffsetToLeftRightOf(int i, boolean z) {
         int i2;
         int i3;
@@ -1868,14 +2229,11 @@ public abstract class Layout {
                 return i;
             }
             z2 = false;
-        } else {
-            if (i == lineStart) {
-                if (lineForOffset > 0) {
-                    lineForOffset--;
-                }
-                return i;
+        } else if (i == lineStart) {
+            if (lineForOffset > 0) {
+                lineForOffset--;
             }
-            z2 = false;
+            return i;
         }
         if (z2) {
             lineStart = getLineStart(lineForOffset);
@@ -1886,33 +2244,28 @@ public abstract class Layout {
                 i3 = lineEnd;
                 i4 = paragraphDirection2;
                 i2 = lineStart;
-                Directions lineDirections = getLineDirections(lineForOffset);
-                TextLine obtain = TextLine.obtain();
-                obtain.set(this.mPaint, this.mText, i2, i3, i4, lineDirections, false, null, getEllipsisStart(lineForOffset), getEllipsisStart(lineForOffset) + getEllipsisCount(lineForOffset), isFallbackLineSpacingEnabled());
-                int offsetToLeftRightOf = i2 + obtain.getOffsetToLeftRightOf(i - i2, z);
-                TextLine.recycle(obtain);
-                return offsetToLeftRightOf;
+            } else {
+                i2 = lineStart;
+                i3 = lineEnd;
+                i4 = paragraphDirection;
             }
         }
-        i2 = lineStart;
-        i3 = lineEnd;
-        i4 = paragraphDirection;
-        Directions lineDirections2 = getLineDirections(lineForOffset);
-        TextLine obtain2 = TextLine.obtain();
-        obtain2.set(this.mPaint, this.mText, i2, i3, i4, lineDirections2, false, null, getEllipsisStart(lineForOffset), getEllipsisStart(lineForOffset) + getEllipsisCount(lineForOffset), isFallbackLineSpacingEnabled());
-        int offsetToLeftRightOf2 = i2 + obtain2.getOffsetToLeftRightOf(i - i2, z);
-        TextLine.recycle(obtain2);
-        return offsetToLeftRightOf2;
+        Directions lineDirections = getLineDirections(lineForOffset);
+        TextLine textLineObtain = TextLine.obtain();
+        textLineObtain.set(this.mPaint, this.mText, i2, i3, i4, lineDirections, false, null, getEllipsisStart(lineForOffset), getEllipsisStart(lineForOffset) + getEllipsisCount(lineForOffset), isFallbackLineSpacingEnabled());
+        int offsetToLeftRightOf = i2 + textLineObtain.getOffsetToLeftRightOf(i - i2, z);
+        TextLine.recycle(textLineObtain);
+        return offsetToLeftRightOf;
     }
 
     private int getOffsetAtStartOf(int i) {
-        char charAt;
+        char cCharAt;
         if (i == 0) {
             return 0;
         }
         CharSequence charSequence = this.mText;
-        char charAt2 = charSequence.charAt(i);
-        if (charAt2 >= 56320 && charAt2 <= 57343 && (charAt = charSequence.charAt(i - 1)) >= 55296 && charAt <= 56319) {
+        char cCharAt2 = charSequence.charAt(i);
+        if (cCharAt2 >= 56320 && cCharAt2 <= 57343 && (cCharAt = charSequence.charAt(i - 1)) >= 55296 && cCharAt <= 56319) {
             i--;
         }
         if (this.mSpannedText) {
@@ -1930,8 +2283,8 @@ public abstract class Layout {
     }
 
     public boolean shouldClampCursor(int i) {
-        int ordinal = getParagraphAlignment(i).ordinal();
-        return ordinal != 0 ? ordinal == 3 : getParagraphDirection(i) > 0;
+        int iOrdinal = getParagraphAlignment(i).ordinal();
+        return iOrdinal != 0 ? iOrdinal == 3 : getParagraphDirection(i) > 0;
     }
 
     public void getCursorPath(int i, Path path, CharSequence charSequence) {
@@ -2004,8 +2357,8 @@ public abstract class Layout {
     }
 
     private void addSelection(int i, int i2, int i3, int i4, int i5, SelectionRectangleConsumer selectionRectangleConsumer) {
-        int max;
-        int min;
+        int iMax;
+        int iMin;
         int lineStart = getLineStart(i);
         int lineEnd = getLineEnd(i);
         Directions lineDirections = getLineDirections(i);
@@ -2019,9 +2372,9 @@ public abstract class Layout {
             if (i9 > lineEnd) {
                 i9 = lineEnd;
             }
-            if (i2 <= i9 && i3 >= i7 && (max = Math.max(i2, i7)) != (min = Math.min(i3, i9))) {
-                float horizontal = getHorizontal(max, false, i, false);
-                float horizontal2 = getHorizontal(min, true, i, false);
+            if (i2 <= i9 && i3 >= i7 && (iMax = Math.max(i2, i7)) != (iMin = Math.min(i3, i9))) {
+                float horizontal = getHorizontal(iMax, false, i, false);
+                float horizontal2 = getHorizontal(iMin, true, i, false);
                 selectionRectangleConsumer.accept(Math.min(horizontal, horizontal2), i4, Math.max(horizontal, horizontal2), i5, (lineDirections.mDirections[i8] & 67108864) != 0 ? 0 : 1);
             }
         }
@@ -2032,7 +2385,7 @@ public abstract class Layout {
         getSelection(i, i2, new SelectionRectangleConsumer() { // from class: android.text.Layout$$ExternalSyntheticLambda0
             @Override // android.text.Layout.SelectionRectangleConsumer
             public final void accept(float f, float f2, float f3, float f4, int i3) {
-                Path.this.addRect(f, f2, f3, f4, Path.Direction.CW);
+                path.addRect(f, f2, f3, f4, Path.Direction.CW);
             }
         });
     }
@@ -2127,72 +2480,71 @@ public abstract class Layout {
                 z |= i < getLineForOffset(spanned.getSpanStart(leadingMarginSpan)) + ((LeadingMarginSpan.LeadingMarginSpan2) leadingMarginSpanArr[i2]).getLeadingMarginLineCount();
             }
         }
-        int i3 = 0;
+        int leadingMargin = 0;
         for (LeadingMarginSpan leadingMarginSpan2 : leadingMarginSpanArr) {
-            i3 += leadingMarginSpan2.getLeadingMargin(z);
+            leadingMargin += leadingMarginSpan2.getLeadingMargin(z);
         }
-        return i3;
+        return leadingMargin;
     }
 
-    private static float measurePara(TextPaint textPaint, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, boolean z) {
-        MeasuredParagraph buildForBidi;
-        int i3;
+    private static float measurePara(TextPaint textPaint, CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic, boolean z) throws Throwable {
+        int leadingMargin;
         TabStops tabStops;
         boolean z2;
-        TextLine obtain = TextLine.obtain();
+        TextLine textLineObtain = TextLine.obtain();
         MeasuredParagraph measuredParagraph = null;
         try {
-            buildForBidi = MeasuredParagraph.buildForBidi(charSequence, i, i2, textDirectionHeuristic, null);
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            char[] chars = buildForBidi.getChars();
-            int length = chars.length;
-            Directions directions = buildForBidi.getDirections(0, length);
-            int paragraphDir = buildForBidi.getParagraphDir();
-            if (charSequence instanceof Spanned) {
-                i3 = 0;
-                for (LeadingMarginSpan leadingMarginSpan : (LeadingMarginSpan[]) getParagraphSpans((Spanned) charSequence, i, i2, LeadingMarginSpan.class)) {
-                    i3 += leadingMarginSpan.getLeadingMargin(true);
-                }
-            } else {
-                i3 = 0;
-            }
-            int i4 = 0;
-            while (true) {
-                if (i4 >= length) {
-                    tabStops = null;
-                    z2 = false;
-                    break;
-                }
-                if (chars[i4] != '\t') {
-                    i4++;
-                } else if (charSequence instanceof Spanned) {
-                    Spanned spanned = (Spanned) charSequence;
-                    TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans(spanned, i, spanned.nextSpanTransition(i, i2, TabStopSpan.class), TabStopSpan.class);
-                    tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
-                    z2 = true;
+            MeasuredParagraph measuredParagraphBuildForBidi = MeasuredParagraph.buildForBidi(charSequence, i, i2, textDirectionHeuristic, null);
+            try {
+                char[] chars = measuredParagraphBuildForBidi.getChars();
+                int length = chars.length;
+                Directions directions = measuredParagraphBuildForBidi.getDirections(0, length);
+                int paragraphDir = measuredParagraphBuildForBidi.getParagraphDir();
+                if (charSequence instanceof Spanned) {
+                    leadingMargin = 0;
+                    for (LeadingMarginSpan leadingMarginSpan : (LeadingMarginSpan[]) getParagraphSpans((Spanned) charSequence, i, i2, LeadingMarginSpan.class)) {
+                        leadingMargin += leadingMarginSpan.getLeadingMargin(true);
+                    }
                 } else {
-                    z2 = true;
-                    tabStops = null;
+                    leadingMargin = 0;
                 }
+                int i3 = 0;
+                while (true) {
+                    if (i3 >= length) {
+                        tabStops = null;
+                        z2 = false;
+                        break;
+                    }
+                    if (chars[i3] != '\t') {
+                        i3++;
+                    } else if (charSequence instanceof Spanned) {
+                        Spanned spanned = (Spanned) charSequence;
+                        TabStopSpan[] tabStopSpanArr = (TabStopSpan[]) getParagraphSpans(spanned, i, spanned.nextSpanTransition(i, i2, TabStopSpan.class), TabStopSpan.class);
+                        tabStops = tabStopSpanArr.length > 0 ? new TabStops(TAB_INCREMENT, tabStopSpanArr) : null;
+                        z2 = true;
+                    } else {
+                        z2 = true;
+                        tabStops = null;
+                    }
+                }
+                textLineObtain.set(textPaint, charSequence, i, i2, paragraphDir, directions, z2, tabStops, 0, 0, false);
+                float fAbs = leadingMargin + Math.abs(textLineObtain.metrics(null, null, z, null));
+                TextLine.recycle(textLineObtain);
+                if (measuredParagraphBuildForBidi != null) {
+                    measuredParagraphBuildForBidi.recycle();
+                }
+                return fAbs;
+            } catch (Throwable th) {
+                th = th;
+                measuredParagraph = measuredParagraphBuildForBidi;
+                TextLine.recycle(textLineObtain);
+                if (measuredParagraph != null) {
+                    measuredParagraph.recycle();
+                }
+                throw th;
             }
-            obtain.set(textPaint, charSequence, i, i2, paragraphDir, directions, z2, tabStops, 0, 0, false);
-            float abs = i3 + Math.abs(obtain.metrics(null, null, z, null));
-            TextLine.recycle(obtain);
-            if (buildForBidi != null) {
-                buildForBidi.recycle();
-            }
-            return abs;
         } catch (Throwable th2) {
             th = th2;
-            measuredParagraph = buildForBidi;
-            TextLine.recycle(obtain);
-            if (measuredParagraph != null) {
-                measuredParagraph.recycle();
-            }
-            throw th;
         }
     }
 
@@ -2306,11 +2658,11 @@ public abstract class Layout {
         String ellipsisString = TextUtils.getEllipsisString(truncateAt);
         int length = ellipsisString.length();
         boolean z = ellipsisCount >= length;
-        int max = Math.max(0, (i - ellipsisStart) - lineStart);
-        int min = Math.min(ellipsisCount, (i2 - ellipsisStart) - lineStart);
-        while (max < min) {
-            cArr[(((max + ellipsisStart) + lineStart) + i4) - i] = (!z || max >= length) ? (char) 65279 : ellipsisString.charAt(max);
-            max++;
+        int iMax = Math.max(0, (i - ellipsisStart) - lineStart);
+        int iMin = Math.min(ellipsisCount, (i2 - ellipsisStart) - lineStart);
+        while (iMax < iMin) {
+            cArr[(((iMax + ellipsisStart) + lineStart) + i4) - i] = (!z || iMax >= length) ? (char) 65279 : ellipsisString.charAt(iMax);
+            iMax++;
         }
     }
 
@@ -2354,10 +2706,10 @@ public abstract class Layout {
 
         @Override // java.lang.CharSequence
         public char charAt(int i) {
-            char[] obtain = TextUtils.obtain(1);
-            getChars(i, i + 1, obtain, 0);
-            char c = obtain[0];
-            TextUtils.recycle(obtain);
+            char[] cArrObtain = TextUtils.obtain(1);
+            getChars(i, i + 1, cArrObtain, 0);
+            char c = cArrObtain[0];
+            TextUtils.recycle(cArrObtain);
             return c;
         }
 
@@ -2559,22 +2911,22 @@ public abstract class Layout {
         }
 
         private BoringLayout.Metrics isBoring() {
-            BoringLayout.Metrics isBoring;
-            if (this.mStart != 0 || this.mEnd != this.mText.length() || (isBoring = BoringLayout.isBoring(this.mText, this.mPaint, this.mTextDir, this.mFallbackLineSpacing, this.mMinimumFontMetrics, null)) == null) {
+            BoringLayout.Metrics metricsIsBoring;
+            if (this.mStart != 0 || this.mEnd != this.mText.length() || (metricsIsBoring = BoringLayout.isBoring(this.mText, this.mPaint, this.mTextDir, this.mFallbackLineSpacing, this.mMinimumFontMetrics, null)) == null) {
                 return null;
             }
-            if (isBoring.width > this.mWidth && this.mEllipsize == null) {
+            if (metricsIsBoring.width > this.mWidth && this.mEllipsize == null) {
                 return null;
             }
-            return isBoring;
+            return metricsIsBoring;
         }
 
         public Layout build() {
-            BoringLayout.Metrics isBoring = isBoring();
-            if (isBoring == null) {
+            BoringLayout.Metrics metricsIsBoring = isBoring();
+            if (metricsIsBoring == null) {
                 return StaticLayout.Builder.obtain(this.mText, this.mStart, this.mEnd, this.mPaint, this.mWidth).setAlignment(this.mAlignment).setLineSpacing(this.mSpacingAdd, this.mSpacingMult).setTextDirection(this.mTextDir).setIncludePad(this.mIncludePad).setUseLineSpacingFromFallbacks(this.mFallbackLineSpacing).setEllipsizedWidth(this.mEllipsizedWidth).setEllipsize(this.mEllipsize).setMaxLines(this.mMaxLines).setBreakStrategy(this.mBreakStrategy).setHyphenationFrequency(this.mHyphenationFrequency).setIndents(this.mLeftIndents, this.mRightIndents).setJustificationMode(this.mJustificationMode).setLineBreakConfig(this.mLineBreakConfig).setUseBoundsForWidth(this.mUseBoundsForWidth).setShiftDrawingOffsetForStartOverhang(this.mShiftDrawingOffsetForStartOverhang).build();
             }
-            return new BoringLayout(this.mText, this.mPaint, this.mWidth, this.mAlignment, this.mTextDir, this.mSpacingMult, this.mSpacingAdd, this.mIncludePad, this.mFallbackLineSpacing, this.mEllipsizedWidth, this.mEllipsize, this.mMaxLines, this.mBreakStrategy, this.mHyphenationFrequency, this.mLeftIndents, this.mRightIndents, this.mJustificationMode, this.mLineBreakConfig, isBoring, this.mUseBoundsForWidth, this.mShiftDrawingOffsetForStartOverhang, this.mMinimumFontMetrics);
+            return new BoringLayout(this.mText, this.mPaint, this.mWidth, this.mAlignment, this.mTextDir, this.mSpacingMult, this.mSpacingAdd, this.mIncludePad, this.mFallbackLineSpacing, this.mEllipsizedWidth, this.mEllipsize, this.mMaxLines, this.mBreakStrategy, this.mHyphenationFrequency, this.mLeftIndents, this.mRightIndents, this.mJustificationMode, this.mLineBreakConfig, metricsIsBoring, this.mUseBoundsForWidth, this.mShiftDrawingOffsetForStartOverhang, this.mMinimumFontMetrics);
         }
     }
 
@@ -2691,14 +3043,14 @@ public abstract class Layout {
         getSelection(i, i2, new SelectionRectangleConsumer() { // from class: android.text.Layout$$ExternalSyntheticLambda1
             @Override // android.text.Layout.SelectionRectangleConsumer
             public final void accept(float f, float f2, float f3, float f4, int i3) {
-                Path.this.addRect(f, f2 + 1.0f, f3, f4 - 1.0f, Path.Direction.CW);
+                path.addRect(f, f2 + 1.0f, f3, f4 - 1.0f, Path.Direction.CW);
             }
         });
     }
 
     public void getSelectionRect(int i, int i2, int i3, int i4, int i5, Rect rect) {
-        int max;
-        int min;
+        int iMax;
+        int iMin;
         int lineStart = getLineStart(i);
         int lineEnd = getLineEnd(i);
         Directions lineDirections = getLineDirections(i);
@@ -2711,9 +3063,9 @@ public abstract class Layout {
             if (i8 > lineEnd) {
                 i8 = lineEnd;
             }
-            if (i2 <= i8 && i3 >= i7 && (max = Math.max(i2, i7)) != (min = Math.min(i3, i8))) {
-                float horizontal = getHorizontal(max, false, i, false);
-                float horizontal2 = getHorizontal(min, true, i, false);
+            if (i2 <= i8 && i3 >= i7 && (iMax = Math.max(i2, i7)) != (iMin = Math.min(i3, i8))) {
+                float horizontal = getHorizontal(iMax, false, i, false);
+                float horizontal2 = getHorizontal(iMin, true, i, false);
                 rect.set((int) Math.min(horizontal, horizontal2), i4, (int) Math.max(horizontal, horizontal2), i5);
             }
         }

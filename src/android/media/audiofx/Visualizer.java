@@ -96,7 +96,7 @@ public class Visualizer {
         native_init();
     }
 
-    public Visualizer(int i) throws UnsupportedOperationException, RuntimeException {
+    public Visualizer(int i) throws RuntimeException {
         this.mState = 0;
         Object obj = new Object();
         this.mStateLock = obj;
@@ -107,18 +107,18 @@ public class Visualizer {
         int[] iArr = new int[1];
         synchronized (obj) {
             this.mState = 0;
-            AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
+            AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
             try {
-                int native_setup = native_setup(new WeakReference(this), i, iArr, asScopedParcelState.getParcel());
-                if (asScopedParcelState != null) {
-                    asScopedParcelState.close();
+                int iNative_setup = native_setup(new WeakReference(this), i, iArr, scopedParcelStateAsScopedParcelState.getParcel());
+                if (scopedParcelStateAsScopedParcelState != null) {
+                    scopedParcelStateAsScopedParcelState.close();
                 }
-                if (native_setup != 0 && native_setup != -2) {
-                    Log.e(TAG, "Error code " + native_setup + " when initializing Visualizer.");
-                    if (native_setup == -5) {
+                if (iNative_setup != 0 && iNative_setup != -2) {
+                    Log.e(TAG, "Error code " + iNative_setup + " when initializing Visualizer.");
+                    if (iNative_setup == -5) {
                         throw new UnsupportedOperationException("Effect library not loaded");
                     }
-                    throw new RuntimeException("Cannot initialize Visualizer engine, error: " + native_setup);
+                    throw new RuntimeException("Cannot initialize Visualizer engine, error: " + iNative_setup);
                 }
                 this.mId = iArr[0];
                 if (native_getEnabled()) {
@@ -145,121 +145,121 @@ public class Visualizer {
     }
 
     public int setEnabled(boolean z) throws IllegalStateException {
-        int i;
+        int iNative_setEnabled;
         synchronized (this.mStateLock) {
-            int i2 = this.mState;
-            if (i2 == 0) {
+            int i = this.mState;
+            if (i == 0) {
                 throw new IllegalStateException("setEnabled() called in wrong state: " + this.mState);
             }
-            int i3 = 2;
-            if (!(z && i2 == 1) && (z || i2 != 2)) {
-                i = 0;
+            int i2 = 2;
+            if (!(z && i == 1) && (z || i != 2)) {
+                iNative_setEnabled = 0;
             } else {
-                i = native_setEnabled(z);
-                if (i == 0) {
+                iNative_setEnabled = native_setEnabled(z);
+                if (iNative_setEnabled == 0) {
                     if (!z) {
-                        i3 = 1;
+                        i2 = 1;
                     }
-                    this.mState = i3;
+                    this.mState = i2;
                 }
             }
         }
-        return i;
+        return iNative_setEnabled;
     }
 
     public boolean getEnabled() {
-        boolean native_getEnabled;
+        boolean zNative_getEnabled;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("getEnabled() called in wrong state: " + this.mState);
             }
-            native_getEnabled = native_getEnabled();
+            zNative_getEnabled = native_getEnabled();
         }
-        return native_getEnabled;
+        return zNative_getEnabled;
     }
 
     public int setCaptureSize(int i) throws IllegalStateException {
-        int native_setCaptureSize;
+        int iNative_setCaptureSize;
         synchronized (this.mStateLock) {
             if (this.mState != 1) {
                 throw new IllegalStateException("setCaptureSize() called in wrong state: " + this.mState);
             }
-            native_setCaptureSize = native_setCaptureSize(i);
-            if (native_setCaptureSize == -4) {
+            iNative_setCaptureSize = native_setCaptureSize(i);
+            if (iNative_setCaptureSize == -4) {
                 throw new IllegalArgumentException("setCaptureSize to " + i + " failed");
             }
         }
-        return native_setCaptureSize;
+        return iNative_setCaptureSize;
     }
 
     public int getCaptureSize() throws IllegalStateException {
-        int native_getCaptureSize;
+        int iNative_getCaptureSize;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("getCaptureSize() called in wrong state: " + this.mState);
             }
-            native_getCaptureSize = native_getCaptureSize();
+            iNative_getCaptureSize = native_getCaptureSize();
         }
-        return native_getCaptureSize;
+        return iNative_getCaptureSize;
     }
 
     public int setScalingMode(int i) throws IllegalStateException {
-        int native_setScalingMode;
+        int iNative_setScalingMode;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("setScalingMode() called in wrong state: " + this.mState);
             }
-            native_setScalingMode = native_setScalingMode(i);
+            iNative_setScalingMode = native_setScalingMode(i);
         }
-        return native_setScalingMode;
+        return iNative_setScalingMode;
     }
 
     public int getScalingMode() throws IllegalStateException {
-        int native_getScalingMode;
+        int iNative_getScalingMode;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("getScalingMode() called in wrong state: " + this.mState);
             }
-            native_getScalingMode = native_getScalingMode();
+            iNative_getScalingMode = native_getScalingMode();
         }
-        return native_getScalingMode;
+        return iNative_getScalingMode;
     }
 
     public int setMeasurementMode(int i) throws IllegalStateException {
-        int native_setMeasurementMode;
+        int iNative_setMeasurementMode;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("setMeasurementMode() called in wrong state: " + this.mState);
             }
-            native_setMeasurementMode = native_setMeasurementMode(i);
+            iNative_setMeasurementMode = native_setMeasurementMode(i);
         }
-        return native_setMeasurementMode;
+        return iNative_setMeasurementMode;
     }
 
     public int getMeasurementMode() throws IllegalStateException {
-        int native_getMeasurementMode;
+        int iNative_getMeasurementMode;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("getMeasurementMode() called in wrong state: " + this.mState);
             }
-            native_getMeasurementMode = native_getMeasurementMode();
+            iNative_getMeasurementMode = native_getMeasurementMode();
         }
-        return native_getMeasurementMode;
+        return iNative_getMeasurementMode;
     }
 
     public int getSamplingRate() throws IllegalStateException {
-        int native_getSamplingRate;
+        int iNative_getSamplingRate;
         synchronized (this.mStateLock) {
             if (this.mState == 0) {
                 throw new IllegalStateException("getSamplingRate() called in wrong state: " + this.mState);
             }
-            native_getSamplingRate = native_getSamplingRate();
+            iNative_getSamplingRate = native_getSamplingRate();
         }
-        return native_getSamplingRate;
+        return iNative_getSamplingRate;
     }
 
     public int getWaveForm(byte[] bArr) throws IllegalStateException {
-        int native_getWaveForm;
+        int iNative_getWaveForm;
         synchronized (this.mStateLock) {
             if (this.mState != 2) {
                 throw new IllegalStateException("getWaveForm() called in wrong state: " + this.mState);
@@ -268,24 +268,24 @@ public class Visualizer {
             if (captureSize > bArr.length) {
                 throw new IllegalArgumentException("getWaveForm() called with illegal size: " + bArr.length + " expecting at least " + captureSize + " bytes");
             }
-            native_getWaveForm = native_getWaveForm(bArr);
+            iNative_getWaveForm = native_getWaveForm(bArr);
         }
-        return native_getWaveForm;
+        return iNative_getWaveForm;
     }
 
     public int getFft(byte[] bArr) throws IllegalStateException {
-        int native_getFft;
+        int iNative_getFft;
         synchronized (this.mStateLock) {
             if (this.mState != 2) {
                 throw new IllegalStateException("getFft() called in wrong state: " + this.mState);
             }
-            native_getFft = native_getFft(bArr);
+            iNative_getFft = native_getFft(bArr);
         }
-        return native_getFft;
+        return iNative_getFft;
     }
 
     public int getMeasurementPeakRms(MeasurementPeakRms measurementPeakRms) {
-        int native_getPeakRms;
+        int iNative_getPeakRms;
         if (measurementPeakRms == null) {
             Log.e(TAG, "Cannot store measurements in a null object");
             return -4;
@@ -294,41 +294,41 @@ public class Visualizer {
             if (this.mState != 2) {
                 throw new IllegalStateException("getMeasurementPeakRms() called in wrong state: " + this.mState);
             }
-            native_getPeakRms = native_getPeakRms(measurementPeakRms);
+            iNative_getPeakRms = native_getPeakRms(measurementPeakRms);
         }
-        return native_getPeakRms;
+        return iNative_getPeakRms;
     }
 
     public int setDataCaptureListener(OnDataCaptureListener onDataCaptureListener, int i, boolean z, boolean z2) {
-        int native_setPeriodicCapture;
+        int iNative_setPeriodicCapture;
         if (onDataCaptureListener == null) {
             z = false;
             z2 = false;
         }
         synchronized (this.mStateLock) {
-            native_setPeriodicCapture = native_setPeriodicCapture(i, z, z2);
+            iNative_setPeriodicCapture = native_setPeriodicCapture(i, z, z2);
         }
-        if (native_setPeriodicCapture != 0) {
-            return native_setPeriodicCapture;
+        if (iNative_setPeriodicCapture != 0) {
+            return iNative_setPeriodicCapture;
         }
         synchronized (this.mListenerLock) {
             this.mCaptureListener = onDataCaptureListener;
             if (onDataCaptureListener != null && this.mNativeEventHandler == null) {
-                Looper myLooper = Looper.myLooper();
-                if (myLooper != null) {
-                    this.mNativeEventHandler = new Handler(myLooper);
+                Looper looperMyLooper = Looper.myLooper();
+                if (looperMyLooper != null) {
+                    this.mNativeEventHandler = new Handler(looperMyLooper);
                 } else {
                     Looper mainLooper = Looper.getMainLooper();
                     if (mainLooper != null) {
                         this.mNativeEventHandler = new Handler(mainLooper);
                     } else {
                         this.mNativeEventHandler = null;
-                        native_setPeriodicCapture = -3;
+                        iNative_setPeriodicCapture = -3;
                     }
                 }
             }
         }
-        return native_setPeriodicCapture;
+        return iNative_setPeriodicCapture;
     }
 
     public int setServerDiedListener(OnServerDiedListener onServerDiedListener) {
@@ -354,7 +354,7 @@ public class Visualizer {
             handler.post(new Runnable() { // from class: android.media.audiofx.Visualizer$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Visualizer.lambda$postEventFromNative$0(Visualizer.this, i, bArr, i2);
+                    Visualizer.lambda$postEventFromNative$0(this.f$0, i, bArr, i2);
                 }
             });
         } else {
@@ -362,7 +362,7 @@ public class Visualizer {
                 handler.post(new Runnable() { // from class: android.media.audiofx.Visualizer$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Visualizer.lambda$postEventFromNative$1(Visualizer.this);
+                        Visualizer.lambda$postEventFromNative$1(this.f$0);
                     }
                 });
                 return;

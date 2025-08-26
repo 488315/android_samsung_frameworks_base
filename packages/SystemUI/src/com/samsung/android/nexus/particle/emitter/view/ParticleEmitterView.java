@@ -11,7 +11,6 @@ import com.samsung.android.nexus.base.layer.NexusLayerParams;
 import com.samsung.android.nexus.base.utils.Log;
 import com.samsung.android.nexus.particle.emitter.layer.EmitterParticleLayer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ParticleEmitterView extends ViewGroup {
     public final Object mCustomInvalidator;
@@ -71,9 +70,9 @@ public class ParticleEmitterView extends ViewGroup {
         super.onVisibilityChanged(view, i);
         LayerContainer layerContainer = this.mLayerContainer;
         if (layerContainer != null) {
-            Boolean valueOf = Boolean.valueOf(i == 0);
-            Log.i("LayerContainer", "setVisibility() : " + valueOf);
-            layerContainer.onVisibilityChanged(valueOf);
+            Boolean boolValueOf = Boolean.valueOf(i == 0);
+            Log.i("LayerContainer", "setVisibility() : " + boolValueOf);
+            layerContainer.onVisibilityChanged(boolValueOf);
         }
     }
 
@@ -82,9 +81,9 @@ public class ParticleEmitterView extends ViewGroup {
         super.onWindowVisibilityChanged(i);
         LayerContainer layerContainer = this.mLayerContainer;
         if (layerContainer != null) {
-            Boolean valueOf = Boolean.valueOf(i == 0);
-            Log.i("LayerContainer", "setVisibility() : " + valueOf);
-            layerContainer.onVisibilityChanged(valueOf);
+            Boolean boolValueOf = Boolean.valueOf(i == 0);
+            Log.i("LayerContainer", "setVisibility() : " + boolValueOf);
+            layerContainer.onVisibilityChanged(boolValueOf);
         }
     }
 

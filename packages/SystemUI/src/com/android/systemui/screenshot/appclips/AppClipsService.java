@@ -17,7 +17,6 @@ import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.bubbles.Bubbles;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AppClipsService extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,12 +34,12 @@ public class AppClipsService extends Service {
             Log.d("AppClipsService", "Bubbles not available");
         } else {
             try {
-                ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.config_screenshotAppClipsActivityComponent));
-                if (unflattenFromString == null) {
+                ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.config_screenshotAppClipsActivityComponent));
+                if (componentNameUnflattenFromString == null) {
                     Log.d("AppClipsService", "AppClips component name not defined");
-                } else if (unflattenFromString.getPackageName().isEmpty()) {
+                } else if (componentNameUnflattenFromString.getPackageName().isEmpty()) {
                     Log.d("AppClipsService", "AppClips component package name is empty");
-                } else if (unflattenFromString.getClassName().isEmpty()) {
+                } else if (componentNameUnflattenFromString.getClassName().isEmpty()) {
                     Log.d("AppClipsService", "AppClips component class name is empty");
                 } else {
                     Log.d("AppClipsService", "isComponentValid returned true");

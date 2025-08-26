@@ -107,7 +107,7 @@ public class SemInfoExtractionManager {
         this.mOnExtractionCompletedListener = onExtractionCompletedListener;
     }
 
-    public long extract(String str) throws IllegalArgumentException, IllegalStateException {
+    public long extract(String str) throws IllegalStateException, IllegalArgumentException {
         if (str == null) {
             return -1L;
         }
@@ -116,7 +116,7 @@ public class SemInfoExtractionManager {
         return this.mRequestNumber;
     }
 
-    public long extract(Uri uri) throws IllegalArgumentException, IllegalStateException {
+    public long extract(Uri uri) throws IllegalStateException, IllegalArgumentException {
         if (uri == null) {
             return -1L;
         }
@@ -125,7 +125,7 @@ public class SemInfoExtractionManager {
         return this.mRequestNumber;
     }
 
-    public long extract(SemStrokeData semStrokeData) throws IllegalArgumentException, IllegalStateException {
+    public long extract(SemStrokeData semStrokeData) throws IllegalStateException, IllegalArgumentException {
         if (semStrokeData == null) {
             return -1L;
         }
@@ -134,7 +134,7 @@ public class SemInfoExtractionManager {
         return this.mRequestNumber;
     }
 
-    public long extract(ArrayList<SemStrokeData> arrayList) throws IllegalArgumentException, IllegalStateException {
+    public long extract(ArrayList<SemStrokeData> arrayList) throws IllegalStateException, IllegalArgumentException {
         if (arrayList == null) {
             return -1L;
         }
@@ -194,11 +194,11 @@ public class SemInfoExtractionManager {
         }
         Intent action = new Intent().setAction("com.samsung.android.service.hermes.InfoExtractionService");
         action.setPackage("com.samsung.android.service.airviewdictionary");
-        boolean bindService = this.mContext.bindService(action, this.mConnection, 1);
-        if (!bindService) {
+        boolean zBindService = this.mContext.bindService(action, this.mConnection, 1);
+        if (!zBindService) {
             Log.d(TAG, "Failed to bind with InfoExtractionService service!");
         }
-        return bindService;
+        return zBindService;
     }
 
     private void startExtraction(final int i, final Object obj) {
@@ -245,12 +245,12 @@ public class SemInfoExtractionManager {
         } else {
             Log.d(TAG, "can't make data type = " + i);
         }
-        Message obtain = Message.obtain((Handler) null, MSG_EXTRACTION_START);
-        obtain.setData(bundle);
-        obtain.replyTo = new Messenger(new IncomingHandler());
+        Message messageObtain = Message.obtain((Handler) null, MSG_EXTRACTION_START);
+        messageObtain.setData(bundle);
+        messageObtain.replyTo = new Messenger(new IncomingHandler());
         try {
             if (iBinder != null) {
-                new Messenger(iBinder).send(obtain);
+                new Messenger(iBinder).send(messageObtain);
                 Log.d(TAG, "request Extraction : success");
             } else {
                 Log.d(TAG, "request Extraction : InfoExtractionService is null!");

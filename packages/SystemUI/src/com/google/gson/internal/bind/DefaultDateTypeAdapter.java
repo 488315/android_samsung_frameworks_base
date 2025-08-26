@@ -22,14 +22,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DefaultDateTypeAdapter<T extends Date> extends TypeAdapter<T> {
     private static final String SIMPLE_NAME = "DefaultDateTypeAdapter";
     private final List<DateFormat> dateFormats;
     private final DateType<T> dateType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class DateType<T extends Date> {
         public static final DateType<Date> DATE = new DateType<Date>(Date.class) { // from class: com.google.gson.internal.bind.DefaultDateTypeAdapter.DateType.1
             @Override // com.google.gson.internal.bind.DefaultDateTypeAdapter.DateType
@@ -68,22 +66,22 @@ public final class DefaultDateTypeAdapter<T extends Date> extends TypeAdapter<T>
     }
 
     private Date deserializeToDate(JsonReader jsonReader) throws IOException {
-        String nextString = jsonReader.nextString();
+        String strNextString = jsonReader.nextString();
         synchronized (this.dateFormats) {
             try {
                 Iterator<DateFormat> it = this.dateFormats.iterator();
                 while (it.hasNext()) {
                     try {
-                        return it.next().parse(nextString);
+                        return it.next().parse(strNextString);
                     } catch (ParseException unused) {
                     }
                 }
                 try {
-                    return ISO8601Utils.parse(nextString, new ParsePosition(0));
+                    return ISO8601Utils.parse(strNextString, new ParsePosition(0));
                 } catch (ParseException e) {
-                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as Date; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString(), e);
+                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as Date; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString(), e);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -106,21 +104,21 @@ public final class DefaultDateTypeAdapter<T extends Date> extends TypeAdapter<T>
             jsonReader.nextNull();
             return null;
         }
-        return this.dateType.deserialize(deserializeToDate(jsonReader));
+        return (T) this.dateType.deserialize(deserializeToDate(jsonReader));
     }
 
     @Override // com.google.gson.TypeAdapter
     public void write(JsonWriter jsonWriter, Date date) throws IOException {
-        String format;
+        String str;
         if (date == null) {
             jsonWriter.nullValue();
             return;
         }
         DateFormat dateFormat = this.dateFormats.get(0);
         synchronized (this.dateFormats) {
-            format = dateFormat.format(date);
+            str = dateFormat.format(date);
         }
-        jsonWriter.value(format);
+        jsonWriter.value(str);
     }
 
     private DefaultDateTypeAdapter(DateType<T> dateType, String str) {

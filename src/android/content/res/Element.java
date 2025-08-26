@@ -275,12 +275,12 @@ public class Element {
     }
 
     static Element obtain(String str) {
-        Element acquire = sPool.get().acquire();
-        if (acquire == null) {
-            acquire = new Element();
+        Element elementAcquire = sPool.get().acquire();
+        if (elementAcquire == null) {
+            elementAcquire = new Element();
         }
-        acquire.init(str);
-        return acquire;
+        elementAcquire.init(str);
+        return elementAcquire;
     }
 
     void recycle() {
@@ -415,20 +415,156 @@ public class Element {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x00a7, code lost:
-    
-        if (r17.equals("activity") == false) goto L4;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void init(java.lang.String r17) {
-        /*
-            Method dump skipped, instructions count: 498
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Element.init(java.lang.String):void");
+    private void init(String str) {
+        this.mTag = str;
+        this.mChildTagMask = 0L;
+        char c = 0;
+        this.mTotalComponentMetadataSize = 0;
+        str.hashCode();
+        switch (str.hashCode()) {
+            case -1655966961:
+                if (!str.equals("activity")) {
+                    c = 65535;
+                    break;
+                }
+                break;
+            case -1194267734:
+                if (str.equals(TAG_URI_RELATIVE_FILTER_GROUP)) {
+                    c = 1;
+                    break;
+                }
+                break;
+            case -1183762788:
+                if (str.equals("intent")) {
+                    c = 2;
+                    break;
+                }
+                break;
+            case -1029793847:
+                if (str.equals(TAG_INTENT_FILTER)) {
+                    c = 3;
+                    break;
+                }
+                break;
+            case -987494927:
+                if (str.equals("provider")) {
+                    c = 4;
+                    break;
+                }
+                break;
+            case -808719889:
+                if (str.equals("receiver")) {
+                    c = 5;
+                    break;
+                }
+                break;
+            case 130625071:
+                if (str.equals("manifest")) {
+                    c = 6;
+                    break;
+                }
+                break;
+            case 655087462:
+                if (str.equals("queries")) {
+                    c = 7;
+                    break;
+                }
+                break;
+            case 790287890:
+                if (str.equals(TAG_ACTIVITY_ALIAS)) {
+                    c = '\b';
+                    break;
+                }
+                break;
+            case 1554253136:
+                if (str.equals("application")) {
+                    c = '\t';
+                    break;
+                }
+                break;
+            case 1818228622:
+                if (str.equals("compatible-screens")) {
+                    c = '\n';
+                    break;
+                }
+                break;
+            case 1984153269:
+                if (str.equals("service")) {
+                    c = 11;
+                    break;
+                }
+                break;
+        }
+        switch (c) {
+            case 0:
+                initializeCounter("layout", 1000);
+                initializeCounter(TAG_META_DATA, 1000);
+                initializeCounter(TAG_INTENT_FILTER, 20000);
+                break;
+            case 1:
+                initializeCounter("data", 100);
+                break;
+            case 2:
+            case 3:
+                initializeCounter(TAG_URI_RELATIVE_FILTER_GROUP, 100);
+                initializeCounter("action", 20000);
+                initializeCounter("category", 40000);
+                initializeCounter("data", 40000);
+                break;
+            case 4:
+                initializeCounter(TAG_GRANT_URI_PERMISSION, 100);
+                initializeCounter(TAG_PATH_PERMISSION, 100);
+                initializeCounter(TAG_META_DATA, 1000);
+                initializeCounter(TAG_INTENT_FILTER, 20000);
+                break;
+            case 5:
+            case '\b':
+            case 11:
+                initializeCounter(TAG_META_DATA, 1000);
+                initializeCounter(TAG_INTENT_FILTER, 20000);
+                break;
+            case 6:
+                initializeCounter("application", 100);
+                initializeCounter("overlay", 100);
+                initializeCounter("instrumentation", 100);
+                initializeCounter("permission-group", 100);
+                initializeCounter("permission-tree", 100);
+                initializeCounter(TAG_SUPPORTS_GL_TEXTURE, 100);
+                initializeCounter("supports-screens", 100);
+                initializeCounter("uses-configuration", 100);
+                initializeCounter("uses-sdk", 100);
+                initializeCounter("compatible-screens", 200);
+                initializeCounter("queries", 200);
+                initializeCounter("attribution", 400);
+                initializeCounter("uses-feature", 400);
+                initializeCounter("permission", 2000);
+                initializeCounter("uses-permission", 20000);
+                break;
+            case 7:
+                initializeCounter("package", 1000);
+                initializeCounter("intent", 2000);
+                initializeCounter("provider", 8000);
+                break;
+            case '\t':
+                initializeCounter("profileable", 100);
+                initializeCounter(TAG_USES_NATIVE_LIBRARY, 300);
+                initializeCounter("receiver", 1000);
+                initializeCounter("service", 1000);
+                initializeCounter(TAG_META_DATA, 1000);
+                initializeCounter(TAG_USES_LIBRARY, 1000);
+                initializeCounter(TAG_ACTIVITY_ALIAS, 4000);
+                initializeCounter("provider", 8000);
+                initializeCounter("activity", 30000);
+                break;
+            case '\n':
+                initializeCounter(TAG_SCREEN, 4000);
+                break;
+        }
     }
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
@@ -818,175 +954,62 @@ public class Element {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x007b, code lost:
-    
-        if (r6.equals(android.content.res.Element.TAG_ATTR_ZYGOTE_PRELOAD_NAME) == false) goto L38;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0010  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean isComponentNameAttr(java.lang.String r6) {
-        /*
-            r5 = this;
-            java.lang.String r5 = r5.mTag
-            r5.hashCode()
-            int r0 = r5.hashCode()
-            r1 = 2
-            r2 = 1
-            r3 = 0
-            r4 = -1
-            switch(r0) {
-                case -1655966961: goto L57;
-                case -987494927: goto L4b;
-                case -808719889: goto L3f;
-                case 544550766: goto L34;
-                case 790287890: goto L29;
-                case 1554253136: goto L1e;
-                case 1984153269: goto L12;
-                default: goto L10;
-            }
-        L10:
-            r5 = r4
-            goto L61
-        L12:
-            java.lang.String r0 = "service"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L1c
-            goto L10
-        L1c:
-            r5 = 6
-            goto L61
-        L1e:
-            java.lang.String r0 = "application"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L27
-            goto L10
-        L27:
-            r5 = 5
-            goto L61
-        L29:
-            java.lang.String r0 = "activity-alias"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L32
-            goto L10
-        L32:
-            r5 = 4
-            goto L61
-        L34:
-            java.lang.String r0 = "instrumentation"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L3d
-            goto L10
-        L3d:
-            r5 = 3
-            goto L61
-        L3f:
-            java.lang.String r0 = "receiver"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L49
-            goto L10
-        L49:
-            r5 = r1
-            goto L61
-        L4b:
-            java.lang.String r0 = "provider"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L55
-            goto L10
-        L55:
-            r5 = r2
-            goto L61
-        L57:
-            java.lang.String r0 = "activity"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L60
-            goto L10
-        L60:
-            r5 = r3
-        L61:
-            java.lang.String r0 = "name"
-            switch(r5) {
-                case 0: goto Laf;
-                case 1: goto La4;
-                case 2: goto La4;
-                case 3: goto La4;
-                case 4: goto L96;
-                case 5: goto L68;
-                case 6: goto La4;
-                default: goto L67;
-            }
-        L67:
-            return r3
-        L68:
-            r6.hashCode()
-            int r5 = r6.hashCode()
-            switch(r5) {
-                case 3373707: goto L89;
-                case 1091642979: goto L7e;
-                case 2130173948: goto L74;
-                default: goto L72;
-            }
-        L72:
-            r1 = r4
-            goto L91
-        L74:
-            java.lang.String r5 = "zygotePreloadName"
-            boolean r5 = r6.equals(r5)
-            if (r5 != 0) goto L91
-            goto L72
-        L7e:
-            java.lang.String r5 = "backupAgent"
-            boolean r5 = r6.equals(r5)
-            if (r5 != 0) goto L87
-            goto L72
-        L87:
-            r1 = r2
-            goto L91
-        L89:
-            boolean r5 = r6.equals(r0)
-            if (r5 != 0) goto L90
-            goto L72
-        L90:
-            r1 = r3
-        L91:
-            switch(r1) {
-                case 0: goto L95;
-                case 1: goto L95;
-                case 2: goto L95;
-                default: goto L94;
-            }
-        L94:
-            return r3
-        L95:
-            return r2
-        L96:
-            r6.hashCode()
-            java.lang.String r5 = "targetActivity"
-            boolean r5 = r6.equals(r5)
-            if (r5 != 0) goto La3
-            return r3
-        La3:
-            return r2
-        La4:
-            r6.hashCode()
-            boolean r5 = r6.equals(r0)
-            if (r5 != 0) goto Lae
-            return r3
-        Lae:
-            return r2
-        Laf:
-            r6.hashCode()
-            boolean r5 = r6.equals(r0)
-            if (r5 != 0) goto Lc2
-            java.lang.String r5 = "parentActivityName"
-            boolean r5 = r6.equals(r5)
-            if (r5 != 0) goto Lc2
-            return r3
-        Lc2:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Element.isComponentNameAttr(java.lang.String):boolean");
+    private boolean isComponentNameAttr(String str) {
+        char c;
+        String str2 = this.mTag;
+        str2.hashCode();
+        c = 2;
+        switch (str2) {
+            case "activity":
+                str.hashCode();
+                if (str.equals("name") || str.equals(TAG_ATTR_PARENT_ACTIVITY_NAME)) {
+                }
+                break;
+            case "provider":
+            case "receiver":
+            case "instrumentation":
+            case "service":
+                str.hashCode();
+                if (!str.equals("name")) {
+                }
+                break;
+            case "activity-alias":
+                str.hashCode();
+                if (!str.equals(TAG_ATTR_TARGET_ACTIVITY)) {
+                }
+                break;
+            case "application":
+                str.hashCode();
+                switch (str.hashCode()) {
+                    case 3373707:
+                        if (!str.equals("name")) {
+                            c = 65535;
+                            break;
+                        } else {
+                            c = 0;
+                            break;
+                        }
+                    case 1091642979:
+                        if (str.equals(TAG_ATTR_BACKUP_AGENT)) {
+                            c = 1;
+                            break;
+                        }
+                        break;
+                    case 2130173948:
+                        if (!str.equals(TAG_ATTR_ZYGOTE_PRELOAD_NAME)) {
+                        }
+                        break;
+                }
+                switch (c) {
+                }
+        }
+        return false;
     }
 
     private boolean isComponentNameAttr(int i) {

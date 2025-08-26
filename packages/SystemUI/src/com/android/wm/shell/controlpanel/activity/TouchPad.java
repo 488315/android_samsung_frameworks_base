@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.controlpanel.utils.ControlPanelUtils;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TouchPad extends FloatingUI {
     public View mCenterText;
@@ -28,13 +27,13 @@ public class TouchPad extends FloatingUI {
 
     @Override // com.android.wm.shell.controlpanel.activity.FloatingUI
     public final void connectUIObject() {
-        View inflate = View.inflate(this.mContext, R.layout.cursorcontrol_panel, null);
-        this.mOverlayView = inflate;
-        this.mTouchPadBg = inflate.findViewById(R.id.touch_pad_bg);
+        View viewInflate = View.inflate(this.mContext, R.layout.cursorcontrol_panel, null);
+        this.mOverlayView = viewInflate;
+        this.mTouchPadBg = viewInflate.findViewById(R.id.touch_pad_bg);
         this.mCenterText = this.mOverlayView.findViewById(R.id.center_text);
-        View findViewById = this.mOverlayView.findViewById(R.id.touch_pad_line);
-        this.mTouchPadLine = findViewById;
-        findViewById.setVisibility(4);
+        View viewFindViewById = this.mOverlayView.findViewById(R.id.touch_pad_line);
+        this.mTouchPadLine = viewFindViewById;
+        viewFindViewById.setVisibility(4);
     }
 
     @Override // com.android.wm.shell.controlpanel.activity.FloatingUI
@@ -56,9 +55,9 @@ public class TouchPad extends FloatingUI {
         int displayX = ControlPanelUtils.getDisplayX(this.mContext);
         int displayY = ControlPanelUtils.getDisplayY(this.mContext);
         Settings.Global.getInt(this.mContext.getContentResolver(), "flex_mode_scroll_wheel_pos", 2);
-        boolean isTypeFold = ControlPanelUtils.isTypeFold();
+        boolean zIsTypeFold = ControlPanelUtils.isTypeFold();
         boolean z = this.mIsMediaPanel;
-        if (isTypeFold) {
+        if (zIsTypeFold) {
             if (z) {
                 WindowManager.LayoutParams layoutParams = this.mLayoutParam;
                 layoutParams.height = (int) ((displayY * 30.4d) / 100.0d);
@@ -91,10 +90,10 @@ public class TouchPad extends FloatingUI {
     }
 
     public final void startFadeInAnimation(View view, boolean z) {
-        Animation loadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.fadein);
+        Animation animationLoadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.fadein);
         if (z) {
             view.setVisibility(0);
         }
-        view.startAnimation(loadAnimation);
+        view.startAnimation(animationLoadAnimation);
     }
 }

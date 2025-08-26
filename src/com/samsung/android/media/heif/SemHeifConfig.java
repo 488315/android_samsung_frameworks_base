@@ -18,9 +18,9 @@ public class SemHeifConfig {
     }
 
     public void setExifData(byte[] bArr, int i, int i2) {
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i2);
-        this.mExifBuffer = allocateDirect;
-        allocateDirect.put(bArr, i, i2);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i2);
+        this.mExifBuffer = byteBufferAllocateDirect;
+        byteBufferAllocateDirect.put(bArr, i, i2);
         this.mExifBuffer.flip();
     }
 
@@ -29,9 +29,9 @@ public class SemHeifConfig {
             this.mExifBuffer = byteBuffer;
             return;
         }
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
-        this.mExifBuffer = allocateDirect;
-        allocateDirect.put(byteBuffer);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
+        this.mExifBuffer = byteBufferAllocateDirect;
+        byteBufferAllocateDirect.put(byteBuffer);
     }
 
     public void setCameraInfo(ByteBuffer byteBuffer) {
@@ -39,9 +39,9 @@ public class SemHeifConfig {
             this.mCameraInfoBuffer = byteBuffer;
             return;
         }
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
-        this.mCameraInfoBuffer = allocateDirect;
-        allocateDirect.put(byteBuffer);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(byteBuffer.limit());
+        this.mCameraInfoBuffer = byteBufferAllocateDirect;
+        byteBufferAllocateDirect.put(byteBuffer);
     }
 
     public SemInputImage getMasterImage() {

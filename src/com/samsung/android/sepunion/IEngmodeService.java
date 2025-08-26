@@ -40,9 +40,9 @@ public interface IEngmodeService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEngmodeService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEngmodeService)) {
-                return (IEngmodeService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEngmodeService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEngmodeService)) {
+                return (IEngmodeService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

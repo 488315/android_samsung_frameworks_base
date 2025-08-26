@@ -1,6 +1,5 @@
 package com.android.systemui.kairos;
 
-import com.android.systemui.kairos.IncrementalKt$$ExternalSyntheticLambda6;
 import com.android.systemui.kairos.internal.DemuxImpl$eventsForKey$$inlined$EventsImplCheap$1;
 import com.android.systemui.kairos.internal.DemuxKt;
 import com.android.systemui.kairos.internal.DerivedMap;
@@ -26,7 +25,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -41,7 +39,7 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         NetworkScope networkScope = (NetworkScope) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -57,7 +55,7 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                         Map map = (Map) obj3;
                         LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(map.size()));
                         for (Map.Entry entry : map.entrySet()) {
-                            linkedHashMap.put(entry.getKey(), IncrementalKt$$ExternalSyntheticLambda6.this.invoke(evalScope, entry));
+                            linkedHashMap.put(entry.getKey(), incrementalKt$$ExternalSyntheticLambda6.invoke(evalScope, entry));
                         }
                         return linkedHashMap;
                     }
@@ -65,7 +63,7 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                 final Function3 function3 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj2, Object obj3, Object obj4) {
-                        Object obj5;
+                        Object objM2590boximpl;
                         EvalScope evalScope = (EvalScope) obj2;
                         Map map = (Map) obj3;
                         ((Integer) obj4).getClass();
@@ -76,29 +74,29 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                             Maybe maybe = (Maybe) entry.getValue();
                             if (maybe instanceof Maybe.Present) {
                                 Maybe.Companion companion = Maybe.Companion;
-                                Object invoke = IncrementalKt$$ExternalSyntheticLambda6.this.invoke(evalScope, new StoreEntry(key2, ((Maybe.Present) maybe).value));
+                                Object objInvoke = incrementalKt$$ExternalSyntheticLambda6.invoke(evalScope, new StoreEntry(key2, ((Maybe.Present) maybe).value));
                                 companion.getClass();
-                                obj5 = Maybe.Present.m2573boximpl(invoke);
+                                objM2590boximpl = Maybe.Present.m2590boximpl(objInvoke);
                             } else {
                                 if (!(maybe instanceof Maybe.Absent)) {
                                     throw new NoWhenBranchMatchedException();
                                 }
-                                obj5 = Maybe.Absent.INSTANCE;
+                                objM2590boximpl = Maybe.Absent.INSTANCE;
                             }
-                            linkedHashMap.put(key, obj5);
+                            linkedHashMap.put(key, objM2590boximpl);
                         }
                         return linkedHashMap;
                     }
                 };
-                final PullNodesKt$cached$$inlined$EventsImplCheap$1 cached = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$mapValuesImpl$$inlined$mapImpl$1
+                final PullNodesKt$cached$$inlined$EventsImplCheap$1 pullNodesKt$cached$$inlined$EventsImplCheap$1Cached = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$mapValuesImpl$$inlined$mapImpl$1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = ((IncrementalImpl) incrementalKt$$ExternalSyntheticLambda4.mo779invoke(evalScope)).patches.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = ((IncrementalImpl) incrementalKt$$ExternalSyntheticLambda4.mo781invoke(evalScope)).patches.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, function3), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 });
                 final Function3 function32 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$maybeUpdate$2
@@ -106,46 +104,46 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                     public final Object invoke(Object obj2, Object obj3, Object obj4) {
                         EvalScope evalScope = (EvalScope) obj2;
                         ((Number) obj4).intValue();
-                        StateDerived stateDerived = StateDerived.this;
-                        Pair access$applyPatchCalm = IncrementalImplKt.access$applyPatchCalm((Map) stateDerived.getCurrentWithEpoch(evalScope).component1(), (Map) obj3);
-                        if (access$applyPatchCalm != null) {
-                            Map map = (Map) access$applyPatchCalm.component2();
+                        StateDerived stateDerived = derivedMap;
+                        Pair pairAccess$applyPatchCalm = IncrementalImplKt.access$applyPatchCalm((Map) stateDerived.getCurrentWithEpoch(evalScope).component1(), (Map) obj3);
+                        if (pairAccess$applyPatchCalm != null) {
+                            Map map = (Map) pairAccess$applyPatchCalm.component2();
                             long epoch = evalScope.getEpoch();
                             stateDerived.cache = map;
                             long j = epoch + 1;
                             stateDerived.validatedEpoch = j;
                             stateDerived.invalidatedEpoch = j;
                         } else {
-                            access$applyPatchCalm = null;
+                            pairAccess$applyPatchCalm = null;
                         }
-                        if (access$applyPatchCalm == null) {
+                        if (pairAccess$applyPatchCalm == null) {
                             return Maybe.Absent.INSTANCE;
                         }
                         Maybe.Companion.getClass();
-                        return Maybe.Present.m2573boximpl(access$applyPatchCalm);
+                        return Maybe.Present.m2590boximpl(pairAccess$applyPatchCalm);
                     }
                 };
-                final PullNodesKt$cached$$inlined$EventsImplCheap$1 cached2 = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$mapImpl$1
+                final PullNodesKt$cached$$inlined$EventsImplCheap$1 pullNodesKt$cached$$inlined$EventsImplCheap$1Cached2 = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$mapImpl$1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = cached.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = pullNodesKt$cached$$inlined$EventsImplCheap$1Cached.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, function32), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 });
                 final FilterNodeKt$filterPresentImpl$1 filterNodeKt$filterPresentImpl$1 = FilterNodeKt$filterPresentImpl$1.INSTANCE;
                 final DemuxImpl$eventsForKey$$inlined$EventsImplCheap$1 demuxImpl$eventsForKey$$inlined$EventsImplCheap$1 = new DemuxImpl$eventsForKey$$inlined$EventsImplCheap$1(DemuxKt.DemuxImpl(1, new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$filterPresentImpl$1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = cached2.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = pullNodesKt$cached$$inlined$EventsImplCheap$1Cached2.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, filterNodeKt$filterPresentImpl$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 }, new SingletonMapK.Factory()), Unit.INSTANCE);
                 final IncrementalImplKt$calmUpdates$patches$2 incrementalImplKt$calmUpdates$patches$2 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$patches$2
@@ -158,12 +156,12 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                 EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$mapImpl$2
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, incrementalImplKt$calmUpdates$patches$2), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 };
                 final IncrementalImplKt$calmUpdates$changes$2 incrementalImplKt$calmUpdates$changes$2 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$changes$2
@@ -176,12 +174,12 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                 Pair pair = new Pair(eventsImpl, new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$mapImpl$3
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, incrementalImplKt$calmUpdates$changes$2), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 });
                 return new IncrementalImpl("mapValues", "mapValues", (EventsImpl) pair.component2(), (EventsImpl) pair.component1(), derivedMap);

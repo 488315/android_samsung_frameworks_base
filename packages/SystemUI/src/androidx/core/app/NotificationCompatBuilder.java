@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationCompatBuilder {
     public final Notification.Builder mBuilder;
@@ -29,7 +28,7 @@ public class NotificationCompatBuilder {
         Notification.BubbleMetadata bubbleMetadata;
         int i;
         Bundle[] bundleArr;
-        NotificationCompat$Action makeAction;
+        NotificationCompat$Action notificationCompat$ActionMakeAction;
         new ArrayList();
         this.mExtras = new Bundle();
         this.mBuilderCompat = notificationCompat$Builder;
@@ -49,16 +48,16 @@ public class NotificationCompatBuilder {
         if (notificationCompat$Style instanceof NotificationCompat$CallStyle) {
             NotificationCompat$CallStyle notificationCompat$CallStyle = (NotificationCompat$CallStyle) notificationCompat$Style;
             PendingIntent pendingIntent = notificationCompat$CallStyle.mDeclineIntent;
-            NotificationCompat$Action makeAction2 = pendingIntent == null ? notificationCompat$CallStyle.makeAction(R.drawable.ic_call_decline, R.string.call_notification_hang_up_action, notificationCompat$CallStyle.mDeclineButtonColor, R.color.call_notification_decline_color, notificationCompat$CallStyle.mHangUpIntent) : notificationCompat$CallStyle.makeAction(R.drawable.ic_call_decline, R.string.call_notification_decline_action, notificationCompat$CallStyle.mDeclineButtonColor, R.color.call_notification_decline_color, pendingIntent);
+            NotificationCompat$Action notificationCompat$ActionMakeAction2 = pendingIntent == null ? notificationCompat$CallStyle.makeAction(R.drawable.ic_call_decline, R.string.call_notification_hang_up_action, notificationCompat$CallStyle.mDeclineButtonColor, R.color.call_notification_decline_color, notificationCompat$CallStyle.mHangUpIntent) : notificationCompat$CallStyle.makeAction(R.drawable.ic_call_decline, R.string.call_notification_decline_action, notificationCompat$CallStyle.mDeclineButtonColor, R.color.call_notification_decline_color, pendingIntent);
             PendingIntent pendingIntent2 = notificationCompat$CallStyle.mAnswerIntent;
             if (pendingIntent2 == null) {
-                makeAction = null;
+                notificationCompat$ActionMakeAction = null;
             } else {
                 boolean z = notificationCompat$CallStyle.mIsVideo;
-                makeAction = notificationCompat$CallStyle.makeAction(z ? R.drawable.ic_call_answer_video : R.drawable.ic_call_answer, z ? R.string.call_notification_answer_video_action : R.string.call_notification_answer_action, notificationCompat$CallStyle.mAnswerButtonColor, R.color.call_notification_answer_color, pendingIntent2);
+                notificationCompat$ActionMakeAction = notificationCompat$CallStyle.makeAction(z ? R.drawable.ic_call_answer_video : R.drawable.ic_call_answer, z ? R.string.call_notification_answer_video_action : R.string.call_notification_answer_action, notificationCompat$CallStyle.mAnswerButtonColor, R.color.call_notification_answer_color, pendingIntent2);
             }
             ArrayList arrayList = new ArrayList(3);
-            arrayList.add(makeAction2);
+            arrayList.add(notificationCompat$ActionMakeAction2);
             ArrayList arrayList2 = notificationCompat$CallStyle.mBuilder.mActions;
             if (arrayList2 != null) {
                 int size = arrayList2.size();
@@ -73,14 +72,14 @@ public class NotificationCompatBuilder {
                         arrayList.add(notificationCompat$Action);
                         i2--;
                     }
-                    if (makeAction != null && i2 == 1) {
-                        arrayList.add(makeAction);
+                    if (notificationCompat$ActionMakeAction != null && i2 == 1) {
+                        arrayList.add(notificationCompat$ActionMakeAction);
                         i2--;
                     }
                 }
             }
-            if (makeAction != null && i2 >= 1) {
-                arrayList.add(makeAction);
+            if (notificationCompat$ActionMakeAction != null && i2 >= 1) {
+                arrayList.add(notificationCompat$ActionMakeAction);
             }
             int size2 = arrayList.size();
             int i4 = 0;
@@ -133,7 +132,7 @@ public class NotificationCompatBuilder {
             Bundle bundle4 = new Bundle();
             int i7 = 0;
             while (i7 < notificationCompat$Builder.mInvisibleActions.size()) {
-                String num = Integer.toString(i7);
+                String string = Integer.toString(i7);
                 NotificationCompat$Action notificationCompat$Action2 = (NotificationCompat$Action) notificationCompat$Builder.mInvisibleActions.get(i7);
                 Bundle bundle5 = new Bundle();
                 IconCompat iconCompat2 = notificationCompat$Action2.getIconCompat();
@@ -180,7 +179,7 @@ public class NotificationCompatBuilder {
                 bundle5.putParcelableArray("remoteInputs", bundleArr);
                 bundle5.putBoolean("showsUserInterface", notificationCompat$Action2.mShowsUserInterface);
                 bundle5.putInt("semanticAction", notificationCompat$Action2.mSemanticAction);
-                bundle4.putBundle(num, bundle5);
+                bundle4.putBundle(string, bundle5);
                 i7 = i11 + 1;
                 str2 = str4;
                 bundleArr2 = null;
@@ -244,16 +243,16 @@ public class NotificationCompatBuilder {
             android.app.RemoteInput[] remoteInputArr2 = new android.app.RemoteInput[remoteInputArr.length];
             for (int i = 0; i < remoteInputArr.length; i++) {
                 RemoteInput remoteInput = remoteInputArr[i];
-                RemoteInput.Builder addExtras = new RemoteInput.Builder(remoteInput.mResultKey).setLabel(remoteInput.mLabel).setChoices(remoteInput.mChoices).setAllowFreeFormInput(remoteInput.mAllowFreeFormTextInput).addExtras(remoteInput.mExtras);
+                RemoteInput.Builder builderAddExtras = new RemoteInput.Builder(remoteInput.mResultKey).setLabel(remoteInput.mLabel).setChoices(remoteInput.mChoices).setAllowFreeFormInput(remoteInput.mAllowFreeFormTextInput).addExtras(remoteInput.mExtras);
                 Set set = remoteInput.mAllowedDataTypes;
                 if (set != null) {
                     Iterator it = set.iterator();
                     while (it.hasNext()) {
-                        addExtras.setAllowDataType((String) it.next(), true);
+                        builderAddExtras.setAllowDataType((String) it.next(), true);
                     }
                 }
-                addExtras.setEditChoicesBeforeSending(remoteInput.mEditChoicesBeforeSending);
-                remoteInputArr2[i] = addExtras.build();
+                builderAddExtras.setEditChoicesBeforeSending(remoteInput.mEditChoicesBeforeSending);
+                remoteInputArr2[i] = builderAddExtras.build();
             }
             for (android.app.RemoteInput remoteInput2 : remoteInputArr2) {
                 builder.addRemoteInput(remoteInput2);

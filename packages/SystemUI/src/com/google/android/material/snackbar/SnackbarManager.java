@@ -6,7 +6,6 @@ import android.os.Message;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SnackbarManager {
     public static SnackbarManager snackbarManager;
@@ -23,11 +22,9 @@ public class SnackbarManager {
             SnackbarRecord snackbarRecord = (SnackbarRecord) message.obj;
             synchronized (snackbarManager2.lock) {
                 try {
-                    if (snackbarManager2.currentSnackbar != snackbarRecord) {
-                        if (snackbarManager2.nextSnackbar == snackbarRecord) {
-                        }
+                    if (snackbarManager2.currentSnackbar == snackbarRecord || snackbarManager2.nextSnackbar == snackbarRecord) {
+                        snackbarManager2.cancelSnackbarLocked(snackbarRecord, 2);
                     }
-                    snackbarManager2.cancelSnackbarLocked(snackbarRecord, 2);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -36,11 +33,9 @@ public class SnackbarManager {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnackbarRecord {
         public final WeakReference callback;
         public int duration;

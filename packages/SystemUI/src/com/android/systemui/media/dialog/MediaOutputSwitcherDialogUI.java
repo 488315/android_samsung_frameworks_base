@@ -7,7 +7,6 @@ import android.util.Log;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.statusbar.CommandQueue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaOutputSwitcherDialogUI implements CoreStartable, CommandQueue.Callbacks {
     public final CommandQueue mCommandQueue;

@@ -1,5 +1,6 @@
 package com.android.systemui.navigationbar.bandaid.pack;
 
+import android.content.res.Resources;
 import com.android.systemui.BasicRune;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.navigationbar.bandaid.Band;
@@ -22,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SetupWizardPack implements BandAidPack {
     public final List allBands;
@@ -42,9 +42,9 @@ public final class SetupWizardPack implements BandAidPack {
         builder.moduleDependencies = Collections.singletonList(NavigationBarView.class);
         builder.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$band$1$1
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                SetupWizardPack setupWizardPack = SetupWizardPack.this;
+                SetupWizardPack setupWizardPack = this.this$0;
                 if (((NavBarStateManagerImpl) kit.manager).shouldShowSUWStyle()) {
                     ((NavBarStoreImpl) setupWizardPack.store).apply(kit, new NavBarStoreAction.UpdateNavBarSUWStyle(null, 1, null));
                 } else {
@@ -52,58 +52,58 @@ public final class SetupWizardPack implements BandAidPack {
                 }
             }
         };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
-        m.runeDependency = z;
-        m.bandAidDependency = BandAid.SETUPWIZARD_PACK_UPDATE_DISABLE_FLAGS;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnSetDisableFlags.class);
-        m.targetModules = Collections.singletonList(NavigationBar.class);
-        m.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$1$1
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        builderM.runeDependency = z;
+        builderM.bandAidDependency = BandAid.SETUPWIZARD_PACK_UPDATE_DISABLE_FLAGS;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnSetDisableFlags.class);
+        builderM.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                SetupWizardPack setupWizardPack = SetupWizardPack.this;
+                SetupWizardPack setupWizardPack = this.this$0;
                 if (((NavBarStateManagerImpl) kit.manager).shouldShowSUWStyle()) {
                     ((NavBarStoreImpl) setupWizardPack.store).apply(kit, new NavBarStoreAction.UpdateSUWDisabled(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, (((EventTypeFactory.EventType.OnSetDisableFlags) kit.event).disable1 & 4194304) != 0, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388479, null)));
                 }
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m2 = ColorPack$$ExternalSyntheticOutline0.m(m, arrayList);
-        m2.runeDependency = z;
-        m2.bandAidDependency = BandAid.SETUPWIZARD_PACK_UPDATE_DARK_INTENSITY;
-        m2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateDarkIntensity.class);
-        m2.targetModules = Collections.singletonList(NavigationBarTransitions.class);
-        m2.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$2$1
+        Band.Builder builderM2 = ColorPack$$ExternalSyntheticOutline0.m(builderM, arrayList);
+        builderM2.runeDependency = z;
+        builderM2.bandAidDependency = BandAid.SETUPWIZARD_PACK_UPDATE_DARK_INTENSITY;
+        builderM2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateDarkIntensity.class);
+        builderM2.targetModules = Collections.singletonList(NavigationBarTransitions.class);
+        builderM2.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$2$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                SetupWizardPack setupWizardPack = SetupWizardPack.this;
+                SetupWizardPack setupWizardPack = this.this$0;
                 if (((NavBarStateManagerImpl) kit.manager).shouldShowSUWStyle()) {
                     ((NavBarStoreImpl) setupWizardPack.store).apply(kit, new NavBarStoreAction.UpdateSUWDarkIntensity(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, ((EventTypeFactory.EventType.OnUpdateDarkIntensity) kit.event).darkIntensity, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388351, null)));
                 }
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m3 = ColorPack$$ExternalSyntheticOutline0.m(m2, arrayList);
-        m3.runeDependency = z;
-        m3.bandAidDependency = BandAid.SETUPWIZARD_PACK_SET_NAVBAR_ICON_HINT;
-        m3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarIconHintChanged.class);
-        m3.targetModules = Collections.singletonList(NavigationBar.class);
-        m3.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$3$1
+        Band.Builder builderM3 = ColorPack$$ExternalSyntheticOutline0.m(builderM2, arrayList);
+        builderM3.runeDependency = z;
+        builderM3.bandAidDependency = BandAid.SETUPWIZARD_PACK_SET_NAVBAR_ICON_HINT;
+        builderM3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarIconHintChanged.class);
+        builderM3.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM3.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$3$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                SetupWizardPack setupWizardPack = SetupWizardPack.this;
+                SetupWizardPack setupWizardPack = this.this$0;
                 if (((NavBarStateManagerImpl) kit.manager).shouldShowSUWStyle()) {
                     ((NavBarStoreImpl) setupWizardPack.store).apply(kit, new NavBarStoreAction.UpdateSUWIconHints(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, ((EventTypeFactory.EventType.OnNavBarIconHintChanged) kit.event).iconHint, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388095, null)));
                 }
                 return Unit.INSTANCE;
             }
         };
-        arrayList.add(m3.build());
+        arrayList.add(builderM3.build());
         Band.Builder builder2 = new Band.Builder();
         builder2.runeDependency = z;
         builder2.bandAidDependency = BandAid.SETUPWIZARD_PACK_UPDATE_A11Y_SERVICE;
@@ -112,9 +112,9 @@ public final class SetupWizardPack implements BandAidPack {
         builder2.moduleDependencies = Collections.singletonList(NavigationBarView.class);
         builder2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.SetupWizardPack$4$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                SetupWizardPack setupWizardPack = SetupWizardPack.this;
+                SetupWizardPack setupWizardPack = this.this$0;
                 if (((NavBarStateManagerImpl) kit.manager).shouldShowSUWStyle()) {
                     NavBarStore navBarStore2 = setupWizardPack.store;
                     EventTypeFactory.EventType.OnNavBarUpdateA11YService onNavBarUpdateA11YService = (EventTypeFactory.EventType.OnNavBarUpdateA11YService) kit.event;

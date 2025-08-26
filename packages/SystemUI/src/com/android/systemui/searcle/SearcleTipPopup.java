@@ -2,6 +2,7 @@ package com.android.systemui.searcle;
 
 import android.animation.AnimatorSet;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,7 +42,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SearcleTipPopup {
     public SearcleTipAnimHelper animHelper;
@@ -61,7 +61,6 @@ public final class SearcleTipPopup {
     private final SettingsHelper settingsHelper;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,7 +70,6 @@ public final class SearcleTipPopup {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -116,8 +114,8 @@ public final class SearcleTipPopup {
         this.onAttachStateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.android.systemui.searcle.SearcleTipPopup$onAttachStateChangeListener$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                if (Intrinsics.areEqual(view, SearcleTipPopup.this.rootView)) {
-                    SearcleTipPopup searcleTipPopup = SearcleTipPopup.this;
+                if (Intrinsics.areEqual(view, this.this$0.rootView)) {
+                    SearcleTipPopup searcleTipPopup = this.this$0;
                     searcleTipPopup.isTipPopupShowing = true;
                     InputMonitorCompat inputMonitorCompat = searcleTipPopup.inputMonitor;
                     if (inputMonitorCompat != null) {
@@ -137,8 +135,8 @@ public final class SearcleTipPopup {
 
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
-                if (Intrinsics.areEqual(view, SearcleTipPopup.this.rootView)) {
-                    SearcleTipPopup searcleTipPopup = SearcleTipPopup.this;
+                if (Intrinsics.areEqual(view, this.this$0.rootView)) {
+                    SearcleTipPopup searcleTipPopup = this.this$0;
                     searcleTipPopup.isTipPopupShowing = false;
                     InputMonitorCompat inputMonitorCompat = searcleTipPopup.inputMonitor;
                     if (inputMonitorCompat != null) {
@@ -156,7 +154,7 @@ public final class SearcleTipPopup {
         this.inputEventListener = new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.searcle.SearcleTipPopup$inputEventListener$1
             @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
             public final void onInputEvent(InputEvent inputEvent) {
-                SearcleTipPopup searcleTipPopup = SearcleTipPopup.this;
+                SearcleTipPopup searcleTipPopup = this.this$0;
                 SearcleTipLayoutHelper searcleTipLayoutHelper = searcleTipPopup.layoutHelper;
                 if (searcleTipLayoutHelper != null) {
                     Log.d("SearcleTipPopup", "onInputEvent ev = " + inputEvent);
@@ -172,15 +170,12 @@ public final class SearcleTipPopup {
                             int rawY = (int) motionEvent.getRawY();
                             boolean z = searcleTipLayoutHelper.isTablet;
                             int i = searcleTipLayoutHelper.naviBarHeight;
-                            if (z || searcleTipLayoutHelper.isFoldWithMainDisplay) {
+                            if (z || searcleTipLayoutHelper.isFoldWithMainDisplay || !searcleTipLayoutHelper.isNaviBtnAndLandscape) {
                                 rect.top += i;
                                 rect.bottom += i;
-                            } else if (searcleTipLayoutHelper.isNaviBtnAndLandscape) {
+                            } else {
                                 rect.right += i;
                                 rect.left += i;
-                            } else {
-                                rect.top += i;
-                                rect.bottom += i;
                             }
                             if (rect.contains(rawX, rawY)) {
                                 return;
@@ -193,7 +188,7 @@ public final class SearcleTipPopup {
         };
     }
 
-    public static final boolean access$show(final SearcleTipPopup searcleTipPopup) {
+    public static final boolean access$show(final SearcleTipPopup searcleTipPopup) throws Resources.NotFoundException {
         boolean z;
         boolean z2;
         SearcleTipAnimHelper.AnimationType animationType;
@@ -202,23 +197,23 @@ public final class SearcleTipPopup {
         if (searcleTipPopup.isTipPopupShowing && searcleTipPopup.rootView != null) {
             searcleTipPopup.hideImmediate();
         }
-        int i = 0;
+        int measuredHeight = 0;
         if (!searcleTipPopup.isTipPopupShowing && searcleTipPopup.rootView == null) {
             Context context = searcleTipPopup.context;
             int rotation = DeviceState.getRotation(searcleTipPopup.defaultDisplay.getRotation());
-            boolean isTablet = TestHelper.isRoboUnitTest() ? DeviceType.isTablet() : ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
-            boolean isSubDisplay = TestHelper.isRoboUnitTest() ? DeviceState.isSubDisplay(searcleTipPopup.context) : ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isFoldWide();
-            boolean isNavigationBarGestureWhileHidden = searcleTipPopup.settingsHelper.isNavigationBarGestureWhileHidden();
+            boolean zIsTablet = TestHelper.isRoboUnitTest() ? DeviceType.isTablet() : ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
+            boolean zIsSubDisplay = TestHelper.isRoboUnitTest() ? DeviceState.isSubDisplay(searcleTipPopup.context) : ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isFoldWide();
+            boolean zIsNavigationBarGestureWhileHidden = searcleTipPopup.settingsHelper.isNavigationBarGestureWhileHidden();
             int navigationBarAlignPosition = searcleTipPopup.settingsHelper.getNavigationBarAlignPosition();
             NavBarStateManager navBarStateManager = searcleTipPopup.navBarStateManager;
             if (navBarStateManager == null || !((NavBarStateManagerImpl) navBarStateManager).isTaskBarEnabled(false)) {
-                z = isTablet;
+                z = zIsTablet;
                 z2 = false;
             } else {
-                z = isTablet;
+                z = zIsTablet;
                 z2 = true;
             }
-            SearcleTipLayoutHelper searcleTipLayoutHelper = new SearcleTipLayoutHelper(context, rotation, z, isSubDisplay, isNavigationBarGestureWhileHidden, navigationBarAlignPosition, z2);
+            SearcleTipLayoutHelper searcleTipLayoutHelper = new SearcleTipLayoutHelper(context, rotation, z, zIsSubDisplay, zIsNavigationBarGestureWhileHidden, navigationBarAlignPosition, z2);
             Log.d("SearcleTipPopup", "startOpenAnimatorSet layoutHelper = " + searcleTipLayoutHelper);
             searcleTipPopup.layoutHelper = searcleTipLayoutHelper;
             SearcleTipView searcleTipView = searcleTipPopup.rootView;
@@ -226,8 +221,8 @@ public final class SearcleTipPopup {
                 Log.d("SearcleTipPopup", "makeRootLayout remove old tipLayout = " + searcleTipView);
                 searcleTipPopup.hideImmediate();
             }
-            View inflate = LayoutInflater.from(searcleTipPopup.context).inflate(R.layout.searcle_tip_popup, (ViewGroup) null);
-            SearcleTipView searcleTipView2 = inflate instanceof SearcleTipView ? (SearcleTipView) inflate : null;
+            View viewInflate = LayoutInflater.from(searcleTipPopup.context).inflate(R.layout.searcle_tip_popup, (ViewGroup) null);
+            SearcleTipView searcleTipView2 = viewInflate instanceof SearcleTipView ? (SearcleTipView) viewInflate : null;
             searcleTipPopup.rootView = searcleTipView2;
             Log.d("SearcleTipPopup", "makeRootLayout tipLayout = " + searcleTipView2);
             SearcleTipView searcleTipView3 = searcleTipPopup.rootView;
@@ -245,55 +240,55 @@ public final class SearcleTipPopup {
                 if (linearLayout != null) {
                     ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();
                     FrameLayout.LayoutParams layoutParams2 = layoutParams instanceof FrameLayout.LayoutParams ? (FrameLayout.LayoutParams) layoutParams : null;
-                    int i2 = searcleTipLayoutHelper.bubbleLayoutWidth;
+                    int i = searcleTipLayoutHelper.bubbleLayoutWidth;
                     if (layoutParams2 != null) {
                         int dimensionPixelSize = searcleTipLayoutHelper.context.getResources().getDimensionPixelSize(R.dimen.tips_margin_without_offset);
-                        int i3 = SearcleTipLayoutHelper.WhenMappings.$EnumSwitchMapping$1[directionType.ordinal()];
-                        if (i3 == 1) {
+                        int i2 = SearcleTipLayoutHelper.WhenMappings.$EnumSwitchMapping$1[directionType.ordinal()];
+                        if (i2 == 1) {
                             layoutParams2.bottomMargin = dimensionPixelSize;
-                        } else if (i3 == 2) {
+                        } else if (i2 == 2) {
                             layoutParams2.setMarginEnd(dimensionPixelSize);
-                        } else if (i3 == 3) {
+                        } else if (i2 == 3) {
                             layoutParams2.setMarginStart(dimensionPixelSize);
-                        } else if (i3 == 4) {
+                        } else if (i2 == 4) {
                             layoutParams2.bottomMargin = dimensionPixelSize;
                             layoutParams2.setMarginEnd(searcleTipLayoutHelper.context.getResources().getDimensionPixelSize(R.dimen.tips_margin));
                         } else {
-                            if (i3 != 5) {
+                            if (i2 != 5) {
                                 throw new NoWhenBranchMatchedException();
                             }
                             layoutParams2.bottomMargin = dimensionPixelSize;
                             layoutParams2.setMarginStart(searcleTipLayoutHelper.context.getResources().getDimensionPixelSize(R.dimen.tips_margin));
                         }
                         layoutParams2.gravity = searcleTipLayoutHelper.gravity;
-                        layoutParams2.width = i2;
+                        layoutParams2.width = i;
                     }
                     View rootView = linearLayout.getRootView();
                     if (rootView != null) {
                         rootView.measure(0, 0);
-                        i = rootView.getMeasuredHeight();
+                        measuredHeight = rootView.getMeasuredHeight();
                     }
                     boolean z3 = searcleTipLayoutHelper.isTablet;
                     boolean z4 = searcleTipLayoutHelper.isNaviBtnAndLandscape;
                     boolean z5 = searcleTipLayoutHelper.isFoldWithMainDisplay;
-                    linearLayout.setPivotX((z3 || z5 || !z4) ? i2 / 2.0f : searcleTipLayoutHelper.rotation == 1 ? i2 : 0.0f);
-                    linearLayout.setPivotY((z3 || z5 || !z4) ? i : i / 2.0f);
+                    linearLayout.setPivotX((z3 || z5 || !z4) ? i / 2.0f : searcleTipLayoutHelper.rotation == 1 ? i : 0.0f);
+                    linearLayout.setPivotY((z3 || z5 || !z4) ? measuredHeight : measuredHeight / 2.0f);
                 }
                 SearcleTipView searcleTipView5 = searcleTipPopup.rootView;
                 LinearLayout linearLayout2 = searcleTipView5 != null ? (LinearLayout) searcleTipView5.findViewById(R.id.searcle_tip_content) : null;
                 searcleTipPopup.contentLayout = linearLayout2;
                 LinearLayout linearLayout3 = searcleTipPopup.bubbleLayout;
-                int i4 = WhenMappings.$EnumSwitchMapping$0[directionType.ordinal()];
-                if (i4 == 1) {
+                int i3 = WhenMappings.$EnumSwitchMapping$0[directionType.ordinal()];
+                if (i3 == 1) {
                     animationType = SearcleTipAnimHelper.AnimationType.TransY;
-                } else if (i4 == 2) {
+                } else if (i3 == 2) {
                     animationType = SearcleTipAnimHelper.AnimationType.TransXOnLTR;
-                } else if (i4 == 3) {
+                } else if (i3 == 3) {
                     animationType = SearcleTipAnimHelper.AnimationType.TransXOnRTL;
-                } else if (i4 == 4) {
+                } else if (i3 == 4) {
                     animationType = SearcleTipAnimHelper.AnimationType.TransXYOnLTR;
                 } else {
-                    if (i4 != 5) {
+                    if (i3 != 5) {
                         throw new NoWhenBranchMatchedException();
                     }
                     animationType = SearcleTipAnimHelper.AnimationType.TransXYOnRTL;
@@ -302,7 +297,7 @@ public final class SearcleTipPopup {
                     SearcleTipAnimHelper searcleTipAnimHelper = new SearcleTipAnimHelper(searcleTipPopup.context, new Runnable() { // from class: com.android.systemui.searcle.SearcleTipPopup$makeAnimHelper$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SearcleTipPopup searcleTipPopup2 = SearcleTipPopup.this;
+                            SearcleTipPopup searcleTipPopup2 = this.this$0;
                             Log.d("SearcleTipPopup", "addView rootView = " + searcleTipPopup2.rootView);
                             WindowManager windowManager = searcleTipPopup2.windowManager;
                             if (windowManager != null) {
@@ -318,7 +313,7 @@ public final class SearcleTipPopup {
                     }, new Runnable() { // from class: com.android.systemui.searcle.SearcleTipPopup$makeAnimHelper$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SearcleTipPopup.this.hideImmediate();
+                            this.this$0.hideImmediate();
                         }
                     }, linearLayout3, linearLayout2);
                     searcleTipAnimHelper.showAnimList.clear();
@@ -386,11 +381,11 @@ public final class SearcleTipPopup {
 
     public final void showSearcleTip(final boolean z) {
         EmergencyButtonController$$ExternalSyntheticOutline0.m("showSearcleTip isRetryShowing = ", "SearcleTipPopup", z);
-        this.handler.post(new Runnable() { // from class: com.android.systemui.searcle.SearcleTipPopup$showSearcleTip$1
+        this.handler.post(new Runnable() { // from class: com.android.systemui.searcle.SearcleTipPopup.showSearcleTip.1
             @Override // java.lang.Runnable
-            public final void run() {
-                boolean access$show = SearcleTipPopup.access$show(SearcleTipPopup.this);
-                if (z || !access$show) {
+            public final void run() throws Resources.NotFoundException {
+                boolean zAccess$show = SearcleTipPopup.access$show(SearcleTipPopup.this);
+                if (z || !zAccess$show) {
                     return;
                 }
                 SearcleTipPopupUtil searcleTipPopupUtil = SearcleTipPopupUtil.INSTANCE;

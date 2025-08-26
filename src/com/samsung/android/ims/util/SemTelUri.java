@@ -15,13 +15,13 @@ public class SemTelUri extends GenericURI {
         if (str == null || !str.startsWith(WebView.SCHEME_TEL)) {
             return null;
         }
-        String replaceAll = str.replaceAll("\\s+", "");
-        int indexOf = replaceAll.indexOf(59);
-        if (indexOf < 0) {
-            return new SemTelUri(replaceAll.substring(4), null);
+        String strReplaceAll = str.replaceAll("\\s+", "");
+        int iIndexOf = strReplaceAll.indexOf(59);
+        if (iIndexOf < 0) {
+            return new SemTelUri(strReplaceAll.substring(4), null);
         }
-        int indexOf2 = replaceAll.indexOf("phone-context");
-        return new SemTelUri(replaceAll.substring(4, indexOf), indexOf2 > 0 ? replaceAll.substring(indexOf2 + 14) : null);
+        int iIndexOf2 = strReplaceAll.indexOf("phone-context");
+        return new SemTelUri(strReplaceAll.substring(4, iIndexOf), iIndexOf2 > 0 ? strReplaceAll.substring(iIndexOf2 + 14) : null);
     }
 
     public SemTelUri(String str, String str2) {

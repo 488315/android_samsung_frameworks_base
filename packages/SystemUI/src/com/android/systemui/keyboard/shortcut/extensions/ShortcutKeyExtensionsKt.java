@@ -10,11 +10,10 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ShortcutKeyExtensionsKt {
     public static final String toContentDescription(ShortcutKey shortcutKey, Context context) {
-        Object obj;
+        Object next;
         Function1 function1;
         String string = context.getString(R.string.shortcut_helper_key_combinations_forward_slash);
         if (shortcutKey instanceof ShortcutKey.Text) {
@@ -34,21 +33,21 @@ public abstract class ShortcutKeyExtensionsKt {
                 Iterator it = ShortcutHelperKeys.keyIcons.entrySet().iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it.next();
-                    if (((Number) ((Map.Entry) obj).getValue()).intValue() == resIdIcon.drawableResId) {
+                    next = it.next();
+                    if (((Number) ((Map.Entry) next).getValue()).intValue() == resIdIcon.drawableResId) {
                         break;
                     }
                 }
-                Map.Entry entry = (Map.Entry) obj;
+                Map.Entry entry = (Map.Entry) next;
                 Integer num = entry != null ? (Integer) entry.getKey() : null;
                 ShortcutHelperKeys.INSTANCE.getClass();
                 function1 = (Function1) ShortcutHelperKeys.specialKeyLabels.get(num);
             }
             if (function1 != null) {
-                return (String) function1.mo779invoke(context);
+                return (String) function1.mo781invoke(context);
             }
         } else if (!(shortcutKey instanceof ShortcutKey.Icon.DrawableIcon)) {
             throw new NoWhenBranchMatchedException();

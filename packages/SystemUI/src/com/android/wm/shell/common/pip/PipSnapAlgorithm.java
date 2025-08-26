@@ -2,7 +2,6 @@ package com.android.wm.shell.common.pip;
 
 import android.graphics.Rect;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipSnapAlgorithm {
     public static void applySnapFraction(Rect rect, Rect rect2, float f) {
@@ -22,10 +21,10 @@ public class PipSnapAlgorithm {
     public final float getSnapFraction(int i, Rect rect, Rect rect2) {
         Rect rect3 = new Rect();
         snapRectToClosestEdge(rect, rect2, rect3, i);
-        float width = (rect3.left - rect2.left) / rect2.width();
-        float height = (rect3.top - rect2.top) / rect2.height();
+        float fWidth = (rect3.left - rect2.left) / rect2.width();
+        float fHeight = (rect3.top - rect2.top) / rect2.height();
         int i2 = rect3.top;
-        return i2 == rect2.top ? width : rect3.left == rect2.right ? height + 1.0f : i2 == rect2.bottom ? (1.0f - width) + 2.0f : (1.0f - height) + 3.0f;
+        return i2 == rect2.top ? fWidth : rect3.left == rect2.right ? fHeight + 1.0f : i2 == rect2.bottom ? (1.0f - fWidth) + 2.0f : (1.0f - fHeight) + 3.0f;
     }
 
     public void snapRectToClosestEdge(Rect rect, Rect rect2, Rect rect3, int i) {
@@ -35,36 +34,36 @@ public class PipSnapAlgorithm {
         } else if (i == 2) {
             i2 = rect2.right;
         }
-        int max = Math.max(rect2.left, Math.min(rect2.right, i2));
-        int max2 = Math.max(rect2.top, Math.min(rect2.bottom, rect.top));
+        int iMax = Math.max(rect2.left, Math.min(rect2.right, i2));
+        int iMax2 = Math.max(rect2.top, Math.min(rect2.bottom, rect.top));
         rect3.set(rect);
-        int abs = Math.abs(i2 - rect2.left);
-        int abs2 = Math.abs(rect.top - rect2.top);
-        int abs3 = Math.abs(rect2.right - i2);
-        int min = Math.min(Math.min(abs, abs3), Math.min(abs2, Math.abs(rect2.bottom - rect.top)));
-        if (min == abs) {
-            rect3.offsetTo(rect2.left, max2);
+        int iAbs = Math.abs(i2 - rect2.left);
+        int iAbs2 = Math.abs(rect.top - rect2.top);
+        int iAbs3 = Math.abs(rect2.right - i2);
+        int iMin = Math.min(Math.min(iAbs, iAbs3), Math.min(iAbs2, Math.abs(rect2.bottom - rect.top)));
+        if (iMin == iAbs) {
+            rect3.offsetTo(rect2.left, iMax2);
             return;
         }
-        if (min == abs2) {
-            rect3.offsetTo(max, rect2.top);
-        } else if (min == abs3) {
-            rect3.offsetTo(rect2.right, max2);
+        if (iMin == iAbs2) {
+            rect3.offsetTo(iMax, rect2.top);
+        } else if (iMin == iAbs3) {
+            rect3.offsetTo(rect2.right, iMax2);
         } else {
-            rect3.offsetTo(max, rect2.bottom);
+            rect3.offsetTo(iMax, rect2.bottom);
         }
     }
 
     public static void applySnapFraction(Rect rect, Rect rect2, float f, int i, int i2, Rect rect3, Rect rect4) {
-        int i3;
+        int iWidth;
         applySnapFraction(rect, rect2, f);
         if (i != 0) {
             if (i == 1) {
-                i3 = (i2 - rect.width()) + rect4.left;
+                iWidth = (i2 - rect.width()) + rect4.left;
             } else {
-                i3 = (rect3.right - i2) - rect4.right;
+                iWidth = (rect3.right - i2) - rect4.right;
             }
-            rect.offsetTo(i3, rect.top);
+            rect.offsetTo(iWidth, rect.top);
         }
     }
 }

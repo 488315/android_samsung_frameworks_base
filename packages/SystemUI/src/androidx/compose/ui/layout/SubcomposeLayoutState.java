@@ -13,7 +13,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SubcomposeLayoutState {
     public LayoutNodeSubcompositionsState _state;
@@ -32,16 +31,16 @@ public final class SubcomposeLayoutState {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 LayoutNode layoutNode = (LayoutNode) obj;
-                SubcomposeLayoutState subcomposeLayoutState = SubcomposeLayoutState.this;
+                SubcomposeLayoutState subcomposeLayoutState = this.this$0;
                 LayoutNodeSubcompositionsState layoutNodeSubcompositionsState = layoutNode.subcompositionsState;
                 if (layoutNodeSubcompositionsState == null) {
                     layoutNodeSubcompositionsState = new LayoutNodeSubcompositionsState(layoutNode, subcomposeLayoutState.slotReusePolicy);
                     layoutNode.subcompositionsState = layoutNodeSubcompositionsState;
                 }
                 subcomposeLayoutState._state = layoutNodeSubcompositionsState;
-                SubcomposeLayoutState.this.getState().makeSureStateIsConsistent();
-                LayoutNodeSubcompositionsState state = SubcomposeLayoutState.this.getState();
-                SubcomposeSlotReusePolicy subcomposeSlotReusePolicy2 = SubcomposeLayoutState.this.slotReusePolicy;
+                this.this$0.getState().makeSureStateIsConsistent();
+                LayoutNodeSubcompositionsState state = this.this$0.getState();
+                SubcomposeSlotReusePolicy subcomposeSlotReusePolicy2 = this.this$0.slotReusePolicy;
                 if (state.slotReusePolicy != subcomposeSlotReusePolicy2) {
                     state.slotReusePolicy = subcomposeSlotReusePolicy2;
                     state.markActiveNodesAsReused(false);
@@ -57,7 +56,7 @@ public final class SubcomposeLayoutState {
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                SubcomposeLayoutState.this.getState().compositionContext = (CompositionContext) obj2;
+                this.this$0.getState().compositionContext = (CompositionContext) obj2;
                 return Unit.INSTANCE;
             }
         };
@@ -69,22 +68,22 @@ public final class SubcomposeLayoutState {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 final Function2 function2 = (Function2) obj2;
-                final LayoutNodeSubcompositionsState state = SubcomposeLayoutState.this.getState();
+                final LayoutNodeSubcompositionsState state = this.this$0.getState();
                 ((LayoutNode) obj).setMeasurePolicy(new LayoutNode.NoIntrinsicsMeasurePolicy(state.NoIntrinsicsMessage) { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState$createMeasurePolicy$1
                     @Override // androidx.compose.ui.layout.MeasurePolicy
                     /* renamed from: measure-3p2s80s */
                     public final MeasureResult mo3measure3p2s80s(MeasureScope measureScope, List list, long j) {
-                        final LayoutNodeSubcompositionsState layoutNodeSubcompositionsState = LayoutNodeSubcompositionsState.this;
+                        final LayoutNodeSubcompositionsState layoutNodeSubcompositionsState = state;
                         layoutNodeSubcompositionsState.scope.layoutDirection = measureScope.getLayoutDirection();
                         float density = measureScope.getDensity();
                         LayoutNodeSubcompositionsState.Scope scope = layoutNodeSubcompositionsState.scope;
                         scope.density = density;
                         scope.fontScale = measureScope.getFontScale();
-                        boolean isLookingAhead = measureScope.isLookingAhead();
+                        boolean zIsLookingAhead = measureScope.isLookingAhead();
                         Function2 function22 = function2;
-                        if (isLookingAhead || layoutNodeSubcompositionsState.root.lookaheadRoot == null) {
+                        if (zIsLookingAhead || layoutNodeSubcompositionsState.root.lookaheadRoot == null) {
                             layoutNodeSubcompositionsState.currentIndex = 0;
-                            final MeasureResult measureResult = (MeasureResult) function22.invoke(scope, Constraints.m813boximpl(j));
+                            final MeasureResult measureResult = (MeasureResult) function22.invoke(scope, Constraints.m815boximpl(j));
                             final int i = layoutNodeSubcompositionsState.currentIndex;
                             return new MeasureResult() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState$createMeasurePolicy$1$measure-3p2s80s$$inlined$createMeasureResult$2
                                 @Override // androidx.compose.ui.layout.MeasureResult
@@ -117,7 +116,7 @@ public final class SubcomposeLayoutState {
                             };
                         }
                         layoutNodeSubcompositionsState.currentApproachIndex = 0;
-                        final MeasureResult measureResult2 = (MeasureResult) function22.invoke(layoutNodeSubcompositionsState.approachMeasureScope, Constraints.m813boximpl(j));
+                        final MeasureResult measureResult2 = (MeasureResult) function22.invoke(layoutNodeSubcompositionsState.approachMeasureScope, Constraints.m815boximpl(j));
                         final int i2 = layoutNodeSubcompositionsState.currentApproachIndex;
                         return new MeasureResult() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState$createMeasurePolicy$1$measure-3p2s80s$$inlined$createMeasureResult$1
                             @Override // androidx.compose.ui.layout.MeasureResult
@@ -161,8 +160,8 @@ public final class SubcomposeLayoutState {
                                                 int i6 = (i3 << 3) + i5;
                                                 Object obj3 = mutableScatterMap.keys[i6];
                                                 SubcomposeLayoutState.PrecomposedSlotHandle precomposedSlotHandle = (SubcomposeLayoutState.PrecomposedSlotHandle) mutableScatterMap.values[i6];
-                                                int indexOf = layoutNodeSubcompositionsState2.approachComposedSlotIds.indexOf(obj3);
-                                                if (indexOf < 0 || indexOf >= layoutNodeSubcompositionsState2.currentApproachIndex) {
+                                                int iIndexOf = layoutNodeSubcompositionsState2.approachComposedSlotIds.indexOf(obj3);
+                                                if (iIndexOf < 0 || iIndexOf >= layoutNodeSubcompositionsState2.currentApproachIndex) {
                                                     precomposedSlotHandle.dispose();
                                                     mutableScatterMap.removeValueAt(i6);
                                                 }
@@ -206,7 +205,6 @@ public final class SubcomposeLayoutState {
         SubcomposeLayoutKt$ReusedSlotId$1 subcomposeLayoutKt$ReusedSlotId$1 = SubcomposeLayoutKt.ReusedSlotId;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PrecomposedSlotHandle {
         void dispose();
 
@@ -215,7 +213,7 @@ public final class SubcomposeLayoutState {
         }
 
         /* renamed from: getSize-YEO4UFw */
-        default long mo620getSizeYEO4UFw(int i) {
+        default long mo622getSizeYEO4UFw(int i) {
             IntSize.Companion.getClass();
             return 0L;
         }
@@ -224,7 +222,7 @@ public final class SubcomposeLayoutState {
         }
 
         /* renamed from: premeasure-0kLqBqw */
-        default void mo621premeasure0kLqBqw(int i, long j) {
+        default void mo623premeasure0kLqBqw(int i, long j) {
         }
     }
 }

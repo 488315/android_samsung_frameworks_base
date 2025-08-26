@@ -3,7 +3,6 @@ package com.android.systemui.volume.panel.component.mediaoutput.ui.viewmodel;
 import com.android.systemui.common.shared.model.Color;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConnectedDeviceViewModel {
     public final CharSequence deviceName;
@@ -30,9 +29,9 @@ public final class ConnectedDeviceViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = (this.labelColor.hashCode() + (this.label.hashCode() * 31)) * 31;
+        int iHashCode = (this.labelColor.hashCode() + (this.label.hashCode() * 31)) * 31;
         CharSequence charSequence = this.deviceName;
-        return this.deviceNameColor.hashCode() + ((hashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31);
+        return this.deviceNameColor.hashCode() + ((iHashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31);
     }
 
     public final String toString() {

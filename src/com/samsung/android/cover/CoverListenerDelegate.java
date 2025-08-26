@@ -32,10 +32,10 @@ class CoverListenerDelegate extends ICoverManagerCallback.Stub {
 
     @Override // com.samsung.android.cover.ICoverManagerCallback
     public void coverCallback(CoverState coverState) throws RemoteException {
-        Message obtain = Message.obtain();
-        obtain.what = 0;
-        obtain.obj = coverState;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 0;
+        messageObtain.obj = coverState;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     @Override // com.samsung.android.cover.ICoverManagerCallback

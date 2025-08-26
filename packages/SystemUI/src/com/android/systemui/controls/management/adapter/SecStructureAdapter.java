@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecStructureAdapter extends RecyclerView.Adapter {
     public final AUIFacade auiFacade;
@@ -42,7 +41,6 @@ public final class SecStructureAdapter extends RecyclerView.Adapter {
     public final LayoutUtil layoutUtil;
     public StructureModel model;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -102,7 +100,7 @@ public final class SecStructureAdapter extends RecyclerView.Adapter {
             @Override // androidx.recyclerview.widget.LinearLayoutManager, androidx.recyclerview.widget.RecyclerView.LayoutManager
             public final void onLayoutCompleted(RecyclerView.State state) {
                 super.onLayoutCompleted(state);
-                SecStructureAdapter secStructureAdapter = SecStructureAdapter.this;
+                SecStructureAdapter secStructureAdapter = this.this$0;
                 Consumer consumer = secStructureAdapter.layoutCompletedCallback;
                 if (consumer != null) {
                     consumer.accept(this);
@@ -123,12 +121,12 @@ public final class SecStructureAdapter extends RecyclerView.Adapter {
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        LayoutInflater from = LayoutInflater.from(viewGroup.getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(viewGroup.getContext());
         if (i == 1) {
-            return new StructureControlHolder(from.inflate(R.layout.controls_structure_view, viewGroup, false), this.currentUserId, this.layoutUtil, this.controlsUtil);
+            return new StructureControlHolder(layoutInflaterFrom.inflate(R.layout.controls_structure_view, viewGroup, false), this.currentUserId, this.layoutUtil, this.controlsUtil);
         }
         if (i == 2) {
-            return new StructureControlReorderHolder(from.inflate(R.layout.controls_structure_reorder_header, viewGroup, false), new Consumer() { // from class: com.android.systemui.controls.management.adapter.SecStructureAdapter$onCreateViewHolder$1
+            return new StructureControlReorderHolder(layoutInflaterFrom.inflate(R.layout.controls_structure_reorder_header, viewGroup, false), new Consumer() { // from class: com.android.systemui.controls.management.adapter.SecStructureAdapter.onCreateViewHolder.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     StructureControlReorderHolder structureControlReorderHolder = (StructureControlReorderHolder) obj;
@@ -160,13 +158,13 @@ public final class SecStructureAdapter extends RecyclerView.Adapter {
             });
         }
         if (i == 3) {
-            return new StructureControlPaddingHolder(from.inflate(R.layout.controls_empty_padding, viewGroup, false));
+            return new StructureControlPaddingHolder(layoutInflaterFrom.inflate(R.layout.controls_empty_padding, viewGroup, false));
         }
         if (i == 4) {
-            return new StructureControlSubtitleHolder(from.inflate(R.layout.controls_sub_title_view, viewGroup, false));
+            return new StructureControlSubtitleHolder(layoutInflaterFrom.inflate(R.layout.controls_sub_title_view, viewGroup, false));
         }
         if (i == 100) {
-            return new StructureControlLoadingHolder(from.inflate(R.layout.controls_loading_view, viewGroup, false));
+            return new StructureControlLoadingHolder(layoutInflaterFrom.inflate(R.layout.controls_loading_view, viewGroup, false));
         }
         throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Wrong viewType: "));
     }

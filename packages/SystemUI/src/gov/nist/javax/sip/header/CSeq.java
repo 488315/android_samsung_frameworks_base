@@ -5,7 +5,6 @@ import gov.nist.javax.sip.message.SIPRequest;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.CSeqHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CSeq extends SIPHeader implements CSeqHeader {
     private static final long serialVersionUID = -5405798080040422910L;
@@ -50,7 +49,7 @@ public class CSeq extends SIPHeader implements CSeqHeader {
         this.method = SIPRequest.getCannonicalName(str);
     }
 
-    public final void setSeqNumber(long j) {
+    public final void setSeqNumber(long j) throws InvalidArgumentException {
         if (j < 0) {
             throw new InvalidArgumentException(ValueAnimator$$ExternalSyntheticOutline0.m("JAIN-SIP Exception, CSeq, setSequenceNumber(), the sequence number parameter is < 0 : ", j));
         }

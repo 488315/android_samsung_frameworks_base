@@ -7,7 +7,6 @@ import java.util.HashMap;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumeStreamState {
     public static final int $stable = 8;
@@ -18,7 +17,6 @@ public final class VolumeStreamState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BooleanStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ BooleanStateKey[] $VALUES;
@@ -41,9 +39,9 @@ public final class VolumeStreamState {
         }
 
         static {
-            BooleanStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            BooleanStateKey[] booleanStateKeyArr$values = $values();
+            $VALUES = booleanStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(booleanStateKeyArr$values);
         }
 
         private BooleanStateKey(String str, int i) {
@@ -64,7 +62,6 @@ public final class VolumeStreamState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntegerStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ IntegerStateKey[] $VALUES;
@@ -77,9 +74,9 @@ public final class VolumeStreamState {
         }
 
         static {
-            IntegerStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            IntegerStateKey[] integerStateKeyArr$values = $values();
+            $VALUES = integerStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(integerStateKeyArr$values);
         }
 
         private IntegerStateKey(String str, int i) {
@@ -100,7 +97,6 @@ public final class VolumeStreamState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StringStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ StringStateKey[] $VALUES;
@@ -114,9 +110,9 @@ public final class VolumeStreamState {
         }
 
         static {
-            StringStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            StringStateKey[] stringStateKeyArr$values = $values();
+            $VALUES = stringStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(stringStateKeyArr$values);
         }
 
         private StringStateKey(String str, int i) {
@@ -242,17 +238,17 @@ public final class VolumeStreamState {
 
     public String toString() {
         int i = this.streamType;
-        boolean isDynamic = isDynamic();
-        boolean isMuted = isMuted();
-        boolean isMuteSupport = isMuteSupport();
-        boolean isRoutedToBt = isRoutedToBt();
-        boolean isRoutedToBuds = isRoutedToBuds();
-        boolean isRoutedToAppMirroring = isRoutedToAppMirroring();
-        boolean isRoutedToHeadset = isRoutedToHeadset();
-        boolean isMuted2 = isMuted();
-        boolean isMuteSupport2 = isMuteSupport();
-        boolean isRoutedToBt2 = isRoutedToBt();
-        boolean isDisabledFixedSession = isDisabledFixedSession();
+        boolean zIsDynamic = isDynamic();
+        boolean zIsMuted = isMuted();
+        boolean zIsMuteSupport = isMuteSupport();
+        boolean zIsRoutedToBt = isRoutedToBt();
+        boolean zIsRoutedToBuds = isRoutedToBuds();
+        boolean zIsRoutedToAppMirroring = isRoutedToAppMirroring();
+        boolean zIsRoutedToHeadset = isRoutedToHeadset();
+        boolean zIsMuted2 = isMuted();
+        boolean zIsMuteSupport2 = isMuteSupport();
+        boolean zIsRoutedToBt2 = isRoutedToBt();
+        boolean zIsDisabledFixedSession = isDisabledFixedSession();
         int level = getLevel();
         int min = getMin();
         int max = getMax();
@@ -260,23 +256,22 @@ public final class VolumeStreamState {
         String dualBtDeviceName = getDualBtDeviceName();
         String remoteLabel = getRemoteLabel();
         String nameRes = getNameRes();
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("[stream=", i, "] isDynamic=", isDynamic, ", isMuted=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isMuted, ", isMuteSupport=", isMuteSupport, ", isRoutedToBt=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isRoutedToBt, ", isRoutedToBuds=", isRoutedToBuds, ", isRoutedToAppMirroring=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isRoutedToAppMirroring, ", isRoutedToHeadset=", isRoutedToHeadset, ", isMuted=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isMuted2, ", isMuteSupport=", isMuteSupport2, ", isRoutedToBt=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isRoutedToBt2, ", isDisabledFixedSession=", isDisabledFixedSession, ", level=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, level, ", min=", min, ", max=");
-        m.append(max);
-        m.append(", dualBtDeviceAddress=");
-        m.append(dualBtDeviceAddress);
-        m.append(", dualBtDeviceName=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, dualBtDeviceName, ", remoteLabel=", remoteLabel, ", nameRes=");
-        m.append(nameRes);
-        return m.toString();
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("[stream=", i, "] isDynamic=", zIsDynamic, ", isMuted=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsMuted, ", isMuteSupport=", zIsMuteSupport, ", isRoutedToBt=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsRoutedToBt, ", isRoutedToBuds=", zIsRoutedToBuds, ", isRoutedToAppMirroring=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsRoutedToAppMirroring, ", isRoutedToHeadset=", zIsRoutedToHeadset, ", isMuted=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsMuted2, ", isMuteSupport=", zIsMuteSupport2, ", isRoutedToBt=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsRoutedToBt2, ", isDisabledFixedSession=", zIsDisabledFixedSession, ", level=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, level, ", min=", min, ", max=");
+        sbM.append(max);
+        sbM.append(", dualBtDeviceAddress=");
+        sbM.append(dualBtDeviceAddress);
+        sbM.append(", dualBtDeviceName=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, dualBtDeviceName, ", remoteLabel=", remoteLabel, ", nameRes=");
+        sbM.append(nameRes);
+        return sbM.toString();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final int $stable = 8;
         private VolumeStreamState volumeStreamState;

@@ -39,8 +39,8 @@ public final class DsmccRequest extends BroadcastInfoRequest implements Parcelab
 
     DsmccRequest(Parcel parcel) {
         super(6, parcel);
-        String readString = parcel.readString();
-        this.mUri = readString == null ? null : Uri.parse(readString);
+        String string = parcel.readString();
+        this.mUri = string == null ? null : Uri.parse(string);
     }
 
     public Uri getUri() {

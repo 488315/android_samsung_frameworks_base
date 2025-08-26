@@ -44,9 +44,9 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICommunicationDeviceDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICommunicationDeviceDispatcher)) {
-                return (ICommunicationDeviceDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICommunicationDeviceDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICommunicationDeviceDispatcher)) {
+                return (ICommunicationDeviceDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                dispatchCommunicationDeviceChanged(readInt);
+                dispatchCommunicationDeviceChanged(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
 
             @Override // android.media.ICommunicationDeviceDispatcher
             public void dispatchCommunicationDeviceChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICommunicationDeviceDispatcher.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICommunicationDeviceDispatcher.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

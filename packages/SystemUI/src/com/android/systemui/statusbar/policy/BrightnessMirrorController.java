@@ -1,21 +1,23 @@
 package com.android.systemui.statusbar.policy;
 
+import android.animation.ValueAnimator;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.android.systemui.R;
+import com.android.systemui.blur.SecQpBlurController;
 import com.android.systemui.qs.bar.BrightnessBar;
 import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.settings.brightness.MirrorController;
+import com.android.systemui.settings.brightness.SecBrightnessSliderController;
 import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.shade.ShadeViewController;
 import com.android.systemui.statusbar.NotificationShadeDepthController;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessMirrorController implements MirrorController {
     public FrameLayout mBrightnessMirror;
@@ -54,6 +56,9 @@ public class BrightnessMirrorController implements MirrorController {
 
     @Override // com.android.systemui.settings.brightness.MirrorController
     public final void hideMirror() {
+        SecBrightnessSliderController secBrightnessSliderController;
+        SecBrightnessSliderController secBrightnessSliderController2;
+        SecQpBlurController secQpBlurController;
         this.mVisibilityCallback.accept(Boolean.FALSE);
         this.mNotificationPanel.setAlpha(255, true);
         NotificationShadeDepthController.DepthAnimation depthAnimation = this.mDepthController.brightnessMirrorSpring;
@@ -63,18 +68,36 @@ public class BrightnessMirrorController implements MirrorController {
         }
         SecBrightnessMirrorController secBrightnessMirrorController = this.mSecBrightnessMirrorController;
         if (secBrightnessMirrorController != null) {
-            secBrightnessMirrorController.hideMirror();
+            FrameLayout frameLayout = secBrightnessMirrorController.brightnessMirror;
+            if (frameLayout != null) {
+                frameLayout.setVisibility(4);
+            }
+            QuickPanelBlur quickPanelBlur = secBrightnessMirrorController.quickPanelBlur;
+            if (quickPanelBlur != null && (secQpBlurController = (SecQpBlurController) quickPanelBlur.blurController$delegate.getValue()) != null) {
+                secQpBlurController.setBrightnessMirrorVisible(false);
+            }
+            BrightnessSliderController brightnessSliderController = secBrightnessMirrorController.toggleSliderController;
+            if (brightnessSliderController != null && (secBrightnessSliderController2 = brightnessSliderController.mSecBrightnessSliderController) != null) {
+                QuickTileBrightnessMirrorDummyView quickTileBrightnessMirrorDummyView = secBrightnessMirrorController.quickTileBrightnessMirrorDummyView;
+                secBrightnessSliderController2.isExpanded = quickTileBrightnessMirrorDummyView != null ? quickTileBrightnessMirrorDummyView.expanded : false;
+            }
+            if (brightnessSliderController == null || (secBrightnessSliderController = brightnessSliderController.mSecBrightnessSliderController) == null) {
+                return;
+            }
+            ValueAnimator valueAnimator = secBrightnessSliderController.thumbAnimator;
+            secBrightnessSliderController.isThumbShowing = false;
+            valueAnimator.reverse();
         }
     }
 
     public final void reinflate$1() {
         FrameLayout frameLayout = this.mBrightnessMirror;
         NotificationShadeWindowView notificationShadeWindowView = this.mStatusBarWindow;
-        int indexOfChild = notificationShadeWindowView.indexOfChild(frameLayout);
+        int iIndexOfChild = notificationShadeWindowView.indexOfChild(frameLayout);
         notificationShadeWindowView.removeView(this.mBrightnessMirror);
         this.mBrightnessMirror = (FrameLayout) LayoutInflater.from(notificationShadeWindowView.getContext()).inflate(R.layout.sec_brightness_mirror_container, (ViewGroup) notificationShadeWindowView, false);
         this.mToggleSliderController = setMirrorLayout();
-        notificationShadeWindowView.addView(this.mBrightnessMirror, indexOfChild);
+        notificationShadeWindowView.addView(this.mBrightnessMirror, iIndexOfChild);
         SecBrightnessMirrorController secBrightnessMirrorController = this.mSecBrightnessMirrorController;
         if (secBrightnessMirrorController != null) {
             secBrightnessMirrorController.reinflate(this.mBrightnessMirror, this.mToggleSliderController);
@@ -120,10 +143,10 @@ public class BrightnessMirrorController implements MirrorController {
     }
 
     public final BrightnessSliderController setMirrorLayout() {
-        BrightnessSliderController create = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mToggleSliderFactory).create(this.mBrightnessMirror.getContext(), this.mBrightnessMirror);
-        create.init();
-        this.mBrightnessMirror.addView(create.getRootView(), -1, -2);
-        return create;
+        BrightnessSliderController brightnessSliderControllerCreate = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mToggleSliderFactory).create(this.mBrightnessMirror.getContext(), this.mBrightnessMirror);
+        brightnessSliderControllerCreate.init();
+        this.mBrightnessMirror.addView(brightnessSliderControllerCreate.getRootView(), -1, -2);
+        return brightnessSliderControllerCreate;
     }
 
     @Override // com.android.systemui.settings.brightness.MirrorController
@@ -132,11 +155,11 @@ public class BrightnessMirrorController implements MirrorController {
         this.mVisibilityCallback.accept(Boolean.TRUE);
         this.mNotificationPanel.setAlpha(0, true);
         NotificationShadeDepthController notificationShadeDepthController = this.mDepthController;
-        int blurRadiusOfRatio = (int) notificationShadeDepthController.blurUtils.blurRadiusOfRatio(1.0f);
+        int iBlurRadiusOfRatio = (int) notificationShadeDepthController.blurUtils.blurRadiusOfRatio(1.0f);
         NotificationShadeDepthController.DepthAnimation depthAnimation = notificationShadeDepthController.brightnessMirrorSpring;
-        if (depthAnimation.pendingRadius != blurRadiusOfRatio) {
-            depthAnimation.pendingRadius = blurRadiusOfRatio;
-            depthAnimation.springAnimation.animateToFinalPosition(blurRadiusOfRatio);
+        if (depthAnimation.pendingRadius != iBlurRadiusOfRatio) {
+            depthAnimation.pendingRadius = iBlurRadiusOfRatio;
+            depthAnimation.springAnimation.animateToFinalPosition(iBlurRadiusOfRatio);
         }
         SecBrightnessMirrorController secBrightnessMirrorController = this.mSecBrightnessMirrorController;
         if (secBrightnessMirrorController != null) {

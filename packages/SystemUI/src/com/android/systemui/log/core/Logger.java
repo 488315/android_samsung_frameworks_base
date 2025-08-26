@@ -2,7 +2,6 @@ package com.android.systemui.log.core;
 
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Logger {
     private final MessageBuffer buffer;
@@ -20,8 +19,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public static /* synthetic */ void e$default(Logger logger, Function1 function1, Throwable th, Function1 function12, int i, Object obj) {
@@ -31,8 +30,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public static /* synthetic */ void i$default(Logger logger, Function1 function1, Throwable th, Function1 function12, int i, Object obj) {
@@ -42,8 +41,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public static /* synthetic */ void log$default(Logger logger, LogLevel logLevel, Function1 function1, Throwable th, Function1 function12, int i, Object obj) {
@@ -53,8 +52,8 @@ public class Logger {
         if ((i & 4) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), logLevel, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), logLevel, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -71,8 +70,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.VERBOSE, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.VERBOSE, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public static /* synthetic */ void w$default(Logger logger, Function1 function1, Throwable th, Function1 function12, int i, Object obj) {
@@ -82,8 +81,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public static /* synthetic */ void wtf$default(Logger logger, Function1 function1, Throwable th, Function1 function12, int i, Object obj) {
@@ -93,8 +92,8 @@ public class Logger {
         if ((i & 2) != 0) {
             th = null;
         }
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WTF, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, logger, obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WTF, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, logger, logMessageObtain);
     }
 
     public final void d(String str) {
@@ -134,38 +133,38 @@ public class Logger {
     }
 
     public final void d(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void e(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.ERROR, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.ERROR, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void i(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.INFO, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.INFO, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void log(LogLevel logLevel, Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), logLevel, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), logLevel, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void v(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.VERBOSE, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.VERBOSE, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void w(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.WARNING, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.WARNING, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void wtf(Function1 function1, Throwable th, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.WTF, function1, th);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.WTF, function1, th);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public static /* synthetic */ void log$default(Logger logger, LogLevel logLevel, String str, Throwable th, int i, Object obj) {
@@ -179,9 +178,9 @@ public class Logger {
     }
 
     public final void log(LogLevel logLevel, String str, Throwable th) {
-        LogMessage obtain = getBuffer().obtain(getTag(), logLevel, new Logger$$ExternalSyntheticLambda1(), th);
-        obtain.setStr1(str);
-        getBuffer().commit(obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), logLevel, new Logger$$ExternalSyntheticLambda1(), th);
+        logMessageObtain.setStr1(str);
+        getBuffer().commit(logMessageObtain);
     }
 
     public static /* synthetic */ void d$default(Logger logger, String str, Throwable th, int i, Object obj) {
@@ -269,37 +268,37 @@ public class Logger {
     }
 
     public final void d(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void e(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.ERROR, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.ERROR, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void i(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.INFO, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.INFO, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void v(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.VERBOSE, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.VERBOSE, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void w(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.WARNING, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.WARNING, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void wtf(Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), LogLevel.WTF, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.WTF, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 
     public final void log(LogLevel logLevel, Function1 function1, Function1 function12) {
-        LogMessage obtain = getBuffer().obtain(getTag(), logLevel, function1, null);
-        Logger$$ExternalSyntheticOutline0.m(function12, obtain, this, obtain);
+        LogMessage logMessageObtain = getBuffer().obtain(getTag(), logLevel, function1, null);
+        Logger$$ExternalSyntheticOutline0.m(function12, logMessageObtain, this, logMessageObtain);
     }
 }

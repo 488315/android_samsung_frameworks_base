@@ -44,8 +44,8 @@ public class PKCS5S1ParametersGenerator extends PBEParametersGenerator {
         if (i5 > this.digest.getDigestSize()) {
             throw new IllegalArgumentException("Can't generate a derived key " + i5 + " bytes long.");
         }
-        byte[] generateDerivedKey = generateDerivedKey();
-        return new ParametersWithIV(new KeyParameter(generateDerivedKey, 0, i3), generateDerivedKey, i3, i4);
+        byte[] bArrGenerateDerivedKey = generateDerivedKey();
+        return new ParametersWithIV(new KeyParameter(bArrGenerateDerivedKey, 0, i3), bArrGenerateDerivedKey, i3, i4);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator

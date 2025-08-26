@@ -71,7 +71,7 @@ public class DvrRecorder implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.dvr.DvrRecorder$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DvrRecorder.this.lambda$onRecordStatusChanged$0(i);
+                        this.f$0.lambda$onRecordStatusChanged$0(i);
                     }
                 });
             }
@@ -108,32 +108,32 @@ public class DvrRecorder implements AutoCloseable {
     }
 
     public int start() {
-        int nativeStartDvr;
+        int iNativeStartDvr;
         int i = this.mSegmentId;
         this.mSegmentId = (((i & 65535) + 1) & 65535) | ((-65536) & i);
         this.mOverflow = 0;
         Log.d(TAG, "Write Stats Log for Record.");
         FrameworkStatsLog.write(279, this.mUserId, 2, 1, this.mSegmentId, 0);
         synchronized (this.mIsStoppedLock) {
-            nativeStartDvr = nativeStartDvr();
-            if (nativeStartDvr == 0) {
+            iNativeStartDvr = nativeStartDvr();
+            if (iNativeStartDvr == 0) {
                 this.mIsStopped = false;
             }
         }
-        return nativeStartDvr;
+        return iNativeStartDvr;
     }
 
     public int stop() {
-        int nativeStopDvr;
+        int iNativeStopDvr;
         Log.d(TAG, "Write Stats Log for Playback.");
         FrameworkStatsLog.write(279, this.mUserId, 2, 2, this.mSegmentId, this.mOverflow);
         synchronized (this.mIsStoppedLock) {
-            nativeStopDvr = nativeStopDvr();
-            if (nativeStopDvr == 0) {
+            iNativeStopDvr = nativeStopDvr();
+            if (iNativeStopDvr == 0) {
                 this.mIsStopped = true;
             }
         }
-        return nativeStopDvr;
+        return iNativeStopDvr;
     }
 
     public int flush() {
@@ -148,9 +148,9 @@ public class DvrRecorder implements AutoCloseable {
 
     @Override // java.lang.AutoCloseable
     public void close() {
-        int nativeClose = nativeClose();
-        if (nativeClose != 0) {
-            TunerUtils.throwExceptionForResult(nativeClose, "failed to close DVR recorder");
+        int iNativeClose = nativeClose();
+        if (iNativeClose != 0) {
+            TunerUtils.throwExceptionForResult(iNativeClose, "failed to close DVR recorder");
         }
     }
 

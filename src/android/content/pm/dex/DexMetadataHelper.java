@@ -50,11 +50,11 @@ public class DexMetadataHelper {
 
     public static long getPackageDexMetadataSize(PackageLite packageLite) {
         Iterator<String> it = getPackageDexMetadata(packageLite).values().iterator();
-        long j = 0;
+        long length = 0;
         while (it.hasNext()) {
-            j += new File(it.next()).length();
+            length += new File(it.next()).length();
         }
-        return j;
+        return length;
     }
 
     public static File findDexMetadataForFile(File file) {
@@ -73,9 +73,9 @@ public class DexMetadataHelper {
         ArrayMap arrayMap = new ArrayMap();
         for (int size = list.size() - 1; size >= 0; size--) {
             String str = list.get(size);
-            String buildDexMetadataPathForFile = buildDexMetadataPathForFile(new File(str));
-            if (Files.exists(Paths.get(buildDexMetadataPathForFile, new String[0]), new LinkOption[0])) {
-                arrayMap.put(str, buildDexMetadataPathForFile);
+            String strBuildDexMetadataPathForFile = buildDexMetadataPathForFile(new File(str));
+            if (Files.exists(Paths.get(strBuildDexMetadataPathForFile, new String[0]), new LinkOption[0])) {
+                arrayMap.put(str, strBuildDexMetadataPathForFile);
             }
         }
         return arrayMap;
@@ -99,96 +99,97 @@ public class DexMetadataHelper {
         return validateDexMetadataFile(parseInput, str, str2, j, SystemProperties.getBoolean(PROPERTY_DM_JSON_MANIFEST_REQUIRED, false));
     }
 
-    public static ParseResult validateDexMetadataFile(ParseInput parseInput, String str, String str2, long j, boolean z) {
+    public static ParseResult validateDexMetadataFile(ParseInput parseInput, String str, String str2, long j, boolean z) throws Throwable {
         Throwable th;
         ParseInput parseInput2;
         String str3;
         IOException iOException;
+        StrictJarFile strictJarFile;
         if (DEBUG) {
             Log.v(TAG, "validateDexMetadataFile: " + str + ", " + str2 + ", " + j);
         }
-        StrictJarFile strictJarFile = null;
+        StrictJarFile strictJarFile2 = null;
         try {
             try {
-                StrictJarFile strictJarFile2 = new StrictJarFile(str, false, false);
+                strictJarFile = new StrictJarFile(str, false, false);
                 parseInput2 = parseInput;
                 str3 = str;
+            } catch (IOException e) {
+                parseInput2 = parseInput;
+                str3 = str;
+                iOException = e;
+            }
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        try {
+            ParseResult parseResultValidateDexMetadataManifest = validateDexMetadataManifest(parseInput2, str3, strictJarFile, str2, j, z);
+            try {
+                strictJarFile.close();
+            } catch (IOException unused) {
+            }
+            return parseResultValidateDexMetadataManifest;
+        } catch (IOException e2) {
+            iOException = e2;
+            strictJarFile2 = strictJarFile;
+            ParseResult parseResultError = parseInput2.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "Error opening " + str3, iOException);
+            if (strictJarFile2 != null) {
                 try {
-                    ParseResult validateDexMetadataManifest = validateDexMetadataManifest(parseInput2, str3, strictJarFile2, str2, j, z);
-                    try {
-                        strictJarFile2.close();
-                    } catch (IOException unused) {
-                    }
-                    return validateDexMetadataManifest;
-                } catch (IOException e) {
-                    iOException = e;
-                    strictJarFile = strictJarFile2;
-                    ParseResult error = parseInput2.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "Error opening " + str3, iOException);
-                    if (strictJarFile != null) {
-                        try {
-                            strictJarFile.close();
-                        } catch (IOException unused2) {
-                        }
-                    }
-                    return error;
-                } catch (Throwable th2) {
-                    th = th2;
-                    strictJarFile = strictJarFile2;
-                    if (strictJarFile != null) {
-                        try {
-                            strictJarFile.close();
-                            throw th;
-                        } catch (IOException unused3) {
-                            throw th;
-                        }
-                    }
+                    strictJarFile2.close();
+                } catch (IOException unused2) {
+                }
+            }
+            return parseResultError;
+        } catch (Throwable th3) {
+            th = th3;
+            strictJarFile2 = strictJarFile;
+            if (strictJarFile2 != null) {
+                try {
+                    strictJarFile2.close();
+                    throw th;
+                } catch (IOException unused3) {
                     throw th;
                 }
-            } catch (Throwable th3) {
-                th = th3;
             }
-        } catch (IOException e2) {
-            parseInput2 = parseInput;
-            str3 = str;
-            iOException = e2;
+            throw th;
         }
     }
 
-    private static ParseResult validateDexMetadataManifest(ParseInput parseInput, String str, StrictJarFile strictJarFile, String str2, long j, boolean z) throws IOException {
+    private static ParseResult validateDexMetadataManifest(ParseInput parseInput, String str, StrictJarFile strictJarFile, String str2, long j, boolean z) throws IOException, NumberFormatException {
         if (!z) {
             if (DEBUG) {
                 Log.v(TAG, "validateDexMetadataManifest: " + str + " manifest.json check skipped");
             }
             return parseInput.success(null);
         }
-        ZipEntry findEntry = strictJarFile.findEntry("manifest.json");
-        if (findEntry == null) {
+        ZipEntry zipEntryFindEntry = strictJarFile.findEntry("manifest.json");
+        if (zipEntryFindEntry == null) {
             return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "Missing manifest.json in " + str);
         }
         try {
-            JsonReader jsonReader = new JsonReader(new InputStreamReader(strictJarFile.getInputStream(findEntry), "UTF-8"));
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(strictJarFile.getInputStream(zipEntryFindEntry), "UTF-8"));
             jsonReader.beginObject();
-            String str3 = null;
-            long j2 = -1;
+            String strNextString = null;
+            long jNextLong = -1;
             while (jsonReader.hasNext()) {
-                String nextName = jsonReader.nextName();
-                if (nextName.equals("packageName")) {
-                    str3 = jsonReader.nextString();
-                } else if (nextName.equals(SmLib_IafdConstant.KEY_VERSION_CODE)) {
-                    j2 = jsonReader.nextLong();
+                String strNextName = jsonReader.nextName();
+                if (strNextName.equals("packageName")) {
+                    strNextString = jsonReader.nextString();
+                } else if (strNextName.equals(SmLib_IafdConstant.KEY_VERSION_CODE)) {
+                    jNextLong = jsonReader.nextLong();
                 } else {
                     jsonReader.skipValue();
                 }
             }
             jsonReader.endObject();
-            if (str3 == null || j2 == -1) {
+            if (strNextString == null || jNextLong == -1) {
                 return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + str + " is missing 'packageName' and/or 'versionCode'");
             }
-            if (!str3.equals(str2)) {
-                return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + str + " has invalid packageName: " + str3 + ", expected: " + str2);
+            if (!strNextString.equals(str2)) {
+                return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + str + " has invalid packageName: " + strNextString + ", expected: " + str2);
             }
-            if (j != j2) {
-                return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + str + " has invalid versionCode: " + j2 + ", expected: " + j);
+            if (j != jNextLong) {
+                return parseInput.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + str + " has invalid versionCode: " + jNextLong + ", expected: " + j);
             }
             if (DEBUG) {
                 Log.v(TAG, "validateDexMetadataManifest: " + str + ", " + str2 + ", " + j + ": successful");

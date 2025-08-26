@@ -6,19 +6,16 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IC2paEmbedCallback extends IInterface {
     void onError(String str);
 
     void onSuccess();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IC2paEmbedCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IC2paEmbedCallback {
             public final IBinder mRemote;
 
@@ -40,8 +37,8 @@ public interface IC2paEmbedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IC2paEmbedCallback");
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IC2paEmbedCallback)) ? new Proxy(iBinder) : (IC2paEmbedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IC2paEmbedCallback");
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IC2paEmbedCallback)) ? new Proxy(iBinder) : (IC2paEmbedCallback) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder

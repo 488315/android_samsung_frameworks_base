@@ -210,9 +210,9 @@ public interface ISessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISessionCallback)) {
-                return (ISessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISessionCallback)) {
+                return (ISessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -288,199 +288,199 @@ public interface ISessionCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    String string2 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCommand(readString, readInt, readInt2, readString2, bundle, resultReceiver);
+                    onCommand(string, i3, i4, string2, bundle, resultReceiver);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     ResultReceiver resultReceiver2 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onMediaButton(readString3, readInt3, readInt4, intent, readInt5, resultReceiver2);
+                    onMediaButton(string3, i5, i6, intent, i7, resultReceiver2);
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onMediaButtonFromController(readString4, readInt6, readInt7, intent2);
+                    onMediaButtonFromController(string4, i8, i9, intent2);
                     return true;
                 case 4:
-                    String readString5 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPrepare(readString5, readInt8, readInt9);
+                    onPrepare(string5, i10, i11);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    String string7 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPrepareFromMediaId(readString6, readInt10, readInt11, readString7, bundle2);
+                    onPrepareFromMediaId(string6, i12, i13, string7, bundle2);
                     return true;
                 case 6:
-                    String readString8 = parcel.readString();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    String string9 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPrepareFromSearch(readString8, readInt12, readInt13, readString9, bundle3);
+                    onPrepareFromSearch(string8, i14, i15, string9, bundle3);
                     return true;
                 case 7:
-                    String readString10 = parcel.readString();
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPrepareFromUri(readString10, readInt14, readInt15, uri, bundle4);
+                    onPrepareFromUri(string10, i16, i17, uri, bundle4);
                     return true;
                 case 8:
-                    String readString11 = parcel.readString();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPlay(readString11, readInt16, readInt17);
+                    onPlay(string11, i18, i19);
                     return true;
                 case 9:
-                    String readString12 = parcel.readString();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
-                    String readString13 = parcel.readString();
+                    String string12 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    String string13 = parcel.readString();
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPlayFromMediaId(readString12, readInt18, readInt19, readString13, bundle5);
+                    onPlayFromMediaId(string12, i20, i21, string13, bundle5);
                     return true;
                 case 10:
-                    String readString14 = parcel.readString();
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    String string15 = parcel.readString();
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPlayFromSearch(readString14, readInt20, readInt21, readString15, bundle6);
+                    onPlayFromSearch(string14, i22, i23, string15, bundle6);
                     return true;
                 case 11:
-                    String readString16 = parcel.readString();
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     Bundle bundle7 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPlayFromUri(readString16, readInt22, readInt23, uri2, bundle7);
+                    onPlayFromUri(string16, i24, i25, uri2, bundle7);
                     return true;
                 case 12:
-                    String readString17 = parcel.readString();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    String string17 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onSkipToTrack(readString17, readInt24, readInt25, readLong);
+                    onSkipToTrack(string17, i26, i27, j);
                     return true;
                 case 13:
-                    String readString18 = parcel.readString();
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPause(readString18, readInt26, readInt27);
+                    onPause(string18, i28, i29);
                     return true;
                 case 14:
-                    String readString19 = parcel.readString();
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
+                    String string19 = parcel.readString();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onStop(readString19, readInt28, readInt29);
+                    onStop(string19, i30, i31);
                     return true;
                 case 15:
-                    String readString20 = parcel.readString();
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNext(readString20, readInt30, readInt31);
+                    onNext(string20, i32, i33);
                     return true;
                 case 16:
-                    String readString21 = parcel.readString();
-                    int readInt32 = parcel.readInt();
-                    int readInt33 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i34 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPrevious(readString21, readInt32, readInt33);
+                    onPrevious(string21, i34, i35);
                     return true;
                 case 17:
-                    String readString22 = parcel.readString();
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onFastForward(readString22, readInt34, readInt35);
+                    onFastForward(string22, i36, i37);
                     return true;
                 case 18:
-                    String readString23 = parcel.readString();
-                    int readInt36 = parcel.readInt();
-                    int readInt37 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    int i38 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRewind(readString23, readInt36, readInt37);
+                    onRewind(string23, i38, i39);
                     return true;
                 case 19:
-                    String readString24 = parcel.readString();
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
+                    String string24 = parcel.readString();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onSeekTo(readString24, readInt38, readInt39, readLong2);
+                    onSeekTo(string24, i40, i41, j2);
                     return true;
                 case 20:
-                    String readString25 = parcel.readString();
-                    int readInt40 = parcel.readInt();
-                    int readInt41 = parcel.readInt();
+                    String string25 = parcel.readString();
+                    int i42 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     Rating rating = (Rating) parcel.readTypedObject(Rating.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onRate(readString25, readInt40, readInt41, rating);
+                    onRate(string25, i42, i43, rating);
                     return true;
                 case 21:
-                    String readString26 = parcel.readString();
-                    int readInt42 = parcel.readInt();
-                    int readInt43 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
+                    String string26 = parcel.readString();
+                    int i44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    onSetPlaybackSpeed(readString26, readInt42, readInt43, readFloat);
+                    onSetPlaybackSpeed(string26, i44, i45, f);
                     return true;
                 case 22:
-                    String readString27 = parcel.readString();
-                    int readInt44 = parcel.readInt();
-                    int readInt45 = parcel.readInt();
-                    String readString28 = parcel.readString();
+                    String string27 = parcel.readString();
+                    int i46 = parcel.readInt();
+                    int i47 = parcel.readInt();
+                    String string28 = parcel.readString();
                     Bundle bundle8 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCustomAction(readString27, readInt44, readInt45, readString28, bundle8);
+                    onCustomAction(string27, i46, i47, string28, bundle8);
                     return true;
                 case 23:
-                    String readString29 = parcel.readString();
-                    int readInt46 = parcel.readInt();
-                    int readInt47 = parcel.readInt();
-                    int readInt48 = parcel.readInt();
+                    String string29 = parcel.readString();
+                    int i48 = parcel.readInt();
+                    int i49 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAdjustVolume(readString29, readInt46, readInt47, readInt48);
+                    onAdjustVolume(string29, i48, i49, i50);
                     return true;
                 case 24:
-                    String readString30 = parcel.readString();
-                    int readInt49 = parcel.readInt();
-                    int readInt50 = parcel.readInt();
-                    int readInt51 = parcel.readInt();
+                    String string30 = parcel.readString();
+                    int i51 = parcel.readInt();
+                    int i52 = parcel.readInt();
+                    int i53 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSetVolumeTo(readString30, readInt49, readInt50, readInt51);
+                    onSetVolumeTo(string30, i51, i52, i53);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -505,364 +505,364 @@ public interface ISessionCallback extends IInterface {
 
             @Override // android.media.session.ISessionCallback
             public void onCommand(String str, int i, int i2, String str2, Bundle bundle, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onMediaButton(String str, int i, int i2, Intent intent, int i3, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onMediaButtonFromController(String str, int i, int i2, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPrepare(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPrepareFromMediaId(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPrepareFromSearch(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPrepareFromUri(String str, int i, int i2, Uri uri, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPlay(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPlayFromMediaId(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPlayFromSearch(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPlayFromUri(String str, int i, int i2, Uri uri, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onSkipToTrack(String str, int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPause(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onStop(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onNext(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onPrevious(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onFastForward(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onRewind(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onSeekTo(String str, int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onRate(String str, int i, int i2, Rating rating) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(rating, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(rating, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onSetPlaybackSpeed(String str, int i, int i2, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onCustomAction(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onAdjustVolume(String str, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.session.ISessionCallback
             public void onSetVolumeTo(String str, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

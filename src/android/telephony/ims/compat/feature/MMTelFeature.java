@@ -29,11 +29,11 @@ public class MMTelFeature extends ImsFeature {
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public int startSession(PendingIntent pendingIntent, IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-            int startSession;
+            int iStartSession;
             synchronized (MMTelFeature.this.mLock) {
-                startSession = MMTelFeature.this.startSession(pendingIntent, iImsRegistrationListener);
+                iStartSession = MMTelFeature.this.startSession(pendingIntent, iImsRegistrationListener);
             }
-            return startSession;
+            return iStartSession;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
@@ -45,20 +45,20 @@ public class MMTelFeature extends ImsFeature {
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public boolean isConnected(int i, int i2) throws RemoteException {
-            boolean isConnected;
+            boolean zIsConnected;
             synchronized (MMTelFeature.this.mLock) {
-                isConnected = MMTelFeature.this.isConnected(i, i2);
+                zIsConnected = MMTelFeature.this.isConnected(i, i2);
             }
-            return isConnected;
+            return zIsConnected;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public boolean isOpened() throws RemoteException {
-            boolean isOpened;
+            boolean zIsOpened;
             synchronized (MMTelFeature.this.mLock) {
-                isOpened = MMTelFeature.this.isOpened();
+                zIsOpened = MMTelFeature.this.isOpened();
             }
-            return isOpened;
+            return zIsOpened;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
@@ -86,20 +86,20 @@ public class MMTelFeature extends ImsFeature {
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public ImsCallProfile createCallProfile(int i, int i2, int i3) throws RemoteException {
-            ImsCallProfile createCallProfile;
+            ImsCallProfile imsCallProfileCreateCallProfile;
             synchronized (MMTelFeature.this.mLock) {
-                createCallProfile = MMTelFeature.this.createCallProfile(i, i2, i3);
+                imsCallProfileCreateCallProfile = MMTelFeature.this.createCallProfile(i, i2, i3);
             }
-            return createCallProfile;
+            return imsCallProfileCreateCallProfile;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public IImsCallSession createCallSession(int i, ImsCallProfile imsCallProfile) throws RemoteException {
-            IImsCallSession createCallSession;
+            IImsCallSession iImsCallSessionCreateCallSession;
             synchronized (MMTelFeature.this.mLock) {
-                createCallSession = MMTelFeature.this.createCallSession(i, imsCallProfile, null);
+                iImsCallSessionCreateCallSession = MMTelFeature.this.createCallSession(i, imsCallProfile, null);
             }
-            return createCallSession;
+            return iImsCallSessionCreateCallSession;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
@@ -180,20 +180,20 @@ public class MMTelFeature extends ImsFeature {
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public int startLocalRingBackTone(int i, int i2, int i3) throws RemoteException {
-            int startLocalRingBackTone;
+            int iStartLocalRingBackTone;
             synchronized (MMTelFeature.this.mLock) {
-                startLocalRingBackTone = MMTelFeature.this.startLocalRingBackTone(i, i2, i3);
+                iStartLocalRingBackTone = MMTelFeature.this.startLocalRingBackTone(i, i2, i3);
             }
-            return startLocalRingBackTone;
+            return iStartLocalRingBackTone;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public int stopLocalRingBackTone() throws RemoteException {
-            int stopLocalRingBackTone;
+            int iStopLocalRingBackTone;
             synchronized (MMTelFeature.this.mLock) {
-                stopLocalRingBackTone = MMTelFeature.this.stopLocalRingBackTone();
+                iStopLocalRingBackTone = MMTelFeature.this.stopLocalRingBackTone();
             }
-            return stopLocalRingBackTone;
+            return iStopLocalRingBackTone;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature
@@ -228,11 +228,11 @@ public class MMTelFeature extends ImsFeature {
 
         @Override // com.android.ims.internal.IImsMMTelFeature
         public boolean isCmcEmergencyCallSupported(int i) throws RemoteException {
-            boolean isCmcEmergencyCallSupported;
+            boolean zIsCmcEmergencyCallSupported;
             synchronized (MMTelFeature.this.mLock) {
-                isCmcEmergencyCallSupported = MMTelFeature.this.isCmcEmergencyCallSupported(i);
+                zIsCmcEmergencyCallSupported = MMTelFeature.this.isCmcEmergencyCallSupported(i);
             }
-            return isCmcEmergencyCallSupported;
+            return zIsCmcEmergencyCallSupported;
         }
 
         @Override // com.android.ims.internal.IImsMMTelFeature

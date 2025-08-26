@@ -6,12 +6,10 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ParcelableSnapshotMutableState<T> extends SnapshotMutableStateImpl<T> implements Parcelable {
     public static final Parcelable.Creator<ParcelableSnapshotMutableState<Object>> CREATOR;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,19 +38,19 @@ public final class ParcelableSnapshotMutableState<T> extends SnapshotMutableStat
                 if (classLoader == null) {
                     classLoader = ParcelableSnapshotMutableState$Companion$CREATOR$1.class.getClassLoader();
                 }
-                Object readValue = parcel.readValue(classLoader);
-                int readInt = parcel.readInt();
-                if (readInt == 0) {
+                Object value = parcel.readValue(classLoader);
+                int i = parcel.readInt();
+                if (i == 0) {
                     snapshotMutationPolicy = NeverEqualPolicy.INSTANCE;
-                } else if (readInt == 1) {
+                } else if (i == 1) {
                     snapshotMutationPolicy = StructuralEqualityPolicy.INSTANCE;
                 } else {
-                    if (readInt != 2) {
-                        throw new IllegalStateException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(readInt, "Unsupported MutableState policy ", " was restored"));
+                    if (i != 2) {
+                        throw new IllegalStateException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "Unsupported MutableState policy ", " was restored"));
                     }
                     snapshotMutationPolicy = ReferentialEqualityPolicy.INSTANCE;
                 }
-                return new ParcelableSnapshotMutableState(readValue, snapshotMutationPolicy);
+                return new ParcelableSnapshotMutableState(value, snapshotMutationPolicy);
             }
 
             @Override // android.os.Parcelable.Creator

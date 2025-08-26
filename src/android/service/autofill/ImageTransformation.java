@@ -9,6 +9,7 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -22,21 +23,21 @@ public final class ImageTransformation extends InternalTransformation implements
             Builder builder;
             AutofillId autofillId = (AutofillId) parcel.readParcelable(null, AutofillId.class);
             Pattern[] patternArr = (Pattern[]) parcel.readSerializable();
-            int[] createIntArray = parcel.createIntArray();
-            CharSequence[] readCharSequenceArray = parcel.readCharSequenceArray();
-            CharSequence charSequence = readCharSequenceArray[0];
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            CharSequence[] charSequenceArray = parcel.readCharSequenceArray();
+            CharSequence charSequence = charSequenceArray[0];
             if (charSequence != null) {
-                builder = new Builder(autofillId, patternArr[0], createIntArray[0], charSequence);
+                builder = new Builder(autofillId, patternArr[0], iArrCreateIntArray[0], charSequence);
             } else {
-                builder = new Builder(autofillId, patternArr[0], createIntArray[0]);
+                builder = new Builder(autofillId, patternArr[0], iArrCreateIntArray[0]);
             }
             int length = patternArr.length;
             for (int i = 1; i < length; i++) {
-                CharSequence charSequence2 = readCharSequenceArray[i];
+                CharSequence charSequence2 = charSequenceArray[i];
                 if (charSequence2 != null) {
-                    builder.addOption(patternArr[i], createIntArray[i], charSequence2);
+                    builder.addOption(patternArr[i], iArrCreateIntArray[i], charSequence2);
                 } else {
-                    builder.addOption(patternArr[i], createIntArray[i]);
+                    builder.addOption(patternArr[i], iArrCreateIntArray[i]);
                 }
             }
             return builder.build();
@@ -64,8 +65,8 @@ public final class ImageTransformation extends InternalTransformation implements
 
     @Override // android.service.autofill.InternalTransformation
     public void apply(ValueFinder valueFinder, RemoteViews remoteViews, int i) throws Exception {
-        String findByAutofillId = valueFinder.findByAutofillId(this.mId);
-        if (findByAutofillId == null) {
+        String strFindByAutofillId = valueFinder.findByAutofillId(this.mId);
+        if (strFindByAutofillId == null) {
             Log.w(TAG, "No view for id " + this.mId);
             return;
         }
@@ -76,7 +77,7 @@ public final class ImageTransformation extends InternalTransformation implements
         for (int i2 = 0; i2 < size; i2++) {
             Option option = this.mOptions.get(i2);
             try {
-                if (option.pattern.matcher(findByAutofillId).matches()) {
+                if (option.pattern.matcher(strFindByAutofillId).matches()) {
                     Log.d(TAG, "Found match at " + i2 + ": " + option);
                     remoteViews.setImageViewResource(i, option.resId);
                     if (option.contentDescription != null) {
@@ -91,7 +92,7 @@ public final class ImageTransformation extends InternalTransformation implements
             }
         }
         if (Helper.sDebug) {
-            Log.d(TAG, "No match for " + findByAutofillId);
+            Log.d(TAG, "No match for " + strFindByAutofillId);
         }
     }
 
@@ -150,7 +151,7 @@ public final class ImageTransformation extends InternalTransformation implements
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v1, types: [java.io.Serializable, java.util.regex.Pattern[]] */
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeParcelable(this.mId, i);
         int size = this.mOptions.size();
         ?? r0 = new Pattern[size];

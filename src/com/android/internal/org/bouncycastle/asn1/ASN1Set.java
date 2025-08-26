@@ -63,33 +63,33 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
     }
 
     protected ASN1Set(ASN1EncodableVector aSN1EncodableVector, boolean z) {
-        ASN1Encodable[] takeElements;
+        ASN1Encodable[] aSN1EncodableArrTakeElements;
         if (aSN1EncodableVector == null) {
             throw new NullPointerException("'elementVector' cannot be null");
         }
         if (z && aSN1EncodableVector.size() >= 2) {
-            takeElements = aSN1EncodableVector.copyElements();
-            sort(takeElements);
+            aSN1EncodableArrTakeElements = aSN1EncodableVector.copyElements();
+            sort(aSN1EncodableArrTakeElements);
         } else {
-            takeElements = aSN1EncodableVector.takeElements();
+            aSN1EncodableArrTakeElements = aSN1EncodableVector.takeElements();
         }
-        this.elements = takeElements;
-        if (!z && takeElements.length >= 2) {
-            takeElements = null;
+        this.elements = aSN1EncodableArrTakeElements;
+        if (!z && aSN1EncodableArrTakeElements.length >= 2) {
+            aSN1EncodableArrTakeElements = null;
         }
-        this.sortedElements = takeElements;
+        this.sortedElements = aSN1EncodableArrTakeElements;
     }
 
     protected ASN1Set(ASN1Encodable[] aSN1EncodableArr, boolean z) {
         if (Arrays.isNullOrContainsNull(aSN1EncodableArr)) {
             throw new NullPointerException("'elements' cannot be null, or contain null");
         }
-        ASN1Encodable[] cloneElements = ASN1EncodableVector.cloneElements(aSN1EncodableArr);
-        if (z && cloneElements.length >= 2) {
-            sort(cloneElements);
+        ASN1Encodable[] aSN1EncodableArrCloneElements = ASN1EncodableVector.cloneElements(aSN1EncodableArr);
+        if (z && aSN1EncodableArrCloneElements.length >= 2) {
+            sort(aSN1EncodableArrCloneElements);
         }
-        this.elements = cloneElements;
-        if (!z && cloneElements.length >= 2) {
+        this.elements = aSN1EncodableArrCloneElements;
+        if (!z && aSN1EncodableArrCloneElements.length >= 2) {
             aSN1EncodableArr = null;
         }
         this.sortedElements = aSN1EncodableArr;
@@ -177,13 +177,13 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         int length = this.elements.length;
-        int i = length + 1;
+        int iHashCode = length + 1;
         while (true) {
             length--;
             if (length < 0) {
-                return i;
+                return iHashCode;
             }
-            i += this.elements[length].toASN1Primitive().hashCode();
+            iHashCode += this.elements[length].toASN1Primitive().hashCode();
         }
     }
 
@@ -262,15 +262,15 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
         if (i != i2) {
             return i < i2;
         }
-        int min = Math.min(bArr.length, bArr2.length) - 1;
-        for (int i3 = 1; i3 < min; i3++) {
+        int iMin = Math.min(bArr.length, bArr2.length) - 1;
+        for (int i3 = 1; i3 < iMin; i3++) {
             byte b = bArr[i3];
             byte b2 = bArr2[i3];
             if (b != b2) {
                 return (b & 255) < (b2 & 255);
             }
         }
-        return (bArr[min] & 255) <= (bArr2[min] & 255);
+        return (bArr[iMin] & 255) <= (bArr2[iMin] & 255);
     }
 
     private static void sort(ASN1Encodable[] aSN1EncodableArr) {

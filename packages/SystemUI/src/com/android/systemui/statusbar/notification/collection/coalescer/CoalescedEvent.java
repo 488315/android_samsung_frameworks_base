@@ -6,7 +6,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CoalescedEvent {
     public EventBatch batch;
@@ -35,9 +34,9 @@ public final class CoalescedEvent {
     }
 
     public final int hashCode() {
-        int hashCode = (this.ranking.hashCode() + ((this.sbn.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.position, this.key.hashCode() * 31, 31)) * 31)) * 31;
+        int iHashCode = (this.ranking.hashCode() + ((this.sbn.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.position, this.key.hashCode() * 31, 31)) * 31)) * 31;
         EventBatch eventBatch = this.batch;
-        return hashCode + (eventBatch == null ? 0 : eventBatch.hashCode());
+        return iHashCode + (eventBatch == null ? 0 : eventBatch.hashCode());
     }
 
     public final String toString() {

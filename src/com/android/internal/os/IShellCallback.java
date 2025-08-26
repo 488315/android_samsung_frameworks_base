@@ -46,9 +46,9 @@ public interface IShellCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IShellCallback)) {
-                return (IShellCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IShellCallback)) {
+                return (IShellCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,13 +75,13 @@ public interface IShellCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                ParcelFileDescriptor openFile = openFile(readString, readString2, readString3);
+                ParcelFileDescriptor parcelFileDescriptorOpenFile = openFile(string, string2, string3);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(openFile, 1);
+                parcel2.writeTypedObject(parcelFileDescriptorOpenFile, 1);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -105,19 +105,19 @@ public interface IShellCallback extends IInterface {
 
             @Override // com.android.internal.os.IShellCallback
             public ParcelFileDescriptor openFile(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

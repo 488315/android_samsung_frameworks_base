@@ -121,11 +121,11 @@ public final class AssociationState {
 
         long start() {
             SourceState commonSourceState;
-            long start = start(-1L);
+            long jStart = start(-1L);
             if (this.mAssociationState != null && (commonSourceState = getCommonSourceState(true)) != null) {
-                commonSourceState.start(start);
+                commonSourceState.start(jStart);
             }
-            return start;
+            return jStart;
         }
 
         long start(long j) {
@@ -143,11 +143,11 @@ public final class AssociationState {
 
         public void stop() {
             SourceState commonSourceState;
-            long stop = stop(-1L);
+            long jStop = stop(-1L);
             if (this.mAssociationState == null || (commonSourceState = getCommonSourceState(false)) == null) {
                 return;
             }
-            commonSourceState.stop(stop);
+            commonSourceState.stop(jStop);
         }
 
         long stop(long j) {
@@ -477,11 +477,11 @@ public final class AssociationState {
         }
 
         public int hashCode() {
-            int hashCode = Integer.hashCode(this.mUid);
+            int iHashCode = Integer.hashCode(this.mUid);
             String str = this.mProcess;
-            int hashCode2 = hashCode ^ (str == null ? 0 : str.hashCode());
+            int iHashCode2 = iHashCode ^ (str == null ? 0 : str.hashCode());
             String str2 = this.mPackage;
-            return hashCode2 ^ (str2 != null ? str2.hashCode() * 33 : 0);
+            return iHashCode2 ^ (str2 != null ? str2.hashCode() * 33 : 0);
         }
 
         public String toString() {
@@ -551,13 +551,13 @@ public final class AssociationState {
             sourceState = new SourceState(this.mProcessStats, this, this.mProc, sourceKey2);
             this.mSources.put(sourceKey2, sourceState);
         }
-        long start = sourceState.start();
-        if (start > 0) {
+        long jStart = sourceState.start();
+        if (jStart > 0) {
             int i2 = this.mTotalNesting + 1;
             this.mTotalNesting = i2;
             if (i2 == 1) {
                 this.mTotalCount++;
-                this.mTotalStartUptime = start;
+                this.mTotalStartUptime = jStart;
             }
         }
         return sourceState;
@@ -569,14 +569,14 @@ public final class AssociationState {
         this.mTotalActiveCount += associationState.mTotalActiveCount;
         this.mTotalActiveDuration += associationState.mTotalActiveDuration;
         for (int size = associationState.mSources.size() - 1; size >= 0; size--) {
-            SourceKey keyAt = associationState.mSources.keyAt(size);
-            SourceState valueAt = associationState.mSources.valueAt(size);
-            SourceState sourceState = this.mSources.get(keyAt);
+            SourceKey sourceKeyKeyAt = associationState.mSources.keyAt(size);
+            SourceState sourceStateValueAt = associationState.mSources.valueAt(size);
+            SourceState sourceState = this.mSources.get(sourceKeyKeyAt);
             if (sourceState == null) {
-                sourceState = new SourceState(this.mProcessStats, this, this.mProc, keyAt);
-                this.mSources.put(keyAt, sourceState);
+                sourceState = new SourceState(this.mProcessStats, this, this.mProc, sourceKeyKeyAt);
+                this.mSources.put(sourceKeyKeyAt, sourceState);
             }
-            sourceState.add(valueAt);
+            sourceState.add(sourceStateValueAt);
         }
     }
 
@@ -591,9 +591,9 @@ public final class AssociationState {
             this.mTotalCount = 0;
         } else {
             for (int size = this.mSources.size() - 1; size >= 0; size--) {
-                SourceState valueAt = this.mSources.valueAt(size);
-                if (valueAt.isInUse()) {
-                    valueAt.resetSafely(j);
+                SourceState sourceStateValueAt = this.mSources.valueAt(size);
+                if (sourceStateValueAt.isInUse()) {
+                    sourceStateValueAt.resetSafely(j);
                 } else {
                     this.mSources.removeAt(size);
                 }
@@ -619,10 +619,10 @@ public final class AssociationState {
         int size = this.mSources.size();
         parcel.writeInt(size);
         for (int i = 0; i < size; i++) {
-            SourceKey keyAt = this.mSources.keyAt(i);
-            SourceState valueAt = this.mSources.valueAt(i);
-            keyAt.writeToParcel(processStats, parcel);
-            valueAt.writeToParcel(parcel, 0);
+            SourceKey sourceKeyKeyAt = this.mSources.keyAt(i);
+            SourceState sourceStateValueAt = this.mSources.valueAt(i);
+            sourceKeyKeyAt.writeToParcel(processStats, parcel);
+            sourceStateValueAt.writeToParcel(parcel, 0);
         }
     }
 
@@ -631,16 +631,16 @@ public final class AssociationState {
         this.mTotalDuration = parcel.readLong();
         this.mTotalActiveCount = parcel.readInt();
         this.mTotalActiveDuration = parcel.readLong();
-        int readInt = parcel.readInt();
-        if (readInt < 0 || readInt > 100000) {
-            return "Association with bad src count: " + readInt;
+        int i2 = parcel.readInt();
+        if (i2 < 0 || i2 > 100000) {
+            return "Association with bad src count: " + i2;
         }
-        for (int i2 = 0; i2 < readInt; i2++) {
+        for (int i3 = 0; i3 < i2; i3++) {
             SourceKey sourceKey = new SourceKey(processStats, parcel, i);
             SourceState sourceState = new SourceState(this.mProcessStats, this, this.mProc, sourceKey);
-            String readFromParcel = sourceState.readFromParcel(parcel);
-            if (readFromParcel != null) {
-                return readFromParcel;
+            String fromParcel = sourceState.readFromParcel(parcel);
+            if (fromParcel != null) {
+                return fromParcel;
             }
             this.mSources.put(sourceKey, sourceState);
         }
@@ -669,8 +669,8 @@ public final class AssociationState {
         }
         int size = this.mSources.size();
         for (int i = 0; i < size; i++) {
-            SourceKey keyAt = this.mSources.keyAt(i);
-            if (str.equals(keyAt.mProcess) || str.equals(keyAt.mPackage)) {
+            SourceKey sourceKeyKeyAt = this.mSources.keyAt(i);
+            if (str.equals(sourceKeyKeyAt.mProcess) || str.equals(sourceKeyKeyAt.mPackage)) {
                 return true;
             }
         }
@@ -679,7 +679,7 @@ public final class AssociationState {
 
     /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ int lambda$static$0(Pair pair, Pair pair2) {
-        int compareTo;
+        int iCompareTo;
         if (((SourceDumpContainer) pair.second).mActiveTime != ((SourceDumpContainer) pair2.second).mActiveTime) {
             return ((SourceDumpContainer) pair.second).mActiveTime > ((SourceDumpContainer) pair2.second).mActiveTime ? -1 : 1;
         }
@@ -689,24 +689,24 @@ public final class AssociationState {
         if (((SourceKey) pair.first).mUid != ((SourceKey) pair2.first).mUid) {
             return ((SourceKey) pair.first).mUid < ((SourceKey) pair2.first).mUid ? -1 : 1;
         }
-        if (((SourceKey) pair.first).mProcess == ((SourceKey) pair2.first).mProcess || (compareTo = ((SourceKey) pair.first).mProcess.compareTo(((SourceKey) pair2.first).mProcess)) == 0) {
+        if (((SourceKey) pair.first).mProcess == ((SourceKey) pair2.first).mProcess || (iCompareTo = ((SourceKey) pair.first).mProcess.compareTo(((SourceKey) pair2.first).mProcess)) == 0) {
             return 0;
         }
-        return compareTo;
+        return iCompareTo;
     }
 
     static ArrayList<Pair<SourceKey, SourceDumpContainer>> createSortedAssociations(long j, long j2, ArrayMap<SourceKey, SourceState> arrayMap) {
         int size = arrayMap.size();
         ArrayList<Pair<SourceKey, SourceDumpContainer>> arrayList = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            SourceState valueAt = arrayMap.valueAt(i);
-            SourceDumpContainer sourceDumpContainer = new SourceDumpContainer(valueAt);
-            long j3 = valueAt.mDuration;
-            if (valueAt.mNesting > 0) {
-                j3 += j - valueAt.mStartUptime;
+            SourceState sourceStateValueAt = arrayMap.valueAt(i);
+            SourceDumpContainer sourceDumpContainer = new SourceDumpContainer(sourceStateValueAt);
+            long j3 = sourceStateValueAt.mDuration;
+            if (sourceStateValueAt.mNesting > 0) {
+                j3 += j - sourceStateValueAt.mStartUptime;
             }
             sourceDumpContainer.mTotalTime = j3;
-            sourceDumpContainer.mActiveTime = dumpTime(null, null, valueAt, j2, j, false, false);
+            sourceDumpContainer.mActiveTime = dumpTime(null, null, sourceStateValueAt, j2, j, false, false);
             if (sourceDumpContainer.mActiveTime < 0) {
                 sourceDumpContainer.mActiveTime = -sourceDumpContainer.mActiveTime;
             }
@@ -917,17 +917,17 @@ public final class AssociationState {
     }
 
     static void dumpActiveDurationSummary(PrintWriter printWriter, SourceState sourceState, long j, long j2, boolean z) {
-        long dumpTime = dumpTime(null, null, sourceState, j, j2, false, false);
-        if (dumpTime < 0) {
-            dumpTime = -dumpTime;
+        long jDumpTime = dumpTime(null, null, sourceState, j, j2, false, false);
+        if (jDumpTime < 0) {
+            jDumpTime = -jDumpTime;
         }
         if (z) {
-            TimeUtils.formatDuration(dumpTime, printWriter);
+            TimeUtils.formatDuration(jDumpTime, printWriter);
             printWriter.print(" / ");
         } else {
             printWriter.print("time ");
         }
-        DumpUtils.printPercent(printWriter, dumpTime / j);
+        DumpUtils.printPercent(printWriter, jDumpTime / j);
         if (sourceState.mActiveStartUptime > 0) {
             printWriter.print(" (running)");
         }
@@ -935,48 +935,48 @@ public final class AssociationState {
     }
 
     static long dumpTime(PrintWriter printWriter, String str, SourceState sourceState, long j, long j2, boolean z, boolean z2) {
-        long j3;
+        long valueForId;
         String str2;
-        long j4 = 0;
+        long j3 = 0;
         int i = 0;
-        long j5 = 0;
+        long j4 = 0;
         boolean z3 = false;
         while (i < 16) {
             if (sourceState.mActiveDurations != null) {
-                j3 = sourceState.mActiveDurations.getValueForId((byte) i);
+                valueForId = sourceState.mActiveDurations.getValueForId((byte) i);
             } else {
-                j3 = sourceState.mActiveProcState == i ? sourceState.mActiveDuration : j4;
+                valueForId = sourceState.mActiveProcState == i ? sourceState.mActiveDuration : j3;
             }
-            if (sourceState.mActiveStartUptime == j4 || sourceState.mActiveProcState != i) {
+            if (sourceState.mActiveStartUptime == j3 || sourceState.mActiveProcState != i) {
                 str2 = null;
             } else {
-                j3 += j2 - sourceState.mActiveStartUptime;
+                valueForId += j2 - sourceState.mActiveStartUptime;
                 z3 = true;
                 str2 = " (running)";
             }
-            if (j3 != j4) {
+            if (valueForId != j3) {
                 if (printWriter != null) {
                     printWriter.print(str);
                     printWriter.print(DumpUtils.STATE_LABELS[i]);
                     printWriter.print(": ");
                     if (z2) {
-                        TimeUtils.formatDuration(j3, printWriter);
+                        TimeUtils.formatDuration(valueForId, printWriter);
                         printWriter.print(" / ");
                     } else {
                         printWriter.print("time ");
                     }
-                    DumpUtils.printPercent(printWriter, j3 / j);
+                    DumpUtils.printPercent(printWriter, valueForId / j);
                     if (str2 != null) {
                         printWriter.print(str2);
                     }
                     printWriter.println();
                 }
-                j5 += j3;
+                j4 += valueForId;
             }
             i++;
-            j4 = 0;
+            j3 = 0;
         }
-        return z3 ? -j5 : j5;
+        return z3 ? -j4 : j4;
     }
 
     public void dumpTimesCheckin(PrintWriter printWriter, String str, int i, long j, String str2, long j2) {
@@ -986,8 +986,8 @@ public final class AssociationState {
         int size = associationState.mSources.size();
         int i4 = 0;
         while (i4 < size) {
-            SourceKey keyAt = associationState.mSources.keyAt(i4);
-            SourceState valueAt = associationState.mSources.valueAt(i4);
+            SourceKey sourceKeyKeyAt = associationState.mSources.keyAt(i4);
+            SourceState sourceStateValueAt = associationState.mSources.valueAt(i4);
             printWriter.print("pkgasc");
             printWriter.print(",");
             printWriter.print(str);
@@ -998,30 +998,30 @@ public final class AssociationState {
             printWriter.print(",");
             printWriter.print(str2);
             printWriter.print(",");
-            printWriter.print(keyAt.mProcess);
+            printWriter.print(sourceKeyKeyAt.mProcess);
             printWriter.print(",");
-            printWriter.print(keyAt.mUid);
+            printWriter.print(sourceKeyKeyAt.mUid);
             printWriter.print(",");
-            printWriter.print(valueAt.mCount);
-            long j3 = valueAt.mDuration;
-            if (valueAt.mNesting > 0) {
-                j3 += j2 - valueAt.mStartUptime;
+            printWriter.print(sourceStateValueAt.mCount);
+            long j3 = sourceStateValueAt.mDuration;
+            if (sourceStateValueAt.mNesting > 0) {
+                j3 += j2 - sourceStateValueAt.mStartUptime;
             }
             printWriter.print(",");
             printWriter.print(j3);
             printWriter.print(",");
-            printWriter.print(valueAt.mActiveCount);
-            long j4 = valueAt.mActiveStartUptime != 0 ? j2 - valueAt.mActiveStartUptime : 0L;
-            if (valueAt.mActiveDurations != null) {
-                int keyCount = valueAt.mActiveDurations.getKeyCount();
+            printWriter.print(sourceStateValueAt.mActiveCount);
+            long j4 = sourceStateValueAt.mActiveStartUptime != 0 ? j2 - sourceStateValueAt.mActiveStartUptime : 0L;
+            if (sourceStateValueAt.mActiveDurations != null) {
+                int keyCount = sourceStateValueAt.mActiveDurations.getKeyCount();
                 int i5 = 0;
                 while (i5 < keyCount) {
-                    int keyAt2 = valueAt.mActiveDurations.getKeyAt(i5);
-                    long value = valueAt.mActiveDurations.getValue(keyAt2);
-                    if (keyAt2 == valueAt.mActiveProcState) {
+                    int keyAt = sourceStateValueAt.mActiveDurations.getKeyAt(i5);
+                    long value = sourceStateValueAt.mActiveDurations.getValue(keyAt);
+                    if (keyAt == sourceStateValueAt.mActiveProcState) {
                         value += j4;
                     }
-                    byte idFromKey = SparseMappingTable.getIdFromKey(keyAt2);
+                    byte idFromKey = SparseMappingTable.getIdFromKey(keyAt);
                     printWriter.print(",");
                     DumpUtils.printArrayEntry(printWriter, DumpUtils.STATE_TAGS, idFromKey, 1);
                     printWriter.print(ShortcutConstants.SERVICES_SEPARATOR);
@@ -1036,10 +1036,10 @@ public final class AssociationState {
             } else {
                 i2 = size;
                 i3 = i4;
-                long j5 = valueAt.mActiveDuration + j4;
+                long j5 = sourceStateValueAt.mActiveDuration + j4;
                 if (j5 != 0) {
                     printWriter.print(",");
-                    DumpUtils.printArrayEntry(printWriter, DumpUtils.STATE_TAGS, valueAt.mActiveProcState, 1);
+                    DumpUtils.printArrayEntry(printWriter, DumpUtils.STATE_TAGS, sourceStateValueAt.mActiveProcState, 1);
                     printWriter.print(ShortcutConstants.SERVICES_SEPARATOR);
                     printWriter.print(j5);
                 }
@@ -1055,7 +1055,7 @@ public final class AssociationState {
         int i;
         long j3;
         long j4 = j2;
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mName);
         protoOutputStream.write(1120986464259L, this.mTotalCount);
         protoOutputStream.write(1112396529668L, getTotalDuration(j4));
@@ -1067,60 +1067,60 @@ public final class AssociationState {
         int size = this.mSources.size();
         int i3 = 0;
         while (i3 < size) {
-            SourceKey keyAt = this.mSources.keyAt(i3);
-            SourceState valueAt = this.mSources.valueAt(i3);
-            long start2 = protoOutputStream.start(2246267895810L);
-            protoOutputStream.write(1138166333442L, keyAt.mProcess);
-            protoOutputStream.write(1138166333447L, keyAt.mPackage);
-            protoOutputStream.write(1120986464257L, keyAt.mUid);
-            protoOutputStream.write(1120986464259L, valueAt.mCount);
-            long j5 = valueAt.mDuration;
-            if (valueAt.mNesting > 0) {
-                j5 += j4 - valueAt.mStartUptime;
+            SourceKey sourceKeyKeyAt = this.mSources.keyAt(i3);
+            SourceState sourceStateValueAt = this.mSources.valueAt(i3);
+            long jStart2 = protoOutputStream.start(2246267895810L);
+            protoOutputStream.write(1138166333442L, sourceKeyKeyAt.mProcess);
+            protoOutputStream.write(1138166333447L, sourceKeyKeyAt.mPackage);
+            protoOutputStream.write(1120986464257L, sourceKeyKeyAt.mUid);
+            protoOutputStream.write(1120986464259L, sourceStateValueAt.mCount);
+            long j5 = sourceStateValueAt.mDuration;
+            if (sourceStateValueAt.mNesting > 0) {
+                j5 += j4 - sourceStateValueAt.mStartUptime;
             }
             protoOutputStream.write(1112396529668L, j5);
-            if (valueAt.mActiveCount != 0) {
-                protoOutputStream.write(1120986464261L, valueAt.mActiveCount);
+            if (sourceStateValueAt.mActiveCount != 0) {
+                protoOutputStream.write(1120986464261L, sourceStateValueAt.mActiveCount);
             }
-            long j6 = valueAt.mActiveStartUptime != 0 ? j4 - valueAt.mActiveStartUptime : 0L;
-            if (valueAt.mActiveDurations != null) {
-                int keyCount = valueAt.mActiveDurations.getKeyCount();
+            long j6 = sourceStateValueAt.mActiveStartUptime != 0 ? j4 - sourceStateValueAt.mActiveStartUptime : 0L;
+            if (sourceStateValueAt.mActiveDurations != null) {
+                int keyCount = sourceStateValueAt.mActiveDurations.getKeyCount();
                 i = i3;
                 int i4 = 0;
                 while (i4 < keyCount) {
-                    int keyAt2 = valueAt.mActiveDurations.getKeyAt(i4);
-                    long value = valueAt.mActiveDurations.getValue(keyAt2);
-                    if (keyAt2 == valueAt.mActiveProcState) {
+                    int keyAt = sourceStateValueAt.mActiveDurations.getKeyAt(i4);
+                    long value = sourceStateValueAt.mActiveDurations.getValue(keyAt);
+                    if (keyAt == sourceStateValueAt.mActiveProcState) {
                         value += j6;
                     }
-                    byte idFromKey = SparseMappingTable.getIdFromKey(keyAt2);
-                    long start3 = protoOutputStream.start(2246267895814L);
+                    byte idFromKey = SparseMappingTable.getIdFromKey(keyAt);
+                    long jStart3 = protoOutputStream.start(2246267895814L);
                     DumpUtils.printProto(protoOutputStream, 1159641169921L, DumpUtils.STATE_PROTO_ENUMS, idFromKey, 1);
                     protoOutputStream.write(1112396529666L, value);
-                    protoOutputStream.end(start3);
+                    protoOutputStream.end(jStart3);
                     i4++;
                     j6 = j6;
-                    valueAt = valueAt;
+                    sourceStateValueAt = sourceStateValueAt;
                     keyCount = keyCount;
-                    start2 = start2;
+                    jStart2 = jStart2;
                 }
-                j3 = start2;
+                j3 = jStart2;
             } else {
                 i = i3;
-                j3 = start2;
-                long j7 = valueAt.mActiveDuration + j6;
+                j3 = jStart2;
+                long j7 = sourceStateValueAt.mActiveDuration + j6;
                 if (j7 != 0) {
-                    long start4 = protoOutputStream.start(2246267895814L);
-                    DumpUtils.printProto(protoOutputStream, 1159641169921L, DumpUtils.STATE_PROTO_ENUMS, valueAt.mActiveProcState, 1);
+                    long jStart4 = protoOutputStream.start(2246267895814L);
+                    DumpUtils.printProto(protoOutputStream, 1159641169921L, DumpUtils.STATE_PROTO_ENUMS, sourceStateValueAt.mActiveProcState, 1);
                     protoOutputStream.write(1112396529666L, j7);
-                    protoOutputStream.end(start4);
+                    protoOutputStream.end(jStart4);
                 }
             }
             protoOutputStream.end(j3);
             i3 = i + 1;
             j4 = j2;
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public String toString() {

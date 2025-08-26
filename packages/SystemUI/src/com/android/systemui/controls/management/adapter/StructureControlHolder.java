@@ -13,7 +13,6 @@ import com.android.systemui.controls.management.model.StructureElementWrapper;
 import com.android.systemui.controls.ui.util.LayoutUtil;
 import com.android.systemui.controls.util.ControlsUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StructureControlHolder extends SecStructureViewHolder {
     public final Context context;
@@ -21,7 +20,7 @@ public final class StructureControlHolder extends SecStructureViewHolder {
     public final LinearLayout structureLayout;
 
     public StructureControlHolder(View view, int i, LayoutUtil layoutUtil, ControlsUtil controlsUtil) {
-        super(view, 0 == true ? 1 : 0);
+        super(view, null);
         this.structureLayout = (LinearLayout) this.itemView.requireViewById(R.id.structure_layout);
         RecyclerView recyclerView = (RecyclerView) this.itemView.requireViewById(R.id.structure_recyclerview);
         Context context = this.itemView.getContext();

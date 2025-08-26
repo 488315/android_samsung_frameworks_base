@@ -1,12 +1,12 @@
 package androidx.appcompat.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SeslArrayAdapter extends ArrayAdapter {
     public int mInitPaddingBottom;
@@ -17,7 +17,7 @@ public final class SeslArrayAdapter extends ArrayAdapter {
     }
 
     @Override // android.widget.ArrayAdapter, android.widget.BaseAdapter, android.widget.SpinnerAdapter
-    public final View getDropDownView(int i, View view, ViewGroup viewGroup) {
+    public final View getDropDownView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         View dropDownView = super.getDropDownView(i, view, viewGroup);
         if (view == null) {
             this.mInitPaddingTop = dropDownView.getPaddingTop();

@@ -38,9 +38,9 @@ public interface IThermalHeadroomListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IThermalHeadroomListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IThermalHeadroomListener)) {
-                return (IThermalHeadroomListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IThermalHeadroomListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IThermalHeadroomListener)) {
+                return (IThermalHeadroomListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,12 +67,12 @@ public interface IThermalHeadroomListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                float readFloat = parcel.readFloat();
-                float readFloat2 = parcel.readFloat();
-                int readInt = parcel.readInt();
-                float[] createFloatArray = parcel.createFloatArray();
+                float f = parcel.readFloat();
+                float f2 = parcel.readFloat();
+                int i3 = parcel.readInt();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                onHeadroomChange(readFloat, readFloat2, readInt, createFloatArray);
+                onHeadroomChange(f, f2, i3, fArrCreateFloatArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -96,16 +96,16 @@ public interface IThermalHeadroomListener extends IInterface {
 
             @Override // android.os.IThermalHeadroomListener
             public void onHeadroomChange(float f, float f2, int i, float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IThermalHeadroomListener.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeInt(i);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IThermalHeadroomListener.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

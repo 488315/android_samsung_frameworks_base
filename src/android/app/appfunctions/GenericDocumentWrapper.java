@@ -12,13 +12,13 @@ public final class GenericDocumentWrapper implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public GenericDocumentWrapper createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int dataPosition = parcel.dataPosition();
-            parcel.setDataPosition(MathUtils.addOrThrow(dataPosition, readInt));
-            Parcel obtain = Parcel.obtain();
-            obtain.appendFrom(parcel, dataPosition, readInt);
-            obtain.setDataPosition(0);
-            return new GenericDocumentWrapper(obtain);
+            int i = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            parcel.setDataPosition(MathUtils.addOrThrow(iDataPosition, i));
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.appendFrom(parcel, iDataPosition, i);
+            parcelObtain.setDataPosition(0);
+            return new GenericDocumentWrapper(parcelObtain);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -67,15 +67,15 @@ public final class GenericDocumentWrapper implements Parcelable {
                 return;
             }
             byte[] bArr = (byte[]) Objects.requireNonNull(((Parcel) Objects.requireNonNull(this.mParcel)).readBlob());
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                obtain.unmarshall(bArr, 0, bArr.length);
-                obtain.setDataPosition(0);
-                this.mGenericDocument = GenericDocument.createFromParcel(obtain);
+                parcelObtain.unmarshall(bArr, 0, bArr.length);
+                parcelObtain.setDataPosition(0);
+                this.mGenericDocument = GenericDocument.createFromParcel(parcelObtain);
                 this.mParcel.recycle();
                 this.mParcel = null;
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
     }
@@ -86,10 +86,10 @@ public final class GenericDocumentWrapper implements Parcelable {
             if (num != null) {
                 return num.intValue();
             }
-            Parcel obtain = Parcel.obtain();
-            writeToParcel(obtain, 0);
-            this.mDataSize = Integer.valueOf(obtain.dataSize());
-            obtain.recycle();
+            Parcel parcelObtain = Parcel.obtain();
+            writeToParcel(parcelObtain, 0);
+            this.mDataSize = Integer.valueOf(parcelObtain.dataSize());
+            parcelObtain.recycle();
             return this.mDataSize.intValue();
         }
     }
@@ -98,21 +98,21 @@ public final class GenericDocumentWrapper implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         synchronized (this.mLock) {
             if (this.mGenericDocument != null) {
-                int dataPosition = parcel.dataPosition();
+                int iDataPosition = parcel.dataPosition();
                 parcel.writeInt(-1);
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    this.mGenericDocument.writeToParcel(obtain, i);
-                    byte[] marshall = obtain.marshall();
-                    obtain.recycle();
-                    int dataPosition2 = parcel.dataPosition();
-                    parcel.writeBlob(marshall);
-                    int dataPosition3 = parcel.dataPosition();
-                    parcel.setDataPosition(dataPosition);
-                    parcel.writeInt(dataPosition3 - dataPosition2);
-                    parcel.setDataPosition(dataPosition3);
+                    this.mGenericDocument.writeToParcel(parcelObtain, i);
+                    byte[] bArrMarshall = parcelObtain.marshall();
+                    parcelObtain.recycle();
+                    int iDataPosition2 = parcel.dataPosition();
+                    parcel.writeBlob(bArrMarshall);
+                    int iDataPosition3 = parcel.dataPosition();
+                    parcel.setDataPosition(iDataPosition);
+                    parcel.writeInt(iDataPosition3 - iDataPosition2);
+                    parcel.setDataPosition(iDataPosition3);
                 } catch (Throwable th) {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                     throw th;
                 }
             } else {

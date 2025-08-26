@@ -46,9 +46,9 @@ public interface IOnProjectionStateChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnProjectionStateChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnProjectionStateChangedListener)) {
-                return (IOnProjectionStateChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOnProjectionStateChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnProjectionStateChangedListener)) {
+                return (IOnProjectionStateChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IOnProjectionStateChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                int i3 = parcel.readInt();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                onProjectionStateChanged(readInt, createStringArrayList);
+                onProjectionStateChanged(i3, arrayListCreateStringArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface IOnProjectionStateChangedListener extends IInterface {
 
             @Override // android.app.IOnProjectionStateChangedListener
             public void onProjectionStateChanged(int i, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnProjectionStateChangedListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnProjectionStateChangedListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

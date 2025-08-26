@@ -67,11 +67,11 @@ public class SemExecutableWhitelist {
                 }
                 return false;
             }
-            boolean isMatchedSignature = isMatchedSignature(signatureArr, num.intValue());
-            if (!isMatchedSignature && DEBUG) {
+            boolean zIsMatchedSignature = isMatchedSignature(signatureArr, num.intValue());
+            if (!zIsMatchedSignature && DEBUG) {
                 SemLog.d(TAG, "isAllowedToUse : executable manager white lists don't match this App");
             }
-            return isMatchedSignature;
+            return zIsMatchedSignature;
         } catch (PackageManager.NameNotFoundException e) {
             if (DEBUG) {
                 SemLog.d(TAG, "isNotAllowedToUse : " + e);

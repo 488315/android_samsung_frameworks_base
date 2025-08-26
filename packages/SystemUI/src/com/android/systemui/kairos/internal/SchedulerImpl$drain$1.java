@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SchedulerImpl$drain$1 implements Function2 {
     public final /* synthetic */ int $maxDepth;
@@ -36,9 +35,9 @@ public final class SchedulerImpl$drain$1 implements Function2 {
                 break;
             }
             Pair pair2 = (Pair) schedulerImpl.scheduledQ.remove();
-            int intValue = ((Number) pair2.component1()).intValue();
+            int iIntValue = ((Number) pair2.component1()).intValue();
             MuxNode muxNode = (MuxNode) pair2.component2();
-            if (muxNode.depthTracker.dirty_directUpstreamDepths.isEmpty() || intValue >= muxNode.depthTracker.dirty_directDepth) {
+            if (muxNode.depthTracker.dirty_directUpstreamDepths.isEmpty() || iIntValue >= muxNode.depthTracker.dirty_directDepth) {
                 i4++;
                 arrayList.add(muxNode);
             } else {
@@ -49,7 +48,7 @@ public final class SchedulerImpl$drain$1 implements Function2 {
         while (i3 < size) {
             Object obj3 = arrayList.get(i3);
             i3++;
-            function2.invoke(LogIndent.m2570boximpl(), (MuxNode) obj3);
+            function2.invoke(LogIndent.m2587boximpl(), (MuxNode) obj3);
         }
         ref$IntRef.element += i4;
         return Unit.INSTANCE;

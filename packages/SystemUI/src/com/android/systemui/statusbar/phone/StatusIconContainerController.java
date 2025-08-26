@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.ViewController;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusIconContainerController extends ViewController implements ConfigurationController.ConfigurationListener {
     public final ConfigurationController configurationController;
@@ -33,26 +32,27 @@ public final class StatusIconContainerController extends ViewController implemen
         if (!BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT || statusIconContainer.mSidelingCutoutContainerInfo == null || statusIconContainer.mIndicatorCutoutUtil == null) {
             return;
         }
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusIconContainerStatusIconContainer:", "StatusIconContainer   mParent=");
-        m.append(statusIconContainer.mSidelingCutoutContainerInfo);
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "StatusIconContainerStatusIconContainer:", "StatusIconContainer   mParent=");
+        sbM.append(statusIconContainer.mSidelingCutoutContainerInfo);
+        printWriter.println(sbM.toString());
         printWriter.println("StatusIconContainer   displayCutoutRect=" + statusIconContainer.mIndicatorCutoutUtil.getDisplayCutoutAreaToExclude());
         printWriter.println("StatusIconContainer   StatusIconContainer width=" + statusIconContainer.getWidth());
         printWriter.println("StatusIconContainer   StatusIconContainer measuredWidth=" + statusIconContainer.getMeasuredWidth());
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("StatusIconContainer   mCutoutRightSideAvailableWidth="), statusIconContainer.mCutoutRightSideAvailableWidth, printWriter, "StatusIconContainer   mCutoutRightSideIconsWidth="), statusIconContainer.mCutoutRightSideIconsWidth, printWriter, "StatusIconContainer   mDeltaWidth=");
-        m2.append(statusIconContainer.mDeltaWidth);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("StatusIconContainer   mCutoutRightSideAvailableWidth="), statusIconContainer.mCutoutRightSideAvailableWidth, printWriter, "StatusIconContainer   mCutoutRightSideIconsWidth="), statusIconContainer.mCutoutRightSideIconsWidth, printWriter, "StatusIconContainer   mDeltaWidth=");
+        sbM2.append(statusIconContainer.mDeltaWidth);
+        printWriter.println(sbM2.toString());
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onDensityOrFontScaleChanged() {
-        updateStatusIconContainerPadding();
+        int iRint = (int) Math.rint(getResources().getDimensionPixelSize(R.dimen.signal_cluster_battery_padding) * this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio);
+        StatusIconContainer statusIconContainer = this.view;
+        statusIconContainer.setPaddingRelative(iRint, statusIconContainer.getPaddingTop(), iRint, statusIconContainer.getPaddingBottom());
     }
 
     @Override // com.android.systemui.util.ViewController
     public final void onViewAttached() {
         ((ConfigurationControllerImpl) this.configurationController).addCallback(this);
-        updateStatusIconContainerPadding();
         if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT) {
             this.view.mIndicatorCutoutUtil = this.indicatorCutoutUtil;
         }
@@ -61,11 +61,5 @@ public final class StatusIconContainerController extends ViewController implemen
     @Override // com.android.systemui.util.ViewController
     public final void onViewDetached() {
         ((ConfigurationControllerImpl) this.configurationController).removeCallback(this);
-    }
-
-    public final void updateStatusIconContainerPadding() {
-        int rint = (int) Math.rint(getResources().getDimensionPixelSize(R.dimen.signal_cluster_battery_padding) * this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio);
-        StatusIconContainer statusIconContainer = this.view;
-        statusIconContainer.setPaddingRelative(statusIconContainer.getPaddingStart(), statusIconContainer.getPaddingTop(), rint, statusIconContainer.getPaddingBottom());
     }
 }

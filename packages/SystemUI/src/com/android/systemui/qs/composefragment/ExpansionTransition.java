@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlinx.coroutines.CompletableDeferredImpl;
 import kotlinx.coroutines.CompletableDeferredKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ExpansionTransition extends TransitionState.Transition.ChangeScene {
     public final CompletableDeferredImpl finishCompletable;
@@ -57,7 +56,7 @@ public final class ExpansionTransition extends TransitionState.Transition.Change
 
     @Override // com.android.compose.animation.scene.content.state.TransitionState.Transition
     public final Object run(Continuation continuation) {
-        Object awaitInternal = this.finishCompletable.awaitInternal(continuation);
-        return awaitInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? awaitInternal : Unit.INSTANCE;
+        Object objAwaitInternal = this.finishCompletable.awaitInternal(continuation);
+        return objAwaitInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objAwaitInternal : Unit.INSTANCE;
     }
 }

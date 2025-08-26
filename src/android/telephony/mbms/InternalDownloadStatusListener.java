@@ -21,7 +21,7 @@ public class InternalDownloadStatusListener extends IDownloadStatusListener.Stub
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadStatusListener.1
                 @Override // java.lang.Runnable
@@ -30,7 +30,7 @@ public class InternalDownloadStatusListener extends IDownloadStatusListener.Stub
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

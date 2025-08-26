@@ -1,11 +1,11 @@
 package com.android.systemui.volume.view.subscreen.simple;
 
+import android.content.res.Resources;
 import android.view.View;
 import com.android.systemui.R;
 import com.android.systemui.volume.util.BlurEffect;
 import com.android.systemui.volume.util.ContextUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class SubDisplayVolumePanelPresentation$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -17,7 +17,7 @@ public final /* synthetic */ class SubDisplayVolumePanelPresentation$$ExternalSy
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         int i = this.$r8$classId;
         SubDisplayVolumePanelPresentation subDisplayVolumePanelPresentation = this.f$0;
         switch (i) {
@@ -44,9 +44,9 @@ public final /* synthetic */ class SubDisplayVolumePanelPresentation$$ExternalSy
                 int color2 = subDisplayVolumePanelPresentation.getContext().getColor(R.color.sub_large_display_volume_seekbar_background_color_blur);
                 float dimension2 = subDisplayVolumePanelPresentation.getContext().getResources().getDimension(R.dimen.volume_sub_large_display_seek_bar_radius);
                 BlurEffect blurEffect4 = subDisplayVolumePanelPresentation.mBlurEffect;
-                boolean isNightMode = ContextUtils.isNightMode(subDisplayVolumePanelPresentation.getContext());
+                boolean zIsNightMode = ContextUtils.isNightMode(subDisplayVolumePanelPresentation.getContext());
                 blurEffect4.getClass();
-                int i2 = isNightMode ? 106 : 121;
+                int i2 = zIsNightMode ? 106 : 121;
                 blurEffect3.getClass();
                 BlurEffect.setRealTimeBlur(view3, color2, dimension2, i2);
                 break;

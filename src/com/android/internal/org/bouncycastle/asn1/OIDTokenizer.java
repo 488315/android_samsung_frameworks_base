@@ -18,14 +18,14 @@ public class OIDTokenizer {
         if (i == -1) {
             return null;
         }
-        int indexOf = this.oid.indexOf(46, i);
-        if (indexOf == -1) {
-            String substring = this.oid.substring(this.index);
+        int iIndexOf = this.oid.indexOf(46, i);
+        if (iIndexOf == -1) {
+            String strSubstring = this.oid.substring(this.index);
             this.index = -1;
-            return substring;
+            return strSubstring;
         }
-        String substring2 = this.oid.substring(this.index, indexOf);
-        this.index = indexOf + 1;
-        return substring2;
+        String strSubstring2 = this.oid.substring(this.index, iIndexOf);
+        this.index = iIndexOf + 1;
+        return strSubstring2;
     }
 }

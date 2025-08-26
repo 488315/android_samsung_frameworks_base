@@ -35,7 +35,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsProfile implements Parcelable, Cloneable {
     public static final int AUDIO_CAPABILITIES_NB_ONLY = 3;
@@ -221,7 +220,6 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum PROFILE_TYPE {
         EMERGENCY,
         VOLTE,
@@ -229,7 +227,6 @@ public class ImsProfile implements Parcelable, Cloneable {
         CHAT
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum RCS_PROFILE {
         UNKNOWN,
         JOYN_BB,
@@ -312,9 +309,9 @@ public class ImsProfile implements Parcelable, Cloneable {
     private Map<String, Integer> getTimerMap() {
         ArrayMap arrayMap = new ArrayMap();
         for (String str : TextUtils.split(getAsString("timer"), ",")) {
-            String[] split = TextUtils.split(str, ":");
-            if (split.length == 2) {
-                arrayMap.put(split[0], Integer.valueOf(split[1]));
+            String[] strArrSplit = TextUtils.split(str, ":");
+            if (strArrSplit.length == 2) {
+                arrayMap.put(strArrSplit[0], Integer.valueOf(strArrSplit[1]));
             }
         }
         return arrayMap;
@@ -376,30 +373,30 @@ public class ImsProfile implements Parcelable, Cloneable {
         boolean z = SemCarrierFeature.getInstance().getBoolean(i, "CarrierFeature_VoiceCall_SupportRTT", false, false);
         String str = SemSystemProperties.get("ro.boot.carrierid", "DEFAULT");
         Log.i(LOG_TAG, "carrierId : " + str + " isRttSupportByCallApp " + z);
-        return z || "EUX".equals(str) || "EUY".equals(str) || "EEX".equals(str) || "EEY".equals(str) || "TUR".equals(str) || "M09".equals(str);
+        return z || "EUX".equals(str) || "EUY".equals(str) || "EEX".equals(str) || "EEY".equals(str) || str.equals("SEK");
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:11:0x0137. Please report as an issue. */
-    public static String trimAudioCodec(String str, String str2, String str3, String str4, int i) {
+    /* JADX WARN: Failed to find 'out' block for switch in B:65:0x0137. Please report as an issue. */
+    public static String trimAudioCodec(String str, String str2, String str3, String str4, int i) throws NumberFormatException {
         int i2;
         int i3;
         int i4;
         int i5;
         int i6;
-        String m;
+        String strM;
         String str5;
         char c;
         String str6;
+        String strM2;
         String str7;
-        String str8;
-        String str9 = "DTMFWB";
-        String str10 = LOG_TAG;
+        String str8 = "DTMFWB";
+        String str9 = LOG_TAG;
         try {
-            int parseInt = Integer.parseInt(str2);
-            int parseInt2 = Integer.parseInt(str3);
+            int i7 = Integer.parseInt(str2);
+            int i8 = Integer.parseInt(str3);
             i5 = Integer.parseInt(str4);
-            i4 = parseInt2;
-            i3 = parseInt;
+            i4 = i8;
+            i3 = i7;
             i2 = i;
         } catch (NumberFormatException unused) {
             Log.e(LOG_TAG, "trimAudioCodec: Invalid values. Use default.");
@@ -408,61 +405,61 @@ public class ImsProfile implements Parcelable, Cloneable {
             i4 = 0;
             i5 = 0;
         }
-        StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "trimAudioCodec : audioCodecMode=", " audioCapabilities=", " dtmfCodecMode=");
-        m2.append(i5);
-        m2.append(" isEnableEvs=");
-        m2.append(i2);
-        Log.i(LOG_TAG, m2.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "trimAudioCodec : audioCodecMode=", " audioCapabilities=", " dtmfCodecMode=");
+        sbM.append(i5);
+        sbM.append(" isEnableEvs=");
+        sbM.append(i2);
+        Log.i(LOG_TAG, sbM.toString());
         StringTokenizer stringTokenizer = new StringTokenizer(str, ",");
+        String str10 = "";
         String str11 = "";
-        String str12 = "";
+        String str12 = str11;
         String str13 = str12;
         String str14 = str13;
-        String str15 = str14;
-        int i7 = i2;
-        int i8 = i3;
-        int i9 = i4;
-        int i10 = i5;
+        int i9 = i2;
+        int i10 = i3;
+        int i11 = i4;
+        int i12 = i5;
+        String strM3 = str14;
+        String str15 = strM3;
         String str16 = str15;
         String str17 = str16;
-        String str18 = str17;
-        String str19 = str18;
         while (stringTokenizer.hasMoreElements()) {
-            String str20 = str10;
+            String str18 = str9;
             String upperCase = stringTokenizer.nextToken().toUpperCase();
             upperCase.getClass();
             char c2 = 65535;
             switch (upperCase.hashCode()) {
                 case -652494161:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("AMRBE-WB")) {
                         c2 = 0;
                         break;
                     }
                     break;
                 case -159196944:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("AMROPEN")) {
                         c2 = 1;
                         break;
                     }
                     break;
                 case 64934:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("AMR")) {
                         c2 = 2;
                         break;
                     }
                     break;
                 case 69058:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS")) {
                         c2 = 3;
                         break;
                     }
                     break;
                 case 2108969:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("DTMF")) {
                         c = 4;
                         c2 = c;
@@ -470,7 +467,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 62403689:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("AMRBE")) {
                         c = 5;
                         c2 = c;
@@ -478,7 +475,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 1934494802:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("AMR-WB")) {
                         c = 6;
                         c2 = c;
@@ -486,15 +483,15 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 2026721972:
-                    str5 = str17;
-                    if (upperCase.equals(str9)) {
+                    str5 = str15;
+                    if (upperCase.equals(str8)) {
                         c = 7;
                         c2 = c;
                         break;
                     }
                     break;
                 case 2057400237:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS_A1")) {
                         c = '\b';
                         c2 = c;
@@ -502,7 +499,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 2057400238:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS_A2")) {
                         c = '\t';
                         c2 = c;
@@ -510,7 +507,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 2057400267:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS_B0")) {
                         c = '\n';
                         c2 = c;
@@ -518,7 +515,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 2057400268:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS_B1")) {
                         c = 11;
                         c2 = c;
@@ -526,7 +523,7 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 case 2057400269:
-                    str5 = str17;
+                    str5 = str15;
                     if (upperCase.equals("EVS_B2")) {
                         c = '\f';
                         c2 = c;
@@ -534,27 +531,27 @@ public class ImsProfile implements Parcelable, Cloneable {
                     }
                     break;
                 default:
-                    str5 = str17;
+                    str5 = str15;
                     break;
             }
             switch (c2) {
                 case 0:
-                    str6 = str9;
-                    str7 = str12;
-                    str14 = "AMRBE-WB";
-                    str17 = str5;
+                    str6 = str8;
+                    strM2 = str11;
+                    str13 = "AMRBE-WB";
+                    str15 = str5;
                     break;
                 case 1:
-                    str6 = str9;
-                    str7 = str12;
-                    str15 = "AMROPEN";
-                    str17 = str5;
+                    str6 = str8;
+                    strM2 = str11;
+                    str14 = "AMROPEN";
+                    str15 = str5;
                     break;
                 case 2:
-                    str6 = str9;
-                    str7 = str12;
-                    str19 = "AMR";
-                    str17 = str5;
+                    str6 = str8;
+                    strM2 = str11;
+                    str17 = "AMR";
+                    str15 = str5;
                     break;
                 case 3:
                 case '\b':
@@ -562,234 +559,234 @@ public class ImsProfile implements Parcelable, Cloneable {
                 case '\n':
                 case 11:
                 case '\f':
-                    StringBuilder m3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str12);
-                    if (TextUtils.isEmpty(str12)) {
-                        str6 = str9;
-                        str8 = str12;
+                    StringBuilder sbM2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str11);
+                    if (TextUtils.isEmpty(str11)) {
+                        str6 = str8;
+                        str7 = str11;
                     } else {
-                        str6 = str9;
-                        str8 = ",";
+                        str6 = str8;
+                        str7 = ",";
                     }
-                    m3.append(str8);
-                    str7 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m3.toString(), upperCase);
-                    str17 = str5;
+                    sbM2.append(str7);
+                    strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM2.toString(), upperCase);
+                    str15 = str5;
                     break;
                 case 4:
-                    str6 = str9;
-                    str17 = "DTMF";
-                    str7 = str12;
+                    str6 = str8;
+                    str15 = "DTMF";
+                    strM2 = str11;
                     break;
                 case 5:
-                    str6 = str9;
-                    str13 = "AMRBE";
-                    str17 = str5;
-                    str7 = str12;
+                    str6 = str8;
+                    str12 = "AMRBE";
+                    str15 = str5;
+                    strM2 = str11;
                     break;
                 case 6:
-                    str6 = str9;
-                    str11 = "AMR-WB";
-                    str17 = str5;
-                    str7 = str12;
+                    str6 = str8;
+                    str10 = "AMR-WB";
+                    str15 = str5;
+                    strM2 = str11;
                     break;
                 case 7:
-                    str18 = str9;
-                    str6 = str18;
-                    str17 = str5;
-                    str7 = str12;
+                    str16 = str8;
+                    str6 = str16;
+                    str15 = str5;
+                    strM2 = str11;
                     break;
                 default:
-                    str16 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str16, ",", upperCase);
-                    str6 = str9;
-                    str17 = str5;
-                    str7 = str12;
+                    strM3 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM3, ",", upperCase);
+                    str6 = str8;
+                    str15 = str5;
+                    strM2 = str11;
                     break;
             }
-            str12 = str7;
-            str9 = str6;
-            str10 = str20;
+            str11 = strM2;
+            str8 = str6;
+            str9 = str18;
         }
-        String str21 = str10;
-        String str22 = str12;
-        StringBuilder m4 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("trimAudioCodec : EVS=", str22, " AMRBE_WB=", str14, " AMRBE=");
-        MoveResult$$ExternalSyntheticOutline0.m(m4, str13, " AMR-WB=", str11, " AMR=");
-        MoveResult$$ExternalSyntheticOutline0.m(m4, str19, " DTMFWB=", str18, " DTMF=");
-        m4.append(str17);
-        m4.append(" OTHERS=");
-        m4.append(str16);
-        Log.i(str21, m4.toString());
-        if (i7 != 1 || TextUtils.isEmpty(str22)) {
-            str22 = str12;
+        String str19 = str9;
+        String str20 = str11;
+        StringBuilder sbM3 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("trimAudioCodec : EVS=", str20, " AMRBE_WB=", str13, " AMRBE=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM3, str12, " AMR-WB=", str10, " AMR=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM3, str17, " DTMFWB=", str16, " DTMF=");
+        sbM3.append(str15);
+        sbM3.append(" OTHERS=");
+        sbM3.append(strM3);
+        Log.i(str19, sbM3.toString());
+        if (i9 != 1 || TextUtils.isEmpty(str20)) {
+            str20 = str11;
         }
-        if (i8 == 0) {
-            i6 = i9;
+        if (i10 == 0) {
+            i6 = i11;
             if (i6 == 1) {
-                StringBuilder m5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m5.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                String m6 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m5.toString(), str13);
-                StringBuilder m7 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m6);
-                m7.append((TextUtils.isEmpty(m6) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m7.toString(), str14);
+                StringBuilder sbM4 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM4.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                String strM4 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM4.toString(), str12);
+                StringBuilder sbM5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM4);
+                sbM5.append((TextUtils.isEmpty(strM4) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM5.toString(), str13);
             } else if (i6 == 2) {
-                StringBuilder m8 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m8.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m8.toString(), str14);
+                StringBuilder sbM6 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM6.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM6.toString(), str13);
             } else if (i6 != 3) {
-                StringBuilder m9 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m9.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                String m10 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m9.toString(), str14);
-                StringBuilder m11 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m10);
-                m11.append((TextUtils.isEmpty(m10) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m11.toString(), str13);
+                StringBuilder sbM7 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM7.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                String strM5 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM7.toString(), str13);
+                StringBuilder sbM8 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM5);
+                sbM8.append((TextUtils.isEmpty(strM5) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM8.toString(), str12);
             } else {
-                StringBuilder m12 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m12.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m12.toString(), str13);
+                StringBuilder sbM9 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM9.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM9.toString(), str12);
             }
-        } else if (i8 == 1) {
-            i6 = i9;
+        } else if (i10 == 1) {
+            i6 = i11;
             if (i6 == 1) {
-                StringBuilder m13 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m13.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                String m14 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m13.toString(), str19);
-                StringBuilder m15 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m14);
-                m15.append((TextUtils.isEmpty(m14) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m15.toString(), str11);
+                StringBuilder sbM10 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM10.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                String strM6 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM10.toString(), str17);
+                StringBuilder sbM11 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM6);
+                sbM11.append((TextUtils.isEmpty(strM6) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM11.toString(), str10);
             } else if (i6 == 2) {
-                StringBuilder m16 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m16.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m16.toString(), str11);
+                StringBuilder sbM12 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM12.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM12.toString(), str10);
             } else if (i6 != 3) {
-                StringBuilder m17 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m17.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                String m18 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m17.toString(), str11);
-                StringBuilder m19 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m18);
-                m19.append((TextUtils.isEmpty(m18) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m19.toString(), str19);
+                StringBuilder sbM13 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM13.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                String strM7 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM13.toString(), str10);
+                StringBuilder sbM14 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM7);
+                sbM14.append((TextUtils.isEmpty(strM7) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM14.toString(), str17);
             } else {
-                StringBuilder m20 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m20.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m20.toString(), str19);
+                StringBuilder sbM15 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM15.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM15.toString(), str17);
             }
-        } else if (i8 != 3) {
-            i6 = i9;
+        } else if (i10 != 3) {
+            i6 = i11;
             if (i6 == 1) {
-                StringBuilder m21 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m21.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                String m22 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m21.toString(), str13);
-                StringBuilder m23 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m22);
-                m23.append((TextUtils.isEmpty(m22) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                String m24 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m23.toString(), str19);
-                StringBuilder m25 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m24);
-                m25.append((TextUtils.isEmpty(m24) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                String m26 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m25.toString(), str14);
-                StringBuilder m27 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m26);
-                m27.append((TextUtils.isEmpty(m26) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m27.toString(), str11);
+                StringBuilder sbM16 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM16.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                String strM8 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM16.toString(), str12);
+                StringBuilder sbM17 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM8);
+                sbM17.append((TextUtils.isEmpty(strM8) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                String strM9 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM17.toString(), str17);
+                StringBuilder sbM18 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM9);
+                sbM18.append((TextUtils.isEmpty(strM9) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                String strM10 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM18.toString(), str13);
+                StringBuilder sbM19 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM10);
+                sbM19.append((TextUtils.isEmpty(strM10) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM19.toString(), str10);
             } else if (i6 == 2) {
-                StringBuilder m28 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m28.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                String m29 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m28.toString(), str14);
-                StringBuilder m30 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m29);
-                m30.append((TextUtils.isEmpty(m29) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m30.toString(), str11);
+                StringBuilder sbM20 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM20.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                String strM11 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM20.toString(), str13);
+                StringBuilder sbM21 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM11);
+                sbM21.append((TextUtils.isEmpty(strM11) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM21.toString(), str10);
             } else if (i6 != 3) {
-                StringBuilder m31 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m31.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                String m32 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m31.toString(), str14);
-                StringBuilder m33 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m32);
-                m33.append((TextUtils.isEmpty(m32) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                String m34 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m33.toString(), str11);
-                StringBuilder m35 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m34);
-                m35.append((TextUtils.isEmpty(m34) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                String m36 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m35.toString(), str13);
-                StringBuilder m37 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m36);
-                m37.append((TextUtils.isEmpty(m36) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m37.toString(), str19);
+                StringBuilder sbM22 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM22.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                String strM12 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM22.toString(), str13);
+                StringBuilder sbM23 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM12);
+                sbM23.append((TextUtils.isEmpty(strM12) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                String strM13 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM23.toString(), str10);
+                StringBuilder sbM24 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM13);
+                sbM24.append((TextUtils.isEmpty(strM13) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                String strM14 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM24.toString(), str12);
+                StringBuilder sbM25 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM14);
+                sbM25.append((TextUtils.isEmpty(strM14) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM25.toString(), str17);
             } else {
-                StringBuilder m38 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m38.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                String m39 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m38.toString(), str13);
-                StringBuilder m40 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m39);
-                m40.append((TextUtils.isEmpty(m39) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m40.toString(), str19);
+                StringBuilder sbM26 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM26.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                String strM15 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM26.toString(), str12);
+                StringBuilder sbM27 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM15);
+                sbM27.append((TextUtils.isEmpty(strM15) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM27.toString(), str17);
             }
         } else {
-            i6 = i9;
+            i6 = i11;
             if (i6 == 1) {
-                StringBuilder m41 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m41.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                String m42 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m41.toString(), str19);
-                StringBuilder m43 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m42);
-                m43.append((TextUtils.isEmpty(m42) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                String m44 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m43.toString(), str13);
-                StringBuilder m45 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m44);
-                m45.append((TextUtils.isEmpty(m44) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                String m46 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m45.toString(), str11);
-                StringBuilder m47 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m46);
-                m47.append((TextUtils.isEmpty(m46) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m47.toString(), str14);
+                StringBuilder sbM28 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM28.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                String strM16 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM28.toString(), str17);
+                StringBuilder sbM29 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM16);
+                sbM29.append((TextUtils.isEmpty(strM16) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                String strM17 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM29.toString(), str12);
+                StringBuilder sbM30 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM17);
+                sbM30.append((TextUtils.isEmpty(strM17) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                String strM18 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM30.toString(), str10);
+                StringBuilder sbM31 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM18);
+                sbM31.append((TextUtils.isEmpty(strM18) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM31.toString(), str13);
             } else if (i6 == 2) {
-                StringBuilder m48 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m48.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                String m49 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m48.toString(), str11);
-                StringBuilder m50 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m49);
-                m50.append((TextUtils.isEmpty(m49) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m50.toString(), str14);
+                StringBuilder sbM32 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM32.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                String strM19 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM32.toString(), str10);
+                StringBuilder sbM33 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM19);
+                sbM33.append((TextUtils.isEmpty(strM19) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM33.toString(), str13);
             } else if (i6 != 3) {
-                StringBuilder m51 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m51.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str11)) ? str12 : ",");
-                String m52 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m51.toString(), str11);
-                StringBuilder m53 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m52);
-                m53.append((TextUtils.isEmpty(m52) || TextUtils.isEmpty(str14)) ? str12 : ",");
-                String m54 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m53.toString(), str14);
-                StringBuilder m55 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m54);
-                m55.append((TextUtils.isEmpty(m54) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                String m56 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m55.toString(), str19);
-                StringBuilder m57 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m56);
-                m57.append((TextUtils.isEmpty(m56) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m57.toString(), str13);
+                StringBuilder sbM34 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM34.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str10)) ? str11 : ",");
+                String strM20 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM34.toString(), str10);
+                StringBuilder sbM35 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM20);
+                sbM35.append((TextUtils.isEmpty(strM20) || TextUtils.isEmpty(str13)) ? str11 : ",");
+                String strM21 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM35.toString(), str13);
+                StringBuilder sbM36 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM21);
+                sbM36.append((TextUtils.isEmpty(strM21) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                String strM22 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM36.toString(), str17);
+                StringBuilder sbM37 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM22);
+                sbM37.append((TextUtils.isEmpty(strM22) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM37.toString(), str12);
             } else {
-                StringBuilder m58 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str22);
-                m58.append((TextUtils.isEmpty(str22) || TextUtils.isEmpty(str19)) ? str12 : ",");
-                String m59 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m58.toString(), str19);
-                StringBuilder m60 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m59);
-                m60.append((TextUtils.isEmpty(m59) || TextUtils.isEmpty(str13)) ? str12 : ",");
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m60.toString(), str13);
+                StringBuilder sbM38 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str20);
+                sbM38.append((TextUtils.isEmpty(str20) || TextUtils.isEmpty(str17)) ? str11 : ",");
+                String strM23 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM38.toString(), str17);
+                StringBuilder sbM39 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM23);
+                sbM39.append((TextUtils.isEmpty(strM23) || TextUtils.isEmpty(str12)) ? str11 : ",");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM39.toString(), str12);
             }
         }
-        if (!TextUtils.isEmpty(m) && !TextUtils.isEmpty(str15)) {
-            Log.d(str21, "Add AMROPEN");
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m + ",", str15);
+        if (!TextUtils.isEmpty(strM) && !TextUtils.isEmpty(str14)) {
+            Log.d(str19, "Add AMROPEN");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM + ",", str14);
         }
-        if (i10 != 0) {
-            Log.i(str21, "trimAudioCodec : DTMF is disabled");
+        if (i12 != 0) {
+            Log.i(str19, "trimAudioCodec : DTMF is disabled");
         } else if (i6 == 1) {
-            StringBuilder m61 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m61.append((TextUtils.isEmpty(m) || TextUtils.isEmpty(str17)) ? str12 : ",");
-            String m62 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m61.toString(), str17);
-            StringBuilder m63 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m62);
-            m63.append((TextUtils.isEmpty(m62) || TextUtils.isEmpty(str18)) ? str12 : ",");
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m63.toString(), str18);
+            StringBuilder sbM40 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM40.append((TextUtils.isEmpty(strM) || TextUtils.isEmpty(str15)) ? str11 : ",");
+            String strM24 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM40.toString(), str15);
+            StringBuilder sbM41 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM24);
+            sbM41.append((TextUtils.isEmpty(strM24) || TextUtils.isEmpty(str16)) ? str11 : ",");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM41.toString(), str16);
         } else if (i6 == 2) {
-            StringBuilder m64 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m64.append((TextUtils.isEmpty(m) || TextUtils.isEmpty(str18)) ? str12 : ",");
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m64.toString(), str18);
+            StringBuilder sbM42 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM42.append((TextUtils.isEmpty(strM) || TextUtils.isEmpty(str16)) ? str11 : ",");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM42.toString(), str16);
         } else if (i6 != 3) {
-            StringBuilder m65 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m65.append((TextUtils.isEmpty(m) || TextUtils.isEmpty(str18)) ? str12 : ",");
-            String m66 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m65.toString(), str18);
-            StringBuilder m67 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m66);
-            m67.append((TextUtils.isEmpty(m66) || TextUtils.isEmpty(str17)) ? str12 : ",");
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m67.toString(), str17);
+            StringBuilder sbM43 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM43.append((TextUtils.isEmpty(strM) || TextUtils.isEmpty(str16)) ? str11 : ",");
+            String strM25 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM43.toString(), str16);
+            StringBuilder sbM44 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM25);
+            sbM44.append((TextUtils.isEmpty(strM25) || TextUtils.isEmpty(str15)) ? str11 : ",");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM44.toString(), str15);
         } else {
-            StringBuilder m68 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m68.append((TextUtils.isEmpty(m) || TextUtils.isEmpty(str17)) ? str12 : ",");
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m68.toString(), str17);
+            StringBuilder sbM45 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM45.append((TextUtils.isEmpty(strM) || TextUtils.isEmpty(str15)) ? str11 : ",");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM45.toString(), str15);
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, str16);
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, strM3);
     }
 
-    public void addImpu(String str) {
+    public void addImpu(String str) throws JSONException {
         ArrayList arrayList = new ArrayList(getImpuList());
         arrayList.add(str);
         setImpuList(TextUtils.join(",", arrayList));
@@ -804,7 +801,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return toJson();
     }
 
-    public void enable(int i) {
+    public void enable(int i) throws JSONException {
         put("enabled", Integer.valueOf(i));
     }
 
@@ -836,19 +833,19 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public Map<Integer, Set<String>> getAllServiceSet() {
         ArrayMap arrayMap = new ArrayMap();
-        JSONArray optJSONArray = this.mBody.optJSONArray("network");
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                JSONObject optJSONObject = optJSONArray.optJSONObject(i);
-                JSONArray optJSONArray2 = optJSONObject.optJSONArray("services");
-                if (optJSONArray2 == null) {
-                    Log.e(LOG_TAG, "getAllServiceSet: No services array in " + optJSONObject.toString());
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray("network");
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                JSONObject jSONObjectOptJSONObject = jSONArrayOptJSONArray.optJSONObject(i);
+                JSONArray jSONArrayOptJSONArray2 = jSONObjectOptJSONObject.optJSONArray("services");
+                if (jSONArrayOptJSONArray2 == null) {
+                    Log.e(LOG_TAG, "getAllServiceSet: No services array in " + jSONObjectOptJSONObject.toString());
                 } else {
                     ArraySet arraySet = new ArraySet();
-                    for (int i2 = 0; i2 < optJSONArray2.length(); i2++) {
-                        arraySet.add(optJSONArray2.optString(i2));
+                    for (int i2 = 0; i2 < jSONArrayOptJSONArray2.length(); i2++) {
+                        arraySet.add(jSONArrayOptJSONArray2.optString(i2));
                     }
-                    arrayMap.put(Integer.valueOf(getNetworkType(optJSONObject.optString("type"))), arraySet);
+                    arrayMap.put(Integer.valueOf(getNetworkType(jSONObjectOptJSONObject.optString("type"))), arraySet);
                 }
             }
         }
@@ -918,18 +915,18 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public ContentValues getAsContentValues() {
         ContentValues contentValues = new ContentValues();
-        Iterator<String> keys = this.mBody.keys();
-        while (keys.hasNext()) {
-            String next = keys.next();
-            Object opt = this.mBody.opt(next);
-            if (opt instanceof Integer) {
-                contentValues.put(next, (Integer) opt);
-            } else if (opt instanceof Boolean) {
-                contentValues.put(next, (Boolean) opt);
-            } else if (opt instanceof String) {
-                contentValues.put(next, (String) opt);
-            } else if (opt instanceof JSONArray) {
-                contentValues.put(next, opt.toString());
+        Iterator<String> itKeys = this.mBody.keys();
+        while (itKeys.hasNext()) {
+            String next = itKeys.next();
+            Object objOpt = this.mBody.opt(next);
+            if (objOpt instanceof Integer) {
+                contentValues.put(next, (Integer) objOpt);
+            } else if (objOpt instanceof Boolean) {
+                contentValues.put(next, (Boolean) objOpt);
+            } else if (objOpt instanceof String) {
+                contentValues.put(next, (String) objOpt);
+            } else if (objOpt instanceof JSONArray) {
+                contentValues.put(next, objOpt.toString());
             }
         }
         return contentValues;
@@ -941,10 +938,10 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public List<JSONObject> getAsJSONObjectList(String str) {
         ArrayList arrayList = new ArrayList();
-        JSONArray optJSONArray = this.mBody.optJSONArray(str);
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                arrayList.add(optJSONArray.optJSONObject(i));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray(str);
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                arrayList.add(jSONArrayOptJSONArray.optJSONObject(i));
             }
         }
         return arrayList;
@@ -956,10 +953,10 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public List<String> getAsStringList(String str) {
         ArrayList arrayList = new ArrayList();
-        JSONArray optJSONArray = this.mBody.optJSONArray(str);
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                arrayList.add(optJSONArray.optString(i));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray(str);
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                arrayList.add(jSONArrayOptJSONArray.optString(i));
             }
         }
         return arrayList;
@@ -1262,12 +1259,12 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public Set<String> getEnabledNetwork() {
         ArraySet arraySet = new ArraySet();
-        JSONArray optJSONArray = this.mBody.optJSONArray("network");
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                JSONObject optJSONObject = optJSONArray.optJSONObject(i);
-                if (optJSONObject.optBoolean("enabled")) {
-                    arraySet.add(optJSONObject.optString("type"));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray("network");
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                JSONObject jSONObjectOptJSONObject = jSONArrayOptJSONArray.optJSONObject(i);
+                if (jSONObjectOptJSONObject.optBoolean("enabled")) {
+                    arraySet.add(jSONObjectOptJSONObject.optString("type"));
                 }
             }
         }
@@ -1683,10 +1680,10 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public Set<String> getNetworkNameSet() {
         ArraySet arraySet = new ArraySet();
-        JSONArray optJSONArray = this.mBody.optJSONArray("network");
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                arraySet.add(optJSONArray.optJSONObject(i).optString("type"));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray("network");
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                arraySet.add(jSONArrayOptJSONArray.optJSONObject(i).optString("type"));
             }
         }
         return arraySet;
@@ -1694,10 +1691,10 @@ public class ImsProfile implements Parcelable, Cloneable {
 
     public Set<Integer> getNetworkSet() {
         ArraySet arraySet = new ArraySet();
-        JSONArray optJSONArray = this.mBody.optJSONArray("network");
-        if (optJSONArray != null) {
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                arraySet.add(Integer.valueOf(getNetworkType(optJSONArray.optJSONObject(i).optString("type"))));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray("network");
+        if (jSONArrayOptJSONArray != null) {
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                arraySet.add(Integer.valueOf(getNetworkType(jSONArrayOptJSONArray.optJSONObject(i).optString("type"))));
             }
         }
         return arraySet;
@@ -1749,88 +1746,30 @@ public class ImsProfile implements Parcelable, Cloneable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x0012  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public int getPdnType() {
-        char c;
         String pdn = getPdn();
         if (pdn == null) {
             return -1;
         }
-        switch (pdn.hashCode()) {
-            case -1991518911:
-                if (pdn.equals(PDN_WIFI_DIRECT)) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1038943343:
-                if (pdn.equals(PDN_BT_HS)) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 104399:
-                if (pdn.equals(PDN_IMS)) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 3649301:
-                if (pdn.equals(PDN_WIFI)) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 109856949:
-                if (pdn.equals(PDN_WIFI_HS)) {
-                    c = 4;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 570410817:
-                if (pdn.equals(PDN_INTERNET)) {
-                    c = 5;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 1544803905:
-                if (pdn.equals("default")) {
-                    c = 6;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 1629013393:
-                if (pdn.equals(PDN_EMERGENCY)) {
-                    c = 7;
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
-            case 1:
-            case 4:
+        switch (pdn) {
+            case "p2p-wlan":
+            case "p2p-bt":
+            case "swlan":
                 Log.i(LOG_TAG, "PDN_WIFI_DIRECT or PDN_WIFI_HS or PDN_BT_HS");
                 break;
-            case 2:
+            case "ims":
                 break;
-            case 3:
+            case "wifi":
                 break;
-            case 5:
+            case "internet":
                 break;
-            case 6:
+            case "default":
                 break;
-            case 7:
+            case "emergency":
                 break;
             default:
                 Log.d(LOG_TAG, "PDN not null and not matched, value is ".concat(pdn));
@@ -2300,10 +2239,10 @@ public class ImsProfile implements Parcelable, Cloneable {
     }
 
     public int getTtyType(int i) {
-        boolean isRttSupported = isRttSupported(i);
-        int intValue = getAsInteger("tty_type").intValue();
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(intValue, "ttyType : ", LOG_TAG);
-        return (isRttSupported && (intValue == 1 || intValue == 2)) ? intValue + 2 : !isRttSupported ? (intValue == 3 || intValue == 4) ? intValue - 2 : intValue : intValue;
+        boolean zIsRttSupported = isRttSupported(i);
+        int iIntValue = getAsInteger("tty_type").intValue();
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iIntValue, "ttyType : ", LOG_TAG);
+        return (zIsRttSupported && (iIntValue == 1 || iIntValue == 2)) ? iIntValue + 2 : !zIsRttSupported ? (iIntValue == 3 || iIntValue == 4) ? iIntValue - 2 : iIntValue : iIntValue;
     }
 
     public List<String> getUacList() {
@@ -2409,9 +2348,9 @@ public class ImsProfile implements Parcelable, Cloneable {
     }
 
     public int hashCode() {
-        int hashCode = super.hashCode() * 31;
+        int iHashCode = super.hashCode() * 31;
         JSONObject jSONObject = this.mBody;
-        return hashCode + (jSONObject != null ? jSONObject.hashCode() : 0);
+        return iHashCode + (jSONObject != null ? jSONObject.hashCode() : 0);
     }
 
     public boolean isAllowedOnRoaming() {
@@ -2548,7 +2487,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return getAsBoolean("wifi_precondition_enabled").booleanValue();
     }
 
-    public void put(String str, Boolean bool) {
+    public void put(String str, Boolean bool) throws JSONException {
         try {
             this.mBody.put(str, bool);
         } catch (JSONException e) {
@@ -2556,49 +2495,49 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void removeImpu(String str) {
+    public void removeImpu(String str) throws JSONException {
         ArrayList arrayList = new ArrayList(getImpuList());
         arrayList.remove(str);
         setImpuList(TextUtils.join(",", arrayList));
     }
 
-    public void setAccessToken(String str) {
+    public void setAccessToken(String str) throws JSONException {
         put("accessToken", str);
     }
 
-    public void setAppId(String str) {
+    public void setAppId(String str) throws JSONException {
         put("app_id", str);
     }
 
-    public void setAudioPortEnd(int i) {
+    public void setAudioPortEnd(int i) throws JSONException {
         put("audio_port_end", Integer.valueOf(i));
     }
 
-    public void setAudioPortStart(int i) {
+    public void setAudioPortStart(int i) throws JSONException {
         put("audio_port_start", Integer.valueOf(i));
     }
 
-    public void setAudioSrtp(int i) {
+    public void setAudioSrtp(int i) throws JSONException {
         put("audio_srtp", Integer.valueOf(i));
     }
 
-    public void setAuthAlgorithm(String str) {
+    public void setAuthAlgorithm(String str) throws JSONException {
         put("auth_algo", str);
     }
 
-    public void setAuthName(String str) {
+    public void setAuthName(String str) throws JSONException {
         put("authname", str);
     }
 
-    public void setConferenceSupportPrematureEnd(boolean z) {
+    public void setConferenceSupportPrematureEnd(boolean z) throws JSONException {
         put("conference_support_premature_end", Boolean.valueOf(z));
     }
 
-    public void setDelayPcscfChangeDuringCall(boolean z) {
+    public void setDelayPcscfChangeDuringCall(boolean z) throws JSONException {
         put("delay_pcscf_change_during_call", Boolean.valueOf(z));
     }
 
-    public void setDeregTimeout(String str, int i) {
+    public void setDeregTimeout(String str, int i) throws JSONException {
         JSONObject network = getNetwork(str);
         if (network != null) {
             try {
@@ -2609,139 +2548,139 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setDisplayName(String str) {
+    public void setDisplayName(String str) throws JSONException {
         put("display_name", str);
     }
 
-    public void setDomain(String str) {
+    public void setDomain(String str) throws JSONException {
         put("domain", str);
     }
 
-    public void setDuid(String str) {
+    public void setDuid(String str) throws JSONException {
         put("duid", str);
     }
 
-    public void setEctNoHoldForActiveCall(boolean z) {
+    public void setEctNoHoldForActiveCall(boolean z) throws JSONException {
         put("ect_no_hold_for_active_call", Boolean.valueOf(z));
     }
 
-    public void setEmergencySupport(boolean z) {
+    public void setEmergencySupport(boolean z) throws JSONException {
         put("emergency_support", Boolean.valueOf(z));
     }
 
-    public void setEnableEvsCodec(boolean z) {
+    public void setEnableEvsCodec(boolean z) throws JSONException {
         put("enable_evs_codec", Boolean.valueOf(z));
     }
 
-    public void setEnableScr(boolean z) {
+    public void setEnableScr(boolean z) throws JSONException {
         put("enable_scr", Boolean.valueOf(z));
     }
 
-    public void setEnableVerstat(boolean z) {
+    public void setEnableVerstat(boolean z) throws JSONException {
         put("enable_verstat", Boolean.valueOf(z));
     }
 
-    public void setEncAlgorithm(String str) {
+    public void setEncAlgorithm(String str) throws JSONException {
         put("enc_algo", str);
     }
 
-    public void setEvs2ndPayload(int i) {
+    public void setEvs2ndPayload(int i) throws JSONException {
         put("evs_2nd_payload", Integer.valueOf(i));
     }
 
-    public void setEvsBandwidthReceive(String str) {
+    public void setEvsBandwidthReceive(String str) throws JSONException {
         put("evs_bandwidth_receive", str);
     }
 
-    public void setEvsBandwidthReceiveExt(String str) {
+    public void setEvsBandwidthReceiveExt(String str) throws JSONException {
         put("evs_bandwidth_receive_ext", str);
     }
 
-    public void setEvsBandwidthSend(String str) {
+    public void setEvsBandwidthSend(String str) throws JSONException {
         put("evs_bandwidth_send", str);
     }
 
-    public void setEvsBandwidthSendExt(String str) {
+    public void setEvsBandwidthSendExt(String str) throws JSONException {
         put("evs_bandwidth_send_ext", str);
     }
 
-    public void setEvsBitRateReceive(String str) {
+    public void setEvsBitRateReceive(String str) throws JSONException {
         put("evs_bit_rate_receive", str);
     }
 
-    public void setEvsBitRateReceiveExt(String str) {
+    public void setEvsBitRateReceiveExt(String str) throws JSONException {
         put("evs_bit_rate_receive_ext", str);
     }
 
-    public void setEvsBitRateSend(String str) {
+    public void setEvsBitRateSend(String str) throws JSONException {
         put("evs_bit_rate_send", str);
     }
 
-    public void setEvsBitRateSendExt(String str) {
+    public void setEvsBitRateSendExt(String str) throws JSONException {
         put("evs_bit_rate_send_ext", str);
     }
 
-    public void setEvsChannelAwareReceive(String str) {
+    public void setEvsChannelAwareReceive(String str) throws JSONException {
         put("evs_channel_aware_receive", str);
     }
 
-    public void setEvsChannelRecv(String str) {
+    public void setEvsChannelRecv(String str) throws JSONException {
         put("evs_channel_recv", str);
     }
 
-    public void setEvsChannelSend(String str) {
+    public void setEvsChannelSend(String str) throws JSONException {
         put("evs_channel_send", str);
     }
 
-    public void setEvsCodecModeRequest(String str) {
+    public void setEvsCodecModeRequest(String str) throws JSONException {
         put("evs_codec_mode_request", str);
     }
 
-    public void setEvsDefaultBandwidth(String str) {
+    public void setEvsDefaultBandwidth(String str) throws JSONException {
         put("evs_default_bandwidth", str);
     }
 
-    public void setEvsDefaultBitrate(String str) {
+    public void setEvsDefaultBitrate(String str) throws JSONException {
         put("evs_default_bitrate", str);
     }
 
-    public void setEvsDiscontinuousTransmission(String str) {
+    public void setEvsDiscontinuousTransmission(String str) throws JSONException {
         put("evs_discontinuous_transmission", str);
     }
 
-    public void setEvsDtxRecv(String str) {
+    public void setEvsDtxRecv(String str) throws JSONException {
         put("evs_dtx_recv", str);
     }
 
-    public void setEvsHeaderFull(String str) {
+    public void setEvsHeaderFull(String str) throws JSONException {
         put("evs_header_full", str);
     }
 
-    public void setEvsLimitedCodec(String str) {
+    public void setEvsLimitedCodec(String str) throws JSONException {
         put("evs_limited_codec", str);
     }
 
-    public void setEvsModeSwitch(String str) {
+    public void setEvsModeSwitch(String str) throws JSONException {
         put("evs_mode_switch", str);
     }
 
-    public void setEvsPayload(int i) {
+    public void setEvsPayload(int i) throws JSONException {
         put("evs_payload", Integer.valueOf(i));
     }
 
-    public void setEvsPayloadExt(int i) {
+    public void setEvsPayloadExt(int i) throws JSONException {
         put("evs_payload_ext", Integer.valueOf(i));
     }
 
-    public void setEvsUseDefaultRtcpBw(boolean z) {
+    public void setEvsUseDefaultRtcpBw(boolean z) throws JSONException {
         put("evs_use_default_rtcp_bw", Boolean.valueOf(z));
     }
 
-    public void setExcludePaniVowifiInitialRegi(boolean z) {
+    public void setExcludePaniVowifiInitialRegi(boolean z) throws JSONException {
         put("exclude_pani_vowifi_initial_regi", Boolean.valueOf(z));
     }
 
-    public void setExtImpuList(List<String> list) {
+    public void setExtImpuList(List<String> list) throws JSONException {
         if (list != null) {
             put("ext_impu", TextUtils.join(",", list));
         } else {
@@ -2750,23 +2689,23 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setId(int i) {
+    public void setId(int i) throws JSONException {
         put("id", Integer.valueOf(i));
     }
 
-    public void setImpi(String str) {
+    public void setImpi(String str) throws JSONException {
         put(ImsSettings.ProfileTable.IMPI, str);
     }
 
-    public void setImpuList(String str) {
+    public void setImpuList(String str) throws JSONException {
         put("impu", str);
     }
 
-    public void setIpSpecEnabled(boolean z) {
+    public void setIpSpecEnabled(boolean z) throws JSONException {
         put("support_ipsec", Boolean.valueOf(z));
     }
 
-    public void setIpVer(int i) {
+    public void setIpVer(int i) throws JSONException {
         if (i == 1) {
             put("ipver", "ipv4");
         } else if (i == 2) {
@@ -2779,77 +2718,77 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setIsSipUriOnly(boolean z) {
+    public void setIsSipUriOnly(boolean z) throws JSONException {
         put("sip_uri_only", Boolean.valueOf(z));
     }
 
-    public void setLboPcscfAddressList(List<String> list) {
+    public void setLboPcscfAddressList(List<String> list) throws JSONException {
         put("lbo_pcscf_address", TextUtils.join(",", list));
     }
 
-    public void setLboPcscfPort(int i) {
+    public void setLboPcscfPort(int i) throws JSONException {
         put("lbo_pcscf_port", Integer.valueOf(i));
     }
 
-    public void setMcc(String str) {
+    public void setMcc(String str) throws JSONException {
         put("mcc", str);
     }
 
-    public void setMediaTypeRestrictionPolicy(String str) {
+    public void setMediaTypeRestrictionPolicy(String str) throws JSONException {
         put("media_type_restriction_policy", str);
     }
 
-    public void setMnc(String str) {
+    public void setMnc(String str) throws JSONException {
         put("mnc", str);
     }
 
-    public void setMnoName(String str) {
+    public void setMnoName(String str) throws JSONException {
         put("mnoname", str);
     }
 
-    public void setMsrpBearerUsed(boolean z) {
+    public void setMsrpBearerUsed(boolean z) throws JSONException {
         put("use_msrp_bearer", Boolean.valueOf(z));
     }
 
-    public void setMssSize(int i) {
+    public void setMssSize(int i) throws JSONException {
         put("mss_size", Integer.valueOf(i));
     }
 
-    public void setName(String str) {
+    public void setName(String str) throws JSONException {
         put("name", str);
     }
 
-    public void setNeedAutoconfig(boolean z) {
+    public void setNeedAutoconfig(boolean z) throws JSONException {
         put("need_autoconfig", Boolean.valueOf(z));
     }
 
-    public void setNeedCheckAllowedMethodForRefresh(boolean z) {
+    public void setNeedCheckAllowedMethodForRefresh(boolean z) throws JSONException {
         put("need_check_allowed_method_for_refresh", Boolean.valueOf(z));
     }
 
-    public void setNeedNaptrDns(boolean z) {
+    public void setNeedNaptrDns(boolean z) throws JSONException {
         put("need_naptr_dns", Boolean.valueOf(z));
     }
 
-    public void setNeedOmadmConfig(boolean z) {
+    public void setNeedOmadmConfig(boolean z) throws JSONException {
         put("need_omadm_config", Boolean.valueOf(z));
     }
 
-    public void setNeedPidfRat(String str) {
+    public void setNeedPidfRat(String str) throws JSONException {
         if (getSupportedGeolocationPhase() < 2) {
             str = "";
         }
         put("need_pidf_rat", str);
     }
 
-    public void setNeedPidfSipMsg(String str) {
+    public void setNeedPidfSipMsg(String str) throws JSONException {
         if (getSupportedGeolocationPhase() < 2) {
             str = "";
         }
         put("need_pidf_sip_msg", str);
     }
 
-    public void setNetworkEnabled(int i, boolean z) {
+    public void setNetworkEnabled(int i, boolean z) throws JSONException {
         JSONObject network = getNetwork(i);
         if (network == null) {
             try {
@@ -2868,10 +2807,10 @@ public class ImsProfile implements Parcelable, Cloneable {
         network.put("enabled", z);
     }
 
-    public void setNetworkList(String str) {
-        List asList = Arrays.asList(TextUtils.split(str, "\\s*,\\s*"));
-        JSONArray optJSONArray = this.mBody.optJSONArray("network");
-        if (optJSONArray != null) {
+    public void setNetworkList(String str) throws JSONException {
+        List listAsList = Arrays.asList(TextUtils.split(str, "\\s*,\\s*"));
+        JSONArray jSONArrayOptJSONArray = this.mBody.optJSONArray("network");
+        if (jSONArrayOptJSONArray != null) {
             int i = 0;
             for (String str2 : TextUtils.split(str, ",")) {
                 if (getNetwork(str2) == null) {
@@ -2881,12 +2820,12 @@ public class ImsProfile implements Parcelable, Cloneable {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    optJSONArray.put(jSONObject);
+                    jSONArrayOptJSONArray.put(jSONObject);
                 }
             }
-            while (i < optJSONArray.length()) {
-                if (!asList.contains(optJSONArray.optJSONObject(i).optString("type"))) {
-                    optJSONArray.remove(i);
+            while (i < jSONArrayOptJSONArray.length()) {
+                if (!listAsList.contains(jSONArrayOptJSONArray.optJSONObject(i).optString("type"))) {
+                    jSONArrayOptJSONArray.remove(i);
                     i--;
                 }
                 i++;
@@ -2894,67 +2833,67 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setNotifyCallDowngraded(int i) {
+    public void setNotifyCallDowngraded(int i) throws JSONException {
         put("notify_call_downgraded", Integer.valueOf(i));
     }
 
-    public void setNotifyCodecOnEstablished(boolean z) {
+    public void setNotifyCodecOnEstablished(boolean z) throws JSONException {
         put("notify_codec_on_established", Boolean.valueOf(z));
     }
 
-    public void setNotifyHistoryInfo(String str) {
+    public void setNotifyHistoryInfo(String str) throws JSONException {
         put("notify_history_info", str);
     }
 
-    public void setOipFromPreferred(String str) {
+    public void setOipFromPreferred(String str) throws JSONException {
         put("oip_from_preferred", str);
     }
 
-    public void setPassword(String str) {
+    public void setPassword(String str) throws JSONException {
         put(HostAuth.PASSWORD, str);
     }
 
-    public void setPcscfList(List<String> list) {
+    public void setPcscfList(List<String> list) throws JSONException {
         put("pcscf", TextUtils.join(",", list));
     }
 
-    public void setPcscfPreference(int i) {
+    public void setPcscfPreference(int i) throws JSONException {
         put("pcscf_pref", Integer.valueOf(i));
     }
 
-    public void setPdn(String str) {
+    public void setPdn(String str) throws JSONException {
         put(ImsSettings.ProfileTable.PDN, str);
     }
 
-    public void setPolicyOnLocalNumbers(String str) {
+    public void setPolicyOnLocalNumbers(String str) throws JSONException {
         put("policy_on_local_numbers", str);
     }
 
-    public void setPriDeviceIdWithURN(String str) {
+    public void setPriDeviceIdWithURN(String str) throws JSONException {
         put("priDeviceIdWithURN", str);
     }
 
-    public void setPriority(int i) {
+    public void setPriority(int i) throws JSONException {
         put(SystemUIAnalytics.QPNE_VID_PRIORITY, Integer.valueOf(i));
     }
 
-    public void setRPort(int i) {
+    public void setRPort(int i) throws JSONException {
         put("rport", Integer.valueOf(i));
     }
 
-    public void setRcsProfile(String str) {
+    public void setRcsProfile(String str) throws JSONException {
         put("rcs_profile", str);
     }
 
-    public void setRegistrationAlgorithm(String str) {
+    public void setRegistrationAlgorithm(String str) throws JSONException {
         put("regi_algo", str);
     }
 
-    public void setRequestLocationTiming(String str) {
+    public void setRequestLocationTiming(String str) throws JSONException {
         put("request_location_timing", str);
     }
 
-    public void setReregiOnRatChange(int i) {
+    public void setReregiOnRatChange(int i) throws JSONException {
         if (i == 1) {
             put("reregi_on_ratchange", "off_rat_change");
         } else if (i != 3) {
@@ -2964,23 +2903,23 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setSaClientPort(int i) {
+    public void setSaClientPort(int i) throws JSONException {
         put("secure_client_port", Integer.valueOf(i));
     }
 
-    public void setSaServerPort(int i) {
+    public void setSaServerPort(int i) throws JSONException {
         put("secure_server_port", Integer.valueOf(i));
     }
 
-    public void setSend18xReliably(boolean z) {
+    public void setSend18xReliably(boolean z) throws JSONException {
         put("send_18x_reliable", Boolean.valueOf(z));
     }
 
-    public void setSendByeForUssi(boolean z) {
+    public void setSendByeForUssi(boolean z) throws JSONException {
         put("send_bye_for_ussi", Boolean.valueOf(z));
     }
 
-    public void setServiceSet(int i, Set<String> set) {
+    public void setServiceSet(int i, Set<String> set) throws JSONException {
         JSONObject network = getNetwork(i);
         if (network == null) {
             Log.e(LOG_TAG, "setServiceSet: getNetwork return null.");
@@ -2993,89 +2932,89 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setSimMobility(boolean z) {
+    public void setSimMobility(boolean z) throws JSONException {
         Log.d(LOG_TAG, "setSimMobility: " + z);
         put("simmobility", Boolean.valueOf(z));
     }
 
-    public void setSimMobilityForRcs(boolean z) {
+    public void setSimMobilityForRcs(boolean z) throws JSONException {
         Log.d(LOG_TAG, "setSimMobilityForRcs: " + z);
         put("simmobilityForRcs", Boolean.valueOf(z));
     }
 
-    public void setSipPort(int i) {
+    public void setSipPort(int i) throws JSONException {
         put(HostAuth.PORT, Integer.valueOf(i));
     }
 
-    public void setSipUserAgent(String str) {
+    public void setSipUserAgent(String str) throws JSONException {
         put("useragent", str);
     }
 
-    public void setSmsPsi(String str) {
+    public void setSmsPsi(String str) throws JSONException {
         put("sms_psi", str);
     }
 
-    public void setSmsoipUsagePolicy(String str) {
+    public void setSmsoipUsagePolicy(String str) throws JSONException {
         put("smsoip_usage_policy", str);
     }
 
-    public void setSoftphoneEnabled(String str) {
+    public void setSoftphoneEnabled(String str) throws JSONException {
         put(ImsSettings.ProfileTable.MDMN_TYPE, ImsSettings.MDMN.SOFTPHONE);
     }
 
-    public void setSosUrnRequired(boolean z) {
+    public void setSosUrnRequired(boolean z) throws JSONException {
         put("sos_urn_required", Boolean.valueOf(z));
     }
 
-    public void setSslType(int i) {
+    public void setSslType(int i) throws JSONException {
         put("ssl_type", Integer.valueOf(i));
     }
 
-    public void setSupport199ProvisionalResponse(boolean z) {
+    public void setSupport199ProvisionalResponse(boolean z) throws JSONException {
         put(ImsSettings.ProfileTable.SUPPORT_199_PROVISIONAL_RESPONSE, Boolean.valueOf(z));
     }
 
-    public void setSupport380PolicyByEmcbs(boolean z) {
+    public void setSupport380PolicyByEmcbs(boolean z) throws JSONException {
         put("support_380_policy_by_emcbs", Boolean.valueOf(z));
     }
 
-    public void setSupport3gppUssi(boolean z) {
+    public void setSupport3gppUssi(boolean z) throws JSONException {
         put("support_3gpp_ussi", Boolean.valueOf(z));
     }
 
-    public void setSupportAltitude(boolean z) {
+    public void setSupportAltitude(boolean z) throws JSONException {
         put("support_altitude", Boolean.valueOf(z));
     }
 
-    public void setSupportClir(boolean z) {
+    public void setSupportClir(boolean z) throws JSONException {
         put("support_clir", Boolean.valueOf(z));
     }
 
-    public void setSupportNetworkInitUssi(boolean z) {
+    public void setSupportNetworkInitUssi(boolean z) throws JSONException {
         put("support_network_init_ussi", Boolean.valueOf(z));
     }
 
-    public void setSupportRcsAcrossSalesCode(boolean z) {
+    public void setSupportRcsAcrossSalesCode(boolean z) throws JSONException {
         put("support_rcs_across_sales_code", Boolean.valueOf(z));
     }
 
-    public void setSupportRfc6337ForDelayedOffer(boolean z) {
+    public void setSupportRfc6337ForDelayedOffer(boolean z) throws JSONException {
         put("support_rfc6337_for_delayed_offer", Boolean.valueOf(z));
     }
 
-    public void setSupportSmsOverIms(boolean z) {
+    public void setSupportSmsOverIms(boolean z) throws JSONException {
         put("support_sms_over_ims", Boolean.valueOf(z));
     }
 
-    public void setSupportedGeolocationPhase(int i) {
+    public void setSupportedGeolocationPhase(int i) throws JSONException {
         put("supported_geolocation_phase", Integer.valueOf(i));
     }
 
-    public void setTcpGracefulShutdownEnabled(boolean z) {
+    public void setTcpGracefulShutdownEnabled(boolean z) throws JSONException {
         put("enable_tcp_graceful_shutdown", Boolean.valueOf(z));
     }
 
-    public void setTimer(String str, int i) {
+    public void setTimer(String str, int i) throws JSONException {
         Map<String, Integer> timerMap = getTimerMap();
         timerMap.put(str, Integer.valueOf(i));
         ArrayList arrayList = new ArrayList();
@@ -3085,63 +3024,63 @@ public class ImsProfile implements Parcelable, Cloneable {
         put("timer", TextUtils.join(",", arrayList));
     }
 
-    public void setTimer1(int i) {
+    public void setTimer1(int i) throws JSONException {
         setTimer("1", i);
     }
 
-    public void setTimer2(int i) {
+    public void setTimer2(int i) throws JSONException {
         setTimer("2", i);
     }
 
-    public void setTimer4(int i) {
+    public void setTimer4(int i) throws JSONException {
         setTimer("4", i);
     }
 
-    public void setTimerA(int i) {
+    public void setTimerA(int i) throws JSONException {
         setTimer(TIMER_NAME_A, i);
     }
 
-    public void setTimerB(int i) {
+    public void setTimerB(int i) throws JSONException {
         setTimer(TIMER_NAME_B, i);
     }
 
-    public void setTimerC(int i) {
+    public void setTimerC(int i) throws JSONException {
         setTimer(TIMER_NAME_C, i);
     }
 
-    public void setTimerD(int i) {
+    public void setTimerD(int i) throws JSONException {
         setTimer(TIMER_NAME_D, i);
     }
 
-    public void setTimerE(int i) {
+    public void setTimerE(int i) throws JSONException {
         setTimer(TIMER_NAME_E, i);
     }
 
-    public void setTimerF(int i) {
+    public void setTimerF(int i) throws JSONException {
         setTimer(TIMER_NAME_F, i);
     }
 
-    public void setTimerG(int i) {
+    public void setTimerG(int i) throws JSONException {
         setTimer(TIMER_NAME_G, i);
     }
 
-    public void setTimerH(int i) {
+    public void setTimerH(int i) throws JSONException {
         setTimer(TIMER_NAME_H, i);
     }
 
-    public void setTimerI(int i) {
+    public void setTimerI(int i) throws JSONException {
         setTimer(TIMER_NAME_I, i);
     }
 
-    public void setTimerJ(int i) {
+    public void setTimerJ(int i) throws JSONException {
         setTimer(TIMER_NAME_J, i);
     }
 
-    public void setTimerK(int i) {
+    public void setTimerK(int i) throws JSONException {
         setTimer(TIMER_NAME_K, i);
     }
 
-    public void setTransport(int i) {
+    public void setTransport(int i) throws JSONException {
         if (i == 1) {
             put("transport", "udp-preferred");
             return;
@@ -3158,31 +3097,31 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public void setUicclessEmergency(boolean z) {
+    public void setUicclessEmergency(boolean z) throws JSONException {
         put("uiccless_emergency", Boolean.valueOf(z));
     }
 
-    public void setUse200offerWhenRemoteNotSupport100rel(boolean z) {
+    public void setUse200offerWhenRemoteNotSupport100rel(boolean z) throws JSONException {
         put("use_200offer_when_remote_not_support_100rel", Boolean.valueOf(z));
     }
 
-    public void setUseQ850causeOn480(boolean z) {
+    public void setUseQ850causeOn480(boolean z) throws JSONException {
         put("use_q850cause_on_480", Boolean.valueOf(z));
     }
 
-    public void setVceConfigEnabled(boolean z) {
+    public void setVceConfigEnabled(boolean z) throws JSONException {
         put("vce_config_enabled", Boolean.valueOf(z));
     }
 
-    public void setVideoPortEnd(int i) {
+    public void setVideoPortEnd(int i) throws JSONException {
         put("video_port_end", Integer.valueOf(i));
     }
 
-    public void setVideoPortStart(int i) {
+    public void setVideoPortStart(int i) throws JSONException {
         put("video_port_start", Integer.valueOf(i));
     }
 
-    public void setVideoSrtp(int i) {
+    public void setVideoSrtp(int i) throws JSONException {
         put("video_srtp", Integer.valueOf(i));
     }
 
@@ -3195,9 +3134,9 @@ public class ImsProfile implements Parcelable, Cloneable {
         JSONArray jSONArray2 = this.mBody.getJSONArray("network");
         if (jSONArray2 != null) {
             for (int i = 0; i < jSONArray2.length(); i++) {
-                JSONObject optJSONObject = jSONArray2.optJSONObject(i);
-                for (String str : TextUtils.split(optJSONObject.optString("type"), ",")) {
-                    JSONObject jSONObject = new JSONObject(optJSONObject, new String[]{"services", "enabled", "dereg_timeout"});
+                JSONObject jSONObjectOptJSONObject = jSONArray2.optJSONObject(i);
+                for (String str : TextUtils.split(jSONObjectOptJSONObject.optString("type"), ",")) {
+                    JSONObject jSONObject = new JSONObject(jSONObjectOptJSONObject, new String[]{"services", "enabled", "dereg_timeout"});
                     jSONObject.put("type", str);
                     jSONArray.put(jSONObject);
                 }
@@ -3214,7 +3153,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return "Name : " + getName() + ", enabled : " + getEnableStatus() + ", pdn : " + getPdn() + ", transport : " + getTransportName() + ", roaming : " + isAllowedOnRoaming() + ", scmversion : " + getScmVersion() + ", selfport : " + getSelfPort() + ", emergency : " + hasEmergencySupport() + ", hashAlgoType : " + getHashAlgoType();
     }
 
-    public void update(ContentValues contentValues) {
+    public void update(ContentValues contentValues) throws JSONException {
         try {
             for (String str : contentValues.keySet()) {
                 String asString = contentValues.getAsString(str);
@@ -3260,7 +3199,7 @@ public class ImsProfile implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ImsProfile m3417clone() throws CloneNotSupportedException {
+    public ImsProfile m3437clone() throws CloneNotSupportedException {
         return (ImsProfile) super.clone();
     }
 
@@ -3268,7 +3207,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return Integer.valueOf(this.mBody.optInt(str, i));
     }
 
-    public JSONObject getNetwork(String str) {
+    public JSONObject getNetwork(String str) throws JSONException {
         try {
             JSONArray jSONArray = this.mBody.getJSONArray("network");
             if (jSONArray == null) {
@@ -3287,7 +3226,6 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NETWORK_TYPE {
         UNKNOWN(0),
         GPRS(1),
@@ -3336,8 +3274,8 @@ public class ImsProfile implements Parcelable, Cloneable {
 
         @Override // java.lang.Enum
         public String toString() {
-            int ordinal = ordinal();
-            return ordinal != 7 ? ordinal != 14 ? super.toString().toLowerCase(Locale.US) : "hspa+" : "1xrtt";
+            int iOrdinal = ordinal();
+            return iOrdinal != 7 ? iOrdinal != 14 ? super.toString().toLowerCase(Locale.US) : "hspa+" : "1xrtt";
         }
 
         public static NETWORK_TYPE from(String str) {
@@ -3377,7 +3315,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return hasService(str);
     }
 
-    public void put(String str, Object obj) {
+    public void put(String str, Object obj) throws JSONException {
         try {
             this.mBody.put(str, obj);
         } catch (JSONException e) {
@@ -3404,7 +3342,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         return arraySet;
     }
 
-    public void put(String str, Integer num) {
+    public void put(String str, Integer num) throws JSONException {
         try {
             this.mBody.put(str, num);
         } catch (JSONException e) {
@@ -3416,7 +3354,7 @@ public class ImsProfile implements Parcelable, Cloneable {
         this(imsProfile.toJson());
     }
 
-    public void put(String str, String str2) {
+    public void put(String str, String str2) throws JSONException {
         try {
             if (this.mBody.opt(str) instanceof JSONArray) {
                 this.mBody.put(str, new JSONArray(str2));
@@ -3428,12 +3366,12 @@ public class ImsProfile implements Parcelable, Cloneable {
         }
     }
 
-    public ImsProfile(ContentValues contentValues) {
+    public ImsProfile(ContentValues contentValues) throws JSONException {
         this.mBody = new JSONObject();
         update(contentValues);
     }
 
-    public void setNetworkEnabled(String str, boolean z) {
+    public void setNetworkEnabled(String str, boolean z) throws JSONException {
         setNetworkEnabled(getNetworkType(str), z);
     }
 }

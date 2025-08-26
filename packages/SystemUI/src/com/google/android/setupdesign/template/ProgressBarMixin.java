@@ -13,7 +13,6 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.template.Mixin;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ProgressBarMixin implements Mixin {
     public ColorStateList color;
@@ -41,10 +40,10 @@ public class ProgressBarMixin implements Mixin {
                 }
                 ColorStateList colorStateList = this.color;
                 this.color = colorStateList;
-                ProgressBar peekProgressBar = peekProgressBar();
-                if (peekProgressBar != null) {
-                    peekProgressBar.setIndeterminateTintList(colorStateList);
-                    peekProgressBar.setProgressBackgroundTintList(colorStateList);
+                ProgressBar progressBarPeekProgressBar = peekProgressBar();
+                if (progressBarPeekProgressBar != null) {
+                    progressBarPeekProgressBar.setIndeterminateTintList(colorStateList);
+                    progressBarPeekProgressBar.setProgressBackgroundTintList(colorStateList);
                 }
             }
         }
@@ -69,15 +68,15 @@ public class ProgressBarMixin implements Mixin {
     public ProgressBarMixin(TemplateLayout templateLayout, AttributeSet attributeSet, int i) {
         this.templateLayout = templateLayout;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SudProgressBarMixin, i, 0);
-            r0 = obtainStyledAttributes.hasValue(0) ? obtainStyledAttributes.getBoolean(0, false) : false;
-            obtainStyledAttributes.recycle();
-            ProgressBar peekProgressBar = peekProgressBar();
-            if (peekProgressBar != null) {
-                peekProgressBar.setVisibility(this.useBottomProgressBar ? 4 : 8);
+            TypedArray typedArrayObtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SudProgressBarMixin, i, 0);
+            z = typedArrayObtainStyledAttributes.hasValue(0) ? typedArrayObtainStyledAttributes.getBoolean(0, false) : false;
+            typedArrayObtainStyledAttributes.recycle();
+            ProgressBar progressBarPeekProgressBar = peekProgressBar();
+            if (progressBarPeekProgressBar != null) {
+                progressBarPeekProgressBar.setVisibility(this.useBottomProgressBar ? 4 : 8);
             }
         }
-        this.useBottomProgressBar = r0;
+        this.useBottomProgressBar = z;
         this.isGlifExpressiveEnabled = PartnerConfigHelper.isGlifExpressiveEnabled(templateLayout.getContext());
     }
 }

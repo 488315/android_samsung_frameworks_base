@@ -92,31 +92,31 @@ public class Explode extends Visibility {
     }
 
     private void calculateOut(View view, Rect rect, int[] iArr) {
-        int centerY;
-        int i;
+        int iCenterY;
+        int width;
         view.getLocationOnScreen(this.mTempLoc);
         int[] iArr2 = this.mTempLoc;
-        int i2 = iArr2[0];
-        int i3 = iArr2[1];
+        int i = iArr2[0];
+        int i2 = iArr2[1];
         Rect epicenter = getEpicenter();
         if (epicenter == null) {
-            i = (view.getWidth() / 2) + i2 + Math.round(view.getTranslationX());
-            centerY = (view.getHeight() / 2) + i3 + Math.round(view.getTranslationY());
+            width = (view.getWidth() / 2) + i + Math.round(view.getTranslationX());
+            iCenterY = (view.getHeight() / 2) + i2 + Math.round(view.getTranslationY());
         } else {
-            int centerX = epicenter.centerX();
-            centerY = epicenter.centerY();
-            i = centerX;
+            int iCenterX = epicenter.centerX();
+            iCenterY = epicenter.centerY();
+            width = iCenterX;
         }
-        double centerX2 = rect.centerX() - i;
-        double centerY2 = rect.centerY() - centerY;
-        if (centerX2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && centerY2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-            centerX2 = (Math.random() * 2.0d) - 1.0d;
-            centerY2 = (Math.random() * 2.0d) - 1.0d;
+        double dCenterX = rect.centerX() - width;
+        double dCenterY = rect.centerY() - iCenterY;
+        if (dCenterX == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && dCenterY == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+            dCenterX = (Math.random() * 2.0d) - 1.0d;
+            dCenterY = (Math.random() * 2.0d) - 1.0d;
         }
-        double hypot = Math.hypot(centerX2, centerY2);
-        double calculateMaxDistance = calculateMaxDistance(view, i - i2, centerY - i3);
-        iArr[0] = (int) Math.round((centerX2 / hypot) * calculateMaxDistance);
-        iArr[1] = (int) Math.round(calculateMaxDistance * (centerY2 / hypot));
+        double dHypot = Math.hypot(dCenterX, dCenterY);
+        double dCalculateMaxDistance = calculateMaxDistance(view, width - i, iCenterY - i2);
+        iArr[0] = (int) Math.round((dCenterX / dHypot) * dCalculateMaxDistance);
+        iArr[1] = (int) Math.round(dCalculateMaxDistance * (dCenterY / dHypot));
     }
 
     private static double calculateMaxDistance(View view, int i, int i2) {

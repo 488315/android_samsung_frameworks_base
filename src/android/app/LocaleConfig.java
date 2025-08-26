@@ -105,13 +105,13 @@ public class LocaleConfig implements Parcelable {
                     }
                     throw th;
                 }
-            } catch (IOException | XmlPullParserException e) {
-                Slog.w(TAG, "Failed to parse XML configuration from " + resources.getResourceEntryName(localeConfigRes), e);
-                this.mStatus = 2;
+            } catch (Resources.NotFoundException unused) {
+                Slog.w(TAG, "The resource file pointed to by the given resource ID isn't found.");
+                this.mStatus = 1;
             }
-        } catch (Resources.NotFoundException unused) {
-            Slog.w(TAG, "The resource file pointed to by the given resource ID isn't found.");
-            this.mStatus = 1;
+        } catch (IOException | XmlPullParserException e) {
+            Slog.w(TAG, "Failed to parse XML configuration from " + resources.getResourceEntryName(localeConfigRes), e);
+            this.mStatus = 2;
         }
     }
 
@@ -126,32 +126,32 @@ public class LocaleConfig implements Parcelable {
         this.mLocales = (LocaleList) parcel.readTypedObject(LocaleList.CREATOR);
     }
 
-    private void parseLocaleConfig(XmlResourceParser xmlResourceParser, Resources resources) throws IOException, XmlPullParserException {
-        String str;
-        TypedArray obtainAttributes;
+    private void parseLocaleConfig(XmlResourceParser xmlResourceParser, Resources resources) throws XmlPullParserException, IOException {
+        String string;
+        TypedArray typedArrayObtainAttributes;
         XmlUtils.beginDocument(xmlResourceParser, TAG_LOCALE_CONFIG);
         int depth = xmlResourceParser.getDepth();
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlResourceParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParser);
         if (android.content.res.Flags.defaultLocale()) {
-            obtainAttributes = resources.obtainAttributes(asAttributeSet, R.styleable.LocaleConfig);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSetAsAttributeSet, R.styleable.LocaleConfig);
             try {
-                str = obtainAttributes.getString(0);
-                if (obtainAttributes != null) {
-                    obtainAttributes.close();
+                string = typedArrayObtainAttributes.getString(0);
+                if (typedArrayObtainAttributes != null) {
+                    typedArrayObtainAttributes.close();
                 }
             } finally {
             }
         } else {
-            str = null;
+            string = null;
         }
         HashSet hashSet = new HashSet();
         while (XmlUtils.nextElementWithin(xmlResourceParser, depth)) {
             if ("locale".equals(xmlResourceParser.getName())) {
-                obtainAttributes = resources.obtainAttributes(asAttributeSet, R.styleable.LocaleConfig_Locale);
+                typedArrayObtainAttributes = resources.obtainAttributes(attributeSetAsAttributeSet, R.styleable.LocaleConfig_Locale);
                 try {
-                    hashSet.add(obtainAttributes.getString(0));
-                    if (obtainAttributes != null) {
-                        obtainAttributes.close();
+                    hashSet.add(typedArrayObtainAttributes.getString(0));
+                    if (typedArrayObtainAttributes != null) {
+                        typedArrayObtainAttributes.close();
                     }
                 } finally {
                 }
@@ -161,12 +161,12 @@ public class LocaleConfig implements Parcelable {
         }
         this.mStatus = 0;
         this.mLocales = LocaleList.forLanguageTags(String.join(",", hashSet));
-        if (str != null) {
-            if (hashSet.contains(str)) {
-                this.mDefaultLocale = Locale.forLanguageTag(str);
+        if (string != null) {
+            if (hashSet.contains(string)) {
+                this.mDefaultLocale = Locale.forLanguageTag(string);
                 return;
             }
-            Slog.w(TAG, "Default locale specified that is not contained in the list: " + str);
+            Slog.w(TAG, "Default locale specified that is not contained in the list: " + string);
             this.mStatus = 2;
         }
     }
@@ -202,11 +202,11 @@ public class LocaleConfig implements Parcelable {
             return true;
         }
         if (localeList2 != null && localeList != null) {
-            List asList = Arrays.asList(localeList2.toLanguageTags().split(","));
-            List asList2 = Arrays.asList(localeList.toLanguageTags().split(","));
-            Collections.sort(asList);
-            Collections.sort(asList2);
-            return asList.equals(asList2);
+            List listAsList = Arrays.asList(localeList2.toLanguageTags().split(","));
+            List listAsList2 = Arrays.asList(localeList.toLanguageTags().split(","));
+            Collections.sort(listAsList);
+            Collections.sort(listAsList2);
+            return listAsList.equals(listAsList2);
         }
         return false;
     }

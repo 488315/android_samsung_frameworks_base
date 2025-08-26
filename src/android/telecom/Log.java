@@ -146,13 +146,13 @@ public class Log {
     }
 
     public static void wtf(String str, String str2, Object... objArr) {
-        String buildMessage = buildMessage(str, str2, objArr);
-        Slog.wtf(TAG, buildMessage, new IllegalStateException(buildMessage));
+        String strBuildMessage = buildMessage(str, str2, objArr);
+        Slog.wtf(TAG, strBuildMessage, new IllegalStateException(strBuildMessage));
     }
 
     public static void wtf(Object obj, String str, Object... objArr) {
-        String buildMessage = buildMessage(getPrefixFromObject(obj), str, objArr);
-        Slog.wtf(TAG, buildMessage, new IllegalStateException(buildMessage));
+        String strBuildMessage = buildMessage(getPrefixFromObject(obj), str, objArr);
+        Slog.wtf(TAG, strBuildMessage, new IllegalStateException(strBuildMessage));
     }
 
     public static void setSessionContext(Context context) {
@@ -363,11 +363,11 @@ public class Log {
                 obfuscatePhoneNumber(sb, schemeSpecificPart);
             } else if ("sip".equals(scheme)) {
                 for (int i = 0; i < schemeSpecificPart.length(); i++) {
-                    char charAt = schemeSpecificPart.charAt(i);
-                    if (charAt != '@' && charAt != '.') {
-                        charAt = '*';
+                    char cCharAt = schemeSpecificPart.charAt(i);
+                    if (cCharAt != '@' && cCharAt != '.') {
+                        cCharAt = '*';
                     }
-                    sb.append(charAt);
+                    sb.append(cCharAt);
                 }
             } else {
                 sb.append(pii(obj));
@@ -381,12 +381,12 @@ public class Log {
     private static void obfuscatePhoneNumber(StringBuilder sb, String str) {
         int dialableCount = getDialableCount(str) - NUM_DIALABLE_DIGITS_TO_LOG;
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            boolean isDialable = PhoneNumberUtils.isDialable(charAt);
-            if (isDialable) {
+            char cCharAt = str.charAt(i);
+            boolean zIsDialable = PhoneNumberUtils.isDialable(cCharAt);
+            if (zIsDialable) {
                 dialableCount--;
             }
-            sb.append((!isDialable || dialableCount < 0) ? Character.valueOf(charAt) : "*");
+            sb.append((!zIsDialable || dialableCount < 0) ? Character.valueOf(cCharAt) : "*");
         }
     }
 

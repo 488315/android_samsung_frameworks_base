@@ -61,9 +61,9 @@ public final class IdsController {
                     } else {
                         i2 = i + 1;
                     }
-                    SharedPreferences.Editor edit = idsSharedPreference.edit();
-                    edit.putInt(IDS_KEY, i2);
-                    edit.apply();
+                    SharedPreferences.Editor editorEdit = idsSharedPreference.edit();
+                    editorEdit.putInt(IDS_KEY, i2);
+                    editorEdit.apply();
                     Log.i(TAG, "IDS count updated to " + i2 + " for " + this.mContext);
                 }
             }

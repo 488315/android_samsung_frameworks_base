@@ -10,13 +10,18 @@ import android.view.SurfaceControlViewHost;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ReusableWindowDecorViewHost implements WindowDecorViewHost {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,13 +33,57 @@ public final class ReusableWindowDecorViewHost implements WindowDecorViewHost {
     public final FrameLayout rootView;
     public final SurfaceControlViewHostAdapter viewHostAdapter;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.windowdecor.common.viewhost.ReusableWindowDecorViewHost$updateViewAsync$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ WindowManager.LayoutParams $attrs;
+        final /* synthetic */ Configuration $configuration;
+        final /* synthetic */ Region $touchableRegion;
+        final /* synthetic */ View $view;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(View view, WindowManager.LayoutParams layoutParams, Configuration configuration, Region region, Continuation continuation) {
+            super(2, continuation);
+            this.$view = view;
+            this.$attrs = layoutParams;
+            this.$configuration = configuration;
+            this.$touchableRegion = region;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ReusableWindowDecorViewHost.this.new AnonymousClass1(this.$view, this.$attrs, this.$configuration, this.$touchableRegion, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ReusableWindowDecorViewHost reusableWindowDecorViewHost = ReusableWindowDecorViewHost.this;
+            View view = this.$view;
+            WindowManager.LayoutParams layoutParams = this.$attrs;
+            Configuration configuration = this.$configuration;
+            Region region = this.$touchableRegion;
+            int i = ReusableWindowDecorViewHost.$r8$clinit;
+            reusableWindowDecorViewHost.updateViewHost$1(view, layoutParams, configuration, region, null);
+            return Unit.INSTANCE;
         }
     }
 
@@ -91,7 +140,7 @@ public final class ReusableWindowDecorViewHost implements WindowDecorViewHost {
             standaloneCoroutine.cancel(null);
         }
         this.currentUpdateJob = null;
-        this.currentUpdateJob = BuildersKt.launch$default(this.mainScope, null, null, new ReusableWindowDecorViewHost$updateViewAsync$1(this, view, layoutParams, configuration, region, null), 3);
+        this.currentUpdateJob = BuildersKt.launch$default(this.mainScope, null, null, new AnonymousClass1(view, layoutParams, configuration, region, null), 3);
         Trace.endSection();
     }
 

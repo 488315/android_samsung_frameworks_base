@@ -17,7 +17,6 @@ import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LayerManager {
     public static final Companion Companion = new Companion(null);
@@ -34,28 +33,28 @@ public final class LayerManager {
             int i;
             char c = 3;
             boolean z2 = true;
-            LayerManager layerManager = LayerManager.this;
+            LayerManager layerManager = this.f$0;
             MutableScatterSet mutableScatterSet = layerManager.layerSet;
             if (!mutableScatterSet.isNotEmpty() || LayerManager.isRobolectric) {
                 return true;
             }
-            ImageReader imageReader = layerManager.imageReader;
-            if (imageReader == null) {
-                imageReader = ImageReader.newInstance(1, 1, 1, 3);
-                imageReader.setOnImageAvailableListener(new LayerManager$$ExternalSyntheticLambda1(), layerManager.handler);
-                layerManager.imageReader = imageReader;
+            ImageReader imageReaderNewInstance = layerManager.imageReader;
+            if (imageReaderNewInstance == null) {
+                imageReaderNewInstance = ImageReader.newInstance(1, 1, 1, 3);
+                imageReaderNewInstance.setOnImageAvailableListener(new LayerManager$$ExternalSyntheticLambda1(), layerManager.handler);
+                layerManager.imageReader = imageReaderNewInstance;
             }
-            Surface surface = imageReader.getSurface();
+            Surface surface = imageReaderNewInstance.getSurface();
             LockHardwareCanvasHelper.INSTANCE.getClass();
-            Canvas lockHardwareCanvas = surface.lockHardwareCanvas();
+            Canvas canvasLockHardwareCanvas = surface.lockHardwareCanvas();
             layerManager.persistenceIterationInProgress = true;
             CanvasHolder canvasHolder = layerManager.canvasHolder;
             AndroidCanvas androidCanvas = canvasHolder.androidCanvas;
             Canvas canvas = androidCanvas.internalCanvas;
-            androidCanvas.internalCanvas = lockHardwareCanvas;
-            lockHardwareCanvas.save();
+            androidCanvas.internalCanvas = canvasLockHardwareCanvas;
+            canvasLockHardwareCanvas.save();
             int i2 = 0;
-            lockHardwareCanvas.clipRect(0, 0, 1, 1);
+            canvasLockHardwareCanvas.clipRect(0, 0, 1, 1);
             Object[] objArr = mutableScatterSet.elements;
             long[] jArr = mutableScatterSet.metadata;
             int length = jArr.length - 2;
@@ -76,9 +75,9 @@ public final class LayerManager {
                                 graphicsLayer.getClass();
                                 Canvas canvas2 = AndroidCanvas_androidKt.EmptyCanvas;
                                 i = i4;
-                                boolean isHardwareAccelerated = androidCanvas.internalCanvas.isHardwareAccelerated();
+                                boolean zIsHardwareAccelerated = androidCanvas.internalCanvas.isHardwareAccelerated();
                                 GraphicsLayerImpl graphicsLayerImpl = graphicsLayer.impl;
-                                if (isHardwareAccelerated) {
+                                if (zIsHardwareAccelerated) {
                                     if (!graphicsLayerImpl.getHasDisplayList()) {
                                         try {
                                             graphicsLayer.recordInternal();
@@ -113,7 +112,7 @@ public final class LayerManager {
             } else {
                 z = true;
             }
-            lockHardwareCanvas.restore();
+            canvasLockHardwareCanvas.restore();
             canvasHolder.androidCanvas.internalCanvas = canvas;
             layerManager.persistenceIterationInProgress = false;
             MutableObjectList mutableObjectList = layerManager.postponedReleaseRequests;
@@ -125,12 +124,11 @@ public final class LayerManager {
                 }
                 mutableObjectList.clear();
             }
-            surface.unlockCanvasAndPost(lockHardwareCanvas);
+            surface.unlockCanvasAndPost(canvasLockHardwareCanvas);
             return z;
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

@@ -4,11 +4,9 @@ import com.android.systemui.common.shared.model.Color;
 import com.android.systemui.common.shared.model.Icon;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface DeviceIconViewModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IsNotPlaying implements DeviceIconViewModel {
         public final Color backgroundColor;
         public final Icon icon;
@@ -55,7 +53,6 @@ public interface DeviceIconViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IsPlaying implements DeviceIconViewModel {
         public final Color backgroundColor;
         public final Icon icon;

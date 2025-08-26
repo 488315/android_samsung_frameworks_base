@@ -24,7 +24,6 @@ import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PagingIndicator extends View {
     public static final TimeInterpolator DECELERATE_INTERPOLATOR = new DecelerateInterpolator();
@@ -42,7 +41,6 @@ public class PagingIndicator extends View {
     public boolean mIsLtr;
     public final int mShadowRadius;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Dot {
         public float mAlpha;
         public float mDiameter;
@@ -68,11 +66,11 @@ public class PagingIndicator extends View {
             @Override // android.util.Property
             public final void set(Object obj, Object obj2) {
                 Dot dot = (Dot) obj;
-                float floatValue = ((Float) obj2).floatValue();
-                dot.mAlpha = floatValue;
-                int round = Math.round(floatValue * 255.0f);
+                float fFloatValue = ((Float) obj2).floatValue();
+                dot.mAlpha = fFloatValue;
+                int iRound = Math.round(fFloatValue * 255.0f);
                 PagingIndicator pagingIndicator = PagingIndicator.this;
-                Color.argb(round, Color.red(pagingIndicator.mDotFgSelectColor), Color.green(pagingIndicator.mDotFgSelectColor), Color.blue(pagingIndicator.mDotFgSelectColor));
+                Color.argb(iRound, Color.red(pagingIndicator.mDotFgSelectColor), Color.green(pagingIndicator.mDotFgSelectColor), Color.blue(pagingIndicator.mDotFgSelectColor));
                 pagingIndicator.invalidate();
             }
         };
@@ -100,9 +98,9 @@ public class PagingIndicator extends View {
             @Override // android.util.Property
             public final void set(Object obj, Object obj2) {
                 Dot dot = (Dot) obj;
-                float floatValue = ((Float) obj2).floatValue();
+                float fFloatValue = ((Float) obj2).floatValue();
                 dot.getClass();
-                dot.mTranslationX = floatValue * 1.0f * dot.mLayoutDirection;
+                dot.mTranslationX = fFloatValue * 1.0f * dot.mLayoutDirection;
                 PagingIndicator.this.invalidate();
             }
         };
@@ -139,20 +137,20 @@ public class PagingIndicator extends View {
     }
 
     public final Animator createDotTranslationXAnimator() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, DOT_TRANSLATION_X, (-this.mArrowGap) + this.mDotGap, 0.0f);
-        ofFloat.setDuration(417L);
-        ofFloat.setInterpolator(DECELERATE_INTERPOLATOR);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, DOT_TRANSLATION_X, (-this.mArrowGap) + this.mDotGap, 0.0f);
+        objectAnimatorOfFloat.setDuration(417L);
+        objectAnimatorOfFloat.setInterpolator(DECELERATE_INTERPOLATOR);
+        return objectAnimatorOfFloat;
     }
 
     public final Bitmap loadArrow() {
-        Bitmap decodeResource = BitmapFactory.decodeResource(getResources(), R.drawable.lb_ic_nav_arrow);
+        Bitmap bitmapDecodeResource = BitmapFactory.decodeResource(getResources(), R.drawable.lb_ic_nav_arrow);
         if (this.mIsLtr) {
-            return decodeResource;
+            return bitmapDecodeResource;
         }
         Matrix matrix = new Matrix();
         matrix.preScale(-1.0f, 1.0f);
-        return Bitmap.createBitmap(decodeResource, 0, 0, decodeResource.getWidth(), decodeResource.getHeight(), matrix, false);
+        return Bitmap.createBitmap(bitmapDecodeResource, 0, 0, bitmapDecodeResource.getWidth(), bitmapDecodeResource.getHeight(), matrix, false);
     }
 
     @Override // android.view.View
@@ -198,31 +196,31 @@ public class PagingIndicator extends View {
         this(context, attributeSet, 0);
     }
 
-    public PagingIndicator(Context context, AttributeSet attributeSet, int i) {
+    public PagingIndicator(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         AnimatorSet animatorSet = new AnimatorSet();
         Resources resources = getResources();
         int[] iArr = androidx.leanback.R$styleable.PagingIndicator;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, obtainStyledAttributes, i, 0);
-        int dimensionPixelOffset = obtainStyledAttributes.getDimensionPixelOffset(6, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_dot_radius));
+        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, 0);
+        int dimensionPixelOffset = typedArrayObtainStyledAttributes.getDimensionPixelOffset(6, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_dot_radius));
         this.mDotRadius = dimensionPixelOffset;
         int i2 = dimensionPixelOffset * 2;
-        int dimensionPixelOffset2 = obtainStyledAttributes.getDimensionPixelOffset(2, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_arrow_radius)) * 2;
+        int dimensionPixelOffset2 = typedArrayObtainStyledAttributes.getDimensionPixelOffset(2, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_arrow_radius)) * 2;
         this.mArrowDiameter = dimensionPixelOffset2;
-        this.mDotGap = obtainStyledAttributes.getDimensionPixelOffset(5, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_dot_gap));
-        this.mArrowGap = obtainStyledAttributes.getDimensionPixelOffset(4, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_arrow_gap));
-        new Paint(1).setColor(obtainStyledAttributes.getColor(3, getResources().getColor(R.color.lb_page_indicator_dot)));
-        this.mDotFgSelectColor = obtainStyledAttributes.getColor(0, getResources().getColor(R.color.lb_page_indicator_arrow_background));
-        if (this.mArrowPaint == null && obtainStyledAttributes.hasValue(1)) {
-            int color = obtainStyledAttributes.getColor(1, 0);
+        this.mDotGap = typedArrayObtainStyledAttributes.getDimensionPixelOffset(5, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_dot_gap));
+        this.mArrowGap = typedArrayObtainStyledAttributes.getDimensionPixelOffset(4, getResources().getDimensionPixelOffset(R.dimen.lb_page_indicator_arrow_gap));
+        new Paint(1).setColor(typedArrayObtainStyledAttributes.getColor(3, getResources().getColor(R.color.lb_page_indicator_dot)));
+        this.mDotFgSelectColor = typedArrayObtainStyledAttributes.getColor(0, getResources().getColor(R.color.lb_page_indicator_arrow_background));
+        if (this.mArrowPaint == null && typedArrayObtainStyledAttributes.hasValue(1)) {
+            int color = typedArrayObtainStyledAttributes.getColor(1, 0);
             if (this.mArrowPaint == null) {
                 this.mArrowPaint = new Paint();
             }
             this.mArrowPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.mIsLtr = resources.getConfiguration().getLayoutDirection() == 0;
         int color2 = resources.getColor(R.color.lb_page_indicator_arrow_shadow);
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.lb_page_indicator_arrow_shadow_radius);
@@ -236,24 +234,24 @@ public class PagingIndicator extends View {
         this.mArrowToBgRatio = this.mArrow.getWidth() / f;
         AnimatorSet animatorSet2 = new AnimatorSet();
         AnonymousClass1 anonymousClass1 = DOT_ALPHA;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, anonymousClass1, 0.0f, 1.0f);
-        ofFloat.setDuration(167L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, anonymousClass1, 0.0f, 1.0f);
+        objectAnimatorOfFloat.setDuration(167L);
         TimeInterpolator timeInterpolator = DECELERATE_INTERPOLATOR;
-        ofFloat.setInterpolator(timeInterpolator);
+        objectAnimatorOfFloat.setInterpolator(timeInterpolator);
         float f2 = i2;
         AnonymousClass2 anonymousClass2 = DOT_DIAMETER;
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat((Object) null, anonymousClass2, f2, f);
-        ofFloat2.setDuration(417L);
-        ofFloat2.setInterpolator(timeInterpolator);
-        animatorSet2.playTogether(ofFloat, ofFloat2, createDotTranslationXAnimator());
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat((Object) null, anonymousClass2, f2, f);
+        objectAnimatorOfFloat2.setDuration(417L);
+        objectAnimatorOfFloat2.setInterpolator(timeInterpolator);
+        animatorSet2.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, createDotTranslationXAnimator());
         AnimatorSet animatorSet3 = new AnimatorSet();
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat((Object) null, anonymousClass1, 1.0f, 0.0f);
-        ofFloat3.setDuration(167L);
-        ofFloat3.setInterpolator(timeInterpolator);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat((Object) null, anonymousClass2, f, f2);
-        ofFloat4.setDuration(417L);
-        ofFloat4.setInterpolator(timeInterpolator);
-        animatorSet3.playTogether(ofFloat3, ofFloat4, createDotTranslationXAnimator());
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat((Object) null, anonymousClass1, 1.0f, 0.0f);
+        objectAnimatorOfFloat3.setDuration(167L);
+        objectAnimatorOfFloat3.setInterpolator(timeInterpolator);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat((Object) null, anonymousClass2, f, f2);
+        objectAnimatorOfFloat4.setDuration(417L);
+        objectAnimatorOfFloat4.setInterpolator(timeInterpolator);
+        animatorSet3.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat4, createDotTranslationXAnimator());
         animatorSet.playTogether(animatorSet2, animatorSet3);
         setLayerType(1, null);
     }

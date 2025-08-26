@@ -545,6 +545,7 @@
     <item type="id" name="notification_progress_end_icon" />
     <item type="id" name="notification_progress_start_icon" />
     <item type="id" name="notification_top_line" />
+    <item type="id" name="notification_top_line_linear_layout" />
     <item type="id" name="numberpicker_input" />
     <item type="id" name="ok" />
     <item type="id" name="old_app_action" />

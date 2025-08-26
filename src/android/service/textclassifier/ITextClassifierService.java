@@ -117,9 +117,9 @@ public interface ITextClassifierService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITextClassifierService)) {
-                return (ITextClassifierService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITextClassifierService)) {
+                return (ITextClassifierService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -169,23 +169,23 @@ public interface ITextClassifierService extends IInterface {
                 case 1:
                     TextClassificationSessionId textClassificationSessionId = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
                     TextSelection.Request request = (TextSelection.Request) parcel.readTypedObject(TextSelection.Request.CREATOR);
-                    ITextClassifierCallback asInterface = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITextClassifierCallback iTextClassifierCallbackAsInterface = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSuggestSelection(textClassificationSessionId, request, asInterface);
+                    onSuggestSelection(textClassificationSessionId, request, iTextClassifierCallbackAsInterface);
                     return true;
                 case 2:
                     TextClassificationSessionId textClassificationSessionId2 = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
                     TextClassification.Request request2 = (TextClassification.Request) parcel.readTypedObject(TextClassification.Request.CREATOR);
-                    ITextClassifierCallback asInterface2 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITextClassifierCallback iTextClassifierCallbackAsInterface2 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onClassifyText(textClassificationSessionId2, request2, asInterface2);
+                    onClassifyText(textClassificationSessionId2, request2, iTextClassifierCallbackAsInterface2);
                     return true;
                 case 3:
                     TextClassificationSessionId textClassificationSessionId3 = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
                     TextLinks.Request request3 = (TextLinks.Request) parcel.readTypedObject(TextLinks.Request.CREATOR);
-                    ITextClassifierCallback asInterface3 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITextClassifierCallback iTextClassifierCallbackAsInterface3 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onGenerateLinks(textClassificationSessionId3, request3, asInterface3);
+                    onGenerateLinks(textClassificationSessionId3, request3, iTextClassifierCallbackAsInterface3);
                     return true;
                 case 4:
                     TextClassificationSessionId textClassificationSessionId4 = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
@@ -213,21 +213,21 @@ public interface ITextClassifierService extends IInterface {
                 case 8:
                     TextClassificationSessionId textClassificationSessionId8 = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
                     TextLanguage.Request request4 = (TextLanguage.Request) parcel.readTypedObject(TextLanguage.Request.CREATOR);
-                    ITextClassifierCallback asInterface4 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITextClassifierCallback iTextClassifierCallbackAsInterface4 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onDetectLanguage(textClassificationSessionId8, request4, asInterface4);
+                    onDetectLanguage(textClassificationSessionId8, request4, iTextClassifierCallbackAsInterface4);
                     return true;
                 case 9:
                     TextClassificationSessionId textClassificationSessionId9 = (TextClassificationSessionId) parcel.readTypedObject(TextClassificationSessionId.CREATOR);
                     ConversationActions.Request request5 = (ConversationActions.Request) parcel.readTypedObject(ConversationActions.Request.CREATOR);
-                    ITextClassifierCallback asInterface5 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITextClassifierCallback iTextClassifierCallbackAsInterface5 = ITextClassifierCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSuggestConversationActions(textClassificationSessionId9, request5, asInterface5);
+                    onSuggestConversationActions(textClassificationSessionId9, request5, iTextClassifierCallbackAsInterface5);
                     return true;
                 case 10:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onConnectedStateChanged(readInt);
+                    onConnectedStateChanged(i3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -252,134 +252,134 @@ public interface ITextClassifierService extends IInterface {
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onSuggestSelection(TextClassificationSessionId textClassificationSessionId, TextSelection.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iTextClassifierCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iTextClassifierCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onClassifyText(TextClassificationSessionId textClassificationSessionId, TextClassification.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iTextClassifierCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iTextClassifierCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onGenerateLinks(TextClassificationSessionId textClassificationSessionId, TextLinks.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iTextClassifierCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iTextClassifierCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onSelectionEvent(TextClassificationSessionId textClassificationSessionId, SelectionEvent selectionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(selectionEvent, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(selectionEvent, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onTextClassifierEvent(TextClassificationSessionId textClassificationSessionId, TextClassifierEvent textClassifierEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(textClassifierEvent, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(textClassifierEvent, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onCreateTextClassificationSession(TextClassificationContext textClassificationContext, TextClassificationSessionId textClassificationSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationContext, 0);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationContext, 0);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onDestroyTextClassificationSession(TextClassificationSessionId textClassificationSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onDetectLanguage(TextClassificationSessionId textClassificationSessionId, TextLanguage.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iTextClassifierCallback);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iTextClassifierCallback);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onSuggestConversationActions(TextClassificationSessionId textClassificationSessionId, ConversationActions.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(textClassificationSessionId, 0);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iTextClassifierCallback);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(textClassificationSessionId, 0);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iTextClassifierCallback);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
             public void onConnectedStateChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.samsung.android.sdk.scs.ai.visual.c2pa;
 import androidx.compose.animation.BoundsAnimationElement$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IngredientManifestInfo {
     private final boolean isParent;
@@ -53,13 +52,13 @@ public final class IngredientManifestInfo {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        int hashCode = this.manifestKey.hashCode() * 31;
+        int iHashCode = this.manifestKey.hashCode() * 31;
         boolean z = this.isParent;
         int i = z;
         if (z != 0) {
             i = 1;
         }
-        return hashCode + i;
+        return iHashCode + i;
     }
 
     public final boolean isParent() {

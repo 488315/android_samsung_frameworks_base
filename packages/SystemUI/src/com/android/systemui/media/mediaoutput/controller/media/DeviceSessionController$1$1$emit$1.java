@@ -4,7 +4,6 @@ import com.android.systemui.media.mediaoutput.controller.media.DeviceSessionCont
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceSessionController$1$1$emit$1 extends ContinuationImpl {
     Object L$0;
@@ -12,12 +11,12 @@ final class DeviceSessionController$1$1$emit$1 extends ContinuationImpl {
     Object L$2;
     int label;
     /* synthetic */ Object result;
-    final /* synthetic */ DeviceSessionController.AnonymousClass1.C02281 this$0;
+    final /* synthetic */ DeviceSessionController.AnonymousClass1.C03511 this$0;
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public DeviceSessionController$1$1$emit$1(DeviceSessionController.AnonymousClass1.C02281 c02281, Continuation continuation) {
+    public DeviceSessionController$1$1$emit$1(DeviceSessionController.AnonymousClass1.C03511 c03511, Continuation continuation) {
         super(continuation);
-        this.this$0 = c02281;
+        this.this$0 = c03511;
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl

@@ -18,7 +18,6 @@ import androidx.reflect.view.SeslViewReflector;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHoverListener, View.OnAttachStateChangeListener {
     public static TooltipCompatHandler sActiveHandler = null;
@@ -67,7 +66,7 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i2 = i;
                 TooltipCompatHandler tooltipCompatHandler = this.f$0;
                 switch (i2) {
@@ -89,7 +88,7 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i22 = i2;
                 TooltipCompatHandler tooltipCompatHandler = this.f$0;
                 switch (i22) {
@@ -145,8 +144,12 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
         sIsTooltipNull = false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0054  */
     @Override // android.view.View.OnHoverListener
-    public final boolean onHover(View view, MotionEvent motionEvent) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final boolean onHover(View view, MotionEvent motionEvent) throws NoSuchMethodException, SecurityException {
         if (this.mPopup == null || !this.mFromTouch) {
             if (this.mAnchor == null) {
                 Log.i("TooltipCompatHandler", "TooltipCompat Anchor view is null");
@@ -154,56 +157,55 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
             }
             Context context = view.getContext();
             if (motionEvent.isFromSource(16386)) {
-                if (Settings.System.getInt(this.mAnchor.getContext().getContentResolver(), SeslSettingsReflector$SeslSystemReflector.getField_SEM_PEN_HOVERING(), 0) != 1) {
-                    if (this.mAnchor.isEnabled() && this.mPopup != null && context != null) {
-                        SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, SeslPointerIconReflector.getField_SEM_TYPE_STYLUS_DEFAULT()));
-                        return false;
-                    }
-                }
-            }
-            AccessibilityManager accessibilityManager = (AccessibilityManager) this.mAnchor.getContext().getSystemService("accessibility");
-            if (!accessibilityManager.isEnabled() || !accessibilityManager.isTouchExplorationEnabled()) {
-                int action = motionEvent.getAction();
-                this.mLastHoverEvent = action;
-                if (action != 7) {
-                    if (action == 9) {
-                        this.mInitialWindowFocus = this.mAnchor.hasWindowFocus();
-                        if (this.mAnchor.isEnabled() && this.mPopup == null && context != null) {
-                            Method declaredMethod = SeslBaseReflector.getDeclaredMethod("android.view.PointerIcon", "hidden_SEM_TYPE_STYLUS_MORE", new Class[0]);
-                            Object invoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
-                            SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, invoke instanceof Integer ? ((Integer) invoke).intValue() : 20010));
-                            return false;
-                        }
-                    } else if (action == 10) {
-                        Log.i("TooltipCompatHandler", "MotionEvent.ACTION_HOVER_EXIT : hide SeslTooltipPopup");
-                        if (this.mAnchor.isEnabled() && this.mPopup != null && context != null) {
-                            SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, SeslPointerIconReflector.getField_SEM_TYPE_STYLUS_DEFAULT()));
-                        }
-                        TooltipPopup tooltipPopup = this.mPopup;
-                        if (tooltipPopup == null || !tooltipPopup.isShowing() || Math.abs(motionEvent.getX() - this.mAnchorX) >= 4.0f || Math.abs(motionEvent.getY() - this.mAnchorY) >= 4.0f) {
-                            hide();
-                            return false;
-                        }
-                        this.mIsForceExitDelay = true;
-                        this.mAnchor.removeCallbacks(this.mHideRunnable);
-                        this.mAnchor.postDelayed(this.mHideRunnable, 2500L);
-                        return false;
-                    }
-                } else if (this.mAnchor.isEnabled() && this.mPopup == null) {
-                    int x = (int) motionEvent.getX();
-                    int y = (int) motionEvent.getY();
-                    if (this.mForceNextChangeSignificant || Math.abs(x - this.mAnchorX) > this.mHoverSlop || Math.abs(y - this.mAnchorY) > this.mHoverSlop) {
-                        this.mAnchorX = x;
-                        this.mAnchorY = y;
-                        this.mForceNextChangeSignificant = false;
-                        this.mAnchorX = (int) motionEvent.getX();
-                        this.mAnchorY = (int) motionEvent.getY();
-                        if (!this.mIsShowRunnablePostDelayed || this.mIsForceExitDelay) {
-                            setPendingHandler(this);
-                            this.mIsForceExitDelay = false;
-                            this.mIsShowRunnablePostDelayed = true;
+                if (Settings.System.getInt(this.mAnchor.getContext().getContentResolver(), SeslSettingsReflector$SeslSystemReflector.getField_SEM_PEN_HOVERING(), 0) == 1) {
+                    AccessibilityManager accessibilityManager = (AccessibilityManager) this.mAnchor.getContext().getSystemService("accessibility");
+                    if (!accessibilityManager.isEnabled() || !accessibilityManager.isTouchExplorationEnabled()) {
+                        int action = motionEvent.getAction();
+                        this.mLastHoverEvent = action;
+                        if (action != 7) {
+                            if (action == 9) {
+                                this.mInitialWindowFocus = this.mAnchor.hasWindowFocus();
+                                if (this.mAnchor.isEnabled() && this.mPopup == null && context != null) {
+                                    Method declaredMethod = SeslBaseReflector.getDeclaredMethod("android.view.PointerIcon", "hidden_SEM_TYPE_STYLUS_MORE", new Class[0]);
+                                    Object objInvoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
+                                    SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, objInvoke instanceof Integer ? ((Integer) objInvoke).intValue() : 20010));
+                                    return false;
+                                }
+                            } else if (action == 10) {
+                                Log.i("TooltipCompatHandler", "MotionEvent.ACTION_HOVER_EXIT : hide SeslTooltipPopup");
+                                if (this.mAnchor.isEnabled() && this.mPopup != null && context != null) {
+                                    SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, SeslPointerIconReflector.getField_SEM_TYPE_STYLUS_DEFAULT()));
+                                }
+                                TooltipPopup tooltipPopup = this.mPopup;
+                                if (tooltipPopup == null || !tooltipPopup.isShowing() || Math.abs(motionEvent.getX() - this.mAnchorX) >= 4.0f || Math.abs(motionEvent.getY() - this.mAnchorY) >= 4.0f) {
+                                    hide();
+                                    return false;
+                                }
+                                this.mIsForceExitDelay = true;
+                                this.mAnchor.removeCallbacks(this.mHideRunnable);
+                                this.mAnchor.postDelayed(this.mHideRunnable, 2500L);
+                                return false;
+                            }
+                        } else if (this.mAnchor.isEnabled() && this.mPopup == null) {
+                            int x = (int) motionEvent.getX();
+                            int y = (int) motionEvent.getY();
+                            if (this.mForceNextChangeSignificant || Math.abs(x - this.mAnchorX) > this.mHoverSlop || Math.abs(y - this.mAnchorY) > this.mHoverSlop) {
+                                this.mAnchorX = x;
+                                this.mAnchorY = y;
+                                this.mForceNextChangeSignificant = false;
+                                this.mAnchorX = (int) motionEvent.getX();
+                                this.mAnchorY = (int) motionEvent.getY();
+                                if (!this.mIsShowRunnablePostDelayed || this.mIsForceExitDelay) {
+                                    setPendingHandler(this);
+                                    this.mIsForceExitDelay = false;
+                                    this.mIsShowRunnablePostDelayed = true;
+                                }
+                            }
                         }
                     }
+                } else if (this.mAnchor.isEnabled() && this.mPopup != null && context != null) {
+                    SeslViewReflector.semSetPointerIcon(view, 2, PointerIcon.getSystemIcon(context, SeslPointerIconReflector.getField_SEM_TYPE_STYLUS_DEFAULT()));
+                    return false;
                 }
             }
         }
@@ -211,7 +213,7 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
     }
 
     @Override // android.view.View.OnLongClickListener
-    public final boolean onLongClick(View view) {
+    public final boolean onLongClick(View view) throws Resources.NotFoundException {
         this.mAnchorX = view.getWidth() / 2;
         this.mAnchorY = view.getHeight() / 2;
         show(true);
@@ -225,7 +227,7 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v9, types: [android.view.View$OnLayoutChangeListener, androidx.appcompat.widget.TooltipCompatHandler$$ExternalSyntheticLambda0] */
-    public final void show(boolean z) {
+    public final void show(boolean z) throws Resources.NotFoundException {
         long longPressTimeout;
         long j;
         long j2;
@@ -273,7 +275,7 @@ public class TooltipCompatHandler implements View.OnLongClickListener, View.OnHo
                 @Override // android.view.View.OnLayoutChangeListener
                 public final void onLayoutChange(View view3, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                     TooltipPopup tooltipPopup2;
-                    TooltipCompatHandler tooltipCompatHandler2 = TooltipCompatHandler.this;
+                    TooltipCompatHandler tooltipCompatHandler2 = this.f$0;
                     Resources resources2 = resources;
                     tooltipCompatHandler2.getClass();
                     if (resources2.getConfiguration().orientation != tooltipCompatHandler2.mLastOrientation && (tooltipPopup2 = tooltipCompatHandler2.mPopup) != null && tooltipPopup2.isShowing()) {

@@ -48,18 +48,18 @@ public abstract class DialogPreference extends Preference implements DialogInter
                 DialogPreference.this.mDialog.dismiss();
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DialogPreference, i, i2);
-        String string = obtainStyledAttributes.getString(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DialogPreference, i, i2);
+        String string = typedArrayObtainStyledAttributes.getString(0);
         this.mDialogTitle = string;
         if (string == null) {
             this.mDialogTitle = getTitle();
         }
-        this.mDialogMessage = obtainStyledAttributes.getString(1);
-        this.mDialogIcon = obtainStyledAttributes.getDrawable(2);
-        this.mPositiveButtonText = obtainStyledAttributes.getString(3);
-        this.mNegativeButtonText = obtainStyledAttributes.getString(4);
-        this.mDialogLayoutResId = obtainStyledAttributes.getResourceId(5, this.mDialogLayoutResId);
-        obtainStyledAttributes.recycle();
+        this.mDialogMessage = typedArrayObtainStyledAttributes.getString(1);
+        this.mDialogIcon = typedArrayObtainStyledAttributes.getDrawable(2);
+        this.mPositiveButtonText = typedArrayObtainStyledAttributes.getString(3);
+        this.mNegativeButtonText = typedArrayObtainStyledAttributes.getString(4);
+        this.mDialogLayoutResId = typedArrayObtainStyledAttributes.getResourceId(5, this.mDialogLayoutResId);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public DialogPreference(Context context, AttributeSet attributeSet, int i) {
@@ -154,29 +154,29 @@ public abstract class DialogPreference extends Preference implements DialogInter
         Context context = getContext();
         this.mWhichButtonClicked = -2;
         this.mBuilder = new AlertDialog.Builder(context).setTitle(this.mDialogTitle).setIcon(this.mDialogIcon).setPositiveButton(this.mPositiveButtonText, this).setNegativeButton(this.mNegativeButtonText, this);
-        View onCreateDialogView = onCreateDialogView();
-        if (onCreateDialogView != null) {
-            onBindDialogView(onCreateDialogView);
-            this.mBuilder.setView(onCreateDialogView);
+        View viewOnCreateDialogView = onCreateDialogView();
+        if (viewOnCreateDialogView != null) {
+            onBindDialogView(viewOnCreateDialogView);
+            this.mBuilder.setView(viewOnCreateDialogView);
         } else {
             this.mBuilder.setMessage(this.mDialogMessage);
         }
         onPrepareDialogBuilder(this.mBuilder);
         getPreferenceManager().registerOnActivityDestroyListener(this);
-        AlertDialog create = this.mBuilder.create();
-        this.mDialog = create;
+        AlertDialog alertDialogCreate = this.mBuilder.create();
+        this.mDialog = alertDialogCreate;
         if (bundle != null) {
-            create.onRestoreInstanceState(bundle);
+            alertDialogCreate.onRestoreInstanceState(bundle);
         }
-        create.setOnShowListener(new DialogInterface.OnShowListener() { // from class: android.preference.DialogPreference.2
+        alertDialogCreate.setOnShowListener(new DialogInterface.OnShowListener() { // from class: android.preference.DialogPreference.2
             @Override // android.content.DialogInterface.OnShowListener
             public void onShow(DialogInterface dialogInterface) {
                 DialogPreference.this.removeDismissCallbacks();
             }
         });
-        create.setOnDismissListener(this);
+        alertDialogCreate.setOnDismissListener(this);
         try {
-            create.show();
+            alertDialogCreate.show();
         } catch (WindowManager.BadTokenException e) {
             e.printStackTrace();
         }
@@ -215,19 +215,19 @@ public abstract class DialogPreference extends Preference implements DialogInter
 
     protected void onBindDialogView(View view) {
         int i;
-        View findViewById = view.findViewById(16908299);
-        if (findViewById != null) {
+        View viewFindViewById = view.findViewById(16908299);
+        if (viewFindViewById != null) {
             CharSequence dialogMessage = getDialogMessage();
             if (TextUtils.isEmpty(dialogMessage)) {
                 i = 8;
             } else {
-                if (findViewById instanceof TextView) {
-                    ((TextView) findViewById).lambda$setTextAsync$0(dialogMessage);
+                if (viewFindViewById instanceof TextView) {
+                    ((TextView) viewFindViewById).lambda$setTextAsync$0(dialogMessage);
                 }
                 i = 0;
             }
-            if (findViewById.getVisibility() != i) {
-                findViewById.setVisibility(i);
+            if (viewFindViewById.getVisibility() != i) {
+                viewFindViewById.setVisibility(i);
             }
         }
     }
@@ -260,12 +260,12 @@ public abstract class DialogPreference extends Preference implements DialogInter
 
     @Override // android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.isDialogShowing = true;
         savedState.dialogBundle = this.mDialog.onSaveInstanceState();
         return savedState;

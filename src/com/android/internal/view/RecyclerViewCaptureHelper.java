@@ -16,8 +16,8 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
     private int mScrollDelta;
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(viewGroup, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(View view, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
+        onScrollRequested((ViewGroup) view, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -37,8 +37,7 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
         viewGroup.setVerticalScrollBarEnabled(false);
     }
 
-    /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
+    public void onScrollRequested(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
         ScrollCaptureViewHelper.ScrollResult scrollResult = new ScrollCaptureViewHelper.ScrollResult();
         scrollResult.requestedArea = new Rect(rect2);
         scrollResult.scrollDelta = this.mScrollDelta;
@@ -51,32 +50,32 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
         Rect rect3 = new Rect(rect2);
         rect3.offset(0, -this.mScrollDelta);
         rect3.offset(rect.left, rect.top);
-        View findChildNearestTarget = findChildNearestTarget(viewGroup, rect3);
-        if (findChildNearestTarget == null) {
+        View viewFindChildNearestTarget = findChildNearestTarget(viewGroup, rect3);
+        if (viewFindChildNearestTarget == null) {
             Log.w(TAG, "Failed to locate anchor view");
             consumer.accept(scrollResult);
             return;
         }
         Rect rect4 = new Rect(rect3);
-        viewGroup.offsetRectIntoDescendantCoords(findChildNearestTarget, rect4);
-        int top = findChildNearestTarget.getTop();
+        viewGroup.offsetRectIntoDescendantCoords(viewFindChildNearestTarget, rect4);
+        int top = viewFindChildNearestTarget.getTop();
         Rect rect5 = new Rect(rect4);
         int height = ((viewGroup.getHeight() - viewGroup.getPaddingTop()) - viewGroup.getPaddingBottom()) - rect5.height();
         if (height > 0) {
             rect5.inset(0, (-height) / 2);
         }
-        if (viewGroup.requestChildRectangleOnScreen(findChildNearestTarget, rect5, true)) {
-            if (findChildNearestTarget.getParent() == null) {
-                Log.w(TAG, "Bug: anchor view " + findChildNearestTarget + " is detached after scrolling");
+        if (viewGroup.requestChildRectangleOnScreen(viewFindChildNearestTarget, rect5, true)) {
+            if (viewFindChildNearestTarget.getParent() == null) {
+                Log.w(TAG, "Bug: anchor view " + viewFindChildNearestTarget + " is detached after scrolling");
                 consumer.accept(scrollResult);
                 return;
             }
-            int top2 = this.mScrollDelta + (top - findChildNearestTarget.getTop());
+            int top2 = this.mScrollDelta + (top - viewFindChildNearestTarget.getTop());
             this.mScrollDelta = top2;
             scrollResult.scrollDelta = top2;
         }
         rect3.set(rect4);
-        viewGroup.offsetDescendantRectToMyCoords(findChildNearestTarget, rect3);
+        viewGroup.offsetDescendantRectToMyCoords(viewFindChildNearestTarget, rect3);
         Rect rect6 = new Rect(rect);
         viewGroup.getLocalVisibleRect(rect6);
         if (!rect3.intersect(rect6)) {
@@ -91,7 +90,7 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
     }
 
     static View findChildNearestTarget(ViewGroup viewGroup, Rect rect) {
-        int height = (int) (rect.height() * 0.25f);
+        int iHeight = (int) (rect.height() * 0.25f);
         viewGroup.getLocalVisibleRect(new Rect());
         Rect rect2 = new Rect();
         View view = null;
@@ -100,11 +99,11 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
             View childAt = viewGroup.getChildAt(i2);
             childAt.getHitRect(rect2);
             if (childAt.getVisibility() == 0) {
-                int abs = Math.abs(rect.centerY() - rect2.centerY());
-                if (abs < i) {
+                int iAbs = Math.abs(rect.centerY() - rect2.centerY());
+                if (iAbs < i) {
                     view = childAt;
-                    i = abs;
-                } else if (rect2.intersect(rect) && rect2.height() > height) {
+                    i = iAbs;
+                } else if (rect2.intersect(rect) && rect2.height() > iHeight) {
                     view = childAt;
                 }
             }

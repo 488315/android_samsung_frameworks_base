@@ -3,6 +3,7 @@ package com.android.systemui.volume;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.PowerManager;
@@ -42,7 +43,6 @@ import com.samsung.systemui.splugins.volume.VolumeInfraMediator;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
     public final AccessibilityManagerWrapper accessibilityManagerWrapper;
@@ -70,7 +70,6 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
     public final VolumeDialogController volumeController;
     public final ZenModeHelper zenModeHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -80,7 +79,6 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -311,9 +309,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void disableSafeMediaVolume() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             audioManagerWrapper.am.disableSafeMediaVolume();
             return;
         }
@@ -328,69 +326,69 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final Object get(final VolumeInfraMediator.Values values, Object... objArr) {
-        final Object obj = 0;
+        final Object objValueOf = 0;
         switch (WhenMappings.$EnumSwitchMapping$1[values.ordinal()]) {
             case 1:
-                obj = Integer.valueOf(getEarProtectLimit());
+                objValueOf = Integer.valueOf(getEarProtectLimit());
                 break;
             case 2:
-                obj = getBtCallDeviceName();
+                objValueOf = getBtCallDeviceName();
                 break;
             case 3:
-                obj = Integer.valueOf(getDevicesForStreamMusic());
+                objValueOf = Integer.valueOf(getDevicesForStreamMusic());
                 break;
             case 4:
-                obj = getPinAppName(((Integer) objArr[0]).intValue());
+                objValueOf = getPinAppName(((Integer) objArr[0]).intValue());
                 break;
             case 5:
-                obj = getPinDeviceName(((Integer) objArr[0]).intValue());
+                objValueOf = getPinDeviceName(((Integer) objArr[0]).intValue());
                 break;
             case 6:
-                obj = Integer.valueOf(getPinDevice());
+                objValueOf = Integer.valueOf(getPinDevice());
                 break;
             case 7:
-                obj = getSmartViewDeviceName();
+                objValueOf = getSmartViewDeviceName();
                 break;
             case 8:
-                obj = Integer.valueOf(getTimeoutControls());
+                objValueOf = Integer.valueOf(getTimeoutControls());
                 break;
             case 9:
-                obj = Integer.valueOf(getTimeoutControlsText());
+                objValueOf = Integer.valueOf(getTimeoutControlsText());
                 break;
             case 10:
                 getCutoutHeight();
                 break;
             case 11:
-                obj = Long.valueOf(getSystemTime());
+                objValueOf = Long.valueOf(getSystemTime());
                 break;
             case 12:
-                obj = getActiveBtDeviceName();
+                objValueOf = getActiveBtDeviceName();
                 break;
             case 13:
-                obj = getAudioCastDeviceName();
+                objValueOf = getAudioCastDeviceName();
                 break;
             case 14:
-                obj = Integer.valueOf(getMultiSoundDevice());
+                objValueOf = Integer.valueOf(getMultiSoundDevice());
                 break;
         }
-        if (obj != null && VolumeInfraMediator.Values.SYSTEM_TIME != values) {
-            this.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.VolumeInfraMediatorImpl$get$1
+        if (objValueOf != null && VolumeInfraMediator.Values.SYSTEM_TIME != values) {
+            this.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.VolumeInfraMediatorImpl.get.1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VolumeInfraMediatorImpl.this.logWrapper.p(values + "=" + obj);
+                    VolumeInfraMediatorImpl.this.logWrapper.p(values + "=" + objValueOf);
                 }
             });
         }
-        return obj;
+        return objValueOf;
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getActiveBtDeviceName() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         BluetoothAdapterWrapper bluetoothAdapterWrapper = this.bluetoothAdapterWrapper;
         BluetoothAudioCastWrapper bluetoothAudioCastWrapper = this.bluetoothAudioCastWrapper;
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isMusicShareEnabled() ? bluetoothAudioCastWrapper.getCastDeviceConnectedName() : bluetoothAdapterWrapper.getActiveBTDeviceName();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getActiveBtDeviceName");
@@ -406,9 +404,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getAudioCastDeviceName() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         BluetoothAudioCastWrapper bluetoothAudioCastWrapper = this.bluetoothAudioCastWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return bluetoothAudioCastWrapper.getCastDeviceConnectedName();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getAudioCastDeviceName");
@@ -421,9 +419,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getBtCallDeviceName() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         BluetoothAdapterWrapper bluetoothAdapterWrapper = this.bluetoothAdapterWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return bluetoothAdapterWrapper.getBtCallDeviceName();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getBtCallDeviceName");
@@ -436,9 +434,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void getCaptionsComponentState(boolean z) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.getCaptionsComponentState(z);
             return;
         }
@@ -453,9 +451,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getCutoutHeight() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             statusBarWrapper.getClass();
             return 0;
         }
@@ -470,9 +468,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getDevicesForStreamMusic() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.getDevicesForStream(3);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getDevicesForStreamMusic");
@@ -485,9 +483,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getEarProtectLimit() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             audioManagerWrapper.getClass();
             return AudioManager.semGetEarProtectLimit();
         }
@@ -502,9 +500,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getMultiSoundDevice() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SoundAssistantManagerWrapper soundAssistantManagerWrapper = this.soundAssistantManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return soundAssistantManagerWrapper.satMananger.getMultiSoundDevice();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getMultiSoundDevice");
@@ -517,9 +515,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getMusicFineVolume() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.getFineVolume(3, 0);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getMusicFineVolume");
@@ -532,9 +530,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getPinAppName(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.getPinAppName(i);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getPinAppName");
@@ -547,9 +545,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getPinDevice() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.semGetPinDevice();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getPinDevice");
@@ -562,9 +560,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getPinDeviceName(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.getPinDeviceName(i);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getPinDeviceName");
@@ -577,9 +575,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final String getSmartViewDeviceName() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         DisplayManagerWrapper displayManagerWrapper = this.displayManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return displayManagerWrapper.getSmartViewDeviceName();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getSmartViewDeviceName");
@@ -592,9 +590,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final long getSystemTime() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SystemClockWrapper systemClockWrapper = this.systemClockWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             systemClockWrapper.getClass();
             return SystemClock.uptimeMillis();
         }
@@ -609,9 +607,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getTimeoutControls() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AccessibilityManagerWrapper accessibilityManagerWrapper = this.accessibilityManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return accessibilityManagerWrapper.getRecommendedTimeoutMillis(4);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getTimeoutControls");
@@ -624,9 +622,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final int getTimeoutControlsText() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AccessibilityManagerWrapper accessibilityManagerWrapper = this.accessibilityManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return accessibilityManagerWrapper.getRecommendedTimeoutMillis(6);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_getTimeoutControlsText");
@@ -639,9 +637,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void initSound(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SoundPoolWrapper soundPoolWrapper = this.soundPoolWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             soundPoolWrapper.initSound(i);
             return;
         }
@@ -669,9 +667,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isAodVolumePanel() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isAODVolumePanel();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isAodVolumePanel");
@@ -684,9 +682,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isAudioMirroring() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isAudioMirroring();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isAudioMirroring");
@@ -699,9 +697,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isBixbyServiceForeground() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         BixbyServiceManager bixbyServiceManager = this.bixbyServiceManager;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return bixbyServiceManager.isBixbyServiceForeground();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isBixbyServiceForeground");
@@ -712,60 +710,36 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x001f, code lost:
-    
-        if (r6.getType() == 26) goto L11;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0022  */
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean isBleCallDeviceOn() {
-        /*
-            r6 = this;
-            r0 = 4096(0x1000, double:2.0237E-320)
-            boolean r2 = android.os.Trace.isTagEnabled(r0)
-            r3 = 1
-            r4 = 26
-            r5 = 0
-            com.android.systemui.volume.util.AudioManagerWrapper r6 = r6.audioManagerWrapper
-            if (r2 == 0) goto L2c
-            java.lang.String r2 = "#vol.infraMediator_isBleCallDeviceOn"
-            android.os.Trace.traceBegin(r0, r2)
-            android.media.AudioManager r6 = r6.am     // Catch: java.lang.Throwable -> L27
-            android.media.AudioDeviceInfo r6 = r6.getCommunicationDevice()     // Catch: java.lang.Throwable -> L27
-            if (r6 == 0) goto L22
-            int r6 = r6.getType()     // Catch: java.lang.Throwable -> L27
-            if (r6 != r4) goto L22
-            goto L23
-        L22:
-            r3 = r5
-        L23:
-            android.os.Trace.traceEnd(r0)
-            return r3
-        L27:
-            r6 = move-exception
-            android.os.Trace.traceEnd(r0)
-            throw r6
-        L2c:
-            android.media.AudioManager r6 = r6.am
-            android.media.AudioDeviceInfo r6 = r6.getCommunicationDevice()
-            if (r6 == 0) goto L3b
-            int r6 = r6.getType()
-            if (r6 != r4) goto L3b
-            return r3
-        L3b:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeInfraMediatorImpl.isBleCallDeviceOn():boolean");
+        boolean z;
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
+        AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
+        if (!zIsTagEnabled) {
+            AudioDeviceInfo communicationDevice = audioManagerWrapper.am.getCommunicationDevice();
+            return communicationDevice != null && communicationDevice.getType() == 26;
+        }
+        Trace.traceBegin(4096L, "#vol.infraMediator_isBleCallDeviceOn");
+        try {
+            AudioDeviceInfo communicationDevice2 = audioManagerWrapper.am.getCommunicationDevice();
+            if (communicationDevice2 != null) {
+                z = communicationDevice2.getType() == 26;
+            }
+            return z;
+        } finally {
+            Trace.traceEnd(4096L);
+        }
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isBluetoothScoOn() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.isBluetoothScoOn();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isBluetoothScoOn");
@@ -778,9 +752,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isBudsTogetherEnabled() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isBudsTogetherEnabled();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isBudsTogetherEnabled");
@@ -793,9 +767,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isCaptionEnabled() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.areCaptionsEnabled();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isCaptionEnabled");
@@ -808,9 +782,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isDensityOrFontChanged() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         ConfigurationWrapper configurationWrapper = this.configurationWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return configurationWrapper.isDensityOrFontScaleChanged();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isDensityOrFontChanged");
@@ -823,9 +797,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isDexMode() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         DesktopManagerWrapper desktopManagerWrapper = this.desktopManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             desktopManagerWrapper.getClass();
             return false;
         }
@@ -840,9 +814,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isDisplayTypeChanged() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         ConfigurationWrapper configurationWrapper = this.configurationWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return configurationWrapper.isDisplayTypeChanged();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isDisplayTypeChanged");
@@ -856,87 +830,87 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isEnabled(final VolumeInfraMediator.Conditions conditions, Object... objArr) {
-        final boolean z = true;
+        final boolean zIsSafeMediaVolumeDeviceOn = true;
         switch (WhenMappings.$EnumSwitchMapping$0[conditions.ordinal()]) {
             case 1:
-                z = isSafeMediaVolumeDeviceOn();
+                zIsSafeMediaVolumeDeviceOn = isSafeMediaVolumeDeviceOn();
                 break;
             case 2:
-                z = isSafeMediaVolumePinDeviceOn();
+                zIsSafeMediaVolumeDeviceOn = isSafeMediaVolumePinDeviceOn();
                 break;
             case 3:
-                z = isUserInCall();
+                zIsSafeMediaVolumeDeviceOn = isUserInCall();
                 break;
             case 4:
-                z = isBluetoothScoOn();
+                zIsSafeMediaVolumeDeviceOn = isBluetoothScoOn();
                 break;
             case 5:
-                z = isBleCallDeviceOn();
+                zIsSafeMediaVolumeDeviceOn = isBleCallDeviceOn();
                 break;
             case 6:
-                z = isBixbyServiceForeground();
+                zIsSafeMediaVolumeDeviceOn = isBixbyServiceForeground();
                 break;
             case 7:
-                z = isSmartView();
+                zIsSafeMediaVolumeDeviceOn = isSmartView();
                 break;
             case 8:
-                z = isZenModeEnabled(((Integer) objArr[0]).intValue());
+                zIsSafeMediaVolumeDeviceOn = isZenModeEnabled(((Integer) objArr[0]).intValue());
                 break;
             case 9:
-                z = isZenModePriorityOnly(((Integer) objArr[0]).intValue());
+                zIsSafeMediaVolumeDeviceOn = isZenModePriorityOnly(((Integer) objArr[0]).intValue());
                 break;
             case 10:
-                z = isZenModeNone(((Integer) objArr[0]).intValue());
+                zIsSafeMediaVolumeDeviceOn = isZenModeNone(((Integer) objArr[0]).intValue());
                 break;
             case 11:
-                z = isVoiceCapable();
+                zIsSafeMediaVolumeDeviceOn = isVoiceCapable();
                 break;
             case 12:
-                z = isAllSoundOff();
+                zIsSafeMediaVolumeDeviceOn = isAllSoundOff();
                 break;
             case 13:
-                z = isHasVibrator();
+                zIsSafeMediaVolumeDeviceOn = isHasVibrator();
                 break;
             case 14:
-                z = isMediaDefault();
+                zIsSafeMediaVolumeDeviceOn = isMediaDefault();
                 break;
             case 15:
-                z = isKeyguardState();
+                zIsSafeMediaVolumeDeviceOn = isKeyguardState();
                 break;
             case 16:
-                z = isShadeLockedState();
+                zIsSafeMediaVolumeDeviceOn = isShadeLockedState();
                 break;
             case 17:
-                z = isOrientationChanged();
+                zIsSafeMediaVolumeDeviceOn = isOrientationChanged();
                 break;
             case 18:
-                z = isDensityOrFontChanged();
+                zIsSafeMediaVolumeDeviceOn = isDensityOrFontChanged();
                 break;
             case 19:
                 isStandalone();
-                z = false;
+                zIsSafeMediaVolumeDeviceOn = false;
                 break;
             case 20:
-                z = isDisplayTypeChanged();
+                zIsSafeMediaVolumeDeviceOn = isDisplayTypeChanged();
                 break;
             case 21:
-                z = isLcdOff();
+                zIsSafeMediaVolumeDeviceOn = isLcdOff();
                 break;
             case 22:
                 isDexMode();
-                z = false;
+                zIsSafeMediaVolumeDeviceOn = false;
                 break;
             case 23:
-                z = isKioskModeEnabled();
+                zIsSafeMediaVolumeDeviceOn = isKioskModeEnabled();
                 break;
             case 24:
-                z = isBudsTogetherEnabled();
+                zIsSafeMediaVolumeDeviceOn = isBudsTogetherEnabled();
                 break;
             case 25:
-                z = isSetupWizardComplete();
+                zIsSafeMediaVolumeDeviceOn = isSetupWizardComplete();
                 break;
             case 26:
-                z = isMultiSoundOn();
+                zIsSafeMediaVolumeDeviceOn = isMultiSoundOn();
                 break;
             case 27:
             case 28:
@@ -945,26 +919,26 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
             case 31:
                 break;
             case 32:
-                z = isAodVolumePanel();
+                zIsSafeMediaVolumeDeviceOn = isAodVolumePanel();
                 break;
             default:
-                z = false;
+                zIsSafeMediaVolumeDeviceOn = false;
                 break;
         }
-        this.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.VolumeInfraMediatorImpl$isEnabled$1
+        this.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.VolumeInfraMediatorImpl.isEnabled.1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeInfraMediatorImpl.this.logWrapper.p(conditions + "=" + z);
+                VolumeInfraMediatorImpl.this.logWrapper.p(conditions + "=" + zIsSafeMediaVolumeDeviceOn);
             }
         });
-        return z;
+        return zIsSafeMediaVolumeDeviceOn;
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isHasVibrator() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.hasVibrator();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isHasVibrator");
@@ -977,9 +951,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isKeyguardState() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarStateControllerWrapper statusBarStateControllerWrapper = this.statusBarStateControllerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return statusBarStateControllerWrapper.statusBarStateController.getState() == 1;
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isKeyguardState");
@@ -992,9 +966,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isKioskModeEnabled() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SemPersonaManagerWrapper semPersonaManagerWrapper = this.semPersonaManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return SemPersonaManager.isKioskModeEnabled(semPersonaManagerWrapper.context);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isKioskModeEnabled");
@@ -1007,9 +981,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isLcdOff() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         PowerManagerWrapper powerManagerWrapper = this.powerManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             Context context = this.context;
             powerManagerWrapper.getClass();
             SystemServiceExtension.INSTANCE.getClass();
@@ -1031,9 +1005,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isLeBroadcasting() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isLeBroadcasting();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isLeBroadcasting");
@@ -1046,9 +1020,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isMediaDefault() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SoundAssistantManagerWrapper soundAssistantManagerWrapper = this.soundAssistantManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return soundAssistantManagerWrapper.satMananger.getVolumeMode(1);
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isMediaDefault");
@@ -1061,9 +1035,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isMultiSoundOn() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SoundAssistantManagerWrapper soundAssistantManagerWrapper = this.soundAssistantManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return soundAssistantManagerWrapper.satMananger.isMultiSoundOn();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isMultiSoundOn");
@@ -1076,9 +1050,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isOrientationChanged() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         ConfigurationWrapper configurationWrapper = this.configurationWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return configurationWrapper.isOrientationChanged();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isOrientationChanged");
@@ -1091,9 +1065,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isSafeMediaVolumeDeviceOn() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.semIsSafeMediaVolumeDeviceOn();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isSafeMediaVolumeDeviceOn");
@@ -1106,9 +1080,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isSafeMediaVolumePinDeviceOn() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             AudioManager audioManager = audioManagerWrapper.am;
             return audioManager.isSafeMediaVolumeDeviceOn(audioManager.semGetPinDevice());
         }
@@ -1123,9 +1097,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isSetupWizardComplete() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         DeviceProvisionedWrapper deviceProvisionedWrapper = this.deviceProvisionedWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return deviceProvisionedWrapper.isDeviceProvisioned();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isSetupWizardComplete");
@@ -1138,9 +1112,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isShadeLockedState() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarStateControllerWrapper statusBarStateControllerWrapper = this.statusBarStateControllerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return statusBarStateControllerWrapper.statusBarStateController.getState() == 2;
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isShadeLockedState");
@@ -1153,9 +1127,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isSmartView() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isSmartViewEnabled();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isSmartView");
@@ -1168,9 +1142,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isStandalone() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         DesktopManagerWrapper desktopManagerWrapper = this.desktopManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             desktopManagerWrapper.getClass();
             return false;
         }
@@ -1184,66 +1158,64 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
-    public final boolean isSupportTvVolumeSync() {
+    public final boolean isSupportTvVolumeSync() throws Throwable {
         long j;
-        boolean supportTvVolumeControl;
-        SystemServiceExtension systemServiceExtension;
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         LogWrapper logWrapper = this.logWrapper;
         DisplayManagerWrapper displayManagerWrapper = this.displayManagerWrapper;
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
-            boolean supportTvVolumeControl2 = volumeDialogController.supportTvVolumeControl();
+        if (!zIsTagEnabled) {
+            boolean zSupportTvVolumeControl = volumeDialogController.supportTvVolumeControl();
             displayManagerWrapper.getClass();
-            SystemServiceExtension systemServiceExtension2 = SystemServiceExtension.INSTANCE;
+            SystemServiceExtension systemServiceExtension = SystemServiceExtension.INSTANCE;
             Context context = displayManagerWrapper.context;
-            systemServiceExtension2.getClass();
+            systemServiceExtension.getClass();
             boolean z = SystemServiceExtension.getDisplayManager(context).semGetScreenSharingStatus() != 7;
-            boolean z2 = supportTvVolumeControl2 && z;
-            boolean isDLNAEnabled = volumeDialogController.isDLNAEnabled();
-            boolean isValidPlayerType = displayManagerWrapper.isValidPlayerType();
-            boolean z3 = isDLNAEnabled && isValidPlayerType;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("supportTvVolumeControl=", ", screenSharing=", ", supportTvVolumeControl=", supportTvVolumeControl2, z);
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, supportTvVolumeControl2, ", dlnaEnabled=", isDLNAEnabled, ", validPlayerType=");
-            m.append(isValidPlayerType);
-            logWrapper.d("VolumeInfraMediatorImpl", m.toString());
+            boolean z2 = zSupportTvVolumeControl && z;
+            boolean zIsDLNAEnabled = volumeDialogController.isDLNAEnabled();
+            boolean zIsValidPlayerType = displayManagerWrapper.isValidPlayerType();
+            boolean z3 = zIsDLNAEnabled && zIsValidPlayerType;
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("supportTvVolumeControl=", ", screenSharing=", ", supportTvVolumeControl=", zSupportTvVolumeControl, z);
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zSupportTvVolumeControl, ", dlnaEnabled=", zIsDLNAEnabled, ", validPlayerType=");
+            sbM.append(zIsValidPlayerType);
+            logWrapper.d("VolumeInfraMediatorImpl", sbM.toString());
             return z2 || z3;
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isSupportTvVolumeSync");
         try {
-            supportTvVolumeControl = volumeDialogController.supportTvVolumeControl();
+            boolean zSupportTvVolumeControl2 = volumeDialogController.supportTvVolumeControl();
             displayManagerWrapper.getClass();
-            systemServiceExtension = SystemServiceExtension.INSTANCE;
+            SystemServiceExtension systemServiceExtension2 = SystemServiceExtension.INSTANCE;
             j = 4096;
-        } catch (Throwable th) {
-            th = th;
-            j = 4096;
-        }
-        try {
-            Context context2 = displayManagerWrapper.context;
-            systemServiceExtension.getClass();
-            boolean z4 = SystemServiceExtension.getDisplayManager(context2).semGetScreenSharingStatus() != 7;
-            boolean z5 = supportTvVolumeControl && z4;
-            boolean isDLNAEnabled2 = volumeDialogController.isDLNAEnabled();
-            boolean isValidPlayerType2 = displayManagerWrapper.isValidPlayerType();
-            boolean z6 = isDLNAEnabled2 && isValidPlayerType2;
-            logWrapper.d("VolumeInfraMediatorImpl", "supportTvVolumeControl=" + supportTvVolumeControl + ", screenSharing=" + z4 + ", supportTvVolumeControl=" + supportTvVolumeControl + ", dlnaEnabled=" + isDLNAEnabled2 + ", validPlayerType=" + isValidPlayerType2);
-            boolean z7 = z5 || z6;
-            Trace.traceEnd(4096L);
-            return z7;
+            try {
+                Context context2 = displayManagerWrapper.context;
+                systemServiceExtension2.getClass();
+                boolean z4 = SystemServiceExtension.getDisplayManager(context2).semGetScreenSharingStatus() != 7;
+                boolean z5 = zSupportTvVolumeControl2 && z4;
+                boolean zIsDLNAEnabled2 = volumeDialogController.isDLNAEnabled();
+                boolean zIsValidPlayerType2 = displayManagerWrapper.isValidPlayerType();
+                boolean z6 = zIsDLNAEnabled2 && zIsValidPlayerType2;
+                logWrapper.d("VolumeInfraMediatorImpl", "supportTvVolumeControl=" + zSupportTvVolumeControl2 + ", screenSharing=" + z4 + ", supportTvVolumeControl=" + zSupportTvVolumeControl2 + ", dlnaEnabled=" + zIsDLNAEnabled2 + ", validPlayerType=" + zIsValidPlayerType2);
+                boolean z7 = z5 || z6;
+                Trace.traceEnd(4096L);
+                return z7;
+            } catch (Throwable th) {
+                th = th;
+                Trace.traceEnd(j);
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            Trace.traceEnd(j);
-            throw th;
+            j = 4096;
         }
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isUserInCall() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         boolean z = true;
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             int modeInternal = audioManagerWrapper.am.getModeInternal();
             return modeInternal == 3 || modeInternal == 2;
         }
@@ -1261,9 +1233,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isVoiceCapable() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return audioManagerWrapper.am.shouldShowRingtoneVolume();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isVoiceCapable");
@@ -1276,9 +1248,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isVolumeStarEnabled() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             return volumeDialogController.isVolumeStarEnabled();
         }
         Trace.traceBegin(4096L, "#vol.infraMediator_isVolumeStarEnabled");
@@ -1291,10 +1263,10 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isZenModeEnabled(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         boolean z = false;
         ZenModeHelper zenModeHelper = this.zenModeHelper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             zenModeHelper.getClass();
             return Settings.Global.isValidZenMode(i) && i != 0;
         }
@@ -1312,9 +1284,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isZenModeNone(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         ZenModeHelper zenModeHelper = this.zenModeHelper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             zenModeHelper.getClass();
             return i == 2;
         }
@@ -1329,9 +1301,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final boolean isZenModePriorityOnly(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         ZenModeHelper zenModeHelper = this.zenModeHelper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             zenModeHelper.getClass();
             return i == 1;
         }
@@ -1351,16 +1323,20 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void playSound() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         final SoundPoolWrapper soundPoolWrapper = this.soundPoolWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             soundPoolWrapper.getClass();
             soundPoolWrapper.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.util.SoundPoolWrapper$playSound$1
+                /* JADX WARN: Removed duplicated region for block: B:33:0x006e  */
                 @Override // java.lang.Runnable
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final void run() {
                     int i;
                     char c;
-                    SoundPoolWrapper soundPoolWrapper2 = SoundPoolWrapper.this;
+                    SoundPoolWrapper soundPoolWrapper2 = soundPoolWrapper;
                     SoundPool soundPool = soundPoolWrapper2.soundPool;
                     if (soundPool != null) {
                         if (BasicRune.SUPPORT_SOUND_THEME) {
@@ -1374,34 +1350,26 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
                                 String stringForUser2 = Settings.System.getStringForUser(soundPoolWrapper2.context.getContentResolver(), "prev_system_sound", currentUser);
                                 stringForUser = stringForUser2 != null ? stringForUser2 : "";
                             }
-                            int hashCode = stringForUser.hashCode();
-                            if (hashCode == 71007) {
+                            int iHashCode = stringForUser.hashCode();
+                            if (iHashCode == 71007) {
                                 if (stringForUser.equals("Fun")) {
                                     c = 2;
-                                    i = iArr[c];
                                 }
-                                c = 0;
                                 i = iArr[c];
-                            } else if (hashCode != 2092671) {
-                                if (hashCode == 78852734 && stringForUser.equals("Retro")) {
-                                    c = 3;
-                                    i = iArr[c];
-                                }
-                                c = 0;
+                            } else if (iHashCode != 2092671) {
+                                c = (iHashCode == 78852734 && stringForUser.equals("Retro")) ? (char) 3 : (char) 0;
                                 i = iArr[c];
                             } else {
                                 if (stringForUser.equals("Calm")) {
                                     c = 1;
-                                    i = iArr[c];
                                 }
-                                c = 0;
                                 i = iArr[c];
                             }
                         } else {
                             i = soundPoolWrapper2.soundID;
                         }
                         if (soundPool.play(i, 1.0f, 1.0f, 0, 0, 1.0f) == 0) {
-                            SoundPoolWrapper soundPoolWrapper3 = SoundPoolWrapper.this;
+                            SoundPoolWrapper soundPoolWrapper3 = soundPoolWrapper;
                             SoundPool soundPool2 = soundPoolWrapper3.soundPool;
                             if (soundPool2 != null) {
                                 soundPool2.release();
@@ -1417,11 +1385,15 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
         try {
             soundPoolWrapper.getClass();
             soundPoolWrapper.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.util.SoundPoolWrapper$playSound$1
+                /* JADX WARN: Removed duplicated region for block: B:33:0x006e  */
                 @Override // java.lang.Runnable
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final void run() {
                     int i;
                     char c;
-                    SoundPoolWrapper soundPoolWrapper2 = SoundPoolWrapper.this;
+                    SoundPoolWrapper soundPoolWrapper2 = soundPoolWrapper;
                     SoundPool soundPool = soundPoolWrapper2.soundPool;
                     if (soundPool != null) {
                         if (BasicRune.SUPPORT_SOUND_THEME) {
@@ -1435,34 +1407,26 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
                                 String stringForUser2 = Settings.System.getStringForUser(soundPoolWrapper2.context.getContentResolver(), "prev_system_sound", currentUser);
                                 stringForUser = stringForUser2 != null ? stringForUser2 : "";
                             }
-                            int hashCode = stringForUser.hashCode();
-                            if (hashCode == 71007) {
+                            int iHashCode = stringForUser.hashCode();
+                            if (iHashCode == 71007) {
                                 if (stringForUser.equals("Fun")) {
                                     c = 2;
-                                    i = iArr[c];
                                 }
-                                c = 0;
                                 i = iArr[c];
-                            } else if (hashCode != 2092671) {
-                                if (hashCode == 78852734 && stringForUser.equals("Retro")) {
-                                    c = 3;
-                                    i = iArr[c];
-                                }
-                                c = 0;
+                            } else if (iHashCode != 2092671) {
+                                c = (iHashCode == 78852734 && stringForUser.equals("Retro")) ? (char) 3 : (char) 0;
                                 i = iArr[c];
                             } else {
                                 if (stringForUser.equals("Calm")) {
                                     c = 1;
-                                    i = iArr[c];
                                 }
-                                c = 0;
                                 i = iArr[c];
                             }
                         } else {
                             i = soundPoolWrapper2.soundID;
                         }
                         if (soundPool.play(i, 1.0f, 1.0f, 0, 0, 1.0f) == 0) {
-                            SoundPoolWrapper soundPoolWrapper3 = SoundPoolWrapper.this;
+                            SoundPoolWrapper soundPoolWrapper3 = soundPoolWrapper;
                             SoundPool soundPool2 = soundPoolWrapper3.soundPool;
                             if (soundPool2 != null) {
                                 soundPool2.release();
@@ -1480,9 +1444,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void sendEventLog(SALoggingWrapper.Event event) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         SALoggingWrapper sALoggingWrapper = this.saLoggingWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             sALoggingWrapper.getClass();
             SALoggingWrapper.sendEventLog(event);
             return;
@@ -1499,9 +1463,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void sendSystemDialogsCloseAction() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         BroadcastSender broadcastSender = this.broadcastSender;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             broadcastSender.context.sendBroadcast(new Intent(PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS));
             return;
         }
@@ -1516,9 +1480,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setActiveStream(int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setActiveStream(i);
             return;
         }
@@ -1533,9 +1497,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setCaptionEnabled(boolean z) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setCaptionsEnabledState(z);
             return;
         }
@@ -1550,9 +1514,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setRingerMode(int i, boolean z) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setRingerMode(i, z);
             return;
         }
@@ -1567,9 +1531,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setSafeMediaVolume() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         AudioManagerWrapper audioManagerWrapper = this.audioManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             audioManagerWrapper.am.setSafeMediaVolume();
             return;
         }
@@ -1584,9 +1548,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setSafeVolumeDialogShowing(boolean z) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setSafeVolumeDialogShowing(z);
             return;
         }
@@ -1601,9 +1565,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setStreamVolume(int i, int i2) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setStreamVolume(i, i2);
             return;
         }
@@ -1618,9 +1582,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void setStreamVolumeDualAudio(int i, int i2, String str) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.setStreamVolumeDualAudio(i, i2, str);
             return;
         }
@@ -1635,9 +1599,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void startDoNotDisturbActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             statusBarWrapper.startDoNotDisturbActivity();
             return;
         }
@@ -1652,9 +1616,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void startHearingEnhancementsActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             statusBarWrapper.startHearingEnhancementsActivity();
             return;
         }
@@ -1669,9 +1633,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void startLeBroadcastActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             statusBarWrapper.startLeBroadcastActivity();
             return;
         }
@@ -1686,9 +1650,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void startSettingsActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             statusBarWrapper.startSettingsActivity();
             return;
         }
@@ -1703,9 +1667,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void startVolumeSettingsActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         StatusBarWrapper statusBarWrapper = this.statusBarWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             sendSystemDialogsCloseAction();
             statusBarWrapper.startVolumeSettingsActivity();
             return;
@@ -1722,9 +1686,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void toggleWifiDisplayMute() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         DisplayManagerWrapper displayManagerWrapper = this.displayManagerWrapper;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             displayManagerWrapper.toggleWifiDisplayMute();
             return;
         }
@@ -1739,9 +1703,9 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void userActivity() {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumeDialogController volumeDialogController = this.volumeController;
-        if (!isTagEnabled) {
+        if (!zIsTagEnabled) {
             volumeDialogController.userActivity();
             return;
         }
@@ -1756,21 +1720,21 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeInfraMediator
     public final void playSound(final int i) {
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         final SoundPoolWrapper soundPoolWrapper = this.soundPoolWrapper;
-        if (isTagEnabled) {
+        if (zIsTagEnabled) {
             Trace.traceBegin(4096L, "#vol.infraMediator_playSound");
             try {
                 soundPoolWrapper.getClass();
                 soundPoolWrapper.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.util.SoundPoolWrapper$playSound$2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundPoolWrapper soundPoolWrapper2 = SoundPoolWrapper.this;
+                        SoundPoolWrapper soundPoolWrapper2 = soundPoolWrapper;
                         SoundPool soundPool = soundPoolWrapper2.soundPool;
                         if (soundPool == null || soundPool.play(soundPoolWrapper2.soundIDs[i], 1.0f, 1.0f, 0, 0, 1.0f) != 0) {
                             return;
                         }
-                        SoundPoolWrapper soundPoolWrapper3 = SoundPoolWrapper.this;
+                        SoundPoolWrapper soundPoolWrapper3 = soundPoolWrapper;
                         SoundPool soundPool2 = soundPoolWrapper3.soundPool;
                         if (soundPool2 != null) {
                             soundPool2.release();
@@ -1788,12 +1752,12 @@ public final class VolumeInfraMediatorImpl implements VolumeInfraMediator {
         soundPoolWrapper.handlerWrapper.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.util.SoundPoolWrapper$playSound$2
             @Override // java.lang.Runnable
             public final void run() {
-                SoundPoolWrapper soundPoolWrapper2 = SoundPoolWrapper.this;
+                SoundPoolWrapper soundPoolWrapper2 = soundPoolWrapper;
                 SoundPool soundPool = soundPoolWrapper2.soundPool;
                 if (soundPool == null || soundPool.play(soundPoolWrapper2.soundIDs[i], 1.0f, 1.0f, 0, 0, 1.0f) != 0) {
                     return;
                 }
-                SoundPoolWrapper soundPoolWrapper3 = SoundPoolWrapper.this;
+                SoundPoolWrapper soundPoolWrapper3 = soundPoolWrapper;
                 SoundPool soundPool2 = soundPoolWrapper3.soundPool;
                 if (soundPool2 != null) {
                     soundPool2.release();

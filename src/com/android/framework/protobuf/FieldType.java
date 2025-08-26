@@ -69,9 +69,9 @@ public enum FieldType {
     private final boolean primitiveScalar;
 
     static {
-        FieldType[] values = values();
-        VALUES = new FieldType[values.length];
-        for (FieldType fieldType : values) {
+        FieldType[] fieldTypeArrValues = values();
+        VALUES = new FieldType[fieldTypeArrValues.length];
+        for (FieldType fieldType : fieldTypeArrValues) {
             VALUES[fieldType.id] = fieldType;
         }
     }
@@ -81,10 +81,8 @@ public enum FieldType {
         this.id = i;
         this.collection = collection;
         this.javaType = javaType;
-        int ordinal = collection.ordinal();
-        if (ordinal == 1) {
-            this.elementType = javaType.getBoxedType();
-        } else if (ordinal == 3) {
+        int iOrdinal = collection.ordinal();
+        if (iOrdinal == 1 || iOrdinal == 3) {
             this.elementType = javaType.getBoxedType();
         } else {
             this.elementType = null;
@@ -154,11 +152,11 @@ public enum FieldType {
         if (!this.javaType.getType().isAssignableFrom(type)) {
             return false;
         }
-        Type[] typeArr = EMPTY_TYPES;
+        Type[] actualTypeArguments = EMPTY_TYPES;
         if (field.getGenericType() instanceof ParameterizedType) {
-            typeArr = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+            actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
         }
-        Type listParameter = getListParameter(type, typeArr);
+        Type listParameter = getListParameter(type, actualTypeArguments);
         if (listParameter instanceof Class) {
             return this.elementType.isAssignableFrom((Class) listParameter);
         }

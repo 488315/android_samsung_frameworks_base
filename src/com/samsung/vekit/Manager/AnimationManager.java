@@ -41,36 +41,36 @@ public class AnimationManager extends Manager<Animation<?>> {
     public Animation<?> create(AnimationType animationType, TransitionType transitionType, String str) {
         Animation<?> transformAnimation;
         try {
-            int generateUniqueId = generateUniqueId();
+            int iGenerateUniqueId = generateUniqueId();
             switch (AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$AnimationType[animationType.ordinal()]) {
                 case 1:
-                    transformAnimation = new TransformAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new TransformAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 2:
-                    transformAnimation = new FilterAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new FilterAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 3:
-                    transformAnimation = new ToneAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new ToneAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 4:
-                    return createTransitionAnimation(transitionType, generateUniqueId, str);
+                    return createTransitionAnimation(transitionType, iGenerateUniqueId, str);
                 case 5:
-                    transformAnimation = new AlphaAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new AlphaAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 6:
-                    transformAnimation = new ClipAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new ClipAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 7:
-                    transformAnimation = new WaveAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new WaveAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 8:
-                    transformAnimation = new ScaleAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new ScaleAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 9:
-                    transformAnimation = new RotateAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new RotateAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 case 10:
-                    transformAnimation = new TranslateAnimation(this.context, generateUniqueId, str);
+                    transformAnimation = new TranslateAnimation(this.context, iGenerateUniqueId, str);
                     break;
                 default:
                     return null;

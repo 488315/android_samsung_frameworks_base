@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SeslCheckboxDefaults$Common$ScaleTransition$animateScale$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $checked;
@@ -47,9 +46,9 @@ final class SeslCheckboxDefaults$Common$ScaleTransition$animateScale$1$1 extends
             ResultKt.throwOnFailure(obj);
             MutableState<Boolean> mutableState = this.$prevChecked$delegate;
             SeslCheckboxDefaults$Common$ScaleTransition seslCheckboxDefaults$Common$ScaleTransition = SeslCheckboxDefaults$Common$ScaleTransition.INSTANCE;
-            boolean booleanValue = ((Boolean) mutableState.getValue()).booleanValue();
+            boolean zBooleanValue = ((Boolean) mutableState.getValue()).booleanValue();
             boolean z = this.$checked;
-            if (booleanValue != z) {
+            if (zBooleanValue != z) {
                 this.$prevChecked$delegate.setValue(Boolean.valueOf(z));
                 Animatable<Float, AnimationVector1D> animatable = this.$scaleAnimator;
                 Float f = new Float(1.0f);

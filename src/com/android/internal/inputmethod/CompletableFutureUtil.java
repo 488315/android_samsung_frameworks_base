@@ -45,20 +45,8 @@ public final class CompletableFutureUtil {
                         try {
                             t = completableFuture.get(j, TimeUnit.MILLISECONDS);
                             break;
-                        } catch (InterruptedException unused) {
-                            z = true;
-                        } catch (CompletionException e) {
-                            if (e.getCause() instanceof CancellationException) {
-                                logCancellationInternal(str, str2);
-                                if (z2) {
-                                    cancellationGroup.unregisterFuture(completableFuture);
-                                }
-                                if (z) {
-                                    Thread.currentThread().interrupt();
-                                }
-                                return null;
-                            }
-                            logErrorInternal(str, str2, e.getMessage());
+                        } catch (CancellationException unused) {
+                            logCancellationInternal(str, str2);
                             if (z2) {
                                 cancellationGroup.unregisterFuture(completableFuture);
                             }
@@ -86,8 +74,20 @@ public final class CompletableFutureUtil {
                         }
                         return null;
                     }
-                } catch (CancellationException unused3) {
-                    logCancellationInternal(str, str2);
+                } catch (InterruptedException unused3) {
+                    z = true;
+                } catch (CompletionException e) {
+                    if (e.getCause() instanceof CancellationException) {
+                        logCancellationInternal(str, str2);
+                        if (z2) {
+                            cancellationGroup.unregisterFuture(completableFuture);
+                        }
+                        if (z) {
+                            Thread.currentThread().interrupt();
+                        }
+                        return null;
+                    }
+                    logErrorInternal(str, str2, e.getMessage());
                     if (z2) {
                         cancellationGroup.unregisterFuture(completableFuture);
                     }

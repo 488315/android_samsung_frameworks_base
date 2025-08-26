@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.LayoutDirection;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutMeasuredItem {
     public final int afterContentPadding;
@@ -48,7 +47,7 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
 
     @Override // androidx.compose.foundation.lazy.layout.LazyLayoutMeasuredItem
     /* renamed from: getConstraints-msEJaDk */
-    public final long mo152getConstraintsmsEJaDk() {
+    public final long mo153getConstraintsmsEJaDk() {
         return this.constraints;
     }
 
@@ -68,7 +67,7 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
     }
 
     /* renamed from: getMainAxis--gyyYBs$1, reason: not valid java name */
-    public final int m161getMainAxisgyyYBs$1(long j) {
+    public final int m162getMainAxisgyyYBs$1(long j) {
         long j2;
         if (this.isVertical) {
             IntOffset.Companion companion = IntOffset.Companion;
@@ -87,7 +86,7 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
 
     @Override // androidx.compose.foundation.lazy.layout.LazyLayoutMeasuredItem
     /* renamed from: getOffset-Bjo55l4 */
-    public final long mo154getOffsetBjo55l4(int i) {
+    public final long mo155getOffsetBjo55l4(int i) {
         return this.offset;
     }
 
@@ -131,11 +130,11 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
                 } else {
                     long j2 = animation.lookaheadOffset;
                     LazyLayoutItemAnimation.Companion.getClass();
-                    long m851plusqkQi6aY = IntOffset.m851plusqkQi6aY(!IntOffset.m849equalsimpl0(j2, LazyLayoutItemAnimation.NotInitialized) ? animation.lookaheadOffset : j, ((IntOffset) ((SnapshotMutableStateImpl) animation.placementDelta$delegate).getValue()).packedValue);
-                    if ((m161getMainAxisgyyYBs$1(j) <= i3 && m161getMainAxisgyyYBs$1(m851plusqkQi6aY) <= i3) || (m161getMainAxisgyyYBs$1(j) >= i4 && m161getMainAxisgyyYBs$1(m851plusqkQi6aY) >= i4)) {
+                    long jM853plusqkQi6aY = IntOffset.m853plusqkQi6aY(!IntOffset.m851equalsimpl0(j2, LazyLayoutItemAnimation.NotInitialized) ? animation.lookaheadOffset : j, ((IntOffset) ((SnapshotMutableStateImpl) animation.placementDelta$delegate).getValue()).packedValue);
+                    if ((m162getMainAxisgyyYBs$1(j) <= i3 && m162getMainAxisgyyYBs$1(jM853plusqkQi6aY) <= i3) || (m162getMainAxisgyyYBs$1(j) >= i4 && m162getMainAxisgyyYBs$1(jM853plusqkQi6aY) >= i4)) {
                         animation.cancelPlacementAnimation();
                     }
-                    j = m851plusqkQi6aY;
+                    j = jM853plusqkQi6aY;
                 }
                 graphicsLayer = animation.layer;
             } else {
@@ -146,22 +145,22 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
                 int i5 = z2 ? (int) (j >> 32) : (this.mainAxisLayoutSize - ((int) (j >> 32))) - (z2 ? placeable.height : placeable.width);
                 j = ((z2 ? (this.mainAxisLayoutSize - ((int) (j & 4294967295L))) - (z2 ? placeable.height : placeable.width) : (int) (j & 4294967295L)) & 4294967295L) | (i5 << 32);
             }
-            long m851plusqkQi6aY2 = IntOffset.m851plusqkQi6aY(j, this.visualOffset);
+            long jM853plusqkQi6aY2 = IntOffset.m853plusqkQi6aY(j, this.visualOffset);
             if (!z && animation != null) {
-                animation.finalOffset = m851plusqkQi6aY2;
+                animation.finalOffset = jM853plusqkQi6aY2;
             }
             if (z2) {
                 if (graphicsLayer != null) {
                     placementScope.getClass();
                     Placeable.PlacementScope.access$handleMotionFrameOfReferencePlacement(placementScope, placeable);
-                    placeable.mo623placeAtf8xVGno(IntOffset.m851plusqkQi6aY(m851plusqkQi6aY2, placeable.apparentToRealOffset), 0.0f, graphicsLayer);
+                    placeable.mo625placeAtf8xVGno(IntOffset.m853plusqkQi6aY(jM853plusqkQi6aY2, placeable.apparentToRealOffset), 0.0f, graphicsLayer);
                 } else {
-                    Placeable.PlacementScope.m629placeWithLayeraW9wM$default(placementScope, placeable, m851plusqkQi6aY2, null, 6);
+                    Placeable.PlacementScope.m631placeWithLayeraW9wM$default(placementScope, placeable, jM853plusqkQi6aY2, null, 6);
                 }
             } else if (graphicsLayer != null) {
-                Placeable.PlacementScope.m628placeRelativeWithLayeraW9wM$default(placementScope, placeable, m851plusqkQi6aY2, graphicsLayer);
+                Placeable.PlacementScope.m630placeRelativeWithLayeraW9wM$default(placementScope, placeable, jM853plusqkQi6aY2, graphicsLayer);
             } else {
-                Placeable.PlacementScope.m627placeRelativeWithLayeraW9wM$default(placementScope, placeable, m851plusqkQi6aY2);
+                Placeable.PlacementScope.m629placeRelativeWithLayeraW9wM$default(placementScope, placeable, jM853plusqkQi6aY2);
             }
         }
     }
@@ -195,19 +194,19 @@ public final class LazyGridMeasuredItem implements LazyGridItemInfo, LazyLayoutM
         this.span = i7;
         this.mainAxisLayoutSize = Integer.MIN_VALUE;
         int size = list.size();
-        int i8 = 0;
-        for (int i9 = 0; i9 < size; i9++) {
-            Placeable placeable = list.get(i9);
-            i8 = Math.max(i8, this.isVertical ? placeable.height : placeable.width);
+        int iMax = 0;
+        for (int i8 = 0; i8 < size; i8++) {
+            Placeable placeable = list.get(i8);
+            iMax = Math.max(iMax, this.isVertical ? placeable.height : placeable.width);
         }
-        this.mainAxisSize = i8;
-        int i10 = i3 + i8;
-        this.mainAxisSizeWithSpacings = i10 >= 0 ? i10 : 0;
+        this.mainAxisSize = iMax;
+        int i9 = i3 + iMax;
+        this.mainAxisSizeWithSpacings = i9 >= 0 ? i9 : 0;
         if (this.isVertical) {
-            j3 = (i8 & 4294967295L) | (this.crossAxisSize << 32);
+            j3 = (iMax & 4294967295L) | (this.crossAxisSize << 32);
             IntSize.Companion companion = IntSize.Companion;
         } else {
-            j3 = (this.crossAxisSize & 4294967295L) | (i8 << 32);
+            j3 = (this.crossAxisSize & 4294967295L) | (iMax << 32);
             IntSize.Companion companion2 = IntSize.Companion;
         }
         this.size = j3;

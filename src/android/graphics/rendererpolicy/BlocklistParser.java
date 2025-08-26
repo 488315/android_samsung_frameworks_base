@@ -62,23 +62,23 @@ class BlocklistParser {
         List<String> arrayList2 = new ArrayList<>();
         List<Integer> arrayList3 = new ArrayList<>();
         jsonReader.beginObject();
-        String str = null;
+        String strNextString = null;
         while (jsonReader.hasNext()) {
-            String nextName = jsonReader.nextName();
-            if (nextName.equalsIgnoreCase("packageID") && isValueNonNull(jsonReader)) {
-                str = jsonReader.nextString();
-            } else if (nextName.equalsIgnoreCase("modelName") && isValueNonNull(jsonReader)) {
+            String strNextName = jsonReader.nextName();
+            if (strNextName.equalsIgnoreCase("packageID") && isValueNonNull(jsonReader)) {
+                strNextString = jsonReader.nextString();
+            } else if (strNextName.equalsIgnoreCase("modelName") && isValueNonNull(jsonReader)) {
                 arrayList = readStringArray(jsonReader);
-            } else if (nextName.equalsIgnoreCase("chipsetName") && isValueNonNull(jsonReader)) {
+            } else if (strNextName.equalsIgnoreCase("chipsetName") && isValueNonNull(jsonReader)) {
                 arrayList2 = readStringArray(jsonReader);
-            } else if (nextName.equalsIgnoreCase("osVersion") && isValueNonNull(jsonReader)) {
+            } else if (strNextName.equalsIgnoreCase("osVersion") && isValueNonNull(jsonReader)) {
                 arrayList3 = readIntegerArray(jsonReader);
             } else {
                 jsonReader.skipValue();
             }
         }
         jsonReader.endObject();
-        return new BlockItem(str, arrayList, arrayList2, arrayList3);
+        return new BlockItem(strNextString, arrayList, arrayList2, arrayList3);
     }
 
     private List<String> readStringArray(JsonReader jsonReader) throws IOException {

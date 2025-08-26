@@ -12,7 +12,6 @@ import kotlinx.coroutines.SupervisorKt;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ViewModelKt {
     public static final SynchronizedObject VIEW_MODEL_SCOPE_LOCK = new SynchronizedObject();

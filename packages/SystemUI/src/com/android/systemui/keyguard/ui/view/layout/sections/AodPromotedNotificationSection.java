@@ -18,14 +18,12 @@ import kotlin.text.HexExtensionsKt;
 import kotlin.text.HexFormat;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodPromotedNotificationSection extends KeyguardSection {
     public static final Companion Companion = new Companion(null);
     public static final int viewId = R.id.aod_promoted_notification_frame;
     public final AODPromotedNotificationViewModel.Factory viewModelFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,7 @@ public final class AodPromotedNotificationSection extends KeyguardSection {
         this.viewModelFactory = factory;
         promotedNotificationLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
-        int identityHashCode = System.identityHashCode(this);
+        int iIdentityHashCode = System.identityHashCode(this);
         int[] iArr = HexExtensionsKt.BYTE_TO_LOWER_CASE_HEX_DIGITS;
         HexFormat.Companion.getClass();
         HexFormat hexFormat = HexFormat.Default;
@@ -50,15 +48,15 @@ public final class AodPromotedNotificationSection extends KeyguardSection {
         boolean z = numberHexFormat.isDigitsOnlyAndNoPadding;
         boolean z2 = numberHexFormat.removeLeadingZeros;
         if (z) {
-            char[] cArr = {str2.charAt((identityHashCode >> 28) & 15), str2.charAt((identityHashCode >> 24) & 15), str2.charAt((identityHashCode >> 20) & 15), str2.charAt((identityHashCode >> 16) & 15), str2.charAt((identityHashCode >> 12) & 15), str2.charAt((identityHashCode >> 8) & 15), str2.charAt((identityHashCode >> 4) & 15), str2.charAt(identityHashCode & 15)};
+            char[] cArr = {str2.charAt((iIdentityHashCode >> 28) & 15), str2.charAt((iIdentityHashCode >> 24) & 15), str2.charAt((iIdentityHashCode >> 20) & 15), str2.charAt((iIdentityHashCode >> 16) & 15), str2.charAt((iIdentityHashCode >> 12) & 15), str2.charAt((iIdentityHashCode >> 8) & 15), str2.charAt((iIdentityHashCode >> 4) & 15), str2.charAt(iIdentityHashCode & 15)};
             if (z2) {
-                int numberOfLeadingZeros = Integer.numberOfLeadingZeros(identityHashCode) >> 2;
-                str = StringsKt__StringsJVMKt.concatToString$default(cArr, numberOfLeadingZeros <= 7 ? numberOfLeadingZeros : 7, 0, 2);
+                int iNumberOfLeadingZeros = Integer.numberOfLeadingZeros(iIdentityHashCode) >> 2;
+                str = StringsKt__StringsJVMKt.concatToString$default(cArr, iNumberOfLeadingZeros <= 7 ? iNumberOfLeadingZeros : 7, 0, 2);
             } else {
                 str = new String(cArr);
             }
         } else {
-            long j = identityHashCode;
+            long j = iIdentityHashCode;
             int i = numberHexFormat.minLength;
             int i2 = i - 8;
             i2 = i2 < 0 ? 0 : i2;
@@ -66,7 +64,7 @@ public final class AodPromotedNotificationSection extends KeyguardSection {
             String str4 = numberHexFormat.suffix;
             long length = str3.length() + i2 + 8 + str4.length();
             if (0 > length || length > 2147483647L) {
-                throw new IllegalArgumentException("The resulting string length is too big: " + ((Object) ULong.m3428toStringimpl(length)));
+                throw new IllegalArgumentException("The resulting string length is too big: " + ((Object) ULong.m3448toStringimpl(length)));
             }
             int i3 = (int) length;
             char[] cArr2 = new char[i3];

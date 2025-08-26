@@ -6,7 +6,6 @@ import kotlin.Unit;
 import kotlin.collections.ArrayDeque;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeferScopeKt$deferScope$scope$1 implements DeferScope {
     public final ArrayDeque deferrals = new ArrayDeque();
@@ -22,7 +21,7 @@ public final class DeferScopeKt$deferScope$scope$1 implements DeferScope {
         this.deferrals.addLast(new Function0() { // from class: com.android.systemui.kairos.internal.DeferScopeKt$deferScope$scope$1$deferAsync$1$1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Lazy.this.getValue();
+                lazy.getValue();
                 return Unit.INSTANCE;
             }
         });

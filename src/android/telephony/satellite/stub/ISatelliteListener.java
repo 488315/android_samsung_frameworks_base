@@ -100,9 +100,9 @@ public interface ISatelliteListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteListener)) {
-                return (ISatelliteListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteListener)) {
+                return (ISatelliteListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -149,9 +149,9 @@ public interface ISatelliteListener extends IInterface {
             switch (i) {
                 case 1:
                     SatelliteDatagram satelliteDatagram = (SatelliteDatagram) parcel.readTypedObject(SatelliteDatagram.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSatelliteDatagramReceived(satelliteDatagram, readInt);
+                    onSatelliteDatagramReceived(satelliteDatagram, i3);
                     return true;
                 case 2:
                     onPendingDatagrams();
@@ -162,9 +162,9 @@ public interface ISatelliteListener extends IInterface {
                     onSatellitePositionChanged(pointingInfo);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSatelliteModemStateChanged(readInt2);
+                    onSatelliteModemStateChanged(i4);
                     return true;
                 case 5:
                     NtnSignalStrength ntnSignalStrength = (NtnSignalStrength) parcel.readTypedObject(NtnSignalStrength.CREATOR);
@@ -177,19 +177,19 @@ public interface ISatelliteListener extends IInterface {
                     onSatelliteCapabilitiesChanged(satelliteCapabilities);
                     return true;
                 case 7:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onSatelliteSupportedStateChanged(readBoolean);
+                    onSatelliteSupportedStateChanged(z);
                     return true;
                 case 8:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRegistrationFailure(readInt3);
+                    onRegistrationFailure(i5);
                     return true;
                 case 9:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onTerrestrialNetworkAvailableChanged(readBoolean2);
+                    onTerrestrialNetworkAvailableChanged(z2);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -214,109 +214,109 @@ public interface ISatelliteListener extends IInterface {
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onSatelliteDatagramReceived(SatelliteDatagram satelliteDatagram, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteDatagram, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteDatagram, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onPendingDatagrams() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeTypedObject(pointingInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pointingInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onSatelliteModemStateChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeTypedObject(ntnSignalStrength, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ntnSignalStrength, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteCapabilities, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteCapabilities, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onSatelliteSupportedStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onRegistrationFailure(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
             public void onTerrestrialNetworkAvailableChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

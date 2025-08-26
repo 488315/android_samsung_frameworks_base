@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
     public static final boolean DEBUG = Log.isLoggable("MediaOutputAdapterBase", 3);
@@ -28,7 +27,6 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
     public int mCurrentActivePosition = -1;
     public boolean mIsDragging = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api34Impl {
         private Api34Impl() {
         }
@@ -53,14 +51,12 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ConnectionState {
         CONNECTED,
         CONNECTING,
         DISCONNECTED
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GroupStatus extends Record {
         public final Boolean deselectable;
         public final Boolean selected;
@@ -89,15 +85,15 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {this.selected, this.deselectable};
-            String[] split = "selected;deselectable".length() == 0 ? new String[0] : "selected;deselectable".split(";");
+            String[] strArrSplit = "selected;deselectable".length() == 0 ? new String[0] : "selected;deselectable".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(GroupStatus.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }
@@ -106,7 +102,6 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class MediaDeviceViewHolderBase extends RecyclerView.ViewHolder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Context mContext;
@@ -136,7 +131,7 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
             Runnable runnable = new Runnable() { // from class: com.android.systemui.media.dialog.MediaOutputAdapterBase$MediaDeviceViewHolderBase$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaOutputAdapterBase.MediaDeviceViewHolderBase mediaDeviceViewHolderBase = MediaOutputAdapterBase.MediaDeviceViewHolderBase.this;
+                    MediaOutputAdapterBase.MediaDeviceViewHolderBase mediaDeviceViewHolderBase = this.f$0;
                     MediaDevice mediaDevice2 = mediaDevice;
                     int i = MediaOutputAdapterBase.MediaDeviceViewHolderBase.$r8$clinit;
                     mediaDeviceViewHolderBase.transferOutput(mediaDevice2);
@@ -173,7 +168,7 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
             ThreadUtils.postOnBackgroundThread(new Runnable() { // from class: com.android.systemui.media.dialog.MediaSwitchingController$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaSwitchingController mediaSwitchingController2 = MediaSwitchingController.this;
+                    MediaSwitchingController mediaSwitchingController2 = mediaSwitchingController;
                     mediaSwitchingController2.mLocalMediaManager.connectDevice(mediaDevice);
                 }
             });
@@ -182,7 +177,6 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OngoingSessionStatus extends Record {
         public final boolean host;
 
@@ -203,15 +197,15 @@ public abstract class MediaOutputAdapterBase extends RecyclerView.Adapter {
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {Boolean.valueOf(this.host)};
-            String[] split = "host".length() == 0 ? new String[0] : "host".split(";");
+            String[] strArrSplit = "host".length() == 0 ? new String[0] : "host".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(OngoingSessionStatus.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }

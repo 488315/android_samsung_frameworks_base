@@ -8,13 +8,19 @@ import android.graphics.Matrix;
 import android.graphics.Path;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.internal.widget.LockPatternView;
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
+import com.android.systemui.aibrief.ui.BriefViewController;
+import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.wallpaper.WallpaperUtils;
+import com.android.systemui.wallpaper.colors.KeyguardWallpaperColors;
 import com.samsung.android.knox.license.KnoxEnterpriseLicenseManager;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecLockPatternView extends LockPatternView {
     public Bitmap mBitmapError;
@@ -35,10 +41,10 @@ public class SecLockPatternView extends LockPatternView {
     }
 
     public final Bitmap getScaledBitmapFor(int i) {
-        Bitmap decodeResource = BitmapFactory.decodeResource(getContext().getResources(), i);
+        Bitmap bitmapDecodeResource = BitmapFactory.decodeResource(getContext().getResources(), i);
         int dimension = (int) getContext().getResources().getDimension(R.dimen.theme_keyguard_pattern_dot_size);
-        if (decodeResource != null) {
-            return Bitmap.createScaledBitmap(decodeResource, dimension, dimension, true);
+        if (bitmapDecodeResource != null) {
+            return Bitmap.createScaledBitmap(bitmapDecodeResource, dimension, dimension, true);
         }
         ClockEventController$$ExternalSyntheticOutline0.m(i, "getScaledBitmapFor() return null - bitmap is null resId = ", "SecLockPatternView");
         return null;
@@ -57,36 +63,36 @@ public class SecLockPatternView extends LockPatternView {
         while (i < historySize + 1) {
             float historicalX = i < historySize ? motionEvent.getHistoricalX(i) : motionEvent.getX();
             float historicalY = i < historySize ? motionEvent.getHistoricalY(i) : motionEvent.getY();
-            LockPatternView.Cell detectAndAddHit = detectAndAddHit(historicalX, historicalY);
+            LockPatternView.Cell cellDetectAndAddHit = detectAndAddHit(historicalX, historicalY);
             int size = ((LockPatternView) this).mPattern.size();
-            if (detectAndAddHit != null && size == 1) {
+            if (cellDetectAndAddHit != null && size == 1) {
                 ((LockPatternView) this).mPatternInProgress = true;
                 notifyPatternStarted();
             }
-            float abs = Math.abs(historicalX - ((LockPatternView) this).mInProgressX);
-            float abs2 = Math.abs(historicalY - ((LockPatternView) this).mInProgressY);
-            if (abs > 0.0f || abs2 > 0.0f) {
+            float fAbs = Math.abs(historicalX - ((LockPatternView) this).mInProgressX);
+            float fAbs2 = Math.abs(historicalY - ((LockPatternView) this).mInProgressY);
+            if (fAbs > 0.0f || fAbs2 > 0.0f) {
                 z = true;
             }
             if (((LockPatternView) this).mPatternInProgress && size > 0) {
                 LockPatternView.Cell cell = (LockPatternView.Cell) ((LockPatternView) this).mPattern.get(size - 1);
                 float centerXForColumn = getCenterXForColumn(cell.getColumn());
                 float centerYForRow = getCenterYForRow(cell.getRow());
-                float min = (Math.min(centerXForColumn, historicalX) - f) - 20.0f;
-                float max = Math.max(centerXForColumn, historicalX) + f + 20.0f;
-                float min2 = (Math.min(centerYForRow, historicalY) - f) - 20.0f;
-                float max2 = Math.max(centerYForRow, historicalY) + f + 20.0f;
-                if (detectAndAddHit != null) {
+                float fMin = (Math.min(centerXForColumn, historicalX) - f) - 20.0f;
+                float fMax = Math.max(centerXForColumn, historicalX) + f + 20.0f;
+                float fMin2 = (Math.min(centerYForRow, historicalY) - f) - 20.0f;
+                float fMax2 = Math.max(centerYForRow, historicalY) + f + 20.0f;
+                if (cellDetectAndAddHit != null) {
                     float f2 = ((LockPatternView) this).mSquareWidth * 0.5f;
                     float f3 = ((LockPatternView) this).mSquareHeight * 0.5f;
-                    float centerXForColumn2 = getCenterXForColumn(detectAndAddHit.getColumn());
-                    float centerYForRow2 = getCenterYForRow(detectAndAddHit.getRow());
-                    min = Math.min(centerXForColumn2 - f2, min);
-                    max = Math.max(centerXForColumn2 + f2, max);
-                    min2 = Math.min(centerYForRow2 - f3, min2);
-                    max2 = Math.max(centerYForRow2 + f3, max2);
+                    float centerXForColumn2 = getCenterXForColumn(cellDetectAndAddHit.getColumn());
+                    float centerYForRow2 = getCenterYForRow(cellDetectAndAddHit.getRow());
+                    fMin = Math.min(centerXForColumn2 - f2, fMin);
+                    fMax = Math.max(centerXForColumn2 + f2, fMax);
+                    fMin2 = Math.min(centerYForRow2 - f3, fMin2);
+                    fMax2 = Math.max(centerYForRow2 + f3, fMax2);
                 }
-                ((LockPatternView) this).mTmpInvalidateRect.union(Math.round(min), Math.round(min2), Math.round(max), Math.round(max2));
+                ((LockPatternView) this).mTmpInvalidateRect.union(Math.round(fMin), Math.round(fMin2), Math.round(fMax), Math.round(fMax2));
             }
             i++;
         }
@@ -109,18 +115,18 @@ public class SecLockPatternView extends LockPatternView {
         int size = arrayList.size();
         boolean[][] zArr = ((LockPatternView) this).mPatternDrawLookup;
         if (((LockPatternView) this).mPatternDisplayMode == LockPatternView.DisplayMode.Animate) {
-            int elapsedRealtime = (((int) (SystemClock.elapsedRealtime() - ((LockPatternView) this).mAnimatingPeriodStart)) % ((size + 1) * KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED)) / KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED;
+            int iElapsedRealtime = (((int) (SystemClock.elapsedRealtime() - ((LockPatternView) this).mAnimatingPeriodStart)) % ((size + 1) * KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED)) / KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED;
             clearPatternDrawLookup();
-            for (int i = 0; i < elapsedRealtime; i++) {
+            for (int i = 0; i < iElapsedRealtime; i++) {
                 LockPatternView.Cell cell = (LockPatternView.Cell) arrayList.get(i);
                 zArr[cell.getRow()][cell.getColumn()] = true;
             }
-            if (elapsedRealtime > 0 && elapsedRealtime < size) {
+            if (iElapsedRealtime > 0 && iElapsedRealtime < size) {
                 float f = (r6 % KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED) / 700.0f;
-                LockPatternView.Cell cell2 = (LockPatternView.Cell) arrayList.get(elapsedRealtime - 1);
+                LockPatternView.Cell cell2 = (LockPatternView.Cell) arrayList.get(iElapsedRealtime - 1);
                 float centerXForColumn = getCenterXForColumn(cell2.getColumn());
                 float centerYForRow = getCenterYForRow(cell2.getRow());
-                LockPatternView.Cell cell3 = (LockPatternView.Cell) arrayList.get(elapsedRealtime);
+                LockPatternView.Cell cell3 = (LockPatternView.Cell) arrayList.get(iElapsedRealtime);
                 float centerXForColumn2 = (getCenterXForColumn(cell3.getColumn()) - centerXForColumn) * f;
                 float centerYForRow2 = (getCenterYForRow(cell3.getRow()) - centerYForRow) * f;
                 ((LockPatternView) this).mInProgressX = centerXForColumn + centerXForColumn2;
@@ -215,11 +221,11 @@ public class SecLockPatternView extends LockPatternView {
                 float f8 = i10;
                 int i13 = (int) ((f7 - f8) / 2.0f);
                 int i14 = (int) ((((LockPatternView) this).mSquareHeight - i11) / 2.0f);
-                float min = Math.min(f7 / f8, 1.0f);
-                float min2 = Math.min(((LockPatternView) this).mSquareHeight / this.mBitmapHeight, 1.0f);
+                float fMin = Math.min(f7 / f8, 1.0f);
+                float fMin2 = Math.min(((LockPatternView) this).mSquareHeight / this.mBitmapHeight, 1.0f);
                 this.mCircleMatrix.setTranslate(i8 + i13, i9 + i14);
                 this.mCircleMatrix.preTranslate(this.mBitmapWidth / 2.0f, this.mBitmapHeight / 2.0f);
-                this.mCircleMatrix.preScale(min, min2);
+                this.mCircleMatrix.preScale(fMin, fMin2);
                 this.mCircleMatrix.preTranslate((-this.mBitmapWidth) / 2.0f, (-this.mBitmapHeight) / 2.0f);
                 if (bitmap != null) {
                     canvas.drawBitmap(bitmap, this.mCircleMatrix, ((LockPatternView) this).mPaint);
@@ -231,23 +237,95 @@ public class SecLockPatternView extends LockPatternView {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00fa  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0071  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x008b  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x009b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateViewStyle(int r12, long r13) {
-        /*
-            Method dump skipped, instructions count: 274
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.SecLockPatternView.updateViewStyle(int, long):void");
+    public final void updateViewStyle(int i, long j) {
+        boolean z;
+        boolean z2;
+        SettingsHelper settingsHelper = (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
+        boolean zIsUltraPowerSavingMode = settingsHelper.isUltraPowerSavingMode();
+        boolean z3 = settingsHelper.isColorThemeEnabled() && (1024 & j) != 0;
+        if (!WallpaperUtils.isOpenThemeLook()) {
+            z = false;
+            break;
+        }
+        int i2 = R.drawable.indicator_code_lock_point_area_green_holo_black;
+        int i3 = R.drawable.indicator_code_lock_point_area_default_holo_black;
+        if (zIsWhiteKeyguardWallpaper) {
+            Bitmap[] bitmapArr = {getScaledBitmapFor(R.drawable.indicator_code_lock_point_area_default_holo_black), getScaledBitmapFor(R.drawable.indicator_code_lock_point_area_green_holo_black)};
+            for (int i4 = 0; i4 < 2; i4++) {
+                if (bitmapArr[i4] == null) {
+                    z2 = false;
+                    break;
+                }
+            }
+            z2 = true;
+            if (!z2) {
+                i3 = R.drawable.indicator_code_lock_point_area_default_holo;
+            }
+            this.mBitmapRegular = getScaledBitmapFor(i3);
+            this.mBitmapError = getScaledBitmapFor(!z2 ? R.drawable.indicator_code_lock_point_area_red_holo_black : R.drawable.indicator_code_lock_point_area_red_holo);
+            if (!z2) {
+                i2 = R.drawable.indicator_code_lock_point_area_green_holo;
+            }
+            Bitmap scaledBitmapFor = getScaledBitmapFor(i2);
+            this.mBitmapSuccess = scaledBitmapFor;
+            Bitmap bitmap = this.mBitmapRegular;
+            Bitmap[] bitmapArr2 = (bitmap == null && scaledBitmapFor != null && this.mBitmapError == null) ? new Bitmap[]{bitmap, scaledBitmapFor} : new Bitmap[]{bitmap, scaledBitmapFor, this.mBitmapError};
+            for (Bitmap bitmap2 : bitmapArr2) {
+                if (bitmap2 == null) {
+                    z = false;
+                    break;
+                } else {
+                    this.mBitmapWidth = Math.max(this.mBitmapWidth, bitmap2.getWidth());
+                    this.mBitmapHeight = Math.max(this.mBitmapHeight, bitmap2.getHeight());
+                }
+            }
+            z = true;
+        } else {
+            z2 = false;
+            if (!z2) {
+            }
+            this.mBitmapRegular = getScaledBitmapFor(i3);
+            this.mBitmapError = getScaledBitmapFor(!z2 ? R.drawable.indicator_code_lock_point_area_red_holo_black : R.drawable.indicator_code_lock_point_area_red_holo);
+            if (!z2) {
+            }
+            Bitmap scaledBitmapFor2 = getScaledBitmapFor(i2);
+            this.mBitmapSuccess = scaledBitmapFor2;
+            Bitmap bitmap3 = this.mBitmapRegular;
+            if (bitmap3 == null) {
+                while (i < r5) {
+                }
+                z = true;
+            }
+        }
+        this.mDecoPatternEnabled = z;
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateViewStyle whiteWp = ", ", open theme enabled = ", zIsWhiteKeyguardWallpaper);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mDecoPatternEnabled, ", isSavingMode = ", zIsUltraPowerSavingMode, ", isColorTheme = ");
+        sbM.append(z3);
+        sbM.append(", themeColor = #");
+        sbM.append(Integer.toHexString(i));
+        sbM.append(", updateFlag = ");
+        sbM.append(KeyguardWallpaperColors.getChangeFlagsString(j));
+        Log.d("SecLockPatternView", sbM.toString());
+        if (this.mDecoPatternEnabled) {
+            setFadePattern(false);
+            this.mIsWhiteWp = zIsWhiteKeyguardWallpaper;
+            invalidate();
+        } else if (z3 && !zIsUltraPowerSavingMode) {
+            setColors(i, i, i);
+        } else {
+            setFadePattern(true);
+            super.updateViewStyle(zIsWhiteKeyguardWallpaper);
+        }
     }
 
     public SecLockPatternView(Context context, AttributeSet attributeSet) {

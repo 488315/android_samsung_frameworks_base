@@ -136,24 +136,24 @@ public final class AutofillValue implements Parcelable {
     }
 
     private AutofillValue(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mType = readInt;
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        this.mType = i;
+        if (i == 1) {
             this.mValue = parcel.readCharSequence();
             return;
         }
-        if (readInt == 2) {
+        if (i == 2) {
             this.mValue = Boolean.valueOf(parcel.readInt() != 0);
             return;
         }
-        if (readInt == 3) {
+        if (i == 3) {
             this.mValue = Integer.valueOf(parcel.readInt());
         } else {
-            if (readInt == 4) {
+            if (i == 4) {
                 this.mValue = Long.valueOf(parcel.readLong());
                 return;
             }
-            throw new IllegalArgumentException("type=" + readInt + " not valid");
+            throw new IllegalArgumentException("type=" + i + " not valid");
         }
     }
 

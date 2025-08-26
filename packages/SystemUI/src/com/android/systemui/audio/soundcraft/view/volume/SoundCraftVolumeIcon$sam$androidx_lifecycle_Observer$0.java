@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.FunctionAdapter;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class SoundCraftVolumeIcon$sam$androidx_lifecycle_Observer$0 implements Observer, FunctionAdapter {
     public final /* synthetic */ Function1 function;
@@ -33,6 +32,6 @@ public final /* synthetic */ class SoundCraftVolumeIcon$sam$androidx_lifecycle_O
 
     @Override // androidx.lifecycle.Observer
     public final /* synthetic */ void onChanged(Object obj) {
-        this.function.mo779invoke(obj);
+        this.function.mo781invoke(obj);
     }
 }

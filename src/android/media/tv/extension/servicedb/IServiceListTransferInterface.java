@@ -64,9 +64,9 @@ public interface IServiceListTransferInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListTransferInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceListTransferInterface)) {
-                return (IServiceListTransferInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListTransferInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceListTransferInterface)) {
+                return (IServiceListTransferInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,23 +99,23 @@ public interface IServiceListTransferInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IServiceListExportListener asInterface = IServiceListExportListener.Stub.asInterface(parcel.readStrongBinder());
+                IServiceListExportListener iServiceListExportListenerAsInterface = IServiceListExportListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                IBinder createExportSession = createExportSession(asInterface);
+                IBinder iBinderCreateExportSession = createExportSession(iServiceListExportListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(createExportSession);
+                parcel2.writeStrongBinder(iBinderCreateExportSession);
             } else if (i == 2) {
-                IServiceListImportListener asInterface2 = IServiceListImportListener.Stub.asInterface(parcel.readStrongBinder());
+                IServiceListImportListener iServiceListImportListenerAsInterface = IServiceListImportListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                IBinder createImportSession = createImportSession(asInterface2);
+                IBinder iBinderCreateImportSession = createImportSession(iServiceListImportListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(createImportSession);
+                parcel2.writeStrongBinder(iBinderCreateImportSession);
             } else if (i == 3) {
-                IServiceListSetChannelListListener asInterface3 = IServiceListSetChannelListListener.Stub.asInterface(parcel.readStrongBinder());
+                IServiceListSetChannelListListener iServiceListSetChannelListListenerAsInterface = IServiceListSetChannelListListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                IBinder createSetChannelListSession = createSetChannelListSession(asInterface3);
+                IBinder iBinderCreateSetChannelListSession = createSetChannelListSession(iServiceListSetChannelListListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(createSetChannelListSession);
+                parcel2.writeStrongBinder(iBinderCreateSetChannelListSession);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -140,49 +140,49 @@ public interface IServiceListTransferInterface extends IInterface {
 
             @Override // android.media.tv.extension.servicedb.IServiceListTransferInterface
             public IBinder createExportSession(IServiceListExportListener iServiceListExportListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
-                    obtain.writeStrongInterface(iServiceListExportListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
+                    parcelObtain.writeStrongInterface(iServiceListExportListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListTransferInterface
             public IBinder createImportSession(IServiceListImportListener iServiceListImportListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
-                    obtain.writeStrongInterface(iServiceListImportListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
+                    parcelObtain.writeStrongInterface(iServiceListImportListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListTransferInterface
             public IBinder createSetChannelListSession(IServiceListSetChannelListListener iServiceListSetChannelListListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
-                    obtain.writeStrongInterface(iServiceListSetChannelListListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListTransferInterface");
+                    parcelObtain.writeStrongInterface(iServiceListSetChannelListListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

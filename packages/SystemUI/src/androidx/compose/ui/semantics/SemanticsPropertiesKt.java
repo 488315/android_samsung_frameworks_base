@@ -12,7 +12,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SemanticsPropertiesKt {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -67,10 +66,10 @@ public abstract class SemanticsPropertiesKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z;
                 List list = (List) obj;
-                Float f = (Float) Function0.this.invoke();
+                Float f = (Float) function0.invoke();
                 if (f == null) {
                     z = false;
                 } else {
@@ -115,11 +114,11 @@ public abstract class SemanticsPropertiesKt {
     }
 
     /* renamed from: setLiveRegion-hR3wRGc, reason: not valid java name */
-    public static final void m716setLiveRegionhR3wRGc(SemanticsPropertyReceiver semanticsPropertyReceiver) {
+    public static final void m718setLiveRegionhR3wRGc(SemanticsPropertyReceiver semanticsPropertyReceiver, int i) {
         SemanticsProperties.INSTANCE.getClass();
         SemanticsPropertyKey semanticsPropertyKey = SemanticsProperties.LiveRegion;
         KProperty kProperty = $$delegatedProperties[3];
-        semanticsPropertyKey.setValue(semanticsPropertyReceiver, LiveRegionMode.m712boximpl());
+        semanticsPropertyKey.setValue(semanticsPropertyReceiver, LiveRegionMode.m714boximpl(i));
     }
 
     public static final void setPaneTitle(SemanticsPropertyReceiver semanticsPropertyReceiver, String str) {
@@ -142,11 +141,11 @@ public abstract class SemanticsPropertiesKt {
     }
 
     /* renamed from: setRole-kuIjeqM, reason: not valid java name */
-    public static final void m717setRolekuIjeqM(SemanticsPropertyReceiver semanticsPropertyReceiver, int i) {
+    public static final void m719setRolekuIjeqM(SemanticsPropertyReceiver semanticsPropertyReceiver, int i) {
         SemanticsProperties.INSTANCE.getClass();
         SemanticsPropertyKey semanticsPropertyKey = SemanticsProperties.Role;
         KProperty kProperty = $$delegatedProperties[12];
-        semanticsPropertyKey.setValue(semanticsPropertyReceiver, Role.m713boximpl(i));
+        semanticsPropertyKey.setValue(semanticsPropertyReceiver, Role.m715boximpl(i));
     }
 
     public static final void setStateDescription(SemanticsPropertyReceiver semanticsPropertyReceiver, String str) {

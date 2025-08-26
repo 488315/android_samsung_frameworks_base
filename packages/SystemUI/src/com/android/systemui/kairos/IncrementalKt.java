@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class IncrementalKt {
     public static final Incremental asIncremental(StateInit stateInit) {
@@ -22,11 +21,11 @@ public abstract class IncrementalKt {
                         return map instanceof HashMap ? (HashMap) map : new HashMap(map);
                     default:
                         WithPrev withPrev = (WithPrev) obj2;
-                        Map mapPatchFromFullDiff = MapPatchKt.mapPatchFromFullDiff((Map) withPrev.previousValue, (Map) withPrev.newValue);
-                        if (((HashMap) mapPatchFromFullDiff).isEmpty()) {
+                        Map mapMapPatchFromFullDiff = MapPatchKt.mapPatchFromFullDiff((Map) withPrev.previousValue, (Map) withPrev.newValue);
+                        if (((HashMap) mapMapPatchFromFullDiff).isEmpty()) {
                             return null;
                         }
-                        return mapPatchFromFullDiff;
+                        return mapMapPatchFromFullDiff;
                 }
             }
         }), EventsKt.mapNotNull(EventsKt.map(StateKt.getChanges(stateInit), new StateKt$$ExternalSyntheticLambda8(stateInit, 0)), new Function2() { // from class: com.android.systemui.kairos.IncrementalKt$$ExternalSyntheticLambda0
@@ -38,11 +37,11 @@ public abstract class IncrementalKt {
                         return map instanceof HashMap ? (HashMap) map : new HashMap(map);
                     default:
                         WithPrev withPrev = (WithPrev) obj2;
-                        Map mapPatchFromFullDiff = MapPatchKt.mapPatchFromFullDiff((Map) withPrev.previousValue, (Map) withPrev.newValue);
-                        if (((HashMap) mapPatchFromFullDiff).isEmpty()) {
+                        Map mapMapPatchFromFullDiff = MapPatchKt.mapPatchFromFullDiff((Map) withPrev.previousValue, (Map) withPrev.newValue);
+                        if (((HashMap) mapMapPatchFromFullDiff).isEmpty()) {
                             return null;
                         }
-                        return mapPatchFromFullDiff;
+                        return mapMapPatchFromFullDiff;
                 }
             }
         }), 0)));

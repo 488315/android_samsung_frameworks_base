@@ -23,7 +23,6 @@ import javax.inject.Provider;
 import kotlin.text.StringsKt__IndentKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeStartable implements CoreStartable {
     public final CoroutineScope applicationScope;
@@ -69,7 +68,7 @@ public final class ShadeStartable implements CoreStartable {
         scrimShadeTransitionController.dumpManager.registerNormalDumpable("ScrimShadeTransitionController", new Dumpable() { // from class: com.android.systemui.shade.transition.ScrimShadeTransitionController$init$2
             @Override // com.android.systemui.Dumpable
             public final void dump(PrintWriter printWriter, String[] strArr) {
-                ScrimShadeTransitionController scrimShadeTransitionController2 = ScrimShadeTransitionController.this;
+                ScrimShadeTransitionController scrimShadeTransitionController2 = scrimShadeTransitionController;
                 printWriter.println(StringsKt__IndentKt.trimIndent("\n                ScrimShadeTransitionController:\n                  State:\n                    currentPanelState: " + scrimShadeTransitionController2.currentPanelState + "\n                    lastExpansionFraction: " + scrimShadeTransitionController2.lastExpansionFraction + "\n                    lastExpansionEvent: " + scrimShadeTransitionController2.lastExpansionEvent + "\n            "));
             }
         });

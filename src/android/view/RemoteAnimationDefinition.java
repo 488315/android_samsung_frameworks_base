@@ -58,9 +58,9 @@ public class RemoteAnimationDefinition implements Parcelable {
     }
 
     public RemoteAnimationDefinition(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mTransitionAnimationMap = new SparseArray<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mTransitionAnimationMap = new SparseArray<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mTransitionAnimationMap.put(parcel.readInt(), (RemoteAnimationAdapterEntry) parcel.readTypedObject(RemoteAnimationAdapterEntry.CREATOR));
         }
     }

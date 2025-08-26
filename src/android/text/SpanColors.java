@@ -20,14 +20,14 @@ public class SpanColors {
 
     public int getColorAt(int i) {
         this.mWorkPaint.setColor(0);
-        int i2 = 0;
-        for (int i3 = 0; i3 < this.mCharacterStyleSpanSet.numberOfSpans; i3++) {
-            if (i >= this.mCharacterStyleSpanSet.spanStarts[i3] && i <= this.mCharacterStyleSpanSet.spanEnds[i3]) {
-                this.mCharacterStyleSpanSet.spans[i3].updateDrawState(this.mWorkPaint);
-                i2 = calculateFinalColor(this.mWorkPaint);
+        int iCalculateFinalColor = 0;
+        for (int i2 = 0; i2 < this.mCharacterStyleSpanSet.numberOfSpans; i2++) {
+            if (i >= this.mCharacterStyleSpanSet.spanStarts[i2] && i <= this.mCharacterStyleSpanSet.spanEnds[i2]) {
+                this.mCharacterStyleSpanSet.spans[i2].updateDrawState(this.mWorkPaint);
+                iCalculateFinalColor = calculateFinalColor(this.mWorkPaint);
             }
         }
-        return i2;
+        return iCalculateFinalColor;
     }
 
     private int calculateFinalColor(TextPaint textPaint) {

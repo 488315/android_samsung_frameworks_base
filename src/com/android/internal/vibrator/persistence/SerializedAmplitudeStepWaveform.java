@@ -93,7 +93,7 @@ final class SerializedAmplitudeStepWaveform implements SerializedComposedEffect.
         Parser() {
         }
 
-        static SerializedAmplitudeStepWaveform parseNext(TypedXmlPullParser typedXmlPullParser) throws XmlParserException, IOException {
+        static SerializedAmplitudeStepWaveform parseNext(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_WAVEFORM_EFFECT);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, new String[0]);
             Builder builder = new Builder();
@@ -109,14 +109,14 @@ final class SerializedAmplitudeStepWaveform implements SerializedComposedEffect.
             return builder.build();
         }
 
-        static void parseWaveformEntry(TypedXmlPullParser typedXmlPullParser, BiConsumer<Integer, Integer> biConsumer) throws XmlParserException, IOException {
+        static void parseWaveformEntry(TypedXmlPullParser typedXmlPullParser, BiConsumer<Integer, Integer> biConsumer) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_WAVEFORM_ENTRY);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, XmlConstants.ATTRIBUTE_DURATION_MS, XmlConstants.ATTRIBUTE_AMPLITUDE);
             biConsumer.accept(Integer.valueOf(XmlReader.readAttributeIntNonNegative(typedXmlPullParser, XmlConstants.ATTRIBUTE_DURATION_MS)), Integer.valueOf("default".equals(typedXmlPullParser.getAttributeValue(XmlConstants.NAMESPACE, XmlConstants.ATTRIBUTE_AMPLITUDE)) ? -1 : XmlReader.readAttributeIntInRange(typedXmlPullParser, XmlConstants.ATTRIBUTE_AMPLITUDE, 0, 255)));
             XmlReader.readEndTag(typedXmlPullParser);
         }
 
-        private static void parseRepeating(TypedXmlPullParser typedXmlPullParser, Builder builder) throws XmlParserException, IOException {
+        private static void parseRepeating(TypedXmlPullParser typedXmlPullParser, Builder builder) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_REPEATING);
             boolean z = false;
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, new String[0]);

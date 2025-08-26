@@ -84,75 +84,47 @@ public class VelocityEasing {
         return str;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0043, code lost:
-    
-        if (r8 == false) goto L19;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void config(float r9, float r10, float r11, float r12, float r13, float r14, com.android.internal.widget.remotecompose.core.operations.utilities.touch.VelocityEasing.Easing r15) {
-        /*
-            r8 = this;
-            int r0 = (r9 > r10 ? 1 : (r9 == r10 ? 0 : -1))
-            if (r0 != 0) goto L7
-            r0 = 1065353216(0x3f800000, float:1.0)
-            float r9 = r9 + r0
-        L7:
-            r1 = r9
-            r8.mStartPos = r1
-            r8.mEndPos = r10
-            if (r15 == 0) goto L14
-            com.android.internal.widget.remotecompose.core.operations.utilities.touch.VelocityEasing$Easing r9 = r15.clone()
-            r8.mEasing = r9
-        L14:
-            float r9 = r10 - r1
-            float r9 = java.lang.Math.signum(r9)
-            float r5 = r14 * r9
-            float r4 = r13 * r9
-            double r13 = (double) r11
-            r2 = 0
-            int r13 = (r13 > r2 ? 1 : (r13 == r2 ? 0 : -1))
-            if (r13 != 0) goto L29
-            r11 = 953267991(0x38d1b717, float:1.0E-4)
-            float r11 = r11 * r9
-        L29:
-            r3 = r11
-            r8.mStartV = r3
-            boolean r9 = r8.rampDown(r1, r10, r3, r12)
-            if (r9 != 0) goto L51
-            boolean r9 = r8.mOneDimension
-            r0 = r8
-            r2 = r10
-            if (r9 == 0) goto L46
-            r6 = r5
-            r5 = r4
-            r4 = r12
-            boolean r8 = r0.cruseThenRampDown(r1, r2, r3, r4, r5, r6)
-            r7 = r6
-            r6 = r4
-            r4 = r5
-            r5 = r7
-            if (r8 != 0) goto L52
-            goto L47
-        L46:
-            r6 = r12
-        L47:
-            boolean r8 = r0.rampUpRampDown(r1, r2, r3, r4, r5, r6)
-            if (r8 != 0) goto L52
-            r0.rampUpCruseRampDown(r1, r2, r3, r4, r5, r6)
-            goto L52
-        L51:
-            r0 = r8
-        L52:
-            boolean r8 = r0.mOneDimension
-            if (r8 == 0) goto L59
-            r0.configureEasingAdapter()
-        L59:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.remotecompose.core.operations.utilities.touch.VelocityEasing.config(float, float, float, float, float, float, com.android.internal.widget.remotecompose.core.operations.utilities.touch.VelocityEasing$Easing):void");
+    public void config(float f, float f2, float f3, float f4, float f5, float f6, Easing easing) {
+        VelocityEasing velocityEasing;
+        float f7;
+        if (f == f2) {
+            f += 1.0f;
+        }
+        float f8 = f;
+        this.mStartPos = f8;
+        this.mEndPos = f2;
+        if (easing != null) {
+            this.mEasing = easing.clone();
+        }
+        float fSignum = Math.signum(f2 - f8);
+        float f9 = f6 * fSignum;
+        float f10 = f5 * fSignum;
+        if (f3 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+            f3 = 1.0E-4f * fSignum;
+        }
+        float f11 = f3;
+        this.mStartV = f11;
+        if (rampDown(f8, f2, f11, f4)) {
+            velocityEasing = this;
+        } else {
+            velocityEasing = this;
+            if (this.mOneDimension) {
+                boolean zCruseThenRampDown = velocityEasing.cruseThenRampDown(f8, f2, f11, f4, f10, f9);
+                f7 = f4;
+                f10 = f10;
+                f9 = f9;
+                if (!zCruseThenRampDown) {
+                }
+            } else {
+                f7 = f4;
+            }
+            if (!velocityEasing.rampUpRampDown(f8, f2, f11, f10, f9, f7)) {
+                velocityEasing.rampUpCruseRampDown(f8, f2, f11, f10, f9, f7);
+            }
+        }
+        if (velocityEasing.mOneDimension) {
+            velocityEasing.configureEasingAdapter();
+        }
     }
 
     private boolean rampDown(float f, float f2, float f3, float f4) {
@@ -183,16 +155,16 @@ public class VelocityEasing {
 
     private boolean rampUpRampDown(float f, float f2, float f3, float f4, float f5, float f6) {
         float f7 = f2 - f;
-        float signum = Math.signum(f4) * ((float) Math.sqrt((f4 * f7) + ((f3 * f3) / 2.0f)));
-        if (f5 / signum <= 1.0f) {
+        float fSignum = Math.signum(f4) * ((float) Math.sqrt((f4 * f7) + ((f3 * f3) / 2.0f)));
+        if (f5 / fSignum <= 1.0f) {
             return false;
         }
-        float f8 = (signum - f3) / f4;
-        float f9 = (((signum + f3) * f8) / 2.0f) + f;
+        float f8 = (fSignum - f3) / f4;
+        float f9 = (((fSignum + f3) * f8) / 2.0f) + f;
         this.mNumberOfStages = 2;
-        this.mStage[0].setUp(f3, f, 0.0f, signum, f9, f8);
-        float f10 = (signum / f4) + f8;
-        this.mStage[1].setUp(signum, f9, f8, 0.0f, f2, f10);
+        this.mStage[0].setUp(f3, f, 0.0f, fSignum, f9, f8);
+        float f10 = (fSignum / f4) + f8;
+        this.mStage[1].setUp(fSignum, f9, f8, 0.0f, f2, f10);
         this.mDuration = f10;
         if (f10 > f6) {
             return false;

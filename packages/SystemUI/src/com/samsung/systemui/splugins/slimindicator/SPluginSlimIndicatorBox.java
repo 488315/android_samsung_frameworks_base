@@ -3,7 +3,6 @@ package com.samsung.systemui.splugins.slimindicator;
 import com.samsung.systemui.splugins.SPlugin;
 import com.samsung.systemui.splugins.annotations.ProvidesInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = "com.samsung.systemui.action.SPLUGIN_SLIMINDICATOR", version = 9000)
 /* loaded from: classes4.dex */
 public interface SPluginSlimIndicatorBox extends SPlugin {

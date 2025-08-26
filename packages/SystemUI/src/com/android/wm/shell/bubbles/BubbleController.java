@@ -18,6 +18,7 @@ import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -47,6 +48,7 @@ import android.widget.FrameLayout;
 import android.window.WindowContainerToken;
 import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
 import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.reflect.view.SeslWindowInsetsReflector;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.systemui.R;
@@ -114,7 +116,6 @@ import java.util.function.Consumer;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleController implements ConfigurationChangeListener, RemoteCallable, Bubbles$SysuiProxy$Provider {
     public final ShellExecutor mBackgroundExecutor;
@@ -179,7 +180,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
     public int mLayoutDirection = -1;
     public boolean mIsStatusBarShade = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$1, reason: invalid class name */
     public class AnonymousClass1 implements BubbleTaskViewFactory {
         public final /* synthetic */ Context val$context;
@@ -195,14 +195,12 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$10, reason: invalid class name */
     public class AnonymousClass10 {
         public AnonymousClass10() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$2, reason: invalid class name */
     public class AnonymousClass2 implements OneHandedTransitionCallback {
         public AnonymousClass2() {
@@ -219,7 +217,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$6, reason: invalid class name */
     public class AnonymousClass6 extends BroadcastReceiver {
         public AnonymousClass6() {
@@ -238,7 +235,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$7, reason: invalid class name */
     public class AnonymousClass7 extends BroadcastReceiver {
         public AnonymousClass7() {
@@ -255,7 +251,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleController$8, reason: invalid class name */
     public class AnonymousClass8 {
         public AnonymousClass8() {
@@ -263,7 +258,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
 
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Type inference failed for: r0v20, types: [com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda37, java.lang.Runnable] */
-        public final void expansionChanged(boolean z) {
+        public final void expansionChanged(boolean z) throws Resources.NotFoundException {
             boolean z2;
             boolean z3;
             float f;
@@ -305,9 +300,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 bubbleStackView.mExpandedAnimationController.mPreparingToCollapse = true;
                 StackAnimationController stackAnimationController = bubbleStackView.mStackAnimationController;
                 PointF pointF = stackAnimationController.mStackPosition;
-                boolean isFirstChildXLeftOfCenter = stackAnimationController.mLayout.isFirstChildXLeftOfCenter(pointF.x);
+                boolean zIsFirstChildXLeftOfCenter = stackAnimationController.mLayout.isFirstChildXLeftOfCenter(pointF.x);
                 RectF allowableStackPositionRegion = stackAnimationController.mPositioner.getAllowableStackPositionRegion(stackAnimationController.mBubbleCountSupplier.getAsInt());
-                pointF.x = isFirstChildXLeftOfCenter ? allowableStackPositionRegion.left : allowableStackPositionRegion.right;
+                pointF.x = zIsFirstChildXLeftOfCenter ? allowableStackPositionRegion.left : allowableStackPositionRegion.right;
                 bubbleStackView.updateOverflowDotVisibility(false);
                 final BubbleStackView$$ExternalSyntheticLambda1 bubbleStackView$$ExternalSyntheticLambda1 = new BubbleStackView$$ExternalSyntheticLambda1(i, bubbleStackView, pointF);
                 BubbleStackView$$ExternalSyntheticLambda5 bubbleStackView$$ExternalSyntheticLambda5 = new BubbleStackView$$ExternalSyntheticLambda5(bubbleStackView, 10);
@@ -332,39 +327,39 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                     }
                     BubbleExpandedView bubbleExpandedView2 = expandedViewAnimationControllerImpl.mExpandedView;
                     ArrayList arrayList = new ArrayList();
-                    ValueAnimator ofInt = ValueAnimator.ofInt((int) expandedViewAnimationControllerImpl.mCollapsedAmount, bubbleExpandedView2.getContentHeight());
-                    ofInt.setInterpolator(Interpolators.EMPHASIZED_ACCELERATE);
-                    ofInt.setDuration(250L);
-                    ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl$$ExternalSyntheticLambda1
+                    ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt((int) expandedViewAnimationControllerImpl.mCollapsedAmount, bubbleExpandedView2.getContentHeight());
+                    valueAnimatorOfInt.setInterpolator(Interpolators.EMPHASIZED_ACCELERATE);
+                    valueAnimatorOfInt.setDuration(250L);
+                    valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl$$ExternalSyntheticLambda1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            ExpandedViewAnimationControllerImpl expandedViewAnimationControllerImpl2 = ExpandedViewAnimationControllerImpl.this;
+                            ExpandedViewAnimationControllerImpl expandedViewAnimationControllerImpl2 = expandedViewAnimationControllerImpl;
                             ExpandedViewAnimationControllerImpl.AnonymousClass1 anonymousClass1 = ExpandedViewAnimationControllerImpl.COLLAPSE_HEIGHT_PROPERTY;
                             expandedViewAnimationControllerImpl2.getClass();
                             expandedViewAnimationControllerImpl2.setCollapsedAmount(((Integer) valueAnimator.getAnimatedValue()).intValue());
                         }
                     });
-                    arrayList.add(ofInt);
+                    arrayList.add(valueAnimatorOfInt);
                     BubbleExpandedView bubbleExpandedView3 = expandedViewAnimationControllerImpl.mExpandedView;
                     BubbleExpandedView.AnonymousClass4 anonymousClass4 = BubbleExpandedView.MANAGE_BUTTON_ALPHA;
                     float[] fArr = new float[1];
                     fArr[z4 ? 1 : 0] = f;
-                    ObjectAnimator ofFloat = ObjectAnimator.ofFloat(bubbleExpandedView3, anonymousClass4, fArr);
-                    ofFloat.setDuration(78L);
+                    ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(bubbleExpandedView3, anonymousClass4, fArr);
+                    objectAnimatorOfFloat.setDuration(78L);
                     Interpolator interpolator = Interpolators.LINEAR;
-                    ofFloat.setInterpolator(interpolator);
-                    arrayList.add(ofFloat);
+                    objectAnimatorOfFloat.setInterpolator(interpolator);
+                    arrayList.add(objectAnimatorOfFloat);
                     BubbleExpandedView bubbleExpandedView4 = expandedViewAnimationControllerImpl.mExpandedView;
                     BubbleExpandedView.AnonymousClass2 anonymousClass2 = BubbleExpandedView.CONTENT_ALPHA;
                     float[] fArr2 = new float[1];
                     fArr2[z4 ? 1 : 0] = f;
-                    ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(bubbleExpandedView4, anonymousClass2, fArr2);
-                    ofFloat2.setDuration(78L);
-                    ofFloat2.setInterpolator(interpolator);
-                    ofFloat2.setStartDelay(93L);
+                    ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(bubbleExpandedView4, anonymousClass2, fArr2);
+                    objectAnimatorOfFloat2.setDuration(78L);
+                    objectAnimatorOfFloat2.setInterpolator(interpolator);
+                    objectAnimatorOfFloat2.setStartDelay(93L);
                     final boolean[] zArr = new boolean[1];
                     zArr[z4 ? 1 : 0] = z4;
-                    ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl$$ExternalSyntheticLambda0
+                    objectAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl$$ExternalSyntheticLambda0
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                             boolean[] zArr2 = zArr;
@@ -377,16 +372,16 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                             bubbleStackView$$ExternalSyntheticLambda12.run();
                         }
                     });
-                    arrayList.add(ofFloat2);
+                    arrayList.add(objectAnimatorOfFloat2);
                     BubbleExpandedView bubbleExpandedView5 = expandedViewAnimationControllerImpl.mExpandedView;
                     BubbleExpandedView.AnonymousClass3 anonymousClass3 = BubbleExpandedView.BACKGROUND_ALPHA;
                     float[] fArr3 = new float[1];
                     fArr3[z4 ? 1 : 0] = f;
-                    ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(bubbleExpandedView5, anonymousClass3, fArr3);
-                    ofFloat3.setDuration(78L);
-                    ofFloat3.setInterpolator(interpolator);
-                    ofFloat3.setStartDelay(172L);
-                    arrayList.add(ofFloat3);
+                    ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(bubbleExpandedView5, anonymousClass3, fArr3);
+                    objectAnimatorOfFloat3.setDuration(78L);
+                    objectAnimatorOfFloat3.setInterpolator(interpolator);
+                    objectAnimatorOfFloat3.setStartDelay(172L);
+                    arrayList.add(objectAnimatorOfFloat3);
                     AnimatorSet animatorSet2 = new AnimatorSet();
                     animatorSet2.addListener(new AnimatorListenerAdapter(expandedViewAnimationControllerImpl, bubbleStackView$$ExternalSyntheticLambda5) { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl.4
                         public final /* synthetic */ Runnable val$after;
@@ -462,11 +457,11 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 bubbleStackView.mExpandedViewContainer.setTranslationX(0.0f);
                 bubbleStackView.mExpandedViewContainer.setTranslationY(expandedViewY);
                 bubbleStackView.mExpandedViewContainer.setAlpha(1.0f);
-                final boolean showBubblesVertically = bubbleStackView.mPositioner.showBubblesVertically();
-                float f4 = showBubblesVertically ? bubbleStackView.mStackAnimationController.mStackPosition.y : bubbleStackView.mStackAnimationController.mStackPosition.x;
-                final float f5 = showBubblesVertically ? expandedBubbleXY.y : expandedBubbleXY.x;
-                long abs = bubbleStackView.getWidth() > 0 ? (long) (((Math.abs(f5 - f4) / bubbleStackView.getWidth()) * 30.0f) + 210.00002f) : 0L;
-                if (showBubblesVertically) {
+                final boolean zShowBubblesVertically = bubbleStackView.mPositioner.showBubblesVertically();
+                float f4 = zShowBubblesVertically ? bubbleStackView.mStackAnimationController.mStackPosition.y : bubbleStackView.mStackAnimationController.mStackPosition.x;
+                final float f5 = zShowBubblesVertically ? expandedBubbleXY.y : expandedBubbleXY.x;
+                long jAbs = bubbleStackView.getWidth() > 0 ? (long) (((Math.abs(f5 - f4) / bubbleStackView.getWidth()) * 30.0f) + 210.00002f) : 0L;
+                if (zShowBubblesVertically) {
                     bubbleStackView.mExpandedViewContainerMatrix.setScale(0.9f, 0.9f, bubbleStackView.mStackOnLeftOrWillBe ? expandedBubbleXY.x + bubbleStackView.mBubbleSize + bubbleStackView.mExpandedViewPadding : expandedBubbleXY.x - bubbleStackView.mExpandedViewPadding, (bubbleStackView.mBubbleSize / 2.0f) + expandedBubbleXY.y);
                 } else {
                     AnimatableScaleMatrix animatableScaleMatrix = bubbleStackView.mExpandedViewContainerMatrix;
@@ -488,8 +483,8 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 ?? r0 = new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda37
                     @Override // java.lang.Runnable
                     public final void run() {
-                        final BubbleStackView bubbleStackView2 = BubbleStackView.this;
-                        final boolean z6 = showBubblesVertically;
+                        final BubbleStackView bubbleStackView2 = bubbleStackView;
+                        final boolean z6 = zShowBubblesVertically;
                         final float f8 = f5;
                         bubbleStackView2.mExpandedViewAlphaAnimator.start();
                         AnimatableScaleMatrix animatableScaleMatrix2 = bubbleStackView2.mExpandedViewContainerMatrix;
@@ -501,7 +496,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                         companion.updateListeners.add(new PhysicsAnimator.UpdateListener() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda38
                             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
                             public final void onAnimationUpdateForProperty(Object obj) {
-                                BubbleStackView bubbleStackView3 = BubbleStackView.this;
+                                BubbleStackView bubbleStackView3 = bubbleStackView2;
                                 BubbleViewProvider bubbleViewProvider3 = bubbleStackView3.mExpandedBubble;
                                 if (bubbleViewProvider3 == null || bubbleViewProvider3.getIconView$1() == null) {
                                     return;
@@ -515,7 +510,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                     }
                 };
                 bubbleStackView.mDelayedAnimation = r0;
-                ((HandlerExecutor) bubbleStackView.mMainExecutor).executeDelayed(r0, abs);
+                ((HandlerExecutor) bubbleStackView.mMainExecutor).executeDelayed(r0, jAbs);
                 bubbleStackView.logBubbleEvent(bubbleStackView.mExpandedBubble, 3);
                 bubbleStackView.logBubbleEvent(bubbleStackView.mExpandedBubble, 15);
                 BubbleStackViewManager bubbleStackViewManager = bubbleStackView.mManager;
@@ -535,14 +530,14 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             if (bubbleViewProvider4 instanceof Bubble) {
                 Bubble bubble = (Bubble) bubbleViewProvider4;
                 String str = bubble.mAppName;
-                String str2 = bubble.mTitle;
-                if (str2 == null) {
-                    str2 = bubbleStackView.getResources().getString(R.string.notification_bubble_title);
+                String string = bubble.mTitle;
+                if (string == null) {
+                    string = bubbleStackView.getResources().getString(R.string.notification_bubble_title);
                 }
-                if (str != null && !str2.equals(str)) {
-                    str2 = bubbleStackView.getResources().getString(R.string.bubble_content_description_single, str2, str);
+                if (str != null && !string.equals(str)) {
+                    string = bubbleStackView.getResources().getString(R.string.bubble_content_description_single, string, str);
                 }
-                bubbleStackView.announceForAccessibility(bubbleStackView.getResources().getString(z7 ? R.string.bubble_accessibility_announce_expand : R.string.bubble_accessibility_announce_collapse, str2));
+                bubbleStackView.announceForAccessibility(bubbleStackView.getResources().getString(z7 ? R.string.bubble_accessibility_announce_expand : R.string.bubble_accessibility_announce_collapse, string));
             }
         }
 
@@ -562,18 +557,17 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                     Log.e("Bubbles", "Bubble is already added to parent. Can't unsuppress: " + bubble);
                     return;
                 }
-                int indexOf = Collections.unmodifiableList(bubbleStackView.mBubbleData.mBubbles).indexOf(bubble);
+                int iIndexOf = Collections.unmodifiableList(bubbleStackView.mBubbleData.mBubbles).indexOf(bubble);
                 PhysicsAnimationLayout physicsAnimationLayout = bubbleStackView.mBubbleContainer;
                 BadgedImageView badgedImageView2 = bubble.mIconView;
                 int i = bubbleStackView.mPositioner.mBubbleSize;
-                physicsAnimationLayout.addViewInternal(badgedImageView2, indexOf, new FrameLayout.LayoutParams(i, i), false);
+                physicsAnimationLayout.addViewInternal(badgedImageView2, iIndexOf, new FrameLayout.LayoutParams(i, i), false);
                 bubbleStackView.updateBubbleShadows(bubbleStackView.mIsExpanded);
                 bubbleStackView.requestUpdate();
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BubbleTaskViewController implements TaskViewController {
         public final TaskViewTransitions mBaseTransitions;
 
@@ -650,7 +644,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BubblesImeListener extends ImeListener implements DisplayImeController.ImePositionProcessor {
         public BubblesImeListener(DisplayController displayController, int i) {
             super(displayController, i);
@@ -662,7 +655,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
 
         @Override // com.android.wm.shell.common.DisplayImeController.ImePositionProcessor
-        public final int onImeStartPositioning(int i, int i2, boolean z, boolean z2, int i3) {
+        public final int onImeStartPositioning(int i, int i2, boolean z, boolean z2, int i3) throws Resources.NotFoundException {
             BubbleController bubbleController = BubbleController.this;
             if (bubbleController.mContext.getDisplayId() == i) {
                 BubblePositioner bubblePositioner = bubbleController.mBubblePositioner;
@@ -680,7 +673,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
 
         @Override // com.android.wm.shell.common.ImeListener
-        public final void onImeVisibilityChanged(boolean z, int i) {
+        public final void onImeVisibilityChanged(boolean z, int i) throws Resources.NotFoundException {
             Runnable runnable;
             BubbleController bubbleController = BubbleController.this;
             if (this.displayId != bubbleController.mContext.getDisplayId()) {
@@ -700,11 +693,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BubblesImpl implements Bubbles {
         public final CachedState mCachedState;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class CachedState {
             public boolean mIsStackExpanded;
             public String mSelectedBubbleKey;
@@ -734,6 +725,10 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             this();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:11:0x0013  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final boolean isBubbleExpanded(String str) {
             boolean z;
             CachedState cachedState = this.mCachedState;
@@ -745,46 +740,25 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             return z;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:9:0x001d, code lost:
-        
-            if (r2.equals(r1.mSuppressedGroupToNotifKeys.get(r3)) != false) goto L14;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:14:0x0024  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean isBubbleNotificationSuppressedFromShade(java.lang.String r2, java.lang.String r3) {
-            /*
-                r1 = this;
-                com.android.wm.shell.bubbles.BubbleController$BubblesImpl$CachedState r1 = r1.mCachedState
-                monitor-enter(r1)
-                java.util.HashSet r0 = r1.mSuppressedBubbleKeys     // Catch: java.lang.Throwable -> L20
-                boolean r0 = r0.contains(r2)     // Catch: java.lang.Throwable -> L20
-                if (r0 != 0) goto L24
-                java.util.HashMap r0 = r1.mSuppressedGroupToNotifKeys     // Catch: java.lang.Throwable -> L20
-                boolean r0 = r0.containsKey(r3)     // Catch: java.lang.Throwable -> L20
-                if (r0 == 0) goto L22
-                java.util.HashMap r0 = r1.mSuppressedGroupToNotifKeys     // Catch: java.lang.Throwable -> L20
-                java.lang.Object r3 = r0.get(r3)     // Catch: java.lang.Throwable -> L20
-                boolean r2 = r2.equals(r3)     // Catch: java.lang.Throwable -> L20
-                if (r2 == 0) goto L22
-                goto L24
-            L20:
-                r2 = move-exception
-                goto L27
-            L22:
-                r2 = 0
-                goto L25
-            L24:
-                r2 = 1
-            L25:
-                monitor-exit(r1)
-                return r2
-            L27:
-                monitor-exit(r1)     // Catch: java.lang.Throwable -> L20
-                throw r2
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleController.BubblesImpl.isBubbleNotificationSuppressedFromShade(java.lang.String, java.lang.String):boolean");
+        public final boolean isBubbleNotificationSuppressedFromShade(String str, String str2) {
+            boolean z;
+            CachedState cachedState = this.mCachedState;
+            synchronized (cachedState) {
+                if (cachedState.mSuppressedBubbleKeys.contains(str)) {
+                    z = true;
+                } else {
+                    if (cachedState.mSuppressedGroupToNotifKeys.containsKey(str2)) {
+                        if (str.equals(cachedState.mSuppressedGroupToNotifKeys.get(str2))) {
+                        }
+                    }
+                    z = false;
+                }
+            }
+            return z;
         }
 
         private BubblesImpl() {
@@ -792,7 +766,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IBubblesImpl extends IBubbles$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public BubbleController mController;
@@ -812,7 +785,6 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UserBubbleData {
         public final Map mKeyToShownInShadeMap;
 
@@ -955,11 +927,11 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             bubbleController.mWindowManager.addView(bubbleController.mStackView, bubbleController.mWmLayoutParams);
             bubbleController.mStackView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda16
                 @Override // android.view.View.OnApplyWindowInsetsListener
-                public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    BubbleController bubbleController2 = BubbleController.this;
+                public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) throws Resources.NotFoundException {
+                    BubbleController bubbleController2 = this.f$0;
                     if (!windowInsets.equals(bubbleController2.mWindowInsets) && bubbleController2.mStackView != null) {
                         bubbleController2.mWindowInsets = windowInsets;
-                        bubbleController2.mBubblePositioner.update(DeviceConfig.create(bubbleController2.mContext, bubbleController2.mWindowManager));
+                        bubbleController2.mBubblePositioner.update(DeviceConfig.create(bubbleController2.mContext, bubbleController2.mWindowManager, SeslWindowInsetsReflector.getDisplayCutoutForUdc(windowInsets)));
                         bubbleController2.mStackView.onDisplaySizeChanged();
                     }
                     return windowInsets;
@@ -996,9 +968,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
 
     public void expandStackAndSelectBubbleFromLauncher(String str, int i) {
         this.mBubblePositioner.mBubbleBarTopOnScreen = i;
-        boolean equals = "Overflow".equals(str);
+        boolean zEquals = "Overflow".equals(str);
         BubbleData bubbleData = this.mBubbleData;
-        if (equals) {
+        if (zEquals) {
             bubbleData.setSelectedBubbleFromLauncher(bubbleData.mOverflow);
             throw null;
         }
@@ -1113,8 +1085,8 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             Function1 function1 = new Function1() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda19
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    BubbleController bubbleController = BubbleController.this;
+                public final Object mo781invoke(Object obj) {
+                    BubbleController bubbleController = this.f$0;
                     bubbleController.getClass();
                     ((List) obj).forEach(new BubbleController$$ExternalSyntheticLambda9(bubbleController, 1));
                     return null;
@@ -1137,14 +1109,14 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         BubbleOverflow bubbleOverflow;
         BubbleExpandedView bubbleExpandedView;
         BubbleOverflow bubbleOverflow2;
         BubbleExpandedView bubbleExpandedView2;
         BubblePositioner bubblePositioner = this.mBubblePositioner;
         if (bubblePositioner != null) {
-            bubblePositioner.update(DeviceConfig.create(this.mContext, this.mWindowManager));
+            bubblePositioner.update(DeviceConfig.create(this.mContext, this.mWindowManager, bubblePositioner.mDeviceConfig.displayCutout));
         }
         if (this.mStackView != null) {
             if (configuration.densityDpi != this.mDensityDpi || !configuration.windowConfiguration.getBounds().equals(this.mScreenBounds)) {
@@ -1188,9 +1160,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 if (manageEducationView != null) {
                     manageEducationView.setLayoutDirection(layoutDirection);
                 }
-                List unmodifiableList = Collections.unmodifiableList(bubbleStackView2.mBubbleData.mBubbles);
-                if (!unmodifiableList.isEmpty()) {
-                    unmodifiableList.forEach(new Consumer() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda0
+                List listUnmodifiableList = Collections.unmodifiableList(bubbleStackView2.mBubbleData.mBubbles);
+                if (!listUnmodifiableList.isEmpty()) {
+                    listUnmodifiableList.forEach(new Consumer() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda0
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
                             int i = layoutDirection;
@@ -1248,38 +1220,38 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         }
     }
 
-    public void onRankingUpdated(NotificationListenerService.RankingMap rankingMap, HashMap<String, Pair<BubbleEntry, Boolean>> hashMap) {
+    public void onRankingUpdated(NotificationListenerService.RankingMap rankingMap, HashMap<String, Pair<BubbleEntry, Boolean>> map) {
         int identifier;
         SparseArray sparseArray;
         if (this.mTmpRanking == null) {
             this.mTmpRanking = new NotificationListenerService.Ranking();
         }
         for (String str : rankingMap.getOrderedKeys()) {
-            Pair<BubbleEntry, Boolean> pair = hashMap.get(str);
+            Pair<BubbleEntry, Boolean> pair = map.get(str);
             BubbleEntry bubbleEntry = (BubbleEntry) pair.first;
-            boolean booleanValue = ((Boolean) pair.second).booleanValue();
+            boolean zBooleanValue = ((Boolean) pair.second).booleanValue();
             if (bubbleEntry != null && (identifier = bubbleEntry.mSbn.getUser().getIdentifier()) != -1 && ((sparseArray = this.mCurrentProfiles) == null || sparseArray.get(identifier) == null)) {
                 return;
             }
             if (bubbleEntry != null && (bubbleEntry.mShouldSuppressNotificationList || bubbleEntry.mRanking.isSuspended())) {
-                booleanValue = false;
+                zBooleanValue = false;
             }
             rankingMap.getRanking(str, this.mTmpRanking);
             BubbleData bubbleData = this.mBubbleData;
-            boolean hasAnyBubbleWithKey = bubbleData.hasAnyBubbleWithKey(str);
+            boolean zHasAnyBubbleWithKey = bubbleData.hasAnyBubbleWithKey(str);
             bubbleData.hasBubbleInStackWithKey(str);
-            if (hasAnyBubbleWithKey && !this.mTmpRanking.canBubble()) {
+            if (zHasAnyBubbleWithKey && !this.mTmpRanking.canBubble()) {
                 bubbleData.dismissBubbleWithKey(4, str);
-            } else if (hasAnyBubbleWithKey && !booleanValue) {
+            } else if (zHasAnyBubbleWithKey && !zBooleanValue) {
                 bubbleData.dismissBubbleWithKey(14, str);
-            } else if (bubbleEntry != null && this.mTmpRanking.isBubble() && !hasAnyBubbleWithKey) {
+            } else if (bubbleEntry != null && this.mTmpRanking.isBubble() && !zHasAnyBubbleWithKey) {
                 bubbleEntry.setFlagBubble(true);
-                onEntryUpdated(bubbleEntry, booleanValue, true);
+                onEntryUpdated(bubbleEntry, zBooleanValue, true);
             }
         }
     }
 
-    public void onStatusBarStateChanged(boolean z) {
+    public void onStatusBarStateChanged(boolean z) throws Resources.NotFoundException {
         boolean z2 = this.mIsStatusBarShade != z;
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
             BubbleEntry bubbleEntry = this.mNotifEntryToExpandOnShadeUnlock;
@@ -1313,7 +1285,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onThemeChanged() {
+    public final void onThemeChanged() throws Resources.NotFoundException {
         AnonymousClass1 anonymousClass1;
         BubbleExpandedViewManager$Companion$fromBubbleController$1 bubbleExpandedViewManager$Companion$fromBubbleController$1;
         BubbleStackView bubbleStackView = this.mStackView;
@@ -1322,9 +1294,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             bubbleStackView.setUpDismissView();
             bubbleStackView.updateOverflow();
             bubbleStackView.updateUserEdu();
-            List unmodifiableList = Collections.unmodifiableList(bubbleStackView.mBubbleData.mBubbles);
-            if (!unmodifiableList.isEmpty()) {
-                unmodifiableList.forEach(new BubbleStackView$$ExternalSyntheticLambda22());
+            List listUnmodifiableList = Collections.unmodifiableList(bubbleStackView.mBubbleData.mBubbles);
+            if (!listUnmodifiableList.isEmpty()) {
+                listUnmodifiableList.forEach(new BubbleStackView$$ExternalSyntheticLambda22());
             }
             bubbleStackView.updateExpandedView();
             bubbleStackView.mScrim.setBackgroundDrawable(new ColorDrawable(bubbleStackView.getResources().getColor(android.R.color.system_neutral1_1000)));
@@ -1335,10 +1307,10 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         BubbleData bubbleData = this.mBubbleData;
         Iterator it = Collections.unmodifiableList(bubbleData.mBubbles).iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             anonymousClass1 = this.mBubbleTaskViewFactory;
             bubbleExpandedViewManager$Companion$fromBubbleController$1 = this.mExpandedViewManager;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             ((Bubble) it.next()).inflate(null, this.mContext, bubbleExpandedViewManager$Companion$fromBubbleController$1, anonymousClass1, this.mBubblePositioner, this.mStackView, null, this.mBubbleIconFactory, this.mBubbleBadgeIconFactory, false);
@@ -1441,9 +1413,9 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         Log.w("Bubbles", "updateBubble, ignore update for non-active user=" + userId + " currentUser=" + this.mCurrentUserId);
     }
 
-    public final void updateBubbleViews() {
+    public final void updateBubbleViews() throws Resources.NotFoundException {
         BubbleStackView bubbleStackView;
-        BadgedImageView iconView$1;
+        BadgedImageView iconView;
         BadgedImageView badgedImageView;
         if (this.mStackView == null) {
             return;
@@ -1466,16 +1438,16 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 for (int i2 = 0; i2 < Collections.unmodifiableList(bubbleStackView3.mBubbleData.mBubbles).size(); i2++) {
                     Bubble bubble = (Bubble) Collections.unmodifiableList(bubbleStackView3.mBubbleData.mBubbles).get(i2);
                     String str = bubble.mAppName;
-                    String str2 = bubble.mTitle;
-                    if (str2 == null) {
-                        str2 = bubbleStackView3.getResources().getString(R.string.notification_bubble_title);
+                    String string = bubble.mTitle;
+                    if (string == null) {
+                        string = bubbleStackView3.getResources().getString(R.string.notification_bubble_title);
                     }
                     BadgedImageView badgedImageView2 = bubble.mIconView;
                     if (badgedImageView2 != null) {
                         if (bubbleStackView3.mIsExpanded || i2 > 0) {
-                            badgedImageView2.setContentDescription(bubbleStackView3.getResources().getString(R.string.bubble_content_description_single, str2, str));
+                            badgedImageView2.setContentDescription(bubbleStackView3.getResources().getString(R.string.bubble_content_description_single, string, str));
                         } else {
-                            bubble.mIconView.setContentDescription(bubbleStackView3.getResources().getString(R.string.bubble_content_description_stack, str2, str, Integer.valueOf(bubbleStackView3.getBubbleCount())));
+                            bubble.mIconView.setContentDescription(bubbleStackView3.getResources().getString(R.string.bubble_content_description_stack, string, str, Integer.valueOf(bubbleStackView3.getBubbleCount())));
                         }
                     }
                 }
@@ -1490,13 +1462,13 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
                 if (badgedImageView3 != null) {
                     if (bubbleStackView4.mIsExpanded) {
                         badgedImageView3.setImportantForAccessibility(1);
-                        iconView$1 = bubble2 != null ? bubble2.mIconView : null;
-                        if (iconView$1 != null) {
-                            badgedImageView3.setAccessibilityDelegate(new View.AccessibilityDelegate(bubbleStackView4, iconView$1) { // from class: com.android.wm.shell.bubbles.BubbleStackView.16
+                        iconView = bubble2 != null ? bubble2.mIconView : null;
+                        if (iconView != null) {
+                            badgedImageView3.setAccessibilityDelegate(new View.AccessibilityDelegate(bubbleStackView4, iconView) { // from class: com.android.wm.shell.bubbles.BubbleStackView.16
                                 public final /* synthetic */ View val$prevBubbleIconView;
 
-                                public AnonymousClass16(BubbleStackView bubbleStackView42, View iconView$12) {
-                                    this.val$prevBubbleIconView = iconView$12;
+                                public AnonymousClass16(BubbleStackView bubbleStackView42, View iconView2) {
+                                    this.val$prevBubbleIconView = iconView2;
                                 }
 
                                 @Override // android.view.View.AccessibilityDelegate
@@ -1514,11 +1486,11 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
             }
             if (bubbleStackView42.mIsExpanded) {
                 BubbleOverflow bubbleOverflow = bubbleStackView42.mBubbleOverflow;
-                iconView$12 = bubbleOverflow != null ? bubbleOverflow.getIconView$1() : null;
-                if (!bubbleStackView42.mShowingOverflow || iconView$12 == null || Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).isEmpty() || (badgedImageView = ((Bubble) Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).get(Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).size() - 1)).mIconView) == null) {
+                iconView2 = bubbleOverflow != null ? bubbleOverflow.getIconView$1() : null;
+                if (!bubbleStackView42.mShowingOverflow || iconView2 == null || Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).isEmpty() || (badgedImageView = ((Bubble) Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).get(Collections.unmodifiableList(bubbleStackView42.mBubbleData.mBubbles).size() - 1)).mIconView) == null) {
                     return;
                 }
-                iconView$12.setAccessibilityDelegate(new View.AccessibilityDelegate(bubbleStackView42, badgedImageView) { // from class: com.android.wm.shell.bubbles.BubbleStackView.17
+                iconView2.setAccessibilityDelegate(new View.AccessibilityDelegate(bubbleStackView42, badgedImageView) { // from class: com.android.wm.shell.bubbles.BubbleStackView.17
                     public final /* synthetic */ View val$lastBubbleIconView;
 
                     public AnonymousClass17(BubbleStackView bubbleStackView42, View badgedImageView4) {
@@ -1536,13 +1508,13 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
     }
 
     public final void updateNotNotifyingEntry(Bubble bubble, BubbleEntry bubbleEntry, boolean z) {
-        boolean showInShade = bubble.showInShade();
+        boolean zShowInShade = bubble.showInShade();
         BubbleData bubbleData = this.mBubbleData;
         boolean z2 = bubbleData.mExpanded && bubble.equals(bubbleData.mSelectedBubble);
         bubble.setEntry(bubbleEntry);
         bubble.setSuppressNotification((!z2 && z && bubble.showInShade()) ? false : true);
         bubble.setShowDot(!z2);
-        if (showInShade != bubble.showInShade()) {
+        if (zShowInShade != bubble.showInShade()) {
             this.mImpl.mCachedState.updateBubbleSuppressedState(bubble);
         }
     }
@@ -1567,7 +1539,7 @@ public class BubbleController implements ConfigurationChangeListener, RemoteCall
         BubbleViewInfoTask.Callback callback = new BubbleViewInfoTask.Callback() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda2
             @Override // com.android.wm.shell.bubbles.BubbleViewInfoTask.Callback
             public final void onBubbleViewsReady(Bubble bubble2) {
-                BubbleController.this.mBubbleData.notificationEntryUpdated(bubble2, z, z2, bubbleBarLocation);
+                this.f$0.mBubbleData.notificationEntryUpdated(bubble2, z, z2, bubbleBarLocation);
             }
         };
         Context context = this.mContext;

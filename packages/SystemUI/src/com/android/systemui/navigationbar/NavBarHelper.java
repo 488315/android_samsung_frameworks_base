@@ -3,7 +3,9 @@ package com.android.systemui.navigationbar;
 import android.R;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
@@ -39,6 +42,7 @@ import com.android.systemui.navigationbar.gestural.AccessibilityGestureHandler;
 import com.android.systemui.navigationbar.gestural.CornerGestureHandler;
 import com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler;
 import com.android.systemui.navigationbar.store.EventTypeFactory;
+import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.recents.LauncherProxyService;
 import com.android.systemui.scene.ui.view.WindowRootView;
@@ -46,6 +50,7 @@ import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
+import com.android.systemui.shared.recents.ILauncherProxy;
 import com.android.systemui.shared.rotation.RotationPolicyUtil;
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.CommandQueue;
@@ -56,6 +61,7 @@ import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SettingsHelper;
 import dagger.Lazy;
 import java.io.PrintWriter;
@@ -64,7 +70,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarHelper implements AccessibilityManager.AccessibilityServicesStateChangeListener, AccessibilityButtonModeObserver.ModeChangedListener, AccessibilityButtonTargetsObserver.TargetsChangedListener, AccessibilityGestureTargetsObserver.TargetsChangedListener, LauncherProxyService.LauncherProxyListener, NavigationModeController.ModeChangedListener, Dumpable, CommandQueue.Callbacks, ConfigurationController.ConfigurationListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -90,6 +95,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     public final Handler mHandler;
     public final KeyguardStateController mKeyguardStateController;
     public int mLastIMEhints;
+    public final LauncherProxyService mLauncherProxyService;
     public boolean mLongPressHomeEnabled;
     public final Executor mMainExecutor;
     public int mNavBarMode;
@@ -111,7 +117,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     public final SparseIntArray mWindowStateDisplays;
     public final IWindowManager mWm;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.NavBarHelper$2, reason: invalid class name */
     public class AnonymousClass2 extends IWallpaperVisibilityListener.Stub {
         public AnonymousClass2() {
@@ -121,7 +126,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
             NavBarHelper.this.mHandler.post(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarHelper$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NavBarHelper.AnonymousClass2 anonymousClass2 = NavBarHelper.AnonymousClass2.this;
+                    NavBarHelper.AnonymousClass2 anonymousClass2 = this.f$0;
                     boolean z2 = z;
                     int i2 = i;
                     NavBarHelper navBarHelper = NavBarHelper.this;
@@ -139,21 +144,20 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.NavBarHelper$4, reason: invalid class name */
     public class AnonymousClass4 extends IRotationWatcher.Stub {
         public AnonymousClass4() {
         }
 
         public final void onRotationChanged(final int i) {
-            final Boolean isRotationLocked = RotationPolicyUtil.isRotationLocked(NavBarHelper.this.mContext);
+            final Boolean boolIsRotationLocked = RotationPolicyUtil.isRotationLocked(NavBarHelper.this.mContext);
             if (!BasicRune.NAVBAR_AOSP_BUG_FIX) {
                 NavBarHelper.this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarHelper$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NavBarHelper.AnonymousClass4 anonymousClass4 = NavBarHelper.AnonymousClass4.this;
+                        NavBarHelper.AnonymousClass4 anonymousClass4 = this.f$0;
                         int i2 = i;
-                        Boolean bool = isRotationLocked;
+                        Boolean bool = boolIsRotationLocked;
                         NavBarHelper navBarHelper = NavBarHelper.this;
                         navBarHelper.mRotationWatcherRotation = i2;
                         ArrayList arrayList = (ArrayList) navBarHelper.mStateListeners;
@@ -188,7 +192,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         this.mWindowStateDisplays = new SparseIntArray();
         this.mAssistContentObserver = new ContentObserver(handler2) { // from class: com.android.systemui.navigationbar.NavBarHelper.1
             @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri) {
+            public final void onChange(boolean z, Uri uri) throws Resources.NotFoundException {
                 NavBarHelper navBarHelper = NavBarHelper.this;
                 int i = NavBarHelper.$r8$clinit;
                 navBarHelper.updateAssistantAvailability();
@@ -200,23 +204,23 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
             public final void run() {
                 NavBarHelper navBarHelper = NavBarHelper.this;
                 int i = navBarHelper.mRotationWatcherRotation;
-                Boolean isRotationLocked = RotationPolicyUtil.isRotationLocked(navBarHelper.mContext);
+                Boolean boolIsRotationLocked = RotationPolicyUtil.isRotationLocked(navBarHelper.mContext);
                 ArrayList arrayList = (ArrayList) navBarHelper.mStateListeners;
                 int size = arrayList.size();
                 int i2 = 0;
                 while (i2 < size) {
                     Object obj = arrayList.get(i2);
                     i2++;
-                    ((NavbarTaskbarStateUpdater) obj).updateRotationWatcherState(i, isRotationLocked);
+                    ((NavbarTaskbarStateUpdater) obj).updateRotationWatcherState(i, boolIsRotationLocked);
                 }
             }
         };
         this.mRotationWatcher = new AnonymousClass4();
         this.mSettingsObserver = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.NavBarHelper$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
+            public final void onChanged(Uri uri) throws Resources.NotFoundException {
                 int i = NavBarHelper.$r8$clinit;
-                NavBarHelper navBarHelper = NavBarHelper.this;
+                NavBarHelper navBarHelper = this.f$0;
                 if (BasicRune.NAVBAR_SUPPORT_SEARCLE) {
                     navBarHelper.updateAssistantAvailability();
                 }
@@ -263,6 +267,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         if (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN) {
             this.mAccessibilityGestureHandler = new AccessibilityGestureHandler(context, this, this.mNavBarStore, displayManager);
         }
+        this.mLauncherProxyService = launcherProxyService;
     }
 
     public static int transitionMode(int i, boolean z) {
@@ -298,12 +303,12 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
         WindowRootView windowRootView = ((NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController).mWindowRootView;
         boolean z = BasicRune.NAVBAR_ENABLED;
-        boolean isVisible = z ? this.mKeyguardStateController.isVisible() : ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing;
+        boolean zIsVisible = z ? this.mKeyguardStateController.isVisible() : ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing;
         boolean z2 = windowRootView != null && windowRootView.isAttachedToWindow() && windowRootView.getRootWindowInsets().isVisible(WindowInsets.Type.ime());
         if (z) {
             z2 &= ((CentralSurfacesImpl) ((CentralSurfaces) ((Optional) this.mCentralSurfacesOptionalLazy.get()).get())).mBouncerShowing;
         }
-        return z2 || !(isVisible || (i & 2) == 0);
+        return z2 || !(zIsVisible || (i & 2) == 0);
     }
 
     @Override // com.android.systemui.accessibility.AccessibilityButtonModeObserver.ModeChangedListener
@@ -328,23 +333,37 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
 
     @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
     public final void onConnectionChanged(boolean z) {
+        ILauncherProxy iLauncherProxy;
         if (z) {
             this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarHelper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    NavBarHelper navBarHelper = NavBarHelper.this;
+                public final void run() throws Resources.NotFoundException {
+                    NavBarHelper navBarHelper = this.f$0;
                     int i = NavBarHelper.$r8$clinit;
                     navBarHelper.updateAssistantAvailability();
                 }
             });
             if (BasicRune.NAVBAR_TASKBAR) {
                 this.mNavBarStore.handleEvent(this, new EventTypeFactory.EventType.OnUpdateTaskbarAvailable(), 0);
+                if (SafeUIState.isSysUiSafeModeEnabled()) {
+                    boolean zIsTaskBarEnabled = ((NavBarStateManagerImpl) this.mNavBarStore.getNavStateManager()).isTaskBarEnabled(true);
+                    Log.w("NavBarHelper", "onConnectionChanged in SafeMode isTaskbarEnabled=" + zIsTaskBarEnabled);
+                    try {
+                        LauncherProxyService launcherProxyService = this.mLauncherProxyService;
+                        if (launcherProxyService == null || (iLauncherProxy = launcherProxyService.mLauncherProxy) == null) {
+                            return;
+                        }
+                        ((ILauncherProxy.Stub.Proxy) iLauncherProxy).isTaskbarEnabled(zIsTaskBarEnabled);
+                    } catch (RemoteException e) {
+                        Log.e("NavBarHelper", "Failed to call isTaskbarEnabled()", e);
+                    }
+                }
             }
         }
     }
 
     @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
-    public final void onNavigationModeChanged(int i) {
+    public final void onNavigationModeChanged(int i) throws Resources.NotFoundException {
         this.mNavBarMode = i;
         updateAssistantAvailability();
         if (BasicRune.NAVBAR_SUPPORT_SEARCLE) {
@@ -402,14 +421,14 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         this.mBgHandler.post(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarHelper$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                final NavBarHelper navBarHelper = NavBarHelper.this;
+                final NavBarHelper navBarHelper = this.f$0;
                 final NavBarHelper.NavbarTaskbarStateUpdater navbarTaskbarStateUpdater2 = navbarTaskbarStateUpdater;
-                final Boolean isRotationLocked = RotationPolicyUtil.isRotationLocked(navBarHelper.mContext);
+                final Boolean boolIsRotationLocked = RotationPolicyUtil.isRotationLocked(navBarHelper.mContext);
                 navBarHelper.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarHelper$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NavBarHelper navBarHelper2 = NavBarHelper.this;
-                        navbarTaskbarStateUpdater2.updateRotationWatcherState(navBarHelper2.mRotationWatcherRotation, isRotationLocked);
+                        NavBarHelper navBarHelper2 = navBarHelper;
+                        navbarTaskbarStateUpdater2.updateRotationWatcherState(navBarHelper2.mRotationWatcherRotation, boolIsRotationLocked);
                     }
                 });
             }
@@ -454,7 +473,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     }
 
     @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
-    public final void setAssistantOverridesRequested(int[] iArr) {
+    public final void setAssistantOverridesRequested(int[] iArr) throws Resources.NotFoundException {
         ((AssistManager) this.mAssistManagerLazy.get()).mAssistOverrideInvocationTypes = iArr;
         updateAssistantAvailability();
     }
@@ -481,7 +500,7 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     }
 
     @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
-    public final void startAssistant(Bundle bundle) {
+    public final void startAssistant(Bundle bundle) throws PackageManager.NameNotFoundException {
         ((AssistManager) this.mAssistManagerLazy.get()).startAssist(bundle);
     }
 
@@ -534,21 +553,21 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void updateAssistantAvailability() {
+    public final void updateAssistantAvailability() throws Resources.NotFoundException {
         if (!BasicRune.NAVBAR_AOSP_BUG_FIX || this.mContext == null || this.mContentResolver == null) {
             return;
         }
         int i = 0;
-        byte b = ((AssistManager) this.mAssistManagerLazy.get()).mAssistUtils.getAssistComponentForUser(((UserTrackerImpl) this.mUserTracker).getUserId()) != null;
-        boolean shouldOverrideAssist = ((AssistManager) this.mAssistManagerLazy.get()).shouldOverrideAssist(5);
-        boolean z = Settings.Secure.getIntForUser(this.mContentResolver, shouldOverrideAssist ? SettingsHelper.INDEX_SEARCH_ALL_ENTRYPOINTS_ENABLED : "assist_long_press_home_enabled", this.mContext.getResources().getBoolean(shouldOverrideAssist ? R.bool.config_supportSystemNavigationKeys : R.bool.config_autoPowerModePrefetchLocation) ? 1 : 0, ((UserTrackerImpl) this.mUserTracker).getUserId()) != 0;
+        Object[] objArr = ((AssistManager) this.mAssistManagerLazy.get()).mAssistUtils.getAssistComponentForUser(((UserTrackerImpl) this.mUserTracker).getUserId()) != null;
+        boolean zShouldOverrideAssist = ((AssistManager) this.mAssistManagerLazy.get()).shouldOverrideAssist(5);
+        boolean z = Settings.Secure.getIntForUser(this.mContentResolver, zShouldOverrideAssist ? SettingsHelper.INDEX_SEARCH_ALL_ENTRYPOINTS_ENABLED : "assist_long_press_home_enabled", this.mContext.getResources().getBoolean(zShouldOverrideAssist ? R.bool.config_supportSystemNavigationKeys : R.bool.config_autoPowerModePrefetchLocation) ? 1 : 0, ((UserTrackerImpl) this.mUserTracker).getUserId()) != 0;
         this.mLongPressHomeEnabled = z;
         boolean z2 = BasicRune.NAVBAR_ENABLED;
         if (z2) {
             this.mLongPressHomeEnabled = z && !(BasicRune.SUPPORT_AI_AGENT && (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getNavigationBarSPluginFlags() & 8) == 0);
         }
         this.mAssistantTouchGestureEnabled = Settings.Secure.getIntForUser(this.mContentResolver, "assist_touch_gesture_enabled", this.mContext.getResources().getBoolean(R.bool.config_autoPowerModeUseMotionSensor) ? 1 : 0, ((UserTrackerImpl) this.mUserTracker).getUserId()) != 0;
-        boolean z3 = b == true && this.mAssistantTouchGestureEnabled && z2 && !(BasicRune.SUPPORT_AI_AGENT && (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getNavigationBarSPluginFlags() & 8) == 0) && QuickStepContract.isGesturalMode(this.mNavBarMode);
+        boolean z3 = objArr == true && this.mAssistantTouchGestureEnabled && z2 && !(BasicRune.SUPPORT_AI_AGENT && (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getNavigationBarSPluginFlags() & 8) == 0) && QuickStepContract.isGesturalMode(this.mNavBarMode);
         this.mAssistantAvailable = z3;
         boolean z4 = this.mLongPressHomeEnabled;
         ArrayList arrayList = (ArrayList) this.mStateListeners;
@@ -661,7 +680,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         systemActions.mA11yManager.registerSystemAction(systemActions.createRemoteAction(i2, str), i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CurrentSysuiState {
         public final int mWindowState;
         public final int mWindowStateDisplayId;
@@ -677,7 +695,6 @@ public final class NavBarHelper implements AccessibilityManager.AccessibilitySer
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NavbarTaskbarStateUpdater {
         void updateAccessibilityServicesState();
 

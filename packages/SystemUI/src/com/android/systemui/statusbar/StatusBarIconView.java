@@ -16,6 +16,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Trace;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
@@ -43,7 +44,6 @@ import com.android.systemui.util.drawable.DrawableSize;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarIconView extends AnimatedImageView implements StatusIconDisplayable {
     public int mAnimationStartColor;
@@ -140,7 +140,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         rect.bottom = (int) (rect.bottom + translationY);
     }
 
-    public final Drawable getIcon(StatusBarIcon statusBarIcon) {
+    public final Drawable getIcon(StatusBarIcon statusBarIcon) throws Resources.NotFoundException {
         Context context = getContext();
         StatusBarNotification statusBarNotification = this.mNotification;
         if (statusBarNotification != null) {
@@ -155,7 +155,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         if (identifier == -1) {
             identifier = 0;
         }
-        Drawable loadDrawableAsUser = statusBarIcon.icon.loadDrawableAsUser(context, identifier);
+        Drawable drawableLoadDrawableAsUser = statusBarIcon.icon.loadDrawableAsUser(context, identifier);
         TypedValue typedValue = new TypedValue();
         context2.getResources().getValue(R.dimen.status_bar_icon_scale_factor, typedValue, true);
         float f = typedValue.getFloat();
@@ -163,13 +163,13 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         if (f2 != 0.0f) {
             f = f2;
         }
-        if (loadDrawableAsUser != null) {
-            boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+        if (drawableLoadDrawableAsUser != null) {
+            boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
             Resources resources = context2.getResources();
-            int dimensionPixelSize = resources.getDimensionPixelSize(isLowRamDeviceStatic ? 17105816 : 17105815);
-            loadDrawableAsUser = DrawableSize.downscaleToSize(resources, loadDrawableAsUser, dimensionPixelSize, dimensionPixelSize);
+            int dimensionPixelSize = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? 17105817 : 17105816);
+            drawableLoadDrawableAsUser = DrawableSize.downscaleToSize(resources, drawableLoadDrawableAsUser, dimensionPixelSize, dimensionPixelSize);
         }
-        return f == 1.0f ? loadDrawableAsUser : new ScalingDrawableWrapper(loadDrawableAsUser, f);
+        return f == 1.0f ? drawableLoadDrawableAsUser : new ScalingDrawableWrapper(drawableLoadDrawableAsUser, f);
     }
 
     public final float getIconScaleIncreased() {
@@ -214,14 +214,14 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         if (getDrawable() != null && layoutParams != null && (i = layoutParams.width) > 0 && (i2 = layoutParams.height) > 0) {
             float intrinsicWidth = getDrawable().getIntrinsicWidth();
             float intrinsicHeight = getDrawable().getIntrinsicHeight();
-            float min = Math.min(i / intrinsicWidth, i2 / intrinsicHeight);
-            if (min > 1.0f) {
-                min = 1.0f;
+            float fMin = Math.min(i / intrinsicWidth, i2 / intrinsicHeight);
+            if (fMin > 1.0f) {
+                fMin = 1.0f;
             }
             float f = this.mOriginalStatusBarIconSize;
-            float min2 = Math.min(f / (intrinsicWidth * min), f / (intrinsicHeight * min));
-            if (min2 > 1.0f) {
-                Math.min(min2, 1.0f / min);
+            float fMin2 = Math.min(f / (intrinsicWidth * fMin), f / (intrinsicHeight * fMin));
+            if (fMin2 > 1.0f) {
+                Math.min(fMin2, 1.0f / fMin);
             }
         }
         this.mIconScale = (this.mStatusBarIconDrawingSize / this.mOriginalStatusBarIconSize) * 1.0f;
@@ -237,9 +237,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        int diff = configuration.diff(this.mConfiguration);
+        int iDiff = configuration.diff(this.mConfiguration);
         this.mConfiguration.setTo(configuration);
-        if ((1073745920 & diff) != 0) {
+        if ((1073745920 & iDiff) != 0) {
             updateIconDimens();
         }
     }
@@ -253,7 +253,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
 
     @Override // android.widget.ImageView, android.view.View
     public final void onDraw(Canvas canvas) {
-        float interpolate;
+        float fInterpolate;
         if (this.mIconAppearAmount > 0.0f) {
             canvas.save();
             int width = getWidth() / 2;
@@ -269,17 +269,17 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
             canvas.restore();
         }
         if (this.mDotAppearAmount != 0.0f) {
-            float alpha = Color.alpha(this.mDecorColor) / 255.0f;
+            float fAlpha = Color.alpha(this.mDecorColor) / 255.0f;
             float f3 = this.mDotAppearAmount;
             if (f3 <= 1.0f) {
-                interpolate = this.mDotRadius * f3;
+                fInterpolate = this.mDotRadius * f3;
             } else {
                 float f4 = f3 - 1.0f;
-                alpha *= 1.0f - f4;
-                interpolate = NotificationUtils.interpolate(this.mDotRadius, getWidth() / 4, f4);
+                fAlpha *= 1.0f - f4;
+                fInterpolate = NotificationUtils.interpolate(this.mDotRadius, getWidth() / 4, f4);
             }
-            this.mDotPaint.setAlpha((int) (alpha * 255.0f));
-            canvas.drawCircle(this.mNewStatusBarIconSize / 2, getHeight() / 2, interpolate, this.mDotPaint);
+            this.mDotPaint.setAlpha((int) (fAlpha * 255.0f));
+            canvas.drawCircle(this.mNewStatusBarIconSize / 2, getHeight() / 2, fInterpolate, this.mDotPaint);
         }
     }
 
@@ -329,7 +329,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         updateDrawable(true);
     }
 
-    public final void reloadDimens$1() {
+    public final void reloadDimens$1() throws Resources.NotFoundException {
         boolean z = this.mDotRadius == ((float) this.mStaticDotRadius);
         Resources resources = getResources();
         this.mStaticDotRadius = resources.getDimensionPixelSize(R.dimen.overflow_dot_radius);
@@ -342,125 +342,72 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         if (z) {
             this.mDotRadius = this.mStaticDotRadius;
         }
+        resources.getDimension(17106387);
         resources.getDimension(17106386);
-        resources.getDimension(17106385);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x004b, code lost:
-    
-        if (r0.getResId() == r3.getResId()) goto L6;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean set(com.android.internal.statusbar.StatusBarIcon r7) {
-        /*
-            r6 = this;
-            com.android.internal.statusbar.StatusBarIcon r0 = r6.mIcon
-            r1 = 1
-            r2 = 0
-            if (r0 == 0) goto L52
-            android.graphics.drawable.Icon r0 = r0.icon
-            android.graphics.drawable.Icon r3 = r7.icon
-            if (r0 != r3) goto Le
-        Lc:
-            r0 = r1
-            goto L4e
-        Le:
-            int r4 = r0.getType()
-            int r5 = r3.getType()
-            if (r4 == r5) goto L1a
-        L18:
-            r0 = r2
-            goto L4e
-        L1a:
-            int r4 = r0.getType()
-            r5 = 2
-            if (r4 == r5) goto L35
-            r5 = 4
-            if (r4 == r5) goto L28
-            r5 = 6
-            if (r4 == r5) goto L28
-            goto L18
-        L28:
-            java.lang.String r0 = r0.getUriString()
-            java.lang.String r3 = r3.getUriString()
-            boolean r0 = r0.equals(r3)
-            goto L4e
-        L35:
-            java.lang.String r4 = r0.getResPackage()
-            java.lang.String r5 = r3.getResPackage()
-            boolean r4 = r4.equals(r5)
-            if (r4 == 0) goto L18
-            int r0 = r0.getResId()
-            int r3 = r3.getResId()
-            if (r0 != r3) goto L18
-            goto Lc
-        L4e:
-            if (r0 == 0) goto L52
-            r0 = r1
-            goto L53
-        L52:
-            r0 = r2
-        L53:
-            if (r0 == 0) goto L5f
-            com.android.internal.statusbar.StatusBarIcon r3 = r6.mIcon
-            int r3 = r3.iconLevel
-            int r4 = r7.iconLevel
-            if (r3 != r4) goto L5f
-            r3 = r1
-            goto L60
-        L5f:
-            r3 = r2
-        L60:
-            com.android.internal.statusbar.StatusBarIcon r4 = r6.mIcon
-            if (r4 == 0) goto L6c
-            boolean r4 = r4.visible
-            boolean r5 = r7.visible
-            if (r4 != r5) goto L6c
-            r4 = r1
-            goto L6d
-        L6c:
-            r4 = r2
-        L6d:
-            com.android.internal.statusbar.StatusBarIcon r5 = r7.clone()
-            r6.mIcon = r5
-            java.lang.CharSequence r5 = r7.contentDescription
-            r6.setContentDescription(r5)
-            if (r0 != 0) goto L8b
-            boolean r0 = r6.updateDrawable(r2)
-            if (r0 != 0) goto L81
-            return r2
-        L81:
-            r0 = 2131363213(0x7f0a058d, float:1.8346228E38)
-            r5 = 0
-            r6.setTag(r0, r5)
-            r6.maybeUpdateIconScaleDimens()
-        L8b:
-            if (r3 != 0) goto L92
-            int r0 = r7.iconLevel
-            r6.setImageLevel(r0)
-        L92:
-            int r0 = com.android.systemui.modes.shared.ModesUiIcons.$r8$clinit
-            if (r4 != 0) goto La4
-            boolean r7 = r7.visible
-            if (r7 == 0) goto L9f
-            boolean r7 = r6.mBlocked
-            if (r7 != 0) goto L9f
-            goto La1
-        L9f:
-            r2 = 8
-        La1:
-            r6.setVisibility(r2)
-        La4:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.StatusBarIconView.set(com.android.internal.statusbar.StatusBarIcon):boolean");
+    public final boolean set(StatusBarIcon statusBarIcon) {
+        boolean z;
+        boolean zEquals;
+        StatusBarIcon statusBarIcon2 = this.mIcon;
+        if (statusBarIcon2 == null) {
+            z = false;
+        } else {
+            Icon icon = statusBarIcon2.icon;
+            Icon icon2 = statusBarIcon.icon;
+            if (icon != icon2) {
+                if (icon.getType() == icon2.getType()) {
+                    int type = icon.getType();
+                    if (type != 2) {
+                        if (type == 4 || type == 6) {
+                            zEquals = icon.getUriString().equals(icon2.getUriString());
+                        }
+                        if (!zEquals) {
+                            z = true;
+                        }
+                    } else {
+                        if (icon.getResPackage().equals(icon2.getResPackage()) && icon.getResId() == icon2.getResId()) {
+                            zEquals = true;
+                        }
+                        if (!zEquals) {
+                        }
+                    }
+                    zEquals = false;
+                    if (!zEquals) {
+                    }
+                } else {
+                    zEquals = false;
+                    if (!zEquals) {
+                    }
+                }
+            }
+        }
+        boolean z2 = z && this.mIcon.iconLevel == statusBarIcon.iconLevel;
+        StatusBarIcon statusBarIcon3 = this.mIcon;
+        boolean z3 = statusBarIcon3 != null && statusBarIcon3.visible == statusBarIcon.visible;
+        this.mIcon = statusBarIcon.clone();
+        setContentDescription(statusBarIcon.contentDescription);
+        if (!z) {
+            if (!updateDrawable(false)) {
+                return false;
+            }
+            setTag(R.id.icon_is_grayscale, null);
+            maybeUpdateIconScaleDimens();
+        }
+        if (!z2) {
+            setImageLevel(statusBarIcon.iconLevel);
+        }
+        int i = ModesUiIcons.$r8$clinit;
+        if (!z3) {
+            setVisibility((!statusBarIcon.visible || this.mBlocked) ? 8 : 0);
+        }
+        return true;
     }
 
     @Override // com.android.systemui.statusbar.StatusIconDisplayable
@@ -486,9 +433,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
                 return;
             }
             this.mAnimationStartColor = i2;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mColorAnimator = ofFloat;
-            ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mColorAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
             this.mColorAnimator.setDuration(100L);
             this.mColorAnimator.addUpdateListener(this.mColorUpdater);
             this.mColorAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.StatusBarIconView.3
@@ -515,7 +462,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     @Override // com.android.systemui.statusbar.StatusIconDisplayable
     public final void setStaticDrawableColor(int i) {
         float f;
-        float abs;
+        float fAbs;
         this.mDrawableColor = i;
         this.mCurrentSetColor = i;
         updateIconColor();
@@ -524,25 +471,25 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
             if (!ContrastColorUtil.satisfiesTextContrast(0, i2)) {
                 int i3 = this.mDrawableColor;
                 ThreadLocal threadLocal = ColorUtils.TEMP_ARRAY;
-                float red = Color.red(i3) / 255.0f;
-                float green = Color.green(i3) / 255.0f;
-                float blue = Color.blue(i3) / 255.0f;
-                float max = Math.max(red, Math.max(green, blue));
-                float min = Math.min(red, Math.min(green, blue));
-                float f2 = max - min;
-                float f3 = (max + min) / 2.0f;
-                if (max == min) {
+                float fRed = Color.red(i3) / 255.0f;
+                float fGreen = Color.green(i3) / 255.0f;
+                float fBlue = Color.blue(i3) / 255.0f;
+                float fMax = Math.max(fRed, Math.max(fGreen, fBlue));
+                float fMin = Math.min(fRed, Math.min(fGreen, fBlue));
+                float f2 = fMax - fMin;
+                float f3 = (fMax + fMin) / 2.0f;
+                if (fMax == fMin) {
                     f = 0.0f;
-                    abs = 0.0f;
+                    fAbs = 0.0f;
                 } else {
-                    f = max == red ? ((green - blue) / f2) % 6.0f : max == green ? ((blue - red) / f2) + 2.0f : ((red - green) / f2) + 4.0f;
-                    abs = f2 / (1.0f - Math.abs((2.0f * f3) - 1.0f));
+                    f = fMax == fRed ? ((fGreen - fBlue) / f2) % 6.0f : fMax == fGreen ? ((fBlue - fRed) / f2) + 2.0f : ((fRed - fGreen) / f2) + 4.0f;
+                    fAbs = f2 / (1.0f - Math.abs((2.0f * f3) - 1.0f));
                 }
                 float f4 = (f * 60.0f) % 360.0f;
                 if (f4 < 0.0f) {
                     f4 += 360.0f;
                 }
-                if (new float[]{f4 < 0.0f ? 0.0f : Math.min(f4, 360.0f), abs < 0.0f ? 0.0f : Math.min(abs, 1.0f), f3 >= 0.0f ? Math.min(f3, 1.0f) : 0.0f}[1] < 0.2f) {
+                if (new float[]{f4 < 0.0f ? 0.0f : Math.min(f4, 360.0f), fAbs < 0.0f ? 0.0f : Math.min(fAbs, 1.0f), f3 >= 0.0f ? Math.min(f3, 1.0f) : 0.0f}[1] < 0.2f) {
                     i2 = 0;
                 }
                 ContrastColorUtil.resolveContrastColor(((ImageView) this).mContext, i2, 0, true ^ ContrastColorUtil.isColorLight(0));
@@ -562,9 +509,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     }
 
     public final void updateDecorColor() {
-        int interpolateColors = NotificationUtils.interpolateColors(this.mDozeAmount, this.mDecorColor, -1);
-        if (this.mDotPaint.getColor() != interpolateColors) {
-            this.mDotPaint.setColor(interpolateColors);
+        int iInterpolateColors = NotificationUtils.interpolateColors(this.mDozeAmount, this.mDecorColor, -1);
+        if (this.mDotPaint.getColor() != iInterpolateColors) {
+            this.mDotPaint.setColor(iInterpolateColors);
             if (this.mDotAppearAmount != 0.0f) {
                 invalidate();
             }
@@ -620,14 +567,14 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         }
         this.mMatrix = new float[20];
         this.mMatrixColorFilter = new ColorMatrixColorFilter(this.mMatrix);
-        int interpolateColors = NotificationUtils.interpolateColors(this.mDozeAmount, this.mCurrentSetColor, -1);
+        int iInterpolateColors = NotificationUtils.interpolateColors(this.mDozeAmount, this.mCurrentSetColor, -1);
         float[] fArr = this.mMatrix;
         float f2 = this.mDozeAmount * 0.67f;
         Arrays.fill(fArr, 0.0f);
-        fArr[4] = Color.red(interpolateColors);
-        fArr[9] = Color.green(interpolateColors);
-        fArr[14] = Color.blue(interpolateColors);
-        fArr[18] = (Color.alpha(interpolateColors) / 255.0f) + f2;
+        fArr[4] = Color.red(iInterpolateColors);
+        fArr[9] = Color.green(iInterpolateColors);
+        fArr[14] = Color.blue(iInterpolateColors);
+        fArr[18] = (Color.alpha(iInterpolateColors) / 255.0f) + f2;
         this.mMatrixColorFilter.setColorMatrixArray(this.mMatrix);
         setColorFilter((ColorFilter) null);
         setColorFilter(this.mMatrixColorFilter);
@@ -654,7 +601,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     }
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.statusbar.StatusBarIconView$$ExternalSyntheticLambda0] */
-    public StatusBarIconView(Context context, String str, StatusBarNotification statusBarNotification, boolean z) {
+    public StatusBarIconView(Context context, String str, StatusBarNotification statusBarNotification, boolean z) throws Resources.NotFoundException {
         super(context);
         this.mStatusBarIconDrawingSizeIncreased = 1;
         this.mStatusBarIconDrawingSize = 1;
@@ -670,7 +617,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         this.mColorUpdater = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.StatusBarIconView$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                StatusBarIconView statusBarIconView = StatusBarIconView.this;
+                StatusBarIconView statusBarIconView = this.f$0;
                 statusBarIconView.mCurrentSetColor = NotificationUtils.interpolateColors(valueAnimator.getAnimatedFraction(), statusBarIconView.mAnimationStartColor, statusBarIconView.mIconColor);
                 statusBarIconView.updateIconColor();
             }
@@ -727,9 +674,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
                 }
                 float f3 = this.mIconAppearAmount;
                 if (f != f3) {
-                    ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, ICON_APPEAR_AMOUNT, f3, f);
-                    this.mIconAppearAnimator = ofFloat;
-                    ofFloat.setInterpolator(interpolator);
+                    ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, ICON_APPEAR_AMOUNT, f3, f);
+                    this.mIconAppearAnimator = objectAnimatorOfFloat;
+                    objectAnimatorOfFloat.setInterpolator(interpolator);
                     this.mIconAppearAnimator.setDuration(j == 0 ? 100L : j);
                     this.mIconAppearAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.StatusBarIconView.4
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -756,9 +703,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
                 if (f2 == f5 || this.mBlockDotAnim) {
                     z3 = z2;
                 } else {
-                    ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, DOT_APPEAR_AMOUNT, f5, f2);
-                    this.mDotAnimator = ofFloat2;
-                    ofFloat2.setInterpolator(interpolator2);
+                    ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, DOT_APPEAR_AMOUNT, f5, f2);
+                    this.mDotAnimator = objectAnimatorOfFloat2;
+                    objectAnimatorOfFloat2.setInterpolator(interpolator2);
                     this.mDotAnimator.setDuration(j != 0 ? j : 100L);
                     final boolean z5 = !z2;
                     this.mDotAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.StatusBarIconView.5

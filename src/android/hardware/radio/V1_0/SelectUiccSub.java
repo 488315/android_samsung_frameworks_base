@@ -38,13 +38,13 @@ public final class SelectUiccSub {
 
     public static final ArrayList<SelectUiccSub> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SelectUiccSub> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SelectUiccSub selectUiccSub = new SelectUiccSub();
-            selectUiccSub.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            selectUiccSub.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             arrayList.add(selectUiccSub);
         }
         return arrayList;

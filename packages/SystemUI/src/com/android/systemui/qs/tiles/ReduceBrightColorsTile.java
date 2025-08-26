@@ -31,7 +31,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ReduceBrightColorsTile extends QSTileImpl implements ReduceBrightColorsController.Listener {
     public static final HashSet excludeDeviceNameSet;
@@ -49,7 +48,7 @@ public class ReduceBrightColorsTile extends QSTileImpl implements ReduceBrightCo
     }
 
     /* JADX WARN: Type inference failed for: r11v3, types: [com.android.systemui.qs.tiles.ReduceBrightColorsTile$1] */
-    public ReduceBrightColorsTile(boolean z, ReduceBrightColorsController reduceBrightColorsController, QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, ExtraDimDialogManager extraDimDialogManager, UserTracker userTracker, SecureSettings secureSettings) {
+    public ReduceBrightColorsTile(boolean z, ReduceBrightColorsController reduceBrightColorsController, QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, ExtraDimDialogManager extraDimDialogManager, UserTracker userTracker, SecureSettings secureSettings) throws Resources.NotFoundException {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         reduceBrightColorsController.observe(this.mLifecycle, this);
         this.mExtraDimDialogManager = extraDimDialogManager;
@@ -60,9 +59,9 @@ public class ReduceBrightColorsTile extends QSTileImpl implements ReduceBrightCo
             @Override // com.android.systemui.qs.UserSettingObserver
             public final void handleValueChanged(int i, boolean z3) {
                 ReduceBrightColorsTile reduceBrightColorsTile = ReduceBrightColorsTile.this;
-                Integer valueOf = Integer.valueOf(i);
+                Integer numValueOf = Integer.valueOf(i);
                 HashSet hashSet = ReduceBrightColorsTile.excludeDeviceNameSet;
-                reduceBrightColorsTile.handleRefreshState(valueOf);
+                reduceBrightColorsTile.handleRefreshState(numValueOf);
             }
         };
     }
@@ -161,16 +160,19 @@ public class ReduceBrightColorsTile extends QSTileImpl implements ReduceBrightCo
                     Iterator it = excludeDeviceNameSet.iterator();
                     while (it.hasNext()) {
                         if (str.startsWith((String) it.next())) {
+                            z = false;
+                            break;
                         }
                     }
                 }
                 z = true;
+                if (identifier <= 0) {
+                }
+            } else {
+                z = false;
                 if (identifier <= 0 && resources.getBoolean(identifier) && z) {
                     return true;
                 }
-            }
-            z = false;
-            if (identifier <= 0) {
             }
         }
         return false;

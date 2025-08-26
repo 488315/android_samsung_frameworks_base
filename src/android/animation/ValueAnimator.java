@@ -123,24 +123,24 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     public static boolean unregisterDurationScaleChangeListener(DurationScaleChangeListener durationScaleChangeListener) {
-        WeakReference<DurationScaleChangeListener> weakReference;
-        boolean remove;
+        WeakReference<DurationScaleChangeListener> next;
+        boolean zRemove;
         ArrayList<WeakReference<DurationScaleChangeListener>> arrayList = sDurationScaleChangeListeners;
         synchronized (arrayList) {
             Iterator<WeakReference<DurationScaleChangeListener>> it = arrayList.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    weakReference = null;
+                    next = null;
                     break;
                 }
-                weakReference = it.next();
-                if (weakReference.get() == durationScaleChangeListener) {
+                next = it.next();
+                if (next.get() == durationScaleChangeListener) {
                     break;
                 }
             }
-            remove = sDurationScaleChangeListeners.remove(weakReference);
+            zRemove = sDurationScaleChangeListeners.remove(next);
         }
-        return remove;
+        return zRemove;
     }
 
     public static boolean areAnimatorsEnabled() {
@@ -288,31 +288,31 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
 
     public void setCurrentFraction(float f) {
         initAnimation();
-        float clampFraction = clampFraction(f);
+        float fClampFraction = clampFraction(f);
         this.mStartTimeCommitted = true;
         if (isPulsingInternal()) {
-            this.mStartTime = AnimationUtils.currentAnimationTimeMillis() - ((long) (getScaledDuration() * clampFraction));
+            this.mStartTime = AnimationUtils.currentAnimationTimeMillis() - ((long) (getScaledDuration() * fClampFraction));
         } else {
-            this.mSeekFraction = clampFraction;
+            this.mSeekFraction = fClampFraction;
         }
-        this.mOverallFraction = clampFraction;
-        animateValue(getCurrentIterationFraction(clampFraction, this.mReversing));
+        this.mOverallFraction = fClampFraction;
+        animateValue(getCurrentIterationFraction(fClampFraction, this.mReversing));
     }
 
     private int getCurrentIteration(float f) {
-        float clampFraction = clampFraction(f);
-        double d = clampFraction;
-        double floor = Math.floor(d);
-        if (d == floor && clampFraction > 0.0f) {
-            floor -= 1.0d;
+        float fClampFraction = clampFraction(f);
+        double d = fClampFraction;
+        double dFloor = Math.floor(d);
+        if (d == dFloor && fClampFraction > 0.0f) {
+            dFloor -= 1.0d;
         }
-        return (int) floor;
+        return (int) dFloor;
     }
 
     private float getCurrentIterationFraction(float f, boolean z) {
-        float clampFraction = clampFraction(f);
-        int currentIteration = getCurrentIteration(clampFraction);
-        float f2 = clampFraction - currentIteration;
+        float fClampFraction = clampFraction(f);
+        int currentIteration = getCurrentIteration(fClampFraction);
+        float f2 = fClampFraction - currentIteration;
         return shouldPlayBackward(currentIteration, z) ? 1.0f - f2 : f2;
     }
 
@@ -334,7 +334,7 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     public long getCurrentPlayTime() {
-        float currentAnimationTimeMillis;
+        float fCurrentAnimationTimeMillis;
         if (!this.mInitialized) {
             return 0L;
         }
@@ -343,15 +343,15 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         }
         float f = this.mSeekFraction;
         if (f >= 0.0f) {
-            currentAnimationTimeMillis = this.mDuration * f;
+            fCurrentAnimationTimeMillis = this.mDuration * f;
         } else {
-            float resolveDurationScale = resolveDurationScale();
-            if (resolveDurationScale == 0.0f) {
-                resolveDurationScale = 1.0f;
+            float fResolveDurationScale = resolveDurationScale();
+            if (fResolveDurationScale == 0.0f) {
+                fResolveDurationScale = 1.0f;
             }
-            currentAnimationTimeMillis = (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / resolveDurationScale;
+            fCurrentAnimationTimeMillis = (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / fResolveDurationScale;
         }
-        return (long) currentAnimationTimeMillis;
+        return (long) fCurrentAnimationTimeMillis;
     }
 
     @Override // android.animation.Animator
@@ -585,8 +585,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     @Override // android.animation.Animator
     public void reverse() {
         if (isPulsingInternal()) {
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-            this.mStartTime = currentAnimationTimeMillis - (getScaledDuration() - (currentAnimationTimeMillis - this.mStartTime));
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+            this.mStartTime = jCurrentAnimationTimeMillis - (getScaledDuration() - (jCurrentAnimationTimeMillis - this.mStartTime));
             this.mStartTimeCommitted = true;
             this.mReversing = !this.mReversing;
             return;
@@ -667,78 +667,30 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x003f, code lost:
-    
-        if (r2 != false) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0033  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    boolean animateBasedOnTime(long r7) {
-        /*
-            r6 = this;
-            boolean r0 = r6.mRunning
-            r1 = 0
-            if (r0 == 0) goto L51
-            long r2 = r6.getScaledDuration()
-            r4 = 0
-            int r0 = (r2 > r4 ? 1 : (r2 == r4 ? 0 : -1))
-            if (r0 <= 0) goto L16
-            long r4 = r6.mStartTime
-            long r7 = r7 - r4
-            float r7 = (float) r7
-            float r8 = (float) r2
-            float r7 = r7 / r8
-            goto L18
-        L16:
-            r7 = 1065353216(0x3f800000, float:1.0)
-        L18:
-            float r8 = r6.mOverallFraction
-            int r2 = (int) r7
-            int r8 = (int) r8
-            r3 = 1
-            if (r2 <= r8) goto L21
-            r8 = r3
-            goto L22
-        L21:
-            r8 = r1
-        L22:
-            int r2 = r6.mRepeatCount
-            int r4 = r2 + 1
-            float r4 = (float) r4
-            int r4 = (r7 > r4 ? 1 : (r7 == r4 ? 0 : -1))
-            if (r4 < 0) goto L30
-            r4 = -1
-            if (r2 == r4) goto L30
-            r2 = r3
-            goto L31
-        L30:
-            r2 = r1
-        L31:
-            if (r0 != 0) goto L35
-        L33:
-            r1 = r3
-            goto L42
-        L35:
-            if (r8 == 0) goto L3f
-            if (r2 != 0) goto L3f
-            android.animation.Animator$AnimatorCaller<android.animation.Animator$AnimatorListener, android.animation.Animator> r8 = android.animation.Animator.AnimatorCaller.ON_REPEAT
-            r6.notifyListeners(r8, r1)
-            goto L42
-        L3f:
-            if (r2 == 0) goto L42
-            goto L33
-        L42:
-            float r7 = r6.clampFraction(r7)
-            r6.mOverallFraction = r7
-            boolean r8 = r6.mReversing
-            float r7 = r6.getCurrentIterationFraction(r7, r8)
-            r6.animateValue(r7)
-        L51:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.animation.ValueAnimator.animateBasedOnTime(long):boolean");
+    boolean animateBasedOnTime(long j) {
+        boolean z = false;
+        if (this.mRunning) {
+            long scaledDuration = getScaledDuration();
+            float f = scaledDuration > 0 ? (j - this.mStartTime) / scaledDuration : 1.0f;
+            boolean z2 = ((int) f) > ((int) this.mOverallFraction);
+            int i = this.mRepeatCount;
+            boolean z3 = f >= ((float) (i + 1)) && i != -1;
+            if (scaledDuration != 0) {
+                if (z2 && !z3) {
+                    notifyListeners(Animator.AnimatorCaller.ON_REPEAT, false);
+                } else if (z3) {
+                    z = true;
+                }
+                float fClampFraction = clampFraction(f);
+                this.mOverallFraction = fClampFraction;
+                animateValue(getCurrentIterationFraction(fClampFraction, this.mReversing));
+            }
+        }
+        return z;
     }
 
     @Override // android.animation.Animator
@@ -827,11 +779,11 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
             this.mStartTimeCommitted = false;
         }
         this.mLastFrameTime = j;
-        boolean animateBasedOnTime = animateBasedOnTime(Math.max(j, this.mStartTime));
-        if (animateBasedOnTime) {
+        boolean zAnimateBasedOnTime = animateBasedOnTime(Math.max(j, this.mStartTime));
+        if (zAnimateBasedOnTime) {
             endAnimation(true);
         }
-        return animateBasedOnTime;
+        return zAnimateBasedOnTime;
     }
 
     @Override // android.animation.Animator
@@ -912,9 +864,9 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
             valueAnimator.mValues = new PropertyValuesHolder[length];
             valueAnimator.mValuesMap = new HashMap<>(length);
             for (int i = 0; i < length; i++) {
-                PropertyValuesHolder mo121clone = propertyValuesHolderArr[i].mo121clone();
-                valueAnimator.mValues[i] = mo121clone;
-                valueAnimator.mValuesMap.put(mo121clone.getPropertyName(), mo121clone);
+                PropertyValuesHolder propertyValuesHolderClone = propertyValuesHolderArr[i].mo121clone();
+                valueAnimator.mValues[i] = propertyValuesHolderClone;
+                valueAnimator.mValuesMap.put(propertyValuesHolderClone.getPropertyName(), propertyValuesHolderClone);
             }
         }
         return valueAnimator;

@@ -1,8 +1,11 @@
 package androidx.compose.foundation.gestures;
 
 import androidx.compose.foundation.gestures.DragEvent;
+import androidx.compose.foundation.gestures.DragGestureDetectorKt;
 import androidx.compose.foundation.interaction.DragInteraction$Cancel;
 import androidx.compose.foundation.interaction.DragInteraction$Start;
+import androidx.compose.foundation.interaction.DragInteraction$Stop;
+import androidx.compose.foundation.interaction.Interaction;
 import androidx.compose.foundation.interaction.MutableInteractionSource;
 import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.pointer.PointerEvent;
@@ -24,6 +27,7 @@ import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
@@ -38,7 +42,6 @@ import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DragGestureNode extends DelegatingNode implements PointerInputModifierNode {
     public Function1 canDrag;
@@ -62,246 +65,185 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return (Boolean) DragGestureNode.this.canDrag.mo779invoke((PointerInputChange) obj);
+            public final Object mo781invoke(Object obj) {
+                return (Boolean) this.this$0.canDrag.mo781invoke((PointerInputChange) obj);
             }
         };
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$processDragCancel(androidx.compose.foundation.gestures.DragGestureNode r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5.getClass()
-            boolean r0 = r6 instanceof androidx.compose.foundation.gestures.DragGestureNode$processDragCancel$1
-            if (r0 == 0) goto L16
-            r0 = r6
-            androidx.compose.foundation.gestures.DragGestureNode$processDragCancel$1 r0 = (androidx.compose.foundation.gestures.DragGestureNode$processDragCancel$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            androidx.compose.foundation.gestures.DragGestureNode$processDragCancel$1 r0 = new androidx.compose.foundation.gestures.DragGestureNode$processDragCancel$1
-            r0.<init>(r5, r6)
-        L1b:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L36
-            if (r2 != r3) goto L2e
-            java.lang.Object r5 = r0.L$0
-            androidx.compose.foundation.gestures.DragGestureNode r5 = (androidx.compose.foundation.gestures.DragGestureNode) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L51
-        L2e:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L36:
-            kotlin.ResultKt.throwOnFailure(r6)
-            androidx.compose.foundation.interaction.DragInteraction$Start r6 = r5.dragInteraction
-            if (r6 == 0) goto L54
-            androidx.compose.foundation.interaction.MutableInteractionSource r2 = r5.interactionSource
-            if (r2 == 0) goto L51
-            androidx.compose.foundation.interaction.DragInteraction$Cancel r4 = new androidx.compose.foundation.interaction.DragInteraction$Cancel
-            r4.<init>(r6)
-            r0.L$0 = r5
-            r0.label = r3
-            java.lang.Object r6 = r2.emit(r4, r0)
-            if (r6 != r1) goto L51
-            return r1
-        L51:
-            r6 = 0
-            r5.dragInteraction = r6
-        L54:
-            androidx.compose.ui.unit.Velocity$Companion r6 = androidx.compose.ui.unit.Velocity.Companion
-            r6.getClass()
-            r0 = 0
-            r5.mo63onDragStoppedTH1AsA0(r0)
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DragGestureNode.access$processDragCancel(androidx.compose.foundation.gestures.DragGestureNode, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$processDragCancel(DragGestureNode dragGestureNode, ContinuationImpl continuationImpl) {
+        DragGestureNode$processDragCancel$1 dragGestureNode$processDragCancel$1;
+        dragGestureNode.getClass();
+        if (continuationImpl instanceof DragGestureNode$processDragCancel$1) {
+            dragGestureNode$processDragCancel$1 = (DragGestureNode$processDragCancel$1) continuationImpl;
+            int i = dragGestureNode$processDragCancel$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                dragGestureNode$processDragCancel$1.label = i - Integer.MIN_VALUE;
+            } else {
+                dragGestureNode$processDragCancel$1 = new DragGestureNode$processDragCancel$1(dragGestureNode, continuationImpl);
+            }
+        }
+        Object obj = dragGestureNode$processDragCancel$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = dragGestureNode$processDragCancel$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            DragInteraction$Start dragInteraction$Start = dragGestureNode.dragInteraction;
+            if (dragInteraction$Start != null) {
+                MutableInteractionSource mutableInteractionSource = dragGestureNode.interactionSource;
+                if (mutableInteractionSource != null) {
+                    DragInteraction$Cancel dragInteraction$Cancel = new DragInteraction$Cancel(dragInteraction$Start);
+                    dragGestureNode$processDragCancel$1.L$0 = dragGestureNode;
+                    dragGestureNode$processDragCancel$1.label = 1;
+                    if (mutableInteractionSource.emit(dragInteraction$Cancel, dragGestureNode$processDragCancel$1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            }
+            Velocity.Companion.getClass();
+            dragGestureNode.mo64onDragStoppedTH1AsA0(0L);
+            return Unit.INSTANCE;
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        dragGestureNode = (DragGestureNode) dragGestureNode$processDragCancel$1.L$0;
+        ResultKt.throwOnFailure(obj);
+        dragGestureNode.dragInteraction = null;
+        Velocity.Companion.getClass();
+        dragGestureNode.mo64onDragStoppedTH1AsA0(0L);
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0068, code lost:
-    
-        if (r2.emit(r5, r0) == r1) goto L27;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$processDragStart(androidx.compose.foundation.gestures.DragGestureNode r6, androidx.compose.foundation.gestures.DragEvent.DragStarted r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r6.getClass()
-            boolean r0 = r8 instanceof androidx.compose.foundation.gestures.DragGestureNode$processDragStart$1
-            if (r0 == 0) goto L16
-            r0 = r8
-            androidx.compose.foundation.gestures.DragGestureNode$processDragStart$1 r0 = (androidx.compose.foundation.gestures.DragGestureNode$processDragStart$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            androidx.compose.foundation.gestures.DragGestureNode$processDragStart$1 r0 = new androidx.compose.foundation.gestures.DragGestureNode$processDragStart$1
-            r0.<init>(r6, r8)
-        L1b:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L4e
-            if (r2 == r4) goto L41
-            if (r2 != r3) goto L39
-            java.lang.Object r6 = r0.L$2
-            androidx.compose.foundation.interaction.DragInteraction$Start r6 = (androidx.compose.foundation.interaction.DragInteraction$Start) r6
-            java.lang.Object r7 = r0.L$1
-            androidx.compose.foundation.gestures.DragEvent$DragStarted r7 = (androidx.compose.foundation.gestures.DragEvent.DragStarted) r7
-            java.lang.Object r0 = r0.L$0
-            androidx.compose.foundation.gestures.DragGestureNode r0 = (androidx.compose.foundation.gestures.DragGestureNode) r0
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L85
-        L39:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L41:
-            java.lang.Object r6 = r0.L$1
-            r7 = r6
-            androidx.compose.foundation.gestures.DragEvent$DragStarted r7 = (androidx.compose.foundation.gestures.DragEvent.DragStarted) r7
-            java.lang.Object r6 = r0.L$0
-            androidx.compose.foundation.gestures.DragGestureNode r6 = (androidx.compose.foundation.gestures.DragGestureNode) r6
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L6b
-        L4e:
-            kotlin.ResultKt.throwOnFailure(r8)
-            androidx.compose.foundation.interaction.DragInteraction$Start r8 = r6.dragInteraction
-            if (r8 == 0) goto L6b
-            androidx.compose.foundation.interaction.MutableInteractionSource r2 = r6.interactionSource
-            if (r2 == 0) goto L6b
-            androidx.compose.foundation.interaction.DragInteraction$Cancel r5 = new androidx.compose.foundation.interaction.DragInteraction$Cancel
-            r5.<init>(r8)
-            r0.L$0 = r6
-            r0.L$1 = r7
-            r0.label = r4
-            java.lang.Object r8 = r2.emit(r5, r0)
-            if (r8 != r1) goto L6b
-            goto L82
-        L6b:
-            androidx.compose.foundation.interaction.DragInteraction$Start r8 = new androidx.compose.foundation.interaction.DragInteraction$Start
-            r8.<init>()
-            androidx.compose.foundation.interaction.MutableInteractionSource r2 = r6.interactionSource
-            if (r2 == 0) goto L87
-            r0.L$0 = r6
-            r0.L$1 = r7
-            r0.L$2 = r8
-            r0.label = r3
-            java.lang.Object r0 = r2.emit(r8, r0)
-            if (r0 != r1) goto L83
-        L82:
-            return r1
-        L83:
-            r0 = r6
-            r6 = r8
-        L85:
-            r8 = r6
-            r6 = r0
-        L87:
-            r6.dragInteraction = r8
-            long r7 = r7.startPoint
-            r6.mo62onDragStartedk4lQ0M(r7)
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DragGestureNode.access$processDragStart(androidx.compose.foundation.gestures.DragGestureNode, androidx.compose.foundation.gestures.DragEvent$DragStarted, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$processDragStart(DragGestureNode dragGestureNode, DragEvent.DragStarted dragStarted, ContinuationImpl continuationImpl) {
+        DragGestureNode$processDragStart$1 dragGestureNode$processDragStart$1;
+        MutableInteractionSource mutableInteractionSource;
+        DragGestureNode dragGestureNode2;
+        Interaction interaction;
+        DragInteraction$Start dragInteraction$Start;
+        dragGestureNode.getClass();
+        if (continuationImpl instanceof DragGestureNode$processDragStart$1) {
+            dragGestureNode$processDragStart$1 = (DragGestureNode$processDragStart$1) continuationImpl;
+            int i = dragGestureNode$processDragStart$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                dragGestureNode$processDragStart$1.label = i - Integer.MIN_VALUE;
+            } else {
+                dragGestureNode$processDragStart$1 = new DragGestureNode$processDragStart$1(dragGestureNode, continuationImpl);
+            }
+        }
+        Object obj = dragGestureNode$processDragStart$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = dragGestureNode$processDragStart$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            DragInteraction$Start dragInteraction$Start2 = dragGestureNode.dragInteraction;
+            if (dragInteraction$Start2 != null && (mutableInteractionSource = dragGestureNode.interactionSource) != null) {
+                DragInteraction$Cancel dragInteraction$Cancel = new DragInteraction$Cancel(dragInteraction$Start2);
+                dragGestureNode$processDragStart$1.L$0 = dragGestureNode;
+                dragGestureNode$processDragStart$1.L$1 = dragStarted;
+                dragGestureNode$processDragStart$1.label = 1;
+                if (mutableInteractionSource.emit(dragInteraction$Cancel, dragGestureNode$processDragStart$1) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            dragGestureNode.dragInteraction = dragInteraction$Start;
+            dragGestureNode.mo63onDragStartedk4lQ0M(dragStarted.startPoint);
+            return Unit.INSTANCE;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            interaction = (DragInteraction$Start) dragGestureNode$processDragStart$1.L$2;
+            dragStarted = (DragEvent.DragStarted) dragGestureNode$processDragStart$1.L$1;
+            dragGestureNode2 = (DragGestureNode) dragGestureNode$processDragStart$1.L$0;
+            ResultKt.throwOnFailure(obj);
+            dragInteraction$Start = interaction;
+            dragGestureNode = dragGestureNode2;
+            dragGestureNode.dragInteraction = dragInteraction$Start;
+            dragGestureNode.mo63onDragStartedk4lQ0M(dragStarted.startPoint);
+            return Unit.INSTANCE;
+        }
+        dragStarted = (DragEvent.DragStarted) dragGestureNode$processDragStart$1.L$1;
+        dragGestureNode = (DragGestureNode) dragGestureNode$processDragStart$1.L$0;
+        ResultKt.throwOnFailure(obj);
+        Interaction interaction2 = new Interaction() { // from class: androidx.compose.foundation.interaction.DragInteraction$Start
+        };
+        MutableInteractionSource mutableInteractionSource2 = dragGestureNode.interactionSource;
+        dragInteraction$Start = interaction2;
+        if (mutableInteractionSource2 != null) {
+            dragGestureNode$processDragStart$1.L$0 = dragGestureNode;
+            dragGestureNode$processDragStart$1.L$1 = dragStarted;
+            dragGestureNode$processDragStart$1.L$2 = interaction2;
+            dragGestureNode$processDragStart$1.label = 2;
+            if (mutableInteractionSource2.emit(interaction2, dragGestureNode$processDragStart$1) != coroutineSingletons) {
+                dragGestureNode2 = dragGestureNode;
+                interaction = interaction2;
+                dragInteraction$Start = interaction;
+                dragGestureNode = dragGestureNode2;
+            }
+            return coroutineSingletons;
+        }
+        dragGestureNode.dragInteraction = dragInteraction$Start;
+        dragGestureNode.mo63onDragStartedk4lQ0M(dragStarted.startPoint);
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$processDragStop(androidx.compose.foundation.gestures.DragGestureNode r5, androidx.compose.foundation.gestures.DragEvent.DragStopped r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5.getClass()
-            boolean r0 = r7 instanceof androidx.compose.foundation.gestures.DragGestureNode$processDragStop$1
-            if (r0 == 0) goto L16
-            r0 = r7
-            androidx.compose.foundation.gestures.DragGestureNode$processDragStop$1 r0 = (androidx.compose.foundation.gestures.DragGestureNode$processDragStop$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            androidx.compose.foundation.gestures.DragGestureNode$processDragStop$1 r0 = new androidx.compose.foundation.gestures.DragGestureNode$processDragStop$1
-            r0.<init>(r5, r7)
-        L1b:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3b
-            if (r2 != r3) goto L33
-            java.lang.Object r5 = r0.L$1
-            r6 = r5
-            androidx.compose.foundation.gestures.DragEvent$DragStopped r6 = (androidx.compose.foundation.gestures.DragEvent.DragStopped) r6
-            java.lang.Object r5 = r0.L$0
-            androidx.compose.foundation.gestures.DragGestureNode r5 = (androidx.compose.foundation.gestures.DragGestureNode) r5
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L58
-        L33:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            androidx.compose.foundation.interaction.DragInteraction$Start r7 = r5.dragInteraction
-            if (r7 == 0) goto L5b
-            androidx.compose.foundation.interaction.MutableInteractionSource r2 = r5.interactionSource
-            if (r2 == 0) goto L58
-            androidx.compose.foundation.interaction.DragInteraction$Stop r4 = new androidx.compose.foundation.interaction.DragInteraction$Stop
-            r4.<init>(r7)
-            r0.L$0 = r5
-            r0.L$1 = r6
-            r0.label = r3
-            java.lang.Object r7 = r2.emit(r4, r0)
-            if (r7 != r1) goto L58
-            return r1
-        L58:
-            r7 = 0
-            r5.dragInteraction = r7
-        L5b:
-            long r6 = r6.velocity
-            r5.mo63onDragStoppedTH1AsA0(r6)
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DragGestureNode.access$processDragStop(androidx.compose.foundation.gestures.DragGestureNode, androidx.compose.foundation.gestures.DragEvent$DragStopped, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$processDragStop(DragGestureNode dragGestureNode, DragEvent.DragStopped dragStopped, ContinuationImpl continuationImpl) {
+        DragGestureNode$processDragStop$1 dragGestureNode$processDragStop$1;
+        dragGestureNode.getClass();
+        if (continuationImpl instanceof DragGestureNode$processDragStop$1) {
+            dragGestureNode$processDragStop$1 = (DragGestureNode$processDragStop$1) continuationImpl;
+            int i = dragGestureNode$processDragStop$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                dragGestureNode$processDragStop$1.label = i - Integer.MIN_VALUE;
+            } else {
+                dragGestureNode$processDragStop$1 = new DragGestureNode$processDragStop$1(dragGestureNode, continuationImpl);
+            }
+        }
+        Object obj = dragGestureNode$processDragStop$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = dragGestureNode$processDragStop$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            DragInteraction$Start dragInteraction$Start = dragGestureNode.dragInteraction;
+            if (dragInteraction$Start != null) {
+                MutableInteractionSource mutableInteractionSource = dragGestureNode.interactionSource;
+                if (mutableInteractionSource != null) {
+                    DragInteraction$Stop dragInteraction$Stop = new DragInteraction$Stop(dragInteraction$Start);
+                    dragGestureNode$processDragStop$1.L$0 = dragGestureNode;
+                    dragGestureNode$processDragStop$1.L$1 = dragStopped;
+                    dragGestureNode$processDragStop$1.label = 1;
+                    if (mutableInteractionSource.emit(dragInteraction$Stop, dragGestureNode$processDragStop$1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            }
+            dragGestureNode.mo64onDragStoppedTH1AsA0(dragStopped.velocity);
+            return Unit.INSTANCE;
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        dragStopped = (DragEvent.DragStopped) dragGestureNode$processDragStop$1.L$1;
+        dragGestureNode = (DragGestureNode) dragGestureNode$processDragStop$1.L$0;
+        ResultKt.throwOnFailure(obj);
+        dragGestureNode.dragInteraction = null;
+        dragGestureNode.mo64onDragStoppedTH1AsA0(dragStopped.velocity);
+        return Unit.INSTANCE;
     }
 
     public final void disposeInteractionSource$1() {
@@ -332,18 +274,17 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
     }
 
     /* renamed from: onDragStarted-k-4lQ0M */
-    public abstract void mo62onDragStartedk4lQ0M(long j);
+    public abstract void mo63onDragStartedk4lQ0M(long j);
 
     /* renamed from: onDragStopped-TH1AsA0 */
-    public abstract void mo63onDragStoppedTH1AsA0(long j);
+    public abstract void mo64onDragStoppedTH1AsA0(long j);
 
     @Override // androidx.compose.ui.node.PointerInputModifierNode
     /* renamed from: onPointerEvent-H0pRuoY */
     public void mo16onPointerEventH0pRuoY(PointerEvent pointerEvent, PointerEventPass pointerEventPass, long j) {
         if (this.enabled && this.pointerInputNode == null) {
-            SuspendingPointerInputModifierNodeImpl SuspendingPointerInputModifierNode = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1
+            SuspendingPointerInputModifierNodeImpl suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ Function2 $onDrag;
@@ -399,11 +340,11 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                                 this.L$0 = coroutineScope;
                                 this.label = 1;
                                 float f = DragGestureDetectorKt.mouseToTouchSlopRatio;
-                                Object awaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new DragGestureDetectorKt$detectDragGestures$9(function02, new Ref$LongRef(), orientation, function3, function2, function0, function1, null), this);
-                                if (awaitEachGesture != obj2) {
-                                    awaitEachGesture = Unit.INSTANCE;
+                                Object objAwaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new DragGestureDetectorKt.AnonymousClass9(function02, new Ref$LongRef(), orientation, function3, function2, function0, function1, null), this);
+                                if (objAwaitEachGesture != obj2) {
+                                    objAwaitEachGesture = Unit.INSTANCE;
                                 }
-                                if (awaitEachGesture == obj2) {
+                                if (objAwaitEachGesture == obj2) {
                                     return obj2;
                                 }
                             } else {
@@ -415,7 +356,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                         } catch (CancellationException e) {
                             BufferedChannel bufferedChannel = this.this$0.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
+                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
                             }
                             if (!CoroutineScopeKt.isActive(r1)) {
                                 throw e;
@@ -428,8 +369,8 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                 @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
                 public final Object invoke(final PointerInputScope pointerInputScope, Continuation continuation) {
                     final VelocityTracker velocityTracker = new VelocityTracker();
-                    final DragGestureNode dragGestureNode = DragGestureNode.this;
-                    Object coroutineScope = CoroutineScopeKt.coroutineScope(new AnonymousClass1(DragGestureNode.this, pointerInputScope, new Function3() { // from class: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1$onDragStart$1
+                    final DragGestureNode dragGestureNode = this.this$0;
+                    Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new AnonymousClass1(this.this$0, pointerInputScope, new Function3() { // from class: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1$onDragStart$1
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(3);
@@ -440,21 +381,21 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                             PointerInputChange pointerInputChange = (PointerInputChange) obj;
                             PointerInputChange pointerInputChange2 = (PointerInputChange) obj2;
                             long j2 = ((Offset) obj3).packedValue;
-                            if (((Boolean) DragGestureNode.this.canDrag.mo779invoke(pointerInputChange)).booleanValue()) {
-                                DragGestureNode dragGestureNode2 = DragGestureNode.this;
+                            if (((Boolean) dragGestureNode.canDrag.mo781invoke(pointerInputChange)).booleanValue()) {
+                                DragGestureNode dragGestureNode2 = dragGestureNode;
                                 if (!dragGestureNode2.isListeningForEvents) {
                                     if (dragGestureNode2.channel == null) {
                                         dragGestureNode2.channel = ChannelKt.Channel$default(Integer.MAX_VALUE, null, null, 6);
                                     }
-                                    DragGestureNode dragGestureNode3 = DragGestureNode.this;
+                                    DragGestureNode dragGestureNode3 = dragGestureNode;
                                     dragGestureNode3.isListeningForEvents = true;
                                     BuildersKt.launch$default(dragGestureNode3.getCoroutineScope(), null, null, new DragGestureNode$startListeningForEvents$1(dragGestureNode3, null), 3);
                                 }
                                 VelocityTrackerKt.addPointerInputChange(velocityTracker, pointerInputChange);
-                                long m400minusMKHz9U = Offset.m400minusMKHz9U(pointerInputChange2.position, j2);
-                                BufferedChannel bufferedChannel = DragGestureNode.this.channel;
+                                long jM402minusMKHz9U = Offset.m402minusMKHz9U(pointerInputChange2.position, j2);
+                                BufferedChannel bufferedChannel = dragGestureNode.channel;
                                 if (bufferedChannel != null) {
-                                    ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(new DragEvent.DragStarted(m400minusMKHz9U, null)));
+                                    ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragStarted(jM402minusMKHz9U, null)));
                                 }
                             }
                             return Unit.INSTANCE;
@@ -467,15 +408,15 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
-                            VelocityTrackerKt.addPointerInputChange(VelocityTracker.this, (PointerInputChange) obj);
+                        public final Object mo781invoke(Object obj) {
+                            VelocityTrackerKt.addPointerInputChange(velocityTracker, (PointerInputChange) obj);
                             float maximumFlingVelocity = pointerInputScope.getViewConfiguration().getMaximumFlingVelocity();
-                            long m600calculateVelocityAH228Gc = VelocityTracker.this.m600calculateVelocityAH228Gc(VelocityKt.Velocity(maximumFlingVelocity, maximumFlingVelocity));
-                            VelocityTracker.this.resetTracking();
+                            long jM602calculateVelocityAH228Gc = velocityTracker.m602calculateVelocityAH228Gc(VelocityKt.Velocity(maximumFlingVelocity, maximumFlingVelocity));
+                            velocityTracker.resetTracking();
                             BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
                                 Function3 function3 = DraggableKt.NoOpOnDragStarted;
-                                ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(new DragEvent.DragStopped(VelocityKt.Velocity(Float.isNaN(Velocity.m878getXimpl(m600calculateVelocityAH228Gc)) ? 0.0f : Velocity.m878getXimpl(m600calculateVelocityAH228Gc), Float.isNaN(Velocity.m879getYimpl(m600calculateVelocityAH228Gc)) ? 0.0f : Velocity.m879getYimpl(m600calculateVelocityAH228Gc)), null)));
+                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragStopped(VelocityKt.Velocity(Float.isNaN(Velocity.m880getXimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m880getXimpl(jM602calculateVelocityAH228Gc), Float.isNaN(Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)), null)));
                             }
                             return Unit.INSTANCE;
                         }
@@ -486,9 +427,9 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
 
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
-                            BufferedChannel bufferedChannel = DragGestureNode.this.channel;
+                            BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
+                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
                             }
                             return Unit.INSTANCE;
                         }
@@ -499,7 +440,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
 
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
-                            return Boolean.valueOf(!DragGestureNode.this.startDragImmediately());
+                            return Boolean.valueOf(!dragGestureNode.startDragImmediately());
                         }
                     }, new Function2() { // from class: androidx.compose.foundation.gestures.DragGestureNode$initializePointerInputNode$1$onDrag$1
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -510,19 +451,19 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                         @Override // kotlin.jvm.functions.Function2
                         public final Object invoke(Object obj, Object obj2) {
                             long j2 = ((Offset) obj2).packedValue;
-                            VelocityTrackerKt.addPointerInputChange(VelocityTracker.this, (PointerInputChange) obj);
+                            VelocityTrackerKt.addPointerInputChange(velocityTracker, (PointerInputChange) obj);
                             BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(new DragEvent.DragDelta(j2, null)));
+                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragDelta(j2, null)));
                             }
                             return Unit.INSTANCE;
                         }
                     }, null), continuation);
-                    return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+                    return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
                 }
             });
-            delegate(SuspendingPointerInputModifierNode);
-            this.pointerInputNode = SuspendingPointerInputModifierNode;
+            delegate(suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode);
+            this.pointerInputNode = suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode;
         }
         SuspendingPointerInputModifierNode suspendingPointerInputModifierNode = this.pointerInputNode;
         if (suspendingPointerInputModifierNode != null) {

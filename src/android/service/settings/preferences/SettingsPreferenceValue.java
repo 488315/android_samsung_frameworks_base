@@ -68,26 +68,26 @@ public final class SettingsPreferenceValue implements Parcelable {
     }
 
     private SettingsPreferenceValue(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mType = readInt;
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        this.mType = i;
+        if (i == 0) {
             this.mValue = Boolean.valueOf(parcel.readBoolean());
             return;
         }
-        if (readInt == 1) {
+        if (i == 1) {
             this.mValue = Long.valueOf(parcel.readLong());
             return;
         }
-        if (readInt == 2) {
+        if (i == 2) {
             this.mValue = Double.valueOf(parcel.readDouble());
             return;
         }
-        if (readInt == 3) {
+        if (i == 3) {
             this.mValue = parcel.readString();
-        } else if (readInt == 4) {
+        } else if (i == 4) {
             this.mValue = Integer.valueOf(parcel.readInt());
         } else {
-            throw new IllegalStateException("Unknown type: " + readInt);
+            throw new IllegalStateException("Unknown type: " + i);
         }
     }
 

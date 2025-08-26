@@ -16,7 +16,6 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Enumeration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KeyStore {
     public static final String SERVICE = "KeyStore";
@@ -56,7 +55,7 @@ public class KeyStore {
         return this.spiImpl.engineGetCertificateChain(str);
     }
 
-    public KeyStore.Entry getEntry(String str, KeyStore.ProtectionParameter protectionParameter) throws NoSuchAlgorithmException, UnrecoverableEntryException, KeyStoreException {
+    public KeyStore.Entry getEntry(String str, KeyStore.ProtectionParameter protectionParameter) throws NoSuchAlgorithmException, KeyStoreException, UnrecoverableEntryException {
         return this.spiImpl.engineGetEntry(str, protectionParameter);
     }
 
@@ -64,11 +63,11 @@ public class KeyStore {
         return ((UcmAgentProviderImpl.UcmAgentKeyStoreSpi) this.spiImpl).getErrorCode();
     }
 
-    public Key getKey(String str, char[] cArr) throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException {
+    public Key getKey(String str, char[] cArr) throws NoSuchAlgorithmException, UnrecoverableKeyException, KeyStoreException {
         return this.spiImpl.engineGetKey(str, cArr);
     }
 
-    public void load(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void load(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         this.spiImpl.engineLoad(inputStream, cArr);
     }
 
@@ -80,7 +79,7 @@ public class KeyStore {
         ((UcmAgentProviderImpl.UcmAgentKeyStoreSpi) this.spiImpl).setProperty(bundle);
     }
 
-    public void load(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void load(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException {
         this.spiImpl.engineLoad(loadStoreParameter);
     }
 }

@@ -8,7 +8,7 @@ import android.preference.DialogPreference;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
-/* loaded from: classes5.dex */
+/* loaded from: classes.dex */
 public class YesNoPreference extends DialogPreference {
     private boolean mWasPositiveResult;
 
@@ -53,13 +53,13 @@ public class YesNoPreference extends DialogPreference {
 
     @Override // android.preference.Preference
     protected void onSetInitialValue(boolean z, Object obj) {
-        boolean booleanValue;
+        boolean zBooleanValue;
         if (z) {
-            booleanValue = getPersistedBoolean(this.mWasPositiveResult);
+            zBooleanValue = getPersistedBoolean(this.mWasPositiveResult);
         } else {
-            booleanValue = ((Boolean) obj).booleanValue();
+            zBooleanValue = ((Boolean) obj).booleanValue();
         }
-        setValue(booleanValue);
+        setValue(zBooleanValue);
     }
 
     @Override // android.preference.Preference
@@ -69,11 +69,11 @@ public class YesNoPreference extends DialogPreference {
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.wasPositiveResult = getValue();
         return savedState;
     }

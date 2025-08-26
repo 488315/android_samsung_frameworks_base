@@ -50,8 +50,8 @@ public class BlockchainTZServiceCommnInfo implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.mServiceVersion = parcel.readInt();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mTAs.put(Integer.valueOf(parcel.readInt()), parcel.readStrongBinder());
         }
     }

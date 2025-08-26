@@ -130,8 +130,8 @@ public class CameraSessionStats implements Parcelable {
         parcel.writeBoolean(this.mUsedZoomOverride);
         parcel.writeInt(this.mSessionIndex);
         this.mCameraExtensionSessionStats.writeToParcel(parcel, 0);
-        parcel.writeInt(this.mMostRequestedFpsRange.getLower().intValue());
-        parcel.writeInt(this.mMostRequestedFpsRange.getUpper().intValue());
+        parcel.writeInt(((Integer) this.mMostRequestedFpsRange.getLower()).intValue());
+        parcel.writeInt(((Integer) this.mMostRequestedFpsRange.getUpper()).intValue());
     }
 
     public void readFromParcel(Parcel parcel) {

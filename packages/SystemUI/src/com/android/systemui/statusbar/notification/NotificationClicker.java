@@ -22,7 +22,6 @@ import com.android.wm.shell.bubbles.Bubbles;
 import java.util.Optional;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationClicker implements View.OnClickListener {
     public final Optional mBubblesOptional;
@@ -31,14 +30,12 @@ public final class NotificationClicker implements View.OnClickListener {
     public final AnonymousClass1 mOnDragSuccessListener;
     public final PowerInteractor mPowerInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.NotificationClicker$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final NotificationClickerLogger mLogger;
         public final PowerInteractor mPowerInteractor;
@@ -72,7 +69,7 @@ public final class NotificationClicker implements View.OnClickListener {
         Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.notification.NotificationClickerLogger$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 switch (i3) {
                     case 0:
@@ -89,9 +86,9 @@ public final class NotificationClicker implements View.OnClickListener {
             }
         };
         LogBuffer logBuffer = notificationClickerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationClicker", logLevel, function1, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationClicker", logLevel, function1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
         NotificationMenuRowPlugin notificationMenuRowPlugin2 = expandableNotificationRow.mMenuRow;
         if (notificationMenuRowPlugin2 != null && notificationMenuRowPlugin2.isMenuVisible()) {
             NotificationClickerLogger notificationClickerLogger2 = this.mLogger;
@@ -100,7 +97,7 @@ public final class NotificationClicker implements View.OnClickListener {
             Function1 function12 = new Function1() { // from class: com.android.systemui.statusbar.notification.NotificationClickerLogger$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     switch (i2) {
                         case 0:
@@ -117,9 +114,9 @@ public final class NotificationClicker implements View.OnClickListener {
                 }
             };
             LogBuffer logBuffer2 = notificationClickerLogger2.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("NotificationClicker", logLevel, function12, null);
-            ((LogMessageImpl) obtain2).str1 = str2;
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("NotificationClicker", logLevel, function12, null);
+            ((LogMessageImpl) logMessageObtain2).str1 = str2;
+            logBuffer2.commit(logMessageObtain2);
             Animator animator = expandableNotificationRow.mTranslateAnim;
             if (animator != null) {
                 animator.cancel();
@@ -137,7 +134,7 @@ public final class NotificationClicker implements View.OnClickListener {
             Function1 function13 = new Function1() { // from class: com.android.systemui.statusbar.notification.NotificationClickerLogger$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     switch (i4) {
                         case 0:
@@ -154,9 +151,9 @@ public final class NotificationClicker implements View.OnClickListener {
                 }
             };
             LogBuffer logBuffer3 = notificationClickerLogger3.buffer;
-            LogMessage obtain3 = logBuffer3.obtain("NotificationClicker", logLevel, function13, null);
-            ((LogMessageImpl) obtain3).str1 = str3;
-            logBuffer3.commit(obtain3);
+            LogMessage logMessageObtain3 = logBuffer3.obtain("NotificationClicker", logLevel, function13, null);
+            ((LogMessageImpl) logMessageObtain3).str1 = str3;
+            logBuffer3.commit(logMessageObtain3);
             ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow.mNotificationParent;
             Animator animator2 = expandableNotificationRow2.mTranslateAnim;
             if (animator2 != null) {
@@ -175,7 +172,7 @@ public final class NotificationClicker implements View.OnClickListener {
             Function1 function14 = new Function1() { // from class: com.android.systemui.statusbar.notification.NotificationClickerLogger$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     switch (i5) {
                         case 0:
@@ -192,9 +189,9 @@ public final class NotificationClicker implements View.OnClickListener {
                 }
             };
             LogBuffer logBuffer4 = notificationClickerLogger4.buffer;
-            LogMessage obtain4 = logBuffer4.obtain("NotificationClicker", logLevel, function14, null);
-            ((LogMessageImpl) obtain4).str1 = str4;
-            logBuffer4.commit(obtain4);
+            LogMessage logMessageObtain4 = logBuffer4.obtain("NotificationClicker", logLevel, function14, null);
+            ((LogMessageImpl) logMessageObtain4).str1 = str4;
+            logBuffer4.commit(logMessageObtain4);
             return;
         }
         if (expandableNotificationRow.areGutsExposed()) {
@@ -204,7 +201,7 @@ public final class NotificationClicker implements View.OnClickListener {
             Function1 function15 = new Function1() { // from class: com.android.systemui.statusbar.notification.NotificationClickerLogger$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     switch (i) {
                         case 0:
@@ -221,16 +218,16 @@ public final class NotificationClicker implements View.OnClickListener {
                 }
             };
             LogBuffer logBuffer5 = notificationClickerLogger5.buffer;
-            LogMessage obtain5 = logBuffer5.obtain("NotificationClicker", logLevel, function15, null);
-            ((LogMessageImpl) obtain5).str1 = str5;
-            logBuffer5.commit(obtain5);
+            LogMessage logMessageObtain5 = logBuffer5.obtain("NotificationClicker", logLevel, function15, null);
+            ((LogMessageImpl) logMessageObtain5).str1 = str5;
+            logBuffer5.commit(logMessageObtain5);
             return;
         }
         expandableNotificationRow.mJustClicked = true;
         DejankUtils.postAfterTraversal(new Runnable() { // from class: com.android.systemui.statusbar.notification.NotificationClicker$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ExpandableNotificationRow.this.mJustClicked = false;
+                expandableNotificationRow.mJustClicked = false;
             }
         });
         if (LsRune.SECURITY_SWIPE_BOUNCER) {

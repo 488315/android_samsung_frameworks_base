@@ -14,13 +14,11 @@ import com.android.systemui.util.sensors.AsyncSensorManager;
 import com.android.systemui.util.settings.SystemSettings;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AODScreenBrightness extends DozeScreenBrightness {
     public int[] mBrightnessValues;
     public int mDozeMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.AODScreenBrightness$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -82,17 +80,18 @@ public class AODScreenBrightness extends DozeScreenBrightness {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateDozeBrightness(int i, int i2, int i3) {
         boolean z = this.mDozeMode != i;
         this.mDozeMode = i;
         if (i3 == -1) {
             if (i2 >= 0) {
                 int[] iArr = this.mBrightnessValues;
-                if (i2 < iArr.length) {
-                    i3 = iArr[i2];
-                }
+                i3 = i2 >= iArr.length ? -1 : iArr[i2];
             }
-            i3 = -1;
         }
         boolean z2 = i3 >= 0;
         if (z || z2) {

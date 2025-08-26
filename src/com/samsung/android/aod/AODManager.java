@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.view.Display;
-import com.samsung.android.aod.AODManager;
 import com.samsung.android.aod.IAODCallback;
 import com.samsung.android.aod.IAODDozeCallback;
 import com.samsung.android.aod.IAODManager;
@@ -261,7 +260,7 @@ public class AODManager {
     }
 
     public void registerAODListener(AODListener aODListener) {
-        AODCallbackDelegate aODCallbackDelegate;
+        AODCallbackDelegate next;
         if (getService() == null) {
             return;
         }
@@ -273,19 +272,19 @@ public class AODManager {
             Iterator<AODCallbackDelegate> it = this.mAODCallbackDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    aODCallbackDelegate = null;
+                    next = null;
                     break;
                 }
-                aODCallbackDelegate = it.next();
-                if (aODCallbackDelegate.getListener() != null && aODCallbackDelegate.getListener().equals(aODListener)) {
+                next = it.next();
+                if (next.getListener() != null && next.getListener().equals(aODListener)) {
                     break;
                 }
             }
-            if (aODCallbackDelegate == null) {
-                AODCallbackDelegate aODCallbackDelegate2 = new AODCallbackDelegate(this, aODListener);
-                this.mAODCallbackDelegates.add(aODCallbackDelegate2);
+            if (next == null) {
+                AODCallbackDelegate aODCallbackDelegate = new AODCallbackDelegate(this, aODListener);
+                this.mAODCallbackDelegates.add(aODCallbackDelegate);
                 try {
-                    this.mService.registerAODListener(aODCallbackDelegate2);
+                    this.mService.registerAODListener(aODCallbackDelegate);
                 } catch (RemoteException e) {
                     Log.w(TAG, "AODManagerService RuntimeException?\n" + Log.getStackTraceString(e));
                 }
@@ -296,7 +295,7 @@ public class AODManager {
     }
 
     public void unregisterAODListener(AODListener aODListener) {
-        AODCallbackDelegate aODCallbackDelegate;
+        AODCallbackDelegate next;
         if (getService() == null) {
             return;
         }
@@ -308,21 +307,21 @@ public class AODManager {
             Iterator<AODCallbackDelegate> it = this.mAODCallbackDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    aODCallbackDelegate = null;
+                    next = null;
                     break;
                 }
-                aODCallbackDelegate = it.next();
-                if (aODCallbackDelegate.getListener() != null && aODCallbackDelegate.getListener().equals(aODListener)) {
+                next = it.next();
+                if (next.getListener() != null && next.getListener().equals(aODListener)) {
                     break;
                 }
             }
-            if (aODCallbackDelegate == null) {
+            if (next == null) {
                 Log.w(TAG, "unregisterAODListener : cannot find the listener");
                 return;
             }
             try {
-                this.mService.unregisterAODListener(aODCallbackDelegate);
-                this.mAODCallbackDelegates.remove(aODCallbackDelegate);
+                this.mService.unregisterAODListener(next);
+                this.mAODCallbackDelegates.remove(next);
             } catch (RemoteException e) {
                 Log.w(TAG, "AODManagerService RuntimeException?\n" + Log.getStackTraceString(e));
             }
@@ -344,7 +343,7 @@ public class AODManager {
             this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: com.samsung.android.aod.AODManager$AODCallbackDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AODManager.AODCallbackDelegate.this.lambda$onScreenTurningOn$0();
+                    this.f$0.lambda$onScreenTurningOn$0();
                 }
             });
         }

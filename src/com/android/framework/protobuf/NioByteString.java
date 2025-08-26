@@ -64,9 +64,9 @@ final class NioByteString extends ByteString.LeafByteString {
 
     @Override // com.android.framework.protobuf.ByteString
     protected void copyToInternal(byte[] bArr, int i, int i2, int i3) {
-        ByteBuffer slice = this.buffer.slice();
-        slice.position(i);
-        slice.get(bArr, i2, i3);
+        ByteBuffer byteBufferSlice = this.buffer.slice();
+        byteBufferSlice.position(i);
+        byteBufferSlice.get(bArr, i2, i3);
     }
 
     @Override // com.android.framework.protobuf.ByteString
@@ -112,17 +112,17 @@ final class NioByteString extends ByteString.LeafByteString {
     protected String toStringInternal(Charset charset) {
         byte[] byteArray;
         int length;
-        int i;
+        int iArrayOffset;
         if (this.buffer.hasArray()) {
             byteArray = this.buffer.array();
-            i = this.buffer.arrayOffset() + this.buffer.position();
+            iArrayOffset = this.buffer.arrayOffset() + this.buffer.position();
             length = this.buffer.remaining();
         } else {
             byteArray = toByteArray();
             length = byteArray.length;
-            i = 0;
+            iArrayOffset = 0;
         }
-        return new String(byteArray, i, length, charset);
+        return new String(byteArray, iArrayOffset, length, charset);
     }
 
     @Override // com.android.framework.protobuf.ByteString
@@ -213,9 +213,9 @@ final class NioByteString extends ByteString.LeafByteString {
                 if (!this.buf.hasRemaining()) {
                     return -1;
                 }
-                int min = Math.min(i2, this.buf.remaining());
-                this.buf.get(bArr, i, min);
-                return min;
+                int iMin = Math.min(i2, this.buf.remaining());
+                this.buf.get(bArr, i, iMin);
+                return iMin;
             }
         };
     }
@@ -229,9 +229,9 @@ final class NioByteString extends ByteString.LeafByteString {
         if (i < this.buffer.position() || i2 > this.buffer.limit() || i > i2) {
             throw new IllegalArgumentException(String.format("Invalid indices [%d, %d]", Integer.valueOf(i), Integer.valueOf(i2)));
         }
-        ByteBuffer slice = this.buffer.slice();
-        slice.position(i - this.buffer.position());
-        slice.limit(i2 - this.buffer.position());
-        return slice;
+        ByteBuffer byteBufferSlice = this.buffer.slice();
+        byteBufferSlice.position(i - this.buffer.position());
+        byteBufferSlice.limit(i2 - this.buffer.position());
+        return byteBufferSlice;
     }
 }

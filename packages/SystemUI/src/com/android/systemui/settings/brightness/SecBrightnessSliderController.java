@@ -12,6 +12,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.hardware.display.BrightnessInfo;
+import android.provider.Settings;
 import android.view.ViewConfiguration;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.android.systemui.R;
 import com.android.systemui.settings.brightness.SecBrightnessSliderController;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.SecBrightnessMirrorController;
+import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.volume.util.ColorUtils;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
@@ -28,7 +30,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecBrightnessSliderController {
     public static final Companion Companion = new Companion(null);
@@ -40,6 +41,7 @@ public final class SecBrightnessSliderController {
     public SystemUIDialog highBrightnessDialog;
     public boolean highBrightnessDialogEnabled;
     public Toast highBrightnessModeToast;
+    public boolean isAdaptiveBrightness;
     public boolean isExpanded;
     public boolean isLongPressed;
     public boolean isSliderDisabled;
@@ -58,9 +60,7 @@ public final class SecBrightnessSliderController {
     public final PointF downPoint = new PointF();
     public boolean sliderEnabled = true;
     public int thumbThreshold = 26;
-    public boolean isAdaptiveBrightness = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -114,29 +114,32 @@ public final class SecBrightnessSliderController {
             }
         });
         this.touchSlop = ViewConfiguration.get(brightnessSliderView.getContext()).getScaledTouchSlop();
+        this.isAdaptiveBrightness = true;
+        this.highBrightnessDialogEnabled = Settings.System.getIntForUser(brightnessSliderView.getContext().getContentResolver(), SettingsHelper.INDEX_MAX_BRIGHTNESS_DIALOG_SHOWN, 0, -2) == 0;
+        this.isAdaptiveBrightness = Settings.System.getIntForUser(brightnessSliderView.getContext().getContentResolver(), "screen_brightness_mode", 0, -2) == 1;
         this.collapsedThumb = brightnessSliderView.getContext().getDrawable(R.drawable.sec_qs_slider_thumb_collapsed);
         this.expandedThumb = brightnessSliderView.getContext().getDrawable(R.drawable.sec_qs_slider_thumb);
         this.transparentThumb = brightnessSliderView.getContext().getDrawable(R.drawable.sec_qs_slider_transparent_thumb);
-        ValueAnimator ofInt = ValueAnimator.ofInt(0, 255);
-        ofInt.setDuration(200L);
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, 255);
+        valueAnimatorOfInt.setDuration(200L);
         SecBrightnessSliderView secBrightnessSliderView = brightnessSliderView.mSecBrightnessSliderView;
         final ToggleSeekBar slider = secBrightnessSliderView != null ? secBrightnessSliderView.getSlider() : null;
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$thumbAnimator$1$1
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$thumbAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 Drawable thumb;
-                ToggleSeekBar toggleSeekBar = ToggleSeekBar.this;
+                ToggleSeekBar toggleSeekBar = slider;
                 if (toggleSeekBar == null || (thumb = toggleSeekBar.getThumb()) == null) {
                     return;
                 }
                 thumb.setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
             }
         });
-        ofInt.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$thumbAnimator$1$2
+        valueAnimatorOfInt.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$thumbAnimator$1$2
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 Drawable thumb;
-                SecBrightnessSliderController secBrightnessSliderController = SecBrightnessSliderController.this;
+                SecBrightnessSliderController secBrightnessSliderController = this.this$0;
                 if (secBrightnessSliderController.isThumbShowing) {
                     return;
                 }
@@ -154,7 +157,7 @@ public final class SecBrightnessSliderController {
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
                 Drawable thumb;
-                SecBrightnessSliderController secBrightnessSliderController = SecBrightnessSliderController.this;
+                SecBrightnessSliderController secBrightnessSliderController = this.this$0;
                 if (secBrightnessSliderController.isThumbShowing) {
                     ToggleSeekBar toggleSeekBar = slider;
                     if (toggleSeekBar != null) {
@@ -176,10 +179,10 @@ public final class SecBrightnessSliderController {
             public final void onAnimationRepeat(Animator animator) {
             }
         });
-        this.thumbAnimator = ofInt;
+        this.thumbAnimator = valueAnimatorOfInt;
     }
 
-    public final boolean isSliderEnabled() {
+    public final boolean isSliderEnabled() throws PackageManager.NameNotFoundException {
         ApplicationInfo applicationInfo;
         Lazy lazy = this.packageManager$delegate;
         BrightnessInfo brightnessInfo = this.view.getContext().getDisplay().getBrightnessInfo();
@@ -187,16 +190,16 @@ public final class SecBrightnessSliderController {
             return false;
         }
         this.sliderEnabled = !brightnessInfo.isBrightnessOverrideByWindow;
-        String str = brightnessInfo.screenBrightnessOverridePackageByWindow;
+        String string = brightnessInfo.screenBrightnessOverridePackageByWindow;
         try {
-            applicationInfo = ((PackageManager) lazy.getValue()).getApplicationInfo(str, 0);
+            applicationInfo = ((PackageManager) lazy.getValue()).getApplicationInfo(string, 0);
         } catch (PackageManager.NameNotFoundException unused) {
             applicationInfo = null;
         }
         if (applicationInfo != null) {
-            str = ((PackageManager) lazy.getValue()).getApplicationLabel(applicationInfo).toString();
+            string = ((PackageManager) lazy.getValue()).getApplicationLabel(applicationInfo).toString();
         }
-        this.appUsingBrightness = str;
+        this.appUsingBrightness = string;
         return this.sliderEnabled;
     }
 
@@ -206,10 +209,10 @@ public final class SecBrightnessSliderController {
             toast.cancel();
         }
         Context context = this.view.getContext();
-        Toast makeText = context != null ? Toast.makeText(context, context.getString(R.string.sec_brightness_slider_hbm_text), 0) : null;
-        this.highBrightnessModeToast = makeText;
-        if (makeText != null) {
-            makeText.show();
+        Toast toastMakeText = context != null ? Toast.makeText(context, context.getString(R.string.sec_brightness_slider_hbm_text), 0) : null;
+        this.highBrightnessModeToast = toastMakeText;
+        if (toastMakeText != null) {
+            toastMakeText.show();
         }
     }
 
@@ -219,10 +222,10 @@ public final class SecBrightnessSliderController {
             toast.cancel();
         }
         Context context = this.view.getContext();
-        Toast makeText = context != null ? Toast.makeText(context, context.getString(R.string.sec_brightness_app_usage_toast, this.appUsingBrightness), 0) : null;
-        this.sliderDisableToast = makeText;
-        if (makeText != null) {
-            makeText.show();
+        Toast toastMakeText = context != null ? Toast.makeText(context, context.getString(R.string.sec_brightness_app_usage_toast, this.appUsingBrightness), 0) : null;
+        this.sliderDisableToast = toastMakeText;
+        if (toastMakeText != null) {
+            toastMakeText.show();
         }
     }
 

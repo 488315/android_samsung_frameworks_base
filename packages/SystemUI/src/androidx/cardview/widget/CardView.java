@@ -3,6 +3,7 @@ package androidx.cardview.widget;
 import android.R;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import androidx.cardview.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CardView extends FrameLayout {
     public static final int[] COLOR_BACKGROUND_ATTR = {R.attr.colorBackground};
@@ -23,7 +23,6 @@ public class CardView extends FrameLayout {
     public final boolean mPreventCornerOverlap;
     public final Rect mShadowBounds;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.cardview.widget.CardView$1, reason: invalid class name */
     public class AnonymousClass1 {
         public Drawable mCardBackground;
@@ -82,22 +81,22 @@ public class CardView extends FrameLayout {
         this(context, attributeSet, com.android.systemui.R.attr.cardViewStyle);
     }
 
-    public CardView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public CardView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         int color;
-        ColorStateList valueOf;
+        ColorStateList colorStateListValueOf;
+        super(context, attributeSet, i);
         Rect rect = new Rect();
         this.mContentPadding = rect;
         this.mShadowBounds = new Rect();
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mCardViewDelegate = anonymousClass1;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CardView, i, com.android.systemui.R.style.CardView);
-        if (obtainStyledAttributes.hasValue(2)) {
-            valueOf = obtainStyledAttributes.getColorStateList(2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CardView, i, com.android.systemui.R.style.CardView);
+        if (typedArrayObtainStyledAttributes.hasValue(2)) {
+            colorStateListValueOf = typedArrayObtainStyledAttributes.getColorStateList(2);
         } else {
-            TypedArray obtainStyledAttributes2 = getContext().obtainStyledAttributes(COLOR_BACKGROUND_ATTR);
-            int color2 = obtainStyledAttributes2.getColor(0, 0);
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = getContext().obtainStyledAttributes(COLOR_BACKGROUND_ATTR);
+            int color2 = typedArrayObtainStyledAttributes2.getColor(0, 0);
+            typedArrayObtainStyledAttributes2.recycle();
             float[] fArr = new float[3];
             Color.colorToHSV(color2, fArr);
             if (fArr[2] > 0.5f) {
@@ -105,25 +104,25 @@ public class CardView extends FrameLayout {
             } else {
                 color = getResources().getColor(com.android.systemui.R.color.cardview_dark_background);
             }
-            valueOf = ColorStateList.valueOf(color);
+            colorStateListValueOf = ColorStateList.valueOf(color);
         }
-        float dimension = obtainStyledAttributes.getDimension(3, 0.0f);
-        float dimension2 = obtainStyledAttributes.getDimension(4, 0.0f);
-        float dimension3 = obtainStyledAttributes.getDimension(5, 0.0f);
-        this.mCompatPadding = obtainStyledAttributes.getBoolean(7, false);
-        this.mPreventCornerOverlap = obtainStyledAttributes.getBoolean(6, true);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(8, 0);
-        rect.left = obtainStyledAttributes.getDimensionPixelSize(10, dimensionPixelSize);
-        rect.top = obtainStyledAttributes.getDimensionPixelSize(12, dimensionPixelSize);
-        rect.right = obtainStyledAttributes.getDimensionPixelSize(11, dimensionPixelSize);
-        rect.bottom = obtainStyledAttributes.getDimensionPixelSize(9, dimensionPixelSize);
+        float dimension = typedArrayObtainStyledAttributes.getDimension(3, 0.0f);
+        float dimension2 = typedArrayObtainStyledAttributes.getDimension(4, 0.0f);
+        float dimension3 = typedArrayObtainStyledAttributes.getDimension(5, 0.0f);
+        this.mCompatPadding = typedArrayObtainStyledAttributes.getBoolean(7, false);
+        this.mPreventCornerOverlap = typedArrayObtainStyledAttributes.getBoolean(6, true);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, 0);
+        rect.left = typedArrayObtainStyledAttributes.getDimensionPixelSize(10, dimensionPixelSize);
+        rect.top = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, dimensionPixelSize);
+        rect.right = typedArrayObtainStyledAttributes.getDimensionPixelSize(11, dimensionPixelSize);
+        rect.bottom = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, dimensionPixelSize);
         dimension3 = dimension2 > dimension3 ? dimension2 : dimension3;
-        obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         CardViewApi21Impl cardViewApi21Impl = IMPL;
         cardViewApi21Impl.getClass();
-        RoundRectDrawable roundRectDrawable = new RoundRectDrawable(valueOf, dimension);
+        RoundRectDrawable roundRectDrawable = new RoundRectDrawable(colorStateListValueOf, dimension);
         anonymousClass1.mCardBackground = roundRectDrawable;
         CardView cardView = CardView.this;
         cardView.setBackgroundDrawable(roundRectDrawable);

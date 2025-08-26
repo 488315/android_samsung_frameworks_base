@@ -76,9 +76,9 @@ public interface ISubscribeResponseCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISubscribeResponseCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISubscribeResponseCallback)) {
-                return (ISubscribeResponseCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISubscribeResponseCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISubscribeResponseCallback)) {
+                return (ISubscribeResponseCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -117,26 +117,26 @@ public interface ISubscribeResponseCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCommandError(readInt);
+                onCommandError(i3);
             } else if (i == 2) {
                 SipDetails sipDetails = (SipDetails) parcel.readTypedObject(SipDetails.CREATOR);
                 parcel.enforceNoDataAvail();
                 onNetworkResponse(sipDetails);
             } else if (i == 3) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                onNotifyCapabilitiesUpdate(createStringArrayList);
+                onNotifyCapabilitiesUpdate(arrayListCreateStringArrayList);
             } else if (i == 4) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(RcsContactTerminatedReason.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(RcsContactTerminatedReason.CREATOR);
                 parcel.enforceNoDataAvail();
-                onResourceTerminated(createTypedArrayList);
+                onResourceTerminated(arrayListCreateTypedArrayList);
             } else if (i == 5) {
-                String readString = parcel.readString();
-                long readLong = parcel.readLong();
+                String string = parcel.readString();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onTerminated(readString, readLong);
+                onTerminated(string, j);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -161,62 +161,62 @@ public interface ISubscribeResponseCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
             public void onCommandError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
             public void onNetworkResponse(SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
             public void onNotifyCapabilitiesUpdate(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
             public void onResourceTerminated(List<RcsContactTerminatedReason> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
             public void onTerminated(String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

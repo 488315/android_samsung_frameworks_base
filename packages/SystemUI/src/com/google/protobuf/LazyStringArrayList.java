@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LazyStringArrayList extends AbstractProtobufList implements LazyStringList, RandomAccess {
     public final List list;
@@ -91,15 +90,15 @@ public class LazyStringArrayList extends AbstractProtobufList implements LazyStr
     @Override // com.google.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final Object remove(int i) {
         ensureIsMutable();
-        Object remove = this.list.remove(i);
+        Object objRemove = this.list.remove(i);
         ((AbstractList) this).modCount++;
-        if (remove instanceof String) {
-            return (String) remove;
+        if (objRemove instanceof String) {
+            return (String) objRemove;
         }
-        if (!(remove instanceof ByteString)) {
-            return new String((byte[]) remove, Internal.UTF_8);
+        if (!(objRemove instanceof ByteString)) {
+            return new String((byte[]) objRemove, Internal.UTF_8);
         }
-        ByteString byteString = (ByteString) remove;
+        ByteString byteString = (ByteString) objRemove;
         byteString.getClass();
         return byteString.size() == 0 ? "" : byteString.toStringInternal(Internal.UTF_8);
     }
@@ -139,9 +138,9 @@ public class LazyStringArrayList extends AbstractProtobufList implements LazyStr
         if (collection instanceof LazyStringList) {
             collection = ((LazyStringList) collection).getUnderlyingElements();
         }
-        boolean addAll = this.list.addAll(i, collection);
+        boolean zAddAll = this.list.addAll(i, collection);
         ((AbstractList) this).modCount++;
-        return addAll;
+        return zAddAll;
     }
 
     @Override // com.google.protobuf.LazyStringList

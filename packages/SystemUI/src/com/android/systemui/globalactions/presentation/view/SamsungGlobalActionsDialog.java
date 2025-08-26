@@ -41,15 +41,14 @@ import com.samsung.android.globalactions.util.ThemeChecker;
 import com.samsung.android.globalactions.util.ToastController;
 import com.samsung.android.globalactions.util.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SamsungGlobalActionsDialog extends SamsungGlobalActionsDialogBase {
     public final CoverUtilWrapper mCoverUtilWrapper;
     public final SysUiState mSysUiState;
 
     public SamsungGlobalActionsDialog(Context context, GlobalActions.GlobalActionsManager globalActionsManager) {
-        super(context, new SystemUIResourceFactory());
         ConditionChecker conditionChecker;
+        super(context, new SystemUIResourceFactory());
         ((SamsungGlobalActionsDialogBase) this).mDialogStyle = R.style.Theme_SystemUI_Dialog_GlobalActions;
         SystemUIGlobalActionsManager systemUIGlobalActionsManager = new SystemUIGlobalActionsManager(globalActionsManager);
         DefaultUtilFactory defaultUtilFactory = new DefaultUtilFactory(((SamsungGlobalActionsDialogBase) this).mContext, systemUIGlobalActionsManager);

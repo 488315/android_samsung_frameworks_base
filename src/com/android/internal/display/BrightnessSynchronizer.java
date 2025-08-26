@@ -54,9 +54,9 @@ public class BrightnessSynchronizer {
     }
 
     static {
-        int max = Math.max(Math.max(255, Resources.getSystem().getInteger(R.integer.config_screenBrightnessExtendedMaximum)), Resources.getSystem().getInteger(R.integer.config_coverScreenBrightnessExtendedMaximum));
-        sScreenExtendedBrightnessRangeMaximumInt = max;
-        sScreenExtendedBrightnessRangeMaximumFloat = max / 255.0f;
+        int iMax = Math.max(Math.max(255, Resources.getSystem().getInteger(R.integer.config_screenBrightnessExtendedMaximum)), Resources.getSystem().getInteger(R.integer.config_coverScreenBrightnessExtendedMaximum));
+        sScreenExtendedBrightnessRangeMaximumInt = iMax;
+        sScreenExtendedBrightnessRangeMaximumFloat = iMax / 255.0f;
         SUB_SCREEN_BRIGHTNESS_URI = Settings.System.getUriFor(Settings.System.SUB_SCREEN_BRIGHTNESS);
     }
 
@@ -102,14 +102,12 @@ public class BrightnessSynchronizer {
         this.mDisplaySynchronizers.append(0, new DisplaySynchronizer(0, this.mDisplayManager, new Supplier() { // from class: com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                int screenBrightnessInt;
-                screenBrightnessInt = BrightnessSynchronizer.this.getScreenBrightnessInt();
-                return Integer.valueOf(screenBrightnessInt);
+                return Integer.valueOf(this.f$0.getScreenBrightnessInt());
             }
         }, new Consumer() { // from class: com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BrightnessSynchronizer.this.setScreenBrightnessInt(((Integer) obj).intValue());
+                this.f$0.setScreenBrightnessInt(((Integer) obj).intValue());
             }
         }));
         this.mBrightnessSyncObserver.startObserving(this.mHandler);
@@ -227,121 +225,49 @@ public class BrightnessSynchronizer {
     
         if (r9 != 2) goto L23;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x009d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x009d, code lost:
     
         if (r9 == 1) goto L21;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void updateScreenBrightness(int r9) {
-        /*
-            r8 = this;
-            int r0 = r8.getScreenBrightnessInt()
-            float r1 = r8.getScreenBrightnessFloat()
-            int r2 = brightnessFloatToInt(r1)
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r4 = "updateScreenBrightness: type="
-            r3.<init>(r4)
-            r3.append(r9)
-            java.lang.String r4 = " mPreferredSettingValue="
-            r3.append(r4)
-            float r4 = r8.mPreferredSettingValue
-            r3.append(r4)
-            java.lang.String r4 = "("
-            r3.append(r4)
-            float r5 = r8.mPreferredSettingValue
-            int r5 = brightnessFloatToInt(r5)
-            r3.append(r5)
-            java.lang.String r5 = ") currentBrightnessInt="
-            r3.append(r5)
-            r3.append(r0)
-            java.lang.String r5 = " currentBrightnessIntFromFloat="
-            r3.append(r5)
-            r3.append(r2)
-            r3.append(r4)
-            r3.append(r1)
-            java.lang.String r4 = ")"
-            r3.append(r4)
-            java.lang.String r3 = r3.toString()
-            java.lang.String r4 = "BrightnessSynchronizer"
-            android.util.Slog.d(r4, r3)
-            if (r0 != r2) goto L7a
-            float r9 = r8.mPreferredSettingValue
-            int r9 = (r9 > r1 ? 1 : (r9 == r1 ? 0 : -1))
-            if (r9 == 0) goto L79
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r0 = "synced: mPreferredSettingValue: "
-            r9.<init>(r0)
-            float r0 = r8.mPreferredSettingValue
-            r9.append(r0)
-            java.lang.String r0 = " currentBrightnessFloat: "
-            r9.append(r0)
-            r9.append(r1)
-            java.lang.String r9 = r9.toString()
-            android.util.Slog.d(r4, r9)
-            r8.mPreferredSettingValue = r1
-        L79:
-            return
-        L7a:
-            float r3 = r8.mPreferredSettingValue
-            boolean r3 = java.lang.Float.isNaN(r3)
-            java.lang.String r5 = " -> "
-            r6 = 2
-            r7 = 1
-            if (r3 == 0) goto L8c
-            if (r9 != r7) goto L89
-            goto Lca
-        L89:
-            if (r9 != r6) goto Lca
-            goto L9f
-        L8c:
-            float r3 = r8.mPreferredSettingValue
-            int r3 = brightnessFloatToInt(r3)
-            if (r0 != r3) goto L95
-            goto L9f
-        L95:
-            if (r2 != r3) goto L98
-            goto Lca
-        L98:
-            java.lang.String r2 = "onChange: both changed"
-            android.util.Slog.e(r4, r2)
-            if (r9 != r7) goto Lca
-        L9f:
-            int r9 = brightnessFloatToInt(r1)
-            r8.mPreferredSettingValue = r1
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "onChange: last float changed: "
-            r0.<init>(r2)
-            r0.append(r1)
-            r0.append(r5)
-            r0.append(r9)
-            java.lang.String r0 = r0.toString()
-            android.util.Slog.d(r4, r0)
-            android.content.Context r8 = r8.mContext
-            android.content.ContentResolver r8 = r8.getContentResolver()
-            java.lang.String r0 = "screen_brightness"
-            r1 = -2
-            android.provider.Settings.System.putIntForUser(r8, r0, r9, r1)
-            return
-        Lca:
-            float r9 = brightnessIntToFloat(r0)
-            r8.mPreferredSettingValue = r9
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "onChange: last int changed: "
-            r1.<init>(r2)
-            r1.append(r0)
-            r1.append(r5)
-            r1.append(r9)
-            java.lang.String r0 = r1.toString()
-            android.util.Slog.d(r4, r0)
-            android.hardware.display.DisplayManager r8 = r8.mDisplayManager
-            r0 = 0
-            r8.setBrightness(r0, r9)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.display.BrightnessSynchronizer.updateScreenBrightness(int):void");
+    private void updateScreenBrightness(int i) {
+        int screenBrightnessInt = getScreenBrightnessInt();
+        float screenBrightnessFloat = getScreenBrightnessFloat();
+        int iBrightnessFloatToInt = brightnessFloatToInt(screenBrightnessFloat);
+        Slog.d(TAG, "updateScreenBrightness: type=" + i + " mPreferredSettingValue=" + this.mPreferredSettingValue + NavigationBarInflaterView.KEY_CODE_START + brightnessFloatToInt(this.mPreferredSettingValue) + ") currentBrightnessInt=" + screenBrightnessInt + " currentBrightnessIntFromFloat=" + iBrightnessFloatToInt + NavigationBarInflaterView.KEY_CODE_START + screenBrightnessFloat + NavigationBarInflaterView.KEY_CODE_END);
+        if (screenBrightnessInt == iBrightnessFloatToInt) {
+            if (this.mPreferredSettingValue != screenBrightnessFloat) {
+                Slog.d(TAG, "synced: mPreferredSettingValue: " + this.mPreferredSettingValue + " currentBrightnessFloat: " + screenBrightnessFloat);
+                this.mPreferredSettingValue = screenBrightnessFloat;
+                return;
+            }
+            return;
+        }
+        if (!Float.isNaN(this.mPreferredSettingValue)) {
+            int iBrightnessFloatToInt2 = brightnessFloatToInt(this.mPreferredSettingValue);
+            if (screenBrightnessInt != iBrightnessFloatToInt2) {
+                if (iBrightnessFloatToInt != iBrightnessFloatToInt2) {
+                    Slog.e(TAG, "onChange: both changed");
+                }
+                float fBrightnessIntToFloat = brightnessIntToFloat(screenBrightnessInt);
+                this.mPreferredSettingValue = fBrightnessIntToFloat;
+                Slog.d(TAG, "onChange: last int changed: " + screenBrightnessInt + " -> " + fBrightnessIntToFloat);
+                this.mDisplayManager.setBrightness(0, fBrightnessIntToFloat);
+            }
+            int iBrightnessFloatToInt3 = brightnessFloatToInt(screenBrightnessFloat);
+            this.mPreferredSettingValue = screenBrightnessFloat;
+            Slog.d(TAG, "onChange: last float changed: " + screenBrightnessFloat + " -> " + iBrightnessFloatToInt3);
+            Settings.System.putIntForUser(this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, iBrightnessFloatToInt3, -2);
+            return;
+        }
+        if (i != 1) {
+        }
+        float fBrightnessIntToFloat2 = brightnessIntToFloat(screenBrightnessInt);
+        this.mPreferredSettingValue = fBrightnessIntToFloat2;
+        Slog.d(TAG, "onChange: last int changed: " + screenBrightnessInt + " -> " + fBrightnessIntToFloat2);
+        this.mDisplayManager.setBrightness(0, fBrightnessIntToFloat2);
     }
 
     public static boolean floatEquals(float f, float f2) {
@@ -359,12 +285,12 @@ public class BrightnessSynchronizer {
         if (i == -1) {
             return Float.NaN;
         }
-        float convertGammaToLinear = BrightnessUtils.convertGammaToLinear(MathUtils.norm(1.0f, 255.0f, i));
+        float fConvertGammaToLinear = BrightnessUtils.convertGammaToLinear(MathUtils.norm(1.0f, 255.0f, i));
         Display display = context.getDisplay();
         if (display == null || (brightnessInfo = display.getBrightnessInfo()) == null) {
             return Float.NaN;
         }
-        return MathUtils.lerp(brightnessInfo.brightnessMinimum, brightnessInfo.brightnessMaximum, convertGammaToLinear);
+        return MathUtils.lerp(brightnessInfo.brightnessMinimum, brightnessInfo.brightnessMaximum, fConvertGammaToLinear);
     }
 
     public static int brightnessFloatToIntSetting(Context context, float f) {
@@ -582,12 +508,12 @@ public class BrightnessSynchronizer {
         }
 
         public void updateScreenBrightness(int i) {
-            int constrainBrightnessInt = constrainBrightnessInt(this.mScreenBrightnessIntGetter.get().intValue());
+            int iConstrainBrightnessInt = constrainBrightnessInt(this.mScreenBrightnessIntGetter.get().intValue());
             float screenBrightnessFloat = getScreenBrightnessFloat();
-            int brightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(screenBrightnessFloat);
-            Slog.d(BrightnessSynchronizer.TAG, "updateScreenBrightness: displayId=" + this.mDisplayId + " type=" + i + " mPreferredSettingValue=" + this.mPreferredSettingValue + NavigationBarInflaterView.KEY_CODE_START + BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue) + ") currentBrightnessInt=" + constrainBrightnessInt + " currentBrightnessIntFromFloat=" + brightnessFloatToInt + NavigationBarInflaterView.KEY_CODE_START + screenBrightnessFloat + NavigationBarInflaterView.KEY_CODE_END);
-            if (constrainBrightnessInt != brightnessFloatToInt) {
-                syncBrightnessValue(constrainBrightnessInt, screenBrightnessFloat, checkFloatTypeChanged(i, constrainBrightnessInt, brightnessFloatToInt));
+            int iBrightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(screenBrightnessFloat);
+            Slog.d(BrightnessSynchronizer.TAG, "updateScreenBrightness: displayId=" + this.mDisplayId + " type=" + i + " mPreferredSettingValue=" + this.mPreferredSettingValue + NavigationBarInflaterView.KEY_CODE_START + BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue) + ") currentBrightnessInt=" + iConstrainBrightnessInt + " currentBrightnessIntFromFloat=" + iBrightnessFloatToInt + NavigationBarInflaterView.KEY_CODE_START + screenBrightnessFloat + NavigationBarInflaterView.KEY_CODE_END);
+            if (iConstrainBrightnessInt != iBrightnessFloatToInt) {
+                syncBrightnessValue(iConstrainBrightnessInt, screenBrightnessFloat, checkFloatTypeChanged(i, iConstrainBrightnessInt, iBrightnessFloatToInt));
                 return;
             }
             if (this.mPreferredSettingValue != screenBrightnessFloat) {
@@ -598,16 +524,16 @@ public class BrightnessSynchronizer {
 
         private void syncBrightnessValue(int i, float f, boolean z) {
             if (z) {
-                int brightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(f);
+                int iBrightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(f);
                 this.mPreferredSettingValue = f;
-                Slog.d(BrightnessSynchronizer.TAG, "onChange: last float changed: " + f + " -> " + brightnessFloatToInt);
-                this.mScreenBrightnessIntSetter.accept(Integer.valueOf(brightnessFloatToInt));
+                Slog.d(BrightnessSynchronizer.TAG, "onChange: last float changed: " + f + " -> " + iBrightnessFloatToInt);
+                this.mScreenBrightnessIntSetter.accept(Integer.valueOf(iBrightnessFloatToInt));
                 return;
             }
-            float brightnessIntToFloat = BrightnessSynchronizer.brightnessIntToFloat(i);
-            this.mPreferredSettingValue = brightnessIntToFloat;
-            Slog.d(BrightnessSynchronizer.TAG, "onChange: last int changed: " + i + " -> " + brightnessIntToFloat);
-            setScreenBrightnessFloat(brightnessIntToFloat);
+            float fBrightnessIntToFloat = BrightnessSynchronizer.brightnessIntToFloat(i);
+            this.mPreferredSettingValue = fBrightnessIntToFloat;
+            Slog.d(BrightnessSynchronizer.TAG, "onChange: last int changed: " + i + " -> " + fBrightnessIntToFloat);
+            setScreenBrightnessFloat(fBrightnessIntToFloat);
         }
 
         private boolean checkFloatTypeChanged(int i, int i2, int i3) {
@@ -617,11 +543,11 @@ public class BrightnessSynchronizer {
             if (Float.isNaN(this.mPreferredSettingValue)) {
                 return i != 1 && i == 2;
             }
-            int brightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue);
-            if (i2 == brightnessFloatToInt) {
+            int iBrightnessFloatToInt = BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue);
+            if (i2 == iBrightnessFloatToInt) {
                 return true;
             }
-            if (i3 == brightnessFloatToInt) {
+            if (i3 == iBrightnessFloatToInt) {
                 return false;
             }
             Slog.e(BrightnessSynchronizer.TAG, "onChange: both changed");

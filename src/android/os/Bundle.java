@@ -201,12 +201,12 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
         bundle.mOwnsLazyValues = false;
         int size = bundle.mMap.size();
         for (int i = 0; i < size; i++) {
-            String keyAt = bundle.mMap.keyAt(i);
-            Object valueAt = bundle.mMap.valueAt(i);
-            if (valueAt instanceof Bundle) {
-                ((Bundle) valueAt).isFirstRetrievedFromABundle = true;
+            String strKeyAt = bundle.mMap.keyAt(i);
+            Object objValueAt = bundle.mMap.valueAt(i);
+            if (objValueAt instanceof Bundle) {
+                ((Bundle) objValueAt).isFirstRetrievedFromABundle = true;
             }
-            this.mMap.put(keyAt, valueAt);
+            this.mMap.put(strKeyAt, objValueAt);
         }
         if ((bundle.mFlags & 256) != 0) {
             this.mFlags |= 256;
@@ -771,11 +771,11 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        boolean pushAllowFds = parcel.pushAllowFds((this.mFlags & 1024) != 0);
+        boolean zPushAllowFds = parcel.pushAllowFds((this.mFlags & 1024) != 0);
         try {
             writeToParcelInner(parcel, i);
         } finally {
-            parcel.restoreAllowFds(pushAllowFds);
+            parcel.restoreAllowFds(zPushAllowFds);
         }
     }
 
@@ -806,7 +806,7 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         if (this.mParcelledData != null) {
             if (isEmptyParcel()) {
                 protoOutputStream.write(1120986464257L, 0);
@@ -816,6 +816,6 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
         } else {
             protoOutputStream.write(1138166333442L, this.mMap.toString());
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

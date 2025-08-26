@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ImsRegStateUtil {
     public final StateFlowImpl _ePDGConnected;
@@ -41,9 +40,9 @@ public final class ImsRegStateUtil {
         this.imsRegStateChangedCallbacks = arrayList;
         this.imsRegStates = new LinkedHashMap();
         this.imsManagers = new LinkedHashMap();
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.valueOf(ePDGConnected()));
-        this._ePDGConnected = MutableStateFlow;
-        this.ePDGConnected = FlowKt.stateIn(MutableStateFlow, this.scope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.valueOf(ePDGConnected()));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.valueOf(ePDGConnected()));
+        this._ePDGConnected = stateFlowImplMutableStateFlow;
+        this.ePDGConnected = FlowKt.stateIn(stateFlowImplMutableStateFlow, this.scope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.valueOf(ePDGConnected()));
     }
 
     public final boolean ePDGConnected() {

@@ -47,11 +47,11 @@ public final class AutofillStateFingerprint {
 
     void storeStatePriorToAuthentication(AutofillManager.AutofillClient autofillClient, Set<AutofillId> set) {
         if (this.mUseRelativePosition) {
-            List<View> autofillClientFindAutofillableViewsByTraversal = autofillClient.autofillClientFindAutofillableViewsByTraversal();
+            List<View> listAutofillClientFindAutofillableViewsByTraversal = autofillClient.autofillClientFindAutofillableViewsByTraversal();
             if (Helper.sDebug) {
-                Log.d(TAG, "Autofillable views count prior to auth:" + autofillClientFindAutofillableViewsByTraversal.size());
+                Log.d(TAG, "Autofillable views count prior to auth:" + listAutofillClientFindAutofillableViewsByTraversal.size());
             }
-            for (Map.Entry<Integer, View> entry : getFingerprintIds(autofillClientFindAutofillableViewsByTraversal).entrySet()) {
+            for (Map.Entry<Integer, View> entry : getFingerprintIds(listAutofillClientFindAutofillableViewsByTraversal).entrySet()) {
                 View value = entry.getValue();
                 if (value != null) {
                     this.mHashToAutofillIdMap.put(entry.getKey(), value.getAutofillId());
@@ -65,9 +65,9 @@ public final class AutofillStateFingerprint {
             Log.d(TAG, "Size of autofillId's being stored: " + set.size() + " list:" + set);
         }
         AutofillId[] array = Helper.toArray(set);
-        View[] autofillClientFindViewsByAutofillIdTraversal = autofillClient.autofillClientFindViewsByAutofillIdTraversal(array);
+        View[] viewArrAutofillClientFindViewsByAutofillIdTraversal = autofillClient.autofillClientFindViewsByAutofillIdTraversal(array);
         for (int i = 0; i < array.length; i++) {
-            View view = autofillClientFindViewsByAutofillIdTraversal[i];
+            View view = viewArrAutofillClientFindViewsByAutofillIdTraversal[i];
             if (view != null) {
                 this.mHashToAutofillIdMap.put(Integer.valueOf(getEphemeralFingerprintId(view, 0)), view.getAutofillId());
             } else if (Helper.sDebug) {
@@ -101,11 +101,11 @@ public final class AutofillStateFingerprint {
             dumpCurrentState();
         }
         ArrayMap<Integer, View> fingerprintIds = getFingerprintIds(list);
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (Map.Entry<Integer, View> entry : fingerprintIds.entrySet()) {
             View value = entry.getValue();
             Integer key = entry.getKey();
-            int intValue = key.intValue();
+            int iIntValue = key.intValue();
             AutofillId autofillId = value.getAutofillId();
             autofillId.setSessionId(this.mSessionId);
             if (this.mHashToAutofillIdMap.containsKey(key)) {
@@ -113,9 +113,9 @@ public final class AutofillStateFingerprint {
                 autofillId2.setSessionId(this.mSessionId);
                 this.mOldIdsToCurrentAutofillIdMap.put(autofillId2, autofillId);
                 Log.i(TAG, "Mapping current autofill id: " + value.getAutofillId() + " to existing autofill id " + autofillId2);
-                hashMap.put(autofillId2, value);
+                map.put(autofillId2, value);
             } else {
-                Log.i(TAG, "Couldn't map current autofill id: " + value.getAutofillId() + " with currentHash:" + intValue + " for view:" + value);
+                Log.i(TAG, "Couldn't map current autofill id: " + value.getAutofillId() + " with currentHash:" + iIntValue + " for view:" + value);
             }
         }
         final View[] viewArr = new View[this.mFailedIds.size()];
@@ -127,7 +127,7 @@ public final class AutofillStateFingerprint {
                 Log.d(TAG, "currentAutofillId = null");
             }
             this.mFailedIds.set(i2, autofillId4);
-            View view = (View) hashMap.get(autofillId3);
+            View view = (View) map.get(autofillId3);
             viewArr[i2] = view;
             if (view != null) {
                 i++;
@@ -140,7 +140,7 @@ public final class AutofillStateFingerprint {
         autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillStateFingerprint$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                AutofillStateFingerprint.this.lambda$attemptRefill$0(autofillManager, viewArr);
+                this.f$0.lambda$attemptRefill$0(autofillManager, viewArr);
             }
         });
         return false;
@@ -157,9 +157,7 @@ public final class AutofillStateFingerprint {
             Collections.sort(list, new Comparator() { // from class: android.view.autofill.AutofillStateFingerprint$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int lambda$getFingerprintIds$1;
-                    lambda$getFingerprintIds$1 = AutofillStateFingerprint.this.lambda$getFingerprintIds$1((View) obj, (View) obj2);
-                    return lambda$getFingerprintIds$1;
+                    return this.f$0.lambda$getFingerprintIds$1((View) obj, (View) obj2);
                 }
             });
         }
@@ -182,39 +180,39 @@ public final class AutofillStateFingerprint {
         if (i2 != 0) {
             return i2;
         }
-        int compareTop = compareTop(view, view2);
-        if (compareTop != 0) {
-            return compareTop;
+        int iCompareTop = compareTop(view, view2);
+        if (iCompareTop != 0) {
+            return iCompareTop;
         }
-        int compareBottom = compareBottom(view, view2);
-        if (compareBottom != 0) {
-            return compareBottom;
+        int iCompareBottom = compareBottom(view, view2);
+        if (iCompareBottom != 0) {
+            return iCompareBottom;
         }
-        int compareLeft = compareLeft(view, view2);
-        return compareLeft != 0 ? compareLeft : compareRight(view, view2);
+        int iCompareLeft = compareLeft(view, view2);
+        return iCompareLeft != 0 ? iCompareLeft : compareRight(view, view2);
     }
 
     public int getEphemeralFingerprintId(View view, int i) {
-        int i2;
-        boolean z;
-        CharSequence charSequence;
-        int i3;
+        int inputType;
+        boolean zIsSingleLine;
+        CharSequence hint;
+        int imeOptions;
         if (view == null) {
             return -1;
         }
         if (!(view instanceof TextView)) {
-            i2 = Integer.MIN_VALUE;
-            z = false;
-            charSequence = "";
-            i3 = Integer.MIN_VALUE;
+            inputType = Integer.MIN_VALUE;
+            zIsSingleLine = false;
+            hint = "";
+            imeOptions = Integer.MIN_VALUE;
         } else {
             TextView textView = (TextView) view;
-            i2 = textView.getInputType();
-            charSequence = textView.getHint();
-            z = textView.isSingleLine();
-            i3 = textView.getImeOptions();
+            inputType = textView.getInputType();
+            hint = textView.getHint();
+            zIsSingleLine = textView.isSingleLine();
+            imeOptions = textView.getImeOptions();
         }
-        CharSequence charSequence2 = charSequence;
+        CharSequence charSequence = hint;
         CharSequence contentDescription = view.getContentDescription();
         CharSequence tooltipText = view.getTooltipText();
         int autofillType = view.getAutofillType();
@@ -226,15 +224,15 @@ public final class AutofillStateFingerprint {
         int paddingBottom = view.getPaddingBottom();
         int height = view.getHeight();
         int width = view.getWidth();
-        boolean z2 = z;
-        int hash = Objects.hash(Integer.valueOf(visibility), Integer.valueOf(i2), Integer.valueOf(i3), Boolean.valueOf(z2), charSequence2, contentDescription, tooltipText, Integer.valueOf(autofillType), Integer.valueOf(Arrays.deepHashCode(autofillHints)), Integer.valueOf(paddingBottom), Integer.valueOf(paddingTop), Integer.valueOf(paddingRight), Integer.valueOf(paddingLeft));
+        boolean z = zIsSingleLine;
+        int iHash = Objects.hash(Integer.valueOf(visibility), Integer.valueOf(inputType), Integer.valueOf(imeOptions), Boolean.valueOf(z), charSequence, contentDescription, tooltipText, Integer.valueOf(autofillType), Integer.valueOf(Arrays.deepHashCode(autofillHints)), Integer.valueOf(paddingBottom), Integer.valueOf(paddingTop), Integer.valueOf(paddingRight), Integer.valueOf(paddingLeft));
         if (this.mUseRelativePosition) {
-            hash = Objects.hash(Integer.valueOf(hash), Integer.valueOf(i));
+            iHash = Objects.hash(Integer.valueOf(iHash), Integer.valueOf(i));
         }
         if (Helper.sDebug) {
-            Log.d(TAG, "Hash: " + hash + " for AutofillId:" + view.getAutofillId() + " visibility:" + visibility + " inputType:" + i2 + " imeOptions:" + i3 + " isSingleLine:" + z2 + " hints:" + ((Object) charSequence2) + " contentDesc:" + ((Object) contentDescription) + " tooltipText:" + ((Object) tooltipText) + " autofillType:" + autofillType + " autofillHints:" + Arrays.toString(autofillHints) + " height:" + height + " width:" + width + " paddingLeft:" + paddingLeft + " paddingRight:" + paddingRight + " paddingTop:" + paddingTop + " paddingBottom:" + paddingBottom + " mUseRelativePosition" + this.mUseRelativePosition + " position:" + i);
+            Log.d(TAG, "Hash: " + iHash + " for AutofillId:" + view.getAutofillId() + " visibility:" + visibility + " inputType:" + inputType + " imeOptions:" + imeOptions + " isSingleLine:" + z + " hints:" + ((Object) charSequence) + " contentDesc:" + ((Object) contentDescription) + " tooltipText:" + ((Object) tooltipText) + " autofillType:" + autofillType + " autofillHints:" + Arrays.toString(autofillHints) + " height:" + height + " width:" + width + " paddingLeft:" + paddingLeft + " paddingRight:" + paddingRight + " paddingTop:" + paddingTop + " paddingBottom:" + paddingBottom + " mUseRelativePosition" + this.mUseRelativePosition + " position:" + i);
         }
-        return hash;
+        return iHash;
     }
 
     private int compareTop(View view, View view2) {

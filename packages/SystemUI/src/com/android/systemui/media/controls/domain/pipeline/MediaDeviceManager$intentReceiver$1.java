@@ -8,9 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDeviceManager$intentReceiver$1 extends BroadcastReceiver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +30,7 @@ public final class MediaDeviceManager$intentReceiver$1 extends BroadcastReceiver
                 ((LinkedHashMap) map).forEach(new BiConsumer() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDeviceManagerKt$sam$java_util_function_BiConsumer$0
                     @Override // java.util.function.BiConsumer
                     public final /* synthetic */ void accept(Object obj, Object obj2) {
-                        Function2.this.invoke(obj, obj2);
+                        mediaDeviceManager$intentReceiver$1$$ExternalSyntheticLambda0.invoke(obj, obj2);
                     }
                 });
                 Unit unit = Unit.INSTANCE;

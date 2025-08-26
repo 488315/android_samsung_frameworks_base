@@ -38,13 +38,13 @@ public final class SehOperatorInfo {
 
     public static final ArrayList<SehOperatorInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehOperatorInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehOperatorInfo sehOperatorInfo = new SehOperatorInfo();
-            sehOperatorInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            sehOperatorInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             arrayList.add(sehOperatorInfo);
         }
         return arrayList;

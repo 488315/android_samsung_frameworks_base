@@ -260,14 +260,14 @@ public final class AudioMetadata {
         }
 
         public ByteBuffer getRawByteBuffer() {
-            int limit = this.mBuffer.limit();
-            int position = this.mBuffer.position();
-            this.mBuffer.limit(position);
+            int iLimit = this.mBuffer.limit();
+            int iPosition = this.mBuffer.position();
+            this.mBuffer.limit(iPosition);
             this.mBuffer.position(0);
-            ByteBuffer slice = this.mBuffer.slice();
-            this.mBuffer.limit(limit);
-            this.mBuffer.position(position);
-            return slice;
+            ByteBuffer byteBufferSlice = this.mBuffer.slice();
+            this.mBuffer.limit(iLimit);
+            this.mBuffer.position(iPosition);
+            return byteBufferSlice;
         }
 
         public ByteOrder order() {
@@ -320,15 +320,15 @@ public final class AudioMetadata {
 
         private void ensureCapacity(int i) {
             if (this.mBuffer.remaining() < i) {
-                int position = this.mBuffer.position() + i;
-                if (position > 1073741823) {
-                    throw new IllegalStateException("Item memory requirements too large: " + position);
+                int iPosition = this.mBuffer.position() + i;
+                if (iPosition > 1073741823) {
+                    throw new IllegalStateException("Item memory requirements too large: " + iPosition);
                 }
-                ByteBuffer allocateDirect = ByteBuffer.allocateDirect(position << 1);
-                allocateDirect.order(this.mBuffer.order());
+                ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(iPosition << 1);
+                byteBufferAllocateDirect.order(this.mBuffer.order());
                 this.mBuffer.flip();
-                allocateDirect.put(this.mBuffer);
-                this.mBuffer = allocateDirect;
+                byteBufferAllocateDirect.put(this.mBuffer);
+                this.mBuffer = byteBufferAllocateDirect;
             }
         }
     }
@@ -357,13 +357,13 @@ public final class AudioMetadata {
                 return null;
             }
             int i2 = byteBuffer.getInt();
-            int position = byteBuffer.position();
-            Object unpack = dataPackage.unpack(byteBuffer);
-            if (byteBuffer.position() - position != i2) {
+            int iPosition = byteBuffer.position();
+            Object objUnpack = dataPackage.unpack(byteBuffer);
+            if (byteBuffer.position() - iPosition != i2) {
                 Log.e(AudioMetadata.TAG, "Broken data package");
                 return null;
             }
-            return new Pair<>(dataPackage.getMyType(), unpack);
+            return new Pair<>(dataPackage.getMyType(), objUnpack);
         }
 
         @Override // android.media.AudioMetadata.DataPackage
@@ -379,17 +379,17 @@ public final class AudioMetadata {
                 return false;
             }
             autoGrowByteBuffer.putInt(num.intValue());
-            int position = autoGrowByteBuffer.position();
+            int iPosition = autoGrowByteBuffer.position();
             autoGrowByteBuffer.putInt(0);
-            int position2 = autoGrowByteBuffer.position();
+            int iPosition2 = autoGrowByteBuffer.position();
             if (!dataPackage.pack(autoGrowByteBuffer, pair.second)) {
                 Log.i(AudioMetadata.TAG, "Failed to pack object: " + pair.second);
                 return false;
             }
-            int position3 = autoGrowByteBuffer.position();
-            autoGrowByteBuffer.position(position);
-            autoGrowByteBuffer.putInt(position3 - position2);
-            autoGrowByteBuffer.position(position3);
+            int iPosition3 = autoGrowByteBuffer.position();
+            autoGrowByteBuffer.position(iPosition);
+            autoGrowByteBuffer.putInt(iPosition3 - iPosition2);
+            autoGrowByteBuffer.position(iPosition3);
             return true;
         }
     }
@@ -414,15 +414,15 @@ public final class AudioMetadata {
                     Log.e(AudioMetadata.TAG, "Failed to unpack key for map");
                     return null;
                 }
-                Pair<Class, Object> unpack = AudioMetadata.OBJECT_PACKAGE.unpack(byteBuffer);
-                if (unpack == null) {
+                Pair<Class, Object> pairUnpack = AudioMetadata.OBJECT_PACKAGE.unpack(byteBuffer);
+                if (pairUnpack == null) {
                     Log.e(AudioMetadata.TAG, "Failed to unpack value for map");
                     return null;
                 }
-                if (str.equals(Format.KEY_HAS_ATMOS.getName()) && unpack.first == Format.KEY_HAS_ATMOS.getValueClass()) {
-                    baseMap.set(Format.KEY_ATMOS_PRESENT, Boolean.valueOf(((Integer) unpack.second).intValue() != 0));
+                if (str.equals(Format.KEY_HAS_ATMOS.getName()) && pairUnpack.first == Format.KEY_HAS_ATMOS.getValueClass()) {
+                    baseMap.set(Format.KEY_ATMOS_PRESENT, Boolean.valueOf(((Integer) pairUnpack.second).intValue() != 0));
                 } else {
-                    baseMap.set(AudioMetadata.createKey(str, unpack.first), unpack.first.cast(unpack.second));
+                    baseMap.set(AudioMetadata.createKey(str, pairUnpack.first), pairUnpack.first.cast(pairUnpack.second));
                 }
             }
             return baseMap;
@@ -439,16 +439,16 @@ public final class AudioMetadata {
             Iterator<Key<?>> it = baseMap.keySet().iterator();
             while (it.hasNext()) {
                 Key<?> next = it.next();
-                Object obj = baseMap.get(next);
+                Object objValueOf = baseMap.get(next);
                 if (next == Format.KEY_ATMOS_PRESENT) {
                     next = Format.KEY_HAS_ATMOS;
-                    obj = Integer.valueOf(((Boolean) obj).booleanValue() ? 1 : 0);
+                    objValueOf = Integer.valueOf(((Boolean) objValueOf).booleanValue() ? 1 : 0);
                 }
                 if (!dataPackage.pack(autoGrowByteBuffer, next.getName())) {
                     Log.i(AudioMetadata.TAG, "Failed to pack key: " + next.getName());
                     return false;
                 }
-                if (!AudioMetadata.OBJECT_PACKAGE.pack(autoGrowByteBuffer, new Pair<>(next.getValueClass(), obj))) {
+                if (!AudioMetadata.OBJECT_PACKAGE.pack(autoGrowByteBuffer, new Pair<>(next.getValueClass(), objValueOf))) {
                     Log.i(AudioMetadata.TAG, "Failed to pack value: " + baseMap.get(next));
                     return false;
                 }

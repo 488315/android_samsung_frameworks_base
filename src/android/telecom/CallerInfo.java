@@ -6,12 +6,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.location.Country;
+import android.location.CountryDetector;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import com.android.i18n.phonenumbers.NumberParseException;
+import com.android.i18n.phonenumbers.PhoneNumberUtil;
+import com.android.i18n.phonenumbers.Phonenumber;
+import com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.android.internal.R;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
 import java.util.Arrays;
@@ -216,14 +222,14 @@ public class CallerInfo {
         if (PhoneNumberUtils.isVoiceMailNumber(null, i, str)) {
             return new CallerInfo().markAsVoiceMail(context, i);
         }
-        CallerInfo doSecondaryLookupIfNecessary = doSecondaryLookupIfNecessary(context, str, getCallerInfo(context, Uri.withAppendedPath(ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, Uri.encode(str))));
-        if (doSecondaryLookupIfNecessary == null) {
+        CallerInfo callerInfoDoSecondaryLookupIfNecessary = doSecondaryLookupIfNecessary(context, str, getCallerInfo(context, Uri.withAppendedPath(ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, Uri.encode(str))));
+        if (callerInfoDoSecondaryLookupIfNecessary == null) {
             return null;
         }
-        if (TextUtils.isEmpty(doSecondaryLookupIfNecessary.phoneNumber)) {
-            doSecondaryLookupIfNecessary.phoneNumber = str;
+        if (TextUtils.isEmpty(callerInfoDoSecondaryLookupIfNecessary.phoneNumber)) {
+            callerInfoDoSecondaryLookupIfNecessary.phoneNumber = str;
         }
-        return doSecondaryLookupIfNecessary;
+        return callerInfoDoSecondaryLookupIfNecessary;
     }
 
     public String getName() {
@@ -305,23 +311,23 @@ public class CallerInfo {
         if (z) {
             Log.v(TAG, "- getColumnIndexForPersonId: contactRef URI = '" + uri + "'...", new Object[0]);
         }
-        String uri2 = uri.toString();
+        String string = uri.toString();
         String str = "contact_id";
-        if (uri2.startsWith("content://com.android.contacts/data/phones")) {
+        if (string.startsWith("content://com.android.contacts/data/phones")) {
             if (z) {
                 Log.v(TAG, "'data/phones' URI; using RawContacts.CONTACT_ID", new Object[0]);
             }
-        } else if (uri2.startsWith("content://com.android.contacts/data")) {
+        } else if (string.startsWith("content://com.android.contacts/data")) {
             if (z) {
                 Log.v(TAG, "'data' URI; using Data.CONTACT_ID", new Object[0]);
             }
-        } else if (uri2.startsWith("content://com.android.contacts/phone_lookup")) {
+        } else if (string.startsWith("content://com.android.contacts/phone_lookup")) {
             if (z) {
                 Log.v(TAG, "'phone_lookup' URI; using PhoneLookup._ID", new Object[0]);
             }
             str = "_id";
         } else {
-            Log.w(TAG, "Unexpected prefix for contactRef '" + uri2 + "'", new Object[0]);
+            Log.w(TAG, "Unexpected prefix for contactRef '" + string + "'", new Object[0]);
             str = null;
         }
         int columnIndex = str != null ? cursor.getColumnIndex(str) : -1;
@@ -338,137 +344,74 @@ public class CallerInfo {
         this.geoDescription = getGeoDescription(context, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x00b8 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0099  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x00b8 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getGeoDescription(android.content.Context r11, java.lang.String r12) {
-        /*
-            java.lang.String r0 = "- parsed number: "
-            java.lang.String r1 = "parsing '"
-            boolean r2 = android.telecom.CallerInfo.VDBG
-            r3 = 0
-            java.lang.String r4 = "CallerInfo"
-            if (r2 == 0) goto L24
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r6 = "getGeoDescription('"
-            r5.<init>(r6)
-            r5.append(r12)
-            java.lang.String r6 = "')..."
-            r5.append(r6)
-            java.lang.String r5 = r5.toString()
-            java.lang.Object[] r6 = new java.lang.Object[r3]
-            android.telecom.Log.v(r4, r5, r6)
-        L24:
-            boolean r5 = android.text.TextUtils.isEmpty(r12)
-            r6 = 0
-            if (r5 == 0) goto L2c
-            return r6
-        L2c:
-            com.android.i18n.phonenumbers.PhoneNumberUtil r5 = com.android.i18n.phonenumbers.PhoneNumberUtil.getInstance()
-            com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder r7 = com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder.getInstance()
-            android.content.res.Resources r8 = r11.getResources()
-            android.content.res.Configuration r8 = r8.getConfiguration()
-            java.util.Locale r8 = r8.locale
-            java.lang.String r11 = getCurrentCountryIso(r11, r8)
-            java.lang.String r9 = "'"
-            if (r2 == 0) goto L64
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            r10.<init>(r1)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            r10.append(r12)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            java.lang.String r1 = "' for countryIso '"
-            r10.append(r1)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            r10.append(r11)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            java.lang.String r1 = "'..."
-            r10.append(r1)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            java.lang.String r1 = r10.toString()     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            java.lang.Object[] r10 = new java.lang.Object[r3]     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            android.telecom.Log.v(r4, r1, r10)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-        L64:
-            com.android.i18n.phonenumbers.Phonenumber$PhoneNumber r11 = r5.parse(r12, r11)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7c
-            if (r2 == 0) goto L97
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            r1.<init>(r0)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            r1.append(r11)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            java.lang.String r0 = r1.toString()     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            java.lang.Object[] r1 = new java.lang.Object[r3]     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            android.telecom.Log.v(r4, r0, r1)     // Catch: com.android.i18n.phonenumbers.NumberParseException -> L7d
-            goto L97
-        L7c:
-            r11 = r6
-        L7d:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "getGeoDescription: NumberParseException for incoming number '"
-            r0.<init>(r1)
-            java.lang.String r12 = android.telecom.Log.pii(r12)
-            r0.append(r12)
-            r0.append(r9)
-            java.lang.String r12 = r0.toString()
-            java.lang.Object[] r0 = new java.lang.Object[r3]
-            android.telecom.Log.w(r4, r12, r0)
-        L97:
-            if (r11 == 0) goto Lb8
-            java.lang.String r11 = r7.getDescriptionForNumber(r11, r8)
-            boolean r12 = android.telecom.CallerInfo.VDBG
-            if (r12 == 0) goto Lb7
-            java.lang.StringBuilder r12 = new java.lang.StringBuilder
-            java.lang.String r0 = "- got description: '"
-            r12.<init>(r0)
-            r12.append(r11)
-            r12.append(r9)
-            java.lang.String r12 = r12.toString()
-            java.lang.Object[] r0 = new java.lang.Object[r3]
-            android.telecom.Log.v(r4, r12, r0)
-        Lb7:
-            return r11
-        Lb8:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telecom.CallerInfo.getGeoDescription(android.content.Context, java.lang.String):java.lang.String");
+    public static String getGeoDescription(Context context, String str) {
+        Phonenumber.PhoneNumber phoneNumber;
+        boolean z = VDBG;
+        if (z) {
+            Log.v(TAG, "getGeoDescription('" + str + "')...", new Object[0]);
+        }
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+        PhoneNumberOfflineGeocoder phoneNumberOfflineGeocoder = PhoneNumberOfflineGeocoder.getInstance();
+        Locale locale = context.getResources().getConfiguration().locale;
+        String currentCountryIso = getCurrentCountryIso(context, locale);
+        if (z) {
+            try {
+                Log.v(TAG, "parsing '" + str + "' for countryIso '" + currentCountryIso + "'...", new Object[0]);
+            } catch (NumberParseException unused) {
+                phoneNumber = null;
+                Log.w(TAG, "getGeoDescription: NumberParseException for incoming number '" + Log.pii(str) + "'", new Object[0]);
+                if (phoneNumber == null) {
+                }
+            }
+        }
+        phoneNumber = phoneNumberUtil.parse(str, currentCountryIso);
+        if (z) {
+            try {
+                Log.v(TAG, "- parsed number: " + phoneNumber, new Object[0]);
+            } catch (NumberParseException unused2) {
+                Log.w(TAG, "getGeoDescription: NumberParseException for incoming number '" + Log.pii(str) + "'", new Object[0]);
+                if (phoneNumber == null) {
+                }
+            }
+        }
+        if (phoneNumber == null) {
+            return null;
+        }
+        String descriptionForNumber = phoneNumberOfflineGeocoder.getDescriptionForNumber(phoneNumber, locale);
+        if (VDBG) {
+            Log.v(TAG, "- got description: '" + descriptionForNumber + "'", new Object[0]);
+        }
+        return descriptionForNumber;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0027  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static java.lang.String getCurrentCountryIso(android.content.Context r4, java.util.Locale r5) {
-        /*
-            java.lang.String r0 = "country_detector"
-            java.lang.Object r4 = r4.getSystemService(r0)
-            android.location.CountryDetector r4 = (android.location.CountryDetector) r4
-            r0 = 0
-            java.lang.String r1 = "CallerInfo"
-            if (r4 == 0) goto L24
-            android.location.Country r4 = r4.detectCountry()
-            if (r4 == 0) goto L18
-            java.lang.String r4 = r4.getCountryIso()
-            goto L25
-        L18:
-            java.lang.Exception r4 = new java.lang.Exception
-            r4.<init>()
-            java.lang.String r2 = "CountryDetector.detectCountry() returned null."
-            java.lang.Object[] r3 = new java.lang.Object[r0]
-            android.telecom.Log.e(r1, r4, r2, r3)
-        L24:
-            r4 = 0
-        L25:
-            if (r4 != 0) goto L3e
-            java.lang.String r4 = r5.getCountry()
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r2 = "No CountryDetector; falling back to countryIso based on locale: "
-            r5.<init>(r2)
-            r5.append(r4)
-            java.lang.String r5 = r5.toString()
-            java.lang.Object[] r0 = new java.lang.Object[r0]
-            android.telecom.Log.w(r1, r5, r0)
-        L3e:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telecom.CallerInfo.getCurrentCountryIso(android.content.Context, java.util.Locale):java.lang.String");
+    private static String getCurrentCountryIso(Context context, Locale locale) {
+        String countryIso;
+        CountryDetector countryDetector = (CountryDetector) context.getSystemService(Context.COUNTRY_DETECTOR);
+        if (countryDetector == null) {
+            countryIso = null;
+        } else {
+            Country countryDetectCountry = countryDetector.detectCountry();
+            if (countryDetectCountry == null) {
+                Log.e(TAG, (Throwable) new Exception(), "CountryDetector.detectCountry() returned null.", new Object[0]);
+                countryIso = null;
+            } else {
+                countryIso = countryDetectCountry.getCountryIso();
+            }
+        }
+        if (countryIso != null) {
+            return countryIso;
+        }
+        String country = locale.getCountry();
+        Log.w(TAG, "No CountryDetector; falling back to countryIso based on locale: " + country, new Object[0]);
+        return country;
     }
 
     protected static String getCurrentCountryIso(Context context) {

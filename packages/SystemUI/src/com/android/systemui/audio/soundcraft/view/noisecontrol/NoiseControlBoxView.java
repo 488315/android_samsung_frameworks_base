@@ -2,6 +2,7 @@ package com.android.systemui.audio.soundcraft.view.noisecontrol;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +43,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NoiseControlBoxView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -65,7 +65,6 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
     public final List sequenceList;
     public NoiseControlBoxViewBinding viewBinding;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -238,7 +237,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i) {
                     case 0:
@@ -352,7 +351,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i2) {
                     case 0:
@@ -466,7 +465,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i3) {
                     case 0:
@@ -580,7 +579,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i4) {
                     case 0:
@@ -694,7 +693,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i5) {
                     case 0:
@@ -808,7 +807,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i6) {
                     case 0:
@@ -922,7 +921,7 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NoiseControlBoxView noiseControlBoxView = this.f$0;
                 switch (i7) {
                     case 0:
@@ -1029,14 +1028,14 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         if (ViewTreeLifecycleOwner.get(this) != null) {
             updateLayout$1();
         }
     }
 
-    public final void updateLayout$1() {
+    public final void updateLayout$1() throws Resources.NotFoundException {
         int i;
         NoiseControlBoxViewBinding noiseControlBoxViewBinding = this.viewBinding;
         if (noiseControlBoxViewBinding == null) {
@@ -1116,21 +1115,21 @@ public final class NoiseControlBoxView extends LinearLayout implements SoundCraf
         if (!viewGroup.isLaidOut() || viewGroup.isLayoutRequested()) {
             viewGroup.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxView$updateLayout$$inlined$doOnLayout$1
                 @Override // android.view.View.OnLayoutChangeListener
-                public final void onLayoutChange(View view, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10) {
+                public final void onLayoutChange(View view, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10) throws Resources.NotFoundException {
                     view.removeOnLayoutChangeListener(this);
-                    NoiseControlBoxView.this.positionList.clear();
-                    for (NoiseControlIconView noiseControlIconView2 : NoiseControlBoxView.this.sequenceList) {
+                    this.this$0.positionList.clear();
+                    for (NoiseControlIconView noiseControlIconView2 : this.this$0.sequenceList) {
                         float x = noiseControlIconView2.binding.root.getX();
-                        int dimensionPixelSize = NoiseControlBoxView.this.getContext().getResources().getDimensionPixelSize(R.dimen.soundcraft_noise_effect_box_icon_stroke);
+                        int dimensionPixelSize = this.this$0.getContext().getResources().getDimensionPixelSize(R.dimen.soundcraft_noise_effect_box_icon_stroke);
                         NoiseControlIconViewBinding noiseControlIconViewBinding = noiseControlIconView2.binding;
                         int measuredWidth = noiseControlIconViewBinding.icon.getMeasuredWidth();
                         int measuredWidth2 = noiseControlIconViewBinding.root.getMeasuredWidth();
-                        if (!NoiseControlBoxView.this.positionList.isEmpty()) {
-                            NoiseControlBoxView.this.positionList.add(Float.valueOf((((measuredWidth2 - measuredWidth) / 2.0f) + x) - (!NoiseControlBoxView.this.getNoiseControlBoxViewModel().modelProvider.isFromCover ? dimensionPixelSize * 2.5f : dimensionPixelSize * 3.0f)));
+                        if (!this.this$0.positionList.isEmpty()) {
+                            this.this$0.positionList.add(Float.valueOf((((measuredWidth2 - measuredWidth) / 2.0f) + x) - (!this.this$0.getNoiseControlBoxViewModel().modelProvider.isFromCover ? dimensionPixelSize * 2.5f : dimensionPixelSize * 3.0f)));
                         }
-                        NoiseControlBoxView.this.positionList.add(Float.valueOf((dimensionPixelSize * 2.5f) + ((measuredWidth2 - measuredWidth) / 2.0f) + x + measuredWidth));
+                        this.this$0.positionList.add(Float.valueOf((dimensionPixelSize * 2.5f) + ((measuredWidth2 - measuredWidth) / 2.0f) + x + measuredWidth));
                     }
-                    NoiseControlBoxView noiseControlBoxView = NoiseControlBoxView.this;
+                    NoiseControlBoxView noiseControlBoxView = this.this$0;
                     NoiseControlBoxViewBinding noiseControlBoxViewBinding4 = noiseControlBoxView.viewBinding;
                     if (noiseControlBoxViewBinding4 == null) {
                         noiseControlBoxViewBinding4 = null;

@@ -308,49 +308,49 @@ public class IsrbHooks {
         }
     }
 
-    public static String getCurrentProcessName() {
+    public static String getCurrentProcessName() throws IOException {
         FileInputStream fileInputStream;
         byte[] bArr;
         int i;
         try {
             try {
                 fileInputStream = new FileInputStream("/proc/self/cmdline");
-            } catch (Throwable th) {
-                th = th;
-                fileInputStream = null;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            bArr = new byte[256];
-            i = 0;
-            while (true) {
-                int read = fileInputStream.read();
-                if (read <= 0 || i >= 256) {
-                    break;
-                }
-                bArr[i] = (byte) read;
-                i++;
-            }
-        } catch (Throwable th2) {
-            th = th2;
-            try {
-                th.printStackTrace();
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-                return null;
-            } catch (Throwable th3) {
-                if (fileInputStream != null) {
+                try {
+                    bArr = new byte[256];
+                    i = 0;
+                    while (true) {
+                        int i2 = fileInputStream.read();
+                        if (i2 <= 0 || i >= 256) {
+                            break;
+                        }
+                        bArr[i] = (byte) i2;
+                        i++;
+                    }
+                } catch (Throwable th) {
+                    th = th;
                     try {
-                        fileInputStream.close();
-                    } catch (IOException e2) {
-                        e2.printStackTrace();
+                        th.printStackTrace();
+                        if (fileInputStream != null) {
+                            fileInputStream.close();
+                        }
+                        return null;
+                    } catch (Throwable th2) {
+                        if (fileInputStream != null) {
+                            try {
+                                fileInputStream.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        throw th2;
                     }
                 }
-                throw th3;
+            } catch (Throwable th3) {
+                th = th3;
+                fileInputStream = null;
             }
+        } catch (IOException e2) {
+            e2.printStackTrace();
         }
         if (i <= 0) {
             fileInputStream.close();

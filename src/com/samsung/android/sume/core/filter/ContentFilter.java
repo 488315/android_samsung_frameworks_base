@@ -87,7 +87,7 @@ public class ContentFilter extends DecorateFilter {
         if (this.filterMap.entrySet().stream().anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return ContentFilter.this.m9537x2ca42333(mediaFormat, (Map.Entry) obj);
+                return this.f$0.m9550x2ca42333(mediaFormat, (Map.Entry) obj);
             }
         })) {
             throw new ContentFilterOutException(this.message.reset());
@@ -95,15 +95,15 @@ public class ContentFilter extends DecorateFilter {
     }
 
     /* renamed from: lambda$filterOut$0$com-samsung-android-sume-core-filter-ContentFilter, reason: not valid java name */
-    /* synthetic */ boolean m9537x2ca42333(MediaFormat mediaFormat, Map.Entry entry) {
-        int intValue = ((Integer) entry.getKey()).intValue();
-        if (intValue == 1) {
+    /* synthetic */ boolean m9550x2ca42333(MediaFormat mediaFormat, Map.Entry entry) {
+        int iIntValue = ((Integer) entry.getKey()).intValue();
+        if (iIntValue == 1) {
             return evaluateDimension(entry.getValue(), mediaFormat.getShape(), this.message);
         }
-        if (intValue == 2) {
+        if (iIntValue == 2) {
             return evaluateDataType(entry.getValue(), mediaFormat.getDataType(), this.message);
         }
-        if (intValue == 3) {
+        if (iIntValue == 3) {
             return evaluateMediaType(entry.getValue(), (String) mediaFormat.get("mime-type"), this.message);
         }
         throw new IllegalArgumentException("");
@@ -111,11 +111,11 @@ public class ContentFilter extends DecorateFilter {
 
     private boolean evaluateDimension(Object obj, Shape shape, PlaceHolder<String> placeHolder) {
         Def.require(obj instanceof Evaluator);
-        boolean evaluate = ((Evaluator) obj).evaluate(Integer.valueOf(shape.getDimension()));
-        if (evaluate) {
+        boolean zEvaluate = ((Evaluator) obj).evaluate(Integer.valueOf(shape.getDimension()));
+        if (zEvaluate) {
             placeHolder.put(getTag() + shape + " is not supported by filter: " + obj);
         }
-        return evaluate;
+        return zEvaluate;
     }
 
     private boolean evaluateDataType(Object obj, final DataType dataType, PlaceHolder<String> placeHolder) {
@@ -128,13 +128,13 @@ public class ContentFilter extends DecorateFilter {
         }
         if (obj instanceof DataType[]) {
             DataType[] dataTypeArr = (DataType[]) obj;
-            boolean anyMatch = Arrays.stream(dataTypeArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda0
+            boolean zAnyMatch = Arrays.stream(dataTypeArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj2) {
-                    return ContentFilter.lambda$evaluateDataType$1(DataType.this, (DataType) obj2);
+                    return ContentFilter.lambda$evaluateDataType$1(dataType, (DataType) obj2);
                 }
             });
-            if (anyMatch) {
+            if (zAnyMatch) {
                 placeHolder.put(getTag() + dataType + " is not supported by filter: " + ((String) Arrays.stream(dataTypeArr).map(new Function() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda1
                     @Override // java.util.function.Function
                     public final Object apply(Object obj2) {
@@ -142,17 +142,17 @@ public class ContentFilter extends DecorateFilter {
                     }
                 }).collect(Collectors.joining())));
             }
-            return anyMatch;
+            return zAnyMatch;
         }
         if (obj instanceof List) {
             List list = (List) obj;
-            boolean anyMatch2 = list.stream().anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda2
+            boolean zAnyMatch2 = list.stream().anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj2) {
-                    return ContentFilter.lambda$evaluateDataType$2(DataType.this, (DataType) obj2);
+                    return ContentFilter.lambda$evaluateDataType$2(dataType, (DataType) obj2);
                 }
             });
-            if (anyMatch2) {
+            if (zAnyMatch2) {
                 placeHolder.put(getTag() + dataType + " is not supported by filter: " + ((String) list.stream().map(new Function() { // from class: com.samsung.android.sume.core.filter.ContentFilter$$ExternalSyntheticLambda1
                     @Override // java.util.function.Function
                     public final Object apply(Object obj2) {
@@ -160,7 +160,7 @@ public class ContentFilter extends DecorateFilter {
                     }
                 }).collect(Collectors.joining())));
             }
-            return anyMatch2;
+            return zAnyMatch2;
         }
         throw new IllegalArgumentException("invalid filter value: " + obj);
     }

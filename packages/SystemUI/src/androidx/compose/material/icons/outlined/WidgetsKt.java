@@ -10,7 +10,6 @@ import androidx.compose.ui.graphics.vector.VectorKt;
 import androidx.compose.ui.unit.Dp;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class WidgetsKt {
     public static ImageVector _widgets;
@@ -71,9 +70,9 @@ public abstract class WidgetsKt {
         pathBuilder.horizontalLineToRelative(8.0f);
         pathBuilder.verticalLineToRelative(-8.0f);
         pathBuilder.close();
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, null, 1.0f, 1.0f, 0, i, 1.0f, 0.0f, 1.0f, 0.0f);
-        ImageVector build = builder.build();
-        _widgets = build;
-        return build;
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, null, 1.0f, 1.0f, 0, i, 1.0f, 0.0f, 1.0f, 0.0f);
+        ImageVector imageVectorBuild = builder.build();
+        _widgets = imageVectorBuild;
+        return imageVectorBuild;
     }
 }

@@ -228,12 +228,12 @@ public final class TelephonyHistogram implements Parcelable {
             this.mInitialTimings = iArr;
             parcel.readIntArray(iArr);
         }
-        int readInt = parcel.readInt();
-        this.mBucketCount = readInt;
-        int[] iArr2 = new int[readInt - 1];
+        int i = parcel.readInt();
+        this.mBucketCount = i;
+        int[] iArr2 = new int[i - 1];
         this.mBucketEndPoints = iArr2;
         parcel.readIntArray(iArr2);
-        int[] iArr3 = new int[readInt];
+        int[] iArr3 = new int[i];
         this.mBucketCounters = iArr3;
         parcel.readIntArray(iArr3);
     }

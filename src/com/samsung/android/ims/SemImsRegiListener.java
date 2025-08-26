@@ -51,9 +51,9 @@ public interface SemImsRegiListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(SemImsRegiListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof SemImsRegiListener)) {
-                return (SemImsRegiListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(SemImsRegiListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof SemImsRegiListener)) {
+                return (SemImsRegiListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,26 +115,26 @@ public interface SemImsRegiListener extends IInterface {
 
             @Override // com.samsung.android.ims.SemImsRegiListener
             public void onRegistered(SemImsRegistration semImsRegistration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(SemImsRegiListener.DESCRIPTOR);
-                    obtain.writeTypedObject(semImsRegistration, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(SemImsRegiListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semImsRegistration, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsRegiListener
             public void onDeregistered(SemImsRegistration semImsRegistration, SemImsRegistrationError semImsRegistrationError) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(SemImsRegiListener.DESCRIPTOR);
-                    obtain.writeTypedObject(semImsRegistration, 0);
-                    obtain.writeTypedObject(semImsRegistrationError, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(SemImsRegiListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semImsRegistration, 0);
+                    parcelObtain.writeTypedObject(semImsRegistrationError, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

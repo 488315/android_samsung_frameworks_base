@@ -18,7 +18,6 @@ import java.util.Collection;
 import kotlin.Unit;
 import kotlin.io.CloseableKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogBufferEulogizer {
     public final DumpManager dumpManager;
@@ -38,30 +37,30 @@ public final class LogBufferEulogizer {
     }
 
     public final long getMillisSinceLastWrite(Path path) {
-        BasicFileAttributes basicFileAttributes;
-        FileTime lastModifiedTime;
+        BasicFileAttributes attributes;
+        FileTime fileTimeLastModifiedTime;
         try {
-            basicFileAttributes = this.files.readAttributes(path, BasicFileAttributes.class, new LinkOption[0]);
+            attributes = this.files.readAttributes(path, BasicFileAttributes.class, new LinkOption[0]);
         } catch (IOException unused) {
-            basicFileAttributes = null;
+            attributes = null;
         }
-        return this.systemClock.currentTimeMillis() - ((basicFileAttributes == null || (lastModifiedTime = basicFileAttributes.lastModifiedTime()) == null) ? 0L : lastModifiedTime.toMillis());
+        return this.systemClock.currentTimeMillis() - ((attributes == null || (fileTimeLastModifiedTime = attributes.lastModifiedTime()) == null) ? 0L : fileTimeLastModifiedTime.toMillis());
     }
 
     public final void record(Throwable th) {
         SystemClock systemClock = this.systemClock;
-        long uptimeMillis = systemClock.uptimeMillis();
+        long jUptimeMillis = systemClock.uptimeMillis();
         Log.i("BufferEulogizer", "Performing emergency dump of log buffers");
         long millisSinceLastWrite = getMillisSinceLastWrite(this.logPath);
         if (millisSinceLastWrite < this.minWriteGap) {
             Log.w("BufferEulogizer", "Cannot dump logs, last write was only " + millisSinceLastWrite + " ms ago");
             return;
         }
-        long j = 0;
+        long jUptimeMillis2 = 0;
         try {
-            BufferedWriter newBufferedWriter = this.files.newBufferedWriter(this.logPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            BufferedWriter bufferedWriterNewBufferedWriter = this.files.newBufferedWriter(this.logPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             try {
-                PrintWriter printWriter = new PrintWriter(newBufferedWriter);
+                PrintWriter printWriter = new PrintWriter(bufferedWriterNewBufferedWriter);
                 printWriter.println(LogBufferEulogizerKt.DATE_FORMAT.format(Long.valueOf(systemClock.currentTimeMillis())));
                 printWriter.println();
                 printWriter.println("Dump triggered by exception:");
@@ -69,17 +68,17 @@ public final class LogBufferEulogizer {
                 Collection logBuffers = this.dumpManager.getLogBuffers();
                 DumpHandler.Companion.getClass();
                 DumpHandler.Companion.dumpEntries(logBuffers, printWriter);
-                j = systemClock.uptimeMillis() - uptimeMillis;
+                jUptimeMillis2 = systemClock.uptimeMillis() - jUptimeMillis;
                 printWriter.println();
-                printWriter.println("Buffer eulogy took " + j + "ms");
+                printWriter.println("Buffer eulogy took " + jUptimeMillis2 + "ms");
                 Unit unit = Unit.INSTANCE;
-                CloseableKt.closeFinally(newBufferedWriter, null);
+                CloseableKt.closeFinally(bufferedWriterNewBufferedWriter, null);
             } finally {
             }
         } catch (Exception e) {
             Log.e("BufferEulogizer", "Exception while attempting to dump buffers, bailing", e);
         }
-        Log.i("BufferEulogizer", "Buffer eulogy took " + j + "ms");
+        Log.i("BufferEulogizer", "Buffer eulogy took " + jUptimeMillis2 + "ms");
     }
 
     public LogBufferEulogizer(Context context, DumpManager dumpManager, SystemClock systemClock, Files files) {

@@ -5,6 +5,7 @@ import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import com.android.systemui.samsung.quicksetting.ui.tiles.QuickTileDrawerKt$ExpandButton$2$1$1$$ExternalSyntheticLambda0;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -15,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Animatable<T, V extends AnimationVector> {
     public final SpringSpec defaultSpringSpec;
@@ -31,6 +31,79 @@ public final class Animatable<T, V extends AnimationVector> {
     public Object upperBound;
     public AnimationVector upperBoundVector;
     public final Object visibilityThreshold;
+
+    /* renamed from: androidx.compose.animation.core.Animatable$snapTo$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function1 {
+        final /* synthetic */ Object $targetValue;
+        int label;
+        final /* synthetic */ Animatable<Object, AnimationVector> this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(Animatable<Object, AnimationVector> animatable, Object obj, Continuation continuation) {
+            super(1, continuation);
+            this.this$0 = animatable;
+            this.$targetValue = obj;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Continuation continuation) {
+            return new AnonymousClass2(this.this$0, this.$targetValue, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((AnonymousClass2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            Animatable.access$endAnimation(this.this$0);
+            Object objClampToBounds = this.this$0.clampToBounds(this.$targetValue);
+            ((SnapshotMutableStateImpl) this.this$0.internalState.value$delegate).setValue(objClampToBounds);
+            ((SnapshotMutableStateImpl) this.this$0.targetValue$delegate).setValue(objClampToBounds);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: androidx.compose.animation.core.Animatable$stop$2, reason: invalid class name and case insensitive filesystem */
+    final class C06802 extends SuspendLambda implements Function1 {
+        int label;
+        final /* synthetic */ Animatable<Object, AnimationVector> this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C06802(Animatable<Object, AnimationVector> animatable, Continuation continuation) {
+            super(1, continuation);
+            this.this$0 = animatable;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Continuation continuation) {
+            return new C06802(this.this$0, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((C06802) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            Animatable.access$endAnimation(this.this$0);
+            return Unit.INSTANCE;
+        }
+    }
 
     public Animatable(T t, TwoWayConverter<T, V> twoWayConverter, T t2, String str) {
         this.typeConverter = twoWayConverter;
@@ -64,20 +137,20 @@ public final class Animatable<T, V extends AnimationVector> {
         Function1 function12 = (i & 8) != 0 ? null : function1;
         Object value = animatable.internalState.getValue();
         TwoWayConverter twoWayConverter = animatable.typeConverter;
-        return MutatorMutex.mutate$default(animatable.mutatorMutex, new Animatable$runAnimation$2(animatable, velocity, new TargetBasedAnimation((AnimationSpec<Object>) animationSpec2, (TwoWayConverter<Object, AnimationVector>) twoWayConverter, value, obj, (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(velocity)), animatable.internalState.lastFrameTimeNanos, function12, null), continuation);
+        return MutatorMutex.mutate$default(animatable.mutatorMutex, new Animatable$runAnimation$2(animatable, velocity, new TargetBasedAnimation((AnimationSpec<Object>) animationSpec2, (TwoWayConverter<Object, AnimationVector>) twoWayConverter, value, obj, (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(velocity)), animatable.internalState.lastFrameTimeNanos, function12, null), continuation);
     }
 
     public final Object animateDecay(Object obj, DecayAnimationSpec decayAnimationSpec, QuickTileDrawerKt$ExpandButton$2$1$1$$ExternalSyntheticLambda0 quickTileDrawerKt$ExpandButton$2$1$1$$ExternalSyntheticLambda0, ContinuationImpl continuationImpl) {
         AnimationState animationState = this.internalState;
         Object value = animationState.getValue();
         TwoWayConverter twoWayConverter = this.typeConverter;
-        return MutatorMutex.mutate$default(this.mutatorMutex, new Animatable$runAnimation$2(this, obj, new DecayAnimation((DecayAnimationSpec<Object>) decayAnimationSpec, (TwoWayConverter<Object, AnimationVector>) twoWayConverter, value, (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(obj)), animationState.lastFrameTimeNanos, quickTileDrawerKt$ExpandButton$2$1$1$$ExternalSyntheticLambda0, null), continuationImpl);
+        return MutatorMutex.mutate$default(this.mutatorMutex, new Animatable$runAnimation$2(this, obj, new DecayAnimation((DecayAnimationSpec<Object>) decayAnimationSpec, (TwoWayConverter<Object, AnimationVector>) twoWayConverter, value, (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(obj)), animationState.lastFrameTimeNanos, quickTileDrawerKt$ExpandButton$2$1$1$$ExternalSyntheticLambda0, null), continuationImpl);
     }
 
     public final Object clampToBounds(Object obj) {
         if (!Intrinsics.areEqual(this.lowerBoundVector, this.negativeInfinityBounds) || !Intrinsics.areEqual(this.upperBoundVector, this.positiveInfinityBounds)) {
             TwoWayConverterImpl twoWayConverterImpl = (TwoWayConverterImpl) this.typeConverter;
-            AnimationVector animationVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo779invoke(obj);
+            AnimationVector animationVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo781invoke(obj);
             int size$animation_core = animationVector.getSize$animation_core();
             boolean z = false;
             for (int i = 0; i < size$animation_core; i++) {
@@ -87,14 +160,14 @@ public final class Animatable<T, V extends AnimationVector> {
                 }
             }
             if (z) {
-                return twoWayConverterImpl.convertFromVector.mo779invoke(animationVector);
+                return twoWayConverterImpl.convertFromVector.mo781invoke(animationVector);
             }
         }
         return obj;
     }
 
     public final Object getVelocity() {
-        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo779invoke(this.internalState.velocityVector);
+        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo781invoke(this.internalState.velocityVector);
     }
 
     public final boolean isRunning() {
@@ -102,22 +175,22 @@ public final class Animatable<T, V extends AnimationVector> {
     }
 
     public final Object snapTo(Object obj, Continuation continuation) {
-        Object mutate$default = MutatorMutex.mutate$default(this.mutatorMutex, new Animatable$snapTo$2(this, obj, null), continuation);
-        return mutate$default == CoroutineSingletons.COROUTINE_SUSPENDED ? mutate$default : Unit.INSTANCE;
+        Object objMutate$default = MutatorMutex.mutate$default(this.mutatorMutex, new AnonymousClass2(this, obj, null), continuation);
+        return objMutate$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objMutate$default : Unit.INSTANCE;
     }
 
     public final Object stop(SuspendLambda suspendLambda) {
-        Object mutate$default = MutatorMutex.mutate$default(this.mutatorMutex, new Animatable$stop$2(this, null), suspendLambda);
-        return mutate$default == CoroutineSingletons.COROUTINE_SUSPENDED ? mutate$default : Unit.INSTANCE;
+        Object objMutate$default = MutatorMutex.mutate$default(this.mutatorMutex, new C06802(this, null), suspendLambda);
+        return objMutate$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objMutate$default : Unit.INSTANCE;
     }
 
     public final void updateBounds(Object obj, Object obj2) {
         TwoWayConverter twoWayConverter = this.typeConverter;
-        AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(obj);
+        AnimationVector animationVector = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(obj);
         if (animationVector == null) {
             animationVector = this.negativeInfinityBounds;
         }
-        AnimationVector animationVector2 = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(obj2);
+        AnimationVector animationVector2 = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(obj2);
         if (animationVector2 == null) {
             animationVector2 = this.positiveInfinityBounds;
         }
@@ -135,11 +208,11 @@ public final class Animatable<T, V extends AnimationVector> {
             return;
         }
         AnimationState animationState = this.internalState;
-        Object clampToBounds = clampToBounds(animationState.getValue());
-        if (Intrinsics.areEqual(clampToBounds, animationState.getValue())) {
+        Object objClampToBounds = clampToBounds(animationState.getValue());
+        if (Intrinsics.areEqual(objClampToBounds, animationState.getValue())) {
             return;
         }
-        ((SnapshotMutableStateImpl) animationState.value$delegate).setValue(clampToBounds);
+        ((SnapshotMutableStateImpl) animationState.value$delegate).setValue(objClampToBounds);
     }
 
     public /* synthetic */ Animatable(Object obj, TwoWayConverter twoWayConverter, Object obj2, String str, int i, DefaultConstructorMarker defaultConstructorMarker) {

@@ -3,7 +3,6 @@ package com.android.systemui.screenshot.message;
 import android.graphics.drawable.Drawable;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LabeledIcon {
     public final Drawable badgedIcon;
@@ -26,9 +25,9 @@ public final class LabeledIcon {
     }
 
     public final int hashCode() {
-        int hashCode = this.label.hashCode() * 31;
+        int iHashCode = this.label.hashCode() * 31;
         Drawable drawable = this.badgedIcon;
-        return hashCode + (drawable == null ? 0 : drawable.hashCode());
+        return iHashCode + (drawable == null ? 0 : drawable.hashCode());
     }
 
     public final String toString() {

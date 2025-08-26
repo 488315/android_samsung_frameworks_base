@@ -1,5 +1,6 @@
 package com.google.android.mms.pdu;
 
+import com.google.android.mms.InvalidHeaderValueException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -214,52 +215,97 @@ public class PduHeaders {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:104:0x0103, code lost:
-    
-        if (r9 <= 255) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:107:0x010a, code lost:
-    
-        if (r9 < 192) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:108:0x010c, code lost:
-    
-        if (r9 > 255) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:114:0x011c, code lost:
-    
-        if (r9 <= 255) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:117:0x0124, code lost:
-    
-        if (r9 < 192) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:118:0x0126, code lost:
-    
-        if (r9 > 255) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x0079, code lost:
-    
-        if (r9 <= 255) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x0081, code lost:
-    
-        if (r9 < 192) goto L57;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x0083, code lost:
-    
-        if (r9 > 255) goto L57;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:132:0x012a  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void setOctet(int r9, int r10) throws com.google.android.mms.InvalidHeaderValueException {
-        /*
-            Method dump skipped, instructions count: 346
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduHeaders.setOctet(int, int):void");
+    protected void setOctet(int i, int i2) throws InvalidHeaderValueException {
+        if (i2 == 134) {
+            if (128 != i && 129 != i) {
+                throw new InvalidHeaderValueException("Invalid Octet value!");
+            }
+        } else if (i2 != 153) {
+            if (i2 != 165) {
+                if (i2 != 167 && i2 != 169 && i2 != 171 && i2 != 177) {
+                    if (i2 != 180) {
+                        if (i2 != 191) {
+                            if (i2 != 140) {
+                                if (i2 != 141) {
+                                    if (i2 != 148) {
+                                        if (i2 != 149) {
+                                            if (i2 != 155) {
+                                                if (i2 != 156) {
+                                                    if (i2 != 162) {
+                                                        if (i2 != 163) {
+                                                            switch (i2) {
+                                                                case 143:
+                                                                    if (i < 128 || i > 130) {
+                                                                        throw new InvalidHeaderValueException("Invalid Octet value!");
+                                                                    }
+                                                                    break;
+                                                                case 144:
+                                                                case 145:
+                                                                    break;
+                                                                case 146:
+                                                                    if (i > 196 && i < 224) {
+                                                                        i = 192;
+                                                                        break;
+                                                                    } else if ((i > 235 && i <= 255) || i < 128 || ((i > 136 && i < 192) || i > 255)) {
+                                                                        i = 224;
+                                                                        break;
+                                                                    }
+                                                                default:
+                                                                    switch (i2) {
+                                                                        case 186:
+                                                                            if (i < 128 || i > 135) {
+                                                                                throw new InvalidHeaderValueException("Invalid Octet value!");
+                                                                            }
+                                                                        case 187:
+                                                                        case 188:
+                                                                            break;
+                                                                        default:
+                                                                            throw new RuntimeException("Invalid header field!");
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        } else if (i < 128 || i > 132) {
+                                                            throw new InvalidHeaderValueException("Invalid Octet value!");
+                                                        }
+                                                    }
+                                                } else if (i < 128 || i > 131) {
+                                                    throw new InvalidHeaderValueException("Invalid Octet value!");
+                                                }
+                                            } else if (128 != i && 129 != i) {
+                                                throw new InvalidHeaderValueException("Invalid Octet value!");
+                                            }
+                                        } else if (i < 128 || i > 135) {
+                                            throw new InvalidHeaderValueException("Invalid Octet value!");
+                                        }
+                                    }
+                                } else if (i < 16 || i > 19) {
+                                    i = 18;
+                                }
+                            } else if (i < 128 || i > 151) {
+                                throw new InvalidHeaderValueException("Invalid Octet value!");
+                            }
+                        } else if (128 != i && 129 != i) {
+                            throw new InvalidHeaderValueException("Invalid Octet value!");
+                        }
+                    } else if (128 != i) {
+                        throw new InvalidHeaderValueException("Invalid Octet value!");
+                    }
+                }
+            } else if (i <= 193 || i >= 224) {
+                if ((i > 228 && i <= 255) || i < 128 || ((i > 128 && i < 192) || i > 255)) {
+                }
+            }
+        } else if (i <= 194 || i >= 224) {
+            if ((i > 227 && i <= 255) || i < 128 || ((i > 128 && i < 192) || i > 255)) {
+            }
+        }
+        this.mHeaderMap.put(Integer.valueOf(i2), Integer.valueOf(i));
     }
 
     protected byte[] getTextString(int i) {

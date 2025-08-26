@@ -6,7 +6,6 @@ import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR
 import com.android.systemui.biometrics.EllipseOverlapDetectorParams;
 import kotlin.internal.ProgressionUtilKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EllipseOverlapDetector implements OverlapDetector {
     public final EllipseOverlapDetectorParams params;
@@ -53,38 +52,38 @@ public final class EllipseOverlapDetector implements OverlapDetector {
                 int progressionLastElement2 = ProgressionUtilKt.getProgressionLastElement(i6, i7, i8);
                 if (i6 <= progressionLastElement2) {
                     while (true) {
-                        int centerX = rect3.centerX();
-                        int centerY = rect3.centerY();
+                        int iCenterX = rect3.centerX();
+                        int iCenterY = rect3.centerY();
                         z = z4;
                         z2 = z5;
-                        int width = rect3.width() / 2;
-                        int i9 = centerX - i6;
-                        int i10 = centerY - i3;
+                        int iWidth = rect3.width() / 2;
+                        int i9 = iCenterX - i6;
+                        int i10 = iCenterY - i3;
                         int i11 = (i10 * i10) + (i9 * i9);
                         float f = i11;
-                        float f2 = ellipseOverlapDetectorParams.targetSize * width;
-                        SensorPixelPosition sensorPixelPosition = f <= f2 * f2 ? SensorPixelPosition.TARGET : i11 <= width * width ? SensorPixelPosition.SENSOR : SensorPixelPosition.OUTSIDE;
+                        float f2 = ellipseOverlapDetectorParams.targetSize * iWidth;
+                        SensorPixelPosition sensorPixelPosition = f <= f2 * f2 ? SensorPixelPosition.TARGET : i11 <= iWidth * iWidth ? SensorPixelPosition.SENSOR : SensorPixelPosition.OUTSIDE;
                         if (sensorPixelPosition != SensorPixelPosition.OUTSIDE) {
                             int i12 = i + 1;
                             Point point = new Point(i6, i3);
                             float f3 = normalizedTouchData.orientation;
                             boolean z6 = z3;
-                            float cos = (float) Math.cos(f3);
+                            float fCos = (float) Math.cos(f3);
                             float f4 = point.x;
                             float f5 = normalizedTouchData.x;
-                            float f6 = (f4 - f5) * cos;
+                            float f6 = (f4 - f5) * fCos;
                             double d = f3;
-                            float sin = (float) Math.sin(d);
+                            float fSin = (float) Math.sin(d);
                             float f7 = point.y;
                             float f8 = normalizedTouchData.y;
-                            float f9 = (f7 - f8) * sin;
-                            float sin2 = (point.x - f5) * ((float) Math.sin(d));
-                            float cos2 = (point.y - f8) * ((float) Math.cos(d));
+                            float f9 = (f7 - f8) * fSin;
+                            float fSin2 = (point.x - f5) * ((float) Math.sin(d));
+                            float fCos2 = (point.y - f8) * ((float) Math.cos(d));
                             float f10 = f6 + f9;
                             float f11 = 2;
                             float f12 = normalizedTouchData.minor / f11;
                             float f13 = (f10 * f10) / (f12 * f12);
-                            float f14 = sin2 - cos2;
+                            float f14 = fSin2 - fCos2;
                             float f15 = normalizedTouchData.major / f11;
                             if (((f14 * f14) / (f15 * f15)) + f13 <= 1.0f) {
                                 i2++;

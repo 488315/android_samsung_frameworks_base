@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.ClassReference;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NavBackStackEntryProviderKt {
     public static final void LocalOwnersProvider(final NavBackStackEntry navBackStackEntry, final SaveableStateHolder saveableStateHolder, final Function2 function2, Composer composer, final int i) {
@@ -50,28 +49,32 @@ public abstract class NavBackStackEntryProviderKt {
                 ComposerKt.traceEventStart("androidx.navigation.compose.LocalOwnersProvider (NavBackStackEntryProvider.kt:45)");
             }
             LocalViewModelStoreOwner.INSTANCE.getClass();
-            CompositionLocalKt.CompositionLocalProvider(new ProvidedValue[]{LocalViewModelStoreOwner.LocalViewModelStoreOwner.defaultProvidedValue$runtime_release(navBackStackEntry), LocalLifecycleOwnerKt.LocalLifecycleOwner.defaultProvidedValue$runtime_release(navBackStackEntry), AndroidCompositionLocals_androidKt.LocalSavedStateRegistryOwner.defaultProvidedValue$runtime_release(navBackStackEntry)}, ComposableLambdaKt.rememberComposableLambda(-52928304, new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$1
+            CompositionLocalKt.CompositionLocalProvider(new ProvidedValue[]{LocalViewModelStoreOwner.LocalViewModelStoreOwner.defaultProvidedValue$runtime_release(navBackStackEntry), LocalLifecycleOwnerKt.LocalLifecycleOwner.defaultProvidedValue$runtime_release(navBackStackEntry), AndroidCompositionLocals_androidKt.LocalSavedStateRegistryOwner.defaultProvidedValue$runtime_release(navBackStackEntry)}, ComposableLambdaKt.rememberComposableLambda(-52928304, new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt.LocalOwnersProvider.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
                 }
 
+                /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
                 @Override // kotlin.jvm.functions.Function2
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     if ((((Number) obj2).intValue() & 3) == 2) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("androidx.navigation.compose.LocalOwnersProvider.<anonymous> (NavBackStackEntryProvider.kt:51)");
+                            }
+                            NavBackStackEntryProviderKt.access$SaveableStateProvider(saveableStateHolder, function2, composer2, 0);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("androidx.navigation.compose.LocalOwnersProvider.<anonymous> (NavBackStackEntryProvider.kt:51)");
-                    }
-                    NavBackStackEntryProviderKt.access$SaveableStateProvider(SaveableStateHolder.this, function2, composer2, 0);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -80,9 +83,9 @@ public abstract class NavBackStackEntryProviderKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt$LocalOwnersProvider$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt.LocalOwnersProvider.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -91,7 +94,7 @@ public abstract class NavBackStackEntryProviderKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    NavBackStackEntryProviderKt.LocalOwnersProvider(NavBackStackEntry.this, saveableStateHolder, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    NavBackStackEntryProviderKt.LocalOwnersProvider(navBackStackEntry, saveableStateHolder, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };
@@ -100,7 +103,7 @@ public abstract class NavBackStackEntryProviderKt {
 
     public static final void access$SaveableStateProvider(final SaveableStateHolder saveableStateHolder, final Function2 function2, Composer composer, final int i) {
         int i2;
-        ViewModelProvider create$default;
+        ViewModelProvider viewModelProviderCreate$default;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1211832233);
         if ((i & 6) == 0) {
@@ -135,11 +138,11 @@ public abstract class NavBackStackEntryProviderKt {
                 ViewModelStore viewModelStore = current.getViewModelStore();
                 ViewModelProvider.Factory defaultViewModelProviderFactory = ((HasDefaultViewModelProviderFactory) current).getDefaultViewModelProviderFactory();
                 companion.getClass();
-                create$default = new ViewModelProvider(viewModelStore, defaultViewModelProviderFactory, defaultViewModelCreationExtras);
+                viewModelProviderCreate$default = new ViewModelProvider(viewModelStore, defaultViewModelProviderFactory, defaultViewModelCreationExtras);
             } else {
-                create$default = ViewModelProvider.Companion.create$default(ViewModelProvider.Companion, current);
+                viewModelProviderCreate$default = ViewModelProvider.Companion.create$default(ViewModelProvider.Companion, current);
             }
-            ViewModel viewModel = create$default.get(orCreateKotlinClass);
+            ViewModel viewModel = viewModelProviderCreate$default.get(orCreateKotlinClass);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -152,9 +155,9 @@ public abstract class NavBackStackEntryProviderKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt$SaveableStateProvider$1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.navigation.compose.NavBackStackEntryProviderKt$SaveableStateProvider$1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -163,7 +166,7 @@ public abstract class NavBackStackEntryProviderKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    NavBackStackEntryProviderKt.access$SaveableStateProvider(SaveableStateHolder.this, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    NavBackStackEntryProviderKt.access$SaveableStateProvider(saveableStateHolder, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };

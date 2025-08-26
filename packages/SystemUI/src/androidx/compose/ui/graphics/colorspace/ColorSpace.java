@@ -6,14 +6,12 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ColorSpace {
     public final int id;
     public final long model;
     public final String name;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,7 +38,7 @@ public abstract class ColorSpace {
         }
         ColorSpace colorSpace = (ColorSpace) obj;
         if (this.id == colorSpace.id && Intrinsics.areEqual(this.name, colorSpace.name)) {
-            return ColorModel.m508equalsimpl0(this.model, colorSpace.model);
+            return ColorModel.m510equalsimpl0(this.model, colorSpace.model);
         }
         return false;
     }
@@ -52,9 +50,9 @@ public abstract class ColorSpace {
     public abstract float getMinValue(int i);
 
     public int hashCode() {
-        int hashCode = this.name.hashCode() * 31;
+        int iHashCode = this.name.hashCode() * 31;
         ColorModel.Companion companion = ColorModel.Companion;
-        return MoveResult$$ExternalSyntheticOutline0.m(hashCode, 31, this.model) + this.id;
+        return MoveResult$$ExternalSyntheticOutline0.m(iHashCode, 31, this.model) + this.id;
     }
 
     public boolean isSrgb() {
@@ -62,7 +60,7 @@ public abstract class ColorSpace {
     }
 
     public final String toString() {
-        return this.name + " (id=" + this.id + ", model=" + ((Object) ColorModel.m509toStringimpl(this.model)) + ')';
+        return this.name + " (id=" + this.id + ", model=" + ((Object) ColorModel.m511toStringimpl(this.model)) + ')';
     }
 
     public long toXy$ui_graphics_release(float f, float f2, float f3) {
@@ -77,14 +75,14 @@ public abstract class ColorSpace {
     }
 
     /* renamed from: xyzaToColor-JlNiLsg$ui_graphics_release, reason: not valid java name */
-    public long mo510xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
+    public long mo512xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
         ColorModel.Companion companion = ColorModel.Companion;
         float[] fArr = new float[(int) (this.model >> 32)];
         fArr[0] = f;
         fArr[1] = f2;
         fArr[2] = f3;
-        float[] fromXyz = fromXyz(fArr);
-        return ColorKt.Color(fromXyz[0], fromXyz[1], fromXyz[2], f4, colorSpace);
+        float[] fArrFromXyz = fromXyz(fArr);
+        return ColorKt.Color(fArrFromXyz[0], fArrFromXyz[1], fArrFromXyz[2], f4, colorSpace);
     }
 
     public /* synthetic */ ColorSpace(String str, long j, DefaultConstructorMarker defaultConstructorMarker) {

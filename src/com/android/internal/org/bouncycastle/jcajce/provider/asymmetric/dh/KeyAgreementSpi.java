@@ -54,7 +54,7 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean z) throws InvalidKeyException, IllegalStateException {
+    protected Key engineDoPhase(Key key, boolean z) throws IllegalStateException, InvalidKeyException {
         if (this.x == null) {
             throw new IllegalStateException("Diffie-Hellman not initialised.");
         }
@@ -70,15 +70,15 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
             BigInteger bigInteger = this.p;
             BigInteger bigInteger2 = ONE;
             if (y.compareTo(bigInteger.subtract(bigInteger2)) < 0) {
-                BigInteger modPow = y.modPow(this.x, this.p);
-                if (modPow.compareTo(bigInteger2) == 0) {
+                BigInteger bigIntegerModPow = y.modPow(this.x, this.p);
+                if (bigIntegerModPow.compareTo(bigInteger2) == 0) {
                     throw new InvalidKeyException("Shared key can't be 1");
                 }
-                this.result = bigIntToBytes(modPow);
+                this.result = bigIntToBytes(bigIntegerModPow);
                 if (z) {
                     return null;
                 }
-                return new BCDHPublicKey(modPow, dHPublicKey.getParams());
+                return new BCDHPublicKey(bigIntegerModPow, dHPublicKey.getParams());
             }
         }
         throw new InvalidKeyException("Invalid DH PublicKey");

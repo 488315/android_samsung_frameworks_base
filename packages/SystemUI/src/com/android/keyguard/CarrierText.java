@@ -15,7 +15,6 @@ import com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl;
 import com.android.systemui.util.DeviceState;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CarrierText extends TextView {
     public final String mDebugLocation;
@@ -25,7 +24,6 @@ public class CarrierText extends TextView {
     public final boolean mShowMissingSim;
     public SlimIndicatorKeyguardCarrierTextHelper mSlimIndicatorKeyguardCarrierTextInterface;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CarrierTextTransformationMethod extends SingleLineTransformationMethod {
         public final boolean mAllCaps;
         public final Locale mLocale;
@@ -100,16 +98,16 @@ public class CarrierText extends TextView {
 
     public CarrierText(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.CarrierText, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.CarrierText, 0, 0);
         try {
-            boolean z = obtainStyledAttributes.getBoolean(0, false);
-            this.mShowAirplaneMode = obtainStyledAttributes.getBoolean(2, false);
-            this.mShowMissingSim = obtainStyledAttributes.getBoolean(3, false);
-            this.mDebugLocation = obtainStyledAttributes.getString(1);
-            obtainStyledAttributes.recycle();
+            boolean z = typedArrayObtainStyledAttributes.getBoolean(0, false);
+            this.mShowAirplaneMode = typedArrayObtainStyledAttributes.getBoolean(2, false);
+            this.mShowMissingSim = typedArrayObtainStyledAttributes.getBoolean(3, false);
+            this.mDebugLocation = typedArrayObtainStyledAttributes.getString(1);
+            typedArrayObtainStyledAttributes.recycle();
             setTransformationMethod(new CarrierTextTransformationMethod(((TextView) this).mContext, z));
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

@@ -22,7 +22,6 @@ import androidx.picker.widget.SeslColorSwatchView;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslColorPicker extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -45,14 +44,12 @@ public class SeslColorPicker extends LinearLayout {
     public final Resources mResources;
     public final GradientDrawable mSelectedColorBackground;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.picker.widget.SeslColorPicker$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PickedColor {
         public Integer mColor = null;
         public final float[] mHsv = new float[3];
@@ -65,7 +62,7 @@ public class SeslColorPicker extends LinearLayout {
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [androidx.picker.widget.SeslColorPicker$4] */
-    public SeslColorPicker(Context context, AttributeSet attributeSet) {
+    public SeslColorPicker(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         int[] iArr = {320, 360, 411};
         this.mImageButtonClickListener = new View.OnClickListener() { // from class: androidx.picker.widget.SeslColorPicker.4
@@ -75,9 +72,9 @@ public class SeslColorPicker extends LinearLayout {
                 for (int i = 0; i < size && i < 6; i++) {
                     if (SeslColorPicker.this.mRecentColorListLayout.getChildAt(i).equals(view)) {
                         SeslColorPicker.this.getClass();
-                        int intValue = ((Integer) SeslColorPicker.this.mRecentColorValues.get(i)).intValue();
-                        SeslColorPicker.this.mPickedColor.setColor(intValue);
-                        SeslColorPicker.this.mapColorOnColorWheel(intValue);
+                        int iIntValue = ((Integer) SeslColorPicker.this.mRecentColorValues.get(i)).intValue();
+                        SeslColorPicker.this.mPickedColor.setColor(iIntValue);
+                        SeslColorPicker.this.mapColorOnColorWheel(iIntValue);
                         SeslColorPicker.this.getClass();
                     }
                 }
@@ -254,9 +251,9 @@ public class SeslColorPicker extends LinearLayout {
     }
 
     public final void setCurrentColorViewDescription(int i) {
-        StringBuilder sb;
+        StringBuilder itemDescription;
+        StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-        StringBuilder sb3 = new StringBuilder();
         SeslColorSwatchView seslColorSwatchView = this.mColorSwatchView;
         if (seslColorSwatchView != null) {
             Point cursorIndexAt = seslColorSwatchView.getCursorIndexAt(i);
@@ -265,22 +262,22 @@ public class SeslColorPicker extends LinearLayout {
                 int i2 = cursorIndexAt.x;
                 StringBuilder[] sbArr2 = sbArr[i2];
                 int i3 = cursorIndexAt.y;
-                sb3 = sbArr2[i3];
-                if (sb3 == null) {
+                sb2 = sbArr2[i3];
+                if (sb2 == null) {
                     int i4 = SeslColorSwatchView.SeslColorSwatchViewTouchHelper.$r8$clinit;
-                    sb = seslColorSwatchView.mTouchHelper.getItemDescription((i3 * 11) + i2);
+                    itemDescription = seslColorSwatchView.mTouchHelper.getItemDescription((i3 * 11) + i2);
                 }
             } else {
-                sb = null;
+                itemDescription = null;
             }
-            sb3 = sb;
+            sb2 = itemDescription;
         }
-        if (sb3 != null) {
-            sb2.append(", ");
-            sb2.append((CharSequence) sb3);
+        if (sb2 != null) {
+            sb.append(", ");
+            sb.append((CharSequence) sb2);
         }
-        sb2.insert(0, this.mResources.getString(R.string.sesl_color_picker_new));
-        this.mPickedColorContainer.setContentDescription(sb2);
+        sb.insert(0, this.mResources.getString(R.string.sesl_color_picker_new));
+        this.mPickedColorContainer.setContentDescription(sb);
     }
 
     public final void updateCurrentColor() {
@@ -288,11 +285,11 @@ public class SeslColorPicker extends LinearLayout {
         if (num != null) {
             SeslOpacitySeekBar seslOpacitySeekBar = this.mOpacitySeekBar;
             if (seslOpacitySeekBar != null) {
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 GradientDrawable gradientDrawable = seslOpacitySeekBar.mProgressDrawable;
                 if (gradientDrawable != null) {
                     int[] iArr = seslOpacitySeekBar.mColors;
-                    iArr[1] = intValue;
+                    iArr[1] = iIntValue;
                     gradientDrawable.setColors(iArr);
                     seslOpacitySeekBar.setProgressDrawable(seslOpacitySeekBar.mProgressDrawable);
                     seslOpacitySeekBar.setProgress(seslOpacitySeekBar.getMax());

@@ -18,7 +18,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomizerLargeTileView extends QSTileView {
     public final SecQSCommonTileView commonTileView;
@@ -26,7 +25,6 @@ public final class CustomizerLargeTileView extends QSTileView {
     public final QSIconViewImpl iconView;
     public final View labelGroup;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -68,7 +66,7 @@ public final class CustomizerLargeTileView extends QSTileView {
 
     @Override // com.android.systemui.plugins.qs.QSTileView
     public final void onStateChanged(QSTile.State state) {
-        View requireViewById;
+        View viewRequireViewById;
         TextView textView;
         this.commonTileView.handleStateChanged(state, true);
         View view = this.labelGroup;
@@ -77,10 +75,10 @@ public final class CustomizerLargeTileView extends QSTileView {
             textView.setSingleLine(!(state.label != null ? StringsKt__StringsKt.contains(r5, " ", false) : false));
         }
         View view2 = this.labelGroup;
-        if (view2 == null || (requireViewById = view2.requireViewById(R.id.app_label)) == null) {
+        if (view2 == null || (viewRequireViewById = view2.requireViewById(R.id.app_label)) == null) {
             return;
         }
-        requireViewById.setSelected(false);
+        viewRequireViewById.setSelected(false);
     }
 
     @Override // com.android.systemui.plugins.qs.QSTileView
@@ -102,9 +100,9 @@ public final class CustomizerLargeTileView extends QSTileView {
         FrameLayout frameLayout = secQSCommonTileView.iconFrame;
         this.iconFrame = frameLayout;
         addView(frameLayout);
-        View createLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_large_tile_label, this);
-        this.labelGroup = createLabel;
-        addView(createLabel);
+        View viewCreateLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_large_tile_label, this);
+        this.labelGroup = viewCreateLabel;
+        addView(viewCreateLabel);
         Resources resources = context.getResources();
         setLayoutParams(new LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.large_tile_width), resources.getDimensionPixelSize(R.dimen.large_tile_height), 1.0f));
         setClipChildren(false);

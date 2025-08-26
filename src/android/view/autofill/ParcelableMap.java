@@ -11,9 +11,9 @@ class ParcelableMap extends HashMap<AutofillId, AutofillValue> implements Parcel
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ParcelableMap createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            ParcelableMap parcelableMap = new ParcelableMap(readInt);
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            ParcelableMap parcelableMap = new ParcelableMap(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 parcelableMap.put((AutofillId) parcel.readParcelable(null, AutofillId.class), (AutofillValue) parcel.readParcelable(null, AutofillValue.class));
             }
             return parcelableMap;

@@ -3,7 +3,6 @@ package kotlin.text;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class HexFormat {
     public static final Companion Companion = new Companion(null);
@@ -12,7 +11,6 @@ public final class HexFormat {
     public final NumberHexFormat number;
     public final boolean upperCase;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BytesHexFormat {
         public static final Companion Companion = new Companion(null);
         public static final BytesHexFormat Default = new BytesHexFormat(Integer.MAX_VALUE, Integer.MAX_VALUE, "  ", "", "", "");
@@ -23,7 +21,6 @@ public final class HexFormat {
         public final int bytesPerLine;
         public final String groupSeparator;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -91,7 +88,6 @@ public final class HexFormat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,7 +97,6 @@ public final class HexFormat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NumberHexFormat {
         public static final Companion Companion = new Companion(null);
         public static final NumberHexFormat Default = new NumberHexFormat("", "", false, 1);
@@ -113,7 +108,6 @@ public final class HexFormat {
         public final boolean removeLeadingZeros;
         public final String suffix;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -185,20 +179,20 @@ public final class HexFormat {
     }
 
     public final String toString() {
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("HexFormat(\n    upperCase = ");
-        m.append(this.upperCase);
-        m.append(",\n    bytes = BytesHexFormat(\n");
-        this.bytes.appendOptionsTo$kotlin_stdlib(m, "        ");
-        m.append('\n');
-        m.append("    ),");
-        m.append('\n');
-        m.append("    number = NumberHexFormat(");
-        m.append('\n');
-        this.number.appendOptionsTo$kotlin_stdlib(m, "        ");
-        m.append('\n');
-        m.append("    )");
-        m.append('\n');
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("HexFormat(\n    upperCase = ");
+        sbM.append(this.upperCase);
+        sbM.append(",\n    bytes = BytesHexFormat(\n");
+        this.bytes.appendOptionsTo$kotlin_stdlib(sbM, "        ");
+        sbM.append('\n');
+        sbM.append("    ),");
+        sbM.append('\n');
+        sbM.append("    number = NumberHexFormat(");
+        sbM.append('\n');
+        this.number.appendOptionsTo$kotlin_stdlib(sbM, "        ");
+        sbM.append('\n');
+        sbM.append("    )");
+        sbM.append('\n');
+        sbM.append(")");
+        return sbM.toString();
     }
 }

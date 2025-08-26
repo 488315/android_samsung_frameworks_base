@@ -4,18 +4,311 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Trace;
 import android.provider.Settings;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import com.android.app.tracing.TraceUtilsKt;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.util.settings.SettingsProxy;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface UserSettingsProxy extends SettingsProxy {
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverAsync$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ Uri $uri;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(Uri uri, ContentObserver contentObserver, Continuation continuation) {
+            super(2, continuation);
+            this.$uri = uri;
+            this.$settingsObserver = contentObserver;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new AnonymousClass1(this.$uri, this.$settingsObserver, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            UserSettingsProxy userSettingsProxy = UserSettingsProxy.this;
+            userSettingsProxy.registerContentObserverForUserSync(this.$uri, this.$settingsObserver, userSettingsProxy.getUserId());
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass1) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverAsync$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $notifyForDescendants;
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ Uri $uri;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(Uri uri, boolean z, ContentObserver contentObserver, Continuation continuation) {
+            super(2, continuation);
+            this.$uri = uri;
+            this.$notifyForDescendants = z;
+            this.$settingsObserver = contentObserver;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new AnonymousClass2(this.$uri, this.$notifyForDescendants, this.$settingsObserver, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            UserSettingsProxy userSettingsProxy = UserSettingsProxy.this;
+            userSettingsProxy.registerContentObserverForUserSync(this.$uri, this.$notifyForDescendants, this.$settingsObserver, userSettingsProxy.getUserId());
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass2) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverForUserAsync$1, reason: invalid class name and case insensitive filesystem */
+    final class C11731 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $name;
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ int $userHandle;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11731(String str, ContentObserver contentObserver, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+            this.$settingsObserver = contentObserver;
+            this.$userHandle = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new C11731(this.$name, this.$settingsObserver, this.$userHandle, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                UserSettingsProxy userSettingsProxy = UserSettingsProxy.this;
+                userSettingsProxy.registerContentObserverForUserSync(userSettingsProxy.getUriFor(this.$name), this.$settingsObserver, this.$userHandle);
+                return Unit.INSTANCE;
+            } catch (SecurityException e) {
+                throw new SecurityException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("registerContentObserverForUserAsync-A, name: ", this.$name), e);
+            }
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11731) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverForUserAsync$2, reason: invalid class name and case insensitive filesystem */
+    final class C11742 extends SuspendLambda implements Function2 {
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ Uri $uri;
+        final /* synthetic */ int $userHandle;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11742(Uri uri, ContentObserver contentObserver, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$uri = uri;
+            this.$settingsObserver = contentObserver;
+            this.$userHandle = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new C11742(this.$uri, this.$settingsObserver, this.$userHandle, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                UserSettingsProxy.this.registerContentObserverForUserSync(this.$uri, this.$settingsObserver, this.$userHandle);
+                return Unit.INSTANCE;
+            } catch (SecurityException e) {
+                throw new SecurityException("registerContentObserverForUserAsync-B, uri: " + this.$uri, e);
+            }
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11742) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverForUserAsync$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Runnable $registered;
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ Uri $uri;
+        final /* synthetic */ int $userHandle;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass3(Uri uri, ContentObserver contentObserver, int i, Runnable runnable, Continuation continuation) {
+            super(2, continuation);
+            this.$uri = uri;
+            this.$settingsObserver = contentObserver;
+            this.$userHandle = i;
+            this.$registered = runnable;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new AnonymousClass3(this.$uri, this.$settingsObserver, this.$userHandle, this.$registered, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                UserSettingsProxy.this.registerContentObserverForUserSync(this.$uri, this.$settingsObserver, this.$userHandle);
+                this.$registered.run();
+                return Unit.INSTANCE;
+            } catch (SecurityException e) {
+                throw new SecurityException("registerContentObserverForUserAsync-C, uri: " + this.$uri, e);
+            }
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass3) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverForUserAsync$4, reason: invalid class name */
+    final class AnonymousClass4 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $name;
+        final /* synthetic */ boolean $notifyForDescendants;
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ int $userHandle;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass4(String str, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+            this.$notifyForDescendants = z;
+            this.$settingsObserver = contentObserver;
+            this.$userHandle = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new AnonymousClass4(this.$name, this.$notifyForDescendants, this.$settingsObserver, this.$userHandle, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                UserSettingsProxy userSettingsProxy = UserSettingsProxy.this;
+                userSettingsProxy.registerContentObserverForUserSync(userSettingsProxy.getUriFor(this.$name), this.$notifyForDescendants, this.$settingsObserver, this.$userHandle);
+                return Unit.INSTANCE;
+            } catch (SecurityException e) {
+                throw new SecurityException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("registerContentObserverForUserAsync-D, name: ", this.$name), e);
+            }
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass4) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.UserSettingsProxy$registerContentObserverForUserAsync$5, reason: invalid class name */
+    final class AnonymousClass5 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $notifyForDescendants;
+        final /* synthetic */ ContentObserver $settingsObserver;
+        final /* synthetic */ Uri $uri;
+        final /* synthetic */ int $userHandle;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass5(Uri uri, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$uri = uri;
+            this.$notifyForDescendants = z;
+            this.$settingsObserver = contentObserver;
+            this.$userHandle = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserSettingsProxy.this.new AnonymousClass5(this.$uri, this.$notifyForDescendants, this.$settingsObserver, this.$userHandle, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                UserSettingsProxy.this.registerContentObserverForUserSync(this.$uri, this.$notifyForDescendants, this.$settingsObserver, this.$userHandle);
+                return Unit.INSTANCE;
+            } catch (SecurityException e) {
+                throw new SecurityException("registerContentObserverForUserAsync-E, uri: " + this.$uri, e);
+            }
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass5) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
     /* JADX INFO: Access modifiers changed from: private */
     static Unit registerContentObserver$lambda$0(UserSettingsProxy userSettingsProxy, Uri uri, ContentObserver contentObserver) {
         userSettingsProxy.registerContentObserverForUserSync(uri, contentObserver, userSettingsProxy.getUserId());
@@ -29,15 +322,13 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     static Object registerContentObserver$suspendImpl(final UserSettingsProxy userSettingsProxy, final Uri uri, final ContentObserver contentObserver, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserver-A", new Function0() { // from class: com.android.systemui.util.settings.UserSettingsProxy$$ExternalSyntheticLambda3
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserver-A", new Function0() { // from class: com.android.systemui.util.settings.UserSettingsProxy$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Unit registerContentObserver$lambda$0;
-                registerContentObserver$lambda$0 = UserSettingsProxy.registerContentObserver$lambda$0(UserSettingsProxy.this, uri, contentObserver);
-                return registerContentObserver$lambda$0;
+                return UserSettingsProxy.registerContentObserver$lambda$0(this.f$0, uri, contentObserver);
             }
         }, continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -65,8 +356,8 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     static Object registerContentObserverForUser$suspendImpl(UserSettingsProxy userSettingsProxy, String str, ContentObserver contentObserver, int i, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-A", new UserSettingsProxy$$ExternalSyntheticLambda4(userSettingsProxy, str, contentObserver, i), continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-A", new UserSettingsProxy$$ExternalSyntheticLambda4(userSettingsProxy, str, contentObserver, i), continuation);
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.util.settings.SettingsProxy
@@ -163,7 +454,7 @@ public interface UserSettingsProxy extends SettingsProxy {
 
     @Override // com.android.systemui.util.settings.SettingsProxy
     default Job registerContentObserverAsync(Uri uri, ContentObserver contentObserver) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverAsync$1(this, uri, contentObserver, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new AnonymousClass1(uri, contentObserver, null), 6);
     }
 
     default Object registerContentObserverForUser(Uri uri, ContentObserver contentObserver, int i, Continuation continuation) {
@@ -171,7 +462,7 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     default Job registerContentObserverForUserAsync(String str, ContentObserver contentObserver, int i) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverForUserAsync$1(this, str, contentObserver, i, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new C11731(str, contentObserver, i, null), 6);
     }
 
     default void registerContentObserverForUserSync(String str, ContentObserver contentObserver, int i) {
@@ -208,7 +499,7 @@ public interface UserSettingsProxy extends SettingsProxy {
 
     @Override // com.android.systemui.util.settings.SettingsProxy
     default Job registerContentObserverAsync(Uri uri, boolean z, ContentObserver contentObserver) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverAsync$2(this, uri, z, contentObserver, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new AnonymousClass2(uri, z, contentObserver, null), 6);
     }
 
     default Object registerContentObserverForUser(Uri uri, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
@@ -216,7 +507,7 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     default Job registerContentObserverForUserAsync(Uri uri, ContentObserver contentObserver, int i) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverForUserAsync$2(this, uri, contentObserver, i, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new C11742(uri, contentObserver, i, null), 6);
     }
 
     default void registerContentObserverForUserSync(Uri uri, ContentObserver contentObserver, int i) {
@@ -253,7 +544,7 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     default Job registerContentObserverForUserAsync(Uri uri, ContentObserver contentObserver, int i, Runnable runnable) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverForUserAsync$3(this, uri, contentObserver, i, runnable, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new AnonymousClass3(uri, contentObserver, i, runnable, null), 6);
     }
 
     default void registerContentObserverForUserSync(String str, boolean z, ContentObserver contentObserver, int i) {
@@ -261,20 +552,18 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     static Object registerContentObserver$suspendImpl(final UserSettingsProxy userSettingsProxy, final Uri uri, final boolean z, final ContentObserver contentObserver, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserver-B", new Function0() { // from class: com.android.systemui.util.settings.UserSettingsProxy$$ExternalSyntheticLambda2
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserver-B", new Function0() { // from class: com.android.systemui.util.settings.UserSettingsProxy$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Unit registerContentObserver$lambda$1;
-                registerContentObserver$lambda$1 = UserSettingsProxy.registerContentObserver$lambda$1(UserSettingsProxy.this, uri, z, contentObserver);
-                return registerContentObserver$lambda$1;
+                return UserSettingsProxy.registerContentObserver$lambda$1(this.f$0, uri, z, contentObserver);
             }
         }, continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 
     static Object registerContentObserverForUser$suspendImpl(UserSettingsProxy userSettingsProxy, Uri uri, ContentObserver contentObserver, int i, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-B", new UserSettingsProxy$$ExternalSyntheticLambda4(userSettingsProxy, uri, contentObserver, i), continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-B", new UserSettingsProxy$$ExternalSyntheticLambda4(userSettingsProxy, uri, contentObserver, i), continuation);
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 
     default Object registerContentObserverForUser(String str, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
@@ -282,35 +571,35 @@ public interface UserSettingsProxy extends SettingsProxy {
     }
 
     default void registerContentObserverForUserAsync(String str, boolean z, ContentObserver contentObserver, int i) {
-        CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverForUserAsync$4(this, str, z, contentObserver, i, null), 6);
+        CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new AnonymousClass4(str, z, contentObserver, i, null), 6);
     }
 
     default Job registerContentObserverForUserAsync(Uri uri, boolean z, ContentObserver contentObserver, int i) {
-        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new UserSettingsProxy$registerContentObserverForUserAsync$5(this, uri, z, contentObserver, i, null), 6);
+        return CoroutineTracingKt.launchTraced$default(getSettingsScope(), null, null, new AnonymousClass5(uri, z, contentObserver, i, null), 6);
     }
 
     default void registerContentObserverForUserSync(Uri uri, boolean z, ContentObserver contentObserver, int i) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("USP#registerObserver#[" + uri + "]");
         }
         try {
             getContentResolver().registerContentObserver(uri, z, contentObserver, getRealUserHandle(i));
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
     }
 
     static Object registerContentObserverForUser$suspendImpl(UserSettingsProxy userSettingsProxy, String str, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-C", new UserSettingsProxy$$ExternalSyntheticLambda0(userSettingsProxy, str, z, contentObserver, i), continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-C", new UserSettingsProxy$$ExternalSyntheticLambda0(userSettingsProxy, str, z, contentObserver, i), continuation);
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 
     static Object registerContentObserverForUser$suspendImpl(UserSettingsProxy userSettingsProxy, Uri uri, boolean z, ContentObserver contentObserver, int i, Continuation continuation) {
-        Object executeOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-D", new UserSettingsProxy$$ExternalSyntheticLambda0(userSettingsProxy, uri, z, contentObserver, i), continuation);
-        return executeOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? executeOnSettingsScopeDispatcher : Unit.INSTANCE;
+        Object objExecuteOnSettingsScopeDispatcher = userSettingsProxy.executeOnSettingsScopeDispatcher("registerContentObserverForUser-D", new UserSettingsProxy$$ExternalSyntheticLambda0(userSettingsProxy, uri, z, contentObserver, i), continuation);
+        return objExecuteOnSettingsScopeDispatcher == CoroutineSingletons.COROUTINE_SUSPENDED ? objExecuteOnSettingsScopeDispatcher : Unit.INSTANCE;
     }
 }

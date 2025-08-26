@@ -8,7 +8,6 @@ import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.io.File;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PowerUiRune extends Rune {
     public static final boolean ADAPTIVE_PROTECTION_NOTIFICATION;
@@ -47,9 +46,9 @@ public class PowerUiRune extends Rune {
         BATTERY_CHARGING_ESTIMATE_TIME = new File("/sys/class/power_supply/battery/time_to_full_now").exists();
         boolean z = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_BATTERY_SUPPORT_LONGLIFE_FORCE_CUTOFF");
         PROTECT_BATTERY_CUTOFF = z;
-        boolean exists = new File("/sys/class/sec/led/led_pattern").exists();
-        KEEP_DIMMING_AT_BATTERY_HEALTH_INTERRUPTION = DeviceType.isTablet() || !exists;
-        FULL_BATTERY_CHECK = !exists || "VZW".equals(string) || "ATT".equals(string) || "SPR".equals(string) || "TMB".equals(string);
+        boolean zExists = new File("/sys/class/sec/led/led_pattern").exists();
+        KEEP_DIMMING_AT_BATTERY_HEALTH_INTERRUPTION = DeviceType.isTablet() || !zExists;
+        FULL_BATTERY_CHECK = !zExists || "VZW".equals(string) || "ATT".equals(string) || "SPR".equals(string) || "TMB".equals(string);
         BATTERY_SWELLING_NOTICE = !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_BATTERY_DISABLE_LOW_TEMP_SLOW_CHARGED_POPUP");
         INCOMPATIBLE_CHARGER_CHECK = "VZW".equals(string);
         SPECIFIC_POWER_REQUEST_BY_VZW = "VZW".equals(string);

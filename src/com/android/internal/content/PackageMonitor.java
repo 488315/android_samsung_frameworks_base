@@ -15,6 +15,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+import android.util.Slog;
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.os.BackgroundThread;
 import java.lang.ref.WeakReference;
@@ -141,11 +142,11 @@ public abstract class PackageMonitor extends BroadcastReceiver {
     }
 
     private IntentFilter getPackageFilter() {
-        boolean isCore = UserHandle.isCore(Process.myUid());
+        boolean zIsCore = UserHandle.isCore(Process.myUid());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_QUERY_PACKAGE_RESTART);
         intentFilter.addDataScheme("package");
-        if (isCore) {
+        if (zIsCore) {
             intentFilter.setPriority(1000);
         }
         return intentFilter;
@@ -319,24 +320,175 @@ public abstract class PackageMonitor extends BroadcastReceiver {
             executor.execute(new Runnable() { // from class: com.android.internal.content.PackageMonitor$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PackageMonitor.this.lambda$postHandlePackageEvent$0(intent);
+                    this.f$0.lambda$postHandlePackageEvent$0(intent);
                 }
             });
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x024c  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x024c  */
     /* renamed from: doHandlePackageEvent, reason: merged with bridge method [inline-methods] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void lambda$postHandlePackageEvent$0(android.content.Intent r14) {
-        /*
-            Method dump skipped, instructions count: 597
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.content.PackageMonitor.lambda$postHandlePackageEvent$0(android.content.Intent):void");
+    public final void lambda$postHandlePackageEvent$0(Intent intent) {
+        PackageMonitor packageMonitor;
+        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
+        this.mChangeUserId = intExtra;
+        if (intExtra == -10000) {
+            Slog.w(TAG, "Intent broadcast does not contain user handle: " + intent);
+            return;
+        }
+        onBeginPackageChanges();
+        this.mAppearingPackages = null;
+        this.mDisappearingPackages = null;
+        int i = 0;
+        this.mSomePackagesChanged = false;
+        this.mModifiedComponents = null;
+        String action = intent.getAction();
+        if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
+            String packageName = getPackageName(intent);
+            int intExtra2 = intent.getIntExtra(Intent.EXTRA_UID, 0);
+            this.mSomePackagesChanged = true;
+            if (packageName != null) {
+                String[] strArr = this.mTempArray;
+                this.mAppearingPackages = strArr;
+                strArr[0] = packageName;
+                if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
+                    this.mModifiedPackages = this.mTempArray;
+                    this.mChangeType = 1;
+                    onPackageUpdateFinished(packageName, intExtra2);
+                    onPackageUpdateFinishedWithExtras(packageName, intExtra2, intent.getExtras());
+                    onPackageModified(packageName);
+                    onPackageModifiedWithExtras(packageName, intent.getExtras());
+                } else {
+                    this.mChangeType = 3;
+                    onPackageAdded(packageName, intExtra2);
+                    onPackageAddedWithExtras(packageName, intExtra2, intent.getExtras());
+                }
+                onPackageAppearedWithExtras(packageName, intent.getExtras());
+                onPackageAppeared(packageName, this.mChangeType);
+            }
+        } else if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
+            String packageName2 = getPackageName(intent);
+            int intExtra3 = intent.getIntExtra(Intent.EXTRA_UID, 0);
+            if (packageName2 != null) {
+                String[] strArr2 = this.mTempArray;
+                this.mDisappearingPackages = strArr2;
+                strArr2[0] = packageName2;
+                if (intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
+                    this.mChangeType = 1;
+                    onPackageUpdateStarted(packageName2, intExtra3);
+                    onPackageUpdateStartedWithExtras(packageName2, intExtra3, intent.getExtras());
+                    if (intent.getBooleanExtra(Intent.EXTRA_ARCHIVAL, false)) {
+                        onPackageModified(packageName2);
+                        onPackageModifiedWithExtras(packageName2, intent.getExtras());
+                    }
+                } else {
+                    this.mChangeType = 3;
+                    this.mSomePackagesChanged = true;
+                    onPackageRemoved(packageName2, intExtra3);
+                    onPackageRemovedWithExtras(packageName2, intExtra3, intent.getExtras());
+                    if (intent.getBooleanExtra(Intent.EXTRA_REMOVED_FOR_ALL_USERS, false)) {
+                        onPackageRemovedAllUsers(packageName2, intExtra3);
+                        onPackageRemovedAllUsersWithExtras(packageName2, intExtra3, intent.getExtras());
+                    }
+                }
+                onPackageDisappearedWithExtras(packageName2, intent.getExtras());
+                onPackageDisappeared(packageName2, this.mChangeType);
+            }
+        } else if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
+            String packageName3 = getPackageName(intent);
+            int intExtra4 = intent.getIntExtra(Intent.EXTRA_UID, 0);
+            String[] stringArrayExtra = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_COMPONENT_NAME_LIST);
+            this.mModifiedComponents = stringArrayExtra;
+            if (packageName3 != null) {
+                String[] strArr3 = this.mTempArray;
+                this.mModifiedPackages = strArr3;
+                strArr3[0] = packageName3;
+                this.mChangeType = 3;
+                if (onPackageChanged(packageName3, intExtra4, stringArrayExtra)) {
+                    this.mSomePackagesChanged = true;
+                }
+                onPackageChangedWithExtras(packageName3, intent.getExtras());
+                onPackageModified(packageName3);
+                onPackageModifiedWithExtras(packageName3, intent.getExtras());
+            }
+        } else if ("android.intent.action.PACKAGE_DATA_CLEARED".equals(action)) {
+            String packageName4 = getPackageName(intent);
+            int intExtra5 = intent.getIntExtra(Intent.EXTRA_UID, 0);
+            if (packageName4 != null) {
+                onPackageDataCleared(packageName4, intExtra5);
+            }
+        } else {
+            if (Intent.ACTION_QUERY_PACKAGE_RESTART.equals(action)) {
+                String[] stringArrayExtra2 = intent.getStringArrayExtra(Intent.EXTRA_PACKAGES);
+                this.mDisappearingPackages = stringArrayExtra2;
+                this.mChangeType = 2;
+                boolean zOnHandleForceStop = onHandleForceStop(intent, stringArrayExtra2, intent.getIntExtra(Intent.EXTRA_UID, 0), false, intent.getExtras());
+                packageMonitor = this;
+                if (zOnHandleForceStop) {
+                    packageMonitor.setResultCode(-1);
+                }
+            } else {
+                packageMonitor = this;
+                if (Intent.ACTION_PACKAGE_RESTARTED.equals(action)) {
+                    String[] strArr4 = {packageMonitor.getPackageName(intent)};
+                    packageMonitor.mDisappearingPackages = strArr4;
+                    packageMonitor.mChangeType = 2;
+                    packageMonitor.onHandleForceStop(intent, strArr4, intent.getIntExtra(Intent.EXTRA_UID, 0), true, intent.getExtras());
+                } else if (Intent.ACTION_UID_REMOVED.equals(action)) {
+                    packageMonitor.onUidRemoved(intent.getIntExtra(Intent.EXTRA_UID, 0));
+                } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+                    String[] stringArrayExtra3 = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                    packageMonitor.mAppearingPackages = stringArrayExtra3;
+                    packageMonitor.mChangeType = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false) ? 1 : 2;
+                    packageMonitor.mSomePackagesChanged = true;
+                    if (stringArrayExtra3 != null) {
+                        packageMonitor.onPackagesAvailable(stringArrayExtra3);
+                        while (i < stringArrayExtra3.length) {
+                            packageMonitor.onPackageAppeared(stringArrayExtra3[i], packageMonitor.mChangeType);
+                            i++;
+                        }
+                    }
+                } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
+                    String[] stringArrayExtra4 = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                    packageMonitor.mDisappearingPackages = stringArrayExtra4;
+                    packageMonitor.mChangeType = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false) ? 1 : 2;
+                    packageMonitor.mSomePackagesChanged = true;
+                    if (stringArrayExtra4 != null) {
+                        packageMonitor.onPackagesUnavailable(stringArrayExtra4);
+                        while (i < stringArrayExtra4.length) {
+                            packageMonitor.onPackageDisappeared(stringArrayExtra4[i], packageMonitor.mChangeType);
+                            i++;
+                        }
+                    }
+                } else if (Intent.ACTION_PACKAGES_SUSPENDED.equals(action)) {
+                    String[] stringArrayExtra5 = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                    packageMonitor.mSomePackagesChanged = true;
+                    packageMonitor.onPackagesSuspended(stringArrayExtra5);
+                } else if (Intent.ACTION_PACKAGES_UNSUSPENDED.equals(action)) {
+                    String[] stringArrayExtra6 = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                    packageMonitor.mSomePackagesChanged = true;
+                    packageMonitor.onPackagesUnsuspended(stringArrayExtra6);
+                } else if (Intent.ACTION_PACKAGE_UNSTOPPED.equals(action)) {
+                    String packageName5 = packageMonitor.getPackageName(intent);
+                    packageMonitor.mAppearingPackages = new String[]{packageName5};
+                    packageMonitor.mChangeType = 2;
+                    packageMonitor.onPackageUnstopped(packageName5, intent.getIntExtra(Intent.EXTRA_UID, 0), intent.getExtras());
+                }
+            }
+            if (packageMonitor.mSomePackagesChanged) {
+                packageMonitor.onSomePackagesChanged();
+            }
+            packageMonitor.onFinishPackageChanges();
+            packageMonitor.mChangeUserId = -10000;
+        }
+        packageMonitor = this;
+        if (packageMonitor.mSomePackagesChanged) {
+        }
+        packageMonitor.onFinishPackageChanges();
+        packageMonitor.mChangeUserId = -10000;
     }
 
     private static final class PackageMonitorCallback extends IRemoteCallback.Stub {

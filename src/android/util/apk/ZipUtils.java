@@ -24,8 +24,8 @@ abstract class ZipUtils {
         if (randomAccessFile.getChannel().size() < 22) {
             return null;
         }
-        Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord = findZipEndOfCentralDirectoryRecord(randomAccessFile, 0);
-        return findZipEndOfCentralDirectoryRecord != null ? findZipEndOfCentralDirectoryRecord : findZipEndOfCentralDirectoryRecord(randomAccessFile, 65535);
+        Pair<ByteBuffer, Long> pairFindZipEndOfCentralDirectoryRecord = findZipEndOfCentralDirectoryRecord(randomAccessFile, 0);
+        return pairFindZipEndOfCentralDirectoryRecord != null ? pairFindZipEndOfCentralDirectoryRecord : findZipEndOfCentralDirectoryRecord(randomAccessFile, 65535);
     }
 
     private static Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord(RandomAccessFile randomAccessFile, int i) throws IOException {
@@ -36,30 +36,30 @@ abstract class ZipUtils {
         if (size < 22) {
             return null;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(((int) Math.min(i, size - 22)) + 22);
-        allocate.order(ByteOrder.LITTLE_ENDIAN);
-        long capacity = size - allocate.capacity();
-        randomAccessFile.seek(capacity);
-        randomAccessFile.readFully(allocate.array(), allocate.arrayOffset(), allocate.capacity());
-        int findZipEndOfCentralDirectoryRecord = findZipEndOfCentralDirectoryRecord(allocate);
-        if (findZipEndOfCentralDirectoryRecord == -1) {
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(((int) Math.min(i, size - 22)) + 22);
+        byteBufferAllocate.order(ByteOrder.LITTLE_ENDIAN);
+        long jCapacity = size - byteBufferAllocate.capacity();
+        randomAccessFile.seek(jCapacity);
+        randomAccessFile.readFully(byteBufferAllocate.array(), byteBufferAllocate.arrayOffset(), byteBufferAllocate.capacity());
+        int iFindZipEndOfCentralDirectoryRecord = findZipEndOfCentralDirectoryRecord(byteBufferAllocate);
+        if (iFindZipEndOfCentralDirectoryRecord == -1) {
             return null;
         }
-        allocate.position(findZipEndOfCentralDirectoryRecord);
-        ByteBuffer slice = allocate.slice();
-        slice.order(ByteOrder.LITTLE_ENDIAN);
-        return Pair.create(slice, Long.valueOf(capacity + findZipEndOfCentralDirectoryRecord));
+        byteBufferAllocate.position(iFindZipEndOfCentralDirectoryRecord);
+        ByteBuffer byteBufferSlice = byteBufferAllocate.slice();
+        byteBufferSlice.order(ByteOrder.LITTLE_ENDIAN);
+        return Pair.create(byteBufferSlice, Long.valueOf(jCapacity + iFindZipEndOfCentralDirectoryRecord));
     }
 
     private static int findZipEndOfCentralDirectoryRecord(ByteBuffer byteBuffer) {
         assertByteOrderLittleEndian(byteBuffer);
-        int capacity = byteBuffer.capacity();
-        if (capacity < 22) {
+        int iCapacity = byteBuffer.capacity();
+        if (iCapacity < 22) {
             return -1;
         }
-        int i = capacity - 22;
-        int min = Math.min(i, 65535);
-        for (int i2 = 0; i2 <= min; i2++) {
+        int i = iCapacity - 22;
+        int iMin = Math.min(i, 65535);
+        for (int i2 = 0; i2 <= iMin; i2++) {
             int i3 = i - i2;
             if (byteBuffer.getInt(i3) == ZIP_EOCD_REC_SIG && getUnsignedInt16(byteBuffer, i3 + 20) == i2) {
                 return i3;

@@ -14,7 +14,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CoreTextFieldKt$CoreTextField$focusModifier$1$1$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BringIntoViewRequester $bringIntoViewRequester;
@@ -46,8 +45,6 @@ final class CoreTextFieldKt$CoreTextField$focusModifier$1$1$1$1 extends SuspendL
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        long computeSizeForDefaultText;
-        Rect rect;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -58,20 +55,12 @@ final class CoreTextFieldKt$CoreTextField$focusModifier$1$1$1$1 extends SuspendL
             TextLayoutResult textLayoutResult = this.$layoutResult.value;
             OffsetMapping offsetMapping = this.$offsetMapping;
             this.label = 1;
-            int originalToTransformed = offsetMapping.originalToTransformed(TextRange.m749getMaximpl(textFieldValue.selection));
-            if (originalToTransformed < textLayoutResult.layoutInput.text.text.length()) {
-                rect = textLayoutResult.getBoundingBox(originalToTransformed);
-            } else if (originalToTransformed != 0) {
-                rect = textLayoutResult.getBoundingBox(originalToTransformed - 1);
-            } else {
-                computeSizeForDefaultText = TextFieldDelegateKt.computeSizeForDefaultText(textDelegate.style, textDelegate.density, textDelegate.fontFamilyResolver, TextFieldDelegateKt.EmptyTextReplacement, 1);
-                rect = new Rect(0.0f, 0.0f, 1.0f, (int) (computeSizeForDefaultText & 4294967295L));
+            int iOriginalToTransformed = offsetMapping.originalToTransformed(TextRange.m751getMaximpl(textFieldValue.selection));
+            Object objBringIntoView = bringIntoViewRequester.bringIntoView(iOriginalToTransformed < textLayoutResult.layoutInput.text.text.length() ? textLayoutResult.getBoundingBox(iOriginalToTransformed) : iOriginalToTransformed != 0 ? textLayoutResult.getBoundingBox(iOriginalToTransformed - 1) : new Rect(0.0f, 0.0f, 1.0f, (int) (TextFieldDelegateKt.computeSizeForDefaultText(textDelegate.style, textDelegate.density, textDelegate.fontFamilyResolver, TextFieldDelegateKt.EmptyTextReplacement, 1) & 4294967295L)), this);
+            if (objBringIntoView != coroutineSingletons) {
+                objBringIntoView = Unit.INSTANCE;
             }
-            Object bringIntoView = bringIntoViewRequester.bringIntoView(rect, this);
-            if (bringIntoView != coroutineSingletons) {
-                bringIntoView = Unit.INSTANCE;
-            }
-            if (bringIntoView == coroutineSingletons) {
+            if (objBringIntoView == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

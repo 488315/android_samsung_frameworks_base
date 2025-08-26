@@ -8,6 +8,7 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.util.MathUtils;
 import android.util.Property;
 import android.util.TypedValue;
+import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.PointerIcon;
 import android.view.View;
@@ -107,7 +109,7 @@ class SemFastScroller {
     private static final long TAP_TIMEOUT = ViewConfiguration.getTapTimeout();
     private static Property<View, Integer> LEFT = new IntProperty<View>("left") { // from class: android.widget.SemFastScroller.3
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setLeft(i);
         }
 
@@ -118,7 +120,7 @@ class SemFastScroller {
     };
     private static Property<View, Integer> TOP = new IntProperty<View>(GenerateXML.TOP) { // from class: android.widget.SemFastScroller.4
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setTop(i);
         }
 
@@ -129,7 +131,7 @@ class SemFastScroller {
     };
     private static Property<View, Integer> RIGHT = new IntProperty<View>("right") { // from class: android.widget.SemFastScroller.5
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setRight(i);
         }
 
@@ -140,7 +142,7 @@ class SemFastScroller {
     };
     private static Property<View, Integer> BOTTOM = new IntProperty<View>(GenerateXML.BOTTOM) { // from class: android.widget.SemFastScroller.6
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setBottom(i);
         }
 
@@ -164,7 +166,7 @@ class SemFastScroller {
     private int mScrollBarTopPadding = 0;
     private final Runnable mDeferHide = new Runnable() { // from class: android.widget.SemFastScroller.1
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws Resources.NotFoundException {
             SemFastScroller.this.setState(0);
         }
     };
@@ -177,7 +179,7 @@ class SemFastScroller {
     private int mListScrollRange = -1;
     private int mListScrollExtent = -1;
 
-    public SemFastScroller(AbsListView absListView, int i) {
+    public SemFastScroller(AbsListView absListView, int i) throws Resources.NotFoundException {
         this.mAdditionalTouchArea = 0.0f;
         this.mList = absListView;
         this.mOldItemCount = absListView.getCount();
@@ -198,48 +200,48 @@ class SemFastScroller {
         View view = new View(this.mContext);
         this.mPreviewImage = view;
         view.setAlpha(0.0f);
-        TextView createPreviewTextView = createPreviewTextView(this.mContext);
-        this.mPrimaryText = createPreviewTextView;
-        TextView createPreviewTextView2 = createPreviewTextView(this.mContext);
-        this.mSecondaryText = createPreviewTextView2;
+        TextView textViewCreatePreviewTextView = createPreviewTextView(this.mContext);
+        this.mPrimaryText = textViewCreatePreviewTextView;
+        TextView textViewCreatePreviewTextView2 = createPreviewTextView(this.mContext);
+        this.mSecondaryText = textViewCreatePreviewTextView2;
         setStyle(i);
         ViewGroupOverlay overlay = absListView.getOverlay();
         this.mOverlay = overlay;
         overlay.add(imageView);
         overlay.add(imageView2);
         overlay.add(view);
-        overlay.add(createPreviewTextView);
-        overlay.add(createPreviewTextView2);
+        overlay.add(textViewCreatePreviewTextView);
+        overlay.add(textViewCreatePreviewTextView2);
         this.mPreviewMarginEnd = this.mContext.getResources().getDimensionPixelOffset(R.dimen.fastscroll_preview_margin_end);
         this.mThumbMarginEnd = this.mContext.getResources().getDimensionPixelOffset(R.dimen.fastscroll_thumb_margin_end);
         this.mAdditionalTouchArea = this.mContext.getResources().getDimension(R.dimen.tw_fluid_scroller_additional_touch_area);
         this.mTrackPadding = this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_track_padding);
         this.mAdditionalBottomPadding = this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_additional_bottom_padding);
         int i2 = this.mPreviewPadding;
-        createPreviewTextView.setPadding(i2, 0, i2, 0);
+        textViewCreatePreviewTextView.setPadding(i2, 0, i2, 0);
         int i3 = this.mPreviewPadding;
-        createPreviewTextView2.setPadding(i3, 0, i3, 0);
+        textViewCreatePreviewTextView2.setPadding(i3, 0, i3, 0);
         getSectionsFromIndexer();
         updateLongList(this.mOldChildCount, this.mOldItemCount);
         setScrollbarPosition(absListView.getVerticalScrollbarPosition());
         postAutoHide();
     }
 
-    private void updateAppearance() {
+    private void updateAppearance() throws Resources.NotFoundException {
         TypedValue typedValue = new TypedValue();
         this.mContext.getTheme().resolveAttribute(16843827, typedValue, true);
         this.mColorPrimary = this.mContext.getResources().getColor(typedValue.resourceId, null);
         this.mTrackImage.lambda$setImageURIAsync$0(this.mTrackDrawable);
         Drawable drawable = this.mTrackDrawable;
-        int max = drawable != null ? Math.max(0, drawable.getIntrinsicWidth()) : 0;
+        int iMax = drawable != null ? Math.max(0, drawable.getIntrinsicWidth()) : 0;
         this.mThumbImage.lambda$setImageURIAsync$0(this.mThumbDrawable);
         this.mThumbImage.setMinimumWidth(this.mThumbMinWidth);
         this.mThumbImage.setMinimumHeight(this.mThumbMinHeight);
         Drawable drawable2 = this.mThumbDrawable;
         if (drawable2 != null) {
-            max = Math.max(max, drawable2.getIntrinsicWidth());
+            iMax = Math.max(iMax, drawable2.getIntrinsicWidth());
         }
-        this.mWidth = Math.max(max, this.mThumbMinWidth);
+        this.mWidth = Math.max(iMax, this.mThumbMinWidth);
         this.mPreviewImage.setMinimumWidth(this.mPreviewMinWidth);
         this.mPreviewImage.setMinimumHeight(this.mPreviewMinHeight);
         int i = this.mTextAppearance;
@@ -257,67 +259,67 @@ class SemFastScroller {
             this.mPrimaryText.setTextSize(0, f);
             this.mSecondaryText.setTextSize(0, this.mTextSize);
         }
-        int max2 = Math.max(0, this.mPreviewMinHeight);
+        int iMax2 = Math.max(0, this.mPreviewMinHeight);
         this.mPrimaryText.setMinimumWidth(this.mPreviewMinWidth);
-        this.mPrimaryText.setMinimumHeight(max2);
+        this.mPrimaryText.setMinimumHeight(iMax2);
         this.mPrimaryText.setIncludeFontPadding(false);
         this.mSecondaryText.setMinimumWidth(this.mPreviewMinWidth);
-        this.mSecondaryText.setMinimumHeight(max2);
+        this.mSecondaryText.setMinimumHeight(iMax2);
         this.mSecondaryText.setIncludeFontPadding(false);
         refreshDrawablePressedState();
     }
 
     public void setStyle(int i) {
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.FastScroll, 16843767, i);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.FastScroll, 16843767, i);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i2 = 0; i2 < indexCount; i2++) {
-            int index = obtainStyledAttributes.getIndex(i2);
+            int index = typedArrayObtainStyledAttributes.getIndex(i2);
             switch (index) {
                 case 0:
-                    this.mTextAppearance = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mTextAppearance = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 1:
-                    this.mTextSize = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 2:
-                    this.mTextColor = obtainStyledAttributes.getColorStateList(index);
+                    this.mTextColor = typedArrayObtainStyledAttributes.getColorStateList(index);
                     break;
                 case 3:
-                    this.mPreviewPadding = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewPadding = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 4:
-                    this.mPreviewMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 5:
-                    this.mPreviewMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 6:
-                    this.mThumbPosition = obtainStyledAttributes.getInt(index, 0);
+                    this.mThumbPosition = typedArrayObtainStyledAttributes.getInt(index, 0);
                     break;
                 case 7:
-                    this.mPreviewResId[0] = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mPreviewResId[0] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 8:
-                    this.mPreviewResId[1] = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mPreviewResId[1] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 9:
-                    this.mOverlayPosition = obtainStyledAttributes.getInt(index, 0);
+                    this.mOverlayPosition = typedArrayObtainStyledAttributes.getInt(index, 0);
                     break;
                 case 10:
-                    this.mThumbDrawable = obtainStyledAttributes.getDrawable(index);
+                    this.mThumbDrawable = typedArrayObtainStyledAttributes.getDrawable(index);
                     break;
                 case 11:
-                    this.mThumbMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mThumbMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 12:
-                    this.mThumbMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mThumbMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 13:
-                    this.mTrackDrawable = obtainStyledAttributes.getDrawable(index);
+                    this.mTrackDrawable = typedArrayObtainStyledAttributes.getDrawable(index);
                     break;
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         if (this.mThumbDrawable instanceof LayerDrawable) {
             this.mThumbWidthAnimator = new SemFastScrollThumbAnimator(this.mContext, (LayerDrawable) this.mThumbDrawable);
         } else {
@@ -353,7 +355,7 @@ class SemFastScroller {
         return false;
     }
 
-    public void setAlwaysShow(boolean z) {
+    public void setAlwaysShow(boolean z) throws Resources.NotFoundException {
         if (this.mAlwaysShow != z) {
             this.mAlwaysShow = z;
             onStateDependencyChanged(false);
@@ -364,7 +366,7 @@ class SemFastScroller {
         return this.mAlwaysShow;
     }
 
-    private void onStateDependencyChanged(boolean z) {
+    private void onStateDependencyChanged(boolean z) throws Resources.NotFoundException {
         if (isEnabled()) {
             if (isAlwaysShowEnabled()) {
                 setState(1);
@@ -388,7 +390,7 @@ class SemFastScroller {
         }
     }
 
-    public void stop() {
+    public void stop() throws Resources.NotFoundException {
         setState(0);
     }
 
@@ -440,7 +442,7 @@ class SemFastScroller {
         updateLongList(i, i2);
     }
 
-    private void updateLongList(int i, int i2) {
+    private void updateLongList(int i, int i2) throws Resources.NotFoundException {
         boolean z = i > 0 && (this.mList.canScrollList(1) || this.mList.canScrollList(-1));
         if (this.mLongList != z) {
             this.mLongList = z;
@@ -463,13 +465,13 @@ class SemFastScroller {
     public void updateLayout() {
         int i;
         AbsListView absListView = this.mList;
-        int computeVerticalScrollRange = absListView.computeVerticalScrollRange();
-        int computeVerticalScrollExtent = absListView.computeVerticalScrollExtent();
+        int iComputeVerticalScrollRange = absListView.computeVerticalScrollRange();
+        int iComputeVerticalScrollExtent = absListView.computeVerticalScrollExtent();
         int i2 = this.mListScrollRange;
-        if ((i2 <= 0 || computeVerticalScrollRange != i2 || (i = this.mListScrollExtent) <= 0 || computeVerticalScrollExtent != i || this.mContainerRect.width() <= 0) && !this.mUpdatingLayout) {
+        if ((i2 <= 0 || iComputeVerticalScrollRange != i2 || (i = this.mListScrollExtent) <= 0 || iComputeVerticalScrollExtent != i || this.mContainerRect.width() <= 0) && !this.mUpdatingLayout) {
             this.mUpdatingLayout = true;
-            this.mListScrollRange = computeVerticalScrollRange;
-            this.mListScrollExtent = computeVerticalScrollExtent;
+            this.mListScrollRange = iComputeVerticalScrollRange;
+            this.mListScrollExtent = iComputeVerticalScrollExtent;
             updateContainerRect();
             layoutThumb();
             layoutTrack();
@@ -488,7 +490,7 @@ class SemFastScroller {
         }
     }
 
-    private void applyLayout(View view, Rect rect) {
+    private void applyLayout(View view, Rect rect) throws Resources.NotFoundException {
         view.layout(rect.left, rect.top, rect.right, rect.bottom);
         view.setPivotX(this.mLayoutFromRight ? rect.right - rect.left : 0.0f);
     }
@@ -510,15 +512,15 @@ class SemFastScroller {
         int i;
         int i2;
         int right;
+        int left;
         int i3;
-        int i4;
         if (this.mLayoutFromRight) {
             if (view2 == null) {
-                i4 = this.mThumbMarginEnd;
+                i3 = this.mThumbMarginEnd;
             } else {
-                i4 = this.mPreviewMarginEnd;
+                i3 = this.mPreviewMarginEnd;
             }
-            i2 = i4;
+            i2 = i3;
             i = 0;
         } else {
             if (view2 == null) {
@@ -529,26 +531,26 @@ class SemFastScroller {
             i2 = 0;
         }
         Rect rect3 = this.mContainerRect;
-        int width = rect3.width();
+        int iWidth = rect3.width();
         if (view2 != null) {
             if (this.mLayoutFromRight) {
-                width = view2.getLeft();
+                iWidth = view2.getLeft();
             } else {
-                width -= view2.getRight();
+                iWidth -= view2.getRight();
             }
         }
-        int max = Math.max(0, rect3.height());
-        int max2 = Math.max(0, (width - i) - i2);
-        view.measure(View.MeasureSpec.makeMeasureSpec(max2, Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(max, 0));
-        int min = Math.min(max2, view.getMeasuredWidth());
+        int iMax = Math.max(0, rect3.height());
+        int iMax2 = Math.max(0, (iWidth - i) - i2);
+        view.measure(View.MeasureSpec.makeMeasureSpec(iMax2, Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(iMax, 0));
+        int iMin = Math.min(iMax2, view.getMeasuredWidth());
         if (this.mLayoutFromRight) {
-            i3 = (view2 == null ? rect3.right : view2.getLeft()) - i2;
-            right = i3 - min;
+            left = (view2 == null ? rect3.right : view2.getLeft()) - i2;
+            right = left - iMin;
         } else {
             right = (view2 == null ? rect3.left : view2.getRight()) + i;
-            i3 = right + min;
+            left = right + iMin;
         }
-        rect2.set(right, 0, i3, view.getMeasuredHeight());
+        rect2.set(right, 0, left, view.getMeasuredHeight());
     }
 
     private void measureFloating(View view, Rect rect, Rect rect2) {
@@ -565,13 +567,13 @@ class SemFastScroller {
             i3 = rect.right;
         }
         Rect rect3 = this.mContainerRect;
-        int width = rect3.width();
-        view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (width - i) - i3), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect3.height()), 0));
-        int height = rect3.height();
+        int iWidth = rect3.width();
+        view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (iWidth - i) - i3), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect3.height()), 0));
+        int iHeight = rect3.height();
         int measuredWidth = view.getMeasuredWidth();
-        int i4 = (height / 10) + i2 + rect3.top;
+        int i4 = (iHeight / 10) + i2 + rect3.top;
         int measuredHeight = view.getMeasuredHeight() + i4;
-        int i5 = ((width - measuredWidth) / 2) + rect3.left;
+        int i5 = ((iWidth - measuredWidth) / 2) + rect3.left;
         rect2.set(i5, i4, measuredWidth + i5, measuredHeight);
     }
 
@@ -606,11 +608,11 @@ class SemFastScroller {
     }
 
     private int getThumbLength(int i, int i2, int i3, int i4) {
-        int round = Math.round((i * i3) / i4);
-        return round < i2 ? i2 : round;
+        int iRound = Math.round((i * i3) / i4);
+        return iRound < i2 ? i2 : iRound;
     }
 
-    private void layoutThumb() {
+    private void layoutThumb() throws Resources.NotFoundException {
         AbsListView absListView = this.mList;
         Rect rect = this.mTempBounds;
         if (this.mLayoutFromRight) {
@@ -625,7 +627,7 @@ class SemFastScroller {
         applyLayout(this.mThumbImage, rect);
     }
 
-    private void layoutTrack() {
+    private void layoutTrack() throws Resources.NotFoundException {
         int i;
         int i2;
         ImageView imageView = this.mTrackImage;
@@ -664,7 +666,7 @@ class SemFastScroller {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void setState(int i) {
+    public void setState(int i) throws Resources.NotFoundException {
         this.mList.removeCallbacks(this.mDeferHide);
         if (this.mAlwaysShow && i == 0) {
             i = 1;
@@ -693,7 +695,7 @@ class SemFastScroller {
         this.mTrackImage.setPressed(z);
     }
 
-    private void transitionToHidden() {
+    private void transitionToHidden() throws Resources.NotFoundException {
         int i;
         Log.d(TAG, "transitionToHidden() mState = " + this.mState);
         if (this.mState != 2) {
@@ -718,7 +720,7 @@ class SemFastScroller {
         this.mDecorAnimation.start();
     }
 
-    private void transitionToVisible() {
+    private void transitionToVisible() throws Resources.NotFoundException {
         Log.d(TAG, "transitionToVisible()");
         AnimatorSet animatorSet = this.mDecorAnimation;
         if (animatorSet != null) {
@@ -810,28 +812,126 @@ class SemFastScroller {
         this.mListAdapter = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0087  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x0098  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void scrollTo(float r13) {
-        /*
-            Method dump skipped, instructions count: 291
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.scrollTo(float):void");
+    private void scrollTo(float f) throws Resources.NotFoundException {
+        int i;
+        int i2;
+        float f2;
+        float f3;
+        AbsListView absListView;
+        this.mScrollCompleted = false;
+        int count = this.mList.getCount();
+        Object[] objArr = this.mSections;
+        int length = objArr == null ? 0 : objArr.length;
+        if (objArr != null && length > 0) {
+            float f4 = length;
+            int i3 = length - 1;
+            int iConstrain = MathUtils.constrain((int) (f * f4), 0, i3);
+            int positionForSection = this.mSectionIndexer.getPositionForSection(iConstrain);
+            int i4 = iConstrain + 1;
+            int positionForSection2 = iConstrain < i3 ? this.mSectionIndexer.getPositionForSection(i4) : count;
+            int i5 = iConstrain;
+            if (positionForSection2 == positionForSection) {
+                int positionForSection3 = positionForSection;
+                do {
+                    if (i5 <= 0) {
+                        i5 = iConstrain;
+                    } else {
+                        i5--;
+                        positionForSection3 = this.mSectionIndexer.getPositionForSection(i5);
+                        if (positionForSection3 != positionForSection) {
+                        }
+                    }
+                    positionForSection = positionForSection3;
+                    i = i5;
+                    break;
+                } while (i5 != 0);
+                i5 = iConstrain;
+                positionForSection = positionForSection3;
+                i = 0;
+                i2 = iConstrain + 2;
+                while (i2 < length && this.mSectionIndexer.getPositionForSection(i2) == positionForSection2) {
+                    i2++;
+                    i4++;
+                }
+                f2 = i5 / f4;
+                f3 = i4 / f4;
+                float f5 = count != 0 ? Float.MAX_VALUE : 0.125f / count;
+                if (i5 == iConstrain || f - f2 >= f5) {
+                    positionForSection += (int) (((positionForSection2 - positionForSection) * (f - f2)) / (f3 - f2));
+                }
+                int iConstrain2 = MathUtils.constrain(positionForSection, 0, count - 1);
+                absListView = this.mList;
+                if (!(absListView instanceof ExpandableListView)) {
+                    ExpandableListView expandableListView = (ExpandableListView) absListView;
+                    expandableListView.setSelectionFromTop(expandableListView.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(iConstrain2 + this.mHeaderCount)), 0);
+                } else if (absListView instanceof ListView) {
+                    ((ListView) absListView).setSelectionFromTop(iConstrain2 + this.mHeaderCount, 0);
+                } else {
+                    absListView.setSelection(iConstrain2 + this.mHeaderCount);
+                }
+            } else {
+                i = i5;
+                i2 = iConstrain + 2;
+                while (i2 < length) {
+                    i2++;
+                    i4++;
+                }
+                f2 = i5 / f4;
+                f3 = i4 / f4;
+                if (count != 0) {
+                }
+                if (i5 == iConstrain) {
+                    positionForSection += (int) (((positionForSection2 - positionForSection) * (f - f2)) / (f3 - f2));
+                    int iConstrain22 = MathUtils.constrain(positionForSection, 0, count - 1);
+                    absListView = this.mList;
+                    if (!(absListView instanceof ExpandableListView)) {
+                    }
+                }
+            }
+        } else {
+            int iConstrain3 = MathUtils.constrain((int) (count * f), 0, count - 1);
+            AbsListView absListView2 = this.mList;
+            if (absListView2 instanceof ExpandableListView) {
+                ExpandableListView expandableListView2 = (ExpandableListView) absListView2;
+                expandableListView2.setSelectionFromTop(expandableListView2.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(iConstrain3 + this.mHeaderCount)), 0);
+            } else if (absListView2 instanceof ListView) {
+                ((ListView) absListView2).setSelectionFromTop(iConstrain3 + this.mHeaderCount, 0);
+            } else {
+                absListView2.setSelection(iConstrain3 + this.mHeaderCount);
+            }
+            i = -1;
+        }
+        if (this.mCurrentSection != i) {
+            this.mList.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(26));
+        }
+        this.mCurrentSection = i;
+        boolean zTransitionPreviewLayout = transitionPreviewLayout(i);
+        Log.d(TAG, "scrollTo() called transitionPreviewLayout() sectionIndex =" + i + ", position = " + f);
+        boolean z = this.mShowingPreview;
+        if (!z && zTransitionPreviewLayout) {
+            transitionToDragging();
+        } else {
+            if (!z || zTransitionPreviewLayout) {
+                return;
+            }
+            transitionToVisible();
+        }
     }
 
-    private boolean transitionPreviewLayout(int i) {
+    private boolean transitionPreviewLayout(int i) throws Resources.NotFoundException {
         TextView textView;
         TextView textView2;
         Object obj;
         Object[] objArr = this.mSections;
-        String obj2 = (objArr == null || i < 0 || i >= objArr.length || (obj = objArr[i]) == null) ? null : obj.toString();
+        String string = (objArr == null || i < 0 || i >= objArr.length || (obj = objArr[i]) == null) ? null : obj.toString();
         Rect rect = this.mTempBounds;
         View view = this.mPreviewImage;
         if (this.mShowingPrimary) {
@@ -841,14 +941,14 @@ class SemFastScroller {
             textView = this.mSecondaryText;
             textView2 = this.mPrimaryText;
         }
-        textView2.lambda$setTextAsync$0(obj2);
+        textView2.lambda$setTextAsync$0(string);
         measurePreview(textView2, rect);
         applyLayout(textView2, rect);
         int i2 = this.mState;
         if (i2 == 1) {
             textView.lambda$setTextAsync$0("");
         } else if (i2 == 2 && textView2.getText() == textView.getText()) {
-            return !TextUtils.isEmpty(obj2);
+            return !TextUtils.isEmpty(string);
         }
         AnimatorSet animatorSet = this.mPreviewAnimation;
         if (animatorSet != null) {
@@ -861,84 +961,54 @@ class SemFastScroller {
         rect.top -= view.getPaddingTop();
         rect.right += view.getPaddingRight();
         rect.bottom += view.getPaddingBottom();
-        Animator animateBounds = animateBounds(view, rect);
-        animateBounds.setDuration(100L);
+        Animator animatorAnimateBounds = animateBounds(view, rect);
+        animatorAnimateBounds.setDuration(100L);
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mPreviewAnimation = animatorSet2;
-        AnimatorSet.Builder with = animatorSet2.play(duration2).with(duration);
-        with.with(animateBounds);
+        AnimatorSet.Builder builderWith = animatorSet2.play(duration2).with(duration);
+        builderWith.with(animatorAnimateBounds);
         int width = (view.getWidth() - view.getPaddingLeft()) - view.getPaddingRight();
         int width2 = textView2.getWidth();
         if (width2 > width) {
             textView2.setScaleX(width / width2);
-            with.with(animateScaleX(textView2, 1.0f).setDuration(100L));
+            builderWith.with(animateScaleX(textView2, 1.0f).setDuration(100L));
         } else {
             textView2.setScaleX(1.0f);
         }
         int width3 = textView.getWidth();
         if (width3 > width2) {
-            with.with(animateScaleX(textView, width2 / width3).setDuration(100L));
+            builderWith.with(animateScaleX(textView, width2 / width3).setDuration(100L));
         }
         this.mPreviewAnimation.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f));
         this.mPreviewAnimation.start();
-        return !TextUtils.isEmpty(obj2);
+        return !TextUtils.isEmpty(string);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0011, code lost:
-    
-        if (r6 < 0.0f) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x000c A[PHI: r2
+      0x000c: PHI (r2v6 float) = (r2v0 float), (r2v1 float) binds: [B:3:0x000a, B:6:0x0011] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void setThumbPos(float r6) {
-        /*
-            r5 = this;
-            android.graphics.Rect r0 = r5.mContainerRect
-            int r1 = r0.top
-            int r0 = r0.bottom
-            r2 = 1065353216(0x3f800000, float:1.0)
-            int r3 = (r6 > r2 ? 1 : (r6 == r2 ? 0 : -1))
-            if (r3 <= 0) goto Le
-        Lc:
-            r6 = r2
-            goto L14
-        Le:
-            r2 = 0
-            int r3 = (r6 > r2 ? 1 : (r6 == r2 ? 0 : -1))
-            if (r3 >= 0) goto L14
-            goto Lc
-        L14:
-            float r2 = r5.mThumbRange
-            float r6 = r6 * r2
-            float r2 = r5.mThumbOffset
-            float r6 = r6 + r2
-            android.widget.ImageView r2 = r5.mThumbImage
-            int r3 = r2.getHeight()
-            float r3 = (float) r3
-            r4 = 1073741824(0x40000000, float:2.0)
-            float r3 = r3 / r4
-            float r3 = r6 - r3
-            r2.setTranslationY(r3)
-            android.view.View r2 = r5.mPreviewImage
-            int r3 = r2.getHeight()
-            float r3 = (float) r3
-            float r3 = r3 / r4
-            float r1 = (float) r1
-            float r1 = r1 + r3
-            float r0 = (float) r0
-            float r0 = r0 - r3
-            float r6 = android.util.MathUtils.constrain(r6, r1, r0)
-            float r6 = r6 - r3
-            r2.setTranslationY(r6)
-            android.widget.TextView r0 = r5.mPrimaryText
-            r0.setTranslationY(r6)
-            android.widget.TextView r5 = r5.mSecondaryText
-            r5.setTranslationY(r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.setThumbPos(float):void");
+    private void setThumbPos(float f) {
+        Rect rect = this.mContainerRect;
+        int i = rect.top;
+        int i2 = rect.bottom;
+        float f2 = 1.0f;
+        if (f > 1.0f) {
+            f = f2;
+        } else {
+            f2 = 0.0f;
+            if (f < 0.0f) {
+            }
+        }
+        float f3 = (f * this.mThumbRange) + this.mThumbOffset;
+        this.mThumbImage.setTranslationY(f3 - (r2.getHeight() / 2.0f));
+        View view = this.mPreviewImage;
+        float height = view.getHeight() / 2.0f;
+        float fConstrain = MathUtils.constrain(f3, i + height, i2 - height) - height;
+        view.setTranslationY(fConstrain);
+        this.mPrimaryText.setTranslationY(fConstrain);
+        this.mSecondaryText.setTranslationY(fConstrain);
     }
 
     private float getPosFromMotionEvent(float f) {
@@ -955,7 +1025,7 @@ class SemFastScroller {
         int height2;
         int top;
         Object[] objArr;
-        int i4;
+        int positionForSection;
         SectionIndexer sectionIndexer = this.mSectionIndexer;
         if (sectionIndexer == null || this.mListAdapter == null) {
             getSectionsFromIndexer();
@@ -966,22 +1036,22 @@ class SemFastScroller {
         View childAt = this.mList.getChildAt(0);
         float paddingTop = (childAt == null || childAt.getHeight() == 0) ? 0.0f : (this.mList.getPaddingTop() - childAt.getTop()) / childAt.getHeight();
         if (sectionIndexer != null && (objArr = this.mSections) != null && objArr.length > 0 && this.mMatchDragPosition) {
-            int i5 = this.mHeaderCount;
-            i -= i5;
+            int i4 = this.mHeaderCount;
+            i -= i4;
             if (i < 0) {
                 return 0.0f;
             }
-            i3 -= i5;
+            i3 -= i4;
             int sectionForPosition = sectionIndexer.getSectionForPosition(i);
-            int positionForSection = sectionIndexer.getPositionForSection(sectionForPosition);
+            int positionForSection2 = sectionIndexer.getPositionForSection(sectionForPosition);
             int length = this.mSections.length;
             if (sectionForPosition < length - 1) {
-                int i6 = sectionForPosition + 1;
-                i4 = (i6 < length ? sectionIndexer.getPositionForSection(i6) : i3 - 1) - positionForSection;
+                int i5 = sectionForPosition + 1;
+                positionForSection = (i5 < length ? sectionIndexer.getPositionForSection(i5) : i3 - 1) - positionForSection2;
             } else {
-                i4 = i3 - positionForSection;
+                positionForSection = i3 - positionForSection2;
             }
-            numColumns = (sectionForPosition + (i4 != 0 ? ((i + paddingTop) - positionForSection) / i4 : 0.0f)) / length;
+            numColumns = (sectionForPosition + (positionForSection != 0 ? ((i + paddingTop) - positionForSection2) / positionForSection : 0.0f)) / length;
         } else {
             if (i2 == i3) {
                 return 0.0f;
@@ -1002,14 +1072,14 @@ class SemFastScroller {
             height2 = this.mList.getHeight();
             top = childAt2.getTop();
         }
-        int i7 = height2 - top;
-        return (i7 <= 0 || height <= 0) ? numColumns : numColumns + ((1.0f - numColumns) * (i7 / height));
+        int i6 = height2 - top;
+        return (i6 <= 0 || height <= 0) ? numColumns : numColumns + ((1.0f - numColumns) * (i6 / height));
     }
 
-    private void cancelFling() {
-        MotionEvent obtain = MotionEvent.obtain(0L, 0L, 3, 0.0f, 0.0f, 0);
-        this.mList.onTouchEvent(obtain);
-        obtain.recycle();
+    private void cancelFling() throws Resources.NotFoundException {
+        MotionEvent motionEventObtain = MotionEvent.obtain(0L, 0L, 3, 0.0f, 0.0f, 0);
+        this.mList.onTouchEvent(motionEventObtain);
+        motionEventObtain.recycle();
     }
 
     private void cancelPendingDrag() {
@@ -1020,7 +1090,7 @@ class SemFastScroller {
         this.mPendingDrag = SystemClock.uptimeMillis() + TAP_TIMEOUT;
     }
 
-    private void beginDrag() {
+    private void beginDrag() throws Resources.NotFoundException {
         Log.d(TAG, "beginDrag() !!!");
         this.mPendingDrag = -1L;
         if (this.mListAdapter == null) {
@@ -1032,90 +1102,47 @@ class SemFastScroller {
         setState(2);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0017, code lost:
-    
-        if (r0 != 3) goto L29;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r8) {
-        /*
-            r7 = this;
-            boolean r0 = r7.isEnabled()
-            r1 = 0
-            if (r0 != 0) goto L8
-            return r1
-        L8:
-            int r0 = r8.getActionMasked()
-            java.lang.String r2 = "SemFastScroller"
-            r3 = 1
-            if (r0 == 0) goto L59
-            if (r0 == r3) goto L55
-            r3 = 2
-            if (r0 == r3) goto L1b
-            r8 = 3
-            if (r0 == r8) goto L55
-            goto L99
-        L1b:
-            float r0 = r8.getX()
-            float r3 = r8.getY()
-            boolean r0 = r7.isPointInside(r0, r3)
-            if (r0 != 0) goto L2d
-            r7.cancelPendingDrag()
-            goto L99
-        L2d:
-            long r3 = r7.mPendingDrag
-            r5 = 0
-            int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r0 < 0) goto L99
-            long r5 = android.os.SystemClock.uptimeMillis()
-            int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r0 > 0) goto L99
-            r7.beginDrag()
-            float r0 = r7.mInitialTouchY
-            float r0 = r7.getPosFromMotionEvent(r0)
-            r7.mOldThumbPosition = r0
-            r7.scrollTo(r0)
-            java.lang.String r0 = "onInterceptTouchEvent() ACTION_MOVE pendingdrag open()"
-            android.util.Log.d(r2, r0)
-            boolean r7 = r7.onTouchEvent(r8)
-            return r7
-        L55:
-            r7.cancelPendingDrag()
-            goto L99
-        L59:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r4 = "onInterceptTouchEvent() ACTION_DOWN ev.getY() = "
-            r0.<init>(r4)
-            float r4 = r8.getY()
-            r0.append(r4)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.d(r2, r0)
-            float r0 = r8.getX()
-            float r2 = r8.getY()
-            boolean r0 = r7.isPointInside(r0, r2)
-            if (r0 == 0) goto L99
-            android.widget.AbsListView r0 = r7.mList
-            r2 = 26
-            int r2 = android.view.HapticFeedbackConstants.semGetVibrationIndex(r2)
-            r0.performHapticFeedback(r2)
-            android.widget.AbsListView r0 = r7.mList
-            boolean r0 = r0.isInScrollingContainer()
-            if (r0 != 0) goto L90
-            return r3
-        L90:
-            float r8 = r8.getY()
-            r7.mInitialTouchY = r8
-            r7.startPendingDrag()
-        L99:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
+        if (!isEnabled()) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked == 0) {
+            Log.d(TAG, "onInterceptTouchEvent() ACTION_DOWN ev.getY() = " + motionEvent.getY());
+            if (isPointInside(motionEvent.getX(), motionEvent.getY())) {
+                this.mList.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(26));
+                if (!this.mList.isInScrollingContainer()) {
+                    return true;
+                }
+                this.mInitialTouchY = motionEvent.getY();
+                startPendingDrag();
+            }
+        } else if (actionMasked == 1) {
+            cancelPendingDrag();
+        } else if (actionMasked != 2) {
+            if (actionMasked == 3) {
+            }
+        } else if (!isPointInside(motionEvent.getX(), motionEvent.getY())) {
+            cancelPendingDrag();
+        } else {
+            long j = this.mPendingDrag;
+            if (j >= 0 && j <= SystemClock.uptimeMillis()) {
+                beginDrag();
+                float posFromMotionEvent = getPosFromMotionEvent(this.mInitialTouchY);
+                this.mOldThumbPosition = posFromMotionEvent;
+                scrollTo(posFromMotionEvent);
+                Log.d(TAG, "onInterceptTouchEvent() ACTION_MOVE pendingdrag open()");
+                return onTouchEvent(motionEvent);
+            }
+        }
+        return false;
     }
 
-    public boolean onInterceptHoverEvent(MotionEvent motionEvent) {
+    public boolean onInterceptHoverEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         if (!isEnabled()) {
             return false;
         }
@@ -1238,13 +1265,13 @@ class SemFastScroller {
 
     private static Animator groupAnimatorOfFloat(Property<View, Float> property, float f, View... viewArr) {
         AnimatorSet animatorSet = new AnimatorSet();
-        AnimatorSet.Builder builder = null;
+        AnimatorSet.Builder builderPlay = null;
         for (int length = viewArr.length - 1; length >= 0; length--) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(viewArr[length], property, f);
-            if (builder == null) {
-                builder = animatorSet.play(ofFloat);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewArr[length], property, f);
+            if (builderPlay == null) {
+                builderPlay = animatorSet.play(objectAnimatorOfFloat);
             } else {
-                builder.with(ofFloat);
+                builderPlay.with(objectAnimatorOfFloat);
             }
         }
         return animatorSet;
@@ -1294,7 +1321,7 @@ class SemFastScroller {
         private final float mMinWidthPx;
         private final ValueAnimator mWidthAnimator;
 
-        SemFastScrollThumbAnimator(Context context, LayerDrawable layerDrawable) {
+        SemFastScrollThumbAnimator(Context context, LayerDrawable layerDrawable) throws Resources.NotFoundException {
             this.mBgDrawable = (SemFastScrollerBgDrawable) layerDrawable.findDrawableByLayerId(R.id.thumb_bg);
             float dimension = context.getResources().getDimension(R.dimen.sem_fast_scroller_thumb_min_width);
             this.mMinWidthPx = dimension;
@@ -1307,22 +1334,22 @@ class SemFastScroller {
             this.mBgDrawable.setValue(dimension);
             this.mBgDrawable.setArgb(alphaComponent);
             this.mBgDrawable.invalidateSelf();
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mWidthAnimator = ofFloat;
-            ofFloat.setDuration(350L);
-            ofFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mWidthAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(350L);
+            valueAnimatorOfFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     SemFastScrollThumbAnimator.this.mBgDrawable.setValue(SemFastScrollThumbAnimator.this.mMinWidthPx + ((SemFastScrollThumbAnimator.this.mMaxWidthPx - SemFastScrollThumbAnimator.this.mMinWidthPx) * ((Float) valueAnimator.getAnimatedValue()).floatValue()));
                     SemFastScrollThumbAnimator.this.mBgDrawable.invalidateSelf();
                 }
             });
-            ValueAnimator ofArgb = ValueAnimator.ofArgb(alphaComponent, alphaComponent2);
-            this.mColorAnimator = ofArgb;
-            ofArgb.setDuration(350L);
-            ofArgb.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
-            ofArgb.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.2
+            ValueAnimator valueAnimatorOfArgb = ValueAnimator.ofArgb(alphaComponent, alphaComponent2);
+            this.mColorAnimator = valueAnimatorOfArgb;
+            valueAnimatorOfArgb.setDuration(350L);
+            valueAnimatorOfArgb.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
+            valueAnimatorOfArgb.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     SemFastScrollThumbAnimator.this.mBgDrawable.setArgb(((Integer) valueAnimator.getAnimatedValue()).intValue());

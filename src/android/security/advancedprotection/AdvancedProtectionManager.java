@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.os.UserManager;
-import android.security.advancedprotection.AdvancedProtectionManager;
 import android.security.advancedprotection.IAdvancedProtectionCallback;
 import android.util.Log;
 import java.lang.annotation.Retention;
@@ -130,18 +129,18 @@ public final class AdvancedProtectionManager {
 
         @Override // android.security.advancedprotection.IAdvancedProtectionCallback
         public void onAdvancedProtectionChanged(final boolean z) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Callback callback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.security.advancedprotection.AdvancedProtectionManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AdvancedProtectionManager.Callback.this.onAdvancedProtectionChanged(z);
+                        callback.onAdvancedProtectionChanged(z);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

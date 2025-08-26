@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.vector.ImageVector;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimatedImageVector {
     public static final Companion Companion = null;
@@ -12,7 +11,6 @@ public final class AnimatedImageVector {
     public final List targets;
     public final int totalDuration;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,34 +29,34 @@ public final class AnimatedImageVector {
         Animator animator;
         this.imageVector = imageVector;
         this.targets = list;
-        int i = 0;
+        int totalDuration = 0;
         if (list.isEmpty()) {
             animatedVectorTarget = null;
         } else {
             animatedVectorTarget = list.get(0);
-            int totalDuration = animatedVectorTarget.animator.getTotalDuration();
-            int i2 = 1;
+            int totalDuration2 = animatedVectorTarget.animator.getTotalDuration();
+            int i = 1;
             int size = list.size() - 1;
             if (1 <= size) {
                 while (true) {
-                    AnimatedVectorTarget animatedVectorTarget2 = list.get(i2);
-                    int totalDuration2 = animatedVectorTarget2.animator.getTotalDuration();
-                    if (totalDuration < totalDuration2) {
+                    AnimatedVectorTarget animatedVectorTarget2 = list.get(i);
+                    int totalDuration3 = animatedVectorTarget2.animator.getTotalDuration();
+                    if (totalDuration2 < totalDuration3) {
                         animatedVectorTarget = animatedVectorTarget2;
-                        totalDuration = totalDuration2;
+                        totalDuration2 = totalDuration3;
                     }
-                    if (i2 == size) {
+                    if (i == size) {
                         break;
                     } else {
-                        i2++;
+                        i++;
                     }
                 }
             }
         }
         AnimatedVectorTarget animatedVectorTarget3 = animatedVectorTarget;
         if (animatedVectorTarget3 != null && (animator = animatedVectorTarget3.animator) != null) {
-            i = animator.getTotalDuration();
+            totalDuration = animator.getTotalDuration();
         }
-        this.totalDuration = i;
+        this.totalDuration = totalDuration;
     }
 }

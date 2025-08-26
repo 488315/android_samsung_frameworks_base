@@ -40,9 +40,9 @@ public interface ITvAdServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITvAdServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvAdServiceCallback)) {
-                return (ITvAdServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITvAdServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvAdServiceCallback)) {
+                return (ITvAdServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

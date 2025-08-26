@@ -6,11 +6,9 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CallbackToFutureAdapter {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Completer {
         public boolean attemptedSetting;
         public ResolvableFuture cancellationFuture = ResolvableFuture.create();
@@ -59,7 +57,6 @@ public final class CallbackToFutureAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class FutureGarbageCollectedException extends Throwable {
         public FutureGarbageCollectedException(String str) {
             super(str);
@@ -71,12 +68,10 @@ public final class CallbackToFutureAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Resolver {
         Object attachCompleter(Completer completer);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SafeFuture implements ListenableFuture {
         public final WeakReference completerWeakReference;
         public final AnonymousClass1 delegate = new AbstractResolvableFuture() { // from class: androidx.concurrent.futures.CallbackToFutureAdapter.SafeFuture.1
@@ -103,13 +98,13 @@ public final class CallbackToFutureAdapter {
         @Override // java.util.concurrent.Future
         public final boolean cancel(boolean z) {
             Completer completer = (Completer) this.completerWeakReference.get();
-            boolean cancel = cancel(z);
-            if (cancel && completer != null) {
+            boolean zCancel = cancel(z);
+            if (zCancel && completer != null) {
                 completer.tag = null;
                 completer.future = null;
                 completer.cancellationFuture.set(null);
             }
-            return cancel;
+            return zCancel;
         }
 
         @Override // java.util.concurrent.Future
@@ -146,9 +141,9 @@ public final class CallbackToFutureAdapter {
         completer.future = safeFuture;
         completer.tag = resolver.getClass();
         try {
-            Object attachCompleter = resolver.attachCompleter(completer);
-            if (attachCompleter != null) {
-                completer.tag = attachCompleter;
+            Object objAttachCompleter = resolver.attachCompleter(completer);
+            if (objAttachCompleter != null) {
+                completer.tag = objAttachCompleter;
                 return safeFuture;
             }
         } catch (Exception e) {

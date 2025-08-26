@@ -46,7 +46,6 @@ import dagger.Lazy;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecLockIconViewController extends ViewController implements Dumpable, PluginLockListener.State {
     public boolean mCanDismissLockScreen;
@@ -90,13 +89,13 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
     public final Lazy mViewMediatorCallbackLazy;
 
     /* renamed from: $r8$lambda$3-mmmdB6ihcNDQifpohr5hGzj84, reason: not valid java name */
-    public static void m969$r8$lambda$3mmmdB6ihcNDQifpohr5hGzj84(SecLockIconViewController secLockIconViewController) {
+    public static void m971$r8$lambda$3mmmdB6ihcNDQifpohr5hGzj84(SecLockIconViewController secLockIconViewController) {
         secLockIconViewController.mView.mIsOneHandModeEnabled = secLockIconViewController.mSettingsHelper.isOneHandModeRunning();
         secLockIconViewController.updateVisibility$4();
     }
 
     /* renamed from: -$$Nest$munregisterCallbacks, reason: not valid java name */
-    public static void m970$$Nest$munregisterCallbacks(SecLockIconViewController secLockIconViewController) {
+    public static void m972$$Nest$munregisterCallbacks(SecLockIconViewController secLockIconViewController) {
         ((ConfigurationControllerImpl) secLockIconViewController.mConfigurationController).removeCallback(secLockIconViewController.mConfigurationListener);
         secLockIconViewController.mKeyguardUpdateMonitor.removeCallback(secLockIconViewController.mKeyguardUpdateMonitorCallback);
         secLockIconViewController.mStatusBarStateController.removeCallback(secLockIconViewController.mStatusBarStateListener);
@@ -124,7 +123,7 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
         this.mSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.keyguard.SecLockIconViewController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                SecLockIconViewController.m969$r8$lambda$3mmmdB6ihcNDQifpohr5hGzj84(SecLockIconViewController.this);
+                SecLockIconViewController.m971$r8$lambda$3mmmdB6ihcNDQifpohr5hGzj84(this.f$0);
             }
         };
         this.mIsDefaultLockViewMode = true;
@@ -162,7 +161,7 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
         };
         this.mKeyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.SecLockIconViewController.7
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricLockoutChanged(boolean z) {
+            public final void onBiometricLockoutChanged(boolean z) throws Resources.NotFoundException {
                 SecLockIconViewController secLockIconViewController = SecLockIconViewController.this;
                 secLockIconViewController.mView.updateLockIconViewLayoutParams(secLockIconViewController.mSelectedUserInteractor.getSelectedUserId());
             }
@@ -209,14 +208,14 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onTrustChanged(int i) {
+            public final void onTrustChanged(int i) throws Resources.NotFoundException {
                 SecLockIconViewController secLockIconViewController = SecLockIconViewController.this;
                 secLockIconViewController.mView.updateLockIconViewLayoutParams(secLockIconViewController.mSelectedUserInteractor.getSelectedUserId());
             }
         };
         this.mKeyguardStateCallback = new KeyguardStateController.Callback() { // from class: com.android.keyguard.SecLockIconViewController.8
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
-            public final void onKeyguardShowingChanged() {
+            public final void onKeyguardShowingChanged() throws Resources.NotFoundException {
                 SecLockIconViewController secLockIconViewController = SecLockIconViewController.this;
                 secLockIconViewController.mCanDismissLockScreen = ((KeyguardStateControllerImpl) secLockIconViewController.mKeyguardStateController).mCanDismissLockScreen;
                 secLockIconViewController.updateKeyguardShowing();
@@ -237,7 +236,7 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.SecLockIconViewController.9
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 SecLockIconViewController secLockIconViewController = SecLockIconViewController.this;
                 secLockIconViewController.mUnlockedLabel = secLockIconViewController.getResources().getString(R.string.accessibility_unlock_button);
                 secLockIconViewController.mLockedLabel = secLockIconViewController.getResources().getString(R.string.accessibility_lock_icon);
@@ -355,26 +354,26 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mIsKeyguardShowing: "), this.mIsKeyguardShowing, printWriter, "mIsBiometricToastViewAnimating: ");
-        m.append(this.mIsBiometricToastViewAnimating);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mIsKeyguardShowing: "), this.mIsKeyguardShowing, printWriter, "mIsBiometricToastViewAnimating: ");
+        sbM.append(this.mIsBiometricToastViewAnimating);
+        printWriter.println(sbM.toString());
         printWriter.println();
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mShowUnlockIcon: "), this.mShowUnlockIcon, printWriter, " mShowLockIcon: ");
-        m2.append(this.mShowLockIcon);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mShowUnlockIcon: "), this.mShowUnlockIcon, printWriter, " mShowLockIcon: ");
+        sbM2.append(this.mShowLockIcon);
+        printWriter.println(sbM2.toString());
         printWriter.println();
-        StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mIsDozing: "), this.mIsDozing, printWriter, " mIsBouncerShowing: "), this.mIsBouncerShowing, printWriter, " mRunningFPS: "), this.mRunningFPS, printWriter, " mCanDismissLockScreen: "), this.mCanDismissLockScreen, printWriter, " mStatusBarState: ");
-        m3.append(StatusBarState.toString(this.mStatusBarState));
-        printWriter.println(m3.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" mIsDozing: "), this.mIsDozing, printWriter, " mIsBouncerShowing: "), this.mIsBouncerShowing, printWriter, " mRunningFPS: "), this.mRunningFPS, printWriter, " mCanDismissLockScreen: "), this.mCanDismissLockScreen, printWriter, " mStatusBarState: ");
+        sbM3.append(StatusBarState.toString(this.mStatusBarState));
+        printWriter.println(sbM3.toString());
         printWriter.println(" mInterpolatedDarkAmount: 0.0");
         printWriter.println(" mSensorTouchLocation: " + this.mSensorTouchLocation);
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
     public final Bundle onUiInfoRequested(boolean z) {
-        boolean shouldShowLockIcon = shouldShowLockIcon();
+        boolean zShouldShowLockIcon = shouldShowLockIcon();
         Bundle bundle = new Bundle();
-        bundle.putInt("lock_icon_visibility", shouldShowLockIcon ? 0 : 4);
+        bundle.putInt("lock_icon_visibility", zShouldShowLockIcon ? 0 : 4);
         return bundle;
     }
 
@@ -440,10 +439,10 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
         boolean z2 = this.mCanDismissLockScreen;
         this.mShowLockIcon = !z2 && z;
         this.mShowUnlockIcon = z2 && z;
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateVisibility : isLockScreen = ", " mShowLockIcon = ", z);
-        m.append(this.mShowLockIcon);
-        m.append(" mShowUnlockIcon = ");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(m, this.mShowUnlockIcon, "SecLockIconViewController");
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateVisibility : isLockScreen = ", " mShowLockIcon = ", z);
+        sbM.append(this.mShowLockIcon);
+        sbM.append(" mShowUnlockIcon = ");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mShowUnlockIcon, "SecLockIconViewController");
         boolean z3 = userHasTrust && z;
         SecLockIconView secLockIconView = this.mView;
         SystemUIImageView systemUIImageView = secLockIconView.mSecLockIcon;
@@ -461,7 +460,7 @@ public class SecLockIconViewController extends ViewController implements Dumpabl
             View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() { // from class: com.android.keyguard.SecLockIconViewController$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view) {
-                    SecLockIconViewController secLockIconViewController = SecLockIconViewController.this;
+                    SecLockIconViewController secLockIconViewController = this.f$0;
                     secLockIconViewController.mKeyguardUpdateMonitor.onLockIconPressed();
                     secLockIconViewController.mLockPatternUtils.requireCredentialEntry(secLockIconViewController.mSelectedUserInteractor.getSelectedUserId());
                     return false;

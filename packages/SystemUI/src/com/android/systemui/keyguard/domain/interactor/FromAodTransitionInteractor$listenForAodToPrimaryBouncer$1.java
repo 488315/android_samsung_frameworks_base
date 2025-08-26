@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromAodTransitionInteractor$listenForAodToPrimaryBouncer$1 extends SuspendLambda implements Function2 {
     int label;
@@ -45,12 +44,12 @@ final class FromAodTransitionInteractor$listenForAodToPrimaryBouncer$1 extends S
             TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(fromAodTransitionInteractor.keyguardInteractor.primaryBouncerShowing, fromAodTransitionInteractor, new Function1() { // from class: com.android.systemui.keyguard.domain.interactor.FromAodTransitionInteractor$listenForAodToPrimaryBouncer$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
+                public final Object mo781invoke(Object obj2) {
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                     BiometricUnlockMode.Companion companion = BiometricUnlockMode.Companion;
-                    BiometricUnlockMode biometricUnlockMode = ((BiometricUnlockModel) FromAodTransitionInteractor.this.keyguardInteractor.biometricUnlockState.$$delegate_0.getValue()).mode;
+                    BiometricUnlockMode biometricUnlockMode = ((BiometricUnlockModel) fromAodTransitionInteractor.keyguardInteractor.biometricUnlockState.$$delegate_0.getValue()).mode;
                     companion.getClass();
-                    return Boolean.valueOf(!BiometricUnlockMode.wakeAndUnlockModes.contains(biometricUnlockMode) && booleanValue);
+                    return Boolean.valueOf(!BiometricUnlockMode.wakeAndUnlockModes.contains(biometricUnlockMode) && zBooleanValue);
                 }
             });
             final FromAodTransitionInteractor fromAodTransitionInteractor2 = this.this$0;
@@ -58,8 +57,8 @@ final class FromAodTransitionInteractor$listenForAodToPrimaryBouncer$1 extends S
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromAodTransitionInteractor.this, KeyguardState.PRIMARY_BOUNCER, null, null, null, continuation, 14);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromAodTransitionInteractor2, KeyguardState.PRIMARY_BOUNCER, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;

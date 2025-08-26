@@ -83,9 +83,9 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     private native void nativeInit();
 
     public GraphicsStatsService(Context context) {
-        int nGetAshmemSize = nGetAshmemSize();
-        this.mAshmemSize = nGetAshmemSize;
-        this.mZeroData = new byte[nGetAshmemSize];
+        int iNGetAshmemSize = nGetAshmemSize();
+        this.mAshmemSize = iNGetAshmemSize;
+        this.mZeroData = new byte[iNGetAshmemSize];
         this.mLock = new Object();
         this.mActive = new ArrayList<>();
         this.mFileAccessLock = new Object();
@@ -122,12 +122,12 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             return;
         }
         this.mRotateIsScheduled = true;
-        Calendar normalizeDate = normalizeDate(System.currentTimeMillis());
-        normalizeDate.add(5, 1);
-        this.mAlarmManager.setExact(1, normalizeDate.getTimeInMillis(), TAG, new AlarmManager.OnAlarmListener() { // from class: android.graphics.GraphicsStatsService$$ExternalSyntheticLambda0
+        Calendar calendarNormalizeDate = normalizeDate(System.currentTimeMillis());
+        calendarNormalizeDate.add(5, 1);
+        this.mAlarmManager.setExact(1, calendarNormalizeDate.getTimeInMillis(), TAG, new AlarmManager.OnAlarmListener() { // from class: android.graphics.GraphicsStatsService$$ExternalSyntheticLambda0
             @Override // android.app.AlarmManager.OnAlarmListener
             public final void onAlarm() {
-                GraphicsStatsService.this.onAlarm();
+                this.f$0.onAlarm();
             }
         }, this.mWriteOutHandler);
     }
@@ -156,7 +156,7 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         String str2;
         int callingUid = Binder.getCallingUid();
         int callingPid = Binder.getCallingPid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 this.mAppOps.checkPackage(callingUid, str);
@@ -180,11 +180,11 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 } catch (Throwable th3) {
                     th = th3;
                 }
-            } catch (PackageManager.NameNotFoundException unused2) {
-                str2 = str;
+            } finally {
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
-        } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+        } catch (PackageManager.NameNotFoundException unused2) {
+            str2 = str;
         }
     }
 
@@ -196,7 +196,7 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             return GraphicsStatsRenderEngine.VK.ordinal();
         }
         int callingUid = Binder.getCallingUid();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 this.mAppOps.checkPackage(callingUid, str);
@@ -205,7 +205,7 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 throw new RemoteException("Unable to find package: '" + str + "'");
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -218,11 +218,11 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 throw new RemoteException(stringWriter.toString());
             }
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             pullGraphicsStatsImpl(z, j);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -246,33 +246,33 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 }
             }
         }
-        long nCreateDump = nCreateDump(-1, true);
+        long jNCreateDump = nCreateDump(-1, true);
         try {
             synchronized (this.mFileAccessLock) {
-                HashSet<File> dumpActiveLocked = dumpActiveLocked(nCreateDump, arrayList);
+                HashSet<File> hashSetDumpActiveLocked = dumpActiveLocked(jNCreateDump, arrayList);
                 arrayList.clear();
                 File file = new File(this.mGraphicsStatsDir, String.format("%d", Long.valueOf(timeInMillis)));
                 if (file.exists()) {
-                    File[] listFiles = file.listFiles();
-                    for (File file2 : listFiles) {
+                    File[] fileArrListFiles = file.listFiles();
+                    for (File file2 : fileArrListFiles) {
                         for (File file3 : file2.listFiles()) {
                             File file4 = new File(file3, "total");
-                            if (!dumpActiveLocked.contains(file4)) {
-                                nAddToDump(nCreateDump, file4.getAbsolutePath());
+                            if (!hashSetDumpActiveLocked.contains(file4)) {
+                                nAddToDump(jNCreateDump, file4.getAbsolutePath());
                             }
                         }
                     }
                 }
             }
         } finally {
-            nFinishDumpInMemory(nCreateDump, j, z);
+            nFinishDumpInMemory(jNCreateDump, j, z);
         }
     }
 
     private ParcelFileDescriptor requestBufferForProcessLocked(IGraphicsStatsCallback iGraphicsStatsCallback, int i, int i2, String str, long j) throws RemoteException {
-        ActiveBuffer fetchActiveBuffersLocked = fetchActiveBuffersLocked(iGraphicsStatsCallback, i, i2, str, j);
+        ActiveBuffer activeBufferFetchActiveBuffersLocked = fetchActiveBuffersLocked(iGraphicsStatsCallback, i, i2, str, j);
         scheduleRotateLocked();
-        return fetchActiveBuffersLocked.getPfd();
+        return activeBufferFetchActiveBuffersLocked.getPfd();
     }
 
     private Calendar normalizeDate(long j) {
@@ -295,14 +295,14 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             Trace.traceBegin(524288L, "saving graphicsstats for " + historicalBuffer.mInfo.mPackageName);
         }
         synchronized (this.mFileAccessLock) {
-            File pathForApp = pathForApp(historicalBuffer.mInfo);
-            File parentFile = pathForApp.getParentFile();
+            File filePathForApp = pathForApp(historicalBuffer.mInfo);
+            File parentFile = filePathForApp.getParentFile();
             parentFile.mkdirs();
             if (!parentFile.exists()) {
                 Log.w(TAG, "Unable to create path: '" + parentFile.getAbsolutePath() + "'");
                 return;
             }
-            nSaveBuffer(pathForApp.getAbsolutePath(), historicalBuffer.mInfo.mUid, historicalBuffer.mInfo.mPackageName, historicalBuffer.mInfo.mVersionCode, historicalBuffer.mInfo.mStartTime, historicalBuffer.mInfo.mEndTime, historicalBuffer.mData);
+            nSaveBuffer(filePathForApp.getAbsolutePath(), historicalBuffer.mInfo.mUid, historicalBuffer.mInfo.mPackageName, historicalBuffer.mInfo.mVersionCode, historicalBuffer.mInfo.mStartTime, historicalBuffer.mInfo.mEndTime, historicalBuffer.mData);
             Trace.traceEnd(524288L);
         }
     }
@@ -323,13 +323,13 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     public void deleteOldBuffers() {
         Trace.traceBegin(524288L, "deleting old graphicsstats buffers");
         synchronized (this.mFileAccessLock) {
-            File[] listFiles = this.mGraphicsStatsDir.listFiles();
-            if (listFiles != null && listFiles.length > 3) {
-                int length = listFiles.length;
+            File[] fileArrListFiles = this.mGraphicsStatsDir.listFiles();
+            if (fileArrListFiles != null && fileArrListFiles.length > 3) {
+                int length = fileArrListFiles.length;
                 long[] jArr = new long[length];
-                for (int i = 0; i < listFiles.length; i++) {
+                for (int i = 0; i < fileArrListFiles.length; i++) {
                     try {
-                        jArr[i] = Long.parseLong(listFiles[i].getName());
+                        jArr[i] = Long.parseLong(fileArrListFiles[i].getName());
                     } catch (NumberFormatException unused) {
                     }
                 }
@@ -365,13 +365,18 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     private ActiveBuffer fetchActiveBuffersLocked(IGraphicsStatsCallback iGraphicsStatsCallback, int i, int i2, String str, long j) throws RemoteException {
         int size = this.mActive.size();
         long timeInMillis = normalizeDate(System.currentTimeMillis()).getTimeInMillis();
-        for (int i3 = 0; i3 < size; i3++) {
-            ActiveBuffer activeBuffer = this.mActive.get(i3);
-            if (activeBuffer.mPid == i2 && activeBuffer.mUid == i) {
-                if (activeBuffer.mInfo.mStartTime >= timeInMillis) {
-                    return activeBuffer;
+        int i3 = 0;
+        while (true) {
+            if (i3 < size) {
+                ActiveBuffer activeBuffer = this.mActive.get(i3);
+                if (activeBuffer.mPid != i2 || activeBuffer.mUid != i) {
+                    i3++;
+                } else {
+                    if (activeBuffer.mInfo.mStartTime >= timeInMillis) {
+                        return activeBuffer;
+                    }
+                    activeBuffer.binderDied();
                 }
-                activeBuffer.binderDied();
             }
         }
         try {
@@ -387,9 +392,9 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         HashSet<File> hashSet = new HashSet<>(arrayList.size());
         for (int i = 0; i < arrayList.size(); i++) {
             HistoricalBuffer historicalBuffer = arrayList.get(i);
-            File pathForApp = pathForApp(historicalBuffer.mInfo);
-            hashSet.add(pathForApp);
-            nAddToDump(j, pathForApp.getAbsolutePath(), historicalBuffer.mInfo.mUid, historicalBuffer.mInfo.mPackageName, historicalBuffer.mInfo.mVersionCode, historicalBuffer.mInfo.mStartTime, historicalBuffer.mInfo.mEndTime, historicalBuffer.mData);
+            File filePathForApp = pathForApp(historicalBuffer.mInfo);
+            hashSet.add(filePathForApp);
+            nAddToDump(j, filePathForApp.getAbsolutePath(), historicalBuffer.mInfo.mUid, historicalBuffer.mInfo.mPackageName, historicalBuffer.mInfo.mVersionCode, historicalBuffer.mInfo.mStartTime, historicalBuffer.mInfo.mEndTime, historicalBuffer.mData);
         }
         return hashSet;
     }
@@ -435,15 +440,15 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                     }
                 }
             }
-            long nCreateDump = nCreateDump(fileDescriptor.getInt$(), z);
+            long jNCreateDump = nCreateDump(fileDescriptor.getInt$(), z);
             try {
                 synchronized (this.mFileAccessLock) {
-                    HashSet<File> dumpActiveLocked = dumpActiveLocked(nCreateDump, arrayList);
+                    HashSet<File> hashSetDumpActiveLocked = dumpActiveLocked(jNCreateDump, arrayList);
                     arrayList.clear();
-                    dumpHistoricalLocked(nCreateDump, dumpActiveLocked);
+                    dumpHistoricalLocked(jNCreateDump, hashSetDumpActiveLocked);
                 }
             } finally {
-                nFinishDump(nCreateDump);
+                nFinishDump(jNCreateDump);
             }
         }
     }
@@ -481,13 +486,13 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             this.mUid = i;
             this.mPid = i2;
             this.mCallback = iGraphicsStatsCallback;
-            IBinder asBinder = iGraphicsStatsCallback.asBinder();
-            this.mToken = asBinder;
-            asBinder.linkToDeath(this, 0);
+            IBinder iBinderAsBinder = iGraphicsStatsCallback.asBinder();
+            this.mToken = iBinderAsBinder;
+            iBinderAsBinder.linkToDeath(this, 0);
             try {
-                SharedMemory create = SharedMemory.create("GFXStats-" + i2, GraphicsStatsService.this.mAshmemSize);
-                this.mProcessBuffer = create;
-                this.mMapping = create.mapReadWrite();
+                SharedMemory sharedMemoryCreate = SharedMemory.create("GFXStats-" + i2, GraphicsStatsService.this.mAshmemSize);
+                this.mProcessBuffer = sharedMemoryCreate;
+                this.mMapping = sharedMemoryCreate.mapReadWrite();
             } catch (ErrnoException e) {
                 e.rethrowAsIOException();
             }

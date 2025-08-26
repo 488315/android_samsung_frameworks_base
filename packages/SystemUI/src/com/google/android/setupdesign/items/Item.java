@@ -1,6 +1,8 @@
 package com.google.android.setupdesign.items;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -19,7 +21,6 @@ import com.google.android.setupdesign.util.PartnerStyleHelper;
 import com.google.android.setupdesign.util.TextViewPartnerStyler;
 import com.google.android.setupdesign.view.RichTextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Item extends AbstractItem implements LinkSpan.OnLinkClickListener {
     public final CharSequence contentDescription;
@@ -64,7 +65,7 @@ public class Item extends AbstractItem implements LinkSpan.OnLinkClickListener {
     }
 
     @Override // com.google.android.setupdesign.items.AbstractItem
-    public void onBindView(View view) {
+    public void onBindView(View view) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         ((TextView) view.findViewById(R.id.sud_items_title)).setText(this.title);
         TextView textView = (TextView) view.findViewById(R.id.sud_items_summary);
         CharSequence summary = getSummary();
@@ -78,7 +79,7 @@ public class Item extends AbstractItem implements LinkSpan.OnLinkClickListener {
             textView.setVisibility(0);
         }
         view.setContentDescription(this.contentDescription);
-        View findViewById = view.findViewById(R.id.sud_items_icon_container);
+        View viewFindViewById = view.findViewById(R.id.sud_items_icon_container);
         Drawable drawable = this.icon;
         if (drawable != null) {
             ImageView imageView = (ImageView) view.findViewById(R.id.sud_items_icon);
@@ -92,13 +93,13 @@ public class Item extends AbstractItem implements LinkSpan.OnLinkClickListener {
             } else {
                 imageView.clearColorFilter();
             }
-            ViewGroup.LayoutParams layoutParams = findViewById.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams = viewFindViewById.getLayoutParams();
             if (layoutParams instanceof LinearLayout.LayoutParams) {
                 ((LinearLayout.LayoutParams) layoutParams).gravity = this.iconGravity;
             }
-            findViewById.setVisibility(0);
+            viewFindViewById.setVisibility(0);
         } else {
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
         }
         view.setId(this.id);
         if (!(this instanceof ExpandableSwitchItem) && view.getId() != R.id.sud_layout_header && !PartnerConfigHelper.isGlifExpressiveEnabled(view.getContext())) {
@@ -145,16 +146,16 @@ public class Item extends AbstractItem implements LinkSpan.OnLinkClickListener {
         this.visible = true;
         this.iconTint = 0;
         this.iconGravity = 16;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudItem);
-        this.enabled = obtainStyledAttributes.getBoolean(1, true);
-        this.icon = obtainStyledAttributes.getDrawable(0);
-        this.title = obtainStyledAttributes.getText(4);
-        this.summary = obtainStyledAttributes.getText(5);
-        this.contentDescription = obtainStyledAttributes.getText(6);
-        this.layoutRes = obtainStyledAttributes.getResourceId(2, getDefaultLayoutResource());
-        this.visible = obtainStyledAttributes.getBoolean(3, true);
-        this.iconTint = obtainStyledAttributes.getColor(8, 0);
-        this.iconGravity = obtainStyledAttributes.getInt(7, 16);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudItem);
+        this.enabled = typedArrayObtainStyledAttributes.getBoolean(1, true);
+        this.icon = typedArrayObtainStyledAttributes.getDrawable(0);
+        this.title = typedArrayObtainStyledAttributes.getText(4);
+        this.summary = typedArrayObtainStyledAttributes.getText(5);
+        this.contentDescription = typedArrayObtainStyledAttributes.getText(6);
+        this.layoutRes = typedArrayObtainStyledAttributes.getResourceId(2, getDefaultLayoutResource());
+        this.visible = typedArrayObtainStyledAttributes.getBoolean(3, true);
+        this.iconTint = typedArrayObtainStyledAttributes.getColor(8, 0);
+        this.iconGravity = typedArrayObtainStyledAttributes.getInt(7, 16);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

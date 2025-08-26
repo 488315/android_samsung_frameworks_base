@@ -95,9 +95,9 @@ public class LegacyRuntimeManifestParseUtils {
             Slog.d(TAG, "<application-salescode> No sales code, skip it");
             return null;
         }
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestApplication);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestApplication);
         try {
-            String nonConfigurationString = obtainAttributes.getNonConfigurationString(3, 0);
+            String nonConfigurationString = typedArrayObtainAttributes.getNonConfigurationString(3, 0);
             if (nonConfigurationString == null) {
                 Slog.d(TAG, "<application-salescode> does not specify android:name");
                 return null;
@@ -105,26 +105,26 @@ public class LegacyRuntimeManifestParseUtils {
             if (!RuntimeManifestUtils.getSalesCode().equals(nonConfigurationString)) {
                 return null;
             }
-            TypedValue peekValue = obtainAttributes.peekValue(1);
-            if (peekValue != null) {
-                if (peekValue.resourceId == 0) {
-                    applicationReplacement.setCoercedLabel(peekValue.coerceToString());
+            TypedValue typedValuePeekValue = typedArrayObtainAttributes.peekValue(1);
+            if (typedValuePeekValue != null) {
+                if (typedValuePeekValue.resourceId == 0) {
+                    applicationReplacement.setCoercedLabel(typedValuePeekValue.coerceToString());
                     applicationReplacement.setLabelRes(0);
                 } else {
                     applicationReplacement.setCoercedLabel(null);
-                    applicationReplacement.setLabelRes(peekValue.resourceId);
+                    applicationReplacement.setLabelRes(typedValuePeekValue.resourceId);
                 }
             }
-            int resourceId = obtainAttributes.getResourceId(2, 0);
+            int resourceId = typedArrayObtainAttributes.getResourceId(2, 0);
             if (resourceId != 0) {
                 applicationReplacement.setIconRes(resourceId);
             }
-            if (obtainAttributes.hasValueOrEmpty(9)) {
-                applicationReplacement.setEnabled(obtainAttributes.getBoolean(9, true));
+            if (typedArrayObtainAttributes.hasValueOrEmpty(9)) {
+                applicationReplacement.setEnabled(typedArrayObtainAttributes.getBoolean(9, true));
             }
             return applicationReplacement;
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 
@@ -152,10 +152,10 @@ public class LegacyRuntimeManifestParseUtils {
             Slog.d(TAG, str2 + " No sales code, skip it");
             return;
         }
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivityAlias);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivityAlias);
         int i = 0;
         try {
-            String nonConfigurationString = obtainAttributes.getNonConfigurationString(2, 0);
+            String nonConfigurationString = typedArrayObtainAttributes.getNonConfigurationString(2, 0);
             if (nonConfigurationString == null) {
                 Slog.d(TAG, str2 + " does not specify android:name");
                 return;
@@ -164,13 +164,13 @@ public class LegacyRuntimeManifestParseUtils {
                 Slog.d(TAG, "Sales code mismatch");
                 return;
             }
-            String nonConfigurationString2 = obtainAttributes.getNonConfigurationString(7, 1024);
+            String nonConfigurationString2 = typedArrayObtainAttributes.getNonConfigurationString(7, 1024);
             if (nonConfigurationString2 == null) {
                 Slog.d(TAG, str2 + " does not specify android:targetActivity");
                 return;
             }
-            String buildClassName = ParsingUtils.buildClassName(str, nonConfigurationString2);
-            if (buildClassName == null) {
+            String strBuildClassName = ParsingUtils.buildClassName(str, nonConfigurationString2);
+            if (strBuildClassName == null) {
                 Slog.d(TAG, str2 + "Empty class name in package " + str);
                 return;
             }
@@ -181,7 +181,7 @@ public class LegacyRuntimeManifestParseUtils {
                     break;
                 }
                 parsedMainComponentImpl = (ParsedMainComponentImpl) list.get(i);
-                if (buildClassName.equals(parsedMainComponentImpl.getName())) {
+                if (strBuildClassName.equals(parsedMainComponentImpl.getName())) {
                     break;
                 } else {
                     i++;
@@ -189,16 +189,16 @@ public class LegacyRuntimeManifestParseUtils {
             }
             ParsedMainComponentImpl parsedMainComponentImpl2 = parsedMainComponentImpl;
             if (parsedMainComponentImpl2 == null) {
-                Slog.d(TAG, str2 + " target " + buildClassName + " not found in manifest");
+                Slog.d(TAG, str2 + " target " + strBuildClassName + " not found in manifest");
                 return;
             }
-            if (!parseMainOverlayComponentAndModify(parsedMainComponentImpl2, str2, obtainAttributes, parseInput, 2, 1, 0).isError()) {
-                parsedMainComponentImpl2.setEnabled(obtainAttributes.getBoolean(4, parsedMainComponentImpl2.isEnabled()));
+            if (!parseMainOverlayComponentAndModify(parsedMainComponentImpl2, str2, typedArrayObtainAttributes, parseInput, 2, 1, 0).isError()) {
+                parsedMainComponentImpl2.setEnabled(typedArrayObtainAttributes.getBoolean(4, parsedMainComponentImpl2.isEnabled()));
                 return;
             }
             Slog.d(TAG, str2 + " got error while parsing overlay components");
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 
@@ -210,11 +210,11 @@ public class LegacyRuntimeManifestParseUtils {
         if (resourceId != 0) {
             component.setIcon(resourceId);
         }
-        TypedValue peekValue = typedArray.peekValue(i3);
-        if (peekValue != null) {
-            component.setLabelRes(peekValue.resourceId);
-            if (peekValue.resourceId == 0) {
-                component.setNonLocalizedLabel(peekValue.coerceToString());
+        TypedValue typedValuePeekValue = typedArray.peekValue(i3);
+        if (typedValuePeekValue != null) {
+            component.setLabelRes(typedValuePeekValue.resourceId);
+            if (typedValuePeekValue.resourceId == 0) {
+                component.setNonLocalizedLabel(typedValuePeekValue.coerceToString());
             }
         }
         return parseInput.success(component);

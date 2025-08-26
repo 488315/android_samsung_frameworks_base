@@ -82,16 +82,12 @@ public abstract class PluginStore {
         }).map(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda8
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String typeName;
-                typeName = ((ParameterizedType) ((Type) obj)).getActualTypeArguments()[0].getTypeName();
-                return typeName;
+                return ((ParameterizedType) ((Type) obj)).getActualTypeArguments()[0].getTypeName();
             }
         }).filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda9
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean startsWith;
-                startsWith = ((String) obj).startsWith("com.samsung.android");
-                return startsWith;
+                return ((String) obj).startsWith("com.samsung.android");
             }
         }).findFirst().orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
     }
@@ -109,14 +105,14 @@ public abstract class PluginStore {
         }).forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                PluginStore.this.m9603lambda$add$3$comsamsungandroidsumecorepluginPluginStore((Plugin) obj);
+                this.f$0.m9616lambda$add$3$comsamsungandroidsumecorepluginPluginStore((Plugin) obj);
             }
         });
         return this;
     }
 
     /* renamed from: lambda$add$3$com-samsung-android-sume-core-plugin-PluginStore, reason: not valid java name */
-    /* synthetic */ void m9603lambda$add$3$comsamsungandroidsumecorepluginPluginStore(Plugin plugin) {
+    /* synthetic */ void m9616lambda$add$3$comsamsungandroidsumecorepluginPluginStore(Plugin plugin) {
         PluginFixture<?> nNPlugin;
         try {
             String pluginName = getPluginName(plugin);
@@ -168,7 +164,7 @@ public abstract class PluginStore {
 
     public static PluginStore of(List<PluginStore> list) {
         Def.require(!list.isEmpty());
-        PluginStore of = of((Context) list.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda3
+        PluginStore pluginStoreOf = of((Context) list.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return PluginStore.lambda$of$5((PluginStore) obj);
@@ -176,21 +172,17 @@ public abstract class PluginStore {
         }).findFirst().flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Optional ofNullable;
-                ofNullable = Optional.ofNullable(((PluginStore) obj).getContext());
-                return ofNullable;
+                return Optional.ofNullable(((PluginStore) obj).getContext());
             }
         }).orElse(null));
         if (list.size() == 1) {
-            of.registry = list.get(0).registry;
-            return of;
+            pluginStoreOf.registry = list.get(0).registry;
+            return pluginStoreOf;
         }
-        of.registry = (Map) list.stream().map(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda5
+        pluginStoreOf.registry = (Map) list.stream().map(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Map map;
-                map = ((PluginStore) obj).registry;
-                return map;
+                return ((PluginStore) obj).registry;
             }
         }).reduce(new BinaryOperator() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda6
             @Override // java.util.function.BiFunction
@@ -198,7 +190,7 @@ public abstract class PluginStore {
                 return PluginStore.lambda$of$8((Map) obj, (Map) obj2);
             }
         }).orElse(new HashMap());
-        return of;
+        return pluginStoreOf;
     }
 
     static /* synthetic */ boolean lambda$of$5(PluginStore pluginStore) {

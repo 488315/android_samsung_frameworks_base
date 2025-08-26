@@ -81,9 +81,9 @@ public class LongArray implements Cloneable {
             if (i4 > i3) {
                 i3 = i4;
             }
-            long[] newUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i3);
-            System.arraycopy(this.mValues, 0, newUnpaddedLongArray, 0, i2);
-            this.mValues = newUnpaddedLongArray;
+            long[] jArrNewUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(i3);
+            System.arraycopy(this.mValues, 0, jArrNewUnpaddedLongArray, 0, i2);
+            this.mValues = jArrNewUnpaddedLongArray;
         }
     }
 
@@ -92,7 +92,7 @@ public class LongArray implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public LongArray m5506clone() {
+    public LongArray m5513clone() {
         try {
             LongArray longArray = (LongArray) super.clone();
             try {

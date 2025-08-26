@@ -78,9 +78,9 @@ public interface IOneHandService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOneHandService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOneHandService)) {
-                return (IOneHandService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOneHandService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOneHandService)) {
+                return (IOneHandService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -116,25 +116,25 @@ public interface IOneHandService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                registerListener(readString, readStrongBinder);
+                registerListener(string, strongBinder);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                String string2 = parcel.readString();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                unRegisterListener(readString2, readStrongBinder2);
+                unRegisterListener(string2, strongBinder2);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                clickTile(readString3);
+                clickTile(string3);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                writeSetting(readString4, readString5, readInt);
+                writeSetting(string4, string5, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -159,53 +159,53 @@ public interface IOneHandService extends IInterface {
 
             @Override // com.samsung.android.sepunion.IOneHandService
             public void registerListener(String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IOneHandService
             public void unRegisterListener(String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IOneHandService
             public void clickTile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IOneHandService
             public void writeSetting(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOneHandService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

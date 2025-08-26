@@ -2,7 +2,6 @@ package com.android.systemui.statusbar.notification.row.ui.viewmodel;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SingleLineViewModel {
     public final CharSequence contentText;
@@ -28,11 +27,11 @@ public final class SingleLineViewModel {
 
     public final int hashCode() {
         CharSequence charSequence = this.titleText;
-        int hashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
+        int iHashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
         CharSequence charSequence2 = this.contentText;
-        int hashCode2 = (hashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
         ConversationData conversationData = this.conversationData;
-        return hashCode2 + (conversationData != null ? conversationData.hashCode() : 0);
+        return iHashCode2 + (conversationData != null ? conversationData.hashCode() : 0);
     }
 
     public final String toString() {

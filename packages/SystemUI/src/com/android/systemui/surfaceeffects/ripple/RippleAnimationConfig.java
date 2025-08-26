@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RippleAnimationConfig {
     public final RippleShader.FadeParams baseRingFadeParams;
@@ -41,13 +40,13 @@ public final class RippleAnimationConfig {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.sparkleStrength, ReorderTile$$ExternalSyntheticOutline0.m(this.opacity, ReorderTile$$ExternalSyntheticOutline0.m(this.color, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.pixelDensity, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxHeight, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxWidth, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerX, MoveResult$$ExternalSyntheticOutline0.m(this.rippleShape.hashCode() * 31, 31, this.duration), 31), 31), 31), 31), 31), 31), 31), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.sparkleStrength, ReorderTile$$ExternalSyntheticOutline0.m(this.opacity, ReorderTile$$ExternalSyntheticOutline0.m(this.color, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.pixelDensity, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxHeight, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxWidth, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerX, MoveResult$$ExternalSyntheticOutline0.m(this.rippleShape.hashCode() * 31, 31, this.duration), 31), 31), 31), 31), 31), 31), 31), 31);
         RippleShader.FadeParams fadeParams = this.baseRingFadeParams;
-        int hashCode = (m + (fadeParams == null ? 0 : fadeParams.hashCode())) * 31;
+        int iHashCode = (iM + (fadeParams == null ? 0 : fadeParams.hashCode())) * 31;
         RippleShader.FadeParams fadeParams2 = this.sparkleRingFadeParams;
-        int hashCode2 = (hashCode + (fadeParams2 == null ? 0 : fadeParams2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (fadeParams2 == null ? 0 : fadeParams2.hashCode())) * 31;
         RippleShader.FadeParams fadeParams3 = this.centerFillFadeParams;
-        return Boolean.hashCode(this.shouldDistort) + ((hashCode2 + (fadeParams3 != null ? fadeParams3.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.shouldDistort) + ((iHashCode2 + (fadeParams3 != null ? fadeParams3.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

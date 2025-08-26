@@ -17,7 +17,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shared.system.TaskStackChangeListener;
 import com.android.systemui.shared.system.TaskStackChangeListeners;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WorkLockActivityController {
     public final Context mContext;
@@ -31,29 +30,29 @@ public class WorkLockActivityController {
         ?? r0 = new TaskStackChangeListener() { // from class: com.android.systemui.keyguard.WorkLockActivityController.1
             @Override // com.android.systemui.shared.system.TaskStackChangeListener
             public final void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i) {
-                String str;
+                String strFlattenToShortString;
                 WorkLockActivityController workLockActivityController = WorkLockActivityController.this;
                 workLockActivityController.getClass();
                 ComponentName componentName = runningTaskInfo.baseActivity;
-                Intent addFlags = new Intent("android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER").setComponent(new ComponentName(workLockActivityController.mContext, (Class<?>) WorkLockActivity.class)).putExtra("android.intent.extra.USER_ID", i).putExtra("android.intent.extra.PACKAGE_NAME", componentName != null ? componentName.getPackageName() : "").addFlags(67239936);
+                Intent intentAddFlags = new Intent("android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER").setComponent(new ComponentName(workLockActivityController.mContext, (Class<?>) WorkLockActivity.class)).putExtra("android.intent.extra.USER_ID", i).putExtra("android.intent.extra.PACKAGE_NAME", componentName != null ? componentName.getPackageName() : "").addFlags(67239936);
                 try {
-                    str = runningTaskInfo.baseIntent.getComponent().flattenToShortString();
+                    strFlattenToShortString = runningTaskInfo.baseIntent.getComponent().flattenToShortString();
                 } catch (Exception e) {
                     android.util.Log.d("WorkLockActivityController", "ActivityTaskManager.getTasks() raise Exception!! " + e);
                     RecyclerView$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "WorkLockActivityController", new StringBuilder("getComponentFromTaskId() failed!! "));
-                    str = null;
+                    strFlattenToShortString = null;
                 }
-                addFlags.putExtra("componentName", str);
-                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                makeBasic.setLaunchTaskId(runningTaskInfo.taskId);
-                makeBasic.setTaskOverlay(true, false);
-                Bundle bundle = makeBasic.toBundle();
-                int i2 = -96;
+                intentAddFlags.putExtra("componentName", strFlattenToShortString);
+                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                activityOptionsMakeBasic.setLaunchTaskId(runningTaskInfo.taskId);
+                activityOptionsMakeBasic.setTaskOverlay(true, false);
+                Bundle bundle = activityOptionsMakeBasic.toBundle();
+                int iStartActivityAsUser = -96;
                 try {
-                    i2 = workLockActivityController.mIatm.startActivityAsUser(workLockActivityController.mContext.getIApplicationThread(), workLockActivityController.mContext.getBasePackageName(), workLockActivityController.mContext.getAttributionTag(), addFlags, addFlags.resolveTypeIfNeeded(workLockActivityController.mContext.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, bundle, ((UserTrackerImpl) workLockActivityController.mUserTracker).getUserId());
+                    iStartActivityAsUser = workLockActivityController.mIatm.startActivityAsUser(workLockActivityController.mContext.getIApplicationThread(), workLockActivityController.mContext.getBasePackageName(), workLockActivityController.mContext.getAttributionTag(), intentAddFlags, intentAddFlags.resolveTypeIfNeeded(workLockActivityController.mContext.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, bundle, ((UserTrackerImpl) workLockActivityController.mUserTracker).getUserId());
                 } catch (RemoteException | Exception unused) {
                 }
-                if (ActivityManager.isStartResultSuccessful(i2)) {
+                if (ActivityManager.isStartResultSuccessful(iStartActivityAsUser)) {
                     return;
                 }
                 android.util.Log.w("WorkLockActivityController", "Failed to start work lock activity, will remove task=" + runningTaskInfo.taskId);

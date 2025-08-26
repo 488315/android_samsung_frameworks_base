@@ -9,7 +9,7 @@ import com.android.systemui.ambient.statusbar.ui.AmbientStatusBarViewController;
 import com.android.systemui.complication.ComplicationHostViewController;
 import com.android.systemui.complication.ComplicationLayoutParams;
 import com.android.systemui.dreams.ui.viewmodel.DreamViewModel;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.core.Logger;
 import com.android.systemui.statusbar.BlurUtils;
@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DreamOverlayAnimationsController {
     public final DreamViewModel dreamViewModel;
@@ -35,12 +34,11 @@ public final class DreamOverlayAnimationsController {
     public final long mDreamInComplicationsAnimDurationMs;
     public final int mDreamInTranslationYDistance;
     public final long mDreamInTranslationYDurationMs;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 mLifecycleFlowHandle;
+    public RepeatWhenAttachedKt.C09181 mLifecycleFlowHandle;
     public final DreamOverlayStateController mOverlayStateController;
     public final AmbientStatusBarViewController mStatusBarViewController;
     public View view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -100,11 +98,11 @@ public final class DreamOverlayAnimationsController {
             interpolator = Interpolators.LINEAR;
         }
         dreamOverlayAnimationsController.getClass();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(0L);
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$alphaAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setStartDelay(0L);
+        valueAnimatorOfFloat.setInterpolator(interpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$alphaAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(final ValueAnimator valueAnimator) {
                 final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
@@ -113,34 +111,34 @@ public final class DreamOverlayAnimationsController {
                 ComplicationLayoutParams.iteratePositions(i, new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$alphaAnimator$1$1.1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        DreamOverlayAnimationsController.access$setElementsAlphaAtPosition(DreamOverlayAnimationsController.this, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((Number) obj).intValue(), f3 < f4);
+                        DreamOverlayAnimationsController.access$setElementsAlphaAtPosition(dreamOverlayAnimationsController2, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((Number) obj).intValue(), f3 < f4);
                     }
                 });
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     public static Animator translationYAnimator$default(final DreamOverlayAnimationsController dreamOverlayAnimationsController, float f, float f2, long j, Interpolator interpolator, int i) {
         dreamOverlayAnimationsController.getClass();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(0L);
-        ofFloat.setInterpolator(interpolator);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setStartDelay(0L);
+        valueAnimatorOfFloat.setInterpolator(interpolator);
         final int i2 = 3;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$translationYAnimator$1$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$translationYAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(final ValueAnimator valueAnimator) {
                 final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
                 ComplicationLayoutParams.iteratePositions(i2, new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$translationYAnimator$1$1.1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        DreamOverlayAnimationsController.access$setElementsTranslationYAtPosition(DreamOverlayAnimationsController.this, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((Number) obj).intValue());
+                        DreamOverlayAnimationsController.access$setElementsTranslationYAtPosition(dreamOverlayAnimationsController2, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((Number) obj).intValue());
                     }
                 });
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     public final void cancelAnimations() {

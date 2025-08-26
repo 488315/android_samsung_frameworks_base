@@ -45,39 +45,39 @@ public class MtuUtils {
         if (i2 <= 0) {
             return 1280;
         }
-        int i3 = 0;
-        int i4 = 0;
-        int i5 = 0;
+        int iMax = 0;
+        int iMax2 = 0;
+        int iMax3 = 0;
         for (ChildSaProposal childSaProposal : list) {
             Iterator<Pair<Integer, Integer>> it = childSaProposal.getEncryptionAlgorithms().iterator();
             while (it.hasNext()) {
                 Integer num = it.next().first;
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 Map<Integer, Integer> map = AUTHCRYPT_ALGORITHM_OVERHEAD;
                 if (map.containsKey(num)) {
-                    i3 = Math.max(i3, map.get(num).intValue());
+                    iMax = Math.max(iMax, map.get(num).intValue());
                 } else {
                     Map<Integer, Integer> map2 = CRYPT_ALGORITHM_OVERHEAD;
                     if (map2.containsKey(num)) {
-                        i4 = Math.max(i4, map2.get(num).intValue());
+                        iMax2 = Math.max(iMax2, map2.get(num).intValue());
                     } else {
-                        Slog.wtf(TAG, "Unknown encryption algorithm requested: " + intValue);
+                        Slog.wtf(TAG, "Unknown encryption algorithm requested: " + iIntValue);
                         return 1280;
                     }
                 }
             }
             for (Integer num2 : childSaProposal.getIntegrityAlgorithms()) {
-                int intValue2 = num2.intValue();
+                int iIntValue2 = num2.intValue();
                 Map<Integer, Integer> map3 = AUTH_ALGORITHM_OVERHEAD;
                 if (map3.containsKey(num2)) {
-                    i5 = Math.max(i5, map3.get(num2).intValue());
+                    iMax3 = Math.max(iMax3, map3.get(num2).intValue());
                 } else {
-                    Slog.wtf(TAG, "Unknown integrity algorithm requested: " + intValue2);
+                    Slog.wtf(TAG, "Unknown integrity algorithm requested: " + iIntValue2);
                     return 1280;
                 }
             }
         }
-        int i6 = z ? 78 : 50;
-        return Math.min(Math.min(i, (i2 - i3) - i6), ((i2 - i4) - i5) - i6);
+        int i3 = z ? 78 : 50;
+        return Math.min(Math.min(i, (i2 - iMax) - i3), ((i2 - iMax2) - iMax3) - i3);
     }
 }

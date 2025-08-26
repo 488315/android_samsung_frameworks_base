@@ -21,18 +21,18 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.libcore");
-            hpkePublicApi = load.getBooleanFlagValue("hpke_public_api", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.libcore");
+            hpkePublicApi = aconfigPackageLoad.getBooleanFlagValue("hpke_public_api", false);
             hpkeVApis = true;
-            madviseApi = load.getBooleanFlagValue("madvise_api", false);
-            nativeMetrics = load.getBooleanFlagValue("native_metrics", false);
-            openjdk21Stringconcat = load.getBooleanFlagValue("openjdk21_stringconcat", false);
-            openjdk21V1Apis = load.getBooleanFlagValue("openjdk_21_v1_apis", false);
-            openjdk21V2Apis = load.getBooleanFlagValue("openjdk_21_v2_apis", false);
-            postCleanupApis = load.getBooleanFlagValue("post_cleanup_apis", false);
-            readOnlyDynamicCodeLoad = load.getBooleanFlagValue("read_only_dynamic_code_load", false);
+            madviseApi = aconfigPackageLoad.getBooleanFlagValue("madvise_api", false);
+            nativeMetrics = aconfigPackageLoad.getBooleanFlagValue("native_metrics", false);
+            openjdk21Stringconcat = aconfigPackageLoad.getBooleanFlagValue("openjdk21_stringconcat", false);
+            openjdk21V1Apis = aconfigPackageLoad.getBooleanFlagValue("openjdk_21_v1_apis", false);
+            openjdk21V2Apis = aconfigPackageLoad.getBooleanFlagValue("openjdk_21_v2_apis", false);
+            postCleanupApis = aconfigPackageLoad.getBooleanFlagValue("post_cleanup_apis", false);
+            readOnlyDynamicCodeLoad = aconfigPackageLoad.getBooleanFlagValue("read_only_dynamic_code_load", false);
             vApis = true;
-            appinfo = load.getBooleanFlagValue("appinfo", false);
+            appinfo = aconfigPackageLoad.getBooleanFlagValue("appinfo", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

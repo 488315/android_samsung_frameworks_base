@@ -11,7 +11,6 @@ import com.samsung.android.sdk.command.template.SliderTemplate;
 import com.samsung.android.sdk.command.template.ToggleTemplate;
 import com.samsung.android.sdk.command.template.UnformattedTemplate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Command {
     public final String mCategory;
@@ -101,7 +100,6 @@ public final class Command {
         return this.mPackageName;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StatefulBuilder {
         public final String mCategory;
         public final String mClassification;
@@ -146,7 +144,6 @@ public final class Command {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatelessBuilder {
         public final String mCategory;
         public final String mClassification;

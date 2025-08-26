@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslSwitchTokens {
     public static final Companion Companion = new Companion(null);
@@ -18,7 +17,6 @@ public final class SeslSwitchTokens {
     public final long trackOffColor;
     public final long trackOnColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,6 @@ public final class SeslSwitchTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -86,7 +83,7 @@ public final class SeslSwitchTokens {
         SeslSwitchTokens seslSwitchTokens = (SeslSwitchTokens) obj;
         long j = seslSwitchTokens.trackOnColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.trackOnColor, j) && ULong.m3427equalsimpl0(this.trackOffColor, seslSwitchTokens.trackOffColor) && ULong.m3427equalsimpl0(this.thumbOnColor, seslSwitchTokens.thumbOnColor) && ULong.m3427equalsimpl0(this.thumbOffColor, seslSwitchTokens.thumbOffColor);
+        return ULong.m3447equalsimpl0(this.trackOnColor, j) && ULong.m3447equalsimpl0(this.trackOffColor, seslSwitchTokens.trackOffColor) && ULong.m3447equalsimpl0(this.thumbOnColor, seslSwitchTokens.thumbOnColor) && ULong.m3447equalsimpl0(this.thumbOffColor, seslSwitchTokens.thumbOffColor);
     }
 
     public final int hashCode() {
@@ -96,9 +93,9 @@ public final class SeslSwitchTokens {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.trackOnColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.trackOffColor);
-        return NotificationController$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslSwitchTokens(trackOnColor=", m462toStringimpl, ", trackOffColor=", m462toStringimpl2, ", thumbOnColor="), Color.m462toStringimpl(this.thumbOnColor), ", thumbOffColor=", Color.m462toStringimpl(this.thumbOffColor), ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.trackOnColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.trackOffColor);
+        return NotificationController$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslSwitchTokens(trackOnColor=", strM464toStringimpl, ", trackOffColor=", strM464toStringimpl2, ", thumbOnColor="), Color.m464toStringimpl(this.thumbOnColor), ", thumbOffColor=", Color.m464toStringimpl(this.thumbOffColor), ")");
     }
 
     private SeslSwitchTokens(long j, long j2, long j3, long j4) {

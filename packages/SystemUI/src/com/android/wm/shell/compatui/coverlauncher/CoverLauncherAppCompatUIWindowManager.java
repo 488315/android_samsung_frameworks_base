@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManagerAbstract {
     public final String TAG;
@@ -43,13 +42,13 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
     public final View createLayout() {
         TextView textView;
         ViewGroup.LayoutParams layoutParams;
-        final CoverLauncherAppCompatUILayout inflateLayout = inflateLayout();
-        this.mLayout = inflateLayout;
+        final CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayoutInflateLayout = inflateLayout();
+        this.mLayout = coverLauncherAppCompatUILayoutInflateLayout;
         CoverLauncherAppCompatUIController coverLauncherAppCompatUIController = this.mCoverLauncherAppCompatUIController;
-        inflateLayout.mWindowManager = this;
-        inflateLayout.mController = coverLauncherAppCompatUIController;
-        inflateLayout.mNaviButtonSize = (int) inflateLayout.getResources().getDimension(R.dimen.fw_cover_launcher_app_compat_button_size);
-        CoverLauncherAppCompatUIController coverLauncherAppCompatUIController2 = inflateLayout.mController;
+        coverLauncherAppCompatUILayoutInflateLayout.mWindowManager = this;
+        coverLauncherAppCompatUILayoutInflateLayout.mController = coverLauncherAppCompatUIController;
+        coverLauncherAppCompatUILayoutInflateLayout.mNaviButtonSize = (int) coverLauncherAppCompatUILayoutInflateLayout.getResources().getDimension(R.dimen.fw_cover_launcher_app_compat_button_size);
+        CoverLauncherAppCompatUIController coverLauncherAppCompatUIController2 = coverLauncherAppCompatUILayoutInflateLayout.mController;
         coverLauncherAppCompatUIController2.getClass();
         try {
             coverLauncherAppCompatUIController2.mAlignment = coverLauncherAppCompatUIController2.mActivityTaskManager.getCoverLauncherAppCompatAlignment();
@@ -58,28 +57,28 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
         }
         boolean z = CoreRune.FW_FLIP_FULL_COVER_SCREEN_APP_COMPAT_UI;
         if (z) {
-            CoverLauncherAppCompatUIController coverLauncherAppCompatUIController3 = inflateLayout.mController;
+            CoverLauncherAppCompatUIController coverLauncherAppCompatUIController3 = coverLauncherAppCompatUILayoutInflateLayout.mController;
             coverLauncherAppCompatUIController3.getClass();
             Rect rect = z ? new Rect(coverLauncherAppCompatUIController3.mTaskInfo.appCompatTaskInfo.topActivityBounds) : null;
-            if (rect != null && (textView = (TextView) inflateLayout.findViewById(R.id.fw_cover_launcher_app_compat_ui_main)) != null && (layoutParams = textView.getLayoutParams()) != null) {
+            if (rect != null && (textView = (TextView) coverLauncherAppCompatUILayoutInflateLayout.findViewById(R.id.fw_cover_launcher_app_compat_ui_main)) != null && (layoutParams = textView.getLayoutParams()) != null) {
                 layoutParams.width = rect.width();
                 textView.setLayoutParams(layoutParams);
             }
         }
         ArrayList arrayList = new ArrayList();
-        AccessibilityManager accessibilityManager = inflateLayout.mController.mAccessibilityManager;
+        AccessibilityManager accessibilityManager = coverLauncherAppCompatUILayoutInflateLayout.mController.mAccessibilityManager;
         if (accessibilityManager != null ? accessibilityManager.semIsScreenReaderEnabled() : false) {
             Log.d("CoverLauncherAppCompatUILayout", "ScreenReader was enabled, do not show alignment buttons");
         } else {
-            Rect taskBounds = inflateLayout.mWindowManager.getTaskBounds();
-            CoverLauncherAppCompatUIController coverLauncherAppCompatUIController4 = inflateLayout.mController;
+            Rect taskBounds = coverLauncherAppCompatUILayoutInflateLayout.mWindowManager.getTaskBounds();
+            CoverLauncherAppCompatUIController coverLauncherAppCompatUIController4 = coverLauncherAppCompatUILayoutInflateLayout.mController;
             coverLauncherAppCompatUIController4.getClass();
             Rect rect2 = z ? new Rect(coverLauncherAppCompatUIController4.mTaskInfo.appCompatTaskInfo.topActivityBounds) : null;
-            if (taskBounds.width() - (rect2.width() + (inflateLayout.mNaviButtonSize << 1)) >= 0) {
+            if (taskBounds.width() - (rect2.width() + (coverLauncherAppCompatUILayoutInflateLayout.mNaviButtonSize << 1)) >= 0) {
                 arrayList.add(Integer.valueOf(R.id.fw_cover_launcher_app_compat_align_left_button));
                 arrayList.add(Integer.valueOf(R.id.fw_cover_launcher_app_compat_align_right_button));
             } else {
-                Log.d("CoverLauncherAppCompatUILayout", "Not enough space to show alignment buttons, taskBounds=" + taskBounds + ", buttonSize=" + inflateLayout.mNaviButtonSize + ", activityBounds=" + rect2);
+                Log.d("CoverLauncherAppCompatUILayout", "Not enough space to show alignment buttons, taskBounds=" + taskBounds + ", buttonSize=" + coverLauncherAppCompatUILayoutInflateLayout.mNaviButtonSize + ", activityBounds=" + rect2);
             }
         }
         int size = arrayList.size();
@@ -88,12 +87,12 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
             Object obj = arrayList.get(i);
             i++;
             Integer num = (Integer) obj;
-            View findViewById = inflateLayout.findViewById(num.intValue());
-            if (findViewById instanceof ImageButton) {
-                inflateLayout.mButtons.put(num, (ImageButton) findViewById);
+            View viewFindViewById = coverLauncherAppCompatUILayoutInflateLayout.findViewById(num.intValue());
+            if (viewFindViewById instanceof ImageButton) {
+                coverLauncherAppCompatUILayoutInflateLayout.mButtons.put(num, (ImageButton) viewFindViewById);
             }
         }
-        Iterator it = inflateLayout.mButtons.entrySet().iterator();
+        Iterator it = coverLauncherAppCompatUILayoutInflateLayout.mButtons.entrySet().iterator();
         while (it.hasNext()) {
             final ImageButton imageButton = (ImageButton) ((Map.Entry) it.next()).getValue();
             int id = imageButton.getId();
@@ -116,7 +115,7 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i3 = i2;
-                        CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout = inflateLayout;
+                        CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout = coverLauncherAppCompatUILayoutInflateLayout;
                         switch (i3) {
                             case 0:
                                 int i4 = CoverLauncherAppCompatUILayout.$r8$clinit;
@@ -139,7 +138,7 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i32 = i3;
-                        CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout = inflateLayout;
+                        CoverLauncherAppCompatUILayout coverLauncherAppCompatUILayout = coverLauncherAppCompatUILayoutInflateLayout;
                         switch (i32) {
                             case 0:
                                 int i4 = CoverLauncherAppCompatUILayout.$r8$clinit;
@@ -158,8 +157,8 @@ public class CoverLauncherAppCompatUIWindowManager extends CompatUIWindowManager
                 });
             }
         }
-        inflateLayout.refreshButtonVisibility(false);
-        inflateLayout.getRootView().getViewTreeObserver().registerFrameCommitCallback(inflateLayout.mFrameCommitCallback);
+        coverLauncherAppCompatUILayoutInflateLayout.refreshButtonVisibility(false);
+        coverLauncherAppCompatUILayoutInflateLayout.getRootView().getViewTreeObserver().registerFrameCommitCallback(coverLauncherAppCompatUILayoutInflateLayout.mFrameCommitCallback);
         return this.mLayout;
     }
 

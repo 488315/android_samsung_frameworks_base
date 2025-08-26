@@ -12,13 +12,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnchoredTranslate implements InterpolatedPropertyTransformation {
     public final ElementKey anchor;
     public final PropertyTransformation.Property.Offset property;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements Transformation.Factory {
         public final ElementKey anchor;
 
@@ -47,39 +45,39 @@ public final class AnchoredTranslate implements InterpolatedPropertyTransformati
 
     @Override // com.android.compose.animation.scene.transformation.InterpolatedPropertyTransformation
     public final Object transform(PropertyTransformationScopeImpl propertyTransformationScopeImpl, ContentKey contentKey, ElementKey elementKey, TransitionState.Transition transition, Object obj) {
-        long floatToRawIntBits;
+        long jFloatToRawIntBits;
         long j;
         long j2 = ((Offset) obj).packedValue;
         ElementStateScopeImpl elementStateScopeImpl = propertyTransformationScopeImpl.$$delegate_0;
         ElementKey elementKey2 = this.anchor;
         ContentKey contentKey2 = transition.fromContent;
-        Offset m922targetOffsetGcwITfU = elementStateScopeImpl.m922targetOffsetGcwITfU(contentKey2, elementKey2);
-        if (m922targetOffsetGcwITfU == null) {
+        Offset offsetM924targetOffsetGcwITfU = elementStateScopeImpl.m924targetOffsetGcwITfU(contentKey2, elementKey2);
+        if (offsetM924targetOffsetGcwITfU == null) {
             transform_ahi2Abc$throwException(this, contentKey2);
             throw null;
         }
         ElementStateScopeImpl elementStateScopeImpl2 = propertyTransformationScopeImpl.$$delegate_0;
         ContentKey contentKey3 = transition.toContent;
-        Offset m922targetOffsetGcwITfU2 = elementStateScopeImpl2.m922targetOffsetGcwITfU(contentKey3, elementKey2);
-        if (m922targetOffsetGcwITfU2 == null) {
+        Offset offsetM924targetOffsetGcwITfU2 = elementStateScopeImpl2.m924targetOffsetGcwITfU(contentKey3, elementKey2);
+        if (offsetM924targetOffsetGcwITfU2 == null) {
             transform_ahi2Abc$throwException(this, contentKey3);
             throw null;
         }
-        long m400minusMKHz9U = Offset.m400minusMKHz9U(m922targetOffsetGcwITfU2.packedValue, m922targetOffsetGcwITfU.packedValue);
+        long jM402minusMKHz9U = Offset.m402minusMKHz9U(offsetM924targetOffsetGcwITfU2.packedValue, offsetM924targetOffsetGcwITfU.packedValue);
         if (Intrinsics.areEqual(contentKey, contentKey3)) {
-            float intBitsToFloat = Float.intBitsToFloat((int) (j2 >> 32)) - Float.intBitsToFloat((int) (m400minusMKHz9U >> 32));
-            float intBitsToFloat2 = Float.intBitsToFloat((int) (j2 & 4294967295L)) - Float.intBitsToFloat((int) (m400minusMKHz9U & 4294967295L));
-            long floatToRawIntBits2 = Float.floatToRawIntBits(intBitsToFloat);
-            floatToRawIntBits = Float.floatToRawIntBits(intBitsToFloat2);
-            j = floatToRawIntBits2 << 32;
+            float fIntBitsToFloat = Float.intBitsToFloat((int) (j2 >> 32)) - Float.intBitsToFloat((int) (jM402minusMKHz9U >> 32));
+            float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j2 & 4294967295L)) - Float.intBitsToFloat((int) (jM402minusMKHz9U & 4294967295L));
+            long jFloatToRawIntBits2 = Float.floatToRawIntBits(fIntBitsToFloat);
+            jFloatToRawIntBits = Float.floatToRawIntBits(fIntBitsToFloat2);
+            j = jFloatToRawIntBits2 << 32;
         } else {
-            float intBitsToFloat3 = Float.intBitsToFloat((int) (m400minusMKHz9U >> 32)) + Float.intBitsToFloat((int) (j2 >> 32));
-            float intBitsToFloat4 = Float.intBitsToFloat((int) (m400minusMKHz9U & 4294967295L)) + Float.intBitsToFloat((int) (j2 & 4294967295L));
-            long floatToRawIntBits3 = Float.floatToRawIntBits(intBitsToFloat3);
-            floatToRawIntBits = Float.floatToRawIntBits(intBitsToFloat4);
-            j = floatToRawIntBits3 << 32;
+            float fIntBitsToFloat3 = Float.intBitsToFloat((int) (jM402minusMKHz9U >> 32)) + Float.intBitsToFloat((int) (j2 >> 32));
+            float fIntBitsToFloat4 = Float.intBitsToFloat((int) (jM402minusMKHz9U & 4294967295L)) + Float.intBitsToFloat((int) (j2 & 4294967295L));
+            long jFloatToRawIntBits3 = Float.floatToRawIntBits(fIntBitsToFloat3);
+            jFloatToRawIntBits = Float.floatToRawIntBits(fIntBitsToFloat4);
+            j = jFloatToRawIntBits3 << 32;
         }
-        return Offset.m393boximpl(j | (floatToRawIntBits & 4294967295L));
+        return Offset.m395boximpl(j | (jFloatToRawIntBits & 4294967295L));
     }
 
     private AnchoredTranslate(ElementKey elementKey) {

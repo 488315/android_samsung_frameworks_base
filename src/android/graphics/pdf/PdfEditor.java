@@ -43,7 +43,7 @@ public final class PdfEditor {
 
     private static native void nativeWrite(long j, int i);
 
-    public PdfEditor(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
+    public PdfEditor(ParcelFileDescriptor parcelFileDescriptor) throws IOException, ErrnoException {
         CloseGuard closeGuard = CloseGuard.get();
         this.mCloseGuard = closeGuard;
         if (parcelFileDescriptor == null) {
@@ -54,10 +54,10 @@ public final class PdfEditor {
             long j = Os.fstat(parcelFileDescriptor.getFileDescriptor()).st_size;
             this.mInput = parcelFileDescriptor;
             synchronized (sPdfiumLock) {
-                long nativeOpen = nativeOpen(this.mInput.getFd(), j);
-                this.mNativeDocument = nativeOpen;
+                long jNativeOpen = nativeOpen(this.mInput.getFd(), j);
+                this.mNativeDocument = jNativeOpen;
                 try {
-                    this.mPageCount = nativeGetPageCount(nativeOpen);
+                    this.mPageCount = nativeGetPageCount(jNativeOpen);
                 } catch (Throwable th) {
                     nativeClose(this.mNativeDocument);
                     this.mNativeDocument = 0L;
@@ -113,14 +113,14 @@ public final class PdfEditor {
     }
 
     public boolean getPageMediaBox(int i, Rect rect) {
-        boolean nativeGetPageMediaBox;
+        boolean zNativeGetPageMediaBox;
         throwIfClosed();
         throwIfOutMediaBoxNull(rect);
         throwIfPageNotInDocument(i);
         synchronized (sPdfiumLock) {
-            nativeGetPageMediaBox = nativeGetPageMediaBox(this.mNativeDocument, i, rect);
+            zNativeGetPageMediaBox = nativeGetPageMediaBox(this.mNativeDocument, i, rect);
         }
-        return nativeGetPageMediaBox;
+        return zNativeGetPageMediaBox;
     }
 
     public void setPageMediaBox(int i, Rect rect) {
@@ -133,14 +133,14 @@ public final class PdfEditor {
     }
 
     public boolean getPageCropBox(int i, Rect rect) {
-        boolean nativeGetPageCropBox;
+        boolean zNativeGetPageCropBox;
         throwIfClosed();
         throwIfOutCropBoxNull(rect);
         throwIfPageNotInDocument(i);
         synchronized (sPdfiumLock) {
-            nativeGetPageCropBox = nativeGetPageCropBox(this.mNativeDocument, i, rect);
+            zNativeGetPageCropBox = nativeGetPageCropBox(this.mNativeDocument, i, rect);
         }
-        return nativeGetPageCropBox;
+        return zNativeGetPageCropBox;
     }
 
     public void setPageCropBox(int i, Rect rect) {
@@ -153,12 +153,12 @@ public final class PdfEditor {
     }
 
     public boolean shouldScaleForPrinting() {
-        boolean nativeScaleForPrinting;
+        boolean zNativeScaleForPrinting;
         throwIfClosed();
         synchronized (sPdfiumLock) {
-            nativeScaleForPrinting = nativeScaleForPrinting(this.mNativeDocument);
+            zNativeScaleForPrinting = nativeScaleForPrinting(this.mNativeDocument);
         }
-        return nativeScaleForPrinting;
+        return zNativeScaleForPrinting;
     }
 
     public void write(ParcelFileDescriptor parcelFileDescriptor) throws IOException {

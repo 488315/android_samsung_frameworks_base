@@ -147,9 +147,9 @@ public interface IEmergencyManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEmergencyManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEmergencyManager)) {
-                return (IEmergencyManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEmergencyManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEmergencyManager)) {
+                return (IEmergencyManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -205,9 +205,9 @@ public interface IEmergencyManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isEmergencyMode = isEmergencyMode();
+                    boolean zIsEmergencyMode = isEmergencyMode();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEmergencyMode);
+                    parcel2.writeBoolean(zIsEmergencyMode);
                     return true;
                 case 2:
                     int emergencyState = getEmergencyState();
@@ -215,83 +215,83 @@ public interface IEmergencyManager extends IInterface {
                     parcel2.writeInt(emergencyState);
                     return true;
                 case 3:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkValidPackage = checkValidPackage(readString, readString2, readInt);
+                    boolean zCheckValidPackage = checkValidPackage(string, string2, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkValidPackage);
+                    parcel2.writeBoolean(zCheckValidPackage);
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkValidIntentAction = checkValidIntentAction(readString3, readString4);
+                    boolean zCheckValidIntentAction = checkValidIntentAction(string3, string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkValidIntentAction);
+                    parcel2.writeBoolean(zCheckValidIntentAction);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkInvalidProcess = checkInvalidProcess(readString5);
+                    boolean zCheckInvalidProcess = checkInvalidProcess(string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkInvalidProcess);
+                    parcel2.writeBoolean(zCheckInvalidProcess);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean checkInvalidBroadcast = checkInvalidBroadcast(readString6, readString7);
+                    boolean zCheckInvalidBroadcast = checkInvalidBroadcast(string6, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkInvalidBroadcast);
+                    parcel2.writeBoolean(zCheckInvalidBroadcast);
                     return true;
                 case 7:
-                    boolean needMobileDataBlock = needMobileDataBlock();
+                    boolean zNeedMobileDataBlock = needMobileDataBlock();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(needMobileDataBlock);
+                    parcel2.writeBoolean(zNeedMobileDataBlock);
                     return true;
                 case 8:
-                    boolean isScreenOn = isScreenOn();
+                    boolean zIsScreenOn = isScreenOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenOn);
+                    parcel2.writeBoolean(zIsScreenOn);
                     return true;
                 case 9:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setUserPackageBlocked(readBoolean);
+                    setUserPackageBlocked(z);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean isUserPackageBlocked = isUserPackageBlocked();
+                    boolean zIsUserPackageBlocked = isUserPackageBlocked();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUserPackageBlocked);
+                    parcel2.writeBoolean(zIsUserPackageBlocked);
                     return true;
                 case 11:
-                    boolean isModifying = isModifying();
+                    boolean zIsModifying = isModifying();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isModifying);
+                    parcel2.writeBoolean(zIsModifying);
                     return true;
                 case 12:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLocationProviderEnabled(readBoolean2);
+                    setLocationProviderEnabled(z2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString8 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string8 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean addAppToLauncher = addAppToLauncher(readString8, readBoolean3);
+                    boolean zAddAppToLauncher = addAppToLauncher(string8, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppToLauncher);
+                    parcel2.writeBoolean(zAddAppToLauncher);
                     return true;
                 case 14:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkModeType = checkModeType(readInt2);
+                    boolean zCheckModeType = checkModeType(i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkModeType);
+                    parcel2.writeBoolean(zCheckModeType);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -316,222 +316,222 @@ public interface IEmergencyManager extends IInterface {
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean isEmergencyMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public int getEmergencyState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean checkValidPackage(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean checkValidIntentAction(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean checkInvalidProcess(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean checkInvalidBroadcast(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean needMobileDataBlock() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean isScreenOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public void setUserPackageBlocked(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean isUserPackageBlocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean isModifying() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public void setLocationProviderEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean addAppToLauncher(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
             public boolean checkModeType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEmergencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

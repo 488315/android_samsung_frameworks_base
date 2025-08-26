@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dumpable;
@@ -17,17 +18,16 @@ import dagger.Lazy;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhoneStatusBarViewControllerExt implements Dumpable {
     public final ConfigurationController configurationController;
     public final PhoneStatusBarViewControllerExt$configurationListener$1 configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt$configurationListener$1
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onConfigChanged(Configuration configuration) {
+        public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
             if (configuration == null) {
                 return;
             }
-            PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt = PhoneStatusBarViewControllerExt.this;
+            PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt = this.this$0;
             PhoneStatusBarViewController phoneStatusBarViewController = phoneStatusBarViewControllerExt.phoneStatusBarViewController;
             if (phoneStatusBarViewController != null) {
                 phoneStatusBarViewControllerExt.indicatorGardenPresenter.onGardenConfigurationChanged(phoneStatusBarViewController, configuration);
@@ -44,11 +44,11 @@ public final class PhoneStatusBarViewControllerExt implements Dumpable {
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
         public final void onDensityOrFontScaleChanged() {
-            final PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt = PhoneStatusBarViewControllerExt.this;
+            final PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt = this.this$0;
             phoneStatusBarViewControllerExt.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt$configurationListener$1$onDensityOrFontScaleChanged$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IndicatorGardenInputProperties indicatorGardenInputProperties = PhoneStatusBarViewControllerExt.this.indicatorGardenPresenter.inputProperties;
+                    IndicatorGardenInputProperties indicatorGardenInputProperties = phoneStatusBarViewControllerExt.indicatorGardenPresenter.inputProperties;
                     indicatorGardenInputProperties.updateWindowMetrics();
                     indicatorGardenInputProperties.updatePaddingValues();
                 }
@@ -74,7 +74,6 @@ public final class PhoneStatusBarViewControllerExt implements Dumpable {
     public final TwoPhoneModeIconController twoPhoneModeIconController;
     public final IndicatorGardenViewTreeLogHelper viewTreeLogHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

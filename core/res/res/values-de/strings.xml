@@ -594,6 +594,7 @@ Wenn du sie dennoch installieren möchtest, lies den Datenschutzhinweis der App 
     <string name="call_notification_screening_text">Filter für eingehenden Anruf</string>
     <string name="camera_restrict">Sicherheitsrichtlinie verhindert die Verwendung der Kamera.</string>
     <string name="can_not_install_app">App kann nicht installiert werden. App nicht für die Verwendung mit %s optimiert.</string>
+    <string name="can_not_open_searcle_on_the_external_display">„Circle to Search“ kann auf einem verbundenen Bildschirm nicht geöffnet werden.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">„Circle to Search“ kann auf dem Sperrbildschirm nicht geöffnet werden.</string>
     <string name="cannot_open_app_concentration_mode">Öffnen der App nicht möglich</string>
     <string name="capability_desc_canCaptureFingerprintGestures">Erfasst Touch-Gesten auf dem Fingerabdrucksensor des Geräts.</string>
@@ -675,6 +676,7 @@ Wenn du sie dennoch installieren möchtest, lies den Datenschutzhinweis der App 
     <string name="common_secure_boot_nwlock_notification_text">Diese SIM-Karte wird nicht unterstützt.</string>
     <string name="common_secure_boot_nwlock_notification_title">Ungültige SIM-Karte</string>
     <string name="compat_restart_education_text">Wenn diese App falsch angezeigt wird, versuche, sie zu schließen und erneut zu öffnen.</string>
+    <string name="compat_restart_menu_education_text">Wenn diese App falsch angezeigt wird, starte sie im Menü „Mehr“ neu.</string>
     <string name="concurrent_display_notification_active_content">%1$s nutzt beide Displays zum Anzeigen von Inhalten</string>
     <string name="concurrent_display_notification_active_title">Dual Screen ist aktiviert</string>
     <string name="concurrent_display_notification_name">Dual Screen</string>
@@ -2922,7 +2924,7 @@ Wenn du über einen längeren Zeitraum Musik in hoher Lautstärke hörst, kann d
     <string name="satellite_notification_manual_title">Nachrichten per Satellit verwenden?</string>
     <string name="satellite_notification_open_message">Messages öffnen</string>
     <string name="satellite_notification_summary">Du kannst Nachrichten ohne Mobilfunknetz oder WLAN senden und empfangen</string>
-    <string name="satellite_notification_summary_with_data">Du kannst Nachrichten senden und empfangen und begrenzte Datenmengen per Satellit nutzen</string>
+    <string name="satellite_notification_summary_with_data">Du kannst per Satellit Nachrichten senden und empfangen und ausgewählte Apps nutzen</string>
     <string name="satellite_notification_title">Automatisch mit Satellit verbunden</string>
     <string name="satellite_sos_available_notification_summary">Du kannst dem Rettungsdienst eine Nachricht senden, wenn kein Mobilfunknetz oder WLAN verfügbar ist. Dazu muss Google Messages als Standard-Messaging-App festgelegt sein.</string>
     <string name="satellite_sos_available_notification_title">„Notruf über Satellit“ jetzt verfügbar</string>

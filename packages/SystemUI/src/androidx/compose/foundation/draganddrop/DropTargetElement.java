@@ -9,7 +9,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DropTargetElement extends ModifierNodeElement<DragAndDropTargetNode> {
     public final Function1 shouldStartDragAndDrop;
@@ -54,8 +53,8 @@ final class DropTargetElement extends ModifierNodeElement<DragAndDropTargetNode>
             dragAndDropTargetNode.undelegate(dragAndDropTargetModifierNode);
         }
         dragAndDropTargetNode.target = dragAndDropTarget2;
-        DragAndDropNode DragAndDropTargetModifierNode = DragAndDropNodeKt.DragAndDropTargetModifierNode(new DragAndDropTargetNode$createAndAttachDragAndDropModifierNode$1(dragAndDropTargetNode), dragAndDropTargetNode.target);
-        dragAndDropTargetNode.delegate(DragAndDropTargetModifierNode);
-        dragAndDropTargetNode.dragAndDropNode = DragAndDropTargetModifierNode;
+        DragAndDropNode dragAndDropNodeDragAndDropTargetModifierNode = DragAndDropNodeKt.DragAndDropTargetModifierNode(new DragAndDropTargetNode$createAndAttachDragAndDropModifierNode$1(dragAndDropTargetNode), dragAndDropTargetNode.target);
+        dragAndDropTargetNode.delegate(dragAndDropNodeDragAndDropTargetModifierNode);
+        dragAndDropTargetNode.dragAndDropNode = dragAndDropNodeDragAndDropTargetModifierNode;
     }
 }

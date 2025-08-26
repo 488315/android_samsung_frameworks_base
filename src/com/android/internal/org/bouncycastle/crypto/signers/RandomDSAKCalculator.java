@@ -28,11 +28,11 @@ public class RandomDSAKCalculator implements DSAKCalculator {
 
     @Override // com.android.internal.org.bouncycastle.crypto.signers.DSAKCalculator
     public BigInteger nextK() {
-        int bitLength = this.q.bitLength();
+        int iBitLength = this.q.bitLength();
         while (true) {
-            BigInteger createRandomBigInteger = BigIntegers.createRandomBigInteger(bitLength, this.random);
-            if (!createRandomBigInteger.equals(ZERO) && createRandomBigInteger.compareTo(this.q) < 0) {
-                return createRandomBigInteger;
+            BigInteger bigIntegerCreateRandomBigInteger = BigIntegers.createRandomBigInteger(iBitLength, this.random);
+            if (!bigIntegerCreateRandomBigInteger.equals(ZERO) && bigIntegerCreateRandomBigInteger.compareTo(this.q) < 0) {
+                return bigIntegerCreateRandomBigInteger;
             }
         }
     }

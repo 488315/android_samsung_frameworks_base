@@ -36,16 +36,16 @@ public class ParcelableParcel implements Parcelable {
     }
 
     public ParcelableParcel(Parcel parcel, ClassLoader classLoader) {
-        Parcel obtain = Parcel.obtain();
-        this.mParcel = obtain;
+        Parcel parcelObtain = Parcel.obtain();
+        this.mParcel = parcelObtain;
         this.mClassLoader = classLoader;
-        int readInt = parcel.readInt();
-        if (readInt < 0) {
+        int i = parcel.readInt();
+        if (i < 0) {
             throw new IllegalArgumentException("Negative size read from parcel");
         }
-        int dataPosition = parcel.dataPosition();
-        parcel.setDataPosition(MathUtils.addOrThrow(dataPosition, readInt));
-        obtain.appendFrom(parcel, dataPosition, readInt);
+        int iDataPosition = parcel.dataPosition();
+        parcel.setDataPosition(MathUtils.addOrThrow(iDataPosition, i));
+        parcelObtain.appendFrom(parcel, iDataPosition, i);
     }
 
     public Parcel getParcel() {

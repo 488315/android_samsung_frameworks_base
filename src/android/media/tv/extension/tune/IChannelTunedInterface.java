@@ -52,9 +52,9 @@ public interface IChannelTunedInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.tune.IChannelTunedInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IChannelTunedInterface)) {
-                return (IChannelTunedInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.tune.IChannelTunedInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IChannelTunedInterface)) {
+                return (IChannelTunedInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,14 +84,14 @@ public interface IChannelTunedInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IChannelTunedListener asInterface = IChannelTunedListener.Stub.asInterface(parcel.readStrongBinder());
+                IChannelTunedListener iChannelTunedListenerAsInterface = IChannelTunedListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addChannelTunedListener(asInterface);
+                addChannelTunedListener(iChannelTunedListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IChannelTunedListener asInterface2 = IChannelTunedListener.Stub.asInterface(parcel.readStrongBinder());
+                IChannelTunedListener iChannelTunedListenerAsInterface2 = IChannelTunedListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeChannelTunedListener(asInterface2);
+                removeChannelTunedListener(iChannelTunedListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -117,31 +117,31 @@ public interface IChannelTunedInterface extends IInterface {
 
             @Override // android.media.tv.extension.tune.IChannelTunedInterface
             public void addChannelTunedListener(IChannelTunedListener iChannelTunedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.tune.IChannelTunedInterface");
-                    obtain.writeStrongInterface(iChannelTunedListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.tune.IChannelTunedInterface");
+                    parcelObtain.writeStrongInterface(iChannelTunedListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.tune.IChannelTunedInterface
             public void removeChannelTunedListener(IChannelTunedListener iChannelTunedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.tune.IChannelTunedInterface");
-                    obtain.writeStrongInterface(iChannelTunedListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.tune.IChannelTunedInterface");
+                    parcelObtain.writeStrongInterface(iChannelTunedListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

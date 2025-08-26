@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IntArrayList extends AbstractProtobufList implements Internal.IntList, RandomAccess, PrimitiveNonBoxingCollection {
     public static final IntArrayList EMPTY_LIST;
@@ -29,12 +28,12 @@ public final class IntArrayList extends AbstractProtobufList implements Internal
     @Override // com.google.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final void add(int i, Object obj) {
         int i2;
-        int intValue = ((Integer) obj).intValue();
+        int iIntValue = ((Integer) obj).intValue();
         ensureIsMutable();
         if (i < 0 || i > (i2 = this.size)) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         int[] iArr = this.array;
         if (i2 < iArr.length) {
@@ -45,7 +44,7 @@ public final class IntArrayList extends AbstractProtobufList implements Internal
             System.arraycopy(this.array, i, iArr2, i + 1, this.size - i);
             this.array = iArr2;
         }
-        this.array[i] = intValue;
+        this.array[i] = iIntValue;
         this.size++;
         ((AbstractList) this).modCount++;
     }
@@ -100,9 +99,9 @@ public final class IntArrayList extends AbstractProtobufList implements Internal
 
     public final void ensureIndexInRange$3(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
     }
 
@@ -147,10 +146,10 @@ public final class IntArrayList extends AbstractProtobufList implements Internal
         if (!(obj instanceof Integer)) {
             return -1;
         }
-        int intValue = ((Integer) obj).intValue();
+        int iIntValue = ((Integer) obj).intValue();
         int i = this.size;
         for (int i2 = 0; i2 < i; i2++) {
-            if (this.array[i2] == intValue) {
+            if (this.array[i2] == iIntValue) {
                 return i2;
             }
         }
@@ -185,12 +184,12 @@ public final class IntArrayList extends AbstractProtobufList implements Internal
 
     @Override // com.google.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final Object set(int i, Object obj) {
-        int intValue = ((Integer) obj).intValue();
+        int iIntValue = ((Integer) obj).intValue();
         ensureIsMutable();
         ensureIndexInRange$3(i);
         int[] iArr = this.array;
         int i2 = iArr[i];
-        iArr[i] = intValue;
+        iArr[i] = iIntValue;
         return Integer.valueOf(i2);
     }
 

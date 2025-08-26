@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AsyncFontListLoader$loadWithTimeoutOrNull$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Font $this_loadWithTimeoutOrNull;
@@ -47,7 +46,7 @@ final class AsyncFontListLoader$loadWithTimeoutOrNull$2 extends SuspendLambda im
         PlatformFontLoader platformFontLoader = this.this$0.platformFontLoader;
         Font font = this.$this_loadWithTimeoutOrNull;
         this.label = 1;
-        Object awaitLoad = platformFontLoader.awaitLoad(font, this);
-        return awaitLoad == coroutineSingletons ? coroutineSingletons : awaitLoad;
+        Object objAwaitLoad = platformFontLoader.awaitLoad(font, this);
+        return objAwaitLoad == coroutineSingletons ? coroutineSingletons : objAwaitLoad;
     }
 }

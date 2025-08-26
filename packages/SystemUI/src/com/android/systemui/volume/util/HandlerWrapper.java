@@ -7,7 +7,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HandlerWrapper {
     public final Lazy mainThreadHandler$delegate;
@@ -15,7 +14,7 @@ public final class HandlerWrapper {
     public final Lazy workerThreadHandler$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.util.HandlerWrapper$$ExternalSyntheticLambda2
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return new Handler(((HandlerThread) HandlerWrapper.this.workerThread$delegate.getValue()).getLooper());
+            return new Handler(((HandlerThread) this.f$0.workerThread$delegate.getValue()).getLooper());
         }
     });
 

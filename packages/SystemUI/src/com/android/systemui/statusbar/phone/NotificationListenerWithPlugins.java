@@ -10,7 +10,6 @@ import com.android.systemui.plugins.PluginListener;
 import com.android.systemui.plugins.PluginManager;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationListenerWithPlugins extends NotificationListenerService implements PluginListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -18,7 +17,6 @@ public class NotificationListenerWithPlugins extends NotificationListenerService
     public final PluginManager mPluginManager;
     public final ArrayList mPlugins = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.NotificationListenerWithPlugins$1, reason: invalid class name */
     public class AnonymousClass1 implements NotificationListenerController.NotificationProvider {
         public AnonymousClass1() {

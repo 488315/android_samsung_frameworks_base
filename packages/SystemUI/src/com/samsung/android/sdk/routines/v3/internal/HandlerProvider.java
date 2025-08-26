@@ -4,7 +4,6 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HandlerProvider {
     public final HashMap b = new HashMap();
@@ -19,16 +18,16 @@ public class HandlerProvider {
             return obj;
         }
         android.util.Log.i("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("getWithTimeout: tag=", str, ", wait 3000 ms until initialized..."));
-        Object computeIfAbsent = this.c.computeIfAbsent(str, new HandlerProvider$$ExternalSyntheticLambda0());
-        synchronized (computeIfAbsent) {
+        Object objComputeIfAbsent = this.c.computeIfAbsent(str, new HandlerProvider$$ExternalSyntheticLambda0());
+        synchronized (objComputeIfAbsent) {
             try {
                 try {
-                    computeIfAbsent.wait(3000L);
-                } catch (InterruptedException e) {
-                    android.util.Log.e("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), "waitWithTimeout: tag=" + str + ", InterruptedException", e);
+                    objComputeIfAbsent.wait(3000L);
+                } catch (IllegalMonitorStateException e) {
+                    android.util.Log.e("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), "waitWithTimeout: tag=" + str + ", IllegalMonitorStateException", e);
                 }
-            } catch (IllegalMonitorStateException e2) {
-                android.util.Log.e("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), "waitWithTimeout: tag=" + str + ", IllegalMonitorStateException", e2);
+            } catch (InterruptedException e2) {
+                android.util.Log.e("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), "waitWithTimeout: tag=" + str + ", InterruptedException", e2);
             }
         }
         android.util.Log.i("Routine@Sdk[3.1.9]: ".concat("HandlerProvider"), ContentInViewNode$Request$$ExternalSyntheticOutline0.m("getWithTimeout: tag=", str, ", notified or timeout"));

@@ -8,7 +8,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardUpdateMonitor$$ExternalSyntheticLambda6 implements Runnable {
     public final /* synthetic */ int $r8$classId = 1;
@@ -34,11 +33,11 @@ public final /* synthetic */ class KeyguardUpdateMonitor$$ExternalSyntheticLambd
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(26);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.bool1 = z;
                 logMessageImpl.int1 = i;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 keyguardUpdateMonitor.mLockPatternUtils.reportSuccessfulBiometricUnlock(z, i);
                 break;
             default:

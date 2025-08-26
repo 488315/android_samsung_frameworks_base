@@ -61,16 +61,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onServiceConnected() {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onServiceConnected$0();
+                            this.f$0.lambda$onServiceConnected$0();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -83,16 +83,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onServiceDisconnected() {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onServiceDisconnected$1();
+                            this.f$0.lambda$onServiceDisconnected$1();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -105,16 +105,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onHotspotNetworksUpdated(final List<HotspotNetwork> list) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onHotspotNetworksUpdated$2(list);
+                            this.f$0.lambda$onHotspotNetworksUpdated$2(list);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -127,16 +127,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onKnownNetworksUpdated(final List<KnownNetwork> list) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onKnownNetworksUpdated$3(list);
+                            this.f$0.lambda$onKnownNetworksUpdated$3(list);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -149,16 +149,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onSharedConnectivitySettingsChanged(final SharedConnectivitySettingsState sharedConnectivitySettingsState) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onSharedConnectivitySettingsChanged$4(sharedConnectivitySettingsState);
+                            this.f$0.lambda$onSharedConnectivitySettingsChanged$4(sharedConnectivitySettingsState);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -171,16 +171,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onHotspotNetworkConnectionStatusChanged(final HotspotNetworkConnectionStatus hotspotNetworkConnectionStatus) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onHotspotNetworkConnectionStatusChanged$5(hotspotNetworkConnectionStatus);
+                            this.f$0.lambda$onHotspotNetworkConnectionStatusChanged$5(hotspotNetworkConnectionStatus);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -193,16 +193,16 @@ public class SharedConnectivityManager {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback
         public void onKnownNetworkConnectionStatusChanged(final KnownNetworkConnectionStatus knownNetworkConnectionStatus) {
             if (this.mCallback != null) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$SharedConnectivityCallbackProxy$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedConnectivityManager.SharedConnectivityCallbackProxy.this.lambda$onKnownNetworkConnectionStatusChanged$6(knownNetworkConnectionStatus);
+                            this.f$0.lambda$onKnownNetworkConnectionStatusChanged$6(knownNetworkConnectionStatus);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -253,7 +253,7 @@ public class SharedConnectivityManager {
                     SharedConnectivityManager.this.mCallbackProxyCache.keySet().forEach(new Consumer() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivityManager$1$$ExternalSyntheticLambda0
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            SharedConnectivityManager.AnonymousClass1.this.lambda$onServiceConnected$0((SharedConnectivityClientCallback) obj);
+                            this.f$0.lambda$onServiceConnected$0((SharedConnectivityClientCallback) obj);
                         }
                     });
                     SharedConnectivityManager.this.mCallbackProxyCache.clear();
@@ -379,8 +379,8 @@ public class SharedConnectivityManager {
     }
 
     public boolean unregisterCallback(SharedConnectivityClientCallback sharedConnectivityClientCallback) {
-        boolean isEmpty;
-        boolean isEmpty2;
+        boolean zIsEmpty;
+        boolean zIsEmpty2;
         Objects.requireNonNull(sharedConnectivityClientCallback, "callback cannot be null");
         if (!this.mProxyMap.containsKey(sharedConnectivityClientCallback) && !this.mCallbackProxyCache.containsKey(sharedConnectivityClientCallback)) {
             Log.e(TAG, "Callback not found, cannot unregister");
@@ -393,9 +393,9 @@ public class SharedConnectivityManager {
         if (this.mService == null) {
             synchronized (this.mProxyDataLock) {
                 this.mCallbackProxyCache.remove(sharedConnectivityClientCallback);
-                isEmpty2 = this.mCallbackProxyCache.isEmpty();
+                zIsEmpty2 = this.mCallbackProxyCache.isEmpty();
             }
-            if (isEmpty2) {
+            if (zIsEmpty2) {
                 unbind();
             }
             return true;
@@ -404,9 +404,9 @@ public class SharedConnectivityManager {
             synchronized (this.mProxyDataLock) {
                 this.mService.unregisterCallback(this.mProxyMap.get(sharedConnectivityClientCallback));
                 this.mProxyMap.remove(sharedConnectivityClientCallback);
-                isEmpty = this.mProxyMap.isEmpty();
+                zIsEmpty = this.mProxyMap.isEmpty();
             }
-            if (isEmpty) {
+            if (zIsEmpty) {
                 unbind();
             }
             return true;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RemoteTileDataSource implements TileDataSource {
     public static final String AUTHORITY;
@@ -18,7 +17,6 @@ public final class RemoteTileDataSource implements TileDataSource {
     public static final Uri TILES_URI;
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,17 +72,17 @@ public final class RemoteTileDataSource implements TileDataSource {
     }
 
     public final String loadData(Uri uri) {
-        String str;
         String string;
+        String string2;
         String type = this.context.getContentResolver().getType(uri);
         if (type != null) {
-            Bundle call = this.context.getContentResolver().call(AUTHORITY, type, (String) null, (Bundle) null);
-            if (call == null || (str = call.getString("result")) == null) {
-                str = "";
+            Bundle bundleCall = this.context.getContentResolver().call(AUTHORITY, type, (String) null, (Bundle) null);
+            if (bundleCall == null || (string = bundleCall.getString("result")) == null) {
+                string = "";
             }
-            Log.d("RemoteDataSource", uri + "  result=" + str);
-            if (call != null && (string = call.getString("result")) != null) {
-                return string;
+            Log.d("RemoteDataSource", uri + "  result=" + string);
+            if (bundleCall != null && (string2 = bundleCall.getString("result")) != null) {
+                return string2;
             }
         }
         return "";

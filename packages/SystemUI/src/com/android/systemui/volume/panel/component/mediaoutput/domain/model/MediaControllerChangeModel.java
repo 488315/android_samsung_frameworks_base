@@ -9,11 +9,9 @@ import com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$D
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface MediaControllerChangeModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AudioInfoChanged implements MediaControllerChangeModel {
         public final MediaController.PlaybackInfo info;
 
@@ -37,7 +35,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ExtrasChanged implements MediaControllerChangeModel {
         public final Bundle extras;
 
@@ -65,7 +62,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MetadataChanged implements MediaControllerChangeModel {
         public final MediaMetadata metadata;
 
@@ -93,7 +89,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlaybackStateChanged implements MediaControllerChangeModel {
         public final PlaybackState state;
 
@@ -121,7 +116,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QueueChanged implements MediaControllerChangeModel {
         public final List queue;
 
@@ -149,7 +143,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QueueTitleChanged implements MediaControllerChangeModel {
         public final CharSequence title;
 
@@ -177,7 +170,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SessionDestroyed implements MediaControllerChangeModel {
         public static final SessionDestroyed INSTANCE = new SessionDestroyed();
 
@@ -197,7 +189,6 @@ public interface MediaControllerChangeModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SessionEvent implements MediaControllerChangeModel {
         public final String event;
         public final Bundle extras;
@@ -219,9 +210,9 @@ public interface MediaControllerChangeModel {
         }
 
         public final int hashCode() {
-            int hashCode = this.event.hashCode() * 31;
+            int iHashCode = this.event.hashCode() * 31;
             Bundle bundle = this.extras;
-            return hashCode + (bundle == null ? 0 : bundle.hashCode());
+            return iHashCode + (bundle == null ? 0 : bundle.hashCode());
         }
 
         public final String toString() {

@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ManufacturerData {
     public byte[] mManufacturerRawData = null;
@@ -15,7 +14,6 @@ public class ManufacturerData {
     public final Data mData = new Data(this);
     public final SSdevice mSSdevice = new SSdevice();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Data {
         public boolean mIsDeviceCategoryInitialized = false;
         public final byte[] mContactHash = {0, 0, 0};
@@ -32,7 +30,6 @@ public class ManufacturerData {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SSdevice {
         public SSdevice() {
             new ArrayList(Arrays.asList("[Phone] ", "[Tablet] ", "[Wearable] ", "[PC] ", "[Accessory] ", "[TV] ", "[AV] ", "[Signage] ", "[Refrigerator] ", "[Washer] ", "[Dryer] ", "[Floor A/C] ", "[Room A/C] ", "[System A/C] ", "[Air Purifier] ", "[Oven] ", "[Range] ", "[Robot Vacuum] ", "[Smart Home] ", "[Printer] ", "[Headphone] ", "[Speaker] ", "[Monitor] ", "[E-Board] ", "[IoT] ", "[Camera] ", "[Camcorder] ", "[Cooktop] ", "[Dish Washer] ", "[Microwave Oven] ", "[Hood] ", "[KimchiRef] ", "[Watch] ", "[Band] ", "[Router] ", "[BD] ", "[Tag] ", "[Car] ", "[Airdresser] ", "[AI Speaker] "));
@@ -208,6 +205,10 @@ public class ManufacturerData {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00ae A[Catch: ArrayIndexOutOfBoundsException -> 0x00c7, TryCatch #5 {ArrayIndexOutOfBoundsException -> 0x00c7, blocks: (B:45:0x0089, B:48:0x008f, B:49:0x0092, B:51:0x0098, B:53:0x00a0, B:55:0x00a6, B:56:0x00ae, B:57:0x00b1, B:59:0x00b6, B:61:0x00bd, B:62:0x00c4), top: B:204:0x0089 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateDeviceInfo(byte[] bArr) {
         int i;
         int i2;
@@ -262,16 +263,13 @@ public class ManufacturerData {
         try {
             int i7 = this.mManufacturerType;
             if (i7 != 2) {
-                if (i7 != 3) {
-                    data.mTxPower = 0;
-                } else {
-                    if (isSupportFeature((byte) 2) && bArr.length > BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_TYPE + BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_INFO) {
-                        int i8 = BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_TYPE;
-                        if (bArr[i8] == 1) {
-                            data.mTxPower = bArr[i8 + BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_INFO];
-                        }
+                if (i7 == 3 && isSupportFeature((byte) 2) && bArr.length > BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_TYPE + BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_INFO) {
+                    int i8 = BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_TYPE;
+                    if (bArr[i8] == 1) {
+                        data.mTxPower = bArr[i8 + BluetoothManufacturerData.OFFSET_SS_LE_PROXIMITY_INFO];
+                    } else {
+                        data.mTxPower = 0;
                     }
-                    data.mTxPower = 0;
                 }
             } else if (bArr.length <= BluetoothManufacturerData.OFFSET_SS_BREDR_PROXIMITY_INFO || (bArr[BluetoothManufacturerData.OFFSET_SS_BREDR_PROXIMITY_TYPE] & 1) != 1) {
                 data.mTxPower = 0;

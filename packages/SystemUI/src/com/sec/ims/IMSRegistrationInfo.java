@@ -3,7 +3,6 @@ package com.sec.ims;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IMSRegistrationInfo implements Parcelable, Cloneable {
     public static final Parcelable.Creator<IMSRegistrationInfo> CREATOR = new Parcelable.Creator<IMSRegistrationInfo>() { // from class: com.sec.ims.IMSRegistrationInfo.1
@@ -34,7 +33,6 @@ public class IMSRegistrationInfo implements Parcelable, Cloneable {
     private String mURIfromPAU;
     private String mURIfromPAU2nd;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ECMP_MODE {
         public static final int CS_PREFERRED = 0;
         public static final int NOT_SUPPORT = -1;
@@ -199,7 +197,7 @@ public class IMSRegistrationInfo implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public IMSRegistrationInfo m3372clone() throws CloneNotSupportedException {
+    public IMSRegistrationInfo m3392clone() throws CloneNotSupportedException {
         IMSRegistrationInfo iMSRegistrationInfo = (IMSRegistrationInfo) super.clone();
         String str = this.mLocalProfileUri;
         if (str != null) {

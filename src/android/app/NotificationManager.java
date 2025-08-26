@@ -6,13 +6,13 @@ import android.app.AutomaticZenRule;
 import android.app.ICallNotificationEventCallback;
 import android.app.INotificationManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.Person;
 import android.app.compat.CompatChanges;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
+import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
@@ -239,13 +239,13 @@ public class NotificationManager {
             synchronized (NotificationManager.this.mNMLock) {
                 INotificationManager service = NotificationManager.getService();
                 try {
-                    long currentTimeMillis = System.currentTimeMillis();
+                    long jCurrentTimeMillis = System.currentTimeMillis();
                     String str = this.mUser.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mPkg + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mId + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mTag;
                     String str2 = this.mUser.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mPkg + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mNotification.getGroup();
                     if (this.mNotification.isGroupSummary() && NotificationManager.this.mOverflowChildUpdateTimeMap.containsKey(str2)) {
-                        long longValue = currentTimeMillis - ((Long) NotificationManager.this.mOverflowChildUpdateTimeMap.get(str2)).longValue();
-                        if (longValue > 400) {
-                            Slog.d(NotificationManager.TAG, "summary is blocked by limit notification for overflow diffTime=" + longValue);
+                        long jLongValue = jCurrentTimeMillis - ((Long) NotificationManager.this.mOverflowChildUpdateTimeMap.get(str2)).longValue();
+                        if (jLongValue > 400) {
+                            Slog.d(NotificationManager.TAG, "summary is blocked by limit notification for overflow diffTime=" + jLongValue);
                             return;
                         }
                     } else {
@@ -266,9 +266,9 @@ public class NotificationManager {
         if (iNotificationManager != null) {
             return iNotificationManager;
         }
-        INotificationManager asInterface = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
-        sService = asInterface;
-        return asInterface;
+        INotificationManager iNotificationManagerAsInterface = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+        sService = iNotificationManagerAsInterface;
+        return iNotificationManagerAsInterface;
     }
 
     protected INotificationManager service() {
@@ -315,10 +315,10 @@ public class NotificationManager {
         IpcDataCache.QueryHandler<String, Map<String, NotificationChannelGroup>> queryHandler2 = new IpcDataCache.QueryHandler<String, Map<String, NotificationChannelGroup>>() { // from class: android.app.NotificationManager.2
             @Override // android.os.IpcDataCache.QueryHandler, android.app.PropertyInvalidatedCache.QueryHandler
             public Map<String, NotificationChannelGroup> apply(String str) {
-                INotificationManager service = NotificationManager.this.service();
+                INotificationManager iNotificationManagerService = NotificationManager.this.service();
                 ArrayMap arrayMap = new ArrayMap();
                 try {
-                    ParceledListSlice notificationChannelGroupsWithoutChannels = service.getNotificationChannelGroupsWithoutChannels(str);
+                    ParceledListSlice notificationChannelGroupsWithoutChannels = iNotificationManagerService.getNotificationChannelGroupsWithoutChannels(str);
                     if (notificationChannelGroupsWithoutChannels != null) {
                         for (NotificationChannelGroup notificationChannelGroup : notificationChannelGroupsWithoutChannels.getList()) {
                             arrayMap.put(notificationChannelGroup.getId(), notificationChannelGroup);
@@ -358,14 +358,14 @@ public class NotificationManager {
     }
 
     public void notifyAsPackage(String str, String str2, int i, Notification notification) {
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         String packageName = this.mContext.getPackageName();
         if (discardNotify(this.mContext.getUser(), str, str2, i, notification)) {
             return;
         }
         try {
             Slog.i(TAG, packageName + ": notify(" + i + ", " + str2 + ", " + notification + ") as package");
-            service.enqueueNotificationWithTag(str, packageName, str2, i, fixNotification(notification), this.mContext.getUser().getIdentifier());
+            iNotificationManagerService.enqueueNotificationWithTag(str, packageName, str2, i, fixNotification(notification), this.mContext.getUser().getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -384,7 +384,7 @@ public class NotificationManager {
             }
             this.mEdgeNotificationManager.postEdgeNotificationByNormal(i, notification);
         }
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         String packageName = this.mContext.getPackageName();
         if (discardNotify(userHandle, packageName, str, i, notification)) {
             return;
@@ -393,7 +393,7 @@ public class NotificationManager {
             Slog.i(TAG, packageName + ": notify(" + i + ", " + str + ", " + notification + ") as user");
             if (this.mBlockedChannelsForOverflowNoti == null) {
                 try {
-                    this.mBlockedChannelsForOverflowNoti = service.getBlockInfoOfNotificationsForOverflow(this.mContext.getPackageName());
+                    this.mBlockedChannelsForOverflowNoti = iNotificationManagerService.getBlockInfoOfNotificationsForOverflow(this.mContext.getPackageName());
                     Slog.d(TAG, "BOOTING pkg =" + packageName + " mBlockedChannelsForOverflowNoti=" + this.mBlockedChannelsForOverflowNoti);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
@@ -403,36 +403,36 @@ public class NotificationManager {
             if (list != null && !list.isEmpty()) {
                 String str2 = userHandle.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + packageName + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + i + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + str;
                 String str3 = userHandle.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + packageName + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + notification.getGroup();
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 if (this.mOverflowNotiUpdateTimeMap.containsKey(str2)) {
                     if (this.mHandler.hasCallbacks(this.mReNotifyRunnable)) {
                         this.mHandler.removeCallbacks(this.mReNotifyRunnable);
                     }
-                    long longValue = currentTimeMillis - this.mOverflowNotiUpdateTimeMap.get(str2).longValue();
-                    if (longValue < 10000) {
-                        this.mReNotifyRunnable = new ReNotifyRunnable(packageName, str, i, notification, userHandle, currentTimeMillis);
+                    long jLongValue = jCurrentTimeMillis - this.mOverflowNotiUpdateTimeMap.get(str2).longValue();
+                    if (jLongValue < 10000) {
+                        this.mReNotifyRunnable = new ReNotifyRunnable(packageName, str, i, notification, userHandle, jCurrentTimeMillis);
                         if (notification.isGroupSummary()) {
-                            this.mHandler.postDelayed(this.mReNotifyRunnable, 10200 - longValue);
+                            this.mHandler.postDelayed(this.mReNotifyRunnable, 10200 - jLongValue);
                             return;
                         } else {
-                            this.mHandler.postDelayed(this.mReNotifyRunnable, 10000 - longValue);
+                            this.mHandler.postDelayed(this.mReNotifyRunnable, 10000 - jLongValue);
                             return;
                         }
                     }
                     Slog.d(TAG, "The time to post with delay has passed. pkg =" + packageName);
                     if (!notification.isGroupSummary()) {
-                        this.mOverflowChildUpdateTimeMap.put(str3, Long.valueOf(currentTimeMillis));
+                        this.mOverflowChildUpdateTimeMap.put(str3, Long.valueOf(jCurrentTimeMillis));
                     }
-                    this.mOverflowNotiUpdateTimeMap.put(str2, Long.valueOf(currentTimeMillis));
+                    this.mOverflowNotiUpdateTimeMap.put(str2, Long.valueOf(jCurrentTimeMillis));
                 } else {
                     Slog.d(TAG, "received first notification to check overflow. pkg =" + packageName);
                     if (!notification.isGroupSummary()) {
-                        this.mOverflowChildUpdateTimeMap.put(str3, Long.valueOf(currentTimeMillis));
+                        this.mOverflowChildUpdateTimeMap.put(str3, Long.valueOf(jCurrentTimeMillis));
                     }
-                    this.mOverflowNotiUpdateTimeMap.put(str2, Long.valueOf(currentTimeMillis));
+                    this.mOverflowNotiUpdateTimeMap.put(str2, Long.valueOf(jCurrentTimeMillis));
                 }
             }
-            service.enqueueNotificationWithTag(packageName, this.mContext.getOpPackageName(), str, i, fixNotification(notification), userHandle.getIdentifier());
+            iNotificationManagerService.enqueueNotificationWithTag(packageName, this.mContext.getOpPackageName(), str, i, fixNotification(notification), userHandle.getIdentifier());
         } catch (RemoteException e2) {
             throw e2.rethrowFromSystemServer();
         }
@@ -535,9 +535,9 @@ public class NotificationManager {
         }
 
         boolean eventExceedsRate() {
-            long millis = NotificationManager.this.mClock.millis();
-            this.mInputRateEstimator.update(millis);
-            return this.mOutputRateEstimator.getRate(millis) > this.mLimitRate;
+            long jMillis = NotificationManager.this.mClock.millis();
+            this.mInputRateEstimator.update(jMillis);
+            return this.mOutputRateEstimator.getRate(jMillis) > this.mLimitRate;
         }
 
         void recordAccepted() {
@@ -563,7 +563,7 @@ public class NotificationManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Notification fixNotification(Notification notification) {
+    public Notification fixNotification(Notification notification) throws Resources.NotFoundException {
         String packageName = this.mContext.getPackageName();
         Notification.addFieldsFromContext(this.mContext, notification);
         if (notification.sound != null) {
@@ -611,12 +611,12 @@ public class NotificationManager {
         if (discardCancel(userHandle, packageName, str, i)) {
             return;
         }
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         if (localLOGV) {
             Log.v(TAG, packageName + ": cancel(" + i + NavigationBarInflaterView.KEY_CODE_END);
         }
         try {
-            service.cancelNotificationWithTag(packageName, this.mContext.getOpPackageName(), str, i, userHandle.getIdentifier());
+            iNotificationManagerService.cancelNotificationWithTag(packageName, this.mContext.getOpPackageName(), str, i, userHandle.getIdentifier());
             EdgeNotificationManager edgeNotificationManager = this.mEdgeNotificationManager;
             if (edgeNotificationManager != null) {
                 edgeNotificationManager.removeEdgeNotificationByNormal(i);
@@ -657,12 +657,12 @@ public class NotificationManager {
                 }
             }
         }
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         if (localLOGV) {
             Log.v(TAG, packageName + ": cancelAll()");
         }
         try {
-            service.cancelAllNotifications(packageName, this.mContext.getUserId());
+            iNotificationManagerService.cancelAllNotifications(packageName, this.mContext.getUserId());
             EdgeNotificationManager edgeNotificationManager = this.mEdgeNotificationManager;
             if (edgeNotificationManager != null) {
                 edgeNotificationManager.removeEdgeNotificationAllByNormal();
@@ -673,13 +673,13 @@ public class NotificationManager {
     }
 
     public void setNotificationDelegate(String str) {
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         String packageName = this.mContext.getPackageName();
         if (localLOGV) {
             Log.v(TAG, packageName + ": setNotificationDelegate()");
         }
         try {
-            service.setNotificationDelegate(packageName, str);
+            iNotificationManagerService.setNotificationDelegate(packageName, str);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -773,10 +773,10 @@ public class NotificationManager {
 
     public List<NotificationChannel> getNotificationChannels() {
         if (Flags.nmBinderPerfCacheChannels()) {
-            List<NotificationChannel> query = this.mNotificationChannelListCache.query(new NotificationChannelQuery(this.mContext.getOpPackageName(), this.mContext.getPackageName(), this.mContext.getUserId()));
+            List<NotificationChannel> listQuery = this.mNotificationChannelListCache.query(new NotificationChannelQuery(this.mContext.getOpPackageName(), this.mContext.getPackageName(), this.mContext.getUserId()));
             ArrayList arrayList = new ArrayList();
-            if (query != null) {
-                Iterator<NotificationChannel> it = query.iterator();
+            if (listQuery != null) {
+                Iterator<NotificationChannel> it = listQuery.iterator();
                 while (it.hasNext()) {
                     arrayList.add(it.next().copy());
                 }
@@ -846,7 +846,7 @@ public class NotificationManager {
             String packageName = this.mContext.getPackageName();
             NotificationChannelGroup groupWithChannels = NotificationChannelGroupsHelper.getGroupWithChannels(str, this.mNotificationChannelListCache.query(new NotificationChannelQuery(packageName, packageName, this.mContext.getUserId())), this.mNotificationChannelGroupsCache.query(packageName), false);
             if (groupWithChannels != null) {
-                return groupWithChannels.m473clone();
+                return groupWithChannels.m477clone();
             }
             return null;
         }
@@ -864,7 +864,7 @@ public class NotificationManager {
             ArrayList arrayList = new ArrayList();
             Iterator<NotificationChannelGroup> it = groupsWithChannels.iterator();
             while (it.hasNext()) {
-                arrayList.add(it.next().m473clone());
+                arrayList.add(it.next().m477clone());
             }
             return arrayList;
         }
@@ -1054,16 +1054,16 @@ public class NotificationManager {
     }
 
     public Map<String, AutomaticZenRule> getAutomaticZenRules() {
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         try {
-            HashMap hashMap = new HashMap();
-            ParceledListSlice automaticZenRules = service.getAutomaticZenRules();
+            HashMap map = new HashMap();
+            ParceledListSlice automaticZenRules = iNotificationManagerService.getAutomaticZenRules();
             if (automaticZenRules != null) {
                 for (AutomaticZenRule.AzrWithId azrWithId : automaticZenRules.getList()) {
-                    hashMap.put(azrWithId.mId, azrWithId.mRule);
+                    map.put(azrWithId.mId, azrWithId.mRule);
                 }
             }
-            return hashMap;
+            return map;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1334,12 +1334,12 @@ public class NotificationManager {
 
     @SystemApi
     public void setNotificationListenerAccessGranted(ComponentName componentName, boolean z, boolean z2) {
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         try {
             if (CompatChanges.isChangeEnabled(SET_LISTENER_ACCESS_GRANTED_IS_USER_AWARE)) {
-                service.setNotificationListenerAccessGrantedForUser(componentName, this.mContext.getUserId(), z, z2);
+                iNotificationManagerService.setNotificationListenerAccessGrantedForUser(componentName, this.mContext.getUserId(), z, z2);
             } else {
-                service.setNotificationListenerAccessGranted(componentName, z, z2);
+                iNotificationManagerService.setNotificationListenerAccessGranted(componentName, z, z2);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -1675,12 +1675,12 @@ public class NotificationManager {
         }
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             bitwiseToProtoEnum(protoOutputStream, 2259152797697L, this.priorityCategories);
             protoOutputStream.write(1159641169922L, this.priorityCallSenders);
             protoOutputStream.write(1159641169923L, this.priorityMessageSenders);
             bitwiseToProtoEnum(protoOutputStream, 2259152797700L, this.suppressedVisualEffects);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
 
         private static void bitwiseToProtoEnum(ProtoOutputStream protoOutputStream, long j, int i) {
@@ -2039,13 +2039,13 @@ public class NotificationManager {
         }
 
         public Policy copy() {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                writeToParcel(obtain, 0);
-                obtain.setDataPosition(0);
-                return new Policy(obtain);
+                writeToParcel(parcelObtain, 0);
+                parcelObtain.setDataPosition(0);
+                return new Policy(parcelObtain);
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
 
@@ -2171,7 +2171,7 @@ public class NotificationManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NotificationManager.CallNotificationEventCallbackStub.this.lambda$onCallNotificationPosted$0(str, userHandle);
+                    this.f$0.lambda$onCallNotificationPosted$0(str, userHandle);
                 }
             });
         }
@@ -2186,7 +2186,7 @@ public class NotificationManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NotificationManager.CallNotificationEventCallbackStub.this.lambda$onCallNotificationRemoved$1(str, userHandle);
+                    this.f$0.lambda$onCallNotificationRemoved$1(str, userHandle);
                 }
             });
         }
@@ -2198,12 +2198,12 @@ public class NotificationManager {
         checkRequired("userHandle", userHandle);
         checkRequired("executor", executor);
         checkRequired("listener", callNotificationEventListener);
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         try {
             synchronized (this.mCallNotificationEventCallbacks) {
                 CallNotificationEventCallbackStub callNotificationEventCallbackStub = new CallNotificationEventCallbackStub(str, userHandle, executor, callNotificationEventListener);
                 this.mCallNotificationEventCallbacks.put(callNotificationEventListener, callNotificationEventCallbackStub);
-                service.registerCallNotificationEventListener(str, userHandle, callNotificationEventCallbackStub);
+                iNotificationManagerService.registerCallNotificationEventListener(str, userHandle, callNotificationEventCallbackStub);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -2213,12 +2213,12 @@ public class NotificationManager {
     @SystemApi
     public void unregisterCallNotificationEventListener(CallNotificationEventListener callNotificationEventListener) {
         checkRequired("listener", callNotificationEventListener);
-        INotificationManager service = service();
+        INotificationManager iNotificationManagerService = service();
         try {
             synchronized (this.mCallNotificationEventCallbacks) {
-                CallNotificationEventCallbackStub remove = this.mCallNotificationEventCallbacks.remove(callNotificationEventListener);
-                if (remove != null) {
-                    service.unregisterCallNotificationEventListener(remove.mPackageName, remove.mUserHandle, remove);
+                CallNotificationEventCallbackStub callNotificationEventCallbackStubRemove = this.mCallNotificationEventCallbacks.remove(callNotificationEventListener);
+                if (callNotificationEventCallbackStubRemove != null) {
+                    iNotificationManagerService.unregisterCallNotificationEventListener(callNotificationEventCallbackStubRemove.mPackageName, callNotificationEventCallbackStubRemove.mUserHandle, callNotificationEventCallbackStubRemove);
                 }
             }
         } catch (RemoteException e) {
@@ -2266,21 +2266,21 @@ public class NotificationManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void semSetZenMode(int i) {
         Uri countdownConditionId;
         INotificationManager service = getService();
         if (i != 0) {
             try {
                 long j = Settings.Secure.getLong(this.mContext.getContentResolver(), "zen_duration_end_time", 0L);
-                if (j > 0) {
-                    countdownConditionId = ZenModeConfig.toCountdownConditionId(j, false);
-                    service.setZenMode(i, countdownConditionId, "called by SEP API", false);
-                }
+                countdownConditionId = j > 0 ? ZenModeConfig.toCountdownConditionId(j, false) : null;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        countdownConditionId = null;
         service.setZenMode(i, countdownConditionId, "called by SEP API", false);
     }
 

@@ -1,16 +1,27 @@
 package androidx.compose.ui.layout;
 
+import androidx.collection.MutableScatterMap;
+import androidx.compose.animation.AnimatedContentKt$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.ComposablesKt;
 import androidx.compose.runtime.Composer;
 import androidx.compose.runtime.ComposerImpl;
 import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.EffectsKt;
+import androidx.compose.runtime.PersistentCompositionLocalMap;
 import androidx.compose.runtime.RecomposeScopeImpl;
 import androidx.compose.runtime.RecomposeScopeImplKt;
+import androidx.compose.runtime.Updater;
+import androidx.compose.ui.ComposedModifierKt;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.layout.LayoutNodeSubcompositionsState;
+import androidx.compose.ui.node.ComposeUiNode;
+import androidx.compose.ui.node.LayoutNode;
 import com.samsung.android.knox.EnterpriseContainerCallback;
 import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SubcomposeLayoutKt {
     public static final SubcomposeLayoutKt$ReusedSlotId$1 ReusedSlotId = new Object() { // from class: androidx.compose.ui.layout.SubcomposeLayoutKt$ReusedSlotId$1
@@ -45,14 +56,14 @@ public abstract class SubcomposeLayoutKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.compose.ui.layout.SubcomposeLayout (SubcomposeLayout.kt:84)");
             }
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
-                rememberedValue = new SubcomposeLayoutState();
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = new SubcomposeLayoutState();
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
             function22 = function2;
-            SubcomposeLayout((SubcomposeLayoutState) rememberedValue, modifier2, function22, composerImpl, (i3 << 3) & EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_SUCCESS, 0);
+            SubcomposeLayout((SubcomposeLayoutState) objRememberedValue, modifier2, function22, composerImpl, (i3 << 3) & EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_SUCCESS, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -61,9 +72,9 @@ public abstract class SubcomposeLayoutKt {
             function22 = function2;
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.ui.layout.SubcomposeLayoutKt$SubcomposeLayout$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.ui.layout.SubcomposeLayoutKt.SubcomposeLayout.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -72,26 +83,163 @@ public abstract class SubcomposeLayoutKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    SubcomposeLayoutKt.SubcomposeLayout(Modifier.this, function22, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
+                    SubcomposeLayoutKt.SubcomposeLayout(modifier, function22, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
                     return Unit.INSTANCE;
                 }
             };
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x00ec, code lost:
-    
-        if (r1 == androidx.compose.runtime.Composer.Companion.Empty) goto L61;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x00ee  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void SubcomposeLayout(final androidx.compose.ui.layout.SubcomposeLayoutState r8, androidx.compose.ui.Modifier r9, final kotlin.jvm.functions.Function2 r10, androidx.compose.runtime.Composer r11, final int r12, final int r13) {
-        /*
-            Method dump skipped, instructions count: 302
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.layout.SubcomposeLayoutKt.SubcomposeLayout(androidx.compose.ui.layout.SubcomposeLayoutState, androidx.compose.ui.Modifier, kotlin.jvm.functions.Function2, androidx.compose.runtime.Composer, int, int):void");
+    public static final void SubcomposeLayout(final SubcomposeLayoutState subcomposeLayoutState, Modifier modifier, final Function2 function2, Composer composer, final int i, final int i2) {
+        int i3;
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startRestartGroup(-511989831);
+        if ((i2 & 1) != 0) {
+            i3 = i | 6;
+        } else if ((i & 6) == 0) {
+            i3 = (composerImpl.changedInstance(subcomposeLayoutState) ? 4 : 2) | i;
+        } else {
+            i3 = i;
+        }
+        int i4 = i2 & 2;
+        if (i4 != 0) {
+            i3 |= 48;
+        } else if ((i & 48) == 0) {
+            i3 |= composerImpl.changed(modifier) ? 32 : 16;
+        }
+        if ((i2 & 4) != 0) {
+            i3 |= 384;
+        } else if ((i & 384) == 0) {
+            i3 |= composerImpl.changedInstance(function2) ? 256 : 128;
+        }
+        if (composerImpl.shouldExecute(i3 & 1, (i3 & 147) != 146)) {
+            if (i4 != 0) {
+                modifier = Modifier.Companion;
+            }
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventStart("androidx.compose.ui.layout.SubcomposeLayout (SubcomposeLayout.kt:117)");
+            }
+            int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
+            ComposerImpl.CompositionContextImpl compositionContextImplRememberCompositionContext = ComposablesKt.rememberCompositionContext(composerImpl);
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            LayoutNode.Companion.getClass();
+            Function0 function0 = LayoutNode.Constructor;
+            if (composerImpl.applier != null) {
+                composerImpl.startReusableNode();
+                if (composerImpl.inserting) {
+                    composerImpl.createNode(function0);
+                } else {
+                    composerImpl.useNode();
+                }
+                Updater.m337setimpl(composerImpl, subcomposeLayoutState, subcomposeLayoutState.setRoot);
+                Updater.m337setimpl(composerImpl, compositionContextImplRememberCompositionContext, subcomposeLayoutState.setCompositionContext);
+                Updater.m337setimpl(composerImpl, function2, subcomposeLayoutState.setMeasurePolicy);
+                ComposeUiNode.Companion.getClass();
+                Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
+                Function2 function22 = ComposeUiNode.Companion.SetCompositeKeyHash;
+                if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
+                    AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function22);
+                }
+                composerImpl.end(true);
+                if (!composerImpl.getSkipping()) {
+                    composerImpl.startReplaceGroup(-26243682);
+                    boolean zChangedInstance = composerImpl.changedInstance(subcomposeLayoutState);
+                    Object objRememberedValue = composerImpl.rememberedValue();
+                    if (!zChangedInstance) {
+                        Composer.Companion.getClass();
+                        if (objRememberedValue == Composer.Companion.Empty) {
+                            objRememberedValue = new Function0() { // from class: androidx.compose.ui.layout.SubcomposeLayoutKt$SubcomposeLayout$4$1
+                                {
+                                    super(0);
+                                }
+
+                                /* JADX WARN: Removed duplicated region for block: B:16:0x0056  */
+                                @Override // kotlin.jvm.functions.Function0
+                                /*
+                                    Code decompiled incorrectly, please refer to instructions dump.
+                                */
+                                public final Object invoke() {
+                                    LayoutNodeSubcompositionsState state = subcomposeLayoutState.getState();
+                                    LayoutNode layoutNode = state.root;
+                                    if (state.reusableCount != layoutNode.getFoldedChildren$ui_release().size()) {
+                                        MutableScatterMap mutableScatterMap = state.nodeToNodeState;
+                                        Object[] objArr = mutableScatterMap.values;
+                                        long[] jArr = mutableScatterMap.metadata;
+                                        int length = jArr.length - 2;
+                                        if (length >= 0) {
+                                            int i5 = 0;
+                                            while (true) {
+                                                long j = jArr[i5];
+                                                if ((((~j) << 7) & j & (-9187201950435737472L)) != -9187201950435737472L) {
+                                                    int i6 = 8 - ((~(i5 - length)) >>> 31);
+                                                    for (int i7 = 0; i7 < i6; i7++) {
+                                                        if ((255 & j) < 128) {
+                                                            ((LayoutNodeSubcompositionsState.NodeState) objArr[(i5 << 3) + i7]).forceRecompose = true;
+                                                        }
+                                                        j >>= 8;
+                                                    }
+                                                    if (i6 != 8) {
+                                                        break;
+                                                    }
+                                                    if (i5 == length) {
+                                                        break;
+                                                    }
+                                                    i5++;
+                                                }
+                                            }
+                                        }
+                                        if (layoutNode.lookaheadRoot != null) {
+                                            if (!layoutNode.layoutDelegate.lookaheadMeasurePending) {
+                                                LayoutNode.requestLookaheadRemeasure$ui_release$default(layoutNode, false, 7);
+                                            }
+                                        } else if (!layoutNode.getMeasurePending$ui_release()) {
+                                            LayoutNode.requestRemeasure$ui_release$default(layoutNode, false, 7);
+                                        }
+                                    }
+                                    return Unit.INSTANCE;
+                                }
+                            };
+                            composerImpl.updateRememberedValue(objRememberedValue);
+                        }
+                        EffectsKt.SideEffect((Function0) objRememberedValue, composerImpl);
+                        composerImpl.end(false);
+                    }
+                } else {
+                    composerImpl.startReplaceGroup(-26185061);
+                    composerImpl.end(false);
+                }
+                if (ComposerKt.isTraceInProgress()) {
+                    ComposerKt.traceEventEnd();
+                }
+            } else {
+                ComposablesKt.invalidApplier();
+                throw null;
+            }
+        } else {
+            composerImpl.skipToGroupEnd();
+        }
+        final Modifier modifier2 = modifier;
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.ui.layout.SubcomposeLayoutKt.SubcomposeLayout.5
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                {
+                    super(2);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    ((Number) obj2).intValue();
+                    SubcomposeLayoutKt.SubcomposeLayout(subcomposeLayoutState, modifier2, function2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
+                    return Unit.INSTANCE;
+                }
+            };
+        }
     }
 }

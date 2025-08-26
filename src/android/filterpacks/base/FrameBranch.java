@@ -32,9 +32,9 @@ public class FrameBranch extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("in");
+        Frame framePullInput = pullInput("in");
         for (int i = 0; i < this.mNumberOfOutputs; i++) {
-            pushOutput("out" + i, pullInput);
+            pushOutput("out" + i, framePullInput);
         }
     }
 }

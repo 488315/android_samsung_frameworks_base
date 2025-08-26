@@ -654,7 +654,7 @@ public final class ApplicationExitInfo implements Parcelable {
     }
 
     public void writeToProto(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.mPid);
         protoOutputStream.write(1120986464258L, this.mRealUid);
         protoOutputStream.write(1120986464259L, this.mPackageUid);
@@ -672,11 +672,11 @@ public final class ApplicationExitInfo implements Parcelable {
         protoOutputStream.write(1151051235343L, this.mState);
         File file = this.mTraceFile;
         protoOutputStream.write(1138166333456L, file == null ? null : file.getAbsolutePath());
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public void readFromProto(ProtoInputStream protoInputStream, long j) throws IOException, WireTypeMismatchException {
-        long start = protoInputStream.start(j);
+    public void readFromProto(ProtoInputStream protoInputStream, long j) throws WireTypeMismatchException, IOException {
+        long jStart = protoInputStream.start(j);
         while (protoInputStream.nextField() != -1) {
             switch (protoInputStream.getFieldNumber()) {
                 case 1:
@@ -725,16 +725,16 @@ public final class ApplicationExitInfo implements Parcelable {
                     this.mState = protoInputStream.readBytes(1151051235343L);
                     break;
                 case 16:
-                    String readString = protoInputStream.readString(1138166333456L);
-                    if (!TextUtils.isEmpty(readString)) {
-                        this.mTraceFile = new File(readString);
+                    String string = protoInputStream.readString(1138166333456L);
+                    if (!TextUtils.isEmpty(string)) {
+                        this.mTraceFile = new File(string);
                         break;
                     } else {
                         break;
                     }
             }
         }
-        protoInputStream.end(start);
+        protoInputStream.end(jStart);
     }
 
     public boolean equals(Object obj) {

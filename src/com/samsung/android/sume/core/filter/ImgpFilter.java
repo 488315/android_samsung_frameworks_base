@@ -54,7 +54,7 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
         }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return ImgpFilter.this.m9538lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(obj);
+                return this.f$0.m9551lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(obj);
             }
         }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         this.imgp = operator;
@@ -66,7 +66,7 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
     }
 
     /* renamed from: lambda$init$0$com-samsung-android-sume-core-filter-ImgpFilter, reason: not valid java name */
-    /* synthetic */ Operator m9538lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(Object obj) {
+    /* synthetic */ Operator m9551lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(Object obj) {
         if (obj instanceof String) {
             return ((ImgpPlugin) this.plugin).getImgProcessor((String) obj);
         }
@@ -119,17 +119,17 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
         if (mediaBuffer.getFormat() != null) {
             format = UpdatableMediaFormat.of(format).with(mediaBuffer.getFormat()).set(UpdatableMediaFormat.UPDATE_AT_ALLOC);
         }
-        MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(format);
-        mutableOf.setExtra(mutableMediaBuffer.getExtra());
-        mutableMediaBuffer.put((MediaBuffer) this.imgp.run(mediaBuffer, (MediaBuffer) mutableOf));
+        MutableMediaBuffer mutableMediaBufferMutableOf = MediaBuffer.mutableOf(format);
+        mutableMediaBufferMutableOf.setExtra(mutableMediaBuffer.getExtra());
+        mutableMediaBuffer.put((MediaBuffer) this.imgp.run(mediaBuffer, (MediaBuffer) mutableMediaBufferMutableOf));
         mutableMediaBuffer.addExtra(mediaBuffer.getExtra());
         if (mediaBuffer != mutableMediaBuffer.get() && !(mediaBuffer instanceof DeriveBufferGroup) && (mutableMediaBuffer.get() instanceof DeriveBufferGroup)) {
-            final int intValue = ((Integer) mutableMediaBuffer.getExtra(Message.KEY_CONTENTS_ID, -1)).intValue();
+            final int iIntValue = ((Integer) mutableMediaBuffer.getExtra(Message.KEY_CONTENTS_ID, -1)).intValue();
             final int size = (int) mutableMediaBuffer.size();
             mutableMediaBuffer.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ImgpFilter.lambda$run$1(intValue, size, (MediaBuffer) obj);
+                    ImgpFilter.lambda$run$1(iIntValue, size, (MediaBuffer) obj);
                 }
             });
         }

@@ -2,7 +2,6 @@ package gov.nist.javax.sip.header;
 
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExtensionHeaderImpl extends SIPHeader implements Header {
     private static final long serialVersionUID = -8693922839612081849L;
@@ -32,9 +31,9 @@ public class ExtensionHeaderImpl extends SIPHeader implements Header {
                 stringBuffer.deleteCharAt(0);
             }
             stringBuffer.deleteCharAt(0);
-            String trim = stringBuffer.toString().trim();
-            this.value = trim;
-            return trim;
+            String strTrim = stringBuffer.toString().trim();
+            this.value = strTrim;
+            return strTrim;
         } catch (Exception unused) {
             return null;
         }

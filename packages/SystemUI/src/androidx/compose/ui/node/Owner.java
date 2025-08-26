@@ -14,12 +14,10 @@ import java.lang.ref.Reference;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface Owner {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -27,13 +25,12 @@ public interface Owner {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnLayoutCompletedListener {
         void onLayoutComplete();
     }
 
     static OwnedLayer createLayer$default(Owner owner, Function2 function2, Function0 function0, GraphicsLayer graphicsLayer, boolean z, int i) {
-        Reference poll;
+        Reference referencePoll;
         MutableVector mutableVector;
         Object obj = null;
         if ((i & 4) != 0) {
@@ -69,12 +66,12 @@ public interface Owner {
         }
         WeakCache weakCache = androidComposeView.layerCache;
         do {
-            poll = weakCache.referenceQueue.poll();
+            referencePoll = weakCache.referenceQueue.poll();
             mutableVector = weakCache.values;
-            if (poll != null) {
-                mutableVector.remove(poll);
+            if (referencePoll != null) {
+                mutableVector.remove(referencePoll);
             }
-        } while (poll != null);
+        } while (referencePoll != null);
         while (true) {
             int i2 = mutableVector.size;
             if (i2 == 0) {

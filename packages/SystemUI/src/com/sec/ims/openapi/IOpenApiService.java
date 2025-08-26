@@ -11,7 +11,6 @@ import com.sec.ims.openapi.ISipDialogListener;
 import com.sec.ims.util.ImsUri;
 import com.sec.ims.volte2.IImsCallEventListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IOpenApiService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.openapi.IOpenApiService";
@@ -38,7 +37,6 @@ public interface IOpenApiService extends IInterface {
 
     void unregisterIncomingSipMessageListener(ISipDialogListener iSipDialogListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IOpenApiService {
         static final int TRANSACTION_registerDialogEventListener = 6;
         static final int TRANSACTION_registerImsCallEventListener = 4;
@@ -52,7 +50,6 @@ public interface IOpenApiService extends IInterface {
         static final int TRANSACTION_unregisterImsRegistrationListener = 9;
         static final int TRANSACTION_unregisterIncomingSipMessageListener = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IOpenApiService {
             private IBinder mRemote;
 
@@ -71,169 +68,169 @@ public interface IOpenApiService extends IInterface {
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void registerDialogEventListener(IDialogEventListener iDialogEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDialogEventListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDialogEventListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void registerImsCallEventListener(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void registerImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void registerIncomingSipMessageListener(ISipDialogListener iSipDialogListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSipDialogListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSipDialogListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public boolean sendSip(ImsUri imsUri, String str, ISipDialogListener iSipDialogListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeTypedObject(imsUri, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSipDialogListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsUri, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSipDialogListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void setFeatureTags(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void setupMediaPath(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void unregisterDialogEventListener(IDialogEventListener iDialogEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDialogEventListener);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDialogEventListener);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void unregisterImsCallEventListener(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void unregisterImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.IOpenApiService
             public void unregisterIncomingSipMessageListener(ISipDialogListener iSipDialogListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSipDialogListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOpenApiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSipDialogListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -246,8 +243,8 @@ public interface IOpenApiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOpenApiService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IOpenApiService)) ? new Proxy(iBinder) : (IOpenApiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOpenApiService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IOpenApiService)) ? new Proxy(iBinder) : (IOpenApiService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -261,72 +258,72 @@ public interface IOpenApiService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String[] createStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    setFeatureTags(createStringArray);
+                    setFeatureTags(strArrCreateStringArray);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    ISipDialogListener asInterface = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISipDialogListener iSipDialogListenerAsInterface = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerIncomingSipMessageListener(asInterface);
+                    registerIncomingSipMessageListener(iSipDialogListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ISipDialogListener asInterface2 = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISipDialogListener iSipDialogListenerAsInterface2 = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterIncomingSipMessageListener(asInterface2);
+                    unregisterIncomingSipMessageListener(iSipDialogListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IImsCallEventListener asInterface3 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallEventListener iImsCallEventListenerAsInterface = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerImsCallEventListener(asInterface3);
+                    registerImsCallEventListener(iImsCallEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IImsCallEventListener asInterface4 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallEventListener iImsCallEventListenerAsInterface2 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterImsCallEventListener(asInterface4);
+                    unregisterImsCallEventListener(iImsCallEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IDialogEventListener asInterface5 = IDialogEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDialogEventListener iDialogEventListenerAsInterface = IDialogEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerDialogEventListener(asInterface5);
+                    registerDialogEventListener(iDialogEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    IDialogEventListener asInterface6 = IDialogEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDialogEventListener iDialogEventListenerAsInterface2 = IDialogEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterDialogEventListener(asInterface6);
+                    unregisterDialogEventListener(iDialogEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IImsRegistrationListener asInterface7 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationListener iImsRegistrationListenerAsInterface = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerImsRegistrationListener(asInterface7);
+                    registerImsRegistrationListener(iImsRegistrationListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IImsRegistrationListener asInterface8 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationListener iImsRegistrationListenerAsInterface2 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterImsRegistrationListener(asInterface8);
+                    unregisterImsRegistrationListener(iImsRegistrationListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     ImsUri imsUri = (ImsUri) parcel.readTypedObject(ImsUri.CREATOR);
-                    String readString = parcel.readString();
-                    ISipDialogListener asInterface9 = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    ISipDialogListener iSipDialogListenerAsInterface3 = ISipDialogListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean sendSip = sendSip(imsUri, readString, asInterface9);
+                    boolean zSendSip = sendSip(imsUri, string, iSipDialogListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendSip);
+                    parcel2.writeBoolean(zSendSip);
                     return true;
                 case 11:
-                    String[] createStringArray2 = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    setupMediaPath(createStringArray2);
+                    setupMediaPath(strArrCreateStringArray2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -340,7 +337,6 @@ public interface IOpenApiService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IOpenApiService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

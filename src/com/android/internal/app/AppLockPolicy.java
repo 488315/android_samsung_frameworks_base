@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IRemoteCallback;
@@ -19,6 +20,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.R;
+import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -87,7 +89,6 @@ public class AppLockPolicy {
     public static final String LAUNCH_FROM_RESUME = "LAUNCH_FROM_RESUME";
     public static final String LAUNCH_FROM_SETTINGS = "APPLOCK_APPS_FROM_SETTINGS";
     public static final String LAUNCH_FROM_WECHAT_HUN = "nofification_type";
-    public static final String LOCKED_APP_CALLING_UID = "LOCKED_APP_CALLING_UID";
     public static final String LOCKED_APP_CAN_SHOW_WHEN_LOCKED = "LOCKED_APP_CAN_SHOW_WHEN_LOCKED";
     private static final String LOCKED_CLASSES = "applock_locked_apps_classes";
     private static final String LOCKED_PACKAGE = "applock_locked_apps_packages";
@@ -154,7 +155,7 @@ public class AppLockPolicy {
         return mInstance;
     }
 
-    private AppLockPolicy(Context context, Handler handler) {
+    private AppLockPolicy(Context context, Handler handler) throws Resources.NotFoundException {
         this.mContext = context;
         this.mAppLockSharedPref = new AppLockCoreState(this.mContext);
         init();
@@ -162,11 +163,11 @@ public class AppLockPolicy {
         getCallingExceptionList();
     }
 
-    private void getAppLockLaunchingExceptionList() {
+    private void getAppLockLaunchingExceptionList() throws Resources.NotFoundException {
         this.mAppLockLaunchingExcpetionList.addAll(Arrays.asList(this.mContext.getResources().getStringArray(R.array.app_lock_exception_activity_list)));
     }
 
-    private void getCallingExceptionList() {
+    private void getCallingExceptionList() throws Resources.NotFoundException {
         this.mApplockCallingExceptionList.addAll(Arrays.asList(this.mContext.getResources().getStringArray(R.array.app_lock_calling_bypass)));
     }
 
@@ -531,9 +532,9 @@ public class AppLockPolicy {
         synchronized (this.mAppLockedLock) {
             String str = this.mLockedPackages;
             if (str != null) {
-                String[] split = str.split(",");
+                String[] strArrSplit = str.split(",");
                 ArrayList<String> arrayList = new ArrayList<>();
-                for (String str2 : split) {
+                for (String str2 : strArrSplit) {
                     arrayList.add(str2);
                     if (this.mAppLockedRelatedPackageMap.containsKey(str2)) {
                         for (String str3 : this.mAppLockedRelatedPackageMap.get(str2)) {
@@ -553,9 +554,9 @@ public class AppLockPolicy {
             }
             String str4 = this.mLockedClasses;
             if (str4 != null) {
-                String[] split2 = str4.split(",");
+                String[] strArrSplit2 = str4.split(",");
                 ArrayList<String> arrayList2 = new ArrayList<>();
-                for (String str5 : split2) {
+                for (String str5 : strArrSplit2) {
                     arrayList2.add(str5);
                     if (this.mAppLockedRelatedClassMap.containsKey(str5)) {
                         for (String str6 : this.mAppLockedRelatedClassMap.get(str5)) {
@@ -644,6 +645,10 @@ public class AppLockPolicy {
     public static boolean skipLockWhenStart(Context context, String str, Intent intent, ActivityOptions activityOptions, String str2) {
         if (CoreRune.FW_APPLOCK && isSupportSSecure()) {
             Log.d(TAG, "intent is starting with S secure, skip");
+            return true;
+        }
+        if (MultiWindowManager.getInstance().inDesktopWindowing()) {
+            Log.d(TAG, "intent is starting in dex windowing mode, skip");
             return true;
         }
         if (activityOptions != null && (WindowConfiguration.inMultiWindowMode(activityOptions.getLaunchWindowingMode()) || WindowConfiguration.inMultiWindowMode(activityOptions.getForceLaunchWindowingMode()))) {

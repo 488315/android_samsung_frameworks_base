@@ -122,27 +122,27 @@ public class LayoutTransition {
         this.mTransitionTypes = 15;
         this.mAnimateParentHierarchy = true;
         if (defaultChangeIn == null) {
-            ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(null, PropertyValuesHolder.ofInt("left", 0, 1), PropertyValuesHolder.ofInt(GenerateXML.TOP, 0, 1), PropertyValuesHolder.ofInt("right", 0, 1), PropertyValuesHolder.ofInt(GenerateXML.BOTTOM, 0, 1), PropertyValuesHolder.ofInt("scrollX", 0, 1), PropertyValuesHolder.ofInt("scrollY", 0, 1));
-            defaultChangeIn = ofPropertyValuesHolder;
-            ofPropertyValuesHolder.setDuration(DEFAULT_DURATION);
+            ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(null, PropertyValuesHolder.ofInt("left", 0, 1), PropertyValuesHolder.ofInt(GenerateXML.TOP, 0, 1), PropertyValuesHolder.ofInt("right", 0, 1), PropertyValuesHolder.ofInt(GenerateXML.BOTTOM, 0, 1), PropertyValuesHolder.ofInt("scrollX", 0, 1), PropertyValuesHolder.ofInt("scrollY", 0, 1));
+            defaultChangeIn = objectAnimatorOfPropertyValuesHolder;
+            objectAnimatorOfPropertyValuesHolder.setDuration(DEFAULT_DURATION);
             defaultChangeIn.setStartDelay(this.mChangingAppearingDelay);
             defaultChangeIn.setInterpolator(this.mChangingAppearingInterpolator);
-            ObjectAnimator mo76clone = defaultChangeIn.mo76clone();
-            defaultChangeOut = mo76clone;
-            mo76clone.setStartDelay(this.mChangingDisappearingDelay);
+            ObjectAnimator objectAnimatorMo76clone = defaultChangeIn.mo76clone();
+            defaultChangeOut = objectAnimatorMo76clone;
+            objectAnimatorMo76clone.setStartDelay(this.mChangingDisappearingDelay);
             defaultChangeOut.setInterpolator(this.mChangingDisappearingInterpolator);
-            ObjectAnimator mo76clone2 = defaultChangeIn.mo76clone();
-            defaultChange = mo76clone2;
-            mo76clone2.setStartDelay(this.mChangingDelay);
+            ObjectAnimator objectAnimatorMo76clone2 = defaultChangeIn.mo76clone();
+            defaultChange = objectAnimatorMo76clone2;
+            objectAnimatorMo76clone2.setStartDelay(this.mChangingDelay);
             defaultChange.setInterpolator(this.mChangingInterpolator);
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 0.0f, 1.0f);
-            defaultFadeIn = ofFloat;
-            ofFloat.setDuration(DEFAULT_DURATION);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 0.0f, 1.0f);
+            defaultFadeIn = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.setDuration(DEFAULT_DURATION);
             defaultFadeIn.setStartDelay(this.mAppearingDelay);
             defaultFadeIn.setInterpolator(this.mAppearingInterpolator);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
-            defaultFadeOut = ofFloat2;
-            ofFloat2.setDuration(DEFAULT_DURATION);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
+            defaultFadeOut = objectAnimatorOfFloat2;
+            objectAnimatorOfFloat2.setDuration(DEFAULT_DURATION);
             defaultFadeOut.setStartDelay(this.mDisappearingDelay);
             defaultFadeOut.setInterpolator(this.mDisappearingInterpolator);
         }
@@ -473,15 +473,15 @@ public class LayoutTransition {
         if (view.getWidth() == 0 && view.getHeight() == 0) {
             return;
         }
-        final Animator mo76clone = animator.mo76clone();
-        mo76clone.setTarget(view);
-        mo76clone.setupStartValues();
+        final Animator animatorMo76clone = animator.mo76clone();
+        animatorMo76clone.setTarget(view);
+        animatorMo76clone.setupStartValues();
         Animator animator2 = this.pendingAnimations.get(view);
         if (animator2 != null) {
             animator2.cancel();
             this.pendingAnimations.remove(view);
         }
-        this.pendingAnimations.put(view, mo76clone);
+        this.pendingAnimations.put(view, animatorMo76clone);
         ValueAnimator duration = ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(100 + j);
         duration.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -491,23 +491,24 @@ public class LayoutTransition {
         });
         duration.start();
         final View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: android.animation.LayoutTransition.2
+            /* JADX WARN: Removed duplicated region for block: B:18:0x0053  */
             @Override // android.view.View.OnLayoutChangeListener
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public void onLayoutChange(View view2, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
                 long j2;
-                mo76clone.setupEndValues();
-                Animator animator3 = mo76clone;
+                animatorMo76clone.setupEndValues();
+                Animator animator3 = animatorMo76clone;
                 if (animator3 instanceof ValueAnimator) {
                     boolean z = false;
                     for (PropertyValuesHolder propertyValuesHolder : ((ValueAnimator) animator3).getValues()) {
                         if (propertyValuesHolder.mKeyframes instanceof KeyframeSet) {
                             KeyframeSet keyframeSet = (KeyframeSet) propertyValuesHolder.mKeyframes;
-                            if (keyframeSet.mFirstKeyframe != null && keyframeSet.mLastKeyframe != null && keyframeSet.mFirstKeyframe.getValue().equals(keyframeSet.mLastKeyframe.getValue())) {
+                            if (keyframeSet.mFirstKeyframe == null || keyframeSet.mLastKeyframe == null || !keyframeSet.mFirstKeyframe.getValue().equals(keyframeSet.mLastKeyframe.getValue())) {
+                                z = true;
                             }
-                            z = true;
-                        } else {
-                            if (propertyValuesHolder.mKeyframes.getValue(0.0f).equals(propertyValuesHolder.mKeyframes.getValue(1.0f))) {
-                            }
-                            z = true;
+                        } else if (!propertyValuesHolder.mKeyframes.getValue(0.0f).equals(propertyValuesHolder.mKeyframes.getValue(1.0f))) {
                         }
                     }
                     if (!z) {
@@ -519,13 +520,13 @@ public class LayoutTransition {
                     j2 = LayoutTransition.this.mChangingAppearingDelay + LayoutTransition.this.staggerDelay;
                     LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingAppearingStagger;
                     if (LayoutTransition.this.mChangingAppearingInterpolator != LayoutTransition.sChangingAppearingInterpolator) {
-                        mo76clone.setInterpolator(LayoutTransition.this.mChangingAppearingInterpolator);
+                        animatorMo76clone.setInterpolator(LayoutTransition.this.mChangingAppearingInterpolator);
                     }
                 } else if (i10 == 3) {
                     j2 = LayoutTransition.this.mChangingDisappearingDelay + LayoutTransition.this.staggerDelay;
                     LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingDisappearingStagger;
                     if (LayoutTransition.this.mChangingDisappearingInterpolator != LayoutTransition.sChangingDisappearingInterpolator) {
-                        mo76clone.setInterpolator(LayoutTransition.this.mChangingDisappearingInterpolator);
+                        animatorMo76clone.setInterpolator(LayoutTransition.this.mChangingDisappearingInterpolator);
                     }
                 } else if (i10 != 4) {
                     j2 = 0;
@@ -533,11 +534,11 @@ public class LayoutTransition {
                     j2 = LayoutTransition.this.mChangingDelay + LayoutTransition.this.staggerDelay;
                     LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingStagger;
                     if (LayoutTransition.this.mChangingInterpolator != LayoutTransition.sChangingInterpolator) {
-                        mo76clone.setInterpolator(LayoutTransition.this.mChangingInterpolator);
+                        animatorMo76clone.setInterpolator(LayoutTransition.this.mChangingInterpolator);
                     }
                 }
-                mo76clone.setStartDelay(j2);
-                mo76clone.setDuration(j);
+                animatorMo76clone.setStartDelay(j2);
+                animatorMo76clone.setDuration(j);
                 Animator animator4 = (Animator) LayoutTransition.this.currentChangingAnimations.get(view);
                 if (animator4 != null) {
                     animator4.cancel();
@@ -545,13 +546,13 @@ public class LayoutTransition {
                 if (((Animator) LayoutTransition.this.pendingAnimations.get(view)) != null) {
                     LayoutTransition.this.pendingAnimations.remove(view);
                 }
-                LayoutTransition.this.currentChangingAnimations.put(view, mo76clone);
+                LayoutTransition.this.currentChangingAnimations.put(view, animatorMo76clone);
                 viewGroup.requestTransitionStart(LayoutTransition.this);
                 view.removeOnLayoutChangeListener(this);
                 LayoutTransition.this.layoutChangeListenerMap.remove(view);
             }
         };
-        mo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.3
+        animatorMo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationStart(Animator animator3) {
                 if (LayoutTransition.this.hasListeners()) {
@@ -695,18 +696,18 @@ public class LayoutTransition {
             }
             return;
         }
-        Animator mo76clone = animator2.mo76clone();
-        mo76clone.setTarget(view);
-        mo76clone.setStartDelay(this.mAppearingDelay);
-        mo76clone.setDuration(this.mAppearingDuration);
+        Animator animatorMo76clone = animator2.mo76clone();
+        animatorMo76clone.setTarget(view);
+        animatorMo76clone.setStartDelay(this.mAppearingDelay);
+        animatorMo76clone.setDuration(this.mAppearingDuration);
         TimeInterpolator timeInterpolator = this.mAppearingInterpolator;
         if (timeInterpolator != sAppearingInterpolator) {
-            mo76clone.setInterpolator(timeInterpolator);
+            animatorMo76clone.setInterpolator(timeInterpolator);
         }
-        if (mo76clone instanceof ObjectAnimator) {
-            ((ObjectAnimator) mo76clone).setCurrentPlayTime(0L);
+        if (animatorMo76clone instanceof ObjectAnimator) {
+            ((ObjectAnimator) animatorMo76clone).setCurrentPlayTime(0L);
         }
-        mo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.4
+        animatorMo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.4
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator3) {
                 LayoutTransition.this.currentAppearingAnimations.remove(view);
@@ -718,8 +719,8 @@ public class LayoutTransition {
                 }
             }
         });
-        this.currentAppearingAnimations.put(view, mo76clone);
-        mo76clone.start();
+        this.currentAppearingAnimations.put(view, animatorMo76clone);
+        animatorMo76clone.start();
     }
 
     private void runDisappearingTransition(final ViewGroup viewGroup, final View view) {
@@ -738,16 +739,16 @@ public class LayoutTransition {
             }
             return;
         }
-        Animator mo76clone = animator2.mo76clone();
-        mo76clone.setStartDelay(this.mDisappearingDelay);
-        mo76clone.setDuration(this.mDisappearingDuration);
+        Animator animatorMo76clone = animator2.mo76clone();
+        animatorMo76clone.setStartDelay(this.mDisappearingDelay);
+        animatorMo76clone.setDuration(this.mDisappearingDuration);
         TimeInterpolator timeInterpolator = this.mDisappearingInterpolator;
         if (timeInterpolator != sDisappearingInterpolator) {
-            mo76clone.setInterpolator(timeInterpolator);
+            animatorMo76clone.setInterpolator(timeInterpolator);
         }
-        mo76clone.setTarget(view);
+        animatorMo76clone.setTarget(view);
         final float alpha = view.getAlpha();
-        mo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.5
+        animatorMo76clone.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.5
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator3) {
                 LayoutTransition.this.currentDisappearingAnimations.remove(view);
@@ -760,11 +761,11 @@ public class LayoutTransition {
                 }
             }
         });
-        if (mo76clone instanceof ObjectAnimator) {
-            ((ObjectAnimator) mo76clone).setCurrentPlayTime(0L);
+        if (animatorMo76clone instanceof ObjectAnimator) {
+            ((ObjectAnimator) animatorMo76clone).setCurrentPlayTime(0L);
         }
-        this.currentDisappearingAnimations.put(view, mo76clone);
-        mo76clone.start();
+        this.currentDisappearingAnimations.put(view, animatorMo76clone);
+        animatorMo76clone.start();
     }
 
     private void addChild(ViewGroup viewGroup, View view, boolean z) {

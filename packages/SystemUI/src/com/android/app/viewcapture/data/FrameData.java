@@ -5,7 +5,6 @@ import com.google.protobuf.MessageLiteOrBuilder;
 import com.google.protobuf.Parser;
 import com.google.protobuf.RawMessageInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FrameData extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final FrameData DEFAULT_INSTANCE;
@@ -16,7 +15,6 @@ public final class FrameData extends GeneratedMessageLite implements MessageLite
     private ViewNode node_;
     private long timestamp_;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.app.viewcapture.data.FrameData$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -55,7 +53,6 @@ public final class FrameData extends GeneratedMessageLite implements MessageLite
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(AnonymousClass1 anonymousClass1) {
             this();
@@ -92,7 +89,7 @@ public final class FrameData extends GeneratedMessageLite implements MessageLite
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         int i = AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
         AnonymousClass1 anonymousClass1 = null;
         switch (i) {
@@ -105,22 +102,22 @@ public final class FrameData extends GeneratedMessageLite implements MessageLite
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (FrameData.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

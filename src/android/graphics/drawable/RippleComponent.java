@@ -39,15 +39,15 @@ abstract class RippleComponent {
     }
 
     private static float getTargetRadius(Rect rect) {
-        float width = rect.width() / 2.0f;
-        float height = rect.height() / 2.0f;
-        return (float) Math.sqrt((width * width) + (height * height));
+        float fWidth = rect.width() / 2.0f;
+        float fHeight = rect.height() / 2.0f;
+        return (float) Math.sqrt((fWidth * fWidth) + (fHeight * fHeight));
     }
 
     public void getBounds(Rect rect) {
-        int ceil = (int) Math.ceil(this.mTargetRadius);
-        int i = -ceil;
-        rect.set(i, i, ceil, ceil);
+        int iCeil = (int) Math.ceil(this.mTargetRadius);
+        int i = -iCeil;
+        rect.set(i, i, iCeil, iCeil);
     }
 
     protected final void invalidateSelf() {

@@ -23,7 +23,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoomConnectionManager extends BaseRoomConnectionManager {
     public final List callbacks;
@@ -32,7 +31,6 @@ public final class RoomConnectionManager extends BaseRoomConnectionManager {
     public final RoomOpenDelegate openDelegate;
     public SupportSQLiteDatabase supportDatabase;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoOpOpenDelegate extends RoomOpenDelegate {
         public NoOpOpenDelegate() {
             super(-1, "", "");
@@ -74,7 +72,6 @@ public final class RoomConnectionManager extends BaseRoomConnectionManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SupportOpenHelperCallback extends SupportSQLiteOpenHelper.Callback {
         public SupportOpenHelperCallback(int i) {
             super(i);
@@ -202,15 +199,15 @@ public final class RoomConnectionManager extends BaseRoomConnectionManager {
         final Function1 function12 = new Function1() { // from class: androidx.room.RoomConnectionManager$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                RoomConnectionManager.this.supportDatabase = (SupportSQLiteDatabase) obj;
+            public final Object mo781invoke(Object obj) {
+                this.f$0.supportDatabase = (SupportSQLiteDatabase) obj;
                 return Unit.INSTANCE;
             }
         };
-        this.connectionPool = new SupportSQLiteConnectionPool(new SupportSQLiteDriver((SupportSQLiteOpenHelper) function1.mo779invoke(new DatabaseConfiguration(databaseConfiguration.context, databaseConfiguration.name, databaseConfiguration.sqliteOpenHelperFactory, databaseConfiguration.migrationContainer, CollectionsKt___CollectionsKt.plus(list == null ? EmptyList.INSTANCE : list, new RoomDatabase.Callback() { // from class: androidx.room.RoomConnectionManager$installOnOpenCallback$newCallbacks$1
+        this.connectionPool = new SupportSQLiteConnectionPool(new SupportSQLiteDriver((SupportSQLiteOpenHelper) function1.mo781invoke(new DatabaseConfiguration(databaseConfiguration.context, databaseConfiguration.name, databaseConfiguration.sqliteOpenHelperFactory, databaseConfiguration.migrationContainer, CollectionsKt___CollectionsKt.plus(list == null ? EmptyList.INSTANCE : list, new RoomDatabase.Callback() { // from class: androidx.room.RoomConnectionManager$installOnOpenCallback$newCallbacks$1
             @Override // androidx.room.RoomDatabase.Callback
             public final void onOpen(SupportSQLiteDatabase supportSQLiteDatabase) {
-                Function1.this.mo779invoke(supportSQLiteDatabase);
+                function12.mo781invoke(supportSQLiteDatabase);
             }
         }), databaseConfiguration.allowMainThreadQueries, databaseConfiguration.journalMode, databaseConfiguration.queryExecutor, databaseConfiguration.transactionExecutor, databaseConfiguration.multiInstanceInvalidationServiceIntent, databaseConfiguration.requireMigration, databaseConfiguration.allowDestructiveMigrationOnDowngrade, databaseConfiguration.migrationNotRequiredFrom, databaseConfiguration.copyFromAssetPath, databaseConfiguration.copyFromFile, databaseConfiguration.copyFromInputStream, databaseConfiguration.prepackagedDatabaseCallback, databaseConfiguration.typeConverters, databaseConfiguration.autoMigrationSpecs, databaseConfiguration.allowDestructiveMigrationForAllTables, databaseConfiguration.sqliteDriver, databaseConfiguration.queryCoroutineContext))));
         boolean z = databaseConfiguration.journalMode == RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING;

@@ -10,24 +10,23 @@ import com.samsung.android.sdk.scs.base.tasks.Task;
 import com.samsung.android.sdk.scs.base.utils.Log;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C2paClient {
     private static final String TAG = "C2paClient";
     private final C2paServiceExecutor mServiceExecutor;
 
     public C2paClient(Context context) {
-        Log.d(TAG, TAG);
+        Log.d(TAG, "C2paClient");
         this.mServiceExecutor = new C2paServiceExecutor(context);
     }
 
     public static C2paManifestList fromJson(String str) throws MalformedJsonException {
-        Gson create = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).registerTypeAdapter(Data.class, new DataFieldDeserializer()).create();
+        Gson gsonCreate = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).registerTypeAdapter(Data.class, new DataFieldDeserializer()).create();
         try {
-            C2paManifestList c2paManifestList = (C2paManifestList) create.fromJson(str, C2paManifestList.class);
+            C2paManifestList c2paManifestList = (C2paManifestList) gsonCreate.fromJson(str, C2paManifestList.class);
             c2paManifestList.calculateValidation();
             List<String> manifestKeys = c2paManifestList.getManifestKeys();
-            JsonObject jsonObject = (JsonObject) create.fromJson(str, JsonObject.class);
+            JsonObject jsonObject = (JsonObject) gsonCreate.fromJson(str, JsonObject.class);
             for (String str2 : manifestKeys) {
                 if (c2paManifestList.getManifest(str2) != null) {
                     c2paManifestList.getManifest(str2).setAssertionsJsonArray(jsonObject.getAsJsonObject("manifests").getAsJsonObject(str2).getAsJsonArray("assertions"));

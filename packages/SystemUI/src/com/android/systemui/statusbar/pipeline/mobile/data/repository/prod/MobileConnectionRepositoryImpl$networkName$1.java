@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ NetworkNameModel $defaultNetworkName;
@@ -63,14 +62,14 @@ final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda i
             BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$networkName$1$receiver$1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context, Intent intent) {
-                    if (intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1) == MobileConnectionRepositoryImpl.this.subId) {
+                    if (intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1) == mobileConnectionRepositoryImpl.subId) {
                         mobileInputLogger.logServiceProvidersUpdatedBroadcast(intent);
                         SendChannel sendChannel = producerScope;
                         Object networkNameModel2 = NetworkNameModelKt.toNetworkNameModel(intent, str);
                         if (networkNameModel2 == null) {
                             networkNameModel2 = networkNameModel;
                         }
-                        ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(networkNameModel2);
+                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(networkNameModel2);
                     }
                 }
             };

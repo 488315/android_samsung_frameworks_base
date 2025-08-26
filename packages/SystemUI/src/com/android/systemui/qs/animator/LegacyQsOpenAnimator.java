@@ -40,7 +40,6 @@ import com.android.systemui.util.ViewUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LegacyQsOpenAnimator extends SecQSImplAnimatorBase implements OnHeadsUpChangedListener {
     public final BarController mBarController;
@@ -349,17 +348,17 @@ public class LegacyQsOpenAnimator extends SecQSImplAnimatorBase implements OnHea
         this.mAnimContents.clear();
         this.mFadingSpan = this.mResourcePicker.getTileIconSize(this.mContext) * 3;
         this.mCarrierAndSystemIconContainer = this.mShadeHeaderController.header;
-        View view3 = null;
+        View viewFindViewWithTag = null;
         SecQuickStatusBarHeader secQuickStatusBarHeader = this.mQs.getView() instanceof ViewGroup ? ViewUtil.getSecQuickStatusBarHeader((ViewGroup) this.mQs.getView()) : null;
         this.mHeader = secQuickStatusBarHeader;
         this.mHeaderDateSettingContainer = secQuickStatusBarHeader != null ? secQuickStatusBarHeader.findViewById(R.id.quick_qs_date_buttons).findViewWithTag("open_anim") : null;
-        View findViewWithTag = ((View) this.mQuickQsPanelController.mTileLayout).findViewWithTag("open_anim");
+        View viewFindViewWithTag2 = ((View) this.mQuickQsPanelController.mTileLayout).findViewWithTag("open_anim");
         BrightnessMediaDevicesBar brightnessMediaDevicesBar = (BrightnessMediaDevicesBar) ((BarItemImpl) this.mBarController.mCollapsedBarItems.parallelStream().filter(new BarController$$ExternalSyntheticLambda6(BarType.BRIGHTNESS_MEDIA_DEVICES, 1)).findFirst().orElse(null));
         this.mBrightnessMediaDevicesBar = brightnessMediaDevicesBar;
-        View findViewWithTag2 = (brightnessMediaDevicesBar == null || (brightnessBar = brightnessMediaDevicesBar.mBrightnessBar) == null || (view2 = brightnessBar.mBarRootView) == null) ? null : view2.findViewWithTag("open_anim");
+        View viewFindViewWithTag3 = (brightnessMediaDevicesBar == null || (brightnessBar = brightnessMediaDevicesBar.mBrightnessBar) == null || (view2 = brightnessBar.mBarRootView) == null) ? null : view2.findViewWithTag("open_anim");
         BrightnessMediaDevicesBar brightnessMediaDevicesBar2 = this.mBrightnessMediaDevicesBar;
         if (brightnessMediaDevicesBar2 != null && (mediaDevicesBar = brightnessMediaDevicesBar2.mMediaDevicesBar) != null && (view = mediaDevicesBar.mBarRootView) != null) {
-            view3 = view.findViewWithTag("open_anim");
+            viewFindViewWithTag = view.findViewWithTag("open_anim");
         }
         TouchAnimator.Builder builder = new TouchAnimator.Builder();
         builder.addFloat(this.mCarrierAndSystemIconContainer, "alpha", 0.0f, 1.0f);
@@ -383,38 +382,38 @@ public class LegacyQsOpenAnimator extends SecQSImplAnimatorBase implements OnHea
             builder2.addFloat(this.mHeaderDateSettingContainer, "alpha", 0.0f, 1.0f);
             builder2.addFloat(this.mHeaderDateSettingContainer, "translationY", f, 0.0f);
             builder2.mStartDelay = getStartDelay(this.mHeaderDateSettingContainer);
-            View view4 = this.mHeaderDateSettingContainer;
-            builder2.mEndDelay = getEndDelay(view4, view4.getHeight());
+            View view3 = this.mHeaderDateSettingContainer;
+            builder2.mEndDelay = getEndDelay(view3, view3.getHeight());
             builder2.mInterpolator = this.mInterpolator;
             this.mHeaderDateSettingAnimator = builder2.build();
             this.mAnimContents.add(this.mHeaderDateSettingContainer);
         }
         TouchAnimator.Builder builder3 = new TouchAnimator.Builder();
-        builder3.addFloat(findViewWithTag, "alpha", 0.0f, 1.0f);
-        builder3.addFloat(findViewWithTag, "translationY", f, 0.0f);
-        builder3.mStartDelay = getStartDelay(findViewWithTag);
-        builder3.mEndDelay = getEndDelay(findViewWithTag, findViewWithTag.getHeight());
+        builder3.addFloat(viewFindViewWithTag2, "alpha", 0.0f, 1.0f);
+        builder3.addFloat(viewFindViewWithTag2, "translationY", f, 0.0f);
+        builder3.mStartDelay = getStartDelay(viewFindViewWithTag2);
+        builder3.mEndDelay = getEndDelay(viewFindViewWithTag2, viewFindViewWithTag2.getHeight());
         builder3.mInterpolator = this.mInterpolator;
         this.mQQSAnimator = builder3.build();
-        if (findViewWithTag2 != null) {
+        if (viewFindViewWithTag3 != null) {
             TouchAnimator.Builder builder4 = new TouchAnimator.Builder();
-            builder4.addFloat(findViewWithTag2, "alpha", 0.0f, 1.0f);
-            builder4.addFloat(findViewWithTag2, "translationY", f, 0.0f);
-            builder4.mStartDelay = getStartDelay(findViewWithTag2);
-            builder4.mEndDelay = getEndDelay(findViewWithTag2, findViewWithTag2.getHeight());
+            builder4.addFloat(viewFindViewWithTag3, "alpha", 0.0f, 1.0f);
+            builder4.addFloat(viewFindViewWithTag3, "translationY", f, 0.0f);
+            builder4.mStartDelay = getStartDelay(viewFindViewWithTag3);
+            builder4.mEndDelay = getEndDelay(viewFindViewWithTag3, viewFindViewWithTag3.getHeight());
             builder4.mInterpolator = this.mInterpolator;
             this.mBrightnessBarAnimator = builder4.build();
-            this.mAnimContents.add(findViewWithTag2);
+            this.mAnimContents.add(viewFindViewWithTag3);
         }
-        if (view3 != null) {
+        if (viewFindViewWithTag != null) {
             TouchAnimator.Builder builder5 = new TouchAnimator.Builder();
-            builder5.addFloat(view3, "alpha", 0.0f, 1.0f);
-            builder5.addFloat(view3, "translationY", f, 0.0f);
-            builder5.mStartDelay = getStartDelay(view3);
-            builder5.mEndDelay = getEndDelay(view3, view3.getHeight());
+            builder5.addFloat(viewFindViewWithTag, "alpha", 0.0f, 1.0f);
+            builder5.addFloat(viewFindViewWithTag, "translationY", f, 0.0f);
+            builder5.mStartDelay = getStartDelay(viewFindViewWithTag);
+            builder5.mEndDelay = getEndDelay(viewFindViewWithTag, viewFindViewWithTag.getHeight());
             builder5.mInterpolator = this.mInterpolator;
             this.mMediaDeviceBarAnimator = builder5.build();
-            this.mAnimContents.add(view3);
+            this.mAnimContents.add(viewFindViewWithTag);
         }
         this.mAnimatorsInitialiezed = true;
         onQsClipBoundChanged(this.mPanelExpansion);

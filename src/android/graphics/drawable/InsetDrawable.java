@@ -52,11 +52,11 @@ public class InsetDrawable extends DrawableWrapper {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.InsetDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.InsetDrawable);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -66,14 +66,14 @@ public class InsetDrawable extends DrawableWrapper {
         if (insetState == null || insetState.mThemeAttrs == null) {
             return;
         }
-        TypedArray resolveAttributes = theme.resolveAttributes(insetState.mThemeAttrs, R.styleable.InsetDrawable);
+        TypedArray typedArrayResolveAttributes = theme.resolveAttributes(insetState.mThemeAttrs, R.styleable.InsetDrawable);
         try {
-            updateStateFromTypedArray(resolveAttributes);
-            verifyRequiredAttributes(resolveAttributes);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            verifyRequiredAttributes(typedArrayResolveAttributes);
         } catch (XmlPullParserException e) {
             rethrowAsRuntimeException(e);
         } finally {
-            resolveAttributes.recycle();
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -107,9 +107,9 @@ public class InsetDrawable extends DrawableWrapper {
 
     private InsetValue getInset(TypedArray typedArray, int i, InsetValue insetValue) {
         if (typedArray.hasValue(i)) {
-            TypedValue peekValue = typedArray.peekValue(i);
-            if (peekValue.type == 6) {
-                float fraction = peekValue.getFraction(1.0f, 1.0f);
+            TypedValue typedValuePeekValue = typedArray.peekValue(i);
+            if (typedValuePeekValue.type == 6) {
+                float fraction = typedValuePeekValue.getFraction(1.0f, 1.0f);
                 if (fraction >= 1.0f) {
                     throw new IllegalStateException("Fraction cannot be larger than 1");
                 }
@@ -215,10 +215,10 @@ public class InsetDrawable extends DrawableWrapper {
         InsetState(InsetState insetState, Resources resources) {
             super(insetState, resources);
             if (insetState != null) {
-                this.mInsetLeft = insetState.mInsetLeft.m1397clone();
-                this.mInsetTop = insetState.mInsetTop.m1397clone();
-                this.mInsetRight = insetState.mInsetRight.m1397clone();
-                this.mInsetBottom = insetState.mInsetBottom.m1397clone();
+                this.mInsetLeft = insetState.mInsetLeft.m1401clone();
+                this.mInsetTop = insetState.mInsetTop.m1401clone();
+                this.mInsetRight = insetState.mInsetRight.m1401clone();
+                this.mInsetBottom = insetState.mInsetBottom.m1401clone();
                 if (insetState.mDensity != this.mDensity) {
                     applyDensityScaling(insetState.mDensity, this.mDensity);
                     return;
@@ -284,7 +284,7 @@ public class InsetDrawable extends DrawableWrapper {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public InsetValue m1397clone() {
+        public InsetValue m1401clone() {
             return new InsetValue(this.mFraction, this.mDimension);
         }
     }

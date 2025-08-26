@@ -15,33 +15,33 @@ class DHParametersHelper {
     DHParametersHelper() {
     }
 
-    static BigInteger[] generateSafePrimes(int i, int i2, SecureRandom secureRandom) {
+    static BigInteger[] generateSafePrimes(int i, int i2, SecureRandom secureRandom) throws IllegalArgumentException {
         logger.info("Generating safe primes. This may take a long time.");
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         int i3 = i - 1;
         int i4 = i >>> 2;
         int i5 = 0;
         while (true) {
             i5++;
-            BigInteger createRandomPrime = BigIntegers.createRandomPrime(i3, 2, secureRandom);
-            BigInteger add = createRandomPrime.shiftLeft(1).add(ONE);
-            if (add.isProbablePrime(i2) && (i2 <= 2 || createRandomPrime.isProbablePrime(i2 - 2))) {
-                if (WNafUtil.getNafWeight(add) >= i4) {
-                    long currentTimeMillis2 = System.currentTimeMillis() - currentTimeMillis;
-                    logger.info("Generated safe primes: " + i5 + " tries took " + currentTimeMillis2 + "ms");
-                    return new BigInteger[]{add, createRandomPrime};
+            BigInteger bigIntegerCreateRandomPrime = BigIntegers.createRandomPrime(i3, 2, secureRandom);
+            BigInteger bigIntegerAdd = bigIntegerCreateRandomPrime.shiftLeft(1).add(ONE);
+            if (bigIntegerAdd.isProbablePrime(i2) && (i2 <= 2 || bigIntegerCreateRandomPrime.isProbablePrime(i2 - 2))) {
+                if (WNafUtil.getNafWeight(bigIntegerAdd) >= i4) {
+                    long jCurrentTimeMillis2 = System.currentTimeMillis() - jCurrentTimeMillis;
+                    logger.info("Generated safe primes: " + i5 + " tries took " + jCurrentTimeMillis2 + "ms");
+                    return new BigInteger[]{bigIntegerAdd, bigIntegerCreateRandomPrime};
                 }
             }
         }
     }
 
     static BigInteger selectGenerator(BigInteger bigInteger, BigInteger bigInteger2, SecureRandom secureRandom) {
-        BigInteger modPow;
-        BigInteger subtract = bigInteger.subtract(TWO);
+        BigInteger bigIntegerModPow;
+        BigInteger bigIntegerSubtract = bigInteger.subtract(TWO);
         do {
             BigInteger bigInteger3 = TWO;
-            modPow = BigIntegers.createRandomInRange(bigInteger3, subtract, secureRandom).modPow(bigInteger3, bigInteger);
-        } while (modPow.equals(ONE));
-        return modPow;
+            bigIntegerModPow = BigIntegers.createRandomInRange(bigInteger3, bigIntegerSubtract, secureRandom).modPow(bigInteger3, bigInteger);
+        } while (bigIntegerModPow.equals(ONE));
+        return bigIntegerModPow;
     }
 }

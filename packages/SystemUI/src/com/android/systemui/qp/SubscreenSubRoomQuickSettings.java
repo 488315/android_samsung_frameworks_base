@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.qs.InjectionInflationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenSubRoomQuickSettings implements SubRoom {
     public static Context mContext;
@@ -23,20 +22,20 @@ public class SubscreenSubRoomQuickSettings implements SubRoom {
     private SubscreenSubRoomQuickSettings() {
         if (QpRune.QUICK_SUBSCREEN_PANEL) {
             InjectionInflationController injectionInflationController = mInjectionInflater;
-            LayoutInflater from = LayoutInflater.from(mContext);
+            LayoutInflater layoutInflaterFrom = LayoutInflater.from(mContext);
             injectionInflationController.getClass();
-            LayoutInflater cloneInContext = from.cloneInContext(from.getContext());
-            cloneInContext.setPrivateFactory(injectionInflationController.mFactory);
-            this.mMainView = cloneInContext.inflate(R.layout.subscreen_quick_settings_qp_base, (ViewGroup) null, false);
+            LayoutInflater layoutInflaterCloneInContext = layoutInflaterFrom.cloneInContext(layoutInflaterFrom.getContext());
+            layoutInflaterCloneInContext.setPrivateFactory(injectionInflationController.mFactory);
+            this.mMainView = layoutInflaterCloneInContext.inflate(R.layout.subscreen_quick_settings_qp_base, (ViewGroup) null, false);
             return;
         }
         if (QpRune.QUICK_SUBSCREEN_SETTINGS) {
             InjectionInflationController injectionInflationController2 = mInjectionInflater;
-            LayoutInflater from2 = LayoutInflater.from(mContext);
+            LayoutInflater layoutInflaterFrom2 = LayoutInflater.from(mContext);
             injectionInflationController2.getClass();
-            LayoutInflater cloneInContext2 = from2.cloneInContext(from2.getContext());
-            cloneInContext2.setPrivateFactory(injectionInflationController2.mFactory);
-            this.mMainView = cloneInContext2.inflate(R.layout.subscreen_quick_settings_base, (ViewGroup) null, false);
+            LayoutInflater layoutInflaterCloneInContext2 = layoutInflaterFrom2.cloneInContext(layoutInflaterFrom2.getContext());
+            layoutInflaterCloneInContext2.setPrivateFactory(injectionInflationController2.mFactory);
+            this.mMainView = layoutInflaterCloneInContext2.inflate(R.layout.subscreen_quick_settings_base, (ViewGroup) null, false);
         }
     }
 

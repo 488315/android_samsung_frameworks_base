@@ -14,12 +14,10 @@ import com.android.systemui.statusbar.pipeline.wifi.ui.binder.WifiViewBinder;
 import com.android.systemui.statusbar.pipeline.wifi.ui.viewmodel.LocationBasedWifiViewModel;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ModernStatusBarWifiView extends ModernStatusBarView {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,16 +57,16 @@ public final class ModernStatusBarWifiView extends ModernStatusBarView {
         if (modernStatusBarViewBinding == null) {
             modernStatusBarViewBinding = null;
         }
-        Boolean valueOf = modernStatusBarViewBinding != null ? Boolean.valueOf(modernStatusBarViewBinding.isCollecting()) : null;
+        Boolean boolValueOf = modernStatusBarViewBinding != null ? Boolean.valueOf(modernStatusBarViewBinding.isCollecting()) : null;
         String str = this.slot;
         String str2 = str != null ? str : null;
         String visibleStateString = StatusBarIconView.getVisibleStateString(this.iconVisibleState);
-        String frameLayout = super.toString();
+        String string = super.toString();
         StringBuilder sb = new StringBuilder("ModernStatusBarWifiView(slot='");
         sb.append(str2);
         sb.append("', isCollecting=");
-        sb.append(valueOf);
+        sb.append(boolValueOf);
         sb.append(", visibleState=");
-        return MutablePreferences$$ExternalSyntheticOutline0.m(sb, visibleStateString, "); viewString=", frameLayout);
+        return MutablePreferences$$ExternalSyntheticOutline0.m(sb, visibleStateString, "); viewString=", string);
     }
 }

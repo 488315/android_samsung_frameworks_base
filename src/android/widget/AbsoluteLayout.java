@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -54,10 +55,10 @@ public class AbsoluteLayout extends ViewGroup {
 
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsoluteLayout_Layout);
-            this.x = obtainStyledAttributes.getDimensionPixelOffset(0, 0);
-            this.y = obtainStyledAttributes.getDimensionPixelOffset(1, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsoluteLayout_Layout);
+            this.x = typedArrayObtainStyledAttributes.getDimensionPixelOffset(0, 0);
+            this.y = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, 0);
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(ViewGroup.LayoutParams layoutParams) {
@@ -90,19 +91,19 @@ public class AbsoluteLayout extends ViewGroup {
     protected void onMeasure(int i, int i2) {
         int childCount = getChildCount();
         measureChildren(i, i2);
-        int i3 = 0;
-        int i4 = 0;
-        for (int i5 = 0; i5 < childCount; i5++) {
-            View childAt = getChildAt(i5);
+        int iMax = 0;
+        int iMax2 = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
                 int measuredWidth = layoutParams.x + childAt.getMeasuredWidth();
                 int measuredHeight = layoutParams.y + childAt.getMeasuredHeight();
-                i3 = Math.max(i3, measuredWidth);
-                i4 = Math.max(i4, measuredHeight);
+                iMax = Math.max(iMax, measuredWidth);
+                iMax2 = Math.max(iMax2, measuredHeight);
             }
         }
-        setMeasuredDimension(resolveSizeAndState(Math.max(i3 + this.mPaddingLeft + this.mPaddingRight, getSuggestedMinimumWidth()), i, 0), resolveSizeAndState(Math.max(i4 + this.mPaddingTop + this.mPaddingBottom, getSuggestedMinimumHeight()), i2, 0));
+        setMeasuredDimension(resolveSizeAndState(Math.max(iMax + this.mPaddingLeft + this.mPaddingRight, getSuggestedMinimumWidth()), i, 0), resolveSizeAndState(Math.max(iMax2 + this.mPaddingTop + this.mPaddingBottom, getSuggestedMinimumHeight()), i2, 0));
     }
 
     @Override // android.view.ViewGroup
@@ -111,7 +112,7 @@ public class AbsoluteLayout extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int childCount = getChildCount();
         for (int i5 = 0; i5 < childCount; i5++) {
             View childAt = getChildAt(i5);

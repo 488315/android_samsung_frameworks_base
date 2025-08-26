@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PickupController extends SensorController implements Dumpable {
     public final PickupController$baseSensorListener$1 baseSensorListener;
@@ -30,7 +29,6 @@ public final class PickupController extends SensorController implements Dumpable
     public final PickupController$registerRunnable$1 registerRunnable;
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,19 +53,19 @@ public final class PickupController extends SensorController implements Dumpable
         this.registerRunnable = new Runnable() { // from class: com.android.systemui.sensor.PickupController$registerRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                PickupController.access$registerSensor(PickupController.this);
+                PickupController.access$registerSensor(this.this$0);
             }
         };
         KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.sensor.PickupController$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onPhoneStateChanged(int i) {
-                PickupController.this.phoneState = i;
+                this.this$0.phoneState = i;
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onStartedGoingToSleep(int i) {
                 Log.d("PickupController", "onStartedGoingToSleep() ");
-                PickupController pickupController = PickupController.this;
+                PickupController pickupController = this.this$0;
                 if (PickupController.access$isLiftToWakeEnabled(pickupController)) {
                     if (i == 4) {
                         pickupController.handler.removeCallbacks(pickupController.registerRunnable);
@@ -82,7 +80,7 @@ public final class PickupController extends SensorController implements Dumpable
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onStartedWakingUp() {
                 Log.d("PickupController", "onStartedWakingUp() ");
-                PickupController pickupController = PickupController.this;
+                PickupController pickupController = this.this$0;
                 if (PickupController.access$isLiftToWakeEnabled(pickupController)) {
                     if (pickupController.handler.hasCallbacks(pickupController.registerRunnable)) {
                         pickupController.handler.removeCallbacks(pickupController.registerRunnable);
@@ -96,7 +94,7 @@ public final class PickupController extends SensorController implements Dumpable
         statusBarStateController.addCallback(new StatusBarStateController.StateListener() { // from class: com.android.systemui.sensor.PickupController$statusBarStateListener$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onDozingChanged(boolean z) {
-                PickupController pickupController = PickupController.this;
+                PickupController pickupController = this.this$0;
                 if (PickupController.access$isLiftToWakeEnabled(pickupController) && keyguardUpdateMonitor.mDeviceInteractive) {
                     if (z) {
                         PickupController.access$registerSensor(pickupController);
@@ -111,7 +109,7 @@ public final class PickupController extends SensorController implements Dumpable
             @Override // com.android.systemui.sensor.SensorController.SensorListener
             public final void onExecute() {
                 Log.d("PickupController", "onExecute : Lift to wake");
-                PickupController pickupController = PickupController.this;
+                PickupController pickupController = this.this$0;
                 pickupController.powerManager.setEarlyWakeUp(true);
                 pickupController.powerManager.wakeUp(SystemClock.uptimeMillis(), 7, "LiftToWake");
             }
@@ -152,7 +150,7 @@ public final class PickupController extends SensorController implements Dumpable
         printWriter.print("      addedMonitorCallback=");
         printWriter.println(false);
         if (this.pickupListener.size() > 0) {
-            this.pickupListener.forEach(new Consumer() { // from class: com.android.systemui.sensor.PickupController$dump$1
+            this.pickupListener.forEach(new Consumer() { // from class: com.android.systemui.sensor.PickupController.dump.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     printWriter.println("      lisenter=" + ((SensorController.SensorListener) obj));

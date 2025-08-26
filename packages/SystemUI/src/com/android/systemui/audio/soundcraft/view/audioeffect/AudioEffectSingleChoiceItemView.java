@@ -20,7 +20,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,7 +30,6 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
     public final ViewGroup parent;
     public final BaseSingleChoiceViewModel viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,7 +67,7 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final AudioEffectSingleChoiceItemView audioEffectSingleChoiceItemView = this.f$0;
                 switch (i) {
                     case 0:
@@ -97,13 +95,13 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
                                 qSBlurPopUpMenu2.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$1
                                     @Override // android.widget.AdapterView.OnItemClickListener
                                     public final void onItemClick(AdapterView adapterView, View view, int i4, long j) {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.onItemSelected(i4);
+                                        audioEffectSingleChoiceItemView.viewModel.onItemSelected(i4);
                                     }
                                 });
                                 qSBlurPopUpMenu2.dismissListener = new PopupWindow.OnDismissListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$2
                                     @Override // android.widget.PopupWindow.OnDismissListener
                                     public final void onDismiss() {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.dismiss();
+                                        audioEffectSingleChoiceItemView.viewModel.dismiss();
                                     }
                                 };
                                 qSBlurPopUpMenu2.show();
@@ -137,7 +135,7 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final AudioEffectSingleChoiceItemView audioEffectSingleChoiceItemView = this.f$0;
                 switch (i3) {
                     case 0:
@@ -165,13 +163,13 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
                                 qSBlurPopUpMenu2.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$1
                                     @Override // android.widget.AdapterView.OnItemClickListener
                                     public final void onItemClick(AdapterView adapterView, View view, int i4, long j) {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.onItemSelected(i4);
+                                        audioEffectSingleChoiceItemView.viewModel.onItemSelected(i4);
                                     }
                                 });
                                 qSBlurPopUpMenu2.dismissListener = new PopupWindow.OnDismissListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$2
                                     @Override // android.widget.PopupWindow.OnDismissListener
                                     public final void onDismiss() {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.dismiss();
+                                        audioEffectSingleChoiceItemView.viewModel.dismiss();
                                     }
                                 };
                                 qSBlurPopUpMenu2.show();
@@ -205,7 +203,7 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 final AudioEffectSingleChoiceItemView audioEffectSingleChoiceItemView = this.f$0;
                 switch (i4) {
                     case 0:
@@ -233,13 +231,13 @@ public final class AudioEffectSingleChoiceItemView extends BaseAudioEffectItemVi
                                 qSBlurPopUpMenu2.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$1
                                     @Override // android.widget.AdapterView.OnItemClickListener
                                     public final void onItemClick(AdapterView adapterView, View view, int i42, long j) {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.onItemSelected(i42);
+                                        audioEffectSingleChoiceItemView.viewModel.onItemSelected(i42);
                                     }
                                 });
                                 qSBlurPopUpMenu2.dismissListener = new PopupWindow.OnDismissListener() { // from class: com.android.systemui.audio.soundcraft.view.audioeffect.AudioEffectSingleChoiceItemView$showChooser$1$2
                                     @Override // android.widget.PopupWindow.OnDismissListener
                                     public final void onDismiss() {
-                                        AudioEffectSingleChoiceItemView.this.viewModel.dismiss();
+                                        audioEffectSingleChoiceItemView.viewModel.dismiss();
                                     }
                                 };
                                 qSBlurPopUpMenu2.show();

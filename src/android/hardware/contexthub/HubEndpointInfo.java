@@ -127,11 +127,11 @@ public final class HubEndpointInfo implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         Iterator<HubServiceInfo> it = this.mHubServiceInfos.iterator();
-        int i = 0;
+        int iDescribeContents = 0;
         while (it.hasNext()) {
-            i |= it.next().describeContents();
+            iDescribeContents |= it.next().describeContents();
         }
-        return i;
+        return iDescribeContents;
     }
 
     @Override // android.os.Parcelable

@@ -24,16 +24,13 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FontRequestEmojiCompatConfig extends EmojiCompat.Config {
     public static final FontProviderHelper DEFAULT_FONTS_CONTRACT = new FontProviderHelper();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FontProviderHelper {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FontRequestMetadataLoader implements EmojiCompat.MetadataRepoLoader {
         public EmojiCompat.MetadataRepoLoaderCallback mCallback;
         public final Context mContext;
@@ -46,7 +43,6 @@ public class FontRequestEmojiCompatConfig extends EmojiCompat.Config {
         public AnonymousClass1 mObserver;
         public final FontRequest mRequest;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: androidx.emoji2.text.FontRequestEmojiCompatConfig$FontRequestMetadataLoader$1, reason: invalid class name */
         public class AnonymousClass1 extends ContentObserver {
             public AnonymousClass1(Handler handler) {
@@ -119,15 +115,15 @@ public class FontRequestEmojiCompatConfig extends EmojiCompat.Config {
                     ((ThreadPoolExecutor) this.mExecutor).execute(new Runnable() { // from class: androidx.emoji2.text.FontRequestEmojiCompatConfig$FontRequestMetadataLoader$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            FontRequestEmojiCompatConfig.FontRequestMetadataLoader fontRequestMetadataLoader = FontRequestEmojiCompatConfig.FontRequestMetadataLoader.this;
+                            FontRequestEmojiCompatConfig.FontRequestMetadataLoader fontRequestMetadataLoader = this.f$0;
                             synchronized (fontRequestMetadataLoader.mLock) {
                                 try {
                                     if (fontRequestMetadataLoader.mCallback == null) {
                                         return;
                                     }
                                     try {
-                                        FontsContractCompat$FontInfo retrieveFontInfo = fontRequestMetadataLoader.retrieveFontInfo();
-                                        int i = retrieveFontInfo.mResultCode;
+                                        FontsContractCompat$FontInfo fontsContractCompat$FontInfoRetrieveFontInfo = fontRequestMetadataLoader.retrieveFontInfo();
+                                        int i = fontsContractCompat$FontInfoRetrieveFontInfo.mResultCode;
                                         if (i == 2) {
                                             synchronized (fontRequestMetadataLoader.mLock) {
                                             }
@@ -140,18 +136,18 @@ public class FontRequestEmojiCompatConfig extends EmojiCompat.Config {
                                             FontRequestEmojiCompatConfig.FontProviderHelper fontProviderHelper = fontRequestMetadataLoader.mFontProviderHelper;
                                             Context context = fontRequestMetadataLoader.mContext;
                                             fontProviderHelper.getClass();
-                                            Typeface createFromFontInfo = TypefaceCompat.createFromFontInfo(context, new FontsContractCompat$FontInfo[]{retrieveFontInfo}, 0);
-                                            ByteBuffer mmap = TypefaceCompatUtil.mmap(fontRequestMetadataLoader.mContext, retrieveFontInfo.mUri);
-                                            if (mmap == null || createFromFontInfo == null) {
+                                            Typeface typefaceCreateFromFontInfo = TypefaceCompat.createFromFontInfo(context, new FontsContractCompat$FontInfo[]{fontsContractCompat$FontInfoRetrieveFontInfo}, 0);
+                                            ByteBuffer byteBufferMmap = TypefaceCompatUtil.mmap(fontRequestMetadataLoader.mContext, fontsContractCompat$FontInfoRetrieveFontInfo.mUri);
+                                            if (byteBufferMmap == null || typefaceCreateFromFontInfo == null) {
                                                 throw new RuntimeException("Unable to open file.");
                                             }
-                                            MetadataRepo create = MetadataRepo.create(createFromFontInfo, mmap);
+                                            MetadataRepo metadataRepoCreate = MetadataRepo.create(typefaceCreateFromFontInfo, byteBufferMmap);
                                             Trace.endSection();
                                             synchronized (fontRequestMetadataLoader.mLock) {
                                                 try {
                                                     EmojiCompat.MetadataRepoLoaderCallback metadataRepoLoaderCallback = fontRequestMetadataLoader.mCallback;
                                                     if (metadataRepoLoaderCallback != null) {
-                                                        metadataRepoLoaderCallback.onLoaded(create);
+                                                        metadataRepoLoaderCallback.onLoaded(metadataRepoCreate);
                                                     }
                                                 } finally {
                                                 }

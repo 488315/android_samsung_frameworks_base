@@ -1,6 +1,7 @@
 package androidx.constraintlayout.helper.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,7 +10,6 @@ import androidx.constraintlayout.widget.ConstraintHelper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Layer extends ConstraintHelper {
     public boolean mApplyElevationOnAttach;
@@ -95,26 +95,26 @@ public class Layer extends ConstraintHelper {
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintHelper
-    public final void init(AttributeSet attributeSet) {
+    public final void init(AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super.init(attributeSet);
         this.mUseViewMeasure = false;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_Layout_android_visibility) {
                     this.mApplyVisibilityOnAttach = true;
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_elevation) {
                     this.mApplyElevationOnAttach = true;
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintHelper, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super.onAttachedToWindow();
         this.mContainer = (ConstraintLayout) getParent();
         if (this.mApplyVisibilityOnAttach || this.mApplyElevationOnAttach) {
@@ -211,14 +211,14 @@ public class Layer extends ConstraintHelper {
         }
         calcCenters();
         double radians = Float.isNaN(this.mGroupRotateAngle) ? 0.0d : Math.toRadians(this.mGroupRotateAngle);
-        float sin = (float) Math.sin(radians);
-        float cos = (float) Math.cos(radians);
+        float fSin = (float) Math.sin(radians);
+        float fCos = (float) Math.cos(radians);
         float f = this.mScaleX;
-        float f2 = f * cos;
+        float f2 = f * fCos;
         float f3 = this.mScaleY;
-        float f4 = (-f3) * sin;
-        float f5 = f * sin;
-        float f6 = f3 * cos;
+        float f4 = (-f3) * fSin;
+        float f5 = f * fSin;
+        float f6 = f3 * fCos;
         for (int i = 0; i < this.mCount; i++) {
             View view = this.mViews[i];
             int right = (view.getRight() + view.getLeft()) / 2;

@@ -3,7 +3,6 @@ package androidx.compose.ui.focus;
 import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FocusDirection {
     public final int value;
@@ -17,7 +16,6 @@ public final class FocusDirection {
     public static final int Enter = 7;
     public static final int Exit = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,12 +30,12 @@ public final class FocusDirection {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ FocusDirection m366boximpl(int i) {
+    public static final /* synthetic */ FocusDirection m368boximpl(int i) {
         return new FocusDirection(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m367toStringimpl(int i) {
+    public static String m369toStringimpl(int i) {
         return i == Next ? "Next" : i == Previous ? "Previous" : i == Left ? SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT : i == Right ? SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT : i == Up ? "Up" : i == Down ? "Down" : i == Enter ? "Enter" : i == Exit ? "Exit" : "Invalid FocusDirection";
     }
 
@@ -53,6 +51,6 @@ public final class FocusDirection {
     }
 
     public final String toString() {
-        return m367toStringimpl(this.value);
+        return m369toStringimpl(this.value);
     }
 }

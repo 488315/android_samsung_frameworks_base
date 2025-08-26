@@ -24,29 +24,29 @@ public final class FieldArray implements Cloneable {
 
     FieldArray(int i) {
         this.mGarbage = false;
-        int idealIntArraySize = idealIntArraySize(i);
-        this.mFieldNumbers = new int[idealIntArraySize];
-        this.mData = new FieldData[idealIntArraySize];
+        int iIdealIntArraySize = idealIntArraySize(i);
+        this.mFieldNumbers = new int[iIdealIntArraySize];
+        this.mData = new FieldData[iIdealIntArraySize];
         this.mSize = 0;
     }
 
     FieldData get(int i) {
         FieldData fieldData;
-        int binarySearch = binarySearch(i);
-        if (binarySearch < 0 || (fieldData = this.mData[binarySearch]) == DELETED) {
+        int iBinarySearch = binarySearch(i);
+        if (iBinarySearch < 0 || (fieldData = this.mData[iBinarySearch]) == DELETED) {
             return null;
         }
         return fieldData;
     }
 
     void remove(int i) {
-        int binarySearch = binarySearch(i);
-        if (binarySearch >= 0) {
+        int iBinarySearch = binarySearch(i);
+        if (iBinarySearch >= 0) {
             FieldData[] fieldDataArr = this.mData;
-            FieldData fieldData = fieldDataArr[binarySearch];
+            FieldData fieldData = fieldDataArr[iBinarySearch];
             FieldData fieldData2 = DELETED;
             if (fieldData != fieldData2) {
-                fieldDataArr[binarySearch] = fieldData2;
+                fieldDataArr[iBinarySearch] = fieldData2;
                 this.mGarbage = true;
             }
         }
@@ -73,12 +73,12 @@ public final class FieldArray implements Cloneable {
     }
 
     void put(int i, FieldData fieldData) {
-        int binarySearch = binarySearch(i);
-        if (binarySearch >= 0) {
-            this.mData[binarySearch] = fieldData;
+        int iBinarySearch = binarySearch(i);
+        if (iBinarySearch >= 0) {
+            this.mData[iBinarySearch] = fieldData;
             return;
         }
-        int i2 = ~binarySearch;
+        int i2 = ~iBinarySearch;
         int i3 = this.mSize;
         if (i2 < i3) {
             FieldData[] fieldDataArr = this.mData;
@@ -94,9 +94,9 @@ public final class FieldArray implements Cloneable {
         }
         int i4 = this.mSize;
         if (i4 >= this.mFieldNumbers.length) {
-            int idealIntArraySize = idealIntArraySize(i4 + 1);
-            int[] iArr = new int[idealIntArraySize];
-            FieldData[] fieldDataArr2 = new FieldData[idealIntArraySize];
+            int iIdealIntArraySize = idealIntArraySize(i4 + 1);
+            int[] iArr = new int[iIdealIntArraySize];
+            FieldData[] fieldDataArr2 = new FieldData[iIdealIntArraySize];
             int[] iArr2 = this.mFieldNumbers;
             System.arraycopy(iArr2, 0, iArr, 0, iArr2.length);
             FieldData[] fieldDataArr3 = this.mData;
@@ -150,11 +150,11 @@ public final class FieldArray implements Cloneable {
         if (this.mGarbage) {
             gc();
         }
-        int i = 17;
-        for (int i2 = 0; i2 < this.mSize; i2++) {
-            i = (((i * 31) + this.mFieldNumbers[i2]) * 31) + this.mData[i2].hashCode();
+        int iHashCode = 17;
+        for (int i = 0; i < this.mSize; i++) {
+            iHashCode = (((iHashCode * 31) + this.mFieldNumbers[i]) * 31) + this.mData[i].hashCode();
         }
-        return i;
+        return iHashCode;
     }
 
     private int idealIntArraySize(int i) {
@@ -198,14 +198,14 @@ public final class FieldArray implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final FieldArray m2268clone() {
+    public final FieldArray m2274clone() {
         int size = size();
         FieldArray fieldArray = new FieldArray(size);
         System.arraycopy(this.mFieldNumbers, 0, fieldArray.mFieldNumbers, 0, size);
         for (int i = 0; i < size; i++) {
             FieldData fieldData = this.mData[i];
             if (fieldData != null) {
-                fieldArray.mData[i] = fieldData.m2269clone();
+                fieldArray.mData[i] = fieldData.m2275clone();
             }
         }
         fieldArray.mSize = size;

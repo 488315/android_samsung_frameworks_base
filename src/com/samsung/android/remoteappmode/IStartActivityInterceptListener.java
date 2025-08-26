@@ -47,9 +47,9 @@ public interface IStartActivityInterceptListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStartActivityInterceptListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStartActivityInterceptListener)) {
-                return (IStartActivityInterceptListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStartActivityInterceptListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStartActivityInterceptListener)) {
+                return (IStartActivityInterceptListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -79,13 +79,13 @@ public interface IStartActivityInterceptListener extends IInterface {
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 ActivityInfo activityInfo = (ActivityInfo) parcel.readTypedObject(ActivityInfo.CREATOR);
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onStartActivityIntercepted(intent, bundle, activityInfo, readInt, readBoolean, readInt2, readInt3, readInt4);
+                onStartActivityIntercepted(intent, bundle, activityInfo, i3, z, i4, i5, i6);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -109,20 +109,20 @@ public interface IStartActivityInterceptListener extends IInterface {
 
             @Override // com.samsung.android.remoteappmode.IStartActivityInterceptListener
             public void onStartActivityIntercepted(Intent intent, Bundle bundle, ActivityInfo activityInfo, int i, boolean z, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStartActivityInterceptListener.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(activityInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStartActivityInterceptListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(activityInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

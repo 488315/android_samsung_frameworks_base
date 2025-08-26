@@ -91,9 +91,9 @@ public interface IMTDService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMTDService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMTDService)) {
-                return (IMTDService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMTDService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMTDService)) {
+                return (IMTDService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -135,53 +135,53 @@ public interface IMTDService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt2 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    analyzeContent(readString, readString2, readInt, readBoolean, readInt2);
+                    analyzeContent(string, string2, i3, z, i4);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    analyzeURL(readString3, readString4, readInt3, readBoolean2, intent);
+                    analyzeURL(string3, string4, i5, z2, intent);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    IMtdCallback asInterface = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    IMtdCallback iMtdCallbackAsInterface = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    analyzeURLs(createStringArrayList, asInterface, readString5);
+                    analyzeURLs(arrayListCreateStringArrayList, iMtdCallbackAsInterface, string5);
                     return true;
                 case 4:
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    IMtdCallback asInterface2 = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    IMtdCallback iMtdCallbackAsInterface2 = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    analyzeContents(createStringArrayList2, asInterface2);
+                    analyzeContents(arrayListCreateStringArrayList2, iMtdCallbackAsInterface2);
                     return true;
                 case 5:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(FrameBuffersInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FrameBuffersInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    analyzeFrameBuffers(createTypedArrayList);
+                    analyzeFrameBuffers(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setSystemProperty(readString6, readString7);
+                    setSystemProperty(string6, string7);
                     return true;
                 case 7:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String systemProperty = getSystemProperty(readString8);
+                    String systemProperty = getSystemProperty(string8);
                     parcel2.writeNoException();
                     parcel2.writeString(systemProperty);
                     return true;
@@ -208,107 +208,107 @@ public interface IMTDService extends IInterface {
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void analyzeContent(String str, String str2, int i, boolean z, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void analyzeURL(String str, String str2, int i, boolean z, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void analyzeURLs(List<String> list, IMtdCallback iMtdCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iMtdCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iMtdCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void analyzeContents(List<String> list, IMtdCallback iMtdCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iMtdCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iMtdCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void analyzeFrameBuffers(List<FrameBuffersInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public void setSystemProperty(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
             public String getSystemProperty(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IMTDService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

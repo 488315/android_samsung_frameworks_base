@@ -80,9 +80,9 @@ public interface IOns extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOns.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOns)) {
-                return (IOns) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOns.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOns)) {
+                return (IOns) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -121,39 +121,39 @@ public interface IOns extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                String readString = parcel.readString();
+                boolean z = parcel.readBoolean();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean enable = setEnable(readBoolean, readString);
+                boolean enable = setEnable(z, string);
                 parcel2.writeNoException();
                 parcel2.writeBoolean(enable);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isEnabled = isEnabled(readString2);
+                boolean zIsEnabled = isEnabled(string2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isEnabled);
+                parcel2.writeBoolean(zIsEnabled);
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
-                ISetOpportunisticDataCallback asInterface = ISetOpportunisticDataCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString3 = parcel.readString();
+                int i3 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
+                ISetOpportunisticDataCallback iSetOpportunisticDataCallbackAsInterface = ISetOpportunisticDataCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                setPreferredDataSubscriptionId(readInt, readBoolean2, asInterface, readString3);
+                setPreferredDataSubscriptionId(i3, z2, iSetOpportunisticDataCallbackAsInterface, string3);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int preferredDataSubscriptionId = getPreferredDataSubscriptionId(readString4, readString5);
+                int preferredDataSubscriptionId = getPreferredDataSubscriptionId(string4, string5);
                 parcel2.writeNoException();
                 parcel2.writeInt(preferredDataSubscriptionId);
             } else if (i == 5) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AvailableNetworkInfo.CREATOR);
-                IUpdateAvailableNetworksCallback asInterface2 = IUpdateAvailableNetworksCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString6 = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AvailableNetworkInfo.CREATOR);
+                IUpdateAvailableNetworksCallback iUpdateAvailableNetworksCallbackAsInterface = IUpdateAvailableNetworksCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                updateAvailableNetworks(createTypedArrayList, asInterface2, readString6);
+                updateAvailableNetworks(arrayListCreateTypedArrayList, iUpdateAvailableNetworksCallbackAsInterface, string6);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -179,86 +179,86 @@ public interface IOns extends IInterface {
 
             @Override // com.android.internal.telephony.IOns
             public boolean setEnable(boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOns.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IOns.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IOns
             public boolean isEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOns.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IOns.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IOns
             public void setPreferredDataSubscriptionId(int i, boolean z, ISetOpportunisticDataCallback iSetOpportunisticDataCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOns.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iSetOpportunisticDataCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOns.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iSetOpportunisticDataCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IOns
             public int getPreferredDataSubscriptionId(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOns.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IOns.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IOns
             public void updateAvailableNetworks(List<AvailableNetworkInfo> list, IUpdateAvailableNetworksCallback iUpdateAvailableNetworksCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOns.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iUpdateAvailableNetworksCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IOns.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iUpdateAvailableNetworksCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

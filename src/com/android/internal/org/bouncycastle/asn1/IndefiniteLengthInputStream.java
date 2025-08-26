@@ -16,9 +16,9 @@ class IndefiniteLengthInputStream extends LimitedInputStream {
         this._eofReached = false;
         this._eofOn00 = true;
         this._b1 = inputStream.read();
-        int read = inputStream.read();
-        this._b2 = read;
-        if (read < 0) {
+        int i2 = inputStream.read();
+        this._b2 = i2;
+        if (i2 < 0) {
             throw new EOFException();
         }
         checkForEof();
@@ -45,17 +45,17 @@ class IndefiniteLengthInputStream extends LimitedInputStream {
         if (this._eofReached) {
             return -1;
         }
-        int read = this._in.read(bArr, i + 2, i2 - 2);
-        if (read < 0) {
+        int i3 = this._in.read(bArr, i + 2, i2 - 2);
+        if (i3 < 0) {
             throw new EOFException();
         }
         bArr[i] = (byte) this._b1;
         bArr[i + 1] = (byte) this._b2;
         this._b1 = this._in.read();
-        int read2 = this._in.read();
-        this._b2 = read2;
-        if (read2 >= 0) {
-            return read + 2;
+        int i4 = this._in.read();
+        this._b2 = i4;
+        if (i4 >= 0) {
+            return i3 + 2;
         }
         throw new EOFException();
     }
@@ -65,13 +65,13 @@ class IndefiniteLengthInputStream extends LimitedInputStream {
         if (checkForEof()) {
             return -1;
         }
-        int read = this._in.read();
-        if (read < 0) {
+        int i = this._in.read();
+        if (i < 0) {
             throw new EOFException();
         }
-        int i = this._b1;
+        int i2 = this._b1;
         this._b1 = this._b2;
-        this._b2 = read;
-        return i;
+        this._b2 = i;
+        return i2;
     }
 }

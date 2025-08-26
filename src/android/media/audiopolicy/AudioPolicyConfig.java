@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public class AudioPolicyConfig implements Parcelable {
     public static final Parcelable.Creator<AudioPolicyConfig> CREATOR = new Parcelable.Creator<AudioPolicyConfig>() { // from class: android.media.audiopolicy.AudioPolicyConfig.1
         /* JADX WARN: Can't rename method to resolve collision */
@@ -82,9 +82,9 @@ public class AudioPolicyConfig implements Parcelable {
         this.mDuckingPolicy = 0;
         this.mRegistrationId = null;
         this.mMixCounter = 0;
-        int readInt = parcel.readInt();
-        this.mMixes = new ArrayList<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mMixes = new ArrayList<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mMixes.add(AudioMix.CREATOR.createFromParcel(parcel));
         }
     }
@@ -224,7 +224,7 @@ public class AudioPolicyConfig implements Parcelable {
         ((List) Objects.requireNonNull(list)).forEach(new Consumer() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AudioPolicyConfig.this.lambda$updateMixingRules$0((Pair) obj);
+                this.f$0.lambda$updateMixingRules$0((Pair) obj);
             }
         });
     }
@@ -241,12 +241,12 @@ public class AudioPolicyConfig implements Parcelable {
         stream.filter(new Predicate() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return AudioMix.this.equals((AudioMix) obj);
+                return audioMix.equals((AudioMix) obj);
             }
         }).findAny().ifPresent(new Consumer() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((AudioMix) obj).setAudioMixingRule(AudioMixingRule.this);
+                ((AudioMix) obj).setAudioMixingRule(audioMixingRule);
             }
         });
     }

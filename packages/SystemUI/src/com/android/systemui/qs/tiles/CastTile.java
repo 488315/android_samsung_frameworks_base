@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CastTile extends QSTileImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -60,7 +59,6 @@ public class CastTile extends QSTileImpl {
     public final ShadeDialogContextInteractor mShadeDialogContextInteractor;
     public final AnonymousClass1 mSignalCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback implements CastController.Callback, KeyguardStateController.Callback {
         public /* synthetic */ Callback(CastTile castTile, int i) {
             this();
@@ -80,7 +78,6 @@ public class CastTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DialogHolder {
         public Dialog mDialog;
 
@@ -106,7 +103,7 @@ public class CastTile extends QSTileImpl {
         ?? r2 = new Consumer() { // from class: com.android.systemui.qs.tiles.CastTile$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                CastTile castTile = CastTile.this;
+                CastTile castTile = this.f$0;
                 DefaultConnectionModel defaultConnectionModel = (DefaultConnectionModel) obj;
                 int i = CastTile.$r8$clinit;
                 boolean z = (defaultConnectionModel.wifi.isDefault || defaultConnectionModel.ethernet.isDefault) && !defaultConnectionModel.mobile.isDefault;
@@ -277,11 +274,11 @@ public class CastTile extends QSTileImpl {
             CastDevice.CastState castState = castDevice.state;
             if (castState == CastDevice.CastState.Connected) {
                 booleanState.value = true;
-                String str = castDevice.name;
-                if (str == null) {
-                    str = this.mContext.getString(R.string.quick_settings_cast_device_default_name);
+                String string2 = castDevice.name;
+                if (string2 == null) {
+                    string2 = this.mContext.getString(R.string.quick_settings_cast_device_default_name);
                 }
-                booleanState.secondaryLabel = str;
+                booleanState.secondaryLabel = string2;
                 booleanState.stateDescription = ((Object) booleanState.stateDescription) + "," + this.mContext.getString(R.string.accessibility_cast_name, booleanState.label);
                 z2 = false;
             } else if (castState == CastDevice.CastState.Connecting) {

@@ -25,7 +25,6 @@ import kotlinx.serialization.internal.CachedNames;
 import kotlinx.serialization.internal.Platform_commonKt;
 import kotlinx.serialization.internal.PluginGeneratedSerialDescriptorKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SerialDescriptorImpl implements SerialDescriptor, CachedNames {
     public final Lazy _hashCode$delegate;
@@ -64,7 +63,7 @@ public final class SerialDescriptorImpl implements SerialDescriptor, CachedNames
                 this._hashCode$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: kotlinx.serialization.descriptors.SerialDescriptorImpl$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        SerialDescriptorImpl serialDescriptorImpl = SerialDescriptorImpl.this;
+                        SerialDescriptorImpl serialDescriptorImpl = this.f$0;
                         return Integer.valueOf(PluginGeneratedSerialDescriptorKt.hashCodeImpl(serialDescriptorImpl, serialDescriptorImpl.typeParametersDescriptors));
                     }
                 });
@@ -76,7 +75,6 @@ public final class SerialDescriptorImpl implements SerialDescriptor, CachedNames
     }
 
     public final boolean equals(Object obj) {
-        int i;
         if (this == obj) {
             return true;
         }
@@ -84,11 +82,12 @@ public final class SerialDescriptorImpl implements SerialDescriptor, CachedNames
             SerialDescriptor serialDescriptor = (SerialDescriptor) obj;
             if (Intrinsics.areEqual(this.serialName, serialDescriptor.getSerialName()) && Arrays.equals(this.typeParametersDescriptors, ((SerialDescriptorImpl) obj).typeParametersDescriptors)) {
                 int elementsCount = serialDescriptor.getElementsCount();
-                int i2 = this.elementsCount;
-                if (i2 == elementsCount) {
-                    for (0; i < i2; i + 1) {
+                int i = this.elementsCount;
+                if (i == elementsCount) {
+                    for (int i2 = 0; i2 < i; i2++) {
                         SerialDescriptor[] serialDescriptorArr = this.elementDescriptors;
-                        i = (Intrinsics.areEqual(serialDescriptorArr[i].getSerialName(), serialDescriptor.getElementDescriptor(i).getSerialName()) && Intrinsics.areEqual(serialDescriptorArr[i].getKind(), serialDescriptor.getElementDescriptor(i).getKind())) ? i + 1 : 0;
+                        if (Intrinsics.areEqual(serialDescriptorArr[i2].getSerialName(), serialDescriptor.getElementDescriptor(i2).getSerialName()) && Intrinsics.areEqual(serialDescriptorArr[i2].getKind(), serialDescriptor.getElementDescriptor(i2).getKind())) {
+                        }
                     }
                     return true;
                 }
@@ -145,10 +144,10 @@ public final class SerialDescriptorImpl implements SerialDescriptor, CachedNames
         return CollectionsKt___CollectionsKt.joinToString$default(RangesKt___RangesKt.until(0, this.elementsCount), ", ", TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.serialName, "("), ")", new Function1() { // from class: kotlinx.serialization.descriptors.SerialDescriptorImpl$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
-                SerialDescriptorImpl serialDescriptorImpl = SerialDescriptorImpl.this;
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(serialDescriptorImpl.elementNames[intValue], ": ", serialDescriptorImpl.elementDescriptors[intValue].getSerialName());
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
+                SerialDescriptorImpl serialDescriptorImpl = this.f$0;
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(serialDescriptorImpl.elementNames[iIntValue], ": ", serialDescriptorImpl.elementDescriptors[iIntValue].getSerialName());
             }
         }, 24);
     }

@@ -23,7 +23,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SystemStatusAnimationSchedulerImpl$startAnimationLifecycle$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ StatusEvent $event;
@@ -57,41 +56,41 @@ final class SystemStatusAnimationSchedulerImpl$startAnimationLifecycle$1 extends
             int i2 = SystemStatusAnimationSchedulerImpl.$r8$clinit;
             systemStatusAnimationSchedulerImpl.getClass();
             Assert.isMainThread();
-            boolean booleanValue = ((Boolean) ((StatusBarModePerDisplayRepositoryImpl) ((StatusBarModePerDisplayRepository) systemStatusAnimationSchedulerImpl.statusBarModeRepository.getDefaultDisplay())).isInFullscreenMode.$$delegate_0.getValue()).booleanValue();
+            boolean zBooleanValue = ((Boolean) ((StatusBarModePerDisplayRepositoryImpl) ((StatusBarModePerDisplayRepository) systemStatusAnimationSchedulerImpl.statusBarModeRepository.getDefaultDisplay())).isInFullscreenMode.$$delegate_0.getValue()).booleanValue();
             StatusBarWindowControllerStore statusBarWindowControllerStore = systemStatusAnimationSchedulerImpl.statusBarWindowControllerStore;
-            if (booleanValue) {
+            if (zBooleanValue) {
                 boolean z = systemStatusAnimationSchedulerImpl.statusBarHidden;
                 ArrayList arrayList = new ArrayList();
                 Iterator it = systemStatusAnimationSchedulerImpl.listeners.iterator();
                 while (it.hasNext()) {
-                    Animator onPrepareSystemEventAnimation = ((SystemStatusAnimationCallback) it.next()).onPrepareSystemEventAnimation(z);
-                    if (onPrepareSystemEventAnimation != null) {
-                        arrayList.add(onPrepareSystemEventAnimation);
+                    Animator animatorOnPrepareSystemEventAnimation = ((SystemStatusAnimationCallback) it.next()).onPrepareSystemEventAnimation(z);
+                    if (animatorOnPrepareSystemEventAnimation != null) {
+                        arrayList.add(animatorOnPrepareSystemEventAnimation);
                     }
                 }
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 0.0f);
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 0.0f);
                 if (systemStatusAnimationSchedulerImpl.hasPersistentDot || (systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent instanceof BatteryEvent)) {
                     ((StatusBarWindowControllerImpl) ((StatusBarWindowController) statusBarWindowControllerStore.getDefaultDisplay())).setForceStatusBarVisible(true);
                 }
-                arrayList.add(ofFloat);
+                arrayList.add(valueAnimatorOfFloat);
                 AnimatorSet animatorSet = new AnimatorSet();
                 animatorSet.playTogether(arrayList);
                 animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$runChipAppearAnimationUsingAnimator$1
                     @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        final SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = SystemStatusAnimationSchedulerImpl.this;
+                        final SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = systemStatusAnimationSchedulerImpl;
                         systemStatusAnimationSchedulerImpl2._animationState.setValue(SystemEventAnimationState.AnimatingIn);
-                        SpringAnimatorSet collectStartAnimations = systemStatusAnimationSchedulerImpl2.collectStartAnimations(systemStatusAnimationSchedulerImpl2.statusBarHidden);
-                        if (collectStartAnimations.getTotalDuration() > 500) {
-                            throw new IllegalStateException(ValueAnimator$$ExternalSyntheticOutline0.m("System animation total length exceeds budget. Expected: 500, actual: ", collectStartAnimations.getTotalDuration()));
+                        SpringAnimatorSet springAnimatorSetCollectStartAnimations = systemStatusAnimationSchedulerImpl2.collectStartAnimations(systemStatusAnimationSchedulerImpl2.statusBarHidden);
+                        if (springAnimatorSetCollectStartAnimations.getTotalDuration() > 500) {
+                            throw new IllegalStateException(ValueAnimator$$ExternalSyntheticOutline0.m("System animation total length exceeds budget. Expected: 500, actual: ", springAnimatorSetCollectStartAnimations.getTotalDuration()));
                         }
-                        collectStartAnimations.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$runChipAppearAnimationUsingAnimator$1$onAnimationEnd$1
+                        springAnimatorSetCollectStartAnimations.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$runChipAppearAnimationUsingAnimator$1$onAnimationEnd$1
                             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                             public final void onAnimationEnd(Animator animator2) {
-                                SystemStatusAnimationSchedulerImpl.this._animationState.setValue(SystemEventAnimationState.RunningChipAnim);
+                                systemStatusAnimationSchedulerImpl2._animationState.setValue(SystemEventAnimationState.RunningChipAnim);
                             }
                         });
-                        collectStartAnimations.start();
+                        springAnimatorSetCollectStartAnimations.start();
                     }
                 });
                 animatorSet.start();
@@ -100,17 +99,17 @@ final class SystemStatusAnimationSchedulerImpl$startAnimationLifecycle$1 extends
                     ((StatusBarWindowControllerImpl) ((StatusBarWindowController) statusBarWindowControllerStore.getDefaultDisplay())).setForceStatusBarVisible(true);
                 }
                 systemStatusAnimationSchedulerImpl._animationState.setValue(SystemEventAnimationState.AnimatingIn);
-                SpringAnimatorSet collectStartAnimations = systemStatusAnimationSchedulerImpl.collectStartAnimations(systemStatusAnimationSchedulerImpl.statusBarHidden);
-                if (collectStartAnimations.getTotalDuration() > 500) {
-                    throw new IllegalStateException(ValueAnimator$$ExternalSyntheticOutline0.m("System animation total length exceeds budget. Expected: 500, actual: ", collectStartAnimations.getTotalDuration()));
+                SpringAnimatorSet springAnimatorSetCollectStartAnimations = systemStatusAnimationSchedulerImpl.collectStartAnimations(systemStatusAnimationSchedulerImpl.statusBarHidden);
+                if (springAnimatorSetCollectStartAnimations.getTotalDuration() > 500) {
+                    throw new IllegalStateException(ValueAnimator$$ExternalSyntheticOutline0.m("System animation total length exceeds budget. Expected: 500, actual: ", springAnimatorSetCollectStartAnimations.getTotalDuration()));
                 }
-                collectStartAnimations.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$runChipAppearAnimation$1
+                springAnimatorSetCollectStartAnimations.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$runChipAppearAnimation$1
                     @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        SystemStatusAnimationSchedulerImpl.this._animationState.setValue(SystemEventAnimationState.RunningChipAnim);
+                        systemStatusAnimationSchedulerImpl._animationState.setValue(SystemEventAnimationState.RunningChipAnim);
                     }
                 });
-                collectStartAnimations.start();
+                springAnimatorSetCollectStartAnimations.start();
             }
             SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = this.this$0;
             StatusEvent statusEvent = this.$event;

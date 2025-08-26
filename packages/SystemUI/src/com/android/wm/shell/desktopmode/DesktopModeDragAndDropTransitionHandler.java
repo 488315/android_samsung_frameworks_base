@@ -17,13 +17,11 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeDragAndDropTransitionHandler implements Transitions.TransitionHandler {
     public final List pendingTransitionTokens = new ArrayList();
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,7 +72,7 @@ public final class DesktopModeDragAndDropTransitionHandler implements Transition
         valueAnimator.setFloatValues(0.0f, 1.0f);
         valueAnimator.setDuration(300L);
         final SurfaceControl.Transaction transaction3 = new SurfaceControl.Transaction();
-        valueAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.DesktopModeDragAndDropTransitionHandler$startAnimation$1
+        valueAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.DesktopModeDragAndDropTransitionHandler.startAnimation.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 transitionFinishCallback.onTransitionFinished(null);
@@ -86,7 +84,7 @@ public final class DesktopModeDragAndDropTransitionHandler implements Transition
                 transaction3.apply();
             }
         });
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeDragAndDropTransitionHandler$startAnimation$2
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeDragAndDropTransitionHandler.startAnimation.2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                 transaction3.setAlpha(leash, valueAnimator2.getAnimatedFraction());

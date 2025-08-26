@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ContextThemeWrapper extends ContextWrapper {
     public static Configuration sEmptyConfig;
@@ -41,11 +40,17 @@ public class ContextThemeWrapper extends ContextWrapper {
         return getResources().getAssets();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x002c  */
     @Override // android.content.ContextWrapper, android.content.Context
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Resources getResources() {
         if (this.mResources == null) {
             Configuration configuration = this.mOverrideConfiguration;
-            if (configuration != null) {
+            if (configuration == null) {
+                this.mResources = super.getResources();
+            } else {
                 if (sEmptyConfig == null) {
                     Configuration configuration2 = new Configuration();
                     configuration2.fontScale = 0.0f;
@@ -55,7 +60,6 @@ public class ContextThemeWrapper extends ContextWrapper {
                     this.mResources = createConfigurationContext(this.mOverrideConfiguration).getResources();
                 }
             }
-            this.mResources = super.getResources();
         }
         return this.mResources;
     }

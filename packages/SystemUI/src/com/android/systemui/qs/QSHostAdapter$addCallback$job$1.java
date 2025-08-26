@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSHostAdapter$addCallback$job$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ QSHost.Callback $callback;
@@ -46,7 +45,7 @@ final class QSHostAdapter$addCallback$job$1 extends SuspendLambda implements Fun
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.QSHostAdapter$addCallback$job$1.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    QSHost.Callback.this.onTilesChanged();
+                    callback.onTilesChanged();
                     return Unit.INSTANCE;
                 }
             };

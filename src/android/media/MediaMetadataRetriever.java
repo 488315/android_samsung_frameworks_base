@@ -1,12 +1,17 @@
 package android.media;
 
 import android.annotation.SystemApi;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.FileUtils;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import com.samsung.android.audio.SoundTheme;
@@ -142,15 +147,15 @@ public class MediaMetadataRetriever implements AutoCloseable {
         native_setup();
     }
 
-    public void setDataSource(String str) throws IllegalArgumentException {
+    public void setDataSource(String str) throws IOException, IllegalArgumentException {
         if (str == null) {
             Log.e(TAG, "setDataSource path is null");
             throw new IllegalArgumentException("null path");
         }
-        Uri parse = Uri.parse(str);
-        String scheme = parse.getScheme();
+        Uri uri = Uri.parse(str);
+        String scheme = uri.getScheme();
         if ("file".equals(scheme)) {
-            str = parse.getPath();
+            str = uri.getPath();
         } else if (scheme != null) {
             setDataSource(str, new HashMap());
             return;
@@ -185,15 +190,15 @@ public class MediaMetadataRetriever implements AutoCloseable {
 
     public void setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalArgumentException {
         try {
-            ParcelFileDescriptor convertToModernFd = FileUtils.convertToModernFd(fileDescriptor);
+            ParcelFileDescriptor parcelFileDescriptorConvertToModernFd = FileUtils.convertToModernFd(fileDescriptor);
             try {
-                if (convertToModernFd == null) {
+                if (parcelFileDescriptorConvertToModernFd == null) {
                     _setDataSource(fileDescriptor, j, j2);
                 } else {
-                    _setDataSource(convertToModernFd.getFileDescriptor(), j, j2);
+                    _setDataSource(parcelFileDescriptorConvertToModernFd.getFileDescriptor(), j, j2);
                 }
-                if (convertToModernFd != null) {
-                    convertToModernFd.close();
+                if (parcelFileDescriptorConvertToModernFd != null) {
+                    parcelFileDescriptorConvertToModernFd.close();
                 }
             } finally {
             }
@@ -207,19 +212,82 @@ public class MediaMetadataRetriever implements AutoCloseable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00c8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00c8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r6v1, types: [java.lang.String] */
     /* JADX WARN: Type inference failed for: r6v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setDataSource(android.content.Context r13, android.net.Uri r14) throws java.lang.IllegalArgumentException, java.lang.SecurityException {
-        /*
-            Method dump skipped, instructions count: 237
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.MediaMetadataRetriever.setDataSource(android.content.Context, android.net.Uri):void");
+    public void setDataSource(Context context, Uri uri) throws IOException, SecurityException, IllegalArgumentException {
+        if (uri == null) {
+            Log.e(TAG, "setDataSource - uri is null");
+            throw new IllegalArgumentException("null uri");
+        }
+        String scheme = uri.getScheme();
+        if (scheme != null) {
+            MediaMetadataRetriever mediaMetadataRetriever = "file";
+            if (!scheme.equals("file")) {
+                AutoCloseable autoCloseable = null;
+                try {
+                    try {
+                        try {
+                            ContentResolver contentResolver = context.getContentResolver();
+                            try {
+                                boolean z = SystemProperties.getBoolean("fuse.sys.transcode_retriever_optimize", false);
+                                Bundle bundle = new Bundle();
+                                bundle.putBoolean("android.provider.extra.ACCEPT_ORIGINAL_MEDIA_FORMAT", true);
+                                AssetFileDescriptor assetFileDescriptorOpenTypedAssetFileDescriptor = z ? contentResolver.openTypedAssetFileDescriptor(uri, "*/*", bundle) : contentResolver.openAssetFileDescriptor(uri, "r");
+                                if (assetFileDescriptorOpenTypedAssetFileDescriptor == null) {
+                                    Log.e(TAG, "setDataSource - fd is null");
+                                    throw new IllegalArgumentException("got null FileDescriptor for " + uri);
+                                }
+                                FileDescriptor fileDescriptor = assetFileDescriptorOpenTypedAssetFileDescriptor.getFileDescriptor();
+                                if (!fileDescriptor.valid()) {
+                                    Log.e(TAG, "setDataSource -descriptor is not valid");
+                                    throw new IllegalArgumentException("got invalid FileDescriptor for " + uri);
+                                }
+                                if (assetFileDescriptorOpenTypedAssetFileDescriptor.getDeclaredLength() < 0) {
+                                    setDataSource(fileDescriptor);
+                                } else {
+                                    setDataSource(fileDescriptor, assetFileDescriptorOpenTypedAssetFileDescriptor.getStartOffset(), assetFileDescriptorOpenTypedAssetFileDescriptor.getDeclaredLength());
+                                }
+                                if (assetFileDescriptorOpenTypedAssetFileDescriptor != null) {
+                                    try {
+                                        assetFileDescriptorOpenTypedAssetFileDescriptor.close();
+                                        return;
+                                    } catch (IOException unused) {
+                                        Log.e(TAG, "setDataSource -descriptor is not valid");
+                                        return;
+                                    }
+                                }
+                                return;
+                            } catch (FileNotFoundException unused2) {
+                                Log.e(TAG, "setDataSource - FileNotFoundException");
+                                throw new IllegalArgumentException("could not access " + uri);
+                            }
+                        } catch (SecurityException unused3) {
+                            mediaMetadataRetriever = this;
+                            if (0 != 0) {
+                                try {
+                                    autoCloseable.close();
+                                } catch (IOException unused4) {
+                                    Log.e(TAG, "setDataSource -descriptor is not valid");
+                                }
+                            }
+                            mediaMetadataRetriever.setDataSource(uri.toString());
+                            return;
+                        }
+                    } catch (SecurityException unused5) {
+                        if (0 != 0) {
+                        }
+                        mediaMetadataRetriever.setDataSource(uri.toString());
+                        return;
+                    }
+                } finally {
+                }
+            }
+        }
+        setDataSource(uri.getPath());
     }
 
     public void setDataSource(MediaDataSource mediaDataSource) throws IllegalArgumentException {
@@ -227,79 +295,79 @@ public class MediaMetadataRetriever implements AutoCloseable {
     }
 
     public String extractMetadata(int i) {
-        String nativeExtractMetadata = nativeExtractMetadata(i);
-        return i == 6 ? convertGenreTag(nativeExtractMetadata) : nativeExtractMetadata;
+        String strNativeExtractMetadata = nativeExtractMetadata(i);
+        return i == 6 ? convertGenreTag(strNativeExtractMetadata) : strNativeExtractMetadata;
     }
 
-    private String convertGenreTag(String str) {
-        String str2;
+    private String convertGenreTag(String str) throws NumberFormatException {
+        String strSubstring;
         if (TextUtils.isEmpty(str)) {
             return null;
         }
         if (Character.isDigit(str.charAt(0))) {
             try {
-                int parseInt = Integer.parseInt(str);
-                if (parseInt >= 0) {
+                int i = Integer.parseInt(str);
+                if (i >= 0) {
                     String[] strArr = STANDARD_GENRES;
-                    if (parseInt < strArr.length) {
-                        return strArr[parseInt];
+                    if (i < strArr.length) {
+                        return strArr[i];
                     }
                 }
             } catch (NumberFormatException unused) {
             }
             return null;
         }
-        String str3 = null;
+        String strSubstring2 = null;
         StringBuilder sb = null;
         while (true) {
-            if (!TextUtils.isEmpty(str3)) {
+            if (!TextUtils.isEmpty(strSubstring2)) {
                 if (sb == null) {
                     sb = new StringBuilder();
                 }
                 if (sb.length() != 0) {
                     sb.append(", ");
                 }
-                sb.append(str3);
+                sb.append(strSubstring2);
             }
             if (!TextUtils.isEmpty(str)) {
                 if (str.startsWith("(RX)")) {
                     str = str.substring(4);
-                    str3 = "Remix";
+                    strSubstring2 = "Remix";
                 } else if (str.startsWith("(CR)")) {
                     str = str.substring(4);
-                    str3 = "Cover";
+                    strSubstring2 = "Cover";
                 } else if (str.startsWith("((")) {
-                    int indexOf = str.indexOf(41);
-                    if (indexOf == -1) {
-                        str3 = str.substring(1);
+                    int iIndexOf = str.indexOf(41);
+                    if (iIndexOf == -1) {
+                        strSubstring2 = str.substring(1);
                         str = "";
                     } else {
-                        int i = indexOf + 1;
-                        str2 = str.substring(1, i);
-                        str = str.substring(i);
-                        str3 = str2;
+                        int i2 = iIndexOf + 1;
+                        strSubstring = str.substring(1, i2);
+                        str = str.substring(i2);
+                        strSubstring2 = strSubstring;
                     }
                 } else if (str.startsWith(NavigationBarInflaterView.KEY_CODE_START)) {
-                    int indexOf2 = str.indexOf(41);
-                    if (indexOf2 == -1) {
+                    int iIndexOf2 = str.indexOf(41);
+                    if (iIndexOf2 == -1) {
                         return null;
                     }
                     try {
-                        int parseInt2 = Integer.parseInt(str.substring(1, indexOf2).toString());
-                        if (parseInt2 < 0) {
+                        int i3 = Integer.parseInt(str.substring(1, iIndexOf2).toString());
+                        if (i3 < 0) {
                             break;
                         }
                         String[] strArr2 = STANDARD_GENRES;
-                        if (parseInt2 >= strArr2.length) {
+                        if (i3 >= strArr2.length) {
                             break;
                         }
-                        str2 = strArr2[parseInt2];
-                        str = str.substring(indexOf2 + 1);
-                        str3 = str2;
+                        strSubstring = strArr2[i3];
+                        str = str.substring(iIndexOf2 + 1);
+                        strSubstring2 = strSubstring;
                     } catch (NumberFormatException unused2) {
                     }
                 } else {
-                    str3 = str;
+                    strSubstring2 = str;
                     str = "";
                 }
             } else {
@@ -393,12 +461,12 @@ public class MediaMetadataRetriever implements AutoCloseable {
         return getFramesAtIndexInternal(i, i2, null);
     }
 
-    private List<Bitmap> getFramesAtIndexInternal(int i, int i2, BitmapParams bitmapParams) {
+    private List<Bitmap> getFramesAtIndexInternal(int i, int i2, BitmapParams bitmapParams) throws NumberFormatException {
         if (!"yes".equals(extractMetadata(17))) {
             throw new IllegalStateException("Does not contain video or image sequences");
         }
-        int parseInt = Integer.parseInt(extractMetadata(32));
-        if (i < 0 || i2 < 1 || i >= parseInt || i > parseInt - i2) {
+        int i3 = Integer.parseInt(extractMetadata(32));
+        if (i < 0 || i2 < 1 || i >= i3 || i > i3 - i2) {
             throw new IllegalArgumentException("Invalid frameIndex or numFrames: " + i + ", " + i2);
         }
         return _getFrameAtIndex(i, i2, bitmapParams);
@@ -424,9 +492,9 @@ public class MediaMetadataRetriever implements AutoCloseable {
         if (!"yes".equals(extractMetadata(26))) {
             throw new IllegalStateException("Does not contain still images");
         }
-        String extractMetadata = extractMetadata(27);
-        if (i >= Integer.parseInt(extractMetadata)) {
-            throw new IllegalArgumentException("Invalid image index: " + extractMetadata);
+        String strExtractMetadata = extractMetadata(27);
+        if (i >= Integer.parseInt(strExtractMetadata)) {
+            throw new IllegalArgumentException("Invalid image index: " + strExtractMetadata);
         }
         return _getImageAtIndex(i, bitmapParams);
     }

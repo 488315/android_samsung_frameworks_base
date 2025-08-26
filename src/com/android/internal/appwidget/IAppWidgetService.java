@@ -367,9 +367,9 @@ public interface IAppWidgetService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppWidgetService)) {
-                return (IAppWidgetService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppWidgetService)) {
+                return (IAppWidgetService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -481,42 +481,42 @@ public interface IAppWidgetService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IAppWidgetHost asInterface = IAppWidgetHost.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
+                    IAppWidgetHost iAppWidgetHostAsInterface = IAppWidgetHost.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice startListening = startListening(asInterface, readString, readInt, createIntArray);
+                    ParceledListSlice parceledListSliceStartListening = startListening(iAppWidgetHostAsInterface, string, i3, iArrCreateIntArray);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startListening, 1);
+                    parcel2.writeTypedObject(parceledListSliceStartListening, 1);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopListening(readString2, readInt2);
+                    stopListening(string2, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int allocateAppWidgetId = allocateAppWidgetId(readString3, readInt3);
+                    int iAllocateAppWidgetId = allocateAppWidgetId(string3, i5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(allocateAppWidgetId);
+                    parcel2.writeInt(iAllocateAppWidgetId);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteAppWidgetId(readString4, readInt4);
+                    deleteAppWidgetId(string4, i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteHost(readString5, readInt5);
+                    deleteHost(string5, i7);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -524,90 +524,90 @@ public interface IAppWidgetService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString6 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    RemoteViews appWidgetViews = getAppWidgetViews(readString6, readInt6);
+                    RemoteViews appWidgetViews = getAppWidgetViews(string6, i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(appWidgetViews, 1);
                     return true;
                 case 8:
-                    String readString7 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] appWidgetIdsForHost = getAppWidgetIdsForHost(readString7, readInt7);
+                    int[] appWidgetIdsForHost = getAppWidgetIdsForHost(string7, i9);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(appWidgetIdsForHost);
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppWidgetHidden(readString8, readInt8);
+                    setAppWidgetHidden(string8, i10);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString9 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IntentSender createAppWidgetConfigIntentSender = createAppWidgetConfigIntentSender(readString9, readInt9, readInt10);
+                    IntentSender intentSenderCreateAppWidgetConfigIntentSender = createAppWidgetConfigIntentSender(string9, i11, i12);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createAppWidgetConfigIntentSender, 1);
+                    parcel2.writeTypedObject(intentSenderCreateAppWidgetConfigIntentSender, 1);
                     return true;
                 case 11:
-                    String readString10 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IntentSender semCreateAppWidgetConfigIntentSender = semCreateAppWidgetConfigIntentSender(readString10, readInt11, readInt12);
+                    IntentSender intentSenderSemCreateAppWidgetConfigIntentSender = semCreateAppWidgetConfigIntentSender(string10, i13, i14);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(semCreateAppWidgetConfigIntentSender, 1);
+                    parcel2.writeTypedObject(intentSenderSemCreateAppWidgetConfigIntentSender, 1);
                     return true;
                 case 12:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    semSetSkipPackageChanged(readString11);
+                    semSetSkipPackageChanged(string11);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString12 = parcel.readString();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    int readInt13 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeHostIds(readString12, createIntArray2, readInt13);
+                    changeHostIds(string12, iArrCreateIntArray2, i15);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString13 = parcel.readString();
-                    int[] createIntArray3 = parcel.createIntArray();
+                    String string13 = parcel.readString();
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
                     RemoteViews remoteViews = (RemoteViews) parcel.readTypedObject(RemoteViews.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateAppWidgetIds(readString13, createIntArray3, remoteViews);
+                    updateAppWidgetIds(string13, iArrCreateIntArray3, remoteViews);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    String readString14 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    int i16 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateAppWidgetOptions(readString14, readInt14, bundle);
+                    updateAppWidgetOptions(string14, i16, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString15 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    String string15 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle appWidgetOptions = getAppWidgetOptions(readString15, readInt15);
+                    Bundle appWidgetOptions = getAppWidgetOptions(string15, i17);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(appWidgetOptions, 1);
                     return true;
                 case 17:
-                    String readString16 = parcel.readString();
-                    int[] createIntArray4 = parcel.createIntArray();
+                    String string16 = parcel.readString();
+                    int[] iArrCreateIntArray4 = parcel.createIntArray();
                     RemoteViews remoteViews2 = (RemoteViews) parcel.readTypedObject(RemoteViews.CREATOR);
                     parcel.enforceNoDataAvail();
-                    partiallyUpdateAppWidgetIds(readString16, createIntArray4, remoteViews2);
+                    partiallyUpdateAppWidgetIds(string16, iArrCreateIntArray4, remoteViews2);
                     parcel2.writeNoException();
                     return true;
                 case 18:
@@ -619,75 +619,75 @@ public interface IAppWidgetService extends IInterface {
                     return true;
                 case 19:
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateAppWidgetProviderInfo(componentName2, readString17);
+                    updateAppWidgetProviderInfo(componentName2, string17);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString18 = parcel.readString();
-                    int[] createIntArray5 = parcel.createIntArray();
-                    int readInt16 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int[] iArrCreateIntArray5 = parcel.createIntArray();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyAppWidgetViewDataChanged(readString18, createIntArray5, readInt16);
+                    notifyAppWidgetViewDataChanged(string18, iArrCreateIntArray5, i18);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    String readString19 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice installedProvidersForProfile = getInstalledProvidersForProfile(readInt17, readInt18, readString19);
+                    ParceledListSlice installedProvidersForProfile = getInstalledProvidersForProfile(i19, i20, string19);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(installedProvidersForProfile, 1);
                     return true;
                 case 22:
-                    String readString20 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    AppWidgetProviderInfo appWidgetInfo = getAppWidgetInfo(readString20, readInt19);
+                    AppWidgetProviderInfo appWidgetInfo = getAppWidgetInfo(string20, i21);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(appWidgetInfo, 1);
                     return true;
                 case 23:
-                    String readString21 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasBindAppWidgetPermission = hasBindAppWidgetPermission(readString21, readInt20);
+                    boolean zHasBindAppWidgetPermission = hasBindAppWidgetPermission(string21, i22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasBindAppWidgetPermission);
+                    parcel2.writeBoolean(zHasBindAppWidgetPermission);
                     return true;
                 case 24:
-                    String readString22 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string22 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBindAppWidgetPermission(readString22, readInt21, readBoolean);
+                    setBindAppWidgetPermission(string22, i23, z);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    String readString23 = parcel.readString();
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     ComponentName componentName3 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean bindAppWidgetId = bindAppWidgetId(readString23, readInt22, readInt23, componentName3, bundle2);
+                    boolean zBindAppWidgetId = bindAppWidgetId(string23, i24, i25, componentName3, bundle2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(bindAppWidgetId);
+                    parcel2.writeBoolean(zBindAppWidgetId);
                     return true;
                 case 26:
-                    String readString24 = parcel.readString();
-                    int readInt24 = parcel.readInt();
+                    String string24 = parcel.readString();
+                    int i26 = parcel.readInt();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    IApplicationThread asInterface2 = IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IServiceConnection asInterface3 = IServiceConnection.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong = parcel.readLong();
+                    IApplicationThread iApplicationThreadAsInterface = IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IServiceConnection iServiceConnectionAsInterface = IServiceConnection.Stub.asInterface(parcel.readStrongBinder());
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean bindRemoteViewsService = bindRemoteViewsService(readString24, readInt24, intent, asInterface2, readStrongBinder, asInterface3, readLong);
+                    boolean zBindRemoteViewsService = bindRemoteViewsService(string24, i26, intent, iApplicationThreadAsInterface, strongBinder, iServiceConnectionAsInterface, j);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(bindRemoteViewsService);
+                    parcel2.writeBoolean(zBindRemoteViewsService);
                     return true;
                 case 27:
                     ComponentName[] componentNameArr = (ComponentName[]) parcel.createTypedArray(ComponentName.CREATOR);
@@ -708,112 +708,112 @@ public interface IAppWidgetService extends IInterface {
                     parcel2.writeIntArray(appWidgetIds);
                     return true;
                 case 30:
-                    String readString25 = parcel.readString();
-                    int readInt25 = parcel.readInt();
+                    String string25 = parcel.readString();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isBoundWidgetPackage = isBoundWidgetPackage(readString25, readInt25);
+                    boolean zIsBoundWidgetPackage = isBoundWidgetPackage(string25, i27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBoundWidgetPackage);
+                    parcel2.writeBoolean(zIsBoundWidgetPackage);
                     return true;
                 case 31:
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     ComponentName componentName5 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean requestPinAppWidget = requestPinAppWidget(readString26, componentName5, bundle3, intentSender);
+                    boolean zRequestPinAppWidget = requestPinAppWidget(string26, componentName5, bundle3, intentSender);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestPinAppWidget);
+                    parcel2.writeBoolean(zRequestPinAppWidget);
                     return true;
                 case 32:
-                    boolean isRequestPinAppWidgetSupported = isRequestPinAppWidgetSupported();
+                    boolean zIsRequestPinAppWidgetSupported = isRequestPinAppWidgetSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRequestPinAppWidgetSupported);
+                    parcel2.writeBoolean(zIsRequestPinAppWidgetSupported);
                     return true;
                 case 33:
-                    String readString27 = parcel.readString();
-                    int readInt26 = parcel.readInt();
+                    String string27 = parcel.readString();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    noteAppWidgetTapped(readString27, readInt26);
+                    noteAppWidgetTapped(string27, i28);
                     return true;
                 case 34:
-                    String readString28 = parcel.readString();
-                    int readInt27 = parcel.readInt();
+                    String string28 = parcel.readString();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Map allWidgets = getAllWidgets(readString28, readInt27);
+                    Map allWidgets = getAllWidgets(string28, i29);
                     parcel2.writeNoException();
                     parcel2.writeMap(allWidgets);
                     return true;
                 case 35:
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<AppWidgetProviderInfo> allProvidersForProfile = getAllProvidersForProfile(readInt28, readInt29, readBoolean2);
+                    List<AppWidgetProviderInfo> allProvidersForProfile = getAllProvidersForProfile(i30, i31, z2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(allProvidersForProfile, 1);
                     return true;
                 case 36:
                     ComponentName componentName6 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     RemoteViews remoteViews4 = (RemoteViews) parcel.readTypedObject(RemoteViews.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean widgetPreview = setWidgetPreview(componentName6, readInt30, remoteViews4);
+                    boolean widgetPreview = setWidgetPreview(componentName6, i32, remoteViews4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(widgetPreview);
                     return true;
                 case 37:
-                    String readString29 = parcel.readString();
+                    String string29 = parcel.readString();
                     ComponentName componentName7 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt31 = parcel.readInt();
-                    int readInt32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    RemoteViews widgetPreview2 = getWidgetPreview(readString29, componentName7, readInt31, readInt32);
+                    RemoteViews widgetPreview2 = getWidgetPreview(string29, componentName7, i33, i34);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(widgetPreview2, 1);
                     return true;
                 case 38:
                     ComponentName componentName8 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeWidgetPreview(componentName8, readInt33);
+                    removeWidgetPreview(componentName8, i35);
                     parcel2.writeNoException();
                     return true;
                 case 39:
                     ComponentName componentName9 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     RemoteViews[] remoteViewsArr = (RemoteViews[]) parcel.createTypedArray(RemoteViews.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean templateWidgetPreview = setTemplateWidgetPreview(componentName9, readInt34, readInt35, remoteViewsArr);
+                    boolean templateWidgetPreview = setTemplateWidgetPreview(componentName9, i36, i37, remoteViewsArr);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(templateWidgetPreview);
                     return true;
                 case 40:
-                    String readString30 = parcel.readString();
+                    String string30 = parcel.readString();
                     ComponentName componentName10 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt36 = parcel.readInt();
-                    int readInt37 = parcel.readInt();
-                    int readInt38 = parcel.readInt();
+                    int i38 = parcel.readInt();
+                    int i39 = parcel.readInt();
+                    int i40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle templateWidgetPreview2 = getTemplateWidgetPreview(readString30, componentName10, readInt36, readInt37, readInt38);
+                    Bundle templateWidgetPreview2 = getTemplateWidgetPreview(string30, componentName10, i38, i39, i40);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(templateWidgetPreview2, 1);
                     return true;
                 case 41:
                     ComponentName componentName11 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt39 = parcel.readInt();
-                    int readInt40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeTemplateWidgetPreview(componentName11, readInt39, readInt40);
+                    removeTemplateWidgetPreview(componentName11, i41, i42);
                     parcel2.writeNoException();
                     return true;
                 case 42:
                     ComponentName componentName12 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isTemplatePreviewUpdateAvailable = isTemplatePreviewUpdateAvailable(componentName12);
+                    boolean zIsTemplatePreviewUpdateAvailable = isTemplatePreviewUpdateAvailable(componentName12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTemplatePreviewUpdateAvailable);
+                    parcel2.writeBoolean(zIsTemplatePreviewUpdateAvailable);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -838,715 +838,715 @@ public interface IAppWidgetService extends IInterface {
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public ParceledListSlice startListening(IAppWidgetHost iAppWidgetHost, String str, int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAppWidgetHost);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAppWidgetHost);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void stopListening(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public int allocateAppWidgetId(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void deleteAppWidgetId(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void deleteHost(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void deleteAllHosts() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public RemoteViews getAppWidgetViews(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RemoteViews) obtain2.readTypedObject(RemoteViews.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RemoteViews) parcelObtain2.readTypedObject(RemoteViews.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public int[] getAppWidgetIdsForHost(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void setAppWidgetHidden(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public IntentSender createAppWidgetConfigIntentSender(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IntentSender) obtain2.readTypedObject(IntentSender.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IntentSender) parcelObtain2.readTypedObject(IntentSender.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public IntentSender semCreateAppWidgetConfigIntentSender(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IntentSender) obtain2.readTypedObject(IntentSender.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IntentSender) parcelObtain2.readTypedObject(IntentSender.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void semSetSkipPackageChanged(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void changeHostIds(String str, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void updateAppWidgetIds(String str, int[] iArr, RemoteViews remoteViews) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedObject(remoteViews, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedObject(remoteViews, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void updateAppWidgetOptions(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public Bundle getAppWidgetOptions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void partiallyUpdateAppWidgetIds(String str, int[] iArr, RemoteViews remoteViews) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedObject(remoteViews, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedObject(remoteViews, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void updateAppWidgetProvider(ComponentName componentName, RemoteViews remoteViews) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(remoteViews, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(remoteViews, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void updateAppWidgetProviderInfo(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void notifyAppWidgetViewDataChanged(String str, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public ParceledListSlice getInstalledProvidersForProfile(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public AppWidgetProviderInfo getAppWidgetInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AppWidgetProviderInfo) obtain2.readTypedObject(AppWidgetProviderInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AppWidgetProviderInfo) parcelObtain2.readTypedObject(AppWidgetProviderInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean hasBindAppWidgetPermission(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void setBindAppWidgetPermission(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean bindAppWidgetId(String str, int i, int i2, ComponentName componentName, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean bindRemoteViewsService(String str, int i, Intent intent, IApplicationThread iApplicationThread, IBinder iBinder, IServiceConnection iServiceConnection, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeStrongInterface(iApplicationThread);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iServiceConnection);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeStrongInterface(iApplicationThread);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iServiceConnection);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void notifyProviderInheritance(ComponentName[] componentNameArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(componentNameArr, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(componentNameArr, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public int getMaxBitmapMemory() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public int[] getAppWidgetIds(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean isBoundWidgetPackage(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean requestPinAppWidget(String str, ComponentName componentName, Bundle bundle, IntentSender intentSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean isRequestPinAppWidgetSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void noteAppWidgetTapped(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public Map getAllWidgets(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public List<AppWidgetProviderInfo> getAllProvidersForProfile(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppWidgetProviderInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppWidgetProviderInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean setWidgetPreview(ComponentName componentName, int i, RemoteViews remoteViews) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteViews, 0);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteViews, 0);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public RemoteViews getWidgetPreview(String str, ComponentName componentName, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RemoteViews) obtain2.readTypedObject(RemoteViews.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RemoteViews) parcelObtain2.readTypedObject(RemoteViews.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void removeWidgetPreview(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean setTemplateWidgetPreview(ComponentName componentName, int i, int i2, RemoteViews[] remoteViewsArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedArray(remoteViewsArr, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedArray(remoteViewsArr, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public Bundle getTemplateWidgetPreview(String str, ComponentName componentName, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public void removeTemplateWidgetPreview(ComponentName componentName, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
             public boolean isTemplatePreviewUpdateAvailable(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

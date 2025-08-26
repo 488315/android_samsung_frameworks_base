@@ -2,20 +2,33 @@ package com.android.wm.shell.bubbles;
 
 import android.content.LocusId;
 import android.content.pm.LauncherApps;
+import android.util.Log;
 import android.util.SparseArray;
 import com.android.wm.shell.bubbles.storage.BubbleEntity;
 import com.android.wm.shell.bubbles.storage.BubblePersistentRepository;
 import com.android.wm.shell.bubbles.storage.BubbleVolatileRepository;
+import com.android.wm.shell.bubbles.storage.BubbleXmlHelperKt;
 import com.android.wm.shell.common.ShellExecutor;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Dispatchers;
+import kotlinx.coroutines.Job;
+import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.SupervisorJobImpl;
 import kotlinx.coroutines.SupervisorKt;
@@ -23,7 +36,6 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.scheduling.DefaultIoScheduler;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleDataRepository {
     public final Executor bgExecutor;
@@ -35,6 +47,83 @@ public final class BubbleDataRepository {
     public final BubblePersistentRepository persistentRepository;
     public final BubbleVolatileRepository volatileRepository;
 
+    /* renamed from: com.android.wm.shell.bubbles.BubbleDataRepository$persistToDisk$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ SparseArray<List<BubbleEntity>> $entitiesByUser;
+        final /* synthetic */ Job $prev;
+        int label;
+        final /* synthetic */ BubbleDataRepository this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(Job job, BubbleDataRepository bubbleDataRepository, SparseArray<List<BubbleEntity>> sparseArray, Continuation continuation) {
+            super(2, continuation);
+            this.$prev = job;
+            this.this$0 = bubbleDataRepository;
+            this.$entitiesByUser = sparseArray;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass1(this.$prev, this.this$0, this.$entitiesByUser, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:16:0x0032, code lost:
+        
+            if (kotlinx.coroutines.YieldKt.yield(r4) == r0) goto L17;
+         */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                Job job = this.$prev;
+                if (job != null) {
+                    this.label = 1;
+                    if (JobKt.cancelAndJoin(job, this) != coroutineSingletons) {
+                    }
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    if (i != 2) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    BubblePersistentRepository bubblePersistentRepository = this.this$0.persistentRepository;
+                    SparseArray<List<BubbleEntity>> sparseArray = this.$entitiesByUser;
+                    synchronized (bubblePersistentRepository.bubbleFile) {
+                        try {
+                            FileOutputStream fileOutputStreamStartWrite = bubblePersistentRepository.bubbleFile.startWrite();
+                            fileOutputStreamStartWrite.getClass();
+                            try {
+                                BubbleXmlHelperKt.writeXml(fileOutputStreamStartWrite, sparseArray);
+                                bubblePersistentRepository.bubbleFile.finishWrite(fileOutputStreamStartWrite);
+                            } catch (Exception e) {
+                                Log.e("BubblePersistentRepository", "Failed to save bubble file, restoring backup", e);
+                                bubblePersistentRepository.bubbleFile.failWrite(fileOutputStreamStartWrite);
+                                Unit unit = Unit.INSTANCE;
+                            }
+                        } catch (IOException e2) {
+                            Log.e("BubblePersistentRepository", "Failed to save bubble file", e2);
+                        }
+                    }
+                    return Unit.INSTANCE;
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            this.label = 2;
+        }
+    }
+
     public BubbleDataRepository(LauncherApps launcherApps, ShellExecutor shellExecutor, Executor executor, BubblePersistentRepository bubblePersistentRepository) {
         this.launcherApps = launcherApps;
         this.mainExecutor = shellExecutor;
@@ -43,9 +132,9 @@ public final class BubbleDataRepository {
         this.volatileRepository = new BubbleVolatileRepository(launcherApps);
         DefaultScheduler defaultScheduler = Dispatchers.Default;
         DefaultIoScheduler defaultIoScheduler = DefaultIoScheduler.INSTANCE;
-        SupervisorJobImpl SupervisorJob$default = SupervisorKt.SupervisorJob$default();
+        SupervisorJobImpl supervisorJobImplSupervisorJob$default = SupervisorKt.SupervisorJob$default();
         defaultIoScheduler.getClass();
-        this.coroutineScope = CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(defaultIoScheduler, SupervisorJob$default));
+        this.coroutineScope = CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(defaultIoScheduler, supervisorJobImplSupervisorJob$default));
     }
 
     public static void persistToDisk$default(BubbleDataRepository bubbleDataRepository) {
@@ -55,10 +144,10 @@ public final class BubbleDataRepository {
             sparseArray = new SparseArray<>();
             int size = bubbleVolatileRepository.entitiesByUser.size();
             for (int i = 0; i < size; i++) {
-                int keyAt = bubbleVolatileRepository.entitiesByUser.keyAt(i);
+                int iKeyAt = bubbleVolatileRepository.entitiesByUser.keyAt(i);
                 List list = (List) bubbleVolatileRepository.entitiesByUser.valueAt(i);
                 list.getClass();
-                sparseArray.put(keyAt, CollectionsKt___CollectionsKt.toList(list));
+                sparseArray.put(iKeyAt, CollectionsKt___CollectionsKt.toList(list));
             }
         }
         bubbleDataRepository.persistToDisk(sparseArray);
@@ -80,11 +169,11 @@ public final class BubbleDataRepository {
                 String str3 = bubble.mTitle;
                 int taskId = bubble.getTaskId();
                 LocusId locusId = bubble.mLocusId;
-                r2 = locusId != null ? locusId.getId() : null;
-                r2 = new BubbleEntity(identifier, str, str2, bubble.mKey, i, i2, str3, taskId, r2, bubble.mIsDismissable);
+                id = locusId != null ? locusId.getId() : null;
+                id = new BubbleEntity(identifier, str, str2, bubble.mKey, i, i2, str3, taskId, id, bubble.mIsDismissable);
             }
-            if (r2 != null) {
-                arrayList.add(r2);
+            if (id != null) {
+                arrayList.add(id);
             }
         }
         return arrayList;
@@ -95,10 +184,10 @@ public final class BubbleDataRepository {
         int size = sparseArray.size();
         boolean z = false;
         for (int i = 0; i < size; i++) {
-            int keyAt = sparseArray.keyAt(i);
-            if (list.contains(Integer.valueOf(keyAt))) {
+            int iKeyAt = sparseArray.keyAt(i);
+            if (list.contains(Integer.valueOf(iKeyAt))) {
                 ArrayList arrayList = new ArrayList();
-                for (BubbleEntity bubbleEntity : sparseArray.get(keyAt)) {
+                for (BubbleEntity bubbleEntity : sparseArray.get(iKeyAt)) {
                     if (list.contains(Integer.valueOf(bubbleEntity.userId))) {
                         arrayList.add(bubbleEntity);
                     } else {
@@ -106,7 +195,7 @@ public final class BubbleDataRepository {
                     }
                 }
                 if (!arrayList.isEmpty()) {
-                    sparseArray2.put(keyAt, arrayList);
+                    sparseArray2.put(iKeyAt, arrayList);
                 }
             } else {
                 z = true;
@@ -120,6 +209,6 @@ public final class BubbleDataRepository {
     }
 
     public final void persistToDisk(SparseArray<List<BubbleEntity>> sparseArray) {
-        this.job = BuildersKt.launch$default(this.coroutineScope, null, null, new BubbleDataRepository$persistToDisk$1(this.job, this, sparseArray, null), 3);
+        this.job = BuildersKt.launch$default(this.coroutineScope, null, null, new AnonymousClass1(this.job, this, sparseArray, null), 3);
     }
 }

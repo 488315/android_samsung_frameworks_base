@@ -5,10 +5,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.sec.clipboard.util.HtmlUtils;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 /* loaded from: classes6.dex */
@@ -248,54 +250,54 @@ public class Caption implements Parcelable {
         return this.mEncoding;
     }
 
-    public static List<Caption> parseCaption(String str) {
+    public static List<Caption> parseCaption(String str) throws XmlPullParserException, IOException {
         if (str == null) {
             DLog.w_api(TAG, "parseCaption caption is null");
             return null;
         }
         ArrayList arrayList = new ArrayList();
         try {
-            XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-            String HTMLStringToTEXTString = HTMLStringToTEXTString(str);
-            if (HTMLStringToTEXTString == null) {
+            XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+            String strHTMLStringToTEXTString = HTMLStringToTEXTString(str);
+            if (strHTMLStringToTEXTString == null) {
                 DLog.e_api("parseCaption", "captions is null");
                 return null;
             }
-            newPullParser.setInput(new StringReader(HTMLStringToTEXTString.trim()));
-            String str2 = "";
-            for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.next()) {
+            xmlPullParserNewPullParser.setInput(new StringReader(strHTMLStringToTEXTString.trim()));
+            String attributeValue = "";
+            for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.next()) {
                 if (eventType != 2) {
-                    if (eventType == 3 && newPullParser.getName().equals("sec:ResCaptionInfo")) {
-                        str2 = "";
+                    if (eventType == 3 && xmlPullParserNewPullParser.getName().equals("sec:ResCaptionInfo")) {
+                        attributeValue = "";
                     }
                 } else {
-                    if ("sec:ResCaptionInfo".equals(newPullParser.getName())) {
-                        if ("resUri".equals(newPullParser.getAttributeName(0))) {
-                            str2 = newPullParser.getAttributeValue(0);
+                    if ("sec:ResCaptionInfo".equals(xmlPullParserNewPullParser.getName())) {
+                        if ("resUri".equals(xmlPullParserNewPullParser.getAttributeName(0))) {
+                            attributeValue = xmlPullParserNewPullParser.getAttributeValue(0);
                         }
-                    } else if ("Captions".equals(newPullParser.getName())) {
-                        if ("resUri".equals(newPullParser.getAttributeName(0))) {
-                            str2 = newPullParser.getAttributeValue(0);
+                    } else if ("Captions".equals(xmlPullParserNewPullParser.getName())) {
+                        if ("resUri".equals(xmlPullParserNewPullParser.getAttributeName(0))) {
+                            attributeValue = xmlPullParserNewPullParser.getAttributeValue(0);
                         }
-                    } else if (newPullParser.getName().equals("captionFileInfo")) {
+                    } else if (xmlPullParserNewPullParser.getName().equals("captionFileInfo")) {
                         Caption caption = new Caption();
-                        for (int i = 0; i < newPullParser.getAttributeCount(); i++) {
-                            String attributeName = newPullParser.getAttributeName(i);
+                        for (int i = 0; i < xmlPullParserNewPullParser.getAttributeCount(); i++) {
+                            String attributeName = xmlPullParserNewPullParser.getAttributeName(i);
                             if (attributeName != null) {
                                 if (attributeName.equals("uri")) {
-                                    caption.setCaptionUri(newPullParser.getAttributeValue(i));
+                                    caption.setCaptionUri(xmlPullParserNewPullParser.getAttributeValue(i));
                                 } else if (attributeName.equals("name")) {
-                                    caption.setName(newPullParser.getAttributeValue(i));
+                                    caption.setName(xmlPullParserNewPullParser.getAttributeValue(i));
                                 } else if (attributeName.equals("captionType")) {
-                                    caption.setCaptionType(CaptionType.stringToEnum(newPullParser.getAttributeValue(i)));
+                                    caption.setCaptionType(CaptionType.stringToEnum(xmlPullParserNewPullParser.getAttributeValue(i)));
                                 } else if (attributeName.equals("language")) {
-                                    caption.setLanguage(newPullParser.getAttributeValue(i));
+                                    caption.setLanguage(xmlPullParserNewPullParser.getAttributeValue(i));
                                 } else if (attributeName.equals("encoding")) {
-                                    caption.setEncoding(newPullParser.getAttributeValue(i));
+                                    caption.setEncoding(xmlPullParserNewPullParser.getAttributeValue(i));
                                 }
                             }
                         }
-                        caption.setResourceUri(str2);
+                        caption.setResourceUri(attributeValue);
                         DLog.d_api(TAG, "[parseCaption] - " + caption.toString());
                         arrayList.add(caption);
                     }

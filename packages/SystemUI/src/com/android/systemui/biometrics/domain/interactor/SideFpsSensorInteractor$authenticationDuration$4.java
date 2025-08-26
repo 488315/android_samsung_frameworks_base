@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SideFpsSensorInteractor$authenticationDuration$4 extends SuspendLambda implements Function2 {
     /* synthetic */ long J$0;
@@ -51,9 +50,9 @@ final class SideFpsSensorInteractor$authenticationDuration$4 extends SuspendLamb
         LogLevel logLevel = LogLevel.DEBUG;
         SideFpsLogger$$ExternalSyntheticLambda0 sideFpsLogger$$ExternalSyntheticLambda0 = new SideFpsLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = sideFpsLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("SideFpsLogger", logLevel, sideFpsLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).long1 = j;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("SideFpsLogger", logLevel, sideFpsLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).long1 = j;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

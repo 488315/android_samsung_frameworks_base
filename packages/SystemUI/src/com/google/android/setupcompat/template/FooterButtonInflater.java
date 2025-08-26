@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FooterButtonInflater {
     public final Context context;
@@ -17,9 +16,9 @@ public class FooterButtonInflater {
         this.context = context;
     }
 
-    public final FooterButton inflate(XmlPullParser xmlPullParser) {
+    public final FooterButton inflate(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int next;
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
         do {
             try {
                 next = xmlPullParser.next();
@@ -36,7 +35,7 @@ public class FooterButtonInflater {
             throw new InflateException(xmlPullParser.getPositionDescription() + ": No start tag found!");
         }
         if (xmlPullParser.getName().equals("FooterButton")) {
-            return new FooterButton(this.context, asAttributeSet);
+            return new FooterButton(this.context, attributeSetAsAttributeSet);
         }
         throw new InflateException(xmlPullParser.getPositionDescription() + ": not a FooterButton");
     }

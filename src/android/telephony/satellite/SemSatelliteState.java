@@ -67,11 +67,11 @@ public final class SemSatelliteState implements Parcelable {
     }
 
     private SemSatelliteState copy() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        SemSatelliteState semSatelliteState = new SemSatelliteState(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        SemSatelliteState semSatelliteState = new SemSatelliteState(parcelObtain);
+        parcelObtain.recycle();
         return semSatelliteState;
     }
 

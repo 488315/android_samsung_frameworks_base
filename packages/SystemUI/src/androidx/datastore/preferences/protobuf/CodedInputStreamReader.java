@@ -1,9 +1,9 @@
 package androidx.datastore.preferences.protobuf;
 
 import androidx.datastore.preferences.protobuf.Internal;
+import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CodedInputStreamReader {
     public int endGroupTag;
@@ -11,7 +11,6 @@ public final class CodedInputStreamReader {
     public int nextTag = 0;
     public int tag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.datastore.preferences.protobuf.CodedInputStreamReader$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType;
@@ -101,13 +100,13 @@ public final class CodedInputStreamReader {
         return codedInputStreamReader != null ? codedInputStreamReader : new CodedInputStreamReader(codedInputStream);
     }
 
-    public static void verifyPackedFixed32Length(int i) {
+    public static void verifyPackedFixed32Length(int i) throws InvalidProtocolBufferException {
         if ((i & 3) != 0) {
             throw new InvalidProtocolBufferException("Failed to parse the message.");
         }
     }
 
-    public static void verifyPackedFixed64Length(int i) {
+    public static void verifyPackedFixed64Length(int i) throws InvalidProtocolBufferException {
         if ((i & 7) != 0) {
             throw new InvalidProtocolBufferException("Failed to parse the message.");
         }
@@ -142,23 +141,23 @@ public final class CodedInputStreamReader {
         }
     }
 
-    public final void mergeMessageFieldInternal(Object obj, Schema schema, ExtensionRegistryLite extensionRegistryLite) {
+    public final void mergeMessageFieldInternal(Object obj, Schema schema, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException {
         CodedInputStream codedInputStream = this.input;
-        int readUInt32 = codedInputStream.readUInt32();
+        int uInt32 = codedInputStream.readUInt32();
         if (codedInputStream.recursionDepth >= codedInputStream.recursionLimit) {
             throw new InvalidProtocolBufferException("Protocol message had too many levels of nesting.  May be malicious.  Use setRecursionLimit() to increase the recursion depth limit.");
         }
-        int pushLimit = codedInputStream.pushLimit(readUInt32);
+        int iPushLimit = codedInputStream.pushLimit(uInt32);
         codedInputStream.recursionDepth++;
         schema.mergeFrom(obj, this, extensionRegistryLite);
         codedInputStream.checkLastTagWas(0);
         codedInputStream.recursionDepth--;
-        codedInputStream.popLimit(pushLimit);
+        codedInputStream.popLimit(iPushLimit);
     }
 
-    public final void readBoolList(List list) {
-        int readTag;
-        int readTag2;
+    public final void readBoolList(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof BooleanArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -169,10 +168,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -193,10 +192,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -209,13 +208,13 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final ByteString readBytes() {
+    public final ByteString readBytes() throws InvalidProtocolBufferException.InvalidWireTypeException {
         requireWireType(2);
         return this.input.readBytes();
     }
 
-    public final void readBytesList(Internal.ProtobufList protobufList) {
-        int readTag;
+    public final void readBytesList(Internal.ProtobufList protobufList) throws InvalidProtocolBufferException.InvalidWireTypeException {
+        int tag;
         if ((this.tag & 7) != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -225,15 +224,15 @@ public final class CodedInputStreamReader {
             if (codedInputStream.isAtEnd()) {
                 return;
             } else {
-                readTag = codedInputStream.readTag();
+                tag = codedInputStream.readTag();
             }
-        } while (readTag == this.tag);
-        this.nextTag = readTag;
+        } while (tag == this.tag);
+        this.nextTag = tag;
     }
 
-    public final void readDoubleList(List list) {
-        int readTag;
-        int readTag2;
+    public final void readDoubleList(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof DoubleArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -244,18 +243,18 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
                 throw InvalidProtocolBufferException.invalidWireType();
             }
-            int readUInt32 = codedInputStream.readUInt32();
-            verifyPackedFixed64Length(readUInt32);
-            int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+            int uInt32 = codedInputStream.readUInt32();
+            verifyPackedFixed64Length(uInt32);
+            int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
             do {
                 list.add(Double.valueOf(codedInputStream.readDouble()));
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -269,26 +268,26 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
-        int readUInt322 = codedInputStream.readUInt32();
-        verifyPackedFixed64Length(readUInt322);
-        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+        int uInt322 = codedInputStream.readUInt32();
+        verifyPackedFixed64Length(uInt322);
+        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
         do {
             doubleArrayList.addDouble(codedInputStream.readDouble());
         } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
     }
 
-    public final void readEnumList(List list) {
-        int readTag;
-        int readTag2;
+    public final void readEnumList(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -299,10 +298,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -323,10 +322,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -339,7 +338,7 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final Object readField(WireFormat$FieldType wireFormat$FieldType, Class cls, ExtensionRegistryLite extensionRegistryLite) {
+    public final Object readField(WireFormat$FieldType wireFormat$FieldType, Class cls, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException.InvalidWireTypeException {
         int i = AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[wireFormat$FieldType.ordinal()];
         CodedInputStream codedInputStream = this.input;
         switch (i) {
@@ -397,17 +396,17 @@ public final class CodedInputStreamReader {
         }
     }
 
-    public final void readFixed32List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readFixed32List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
             int i = this.tag & 7;
             if (i == 2) {
-                int readUInt32 = codedInputStream.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+                int uInt32 = codedInputStream.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
                 do {
                     list.add(Integer.valueOf(codedInputStream.readFixed32()));
                 } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -421,18 +420,18 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag = codedInputStream.readTag();
+                    tag = codedInputStream.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         IntArrayList intArrayList = (IntArrayList) list;
         int i2 = this.tag & 7;
         if (i2 == 2) {
-            int readUInt322 = codedInputStream.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+            int uInt322 = codedInputStream.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
             do {
                 intArrayList.addInt(codedInputStream.readFixed32());
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
@@ -446,15 +445,15 @@ public final class CodedInputStreamReader {
             if (codedInputStream.isAtEnd()) {
                 return;
             } else {
-                readTag2 = codedInputStream.readTag();
+                tag2 = codedInputStream.readTag();
             }
-        } while (readTag2 == this.tag);
-        this.nextTag = readTag2;
+        } while (tag2 == this.tag);
+        this.nextTag = tag2;
     }
 
-    public final void readFixed64List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readFixed64List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof LongArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -465,18 +464,18 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
                 throw InvalidProtocolBufferException.invalidWireType();
             }
-            int readUInt32 = codedInputStream.readUInt32();
-            verifyPackedFixed64Length(readUInt32);
-            int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+            int uInt32 = codedInputStream.readUInt32();
+            verifyPackedFixed64Length(uInt32);
+            int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
             do {
                 list.add(Long.valueOf(codedInputStream.readFixed64()));
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -490,34 +489,34 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
-        int readUInt322 = codedInputStream.readUInt32();
-        verifyPackedFixed64Length(readUInt322);
-        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+        int uInt322 = codedInputStream.readUInt32();
+        verifyPackedFixed64Length(uInt322);
+        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
         do {
             longArrayList.addLong(codedInputStream.readFixed64());
         } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
     }
 
-    public final void readFloatList(List list) {
-        int readTag;
-        int readTag2;
+    public final void readFloatList(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof FloatArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
             int i = this.tag & 7;
             if (i == 2) {
-                int readUInt32 = codedInputStream.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+                int uInt32 = codedInputStream.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
                 do {
                     list.add(Float.valueOf(codedInputStream.readFloat()));
                 } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -531,18 +530,18 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag = codedInputStream.readTag();
+                    tag = codedInputStream.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         FloatArrayList floatArrayList = (FloatArrayList) list;
         int i2 = this.tag & 7;
         if (i2 == 2) {
-            int readUInt322 = codedInputStream.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+            int uInt322 = codedInputStream.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
             do {
                 floatArrayList.addFloat(codedInputStream.readFloat());
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
@@ -556,15 +555,15 @@ public final class CodedInputStreamReader {
             if (codedInputStream.isAtEnd()) {
                 return;
             } else {
-                readTag2 = codedInputStream.readTag();
+                tag2 = codedInputStream.readTag();
             }
-        } while (readTag2 == this.tag);
-        this.nextTag = readTag2;
+        } while (tag2 == this.tag);
+        this.nextTag = tag2;
     }
 
-    public final void readInt32List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readInt32List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -575,10 +574,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -599,10 +598,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -615,9 +614,9 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final void readInt64List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readInt64List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof LongArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -628,10 +627,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -652,10 +651,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -668,26 +667,26 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final Object readMessage(Class cls, ExtensionRegistryLite extensionRegistryLite) {
+    public final Object readMessage(Class cls, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException {
         requireWireType(2);
-        Schema schemaFor = Protobuf.INSTANCE.schemaFor(cls);
-        Object newInstance = schemaFor.newInstance();
-        mergeMessageFieldInternal(newInstance, schemaFor, extensionRegistryLite);
-        schemaFor.makeImmutable(newInstance);
-        return newInstance;
+        Schema schemaSchemaFor = Protobuf.INSTANCE.schemaFor(cls);
+        Object objNewInstance = schemaSchemaFor.newInstance();
+        mergeMessageFieldInternal(objNewInstance, schemaSchemaFor, extensionRegistryLite);
+        schemaSchemaFor.makeImmutable(objNewInstance);
+        return objNewInstance;
     }
 
-    public final void readSFixed32List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readSFixed32List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
             int i = this.tag & 7;
             if (i == 2) {
-                int readUInt32 = codedInputStream.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+                int uInt32 = codedInputStream.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
                 do {
                     list.add(Integer.valueOf(codedInputStream.readSFixed32()));
                 } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -701,18 +700,18 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag = codedInputStream.readTag();
+                    tag = codedInputStream.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         IntArrayList intArrayList = (IntArrayList) list;
         int i2 = this.tag & 7;
         if (i2 == 2) {
-            int readUInt322 = codedInputStream.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+            int uInt322 = codedInputStream.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
             do {
                 intArrayList.addInt(codedInputStream.readSFixed32());
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
@@ -726,15 +725,15 @@ public final class CodedInputStreamReader {
             if (codedInputStream.isAtEnd()) {
                 return;
             } else {
-                readTag2 = codedInputStream.readTag();
+                tag2 = codedInputStream.readTag();
             }
-        } while (readTag2 == this.tag);
-        this.nextTag = readTag2;
+        } while (tag2 == this.tag);
+        this.nextTag = tag2;
     }
 
-    public final void readSFixed64List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readSFixed64List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof LongArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -745,18 +744,18 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
                 throw InvalidProtocolBufferException.invalidWireType();
             }
-            int readUInt32 = codedInputStream.readUInt32();
-            verifyPackedFixed64Length(readUInt32);
-            int totalBytesRead = codedInputStream.getTotalBytesRead() + readUInt32;
+            int uInt32 = codedInputStream.readUInt32();
+            verifyPackedFixed64Length(uInt32);
+            int totalBytesRead = codedInputStream.getTotalBytesRead() + uInt32;
             do {
                 list.add(Long.valueOf(codedInputStream.readSFixed64()));
             } while (codedInputStream.getTotalBytesRead() < totalBytesRead);
@@ -770,26 +769,26 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
-        int readUInt322 = codedInputStream.readUInt32();
-        verifyPackedFixed64Length(readUInt322);
-        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + readUInt322;
+        int uInt322 = codedInputStream.readUInt32();
+        verifyPackedFixed64Length(uInt322);
+        int totalBytesRead2 = codedInputStream.getTotalBytesRead() + uInt322;
         do {
             longArrayList.addLong(codedInputStream.readSFixed64());
         } while (codedInputStream.getTotalBytesRead() < totalBytesRead2);
     }
 
-    public final void readSInt32List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readSInt32List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -800,10 +799,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -824,10 +823,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -840,9 +839,9 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final void readSInt64List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readSInt64List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof LongArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -853,10 +852,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -877,10 +876,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -893,9 +892,9 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final void readStringListInternal(Internal.ProtobufList protobufList, boolean z) {
-        String readString;
-        int readTag;
+    public final void readStringListInternal(Internal.ProtobufList protobufList, boolean z) throws InvalidProtocolBufferException.InvalidWireTypeException {
+        String string;
+        int tag;
         if ((this.tag & 7) != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -903,24 +902,24 @@ public final class CodedInputStreamReader {
             CodedInputStream codedInputStream = this.input;
             if (z) {
                 requireWireType(2);
-                readString = codedInputStream.readStringRequireUtf8();
+                string = codedInputStream.readStringRequireUtf8();
             } else {
                 requireWireType(2);
-                readString = codedInputStream.readString();
+                string = codedInputStream.readString();
             }
-            protobufList.add(readString);
+            protobufList.add(string);
             if (codedInputStream.isAtEnd()) {
                 return;
             } else {
-                readTag = codedInputStream.readTag();
+                tag = codedInputStream.readTag();
             }
-        } while (readTag == this.tag);
-        this.nextTag = readTag;
+        } while (tag == this.tag);
+        this.nextTag = tag;
     }
 
-    public final void readUInt32List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readUInt32List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof IntArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -931,10 +930,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -955,10 +954,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -971,9 +970,9 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final void readUInt64List(List list) {
-        int readTag;
-        int readTag2;
+    public final void readUInt64List(List list) throws InvalidProtocolBufferException {
+        int tag;
+        int tag2;
         boolean z = list instanceof LongArrayList;
         CodedInputStream codedInputStream = this.input;
         if (!z) {
@@ -984,10 +983,10 @@ public final class CodedInputStreamReader {
                     if (codedInputStream.isAtEnd()) {
                         return;
                     } else {
-                        readTag = codedInputStream.readTag();
+                        tag = codedInputStream.readTag();
                     }
-                } while (readTag == this.tag);
-                this.nextTag = readTag;
+                } while (tag == this.tag);
+                this.nextTag = tag;
                 return;
             }
             if (i != 2) {
@@ -1008,10 +1007,10 @@ public final class CodedInputStreamReader {
                 if (codedInputStream.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = codedInputStream.readTag();
+                    tag2 = codedInputStream.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         if (i2 != 2) {
@@ -1024,13 +1023,13 @@ public final class CodedInputStreamReader {
         requirePosition(totalBytesRead2);
     }
 
-    public final void requirePosition(int i) {
+    public final void requirePosition(int i) throws InvalidProtocolBufferException {
         if (this.input.getTotalBytesRead() != i) {
             throw InvalidProtocolBufferException.truncatedMessage();
         }
     }
 
-    public final void requireWireType(int i) {
+    public final void requireWireType(int i) throws InvalidProtocolBufferException.InvalidWireTypeException {
         if ((this.tag & 7) != i) {
             throw InvalidProtocolBufferException.invalidWireType();
         }

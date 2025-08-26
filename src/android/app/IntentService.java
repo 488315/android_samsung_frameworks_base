@@ -54,10 +54,10 @@ public abstract class IntentService extends Service {
 
     @Override // android.app.Service
     public void onStart(Intent intent, int i) {
-        Message obtainMessage = this.mServiceHandler.obtainMessage();
-        obtainMessage.arg1 = i;
-        obtainMessage.obj = intent;
-        this.mServiceHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mServiceHandler.obtainMessage();
+        messageObtainMessage.arg1 = i;
+        messageObtainMessage.obj = intent;
+        this.mServiceHandler.sendMessage(messageObtainMessage);
     }
 
     @Override // android.app.Service

@@ -61,10 +61,10 @@ public final class ConvertCredentialRequest implements Parcelable {
 
     ConvertCredentialRequest(Parcel parcel) {
         GetCredentialResponse getCredentialResponse = (GetCredentialResponse) parcel.readTypedObject(GetCredentialResponse.CREATOR);
-        Bundle readBundle = parcel.readBundle();
+        Bundle bundle = parcel.readBundle();
         this.mGetCredentialResponse = getCredentialResponse;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) getCredentialResponse);
-        this.mClientState = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        this.mClientState = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 }

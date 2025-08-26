@@ -3,6 +3,7 @@ package android.widget;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BlendMode;
@@ -196,38 +197,38 @@ public class ImageView extends View {
         this.mBaseline = -1;
         this.mBaselineAlignBottom = false;
         initImageView();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ImageView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.ImageView, attributeSet, obtainStyledAttributes, i, i2);
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ImageView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.ImageView, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         if (drawable != null) {
             setImageDrawable(drawable);
         }
-        this.mBaselineAlignBottom = obtainStyledAttributes.getBoolean(6, false);
-        this.mBaseline = obtainStyledAttributes.getDimensionPixelSize(8, -1);
-        setAdjustViewBounds(obtainStyledAttributes.getBoolean(2, false));
-        setMaxWidth(obtainStyledAttributes.getDimensionPixelSize(3, Integer.MAX_VALUE));
-        setMaxHeight(obtainStyledAttributes.getDimensionPixelSize(4, Integer.MAX_VALUE));
-        int i3 = obtainStyledAttributes.getInt(1, -1);
+        this.mBaselineAlignBottom = typedArrayObtainStyledAttributes.getBoolean(6, false);
+        this.mBaseline = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, -1);
+        setAdjustViewBounds(typedArrayObtainStyledAttributes.getBoolean(2, false));
+        setMaxWidth(typedArrayObtainStyledAttributes.getDimensionPixelSize(3, Integer.MAX_VALUE));
+        setMaxHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(4, Integer.MAX_VALUE));
+        int i3 = typedArrayObtainStyledAttributes.getInt(1, -1);
         if (i3 >= 0) {
             setScaleType(sScaleTypeArray[i3]);
         }
-        if (obtainStyledAttributes.hasValue(5)) {
-            this.mDrawableTintList = obtainStyledAttributes.getColorStateList(5);
+        if (typedArrayObtainStyledAttributes.hasValue(5)) {
+            this.mDrawableTintList = typedArrayObtainStyledAttributes.getColorStateList(5);
             this.mHasDrawableTint = true;
             this.mDrawableBlendMode = BlendMode.SRC_ATOP;
             this.mHasDrawableBlendMode = true;
         }
-        if (obtainStyledAttributes.hasValue(9)) {
-            this.mDrawableBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(9, -1), this.mDrawableBlendMode);
+        if (typedArrayObtainStyledAttributes.hasValue(9)) {
+            this.mDrawableBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(9, -1), this.mDrawableBlendMode);
             this.mHasDrawableBlendMode = true;
         }
         applyImageTint();
-        int i4 = obtainStyledAttributes.getInt(10, 255);
+        int i4 = typedArrayObtainStyledAttributes.getInt(10, 255);
         if (i4 != 255) {
             setImageAlpha(i4);
         }
-        this.mCropToPadding = obtainStyledAttributes.getBoolean(7, false);
-        obtainStyledAttributes.recycle();
+        this.mCropToPadding = typedArrayObtainStyledAttributes.getBoolean(7, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private void initImageView() {
@@ -375,9 +376,9 @@ public class ImageView extends View {
                 Log.w(LOG_TAG, "Unable to find resource: " + i, e);
                 i = 0;
             }
-            return new ImageDrawableCallback(drawable, null, i);
+        } else {
+            drawable = null;
         }
-        drawable = null;
         return new ImageDrawableCallback(drawable, null, i);
     }
 
@@ -477,10 +478,10 @@ public class ImageView extends View {
         Drawable drawable = this.mDrawable;
         if (drawable != null) {
             if (this.mHasDrawableTint || this.mHasDrawableBlendMode) {
-                Drawable mutate = drawable.mutate();
-                this.mDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mDrawable = drawableMutate;
                 if (this.mHasDrawableTint) {
-                    mutate.setTintList(this.mDrawableTintList);
+                    drawableMutate.setTintList(this.mDrawableTintList);
                 }
                 if (this.mHasDrawableBlendMode) {
                     this.mDrawable.setTintBlendMode(this.mDrawableBlendMode);
@@ -650,101 +651,59 @@ public class ImageView extends View {
         return !this.mMergeState ? iArr : mergeDrawableStates(super.onCreateDrawableState(i + iArr.length), this.mState);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x005b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x005b, code lost:
     
         r3 = true;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void updateDrawable(android.graphics.drawable.Drawable r6) {
-        /*
-            r5 = this;
-            android.graphics.drawable.BitmapDrawable r0 = r5.mRecycleableBitmapDrawable
-            r1 = 0
-            if (r6 == r0) goto La
-            if (r0 == 0) goto La
-            r0.setBitmap(r1)
-        La:
-            android.graphics.drawable.Drawable r0 = r5.mDrawable
-            r2 = 1
-            r3 = 0
-            if (r0 == 0) goto L2f
-            if (r0 != r6) goto L14
-            r4 = r2
-            goto L15
-        L14:
-            r4 = r3
-        L15:
-            r0.setCallback(r1)
-            android.graphics.drawable.Drawable r0 = r5.mDrawable
-            r5.unscheduleDrawable(r0)
-            boolean r0 = android.widget.ImageView.sCompatDrawableVisibilityDispatch
-            if (r0 != 0) goto L30
-            if (r4 != 0) goto L30
-            boolean r0 = r5.isAttachedToWindow()
-            if (r0 == 0) goto L30
-            android.graphics.drawable.Drawable r0 = r5.mDrawable
-            r0.setVisible(r3, r3)
-            goto L30
-        L2f:
-            r4 = r3
-        L30:
-            r5.mDrawable = r6
-            if (r6 == 0) goto L98
-            r6.setCallback(r5)
-            int r0 = r5.getLayoutDirection()
-            r6.setLayoutDirection(r0)
-            boolean r0 = r6.isStateful()
-            if (r0 == 0) goto L4b
-            int[] r0 = r5.getDrawableState()
-            r6.setState(r0)
-        L4b:
-            if (r4 == 0) goto L51
-            boolean r0 = android.widget.ImageView.sCompatDrawableVisibilityDispatch
-            if (r0 == 0) goto L73
-        L51:
-            boolean r0 = android.widget.ImageView.sCompatDrawableVisibilityDispatch
-            if (r0 == 0) goto L5d
-            int r0 = r5.getVisibility()
-            if (r0 != 0) goto L70
-        L5b:
-            r3 = r2
-            goto L70
-        L5d:
-            boolean r0 = r5.isAttachedToWindow()
-            if (r0 == 0) goto L70
-            int r0 = r5.getWindowVisibility()
-            if (r0 != 0) goto L70
-            boolean r0 = r5.isShown()
-            if (r0 == 0) goto L70
-            goto L5b
-        L70:
-            r6.setVisible(r3, r2)
-        L73:
-            boolean r0 = r5.mHasLevelSet
-            if (r0 == 0) goto L7c
-            int r0 = r5.mLevel
-            r6.setLevel(r0)
-        L7c:
-            int r0 = r6.getIntrinsicWidth()
-            r5.mDrawableWidth = r0
-            int r6 = r6.getIntrinsicHeight()
-            r5.mDrawableHeight = r6
-            r5.applyImageTint()
-            r5.applyColorFilter()
-            r5.applyAlpha()
-            r5.applyXfermode()
-            r5.configureBounds()
-            return
-        L98:
-            r6 = -1
-            r5.mDrawableHeight = r6
-            r5.mDrawableWidth = r6
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.ImageView.updateDrawable(android.graphics.drawable.Drawable):void");
+    private void updateDrawable(Drawable drawable) {
+        boolean z;
+        BitmapDrawable bitmapDrawable = this.mRecycleableBitmapDrawable;
+        if (drawable != bitmapDrawable && bitmapDrawable != null) {
+            bitmapDrawable.setBitmap(null);
+        }
+        Drawable drawable2 = this.mDrawable;
+        boolean z2 = false;
+        if (drawable2 != null) {
+            z = drawable2 == drawable;
+            drawable2.setCallback(null);
+            unscheduleDrawable(this.mDrawable);
+            if (!sCompatDrawableVisibilityDispatch && !z && isAttachedToWindow()) {
+                this.mDrawable.setVisible(false, false);
+            }
+        } else {
+            z = false;
+        }
+        this.mDrawable = drawable;
+        if (drawable != null) {
+            drawable.setCallback(this);
+            drawable.setLayoutDirection(getLayoutDirection());
+            if (drawable.isStateful()) {
+                drawable.setState(getDrawableState());
+            }
+            if (!z || sCompatDrawableVisibilityDispatch) {
+                if (sCompatDrawableVisibilityDispatch) {
+                    drawable.setVisible(z2, true);
+                } else {
+                    drawable.setVisible(z2, true);
+                }
+            }
+            if (this.mHasLevelSet) {
+                drawable.setLevel(this.mLevel);
+            }
+            this.mDrawableWidth = drawable.getIntrinsicWidth();
+            this.mDrawableHeight = drawable.getIntrinsicHeight();
+            applyImageTint();
+            applyColorFilter();
+            applyAlpha();
+            applyXfermode();
+            configureBounds();
+            return;
+        }
+        this.mDrawableHeight = -1;
+        this.mDrawableWidth = -1;
     }
 
     private void resizeFromDrawable() {
@@ -780,18 +739,96 @@ public class ImageView extends View {
         return sS2FArray[scaleType.nativeInt - 1];
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00b2 A[PHI: r5
+      0x00b2: PHI (r5v9 int) = (r5v7 int), (r5v11 int) binds: [B:30:0x009a, B:36:0x00ad] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00d0 A[PHI: r5 r9
+      0x00d0: PHI (r5v8 int) = (r5v7 int), (r5v7 int), (r5v10 int), (r5v10 int), (r5v10 int) binds: [B:27:0x0080, B:29:0x0098, B:39:0x00b3, B:40:0x00b5, B:46:0x00cb] A[DONT_GENERATE, DONT_INLINE]
+      0x00d0: PHI (r9v7 int) = (r9v6 int), (r9v6 int), (r9v6 int), (r9v6 int), (r9v8 int) binds: [B:27:0x0080, B:29:0x0098, B:39:0x00b3, B:40:0x00b5, B:46:0x00cb] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r19, int r20) {
-        /*
-            Method dump skipped, instructions count: 214
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.ImageView.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int i3;
+        int i4;
+        float f;
+        boolean z;
+        boolean z2;
+        int iResolveSizeAndState;
+        int iResolveSizeAndState2;
+        boolean z3;
+        resolveUri();
+        int mode = View.MeasureSpec.getMode(i);
+        int mode2 = View.MeasureSpec.getMode(i2);
+        if (this.mDrawable == null) {
+            this.mDrawableWidth = -1;
+            this.mDrawableHeight = -1;
+            f = 0.0f;
+            z = false;
+            z2 = false;
+            i3 = 0;
+            i4 = 0;
+        } else {
+            i3 = this.mDrawableWidth;
+            i4 = this.mDrawableHeight;
+            if (i3 <= 0) {
+                i3 = 1;
+            }
+            if (i4 <= 0) {
+                i4 = 1;
+            }
+            if (this.mAdjustViewBounds) {
+                z = mode != 1073741824;
+                z2 = mode2 != 1073741824;
+                f = i3 / i4;
+            } else {
+                f = 0.0f;
+                z = false;
+                z2 = false;
+            }
+        }
+        int i5 = this.mPaddingLeft;
+        int i6 = this.mPaddingRight;
+        int i7 = this.mPaddingTop;
+        int i8 = this.mPaddingBottom;
+        if (z || z2) {
+            int iResolveAdjustedSize = resolveAdjustedSize(i3 + i5 + i6, this.mMaxWidth, i);
+            int iResolveAdjustedSize2 = resolveAdjustedSize(i4 + i7 + i8, this.mMaxHeight, i2);
+            if (f != 0.0f) {
+                float f2 = (iResolveAdjustedSize2 - i7) - i8;
+                if (Math.abs((((iResolveAdjustedSize - i5) - i6) / f2) - f) <= 1.0E-7d) {
+                    iResolveSizeAndState = iResolveAdjustedSize;
+                    iResolveSizeAndState2 = iResolveAdjustedSize2;
+                } else if (z) {
+                    int i9 = ((int) (f2 * f)) + i5 + i6;
+                    if (!z2 && !sCompatAdjustViewBounds) {
+                        iResolveAdjustedSize = resolveAdjustedSize(i9, this.mMaxWidth, i);
+                    }
+                    if (i9 <= iResolveAdjustedSize) {
+                        iResolveAdjustedSize = i9;
+                        z3 = true;
+                    } else {
+                        z3 = false;
+                    }
+                    if (!z3 && z2) {
+                        int i10 = ((int) (((iResolveAdjustedSize - i5) - i6) / f)) + i7 + i8;
+                        if (!z && !sCompatAdjustViewBounds) {
+                            iResolveAdjustedSize2 = resolveAdjustedSize(i10, this.mMaxHeight, i2);
+                        }
+                        if (i10 <= iResolveAdjustedSize2) {
+                            iResolveSizeAndState2 = i10;
+                            iResolveSizeAndState = iResolveAdjustedSize;
+                        }
+                    }
+                }
+            }
+        } else {
+            int iMax = Math.max(i3 + i5 + i6, getSuggestedMinimumWidth());
+            int iMax2 = Math.max(i4 + i7 + i8, getSuggestedMinimumHeight());
+            iResolveSizeAndState = resolveSizeAndState(iMax, i, 0);
+            iResolveSizeAndState2 = resolveSizeAndState(iMax2, i2, 0);
+        }
+        setMeasuredDimension(iResolveSizeAndState, iResolveSizeAndState2);
     }
 
     private int resolveAdjustedSize(int i, int i2, int i3) {
@@ -807,7 +844,7 @@ public class ImageView extends View {
     }
 
     @Override // android.view.View
-    protected boolean setFrame(int i, int i2, int i3, int i4) {
+    protected boolean setFrame(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         boolean frame = super.setFrame(i, i2, i3, i4);
         this.mHaveFrame = true;
         configureBounds();
@@ -870,11 +907,11 @@ public class ImageView extends View {
         }
         if (ScaleType.CENTER_INSIDE == this.mScaleType) {
             this.mDrawMatrix = this.mMatrix;
-            float min = (i > width || i2 > height) ? Math.min(width / i, height / i2) : 1.0f;
-            float round = Math.round((width - (i * min)) * 0.5f);
-            float round2 = Math.round((height - (i2 * min)) * 0.5f);
-            this.mDrawMatrix.setScale(min, min);
-            this.mDrawMatrix.postTranslate(round, round2);
+            float fMin = (i > width || i2 > height) ? Math.min(width / i, height / i2) : 1.0f;
+            float fRound = Math.round((width - (i * fMin)) * 0.5f);
+            float fRound2 = Math.round((height - (i2 * fMin)) * 0.5f);
+            this.mDrawMatrix.setScale(fMin, fMin);
+            this.mDrawMatrix.postTranslate(fRound, fRound2);
             return;
         }
         this.mTempSrc.set(0.0f, 0.0f, i, i2);
@@ -1034,9 +1071,9 @@ public class ImageView extends View {
         if (drawable == null || !this.mHasXfermode) {
             return;
         }
-        Drawable mutate = drawable.mutate();
-        this.mDrawable = mutate;
-        mutate.setXfermode(this.mXfermode);
+        Drawable drawableMutate = drawable.mutate();
+        this.mDrawable = drawableMutate;
+        drawableMutate.setXfermode(this.mXfermode);
     }
 
     private void applyColorFilter() {
@@ -1044,9 +1081,9 @@ public class ImageView extends View {
         if (drawable == null || !this.mHasColorFilter) {
             return;
         }
-        Drawable mutate = drawable.mutate();
-        this.mDrawable = mutate;
-        mutate.setColorFilter(this.mColorFilter);
+        Drawable drawableMutate = drawable.mutate();
+        this.mDrawable = drawableMutate;
+        drawableMutate.setColorFilter(this.mColorFilter);
     }
 
     private void applyAlpha() {
@@ -1054,9 +1091,9 @@ public class ImageView extends View {
         if (drawable == null || !this.mHasAlpha) {
             return;
         }
-        Drawable mutate = drawable.mutate();
-        this.mDrawable = mutate;
-        mutate.setAlpha((this.mAlpha * 256) >> 8);
+        Drawable drawableMutate = drawable.mutate();
+        this.mDrawable = drawableMutate;
+        drawableMutate.setAlpha((this.mAlpha * 256) >> 8);
     }
 
     @Override // android.view.View
@@ -1137,7 +1174,7 @@ public class ImageView extends View {
     }
 
     @Override // android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws Resources.NotFoundException, IOException {
         super.encodeProperties(viewHierarchyEncoder);
         viewHierarchyEncoder.addProperty("layout:baseline", getBaseline());
     }

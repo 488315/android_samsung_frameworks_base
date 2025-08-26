@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CredentialStorage implements Parcelable {
     public static final Parcelable.Creator<CredentialStorage> CREATOR = new Parcelable.Creator<CredentialStorage>() { // from class: com.samsung.android.knox.ucm.configurator.CredentialStorage.1

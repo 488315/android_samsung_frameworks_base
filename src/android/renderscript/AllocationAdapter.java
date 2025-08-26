@@ -171,7 +171,7 @@ public class AllocationAdapter extends Allocation {
         return createTyped(renderScript, allocation, Type.createXY(renderScript, allocation.getElement(), allocation.getType().getX(), allocation.getType().getY()));
     }
 
-    public static AllocationAdapter createTyped(RenderScript renderScript, Allocation allocation, Type type) {
+    public static AllocationAdapter createTyped(RenderScript renderScript, Allocation allocation, Type type) throws Throwable {
         renderScript.validate();
         if (allocation.mAdaptedAllocation != null) {
             throw new RSInvalidStateException("Adapters cannot be nested.");
@@ -193,11 +193,11 @@ public class AllocationAdapter extends Allocation {
                 }
             }
         }
-        long nAllocationAdapterCreate = renderScript.nAllocationAdapterCreate(allocation.getID(renderScript), type.getID(renderScript));
-        if (nAllocationAdapterCreate == 0) {
+        long jNAllocationAdapterCreate = renderScript.nAllocationAdapterCreate(allocation.getID(renderScript), type.getID(renderScript));
+        if (jNAllocationAdapterCreate == 0) {
             throw new RSRuntimeException("AllocationAdapter creation failed.");
         }
-        return new AllocationAdapter(nAllocationAdapterCreate, renderScript, allocation, type);
+        return new AllocationAdapter(jNAllocationAdapterCreate, renderScript, allocation, type);
     }
 
     @Override // android.renderscript.Allocation

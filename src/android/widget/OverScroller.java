@@ -131,12 +131,12 @@ public class OverScroller {
         }
         int i = this.mMode;
         if (i == 0) {
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mScrollerX.mStartTime;
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mScrollerX.mStartTime;
             int i2 = this.mScrollerX.mDuration;
-            if (currentAnimationTimeMillis < i2) {
+            if (jCurrentAnimationTimeMillis < i2) {
                 float f = i2;
-                float interpolation = this.mInterpolator.getInterpolation(currentAnimationTimeMillis / f);
-                float interpolation2 = this.mInterpolator.getInterpolation((currentAnimationTimeMillis - 1) / f);
+                float interpolation = this.mInterpolator.getInterpolation(jCurrentAnimationTimeMillis / f);
+                float interpolation2 = this.mInterpolator.getInterpolation((jCurrentAnimationTimeMillis - 1) / f);
                 this.mScrollerX.updateScroll(interpolation, interpolation2);
                 this.mScrollerY.updateScroll(interpolation, interpolation2);
             } else {
@@ -485,14 +485,14 @@ public class OverScroller {
         }
 
         private void adjustDuration(int i, int i2, int i3) {
-            float abs = Math.abs((i3 - i) / (i2 - i));
-            int i4 = (int) (abs * 100.0f);
+            float fAbs = Math.abs((i3 - i) / (i2 - i));
+            int i4 = (int) (fAbs * 100.0f);
             if (i4 < 100) {
                 float f = i4 / 100.0f;
                 int i5 = i4 + 1;
                 float[] fArr = SPLINE_TIME;
                 float f2 = fArr[i4];
-                this.mDuration = (int) (this.mDuration * (f2 + (((abs - f) / ((i5 / 100.0f) - f)) * (fArr[i5] - f2))));
+                this.mDuration = (int) (this.mDuration * (f2 + (((fAbs - f) / ((i5 / 100.0f) - f)) * (fArr[i5] - f2))));
             }
         }
 
@@ -523,9 +523,9 @@ public class OverScroller {
         }
 
         void extendDuration(int i) {
-            int currentAnimationTimeMillis = ((int) (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime)) + i;
-            this.mSplineDuration = currentAnimationTimeMillis;
-            this.mDuration = currentAnimationTimeMillis;
+            int iCurrentAnimationTimeMillis = ((int) (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime)) + i;
+            this.mSplineDuration = iCurrentAnimationTimeMillis;
+            this.mDuration = iCurrentAnimationTimeMillis;
             this.mFinished = false;
         }
 
@@ -559,7 +559,7 @@ public class OverScroller {
         }
 
         void fling(int i, int i2, int i3, int i4, int i5) {
-            double d;
+            double splineFlingDistance;
             this.mOver = i5;
             this.mFinished = false;
             this.mVelocity = i2;
@@ -578,17 +578,17 @@ public class OverScroller {
                 int splineFlingDuration = getSplineFlingDuration(i2);
                 this.mSplineDuration = splineFlingDuration;
                 this.mDuration = splineFlingDuration;
-                d = getSplineFlingDistance(i2);
+                splineFlingDistance = getSplineFlingDistance(i2);
                 if (sIsSmoothFlingEnabled && !this.mIsDVFSBoosting && (i2 >= 800 || i2 <= MINIMUM_BOOSTED_FLING_VELOCITY_NEGATIVE)) {
                     SemPerfManager.onSmoothScrollEvent(true);
                     this.mIsDVFSBoosting = true;
                 }
             } else {
-                d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+                splineFlingDistance = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
             }
-            int signum = (int) (d * Math.signum(r0));
-            this.mSplineDistance = signum;
-            int i6 = i + signum;
+            int iSignum = (int) (splineFlingDistance * Math.signum(r0));
+            this.mSplineDistance = iSignum;
+            int i6 = i + iSignum;
             this.mFinal = i6;
             if (i6 < i3) {
                 adjustDuration(this.mStart, i6, i3);
@@ -614,39 +614,39 @@ public class OverScroller {
             float f = DECELERATION_RATE;
             double d = f - 1.0d;
             if (sIsSmoothFlingEnabled) {
-                int abs = (int) ((Math.abs(i) / this.mMaximumVelocity) * 100.0f);
-                if (abs > 100) {
-                    abs = 100;
+                int iAbs = (int) ((Math.abs(i) / this.mMaximumVelocity) * 100.0f);
+                if (iAbs > 100) {
+                    iAbs = 100;
                 }
-                return (((1.0f - SPLINE_POSITION[abs]) * 3.0f) + DISTANCE_M2) * this.mFlingFriction * this.mPhysicalCoeff * Math.exp((DECELERATION_RATE / d) * splineDeceleration);
+                return (((1.0f - SPLINE_POSITION[iAbs]) * 3.0f) + DISTANCE_M2) * this.mFlingFriction * this.mPhysicalCoeff * Math.exp((DECELERATION_RATE / d) * splineDeceleration);
             }
             return this.mFlingFriction * this.mPhysicalCoeff * Math.exp((f / d) * splineDeceleration);
         }
 
         private int getSplineFlingDuration(int i) {
-            double exp;
+            double dExp;
             double splineDeceleration = getSplineDeceleration(i);
             double d = DECELERATION_RATE - 1.0d;
             if (sIsSmoothFlingEnabled) {
-                int abs = (int) ((Math.abs(i) / this.mMaximumVelocity) * 100.0f);
-                if (abs > 100) {
-                    abs = 100;
+                int iAbs = (int) ((Math.abs(i) / this.mMaximumVelocity) * 100.0f);
+                if (iAbs > 100) {
+                    iAbs = 100;
                 }
-                exp = (((1.0f - SPLINE_POSITION[abs]) * DURATION_M1) + DURATION_M2) * 1000.0d * Math.exp(splineDeceleration / d);
+                dExp = (((1.0f - SPLINE_POSITION[iAbs]) * DURATION_M1) + DURATION_M2) * 1000.0d * Math.exp(splineDeceleration / d);
             } else {
-                exp = Math.exp(splineDeceleration / d) * 1000.0d;
+                dExp = Math.exp(splineDeceleration / d) * 1000.0d;
             }
-            return (int) exp;
+            return (int) dExp;
         }
 
         private void fitOnBounceCurve(int i, int i2, int i3) {
             float f = (-i3) / this.mDeceleration;
             float f2 = i3;
-            float sqrt = (float) Math.sqrt((((((f2 * f2) / 2.0f) / Math.abs(r1)) + Math.abs(i2 - i)) * 2.0d) / Math.abs(this.mDeceleration));
-            this.mStartTime -= (int) ((sqrt - f) * 1000.0f);
+            float fSqrt = (float) Math.sqrt((((((f2 * f2) / 2.0f) / Math.abs(r1)) + Math.abs(i2 - i)) * 2.0d) / Math.abs(this.mDeceleration));
+            this.mStartTime -= (int) ((fSqrt - f) * 1000.0f);
             this.mStart = i2;
             this.mCurrentPosition = i2;
-            this.mVelocity = (int) ((-this.mDeceleration) * sqrt);
+            this.mVelocity = (int) ((-this.mDeceleration) * fSqrt);
         }
 
         private void startBounceAfterEdge(int i, int i2, int i3) {
@@ -683,21 +683,21 @@ public class OverScroller {
         private void onEdgeReached() {
             int i = this.mVelocity;
             float f = i * i;
-            float abs = f / (Math.abs(this.mDeceleration) * 2.0f);
-            float signum = Math.signum(this.mVelocity);
+            float fAbs = f / (Math.abs(this.mDeceleration) * 2.0f);
+            float fSignum = Math.signum(this.mVelocity);
             int i2 = this.mOver;
-            if (abs > i2) {
-                this.mDeceleration = ((-signum) * f) / (i2 * 2.0f);
-                abs = i2;
+            if (fAbs > i2) {
+                this.mDeceleration = ((-fSignum) * f) / (i2 * 2.0f);
+                fAbs = i2;
             }
-            this.mOver = (int) abs;
+            this.mOver = (int) fAbs;
             this.mState = 2;
             int i3 = this.mStart;
             int i4 = this.mVelocity;
             if (i4 <= 0) {
-                abs = -abs;
+                fAbs = -fAbs;
             }
-            this.mFinal = i3 + ((int) abs);
+            this.mFinal = i3 + ((int) fAbs);
             this.mDuration = -((int) ((i4 * 1000.0f) / this.mDeceleration));
             if (sUseRegulateCurrentTimeInterval) {
                 this.mUpdateCount = 0;
@@ -736,40 +736,40 @@ public class OverScroller {
             float f2;
             double d;
             double d2;
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mStartTime;
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mStartTime;
             if (sUseRegulateCurrentTimeInterval && this.mState == 0) {
                 if (OverScroller.sIntervalTime == 0 && this.mUpdateCount > 0) {
-                    currentAnimationTimeMillis = (this.mPrevTime + currentAnimationTimeMillis) / 2;
+                    jCurrentAnimationTimeMillis = (this.mPrevTime + jCurrentAnimationTimeMillis) / 2;
                 }
                 int i = this.mUpdateCount;
                 if (i > 30) {
                     long j = this.mPrevTime;
-                    long j2 = currentAnimationTimeMillis - j;
+                    long j2 = jCurrentAnimationTimeMillis - j;
                     long j3 = this.mPrevTimeGap;
                     if (j2 > j3 + 1) {
-                        currentAnimationTimeMillis = j + j3 + 1;
+                        jCurrentAnimationTimeMillis = j + j3 + 1;
                     } else if (j2 < j3 - 1) {
-                        currentAnimationTimeMillis = (j + j3) - 1;
+                        jCurrentAnimationTimeMillis = (j + j3) - 1;
                     }
                 }
-                if (currentAnimationTimeMillis < 0) {
-                    currentAnimationTimeMillis = 0;
+                if (jCurrentAnimationTimeMillis < 0) {
+                    jCurrentAnimationTimeMillis = 0;
                 }
-                this.mPrevTimeGap = currentAnimationTimeMillis - this.mPrevTime;
-                this.mPrevTime = currentAnimationTimeMillis;
+                this.mPrevTimeGap = jCurrentAnimationTimeMillis - this.mPrevTime;
+                this.mPrevTime = jCurrentAnimationTimeMillis;
                 this.mUpdateCount = i + 1;
             }
-            if (currentAnimationTimeMillis == 0) {
+            if (jCurrentAnimationTimeMillis == 0) {
                 return this.mDuration > 0;
             }
             int i2 = this.mDuration;
-            if (currentAnimationTimeMillis > i2) {
+            if (jCurrentAnimationTimeMillis > i2) {
                 return false;
             }
             int i3 = this.mState;
             if (i3 == 0) {
                 int i4 = this.mSplineDuration;
-                float f3 = currentAnimationTimeMillis / i4;
+                float f3 = jCurrentAnimationTimeMillis / i4;
                 int i5 = (int) (f3 * 100.0f);
                 if (i5 < 100) {
                     float f4 = i5 / 100.0f;
@@ -786,17 +786,17 @@ public class OverScroller {
                 d = f * i7;
                 this.mCurrVelocity = ((f2 * i7) / i4) * 1000.0f;
             } else if (i3 == 1) {
-                float f6 = currentAnimationTimeMillis / i2;
+                float f6 = jCurrentAnimationTimeMillis / i2;
                 float f7 = f6 * f6;
-                float signum = Math.signum(this.mVelocity);
+                float fSignum = Math.signum(this.mVelocity);
                 int i8 = this.mOver;
-                d = i8 * signum * ((3.0f * f7) - ((2.0f * f6) * f7));
-                this.mCurrVelocity = signum * i8 * 6.0f * ((-f6) + f7);
+                d = i8 * fSignum * ((3.0f * f7) - ((2.0f * f6) * f7));
+                this.mCurrVelocity = fSignum * i8 * 6.0f * ((-f6) + f7);
             } else {
                 if (i3 != 2) {
                     d2 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
                 } else {
-                    float f8 = currentAnimationTimeMillis / 1000.0f;
+                    float f8 = jCurrentAnimationTimeMillis / 1000.0f;
                     int i9 = this.mVelocity;
                     float f9 = this.mDeceleration;
                     this.mCurrVelocity = i9 + (f9 * f8);

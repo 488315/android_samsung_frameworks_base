@@ -45,9 +45,9 @@ public interface IVoiceInteractionSessionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceInteractionSessionService)) {
-                return (IVoiceInteractionSessionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceInteractionSessionService)) {
+                return (IVoiceInteractionSessionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface IVoiceInteractionSessionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                newSession(readStrongBinder, bundle, readInt);
+                newSession(strongBinder, bundle, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,15 +102,15 @@ public interface IVoiceInteractionSessionService extends IInterface {
 
             @Override // android.service.voice.IVoiceInteractionSessionService
             public void newSession(IBinder iBinder, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

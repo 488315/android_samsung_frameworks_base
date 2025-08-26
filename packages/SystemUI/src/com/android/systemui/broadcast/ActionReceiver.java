@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActionReceiver extends BroadcastReceiver implements Dumpable {
     public static final AtomicInteger index;
@@ -39,7 +38,6 @@ public final class ActionReceiver extends BroadcastReceiver implements Dumpable 
     public final ArraySet receiverDatas = new ArraySet();
     public final ArraySet activeCategories = new ArraySet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -109,47 +107,47 @@ public final class ActionReceiver extends BroadcastReceiver implements Dumpable 
         BroadcastDispatcherLogger broadcastDispatcherLogger = this.logger;
         int i = this.userId;
         broadcastDispatcherLogger.getClass();
-        String intent2 = intent.toString();
+        String string = intent.toString();
         LogLevel logLevel = LogLevel.INFO;
         BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda0 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(4);
         LogBuffer logBuffer = broadcastDispatcherLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = andIncrement;
         logMessageImpl.int2 = i;
-        logMessageImpl.str1 = intent2;
-        logBuffer.commit(obtain);
-        this.workerExecutor.execute(new Runnable() { // from class: com.android.systemui.broadcast.ActionReceiver$onReceive$1
+        logMessageImpl.str1 = string;
+        logBuffer.commit(logMessageObtain);
+        this.workerExecutor.execute(new Runnable() { // from class: com.android.systemui.broadcast.ActionReceiver.onReceive.1
             @Override // java.lang.Runnable
             public final void run() {
                 final ActionReceiver actionReceiver = ActionReceiver.this;
                 ArraySet<ReceiverData> arraySet = actionReceiver.receiverDatas;
-                final Intent intent3 = intent;
+                final Intent intent2 = intent;
                 final Context context2 = context;
                 final int i2 = andIncrement;
                 for (final ReceiverData receiverData : arraySet) {
-                    if (receiverData.filter.matchCategories(intent3.getCategories()) == null && !((Boolean) actionReceiver.testPendingRemovalAction.invoke(receiverData.receiver, Integer.valueOf(actionReceiver.userId))).booleanValue()) {
+                    if (receiverData.filter.matchCategories(intent2.getCategories()) == null && !((Boolean) actionReceiver.testPendingRemovalAction.invoke(receiverData.receiver, Integer.valueOf(actionReceiver.userId))).booleanValue()) {
                         receiverData.executor.execute(new Runnable() { // from class: com.android.systemui.broadcast.ActionReceiver$onReceive$1$1$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                ReceiverData.this.receiver.setPendingResult(actionReceiver.getPendingResult());
-                                ReceiverData.this.receiver.onReceive(context2, intent3);
+                                receiverData.receiver.setPendingResult(actionReceiver.getPendingResult());
+                                receiverData.receiver.onReceive(context2, intent2);
                                 ActionReceiver actionReceiver2 = actionReceiver;
                                 BroadcastDispatcherLogger broadcastDispatcherLogger2 = actionReceiver2.logger;
                                 int i3 = i2;
                                 String str = actionReceiver2.action;
-                                BroadcastReceiver broadcastReceiver = ReceiverData.this.receiver;
+                                BroadcastReceiver broadcastReceiver = receiverData.receiver;
                                 broadcastDispatcherLogger2.getClass();
-                                String broadcastReceiver2 = broadcastReceiver.toString();
+                                String string2 = broadcastReceiver.toString();
                                 LogLevel logLevel2 = LogLevel.DEBUG;
                                 BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda02 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(3);
                                 LogBuffer logBuffer2 = broadcastDispatcherLogger2.buffer;
-                                LogMessage obtain2 = logBuffer2.obtain("BroadcastDispatcherLog", logLevel2, broadcastDispatcherLogger$$ExternalSyntheticLambda02, null);
-                                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                                LogMessage logMessageObtain2 = logBuffer2.obtain("BroadcastDispatcherLog", logLevel2, broadcastDispatcherLogger$$ExternalSyntheticLambda02, null);
+                                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                                 logMessageImpl2.int1 = i3;
                                 logMessageImpl2.str1 = str;
-                                logMessageImpl2.str2 = broadcastReceiver2;
-                                logBuffer2.commit(obtain2);
+                                logMessageImpl2.str2 = string2;
+                                logBuffer2.commit(logMessageObtain2);
                             }
                         });
                     }

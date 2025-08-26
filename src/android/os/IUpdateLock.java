@@ -45,9 +45,9 @@ public interface IUpdateLock extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUpdateLock)) {
-                return (IUpdateLock) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUpdateLock)) {
+                return (IUpdateLock) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,15 +77,15 @@ public interface IUpdateLock extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                String readString = parcel.readString();
+                IBinder strongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                acquireUpdateLock(readStrongBinder, readString);
+                acquireUpdateLock(strongBinder, string);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                releaseUpdateLock(readStrongBinder2);
+                releaseUpdateLock(strongBinder2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -111,32 +111,32 @@ public interface IUpdateLock extends IInterface {
 
             @Override // android.os.IUpdateLock
             public void acquireUpdateLock(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IUpdateLock
             public void releaseUpdateLock(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

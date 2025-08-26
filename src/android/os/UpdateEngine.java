@@ -52,15 +52,15 @@ public class UpdateEngine {
     }
 
     public UpdateEngine() {
-        IUpdateEngine asInterface = IUpdateEngine.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_SERVICE));
-        this.mUpdateEngine = asInterface;
-        if (asInterface == null) {
+        IUpdateEngine iUpdateEngineAsInterface = IUpdateEngine.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_SERVICE));
+        this.mUpdateEngine = iUpdateEngineAsInterface;
+        if (iUpdateEngineAsInterface == null) {
             throw new IllegalStateException("Failed to find update_engine");
         }
     }
 
     public boolean bind(final UpdateEngineCallback updateEngineCallback, final Handler handler) {
-        boolean bind;
+        boolean zBind;
         synchronized (this.mUpdateEngineCallbackLock) {
             IUpdateEngineCallback.Stub stub = new IUpdateEngineCallback.Stub(this) { // from class: android.os.UpdateEngine.1
                 @Override // android.os.IUpdateEngineCallback
@@ -95,12 +95,12 @@ public class UpdateEngine {
             };
             this.mUpdateEngineCallback = stub;
             try {
-                bind = this.mUpdateEngine.bind(stub);
+                zBind = this.mUpdateEngine.bind(stub);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        return bind;
+        return zBind;
     }
 
     public boolean bind(UpdateEngineCallback updateEngineCallback) {
@@ -178,9 +178,9 @@ public class UpdateEngine {
                 return true;
             }
             try {
-                boolean unbind = this.mUpdateEngine.unbind(iUpdateEngineCallback);
+                boolean zUnbind = this.mUpdateEngine.unbind(iUpdateEngineCallback);
                 this.mUpdateEngineCallback = null;
-                return unbind;
+                return zUnbind;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

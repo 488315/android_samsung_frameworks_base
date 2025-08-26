@@ -143,9 +143,9 @@ public class BaseInputConnection implements InputConnection {
 
     public Editable getEditable() {
         if (this.mEditable == null) {
-            Editable newEditable = Editable.Factory.getInstance().newEditable("");
-            this.mEditable = newEditable;
-            Selection.setSelection(newEditable, 0);
+            Editable editableNewEditable = Editable.Factory.getInstance().newEditable("");
+            this.mEditable = editableNewEditable;
+            Selection.setSelection(editableNewEditable, 0);
         }
         return this.mEditable;
     }
@@ -218,13 +218,13 @@ public class BaseInputConnection implements InputConnection {
         }
         if (i2 > 0) {
             int i6 = selectionEnd - i3;
-            int i7 = i2 + i6;
-            if (i7 > editable.length()) {
-                i7 = editable.length();
+            int length = i2 + i6;
+            if (length > editable.length()) {
+                length = editable.length();
             }
-            int i8 = i7 - i6;
-            if (i6 >= 0 && i8 > 0) {
-                editable.delete(i6, i7);
+            int i7 = length - i6;
+            if (i6 >= 0 && i7 > 0) {
+                editable.delete(i6, length);
             }
         }
         endBatchEdit();
@@ -249,16 +249,16 @@ public class BaseInputConnection implements InputConnection {
                     }
                     return 0;
                 }
-                char charAt = charSequence.charAt(i);
+                char cCharAt = charSequence.charAt(i);
                 if (z) {
-                    if (!Character.isHighSurrogate(charAt)) {
+                    if (!Character.isHighSurrogate(cCharAt)) {
                         return INVALID_INDEX;
                     }
                     i2--;
-                } else if (!Character.isSurrogate(charAt)) {
+                } else if (!Character.isSurrogate(cCharAt)) {
                     i2--;
                 } else {
-                    if (Character.isHighSurrogate(charAt)) {
+                    if (Character.isHighSurrogate(cCharAt)) {
                         return INVALID_INDEX;
                     }
                     z = true;
@@ -282,18 +282,18 @@ public class BaseInputConnection implements InputConnection {
                 if (i >= length) {
                     return z ? INVALID_INDEX : length;
                 }
-                char charAt = charSequence.charAt(i);
+                char cCharAt = charSequence.charAt(i);
                 if (z) {
-                    if (!Character.isLowSurrogate(charAt)) {
+                    if (!Character.isLowSurrogate(cCharAt)) {
                         return INVALID_INDEX;
                     }
                     i2--;
                     i++;
-                } else if (!Character.isSurrogate(charAt)) {
+                } else if (!Character.isSurrogate(cCharAt)) {
                     i2--;
                     i++;
                 } else {
-                    if (Character.isLowSurrogate(charAt)) {
+                    if (Character.isLowSurrogate(cCharAt)) {
                         return INVALID_INDEX;
                     }
                     i++;
@@ -306,8 +306,8 @@ public class BaseInputConnection implements InputConnection {
 
     @Override // android.view.inputmethod.InputConnection
     public boolean deleteSurroundingTextInCodePoints(int i, int i2) {
-        int findIndexBackward;
-        int findIndexForward;
+        int iFindIndexBackward;
+        int iFindIndexForward;
         Editable editable = getEditable();
         if (editable == null) {
             return false;
@@ -333,13 +333,13 @@ public class BaseInputConnection implements InputConnection {
                 selectionEnd = composingSpanEnd;
             }
         }
-        if (selectionStart >= 0 && selectionEnd >= 0 && (findIndexBackward = findIndexBackward(editable, selectionStart, Math.max(i, 0))) != INVALID_INDEX && (findIndexForward = findIndexForward(editable, selectionEnd, Math.max(i2, 0))) != INVALID_INDEX) {
-            int i3 = selectionStart - findIndexBackward;
+        if (selectionStart >= 0 && selectionEnd >= 0 && (iFindIndexBackward = findIndexBackward(editable, selectionStart, Math.max(i, 0))) != INVALID_INDEX && (iFindIndexForward = findIndexForward(editable, selectionEnd, Math.max(i2, 0))) != INVALID_INDEX) {
+            int i3 = selectionStart - iFindIndexBackward;
             if (i3 > 0) {
-                editable.delete(findIndexBackward, selectionStart);
+                editable.delete(iFindIndexBackward, selectionStart);
             }
-            if (findIndexForward - selectionEnd > 0) {
-                editable.delete(selectionEnd - i3, findIndexForward - i3);
+            if (iFindIndexForward - selectionEnd > 0) {
+                editable.delete(selectionEnd - i3, iFindIndexForward - i3);
             }
         }
         endBatchEdit();
@@ -434,16 +434,16 @@ public class BaseInputConnection implements InputConnection {
         if (selectionStart < 0) {
             selectionStart = 0;
         }
-        int min = (int) Math.min(selectionStart + i, editable.length());
+        int iMin = (int) Math.min(selectionStart + i, editable.length());
         if ((i2 & 1) != 0) {
-            return editable.subSequence(selectionStart, min);
+            return editable.subSequence(selectionStart, iMin);
         }
-        return TextUtils.substring(editable, selectionStart, min);
+        return TextUtils.substring(editable, selectionStart, iMin);
     }
 
     @Override // android.view.inputmethod.InputConnection
     public SurroundingText getSurroundingText(int i, int i2, int i3) {
-        CharSequence substring;
+        CharSequence charSequenceSubstring;
         Preconditions.checkArgumentNonnegative(i);
         Preconditions.checkArgumentNonnegative(i2);
         Editable editable = getEditable();
@@ -459,21 +459,21 @@ public class BaseInputConnection implements InputConnection {
             selectionEnd = selectionStart;
             selectionStart = selectionEnd;
         }
-        int max = Math.max(0, selectionStart - i);
-        int min = (int) Math.min(selectionEnd + i2, editable.length());
+        int iMax = Math.max(0, selectionStart - i);
+        int iMin = (int) Math.min(selectionEnd + i2, editable.length());
         if ((i3 & 1) != 0) {
-            substring = editable.subSequence(max, min);
+            charSequenceSubstring = editable.subSequence(iMax, iMin);
         } else {
-            substring = TextUtils.substring(editable, max, min);
+            charSequenceSubstring = TextUtils.substring(editable, iMax, iMin);
         }
-        return new SurroundingText(substring, selectionStart - max, selectionEnd - max, max);
+        return new SurroundingText(charSequenceSubstring, selectionStart - iMax, selectionEnd - iMax, iMax);
     }
 
     @Override // android.view.inputmethod.InputConnection
     public boolean performEditorAction(int i) {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        sendKeyEvent(new KeyEvent(uptimeMillis, uptimeMillis, 0, 66, 0, 0, -1, 0, 22));
-        sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), uptimeMillis, 1, 66, 0, 0, -1, 0, 22));
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        sendKeyEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 66, 0, 0, -1, 0, 22));
+        sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), jUptimeMillis, 1, 66, 0, 0, -1, 0, 22));
         return true;
     }
 
@@ -585,9 +585,9 @@ public class BaseInputConnection implements InputConnection {
                 fallbackContextFromServedView = this.mIMM.getFallbackContextFromServedView();
             }
             if (fallbackContextFromServedView != null) {
-                TypedArray obtainStyledAttributes = fallbackContextFromServedView.getTheme().obtainStyledAttributes(new int[]{16843312});
-                CharSequence text = obtainStyledAttributes.getText(0);
-                obtainStyledAttributes.recycle();
+                TypedArray typedArrayObtainStyledAttributes = fallbackContextFromServedView.getTheme().obtainStyledAttributes(new int[]{16843312});
+                CharSequence text = typedArrayObtainStyledAttributes.getText(0);
+                typedArrayObtainStyledAttributes.recycle();
                 if (text == null || !(text instanceof Spanned)) {
                     return;
                 }
@@ -609,14 +609,14 @@ public class BaseInputConnection implements InputConnection {
         beginBatchEdit();
         removeComposingSpans(editable);
         int length = editable.length();
-        int min = Math.min(i, length);
-        int min2 = Math.min(i2, length);
-        if (min2 < min) {
-            i5 = min;
-            i4 = min2;
+        int iMin = Math.min(i, length);
+        int iMin2 = Math.min(i2, length);
+        if (iMin2 < iMin) {
+            i5 = iMin;
+            i4 = iMin2;
         } else {
-            i4 = min;
-            i5 = min2;
+            i4 = iMin;
+            i5 = iMin2;
         }
         replaceTextInternal(i4, i5, charSequence, i3, false);
         endBatchEdit();
@@ -675,14 +675,14 @@ public class BaseInputConnection implements InputConnection {
     }
 
     private void replaceTextInternal(int i, int i2, CharSequence charSequence, int i3, boolean z) {
-        Spannable spannable;
+        Spannable spannableStringBuilder;
         Editable editable = getEditable();
         if (editable == null) {
             return;
         }
         if (z) {
             if (!(charSequence instanceof Spannable)) {
-                spannable = new SpannableStringBuilder(charSequence);
+                spannableStringBuilder = new SpannableStringBuilder(charSequence);
                 ensureDefaultComposingSpans();
                 if (this.mDefaultComposingSpans != null) {
                     int i4 = 0;
@@ -691,25 +691,25 @@ public class BaseInputConnection implements InputConnection {
                         if (i4 >= objArr.length) {
                             break;
                         }
-                        spannable.setSpan(objArr[i4], 0, spannable.length(), 289);
+                        spannableStringBuilder.setSpan(objArr[i4], 0, spannableStringBuilder.length(), 289);
                         i4++;
                     }
                 }
-                charSequence = spannable;
+                charSequence = spannableStringBuilder;
             } else {
-                spannable = (Spannable) charSequence;
+                spannableStringBuilder = (Spannable) charSequence;
             }
-            setComposingSpans(spannable);
+            setComposingSpans(spannableStringBuilder);
         }
         int i5 = i3 > 0 ? (i2 - 1) + i3 : i3 + i;
-        int i6 = i5 >= 0 ? i5 : 0;
-        if (i6 > editable.length()) {
-            i6 = editable.length();
+        int length = i5 >= 0 ? i5 : 0;
+        if (length > editable.length()) {
+            length = editable.length();
         }
-        Selection.setSelection(editable, i6);
-        editable.replace(i, i2, SemBaseInputConnectionUtil.convertAllBrackets(charSequence, i6, editable, this.mTargetView));
+        Selection.setSelection(editable, length);
+        editable.replace(i, i2, SemBaseInputConnectionUtil.convertAllBrackets(charSequence, length, editable, this.mTargetView));
         if (i3 == 0 && i == i2) {
-            Selection.setSelection(editable, i6);
+            Selection.setSelection(editable, length);
         }
     }
 

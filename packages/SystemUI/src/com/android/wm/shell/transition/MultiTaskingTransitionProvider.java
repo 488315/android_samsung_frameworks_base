@@ -32,7 +32,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
     public static final ArrayList sForceHidingAnimators = new ArrayList();
@@ -45,7 +44,6 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
     public float mDurationScale = 1.0f;
     public final SparseArray mAnimationLoaderMap = new SparseArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SurfaceValueAnimator extends ValueAnimator {
         public final String mLeashName;
 
@@ -92,9 +90,9 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
         Rect rect2 = new Rect(rect);
         Insets insets = transformation.getInsets();
         Insets insets2 = Insets.NONE;
-        Insets min = Insets.min(insets, insets2);
-        if (!min.equals(insets2) && !rect2.isEmpty()) {
-            rect2.inset(min);
+        Insets insetsMin = Insets.min(insets, insets2);
+        if (!insetsMin.equals(insets2) && !rect2.isEmpty()) {
+            rect2.inset(insetsMin);
             transaction.setCrop(surfaceControl, rect2);
         }
         if (animation.hasRoundedCorners() && f > 0.0f) {
@@ -119,20 +117,20 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
         Slog.d(str, "buildForceHideAnimationIfNeeded: " + str2);
         Rect endAbsBounds = change.getEndAbsBounds();
         MultiTaskingTransitionProvider multiTaskingTransitionProvider = (MultiTaskingTransitionProvider) multiTaskingTransitions;
-        Animation loadAnimationFromResources = multiTaskingTransitionProvider.loadAnimationFromResources(i, endAbsBounds);
-        loadAnimationFromResources.setInterpolator(InterpolatorUtils.SINE_OUT_60);
+        Animation animationLoadAnimationFromResources = multiTaskingTransitionProvider.loadAnimationFromResources(i, endAbsBounds);
+        animationLoadAnimationFromResources.setInterpolator(InterpolatorUtils.SINE_OUT_60);
         Point point = new Point(endAbsBounds.left, endAbsBounds.top);
         Rect rect = new Rect(endAbsBounds);
         rect.offsetTo(0, 0);
-        multiTaskingTransitionProvider.buildSurfaceAnimator(sForceHidingAnimators, loadAnimationFromResources, leash, new Runnable() { // from class: com.android.wm.shell.transition.MultiTaskingTransitionProvider$$ExternalSyntheticLambda2
+        multiTaskingTransitionProvider.buildSurfaceAnimator(sForceHidingAnimators, animationLoadAnimationFromResources, leash, new Runnable() { // from class: com.android.wm.shell.transition.MultiTaskingTransitionProvider$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
                 String str3 = str;
                 String str4 = str2;
                 ArrayList arrayList = MultiTaskingTransitionProvider.sForceHidingAnimators;
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onForceHideAnimationFinished: ", str4, ", num_remains=");
-                m.append(MultiTaskingTransitionProvider.sForceHidingAnimators.size());
-                Slog.d(str3, m.toString());
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onForceHideAnimationFinished: ", str4, ", num_remains=");
+                sbM.append(MultiTaskingTransitionProvider.sForceHidingAnimators.size());
+                Slog.d(str3, sbM.toString());
             }
         }, point, 0.0f, rect, true);
         return true;
@@ -163,7 +161,7 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
     }
 
     public final SurfaceValueAnimator buildSurfaceAnimator(final ArrayList arrayList, final Animation animation, final SurfaceControl surfaceControl, final Runnable runnable, final Point point, final float f, final Rect rect, boolean z) {
-        final SurfaceControl.Transaction acquire = this.mTransactionPool.acquire();
+        final SurfaceControl.Transaction transactionAcquire = this.mTransactionPool.acquire();
         final SurfaceValueAnimator surfaceValueAnimator = new SurfaceValueAnimator(surfaceControl, 0.0f, 1.0f);
         final Transformation transformation = new Transformation();
         final float[] fArr = new float[9];
@@ -172,8 +170,8 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
         final ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.transition.MultiTaskingTransitionProvider$$ExternalSyntheticLambda3
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = MultiTaskingTransitionProvider.SurfaceValueAnimator.this;
-                SurfaceControl.Transaction transaction = acquire;
+                MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = surfaceValueAnimator;
+                SurfaceControl.Transaction transaction = transactionAcquire;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 Animation animation2 = animation;
                 Transformation transformation2 = transformation;
@@ -189,9 +187,9 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
         final Runnable runnable2 = new Runnable() { // from class: com.android.wm.shell.transition.MultiTaskingTransitionProvider$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                MultiTaskingTransitionProvider multiTaskingTransitionProvider = MultiTaskingTransitionProvider.this;
+                MultiTaskingTransitionProvider multiTaskingTransitionProvider = this.f$0;
                 final MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = surfaceValueAnimator;
-                SurfaceControl.Transaction transaction = acquire;
+                SurfaceControl.Transaction transaction = transactionAcquire;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 Animation animation2 = animation;
                 Transformation transformation2 = transformation;
@@ -259,20 +257,20 @@ public class MultiTaskingTransitionProvider implements MultiTaskingTransitions {
     }
 
     public final Animation loadAnimationFromResources(int i, Rect rect) {
-        Animation loadAnimationRes = this.mTransitionAnimation.loadAnimationRes("android", i);
-        if (loadAnimationRes == null) {
+        Animation animationLoadAnimationRes = this.mTransitionAnimation.loadAnimationRes("android", i);
+        if (animationLoadAnimationRes == null) {
             Log.d("MultiTaskingTransitionProvider", "loadAnimationFromResources: failed, Callers=" + Debug.getCallers(5));
-            loadAnimationRes = new AlphaAnimation(1.0f, 1.0f);
-            loadAnimationRes.setDuration(336L);
+            animationLoadAnimationRes = new AlphaAnimation(1.0f, 1.0f);
+            animationLoadAnimationRes.setDuration(336L);
         }
-        if (!loadAnimationRes.isInitialized()) {
-            int width = rect.width();
-            int height = rect.height();
-            loadAnimationRes.initialize(width, height, width, height);
+        if (!animationLoadAnimationRes.isInitialized()) {
+            int iWidth = rect.width();
+            int iHeight = rect.height();
+            animationLoadAnimationRes.initialize(iWidth, iHeight, iWidth, iHeight);
         }
-        loadAnimationRes.restrictDuration(10000L);
-        loadAnimationRes.scaleCurrentDuration(this.mDurationScale);
-        return loadAnimationRes;
+        animationLoadAnimationRes.restrictDuration(10000L);
+        animationLoadAnimationRes.scaleCurrentDuration(this.mDurationScale);
+        return animationLoadAnimationRes;
     }
 
     public void registerAnimationLoader(int i) {

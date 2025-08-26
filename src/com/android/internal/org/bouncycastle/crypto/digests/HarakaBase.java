@@ -51,9 +51,9 @@ public abstract class HarakaBase implements Digest {
     }
 
     static byte[] aesEnc(byte[] bArr, byte[] bArr2) {
-        byte[] mixColumns = mixColumns(shiftRows(subBytes(bArr)));
-        Bytes.xorTo(16, bArr2, mixColumns);
-        return mixColumns;
+        byte[] bArrMixColumns = mixColumns(shiftRows(subBytes(bArr)));
+        Bytes.xorTo(16, bArr2, bArrMixColumns);
+        return bArrMixColumns;
     }
 
     private static byte[] mixColumns(byte[] bArr) {

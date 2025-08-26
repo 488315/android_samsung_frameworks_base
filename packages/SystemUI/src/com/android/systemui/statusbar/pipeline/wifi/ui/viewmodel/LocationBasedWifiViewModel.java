@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.pipeline.wifi.ui.viewmodel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import com.android.systemui.statusbar.phone.DoubleShadowStatusBarIconDrawable;
@@ -11,17 +12,14 @@ import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class LocationBasedWifiViewModel implements WifiViewModelCommon {
     public static final Companion Companion = new Companion(null);
     public final WifiViewModelCommon commonImpl;
     public final StatusBarLocation location;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -68,7 +66,7 @@ public abstract class LocationBasedWifiViewModel implements WifiViewModelCommon 
         this.location = statusBarLocation;
     }
 
-    public static DoubleShadowStatusBarIconDrawable getShadowDrawable(View view, int i) {
+    public static DoubleShadowStatusBarIconDrawable getShadowDrawable(View view, int i) throws Resources.NotFoundException {
         Context context = view.getContext();
         Drawable drawable = context.getResources().getDrawable(i, null);
         int height = view.getHeight();

@@ -399,9 +399,9 @@ public interface ITvInteractiveAppSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITvInteractiveAppSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvInteractiveAppSession)) {
-                return (ITvInteractiveAppSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITvInteractiveAppSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvInteractiveAppSession)) {
+                return (ITvInteractiveAppSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -544,14 +544,14 @@ public interface ITvInteractiveAppSession extends IInterface {
                     createBiInteractiveApp(uri, bundle);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    destroyBiInteractiveApp(readString);
+                    destroyBiInteractiveApp(string);
                     return true;
                 case 6:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTeletextAppEnabled(readBoolean);
+                    setTeletextAppEnabled(z);
                     return true;
                 case 7:
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
@@ -564,47 +564,47 @@ public interface ITvInteractiveAppSession extends IInterface {
                     sendCurrentChannelUri(uri2);
                     return true;
                 case 9:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendCurrentChannelLcn(readInt);
+                    sendCurrentChannelLcn(i3);
                     return true;
                 case 10:
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    sendStreamVolume(readFloat);
+                    sendStreamVolume(f);
                     return true;
                 case 11:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendTrackInfoList(createTypedArrayList);
+                    sendTrackInfoList(arrayListCreateTypedArrayList);
                     return true;
                 case 12:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendCurrentTvInputId(readString2);
+                    sendCurrentTvInputId(string2);
                     return true;
                 case 13:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendTimeShiftMode(readInt2);
+                    sendTimeShiftMode(i4);
                     return true;
                 case 14:
-                    float[] createFloatArray = parcel.createFloatArray();
+                    float[] fArrCreateFloatArray = parcel.createFloatArray();
                     parcel.enforceNoDataAvail();
-                    sendAvailableSpeeds(createFloatArray);
+                    sendAvailableSpeeds(fArrCreateFloatArray);
                     return true;
                 case 15:
-                    String readString3 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
+                    String string3 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    sendSigningResult(readString3, createByteArray);
+                    sendSigningResult(string3, bArrCreateByteArray);
                     return true;
                 case 16:
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCertificate(readString4, readInt3, bundle2);
+                    sendCertificate(string4, i5, bundle2);
                     return true;
                 case 17:
                     TvRecordingInfo tvRecordingInfo = (TvRecordingInfo) parcel.readTypedObject(TvRecordingInfo.CREATOR);
@@ -612,15 +612,15 @@ public interface ITvInteractiveAppSession extends IInterface {
                     sendTvRecordingInfo(tvRecordingInfo);
                     return true;
                 case 18:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(TvRecordingInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(TvRecordingInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendTvRecordingInfoList(createTypedArrayList2);
+                    sendTvRecordingInfoList(arrayListCreateTypedArrayList2);
                     return true;
                 case 19:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyError(readString5, bundle3);
+                    notifyError(string5, bundle3);
                     return true;
                 case 20:
                     PlaybackParams playbackParams = (PlaybackParams) parcel.readTypedObject(PlaybackParams.CREATOR);
@@ -628,52 +628,52 @@ public interface ITvInteractiveAppSession extends IInterface {
                     notifyTimeShiftPlaybackParams(playbackParams);
                     return true;
                 case 21:
-                    String readString6 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyTimeShiftStatusChanged(readString6, readInt4);
+                    notifyTimeShiftStatusChanged(string6, i6);
                     return true;
                 case 22:
-                    String readString7 = parcel.readString();
-                    long readLong = parcel.readLong();
+                    String string7 = parcel.readString();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyTimeShiftStartPositionChanged(readString7, readLong);
+                    notifyTimeShiftStartPositionChanged(string7, j);
                     return true;
                 case 23:
-                    String readString8 = parcel.readString();
-                    long readLong2 = parcel.readLong();
+                    String string8 = parcel.readString();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyTimeShiftCurrentPositionChanged(readString8, readLong2);
+                    notifyTimeShiftCurrentPositionChanged(string8, j2);
                     return true;
                 case 24:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingConnectionFailed(readString9, readString10);
+                    notifyRecordingConnectionFailed(string9, string10);
                     return true;
                 case 25:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingDisconnected(readString11, readString12);
+                    notifyRecordingDisconnected(string11, string12);
                     return true;
                 case 26:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     Uri uri3 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyRecordingTuned(readString13, uri3);
+                    notifyRecordingTuned(string13, uri3);
                     return true;
                 case 27:
-                    String readString14 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingError(readString14, readInt5);
+                    notifyRecordingError(string14, i7);
                     return true;
                 case 28:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingScheduled(readString15, readString16);
+                    notifyRecordingScheduled(string15, string16);
                     return true;
                 case 29:
                     release();
@@ -684,58 +684,58 @@ public interface ITvInteractiveAppSession extends IInterface {
                     notifyTuned(uri4);
                     return true;
                 case 31:
-                    int readInt6 = parcel.readInt();
-                    String readString17 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyTrackSelected(readInt6, readString17);
+                    notifyTrackSelected(i8, string17);
                     return true;
                 case 32:
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyTracksChanged(createTypedArrayList3);
+                    notifyTracksChanged(arrayListCreateTypedArrayList3);
                     return true;
                 case 33:
                     notifyVideoAvailable();
                     return true;
                 case 34:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyVideoUnavailable(readInt7);
+                    notifyVideoUnavailable(i9);
                     return true;
                 case 35:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyVideoFreezeUpdated(readBoolean2);
+                    notifyVideoFreezeUpdated(z2);
                     return true;
                 case 36:
                     notifyContentAllowed();
                     return true;
                 case 37:
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyContentBlocked(readString18);
+                    notifyContentBlocked(string18);
                     return true;
                 case 38:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifySignalStrength(readInt8);
+                    notifySignalStrength(i10);
                     return true;
                 case 39:
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingStarted(readString19, readString20);
+                    notifyRecordingStarted(string19, string20);
                     return true;
                 case 40:
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyRecordingStopped(readString21);
+                    notifyRecordingStopped(string21);
                     return true;
                 case 41:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyTvMessage(readInt9, bundle4);
+                    notifyTvMessage(i11, bundle4);
                     return true;
                 case 42:
                     Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
@@ -743,11 +743,11 @@ public interface ITvInteractiveAppSession extends IInterface {
                     setSurface(surface);
                     return true;
                 case 43:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    dispatchSurfaceChanged(readInt10, readInt11, readInt12);
+                    dispatchSurfaceChanged(i12, i13, i14);
                     return true;
                 case 44:
                     BroadcastInfoResponse broadcastInfoResponse = (BroadcastInfoResponse) parcel.readTypedObject(BroadcastInfoResponse.CREATOR);
@@ -765,15 +765,15 @@ public interface ITvInteractiveAppSession extends IInterface {
                     notifyAdBufferConsumed(adBuffer);
                     return true;
                 case 47:
-                    ArrayList createTypedArrayList4 = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList4 = parcel.createTypedArrayList(TvTrackInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendSelectedTrackInfo(createTypedArrayList4);
+                    sendSelectedTrackInfo(arrayListCreateTypedArrayList4);
                     return true;
                 case 48:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createMediaView(readStrongBinder, rect2);
+                    createMediaView(strongBinder, rect2);
                     return true;
                 case 49:
                     Rect rect3 = (Rect) parcel.readTypedObject(Rect.CREATOR);
@@ -806,613 +806,613 @@ public interface ITvInteractiveAppSession extends IInterface {
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void startInteractiveApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void stopInteractiveApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void resetInteractiveApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void createBiInteractiveApp(Uri uri, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void destroyBiInteractiveApp(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void setTeletextAppEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendCurrentVideoBounds(Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendCurrentChannelUri(Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendCurrentChannelLcn(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendStreamVolume(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendTrackInfoList(List<TvTrackInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendCurrentTvInputId(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendTimeShiftMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendAvailableSpeeds(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendSigningResult(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendCertificate(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendTvRecordingInfo(TvRecordingInfo tvRecordingInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(tvRecordingInfo, 0);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(tvRecordingInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendTvRecordingInfoList(List<TvRecordingInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyError(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTimeShiftPlaybackParams(PlaybackParams playbackParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(playbackParams, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(playbackParams, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTimeShiftStatusChanged(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTimeShiftStartPositionChanged(String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTimeShiftCurrentPositionChanged(String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingConnectionFailed(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingDisconnected(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingTuned(String str, Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingError(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingScheduled(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void release() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTuned(Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(30, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(30, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTrackSelected(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTracksChanged(List<TvTrackInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(32, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(32, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyVideoAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyVideoUnavailable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyVideoFreezeUpdated(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyContentAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyContentBlocked(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(37, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(37, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifySignalStrength(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingStarted(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(39, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(39, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyRecordingStopped(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyTvMessage(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(41, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(41, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void setSurface(Surface surface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    this.mRemote.transact(42, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    this.mRemote.transact(42, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void dispatchSurfaceChanged(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(43, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(43, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyBroadcastInfoResponse(BroadcastInfoResponse broadcastInfoResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(broadcastInfoResponse, 0);
-                    this.mRemote.transact(44, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(broadcastInfoResponse, 0);
+                    this.mRemote.transact(44, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyAdResponse(AdResponse adResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(adResponse, 0);
-                    this.mRemote.transact(45, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(adResponse, 0);
+                    this.mRemote.transact(45, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void notifyAdBufferConsumed(AdBuffer adBuffer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(adBuffer, 0);
-                    this.mRemote.transact(46, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(adBuffer, 0);
+                    this.mRemote.transact(46, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void sendSelectedTrackInfo(List<TvTrackInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(47, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(47, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void createMediaView(IBinder iBinder, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(48, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(48, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void relayoutMediaView(Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(49, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(49, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSession
             public void removeMediaView() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppSession.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

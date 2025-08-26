@@ -3,11 +3,9 @@ package com.samsung.android.knox.ex.peripheral;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PeripheralBarcodeConstants {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Option {
         public static final String CODABAR_CHECK_DIGIT_VERIFY_NO_TRANSMIT = "CODABAR_CHECK_DIGIT_VERIFY_NO_TRANSMIT";
         public static final String CODABAR_CHECK_DIGIT_VERIFY_TRANSMIT = "CODABAR_CHECK_DIGIT_VERIFY_TRANSMIT";
@@ -80,7 +78,6 @@ public class PeripheralBarcodeConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Symbology {
         public static final String AUSTRALIAN_POST = "AUSTRALIAN_POST";
         public static final String AZTEC_CODE = "AZTEC_CODE";
@@ -154,7 +151,6 @@ public class PeripheralBarcodeConstants {
         public static final HashSet<String> mType1Ds;
         public static final HashSet<String> mType2Ds;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Type {
             public static final String TYPE_1D = "1D";
             public static final String TYPE_2D = "2D";

@@ -7,14 +7,12 @@ import android.view.View;
 import kotlin.collections.builders.MapBuilder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifLayoutInflaterFactory implements LayoutInflater.Factory2 {
     public final int layoutType;
     public final NotifRemoteViewsFactoryContainer notifRemoteViewsFactoryContainer;
     public final ExpandableNotificationRow row;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,7 +22,6 @@ public final class NotifLayoutInflaterFactory implements LayoutInflater.Factory2
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Provider {
         NotifLayoutInflaterFactory provide(ExpandableNotificationRow expandableNotificationRow, int i);
     }
@@ -49,12 +46,12 @@ public final class NotifLayoutInflaterFactory implements LayoutInflater.Factory2
             String str2 = str;
             Context context2 = context;
             AttributeSet attributeSet2 = attributeSet;
-            View instantiate = notifRemoteViewsFactory2.instantiate(this.row, this.layoutType, str2, context2, attributeSet2);
-            if (instantiate != null) {
+            View viewInstantiate = notifRemoteViewsFactory2.instantiate(this.row, this.layoutType, str2, context2, attributeSet2);
+            if (viewInstantiate != null) {
                 if (notifRemoteViewsFactory != null) {
                     throw new IllegalStateException((notifRemoteViewsFactory2 + " tries to produce name:" + str2 + " with type:" + this.layoutType + ". However, " + notifRemoteViewsFactory + " produced view for " + str2 + " before.").toString());
                 }
-                view2 = instantiate;
+                view2 = viewInstantiate;
                 notifRemoteViewsFactory = notifRemoteViewsFactory2;
             }
             str = str2;

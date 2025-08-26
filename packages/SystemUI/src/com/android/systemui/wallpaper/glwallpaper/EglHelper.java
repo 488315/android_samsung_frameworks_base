@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class EglHelper {
     public EGLConfig mEglConfig;
@@ -33,11 +32,11 @@ public class EglHelper {
             Log.w("EglHelper", "eglGetDisplay failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
             return false;
         }
-        String eglQueryString = EGL14.eglQueryString(this.mEglDisplay, 12373);
-        if (TextUtils.isEmpty(eglQueryString)) {
+        String strEglQueryString = EGL14.eglQueryString(this.mEglDisplay, 12373);
+        if (TextUtils.isEmpty(strEglQueryString)) {
             return true;
         }
-        Collections.addAll(this.mExts, eglQueryString.split(" "));
+        Collections.addAll(this.mExts, strEglQueryString.split(" "));
         return true;
     }
 

@@ -37,24 +37,24 @@ public final class UnixEpochTime implements Parcelable {
     }
 
     public static UnixEpochTime parseCommandLineArgs(ShellCommand shellCommand) {
-        Long l = null;
-        Long l2 = null;
+        Long lValueOf = null;
+        Long lValueOf2 = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg == null) {
-                if (l == null) {
+                if (lValueOf == null) {
                     throw new IllegalArgumentException("No elapsedRealtimeMillis specified.");
                 }
-                if (l2 == null) {
+                if (lValueOf2 == null) {
                     throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
                 }
-                return new UnixEpochTime(l.longValue(), l2.longValue());
+                return new UnixEpochTime(lValueOf.longValue(), lValueOf2.longValue());
             }
             nextArg.hashCode();
             if (nextArg.equals("--elapsed_realtime")) {
-                l = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                lValueOf = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
             } else if (nextArg.equals("--unix_epoch_time")) {
-                l2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                lValueOf2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
             } else {
                 throw new IllegalArgumentException("Unknown option: " + nextArg);
             }

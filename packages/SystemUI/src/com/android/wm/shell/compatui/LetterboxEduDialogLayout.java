@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 class LetterboxEduDialogLayout extends ConstraintLayout implements DialogContainerSupplier {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,9 +34,9 @@ class LetterboxEduDialogLayout extends ConstraintLayout implements DialogContain
         super.onFinishInflate();
         this.mDialogContainer = findViewById(R.id.letterbox_education_dialog_container);
         this.mDialogTitle = (TextView) findViewById(R.id.letterbox_education_dialog_title);
-        Drawable mutate = getBackground().mutate();
-        this.mBackgroundDim = mutate;
-        mutate.setAlpha(0);
+        Drawable drawableMutate = getBackground().mutate();
+        this.mBackgroundDim = drawableMutate;
+        drawableMutate.setAlpha(0);
     }
 
     public final void setDismissOnClickListener(Runnable runnable) {
@@ -49,7 +48,7 @@ class LetterboxEduDialogLayout extends ConstraintLayout implements DialogContain
             onClickListener = new View.OnClickListener() { // from class: com.android.wm.shell.compatui.LetterboxEduDialogLayout$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    LetterboxEduWindowManager$$ExternalSyntheticLambda0 letterboxEduWindowManager$$ExternalSyntheticLambda02 = LetterboxEduWindowManager$$ExternalSyntheticLambda0.this;
+                    LetterboxEduWindowManager$$ExternalSyntheticLambda0 letterboxEduWindowManager$$ExternalSyntheticLambda02 = letterboxEduWindowManager$$ExternalSyntheticLambda0;
                     int i = LetterboxEduDialogLayout.$r8$clinit;
                     letterboxEduWindowManager$$ExternalSyntheticLambda02.run();
                 }

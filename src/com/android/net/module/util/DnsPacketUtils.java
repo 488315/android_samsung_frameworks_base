@@ -41,7 +41,7 @@ public final class DnsPacketUtils {
             return stringBuffer.toString();
         }
 
-        public static byte[] domainNameToLabels(String str) throws IOException, ParseException {
+        public static byte[] domainNameToLabels(String str) throws ParseException, IOException {
             if (str.length() > 255) {
                 throw new ParseException("Domain name exceeds max length: " + str.length());
             }
@@ -82,26 +82,26 @@ public final class DnsPacketUtils {
             }
             if (i3 == 192) {
                 int unsignedInt2 = ((unsignedInt & (-193)) << 8) + Byte.toUnsignedInt(byteBuffer.get());
-                int position = byteBuffer.position();
-                if (unsignedInt2 >= position - 2) {
+                int iPosition = byteBuffer.position();
+                if (unsignedInt2 >= iPosition - 2) {
                     throw new DnsPacket.ParseException("Parse compression name fail, invalid compression");
                 }
                 byteBuffer.position(unsignedInt2);
-                String parseName = parseName(byteBuffer, i + 1, i2, z);
-                byteBuffer.position(position);
-                return parseName;
+                String name = parseName(byteBuffer, i + 1, i2, z);
+                byteBuffer.position(iPosition);
+                return name;
             }
             byte[] bArr = new byte[unsignedInt];
             byteBuffer.get(bArr);
-            String labelToString = labelToString(bArr);
-            if (labelToString.length() > 63) {
+            String strLabelToString = labelToString(bArr);
+            if (strLabelToString.length() > 63) {
                 throw new DnsPacket.ParseException("Parse name fail, invalid label length");
             }
-            String parseName2 = parseName(byteBuffer, i + 1, i2, z);
-            if (TextUtils.isEmpty(parseName2)) {
-                return labelToString;
+            String name2 = parseName(byteBuffer, i + 1, i2, z);
+            if (TextUtils.isEmpty(name2)) {
+                return strLabelToString;
             }
-            return labelToString + MediaMetrics.SEPARATOR + parseName2;
+            return strLabelToString + MediaMetrics.SEPARATOR + name2;
         }
 
         private DnsRecordParser() {

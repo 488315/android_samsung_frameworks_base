@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BasicSwitchKt$SeslBasicSwitch$animateFraction$2$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Float> $fraction$delegate;
@@ -45,13 +44,13 @@ final class BasicSwitchKt$SeslBasicSwitch$animateFraction$2$1$1 extends SuspendL
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            float abs = Math.abs(this.$target - ((Number) this.$fraction$delegate.getValue()).floatValue());
+            float fAbs = Math.abs(this.$target - ((Number) this.$fraction$delegate.getValue()).floatValue());
             Animatable<Float, AnimationVector1D> animatable = this.$fractionAnimatable;
             Float f = new Float(this.$target);
             SeslBasicSwitchDefaults.INSTANCE.getClass();
-            TweenSpec tween$default = AnimationSpecKt.tween$default((int) (300 * abs), 0, SeslBasicSwitchDefaults.ThumbTransitionEasing, 2);
+            TweenSpec tweenSpecTween$default = AnimationSpecKt.tween$default((int) (300 * fAbs), 0, SeslBasicSwitchDefaults.ThumbTransitionEasing, 2);
             this.label = 1;
-            if (Animatable.animateTo$default(animatable, f, tween$default, null, null, this, 12) == coroutineSingletons) {
+            if (Animatable.animateTo$default(animatable, f, tweenSpecTween$default, null, null, this, 12) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

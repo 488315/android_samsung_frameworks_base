@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamOverlayNotificationCountProvider implements CallbackController {
     public final AnonymousClass1 mNotificationHandler;
@@ -57,11 +56,11 @@ public class DreamOverlayNotificationCountProvider implements CallbackController
         executor.execute(new Runnable() { // from class: com.android.systemui.dreams.DreamOverlayNotificationCountProvider$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final DreamOverlayNotificationCountProvider dreamOverlayNotificationCountProvider = DreamOverlayNotificationCountProvider.this;
+                final DreamOverlayNotificationCountProvider dreamOverlayNotificationCountProvider = this.f$0;
                 Arrays.stream(notificationListener.getActiveNotifications()).forEach(new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayNotificationCountProvider$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ((HashSet) DreamOverlayNotificationCountProvider.this.mNotificationKeys).add(((StatusBarNotification) obj).getKey());
+                        ((HashSet) dreamOverlayNotificationCountProvider.mNotificationKeys).add(((StatusBarNotification) obj).getKey());
                     }
                 });
                 dreamOverlayNotificationCountProvider.reportNotificationCountChanged();

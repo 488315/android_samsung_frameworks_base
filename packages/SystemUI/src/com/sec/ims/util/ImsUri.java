@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsUri implements Parcelable {
     public static ImsUri EMPTY = null;
@@ -37,7 +36,6 @@ public class ImsUri implements Parcelable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum UriType {
         TEL_URI,
         SIP_URI,
@@ -53,35 +51,35 @@ public class ImsUri implements Parcelable {
         if (str == null) {
             return null;
         }
-        String replaceAll = PATTERN_WHITE_SPACES.matcher(str).replaceAll("");
-        int indexOf = replaceAll.indexOf(58);
-        if (indexOf < 0) {
+        String strReplaceAll = PATTERN_WHITE_SPACES.matcher(str).replaceAll("");
+        int iIndexOf = strReplaceAll.indexOf(58);
+        if (iIndexOf < 0) {
             if (!DBG) {
-                replaceAll = "xxxxx";
+                strReplaceAll = "xxxxx";
             }
-            Log.e(LOG_TAG, "parse: illegal Uri - ".concat(replaceAll));
+            Log.e(LOG_TAG, "parse: illegal Uri - ".concat(strReplaceAll));
             return null;
         }
-        String substring = replaceAll.substring(0, indexOf);
+        String strSubstring = strReplaceAll.substring(0, iIndexOf);
         try {
-            uRLParser = new URLParser(replaceAll);
+            uRLParser = new URLParser(strReplaceAll);
         } catch (Exception e) {
             StringBuilder sb = new StringBuilder("parse: failured. uri=");
             if (!DBG) {
-                replaceAll = "xxxxx";
+                strReplaceAll = "xxxxx";
             }
-            sb.append(replaceAll);
+            sb.append(strReplaceAll);
             sb.append(" e=");
             sb.append(e);
             Log.e(LOG_TAG, sb.toString());
             e.printStackTrace();
         }
-        if (!"sip".equalsIgnoreCase(substring) && !"sips".equalsIgnoreCase(substring)) {
-            if ("tel".equalsIgnoreCase(substring)) {
+        if (!"sip".equalsIgnoreCase(strSubstring) && !"sips".equalsIgnoreCase(strSubstring)) {
+            if ("tel".equalsIgnoreCase(strSubstring)) {
                 return new ImsUri(uRLParser.telURL(true));
             }
-            if (IMSParameter.CALL.URN.equalsIgnoreCase(substring)) {
-                return new ImsUri(replaceAll);
+            if (IMSParameter.CALL.URN.equalsIgnoreCase(strSubstring)) {
+                return new ImsUri(strReplaceAll);
             }
             return null;
         }
@@ -136,8 +134,8 @@ public class ImsUri implements Parcelable {
         if (this.mUrn != null || (user = this.mSipUri.getUser()) == null) {
             return "";
         }
-        int indexOf = user.indexOf(59);
-        return indexOf > 0 ? user.substring(0, indexOf) : user;
+        int iIndexOf = user.indexOf(59);
+        return iIndexOf > 0 ? user.substring(0, iIndexOf) : user;
     }
 
     public String getParam(String str) {
@@ -183,9 +181,9 @@ public class ImsUri implements Parcelable {
 
     public int hashCode() {
         SipUri sipUri = this.mSipUri;
-        int hashCode = ((sipUri == null ? 0 : sipUri.hashCode()) + 31) * 31;
+        int iHashCode = ((sipUri == null ? 0 : sipUri.hashCode()) + 31) * 31;
         TelURLImpl telURLImpl = this.mTelUri;
-        return hashCode + (telURLImpl != null ? telURLImpl.hashCode() : 0);
+        return iHashCode + (telURLImpl != null ? telURLImpl.hashCode() : 0);
     }
 
     public void removeHeaders() {
@@ -296,8 +294,8 @@ public class ImsUri implements Parcelable {
         this.mUrn = null;
         this.mSipUri = null;
         this.mTelUri = null;
-        ImsUri parse = parse(parcel.readString());
-        this.mSipUri = parse.mSipUri;
-        this.mTelUri = parse.mTelUri;
+        ImsUri imsUri = parse(parcel.readString());
+        this.mSipUri = imsUri.mSipUri;
+        this.mTelUri = imsUri.mTelUri;
     }
 }

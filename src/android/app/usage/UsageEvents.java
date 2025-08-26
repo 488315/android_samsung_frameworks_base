@@ -287,23 +287,23 @@ public final class UsageEvents implements Parcelable {
     }
 
     private void readUsageEventsFromParcelWithBlob(Parcel parcel) {
-        byte[] readBlob = parcel.readBlob();
-        Parcel obtain = Parcel.obtain();
-        obtain.unmarshall(readBlob, 0, readBlob.length);
-        obtain.setDataPosition(0);
-        this.mEventCount = obtain.readInt();
-        this.mIndex = obtain.readInt();
+        byte[] blob = parcel.readBlob();
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.unmarshall(blob, 0, blob.length);
+        parcelObtain.setDataPosition(0);
+        this.mEventCount = parcelObtain.readInt();
+        this.mIndex = parcelObtain.readInt();
         if (this.mEventCount > 0) {
-            this.mStringPool = obtain.createStringArray();
-            int readInt = obtain.readInt();
-            int readInt2 = obtain.readInt();
-            Parcel obtain2 = Parcel.obtain();
-            this.mParcel = obtain2;
-            obtain2.setDataPosition(0);
-            this.mParcel.appendFrom(obtain, obtain.dataPosition(), readInt);
+            this.mStringPool = parcelObtain.createStringArray();
+            int i = parcelObtain.readInt();
+            int i2 = parcelObtain.readInt();
+            Parcel parcelObtain2 = Parcel.obtain();
+            this.mParcel = parcelObtain2;
+            parcelObtain2.setDataPosition(0);
+            this.mParcel.appendFrom(parcelObtain, parcelObtain.dataPosition(), i);
             Parcel parcel2 = this.mParcel;
             parcel2.setDataSize(parcel2.dataPosition());
-            this.mParcel.setDataPosition(readInt2);
+            this.mParcel.setDataPosition(i2);
         }
     }
 
@@ -374,43 +374,43 @@ public final class UsageEvents implements Parcelable {
     }
 
     private int findStringIndex(String str) {
-        int binarySearch = Arrays.binarySearch(this.mStringPool, str);
-        if (binarySearch >= 0) {
-            return binarySearch;
+        int iBinarySearch = Arrays.binarySearch(this.mStringPool, str);
+        if (iBinarySearch >= 0) {
+            return iBinarySearch;
         }
         throw new IllegalStateException("String '" + str + "' is not in the string pool");
     }
 
     private void writeEventToParcel(Event event, Parcel parcel, int i) {
-        int i2 = -1;
-        int findStringIndex = event.mPackage != null ? findStringIndex(event.mPackage) : -1;
-        int findStringIndex2 = event.mClass != null ? findStringIndex(event.mClass) : -1;
-        int findStringIndex3 = (!this.mIncludeTaskRoots || event.mTaskRootPackage == null) ? -1 : findStringIndex(event.mTaskRootPackage);
+        int iFindStringIndex = -1;
+        int iFindStringIndex2 = event.mPackage != null ? findStringIndex(event.mPackage) : -1;
+        int iFindStringIndex3 = event.mClass != null ? findStringIndex(event.mClass) : -1;
+        int iFindStringIndex4 = (!this.mIncludeTaskRoots || event.mTaskRootPackage == null) ? -1 : findStringIndex(event.mTaskRootPackage);
         if (this.mIncludeTaskRoots && event.mTaskRootClass != null) {
-            i2 = findStringIndex(event.mTaskRootClass);
+            iFindStringIndex = findStringIndex(event.mTaskRootClass);
         }
-        parcel.writeInt(findStringIndex);
-        parcel.writeInt(findStringIndex2);
+        parcel.writeInt(iFindStringIndex2);
+        parcel.writeInt(iFindStringIndex3);
         parcel.writeInt(event.mInstanceId);
-        parcel.writeInt(findStringIndex3);
-        parcel.writeInt(i2);
+        parcel.writeInt(iFindStringIndex4);
+        parcel.writeInt(iFindStringIndex);
         parcel.writeInt(event.mEventType);
         parcel.writeLong(event.mTimeStamp);
-        int i3 = event.mEventType;
-        if (i3 == 5) {
+        int i2 = event.mEventType;
+        if (i2 == 5) {
             event.mConfiguration.writeToParcel(parcel, i);
-        } else if (i3 == 30) {
+        } else if (i2 == 30) {
             parcel.writeString(event.mLocusId);
-        } else if (i3 != 7) {
-            if (i3 == 8) {
+        } else if (i2 != 7) {
+            if (i2 == 8) {
                 parcel.writeString(event.mShortcutId);
-            } else if (i3 == 9) {
+            } else if (i2 == 9) {
                 parcel.writeString(event.mAction);
                 parcel.writeString(event.mContentType);
                 parcel.writeStringArray(event.mContentAnnotations);
-            } else if (i3 == 11) {
+            } else if (i2 == 11) {
                 parcel.writeInt(event.mBucketAndReason);
-            } else if (i3 == 12) {
+            } else if (i2 == 12) {
                 parcel.writeString(event.mNotificationChannelId);
             }
         } else if (event.mExtras != null) {
@@ -423,28 +423,28 @@ public final class UsageEvents implements Parcelable {
     }
 
     private void readEventFromParcel(Parcel parcel, Event event) {
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            event.mPackage = this.mStringPool[readInt];
+        int i = parcel.readInt();
+        if (i >= 0) {
+            event.mPackage = this.mStringPool[i];
         } else {
             event.mPackage = null;
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 >= 0) {
-            event.mClass = this.mStringPool[readInt2];
+        int i2 = parcel.readInt();
+        if (i2 >= 0) {
+            event.mClass = this.mStringPool[i2];
         } else {
             event.mClass = null;
         }
         event.mInstanceId = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        if (readInt3 >= 0) {
-            event.mTaskRootPackage = this.mStringPool[readInt3];
+        int i3 = parcel.readInt();
+        if (i3 >= 0) {
+            event.mTaskRootPackage = this.mStringPool[i3];
         } else {
             event.mTaskRootPackage = null;
         }
-        int readInt4 = parcel.readInt();
-        if (readInt4 >= 0) {
-            event.mTaskRootClass = this.mStringPool[readInt4];
+        int i4 = parcel.readInt();
+        if (i4 >= 0) {
+            event.mTaskRootClass = this.mStringPool[i4];
         } else {
             event.mTaskRootClass = null;
         }
@@ -458,21 +458,21 @@ public final class UsageEvents implements Parcelable {
         event.mNotificationChannelId = null;
         event.mLocusId = null;
         event.mExtras = null;
-        int i = event.mEventType;
-        if (i == 5) {
+        int i5 = event.mEventType;
+        if (i5 == 5) {
             event.mConfiguration = Configuration.CREATOR.createFromParcel(parcel);
-        } else if (i == 30) {
+        } else if (i5 == 30) {
             event.mLocusId = parcel.readString();
-        } else if (i != 7) {
-            if (i == 8) {
+        } else if (i5 != 7) {
+            if (i5 == 8) {
                 event.mShortcutId = parcel.readString();
-            } else if (i == 9) {
+            } else if (i5 == 9) {
                 event.mAction = parcel.readString();
                 event.mContentType = parcel.readString();
                 event.mContentAnnotations = parcel.readStringArray();
-            } else if (i == 11) {
+            } else if (i5 == 11) {
                 event.mBucketAndReason = parcel.readInt();
-            } else if (i == 12) {
+            } else if (i5 == 12) {
                 event.mNotificationChannelId = parcel.readString();
             }
         } else if (parcel.readInt() != 0) {
@@ -497,38 +497,38 @@ public final class UsageEvents implements Parcelable {
     }
 
     private void writeUsageEventsToParcelWithBlob(Parcel parcel, int i) {
-        Parcel obtain = Parcel.obtain();
-        obtain.writeInt(this.mEventCount);
-        obtain.writeInt(this.mIndex);
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.writeInt(this.mEventCount);
+        parcelObtain.writeInt(this.mIndex);
         if (this.mEventCount > 0) {
-            obtain.writeStringArray(this.mStringPool);
+            parcelObtain.writeStringArray(this.mStringPool);
             if (this.mEventsToWrite != null) {
-                obtain = Parcel.obtain();
+                parcelObtain = Parcel.obtain();
                 try {
-                    obtain.setDataPosition(0);
+                    parcelObtain.setDataPosition(0);
                     for (int i2 = 0; i2 < this.mEventCount; i2++) {
-                        writeEventToParcel(this.mEventsToWrite.get(i2), obtain, i);
+                        writeEventToParcel(this.mEventsToWrite.get(i2), parcelObtain, i);
                     }
-                    int dataPosition = obtain.dataPosition();
-                    obtain.writeInt(dataPosition);
-                    obtain.writeInt(0);
-                    obtain.appendFrom(obtain, 0, dataPosition);
-                    obtain.recycle();
+                    int iDataPosition = parcelObtain.dataPosition();
+                    parcelObtain.writeInt(iDataPosition);
+                    parcelObtain.writeInt(0);
+                    parcelObtain.appendFrom(parcelObtain, 0, iDataPosition);
+                    parcelObtain.recycle();
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             } else {
                 Parcel parcel2 = this.mParcel;
                 if (parcel2 != null) {
-                    obtain.writeInt(parcel2.dataSize());
-                    obtain.writeInt(this.mParcel.dataPosition());
+                    parcelObtain.writeInt(parcel2.dataSize());
+                    parcelObtain.writeInt(this.mParcel.dataPosition());
                     Parcel parcel3 = this.mParcel;
-                    obtain.appendFrom(parcel3, 0, parcel3.dataSize());
+                    parcelObtain.appendFrom(parcel3, 0, parcel3.dataSize());
                 } else {
                     throw new IllegalStateException("Either mParcel or mEventsToWrite must not be null");
                 }
             }
         }
-        parcel.writeBlob(obtain.marshall());
+        parcel.writeBlob(parcelObtain.marshall());
     }
 }

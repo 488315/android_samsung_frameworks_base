@@ -2,6 +2,7 @@ package com.android.systemui.popup.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.popup.data.SimTrayProtectionData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SimTrayProtectionDialog implements PopupUIAlertDialog {
     private static final String TAG = "SimTrayProtectionDialog";
@@ -35,7 +35,7 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
     private int mDisplayWidth;
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.popup.view.SimTrayProtectionDialog.1
         @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-        public void onGlobalLayout() {
+        public void onGlobalLayout() throws Resources.NotFoundException {
             if (SimTrayProtectionDialog.this.mDisplayMetrics == null) {
                 SimTrayProtectionDialog.this.mDisplayMetrics = new DisplayMetrics();
             }
@@ -70,14 +70,14 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
         this.mDialog = createDialog(new SimTrayProtectionData(context));
     }
 
-    private AlertDialog createDialog(SimTrayProtectionData simTrayProtectionData) {
+    private AlertDialog createDialog(SimTrayProtectionData simTrayProtectionData) throws Resources.NotFoundException {
         String string = this.mContext.getResources().getString(simTrayProtectionData.getTitleMessage());
         boolean z = BasicRune.POPUPUI_FOLDERBLE_TYPE_FLIP && !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened;
-        View inflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_POPUPUI)).inflate(R.layout.sim_card_tray_protection_dialog, (ViewGroup) null);
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.sim_card_tray_protection_dialog_body_layout);
+        View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_POPUPUI)).inflate(R.layout.sim_card_tray_protection_dialog, (ViewGroup) null);
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.sim_card_tray_protection_dialog_body_layout);
         this.mBodyLayout = linearLayout;
         linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(this.mGlobalLayoutListener);
-        LottieAnimationView lottieAnimationView = (LottieAnimationView) inflate.findViewById(R.id.sim_card_tray_protection_dialog_body_image);
+        LottieAnimationView lottieAnimationView = (LottieAnimationView) viewInflate.findViewById(R.id.sim_card_tray_protection_dialog_body_image);
         this.mBodyImage = lottieAnimationView;
         lottieAnimationView.getLayoutParams().height = this.mContext.getResources().getDimensionPixelSize(simTrayProtectionData.getBodyImageHeight());
         int bodyImage = simTrayProtectionData.getBodyImage();
@@ -92,19 +92,19 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
         } else {
             this.mLogWrapper.e(TAG, "Unknown resource type");
         }
-        TextView textView = (TextView) inflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_no_sim_card);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_no_sim_card);
         if (this.mType == 1) {
             textView.setText(this.mContext.getResources().getString(simTrayProtectionData.getBodyMessageNoSimCard()));
         } else {
             textView.setVisibility(8);
         }
-        TextView textView2 = (TextView) inflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_waterproof_sim_card);
+        TextView textView2 = (TextView) viewInflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_waterproof_sim_card);
         if (this.mWaterproof) {
             textView2.setText(this.mContext.getResources().getString(simTrayProtectionData.getBodyMessageWaterProofSimCard()));
         } else {
             textView2.setVisibility(8);
         }
-        TextView textView3 = (TextView) inflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_inserting_sim_card);
+        TextView textView3 = (TextView) viewInflate.findViewById(R.id.sim_card_tray_protection_dialog_body_message_inserting_sim_card);
         if (this.mStyle == 0) {
             textView3.setVisibility(8);
         } else {
@@ -117,23 +117,23 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext, R.style.Theme_SystemUI_POPUPUI);
         AlertController.AlertParams alertParams = builder.P;
         alertParams.mTitle = string;
-        builder.setView(inflate);
+        builder.setView(viewInflate);
         builder.setPositiveButton(this.mContext.getResources().getString(R.string.yes), null);
         alertParams.mOnDismissListener = new DialogInterface.OnDismissListener() { // from class: com.android.systemui.popup.view.SimTrayProtectionDialog$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                SimTrayProtectionDialog.this.lambda$createDialog$0(dialogInterface);
+                this.f$0.lambda$createDialog$0(dialogInterface);
             }
         };
-        AlertDialog create = builder.create();
-        create.getWindow().getAttributes().setTitle(TAG);
-        create.mAlert.mIsBlurEnabled = true;
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().getAttributes().setTitle(TAG);
+        alertDialogCreate.mAlert.mIsBlurEnabled = true;
         if (z2) {
-            create.getWindow().setType(2017);
-            return create;
+            alertDialogCreate.getWindow().setType(2017);
+            return alertDialogCreate;
         }
-        create.getWindow().setType(2009);
-        return create;
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -141,10 +141,10 @@ public class SimTrayProtectionDialog implements PopupUIAlertDialog {
         this.mDialog = null;
     }
 
-    private void updateFontSize(TextView... textViewArr) {
+    private void updateFontSize(TextView... textViewArr) throws Resources.NotFoundException {
         for (TextView textView : textViewArr) {
             if (textView != null) {
-                FontSizeUtils.updateFontSize(textView, R.dimen.subscreen_dialog_text_size, 0.9f, 1.3f);
+                FontSizeUtils.updateFontSize(textView, R.dimen.subscreen_dialog_text_size, 0.8f, 1.3f);
             }
         }
     }

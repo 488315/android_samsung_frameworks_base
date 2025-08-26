@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumePanelValues {
     public static final int $stable = 0;
@@ -38,31 +37,26 @@ public final class VolumePanelValues {
     public static final int TYPE_CLEAR_SIDE_VIEW_COVER = 15;
     public static final int TYPE_MINI_SVIEW_WALLET_COVER = 16;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface AccessibilityContentFlags {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionFlags {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CoverTypes {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RingerModes {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface StreamTypes {

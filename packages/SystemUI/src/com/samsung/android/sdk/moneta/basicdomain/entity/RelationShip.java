@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RelationShip implements Parcelable {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -42,7 +41,6 @@ public final class RelationShip implements Parcelable {
     private final RelationGroup relationGroup;
     private final int value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -82,9 +80,9 @@ public final class RelationShip implements Parcelable {
         DAUGHTER_IN_LAW = new RelationShip("DAUGHTER_IN_LAW", 21, relationGroup, 21);
         SON_IN_LAW = new RelationShip("SON_IN_LAW", 22, relationGroup, 22);
         UNKNOWN = new RelationShip("UNKNOWN", 23, RelationGroup.UNKNOWN, -1);
-        RelationShip[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        RelationShip[] relationShipArr$values = $values();
+        $VALUES = relationShipArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(relationShipArr$values);
         Companion = new Companion(null);
         CREATOR = new Parcelable.Creator() { // from class: com.samsung.android.sdk.moneta.basicdomain.entity.RelationShip.Creator
             @Override // android.os.Parcelable.Creator

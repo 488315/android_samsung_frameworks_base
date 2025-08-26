@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.util.Log;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdmUtils {
     /* JADX WARN: Multi-variable type inference failed */
@@ -19,30 +18,30 @@ public class EdmUtils {
     /* JADX WARN: Type inference failed for: r8v9 */
     public static boolean isScreenCaptureEnabled(Context context) {
         String[] strArr = {"false"};
-        Uri parse = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy3");
-        int i = -1;
-        i = -1;
-        i = -1;
+        Uri uri = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy3");
+        int iEquals = -1;
+        iEquals = -1;
+        iEquals = -1;
         char c = 65535;
-        i = -1;
-        i = -1;
+        iEquals = -1;
+        iEquals = -1;
         if (context == null) {
             Log.e("Screenshot", "getEnterprisePolicyEnabled: context is null");
         } else {
-            Cursor query = context.getContentResolver().query(parse, null, "isScreenCaptureEnabled", strArr, null);
+            Cursor cursorQuery = context.getContentResolver().query(uri, null, "isScreenCaptureEnabled", strArr, null);
             try {
-                if (query != null) {
+                if (cursorQuery != null) {
                     try {
-                        query.moveToFirst();
-                        i = query.getString(query.getColumnIndex("isScreenCaptureEnabled")).equals("true");
-                        query.close();
+                        cursorQuery.moveToFirst();
+                        iEquals = cursorQuery.getString(cursorQuery.getColumnIndex("isScreenCaptureEnabled")).equals("true");
+                        cursorQuery.close();
                     } finally {
                     }
                 }
             } catch (Exception unused) {
             }
-            ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "projectionArgs:isScreenCaptureEnabled/", "Screenshot");
-            c = i;
+            ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iEquals, "projectionArgs:isScreenCaptureEnabled/", "Screenshot");
+            c = iEquals;
         }
         return c != 0;
     }

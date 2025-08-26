@@ -47,11 +47,11 @@ public final class DreamOverlayConnectionHandler {
 
     public boolean bind() {
         this.mConnection.addCallback(this.mCallback);
-        boolean bind = this.mConnection.bind();
-        if (!bind) {
+        boolean zBind = this.mConnection.bind();
+        if (!zBind) {
             unbind();
         }
-        return bind;
+        return zBind;
     }
 
     public void unbind() {

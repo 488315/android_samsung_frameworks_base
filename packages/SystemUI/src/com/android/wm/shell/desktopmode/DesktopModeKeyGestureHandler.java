@@ -2,6 +2,7 @@ package com.android.wm.shell.desktopmode;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyGestureEvent;
 import android.os.IBinder;
@@ -20,7 +21,6 @@ import java.util.Optional;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestureEventHandler {
     public final Optional desktopModeWindowDecorViewModel;
@@ -30,7 +30,6 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
     public final ShellExecutor mainExecutor;
     public final ShellTaskOrganizer shellTaskOrganizer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,9 +57,9 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
 
     public static void logV(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopModeKeyGestureHandler", objArr);
-        ProtoLog.v(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopModeKeyGestureHandler", objArr);
+        ProtoLog.v(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public final ActivityManager.RunningTaskInfo getGloballyFocusedFreeformTask() {
@@ -81,8 +80,8 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
             if (focusedActivityTaskWithWinMode != null) {
                 this.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopModeKeyGestureHandler$handleKeyGestureEvent$1$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        ((DesktopTasksController) DesktopModeKeyGestureHandler.this.desktopTasksController.get()).toggleExternalDisplay(focusedActivityTaskWithWinMode.taskId);
+                    public final void run() throws Resources.NotFoundException {
+                        ((DesktopTasksController) this.this$0.desktopTasksController.get()).toggleExternalDisplay(focusedActivityTaskWithWinMode.taskId);
                     }
                 });
                 return;
@@ -97,7 +96,7 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
                     this.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopModeKeyGestureHandler$handleKeyGestureEvent$3$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ((DesktopModeWindowDecorViewModel) DesktopModeKeyGestureHandler.this.desktopModeWindowDecorViewModel.get()).onSnapResize(globallyFocusedFreeformTask.taskId, true, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD, false);
+                            ((DesktopModeWindowDecorViewModel) this.this$0.desktopModeWindowDecorViewModel.get()).onSnapResize(globallyFocusedFreeformTask.taskId, true, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD, false);
                         }
                     });
                     break;
@@ -110,7 +109,7 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
                     this.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopModeKeyGestureHandler$handleKeyGestureEvent$4$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ((DesktopModeWindowDecorViewModel) DesktopModeKeyGestureHandler.this.desktopModeWindowDecorViewModel.get()).onSnapResize(globallyFocusedFreeformTask2.taskId, false, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD, false);
+                            ((DesktopModeWindowDecorViewModel) this.this$0.desktopModeWindowDecorViewModel.get()).onSnapResize(globallyFocusedFreeformTask2.taskId, false, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD, false);
                         }
                     });
                     break;
@@ -122,8 +121,8 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
                 if (globallyFocusedFreeformTask3 != null) {
                     this.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopModeKeyGestureHandler$handleKeyGestureEvent$6$1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            ((DesktopTasksController) DesktopModeKeyGestureHandler.this.desktopTasksController.get()).minimizeTask(globallyFocusedFreeformTask3, DesktopModeEventLogger.Companion.MinimizeReason.KEY_GESTURE);
+                        public final void run() throws Resources.NotFoundException {
+                            ((DesktopTasksController) this.this$0.desktopTasksController.get()).minimizeTask(globallyFocusedFreeformTask3, DesktopModeEventLogger.Companion.MinimizeReason.KEY_GESTURE);
                         }
                     });
                     break;
@@ -136,9 +135,9 @@ public final class DesktopModeKeyGestureHandler implements InputManager.KeyGestu
                     this.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopModeKeyGestureHandler$handleKeyGestureEvent$5$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            DesktopTasksController desktopTasksController = (DesktopTasksController) DesktopModeKeyGestureHandler.this.desktopTasksController.get();
+                            DesktopTasksController desktopTasksController = (DesktopTasksController) this.this$0.desktopTasksController.get();
                             ActivityManager.RunningTaskInfo runningTaskInfo = globallyFocusedFreeformTask4;
-                            desktopTasksController.toggleDesktopTaskSize(runningTaskInfo, new ToggleTaskSizeInteraction(DesktopModeUtils.isTaskMaximized(runningTaskInfo, DesktopModeKeyGestureHandler.this.displayController), ToggleTaskSizeInteraction.Source.KEYBOARD_SHORTCUT, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD));
+                            desktopTasksController.toggleDesktopTaskSize(runningTaskInfo, new ToggleTaskSizeInteraction(DesktopModeUtils.isTaskMaximized(runningTaskInfo, this.this$0.displayController), ToggleTaskSizeInteraction.Source.KEYBOARD_SHORTCUT, DesktopModeEventLogger.Companion.InputMethod.KEYBOARD));
                         }
                     });
                     break;

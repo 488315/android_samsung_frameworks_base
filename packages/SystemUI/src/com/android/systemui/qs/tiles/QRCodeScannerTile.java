@@ -19,7 +19,6 @@ import com.android.systemui.qs.flags.QsInCompose;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QRCodeScannerTile extends QSTileImpl {
     public final AnonymousClass1 mCallback;
@@ -85,9 +84,9 @@ public class QRCodeScannerTile extends QSTileImpl {
         state.contentDescription = string;
         int i = QsInCompose.$r8$clinit;
         state.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qr_code_scanner);
-        boolean isAbleToLaunchScannerActivity = this.mQRCodeScannerController.isAbleToLaunchScannerActivity();
-        state.state = isAbleToLaunchScannerActivity ? 1 : 0;
-        state.secondaryLabel = !isAbleToLaunchScannerActivity ? this.mContext.getString(R.string.qr_code_scanner_updating_secondary_label) : null;
+        boolean zIsAbleToLaunchScannerActivity = this.mQRCodeScannerController.isAbleToLaunchScannerActivity();
+        state.state = zIsAbleToLaunchScannerActivity ? 1 : 0;
+        state.secondaryLabel = !zIsAbleToLaunchScannerActivity ? this.mContext.getString(R.string.qr_code_scanner_updating_secondary_label) : null;
         state.expandedAccessibilityClassName = Button.class.getName();
     }
 

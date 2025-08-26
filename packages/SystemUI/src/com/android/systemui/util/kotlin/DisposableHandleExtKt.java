@@ -1,77 +1,133 @@
 package com.android.systemui.util.kotlin;
 
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.EmptyCoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
+import kotlinx.coroutines.DelayKt;
+import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisposableHandleExtKt {
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+
+    /* renamed from: com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DisposableHandleExtKt.awaitCancellationThenDispose(null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.kotlin.DisposableHandleExtKt$launchAndDispose$1, reason: invalid class name and case insensitive filesystem */
+    public final class C11521 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Function0 $onLaunch;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11521(Function0 function0, Continuation continuation) {
+            super(2, continuation);
+            this.$onLaunch = function0;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new C11521(this.$onLaunch, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                DisposableHandle disposableHandle = (DisposableHandle) this.$onLaunch.invoke();
+                this.label = 1;
+                if (DisposableHandleExtKt.awaitCancellationThenDispose(disposableHandle, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+
+        public final Object invokeSuspend$$forInline(Object obj) {
+            DisposableHandleExtKt.awaitCancellationThenDispose((DisposableHandle) this.$onLaunch.invoke(), this);
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11521) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object awaitCancellationThenDispose(kotlinx.coroutines.DisposableHandle r4, kotlin.coroutines.Continuation r5) {
-        /*
-            boolean r0 = r5 instanceof com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1 r0 = (com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1 r0 = new com.android.systemui.util.kotlin.DisposableHandleExtKt$awaitCancellationThenDispose$1
-            r0.<init>(r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L35
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            java.lang.Object r4 = r0.L$0
-            kotlinx.coroutines.DisposableHandle r4 = (kotlinx.coroutines.DisposableHandle) r4
-            kotlin.ResultKt.throwOnFailure(r5)     // Catch: java.lang.Throwable -> L33
-            goto L43
-        L33:
-            r5 = move-exception
-            goto L49
-        L35:
-            kotlin.ResultKt.throwOnFailure(r5)
-            r0.L$0 = r4     // Catch: java.lang.Throwable -> L33
-            r0.label = r3     // Catch: java.lang.Throwable -> L33
-            kotlin.coroutines.intrinsics.CoroutineSingletons r5 = kotlinx.coroutines.DelayKt.awaitCancellation(r0)     // Catch: java.lang.Throwable -> L33
-            if (r5 != r1) goto L43
-            return r1
-        L43:
-            kotlin.KotlinNothingValueException r5 = new kotlin.KotlinNothingValueException     // Catch: java.lang.Throwable -> L33
-            r5.<init>()     // Catch: java.lang.Throwable -> L33
-            throw r5     // Catch: java.lang.Throwable -> L33
-        L49:
-            r4.dispose()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.kotlin.DisposableHandleExtKt.awaitCancellationThenDispose(kotlinx.coroutines.DisposableHandle, kotlin.coroutines.Continuation):java.lang.Object");
+    public static final Object awaitCancellationThenDispose(DisposableHandle disposableHandle, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                anonymousClass1.L$0 = disposableHandle;
+                anonymousClass1.label = 1;
+                if (DelayKt.awaitCancellation(anonymousClass1) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                disposableHandle = (DisposableHandle) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        } catch (Throwable th) {
+            disposableHandle.dispose();
+            throw th;
+        }
     }
 
     public static final Job launchAndDispose(CoroutineScope coroutineScope, CoroutineContext coroutineContext, CoroutineStart coroutineStart, Function0 function0) {
-        return BuildersKt.launch(coroutineScope, coroutineContext, coroutineStart, new DisposableHandleExtKt$launchAndDispose$1(function0, null));
+        return BuildersKt.launch(coroutineScope, coroutineContext, coroutineStart, new C11521(function0, null));
     }
 
     public static /* synthetic */ Job launchAndDispose$default(CoroutineScope coroutineScope, CoroutineContext coroutineContext, CoroutineStart coroutineStart, Function0 function0, int i, Object obj) {
@@ -81,6 +137,6 @@ public final class DisposableHandleExtKt {
         if ((i & 2) != 0) {
             coroutineStart = CoroutineStart.DEFAULT;
         }
-        return BuildersKt.launch(coroutineScope, coroutineContext, coroutineStart, new DisposableHandleExtKt$launchAndDispose$1(function0, null));
+        return BuildersKt.launch(coroutineScope, coroutineContext, coroutineStart, new C11521(function0, null));
     }
 }

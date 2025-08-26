@@ -31,7 +31,6 @@ import java.util.Objects;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SpinnerLayoutHolder extends Holder {
     public final ControlsSpinner spinner;
@@ -146,7 +145,7 @@ public final class SpinnerLayoutHolder extends Holder {
                 public final void onItemSelected(AdapterView adapterView, View view, int i, long j) {
                     SelectedComponentRepository.SelectedComponent selectedComponent;
                     if (adapterView != null) {
-                        ControlsSpinner.ItemAdapter itemAdapter2 = ControlsSpinner.ItemAdapter.this;
+                        ControlsSpinner.ItemAdapter itemAdapter2 = itemAdapter;
                         ControlsSpinner controlsSpinner2 = controlsSpinner;
                         ControlsSpinner.SelectionItem selectionItem3 = (ControlsSpinner.SelectionItem) adapterView.getItemAtPosition(i);
                         itemAdapter2.mSelectedIndex = i;
@@ -190,21 +189,21 @@ public final class SpinnerLayoutHolder extends Holder {
                                 ComponentInfo.Companion.getClass();
                                 if (!componentInfo2.equals(ComponentInfo.EMPTY_COMPONENT_INFO)) {
                                     int i2 = SecControlsUiControllerImpl.$r8$clinit;
-                                    ControlsServiceInfo isPanelComponent = secControlsUiControllerImpl.isPanelComponent(componentInfo2);
-                                    if (isPanelComponent != null) {
-                                        selectedComponent = new SelectedComponentRepository.SelectedComponent(new SelectedItem.PanelItem(isPanelComponent.loadLabel(), componentInfo2.componentName));
+                                    ControlsServiceInfo controlsServiceInfoIsPanelComponent = secControlsUiControllerImpl.isPanelComponent(componentInfo2);
+                                    if (controlsServiceInfoIsPanelComponent != null) {
+                                        selectedComponent = new SelectedComponentRepository.SelectedComponent(new SelectedItem.PanelItem(controlsServiceInfoIsPanelComponent.loadLabel(), componentInfo2.componentName));
                                     } else {
-                                        ControlsServiceInfo access$getComponent = SecControlsUiControllerImpl.access$getComponent(secControlsUiControllerImpl, componentInfo2);
-                                        selectedComponent = new SelectedComponentRepository.SelectedComponent(new SelectedItem.ComponentItem(access$getComponent != null ? access$getComponent.loadLabel() : "", componentInfo2));
+                                        ControlsServiceInfo controlsServiceInfoAccess$getComponent = SecControlsUiControllerImpl.access$getComponent(secControlsUiControllerImpl, componentInfo2);
+                                        selectedComponent = new SelectedComponentRepository.SelectedComponent(new SelectedItem.ComponentItem(controlsServiceInfoAccess$getComponent != null ? controlsServiceInfoAccess$getComponent.loadLabel() : "", componentInfo2));
                                     }
                                     ((SecSelectedComponentRepositoryImpl) secControlsUiControllerImpl.secSelectedComponentRepository).setSelectedComponent(selectedComponent);
                                 }
                                 secControlsUiControllerImpl.isChanged = false;
                                 new SALogger.Event.TapSpinnerApp(secControlsUiControllerImpl.selectedItem.getComponentName().getPackageName()).sendEvent(secControlsUiControllerImpl.saLogger.systemUIAnalyticsWrapper);
                                 secControlsUiControllerImpl.adapterNeedToUpdateDataSet = true;
-                                ControlsServiceInfo isPanelComponent2 = secControlsUiControllerImpl.isPanelComponent(componentInfo2);
-                                ControlsServiceInfo access$getComponent2 = SecControlsUiControllerImpl.access$getComponent(secControlsUiControllerImpl, componentInfo2);
-                                SecControlsUiControllerImpl.access$reload(secControlsUiControllerImpl, isPanelComponent2 != null ? new SelectedItem.PanelItem(isPanelComponent2.loadLabel(), componentInfo2.componentName) : new SelectedItem.ComponentItem(access$getComponent2 != null ? access$getComponent2.loadLabel() : "", componentInfo2));
+                                ControlsServiceInfo controlsServiceInfoIsPanelComponent2 = secControlsUiControllerImpl.isPanelComponent(componentInfo2);
+                                ControlsServiceInfo controlsServiceInfoAccess$getComponent2 = SecControlsUiControllerImpl.access$getComponent(secControlsUiControllerImpl, componentInfo2);
+                                SecControlsUiControllerImpl.access$reload(secControlsUiControllerImpl, controlsServiceInfoIsPanelComponent2 != null ? new SelectedItem.PanelItem(controlsServiceInfoIsPanelComponent2.loadLabel(), componentInfo2.componentName) : new SelectedItem.ComponentItem(controlsServiceInfoAccess$getComponent2 != null ? controlsServiceInfoAccess$getComponent2.loadLabel() : "", componentInfo2));
                             }
                         }
                         controlsSpinner2.previous = selectionItem3;

@@ -14,11 +14,11 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.art.flags");
-            artServiceV3 = load.getBooleanFlagValue("art_service_v3", false);
-            alwaysEnableProfileCode = load.getBooleanFlagValue("always_enable_profile_code", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.art.flags");
+            artServiceV3 = aconfigPackageLoad.getBooleanFlagValue("art_service_v3", false);
+            alwaysEnableProfileCode = aconfigPackageLoad.getBooleanFlagValue("always_enable_profile_code", false);
             executableMethodFileOffsets = true;
-            executableMethodFileOffsetsV2 = load.getBooleanFlagValue("executable_method_file_offsets_v2", false);
+            executableMethodFileOffsetsV2 = aconfigPackageLoad.getBooleanFlagValue("executable_method_file_offsets_v2", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

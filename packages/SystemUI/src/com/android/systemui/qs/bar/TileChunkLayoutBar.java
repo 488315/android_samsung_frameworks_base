@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -25,10 +26,10 @@ import com.android.systemui.util.ConfigurationState;
 import com.android.systemui.util.SettingsHelper;
 import java.util.Arrays;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileChunkLayoutBar extends BarItemImpl {
     public final float BUTTON_WIDTH_MAX_RATIO;
@@ -65,7 +66,7 @@ public class TileChunkLayoutBar extends BarItemImpl {
         this.BUTTON_WIDTH_MIN_RATIO = this.mSecQsUiDisplayModeInteractor.isTablet() ? 0.67f : 0.75f;
         this.mSettingListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.bar.TileChunkLayoutBar.1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
+            public final void onChanged(Uri uri) throws Resources.NotFoundException {
                 TileChunkLayoutBar tileChunkLayoutBar = TileChunkLayoutBar.this;
                 if (tileChunkLayoutBar.mTileLayout == null) {
                     return;
@@ -78,9 +79,9 @@ public class TileChunkLayoutBar extends BarItemImpl {
                     float f = tileChunkLayoutBar.BUTTON_WIDTH_MAX_RATIO;
                     float f2 = tileChunkLayoutBar.BUTTON_WIDTH_MIN_RATIO;
                     float f3 = (f - f2) / 10.0f;
-                    float min = Math.min(Math.max(Math.round((f - (qSButtonGridWidth * f3)) * 1000.0f) / 1000.0f, f2), f);
-                    Log.d(str, "QUICKSTAR_QS_TILE_LAYOUT_CUSTOM_MATRIX result[P:" + qSButtonGridWidth + ", R:" + min + "] dP:" + tileChunkLayoutBar.getDefaultProgress() + ", iR:" + f3 + ", cDR:" + (f - (tileChunkLayoutBar.getDefaultProgress() * f3)));
-                    secTileChunkLayout.updateTileWidth(min);
+                    float fMin = Math.min(Math.max(Math.round((f - (qSButtonGridWidth * f3)) * 1000.0f) / 1000.0f, f2), f);
+                    Log.d(str, "QUICKSTAR_QS_TILE_LAYOUT_CUSTOM_MATRIX result[P:" + qSButtonGridWidth + ", R:" + fMin + "] dP:" + tileChunkLayoutBar.getDefaultProgress() + ", iR:" + f3 + ", cDR:" + (f - (tileChunkLayoutBar.getDefaultProgress() * f3)));
+                    secTileChunkLayout.updateTileWidth(fMin);
                 } else {
                     tileChunkLayoutBar.mTileLayout.updateTileWidth(1.0f);
                 }
@@ -91,7 +92,7 @@ public class TileChunkLayoutBar extends BarItemImpl {
         this.mResourcePicker = secQSPanelResourcePicker;
     }
 
-    public final void calculateContainerHeight() {
+    public final void calculateContainerHeight() throws Resources.NotFoundException {
         this.mIsExpanded = false;
         if (this.mTileLayout == null) {
             this.mContainerCollapsedHeight = 0;
@@ -111,9 +112,9 @@ public class TileChunkLayoutBar extends BarItemImpl {
                     this.mCollapsedRow = 1;
                 }
             }
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "calculateContainerHeight Expanded row: ", " Collapsed row: ");
-            m.append(this.mCollapsedRow);
-            Log.d(this.TAG, m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "calculateContainerHeight Expanded row: ", " Collapsed row: ");
+            sbM.append(this.mCollapsedRow);
+            Log.d(this.TAG, sbM.toString());
             Context context = this.mContext;
             SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
             int touchIconSize = secQSPanelResourcePicker.getTouchIconSize(context);
@@ -146,10 +147,10 @@ public class TileChunkLayoutBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_tile_chunk_layout_bar, viewGroup, false);
-        this.mBarRootView = inflate;
-        inflate.setClickable(true);
+    public final void inflateViews(ViewGroup viewGroup) throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_tile_chunk_layout_bar, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        viewInflate.setClickable(true);
         this.mTileLayoutContainer = (ViewGroup) this.mBarRootView.findViewById(R.id.tile_layout_container);
         this.mTileLayoutBackground = this.mBarRootView.findViewById(R.id.tile_layout_background);
         this.mScrollIndicatorClickContainer = this.mBarRootView.findViewById(R.id.scroll_indicator_touch_container);
@@ -177,7 +178,7 @@ public class TileChunkLayoutBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void onConfigChanged(Configuration configuration) {
+    public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
         if (this.mBarRootView == null) {
             return;
         }
@@ -226,9 +227,9 @@ public class TileChunkLayoutBar extends BarItemImpl {
         secTileChunkLayout.fraction = f;
         secTileChunkLayout.updateExpandableVariables(f);
         float f2 = secTileChunkLayout.fraction;
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(secTileChunkLayout.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(2)), new SecTileChunkLayout$$ExternalSyntheticLambda0(3)));
-        while (filteringSequence$iterator$1.hasNext()) {
-            LinearLayout linearLayout = ((LabelTileView) filteringSequence$iterator$1.next()).labelContainer;
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.filterNot(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(secTileChunkLayout.records), new SecTileChunkLayout$$ExternalSyntheticLambda0(2)), new SecTileChunkLayout$$ExternalSyntheticLambda0(3)).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            LinearLayout linearLayout = ((LabelTileView) anonymousClass1.next()).labelContainer;
             if (linearLayout != null) {
                 linearLayout.setAlpha(f2);
             }
@@ -243,17 +244,17 @@ public class TileChunkLayoutBar extends BarItemImpl {
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
         secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_tile_chunk_layout_indicator_touch_height, context);
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_tile_chunk_layout_indicator_touch_height, context);
         Context context2 = this.mContext;
         secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
-        int dp2 = dp - ((int) ((dp - SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_tile_chunk_layout_indicator_touch_height_expanded, context2)) * f));
+        int iDp2 = iDp - ((int) ((iDp - SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_tile_chunk_layout_indicator_touch_height_expanded, context2)) * f));
         ViewGroup.LayoutParams layoutParams = this.mScrollIndicatorClickContainer.getLayoutParams();
-        layoutParams.height = dp2;
+        layoutParams.height = iDp2;
         this.mScrollIndicatorClickContainer.setLayoutParams(layoutParams);
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void setListening(boolean z) {
+    public final void setListening(boolean z) throws Resources.NotFoundException {
         this.mListening = z;
         if (this.mLocalListening == z) {
             return;
@@ -275,7 +276,7 @@ public class TileChunkLayoutBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void setUnderneathQqs(boolean z) {
+    public final void setUnderneathQqs(boolean z) throws Resources.NotFoundException {
         this.mIsUnderneathQqs = z;
         updateHeightMargins();
     }
@@ -290,7 +291,7 @@ public class TileChunkLayoutBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         View view = this.mBarRootView;
         if (view == null) {
             return;

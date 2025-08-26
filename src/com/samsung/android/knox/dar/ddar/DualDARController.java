@@ -40,8 +40,8 @@ public class DualDARController {
         Bundle bundle = new Bundle();
         boolean z = false;
         bundle.putInt("user_id", 0);
-        Bundle processCommand = processCommand("ON_DEVICE_OWNER_PROVISIONING", bundle);
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("ON_DEVICE_OWNER_PROVISIONING", bundle);
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         Log.d(TAG, "handleDeviceOwnerProvisioning - result : " + z);
@@ -52,8 +52,8 @@ public class DualDARController {
         Log.d(TAG, "handleWorkspaceCreation");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommand = processCommand("ON_WORKSPACE_CREATION", bundle);
-        if (processCommand == null || !processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("ON_WORKSPACE_CREATION", bundle);
+        if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             Log.e(TAG, "handleWorkspaceCreation failed");
             return false;
         }
@@ -65,8 +65,8 @@ public class DualDARController {
         Log.d(TAG, "handleBeforeUnlockUser");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommand = processCommand("ON_BEFORE_UNLOCK_USER", bundle);
-        if (processCommand == null || !processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("ON_BEFORE_UNLOCK_USER", bundle);
+        if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             Log.e(TAG, "handleBeforeUnlockUser failed");
             return false;
         }
@@ -75,8 +75,8 @@ public class DualDARController {
     }
 
     public boolean onPassword2Change(int i, byte[] bArr, byte[] bArr2) {
-        byte[] encryptStream;
-        byte[] encryptStream2;
+        byte[] bArrEncryptStream;
+        byte[] bArrEncryptStream2;
         Log.d(TAG, "onPassword2Change");
         Bundle bundle = new Bundle();
         if (bArr2 != null && bArr2.length == 0) {
@@ -86,22 +86,22 @@ public class DualDARController {
             bArr = null;
         }
         if (bArr != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(i) && (encryptStream2 = StreamCipher.encryptStream(bArr)) != null) {
-                bArr = encryptStream2;
+            if (SemPersonaManager.isDualDARNativeCrypto(i) && (bArrEncryptStream2 = StreamCipher.encryptStream(bArr)) != null) {
+                bArr = bArrEncryptStream2;
             }
             bundle.putByteArray("EXISTING_PASSWORD", bArr);
         }
         bundle.putInt("user_id", i);
         if (bArr2 != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(i) && (encryptStream = StreamCipher.encryptStream(bArr2)) != null) {
-                bArr2 = encryptStream;
+            if (SemPersonaManager.isDualDARNativeCrypto(i) && (bArrEncryptStream = StreamCipher.encryptStream(bArr2)) != null) {
+                bArr2 = bArrEncryptStream;
             }
             bundle.putByteArray("NEW_PASSWORD", bArr2);
         }
-        Bundle processCommand = processCommand("ON_PASSWORD2_CHANGE", bundle);
+        Bundle bundleProcessCommand = processCommand("ON_PASSWORD2_CHANGE", bundle);
         Wiper.wipe(bundle.getByteArray("EXISTING_PASSWORD"));
         Wiper.wipe(bundle.getByteArray("NEW_PASSWORD"));
-        if (processCommand == null || !processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             Log.e(TAG, "Authentication Change Failure by dual dar client");
             return false;
         }
@@ -113,8 +113,8 @@ public class DualDARController {
         Log.d(TAG, "onPassword1Change");
         Bundle bundle = new Bundle();
         bundle.putBoolean("NEW_PASSWORD", z);
-        Bundle processCommand = processCommand("ON_PASSWORD1_CHANGE", bundle);
-        if (processCommand == null || !processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("ON_PASSWORD1_CHANGE", bundle);
+        if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             Log.e(TAG, "Failed to handle user 0 password change");
             return false;
         }
@@ -123,18 +123,18 @@ public class DualDARController {
     }
 
     public boolean onPassword2Auth(int i, byte[] bArr) {
-        byte[] encryptStream;
+        byte[] bArrEncryptStream;
         Log.d(TAG, "onPassword2Auth()");
         Bundle bundle = new Bundle();
         if (bArr != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(i) && (encryptStream = StreamCipher.encryptStream(bArr)) != null) {
-                bArr = encryptStream;
+            if (SemPersonaManager.isDualDARNativeCrypto(i) && (bArrEncryptStream = StreamCipher.encryptStream(bArr)) != null) {
+                bArr = bArrEncryptStream;
             }
             bundle.putByteArray("EXISTING_PASSWORD", bArr);
         }
         bundle.putInt("user_id", i);
-        Bundle processCommand = processCommand("ON_PASSWORD2_AUTH", bundle);
-        boolean z = processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        Bundle bundleProcessCommand = processCommand("ON_PASSWORD2_AUTH", bundle);
+        boolean z = bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         Wiper.wipe(bundle.getByteArray("EXISTING_PASSWORD"));
         if (!z) {
             Log.e(TAG, "Authentication Failure by dual dar client");
@@ -148,8 +148,8 @@ public class DualDARController {
         Log.d(TAG, "fetchOuterLayerKey()");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommand = processCommand("FETCH_OUTERLAYER_KEY", bundle);
-        byte[] byteArray = processCommand != null ? processCommand.getByteArray("OUTER_LAYER_SECRET") : null;
+        Bundle bundleProcessCommand = processCommand("FETCH_OUTERLAYER_KEY", bundle);
+        byte[] byteArray = bundleProcessCommand != null ? bundleProcessCommand.getByteArray("OUTER_LAYER_SECRET") : null;
         if (byteArray == null) {
             Log.e(TAG, "fetchOuterLayerKey failed");
             return null;
@@ -162,8 +162,8 @@ public class DualDARController {
         Log.d(TAG, "onUserStopped()");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommandAsync = processCommandAsync("ON_USER_STOPPED", bundle);
-        if (processCommandAsync == null || !processCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleProcessCommandAsync = processCommandAsync("ON_USER_STOPPED", bundle);
+        if (bundleProcessCommandAsync == null || !bundleProcessCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "handling onUserStopped failed by KnoxCore");
         }
         Log.e(TAG, "handling onUserStopped succeeded by KnoxCore");
@@ -173,8 +173,8 @@ public class DualDARController {
         Log.d(TAG, "onUserStart()");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommandAsync = processCommandAsync("ON_USER_START", bundle);
-        if (processCommandAsync == null || !processCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleProcessCommandAsync = processCommandAsync("ON_USER_START", bundle);
+        if (bundleProcessCommandAsync == null || !bundleProcessCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "handling onUserStart failed by KnoxCore");
         }
         Log.e(TAG, "handling onUserStart succeeded by KnoxCore");
@@ -184,8 +184,8 @@ public class DualDARController {
         Log.d(TAG, "isReady()");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommand = processCommand("IS_READY", bundle);
-        boolean z = processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE);
+        Bundle bundleProcessCommand = processCommand("IS_READY", bundle);
+        boolean z = bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE);
         if (!z) {
             Log.e(TAG, "handling isReady failed by KnoxCore");
         }
@@ -196,8 +196,8 @@ public class DualDARController {
         Log.d(TAG, "onUserRemoved()");
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
-        Bundle processCommandAsync = processCommandAsync("ON_USER_REMOVED", bundle);
-        if (processCommandAsync == null || !processCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleProcessCommandAsync = processCommandAsync("ON_USER_REMOVED", bundle);
+        if (bundleProcessCommandAsync == null || !bundleProcessCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "handling onUserRemoved failed by KnoxCore");
         }
         Log.e(TAG, "handling onUserRemoved succeeded by KnoxCore");
@@ -209,9 +209,9 @@ public class DualDARController {
         bundle.putString("PREVIOUS_STATE", state.name());
         bundle.putString("CURRENT_STATE", state2.name());
         bundle.putString("ON_EVENT", event.name());
-        Bundle processCommandAsync = processCommandAsync("ON_DDAR_STATE_CHANGED", bundle);
+        Bundle bundleProcessCommandAsync = processCommandAsync("ON_DDAR_STATE_CHANGED", bundle);
         boolean z = false;
-        if (processCommandAsync != null && processCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        if (bundleProcessCommandAsync != null && bundleProcessCommandAsync.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         if (!z) {
@@ -228,10 +228,10 @@ public class DualDARController {
         }
         bundle.putLong("RESET_PASSWORD_TOKEN_HANDLE", j);
         bundle.putByteArray("RESET_PASSWORD_TOKEN", bArr2);
-        Bundle processCommand = processCommand("SET_RESET_PASSWORD_TOKEN", bundle);
+        Bundle bundleProcessCommand = processCommand("SET_RESET_PASSWORD_TOKEN", bundle);
         Wiper.wipe(bundle.getByteArray("EXISTING_PASSWORD"));
         boolean z = false;
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         if (!z) {
@@ -244,8 +244,8 @@ public class DualDARController {
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
         bundle.putLong("RESET_PASSWORD_TOKEN_HANDLE", j);
-        Bundle processCommand = processCommand("CLEAR_RESET_PASSWORD_TOKEN", bundle);
-        if (processCommand == null || !processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("CLEAR_RESET_PASSWORD_TOKEN", bundle);
+        if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             Log.e(TAG, "Some operation on DualDAR platform failed on DualDAR state changed");
         }
     }
@@ -258,10 +258,10 @@ public class DualDARController {
         }
         bundle.putLong("RESET_PASSWORD_TOKEN_HANDLE", j);
         bundle.putByteArray("RESET_PASSWORD_TOKEN", bArr2);
-        Bundle processCommand = processCommand("RESET_PASSWORD_WITH_TOKEN", bundle);
+        Bundle bundleProcessCommand = processCommand("RESET_PASSWORD_WITH_TOKEN", bundle);
         Wiper.wipe(bundle.getByteArray("NEW_PASSWORD"));
         boolean z = false;
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         if (!z) {
@@ -274,9 +274,9 @@ public class DualDARController {
         Bundle bundle = new Bundle();
         bundle.putInt("user_id", i);
         bundle.putInt("FEATURE", 1000);
-        Bundle processCommand = processCommand("IS_SUPPORTED", bundle);
+        Bundle bundleProcessCommand = processCommand("IS_SUPPORTED", bundle);
         boolean z = false;
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         if (!z) {

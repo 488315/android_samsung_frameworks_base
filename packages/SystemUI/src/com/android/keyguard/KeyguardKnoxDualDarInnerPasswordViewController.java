@@ -30,7 +30,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.samsung.android.knox.SemPersonaManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardKnoxDualDarInnerPasswordViewController extends KeyguardSecPasswordViewController {
     public byte[] mEntry;
@@ -107,7 +106,7 @@ public class KeyguardKnoxDualDarInnerPasswordViewController extends KeyguardSecP
     }
 
     @Override // com.android.keyguard.KeyguardSecPasswordViewController, com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
-    public final void reset$1() {
+    public final void reset$1() throws Resources.NotFoundException {
         this.mDismissing = false;
         ((KeyguardSecPasswordView) this.mView).resetPasswordText(false, false);
         long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) this.mKnoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();

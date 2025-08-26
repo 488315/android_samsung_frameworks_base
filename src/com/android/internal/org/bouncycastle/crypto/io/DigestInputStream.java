@@ -16,20 +16,20 @@ public class DigestInputStream extends FilterInputStream {
 
     @Override // java.io.FilterInputStream, java.io.InputStream
     public int read() throws IOException {
-        int read = this.in.read();
-        if (read >= 0) {
-            this.digest.update((byte) read);
+        int i = this.in.read();
+        if (i >= 0) {
+            this.digest.update((byte) i);
         }
-        return read;
+        return i;
     }
 
     @Override // java.io.FilterInputStream, java.io.InputStream
     public int read(byte[] bArr, int i, int i2) throws IOException {
-        int read = this.in.read(bArr, i, i2);
-        if (read > 0) {
-            this.digest.update(bArr, i, read);
+        int i3 = this.in.read(bArr, i, i2);
+        if (i3 > 0) {
+            this.digest.update(bArr, i, i3);
         }
-        return read;
+        return i3;
     }
 
     public Digest getDigest() {

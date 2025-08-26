@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
@@ -36,28 +37,30 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.statusbar.policy.LocationController;
 import com.android.systemui.statusbar.policy.LocationControllerImpl;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
+import com.android.systemui.statusbar.policy.SatelliteEnabledListener;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
+import com.android.systemui.statusbar.policy.SatelliteTrtListener;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LocationTile extends SQSTileImpl {
     public final ActivityStarter mActivityStarter;
     public final LocationController mController;
     public final QSTileImpl.AnimationIcon mDisable;
     public final QSTileImpl.AnimationIcon mEnable;
+    public boolean mIsSatelliteEnabled;
     public boolean mIsSatelliteModeOn;
+    public boolean mIsUsingTerrestrialNetwork;
     public final KeyguardStateController mKeyguard;
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public boolean mListening;
     public final PanelInteractor mPanelInteractor;
     public final AnonymousClass1 mSatelliteModeCallback;
     public final SatelliteModeObserverHelper mSatelliteModeObserverHelper;
+    public final AnonymousClass2 mSatelliteTrtCallback;
     private final SettingsHelper mSettingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback implements LocationController.LocationChangeCallback, KeyguardStateController.Callback {
         public /* synthetic */ Callback(LocationTile locationTile, int i) {
             this();
@@ -78,6 +81,7 @@ public class LocationTile extends SQSTileImpl {
     }
 
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.qs.tiles.LocationTile$1] */
+    /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.qs.tiles.LocationTile$2] */
     public LocationTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, LocationController locationController, KeyguardStateController keyguardStateController, PanelInteractor panelInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, SatelliteModeObserverHelper satelliteModeObserverHelper, SettingsHelper settingsHelper) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         QSTileImpl.ResourceIcon.get(R.drawable.ic_location);
@@ -86,11 +90,23 @@ public class LocationTile extends SQSTileImpl {
         this.mDisable = new QSTileImpl.AnimationIcon(R.drawable.quick_panel_icon_location_off, R.drawable.quick_panel_icon_location_000);
         this.mListening = false;
         this.mIsSatelliteModeOn = false;
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.LocationTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mIsSatelliteEnabled = false;
+        this.mIsUsingTerrestrialNetwork = false;
+        this.mSatelliteModeCallback = new SatelliteEnabledListener() { // from class: com.android.systemui.qs.tiles.LocationTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteEnabledListener
+            public final void onSatelliteEnabledChanged(boolean z) {
                 LocationTile locationTile = LocationTile.this;
-                locationTile.mIsSatelliteModeOn = z;
+                locationTile.mIsSatelliteEnabled = z;
+                locationTile.mIsSatelliteModeOn = z || locationTile.mIsUsingTerrestrialNetwork;
+                locationTile.refreshState(null);
+            }
+        };
+        this.mSatelliteTrtCallback = new SatelliteTrtListener() { // from class: com.android.systemui.qs.tiles.LocationTile.2
+            @Override // com.android.systemui.statusbar.policy.SatelliteTrtListener
+            public final void onSatelliteTrtChanged(boolean z) {
+                LocationTile locationTile = LocationTile.this;
+                locationTile.mIsUsingTerrestrialNetwork = z;
+                locationTile.mIsSatelliteModeOn = locationTile.mIsSatelliteEnabled || z;
                 locationTile.refreshState(null);
             }
         };
@@ -126,7 +142,7 @@ public class LocationTile extends SQSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(final Expandable expandable) {
+    public final void handleClick(final Expandable expandable) throws Resources.NotFoundException {
         if (((QSTile.BooleanState) this.mState).state == 0) {
             return;
         }
@@ -135,13 +151,13 @@ public class LocationTile extends SQSTileImpl {
         if (edmMonitor != null) {
             Context context = edmMonitor.knoxStateMonitor.mContext;
             boolean z2 = edmMonitor.mSettingsChangesAllowed;
-            boolean booleanValue = edmMonitor.mLocationProviderAllowed.get("gps") != null ? ((Boolean) edmMonitor.mLocationProviderAllowed.get("gps")).booleanValue() : true;
-            boolean booleanValue2 = edmMonitor.mLocationProviderAllowed.get("network") != null ? ((Boolean) edmMonitor.mLocationProviderAllowed.get("network")).booleanValue() : true;
+            boolean zBooleanValue = edmMonitor.mLocationProviderAllowed.get("gps") != null ? ((Boolean) edmMonitor.mLocationProviderAllowed.get("gps")).booleanValue() : true;
+            boolean zBooleanValue2 = edmMonitor.mLocationProviderAllowed.get("network") != null ? ((Boolean) edmMonitor.mLocationProviderAllowed.get("network")).booleanValue() : true;
             boolean z3 = edmMonitor.mGPSStateChangeAllowed;
-            boolean isLocationProviderEnabled = Settings.Secure.isLocationProviderEnabled(edmMonitor.knoxStateMonitor.mContext.getContentResolver(), "gps");
-            boolean z4 = (booleanValue && (isLocationProviderEnabled || z3)) ? false : true;
-            boolean z5 = isLocationProviderEnabled && !z3;
-            boolean z6 = ((!z4 || booleanValue2) && z2 && z3) ? false : true;
+            boolean zIsLocationProviderEnabled = Settings.Secure.isLocationProviderEnabled(edmMonitor.knoxStateMonitor.mContext.getContentResolver(), "gps");
+            boolean z4 = (zBooleanValue && (zIsLocationProviderEnabled || z3)) ? false : true;
+            boolean z5 = zIsLocationProviderEnabled && !z3;
+            boolean z6 = ((!z4 || zBooleanValue2) && z2 && z3) ? false : true;
             if (z5) {
                 z6 = true;
             }
@@ -158,8 +174,8 @@ public class LocationTile extends SQSTileImpl {
             if (keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) && this.mSettingsHelper.isLockFunctionsEnabled()) {
                 this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.LocationTile$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        LocationTile.this.handleClick(expandable);
+                    public final void run() throws Resources.NotFoundException {
+                        this.f$0.handleClick(expandable);
                     }
                 });
                 return;
@@ -227,7 +243,7 @@ public class LocationTile extends SQSTileImpl {
         systemUIDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.LocationTile$$ExternalSyntheticLambda3
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                LocationTile.this.refreshState(null);
+                this.f$0.refreshState(null);
             }
         });
         ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
@@ -249,12 +265,15 @@ public class LocationTile extends SQSTileImpl {
             return;
         }
         this.mListening = z;
+        AnonymousClass2 anonymousClass2 = this.mSatelliteTrtCallback;
         AnonymousClass1 anonymousClass1 = this.mSatelliteModeCallback;
         SatelliteModeObserverHelper satelliteModeObserverHelper = this.mSatelliteModeObserverHelper;
         if (z) {
             satelliteModeObserverHelper.addCallback(anonymousClass1);
+            satelliteModeObserverHelper.addCallback(anonymousClass2);
         } else {
             satelliteModeObserverHelper.removeCallback(anonymousClass1);
+            satelliteModeObserverHelper.removeCallback(anonymousClass2);
         }
     }
 
@@ -262,9 +281,9 @@ public class LocationTile extends SQSTileImpl {
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         LocationControllerImpl locationControllerImpl = (LocationControllerImpl) this.mController;
-        boolean isLocationEnabled$1 = locationControllerImpl.isLocationEnabled$1();
+        boolean zIsLocationEnabled$1 = locationControllerImpl.isLocationEnabled$1();
         booleanState.dualTarget = true;
-        booleanState.value = isLocationEnabled$1;
+        booleanState.value = zIsLocationEnabled$1;
         checkIfRestrictionEnforcedByAdminOnly(booleanState, "no_share_location");
         if (!booleanState.disabledByPolicy) {
             checkIfRestrictionEnforcedByAdminOnly(booleanState, "no_config_location");

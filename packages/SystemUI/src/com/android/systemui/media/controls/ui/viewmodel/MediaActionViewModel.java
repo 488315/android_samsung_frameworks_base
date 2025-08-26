@@ -6,7 +6,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaActionViewModel {
     public final Drawable background;
@@ -46,15 +45,15 @@ public final class MediaActionViewModel {
 
     public final int hashCode() {
         Drawable drawable = this.icon;
-        int hashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
+        int iHashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
         CharSequence charSequence = this.contentDescription;
-        int hashCode2 = (hashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         Drawable drawable2 = this.background;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.notVisibleValue, TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (drawable2 == null ? 0 : drawable2.hashCode())) * 31, 31, this.isVisibleWhenScrubbing), 31), 31, this.showInCollapsed);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.notVisibleValue, TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (drawable2 == null ? 0 : drawable2.hashCode())) * 31, 31, this.isVisibleWhenScrubbing), 31), 31, this.showInCollapsed);
         Integer num = this.rebindId;
-        int hashCode3 = (m + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode3 = (iM + (num == null ? 0 : num.hashCode())) * 31;
         Integer num2 = this.buttonId;
-        return this.onClicked.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode3 + (num2 != null ? num2.hashCode() : 0)) * 31, 31, this.isEnabled);
+        return this.onClicked.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode3 + (num2 != null ? num2.hashCode() : 0)) * 31, 31, this.isEnabled);
     }
 
     public final String toString() {

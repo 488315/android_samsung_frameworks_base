@@ -188,9 +188,9 @@ public interface ISemWifiP2pManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiP2pManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiP2pManager)) {
-                return (ISemWifiP2pManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiP2pManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiP2pManager)) {
+                return (ISemWifiP2pManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -258,93 +258,93 @@ public interface ISemWifiP2pManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isP2pConnected = isP2pConnected();
+                    boolean zIsP2pConnected = isP2pConnected();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isP2pConnected);
+                    parcel2.writeBoolean(zIsP2pConnected);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setMsMiceInfo(readInt, readString, readString2);
+                    setMsMiceInfo(i3, string, string2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setScreenSharing(readBoolean);
+                    setScreenSharing(z);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    ISemWifiP2pCallback asInterface = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    ISemWifiP2pCallback iSemWifiP2pCallbackAsInterface = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setPreparedAccountPin(readInt2, readString3, readString4, readString5, readString6, asInterface);
+                    setPreparedAccountPin(i4, string3, string4, string5, string6, iSemWifiP2pCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setListenOffloading(readInt3, readInt4, readInt5, readInt6);
+                    setListenOffloading(i5, i6, i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    controlOpenWifiScanTimer(readInt7);
+                    controlOpenWifiScanTimer(i9);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> inUsePackageList = getInUsePackageList(readString7);
+                    List<String> inUsePackageList = getInUsePackageList(string7);
                     parcel2.writeNoException();
                     parcel2.writeStringList(inUsePackageList);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setInUsePackage(readString8, readString9, readString10, readBoolean2);
+                    setInUsePackage(string8, string9, string10, z2);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    unsetInUsePackage(readString11, readString12, readString13, readBoolean3);
+                    unsetInUsePackage(string11, string12, string13, z3);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unsetAllInUsePackage(readString14);
+                    unsetAllInUsePackage(string14);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString15 = parcel.readString();
-                    ISemWifiP2pCallback asInterface2 = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string15 = parcel.readString();
+                    ISemWifiP2pCallback iSemWifiP2pCallbackAsInterface2 = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeClient(readString15, asInterface2);
+                    removeClient(string15, iSemWifiP2pCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt8 = parcel.readInt();
-                    ISemWifiP2pCallback asInterface3 = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    ISemWifiP2pCallback iSemWifiP2pCallbackAsInterface3 = ISemWifiP2pCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    discoverPeers(readInt8, asInterface3);
+                    discoverPeers(i10, iSemWifiP2pCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 13:
@@ -353,30 +353,30 @@ public interface ISemWifiP2pManager extends IInterface {
                     parcel2.writeTypedObject(p2pFactoryMacAddress, 1);
                     return true;
                 case 14:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SemWifiP2pDevice semWifiP2pDevice = getSemWifiP2pDevice(readString16);
+                    SemWifiP2pDevice semWifiP2pDevice = getSemWifiP2pDevice(string16);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(semWifiP2pDevice, 1);
                     return true;
                 case 15:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] channelsMhzForBand = getChannelsMhzForBand(readInt9);
+                    int[] channelsMhzForBand = getChannelsMhzForBand(i11);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(channelsMhzForBand);
                     return true;
                 case 16:
-                    boolean isP2pSoftApConcurrencySupported = isP2pSoftApConcurrencySupported();
+                    boolean zIsP2pSoftApConcurrencySupported = isP2pSoftApConcurrencySupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isP2pSoftApConcurrencySupported);
+                    parcel2.writeBoolean(zIsP2pSoftApConcurrencySupported);
                     return true;
                 case 17:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean disconnectApBlockAutojoin = disconnectApBlockAutojoin(readBoolean4);
+                    boolean zDisconnectApBlockAutojoin = disconnectApBlockAutojoin(z4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disconnectApBlockAutojoin);
+                    parcel2.writeBoolean(zDisconnectApBlockAutojoin);
                     return true;
                 case 18:
                     long p2pFeature = getP2pFeature();
@@ -388,9 +388,9 @@ public interface ISemWifiP2pManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAwareEnabled(readBoolean5);
+                    setAwareEnabled(z5);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -416,322 +416,322 @@ public interface ISemWifiP2pManager extends IInterface {
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public boolean isP2pConnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setMsMiceInfo(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setScreenSharing(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setPreparedAccountPin(int i, String str, String str2, String str3, String str4, ISemWifiP2pCallback iSemWifiP2pCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeStrongInterface(iSemWifiP2pCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeStrongInterface(iSemWifiP2pCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setListenOffloading(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void controlOpenWifiScanTimer(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public List<String> getInUsePackageList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setInUsePackage(String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void unsetInUsePackage(String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void unsetAllInUsePackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void removeClient(String str, ISemWifiP2pCallback iSemWifiP2pCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSemWifiP2pCallback);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSemWifiP2pCallback);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void discoverPeers(int i, ISemWifiP2pCallback iSemWifiP2pCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSemWifiP2pCallback);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSemWifiP2pCallback);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public MacAddress getP2pFactoryMacAddress() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (MacAddress) obtain2.readTypedObject(MacAddress.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (MacAddress) parcelObtain2.readTypedObject(MacAddress.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public SemWifiP2pDevice getSemWifiP2pDevice(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemWifiP2pDevice) obtain2.readTypedObject(SemWifiP2pDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemWifiP2pDevice) parcelObtain2.readTypedObject(SemWifiP2pDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public int[] getChannelsMhzForBand(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public boolean isP2pSoftApConcurrencySupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public boolean disconnectApBlockAutojoin(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public long getP2pFeature() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void factoryReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
             public void setAwareEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiP2pManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

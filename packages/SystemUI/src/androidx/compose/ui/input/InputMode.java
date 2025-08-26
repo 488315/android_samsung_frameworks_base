@@ -2,7 +2,6 @@ package androidx.compose.ui.input;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class InputMode {
     public final int value;
@@ -10,7 +9,6 @@ public final class InputMode {
     public static final int Touch = 1;
     public static final int Keyboard = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -25,7 +23,7 @@ public final class InputMode {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ InputMode m572boximpl(int i) {
+    public static final /* synthetic */ InputMode m574boximpl(int i) {
         return new InputMode(i);
     }
 

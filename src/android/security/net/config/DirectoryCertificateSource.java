@@ -45,7 +45,7 @@ abstract class DirectoryCertificateSource implements CertificateSource {
 
     @Override // android.security.net.config.CertificateSource
     public Set<X509Certificate> getCertificates() {
-        X509Certificate readCertificate;
+        X509Certificate certificate;
         synchronized (this.mLock) {
             Set<X509Certificate> set = this.mCertificates;
             if (set != null) {
@@ -54,8 +54,8 @@ abstract class DirectoryCertificateSource implements CertificateSource {
             ArraySet arraySet = new ArraySet();
             if (this.mDir.isDirectory()) {
                 for (String str : this.mDir.list()) {
-                    if (!isCertMarkedAsRemoved(str) && (readCertificate = readCertificate(str)) != null) {
-                        arraySet.add(readCertificate);
+                    if (!isCertMarkedAsRemoved(str) && (certificate = readCertificate(str)) != null) {
+                        arraySet.add(certificate);
                     }
                 }
             }
@@ -112,7 +112,7 @@ abstract class DirectoryCertificateSource implements CertificateSource {
     }
 
     private Set<X509Certificate> findCerts(X500Principal x500Principal, CertSelector certSelector) {
-        X509Certificate readCertificate;
+        X509Certificate certificate;
         String hash = getHash(x500Principal);
         ArraySet arraySet = null;
         for (int i = 0; i >= 0; i++) {
@@ -120,26 +120,26 @@ abstract class DirectoryCertificateSource implements CertificateSource {
             if (!new File(this.mDir, str).exists()) {
                 break;
             }
-            if (!isCertMarkedAsRemoved(str) && (readCertificate = readCertificate(str)) != null && x500Principal.equals(readCertificate.getSubjectX500Principal()) && certSelector.match(readCertificate)) {
+            if (!isCertMarkedAsRemoved(str) && (certificate = readCertificate(str)) != null && x500Principal.equals(certificate.getSubjectX500Principal()) && certSelector.match(certificate)) {
                 if (arraySet == null) {
                     arraySet = new ArraySet();
                 }
-                arraySet.add(readCertificate);
+                arraySet.add(certificate);
             }
         }
         return arraySet != null ? arraySet : Collections.EMPTY_SET;
     }
 
     private X509Certificate findCert(X500Principal x500Principal, CertSelector certSelector) {
-        X509Certificate readCertificate;
+        X509Certificate certificate;
         String hash = getHash(x500Principal);
         for (int i = 0; i >= 0; i++) {
             String str = hash + MediaMetrics.SEPARATOR + i;
             if (!new File(this.mDir, str).exists()) {
                 return null;
             }
-            if (!isCertMarkedAsRemoved(str) && (readCertificate = readCertificate(str)) != null && x500Principal.equals(readCertificate.getSubjectX500Principal()) && certSelector.match(readCertificate)) {
-                return readCertificate;
+            if (!isCertMarkedAsRemoved(str) && (certificate = readCertificate(str)) != null && x500Principal.equals(certificate.getSubjectX500Principal()) && certSelector.match(certificate)) {
+                return certificate;
             }
         }
         return null;
@@ -165,42 +165,42 @@ abstract class DirectoryCertificateSource implements CertificateSource {
 
     private static int hashName(X500Principal x500Principal) {
         try {
-            byte[] digest = MessageDigest.getInstance(KeyProperties.DIGEST_MD5).digest(x500Principal.getEncoded());
-            return ((digest[3] & 255) << 24) | (digest[0] & 255) | ((digest[1] & 255) << 8) | ((digest[2] & 255) << 16);
+            byte[] bArrDigest = MessageDigest.getInstance(KeyProperties.DIGEST_MD5).digest(x500Principal.getEncoded());
+            return ((bArrDigest[3] & 255) << 24) | (bArrDigest[0] & 255) | ((bArrDigest[1] & 255) << 8) | ((bArrDigest[2] & 255) << 16);
         } catch (NoSuchAlgorithmException e) {
             throw new AssertionError(e);
         }
     }
 
-    private X509Certificate readCertificate(String str) {
+    private X509Certificate readCertificate(String str) throws Throwable {
         BufferedInputStream bufferedInputStream;
         BufferedInputStream bufferedInputStream2 = null;
         try {
             bufferedInputStream = new BufferedInputStream(new FileInputStream(new File(this.mDir, str)));
-        } catch (IOException | CertificateException e) {
-            e = e;
-            bufferedInputStream = null;
-        } catch (Throwable th) {
-            th = th;
-            IoUtils.closeQuietly(bufferedInputStream2);
-            throw th;
-        }
-        try {
             try {
-                X509Certificate x509Certificate = (X509Certificate) this.mCertFactory.generateCertificate(bufferedInputStream);
-                IoUtils.closeQuietly(bufferedInputStream);
-                return x509Certificate;
-            } catch (Throwable th2) {
-                th = th2;
+                try {
+                    X509Certificate x509Certificate = (X509Certificate) this.mCertFactory.generateCertificate(bufferedInputStream);
+                    IoUtils.closeQuietly(bufferedInputStream);
+                    return x509Certificate;
+                } catch (IOException | CertificateException e) {
+                    e = e;
+                    Log.e(LOG_TAG, "Failed to read certificate from " + str, e);
+                    IoUtils.closeQuietly(bufferedInputStream);
+                    return null;
+                }
+            } catch (Throwable th) {
+                th = th;
                 bufferedInputStream2 = bufferedInputStream;
                 IoUtils.closeQuietly(bufferedInputStream2);
                 throw th;
             }
         } catch (IOException | CertificateException e2) {
             e = e2;
-            Log.e(LOG_TAG, "Failed to read certificate from " + str, e);
-            IoUtils.closeQuietly(bufferedInputStream);
-            return null;
+            bufferedInputStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+            IoUtils.closeQuietly(bufferedInputStream2);
+            throw th;
         }
     }
 }

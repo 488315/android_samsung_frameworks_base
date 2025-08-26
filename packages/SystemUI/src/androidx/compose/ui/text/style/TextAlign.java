@@ -3,7 +3,6 @@ package androidx.compose.ui.text.style;
 import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextAlign {
     public final int value;
@@ -16,7 +15,6 @@ public final class TextAlign {
     public static final int End = 6;
     public static final int Unspecified = Integer.MIN_VALUE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,12 +29,12 @@ public final class TextAlign {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ TextAlign m805boximpl(int i) {
+    public static final /* synthetic */ TextAlign m807boximpl(int i) {
         return new TextAlign(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m806toStringimpl(int i) {
+    public static String m808toStringimpl(int i) {
         return i == Left ? SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT : i == Right ? SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT : i == Center ? SystemUIAnalytics.DT_BOUNCER_POSITION_CENTER : i == Justify ? "Justify" : i == Start ? "Start" : i == End ? "End" : i == Unspecified ? "Unspecified" : "Invalid";
     }
 
@@ -52,6 +50,6 @@ public final class TextAlign {
     }
 
     public final String toString() {
-        return m806toStringimpl(this.value);
+        return m808toStringimpl(this.value);
     }
 }

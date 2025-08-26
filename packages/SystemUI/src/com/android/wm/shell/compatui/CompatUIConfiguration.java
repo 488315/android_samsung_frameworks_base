@@ -2,11 +2,11 @@ package com.android.wm.shell.compatui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.provider.DeviceConfig;
 import com.android.systemui.R;
 import com.android.wm.shell.common.ShellExecutor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CompatUIConfiguration implements DeviceConfig.OnPropertiesChangedListener {
     public final SharedPreferences mCompatUISharedPreferences;
@@ -16,7 +16,7 @@ public class CompatUIConfiguration implements DeviceConfig.OnPropertiesChangedLi
     public boolean mIsRestartDialogOverrideEnabled;
     public final SharedPreferences mLetterboxEduSharedPreferences;
 
-    public CompatUIConfiguration(Context context, ShellExecutor shellExecutor) {
+    public CompatUIConfiguration(Context context, ShellExecutor shellExecutor) throws Resources.NotFoundException {
         this.mIsRestartDialogEnabled = context.getResources().getBoolean(R.bool.config_letterboxIsRestartDialogEnabled);
         context.getResources().getBoolean(R.bool.config_letterboxIsReachabilityEducationEnabled);
         int integer = context.getResources().getInteger(R.integer.config_letterboxRestartButtonHideTolerance);

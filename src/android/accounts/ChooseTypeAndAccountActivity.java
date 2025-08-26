@@ -116,9 +116,7 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             ((TextView) findViewById(R.id.description)).lambda$setTextAsync$0(((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.CANT_ADD_ACCOUNT_MESSAGE, new Supplier() { // from class: android.accounts.ChooseTypeAndAccountActivity$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$onCreate$0;
-                    lambda$onCreate$0 = ChooseTypeAndAccountActivity.this.lambda$onCreate$0();
-                    return lambda$onCreate$0;
+                    return this.f$0.lambda$onCreate$0();
                 }
             }));
             this.mDontShowPicker = true;
@@ -204,9 +202,9 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
 
     @Override // android.app.Activity
     protected void onActivityResult(int i, int i2, Intent intent) {
-        String str;
-        String str2;
         String stringExtra;
+        String stringExtra2;
+        String stringExtra3;
         if (Log.isLoggable(TAG, 2)) {
             if (intent != null && intent.getExtras() != null) {
                 intent.getExtras().keySet();
@@ -227,21 +225,21 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         }
         if (i2 == -1) {
             if (i == 1) {
-                if (intent == null || (stringExtra = intent.getStringExtra("accountType")) == null) {
+                if (intent == null || (stringExtra3 = intent.getStringExtra("accountType")) == null) {
                     Log.d(TAG, "ChooseTypeAndAccountActivity.onActivityResult: unable to find account type, pretending the request was canceled");
                 } else {
-                    runAddAccountForAuthenticator(stringExtra);
+                    runAddAccountForAuthenticator(stringExtra3);
                     return;
                 }
             } else if (i == 2) {
                 if (intent != null) {
-                    str = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-                    str2 = intent.getStringExtra("accountType");
+                    stringExtra = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                    stringExtra2 = intent.getStringExtra("accountType");
                 } else {
-                    str = null;
-                    str2 = null;
+                    stringExtra = null;
+                    stringExtra2 = null;
                 }
-                if (str == null || str2 == null) {
+                if (stringExtra == null || stringExtra2 == null) {
                     Account[] accountsForPackage = AccountManager.get(this).getAccountsForPackage(this.mCallingPackage, this.mCallingUid);
                     HashSet hashSet = new HashSet();
                     for (Parcelable parcelable : this.mExistingAccounts) {
@@ -255,15 +253,15 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
                         }
                         Account account = accountsForPackage[i3];
                         if (!hashSet.contains(account)) {
-                            str = account.name;
-                            str2 = account.type;
+                            stringExtra = account.name;
+                            stringExtra2 = account.type;
                             break;
                         }
                         i3++;
                     }
                 }
-                if (str != null || str2 != null) {
-                    setResultAndFinish(str, str2);
+                if (stringExtra != null || stringExtra2 != null) {
+                    setResultAndFinish(stringExtra, stringExtra2);
                     return;
                 }
             }
@@ -320,15 +318,15 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
     private void setResultAndFinish(String str, String str2) {
         Account account = new Account(str, str2);
         int accountVisibility = AccountManager.get(this).getAccountVisibility(account, this.mCallingPackage);
-        Integer valueOf = Integer.valueOf(accountVisibility);
-        if (valueOf != null) {
-            valueOf.getClass();
+        Integer numValueOf = Integer.valueOf(accountVisibility);
+        if (numValueOf != null) {
+            numValueOf.getClass();
             if (accountVisibility == 4) {
                 AccountManager.get(this).setAccountVisibility(account, this.mCallingPackage, 2);
             }
         }
-        if (valueOf != null) {
-            valueOf.getClass();
+        if (numValueOf != null) {
+            numValueOf.getClass();
             if (accountVisibility == 3) {
                 setResult(0);
                 finish();
@@ -406,9 +404,9 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         if (stringArrayExtra == null) {
             return hashSet;
         }
-        HashSet newHashSet = Sets.newHashSet(stringArrayExtra);
-        newHashSet.retainAll(hashSet);
-        return newHashSet;
+        HashSet hashSetNewHashSet = Sets.newHashSet(stringArrayExtra);
+        hashSetNewHashSet.retainAll(hashSet);
+        return hashSetNewHashSet;
     }
 
     private Set<Account> getAllowableAccountSet(Intent intent) {

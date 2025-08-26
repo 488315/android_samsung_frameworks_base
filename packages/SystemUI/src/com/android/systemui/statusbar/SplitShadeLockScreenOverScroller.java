@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SplitShadeLockScreenOverScroller {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,7 +30,6 @@ public final class SplitShadeLockScreenOverScroller {
     public final SysuiStatusBarStateController statusBarStateController;
     public int transitionToFullShadeDistance;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,6 @@ public final class SplitShadeLockScreenOverScroller {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SplitShadeLockScreenOverScroller create(Function0 function0, Function0 function02);
     }
@@ -79,10 +76,10 @@ public final class SplitShadeLockScreenOverScroller {
                 int i = splitShadeLockScreenOverScroller.transitionToFullShadeDistance;
                 int i2 = splitShadeLockScreenOverScroller.maxOverScrollAmount;
                 long j = splitShadeLockScreenOverScroller.releaseOverScrollDuration;
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "\n            SplitShadeLockScreenOverScroller:\n                Resources:\n                    transitionToFullShadeDistance: ", "\n                    maxOverScrollAmount: ", "\n                    releaseOverScrollDuration: ");
-                m.append(j);
-                m.append("\n                State:\n                    previousOverscrollAmount: 0\n                    expansionDragDownAmount: 0.0\n            ");
-                printWriter.println(StringsKt__IndentKt.trimIndent(m.toString()));
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "\n            SplitShadeLockScreenOverScroller:\n                Resources:\n                    transitionToFullShadeDistance: ", "\n                    maxOverScrollAmount: ", "\n                    releaseOverScrollDuration: ");
+                sbM.append(j);
+                sbM.append("\n                State:\n                    previousOverscrollAmount: 0\n                    expansionDragDownAmount: 0.0\n            ");
+                printWriter.println(StringsKt__IndentKt.trimIndent(sbM.toString()));
             }
         });
     }

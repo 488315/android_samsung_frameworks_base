@@ -23,8 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ScreenControlActionInteractor implements ActionInteractor {
     private static final String PACKAGE_NAME = "packageName";
@@ -32,7 +32,6 @@ public class ScreenControlActionInteractor implements ActionInteractor {
     private final Context mContext;
     private final ScreenController mScreenController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Action {
         goto_homescreen,
         back,
@@ -59,9 +58,7 @@ public class ScreenControlActionInteractor implements ActionInteractor {
         return Arrays.stream(Action.values()).map(new ScreenControlActionInteractor$$ExternalSyntheticLambda0()).anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.interactor.ScreenControlActionInteractor$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$matchAction$0;
-                lambda$matchAction$0 = ScreenControlActionInteractor.lambda$matchAction$0(str, (String) obj);
-                return lambda$matchAction$0;
+                return ScreenControlActionInteractor.lambda$matchAction$0(str, (String) obj);
             }
         });
     }
@@ -129,16 +126,21 @@ public class ScreenControlActionInteractor implements ActionInteractor {
             statefulBuilder8.mTemplate = CommandTemplate.NO_TEMPLATE;
             return statefulBuilder8.build();
         }
-        boolean isAutoBrightnessCoverEnabled = this.mScreenController.isAutoBrightnessCoverEnabled(this.mContext);
-        Log.d(TAG, "isAutoBrightnessCoverEnabled = " + isAutoBrightnessCoverEnabled);
+        boolean zIsAutoBrightnessCoverEnabled = this.mScreenController.isAutoBrightnessCoverEnabled(this.mContext);
+        Log.d(TAG, "isAutoBrightnessCoverEnabled = " + zIsAutoBrightnessCoverEnabled);
         Command.StatefulBuilder statefulBuilder9 = new Command.StatefulBuilder(command.mCommandId);
         statefulBuilder9.mStatus = 1;
-        statefulBuilder9.mTemplate = new ToggleTemplate(isAutoBrightnessCoverEnabled);
+        statefulBuilder9.mTemplate = new ToggleTemplate(zIsAutoBrightnessCoverEnabled);
         return statefulBuilder9.build();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x001d A[PHI: r4
+      0x001d: PHI (r4v1 java.lang.String) = (r4v0 java.lang.String), (r4v0 java.lang.String), (r4v0 java.lang.String), (r4v3 java.lang.String) binds: [B:18:0x0058, B:15:0x002c, B:13:0x001f, B:11:0x0019] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
-    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) throws JSONException {
         int i;
         int actionType = commandAction.getActionType();
         int i2 = 1;
@@ -154,12 +156,11 @@ public class ScreenControlActionInteractor implements ActionInteractor {
                     str3 = ((JSONStringAction) commandAction).mNewValue;
                 }
                 i = 1;
+            } else if (Action.set_brightness.toString().equals(str)) {
+                CommandActionResponse brightness = this.mScreenController.setBrightness(this.mContext, (int) ((FloatAction) commandAction).mNewValue);
+                i = brightness.responseCode;
+                str2 = brightness.responseMessage;
             } else {
-                if (Action.set_brightness.toString().equals(str)) {
-                    CommandActionResponse brightness = this.mScreenController.setBrightness(this.mContext, (int) ((FloatAction) commandAction).mNewValue);
-                    i = brightness.responseCode;
-                    str2 = brightness.responseMessage;
-                }
                 i = 1;
             }
         } else {
@@ -171,7 +172,6 @@ public class ScreenControlActionInteractor implements ActionInteractor {
                 i = autoBrightnessCover.responseCode;
                 str2 = autoBrightnessCover.responseMessage;
             }
-            i = 1;
         }
         if (matchAction(str)) {
             if (Action.goto_homescreen.toString().equals(str)) {
@@ -179,19 +179,19 @@ public class ScreenControlActionInteractor implements ActionInteractor {
             } else if (Action.back.toString().equals(str)) {
                 this.mScreenController.pressBackKey(this.mContext);
             } else if (Action.capture_screen.toString().equals(str)) {
-                CommandActionResponse takeScreenShot = this.mScreenController.takeScreenShot(this.mContext);
-                i2 = takeScreenShot.responseCode;
-                str2 = takeScreenShot.responseMessage;
+                CommandActionResponse commandActionResponseTakeScreenShot = this.mScreenController.takeScreenShot(this.mContext);
+                i2 = commandActionResponseTakeScreenShot.responseCode;
+                str2 = commandActionResponseTakeScreenShot.responseMessage;
             } else if (Action.share_screenshot.toString().equals(str)) {
-                Bundle m = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("packageName", str3);
+                Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("packageName", str3);
                 MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("share_screenshot    newJSONStringValue = ", str3, TAG);
-                CommandActionResponse shareScreenShot = this.mScreenController.shareScreenShot(this.mContext, m);
-                i2 = shareScreenShot.responseCode;
-                str2 = shareScreenShot.responseMessage;
+                CommandActionResponse commandActionResponseShareScreenShot = this.mScreenController.shareScreenShot(this.mContext, bundleM);
+                i2 = commandActionResponseShareScreenShot.responseCode;
+                str2 = commandActionResponseShareScreenShot.responseMessage;
             } else if (Action.share_screenshot_uri.toString().equals(str)) {
-                CommandActionResponse takeScreenShotUri = this.mScreenController.takeScreenShotUri(this.mContext);
-                i2 = takeScreenShotUri.responseCode;
-                str2 = takeScreenShotUri.responseMessage;
+                CommandActionResponse commandActionResponseTakeScreenShotUri = this.mScreenController.takeScreenShotUri(this.mContext);
+                i2 = commandActionResponseTakeScreenShotUri.responseCode;
+                str2 = commandActionResponseTakeScreenShotUri.responseMessage;
             } else if (Action.scroll_up_down.toString().equals(str)) {
                 this.mScreenController.screenScroll(this.mContext, str3);
             } else if (Action.close_panelscreen.toString().equals(str)) {
@@ -256,11 +256,11 @@ public class ScreenControlActionInteractor implements ActionInteractor {
             return statefulBuilder7.build();
         }
         if (Action.auto_brightness_cover.toString().equals(str)) {
-            boolean isAutoBrightnessCoverEnabled = this.mScreenController.isAutoBrightnessCoverEnabled(this.mContext);
-            Log.d(TAG, "isAutoBrightnessCoverEnabled = " + isAutoBrightnessCoverEnabled);
+            boolean zIsAutoBrightnessCoverEnabled = this.mScreenController.isAutoBrightnessCoverEnabled(this.mContext);
+            Log.d(TAG, "isAutoBrightnessCoverEnabled = " + zIsAutoBrightnessCoverEnabled);
             Command.StatefulBuilder statefulBuilder8 = new Command.StatefulBuilder(command.mCommandId);
             statefulBuilder8.mStatus = 1;
-            statefulBuilder8.mTemplate = new ToggleTemplate(isAutoBrightnessCoverEnabled);
+            statefulBuilder8.mTemplate = new ToggleTemplate(zIsAutoBrightnessCoverEnabled);
             return statefulBuilder8.build();
         }
         if (!Action.close_panelscreen.toString().equals(str)) {

@@ -28,7 +28,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ConstructorConstructor {
     private final Map<Type, InstanceCreator<?>> instanceCreators;
@@ -39,18 +38,18 @@ public final class ConstructorConstructor {
         this.useJdkUnsafe = z;
     }
 
-    private <T> ObjectConstructor<T> newDefaultConstructor(Class<? super T> cls) {
+    private <T> ObjectConstructor<T> newDefaultConstructor(Class<? super T> cls) throws NoSuchMethodException, SecurityException {
         if (Modifier.isAbstract(cls.getModifiers())) {
             return null;
         }
         try {
             Class[] clsArr = new Class[0];
             final Constructor<? super T> declaredConstructor = cls.getDeclaredConstructor(null);
-            final String tryMakeAccessible = ReflectionHelper.tryMakeAccessible(declaredConstructor);
-            return tryMakeAccessible != null ? (ObjectConstructor<T>) new ObjectConstructor<Object>() { // from class: com.google.gson.internal.ConstructorConstructor.3
+            final String strTryMakeAccessible = ReflectionHelper.tryMakeAccessible(declaredConstructor);
+            return strTryMakeAccessible != null ? (ObjectConstructor<T>) new ObjectConstructor<Object>() { // from class: com.google.gson.internal.ConstructorConstructor.3
                 @Override // com.google.gson.internal.ObjectConstructor
                 public Object construct() {
-                    throw new JsonIOException(tryMakeAccessible);
+                    throw new JsonIOException(strTryMakeAccessible);
                 }
             } : (ObjectConstructor<T>) new ObjectConstructor<Object>() { // from class: com.google.gson.internal.ConstructorConstructor.4
                 @Override // com.google.gson.internal.ObjectConstructor
@@ -176,7 +175,7 @@ public final class ConstructorConstructor {
         };
     }
 
-    public <T> ObjectConstructor<T> get(TypeToken<T> typeToken) {
+    public <T> ObjectConstructor<T> get(TypeToken<T> typeToken) throws NoSuchMethodException, SecurityException {
         final Type type = typeToken.getType();
         Class<? super T> rawType = typeToken.getRawType();
         final InstanceCreator<?> instanceCreator = this.instanceCreators.get(type);
@@ -197,12 +196,12 @@ public final class ConstructorConstructor {
                 }
             };
         }
-        ObjectConstructor<T> newDefaultConstructor = newDefaultConstructor(rawType);
-        if (newDefaultConstructor != null) {
-            return newDefaultConstructor;
+        ObjectConstructor<T> objectConstructorNewDefaultConstructor = newDefaultConstructor(rawType);
+        if (objectConstructorNewDefaultConstructor != null) {
+            return objectConstructorNewDefaultConstructor;
         }
-        ObjectConstructor<T> newDefaultImplementationConstructor = newDefaultImplementationConstructor(type, rawType);
-        return newDefaultImplementationConstructor != null ? newDefaultImplementationConstructor : newUnsafeAllocator(rawType);
+        ObjectConstructor<T> objectConstructorNewDefaultImplementationConstructor = newDefaultImplementationConstructor(type, rawType);
+        return objectConstructorNewDefaultImplementationConstructor != null ? objectConstructorNewDefaultImplementationConstructor : newUnsafeAllocator(rawType);
     }
 
     public String toString() {

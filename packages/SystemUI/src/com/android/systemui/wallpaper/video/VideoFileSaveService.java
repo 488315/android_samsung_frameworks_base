@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VideoFileSaveService extends Service {
     public String mVideoFileExt = "mp4";
@@ -30,7 +29,6 @@ public class VideoFileSaveService extends Service {
     };
     public final AnonymousClass2 mBinder = new AnonymousClass2();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.video.VideoFileSaveService$2, reason: invalid class name */
     public class AnonymousClass2 extends IVideoFileSaveService$Stub {
         public AnonymousClass2() {
@@ -58,7 +56,7 @@ public class VideoFileSaveService extends Service {
 
         public final String getVideoFilePath(String str, boolean z) {
             VideoFileSaveService videoFileSaveService = VideoFileSaveService.this;
-            return z ? VideoFileSaveService.m3211$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich) : VideoFileSaveService.m3210$$Nest$mgetSavedFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
+            return z ? VideoFileSaveService.m3228$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich) : VideoFileSaveService.m3227$$Nest$mgetSavedFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
         }
 
         public final boolean isVideoFileExistsWithFilename(String str, boolean z) {
@@ -78,12 +76,12 @@ public class VideoFileSaveService extends Service {
                 throw new IllegalStateException("This service must be run from the owner(" + UserHandle.semGetMyUserId() + ")");
             }
             VideoFileSaveService videoFileSaveService = VideoFileSaveService.this;
-            String m3211$$Nest$mgetTempFilePath = VideoFileSaveService.m3211$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
+            String strM3228$$Nest$mgetTempFilePath = VideoFileSaveService.m3228$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
             VideoFileSaveService videoFileSaveService2 = VideoFileSaveService.this;
-            String m3210$$Nest$mgetSavedFilePath = VideoFileSaveService.m3210$$Nest$mgetSavedFilePath(videoFileSaveService2, str, videoFileSaveService2.mVideoFileExt, videoFileSaveService2.mUserId, videoFileSaveService2.mCurentWhich);
+            String strM3227$$Nest$mgetSavedFilePath = VideoFileSaveService.m3227$$Nest$mgetSavedFilePath(videoFileSaveService2, str, videoFileSaveService2.mVideoFileExt, videoFileSaveService2.mUserId, videoFileSaveService2.mCurentWhich);
             boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
-            File file = new File(m3211$$Nest$mgetTempFilePath);
-            File file2 = new File(m3210$$Nest$mgetSavedFilePath);
+            File file = new File(strM3228$$Nest$mgetTempFilePath);
+            File file2 = new File(strM3227$$Nest$mgetSavedFilePath);
             return file.exists() && !file2.exists() && file.renameTo(file2);
         }
 
@@ -110,41 +108,41 @@ public class VideoFileSaveService extends Service {
     }
 
     /* renamed from: -$$Nest$mgetSavedFilePath, reason: not valid java name */
-    public static String m3210$$Nest$mgetSavedFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
-        String str3;
+    public static String m3227$$Nest$mgetSavedFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
+        String absolutePath;
         File filesDir = videoFileSaveService.getFilesDir();
         if (filesDir != null) {
-            str3 = filesDir.getAbsolutePath();
+            absolutePath = filesDir.getAbsolutePath();
         } else {
             Log.w("VideoFileCopyService", "getSavedFilePath() file is null");
-            str3 = "/data/user_de/0/com.android.systemui/files";
+            absolutePath = "/data/user_de/0/com.android.systemui/files";
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "video_wallpaper_", "_", ".");
-        m.append(str2);
-        String sb = m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "video_wallpaper_", "_", ".");
+        sbM.append(str2);
+        String string = sbM.toString();
         if (TextUtils.isEmpty(str)) {
-            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str3, "/", sb);
+            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(absolutePath, "/", string);
         }
-        return str3 + "/" + str + sb;
+        return absolutePath + "/" + str + string;
     }
 
     /* renamed from: -$$Nest$mgetTempFilePath, reason: not valid java name */
-    public static String m3211$$Nest$mgetTempFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
-        String str3;
+    public static String m3228$$Nest$mgetTempFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
+        String absolutePath;
         File filesDir = videoFileSaveService.getFilesDir();
         if (filesDir != null) {
-            str3 = filesDir.getAbsolutePath();
+            absolutePath = filesDir.getAbsolutePath();
         } else {
             Log.w("VideoFileCopyService", "getTempFilePath() file is null");
-            str3 = "/data/user_de/0/com.android.systemui/files";
+            absolutePath = "/data/user_de/0/com.android.systemui/files";
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "video_wallpaper_", "_", "_temp.");
-        m.append(str2);
-        String sb = m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "video_wallpaper_", "_", "_temp.");
+        sbM.append(str2);
+        String string = sbM.toString();
         if (TextUtils.isEmpty(str)) {
-            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str3, "/", sb);
+            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(absolutePath, "/", string);
         }
-        return str3 + "/" + str + sb;
+        return absolutePath + "/" + str + string;
     }
 
     @Override // android.app.Service

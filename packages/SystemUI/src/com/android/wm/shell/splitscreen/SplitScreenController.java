@@ -105,7 +105,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCallable, KeyguardChangeListener {
     public final AnonymousClass1 mConnection;
@@ -142,7 +141,6 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
     public final SplitScreenImpl mImpl = new SplitScreenImpl(this, 0);
     public int mFocusedTaskPosition = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallerInfo {
         public final int mUid;
 
@@ -152,7 +150,6 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ISplitScreenImpl extends ISplitScreen$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public SplitScreenController mController;
@@ -168,14 +165,16 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                 }
                 try {
                     ISplitScreenListener$Stub$Proxy iSplitScreenListener$Stub$Proxy = (ISplitScreenListener$Stub$Proxy) iInterface;
-                    Parcel obtain = Parcel.obtain(iSplitScreenListener$Stub$Proxy.mRemote);
+                    Parcel parcelObtain = Parcel.obtain(iSplitScreenListener$Stub$Proxy.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.wm.shell.splitscreen.ISplitScreenListener");
-                        obtain.writeInt(i);
-                        obtain.writeInt(i2);
-                        iSplitScreenListener$Stub$Proxy.mRemote.transact(1, obtain, null, 1);
-                    } finally {
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken("com.android.wm.shell.splitscreen.ISplitScreenListener");
+                        parcelObtain.writeInt(i);
+                        parcelObtain.writeInt(i2);
+                        iSplitScreenListener$Stub$Proxy.mRemote.transact(1, parcelObtain, null, 1);
+                        parcelObtain.recycle();
+                    } catch (Throwable th) {
+                        parcelObtain.recycle();
+                        throw th;
                     }
                 } catch (RemoteException e) {
                     Slog.e("SingleInstanceRemoteListener", "Failed remote call", e);
@@ -191,16 +190,16 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                 }
                 try {
                     ISplitScreenListener$Stub$Proxy iSplitScreenListener$Stub$Proxy = (ISplitScreenListener$Stub$Proxy) iInterface;
-                    Parcel obtain = Parcel.obtain(iSplitScreenListener$Stub$Proxy.mRemote);
+                    Parcel parcelObtain = Parcel.obtain(iSplitScreenListener$Stub$Proxy.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.wm.shell.splitscreen.ISplitScreenListener");
-                        obtain.writeInt(i);
-                        obtain.writeInt(i2);
-                        obtain.writeBoolean(z);
-                        iSplitScreenListener$Stub$Proxy.mRemote.transact(2, obtain, null, 1);
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken("com.android.wm.shell.splitscreen.ISplitScreenListener");
+                        parcelObtain.writeInt(i);
+                        parcelObtain.writeInt(i2);
+                        parcelObtain.writeBoolean(z);
+                        iSplitScreenListener$Stub$Proxy.mRemote.transact(2, parcelObtain, null, 1);
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 } catch (RemoteException e) {
@@ -210,7 +209,6 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         };
         public final AnonymousClass2 mSplitSelectListener = new AnonymousClass2();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.splitscreen.SplitScreenController$ISplitScreenImpl$2, reason: invalid class name */
         public class AnonymousClass2 {
             public AnonymousClass2() {
@@ -232,7 +230,6 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl extends TaskStackListener {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -244,12 +241,10 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SplitScreenImpl implements SplitScreen {
         public final ArrayMap mExecutors;
         public final AnonymousClass1 mListener;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$1, reason: invalid class name */
         public class AnonymousClass1 implements SplitScreen.SplitScreenListener {
             public AnonymousClass1() {
@@ -266,7 +261,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                     ((Executor) splitScreenImpl.mExecutors.valueAt(i)).execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = SplitScreenController.SplitScreenImpl.AnonymousClass1.this;
+                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = this.f$0;
                             int i2 = i;
                             ((SplitScreen.SplitScreenListener) SplitScreenController.SplitScreenImpl.this.mExecutors.keyAt(i2)).onSplitBoundsChanged(rect, rect2, rect3);
                         }
@@ -299,7 +294,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                     ((Executor) splitScreenImpl.mExecutors.valueAt(i3)).execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$1$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = SplitScreenController.SplitScreenImpl.AnonymousClass1.this;
+                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = this.f$0;
                             int i4 = i3;
                             ((SplitScreen.SplitScreenListener) SplitScreenController.SplitScreenImpl.this.mExecutors.keyAt(i4)).onStagePositionChanged(i, i2);
                         }
@@ -319,7 +314,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                     ((Executor) splitScreenImpl.mExecutors.valueAt(i3)).execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$1$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = SplitScreenController.SplitScreenImpl.AnonymousClass1.this;
+                            SplitScreenController.SplitScreenImpl.AnonymousClass1 anonymousClass1 = this.f$0;
                             int i4 = i3;
                             ((SplitScreen.SplitScreenListener) SplitScreenController.SplitScreenImpl.this.mExecutors.keyAt(i4)).onTaskStageChanged(i, i2, z);
                         }
@@ -348,7 +343,6 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SplitTwoFingerGestureStarter {
         public final ComponentName allAppsComponentName;
         public boolean mEnabled;
@@ -400,8 +394,8 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                 }
                 return;
             }
-            boolean intValueIn = intValueIn(i, 1, 2);
-            int i3 = !intValueIn ? 1 : 0;
+            boolean zIntValueIn = intValueIn(i, 1, 2);
+            int i3 = !zIntValueIn ? 1 : 0;
             if (!CoreRune.MW_MULTI_SPLIT_FULL_TO_SPLIT_BY_GESTURE || MultiWindowUtils.isInSubDisplay(splitScreenController.mContext) || (!splitScreenController.mStageCoordinator.isSplitScreenVisible() && CoreRune.MW_MULTI_SPLIT_ENSURE_APP_SIZE && !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize())) {
                 DisplayLayout displayLayout = splitScreenController.mDisplayController.getDisplayLayout(splitScreenController.mContext.getDisplayId());
                 int i4 = displayLayout.mWidth > displayLayout.mHeight ? 2 : 1;
@@ -451,7 +445,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
             }
             if (z) {
                 StringBuilder sb = new StringBuilder("enterSplitIfPossible: all apps position=");
-                sb.append(i3 != -1 ? !intValueIn ? i3 != 1 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "unknown=") : "bottomOrRight" : "topOrLeft" : "undefined");
+                sb.append(i3 != -1 ? !zIntValueIn ? i3 != 1 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "unknown=") : "bottomOrRight" : "topOrLeft" : "undefined");
                 Slog.d(str2, sb.toString());
             }
             List visibleTasks = MultiWindowManager.getInstance().getVisibleTasks();
@@ -460,7 +454,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) obj;
-                    return SplitScreenController.SplitTwoFingerGestureStarter.this.allAppsComponentName.equals(runningTaskInfo.topActivity) && runningTaskInfo.isTopTaskInStage;
+                    return this.f$0.allAppsComponentName.equals(runningTaskInfo.topActivity) && runningTaskInfo.isTopTaskInStage;
                 }
             })) {
                 visibleTasks.stream().filter(new Predicate() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitTwoFingerGestureStarter$$ExternalSyntheticLambda1
@@ -535,10 +529,10 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
             shellInit.addInitCallback(new SplitScreenController$$ExternalSyntheticLambda7(this, 0), this);
         }
         context.bindService(new Intent(context, (Class<?>) SplitScreenProxyService.class), (ServiceConnection) r2, 1);
-        ShellTaskOrganizer.MultiWindowCoreStateChangeListener multiWindowCoreStateChangeListener = new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda8
+        shellTaskOrganizer.registerMultiWindowCoreStateListener(new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda8
             @Override // com.android.wm.shell.ShellTaskOrganizer.MultiWindowCoreStateChangeListener
             public final boolean onMultiWindowCoreStateChanged(int i) {
-                SplitScreenController splitScreenController = SplitScreenController.this;
+                SplitScreenController splitScreenController = this.f$0;
                 StageCoordinator stageCoordinator2 = splitScreenController.mStageCoordinator;
                 if (stageCoordinator2.mMainStage.mIsActive) {
                     if ((i & 1024) != 0 || (i & 512) != 0) {
@@ -551,7 +545,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                         handlerExecutor.executeDelayed(stageCoordinator2.mDelayedHandleLayoutSizeChange, z ? 0 : 300);
                     }
                     if ((i & 1) != 0 && !MultiWindowCoreState.MW_ENABLED) {
-                        boolean isSplitScreenVisible = splitScreenController.mStageCoordinator.isSplitScreenVisible();
+                        boolean zIsSplitScreenVisible = splitScreenController.mStageCoordinator.isSplitScreenVisible();
                         StageCoordinator stageCoordinator3 = splitScreenController.mStageCoordinator;
                         StageTaskListener stageTaskListener = stageCoordinator3.mSideStage;
                         if (!stageTaskListener.isFocused()) {
@@ -560,23 +554,21 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                         ActivityManager.RunningTaskInfo runningTaskInfo = stageTaskListener.mRootTaskInfo;
                         if (runningTaskInfo == null) {
                             Slog.e("SplitScreenController", "onMultiWindowCoreStateChanged: cannot find focusedInfo");
-                            return isSplitScreenVisible;
+                            return zIsSplitScreenVisible;
                         }
                         if (splitScreenController.mFocusedTaskPosition == 0) {
                             Slog.d("SplitScreenController", "onMultiWindowCoreStateChanged: dismiss split");
                             splitScreenController.exitSplitScreen(-1, 1);
-                            return isSplitScreenVisible;
+                            return zIsSplitScreenVisible;
                         }
                         Slog.d("SplitScreenController", "onMultiWindowCoreStateChanged: maximize split #" + runningTaskInfo.taskId);
                         splitScreenController.maximizeSplitTask(runningTaskInfo.token);
-                        return isSplitScreenVisible;
+                        return zIsSplitScreenVisible;
                     }
                 }
                 return false;
             }
-        };
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.remove(multiWindowCoreStateChangeListener);
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.add(multiWindowCoreStateChangeListener);
+        });
         this.mGestureStarter = Optional.of(new SplitTwoFingerGestureStarter());
         transitions.registerObserver(new Transitions.TransitionObserver() { // from class: com.android.wm.shell.splitscreen.SplitScreenController.2
             @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
@@ -775,53 +767,23 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         return this.mStageCoordinator.getMainStageWinConfigPosition();
     }
 
-    /*  JADX ERROR: JadxRuntimeException in pass: IfRegionVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r2v4 android.app.ActivityManager$RunningTaskInfo, still in use, count: 2, list:
-          (r2v4 android.app.ActivityManager$RunningTaskInfo) from 0x0020: INVOKE (r2v4 android.app.ActivityManager$RunningTaskInfo) STATIC call: com.android.wm.shell.common.split.SplitScreenUtils.isValidToSplit(android.app.ActivityManager$RunningTaskInfo):boolean A[MD:(android.app.ActivityManager$RunningTaskInfo):boolean (m), WRAPPED] (LINE:33)
-          (r2v4 android.app.ActivityManager$RunningTaskInfo) from 0x0027: PHI (r2v5 android.app.ActivityManager$RunningTaskInfo) = (r2v4 android.app.ActivityManager$RunningTaskInfo) binds: [B:10:0x0024] A[DONT_GENERATE, DONT_INLINE]
-        	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-        	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-        	at jadx.core.dex.visitors.regions.TernaryMod.makeTernaryInsn(TernaryMod.java:125)
-        	at jadx.core.dex.visitors.regions.TernaryMod.processRegion(TernaryMod.java:62)
-        	at jadx.core.dex.visitors.regions.TernaryMod.enterRegion(TernaryMod.java:45)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:67)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverse(DepthRegionTraversal.java:19)
-        	at jadx.core.dex.visitors.regions.TernaryMod.process(TernaryMod.java:35)
-        	at jadx.core.dex.visitors.regions.IfRegionVisitor.process(IfRegionVisitor.java:34)
-        	at jadx.core.dex.visitors.regions.IfRegionVisitor.visit(IfRegionVisitor.java:30)
-        */
-    public final java.lang.String getPackageName(int r3, android.window.WindowContainerToken r4) {
-        /*
-            r2 = this;
-            com.android.wm.shell.splitscreen.StageCoordinator r0 = r2.mStageCoordinator
-            boolean r0 = r0.isSplitScreenVisible()
-            r1 = 0
-            if (r0 == 0) goto Le
-            android.app.ActivityManager$RunningTaskInfo r2 = r2.getTaskInfo(r3)
-            goto L27
-        Le:
-            java.util.Optional r2 = r2.mRecentTasksOptional
-            com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda5 r3 = new com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda5
-            r0 = 0
-            r3.<init>(r0, r4)
-            java.util.Optional r2 = r2.map(r3)
-            java.lang.Object r2 = r2.orElse(r1)
-            android.app.ActivityManager$RunningTaskInfo r2 = (android.app.ActivityManager.RunningTaskInfo) r2
-            boolean r3 = com.android.wm.shell.common.split.SplitScreenUtils.isValidToSplit(r2)
-            if (r3 != 0) goto L27
-            goto L30
-        L27:
-            if (r2 == 0) goto L30
-            android.content.Intent r2 = r2.baseIntent
-            java.lang.String r2 = com.android.wm.shell.common.ComponentUtils.getPackageName(r2)
-            return r2
-        L30:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.splitscreen.SplitScreenController.getPackageName(int, android.window.WindowContainerToken):java.lang.String");
+    public final ActivityManager.RunningTaskInfo getMainStageRootTaskInfo() {
+        return this.mStageCoordinator.mMainStage.mRootTaskInfo;
+    }
+
+    public final String getPackageName(int i, WindowContainerToken windowContainerToken) {
+        ActivityManager.RunningTaskInfo taskInfo;
+        if (!this.mStageCoordinator.isSplitScreenVisible()) {
+            taskInfo = (ActivityManager.RunningTaskInfo) this.mRecentTasksOptional.map(new SplitScreenController$$ExternalSyntheticLambda5(0, windowContainerToken)).orElse(null);
+            if (SplitScreenUtils.isValidToSplit(taskInfo)) {
+            }
+            return null;
+        }
+        taskInfo = getTaskInfo(i);
+        if (taskInfo != null) {
+            return ComponentUtils.getPackageName(taskInfo.baseIntent);
+        }
+        return null;
     }
 
     public final void getRefStageBounds(Rect rect, Rect rect2) {
@@ -887,7 +849,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         if (!this.mStageCoordinator.isSplitScreenVisible()) {
             return null;
         }
-        int i2 = -1;
+        int topVisibleChildTaskId = -1;
         if (i == -1) {
             return null;
         }
@@ -895,9 +857,9 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         if (i == -1) {
             stageCoordinator.getClass();
         } else {
-            i2 = stageCoordinator.mSideStagePosition == i ? stageCoordinator.mSideStage.getTopVisibleChildTaskId() : stageCoordinator.mMainStage.getTopVisibleChildTaskId();
+            topVisibleChildTaskId = stageCoordinator.mSideStagePosition == i ? stageCoordinator.mSideStage.getTopVisibleChildTaskId() : stageCoordinator.mMainStage.getTopVisibleChildTaskId();
         }
-        return this.mTaskOrganizer.getRunningTaskInfo(i2);
+        return this.mTaskOrganizer.getRunningTaskInfo(topVisibleChildTaskId);
     }
 
     public final ActivityManager.RunningTaskInfo getTopRunningTaskInfoByPosition(int i) {
@@ -913,17 +875,17 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
     }
 
     public final int getUserId(int i, WindowContainerToken windowContainerToken) {
-        ActivityManager.RunningTaskInfo runningTaskInfo;
+        ActivityManager.RunningTaskInfo taskInfo;
         if (this.mStageCoordinator.isSplitScreenVisible()) {
-            runningTaskInfo = getTaskInfo(i);
+            taskInfo = getTaskInfo(i);
         } else {
-            runningTaskInfo = (ActivityManager.RunningTaskInfo) this.mRecentTasksOptional.map(new SplitScreenController$$ExternalSyntheticLambda5(1, windowContainerToken)).orElse(null);
-            if (!SplitScreenUtils.isValidToSplit(runningTaskInfo)) {
+            taskInfo = (ActivityManager.RunningTaskInfo) this.mRecentTasksOptional.map(new SplitScreenController$$ExternalSyntheticLambda5(1, windowContainerToken)).orElse(null);
+            if (!SplitScreenUtils.isValidToSplit(taskInfo)) {
                 return -1;
             }
         }
-        if (runningTaskInfo != null) {
-            return runningTaskInfo.userId;
+        if (taskInfo != null) {
+            return taskInfo.userId;
         }
         return -1;
     }
@@ -1012,71 +974,28 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         this.mStageCoordinator.moveSplitToFreeform(windowContainerToken, rect, z);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0040, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0034, code lost:
-    
-        if (r5.mSideStagePosition == 1) goto L9;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0024, code lost:
-    
-        if (r5.mSideStagePosition == 0) goto L9;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0026, code lost:
-    
-        r1 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0037, code lost:
-    
-        r5.mSplitLayout.flingDividerToDismiss(12, !r1);
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void moveTaskToFullscreen(int r6) {
-        /*
-            r5 = this;
-            com.android.wm.shell.splitscreen.StageCoordinator r5 = r5.mStageCoordinator
-            r5.getClass()
-            boolean[] r0 = com.android.internal.protolog.ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled
-            r1 = 0
-            boolean r0 = r0[r1]
-            if (r0 == 0) goto L17
-            com.android.wm.shell.protolog.ShellProtoLogGroup r0 = com.android.wm.shell.protolog.ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN
-            r2 = -4495304678011028405(0xc19d783666003c4b, double:-1.2360437750023E8)
-            r4 = 0
-            com.android.internal.protolog.ProtoLogImpl_1771455215.d(r0, r2, r1, r4)
-        L17:
-            com.android.wm.shell.splitscreen.StageTaskListener r0 = r5.mMainStage
-            com.android.wm.shell.splitscreen.StageTaskListener$RunningTaskInfoList r0 = r0.mChildrenTaskInfo
-            boolean r0 = r0.contains(r6)
-            r2 = 1
-            if (r0 == 0) goto L28
-            int r6 = r5.mSideStagePosition
-            if (r6 != 0) goto L37
-        L26:
-            r1 = r2
-            goto L37
-        L28:
-            com.android.wm.shell.splitscreen.StageTaskListener r0 = r5.mSideStage
-            com.android.wm.shell.splitscreen.StageTaskListener$RunningTaskInfoList r0 = r0.mChildrenTaskInfo
-            boolean r6 = r0.contains(r6)
-            if (r6 == 0) goto L40
-            int r6 = r5.mSideStagePosition
-            if (r6 != r2) goto L37
-            goto L26
-        L37:
-            com.android.wm.shell.common.split.SplitLayout r5 = r5.mSplitLayout
-            r6 = r1 ^ 1
-            r0 = 12
-            r5.flingDividerToDismiss(r0, r6)
-        L40:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.splitscreen.SplitScreenController.moveTaskToFullscreen(int):void");
+    public final void moveTaskToFullscreen(int i) {
+        StageCoordinator stageCoordinator = this.mStageCoordinator;
+        stageCoordinator.getClass();
+        boolean z = false;
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled[0]) {
+            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN, -4495304678011028405L, 0, null);
+        }
+        if (stageCoordinator.mMainStage.mChildrenTaskInfo.contains(i)) {
+            if (stageCoordinator.mSideStagePosition == 0) {
+                z = true;
+            }
+        } else if (!stageCoordinator.mSideStage.mChildrenTaskInfo.contains(i)) {
+            return;
+        } else {
+            if (stageCoordinator.mSideStagePosition == 1) {
+            }
+        }
+        stageCoordinator.mSplitLayout.flingDividerToDismiss(12, !z);
     }
 
     public final void moveToStage(int i, int i2, WindowContainerTransaction windowContainerTransaction) {
@@ -1122,7 +1041,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         BiConsumer biConsumer = new BiConsumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SplitScreenController splitScreenController = SplitScreenController.this;
+                SplitScreenController splitScreenController = this.f$0;
                 PrintWriter printWriter = (PrintWriter) obj;
                 String str = (String) obj2;
                 QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str, "SplitScreenController");
@@ -1140,7 +1059,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         shellController.addExternalInterface("com.android.wm.shell.splitscreen.ISplitScreen", new Supplier() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                SplitScreenController splitScreenController = SplitScreenController.this;
+                SplitScreenController splitScreenController = this.f$0;
                 splitScreenController.getClass();
                 return new SplitScreenController.ISplitScreenImpl(splitScreenController);
             }
@@ -1162,7 +1081,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
             naturalSwitchingDropTargetController.mMainHandler.post(new Runnable() { // from class: com.android.wm.shell.naturalswitching.NaturalSwitchingDropTargetController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NaturalSwitchingDropTargetController naturalSwitchingDropTargetController2 = NaturalSwitchingDropTargetController.this;
+                    NaturalSwitchingDropTargetController naturalSwitchingDropTargetController2 = naturalSwitchingDropTargetController;
                     SplitScreenController splitScreenController = this;
                     naturalSwitchingDropTargetController2.getClass();
                     naturalSwitchingDropTargetController2.mGestureDetector = new GestureDetector(naturalSwitchingDropTargetController2.mContext, naturalSwitchingDropTargetController2);
@@ -1246,6 +1165,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
             stageCoordinator.mTopStageAfterFold = -1;
             if (CoreRune.MW_SPLIT_CONTINUITY_MODE && stageCoordinator.mFoldLockSettingsObserver.isSelectiveStayAwake()) {
                 if (z4 && stageCoordinator.isMultiSplitScreenVisible()) {
+                    stageCoordinator.updateCoverDisplaySplitLayoutIfNeeded();
                     stageCoordinator.setSplitsVisible(false);
                 }
                 Log.d("StageCoordinator", "cover display already updated in selectiveAwake");
@@ -1359,13 +1279,14 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         StageTaskListener stageTaskListenerByStageType = stageCoordinator.getStageTaskListenerByStageType(i);
         StageTaskListener stageTaskListenerByStageType2 = stageCoordinator.getStageTaskListenerByStageType(i2);
         StageTaskListener stageTaskListenerByStageType3 = stageCoordinator.getStageTaskListenerByStageType(i3);
-        if (stageTaskListenerByStageType != null && stageTaskListenerByStageType2 != null && stageTaskListenerByStageType3 != null) {
+        if (stageTaskListenerByStageType == null || stageTaskListenerByStageType2 == null || stageTaskListenerByStageType3 == null) {
+            Slog.w("StageCoordinator", "Cannot swapStageTasks, stage1=" + stageTaskListenerByStageType + ",stage2=" + stageTaskListenerByStageType2 + ",stage3=" + stageTaskListenerByStageType3 + ",callers=" + Debug.getCallers(3));
+        } else {
             stageTaskListenerByStageType.reparentAllChildren(stageTaskListenerByStageType2.mRootTaskInfo.token, windowContainerTransaction);
             stageTaskListenerByStageType2.reparentAllChildren(stageTaskListenerByStageType3.mRootTaskInfo.token, windowContainerTransaction);
             stageTaskListenerByStageType3.reparentAllChildren(stageTaskListenerByStageType.mRootTaskInfo.token, windowContainerTransaction);
-            return;
         }
-        Slog.w("StageCoordinator", "Cannot swapStageTasks, stage1=" + stageTaskListenerByStageType + ",stage2=" + stageTaskListenerByStageType2 + ",stage3=" + stageTaskListenerByStageType3 + ",callers=" + Debug.getCallers(3));
+        this.mStageCoordinator.mIsStageTasksChanged = true;
     }
 
     @Override // com.android.wm.shell.draganddrop.SplitDragPolicy.Starter
@@ -1392,11 +1313,11 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         if (CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER && this.mStageCoordinator.isSplitScreenVisible()) {
             Intent intent2 = new Intent();
             intent2.addFlags(262144);
-            ActivityOptions makeBasic = ActivityOptions.makeBasic();
+            ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
             if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && this.mStageCoordinator.isMultiSplitActive()) {
-                makeBasic.setResumedAffordanceAnimation();
+                activityOptionsMakeBasic.setResumedAffordanceAnimation();
             }
-            this.mStageCoordinator.startIntentToCell(pendingIntent, intent, intent2, userHandle, i, z, makeBasic.toBundle());
+            this.mStageCoordinator.startIntentToCell(pendingIntent, intent, intent2, userHandle, i, z, activityOptionsMakeBasic.toBundle());
         }
     }
 
@@ -1417,34 +1338,34 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
         if (CoreRune.MW_DND_MULTI_SPLIT_DROP_TARGET) {
             this.mStageCoordinator.isSplitScreenVisible();
         }
-        Bundle resolveStartStage = this.mStageCoordinator.resolveStartStage(-1, i, bundle, null, -1);
-        if (resolveStartStage == null) {
-            resolveStartStage = new Bundle();
+        Bundle bundleResolveStartStage = this.mStageCoordinator.resolveStartStage(-1, i, bundle, null, -1);
+        if (bundleResolveStartStage == null) {
+            bundleResolveStartStage = new Bundle();
         }
-        ActivityOptions fromBundle = ActivityOptions.fromBundle(resolveStartStage);
+        ActivityOptions activityOptionsFromBundle = ActivityOptions.fromBundle(bundleResolveStartStage);
         MultiInstanceHelper.samePackage(userHandle.getIdentifier(), getUserId(SplitScreenUtils.reverseSplitPosition(i), null), str, getPackageName(SplitScreenUtils.reverseSplitPosition(i), null));
         StageCoordinator stageCoordinator = this.mStageCoordinator;
-        Bundle bundle2 = fromBundle.toBundle();
+        Bundle bundle2 = activityOptionsFromBundle.toBundle();
         stageCoordinator.getClass();
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled[0]) {
             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN, -5167067216468757684L, 80, String.valueOf(str), String.valueOf(str2), Long.valueOf(i), Long.valueOf(userHandle.getIdentifier()));
         }
         StageCoordinator.AnonymousClass2 anonymousClass2 = stageCoordinator.new AnonymousClass2(!stageCoordinator.mMainStage.mIsActive, i);
-        Bundle resolveStartStage2 = stageCoordinator.resolveStartStage(-1, i, bundle2, null, -1);
+        Bundle bundleResolveStartStage2 = stageCoordinator.resolveStartStage(-1, i, bundle2, null, -1);
         RemoteAnimationAdapter remoteAnimationAdapter = new RemoteAnimationAdapter(anonymousClass2, 0L, 0L);
-        ActivityOptions fromBundle2 = ActivityOptions.fromBundle(resolveStartStage2);
-        fromBundle2.setApplyNoUserActionFlagForShortcut(true);
-        fromBundle2.update(ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter));
+        ActivityOptions activityOptionsFromBundle2 = ActivityOptions.fromBundle(bundleResolveStartStage2);
+        activityOptionsFromBundle2.setApplyNoUserActionFlagForShortcut(true);
+        activityOptionsFromBundle2.update(ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter));
         try {
-            ((LauncherApps) stageCoordinator.mContext.getSystemService(LauncherApps.class)).startShortcut(str, str2, null, fromBundle2.toBundle(), userHandle);
+            ((LauncherApps) stageCoordinator.mContext.getSystemService(LauncherApps.class)).startShortcut(str, str2, null, activityOptionsFromBundle2.toBundle(), userHandle);
         } catch (ActivityNotFoundException e) {
             Slog.e("StageCoordinator", "Failed to launch shortcut", e);
         }
     }
 
-    public final void startSplitTasks(int i, int i2, int i3, boolean z, int i4, float f, float f2) {
+    public final void startSplitTasks(int i, int i2, int i3, boolean z, int i4, float f, float f2, boolean z2) {
         try {
-            this.mStageCoordinator.startSplitTasks(i, i2, i3, z, i4, f, f2);
+            this.mStageCoordinator.startSplitTasks(i, i2, i3, z, i4, f, f2, z2);
         } catch (Exception e) {
             Slog.e("SplitScreenController", "Failed to launch tasks", e);
         }
@@ -1461,7 +1382,7 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
 
     public final void startTasks(int i, Bundle bundle, int i2, Bundle bundle2, int i3, float f, RemoteTransition remoteTransition) {
         try {
-            this.mStageCoordinator.startTasks(i, bundle, i2, bundle2, -1, null, i3, 8, f, 0, 0.5f, remoteTransition, null, -1, null);
+            this.mStageCoordinator.startTasks(i, bundle, i2, bundle2, -1, null, i3, 8, f, 0, 0.5f, remoteTransition, null, -1, false, null);
         } catch (Exception e) {
             Slog.e("SplitScreenController", "Failed to launch tasks", e);
         }
@@ -1552,12 +1473,12 @@ public class SplitScreenController implements SplitDragPolicy.Starter, RemoteCal
                 }
             }
         };
-        Bundle resolveStartStage = this.mStageCoordinator.resolveStartStage(-1, i2, bundle, null, -1);
+        Bundle bundleResolveStartStage = this.mStageCoordinator.resolveStartStage(-1, i2, bundle, null, -1);
         RemoteAnimationAdapter remoteAnimationAdapter = new RemoteAnimationAdapter(stub, 0L, 0L);
-        ActivityOptions fromBundle = ActivityOptions.fromBundle(resolveStartStage);
-        fromBundle.update(ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter));
+        ActivityOptions activityOptionsFromBundle = ActivityOptions.fromBundle(bundleResolveStartStage);
+        activityOptionsFromBundle.update(ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter));
         try {
-            iArr[0] = ActivityTaskManager.getService().startActivityFromRecents(i, fromBundle.toBundle());
+            iArr[0] = ActivityTaskManager.getService().startActivityFromRecents(i, activityOptionsFromBundle.toBundle());
         } catch (RemoteException e) {
             Slog.e("SplitScreenController", "Failed to launch task", e);
         }

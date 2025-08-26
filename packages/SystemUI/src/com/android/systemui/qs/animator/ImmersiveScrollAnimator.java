@@ -21,7 +21,6 @@ import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.Collections;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ImmersiveScrollAnimator extends SecQSImplAnimatorBase {
     public float animDistance;
@@ -43,7 +42,6 @@ public final class ImmersiveScrollAnimator extends SecQSImplAnimatorBase {
     public final int[] plmnLoc = new int[2];
     public final ConfigurationState lastConfigurationState = new ConfigurationState(Collections.singletonList(ConfigurationState.ConfigurationField.ORIENTATION));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -121,7 +119,7 @@ public final class ImmersiveScrollAnimator extends SecQSImplAnimatorBase {
             view.post(new Runnable() { // from class: com.android.systemui.qs.animator.ImmersiveScrollAnimator$onConfigurationChanged$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImmersiveScrollAnimator.this.updateAnimators();
+                    this.this$0.updateAnimators();
                 }
             });
         }
@@ -278,11 +276,11 @@ public final class ImmersiveScrollAnimator extends SecQSImplAnimatorBase {
         this.bigDate = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_DATE);
         this.plmn = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PLMN);
         SecPanelSplitHelper.Companion.getClass();
-        int i = 0;
+        int height = 0;
         this.qqsHeight = (SecPanelSplitHelper.isEnabled || qSAnimView2 == null || (view = qSAnimView2.getView()) == null) ? 0 : view.getHeight();
         if (qSAnimView != null && (view2 = qSAnimView.getView()) != null) {
-            i = view2.getHeight();
+            height = view2.getHeight();
         }
-        this.animDistance = i - this.qqsHeight;
+        this.animDistance = height - this.qqsHeight;
     }
 }

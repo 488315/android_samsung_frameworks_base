@@ -44,9 +44,9 @@ public interface ICarrierConfigChangeListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICarrierConfigChangeListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICarrierConfigChangeListener)) {
-                return (ICarrierConfigChangeListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICarrierConfigChangeListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICarrierConfigChangeListener)) {
+                return (ICarrierConfigChangeListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface ICarrierConfigChangeListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCarrierConfigChanged(readInt, readInt2, readInt3, readInt4);
+                onCarrierConfigChanged(i3, i4, i5, i6);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,16 +102,16 @@ public interface ICarrierConfigChangeListener extends IInterface {
 
             @Override // com.android.internal.telephony.ICarrierConfigChangeListener
             public void onCarrierConfigChanged(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICarrierConfigChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICarrierConfigChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

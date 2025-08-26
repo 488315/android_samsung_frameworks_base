@@ -45,9 +45,9 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILocalWallpaperColorConsumer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILocalWallpaperColorConsumer)) {
-                return (ILocalWallpaperColorConsumer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILocalWallpaperColorConsumer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILocalWallpaperColorConsumer)) {
+                return (ILocalWallpaperColorConsumer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,14 +101,14 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
 
             @Override // android.app.ILocalWallpaperColorConsumer
             public void onColorsChanged(RectF rectF, WallpaperColors wallpaperColors) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILocalWallpaperColorConsumer.DESCRIPTOR);
-                    obtain.writeTypedObject(rectF, 0);
-                    obtain.writeTypedObject(wallpaperColors, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILocalWallpaperColorConsumer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rectF, 0);
+                    parcelObtain.writeTypedObject(wallpaperColors, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

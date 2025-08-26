@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ConfigurationRepositoryImpl implements ConfigurationRepository {
     public final ConfigurationController configurationController;
@@ -31,14 +30,14 @@ public final class ConfigurationRepositoryImpl implements ConfigurationRepositor
         this.configurationController = configurationController;
         this.context = context;
         this.displayUtils = displayUtilsWrapper;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ConfigurationRepositoryImpl$onConfigurationChange$1(this, null));
-        this.onConfigurationChange = conflatedCallbackFlow;
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new ConfigurationRepositoryImpl$onConfigurationChange$1(this, null));
+        this.onConfigurationChange = flowConflatedCallbackFlow;
         this.configurationValues = FlowConflatedKt.conflatedCallbackFlow(new ConfigurationRepositoryImpl$configurationValues$1(this, null));
-        Flow conflatedCallbackFlow2 = FlowConflatedKt.conflatedCallbackFlow(new ConfigurationRepositoryImpl$onMovedToDisplay$1(this, null));
+        Flow flowConflatedCallbackFlow2 = FlowConflatedKt.conflatedCallbackFlow(new ConfigurationRepositoryImpl$onMovedToDisplay$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
         companion.getClass();
-        this.onMovedToDisplay = FlowKt.stateIn(conflatedCallbackFlow2, coroutineScope, SharingStarted.Companion.Eagerly, 0);
-        this.scaleForResolution = FlowKt.stateIn(FlowKt.distinctUntilChanged(FlowKt.mapLatest(conflatedCallbackFlow, new ConfigurationRepositoryImpl$scaleForResolution$1(this, null))), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Float.valueOf(getResolutionScale()));
+        this.onMovedToDisplay = FlowKt.stateIn(flowConflatedCallbackFlow2, coroutineScope, SharingStarted.Companion.Eagerly, 0);
+        this.scaleForResolution = FlowKt.stateIn(FlowKt.distinctUntilChanged(FlowKt.mapLatest(flowConflatedCallbackFlow, new ConfigurationRepositoryImpl$scaleForResolution$1(this, null))), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Float.valueOf(getResolutionScale()));
     }
 
     public final float getResolutionScale() {

@@ -58,9 +58,9 @@ public interface ITkgsInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ITkgsInfoListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITkgsInfoListener)) {
-                return (ITkgsInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ITkgsInfoListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITkgsInfoListener)) {
+                return (ITkgsInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,17 +93,17 @@ public interface ITkgsInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String[] createStringArray = parcel.createStringArray();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                onServiceList(createStringArray);
+                onServiceList(strArrCreateStringArray);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTableVersionUpdate(readInt);
+                onTableVersionUpdate(i3);
             } else if (i == 3) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onUserMessage(readString);
+                onUserMessage(string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -128,37 +128,37 @@ public interface ITkgsInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.scan.ITkgsInfoListener
             public void onServiceList(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ITkgsInfoListener
             public void onTableVersionUpdate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ITkgsInfoListener
             public void onUserMessage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ITkgsInfoListener");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

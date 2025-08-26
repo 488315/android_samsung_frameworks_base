@@ -172,94 +172,94 @@ public class AccessibilityServiceInfo implements Parcelable {
         try {
             try {
                 PackageManager packageManager = context.getPackageManager();
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, AccessibilityService.SERVICE_META_DATA);
-                long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                if (elapsedRealtime2 > 100) {
-                    Log.i("AccessibilityServiceInfo", "took more than 100ms mComponentName : " + this.mComponentName + ", elapsedTime : " + elapsedRealtime2);
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, AccessibilityService.SERVICE_META_DATA);
+                long jElapsedRealtime2 = SystemClock.elapsedRealtime() - jElapsedRealtime;
+                if (jElapsedRealtime2 > 100) {
+                    Log.i("AccessibilityServiceInfo", "took more than 100ms mComponentName : " + this.mComponentName + ", elapsedTime : " + jElapsedRealtime2);
                 }
-                if (loadXmlMetaData != null) {
-                    for (int i = 0; i != 1 && i != 2; i = loadXmlMetaData.next()) {
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
                     }
-                    if (!TAG_ACCESSIBILITY_SERVICE.equals(loadXmlMetaData.getName())) {
+                    if (!TAG_ACCESSIBILITY_SERVICE.equals(xmlResourceParserLoadXmlMetaData.getName())) {
                         throw new XmlPullParserException("Meta-data does not start withaccessibility-service tag");
                     }
-                    TypedArray obtainAttributes = packageManager.getResourcesForApplication(serviceInfo.applicationInfo).obtainAttributes(Xml.asAttributeSet(loadXmlMetaData), R.styleable.AccessibilityService);
-                    this.eventTypes = obtainAttributes.getInt(3, 0);
-                    String string = obtainAttributes.getString(4);
+                    TypedArray typedArrayObtainAttributes = packageManager.getResourcesForApplication(serviceInfo.applicationInfo).obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.AccessibilityService);
+                    this.eventTypes = typedArrayObtainAttributes.getInt(3, 0);
+                    String string = typedArrayObtainAttributes.getString(4);
                     if (string != null) {
                         this.packageNames = string.split("(\\s)*,(\\s)*");
                     }
-                    this.feedbackType = obtainAttributes.getInt(5, 0);
-                    this.notificationTimeout = obtainAttributes.getInt(6, 0);
-                    this.mNonInteractiveUiTimeout = obtainAttributes.getInt(15, 0);
-                    this.mInteractiveUiTimeout = obtainAttributes.getInt(16, 0);
-                    this.flags = obtainAttributes.getInt(7, 0);
-                    this.mSettingsActivityName = obtainAttributes.getString(2);
-                    if (obtainAttributes.getBoolean(8, false)) {
+                    this.feedbackType = typedArrayObtainAttributes.getInt(5, 0);
+                    this.notificationTimeout = typedArrayObtainAttributes.getInt(6, 0);
+                    this.mNonInteractiveUiTimeout = typedArrayObtainAttributes.getInt(15, 0);
+                    this.mInteractiveUiTimeout = typedArrayObtainAttributes.getInt(16, 0);
+                    this.flags = typedArrayObtainAttributes.getInt(7, 0);
+                    this.mSettingsActivityName = typedArrayObtainAttributes.getString(2);
+                    if (typedArrayObtainAttributes.getBoolean(8, false)) {
                         this.mCapabilities |= 1;
                     }
-                    if (obtainAttributes.getBoolean(9, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(9, false)) {
                         this.mCapabilities = 2 | this.mCapabilities;
                     }
-                    if (obtainAttributes.getBoolean(11, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(11, false)) {
                         this.mCapabilities |= 8;
                     }
-                    if (obtainAttributes.getBoolean(12, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(12, false)) {
                         this.mCapabilities = 16 | this.mCapabilities;
                     }
-                    if (obtainAttributes.getBoolean(13, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(13, false)) {
                         this.mCapabilities |= 32;
                     }
-                    if (obtainAttributes.getBoolean(14, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(14, false)) {
                         this.mCapabilities |= 64;
                     }
-                    if (obtainAttributes.getBoolean(19, false)) {
+                    if (typedArrayObtainAttributes.getBoolean(19, false)) {
                         this.mCapabilities |= 128;
                     }
                     try {
-                        TypedValue peekValue = obtainAttributes.peekValue(0);
-                        if (peekValue != null) {
-                            this.mDescriptionResId = peekValue.resourceId;
-                            CharSequence coerceToString = peekValue.coerceToString();
-                            if (coerceToString != null) {
-                                this.mNonLocalizedDescription = coerceToString.toString().trim();
+                        TypedValue typedValuePeekValue = typedArrayObtainAttributes.peekValue(0);
+                        if (typedValuePeekValue != null) {
+                            this.mDescriptionResId = typedValuePeekValue.resourceId;
+                            CharSequence charSequenceCoerceToString = typedValuePeekValue.coerceToString();
+                            if (charSequenceCoerceToString != null) {
+                                this.mNonLocalizedDescription = charSequenceCoerceToString.toString().trim();
                             }
                         }
                     } catch (IndexOutOfBoundsException unused) {
                         this.mNonLocalizedDescription = " ";
                     }
-                    TypedValue peekValue2 = obtainAttributes.peekValue(1);
-                    if (peekValue2 != null) {
-                        this.mSummaryResId = peekValue2.resourceId;
-                        CharSequence coerceToString2 = peekValue2.coerceToString();
-                        if (coerceToString2 != null) {
-                            this.mNonLocalizedSummary = coerceToString2.toString().trim();
+                    TypedValue typedValuePeekValue2 = typedArrayObtainAttributes.peekValue(1);
+                    if (typedValuePeekValue2 != null) {
+                        this.mSummaryResId = typedValuePeekValue2.resourceId;
+                        CharSequence charSequenceCoerceToString2 = typedValuePeekValue2.coerceToString();
+                        if (charSequenceCoerceToString2 != null) {
+                            this.mNonLocalizedSummary = charSequenceCoerceToString2.toString().trim();
                         }
                     }
-                    TypedValue peekValue3 = obtainAttributes.peekValue(17);
-                    if (peekValue3 != null) {
-                        this.mAnimatedImageRes = peekValue3.resourceId;
+                    TypedValue typedValuePeekValue3 = typedArrayObtainAttributes.peekValue(17);
+                    if (typedValuePeekValue3 != null) {
+                        this.mAnimatedImageRes = typedValuePeekValue3.resourceId;
                     }
-                    TypedValue peekValue4 = obtainAttributes.peekValue(18);
-                    if (peekValue4 != null) {
-                        this.mHtmlDescriptionRes = peekValue4.resourceId;
+                    TypedValue typedValuePeekValue4 = typedArrayObtainAttributes.peekValue(18);
+                    if (typedValuePeekValue4 != null) {
+                        this.mHtmlDescriptionRes = typedValuePeekValue4.resourceId;
                     }
-                    this.mIsAccessibilityTool = obtainAttributes.getBoolean(20, false);
-                    this.mTileServiceName = obtainAttributes.getString(21);
-                    TypedValue peekValue5 = obtainAttributes.peekValue(22);
-                    if (peekValue5 != null) {
-                        this.mIntroResId = peekValue5.resourceId;
+                    this.mIsAccessibilityTool = typedArrayObtainAttributes.getBoolean(20, false);
+                    this.mTileServiceName = typedArrayObtainAttributes.getString(21);
+                    TypedValue typedValuePeekValue5 = typedArrayObtainAttributes.peekValue(22);
+                    if (typedValuePeekValue5 != null) {
+                        this.mIntroResId = typedValuePeekValue5.resourceId;
                     }
-                    obtainAttributes.recycle();
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
+                    typedArrayObtainAttributes.recycle();
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
                     }
                     this.mDynamicPropertyDefaults = new DynamicPropertyDefaults(this);
                     return;
                 }
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    xmlResourceParserLoadXmlMetaData.close();
                 }
                 this.mDynamicPropertyDefaults = new DynamicPropertyDefaults(this);
             } catch (PackageManager.NameNotFoundException unused2) {
@@ -483,10 +483,10 @@ public class AccessibilityServiceInfo implements Parcelable {
     }
 
     public final boolean isWithinParcelableSize() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        boolean z = obtain.dataSize() <= 65536;
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        boolean z = parcelObtain.dataSize() <= 65536;
+        parcelObtain.recycle();
         return z;
     }
 
@@ -613,9 +613,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         sb.append("feedbackTypes:");
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            sb.append(feedbackTypeToString(numberOfTrailingZeros));
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            sb.append(feedbackTypeToString(iNumberOfTrailingZeros));
+            i &= ~iNumberOfTrailingZeros;
             if (i != 0) {
                 sb.append(", ");
             }
@@ -642,9 +642,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         sb.append("eventTypes:");
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            sb.append(AccessibilityEvent.eventTypeToString(numberOfTrailingZeros));
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            sb.append(AccessibilityEvent.eventTypeToString(iNumberOfTrailingZeros));
+            i &= ~iNumberOfTrailingZeros;
             if (i != 0) {
                 sb.append(", ");
             }
@@ -656,9 +656,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         sb.append("flags:");
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            sb.append(flagToString(numberOfTrailingZeros));
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            sb.append(flagToString(iNumberOfTrailingZeros));
+            i &= ~iNumberOfTrailingZeros;
             if (i != 0) {
                 sb.append(", ");
             }
@@ -670,9 +670,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         sb.append("capabilities:");
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            sb.append(capabilityToString(numberOfTrailingZeros));
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            sb.append(capabilityToString(iNumberOfTrailingZeros));
+            i &= ~iNumberOfTrailingZeros;
             if (i != 0) {
                 sb.append(", ");
             }
@@ -684,34 +684,34 @@ public class AccessibilityServiceInfo implements Parcelable {
         StringBuilder sb = new StringBuilder();
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
-            if (numberOfTrailingZeros == 1) {
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
+            if (iNumberOfTrailingZeros == 1) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append("FEEDBACK_SPOKEN");
-            } else if (numberOfTrailingZeros == 2) {
+            } else if (iNumberOfTrailingZeros == 2) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append("FEEDBACK_HAPTIC");
-            } else if (numberOfTrailingZeros == 4) {
+            } else if (iNumberOfTrailingZeros == 4) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append("FEEDBACK_AUDIBLE");
-            } else if (numberOfTrailingZeros == 8) {
+            } else if (iNumberOfTrailingZeros == 8) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append("FEEDBACK_VISUAL");
-            } else if (numberOfTrailingZeros == 16) {
+            } else if (iNumberOfTrailingZeros == 16) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
                 sb.append("FEEDBACK_GENERIC");
-            } else if (numberOfTrailingZeros == 32) {
+            } else if (iNumberOfTrailingZeros == 32) {
                 if (sb.length() > 1) {
                     sb.append(", ");
                 }
@@ -800,9 +800,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         ArrayList arrayList = new ArrayList();
         SparseArray<CapabilityInfo> capabilityInfoSparseArray = getCapabilityInfoSparseArray(context);
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
-            CapabilityInfo capabilityInfo = capabilityInfoSparseArray.get(numberOfTrailingZeros);
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
+            CapabilityInfo capabilityInfo = capabilityInfoSparseArray.get(iNumberOfTrailingZeros);
             if (capabilityInfo != null) {
                 arrayList.add(capabilityInfo);
             }

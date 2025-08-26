@@ -2,7 +2,9 @@ package com.android.systemui.qs.tiles.detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Handler;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -10,20 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import com.android.systemui.Dependency;
+import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
+import com.android.systemui.knox.EdmMonitor;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.statusbar.policy.FlashlightController;
+import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 import com.android.systemui.statusbar.policy.SecFlashlightControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FlashlightDetailAdapter implements DetailAdapter {
     public final Context mContext;
     public final FlashlightController mFlashlightController;
+    public TextView mFlashlightDetailTextView;
     public final FlashlightTile mFlashlightTile;
     public final boolean mIsLowBattery;
     public final SecFlashlightControllerImpl mSecFlashlightController;
@@ -62,7 +70,6 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter$2, reason: invalid class name */
     public class AnonymousClass2 implements Runnable {
         public final /* synthetic */ boolean val$state;
@@ -105,16 +112,17 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
-    public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_detail_flashlight, viewGroup, false);
-        this.mWarningTextView = (TextView) inflate.findViewById(R.id.text_warning);
+    public final View createDetailView(Context context, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_detail_flashlight, viewGroup, false);
+        this.mFlashlightDetailTextView = (TextView) viewInflate.findViewById(R.id.qs_flashlight_detail_title);
+        this.mWarningTextView = (TextView) viewInflate.findViewById(R.id.text_warning);
         Context context2 = this.mContext;
         String string = context2.getString(R.string.quick_settings_flashlight_detail_warning, context2.getString(R.string.sec_quick_settings_flashlight_label));
         TextView textView = this.mWarningTextView;
         if (textView != null) {
             textView.setText(string);
         }
-        SeekBar seekBar = (SeekBar) inflate.findViewById(R.id.flashlight_slider);
+        SeekBar seekBar = (SeekBar) viewInflate.findViewById(R.id.flashlight_slider);
         this.mSlider = seekBar;
         seekBar.setOnSeekBarChangeListener(this.torchLevelChangedListener);
         this.mSlider.setMax(4);
@@ -124,8 +132,9 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
                 return false;
             }
         });
+        FontSizeUtils.updateFontSize(this.mFlashlightDetailTextView, R.dimen.sec_qs_detail_content_primary_text_size, 0.8f, 1.3f);
         this.mUiHandler.post(new AnonymousClass2(this.mState.value));
-        return inflate;
+        return viewInflate;
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -148,74 +157,33 @@ public final class FlashlightDetailAdapter implements DetailAdapter {
         return Boolean.valueOf(this.mState.value);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001a  */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setToggleState(boolean r6) {
-        /*
-            r5 = this;
-            com.android.systemui.Dependency r0 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.knox.KnoxStateMonitor> r1 = com.android.systemui.knox.KnoxStateMonitor.class
-            java.lang.Object r0 = r0.getDependencyInner(r1)
-            com.android.systemui.knox.KnoxStateMonitor r0 = (com.android.systemui.knox.KnoxStateMonitor) r0
-            com.android.systemui.knox.KnoxStateMonitorImpl r0 = (com.android.systemui.knox.KnoxStateMonitorImpl) r0
-            com.android.systemui.knox.EdmMonitor r0 = r0.mEdmMonitor
-            if (r0 == 0) goto L1a
-            com.android.systemui.knox.KnoxStateMonitorImpl r1 = r0.knoxStateMonitor
-            android.content.Context r1 = r1.mContext
-            boolean r0 = r0.mSettingsChangesAllowed
-            if (r0 != 0) goto L1a
-            r0 = 1
-            goto L1b
-        L1a:
-            r0 = 0
-        L1b:
-            java.lang.String r1 = "FlashlightDetailAdapter"
-            com.android.systemui.qs.tiles.FlashlightTile r2 = r5.mFlashlightTile
-            if (r0 == 0) goto L36
-            r2.showItPolicyToast()
-            java.lang.String r6 = "setToggleState blocked"
-            android.util.Log.d(r1, r6)
-            java.lang.Boolean r5 = r5.getToggleState()
-            boolean r5 = r5.booleanValue()
-            r2.fireToggleStateChanged(r5)
-            return
-        L36:
-            boolean r0 = r5.mIsLowBattery
-            if (r0 == 0) goto L52
-            android.content.Context r6 = r5.mContext
-            r0 = 2131953558(0x7f130796, float:1.954359E38)
-            java.lang.String r6 = r6.getString(r0)
-            r2.showWarningMessage(r6)
-            java.lang.Boolean r5 = r5.getToggleState()
-            boolean r5 = r5.booleanValue()
-            r2.fireToggleStateChanged(r5)
-            return
-        L52:
-            java.lang.String r0 = com.android.systemui.util.SystemUIAnalytics.getCurrentScreenID()
-            java.lang.String r2 = "flashlight"
-            java.lang.String r3 = "QPDE1008"
-            java.lang.String r4 = "location"
-            com.android.systemui.util.SystemUIAnalytics.sendEventCDLog(r0, r3, r4, r2)
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "setToggleState "
-            r0.<init>(r2)
-            r0.append(r6)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.d(r1, r0)
-            com.android.systemui.statusbar.policy.FlashlightController r0 = r5.mFlashlightController
-            com.android.systemui.statusbar.policy.FlashlightControllerImpl r0 = (com.android.systemui.statusbar.policy.FlashlightControllerImpl) r0
-            r0.setFlashlight(r6)
-            com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter$2 r0 = new com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter$2
-            r0.<init>(r6)
-            android.os.Handler r5 = r5.mUiHandler
-            r5.post(r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.detail.FlashlightDetailAdapter.setToggleState(boolean):void");
+    public final void setToggleState(boolean z) {
+        boolean z2;
+        EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
+        if (edmMonitor != null) {
+            Context context = edmMonitor.knoxStateMonitor.mContext;
+            z2 = !edmMonitor.mSettingsChangesAllowed;
+        }
+        FlashlightTile flashlightTile = this.mFlashlightTile;
+        if (z2) {
+            flashlightTile.showItPolicyToast();
+            Log.d("FlashlightDetailAdapter", "setToggleState blocked");
+            flashlightTile.fireToggleStateChanged(getToggleState().booleanValue());
+        } else {
+            if (this.mIsLowBattery) {
+                flashlightTile.showWarningMessage(this.mContext.getString(R.string.flash_light_disabled_by_low_battery));
+                flashlightTile.fireToggleStateChanged(getToggleState().booleanValue());
+                return;
+            }
+            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_DETAIL_SWITCH, "location", "flashlight");
+            Log.d("FlashlightDetailAdapter", "setToggleState " + z);
+            ((FlashlightControllerImpl) this.mFlashlightController).setFlashlight(z);
+            this.mUiHandler.post(new AnonymousClass2(z));
+        }
     }
 }

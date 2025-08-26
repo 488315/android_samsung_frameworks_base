@@ -574,17 +574,17 @@ public final class Debug {
         }
 
         public Map<String, String> getMemoryStats() {
-            HashMap hashMap = new HashMap();
-            hashMap.put("summary.java-heap", Integer.toString(getSummaryJavaHeap()));
-            hashMap.put("summary.native-heap", Integer.toString(getSummaryNativeHeap()));
-            hashMap.put("summary.code", Integer.toString(getSummaryCode()));
-            hashMap.put("summary.stack", Integer.toString(getSummaryStack()));
-            hashMap.put("summary.graphics", Integer.toString(getSummaryGraphics()));
-            hashMap.put("summary.private-other", Integer.toString(getSummaryPrivateOther()));
-            hashMap.put("summary.system", Integer.toString(getSummarySystem()));
-            hashMap.put("summary.total-pss", Integer.toString(getSummaryTotalPss()));
-            hashMap.put("summary.total-swap", Integer.toString(getSummaryTotalSwap()));
-            return hashMap;
+            HashMap map = new HashMap();
+            map.put("summary.java-heap", Integer.toString(getSummaryJavaHeap()));
+            map.put("summary.native-heap", Integer.toString(getSummaryNativeHeap()));
+            map.put("summary.code", Integer.toString(getSummaryCode()));
+            map.put("summary.stack", Integer.toString(getSummaryStack()));
+            map.put("summary.graphics", Integer.toString(getSummaryGraphics()));
+            map.put("summary.private-other", Integer.toString(getSummaryPrivateOther()));
+            map.put("summary.system", Integer.toString(getSummarySystem()));
+            map.put("summary.total-pss", Integer.toString(getSummaryTotalPss()));
+            map.put("summary.total-swap", Integer.toString(getSummaryTotalSwap()));
+            return map;
         }
 
         public int getSummaryJavaHeap() {
@@ -726,7 +726,7 @@ public final class Debug {
         }
     }
 
-    public static void suspendAllAndSendVmStart() {
+    public static void suspendAllAndSendVmStart() throws InterruptedException {
         if (VMDebug.isDebuggingEnabled()) {
             System.out.println("Sending WAIT chunk");
             DdmServer.sendChunk(new Chunk(ChunkHandler.type("WAIT"), new byte[]{0}, 0, 1));
@@ -745,7 +745,7 @@ public final class Debug {
         }
     }
 
-    public static void waitForDebugger() {
+    public static void waitForDebugger() throws InterruptedException {
         if (!VMDebug.isDebuggingEnabled() || isDebuggerConnected()) {
             return;
         }
@@ -761,19 +761,19 @@ public final class Debug {
         setWaitingForDebugger(false);
         System.out.println("Debugger has connected");
         while (true) {
-            long lastDebuggerActivity = VMDebug.lastDebuggerActivity();
-            if (lastDebuggerActivity < 0) {
+            long jLastDebuggerActivity = VMDebug.lastDebuggerActivity();
+            if (jLastDebuggerActivity < 0) {
                 System.out.println("debugger detached?");
                 return;
             }
-            if (lastDebuggerActivity < 1300) {
+            if (jLastDebuggerActivity < 1300) {
                 System.out.println("waiting for debugger to settle...");
                 try {
                     Thread.sleep(200L);
                 } catch (InterruptedException unused2) {
                 }
             } else {
-                System.out.println("debugger has settled (" + lastDebuggerActivity + NavigationBarInflaterView.KEY_CODE_END);
+                System.out.println("debugger has settled (" + jLastDebuggerActivity + NavigationBarInflaterView.KEY_CODE_END);
                 return;
             }
         }
@@ -800,59 +800,59 @@ public final class Debug {
         return FRAMEWORK_FEATURES;
     }
 
-    public static void startNativeTracing() {
+    public static void startNativeTracing() throws Throwable {
         FastPrintWriter fastPrintWriter;
         Throwable th;
         FastPrintWriter fastPrintWriter2 = null;
         try {
             fastPrintWriter = new FastPrintWriter(new FileOutputStream(SYSFS_QEMU_TRACE_STATE));
-        } catch (Exception unused) {
-        } catch (Throwable th2) {
-            fastPrintWriter = null;
-            th = th2;
-        }
-        try {
-            fastPrintWriter.println("1");
-            fastPrintWriter.close();
-        } catch (Exception unused2) {
-            fastPrintWriter2 = fastPrintWriter;
-            if (fastPrintWriter2 != null) {
-                fastPrintWriter2.close();
-            }
-        } catch (Throwable th3) {
-            th = th3;
-            if (fastPrintWriter != null) {
+            try {
+                fastPrintWriter.println("1");
                 fastPrintWriter.close();
+            } catch (Exception unused) {
+                fastPrintWriter2 = fastPrintWriter;
+                if (fastPrintWriter2 != null) {
+                    fastPrintWriter2.close();
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                if (fastPrintWriter != null) {
+                    fastPrintWriter.close();
+                }
+                throw th;
             }
-            throw th;
+        } catch (Exception unused2) {
+        } catch (Throwable th3) {
+            fastPrintWriter = null;
+            th = th3;
         }
     }
 
-    public static void stopNativeTracing() {
+    public static void stopNativeTracing() throws Throwable {
         FastPrintWriter fastPrintWriter;
         Throwable th;
         FastPrintWriter fastPrintWriter2 = null;
         try {
             fastPrintWriter = new FastPrintWriter(new FileOutputStream(SYSFS_QEMU_TRACE_STATE));
-        } catch (Exception unused) {
-        } catch (Throwable th2) {
-            fastPrintWriter = null;
-            th = th2;
-        }
-        try {
-            fastPrintWriter.println("0");
-            fastPrintWriter.close();
-        } catch (Exception unused2) {
-            fastPrintWriter2 = fastPrintWriter;
-            if (fastPrintWriter2 != null) {
-                fastPrintWriter2.close();
-            }
-        } catch (Throwable th3) {
-            th = th3;
-            if (fastPrintWriter != null) {
+            try {
+                fastPrintWriter.println("0");
                 fastPrintWriter.close();
+            } catch (Exception unused) {
+                fastPrintWriter2 = fastPrintWriter;
+                if (fastPrintWriter2 != null) {
+                    fastPrintWriter2.close();
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                if (fastPrintWriter != null) {
+                    fastPrintWriter.close();
+                }
+                throw th;
             }
-            throw th;
+        } catch (Exception unused2) {
+        } catch (Throwable th3) {
+            fastPrintWriter = null;
+            th = th3;
         }
     }
 
@@ -1111,7 +1111,7 @@ public final class Debug {
         return type == ((Class) cls.getField(AccessibilityButtonChooserActivity.EXTRA_TYPE_TO_CHOOSE).get(null));
     }
 
-    private static void modifyFieldIfSet(Field field, TypedProperties typedProperties, String str) {
+    private static void modifyFieldIfSet(Field field, TypedProperties typedProperties, String str) throws IllegalAccessException, IllegalArgumentException {
         if (field.getType() == String.class) {
             int stringInfo = typedProperties.getStringInfo(str);
             if (stringInfo == -2) {
@@ -1233,14 +1233,12 @@ public final class Debug {
     }
 
     public static synchronized void saveResetReason(String str, String str2) {
-        synchronized (Debug.class) {
-            if (str != null) {
-                SystemProperties.set("sys.reset_reason", str);
-                SystemProperties.set("sys.reset_info", str2.substring(0, Math.min(str2.length(), 91)));
-                SystemProperties.set("ctl.start", "resetreason");
-            } else {
-                Log.d(TAG, "!@ saveResetReason, but reason is null");
-            }
+        if (str != null) {
+            SystemProperties.set("sys.reset_reason", str);
+            SystemProperties.set("sys.reset_info", str2.substring(0, Math.min(str2.length(), 91)));
+            SystemProperties.set("ctl.start", "resetreason");
+        } else {
+            Log.d(TAG, "!@ saveResetReason, but reason is null");
         }
     }
 
@@ -1255,51 +1253,49 @@ public final class Debug {
     }
 
     public static synchronized void saveDump(BugreportParams bugreportParams, String str) {
-        synchronized (Debug.class) {
-            String str2 = SystemProperties.get("dumpstate.is_running", "0");
-            String str3 = SystemProperties.get("bugreport.mode", "default");
-            String str4 = "default";
-            int mode = bugreportParams.getMode();
-            if (mode == 11) {
-                str4 = "sys_error";
-            } else if (mode == 16) {
-                str4 = "app_anr";
-            } else if (mode == 13) {
-                str4 = "sys_watchdog";
-            } else if (mode == 14) {
-                str4 = "app_error";
-            }
-            String str5 = SystemProperties.get("sys.reset_reason", "UNKNOWN");
-            if ("sys_error".equals(str4) && PLATFORM_SILENT_RESET.equals(str5)) {
-                Log.d(TAG, "No need to trigger dumpstate in PF_SR case");
+        String str2 = SystemProperties.get("dumpstate.is_running", "0");
+        String str3 = SystemProperties.get("bugreport.mode", "default");
+        String str4 = "default";
+        int mode = bugreportParams.getMode();
+        if (mode == 11) {
+            str4 = "sys_error";
+        } else if (mode == 16) {
+            str4 = "app_anr";
+        } else if (mode == 13) {
+            str4 = "sys_watchdog";
+        } else if (mode == 14) {
+            str4 = "app_error";
+        }
+        String str5 = SystemProperties.get("sys.reset_reason", "UNKNOWN");
+        if ("sys_error".equals(str4) && PLATFORM_SILENT_RESET.equals(str5)) {
+            Log.d(TAG, "No need to trigger dumpstate in PF_SR case");
+            return;
+        }
+        if (CoreRune.IS_DEBUG_LEVEL_LOW) {
+            try {
+                if (str4.startsWith("app") && (str == null || (!str.contains("com.sec.") && !str.contains("com.samsung.") && !str.contains("com.android.phone")))) {
+                    Log.d(TAG, "low && ship && 3rdparty app crash, do not dump");
+                    return;
+                }
+            } catch (NullPointerException unused) {
+                Log.d(TAG, "NullPointerException Occurred from saveDump");
                 return;
             }
-            if (CoreRune.IS_DEBUG_LEVEL_LOW) {
-                try {
-                    if (str4.startsWith("app") && (str == null || (!str.contains("com.sec.") && !str.contains("com.samsung.") && !str.contains("com.android.phone")))) {
-                        Log.d(TAG, "low && ship && 3rdparty app crash, do not dump");
-                        return;
-                    }
-                } catch (NullPointerException unused) {
-                    Log.d(TAG, "NullPointerException Occurred from saveDump");
-                    return;
-                }
-            }
-            if ("1".equals(str2)) {
-                if (!str3.startsWith(Notification.CATEGORY_SYSTEM) && str4.startsWith(Notification.CATEGORY_SYSTEM)) {
-                    Log.d(TAG, "cancel previous dumsptate, and start new one");
-                    SystemProperties.set("ctl.stop", "bugreportm");
-                    SystemProperties.set("ctl.stop", "bugreportd");
-                    SystemProperties.set("ctl.stop", "dumpstate");
-                    SystemProperties.set("ctl.stop", "dumpstatez");
-                } else {
-                    Log.d(TAG, "dumpstate is already running, so skip");
-                    return;
-                }
-            }
-            SystemProperties.set("bugreport.mode", str4);
-            SystemProperties.set("dumpstate.process", str != null ? str.substring(0, Math.min(str.length(), 91)) : null);
-            SystemProperties.set("ctl.start", "bugreportm");
         }
+        if ("1".equals(str2)) {
+            if (!str3.startsWith(Notification.CATEGORY_SYSTEM) && str4.startsWith(Notification.CATEGORY_SYSTEM)) {
+                Log.d(TAG, "cancel previous dumsptate, and start new one");
+                SystemProperties.set("ctl.stop", "bugreportm");
+                SystemProperties.set("ctl.stop", "bugreportd");
+                SystemProperties.set("ctl.stop", "dumpstate");
+                SystemProperties.set("ctl.stop", "dumpstatez");
+            } else {
+                Log.d(TAG, "dumpstate is already running, so skip");
+                return;
+            }
+        }
+        SystemProperties.set("bugreport.mode", str4);
+        SystemProperties.set("dumpstate.process", str != null ? str.substring(0, Math.min(str.length(), 91)) : null);
+        SystemProperties.set("ctl.start", "bugreportm");
     }
 }

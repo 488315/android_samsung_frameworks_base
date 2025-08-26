@@ -175,7 +175,7 @@ public class Gains {
             this.useForVolume = Boolean.valueOf(z);
         }
 
-        static Gain read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Gain read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             Gain gain = new Gain();
             String attributeValue = xmlPullParser.getAttributeValue(null, "name");
             if (attributeValue != null) {
@@ -233,7 +233,7 @@ public class Gains {
         return this.gain;
     }
 
-    static Gains read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Gains read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         Gains gains = new Gains();
         xmlPullParser.getDepth();

@@ -22,31 +22,31 @@ public class NotificationBigTextNormalizer {
     }
 
     private static String normalizeLines(String str) {
-        String[] split = str.split(ShaderAssembler.NEWLINE);
+        String[] strArrSplit = str.split(ShaderAssembler.NEWLINE);
         StringBuilder sb = new StringBuilder(str.length());
-        for (String str2 : split) {
+        for (String str2 : strArrSplit) {
             StringBuilder sb2 = new StringBuilder(str2.length());
             boolean z = false;
             for (int i = 0; i < str2.length(); i++) {
-                char charAt = str2.charAt(i);
-                if ((charAt < 8203 || charAt > 8205) && charAt != 65279 && charAt != 847 && ((charAt < 8288 || charAt > 8293) && ((charAt < 8298 || charAt > 8303) && (charAt < 65529 || charAt > 65531)))) {
-                    if (isSpace(charAt)) {
+                char cCharAt = str2.charAt(i);
+                if ((cCharAt < 8203 || cCharAt > 8205) && cCharAt != 65279 && cCharAt != 847 && ((cCharAt < 8288 || cCharAt > 8293) && ((cCharAt < 8298 || cCharAt > 8303) && (cCharAt < 65529 || cCharAt > 65531)))) {
+                    if (isSpace(cCharAt)) {
                         if (!z) {
                             sb2.append(" ");
                         }
                         z = true;
                     } else {
-                        sb2.append(charAt);
+                        sb2.append(cCharAt);
                         z = false;
                     }
                 }
             }
-            String trim = sb2.toString().trim();
-            if (trim.length() > 0) {
+            String strTrim = sb2.toString().trim();
+            if (strTrim.length() > 0) {
                 if (sb.length() > 0) {
                     sb.append(ShaderAssembler.NEWLINE);
                 }
-                sb.append(trim);
+                sb.append(strTrim);
             }
         }
         return sb.toString();

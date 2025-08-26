@@ -114,9 +114,9 @@ public interface INetworkManagementEventObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INetworkManagementEventObserver)) {
-                return (INetworkManagementEventObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INetworkManagementEventObserver)) {
+                return (INetworkManagementEventObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -166,59 +166,59 @@ public interface INetworkManagementEventObserver extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    interfaceStatusChanged(readString, readBoolean);
+                    interfaceStatusChanged(string, z);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    interfaceLinkStateChanged(readString2, readBoolean2);
+                    interfaceLinkStateChanged(string2, z2);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    interfaceAdded(readString3);
+                    interfaceAdded(string3);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    interfaceRemoved(readString4);
+                    interfaceRemoved(string4);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     LinkAddress linkAddress = (LinkAddress) parcel.readTypedObject(LinkAddress.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addressUpdated(readString5, linkAddress);
+                    addressUpdated(string5, linkAddress);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     LinkAddress linkAddress2 = (LinkAddress) parcel.readTypedObject(LinkAddress.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addressRemoved(readString6, linkAddress2);
+                    addressRemoved(string6, linkAddress2);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    limitReached(readString7, readString8);
+                    limitReached(string7, string8);
                     return true;
                 case 8:
-                    int readInt = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    long readLong = parcel.readLong();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
+                    long j = parcel.readLong();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    interfaceClassDataActivityChanged(readInt, readBoolean3, readLong, readInt2);
+                    interfaceClassDataActivityChanged(i3, z3, j, i4);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    long readLong2 = parcel.readLong();
-                    String[] createStringArray = parcel.createStringArray();
+                    String string9 = parcel.readString();
+                    long j2 = parcel.readLong();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    interfaceDnsServerInfo(readString9, readLong2, createStringArray);
+                    interfaceDnsServerInfo(string9, j2, strArrCreateStringArray);
                     return true;
                 case 10:
                     RouteInfo routeInfo = (RouteInfo) parcel.readTypedObject(RouteInfo.CREATOR);
@@ -253,143 +253,143 @@ public interface INetworkManagementEventObserver extends IInterface {
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceStatusChanged(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceLinkStateChanged(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceAdded(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceRemoved(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void addressUpdated(String str, LinkAddress linkAddress) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(linkAddress, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(linkAddress, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void addressRemoved(String str, LinkAddress linkAddress) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(linkAddress, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(linkAddress, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void limitReached(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceClassDataActivityChanged(int i, boolean z, long j, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void interfaceDnsServerInfo(String str, long j, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void routeUpdated(RouteInfo routeInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(routeInfo, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routeInfo, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.INetworkManagementEventObserver
             public void routeRemoved(RouteInfo routeInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(routeInfo, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routeInfo, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

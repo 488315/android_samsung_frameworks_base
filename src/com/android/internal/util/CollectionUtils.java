@@ -1,6 +1,6 @@
 package com.android.internal.util;
 
-import android.Manifest;
+import android.R;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.ExceptionUtils;
@@ -26,38 +26,38 @@ public class CollectionUtils {
     }
 
     public static <T> List<T> filter(List<T> list, Predicate<? super T> predicate) {
-        ArrayList arrayList = null;
+        ArrayList arrayListAdd = null;
         for (int i = 0; i < size(list); i++) {
             T t = list.get(i);
             if (predicate.test(t)) {
-                arrayList = ArrayUtils.add(arrayList, t);
+                arrayListAdd = ArrayUtils.add(arrayListAdd, t);
             }
         }
-        return emptyIfNull(arrayList);
+        return emptyIfNull(arrayListAdd);
     }
 
     public static <T> Set<T> filter(Set<T> set, Predicate<? super T> predicate) {
         if (set == null || set.size() == 0) {
             return Collections.EMPTY_SET;
         }
-        ArraySet arraySet = null;
+        ArraySet arraySetAdd = null;
         if (set instanceof ArraySet) {
-            ArraySet arraySet2 = (ArraySet) set;
-            int size = arraySet2.size();
+            ArraySet arraySet = (ArraySet) set;
+            int size = arraySet.size();
             for (int i = 0; i < size; i++) {
-                Manifest manifest = (Object) arraySet2.valueAt(i);
-                if (predicate.test(manifest)) {
-                    arraySet = ArrayUtils.add((ArraySet<Manifest>) arraySet, manifest);
+                R.bool boolVar = (Object) arraySet.valueAt(i);
+                if (predicate.test(boolVar)) {
+                    arraySetAdd = ArrayUtils.add((ArraySet<R.bool>) arraySetAdd, boolVar);
                 }
             }
         } else {
             for (Object obj : set) {
                 if (predicate.test(obj)) {
-                    arraySet = ArrayUtils.add((ArraySet<Object>) arraySet, obj);
+                    arraySetAdd = ArrayUtils.add((ArraySet<Object>) arraySetAdd, obj);
                 }
             }
         }
-        return emptyIfNull(arraySet);
+        return emptyIfNull(arraySetAdd);
     }
 
     public static <T> void addIf(List<T> list, Collection<? super T> collection, Predicate<? super T> predicate) {
@@ -106,14 +106,14 @@ public class CollectionUtils {
             return Collections.EMPTY_LIST;
         }
         int size = list.size();
-        List list2 = null;
+        List listAdd = null;
         for (int i = 0; i < size; i++) {
-            O apply = function.apply(list.get(i));
-            if (apply != null) {
-                list2 = add((List<O>) list2, apply);
+            O oApply = function.apply(list.get(i));
+            if (oApply != null) {
+                listAdd = add((List<O>) listAdd, oApply);
             }
         }
-        return emptyIfNull(list2);
+        return emptyIfNull(listAdd);
     }
 
     public static <T> List<T> emptyIfNull(List<T> list) {
@@ -155,14 +155,14 @@ public class CollectionUtils {
             return Collections.EMPTY_LIST;
         }
         int size = list.size();
-        ArrayList arrayList = null;
+        ArrayList arrayListAdd = null;
         for (int i = 0; i < size; i++) {
             Object obj = list.get(i);
             if (cls.isInstance(obj)) {
-                arrayList = ArrayUtils.add((ArrayList<Object>) arrayList, obj);
+                arrayListAdd = ArrayUtils.add((ArrayList<Object>) arrayListAdd, obj);
             }
         }
-        return emptyIfNull(arrayList);
+        return emptyIfNull(arrayListAdd);
     }
 
     public static <T> boolean any(List<T> list, Predicate<T> predicate) {

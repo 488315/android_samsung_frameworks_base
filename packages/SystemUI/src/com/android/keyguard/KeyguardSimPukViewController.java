@@ -31,7 +31,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewController {
     public CheckSimPuk mCheckSimPukThread;
@@ -47,7 +46,6 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
     public int mSubId;
     public final TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSimPukViewController$3, reason: invalid class name */
     public class AnonymousClass3 extends CheckSimPuk {
         public AnonymousClass3(String str, String str2, int i) {
@@ -60,7 +58,6 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CheckSimPuk extends Thread {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String mPin;
@@ -77,13 +74,12 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
 
         @Override // java.lang.Thread, java.lang.Runnable
         public final void run() {
-            PinResult supplyIccLockPuk = KeyguardSimPukViewController.this.mTelephonyManager.createForSubscriptionId(this.mSubId).supplyIccLockPuk(this.mPuk, this.mPin);
-            supplyIccLockPuk.toString();
-            ((KeyguardSimPukView) ((ViewController) KeyguardSimPukViewController.this).mView).post(new KeyguardSimPukViewController$3$$ExternalSyntheticLambda0(this, supplyIccLockPuk, 1));
+            PinResult pinResultSupplyIccLockPuk = KeyguardSimPukViewController.this.mTelephonyManager.createForSubscriptionId(this.mSubId).supplyIccLockPuk(this.mPuk, this.mPin);
+            pinResultSupplyIccLockPuk.toString();
+            ((KeyguardSimPukView) ((ViewController) KeyguardSimPukViewController.this).mView).post(new KeyguardSimPukViewController$3$$ExternalSyntheticLambda0(this, pinResultSupplyIccLockPuk, 1));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StateMachine {
         public int mState = 0;
 
@@ -124,7 +120,7 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
             }
         }
 
-        public void reset() {
+        public void reset() throws Resources.NotFoundException {
             KeyguardSimPukViewController keyguardSimPukViewController = KeyguardSimPukViewController.this;
             keyguardSimPukViewController.mPinText = "";
             keyguardSimPukViewController.mPukText = "";
@@ -139,18 +135,18 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
                 keyguardSimPukViewController.showDefaultMessage();
             }
             KeyguardSimPukView keyguardSimPukView = (KeyguardSimPukView) ((ViewController) keyguardSimPukViewController).mView;
-            boolean isEsimLocked = KeyguardEsimArea.isEsimLocked(keyguardSimPukViewController.mSubId, ((KeyguardSimPukView) ((ViewController) keyguardSimPukViewController).mView).getContext());
+            boolean zIsEsimLocked = KeyguardEsimArea.isEsimLocked(keyguardSimPukViewController.mSubId, ((KeyguardSimPukView) ((ViewController) keyguardSimPukViewController).mView).getContext());
             int i = keyguardSimPukViewController.mSubId;
             KeyguardEsimArea keyguardEsimArea = keyguardSimPukView.disableESimButton;
             if (keyguardEsimArea != null) {
                 keyguardEsimArea.mSubscriptionId = i;
             }
             if (keyguardEsimArea != null) {
-                keyguardEsimArea.setVisibility(isEsimLocked ? 0 : 8);
+                keyguardEsimArea.setVisibility(zIsEsimLocked ? 0 : 8);
             }
             ImageView imageView = keyguardSimPukView.simImageView;
             if (imageView != null) {
-                imageView.setVisibility(isEsimLocked ? 8 : 0);
+                imageView.setVisibility(zIsEsimLocked ? 8 : 0);
             }
             keyguardSimPukViewController.mPasswordEntry.requestFocus();
         }
@@ -199,7 +195,7 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
         return this.mPinText.equals(this.mPasswordEntry.getText());
     }
 
-    public final Dialog getPukRemainingAttemptsDialog(int i) {
+    public final Dialog getPukRemainingAttemptsDialog(int i) throws Resources.NotFoundException {
         T t = this.mView;
         String pukPasswordErrorMessage = ((KeyguardSimPukView) t).getPukPasswordErrorMessage(i, false, KeyguardEsimArea.isEsimLocked(this.mSubId, ((KeyguardSimPukView) t).getContext()));
         AlertDialog alertDialog = this.mRemainingAttemptsDialog;
@@ -208,9 +204,9 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
             builder.setMessage(pukPasswordErrorMessage);
             builder.setCancelable(false);
             builder.setNeutralButton(R.string.ok, (DialogInterface.OnClickListener) null);
-            AlertDialog create = builder.create();
-            this.mRemainingAttemptsDialog = create;
-            create.getWindow().setType(2009);
+            AlertDialog alertDialogCreate = builder.create();
+            this.mRemainingAttemptsDialog = alertDialogCreate;
+            alertDialogCreate.getWindow().setType(2009);
         } else {
             alertDialog.setMessage(pukPasswordErrorMessage);
         }
@@ -227,7 +223,7 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
     }
 
     @Override // com.android.keyguard.KeyguardSecPinBasedInputViewController, com.android.keyguard.KeyguardPinBasedInputViewController, com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
-    public final void onResume(int i) {
+    public final void onResume(int i) throws Resources.NotFoundException {
         super.onResume(i);
         if (this.mShowDefaultMessage) {
             showDefaultMessage();
@@ -245,8 +241,8 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
         return false;
     }
 
-    public void showDefaultMessage() {
-        String str;
+    public void showDefaultMessage() throws Resources.NotFoundException {
+        String string;
         int i = this.mRemainingAttempts;
         KeyguardSecMessageAreaController keyguardSecMessageAreaController = this.mMessageAreaController;
         if (i >= 0) {
@@ -254,31 +250,31 @@ public class KeyguardSimPukViewController extends KeyguardSecPinBasedInputViewCo
             keyguardSecMessageAreaController.setMessage(((KeyguardSimPukView) t).getPukPasswordErrorMessage(i, true, KeyguardEsimArea.isEsimLocked(this.mSubId, ((KeyguardSimPukView) t).getContext())), false);
             return;
         }
-        boolean isEsimLocked = KeyguardEsimArea.isEsimLocked(this.mSubId, ((KeyguardSimPukView) this.mView).getContext());
+        boolean zIsEsimLocked = KeyguardEsimArea.isEsimLocked(this.mSubId, ((KeyguardSimPukView) this.mView).getContext());
         TelephonyManager telephonyManager = this.mTelephonyManager;
         int activeModemCount = telephonyManager != null ? telephonyManager.getActiveModemCount() : 1;
         Resources resources = ((KeyguardSimPukView) this.mView).getResources();
-        TypedArray obtainStyledAttributes = ((KeyguardSimPukView) this.mView).getContext().obtainStyledAttributes(new int[]{android.R.attr.textColor});
-        int color = obtainStyledAttributes.getColor(0, -1);
-        obtainStyledAttributes.recycle();
-        String str2 = "";
+        TypedArray typedArrayObtainStyledAttributes = ((KeyguardSimPukView) this.mView).getContext().obtainStyledAttributes(new int[]{android.R.attr.textColor});
+        int color = typedArrayObtainStyledAttributes.getColor(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
+        String str = "";
         if (activeModemCount < 2) {
-            str = resources.getString(R.string.kg_puk_enter_puk_hint);
+            string = resources.getString(R.string.kg_puk_enter_puk_hint);
         } else {
             SubscriptionInfo subscriptionInfoForSubId = this.mKeyguardUpdateMonitor.getSubscriptionInfoForSubId(this.mSubId);
             String displayName = subscriptionInfoForSubId != null ? subscriptionInfoForSubId.getDisplayName() : "";
-            String string = !TextUtils.isEmpty(displayName) ? resources.getString(R.string.kg_puk_enter_puk_hint_multi, displayName) : resources.getString(R.string.kg_puk_enter_puk_hint);
+            String string2 = !TextUtils.isEmpty(displayName) ? resources.getString(R.string.kg_puk_enter_puk_hint_multi, displayName) : resources.getString(R.string.kg_puk_enter_puk_hint);
             if (subscriptionInfoForSubId != null) {
                 color = subscriptionInfoForSubId.getIconTint();
             }
-            str = string;
+            string = string2;
         }
-        if (isEsimLocked) {
-            str = resources.getString(R.string.kg_sim_lock_esim_instructions, str);
+        if (zIsEsimLocked) {
+            string = resources.getString(R.string.kg_sim_lock_esim_instructions, string);
         }
-        keyguardSecMessageAreaController.setMessage(str, false);
+        keyguardSecMessageAreaController.setMessage(string, false);
         this.mSimImageView.setImageTintList(ColorStateList.valueOf(color));
-        new CheckSimPuk(str2, str2, this.mSubId) { // from class: com.android.keyguard.KeyguardSimPukViewController.2
+        new CheckSimPuk(str, str, this.mSubId) { // from class: com.android.keyguard.KeyguardSimPukViewController.2
             @Override // com.android.keyguard.KeyguardSimPukViewController.CheckSimPuk
             public final void onSimLockChangedResponse(PinResult pinResult) {
                 Log.d("KeyguardSimPukView", "onSimCheckResponse  empty One result " + pinResult.toString());

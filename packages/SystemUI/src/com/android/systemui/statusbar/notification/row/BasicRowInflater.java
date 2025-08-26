@@ -2,16 +2,15 @@ package com.android.systemui.statusbar.notification.row;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BasicRowInflater extends LayoutInflater {
     public static final String[] sClassPrefixList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,16 +35,16 @@ public final class BasicRowInflater extends LayoutInflater {
     }
 
     @Override // android.view.LayoutInflater
-    public final View onCreateView(String str, AttributeSet attributeSet) {
-        View createView;
+    public final View onCreateView(String str, AttributeSet attributeSet) throws InflateException, ClassNotFoundException {
+        View viewCreateView;
         for (String str2 : sClassPrefixList) {
             str2.getClass();
             try {
-                createView = createView(str, str2, attributeSet);
+                viewCreateView = createView(str, str2, attributeSet);
             } catch (ClassNotFoundException unused) {
             }
-            if (createView != null) {
-                return createView;
+            if (viewCreateView != null) {
+                return viewCreateView;
             }
         }
         return super.onCreateView(str, attributeSet);

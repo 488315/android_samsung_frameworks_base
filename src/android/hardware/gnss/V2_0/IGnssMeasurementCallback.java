@@ -62,9 +62,9 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssMeasurementCallback)) {
-            return (IGnssMeasurementCallback) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IGnssMeasurementCallback)) {
+            return (IGnssMeasurementCallback) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -293,13 +293,13 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
 
         public static final ArrayList<GnssMeasurement> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssMeasurement> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 176, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 176, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssMeasurement gnssMeasurement = new GnssMeasurement();
-                gnssMeasurement.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 176);
+                gnssMeasurement.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 176);
                 arrayList.add(gnssMeasurement);
             }
             return arrayList;
@@ -371,13 +371,13 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
 
         public static final ArrayList<GnssData> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssData> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssData gnssData = new GnssData();
-                gnssData.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 112);
+                gnssData.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 112);
                 arrayList.add(gnssData);
             }
             return arrayList;
@@ -385,11 +385,11 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
 
         public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
             int int32 = hwBlob.getInt32(8 + j);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 176, hwBlob.handle(), j, true);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 176, hwBlob.handle(), j, true);
             this.measurements.clear();
             for (int i = 0; i < int32; i++) {
                 GnssMeasurement gnssMeasurement = new GnssMeasurement();
-                gnssMeasurement.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 176);
+                gnssMeasurement.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 176);
                 this.measurements.add(gnssMeasurement);
             }
             this.clock.readEmbeddedFromParcel(hwParcel, hwBlob, 16 + j);
@@ -558,13 +558,13 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -746,9 +746,9 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
             switch (i) {
                 case 256067662:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    ArrayList<String> interfaceChain = interfaceChain();
+                    ArrayList<String> arrayListInterfaceChain = interfaceChain();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(interfaceChain);
+                    hwParcel2.writeStringVector(arrayListInterfaceChain);
                     hwParcel2.send();
                     return;
                 case 256131655:
@@ -759,9 +759,9 @@ public interface IGnssMeasurementCallback extends android.hardware.gnss.V1_1.IGn
                     return;
                 case 256136003:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    String interfaceDescriptor = interfaceDescriptor();
+                    String strInterfaceDescriptor = interfaceDescriptor();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeString(interfaceDescriptor);
+                    hwParcel2.writeString(strInterfaceDescriptor);
                     hwParcel2.send();
                     return;
                 case 256398152:

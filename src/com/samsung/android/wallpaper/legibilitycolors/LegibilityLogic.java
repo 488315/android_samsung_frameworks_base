@@ -43,24 +43,24 @@ public class LegibilityLogic extends ColorExtractor {
 
     public static AdaptiveShadowData calculateAdaptiveShadow(int[] iArr, int i, int i2, LegibilityDefinition.ColorType colorType, ColorExtractor.DominantColorResult[] dominantColorResultArr) {
         AdaptiveShadowData adaptiveShadowData = new AdaptiveShadowData();
-        float computeLuminosityComplexity = computeLuminosityComplexity(dominantColorResultArr);
-        float computeContentContrastDifferentiation = computeContentContrastDifferentiation(colorType == LegibilityDefinition.ColorType.DARK ? -16777216 : -1, dominantColorResultArr);
-        float computeShapeComplexity = computeShapeComplexity(iArr, i, i2);
-        adaptiveShadowData.luminanceComplexity = computeLuminosityComplexity;
-        adaptiveShadowData.contentContrastDiff = computeContentContrastDifferentiation;
-        adaptiveShadowData.shapeComplexity = computeShapeComplexity;
+        float fComputeLuminosityComplexity = computeLuminosityComplexity(dominantColorResultArr);
+        float fComputeContentContrastDifferentiation = computeContentContrastDifferentiation(colorType == LegibilityDefinition.ColorType.DARK ? -16777216 : -1, dominantColorResultArr);
+        float fComputeShapeComplexity = computeShapeComplexity(iArr, i, i2);
+        adaptiveShadowData.luminanceComplexity = fComputeLuminosityComplexity;
+        adaptiveShadowData.contentContrastDiff = fComputeContentContrastDifferentiation;
+        adaptiveShadowData.shapeComplexity = fComputeShapeComplexity;
         adaptiveShadowData.dominantColorResults = dominantColorResultArr;
         float f = mShapeAndColorComplexityRatio;
-        float min = Math.min(Math.max((computeShapeComplexity - 0.02f) / 0.099999994f, 0.0f), 1.0f);
-        float min2 = 1.0f - Math.min(Math.max((computeContentContrastDifferentiation - 0.1f) / 0.79999995f, 0.0f), 1.0f);
-        float easeIn = EasingQuintic.getInstance().easeIn(min, 0.0f, 1.0f, 1.0f);
-        float max = Math.max((easeIn * f) + ((1.0f - f) * min2), 0.0f);
-        adaptiveShadowData.shadowOpacityNormalized = Math.max(Math.min(max, 0.8f), 1.0E-4f) / 0.8f;
-        adaptiveShadowData.shadowSizeNormalized = Math.max(Math.min(max, 1.0f), 1.0E-4f);
+        float fMin = Math.min(Math.max((fComputeShapeComplexity - 0.02f) / 0.099999994f, 0.0f), 1.0f);
+        float fMin2 = 1.0f - Math.min(Math.max((fComputeContentContrastDifferentiation - 0.1f) / 0.79999995f, 0.0f), 1.0f);
+        float fEaseIn = EasingQuintic.getInstance().easeIn(fMin, 0.0f, 1.0f, 1.0f);
+        float fMax = Math.max((fEaseIn * f) + ((1.0f - f) * fMin2), 0.0f);
+        adaptiveShadowData.shadowOpacityNormalized = Math.max(Math.min(fMax, 0.8f), 1.0E-4f) / 0.8f;
+        adaptiveShadowData.shadowSizeNormalized = Math.max(Math.min(fMax, 1.0f), 1.0E-4f);
         adaptiveShadowData.contentOpacityNormalized = adaptiveShadowData.shadowOpacityNormalized;
-        adaptiveShadowData.contentContrastDiffNormalized = min2;
-        adaptiveShadowData.shapeComplexityNormalized = easeIn;
-        adaptiveShadowData.totalComplexity = max;
+        adaptiveShadowData.contentContrastDiffNormalized = fMin2;
+        adaptiveShadowData.shapeComplexityNormalized = fEaseIn;
+        adaptiveShadowData.totalComplexity = fMax;
         return adaptiveShadowData;
     }
 
@@ -93,9 +93,9 @@ public class LegibilityLogic extends ColorExtractor {
     }
 
     public static ColorExtractor.DominantColorResult[] calculateAdjustedDominantColors(int[] iArr) {
-        ColorExtractor.DominantColorResult[] calculateDominantColors = calculateDominantColors(iArr);
-        ColorExtractor.discardSameHSVfromDominantColors(calculateDominantColors, 0.0692f);
-        return calculateDominantColors;
+        ColorExtractor.DominantColorResult[] dominantColorResultArrCalculateDominantColors = calculateDominantColors(iArr);
+        ColorExtractor.discardSameHSVfromDominantColors(dominantColorResultArrCalculateDominantColors, 0.0692f);
+        return dominantColorResultArrCalculateDominantColors;
     }
 
     public static ColorExtractor.DominantColorResult[] calculateDominantColors(int[] iArr) {
@@ -106,61 +106,61 @@ public class LegibilityLogic extends ColorExtractor {
 
     public static float computeBrightnessComplexity(ColorExtractor.DominantColorResult[] dominantColorResultArr) {
         float[][] fArr = new float[dominantColorResultArr.length][];
+        float fAbs = 0.0f;
         float f = 0.0f;
-        float f2 = 0.0f;
         for (int i = 0; i < dominantColorResultArr.length; i++) {
             if (dominantColorResultArr[i].percentage == 0.0f) {
                 fArr[i] = null;
             } else {
                 fArr[i] = new float[3];
                 Color.colorToHSV(dominantColorResultArr[i].color, fArr[i]);
-                f2 += fArr[i][2] * dominantColorResultArr[i].percentage;
+                f += fArr[i][2] * dominantColorResultArr[i].percentage;
             }
         }
         for (int i2 = 0; i2 < dominantColorResultArr.length; i2++) {
             float[] fArr2 = fArr[i2];
             if (fArr2 != null) {
-                f += Math.abs(fArr2[2] - f2) * dominantColorResultArr[i2].percentage;
+                fAbs += Math.abs(fArr2[2] - f) * dominantColorResultArr[i2].percentage;
             }
         }
-        return f;
+        return fAbs;
     }
 
     public static float computeLuminosityComplexity(ColorExtractor.DominantColorResult[] dominantColorResultArr) {
         int length = dominantColorResultArr.length;
         float[] fArr = new float[length];
+        float fAbs = 0.0f;
         float f = 0.0f;
-        float f2 = 0.0f;
         for (int i = 0; i < length; i++) {
             ColorExtractor.DominantColorResult dominantColorResult = dominantColorResultArr[i];
             if (dominantColorResult.percentage == 0.0f) {
                 fArr[i] = Float.MAX_VALUE;
             } else {
-                float caculateLuminosity = IUXColorUtils.caculateLuminosity(dominantColorResult.color);
-                fArr[i] = caculateLuminosity;
-                f2 += caculateLuminosity * dominantColorResult.percentage;
+                float fCaculateLuminosity = IUXColorUtils.caculateLuminosity(dominantColorResult.color);
+                fArr[i] = fCaculateLuminosity;
+                f += fCaculateLuminosity * dominantColorResult.percentage;
             }
         }
         for (int i2 = 0; i2 < length; i2++) {
-            float f3 = fArr[i2];
-            if (f3 != Float.MAX_VALUE) {
-                f += Math.abs(f3 - f2) * dominantColorResultArr[i2].percentage;
+            float f2 = fArr[i2];
+            if (f2 != Float.MAX_VALUE) {
+                fAbs += Math.abs(f2 - f) * dominantColorResultArr[i2].percentage;
             }
         }
-        return f;
+        return fAbs;
     }
 
     public static float computeContentContrastDifferentiation(int i, ColorExtractor.DominantColorResult[] dominantColorResultArr) {
-        float caculateLuminosity = IUXColorUtils.caculateLuminosity(i);
-        Log.i(TAG, "Content Luminance = " + caculateLuminosity);
+        float fCaculateLuminosity = IUXColorUtils.caculateLuminosity(i);
+        Log.i(TAG, "Content Luminance = " + fCaculateLuminosity);
         float f = 1.0f;
         for (ColorExtractor.DominantColorResult dominantColorResult : dominantColorResultArr) {
             if (dominantColorResult.percentage > 0.03d) {
-                float caculateLuminosity2 = IUXColorUtils.caculateLuminosity(dominantColorResult.color);
-                if (caculateLuminosity2 != Float.MAX_VALUE) {
-                    float abs = Math.abs(caculateLuminosity2 - caculateLuminosity);
-                    if (abs < f) {
-                        f = abs;
+                float fCaculateLuminosity2 = IUXColorUtils.caculateLuminosity(dominantColorResult.color);
+                if (fCaculateLuminosity2 != Float.MAX_VALUE) {
+                    float fAbs = Math.abs(fCaculateLuminosity2 - fCaculateLuminosity);
+                    if (fAbs < f) {
+                        f = fAbs;
                     }
                 }
             }
@@ -188,38 +188,40 @@ public class LegibilityLogic extends ColorExtractor {
     }
 
     public static int calculatedAdaptiveContrastContentsColor(LegibilityDefinition.ColorType colorType, int i) {
-        float lerp;
-        float caculateLuminosity = IUXColorUtils.caculateLuminosity(i);
+        float fLerp;
+        float fCaculateLuminosity = IUXColorUtils.caculateLuminosity(i);
         if (LegibilityDefinition.ColorType.LIGHT == colorType) {
-            lerp = IUXMathUtils.lerp(IUXMathUtils.getRatioFromRange(caculateLuminosity, 0.0f, 0.7f), mTextBrightnessRangeWhiteMin, mTextBrightnessRangeWhiteMax);
+            fLerp = IUXMathUtils.lerp(IUXMathUtils.getRatioFromRange(fCaculateLuminosity, 0.0f, 0.7f), mTextBrightnessRangeWhiteMin, mTextBrightnessRangeWhiteMax);
         } else {
-            lerp = IUXMathUtils.lerp(IUXMathUtils.getRatioFromRange(1.0f - caculateLuminosity, 0.0f, 0.7f), mTextBrightnessRangeBlackMax, mTextBrightnessRangeBlackMin);
+            fLerp = IUXMathUtils.lerp(IUXMathUtils.getRatioFromRange(1.0f - fCaculateLuminosity, 0.0f, 0.7f), mTextBrightnessRangeBlackMax, mTextBrightnessRangeBlackMin);
         }
-        int i2 = (int) (lerp * 255.0f);
+        int i2 = (int) (fLerp * 255.0f);
         return Color.rgb(i2, i2, i2);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x002b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static int getUnequivalanttColor(int i, int i2) {
-        int red = Color.red(i);
-        int red2 = Color.red(i2);
-        int abs = Math.abs(red - red2);
-        if (abs < 4) {
-            if (red >= 127) {
-                if (red >= red2) {
-                    red += 4 - abs;
-                    if (red > Color.red(LegibilityDefinition.CONTENT_COLOR_LIGHT)) {
-                        red = red2 - 4;
+        int iRed = Color.red(i);
+        int iRed2 = Color.red(i2);
+        int iAbs = Math.abs(iRed - iRed2);
+        if (iAbs < 4) {
+            if (iRed >= 127) {
+                if (iRed >= iRed2) {
+                    iRed += 4 - iAbs;
+                    if (iRed > Color.red(LegibilityDefinition.CONTENT_COLOR_LIGHT)) {
+                        iRed = iRed2 - 4;
                     }
+                } else {
+                    iRed -= 4 - iAbs;
                 }
-                red -= 4 - abs;
-            } else {
-                if (red >= red2) {
-                    red += 4 - abs;
-                }
-                red -= 4 - abs;
+            } else if (iRed >= iRed2) {
+                iRed += 4 - iAbs;
             }
         }
-        return Color.rgb(red, red, red);
+        return Color.rgb(iRed, iRed, iRed);
     }
 
     public static LegibilityResult calculateTotalLegibilityResult(Bitmap bitmap, LegibilityResult legibilityResult, int i) {
@@ -239,14 +241,14 @@ public class LegibilityLogic extends ColorExtractor {
     }
 
     public static LegibilityResult calculateTotalLegibilityResult(int[] iArr, float[] fArr, int i, int i2, LegibilityResult legibilityResult, LegibilityDefinition.ColorType colorType, int i3) {
-        ColorExtractor.DominantColorResult[] calculateAdjustedDominantColors = calculateAdjustedDominantColors(iArr);
+        ColorExtractor.DominantColorResult[] dominantColorResultArrCalculateAdjustedDominantColors = calculateAdjustedDominantColors(iArr);
         LegibilityResult legibilityResult2 = new LegibilityResult();
         legibilityResult2.avgHSV = fArr;
-        legibilityResult2.adaptiveShadowData = calculateAdaptiveShadow(iArr, i, i2, colorType, calculateAdjustedDominantColors);
+        legibilityResult2.adaptiveShadowData = calculateAdaptiveShadow(iArr, i, i2, colorType, dominantColorResultArrCalculateAdjustedDominantColors);
         legibilityResult2.contentsColorType = colorType;
         legibilityResult2.contentsColor = colorType == LegibilityDefinition.ColorType.LIGHT ? LegibilityDefinition.CONTENT_COLOR_LIGHT : -12303292;
         legibilityResult2.adjustedContentsColor = calculatedAdaptiveContrastContentsColor(colorType, IUXColorUtils.HSVToColor(legibilityResult2.avgHSV));
-        legibilityResult2.dominantColorResult = calculateAdjustedDominantColors;
+        legibilityResult2.dominantColorResult = dominantColorResultArrCalculateAdjustedDominantColors;
         return legibilityResult2;
     }
 
@@ -293,7 +295,7 @@ public class LegibilityLogic extends ColorExtractor {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public AdaptiveShadowData m9626clone() {
+        public AdaptiveShadowData m9639clone() {
             try {
                 AdaptiveShadowData adaptiveShadowData = (AdaptiveShadowData) super.clone();
                 ColorExtractor.DominantColorResult[] dominantColorResultArr = this.dominantColorResults;
@@ -305,7 +307,7 @@ public class LegibilityLogic extends ColorExtractor {
                         if (i >= dominantColorResultArr2.length) {
                             break;
                         }
-                        adaptiveShadowData.dominantColorResults[i] = dominantColorResultArr2[i].m9628clone();
+                        adaptiveShadowData.dominantColorResults[i] = dominantColorResultArr2[i].m9641clone();
                         i++;
                     }
                 }
@@ -379,13 +381,13 @@ public class LegibilityLogic extends ColorExtractor {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public LegibilityResult m9627clone() {
+        public LegibilityResult m9640clone() {
             try {
                 LegibilityResult legibilityResult = (LegibilityResult) super.clone();
                 legibilityResult.contentsColorType = this.contentsColorType;
                 AdaptiveShadowData adaptiveShadowData = this.adaptiveShadowData;
                 if (adaptiveShadowData != null) {
-                    legibilityResult.adaptiveShadowData = adaptiveShadowData.m9626clone();
+                    legibilityResult.adaptiveShadowData = adaptiveShadowData.m9639clone();
                 }
                 ColorExtractor.DominantColorResult[] dominantColorResultArr = this.dominantColorResult;
                 int i = 0;
@@ -397,7 +399,7 @@ public class LegibilityLogic extends ColorExtractor {
                         if (i2 >= dominantColorResultArr2.length) {
                             break;
                         }
-                        legibilityResult.dominantColorResult[i2] = dominantColorResultArr2[i2].m9628clone();
+                        legibilityResult.dominantColorResult[i2] = dominantColorResultArr2[i2].m9641clone();
                         i2++;
                     }
                 }

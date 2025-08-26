@@ -101,9 +101,9 @@ public interface IProcessStats extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProcessStats.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProcessStats)) {
-                return (IProcessStats) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProcessStats.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProcessStats)) {
+                return (IProcessStats) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -151,9 +151,9 @@ public interface IProcessStats extends IInterface {
                     parcel2.writeTypedList(arrayList, 1);
                     return true;
                 case 2:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor statsOverTime = getStatsOverTime(readLong);
+                    ParcelFileDescriptor statsOverTime = getStatsOverTime(j);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(statsOverTime, 1);
                     return true;
@@ -163,24 +163,24 @@ public interface IProcessStats extends IInterface {
                     parcel2.writeInt(currentMemoryState);
                     return true;
                 case 4:
-                    long readLong2 = parcel.readLong();
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    long j2 = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     ArrayList arrayList2 = new ArrayList();
                     parcel.enforceNoDataAvail();
-                    long committedStats = getCommittedStats(readLong2, readInt, readBoolean, arrayList2);
+                    long committedStats = getCommittedStats(j2, i3, z, arrayList2);
                     parcel2.writeNoException();
                     parcel2.writeLong(committedStats);
                     parcel2.writeTypedList(arrayList2, 1);
                     return true;
                 case 5:
-                    long readLong3 = parcel.readLong();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    long j3 = parcel.readLong();
+                    int i4 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     ArrayList arrayList3 = new ArrayList();
                     ProcessStats processStats = new ProcessStats();
                     parcel.enforceNoDataAvail();
-                    long committedStatsMerged = getCommittedStatsMerged(readLong3, readInt2, readBoolean2, arrayList3, processStats);
+                    long committedStatsMerged = getCommittedStatsMerged(j3, i4, z2, arrayList3, processStats);
                     parcel2.writeNoException();
                     parcel2.writeLong(committedStatsMerged);
                     parcel2.writeTypedList(arrayList3, 1);
@@ -214,107 +214,107 @@ public interface IProcessStats extends IInterface {
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public byte[] getCurrentStats(List<ParcelFileDescriptor> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    byte[] createByteArray = obtain2.createByteArray();
-                    obtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
-                    return createByteArray;
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    byte[] bArrCreateByteArray = parcelObtain2.createByteArray();
+                    parcelObtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
+                    return bArrCreateByteArray;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public ParcelFileDescriptor getStatsOverTime(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public int getCurrentMemoryState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public long getCommittedStats(long j, int i, boolean z, List<ParcelFileDescriptor> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    long readLong = obtain2.readLong();
-                    obtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
-                    return readLong;
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    long j2 = parcelObtain2.readLong();
+                    parcelObtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
+                    return j2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public long getCommittedStatsMerged(long j, int i, boolean z, List<ParcelFileDescriptor> list, ProcessStats processStats) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    long readLong = obtain2.readLong();
-                    obtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
-                    if (obtain2.readInt() != 0) {
-                        processStats.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    long j2 = parcelObtain2.readLong();
+                    parcelObtain2.readTypedList(list, ParcelFileDescriptor.CREATOR);
+                    if (parcelObtain2.readInt() != 0) {
+                        processStats.readFromParcel(parcelObtain2);
                     }
-                    return readLong;
+                    return j2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
             public long getMinAssociationDumpDuration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IProcessStats.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

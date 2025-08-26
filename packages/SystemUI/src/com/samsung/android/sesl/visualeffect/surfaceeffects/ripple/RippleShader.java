@@ -10,7 +10,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RippleShader extends RuntimeShader {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +18,6 @@ public final class RippleShader extends RuntimeShader {
     public final RippleSize rippleSize;
     public final FadeParams sparkleRingFadeParams;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,7 +27,6 @@ public final class RippleShader extends RuntimeShader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RippleSize {
         public final List sizes = new ArrayList();
         public final SizeAtProgress initialSize = new SizeAtProgress(0.0f, 0.0f, 0.0f);
@@ -38,7 +35,6 @@ public final class RippleShader extends RuntimeShader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SizeAtProgress {
         public final float height;
         public final float t;
@@ -90,7 +86,6 @@ public final class RippleShader extends RuntimeShader {
         this.centerFillFadeParams = new FadeParams(0.0f, 0.0f, 0.0f, 0.6f);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FadeParams {
         public float fadeInEnd;
         public float fadeInStart;
@@ -124,12 +119,12 @@ public final class RippleShader extends RuntimeShader {
             float f2 = this.fadeInEnd;
             float f3 = this.fadeOutStart;
             float f4 = this.fadeOutEnd;
-            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("FadeParams(fadeInStart=", f, ", fadeInEnd=", f2, ", fadeOutStart=");
-            m.append(f3);
-            m.append(", fadeOutEnd=");
-            m.append(f4);
-            m.append(")");
-            return m.toString();
+            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("FadeParams(fadeInStart=", f, ", fadeInEnd=", f2, ", fadeOutStart=");
+            sbM.append(f3);
+            sbM.append(", fadeOutEnd=");
+            sbM.append(f4);
+            sbM.append(")");
+            return sbM.toString();
         }
 
         public /* synthetic */ FadeParams(float f, float f2, float f3, float f4, int i, DefaultConstructorMarker defaultConstructorMarker) {

@@ -1,8 +1,11 @@
 package com.android.framework.protobuf;
 
+import com.android.framework.protobuf.InvalidProtocolBufferException;
+import com.android.framework.protobuf.MapEntryLite;
 import com.android.framework.protobuf.WireFormat;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @CheckReturnValue
 /* loaded from: classes5.dex */
@@ -162,24 +165,24 @@ final class CodedInputStreamReader implements Reader {
     }
 
     private <T> void mergeMessageFieldInternal(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        int readUInt32 = this.input.readUInt32();
+        int uInt32 = this.input.readUInt32();
         if (this.input.recursionDepth >= this.input.recursionLimit) {
             throw InvalidProtocolBufferException.recursionLimitExceeded();
         }
-        int pushLimit = this.input.pushLimit(readUInt32);
+        int iPushLimit = this.input.pushLimit(uInt32);
         this.input.recursionDepth++;
         schema.mergeFrom(t, this, extensionRegistryLite);
         this.input.checkLastTagWas(0);
         CodedInputStream codedInputStream = this.input;
         codedInputStream.recursionDepth--;
-        this.input.popLimit(pushLimit);
+        this.input.popLimit(iPushLimit);
     }
 
     private <T> T readMessage(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        T newInstance = schema.newInstance();
-        mergeMessageFieldInternal(newInstance, schema, extensionRegistryLite);
-        schema.makeImmutable(newInstance);
-        return newInstance;
+        T tNewInstance = schema.newInstance();
+        mergeMessageFieldInternal(tNewInstance, schema, extensionRegistryLite);
+        schema.makeImmutable(tNewInstance);
+        return tNewInstance;
     }
 
     @Override // com.android.framework.protobuf.Reader
@@ -203,10 +206,10 @@ final class CodedInputStreamReader implements Reader {
     }
 
     private <T> T readGroup(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        T newInstance = schema.newInstance();
-        mergeGroupFieldInternal(newInstance, schema, extensionRegistryLite);
-        schema.makeImmutable(newInstance);
-        return newInstance;
+        T tNewInstance = schema.newInstance();
+        mergeGroupFieldInternal(tNewInstance, schema, extensionRegistryLite);
+        schema.makeImmutable(tNewInstance);
+        return tNewInstance;
     }
 
     @Override // com.android.framework.protobuf.Reader
@@ -253,8 +256,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readDoubleList(List<Double> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof DoubleArrayList) {
             DoubleArrayList doubleArrayList = (DoubleArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -264,16 +267,16 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed64Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed64Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     doubleArrayList.addDouble(this.input.readDouble());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -288,16 +291,16 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed64Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed64Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Double.valueOf(this.input.readDouble()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -308,15 +311,15 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readFloatList(List<Float> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof FloatArrayList) {
             FloatArrayList floatArrayList = (FloatArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     floatArrayList.addFloat(this.input.readFloat());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -328,19 +331,19 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
         }
         int tagWireType2 = WireFormat.getTagWireType(this.tag);
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Float.valueOf(this.input.readFloat()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -352,10 +355,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         throw InvalidProtocolBufferException.invalidWireType();
@@ -363,8 +366,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readUInt64List(List<Long> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof LongArrayList) {
             LongArrayList longArrayList = (LongArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -374,10 +377,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -397,10 +400,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -416,8 +419,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readInt64List(List<Long> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof LongArrayList) {
             LongArrayList longArrayList = (LongArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -427,10 +430,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -450,10 +453,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -469,8 +472,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readInt32List(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -480,10 +483,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -503,10 +506,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -522,8 +525,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readFixed64List(List<Long> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof LongArrayList) {
             LongArrayList longArrayList = (LongArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -533,16 +536,16 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed64Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed64Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     longArrayList.addLong(this.input.readFixed64());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -557,16 +560,16 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed64Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed64Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Long.valueOf(this.input.readFixed64()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -577,15 +580,15 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readFixed32List(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     intArrayList.addInt(this.input.readFixed32());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -597,19 +600,19 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
         }
         int tagWireType2 = WireFormat.getTagWireType(this.tag);
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Integer.valueOf(this.input.readFixed32()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -621,10 +624,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         throw InvalidProtocolBufferException.invalidWireType();
@@ -632,8 +635,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readBoolList(List<Boolean> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof BooleanArrayList) {
             BooleanArrayList booleanArrayList = (BooleanArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -643,10 +646,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -666,10 +669,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -694,8 +697,8 @@ final class CodedInputStreamReader implements Reader {
     }
 
     public void readStringListInternal(List<String> list, boolean z) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (WireFormat.getTagWireType(this.tag) != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -706,10 +709,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag2 = this.input.readTag();
+                    tag2 = this.input.readTag();
                 }
-            } while (readTag2 == this.tag);
-            this.nextTag = readTag2;
+            } while (tag2 == this.tag);
+            this.nextTag = tag2;
             return;
         }
         do {
@@ -717,10 +720,10 @@ final class CodedInputStreamReader implements Reader {
             if (this.input.isAtEnd()) {
                 return;
             } else {
-                readTag = this.input.readTag();
+                tag = this.input.readTag();
             }
-        } while (readTag == this.tag);
-        this.nextTag = readTag;
+        } while (tag == this.tag);
+        this.nextTag = tag;
     }
 
     @Override // com.android.framework.protobuf.Reader
@@ -731,7 +734,7 @@ final class CodedInputStreamReader implements Reader {
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Reader
     public <T> void readMessageList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        int readTag;
+        int tag;
         if (WireFormat.getTagWireType(this.tag) != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -741,10 +744,10 @@ final class CodedInputStreamReader implements Reader {
             if (this.input.isAtEnd() || this.nextTag != 0) {
                 return;
             } else {
-                readTag = this.input.readTag();
+                tag = this.input.readTag();
             }
-        } while (readTag == i);
-        this.nextTag = readTag;
+        } while (tag == i);
+        this.nextTag = tag;
     }
 
     @Override // com.android.framework.protobuf.Reader
@@ -757,7 +760,7 @@ final class CodedInputStreamReader implements Reader {
     @Override // com.android.framework.protobuf.Reader
     @Deprecated
     public <T> void readGroupList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        int readTag;
+        int tag;
         if (WireFormat.getTagWireType(this.tag) != 3) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -767,15 +770,15 @@ final class CodedInputStreamReader implements Reader {
             if (this.input.isAtEnd() || this.nextTag != 0) {
                 return;
             } else {
-                readTag = this.input.readTag();
+                tag = this.input.readTag();
             }
-        } while (readTag == i);
-        this.nextTag = readTag;
+        } while (tag == i);
+        this.nextTag = tag;
     }
 
     @Override // com.android.framework.protobuf.Reader
     public void readBytesList(List<ByteString> list) throws IOException {
-        int readTag;
+        int tag;
         if (WireFormat.getTagWireType(this.tag) != 2) {
             throw InvalidProtocolBufferException.invalidWireType();
         }
@@ -784,16 +787,16 @@ final class CodedInputStreamReader implements Reader {
             if (this.input.isAtEnd()) {
                 return;
             } else {
-                readTag = this.input.readTag();
+                tag = this.input.readTag();
             }
-        } while (readTag == this.tag);
-        this.nextTag = readTag;
+        } while (tag == this.tag);
+        this.nextTag = tag;
     }
 
     @Override // com.android.framework.protobuf.Reader
     public void readUInt32List(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -803,10 +806,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -826,10 +829,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -845,8 +848,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readEnumList(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -856,10 +859,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -879,10 +882,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -898,15 +901,15 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readSFixed32List(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed32Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed32Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     intArrayList.addInt(this.input.readSFixed32());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -918,19 +921,19 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             throw InvalidProtocolBufferException.invalidWireType();
         }
         int tagWireType2 = WireFormat.getTagWireType(this.tag);
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed32Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed32Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Integer.valueOf(this.input.readSFixed32()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -942,10 +945,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         throw InvalidProtocolBufferException.invalidWireType();
@@ -953,8 +956,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readSFixed64List(List<Long> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof LongArrayList) {
             LongArrayList longArrayList = (LongArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -964,16 +967,16 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
-                int readUInt32 = this.input.readUInt32();
-                verifyPackedFixed64Length(readUInt32);
-                int totalBytesRead = this.input.getTotalBytesRead() + readUInt32;
+                int uInt32 = this.input.readUInt32();
+                verifyPackedFixed64Length(uInt32);
+                int totalBytesRead = this.input.getTotalBytesRead() + uInt32;
                 do {
                     longArrayList.addLong(this.input.readSFixed64());
                 } while (this.input.getTotalBytesRead() < totalBytesRead);
@@ -988,16 +991,16 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
-            int readUInt322 = this.input.readUInt32();
-            verifyPackedFixed64Length(readUInt322);
-            int totalBytesRead2 = this.input.getTotalBytesRead() + readUInt322;
+            int uInt322 = this.input.readUInt32();
+            verifyPackedFixed64Length(uInt322);
+            int totalBytesRead2 = this.input.getTotalBytesRead() + uInt322;
             do {
                 list.add(Long.valueOf(this.input.readSFixed64()));
             } while (this.input.getTotalBytesRead() < totalBytesRead2);
@@ -1008,8 +1011,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readSInt32List(List<Integer> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof IntArrayList) {
             IntArrayList intArrayList = (IntArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -1019,10 +1022,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -1042,10 +1045,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -1061,8 +1064,8 @@ final class CodedInputStreamReader implements Reader {
 
     @Override // com.android.framework.protobuf.Reader
     public void readSInt64List(List<Long> list) throws IOException {
-        int readTag;
-        int readTag2;
+        int tag;
+        int tag2;
         if (list instanceof LongArrayList) {
             LongArrayList longArrayList = (LongArrayList) list;
             int tagWireType = WireFormat.getTagWireType(this.tag);
@@ -1072,10 +1075,10 @@ final class CodedInputStreamReader implements Reader {
                     if (this.input.isAtEnd()) {
                         return;
                     } else {
-                        readTag2 = this.input.readTag();
+                        tag2 = this.input.readTag();
                     }
-                } while (readTag2 == this.tag);
-                this.nextTag = readTag2;
+                } while (tag2 == this.tag);
+                this.nextTag = tag2;
                 return;
             }
             if (tagWireType == 2) {
@@ -1095,10 +1098,10 @@ final class CodedInputStreamReader implements Reader {
                 if (this.input.isAtEnd()) {
                     return;
                 } else {
-                    readTag = this.input.readTag();
+                    tag = this.input.readTag();
                 }
-            } while (readTag == this.tag);
-            this.nextTag = readTag;
+            } while (tag == this.tag);
+            this.nextTag = tag;
             return;
         }
         if (tagWireType2 == 2) {
@@ -1118,11 +1121,11 @@ final class CodedInputStreamReader implements Reader {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x005c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x005c, code lost:
     
         r8.put(r2, r3);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x0064, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x0064, code lost:
     
         return;
      */
@@ -1130,70 +1133,37 @@ final class CodedInputStreamReader implements Reader {
     @Override // com.android.framework.protobuf.Reader
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public <K, V> void readMap(java.util.Map<K, V> r8, com.android.framework.protobuf.MapEntryLite.Metadata<K, V> r9, com.android.framework.protobuf.ExtensionRegistryLite r10) throws java.io.IOException {
-        /*
-            r7 = this;
-            r0 = 2
-            r7.requireWireType(r0)
-            com.android.framework.protobuf.CodedInputStream r1 = r7.input
-            int r1 = r1.readUInt32()
-            com.android.framework.protobuf.CodedInputStream r2 = r7.input
-            int r1 = r2.pushLimit(r1)
-            K r2 = r9.defaultKey
-            V r3 = r9.defaultValue
-        L14:
-            int r4 = r7.getFieldNumber()     // Catch: java.lang.Throwable -> L65
-            r5 = 2147483647(0x7fffffff, float:NaN)
-            if (r4 == r5) goto L5c
-            com.android.framework.protobuf.CodedInputStream r5 = r7.input     // Catch: java.lang.Throwable -> L65
-            boolean r5 = r5.isAtEnd()     // Catch: java.lang.Throwable -> L65
-            if (r5 == 0) goto L26
-            goto L5c
-        L26:
-            r5 = 1
-            java.lang.String r6 = "Unable to parse map entry."
-            if (r4 == r5) goto L47
-            if (r4 == r0) goto L3a
-            boolean r4 = r7.skipField()     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            if (r4 == 0) goto L34
-            goto L14
-        L34:
-            com.android.framework.protobuf.InvalidProtocolBufferException r4 = new com.android.framework.protobuf.InvalidProtocolBufferException     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            r4.<init>(r6)     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            throw r4     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-        L3a:
-            com.android.framework.protobuf.WireFormat$FieldType r4 = r9.valueType     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            V r5 = r9.defaultValue     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            java.lang.Class r5 = r5.getClass()     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            java.lang.Object r3 = r7.readField(r4, r5, r10)     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            goto L14
-        L47:
-            com.android.framework.protobuf.WireFormat$FieldType r4 = r9.keyType     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            r5 = 0
-            java.lang.Object r2 = r7.readField(r4, r5, r5)     // Catch: com.android.framework.protobuf.InvalidProtocolBufferException.InvalidWireTypeException -> L4f java.lang.Throwable -> L65
-            goto L14
-        L4f:
-            boolean r4 = r7.skipField()     // Catch: java.lang.Throwable -> L65
-            if (r4 == 0) goto L56
-            goto L14
-        L56:
-            com.android.framework.protobuf.InvalidProtocolBufferException r8 = new com.android.framework.protobuf.InvalidProtocolBufferException     // Catch: java.lang.Throwable -> L65
-            r8.<init>(r6)     // Catch: java.lang.Throwable -> L65
-            throw r8     // Catch: java.lang.Throwable -> L65
-        L5c:
-            r8.put(r2, r3)     // Catch: java.lang.Throwable -> L65
-            com.android.framework.protobuf.CodedInputStream r7 = r7.input
-            r7.popLimit(r1)
-            return
-        L65:
-            r8 = move-exception
-            com.android.framework.protobuf.CodedInputStream r7 = r7.input
-            r7.popLimit(r1)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.CodedInputStreamReader.readMap(java.util.Map, com.android.framework.protobuf.MapEntryLite$Metadata, com.android.framework.protobuf.ExtensionRegistryLite):void");
+    public <K, V> void readMap(Map<K, V> map, MapEntryLite.Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+        requireWireType(2);
+        int iPushLimit = this.input.pushLimit(this.input.readUInt32());
+        Object field = metadata.defaultKey;
+        Object field2 = metadata.defaultValue;
+        while (true) {
+            try {
+                int fieldNumber = getFieldNumber();
+                if (fieldNumber == Integer.MAX_VALUE || this.input.isAtEnd()) {
+                    break;
+                }
+                if (fieldNumber == 1) {
+                    field = readField(metadata.keyType, null, null);
+                } else if (fieldNumber == 2) {
+                    field2 = readField(metadata.valueType, metadata.defaultValue.getClass(), extensionRegistryLite);
+                } else {
+                    try {
+                        if (!skipField()) {
+                            throw new InvalidProtocolBufferException("Unable to parse map entry.");
+                        }
+                    } catch (InvalidProtocolBufferException.InvalidWireTypeException unused) {
+                        if (!skipField()) {
+                            throw new InvalidProtocolBufferException("Unable to parse map entry.");
+                        }
+                    }
+                }
+            } finally {
+                this.input.popLimit(iPushLimit);
+            }
+        }
     }
 
     /* renamed from: com.android.framework.protobuf.CodedInputStreamReader$1, reason: invalid class name */

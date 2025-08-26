@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StatusbarIconItem implements Parcelable {
     public static final Parcelable.Creator<StatusbarIconItem> CREATOR = new Parcelable.Creator<StatusbarIconItem>() { // from class: com.samsung.android.knox.custom.StatusbarIconItem.1
@@ -91,7 +90,6 @@ public class StatusbarIconItem implements Parcelable {
         this.mAttributeColour = attributeColourArr;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AttributeColour {
         public int mAttribute;
         public int mColour;
@@ -125,12 +123,12 @@ public class StatusbarIconItem implements Parcelable {
         this.mIcon_KEY = "ICON";
         this.mAttributeColour_KEY = "ATTRIBUTE_COLOUR";
         this.mIcon = parcel.readInt();
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mAttributeColour = null;
-        if (readInt > 0) {
-            this.mAttributeColour = new AttributeColour[readInt];
-            for (int i = 0; i < readInt; i++) {
-                this.mAttributeColour[i] = new AttributeColour(this, parcel.readInt(), parcel.readInt());
+        if (i > 0) {
+            this.mAttributeColour = new AttributeColour[i];
+            for (int i2 = 0; i2 < i; i2++) {
+                this.mAttributeColour[i2] = new AttributeColour(this, parcel.readInt(), parcel.readInt());
             }
         }
     }

@@ -12,7 +12,6 @@ import dagger.Lazy;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SensorModule {
     private static ThresholdSensor[] createPostureToSensorMapping(ThresholdSensorImpl.BuilderFactory builderFactory, String[] strArr, int i, int i2) {
@@ -22,16 +21,16 @@ public class SensorModule {
             Log.e("SensorModule", "config doesn't support postures, but attempting to retrieve proxSensorMapping");
             return thresholdSensorArr;
         }
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (int i3 = 0; i3 < strArr.length; i3++) {
             try {
                 String str = strArr[i3];
-                if (hashMap.containsKey(str)) {
-                    thresholdSensorArr[i3] = (ThresholdSensor) hashMap.get(str);
+                if (map.containsKey(str)) {
+                    thresholdSensorArr[i3] = (ThresholdSensor) map.get(str);
                 } else {
-                    ThresholdSensor build = builderFactory.createBuilder().setSensorType(strArr[i3], true).setThresholdResourceId(i).setThresholdLatchResourceId(i2).build();
-                    thresholdSensorArr[i3] = build;
-                    hashMap.put(str, build);
+                    ThresholdSensor thresholdSensorBuild = builderFactory.createBuilder().setSensorType(strArr[i3], true).setThresholdResourceId(i).setThresholdLatchResourceId(i2).build();
+                    thresholdSensorArr[i3] = thresholdSensorBuild;
+                    map.put(str, thresholdSensorBuild);
                 }
             } catch (IllegalStateException unused) {
             }

@@ -50,7 +50,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.MutableStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Flow $alpha;
@@ -63,7 +62,6 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
     int label;
     final /* synthetic */ KeyguardQuickAffordanceViewBinder this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Flow $alpha;
@@ -76,9 +74,8 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
         int label;
         final /* synthetic */ KeyguardQuickAffordanceViewBinder this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01821 extends SuspendLambda implements Function2 {
+        final class C02981 extends SuspendLambda implements Function2 {
             final /* synthetic */ ImageView $button;
             final /* synthetic */ KeyguardQuickAffordanceHapticViewModel $hapticsViewModel;
             final /* synthetic */ Function1 $messageDisplayer;
@@ -87,7 +84,7 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
             final /* synthetic */ KeyguardQuickAffordanceViewBinder this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01821(Flow flow, KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder, ImageView imageView, Function1 function1, KeyguardQuickAffordanceHapticViewModel keyguardQuickAffordanceHapticViewModel, Continuation continuation) {
+            public C02981(Flow flow, KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder, ImageView imageView, Function1 function1, KeyguardQuickAffordanceHapticViewModel keyguardQuickAffordanceHapticViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = flow;
                 this.this$0 = keyguardQuickAffordanceViewBinder;
@@ -98,12 +95,12 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01821(this.$viewModel, this.this$0, this.$button, this.$messageDisplayer, this.$hapticsViewModel, continuation);
+                return new C02981(this.$viewModel, this.this$0, this.$button, this.$messageDisplayer, this.$hapticsViewModel, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01821) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02981) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -120,19 +117,19 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder.bind.disposableHandle.1.1.1.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            ColorStateList colorStateList;
+                            ColorStateList colorStateListValueOf;
                             final ImageView imageView2;
                             final KeyguardQuickAffordanceViewModel keyguardQuickAffordanceViewModel = (KeyguardQuickAffordanceViewModel) obj2;
                             ImageView imageView3 = imageView;
-                            final KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder2 = KeyguardQuickAffordanceViewBinder.this;
+                            final KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder2 = keyguardQuickAffordanceViewBinder;
                             KeyguardQuickAffordancesLogger keyguardQuickAffordancesLogger = keyguardQuickAffordanceViewBinder2.logger;
                             keyguardQuickAffordancesLogger.getClass();
                             LogLevel logLevel = LogLevel.DEBUG;
                             KeyguardQuickAffordancesLogger$$ExternalSyntheticLambda0 keyguardQuickAffordancesLogger$$ExternalSyntheticLambda0 = new KeyguardQuickAffordancesLogger$$ExternalSyntheticLambda0(1);
                             LogBuffer logBuffer = keyguardQuickAffordancesLogger.buffer;
-                            LogMessage obtain = logBuffer.obtain("KeyguardQuickAffordancesLogger", logLevel, keyguardQuickAffordancesLogger$$ExternalSyntheticLambda0, null);
-                            ((LogMessageImpl) obtain).str1 = keyguardQuickAffordanceViewModel.toString();
-                            logBuffer.commit(obtain);
+                            LogMessage logMessageObtain = logBuffer.obtain("KeyguardQuickAffordancesLogger", logLevel, keyguardQuickAffordancesLogger$$ExternalSyntheticLambda0, null);
+                            ((LogMessageImpl) logMessageObtain).str1 = keyguardQuickAffordanceViewModel.toString();
+                            logBuffer.commit(logMessageObtain);
                             boolean z = keyguardQuickAffordanceViewModel.isVisible;
                             boolean z2 = keyguardQuickAffordanceViewModel.isActivated;
                             if (z) {
@@ -161,11 +158,11 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                 imageView3.getDrawable().setTint(imageView3.getContext().getColor(z2 ? R.color.ripple_material_dark : R.color.search_url_text_material_light));
                                 boolean z3 = keyguardQuickAffordanceViewModel.isSelected;
                                 if (z3) {
-                                    colorStateList = null;
+                                    colorStateListValueOf = null;
                                 } else {
-                                    colorStateList = ColorStateList.valueOf(imageView3.getContext().getColor(z2 ? R.color.secondary_text_material_dark : R.color.sliding_tab_text_color_shadow));
+                                    colorStateListValueOf = ColorStateList.valueOf(imageView3.getContext().getColor(z2 ? R.color.secondary_text_material_dark : R.color.sliding_tab_text_color_shadow));
                                 }
-                                imageView3.setBackgroundTintList(colorStateList);
+                                imageView3.setBackgroundTintList(colorStateListValueOf);
                                 imageView3.animate().scaleX(z3 ? 1.23f : 1.0f).scaleY(z3 ? 1.23f : 1.0f).start();
                                 boolean z4 = keyguardQuickAffordanceViewModel.isClickable;
                                 imageView3.setClickable(z4);
@@ -185,15 +182,15 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                         @Override // android.view.View.OnClickListener
                                         public final void onClick(View view) {
                                             Pair pair;
-                                            Function1.this.mo779invoke(Integer.valueOf(com.android.systemui.R.string.keyguard_affordance_press_too_short));
+                                            function12.mo781invoke(Integer.valueOf(com.android.systemui.R.string.keyguard_affordance_press_too_short));
                                             float dimensionPixelSize = imageView2.getContext().getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_affordance_shake_amplitude);
                                             float f = 2;
-                                            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(imageView2, "translationX", (-dimensionPixelSize) / f, dimensionPixelSize / f);
+                                            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(imageView2, "translationX", (-dimensionPixelSize) / f, dimensionPixelSize / f);
                                             KeyguardBottomAreaVibrations.INSTANCE.getClass();
-                                            ofFloat.m894setDuration(Duration.m3437getInWholeMillisecondsimpl(KeyguardBottomAreaVibrations.ShakeAnimationDuration));
-                                            ofFloat.mInterpolator = new CycleInterpolator(KeyguardBottomAreaVibrations.ShakeAnimationCycles);
+                                            objectAnimatorOfFloat.m896setDuration(Duration.m3457getInWholeMillisecondsimpl(KeyguardBottomAreaVibrations.ShakeAnimationDuration));
+                                            objectAnimatorOfFloat.mInterpolator = new CycleInterpolator(KeyguardBottomAreaVibrations.ShakeAnimationCycles);
                                             final ImageView imageView4 = imageView2;
-                                            ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButton$2$onClick$$inlined$doOnEnd$1
+                                            objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButton$2$onClick$$inlined$doOnEnd$1
                                                 @Override // androidx.core.animation.Animator.AnimatorListener
                                                 public final void onAnimationEnd(Animator animator) {
                                                     imageView4.setTranslationX(0.0f);
@@ -211,7 +208,7 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                                 public final void onAnimationStart(Animator animator) {
                                                 }
                                             });
-                                            ofFloat.start();
+                                            objectAnimatorOfFloat.start();
                                             KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder3 = keyguardQuickAffordanceViewBinder2;
                                             VibratorHelper vibratorHelper2 = keyguardQuickAffordanceViewBinder3.vibratorHelper;
                                             if (vibratorHelper2 != null) {
@@ -223,8 +220,8 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                             String str = keyguardQuickAffordanceViewModel.configKey;
                                             keyguardQuickAffordancesLogger2.getClass();
                                             if (str != null) {
-                                                List split$default = StringsKt__StringsKt.split$default(str, new String[]{"::"}, 0, 6);
-                                                pair = new Pair(split$default.get(0), split$default.get(1));
+                                                List listSplit$default = StringsKt__StringsKt.split$default(str, new String[]{"::"}, 0, 6);
+                                                pair = new Pair(listSplit$default.get(0), listSplit$default.get(1));
                                             } else {
                                                 pair = new Pair("", "");
                                             }
@@ -233,11 +230,11 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                             LogLevel logLevel2 = LogLevel.DEBUG;
                                             KeyguardQuickAffordancesLogger$$ExternalSyntheticLambda0 keyguardQuickAffordancesLogger$$ExternalSyntheticLambda02 = new KeyguardQuickAffordancesLogger$$ExternalSyntheticLambda0(2);
                                             LogBuffer logBuffer2 = keyguardQuickAffordancesLogger2.buffer;
-                                            LogMessage obtain2 = logBuffer2.obtain("KeyguardQuickAffordancesLogger", logLevel2, keyguardQuickAffordancesLogger$$ExternalSyntheticLambda02, null);
-                                            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+                                            LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardQuickAffordancesLogger", logLevel2, keyguardQuickAffordancesLogger$$ExternalSyntheticLambda02, null);
+                                            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
                                             logMessageImpl.str1 = str3;
                                             logMessageImpl.str2 = str2;
-                                            logBuffer2.commit(obtain2);
+                                            logBuffer2.commit(logMessageObtain2);
                                         }
                                     });
                                     imageView2.setOnLongClickListener(new KeyguardQuickAffordanceViewBinder.OnLongClickListener(keyguardQuickAffordanceViewBinder2.falsingManager, keyguardQuickAffordanceViewModel, keyguardQuickAffordanceViewBinder2.vibratorHelper, keyguardQuickAffordanceOnTouchListener, keyguardQuickAffordanceViewBinder2.msdlPlayer));
@@ -277,7 +274,6 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ Flow $alpha;
@@ -317,9 +313,8 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                     Flow flow2 = this.$alpha;
                     this.label = 1;
                     keyguardQuickAffordanceViewBinder.getClass();
-                    Object collect = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new Flow() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1
+                    Object objCollect = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new Flow() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1
 
-                        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                         /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1$2, reason: invalid class name */
                         public final class AnonymousClass2 implements FlowCollector {
                             public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -346,66 +341,46 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                 this.$this_unsafeFlow = flowCollector;
                             }
 
-                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
-                                To view partially-correct code enable 'Show inconsistent code' option in preferences
                             */
-                            public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                                /*
-                                    r4 = this;
-                                    boolean r0 = r6 instanceof com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                                    if (r0 == 0) goto L13
-                                    r0 = r6
-                                    com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                                    int r1 = r0.label
-                                    r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                    r3 = r1 & r2
-                                    if (r3 == 0) goto L13
-                                    int r1 = r1 - r2
-                                    r0.label = r1
-                                    goto L18
-                                L13:
-                                    com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1$2$1
-                                    r0.<init>(r6)
-                                L18:
-                                    java.lang.Object r6 = r0.result
-                                    kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                    int r2 = r0.label
-                                    r3 = 1
-                                    if (r2 == 0) goto L2f
-                                    if (r2 != r3) goto L27
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    goto L45
-                                L27:
-                                    java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                    java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                    r4.<init>(r5)
-                                    throw r4
-                                L2f:
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordanceViewModel r5 = (com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordanceViewModel) r5
-                                    boolean r5 = r5.isDimmed
-                                    java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                                    r0.label = r3
-                                    kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                    java.lang.Object r4 = r4.emit(r5, r0)
-                                    if (r4 != r1) goto L45
-                                    return r1
-                                L45:
-                                    kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                    return r4
-                                */
-                                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    Boolean boolValueOf = Boolean.valueOf(((KeyguardQuickAffordanceViewModel) obj).isDimmed);
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
                             }
                         }
 
                         @Override // kotlinx.coroutines.flow.Flow
                         public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                            Object collect2 = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                            return collect2 == CoroutineSingletons.COROUTINE_SUSPENDED ? collect2 : Unit.INSTANCE;
+                            Object objCollect2 = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                            return objCollect2 == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect2 : Unit.INSTANCE;
                         }
                     }, flow2, new KeyguardQuickAffordanceViewBinder$updateButtonAlpha$3(keyguardQuickAffordanceViewBinder, null)).collect(new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButtonAlpha$4
                         @Override // kotlinx.coroutines.flow.FlowCollector
@@ -414,10 +389,10 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                             return Unit.INSTANCE;
                         }
                     }, this);
-                    if (collect != coroutineSingletons) {
-                        collect = Unit.INSTANCE;
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
                     }
-                    if (collect == coroutineSingletons) {
+                    if (objCollect == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -430,7 +405,6 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ ImageView $button;
@@ -523,7 +497,7 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01821(this.$viewModel, this.this$0, this.$button, this.$messageDisplayer, this.$hapticsViewModel, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02981(this.$viewModel, this.this$0, this.$button, this.$messageDisplayer, this.$hapticsViewModel, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.this$0, this.$button, this.$viewModel, this.$alpha, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$configurationBasedDimensions, this.$button, null), 7);
             return Unit.INSTANCE;

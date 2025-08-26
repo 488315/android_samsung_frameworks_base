@@ -15,7 +15,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final /* synthetic */ class SecControlsUiControllerImpl$show$3 extends FunctionReferenceImpl implements Function2 {
     public SecControlsUiControllerImpl$show$3(Object obj) {
@@ -30,15 +29,15 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$3 extends FunctionR
         secControlsUiControllerImpl.getClass();
         Log.d("SecControlsUiControllerImpl", "showNonMainView");
         secControlsUiControllerImpl.serviceInfos = list;
-        boolean isEmpty = list.isEmpty();
+        boolean zIsEmpty = list.isEmpty();
         SALogger sALogger = secControlsUiControllerImpl.saLogger;
-        if (isEmpty) {
+        if (zIsEmpty) {
             Log.d("SecControlsUiControllerImpl", "showNoAppView");
             String name = NoAppFragment.class.getName();
             if (secControlsUiControllerImpl.noAppFragment == null) {
                 FragmentManagerImpl fragmentManagerImpl = secControlsUiControllerImpl.fragmentManager;
-                Fragment findFragmentByTag = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentByTag(name) : null;
-                NoAppFragment noAppFragment = findFragmentByTag instanceof NoAppFragment ? (NoAppFragment) findFragmentByTag : null;
+                Fragment fragmentFindFragmentByTag = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentByTag(name) : null;
+                NoAppFragment noAppFragment = fragmentFindFragmentByTag instanceof NoAppFragment ? (NoAppFragment) fragmentFindFragmentByTag : null;
                 if (noAppFragment == null) {
                     noAppFragment = new NoAppFragment(sALogger);
                 }
@@ -57,8 +56,8 @@ final /* synthetic */ class SecControlsUiControllerImpl$show$3 extends FunctionR
             String name2 = NoFavoriteFragment.class.getName();
             if (secControlsUiControllerImpl.noFavoriteFragment == null) {
                 FragmentManagerImpl fragmentManagerImpl3 = secControlsUiControllerImpl.fragmentManager;
-                LifecycleOwner findFragmentByTag2 = fragmentManagerImpl3 != null ? fragmentManagerImpl3.findFragmentByTag(name2) : null;
-                NoFavoriteFragment noFavoriteFragment = findFragmentByTag2 instanceof NoFavoriteFragment ? (NoFavoriteFragment) findFragmentByTag2 : null;
+                LifecycleOwner lifecycleOwnerFindFragmentByTag = fragmentManagerImpl3 != null ? fragmentManagerImpl3.findFragmentByTag(name2) : null;
+                NoFavoriteFragment noFavoriteFragment = lifecycleOwnerFindFragmentByTag instanceof NoFavoriteFragment ? (NoFavoriteFragment) lifecycleOwnerFindFragmentByTag : null;
                 if (noFavoriteFragment == null) {
                     noFavoriteFragment = new NoFavoriteFragment((ControlsActivityStarter) secControlsUiControllerImpl.controlsActivityStarter.get(), sALogger, secControlsUiControllerImpl.badgeSubject);
                 }

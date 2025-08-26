@@ -119,9 +119,9 @@ public interface ISandboxedDetectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISandboxedDetectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISandboxedDetectionService)) {
-                return (ISandboxedDetectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISandboxedDetectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISandboxedDetectionService)) {
+                return (ISandboxedDetectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -171,60 +171,60 @@ public interface ISandboxedDetectionService extends IInterface {
                 case 1:
                     SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent = (SoundTrigger.KeyphraseRecognitionEvent) parcel.readTypedObject(SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
                     AudioFormat audioFormat = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
-                    long readLong = parcel.readLong();
-                    IDspHotwordDetectionCallback asInterface = IDspHotwordDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j = parcel.readLong();
+                    IDspHotwordDetectionCallback iDspHotwordDetectionCallbackAsInterface = IDspHotwordDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    detectFromDspSource(keyphraseRecognitionEvent, audioFormat, readLong, asInterface);
+                    detectFromDspSource(keyphraseRecognitionEvent, audioFormat, j, iDspHotwordDetectionCallbackAsInterface);
                     return true;
                 case 2:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     AudioFormat audioFormat2 = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-                    IDspHotwordDetectionCallback asInterface2 = IDspHotwordDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDspHotwordDetectionCallback iDspHotwordDetectionCallbackAsInterface2 = IDspHotwordDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    detectFromMicrophoneSource(parcelFileDescriptor, readInt, audioFormat2, persistableBundle, asInterface2);
+                    detectFromMicrophoneSource(parcelFileDescriptor, i3, audioFormat2, persistableBundle, iDspHotwordDetectionCallbackAsInterface2);
                     return true;
                 case 3:
-                    IDetectorSessionVisualQueryDetectionCallback asInterface3 = IDetectorSessionVisualQueryDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDetectorSessionVisualQueryDetectionCallback iDetectorSessionVisualQueryDetectionCallbackAsInterface = IDetectorSessionVisualQueryDetectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    detectWithVisualSignals(asInterface3);
+                    detectWithVisualSignals(iDetectorSessionVisualQueryDetectionCallbackAsInterface);
                     return true;
                 case 4:
                     PersistableBundle persistableBundle2 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     SharedMemory sharedMemory = (SharedMemory) parcel.readTypedObject(SharedMemory.CREATOR);
-                    IRemoteCallback asInterface4 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateState(persistableBundle2, sharedMemory, asInterface4);
+                    updateState(persistableBundle2, sharedMemory, iRemoteCallbackAsInterface);
                     return true;
                 case 5:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    updateAudioFlinger(readStrongBinder);
+                    updateAudioFlinger(strongBinder);
                     return true;
                 case 6:
-                    IContentCaptureManager asInterface5 = IContentCaptureManager.Stub.asInterface(parcel.readStrongBinder());
+                    IContentCaptureManager iContentCaptureManagerAsInterface = IContentCaptureManager.Stub.asInterface(parcel.readStrongBinder());
                     ContentCaptureOptions contentCaptureOptions = (ContentCaptureOptions) parcel.readTypedObject(ContentCaptureOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateContentCaptureManager(asInterface5, contentCaptureOptions);
+                    updateContentCaptureManager(iContentCaptureManagerAsInterface, contentCaptureOptions);
                     return true;
                 case 7:
-                    IRecognitionServiceManager asInterface6 = IRecognitionServiceManager.Stub.asInterface(parcel.readStrongBinder());
+                    IRecognitionServiceManager iRecognitionServiceManagerAsInterface = IRecognitionServiceManager.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateRecognitionServiceManager(asInterface6);
+                    updateRecognitionServiceManager(iRecognitionServiceManagerAsInterface);
                     return true;
                 case 8:
-                    IPingMe asInterface7 = IPingMe.Stub.asInterface(parcel.readStrongBinder());
+                    IPingMe iPingMeAsInterface = IPingMe.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    ping(asInterface7);
+                    ping(iPingMeAsInterface);
                     return true;
                 case 9:
                     stopDetection();
                     return true;
                 case 10:
-                    IDetectorSessionStorageService asInterface8 = IDetectorSessionStorageService.Stub.asInterface(parcel.readStrongBinder());
+                    IDetectorSessionStorageService iDetectorSessionStorageServiceAsInterface = IDetectorSessionStorageService.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRemoteStorageService(asInterface8);
+                    registerRemoteStorageService(iDetectorSessionStorageServiceAsInterface);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -249,130 +249,130 @@ public interface ISandboxedDetectionService extends IInterface {
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void detectFromDspSource(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent, AudioFormat audioFormat, long j, IDspHotwordDetectionCallback iDspHotwordDetectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeTypedObject(keyphraseRecognitionEvent, 0);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iDspHotwordDetectionCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyphraseRecognitionEvent, 0);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iDspHotwordDetectionCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void detectFromMicrophoneSource(ParcelFileDescriptor parcelFileDescriptor, int i, AudioFormat audioFormat, PersistableBundle persistableBundle, IDspHotwordDetectionCallback iDspHotwordDetectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeStrongInterface(iDspHotwordDetectionCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeStrongInterface(iDspHotwordDetectionCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void detectWithVisualSignals(IDetectorSessionVisualQueryDetectionCallback iDetectorSessionVisualQueryDetectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDetectorSessionVisualQueryDetectionCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDetectorSessionVisualQueryDetectionCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void updateState(PersistableBundle persistableBundle, SharedMemory sharedMemory, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void updateAudioFlinger(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void updateContentCaptureManager(IContentCaptureManager iContentCaptureManager, ContentCaptureOptions contentCaptureOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iContentCaptureManager);
-                    obtain.writeTypedObject(contentCaptureOptions, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iContentCaptureManager);
+                    parcelObtain.writeTypedObject(contentCaptureOptions, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void updateRecognitionServiceManager(IRecognitionServiceManager iRecognitionServiceManager) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecognitionServiceManager);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecognitionServiceManager);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void ping(IPingMe iPingMe) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPingMe);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPingMe);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void stopDetection() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.ISandboxedDetectionService
             public void registerRemoteStorageService(IDetectorSessionStorageService iDetectorSessionStorageService) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDetectorSessionStorageService);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISandboxedDetectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDetectorSessionStorageService);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -415,9 +415,9 @@ public interface ISandboxedDetectionService extends IInterface {
                 if (iBinder == null) {
                     return null;
                 }
-                IInterface queryLocalInterface = iBinder.queryLocalInterface(IPingMe.DESCRIPTOR);
-                if (queryLocalInterface != null && (queryLocalInterface instanceof IPingMe)) {
-                    return (IPingMe) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPingMe.DESCRIPTOR);
+                if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPingMe)) {
+                    return (IPingMe) iInterfaceQueryLocalInterface;
                 }
                 return new Proxy(iBinder);
             }
@@ -469,15 +469,15 @@ public interface ISandboxedDetectionService extends IInterface {
 
                 @Override // android.service.voice.ISandboxedDetectionService.IPingMe
                 public void onPing() throws RemoteException {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(IPingMe.DESCRIPTOR);
-                        this.mRemote.transact(1, obtain, obtain2, 0);
-                        obtain2.readException();
+                        parcelObtain.writeInterfaceToken(IPingMe.DESCRIPTOR);
+                        this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
             }

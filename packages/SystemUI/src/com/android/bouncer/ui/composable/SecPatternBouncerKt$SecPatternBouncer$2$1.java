@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecPatternBouncerKt$SecPatternBouncer$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Map<PatternDotViewModel, Animatable<Float, AnimationVector1D>> $dotAppearFadeInAnimatables;
@@ -49,11 +48,11 @@ final class SecPatternBouncerKt$SecPatternBouncer$2$1 extends SuspendLambda impl
             Map<PatternDotViewModel, Animatable<Float, AnimationVector1D>> map = this.$dotAppearFadeInAnimatables;
             Map<PatternDotViewModel, Animatable<Float, AnimationVector1D>> map2 = this.$dotAppearMoveUpAnimatables;
             this.label = 1;
-            Object coroutineScope = CoroutineScopeKt.coroutineScope(new SecPatternBouncerKt$showEntryAnimation$2(map, map2, null), this);
-            if (coroutineScope != obj2) {
-                coroutineScope = Unit.INSTANCE;
+            Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new SecPatternBouncerKt$showEntryAnimation$2(map, map2, null), this);
+            if (objCoroutineScope != obj2) {
+                objCoroutineScope = Unit.INSTANCE;
             }
-            if (coroutineScope == obj2) {
+            if (objCoroutineScope == obj2) {
                 return obj2;
             }
         } else {

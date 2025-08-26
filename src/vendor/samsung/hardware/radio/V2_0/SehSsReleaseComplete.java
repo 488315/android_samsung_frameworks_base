@@ -39,13 +39,13 @@ public final class SehSsReleaseComplete {
 
     public static final ArrayList<SehSsReleaseComplete> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehSsReleaseComplete> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehSsReleaseComplete sehSsReleaseComplete = new SehSsReleaseComplete();
-            sehSsReleaseComplete.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            sehSsReleaseComplete.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(sehSsReleaseComplete);
         }
         return arrayList;

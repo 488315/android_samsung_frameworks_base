@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxConfiguration {
     public final Context context;
@@ -14,7 +13,7 @@ public final class LetterboxConfiguration {
     public Color letterboxBackgroundColorOverride;
     public Integer letterboxBackgroundColorResourceIdOverride;
 
-    public LetterboxConfiguration(Context context) {
+    public LetterboxConfiguration(Context context) throws Resources.NotFoundException {
         this.context = context;
         int integer = context.getResources().getInteger(R.integer.config_notificationsBatteryLedOn);
         this.letterboxActivityDefaultCornersRadius = integer;
@@ -27,12 +26,12 @@ public final class LetterboxConfiguration {
             color.getClass();
             return color;
         }
-        Integer num = this.letterboxBackgroundColorResourceIdOverride;
-        if (num == null) {
-            num = Integer.valueOf(R.color.dim_foreground_disabled_holo_light);
+        Integer numValueOf = this.letterboxBackgroundColorResourceIdOverride;
+        if (numValueOf == null) {
+            numValueOf = Integer.valueOf(R.color.dim_foreground_disabled_holo_light);
         }
         Resources resources = this.context.getResources();
-        num.getClass();
-        return Color.valueOf(resources.getColor(num.intValue(), null));
+        numValueOf.getClass();
+        return Color.valueOf(resources.getColor(numValueOf.intValue(), null));
     }
 }

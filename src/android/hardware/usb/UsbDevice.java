@@ -17,16 +17,16 @@ public class UsbDevice implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public UsbDevice createFromParcel(Parcel parcel) {
             boolean z;
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            String readString4 = parcel.readString();
-            IUsbSerialReader asInterface = IUsbSerialReader.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            String string4 = parcel.readString();
+            IUsbSerialReader iUsbSerialReaderAsInterface = IUsbSerialReader.Stub.asInterface(parcel.readStrongBinder());
             UsbConfiguration[] usbConfigurationArr = (UsbConfiguration[]) parcel.readParcelableArray(UsbConfiguration.class.getClassLoader(), UsbConfiguration.class);
             boolean z2 = false;
             boolean z3 = parcel.readInt() == 1;
@@ -36,7 +36,7 @@ public class UsbDevice implements Parcelable {
             } else {
                 z = false;
             }
-            return new UsbDevice(readString, readInt, readInt2, readInt3, readInt4, readInt5, readString2, readString3, readString4, usbConfigurationArr, asInterface, z3, z2, parcel.readInt() == 1 ? true : z, parcel.readInt() == 1, parcel.readInt() == 1);
+            return new UsbDevice(string, i, i2, i3, i4, i5, string2, string3, string4, usbConfigurationArr, iUsbSerialReaderAsInterface, z3, z2, parcel.readInt() == 1 ? true : z, parcel.readInt() == 1, parcel.readInt() == 1);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -177,20 +177,20 @@ public class UsbDevice implements Parcelable {
     private UsbInterface[] getInterfaceList() {
         if (this.mInterfaces == null) {
             int length = this.mConfigurations.length;
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += this.mConfigurations[i2].getInterfaceCount();
+            int interfaceCount = 0;
+            for (int i = 0; i < length; i++) {
+                interfaceCount += this.mConfigurations[i].getInterfaceCount();
             }
-            this.mInterfaces = new UsbInterface[i];
-            int i3 = 0;
-            for (int i4 = 0; i4 < length; i4++) {
-                UsbConfiguration usbConfiguration = this.mConfigurations[i4];
-                int interfaceCount = usbConfiguration.getInterfaceCount();
-                int i5 = 0;
-                while (i5 < interfaceCount) {
-                    this.mInterfaces[i3] = usbConfiguration.getInterface(i5);
-                    i5++;
-                    i3++;
+            this.mInterfaces = new UsbInterface[interfaceCount];
+            int i2 = 0;
+            for (int i3 = 0; i3 < length; i3++) {
+                UsbConfiguration usbConfiguration = this.mConfigurations[i3];
+                int interfaceCount2 = usbConfiguration.getInterfaceCount();
+                int i4 = 0;
+                while (i4 < interfaceCount2) {
+                    this.mInterfaces[i2] = usbConfiguration.getInterface(i4);
+                    i4++;
+                    i2++;
                 }
             }
         }

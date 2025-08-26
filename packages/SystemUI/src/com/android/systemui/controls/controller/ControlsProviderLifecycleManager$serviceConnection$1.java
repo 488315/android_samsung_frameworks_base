@@ -12,7 +12,6 @@ import com.android.systemui.controls.util.ControlsUtil;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsProviderLifecycleManager$serviceConnection$1 implements ServiceConnection {
     public final AtomicBoolean connected = new AtomicBoolean(false);
@@ -31,7 +30,7 @@ public final class ControlsProviderLifecycleManager$serviceConnection$1 implemen
         controlsProviderLifecycleManager.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$serviceConnection$1$onBindingDied$1
             @Override // java.lang.Runnable
             public final void run() {
-                ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = ControlsProviderLifecycleManager.this;
+                ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = controlsProviderLifecycleManager;
                 int i = ControlsProviderLifecycleManager.BIND_FLAGS;
                 controlsProviderLifecycleManager2.unbindAndCleanup("binder died");
             }
@@ -46,7 +45,7 @@ public final class ControlsProviderLifecycleManager$serviceConnection$1 implemen
         controlsProviderLifecycleManager.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$serviceConnection$1$onNullBinding$1
             @Override // java.lang.Runnable
             public final void run() {
-                ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = ControlsProviderLifecycleManager.this;
+                ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = controlsProviderLifecycleManager;
                 int i = ControlsProviderLifecycleManager.BIND_FLAGS;
                 controlsProviderLifecycleManager2.unbindAndCleanup("null binding");
             }

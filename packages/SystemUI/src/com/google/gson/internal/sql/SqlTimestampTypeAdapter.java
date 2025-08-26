@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class SqlTimestampTypeAdapter extends TypeAdapter<Timestamp> {
     static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() { // from class: com.google.gson.internal.sql.SqlTimestampTypeAdapter.1
@@ -31,9 +30,9 @@ class SqlTimestampTypeAdapter extends TypeAdapter<Timestamp> {
     @Override // com.google.gson.TypeAdapter
     /* renamed from: read, reason: avoid collision after fix types in other method */
     public Timestamp read2(JsonReader jsonReader) throws IOException {
-        Date read2 = this.dateTypeAdapter.read2(jsonReader);
-        if (read2 != null) {
-            return new Timestamp(read2.getTime());
+        Date date = this.dateTypeAdapter.read2(jsonReader);
+        if (date != null) {
+            return new Timestamp(date.getTime());
         }
         return null;
     }

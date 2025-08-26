@@ -1,13 +1,25 @@
 package androidx.compose.foundation.text;
 
+import android.text.Layout;
+import androidx.compose.foundation.text.modifiers.TextAutoSizeLayoutScope;
+import androidx.compose.ui.text.AndroidParagraph;
+import androidx.compose.ui.text.AnnotatedString;
+import androidx.compose.ui.text.MultiParagraph;
+import androidx.compose.ui.text.MultiParagraphKt;
+import androidx.compose.ui.text.ParagraphInfo;
+import androidx.compose.ui.text.TextLayoutInput;
+import androidx.compose.ui.text.TextLayoutResult;
+import androidx.compose.ui.text.android.TextAndroidCanvas;
+import androidx.compose.ui.text.android.TextLayout_androidKt;
+import androidx.compose.ui.text.style.TextOverflow;
 import androidx.compose.ui.unit.TextUnit;
 import androidx.compose.ui.unit.TextUnitKt;
 import androidx.compose.ui.unit.TextUnitType;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AutoSizeStepBased implements TextAutoSize {
     public final long maxFontSize;
@@ -26,148 +38,67 @@ public final class AutoSizeStepBased implements TextAutoSize {
             return false;
         }
         AutoSizeStepBased autoSizeStepBased = (AutoSizeStepBased) obj;
-        return TextUnit.m866equalsimpl0(autoSizeStepBased.minFontSize, this.minFontSize) && TextUnit.m866equalsimpl0(autoSizeStepBased.maxFontSize, this.maxFontSize) && TextUnit.m866equalsimpl0(autoSizeStepBased.stepSize, this.stepSize);
+        return TextUnit.m868equalsimpl0(autoSizeStepBased.minFontSize, this.minFontSize) && TextUnit.m868equalsimpl0(autoSizeStepBased.maxFontSize, this.maxFontSize) && TextUnit.m868equalsimpl0(autoSizeStepBased.stepSize, this.stepSize);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0082, code lost:
-    
-        if (r6 > 0) goto L31;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0086, code lost:
-    
-        r4 = r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0043, code lost:
-    
-        if (r5.getDidOverflowHeight() == false) goto L32;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0084  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0086  */
     @Override // androidx.compose.foundation.text.TextAutoSize
     /* renamed from: getFontSize-Ci0_558, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final long mo190getFontSizeCi0_558(androidx.compose.foundation.text.modifiers.TextAutoSizeLayoutScope r10, long r11, androidx.compose.ui.text.AnnotatedString r13) {
-        /*
-            r9 = this;
-            long r0 = r9.stepSize
-            float r13 = r10.mo56toPxR2X_6o(r0)
-            long r0 = r9.minFontSize
-            float r0 = r10.mo56toPxR2X_6o(r0)
-            long r1 = r9.maxFontSize
-            float r9 = r10.mo56toPxR2X_6o(r1)
-            float r1 = r0 + r9
-            r2 = 2
-            float r2 = (float) r2
-            float r1 = r1 / r2
-            r3 = r9
-            r4 = r0
-        L19:
-            float r5 = r3 - r4
-            int r5 = (r5 > r13 ? 1 : (r5 == r13 ? 0 : -1))
-            if (r5 < 0) goto Laa
-            long r5 = r10.mo60toSpkPz2Gy4(r1)
-            androidx.compose.ui.text.TextLayoutResult r5 = r10.mo226performLayout5ZSfY2I(r11, r5)
-            androidx.compose.ui.text.TextLayoutInput r6 = r5.layoutInput
-            int r7 = r6.overflow
-            androidx.compose.ui.text.style.TextOverflow$Companion r8 = androidx.compose.ui.text.style.TextOverflow.Companion
-            r8.getClass()
-            int r8 = androidx.compose.ui.text.style.TextOverflow.Clip
-            if (r7 != r8) goto L35
-            goto L39
-        L35:
-            int r8 = androidx.compose.ui.text.style.TextOverflow.Visible
-            if (r7 != r8) goto L46
-        L39:
-            boolean r6 = r5.getDidOverflowWidth()
-            if (r6 != 0) goto L84
-            boolean r5 = r5.getDidOverflowHeight()
-            if (r5 == 0) goto L86
-            goto L84
-        L46:
-            int r8 = androidx.compose.ui.text.style.TextOverflow.StartEllipsis
-            if (r7 != r8) goto L4b
-            goto L54
-        L4b:
-            int r8 = androidx.compose.ui.text.style.TextOverflow.MiddleEllipsis
-            if (r7 != r8) goto L50
-            goto L54
-        L50:
-            int r8 = androidx.compose.ui.text.style.TextOverflow.Ellipsis
-            if (r7 != r8) goto L8b
-        L54:
-            r6 = 0
-        L55:
-            androidx.compose.ui.text.MultiParagraph r7 = r5.multiParagraph
-            int r8 = r7.lineCount
-            if (r6 >= r8) goto L82
-            r7.requireLineIndexInRange(r6)
-            java.util.List r8 = r7.paragraphInfoList
-            int r8 = androidx.compose.ui.text.MultiParagraphKt.findParagraphByLineIndex(r6, r8)
-            java.util.List r7 = r7.paragraphInfoList
-            java.util.ArrayList r7 = (java.util.ArrayList) r7
-            java.lang.Object r7 = r7.get(r8)
-            androidx.compose.ui.text.ParagraphInfo r7 = (androidx.compose.ui.text.ParagraphInfo) r7
-            androidx.compose.ui.text.Paragraph r7 = r7.paragraph
-            androidx.compose.ui.text.AndroidParagraph r7 = (androidx.compose.ui.text.AndroidParagraph) r7
-            androidx.compose.ui.text.android.TextLayout r7 = r7.layout
-            android.text.Layout r7 = r7.layout
-            androidx.compose.ui.text.android.TextAndroidCanvas r8 = androidx.compose.ui.text.android.TextLayout_androidKt.SharedTextAndroidCanvas
-            int r7 = r7.getEllipsisCount(r6)
-            if (r7 <= 0) goto L7f
-            goto L82
-        L7f:
-            int r6 = r6 + 1
-            goto L55
-        L82:
-            if (r6 <= 0) goto L86
-        L84:
-            r3 = r1
-            goto L87
-        L86:
-            r4 = r1
-        L87:
-            float r1 = r4 + r3
-            float r1 = r1 / r2
-            goto L19
-        L8b:
-            java.lang.IllegalArgumentException r9 = new java.lang.IllegalArgumentException
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder
-            java.lang.String r11 = "TextOverflow type "
-            r10.<init>(r11)
-            int r11 = r6.overflow
-            java.lang.String r11 = androidx.compose.ui.text.style.TextOverflow.m812toStringimpl(r11)
-            r10.append(r11)
-            java.lang.String r11 = " is not supported."
-            r10.append(r11)
-            java.lang.String r10 = r10.toString()
-            r9.<init>(r10)
-            throw r9
-        Laa:
-            float r4 = r4 - r0
-            float r4 = r4 / r13
-            double r1 = (double) r4
-            double r1 = java.lang.Math.floor(r1)
-            float r1 = (float) r1
-            float r1 = r1 * r13
-            float r1 = r1 + r0
-            float r13 = r13 + r1
-            int r9 = (r13 > r9 ? 1 : (r13 == r9 ? 0 : -1))
-            if (r9 > 0) goto Lcf
-            long r2 = r10.mo60toSpkPz2Gy4(r13)
-            androidx.compose.ui.text.TextLayoutResult r9 = r10.mo226performLayout5ZSfY2I(r11, r2)
-            boolean r11 = r9.getDidOverflowWidth()
-            if (r11 != 0) goto Lcf
-            boolean r9 = r9.getDidOverflowHeight()
-            if (r9 == 0) goto Lce
-            goto Lcf
-        Lce:
-            r1 = r13
-        Lcf:
-            long r9 = r10.mo60toSpkPz2Gy4(r1)
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.text.AutoSizeStepBased.mo190getFontSizeCi0_558(androidx.compose.foundation.text.modifiers.TextAutoSizeLayoutScope, long, androidx.compose.ui.text.AnnotatedString):long");
+    public final long mo191getFontSizeCi0_558(TextAutoSizeLayoutScope textAutoSizeLayoutScope, long j, AnnotatedString annotatedString) {
+        float fMo57toPxR2X_6o = textAutoSizeLayoutScope.mo57toPxR2X_6o(this.stepSize);
+        float fMo57toPxR2X_6o2 = textAutoSizeLayoutScope.mo57toPxR2X_6o(this.minFontSize);
+        float fMo57toPxR2X_6o3 = textAutoSizeLayoutScope.mo57toPxR2X_6o(this.maxFontSize);
+        float f = 2;
+        float f2 = (fMo57toPxR2X_6o2 + fMo57toPxR2X_6o3) / f;
+        float f3 = fMo57toPxR2X_6o3;
+        float f4 = fMo57toPxR2X_6o2;
+        while (f3 - f4 >= fMo57toPxR2X_6o) {
+            TextLayoutResult textLayoutResultMo227performLayout5ZSfY2I = textAutoSizeLayoutScope.mo227performLayout5ZSfY2I(j, textAutoSizeLayoutScope.mo61toSpkPz2Gy4(f2));
+            TextLayoutInput textLayoutInput = textLayoutResultMo227performLayout5ZSfY2I.layoutInput;
+            int i = textLayoutInput.overflow;
+            TextOverflow.Companion.getClass();
+            if (i == TextOverflow.Clip || i == TextOverflow.Visible) {
+                if (textLayoutResultMo227performLayout5ZSfY2I.getDidOverflowWidth() || textLayoutResultMo227performLayout5ZSfY2I.getDidOverflowHeight()) {
+                }
+            } else {
+                if (i != TextOverflow.StartEllipsis && i != TextOverflow.MiddleEllipsis && i != TextOverflow.Ellipsis) {
+                    throw new IllegalArgumentException("TextOverflow type " + ((Object) TextOverflow.m814toStringimpl(textLayoutInput.overflow)) + " is not supported.");
+                }
+                int i2 = 0;
+                while (true) {
+                    MultiParagraph multiParagraph = textLayoutResultMo227performLayout5ZSfY2I.multiParagraph;
+                    if (i2 >= multiParagraph.lineCount) {
+                        break;
+                    }
+                    multiParagraph.requireLineIndexInRange(i2);
+                    Layout layout = ((AndroidParagraph) ((ParagraphInfo) ((ArrayList) multiParagraph.paragraphInfoList).get(MultiParagraphKt.findParagraphByLineIndex(i2, multiParagraph.paragraphInfoList))).paragraph).layout.layout;
+                    TextAndroidCanvas textAndroidCanvas = TextLayout_androidKt.SharedTextAndroidCanvas;
+                    if (layout.getEllipsisCount(i2) > 0) {
+                        break;
+                    }
+                    i2++;
+                }
+                if (i2 > 0) {
+                    f3 = f2;
+                } else {
+                    f4 = f2;
+                }
+            }
+            f2 = (f4 + f3) / f;
+        }
+        float fFloor = (((float) Math.floor((f4 - fMo57toPxR2X_6o2) / fMo57toPxR2X_6o)) * fMo57toPxR2X_6o) + fMo57toPxR2X_6o2;
+        float f5 = fMo57toPxR2X_6o + fFloor;
+        if (f5 <= fMo57toPxR2X_6o3) {
+            TextLayoutResult textLayoutResultMo227performLayout5ZSfY2I2 = textAutoSizeLayoutScope.mo227performLayout5ZSfY2I(j, textAutoSizeLayoutScope.mo61toSpkPz2Gy4(f5));
+            if (!textLayoutResultMo227performLayout5ZSfY2I2.getDidOverflowWidth() && !textLayoutResultMo227performLayout5ZSfY2I2.getDidOverflowHeight()) {
+                fFloor = f5;
+            }
+        }
+        return textAutoSizeLayoutScope.mo61toSpkPz2Gy4(fFloor);
     }
 
     @Override // androidx.compose.foundation.text.TextAutoSize
@@ -183,36 +114,36 @@ public final class AutoSizeStepBased implements TextAutoSize {
         TextUnit.Companion companion = TextUnit.Companion;
         companion.getClass();
         long j4 = TextUnit.Unspecified;
-        if (TextUnit.m866equalsimpl0(j, j4)) {
+        if (TextUnit.m868equalsimpl0(j, j4)) {
             throw new IllegalArgumentException("AutoSize.StepBased: TextUnit.Unspecified is not a valid value for minFontSize. Try using other values e.g. 10.sp");
         }
         companion.getClass();
-        if (TextUnit.m866equalsimpl0(j2, j4)) {
+        if (TextUnit.m868equalsimpl0(j2, j4)) {
             throw new IllegalArgumentException("AutoSize.StepBased: TextUnit.Unspecified is not a valid value for maxFontSize. Try using other values e.g. 100.sp");
         }
         companion.getClass();
-        if (TextUnit.m866equalsimpl0(j3, j4)) {
+        if (TextUnit.m868equalsimpl0(j3, j4)) {
             throw new IllegalArgumentException("AutoSize.StepBased: TextUnit.Unspecified is not a valid value for stepSize. Try using other values e.g. 0.25.sp");
         }
-        if (TextUnitType.m874equalsimpl0(TextUnit.m867getTypeUIouoOA(j), TextUnit.m867getTypeUIouoOA(j2))) {
-            TextUnitKt.m872checkArithmeticNB67dxo(j, j2);
-            if (Float.compare(TextUnit.m868getValueimpl(j), TextUnit.m868getValueimpl(j2)) > 0) {
+        if (TextUnitType.m876equalsimpl0(TextUnit.m869getTypeUIouoOA(j), TextUnit.m869getTypeUIouoOA(j2))) {
+            TextUnitKt.m874checkArithmeticNB67dxo(j, j2);
+            if (Float.compare(TextUnit.m870getValueimpl(j), TextUnit.m870getValueimpl(j2)) > 0) {
                 this.minFontSize = j2;
             }
         }
-        long m867getTypeUIouoOA = TextUnit.m867getTypeUIouoOA(j3);
+        long jM869getTypeUIouoOA = TextUnit.m869getTypeUIouoOA(j3);
         TextUnitType.Companion.getClass();
-        if (TextUnitType.m874equalsimpl0(m867getTypeUIouoOA, TextUnitType.Sp)) {
-            long pack = TextUnitKt.pack(1.0E-4f, 4294967296L);
-            TextUnitKt.m872checkArithmeticNB67dxo(j3, pack);
-            if (Float.compare(TextUnit.m868getValueimpl(j3), TextUnit.m868getValueimpl(pack)) < 0) {
+        if (TextUnitType.m876equalsimpl0(jM869getTypeUIouoOA, TextUnitType.Sp)) {
+            long jPack = TextUnitKt.pack(1.0E-4f, 4294967296L);
+            TextUnitKt.m874checkArithmeticNB67dxo(j3, jPack);
+            if (Float.compare(TextUnit.m870getValueimpl(j3), TextUnit.m870getValueimpl(jPack)) < 0) {
                 throw new IllegalArgumentException("AutoSize.StepBased: stepSize must be greater than or equal to 0.0001f.sp");
             }
         }
-        if (TextUnit.m868getValueimpl(this.minFontSize) < 0.0f) {
+        if (TextUnit.m870getValueimpl(this.minFontSize) < 0.0f) {
             throw new IllegalArgumentException("AutoSize.StepBased: minFontSize must not be negative");
         }
-        if (TextUnit.m868getValueimpl(j2) < 0.0f) {
+        if (TextUnit.m870getValueimpl(j2) < 0.0f) {
             throw new IllegalArgumentException("AutoSize.StepBased: maxFontSize must not be negative");
         }
     }

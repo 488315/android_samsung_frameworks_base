@@ -9,7 +9,6 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda4 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -27,13 +26,13 @@ public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda4 imple
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                CommunalHubKt.ScrollOnUpdatedLiveContentEffect((List) this.f$0, (LazyGridState) this.f$1, (Composer) obj, updateChangedFlags);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                CommunalHubKt.ScrollOnUpdatedLiveContentEffect((List) this.f$0, (LazyGridState) this.f$1, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(1);
-                CommunalHubKt.EmptyStateCta((PaddingValues) this.f$0, (BaseCommunalViewModel) this.f$1, (Composer) obj, updateChangedFlags2);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(1);
+                CommunalHubKt.EmptyStateCta((PaddingValues) this.f$0, (BaseCommunalViewModel) this.f$1, (Composer) obj, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class GuidedActionsRelativeLayout extends RelativeLayout {
     public boolean mInOverride;
@@ -26,10 +25,10 @@ class GuidedActionsRelativeLayout extends RelativeLayout {
 
     @Override // android.widget.RelativeLayout, android.view.View
     public final void onMeasure(int i, int i2) {
-        View findViewById;
+        View viewFindViewById;
         int size = View.MeasureSpec.getSize(i2);
-        if (size > 0 && (findViewById = findViewById(R.id.guidedactions_sub_list)) != null) {
-            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) findViewById.getLayoutParams();
+        if (size > 0 && (viewFindViewById = findViewById(R.id.guidedactions_sub_list)) != null) {
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) viewFindViewById.getLayoutParams();
             if (marginLayoutParams.topMargin < 0 && !this.mInOverride) {
                 this.mInOverride = true;
             }
@@ -47,9 +46,9 @@ class GuidedActionsRelativeLayout extends RelativeLayout {
     public GuidedActionsRelativeLayout(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mInOverride = false;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(androidx.leanback.R$styleable.LeanbackGuidedStepTheme);
-        float f = obtainStyledAttributes.getFloat(46, 40.0f);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(androidx.leanback.R$styleable.LeanbackGuidedStepTheme);
+        float f = typedArrayObtainStyledAttributes.getFloat(46, 40.0f);
+        typedArrayObtainStyledAttributes.recycle();
         this.mKeyLinePercent = f;
     }
 }

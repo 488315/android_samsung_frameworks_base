@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BorderModifierNodeElement extends ModifierNodeElement<BorderModifierNode> {
     public final Brush brush;
@@ -33,7 +32,7 @@ public final class BorderModifierNodeElement extends ModifierNodeElement<BorderM
             return false;
         }
         BorderModifierNodeElement borderModifierNodeElement = (BorderModifierNodeElement) obj;
-        return Dp.m836equalsimpl0(this.width, borderModifierNodeElement.width) && Intrinsics.areEqual(this.brush, borderModifierNodeElement.brush) && Intrinsics.areEqual(this.shape, borderModifierNodeElement.shape);
+        return Dp.m838equalsimpl0(this.width, borderModifierNodeElement.width) && Intrinsics.areEqual(this.brush, borderModifierNodeElement.brush) && Intrinsics.areEqual(this.shape, borderModifierNodeElement.shape);
     }
 
     public final int hashCode() {
@@ -56,9 +55,9 @@ public final class BorderModifierNodeElement extends ModifierNodeElement<BorderM
         BorderModifierNode borderModifierNode = (BorderModifierNode) node;
         float f = borderModifierNode.width;
         float f2 = this.width;
-        boolean m836equalsimpl0 = Dp.m836equalsimpl0(f, f2);
+        boolean zM838equalsimpl0 = Dp.m838equalsimpl0(f, f2);
         CacheDrawModifierNode cacheDrawModifierNode = borderModifierNode.drawWithCacheModifierNode;
-        if (!m836equalsimpl0) {
+        if (!zM838equalsimpl0) {
             borderModifierNode.width = f2;
             cacheDrawModifierNode.invalidateDrawCache();
         }

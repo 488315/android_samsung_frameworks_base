@@ -79,7 +79,6 @@ import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubScreenManager implements PluginListener, ScreenLifecycle.Observer, DisplayLifecycle.Observer, Dumpable, WakefulnessLifecycle.Observer {
     public SubHomeActivity mActivity;
@@ -183,12 +182,12 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onDualDARInnerLockscreenRequirementChanged(int i) {
             SubScreenManager subScreenManager = SubScreenManager.this;
-            boolean isDualDarInnerAuthRequired = subScreenManager.mKeyguardUpdateMonitor.isDualDarInnerAuthRequired(i);
+            boolean zIsDualDarInnerAuthRequired = subScreenManager.mKeyguardUpdateMonitor.isDualDarInnerAuthRequired(i);
             if (subScreenManager.mSubScreenPlugin == null) {
                 Log.w("SubScreenManager", "onDualDARInnerLockscreenRequirementChanged() no plugin");
             } else {
-                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("onDualDARInnerLockscreenRequirementChanged() ", "SubScreenManager", isDualDarInnerAuthRequired);
-                subScreenManager.mSubScreenPlugin.onDualDARInnerLockscreenRequirementChanged(isDualDarInnerAuthRequired);
+                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("onDualDARInnerLockscreenRequirementChanged() ", "SubScreenManager", zIsDualDarInnerAuthRequired);
+                subScreenManager.mSubScreenPlugin.onDualDARInnerLockscreenRequirementChanged(zIsDualDarInnerAuthRequired);
             }
         }
 
@@ -250,13 +249,13 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
             if (i != 1 && i != 2) {
                 z = false;
             }
-            boolean checkFullscreenBouncer = SecurityUtils.checkFullscreenBouncer(securityMode);
+            boolean zCheckFullscreenBouncer = SecurityUtils.checkFullscreenBouncer(securityMode);
             SubScreenManager subScreenManager = SubScreenManager.this;
             if (subScreenManager.mSubScreenPlugin == null) {
                 Log.w("SubScreenManager", "onFullscreenBouncerChanged() no plugin");
             } else {
-                KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onFullscreenBouncerChanged() ", " ", "SubScreenManager", checkFullscreenBouncer, z);
-                subScreenManager.mSubScreenPlugin.onFullscreenBouncerChanged(checkFullscreenBouncer, z);
+                KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onFullscreenBouncerChanged() ", " ", "SubScreenManager", zCheckFullscreenBouncer, z);
+                subScreenManager.mSubScreenPlugin.onFullscreenBouncerChanged(zCheckFullscreenBouncer, z);
             }
         }
 
@@ -343,7 +342,6 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.subscreen.SubScreenManager$4, reason: invalid class name */
     public class AnonymousClass4 implements DeviceStateManager.DeviceStateCallback {
         public AnonymousClass4() {
@@ -384,7 +382,6 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.subscreen.SubScreenManager$9, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass9 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -562,9 +559,9 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println("  mSubDisplay = " + this.mSubDisplay);
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsPluginConnected = "), this.mIsPluginConnected, printWriter, "  mIsFolderOpened = "), this.mIsFolderOpened, printWriter, "  mSubScreenPlugin = ");
-        m.append(this.mSubScreenPlugin);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsPluginConnected = "), this.mIsPluginConnected, printWriter, "  mIsFolderOpened = "), this.mIsFolderOpened, printWriter, "  mSubScreenPlugin = ");
+        sbM.append(this.mSubScreenPlugin);
+        printWriter.println(sbM.toString());
         printWriter.println("  getWindow() = " + getWindow$1());
         printWriter.println("  mActivity= = " + this.mActivity);
         printWriter.println("  mSubScreenWindow = " + this.mSubScreenWindow);
@@ -781,7 +778,7 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         pluginLifecycleManager.setLogFunc(new BiConsumer() { // from class: com.android.systemui.subscreen.SubScreenManager$$ExternalSyntheticLambda2
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SubScreenLogger subScreenLogger2 = SubScreenLogger.this;
+                SubScreenLogger subScreenLogger2 = subScreenLogger;
                 String str = (String) obj;
                 String str2 = (String) obj2;
                 subScreenLogger2.getClass();
@@ -894,7 +891,7 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
     }
 
     @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
-    public final void onStartedWakingUp() {
+    public final void onStartedWakingUp() throws SecurityException {
         ComponentName componentName;
         this.mDeviceInteractive = true;
         if (this.mSubScreenPlugin == null) {
@@ -1001,11 +998,11 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         intent.setAction("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.SECONDARY_HOME");
         intent.setClassName("com.android.systemui", "com.android.systemui.subscreen.SubScreenFallback");
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchDisplayId(display.getDisplayId());
-        makeBasic.setForceLaunchWindowingMode(1);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchDisplayId(display.getDisplayId());
+        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
         try {
-            this.mContext.startActivity(intent, makeBasic.toBundle());
+            this.mContext.startActivity(intent, activityOptionsMakeBasic.toBundle());
         } catch (ActivityNotFoundException e) {
             Log.w("SubScreenManager", "startSubScreenFallback() " + e);
         }
@@ -1071,13 +1068,13 @@ public class SubScreenManager implements PluginListener, ScreenLifecycle.Observe
         intent.setAction("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.SECONDARY_HOME");
         intent.setClassName("com.android.systemui", "com.android.systemui.subscreen.SubHomeActivity");
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
         if (!LsRune.SUBSCREEN_DEBUG_ACTIVITY_ON_MAIN) {
-            makeBasic.setLaunchDisplayId(display.getDisplayId());
+            activityOptionsMakeBasic.setLaunchDisplayId(display.getDisplayId());
         }
-        makeBasic.setForceLaunchWindowingMode(1);
+        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
         try {
-            this.mContext.startActivity(intent, makeBasic.toBundle());
+            this.mContext.startActivity(intent, activityOptionsMakeBasic.toBundle());
         } catch (ActivityNotFoundException e) {
             Log.w("SubScreenManager", "startSubHomeActivity() " + e);
         }

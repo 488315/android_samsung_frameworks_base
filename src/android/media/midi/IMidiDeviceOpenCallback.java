@@ -45,9 +45,9 @@ public interface IMidiDeviceOpenCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMidiDeviceOpenCallback)) {
-                return (IMidiDeviceOpenCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMidiDeviceOpenCallback)) {
+                return (IMidiDeviceOpenCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IMidiDeviceOpenCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IMidiDeviceServer asInterface = IMidiDeviceServer.Stub.asInterface(parcel.readStrongBinder());
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IMidiDeviceServer iMidiDeviceServerAsInterface = IMidiDeviceServer.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                onDeviceOpened(asInterface, readStrongBinder);
+                onDeviceOpened(iMidiDeviceServerAsInterface, strongBinder);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IMidiDeviceOpenCallback extends IInterface {
 
             @Override // android.media.midi.IMidiDeviceOpenCallback
             public void onDeviceOpened(IMidiDeviceServer iMidiDeviceServer, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMidiDeviceServer);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMidiDeviceServer);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -168,10 +168,10 @@ public final class TextLanguage implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel parcel) {
-            CharSequence readCharSequence = parcel.readCharSequence();
-            Bundle readBundle = parcel.readBundle();
+            CharSequence charSequence = parcel.readCharSequence();
+            Bundle bundle = parcel.readBundle();
             SystemTextClassifierMetadata systemTextClassifierMetadata = (SystemTextClassifierMetadata) parcel.readParcelable(null, SystemTextClassifierMetadata.class);
-            Request request = new Request(readCharSequence, readBundle);
+            Request request = new Request(charSequence, bundle);
             request.setSystemTextClassifierMetadata(systemTextClassifierMetadata);
             return request;
         }
@@ -190,12 +190,12 @@ public final class TextLanguage implements Parcelable {
             }
 
             public Request build() {
-                String charSequence = this.mText.toString();
+                String string = this.mText.toString();
                 Bundle bundle = this.mBundle;
                 if (bundle == null) {
                     bundle = Bundle.EMPTY;
                 }
-                return new Request(charSequence, bundle);
+                return new Request(string, bundle);
             }
         }
     }

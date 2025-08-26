@@ -12,11 +12,9 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface SupportSQLiteOpenHelper extends Closeable {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SupportSQLiteOpenHelper create(Configuration configuration);
     }
@@ -27,7 +25,6 @@ public interface SupportSQLiteOpenHelper extends Closeable {
 
     void setWriteAheadLoggingEnabled(boolean z);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Configuration {
         public static final Companion Companion = new Companion(null);
         public final boolean allowDataLossOnRecovery;
@@ -36,7 +33,6 @@ public interface SupportSQLiteOpenHelper extends Closeable {
         public final String name;
         public final boolean useNoBackupDirectory;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Builder {
             public Callback callback;
             public final Context context;
@@ -47,7 +43,6 @@ public interface SupportSQLiteOpenHelper extends Closeable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -70,11 +65,9 @@ public interface SupportSQLiteOpenHelper extends Closeable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback {
         public final int version;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();

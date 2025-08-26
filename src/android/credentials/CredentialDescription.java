@@ -47,13 +47,13 @@ public final class CredentialDescription implements Parcelable {
     }
 
     private CredentialDescription(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+        String string8 = parcel.readString8();
+        ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
         ArrayList arrayList = new ArrayList();
         parcel.readTypedList(arrayList, CredentialEntry.CREATOR);
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        HashSet hashSet = new HashSet(createStringArrayList);
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        HashSet hashSet = new HashSet(arrayListCreateStringArrayList);
         this.mSupportedElementKeys = hashSet;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) hashSet);
         this.mCredentialEntries = arrayList;

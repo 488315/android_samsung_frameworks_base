@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ControlsListingController $listingController;
@@ -64,20 +63,20 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
             final ?? r1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.keyguard.data.quickaffordance.HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1$callback$1
                 @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
                 public final void onServicesUpdated(List list) {
-                    List list2;
-                    Object obj2;
-                    HomeControlsKeyguardQuickAffordanceConfig homeControlsKeyguardQuickAffordanceConfig2 = HomeControlsKeyguardQuickAffordanceConfig.this;
+                    List allStructures;
+                    Object visible;
+                    HomeControlsKeyguardQuickAffordanceConfig homeControlsKeyguardQuickAffordanceConfig2 = homeControlsKeyguardQuickAffordanceConfig;
                     if (((ControlsController) homeControlsKeyguardQuickAffordanceConfig2.component.controlsController.orElse(null)) != null) {
                         Favorites.INSTANCE.getClass();
-                        list2 = Favorites.getAllStructures();
+                        allStructures = Favorites.getAllStructures();
                     } else {
-                        list2 = null;
+                        allStructures = null;
                     }
                     ChannelExt channelExt = ChannelExt.INSTANCE;
                     ControlsComponent controlsComponent = homeControlsKeyguardQuickAffordanceConfig2.component;
                     boolean z = controlsComponent.featureEnabled;
                     boolean z2 = false;
-                    boolean z3 = list2 != null && (list2.isEmpty() ^ true);
+                    boolean z3 = allStructures != null && (allStructures.isEmpty() ^ true);
                     if (!list.isEmpty()) {
                         Iterator it = list.iterator();
                         while (true) {
@@ -89,16 +88,16 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
                             }
                         }
                     }
-                    boolean isEmpty = list.isEmpty();
+                    boolean zIsEmpty = list.isEmpty();
                     controlsComponent.controlsTileResourceConfiguration.getClass();
                     ControlsComponent.Visibility visibility = !controlsComponent.featureEnabled ? ControlsComponent.Visibility.UNAVAILABLE : controlsComponent.lockPatternUtils.getStrongAuthForUser(((UserTrackerImpl) controlsComponent.userTracker).getUserHandle().getIdentifier()) == 1 ? ControlsComponent.Visibility.AVAILABLE_AFTER_UNLOCK : (((Boolean) controlsComponent.canShowWhileLockedSetting.$$delegate_0.getValue()).booleanValue() || controlsComponent.keyguardStateController.isUnlocked()) ? ControlsComponent.Visibility.AVAILABLE : ControlsComponent.Visibility.AVAILABLE_AFTER_UNLOCK;
-                    if (z && ((z3 || z2) && !isEmpty && visibility == ControlsComponent.Visibility.AVAILABLE)) {
+                    if (z && ((z3 || z2) && !zIsEmpty && visibility == ControlsComponent.Visibility.AVAILABLE)) {
                         controlsComponent.controlsTileResourceConfiguration.getClass();
-                        obj2 = new KeyguardQuickAffordanceConfig.LockScreenState.Visible(new Icon.Resource(R.drawable.controls_icon, new ContentDescription.Resource(R.string.quick_controls_title)), null, 2, null);
+                        visible = new KeyguardQuickAffordanceConfig.LockScreenState.Visible(new Icon.Resource(R.drawable.controls_icon, new ContentDescription.Resource(R.string.quick_controls_title)), null, 2, null);
                     } else {
-                        obj2 = KeyguardQuickAffordanceConfig.LockScreenState.Hidden.INSTANCE;
+                        visible = KeyguardQuickAffordanceConfig.LockScreenState.Hidden.INSTANCE;
                     }
-                    ChannelExt.trySendWithFailureLogging$default(channelExt, producerScope, obj2, "HomeControlsKeyguardQuickAffordanceConfig");
+                    ChannelExt.trySendWithFailureLogging$default(channelExt, producerScope, visible, "HomeControlsKeyguardQuickAffordanceConfig");
                 }
             };
             ControlsListingControllerImpl controlsListingControllerImpl = (ControlsListingControllerImpl) this.$listingController;
@@ -108,7 +107,7 @@ final class HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1 extends Su
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.HomeControlsKeyguardQuickAffordanceConfig$stateInternal$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((ControlsListingControllerImpl) ControlsListingController.this).removeCallback(r1);
+                    ((ControlsListingControllerImpl) controlsListingController).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

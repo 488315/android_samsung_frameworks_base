@@ -39,27 +39,27 @@ public final class ChangeIdStateCache extends PropertyInvalidatedCache<ChangeIdS
     }
 
     IPlatformCompat getPlatformCompatService() {
-        IPlatformCompat iPlatformCompat;
-        IPlatformCompat iPlatformCompat2 = this.mPlatformCompat;
-        if (iPlatformCompat2 != null) {
-            return iPlatformCompat2;
+        IPlatformCompat iPlatformCompatAsInterface;
+        IPlatformCompat iPlatformCompat = this.mPlatformCompat;
+        if (iPlatformCompat != null) {
+            return iPlatformCompat;
         }
         synchronized (this) {
-            iPlatformCompat = this.mPlatformCompat;
-            if (iPlatformCompat == null) {
-                iPlatformCompat = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
-                if (iPlatformCompat == null) {
+            iPlatformCompatAsInterface = this.mPlatformCompat;
+            if (iPlatformCompatAsInterface == null) {
+                iPlatformCompatAsInterface = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+                if (iPlatformCompatAsInterface == null) {
                     throw new RuntimeException("Could not get PlatformCompatService instance!");
                 }
-                this.mPlatformCompat = iPlatformCompat;
+                this.mPlatformCompat = iPlatformCompatAsInterface;
             }
         }
-        return iPlatformCompat;
+        return iPlatformCompatAsInterface;
     }
 
     @Override // android.app.PropertyInvalidatedCache
     public Boolean recompute(ChangeIdStateQuery changeIdStateQuery) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 if (changeIdStateQuery.type == 0) {
@@ -71,11 +71,11 @@ public final class ChangeIdStateCache extends PropertyInvalidatedCache<ChangeIdS
                 throw new IllegalArgumentException("Invalid query type: " + changeIdStateQuery.type);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 throw new IllegalStateException("Could not recompute value!");
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 }

@@ -71,8 +71,8 @@ public class SpeechRecognizer {
     }
 
     public static boolean isRecognitionAvailable(Context context) {
-        List<ResolveInfo> queryIntentServices = context.getPackageManager().queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE), 0);
-        return (queryIntentServices == null || queryIntentServices.size() == 0) ? false : true;
+        List<ResolveInfo> listQueryIntentServices = context.getPackageManager().queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE), 0);
+        return (listQueryIntentServices == null || listQueryIntentServices.size() == 0) ? false : true;
     }
 
     public static boolean isOnDeviceRecognitionAvailable(Context context) {

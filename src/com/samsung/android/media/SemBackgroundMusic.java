@@ -18,29 +18,29 @@ public abstract class SemBackgroundMusic {
     }
 
     public Parcel writeToParcel(String str) {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         if (str != null) {
-            obtain.writeInterfaceToken(str);
+            parcelObtain.writeInterfaceToken(str);
         }
-        obtain.writeInt(this.mBGMInfos.size());
+        parcelObtain.writeInt(this.mBGMInfos.size());
         Log.i(TAG, "BackgroundMusic size : " + this.mBGMInfos.size());
         for (int i = 0; i < this.mBGMInfos.size(); i++) {
             if (str != null) {
                 try {
-                    obtain.writeFileDescriptor(this.mBGMInfos.get(i).fd);
+                    parcelObtain.writeFileDescriptor(this.mBGMInfos.get(i).fd);
                 } catch (IOException unused) {
                     Log.i(TAG, "setBackgroundMusic ParcelFileDescriptor.dup failed");
                 }
             } else {
-                obtain.writeInt(ParcelFileDescriptor.dup(this.mBGMInfos.get(i).fd).detachFd());
+                parcelObtain.writeInt(ParcelFileDescriptor.dup(this.mBGMInfos.get(i).fd).detachFd());
             }
-            obtain.writeLong(this.mBGMInfos.get(i).offset);
-            obtain.writeLong(this.mBGMInfos.get(i).length);
-            obtain.writeInt(this.mBGMInfos.get(i).startTimeMs);
-            obtain.writeInt(this.mBGMInfos.get(i).endTimeMs);
-            obtain.writeInt(this.mBGMInfos.get(i).durationMs);
+            parcelObtain.writeLong(this.mBGMInfos.get(i).offset);
+            parcelObtain.writeLong(this.mBGMInfos.get(i).length);
+            parcelObtain.writeInt(this.mBGMInfos.get(i).startTimeMs);
+            parcelObtain.writeInt(this.mBGMInfos.get(i).endTimeMs);
+            parcelObtain.writeInt(this.mBGMInfos.get(i).durationMs);
         }
-        return obtain;
+        return parcelObtain;
     }
 
     protected BGMInfo addInfo(BGMInfo bGMInfo, FileDescriptor fileDescriptor, int i, int i2) {

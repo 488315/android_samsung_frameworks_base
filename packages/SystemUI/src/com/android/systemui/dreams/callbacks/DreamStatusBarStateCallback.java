@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamStatusBarStateCallback implements Monitor.Callback {
     public final SysuiStatusBarStateController mStateController;
@@ -31,8 +30,8 @@ public class DreamStatusBarStateCallback implements Monitor.Callback {
         statusBarStateControllerImpl.mIsDreaming = z;
         synchronized (statusBarStateControllerImpl.mListeners) {
             try {
-                String concat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsDreaming");
-                DejankUtils.startDetectingBlockingIpcs(concat);
+                String strConcat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsDreaming");
+                DejankUtils.startDetectingBlockingIpcs(strConcat);
                 ArrayList arrayList = new ArrayList(statusBarStateControllerImpl.mListeners);
                 int size = arrayList.size();
                 int i = 0;
@@ -41,7 +40,7 @@ public class DreamStatusBarStateCallback implements Monitor.Callback {
                     i++;
                     ((SysuiStatusBarStateController.RankedListener) obj).mListener.onDreamingChanged(z);
                 }
-                DejankUtils.stopDetectingBlockingIpcs(concat);
+                DejankUtils.stopDetectingBlockingIpcs(strConcat);
             } catch (Throwable th) {
                 throw th;
             }

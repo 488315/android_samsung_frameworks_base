@@ -41,7 +41,6 @@ import com.samsung.android.cover.CoverState;
 import com.samsung.android.view.SemWindowManager;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LockscreenNotificationManager implements ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener, WakefulnessLifecycle.Observer, SemWindowManager.FoldStateListener {
     public static int mCurrentNotificationType;
@@ -67,7 +66,6 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
     public final ArrayList mCallbacks = new ArrayList();
     public final LockscreenNotificationMgrHandler mHandler = new LockscreenNotificationMgrHandler(this, Looper.getMainLooper(), 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.LockscreenNotificationManager$3, reason: invalid class name */
     class AnonymousClass3 implements UserTracker.Callback {
         public AnonymousClass3() {
@@ -78,23 +76,19 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
             new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.statusbar.LockscreenNotificationManager$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SettingsHelper.OnChangedCallback onChangedCallback;
                     LockscreenNotificationManager lockscreenNotificationManager = LockscreenNotificationManager.this;
-                    onChangedCallback = lockscreenNotificationManager.mSettingsListenerForNotificationStyle;
-                    onChangedCallback.onChanged(lockscreenNotificationManager.mNotificationSettingUri);
+                    lockscreenNotificationManager.mSettingsListenerForNotificationStyle.onChanged(lockscreenNotificationManager.mNotificationSettingUri);
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onNotificationInfoUpdated(ArrayList arrayList);
 
         void onNotificationTypeChanged(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LockscreenNotificationMgrHandler extends Handler {
         public /* synthetic */ LockscreenNotificationMgrHandler(LockscreenNotificationManager lockscreenNotificationManager, Looper looper, int i) {
             this(looper);
@@ -129,9 +123,9 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
             LogLevel logLevel = LogLevel.INFO;
             LockscreenNotificationManagerLogger$$ExternalSyntheticLambda0 lockscreenNotificationManagerLogger$$ExternalSyntheticLambda0 = new LockscreenNotificationManagerLogger$$ExternalSyntheticLambda0();
             LogBuffer logBuffer = lockscreenNotificationManagerLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("LockNotifManager", logLevel, lockscreenNotificationManagerLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = stringBuffer.toString();
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("LockNotifManager", logLevel, lockscreenNotificationManagerLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = stringBuffer.toString();
+            logBuffer.commit(logMessageObtain);
             while (i2 < lockscreenNotificationManager.mCallbacks.size()) {
                 ((Callback) lockscreenNotificationManager.mCallbacks.get(i2)).onNotificationInfoUpdated(arrayList);
                 i2++;
@@ -143,7 +137,6 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationIconData {
         public int mColor;
         public final Context mContext;
@@ -164,9 +157,9 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
                 int i = statusBarNotification.getNotification().iconLevel;
                 boolean z = statusBarIconView.mShowsConversation;
                 ImageView imageView = new ImageView(this.mContext);
-                Drawable mutate = icon != null ? icon.mutate() : null;
-                if (mutate instanceof AnimationDrawable) {
-                    AnimationDrawable animationDrawable = (AnimationDrawable) mutate;
+                Drawable drawableMutate = icon != null ? icon.mutate() : null;
+                if (drawableMutate instanceof AnimationDrawable) {
+                    AnimationDrawable animationDrawable = (AnimationDrawable) drawableMutate;
                     int numberOfFrames = animationDrawable.getNumberOfFrames();
                     Drawable[] drawableArr = new Drawable[numberOfFrames];
                     for (int i2 = 0; i2 < numberOfFrames; i2++) {
@@ -177,20 +170,20 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
                         }
                         drawableArr[i2] = frame;
                     }
-                    mutate = new LayerDrawable(drawableArr);
-                    imageView.setImageDrawable(mutate);
+                    drawableMutate = new LayerDrawable(drawableArr);
+                    imageView.setImageDrawable(drawableMutate);
                 } else {
-                    if (mutate != null) {
-                        mutate.clearColorFilter();
-                        mutate.setTintList(null);
+                    if (drawableMutate != null) {
+                        drawableMutate.clearColorFilter();
+                        drawableMutate.setTintList(null);
                     }
-                    imageView.setImageDrawable(mutate);
+                    imageView.setImageDrawable(drawableMutate);
                     if (i != 0) {
                         imageView.setImageLevel(i);
                     }
                 }
                 imageView.setTag(this.mTagIsAppColor, Integer.valueOf(this.mColor));
-                imageView.setTag(this.mTagFreshDrawable, mutate);
+                imageView.setTag(this.mTagFreshDrawable, drawableMutate);
                 imageView.setTag(this.mTagShowConversation, Boolean.valueOf(z));
                 imageView.setScaleType(scaleType);
                 if (this.mIconArray.contains(imageView)) {
@@ -269,11 +262,6 @@ public class LockscreenNotificationManager implements ConfigurationController.Co
         if (NotiRune.NOTI_SUBSCREEN_NOTIFICATION_COMMON || NotiRune.NOTI_SUBSCREEN_NOTIFICATION) {
             SemWindowManager.getInstance().registerFoldStateListener(this, (Handler) null);
         }
-    }
-
-    public static boolean isNotificationIconsOnlyShowing() {
-        int i = mCurrentNotificationType;
-        return i == 1 || i == 3 || i == 2 || i == 4;
     }
 
     public final void addCallback(Callback callback) {

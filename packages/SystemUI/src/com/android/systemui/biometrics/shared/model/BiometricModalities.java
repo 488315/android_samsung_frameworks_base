@@ -5,26 +5,15 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BiometricModalities {
     public final FaceSensorPropertiesInternal faceProperties;
     public final FingerprintSensorPropertiesInternal fingerprintProperties;
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public BiometricModalities() {
-        /*
-            r2 = this;
-            r0 = 0
-            r1 = 3
-            r2.<init>(r0, r0, r1, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.shared.model.BiometricModalities.<init>():void");
+        FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal = null;
+        this(fingerprintSensorPropertiesInternal, fingerprintSensorPropertiesInternal, 3, fingerprintSensorPropertiesInternal);
     }
 
     public final boolean equals(Object obj) {
@@ -70,9 +59,9 @@ public final class BiometricModalities {
 
     public final int hashCode() {
         FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal = this.fingerprintProperties;
-        int hashCode = (fingerprintSensorPropertiesInternal == null ? 0 : fingerprintSensorPropertiesInternal.hashCode()) * 31;
+        int iHashCode = (fingerprintSensorPropertiesInternal == null ? 0 : fingerprintSensorPropertiesInternal.hashCode()) * 31;
         FaceSensorPropertiesInternal faceSensorPropertiesInternal = this.faceProperties;
-        return hashCode + (faceSensorPropertiesInternal != null ? faceSensorPropertiesInternal.hashCode() : 0);
+        return iHashCode + (faceSensorPropertiesInternal != null ? faceSensorPropertiesInternal.hashCode() : 0);
     }
 
     public final String toString() {

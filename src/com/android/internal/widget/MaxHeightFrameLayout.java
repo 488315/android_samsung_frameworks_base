@@ -26,9 +26,9 @@ public class MaxHeightFrameLayout extends FrameLayout {
     public MaxHeightFrameLayout(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mMaxHeight = Integer.MAX_VALUE;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MaxHeightFrameLayout, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.MaxHeightFrameLayout, attributeSet, obtainStyledAttributes, i, i2);
-        setMaxHeight(obtainStyledAttributes.getDimensionPixelSize(0, Integer.MAX_VALUE));
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MaxHeightFrameLayout, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.MaxHeightFrameLayout, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        setMaxHeight(typedArrayObtainStyledAttributes.getDimensionPixelSize(0, Integer.MAX_VALUE));
     }
 
     public int getMaxHeight() {

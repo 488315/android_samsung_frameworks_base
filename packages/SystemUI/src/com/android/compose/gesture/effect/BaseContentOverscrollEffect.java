@@ -20,7 +20,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BaseContentOverscrollEffect implements OverscrollEffect {
     public final Animatable animatable = AnimatableKt.Animatable(0.0f, 0.01f);
@@ -36,47 +35,47 @@ public class BaseContentOverscrollEffect implements OverscrollEffect {
     @Override // androidx.compose.foundation.OverscrollEffect
     /* renamed from: applyToFling-BMRW4eQ */
     public final Object mo19applyToFlingBMRW4eQ(long j, Function2 function2, ContinuationImpl continuationImpl) {
-        SpaceVectorConverter converterOrNull = converterOrNull(Velocity.m878getXimpl(j), Velocity.m879getYimpl(j));
-        if (converterOrNull == null) {
+        SpaceVectorConverter spaceVectorConverterConverterOrNull = converterOrNull(Velocity.m880getXimpl(j), Velocity.m881getYimpl(j));
+        if (spaceVectorConverterConverterOrNull == null) {
             return Unit.INSTANCE;
         }
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new BaseContentOverscrollEffect$applyToFling$3(function2, j, this, converterOrNull, null), continuationImpl);
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new BaseContentOverscrollEffect$applyToFling$3(function2, j, this, spaceVectorConverterConverterOrNull, null), continuationImpl);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (coroutineScope != coroutineSingletons) {
-            coroutineScope = Unit.INSTANCE;
+        if (objCoroutineScope != coroutineSingletons) {
+            objCoroutineScope = Unit.INSTANCE;
         }
-        return coroutineScope == coroutineSingletons ? coroutineScope : Unit.INSTANCE;
+        return objCoroutineScope == coroutineSingletons ? objCoroutineScope : Unit.INSTANCE;
     }
 
     @Override // androidx.compose.foundation.OverscrollEffect
     /* renamed from: applyToScroll-Rhakbz0 */
     public final long mo20applyToScrollRhakbz0(int i, long j, Function1 function1) {
-        SpaceVectorConverter converterOrNull = converterOrNull(Float.intBitsToFloat((int) (j >> 32)), Float.intBitsToFloat((int) (4294967295L & j)));
-        if (converterOrNull == null) {
-            return ((Offset) function1.mo779invoke(Offset.m393boximpl(j))).packedValue;
+        SpaceVectorConverter spaceVectorConverterConverterOrNull = converterOrNull(Float.intBitsToFloat((int) (j >> 32)), Float.intBitsToFloat((int) (4294967295L & j)));
+        if (spaceVectorConverterConverterOrNull == null) {
+            return ((Offset) function1.mo781invoke(Offset.m395boximpl(j))).packedValue;
         }
-        float mo915toFloatk4lQ0M$1 = converterOrNull.mo915toFloatk4lQ0M$1(j);
-        float floatValue = ((Number) this.animatable.internalState.getValue()).floatValue();
-        boolean z = Math.signum(mo915toFloatk4lQ0M$1) == Math.signum(floatValue);
-        double abs = Math.abs(floatValue);
+        float fMo917toFloatk4lQ0M$1 = spaceVectorConverterConverterOrNull.mo917toFloatk4lQ0M$1(j);
+        float fFloatValue = ((Number) this.animatable.internalState.getValue()).floatValue();
+        boolean z = Math.signum(fMo917toFloatk4lQ0M$1) == Math.signum(fFloatValue);
+        double dAbs = Math.abs(fFloatValue);
         CoroutineScope coroutineScope = this.animationScope;
-        if (abs <= 0.5d || z) {
-            mo915toFloatk4lQ0M$1 = 0.0f;
+        if (dAbs <= 0.5d || z) {
+            fMo917toFloatk4lQ0M$1 = 0.0f;
         } else {
-            float f = floatValue + mo915toFloatk4lQ0M$1;
-            if (Math.signum(floatValue) == Math.signum(f)) {
+            float f = fFloatValue + fMo917toFloatk4lQ0M$1;
+            if (Math.signum(fFloatValue) == Math.signum(f)) {
                 BuildersKt.launch$default(coroutineScope, null, null, new BaseContentOverscrollEffect$applyToScroll$consumedByPreScroll$2(this, f, null), 3);
             } else {
                 BuildersKt.launch$default(coroutineScope, null, null, new BaseContentOverscrollEffect$applyToScroll$consumedByPreScroll$1(this, null), 3);
-                mo915toFloatk4lQ0M$1 = -floatValue;
+                fMo917toFloatk4lQ0M$1 = -fFloatValue;
             }
         }
-        long m400minusMKHz9U = Offset.m400minusMKHz9U(j, converterOrNull.mo917toOffsettuRUvjQ$1(mo915toFloatk4lQ0M$1));
-        long m400minusMKHz9U2 = Offset.m400minusMKHz9U(m400minusMKHz9U, ((Offset) function1.mo779invoke(Offset.m393boximpl(m400minusMKHz9U))).packedValue);
-        if (Math.abs(converterOrNull.mo915toFloatk4lQ0M$1(m400minusMKHz9U2)) > 0.5d) {
+        long jM402minusMKHz9U = Offset.m402minusMKHz9U(j, spaceVectorConverterConverterOrNull.mo919toOffsettuRUvjQ$1(fMo917toFloatk4lQ0M$1));
+        long jM402minusMKHz9U2 = Offset.m402minusMKHz9U(jM402minusMKHz9U, ((Offset) function1.mo781invoke(Offset.m395boximpl(jM402minusMKHz9U))).packedValue);
+        if (Math.abs(spaceVectorConverterConverterOrNull.mo917toFloatk4lQ0M$1(jM402minusMKHz9U2)) > 0.5d) {
             NestedScrollSource.Companion.getClass();
             if (i == NestedScrollSource.UserInput) {
-                BuildersKt.launch$default(coroutineScope, null, null, new BaseContentOverscrollEffect$applyToScroll$1(this, floatValue, converterOrNull, m400minusMKHz9U2, null), 3);
+                BuildersKt.launch$default(coroutineScope, null, null, new BaseContentOverscrollEffect$applyToScroll$1(this, fFloatValue, spaceVectorConverterConverterOrNull, jM402minusMKHz9U2, null), 3);
             }
         }
         return j;

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EmojiCompat {
     public static final Object INSTANCE_LOCK = new Object();
@@ -29,7 +28,6 @@ public class EmojiCompat {
     public final int mMetadataLoadStrategy;
     public final MetadataRepoLoader mMetadataLoader;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CompatInternal {
         public final EmojiCompat mEmojiCompat;
 
@@ -38,12 +36,10 @@ public class EmojiCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CompatInternal19 extends CompatInternal {
         public volatile MetadataRepo mMetadataRepo;
         public volatile EmojiProcessor mProcessor;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: androidx.emoji2.text.EmojiCompat$CompatInternal19$1, reason: invalid class name */
         public class AnonymousClass1 extends MetadataRepoLoaderCallback {
             public AnonymousClass1() {
@@ -81,7 +77,6 @@ public class EmojiCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Config {
         public final MetadataRepoLoader mMetadataLoader;
         public int mMetadataLoadStrategy = 0;
@@ -93,11 +88,9 @@ public class EmojiCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface GlyphChecker {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ListenerDispatcher implements Runnable {
         public final List mInitCallbacks;
         public final int mLoadState;
@@ -138,19 +131,16 @@ public class EmojiCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MetadataRepoLoader {
         void load(MetadataRepoLoaderCallback metadataRepoLoaderCallback);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class MetadataRepoLoaderCallback {
         public abstract void onFailed(Throwable th);
 
         public abstract void onLoaded(MetadataRepo metadataRepo);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SpanFactory {
     }
 
@@ -269,32 +259,52 @@ public class EmojiCompat {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:114:0x0180, code lost:
-    
-        if (r3 != false) goto L105;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:115:0x0182, code lost:
-    
-        ((androidx.emoji2.text.SpannableBuilder) r14).endBatchEdit();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:116:0x0188, code lost:
-    
-        return r14;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x015e A[Catch: all -> 0x007d, TryCatch #0 {all -> 0x007d, blocks: (B:120:0x005f, B:123:0x0064, B:125:0x0068, B:127:0x0077, B:30:0x008a, B:32:0x0096, B:34:0x0099, B:36:0x009d, B:38:0x00ad, B:40:0x00b0, B:44:0x00bd, B:47:0x00c5, B:52:0x00e4, B:77:0x00f2, B:81:0x00fe, B:82:0x0108, B:64:0x011c, B:67:0x0123, B:55:0x0128, B:57:0x0133, B:88:0x013a, B:90:0x013e, B:92:0x0144, B:94:0x0148, B:98:0x0152, B:101:0x015e, B:102:0x0163, B:104:0x0176, B:28:0x0080), top: B:119:0x005f }] */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0176 A[Catch: all -> 0x007d, TRY_LEAVE, TryCatch #0 {all -> 0x007d, blocks: (B:120:0x005f, B:123:0x0064, B:125:0x0068, B:127:0x0077, B:30:0x008a, B:32:0x0096, B:34:0x0099, B:36:0x009d, B:38:0x00ad, B:40:0x00b0, B:44:0x00bd, B:47:0x00c5, B:52:0x00e4, B:77:0x00f2, B:81:0x00fe, B:82:0x0108, B:64:0x011c, B:67:0x0123, B:55:0x0128, B:57:0x0133, B:88:0x013a, B:90:0x013e, B:92:0x0144, B:94:0x0148, B:98:0x0152, B:101:0x015e, B:102:0x0163, B:104:0x0176, B:28:0x0080), top: B:119:0x005f }] */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x0180  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x009d A[Catch: all -> 0x007d, TryCatch #0 {all -> 0x007d, blocks: (B:120:0x005f, B:123:0x0064, B:125:0x0068, B:127:0x0077, B:30:0x008a, B:32:0x0096, B:34:0x0099, B:36:0x009d, B:38:0x00ad, B:40:0x00b0, B:44:0x00bd, B:47:0x00c5, B:52:0x00e4, B:77:0x00f2, B:81:0x00fe, B:82:0x0108, B:64:0x011c, B:67:0x0123, B:55:0x0128, B:57:0x0133, B:88:0x013a, B:90:0x013e, B:92:0x0144, B:94:0x0148, B:98:0x0152, B:101:0x015e, B:102:0x0163, B:104:0x0176, B:28:0x0080), top: B:119:0x005f }] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0128 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00ea A[SYNTHETIC] */
+    /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
+        jadx.core.utils.exceptions.JadxRuntimeException: Not found exit edge by exit block: B:63:0x00e0
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.checkLoopExits(LoopRegionMaker.java:225)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeLoopRegion(LoopRegionMaker.java:195)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:62)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:89)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeEndlessLoop(LoopRegionMaker.java:281)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:64)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:89)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:101)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:101)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:48)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+        */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x009d A[Catch: all -> 0x007d, TryCatch #0 {all -> 0x007d, blocks: (B:34:0x005f, B:37:0x0064, B:39:0x0068, B:41:0x0077, B:46:0x008a, B:48:0x0096, B:50:0x0099, B:52:0x009d, B:54:0x00ad, B:55:0x00b0, B:57:0x00bd, B:60:0x00c5, B:65:0x00e4, B:72:0x00f2, B:75:0x00fe, B:76:0x0108, B:77:0x011c, B:79:0x0123, B:80:0x0128, B:82:0x0133, B:84:0x013a, B:86:0x013e, B:88:0x0144, B:90:0x0148, B:94:0x0152, B:97:0x015e, B:98:0x0163, B:100:0x0176, B:44:0x0080), top: B:119:0x005f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final java.lang.CharSequence process(int r11, int r12, int r13, java.lang.CharSequence r14) {
         /*
             Method dump skipped, instructions count: 430
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: androidx.emoji2.text.EmojiCompat.process(int, int, int, java.lang.CharSequence):java.lang.CharSequence");
     }
@@ -303,11 +313,11 @@ public class EmojiCompat {
         Preconditions.checkNotNull(initCallback, "initCallback cannot be null");
         this.mInitLock.writeLock().lock();
         try {
-            if (this.mLoadState != 1 && this.mLoadState != 2) {
+            if (this.mLoadState == 1 || this.mLoadState == 2) {
+                this.mMainHandler.post(new ListenerDispatcher(initCallback, this.mLoadState));
+            } else {
                 this.mInitCallbacks.add(initCallback);
-                this.mInitLock.writeLock().unlock();
             }
-            this.mMainHandler.post(new ListenerDispatcher(initCallback, this.mLoadState));
             this.mInitLock.writeLock().unlock();
         } catch (Throwable th) {
             this.mInitLock.writeLock().unlock();
@@ -326,14 +336,13 @@ public class EmojiCompat {
         compatInternal19.getClass();
         Bundle bundle = editorInfo.extras;
         MetadataList metadataList = compatInternal19.mMetadataRepo.mMetadataList;
-        int __offset = metadataList.__offset(4);
-        bundle.putInt("android.support.text.emoji.emojiCompat_metadataVersion", __offset != 0 ? metadataList.bb.getInt(__offset + metadataList.bb_pos) : 0);
+        int i__offset = metadataList.__offset(4);
+        bundle.putInt("android.support.text.emoji.emojiCompat_metadataVersion", i__offset != 0 ? metadataList.bb.getInt(i__offset + metadataList.bb_pos) : 0);
         Bundle bundle2 = editorInfo.extras;
         compatInternal19.mEmojiCompat.getClass();
         bundle2.putBoolean("android.support.text.emoji.emojiCompat_replaceAll", false);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class InitCallback {
         public void onFailed() {
         }

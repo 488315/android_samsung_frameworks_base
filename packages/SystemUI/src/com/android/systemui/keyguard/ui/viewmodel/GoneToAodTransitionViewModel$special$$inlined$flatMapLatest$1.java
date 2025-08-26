@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,7 +40,7 @@ public final class GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowM2616sharedFlow74qcysc$default;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -51,10 +50,10 @@ public final class GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1
                 KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = this.this$0.transitionAnimation;
                 Duration.Companion companion = Duration.Companion;
                 DurationUnit durationUnit = DurationUnit.MILLISECONDS;
-                flow = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(flowBuilder, DurationKt.toDuration(200, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GoneToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
+                flowM2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, DurationKt.toDuration(200, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GoneToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         return Float.valueOf(((Number) obj2).floatValue());
                     }
                 }, DurationKt.toDuration(1100, durationUnit), null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.GoneToAodTransitionViewModel$deviceEntryParentViewAlpha$1$2
@@ -69,10 +68,10 @@ public final class GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1
                     }
                 }, null, null, 200);
             } else {
-                flow = EmptyFlow.INSTANCE;
+                flowM2616sharedFlow74qcysc$default = EmptyFlow.INSTANCE;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowM2616sharedFlow74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

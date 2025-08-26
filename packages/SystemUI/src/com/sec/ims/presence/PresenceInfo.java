@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PresenceInfo implements Parcelable {
     public static final Parcelable.Creator<PresenceInfo> CREATOR = new Parcelable.Creator<PresenceInfo>() { // from class: com.sec.ims.presence.PresenceInfo.1
@@ -40,7 +39,6 @@ public class PresenceInfo implements Parcelable {
     private String uri;
     private boolean useExtendedTimer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         long expire_time;
         int phoneId;

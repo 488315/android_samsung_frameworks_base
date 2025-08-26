@@ -34,7 +34,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeService extends DreamService implements DozeMachine.Service, DozeServicePlugin.RequestDoze, PluginListener<Plugin> {
     public static final boolean DEBUG = Log.isLoggable("DozeService", 3);
@@ -54,7 +53,7 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
     public final DozeService$$ExternalSyntheticLambda1 mPluginConnectionRunnable = new Runnable() { // from class: com.android.systemui.doze.DozeService$$ExternalSyntheticLambda1
         @Override // java.lang.Runnable
         public final void run() {
-            DozeService dozeService = DozeService.this;
+            DozeService dozeService = this.f$0;
             boolean z = DozeService.DEBUG;
             Log.d("DozeService", "addPluginListener() PluginFaceWidget is connected");
             if (dozeService.mDozeMachine != null) {
@@ -270,10 +269,10 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
         if (plugin instanceof PluginAOD) {
             Log.d("DozeService", "onPluginDisconnected: PluginAOD plugin=" + plugin);
             DozeServiceHost dozeServiceHost = this.mDozeServiceHost;
-            boolean isDozing = dozeServiceHost.mStatusBarStateController.isDozing();
+            boolean zIsDozing = dozeServiceHost.mStatusBarStateController.isDozing();
             NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = (NotificationShadeWindowControllerImpl) dozeServiceHost.mNotificationShadeWindowController;
             NotificationShadeWindowState notificationShadeWindowState = notificationShadeWindowControllerImpl.mCurrentState;
-            notificationShadeWindowState.dozing = isDozing;
+            notificationShadeWindowState.dozing = zIsDozing;
             notificationShadeWindowControllerImpl.apply(notificationShadeWindowState);
             stopAlwaysOnDisplay();
             return;
@@ -306,24 +305,25 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0022  */
     @Override // com.android.systemui.doze.DozeMachine.Service
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void requestWakeUp(int i) {
         PowerManager powerManager = (PowerManager) getSystemService(PowerManager.class);
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         int i2 = 3;
-        if (i != 3) {
-            if (i != 4) {
-                if (i != 6) {
-                    if (i != 9) {
-                        i2 = i != 10 ? 4 : 17;
-                    }
-                }
-            }
-            i2 = 15;
-        } else {
+        if (i == 3) {
             i2 = 16;
+        } else if (i == 4) {
+            i2 = 15;
+        } else if (i != 6) {
+            if (i != 9) {
+                i2 = i != 10 ? 4 : 17;
+            }
         }
-        powerManager.wakeUp(uptimeMillis, i2, "com.android.systemui:NODOZE ".concat(DozeLog.reasonToString(i)));
+        powerManager.wakeUp(jUptimeMillis, i2, "com.android.systemui:NODOZE ".concat(DozeLog.reasonToString(i)));
     }
 
     @Override // com.android.systemui.doze.DozeMachine.Service
@@ -331,7 +331,7 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.doze.DozeService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DozeService.$r8$lambda$64Z7k0lpg02PdLzRjwhu7MKpSVg(DozeService.this, i);
+                DozeService.$r8$lambda$64Z7k0lpg02PdLzRjwhu7MKpSVg(this.f$0, i);
             }
         });
     }
@@ -341,7 +341,7 @@ public class DozeService extends DreamService implements DozeMachine.Service, Do
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.doze.DozeService$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                DozeService.$r8$lambda$9rERu2791NWLKgpRaGCQvv57wYg(DozeService.this, f);
+                DozeService.$r8$lambda$9rERu2791NWLKgpRaGCQvv57wYg(this.f$0, f);
             }
         });
     }

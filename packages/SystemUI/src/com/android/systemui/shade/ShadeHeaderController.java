@@ -3,41 +3,65 @@ package com.android.systemui.shade;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.AlarmManager;
+import android.app.AppOpsManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.PermissionChecker;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.os.Trace;
+import android.os.UserHandle;
+import android.permission.PermissionGroupUsage;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.DisplayCutout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.TextView;
 import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintSet;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
 import com.android.settingslib.Utils;
 import com.android.systemui.BasicRune;
+import com.android.systemui.DualToneHandler;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
+import com.android.systemui.ScRune;
+import com.android.systemui.appops.AppOpsControllerImpl;
 import com.android.systemui.battery.BatteryMeterView;
 import com.android.systemui.battery.BatteryMeterViewController;
 import com.android.systemui.broadcast.ActionReceiver$$ExternalSyntheticOutline0;
 import com.android.systemui.demomode.DemoModeController;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.dump.DumpManager;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.privacy.OngoingPrivacyChip;
 import com.android.systemui.privacy.PrivacyChipEvent;
 import com.android.systemui.privacy.PrivacyConfig;
 import com.android.systemui.privacy.PrivacyDialog;
 import com.android.systemui.privacy.PrivacyDialogController;
+import com.android.systemui.privacy.logging.PrivacyLogger;
+import com.android.systemui.privacy.logging.PrivacyLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.qs.HeaderPrivacyIconsController;
 import com.android.systemui.qs.animator.QsAnimatorState;
+import com.android.systemui.settings.UserTrackerImpl;
+import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.shade.ShadeHeaderController;
 import com.android.systemui.shade.carrier.ShadeCarrier;
 import com.android.systemui.shade.carrier.ShadeCarrierGroup;
@@ -45,41 +69,60 @@ import com.android.systemui.shade.carrier.ShadeCarrierGroupController;
 import com.android.systemui.shade.data.repository.ShadeDisplaysRepository;
 import com.android.systemui.shade.data.repository.ShadeDisplaysRepositoryImpl;
 import com.android.systemui.shade.domain.interactor.ShadeDialogContextInteractorImpl;
+import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import com.android.systemui.shade.shared.flag.ShadeWindowGoesAround;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
 import com.android.systemui.statusbar.data.repository.StatusBarContentInsetsProviderStore;
 import com.android.systemui.statusbar.layout.StatusBarContentInsetsProvider;
 import com.android.systemui.statusbar.layout.StatusBarContentInsetsProviderImpl;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
-import com.android.systemui.statusbar.phone.SidelingCutoutContainerInfo;
+import com.android.systemui.statusbar.phone.IndicatorGardenPresenter;
+import com.android.systemui.statusbar.phone.KeyguardStatusBarWallpaperHelper;
 import com.android.systemui.statusbar.phone.StatusBarLocation;
 import com.android.systemui.statusbar.phone.StatusIconContainer;
 import com.android.systemui.statusbar.phone.StatusIconContainerController;
 import com.android.systemui.statusbar.phone.StatusOverlayHoverListenerFactory;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
+import com.android.systemui.statusbar.phone.ui.SamsungPopOverIconManager;
 import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.statusbar.phone.ui.StatusBarIconControllerImpl;
 import com.android.systemui.statusbar.phone.ui.TintedIconManager;
 import com.android.systemui.statusbar.pipeline.battery.ui.viewmodel.BatteryViewModel;
+import com.android.systemui.statusbar.policy.BatteryControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.statusbar.policy.NetspeedViewController;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.VariableDateViewController$Factory;
-import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.ViewController;
 import dagger.Lazy;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.Executor;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
+import kotlin.collections.CollectionsKt__MutableCollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyIterator;
 import kotlin.collections.EmptyList;
+import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeHeaderController extends ViewController implements Dumpable {
     public final ActivityStarter activityStarter;
@@ -128,7 +171,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
     public static final int LARGE_SCREEN_HEADER_CONSTRAINT = R.id.large_screen_header_constraint;
     public static final Intent DEFAULT_CLOCK_INTENT = new Intent("android.intent.action.SHOW_ALARMS");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -156,7 +198,6 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CustomizerAnimationListener extends AnimatorListenerAdapter {
         public final boolean enteringCustomizing;
 
@@ -220,13 +261,13 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         this.qsExpandedFraction = -1.0f;
         this.insetListener = new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.shade.ShadeHeaderController$insetListener$1
             @Override // android.view.View.OnApplyWindowInsetsListener
-            public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+            public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) throws Resources.NotFoundException, NumberFormatException {
                 WindowInsets windowInsets2 = new WindowInsets(windowInsets);
-                if (windowInsets2.equals(ShadeHeaderController.this.lastInsets)) {
+                if (windowInsets2.equals(this.this$0.lastInsets)) {
                     return windowInsets;
                 }
-                ShadeHeaderController.this.updateConstraintsForInsets((MotionLayout) view, windowInsets);
-                ShadeHeaderController.this.lastInsets = windowInsets2;
+                this.this$0.updateConstraintsForInsets((MotionLayout) view, windowInsets);
+                this.this$0.lastInsets = windowInsets2;
                 return view.onApplyWindowInsets(windowInsets);
             }
         };
@@ -234,26 +275,26 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         this.configurationControllerListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.shade.ShadeHeaderController$configurationControllerListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onConfigChanged(Configuration configuration) {
-                ((SamsungShadeHeaderControllerExt) ShadeHeaderController.this.samsungExt.get()).updateHeaderPadding();
+                ((SamsungShadeHeaderControllerExt) this.this$0.samsungExt.get()).updateHeaderPadding();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDensityOrFontScaleChanged() {
+            public final void onDensityOrFontScaleChanged() throws XmlPullParserException, Resources.NotFoundException, IOException, NumberFormatException {
                 ShadeHeaderController.Companion companion = ShadeHeaderController.Companion;
-                ShadeHeaderController shadeHeaderController = ShadeHeaderController.this;
+                ShadeHeaderController shadeHeaderController = this.this$0;
                 float dimensionPixelSize = shadeHeaderController.getResources().getDimensionPixelSize(R.dimen.status_bar_clock_size);
                 Lazy lazy3 = shadeHeaderController.samsungExt;
                 SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt = (SamsungShadeHeaderControllerExt) lazy3.get();
                 float f = dimensionPixelSize * samsungShadeHeaderControllerExt.indicatorScaleGardener.getLatestScaleModel(samsungShadeHeaderControllerExt.context).ratio;
                 ShadeCarrierGroup shadeCarrierGroup = shadeHeaderController.mShadeCarrierGroup;
                 TextView textView = (TextView) shadeCarrierGroup.findViewById(R.id.no_carrier_text);
-                TypedArray obtainStyledAttributes = textView.getContext().obtainStyledAttributes(R.style.TextAppearance_QS_Status_SamsungCarriers, new int[]{android.R.attr.textSize});
-                textView.setTextSize(0, obtainStyledAttributes.getDimensionPixelSize(0, (int) textView.getTextSize()));
-                obtainStyledAttributes.recycle();
-                ((ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier1)).mCarrierText.setTextAppearance(R.style.TextAppearance_QS_Status_SamsungCarriers);
+                TypedArray typedArrayObtainStyledAttributes = textView.getContext().obtainStyledAttributes(R.style.TextAppearance_QS_Status_SamsungCarriers, new int[]{android.R.attr.textSize});
+                textView.setTextSize(0, typedArrayObtainStyledAttributes.getDimensionPixelSize(0, (int) textView.getTextSize()));
+                typedArrayObtainStyledAttributes.recycle();
+                shadeCarrierGroup.getCarrier1View().mCarrierText.setTextAppearance(R.style.TextAppearance_QS_Status_SamsungCarriers);
                 ((ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier2)).mCarrierText.setTextAppearance(R.style.TextAppearance_QS_Status_SamsungCarriers);
                 ((ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier3)).mCarrierText.setTextAppearance(R.style.TextAppearance_QS_Status_SamsungCarriers);
-                ((ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier1)).mCarrierText.setTextSize(0, f);
+                shadeCarrierGroup.getCarrier1View().mCarrierText.setTextSize(0, f);
                 int i = ShadeHeaderController.QQS_HEADER_CONSTRAINT;
                 MotionLayout motionLayout2 = shadeHeaderController.header;
                 motionLayout2.getConstraintSet(i).load(shadeHeaderController.context, shadeHeaderController.getResources().getXml(R.xml.qqs_header));
@@ -277,7 +318,7 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDisplayDeviceTypeChanged() {
+            public final void onDisplayDeviceTypeChanged() throws XmlPullParserException, Resources.NotFoundException, IOException, NumberFormatException {
                 if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
                     onDensityOrFontScaleChanged();
                 }
@@ -286,7 +327,7 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         new NextAlarmController.NextAlarmChangeCallback() { // from class: com.android.systemui.shade.ShadeHeaderController$nextAlarmCallback$1
             @Override // com.android.systemui.statusbar.policy.NextAlarmController.NextAlarmChangeCallback
             public final void onNextAlarmChanged(AlarmManager.AlarmClockInfo alarmClockInfo) {
-                ShadeHeaderController.this.nextAlarmIntent = alarmClockInfo != null ? alarmClockInfo.getShowIntent() : null;
+                this.this$0.nextAlarmIntent = alarmClockInfo != null ? alarmClockInfo.getShowIntent() : null;
             }
         };
     }
@@ -316,29 +357,46 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
 
     @Override // com.android.systemui.util.ViewController
     public final void onInit() {
+        int i;
         NetspeedViewController netspeedViewController;
         MotionLayout motionLayout = this.header;
         int colorAttrDefaultColor = Utils.getColorAttrDefaultColor(motionLayout.getContext(), android.R.attr.textColorPrimary, 0);
         int colorAttrDefaultColor2 = Utils.getColorAttrDefaultColor(motionLayout.getContext(), android.R.attr.textColorPrimaryInverse, 0);
-        TintedIconManager create = this.tintedIconManagerFactory.create(this.iconContainer, StatusBarLocation.QS);
-        this.iconManager = create;
-        create.setTint(this.context.getColor(R.color.status_bar_clock_color), Utils.getColorAttrDefaultColor(motionLayout.getContext(), android.R.attr.textColorPrimaryInverse, 0));
+        boolean z = BasicRune.STATUS_POP_OVER_PANEL_BAR;
+        Lazy lazy = this.samsungExt;
+        if (z) {
+            SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt = (SamsungShadeHeaderControllerExt) lazy.get();
+            StatusBarLocation statusBarLocation = StatusBarLocation.QS;
+            SamsungPopOverIconManager.Factory factory = samsungShadeHeaderControllerExt.popOverIconManagerFactory;
+            factory.getClass();
+            this.iconManager = new SamsungPopOverIconManager(this.iconContainer, statusBarLocation, factory.mWifiUiAdapter, factory.mMobileUiAdapter, factory.mMobileUiAdapterKairos, factory.mMobileContextProvider, factory.mKairosNetwork, factory.mAppScope, factory.mBTTetherUiAdapter);
+        } else {
+            this.iconManager = this.tintedIconManagerFactory.create(this.iconContainer, StatusBarLocation.QS);
+        }
+        TintedIconManager tintedIconManager = this.iconManager;
+        if (tintedIconManager == null) {
+            tintedIconManager = null;
+        }
+        tintedIconManager.setTint(this.context.getColor(R.color.status_bar_clock_color), Utils.getColorAttrDefaultColor(motionLayout.getContext(), android.R.attr.textColorPrimaryInverse, 0));
         if (BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION) {
-            TintedIconManager tintedIconManager = this.iconManager;
-            if (tintedIconManager == null) {
-                tintedIconManager = null;
+            TintedIconManager tintedIconManager2 = this.iconManager;
+            if (tintedIconManager2 == null) {
+                tintedIconManager2 = null;
             }
-            tintedIconManager.setBlockList(ArraysKt___ArraysKt.toList(getResources().getStringArray(R.array.config_panel_statusbar_icon_blocklist)));
+            tintedIconManager2.setBlockList(ArraysKt___ArraysKt.toList(getResources().getStringArray(R.array.config_panel_statusbar_icon_blocklist)));
         }
         BatteryMeterViewController batteryMeterViewController = this.batteryMeterViewController;
         batteryMeterViewController.init();
         batteryMeterViewController.mIgnoreTunerUpdates = true;
         if (batteryMeterViewController.mIsSubscribedForTunerUpdates) {
             batteryMeterViewController.mTunerService.removeTunable(batteryMeterViewController.mTunable);
+            i = 0;
             batteryMeterViewController.mIsSubscribedForTunerUpdates = false;
+        } else {
+            i = 0;
         }
         BatteryMeterView batteryMeterView = this.batteryIcon;
-        batteryMeterView.setVisibility(0);
+        batteryMeterView.setVisibility(i);
         batteryMeterView.updateColors(colorAttrDefaultColor, colorAttrDefaultColor2, colorAttrDefaultColor);
         this.carrierIconSlots = EmptyList.INSTANCE;
         ShadeCarrierGroupController.Builder builder = this.shadeCarrierGroupControllerBuilder;
@@ -349,9 +407,9 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$onParentVisible$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                if (((DeviceProvisionedControllerImpl) HeaderPrivacyIconsController.this.deviceProvisionedController).deviceProvisioned.get()) {
-                    HeaderPrivacyIconsController.this.uiEventLogger.log(PrivacyChipEvent.ONGOING_INDICATORS_CHIP_CLICK);
-                    HeaderPrivacyIconsController headerPrivacyIconsController2 = HeaderPrivacyIconsController.this;
+                if (((DeviceProvisionedControllerImpl) headerPrivacyIconsController.deviceProvisionedController).deviceProvisioned.get()) {
+                    headerPrivacyIconsController.uiEventLogger.log(PrivacyChipEvent.ONGOING_INDICATORS_CHIP_CLICK);
+                    HeaderPrivacyIconsController headerPrivacyIconsController2 = headerPrivacyIconsController;
                     final PrivacyDialogController privacyDialogController = headerPrivacyIconsController2.privacyDialogController;
                     final Context context = ((ShadeDialogContextInteractorImpl) headerPrivacyIconsController2.shadeDialogContextInteractor).getContext();
                     PrivacyDialog privacyDialog = privacyDialogController.dialog;
@@ -360,26 +418,335 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                     }
                     privacyDialogController.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyDialogController$showDialog$1
                         /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Removed duplicated region for block: B:116:0x02af  */
-                        /* JADX WARN: Removed duplicated region for block: B:118:0x00da A[SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:26:0x00c6  */
-                        /* JADX WARN: Removed duplicated region for block: B:35:0x02b8  */
-                        /* JADX WARN: Removed duplicated region for block: B:38:0x02bb A[SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:40:0x00f1  */
-                        /* JADX WARN: Removed duplicated region for block: B:60:0x0208  */
-                        /* JADX WARN: Removed duplicated region for block: B:63:0x021d  */
+                        /* JADX WARN: Removed duplicated region for block: B:101:0x0208  */
+                        /* JADX WARN: Removed duplicated region for block: B:103:0x021d  */
+                        /* JADX WARN: Removed duplicated region for block: B:23:0x0098  */
+                        /* JADX WARN: Removed duplicated region for block: B:37:0x00b8  */
+                        /* JADX WARN: Removed duplicated region for block: B:79:0x01a5  */
+                        /* JADX WARN: Removed duplicated region for block: B:98:0x01fc  */
                         /* JADX WARN: Type inference failed for: r12v4, types: [java.lang.CharSequence, java.lang.Object] */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
                         public final void run() {
-                            /*
-                                Method dump skipped, instructions count: 723
-                                To view this dump change 'Code comments level' option to 'DEBUG'
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.privacy.PrivacyDialogController$showDialog$1.run():void");
+                            PrivacyType privacyType;
+                            PrivacyType privacyType2;
+                            Object next;
+                            Iterator it;
+                            List list;
+                            Context context2;
+                            Object privacyElement;
+                            String packageName;
+                            PermissionGroupUsage permissionGroupUsage;
+                            boolean z2;
+                            boolean z3;
+                            Intent intent;
+                            ActivityInfo activityInfo;
+                            boolean z4;
+                            PrivacyDialogController privacyDialogController2 = privacyDialogController;
+                            List indicatorAppOpUsageData = privacyDialogController2.permissionManager.getIndicatorAppOpUsageData(((AppOpsControllerImpl) privacyDialogController2.appOpsController).mMicMuted);
+                            List userProfiles = ((UserTrackerImpl) privacyDialogController.userTracker).getUserProfiles();
+                            PrivacyLogger privacyLogger = privacyDialogController.privacyLogger;
+                            privacyLogger.getClass();
+                            LogLevel logLevel = LogLevel.DEBUG;
+                            PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(10);
+                            LogBuffer logBuffer = privacyLogger.buffer;
+                            PrivacyType privacyType3 = null;
+                            LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+                            ((LogMessageImpl) logMessageObtain).str1 = indicatorAppOpUsageData.toString();
+                            logBuffer.commit(logMessageObtain);
+                            PrivacyDialogController privacyDialogController3 = privacyDialogController;
+                            Context context3 = context;
+                            final ArrayList arrayList = new ArrayList();
+                            Iterator it2 = indicatorAppOpUsageData.iterator();
+                            while (it2.hasNext()) {
+                                PermissionGroupUsage permissionGroupUsage2 = (PermissionGroupUsage) it2.next();
+                                String permissionGroupName = permissionGroupUsage2.getPermissionGroupName();
+                                privacyDialogController3.getClass();
+                                int iHashCode = permissionGroupName.hashCode();
+                                if (iHashCode != -1140935117) {
+                                    if (iHashCode != 828638019) {
+                                        privacyType = (iHashCode == 1581272376 && permissionGroupName.equals("android.permission-group.MICROPHONE")) ? PrivacyType.TYPE_MICROPHONE : privacyType3;
+                                    } else if (permissionGroupName.equals("android.permission-group.LOCATION")) {
+                                        privacyType = PrivacyType.TYPE_LOCATION;
+                                    }
+                                } else if (permissionGroupName.equals("android.permission-group.CAMERA")) {
+                                    privacyType = PrivacyType.TYPE_CAMERA;
+                                }
+                                if (privacyType != null) {
+                                    PrivacyType privacyType4 = PrivacyType.TYPE_CAMERA;
+                                    PrivacyItemController privacyItemController = privacyDialogController3.privacyItemController;
+                                    privacyType2 = (((privacyType == privacyType4 || privacyType == PrivacyType.TYPE_MICROPHONE) && privacyItemController.privacyConfig.micCameraAvailable) || (privacyType == PrivacyType.TYPE_LOCATION && privacyItemController.privacyConfig.locationAvailable)) ? privacyType : privacyType3;
+                                }
+                                Iterator it3 = userProfiles.iterator();
+                                while (true) {
+                                    if (!it3.hasNext()) {
+                                        next = privacyType3;
+                                        break;
+                                    } else {
+                                        next = it3.next();
+                                        if (((UserInfo) next).id == UserHandle.getUserId(permissionGroupUsage2.getUid())) {
+                                            break;
+                                        }
+                                    }
+                                }
+                                UserInfo userInfo = (UserInfo) next;
+                                if (userInfo == null && !permissionGroupUsage2.isPhoneCall()) {
+                                    it = it2;
+                                    list = userProfiles;
+                                    context2 = context3;
+                                    privacyElement = privacyType3;
+                                } else if (privacyType2 != null) {
+                                    if (permissionGroupUsage2.isPhoneCall()) {
+                                        packageName = "";
+                                    } else {
+                                        packageName = permissionGroupUsage2.getPackageName();
+                                        try {
+                                            ?? LoadLabel = privacyDialogController3.packageManager.getApplicationInfoAsUser(packageName, 0, UserHandle.getUserId(permissionGroupUsage2.getUid())).loadLabel(privacyDialogController3.packageManager);
+                                            LoadLabel.getClass();
+                                            packageName = LoadLabel;
+                                        } catch (PackageManager.NameNotFoundException unused) {
+                                            MotionLayout$$ExternalSyntheticOutline0.m("Label not found for: ", packageName, "PrivacyDialogController");
+                                        }
+                                    }
+                                    String str = packageName;
+                                    int userId = UserHandle.getUserId(permissionGroupUsage2.getUid());
+                                    if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+                                        List userProfiles2 = ((UserTrackerImpl) privacyDialogController3.userTracker).getUserProfiles();
+                                        if (privacyType2 == PrivacyType.TYPE_LOCATION) {
+                                            int[] iArr = privacyDialogController3.LOCATION_OPS;
+                                            int length = iArr.length;
+                                            int i2 = 0;
+                                            z4 = false;
+                                            while (true) {
+                                                if (i2 >= length) {
+                                                    it = it2;
+                                                    list = userProfiles;
+                                                    permissionGroupUsage = permissionGroupUsage2;
+                                                    break;
+                                                }
+                                                String strOpToPermission = AppOpsManager.opToPermission(iArr[i2]);
+                                                it = it2;
+                                                UserHandle userHandleForUid = UserHandle.getUserHandleForUid(permissionGroupUsage2.getUid());
+                                                list = userProfiles;
+                                                int size = userProfiles2.size();
+                                                permissionGroupUsage = permissionGroupUsage2;
+                                                int i3 = 0;
+                                                boolean z5 = false;
+                                                while (i3 < size) {
+                                                    int i4 = size;
+                                                    if (((UserInfo) userProfiles2.get(i3)).getUserHandle().equals(userHandleForUid)) {
+                                                        z5 = true;
+                                                    }
+                                                    i3++;
+                                                    size = i4;
+                                                }
+                                                if (!z5) {
+                                                    z4 = true;
+                                                    break;
+                                                }
+                                                int permissionFlags = privacyDialogController3.packageManager.getPermissionFlags(strOpToPermission, permissionGroupUsage.getPackageName(), userHandleForUid);
+                                                int i5 = i2;
+                                                if (PermissionChecker.checkPermissionForPreflight(context3, strOpToPermission, -1, permissionGroupUsage.getUid(), permissionGroupUsage.getPackageName()) == 0) {
+                                                    if ((permissionFlags & 256) == 0) {
+                                                        z4 = true;
+                                                    }
+                                                } else if ((permissionFlags & 512) == 0) {
+                                                }
+                                                i2 = i5 + 1;
+                                                permissionGroupUsage2 = permissionGroupUsage;
+                                                it2 = it;
+                                                userProfiles = list;
+                                            }
+                                        } else {
+                                            it = it2;
+                                            list = userProfiles;
+                                            permissionGroupUsage = permissionGroupUsage2;
+                                            z4 = false;
+                                        }
+                                        z2 = z4;
+                                    } else {
+                                        it = it2;
+                                        list = userProfiles;
+                                        permissionGroupUsage = permissionGroupUsage2;
+                                        z2 = false;
+                                    }
+                                    String packageName2 = permissionGroupUsage.getPackageName();
+                                    CharSequence attributionTag = permissionGroupUsage.getAttributionTag();
+                                    CharSequence attributionLabel = permissionGroupUsage.getAttributionLabel();
+                                    CharSequence proxyLabel = permissionGroupUsage.getProxyLabel();
+                                    long lastAccessTimeMillis = permissionGroupUsage.getLastAccessTimeMillis();
+                                    PermissionGroupUsage permissionGroupUsage3 = permissionGroupUsage;
+                                    boolean zIsActive = permissionGroupUsage3.isActive();
+                                    if (userInfo != null ? userInfo.isManagedProfile() : false) {
+                                        z3 = true;
+                                        boolean zIsPhoneCall = permissionGroupUsage3.isPhoneCall();
+                                        String permissionGroupName2 = permissionGroupUsage3.getPermissionGroupName();
+                                        if (z2) {
+                                            String packageName3 = permissionGroupUsage3.getPackageName();
+                                            String permissionGroupName3 = permissionGroupUsage3.getPermissionGroupName();
+                                            CharSequence attributionTag2 = permissionGroupUsage3.getAttributionTag();
+                                            boolean z6 = permissionGroupUsage3.getAttributionLabel() != null;
+                                            if (attributionTag2 == null || !z6) {
+                                                context2 = context3;
+                                            } else {
+                                                context2 = context3;
+                                                if (privacyDialogController3.locationManager.isProviderPackage(null, packageName3, attributionTag2.toString())) {
+                                                    intent = new Intent("android.intent.action.MANAGE_PERMISSION_USAGE");
+                                                    intent.setPackage(packageName3);
+                                                    intent.putExtra("android.intent.extra.PERMISSION_GROUP_NAME", permissionGroupName3.toString());
+                                                    intent.putExtra("android.intent.extra.ATTRIBUTION_TAGS", new String[]{attributionTag2.toString()});
+                                                    intent.putExtra("android.intent.extra.SHOWING_ATTRIBUTION", true);
+                                                    ResolveInfo resolveInfoResolveActivity = privacyDialogController3.packageManager.resolveActivity(intent, PackageManager.ResolveInfoFlags.of(0L));
+                                                    if (resolveInfoResolveActivity != null && (activityInfo = resolveInfoResolveActivity.activityInfo) != null && Intrinsics.areEqual(activityInfo.permission, "android.permission.START_VIEW_PERMISSION_USAGE")) {
+                                                        intent.setComponent(new ComponentName(packageName3, resolveInfoResolveActivity.activityInfo.name));
+                                                    }
+                                                }
+                                            }
+                                            intent = new Intent("android.intent.action.MANAGE_APP_PERMISSIONS");
+                                            intent.putExtra("android.intent.extra.PACKAGE_NAME", packageName3);
+                                            intent.putExtra("android.intent.extra.USER", UserHandle.of(userId));
+                                        } else {
+                                            intent = new Intent("com.samsung.android.intent.action.LOCATION_RECENT_ACCESS");
+                                            intent.putExtra("isOnlyShowSystem", true);
+                                            context2 = context3;
+                                        }
+                                        privacyElement = new PrivacyDialog.PrivacyElement(privacyType2, packageName2, userId, str, attributionTag, attributionLabel, proxyLabel, lastAccessTimeMillis, zIsActive, z3, zIsPhoneCall, permissionGroupName2, intent, z2);
+                                    } else {
+                                        if (!(userInfo != null ? userInfo.isPrivateProfile() : false)) {
+                                            z3 = false;
+                                        }
+                                        boolean zIsPhoneCall2 = permissionGroupUsage3.isPhoneCall();
+                                        String permissionGroupName22 = permissionGroupUsage3.getPermissionGroupName();
+                                        if (z2) {
+                                        }
+                                        privacyElement = new PrivacyDialog.PrivacyElement(privacyType2, packageName2, userId, str, attributionTag, attributionLabel, proxyLabel, lastAccessTimeMillis, zIsActive, z3, zIsPhoneCall2, permissionGroupName22, intent, z2);
+                                    }
+                                } else {
+                                    it = it2;
+                                    list = userProfiles;
+                                    context2 = context3;
+                                    privacyElement = null;
+                                }
+                                if (privacyElement != null) {
+                                    arrayList.add(privacyElement);
+                                }
+                                it2 = it;
+                                userProfiles = list;
+                                context3 = context2;
+                                privacyType3 = null;
+                            }
+                            final PrivacyDialogController privacyDialogController4 = privacyDialogController;
+                            Executor executor = privacyDialogController4.uiExecutor;
+                            final Context context4 = context;
+                            executor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyDialogController$showDialog$1.1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    PrivacyDialogController privacyDialogController5 = privacyDialogController4;
+                                    List list2 = arrayList;
+                                    int i6 = PrivacyDialogController.$r8$clinit;
+                                    privacyDialogController5.getClass();
+                                    LinkedHashMap linkedHashMap = new LinkedHashMap();
+                                    for (Object obj : list2) {
+                                        PrivacyType privacyType5 = ((PrivacyDialog.PrivacyElement) obj).type;
+                                        Object arrayList2 = linkedHashMap.get(privacyType5);
+                                        if (arrayList2 == null) {
+                                            arrayList2 = new ArrayList();
+                                            linkedHashMap.put(privacyType5, arrayList2);
+                                        }
+                                        ((List) arrayList2).add(obj);
+                                    }
+                                    TreeMap treeMap = new TreeMap(linkedHashMap);
+                                    ArrayList arrayList3 = new ArrayList();
+                                    Iterator it4 = treeMap.entrySet().iterator();
+                                    while (true) {
+                                        Object next2 = null;
+                                        if (!it4.hasNext()) {
+                                            break;
+                                        }
+                                        Map.Entry entry = (Map.Entry) it4.next();
+                                        PrivacyType privacyType6 = (PrivacyType) entry.getKey();
+                                        Iterable iterableSingletonList = (List) entry.getValue();
+                                        iterableSingletonList.getClass();
+                                        Iterable iterable = iterableSingletonList;
+                                        ArrayList arrayList4 = new ArrayList();
+                                        for (Object obj2 : iterable) {
+                                            if (((PrivacyDialog.PrivacyElement) obj2).active) {
+                                                arrayList4.add(obj2);
+                                            }
+                                        }
+                                        if (!arrayList4.isEmpty()) {
+                                            iterableSingletonList = CollectionsKt___CollectionsKt.sortedWith(arrayList4, new Comparator() { // from class: com.android.systemui.privacy.PrivacyDialogController$filterAndSelect$lambda$7$$inlined$sortedByDescending$1
+                                                @Override // java.util.Comparator
+                                                public final int compare(Object obj3, Object obj4) {
+                                                    return ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((PrivacyDialog.PrivacyElement) obj4).lastActiveTimestamp), Long.valueOf(((PrivacyDialog.PrivacyElement) obj3).lastActiveTimestamp));
+                                                }
+                                            });
+                                        } else if (!ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP || privacyType6 != PrivacyType.TYPE_LOCATION) {
+                                            Iterator it5 = iterable.iterator();
+                                            if (it5.hasNext()) {
+                                                next2 = it5.next();
+                                                if (it5.hasNext()) {
+                                                    long j = ((PrivacyDialog.PrivacyElement) next2).lastActiveTimestamp;
+                                                    do {
+                                                        Object next3 = it5.next();
+                                                        long j2 = ((PrivacyDialog.PrivacyElement) next3).lastActiveTimestamp;
+                                                        if (j < j2) {
+                                                            next2 = next3;
+                                                            j = j2;
+                                                        }
+                                                    } while (it5.hasNext());
+                                                }
+                                            }
+                                            PrivacyDialog.PrivacyElement privacyElement2 = (PrivacyDialog.PrivacyElement) next2;
+                                            if (privacyElement2 == null || (iterableSingletonList = Collections.singletonList(privacyElement2)) == null) {
+                                                iterableSingletonList = EmptyList.INSTANCE;
+                                            }
+                                        }
+                                        iterableSingletonList.getClass();
+                                        CollectionsKt__MutableCollectionsKt.addAll(iterableSingletonList, arrayList3);
+                                    }
+                                    Log.i("PrivacyDialogController", "showDialog  elements " + arrayList3);
+                                    if (arrayList3.isEmpty()) {
+                                        Log.w("PrivacyDialogController", "Trying to show empty dialog");
+                                        return;
+                                    }
+                                    PrivacyDialogController.DialogProvider dialogProvider = privacyDialogController4.dialogProvider;
+                                    Context context5 = context4;
+                                    PrivacyDialogController$showDialog$1$1$d$1 privacyDialogController$showDialog$1$1$d$1 = new PrivacyDialogController$showDialog$1$1$d$1(privacyDialogController4);
+                                    ((PrivacyDialogControllerKt$defaultDialogProvider$1) dialogProvider).getClass();
+                                    PrivacyDialog privacyDialog2 = new PrivacyDialog(context5, arrayList3, privacyDialogController$showDialog$1$1$d$1);
+                                    SystemUIDialog.setShowForAllUsers(privacyDialog2);
+                                    PrivacyDialogController$onDialogDismissed$1 privacyDialogController$onDialogDismissed$1 = privacyDialogController4.onDialogDismissed;
+                                    if (privacyDialog2.dismissed.get()) {
+                                        PrivacyDialogController privacyDialogController6 = privacyDialogController$onDialogDismissed$1.this$0;
+                                        PrivacyLogger privacyLogger2 = privacyDialogController6.privacyLogger;
+                                        privacyLogger2.getClass();
+                                        LogLevel logLevel2 = LogLevel.INFO;
+                                        PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda02 = new PrivacyLogger$$ExternalSyntheticLambda0(14);
+                                        LogBuffer logBuffer2 = privacyLogger2.buffer;
+                                        logBuffer2.commit(logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null));
+                                        privacyDialogController6.uiEventLogger.log(PrivacyDialogEvent.PRIVACY_DIALOG_DISMISSED);
+                                        privacyDialogController6.dialog = null;
+                                    } else {
+                                        ((ArrayList) privacyDialog2.dismissListeners).add(new WeakReference(privacyDialogController$onDialogDismissed$1));
+                                    }
+                                    privacyDialogController4.getClass();
+                                    SecPanelSplitHelper.Companion.getClass();
+                                    privacyDialog2.qsExpanded = SecPanelSplitHelper.isEnabled ? ((SecPanelSplitHelper) privacyDialogController4.panelSplitHepler$delegate.getValue()).isQSState() : ((Boolean) ((ShadeInteractorImpl) privacyDialogController4.shadeInteractor).baseShadeInteractor.isQsExpanded().getValue()).booleanValue();
+                                    privacyDialog2.show();
+                                    PrivacyLogger privacyLogger3 = privacyDialogController4.privacyLogger;
+                                    privacyLogger3.getClass();
+                                    LogLevel logLevel3 = LogLevel.INFO;
+                                    PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda03 = new PrivacyLogger$$ExternalSyntheticLambda0(1);
+                                    LogBuffer logBuffer3 = privacyLogger3.buffer;
+                                    LogMessage logMessageObtain2 = logBuffer3.obtain("PrivacyLog", logLevel3, privacyLogger$$ExternalSyntheticLambda03, null);
+                                    ((LogMessageImpl) logMessageObtain2).str1 = arrayList3.toString();
+                                    logBuffer3.commit(logMessageObtain2);
+                                    privacyDialogController4.dialog = privacyDialog2;
+                                }
+                            });
                         }
                     });
                 }
@@ -393,49 +760,59 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         headerPrivacyIconsController.micCameraIndicatorsEnabled = privacyConfig.micCameraAvailable;
         headerPrivacyIconsController.locationIndicatorsEnabled = privacyConfig.locationAvailable;
         headerPrivacyIconsController.updatePrivacyIconSlots();
-        final SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt = (SamsungShadeHeaderControllerExt) this.samsungExt.get();
-        final Runnable runnable = new Runnable() { // from class: com.android.systemui.shade.ShadeHeaderController$onInit$2
+        final SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt2 = (SamsungShadeHeaderControllerExt) lazy.get();
+        final Runnable runnable = new Runnable() { // from class: com.android.systemui.shade.ShadeHeaderController.onInit.2
             @Override // java.lang.Runnable
             public final void run() {
                 ShadeHeaderController shadeHeaderController = ShadeHeaderController.this;
-                ShadeHeaderController.Companion companion = ShadeHeaderController.Companion;
+                Companion companion = ShadeHeaderController.Companion;
                 shadeHeaderController.updateVisibility$7();
             }
         };
-        samsungShadeHeaderControllerExt.printLog$1("onInit()");
-        if (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED && (netspeedViewController = samsungShadeHeaderControllerExt.netspeedViewController) != null) {
+        TintedIconManager tintedIconManager3 = this.iconManager;
+        TintedIconManager tintedIconManager4 = tintedIconManager3 == null ? null : tintedIconManager3;
+        samsungShadeHeaderControllerExt2.printLog$1("onInit()");
+        if (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED && (netspeedViewController = samsungShadeHeaderControllerExt2.netspeedViewController) != null) {
             netspeedViewController.init();
         }
-        StatusIconContainerController statusIconContainerController = samsungShadeHeaderControllerExt.statusIconContainerController;
+        StatusIconContainerController statusIconContainerController = samsungShadeHeaderControllerExt2.statusIconContainerController;
         statusIconContainerController.init();
-        if (BasicRune.STATUS_POP_OVER_PANEL_BAR && BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT) {
-            samsungShadeHeaderControllerExt.privacyItemController.addCallback(samsungShadeHeaderControllerExt.privacyItemControllerCallback);
-            statusIconContainerController.view.mSidelingCutoutContainerInfo = new SidelingCutoutContainerInfo() { // from class: com.android.systemui.shade.SamsungShadeHeaderControllerExt$onInit$3
-                @Override // com.android.systemui.statusbar.phone.SidelingCutoutContainerInfo
-                public final int getRightSideAvailableWidth(Rect rect) {
-                    if (!DeviceState.isShowingPopOverStatusBar()) {
-                        return 0;
-                    }
-                    SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt2 = SamsungShadeHeaderControllerExt.this;
-                    int width = samsungShadeHeaderControllerExt2.context.getResources().getConfiguration().windowConfiguration.getBounds().width();
-                    int i = rect.right;
-                    int paddingEnd = samsungShadeHeaderControllerExt2.headerView.getPaddingEnd();
-                    return (width - (((samsungShadeHeaderControllerExt2.privacyContainer.getMeasuredWidth() + samsungShadeHeaderControllerExt2.batteryIcon.getMeasuredWidth()) + paddingEnd) + samsungShadeHeaderControllerExt2.iconContainer.getPaddingEnd())) - i;
-                }
-            };
+        samsungShadeHeaderControllerExt2.updateColorModel(samsungShadeHeaderControllerExt2.model.colorModelNormalPanel, samsungShadeHeaderControllerExt2.emptyTintRect, 0.0f, new DualToneHandler(new ContextThemeWrapper(samsungShadeHeaderControllerExt2.context, R.style.Theme_SystemUI_QuickSettings_Header)).getSingleColor());
+        if (z) {
+            samsungShadeHeaderControllerExt2.tintedIconManager = tintedIconManager4;
+            samsungShadeHeaderControllerExt2.darkIconDispatcher.addDarkReceiver(samsungShadeHeaderControllerExt2);
+            ((KeyguardStateControllerImpl) samsungShadeHeaderControllerExt2.keyguardStateController).addCallback(samsungShadeHeaderControllerExt2.keyguardStateControllerCallback);
+            KeyguardStatusBarWallpaperHelper keyguardStatusBarWallpaperHelper = samsungShadeHeaderControllerExt2.keyguardStatusBarWallpaperHelper;
+            keyguardStatusBarWallpaperHelper.wakefulnessLifecycle.addObserver(keyguardStatusBarWallpaperHelper);
+            keyguardStatusBarWallpaperHelper.wallpaperEventNotifier.registerCallback(false, keyguardStatusBarWallpaperHelper, 17L);
+            keyguardStatusBarWallpaperHelper.listener = samsungShadeHeaderControllerExt2.keyguardStatusBarWallpaperListener;
+            ((ConfigurationControllerImpl) samsungShadeHeaderControllerExt2.configurationController).addCallback(samsungShadeHeaderControllerExt2.configurationControllerListener);
+            samsungShadeHeaderControllerExt2.indicatorGardenPresenter.addCallback((IndicatorGardenPresenter.GardenListener) samsungShadeHeaderControllerExt2.indicatorGardenPresenterListener);
+            if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT) {
+                samsungShadeHeaderControllerExt2.privacyItemController.addCallback(samsungShadeHeaderControllerExt2.privacyItemControllerCallback);
+                ((BatteryControllerImpl) samsungShadeHeaderControllerExt2.batteryController).addCallback(samsungShadeHeaderControllerExt2.batteryStateChangeCallback);
+                statusIconContainerController.view.mSidelingCutoutContainerInfo = samsungShadeHeaderControllerExt2.sidelingCutoutContainerInfo;
+            }
         }
-        samsungShadeHeaderControllerExt.lockscreenShadeTransitionController.addCallback(new LockscreenShadeTransitionController.Callback() { // from class: com.android.systemui.shade.SamsungShadeHeaderControllerExt$onInit$4
+        samsungShadeHeaderControllerExt2.lockscreenShadeTransitionController.addCallback(new LockscreenShadeTransitionController.Callback() { // from class: com.android.systemui.shade.SamsungShadeHeaderControllerExt$onInit$1
             @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
             public final void setTransitionToFullShadeAmount(float f) {
-                boolean z = !(f == 0.0f);
-                SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt2 = SamsungShadeHeaderControllerExt.this;
-                if (samsungShadeHeaderControllerExt2.prvFragmentToShade != z) {
-                    samsungShadeHeaderControllerExt2.prvFragmentToShade = z;
+                boolean z2 = !(f == 0.0f);
+                SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt3 = samsungShadeHeaderControllerExt2;
+                if (samsungShadeHeaderControllerExt3.prvFragmentToShade != z2) {
+                    samsungShadeHeaderControllerExt3.prvFragmentToShade = z2;
                     runnable.run();
                 }
             }
         });
-        this.mView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.shade.ShadeHeaderController$onInit$3
+        samsungShadeHeaderControllerExt2.mainHandler.post(new Runnable() { // from class: com.android.systemui.shade.SamsungShadeHeaderControllerExt$onInit$3
+            @Override // java.lang.Runnable
+            public final void run() {
+                SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt3 = samsungShadeHeaderControllerExt2;
+                samsungShadeHeaderControllerExt3.setChildFocusableFalse(samsungShadeHeaderControllerExt3.headerView);
+            }
+        });
+        this.mView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.shade.ShadeHeaderController.onInit.3
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
                 SecPanelSplitHelper.Companion.getClass();
@@ -480,9 +857,9 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         onViewDetached();
     }
 
-    public final void updateConstraintsForInsets(MotionLayout motionLayout, WindowInsets windowInsets) {
-        ConstraintsChanges plus;
-        Integer num;
+    public final void updateConstraintsForInsets(MotionLayout motionLayout, WindowInsets windowInsets) throws Resources.NotFoundException, NumberFormatException {
+        ConstraintsChanges constraintsChangesPlus;
+        Integer numValueOf;
         ShadeWindowGoesAround.INSTANCE.getClass();
         StatusBarContentInsetsProvider statusBarContentInsetsProvider = (StatusBarContentInsetsProvider) this.statusBarContentInsetsProviderStore.forDisplay(ShadeWindowGoesAround.FLAG.isTrue() ? ((Number) ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.shadeDisplaysRepositoryLazy.get())).displayId.getValue()).intValue() : this.context.getDisplayId());
         if (statusBarContentInsetsProvider == null) {
@@ -494,7 +871,7 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         Insets statusBarContentInsetsForCurrentRotation = statusBarContentInsetsProviderImpl.getStatusBarContentInsetsForCurrentRotation();
         final int i = statusBarContentInsetsForCurrentRotation.left;
         int i2 = statusBarContentInsetsForCurrentRotation.right;
-        boolean currentRotationHasCornerCutout = statusBarContentInsetsProviderImpl.currentRotationHasCornerCutout();
+        boolean zCurrentRotationHasCornerCutout = statusBarContentInsetsProviderImpl.currentRotationHasCornerCutout();
         final int i3 = motionLayout.isLayoutRtl() ? i2 : i;
         MotionLayout motionLayout2 = this.header;
         final int paddingStart = motionLayout2.getPaddingStart();
@@ -507,7 +884,7 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         Function1 function1 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ConstraintSet constraintSet = (ConstraintSet) obj;
                 CombinedShadeHeadersConstraintManagerImpl combinedShadeHeadersConstraintManagerImpl2 = CombinedShadeHeadersConstraintManagerImpl.INSTANCE;
                 constraintSet.setGuidelineBegin(R.id.begin_guide, Math.max(i3 - paddingStart, 0));
@@ -518,23 +895,23 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         ConstraintsChanges constraintsChanges = new ConstraintsChanges(function1, function1, function1);
         if (displayCutout != null) {
             Rect boundingRectTop = displayCutout.getBoundingRectTop();
-            if (boundingRectTop.isEmpty() || currentRotationHasCornerCutout) {
+            if (boundingRectTop.isEmpty() || zCurrentRotationHasCornerCutout) {
                 combinedShadeHeadersConstraintManagerImpl.getClass();
-                plus = constraintsChanges.plus(new ConstraintsChanges(new CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda0(), null, null, 6, null));
+                constraintsChangesPlus = constraintsChanges.plus(new ConstraintsChanges(new CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda0(), null, null, 6, null));
             } else {
-                boolean isLayoutRtl = motionLayout.isLayoutRtl();
+                boolean zIsLayoutRtl = motionLayout.isLayoutRtl();
                 final int width = (((motionLayout.getWidth() - motionLayout.getPaddingLeft()) - motionLayout.getPaddingRight()) - boundingRectTop.width()) / 2;
                 combinedShadeHeadersConstraintManagerImpl.getClass();
                 final int i4 = R.id.center_right;
-                final int i5 = !isLayoutRtl ? R.id.center_left : R.id.center_right;
-                if (isLayoutRtl) {
+                final int i5 = !zIsLayoutRtl ? R.id.center_left : R.id.center_right;
+                if (zIsLayoutRtl) {
                     i4 = R.id.center_left;
                 }
                 final int i6 = 0;
                 Function1 function12 = new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         int i7 = i4;
                         int i8 = width;
                         int i9 = i5;
@@ -561,10 +938,10 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                     }
                 };
                 final int i7 = 1;
-                plus = constraintsChanges.plus(new ConstraintsChanges(function12, new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda2
+                constraintsChangesPlus = constraintsChanges.plus(new ConstraintsChanges(function12, new Function1() { // from class: com.android.systemui.shade.CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         int i72 = i4;
                         int i8 = width;
                         int i9 = i5;
@@ -593,22 +970,22 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
             }
         } else {
             combinedShadeHeadersConstraintManagerImpl.getClass();
-            plus = constraintsChanges.plus(new ConstraintsChanges(new CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda0(), null, null, 6, null));
+            constraintsChangesPlus = constraintsChanges.plus(new ConstraintsChanges(new CombinedShadeHeadersConstraintManagerImpl$$ExternalSyntheticLambda0(), null, null, 6, null));
         }
-        Function1 function13 = plus.qqsConstraintsChanges;
+        Function1 function13 = constraintsChangesPlus.qqsConstraintsChanges;
         if (function13 != null) {
             int i8 = QQS_HEADER_CONSTRAINT;
             ConstraintSet constraintSet = motionLayout.getConstraintSet(i8);
             constraintSet.getClass();
-            function13.mo779invoke(constraintSet);
+            function13.mo781invoke(constraintSet);
             motionLayout.updateState(i8, constraintSet);
         }
-        Function1 function14 = plus.qsConstraintsChanges;
+        Function1 function14 = constraintsChangesPlus.qsConstraintsChanges;
         if (function14 != null) {
             int i9 = QS_HEADER_CONSTRAINT;
             ConstraintSet constraintSet2 = motionLayout.getConstraintSet(i9);
             constraintSet2.getClass();
-            function14.mo779invoke(constraintSet2);
+            function14.mo781invoke(constraintSet2);
             motionLayout.updateState(i9, constraintSet2);
         }
         DisplayCutout displayCutout2 = this.cutout;
@@ -617,17 +994,17 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         StatusBarContentInsetsProvider statusBarContentInsetsProvider2 = (StatusBarContentInsetsProvider) qsBatteryModeController.insetsProviderStore.forDisplay(qsBatteryModeController.context.getDisplayId());
         int i10 = 3;
         if (f > qsBatteryModeController.fadeInStartFraction) {
-            num = 3;
+            numValueOf = 3;
         } else if (statusBarContentInsetsProvider2 == null || f >= qsBatteryModeController.fadeOutCompleteFraction) {
-            num = null;
+            numValueOf = null;
         } else {
             if (displayCutout2 != null && !((StatusBarContentInsetsProviderImpl) statusBarContentInsetsProvider2).currentRotationHasCornerCutout() && !displayCutout2.getBoundingRectTop().isEmpty()) {
                 i10 = 1;
             }
-            num = Integer.valueOf(i10);
+            numValueOf = Integer.valueOf(i10);
         }
-        if (num != null) {
-            this.batteryIcon.setPercentShowMode(num.intValue());
+        if (numValueOf != null) {
+            this.batteryIcon.setPercentShowMode(numValueOf.intValue());
         }
     }
 
@@ -651,11 +1028,11 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
         EmptyList emptyList3 = emptyList2 != null ? emptyList2 : null;
         statusIconContainer.getClass();
         Iterator it = emptyList3.iterator();
-        boolean z2 = false;
+        boolean zRemove = false;
         while (it.hasNext()) {
-            z2 |= statusIconContainer.mIgnoredSlots.remove((String) it.next());
+            zRemove |= statusIconContainer.mIgnoredSlots.remove((String) it.next());
         }
-        if (z2) {
+        if (zRemove) {
             statusIconContainer.requestLayout();
         }
     }

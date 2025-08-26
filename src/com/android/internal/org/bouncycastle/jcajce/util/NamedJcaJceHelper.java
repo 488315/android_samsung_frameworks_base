@@ -35,7 +35,7 @@ public class NamedJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public Cipher createCipher(String str) throws NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+    public Cipher createCipher(String str) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
         return Cipher.getInstance(str, this.providerName);
     }
 
@@ -115,7 +115,7 @@ public class NamedJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public CertStore createCertStore(String str, CertStoreParameters certStoreParameters) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException {
+    public CertStore createCertStore(String str, CertStoreParameters certStoreParameters) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException {
         return CertStore.getInstance(str, certStoreParameters, this.providerName);
     }
 

@@ -8,12 +8,10 @@ import kotlin.jvm.internal.ClassReference;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.reflect.KClass;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ConsumerAdapter {
     public final ClassLoader loader;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConsumerHandler implements InvocationHandler {
         public final KClass clazz;
         public final Function1 consumer;
@@ -30,7 +28,7 @@ public final class ConsumerAdapter {
                 Object obj2 = objArr != null ? objArr[0] : null;
                 ClassReference classReference = (ClassReference) kClass;
                 if (classReference.isInstance(obj2)) {
-                    this.consumer.mo779invoke(obj2);
+                    this.consumer.mo781invoke(obj2);
                     return Unit.INSTANCE;
                 }
                 throw new ClassCastException("Value cannot be cast to " + classReference.getQualifiedName());

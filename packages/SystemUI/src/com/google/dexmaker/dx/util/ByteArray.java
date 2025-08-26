@@ -2,7 +2,6 @@ package com.google.dexmaker.dx.util;
 
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ByteArray {
     public final byte[] bytes;
@@ -33,9 +32,9 @@ public final class ByteArray {
         if (i >= 0 && i2 >= i && i2 <= i3) {
             return this.bytes[this.start + i] & 255;
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "bad range: ", "..", "; actual size ");
-        m.append(i3);
-        throw new IllegalArgumentException(m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "bad range: ", "..", "; actual size ");
+        sbM.append(i3);
+        throw new IllegalArgumentException(sbM.toString());
     }
 
     public ByteArray(byte[] bArr) {

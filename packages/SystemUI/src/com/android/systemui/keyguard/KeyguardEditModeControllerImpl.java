@@ -40,7 +40,7 @@ import com.android.systemui.keyguardimage.WallpaperImageCreator;
 import com.android.systemui.pluginlock.PluginLockProvider;
 import com.android.systemui.pluginlock.PluginWallpaperManager;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda20;
+import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda25;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
@@ -52,6 +52,7 @@ import com.samsung.android.knox.container.KnoxContainerManager;
 import com.samsung.android.knox.custom.CustomDeviceManager;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -60,7 +61,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardEditModeControllerImpl implements KeyguardEditModeController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -76,7 +76,7 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
     public boolean isShowEditorRequested;
     public final KeyguardDisplayManager keyguardDisplayManager;
     public final KeyguardUpdateMonitor keyguardUpdateMonitor;
-    public NotificationPanelViewController$$ExternalSyntheticLambda20 onStartActivityListener;
+    public NotificationPanelViewController$$ExternalSyntheticLambda25 onStartActivityListener;
     public final PluginWallpaperManager pluginWallpaperManager;
     private final SettingsHelper settingsHelper;
     public Function0 startCancelAnimationFunction;
@@ -95,7 +95,7 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onKeyguardBouncerFullyShowingChanged(boolean z) {
             CardView cardView;
-            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = KeyguardEditModeControllerImpl.this;
+            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = this.this$0;
             Log.d("KeyguardEditModeController", "onKeyguardBouncerFullyShowingChanged editorRequested=" + keyguardEditModeControllerImpl.isShowEditorRequested + " bouncerIsFullyShowing=" + z);
             if (z) {
                 return;
@@ -110,7 +110,7 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onStartedGoingToSleep() {
             Log.d("KeyguardEditModeController", "onStartedGoingToSleep");
-            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = KeyguardEditModeControllerImpl.this;
+            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = this.this$0;
             keyguardEditModeControllerImpl.startCancelAnimationFunction.invoke();
             keyguardEditModeControllerImpl.isEditMode = false;
         }
@@ -119,13 +119,12 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
         public final void onFolderStateChanged(boolean z) {
             Log.d("KeyguardEditModeController", "onFolderStateChanged" + z);
-            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = KeyguardEditModeControllerImpl.this;
+            KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = this.this$0;
             keyguardEditModeControllerImpl.isEditMode = false;
             keyguardEditModeControllerImpl.cancel();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -185,7 +184,7 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         };
     }
 
-    public static final void access$saveWallpaperBitmap(KeyguardEditModeControllerImpl keyguardEditModeControllerImpl, Context context, Bitmap bitmap) {
+    public static final void access$saveWallpaperBitmap(KeyguardEditModeControllerImpl keyguardEditModeControllerImpl, Context context, Bitmap bitmap) throws IOException {
         keyguardEditModeControllerImpl.getClass();
         try {
             File file = new File(new File(context.getFilesDir().getAbsolutePath(), "keyguard_edit.jpg").getAbsolutePath());
@@ -218,7 +217,7 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
             Log.d("KeyguardEditModeController", "can not be FBE");
             return false;
         }
-        if (DeviceType.isTablet() && this.keyguardDisplayManager.isDesktopMode()) {
+        if ((DeviceType.isTablet() || DeviceState.isMultiFoldMain()) && this.keyguardDisplayManager.isDesktopMode()) {
             Log.d("KeyguardEditModeController", "can not be : New Dex or Dex Standalone");
             return false;
         }
@@ -275,17 +274,17 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         return false;
     }
 
-    public final Bitmap getWallpaperBitmap(Context context, boolean z) {
+    public final Bitmap getWallpaperBitmap(Context context, boolean z) throws IOException {
         if (this.settingsHelper.isUltraPowerSavingMode()) {
             return null;
         }
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
         if (z) {
-            long elapsedRealtime = SystemClock.elapsedRealtime();
-            this.wallpaperRequestID = String.valueOf(elapsedRealtime);
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
+            this.wallpaperRequestID = String.valueOf(jElapsedRealtime);
             Bundle bundle = new Bundle();
             bundle.putString(KnoxContainerManager.CONTAINER_CREATION_REQUEST_ID, this.wallpaperRequestID);
-            bundle.putLong("requestTime", elapsedRealtime);
+            bundle.putLong("requestTime", jElapsedRealtime);
             wallpaperManager.semSendWallpaperCommand(2, "samsung.android.wallpaper.backuprunningstate", bundle);
         }
         Log.d("KeyguardEditModeController", "send command to lockscreen semSendWallpaperCommand: pause");
@@ -304,23 +303,23 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         imageOption.rotation = rotation;
         int i2 = imageOption.width;
         int i3 = imageOption.height;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, rotation, "getWallpaperBitmap, orientation=", ", rotation=", ", w=");
-        m.append(i2);
-        m.append(", h=");
-        m.append(i3);
-        Log.d("KeyguardEditModeController", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, rotation, "getWallpaperBitmap, orientation=", ", rotation=", ", w=");
+        sbM.append(i2);
+        sbM.append(", h=");
+        sbM.append(i3);
+        Log.d("KeyguardEditModeController", sbM.toString());
         if (z) {
             imageOption.useScreenshot = true;
         } else {
             Log.i("KeyguardEditModeController", "getWallpaperBitmap, parcelFileDescriptor : " + this.backupWallpaperPreviewPFD + ", requestId : " + this.backupWallpaperRequestId);
             try {
                 ParcelFileDescriptor parcelFileDescriptor = this.backupWallpaperPreviewPFD;
-                Bitmap decodeFileDescriptor = BitmapFactory.decodeFileDescriptor(parcelFileDescriptor != null ? parcelFileDescriptor.getFileDescriptor() : null);
+                Bitmap bitmapDecodeFileDescriptor = BitmapFactory.decodeFileDescriptor(parcelFileDescriptor != null ? parcelFileDescriptor.getFileDescriptor() : null);
                 ParcelFileDescriptor parcelFileDescriptor2 = this.backupWallpaperPreviewPFD;
                 if (parcelFileDescriptor2 != null) {
                     parcelFileDescriptor2.close();
                 }
-                return decodeFileDescriptor;
+                return bitmapDecodeFileDescriptor;
             } catch (Exception e) {
                 Log.e("KeyguardEditModeController", String.valueOf(e));
             }
@@ -334,23 +333,23 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
     }
 
     public final void initPreviewValues(Context context) {
-        String str;
+        String strConcat;
         try {
             Resources resourcesForApplication = context.getPackageManager().getResourcesForApplication("com.samsung.android.app.dressroom");
             if (DeviceType.isTablet()) {
-                str = "tablet";
+                strConcat = "tablet";
             } else if (LsRune.LOCKUI_SUB_DISPLAY_LOCK) {
-                str = "fold_".concat(this.displayLifecycle.mIsFolderOpened ? "main" : "sub");
+                strConcat = "fold_".concat(this.displayLifecycle.mIsFolderOpened ? "main" : "sub");
             } else {
-                str = "phone";
+                strConcat = "phone";
             }
-            this.previewScale = resourcesForApplication.getFloat(resourcesForApplication.getIdentifier("preview_scale_" + str, "dimen", "com.samsung.android.app.dressroom"));
-            this.previewTopMargin = resourcesForApplication.getFloat(resourcesForApplication.getIdentifier("preview_top_margin_" + str, "dimen", "com.samsung.android.app.dressroom"));
+            this.previewScale = resourcesForApplication.getFloat(resourcesForApplication.getIdentifier("preview_scale_" + strConcat, "dimen", "com.samsung.android.app.dressroom"));
+            this.previewTopMargin = resourcesForApplication.getFloat(resourcesForApplication.getIdentifier("preview_top_margin_" + strConcat, "dimen", "com.samsung.android.app.dressroom"));
             CardView cardView = this.wallpaperCardView;
             if (cardView != null) {
                 cardView.setRadius(context.getResources().getDimension(R.dimen.lock_ui_edit_wallpaper_radius) / this.previewScale);
             }
-            Log.d("KeyguardEditModeController", "init preview values " + str + " " + this.previewScale + " " + this.previewTopMargin);
+            Log.d("KeyguardEditModeController", "init preview values " + strConcat + " " + this.previewScale + " " + this.previewTopMargin);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         } catch (Resources.NotFoundException e2) {
@@ -379,19 +378,19 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         }
     }
 
-    public final boolean startEditActivity(final Context context, boolean z) {
+    public final boolean startEditActivity(final Context context, boolean z) throws IOException {
         Log.d("KeyguardEditModeController", "startActivity begin");
-        NotificationPanelViewController$$ExternalSyntheticLambda20 notificationPanelViewController$$ExternalSyntheticLambda20 = this.onStartActivityListener;
-        if (notificationPanelViewController$$ExternalSyntheticLambda20 == null) {
-            notificationPanelViewController$$ExternalSyntheticLambda20 = null;
+        NotificationPanelViewController$$ExternalSyntheticLambda25 notificationPanelViewController$$ExternalSyntheticLambda25 = this.onStartActivityListener;
+        if (notificationPanelViewController$$ExternalSyntheticLambda25 == null) {
+            notificationPanelViewController$$ExternalSyntheticLambda25 = null;
         }
-        notificationPanelViewController$$ExternalSyntheticLambda20.invoke();
+        notificationPanelViewController$$ExternalSyntheticLambda25.invoke();
         final Ref$IntRef ref$IntRef = new Ref$IntRef();
         ref$IntRef.element = -96;
         final Intent intent = new Intent();
         intent.setAction("com.samsung.dressroom.intent.action.SHOW_LOCK_EDITOR");
-        Bundle notifyEvent = ((KeyguardWallpaperController) this.wallpaperImageCreator.mKeyguardWallpaper).notifyEvent(615);
-        intent.putExtra("video_wallpaper_start_frame", notifyEvent != null ? notifyEvent.getInt("current_position") : 0);
+        Bundle bundleNotifyEvent = ((KeyguardWallpaperController) this.wallpaperImageCreator.mKeyguardWallpaper).notifyEvent(615);
+        intent.putExtra("video_wallpaper_start_frame", bundleNotifyEvent != null ? bundleNotifyEvent.getInt("current_position") : 0);
         intent.putExtra(PluginLockProvider.KEY_WALLPAPER_INDEX, this.pluginWallpaperManager.getWallpaperIndex());
         intent.putExtra("lock_bouncer_enabled", z);
         intent.putExtra("stateBackupRequestId", this.wallpaperRequestID);
@@ -400,24 +399,24 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         intent.setPackage("com.samsung.android.app.dressroom");
         intent.addFlags(335544352);
         if (!z) {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardEditModeControllerImpl$startEditActivity$2
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardEditModeControllerImpl.startEditActivity.2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
-                    makeBasic.setLaunchDisplayId(0);
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
+                    activityOptionsMakeBasic.setLaunchDisplayId(0);
                     try {
                         ActivityManager.getService().resumeAppSwitches();
-                        Ref$IntRef ref$IntRef2 = Ref$IntRef.this;
+                        Ref$IntRef ref$IntRef2 = ref$IntRef;
                         IActivityTaskManager service = ActivityTaskManager.getService();
                         String packageName = context.getPackageName();
                         String attributionTag = context.getAttributionTag();
                         Intent intent2 = intent;
-                        ref$IntRef2.element = service.startActivityAsUser((IApplicationThread) null, packageName, attributionTag, intent2, intent2.resolveTypeIfNeeded(context.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, makeBasic.toBundle(), UserHandle.CURRENT.getIdentifier());
+                        ref$IntRef2.element = service.startActivityAsUser((IApplicationThread) null, packageName, attributionTag, intent2, intent2.resolveTypeIfNeeded(context.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, activityOptionsMakeBasic.toBundle(), UserHandle.CURRENT.getIdentifier());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
-                    Log.d("KeyguardEditModeController", "startActivity end " + Ref$IntRef.this.element);
+                    Log.d("KeyguardEditModeController", "startActivity end " + ref$IntRef.element);
                 }
             });
             return ref$IntRef.element != -96;
@@ -428,8 +427,8 @@ public final class KeyguardEditModeControllerImpl implements KeyguardEditModeCon
         if (wallpaperBitmap != null) {
             this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardEditModeControllerImpl$startEditActivity$1$1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    KeyguardEditModeControllerImpl.access$saveWallpaperBitmap(KeyguardEditModeControllerImpl.this, context, wallpaperBitmap);
+                public final void run() throws IOException {
+                    KeyguardEditModeControllerImpl.access$saveWallpaperBitmap(this.this$0, context, wallpaperBitmap);
                 }
             });
         }

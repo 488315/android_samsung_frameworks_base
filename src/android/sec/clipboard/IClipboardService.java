@@ -116,9 +116,9 @@ public interface IClipboardService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IClipboardService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClipboardService)) {
-                return (IClipboardService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IClipboardService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClipboardService)) {
+                return (IClipboardService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -166,10 +166,10 @@ public interface IClipboardService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    IClipboardDataPasteEvent asInterface = IClipboardDataPasteEvent.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    IClipboardDataPasteEvent iClipboardDataPasteEventAsInterface = IClipboardDataPasteEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateFilter(readInt, asInterface);
+                    updateFilter(i3, iClipboardDataPasteEventAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -178,64 +178,64 @@ public interface IClipboardService extends IInterface {
                     parcel2.writeInt(filter);
                     return true;
                 case 3:
-                    IOnClipboardEventListener asInterface2 = IOnClipboardEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
+                    IOnClipboardEventListener iOnClipboardEventListenerAsInterface = IOnClipboardEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addClipboardEventListener(asInterface2, readString);
+                    addClipboardEventListener(iOnClipboardEventListenerAsInterface, string);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IOnClipboardEventListener asInterface3 = IOnClipboardEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOnClipboardEventListener iOnClipboardEventListenerAsInterface2 = IOnClipboardEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeClipboardEventListener(asInterface3);
+                    removeClipboardEventListener(iOnClipboardEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     ClipData clipData = (ClipData) parcel.readTypedObject(ClipData.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrimaryClip(clipData, readInt2);
+                    setPrimaryClip(clipData, i4);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     SemClipData semClipData = (SemClipData) parcel.readTypedObject(SemClipData.CREATOR);
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrimarySemClip(semClipData, readString2, readInt3);
+                    setPrimarySemClip(semClipData, string2, i5);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString3 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemClipData primarySemClip = getPrimarySemClip(readString3, readInt4);
+                    SemClipData primarySemClip = getPrimarySemClip(string3, i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(primarySemClip, 1);
                     return true;
                 case 8:
-                    String readString4 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasPrimaryClip = hasPrimaryClip(readString4, readInt5);
+                    boolean zHasPrimaryClip = hasPrimaryClip(string4, i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasPrimaryClip);
+                    parcel2.writeBoolean(zHasPrimaryClip);
                     return true;
                 case 9:
                     ClipData clipData2 = (ClipData) parcel.readTypedObject(ClipData.CREATOR);
-                    String readString5 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean pasteClipData = pasteClipData(clipData2, readString5, readInt6);
+                    boolean zPasteClipData = pasteClipData(clipData2, string5, i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(pasteClipData);
+                    parcel2.writeBoolean(zPasteClipData);
                     return true;
                 case 10:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isEnabled = isEnabled(readInt7);
+                    boolean zIsEnabled = isEnabled(i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnabled);
+                    parcel2.writeBoolean(zIsEnabled);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -260,164 +260,164 @@ public interface IClipboardService extends IInterface {
 
             @Override // android.sec.clipboard.IClipboardService
             public void updateFilter(int i, IClipboardDataPasteEvent iClipboardDataPasteEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iClipboardDataPasteEvent);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iClipboardDataPasteEvent);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public int getFilter() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public void addClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnClipboardEventListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnClipboardEventListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public void removeClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnClipboardEventListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnClipboardEventListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public void setPrimaryClip(ClipData clipData, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeTypedObject(clipData, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clipData, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public void setPrimarySemClip(SemClipData semClipData, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeTypedObject(semClipData, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semClipData, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public SemClipData getPrimarySemClip(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemClipData) obtain2.readTypedObject(SemClipData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemClipData) parcelObtain2.readTypedObject(SemClipData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public boolean hasPrimaryClip(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public boolean pasteClipData(ClipData clipData, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeTypedObject(clipData, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clipData, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.IClipboardService
             public boolean isEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IClipboardService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

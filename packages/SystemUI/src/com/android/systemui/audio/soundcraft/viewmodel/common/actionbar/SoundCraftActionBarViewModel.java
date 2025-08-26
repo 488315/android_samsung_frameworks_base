@@ -12,7 +12,6 @@ import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftActionBarViewModel extends BaseViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
@@ -24,7 +23,6 @@ public final class SoundCraftActionBarViewModel extends BaseViewModel {
     public final MutableLiveData title = new MutableLiveData("");
     public final MutableLiveData isCoverScreen = new MutableLiveData(Boolean.FALSE);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,13 +47,13 @@ public final class SoundCraftActionBarViewModel extends BaseViewModel {
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     public final void notifyChange() {
-        String str;
+        String name;
         MutableLiveData mutableLiveData = this.title;
         BluetoothDevice activeDevice = this.bluetoothDeviceManager.getActiveDevice();
-        if (activeDevice == null || (str = activeDevice.getName()) == null) {
-            str = "";
+        if (activeDevice == null || (name = activeDevice.getName()) == null) {
+            name = "";
         }
-        mutableLiveData.setValue(str);
+        mutableLiveData.setValue(name);
         this.isCoverScreen.setValue(Boolean.valueOf(this.modelProvider.isFromCover));
     }
 }

@@ -6,7 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public interface IProtoLogClient extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.protolog.IProtoLogClient";
 
@@ -44,9 +44,9 @@ public interface IProtoLogClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProtoLogClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProtoLogClient)) {
-                return (IProtoLogClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProtoLogClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProtoLogClient)) {
+                return (IProtoLogClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IProtoLogClient extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                String[] createStringArray = parcel.createStringArray();
+                boolean z = parcel.readBoolean();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                toggleLogcat(readBoolean, createStringArray);
+                toggleLogcat(z, strArrCreateStringArray);
                 parcel2.writeNoException();
                 return true;
             }
@@ -101,17 +101,17 @@ public interface IProtoLogClient extends IInterface {
 
             @Override // com.android.internal.protolog.IProtoLogClient
             public void toggleLogcat(boolean z, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProtoLogClient.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProtoLogClient.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -26,7 +26,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Provider {
     public final Provider appScopeProvider;
@@ -66,9 +65,9 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
         KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.MANAGED_PROFILE_UNAVAILABLE", "android.intent.action.MANAGED_PROFILE_ADDED", "android.intent.action.MANAGED_PROFILE_REMOVED", "android.intent.action.MANAGED_PROFILE_UNLOCKED");
         userTrackerImpl.context.registerReceiverForAllUsers(userTrackerImpl, intentFilter, null, userTrackerImpl.backgroundHandler);
         userTrackerImpl.iActivityManager.registerUserSwitchObserver(new UserSwitchObserver() { // from class: com.android.systemui.settings.UserTrackerImpl$registerUserSwitchObserver$1
-            public final void onBeforeUserSwitching(final int i, IRemoteCallback iRemoteCallback) {
+            public final void onBeforeUserSwitching(final int i, IRemoteCallback iRemoteCallback) throws InterruptedException {
                 List<DataItem> list;
-                UserTrackerImpl userTrackerImpl2 = UserTrackerImpl.this;
+                UserTrackerImpl userTrackerImpl2 = userTrackerImpl;
                 userTrackerImpl2.setUserIdInternal(i);
                 synchronized (userTrackerImpl2.callbacks) {
                     list = CollectionsKt___CollectionsKt.toList(userTrackerImpl2.callbacks);
@@ -79,7 +78,6 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                     if (callback != null) {
                         dataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.UserTrackerImpl$handleBeforeUserSwitching$$inlined$notifySubscribers$1
 
-                            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                             /* renamed from: com.android.systemui.settings.UserTrackerImpl$handleBeforeUserSwitching$$inlined$notifySubscribers$1$1, reason: invalid class name */
                             public final class AnonymousClass1 implements Runnable {
                                 public final /* synthetic */ CountDownLatch $latch;
@@ -96,16 +94,16 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
 
                             @Override // java.lang.Runnable
                             public final void run() {
-                                UserTracker.Callback callback2 = UserTracker.Callback.this;
+                                UserTracker.Callback callback2 = callback;
                                 CountDownLatch countDownLatch2 = countDownLatch;
-                                boolean isEnabled = Trace.isEnabled();
-                                if (isEnabled) {
+                                boolean zIsEnabled = Trace.isEnabled();
+                                if (zIsEnabled) {
                                     TraceUtilsKt.beginSlice("UserTrackerImpl::" + callback2);
                                 }
                                 try {
                                     callback2.onBeforeUserSwitching(i, new AnonymousClass1(countDownLatch2));
                                 } finally {
-                                    if (isEnabled) {
+                                    if (zIsEnabled) {
                                         TraceUtilsKt.endSlice();
                                     }
                                 }
@@ -123,12 +121,12 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
 
             public final void onUserSwitchComplete(final int i) {
                 List<DataItem> list;
-                UserTrackerImpl userTrackerImpl2 = UserTrackerImpl.this;
+                UserTrackerImpl userTrackerImpl2 = userTrackerImpl;
                 userTrackerImpl2.isUserSwitching = false;
                 FeatureFlagsClassic featureFlagsClassic = (FeatureFlagsClassic) userTrackerImpl2.featureFlagsProvider.get();
                 Flags flags = Flags.INSTANCE;
                 featureFlagsClassic.getClass();
-                final UserTrackerImpl userTrackerImpl3 = UserTrackerImpl.this;
+                final UserTrackerImpl userTrackerImpl3 = userTrackerImpl;
                 userTrackerImpl3.getClass();
                 Assert.isNotMainThread();
                 Log.i("UserTrackerImpl", "Switched to user " + i);
@@ -142,10 +140,10 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                         dataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.UserTrackerImpl$handleUserSwitchComplete$$inlined$notifySubscribers$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                UserTracker.Callback callback2 = UserTracker.Callback.this;
+                                UserTracker.Callback callback2 = callback;
                                 final CountDownLatch countDownLatch2 = countDownLatch;
-                                boolean isEnabled = Trace.isEnabled();
-                                if (isEnabled) {
+                                boolean zIsEnabled = Trace.isEnabled();
+                                if (zIsEnabled) {
                                     TraceUtilsKt.beginSlice("UserTrackerImpl::" + callback2);
                                 }
                                 try {
@@ -158,7 +156,7 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                                     callback2.onUserChanged(i, userTrackerImpl3.getUserContext());
                                     callback2.onProfilesChanged(userTrackerImpl3.getUserProfiles());
                                 } finally {
-                                    if (isEnabled) {
+                                    if (zIsEnabled) {
                                         TraceUtilsKt.endSlice();
                                     }
                                 }
@@ -170,14 +168,14 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                 }
             }
 
-            public final void onUserSwitching(final int i, IRemoteCallback iRemoteCallback) {
+            public final void onUserSwitching(final int i, IRemoteCallback iRemoteCallback) throws InterruptedException {
                 List<DataItem> list;
-                UserTrackerImpl userTrackerImpl2 = UserTrackerImpl.this;
+                UserTrackerImpl userTrackerImpl2 = userTrackerImpl;
                 userTrackerImpl2.isUserSwitching = true;
                 FeatureFlagsClassic featureFlagsClassic = (FeatureFlagsClassic) userTrackerImpl2.featureFlagsProvider.get();
                 Flags flags = Flags.INSTANCE;
                 featureFlagsClassic.getClass();
-                final UserTrackerImpl userTrackerImpl3 = UserTrackerImpl.this;
+                final UserTrackerImpl userTrackerImpl3 = userTrackerImpl;
                 userTrackerImpl3.getClass();
                 Assert.isNotMainThread();
                 Log.i("UserTrackerImpl", "Switching to user " + i);
@@ -191,10 +189,10 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                         dataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.UserTrackerImpl$handleUserSwitching$$inlined$notifySubscribers$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                UserTracker.Callback callback2 = UserTracker.Callback.this;
+                                UserTracker.Callback callback2 = callback;
                                 final CountDownLatch countDownLatch2 = countDownLatch;
-                                boolean isEnabled = Trace.isEnabled();
-                                if (isEnabled) {
+                                boolean zIsEnabled = Trace.isEnabled();
+                                if (zIsEnabled) {
                                     TraceUtilsKt.beginSlice("UserTrackerImpl::" + callback2);
                                 }
                                 try {
@@ -205,7 +203,7 @@ public final class MultiUserUtilsModule_ProvideUserTrackerFactory implements Pro
                                         }
                                     });
                                 } finally {
-                                    if (isEnabled) {
+                                    if (zIsEnabled) {
                                         TraceUtilsKt.endSlice();
                                     }
                                 }

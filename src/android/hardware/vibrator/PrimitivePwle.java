@@ -92,13 +92,13 @@ public final class PrimitivePwle implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, (ActivePwle) parcel.readTypedObject(ActivePwle.CREATOR));
-        } else if (readInt == 1) {
-            _set(readInt, (BrakingPwle) parcel.readTypedObject(BrakingPwle.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, (ActivePwle) parcel.readTypedObject(ActivePwle.CREATOR));
+        } else if (i == 1) {
+            _set(i, (BrakingPwle) parcel.readTypedObject(BrakingPwle.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

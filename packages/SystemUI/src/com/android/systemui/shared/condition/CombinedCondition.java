@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CombinedCondition extends Condition {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,7 @@ public final class CombinedCondition extends Condition {
         this._startStrategy$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shared.condition.CombinedCondition$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Iterator it = CombinedCondition.this.conditions.iterator();
+                Iterator it = this.f$0.conditions.iterator();
                 int i2 = 2;
                 while (true) {
                     if (!it.hasNext()) {
@@ -64,18 +63,18 @@ public final class CombinedCondition extends Condition {
         Collection collection = this.conditions;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (Object obj : collection) {
-            Boolean valueOf = Boolean.valueOf(((Condition) obj).isOverridingCondition);
-            Object obj2 = linkedHashMap.get(valueOf);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(valueOf, obj2);
+            Boolean boolValueOf = Boolean.valueOf(((Condition) obj).isOverridingCondition);
+            Object arrayList = linkedHashMap.get(boolValueOf);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(boolValueOf, arrayList);
             }
-            ((List) obj2).add(obj);
+            ((List) arrayList).add(obj);
         }
-        Object collect = FlowKt.transformLatest(FlowKt.distinctUntilChanged(FlowKt.callbackFlow(new CombinedCondition$lazilyEvaluate$1((Collection) linkedHashMap.getOrDefault(Boolean.TRUE, EmptyList.INSTANCE), true, this, null))), new CombinedCondition$start$$inlined$flatMapLatest$1(null, this, linkedHashMap)).collect(new FlowCollector() { // from class: com.android.systemui.shared.condition.CombinedCondition$start$3
+        Object objCollect = FlowKt.transformLatest(FlowKt.distinctUntilChanged(FlowKt.callbackFlow(new CombinedCondition$lazilyEvaluate$1((Collection) linkedHashMap.getOrDefault(Boolean.TRUE, EmptyList.INSTANCE), true, this, null))), new CombinedCondition$start$$inlined$flatMapLatest$1(null, this, linkedHashMap)).collect(new FlowCollector() { // from class: com.android.systemui.shared.condition.CombinedCondition.start.3
             @Override // kotlinx.coroutines.flow.FlowCollector
-            public final Object emit(Object obj3, Continuation continuation2) {
-                Boolean bool = (Boolean) obj3;
+            public final Object emit(Object obj2, Continuation continuation2) {
+                Boolean bool = (Boolean) obj2;
                 CombinedCondition combinedCondition = CombinedCondition.this;
                 if (bool != null) {
                     combinedCondition.updateCondition(bool.booleanValue());
@@ -90,7 +89,7 @@ public final class CombinedCondition extends Condition {
                 return Unit.INSTANCE;
             }
         }, continuation);
-        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.shared.condition.Condition

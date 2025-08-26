@@ -4,7 +4,6 @@ import com.android.systemui.kairos.internal.NoScope;
 import com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda2;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CombineKt$$ExternalSyntheticLambda9 implements Function6 {
     public final /* synthetic */ CellularIconViewModelKairos$$ExternalSyntheticLambda2 f$0;

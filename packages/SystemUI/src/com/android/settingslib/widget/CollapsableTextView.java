@@ -17,7 +17,6 @@ import com.google.android.material.button.MaterialButton;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CollapsableTextView extends ConstraintLayout {
     public static final int isCollapsableAttr;
@@ -30,7 +29,6 @@ public final class CollapsableTextView extends ConstraintLayout {
     public int minLines;
     public final TextView titleTextView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CollapseButtonResources {
         public final Drawable collapseIcon;
         public final String collapseText;
@@ -73,7 +71,6 @@ public final class CollapsableTextView extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -160,15 +157,15 @@ public final class CollapsableTextView extends ConstraintLayout {
                 collapsableTextView.updateView$1();
             }
         });
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CollapsableTextView, i, 0);
-        int i2 = obtainStyledAttributes.getInt(0, 8388611);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CollapsableTextView, i, 0);
+        int i2 = typedArrayObtainStyledAttributes.getInt(0, 8388611);
         if (i2 == 1 || i2 == 16 || i2 == 17) {
             centerHorizontally(textView);
             centerHorizontally(materialButton);
             centerHorizontally(linkableTextView);
         }
-        this.isCollapsable = obtainStyledAttributes.getBoolean(isCollapsableAttr, true);
-        this.minLines = obtainStyledAttributes.getInt(minLinesAttr, 2);
-        obtainStyledAttributes.recycle();
+        this.isCollapsable = typedArrayObtainStyledAttributes.getBoolean(isCollapsableAttr, true);
+        this.minLines = typedArrayObtainStyledAttributes.getInt(minLinesAttr, 2);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

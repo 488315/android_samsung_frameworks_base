@@ -59,9 +59,9 @@ public interface IIntelligentDynamicFpsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIntelligentDynamicFpsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIntelligentDynamicFpsService)) {
-                return (IIntelligentDynamicFpsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIntelligentDynamicFpsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIntelligentDynamicFpsService)) {
+                return (IIntelligentDynamicFpsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,11 +100,11 @@ public interface IIntelligentDynamicFpsService extends IInterface {
                 cameraPolicyStop();
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int cameraPolicyChange = cameraPolicyChange(readInt);
+                int iCameraPolicyChange = cameraPolicyChange(i3);
                 parcel2.writeNoException();
-                parcel2.writeInt(cameraPolicyChange);
+                parcel2.writeInt(iCameraPolicyChange);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -129,45 +129,45 @@ public interface IIntelligentDynamicFpsService extends IInterface {
 
             @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
             public void cameraPolicyStart() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
             public void cameraPolicyStop() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
             public int cameraPolicyChange(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

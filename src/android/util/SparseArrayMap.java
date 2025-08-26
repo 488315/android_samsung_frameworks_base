@@ -95,11 +95,11 @@ public class SparseArrayMap<K, V> {
     }
 
     public int numElementsForKeyAt(int i) {
-        ArrayMap<K, V> valueAt = this.mData.valueAt(i);
-        if (valueAt == null) {
+        ArrayMap<K, V> arrayMapValueAt = this.mData.valueAt(i);
+        if (arrayMapValueAt == null) {
             return 0;
         }
-        return valueAt.size();
+        return arrayMapValueAt.size();
     }
 
     public V valueAt(int i, int i2) {
@@ -107,20 +107,20 @@ public class SparseArrayMap<K, V> {
     }
 
     public void forEach(Consumer<V> consumer) {
-        for (int numMaps = numMaps() - 1; numMaps >= 0; numMaps--) {
-            ArrayMap<K, V> valueAt = this.mData.valueAt(numMaps);
-            for (int size = valueAt.size() - 1; size >= 0; size--) {
-                consumer.accept(valueAt.valueAt(size));
+        for (int iNumMaps = numMaps() - 1; iNumMaps >= 0; iNumMaps--) {
+            ArrayMap<K, V> arrayMapValueAt = this.mData.valueAt(iNumMaps);
+            for (int size = arrayMapValueAt.size() - 1; size >= 0; size--) {
+                consumer.accept(arrayMapValueAt.valueAt(size));
             }
         }
     }
 
     public void forEach(TriConsumer<K, V> triConsumer) {
-        for (int numMaps = numMaps() - 1; numMaps >= 0; numMaps--) {
-            int keyAt = this.mData.keyAt(numMaps);
-            ArrayMap<K, V> valueAt = this.mData.valueAt(numMaps);
-            for (int size = valueAt.size() - 1; size >= 0; size--) {
-                triConsumer.accept(keyAt, valueAt.keyAt(size), valueAt.valueAt(size));
+        for (int iNumMaps = numMaps() - 1; iNumMaps >= 0; iNumMaps--) {
+            int iKeyAt = this.mData.keyAt(iNumMaps);
+            ArrayMap<K, V> arrayMapValueAt = this.mData.valueAt(iNumMaps);
+            for (int size = arrayMapValueAt.size() - 1; size >= 0; size--) {
+                triConsumer.accept(iKeyAt, arrayMapValueAt.keyAt(size), arrayMapValueAt.valueAt(size));
             }
         }
     }

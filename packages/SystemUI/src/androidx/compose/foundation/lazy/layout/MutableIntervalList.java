@@ -5,7 +5,6 @@ import androidx.compose.foundation.internal.InlineClassHelperKt;
 import androidx.compose.foundation.lazy.layout.LazyLayoutIntervalContent;
 import androidx.compose.runtime.collection.MutableVector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableIntervalList<T> {
     public final MutableVector intervals = new MutableVector(new IntervalList$Interval[16], 0);
@@ -26,9 +25,9 @@ public final class MutableIntervalList<T> {
 
     public final IntervalList$Interval get(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index ", ", size ");
-            m.append(this.size);
-            InlineClassHelperKt.throwIndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index ", ", size ");
+            sbM.append(this.size);
+            InlineClassHelperKt.throwIndexOutOfBoundsException(sbM.toString());
         }
         IntervalList$Interval intervalList$Interval = this.lastInterval;
         if (intervalList$Interval != null) {

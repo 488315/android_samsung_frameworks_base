@@ -31,7 +31,6 @@ import com.google.android.material.timepicker.ClockHandView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateListener {
     public final int clockHandPadding;
@@ -64,10 +63,10 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 textView2.getHitRect(this.textViewRect);
                 this.scratch.set(this.textViewRect);
                 this.scratch.union(rectF);
-                float height = this.scratch.height() * this.scratch.width();
-                if (height < f) {
+                float fHeight = this.scratch.height() * this.scratch.width();
+                if (fHeight < f) {
                     textView = textView2;
-                    f = height;
+                    f = fHeight;
                 }
             }
         }
@@ -102,10 +101,10 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
     @Override // androidx.constraintlayout.widget.ConstraintLayout, android.view.View
     public final void onMeasure(int i, int i2) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int max = (int) (this.clockSize / Math.max(Math.max(this.minimumHeight / displayMetrics.heightPixels, this.minimumWidth / displayMetrics.widthPixels), 1.0f));
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(max, 1073741824);
-        setMeasuredDimension(max, max);
-        super.onMeasure(makeMeasureSpec, makeMeasureSpec);
+        int iMax = (int) (this.clockSize / Math.max(Math.max(this.minimumHeight / displayMetrics.heightPixels, this.minimumWidth / displayMetrics.widthPixels), 1.0f));
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(iMax, 1073741824);
+        setMeasuredDimension(iMax, iMax);
+        super.onMeasure(iMakeMeasureSpec, iMakeMeasureSpec);
     }
 
     @Override // com.google.android.material.timepicker.RadialViewGroup
@@ -129,9 +128,9 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
         SparseArray sparseArray = new SparseArray();
         this.textViewPool = sparseArray;
         this.gradientPositions = new float[]{0.0f, 0.9f, 1.0f};
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockFaceView, i, R.style.Widget_MaterialComponents_TimePicker_Clock);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockFaceView, i, R.style.Widget_MaterialComponents_TimePicker_Clock);
         Resources resources = getResources();
-        ColorStateList colorStateList = MaterialResources.getColorStateList(context, obtainStyledAttributes, 1);
+        ColorStateList colorStateList = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 1);
         this.textColor = colorStateList;
         LayoutInflater.from(context).inflate(R.layout.material_clockface_view, (ViewGroup) this, true);
         ClockHandView clockHandView = (ClockHandView) findViewById(R.id.material_clock_hand);
@@ -141,7 +140,7 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
         this.gradientColors = new int[]{colorForState, colorForState, colorStateList.getDefaultColor()};
         ((ArrayList) clockHandView.listeners).add(this);
         int defaultColor = ResourcesCompat.getColorStateList(R.color.material_timepicker_clockface, context.getTheme(), context.getResources()).getDefaultColor();
-        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 0);
+        ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 0);
         setBackgroundColor(colorStateList2 != null ? colorStateList2.getDefaultColor() : defaultColor);
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.google.android.material.timepicker.ClockFaceView.1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
@@ -164,16 +163,16 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
             }
         });
         setFocusable(true);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.valueAccessibilityDelegate = new AccessibilityDelegateCompat() { // from class: com.google.android.material.timepicker.ClockFaceView.2
             @Override // androidx.core.view.AccessibilityDelegateCompat
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
                 this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
-                int intValue = ((Integer) view.getTag(R.id.material_value_index)).intValue();
-                if (intValue > 0) {
-                    accessibilityNodeInfoCompat.mInfo.setTraversalAfter((View) ClockFaceView.this.textViewPool.get(intValue - 1));
+                int iIntValue = ((Integer) view.getTag(R.id.material_value_index)).intValue();
+                if (iIntValue > 0) {
+                    accessibilityNodeInfoCompat.mInfo.setTraversalAfter((View) ClockFaceView.this.textViewPool.get(iIntValue - 1));
                 }
-                accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.CollectionItemInfoCompat.obtain(view.isSelected(), 0, 1, intValue, 1));
+                accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.CollectionItemInfoCompat.obtain(view.isSelected(), 0, 1, iIntValue, 1));
                 accessibilityNodeInfoCompat.setClickable(true);
                 accessibilityNodeInfoCompat.addAction(AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK);
             }
@@ -183,20 +182,20 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 if (i2 != 16) {
                     return super.performAccessibilityAction(view, i2, bundle);
                 }
-                long uptimeMillis = SystemClock.uptimeMillis();
+                long jUptimeMillis = SystemClock.uptimeMillis();
                 ClockFaceView clockFaceView = ClockFaceView.this;
                 view.getHitRect(clockFaceView.textViewRect);
-                float centerX = clockFaceView.textViewRect.centerX();
-                float centerY = clockFaceView.textViewRect.centerY();
-                clockFaceView.clockHandView.onTouchEvent(MotionEvent.obtain(uptimeMillis, uptimeMillis, 0, centerX, centerY, 0));
-                clockFaceView.clockHandView.onTouchEvent(MotionEvent.obtain(uptimeMillis, uptimeMillis, 1, centerX, centerY, 0));
+                float fCenterX = clockFaceView.textViewRect.centerX();
+                float fCenterY = clockFaceView.textViewRect.centerY();
+                clockFaceView.clockHandView.onTouchEvent(MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 0, fCenterX, fCenterY, 0));
+                clockFaceView.clockHandView.onTouchEvent(MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 1, fCenterX, fCenterY, 0));
                 return true;
             }
         };
         String[] strArr = new String[12];
         Arrays.fill(strArr, "");
         this.values = strArr;
-        LayoutInflater from = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         int size = sparseArray.size();
         boolean z = false;
         for (int i2 = 0; i2 < Math.max(this.values.length, size); i2++) {
@@ -206,7 +205,7 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 this.textViewPool.remove(i2);
             } else {
                 if (textView == null) {
-                    textView = (TextView) from.inflate(R.layout.material_clockface_textview, (ViewGroup) this, false);
+                    textView = (TextView) layoutInflaterFrom.inflate(R.layout.material_clockface_textview, (ViewGroup) this, false);
                     this.textViewPool.put(i2, textView);
                     addView(textView);
                 }

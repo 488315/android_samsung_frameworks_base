@@ -15,7 +15,6 @@ import kotlin.jvm.internal.markers.KMutableList;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MultiValueMap<K, V> {
     public final MutableScatterMap map;
@@ -25,10 +24,10 @@ public final class MultiValueMap<K, V> {
     }
 
     /* renamed from: add-impl, reason: not valid java name */
-    public static final void m341addimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
-        int findInsertIndex = mutableScatterMap.findInsertIndex(obj);
-        boolean z = findInsertIndex < 0;
-        Object obj3 = z ? null : mutableScatterMap.values[findInsertIndex];
+    public static final void m342addimpl(MutableScatterMap mutableScatterMap, Object obj, Object obj2) {
+        int iFindInsertIndex = mutableScatterMap.findInsertIndex(obj);
+        boolean z = iFindInsertIndex < 0;
+        Object obj3 = z ? null : mutableScatterMap.values[iFindInsertIndex];
         if ((obj3 instanceof List) && (obj3 instanceof KMappedMarker)) {
             boolean z2 = obj3 instanceof KMutableList;
         }
@@ -46,26 +45,26 @@ public final class MultiValueMap<K, V> {
             }
         }
         if (!z) {
-            mutableScatterMap.values[findInsertIndex] = obj2;
+            mutableScatterMap.values[iFindInsertIndex] = obj2;
             return;
         }
-        int i = ~findInsertIndex;
+        int i = ~iFindInsertIndex;
         mutableScatterMap.keys[i] = obj;
         mutableScatterMap.values[i] = obj2;
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ MultiValueMap m342boximpl(MutableScatterMap mutableScatterMap) {
+    public static final /* synthetic */ MultiValueMap m343boximpl(MutableScatterMap mutableScatterMap) {
         return new MultiValueMap(mutableScatterMap);
     }
 
     /* renamed from: constructor-impl$default, reason: not valid java name */
-    public static MutableScatterMap m343constructorimpl$default() {
+    public static MutableScatterMap m344constructorimpl$default() {
         return new MutableScatterMap(0, 1, null);
     }
 
     /* renamed from: removeLast-impl, reason: not valid java name */
-    public static final Object m344removeLastimpl(MutableScatterMap mutableScatterMap, MovableContent movableContent) {
+    public static final Object m345removeLastimpl(MutableScatterMap mutableScatterMap, MovableContent movableContent) {
         Object obj = mutableScatterMap.get(movableContent);
         if (obj == null) {
             return null;
@@ -91,11 +90,11 @@ public final class MultiValueMap<K, V> {
     }
 
     /* renamed from: removeValueIf-impl, reason: not valid java name */
-    public static final void m345removeValueIfimpl(MutableScatterMap mutableScatterMap, MovableContent movableContent, Function1 function1) {
+    public static final void m346removeValueIfimpl(MutableScatterMap mutableScatterMap, MovableContent movableContent, Function1 function1) {
         Object obj = mutableScatterMap.get(movableContent);
         if (obj != null) {
             if (!(obj instanceof MutableObjectList)) {
-                if (((Boolean) function1.mo779invoke(obj)).booleanValue()) {
+                if (((Boolean) function1.mo781invoke(obj)).booleanValue()) {
                     mutableScatterMap.remove(movableContent);
                     return;
                 }
@@ -105,13 +104,13 @@ public final class MultiValueMap<K, V> {
             int i = mutableObjectList._size;
             Object[] objArr = mutableObjectList.content;
             int i2 = 0;
-            IntRange until = RangesKt___RangesKt.until(0, i);
-            int i3 = until.first;
-            int i4 = until.last;
+            IntRange intRangeUntil = RangesKt___RangesKt.until(0, i);
+            int i3 = intRangeUntil.first;
+            int i4 = intRangeUntil.last;
             if (i3 <= i4) {
                 while (true) {
                     objArr[i3 - i2] = objArr[i3];
-                    if (((Boolean) function1.mo779invoke(objArr[i3])).booleanValue()) {
+                    if (((Boolean) function1.mo781invoke(objArr[i3])).booleanValue()) {
                         i2++;
                     }
                     if (i3 == i4) {
@@ -132,8 +131,12 @@ public final class MultiValueMap<K, V> {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:27:0x007b  */
     /* renamed from: values-impl, reason: not valid java name */
-    public static final MutableObjectList m346valuesimpl(MutableScatterMap mutableScatterMap) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static final MutableObjectList m347valuesimpl(MutableScatterMap mutableScatterMap) {
         if (mutableScatterMap.isEmpty()) {
             return ObjectListKt.EmptyObjectList;
         }
@@ -170,11 +173,11 @@ public final class MultiValueMap<K, V> {
                     if (i2 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
         }
         return mutableObjectList;

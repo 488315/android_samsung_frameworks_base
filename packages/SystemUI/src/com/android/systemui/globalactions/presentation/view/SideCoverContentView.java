@@ -5,14 +5,18 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import com.android.systemui.basic.util.CoverUtilWrapper;
 import com.android.systemui.globalactions.presentation.view.CoverViewAnimatorFSM;
+import com.samsung.android.cover.CoverState;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter;
 import com.samsung.android.globalactions.presentation.view.ContentView;
 import com.samsung.android.globalactions.presentation.view.ExtendableGlobalActionsView;
@@ -25,12 +29,12 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.ToastController;
+import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SideCoverContentView implements ContentView, ViewStateController {
     public final ConditionChecker mConditionChecker;
@@ -54,7 +58,6 @@ public class SideCoverContentView implements ContentView, ViewStateController {
     public final AnonymousClass1 mSideCoverAnimatorCallback = new AnonymousClass1();
     public ViewAnimationState mViewAnimationState = ViewAnimationState.IDLE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.globalactions.presentation.view.SideCoverContentView$1, reason: invalid class name */
     public class AnonymousClass1 {
         public String toastMessage;
@@ -63,7 +66,6 @@ public class SideCoverContentView implements ContentView, ViewStateController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SideCoverContentAdapter extends ArrayAdapter {
         public View mLastAnimatedView;
         public final List mTempViewModelList;
@@ -93,22 +95,21 @@ public class SideCoverContentView implements ContentView, ViewStateController {
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
         public final View getView(int i, View view, ViewGroup viewGroup) {
             SideCoverContentItemView sideCoverContentItemView = new SideCoverContentItemView(SideCoverContentView.this.mContext, (ActionViewModel) ((ArrayList) this.mViewModelList).get(i), viewGroup, SideCoverContentView.this.mResourceFactory, false, false);
-            View inflateView = sideCoverContentItemView.inflateView();
-            sideCoverContentItemView.setViewAttrs(inflateView);
+            View viewInflateView = sideCoverContentItemView.inflateView();
+            sideCoverContentItemView.setViewAttrs(viewInflateView);
             sideCoverContentItemView.mViewModel.getActionInfo().setViewIndex(i);
             ActionViewModel actionViewModel = SideCoverContentView.this.mSelectedViewModel;
             if (actionViewModel != null && actionViewModel.getActionInfo().getStateLabel().equals("confirm_dismiss") && ((ActionViewModel) ((ArrayList) this.mViewModelList).get(i)).getActionInfo().getName().equals(SideCoverContentView.this.mSelectedViewModel.getActionInfo().getName())) {
-                this.mLastAnimatedView = inflateView;
+                this.mLastAnimatedView = viewInflateView;
                 View view2 = SideCoverContentView.this.mGridViewAdapter.mLastAnimatedView;
                 if (view2 != null) {
                     view2.setVisibility(8);
                 }
             }
-            return inflateView;
+            return viewInflateView;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SideCoverContentGridView extends GridView {
         public long mLastTime;
         public float mLastX;
@@ -134,9 +135,9 @@ public class SideCoverContentView implements ContentView, ViewStateController {
                 return true;
             }
             if (motionEvent.getAction() == 1) {
-                long currentTimeMillis = System.currentTimeMillis() - this.mLastTime;
-                if (Math.abs(motionEvent.getX() - this.mLastX) > 250.0f || Math.abs(motionEvent.getY() - this.mLastY) > 200.0f || currentTimeMillis > 500) {
-                    SideCoverContentView.this.mLogWrapper.i("SideCoverContentView", "button click canceled, diff : " + currentTimeMillis);
+                long jCurrentTimeMillis = System.currentTimeMillis() - this.mLastTime;
+                if (Math.abs(motionEvent.getX() - this.mLastX) > 250.0f || Math.abs(motionEvent.getY() - this.mLastY) > 200.0f || jCurrentTimeMillis > 500) {
+                    SideCoverContentView.this.mLogWrapper.i("SideCoverContentView", "button click canceled, diff : " + jCurrentTimeMillis);
                     return false;
                 }
             }
@@ -152,7 +153,6 @@ public class SideCoverContentView implements ContentView, ViewStateController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SideCoverContentRootView extends FrameLayout {
         public SideCoverContentRootView(Context context) {
             super(context);
@@ -222,17 +222,87 @@ public class SideCoverContentView implements ContentView, ViewStateController {
         this.mViewAnimatorFSM = new CoverViewAnimatorFSM(sideCoverViewAnimator, this.mLogWrapper, this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00fb  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x00fb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initLayouts() {
-        /*
-            Method dump skipped, instructions count: 322
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.globalactions.presentation.view.SideCoverContentView.initLayouts():void");
+    public final void initLayouts() throws Resources.NotFoundException {
+        float f;
+        float f2;
+        CoverUtilWrapper coverUtilWrapper = this.mCoverUtilWrapper;
+        coverUtilWrapper.getClass();
+        Rect rect = new Rect();
+        CoverState coverState = coverUtilWrapper.mCoverState;
+        if (coverState != null) {
+            rect = coverState.getVisibleRect();
+        }
+        this.mVisibleRect = rect;
+        SideCoverContentRootView sideCoverContentRootView = new SideCoverContentRootView(this.mContext);
+        this.mRootView = sideCoverContentRootView;
+        ResourceFactory resourceFactory = this.mResourceFactory;
+        ResourceType resourceType = ResourceType.ID_SIDE_COVER_ITEM_LIST;
+        ViewGroup viewGroup = (ViewGroup) sideCoverContentRootView.findViewById(resourceFactory.get(resourceType));
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) viewGroup.getLayoutParams();
+        layoutParams.width = this.mVisibleRect.height();
+        layoutParams.height = this.mVisibleRect.width();
+        viewGroup.setLayoutParams(layoutParams);
+        SideCoverContentGridView sideCoverContentGridView = new SideCoverContentGridView(this.mContext, true);
+        this.mListView = sideCoverContentGridView;
+        viewGroup.addView(sideCoverContentGridView);
+        SideCoverContentAdapter sideCoverContentAdapter = new SideCoverContentAdapter(this.mContext, this.mResourceFactory.get(resourceType), new ArrayList());
+        this.mGridViewAdapter = sideCoverContentAdapter;
+        this.mListView.setAdapter((ListAdapter) sideCoverContentAdapter);
+        LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) this.mListView.getLayoutParams();
+        DisplayMetrics displayMetrics = this.mResources.getDisplayMetrics();
+        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(this.mResourceFactory.get(ResourceType.DIMEN_SIDE_COVER_WIDTH));
+        int i = displayMetrics.widthPixels;
+        int i2 = i == 720 ? 320 : i == 1080 ? VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE : 640;
+        int i3 = displayMetrics.densityDpi;
+        if (i3 >= i2) {
+            if (i3 > i2) {
+                f = dimensionPixelSize;
+                f2 = 0.889f;
+            }
+            layoutParams2.width = dimensionPixelSize;
+            this.mListView.setNumColumns(2);
+            this.mListView.setGravity(17);
+            this.mListView.setLayoutParams(layoutParams2);
+            ViewGroup viewGroup2 = (ViewGroup) this.mRootView.findViewById(this.mResourceFactory.get(ResourceType.ID_SIDE_COVER_CONFIRM));
+            this.mConfirmView = viewGroup2;
+            ViewGroup.LayoutParams layoutParams3 = viewGroup2.getLayoutParams();
+            layoutParams3.width = this.mVisibleRect.height();
+            layoutParams3.height = this.mVisibleRect.width();
+            this.mConfirmView.setLayoutParams(layoutParams3);
+            if (this.mContext.getResources().getConfiguration().orientation == 1) {
+                viewGroup.setX(this.mVisibleRect.right);
+                viewGroup.setY(this.mVisibleRect.top);
+                viewGroup.setPivotX(0.0f);
+                viewGroup.setPivotY(0.0f);
+                viewGroup.setRotation(90.0f);
+                this.mConfirmView.setPivotX(0.0f);
+                this.mConfirmView.setPivotY(0.0f);
+                this.mConfirmView.setRotation(90.0f);
+                this.mConfirmView.setX(this.mVisibleRect.right);
+                this.mConfirmView.setY(this.mVisibleRect.top);
+            }
+            this.mDialog.setContentView(this.mRootView);
+        }
+        f = dimensionPixelSize;
+        f2 = 1.143f;
+        dimensionPixelSize = (int) (f * f2);
+        layoutParams2.width = dimensionPixelSize;
+        this.mListView.setNumColumns(2);
+        this.mListView.setGravity(17);
+        this.mListView.setLayoutParams(layoutParams2);
+        ViewGroup viewGroup22 = (ViewGroup) this.mRootView.findViewById(this.mResourceFactory.get(ResourceType.ID_SIDE_COVER_CONFIRM));
+        this.mConfirmView = viewGroup22;
+        ViewGroup.LayoutParams layoutParams32 = viewGroup22.getLayoutParams();
+        layoutParams32.width = this.mVisibleRect.height();
+        layoutParams32.height = this.mVisibleRect.width();
+        this.mConfirmView.setLayoutParams(layoutParams32);
+        if (this.mContext.getResources().getConfiguration().orientation == 1) {
+        }
+        this.mDialog.setContentView(this.mRootView);
     }
 
     public final void notifyDataSetChanged() {
@@ -247,7 +317,7 @@ public class SideCoverContentView implements ContentView, ViewStateController {
         this.mToastController.setInterceptor(new Consumer() { // from class: com.android.systemui.globalactions.presentation.view.SideCoverContentView$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SideCoverContentView sideCoverContentView = SideCoverContentView.this;
+                SideCoverContentView sideCoverContentView = this.f$0;
                 sideCoverContentView.getClass();
                 sideCoverContentView.mSelectedViewModel = (ActionViewModel) sideCoverContentView.mGridViewAdapter.getItem(0);
                 sideCoverContentView.mSideCoverAnimatorCallback.toastMessage = (String) obj;

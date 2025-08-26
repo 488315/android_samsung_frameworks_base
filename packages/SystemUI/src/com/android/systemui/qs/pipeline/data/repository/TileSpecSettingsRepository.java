@@ -2,28 +2,38 @@ package com.android.systemui.qs.pipeline.data.repository;
 
 import android.content.res.Resources;
 import android.util.SparseArray;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.R;
 import com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository;
 import com.android.systemui.qs.pipeline.shared.TileSpec;
+import com.android.systemui.qs.pipeline.shared.TilesUpgradePath;
 import com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger;
 import com.android.systemui.retail.data.repository.RetailModeRepository;
+import com.android.systemui.retail.data.repository.impl.RetailModeSettingsRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.BufferedChannel;
+import kotlinx.coroutines.channels.BufferedChannel.BufferedChannelIterator;
 import kotlinx.coroutines.channels.ChannelKt;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileSpecSettingsRepository implements TileSpecRepository {
     public final CoroutineScope applicationScope;
@@ -35,10 +45,10 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
             int i = 0;
-            List<String> split$default = StringsKt__StringsKt.split$default(TileSpecSettingsRepository.this.resources.getString(R.string.quick_settings_tiles_retail_mode), new String[]{","}, 0, 6);
+            List<String> listSplit$default = StringsKt__StringsKt.split$default(this.f$0.resources.getString(R.string.quick_settings_tiles_retail_mode), new String[]{","}, 0, 6);
             TileSpec.Companion companion = TileSpec.Companion;
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default, 10));
-            for (String str : split$default) {
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listSplit$default, 10));
+            for (String str : listSplit$default) {
                 companion.getClass();
                 arrayList.add(TileSpec.Companion.create(str));
             }
@@ -57,13 +67,105 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
     public final BufferedChannel _tilesUpgradePath = ChannelKt.Channel$default(5, null, null, 6);
     public final SparseArray userTileRepositories = new SparseArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return TileSpecSettingsRepository.this.tilesSpecs(0, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $userId;
+        final /* synthetic */ UserTileSpecRepository $userTileRepository;
+        Object L$0;
+        int label;
+        final /* synthetic */ TileSpecSettingsRepository this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(UserTileSpecRepository userTileSpecRepository, TileSpecSettingsRepository tileSpecSettingsRepository, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$userTileRepository = userTileSpecRepository;
+            this.this$0 = tileSpecSettingsRepository;
+            this.$userId = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass2(this.$userTileRepository, this.this$0, this.$userId, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Removed duplicated region for block: B:16:0x0046  */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x0067  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0064 -> B:11:0x0033). Please report as a decompilation issue!!! */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                BufferedChannel bufferedChannel = this.$userTileRepository.tilesUpgradePath;
+                bufferedChannel.getClass();
+                bufferedChannelIterator = bufferedChannel.new BufferedChannelIterator();
+            } else {
+                if (i == 1) {
+                    bufferedChannelIterator = (BufferedChannel.BufferedChannelIterator) this.L$0;
+                    ResultKt.throwOnFailure(obj);
+                    if (((Boolean) obj).booleanValue()) {
+                        return Unit.INSTANCE;
+                    }
+                    TilesUpgradePath tilesUpgradePath = (TilesUpgradePath) bufferedChannelIterator.next();
+                    BufferedChannel bufferedChannel2 = this.this$0._tilesUpgradePath;
+                    Pair pair = new Pair(tilesUpgradePath, new Integer(this.$userId));
+                    this.L$0 = bufferedChannelIterator;
+                    this.label = 2;
+                    if (bufferedChannel2.send(pair, this) != coroutineSingletons) {
+                    }
+                    return coroutineSingletons;
+                }
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                bufferedChannelIterator = (BufferedChannel.BufferedChannelIterator) this.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            this.L$0 = bufferedChannelIterator;
+            this.label = 1;
+            obj = bufferedChannelIterator.hasNext(this);
+            if (obj != coroutineSingletons) {
+                if (((Boolean) obj).booleanValue()) {
+                }
+            }
+            return coroutineSingletons;
         }
     }
 
@@ -81,7 +183,7 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
     public final Object addTile(int i, TileSpec tileSpec, int i2, SuspendLambda suspendLambda) {
-        Object emit;
+        Object objEmit;
         if (this.retailModeRepository.getInRetailMode()) {
             return Unit.INSTANCE;
         }
@@ -93,19 +195,14 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         if (userTileSpecRepository == null) {
             return Unit.INSTANCE;
         }
-        if (z) {
-            emit = Unit.INSTANCE;
-        } else {
-            emit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.AddTile(tileSpec, i2), suspendLambda);
-            if (emit != CoroutineSingletons.COROUTINE_SUSPENDED) {
-                emit = Unit.INSTANCE;
-            }
+        if (z || (objEmit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.AddTile(tileSpec, i2), suspendLambda)) != CoroutineSingletons.COROUTINE_SUSPENDED) {
+            objEmit = Unit.INSTANCE;
         }
-        return emit == CoroutineSingletons.COROUTINE_SUSPENDED ? emit : Unit.INSTANCE;
+        return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
-    public final Object prependDefault(int i, SuspendLambda suspendLambda) {
+    public final Object prependDefault(int i, SuspendLambda suspendLambda) throws Throwable {
         if (this.retailModeRepository.getInRetailMode()) {
             return Unit.INSTANCE;
         }
@@ -113,12 +210,12 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         if (userTileSpecRepository == null) {
             return Unit.INSTANCE;
         }
-        Object emit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.PrependDefault(userTileSpecRepository.defaultTilesRepository.getDefaultTiles()), suspendLambda);
+        Object objEmit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.PrependDefault(userTileSpecRepository.defaultTilesRepository.getDefaultTiles()), suspendLambda);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (emit != coroutineSingletons) {
-            emit = Unit.INSTANCE;
+        if (objEmit != coroutineSingletons) {
+            objEmit = Unit.INSTANCE;
         }
-        return emit == coroutineSingletons ? emit : Unit.INSTANCE;
+        return objEmit == coroutineSingletons ? objEmit : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
@@ -127,7 +224,7 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
-    public final Object removeTiles(int i, Collection collection, SuspendLambda suspendLambda) {
+    public final Object removeTiles(int i, Collection collection, SuspendLambda suspendLambda) throws Throwable {
         if (this.retailModeRepository.getInRetailMode()) {
             return Unit.INSTANCE;
         }
@@ -135,30 +232,30 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         if (userTileSpecRepository == null) {
             return Unit.INSTANCE;
         }
-        Object emit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.RemoveTiles(collection), suspendLambda);
+        Object objEmit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.RemoveTiles(collection), suspendLambda);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (emit != coroutineSingletons) {
-            emit = Unit.INSTANCE;
+        if (objEmit != coroutineSingletons) {
+            objEmit = Unit.INSTANCE;
         }
-        return emit == coroutineSingletons ? emit : Unit.INSTANCE;
+        return objEmit == coroutineSingletons ? objEmit : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
-    public final Object resetToDefault(int i, SuspendLambda suspendLambda) {
+    public final Object resetToDefault(int i, SuspendLambda suspendLambda) throws Throwable {
         UserTileSpecRepository userTileSpecRepository = (UserTileSpecRepository) this.userTileRepositories.get(i);
         if (userTileSpecRepository == null) {
             return Unit.INSTANCE;
         }
-        Object emit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.ResetToDefault(userTileSpecRepository.defaultTilesRepository.getDefaultTiles()), suspendLambda);
+        Object objEmit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.ResetToDefault(userTileSpecRepository.defaultTilesRepository.getDefaultTiles()), suspendLambda);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (emit != coroutineSingletons) {
-            emit = Unit.INSTANCE;
+        if (objEmit != coroutineSingletons) {
+            objEmit = Unit.INSTANCE;
         }
-        return emit == coroutineSingletons ? emit : Unit.INSTANCE;
+        return objEmit == coroutineSingletons ? objEmit : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
-    public final Object setTiles(int i, List list, SuspendLambda suspendLambda) {
+    public final Object setTiles(int i, List list, SuspendLambda suspendLambda) throws Throwable {
         if (this.retailModeRepository.getInRetailMode()) {
             return Unit.INSTANCE;
         }
@@ -166,88 +263,54 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         if (userTileSpecRepository == null) {
             return Unit.INSTANCE;
         }
-        Object emit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.ChangeTiles(list), suspendLambda);
+        Object objEmit = userTileSpecRepository.changeEvents.emit(new UserTileSpecRepository.ChangeTiles(list), suspendLambda);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        if (emit != coroutineSingletons) {
-            emit = Unit.INSTANCE;
+        if (objEmit != coroutineSingletons) {
+            objEmit = Unit.INSTANCE;
         }
-        return emit == coroutineSingletons ? emit : Unit.INSTANCE;
+        return objEmit == coroutineSingletons ? objEmit : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.qs.pipeline.data.repository.TileSpecRepository
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object tilesSpecs(int r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r6 = this;
-            boolean r0 = r8 instanceof com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1 r0 = (com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1 r0 = new com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$1
-            r0.<init>(r6, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L34
-            if (r2 != r4) goto L2c
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository r6 = (com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository) r6
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L68
-        L2c:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L34:
-            kotlin.ResultKt.throwOnFailure(r8)
-            android.util.SparseArray r8 = r6.userTileRepositories
-            boolean r8 = r8.contains(r7)
-            if (r8 != 0) goto L55
-            com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository$Factory r8 = r6.userTileSpecRepositoryFactory
-            com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository r8 = r8.create(r7)
-            android.util.SparseArray r2 = r6.userTileRepositories
-            r2.put(r7, r8)
-            com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$2 r2 = new com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$2
-            r2.<init>(r8, r6, r7, r3)
-            r8 = 6
-            kotlinx.coroutines.CoroutineScope r5 = r6.applicationScope
-            com.android.app.tracing.coroutines.CoroutineTracingKt.launchTraced$default(r5, r3, r3, r2, r8)
-        L55:
-            android.util.SparseArray r8 = r6.userTileRepositories
-            java.lang.Object r7 = r8.get(r7)
-            com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository r7 = (com.android.systemui.qs.pipeline.data.repository.UserTileSpecRepository) r7
-            r0.L$0 = r6
-            r0.label = r4
-            java.lang.Object r8 = r7.tiles(r0)
-            if (r8 != r1) goto L68
-            return r1
-        L68:
-            kotlinx.coroutines.flow.Flow r8 = (kotlinx.coroutines.flow.Flow) r8
-            com.android.systemui.retail.data.repository.RetailModeRepository r7 = r6.retailModeRepository
-            com.android.systemui.retail.data.repository.impl.RetailModeSettingsRepository r7 = (com.android.systemui.retail.data.repository.impl.RetailModeSettingsRepository) r7
-            kotlinx.coroutines.flow.ReadonlyStateFlow r7 = r7.retailMode
-            com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$1 r0 = new com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$1
-            r0.<init>(r3, r6, r8)
-            kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest r6 = kotlinx.coroutines.flow.FlowKt.transformLatest(r7, r0)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.pipeline.data.repository.TileSpecSettingsRepository.tilesSpecs(int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object tilesSpecs(int i, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i2 = anonymousClass1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objTiles = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = anonymousClass1.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(objTiles);
+            if (!this.userTileRepositories.contains(i)) {
+                UserTileSpecRepository userTileSpecRepositoryCreate = this.userTileSpecRepositoryFactory.create(i);
+                this.userTileRepositories.put(i, userTileSpecRepositoryCreate);
+                CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new AnonymousClass2(userTileSpecRepositoryCreate, this, i, null), 6);
+            }
+            UserTileSpecRepository userTileSpecRepository = (UserTileSpecRepository) this.userTileRepositories.get(i);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objTiles = userTileSpecRepository.tiles(anonymousClass1);
+            if (objTiles == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (TileSpecSettingsRepository) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(objTiles);
+        }
+        return FlowKt.transformLatest(((RetailModeSettingsRepository) this.retailModeRepository).retailMode, new TileSpecSettingsRepository$tilesSpecs$$inlined$flatMapLatest$1(null, this, (Flow) objTiles));
     }
 }

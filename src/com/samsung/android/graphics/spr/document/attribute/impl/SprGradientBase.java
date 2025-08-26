@@ -28,13 +28,13 @@ public abstract class SprGradientBase implements Cloneable {
         this.colors = iArr;
         this.positions = new float[iArr.length];
         for (int i = 0; i < this.colors.length; i++) {
-            float readFloat = sprInputStream.readFloat();
+            float f = sprInputStream.readFloat();
             this.colors[i] = sprInputStream.readInt() | (((int) (sprInputStream.readFloat() * 255.0f)) << 24);
-            this.positions[i] = readFloat;
+            this.positions[i] = f;
         }
-        byte readByte = sprInputStream.readByte();
+        byte b = sprInputStream.readByte();
         this.matrix = SprMatrix.fromSPR(sprInputStream);
-        if (readByte == 0) {
+        if (b == 0) {
             this.matrix = null;
         }
         updateGradient();
@@ -57,7 +57,7 @@ public abstract class SprGradientBase implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SprGradientBase m9222clone() throws CloneNotSupportedException {
+    public SprGradientBase m9234clone() throws CloneNotSupportedException {
         SprGradientBase sprGradientBase = (SprGradientBase) super.clone();
         sprGradientBase.colors = new int[this.colors.length];
         sprGradientBase.positions = new float[this.colors.length];

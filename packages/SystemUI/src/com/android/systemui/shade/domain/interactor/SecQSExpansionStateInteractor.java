@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQSExpansionStateInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -22,7 +21,7 @@ public final class SecQSExpansionStateInteractor {
     public final SecQSExpansionStateInteractor$panelTransitionStateListener$1 panelTransitionStateListener = new PanelTransitionStateListener() { // from class: com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteractor$panelTransitionStateListener$1
         @Override // com.android.systemui.shade.PanelTransitionStateListener
         public final void onPanelTransitionStateChanged(PanelTransitionStateChangeEvent panelTransitionStateChangeEvent) {
-            SecQSExpansionStateRepository repository = SecQSExpansionStateInteractor.this.getRepository();
+            SecQSExpansionStateRepository repository = this.this$0.getRepository();
             repository._panelTransitionEnabled.updateState(null, Boolean.valueOf(panelTransitionStateChangeEvent.enabled));
             repository._panelTransitionState.updateState(null, Integer.valueOf(panelTransitionStateChangeEvent.state));
         }
@@ -31,7 +30,6 @@ public final class SecQSExpansionStateInteractor {
     public final Lazy repository$delegate;
     public final Lazy splitHelper$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,7 +63,7 @@ public final class SecQSExpansionStateInteractor {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i2 = SecQSExpansionStateInteractor.$r8$clinit;
-                return new SecQSExpansionStateRepository(CoroutineScope.this, shadeRepository, new SecQSExpansionStateInteractor$repository$2$1(this));
+                return new SecQSExpansionStateRepository(coroutineScope, shadeRepository, new SecQSExpansionStateInteractor$repository$2$1(this));
             }
         });
         final int i2 = 1;

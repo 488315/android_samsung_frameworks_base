@@ -46,7 +46,6 @@ import com.android.wm.shell.back.BackAnimationController;
 import com.sec.ims.presence.ServiceTuple;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyButtonView extends ImageView implements ButtonInterface {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -77,7 +76,6 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     public final UiEventLogger mUiEventLogger;
     public final VibratorHelper mVibratorHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NavBarButtonEvent implements UiEventLogger.UiEventEnum {
         NAVBAR_HOME_BUTTON_TAP(533),
         NAVBAR_BACK_BUTTON_TAP(534),
@@ -128,9 +126,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     public final void draw(Canvas canvas) {
         Canvas canvas2;
         if (this.mHasOvalBg) {
-            float min = Math.min(getWidth(), getHeight());
+            float fMin = Math.min(getWidth(), getHeight());
             canvas2 = canvas;
-            canvas2.drawOval(0.0f, 0.0f, min, min, this.mOvalBgPaint);
+            canvas2.drawOval(0.0f, 0.0f, fMin, fMin, this.mOvalBgPaint);
         } else {
             canvas2 = canvas;
         }
@@ -172,7 +170,7 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     @Override // android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         View.OnClickListener onClickListener;
-        boolean shouldShowSwipeUpUI = this.mLauncherProxyService.shouldShowSwipeUpUI();
+        boolean zShouldShowSwipeUpUI = this.mLauncherProxyService.shouldShowSwipeUpUI();
         int action = motionEvent.getAction();
         if (action == 0) {
             this.mGestureAborted = false;
@@ -189,7 +187,7 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
             this.mTouchDownY = (int) motionEvent.getY();
             if (this.mCode != 0) {
                 sendEvent(0, 0, this.mDownTime);
-                if (BasicRune.NAVBAR_ENABLED && !shouldShowSwipeUpUI) {
+                if (BasicRune.NAVBAR_ENABLED && !zShouldShowSwipeUpUI) {
                     if (this.mVibratorHelper.isSupportDCMotorHapticFeedback()) {
                         this.mVibratorHelper.vibrateButton();
                     } else if (BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON && this.mBackAnimation != null && this.mCode == 4) {
@@ -198,14 +196,14 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
                 }
             } else if (!BasicRune.NAVBAR_ENABLED) {
                 performHapticFeedback(1);
-            } else if (!shouldShowSwipeUpUI) {
+            } else if (!zShouldShowSwipeUpUI) {
                 if (this.mVibratorHelper.isSupportDCMotorHapticFeedback()) {
                     this.mVibratorHelper.vibrateButton();
                 } else {
                     performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
                 }
             }
-            if (!shouldShowSwipeUpUI) {
+            if (!zShouldShowSwipeUpUI) {
                 playSoundEffect(0);
             }
             removeCallbacks(this.mCheckLongPress);
@@ -257,7 +255,7 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         boolean z2 = isPressed() && !this.mLongClicked;
         setPressed(false);
         boolean z3 = SystemClock.uptimeMillis() - this.mDownTime > 150;
-        if (shouldShowSwipeUpUI) {
+        if (zShouldShowSwipeUpUI) {
             if (z2) {
                 if (!BasicRune.NAVBAR_ENABLED) {
                     performHapticFeedback(1);
@@ -440,7 +438,7 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
             handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.views.buttons.KeyButtonView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyButtonView keyButtonView = KeyButtonView.this;
+                    KeyButtonView keyButtonView = this.f$0;
                     KeyEvent keyEvent3 = keyEvent2;
                     int i5 = KeyButtonView.$r8$clinit;
                     keyButtonView.getClass();
@@ -476,14 +474,14 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
             }
         };
         this.mUiEventLogger = uiEventLogger;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyButtonView, i, 0);
-        this.mCode = obtainStyledAttributes.getInteger(1, 0);
-        this.mPlaySounds = obtainStyledAttributes.getBoolean(2, true);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyButtonView, i, 0);
+        this.mCode = typedArrayObtainStyledAttributes.getInteger(1, 0);
+        this.mPlaySounds = typedArrayObtainStyledAttributes.getBoolean(2, true);
         TypedValue typedValue = new TypedValue();
-        if (obtainStyledAttributes.getValue(0, typedValue)) {
+        if (typedArrayObtainStyledAttributes.getValue(0, typedValue)) {
             this.mContentDescriptionRes = typedValue.resourceId;
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setClickable(true);
         this.mAudioManager = (AudioManager) context.getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
         if (BasicRune.NAVBAR_STABLE_LAYOUT) {

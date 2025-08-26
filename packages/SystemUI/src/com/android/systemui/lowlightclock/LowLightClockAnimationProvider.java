@@ -8,7 +8,6 @@ import android.view.View;
 import com.android.app.animation.Interpolators;
 import com.android.dream.lowlight.util.TruncatedInterpolator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LowLightClockAnimationProvider {
     public final long mAlphaAnimationDurationMillis;
@@ -29,14 +28,14 @@ public class LowLightClockAnimationProvider {
         AnimatorSet animatorSet = new AnimatorSet();
         for (View view : viewArr) {
             if (view != null) {
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 0.0f);
                 long j = this.mAlphaAnimationDurationMillis;
-                ofFloat.setDuration(j);
-                ofFloat.setInterpolator(Interpolators.LINEAR);
-                ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, this.mYTranslationAnimationInStartOffset);
-                ofFloat2.setDuration(j);
-                ofFloat2.setInterpolator(this.mTranslationOutInterpolator);
-                animatorSet.playTogether(ofFloat, ofFloat2);
+                objectAnimatorOfFloat.setDuration(j);
+                objectAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, this.mYTranslationAnimationInStartOffset);
+                objectAnimatorOfFloat2.setDuration(j);
+                objectAnimatorOfFloat2.setInterpolator(this.mTranslationOutInterpolator);
+                animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
             }
         }
         return animatorSet;

@@ -22,7 +22,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 import kotlin.text.StringsKt___StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
     public final RingBuffer buffer;
@@ -158,16 +157,15 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
 
     @Override // com.android.systemui.plugins.log.TableLogBufferBase
     public final void logChange(String str, String str2, String str3, boolean z) {
-        long currentTimeMillis = this.systemClock.currentTimeMillis();
+        long jCurrentTimeMillis = this.systemClock.currentTimeMillis();
         Trace.beginSection("TableLogBuffer#logChange(string)");
-        TableChange obtain = obtain(currentTimeMillis, str, str2, z);
-        obtain.type = TableChange.DataType.STRING;
-        obtain.str = str3 != null ? StringsKt___StringsKt.take(500, str3) : null;
-        echoToDesiredEndpoints(obtain);
+        TableChange tableChangeObtain = obtain(jCurrentTimeMillis, str, str2, z);
+        tableChangeObtain.type = TableChange.DataType.STRING;
+        tableChangeObtain.str = str3 != null ? StringsKt___StringsKt.take(500, str3) : null;
+        echoToDesiredEndpoints(tableChangeObtain);
         Trace.endSection();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TableRowLoggerImpl {
         public String columnPrefix;
         public boolean isInitial;
@@ -188,10 +186,10 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
             TableLogBuffer tableLogBuffer = this.tableLogBuffer;
             tableLogBuffer.getClass();
             Trace.beginSection("TableLogBuffer#logChange(string)");
-            TableChange obtain = tableLogBuffer.obtain(j, str3, str, z);
-            obtain.type = TableChange.DataType.STRING;
-            obtain.str = str2 != null ? StringsKt___StringsKt.take(500, str2) : null;
-            tableLogBuffer.echoToDesiredEndpoints(obtain);
+            TableChange tableChangeObtain = tableLogBuffer.obtain(j, str3, str, z);
+            tableChangeObtain.type = TableChange.DataType.STRING;
+            tableChangeObtain.str = str2 != null ? StringsKt___StringsKt.take(500, str2) : null;
+            tableLogBuffer.echoToDesiredEndpoints(tableChangeObtain);
             Trace.endSection();
         }
 
@@ -202,25 +200,25 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
             TableLogBuffer tableLogBuffer = this.tableLogBuffer;
             tableLogBuffer.getClass();
             Trace.beginSection("TableLogBuffer#logChange(boolean)");
-            TableChange obtain = tableLogBuffer.obtain(j, str2, str, z2);
-            obtain.type = TableChange.DataType.BOOLEAN;
-            obtain.bool = z;
-            tableLogBuffer.echoToDesiredEndpoints(obtain);
+            TableChange tableChangeObtain = tableLogBuffer.obtain(j, str2, str, z2);
+            tableChangeObtain.type = TableChange.DataType.BOOLEAN;
+            tableChangeObtain.bool = z;
+            tableLogBuffer.echoToDesiredEndpoints(tableChangeObtain);
             Trace.endSection();
         }
 
         public final void logChange(int i, String str) {
             long j = this.timestamp;
             String str2 = this.columnPrefix;
-            Integer valueOf = Integer.valueOf(i);
+            Integer numValueOf = Integer.valueOf(i);
             boolean z = this.isInitial;
             TableLogBuffer tableLogBuffer = this.tableLogBuffer;
             tableLogBuffer.getClass();
             Trace.beginSection("TableLogBuffer#logChange(int)");
-            TableChange obtain = tableLogBuffer.obtain(j, str2, str, z);
-            obtain.type = TableChange.DataType.INT;
-            obtain.f49int = valueOf;
-            tableLogBuffer.echoToDesiredEndpoints(obtain);
+            TableChange tableChangeObtain = tableLogBuffer.obtain(j, str2, str, z);
+            tableChangeObtain.type = TableChange.DataType.INT;
+            tableChangeObtain.f49int = numValueOf;
+            tableLogBuffer.echoToDesiredEndpoints(tableChangeObtain);
             Trace.endSection();
         }
     }
@@ -238,12 +236,12 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
 
     @Override // com.android.systemui.plugins.log.TableLogBufferBase
     public final void logChange(String str, String str2, boolean z, boolean z2) {
-        long currentTimeMillis = this.systemClock.currentTimeMillis();
+        long jCurrentTimeMillis = this.systemClock.currentTimeMillis();
         Trace.beginSection("TableLogBuffer#logChange(boolean)");
-        TableChange obtain = obtain(currentTimeMillis, str, str2, z2);
-        obtain.type = TableChange.DataType.BOOLEAN;
-        obtain.bool = z;
-        echoToDesiredEndpoints(obtain);
+        TableChange tableChangeObtain = obtain(jCurrentTimeMillis, str, str2, z2);
+        tableChangeObtain.type = TableChange.DataType.BOOLEAN;
+        tableChangeObtain.bool = z;
+        echoToDesiredEndpoints(tableChangeObtain);
         Trace.endSection();
     }
 
@@ -253,12 +251,12 @@ public final class TableLogBuffer implements Dumpable, TableLogBufferBase {
 
     @Override // com.android.systemui.plugins.log.TableLogBufferBase
     public final void logChange(String str, String str2, Integer num, boolean z) {
-        long currentTimeMillis = this.systemClock.currentTimeMillis();
+        long jCurrentTimeMillis = this.systemClock.currentTimeMillis();
         Trace.beginSection("TableLogBuffer#logChange(int)");
-        TableChange obtain = obtain(currentTimeMillis, str, str2, z);
-        obtain.type = TableChange.DataType.INT;
-        obtain.f49int = num;
-        echoToDesiredEndpoints(obtain);
+        TableChange tableChangeObtain = obtain(jCurrentTimeMillis, str, str2, z);
+        tableChangeObtain.type = TableChange.DataType.INT;
+        tableChangeObtain.f49int = num;
+        echoToDesiredEndpoints(tableChangeObtain);
         Trace.endSection();
     }
 }

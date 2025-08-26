@@ -73,9 +73,9 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ISehRadioIndication)) {
-            return (ISehRadioIndication) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof ISehRadioIndication)) {
+            return (ISehRadioIndication) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -546,10 +546,10 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                 this.mRemote.transact(27, hwParcel, hwParcel2, 0);
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
-                int readInt32 = hwParcel2.readInt32();
+                int int32 = hwParcel2.readInt32();
                 SehPacketUsage sehPacketUsage = new SehPacketUsage();
                 sehPacketUsage.readFromParcel(hwParcel2);
-                needpacketusagecallback.onValues(readInt32, sehPacketUsage);
+                needpacketusagecallback.onValues(int32, sehPacketUsage);
             } finally {
                 hwParcel2.release();
             }
@@ -674,13 +674,13 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -895,10 +895,10 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                     return;
                 case 16:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int readInt32 = hwParcel.readInt32();
+                    int int32 = hwParcel.readInt32();
                     SehSsReleaseComplete sehSsReleaseComplete = new SehSsReleaseComplete();
                     sehSsReleaseComplete.readFromParcel(hwParcel);
-                    releaseCompleteMessageIndication(readInt32, sehSsReleaseComplete);
+                    releaseCompleteMessageIndication(int32, sehSsReleaseComplete);
                     return;
                 case 17:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
@@ -914,30 +914,30 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                     return;
                 case 20:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int readInt322 = hwParcel.readInt32();
+                    int int322 = hwParcel.readInt32();
                     SehRrcStateInfo sehRrcStateInfo = new SehRrcStateInfo();
                     sehRrcStateInfo.readFromParcel(hwParcel);
-                    rrcStateChanged(readInt322, sehRrcStateInfo);
+                    rrcStateChanged(int322, sehRrcStateInfo);
                     return;
                 case 21:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int readInt323 = hwParcel.readInt32();
+                    int int323 = hwParcel.readInt32();
                     SehConfigModemCapability sehConfigModemCapability = new SehConfigModemCapability();
                     sehConfigModemCapability.readFromParcel(hwParcel);
-                    configModemCapabilityChangeNoti(readInt323, sehConfigModemCapability);
+                    configModemCapabilityChangeNoti(int323, sehConfigModemCapability);
                     return;
                 case 22:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    SehApnProfile needApnProfileIndication = needApnProfileIndication(hwParcel.readString());
+                    SehApnProfile sehApnProfileNeedApnProfileIndication = needApnProfileIndication(hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    needApnProfileIndication.writeToParcel(hwParcel2);
+                    sehApnProfileNeedApnProfileIndication.writeToParcel(hwParcel2);
                     hwParcel2.send();
                     return;
                 case 23:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int needSettingValueIndication = needSettingValueIndication(hwParcel.readString(), hwParcel.readString());
+                    int iNeedSettingValueIndication = needSettingValueIndication(hwParcel.readString(), hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(needSettingValueIndication);
+                    hwParcel2.writeInt32(iNeedSettingValueIndication);
                     hwParcel2.send();
                     return;
                 case 24:
@@ -946,19 +946,19 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                     return;
                 case 25:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int readInt324 = hwParcel.readInt32();
+                    int int324 = hwParcel.readInt32();
                     SehSignalBar sehSignalBar = new SehSignalBar();
                     sehSignalBar.readFromParcel(hwParcel);
-                    signalLevelInfoChanged(readInt324, sehSignalBar);
+                    signalLevelInfoChanged(int324, sehSignalBar);
                     hwParcel2.writeStatus(0);
                     hwParcel2.send();
                     return;
                 case 26:
                     hwParcel.enforceInterface(vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.kInterfaceName);
-                    int readInt325 = hwParcel.readInt32();
+                    int int325 = hwParcel.readInt32();
                     SehExtendedRegStateResult sehExtendedRegStateResult = new SehExtendedRegStateResult();
                     sehExtendedRegStateResult.readFromParcel(hwParcel);
-                    extendedRegistrationState(readInt325, sehExtendedRegStateResult);
+                    extendedRegistrationState(int325, sehExtendedRegStateResult);
                     hwParcel2.writeStatus(0);
                     hwParcel2.send();
                     return;
@@ -992,10 +992,10 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                     return;
                 case 31:
                     hwParcel.enforceInterface(ISehRadioIndication.kInterfaceName);
-                    int readInt326 = hwParcel.readInt32();
+                    int int326 = hwParcel.readInt32();
                     SehEriInfo sehEriInfo = new SehEriInfo();
                     sehEriInfo.readFromParcel(hwParcel);
-                    eriInfoReceived(readInt326, sehEriInfo);
+                    eriInfoReceived(int326, sehEriInfo);
                     hwParcel2.writeStatus(0);
                     hwParcel2.send();
                     return;
@@ -1003,9 +1003,9 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -1016,9 +1016,9 @@ public interface ISehRadioIndication extends vendor.samsung.hardware.radio.V2_1.
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

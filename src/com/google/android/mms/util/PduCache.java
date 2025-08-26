@@ -47,31 +47,27 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
         uriMatcher.addURI("mms", "outbox/#", 9);
         uriMatcher.addURI("mms-sms", "conversations", 10);
         uriMatcher.addURI("mms-sms", "conversations/#", 11);
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        MATCH_TO_MSGBOX_ID_MAP = hashMap;
-        hashMap.put(2, 1);
-        hashMap.put(4, 2);
-        hashMap.put(6, 3);
-        hashMap.put(8, 4);
+        HashMap<Integer, Integer> map = new HashMap<>();
+        MATCH_TO_MSGBOX_ID_MAP = map;
+        map.put(2, 1);
+        map.put(4, 2);
+        map.put(6, 3);
+        map.put(8, 4);
     }
 
     private PduCache() {
     }
 
     public static final synchronized PduCache getInstance() {
-        PduCache pduCache;
-        synchronized (PduCache.class) {
-            if (sInstance == null) {
-                sInstance = new PduCache();
-            }
-            pduCache = sInstance;
+        if (sInstance == null) {
+            sInstance = new PduCache();
         }
-        return pduCache;
+        return sInstance;
     }
 
     @Override // com.google.android.mms.util.AbstractCache
     public synchronized boolean put(Uri uri, PduCacheEntry pduCacheEntry) {
-        boolean put;
+        boolean zPut;
         int messageBox = pduCacheEntry.getMessageBox();
         HashSet<Uri> hashSet = this.mMessageBoxes.get(Integer.valueOf(messageBox));
         if (hashSet == null) {
@@ -84,14 +80,14 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
             hashSet2 = new HashSet<>();
             this.mThreads.put(Long.valueOf(threadId), hashSet2);
         }
-        Uri normalizeKey = normalizeKey(uri);
-        put = super.put((PduCache) normalizeKey, (Uri) pduCacheEntry);
-        if (put) {
-            hashSet.add(normalizeKey);
-            hashSet2.add(normalizeKey);
+        Uri uriNormalizeKey = normalizeKey(uri);
+        zPut = super.put((PduCache) uriNormalizeKey, (Uri) pduCacheEntry);
+        if (zPut) {
+            hashSet.add(uriNormalizeKey);
+            hashSet2.add(uriNormalizeKey);
         }
         setUpdating(uri, false);
-        return put;
+        return zPut;
     }
 
     public synchronized void setUpdating(Uri uri, boolean z) {
@@ -108,8 +104,8 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
 
     @Override // com.google.android.mms.util.AbstractCache
     public synchronized PduCacheEntry purge(Uri uri) {
-        int match = URI_MATCHER.match(uri);
-        switch (match) {
+        int iMatch = URI_MATCHER.match(uri);
+        switch (iMatch) {
             case 0:
             case 10:
                 purgeAll();
@@ -120,7 +116,7 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
             case 4:
             case 6:
             case 8:
-                purgeByMessageBox(MATCH_TO_MSGBOX_ID_MAP.get(Integer.valueOf(match)));
+                purgeByMessageBox(MATCH_TO_MSGBOX_ID_MAP.get(Integer.valueOf(iMatch)));
                 return null;
             case 3:
             case 5:
@@ -155,22 +151,22 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
     }
 
     private Uri normalizeKey(Uri uri) {
-        int match = URI_MATCHER.match(uri);
-        if (match == 1) {
+        int iMatch = URI_MATCHER.match(uri);
+        if (iMatch == 1) {
             return uri;
         }
-        if (match != 3 && match != 5 && match != 7 && match != 9) {
+        if (iMatch != 3 && iMatch != 5 && iMatch != 7 && iMatch != 9) {
             return null;
         }
         return Uri.withAppendedPath(Telephony.Mms.CONTENT_URI, uri.getLastPathSegment());
     }
 
     private void purgeByMessageBox(Integer num) {
-        HashSet<Uri> remove;
-        if (num == null || (remove = this.mMessageBoxes.remove(num)) == null) {
+        HashSet<Uri> hashSetRemove;
+        if (num == null || (hashSetRemove = this.mMessageBoxes.remove(num)) == null) {
             return;
         }
-        Iterator<Uri> it = remove.iterator();
+        Iterator<Uri> it = hashSetRemove.iterator();
         while (it.hasNext()) {
             Uri next = it.next();
             this.mUpdating.remove(next);
@@ -189,9 +185,9 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
     }
 
     private void purgeByThreadId(long j) {
-        HashSet<Uri> remove = this.mThreads.remove(Long.valueOf(j));
-        if (remove != null) {
-            Iterator<Uri> it = remove.iterator();
+        HashSet<Uri> hashSetRemove = this.mThreads.remove(Long.valueOf(j));
+        if (hashSetRemove != null) {
+            Iterator<Uri> it = hashSetRemove.iterator();
             while (it.hasNext()) {
                 Uri next = it.next();
                 this.mUpdating.remove(next);

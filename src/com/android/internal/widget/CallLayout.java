@@ -61,7 +61,7 @@ public class CallLayout extends FrameLayout {
         this.mIcon.setOnForceHiddenChangedListener(new Consumer() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                CallLayout.this.lambda$onFinishInflate$0((Boolean) obj);
+                this.f$0.lambda$onFinishInflate$0((Boolean) obj);
             }
         });
     }
@@ -73,22 +73,22 @@ public class CallLayout extends FrameLayout {
 
     private Icon getConversationIcon() {
         Icon icon;
-        String str;
+        String strFindNamePrefix;
         Person person = this.mUser;
         CharSequence charSequence = "";
         if (person != null) {
             icon = person.getIcon();
             CharSequence name = this.mUser.getName();
-            str = this.mPeopleHelper.findNamePrefix(name, "");
+            strFindNamePrefix = this.mPeopleHelper.findNamePrefix(name, "");
             charSequence = name;
         } else {
             icon = null;
-            str = "";
+            strFindNamePrefix = "";
         }
         if (icon == null) {
             icon = this.mLargeIcon;
         }
-        return icon == null ? this.mPeopleHelper.createAvatarSymbol(charSequence, str, this.mLayoutColor) : icon;
+        return icon == null ? this.mPeopleHelper.createAvatarSymbol(charSequence, strFindNamePrefix, this.mLayoutColor) : icon;
     }
 
     public Runnable setLayoutColorAsync(final int i) {
@@ -96,7 +96,7 @@ public class CallLayout extends FrameLayout {
             return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallLayout.this.lambda$setLayoutColorAsync$1(i);
+                    this.f$0.lambda$setLayoutColorAsync$1(i);
                 }
             };
         }
@@ -125,7 +125,7 @@ public class CallLayout extends FrameLayout {
             return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallLayout.this.lambda$setLargeIconAsync$3(icon);
+                    this.f$0.lambda$setLargeIconAsync$3(icon);
                 }
             };
         }
@@ -156,7 +156,7 @@ public class CallLayout extends FrameLayout {
             return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallLayout.this.lambda$setDataAsync$5(bundle);
+                    this.f$0.lambda$setDataAsync$5(bundle);
                 }
             };
         }

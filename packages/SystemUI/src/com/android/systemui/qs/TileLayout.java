@@ -25,7 +25,6 @@ import com.android.systemui.qs.tileimpl.QSTileViewImpl;
 import com.android.systemui.util.Utils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
     public int mCellHeight;
@@ -84,11 +83,11 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
 
     public final void layoutTileRecords(int i, boolean z) {
         boolean z2 = getLayoutDirection() == 1;
-        int min = Math.min(i, this.mRows * this.mColumns);
+        int iMin = Math.min(i, this.mRows * this.mColumns);
         int i2 = 0;
         int i3 = 0;
         int i4 = 0;
-        while (i2 < min) {
+        while (i2 < iMin) {
             if (i3 == this.mColumns) {
                 i4++;
                 i3 = 0;
@@ -134,20 +133,20 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
         }
         int i3 = this.mColumns;
         this.mCellWidth = ((paddingStart - (this.mCellMarginHorizontal * (i3 - 1))) - (this.mSidePadding * 2)) / i3;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(this.mResourceCellHeight, this.mEstimatedCellHeight), 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(this.mResourceCellHeight, this.mEstimatedCellHeight), 1073741824);
         ArrayList arrayList = this.mRecords;
         int size3 = arrayList.size();
-        View view = this;
+        View viewUpdateAccessibilityOrder = this;
         int i4 = 0;
         while (i4 < size3) {
             Object obj = arrayList.get(i4);
             i4++;
             SecQSPanelControllerBase.TileRecord tileRecord = (SecQSPanelControllerBase.TileRecord) obj;
             if (tileRecord.tileView.getVisibility() != 8) {
-                int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824);
+                int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824);
                 QSTileView qSTileView = tileRecord.tileView;
-                qSTileView.measure(makeMeasureSpec2, makeMeasureSpec);
-                view = qSTileView.updateAccessibilityOrder(view);
+                qSTileView.measure(iMakeMeasureSpec2, iMakeMeasureSpec);
+                viewUpdateAccessibilityOrder = qSTileView.updateAccessibilityOrder(viewUpdateAccessibilityOrder);
                 this.mCellHeight = qSTileView.getMeasuredHeight();
             }
         }
@@ -196,14 +195,14 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
     public boolean updateMaxRows(int i, int i2) {
         int i3 = i + this.mCellMarginVertical;
         int i4 = this.mRows;
-        int max = i3 / (Math.max(this.mResourceCellHeight, this.mEstimatedCellHeight) + this.mCellMarginVertical);
-        this.mRows = max;
+        int iMax = i3 / (Math.max(this.mResourceCellHeight, this.mEstimatedCellHeight) + this.mCellMarginVertical);
+        this.mRows = iMax;
         int i5 = this.mMinRows;
-        if (max < i5) {
+        if (iMax < i5) {
             this.mRows = i5;
         } else {
             int i6 = this.mMaxAllowedRows;
-            if (max >= i6) {
+            if (iMax >= i6) {
                 this.mRows = i6;
             }
         }
@@ -216,7 +215,7 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
         return i4 != this.mRows;
     }
 
-    public boolean updateResources() {
+    public boolean updateResources() throws Resources.NotFoundException {
         Resources resources = getResources();
         this.mResourceColumns = Math.max(1, (this.mIsSmallLandscapeLockscreenEnabled.booleanValue() && ((ViewGroup) this).mContext.getResources().getBoolean(R.bool.is_small_screen_landscape)) ? resources.getInteger(R.integer.small_land_lockscreen_quick_settings_num_columns) : resources.getInteger(R.integer.quick_settings_num_columns));
         this.mResourceCellHeight = resources.getDimensionPixelSize(this.mResourceCellHeightResId);
@@ -224,27 +223,28 @@ public class TileLayout extends ViewGroup implements SecQSPanel.QSTileLayout {
         this.mCellMarginHorizontal = dimensionPixelSize;
         this.mSidePadding = !(this instanceof SideLabelTileLayout) ? dimensionPixelSize / 2 : 0;
         this.mCellMarginVertical = resources.getDimensionPixelSize(R.dimen.qs_tile_margin_vertical);
-        int max = Math.max(1, (this.mIsSmallLandscapeLockscreenEnabled.booleanValue() && ((ViewGroup) this).mContext.getResources().getBoolean(R.bool.is_small_screen_landscape)) ? resources.getInteger(R.integer.small_land_lockscreen_quick_settings_max_rows) : resources.getInteger(R.integer.quick_settings_max_rows));
-        this.mMaxAllowedRows = max;
+        int iMax = Math.max(1, (this.mIsSmallLandscapeLockscreenEnabled.booleanValue() && ((ViewGroup) this).mContext.getResources().getBoolean(R.bool.is_small_screen_landscape)) ? resources.getInteger(R.integer.small_land_lockscreen_quick_settings_max_rows) : resources.getInteger(R.integer.quick_settings_max_rows));
+        this.mMaxAllowedRows = iMax;
         if (this.mLessRows) {
-            this.mMaxAllowedRows = Math.max(this.mMinRows, max - 1);
+            this.mMaxAllowedRows = Math.max(this.mMinRows, iMax - 1);
         }
         this.mTempTextView.dispatchConfigurationChanged(((ViewGroup) this).mContext.getResources().getConfiguration());
         FontSizeUtils.updateFontSize(this.mTempTextView, R.dimen.qs_tile_text_size);
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        this.mTempTextView.measure(makeMeasureSpec, makeMeasureSpec);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        this.mTempTextView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
         this.mEstimatedCellHeight = (((ViewGroup) this).mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_padding) * 2) + (this.mTempTextView.getMeasuredHeight() * 2);
         int i = this.mColumns;
-        int min = Math.min(this.mResourceColumns, this.mMaxColumns);
-        this.mColumns = min;
-        if (i == min) {
+        int iMin = Math.min(this.mResourceColumns, this.mMaxColumns);
+        this.mColumns = iMin;
+        if (i == iMin) {
             return false;
         }
         requestLayout();
         return true;
     }
 
-    public TileLayout(Context context, AttributeSet attributeSet) {
+    /* JADX WARN: Multi-variable type inference failed */
+    public TileLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mResourceCellHeightResId = R.dimen.qs_tile_height;
         boolean z = true;

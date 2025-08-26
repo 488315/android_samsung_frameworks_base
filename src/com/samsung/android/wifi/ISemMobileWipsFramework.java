@@ -77,9 +77,9 @@ public interface ISemMobileWipsFramework extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsFramework.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemMobileWipsFramework)) {
-                return (ISemMobileWipsFramework) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsFramework.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemMobileWipsFramework)) {
+                return (ISemMobileWipsFramework) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -118,17 +118,17 @@ public interface ISemMobileWipsFramework extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean invokeMethodBool = invokeMethodBool(readInt);
+                boolean zInvokeMethodBool = invokeMethodBool(i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(invokeMethodBool);
+                parcel2.writeBoolean(zInvokeMethodBool);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                String invokeMethodStr = invokeMethodStr(readInt2);
+                String strInvokeMethodStr = invokeMethodStr(i4);
                 parcel2.writeNoException();
-                parcel2.writeString(invokeMethodStr);
+                parcel2.writeString(strInvokeMethodStr);
             } else if (i == 3) {
                 Message message = (Message) parcel.readTypedObject(Message.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -139,18 +139,18 @@ public interface ISemMobileWipsFramework extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeTypedList(scanResults, 1);
             } else if (i == 5) {
-                int readInt3 = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
-                String readString6 = parcel.readString();
-                String readString7 = parcel.readString();
-                String readString8 = parcel.readString();
-                String readString9 = parcel.readString();
+                int i5 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
+                String string6 = parcel.readString();
+                String string7 = parcel.readString();
+                String string8 = parcel.readString();
+                String string9 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                sendHWParamToHQMwithAppId(readInt3, readString, readString2, readString3, readString4, readString5, readString6, readString7, readString8, readString9);
+                sendHWParamToHQMwithAppId(i5, string, string2, string3, string4, string5, string6, string7, string8, string9);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -176,87 +176,87 @@ public interface ISemMobileWipsFramework extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
             public boolean invokeMethodBool(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
             public String invokeMethodStr(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
             public void partialScanStart(Message message) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
-                    obtain.writeTypedObject(message, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(message, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
             public List<SemMobileWipsScanResult> getScanResults() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
             public void sendHWParamToHQMwithAppId(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeString(str8);
-                    obtain.writeString(str9);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeString(str8);
+                    parcelObtain.writeString(str9);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,7 +6,6 @@ import android.view.WindowManager;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.feature.SemFloatingFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowUtils {
     private static final String TAG = "WindowUtils";

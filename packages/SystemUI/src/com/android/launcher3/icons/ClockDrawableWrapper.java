@@ -22,7 +22,6 @@ import com.android.systemui.R;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClockDrawableWrapper extends AdaptiveIconDrawable implements BitmapInfo.Extender {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -30,7 +29,6 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
     public final AnimationInfo mAnimationInfo;
     public AnimationInfo mThemeInfo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationInfo {
         public Drawable.ConstantState baseDrawableState;
         public int defaultHour;
@@ -44,38 +42,29 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
             this();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0046  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final boolean applyTime(Calendar calendar, LayerDrawable layerDrawable) {
             boolean z;
-            int i;
-            int i2;
             calendar.setTimeInMillis(System.currentTimeMillis());
-            int i3 = ((12 - this.defaultHour) + calendar.get(10)) % 12;
-            int i4 = ((60 - this.defaultMinute) + calendar.get(12)) % 60;
-            int i5 = ((60 - this.defaultSecond) + calendar.get(13)) % 60;
-            int i6 = this.hourLayerIndex;
-            if (i6 != -1) {
-                if (layerDrawable.getDrawable(i6).setLevel(calendar.get(12) + (i3 * 60))) {
-                    z = true;
-                    i = this.minuteLayerIndex;
-                    if (i != -1 && layerDrawable.getDrawable(i).setLevel((calendar.get(10) * 60) + i4)) {
-                        z = true;
-                    }
-                    i2 = this.secondLayerIndex;
-                    if (i2 == -1 && layerDrawable.getDrawable(i2).setLevel(i5 * 10)) {
-                        return true;
-                    }
-                    return z;
-                }
+            int i = ((12 - this.defaultHour) + calendar.get(10)) % 12;
+            int i2 = ((60 - this.defaultMinute) + calendar.get(12)) % 60;
+            int i3 = ((60 - this.defaultSecond) + calendar.get(13)) % 60;
+            int i4 = this.hourLayerIndex;
+            if (i4 != -1) {
+                z = layerDrawable.getDrawable(i4).setLevel(calendar.get(12) + (i * 60));
             }
-            z = false;
-            i = this.minuteLayerIndex;
-            if (i != -1) {
+            int i5 = this.minuteLayerIndex;
+            if (i5 != -1 && layerDrawable.getDrawable(i5).setLevel((calendar.get(10) * 60) + i2)) {
                 z = true;
             }
-            i2 = this.secondLayerIndex;
-            if (i2 == -1) {
+            int i6 = this.secondLayerIndex;
+            if (i6 == -1 || !layerDrawable.getDrawable(i6).setLevel(i3 * 10)) {
+                return z;
             }
-            return z;
+            return true;
         }
 
         public final AnimationInfo copyForIcon(Drawable drawable) {
@@ -94,7 +83,6 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClockBitmapInfo extends BitmapInfo {
         public final AnimationInfo animInfo;
         public final float boundsOffset;
@@ -114,65 +102,65 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         @Override // com.android.launcher3.icons.BitmapInfo
         public final FastBitmapDrawable newIcon$1(int i, Context context) {
             Bitmap bitmap;
-            AnimationInfo animationInfo;
+            AnimationInfo animationInfoCopyForIcon;
             int i2;
             BlendModeColorFilter blendModeColorFilter;
-            AnimationInfo animationInfo2;
-            if ((i & 1) == 0 || (animationInfo2 = this.themeData) == null) {
+            AnimationInfo animationInfo;
+            if ((i & 1) == 0 || (animationInfo = this.themeData) == null) {
                 bitmap = this.mFlattenedBackground;
-                animationInfo = this.animInfo;
+                animationInfoCopyForIcon = this.animInfo;
                 i2 = -1;
                 blendModeColorFilter = null;
             } else {
                 ThemedIconDrawable.Companion.getClass();
                 Resources resources = context.getResources();
                 int[] iArr = {resources.getColor(R.color.themed_icon_background_color), resources.getColor(R.color.themed_icon_color)};
-                Drawable mutate = animationInfo2.baseDrawableState.newDrawable().mutate();
+                Drawable drawableMutate = animationInfo.baseDrawableState.newDrawable().mutate();
                 i2 = iArr[1];
-                mutate.setTint(i2);
-                animationInfo = animationInfo2.copyForIcon(mutate);
+                drawableMutate.setTint(i2);
+                animationInfoCopyForIcon = animationInfo.copyForIcon(drawableMutate);
                 bitmap = this.themeBackground;
                 blendModeColorFilter = new BlendModeColorFilter(iArr[0], BlendMode.SRC_IN);
             }
             int i3 = i2;
-            AnimationInfo animationInfo3 = animationInfo;
+            AnimationInfo animationInfo2 = animationInfoCopyForIcon;
             Bitmap bitmap2 = bitmap;
-            if (animationInfo3 == null) {
+            if (animationInfo2 == null) {
                 return newIcon$1(i, context);
             }
-            ClockIconDrawable.ClockConstantState clockConstantState = new ClockIconDrawable.ClockConstantState(this, i3, this.boundsOffset, animationInfo3, bitmap2, blendModeColorFilter);
-            FastBitmapDrawable createDrawable = clockConstantState.createDrawable();
+            ClockIconDrawable.ClockConstantState clockConstantState = new ClockIconDrawable.ClockConstantState(this, i3, this.boundsOffset, animationInfo2, bitmap2, blendModeColorFilter);
+            FastBitmapDrawable fastBitmapDrawableCreateDrawable = clockConstantState.createDrawable();
             Drawable.ConstantState constantState = clockConstantState.mBadgeConstantState;
             if (constantState != null) {
-                Drawable newDrawable = constantState.newDrawable();
-                Drawable drawable = createDrawable.mBadge;
+                Drawable drawableNewDrawable = constantState.newDrawable();
+                Drawable drawable = fastBitmapDrawableCreateDrawable.mBadge;
                 if (drawable != null) {
                     drawable.setCallback(null);
                 }
-                createDrawable.mBadge = newDrawable;
-                if (newDrawable != null) {
-                    newDrawable.setCallback(createDrawable);
+                fastBitmapDrawableCreateDrawable.mBadge = drawableNewDrawable;
+                if (drawableNewDrawable != null) {
+                    drawableNewDrawable.setCallback(fastBitmapDrawableCreateDrawable);
                 }
-                Rect bounds = createDrawable.getBounds();
-                Drawable drawable2 = createDrawable.mBadge;
+                Rect bounds = fastBitmapDrawableCreateDrawable.getBounds();
+                Drawable drawable2 = fastBitmapDrawableCreateDrawable.mBadge;
                 if (drawable2 != null) {
-                    int width = bounds.width();
+                    int iWidth = bounds.width();
                     float f = BaseIconFactory.LEGACY_ICON_SCALE;
-                    int i4 = (int) (width * 0.444f);
+                    int i4 = (int) (iWidth * 0.444f);
                     int i5 = bounds.right;
                     int i6 = bounds.bottom;
                     drawable2.setBounds(i5 - i4, i6 - i4, i5, i6);
                 }
-                createDrawable.updateFilter();
+                fastBitmapDrawableCreateDrawable.updateFilter();
             }
-            createDrawable.mCreationFlags = clockConstantState.mCreationFlags;
-            applyFlags(context, createDrawable, i);
-            return createDrawable;
+            fastBitmapDrawableCreateDrawable.mCreationFlags = clockConstantState.mCreationFlags;
+            applyFlags(context, fastBitmapDrawableCreateDrawable, i);
+            return fastBitmapDrawableCreateDrawable;
         }
 
         @Override // com.android.launcher3.icons.BitmapInfo
         /* renamed from: clone */
-        public final BitmapInfo mo972clone() {
+        public final BitmapInfo mo974clone() {
             ClockBitmapInfo clockBitmapInfo = new ClockBitmapInfo(this.icon, this.color, 1.0f - (this.boundsOffset * 2.0f), this.animInfo, this.mFlattenedBackground, this.themeData, this.themeBackground);
             clockBitmapInfo.flags = this.flags;
             clockBitmapInfo.badgeInfo = this.badgeInfo;
@@ -180,7 +168,6 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClockIconDrawable extends FastBitmapDrawable implements Runnable {
         public final AnimationInfo mAnimInfo;
         public final Bitmap mBG;
@@ -193,7 +180,6 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         public final int mThemedFgColor;
         public final Calendar mTime;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ClockConstantState extends FastBitmapDrawable.FastBitmapConstantState {
             public final AnimationInfo mAnimInfo;
             public final Bitmap mBG;
@@ -247,13 +233,13 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
             }
             canvas.drawBitmap(this.mBG, (Rect) null, rect, this.mBgPaint);
             this.mAnimInfo.applyTime(this.mTime, this.mFG);
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.translate(rect.left, rect.top);
             float f = this.mCanvasScale;
             canvas.scale(f, f, rect.width() / 2, rect.height() / 2);
             canvas.clipPath(this.mFullDrawable.getIconMask());
             this.mFG.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
             reschedule();
         }
 
@@ -271,9 +257,9 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         public final void reschedule() {
             if (isVisible()) {
                 unscheduleSelf(this);
-                long uptimeMillis = SystemClock.uptimeMillis();
+                long jUptimeMillis = SystemClock.uptimeMillis();
                 long j = ClockDrawableWrapper.TICK_MS;
-                scheduleSelf(this, (uptimeMillis - (uptimeMillis % j)) + j);
+                scheduleSelf(this, (jUptimeMillis - (jUptimeMillis % j)) + j);
             }
         }
 
@@ -322,12 +308,12 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
     public static ClockDrawableWrapper forExtras(Bundle bundle, ClockDrawableWrapper$$ExternalSyntheticLambda0 clockDrawableWrapper$$ExternalSyntheticLambda0) {
         int i;
         if (bundle != null && (i = bundle.getInt("com.android.launcher3.LEVEL_PER_TICK_ICON_ROUND", 0)) != 0) {
-            Drawable mutate = ((Drawable) clockDrawableWrapper$$ExternalSyntheticLambda0.apply(i)).mutate();
-            if (mutate instanceof AdaptiveIconDrawable) {
-                AdaptiveIconDrawable adaptiveIconDrawable = (AdaptiveIconDrawable) mutate;
+            Drawable drawableMutate = ((Drawable) clockDrawableWrapper$$ExternalSyntheticLambda0.apply(i)).mutate();
+            if (drawableMutate instanceof AdaptiveIconDrawable) {
+                AdaptiveIconDrawable adaptiveIconDrawable = (AdaptiveIconDrawable) drawableMutate;
                 ClockDrawableWrapper clockDrawableWrapper = new ClockDrawableWrapper(adaptiveIconDrawable);
                 AnimationInfo animationInfo = clockDrawableWrapper.mAnimationInfo;
-                animationInfo.baseDrawableState = mutate.getConstantState();
+                animationInfo.baseDrawableState = drawableMutate.getConstantState();
                 animationInfo.hourLayerIndex = bundle.getInt("com.android.launcher3.HOUR_LAYER_INDEX", -1);
                 animationInfo.minuteLayerIndex = bundle.getInt("com.android.launcher3.MINUTE_LAYER_INDEX", -1);
                 animationInfo.secondLayerIndex = bundle.getInt("com.android.launcher3.SECOND_LAYER_INDEX", -1);
@@ -367,11 +353,11 @@ public class ClockDrawableWrapper extends AdaptiveIconDrawable implements Bitmap
         if (animationInfo == null) {
             return null;
         }
-        Drawable mutate = animationInfo.baseDrawableState.newDrawable().mutate();
-        if (!(mutate instanceof AdaptiveIconDrawable)) {
+        Drawable drawableMutate = animationInfo.baseDrawableState.newDrawable().mutate();
+        if (!(drawableMutate instanceof AdaptiveIconDrawable)) {
             return null;
         }
-        Drawable foreground = ((AdaptiveIconDrawable) mutate).getForeground();
+        Drawable foreground = ((AdaptiveIconDrawable) drawableMutate).getForeground();
         this.mThemeInfo.applyTime(Calendar.getInstance(), (LayerDrawable) foreground);
         return foreground;
     }

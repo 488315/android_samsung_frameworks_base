@@ -41,13 +41,13 @@ public final class CellIdentity {
 
     public static final ArrayList<CellIdentity> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentity> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentity cellIdentity = new CellIdentity();
-            cellIdentity.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            cellIdentity.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             arrayList.add(cellIdentity);
         }
         return arrayList;
@@ -56,43 +56,43 @@ public final class CellIdentity {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.cellInfoType = hwBlob.getInt32(j);
         int int32 = hwBlob.getInt32(16 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, hwBlob.handle(), j + 8, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, hwBlob.handle(), j + 8, true);
         this.cellIdentityGsm.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityGsm cellIdentityGsm = new CellIdentityGsm();
-            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 80);
+            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 80);
             this.cellIdentityGsm.add(cellIdentityGsm);
         }
         int int322 = hwBlob.getInt32(32 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 80, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 80, hwBlob.handle(), j + 24, true);
         this.cellIdentityWcdma.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             CellIdentityWcdma cellIdentityWcdma = new CellIdentityWcdma();
-            cellIdentityWcdma.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 80);
+            cellIdentityWcdma.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 80);
             this.cellIdentityWcdma.add(cellIdentityWcdma);
         }
         int int323 = hwBlob.getInt32(48 + j);
-        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 56, hwBlob.handle(), j + 40, true);
+        HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 56, hwBlob.handle(), j + 40, true);
         this.cellIdentityCdma.clear();
         for (int i3 = 0; i3 < int323; i3++) {
             CellIdentityCdma cellIdentityCdma = new CellIdentityCdma();
-            cellIdentityCdma.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer3, i3 * 56);
+            cellIdentityCdma.readEmbeddedFromParcel(hwParcel, embeddedBuffer3, i3 * 56);
             this.cellIdentityCdma.add(cellIdentityCdma);
         }
         int int324 = hwBlob.getInt32(64 + j);
-        HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 88, hwBlob.handle(), j + 56, true);
+        HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 88, hwBlob.handle(), j + 56, true);
         this.cellIdentityLte.clear();
         for (int i4 = 0; i4 < int324; i4++) {
             CellIdentityLte cellIdentityLte = new CellIdentityLte();
-            cellIdentityLte.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer4, i4 * 88);
+            cellIdentityLte.readEmbeddedFromParcel(hwParcel, embeddedBuffer4, i4 * 88);
             this.cellIdentityLte.add(cellIdentityLte);
         }
         int int325 = hwBlob.getInt32(j + 80);
-        HwBlob readEmbeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 88, hwBlob.handle(), j + 72, true);
+        HwBlob embeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 88, hwBlob.handle(), j + 72, true);
         this.cellIdentityTdscdma.clear();
         for (int i5 = 0; i5 < int325; i5++) {
             CellIdentityTdscdma cellIdentityTdscdma = new CellIdentityTdscdma();
-            cellIdentityTdscdma.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer5, i5 * 88);
+            cellIdentityTdscdma.readEmbeddedFromParcel(hwParcel, embeddedBuffer5, i5 * 88);
             this.cellIdentityTdscdma.add(cellIdentityTdscdma);
         }
     }

@@ -26,7 +26,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlayingAudioConditionHandler implements RoutineConditionHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
     public int lastStartedUid;
     public final PlayingAudioConditionHandler$recheckCallback$1 recheckCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,10 +60,10 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.audio.soundcraft.interfaces.routine.condition.PlayingAudioConditionHandler$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                PlayingAudioConditionHandler$$ExternalSyntheticLambda3 playingAudioConditionHandler$$ExternalSyntheticLambda3 = new PlayingAudioConditionHandler$$ExternalSyntheticLambda3(PlayingAudioConditionHandler.this.context);
+                PlayingAudioConditionHandler$$ExternalSyntheticLambda3 playingAudioConditionHandler$$ExternalSyntheticLambda3 = new PlayingAudioConditionHandler$$ExternalSyntheticLambda3(this.this$0.context);
                 RoutineHandlerThread.INSTANCE.getClass();
                 ((Handler) RoutineHandlerThread.handler$delegate.getValue()).post(new RoutineHandlerThread$sam$java_lang_Runnable$0(playingAudioConditionHandler$$ExternalSyntheticLambda3));
-                PlayingAudioConditionHandler playingAudioConditionHandler = PlayingAudioConditionHandler.this;
+                PlayingAudioConditionHandler playingAudioConditionHandler = this.this$0;
                 playingAudioConditionHandler.lastStartedUid = -1;
                 playingAudioConditionHandler.lastStartedPackageName = null;
             }
@@ -74,27 +72,27 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
             @Override // android.media.AudioManager.AudioPlaybackCallback
             public final void onPlaybackConfigChanged(List list) {
                 String str;
-                int findValidPlaybackUid = PlayingAudioConditionHandler.this.audioPlaybackManager.findValidPlaybackUid(list);
+                int iFindValidPlaybackUid = this.this$0.audioPlaybackManager.findValidPlaybackUid(list);
                 PackageExt packageExt = PackageExt.INSTANCE;
-                Context context2 = PlayingAudioConditionHandler.this.context;
+                Context context2 = this.this$0.context;
                 packageExt.getClass();
-                String packageNameForUid = PackageExt.getPackageNameForUid(findValidPlaybackUid, context2);
-                PlayingAudioConditionHandler playingAudioConditionHandler = PlayingAudioConditionHandler.this;
+                String packageNameForUid = PackageExt.getPackageNameForUid(iFindValidPlaybackUid, context2);
+                PlayingAudioConditionHandler playingAudioConditionHandler = this.this$0;
                 String str2 = playingAudioConditionHandler.lastStartedPackageName;
                 int i = playingAudioConditionHandler.lastStartedUid;
-                Thread currentThread = Thread.currentThread();
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "onPlaybackConfigChanged : lastStartedPackageName=", str2, ", lastStartedUid=", ", newStartedUid=");
-                m888m.append(findValidPlaybackUid);
-                m888m.append(", newStartPackageName=");
-                m888m.append(packageNameForUid);
-                m888m.append(", thread=");
-                m888m.append(currentThread);
-                Log.d("SoundCraft.PlayingAudioConditionHandler", m888m.toString());
-                PlayingAudioConditionHandler playingAudioConditionHandler2 = PlayingAudioConditionHandler.this;
-                if ((playingAudioConditionHandler2.lastStartedUid == findValidPlaybackUid && (((str = playingAudioConditionHandler2.lastStartedPackageName) != null && str.length() != 0) || findValidPlaybackUid == -1)) || (findValidPlaybackUid != -1 && packageNameForUid == null)) {
-                    if (findValidPlaybackUid != -1) {
-                        PlayingAudioConditionHandler playingAudioConditionHandler3 = PlayingAudioConditionHandler.this;
-                        if (playingAudioConditionHandler3.lastStartedUid == findValidPlaybackUid) {
+                Thread threadCurrentThread = Thread.currentThread();
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "onPlaybackConfigChanged : lastStartedPackageName=", str2, ", lastStartedUid=", ", newStartedUid=");
+                sbM890m.append(iFindValidPlaybackUid);
+                sbM890m.append(", newStartPackageName=");
+                sbM890m.append(packageNameForUid);
+                sbM890m.append(", thread=");
+                sbM890m.append(threadCurrentThread);
+                Log.d("SoundCraft.PlayingAudioConditionHandler", sbM890m.toString());
+                PlayingAudioConditionHandler playingAudioConditionHandler2 = this.this$0;
+                if ((playingAudioConditionHandler2.lastStartedUid == iFindValidPlaybackUid && (((str = playingAudioConditionHandler2.lastStartedPackageName) != null && str.length() != 0) || iFindValidPlaybackUid == -1)) || (iFindValidPlaybackUid != -1 && packageNameForUid == null)) {
+                    if (iFindValidPlaybackUid != -1) {
+                        PlayingAudioConditionHandler playingAudioConditionHandler3 = this.this$0;
+                        if (playingAudioConditionHandler3.lastStartedUid == iFindValidPlaybackUid) {
                             RoutineHandlerThread.INSTANCE.getClass();
                             ((Handler) RoutineHandlerThread.handler$delegate.getValue()).removeCallbacks(playingAudioConditionHandler3.recheckCallback);
                             return;
@@ -103,22 +101,22 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
                     }
                     return;
                 }
-                if (findValidPlaybackUid != -1) {
+                if (iFindValidPlaybackUid != -1) {
                     Log.d("SoundCraft.PlayingAudioConditionHandler", "onPlaybackConfigChanged : notifyChanged");
-                    PlayingAudioConditionHandler$$ExternalSyntheticLambda3 playingAudioConditionHandler$$ExternalSyntheticLambda3 = new PlayingAudioConditionHandler$$ExternalSyntheticLambda3(PlayingAudioConditionHandler.this.context);
+                    PlayingAudioConditionHandler$$ExternalSyntheticLambda3 playingAudioConditionHandler$$ExternalSyntheticLambda3 = new PlayingAudioConditionHandler$$ExternalSyntheticLambda3(this.this$0.context);
                     RoutineHandlerThread.INSTANCE.getClass();
                     ((Handler) RoutineHandlerThread.handler$delegate.getValue()).post(new RoutineHandlerThread$sam$java_lang_Runnable$0(playingAudioConditionHandler$$ExternalSyntheticLambda3));
-                    PlayingAudioConditionHandler playingAudioConditionHandler4 = PlayingAudioConditionHandler.this;
-                    playingAudioConditionHandler4.lastStartedUid = findValidPlaybackUid;
-                    playingAudioConditionHandler4.lastStartedPackageName = PackageExt.getPackageNameForUid(findValidPlaybackUid, playingAudioConditionHandler4.context);
+                    PlayingAudioConditionHandler playingAudioConditionHandler4 = this.this$0;
+                    playingAudioConditionHandler4.lastStartedUid = iFindValidPlaybackUid;
+                    playingAudioConditionHandler4.lastStartedPackageName = PackageExt.getPackageNameForUid(iFindValidPlaybackUid, playingAudioConditionHandler4.context);
                     return;
                 }
-                PlayingAudioConditionHandler$recheckCallback$1 playingAudioConditionHandler$recheckCallback$1 = PlayingAudioConditionHandler.this.recheckCallback;
+                PlayingAudioConditionHandler$recheckCallback$1 playingAudioConditionHandler$recheckCallback$1 = this.this$0.recheckCallback;
                 RoutineHandlerThread routineHandlerThread = RoutineHandlerThread.INSTANCE;
                 routineHandlerThread.getClass();
                 Lazy lazy = RoutineHandlerThread.handler$delegate;
                 ((Handler) lazy.getValue()).removeCallbacks(playingAudioConditionHandler$recheckCallback$1);
-                PlayingAudioConditionHandler$recheckCallback$1 playingAudioConditionHandler$recheckCallback$12 = PlayingAudioConditionHandler.this.recheckCallback;
+                PlayingAudioConditionHandler$recheckCallback$1 playingAudioConditionHandler$recheckCallback$12 = this.this$0.recheckCallback;
                 routineHandlerThread.getClass();
                 ((Handler) lazy.getValue()).postDelayed(playingAudioConditionHandler$recheckCallback$12, 3000L);
             }
@@ -133,7 +131,7 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 PlayingAudioConditionHandler playingAudioConditionHandler = this.f$0;
                 Boolean bool = (Boolean) obj;
                 switch (i) {
@@ -173,7 +171,7 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 PlayingAudioConditionHandler playingAudioConditionHandler = this.f$0;
                 Boolean bool = (Boolean) obj;
                 switch (i2) {
@@ -213,7 +211,7 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 PlayingAudioConditionHandler playingAudioConditionHandler = this.f$0;
                 Boolean bool = (Boolean) obj;
                 switch (i3) {
@@ -254,10 +252,10 @@ public final class PlayingAudioConditionHandler implements RoutineConditionHandl
         ((AudioManager) systemService).registerAudioPlaybackCallback(audioPlaybackCallback, new Handler(((HandlerThread) RoutineHandlerThread.thread$delegate.getValue()).getLooper()));
         Object systemService2 = context.getSystemService((Class<Object>) AudioManager.class);
         systemService2.getClass();
-        int findValidPlaybackUid = audioPlaybackManager.findValidPlaybackUid(((AudioManager) systemService2).getActivePlaybackConfigurations());
-        this.lastStartedUid = findValidPlaybackUid;
+        int iFindValidPlaybackUid = audioPlaybackManager.findValidPlaybackUid(((AudioManager) systemService2).getActivePlaybackConfigurations());
+        this.lastStartedUid = iFindValidPlaybackUid;
         PackageExt.INSTANCE.getClass();
-        String packageNameForUid = PackageExt.getPackageNameForUid(findValidPlaybackUid, context);
+        String packageNameForUid = PackageExt.getPackageNameForUid(iFindValidPlaybackUid, context);
         this.lastStartedPackageName = packageNameForUid;
         KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(this.lastStartedUid, "onCreate : lastStartedUid=", ", lastStartedPackageName=", packageNameForUid, "SoundCraft.PlayingAudioConditionHandler");
         this.isBudsEnabledAndPluginConnected = isBudsPluginCanAction();

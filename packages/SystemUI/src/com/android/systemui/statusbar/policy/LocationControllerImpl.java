@@ -1,16 +1,22 @@
 package com.android.systemui.statusbar.policy;
 
+import android.app.AppOpsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.PermissionChecker;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.database.ContentObserver;
 import android.location.ILocationManager;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -33,9 +39,9 @@ import com.android.systemui.util.DeviceConfigProxy;
 import com.android.systemui.util.settings.SecureSettings;
 import com.samsung.android.feature.SemCarrierFeature;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LocationControllerImpl extends BroadcastReceiver implements LocationController, AppOpsController.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -58,7 +64,6 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     public AppOpItem mActiveAppOpItem = null;
     public final ArrayList mSettingsChangeCallbacks = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -69,12 +74,12 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
             int i = message.what;
             int i2 = 0;
             if (i == 1) {
-                boolean isLocationEnabled$1 = LocationControllerImpl.this.isLocationEnabled$1();
+                boolean zIsLocationEnabled$1 = LocationControllerImpl.this.isLocationEnabled$1();
                 synchronized (LocationControllerImpl.this.mSettingsChangeCallbacks) {
                     try {
                         int size = LocationControllerImpl.this.mSettingsChangeCallbacks.size();
                         while (i2 < size) {
-                            ((LocationController.LocationChangeCallback) LocationControllerImpl.this.mSettingsChangeCallbacks.get(i2)).onLocationSettingsChanged(isLocationEnabled$1);
+                            ((LocationController.LocationChangeCallback) LocationControllerImpl.this.mSettingsChangeCallbacks.get(i2)).onLocationSettingsChanged(zIsLocationEnabled$1);
                             i2++;
                         }
                     } finally {
@@ -110,7 +115,6 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum LocationIndicatorEvent implements UiEventLogger.UiEventEnum {
         LOCATION_INDICATOR_MONITOR_HIGH_POWER(935),
         LOCATION_INDICATOR_SYSTEM_APP(936),
@@ -129,7 +133,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v22, types: [android.database.ContentObserver, com.android.systemui.statusbar.policy.LocationControllerImpl$1] */
-    public LocationControllerImpl(Context context, AppOpsController appOpsController, DeviceConfigProxy deviceConfigProxy, Looper looper, Handler handler, BroadcastDispatcher broadcastDispatcher, BootCompleteCache bootCompleteCache, UserTracker userTracker, PackageManager packageManager, UiEventLogger uiEventLogger, SecureSettings secureSettings) {
+    public LocationControllerImpl(Context context, AppOpsController appOpsController, DeviceConfigProxy deviceConfigProxy, Looper looper, Handler handler, BroadcastDispatcher broadcastDispatcher, BootCompleteCache bootCompleteCache, UserTracker userTracker, PackageManager packageManager, UiEventLogger uiEventLogger, SecureSettings secureSettings) throws NumberFormatException {
         int i;
         this.mContext = context;
         this.mAppOpsController = appOpsController;
@@ -166,7 +170,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         Objects.requireNonNull(handler);
         deviceConfigProxy2.addOnPropertiesChangedListener("privacy", new MobileStatusTracker$$ExternalSyntheticLambda1(handler), new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.statusbar.policy.LocationControllerImpl$$ExternalSyntheticLambda1
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                LocationControllerImpl locationControllerImpl = LocationControllerImpl.this;
+                LocationControllerImpl locationControllerImpl = this.f$0;
                 int i2 = LocationControllerImpl.$r8$clinit;
                 locationControllerImpl.mShouldDisplayAllAccesses = locationControllerImpl.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_small_enabled", false) || locationControllerImpl.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
                 locationControllerImpl.mShowSystemAccessesFlag = locationControllerImpl.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_show_system", false) || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
@@ -204,18 +208,96 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00bf  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00cb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void areActiveLocationRequests() {
-        /*
-            Method dump skipped, instructions count: 262
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.LocationControllerImpl.areActiveLocationRequests():void");
+        boolean z;
+        boolean z2;
+        if (this.mShouldDisplayAllAccesses) {
+            boolean z3 = this.mAreActiveLocationRequests;
+            boolean z4 = true;
+            boolean z5 = this.mShowSystemAccessesFlag || this.mShowSystemAccessesSetting;
+            List activeAppOps = ((AppOpsControllerImpl) this.mAppOpsController).getActiveAppOps(false);
+            List userProfiles = ((UserTrackerImpl) this.mUserTracker).getUserProfiles();
+            ArrayList arrayList = (ArrayList) activeAppOps;
+            int size = arrayList.size();
+            int i = 0;
+            boolean z6 = false;
+            boolean z7 = false;
+            boolean z8 = false;
+            while (i < size) {
+                if (((AppOpItem) arrayList.get(i)).mCode == z4 || ((AppOpItem) arrayList.get(i)).mCode == 0) {
+                    AppOpItem appOpItem = (AppOpItem) arrayList.get(i);
+                    String strOpToPermission = AppOpsManager.opToPermission(appOpItem.mCode);
+                    int i2 = appOpItem.mUid;
+                    UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i2);
+                    int size2 = userProfiles.size();
+                    int i3 = 0;
+                    boolean z9 = false;
+                    while (i3 < size2) {
+                        boolean z10 = z5;
+                        if (((UserInfo) userProfiles.get(i3)).getUserHandle().equals(userHandleForUid)) {
+                            z9 = true;
+                        }
+                        i3++;
+                        z5 = z10;
+                    }
+                    z = z5;
+                    if (z9) {
+                        PackageManager packageManager = this.mPackageManager;
+                        String str = appOpItem.mPackageName;
+                        int permissionFlags = packageManager.getPermissionFlags(strOpToPermission, str, userHandleForUid);
+                        if (PermissionChecker.checkPermissionForPreflight(this.mContext, strOpToPermission, -1, i2, str) != 0 ? (permissionFlags & 512) != 0 : (permissionFlags & 256) != 0) {
+                            z2 = false;
+                        }
+                        if (z2) {
+                        }
+                        if (z) {
+                        }
+                    } else {
+                        z2 = true;
+                        if (z2) {
+                            z8 = true;
+                        } else {
+                            z7 = true;
+                        }
+                        z6 = (z && !z6 && z2) ? false : true;
+                    }
+                } else if ((this.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION) && ((AppOpItem) arrayList.get(i)).mCode == 42) {
+                    z = z5;
+                    z6 = z4;
+                } else {
+                    z = z5;
+                }
+                i++;
+                z5 = z;
+                z4 = true;
+            }
+            boolean zAreActiveHighPowerLocationRequests = areActiveHighPowerLocationRequests();
+            this.mAreActiveLocationRequests = z6;
+            if (z6 != z3) {
+                this.mHandler.sendEmptyMessage(2);
+            }
+            if (z3) {
+                return;
+            }
+            if (zAreActiveHighPowerLocationRequests || z7 || z8) {
+                if (zAreActiveHighPowerLocationRequests) {
+                    this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_MONITOR_HIGH_POWER);
+                }
+                if (z7) {
+                    this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_SYSTEM_APP);
+                }
+                if (z8) {
+                    this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_NON_SYSTEM_APP);
+                }
+            }
+        }
     }
 
     public final boolean isLocationEnabled$1() {
@@ -258,102 +340,70 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0070 A[Catch: RemoteException -> 0x007d, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:15:0x006c, B:17:0x0070, B:18:0x007f, B:20:0x0083, B:23:0x0089), top: B:14:0x006c }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0083 A[Catch: RemoteException -> 0x007d, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:15:0x006c, B:17:0x0070, B:18:0x007f, B:20:0x0083, B:23:0x0089), top: B:14:0x006c }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0089 A[Catch: RemoteException -> 0x007d, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:15:0x006c, B:17:0x0070, B:18:0x007f, B:20:0x0083, B:23:0x0089), top: B:14:0x006c }] */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0048  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0070 A[Catch: RemoteException -> 0x007d, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:20:0x006c, B:22:0x0070, B:25:0x007f, B:27:0x0083, B:29:0x0089), top: B:33:0x006c }] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0083 A[Catch: RemoteException -> 0x007d, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:20:0x006c, B:22:0x0070, B:25:0x007f, B:27:0x0083, B:29:0x0089), top: B:33:0x006c }] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0089 A[Catch: RemoteException -> 0x007d, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x007d, blocks: (B:20:0x006c, B:22:0x0070, B:25:0x007f, B:27:0x0083, B:29:0x0089), top: B:33:0x006c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateActiveLocationRequests() {
-        /*
-            r5 = this;
-            com.android.systemui.appops.AppOpItem r0 = r5.mActiveAppOpItem
-            boolean r1 = r5.mShouldDisplayAllAccesses
-            if (r1 == 0) goto L12
-            android.os.Handler r1 = r5.mBackgroundHandler
-            com.android.systemui.statusbar.policy.LocationControllerImpl$$ExternalSyntheticLambda0 r2 = new com.android.systemui.statusbar.policy.LocationControllerImpl$$ExternalSyntheticLambda0
-            r3 = 0
-            r2.<init>(r5, r3)
-            r1.post(r2)
-            goto L2e
-        L12:
-            boolean r1 = r5.mAreActiveLocationRequests
-            boolean r2 = r5.areActiveHighPowerLocationRequests()
-            r5.mAreActiveLocationRequests = r2
-            if (r2 == r1) goto L2e
-            com.android.systemui.statusbar.policy.LocationControllerImpl$H r1 = r5.mHandler
-            r2 = 2
-            r1.sendEmptyMessage(r2)
-            boolean r1 = r5.mAreActiveLocationRequests
-            if (r1 == 0) goto L36
-            com.android.internal.logging.UiEventLogger r1 = r5.mUiEventLogger
-            com.android.systemui.statusbar.policy.LocationControllerImpl$LocationIndicatorEvent r2 = com.android.systemui.statusbar.policy.LocationControllerImpl.LocationIndicatorEvent.LOCATION_INDICATOR_MONITOR_HIGH_POWER
-            r1.log(r2)
-            goto L36
-        L2e:
-            boolean r1 = r5.mAreActiveLocationRequests
-            if (r1 == 0) goto La2
-            com.android.systemui.appops.AppOpItem r1 = r5.mActiveAppOpItem
-            if (r0 == r1) goto La2
-        L36:
-            java.lang.String r1 = "LocationControllerImpl"
-            android.os.Bundle r2 = new android.os.Bundle
-            r2.<init>()
-            java.lang.String r3 = "icon"
-            boolean r4 = r5.mAreActiveLocationRequests
-            r2.putBoolean(r3, r4)
-            com.android.systemui.appops.AppOpItem r3 = r5.mActiveAppOpItem
-            if (r3 == 0) goto L62
-            if (r0 == 0) goto L50
-            java.lang.String r0 = "onlyItemChanged"
-            r3 = 1
-            r2.putBoolean(r0, r3)
-        L50:
-            com.android.systemui.appops.AppOpItem r0 = r5.mActiveAppOpItem
-            int r0 = r0.mUid
-            java.lang.String r3 = "activeAppOpUid"
-            r2.putInt(r3, r0)
-            com.android.systemui.appops.AppOpItem r0 = r5.mActiveAppOpItem
-            java.lang.String r0 = r0.mPackageName
-            java.lang.String r3 = "activeAppOpPackageName"
-            r2.putString(r3, r0)
-        L62:
-            android.os.Message r0 = android.os.Message.obtain()
-            r3 = 202(0xca, float:2.83E-43)
-            r0.what = r3
-            r0.obj = r2
-            android.location.ILocationManager r2 = r5.mLocationManager     // Catch: android.os.RemoteException -> L7d
-            if (r2 != 0) goto L7f
-            java.lang.String r2 = "location"
-            android.os.IBinder r2 = android.os.ServiceManager.getService(r2)     // Catch: android.os.RemoteException -> L7d
-            android.location.ILocationManager r2 = android.location.ILocationManager.Stub.asInterface(r2)     // Catch: android.os.RemoteException -> L7d
-            r5.mLocationManager = r2     // Catch: android.os.RemoteException -> L7d
-            goto L7f
-        L7d:
-            r5 = move-exception
-            goto L8d
-        L7f:
-            android.location.ILocationManager r5 = r5.mLocationManager     // Catch: android.os.RemoteException -> L7d
-            if (r5 != 0) goto L89
-            java.lang.String r5 = "Failed to get Location Manager"
-            android.util.Log.w(r1, r5)     // Catch: android.os.RemoteException -> L7d
-            return
-        L89:
-            r5.notifyNSFLP(r0)     // Catch: android.os.RemoteException -> L7d
-            return
-        L8d:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "Failed to send nsflp message, "
-            r0.<init>(r2)
-            java.lang.String r5 = r5.toString()
-            r0.append(r5)
-            java.lang.String r5 = r0.toString()
-            android.util.Log.w(r1, r5)
-        La2:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.LocationControllerImpl.updateActiveLocationRequests():void");
+        ILocationManager iLocationManager;
+        AppOpItem appOpItem = this.mActiveAppOpItem;
+        try {
+            if (!this.mShouldDisplayAllAccesses) {
+                boolean z = this.mAreActiveLocationRequests;
+                boolean zAreActiveHighPowerLocationRequests = areActiveHighPowerLocationRequests();
+                this.mAreActiveLocationRequests = zAreActiveHighPowerLocationRequests;
+                if (zAreActiveHighPowerLocationRequests != z) {
+                    this.mHandler.sendEmptyMessage(2);
+                    if (this.mAreActiveLocationRequests) {
+                        this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_MONITOR_HIGH_POWER);
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("icon", this.mAreActiveLocationRequests);
+                if (this.mActiveAppOpItem != null) {
+                    if (appOpItem != null) {
+                        bundle.putBoolean("onlyItemChanged", true);
+                    }
+                    bundle.putInt("activeAppOpUid", this.mActiveAppOpItem.mUid);
+                    bundle.putString("activeAppOpPackageName", this.mActiveAppOpItem.mPackageName);
+                }
+                Message messageObtain = Message.obtain();
+                messageObtain.what = 202;
+                messageObtain.obj = bundle;
+                if (this.mLocationManager == null) {
+                    this.mLocationManager = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
+                }
+                iLocationManager = this.mLocationManager;
+                if (iLocationManager != null) {
+                    Log.w("LocationControllerImpl", "Failed to get Location Manager");
+                    return;
+                } else {
+                    iLocationManager.notifyNSFLP(messageObtain);
+                    return;
+                }
+            }
+            this.mBackgroundHandler.post(new LocationControllerImpl$$ExternalSyntheticLambda0(this, 0));
+            if (this.mLocationManager == null) {
+            }
+            iLocationManager = this.mLocationManager;
+            if (iLocationManager != null) {
+            }
+        } catch (RemoteException e) {
+            Log.w("LocationControllerImpl", "Failed to send nsflp message, " + e.toString());
+            return;
+        }
+        if (!this.mAreActiveLocationRequests || appOpItem == this.mActiveAppOpItem) {
+            return;
+        }
+        Bundle bundle2 = new Bundle();
+        bundle2.putBoolean("icon", this.mAreActiveLocationRequests);
+        if (this.mActiveAppOpItem != null) {
+        }
+        Message messageObtain2 = Message.obtain();
+        messageObtain2.what = 202;
+        messageObtain2.obj = bundle2;
     }
 }

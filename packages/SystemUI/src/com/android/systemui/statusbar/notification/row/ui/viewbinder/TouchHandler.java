@@ -9,14 +9,12 @@ import com.android.systemui.statusbar.notification.row.ActivatableNotificationVi
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TouchHandler implements Gefingerpoken, View.OnTouchListener {
     public final FalsingManager falsingManager;
     public boolean isTouchEnabled;
     public final ActivatableNotificationView view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,14 +46,14 @@ public final class TouchHandler implements Gefingerpoken, View.OnTouchListener {
         if (!this.isTouchEnabled || motionEvent.getAction() != 1) {
             return false;
         }
-        boolean isFalseTap = this.falsingManager.isFalseTap(1);
-        if (isFalseTap) {
+        boolean zIsFalseTap = this.falsingManager.isFalseTap(1);
+        if (zIsFalseTap) {
             String simpleName = Reflection.getOrCreateKotlinClass(view.getClass()).getSimpleName();
             if (simpleName == null) {
                 simpleName = "ActivatableNotificationViewBinder";
             }
             Log.d(simpleName, "capturing false tap");
         }
-        return isFalseTap;
+        return zIsFalseTap;
     }
 }

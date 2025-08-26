@@ -44,16 +44,16 @@ public final class TimeZoneProviderEvent implements Parcelable {
     }
 
     private TimeZoneProviderEvent(int i, long j, TimeZoneProviderSuggestion timeZoneProviderSuggestion, String str, TimeZoneProviderStatus timeZoneProviderStatus) {
-        int validateEventType = validateEventType(i);
-        this.mType = validateEventType;
+        int iValidateEventType = validateEventType(i);
+        this.mType = iValidateEventType;
         this.mCreationElapsedMillis = j;
         this.mSuggestion = timeZoneProviderSuggestion;
         this.mFailureCause = str;
         this.mTimeZoneProviderStatus = timeZoneProviderStatus;
-        if (validateEventType != 1 || timeZoneProviderStatus == null) {
+        if (iValidateEventType != 1 || timeZoneProviderStatus == null) {
             return;
         }
-        throw new IllegalArgumentException("Unexpected status: mType=" + validateEventType + ", mTimeZoneProviderStatus=" + timeZoneProviderStatus);
+        throw new IllegalArgumentException("Unexpected status: mType=" + iValidateEventType + ", mTimeZoneProviderStatus=" + timeZoneProviderStatus);
     }
 
     private static int validateEventType(int i) {

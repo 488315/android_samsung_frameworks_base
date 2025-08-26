@@ -196,9 +196,9 @@ public interface IAutoFillManagerClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAutoFillManagerClient)) {
-                return (IAutoFillManagerClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAutoFillManagerClient)) {
+                return (IAutoFillManagerClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -268,107 +268,107 @@ public interface IAutoFillManagerClient extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setState(readInt);
+                    setState(i3);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AutofillValue.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AutofillValue.CREATOR);
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    autofill(readInt2, createTypedArrayList, createTypedArrayList2, readBoolean);
+                    autofill(i4, arrayListCreateTypedArrayList, arrayListCreateTypedArrayList2, z);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     GetCredentialResponse getCredentialResponse = (GetCredentialResponse) parcel.readTypedObject(GetCredentialResponse.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onGetCredentialResponse(readInt3, autofillId, getCredentialResponse);
+                    onGetCredentialResponse(i5, autofillId, getCredentialResponse);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     AutofillId autofillId2 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onGetCredentialException(readInt4, autofillId2, readString, readString2);
+                    onGetCredentialException(i6, autofillId2, string, string2);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     AutofillId autofillId3 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     ClipData clipData = (ClipData) parcel.readTypedObject(ClipData.CREATOR);
                     parcel.enforceNoDataAvail();
-                    autofillContent(readInt5, autofillId3, clipData);
+                    autofillContent(i7, autofillId3, clipData);
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    authenticate(readInt6, readInt7, intentSender, intent, readBoolean2);
+                    authenticate(i8, i9, intentSender, intent, z2);
                     return true;
                 case 7:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     AutofillId[] autofillIdArr = (AutofillId[]) parcel.createTypedArray(AutofillId.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     AutofillId[] autofillIdArr2 = (AutofillId[]) parcel.createTypedArray(AutofillId.CREATOR);
                     AutofillId autofillId4 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTrackedViews(readInt8, autofillIdArr, readBoolean3, readBoolean4, autofillIdArr2, autofillId4, readBoolean5);
+                    setTrackedViews(i10, autofillIdArr, z3, z4, autofillIdArr2, autofillId4, z5);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     AutofillId autofillId5 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    IAutofillWindowPresenter asInterface = IAutofillWindowPresenter.Stub.asInterface(parcel.readStrongBinder());
+                    IAutofillWindowPresenter iAutofillWindowPresenterAsInterface = IAutofillWindowPresenter.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestShowFillUi(readInt9, autofillId5, readInt10, readInt11, rect, asInterface);
+                    requestShowFillUi(i11, autofillId5, i12, i13, rect, iAutofillWindowPresenterAsInterface);
                     return true;
                 case 9:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     AutofillId autofillId6 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestHideFillUi(readInt12, autofillId6);
+                    requestHideFillUi(i14, autofillId6);
                     return true;
                 case 10:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     AutofillId autofillId7 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestHideFillUiWhenDestroyed(readInt13, autofillId7);
+                    requestHideFillUiWhenDestroyed(i15, autofillId7);
                     return true;
                 case 11:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     AutofillId autofillId8 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyNoFillUi(readInt14, autofillId8, readInt15);
+                    notifyNoFillUi(i16, autofillId8, i17);
                     return true;
                 case 12:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     AutofillId autofillId9 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyFillUiShown(readInt16, autofillId9);
+                    notifyFillUiShown(i18, autofillId9);
                     return true;
                 case 13:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     AutofillId autofillId10 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyFillUiHidden(readInt17, autofillId10);
+                    notifyFillUiHidden(i19, autofillId10);
                     return true;
                 case 14:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     AutofillId autofillId11 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                     KeyEvent keyEvent = (KeyEvent) parcel.readTypedObject(KeyEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    dispatchUnhandledKey(readInt18, autofillId11, keyEvent);
+                    dispatchUnhandledKey(i20, autofillId11, keyEvent);
                     return true;
                 case 15:
                     IntentSender intentSender2 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
@@ -377,27 +377,27 @@ public interface IAutoFillManagerClient extends IInterface {
                     startIntentSender(intentSender2, intent2);
                     return true;
                 case 16:
-                    int readInt19 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i21 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSaveUiState(readInt19, readBoolean6);
+                    setSaveUiState(i21, z6);
                     return true;
                 case 17:
-                    int readInt20 = parcel.readInt();
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    int i22 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setSessionFinished(readInt20, createTypedArrayList3);
+                    setSessionFinished(i22, arrayListCreateTypedArrayList3);
                     return true;
                 case 18:
-                    IResultReceiver asInterface2 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getAugmentedAutofillClient(asInterface2);
+                    getAugmentedAutofillClient(iResultReceiverAsInterface);
                     return true;
                 case 19:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyDisableAutofill(readLong, componentName);
+                    notifyDisableAutofill(j, componentName);
                     return true;
                 case 20:
                     AutofillId autofillId12 = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
@@ -405,9 +405,9 @@ public interface IAutoFillManagerClient extends IInterface {
                     requestShowSoftInput(autofillId12);
                     return true;
                 case 21:
-                    ArrayList createTypedArrayList4 = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList4 = parcel.createTypedArrayList(AutofillId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyFillDialogTriggerIds(createTypedArrayList4);
+                    notifyFillDialogTriggerIds(arrayListCreateTypedArrayList4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -432,290 +432,290 @@ public interface IAutoFillManagerClient extends IInterface {
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void setState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void autofill(int i, List<AutofillId> list, List<AutofillValue> list2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedList(list2, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedList(list2, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void onGetCredentialResponse(int i, AutofillId autofillId, GetCredentialResponse getCredentialResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeTypedObject(getCredentialResponse, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeTypedObject(getCredentialResponse, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void onGetCredentialException(int i, AutofillId autofillId, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void autofillContent(int i, AutofillId autofillId, ClipData clipData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeTypedObject(clipData, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeTypedObject(clipData, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void authenticate(int i, int i2, IntentSender intentSender, Intent intent, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void setTrackedViews(int i, AutofillId[] autofillIdArr, boolean z, boolean z2, AutofillId[] autofillIdArr2, AutofillId autofillId, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(autofillIdArr, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedArray(autofillIdArr2, 0);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(autofillIdArr, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedArray(autofillIdArr2, 0);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void requestShowFillUi(int i, AutofillId autofillId, int i2, int i3, Rect rect, IAutofillWindowPresenter iAutofillWindowPresenter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeStrongInterface(iAutofillWindowPresenter);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeStrongInterface(iAutofillWindowPresenter);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void requestHideFillUi(int i, AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void requestHideFillUiWhenDestroyed(int i, AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void notifyNoFillUi(int i, AutofillId autofillId, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void notifyFillUiShown(int i, AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void notifyFillUiHidden(int i, AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void dispatchUnhandledKey(int i, AutofillId autofillId, KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void startIntentSender(IntentSender intentSender, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void setSaveUiState(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void setSessionFinished(int i, List<AutofillId> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void getAugmentedAutofillClient(IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void notifyDisableAutofill(long j, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void requestShowSoftInput(AutofillId autofillId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(autofillId, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
             public void notifyFillDialogTriggerIds(List<AutofillId> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ AirplaneModeRepository $airplaneModeRepository$inlined;
@@ -43,7 +42,7 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -52,12 +51,12 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
             if (((Boolean) this.L$1).booleanValue()) {
                 ReadonlyStateFlow readonlyStateFlow = this.this$0.shouldShowIconForOosAfterHysteresis;
                 DeviceBasedSatelliteInteractor deviceBasedSatelliteInteractor = this.$interactor$inlined;
-                combine = FlowKt.combine(readonlyStateFlow, deviceBasedSatelliteInteractor.isAnyConnectionNtn, deviceBasedSatelliteInteractor.connectionState, deviceBasedSatelliteInteractor.isWifiActive, ((AirplaneModeRepositoryImpl) this.$airplaneModeRepository$inlined).isAirplaneMode, new DeviceBasedSatelliteViewModelImpl$showIcon$1$1(null));
+                flowCombine = FlowKt.combine(readonlyStateFlow, deviceBasedSatelliteInteractor.isAnyConnectionNtn, deviceBasedSatelliteInteractor.connectionState, deviceBasedSatelliteInteractor.isWifiActive, ((AirplaneModeRepositoryImpl) this.$airplaneModeRepository$inlined).isAirplaneMode, new DeviceBasedSatelliteViewModelImpl$showIcon$1$1(null));
             } else {
-                combine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+                flowCombine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

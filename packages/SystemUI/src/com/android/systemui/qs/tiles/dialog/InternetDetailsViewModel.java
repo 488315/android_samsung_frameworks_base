@@ -11,7 +11,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetDetailsViewModel implements TileDetailsViewModel {
     public final AccessPointController accessPointController;
@@ -19,14 +18,13 @@ public final class InternetDetailsViewModel implements TileDetailsViewModel {
     public final Lazy internetDetailsContentManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.qs.tiles.dialog.InternetDetailsViewModel$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            InternetDetailsViewModel internetDetailsViewModel = InternetDetailsViewModel.this;
+            InternetDetailsViewModel internetDetailsViewModel = this.f$0;
             AccessPointControllerImpl accessPointControllerImpl = (AccessPointControllerImpl) internetDetailsViewModel.accessPointController;
             return internetDetailsViewModel.contentManagerFactory.create(accessPointControllerImpl.canConfigMobileData(), accessPointControllerImpl.canConfigWifi());
         }
     });
     public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         InternetDetailsViewModel create();
     }

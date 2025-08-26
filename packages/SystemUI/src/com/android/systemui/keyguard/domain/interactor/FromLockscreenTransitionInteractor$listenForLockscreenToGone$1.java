@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromLockscreenTransitionInteractor$listenForLockscreenToGone$1 extends SuspendLambda implements Function2 {
     int label;
@@ -46,8 +45,8 @@ final class FromLockscreenTransitionInteractor$listenForLockscreenToGone$1 exten
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromLockscreenTransitionInteractor.this, KeyguardState.GONE, null, TransitionModeOnCanceled.RESET, "keyguard interactor says keyguard is going away", continuation, 2);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromLockscreenTransitionInteractor2, KeyguardState.GONE, null, TransitionModeOnCanceled.RESET, "keyguard interactor says keyguard is going away", continuation, 2);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;

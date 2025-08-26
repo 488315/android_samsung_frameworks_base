@@ -149,7 +149,7 @@ public class MediaEncoderFilter extends Filter {
         this.mProgram.setSourceRegion(quad);
     }
 
-    private void updateMediaRecorderParams() {
+    private void updateMediaRecorderParams() throws IllegalStateException, IllegalArgumentException {
         int i;
         int i2;
         this.mCaptureTimeLapse = this.mTimeBetweenTimeLapseFrameCaptureUs > 0;
@@ -198,7 +198,7 @@ public class MediaEncoderFilter extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void open(FilterContext filterContext) {
+    public void open(FilterContext filterContext) throws IllegalStateException, IllegalArgumentException {
         if (this.mLogVerbose) {
             Log.v(TAG, "Opening");
         }
@@ -208,7 +208,7 @@ public class MediaEncoderFilter extends Filter {
         }
     }
 
-    private void startRecording(FilterContext filterContext) {
+    private void startRecording(FilterContext filterContext) throws IllegalStateException, IllegalArgumentException {
         int i;
         if (this.mLogVerbose) {
             Log.v(TAG, "Starting recording");
@@ -275,9 +275,9 @@ public class MediaEncoderFilter extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void process(FilterContext filterContext) {
+    public void process(FilterContext filterContext) throws IllegalStateException, IllegalArgumentException {
         GLEnvironment gLEnvironment = filterContext.getGLEnvironment();
-        Frame pullInput = pullInput("videoframe");
+        Frame framePullInput = pullInput("videoframe");
         if (!this.mRecordingActive && this.mRecording) {
             startRecording(filterContext);
         }
@@ -286,14 +286,14 @@ public class MediaEncoderFilter extends Filter {
         }
         if (this.mRecordingActive) {
             if (this.mCaptureTimeLapse) {
-                if (skipFrameAndModifyTimestamp(pullInput.getTimestamp())) {
+                if (skipFrameAndModifyTimestamp(framePullInput.getTimestamp())) {
                     return;
                 }
             } else {
-                this.mTimestampNs = pullInput.getTimestamp();
+                this.mTimestampNs = framePullInput.getTimestamp();
             }
             gLEnvironment.activateSurfaceWithId(this.mSurfaceId);
-            this.mProgram.process(pullInput, this.mScreen);
+            this.mProgram.process(framePullInput, this.mScreen);
             gLEnvironment.setSurfaceTimestamp(this.mTimestampNs);
             gLEnvironment.swapBuffers();
             this.mNumFramesEncoded++;

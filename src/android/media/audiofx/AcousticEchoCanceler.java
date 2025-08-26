@@ -25,7 +25,7 @@ public class AcousticEchoCanceler extends AudioEffect {
         }
     }
 
-    private AcousticEchoCanceler(int i) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private AcousticEchoCanceler(int i) throws RuntimeException {
         super(EFFECT_TYPE_AEC, EFFECT_TYPE_NULL, 0, i);
     }
 }

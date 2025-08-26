@@ -1,6 +1,5 @@
 package com.samsung.android.sdk.scs.ai.language;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AppInfo {
     public final String accessToken;
@@ -12,14 +11,12 @@ public class AppInfo {
     public final String signingKey;
     public final String userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public String apiKey = "";
         public String signingKey = "";
         public RequestType requestType = RequestType.CLOUD;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum RequestType {
         CLOUD,
         ONDEVICE,

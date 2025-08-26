@@ -1,19 +1,18 @@
 package com.android.settingslib.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AdaptiveIcon extends LayerDrawable {
     public final AdaptiveConstantState mAdaptiveConstantState;
     int mBackgroundColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class AdaptiveConstantState extends Drawable.ConstantState {
         public int mColor;
         public final Context mContext;
@@ -53,7 +52,7 @@ public class AdaptiveIcon extends LayerDrawable {
         this.mAdaptiveConstantState.mColor = i;
     }
 
-    public AdaptiveIcon(Context context, Drawable drawable, int i) {
+    public AdaptiveIcon(Context context, Drawable drawable, int i) throws Resources.NotFoundException {
         super(new Drawable[]{new AdaptiveIconShapeDrawable(context.getResources()), drawable});
         this.mBackgroundColor = -1;
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(i);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -185,12 +186,12 @@ public class MultiSelectPopupWindow {
                 menu.add(0, R.id.multiSelectShare, 3, R.string.share).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_share)).setShowAsAction(1);
             }
             PackageManager packageManager = MultiSelectPopupWindow.sTextView.getContext().getPackageManager();
-            List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
+            List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
             if (MultiSelectPopupWindow.this.isEmergencyMode()) {
                 return;
             }
             int i = 0;
-            for (ResolveInfo resolveInfo : queryIntentActivities) {
+            for (ResolveInfo resolveInfo : listQueryIntentActivities) {
                 ComponentInfo componentInfo = resolveInfo.getComponentInfo();
                 if (componentInfo.packageName.contains("com.sec.android.app.translator") || componentInfo.packageName.contains("com.google.android.apps.translate")) {
                     menu.add(0, R.id.multiSelectTranslate, i + 5, resolveInfo.loadLabel(packageManager)).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_translate)).setIntent(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain").putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true).setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)).setShowAsAction(1);
@@ -207,11 +208,11 @@ public class MultiSelectPopupWindow {
 
         private void updateSelectAllItem(Menu menu) {
             boolean z = menu.findItem(R.id.multiSelectAll) != null;
-            boolean isSelectAllEnable = MultiSelectPopupWindow.this.isSelectAllEnable();
-            if (isSelectAllEnable && !z) {
+            boolean zIsSelectAllEnable = MultiSelectPopupWindow.this.isSelectAllEnable();
+            if (zIsSelectAllEnable && !z) {
                 menu.add(0, R.id.multiSelectAll, 1, 17039373).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_selectall)).setShowAsAction(1);
             } else {
-                if (isSelectAllEnable || !z) {
+                if (zIsSelectAllEnable || !z) {
                     return;
                 }
                 menu.removeItem(R.id.multiSelectAll);
@@ -237,7 +238,7 @@ public class MultiSelectPopupWindow {
         }
 
         @Override // android.view.ActionMode.Callback2
-        public void onGetContentRect(ActionMode actionMode, View view, Rect rect) {
+        public void onGetContentRect(ActionMode actionMode, View view, Rect rect) throws Resources.NotFoundException {
             if (!view.equals(MultiSelectPopupWindow.sTextView) || MultiSelectPopupWindow.sTextView.getLayout() == null) {
                 super.onGetContentRect(actionMode, view, rect);
                 return;
@@ -256,9 +257,9 @@ public class MultiSelectPopupWindow {
                 this.mSelectionBounds.top -= dimensionPixelSize2;
                 this.mSelectionBounds.bottom += this.mHandleHeight + dimensionPixelSize;
             }
-            float viewportToContentHorizontalOffset = MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
-            float viewportToContentVerticalOffset = MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
-            rect.set((int) Math.floor(this.mSelectionBounds.left + viewportToContentHorizontalOffset), (int) Math.floor(this.mSelectionBounds.top + viewportToContentVerticalOffset), (int) Math.ceil(this.mSelectionBounds.right + viewportToContentHorizontalOffset), (int) Math.ceil(this.mSelectionBounds.bottom + viewportToContentVerticalOffset));
+            float fViewportToContentHorizontalOffset = MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
+            float fViewportToContentVerticalOffset = MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
+            rect.set((int) Math.floor(this.mSelectionBounds.left + fViewportToContentHorizontalOffset), (int) Math.floor(this.mSelectionBounds.top + fViewportToContentVerticalOffset), (int) Math.ceil(this.mSelectionBounds.right + fViewportToContentHorizontalOffset), (int) Math.ceil(this.mSelectionBounds.bottom + fViewportToContentVerticalOffset));
         }
     }
 
@@ -282,12 +283,12 @@ public class MultiSelectPopupWindow {
     }
 
     private boolean isTranslatorEnable() {
-        List<ResolveInfo> queryIntentActivities = sTextView.getContext().getPackageManager().queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
-        if (queryIntentActivities.size() != 0 && !isEmergencyMode()) {
-            Iterator<ResolveInfo> it = queryIntentActivities.iterator();
+        List<ResolveInfo> listQueryIntentActivities = sTextView.getContext().getPackageManager().queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
+        if (listQueryIntentActivities.size() != 0 && !isEmergencyMode()) {
+            Iterator<ResolveInfo> it = listQueryIntentActivities.iterator();
             while (it.hasNext()) {
-                String resolveInfo = it.next().toString();
-                if (resolveInfo.contains("com.sec.android.app.translator") || resolveInfo.contains("com.google.android.apps.translate")) {
+                String string = it.next().toString();
+                if (string.contains("com.sec.android.app.translator") || string.contains("com.google.android.apps.translate")) {
                     return true;
                 }
             }
@@ -420,6 +421,10 @@ public class MultiSelectPopupWindow {
             return true;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:12:0x0044  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private void updatePosition() {
             boolean z;
             MultiSelectPopupWindow.sTextView.getLocationInWindow(this.mTempCoords);
@@ -433,23 +438,17 @@ public class MultiSelectPopupWindow {
                 int[] iArr3 = this.mNewRect;
                 if (i2 == iArr3[0] && iArr2[1] == iArr3[1]) {
                     z = false;
-                    this.mPositionHasChanged = z;
-                    this.mPositionX = i;
-                    this.mPositionY = iArr[1];
-                    int[] iArr4 = this.mRect;
-                    int[] iArr5 = this.mNewRect;
-                    iArr4[0] = iArr5[0];
-                    iArr4[1] = iArr5[1];
                 }
+            } else {
+                z = true;
             }
-            z = true;
             this.mPositionHasChanged = z;
             this.mPositionX = i;
             this.mPositionY = iArr[1];
-            int[] iArr42 = this.mRect;
-            int[] iArr52 = this.mNewRect;
-            iArr42[0] = iArr52[0];
-            iArr42[1] = iArr52[1];
+            int[] iArr4 = this.mRect;
+            int[] iArr5 = this.mNewRect;
+            iArr4[0] = iArr5[0];
+            iArr4[1] = iArr5[1];
         }
 
         public void onScrollChanged() {
@@ -631,11 +630,11 @@ public class MultiSelectPopupWindow {
         }
 
         protected void updateDrawable() {
-            boolean isRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(getCurrentCursorOffset());
-            Drawable drawable = isRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
+            boolean zIsRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(getCurrentCursorOffset());
+            Drawable drawable = zIsRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
             this.mDrawable = drawable;
-            this.mHotspotX = getHotspotX(drawable, isRtlCharAt);
-            this.mHorizontalGravity = getHorizontalGravity(isRtlCharAt);
+            this.mHotspotX = getHotspotX(drawable, zIsRtlCharAt);
+            this.mHorizontalGravity = getHorizontalGravity(zIsRtlCharAt);
         }
 
         protected int getHorizontalGravity(boolean z) {
@@ -859,7 +858,7 @@ public class MultiSelectPopupWindow {
 
         @Override // android.view.View
         public boolean onTouchEvent(MotionEvent motionEvent) {
-            float min;
+            float fMin;
             CharSequence textForMultiSelection = MultiSelectPopupWindow.sTextView.getTextForMultiSelection();
             if (textForMultiSelection == null) {
                 Log.e(MultiSelectPopupWindow.TAG, "getTextFormultiSelection() text is null");
@@ -904,13 +903,13 @@ public class MultiSelectPopupWindow {
                 float f3 = (rawYForScaledWindow - this.mPositionY) - i;
                 float f4 = this.mIdealVerticalOffset;
                 if (f2 < f4) {
-                    min = Math.max(Math.min(f3, f4), f2);
+                    fMin = Math.max(Math.min(f3, f4), f2);
                 } else if (f3 < f2) {
-                    min = Math.max(Math.max(f3, f4), f2);
+                    fMin = Math.max(Math.max(f3, f4), f2);
                 } else {
-                    min = Math.min(Math.max(f3, f4), f2);
+                    fMin = Math.min(Math.max(f3, f4), f2);
                 }
-                this.mTouchToWindowOffsetY = min + this.mLastParentY;
+                this.mTouchToWindowOffsetY = fMin + this.mLastParentY;
                 updatePosition((rawXForScaledWindow - this.mTouchToWindowOffsetX) + this.mHotspotX + getHorizontalOffset(), (rawYForScaledWindow - this.mTouchToWindowOffsetY) + this.mTouchOffsetY);
             } else if (actionMasked == 3) {
                 this.mIsDragging = false;
@@ -940,9 +939,9 @@ public class MultiSelectPopupWindow {
             int intrinsicHeight = this.mDrawable.getIntrinsicHeight();
             final int i = (int) (intrinsicWidth * 1.5f);
             final int i2 = (int) (intrinsicHeight * 1.5f);
-            ValueAnimator ofPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("width", intrinsicWidth, i), PropertyValuesHolder.ofInt("height", intrinsicHeight, i2));
-            this.mMagnifySizeAnimator = ofPropertyValuesHolder;
-            ofPropertyValuesHolder.setDuration(250L);
+            ValueAnimator valueAnimatorOfPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("width", intrinsicWidth, i), PropertyValuesHolder.ofInt("height", intrinsicHeight, i2));
+            this.mMagnifySizeAnimator = valueAnimatorOfPropertyValuesHolder;
+            valueAnimatorOfPropertyValuesHolder.setDuration(250L);
             this.mMagnifySizeAnimator.setInterpolator(new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f));
             this.mMagnifySizeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.MultiSelectPopupWindow.HandleView.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -966,9 +965,9 @@ public class MultiSelectPopupWindow {
                 this.mMagnifySizeAnimator.pause();
             }
             Rect bounds = this.mDrawable.getBounds();
-            ValueAnimator ofPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("width", bounds.right - bounds.left, this.mDrawable.getIntrinsicWidth()), PropertyValuesHolder.ofInt("height", bounds.bottom - bounds.top, this.mDrawable.getIntrinsicHeight()));
-            this.mResetAnimator = ofPropertyValuesHolder;
-            ofPropertyValuesHolder.setDuration(250L);
+            ValueAnimator valueAnimatorOfPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("width", bounds.right - bounds.left, this.mDrawable.getIntrinsicWidth()), PropertyValuesHolder.ofInt("height", bounds.bottom - bounds.top, this.mDrawable.getIntrinsicHeight()));
+            this.mResetAnimator = valueAnimatorOfPropertyValuesHolder;
+            valueAnimatorOfPropertyValuesHolder.setDuration(250L);
             this.mResetAnimator.setInterpolator(new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f));
             this.mResetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.MultiSelectPopupWindow.HandleView.3
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -1079,13 +1078,13 @@ public class MultiSelectPopupWindow {
         protected void updateDrawable() {
             int currentCursorOffset = getCurrentCursorOffset();
             Drawable drawable = this.mDrawable;
-            boolean isRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(currentCursorOffset);
+            boolean zIsRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(currentCursorOffset);
             if (this.mbSwitchCursor) {
-                isRtlCharAt = !isRtlCharAt;
+                zIsRtlCharAt = !zIsRtlCharAt;
             }
-            this.mDrawable = isRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
-            this.mHotspotX = getHotspotX(this.mDrawable, isRtlCharAt);
-            this.mHorizontalGravity = getHorizontalGravity(isRtlCharAt);
+            this.mDrawable = zIsRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
+            this.mHotspotX = getHotspotX(this.mDrawable, zIsRtlCharAt);
+            this.mHorizontalGravity = getHorizontalGravity(zIsRtlCharAt);
             if (drawable != this.mDrawable) {
                 recalHandleView();
                 invalidate();
@@ -1186,13 +1185,13 @@ public class MultiSelectPopupWindow {
         protected void updateDrawable() {
             int currentCursorOffset = getCurrentCursorOffset();
             Drawable drawable = this.mDrawable;
-            boolean isRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(currentCursorOffset);
+            boolean zIsRtlCharAt = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(currentCursorOffset);
             if (this.mbSwitchCursor) {
-                isRtlCharAt = !isRtlCharAt;
+                zIsRtlCharAt = !zIsRtlCharAt;
             }
-            this.mDrawable = isRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
-            this.mHotspotX = getHotspotX(this.mDrawable, isRtlCharAt);
-            this.mHorizontalGravity = getHorizontalGravity(isRtlCharAt);
+            this.mDrawable = zIsRtlCharAt ? this.mDrawableRtl : this.mDrawableLtr;
+            this.mHotspotX = getHotspotX(this.mDrawable, zIsRtlCharAt);
+            this.mHorizontalGravity = getHorizontalGravity(zIsRtlCharAt);
             if (drawable != this.mDrawable) {
                 recalHandleView();
                 invalidate();

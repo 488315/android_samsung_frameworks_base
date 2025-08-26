@@ -7,7 +7,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MouseWheelScrollingLogic$untilNull$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ Function0 $builderAction;
@@ -39,15 +38,14 @@ final class MouseWheelScrollingLogic$untilNull$1 extends RestrictedSuspendLambda
         	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002b  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:12:0x0038 -> B:5:0x0039). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:9:0x0035 -> B:5:0x0039). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002b  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0038  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x003b  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:12:0x0035 -> B:15:0x0039). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:14:0x0038 -> B:15:0x0039). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final java.lang.Object invokeSuspend(java.lang.Object r5) {
         /*

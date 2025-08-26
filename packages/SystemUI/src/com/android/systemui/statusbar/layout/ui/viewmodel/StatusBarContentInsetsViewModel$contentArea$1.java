@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class StatusBarContentInsetsViewModel$contentArea$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -53,7 +52,7 @@ final class StatusBarContentInsetsViewModel$contentArea$1 extends SuspendLambda 
                 @Override // com.android.systemui.statusbar.layout.StatusBarContentInsetsChangedListener
                 public final void onStatusBarContentInsetsChanged() {
                     StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) statusBarContentInsetsViewModel.statusBarContentInsetsProvider;
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
                 }
             };
             ((StatusBarContentInsetsProviderImpl) this.this$0.statusBarContentInsetsProvider).addCallback(r1);
@@ -61,7 +60,7 @@ final class StatusBarContentInsetsViewModel$contentArea$1 extends SuspendLambda 
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.layout.ui.viewmodel.StatusBarContentInsetsViewModel$contentArea$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((StatusBarContentInsetsProviderImpl) StatusBarContentInsetsViewModel.this.statusBarContentInsetsProvider).removeCallback(r1);
+                    ((StatusBarContentInsetsProviderImpl) statusBarContentInsetsViewModel2.statusBarContentInsetsProvider).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

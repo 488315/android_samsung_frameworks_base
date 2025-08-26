@@ -20,7 +20,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActiveUnlockConfig implements Dumpable {
     public final ContentResolver contentResolver;
@@ -39,7 +38,6 @@ public final class ActiveUnlockConfig implements Dumpable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActiveUnlockRequestOrigin {
         public static final /* synthetic */ ActiveUnlockRequestOrigin[] $VALUES;
         public static final ActiveUnlockRequestOrigin ASSISTANT;
@@ -78,7 +76,6 @@ public final class ActiveUnlockConfig implements Dumpable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BiometricType {
         public static final /* synthetic */ BiometricType[] $VALUES;
         public static final BiometricType ANY_FACE;
@@ -118,7 +115,6 @@ public final class ActiveUnlockConfig implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -128,7 +124,6 @@ public final class ActiveUnlockConfig implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -178,7 +173,7 @@ public final class ActiveUnlockConfig implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        String str;
+        String strName;
         printWriter.println("Settings:");
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "   requestActiveUnlockOnWakeup=", this.requestActiveUnlockOnWakeup);
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "   requestActiveUnlockOnUnlockIntentLegacy=", this.requestActiveUnlockOnUnlockIntentLegacy);
@@ -188,23 +183,23 @@ public final class ActiveUnlockConfig implements Dumpable {
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(set, 10));
         Iterator it = set.iterator();
         while (it.hasNext()) {
-            int intValue = ((Number) it.next()).intValue();
-            BiometricType[] values = BiometricType.values();
-            int length = values.length;
+            int iIntValue = ((Number) it.next()).intValue();
+            BiometricType[] biometricTypeArrValues = BiometricType.values();
+            int length = biometricTypeArrValues.length;
             int i = 0;
             while (true) {
                 if (i >= length) {
-                    str = "UNKNOWN";
+                    strName = "UNKNOWN";
                     break;
                 }
-                BiometricType biometricType = values[i];
-                if (biometricType.getIntValue() == intValue) {
-                    str = biometricType.name();
+                BiometricType biometricType = biometricTypeArrValues[i];
+                if (biometricType.getIntValue() == iIntValue) {
+                    strName = biometricType.name();
                     break;
                 }
                 i++;
             }
-            arrayList.add(str);
+            arrayList.add(strName);
         }
         printWriter.println("   requestActiveUnlockOnUnlockIntentWhenBiometricEnrolled=" + arrayList);
         printWriter.println("   requestActiveUnlockOnFaceError=" + this.faceErrorsToTriggerBiometricFailOn);
@@ -236,19 +231,19 @@ public final class ActiveUnlockConfig implements Dumpable {
             return false;
         }
         KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) this.keyguardUpdateMonitor.get();
-        boolean isFaceEnabledAndEnrolled = keyguardUpdateMonitor.isFaceEnabledAndEnrolled();
-        boolean isUnlockWithFingerprintPossible = keyguardUpdateMonitor.isUnlockWithFingerprintPossible(this.selectedUserInteractor.getSelectedUserId());
-        boolean isUdfpsEnrolled = keyguardUpdateMonitor.isUdfpsEnrolled();
-        if (!isFaceEnabledAndEnrolled && !isUnlockWithFingerprintPossible) {
+        boolean zIsFaceEnabledAndEnrolled = keyguardUpdateMonitor.isFaceEnabledAndEnrolled();
+        boolean zIsUnlockWithFingerprintPossible = keyguardUpdateMonitor.isUnlockWithFingerprintPossible(this.selectedUserInteractor.getSelectedUserId());
+        boolean zIsUdfpsEnrolled = keyguardUpdateMonitor.isUdfpsEnrolled();
+        if (!zIsFaceEnabledAndEnrolled && !zIsUnlockWithFingerprintPossible) {
             return this.onUnlockIntentWhenBiometricEnrolled.contains(Integer.valueOf(BiometricType.NONE.getIntValue()));
         }
-        if (!isFaceEnabledAndEnrolled && isUnlockWithFingerprintPossible) {
+        if (!zIsFaceEnabledAndEnrolled && zIsUnlockWithFingerprintPossible) {
             if (this.onUnlockIntentWhenBiometricEnrolled.contains(Integer.valueOf(BiometricType.ANY_FINGERPRINT.getIntValue()))) {
                 return true;
             }
-            return isUdfpsEnrolled && this.onUnlockIntentWhenBiometricEnrolled.contains(Integer.valueOf(BiometricType.UNDER_DISPLAY_FINGERPRINT.getIntValue()));
+            return zIsUdfpsEnrolled && this.onUnlockIntentWhenBiometricEnrolled.contains(Integer.valueOf(BiometricType.UNDER_DISPLAY_FINGERPRINT.getIntValue()));
         }
-        if (isUnlockWithFingerprintPossible || !isFaceEnabledAndEnrolled) {
+        if (zIsUnlockWithFingerprintPossible || !zIsFaceEnabledAndEnrolled) {
             return false;
         }
         return this.onUnlockIntentWhenBiometricEnrolled.contains(Integer.valueOf(BiometricType.ANY_FACE.getIntValue()));

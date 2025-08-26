@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$3 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,9 +40,9 @@ public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$3 e
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) this.L$1;
-            Flow buffer$default = mobileIconInteractor == null ? this.this$0.notConnectedFlow : FlowKt.buffer$default(FlowKt.mapLatest(FlowKt.combine(mobileIconInteractor.getNetworkName(), mobileIconInteractor.getSignalLevelIcon(), this.this$0.mobileDataContentName, new InternetTileDataInteractor$mobileIconFlow$1$1(null)), new InternetTileDataInteractor$mobileIconFlow$1$2(this.this$0, null)), -1, 2);
+            Flow flowBuffer$default = mobileIconInteractor == null ? this.this$0.notConnectedFlow : FlowKt.buffer$default(FlowKt.mapLatest(FlowKt.combine(mobileIconInteractor.getNetworkName(), mobileIconInteractor.getSignalLevelIcon(), this.this$0.mobileDataContentName, new InternetTileDataInteractor$mobileIconFlow$1$1(null)), new InternetTileDataInteractor$mobileIconFlow$1$2(this.this$0, null)), -1, 2);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, buffer$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowBuffer$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

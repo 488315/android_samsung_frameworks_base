@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TopAppBarColors {
     public final long actionIconContentColor;
@@ -20,7 +19,7 @@ public final class TopAppBarColors {
     }
 
     /* renamed from: copy-tNS2XkQ, reason: not valid java name */
-    public final TopAppBarColors m318copytNS2XkQ(long j, long j2, long j3, long j4, long j5, long j6) {
+    public final TopAppBarColors m319copytNS2XkQ(long j, long j2, long j3, long j4, long j5, long j6) {
         return new TopAppBarColors(j != 16 ? j : this.containerColor, j2 != 16 ? j2 : this.scrolledContainerColor, j3 != 16 ? j3 : this.navigationIconContentColor, j4 != 16 ? j4 : this.titleContentColor, j5 != 16 ? j5 : this.actionIconContentColor, j6 != 16 ? j6 : this.subtitleContentColor, null);
     }
 
@@ -33,7 +32,7 @@ public final class TopAppBarColors {
         }
         TopAppBarColors topAppBarColors = (TopAppBarColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.containerColor, topAppBarColors.containerColor) && ULong.m3427equalsimpl0(this.scrolledContainerColor, topAppBarColors.scrolledContainerColor) && ULong.m3427equalsimpl0(this.navigationIconContentColor, topAppBarColors.navigationIconContentColor) && ULong.m3427equalsimpl0(this.titleContentColor, topAppBarColors.titleContentColor) && ULong.m3427equalsimpl0(this.actionIconContentColor, topAppBarColors.actionIconContentColor) && ULong.m3427equalsimpl0(this.subtitleContentColor, topAppBarColors.subtitleContentColor);
+        return ULong.m3447equalsimpl0(this.containerColor, topAppBarColors.containerColor) && ULong.m3447equalsimpl0(this.scrolledContainerColor, topAppBarColors.scrolledContainerColor) && ULong.m3447equalsimpl0(this.navigationIconContentColor, topAppBarColors.navigationIconContentColor) && ULong.m3447equalsimpl0(this.titleContentColor, topAppBarColors.titleContentColor) && ULong.m3447equalsimpl0(this.actionIconContentColor, topAppBarColors.actionIconContentColor) && ULong.m3447equalsimpl0(this.subtitleContentColor, topAppBarColors.subtitleContentColor);
     }
 
     public final int hashCode() {

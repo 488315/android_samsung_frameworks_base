@@ -53,11 +53,11 @@ public class BitmapImageProcessing {
     }
 
     public Bitmap createBitmapFromCurrent() {
-        Bitmap createBitmap = Bitmap.createBitmap(this.mImageWidth, this.mImageHeight, this.mConfig);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(this.mImageWidth, this.mImageHeight, this.mConfig);
         int[] iArr = this.mPixels;
         int i = this.mImageWidth;
-        createBitmap.setPixels(iArr, 0, i, 0, 0, i, this.mImageHeight);
-        return createBitmap;
+        bitmapCreateBitmap.setPixels(iArr, 0, i, 0, 0, i, this.mImageHeight);
+        return bitmapCreateBitmap;
     }
 
     public void setPixels(int[] iArr) {
@@ -72,8 +72,8 @@ public class BitmapImageProcessing {
         int[] iArr2 = this.mPixels;
         int length = iArr2.length;
         for (int i = 0; i < length; i++) {
-            int caculateLuminosity = (int) (IUXColorUtils.caculateLuminosity(iArr2[i]) * 255.0f);
-            iArr[i] = Color.rgb(caculateLuminosity, caculateLuminosity, caculateLuminosity);
+            int iCaculateLuminosity = (int) (IUXColorUtils.caculateLuminosity(iArr2[i]) * 255.0f);
+            iArr[i] = Color.rgb(iCaculateLuminosity, iCaculateLuminosity, iCaculateLuminosity);
         }
     }
 
@@ -85,8 +85,8 @@ public class BitmapImageProcessing {
         int[] iArr2 = this.mPixels;
         int length = iArr2.length;
         for (int i = 0; i < length; i++) {
-            int calculateLuminance = (int) (ColorUtils.calculateLuminance(iArr2[i]) * 255.0d);
-            iArr[i] = Color.rgb(calculateLuminance, calculateLuminance, calculateLuminance);
+            int iCalculateLuminance = (int) (ColorUtils.calculateLuminance(iArr2[i]) * 255.0d);
+            iArr[i] = Color.rgb(iCalculateLuminance, iCalculateLuminance, iCalculateLuminance);
         }
     }
 
@@ -128,18 +128,18 @@ public class BitmapImageProcessing {
         int[] iArr2 = this.mPixels;
         int length = iArr2.length;
         for (int i = 0; i < length; i++) {
-            int calculateLuminance = (int) (ColorUtils.calculateLuminance(iArr2[i]) * 255.0d);
-            iArr[i] = Color.rgb(calculateLuminance, calculateLuminance, calculateLuminance);
+            int iCalculateLuminance = (int) (ColorUtils.calculateLuminance(iArr2[i]) * 255.0d);
+            iArr[i] = Color.rgb(iCalculateLuminance, iCalculateLuminance, iCalculateLuminance);
         }
     }
 
     public float getAverageValueFromRed(int[] iArr) {
-        float f = 0.0f;
+        float fRed = 0.0f;
         for (int i = 0; i < iArr.length; i++) {
-            float f2 = i;
-            f = ((f * f2) + Color.red(iArr[i])) / (f2 + 1.0f);
+            float f = i;
+            fRed = ((fRed * f) + Color.red(iArr[i])) / (f + 1.0f);
         }
-        return f * 0.003921569f;
+        return fRed * 0.003921569f;
     }
 
     public float getAverageValueFromRed() {

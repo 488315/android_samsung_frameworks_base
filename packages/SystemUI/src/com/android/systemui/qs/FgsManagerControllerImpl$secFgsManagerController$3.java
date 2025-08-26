@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import com.android.systemui.broadcast.BroadcastDispatcher;
@@ -23,7 +24,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final /* synthetic */ class FgsManagerControllerImpl$secFgsManagerController$3 extends FunctionReferenceImpl implements Function0 {
     public FgsManagerControllerImpl$secFgsManagerController$3(Object obj) {
@@ -56,14 +56,14 @@ final /* synthetic */ class FgsManagerControllerImpl$secFgsManagerController$3 e
                 set.addAll(arrayList);
                 fgsManagerControllerImpl.deviceConfigProxy.addOnPropertiesChangedListener("systemui", fgsManagerControllerImpl.backgroundExecutor, new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$init$1$2
                     public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                        StateFlowImpl stateFlowImpl = FgsManagerControllerImpl.this._showFooterDot;
+                        StateFlowImpl stateFlowImpl = fgsManagerControllerImpl._showFooterDot;
                         stateFlowImpl.updateState(null, Boolean.valueOf(properties.getBoolean("task_manager_show_footer_dot", ((Boolean) stateFlowImpl.getValue()).booleanValue())));
-                        FgsManagerControllerImpl fgsManagerControllerImpl2 = FgsManagerControllerImpl.this;
+                        FgsManagerControllerImpl fgsManagerControllerImpl2 = fgsManagerControllerImpl;
                         fgsManagerControllerImpl2.showStopBtnForUserAllowlistedApps = properties.getBoolean("show_stop_button_for_user_allowlisted_apps", fgsManagerControllerImpl2.showStopBtnForUserAllowlistedApps);
-                        FgsManagerControllerImpl fgsManagerControllerImpl3 = FgsManagerControllerImpl.this;
+                        FgsManagerControllerImpl fgsManagerControllerImpl3 = fgsManagerControllerImpl;
                         boolean z = fgsManagerControllerImpl3.showUserVisibleJobs;
                         fgsManagerControllerImpl3.showUserVisibleJobs = properties.getBoolean("task_manager_show_user_visible_jobs", z);
-                        FgsManagerControllerImpl fgsManagerControllerImpl4 = FgsManagerControllerImpl.this;
+                        FgsManagerControllerImpl fgsManagerControllerImpl4 = fgsManagerControllerImpl;
                         boolean z2 = fgsManagerControllerImpl4.showUserVisibleJobs;
                         if (z2 != z) {
                             if (z2) {
@@ -90,7 +90,7 @@ final /* synthetic */ class FgsManagerControllerImpl$secFgsManagerController$3 e
                                 }
                             }
                         }
-                        FgsManagerControllerImpl fgsManagerControllerImpl5 = FgsManagerControllerImpl.this;
+                        FgsManagerControllerImpl fgsManagerControllerImpl5 = fgsManagerControllerImpl;
                         fgsManagerControllerImpl5.informJobSchedulerOfPendingAppStop = properties.getBoolean("show_stop_button_for_user_allowlisted_apps", fgsManagerControllerImpl5.informJobSchedulerOfPendingAppStop);
                     }
                 });
@@ -99,9 +99,9 @@ final /* synthetic */ class FgsManagerControllerImpl$secFgsManagerController$3 e
                 fgsManagerControllerImpl.dumpManager.registerDumpable(fgsManagerControllerImpl);
                 BroadcastDispatcher.registerReceiver$default(fgsManagerControllerImpl.broadcastDispatcher, new BroadcastReceiver() { // from class: com.android.systemui.qs.FgsManagerControllerImpl$init$1$3
                     @Override // android.content.BroadcastReceiver
-                    public final void onReceive(Context context, Intent intent) {
+                    public final void onReceive(Context context, Intent intent) throws Resources.NotFoundException {
                         if (Intrinsics.areEqual(intent.getAction(), "android.intent.action.SHOW_FOREGROUND_SERVICE_MANAGER")) {
-                            FgsManagerControllerImpl.this.showDialog$2();
+                            fgsManagerControllerImpl.showDialog$2();
                         }
                     }
                 }, new IntentFilter("android.intent.action.SHOW_FOREGROUND_SERVICE_MANAGER"), fgsManagerControllerImpl.mainExecutor, null, 4, null, 40);

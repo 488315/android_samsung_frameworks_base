@@ -31,13 +31,13 @@ public final class CdmaT53ClirInfoRecord {
 
     public static final ArrayList<CdmaT53ClirInfoRecord> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaT53ClirInfoRecord> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaT53ClirInfoRecord cdmaT53ClirInfoRecord = new CdmaT53ClirInfoRecord();
-            cdmaT53ClirInfoRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i);
+            cdmaT53ClirInfoRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i);
             arrayList.add(cdmaT53ClirInfoRecord);
         }
         return arrayList;

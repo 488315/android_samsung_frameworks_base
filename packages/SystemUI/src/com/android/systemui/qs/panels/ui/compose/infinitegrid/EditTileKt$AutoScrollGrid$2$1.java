@@ -14,7 +14,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class EditTileKt$AutoScrollGrid$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ScrollState $scrollState;
@@ -47,13 +46,13 @@ final class EditTileKt$AutoScrollGrid$2$1 extends SuspendLambda implements Funct
             Integer num = (Integer) this.$scrollTarget$delegate.getValue();
             if (num != null) {
                 ScrollState scrollState = this.$scrollState;
-                TweenSpec tween$default = AnimationSpecKt.tween$default(Math.abs(num.intValue() - scrollState.getValue()) * 2, 0, EasingKt.LinearEasing, 2);
+                TweenSpec tweenSpecTween$default = AnimationSpecKt.tween$default(Math.abs(num.intValue() - scrollState.getValue()) * 2, 0, EasingKt.LinearEasing, 2);
                 this.label = 1;
-                Object animateScrollBy = ScrollExtensionsKt.animateScrollBy(scrollState, r8 - scrollState.getValue(), tween$default, this);
-                if (animateScrollBy != obj2) {
-                    animateScrollBy = Unit.INSTANCE;
+                Object objAnimateScrollBy = ScrollExtensionsKt.animateScrollBy(scrollState, r8 - scrollState.getValue(), tweenSpecTween$default, this);
+                if (objAnimateScrollBy != obj2) {
+                    objAnimateScrollBy = Unit.INSTANCE;
                 }
-                if (animateScrollBy == obj2) {
+                if (objAnimateScrollBy == obj2) {
                     return obj2;
                 }
             }

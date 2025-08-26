@@ -4,7 +4,6 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RowColumnParentData {
     public CrossAxisAlignment crossAxisAlignment;
@@ -28,11 +27,11 @@ public final class RowColumnParentData {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.weight) * 31, 31, this.fill);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.weight) * 31, 31, this.fill);
         CrossAxisAlignment crossAxisAlignment = this.crossAxisAlignment;
-        int hashCode = (m + (crossAxisAlignment == null ? 0 : crossAxisAlignment.hashCode())) * 31;
+        int iHashCode = (iM + (crossAxisAlignment == null ? 0 : crossAxisAlignment.hashCode())) * 31;
         FlowLayoutData flowLayoutData = this.flowLayoutData;
-        return hashCode + (flowLayoutData != null ? Float.hashCode(flowLayoutData.fillCrossAxisFraction) : 0);
+        return iHashCode + (flowLayoutData != null ? Float.hashCode(flowLayoutData.fillCrossAxisFraction) : 0);
     }
 
     public final String toString() {

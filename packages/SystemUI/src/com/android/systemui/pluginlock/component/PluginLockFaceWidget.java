@@ -25,7 +25,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockFaceWidget extends AbstractPluginLockItem {
     private static final String KEY_CLOCK_POS_CHANGED = "clock_position_changed";
@@ -88,19 +87,19 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
 
             @Override // com.android.systemui.plugins.keyguardstatusview.PluginClockProvider.ClockCallback
             public void onClockColorChanged() {
-                int parseColor;
+                int color;
                 StringBuilder sb = new StringBuilder("onClockColorChanged() #");
                 PluginClockProvider pluginClockProvider = PluginLockFaceWidget.this.mClockProvider.mClockProvider;
                 if (pluginClockProvider == null) {
-                    parseColor = Color.parseColor("#FFFAFAFA");
+                    color = Color.parseColor("#FFFAFAFA");
                 } else {
                     try {
-                        parseColor = pluginClockProvider.getClockDateColor();
+                        color = pluginClockProvider.getClockDateColor();
                     } catch (Error unused) {
-                        parseColor = Color.parseColor("#FFFAFAFA");
+                        color = Color.parseColor("#FFFAFAFA");
                     }
                 }
-                sb.append(Integer.toHexString(parseColor));
+                sb.append(Integer.toHexString(color));
                 Log.i(PluginLockFaceWidget.TAG, sb.toString());
             }
 
@@ -124,9 +123,9 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
                     Log.w(PluginLockFaceWidget.TAG, "onClockPositionChanged() wrong state");
                     return;
                 }
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 PluginLockFaceWidget pluginLockFaceWidget2 = PluginLockFaceWidget.this;
-                if (currentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
+                if (jCurrentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
                     Log.i(PluginLockFaceWidget.TAG, "onClockPositionChanged() ignored");
                 } else {
                     if (pluginLockFaceWidget2.mIsDlsData) {
@@ -146,9 +145,9 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
                     Log.w(PluginLockFaceWidget.TAG, "onClockScaleChanged() wrong state");
                     return;
                 }
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 PluginLockFaceWidget pluginLockFaceWidget2 = PluginLockFaceWidget.this;
-                if (currentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
+                if (jCurrentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
                     Log.i(PluginLockFaceWidget.TAG, "onClockScaleChanged() ignored");
                 } else {
                     if (pluginLockFaceWidget2.mIsDlsData) {
@@ -166,9 +165,9 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
                     Log.w(PluginLockFaceWidget.TAG, "onClockStyleChanged() wrong state");
                     return;
                 }
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 PluginLockFaceWidget pluginLockFaceWidget2 = PluginLockFaceWidget.this;
-                if (currentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
+                if (jCurrentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
                     Log.i(PluginLockFaceWidget.TAG, "onClockStyleChanged() ignored");
                     return;
                 }
@@ -196,9 +195,9 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
                     Log.w(PluginLockFaceWidget.TAG, "onClockVisibilityChanged() wrong state");
                     return;
                 }
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 PluginLockFaceWidget pluginLockFaceWidget2 = PluginLockFaceWidget.this;
-                if (currentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
+                if (jCurrentTimeMillis - pluginLockFaceWidget2.mCallbackRegisterTime < 8000) {
                     Log.i(PluginLockFaceWidget.TAG, "onClockVisibilityChanged() ignored");
                 } else {
                     if (pluginLockFaceWidget2.mIsDlsData) {
@@ -339,7 +338,7 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
         new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.pluginlock.component.PluginLockFaceWidget$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                PluginLockFaceWidget.this.lambda$unregisterClockCallbackRecover$0();
+                this.f$0.lambda$unregisterClockCallbackRecover$0();
             }
         });
     }
@@ -422,9 +421,9 @@ public class PluginLockFaceWidget extends AbstractPluginLockItem {
         this.mServiceBoxPaddingEndLand = clockInfo.getPaddingEndLand().intValue();
         this.mIsPortraitAvailable = dynamicLockData2.isPortraitAvailable();
         this.mIsLandscapeAvailable = dynamicLockData2.isLandscapeAvailable();
-        boolean isEqual = isEqual(dynamicLockData, dynamicLockData2);
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("loadClockData, isEqual: ", TAG, isEqual);
-        if (isEqual) {
+        boolean zIsEqual = isEqual(dynamicLockData, dynamicLockData2);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("loadClockData, isEqual: ", TAG, zIsEqual);
+        if (zIsEqual) {
             return;
         }
         Bundle bundle = new Bundle();

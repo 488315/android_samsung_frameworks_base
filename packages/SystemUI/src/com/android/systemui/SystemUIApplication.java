@@ -1,6 +1,5 @@
 package com.android.systemui;
 
-import android.R;
 import android.app.ActivityThread;
 import android.app.Application;
 import android.app.Notification;
@@ -50,7 +49,6 @@ import java.util.TreeMap;
 import java.util.function.Function;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SystemUIApplication extends Application implements SystemUIAppComponentFactoryBase.ContextInitializer, HasWMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -67,7 +65,6 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
     public int mFlipfont = 0;
     public final SystemUIThemeHelper mThemeHelper = new SystemUIThemeHelper(0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SystemUIThemeHelper {
         public /* synthetic */ SystemUIThemeHelper(int i) {
             this();
@@ -87,8 +84,8 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
     }
 
     public SystemUIApplication() {
-        String currentProcessName = ActivityThread.currentProcessName();
-        if (currentProcessName == null || !currentProcessName.contains(":")) {
+        String strCurrentProcessName = ActivityThread.currentProcessName();
+        if (strCurrentProcessName == null || !strCurrentProcessName.contains(":")) {
             Trace.registerWithPerfetto();
         }
         ProtoLog.REQUIRE_PROTOLOGTOOL = false;
@@ -104,7 +101,7 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
 
     public static void overrideNotificationAppName(Context context, Notification.Builder builder, boolean z) {
         Bundle bundle = new Bundle();
-        bundle.putString("android.substName", z ? context.getString(R.string.sms_short_code_confirm_deny) : context.getString(R.string.sms_short_code_confirm_always_allow));
+        bundle.putString("android.substName", z ? context.getString(android.R.string.sms_short_code_confirm_never_allow) : context.getString(android.R.string.sms_short_code_confirm_message));
         builder.addExtras(bundle);
     }
 
@@ -118,13 +115,13 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
     }
 
     public static void timeInitialization(String str, Runnable runnable, TimingsTraceLog timingsTraceLog, String str2) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         timingsTraceLog.traceBegin(str2 + " " + str);
         runnable.run();
         timingsTraceLog.traceEnd();
-        long currentTimeMillis2 = System.currentTimeMillis() - currentTimeMillis;
-        if (currentTimeMillis2 > 1000) {
-            Log.w("SystemUIService", "Initialization of " + str + " took " + currentTimeMillis2 + " ms");
+        long jCurrentTimeMillis2 = System.currentTimeMillis() - jCurrentTimeMillis;
+        if (jCurrentTimeMillis2 > 1000) {
+            Log.w("SystemUIService", "Initialization of " + str + " took " + jCurrentTimeMillis2 + " ms");
         }
     }
 
@@ -163,9 +160,9 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
         super.onCreate();
         TimingsTraceLog timingsTraceLog = new TimingsTraceLog("SystemUIBootTiming", 4096L);
         timingsTraceLog.traceBegin("DependencyInjection");
-        SystemUIInitializer onContextAvailable = this.mContextAvailableCallback.onContextAvailable(this);
-        this.mInitializer = onContextAvailable;
-        SysUIComponent sysUIComponent = onContextAvailable.getSysUIComponent();
+        SystemUIInitializer systemUIInitializerOnContextAvailable = this.mContextAvailableCallback.onContextAvailable(this);
+        this.mInitializer = systemUIInitializerOnContextAvailable;
+        SysUIComponent sysUIComponent = systemUIInitializerOnContextAvailable.getSysUIComponent();
         this.mSysUIComponent = sysUIComponent;
         this.mBootCompleteCache = sysUIComponent.provideBootCacheImpl();
         timingsTraceLog.traceEnd();
@@ -179,8 +176,8 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
         View.setTracedRequestLayoutClassClass(SystemProperties.get("persist.debug.trace_request_layout_class", (String) null));
         this.mProcessWrapper.getClass();
         if (!ProcessWrapper.isSystemUser()) {
-            String currentProcessName = ActivityThread.currentProcessName();
-            if (currentProcessName == null || !currentProcessName.contains(":")) {
+            String strCurrentProcessName = ActivityThread.currentProcessName();
+            if (strCurrentProcessName == null || !strCurrentProcessName.contains(":")) {
                 startSecondaryUserServicesIfNeeded();
                 return;
             }
@@ -190,7 +187,7 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
             @Override // com.android.systemui.BootAnimationFinishedCache.BootAnimationFinishedListener
             public final void onBootAnimationFinished() {
                 int i = SystemUIApplication.$r8$clinit;
-                SystemUIApplication systemUIApplication = SystemUIApplication.this;
+                SystemUIApplication systemUIApplication = this.f$0;
                 TreeMap treeMap = new TreeMap(Comparator.comparing(new ViewCapture$$ExternalSyntheticLambda6()));
                 treeMap.putAll(systemUIApplication.mSysUIComponent.getPostStartables());
                 if (systemUIApplication.mPostServicesStarted) {
@@ -292,7 +289,7 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
                 getMainThreadHandler().post(new Runnable() { // from class: com.android.systemui.SystemUIApplication$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ((BootAnimationFinishedCacheImpl) SystemUIApplication.this.mBootAnimationFinishedTrigger).setBootAnimationFinished();
+                        ((BootAnimationFinishedCacheImpl) this.f$0.mBootAnimationFinishedTrigger).setBootAnimationFinished();
                     }
                 });
                 SystemUIAnalytics.initSystemUIAnalyticsStates(this);
@@ -313,7 +310,7 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
 
     public final void startServicesImpl(Map map, String str, final CoreStartable[] coreStartableArr, final String str2, TimingsTraceLog timingsTraceLog) {
         ArrayDeque arrayDeque;
-        DumpManager createDumpManager = this.mSysUIComponent.createDumpManager();
+        DumpManager dumpManagerCreateDumpManager = this.mSysUIComponent.createDumpManager();
         HashSet hashSet = new HashSet();
         timingsTraceLog.traceBegin("Topologically start Core Startables");
         TreeMap treeMap = (TreeMap) map;
@@ -412,10 +409,10 @@ public class SystemUIApplication extends Application implements SystemUIAppCompo
                 notifyBootCompleted(coreStartable);
             }
             if (coreStartable.isDumpCritical()) {
-                createDumpManager.getClass();
-                createDumpManager.registerCriticalDumpable(coreStartable.getClass().getName(), coreStartable);
+                dumpManagerCreateDumpManager.getClass();
+                dumpManagerCreateDumpManager.registerCriticalDumpable(coreStartable.getClass().getName(), coreStartable);
             } else {
-                createDumpManager.registerNormalDumpable(coreStartable);
+                dumpManagerCreateDumpManager.registerNormalDumpable(coreStartable);
             }
         }
     }

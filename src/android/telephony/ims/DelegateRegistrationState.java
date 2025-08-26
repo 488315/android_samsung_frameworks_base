@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -122,7 +123,7 @@ public final class DelegateRegistrationState implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeArraySet(this.mRegisteredTags);
         writeStateToParcel(parcel, this.mDeregisteringTags);
         writeStateToParcel(parcel, this.mDeregisteredTags);
@@ -138,8 +139,8 @@ public final class DelegateRegistrationState implements Parcelable {
     }
 
     private void readStateFromParcel(Parcel parcel, Set<FeatureTagState> set) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             set.add(new FeatureTagState(parcel.readString(), parcel.readInt()));
         }
     }

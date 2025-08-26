@@ -31,7 +31,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnnotatedStringResolveInlineContentKt {
     public static final Pair EmptyInlineContent;
@@ -58,8 +57,8 @@ public abstract class AnnotatedStringResolveInlineContentKt {
                 Function3 function3 = (Function3) range.item;
                 Modifier.Companion companion = Modifier.Companion;
                 int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-                PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-                Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, companion);
+                PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+                Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, companion);
                 ComposeUiNode.Companion.getClass();
                 Function0 function0 = ComposeUiNode.Companion.Constructor;
                 if (composerImpl.applier == null) {
@@ -72,17 +71,16 @@ public abstract class AnnotatedStringResolveInlineContentKt {
                 } else {
                     composerImpl.useNode();
                 }
-                Updater.m336setimpl(composerImpl, new MeasurePolicy() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$1$2
+                Updater.m337setimpl(composerImpl, new MeasurePolicy() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$1$2
                     @Override // androidx.compose.ui.layout.MeasurePolicy
                     /* renamed from: measure-3p2s80s */
                     public final MeasureResult mo3measure3p2s80s(MeasureScope measureScope, List list2, long j) {
-                        MeasureResult layout$1;
                         final ArrayList arrayList = new ArrayList(list2.size());
                         int size2 = list2.size();
                         for (int i4 = 0; i4 < size2; i4++) {
-                            arrayList.add(((Measurable) list2.get(i4)).mo608measureBRTryo0(j));
+                            arrayList.add(((Measurable) list2.get(i4)).mo610measureBRTryo0(j));
                         }
-                        layout$1 = measureScope.layout$1(Constraints.m821getMaxWidthimpl(j), Constraints.m820getMaxHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$1$2.1
+                        return measureScope.layout$1(Constraints.m823getMaxWidthimpl(j), Constraints.m822getMaxHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$1$2.1
                             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                             /* JADX WARN: Multi-variable type inference failed */
                             {
@@ -91,7 +89,7 @@ public abstract class AnnotatedStringResolveInlineContentKt {
 
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
                                 List<Placeable> list3 = arrayList;
                                 int size3 = list3.size();
@@ -101,15 +99,14 @@ public abstract class AnnotatedStringResolveInlineContentKt {
                                 return Unit.INSTANCE;
                             }
                         });
-                        return layout$1;
                     }
                 }, ComposeUiNode.Companion.SetMeasurePolicy);
-                Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
                 Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
                 if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                     AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
                 }
-                Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+                Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
                 function3.invoke(annotatedString.subSequence(range.start, range.end).text, composerImpl, 0);
                 composerImpl.end(true);
             }
@@ -119,9 +116,9 @@ public abstract class AnnotatedStringResolveInlineContentKt {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt.InlineChildren.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -130,7 +127,7 @@ public abstract class AnnotatedStringResolveInlineContentKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    AnnotatedStringResolveInlineContentKt.InlineChildren(AnnotatedString.this, list, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    AnnotatedStringResolveInlineContentKt.InlineChildren(annotatedString, list, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };

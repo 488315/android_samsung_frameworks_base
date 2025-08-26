@@ -121,9 +121,9 @@ public interface IDeviceInfoManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceInfoManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceInfoManager)) {
-                return (IDeviceInfoManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceInfoManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceInfoManager)) {
+                return (IDeviceInfoManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -175,91 +175,91 @@ public interface IDeviceInfoManager extends IInterface {
                 case 1:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerPendingIntentForUriAsUser(uri, pendingIntent, readString, readInt);
+                    registerPendingIntentForUriAsUser(uri, pendingIntent, string, i3);
                     return true;
                 case 2:
                     IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerPendingIntentForIntentAsUser(intentFilter, pendingIntent2, readString2, readInt2);
+                    registerPendingIntentForIntentAsUser(intentFilter, pendingIntent2, string2, i4);
                     return true;
                 case 3:
                     IntentFilter intentFilter2 = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     PendingIntent pendingIntent3 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString3 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerPendingIntentForIntentForAllUsers(intentFilter2, pendingIntent3, readString3, readInt3);
+                    registerPendingIntentForIntentForAllUsers(intentFilter2, pendingIntent3, string3, i5);
                     return true;
                 case 4:
                     IntentFilter intentFilter3 = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     PendingIntent pendingIntent4 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    int readInt4 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    String readString4 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    String string4 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerPendingIntent(intentFilter3, pendingIntent4, readInt4, createStringArrayList, readString4, readInt5);
+                    registerPendingIntent(intentFilter3, pendingIntent4, i6, arrayListCreateStringArrayList, string4, i7);
                     return true;
                 case 5:
                     IntentFilter intentFilter4 = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     PendingIntent pendingIntent5 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString5 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterPendingIntent(intentFilter4, pendingIntent5, readString5, readInt6);
+                    unregisterPendingIntent(intentFilter4, pendingIntent5, string5, i8);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     PendingIntent pendingIntent6 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    String readString7 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerPendingIntentForCustomEventAsUser(readString6, pendingIntent6, bundle, readString7, readInt7);
+                    registerPendingIntentForCustomEventAsUser(string6, pendingIntent6, bundle, string7, i9);
                     return true;
                 case 7:
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     PendingIntent pendingIntent7 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString8 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterPendingIntentForUriAsUser(uri2, pendingIntent7, readString8, readInt8);
+                    unregisterPendingIntentForUriAsUser(uri2, pendingIntent7, string8, i10);
                     return true;
                 case 8:
                     IntentFilter intentFilter5 = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     PendingIntent pendingIntent8 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString9 = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterPendingIntentForIntentAsUser(intentFilter5, pendingIntent8, readString9, readInt9);
+                    unregisterPendingIntentForIntentAsUser(intentFilter5, pendingIntent8, string9, i11);
                     return true;
                 case 9:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     PendingIntent pendingIntent9 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    String readString11 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterPendingIntentForCustomEventAsUser(readString10, pendingIntent9, bundle2, readString11, readInt10);
+                    unregisterPendingIntentForCustomEventAsUser(string10, pendingIntent9, bundle2, string11, i12);
                     return true;
                 case 10:
-                    String readString12 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearPendingIntentAsUser(readString12, readInt11);
+                    clearPendingIntentAsUser(string12, i13);
                     return true;
                 case 11:
-                    int readInt12 = parcel.readInt();
-                    String readString13 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int numPendingIntentAsUser = getNumPendingIntentAsUser(readInt12, readString13, readInt13);
+                    int numPendingIntentAsUser = getNumPendingIntentAsUser(i14, string13, i15);
                     parcel2.writeNoException();
                     parcel2.writeInt(numPendingIntentAsUser);
                     return true;
@@ -286,171 +286,171 @@ public interface IDeviceInfoManager extends IInterface {
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void registerPendingIntentForUriAsUser(Uri uri, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void registerPendingIntentForIntentAsUser(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void registerPendingIntentForIntentForAllUsers(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void registerPendingIntent(IntentFilter intentFilter, PendingIntent pendingIntent, int i, List<String> list, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void unregisterPendingIntent(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void registerPendingIntentForCustomEventAsUser(String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void unregisterPendingIntentForUriAsUser(Uri uri, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void unregisterPendingIntentForIntentAsUser(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void unregisterPendingIntentForCustomEventAsUser(String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public void clearPendingIntentAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
             public int getNumPendingIntentAsUser(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

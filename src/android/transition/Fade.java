@@ -28,9 +28,9 @@ public class Fade extends Visibility {
 
     public Fade(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Fade);
-        setMode(obtainStyledAttributes.getInt(0, getMode()));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Fade);
+        setMode(typedArrayObtainStyledAttributes.getInt(0, getMode()));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.transition.Visibility, android.transition.Transition
@@ -44,11 +44,11 @@ public class Fade extends Visibility {
             return null;
         }
         view.setTransitionAlpha(f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", f2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", f2);
         if (DBG) {
-            Log.d(LOG_TAG, "Created animator " + ofFloat);
+            Log.d(LOG_TAG, "Created animator " + objectAnimatorOfFloat);
         }
-        ofFloat.addListener(new FadeAnimatorListener(view));
+        objectAnimatorOfFloat.addListener(new FadeAnimatorListener(view));
         addListener(new TransitionListenerAdapter(this) { // from class: android.transition.Fade.1
             @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
             public void onTransitionEnd(Transition transition) {
@@ -56,7 +56,7 @@ public class Fade extends Visibility {
                 transition.removeListener(this);
             }
         });
-        return ofFloat;
+        return objectAnimatorOfFloat;
     }
 
     @Override // android.transition.Visibility

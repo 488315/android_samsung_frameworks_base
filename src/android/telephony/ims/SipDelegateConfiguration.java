@@ -505,9 +505,9 @@ public final class SipDelegateConfiguration implements Parcelable {
     }
 
     private InetSocketAddress readAddressFromParcel(Parcel parcel) {
-        byte[] createByteArray = parcel.createByteArray();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
         try {
-            return new InetSocketAddress(InetAddress.getByAddress(createByteArray), parcel.readInt());
+            return new InetSocketAddress(InetAddress.getByAddress(bArrCreateByteArray), parcel.readInt());
         } catch (UnknownHostException unused) {
             Log.e("SipDelegateConfiguration", "exception reading address, returning null");
             return null;

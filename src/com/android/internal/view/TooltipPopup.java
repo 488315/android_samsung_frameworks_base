@@ -2,9 +2,11 @@ package com.android.internal.view;
 
 import android.app.WindowConfiguration;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Slog;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewRootImpl;
 import android.view.WindowInsets;
 import android.view.WindowManager;
+import android.view.WindowManagerGlobal;
 import android.widget.TextView;
 import com.android.internal.R;
 import com.samsung.android.rune.CoreRune;
@@ -46,7 +49,7 @@ public class TooltipPopup {
     }
 
     public TooltipPopup(Context context) {
-        View inflate;
+        View viewInflate;
         this.mContentView = null;
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         this.mLayoutParams = layoutParams;
@@ -56,7 +59,7 @@ public class TooltipPopup {
         this.mOnLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.internal.view.TooltipPopup$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                TooltipPopup.this.lambda$new$0(view, i, i2, i3, i4, i5, i6, i7, i8);
+                this.f$0.lambda$new$0(view, i, i2, i3, i4, i5, i6, i7, i8);
             }
         };
         this.mIsDexMode = false;
@@ -75,12 +78,12 @@ public class TooltipPopup {
             }
         }
         if (z) {
-            inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sem_tooltip, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sem_tooltip, (ViewGroup) null);
         } else {
-            inflate = LayoutInflater.from(this.mContext).inflate(R.layout.tooltip, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.tooltip, (ViewGroup) null);
         }
-        this.mContentView = inflate;
-        this.mMessageView = (TextView) inflate.findViewById(16908299);
+        this.mContentView = viewInflate;
+        this.mMessageView = (TextView) viewInflate.findViewById(16908299);
         this.mLastOrientation = context.getResources().getConfiguration().orientation;
         layoutParams.setTitle(this.mContext.getString(R.string.tooltip_popup_title));
         layoutParams.packageName = this.mContext.getOpPackageName();
@@ -136,91 +139,179 @@ public class TooltipPopup {
         return this.mContentView.getParent() != null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0077  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0093  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00e7  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x01a5  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x01b0  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0077  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0093  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x00a9  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x00e7  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x01a5  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x01b0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void computePosition(android.view.View r19, int r20, int r21, boolean r22, android.view.WindowManager.LayoutParams r23) {
-        /*
-            Method dump skipped, instructions count: 491
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.view.TooltipPopup.computePosition(android.view.View, int, int, boolean, android.view.WindowManager$LayoutParams):void");
+    private void computePosition(View view, int i, int i2, boolean z, WindowManager.LayoutParams layoutParams) throws Resources.NotFoundException {
+        int i3;
+        int height;
+        int i4;
+        View windowView;
+        WindowInsets rootWindowInsets;
+        int systemWindowInsetLeft;
+        layoutParams.token = view.getApplicationWindowToken();
+        int dimensionPixelOffset = this.mContext.getResources().getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_threshold);
+        if (this.mIsDeviceDefault || view.getWidth() < dimensionPixelOffset) {
+            int width = view.getWidth() / 2;
+            i3 = width;
+            if (view.getHeight() < dimensionPixelOffset) {
+            }
+            layoutParams.gravity = 49;
+            int dimensionPixelOffset2 = this.mContext.getResources().getDimensionPixelOffset(!z ? R.dimen.tooltip_y_offset_touch : R.dimen.tooltip_y_offset_non_touch);
+            windowView = WindowManagerGlobal.getInstance().getWindowView(view.getApplicationWindowToken());
+            if (windowView == null) {
+            }
+            windowView.getWindowVisibleDisplayFrame(this.mTmpDisplayFrame);
+            rootWindowInsets = windowView.getRootWindowInsets();
+            if (rootWindowInsets == null) {
+            }
+            int[] iArr = new int[2];
+            windowView.getLocationOnScreen(iArr);
+            int i5 = height;
+            int i6 = iArr[0];
+            Rect rect = new Rect(i6, iArr[1], i6 + windowView.getWidth(), iArr[1] + windowView.getHeight());
+            this.mTmpDisplayFrame.left = rect.left + systemWindowInsetLeft;
+            this.mTmpDisplayFrame.right = rect.right;
+            windowView.getLocationOnScreen(this.mTmpAppPos);
+            view.getLocationOnScreen(this.mTmpAnchorPos);
+            if (ViewRune.COMMON_IS_PRODUCT_DEV) {
+            }
+            int[] iArr2 = this.mTmpAnchorPos;
+            int i7 = iArr2[0];
+            int[] iArr3 = this.mTmpAppPos;
+            int i8 = i7 - iArr3[0];
+            iArr2[0] = i8;
+            iArr2[1] = iArr2[1] - iArr3[1];
+            if (!this.mIsDeviceDefault) {
+            }
+        } else {
+            i3 = i;
+            if (view.getHeight() < dimensionPixelOffset) {
+                int dimensionPixelOffset3 = this.mContext.getResources().getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_extra_offset);
+                height = i2 + dimensionPixelOffset3;
+                i4 = i2 - dimensionPixelOffset3;
+            } else {
+                height = view.getHeight();
+                i4 = 0;
+            }
+            layoutParams.gravity = 49;
+            int dimensionPixelOffset22 = this.mContext.getResources().getDimensionPixelOffset(!z ? R.dimen.tooltip_y_offset_touch : R.dimen.tooltip_y_offset_non_touch);
+            windowView = WindowManagerGlobal.getInstance().getWindowView(view.getApplicationWindowToken());
+            if (windowView == null) {
+                ViewRootImpl viewRootImpl = view.getViewRootImpl();
+                if (viewRootImpl == null) {
+                    Slog.e(TAG, "Cannot find app view");
+                    return;
+                }
+                windowView = viewRootImpl.getView();
+            }
+            windowView.getWindowVisibleDisplayFrame(this.mTmpDisplayFrame);
+            rootWindowInsets = windowView.getRootWindowInsets();
+            if (rootWindowInsets == null) {
+                systemWindowInsetLeft = rootWindowInsets.getSystemWindowInsetLeft();
+                Log.i(TAG, "left inset = " + systemWindowInsetLeft);
+            } else {
+                systemWindowInsetLeft = 0;
+            }
+            int[] iArr4 = new int[2];
+            windowView.getLocationOnScreen(iArr4);
+            int i52 = height;
+            int i62 = iArr4[0];
+            Rect rect2 = new Rect(i62, iArr4[1], i62 + windowView.getWidth(), iArr4[1] + windowView.getHeight());
+            this.mTmpDisplayFrame.left = rect2.left + systemWindowInsetLeft;
+            this.mTmpDisplayFrame.right = rect2.right;
+            windowView.getLocationOnScreen(this.mTmpAppPos);
+            view.getLocationOnScreen(this.mTmpAnchorPos);
+            if (ViewRune.COMMON_IS_PRODUCT_DEV) {
+                Log.i(TAG, "computePosition - displayFrame left : " + this.mTmpDisplayFrame.left);
+                Log.i(TAG, "computePosition - displayFrame right : " + this.mTmpDisplayFrame.right);
+                Log.i(TAG, "computePosition - displayFrame top : " + this.mTmpDisplayFrame.top);
+                Log.i(TAG, "computePosition - displayFrame bottom : " + this.mTmpDisplayFrame.bottom);
+                Log.i(TAG, "computePosition - anchorView locationOnScreen x : " + this.mTmpAnchorPos[0]);
+                Log.i(TAG, "computePosition - anchorView locationOnScreen y : " + this.mTmpAnchorPos[1]);
+                Log.i(TAG, "computePosition - appView locationOnScreen x : " + this.mTmpAppPos[0]);
+                Log.i(TAG, "computePosition - appView locationOnScreen y : " + this.mTmpAppPos[1]);
+            }
+            int[] iArr22 = this.mTmpAnchorPos;
+            int i72 = iArr22[0];
+            int[] iArr32 = this.mTmpAppPos;
+            int i82 = i72 - iArr32[0];
+            iArr22[0] = i82;
+            iArr22[1] = iArr22[1] - iArr32[1];
+            if (!this.mIsDeviceDefault) {
+                semUpdateMaxWidth();
+                semComputePositionForMultiWindow(view, rect2, z, i3, systemWindowInsetLeft, layoutParams);
+                return;
+            }
+            layoutParams.x = (i82 + i3) - (rect2.width() / 2);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+            this.mContentView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
+            int measuredHeight = this.mContentView.getMeasuredHeight();
+            int i9 = this.mTmpAnchorPos[1];
+            int i10 = ((i4 + i9) - dimensionPixelOffset22) - measuredHeight;
+            int i11 = i9 + i52 + dimensionPixelOffset22;
+            if (z) {
+                if (i10 >= 0) {
+                    layoutParams.y = i10;
+                    return;
+                } else {
+                    layoutParams.y = i11;
+                    return;
+                }
+            }
+            if (measuredHeight + i11 <= this.mTmpDisplayFrame.height()) {
+                layoutParams.y = i11;
+            } else {
+                layoutParams.y = i10;
+            }
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0040  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0040  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void semUpdateMaxWidth() {
-        /*
-            r4 = this;
-            android.util.TypedValue r0 = new android.util.TypedValue
-            r0.<init>()
-            android.content.Context r1 = r4.mContext
-            android.content.res.Resources r1 = r1.getResources()
-            r2 = 17106046(0x105047e, float:2.4431465E-38)
-            r3 = 1
-            r1.getValue(r2, r0, r3)
-            android.content.Context r1 = r4.mContext
-            android.content.res.Resources r1 = r1.getResources()
-            android.util.DisplayMetrics r1 = r1.getDisplayMetrics()
-            int r2 = r0.type
-            r3 = 5
-            if (r2 != r3) goto L27
-            float r0 = r0.getDimension(r1)
-        L25:
-            int r0 = (int) r0
-            goto L38
-        L27:
-            int r2 = r0.type
-            r3 = 6
-            if (r2 != r3) goto L37
-            int r2 = r1.widthPixels
-            float r2 = (float) r2
-            int r1 = r1.widthPixels
-            float r1 = (float) r1
-            float r0 = r0.getFraction(r2, r1)
-            goto L25
-        L37:
-            r0 = 0
-        L38:
-            android.view.View r1 = r4.mContentView
-            android.graphics.drawable.Drawable r1 = r1.getBackground()
-            if (r1 == 0) goto L4e
-            android.view.View r1 = r4.mContentView
-            int r1 = r1.getPaddingLeft()
-            android.view.View r2 = r4.mContentView
-            int r2 = r2.getPaddingRight()
-            int r1 = r1 + r2
-            int r0 = r0 - r1
-        L4e:
-            android.widget.TextView r4 = r4.mMessageView
-            r4.setMaxWidth(r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.view.TooltipPopup.semUpdateMaxWidth():void");
+    private void semUpdateMaxWidth() throws Resources.NotFoundException {
+        int paddingLeft;
+        float fraction;
+        TypedValue typedValue = new TypedValue();
+        this.mContext.getResources().getValue(R.dimen.sem_config_prefDialogWidth, typedValue, true);
+        DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
+        if (typedValue.type == 5) {
+            fraction = typedValue.getDimension(displayMetrics);
+        } else if (typedValue.type == 6) {
+            fraction = typedValue.getFraction(displayMetrics.widthPixels, displayMetrics.widthPixels);
+        } else {
+            paddingLeft = 0;
+            if (this.mContentView.getBackground() != null) {
+                paddingLeft -= this.mContentView.getPaddingLeft() + this.mContentView.getPaddingRight();
+            }
+            this.mMessageView.setMaxWidth(paddingLeft);
+        }
+        paddingLeft = (int) fraction;
+        if (this.mContentView.getBackground() != null) {
+        }
+        this.mMessageView.setMaxWidth(paddingLeft);
     }
 
-    private void semComputePositionForMultiWindow(View view, Rect rect, boolean z, int i, int i2, WindowManager.LayoutParams layoutParams) {
+    private void semComputePositionForMultiWindow(View view, Rect rect, boolean z, int i, int i2, WindowManager.LayoutParams layoutParams) throws Resources.NotFoundException {
         View view2;
+        int yAbove;
         int i3;
         int i4;
-        int i5;
         ViewRootImpl viewRootImpl;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        this.mContentView.measure(makeMeasureSpec, makeMeasureSpec);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        this.mContentView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
         int measuredHeight = this.mContentView.getMeasuredHeight();
         layoutParams.layoutInDisplayCutoutMode = 2;
         int measuredWidth = this.mContentView.getMeasuredWidth();
@@ -229,15 +320,15 @@ public class TooltipPopup {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealMetrics(displayMetrics);
         WindowManager windowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
-        int i6 = displayMetrics.widthPixels;
-        int i7 = displayMetrics.heightPixels;
-        int i8 = i6 - dimensionPixelOffset;
-        if (measuredWidth > i8) {
-            measuredWidth = i8;
+        int i5 = displayMetrics.widthPixels;
+        int i6 = displayMetrics.heightPixels;
+        int i7 = i5 - dimensionPixelOffset;
+        if (measuredWidth > i7) {
+            measuredWidth = i7;
         }
-        int width = this.mTmpDisplayFrame.width() - dimensionPixelOffset;
-        if (isSplitWindow() && measuredWidth > width && width >= this.mContext.getResources().getDimensionPixelOffset(R.dimen.default_minimal_size_resizable_task)) {
-            measuredWidth = width;
+        int iWidth = this.mTmpDisplayFrame.width() - dimensionPixelOffset;
+        if (isSplitWindow() && measuredWidth > iWidth && iWidth >= this.mContext.getResources().getDimensionPixelOffset(R.dimen.default_minimal_size_resizable_task)) {
+            measuredWidth = iWidth;
         }
         if (isFreeForm() && !isEmbedded()) {
             Log.i(TAG, "Add Flag FLAG_LAYOUT_NO_LIMITS for free form mode");
@@ -247,81 +338,81 @@ public class TooltipPopup {
         }
         if (CoreRune.MW_CAPTION_FREEFORM) {
             view2 = view;
-            i3 = getYAbove(view2, measuredHeight);
+            yAbove = getYAbove(view2, measuredHeight);
         } else {
             view2 = view;
-            i3 = this.mTmpAnchorPos[1] - measuredHeight;
+            yAbove = this.mTmpAnchorPos[1] - measuredHeight;
         }
         int height = this.mTmpAnchorPos[1] + view2.getHeight();
         if (z) {
             if (view2.getLayoutDirection() == 0) {
-                int i9 = this.mTmpAnchorPos[0];
-                i4 = ((i9 + i) - measuredWidth) + dimensionPixelOffset;
-                i5 = i4 + measuredWidth;
-                layoutParams.x = ((i9 + i) - ((rect.width() + measuredWidth) / 2)) + dimensionPixelOffset;
+                int i8 = this.mTmpAnchorPos[0];
+                i3 = ((i8 + i) - measuredWidth) + dimensionPixelOffset;
+                i4 = i3 + measuredWidth;
+                layoutParams.x = ((i8 + i) - ((rect.width() + measuredWidth) / 2)) + dimensionPixelOffset;
             } else {
-                int i10 = this.mTmpAnchorPos[0];
-                i4 = (i10 + i) - dimensionPixelOffset;
-                i5 = i4 + measuredWidth;
-                layoutParams.x = ((i10 + i) - ((rect.width() - measuredWidth) / 2)) - dimensionPixelOffset;
+                int i9 = this.mTmpAnchorPos[0];
+                i3 = (i9 + i) - dimensionPixelOffset;
+                i4 = i3 + measuredWidth;
+                layoutParams.x = ((i9 + i) - ((rect.width() - measuredWidth) / 2)) - dimensionPixelOffset;
             }
             if (height + measuredHeight > this.mTmpDisplayFrame.height() && !this.mIsCaptionMenuButton && !this.mIsCaptionPopupButton) {
-                layoutParams.y = i3;
+                layoutParams.y = yAbove;
             } else {
                 layoutParams.y = height;
             }
         } else {
             layoutParams.x = (this.mTmpAnchorPos[0] + i) - (rect.width() / 2);
-            i4 = (this.mTmpAnchorPos[0] + i) - (measuredWidth / 2);
-            i5 = i4 + measuredWidth;
-            if (i3 >= 0) {
-                layoutParams.y = i3;
+            i3 = (this.mTmpAnchorPos[0] + i) - (measuredWidth / 2);
+            i4 = i3 + measuredWidth;
+            if (yAbove >= 0) {
+                layoutParams.y = yAbove;
             } else if (height + measuredHeight <= this.mTmpDisplayFrame.height()) {
                 layoutParams.y = height;
             } else {
                 layoutParams.flags |= 512;
-                if (this.mTmpDisplayFrame.top + i3 >= 0) {
-                    layoutParams.y = i3;
+                if (this.mTmpDisplayFrame.top + yAbove >= 0) {
+                    layoutParams.y = yAbove;
                 } else {
                     layoutParams.y = height;
                 }
             }
         }
-        int i11 = i5;
-        int i12 = i4 + rect.left;
-        int i13 = (rect.left + i11) - i6;
-        int i14 = (layoutParams.y + rect.top) - i7;
+        int i10 = i4;
+        int i11 = i3 + rect.left;
+        int i12 = (rect.left + i10) - i5;
+        int dimensionPixelOffset2 = (layoutParams.y + rect.top) - i6;
         int rotation = windowManager.getDefaultDisplay().getRotation();
         if (rotation == 3) {
             if (i2 != 0) {
-                int dimensionPixelOffset2 = this.mContext.getResources().getDimensionPixelOffset(R.dimen.navigation_bar_height_landscape);
-                i12 -= dimensionPixelOffset2;
-                i13 -= dimensionPixelOffset2;
+                int dimensionPixelOffset3 = this.mContext.getResources().getDimensionPixelOffset(R.dimen.navigation_bar_height_landscape);
+                i11 -= dimensionPixelOffset3;
+                i12 -= dimensionPixelOffset3;
             }
         } else if (rotation == 0) {
-            i14 += this.mContext.getResources().getDimensionPixelOffset(R.dimen.navigation_bar_height);
+            dimensionPixelOffset2 += this.mContext.getResources().getDimensionPixelOffset(R.dimen.navigation_bar_height);
         }
-        if (i12 < 0) {
+        if (i11 < 0) {
+            layoutParams.x -= i11;
+        } else if (i12 > 0) {
             layoutParams.x -= i12;
-        } else if (i13 > 0) {
-            layoutParams.x -= i13;
-        } else if (i4 < 0) {
-            layoutParams.x -= i4;
-        } else if (i11 > rect.width()) {
-            layoutParams.x -= i11 - rect.width();
+        } else if (i3 < 0) {
+            layoutParams.x -= i3;
+        } else if (i10 > rect.width()) {
+            layoutParams.x -= i10 - rect.width();
         }
-        if (i14 > 0) {
-            layoutParams.y = i3;
+        if (dimensionPixelOffset2 > 0) {
+            layoutParams.y = yAbove;
         }
         if (CoreRune.MW_CAPTION_TOOLTIP && this.mIsCaptionPopupButton && view2.getRootView() != null && (viewRootImpl = view2.getRootView().getViewRootImpl()) != null) {
             layoutParams.y += viewRootImpl.mWindowAttributes.surfaceInsets.top;
             layoutParams.x += viewRootImpl.mWindowAttributes.surfaceInsets.left;
         }
-        if (this.mTmpAppPos[1] + layoutParams.y + measuredHeight > i7) {
-            layoutParams.y = i3;
+        if (this.mTmpAppPos[1] + layoutParams.y + measuredHeight > i6) {
+            layoutParams.y = yAbove;
         }
-        if (this.mTmpDisplayFrame.width() < measuredWidth || rect.height() < measuredHeight || i13 > 0) {
-            if (i3 >= windowManager.getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.statusBars()).top) {
+        if (this.mTmpDisplayFrame.width() < measuredWidth || rect.height() < measuredHeight || i12 > 0) {
+            if (yAbove >= windowManager.getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.statusBars()).top) {
                 layoutParams.flags |= 512;
             }
             Log.i(TAG, "Add Flag FLAG_LAYOUT_NO_LIMITS for small window");

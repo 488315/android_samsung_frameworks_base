@@ -1,6 +1,7 @@
 package com.google.android.setupdesign;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.util.AttributeSet;
@@ -21,7 +22,6 @@ import com.google.android.setupdesign.template.RecyclerViewScrollHandlingDelegat
 import com.google.android.setupdesign.template.RequireScrollMixin;
 import com.google.android.setupdesign.util.PartnerStyleHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GlifRecyclerLayout extends GlifLayout {
     public RecyclerMixin recyclerMixin;
@@ -40,39 +40,39 @@ public class GlifRecyclerLayout extends GlifLayout {
 
     @Override // com.google.android.setupcompat.internal.TemplateLayout
     public final View findManagedViewById(int i) {
-        View findViewById;
+        View viewFindViewById;
         View view = this.recyclerMixin.header;
-        return (view == null || (findViewById = view.findViewById(i)) == null) ? super.findViewById(i) : findViewById;
+        return (view == null || (viewFindViewById = view.findViewById(i)) == null) ? super.findViewById(i) : viewFindViewById;
     }
 
-    public final void init(AttributeSet attributeSet, int i) {
-        boolean z;
-        boolean z2;
+    public final void init(AttributeSet attributeSet, int i) throws Resources.NotFoundException {
+        boolean zUseFullDynamicColor;
+        boolean zShouldApplyPartnerHeavyThemeResource;
         if (isInEditMode()) {
             return;
         }
         RecyclerMixin recyclerMixin = this.recyclerMixin;
         TemplateLayout templateLayout = recyclerMixin.templateLayout;
         Context context = templateLayout.getContext();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudRecyclerMixin, i, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudRecyclerMixin, i, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId != 0) {
             ItemInflater itemInflater = new ItemInflater(context);
             XmlResourceParser xml = itemInflater.resources.getXml(resourceId);
             try {
-                Object inflate = itemInflater.inflate(xml);
+                Object objInflate = itemInflater.inflate(xml);
                 xml.close();
-                ItemHierarchy itemHierarchy = (ItemHierarchy) inflate;
+                ItemHierarchy itemHierarchy = (ItemHierarchy) objInflate;
                 if (templateLayout instanceof GlifLayout) {
                     GlifLayout glifLayout = (GlifLayout) templateLayout;
-                    z2 = glifLayout.shouldApplyPartnerHeavyThemeResource();
-                    z = glifLayout.useFullDynamicColor();
+                    zShouldApplyPartnerHeavyThemeResource = glifLayout.shouldApplyPartnerHeavyThemeResource();
+                    zUseFullDynamicColor = glifLayout.useFullDynamicColor();
                 } else {
-                    z = false;
-                    z2 = false;
+                    zUseFullDynamicColor = false;
+                    zShouldApplyPartnerHeavyThemeResource = false;
                 }
-                RecyclerItemAdapter recyclerItemAdapter = new RecyclerItemAdapter(itemHierarchy, z2, z);
-                recyclerItemAdapter.setHasStableIds(obtainStyledAttributes.getBoolean(4, false));
+                RecyclerItemAdapter recyclerItemAdapter = new RecyclerItemAdapter(itemHierarchy, zShouldApplyPartnerHeavyThemeResource, zUseFullDynamicColor);
+                recyclerItemAdapter.setHasStableIds(typedArrayObtainStyledAttributes.getBoolean(4, false));
                 RecyclerView recyclerView = recyclerMixin.recyclerView;
                 recyclerItemAdapter.recyclerView = recyclerView;
                 recyclerView.setAdapter(recyclerItemAdapter);
@@ -82,14 +82,14 @@ public class GlifRecyclerLayout extends GlifLayout {
             }
         }
         if (recyclerMixin.isDividerDisplay) {
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(1, -1);
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, -1);
             if (dimensionPixelSize != -1) {
                 recyclerMixin.dividerInsetStart = dimensionPixelSize;
                 recyclerMixin.dividerInsetEnd = 0;
                 recyclerMixin.updateDivider();
             } else {
-                int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(3, 0);
-                int dimensionPixelSize3 = obtainStyledAttributes.getDimensionPixelSize(2, 0);
+                int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 0);
+                int dimensionPixelSize3 = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0);
                 if (PartnerStyleHelper.shouldApplyPartnerResource(templateLayout)) {
                     PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
                     PartnerConfig partnerConfig = PartnerConfig.CONFIG_LAYOUT_MARGIN_START;
@@ -106,17 +106,17 @@ public class GlifRecyclerLayout extends GlifLayout {
                 recyclerMixin.dividerInsetEnd = dimensionPixelSize3;
                 recyclerMixin.updateDivider();
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         } else {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         registerMixin(RecyclerMixin.class, this.recyclerMixin);
         RequireScrollMixin requireScrollMixin = (RequireScrollMixin) getMixin(RequireScrollMixin.class);
         new RecyclerViewScrollHandlingDelegate(requireScrollMixin, this.recyclerMixin.recyclerView);
         requireScrollMixin.getClass();
-        View findManagedViewById = findManagedViewById(R.id.sud_landscape_content_area);
-        if (findManagedViewById != null) {
-            tryApplyPartnerCustomizationContentPaddingTopStyle(findManagedViewById);
+        View viewFindManagedViewById = findManagedViewById(R.id.sud_landscape_content_area);
+        if (viewFindManagedViewById != null) {
+            tryApplyPartnerCustomizationContentPaddingTopStyle(viewFindManagedViewById);
         }
         updateLandscapeMiddleHorizontalSpacing();
         if (PartnerConfigHelper.isGlifExpressiveEnabled(getContext())) {
@@ -165,28 +165,28 @@ public class GlifRecyclerLayout extends GlifLayout {
 
     @Override // com.google.android.setupcompat.internal.TemplateLayout
     public void onTemplateInflated() {
-        View findViewById = findViewById(R.id.sud_recycler_view);
-        if (!(findViewById instanceof RecyclerView)) {
+        View viewFindViewById = findViewById(R.id.sud_recycler_view);
+        if (!(viewFindViewById instanceof RecyclerView)) {
             throw new IllegalStateException("GlifRecyclerLayout should use a template with recycler view");
         }
-        this.recyclerMixin = new RecyclerMixin(this, (RecyclerView) findViewById);
+        this.recyclerMixin = new RecyclerMixin(this, (RecyclerView) viewFindViewById);
     }
 
     public GlifRecyclerLayout(Context context, int i) {
         this(context, i, 0);
     }
 
-    public GlifRecyclerLayout(Context context, int i, int i2) {
+    public GlifRecyclerLayout(Context context, int i, int i2) throws Resources.NotFoundException {
         super(context, i, i2);
         init(null, 0);
     }
 
-    public GlifRecyclerLayout(Context context, AttributeSet attributeSet) {
+    public GlifRecyclerLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         init(attributeSet, 0);
     }
 
-    public GlifRecyclerLayout(Context context, AttributeSet attributeSet, int i) {
+    public GlifRecyclerLayout(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         init(attributeSet, i);
     }

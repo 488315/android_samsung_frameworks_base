@@ -53,9 +53,9 @@ public interface IArtManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IArtManager)) {
-                return (IArtManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IArtManager)) {
+                return (IArtManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,21 +85,21 @@ public interface IArtManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                ISnapshotRuntimeProfileCallback asInterface = ISnapshotRuntimeProfileCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString3 = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallbackAsInterface = ISnapshotRuntimeProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                snapshotRuntimeProfile(readInt, readString, readString2, asInterface, readString3);
+                snapshotRuntimeProfile(i3, string, string2, iSnapshotRuntimeProfileCallbackAsInterface, string3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                String readString4 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isRuntimeProfilingEnabled = isRuntimeProfilingEnabled(readInt2, readString4);
+                boolean zIsRuntimeProfilingEnabled = isRuntimeProfilingEnabled(i4, string4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isRuntimeProfilingEnabled);
+                parcel2.writeBoolean(zIsRuntimeProfilingEnabled);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -124,37 +124,37 @@ public interface IArtManager extends IInterface {
 
             @Override // android.content.pm.dex.IArtManager
             public void snapshotRuntimeProfile(int i, String str, String str2, ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iSnapshotRuntimeProfileCallback);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iSnapshotRuntimeProfileCallback);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.dex.IArtManager
             public boolean isRuntimeProfilingEnabled(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

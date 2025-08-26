@@ -19,7 +19,7 @@ public abstract class AppFunctionService extends Service {
     private final Binder mBinder = createBinder(this, new OnExecuteFunction() { // from class: android.app.appfunctions.AppFunctionService$$ExternalSyntheticLambda0
         @Override // android.app.appfunctions.AppFunctionService.OnExecuteFunction
         public final void perform(ExecuteAppFunctionRequest executeAppFunctionRequest, String str, SigningInfo signingInfo, CancellationSignal cancellationSignal, OutcomeReceiver outcomeReceiver) {
-            AppFunctionService.this.onExecuteFunction(executeAppFunctionRequest, str, signingInfo, cancellationSignal, outcomeReceiver);
+            this.f$0.onExecuteFunction(executeAppFunctionRequest, str, signingInfo, cancellationSignal, outcomeReceiver);
         }
     });
 
@@ -34,7 +34,7 @@ public abstract class AppFunctionService extends Service {
         return new IAppFunctionService.Stub() { // from class: android.app.appfunctions.AppFunctionService.1
             @Override // android.app.appfunctions.IAppFunctionService
             public void executeAppFunction(ExecuteAppFunctionRequest executeAppFunctionRequest, String str, SigningInfo signingInfo, ICancellationCallback iCancellationCallback, IExecuteAppFunctionCallback iExecuteAppFunctionCallback) {
-                if (Context.this.checkCallingPermission(Manifest.permission.BIND_APP_FUNCTION_SERVICE) == -1) {
+                if (context.checkCallingPermission(Manifest.permission.BIND_APP_FUNCTION_SERVICE) == -1) {
                     throw new SecurityException("Can only be called by the system server.");
                 }
                 final SafeOneTimeExecuteAppFunctionCallback safeOneTimeExecuteAppFunctionCallback = new SafeOneTimeExecuteAppFunctionCallback(iExecuteAppFunctionCallback);
@@ -59,11 +59,11 @@ public abstract class AppFunctionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static CancellationSignal buildCancellationSignal(ICancellationCallback iCancellationCallback) {
-        ICancellationSignal createTransport = CancellationSignal.createTransport();
-        CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
+        ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+        CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
         try {
-            iCancellationCallback.sendCancellationTransport(createTransport);
-            return fromTransport;
+            iCancellationCallback.sendCancellationTransport(iCancellationSignalCreateTransport);
+            return cancellationSignalFromTransport;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

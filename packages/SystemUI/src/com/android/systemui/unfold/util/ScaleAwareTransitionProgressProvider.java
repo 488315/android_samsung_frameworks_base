@@ -9,14 +9,12 @@ import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringNumberConversionsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ScaleAwareTransitionProgressProvider implements UnfoldTransitionProgressProvider {
     public static final Companion Companion = new Companion(null);
     public final ContentResolver contentResolver;
     public final ScopedUnfoldTransitionProgressProvider scopedUnfoldTransitionProgressProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +41,7 @@ public final class ScaleAwareTransitionProgressProvider implements UnfoldTransit
 
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                ScaleAwareTransitionProgressProvider scaleAwareTransitionProgressProvider = ScaleAwareTransitionProgressProvider.this;
+                ScaleAwareTransitionProgressProvider scaleAwareTransitionProgressProvider = this.this$0;
                 ScaleAwareTransitionProgressProvider.Companion companion = ScaleAwareTransitionProgressProvider.Companion;
                 ContentResolver contentResolver2 = scaleAwareTransitionProgressProvider.contentResolver;
                 ScaleAwareTransitionProgressProvider.Companion.getClass();

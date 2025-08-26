@@ -39,7 +39,6 @@ import dagger.Lazy;
 import java.util.ArrayList;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationController.Stub implements KeyguardStateController.Callback, KeyguardSecUnlockAnimationController {
     public final Lazy biometricUnlockControllerLazy;
@@ -83,36 +82,36 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
         this.notificationShadeWindowController = notificationShadeWindowController;
         this.powerManager = powerManager;
         this.deviceStateManager = deviceStateManager;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.surfaceBehindAlphaAnimator = ofFloat;
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.wallpaperCannedUnlockAnimator = ofFloat2;
-        ValueAnimator ofFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
-        this.wallpaperFadeOutUnlockAnimator = ofFloat3;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.surfaceBehindAlphaAnimator = valueAnimatorOfFloat;
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.wallpaperCannedUnlockAnimator = valueAnimatorOfFloat2;
+        ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
+        this.wallpaperFadeOutUnlockAnimator = valueAnimatorOfFloat3;
         this.surfaceBehindMatrix = new Matrix();
-        ValueAnimator ofFloat4 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.surfaceBehindEntryAnimator = ofFloat4;
+        ValueAnimator valueAnimatorOfFloat4 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.surfaceBehindEntryAnimator = valueAnimatorOfFloat4;
         this.handler = new Handler();
         this.tmpFloat = new float[9];
-        ofFloat.setDuration(175L);
+        valueAnimatorOfFloat.setDuration(175L);
         Interpolator interpolator = Interpolators.LINEAR;
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$1$1
+        valueAnimatorOfFloat.setInterpolator(interpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardUnlockAnimationController.this.surfaceBehindAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                KeyguardUnlockAnimationController.this.updateSurfaceBehindAppearAmount();
+                this.this$0.surfaceBehindAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                this.this$0.updateSurfaceBehindAppearAmount();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                float f = KeyguardUnlockAnimationController.this.surfaceBehindAlpha;
+                float f = this.this$0.surfaceBehindAlpha;
                 if (f != 0.0f) {
                     android.util.Log.d("KeyguardUnlock", "skip finishSurfaceBehindRemoteAnimation surfaceBehindAlpha=" + f);
                 } else {
                     android.util.Log.d("KeyguardUnlock", "surfaceBehindAlphaAnimator#onAnimationEnd");
-                    KeyguardUnlockAnimationController keyguardUnlockAnimationController = KeyguardUnlockAnimationController.this;
+                    KeyguardUnlockAnimationController keyguardUnlockAnimationController = this.this$0;
                     keyguardUnlockAnimationController.surfaceBehindRemoteAnimationTargets = null;
                     keyguardUnlockAnimationController.openingWallpaperTargets = null;
                     keyguardUnlockAnimationController.closingWallpaperTargets = null;
@@ -120,19 +119,19 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
                 }
             }
         });
-        ofFloat2.setDuration(300L);
-        ofFloat2.setInterpolator(interpolator);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$2$1
+        valueAnimatorOfFloat2.setDuration(300L);
+        valueAnimatorOfFloat2.setInterpolator(interpolator);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$2$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardUnlockAnimationController.this.setWallpaperAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), KeyguardUnlockAnimationController.this.openingWallpaperTargets);
+                this.this$0.setWallpaperAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), this.this$0.openingWallpaperTargets);
             }
         });
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$2$2
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$2$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 android.util.Log.d("KeyguardUnlock", "wallpaperCannedUnlockAnimator#onAnimationEnd");
-                ((KeyguardViewMediator) KeyguardUnlockAnimationController.this.keyguardViewMediator.get()).exitKeyguardAndFinishSurfaceBehindRemoteAnimation();
+                ((KeyguardViewMediator) this.this$0.keyguardViewMediator.get()).exitKeyguardAndFinishSurfaceBehindRemoteAnimation();
                 Trace.asyncTraceEnd(4096L, "WallpaperAlphaAnimation", 0);
             }
 
@@ -142,36 +141,36 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
                 Trace.asyncTraceBegin(4096L, "WallpaperAlphaAnimation", 0);
             }
         });
-        ofFloat3.setDuration(150L);
-        ofFloat3.setStartDelay(150L);
-        ofFloat3.setInterpolator(interpolator);
-        ofFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$3$1
+        valueAnimatorOfFloat3.setDuration(150L);
+        valueAnimatorOfFloat3.setStartDelay(150L);
+        valueAnimatorOfFloat3.setInterpolator(interpolator);
+        valueAnimatorOfFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$3$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardUnlockAnimationController.this.setWallpaperAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), KeyguardUnlockAnimationController.this.closingWallpaperTargets);
+                this.this$0.setWallpaperAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), this.this$0.closingWallpaperTargets);
             }
         });
-        ofFloat4.setDuration(300L);
-        ofFloat4.setStartDelay(67L);
-        ofFloat4.setInterpolator(Interpolators.TOUCH_RESPONSE);
-        ofFloat4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$4$1
+        valueAnimatorOfFloat4.setDuration(300L);
+        valueAnimatorOfFloat4.setStartDelay(67L);
+        valueAnimatorOfFloat4.setInterpolator(Interpolators.TOUCH_RESPONSE);
+        valueAnimatorOfFloat4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$4$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardUnlockAnimationController.this.surfaceBehindAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                KeyguardUnlockAnimationController.this.setSurfaceBehindAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), true);
+                this.this$0.surfaceBehindAlpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                this.this$0.setSurfaceBehindAppearAmount(((Float) valueAnimator.getAnimatedValue()).floatValue(), true);
             }
         });
-        ofFloat4.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$4$2
+        valueAnimatorOfFloat4.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$4$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 android.util.Log.d("KeyguardUnlock", "surfaceBehindEntryAnimator#onAnimationEnd");
-                KeyguardUnlockAnimationController keyguardUnlockAnimationController = KeyguardUnlockAnimationController.this;
+                KeyguardUnlockAnimationController keyguardUnlockAnimationController = this.this$0;
                 keyguardUnlockAnimationController.playingCannedUnlockAnimation = false;
                 ((KeyguardViewMediator) keyguardUnlockAnimationController.keyguardViewMediator.get()).exitKeyguardAndFinishSurfaceBehindRemoteAnimation();
             }
         });
         ((KeyguardStateControllerImpl) keyguardStateController).addCallback(this);
-        this.roundedCornerRadius = resources.getDimensionPixelSize(17105918);
+        this.roundedCornerRadius = resources.getDimensionPixelSize(17105919);
     }
 
     public final void finishKeyguardExitRemoteAnimationIfReachThreshold() {
@@ -325,14 +324,14 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
         RemoteAnimationTarget[] remoteAnimationTargetArr = this.surfaceBehindRemoteAnimationTargets;
         if (remoteAnimationTargetArr != null) {
             for (RemoteAnimationTarget remoteAnimationTarget : remoteAnimationTargetArr) {
-                int height = remoteAnimationTarget.screenSpaceBounds.height();
-                float clamp = (MathUtils.clamp(f, 0.0f, 1.0f) * 0.050000012f) + 0.95f;
+                int iHeight = remoteAnimationTarget.screenSpaceBounds.height();
+                float fClamp = (MathUtils.clamp(f, 0.0f, 1.0f) * 0.050000012f) + 0.95f;
                 ((KeyguardStateControllerImpl) this.keyguardStateController).getClass();
                 Matrix matrix = this.surfaceBehindMatrix;
                 Rect rect = remoteAnimationTarget.screenSpaceBounds;
-                float f3 = height;
+                float f3 = iHeight;
                 matrix.setTranslate(rect.left, DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, f3 * 0.05f, rect.top));
-                this.surfaceBehindMatrix.postScale(clamp, clamp, this.keyguardViewController.getViewRootImpl().getWidth() / 2.0f, f3 * 0.66f);
+                this.surfaceBehindMatrix.postScale(fClamp, fClamp, this.keyguardViewController.getViewRootImpl().getWidth() / 2.0f, f3 * 0.66f);
                 SurfaceControl surfaceControl = remoteAnimationTarget.leash;
                 View view = this.keyguardViewController.getViewRootImpl().getView();
                 if ((view == null || view.getVisibility() != 0) && surfaceControl != null && surfaceControl.isValid()) {
@@ -342,20 +341,20 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
                     transaction.setAlpha(surfaceControl, f2);
                     transaction.apply();
                 } else {
-                    SyncRtSurfaceTransactionApplier.SurfaceParams build = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withMatrix(this.surfaceBehindMatrix).withCornerRadius(this.roundedCornerRadius).withAlpha(f2).build();
+                    SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParamsBuild = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withMatrix(this.surfaceBehindMatrix).withCornerRadius(this.roundedCornerRadius).withAlpha(f2).build();
                     SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier = this.surfaceTransactionApplier;
                     syncRtSurfaceTransactionApplier.getClass();
-                    syncRtSurfaceTransactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{build});
+                    syncRtSurfaceTransactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{surfaceParamsBuild});
                 }
             }
         }
         if (z) {
             float f4 = 25 / 325.0f;
-            float max = Math.max(0.0f, (f - f4) / (1.0f - f4));
+            float fMax = Math.max(0.0f, (f - f4) / (1.0f - f4));
             float f5 = 150 / 325.0f;
-            float coerceIn = RangesKt___RangesKt.coerceIn((f - f5) / ((f5 + f5) - f5), 0.0f, 1.0f);
-            setWallpaperAppearAmount(max, this.openingWallpaperTargets);
-            setWallpaperAppearAmount(1 - coerceIn, this.closingWallpaperTargets);
+            float fCoerceIn = RangesKt___RangesKt.coerceIn((f - f5) / ((f5 + f5) - f5), 0.0f, 1.0f);
+            setWallpaperAppearAmount(fMax, this.openingWallpaperTargets);
+            setWallpaperAppearAmount(1 - fCoerceIn, this.closingWallpaperTargets);
         }
     }
 
@@ -369,10 +368,10 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
                     transaction.setAlpha(surfaceControl, f);
                     transaction.apply();
                 } else {
-                    SyncRtSurfaceTransactionApplier.SurfaceParams build = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withAlpha(f).build();
+                    SyncRtSurfaceTransactionApplier.SurfaceParams surfaceParamsBuild = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withAlpha(f).build();
                     SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier = this.surfaceTransactionApplier;
                     syncRtSurfaceTransactionApplier.getClass();
-                    syncRtSurfaceTransactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{build});
+                    syncRtSurfaceTransactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{surfaceParamsBuild});
                 }
             }
         }
@@ -404,7 +403,7 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
                 this.wallpaperFadeOutUnlockAnimator.start();
             }
         }
-        this.handler.postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController$unlockToLauncherWithInWindowAnimations$1
+        this.handler.postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardUnlockAnimationController.unlockToLauncherWithInWindowAnimations.1
             @Override // java.lang.Runnable
             public final void run() {
                 if (((KeyguardViewMediator) KeyguardUnlockAnimationController.this.keyguardViewMediator.get()).isShowingAndNotOccluded() && !((KeyguardStateControllerImpl) KeyguardUnlockAnimationController.this.keyguardStateController).mKeyguardGoingAway) {
@@ -442,7 +441,6 @@ public class KeyguardUnlockAnimationController extends ISysuiUnlockAnimationCont
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface KeyguardUnlockAnimationListener {
         void onUnlockAnimationStarted(boolean z, boolean z2);
 

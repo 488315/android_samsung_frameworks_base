@@ -2,6 +2,7 @@ package kotlin.sequences;
 
 import com.android.systemui.qs.panels.ui.model.TileGridCellKt$$ExternalSyntheticLambda0;
 import com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator$$ExternalSyntheticLambda0;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,11 +15,42 @@ import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequ
 import kotlin.collections.EmptyList;
 import kotlin.collections.EmptySet;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.text.StringsKt__AppendableKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SequencesKt___SequencesKt extends SequencesKt___SequencesJvmKt {
+
+    /* renamed from: kotlin.sequences.SequencesKt___SequencesKt$flatMap$1, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
+        public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
+
+        public AnonymousClass1() {
+            super(1, Iterable.class, "iterator", "iterator()Ljava/util/Iterator;", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((Iterable) obj).iterator();
+        }
+    }
+
+    /* renamed from: kotlin.sequences.SequencesKt___SequencesKt$flatMap$2, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function1 {
+        public static final AnonymousClass2 INSTANCE = new AnonymousClass2();
+
+        public AnonymousClass2() {
+            super(1, Sequence.class, "iterator", "iterator()Ljava/util/Iterator;", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((Sequence) obj).iterator();
+        }
+    }
+
     public static int count(Sequence sequence) {
         Iterator it = sequence.iterator();
         int i = 0;
@@ -50,7 +82,7 @@ public class SequencesKt___SequencesKt extends SequencesKt___SequencesJvmKt {
     }
 
     public static FlatteningSequence flatMap(Sequence sequence, Function1 function1) {
-        return new FlatteningSequence(sequence, function1, SequencesKt___SequencesKt$flatMap$2.INSTANCE);
+        return new FlatteningSequence(sequence, function1, AnonymousClass2.INSTANCE);
     }
 
     public static SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1 flatMapIndexedIterable(SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1 sequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1, TileGridCellKt$$ExternalSyntheticLambda0 tileGridCellKt$$ExternalSyntheticLambda0) {
@@ -58,10 +90,10 @@ public class SequencesKt___SequencesKt extends SequencesKt___SequencesJvmKt {
     }
 
     public static FlatteningSequence flatMapIterable(CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1 collectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1, GroupCountCoordinator$$ExternalSyntheticLambda0 groupCountCoordinator$$ExternalSyntheticLambda0) {
-        return new FlatteningSequence(collectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1, groupCountCoordinator$$ExternalSyntheticLambda0, SequencesKt___SequencesKt$flatMap$1.INSTANCE);
+        return new FlatteningSequence(collectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1, groupCountCoordinator$$ExternalSyntheticLambda0, AnonymousClass1.INSTANCE);
     }
 
-    public static String joinToString$default(Sequence sequence, CharSequence charSequence, CharSequence charSequence2, int i) {
+    public static String joinToString$default(Sequence sequence, CharSequence charSequence, CharSequence charSequence2, int i) throws IOException {
         if ((i & 2) != 0) {
             charSequence2 = "";
         }

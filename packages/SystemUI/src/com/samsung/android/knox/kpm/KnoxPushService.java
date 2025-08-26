@@ -20,7 +20,6 @@ import com.samsung.android.knox.kpm.IKnoxPushService;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxPushService {
     public static final String KPM_BIND_ACTION = "com.samsung.android.knox.intent.action.BIND_KNOX_PUSH_SERVICE";
@@ -57,16 +56,14 @@ public class KnoxPushService {
     }
 
     public static synchronized KnoxPushService getInstance(Context context) {
-        synchronized (KnoxPushService.class) {
-            if (context == null) {
-                Log.e(TAG, "context is null");
-                return null;
-            }
-            if (mPushPolicy == null) {
-                mPushPolicy = new KnoxPushService(context);
-            }
-            return mPushPolicy;
+        if (context == null) {
+            Log.e(TAG, "context is null");
+            return null;
         }
+        if (mPushPolicy == null) {
+            mPushPolicy = new KnoxPushService(context);
+        }
+        return mPushPolicy;
     }
 
     public static boolean isOSVersionSupported() {
@@ -124,9 +121,9 @@ public class KnoxPushService {
                 Intent intent = new Intent();
                 intent.setClassName(KPM_PACKAGE_NAME, KPM_SERVICE_CLASS);
                 intent.setAction(KPM_BIND_ACTION);
-                boolean bindService = this.mContext.bindService(intent, this.conn, 1);
-                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("bind service:", TAG, bindService);
-                return bindService;
+                boolean zBindService = this.mContext.bindService(intent, this.conn, 1);
+                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("bind service:", TAG, zBindService);
+                return zBindService;
             } catch (Throwable th) {
                 throw th;
             }
@@ -142,23 +139,23 @@ public class KnoxPushService {
     }
 
     public final void handlePendingRequest() {
-        HashMap hashMap;
+        HashMap map;
         if (getTrackMapSize() < 1) {
             return;
         }
         synchronized (this) {
-            hashMap = new HashMap(this.mTrackOpsHash);
+            map = new HashMap(this.mTrackOpsHash);
             clearTrackMap();
             this.mProcessPendingRequest = true;
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
+        for (Map.Entry entry : map.entrySet()) {
             KnoxPushServiceCallback knoxPushServiceCallback = (KnoxPushServiceCallback) entry.getKey();
             RequestInfo requestInfo = (RequestInfo) entry.getValue();
             int cmd = requestInfo.getCmd();
-            boolean isForce = requestInfo.isForce();
-            KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("process pending request: cmd: ", cmd, ", force: ", isForce, TAG);
+            boolean zIsForce = requestInfo.isForce();
+            KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("process pending request: cmd: ", cmd, ", force: ", zIsForce, TAG);
             if (cmd == 1) {
-                registerDevice(isForce, knoxPushServiceCallback);
+                registerDevice(zIsForce, knoxPushServiceCallback);
             } else if (cmd == 2) {
                 unRegisterDevice(knoxPushServiceCallback);
             } else if (cmd != 3) {
@@ -172,7 +169,7 @@ public class KnoxPushService {
         }
     }
 
-    public final boolean hasPackage(String str) {
+    public final boolean hasPackage(String str) throws PackageManager.NameNotFoundException {
         try {
             Log.d(TAG, "appInfo: " + this.mContext.getPackageManager().getApplicationInfo(str, 128));
             return true;
@@ -201,10 +198,10 @@ public class KnoxPushService {
         return false;
     }
 
-    public final boolean isGMSCoreEnabled() {
-        boolean hasPackage = hasPackage("com.google.android.gms");
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("GMS Core Enabled : ", TAG, hasPackage);
-        return hasPackage;
+    public final boolean isGMSCoreEnabled() throws PackageManager.NameNotFoundException {
+        boolean zHasPackage = hasPackage("com.google.android.gms");
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("GMS Core Enabled : ", TAG, zHasPackage);
+        return zHasPackage;
     }
 
     public final boolean isKnoxVersionSupported() {
@@ -338,10 +335,6 @@ public class KnoxPushService {
     }
 
     public static synchronized KnoxPushService getInstance() {
-        KnoxPushService knoxPushService;
-        synchronized (KnoxPushService.class) {
-            knoxPushService = mPushPolicy;
-        }
-        return knoxPushService;
+        return mPushPolicy;
     }
 }

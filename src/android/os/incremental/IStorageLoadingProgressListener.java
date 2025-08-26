@@ -44,9 +44,9 @@ public interface IStorageLoadingProgressListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStorageLoadingProgressListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStorageLoadingProgressListener)) {
-                return (IStorageLoadingProgressListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStorageLoadingProgressListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStorageLoadingProgressListener)) {
+                return (IStorageLoadingProgressListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IStorageLoadingProgressListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                float readFloat = parcel.readFloat();
+                int i3 = parcel.readInt();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                onStorageLoadingProgressChanged(readInt, readFloat);
+                onStorageLoadingProgressChanged(i3, f);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IStorageLoadingProgressListener extends IInterface {
 
             @Override // android.os.incremental.IStorageLoadingProgressListener
             public void onStorageLoadingProgressChanged(int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStorageLoadingProgressListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStorageLoadingProgressListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

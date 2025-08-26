@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class HomeControlsComponentInteractor$panelComponent$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -34,7 +33,7 @@ final class HomeControlsComponentInteractor$panelComponent$1 extends SuspendLamb
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
+        Object next;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -45,15 +44,15 @@ final class HomeControlsComponentInteractor$panelComponent$1 extends SuspendLamb
         Iterator it = list.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj2 = null;
+                next = null;
                 break;
             }
-            obj2 = it.next();
-            if (Intrinsics.areEqual(((HomeControlsComponentInteractor.PanelComponent) obj2).componentName, selectedComponent != null ? selectedComponent.componentName : null)) {
+            next = it.next();
+            if (Intrinsics.areEqual(((HomeControlsComponentInteractor.PanelComponent) next).componentName, selectedComponent != null ? selectedComponent.componentName : null)) {
                 break;
             }
         }
-        HomeControlsComponentInteractor.PanelComponent panelComponent = (HomeControlsComponentInteractor.PanelComponent) obj2;
+        HomeControlsComponentInteractor.PanelComponent panelComponent = (HomeControlsComponentInteractor.PanelComponent) next;
         if (panelComponent == null) {
             panelComponent = (HomeControlsComponentInteractor.PanelComponent) CollectionsKt___CollectionsKt.firstOrNull(list);
         }

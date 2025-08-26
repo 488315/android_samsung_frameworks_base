@@ -3,6 +3,7 @@ package android.app;
 import android.app.SemWallpaperColors;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -11,8 +12,10 @@ import android.util.Log;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.WindowManager;
+import com.android.internal.R;
 import com.samsung.android.wallpaper.Rune;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -56,24 +59,133 @@ public class SemWallpaperColorsArea implements Cloneable {
         this(context, i, i2, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00f2  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00f2  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0109  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public SemWallpaperColorsArea(android.content.Context r10, int r11, int r12, android.app.WallpaperColorOverrideAreas r13) {
-        /*
-            Method dump skipped, instructions count: 395
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SemWallpaperColorsArea.<init>(android.content.Context, int, int, android.app.WallpaperColorOverrideAreas):void");
+    public SemWallpaperColorsArea(Context context, int i, int i2, WallpaperColorOverrideAreas wallpaperColorOverrideAreas) throws Resources.NotFoundException {
+        int i3;
+        int i4;
+        int dimensionPixelSize;
+        int dimensionPixelSize2;
+        int dimensionPixelSize3;
+        int i5;
+        this.mKeyMap = new HashMap();
+        this.mInit = true;
+        this.mContext = context;
+        this.mWhich = i;
+        this.mRotation = i2;
+        if (context != null) {
+            if (wallpaperColorOverrideAreas != null) {
+                this.mWallpaperColorOverrideAreas = new WallpaperColorOverrideAreas(context, i, wallpaperColorOverrideAreas);
+            } else {
+                WallpaperColorOverrideAreas wallpaperColorOverrideAreas2 = new WallpaperColorOverrideAreas(context, i);
+                this.mWallpaperColorOverrideAreas = wallpaperColorOverrideAreas2;
+                wallpaperColorOverrideAreas2.load();
+            }
+        }
+        Resources system = Resources.getSystem();
+        if (this.mContext == null) {
+            i4 = system.getDisplayMetrics().widthPixels;
+            i3 = system.getDisplayMetrics().heightPixels;
+        } else {
+            Point coverScreenSize = getCoverScreenSize(context, i);
+            coverScreenSize = coverScreenSize == null ? getDisplaySize(i) : coverScreenSize;
+            int i6 = coverScreenSize.x;
+            i3 = coverScreenSize.y;
+            i4 = i6;
+        }
+        StringBuilder sb = new StringBuilder("SemWallpaperColorsArea [");
+        sb.append(i4);
+        sb.append(", ");
+        sb.append(i3);
+        sb.append("] which: ");
+        sb.append(i);
+        sb.append(" rotation: ");
+        sb.append(i2);
+        sb.append(" has Base: ");
+        int dimensionPixelSize4 = 0;
+        sb.append(wallpaperColorOverrideAreas != null);
+        Log.d(TAG, sb.toString());
+        boolean z = i4 > i3;
+        this.mWidth = i4;
+        this.mHeight = i3;
+        if ((Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 16) || (Rune.VIRTUAL_DISPLAY_WALLPAPER && (this.mWhich & 32) == 32)) {
+            if (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
+                dimensionPixelSize4 = system.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
+                dimensionPixelSize3 = 30;
+                dimensionPixelSize2 = 67;
+            } else {
+                i5 = 0;
+                dimensionPixelSize2 = 0;
+                if (Rune.SUPPORT_SUB_DISPLAY_MODE) {
+                    this.mDensity = system.getDisplayMetrics().density;
+                }
+                float f = this.mWidth;
+                float f2 = this.mDensity;
+                this.mDpWidth = (int) (f / f2);
+                this.mDpHeight = (int) (this.mHeight / f2);
+                this.mDpStatusBarHeight = (int) (dimensionPixelSize4 / f2);
+                this.mDpNavigationBarHeight = (int) (dimensionPixelSize2 / f2);
+                this.mDpStatusBarTopMargin = (int) (i5 / f2);
+                Log.d(TAG, "SemWallpaperColorsArea which = " + this.mWhich + ", mDensity : " + this.mDensity + ", " + this.mWidth + "x" + this.mHeight + "," + this.mDpWidth + "x" + this.mDpHeight + "," + this.mDpStatusBarHeight + "," + this.mDpNavigationBarHeight + ", " + this.mDpStatusBarTopMargin);
+            }
+        } else if (i2 != 0) {
+            if (!z) {
+                this.mWidth = i3;
+                this.mHeight = i4;
+            }
+            dimensionPixelSize3 = system.getDimensionPixelSize(R.dimen.status_bar_height_landscape);
+            dimensionPixelSize2 = system.getDimensionPixelSize(R.dimen.navigation_bar_height);
+        } else {
+            if (z) {
+                this.mWidth = i3;
+                this.mHeight = i4;
+            }
+            dimensionPixelSize4 = system.getDimensionPixelSize(R.dimen.status_bar_height_portrait);
+            int dimensionPixelSize5 = system.getDimensionPixelSize(R.dimen.navigation_bar_height);
+            dimensionPixelSize = system.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
+            dimensionPixelSize2 = dimensionPixelSize5;
+            i5 = dimensionPixelSize;
+            if (Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 16) {
+                if (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
+                    this.mDensity = 2.125f;
+                } else {
+                    this.mDensity = 1.0f;
+                }
+            } else {
+                this.mDensity = system.getDisplayMetrics().density;
+            }
+            float f3 = this.mWidth;
+            float f22 = this.mDensity;
+            this.mDpWidth = (int) (f3 / f22);
+            this.mDpHeight = (int) (this.mHeight / f22);
+            this.mDpStatusBarHeight = (int) (dimensionPixelSize4 / f22);
+            this.mDpNavigationBarHeight = (int) (dimensionPixelSize2 / f22);
+            this.mDpStatusBarTopMargin = (int) (i5 / f22);
+            Log.d(TAG, "SemWallpaperColorsArea which = " + this.mWhich + ", mDensity : " + this.mDensity + ", " + this.mWidth + "x" + this.mHeight + "," + this.mDpWidth + "x" + this.mDpHeight + "," + this.mDpStatusBarHeight + "," + this.mDpNavigationBarHeight + ", " + this.mDpStatusBarTopMargin);
+        }
+        dimensionPixelSize = dimensionPixelSize4;
+        dimensionPixelSize4 = dimensionPixelSize3;
+        i5 = dimensionPixelSize;
+        if (Rune.SUPPORT_SUB_DISPLAY_MODE) {
+        }
+        float f32 = this.mWidth;
+        float f222 = this.mDensity;
+        this.mDpWidth = (int) (f32 / f222);
+        this.mDpHeight = (int) (this.mHeight / f222);
+        this.mDpStatusBarHeight = (int) (dimensionPixelSize4 / f222);
+        this.mDpNavigationBarHeight = (int) (dimensionPixelSize2 / f222);
+        this.mDpStatusBarTopMargin = (int) (i5 / f222);
+        Log.d(TAG, "SemWallpaperColorsArea which = " + this.mWhich + ", mDensity : " + this.mDensity + ", " + this.mWidth + "x" + this.mHeight + "," + this.mDpWidth + "x" + this.mDpHeight + "," + this.mDpStatusBarHeight + "," + this.mDpNavigationBarHeight + ", " + this.mDpStatusBarTopMargin);
     }
 
     public Rect get(int i) {
         return get(i, 0, 0);
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:133:0x0696. Please report as an issue. */
+    /* JADX WARN: Failed to find 'out' block for switch in B:120:0x0696. Please report as an issue. */
     public Rect get(int i, int i2, int i3) {
         Rect rect = new Rect();
         int i4 = 3;
@@ -565,9 +677,9 @@ public class SemWallpaperColorsArea implements Cloneable {
         }
         if (this.mWallpaperColorOverrideAreas != null) {
             Long l = this.mKeyMap.get(Integer.valueOf(i));
-            long longValue = l == null ? 0L : l.longValue();
-            Log.i(TAG, "Get custom area. display type = " + i5 + ", rotation = " + i4 + ", area = " + i + " areaFlag = " + longValue + " rect = " + rect);
-            RectF rectF = this.mWallpaperColorOverrideAreas.get(i5, i4, longValue);
+            long jLongValue = l == null ? 0L : l.longValue();
+            Log.i(TAG, "Get custom area. display type = " + i5 + ", rotation = " + i4 + ", area = " + i + " areaFlag = " + jLongValue + " rect = " + rect);
+            RectF rectF = this.mWallpaperColorOverrideAreas.get(i5, i4, jLongValue);
             if (rectF != null) {
                 rect.left = (int) (this.mDpWidth * rectF.left);
                 rect.right = (int) (this.mDpWidth * rectF.right);
@@ -681,7 +793,7 @@ public class SemWallpaperColorsArea implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemWallpaperColorsArea m598clone() {
+    public SemWallpaperColorsArea m602clone() {
         try {
             return (SemWallpaperColorsArea) super.clone();
         } catch (CloneNotSupportedException e) {

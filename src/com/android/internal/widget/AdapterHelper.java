@@ -190,7 +190,7 @@ class AdapterHelper implements OpReorderer.Callback {
         if (updateOp.cmd == 1 || updateOp.cmd == 8) {
             throw new IllegalArgumentException("should not dispatch add or move for pre layout");
         }
-        int updatePositionWithPostponed = updatePositionWithPostponed(updateOp.positionStart, updateOp.cmd);
+        int iUpdatePositionWithPostponed = updatePositionWithPostponed(updateOp.positionStart, updateOp.cmd);
         int i2 = updateOp.positionStart;
         int i3 = updateOp.cmd;
         if (i3 == 2) {
@@ -203,17 +203,17 @@ class AdapterHelper implements OpReorderer.Callback {
         }
         int i4 = 1;
         for (int i5 = 1; i5 < updateOp.itemCount; i5++) {
-            int updatePositionWithPostponed2 = updatePositionWithPostponed(updateOp.positionStart + (i * i5), updateOp.cmd);
+            int iUpdatePositionWithPostponed2 = updatePositionWithPostponed(updateOp.positionStart + (i * i5), updateOp.cmd);
             int i6 = updateOp.cmd;
-            if (i6 == 2 ? updatePositionWithPostponed2 != updatePositionWithPostponed : !(i6 == 4 && updatePositionWithPostponed2 == updatePositionWithPostponed + 1)) {
-                UpdateOp obtainUpdateOp = obtainUpdateOp(updateOp.cmd, updatePositionWithPostponed, i4, updateOp.payload);
-                dispatchFirstPassAndUpdateViewHolders(obtainUpdateOp, i2);
-                recycleUpdateOp(obtainUpdateOp);
+            if (i6 == 2 ? iUpdatePositionWithPostponed2 != iUpdatePositionWithPostponed : !(i6 == 4 && iUpdatePositionWithPostponed2 == iUpdatePositionWithPostponed + 1)) {
+                UpdateOp updateOpObtainUpdateOp = obtainUpdateOp(updateOp.cmd, iUpdatePositionWithPostponed, i4, updateOp.payload);
+                dispatchFirstPassAndUpdateViewHolders(updateOpObtainUpdateOp, i2);
+                recycleUpdateOp(updateOpObtainUpdateOp);
                 if (updateOp.cmd == 4) {
                     i2 += i4;
                 }
                 i4 = 1;
-                updatePositionWithPostponed = updatePositionWithPostponed2;
+                iUpdatePositionWithPostponed = iUpdatePositionWithPostponed2;
             } else {
                 i4++;
             }
@@ -221,9 +221,9 @@ class AdapterHelper implements OpReorderer.Callback {
         Object obj = updateOp.payload;
         recycleUpdateOp(updateOp);
         if (i4 > 0) {
-            UpdateOp obtainUpdateOp2 = obtainUpdateOp(updateOp.cmd, updatePositionWithPostponed, i4, obj);
-            dispatchFirstPassAndUpdateViewHolders(obtainUpdateOp2, i2);
-            recycleUpdateOp(obtainUpdateOp2);
+            UpdateOp updateOpObtainUpdateOp2 = obtainUpdateOp(updateOp.cmd, iUpdatePositionWithPostponed, i4, obj);
+            dispatchFirstPassAndUpdateViewHolders(updateOpObtainUpdateOp2, i2);
+            recycleUpdateOp(updateOpObtainUpdateOp2);
         }
     }
 
@@ -574,15 +574,15 @@ class AdapterHelper implements OpReorderer.Callback {
 
     @Override // com.android.internal.widget.OpReorderer.Callback
     public UpdateOp obtainUpdateOp(int i, int i2, int i3, Object obj) {
-        UpdateOp acquire = this.mUpdateOpPool.acquire();
-        if (acquire == null) {
+        UpdateOp updateOpAcquire = this.mUpdateOpPool.acquire();
+        if (updateOpAcquire == null) {
             return new UpdateOp(i, i2, i3, obj);
         }
-        acquire.cmd = i;
-        acquire.positionStart = i2;
-        acquire.itemCount = i3;
-        acquire.payload = obj;
-        return acquire;
+        updateOpAcquire.cmd = i;
+        updateOpAcquire.positionStart = i2;
+        updateOpAcquire.itemCount = i3;
+        updateOpAcquire.payload = obj;
+        return updateOpAcquire;
     }
 
     @Override // com.android.internal.widget.OpReorderer.Callback

@@ -11,14 +11,12 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FixedTimingTransitionProgressProvider implements UnfoldTransitionProgressProvider, FoldStateProvider.FoldUpdatesListener {
     public final ObjectAnimator animator;
     public final List listeners;
     public float transitionProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationProgressProperty extends FloatProperty {
         public static final AnimationProgressProperty INSTANCE = new AnimationProgressProperty();
 
@@ -46,7 +44,6 @@ public final class FixedTimingTransitionProgressProvider implements UnfoldTransi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,10 +59,10 @@ public final class FixedTimingTransitionProgressProvider implements UnfoldTransi
 
     public FixedTimingTransitionProgressProvider(FoldStateProvider foldStateProvider) {
         AnimatorListener animatorListener = new AnimatorListener();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, AnimationProgressProperty.INSTANCE, 0.0f, 1.0f);
-        ofFloat.setDuration(400L);
-        ofFloat.addListener(animatorListener);
-        this.animator = ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, AnimationProgressProperty.INSTANCE, 0.0f, 1.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.addListener(animatorListener);
+        this.animator = objectAnimatorOfFloat;
         this.listeners = new ArrayList();
         DeviceFoldStateProvider deviceFoldStateProvider = (DeviceFoldStateProvider) foldStateProvider;
         deviceFoldStateProvider.addCallback(this);
@@ -94,7 +91,6 @@ public final class FixedTimingTransitionProgressProvider implements UnfoldTransi
         ((ArrayList) this.listeners).remove((UnfoldTransitionProgressProvider.TransitionProgressListener) obj);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimatorListener implements Animator.AnimatorListener {
         public AnimatorListener() {
         }

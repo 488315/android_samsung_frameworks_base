@@ -12,14 +12,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ QSFragmentComposeViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -47,17 +45,17 @@ final class QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2 extends
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this.this$0, 17));
+                SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this.this$0, 17));
                 final QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel.hydrateMediaDisappearParameters.2.1.2
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        QSFragmentComposeViewModelKt.access$applyDisappearParameters(QSFragmentComposeViewModel.this.qqsMediaHost, ((Boolean) obj2).booleanValue());
+                        QSFragmentComposeViewModelKt.access$applyDisappearParameters(qSFragmentComposeViewModel.qqsMediaHost, ((Boolean) obj2).booleanValue());
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+                if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -70,7 +68,6 @@ final class QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2 extends
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -98,17 +95,17 @@ final class QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2 extends
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this.this$0, 18));
+                SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this.this$0, 18));
                 final QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel.hydrateMediaDisappearParameters.2.2.2
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        QSFragmentComposeViewModelKt.access$applyDisappearParameters(QSFragmentComposeViewModel.this.qsMediaHost, ((Boolean) obj2).booleanValue());
+                        QSFragmentComposeViewModelKt.access$applyDisappearParameters(qSFragmentComposeViewModel.qsMediaHost, ((Boolean) obj2).booleanValue());
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+                if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

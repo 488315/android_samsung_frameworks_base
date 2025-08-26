@@ -1,13 +1,17 @@
 package com.android.systemui.bouncer.domain.interactor;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Trace;
+import android.util.Log;
 import androidx.fragment.app.FragmentManager$$ExternalSyntheticOutline0;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.keyguard.KeyguardSecSecurityContainerController;
 import com.android.keyguard.KeyguardSecurityModel;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.keyguard.SecurityUtils;
+import com.android.systemui.CscRune;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.R;
 import com.android.systemui.bouncer.data.repository.KeyguardBouncerRepository;
@@ -19,10 +23,12 @@ import com.android.systemui.bouncer.ui.BouncerViewImpl;
 import com.android.systemui.bouncer.ui.binder.KeyguardBouncerViewBinder$bind$delegate$1;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryFaceAuthInteractor;
+import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.keyguard.DismissCallbackRegistry;
 import com.android.systemui.keyguard.data.repository.TrustRepository;
 import com.android.systemui.keyguard.data.repository.TrustRepositoryImpl;
 import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.shared.system.SysUiStatsLog;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
@@ -48,7 +54,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PrimaryBouncerInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -85,7 +90,6 @@ public final class PrimaryBouncerInteractor {
     public final TrustRepository trustRepository;
     public final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 userRequestedBouncerWhenAlreadyAuthenticated;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -117,7 +121,7 @@ public final class PrimaryBouncerInteractor {
                     public final Object emit(Object obj2, Continuation continuation) {
                         ((Boolean) obj2).booleanValue();
                         int i2 = PrimaryBouncerInteractor.$r8$clinit;
-                        PrimaryBouncerInteractor.this.getClass();
+                        primaryBouncerInteractor.getClass();
                         return Unit.INSTANCE;
                     }
                 };
@@ -135,7 +139,6 @@ public final class PrimaryBouncerInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -145,13 +148,107 @@ public final class PrimaryBouncerInteractor {
         }
     }
 
+    /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$notifyKeyguardAuthenticatedPrimaryAuth$1, reason: invalid class name and case insensitive filesystem */
+    final class C08141 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $userId;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08141(int i, Continuation continuation) {
+            super(2, continuation);
+            this.$userId = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return PrimaryBouncerInteractor.this.new C08141(this.$userId, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08141) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                KeyguardBouncerRepository keyguardBouncerRepository = PrimaryBouncerInteractor.this.repository;
+                int i2 = this.$userId;
+                this.label = 1;
+                Object objEmit = ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._keyguardAuthenticatedPrimaryAuth.emit(new Integer(i2), this);
+                if (objEmit != coroutineSingletons) {
+                    objEmit = Unit.INSTANCE;
+                }
+                if (objEmit == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$notifyUserRequestedBouncerWhenAlreadyAuthenticated$1, reason: invalid class name and case insensitive filesystem */
+    final class C08151 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $userId;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08151(int i, Continuation continuation) {
+            super(2, continuation);
+            this.$userId = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return PrimaryBouncerInteractor.this.new C08151(this.$userId, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08151) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                KeyguardBouncerRepository keyguardBouncerRepository = PrimaryBouncerInteractor.this.repository;
+                int i2 = this.$userId;
+                this.label = 1;
+                Object objEmit = ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._userRequestedBouncerWhenAlreadyAuthenticated.emit(new Integer(i2), this);
+                if (objEmit != coroutineSingletons) {
+                    objEmit = Unit.INSTANCE;
+                }
+                if (objEmit == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
 
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$showRunnable$1] */
     /* JADX WARN: Type inference failed for: r2v6, types: [com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1] */
-    public PrimaryBouncerInteractor(KeyguardBouncerRepository keyguardBouncerRepository, BouncerView bouncerView, Handler handler, KeyguardStateController keyguardStateController, KeyguardSecurityModel keyguardSecurityModel, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, FalsingCollector falsingCollector, DismissCallbackRegistry dismissCallbackRegistry, Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, TrustRepository trustRepository, CoroutineScope coroutineScope, SelectedUserInteractor selectedUserInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor) {
+    public PrimaryBouncerInteractor(KeyguardBouncerRepository keyguardBouncerRepository, BouncerView bouncerView, Handler handler, KeyguardStateController keyguardStateController, KeyguardSecurityModel keyguardSecurityModel, PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor, FalsingCollector falsingCollector, DismissCallbackRegistry dismissCallbackRegistry, Context context, KeyguardUpdateMonitor keyguardUpdateMonitor, TrustRepository trustRepository, CoroutineScope coroutineScope, SelectedUserInteractor selectedUserInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor) throws Resources.NotFoundException {
         this.repository = keyguardBouncerRepository;
         this.primaryBouncerView = bouncerView;
         this.mainHandler = handler;
@@ -168,18 +265,18 @@ public final class PrimaryBouncerInteractor {
         this.showRunnable = new Runnable() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$showRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardBouncerViewBinder$bind$delegate$1 delegate = ((BouncerViewImpl) PrimaryBouncerInteractor.this.primaryBouncerView).getDelegate();
+                KeyguardBouncerViewBinder$bind$delegate$1 delegate = ((BouncerViewImpl) this.this$0.primaryBouncerView).getDelegate();
                 int i = 0;
                 if (delegate != null) {
                     delegate.$securityContainerController.setSecurityContainerVisibility(0);
                 }
-                KeyguardBouncerRepositoryImpl keyguardBouncerRepositoryImpl = (KeyguardBouncerRepositoryImpl) PrimaryBouncerInteractor.this.repository;
+                KeyguardBouncerRepositoryImpl keyguardBouncerRepositoryImpl = (KeyguardBouncerRepositoryImpl) this.this$0.repository;
                 keyguardBouncerRepositoryImpl._primaryBouncerShow.updateState(null, Boolean.TRUE);
-                KeyguardBouncerRepositoryImpl keyguardBouncerRepositoryImpl2 = (KeyguardBouncerRepositoryImpl) PrimaryBouncerInteractor.this.repository;
+                KeyguardBouncerRepositoryImpl keyguardBouncerRepositoryImpl2 = (KeyguardBouncerRepositoryImpl) this.this$0.repository;
                 Boolean bool = Boolean.FALSE;
                 keyguardBouncerRepositoryImpl2._primaryBouncerShowingSoon.updateState(null, bool);
-                ((KeyguardBouncerRepositoryImpl) PrimaryBouncerInteractor.this.repository)._primaryBouncerUpdating.updateState(null, bool);
-                ArrayList arrayList = PrimaryBouncerInteractor.this.primaryBouncerCallbackInteractor.expansionCallbacks;
+                ((KeyguardBouncerRepositoryImpl) this.this$0.repository)._primaryBouncerUpdating.updateState(null, bool);
+                ArrayList arrayList = this.this$0.primaryBouncerCallbackInteractor.expansionCallbacks;
                 int size = arrayList.size();
                 while (i < size) {
                     Object obj = arrayList.get(i);
@@ -194,7 +291,6 @@ public final class PrimaryBouncerInteractor {
         final ReadonlyStateFlow readonlyStateFlow = keyguardBouncerRepositoryImpl.keyguardAuthenticatedBiometrics;
         final Flow flow = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -222,71 +318,51 @@ public final class PrimaryBouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L42
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        if (r6 != 0) goto L42
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L42
-                        return r1
-                    L42:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((Boolean) obj) == null) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.keyguardAuthenticatedBiometricsHandled = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -313,65 +389,46 @@ public final class PrimaryBouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L41
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L41
-                        return r1
-                    L41:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Unit unit = Unit.INSTANCE;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.userRequestedBouncerWhenAlreadyAuthenticated = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(keyguardBouncerRepositoryImpl.userRequestedBouncerWhenAlreadyAuthenticated);
@@ -379,7 +436,6 @@ public final class PrimaryBouncerInteractor {
         final ReadonlyStateFlow readonlyStateFlow2 = keyguardBouncerRepositoryImpl.primaryBouncerStartingToHide;
         this.startingToHide = new PrimaryBouncerInteractor$special$$inlined$map$2(new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -407,67 +463,47 @@ public final class PrimaryBouncerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2$2$1 r0 = (com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2$2$1 r0 = new com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L46
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 == 0) goto L46
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L46
-                        return r1
-                    L46:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$special$$inlined$filter$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((Boolean) obj).booleanValue()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.isBackButtonEnabled = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(keyguardBouncerRepositoryImpl.isBackButtonEnabled);
@@ -550,11 +586,11 @@ public final class PrimaryBouncerInteractor {
     }
 
     public final void notifyKeyguardAuthenticatedPrimaryAuth(int i) {
-        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new PrimaryBouncerInteractor$notifyKeyguardAuthenticatedPrimaryAuth$1(this, i, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new C08141(i, null), 7);
     }
 
     public final void notifyUserRequestedBouncerWhenAlreadyAuthenticated(int i) {
-        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new PrimaryBouncerInteractor$notifyUserRequestedBouncerWhenAlreadyAuthenticated$1(this, i, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new C08151(i, null), 7);
     }
 
     public final void setBackButtonEnabled(boolean z) {
@@ -589,7 +625,7 @@ public final class PrimaryBouncerInteractor {
         PrimaryBouncerCallbackInteractor primaryBouncerCallbackInteractor = this.primaryBouncerCallbackInteractor;
         if (f == 1.0f) {
             hide();
-            DejankUtils.postAfterTraversal(new Runnable() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor$setPanelExpansion$1
+            DejankUtils.postAfterTraversal(new Runnable() { // from class: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor.setPanelExpansion.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     Iterator it = PrimaryBouncerInteractor.this.primaryBouncerCallbackInteractor.resetCallbacks.iterator();
@@ -629,24 +665,72 @@ public final class PrimaryBouncerInteractor {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007c A[Catch: all -> 0x0130, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008e A[Catch: all -> 0x0130, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009a A[Catch: all -> 0x0130, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00b4 A[Catch: all -> 0x0130, TRY_LEAVE, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00e2 A[Catch: all -> 0x0130, TRY_LEAVE, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00eb A[Catch: all -> 0x0130, TRY_ENTER, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x010d A[Catch: all -> 0x0130, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0121 A[Catch: all -> 0x0130, LOOP:0: B:41:0x011f->B:42:0x0121, LOOP_END, TRY_LEAVE, TryCatch #0 {all -> 0x0130, blocks: (B:7:0x001f, B:10:0x0043, B:13:0x006e, B:15:0x007c, B:16:0x0080, B:18:0x008e, B:20:0x009a, B:21:0x00ac, B:23:0x00b4, B:27:0x00ca, B:29:0x00ce, B:31:0x00d4, B:33:0x00e2, B:36:0x00eb, B:37:0x00f0, B:39:0x010d, B:40:0x0117, B:42:0x0121, B:46:0x0056, B:48:0x0064), top: B:6:0x001f }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean show(java.lang.String r15, boolean r16) {
-        /*
-            Method dump skipped, instructions count: 310
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor.show(java.lang.String, boolean):boolean");
+    public final boolean show(String str, boolean z) {
+        KeyguardBouncerRepository keyguardBouncerRepository = this.repository;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        int i = SceneContainerFlag.$r8$clinit;
+        BouncerView bouncerView = this.primaryBouncerView;
+        int i2 = 0;
+        if (((BouncerViewImpl) bouncerView).getDelegate() == null) {
+            Log.d("PrimaryBouncerInteractor", "BouncerViewDelegate is null");
+            this.pendingBouncerViewDelegate = true;
+            return false;
+        }
+        try {
+            Trace.beginSection("KeyguardBouncer#show");
+            ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._keyguardAuthenticatedBiometrics.setValue(null);
+            Boolean bool = Boolean.FALSE;
+            ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerStartingToHide.updateState(null, bool);
+            boolean zIsBouncerShowing = isBouncerShowing();
+            KeyguardSecurityModel keyguardSecurityModel = this.keyguardSecurityModel;
+            SelectedUserInteractor selectedUserInteractor = this.selectedUserInteractor;
+            KeyguardUpdateMonitor keyguardUpdateMonitor = this.keyguardUpdateMonitor;
+            boolean z2 = (zIsBouncerShowing || ((Boolean) ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository).primaryBouncerShowingSoon.$$delegate_0.getValue()).booleanValue()) && (SecurityUtils.checkFullscreenBouncer(keyguardSecurityModel.getSecurityMode(selectedUserInteractor.getSelectedUserId())) || keyguardUpdateMonitor.isDismissActionExist());
+            ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerScrimmed.updateState(null, Boolean.valueOf(z));
+            if (z) {
+                setPanelExpansion(0.0f);
+            }
+            if (SecurityUtils.checkFullscreenBouncer(keyguardSecurityModel.getSecurityMode(selectedUserInteractor.getSelectedUserId()))) {
+                ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerInflate.updateState(null, Boolean.TRUE);
+            }
+            if (z2) {
+                ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerUpdating.updateState(null, Boolean.TRUE);
+                ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerShow.updateState(null, bool);
+            }
+            KeyguardBouncerViewBinder$bind$delegate$1 delegate = ((BouncerViewImpl) bouncerView).getDelegate();
+            if (delegate != null) {
+                int selectedUserId = delegate.$selectedUserInteractor.getSelectedUserId();
+                KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = delegate.$securityContainerController;
+                if (keyguardSecSecurityContainerController.mKeyguardSecurityCallback.dismiss(false, selectedUserId, false, keyguardSecSecurityContainerController.mCurrentSecurityMode)) {
+                    return false;
+                }
+            }
+            if (CscRune.SECURITY_SIM_PERM_DISABLED && keyguardUpdateMonitor.isIccBlockedPermanently()) {
+                if (!SecurityUtils.checkFullscreenBouncer(keyguardSecurityModel.getSecurityMode(selectedUserInteractor.getSelectedUserId()))) {
+                    Log.d("PrimaryBouncerInteractor", "do not show by permanent state.");
+                    return false;
+                }
+                Log.d("PrimaryBouncerInteractor", "Permanent state but it have to show bouncer");
+            }
+            Log.i("PrimaryBouncerInteractor", "Show primary bouncer requested, reason: ".concat(str));
+            ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository)._primaryBouncerShowingSoon.updateState(null, Boolean.TRUE);
+            DejankUtils.postAfterTraversal(this.showRunnable);
+            KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.keyguardStateController;
+            if (!keyguardStateControllerImpl.mPrimaryBouncerShowing) {
+                keyguardStateControllerImpl.mPrimaryBouncerShowing = true;
+                keyguardStateControllerImpl.invokeForEachCallback(new KeyguardStateControllerImpl$$ExternalSyntheticLambda0(1));
+            }
+            ArrayList arrayList = this.primaryBouncerCallbackInteractor.expansionCallbacks;
+            int size = arrayList.size();
+            while (i2 < size) {
+                Object obj = arrayList.get(i2);
+                i2++;
+                ((PrimaryBouncerCallbackInteractor.PrimaryBouncerExpansionCallback) obj).onStartingToShow();
+            }
+            return true;
+        } finally {
+            Trace.endSection();
+        }
     }
 
     public final void startDisappearAnimation(Runnable runnable) {

@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.RemoteInput;
 import android.content.Intent;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ServiceManager;
@@ -31,7 +32,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RemoteInputViewControllerImpl implements RemoteInputViewController {
     public final NotificationRemoteInputManager$$ExternalSyntheticLambda1 bouncerChecker;
@@ -63,7 +63,7 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
         this.onFocusChangeListener = new View.OnFocusChangeListener() { // from class: com.android.systemui.statusbar.policy.RemoteInputViewControllerImpl$onFocusChangeListener$1
             @Override // android.view.View.OnFocusChangeListener
             public final void onFocusChange(View view, boolean z) {
-                RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler2 = RemoteInputViewControllerImpl.this.remoteInputQuickSettingsDisabler;
+                RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler2 = this.this$0.remoteInputQuickSettingsDisabler;
                 if (remoteInputQuickSettingsDisabler2.remoteInputActive != z) {
                     remoteInputQuickSettingsDisabler2.remoteInputActive = z;
                 }
@@ -71,10 +71,10 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
         };
         this.onSendRemoteInputListener = new Runnable() { // from class: com.android.systemui.statusbar.policy.RemoteInputViewControllerImpl$onSendRemoteInputListener$1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException, PendingIntent.CanceledException {
                 Intent intent;
                 INotificationManager iNotificationManager;
-                RemoteInputViewControllerImpl remoteInputViewControllerImpl = RemoteInputViewControllerImpl.this;
+                RemoteInputViewControllerImpl remoteInputViewControllerImpl = this.this$0;
                 RemoteInput remoteInput = remoteInputViewControllerImpl.remoteInput;
                 if (remoteInput == null) {
                     Log.e("RemoteInput", "cannot send remote input, RemoteInput data is null");
@@ -91,19 +91,19 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
                 if (contentInfo == null) {
                     Bundle bundle = new Bundle();
                     bundle.putString(remoteInput.getResultKey(), remoteInputView2.mEditText.getText().toString());
-                    Intent addFlags = new Intent().addFlags(268435456);
-                    RemoteInput.addResultsToIntent(remoteInputViewControllerImpl.remoteInputs, addFlags, bundle);
+                    Intent intentAddFlags = new Intent().addFlags(268435456);
+                    RemoteInput.addResultsToIntent(remoteInputViewControllerImpl.remoteInputs, intentAddFlags, bundle);
                     notificationEntry2.remoteInputText = remoteInputView2.mEditText.getText();
                     remoteInputView2.setAttachment(null);
                     notificationEntry2.remoteInputUri = null;
                     notificationEntry2.remoteInputMimeType = null;
-                    RemoteInput.setResultsSource(addFlags, notificationEntry2.editedSuggestionInfo != null ? 1 : 0);
-                    intent = addFlags;
+                    RemoteInput.setResultsSource(intentAddFlags, notificationEntry2.editedSuggestionInfo != null ? 1 : 0);
+                    intent = intentAddFlags;
                 } else {
                     String str = notificationEntry2.remoteInputMimeType;
                     Uri uri = notificationEntry2.remoteInputUri;
-                    HashMap hashMap = new HashMap();
-                    hashMap.put(str, uri);
+                    HashMap map = new HashMap();
+                    map.put(str, uri);
                     StatusBarNotification statusBarNotification = notificationEntry2.mSbn;
                     RemoteInputUriController remoteInputUriController = remoteInputViewControllerImpl.remoteInputController.mRemoteInputUriController;
                     remoteInputUriController.getClass();
@@ -112,11 +112,11 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
                     } catch (Exception e) {
                         Log.e("RemoteInputUriController", "Failed to grant URI permissions:" + e.getMessage(), e);
                     }
-                    Intent addFlags2 = new Intent().addFlags(268435456);
-                    RemoteInput.addDataResultToIntent(remoteInput, addFlags2, hashMap);
+                    Intent intentAddFlags2 = new Intent().addFlags(268435456);
+                    RemoteInput.addDataResultToIntent(remoteInput, intentAddFlags2, map);
                     Bundle bundle2 = new Bundle();
                     bundle2.putString(remoteInput.getResultKey(), remoteInputView2.mEditText.getText().toString());
-                    RemoteInput.addResultsToIntent(remoteInputViewControllerImpl.remoteInputs, addFlags2, bundle2);
+                    RemoteInput.addResultsToIntent(remoteInputViewControllerImpl.remoteInputs, intentAddFlags2, bundle2);
                     CharSequence label = notificationEntry2.remoteInputAttachment.getClip().getDescription().getLabel();
                     if (TextUtils.isEmpty(label)) {
                         label = remoteInputView2.getResources().getString(R.string.remote_input_image_insertion_text);
@@ -125,10 +125,10 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
                         label = "\"" + ((Object) label) + "\" " + ((Object) remoteInputView2.mEditText.getText());
                     }
                     notificationEntry2.remoteInputText = label;
-                    RemoteInput.setResultsSource(addFlags2, notificationEntry2.editedSuggestionInfo != null ? 1 : 0);
-                    intent = addFlags2;
+                    RemoteInput.setResultsSource(intentAddFlags2, notificationEntry2.editedSuggestionInfo != null ? 1 : 0);
+                    intent = intentAddFlags2;
                 }
-                RemoteInputViewControllerImpl remoteInputViewControllerImpl2 = RemoteInputViewControllerImpl.this;
+                RemoteInputViewControllerImpl remoteInputViewControllerImpl2 = this.this$0;
                 NotificationRemoteInputManager$$ExternalSyntheticLambda1 notificationRemoteInputManager$$ExternalSyntheticLambda1 = remoteInputViewControllerImpl2.bouncerChecker;
                 RemoteInputView remoteInputView3 = remoteInputViewControllerImpl2.view;
                 remoteInputView3.mEditText.setEnabled(false);
@@ -136,9 +136,9 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
                 remoteInputView3.mSendButton.setVisibility(4);
                 remoteInputView3.mProgressBar.setVisibility(0);
                 remoteInputView3.mEditText.mShowImeOnInputConnection = false;
-                long elapsedRealtime = SystemClock.elapsedRealtime();
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
                 NotificationEntry notificationEntry3 = remoteInputViewControllerImpl2.entry;
-                notificationEntry3.lastRemoteInputSent = elapsedRealtime;
+                notificationEntry3.lastRemoteInputSent = jElapsedRealtime;
                 notificationEntry3.mRemoteEditImeAnimatingAway = true;
                 Object obj = remoteInputView3.mToken;
                 RemoteInputController remoteInputController2 = remoteInputViewControllerImpl2.remoteInputController;
@@ -163,9 +163,9 @@ public final class RemoteInputViewControllerImpl implements RemoteInputViewContr
                     if (NotiRune.NOTI_SUBSCREEN_SUPPORT_NOTIFICATION_HISTORY && (iNotificationManager = remoteInputViewControllerImpl2.notifManager) != null) {
                         iNotificationManager.addReplyHistory(1, notificationEntry3.mKey, notificationEntry3.mSbn.getPackageName(), notificationEntry3.mSbn.getUser().getIdentifier(), "NOUI_2023", remoteInputView3.mEditText.getText().toString());
                     }
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setPendingIntentBackgroundActivityStartMode(1);
-                    pendingIntent.send(remoteInputView3.getContext(), 0, intent, null, null, null, makeBasic.toBundle());
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
+                    pendingIntent.send(remoteInputView3.getContext(), 0, intent, null, null, null, activityOptionsMakeBasic.toBundle());
                 } catch (PendingIntent.CanceledException e2) {
                     Log.i("RemoteInput", "Unable to send remote input result", e2);
                     remoteInputViewControllerImpl2.uiEventLogger.logWithInstanceId(RemoteInputView.NotificationRemoteInputEvent.NOTIFICATION_REMOTE_INPUT_FAILURE, notificationEntry3.mSbn.getUid(), notificationEntry3.mSbn.getPackageName(), notificationEntry3.mSbn.getInstanceId());

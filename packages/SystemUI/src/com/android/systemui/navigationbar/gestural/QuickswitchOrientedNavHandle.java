@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QuickswitchOrientedNavHandle extends NavigationHandle {
     public int mDeltaRotation;
@@ -33,40 +32,40 @@ public class QuickswitchOrientedNavHandle extends NavigationHandle {
     }
 
     public final RectF computeHomeHandleBounds() {
+        float width;
         float f;
+        float width2;
+        float height;
         float f2;
-        float f3;
-        float f4;
-        float f5;
-        float f6 = this.mRadius * 2.0f;
+        float f3 = this.mRadius * 2.0f;
         int i = getLocationOnScreen()[1];
         int i2 = this.mDeltaRotation;
         if (i2 == 1) {
-            float f7 = this.mBottom;
-            f = f7 + f6;
+            float f4 = this.mBottom;
+            width = f4 + f3;
             int i3 = this.mWidth;
-            float height = ((getHeight() / 2.0f) - (i3 / 2.0f)) - (i / 2.0f);
-            f2 = i3 + height;
-            f3 = f7;
-            f4 = height;
+            float height2 = ((getHeight() / 2.0f) - (i3 / 2.0f)) - (i / 2.0f);
+            f = i3 + height2;
+            width2 = f4;
+            height = height2;
         } else {
             if (i2 != 3) {
-                float f8 = this.mRadius * 2.0f;
-                f3 = (getWidth() / 2.0f) - (this.mWidth / 2.0f);
-                f4 = (getHeight() - this.mBottom) - f8;
-                f = (this.mWidth / 2.0f) + (getWidth() / 2.0f);
-                f5 = f8 + f4;
-                this.mTmpBoundsRectF.set(f3, f4, f, f5);
+                float f5 = this.mRadius * 2.0f;
+                width2 = (getWidth() / 2.0f) - (this.mWidth / 2.0f);
+                height = (getHeight() - this.mBottom) - f5;
+                width = (this.mWidth / 2.0f) + (getWidth() / 2.0f);
+                f2 = f5 + height;
+                this.mTmpBoundsRectF.set(width2, height, width, f2);
                 return this.mTmpBoundsRectF;
             }
-            f = getWidth() - this.mBottom;
+            width = getWidth() - this.mBottom;
             int i4 = this.mWidth;
-            f4 = ((getHeight() / 2.0f) - (i4 / 2.0f)) - (i / 2.0f);
-            f2 = i4 + f4;
-            f3 = f - f6;
+            height = ((getHeight() / 2.0f) - (i4 / 2.0f)) - (i / 2.0f);
+            f = i4 + height;
+            width2 = width - f3;
         }
-        f5 = f2;
-        this.mTmpBoundsRectF.set(f3, f4, f, f5);
+        f2 = f;
+        this.mTmpBoundsRectF.set(width2, height, width, f2);
         return this.mTmpBoundsRectF;
     }
 
@@ -75,9 +74,9 @@ public class QuickswitchOrientedNavHandle extends NavigationHandle {
         if (BasicRune.NAVBAR_GESTURE) {
             return;
         }
-        RectF computeHomeHandleBounds = computeHomeHandleBounds();
+        RectF rectFComputeHomeHandleBounds = computeHomeHandleBounds();
         float f = this.mRadius;
-        canvas.drawRoundRect(computeHomeHandleBounds, f, f, this.mPaint);
+        canvas.drawRoundRect(rectFComputeHomeHandleBounds, f, f, this.mPaint);
     }
 
     @Override // com.android.systemui.navigationbar.gestural.NavigationHandle, com.android.systemui.navigationbar.views.buttons.ButtonInterface

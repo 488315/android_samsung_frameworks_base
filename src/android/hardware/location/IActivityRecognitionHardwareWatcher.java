@@ -46,9 +46,9 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActivityRecognitionHardwareWatcher)) {
-                return (IActivityRecognitionHardwareWatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActivityRecognitionHardwareWatcher)) {
+                return (IActivityRecognitionHardwareWatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IActivityRecognitionHardware asInterface = IActivityRecognitionHardware.Stub.asInterface(parcel.readStrongBinder());
+                IActivityRecognitionHardware iActivityRecognitionHardwareAsInterface = IActivityRecognitionHardware.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onInstanceChanged(asInterface);
+                onInstanceChanged(iActivityRecognitionHardwareAsInterface);
                 parcel2.writeNoException();
                 return true;
             }
@@ -102,16 +102,16 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
 
             @Override // android.hardware.location.IActivityRecognitionHardwareWatcher
             public void onInstanceChanged(IActivityRecognitionHardware iActivityRecognitionHardware) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iActivityRecognitionHardware);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iActivityRecognitionHardware);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

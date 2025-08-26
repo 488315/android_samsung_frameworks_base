@@ -1,6 +1,7 @@
 package com.android.internal.view.menu;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -58,16 +59,16 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
     public ListMenuItemView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mIsDeviceDefaultLight = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, i, i2);
-        this.mBackground = obtainStyledAttributes.getDrawable(5);
-        this.mTextAppearance = obtainStyledAttributes.getResourceId(1, -1);
-        this.mPreserveIconSpacing = obtainStyledAttributes.getBoolean(8, false);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, i, i2);
+        this.mBackground = typedArrayObtainStyledAttributes.getDrawable(5);
+        this.mTextAppearance = typedArrayObtainStyledAttributes.getResourceId(1, -1);
+        this.mPreserveIconSpacing = typedArrayObtainStyledAttributes.getBoolean(8, false);
         this.mTextAppearanceContext = context;
-        this.mSubMenuArrow = obtainStyledAttributes.getDrawable(7);
-        TypedArray obtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, new int[]{16843049}, 16842861, 0);
-        this.mHasListDivider = obtainStyledAttributes2.hasValue(0);
-        obtainStyledAttributes.recycle();
-        obtainStyledAttributes2.recycle();
+        this.mSubMenuArrow = typedArrayObtainStyledAttributes.getDrawable(7);
+        TypedArray typedArrayObtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, new int[]{16843049}, 16842861, 0);
+        this.mHasListDivider = typedArrayObtainStyledAttributes2.hasValue(0);
+        typedArrayObtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes2.recycle();
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, false);
         if (typedValue.data != 0) {
@@ -87,7 +88,7 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
     }
 
     @Override // android.view.View
-    protected void onFinishInflate() {
+    protected void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         setBackgroundDrawable(this.mBackground);
         TextView textView = (TextView) findViewById(16908310);
@@ -100,14 +101,14 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
         ImageView imageView = (ImageView) findViewById(R.id.submenuarrow);
         this.mSubMenuArrowView = imageView;
         if (imageView != null) {
-            imageView.lambda$setImageURIAsync$2(this.mSubMenuArrow);
+            imageView.setImageDrawable(this.mSubMenuArrow);
         }
         this.mGroupDivider = (ImageView) findViewById(R.id.group_divider);
         this.mContent = (LinearLayout) findViewById(16908290);
     }
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void initialize(MenuItemImpl menuItemImpl, int i) {
+    public void initialize(MenuItemImpl menuItemImpl, int i) throws Resources.NotFoundException {
         this.mItemData = menuItemImpl;
         this.mMenuType = i;
         setVisibility(menuItemImpl.isVisible() ? 0 : 8);
@@ -121,12 +122,12 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
         setBadgeText(menuItemImpl.getBadgeText());
         int i2 = this.mTextAppearance;
         if (i2 != -1) {
-            TypedArray obtainStyledAttributes = this.mTextAppearanceContext.obtainStyledAttributes(i2, R.styleable.TextAppearance);
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(0, 0);
+            TypedArray typedArrayObtainStyledAttributes = this.mTextAppearanceContext.obtainStyledAttributes(i2, R.styleable.TextAppearance);
+            int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
             if (dimensionPixelSize != 0) {
                 this.mTitleView.getPaint().setTextSize(dimensionPixelSize);
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -261,7 +262,7 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
                 if (!z) {
                     drawable = null;
                 }
-                imageView2.lambda$setImageURIAsync$2(drawable);
+                imageView2.setImageDrawable(drawable);
                 if (this.mIconView.getVisibility() != 0) {
                     this.mIconView.setVisibility(0);
                     return;
@@ -383,7 +384,7 @@ public class ListMenuItemView extends LinearLayout implements MenuView.ItemView,
         this.mBadgeView.setVisibility(str != null ? 0 : 8);
     }
 
-    private boolean isNumericValue(String str) {
+    private boolean isNumericValue(String str) throws NumberFormatException {
         if (str == null) {
             return false;
         }

@@ -13,7 +13,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ActiveNotificationsStore {
     public final Map groups;
@@ -21,7 +20,6 @@ public final class ActiveNotificationsStore {
     public final Map rankingsMap;
     public final List renderList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public final Map groups = new LinkedHashMap();
         public final Map individuals = new LinkedHashMap();
@@ -29,10 +27,8 @@ public final class ActiveNotificationsStore {
         public Map rankingsMap = MapsKt__MapsKt.emptyMap();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Key {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Group extends Key {
             public final String key;
 
@@ -57,7 +53,6 @@ public final class ActiveNotificationsStore {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Individual extends Key {
             public final String key;
 

@@ -1256,6 +1256,7 @@
     <string name="delete_blob_text">刪除共用資料</string>
     <string name="demo_mode">系統 UI 展示模式</string>
     <string name="demote_explain_text">「%1$s」將不再顯示最新即時資訊，你隨時可以前往「設定」進行變更。</string>
+    <string name="desktop_label">桌面 %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">將視窗最大化或還原大小</string>
     <string name="desktop_mode_a11y_action_snap_left">調整應用程式視窗大小並向左貼齊</string>
     <string name="desktop_mode_a11y_action_snap_right">調整應用程式視窗大小並向右貼齊</string>
@@ -1310,6 +1311,17 @@
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">如何開啟平板觸控板</string>
     <string name="dex_touchpad_dialog_pinch">以 2 指觸控縮放</string>
     <string name="dex_touchpad_dialog_pinch_desc">放大或縮小。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">使用 S Pen 在常用應用程式中書寫或繪畫。將 S Pen 置於手機螢幕上時，游標隨即會浮現於顯示器相應點上。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">使用 S Pen 在常用應用程式中書寫或繪畫。將 S Pen 置於平板螢幕上時，游標隨即會浮現於顯示器相應點上。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">選擇物件、開啟應用程式、啟用按鈕等功能 (按一下左鍵)。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">朝任一方向捲動。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">輕觸並拖曳</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">輕觸</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">S Pen 游標</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">觸碰並按住</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">選擇螢幕上的物件。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">將物件繞著螢幕四周移動或選取文字。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">觸碰並按住，然後拖曳</string>
     <string name="dex_touchpad_dialog_swipe">以 2 指滑動</string>
     <string name="dex_touchpad_dialog_swipe_desc">朝任一方向捲動。</string>
     <string name="dex_touchpad_dialog_swipe_left_right">以 3 指向左或向右滑動</string>
@@ -1351,6 +1363,7 @@
     <string name="disconnect_smart_view">中斷連接 Smart View 嗎？</string>
     <string name="dismiss_dialog">關閉</string>
     <string name="dismissible_keyguard_swipe">向上滑動即可繼續使用</string>
+    <string name="display_disconnected_to_change_user">為變更使用者，已中斷顯示畫面連線。</string>
     <string name="divider_panel_app_pair_to_edge">新增應用程式組至側螢幕面板</string>
     <string name="divider_panel_change_layout">變更版面配置</string>
     <string name="divider_panel_rotate_clockwise">順時針旋轉</string>
@@ -1408,6 +1421,7 @@
     <string name="drop_now_to_open_in_fullscreen_view">立即拖放以全螢幕檢視開啟</string>
     <string name="dropdown_menu">下拉式選單</string>
     <string name="durationMinutes">%d 分鐘</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">使用 Smart View 期間會隱藏桌面工作空間。</string>
     <string name="edge_feeds_preview_not_selected_tts">未選擇%s。</string>
     <string name="edge_feeds_preview_selected_tts">已選擇%s。</string>
     <string name="edge_lighting_action_description">顯示一次閃光快顯效果</string>
@@ -2622,6 +2636,7 @@
     <string name="ksh_group_system_notifications">通知</string>
     <string name="ksh_group_system_popup_view">彈出視窗檢視</string>
     <string name="ksh_group_system_recents">最近使用的應用程式</string>
+    <string name="ksh_group_system_running_apps">執行中的應用程式</string>
     <string name="ksh_group_system_screen_off">螢幕關閉</string>
     <string name="ksh_group_system_show_emojis">顯示表情符號</string>
     <string name="ksh_group_system_show_hanja_input">顯示漢字輸入</string>
@@ -3173,9 +3188,13 @@
     <string name="music_share_description_second_line">只要同時開啟您和朋友的 Galaxy Buds，就能一起聽音樂。</string>
     <string name="mw_caption_button_text_open_in_browser">使用瀏覽器開啟</string>
     <string name="mw_caption_button_text_remove_from_workspace">自工作區移除</string>
+    <string name="mw_caption_button_text_restart_app">重新啟動應用程式以優化版面配置</string>
     <string name="mw_caption_button_text_send_to_other_display">傳送到其他顯示螢幕</string>
     <string name="mw_caption_button_text_snap_to_left">貼齊左側</string>
     <string name="mw_caption_button_text_snap_to_right">貼齊右側</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">您的手機溫度過高，因此已隱藏桌面工作空間。待裝置降溫後即可再次使用。</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">您的螢幕放大比例太高，無法將此應用程式切換至桌面工作空間。請調整螢幕變焦設定後再試一次。</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">使用 Smart View 期間無法將應用程式變更為桌面檢視。</string>
     <string name="nav_bar">導覽列</string>
     <string name="nav_bar_layout">配置</string>
     <string name="navigation_menu">導覽選單</string>
@@ -3522,6 +3541,7 @@
     <string name="qs_custom_action_move_to_bottom">移至底部</string>
     <string name="qs_custom_action_move_to_top">移至頂端</string>
     <string name="qs_custom_action_move_up">往上移動</string>
+    <string name="qs_custom_action_radio_button">選項按鈕</string>
     <string name="qs_custom_action_removed_done">已移除 %s 按鈕</string>
     <string name="qs_customizer_settings">面板設定</string>
     <string name="qs_detail_flashlight_title">手電筒</string>
@@ -3616,6 +3636,7 @@
     <string name="qs_record_issue_label">記錄問題</string>
     <string name="qs_record_issue_start">開始</string>
     <string name="qs_record_issue_stop">停止</string>
+    <string name="qs_reset_complete">重設完畢。</string>
     <string name="qs_sensor_privacy_dialog_cancel">取消</string>
     <string name="qs_sensor_privacy_dialog_turn_on">開啟</string>
     <string name="qs_sensor_privacy_dialog_unblock">解除封鎖</string>
@@ -3894,7 +3915,6 @@
     <string name="retail_demo_reset_title">請輸入密碼</string>
     <string name="retry_face">再次進行臉部驗證</string>
     <string name="reverse_folding_alert_view_warning_text">打開手機並從左側摺疊。</string>
-    <string name="reverse_folding_order_guide_text">請先從左側方向摺疊。</string>
     <string name="right_icon">向右圖示</string>
     <string name="right_keycode">向右按鍵碼</string>
     <string name="right_nav_bar_button_type">其他向右按鈕類型</string>
@@ -4114,6 +4134,7 @@
     <string name="sec_decor_button_text_caption_pin">將選項功能表釘選至頂端</string>
     <string name="sec_decor_button_text_caption_unpin">取消釘選項功能表</string>
     <string name="sec_decor_button_text_close">關閉</string>
+    <string name="sec_decor_button_text_enter_full_screen">全螢幕</string>
     <string name="sec_decor_button_text_exit_full_screen">退出全螢幕</string>
     <string name="sec_decor_button_text_freeform">以彈出視窗檢視開啟</string>
     <string name="sec_decor_button_text_maximize">最大化</string>
@@ -4129,6 +4150,7 @@
     <string name="sec_decor_button_text_window_pin">將視窗釘選至頂部</string>
     <string name="sec_decor_button_text_window_unpin">取消釘選視窗</string>
     <string name="sec_decor_handle_text">快速選項</string>
+    <string name="sec_decor_window_handle">視窗控點</string>
     <string name="sec_default_app">設為預設</string>
     <string name="sec_devices_and_media_control">裝置操控與媒體輸出按鈕</string>
     <string name="sec_dlg_turn_on">開啟</string>

@@ -70,28 +70,28 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
 
     @Override // android.widget.SemRemoteViewsAnimation
     protected void startAnimation(View view) {
-        View findViewById;
+        View viewFindViewById;
         String string;
-        if (this.mIsExpired || view == null || (findViewById = view.findViewById(this.mViewId)) == null) {
+        if (this.mIsExpired || view == null || (viewFindViewById = view.findViewById(this.mViewId)) == null) {
             return;
         }
         String str = this.mAnimationType;
         str.hashCode();
-        if (str.equals(TYPE_TEXT_SWITCHER) && (findViewById instanceof TextView) && (string = this.mExtras.getString("new_text")) != null) {
-            animateTextSwitcher((TextView) findViewById, string);
+        if (str.equals(TYPE_TEXT_SWITCHER) && (viewFindViewById instanceof TextView) && (string = this.mExtras.getString("new_text")) != null) {
+            animateTextSwitcher((TextView) viewFindViewById, string);
         }
     }
 
     private void animateTextSwitcher(final TextView textView, final CharSequence charSequence) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(textView, "alpha", 1.0f, 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(textView, "translationY", 0.0f, -50.0f);
-        if (ofFloat == null || ofFloat2 == null) {
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(textView, "alpha", 1.0f, 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(textView, "translationY", 0.0f, -50.0f);
+        if (objectAnimatorOfFloat == null || objectAnimatorOfFloat2 == null) {
             return;
         }
-        ofFloat.setDuration(300L);
-        ofFloat2.setDuration(300L);
+        objectAnimatorOfFloat.setDuration(300L);
+        objectAnimatorOfFloat2.setDuration(300L);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         animatorSet.addListener(new AnimatorListenerAdapter(this) { // from class: android.widget.SemRemoteViewsBasicAnimation.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {
@@ -99,15 +99,15 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
                 textView.lambda$setTextAsync$0(charSequence);
             }
         });
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(textView, "alpha", 0.0f, 1.0f);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(textView, "translationY", 50.0f, 0.0f);
-        if (ofFloat3 == null || ofFloat4 == null) {
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(textView, "alpha", 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(textView, "translationY", 50.0f, 0.0f);
+        if (objectAnimatorOfFloat3 == null || objectAnimatorOfFloat4 == null) {
             return;
         }
-        ofFloat3.setDuration(300L);
-        ofFloat4.setDuration(300L);
+        objectAnimatorOfFloat3.setDuration(300L);
+        objectAnimatorOfFloat4.setDuration(300L);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3, ofFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat4);
         animatorSet2.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsBasicAnimation.3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationStart(Animator animator) {

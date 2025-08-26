@@ -131,9 +131,9 @@ public final class XmlConstants {
         public static PredefinedEffectName findByName(String str, int i) {
             boolean z = (i & 1) != 0;
             try {
-                PredefinedEffectName valueOf = valueOf(str.toUpperCase(Locale.ROOT));
-                if (valueOf.mIsPublic || z) {
-                    return valueOf;
+                PredefinedEffectName predefinedEffectNameValueOf = valueOf(str.toUpperCase(Locale.ROOT));
+                if (predefinedEffectNameValueOf.mIsPublic || z) {
+                    return predefinedEffectNameValueOf;
                 }
                 return null;
             } catch (IllegalArgumentException unused) {

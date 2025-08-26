@@ -134,11 +134,11 @@ public class SurfaceTextureSource extends Filter {
         ShaderProgram shaderProgram = this.mFrameExtractor;
         float[] fArr = this.mMappedCoords;
         shaderProgram.setSourceRegion(fArr[0], fArr[1], fArr[4], fArr[5], fArr[8], fArr[9], fArr[12], fArr[13]);
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        this.mFrameExtractor.process(this.mMediaFrame, newFrame);
-        newFrame.setTimestamp(this.mSurfaceTexture.getTimestamp());
-        pushOutput("video", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        this.mFrameExtractor.process(this.mMediaFrame, frameNewFrame);
+        frameNewFrame.setTimestamp(this.mSurfaceTexture.getTimestamp());
+        pushOutput("video", frameNewFrame);
+        frameNewFrame.release();
     }
 
     @Override // android.filterfw.core.Filter

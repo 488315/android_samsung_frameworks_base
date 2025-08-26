@@ -44,9 +44,9 @@ public interface IKeyGestureHandler extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyGestureHandler.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyGestureHandler)) {
-                return (IKeyGestureHandler) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyGestureHandler.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyGestureHandler)) {
+                return (IKeyGestureHandler) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IKeyGestureHandler extends IInterface {
             }
             if (i == 1) {
                 AidlKeyGestureEvent aidlKeyGestureEvent = (AidlKeyGestureEvent) parcel.readTypedObject(AidlKeyGestureEvent.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                handleKeyGesture(aidlKeyGestureEvent, readStrongBinder);
+                handleKeyGesture(aidlKeyGestureEvent, strongBinder);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IKeyGestureHandler extends IInterface {
 
             @Override // android.hardware.input.IKeyGestureHandler
             public void handleKeyGesture(AidlKeyGestureEvent aidlKeyGestureEvent, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKeyGestureHandler.DESCRIPTOR);
-                    obtain.writeTypedObject(aidlKeyGestureEvent, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKeyGestureHandler.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(aidlKeyGestureEvent, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

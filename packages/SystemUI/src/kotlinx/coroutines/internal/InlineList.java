@@ -3,13 +3,12 @@ package kotlinx.coroutines.internal;
 import java.util.ArrayList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class InlineList {
     public final Object holder;
 
     /* renamed from: plus-FjFbRPM, reason: not valid java name */
-    public static final Object m3464plusFjFbRPM(Object obj, Object obj2) {
+    public static final Object m3484plusFjFbRPM(Object obj, Object obj2) {
         if (obj == null) {
             return obj2;
         }

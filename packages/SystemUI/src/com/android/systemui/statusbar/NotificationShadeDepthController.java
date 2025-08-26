@@ -19,6 +19,7 @@ import com.android.app.animation.Interpolators;
 import com.android.app.tracing.coroutines.TrackTracer;
 import com.android.systemui.CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0;
 import com.android.systemui.Dumpable;
+import com.android.systemui.animation.ShadeInterpolation;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
@@ -29,7 +30,10 @@ import com.android.systemui.shade.NotificationShadeWindowState;
 import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.shade.ShadeExpansionChangeEvent;
 import com.android.systemui.shade.ShadeExpansionListener;
+import com.android.systemui.shade.data.repository.ShadeDisplaysRepository;
+import com.android.systemui.shade.data.repository.ShadeDisplaysRepositoryImpl;
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractor;
+import com.android.systemui.shade.shared.flag.ShadeWindowGoesAround;
 import com.android.systemui.statusbar.NotificationShadeDepthController;
 import com.android.systemui.statusbar.phone.BiometricUnlockController;
 import com.android.systemui.statusbar.phone.DozeParameters;
@@ -60,7 +64,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationShadeDepthController implements ShadeExpansionListener, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -105,7 +108,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
     public final List listeners = new ArrayList();
     public long prevTimestamp = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.NotificationShadeDepthController$1, reason: invalid class name */
     public final class AnonymousClass1 implements Consumer {
         public AnonymousClass1() {
@@ -124,7 +126,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.NotificationShadeDepthController$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -154,14 +155,14 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController.2.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        NotificationShadeDepthController notificationShadeDepthController2 = NotificationShadeDepthController.this;
-                        notificationShadeDepthController2.wallpaperSupportsAmbientMode = booleanValue;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        NotificationShadeDepthController notificationShadeDepthController2 = notificationShadeDepthController;
+                        notificationShadeDepthController2.wallpaperSupportsAmbientMode = zBooleanValue;
                         float f = notificationShadeDepthController2.prevDozeAmount;
                         BlurUtils blurUtils = notificationShadeDepthController2.blurUtils;
-                        float blurRadiusOfRatio = !booleanValue ? 0.0f : blurUtils.blurRadiusOfRatio(f);
+                        float fBlurRadiusOfRatio = !zBooleanValue ? 0.0f : blurUtils.blurRadiusOfRatio(f);
                         WakeAndUnlockBlurData wakeAndUnlockBlurData = notificationShadeDepthController2.wakeAndUnlockBlurData;
-                        if (blurRadiusOfRatio == wakeAndUnlockBlurData.radius && !wakeAndUnlockBlurData.useZoom) {
+                        if (fBlurRadiusOfRatio == wakeAndUnlockBlurData.radius && !wakeAndUnlockBlurData.useZoom) {
                             new WakeAndUnlockBlurData(notificationShadeDepthController2.wallpaperSupportsAmbientMode ? blurUtils.blurRadiusOfRatio(notificationShadeDepthController2.prevDozeAmount) : 0.0f, false);
                         }
                         return Unit.INSTANCE;
@@ -181,7 +182,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -191,7 +191,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DepthAnimation {
         public int pendingRadius = -1;
         public float radius;
@@ -206,14 +205,14 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
 
                 @Override // androidx.dynamicanimation.animation.FloatPropertyCompat
                 public final float getValue(Object obj) {
-                    return NotificationShadeDepthController.DepthAnimation.this.radius;
+                    return this.this$0.radius;
                 }
 
                 @Override // androidx.dynamicanimation.animation.FloatPropertyCompat
                 public final void setValue(Object obj, float f) {
-                    NotificationShadeDepthController.DepthAnimation.this.radius = f;
+                    this.this$0.radius = f;
                     int i = NotificationShadeDepthController.$r8$clinit;
-                    r2.scheduleUpdate();
+                    notificationShadeDepthController.scheduleUpdate();
                 }
             });
             this.springAnimation = springAnimation;
@@ -230,7 +229,6 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WakeAndUnlockBlurData {
         public final float radius;
         public final boolean useZoom;
@@ -292,15 +290,15 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         this.updateBlurCallback = new Choreographer.FrameCallback() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$updateBlurCallback$1
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
-                NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 notificationShadeDepthController.updateScheduled = false;
-                Pair computeBlurAndZoomOut = notificationShadeDepthController.computeBlurAndZoomOut();
-                int intValue = ((Number) computeBlurAndZoomOut.component1()).intValue();
-                float floatValue = ((Number) computeBlurAndZoomOut.component2()).floatValue();
-                NotificationShadeDepthController.this.getClass();
+                Pair pairComputeBlurAndZoomOut = notificationShadeDepthController.computeBlurAndZoomOut();
+                int iIntValue = ((Number) pairComputeBlurAndZoomOut.component1()).intValue();
+                float fFloatValue = ((Number) pairComputeBlurAndZoomOut.component2()).floatValue();
+                this.this$0.getClass();
                 TrackTracer.Companion.getClass();
-                TrackTracer.Companion.instantForGroup(intValue, "shade", "shade_blur_radius");
-                NotificationShadeDepthController notificationShadeDepthController2 = NotificationShadeDepthController.this;
+                TrackTracer.Companion.instantForGroup(iIntValue, "shade", "shade_blur_radius");
+                NotificationShadeDepthController notificationShadeDepthController2 = this.this$0;
                 BlurUtils blurUtils2 = notificationShadeDepthController2.blurUtils;
                 NotificationShadeWindowView notificationShadeWindowView = notificationShadeDepthController2.root;
                 if (notificationShadeWindowView == null) {
@@ -311,11 +309,11 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                 if (viewRootImpl != null) {
                     viewRootImpl.getSurfaceControl().isValid();
                 }
-                NotificationShadeDepthController notificationShadeDepthController3 = NotificationShadeDepthController.this;
-                notificationShadeDepthController3.lastAppliedBlur = intValue;
+                NotificationShadeDepthController notificationShadeDepthController3 = this.this$0;
+                notificationShadeDepthController3.lastAppliedBlur = iIntValue;
                 TrackTracer.Companion.getClass();
-                TrackTracer.Companion.instantForGroup((int) (100 * floatValue), "shade", "zoom_out");
-                notificationShadeDepthController3.wallpaperController.setNotificationShadeZoom(floatValue);
+                TrackTracer.Companion.instantForGroup((int) (100 * fFloatValue), "shade", "zoom_out");
+                notificationShadeDepthController3.wallpaperController.setNotificationShadeZoom(fFloatValue);
                 ArrayList arrayList = (ArrayList) notificationShadeDepthController3.listeners;
                 int size = arrayList.size();
                 int i = 0;
@@ -324,7 +322,7 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                     i++;
                     NavigationBar.AnonymousClass6 anonymousClass6 = (NavigationBar.AnonymousClass6) obj;
                     anonymousClass6.getClass();
-                    boolean z = intValue != 0;
+                    boolean z = iIntValue != 0;
                     if (z != anonymousClass6.mHasBlurs) {
                         anonymousClass6.mHasBlurs = z;
                         RegionSamplingHelper regionSamplingHelper = NavigationBar.this.mRegionSamplingHelper;
@@ -334,30 +332,30 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                 }
                 NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = (NotificationShadeWindowControllerImpl) notificationShadeDepthController3.notificationShadeWindowController;
                 NotificationShadeWindowState notificationShadeWindowState = notificationShadeWindowControllerImpl.mCurrentState;
-                if (notificationShadeWindowState.backgroundBlurRadius == intValue) {
+                if (notificationShadeWindowState.backgroundBlurRadius == iIntValue) {
                     return;
                 }
-                notificationShadeWindowState.backgroundBlurRadius = intValue;
+                notificationShadeWindowState.backgroundBlurRadius = iIntValue;
                 notificationShadeWindowControllerImpl.apply(notificationShadeWindowState);
             }
         };
         this.applyZoomOutForFrame = new Choreographer.FrameCallback() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$applyZoomOutForFrame$1
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
-                NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 notificationShadeDepthController.updateScheduled = false;
-                float floatValue = ((Number) notificationShadeDepthController.computeBlurAndZoomOut().component2()).floatValue();
-                NotificationShadeDepthController notificationShadeDepthController2 = NotificationShadeDepthController.this;
+                float fFloatValue = ((Number) notificationShadeDepthController.computeBlurAndZoomOut().component2()).floatValue();
+                NotificationShadeDepthController notificationShadeDepthController2 = this.this$0;
                 notificationShadeDepthController2.getClass();
                 TrackTracer.Companion.getClass();
-                TrackTracer.Companion.instantForGroup((int) (100 * floatValue), "shade", "zoom_out");
-                notificationShadeDepthController2.wallpaperController.setNotificationShadeZoom(floatValue);
+                TrackTracer.Companion.instantForGroup((int) (100 * fFloatValue), "shade", "zoom_out");
+                notificationShadeDepthController2.wallpaperController.setNotificationShadeZoom(fFloatValue);
             }
         };
         KeyguardStateController.Callback callback = new KeyguardStateController.Callback() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$keyguardStateCallback$1
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onKeyguardFadingAwayChanged() {
-                final NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                final NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 if (((KeyguardStateControllerImpl) notificationShadeDepthController.keyguardStateController).mKeyguardFadingAway && notificationShadeDepthController.biometricUnlockController.mMode == 1) {
                     if (notificationShadeDepthController.keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED)) {
                         return;
@@ -366,37 +364,37 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                     if (animator != null) {
                         animator.cancel();
                     }
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-                    ofFloat.setDuration(notificationShadeDepthController.dozeParameters.mAlwaysOnPolicy.wallpaperFadeOutDuration);
-                    ofFloat.setStartDelay(((KeyguardStateControllerImpl) notificationShadeDepthController.keyguardStateController).mKeyguardFadingAwayDelay);
-                    ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$keyguardStateCallback$1$onKeyguardFadingAwayChanged$1$1
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                    valueAnimatorOfFloat.setDuration(notificationShadeDepthController.dozeParameters.mAlwaysOnPolicy.wallpaperFadeOutDuration);
+                    valueAnimatorOfFloat.setStartDelay(((KeyguardStateControllerImpl) notificationShadeDepthController.keyguardStateController).mKeyguardFadingAwayDelay);
+                    valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$keyguardStateCallback$1$onKeyguardFadingAwayChanged$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            NotificationShadeDepthController notificationShadeDepthController2 = NotificationShadeDepthController.this;
+                            NotificationShadeDepthController notificationShadeDepthController2 = notificationShadeDepthController;
                             new NotificationShadeDepthController.WakeAndUnlockBlurData(notificationShadeDepthController2.blurUtils.blurRadiusOfRatio(((Float) valueAnimator.getAnimatedValue()).floatValue()), false, 2, null);
                             notificationShadeDepthController2.getClass();
                         }
                     });
-                    ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$keyguardStateCallback$1$onKeyguardFadingAwayChanged$1$2
+                    valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$keyguardStateCallback$1$onKeyguardFadingAwayChanged$1$2
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator2) {
-                            NotificationShadeDepthController notificationShadeDepthController2 = NotificationShadeDepthController.this;
+                            NotificationShadeDepthController notificationShadeDepthController2 = notificationShadeDepthController;
                             notificationShadeDepthController2.keyguardAnimator = null;
                             float f = 0.0f;
                             new NotificationShadeDepthController.WakeAndUnlockBlurData(f, false, 2, null);
                             notificationShadeDepthController2.getClass();
                         }
                     });
-                    ofFloat.start();
-                    notificationShadeDepthController.keyguardAnimator = ofFloat;
+                    valueAnimatorOfFloat.start();
+                    notificationShadeDepthController.keyguardAnimator = valueAnimatorOfFloat;
                 }
             }
 
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onKeyguardShowingChanged() {
                 Animator animator;
-                NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 if (!((KeyguardStateControllerImpl) notificationShadeDepthController.keyguardStateController).mShowing || (animator = notificationShadeDepthController.keyguardAnimator) == null) {
                     return;
                 }
@@ -406,7 +404,7 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         StatusBarStateController.StateListener stateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.NotificationShadeDepthController$statusBarStateCallback$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onDozeAmountChanged(float f, float f2) {
-                NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 notificationShadeDepthController.prevDozeAmount = f2;
                 new NotificationShadeDepthController.WakeAndUnlockBlurData(!notificationShadeDepthController.wallpaperSupportsAmbientMode ? 0.0f : notificationShadeDepthController.blurUtils.blurRadiusOfRatio(f2), false);
             }
@@ -414,7 +412,7 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onDozingChanged(boolean z) {
                 if (z) {
-                    NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                    NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                     SpringAnimation springAnimation = notificationShadeDepthController.shadeAnimation.springAnimation;
                     if (springAnimation.mRunning) {
                         springAnimation.skipToEnd();
@@ -428,7 +426,7 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
 
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onStateChanged(int i) {
-                NotificationShadeDepthController notificationShadeDepthController = NotificationShadeDepthController.this;
+                NotificationShadeDepthController notificationShadeDepthController = this.this$0;
                 notificationShadeDepthController.updateShadeAnimationBlur(notificationShadeDepthController.shadeExpansion, notificationShadeDepthController.prevShadeVelocity, notificationShadeDepthController.prevShadeDirection, notificationShadeDepthController.prevTracking);
                 notificationShadeDepthController.scheduleUpdate();
             }
@@ -451,28 +449,55 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
         float f2 = (z && shouldApplyShadeBlur()) ? 1.0f : 0.0f;
         DepthAnimation depthAnimation = this.shadeAnimation;
         depthAnimation.springAnimation.mVelocity = f;
-        int blurRadiusOfRatio = (int) this.blurUtils.blurRadiusOfRatio(f2);
-        if (depthAnimation.pendingRadius == blurRadiusOfRatio) {
+        int iBlurRadiusOfRatio = (int) this.blurUtils.blurRadiusOfRatio(f2);
+        if (depthAnimation.pendingRadius == iBlurRadiusOfRatio) {
             return;
         }
-        depthAnimation.pendingRadius = blurRadiusOfRatio;
-        depthAnimation.springAnimation.animateToFinalPosition(blurRadiusOfRatio);
+        depthAnimation.pendingRadius = iBlurRadiusOfRatio;
+        depthAnimation.springAnimation.animateToFinalPosition(iBlurRadiusOfRatio);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00a6, code lost:
-    
-        if (r8.scrimsVisible != false) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x007f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final kotlin.Pair computeBlurAndZoomOut() {
-        /*
-            Method dump skipped, instructions count: 225
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.NotificationShadeDepthController.computeBlurAndZoomOut():kotlin.Pair");
+    public final Pair computeBlurAndZoomOut() {
+        float fSaturate;
+        float f = this.shadeAnimation.radius;
+        BlurUtils blurUtils = this.blurUtils;
+        float f2 = blurUtils.minBlurRadius;
+        float f3 = blurUtils.maxBlurRadius;
+        float map = 0.0f;
+        float fMax = Math.max(Math.max((MathUtils.constrain(f, f2, f3) * 0.19999999f) + (blurUtils.blurRadiusOfRatio(ShadeInterpolation.getNotificationScrimAlpha(shouldApplyShadeBlur() ? this.shadeExpansion : 0.0f)) * 0.8f), blurUtils.blurRadiusOfRatio(ShadeInterpolation.getNotificationScrimAlpha(this.qsPanelExpansion) * this.shadeExpansion)), blurUtils.blurRadiusOfRatio(this.transitionToFullShadeProgress));
+        WakeAndUnlockBlurData wakeAndUnlockBlurData = this.wakeAndUnlockBlurData;
+        float fMax2 = Math.max(fMax, wakeAndUnlockBlurData.radius);
+        if (this.blursDisabledForAppLaunch || this.blursDisabledForUnlock) {
+            fMax2 = 0.0f;
+        }
+        int i = (int) fMax2;
+        ShadeWindowGoesAround.INSTANCE.getClass();
+        if ((!ShadeWindowGoesAround.FLAG.isTrue() || ((Number) ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.shadeDisplaysRepository.get())).displayId.getValue()).intValue() == 0) && (fMax2 != wakeAndUnlockBlurData.radius || wakeAndUnlockBlurData.useZoom)) {
+            fSaturate = MathUtils.saturate(fMax2 == 0.0f ? 0.0f : MathUtils.map(blurUtils.minBlurRadius, f3, 0.0f, 1.0f, fMax2));
+            if (this.shadeModeInteractor.isSplitShade()) {
+                fSaturate = 0.0f;
+            }
+            if (this.scrimsVisible) {
+                fSaturate = 0.0f;
+            }
+        }
+        if (this.scrimsVisible) {
+            i = 0;
+        }
+        float f4 = blurUtils.supportsBlursOnWindows() ? i : 0;
+        DepthAnimation depthAnimation = this.brightnessMirrorSpring;
+        BlurUtils blurUtils2 = NotificationShadeDepthController.this.blurUtils;
+        float f5 = depthAnimation.radius;
+        if (f5 == 0.0f) {
+            blurUtils2.getClass();
+        } else {
+            map = MathUtils.map(blurUtils2.minBlurRadius, blurUtils2.maxBlurRadius, 0.0f, 1.0f, f5);
+        }
+        return new Pair(Integer.valueOf((int) ((1.0f - map) * f4)), Float.valueOf(fSaturate));
     }
 
     @Override // com.android.systemui.Dumpable
@@ -496,41 +521,41 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
 
     @Override // com.android.systemui.shade.ShadeExpansionListener
     public final void onPanelExpansionChanged(ShadeExpansionChangeEvent shadeExpansionChangeEvent) {
-        long elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
+        long jElapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
         float f = this.panelPullDownMinFraction;
-        float f2 = 1.0f;
-        float saturate = MathUtils.saturate((shadeExpansionChangeEvent.fraction - f) / (1.0f - f));
-        float f3 = this.shadeExpansion;
+        float fConstrain = 1.0f;
+        float fSaturate = MathUtils.saturate((shadeExpansionChangeEvent.fraction - f) / (1.0f - f));
+        float f2 = this.shadeExpansion;
         boolean z = shadeExpansionChangeEvent.tracking;
-        if (f3 == saturate && this.prevTracking == z) {
-            this.prevTimestamp = elapsedRealtimeNanos;
+        if (f2 == fSaturate && this.prevTracking == z) {
+            this.prevTimestamp = jElapsedRealtimeNanos;
             return;
         }
         if (this.prevTimestamp < 0) {
-            this.prevTimestamp = elapsedRealtimeNanos;
+            this.prevTimestamp = jElapsedRealtimeNanos;
         } else {
-            f2 = MathUtils.constrain((float) ((elapsedRealtimeNanos - r5) / 1.0E9d), 1.0E-5f, 1.0f);
+            fConstrain = MathUtils.constrain((float) ((jElapsedRealtimeNanos - r5) / 1.0E9d), 1.0E-5f, 1.0f);
         }
-        float f4 = saturate - this.shadeExpansion;
-        int signum = (int) Math.signum(f4);
-        float constrain = MathUtils.constrain((f4 * 100.0f) / f2, -3000.0f, 3000.0f);
-        if (saturate == 0.0f && this.appLaunchTransitionIsInProgress && !this.blursDisabledForAppLaunch) {
+        float f3 = fSaturate - this.shadeExpansion;
+        int iSignum = (int) Math.signum(f3);
+        float fConstrain2 = MathUtils.constrain((f3 * 100.0f) / fConstrain, -3000.0f, 3000.0f);
+        if (fSaturate == 0.0f && this.appLaunchTransitionIsInProgress && !this.blursDisabledForAppLaunch) {
             Log.d("DepthController", "appLaunchTransitionIsInProgress is now false from shade expansion event");
             this.appLaunchTransitionIsInProgress = false;
         }
-        updateShadeAnimationBlur(saturate, constrain, signum, z);
-        this.prevShadeDirection = signum;
-        this.prevShadeVelocity = constrain;
-        this.shadeExpansion = saturate;
+        updateShadeAnimationBlur(fSaturate, fConstrain2, iSignum, z);
+        this.prevShadeDirection = iSignum;
+        this.prevShadeVelocity = fConstrain2;
+        this.shadeExpansion = fSaturate;
         this.prevTracking = z;
-        this.prevTimestamp = elapsedRealtimeNanos;
+        this.prevTimestamp = jElapsedRealtimeNanos;
         scheduleUpdate();
     }
 
     public final void scheduleUpdate() {
-        Pair computeBlurAndZoomOut = computeBlurAndZoomOut();
-        int intValue = ((Number) computeBlurAndZoomOut.component1()).intValue();
-        ((Number) computeBlurAndZoomOut.component2()).floatValue();
+        Pair pairComputeBlurAndZoomOut = computeBlurAndZoomOut();
+        int iIntValue = ((Number) pairComputeBlurAndZoomOut.component1()).intValue();
+        ((Number) pairComputeBlurAndZoomOut.component2()).floatValue();
         if (this.updateScheduled) {
             return;
         }
@@ -548,7 +573,7 @@ public final class NotificationShadeDepthController implements ShadeExpansionLis
                 blurUtils.lastTargetViewRootImpl = viewRootImpl;
             }
             SyncRtSurfaceTransactionApplier.SurfaceParams.Builder builder = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(viewRootImpl.getSurfaceControl());
-            if (intValue != 0) {
+            if (iIntValue != 0) {
                 Trace.asyncTraceForTrackBegin(4096L, "BlurUtils", "eEarlyWakeup (prepareBlur)", 0);
                 builder.withEarlyWakeupStart();
                 blurUtils.earlyWakeupEnabled = true;

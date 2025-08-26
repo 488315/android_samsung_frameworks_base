@@ -11,7 +11,6 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.PathInterpolator;
 import androidx.core.animation.PathInterpolator$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Interpolators {
     public static final Interpolator ACCELERATE;
@@ -46,7 +45,6 @@ public class Interpolators {
     public static final Interpolator TOUCH_RESPONSE_REVERSE;
     public static final AnonymousClass2 ZOOM_OUT;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.app.animation.Interpolators$2, reason: invalid class name */
     public class AnonymousClass2 implements Interpolator {
         @Override // android.animation.TimeInterpolator
@@ -56,20 +54,20 @@ public class Interpolators {
     }
 
     static {
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m.cubicTo(0.05f, 0.0f, 0.133333f, 0.06f, 0.166666f, 0.4f);
-        m.cubicTo(0.208333f, 0.82f, 0.25f, 1.0f, 1.0f, 1.0f);
-        EMPHASIZED = new PathInterpolator(m);
-        Path m2 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m2.cubicTo(0.1217f, 0.0462f, 0.15f, 0.4686f, 0.1667f, 0.66f);
-        m2.cubicTo(0.1834f, 0.8878f, 0.1667f, 1.0f, 1.0f, 1.0f);
-        EMPHASIZED_COMPLEMENT = new PathInterpolator(m2);
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM.cubicTo(0.05f, 0.0f, 0.133333f, 0.06f, 0.166666f, 0.4f);
+        pathM.cubicTo(0.208333f, 0.82f, 0.25f, 1.0f, 1.0f, 1.0f);
+        EMPHASIZED = new PathInterpolator(pathM);
+        Path pathM2 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM2.cubicTo(0.1217f, 0.0462f, 0.15f, 0.4686f, 0.1667f, 0.66f);
+        pathM2.cubicTo(0.1834f, 0.8878f, 0.1667f, 1.0f, 1.0f, 1.0f);
+        EMPHASIZED_COMPLEMENT = new PathInterpolator(pathM2);
         EMPHASIZED_ACCELERATE = new PathInterpolator(0.3f, 0.0f, 0.8f, 0.15f);
         EMPHASIZED_DECELERATE = new PathInterpolator(0.05f, 0.7f, 0.1f, 1.0f);
-        Path m3 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m3.cubicTo(0.05f, 0.0f, 0.133333f, 0.08f, 0.166666f, 0.4f);
-        m3.cubicTo(0.225f, 0.94f, 0.5f, 1.0f, 1.0f, 1.0f);
-        new PathInterpolator(m3);
+        Path pathM3 = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM3.cubicTo(0.05f, 0.0f, 0.133333f, 0.08f, 0.166666f, 0.4f);
+        pathM3.cubicTo(0.225f, 0.94f, 0.5f, 1.0f, 1.0f, 1.0f);
+        new PathInterpolator(pathM3);
         new OvershootInterpolator(0.75f);
         new OvershootInterpolator(1.2f);
         new OvershootInterpolator(1.7f);

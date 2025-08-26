@@ -1,6 +1,7 @@
 package com.android.systemui.qs.footer.data.repository;
 
 import com.android.systemui.qs.FgsManagerController;
+import com.android.systemui.qs.FgsManagerControllerImpl;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ForegroundServicesRepositoryImpl$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ FgsManagerController $fgsManagerController$inlined;
@@ -41,18 +41,17 @@ public final class ForegroundServicesRepositoryImpl$special$$inlined$flatMapLate
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow distinctUntilChanged;
+        Flow flowDistinctUntilChanged;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             if (((Boolean) this.L$1).booleanValue()) {
-                final ChannelLimitedFlowMerge merge = FlowKt.merge(this.this$0.foregroundServicesCount, FlowConflatedKt.conflatedCallbackFlow(new ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1(this.$fgsManagerController$inlined, null)));
+                final ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(this.this$0.foregroundServicesCount, FlowConflatedKt.conflatedCallbackFlow(new ForegroundServicesRepositoryImpl$hasNewChanges$1$dialogDismissedEvents$1(this.$fgsManagerController$inlined, null)));
                 final FgsManagerController fgsManagerController = this.$fgsManagerController$inlined;
-                distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1
+                flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FgsManagerController $fgsManagerController$inlined;
@@ -81,74 +80,53 @@ public final class ForegroundServicesRepositoryImpl$special$$inlined$flatMapLate
                             this.$fgsManagerController$inlined = fgsManagerController;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r4, kotlin.coroutines.Continuation r5) {
-                            /*
-                                r3 = this;
-                                boolean r4 = r5 instanceof com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                                if (r4 == 0) goto L13
-                                r4 = r5
-                                com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1$2$1 r4 = (com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1.AnonymousClass2.AnonymousClass1) r4
-                                int r0 = r4.label
-                                r1 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r2 = r0 & r1
-                                if (r2 == 0) goto L13
-                                int r0 = r0 - r1
-                                r4.label = r0
-                                goto L18
-                            L13:
-                                com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1$2$1 r4 = new com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1$2$1
-                                r4.<init>(r5)
-                            L18:
-                                java.lang.Object r5 = r4.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r1 = r4.label
-                                r2 = 1
-                                if (r1 == 0) goto L2f
-                                if (r1 != r2) goto L27
-                                kotlin.ResultKt.throwOnFailure(r5)
-                                goto L47
-                            L27:
-                                java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                                java.lang.String r4 = "call to 'resume' before 'invoke' with coroutine"
-                                r3.<init>(r4)
-                                throw r3
-                            L2f:
-                                kotlin.ResultKt.throwOnFailure(r5)
-                                com.android.systemui.qs.FgsManagerController r5 = r3.$fgsManagerController$inlined
-                                com.android.systemui.qs.FgsManagerControllerImpl r5 = (com.android.systemui.qs.FgsManagerControllerImpl) r5
-                                boolean r5 = r5.newChangesSinceDialogWasDismissed
-                                java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                                r4.label = r2
-                                kotlinx.coroutines.flow.FlowCollector r3 = r3.$this_unsafeFlow
-                                java.lang.Object r3 = r3.emit(r5, r4)
-                                if (r3 != r0) goto L47
-                                return r0
-                            L47:
-                                kotlin.Unit r3 = kotlin.Unit.INSTANCE
-                                return r3
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$hasNewChanges$lambda$1$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                Boolean boolValueOf = Boolean.valueOf(((FgsManagerControllerImpl) this.$fgsManagerController$inlined).newChangesSinceDialogWasDismissed);
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector2, fgsManagerController), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = channelLimitedFlowMergeMerge.collect(new AnonymousClass2(flowCollector2, fgsManagerController), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 });
             } else {
-                distinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+                flowDistinctUntilChanged = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, distinctUntilChanged, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowDistinctUntilChanged, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

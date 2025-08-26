@@ -43,9 +43,9 @@ public class DefaultSplitAssetLoader implements SplitAssetLoader {
         String[] strArr = this.mSplitApkPaths;
         int i = 1;
         ApkAssets[] apkAssetsArr = new ApkAssets[(strArr != null ? strArr.length : 0) + 1];
-        ApkAssets loadApkAssets = loadApkAssets(this.mBaseApkPath, this.mFlags);
-        this.mBaseApkAssets = loadApkAssets;
-        apkAssetsArr[0] = loadApkAssets;
+        ApkAssets apkAssetsLoadApkAssets = loadApkAssets(this.mBaseApkPath, this.mFlags);
+        this.mBaseApkAssets = apkAssetsLoadApkAssets;
+        apkAssetsArr[0] = apkAssetsLoadApkAssets;
         if (!ArrayUtils.isEmpty(this.mSplitApkPaths)) {
             String[] strArr2 = this.mSplitApkPaths;
             int length = strArr2.length;

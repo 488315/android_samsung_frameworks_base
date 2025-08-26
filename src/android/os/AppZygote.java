@@ -54,10 +54,7 @@ public class AppZygote {
         try {
             return getProcess().start(str, str2, i, i, iArr, i2, i3, i4, str3, str4, str5, str6, null, str7, 0, z, jArr, map, map2, false, false, false, strArr);
         } catch (RuntimeException e) {
-            if (!Flags.appZygoteRetryStart()) {
-                throw e;
-            }
-            if (!getProcess().isDead()) {
+            if (!Flags.appZygoteRetryStart() || !getProcess().isDead()) {
                 throw e;
             }
             Log.w(LOG_TAG, "retry starting process " + str2);
@@ -85,9 +82,9 @@ public class AppZygote {
             ZygoteProcess zygoteProcess = Process.ZYGOTE_PROCESS;
             String str2 = this.mAppInfo.processName + "_zygote";
             int i = this.mZygoteUid;
-            ChildZygoteProcess startChildZygote = zygoteProcess.startChildZygote("com.android.internal.os.AppZygoteInit", str2, i, i, iArr, memorySafetyRuntimeFlagsForSecondaryZygote, "app_zygote", str, str, VMRuntime.getInstructionSet(str), this.mZygoteUidGidMin, this.mZygoteUidGidMax);
-            this.mZygote = startChildZygote;
-            ZygoteProcess.waitForConnectionToZygote(startChildZygote.getPrimarySocketAddress());
+            ChildZygoteProcess childZygoteProcessStartChildZygote = zygoteProcess.startChildZygote("com.android.internal.os.AppZygoteInit", str2, i, i, iArr, memorySafetyRuntimeFlagsForSecondaryZygote, "app_zygote", str, str, VMRuntime.getInstructionSet(str), this.mZygoteUidGidMin, this.mZygoteUidGidMax);
+            this.mZygote = childZygoteProcessStartChildZygote;
+            ZygoteProcess.waitForConnectionToZygote(childZygoteProcessStartChildZygote.getPrimarySocketAddress());
             Log.i(LOG_TAG, "Starting application preload.");
             this.mZygote.preloadApp(this.mAppInfo, str);
             Log.i(LOG_TAG, "Application preload done.");

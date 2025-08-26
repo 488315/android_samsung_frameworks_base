@@ -1,10 +1,8 @@
 package com.android.wm.shell.shared.bubbles;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface DraggedObject {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Bubble implements DraggedObject {
         public final BubbleBarLocation initialLocation;
 
@@ -33,7 +31,6 @@ public interface DraggedObject {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BubbleBar implements DraggedObject {
         public final BubbleBarLocation initialLocation;
 
@@ -62,7 +59,6 @@ public interface DraggedObject {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ExpandedView implements DraggedObject {
         public final BubbleBarLocation initialLocation;
 

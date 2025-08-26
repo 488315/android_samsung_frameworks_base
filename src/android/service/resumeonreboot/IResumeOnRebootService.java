@@ -52,9 +52,9 @@ public interface IResumeOnRebootService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IResumeOnRebootService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResumeOnRebootService)) {
-                return (IResumeOnRebootService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IResumeOnRebootService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResumeOnRebootService)) {
+                return (IResumeOnRebootService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,16 +84,16 @@ public interface IResumeOnRebootService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
-                long readLong = parcel.readLong();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                long j = parcel.readLong();
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                wrapSecret(createByteArray, readLong, remoteCallback);
+                wrapSecret(bArrCreateByteArray, j, remoteCallback);
             } else if (i == 2) {
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                unwrap(createByteArray2, remoteCallback2);
+                unwrap(bArrCreateByteArray2, remoteCallback2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,28 +118,28 @@ public interface IResumeOnRebootService extends IInterface {
 
             @Override // android.service.resumeonreboot.IResumeOnRebootService
             public void wrapSecret(byte[] bArr, long j, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.resumeonreboot.IResumeOnRebootService
             public void unwrap(byte[] bArr, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

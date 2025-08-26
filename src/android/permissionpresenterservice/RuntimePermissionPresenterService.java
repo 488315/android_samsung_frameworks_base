@@ -56,10 +56,10 @@ public abstract class RuntimePermissionPresenterService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void getAppPermissions(String str, RemoteCallback remoteCallback) {
-        List<RuntimePermissionPresentationInfo> onGetAppPermissions = onGetAppPermissions(str);
-        if (onGetAppPermissions != null && !onGetAppPermissions.isEmpty()) {
+        List<RuntimePermissionPresentationInfo> listOnGetAppPermissions = onGetAppPermissions(str);
+        if (listOnGetAppPermissions != null && !listOnGetAppPermissions.isEmpty()) {
             Bundle bundle = new Bundle();
-            bundle.putParcelableList(KEY_RESULT, onGetAppPermissions);
+            bundle.putParcelableList(KEY_RESULT, listOnGetAppPermissions);
             remoteCallback.sendResult(bundle);
             return;
         }

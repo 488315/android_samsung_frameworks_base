@@ -20,7 +20,6 @@ import android.print.IPrintDocumentAdapter;
 import android.print.IPrintJobStateChangeListener;
 import android.print.IPrintServicesChangeListener;
 import android.print.PrintDocumentAdapter;
-import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
 import android.printservice.recommendation.IRecommendationsChangeListener;
 import android.printservice.recommendation.RecommendationInfo;
@@ -132,21 +131,21 @@ public final class PrintManager {
     }
 
     public void removePrintJobStateChangeListener(PrintJobStateChangeListener printJobStateChangeListener) {
-        PrintJobStateChangeListenerWrapper remove;
+        PrintJobStateChangeListenerWrapper printJobStateChangeListenerWrapperRemove;
         if (this.mService == null) {
             Log.w(LOG_TAG, "Feature android.software.print not available");
             return;
         }
         Map<PrintJobStateChangeListener, PrintJobStateChangeListenerWrapper> map = this.mPrintJobStateChangeListeners;
-        if (map == null || (remove = map.remove(printJobStateChangeListener)) == null) {
+        if (map == null || (printJobStateChangeListenerWrapperRemove = map.remove(printJobStateChangeListener)) == null) {
             return;
         }
         if (this.mPrintJobStateChangeListeners.isEmpty()) {
             this.mPrintJobStateChangeListeners = null;
         }
-        remove.destroy();
+        printJobStateChangeListenerWrapperRemove.destroy();
         try {
-            this.mService.removePrintJobStateChangeListener(remove, this.mUserId);
+            this.mService.removePrintJobStateChangeListener(printJobStateChangeListenerWrapperRemove, this.mUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -245,10 +244,10 @@ public final class PrintManager {
             throw new IllegalArgumentException("documentAdapter cannot be null");
         }
         try {
-            Bundle print = this.mService.print(str, new PrintDocumentAdapterDelegate((Activity) this.mContext, printDocumentAdapter), printAttributes, this.mContext.getPackageName(), this.mAppId, this.mUserId);
-            if (print != null) {
-                PrintJobInfo printJobInfo = (PrintJobInfo) print.getParcelable(EXTRA_PRINT_JOB, PrintJobInfo.class);
-                IntentSender intentSender = (IntentSender) print.getParcelable(EXTRA_PRINT_DIALOG_INTENT, IntentSender.class);
+            Bundle bundlePrint = this.mService.print(str, new PrintDocumentAdapterDelegate((Activity) this.mContext, printDocumentAdapter), printAttributes, this.mContext.getPackageName(), this.mAppId, this.mUserId);
+            if (bundlePrint != null) {
+                PrintJobInfo printJobInfo = (PrintJobInfo) bundlePrint.getParcelable(EXTRA_PRINT_JOB, PrintJobInfo.class);
+                IntentSender intentSender = (IntentSender) bundlePrint.getParcelable(EXTRA_PRINT_DIALOG_INTENT, IntentSender.class);
                 if (printJobInfo != null && intentSender != null) {
                     try {
                         this.mContext.startIntentSender(intentSender, null, 0, 0, 0, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
@@ -288,22 +287,22 @@ public final class PrintManager {
 
     @SystemApi
     public void removePrintServicesChangeListener(PrintServicesChangeListener printServicesChangeListener) {
-        PrintServicesChangeListenerWrapper remove;
+        PrintServicesChangeListenerWrapper printServicesChangeListenerWrapperRemove;
         Preconditions.checkNotNull(printServicesChangeListener);
         if (this.mService == null) {
             Log.w(LOG_TAG, "Feature android.software.print not available");
             return;
         }
         Map<PrintServicesChangeListener, PrintServicesChangeListenerWrapper> map = this.mPrintServicesChangeListeners;
-        if (map == null || (remove = map.remove(printServicesChangeListener)) == null) {
+        if (map == null || (printServicesChangeListenerWrapperRemove = map.remove(printServicesChangeListener)) == null) {
             return;
         }
         if (this.mPrintServicesChangeListeners.isEmpty()) {
             this.mPrintServicesChangeListeners = null;
         }
-        remove.destroy();
+        printServicesChangeListenerWrapperRemove.destroy();
         try {
-            this.mService.removePrintServicesChangeListener(remove, this.mUserId);
+            this.mService.removePrintServicesChangeListener(printServicesChangeListenerWrapperRemove, this.mUserId);
         } catch (RemoteException e) {
             Log.e(LOG_TAG, "Error removing print services change listener", e);
         }
@@ -344,22 +343,22 @@ public final class PrintManager {
 
     @SystemApi
     public void removePrintServiceRecommendationsChangeListener(PrintServiceRecommendationsChangeListener printServiceRecommendationsChangeListener) {
-        PrintServiceRecommendationsChangeListenerWrapper remove;
+        PrintServiceRecommendationsChangeListenerWrapper printServiceRecommendationsChangeListenerWrapperRemove;
         Preconditions.checkNotNull(printServiceRecommendationsChangeListener);
         if (this.mService == null) {
             Log.w(LOG_TAG, "Feature android.software.print not available");
             return;
         }
         Map<PrintServiceRecommendationsChangeListener, PrintServiceRecommendationsChangeListenerWrapper> map = this.mPrintServiceRecommendationsChangeListeners;
-        if (map == null || (remove = map.remove(printServiceRecommendationsChangeListener)) == null) {
+        if (map == null || (printServiceRecommendationsChangeListenerWrapperRemove = map.remove(printServiceRecommendationsChangeListener)) == null) {
             return;
         }
         if (this.mPrintServiceRecommendationsChangeListeners.isEmpty()) {
             this.mPrintServiceRecommendationsChangeListeners = null;
         }
-        remove.destroy();
+        printServiceRecommendationsChangeListenerWrapperRemove.destroy();
         try {
-            this.mService.removePrintServiceRecommendationsChangeListener(remove, this.mUserId);
+            this.mService.removePrintServiceRecommendationsChangeListener(printServiceRecommendationsChangeListenerWrapperRemove, this.mUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -458,12 +457,12 @@ public final class PrintManager {
 
         @Override // android.print.IPrintDocumentAdapter
         public void setObserver(IPrintDocumentAdapterObserver iPrintDocumentAdapterObserver) {
-            boolean isDestroyedLocked;
+            boolean zIsDestroyedLocked;
             synchronized (this.mLock) {
                 this.mObserver = iPrintDocumentAdapterObserver;
-                isDestroyedLocked = isDestroyedLocked();
+                zIsDestroyedLocked = isDestroyedLocked();
             }
-            if (!isDestroyedLocked || iPrintDocumentAdapterObserver == null) {
+            if (!zIsDestroyedLocked || iPrintDocumentAdapterObserver == null) {
                 return;
             }
             try {
@@ -484,22 +483,22 @@ public final class PrintManager {
 
         @Override // android.print.IPrintDocumentAdapter
         public void layout(PrintAttributes printAttributes, PrintAttributes printAttributes2, ILayoutResultCallback iLayoutResultCallback, Bundle bundle, int i) {
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iLayoutResultCallback.onLayoutStarted(createTransport, i);
+                iLayoutResultCallback.onLayoutStarted(iCancellationSignalCreateTransport, i);
                 synchronized (this.mLock) {
                     if (isDestroyedLocked()) {
                         return;
                     }
-                    CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
-                    SomeArgs obtain = SomeArgs.obtain();
-                    obtain.arg1 = this.mDocumentAdapter;
-                    obtain.arg2 = printAttributes;
-                    obtain.arg3 = printAttributes2;
-                    obtain.arg4 = fromTransport;
-                    obtain.arg5 = new MyLayoutResultCallback(iLayoutResultCallback, i);
-                    obtain.arg6 = bundle;
-                    this.mHandler.obtainMessage(2, obtain).sendToTarget();
+                    CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
+                    SomeArgs someArgsObtain = SomeArgs.obtain();
+                    someArgsObtain.arg1 = this.mDocumentAdapter;
+                    someArgsObtain.arg2 = printAttributes;
+                    someArgsObtain.arg3 = printAttributes2;
+                    someArgsObtain.arg4 = cancellationSignalFromTransport;
+                    someArgsObtain.arg5 = new MyLayoutResultCallback(iLayoutResultCallback, i);
+                    someArgsObtain.arg6 = bundle;
+                    this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
                 }
             } catch (RemoteException e) {
                 Log.e(PrintManager.LOG_TAG, "Error notifying for layout start", e);
@@ -508,21 +507,21 @@ public final class PrintManager {
 
         @Override // android.print.IPrintDocumentAdapter
         public void write(PageRange[] pageRangeArr, ParcelFileDescriptor parcelFileDescriptor, IWriteResultCallback iWriteResultCallback, int i) {
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iWriteResultCallback.onWriteStarted(createTransport, i);
+                iWriteResultCallback.onWriteStarted(iCancellationSignalCreateTransport, i);
                 synchronized (this.mLock) {
                     if (isDestroyedLocked()) {
                         return;
                     }
-                    CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
-                    SomeArgs obtain = SomeArgs.obtain();
-                    obtain.arg1 = this.mDocumentAdapter;
-                    obtain.arg2 = pageRangeArr;
-                    obtain.arg3 = parcelFileDescriptor;
-                    obtain.arg4 = fromTransport;
-                    obtain.arg5 = new MyWriteResultCallback(iWriteResultCallback, parcelFileDescriptor, i);
-                    this.mHandler.obtainMessage(3, obtain).sendToTarget();
+                    CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
+                    SomeArgs someArgsObtain = SomeArgs.obtain();
+                    someArgsObtain.arg1 = this.mDocumentAdapter;
+                    someArgsObtain.arg2 = pageRangeArr;
+                    someArgsObtain.arg3 = parcelFileDescriptor;
+                    someArgsObtain.arg4 = cancellationSignalFromTransport;
+                    someArgsObtain.arg5 = new MyWriteResultCallback(iWriteResultCallback, parcelFileDescriptor, i);
+                    this.mHandler.obtainMessage(3, someArgsObtain).sendToTarget();
                 }
             } catch (RemoteException e) {
                 Log.e(PrintManager.LOG_TAG, "Error notifying for write start", e);
@@ -817,10 +816,10 @@ public final class PrintManager {
             if (handler == null || printJobStateChangeListener == null) {
                 return;
             }
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = this;
-            obtain.arg2 = printJobId;
-            handler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = this;
+            someArgsObtain.arg2 = printJobId;
+            handler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         public void destroy() {
@@ -852,7 +851,7 @@ public final class PrintManager {
             handler.post(new Runnable() { // from class: android.print.PrintManager$PrintServicesChangeListenerWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PrintManager.PrintServicesChangeListener.this.onPrintServicesChanged();
+                    printServicesChangeListener.onPrintServicesChanged();
                 }
             });
         }
@@ -882,7 +881,7 @@ public final class PrintManager {
             handler.post(new Runnable() { // from class: android.print.PrintManager$PrintServiceRecommendationsChangeListenerWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PrintManager.PrintServiceRecommendationsChangeListener.this.onPrintServiceRecommendationsChanged();
+                    printServiceRecommendationsChangeListener.onPrintServiceRecommendationsChanged();
                 }
             });
         }

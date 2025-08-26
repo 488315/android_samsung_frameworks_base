@@ -52,10 +52,10 @@ public class CbGeoUtils {
         }
 
         public double distance(LatLng latLng) {
-            double sin = Math.sin(Math.toRadians(this.lat - latLng.lat) * 0.5d);
-            double sin2 = Math.sin(Math.toRadians(this.lng - latLng.lng) * 0.5d);
-            double cos = (sin * sin) + (sin2 * sin2 * Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(latLng.lat)));
-            return Math.atan2(Math.sqrt(cos), Math.sqrt(1.0d - cos)) * 2.0d * 6371000.0d;
+            double dSin = Math.sin(Math.toRadians(this.lat - latLng.lat) * 0.5d);
+            double dSin2 = Math.sin(Math.toRadians(this.lng - latLng.lng) * 0.5d);
+            double dCos = (dSin * dSin) + (dSin2 * dSin2 * Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(latLng.lat)));
+            return Math.atan2(Math.sqrt(dCos), Math.sqrt(1.0d - dCos)) * 2.0d * 6371000.0d;
         }
 
         public String toString() {
@@ -92,9 +92,7 @@ public class CbGeoUtils {
             this.mScaledVertices = (List) list.stream().map(new Function() { // from class: android.telephony.CbGeoUtils$Polygon$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    CbGeoUtils.Polygon.Point lambda$new$0;
-                    lambda$new$0 = CbGeoUtils.Polygon.this.lambda$new$0((CbGeoUtils.LatLng) obj);
-                    return lambda$new$0;
+                    return this.f$0.lambda$new$0((CbGeoUtils.LatLng) obj);
                 }
             }).collect(Collectors.toList());
         }
@@ -105,7 +103,7 @@ public class CbGeoUtils {
 
         @Override // android.telephony.CbGeoUtils.Geometry
         public boolean contains(LatLng latLng) {
-            Point lambda$new$0 = lambda$new$0(latLng);
+            Point pointLambda$new$0 = lambda$new$0(latLng);
             int size = this.mScaledVertices.size();
             int i = 0;
             int i2 = 0;
@@ -113,16 +111,16 @@ public class CbGeoUtils {
                 Point point = this.mScaledVertices.get(i);
                 i++;
                 Point point2 = this.mScaledVertices.get(i % size);
-                int sign = CbGeoUtils.sign(crossProduct(point2.subtract(point), lambda$new$0.subtract(point)));
-                if (sign == 0) {
-                    if (Math.min(point.x, point2.x) <= lambda$new$0.x && lambda$new$0.x <= Math.max(point.x, point2.x) && Math.min(point.y, point2.y) <= lambda$new$0.y && lambda$new$0.y <= Math.max(point.y, point2.y)) {
+                int iSign = CbGeoUtils.sign(crossProduct(point2.subtract(point), pointLambda$new$0.subtract(point)));
+                if (iSign == 0) {
+                    if (Math.min(point.x, point2.x) <= pointLambda$new$0.x && pointLambda$new$0.x <= Math.max(point.x, point2.x) && Math.min(point.y, point2.y) <= pointLambda$new$0.y && pointLambda$new$0.y <= Math.max(point.y, point2.y)) {
                         return true;
                     }
-                } else if (CbGeoUtils.sign(point.y - lambda$new$0.y) <= 0) {
-                    if (sign > 0 && CbGeoUtils.sign(point2.y - lambda$new$0.y) > 0) {
+                } else if (CbGeoUtils.sign(point.y - pointLambda$new$0.y) <= 0) {
+                    if (iSign > 0 && CbGeoUtils.sign(point2.y - pointLambda$new$0.y) > 0) {
                         i2++;
                     }
-                } else if (sign < 0 && CbGeoUtils.sign(point2.y - lambda$new$0.y) <= 0) {
+                } else if (iSign < 0 && CbGeoUtils.sign(point2.y - pointLambda$new$0.y) <= 0) {
                     i2--;
                 }
             }
@@ -133,14 +131,14 @@ public class CbGeoUtils {
         /* renamed from: convertAndScaleLatLng, reason: merged with bridge method [inline-methods] */
         public Point lambda$new$0(LatLng latLng) {
             double d = latLng.lat - this.mOrigin.lat;
-            double d2 = latLng.lng - this.mOrigin.lng;
+            double dSign = latLng.lng - this.mOrigin.lng;
             if (CbGeoUtils.sign(this.mOrigin.lng) != 0 && CbGeoUtils.sign(this.mOrigin.lng) != CbGeoUtils.sign(latLng.lng)) {
-                double abs = Math.abs(this.mOrigin.lng) + Math.abs(latLng.lng);
-                if (CbGeoUtils.sign((2.0d * abs) - 360.0d) > 0) {
-                    d2 = CbGeoUtils.sign(this.mOrigin.lng) * (360.0d - abs);
+                double dAbs = Math.abs(this.mOrigin.lng) + Math.abs(latLng.lng);
+                if (CbGeoUtils.sign((2.0d * dAbs) - 360.0d) > 0) {
+                    dSign = CbGeoUtils.sign(this.mOrigin.lng) * (360.0d - dAbs);
                 }
             }
-            return new Point(d * SCALE, d2 * SCALE);
+            return new Point(d * SCALE, dSign * SCALE);
         }
 
         private static double crossProduct(Point point, Point point2) {
@@ -232,15 +230,15 @@ public class CbGeoUtils {
     public static List<Geometry> parseGeometriesFromString(String str) {
         ArrayList arrayList = new ArrayList();
         for (String str2 : str.split("\\s*;\\s*")) {
-            String[] split = str2.split("\\s*\\|\\s*");
-            String str3 = split[0];
+            String[] strArrSplit = str2.split("\\s*\\|\\s*");
+            String str3 = strArrSplit[0];
             str3.hashCode();
             if (str3.equals(CIRCLE_SYMBOL)) {
-                arrayList.add(new Circle(parseLatLngFromString(split[1]), Double.parseDouble(split[2])));
+                arrayList.add(new Circle(parseLatLngFromString(strArrSplit[1]), Double.parseDouble(strArrSplit[2])));
             } else if (str3.equals(POLYGON_SYMBOL)) {
-                ArrayList arrayList2 = new ArrayList(split.length - 1);
-                for (int i = 1; i < split.length; i++) {
-                    arrayList2.add(parseLatLngFromString(split[i]));
+                ArrayList arrayList2 = new ArrayList(strArrSplit.length - 1);
+                for (int i = 1; i < strArrSplit.length; i++) {
+                    arrayList2.add(parseLatLngFromString(strArrSplit[i]));
                 }
                 arrayList.add(new Polygon(arrayList2));
             } else {
@@ -257,9 +255,7 @@ public class CbGeoUtils {
         return (String) list.stream().map(new Function() { // from class: android.telephony.CbGeoUtils$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String encodeGeometryToString;
-                encodeGeometryToString = CbGeoUtils.encodeGeometryToString((CbGeoUtils.Geometry) obj);
-                return encodeGeometryToString;
+                return CbGeoUtils.encodeGeometryToString((CbGeoUtils.Geometry) obj);
             }
         }).filter(new Predicate() { // from class: android.telephony.CbGeoUtils$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
@@ -301,7 +297,7 @@ public class CbGeoUtils {
     }
 
     public static LatLng parseLatLngFromString(String str) {
-        String[] split = str.split("\\s*,\\s*");
-        return new LatLng(Double.parseDouble(split[0]), Double.parseDouble(split[1]));
+        String[] strArrSplit = str.split("\\s*,\\s*");
+        return new LatLng(Double.parseDouble(strArrSplit[0]), Double.parseDouble(strArrSplit[1]));
     }
 }

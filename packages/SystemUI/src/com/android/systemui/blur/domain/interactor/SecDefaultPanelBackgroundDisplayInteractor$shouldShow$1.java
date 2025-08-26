@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecDefaultPanelBackgroundDisplayInteractor$shouldShow$1 extends SuspendLambda implements Function6 {
     /* synthetic */ int I$0;
@@ -30,20 +29,24 @@ final class SecDefaultPanelBackgroundDisplayInteractor$shouldShow$1 extends Susp
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        int intValue = ((Number) obj3).intValue();
-        boolean booleanValue3 = ((Boolean) obj5).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj3).intValue();
+        boolean zBooleanValue3 = ((Boolean) obj5).booleanValue();
         SecDefaultPanelBackgroundDisplayInteractor$shouldShow$1 secDefaultPanelBackgroundDisplayInteractor$shouldShow$1 = new SecDefaultPanelBackgroundDisplayInteractor$shouldShow$1(this.this$0, (Continuation) obj6);
-        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$0 = booleanValue;
-        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$1 = booleanValue2;
-        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.I$0 = intValue;
+        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$0 = zBooleanValue;
+        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$1 = zBooleanValue2;
+        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.I$0 = iIntValue;
         secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.L$0 = (KeyguardState) obj4;
-        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$2 = booleanValue3;
+        secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.Z$2 = zBooleanValue3;
         return secDefaultPanelBackgroundDisplayInteractor$shouldShow$1.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0051  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         boolean z;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -56,23 +59,19 @@ final class SecDefaultPanelBackgroundDisplayInteractor$shouldShow$1 extends Susp
         int i = this.I$0;
         KeyguardState keyguardState = (KeyguardState) this.L$0;
         boolean z4 = this.Z$2;
-        String statusBarState = StatusBarState.toString(i);
-        String name = keyguardState.name();
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("blurReduced = ", " , minimalBatteryUse = ", " , statusBarState = ", z2, z3);
-        m.append(statusBarState);
-        m.append(", keyguardState = ");
-        m.append(name);
-        Log.d("SecDefaultPanelBackgroundDisplayInteractor", m.toString());
+        String string = StatusBarState.toString(i);
+        String strName = keyguardState.name();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("blurReduced = ", " , minimalBatteryUse = ", " , statusBarState = ", z2, z3);
+        sbM.append(string);
+        sbM.append(", keyguardState = ");
+        sbM.append(strName);
+        Log.d("SecDefaultPanelBackgroundDisplayInteractor", sbM.toString());
         if (!z2) {
             SecDefaultPanelBackgroundDisplayInteractor secDefaultPanelBackgroundDisplayInteractor = this.this$0;
             int i2 = SecDefaultPanelBackgroundDisplayInteractor.$r8$clinit;
             secDefaultPanelBackgroundDisplayInteractor.getClass();
-            if ((i == 0 || keyguardState == KeyguardState.OCCLUDED || !z3) && !z4) {
-                z = false;
-                return Boolean.valueOf(z);
-            }
+            z = !(i == 0 || keyguardState == KeyguardState.OCCLUDED || !z3) || z4;
         }
-        z = true;
         return Boolean.valueOf(z);
     }
 }

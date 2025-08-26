@@ -7,7 +7,6 @@ import com.android.systemui.qs.pipeline.shared.TileSpec;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda39 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -32,11 +31,11 @@ public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda39 impleme
                 TileSpec selection = mutableSelectionState.getSelection();
                 if (selection != null) {
                     mutableSelectionState.unSelect();
-                    ((Function1) this.f$1).mo779invoke(selection);
+                    ((Function1) this.f$1).mo781invoke(selection);
                 }
                 break;
             case 2:
-                ((Function1) this.f$0).mo779invoke(new ResizingState.ResizeOperation.FinalResizeOperation(((TileGridCell) this.f$1).tile.tileSpec, !r1.isIcon()));
+                ((Function1) this.f$0).mo781invoke(new ResizingState.ResizeOperation.FinalResizeOperation(((TileGridCell) this.f$1).tile.tileSpec, !r1.isIcon()));
                 break;
             default:
                 TileSpec tileSpec = ((TileGridCell) this.f$1).tile.tileSpec;

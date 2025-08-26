@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$isSatelliteAvailableFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -57,14 +56,14 @@ final class DeviceBasedSatelliteRepositoryImpl$isSatelliteAvailableFlow$1 extend
             ?? r1 = new SatelliteCommunicationAccessStateCallback() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$isSatelliteAvailableFlow$1$callback$1
                 public final void onAccessAllowedStateChanged(boolean z) {
                     DeviceBasedSatelliteRepositoryImpl.Companion companion = DeviceBasedSatelliteRepositoryImpl.Companion;
-                    LogBuffer logBuffer = DeviceBasedSatelliteRepositoryImpl.this.logBuffer;
+                    LogBuffer logBuffer = deviceBasedSatelliteRepositoryImpl.logBuffer;
                     DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0 = new DeviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0(6);
                     companion.getClass();
-                    LogMessage obtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
-                    obtain.setBool1(z);
+                    LogMessage logMessageObtain = logBuffer.obtain("DeviceBasedSatelliteRepo", LogLevel.INFO, deviceBasedSatelliteRepositoryImpl$$ExternalSyntheticLambda0, null);
+                    logMessageObtain.setBool1(z);
                     Unit unit = Unit.INSTANCE;
-                    logBuffer.commit(obtain);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    logBuffer.commit(logMessageObtain);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

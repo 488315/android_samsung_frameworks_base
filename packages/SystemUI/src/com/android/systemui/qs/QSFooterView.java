@@ -2,6 +2,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -19,7 +20,6 @@ import com.android.systemui.qs.TouchAnimator;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.custom.SettingsManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSFooterView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +49,7 @@ public class QSFooterView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         updateResources();
     }
@@ -61,7 +61,7 @@ public class QSFooterView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mPageIndicator = (PageIndicator) findViewById(R.id.footer_page_indicator);
         this.mBuildText = (TextView) findViewById(R.id.build);
@@ -78,13 +78,13 @@ public class QSFooterView extends FrameLayout {
             return;
         }
         Context context = ((FrameLayout) this).mContext;
-        byte b = Settings.Global.getInt(context.getContentResolver(), "development_settings_enabled", Build.TYPE.equals("eng") ? 1 : 0) != 0;
-        if (b != false) {
+        Object[] objArr = Settings.Global.getInt(context.getContentResolver(), "development_settings_enabled", Build.TYPE.equals("eng") ? 1 : 0) != 0;
+        if (objArr != false) {
             SettingsManager settingsManager = SettingsManager.getInstance();
             if (((settingsManager != null ? settingsManager.getSettingsHiddenState() : 0) & 256) == 0 && ((enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(context.getApplicationContext())) == null || enterpriseDeviceManager.getRestrictionPolicy().isDeveloperModeAllowed())) {
                 UserManager userManager = (UserManager) context.getSystemService("user");
-                boolean hasUserRestriction = userManager.hasUserRestriction("no_debugging_features");
-                if (userManager.isAdminUser() && !hasUserRestriction && b != false) {
+                boolean zHasUserRestriction = userManager.hasUserRestriction("no_debugging_features");
+                if (userManager.isAdminUser() && !zHasUserRestriction && objArr != false) {
                     this.mBuildText.setText(((FrameLayout) this).mContext.getString(android.R.string.config_managed_provisioning_package, Build.VERSION.RELEASE_OR_CODENAME, Build.ID));
                     this.mBuildText.setSelected(true);
                     return;
@@ -95,7 +95,7 @@ public class QSFooterView extends FrameLayout {
         this.mBuildText.setSelected(false);
     }
 
-    public final void updateResources() {
+    public final void updateResources() throws Resources.NotFoundException {
         TouchAnimator.Builder builder = new TouchAnimator.Builder();
         builder.addFloat(this.mPageIndicator, "alpha", 0.0f, 1.0f);
         builder.addFloat(this.mBuildText, "alpha", 0.0f, 1.0f);
@@ -110,9 +110,9 @@ public class QSFooterView extends FrameLayout {
         this.mEditButton.setLayoutParams(marginLayoutParams);
         this.mEditButton.setPadding(dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2);
         TextView textView = this.mBuildText;
-        TypedArray obtainStyledAttributes = textView.getContext().obtainStyledAttributes(R.style.TextAppearance_QS_Status_Build, new int[]{android.R.attr.textSize});
-        textView.setTextSize(0, obtainStyledAttributes.getDimensionPixelSize(0, (int) textView.getTextSize()));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = textView.getContext().obtainStyledAttributes(R.style.TextAppearance_QS_Status_Build, new int[]{android.R.attr.textSize});
+        textView.setTextSize(0, typedArrayObtainStyledAttributes.getDimensionPixelSize(0, (int) textView.getTextSize()));
+        typedArrayObtainStyledAttributes.recycle();
         ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) getLayoutParams();
         marginLayoutParams2.height = getResources().getDimensionPixelSize(R.dimen.qs_footer_height);
         int dimensionPixelSize3 = getResources().getDimensionPixelSize(R.dimen.qs_footer_margin);

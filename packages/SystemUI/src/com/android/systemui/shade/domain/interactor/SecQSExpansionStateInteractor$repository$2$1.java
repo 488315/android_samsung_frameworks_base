@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class SecQSExpansionStateInteractor$repository$2$1 extends FunctionReferenceImpl implements Function1 {
     public SecQSExpansionStateInteractor$repository$2$1(Object obj) {
@@ -16,11 +15,11 @@ final /* synthetic */ class SecQSExpansionStateInteractor$repository$2$1 extends
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+    public final Object mo781invoke(Object obj) {
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         SecQSExpansionStateInteractor secQSExpansionStateInteractor = (SecQSExpansionStateInteractor) this.receiver;
         secQSExpansionStateInteractor.getClass();
-        SecQSExpansionStateChangeEvent secQSExpansionStateChangeEvent = new SecQSExpansionStateChangeEvent(booleanValue);
+        SecQSExpansionStateChangeEvent secQSExpansionStateChangeEvent = new SecQSExpansionStateChangeEvent(zBooleanValue);
         ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("notify: "), secQSExpansionStateChangeEvent.expanded, "SecQSExpansionStateInteractor");
         Iterator it = ((List) secQSExpansionStateInteractor.expansionStateListeners$delegate.getValue()).iterator();
         while (it.hasNext()) {

@@ -12,7 +12,6 @@ import com.android.systemui.util.animation.UniqueObjectHostView;
 import kotlin.jvm.functions.Function0;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class QSFragmentComposeViewModel$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -25,20 +24,20 @@ public final /* synthetic */ class QSFragmentComposeViewModel$$ExternalSynthetic
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
-        float floatValue;
+        float fFloatValue;
         switch (this.$r8$classId) {
             case 0:
                 return Float.valueOf(this.f$0.getQqsMediaExpansion());
             case 1:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel = this.f$0;
-                boolean booleanValue = ((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel.isInBouncerTransit$delegate).getValue()).booleanValue();
+                boolean zBooleanValue = ((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel.isInBouncerTransit$delegate).getValue()).booleanValue();
                 State state = qSFragmentComposeViewModel.alphaProgress$delegate;
-                return Float.valueOf(booleanValue ? BouncerPanelExpansionCalculator.aboutToShowBouncerProgress(((Number) state.getValue()).floatValue()) : qSFragmentComposeViewModel.isKeyguardState$1() ? ((Number) state.getValue()).floatValue() : ((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel.isSmallScreen$delegate).getValue()).booleanValue() ? ShadeInterpolation.getContentAlpha(((Number) state.getValue()).floatValue()) : qSFragmentComposeViewModel.largeScreenShadeInterpolator.getQsAlpha(((Number) state.getValue()).floatValue()));
+                return Float.valueOf(zBooleanValue ? BouncerPanelExpansionCalculator.aboutToShowBouncerProgress(((Number) state.getValue()).floatValue()) : qSFragmentComposeViewModel.isKeyguardState$1() ? ((Number) state.getValue()).floatValue() : ((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel.isSmallScreen$delegate).getValue()).booleanValue() ? ShadeInterpolation.getContentAlpha(((Number) state.getValue()).floatValue()) : qSFragmentComposeViewModel.largeScreenShadeInterpolator.getQsAlpha(((Number) state.getValue()).floatValue()));
             case 2:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel2 = this.f$0;
                 float f = 0.0f;
-                if (qSFragmentComposeViewModel2.getQsExpansion() > 0.0f && !qSFragmentComposeViewModel2.isKeyguardState$1() && !qSFragmentComposeViewModel2.getQqsMediaVisible() && !qSFragmentComposeViewModel2.qsMediaInRowViewModel.getShouldMediaShowInRow() && !qSFragmentComposeViewModel2.isInSplitShade()) {
-                    float interpolation = ((AccelerateInterpolator) Interpolators.ACCELERATE).getInterpolation(1.0f - qSFragmentComposeViewModel2.getQsExpansion());
+                if (qSFragmentComposeViewModel2.getQsExpansion$1() > 0.0f && !qSFragmentComposeViewModel2.isKeyguardState$1() && !qSFragmentComposeViewModel2.getQqsMediaVisible() && !qSFragmentComposeViewModel2.qsMediaInRowViewModel.getShouldMediaShowInRow() && !qSFragmentComposeViewModel2.isInSplitShade()) {
+                    float interpolation = ((AccelerateInterpolator) Interpolators.ACCELERATE).getInterpolation(1.0f - qSFragmentComposeViewModel2.getQsExpansion$1());
                     UniqueObjectHostView uniqueObjectHostView = qSFragmentComposeViewModel2.qsMediaHost.hostView;
                     if (uniqueObjectHostView == null) {
                         uniqueObjectHostView = null;
@@ -60,7 +59,7 @@ public final /* synthetic */ class QSFragmentComposeViewModel$$ExternalSynthetic
             case 7:
                 return Float.valueOf(((Number) this.f$0.mediaSquishiness$delegate.getValue()).floatValue());
             case 8:
-                return Boolean.valueOf(this.f$0.getQsExpansion() <= 0.0f);
+                return Boolean.valueOf(this.f$0.getQsExpansion$1() <= 0.0f);
             case 9:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel6 = this.f$0;
                 return Boolean.valueOf(((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel6.isBypassEnabled$delegate).getValue()).booleanValue() || (((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel6.isTransitioningToFullShade$delegate).getValue()).booleanValue() && !qSFragmentComposeViewModel6.isInSplitShade()));
@@ -73,18 +72,18 @@ public final /* synthetic */ class QSFragmentComposeViewModel$$ExternalSynthetic
             case 12:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel9 = this.f$0;
                 if (((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel9.isSmallScreen$delegate).getValue()).booleanValue()) {
-                    floatValue = 1.0f;
+                    fFloatValue = 1.0f;
                 } else {
-                    boolean isInSplitShade = qSFragmentComposeViewModel9.isInSplitShade();
+                    boolean zIsInSplitShade = qSFragmentComposeViewModel9.isInSplitShade();
                     MutableState mutableState = qSFragmentComposeViewModel9.lockscreenToShadeProgress$delegate;
                     MutableState mutableState2 = qSFragmentComposeViewModel9.panelExpansionFraction$delegate;
                     MutableState mutableState3 = qSFragmentComposeViewModel9.isTransitioningToFullShade$delegate;
-                    floatValue = isInSplitShade ? (((Boolean) ((SnapshotMutableStateImpl) mutableState3).getValue()).booleanValue() || qSFragmentComposeViewModel9.isKeyguardState$1()) ? ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).floatValue() : ((Number) ((SnapshotMutableStateImpl) mutableState2).getValue()).floatValue() : ((Boolean) ((SnapshotMutableStateImpl) mutableState3).getValue()).booleanValue() ? ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).floatValue() : ((Number) ((SnapshotMutableStateImpl) mutableState2).getValue()).floatValue();
+                    fFloatValue = zIsInSplitShade ? (((Boolean) ((SnapshotMutableStateImpl) mutableState3).getValue()).booleanValue() || qSFragmentComposeViewModel9.isKeyguardState$1()) ? ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).floatValue() : ((Number) ((SnapshotMutableStateImpl) mutableState2).getValue()).floatValue() : ((Boolean) ((SnapshotMutableStateImpl) mutableState3).getValue()).booleanValue() ? ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).floatValue() : ((Number) ((SnapshotMutableStateImpl) mutableState2).getValue()).floatValue();
                 }
-                return Float.valueOf(floatValue);
+                return Float.valueOf(fFloatValue);
             case 13:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel10 = this.f$0;
-                return ((Boolean) qSFragmentComposeViewModel10.forceQs$delegate.getValue()).booleanValue() ? new QSFragmentComposeViewModel.QSExpansionState(1.0f) : new QSFragmentComposeViewModel.QSExpansionState(RangesKt___RangesKt.coerceIn(qSFragmentComposeViewModel10.getQsExpansion(), 0.0f, 1.0f));
+                return ((Boolean) qSFragmentComposeViewModel10.forceQs$delegate.getValue()).booleanValue() ? new QSFragmentComposeViewModel.QSExpansionState(1.0f) : new QSFragmentComposeViewModel.QSExpansionState(RangesKt___RangesKt.coerceIn(qSFragmentComposeViewModel10.getQsExpansion$1(), 0.0f, 1.0f));
             case 14:
                 QSFragmentComposeViewModel qSFragmentComposeViewModel11 = this.f$0;
                 return Boolean.valueOf(((QSFragmentComposeViewModel.QSExpansionState) qSFragmentComposeViewModel11.expansionState$delegate.getValue()).progress >= 1.0f && ((Boolean) ((SnapshotMutableStateImpl) qSFragmentComposeViewModel11.isQsExpanded$delegate).getValue()).booleanValue());

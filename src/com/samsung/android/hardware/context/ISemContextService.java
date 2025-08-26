@@ -106,9 +106,9 @@ public interface ISemContextService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemContextService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemContextService)) {
-                return (ISemContextService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemContextService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemContextService)) {
+                return (ISemContextService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -154,37 +154,37 @@ public interface ISemContextService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
                     SemContextAttribute semContextAttribute = (SemContextAttribute) parcel.readTypedObject(SemContextAttribute.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerCallback(readStrongBinder, readInt, semContextAttribute, readString);
+                    registerCallback(strongBinder, i3, semContextAttribute, string);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean unregisterCallback = unregisterCallback(readStrongBinder2, readInt2);
+                    boolean zUnregisterCallback = unregisterCallback(strongBinder2, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterCallback);
+                    parcel2.writeBoolean(zUnregisterCallback);
                     return true;
                 case 3:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    initializeService(readStrongBinder3, readInt3);
+                    initializeService(strongBinder3, i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    int readInt4 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    int i6 = parcel.readInt();
                     SemContextAttribute semContextAttribute2 = (SemContextAttribute) parcel.readTypedObject(SemContextAttribute.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean changeParameters = changeParameters(readStrongBinder4, readInt4, semContextAttribute2);
+                    boolean zChangeParameters = changeParameters(strongBinder4, i6, semContextAttribute2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeParameters);
+                    parcel2.writeBoolean(zChangeParameters);
                     return true;
                 case 5:
                     Map availableServiceMap = getAvailableServiceMap();
@@ -192,28 +192,28 @@ public interface ISemContextService extends IInterface {
                     parcel2.writeMap(availableServiceMap);
                     return true;
                 case 6:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean referenceData = setReferenceData(readInt5, readInt6, createByteArray);
+                    boolean referenceData = setReferenceData(i7, i8, bArrCreateByteArray);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(referenceData);
                     return true;
                 case 7:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    int readInt7 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    int i9 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    requestToUpdate(readStrongBinder5, readInt7, readString2);
+                    requestToUpdate(strongBinder5, i9, string2);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    int readInt8 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    int i10 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    requestHistoryData(readStrongBinder6, readInt8, readString3);
+                    requestHistoryData(strongBinder6, i10, string3);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -244,152 +244,152 @@ public interface ISemContextService extends IInterface {
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public void registerCallback(IBinder iBinder, int i, SemContextAttribute semContextAttribute, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(semContextAttribute, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(semContextAttribute, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public boolean unregisterCallback(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public void initializeService(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public boolean changeParameters(IBinder iBinder, int i, SemContextAttribute semContextAttribute) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(semContextAttribute, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(semContextAttribute, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public Map getAvailableServiceMap() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public boolean setReferenceData(int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public void requestToUpdate(IBinder iBinder, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public void requestHistoryData(IBinder iBinder, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
             public String getCurrentServiceList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemContextService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

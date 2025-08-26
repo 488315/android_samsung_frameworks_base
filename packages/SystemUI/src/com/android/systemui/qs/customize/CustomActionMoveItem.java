@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomActionMoveItem implements View.OnClickListener {
     public final Consumer actionCancelConsumer;
@@ -26,7 +25,6 @@ public final class CustomActionMoveItem implements View.OnClickListener {
     public final CustomTileInfo source;
     public final CustomizerTileViewPager sourceTileLayout;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,7 +59,7 @@ public final class CustomActionMoveItem implements View.OnClickListener {
             CustomTileInfo customTileInfo3 = customizerTileViewPager2.mDummyTile;
             customTileInfo3.spec = "dummy";
             customTileInfo3.isActive = false;
-            ((CustomizerTileViewPager.CustomizerTilePage) AlertController$$ExternalSyntheticOutline0.m(customizerTileViewPager2.mPages, 1)).addTile(customizerTileViewPager2.mDummyTile);
+            ((CustomizerTileViewPager.CustomizerTilePage) AlertController$$ExternalSyntheticOutline0.m(1, customizerTileViewPager2.mPages)).addTile(customizerTileViewPager2.mDummyTile);
         }
         ArrayList sources = getSources();
         int size = sources.size();
@@ -145,22 +143,22 @@ public final class CustomActionMoveItem implements View.OnClickListener {
     }
 
     public final String getContentDescription(CustomTileInfo customTileInfo) {
-        int indexOf = getSources().indexOf(customTileInfo);
-        int indexOf2 = getDestinations().indexOf(customTileInfo);
+        int iIndexOf = getSources().indexOf(customTileInfo);
+        int iIndexOf2 = getDestinations().indexOf(customTileInfo);
         int i = R.string.qs_custom_action_move_from_available_to_active;
-        if (indexOf >= 0) {
+        if (iIndexOf >= 0) {
             if (this.isAvailableSource) {
                 i = R.string.qs_custom_action_move_from_available_to_available;
             }
-            return getContentDescription$getContentDescription(this, this.sourceTileLayout, indexOf, i);
+            return getContentDescription$getContentDescription(this, this.sourceTileLayout, iIndexOf, i);
         }
-        if (indexOf2 < 0) {
+        if (iIndexOf2 < 0) {
             return "";
         }
         if (!this.isAvailableSource) {
             i = R.string.qs_custom_action_move_from_available_to_available;
         }
-        return getContentDescription$getContentDescription(this, this.destinationTileLayout, indexOf2, i);
+        return getContentDescription$getContentDescription(this, this.destinationTileLayout, iIndexOf2, i);
     }
 
     public final ArrayList getDestinations() {
@@ -187,14 +185,14 @@ public final class CustomActionMoveItem implements View.OnClickListener {
         if (customTileInfo == null) {
             return;
         }
-        int indexOf = getSources().indexOf(customTileInfo);
-        int indexOf2 = getDestinations().indexOf(customTileInfo);
-        if (indexOf >= 0) {
-            ListPopupWindow$$ExternalSyntheticOutline0.m(indexOf, "move to source=", "CustomActionMoveItem");
-            this.moveToSourceConsumer.accept(this.source, Integer.valueOf(indexOf));
-        } else if (indexOf2 >= 0) {
-            ListPopupWindow$$ExternalSyntheticOutline0.m(indexOf2, "move to target=", "CustomActionMoveItem");
-            this.moveToTargetConsumer.accept(this.source, Integer.valueOf(indexOf2));
+        int iIndexOf = getSources().indexOf(customTileInfo);
+        int iIndexOf2 = getDestinations().indexOf(customTileInfo);
+        if (iIndexOf >= 0) {
+            ListPopupWindow$$ExternalSyntheticOutline0.m(iIndexOf, "move to source=", "CustomActionMoveItem");
+            this.moveToSourceConsumer.accept(this.source, Integer.valueOf(iIndexOf));
+        } else if (iIndexOf2 >= 0) {
+            ListPopupWindow$$ExternalSyntheticOutline0.m(iIndexOf2, "move to target=", "CustomActionMoveItem");
+            this.moveToTargetConsumer.accept(this.source, Integer.valueOf(iIndexOf2));
         }
         actionFinish();
     }

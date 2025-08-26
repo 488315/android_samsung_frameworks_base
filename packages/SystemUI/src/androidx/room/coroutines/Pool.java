@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Pool {
     public final int capacity;
@@ -33,8 +32,8 @@ public final class Pool {
         this.channel = ChannelKt.Channel$default(i, null, new Function1() { // from class: androidx.room.coroutines.Pool$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Pool.this.recycle((ConnectionWithLock) obj);
+            public final Object mo781invoke(Object obj) {
+                this.f$0.recycle((ConnectionWithLock) obj);
                 return Unit.INSTANCE;
             }
         }, 2);
@@ -49,9 +48,9 @@ public final class Pool {
         for (int i2 = 0; i2 < length; i2++) {
             ConnectionWithLock connectionWithLock = connectionWithLockArr[i2];
             i++;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "\t\t[", "] - ");
-            m.append(connectionWithLock != null ? connectionWithLock.delegate.toString() : null);
-            sb.append(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "\t\t[", "] - ");
+            sbM.append(connectionWithLock != null ? connectionWithLock.delegate.toString() : null);
+            sb.append(sbM.toString());
             sb.append('\n');
             if (connectionWithLock != null) {
                 if (connectionWithLock.acquireCoroutineContext == null && connectionWithLock.acquireThrowable == null) {
@@ -81,17 +80,17 @@ public final class Pool {
     }
 
     public final void recycle(ConnectionWithLock connectionWithLock) {
-        Object mo3456trySendJP2dKIU = this.channel.mo3456trySendJP2dKIU(connectionWithLock);
+        Object objMo3476trySendJP2dKIU = this.channel.mo3476trySendJP2dKIU(connectionWithLock);
         ChannelResult.Companion companion = ChannelResult.Companion;
-        if (mo3456trySendJP2dKIU instanceof ChannelResult.Failed) {
+        if (objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) {
             connectionWithLock.close();
-            if (!(mo3456trySendJP2dKIU instanceof ChannelResult.Closed)) {
+            if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Closed)) {
                 throw new IllegalStateException("Couldn't recycle connection");
             }
         }
     }
 
-    public final void tryOpenNewConnection() {
+    public final void tryOpenNewConnection() throws Exception {
         int i = this.size.get();
         if (i >= this.capacity) {
             return;
@@ -101,14 +100,14 @@ public final class Pool {
             return;
         }
         ConnectionWithLock connectionWithLock = new ConnectionWithLock((SQLiteConnection) this.connectionFactory.invoke(), null, 2, null);
-        Object mo3456trySendJP2dKIU = this.channel.mo3456trySendJP2dKIU(connectionWithLock);
+        Object objMo3476trySendJP2dKIU = this.channel.mo3476trySendJP2dKIU(connectionWithLock);
         ChannelResult.Companion companion = ChannelResult.Companion;
-        if (!(mo3456trySendJP2dKIU instanceof ChannelResult.Failed)) {
+        if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Failed)) {
             this.connections[i] = connectionWithLock;
             return;
         }
         connectionWithLock.close();
-        if (!(mo3456trySendJP2dKIU instanceof ChannelResult.Closed)) {
+        if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Closed)) {
             throw new IllegalStateException("Couldn't send a new connection for acquisition");
         }
     }

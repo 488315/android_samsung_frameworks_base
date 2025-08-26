@@ -31,7 +31,7 @@ public class AconfigFlags {
     private final Map<String, Boolean> mFlagValues = new ArrayMap();
     private final Map<String, AconfigPackage> mAconfigPackages = new ConcurrentHashMap();
 
-    public AconfigFlags() {
+    public AconfigFlags() throws IOException {
         if (Flags.manifestFlagging()) {
             if (useNewStorage()) {
                 Slog.i(LOG_TAG, "Using new flag storage");
@@ -69,7 +69,7 @@ public class AconfigFlags {
         return com.android.internal.hidden_from_bootclasspath.android.provider.flags.Flags.newStoragePublicApi() && Flags.useNewAconfigStorage();
     }
 
-    private void loadServerOverrides() {
+    private void loadServerOverrides() throws IOException {
         int i;
         Integer num;
         File file = new File(Environment.getUserSystemDirectory(0), "settings_config.xml");
@@ -77,18 +77,18 @@ public class AconfigFlags {
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 try {
-                    TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(fileInputStream);
-                    if (resolvePullParser.next() != 3 && "settings".equals(resolvePullParser.getName())) {
+                    TypedXmlPullParser typedXmlPullParserResolvePullParser = Xml.resolvePullParser(fileInputStream);
+                    if (typedXmlPullParserResolvePullParser.next() != 3 && "settings".equals(typedXmlPullParserResolvePullParser.getName())) {
                         ArrayMap arrayMap = new ArrayMap();
-                        int depth = resolvePullParser.getDepth();
+                        int depth = typedXmlPullParserResolvePullParser.getDepth();
                         while (true) {
-                            int next = resolvePullParser.next();
-                            if (next == 1 || (next == 3 && resolvePullParser.getDepth() <= depth)) {
+                            int next = typedXmlPullParserResolvePullParser.next();
+                            if (next == 1 || (next == 3 && typedXmlPullParserResolvePullParser.getDepth() <= depth)) {
                                 break;
                             }
-                            if (next != 3 && next != 4 && "setting".equals(resolvePullParser.getName())) {
-                                String attributeValue = resolvePullParser.getAttributeValue(null, "name");
-                                String attributeValue2 = resolvePullParser.getAttributeValue(null, "value");
+                            if (next != 3 && next != 4 && "setting".equals(typedXmlPullParserResolvePullParser.getName())) {
+                                String attributeValue = typedXmlPullParserResolvePullParser.getAttributeValue(null, "name");
+                                String attributeValue2 = typedXmlPullParserResolvePullParser.getAttributeValue(null, "value");
                                 if (attributeValue != null && attributeValue2 != null && ("false".equalsIgnoreCase(attributeValue2) || "true".equalsIgnoreCase(attributeValue2))) {
                                     String str = "/";
                                     if (attributeValue.startsWith(OVERRIDE_PREFIX)) {
@@ -102,10 +102,10 @@ public class AconfigFlags {
                                     } else {
                                         i = 0;
                                     }
-                                    String parseFlagPackageAndName = parseFlagPackageAndName(attributeValue, str);
-                                    if (parseFlagPackageAndName != null && this.mFlagValues.containsKey(parseFlagPackageAndName) && ((num = (Integer) arrayMap.get(parseFlagPackageAndName)) == null || num.intValue() < i)) {
-                                        arrayMap.put(parseFlagPackageAndName, Integer.valueOf(i));
-                                        this.mFlagValues.put(parseFlagPackageAndName, Boolean.valueOf(Boolean.parseBoolean(attributeValue2)));
+                                    String flagPackageAndName = parseFlagPackageAndName(attributeValue, str);
+                                    if (flagPackageAndName != null && this.mFlagValues.containsKey(flagPackageAndName) && ((num = (Integer) arrayMap.get(flagPackageAndName)) == null || num.intValue() < i)) {
+                                        arrayMap.put(flagPackageAndName, Integer.valueOf(i));
+                                        this.mFlagValues.put(flagPackageAndName, Boolean.valueOf(Boolean.parseBoolean(attributeValue2)));
                                     }
                                 }
                             }
@@ -127,11 +127,11 @@ public class AconfigFlags {
     }
 
     private static String parseFlagPackageAndName(String str, String str2) {
-        int indexOf = str.indexOf(str2);
-        if (indexOf < 0) {
+        int iIndexOf = str.indexOf(str2);
+        if (iIndexOf < 0) {
             return null;
         }
-        return str.substring(indexOf + 1);
+        return str.substring(iIndexOf + 1);
     }
 
     private void loadAconfigDefaultValues(byte[] bArr) throws IOException {
@@ -156,22 +156,22 @@ public class AconfigFlags {
         if (!this.mFlagValues.isEmpty() && this.mFlagValues.containsKey(str)) {
             return this.mFlagValues.get(str);
         }
-        int lastIndexOf = str.lastIndexOf(46);
-        if (lastIndexOf < 0) {
+        int iLastIndexOf = str.lastIndexOf(46);
+        if (iLastIndexOf < 0) {
             Slog.e(LOG_TAG, "Unable to parse package name from " + str);
             return null;
         }
-        String substring = str.substring(0, lastIndexOf);
-        String substring2 = str.substring(lastIndexOf + 1);
-        AconfigPackage computeIfAbsent = this.mAconfigPackages.computeIfAbsent(substring, new Function() { // from class: com.android.internal.pm.pkg.component.AconfigFlags$$ExternalSyntheticLambda0
+        String strSubstring = str.substring(0, iLastIndexOf);
+        String strSubstring2 = str.substring(iLastIndexOf + 1);
+        AconfigPackage aconfigPackageComputeIfAbsent = this.mAconfigPackages.computeIfAbsent(strSubstring, new Function() { // from class: com.android.internal.pm.pkg.component.AconfigFlags$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 return AconfigFlags.lambda$getFlagValueFromNewStorage$0((String) obj);
             }
         });
-        if (computeIfAbsent != null) {
+        if (aconfigPackageComputeIfAbsent != null) {
             try {
-                return Boolean.valueOf(computeIfAbsent.getBooleanFlagValue(substring2, false));
+                return Boolean.valueOf(aconfigPackageComputeIfAbsent.getBooleanFlagValue(strSubstring2, false));
             } catch (Exception e) {
                 Slog.e(LOG_TAG, "Failed to read Aconfig flag value for " + str, e);
             }
@@ -205,14 +205,14 @@ public class AconfigFlags {
         if (attributeValue == null) {
             return false;
         }
-        String strip = attributeValue.strip();
-        if (strip.startsWith("!")) {
-            strip = strip.substring(1).strip();
+        String strStrip = attributeValue.strip();
+        if (strStrip.startsWith("!")) {
+            strStrip = strStrip.substring(1).strip();
             z2 = true;
         } else {
             z2 = false;
         }
-        Boolean flagValue = getFlagValue(strip);
+        Boolean flagValue = getFlagValue(strStrip);
         if (flagValue == null) {
             flagValue = false;
             z3 = true;
@@ -222,10 +222,10 @@ public class AconfigFlags {
         boolean z4 = flagValue.booleanValue() == z2;
         if (parsingPackage != null && com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags.includeFeatureFlagsInPackageCacher()) {
             if (z3) {
-                parsingPackage.addFeatureFlag(strip, null);
+                parsingPackage.addFeatureFlag(strStrip, null);
                 return z4;
             }
-            parsingPackage.addFeatureFlag(strip, flagValue);
+            parsingPackage.addFeatureFlag(strStrip, flagValue);
         }
         return z4;
     }

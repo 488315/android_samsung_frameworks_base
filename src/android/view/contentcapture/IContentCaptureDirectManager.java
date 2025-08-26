@@ -46,9 +46,9 @@ public interface IContentCaptureDirectManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentCaptureDirectManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentCaptureDirectManager)) {
-                return (IContentCaptureDirectManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentCaptureDirectManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentCaptureDirectManager)) {
+                return (IContentCaptureDirectManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,10 +76,10 @@ public interface IContentCaptureDirectManager extends IInterface {
             }
             if (i == 1) {
                 ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 ContentCaptureOptions contentCaptureOptions = (ContentCaptureOptions) parcel.readTypedObject(ContentCaptureOptions.CREATOR);
                 parcel.enforceNoDataAvail();
-                sendEvents(parceledListSlice, readInt, contentCaptureOptions);
+                sendEvents(parceledListSlice, i3, contentCaptureOptions);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,15 +103,15 @@ public interface IContentCaptureDirectManager extends IInterface {
 
             @Override // android.view.contentcapture.IContentCaptureDirectManager
             public void sendEvents(ParceledListSlice parceledListSlice, int i, ContentCaptureOptions contentCaptureOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureDirectManager.DESCRIPTOR);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(contentCaptureOptions, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureDirectManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(contentCaptureOptions, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

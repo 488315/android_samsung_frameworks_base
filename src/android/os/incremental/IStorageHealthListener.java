@@ -48,9 +48,9 @@ public interface IStorageHealthListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStorageHealthListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStorageHealthListener)) {
-                return (IStorageHealthListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStorageHealthListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStorageHealthListener)) {
+                return (IStorageHealthListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,10 +77,10 @@ public interface IStorageHealthListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onHealthStatus(readInt, readInt2);
+                onHealthStatus(i3, i4);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,14 +104,14 @@ public interface IStorageHealthListener extends IInterface {
 
             @Override // android.os.incremental.IStorageHealthListener
             public void onHealthStatus(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStorageHealthListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStorageHealthListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

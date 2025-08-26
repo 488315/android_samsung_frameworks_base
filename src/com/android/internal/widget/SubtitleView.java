@@ -64,30 +64,30 @@ public class SubtitleView extends View {
         this.mSpacingMult = 1.0f;
         this.mSpacingAdd = 0.0f;
         this.mInnerPaddingX = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
-        int indexCount = obtainStyledAttributes.getIndexCount();
-        CharSequence charSequence = "";
-        int i3 = 15;
-        for (int i4 = 0; i4 < indexCount; i4++) {
-            int index = obtainStyledAttributes.getIndex(i4);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
+        CharSequence text = "";
+        int dimensionPixelSize = 15;
+        for (int i3 = 0; i3 < indexCount; i3++) {
+            int index = typedArrayObtainStyledAttributes.getIndex(i3);
             if (index == 0) {
-                i3 = obtainStyledAttributes.getDimensionPixelSize(index, i3);
+                dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, dimensionPixelSize);
             } else if (index == 18) {
-                charSequence = obtainStyledAttributes.getText(index);
+                text = typedArrayObtainStyledAttributes.getText(index);
             } else if (index == 53) {
-                this.mSpacingAdd = obtainStyledAttributes.getDimensionPixelSize(index, (int) this.mSpacingAdd);
+                this.mSpacingAdd = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, (int) this.mSpacingAdd);
             } else if (index == 54) {
-                this.mSpacingMult = obtainStyledAttributes.getFloat(index, this.mSpacingMult);
+                this.mSpacingMult = typedArrayObtainStyledAttributes.getFloat(index, this.mSpacingMult);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         Resources resources = getContext().getResources();
         this.mCornerRadius = resources.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_corner_radius);
         this.mOutlineWidth = resources.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_outline_width);
         this.mShadowRadius = resources.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_radius);
-        float dimensionPixelSize = resources.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_offset);
-        this.mShadowOffsetX = dimensionPixelSize;
-        this.mShadowOffsetY = dimensionPixelSize;
+        float dimensionPixelSize2 = resources.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_offset);
+        this.mShadowOffsetX = dimensionPixelSize2;
+        this.mShadowOffsetY = dimensionPixelSize2;
         TextPaint textPaint = new TextPaint();
         this.mTextPaint = textPaint;
         textPaint.setAntiAlias(true);
@@ -95,8 +95,8 @@ public class SubtitleView extends View {
         Paint paint = new Paint();
         this.mPaint = paint;
         paint.setAntiAlias(true);
-        setText(charSequence);
-        setTextSize(i3);
+        setText(text);
+        setTextSize(dimensionPixelSize);
     }
 
     public void setText(int i) {
@@ -191,20 +191,20 @@ public class SubtitleView extends View {
     }
 
     public void setStyle(int i) {
-        CaptioningManager.CaptionStyle captionStyle;
+        CaptioningManager.CaptionStyle customStyle;
         ContentResolver contentResolver = this.mContext.getContentResolver();
         if (i == -1) {
-            captionStyle = CaptioningManager.CaptionStyle.getCustomStyle(contentResolver);
+            customStyle = CaptioningManager.CaptionStyle.getCustomStyle(contentResolver);
         } else {
-            captionStyle = CaptioningManager.CaptionStyle.PRESETS[i];
+            customStyle = CaptioningManager.CaptionStyle.PRESETS[i];
         }
-        CaptioningManager.CaptionStyle captionStyle2 = CaptioningManager.CaptionStyle.DEFAULT;
-        this.mForegroundColor = captionStyle.hasForegroundColor() ? captionStyle.foregroundColor : captionStyle2.foregroundColor;
-        this.mBackgroundColor = captionStyle.hasBackgroundColor() ? captionStyle.backgroundColor : captionStyle2.backgroundColor;
-        this.mEdgeType = captionStyle.hasEdgeType() ? captionStyle.edgeType : captionStyle2.edgeType;
-        this.mEdgeColor = captionStyle.hasEdgeColor() ? captionStyle.edgeColor : captionStyle2.edgeColor;
+        CaptioningManager.CaptionStyle captionStyle = CaptioningManager.CaptionStyle.DEFAULT;
+        this.mForegroundColor = customStyle.hasForegroundColor() ? customStyle.foregroundColor : captionStyle.foregroundColor;
+        this.mBackgroundColor = customStyle.hasBackgroundColor() ? customStyle.backgroundColor : captionStyle.backgroundColor;
+        this.mEdgeType = customStyle.hasEdgeType() ? customStyle.edgeType : captionStyle.edgeType;
+        this.mEdgeColor = customStyle.hasEdgeColor() ? customStyle.edgeColor : captionStyle.edgeColor;
         this.mHasMeasurements = false;
-        setTypeface(captionStyle.getTypeface());
+        setTypeface(customStyle.getTypeface());
         requestLayout();
     }
 
@@ -214,7 +214,7 @@ public class SubtitleView extends View {
         if (staticLayout == null) {
             return;
         }
-        int save = canvas.save();
+        int iSave = canvas.save();
         int i = this.mInnerPaddingX;
         canvas.translate(this.mPaddingLeft + i, this.mPaddingTop);
         int lineCount = staticLayout.getLineCount();
@@ -267,6 +267,6 @@ public class SubtitleView extends View {
             staticLayout.drawText(canvas, i8, i8);
         }
         textPaint.setShadowLayer(0.0f, 0.0f, 0.0f, 0);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 }

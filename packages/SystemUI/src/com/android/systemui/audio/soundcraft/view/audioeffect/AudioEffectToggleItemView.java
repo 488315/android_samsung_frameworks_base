@@ -1,6 +1,7 @@
 package com.android.systemui.audio.soundcraft.view.audioeffect;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
     public final AudioEffectToggleItemViewBinding binding;
@@ -51,7 +51,7 @@ public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
                 switch (i) {
                     case 0:
                         this.f$0.binding.name.setText((String) obj);
@@ -89,7 +89,7 @@ public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
                 switch (i3) {
                     case 0:
                         this.f$0.binding.name.setText((String) obj);
@@ -127,7 +127,7 @@ public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
                 switch (i4) {
                     case 0:
                         this.f$0.binding.name.setText((String) obj);
@@ -165,7 +165,7 @@ public final class AudioEffectToggleItemView extends BaseAudioEffectItemView {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
                 switch (i5) {
                     case 0:
                         this.f$0.binding.name.setText((String) obj);

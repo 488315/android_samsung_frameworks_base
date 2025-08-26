@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -32,14 +31,14 @@ final class DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 exten
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
         DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 = new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1(this.this$0, (Continuation) obj5);
         deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.L$0 = (AuthenticationRequest) obj;
-        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$0 = booleanValue;
-        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$1 = booleanValue2;
-        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$2 = booleanValue3;
+        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$0 = zBooleanValue;
+        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$1 = zBooleanValue2;
+        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.Z$2 = zBooleanValue3;
         return deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -64,13 +63,13 @@ final class DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$1 exten
             LogLevel logLevel = LogLevel.DEBUG;
             FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = faceAuthUiEvent.getReason();
             logMessageImpl.bool1 = z;
             logMessageImpl.bool2 = z2;
             logMessageImpl.bool3 = z3;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         return null;
     }

@@ -172,23 +172,23 @@ public abstract class AccessibilityDisplayProxy {
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-                    AccessibilityDisplayProxy.this.onAccessibilityEvent(accessibilityEvent);
+                    accessibilityDisplayProxy.onAccessibilityEvent(accessibilityEvent);
                 }
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void onInterrupt() {
-                    AccessibilityDisplayProxy.this.interrupt();
+                    accessibilityDisplayProxy.interrupt();
                 }
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void onServiceConnected() {
-                    AccessibilityDisplayProxy.this.sendServiceInfos();
-                    AccessibilityDisplayProxy.this.onProxyConnected();
+                    accessibilityDisplayProxy.sendServiceInfos();
+                    accessibilityDisplayProxy.onProxyConnected();
                 }
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void init(int i, IBinder iBinder) {
-                    AccessibilityDisplayProxy.this.mConnectionId = i;
+                    accessibilityDisplayProxy.mConnectionId = i;
                 }
             });
         }

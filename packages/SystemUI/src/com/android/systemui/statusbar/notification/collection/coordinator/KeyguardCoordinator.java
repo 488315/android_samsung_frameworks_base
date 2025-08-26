@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.notification.stack.AmbientState;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class KeyguardCoordinator implements Coordinator {
@@ -26,9 +25,7 @@ public final class KeyguardCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
         public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
-            KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider;
-            keyguardNotificationVisibilityProvider = KeyguardCoordinator.this.keyguardNotificationVisibilityProvider;
-            return ((KeyguardNotificationVisibilityProviderImpl) keyguardNotificationVisibilityProvider).shouldHideNotification(notificationEntry);
+            return ((KeyguardNotificationVisibilityProviderImpl) this.this$0.keyguardNotificationVisibilityProvider).shouldHideNotification(notificationEntry);
         }
     };
     private final SectionHeaderVisibilityProvider sectionHeaderVisibilityProvider;
@@ -36,7 +33,6 @@ public final class KeyguardCoordinator implements Coordinator {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,7 +70,7 @@ public final class KeyguardCoordinator implements Coordinator {
         setupInvalidateNotifListCallbacks();
         notifPipeline.addFinalizeFilter(this.notifFilter);
         KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider = this.keyguardNotificationVisibilityProvider;
-        ((KeyguardNotificationVisibilityProviderImpl) keyguardNotificationVisibilityProvider).onStateChangedListeners.addIfAbsent(new Consumer() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator$attach$1
+        ((KeyguardNotificationVisibilityProviderImpl) keyguardNotificationVisibilityProvider).onStateChangedListeners.addIfAbsent(new Consumer() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.KeyguardCoordinator.attach.1
             @Override // java.util.function.Consumer
             public final void accept(String str) {
                 KeyguardCoordinator.this.invalidateListFromFilter(str);

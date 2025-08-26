@@ -1,6 +1,7 @@
 package com.android.wm.shell.compatui.coverlauncher;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,7 +11,6 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CoverLauncherAppCompatFloatingIcon {
     public final Context mContext;
@@ -47,12 +47,12 @@ public class CoverLauncherAppCompatFloatingIcon {
         this.mType = str;
     }
 
-    public final void fadeOutAnimation() {
+    public final void fadeOutAnimation() throws Resources.NotFoundException {
         this.mIconArea.startAnimation(AnimationUtils.loadAnimation(this.mContext, R.anim.fw_cover_launcher_app_compat_floating_icon_fadeout));
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.wm.shell.compatui.coverlauncher.CoverLauncherAppCompatFloatingIcon$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CoverLauncherAppCompatFloatingIcon coverLauncherAppCompatFloatingIcon = CoverLauncherAppCompatFloatingIcon.this;
+                CoverLauncherAppCompatFloatingIcon coverLauncherAppCompatFloatingIcon = this.f$0;
                 View view = coverLauncherAppCompatFloatingIcon.mOverlayView;
                 if (view != null) {
                     view.setVisibility(8);

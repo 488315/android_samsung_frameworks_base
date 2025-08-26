@@ -7,7 +7,6 @@ import java.util.Set;
 import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewModelImpl {
     public final Set closeables;
@@ -21,7 +20,7 @@ public final class ViewModelImpl {
         this.closeables = new LinkedHashSet();
     }
 
-    public final void addCloseable(String str, AutoCloseable autoCloseable) {
+    public final void addCloseable(String str, AutoCloseable autoCloseable) throws Exception {
         AutoCloseable autoCloseable2;
         if (this.isCleared) {
             try {
@@ -43,7 +42,7 @@ public final class ViewModelImpl {
         }
     }
 
-    public ViewModelImpl(CoroutineScope coroutineScope) {
+    public ViewModelImpl(CoroutineScope coroutineScope) throws Exception {
         this.lock = new SynchronizedObject();
         this.keyToCloseables = new LinkedHashMap();
         this.closeables = new LinkedHashSet();
@@ -58,7 +57,7 @@ public final class ViewModelImpl {
         CollectionsKt__MutableCollectionsKt.addAll(linkedHashSet, autoCloseableArr);
     }
 
-    public ViewModelImpl(CoroutineScope coroutineScope, AutoCloseable... autoCloseableArr) {
+    public ViewModelImpl(CoroutineScope coroutineScope, AutoCloseable... autoCloseableArr) throws Exception {
         this.lock = new SynchronizedObject();
         this.keyToCloseables = new LinkedHashMap();
         LinkedHashSet linkedHashSet = new LinkedHashSet();

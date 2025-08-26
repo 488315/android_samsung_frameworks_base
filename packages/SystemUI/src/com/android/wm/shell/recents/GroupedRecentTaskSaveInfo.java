@@ -4,9 +4,9 @@ import android.graphics.Rect;
 import com.android.wm.shell.shared.split.SplitBounds;
 import com.samsung.android.rune.CoreRune;
 import java.util.Objects;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GroupedRecentTaskSaveInfo {
     public Rect mCellBounds;
@@ -59,7 +59,7 @@ public class GroupedRecentTaskSaveInfo {
         return this.mLeftTopTaskId == groupedRecentTaskSaveInfo.mLeftTopTaskId && this.mRightBottomTaskId == groupedRecentTaskSaveInfo.mRightBottomTaskId && this.mCellTaskId == groupedRecentTaskSaveInfo.mCellTaskId && Objects.equals(this.mLeftTopBounds, groupedRecentTaskSaveInfo.mLeftTopBounds) && Objects.equals(this.mRightBottomBounds, groupedRecentTaskSaveInfo.mRightBottomBounds) && Objects.equals(this.mCellBounds, groupedRecentTaskSaveInfo.mCellBounds) && this.mSplitDivision == groupedRecentTaskSaveInfo.mSplitDivision && this.mCellPosition == groupedRecentTaskSaveInfo.mCellPosition && this.mParallelMultiSplit == groupedRecentTaskSaveInfo.mParallelMultiSplit;
     }
 
-    public final JSONObject groupedRecentTaskSaveInfoToJSON() {
+    public final JSONObject groupedRecentTaskSaveInfoToJSON() throws JSONException {
         JSONObject jSONObject = new JSONObject();
         jSONObject.put("left_top_taskid", this.mLeftTopTaskId);
         jSONObject.put("right_bottom_taskid", this.mRightBottomTaskId);

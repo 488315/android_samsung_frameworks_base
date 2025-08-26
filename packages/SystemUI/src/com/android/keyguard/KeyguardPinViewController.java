@@ -1,5 +1,6 @@
 package com.android.keyguard;
 
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -21,7 +22,6 @@ import com.android.systemui.statusbar.policy.DevicePostureControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewController {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -31,7 +31,6 @@ public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewContr
     public final DevicePostureController mPostureController;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PinBouncerUiEvent implements UiEventLogger.UiEventEnum {
         ATTEMPT_UNLOCK_WITH_AUTO_CONFIRM_FEATURE(1547);
 
@@ -52,7 +51,7 @@ public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewContr
         this.mPostureCallback = new DevicePostureController.Callback() { // from class: com.android.keyguard.KeyguardPinViewController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
             public final void onPostureChanged(int i) {
-                ((KeyguardPINView) KeyguardPinViewController.this.mView).onDevicePostureChanged(i);
+                ((KeyguardPINView) this.f$0.mView).onDevicePostureChanged(i);
             }
         };
         this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;
@@ -66,7 +65,7 @@ public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewContr
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
-    public final void onUserInput() {
+    public final void onUserInput() throws Resources.NotFoundException {
         super.onUserInput();
         if (this.mLockPatternUtils.isAutoPinConfirmEnabled(this.mSelectedUserInteractor.getSelectedUserId()) && this.mPinLength != -1 && this.mPasswordEntry.getText().length() == this.mPinLength && this.mOkButton.getVisibility() == 4) {
             this.mUiEventLogger.log(PinBouncerUiEvent.ATTEMPT_UNLOCK_WITH_AUTO_CONFIRM_FEATURE);
@@ -77,12 +76,12 @@ public class KeyguardPinViewController extends KeyguardSecPinBasedInputViewContr
     @Override // com.android.keyguard.KeyguardSecPinBasedInputViewController, com.android.keyguard.KeyguardPinBasedInputViewController, com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController, com.android.systemui.util.ViewController
     public void onViewAttached() {
         super.onViewAttached();
-        View findViewById = ((KeyguardPINView) this.mView).findViewById(R.id.cancel_button);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardPinViewController$$ExternalSyntheticLambda1
+        View viewFindViewById = ((KeyguardPINView) this.mView).findViewById(R.id.cancel_button);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardPinViewController$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    KeyguardPinViewController keyguardPinViewController = KeyguardPinViewController.this;
+                    KeyguardPinViewController keyguardPinViewController = this.f$0;
                     keyguardPinViewController.getKeyguardSecurityCallback().reset();
                     keyguardPinViewController.getKeyguardSecurityCallback().onCancelClicked();
                 }

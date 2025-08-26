@@ -45,9 +45,9 @@ public interface IServiceConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceConnection)) {
-                return (IServiceConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceConnection)) {
+                return (IServiceConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IServiceConnection extends IInterface {
             }
             if (i == 1) {
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                connected(componentName, readStrongBinder, readBoolean);
+                connected(componentName, strongBinder, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,15 +102,15 @@ public interface IServiceConnection extends IInterface {
 
             @Override // android.app.IServiceConnection
             public void connected(ComponentName componentName, IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -44,9 +44,9 @@ public interface ITaskFragmentOrganizer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITaskFragmentOrganizer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskFragmentOrganizer)) {
-                return (ITaskFragmentOrganizer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITaskFragmentOrganizer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskFragmentOrganizer)) {
+                return (ITaskFragmentOrganizer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ITaskFragmentOrganizer extends IInterface {
 
             @Override // android.window.ITaskFragmentOrganizer
             public void onTransactionReady(TaskFragmentTransaction taskFragmentTransaction) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskFragmentOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(taskFragmentTransaction, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskFragmentOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(taskFragmentTransaction, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

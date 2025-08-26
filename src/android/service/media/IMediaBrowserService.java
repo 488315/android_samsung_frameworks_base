@@ -90,9 +90,9 @@ public interface IMediaBrowserService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaBrowserService)) {
-                return (IMediaBrowserService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaBrowserService)) {
+                return (IMediaBrowserService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,50 +134,50 @@ public interface IMediaBrowserService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IMediaBrowserServiceCallbacks asInterface = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    connect(readString, bundle, asInterface);
+                    connect(string, bundle, iMediaBrowserServiceCallbacksAsInterface);
                     return true;
                 case 2:
-                    IMediaBrowserServiceCallbacks asInterface2 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface2 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    disconnect(asInterface2);
+                    disconnect(iMediaBrowserServiceCallbacksAsInterface2);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    IMediaBrowserServiceCallbacks asInterface3 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface3 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addSubscriptionDeprecated(readString2, asInterface3);
+                    addSubscriptionDeprecated(string2, iMediaBrowserServiceCallbacksAsInterface3);
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    IMediaBrowserServiceCallbacks asInterface4 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface4 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeSubscriptionDeprecated(readString3, asInterface4);
+                    removeSubscriptionDeprecated(string3, iMediaBrowserServiceCallbacksAsInterface4);
                     return true;
                 case 5:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
-                    IMediaBrowserServiceCallbacks asInterface5 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface5 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getMediaItem(readString4, resultReceiver, asInterface5);
+                    getMediaItem(string4, resultReceiver, iMediaBrowserServiceCallbacksAsInterface5);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    String string5 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IMediaBrowserServiceCallbacks asInterface6 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface6 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addSubscription(readString5, readStrongBinder, bundle2, asInterface6);
+                    addSubscription(string5, strongBinder, bundle2, iMediaBrowserServiceCallbacksAsInterface6);
                     return true;
                 case 7:
-                    String readString6 = parcel.readString();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    IMediaBrowserServiceCallbacks asInterface7 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    String string6 = parcel.readString();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacksAsInterface7 = IMediaBrowserServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeSubscription(readString6, readStrongBinder2, asInterface7);
+                    removeSubscription(string6, strongBinder2, iMediaBrowserServiceCallbacksAsInterface7);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -202,96 +202,96 @@ public interface IMediaBrowserService extends IInterface {
 
             @Override // android.service.media.IMediaBrowserService
             public void connect(String str, Bundle bundle, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void disconnect(IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void addSubscriptionDeprecated(String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void removeSubscriptionDeprecated(String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void getMediaItem(String str, ResultReceiver resultReceiver, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void addSubscription(String str, IBinder iBinder, Bundle bundle, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.media.IMediaBrowserService
             public void removeSubscription(String str, IBinder iBinder, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iMediaBrowserServiceCallbacks);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -39,8 +39,8 @@ final class UnsafeUtil {
     private static final boolean HAS_UNSAFE_ARRAY_OPERATIONS = supportsUnsafeArrayOperations();
 
     static {
-        long arrayBaseOffset = arrayBaseOffset(byte[].class);
-        BYTE_ARRAY_BASE_OFFSET = arrayBaseOffset;
+        long jArrayBaseOffset = arrayBaseOffset(byte[].class);
+        BYTE_ARRAY_BASE_OFFSET = jArrayBaseOffset;
         BOOLEAN_ARRAY_BASE_OFFSET = arrayBaseOffset(boolean[].class);
         BOOLEAN_ARRAY_INDEX_SCALE = arrayIndexScale(boolean[].class);
         INT_ARRAY_BASE_OFFSET = arrayBaseOffset(int[].class);
@@ -54,7 +54,7 @@ final class UnsafeUtil {
         OBJECT_ARRAY_BASE_OFFSET = arrayBaseOffset(Object[].class);
         OBJECT_ARRAY_INDEX_SCALE = arrayIndexScale(Object[].class);
         BUFFER_ADDRESS_OFFSET = fieldOffset(bufferAddressField());
-        BYTE_ARRAY_ALIGNMENT = (int) (arrayBaseOffset & 7);
+        BYTE_ARRAY_ALIGNMENT = (int) (jArrayBaseOffset & 7);
         IS_BIG_ENDIAN = ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN;
     }
 
@@ -342,13 +342,13 @@ final class UnsafeUtil {
     }
 
     private static int firstDifferingByteIndexNativeEndian(long j, long j2) {
-        int numberOfTrailingZeros;
+        int iNumberOfTrailingZeros;
         if (IS_BIG_ENDIAN) {
-            numberOfTrailingZeros = Long.numberOfLeadingZeros(j ^ j2);
+            iNumberOfTrailingZeros = Long.numberOfLeadingZeros(j ^ j2);
         } else {
-            numberOfTrailingZeros = Long.numberOfTrailingZeros(j ^ j2);
+            iNumberOfTrailingZeros = Long.numberOfTrailingZeros(j ^ j2);
         }
-        return numberOfTrailingZeros >> 3;
+        return iNumberOfTrailingZeros >> 3;
     }
 
     static int mismatch(byte[] bArr, int i, byte[] bArr2, int i2, int i3) {

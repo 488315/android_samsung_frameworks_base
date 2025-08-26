@@ -96,9 +96,9 @@ public class CaptureResultExtras implements Parcelable {
         this.lastCompletedRegularFrameNumber = parcel.readLong();
         this.lastCompletedReprocessFrameNumber = parcel.readLong();
         this.lastCompletedZslFrameNumber = parcel.readLong();
-        boolean readBoolean = parcel.readBoolean();
-        this.hasReadoutTimestamp = readBoolean;
-        if (readBoolean) {
+        boolean z = parcel.readBoolean();
+        this.hasReadoutTimestamp = z;
+        if (z) {
             this.readoutTimestamp = parcel.readLong();
         }
     }

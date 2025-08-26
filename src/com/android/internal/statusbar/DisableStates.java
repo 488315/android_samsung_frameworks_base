@@ -12,12 +12,12 @@ public class DisableStates implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public DisableStates createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            HashMap hashMap = new HashMap(readInt);
-            for (int i = 0; i < readInt; i++) {
-                hashMap.put(Integer.valueOf(parcel.readInt()), new Pair(Integer.valueOf(parcel.readInt()), Integer.valueOf(parcel.readInt())));
+            int i = parcel.readInt();
+            HashMap map = new HashMap(i);
+            for (int i2 = 0; i2 < i; i2++) {
+                map.put(Integer.valueOf(parcel.readInt()), new Pair(Integer.valueOf(parcel.readInt()), Integer.valueOf(parcel.readInt())));
             }
-            return new DisableStates(hashMap, parcel.readBoolean());
+            return new DisableStates(map, parcel.readBoolean());
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

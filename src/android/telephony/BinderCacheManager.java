@@ -104,9 +104,7 @@ public class BinderCacheManager<T extends IInterface> {
         return this.mCachedConnection.updateAndGet(new UnaryOperator() { // from class: android.telephony.BinderCacheManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                BinderCacheManager.BinderDeathTracker lambda$getTracker$0;
-                lambda$getTracker$0 = BinderCacheManager.this.lambda$getTracker$0((BinderCacheManager.BinderDeathTracker) obj);
-                return lambda$getTracker$0;
+                return this.f$0.lambda$getTracker$0((BinderCacheManager.BinderDeathTracker) obj);
             }
         });
     }
@@ -114,8 +112,8 @@ public class BinderCacheManager<T extends IInterface> {
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ BinderDeathTracker lambda$getTracker$0(BinderDeathTracker binderDeathTracker) {
         if (binderDeathTracker == null || !binderDeathTracker.isAlive()) {
-            T create = this.mBinderInterfaceFactory.create();
-            binderDeathTracker = create != null ? new BinderDeathTracker(this, create) : null;
+            T tCreate = this.mBinderInterfaceFactory.create();
+            binderDeathTracker = tCreate != null ? new BinderDeathTracker(this, tCreate) : null;
         }
         if (binderDeathTracker == null || !binderDeathTracker.isAlive()) {
             return null;

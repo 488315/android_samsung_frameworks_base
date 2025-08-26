@@ -7,13 +7,13 @@ import java.util.Arrays;
 /* loaded from: classes4.dex */
 public class ProtoUtils {
     public static void toAggStatsProto(ProtoOutputStream protoOutputStream, long j, long j2, long j3, long j4, int i, int i2) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1112396529665L, j2);
         protoOutputStream.write(1112396529666L, j3);
         protoOutputStream.write(1112396529667L, j4);
         protoOutputStream.write(1120986464260L, i);
         protoOutputStream.write(1120986464261L, i2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static void toAggStatsProto(ProtoOutputStream protoOutputStream, long j, long j2, long j3, long j4) {
@@ -21,10 +21,10 @@ public class ProtoUtils {
     }
 
     public static void toDuration(ProtoOutputStream protoOutputStream, long j, long j2, long j3) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1112396529665L, j2);
         protoOutputStream.write(1112396529666L, j3);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static void writeBitWiseFlagsToProtoEnum(ProtoOutputStream protoOutputStream, long j, long j2, int[] iArr, int[] iArr2) {
@@ -54,25 +54,25 @@ public class ProtoUtils {
         sb.append(Integer.toHexString(protoInputStream.getFieldNumber()));
         sb.append("\nWire Type : ");
         if (wireType == 0) {
-            long makeFieldId = ProtoStream.makeFieldId(fieldNumber, 1112396529664L);
+            long jMakeFieldId = ProtoStream.makeFieldId(fieldNumber, 1112396529664L);
             sb.append("varint\nField Value : 0x");
-            sb.append(Long.toHexString(protoInputStream.readLong(makeFieldId)));
+            sb.append(Long.toHexString(protoInputStream.readLong(jMakeFieldId)));
         } else if (wireType == 1) {
-            long makeFieldId2 = ProtoStream.makeFieldId(fieldNumber, 1125281431552L);
+            long jMakeFieldId2 = ProtoStream.makeFieldId(fieldNumber, 1125281431552L);
             sb.append("fixed64\nField Value : 0x");
-            sb.append(Long.toHexString(protoInputStream.readLong(makeFieldId2)));
+            sb.append(Long.toHexString(protoInputStream.readLong(jMakeFieldId2)));
         } else if (wireType == 2) {
-            long makeFieldId3 = ProtoStream.makeFieldId(fieldNumber, 1151051235328L);
+            long jMakeFieldId3 = ProtoStream.makeFieldId(fieldNumber, 1151051235328L);
             sb.append("length delimited\nField Bytes : ");
-            sb.append(Arrays.toString(protoInputStream.readBytes(makeFieldId3)));
+            sb.append(Arrays.toString(protoInputStream.readBytes(jMakeFieldId3)));
         } else if (wireType == 3) {
             sb.append("start group");
         } else if (wireType == 4) {
             sb.append("end group");
         } else if (wireType == 5) {
-            long makeFieldId4 = ProtoStream.makeFieldId(fieldNumber, 1129576398848L);
+            long jMakeFieldId4 = ProtoStream.makeFieldId(fieldNumber, 1129576398848L);
             sb.append("fixed32\nField Value : 0x");
-            sb.append(Integer.toHexString(protoInputStream.readInt(makeFieldId4)));
+            sb.append(Integer.toHexString(protoInputStream.readInt(jMakeFieldId4)));
         } else {
             sb.append("unknown(");
             sb.append(protoInputStream.getWireType());

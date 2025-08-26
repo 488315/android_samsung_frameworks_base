@@ -55,8 +55,8 @@ public class DigitalClock extends TextView {
                 DigitalClock digitalClock = DigitalClock.this;
                 digitalClock.lambda$setTextAsync$0(DateFormat.format(digitalClock.mFormat, DigitalClock.this.mCalendar));
                 DigitalClock.this.invalidate();
-                long uptimeMillis = SystemClock.uptimeMillis();
-                DigitalClock.this.mHandler.postAtTime(DigitalClock.this.mTicker, uptimeMillis + (1000 - (uptimeMillis % 1000)));
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                DigitalClock.this.mHandler.postAtTime(DigitalClock.this.mTicker, jUptimeMillis + (1000 - (jUptimeMillis % 1000)));
             }
         };
         this.mTicker = runnable;

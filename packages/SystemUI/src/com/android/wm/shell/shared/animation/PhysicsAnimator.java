@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhysicsAnimator {
     public static final Companion Companion = new Companion(null);
@@ -43,7 +42,6 @@ public final class PhysicsAnimator {
     public final ArrayList updateListeners;
     public final WeakReference weakTarget;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationUpdate {
         public final float value;
         public final float velocity;
@@ -76,7 +74,6 @@ public final class PhysicsAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,12 +94,10 @@ public final class PhysicsAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface EndListener {
         void onAnimationEnd(Object obj, FloatPropertyCompat floatPropertyCompat, boolean z, boolean z2, float f, float f2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InternalListener {
         public final List endActions;
         public final List endListeners;
@@ -133,7 +128,6 @@ public final class PhysicsAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface UpdateListener {
         void onAnimationUpdateForProperty(Object obj);
     }
@@ -165,15 +159,15 @@ public final class PhysicsAnimator {
         int size = this.flingAnimations.size();
         Function1 function1 = this.cancelAction;
         if (size > 0) {
-            ((PhysicsAnimator$cancelAction$1) function1).mo779invoke(this.flingAnimations.keySet());
+            ((PhysicsAnimator$cancelAction$1) function1).mo781invoke(this.flingAnimations.keySet());
         }
         if (this.springAnimations.size() > 0) {
-            ((PhysicsAnimator$cancelAction$1) function1).mo779invoke(this.springAnimations.keySet());
+            ((PhysicsAnimator$cancelAction$1) function1).mo781invoke(this.springAnimations.keySet());
         }
     }
 
     public final void flingThenSpring(FloatPropertyCompat floatPropertyCompat, float f, FlingConfig flingConfig, SpringConfig springConfig, boolean z) {
-        float f2 = f;
+        float fMin = f;
         Object obj = this.weakTarget.get();
         if (obj == null) {
             Log.w("PhysicsAnimator", "Trying to animate a GC-ed target.");
@@ -181,34 +175,34 @@ public final class PhysicsAnimator {
         }
         FlingConfig flingConfig2 = new FlingConfig(flingConfig.friction, flingConfig.min, flingConfig.max, flingConfig.startVelocity);
         SpringConfig springConfig2 = new SpringConfig(springConfig.stiffness, springConfig.dampingRatio, springConfig.startVelocity, springConfig.finalPosition);
-        float f3 = f2 < 0.0f ? flingConfig.min : flingConfig.max;
-        if (!z || f3 >= Float.MAX_VALUE || f3 <= -3.4028235E38f) {
-            flingConfig2.startVelocity = f2;
+        float f2 = fMin < 0.0f ? flingConfig.min : flingConfig.max;
+        if (!z || f2 >= Float.MAX_VALUE || f2 <= -3.4028235E38f) {
+            flingConfig2.startVelocity = fMin;
         } else {
             float value = floatPropertyCompat.getValue(obj);
-            float f4 = flingConfig.friction * 4.2f;
-            float f5 = (f2 / f4) + value;
-            float f6 = flingConfig.min;
-            float f7 = flingConfig.max;
-            float f8 = (f6 + f7) / 2;
-            if ((f2 < 0.0f && f5 > f8) || (f2 > 0.0f && f5 < f8)) {
-                if (f5 >= f8) {
-                    f6 = f7;
+            float f3 = flingConfig.friction * 4.2f;
+            float f4 = (fMin / f3) + value;
+            float f5 = flingConfig.min;
+            float f6 = flingConfig.max;
+            float f7 = (f5 + f6) / 2;
+            if ((fMin < 0.0f && f4 > f7) || (fMin > 0.0f && f4 < f7)) {
+                if (f4 >= f7) {
+                    f5 = f6;
                 }
-                if (f6 < Float.MAX_VALUE && f6 > -3.4028235E38f) {
-                    spring(floatPropertyCompat, f6, f2, springConfig);
+                if (f5 < Float.MAX_VALUE && f5 > -3.4028235E38f) {
+                    spring(floatPropertyCompat, f5, fMin, springConfig);
                     return;
                 }
             }
-            float value2 = f3 - floatPropertyCompat.getValue(obj);
-            float f9 = f4 * value2;
-            if (value2 > 0.0f && f2 >= 0.0f) {
-                f2 = Math.max(f9, f2);
-            } else if (value2 < 0.0f && f2 <= 0.0f) {
-                f2 = Math.min(f9, f2);
+            float value2 = f2 - floatPropertyCompat.getValue(obj);
+            float f8 = f3 * value2;
+            if (value2 > 0.0f && fMin >= 0.0f) {
+                fMin = Math.max(f8, fMin);
+            } else if (value2 < 0.0f && fMin <= 0.0f) {
+                fMin = Math.min(f8, fMin);
             }
-            flingConfig2.startVelocity = f2;
-            springConfig2.finalPosition = f3;
+            flingConfig2.startVelocity = fMin;
+            springConfig2.finalPosition = f2;
         }
         this.flingConfigs.put(floatPropertyCompat, flingConfig2);
         this.springConfigs.put(floatPropertyCompat, springConfig2);
@@ -224,10 +218,10 @@ public final class PhysicsAnimator {
     }
 
     public final boolean isRunning() {
-        Set keySet = this.springAnimations.keySet();
-        Set keySet2 = this.flingAnimations.keySet();
-        Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(keySet);
-        CollectionsKt__MutableCollectionsKt.addAll(keySet2, mutableSet);
+        Set setKeySet = this.springAnimations.keySet();
+        Set setKeySet2 = this.flingAnimations.keySet();
+        Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(setKeySet);
+        CollectionsKt__MutableCollectionsKt.addAll(setKeySet2, mutableSet);
         return arePropertiesAnimating(mutableSet);
     }
 
@@ -243,7 +237,6 @@ public final class PhysicsAnimator {
         this.endActions.addAll(ArraysKt___ArraysKt.filterNotNull(function0Arr));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingConfig {
         public final float friction;
         public float max;
@@ -274,20 +267,9 @@ public final class PhysicsAnimator {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public FlingConfig(float r3) {
-            /*
-                r2 = this;
-                com.android.wm.shell.shared.animation.PhysicsAnimator$FlingConfig r0 = com.android.wm.shell.shared.animation.PhysicsAnimatorKt.globalDefaultFling
-                float r1 = r0.min
-                float r0 = r0.max
-                r2.<init>(r3, r1, r0)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.shared.animation.PhysicsAnimator.FlingConfig.<init>(float):void");
+        public FlingConfig(float f) {
+            FlingConfig flingConfig = PhysicsAnimatorKt.globalDefaultFling;
+            this(f, flingConfig.min, flingConfig.max);
         }
 
         public FlingConfig(float f, float f2, float f3, float f4) {
@@ -302,7 +284,6 @@ public final class PhysicsAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpringConfig {
         public final float dampingRatio;
         public float finalPosition;
@@ -310,20 +291,9 @@ public final class PhysicsAnimator {
         public final float stiffness;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public SpringConfig() {
-            /*
-                r2 = this;
-                com.android.wm.shell.shared.animation.PhysicsAnimator$SpringConfig r0 = com.android.wm.shell.shared.animation.PhysicsAnimatorKt.globalDefaultSpring
-                float r1 = r0.stiffness
-                float r0 = r0.dampingRatio
-                r2.<init>(r1, r0)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.shared.animation.PhysicsAnimator.SpringConfig.<init>():void");
+            SpringConfig springConfig = PhysicsAnimatorKt.globalDefaultSpring;
+            this(springConfig.stiffness, springConfig.dampingRatio);
         }
 
         public final void applyToAnimation$frameworks__base__libs__WindowManager__Shell__shared__android_common__WindowManager_Shell_shared(SpringAnimation springAnimation) {
@@ -378,26 +348,13 @@ public final class PhysicsAnimator {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ SpringConfig(float r1, float r2, float r3, float r4, int r5, kotlin.jvm.internal.DefaultConstructorMarker r6) {
-            /*
-                r0 = this;
-                r6 = r5 & 4
-                if (r6 == 0) goto L5
-                r3 = 0
-            L5:
-                r5 = r5 & 8
-                if (r5 == 0) goto Le
-                java.util.WeakHashMap r4 = com.android.wm.shell.shared.animation.PhysicsAnimatorKt.animators
-                r4 = -8388609(0xffffffffff7fffff, float:-3.4028235E38)
-            Le:
-                r0.<init>(r1, r2, r3, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.shared.animation.PhysicsAnimator.SpringConfig.<init>(float, float, float, float, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ SpringConfig(float f, float f2, float f3, float f4, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            f3 = (i & 4) != 0 ? 0.0f : f3;
+            if ((i & 8) != 0) {
+                WeakHashMap weakHashMap = PhysicsAnimatorKt.animators;
+                f4 = -3.4028235E38f;
+            }
+            this(f, f2, f3, f4);
         }
 
         public SpringConfig(float f, float f2) {
@@ -422,9 +379,9 @@ public final class PhysicsAnimator {
 
     public final void withEndActions(Runnable... runnableArr) {
         ArrayList arrayList = this.endActions;
-        List filterNotNull = ArraysKt___ArraysKt.filterNotNull(runnableArr);
-        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(filterNotNull, 10));
-        Iterator it = filterNotNull.iterator();
+        List listFilterNotNull = ArraysKt___ArraysKt.filterNotNull(runnableArr);
+        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listFilterNotNull, 10));
+        Iterator it = listFilterNotNull.iterator();
         while (it.hasNext()) {
             arrayList2.add(new PhysicsAnimator$withEndActions$1$1((Runnable) it.next()));
         }
@@ -438,6 +395,6 @@ public final class PhysicsAnimator {
     }
 
     public final void cancel(FloatPropertyCompat... floatPropertyCompatArr) {
-        ((PhysicsAnimator$cancelAction$1) this.cancelAction).mo779invoke(ArraysKt___ArraysKt.toSet(floatPropertyCompatArr));
+        ((PhysicsAnimator$cancelAction$1) this.cancelAction).mo781invoke(ArraysKt___ArraysKt.toSet(floatPropertyCompatArr));
     }
 }

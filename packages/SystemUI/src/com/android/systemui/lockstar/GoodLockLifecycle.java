@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GoodLockLifecycle extends SecLifecycle implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class GoodLockLifecycle extends SecLifecycle implements Dumpable {
     public final Handler mainHandler;
     public final PackageManager packageManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,29 +38,29 @@ public final class GoodLockLifecycle extends SecLifecycle implements Dumpable {
         new Companion(null);
     }
 
-    public GoodLockLifecycle(Context context, Handler handler, KeyguardUpdateMonitor keyguardUpdateMonitor, DumpManager dumpManager) {
+    public GoodLockLifecycle(Context context, Handler handler, KeyguardUpdateMonitor keyguardUpdateMonitor, DumpManager dumpManager) throws PackageManager.NameNotFoundException {
         this.mainHandler = handler;
         this.packageManager = context.getPackageManager();
         KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.lockstar.GoodLockLifecycle$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onPackageAdded(String str) {
+            public final void onPackageAdded(String str) throws PackageManager.NameNotFoundException {
                 KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("onPackageAdded: ", str, "GoodLockLifecycle");
                 int i = GoodLockLifecycle.$r8$clinit;
-                GoodLockLifecycle.this.updateGoodLockInstalledState(str);
+                this.this$0.updateGoodLockInstalledState(str);
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onPackageChanged(String str) {
+            public final void onPackageChanged(String str) throws PackageManager.NameNotFoundException {
                 KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("onPackageChanged: ", str, "GoodLockLifecycle");
                 int i = GoodLockLifecycle.$r8$clinit;
-                GoodLockLifecycle.this.updateGoodLockInstalledState(str);
+                this.this$0.updateGoodLockInstalledState(str);
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onPackageRemoved(String str, boolean z) {
+            public final void onPackageRemoved(String str, boolean z) throws PackageManager.NameNotFoundException {
                 KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("onPackageRemoved: ", str, "GoodLockLifecycle");
                 int i = GoodLockLifecycle.$r8$clinit;
-                GoodLockLifecycle.this.updateGoodLockInstalledState(str);
+                this.this$0.updateGoodLockInstalledState(str);
             }
         };
         this.keyguardUpdateMonitorCallback = keyguardUpdateMonitorCallback;
@@ -78,7 +76,7 @@ public final class GoodLockLifecycle extends SecLifecycle implements Dumpable {
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "   isInstalled = ", this.isInstalled);
     }
 
-    public final void updateGoodLockInstalledState(String str) {
+    public final void updateGoodLockInstalledState(String str) throws PackageManager.NameNotFoundException {
         if (str != null && TextUtils.equals("com.samsung.android.goodlock", str)) {
             Log.i("GoodLockLifecycle", "updateGoodLockInstalledState: GOOD_LOCK");
             boolean z = false;
@@ -93,12 +91,12 @@ public final class GoodLockLifecycle extends SecLifecycle implements Dumpable {
                 this.mainHandler.post(new Runnable() { // from class: com.android.systemui.lockstar.GoodLockLifecycle$notifyChanged$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        final GoodLockLifecycle goodLockLifecycle = GoodLockLifecycle.this;
+                        final GoodLockLifecycle goodLockLifecycle = this.this$0;
                         goodLockLifecycle.dispatch(new Consumer() { // from class: com.android.systemui.lockstar.GoodLockLifecycle$notifyChanged$1.1
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 PluginLockStarManager.AnonymousClass2 anonymousClass2 = (PluginLockStarManager.AnonymousClass2) obj;
-                                boolean z2 = GoodLockLifecycle.this.isInstalled;
+                                boolean z2 = goodLockLifecycle.isInstalled;
                                 anonymousClass2.getClass();
                                 Log.i("LStar|PluginLockStarManager", "onGoodLockAppInstallStateChanged: " + z2);
                                 PluginLockStarManager.this.checkGoodLockInstalledState();

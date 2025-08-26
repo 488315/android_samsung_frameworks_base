@@ -7,7 +7,6 @@ import com.samsung.android.sdk.moneta.memory.entity.context.Place;
 import com.samsung.android.sdk.moneta.memory.entity.context.PlaceType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PlaceWrapperV1 implements Parcelable {
     private final Address address;
@@ -20,7 +19,6 @@ public final class PlaceWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<PlaceWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -30,7 +28,6 @@ public final class PlaceWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {

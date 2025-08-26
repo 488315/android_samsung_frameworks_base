@@ -12,7 +12,6 @@ import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.viewinterop.AndroidViewHolder;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidViewsHandler extends ViewGroup {
     public final HashMap holderToLayoutNode;

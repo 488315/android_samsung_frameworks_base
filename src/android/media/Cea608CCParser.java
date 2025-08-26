@@ -66,13 +66,13 @@ class Cea608CCParser {
     }
 
     public void parse(byte[] bArr) {
-        CCData[] fromByteArray = CCData.fromByteArray(bArr);
-        for (int i = 0; i < fromByteArray.length; i++) {
+        CCData[] cCDataArrFromByteArray = CCData.fromByteArray(bArr);
+        for (int i = 0; i < cCDataArrFromByteArray.length; i++) {
             if (DEBUG) {
-                Log.d(TAG, fromByteArray[i].toString());
+                Log.d(TAG, cCDataArrFromByteArray[i].toString());
             }
-            if (!handleCtrlCode(fromByteArray[i]) && !handleTabOffsets(fromByteArray[i]) && !handlePACCode(fromByteArray[i]) && !handleMidRowCode(fromByteArray[i])) {
-                handleDisplayableChars(fromByteArray[i]);
+            if (!handleCtrlCode(cCDataArrFromByteArray[i]) && !handleTabOffsets(cCDataArrFromByteArray[i]) && !handlePACCode(cCDataArrFromByteArray[i]) && !handleMidRowCode(cCDataArrFromByteArray[i])) {
+                handleDisplayableChars(cCDataArrFromByteArray[i]);
             }
         }
     }

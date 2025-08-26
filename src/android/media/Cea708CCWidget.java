@@ -1,6 +1,7 @@
 package android.media;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -8,6 +9,7 @@ import android.media.Cea708CCParser;
 import android.media.ClosedCaptionWidget;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.CharacterStyle;
@@ -17,6 +19,7 @@ import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.CaptioningManager;
@@ -166,8 +169,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                 float f6 = paddingTop;
                 int i6 = i4;
                 this.mRectArray[i6] = new Rect((int) (f3 * f5), (int) (f * f6), (int) (f4 * f5), (int) (f2 * f6));
-                int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (f5 * (f4 - f3)), 1073741824);
-                childAt.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, 0));
+                int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (f5 * (f4 - f3)), 1073741824);
+                childAt.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, 0));
                 if (childAt.getMeasuredHeight() > this.mRectArray[i6].height()) {
                     int measuredHeight = ((childAt.getMeasuredHeight() - this.mRectArray[i6].height()) + 1) / 2;
                     this.mRectArray[i6].bottom += measuredHeight;
@@ -181,7 +184,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                         this.mRectArray[i6].bottom = paddingTop;
                     }
                 }
-                childAt.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec((int) (f6 * (f2 - f)), 1073741824));
+                childAt.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec((int) (f6 * (f2 - f)), 1073741824));
                 i4 = i6 + 1;
                 paddingLeft = i5;
             }
@@ -228,7 +231,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
 
         @Override // android.view.ViewGroup, android.view.View
-        protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+        protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
             int paddingLeft = getPaddingLeft();
             int paddingTop = getPaddingTop();
             int childCount = getChildCount();
@@ -254,10 +257,10 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                     }
                     int i2 = rectArr[i].left + paddingLeft;
                     int i3 = this.mRectArray[i].top + paddingTop;
-                    int save = canvas.save();
+                    int iSave = canvas.save();
                     canvas.translate(i2, i3);
                     childAt.draw(canvas);
-                    canvas.restoreToCount(save);
+                    canvas.restoreToCount(iSave);
                 }
             }
         }
@@ -719,20 +722,108 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             appendText(str);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0113  */
-        /* JADX WARN: Removed duplicated region for block: B:33:0x0146  */
-        /* JADX WARN: Removed duplicated region for block: B:36:0x014a  */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x0128  */
+        /* JADX WARN: Removed duplicated region for block: B:47:0x0113  */
+        /* JADX WARN: Removed duplicated region for block: B:53:0x0128  */
+        /* JADX WARN: Removed duplicated region for block: B:56:0x0146  */
+        /* JADX WARN: Removed duplicated region for block: B:58:0x014a  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void initWindow(android.media.Cea708CCWidget.CCLayout r13, android.media.Cea708CCParser.CaptionWindow r14) {
-            /*
-                Method dump skipped, instructions count: 334
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.Cea708CCWidget.CCWindowLayout.initWindow(android.media.Cea708CCWidget$CCLayout, android.media.Cea708CCParser$CaptionWindow):void");
+        public void initWindow(CCLayout cCLayout, Cea708CCParser.CaptionWindow captionWindow) {
+            float f;
+            CCLayout cCLayout2 = this.mCCLayout;
+            if (cCLayout2 != cCLayout) {
+                if (cCLayout2 != null) {
+                    cCLayout2.removeOnLayoutChangeListener(this);
+                }
+                this.mCCLayout = cCLayout;
+                cCLayout.addOnLayoutChangeListener(this);
+                updateWidestChar();
+            }
+            float fMax = captionWindow.anchorVertical / (captionWindow.relativePositioning ? 99 : 74);
+            float fMax2 = captionWindow.anchorHorizontal / (captionWindow.relativePositioning ? 99 : 209);
+            float f2 = 0.0f;
+            float f3 = 1.0f;
+            if (fMax < 0.0f || fMax > 1.0f) {
+                Log.i(TAG, "The vertical position of the anchor point should be at the range of 0 and 1 but " + fMax);
+                fMax = Math.max(0.0f, Math.min(fMax, 1.0f));
+            }
+            if (fMax2 < 0.0f || fMax2 > 1.0f) {
+                Log.i(TAG, "The horizontal position of the anchor point should be at the range of 0 and 1 but " + fMax2);
+                fMax2 = Math.max(0.0f, Math.min(fMax2, 1.0f));
+            }
+            int i = 3;
+            int i2 = captionWindow.anchorId % 3;
+            int i3 = captionWindow.anchorId / 3;
+            if (i2 == 0) {
+                this.mCCView.setAlignment(Layout.Alignment.ALIGN_NORMAL);
+            } else {
+                if (i2 == 1) {
+                    float fMin = Math.min(1.0f - fMax2, fMax2);
+                    int iMin = Math.min(getScreenColumnCount(), captionWindow.columnCount + 1);
+                    StringBuilder sb = new StringBuilder();
+                    for (int i4 = 0; i4 < iMin; i4++) {
+                        sb.append(this.mWidestChar);
+                    }
+                    Paint paint = new Paint();
+                    paint.setTypeface(this.mCaptionStyle.getTypeface());
+                    paint.setTextSize(this.mTextSize);
+                    float fMeasureText = this.mCCLayout.getWidth() > 0 ? (paint.measureText(sb.toString()) / 2.0f) / (this.mCCLayout.getWidth() * 0.8f) : 0.0f;
+                    if (fMeasureText > 0.0f && fMeasureText < fMax2) {
+                        this.mCCView.setAlignment(Layout.Alignment.ALIGN_NORMAL);
+                        fMax2 -= fMeasureText;
+                    } else {
+                        this.mCCView.setAlignment(Layout.Alignment.ALIGN_CENTER);
+                        float f4 = fMax2 - fMin;
+                        f = fMax2 + fMin;
+                        fMax2 = f4;
+                        i = 1;
+                    }
+                } else if (i2 != 2) {
+                    i = 17;
+                    fMax2 = 0.0f;
+                } else {
+                    this.mCCView.setAlignment(Layout.Alignment.ALIGN_RIGHT);
+                    i = 5;
+                    f = fMax2;
+                    fMax2 = 0.0f;
+                }
+                if (i3 == 0) {
+                    if (i3 == 1) {
+                        i |= 16;
+                        float fMin2 = Math.min(1.0f - fMax, fMax);
+                        float f5 = fMax - fMin2;
+                        fMax += fMin2;
+                        f2 = f5;
+                    } else if (i3 == 2) {
+                        i |= 80;
+                    }
+                    f3 = fMax;
+                } else {
+                    i |= 48;
+                    f2 = fMax;
+                }
+                this.mCCLayout.addOrUpdateViewToSafeTitleArea(this, new ScaledLayout.ScaledLayoutParams(f2, f3, fMax2, f));
+                setCaptionWindowId(captionWindow.id);
+                setRowLimit(captionWindow.rowCount);
+                setGravity(i);
+                if (!captionWindow.visible) {
+                    show();
+                    return;
+                } else {
+                    hide();
+                    return;
+                }
+            }
+            f = 1.0f;
+            if (i3 == 0) {
+            }
+            this.mCCLayout.addOrUpdateViewToSafeTitleArea(this, new ScaledLayout.ScaledLayoutParams(f2, f3, fMax2, f));
+            setCaptionWindowId(captionWindow.id);
+            setRowLimit(captionWindow.rowCount);
+            setGravity(i);
+            if (!captionWindow.visible) {
+            }
         }
 
         @Override // android.view.View.OnLayoutChangeListener
@@ -750,14 +841,14 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         private void updateWidestChar() {
             Paint paint = new Paint();
             paint.setTypeface(this.mCaptionStyle.getTypeface());
-            Charset forName = Charset.forName("ISO-8859-1");
+            Charset charsetForName = Charset.forName("ISO-8859-1");
             float f = 0.0f;
             for (int i = 0; i < 256; i++) {
-                String str = new String(new byte[]{(byte) i}, forName);
-                float measureText = paint.measureText(str);
-                if (f < measureText) {
+                String str = new String(new byte[]{(byte) i}, charsetForName);
+                float fMeasureText = paint.measureText(str);
+                if (f < fMeasureText) {
                     this.mWidestChar = str;
-                    f = measureText;
+                    f = fMeasureText;
                 }
             }
             updateTextSize();
@@ -772,7 +863,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             for (int i = 0; i < screenColumnCount; i++) {
                 sb.append(this.mWidestChar);
             }
-            String sb2 = sb.toString();
+            String string = sb.toString();
             Paint paint = new Paint();
             paint.setTypeface(this.mCaptionStyle.getTypeface());
             float f = 0.0f;
@@ -780,7 +871,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             while (f < f2) {
                 float f3 = (f + f2) / 2.0f;
                 paint.setTextSize(f3);
-                if (this.mCCLayout.getWidth() * 0.8f > paint.measureText(sb2)) {
+                if (this.mCCLayout.getWidth() * 0.8f > paint.measureText(string)) {
                     f = f3 + 0.01f;
                 } else {
                     f2 = f3 - 0.01f;
@@ -825,10 +916,10 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                     spannableStringBuilder.setSpan(characterStyle, length, spannableStringBuilder.length(), 33);
                 }
             }
-            String[] split = TextUtils.split(this.mBuilder.toString(), ShaderAssembler.NEWLINE);
-            String join = TextUtils.join(ShaderAssembler.NEWLINE, Arrays.copyOfRange(split, Math.max(0, split.length - (this.mRowLimit + 1)), split.length));
+            String[] strArrSplit = TextUtils.split(this.mBuilder.toString(), ShaderAssembler.NEWLINE);
+            String strJoin = TextUtils.join(ShaderAssembler.NEWLINE, Arrays.copyOfRange(strArrSplit, Math.max(0, strArrSplit.length - (this.mRowLimit + 1)), strArrSplit.length));
             SpannableStringBuilder spannableStringBuilder2 = this.mBuilder;
-            spannableStringBuilder2.delete(0, spannableStringBuilder2.length() - join.length());
+            spannableStringBuilder2.delete(0, spannableStringBuilder2.length() - strJoin.length());
             int length2 = this.mBuilder.length();
             int i = length2 - 1;
             int i2 = 0;

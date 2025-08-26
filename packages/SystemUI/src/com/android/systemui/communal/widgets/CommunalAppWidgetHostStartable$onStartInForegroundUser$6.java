@@ -21,7 +21,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalAppWidgetHostStartable$onStartInForegroundUser$6 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -48,7 +47,7 @@ final class CommunalAppWidgetHostStartable$onStartInForegroundUser$6 extends Sus
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Integer valueOf;
+        Integer numValueOf;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -90,14 +89,14 @@ final class CommunalAppWidgetHostStartable$onStartInForegroundUser$6 extends Sus
                 CommunalWidgetContentModel communalWidgetContentModel2 = (CommunalWidgetContentModel) obj4;
                 if (communalWidgetContentModel2 instanceof CommunalWidgetContentModel.Available) {
                     UserHandle profile = ((CommunalWidgetContentModel.Available) communalWidgetContentModel2).providerInfo.getProfile();
-                    valueOf = profile != null ? Integer.valueOf(profile.getIdentifier()) : null;
+                    numValueOf = profile != null ? Integer.valueOf(profile.getIdentifier()) : null;
                 } else {
                     if (!(communalWidgetContentModel2 instanceof CommunalWidgetContentModel.Pending)) {
                         throw new NoWhenBranchMatchedException();
                     }
-                    valueOf = Integer.valueOf(((CommunalWidgetContentModel.Pending) communalWidgetContentModel2).user.getIdentifier());
+                    numValueOf = Integer.valueOf(((CommunalWidgetContentModel.Pending) communalWidgetContentModel2).user.getIdentifier());
                 }
-                if (!CollectionsKt___CollectionsKt.contains(set, valueOf)) {
+                if (!CollectionsKt___CollectionsKt.contains(set, numValueOf)) {
                     arrayList3.add(obj4);
                 }
             }

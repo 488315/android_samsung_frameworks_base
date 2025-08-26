@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class RowAppearanceCoordinator implements Coordinator {
@@ -48,10 +47,10 @@ public final class RowAppearanceCoordinator implements Coordinator {
         ExpandableNotificationRowController expandableNotificationRowController = (ExpandableNotificationRowController) notifRowController;
         ExpandableNotificationRow expandableNotificationRow = expandableNotificationRowController.mView;
         if (z != expandableNotificationRow.mIsSystemExpanded) {
-            boolean isExpanded = expandableNotificationRow.isExpanded(false);
+            boolean zIsExpanded = expandableNotificationRow.isExpanded(false);
             expandableNotificationRow.mIsSystemExpanded = z;
             expandableNotificationRow.notifyHeightChanged(false);
-            expandableNotificationRow.onExpansionChanged(false, isExpanded);
+            expandableNotificationRow.onExpansionChanged(false, zIsExpanded);
             if (expandableNotificationRow.mIsSummaryWithChildren) {
                 expandableNotificationRow.mChildrenContainer.updateGroupOverflow();
                 if (expandableNotificationRow.mIsSummaryWithChildren) {
@@ -121,13 +120,13 @@ public final class RowAppearanceCoordinator implements Coordinator {
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RowAppearanceCoordinator$attach$1
+        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RowAppearanceCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
             public final void onBeforeRenderList(List<? extends PipelineEntry> list) {
                 RowAppearanceCoordinator.this.onBeforeRenderList(list);
             }
         });
-        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderEntryListeners).add(new OnAfterRenderEntryListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RowAppearanceCoordinator$attach$2
+        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderEntryListeners).add(new OnAfterRenderEntryListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.RowAppearanceCoordinator.attach.2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderEntryListener
             public final void onAfterRenderEntry(NotificationEntry notificationEntry, NotifRowController notifRowController) {
                 RowAppearanceCoordinator.this.onAfterRenderEntry(notificationEntry, notifRowController);

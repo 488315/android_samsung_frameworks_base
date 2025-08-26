@@ -11,6 +11,7 @@ import android.util.Property;
 import android.view.View;
 import android.view.animation.Interpolator;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.app.animation.Interpolators;
 import com.android.internal.dynamicanimation.animation.DynamicAnimation;
 import com.android.internal.dynamicanimation.animation.SpringAnimation;
@@ -29,7 +30,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ViewState implements Dumpable {
     public boolean gone;
@@ -129,9 +129,9 @@ public class ViewState implements Dumpable {
         if (valueAnimator == null) {
             return j;
         }
-        long max = Math.max(valueAnimator.getDuration() - valueAnimator.getCurrentPlayTime(), j);
+        long jMax = Math.max(valueAnimator.getDuration() - valueAnimator.getCurrentPlayTime(), j);
         valueAnimator.cancel();
-        return max;
+        return jMax;
     }
 
     public static boolean isAnimating(View view) {
@@ -153,136 +153,67 @@ public class ViewState implements Dumpable {
         animator.start();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00c6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void animateTo(android.view.View r6, com.android.systemui.statusbar.notification.stack.AnimationProperties r7) {
-        /*
-            r5 = this;
-            int r0 = r6.getVisibility()
-            r1 = 1
-            r2 = 0
-            if (r0 != 0) goto La
-            r0 = r1
-            goto Lb
-        La:
-            r0 = r2
-        Lb:
-            float r3 = r5.mAlpha
-            if (r0 != 0) goto L27
-            r0 = 0
-            int r3 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r3 != 0) goto L1c
-            float r3 = r6.getAlpha()
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 == 0) goto L27
-        L1c:
-            boolean r0 = r5.gone
-            if (r0 != 0) goto L27
-            boolean r0 = r5.hidden
-            if (r0 != 0) goto L27
-            r6.setVisibility(r2)
-        L27:
-            float r0 = r6.getAlpha()
-            float r3 = r5.mAlpha
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 == 0) goto L33
-            r0 = r1
-            goto L34
-        L33:
-            r0 = r2
-        L34:
-            boolean r3 = r6 instanceof com.android.systemui.statusbar.notification.row.ExpandableView
-            if (r3 == 0) goto L3f
-            r3 = r6
-            com.android.systemui.statusbar.notification.row.ExpandableView r3 = (com.android.systemui.statusbar.notification.row.ExpandableView) r3
-            boolean r3 = r3.mWillBeGone
-            r1 = r1 ^ r3
-            r0 = r0 & r1
-        L3f:
-            float r1 = r6.getTranslationX()
-            float r3 = r5.mXTranslation
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 == 0) goto L4d
-            r5.startXTranslationAnimation(r6, r7)
-            goto L52
-        L4d:
-            int r1 = com.android.systemui.statusbar.notification.stack.ViewState.TAG_ANIMATOR_TRANSLATION_X
-            abortAnimation(r6, r1)
-        L52:
-            float r1 = r6.getTranslationY()
-            float r3 = r5.mYTranslation
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 == 0) goto L60
-            r5.startYTranslationAnimation(r6, r7)
-            goto L65
-        L60:
-            int r1 = com.android.systemui.statusbar.notification.PhysicsPropertyAnimator.TAG_ANIMATOR_TRANSLATION_Y
-            abortAnimation(r6, r1)
-        L65:
-            float r1 = r6.getTranslationZ()
-            float r3 = r5.mZTranslation
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 == 0) goto L73
-            r5.startZTranslationAnimation(r6, r7)
-            goto L78
-        L73:
-            int r1 = com.android.systemui.statusbar.notification.stack.ViewState.TAG_ANIMATOR_TRANSLATION_Z
-            abortAnimation(r6, r1)
-        L78:
-            float r1 = r6.getScaleX()
-            float r3 = r5.mScaleX
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            com.android.systemui.statusbar.notification.stack.ViewState$2 r4 = com.android.systemui.statusbar.notification.stack.ViewState.SCALE_X_PROPERTY
-            if (r1 == 0) goto L88
-            com.android.systemui.statusbar.notification.PropertyAnimator.startAnimation(r6, r4, r3, r7)
-            goto L91
-        L88:
-            r4.getClass()
-            r1 = 2131364538(0x7f0a0aba, float:1.8348916E38)
-            abortAnimation(r6, r1)
-        L91:
-            float r1 = r6.getScaleY()
-            float r3 = r5.mScaleY
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            com.android.systemui.statusbar.notification.stack.ViewState$3 r4 = com.android.systemui.statusbar.notification.stack.ViewState.SCALE_Y_PROPERTY
-            if (r1 == 0) goto La1
-            com.android.systemui.statusbar.notification.PropertyAnimator.startAnimation(r6, r4, r3, r7)
-            goto Laa
-        La1:
-            r4.getClass()
-            r1 = 2131364542(0x7f0a0abe, float:1.8348924E38)
-            abortAnimation(r6, r1)
-        Laa:
-            if (r0 == 0) goto Lc6
-            boolean r1 = r6 instanceof com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
-            if (r1 == 0) goto Lc6
-            r1 = r6
-            com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r1 = (com.android.systemui.statusbar.notification.row.ExpandableNotificationRow) r1
-            boolean r3 = r1.mHeadsupDisappearRunning
-            if (r3 == 0) goto Lc6
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r3 = " does not change alpha during headsup animation away "
-            r0.<init>(r3)
-            java.lang.String r1 = r1.mLoggingKey
-            java.lang.String r3 = "ExpandableNotifRow"
-            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r0, r1, r3)
-            goto Lc7
-        Lc6:
-            r2 = r0
-        Lc7:
-            if (r2 == 0) goto Lcd
-            r5.startAlphaAnimation(r6, r7)
-            return
-        Lcd:
-            int r5 = com.android.systemui.statusbar.notification.stack.ViewState.TAG_ANIMATOR_ALPHA
-            abortAnimation(r6, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ViewState.animateTo(android.view.View, com.android.systemui.statusbar.notification.stack.AnimationProperties):void");
+    public void animateTo(View view, AnimationProperties animationProperties) {
+        boolean z = false;
+        boolean z2 = view.getVisibility() == 0;
+        float f = this.mAlpha;
+        if (!z2 && ((f != 0.0f || view.getAlpha() != 0.0f) && !this.gone && !this.hidden)) {
+            view.setVisibility(0);
+        }
+        boolean z3 = this.mAlpha != view.getAlpha();
+        if (view instanceof ExpandableView) {
+            z3 &= true ^ ((ExpandableView) view).mWillBeGone;
+        }
+        if (view.getTranslationX() != this.mXTranslation) {
+            startXTranslationAnimation(view, animationProperties);
+        } else {
+            abortAnimation(view, TAG_ANIMATOR_TRANSLATION_X);
+        }
+        if (view.getTranslationY() != this.mYTranslation) {
+            startYTranslationAnimation(view, animationProperties);
+        } else {
+            abortAnimation(view, PhysicsPropertyAnimator.TAG_ANIMATOR_TRANSLATION_Y);
+        }
+        if (view.getTranslationZ() != this.mZTranslation) {
+            startZTranslationAnimation(view, animationProperties);
+        } else {
+            abortAnimation(view, TAG_ANIMATOR_TRANSLATION_Z);
+        }
+        float scaleX = view.getScaleX();
+        float f2 = this.mScaleX;
+        AnonymousClass2 anonymousClass2 = SCALE_X_PROPERTY;
+        if (scaleX != f2) {
+            PropertyAnimator.startAnimation(view, anonymousClass2, f2, animationProperties);
+        } else {
+            anonymousClass2.getClass();
+            abortAnimation(view, R.id.scale_x_animator_tag);
+        }
+        float scaleY = view.getScaleY();
+        float f3 = this.mScaleY;
+        AnonymousClass3 anonymousClass3 = SCALE_Y_PROPERTY;
+        if (scaleY != f3) {
+            PropertyAnimator.startAnimation(view, anonymousClass3, f3, animationProperties);
+        } else {
+            anonymousClass3.getClass();
+            abortAnimation(view, R.id.scale_y_animator_tag);
+        }
+        if (z3 && (view instanceof ExpandableNotificationRow)) {
+            ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) view;
+            if (expandableNotificationRow.mHeadsupDisappearRunning) {
+                ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder(" does not change alpha during headsup animation away "), expandableNotificationRow.mLoggingKey, "ExpandableNotifRow");
+            }
+        } else {
+            z = z3;
+        }
+        if (z) {
+            startAlphaAnimation(view, animationProperties);
+        } else {
+            abortAnimation(view, TAG_ANIMATOR_ALPHA);
+        }
     }
 
     public void applyToView(View view) {
@@ -290,9 +221,9 @@ public class ViewState implements Dumpable {
         if (this.gone) {
             return;
         }
-        boolean isAnimating = isAnimating(view, TAG_ANIMATOR_TRANSLATION_X);
+        boolean zIsAnimating = isAnimating(view, TAG_ANIMATOR_TRANSLATION_X);
         AnonymousClass1 anonymousClass1 = NO_NEW_ANIMATIONS;
-        if (isAnimating) {
+        if (zIsAnimating) {
             startXTranslationAnimation(view, anonymousClass1);
         } else {
             float translationX = view.getTranslationX();
@@ -403,28 +334,28 @@ public class ViewState implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("ViewState { ");
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("ViewState { ");
         boolean z = true;
-        for (Class<?> cls = getClass(); cls != null; cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
+        for (Class<?> superclass = getClass(); superclass != null; superclass = superclass.getSuperclass()) {
+            for (Field field : superclass.getDeclaredFields()) {
                 int modifiers = field.getModifiers();
                 if (!Modifier.isStatic(modifiers) && !field.isSynthetic() && !Modifier.isTransient(modifiers)) {
                     if (!z) {
-                        m.append(", ");
+                        sbM.append(", ");
                     }
                     try {
-                        m.append(field.getName());
-                        m.append(": ");
+                        sbM.append(field.getName());
+                        sbM.append(": ");
                         field.setAccessible(true);
-                        m.append(field.get(this));
+                        sbM.append(field.get(this));
                     } catch (IllegalAccessException unused) {
                     }
                     z = false;
                 }
             }
         }
-        m.append(" }");
-        printWriter.print(m);
+        sbM.append(" }");
+        printWriter.print(sbM);
     }
 
     public void initFrom(View view) {
@@ -487,9 +418,9 @@ public class ViewState implements Dumpable {
             if (!animationProperties.getAnimationFilter().animateAlpha) {
                 if (objectAnimator != null) {
                     PropertyValuesHolder[] values = objectAnimator.getValues();
-                    float floatValue = f.floatValue() + (f3 - f2.floatValue());
-                    values[0].setFloatValues(floatValue, f3);
-                    view.setTag(i, Float.valueOf(floatValue));
+                    float fFloatValue = f.floatValue() + (f3 - f2.floatValue());
+                    values[0].setFloatValues(fFloatValue, f3);
+                    view.setTag(i, Float.valueOf(fFloatValue));
                     view.setTag(i2, Float.valueOf(f3));
                     objectAnimator.setCurrentPlayTime(objectAnimator.getCurrentPlayTime());
                     return;
@@ -500,10 +431,10 @@ public class ViewState implements Dumpable {
                 }
             }
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), f3);
-            ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getAlpha(), f3);
+            objectAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
             view.setLayerType(2, null);
-            ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.4
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.4
                 public boolean mWasCancelled;
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -527,16 +458,16 @@ public class ViewState implements Dumpable {
                     this.mWasCancelled = false;
                 }
             });
-            ofFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
+            objectAnimatorOfFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
             if (animationProperties.delay > 0 && (objectAnimator == null || objectAnimator.getAnimatedFraction() == 0.0f)) {
-                ofFloat.setStartDelay(animationProperties.delay);
+                objectAnimatorOfFloat.setStartDelay(animationProperties.delay);
             }
             AnimatorListenerAdapter animationFinishListener = animationProperties.getAnimationFinishListener(property);
             if (animationFinishListener != null) {
-                ofFloat.addListener(animationFinishListener);
+                objectAnimatorOfFloat.addListener(animationFinishListener);
             }
-            startAnimator(ofFloat, animationFinishListener);
-            view.setTag(i3, ofFloat);
+            startAnimator(objectAnimatorOfFloat, animationFinishListener);
+            view.setTag(i3, objectAnimatorOfFloat);
             view.setTag(i, Float.valueOf(view.getAlpha()));
             view.setTag(i2, Float.valueOf(f3));
         }
@@ -557,30 +488,30 @@ public class ViewState implements Dumpable {
                     return;
                 }
                 PropertyValuesHolder[] values = objectAnimator.getValues();
-                float floatValue = f.floatValue() + (f3 - f2.floatValue());
-                values[0].setFloatValues(floatValue, f3);
-                view.setTag(i, Float.valueOf(floatValue));
+                float fFloatValue = f.floatValue() + (f3 - f2.floatValue());
+                values[0].setFloatValues(fFloatValue, f3);
+                view.setTag(i, Float.valueOf(fFloatValue));
                 view.setTag(i2, Float.valueOf(f3));
                 objectAnimator.setCurrentPlayTime(objectAnimator.getCurrentPlayTime());
                 return;
             }
             Property property = View.TRANSLATION_X;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationX(), f3);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationX(), f3);
             ArrayMap arrayMap = animationProperties.mInterpolatorMap;
             Interpolator interpolator = arrayMap != null ? (Interpolator) arrayMap.get(property) : null;
             if (interpolator == null) {
                 interpolator = Interpolators.FAST_OUT_SLOW_IN;
             }
-            ofFloat.setInterpolator(interpolator);
-            ofFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
+            objectAnimatorOfFloat.setInterpolator(interpolator);
+            objectAnimatorOfFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
             if (animationProperties.delay > 0 && (objectAnimator == null || objectAnimator.getAnimatedFraction() == 0.0f)) {
-                ofFloat.setStartDelay(animationProperties.delay);
+                objectAnimatorOfFloat.setStartDelay(animationProperties.delay);
             }
             AnimatorListenerAdapter animationFinishListener = animationProperties.getAnimationFinishListener(property);
             if (animationFinishListener != null) {
-                ofFloat.addListener(animationFinishListener);
+                objectAnimatorOfFloat.addListener(animationFinishListener);
             }
-            ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.6
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.6
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     view.setTag(ViewState.TAG_ANIMATOR_TRANSLATION_X, null);
@@ -588,8 +519,8 @@ public class ViewState implements Dumpable {
                     view.setTag(ViewState.TAG_END_TRANSLATION_X, null);
                 }
             });
-            startAnimator(ofFloat, animationFinishListener);
-            view.setTag(i3, ofFloat);
+            startAnimator(objectAnimatorOfFloat, animationFinishListener);
+            view.setTag(i3, objectAnimatorOfFloat);
             view.setTag(i, Float.valueOf(view.getTranslationX()));
             view.setTag(i2, Float.valueOf(f3));
         }
@@ -600,7 +531,7 @@ public class ViewState implements Dumpable {
         if (this.mUsePhysicsForMovement) {
             onAnimationEndListener = isAnimating(view, PhysicsPropertyAnimator.TAG_ANIMATOR_TRANSLATION_Y) ? null : new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.notification.stack.ViewState$$ExternalSyntheticLambda0
                 public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-                    ViewState viewState = ViewState.this;
+                    ViewState viewState = this.f$0;
                     View view2 = view;
                     ViewState.AnonymousClass1 anonymousClass1 = ViewState.NO_NEW_ANIMATIONS;
                     viewState.getClass();
@@ -632,30 +563,30 @@ public class ViewState implements Dumpable {
                     return;
                 }
                 PropertyValuesHolder[] values = objectAnimator.getValues();
-                float floatValue = f2.floatValue() + (f4 - f3.floatValue());
-                values[0].setFloatValues(floatValue, f4);
-                view.setTag(i, Float.valueOf(floatValue));
+                float fFloatValue = f2.floatValue() + (f4 - f3.floatValue());
+                values[0].setFloatValues(fFloatValue, f4);
+                view.setTag(i, Float.valueOf(fFloatValue));
                 view.setTag(i2, Float.valueOf(f4));
                 objectAnimator.setCurrentPlayTime(objectAnimator.getCurrentPlayTime());
                 return;
             }
             Property property = View.TRANSLATION_Y;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationY(), f4);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationY(), f4);
             ArrayMap arrayMap = animationProperties.mInterpolatorMap;
             onAnimationEndListener = arrayMap != null ? (Interpolator) arrayMap.get(property) : null;
             if (onAnimationEndListener == null) {
                 onAnimationEndListener = Interpolators.FAST_OUT_SLOW_IN;
             }
-            ofFloat.setInterpolator(onAnimationEndListener);
-            ofFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
+            objectAnimatorOfFloat.setInterpolator(onAnimationEndListener);
+            objectAnimatorOfFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
             if (animationProperties.delay > 0 && (objectAnimator == null || objectAnimator.getAnimatedFraction() == 0.0f)) {
-                ofFloat.setStartDelay(animationProperties.delay);
+                objectAnimatorOfFloat.setStartDelay(animationProperties.delay);
             }
             AnimatorListenerAdapter animationFinishListener = animationProperties.getAnimationFinishListener(property);
             if (animationFinishListener != null) {
-                ofFloat.addListener(animationFinishListener);
+                objectAnimatorOfFloat.addListener(animationFinishListener);
             }
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.stack.ViewState.7
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.notification.stack.ViewState.7
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     view.setTag(R.id.is_clicked_heads_up_tag, null);
@@ -665,8 +596,8 @@ public class ViewState implements Dumpable {
                     ViewState.this.onYTranslationAnimationFinished(view);
                 }
             });
-            startAnimator(ofFloat, animationFinishListener);
-            view.setTag(i3, ofFloat);
+            startAnimator(objectAnimatorOfFloat, animationFinishListener);
+            view.setTag(i3, objectAnimatorOfFloat);
             view.setTag(i, Float.valueOf(view.getTranslationY()));
             view.setTag(i2, Float.valueOf(f4));
         }
@@ -684,9 +615,9 @@ public class ViewState implements Dumpable {
             if (!animationProperties.getAnimationFilter().animateZ) {
                 if (objectAnimator != null) {
                     PropertyValuesHolder[] values = objectAnimator.getValues();
-                    float floatValue = f.floatValue() + (f3 - f2.floatValue());
-                    values[0].setFloatValues(floatValue, f3);
-                    view.setTag(i, Float.valueOf(floatValue));
+                    float fFloatValue = f.floatValue() + (f3 - f2.floatValue());
+                    values[0].setFloatValues(fFloatValue, f3);
+                    view.setTag(i, Float.valueOf(fFloatValue));
                     view.setTag(i2, Float.valueOf(f3));
                     objectAnimator.setCurrentPlayTime(objectAnimator.getCurrentPlayTime());
                     return;
@@ -694,17 +625,17 @@ public class ViewState implements Dumpable {
                 view.setTranslationZ(f3);
             }
             Property property = View.TRANSLATION_Z;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationZ(), f3);
-            ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-            ofFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, view.getTranslationZ(), f3);
+            objectAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+            objectAnimatorOfFloat.setDuration(cancelAnimatorAndGetNewDuration(animationProperties.duration, objectAnimator));
             if (animationProperties.delay > 0 && (objectAnimator == null || objectAnimator.getAnimatedFraction() == 0.0f)) {
-                ofFloat.setStartDelay(animationProperties.delay);
+                objectAnimatorOfFloat.setStartDelay(animationProperties.delay);
             }
             AnimatorListenerAdapter animationFinishListener = animationProperties.getAnimationFinishListener(property);
             if (animationFinishListener != null) {
-                ofFloat.addListener(animationFinishListener);
+                objectAnimatorOfFloat.addListener(animationFinishListener);
             }
-            ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.5
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ViewState.5
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     view.setTag(ViewState.TAG_ANIMATOR_TRANSLATION_Z, null);
@@ -712,8 +643,8 @@ public class ViewState implements Dumpable {
                     view.setTag(ViewState.TAG_END_TRANSLATION_Z, null);
                 }
             });
-            startAnimator(ofFloat, animationFinishListener);
-            view.setTag(i3, ofFloat);
+            startAnimator(objectAnimatorOfFloat, animationFinishListener);
+            view.setTag(i3, objectAnimatorOfFloat);
             view.setTag(i, Float.valueOf(view.getTranslationZ()));
             view.setTag(i2, Float.valueOf(f3));
         }

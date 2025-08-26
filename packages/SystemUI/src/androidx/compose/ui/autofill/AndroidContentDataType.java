@@ -2,7 +2,6 @@ package androidx.compose.ui.autofill;
 
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AndroidContentDataType implements ContentDataType {
     public final int androidAutofillType;
@@ -12,7 +11,7 @@ final class AndroidContentDataType implements ContentDataType {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ AndroidContentDataType m355boximpl(int i) {
+    public static final /* synthetic */ AndroidContentDataType m356boximpl(int i) {
         return new AndroidContentDataType(i);
     }
 

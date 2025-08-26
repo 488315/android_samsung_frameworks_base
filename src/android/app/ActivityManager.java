@@ -2,7 +2,6 @@ package android.app;
 
 import android.Manifest;
 import android.annotation.SystemApi;
-import android.app.ActivityManager;
 import android.app.IActivityController;
 import android.app.IActivityManager;
 import android.app.IAppTask;
@@ -65,6 +64,7 @@ import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.LocalServices;
 import com.samsung.android.app.SemDualAppManager;
+import com.samsung.android.rune.CoreRune;
 import com.samsung.android.sdhms.SemAppRestrictionManager;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -214,6 +214,7 @@ public class ActivityManager {
     public static final int PROCESS_STATE_TRANSIENT_BACKGROUND = 8;
     public static final int PROCESS_STATE_UNKNOWN = -1;
     public static final int RECENT_IGNORE_DESK_TYPE = 32;
+    public static final int RECENT_IGNORE_HANDLE_SPLIT_TYPE = 64;
     public static final int RECENT_IGNORE_UNAVAILABLE = 2;
     public static final int RECENT_WITH_ALIAS_TARGET = 16;
     public static final int RECENT_WITH_EXCLUDED = 1;
@@ -477,7 +478,19 @@ public class ActivityManager {
         }
     }
 
+    public void getCurrentResourceCacheMax(int i, IHwuiCallback iHwuiCallback) {
+    }
+
+    public void getCurrentResourceCacheUsage(int i, IHwuiCallback iHwuiCallback) {
+    }
+
+    public void getResourceCacheLimit(int i, IHwuiCallback iHwuiCallback) {
+    }
+
     public void semKeepKeyguardWaitingForActivityDrawn() {
+    }
+
+    public void setResourceCacheLimit(int i, int i2, IHwuiCallback iHwuiCallback) {
     }
 
     static final class MyUidObserver extends UidObserver {
@@ -549,7 +562,7 @@ public class ActivityManager {
                         executor.execute(new Runnable() { // from class: android.app.ActivityManager$2$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
-                                ActivityManager.UidFrozenStateChangedCallback.this.onUidFrozenStateChanged(r2, r3);
+                                uidFrozenStateChangedCallback.onUidFrozenStateChanged(iArr, iArr);
                             }
                         });
                     }
@@ -1093,9 +1106,9 @@ public class ActivityManager {
             if (icon != null) {
                 return icon;
             }
-            Bitmap loadTaskDescriptionIcon = loadTaskDescriptionIcon(this.mIconFilename, UserHandle.myUserId());
-            if (loadTaskDescriptionIcon != null) {
-                return Icon.createWithBitmap(loadTaskDescriptionIcon);
+            Bitmap bitmapLoadTaskDescriptionIcon = loadTaskDescriptionIcon(this.mIconFilename, UserHandle.myUserId());
+            if (bitmapLoadTaskDescriptionIcon != null) {
+                return Icon.createWithBitmap(bitmapLoadTaskDescriptionIcon);
             }
             return null;
         }
@@ -1360,16 +1373,16 @@ public class ActivityManager {
 
         public int hashCode() {
             String str = this.mLabel;
-            int hashCode = str != null ? 527 + str.hashCode() : 17;
+            int iHashCode = str != null ? 527 + str.hashCode() : 17;
             Icon icon = this.mIcon;
             if (icon != null) {
-                hashCode = (hashCode * 31) + icon.hashCode();
+                iHashCode = (iHashCode * 31) + icon.hashCode();
             }
             String str2 = this.mIconFilename;
             if (str2 != null) {
-                hashCode = (hashCode * 31) + str2.hashCode();
+                iHashCode = (iHashCode * 31) + str2.hashCode();
             }
-            return (((((((((((((((((((((((hashCode * 31) + this.mColorPrimary) * 31) + this.mColorBackground) * 31) + this.mColorBackgroundFloating) * 31) + this.mStatusBarColor) * 31) + this.mNavigationBarColor) * 31) + this.mSystemBarsAppearance) * 31) + this.mTopOpaqueSystemBarsAppearance) * 31) + (this.mEnsureStatusBarContrastWhenTransparent ? 1 : 0)) * 31) + (this.mEnsureNavigationBarContrastWhenTransparent ? 1 : 0)) * 31) + this.mResizeMode) * 31) + this.mMinWidth) * 31) + this.mMinHeight;
+            return (((((((((((((((((((((((iHashCode * 31) + this.mColorPrimary) * 31) + this.mColorBackground) * 31) + this.mColorBackgroundFloating) * 31) + this.mStatusBarColor) * 31) + this.mNavigationBarColor) * 31) + this.mSystemBarsAppearance) * 31) + this.mTopOpaqueSystemBarsAppearance) * 31) + (this.mEnsureStatusBarContrastWhenTransparent ? 1 : 0)) * 31) + (this.mEnsureNavigationBarContrastWhenTransparent ? 1 : 0)) * 31) + this.mResizeMode) * 31) + this.mMinWidth) * 31) + this.mMinHeight;
         }
 
         public boolean equals(Object obj) {
@@ -1635,7 +1648,7 @@ public class ActivityManager {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         if (width != point.x || height != point.y) {
-            Bitmap createBitmap = Bitmap.createBitmap(point.x, point.y, bitmap.getConfig());
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(point.x, point.y, bitmap.getConfig());
             if (point.x * width > point.y * height) {
                 f = point.x / height;
                 f2 = (point.y - (width * f)) * 0.5f;
@@ -1647,10 +1660,10 @@ public class ActivityManager {
             Matrix matrix = new Matrix();
             matrix.setScale(f, f);
             matrix.postTranslate((int) (f2 + 0.5f), 0.0f);
-            Canvas canvas = new Canvas(createBitmap);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.drawBitmap(bitmap, matrix, null);
             canvas.setBitmap(null);
-            bitmap = createBitmap;
+            bitmap = bitmapCreateBitmap;
         }
         if (taskDescription == null) {
             taskDescription = new TaskDescription();
@@ -1875,9 +1888,7 @@ public class ActivityManager {
                 rateLimitingCache.get(new RateLimitingCache.ValueFetcher() { // from class: android.app.ActivityManager$$ExternalSyntheticLambda0
                     @Override // com.android.internal.util.RateLimitingCache.ValueFetcher
                     public final Object fetchValue() {
-                        ActivityManager.MemoryInfo lambda$getMemoryInfo$0;
-                        lambda$getMemoryInfo$0 = ActivityManager.this.lambda$getMemoryInfo$0();
-                        return lambda$getMemoryInfo$0;
+                        return this.f$0.lambda$getMemoryInfo$0();
                     }
                 });
                 mRateLimitedMemInfo.copyTo(memoryInfo);
@@ -1994,9 +2005,7 @@ public class ActivityManager {
             return mErrorProcessesCache.get(new RateLimitingCache.ValueFetcher() { // from class: android.app.ActivityManager$$ExternalSyntheticLambda3
                 @Override // com.android.internal.util.RateLimitingCache.ValueFetcher
                 public final Object fetchValue() {
-                    List lambda$getProcessesInErrorState$1;
-                    lambda$getProcessesInErrorState$1 = ActivityManager.this.lambda$getProcessesInErrorState$1();
-                    return lambda$getProcessesInErrorState$1;
+                    return this.f$0.lambda$getProcessesInErrorState$1();
                 }
             });
         }
@@ -2139,18 +2148,18 @@ public class ActivityManager {
         }
 
         public static int procStateToImportanceForTargetSdk(int i, int i2) {
-            int procStateToImportance = procStateToImportance(i);
+            int iProcStateToImportance = procStateToImportance(i);
             if (i2 >= 26) {
-                return procStateToImportance;
+                return iProcStateToImportance;
             }
-            if (procStateToImportance == 230) {
+            if (iProcStateToImportance == 230) {
                 return 130;
             }
-            if (procStateToImportance == 325) {
+            if (iProcStateToImportance == 325) {
                 return 150;
             }
-            if (procStateToImportance != 350) {
-                return procStateToImportance;
+            if (iProcStateToImportance != 350) {
+                return iProcStateToImportance;
             }
             return 170;
         }
@@ -2303,9 +2312,7 @@ public class ActivityManager {
         return mRunningProcessesCache.get(new RateLimitingCache.ValueFetcher() { // from class: android.app.ActivityManager$$ExternalSyntheticLambda2
             @Override // com.android.internal.util.RateLimitingCache.ValueFetcher
             public final Object fetchValue() {
-                List lambda$getRunningAppProcesses$2;
-                lambda$getRunningAppProcesses$2 = ActivityManager.this.lambda$getRunningAppProcesses$2();
-                return lambda$getRunningAppProcesses$2;
+                return this.f$0.lambda$getRunningAppProcesses$2();
             }
         });
     }
@@ -2386,7 +2393,7 @@ public class ActivityManager {
                     appStartInfoCallbackWrapper.mExecutor.execute(new Runnable() { // from class: android.app.ActivityManager$3$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ActivityManager.AppStartInfoCallbackWrapper.this.mListener.accept(applicationStartInfo);
+                            appStartInfoCallbackWrapper.mListener.accept(applicationStartInfo);
                         }
                     });
                 }
@@ -2526,12 +2533,12 @@ public class ActivityManager {
     @SystemApi
     public void removeOnUidImportanceListener(OnUidImportanceListener onUidImportanceListener) {
         synchronized (this.mImportanceListeners) {
-            MyUidObserver remove = this.mImportanceListeners.remove(onUidImportanceListener);
-            if (remove == null) {
+            MyUidObserver myUidObserverRemove = this.mImportanceListeners.remove(onUidImportanceListener);
+            if (myUidObserverRemove == null) {
                 throw new IllegalArgumentException("Listener not registered: " + onUidImportanceListener);
             }
             try {
-                getService().unregisterUidObserver(remove);
+                getService().unregisterUidObserver(myUidObserverRemove);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -2686,7 +2693,7 @@ public class ActivityManager {
         return getLauncherLargeIconSizeInner(this.mContext);
     }
 
-    static int getLauncherLargeIconSizeInner(Context context) {
+    static int getLauncherLargeIconSizeInner(Context context) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(17104896);
         if (resources.getConfiguration().smallestScreenWidthDp < 600) {
@@ -2998,20 +3005,19 @@ public class ActivityManager {
     }
 
     private static void dumpService(PrintWriter printWriter, FileDescriptor fileDescriptor, String str, String[] strArr) {
-        TransferPipe transferPipe;
         printWriter.print("DUMP OF SERVICE ");
         printWriter.print(str);
         printWriter.println(":");
-        IBinder checkService = ServiceManager.checkService(str);
-        if (checkService == null) {
+        IBinder iBinderCheckService = ServiceManager.checkService(str);
+        if (iBinderCheckService == null) {
             printWriter.println("  (Service not found)");
             printWriter.flush();
             return;
         }
         printWriter.flush();
-        if (checkService instanceof Binder) {
+        if (iBinderCheckService instanceof Binder) {
             try {
-                checkService.dump(fileDescriptor, strArr);
+                iBinderCheckService.dump(fileDescriptor, strArr);
                 return;
             } catch (Throwable th) {
                 printWriter.println("Failure dumping service:");
@@ -3020,25 +3026,25 @@ public class ActivityManager {
                 return;
             }
         }
-        TransferPipe transferPipe2 = null;
+        TransferPipe transferPipe = null;
         try {
             printWriter.flush();
-            transferPipe = new TransferPipe();
-        } catch (Throwable th2) {
-            th = th2;
-        }
-        try {
-            transferPipe.setBufferPrefix("  ");
-            checkService.dumpAsync(transferPipe.getWriteFd().getFileDescriptor(), strArr);
-            transferPipe.go(fileDescriptor, JobInfo.MIN_BACKOFF_MILLIS);
+            TransferPipe transferPipe2 = new TransferPipe();
+            try {
+                transferPipe2.setBufferPrefix("  ");
+                iBinderCheckService.dumpAsync(transferPipe2.getWriteFd().getFileDescriptor(), strArr);
+                transferPipe2.go(fileDescriptor, JobInfo.MIN_BACKOFF_MILLIS);
+            } catch (Throwable th2) {
+                th = th2;
+                transferPipe = transferPipe2;
+                if (transferPipe != null) {
+                    transferPipe.kill();
+                }
+                printWriter.println("Failure dumping service:");
+                th.printStackTrace(printWriter);
+            }
         } catch (Throwable th3) {
             th = th3;
-            transferPipe2 = transferPipe;
-            if (transferPipe2 != null) {
-                transferPipe2.kill();
-            }
-            printWriter.println("Failure dumping service:");
-            th.printStackTrace(printWriter);
         }
     }
 
@@ -3201,8 +3207,8 @@ public class ActivityManager {
         }
 
         public void startActivity(Context context, Intent intent, Bundle bundle) {
-            ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-            currentActivityThread.getInstrumentation().execStartActivityFromAppTask(context, currentActivityThread.getApplicationThread(), this.mAppTaskImpl, intent, bundle);
+            ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+            activityThreadCurrentActivityThread.getInstrumentation().execStartActivityFromAppTask(context, activityThreadCurrentActivityThread.getApplicationThread(), this.mAppTaskImpl, intent, bundle);
         }
 
         public void setExcludeFromRecents(boolean z) {
@@ -3302,9 +3308,9 @@ public class ActivityManager {
             Iterator it = ActivityManager.this.mActivityControllerListeners.iterator();
             int i2 = 0;
             while (it.hasNext()) {
-                int onAppEarlyNotResponding = ((SemActivityControllerListener) it.next()).onAppEarlyNotResponding(str, i, str2);
-                if (onAppEarlyNotResponding != 0 && (onAppEarlyNotResponding == 1 || i2 != 1)) {
-                    i2 = onAppEarlyNotResponding;
+                int iOnAppEarlyNotResponding = ((SemActivityControllerListener) it.next()).onAppEarlyNotResponding(str, i, str2);
+                if (iOnAppEarlyNotResponding != 0 && (iOnAppEarlyNotResponding == 1 || i2 != 1)) {
+                    i2 = iOnAppEarlyNotResponding;
                 }
             }
             return i2;
@@ -3315,9 +3321,9 @@ public class ActivityManager {
             Iterator it = ActivityManager.this.mActivityControllerListeners.iterator();
             int i2 = 0;
             while (it.hasNext()) {
-                int onAppNotResponding = ((SemActivityControllerListener) it.next()).onAppNotResponding(str, i, str2);
-                if (onAppNotResponding != 0 && (onAppNotResponding == 1 || i2 != 1)) {
-                    i2 = onAppNotResponding;
+                int iOnAppNotResponding = ((SemActivityControllerListener) it.next()).onAppNotResponding(str, i, str2);
+                if (iOnAppNotResponding != 0 && (iOnAppNotResponding == 1 || i2 != 1)) {
+                    i2 = iOnAppNotResponding;
                 }
             }
             return i2;
@@ -3328,9 +3334,9 @@ public class ActivityManager {
             Iterator it = ActivityManager.this.mActivityControllerListeners.iterator();
             int i = 0;
             while (it.hasNext()) {
-                int onSystemNotResponding = ((SemActivityControllerListener) it.next()).onSystemNotResponding(str);
-                if (onSystemNotResponding != 0 && (onSystemNotResponding == 1 || i != 1)) {
-                    i = onSystemNotResponding;
+                int iOnSystemNotResponding = ((SemActivityControllerListener) it.next()).onSystemNotResponding(str);
+                if (iOnSystemNotResponding != 0 && (iOnSystemNotResponding == 1 || i != 1)) {
+                    i = iOnSystemNotResponding;
                 }
             }
             return i;
@@ -3414,7 +3420,8 @@ public class ActivityManager {
             executor.execute(new Runnable() { // from class: android.app.ActivityManager$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    r0.onHomeVisibilityChanged(HomeVisibilityListener.this.mIsHomeActivityVisible);
+                    HomeVisibilityListener homeVisibilityListener2 = homeVisibilityListener;
+                    homeVisibilityListener2.onHomeVisibilityChanged(homeVisibilityListener2.mIsHomeActivityVisible);
                 }
             });
         } catch (RemoteException e) {
@@ -3516,12 +3523,12 @@ public class ActivityManager {
     }
 
     public void notifySystemPropertiesChanged() {
-        IBinder asBinder = getService().asBinder();
-        if (asBinder != null) {
-            Parcel obtain = Parcel.obtain();
+        IBinder iBinderAsBinder = getService().asBinder();
+        if (iBinderAsBinder != null) {
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                asBinder.transact(IBinder.SYSPROPS_TRANSACTION, obtain, null, 0);
-                obtain.recycle();
+                iBinderAsBinder.transact(IBinder.SYSPROPS_TRANSACTION, parcelObtain, null, 0);
+                parcelObtain.recycle();
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -3581,6 +3588,16 @@ public class ActivityManager {
             parcel.writeInt(this.mCreatorUid);
             parcel.writeBoolean(this.mImmutable);
             parcel.writeInt(this.mIntentSenderType);
+        }
+    }
+
+    public void setThreadRT(int i, int i2, boolean z, boolean z2) {
+        if (CoreRune.SYSPERF_ATLAS_ENABLE) {
+            try {
+                getService().setThreadRT(i, i2, z, z2);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 

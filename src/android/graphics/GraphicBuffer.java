@@ -10,13 +10,13 @@ public class GraphicBuffer implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public GraphicBuffer createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            long nReadGraphicBufferFromParcel = GraphicBuffer.nReadGraphicBufferFromParcel(parcel);
-            if (nReadGraphicBufferFromParcel != 0) {
-                return new GraphicBuffer(readInt, readInt2, readInt3, readInt4, nReadGraphicBufferFromParcel);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            long jNReadGraphicBufferFromParcel = GraphicBuffer.nReadGraphicBufferFromParcel(parcel);
+            if (jNReadGraphicBufferFromParcel != 0) {
+                return new GraphicBuffer(i, i2, i3, i4, jNReadGraphicBufferFromParcel);
             }
             return null;
         }
@@ -73,9 +73,9 @@ public class GraphicBuffer implements Parcelable {
     }
 
     public static GraphicBuffer create(int i, int i2, int i3, int i4) {
-        long nCreateGraphicBuffer = nCreateGraphicBuffer(i, i2, i3, i4);
-        if (nCreateGraphicBuffer != 0) {
-            return new GraphicBuffer(i, i2, i3, i4, nCreateGraphicBuffer);
+        long jNCreateGraphicBuffer = nCreateGraphicBuffer(i, i2, i3, i4);
+        if (jNCreateGraphicBuffer != 0) {
+            return new GraphicBuffer(i, i2, i3, i4, jNCreateGraphicBuffer);
         }
         return null;
     }

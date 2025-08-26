@@ -45,9 +45,9 @@ public interface IClipboardDataPasteEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IClipboardDataPasteEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClipboardDataPasteEvent)) {
-                return (IClipboardDataPasteEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IClipboardDataPasteEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClipboardDataPasteEvent)) {
+                return (IClipboardDataPasteEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IClipboardDataPasteEvent extends IInterface {
 
             @Override // android.sec.clipboard.IClipboardDataPasteEvent
             public void onPaste(SemClipData semClipData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataPasteEvent.DESCRIPTOR);
-                    obtain.writeTypedObject(semClipData, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IClipboardDataPasteEvent.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semClipData, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

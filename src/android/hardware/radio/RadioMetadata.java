@@ -271,8 +271,8 @@ public final class RadioMetadata implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static void putInt(Bundle bundle, String str, int i) {
-        int intValue = METADATA_KEYS_TYPE.getOrDefault(str, -1).intValue();
-        if (intValue != 0 && intValue != 2) {
+        int iIntValue = METADATA_KEYS_TYPE.getOrDefault(str, -1).intValue();
+        if (iIntValue != 0 && iIntValue != 2) {
             throw new IllegalArgumentException("The " + str + " key cannot be used to put an int");
         }
         bundle.putInt(str, i);
@@ -407,8 +407,8 @@ public final class RadioMetadata implements Parcelable {
 
         private Bitmap scaleBitmap(Bitmap bitmap, int i) {
             float f = i;
-            float min = Math.min(f / bitmap.getWidth(), f / bitmap.getHeight());
-            return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * min), (int) (bitmap.getHeight() * min), true);
+            float fMin = Math.min(f / bitmap.getWidth(), f / bitmap.getHeight());
+            return Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fMin), (int) (bitmap.getHeight() * fMin), true);
         }
     }
 
@@ -438,9 +438,9 @@ public final class RadioMetadata implements Parcelable {
         ArrayMap<String, Integer> arrayMap = METADATA_KEYS_TYPE;
         if (arrayMap.containsKey(keyFromNativeKey) && arrayMap.get(keyFromNativeKey).intValue() == 2) {
             try {
-                Bitmap decodeByteArray = BitmapFactory.decodeByteArray(bArr, 0, bArr.length);
-                if (decodeByteArray != null) {
-                    this.mBundle.putParcelable(keyFromNativeKey, decodeByteArray);
+                Bitmap bitmapDecodeByteArray = BitmapFactory.decodeByteArray(bArr, 0, bArr.length);
+                if (bitmapDecodeByteArray != null) {
+                    this.mBundle.putParcelable(keyFromNativeKey, bitmapDecodeByteArray);
                     this.mHashCode = null;
                     return 0;
                 }

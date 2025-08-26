@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class GridTileInteractor$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -30,7 +29,7 @@ public final /* synthetic */ class GridTileInteractor$$ExternalSyntheticLambda0 
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 CurrentTilesInteractor currentTilesInteractor = this.f$0.currentTilesInteractor;
@@ -40,9 +39,9 @@ public final /* synthetic */ class GridTileInteractor$$ExternalSyntheticLambda0 
                 return tileBySpecString != null ? new QuickTile(0L, null, str, GridTileInteractor.getQuickTileResourceId(str), tileBySpecString, 3, null) : new QuickTile(0L, null, str, GridTileInteractor.getQuickTileResourceId(str), null, 19, null);
             case 1:
                 GridTileData gridTileData2 = this.f$1;
-                List<String> split$default = StringsKt__StringsKt.split$default(gridTileData2.spec, new String[]{","}, 0, 6);
-                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default, 10));
-                for (String str2 : split$default) {
+                List<String> listSplit$default = StringsKt__StringsKt.split$default(gridTileData2.spec, new String[]{","}, 0, 6);
+                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listSplit$default, 10));
+                for (String str2 : listSplit$default) {
                     GridTileInteractor gridTileInteractor = this.f$0;
                     gridTileInteractor.getClass();
                     int quickTileResourceId = GridTileInteractor.getQuickTileResourceId(gridTileData2.spec);
@@ -57,9 +56,9 @@ public final /* synthetic */ class GridTileInteractor$$ExternalSyntheticLambda0 
                 GridTileData gridTileData3 = this.f$1;
                 String str3 = gridTileData3.spec;
                 this.f$0.getClass();
-                boolean areEqual = Intrinsics.areEqual(str3, "NearByDevices");
+                boolean zAreEqual = Intrinsics.areEqual(str3, "NearByDevices");
                 int i = R.drawable.quick_panel_icon_device_control;
-                if (!areEqual && Intrinsics.areEqual(str3, "SmartThings")) {
+                if (!zAreEqual && Intrinsics.areEqual(str3, "SmartThings")) {
                     i = R.drawable.ic_smartthings;
                 }
                 return new QuickButton(0L, null, str3, i, gridTileData3.spec, new GridTileInteractor$$ExternalSyntheticLambda5(), 3, null);

@@ -12,14 +12,12 @@ import com.android.systemui.util.DeviceState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ResetTilesInteractorImpl implements ResetTilesInteractor {
     public final CurrentTilesInteractor currentTileInteractor;
     public final CurrentTilesInteractor qqsInteractor;
     public final CurrentTilesInteractor subQsInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,16 +42,16 @@ public final class ResetTilesInteractorImpl implements ResetTilesInteractor {
                 if (StringsKt__StringsJVMKt.equals(action, "com.samsung.intent.action.SETTINGS_SOFT_RESET", false)) {
                     Log.d("ResetTilesInteractor", "softResetStarted()");
                     Prefs.putInt(context2, "QsWifiCallingTileIndex", -1);
-                    ResetTilesInteractorImpl.this.currentTileInteractor.resetTiles();
-                    ResetTilesInteractorImpl.this.qqsInteractor.resetTiles();
-                    ResetTilesInteractorImpl.this.subQsInteractor.resetTiles();
+                    this.this$0.currentTileInteractor.resetTiles();
+                    this.this$0.qqsInteractor.resetTiles();
+                    this.this$0.subQsInteractor.resetTiles();
                     return;
                 }
                 if (StringsKt__StringsJVMKt.equals(action, "com.samsung.sea.rm.DEMO_RESET_STARTED", false) && DeviceState.isShopDemo(context2)) {
                     Log.d("ResetTilesInteractor", "demoResetStarted()");
-                    ResetTilesInteractorImpl.this.currentTileInteractor.resetTiles();
-                    ResetTilesInteractorImpl.this.qqsInteractor.resetTiles();
-                    ResetTilesInteractorImpl.this.subQsInteractor.resetTiles();
+                    this.this$0.currentTileInteractor.resetTiles();
+                    this.this$0.qqsInteractor.resetTiles();
+                    this.this$0.subQsInteractor.resetTiles();
                 }
             }
         };

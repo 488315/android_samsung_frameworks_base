@@ -2,6 +2,8 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Debug;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
@@ -14,7 +16,6 @@ import com.android.systemui.shade.SecPanelSplitHelper;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NonInterceptingScrollView extends ScrollView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,14 +39,14 @@ public class NonInterceptingScrollView extends ScrollView {
         this.mSecNonInterceptingScrollView = new SecNonInterceptingScrollView(new Runnable() { // from class: com.android.systemui.qs.NonInterceptingScrollView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                NonInterceptingScrollView nonInterceptingScrollView = NonInterceptingScrollView.this;
+                NonInterceptingScrollView nonInterceptingScrollView = this.f$0;
                 int i = NonInterceptingScrollView.$r8$clinit;
                 nonInterceptingScrollView.scrollTo(0, 0);
             }
         }, new Function0() { // from class: com.android.systemui.qs.NonInterceptingScrollView$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Integer.valueOf(NonInterceptingScrollView.this.getScrollRange());
+                return Integer.valueOf(this.f$0.getScrollRange());
             }
         });
     }
@@ -109,49 +110,51 @@ public class NonInterceptingScrollView extends ScrollView {
         if (quickPanelLogger != null) {
             quickPanelLogger.onInterceptTouchEvent(motionEvent);
         }
-        Function0 function0 = this.mSecNonInterceptingScrollView.scrollRange;
-        if (((Number) function0.invoke()).intValue() != 0) {
-            int actionMasked = motionEvent.getActionMasked();
-            if (actionMasked == 0) {
-                this.mDownY = motionEvent.getY();
-            } else if (actionMasked == 2 && ((Number) function0.invoke()).intValue() > 0) {
-                float y = ((int) motionEvent.getY()) - this.mDownY;
-                if (y >= (-this.mTouchSlop) || canScrollVertically(1)) {
-                    double d = y;
-                    if (Math.abs(d) > this.mTouchSlop) {
-                        QuickPanelLogger quickPanelLogger2 = this.mQuickPanelLogger;
-                        if (quickPanelLogger2 != null) {
-                            StringBuilder sb2 = this.mQuickPanelLogBuilder;
-                            if (sb2 != null) {
-                                sb2.setLength(0);
-                                sb2.append("abs(yDiff): ");
-                                sb2.append(Math.abs(d));
-                                sb2.append(" > touchSlop: ");
-                                sb2.append(this.mTouchSlop);
-                            } else {
-                                sb2 = null;
+        if (!(!(QpRune.QUICK_TABLET || QpRune.QUICK_PANEL_BLUR_MASSIVE || !QsAnimatorState.isDetailPopupShowing) || (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && QsAnimatorState.isDetailShowing))) {
+            Function0 function0 = this.mSecNonInterceptingScrollView.scrollRange;
+            if (((Number) function0.invoke()).intValue() != 0) {
+                int actionMasked = motionEvent.getActionMasked();
+                if (actionMasked == 0) {
+                    this.mDownY = motionEvent.getY();
+                } else if (actionMasked == 2 && ((Number) function0.invoke()).intValue() > 0) {
+                    float y = ((int) motionEvent.getY()) - this.mDownY;
+                    if (y >= (-this.mTouchSlop) || canScrollVertically(1)) {
+                        double d = y;
+                        if (Math.abs(d) > this.mTouchSlop) {
+                            QuickPanelLogger quickPanelLogger2 = this.mQuickPanelLogger;
+                            if (quickPanelLogger2 != null) {
+                                StringBuilder sb2 = this.mQuickPanelLogBuilder;
+                                if (sb2 != null) {
+                                    sb2.setLength(0);
+                                    sb2.append("abs(yDiff): ");
+                                    sb2.append(Math.abs(d));
+                                    sb2.append(" > touchSlop: ");
+                                    sb2.append(this.mTouchSlop);
+                                } else {
+                                    sb2 = null;
+                                }
+                                quickPanelLogger2.onInterceptTouchEvent(motionEvent, String.valueOf(sb2), true);
                             }
-                            quickPanelLogger2.onInterceptTouchEvent(motionEvent, String.valueOf(sb2), true);
+                            return true;
                         }
-                        return true;
-                    }
-                } else {
-                    QuickPanelLogger quickPanelLogger3 = this.mQuickPanelLogger;
-                    if (quickPanelLogger3 != null && (sb = this.mQuickPanelLogBuilder) != null) {
-                        sb.setLength(0);
-                        sb.append("yDiff: ");
-                        sb.append(y);
-                        sb.append(" < -touchSlop: ");
-                        quickPanelLogger3.onInterceptTouchEvent(motionEvent, ReorderTile$$ExternalSyntheticOutline0.m(-this.mTouchSlop, " && !canScrollVertically()", sb), false);
+                    } else {
+                        QuickPanelLogger quickPanelLogger3 = this.mQuickPanelLogger;
+                        if (quickPanelLogger3 != null && (sb = this.mQuickPanelLogBuilder) != null) {
+                            sb.setLength(0);
+                            sb.append("yDiff: ");
+                            sb.append(y);
+                            sb.append(" < -touchSlop: ");
+                            quickPanelLogger3.onInterceptTouchEvent(motionEvent, ReorderTile$$ExternalSyntheticOutline0.m(-this.mTouchSlop, " && !canScrollVertically()", sb), false);
+                        }
                     }
                 }
+                return super.onInterceptTouchEvent(motionEvent);
             }
-            return super.onInterceptTouchEvent(motionEvent);
-        }
-        QuickPanelLogger quickPanelLogger4 = this.mQuickPanelLogger;
-        if (quickPanelLogger4 != null) {
-            quickPanelLogger4.onInterceptTouchEvent(motionEvent, "scrollRange == 0", false);
-            return false;
+            QuickPanelLogger quickPanelLogger4 = this.mQuickPanelLogger;
+            if (quickPanelLogger4 != null) {
+                quickPanelLogger4.onInterceptTouchEvent(motionEvent, "scrollRange == 0", false);
+                return false;
+            }
         }
         return false;
     }
@@ -179,13 +182,24 @@ public class NonInterceptingScrollView extends ScrollView {
         return false;
     }
 
+    @Override // android.view.View
+    public final void setVisibility(int i) {
+        super.setVisibility(i);
+        QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
+        if (quickPanelLogger != null) {
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setVisibility: ", ", caller: ");
+            sbM.append(Debug.getCallers(1));
+            quickPanelLogger.logPanelState(sbM.toString());
+        }
+    }
+
     public final void smoothScrollToDescendant(QSTileView qSTileView) {
         Rect rect = new Rect();
         qSTileView.getDrawingRect(rect);
         offsetDescendantRectToMyCoords(qSTileView, rect);
-        int computeScrollDeltaToGetChildRectOnScreen = computeScrollDeltaToGetChildRectOnScreen(rect);
-        if (computeScrollDeltaToGetChildRectOnScreen != 0) {
-            smoothScrollTo(0, computeScrollDeltaToGetChildRectOnScreen);
+        int iComputeScrollDeltaToGetChildRectOnScreen = computeScrollDeltaToGetChildRectOnScreen(rect);
+        if (iComputeScrollDeltaToGetChildRectOnScreen != 0) {
+            smoothScrollTo(0, iComputeScrollDeltaToGetChildRectOnScreen);
         }
     }
 }

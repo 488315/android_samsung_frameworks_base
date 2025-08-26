@@ -14,7 +14,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SeslRecoilModifierElement extends ModifierNodeElement<SeslRecoilNode> {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -33,10 +32,10 @@ final class SeslRecoilModifierElement extends ModifierNodeElement<SeslRecoilNode
 
     @Override // androidx.compose.ui.node.ModifierNodeElement
     public final Modifier.Node create() {
-        ColorProducer colorProducer = new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilModifierElement$create$1
+        ColorProducer colorProducer = new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilModifierElement.create.1
             @Override // androidx.compose.ui.graphics.ColorProducer
             /* renamed from: invoke-0d7_KjU */
-            public final long mo261invoke0d7_KjU() {
+            public final long mo262invoke0d7_KjU() {
                 return SeslRecoilModifierElement.this.feedbackColor;
             }
         };
@@ -56,20 +55,20 @@ final class SeslRecoilModifierElement extends ModifierNodeElement<SeslRecoilNode
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.feedbackColor, seslRecoilModifierElement.feedbackColor) && Intrinsics.areEqual(this.feedbackShape, seslRecoilModifierElement.feedbackShape) && Intrinsics.areEqual(this.feedbackMargin, seslRecoilModifierElement.feedbackMargin) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilModifierElement.feedbackAlpha) && Intrinsics.areEqual(this.drawStrategy, seslRecoilModifierElement.drawStrategy);
+        return ULong.m3447equalsimpl0(this.feedbackColor, seslRecoilModifierElement.feedbackColor) && Intrinsics.areEqual(this.feedbackShape, seslRecoilModifierElement.feedbackShape) && Intrinsics.areEqual(this.feedbackMargin, seslRecoilModifierElement.feedbackMargin) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilModifierElement.feedbackAlpha) && Intrinsics.areEqual(this.drawStrategy, seslRecoilModifierElement.drawStrategy);
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, TransitionData$$ExternalSyntheticOutline0.m(this.interactionSource.hashCode() * 31, 31, this.enabled), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, TransitionData$$ExternalSyntheticOutline0.m(this.interactionSource.hashCode() * 31, 31, this.enabled), 31);
         Color.Companion companion = Color.Companion;
         int i = ULong.$r8$clinit;
-        int m2 = MoveResult$$ExternalSyntheticOutline0.m(m, 31, this.feedbackColor);
+        int iM2 = MoveResult$$ExternalSyntheticOutline0.m(iM, 31, this.feedbackColor);
         Shape shape = this.feedbackShape;
-        return this.drawStrategy.hashCode() + ((this.feedbackAlpha.hashCode() + ((this.feedbackMargin.hashCode() + ((m2 + (shape == null ? 0 : shape.hashCode())) * 31)) * 31)) * 31);
+        return this.drawStrategy.hashCode() + ((this.feedbackAlpha.hashCode() + ((this.feedbackMargin.hashCode() + ((iM2 + (shape == null ? 0 : shape.hashCode())) * 31)) * 31)) * 31);
     }
 
     public final String toString() {
-        return "SeslRecoilModifierElement(interactionSource=" + this.interactionSource + ", enabled=" + this.enabled + ", scale=" + this.scale + ", feedbackColor=" + Color.m462toStringimpl(this.feedbackColor) + ", feedbackShape=" + this.feedbackShape + ", feedbackMargin=" + this.feedbackMargin + ", feedbackAlpha=" + this.feedbackAlpha + ", drawStrategy=" + this.drawStrategy + ")";
+        return "SeslRecoilModifierElement(interactionSource=" + this.interactionSource + ", enabled=" + this.enabled + ", scale=" + this.scale + ", feedbackColor=" + Color.m464toStringimpl(this.feedbackColor) + ", feedbackShape=" + this.feedbackShape + ", feedbackMargin=" + this.feedbackMargin + ", feedbackAlpha=" + this.feedbackAlpha + ", drawStrategy=" + this.drawStrategy + ")";
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement
@@ -88,10 +87,10 @@ final class SeslRecoilModifierElement extends ModifierNodeElement<SeslRecoilNode
             }
         }
         seslRecoilNode.feedbackShape = this.feedbackShape;
-        seslRecoilNode.feedbackColor = new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilModifierElement$update$1
+        seslRecoilNode.feedbackColor = new ColorProducer() { // from class: com.samsung.sesl.compose.foundation.SeslRecoilModifierElement.update.1
             @Override // androidx.compose.ui.graphics.ColorProducer
             /* renamed from: invoke-0d7_KjU */
-            public final long mo261invoke0d7_KjU() {
+            public final long mo262invoke0d7_KjU() {
                 return SeslRecoilModifierElement.this.feedbackColor;
             }
         };

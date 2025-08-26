@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecColorSchemeTransition {
     public final boolean DEBUG;
@@ -38,7 +37,6 @@ public final class SecColorSchemeTransition {
     public boolean isGradientEnabled;
     public final SecPlayerViewHolder mediaViewHolder;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.SecColorSchemeTransition$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function3 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
@@ -71,21 +69,21 @@ public final class SecColorSchemeTransition {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Drawable drawable;
                 Integer num = (Integer) obj;
                 switch (i) {
                     case 0:
-                        ColorStateList valueOf = ColorStateList.valueOf(num.intValue());
+                        ColorStateList colorStateListValueOf = ColorStateList.valueOf(num.intValue());
                         ImageView imageView = this.f$0.mediaViewHolder.albumView;
                         if (imageView == null) {
                             imageView = null;
                         }
-                        imageView.setBackgroundTintList(valueOf);
+                        imageView.setBackgroundTintList(colorStateListValueOf);
                         break;
                     case 1:
-                        int intValue = num.intValue();
-                        ColorStateList.valueOf(intValue);
+                        int iIntValue = num.intValue();
+                        ColorStateList.valueOf(iIntValue);
                         SecColorSchemeTransition secColorSchemeTransition = this.f$0;
                         SeekBar seekBar = secColorSchemeTransition.mediaViewHolder.seekBar;
                         if (seekBar == null) {
@@ -97,18 +95,18 @@ public final class SecColorSchemeTransition {
                             if (seekBar2 == null) {
                                 seekBar2 = null;
                             }
-                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = intValue;
+                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = iIntValue;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarPrimaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder2.progressBarPrimaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder2.progressBarPrimaryColor = intValue;
+                            secPlayerViewHolder2.progressBarPrimaryColor = iIntValue;
                             SeekBar seekBar3 = secPlayerViewHolder2.seekBar;
-                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(intValue, PorterDuff.Mode.MULTIPLY);
+                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(iIntValue, PorterDuff.Mode.MULTIPLY);
                         }
                         break;
                     case 2:
-                        int intValue2 = num.intValue();
-                        ColorStateList valueOf2 = ColorStateList.valueOf(intValue2);
+                        int iIntValue2 = num.intValue();
+                        ColorStateList colorStateListValueOf2 = ColorStateList.valueOf(iIntValue2);
                         SecColorSchemeTransition secColorSchemeTransition2 = this.f$0;
                         SeekBar seekBar4 = secColorSchemeTransition2.mediaViewHolder.seekBar;
                         if (seekBar4 == null) {
@@ -118,18 +116,18 @@ public final class SecColorSchemeTransition {
                         SecPlayerViewHolder secPlayerViewHolder3 = secColorSchemeTransition2.mediaViewHolder;
                         if (z) {
                             SeekBar seekBar5 = secPlayerViewHolder3.seekBar;
-                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = intValue2;
+                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = iIntValue2;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarSecondaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder3.progressBarSecondaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder3.progressBarSecondaryColor = intValue2;
+                            secPlayerViewHolder3.progressBarSecondaryColor = iIntValue2;
                         } else {
                             SeekBar seekBar6 = secPlayerViewHolder3.seekBar;
-                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(valueOf2);
+                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(colorStateListValueOf2);
                         }
                         LayerDrawable layerDrawable = secPlayerViewHolder3.dummyProgressDrawable;
                         if (layerDrawable != null && (drawable = layerDrawable.getDrawable(2)) != null) {
-                            drawable.setColorFilter(intValue2, PorterDuff.Mode.SRC_ATOP);
+                            drawable.setColorFilter(iIntValue2, PorterDuff.Mode.SRC_ATOP);
                         }
                         break;
                     case 3:
@@ -154,21 +152,21 @@ public final class SecColorSchemeTransition {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Drawable drawable;
                 Integer num = (Integer) obj;
                 switch (i2) {
                     case 0:
-                        ColorStateList valueOf = ColorStateList.valueOf(num.intValue());
+                        ColorStateList colorStateListValueOf = ColorStateList.valueOf(num.intValue());
                         ImageView imageView = this.f$0.mediaViewHolder.albumView;
                         if (imageView == null) {
                             imageView = null;
                         }
-                        imageView.setBackgroundTintList(valueOf);
+                        imageView.setBackgroundTintList(colorStateListValueOf);
                         break;
                     case 1:
-                        int intValue = num.intValue();
-                        ColorStateList.valueOf(intValue);
+                        int iIntValue = num.intValue();
+                        ColorStateList.valueOf(iIntValue);
                         SecColorSchemeTransition secColorSchemeTransition = this.f$0;
                         SeekBar seekBar = secColorSchemeTransition.mediaViewHolder.seekBar;
                         if (seekBar == null) {
@@ -180,18 +178,18 @@ public final class SecColorSchemeTransition {
                             if (seekBar2 == null) {
                                 seekBar2 = null;
                             }
-                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = intValue;
+                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = iIntValue;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarPrimaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder2.progressBarPrimaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder2.progressBarPrimaryColor = intValue;
+                            secPlayerViewHolder2.progressBarPrimaryColor = iIntValue;
                             SeekBar seekBar3 = secPlayerViewHolder2.seekBar;
-                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(intValue, PorterDuff.Mode.MULTIPLY);
+                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(iIntValue, PorterDuff.Mode.MULTIPLY);
                         }
                         break;
                     case 2:
-                        int intValue2 = num.intValue();
-                        ColorStateList valueOf2 = ColorStateList.valueOf(intValue2);
+                        int iIntValue2 = num.intValue();
+                        ColorStateList colorStateListValueOf2 = ColorStateList.valueOf(iIntValue2);
                         SecColorSchemeTransition secColorSchemeTransition2 = this.f$0;
                         SeekBar seekBar4 = secColorSchemeTransition2.mediaViewHolder.seekBar;
                         if (seekBar4 == null) {
@@ -201,18 +199,18 @@ public final class SecColorSchemeTransition {
                         SecPlayerViewHolder secPlayerViewHolder3 = secColorSchemeTransition2.mediaViewHolder;
                         if (z) {
                             SeekBar seekBar5 = secPlayerViewHolder3.seekBar;
-                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = intValue2;
+                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = iIntValue2;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarSecondaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder3.progressBarSecondaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder3.progressBarSecondaryColor = intValue2;
+                            secPlayerViewHolder3.progressBarSecondaryColor = iIntValue2;
                         } else {
                             SeekBar seekBar6 = secPlayerViewHolder3.seekBar;
-                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(valueOf2);
+                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(colorStateListValueOf2);
                         }
                         LayerDrawable layerDrawable = secPlayerViewHolder3.dummyProgressDrawable;
                         if (layerDrawable != null && (drawable = layerDrawable.getDrawable(2)) != null) {
-                            drawable.setColorFilter(intValue2, PorterDuff.Mode.SRC_ATOP);
+                            drawable.setColorFilter(iIntValue2, PorterDuff.Mode.SRC_ATOP);
                         }
                         break;
                     case 3:
@@ -237,21 +235,21 @@ public final class SecColorSchemeTransition {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Drawable drawable;
                 Integer num = (Integer) obj;
                 switch (i3) {
                     case 0:
-                        ColorStateList valueOf = ColorStateList.valueOf(num.intValue());
+                        ColorStateList colorStateListValueOf = ColorStateList.valueOf(num.intValue());
                         ImageView imageView = this.f$0.mediaViewHolder.albumView;
                         if (imageView == null) {
                             imageView = null;
                         }
-                        imageView.setBackgroundTintList(valueOf);
+                        imageView.setBackgroundTintList(colorStateListValueOf);
                         break;
                     case 1:
-                        int intValue = num.intValue();
-                        ColorStateList.valueOf(intValue);
+                        int iIntValue = num.intValue();
+                        ColorStateList.valueOf(iIntValue);
                         SecColorSchemeTransition secColorSchemeTransition = this.f$0;
                         SeekBar seekBar = secColorSchemeTransition.mediaViewHolder.seekBar;
                         if (seekBar == null) {
@@ -263,18 +261,18 @@ public final class SecColorSchemeTransition {
                             if (seekBar2 == null) {
                                 seekBar2 = null;
                             }
-                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = intValue;
+                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = iIntValue;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarPrimaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder2.progressBarPrimaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder2.progressBarPrimaryColor = intValue;
+                            secPlayerViewHolder2.progressBarPrimaryColor = iIntValue;
                             SeekBar seekBar3 = secPlayerViewHolder2.seekBar;
-                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(intValue, PorterDuff.Mode.MULTIPLY);
+                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(iIntValue, PorterDuff.Mode.MULTIPLY);
                         }
                         break;
                     case 2:
-                        int intValue2 = num.intValue();
-                        ColorStateList valueOf2 = ColorStateList.valueOf(intValue2);
+                        int iIntValue2 = num.intValue();
+                        ColorStateList colorStateListValueOf2 = ColorStateList.valueOf(iIntValue2);
                         SecColorSchemeTransition secColorSchemeTransition2 = this.f$0;
                         SeekBar seekBar4 = secColorSchemeTransition2.mediaViewHolder.seekBar;
                         if (seekBar4 == null) {
@@ -284,18 +282,18 @@ public final class SecColorSchemeTransition {
                         SecPlayerViewHolder secPlayerViewHolder3 = secColorSchemeTransition2.mediaViewHolder;
                         if (z) {
                             SeekBar seekBar5 = secPlayerViewHolder3.seekBar;
-                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = intValue2;
+                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = iIntValue2;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarSecondaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder3.progressBarSecondaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder3.progressBarSecondaryColor = intValue2;
+                            secPlayerViewHolder3.progressBarSecondaryColor = iIntValue2;
                         } else {
                             SeekBar seekBar6 = secPlayerViewHolder3.seekBar;
-                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(valueOf2);
+                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(colorStateListValueOf2);
                         }
                         LayerDrawable layerDrawable = secPlayerViewHolder3.dummyProgressDrawable;
                         if (layerDrawable != null && (drawable = layerDrawable.getDrawable(2)) != null) {
-                            drawable.setColorFilter(intValue2, PorterDuff.Mode.SRC_ATOP);
+                            drawable.setColorFilter(iIntValue2, PorterDuff.Mode.SRC_ATOP);
                         }
                         break;
                     case 3:
@@ -310,7 +308,7 @@ public final class SecColorSchemeTransition {
                 return Unit.INSTANCE;
             }
         });
-        Integer valueOf = Integer.valueOf(color);
+        Integer numValueOf = Integer.valueOf(color);
         final SecColorSchemeTransition$bgGradientStart$1 secColorSchemeTransition$bgGradientStart$1 = SecColorSchemeTransition$bgGradientStart$1.INSTANCE;
         final float f = 0.45f;
         Function1 function1 = new Function1(secColorSchemeTransition$bgGradientStart$1, f) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda5
@@ -326,26 +324,26 @@ public final class SecColorSchemeTransition {
             /* JADX WARN: Type inference failed for: r0v2, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.FunctionReferenceImpl] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int i4;
+            public final Object mo781invoke(Object obj) {
+                int colorWithAlpha;
                 ColorScheme colorScheme = (ColorScheme) obj;
-                if (SecColorSchemeTransition.this.isGradientEnabled) {
-                    int intValue = ((Number) this.f$1.mo779invoke(colorScheme)).intValue();
+                if (this.f$0.isGradientEnabled) {
+                    int iIntValue = ((Number) this.f$1.mo781invoke(colorScheme)).intValue();
                     float[] fArr = new float[3];
-                    Color.colorToHSV(intValue, fArr);
+                    Color.colorToHSV(iIntValue, fArr);
                     if (fArr[2] > 0.2f) {
                         fArr[2] = 0.2f;
-                        intValue = Color.HSVToColor(fArr);
+                        iIntValue = Color.HSVToColor(fArr);
                     }
-                    i4 = ColorUtilKt.getColorWithAlpha(intValue, this.f$2);
+                    colorWithAlpha = ColorUtilKt.getColorWithAlpha(iIntValue, this.f$2);
                 } else {
-                    i4 = 0;
+                    colorWithAlpha = 0;
                 }
-                return Integer.valueOf(i4);
+                return Integer.valueOf(colorWithAlpha);
             }
         };
         final int i4 = 3;
-        SecAnimatingColorTransition secAnimatingColorTransition4 = (SecAnimatingColorTransition) function3.invoke(valueOf, function1, new Function1(this) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda0
+        SecAnimatingColorTransition secAnimatingColorTransition4 = (SecAnimatingColorTransition) function3.invoke(numValueOf, function1, new Function1(this) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda0
             public final /* synthetic */ SecColorSchemeTransition f$0;
 
             {
@@ -354,21 +352,21 @@ public final class SecColorSchemeTransition {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Drawable drawable;
                 Integer num = (Integer) obj;
                 switch (i4) {
                     case 0:
-                        ColorStateList valueOf2 = ColorStateList.valueOf(num.intValue());
+                        ColorStateList colorStateListValueOf = ColorStateList.valueOf(num.intValue());
                         ImageView imageView = this.f$0.mediaViewHolder.albumView;
                         if (imageView == null) {
                             imageView = null;
                         }
-                        imageView.setBackgroundTintList(valueOf2);
+                        imageView.setBackgroundTintList(colorStateListValueOf);
                         break;
                     case 1:
-                        int intValue = num.intValue();
-                        ColorStateList.valueOf(intValue);
+                        int iIntValue = num.intValue();
+                        ColorStateList.valueOf(iIntValue);
                         SecColorSchemeTransition secColorSchemeTransition = this.f$0;
                         SeekBar seekBar = secColorSchemeTransition.mediaViewHolder.seekBar;
                         if (seekBar == null) {
@@ -380,18 +378,18 @@ public final class SecColorSchemeTransition {
                             if (seekBar2 == null) {
                                 seekBar2 = null;
                             }
-                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = intValue;
+                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = iIntValue;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarPrimaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder2.progressBarPrimaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder2.progressBarPrimaryColor = intValue;
+                            secPlayerViewHolder2.progressBarPrimaryColor = iIntValue;
                             SeekBar seekBar3 = secPlayerViewHolder2.seekBar;
-                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(intValue, PorterDuff.Mode.MULTIPLY);
+                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(iIntValue, PorterDuff.Mode.MULTIPLY);
                         }
                         break;
                     case 2:
-                        int intValue2 = num.intValue();
-                        ColorStateList valueOf22 = ColorStateList.valueOf(intValue2);
+                        int iIntValue2 = num.intValue();
+                        ColorStateList colorStateListValueOf2 = ColorStateList.valueOf(iIntValue2);
                         SecColorSchemeTransition secColorSchemeTransition2 = this.f$0;
                         SeekBar seekBar4 = secColorSchemeTransition2.mediaViewHolder.seekBar;
                         if (seekBar4 == null) {
@@ -401,18 +399,18 @@ public final class SecColorSchemeTransition {
                         SecPlayerViewHolder secPlayerViewHolder3 = secColorSchemeTransition2.mediaViewHolder;
                         if (z) {
                             SeekBar seekBar5 = secPlayerViewHolder3.seekBar;
-                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = intValue2;
+                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = iIntValue2;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarSecondaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder3.progressBarSecondaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder3.progressBarSecondaryColor = intValue2;
+                            secPlayerViewHolder3.progressBarSecondaryColor = iIntValue2;
                         } else {
                             SeekBar seekBar6 = secPlayerViewHolder3.seekBar;
-                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(valueOf22);
+                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(colorStateListValueOf2);
                         }
                         LayerDrawable layerDrawable = secPlayerViewHolder3.dummyProgressDrawable;
                         if (layerDrawable != null && (drawable = layerDrawable.getDrawable(2)) != null) {
-                            drawable.setColorFilter(intValue2, PorterDuff.Mode.SRC_ATOP);
+                            drawable.setColorFilter(iIntValue2, PorterDuff.Mode.SRC_ATOP);
                         }
                         break;
                     case 3:
@@ -428,7 +426,7 @@ public final class SecColorSchemeTransition {
             }
         });
         this.bgGradientStart = secAnimatingColorTransition4;
-        Integer valueOf2 = Integer.valueOf(color);
+        Integer numValueOf2 = Integer.valueOf(color);
         final SecColorSchemeTransition$bgGradientEnd$1 secColorSchemeTransition$bgGradientEnd$1 = SecColorSchemeTransition$bgGradientEnd$1.INSTANCE;
         final float f2 = 1.0f;
         Function1 function12 = new Function1(secColorSchemeTransition$bgGradientEnd$1, f2) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda5
@@ -444,26 +442,26 @@ public final class SecColorSchemeTransition {
             /* JADX WARN: Type inference failed for: r0v2, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.FunctionReferenceImpl] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int i42;
+            public final Object mo781invoke(Object obj) {
+                int colorWithAlpha;
                 ColorScheme colorScheme = (ColorScheme) obj;
-                if (SecColorSchemeTransition.this.isGradientEnabled) {
-                    int intValue = ((Number) this.f$1.mo779invoke(colorScheme)).intValue();
+                if (this.f$0.isGradientEnabled) {
+                    int iIntValue = ((Number) this.f$1.mo781invoke(colorScheme)).intValue();
                     float[] fArr = new float[3];
-                    Color.colorToHSV(intValue, fArr);
+                    Color.colorToHSV(iIntValue, fArr);
                     if (fArr[2] > 0.2f) {
                         fArr[2] = 0.2f;
-                        intValue = Color.HSVToColor(fArr);
+                        iIntValue = Color.HSVToColor(fArr);
                     }
-                    i42 = ColorUtilKt.getColorWithAlpha(intValue, this.f$2);
+                    colorWithAlpha = ColorUtilKt.getColorWithAlpha(iIntValue, this.f$2);
                 } else {
-                    i42 = 0;
+                    colorWithAlpha = 0;
                 }
-                return Integer.valueOf(i42);
+                return Integer.valueOf(colorWithAlpha);
             }
         };
         final int i5 = 4;
-        SecAnimatingColorTransition secAnimatingColorTransition5 = (SecAnimatingColorTransition) function3.invoke(valueOf2, function12, new Function1(this) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda0
+        SecAnimatingColorTransition secAnimatingColorTransition5 = (SecAnimatingColorTransition) function3.invoke(numValueOf2, function12, new Function1(this) { // from class: com.android.systemui.media.controls.ui.SecColorSchemeTransition$$ExternalSyntheticLambda0
             public final /* synthetic */ SecColorSchemeTransition f$0;
 
             {
@@ -472,21 +470,21 @@ public final class SecColorSchemeTransition {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Drawable drawable;
                 Integer num = (Integer) obj;
                 switch (i5) {
                     case 0:
-                        ColorStateList valueOf22 = ColorStateList.valueOf(num.intValue());
+                        ColorStateList colorStateListValueOf = ColorStateList.valueOf(num.intValue());
                         ImageView imageView = this.f$0.mediaViewHolder.albumView;
                         if (imageView == null) {
                             imageView = null;
                         }
-                        imageView.setBackgroundTintList(valueOf22);
+                        imageView.setBackgroundTintList(colorStateListValueOf);
                         break;
                     case 1:
-                        int intValue = num.intValue();
-                        ColorStateList.valueOf(intValue);
+                        int iIntValue = num.intValue();
+                        ColorStateList.valueOf(iIntValue);
                         SecColorSchemeTransition secColorSchemeTransition = this.f$0;
                         SeekBar seekBar = secColorSchemeTransition.mediaViewHolder.seekBar;
                         if (seekBar == null) {
@@ -498,18 +496,18 @@ public final class SecColorSchemeTransition {
                             if (seekBar2 == null) {
                                 seekBar2 = null;
                             }
-                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = intValue;
+                            ((AudioVisSeekBarProgressDrawable) seekBar2.getProgressDrawable()).config.primaryColor = iIntValue;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarPrimaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder2.progressBarPrimaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder2.progressBarPrimaryColor = intValue;
+                            secPlayerViewHolder2.progressBarPrimaryColor = iIntValue;
                             SeekBar seekBar3 = secPlayerViewHolder2.seekBar;
-                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(intValue, PorterDuff.Mode.MULTIPLY);
+                            (seekBar3 != null ? seekBar3 : null).getThumb().setColorFilter(iIntValue, PorterDuff.Mode.MULTIPLY);
                         }
                         break;
                     case 2:
-                        int intValue2 = num.intValue();
-                        ColorStateList valueOf222 = ColorStateList.valueOf(intValue2);
+                        int iIntValue2 = num.intValue();
+                        ColorStateList colorStateListValueOf2 = ColorStateList.valueOf(iIntValue2);
                         SecColorSchemeTransition secColorSchemeTransition2 = this.f$0;
                         SeekBar seekBar4 = secColorSchemeTransition2.mediaViewHolder.seekBar;
                         if (seekBar4 == null) {
@@ -519,18 +517,18 @@ public final class SecColorSchemeTransition {
                         SecPlayerViewHolder secPlayerViewHolder3 = secColorSchemeTransition2.mediaViewHolder;
                         if (z) {
                             SeekBar seekBar5 = secPlayerViewHolder3.seekBar;
-                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = intValue2;
+                            ((AudioVisSeekBarProgressDrawable) (seekBar5 != null ? seekBar5 : null).getProgressDrawable()).config.secondaryColor = iIntValue2;
                             if (SecPlayerViewHolder.DEBUG) {
                                 Log.d(SecPlayerViewHolder.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("ColorUpdate progressBarSecondaryColor changed from ", String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secPlayerViewHolder3.progressBarSecondaryColor)}, 1)), " to ", String.format("0x%08X", Arrays.copyOf(new Object[]{num}, 1))));
                             }
-                            secPlayerViewHolder3.progressBarSecondaryColor = intValue2;
+                            secPlayerViewHolder3.progressBarSecondaryColor = iIntValue2;
                         } else {
                             SeekBar seekBar6 = secPlayerViewHolder3.seekBar;
-                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(valueOf222);
+                            (seekBar6 != null ? seekBar6 : null).setProgressTintList(colorStateListValueOf2);
                         }
                         LayerDrawable layerDrawable = secPlayerViewHolder3.dummyProgressDrawable;
                         if (layerDrawable != null && (drawable = layerDrawable.getDrawable(2)) != null) {
-                            drawable.setColorFilter(intValue2, PorterDuff.Mode.SRC_ATOP);
+                            drawable.setColorFilter(iIntValue2, PorterDuff.Mode.SRC_ATOP);
                         }
                         break;
                     case 3:
@@ -555,20 +553,20 @@ public final class SecColorSchemeTransition {
             imageView = null;
         }
         Drawable foreground = imageView.getForeground();
-        Drawable mutate = foreground != null ? foreground.mutate() : null;
-        if (mutate instanceof GradientDrawable) {
+        Drawable drawableMutate = foreground != null ? foreground.mutate() : null;
+        if (drawableMutate instanceof GradientDrawable) {
             boolean z = this.DEBUG;
             SecAnimatingColorTransition secAnimatingColorTransition = this.bgGradientEnd;
             SecAnimatingColorTransition secAnimatingColorTransition2 = this.bgGradientStart;
             if (z) {
-                String format = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(this.bgColor)}, 1));
-                String format2 = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secAnimatingColorTransition2 != null ? secAnimatingColorTransition2.currentColor : 0)}, 1));
-                String format3 = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secAnimatingColorTransition != null ? secAnimatingColorTransition.currentColor : 0)}, 1));
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ColorUpdate updateAlbumGradient bgColor ", format, " bgGradientStart ", format2, " bgGradientEnd ");
-                m.append(format3);
-                Log.d(this.TAG, m.toString());
+                String str = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(this.bgColor)}, 1));
+                String str2 = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secAnimatingColorTransition2 != null ? secAnimatingColorTransition2.currentColor : 0)}, 1));
+                String str3 = String.format("0x%08X", Arrays.copyOf(new Object[]{Integer.valueOf(secAnimatingColorTransition != null ? secAnimatingColorTransition.currentColor : 0)}, 1));
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ColorUpdate updateAlbumGradient bgColor ", str, " bgGradientStart ", str2, " bgGradientEnd ");
+                sbM.append(str3);
+                Log.d(this.TAG, sbM.toString());
             }
-            ((GradientDrawable) mutate).setColors(new int[]{secAnimatingColorTransition2 != null ? secAnimatingColorTransition2.currentColor : 0, secAnimatingColorTransition != null ? secAnimatingColorTransition.currentColor : 0});
+            ((GradientDrawable) drawableMutate).setColors(new int[]{secAnimatingColorTransition2 != null ? secAnimatingColorTransition2.currentColor : 0, secAnimatingColorTransition != null ? secAnimatingColorTransition.currentColor : 0});
         }
     }
 

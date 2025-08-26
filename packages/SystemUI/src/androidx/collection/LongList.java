@@ -4,7 +4,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LongList {
     public int _size;
@@ -22,9 +21,9 @@ public abstract class LongList {
             if (i == i2) {
                 long[] jArr = this.content;
                 long[] jArr2 = longList.content;
-                IntRange until = RangesKt___RangesKt.until(0, i2);
-                int i3 = until.first;
-                int i4 = until.last;
+                IntRange intRangeUntil = RangesKt___RangesKt.until(0, i2);
+                int i3 = intRangeUntil.first;
+                int i4 = intRangeUntil.last;
                 if (i3 > i4) {
                     return true;
                 }
@@ -43,11 +42,11 @@ public abstract class LongList {
     public final int hashCode() {
         long[] jArr = this.content;
         int i = this._size;
-        int i2 = 0;
-        for (int i3 = 0; i3 < i; i3++) {
-            i2 += Long.hashCode(jArr[i3]) * 31;
+        int iHashCode = 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            iHashCode += Long.hashCode(jArr[i2]) * 31;
         }
-        return i2;
+        return iHashCode;
     }
 
     public final String toString() {

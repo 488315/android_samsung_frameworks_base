@@ -40,7 +40,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RotationButtonController {
     public final AccessibilityManager mAccessibilityManager;
@@ -103,7 +102,7 @@ public class RotationButtonController {
     public final RotationButtonController$$ExternalSyntheticLambda3 mRotationLockCallback = new Consumer() { // from class: com.android.systemui.shared.rotation.RotationButtonController$$ExternalSyntheticLambda3
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
-            RotationButtonController rotationButtonController = RotationButtonController.this;
+            RotationButtonController rotationButtonController = this.f$0;
             boolean z = RotationButtonController.OEM_DISALLOW_ROTATION_IN_SUW;
             rotationButtonController.getClass();
             if (((Boolean) obj).booleanValue()) {
@@ -113,25 +112,23 @@ public class RotationButtonController {
     };
     public final TaskStackListenerImpl mTaskStackListener = new TaskStackListenerImpl(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shared.rotation.RotationButtonController$2, reason: invalid class name */
     public class AnonymousClass2 extends IRotationWatcher.Stub {
         public AnonymousClass2() {
         }
 
         public final void onRotationChanged(final int i) {
-            final Boolean valueOf = Boolean.valueOf(RotationButtonController.this.mBarProxy.rotationLocked);
+            final Boolean boolValueOf = Boolean.valueOf(RotationButtonController.this.mBarProxy.rotationLocked);
             RotationButtonController.this.mMainThreadHandler.postAtFrontOfQueue(new Runnable() { // from class: com.android.systemui.shared.rotation.RotationButtonController$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RotationButtonController.AnonymousClass2 anonymousClass2 = RotationButtonController.AnonymousClass2.this;
-                    RotationButtonController.this.onRotationWatcherChanged(i, valueOf);
+                    RotationButtonController.AnonymousClass2 anonymousClass2 = this.f$0;
+                    RotationButtonController.this.onRotationWatcherChanged(i, boolValueOf);
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum RotationButtonEvent implements UiEventLogger.UiEventEnum {
         ROTATION_SUGGESTION_SHOWN(206),
         ROTATION_SUGGESTION_ACCEPTED(207);
@@ -147,7 +144,6 @@ public class RotationButtonController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TaskStackListenerImpl implements TaskStackChangeListener {
         public /* synthetic */ TaskStackListenerImpl(RotationButtonController rotationButtonController, int i) {
             this();
@@ -158,13 +154,13 @@ public class RotationButtonController {
             RotationButtonController.this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.rotation.RotationButtonController$TaskStackListenerImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final RotationButtonController.TaskStackListenerImpl taskStackListenerImpl = RotationButtonController.TaskStackListenerImpl.this;
+                    final RotationButtonController.TaskStackListenerImpl taskStackListenerImpl = this.f$0;
                     final int i2 = i;
                     taskStackListenerImpl.getClass();
                     Optional.ofNullable(ActivityManagerWrapper.sInstance).map(new RotationButtonController$TaskStackListenerImpl$$ExternalSyntheticLambda1()).ifPresent(new Consumer() { // from class: com.android.systemui.shared.rotation.RotationButtonController$TaskStackListenerImpl$$ExternalSyntheticLambda2
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            RotationButtonController.TaskStackListenerImpl taskStackListenerImpl2 = RotationButtonController.TaskStackListenerImpl.this;
+                            RotationButtonController.TaskStackListenerImpl taskStackListenerImpl2 = taskStackListenerImpl;
                             int i3 = i2;
                             taskStackListenerImpl2.getClass();
                             if (((ActivityManager.RunningTaskInfo) obj).id == i3) {
@@ -347,17 +343,17 @@ public class RotationButtonController {
         }
         Animator animator3 = this.mRotateHideAnimator;
         if (animator3 == null || !animator3.isRunning()) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(floatingRotationButtonView, "alpha", 0.0f);
-            ofFloat.setDuration(100L);
-            ofFloat.setInterpolator(LINEAR_INTERPOLATOR);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shared.rotation.RotationButtonController.3
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(floatingRotationButtonView, "alpha", 0.0f);
+            objectAnimatorOfFloat.setDuration(100L);
+            objectAnimatorOfFloat.setInterpolator(LINEAR_INTERPOLATOR);
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shared.rotation.RotationButtonController.3
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator4) {
                     RotationButtonController.this.mRotationButton.hide();
                 }
             });
-            this.mRotateHideAnimator = ofFloat;
-            ofFloat.start();
+            this.mRotateHideAnimator = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.start();
         }
     }
 }

@@ -10,7 +10,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileInputLogger {
     public final LogBuffer buffer;
@@ -23,52 +22,52 @@ public final class MobileInputLogger {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(26);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i3;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i3;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int2 = i;
         logMessageImpl.str1 = String.valueOf(i2);
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logOnDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo, int i) {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = telephonyDisplayInfo.toString();
         logMessageImpl.bool1 = telephonyDisplayInfo.isRoaming();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logOnServiceStateChanged(int i, ServiceState serviceState) {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(21);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = Utils.isInService(serviceState);
         logMessageImpl.bool2 = serviceState.isEmergencyOnly();
         logMessageImpl.bool3 = serviceState.getRoaming();
         logMessageImpl.bool4 = serviceState.isUsingNonTerrestrialNetwork();
         logMessageImpl.str1 = serviceState.getOperatorAlphaShort();
         logMessageImpl.int2 = serviceState.getVoiceNetworkType();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logOnSignalStrengthsChanged(SignalStrength signalStrength, int i) {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(27);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = signalStrength.toString();
         logMessageImpl.int2 = signalStrength.getVendorLevel();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logServiceProvidersUpdatedBroadcast(Intent intent) {
@@ -80,24 +79,24 @@ public final class MobileInputLogger {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = booleanExtra;
         logMessageImpl.str1 = stringExtra;
         logMessageImpl.str2 = stringExtra2;
         logMessageImpl.bool2 = booleanExtra2;
         logMessageImpl.str3 = stringExtra3;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logSimSettingChanged(int i, boolean z) {
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(13);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

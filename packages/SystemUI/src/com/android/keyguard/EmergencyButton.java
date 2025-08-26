@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,7 +21,6 @@ import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.systemui.CscRune;
 import com.android.systemui.widget.SystemUIButton;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EmergencyButton extends SystemUIButton {
     public int mDownX;
@@ -30,7 +30,6 @@ public class EmergencyButton extends SystemUIButton {
     public boolean mLongPressWasDragged;
     public TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Samsung321Task extends AsyncTask {
         public /* synthetic */ Samsung321Task(EmergencyButton emergencyButton, int i) {
             this();
@@ -38,7 +37,7 @@ public class EmergencyButton extends SystemUIButton {
 
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
-            return Boolean.valueOf(EmergencyButton.m949$$Nest$misSamsung321Enabled(EmergencyButton.this));
+            return Boolean.valueOf(EmergencyButton.m951$$Nest$misSamsung321Enabled(EmergencyButton.this));
         }
 
         @Override // android.os.AsyncTask
@@ -51,8 +50,8 @@ public class EmergencyButton extends SystemUIButton {
     }
 
     /* renamed from: $r8$lambda$HEMKmkVNKF-XedRWg2uz8LyJ1f8, reason: not valid java name */
-    public static boolean m947$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(EmergencyButton emergencyButton) {
-        if (emergencyButton.getVisibility() != 0 || !TextUtils.equals(emergencyButton.getText(), ((Button) emergencyButton).mContext.getString(R.string.permlab_accessLastKnownCellId)) || emergencyButton.mLongPressWasDragged || !emergencyButton.mEmergencyAffordanceManager.needsEmergencyAffordance()) {
+    public static boolean m949$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(EmergencyButton emergencyButton) {
+        if (emergencyButton.getVisibility() != 0 || !TextUtils.equals(emergencyButton.getText(), ((Button) emergencyButton).mContext.getString(R.string.permlab_accessNetworkConditions)) || emergencyButton.mLongPressWasDragged || !emergencyButton.mEmergencyAffordanceManager.needsEmergencyAffordance()) {
             return false;
         }
         emergencyButton.mEmergencyAffordanceManager.performEmergencyCall();
@@ -60,7 +59,7 @@ public class EmergencyButton extends SystemUIButton {
     }
 
     /* renamed from: $r8$lambda$U2-ul65dxQZsDCrj1vn5FpgiwWw, reason: not valid java name */
-    public static boolean m948$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(EmergencyButton emergencyButton) {
+    public static boolean m950$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(EmergencyButton emergencyButton) {
         try {
             if (!emergencyButton.mIsSamsung321Enable) {
                 Log.d("EmergencyButton", "PH Feature, Samsung Emergency 321 not enabled in settings");
@@ -83,7 +82,7 @@ public class EmergencyButton extends SystemUIButton {
     }
 
     /* renamed from: -$$Nest$misSamsung321Enabled, reason: not valid java name */
-    public static boolean m949$$Nest$misSamsung321Enabled(EmergencyButton emergencyButton) {
+    public static boolean m951$$Nest$misSamsung321Enabled(EmergencyButton emergencyButton) {
         Signature[] signatureArr;
         emergencyButton.getClass();
         try {
@@ -100,18 +99,18 @@ public class EmergencyButton extends SystemUIButton {
             if (signatureArr == null || signatureArr.length <= 0 || !SecurityUtils.matchSignature(signatureArr[0])) {
                 return false;
             }
-            Cursor query = ((Button) emergencyButton).mContext.getContentResolver().query(Uri.parse("content://com.srph.emergency321.settings/settings/1"), new String[]{"_ID", "isEnabled"}, null, null, null);
-            if (query == null) {
+            Cursor cursorQuery = ((Button) emergencyButton).mContext.getContentResolver().query(Uri.parse("content://com.srph.emergency321.settings/settings/1"), new String[]{"_ID", "isEnabled"}, null, null, null);
+            if (cursorQuery == null) {
                 return false;
             }
             try {
-                int i2 = query.moveToFirst() ? query.getInt(query.getColumnIndex("isEnabled")) : 0;
+                int i2 = cursorQuery.moveToFirst() ? cursorQuery.getInt(cursorQuery.getColumnIndex("isEnabled")) : 0;
                 Log.d("EmergencyButton", "Samsung321 - Query successful");
                 boolean z = i2 != 0;
-                query.close();
+                cursorQuery.close();
                 return z;
             } catch (Throwable th) {
-                query.close();
+                cursorQuery.close();
                 throw th;
             }
         } catch (PackageManager.NameNotFoundException unused2) {
@@ -144,9 +143,9 @@ public class EmergencyButton extends SystemUIButton {
                     EmergencyButton emergencyButton = this.f$0;
                     switch (i2) {
                         case 0:
-                            return EmergencyButton.m947$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(emergencyButton);
+                            return EmergencyButton.m949$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(emergencyButton);
                         default:
-                            return EmergencyButton.m948$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(emergencyButton);
+                            return EmergencyButton.m950$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(emergencyButton);
                     }
                 }
             });
@@ -166,9 +165,9 @@ public class EmergencyButton extends SystemUIButton {
                 EmergencyButton emergencyButton = this.f$0;
                 switch (i22) {
                     case 0:
-                        return EmergencyButton.m947$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(emergencyButton);
+                        return EmergencyButton.m949$r8$lambda$HEMKmkVNKFXedRWg2uz8LyJ1f8(emergencyButton);
                     default:
-                        return EmergencyButton.m948$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(emergencyButton);
+                        return EmergencyButton.m950$r8$lambda$U2ul65dxQZsDCrj1vn5FpgiwWw(emergencyButton);
                 }
             }
         });
@@ -186,17 +185,17 @@ public class EmergencyButton extends SystemUIButton {
             this.mDownY = y;
             this.mLongPressWasDragged = false;
         } else {
-            int abs = Math.abs(x - this.mDownX);
-            int abs2 = Math.abs(y - this.mDownY);
+            int iAbs = Math.abs(x - this.mDownX);
+            int iAbs2 = Math.abs(y - this.mDownY);
             int scaledTouchSlop = ViewConfiguration.get(((Button) this).mContext).getScaledTouchSlop();
-            if (Math.abs(abs2) > scaledTouchSlop || Math.abs(abs) > scaledTouchSlop) {
+            if (Math.abs(iAbs2) > scaledTouchSlop || Math.abs(iAbs) > scaledTouchSlop) {
                 this.mLongPressWasDragged = true;
             }
         }
         return super.onTouchEvent(motionEvent);
     }
 
-    public EmergencyButton(Context context, AttributeSet attributeSet) {
+    public EmergencyButton(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mIsSamsung321Enable = false;
         ((Button) this).mContext.getResources().getBoolean(R.bool.config_honor_data_retry_timer_for_emergency_network);

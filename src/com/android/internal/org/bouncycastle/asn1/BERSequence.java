@@ -21,12 +21,12 @@ public class BERSequence extends ASN1Sequence {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength(boolean z) throws IOException {
-        int i = z ? 4 : 3;
+        int iEncodedLength = z ? 4 : 3;
         int length = this.elements.length;
-        for (int i2 = 0; i2 < length; i2++) {
-            i += this.elements[i2].toASN1Primitive().encodedLength(true);
+        for (int i = 0; i < length; i++) {
+            iEncodedLength += this.elements[i].toASN1Primitive().encodedLength(true);
         }
-        return i;
+        return iEncodedLength;
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive

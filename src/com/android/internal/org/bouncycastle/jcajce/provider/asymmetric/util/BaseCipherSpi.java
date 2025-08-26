@@ -98,13 +98,13 @@ public abstract class BaseCipherSpi extends CipherSpi {
     protected Key engineUnwrap(byte[] bArr, String str, int i) throws InvalidKeyException {
         try {
             Wrapper wrapper = this.wrapEngine;
-            byte[] engineDoFinal = wrapper == null ? engineDoFinal(bArr, 0, bArr.length) : wrapper.unwrap(bArr, 0, bArr.length);
+            byte[] bArrEngineDoFinal = wrapper == null ? engineDoFinal(bArr, 0, bArr.length) : wrapper.unwrap(bArr, 0, bArr.length);
             if (i == 3) {
-                return new SecretKeySpec(engineDoFinal, str);
+                return new SecretKeySpec(bArrEngineDoFinal, str);
             }
             if (str.equals("") && i == 2) {
                 try {
-                    PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(engineDoFinal);
+                    PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(bArrEngineDoFinal);
                     PrivateKey privateKey = BouncyCastleProvider.getPrivateKey(privateKeyInfo);
                     if (privateKey != null) {
                         return privateKey;
@@ -115,12 +115,12 @@ public abstract class BaseCipherSpi extends CipherSpi {
                 }
             }
             try {
-                KeyFactory createKeyFactory = this.helper.createKeyFactory(str);
+                KeyFactory keyFactoryCreateKeyFactory = this.helper.createKeyFactory(str);
                 if (i == 1) {
-                    return createKeyFactory.generatePublic(new X509EncodedKeySpec(engineDoFinal));
+                    return keyFactoryCreateKeyFactory.generatePublic(new X509EncodedKeySpec(bArrEngineDoFinal));
                 }
                 if (i == 2) {
-                    return createKeyFactory.generatePrivate(new PKCS8EncodedKeySpec(engineDoFinal));
+                    return keyFactoryCreateKeyFactory.generatePrivate(new PKCS8EncodedKeySpec(bArrEngineDoFinal));
                 }
                 throw new InvalidKeyException("Unknown key type " + i);
             } catch (NoSuchAlgorithmException e) {

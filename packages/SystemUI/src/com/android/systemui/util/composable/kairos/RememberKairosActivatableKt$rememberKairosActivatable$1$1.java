@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class RememberKairosActivatableKt$rememberKairosActivatable$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ KairosActivatable $instance;
@@ -48,10 +47,8 @@ final class RememberKairosActivatableKt$rememberKairosActivatable$1$1 extends Su
             Function1 function1 = new Function1() { // from class: com.android.systemui.util.composable.kairos.RememberKairosActivatableKt$rememberKairosActivatable$1$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    Unit invokeSuspend$lambda$1;
-                    invokeSuspend$lambda$1 = RememberKairosActivatableKt$rememberKairosActivatable$1$1.invokeSuspend$lambda$1(KairosActivatable.this, (BuildScope) obj2);
-                    return invokeSuspend$lambda$1;
+                public final Object mo781invoke(Object obj2) {
+                    return RememberKairosActivatableKt$rememberKairosActivatable$1$1.invokeSuspend$lambda$1(kairosActivatable, (BuildScope) obj2);
                 }
             };
             this.label = 1;

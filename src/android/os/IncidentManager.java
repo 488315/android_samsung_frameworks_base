@@ -9,7 +9,6 @@ import android.os.IIncidentAuthListener;
 import android.os.IIncidentCompanion;
 import android.os.IIncidentDumpCallback;
 import android.os.IIncidentManager;
-import android.os.IncidentManager;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 import android.util.Slog;
@@ -17,6 +16,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class IncidentManager {
         private final long mTimestamp;
         private final Uri mUri;
 
-        public PendingReport(Uri uri) {
+        public PendingReport(Uri uri) throws UnsupportedEncodingException {
             try {
                 this.mFlags = Integer.parseInt(uri.getQueryParameter("flags"));
                 String queryParameter = uri.getQueryParameter("pkg");
@@ -206,7 +206,7 @@ public class IncidentManager {
                     AuthListener.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            IncidentManager.AuthListener.AnonymousClass1.this.lambda$onReportApproved$0();
+                            this.f$0.lambda$onReportApproved$0();
                         }
                     });
                 } else {
@@ -225,7 +225,7 @@ public class IncidentManager {
                     AuthListener.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            IncidentManager.AuthListener.AnonymousClass1.this.lambda$onReportDenied$1();
+                            this.f$0.lambda$onReportDenied$1();
                         }
                     });
                 } else {
@@ -259,7 +259,7 @@ public class IncidentManager {
                     DumpCallback.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$DumpCallback$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            IncidentManager.DumpCallback.AnonymousClass1.this.lambda$onDumpSection$0(parcelFileDescriptor);
+                            this.f$0.lambda$onDumpSection$0(parcelFileDescriptor);
                         }
                     });
                 } else {
@@ -385,7 +385,7 @@ public class IncidentManager {
         }
     }
 
-    public IncidentReport getIncidentReport(Uri uri) {
+    public IncidentReport getIncidentReport(Uri uri) throws UnsupportedEncodingException {
         String queryParameter = uri.getQueryParameter("r");
         if (queryParameter == null) {
             return null;
@@ -405,7 +405,7 @@ public class IncidentManager {
         }
     }
 
-    public void deleteIncidentReports(Uri uri) {
+    public void deleteIncidentReports(Uri uri) throws UnsupportedEncodingException {
         if (uri == null) {
             try {
                 getCompanionServiceLocked().deleteAllIncidentReports(this.mContext.getPackageName());
@@ -456,13 +456,13 @@ public class IncidentManager {
             if (iIncidentManager2 != null) {
                 return iIncidentManager2;
             }
-            IIncidentManager asInterface = IIncidentManager.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_SERVICE));
-            this.mIncidentService = asInterface;
-            if (asInterface != null) {
-                asInterface.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda1
+            IIncidentManager iIncidentManagerAsInterface = IIncidentManager.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_SERVICE));
+            this.mIncidentService = iIncidentManagerAsInterface;
+            if (iIncidentManagerAsInterface != null) {
+                iIncidentManagerAsInterface.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda1
                     @Override // android.os.IBinder.DeathRecipient
                     public final void binderDied() {
-                        IncidentManager.this.lambda$getIIncidentManagerLocked$0();
+                        this.f$0.lambda$getIIncidentManagerLocked$0();
                     }
                 }, 0);
             }
@@ -487,13 +487,13 @@ public class IncidentManager {
             if (iIncidentCompanion2 != null) {
                 return iIncidentCompanion2;
             }
-            IIncidentCompanion asInterface = IIncidentCompanion.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_COMPANION_SERVICE));
-            this.mCompanionService = asInterface;
-            if (asInterface != null) {
-                asInterface.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda0
+            IIncidentCompanion iIncidentCompanionAsInterface = IIncidentCompanion.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_COMPANION_SERVICE));
+            this.mCompanionService = iIncidentCompanionAsInterface;
+            if (iIncidentCompanionAsInterface != null) {
+                iIncidentCompanionAsInterface.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda0
                     @Override // android.os.IBinder.DeathRecipient
                     public final void binderDied() {
-                        IncidentManager.this.lambda$getCompanionServiceLocked$1();
+                        this.f$0.lambda$getCompanionServiceLocked$1();
                     }
                 }, 0);
             }

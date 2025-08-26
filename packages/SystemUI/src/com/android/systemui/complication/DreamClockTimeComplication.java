@@ -11,12 +11,10 @@ import com.android.systemui.shared.condition.Monitor;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.util.condition.ConditionalCoreStartable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamClockTimeComplication implements Complication {
     public final DreamClockTimeComplicationComponent.Factory mComponentFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DreamClockTimeViewHolder {
         public final ComplicationLayoutParams mLayoutParams;
         public final TextClock mView;
@@ -31,7 +29,6 @@ public class DreamClockTimeComplication implements Complication {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Registrant extends ConditionalCoreStartable {
         public final DreamClockTimeComplication mComplication;
         public final DreamOverlayStateController mDreamOverlayStateController;
@@ -63,7 +60,6 @@ public class DreamClockTimeComplication implements Complication {
         return 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DreamClockTimeViewController extends ViewController {
         public DreamClockTimeViewController(TextClock textClock, UiEventLogger uiEventLogger) {
             super(textClock);

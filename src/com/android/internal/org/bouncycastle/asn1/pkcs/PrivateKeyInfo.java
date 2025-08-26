@@ -42,11 +42,11 @@ public class PrivateKeyInfo extends ASN1Object {
     }
 
     private static int getVersionValue(ASN1Integer aSN1Integer) {
-        int intValueExact = aSN1Integer.intValueExact();
-        if (intValueExact < 0 || intValueExact > 1) {
+        int iIntValueExact = aSN1Integer.intValueExact();
+        if (iIntValueExact < 0 || iIntValueExact > 1) {
             throw new IllegalArgumentException("invalid version for private key info");
         }
-        return intValueExact;
+        return iIntValueExact;
     }
 
     public PrivateKeyInfo(AlgorithmIdentifier algorithmIdentifier, ASN1Encodable aSN1Encodable) throws IOException {

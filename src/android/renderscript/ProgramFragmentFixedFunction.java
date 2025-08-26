@@ -115,30 +115,30 @@ public class ProgramFragmentFixedFunction extends ProgramFragment {
                 }
             }
             for (int i = 0; i < this.mNumTextures; i++) {
-                int ordinal = this.mSlots[i].env.ordinal();
-                if (ordinal == 0) {
-                    int ordinal2 = this.mSlots[i].format.ordinal();
-                    if (ordinal2 == 0) {
+                int iOrdinal = this.mSlots[i].env.ordinal();
+                if (iOrdinal == 0) {
+                    int iOrdinal2 = this.mSlots[i].format.ordinal();
+                    if (iOrdinal2 == 0) {
                         this.mShader += "  col.a = texture2D(UNI_Tex0, t0).a;\n";
-                    } else if (ordinal2 == 1) {
+                    } else if (iOrdinal2 == 1) {
                         this.mShader += "  col.rgba = texture2D(UNI_Tex0, t0).rgba;\n";
-                    } else if (ordinal2 == 2) {
+                    } else if (iOrdinal2 == 2) {
                         this.mShader += "  col.rgb = texture2D(UNI_Tex0, t0).rgb;\n";
-                    } else if (ordinal2 == 3) {
+                    } else if (iOrdinal2 == 3) {
                         this.mShader += "  col.rgba = texture2D(UNI_Tex0, t0).rgba;\n";
                     }
-                } else if (ordinal == 1) {
-                    int ordinal3 = this.mSlots[i].format.ordinal();
-                    if (ordinal3 == 0) {
+                } else if (iOrdinal == 1) {
+                    int iOrdinal3 = this.mSlots[i].format.ordinal();
+                    if (iOrdinal3 == 0) {
                         this.mShader += "  col.a *= texture2D(UNI_Tex0, t0).a;\n";
-                    } else if (ordinal3 == 1) {
+                    } else if (iOrdinal3 == 1) {
                         this.mShader += "  col.rgba *= texture2D(UNI_Tex0, t0).rgba;\n";
-                    } else if (ordinal3 == 2) {
+                    } else if (iOrdinal3 == 2) {
                         this.mShader += "  col.rgb *= texture2D(UNI_Tex0, t0).rgb;\n";
-                    } else if (ordinal3 == 3) {
+                    } else if (iOrdinal3 == 3) {
                         this.mShader += "  col.rgba *= texture2D(UNI_Tex0, t0).rgba;\n";
                     }
-                } else if (ordinal == 2) {
+                } else if (iOrdinal == 2) {
                     this.mShader += "  col = texture2D(UNI_Tex0, t0);\n";
                 }
             }
@@ -169,7 +169,7 @@ public class ProgramFragmentFixedFunction extends ProgramFragment {
         }
 
         public ProgramFragmentFixedFunction create() {
-            Type type;
+            Type typeCreate;
             InternalBuilder internalBuilder = new InternalBuilder(this.mRS);
             this.mNumTextures = 0;
             for (int i = 0; i < 2; i++) {
@@ -180,28 +180,28 @@ public class ProgramFragmentFixedFunction extends ProgramFragment {
             buildShaderString();
             internalBuilder.setShader(this.mShader);
             if (this.mVaryingColorEnable) {
-                type = null;
+                typeCreate = null;
             } else {
                 Element.Builder builder = new Element.Builder(this.mRS);
                 builder.add(Element.F32_4(this.mRS), "Color");
                 Type.Builder builder2 = new Type.Builder(this.mRS, builder.create());
                 builder2.setX(1);
-                type = builder2.create();
-                internalBuilder.addConstant(type);
+                typeCreate = builder2.create();
+                internalBuilder.addConstant(typeCreate);
             }
             for (int i2 = 0; i2 < this.mNumTextures; i2++) {
                 internalBuilder.addTexture(Program.TextureType.TEXTURE_2D);
             }
-            ProgramFragmentFixedFunction create = internalBuilder.create();
-            create.mTextureCount = 2;
+            ProgramFragmentFixedFunction programFragmentFixedFunctionCreate = internalBuilder.create();
+            programFragmentFixedFunctionCreate.mTextureCount = 2;
             if (!this.mVaryingColorEnable) {
-                Allocation createTyped = Allocation.createTyped(this.mRS, type);
+                Allocation allocationCreateTyped = Allocation.createTyped(this.mRS, typeCreate);
                 FieldPacker fieldPacker = new FieldPacker(16);
                 fieldPacker.addF32(new Float4(1.0f, 1.0f, 1.0f, 1.0f));
-                createTyped.setFromFieldPacker(0, fieldPacker);
-                create.bindConstants(createTyped, 0);
+                allocationCreateTyped.setFromFieldPacker(0, fieldPacker);
+                programFragmentFixedFunctionCreate.bindConstants(allocationCreateTyped, 0);
             }
-            return create;
+            return programFragmentFixedFunctionCreate;
         }
     }
 }

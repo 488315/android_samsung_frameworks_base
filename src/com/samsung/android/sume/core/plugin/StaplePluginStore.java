@@ -30,7 +30,7 @@ class StaplePluginStore extends PluginStore {
         }), Optional.ofNullable(pluginFixture.getDescriptorStreamLoader()).flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.StaplePluginStore$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return StaplePluginStore.this.m9607xccf3d0d6((DescriptorStreamLoader) obj);
+                return this.f$0.m9620xccf3d0d6((DescriptorStreamLoader) obj);
             }
         })}).filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.StaplePluginStore$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
@@ -43,13 +43,11 @@ class StaplePluginStore extends PluginStore {
     }
 
     /* renamed from: lambda$add$1$com-samsung-android-sume-core-plugin-StaplePluginStore, reason: not valid java name */
-    /* synthetic */ Optional m9607xccf3d0d6(final DescriptorStreamLoader descriptorStreamLoader) {
+    /* synthetic */ Optional m9620xccf3d0d6(final DescriptorStreamLoader descriptorStreamLoader) {
         return Optional.ofNullable(this.context).map(new Function() { // from class: com.samsung.android.sume.core.plugin.StaplePluginStore$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MFDescriptor parse;
-                parse = MFDescriptorParser.of(MFDescriptorParser.Type.JSON).parse(DescriptorStreamLoader.this.load((Context) obj));
-                return parse;
+                return MFDescriptorParser.of(MFDescriptorParser.Type.JSON).parse(descriptorStreamLoader.load((Context) obj));
             }
         });
     }
@@ -59,12 +57,12 @@ class StaplePluginStore extends PluginStore {
         return (PluginFixture) this.registry.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.StaplePluginStore$$ExternalSyntheticLambda4
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return StaplePluginStore.lambda$remove$2(PluginFixture.this, (Map.Entry) obj);
+                return StaplePluginStore.lambda$remove$2(pluginFixture, (Map.Entry) obj);
             }
         }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.plugin.StaplePluginStore$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return StaplePluginStore.this.m9608x1d949b77((Map.Entry) obj);
+                return this.f$0.m9621x1d949b77((Map.Entry) obj);
             }
         }).orElse(null);
     }
@@ -74,7 +72,7 @@ class StaplePluginStore extends PluginStore {
     }
 
     /* renamed from: lambda$remove$3$com-samsung-android-sume-core-plugin-StaplePluginStore, reason: not valid java name */
-    /* synthetic */ PluginFixture m9608x1d949b77(Map.Entry entry) {
+    /* synthetic */ PluginFixture m9621x1d949b77(Map.Entry entry) {
         return this.registry.remove(entry.getKey()).getPluginFixture();
     }
 

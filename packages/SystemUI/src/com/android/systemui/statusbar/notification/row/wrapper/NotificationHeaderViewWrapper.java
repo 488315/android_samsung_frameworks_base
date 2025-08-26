@@ -18,7 +18,7 @@ import com.android.internal.widget.CachingIconView;
 import com.android.internal.widget.NotificationCloseButton;
 import com.android.internal.widget.NotificationExpandButton;
 import com.android.systemui.R;
-import com.android.systemui.qs.SecQSDetailController$$ExternalSyntheticOutline0;
+import com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.statusbar.CrossFadeHelper;
 import com.android.systemui.statusbar.RotationHelper;
 import com.android.systemui.statusbar.TransformableView;
@@ -37,7 +37,6 @@ import com.android.systemui.statusbar.notification.stack.NotificationChildrenCon
 import com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer$$ExternalSyntheticLambda1;
 import java.util.Stack;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationHeaderViewWrapper extends NotificationViewWrapper implements Roundable {
     public static final Interpolator LOW_PRIORITY_HEADER_CLOSE = new PathInterpolator(0.4f, 0.0f, 0.7f, 1.0f);
@@ -153,14 +152,14 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
                 NotificationHeaderViewWrapper notificationHeaderViewWrapper = NotificationHeaderViewWrapper.this;
                 ExpandableNotificationRow expandableNotificationRow2 = notificationHeaderViewWrapper.mRow;
                 NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow2.mChildrenContainer;
-                boolean isGroupExpanded$1 = expandableNotificationRow2.mIsSummaryWithChildren ? expandableNotificationRow2.isGroupExpanded$1() : expandableNotificationRow2.isExpanded(false);
+                boolean zIsGroupExpanded$1 = expandableNotificationRow2.mIsSummaryWithChildren ? expandableNotificationRow2.isGroupExpanded$1() : expandableNotificationRow2.isExpanded(false);
                 if (notificationHeaderViewWrapper.mRow.mUserLocked) {
-                    if (isGroupExpanded$1) {
+                    if (zIsGroupExpanded$1) {
                         RotationHelper.counterClockWise(1.0f, view2);
                     } else {
                         RotationHelper.counterClockWise(f, view2);
                     }
-                } else if (isGroupExpanded$1) {
+                } else if (zIsGroupExpanded$1) {
                     RotationHelper.counterClockWise(f, view2);
                 } else {
                     Interpolator interpolator = RotationHelper.ROTATION;
@@ -263,9 +262,9 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
     @Override // com.android.systemui.statusbar.notification.row.wrapper.NotificationViewWrapper
     public void onContentUpdated(ExpandableNotificationRow expandableNotificationRow) {
         int i = NotificationBundleUi.$r8$clinit;
-        boolean isAmbient = expandableNotificationRow.getEntryLegacy().mRanking.isAmbient();
-        this.mIsLowPriority = isAmbient;
-        if (isAmbient) {
+        boolean zIsAmbient = expandableNotificationRow.getEntryLegacy().mRanking.isAmbient();
+        this.mIsLowPriority = zIsAmbient;
+        if (zIsAmbient) {
             NotificationHeaderView notificationHeaderView = this.mView;
             if (notificationHeaderView instanceof NotificationHeaderView) {
                 notificationHeaderView.setAcceptAllTouches(false);
@@ -302,9 +301,9 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
         for (int i4 = 0; i4 < arraySet.size(); i4++) {
             View view2 = (View) arraySet.valueAt(i4);
             if (!arraySet2.contains(view2)) {
-                TransformState createFrom = TransformState.createFrom(view2, viewTransformationHelper);
-                createFrom.setVisible(true, true);
-                createFrom.recycle();
+                TransformState transformStateCreateFrom = TransformState.createFrom(view2, viewTransformationHelper);
+                transformStateCreateFrom.setVisible(true, true);
+                transformStateCreateFrom.recycle();
             }
         }
     }
@@ -316,7 +315,7 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
         this.mExpandButton = this.mView.findViewById(android.R.id.flagRetrieveInteractiveWindows);
         this.mAltExpandTarget = this.mView.findViewById(android.R.id.autofill_save);
         this.mIconContainer = this.mView.findViewById(android.R.id.eight);
-        this.mWorkProfileImage = (ImageView) this.mView.findViewById(android.R.id.small);
+        this.mWorkProfileImage = (ImageView) this.mView.findViewById(android.R.id.smallIcon);
         this.mNotificationHeader = this.mView.findViewById(android.R.id.remote_input);
         this.mView.findViewById(android.R.id.resolver_list);
         this.mAudiblyAlertedIcon = this.mView.findViewById(android.R.id.autofill_dataset_icon);
@@ -347,9 +346,9 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
     }
 
     public final void setNotificationWhen(long j) {
-        DateTimeView findViewById = this.mView.findViewById(16909967);
-        if (findViewById instanceof DateTimeView) {
-            findViewById.setTime(j);
+        DateTimeView dateTimeViewFindViewById = this.mView.findViewById(16909968);
+        if (dateTimeViewFindViewById instanceof DateTimeView) {
+            dateTimeViewFindViewById.setTime(j);
         }
     }
 
@@ -403,10 +402,10 @@ public class NotificationHeaderViewWrapper extends NotificationViewWrapper imple
             }
             NotificationHeaderView notificationHeaderView2 = this.mNotificationHeader;
             if (hasRightIcon()) {
-                notificationHeaderView2.setTopLineExtraMarginEnd(SecQSDetailController$$ExternalSyntheticOutline0.m(this.mView, 17105810) + SecQSDetailController$$ExternalSyntheticOutline0.m(this.mView, 17105807) + SecQSDetailController$$ExternalSyntheticOutline0.m(this.mView, android.R.dimen.toast_text_size));
+                notificationHeaderView2.setTopLineExtraMarginEnd(QSLayoutEditViewController$$ExternalSyntheticOutline0.m(this.mView, 17105811) + QSLayoutEditViewController$$ExternalSyntheticOutline0.m(this.mView, 17105808) + QSLayoutEditViewController$$ExternalSyntheticOutline0.m(this.mView, android.R.dimen.toast_width));
                 updateRightIconEndMargin();
             } else {
-                notificationHeaderView2.setTopLineExtraMarginEnd(this.mView.getContext().getResources().getDimensionPixelSize(android.R.dimen.toast_text_size));
+                notificationHeaderView2.setTopLineExtraMarginEnd(this.mView.getContext().getResources().getDimensionPixelSize(android.R.dimen.toast_width));
             }
         }
         if (z2) {

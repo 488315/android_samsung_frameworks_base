@@ -4,7 +4,6 @@ import androidx.collection.CircularIntArray;
 import androidx.leanback.widget.GridLayoutManager;
 import androidx.recyclerview.widget.GapWorker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Grid {
     public int mNumRows;
@@ -17,7 +16,6 @@ public abstract class Grid {
     public int mLastVisibleIndex = -1;
     public int mStartIndex = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Location {
         public final int mRow;
 

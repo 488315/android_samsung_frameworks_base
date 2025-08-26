@@ -9,27 +9,27 @@ public class Tables1kGCMExponentiator implements GCMExponentiator {
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.gcm.GCMExponentiator
     public void init(byte[] bArr) {
-        long[] asLongs = GCMUtil.asLongs(bArr);
+        long[] jArrAsLongs = GCMUtil.asLongs(bArr);
         List list = this.lookupPowX2;
-        if (list == null || 0 == GCMUtil.areEqual(asLongs, (long[]) list.get(0))) {
+        if (list == null || 0 == GCMUtil.areEqual(jArrAsLongs, (long[]) list.get(0))) {
             ArrayList arrayList = new ArrayList(8);
             this.lookupPowX2 = arrayList;
-            arrayList.add(asLongs);
+            arrayList.add(jArrAsLongs);
         }
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.gcm.GCMExponentiator
     public void exponentiateX(long j, byte[] bArr) {
-        long[] oneAsLongs = GCMUtil.oneAsLongs();
+        long[] jArrOneAsLongs = GCMUtil.oneAsLongs();
         int i = 0;
         while (j > 0) {
             if ((1 & j) != 0) {
-                GCMUtil.multiply(oneAsLongs, getPowX2(i));
+                GCMUtil.multiply(jArrOneAsLongs, getPowX2(i));
             }
             i++;
             j >>>= 1;
         }
-        GCMUtil.asBytes(oneAsLongs, bArr);
+        GCMUtil.asBytes(jArrOneAsLongs, bArr);
     }
 
     private long[] getPowX2(int i) {

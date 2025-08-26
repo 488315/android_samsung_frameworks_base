@@ -4,12 +4,10 @@ import java.util.Iterator;
 import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractSet extends AbstractCollection implements Set {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,12 +37,12 @@ public abstract class AbstractSet extends AbstractCollection implements Set {
     public final int hashCode() {
         Companion.getClass();
         Iterator<E> it = iterator();
-        int i = 0;
+        int iHashCode = 0;
         while (it.hasNext()) {
             Object next = it.next();
-            i += next != null ? next.hashCode() : 0;
+            iHashCode += next != null ? next.hashCode() : 0;
         }
-        return i;
+        return iHashCode;
     }
 
     @Override // java.util.Collection, java.lang.Iterable, java.util.Set

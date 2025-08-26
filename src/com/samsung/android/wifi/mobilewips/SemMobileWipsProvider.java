@@ -102,11 +102,11 @@ public class SemMobileWipsProvider extends ContentProvider {
             if (sURIMatcher.match(uri) == 0) {
                 sQLiteQueryBuilder.setTables(DB_TABLE_WHITELIST);
                 Log.d(TAG, "allowlist");
-                Cursor query = sQLiteQueryBuilder.query(writableDatabase, strArr, str, strArr2, null, null, str2);
-                if (query == null) {
+                Cursor cursorQuery = sQLiteQueryBuilder.query(writableDatabase, strArr, str, strArr2, null, null, str2);
+                if (cursorQuery == null) {
                     Log.d(TAG, "query failed in downloads database");
                 }
-                return query;
+                return cursorQuery;
             }
             Log.d(TAG, "querying unknown URI: " + uri);
             return null;

@@ -4,12 +4,10 @@ import androidx.compose.foundation.gestures.Orientation;
 import androidx.compose.ui.unit.IntSize;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DefaultSwipeDistance implements UserActionDistance {
     public static final DefaultSwipeDistance INSTANCE = new DefaultSwipeDistance();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -33,12 +31,12 @@ public final class DefaultSwipeDistance implements UserActionDistance {
     @Override // com.android.compose.animation.scene.UserActionDistance
     public final float absoluteDistance(UserActionDistanceScopeImpl userActionDistanceScopeImpl, ContentKey contentKey, ContentKey contentKey2, Orientation orientation) {
         long j;
-        IntSize m923targetSizeGG5KONw = userActionDistanceScopeImpl.$$delegate_0.m923targetSizeGG5KONw(contentKey);
-        if (m923targetSizeGG5KONw == null) {
+        IntSize intSizeM925targetSizeGG5KONw = userActionDistanceScopeImpl.$$delegate_0.m925targetSizeGG5KONw(contentKey);
+        if (intSizeM925targetSizeGG5KONw == null) {
             throw new IllegalStateException("Required value was null.");
         }
         int i = WhenMappings.$EnumSwitchMapping$0[orientation.ordinal()];
-        long j2 = m923targetSizeGG5KONw.packedValue;
+        long j2 = intSizeM925targetSizeGG5KONw.packedValue;
         if (i == 1) {
             j = j2 >> 32;
         } else {

@@ -14,7 +14,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.jvm.internal.ReflectionFactory;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BottomMarginCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -24,7 +23,6 @@ public final class BottomMarginCommand extends ParseableCommand {
     public final SingleArgParamOptional marginBottomDp$delegate;
     public final SingleArgParamOptional rotationDegrees$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,11 +40,12 @@ public final class BottomMarginCommand extends ParseableCommand {
         reflectionFactory.getClass();
         $$delegatedProperties = new KProperty[]{propertyReference1Impl, propertyReference1Impl2};
         Companion = new Companion(null);
-        Map mapOf = MapsKt__MapsKt.mapOf(new Pair(0, 0), new Pair(90, 1), new Pair(180, 2), new Pair(270, 3));
-        ROTATION_DEGREES_TO_VALUE_MAPPING = mapOf;
-        ROTATION_DEGREES_OPTIONS = mapOf.keySet();
+        Map mapMapOf = MapsKt__MapsKt.mapOf(new Pair(0, 0), new Pair(90, 1), new Pair(180, 2), new Pair(270, 3));
+        ROTATION_DEGREES_TO_VALUE_MAPPING = mapMapOf;
+        ROTATION_DEGREES_OPTIONS = mapMapOf.keySet();
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BottomMarginCommand() {
         super("bottom-margin", null, 2, 0 == true ? 1 : 0);
         Type.INSTANCE.getClass();

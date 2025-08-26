@@ -103,13 +103,13 @@ public class MarqueeModifierOperation extends DecoratorModifierOperation impleme
 
     @Override // com.android.internal.widget.remotecompose.core.PaintOperation
     public void paint(PaintContext paintContext) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         if (this.mLastTime == 0) {
-            this.mLastTime = currentTimeMillis;
-            this.mStartTime = ((long) this.mInitialDelayMillis) + currentTimeMillis;
+            this.mLastTime = jCurrentTimeMillis;
+            this.mStartTime = ((long) this.mInitialDelayMillis) + jCurrentTimeMillis;
             paintContext.needsRepaint();
         }
-        if (this.mContentWidth <= this.mComponentWidth || currentTimeMillis - this.mStartTime <= this.mInitialDelayMillis) {
+        if (this.mContentWidth <= this.mComponentWidth || jCurrentTimeMillis - this.mStartTime <= this.mInitialDelayMillis) {
             return;
         }
         float density = paintContext.getContext().getDensity();

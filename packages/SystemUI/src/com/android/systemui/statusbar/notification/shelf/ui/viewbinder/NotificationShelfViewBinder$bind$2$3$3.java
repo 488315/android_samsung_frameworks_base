@@ -17,14 +17,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationShelfViewBinder$bind$2$3$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationShelf $this_apply;
     final /* synthetic */ NotificationShelfViewModel $viewModel;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.shelf.ui.viewbinder.NotificationShelfViewBinder$bind$2$3$3$1, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass1 implements FlowCollector, FunctionAdapter {
         public final /* synthetic */ NotificationShelf $tmp0;
@@ -35,9 +33,9 @@ final class NotificationShelfViewBinder$bind$2$3$3 extends SuspendLambda impleme
 
         @Override // kotlinx.coroutines.flow.FlowCollector
         public final Object emit(Object obj, Continuation continuation) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
             NotificationShelf notificationShelf = this.$tmp0;
-            notificationShelf.mCanInteract = booleanValue;
+            notificationShelf.mCanInteract = zBooleanValue;
             notificationShelf.updateInteractiveness();
             Unit unit = Unit.INSTANCE;
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;

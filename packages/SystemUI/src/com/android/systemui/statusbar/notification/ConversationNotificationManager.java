@@ -23,11 +23,11 @@ import kotlin.jvm.internal.FunctionAdapter;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.EmptySequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConversationNotificationManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -37,7 +37,6 @@ public final class ConversationNotificationManager {
     public final ConcurrentHashMap states = new ConcurrentHashMap();
     public boolean notifPanelCollapsed = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.ConversationNotificationManager$2, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass2 implements BindEventManager.Listener, FunctionAdapter {
         public AnonymousClass2() {
@@ -78,7 +77,6 @@ public final class ConversationNotificationManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,16 +86,15 @@ public final class ConversationNotificationManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConversationState {
 
         /* renamed from: notification, reason: collision with root package name */
-        public final Notification f133notification;
+        public final Notification f134notification;
         public final int unreadCount;
 
         public ConversationState(int i, Notification notification2) {
             this.unreadCount = i;
-            this.f133notification = notification2;
+            this.f134notification = notification2;
         }
 
         public final boolean equals(Object obj) {
@@ -108,15 +105,15 @@ public final class ConversationNotificationManager {
                 return false;
             }
             ConversationState conversationState = (ConversationState) obj;
-            return this.unreadCount == conversationState.unreadCount && Intrinsics.areEqual(this.f133notification, conversationState.f133notification);
+            return this.unreadCount == conversationState.unreadCount && Intrinsics.areEqual(this.f134notification, conversationState.f134notification);
         }
 
         public final int hashCode() {
-            return this.f133notification.hashCode() + (Integer.hashCode(this.unreadCount) * 31);
+            return this.f134notification.hashCode() + (Integer.hashCode(this.unreadCount) * 31);
         }
 
         public final String toString() {
-            return "ConversationState(unreadCount=" + this.unreadCount + ", notification=" + this.f133notification + ")";
+            return "ConversationState(unreadCount=" + this.unreadCount + ", notification=" + this.f134notification + ")";
         }
     }
 
@@ -136,40 +133,40 @@ public final class ConversationNotificationManager {
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
             public final void onRankingUpdate(NotificationListenerService.RankingMap rankingMap) {
-                Sequence asSequence;
+                Sequence sequenceAsSequence;
                 int i = ConversationNotificationManager.$r8$clinit;
                 ConversationNotificationManager conversationNotificationManager = ConversationNotificationManager.this;
                 conversationNotificationManager.getClass();
                 NotificationListenerService.Ranking ranking = new NotificationListenerService.Ranking();
-                FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(conversationNotificationManager.states.keySet()), new ConversationNotificationManager$$ExternalSyntheticLambda4(conversationNotificationManager, 1)));
-                while (filteringSequence$iterator$1.hasNext()) {
-                    NotificationEntry notificationEntry = (NotificationEntry) filteringSequence$iterator$1.next();
+                FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(conversationNotificationManager.states.keySet()), new ConversationNotificationManager$$ExternalSyntheticLambda4(conversationNotificationManager, 1)).new AnonymousClass1();
+                while (anonymousClass1.hasNext()) {
+                    NotificationEntry notificationEntry = (NotificationEntry) anonymousClass1.next();
                     if (rankingMap.getRanking(notificationEntry.mSbn.getKey(), ranking) && ranking.isConversation()) {
-                        final boolean isImportantConversation = ranking.getChannel().isImportantConversation();
+                        final boolean zIsImportantConversation = ranking.getChannel().isImportantConversation();
                         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
                         if (expandableNotificationRow != null) {
                             NotificationContentView[] notificationContentViewArr = expandableNotificationRow.mLayouts;
                             NotificationContentView[] notificationContentViewArr2 = (NotificationContentView[]) Arrays.copyOf(notificationContentViewArr, notificationContentViewArr.length);
-                            if (notificationContentViewArr2 != null && (asSequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) != null) {
-                                FilteringSequence$iterator$1 filteringSequence$iterator$12 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filterNot(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.flatMap(asSequence, ConversationNotificationManager$updateNotificationRanking$1.INSTANCE), new ConversationNotificationManager$$ExternalSyntheticLambda1(3)), new Function1() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$$ExternalSyntheticLambda9
+                            if (notificationContentViewArr2 != null && (sequenceAsSequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) != null) {
+                                FilteringSequence.AnonymousClass1 anonymousClass12 = SequencesKt___SequencesKt.filterNot(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.flatMap(sequenceAsSequence, ConversationNotificationManager$updateNotificationRanking$1.INSTANCE), new ConversationNotificationManager$$ExternalSyntheticLambda1(3)), new Function1() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$$ExternalSyntheticLambda9
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
+                                    public final Object mo781invoke(Object obj) {
                                         int i2 = ConversationNotificationManager.$r8$clinit;
-                                        return Boolean.valueOf(((ConversationLayout) obj).isImportantConversation() == isImportantConversation);
+                                        return Boolean.valueOf(((ConversationLayout) obj).isImportantConversation() == zIsImportantConversation);
                                     }
-                                }));
-                                while (filteringSequence$iterator$12.hasNext()) {
-                                    final ConversationLayout conversationLayout = (ConversationLayout) filteringSequence$iterator$12.next();
-                                    if (isImportantConversation && notificationEntry.mIsMarkedForUserTriggeredMovement) {
+                                }).new AnonymousClass1();
+                                while (anonymousClass12.hasNext()) {
+                                    final ConversationLayout conversationLayout = (ConversationLayout) anonymousClass12.next();
+                                    if (zIsImportantConversation && notificationEntry.mIsMarkedForUserTriggeredMovement) {
                                         conversationNotificationManager.mainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$updateNotificationRanking$4$1
                                             @Override // java.lang.Runnable
                                             public final void run() {
-                                                conversationLayout.setIsImportantConversation(isImportantConversation, true);
+                                                conversationLayout.setIsImportantConversation(zIsImportantConversation, true);
                                             }
                                         }, 960L);
                                     } else {
-                                        conversationLayout.setIsImportantConversation(isImportantConversation, false);
+                                        conversationLayout.setIsImportantConversation(zIsImportantConversation, false);
                                     }
                                 }
                             }
@@ -201,15 +198,15 @@ public final class ConversationNotificationManager {
     }
 
     public static void resetBadgeUi(ExpandableNotificationRow expandableNotificationRow) {
-        Sequence sequence;
+        Sequence sequenceAsSequence;
         NotificationContentView[] notificationContentViewArr = expandableNotificationRow.mLayouts;
         NotificationContentView[] notificationContentViewArr2 = (NotificationContentView[]) Arrays.copyOf(notificationContentViewArr, notificationContentViewArr.length);
-        if (notificationContentViewArr2 == null || (sequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) == null) {
-            sequence = EmptySequence.INSTANCE;
+        if (notificationContentViewArr2 == null || (sequenceAsSequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) == null) {
+            sequenceAsSequence = EmptySequence.INSTANCE;
         }
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.flatMap(sequence, new ConversationNotificationManager$$ExternalSyntheticLambda1(0)), new ConversationNotificationManager$$ExternalSyntheticLambda1(1)));
-        while (filteringSequence$iterator$1.hasNext()) {
-            ((ConversationLayout) filteringSequence$iterator$1.next()).setUnreadCount(0);
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(SequencesKt___SequencesKt.flatMap(sequenceAsSequence, new ConversationNotificationManager$$ExternalSyntheticLambda1(0)), new ConversationNotificationManager$$ExternalSyntheticLambda1(1)).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            ((ConversationLayout) anonymousClass1.next()).setUnreadCount(0);
         }
     }
 }

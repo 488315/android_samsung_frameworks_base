@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.CancellationSignal;
 import android.util.IndentingPrintWriter;
-import android.view.ScrollCaptureSearchResults;
 import android.view.flags.Flags;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,7 +46,7 @@ public final class ScrollCaptureSearchResults {
         this.mExecutor.execute(new Runnable() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureSearchResults.this.lambda$addTarget$0(callback, searchRequest);
+                this.f$0.lambda$addTarget$0(callback, searchRequest);
             }
         });
     }
@@ -121,9 +120,7 @@ public final class ScrollCaptureSearchResults {
         this.mTargets.removeIf(new Predicate() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean nullOrEmpty;
-                nullOrEmpty = ScrollCaptureSearchResults.nullOrEmpty(((ScrollCaptureTarget) obj).getScrollBounds());
-                return nullOrEmpty;
+                return ScrollCaptureSearchResults.nullOrEmpty(((ScrollCaptureTarget) obj).getScrollBounds());
             }
         });
         while (i < this.mTargets.size()) {
@@ -132,9 +129,7 @@ public final class ScrollCaptureSearchResults {
             i++;
             if (i < this.mTargets.size()) {
                 View containingView2 = this.mTargets.get(i).getContainingView();
-                if (isDescendant(containingView, containingView2)) {
-                    if (hasIncludeHint(containingView) && !hasIncludeHint(containingView2)) {
-                    }
+                if (!isDescendant(containingView, containingView2) || (hasIncludeHint(containingView) && !hasIncludeHint(containingView2))) {
                 }
             }
             int i2 = i;
@@ -153,16 +148,12 @@ public final class ScrollCaptureSearchResults {
         arrayList.sort(Comparator.comparing(new Function() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                boolean hasIncludeHint;
-                hasIncludeHint = ScrollCaptureSearchResults.hasIncludeHint((ScrollCaptureTarget) obj);
-                return Boolean.valueOf(hasIncludeHint);
+                return Boolean.valueOf(ScrollCaptureSearchResults.hasIncludeHint((ScrollCaptureTarget) obj));
             }
         }).thenComparing(Comparator.comparing(new Function() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(ScrollCaptureSearchResults.area((Rect) Objects.requireNonNullElse(((ScrollCaptureTarget) obj).getScrollBounds(), new Rect())));
-                return valueOf;
+                return Integer.valueOf(ScrollCaptureSearchResults.area((Rect) Objects.requireNonNullElse(((ScrollCaptureTarget) obj).getScrollBounds(), new Rect())));
             }
         })));
         if (arrayList.isEmpty()) {
@@ -187,7 +178,7 @@ public final class ScrollCaptureSearchResults {
             ScrollCaptureSearchResults.this.mExecutor.execute(new Runnable() { // from class: android.view.ScrollCaptureSearchResults$SearchRequest$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ScrollCaptureSearchResults.SearchRequest.this.lambda$accept$0(rect);
+                    this.f$0.lambda$accept$0(rect);
                 }
             });
         }
@@ -217,19 +208,19 @@ public final class ScrollCaptureSearchResults {
         if (scrollCaptureTarget == null || scrollCaptureTarget2 == null) {
             return scrollCaptureTarget == null ? 1 : -1;
         }
-        boolean nullOrEmpty = nullOrEmpty(scrollCaptureTarget.getScrollBounds());
-        boolean nullOrEmpty2 = nullOrEmpty(scrollCaptureTarget2.getScrollBounds());
-        if (nullOrEmpty || nullOrEmpty2) {
-            if (nullOrEmpty && nullOrEmpty2) {
+        boolean zNullOrEmpty = nullOrEmpty(scrollCaptureTarget.getScrollBounds());
+        boolean zNullOrEmpty2 = nullOrEmpty(scrollCaptureTarget2.getScrollBounds());
+        if (zNullOrEmpty || zNullOrEmpty2) {
+            if (zNullOrEmpty && zNullOrEmpty2) {
                 return 0;
             }
-            return nullOrEmpty ? 1 : -1;
+            return zNullOrEmpty ? 1 : -1;
         }
         View containingView = scrollCaptureTarget.getContainingView();
         View containingView2 = scrollCaptureTarget2.getContainingView();
-        boolean hasIncludeHint = hasIncludeHint(containingView);
-        if (hasIncludeHint != hasIncludeHint(containingView2)) {
-            return hasIncludeHint ? -1 : 1;
+        boolean zHasIncludeHint = hasIncludeHint(containingView);
+        if (zHasIncludeHint != hasIncludeHint(containingView2)) {
+            return zHasIncludeHint ? -1 : 1;
         }
         if (isDescendant(containingView, containingView2)) {
             return -1;

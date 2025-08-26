@@ -54,11 +54,11 @@ public class FontScaleConverterFactory {
         if (fontScaleConverter != null) {
             return fontScaleConverter;
         }
-        int indexOfKey = sLookupTables.indexOfKey(getKey(f));
-        if (indexOfKey >= 0) {
-            return sLookupTables.valueAt(indexOfKey);
+        int iIndexOfKey = sLookupTables.indexOfKey(getKey(f));
+        if (iIndexOfKey >= 0) {
+            return sLookupTables.valueAt(iIndexOfKey);
         }
-        int i = -(indexOfKey + 1);
+        int i = -(iIndexOfKey + 1);
         int i2 = i - 1;
         if (i2 < 0 || i >= sLookupTables.size()) {
             FontScaleConverterImpl fontScaleConverterImpl = new FontScaleConverterImpl(new float[]{1.0f}, new float[]{f});
@@ -67,11 +67,11 @@ public class FontScaleConverterFactory {
             }
             return fontScaleConverterImpl;
         }
-        FontScaleConverter createInterpolatedTableBetween = createInterpolatedTableBetween(sLookupTables.valueAt(i2), sLookupTables.valueAt(i), MathUtils.constrainedMap(0.0f, 1.0f, getScaleFromKey(sLookupTables.keyAt(i2)), getScaleFromKey(sLookupTables.keyAt(i)), f));
+        FontScaleConverter fontScaleConverterCreateInterpolatedTableBetween = createInterpolatedTableBetween(sLookupTables.valueAt(i2), sLookupTables.valueAt(i), MathUtils.constrainedMap(0.0f, 1.0f, getScaleFromKey(sLookupTables.keyAt(i2)), getScaleFromKey(sLookupTables.keyAt(i)), f));
         if (Flags.fontScaleConverterPublic()) {
-            put(f, createInterpolatedTableBetween);
+            put(f, fontScaleConverterCreateInterpolatedTableBetween);
         }
-        return createInterpolatedTableBetween;
+        return fontScaleConverterCreateInterpolatedTableBetween;
     }
 
     private static FontScaleConverter createInterpolatedTableBetween(FontScaleConverter fontScaleConverter, FontScaleConverter fontScaleConverter2, float f) {
@@ -86,9 +86,9 @@ public class FontScaleConverterFactory {
 
     private static void put(float f, FontScaleConverter fontScaleConverter) {
         synchronized (LOOKUP_TABLES_WRITE_LOCK) {
-            SparseArray<FontScaleConverter> m5529clone = sLookupTables.m5529clone();
-            putInto(m5529clone, f, fontScaleConverter);
-            sLookupTables = m5529clone;
+            SparseArray<FontScaleConverter> sparseArrayClone = sLookupTables.m5536clone();
+            putInto(sparseArrayClone, f, fontScaleConverter);
+            sLookupTables = sparseArrayClone;
         }
     }
 

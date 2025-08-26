@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Transition<EnterExitState> $childTransition;
@@ -51,7 +50,7 @@ final class AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$
             ResultKt.throwOnFailure(obj);
             final ProduceStateScope produceStateScope = (ProduceStateScope) this.L$0;
             final Transition<EnterExitState> transition = this.$childTransition;
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1.1
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
@@ -70,20 +69,20 @@ final class AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$
             FlowCollector flowCollector = new FlowCollector() { // from class: androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$shouldDisposeAfterExit$2$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    boolean z;
+                    boolean zBooleanValue;
                     if (((Boolean) obj2).booleanValue()) {
                         Function2 function2 = (Function2) state.getValue();
                         Transition transition3 = transition2;
-                        z = ((Boolean) function2.invoke(transition3.transitionState.getCurrentState(), ((SnapshotMutableStateImpl) transition3.targetState$delegate).getValue())).booleanValue();
+                        zBooleanValue = ((Boolean) function2.invoke(transition3.transitionState.getCurrentState(), ((SnapshotMutableStateImpl) transition3.targetState$delegate).getValue())).booleanValue();
                     } else {
-                        z = false;
+                        zBooleanValue = false;
                     }
-                    produceStateScope.setValue(Boolean.valueOf(z));
+                    produceStateScope.setValue(Boolean.valueOf(zBooleanValue));
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

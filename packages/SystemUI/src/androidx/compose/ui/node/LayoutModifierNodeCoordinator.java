@@ -10,14 +10,15 @@ import androidx.compose.ui.graphics.layer.GraphicsLayer;
 import androidx.compose.ui.layout.AlignmentLine;
 import androidx.compose.ui.layout.ApproachLayoutModifierNode;
 import androidx.compose.ui.layout.ApproachMeasureScopeImpl;
+import androidx.compose.ui.layout.MeasureResult;
 import androidx.compose.ui.layout.Placeable;
 import androidx.compose.ui.platform.AndroidComposeView;
 import androidx.compose.ui.unit.Constraints;
 import androidx.compose.ui.unit.IntSize;
+import java.util.Map;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
     public static final AndroidPaint modifierBoundsPaint;
@@ -26,7 +27,6 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
     public Constraints lookaheadConstraints;
     public LookaheadDelegate lookaheadDelegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,7 +36,6 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class LookaheadDelegateForLayoutModifierNode extends LookaheadDelegate {
         public LookaheadDelegateForLayoutModifierNode() {
             super(LayoutModifierNodeCoordinator.this);
@@ -44,9 +43,9 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
 
         @Override // androidx.compose.ui.node.LookaheadCapablePlaceable
         public final int calculateAlignmentLine(AlignmentLine alignmentLine) {
-            int access$calculateAlignmentAndPlaceChildAsNeeded = LayoutModifierNodeCoordinatorKt.access$calculateAlignmentAndPlaceChildAsNeeded(this, alignmentLine);
-            this.cachedAlignmentLinesMap.set(access$calculateAlignmentAndPlaceChildAsNeeded, alignmentLine);
-            return access$calculateAlignmentAndPlaceChildAsNeeded;
+            int iAccess$calculateAlignmentAndPlaceChildAsNeeded = LayoutModifierNodeCoordinatorKt.access$calculateAlignmentAndPlaceChildAsNeeded(this, alignmentLine);
+            this.cachedAlignmentLinesMap.set(iAccess$calculateAlignmentAndPlaceChildAsNeeded, alignmentLine);
+            return iAccess$calculateAlignmentAndPlaceChildAsNeeded;
         }
 
         @Override // androidx.compose.ui.node.LookaheadDelegate, androidx.compose.ui.layout.IntrinsicMeasurable
@@ -73,11 +72,11 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
 
         @Override // androidx.compose.ui.layout.Measurable
         /* renamed from: measure-BRTryo0 */
-        public final Placeable mo608measureBRTryo0(long j) {
-            m625setMeasurementConstraintsBRTryo0(j);
-            Constraints m813boximpl = Constraints.m813boximpl(j);
+        public final Placeable mo610measureBRTryo0(long j) {
+            m627setMeasurementConstraintsBRTryo0(j);
+            Constraints constraintsM815boximpl = Constraints.m815boximpl(j);
             LayoutModifierNodeCoordinator layoutModifierNodeCoordinator = LayoutModifierNodeCoordinator.this;
-            layoutModifierNodeCoordinator.lookaheadConstraints = m813boximpl;
+            layoutModifierNodeCoordinator.lookaheadConstraints = constraintsM815boximpl;
             LayoutModifierNode layoutModifierNode = layoutModifierNodeCoordinator.layoutModifierNode;
             NodeCoordinator nodeCoordinator = layoutModifierNodeCoordinator.wrapped;
             nodeCoordinator.getClass();
@@ -114,10 +113,10 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
         new Companion(null);
         AndroidPaint androidPaint = new AndroidPaint();
         Color.Companion.getClass();
-        androidPaint.m438setColor8_81llA(Color.Blue);
+        androidPaint.m440setColor8_81llA(Color.Blue);
         androidPaint.setStrokeWidth(1.0f);
         PaintingStyle.Companion.getClass();
-        androidPaint.m442setStylek9PVt8s(PaintingStyle.Stroke);
+        androidPaint.m444setStylek9PVt8s(PaintingStyle.Stroke);
         modifierBoundsPaint = androidPaint;
     }
 
@@ -136,9 +135,9 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
             return LayoutModifierNodeCoordinatorKt.access$calculateAlignmentAndPlaceChildAsNeeded(this, alignmentLine);
         }
         MutableObjectIntMap mutableObjectIntMap = lookaheadDelegate.cachedAlignmentLinesMap;
-        int findKeyIndex = mutableObjectIntMap.findKeyIndex(alignmentLine);
-        if (findKeyIndex >= 0) {
-            return mutableObjectIntMap.values[findKeyIndex];
+        int iFindKeyIndex = mutableObjectIntMap.findKeyIndex(alignmentLine);
+        if (iFindKeyIndex >= 0) {
+            return mutableObjectIntMap.values[iFindKeyIndex];
         }
         return Integer.MIN_VALUE;
     }
@@ -190,113 +189,105 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
         return layoutModifierNode.maxIntrinsicWidth(this, nodeCoordinator2, i);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x006a, code lost:
-    
-        if (r9 == r1.height) goto L30;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x006d  */
     @Override // androidx.compose.ui.layout.Measurable
     /* renamed from: measure-BRTryo0 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.compose.ui.layout.Placeable mo608measureBRTryo0(long r8) {
-        /*
-            r7 = this;
-            boolean r0 = r7.forceMeasureWithLookaheadConstraints
-            if (r0 == 0) goto L13
-            androidx.compose.ui.unit.Constraints r8 = r7.lookaheadConstraints
-            if (r8 == 0) goto Lb
-            long r8 = r8.value
-            goto L13
-        Lb:
-            java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-            java.lang.String r8 = "Lookahead constraints cannot be null in approach pass."
-            r7.<init>(r8)
-            throw r7
-        L13:
-            r7.m625setMeasurementConstraintsBRTryo0(r8)
-            androidx.compose.ui.layout.ApproachMeasureScopeImpl r0 = r7.approachMeasureScope
-            if (r0 == 0) goto L9d
-            androidx.compose.ui.layout.ApproachLayoutModifierNode r1 = r0.approachNode
-            long r2 = r0.mo602getLookaheadSizeYbymL2g()
-            boolean r2 = r1.mo604isMeasurementApproachInProgressozmzZPI(r2)
-            r3 = 1
-            r4 = 0
-            if (r2 != 0) goto L36
-            androidx.compose.ui.unit.Constraints r2 = r7.lookaheadConstraints
-            if (r2 != 0) goto L2d
-            goto L36
-        L2d:
-            long r5 = r2.value
-            int r2 = (r8 > r5 ? 1 : (r8 == r5 ? 0 : -1))
-            if (r2 == 0) goto L34
-            goto L36
-        L34:
-            r2 = r4
-            goto L37
-        L36:
-            r2 = r3
-        L37:
-            r0.approachMeasureRequired = r2
-            if (r2 != 0) goto L42
-            androidx.compose.ui.node.NodeCoordinator r2 = r7.wrapped
-            r2.getClass()
-            r2.forceMeasureWithLookaheadConstraints = r3
-        L42:
-            androidx.compose.ui.node.NodeCoordinator r2 = r7.wrapped
-            r2.getClass()
-            androidx.compose.ui.layout.MeasureResult r8 = r1.mo603approachMeasure3p2s80s(r0, r2, r8)
-            androidx.compose.ui.node.NodeCoordinator r9 = r7.wrapped
-            r9.getClass()
-            r9.forceMeasureWithLookaheadConstraints = r4
-            int r9 = r8.getWidth()
-            androidx.compose.ui.node.LookaheadDelegate r1 = r7.lookaheadDelegate
-            r1.getClass()
-            int r1 = r1.width
-            if (r9 != r1) goto L6d
-            int r9 = r8.getHeight()
-            androidx.compose.ui.node.LookaheadDelegate r1 = r7.lookaheadDelegate
-            r1.getClass()
-            int r1 = r1.height
-            if (r9 != r1) goto L6d
-            goto L6e
-        L6d:
-            r3 = r4
-        L6e:
-            boolean r9 = r0.approachMeasureRequired
-            if (r9 != 0) goto La8
-            androidx.compose.ui.node.NodeCoordinator r9 = r7.wrapped
-            r9.getClass()
-            long r0 = r9.measuredSize
-            androidx.compose.ui.node.NodeCoordinator r9 = r7.wrapped
-            r9.getClass()
-            androidx.compose.ui.node.LookaheadDelegate r9 = r9.getLookaheadDelegate()
-            if (r9 == 0) goto L8d
-            long r4 = r9.m650getSizeYbymL2g$ui_release()
-            androidx.compose.ui.unit.IntSize r9 = androidx.compose.ui.unit.IntSize.m859boximpl(r4)
-            goto L8e
-        L8d:
-            r9 = 0
-        L8e:
-            boolean r9 = androidx.compose.ui.unit.IntSize.m860equalsimpl(r0, r9)
-            if (r9 == 0) goto La8
-            if (r3 != 0) goto La8
-            androidx.compose.ui.node.LayoutModifierNodeCoordinator$measure$1$1$1$1 r9 = new androidx.compose.ui.node.LayoutModifierNodeCoordinator$measure$1$1$1$1
-            r9.<init>(r7)
-            r8 = r9
-            goto La8
-        L9d:
-            androidx.compose.ui.node.LayoutModifierNode r0 = r7.layoutModifierNode
-            androidx.compose.ui.node.NodeCoordinator r1 = r7.wrapped
-            r1.getClass()
-            androidx.compose.ui.layout.MeasureResult r8 = r0.mo4measure3p2s80s(r7, r1, r8)
-        La8:
-            r7.setMeasureResult$ui_release(r8)
-            r7.onMeasured()
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.node.LayoutModifierNodeCoordinator.mo608measureBRTryo0(long):androidx.compose.ui.layout.Placeable");
+    public final Placeable mo610measureBRTryo0(long j) {
+        final MeasureResult measureResultMo4measure3p2s80s;
+        Constraints constraints;
+        if (this.forceMeasureWithLookaheadConstraints) {
+            Constraints constraints2 = this.lookaheadConstraints;
+            if (constraints2 == null) {
+                throw new IllegalArgumentException("Lookahead constraints cannot be null in approach pass.");
+            }
+            j = constraints2.value;
+        }
+        m627setMeasurementConstraintsBRTryo0(j);
+        ApproachMeasureScopeImpl approachMeasureScopeImpl = this.approachMeasureScope;
+        if (approachMeasureScopeImpl != null) {
+            ApproachLayoutModifierNode approachLayoutModifierNode = approachMeasureScopeImpl.approachNode;
+            boolean z = approachLayoutModifierNode.mo606isMeasurementApproachInProgressozmzZPI(approachMeasureScopeImpl.mo604getLookaheadSizeYbymL2g()) || (constraints = this.lookaheadConstraints) == null || j != constraints.value;
+            approachMeasureScopeImpl.approachMeasureRequired = z;
+            if (!z) {
+                NodeCoordinator nodeCoordinator = this.wrapped;
+                nodeCoordinator.getClass();
+                nodeCoordinator.forceMeasureWithLookaheadConstraints = true;
+            }
+            NodeCoordinator nodeCoordinator2 = this.wrapped;
+            nodeCoordinator2.getClass();
+            measureResultMo4measure3p2s80s = approachLayoutModifierNode.mo605approachMeasure3p2s80s(approachMeasureScopeImpl, nodeCoordinator2, j);
+            NodeCoordinator nodeCoordinator3 = this.wrapped;
+            nodeCoordinator3.getClass();
+            nodeCoordinator3.forceMeasureWithLookaheadConstraints = false;
+            int width = measureResultMo4measure3p2s80s.getWidth();
+            LookaheadDelegate lookaheadDelegate = this.lookaheadDelegate;
+            lookaheadDelegate.getClass();
+            if (width == lookaheadDelegate.width) {
+                int height = measureResultMo4measure3p2s80s.getHeight();
+                LookaheadDelegate lookaheadDelegate2 = this.lookaheadDelegate;
+                lookaheadDelegate2.getClass();
+                boolean z2 = height == lookaheadDelegate2.height;
+                if (!approachMeasureScopeImpl.approachMeasureRequired) {
+                    NodeCoordinator nodeCoordinator4 = this.wrapped;
+                    nodeCoordinator4.getClass();
+                    long j2 = nodeCoordinator4.measuredSize;
+                    NodeCoordinator nodeCoordinator5 = this.wrapped;
+                    nodeCoordinator5.getClass();
+                    LookaheadDelegate lookaheadDelegate3 = nodeCoordinator5.getLookaheadDelegate();
+                    if (IntSize.m862equalsimpl(j2, lookaheadDelegate3 != null ? IntSize.m861boximpl(lookaheadDelegate3.m652getSizeYbymL2g$ui_release()) : null) && !z2) {
+                        measureResultMo4measure3p2s80s = new MeasureResult(this) { // from class: androidx.compose.ui.node.LayoutModifierNodeCoordinator$measure$1$1$1$1
+                            public final int height;
+                            public final int width;
+
+                            {
+                                LookaheadDelegate lookaheadDelegate4 = this.lookaheadDelegate;
+                                lookaheadDelegate4.getClass();
+                                this.width = lookaheadDelegate4.width;
+                                LookaheadDelegate lookaheadDelegate5 = this.lookaheadDelegate;
+                                lookaheadDelegate5.getClass();
+                                this.height = lookaheadDelegate5.height;
+                            }
+
+                            @Override // androidx.compose.ui.layout.MeasureResult
+                            public final Map getAlignmentLines() {
+                                return this.$$delegate_0.getAlignmentLines();
+                            }
+
+                            @Override // androidx.compose.ui.layout.MeasureResult
+                            public final int getHeight() {
+                                return this.height;
+                            }
+
+                            @Override // androidx.compose.ui.layout.MeasureResult
+                            public final Function1 getRulers() {
+                                return this.$$delegate_0.getRulers();
+                            }
+
+                            @Override // androidx.compose.ui.layout.MeasureResult
+                            public final int getWidth() {
+                                return this.width;
+                            }
+
+                            @Override // androidx.compose.ui.layout.MeasureResult
+                            public final void placeChildren() {
+                                this.$$delegate_0.placeChildren();
+                            }
+                        };
+                    }
+                }
+            }
+        } else {
+            LayoutModifierNode layoutModifierNode = this.layoutModifierNode;
+            NodeCoordinator nodeCoordinator6 = this.wrapped;
+            nodeCoordinator6.getClass();
+            measureResultMo4measure3p2s80s = layoutModifierNode.mo4measure3p2s80s(this, nodeCoordinator6, j);
+        }
+        setMeasureResult$ui_release(measureResultMo4measure3p2s80s);
+        onMeasured();
+        return this;
     }
 
     @Override // androidx.compose.ui.layout.IntrinsicMeasurable
@@ -329,6 +320,10 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
         return layoutModifierNode.minIntrinsicWidth(this, nodeCoordinator2, i);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x005b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onAfterPlaceAt$1() {
         boolean z;
         if (this.isShallowPlacing) {
@@ -341,33 +336,34 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
             Placeable.PlacementScope placementScope = this.placementScope;
             LookaheadDelegate lookaheadDelegate = this.lookaheadDelegate;
             lookaheadDelegate.getClass();
-            if (!approachLayoutModifierNode.isPlacementApproachInProgress(placementScope, lookaheadDelegate.lookaheadLayoutCoordinates) && !approachMeasureScopeImpl.approachMeasureRequired) {
+            if (approachLayoutModifierNode.isPlacementApproachInProgress(placementScope, lookaheadDelegate.lookaheadLayoutCoordinates) || approachMeasureScopeImpl.approachMeasureRequired) {
+                z = false;
+                NodeCoordinator nodeCoordinator = this.wrapped;
+                nodeCoordinator.getClass();
+                nodeCoordinator.forcePlaceWithLookaheadOffset = z;
+            } else {
                 long j = this.measuredSize;
                 LookaheadDelegate lookaheadDelegate2 = this.lookaheadDelegate;
-                if (IntSize.m860equalsimpl(j, lookaheadDelegate2 != null ? IntSize.m859boximpl(lookaheadDelegate2.m650getSizeYbymL2g$ui_release()) : null)) {
-                    NodeCoordinator nodeCoordinator = this.wrapped;
-                    nodeCoordinator.getClass();
-                    long j2 = nodeCoordinator.measuredSize;
+                if (IntSize.m862equalsimpl(j, lookaheadDelegate2 != null ? IntSize.m861boximpl(lookaheadDelegate2.m652getSizeYbymL2g$ui_release()) : null)) {
                     NodeCoordinator nodeCoordinator2 = this.wrapped;
                     nodeCoordinator2.getClass();
-                    LookaheadDelegate lookaheadDelegate3 = nodeCoordinator2.getLookaheadDelegate();
-                    if (IntSize.m860equalsimpl(j2, lookaheadDelegate3 != null ? IntSize.m859boximpl(lookaheadDelegate3.m650getSizeYbymL2g$ui_release()) : null)) {
+                    long j2 = nodeCoordinator2.measuredSize;
+                    NodeCoordinator nodeCoordinator3 = this.wrapped;
+                    nodeCoordinator3.getClass();
+                    LookaheadDelegate lookaheadDelegate3 = nodeCoordinator3.getLookaheadDelegate();
+                    if (IntSize.m862equalsimpl(j2, lookaheadDelegate3 != null ? IntSize.m861boximpl(lookaheadDelegate3.m652getSizeYbymL2g$ui_release()) : null)) {
                         z = true;
-                        NodeCoordinator nodeCoordinator3 = this.wrapped;
-                        nodeCoordinator3.getClass();
-                        nodeCoordinator3.forcePlaceWithLookaheadOffset = z;
                     }
+                    NodeCoordinator nodeCoordinator4 = this.wrapped;
+                    nodeCoordinator4.getClass();
+                    nodeCoordinator4.forcePlaceWithLookaheadOffset = z;
                 }
             }
-            z = false;
-            NodeCoordinator nodeCoordinator32 = this.wrapped;
-            nodeCoordinator32.getClass();
-            nodeCoordinator32.forcePlaceWithLookaheadOffset = z;
         }
         getMeasureResult$ui_release().placeChildren();
-        NodeCoordinator nodeCoordinator4 = this.wrapped;
-        nodeCoordinator4.getClass();
-        nodeCoordinator4.forcePlaceWithLookaheadOffset = false;
+        NodeCoordinator nodeCoordinator5 = this.wrapped;
+        nodeCoordinator5.getClass();
+        nodeCoordinator5.forcePlaceWithLookaheadOffset = false;
     }
 
     @Override // androidx.compose.ui.node.NodeCoordinator
@@ -383,8 +379,8 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
 
     @Override // androidx.compose.ui.node.NodeCoordinator, androidx.compose.ui.layout.Placeable
     /* renamed from: placeAt-f8xVGno */
-    public final void mo623placeAtf8xVGno(long j, float f, GraphicsLayer graphicsLayer) {
-        super.mo623placeAtf8xVGno(j, f, graphicsLayer);
+    public final void mo625placeAtf8xVGno(long j, float f, GraphicsLayer graphicsLayer) {
+        super.mo625placeAtf8xVGno(j, f, graphicsLayer);
         onAfterPlaceAt$1();
     }
 
@@ -409,8 +405,8 @@ public final class LayoutModifierNodeCoordinator extends NodeCoordinator {
 
     @Override // androidx.compose.ui.node.NodeCoordinator, androidx.compose.ui.layout.Placeable
     /* renamed from: placeAt-f8xVGno */
-    public final void mo609placeAtf8xVGno(long j, float f, Function1 function1) {
-        super.mo609placeAtf8xVGno(j, f, function1);
+    public final void mo611placeAtf8xVGno(long j, float f, Function1 function1) {
+        super.mo611placeAtf8xVGno(j, f, function1);
         onAfterPlaceAt$1();
     }
 }

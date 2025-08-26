@@ -7,7 +7,6 @@ import com.facebook.rebound.Spring;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends SpringLooper {
     public final Choreographer mChoreographer;
@@ -28,10 +27,10 @@ public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends
             if (!androidSpringLooperFactory$ChoreographerAndroidSpringLooper.mStarted || androidSpringLooperFactory$ChoreographerAndroidSpringLooper.mSpringSystem == null) {
                 return;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper androidSpringLooperFactory$ChoreographerAndroidSpringLooper2 = AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper.this;
             BaseSpringSystem baseSpringSystem2 = androidSpringLooperFactory$ChoreographerAndroidSpringLooper2.mSpringSystem;
-            double d4 = uptimeMillis - androidSpringLooperFactory$ChoreographerAndroidSpringLooper2.mLastTime;
+            double d4 = jUptimeMillis - androidSpringLooperFactory$ChoreographerAndroidSpringLooper2.mLastTime;
             Iterator it2 = baseSpringSystem2.mListeners.iterator();
             if (it2.hasNext()) {
                 throw FragmentManager$$ExternalSyntheticOutline0.m(it2);
@@ -43,8 +42,8 @@ public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends
                     ((CopyOnWriteArraySet) baseSpringSystem2.mActiveSprings).remove(spring);
                 } else {
                     double d5 = d4 / 1000.0d;
-                    boolean isAtRest = spring.isAtRest();
-                    if (!isAtRest || !spring.mWasAtRest) {
+                    boolean zIsAtRest = spring.isAtRest();
+                    if (!zIsAtRest || !spring.mWasAtRest) {
                         if (d5 > 0.064d) {
                             d5 = 0.064d;
                         }
@@ -58,7 +57,7 @@ public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends
                         double d9 = physicsState2.velocity;
                         Spring.PhysicsState physicsState3 = spring.mTempState;
                         double d10 = physicsState3.position;
-                        j2 = uptimeMillis;
+                        j2 = jUptimeMillis;
                         double d11 = d8;
                         double d12 = physicsState3.velocity;
                         double d13 = d10;
@@ -112,7 +111,7 @@ public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends
                             spring.setVelocity(d3);
                             z = true;
                         } else {
-                            z = isAtRest;
+                            z = zIsAtRest;
                         }
                         if (spring.mWasAtRest) {
                             spring.mWasAtRest = false;
@@ -137,22 +136,22 @@ public class AndroidSpringLooperFactory$ChoreographerAndroidSpringLooper extends
                                 springListener.onSpringAtRest(spring);
                             }
                         }
-                        baseSpringSystem2 = baseSpringSystem;
-                        d4 = d;
-                        uptimeMillis = j2;
-                        it3 = it;
                     }
+                    baseSpringSystem2 = baseSpringSystem;
+                    d4 = d;
+                    jUptimeMillis = j2;
+                    it3 = it;
                 }
-                j2 = uptimeMillis;
+                j2 = jUptimeMillis;
                 it = it3;
                 baseSpringSystem = baseSpringSystem2;
                 d = d4;
                 baseSpringSystem2 = baseSpringSystem;
                 d4 = d;
-                uptimeMillis = j2;
+                jUptimeMillis = j2;
                 it3 = it;
             }
-            long j3 = uptimeMillis;
+            long j3 = jUptimeMillis;
             BaseSpringSystem baseSpringSystem3 = baseSpringSystem2;
             if (((CopyOnWriteArraySet) baseSpringSystem3.mActiveSprings).isEmpty()) {
                 baseSpringSystem3.mIdle = true;

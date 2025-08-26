@@ -9,7 +9,6 @@ import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VolumeControlProfile implements LocalBluetoothProfile {
     public final CachedBluetoothDeviceManager mDeviceManager;
@@ -17,7 +16,6 @@ public final class VolumeControlProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothVolumeControl mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeControlProfileServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ VolumeControlProfileServiceListener(VolumeControlProfile volumeControlProfile, int i) {
             this();
@@ -31,15 +29,15 @@ public final class VolumeControlProfile implements LocalBluetoothProfile {
             List connectedDevices = bluetoothVolumeControl.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = VolumeControlProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                if (findDevice == null) {
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = VolumeControlProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceFindDevice == null) {
                     Log.d("VolumeControlProfile", "VolumeControlProfile found new device: " + bluetoothDevice);
                     VolumeControlProfile volumeControlProfile = VolumeControlProfile.this;
-                    findDevice = volumeControlProfile.mDeviceManager.addDevice(volumeControlProfile.mProfileManager, bluetoothDevice);
+                    cachedBluetoothDeviceFindDevice = volumeControlProfile.mDeviceManager.addDevice(volumeControlProfile.mProfileManager, bluetoothDevice);
                 }
-                if (findDevice != null) {
-                    findDevice.onProfileStateChanged(VolumeControlProfile.this, 2);
-                    findDevice.refresh();
+                if (cachedBluetoothDeviceFindDevice != null) {
+                    cachedBluetoothDeviceFindDevice.onProfileStateChanged(VolumeControlProfile.this, 2);
+                    cachedBluetoothDeviceFindDevice.refresh();
                 }
             }
             VolumeControlProfile.this.mProfileManager.callServiceConnectedListeners();

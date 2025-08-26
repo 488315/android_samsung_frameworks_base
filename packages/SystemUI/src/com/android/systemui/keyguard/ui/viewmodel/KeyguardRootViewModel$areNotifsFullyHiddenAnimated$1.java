@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -25,10 +24,10 @@ final class KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1 extends Suspend
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1 keyguardRootViewModel$areNotifsFullyHiddenAnimated$1 = new KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1(this.this$0, (Continuation) obj3);
         keyguardRootViewModel$areNotifsFullyHiddenAnimated$1.L$0 = (WithPrev) obj;
-        keyguardRootViewModel$areNotifsFullyHiddenAnimated$1.Z$0 = booleanValue;
+        keyguardRootViewModel$areNotifsFullyHiddenAnimated$1.Z$0 = zBooleanValue;
         return keyguardRootViewModel$areNotifsFullyHiddenAnimated$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -42,11 +41,11 @@ final class KeyguardRootViewModel$areNotifsFullyHiddenAnimated$1 extends Suspend
         WithPrev withPrev = (WithPrev) this.L$0;
         boolean z = this.Z$0;
         Boolean bool = (Boolean) withPrev.component1();
-        boolean booleanValue = ((Boolean) withPrev.component2()).booleanValue();
+        boolean zBooleanValue = ((Boolean) withPrev.component2()).booleanValue();
         boolean z2 = false;
         if (bool != null && (z || (this.this$0.dozeParameters.getAlwaysOn() && !this.this$0.dozeParameters.getDisplayNeedsBlanking()))) {
             z2 = true;
         }
-        return new AnimatableEvent(Boolean.valueOf(booleanValue), z2);
+        return new AnimatableEvent(Boolean.valueOf(zBooleanValue), z2);
     }
 }

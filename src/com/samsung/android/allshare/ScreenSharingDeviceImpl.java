@@ -44,11 +44,11 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
             public void handleEventMessage(CVMessage cVMessage) {
                 ERROR error = ERROR.FAIL;
                 try {
-                    ERROR stringToEnum = ERROR.stringToEnum(cVMessage.getBundle().getString("BUNDLE_ENUM_ERROR"));
-                    if (stringToEnum == null) {
-                        stringToEnum = ERROR.FAIL;
+                    ERROR errorStringToEnum = ERROR.stringToEnum(cVMessage.getBundle().getString("BUNDLE_ENUM_ERROR"));
+                    if (errorStringToEnum == null) {
+                        errorStringToEnum = ERROR.FAIL;
                     }
-                    ScreenSharingDeviceImpl.this.mUPnPDeviceEventListener.onEventReceived("", "", stringToEnum);
+                    ScreenSharingDeviceImpl.this.mUPnPDeviceEventListener.onEventReceived("", "", errorStringToEnum);
                 } catch (Error e) {
                     DLog.w_api(ScreenSharingDeviceImpl.TAG_CLASS, "mEventHandler.handleEventMessage Error", e);
                 } catch (Exception unused) {
@@ -64,11 +64,11 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
                 if (actionID == null || bundle == null) {
                     return;
                 }
-                ERROR stringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+                ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
                 try {
                     if (ScreenSharingDeviceImpl.this.mActionResponseListener != null) {
                         if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_MOBILE_TO_TV)) {
-                            if (stringToEnum.equals(ERROR.SUCCESS)) {
+                            if (errorStringToEnum.equals(ERROR.SUCCESS)) {
                                 String string = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_BSSID);
                                 String string2 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_WLANFREQ);
                                 String string3 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_LISTENFREQ);
@@ -78,7 +78,7 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
                             }
                             return;
                         }
-                        if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_TV_TO_MOBILE) && stringToEnum.equals(ERROR.SUCCESS)) {
+                        if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_TV_TO_MOBILE) && errorStringToEnum.equals(ERROR.SUCCESS)) {
                             String string4 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_BSSID);
                             String string5 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_WLANFREQ);
                             String string6 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_LISTENFREQ);
@@ -106,11 +106,11 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
             public void handleEventMessage(CVMessage cVMessage) {
                 ERROR error = ERROR.FAIL;
                 try {
-                    ERROR stringToEnum = ERROR.stringToEnum(cVMessage.getBundle().getString("BUNDLE_ENUM_ERROR"));
-                    if (stringToEnum == null) {
-                        stringToEnum = ERROR.FAIL;
+                    ERROR errorStringToEnum = ERROR.stringToEnum(cVMessage.getBundle().getString("BUNDLE_ENUM_ERROR"));
+                    if (errorStringToEnum == null) {
+                        errorStringToEnum = ERROR.FAIL;
                     }
-                    ScreenSharingDeviceImpl.this.mUPnPDeviceEventListener.onEventReceived("", "", stringToEnum);
+                    ScreenSharingDeviceImpl.this.mUPnPDeviceEventListener.onEventReceived("", "", errorStringToEnum);
                 } catch (Error e) {
                     DLog.w_api(ScreenSharingDeviceImpl.TAG_CLASS, "mEventHandler.handleEventMessage Error", e);
                 } catch (Exception unused) {
@@ -126,11 +126,11 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
                 if (actionID == null || bundle == null) {
                     return;
                 }
-                ERROR stringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+                ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
                 try {
                     if (ScreenSharingDeviceImpl.this.mActionResponseListener != null) {
                         if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_MOBILE_TO_TV)) {
-                            if (stringToEnum.equals(ERROR.SUCCESS)) {
+                            if (errorStringToEnum.equals(ERROR.SUCCESS)) {
                                 String string = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_BSSID);
                                 String string2 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_WLANFREQ);
                                 String string3 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_LISTENFREQ);
@@ -140,7 +140,7 @@ final class ScreenSharingDeviceImpl extends ScreenSharingDevice implements IBund
                             }
                             return;
                         }
-                        if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_TV_TO_MOBILE) && stringToEnum.equals(ERROR.SUCCESS)) {
+                        if (actionID.equals(AllShareAction.ACTION_CONNECT_SCREENSHARING_TV_TO_MOBILE) && errorStringToEnum.equals(ERROR.SUCCESS)) {
                             String string4 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_BSSID);
                             String string5 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_WLANFREQ);
                             String string6 = bundle.getString(AllShareKey.BUNDLE_STRING_SCREENSHARING_TV_LISTENFREQ);

@@ -16,13 +16,11 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SingleScheduler extends Scheduler {
     public static final RxThreadFactory SINGLE_THREAD_FACTORY;
     public final AtomicReference executor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScheduledWorker extends Scheduler.Worker {
         public volatile boolean disposed;
         public final ScheduledExecutorService executor;
@@ -91,10 +89,10 @@ public final class SingleScheduler extends Scheduler {
         AtomicReference atomicReference = new AtomicReference();
         this.executor = atomicReference;
         boolean z = SchedulerPoolFactory.PURGE_ENABLED;
-        ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(1, threadFactory);
-        if (SchedulerPoolFactory.PURGE_ENABLED && (newScheduledThreadPool instanceof ScheduledThreadPoolExecutor)) {
-            ((ConcurrentHashMap) SchedulerPoolFactory.POOLS).put((ScheduledThreadPoolExecutor) newScheduledThreadPool, newScheduledThreadPool);
+        ScheduledExecutorService scheduledExecutorServiceNewScheduledThreadPool = Executors.newScheduledThreadPool(1, threadFactory);
+        if (SchedulerPoolFactory.PURGE_ENABLED && (scheduledExecutorServiceNewScheduledThreadPool instanceof ScheduledThreadPoolExecutor)) {
+            ((ConcurrentHashMap) SchedulerPoolFactory.POOLS).put((ScheduledThreadPoolExecutor) scheduledExecutorServiceNewScheduledThreadPool, scheduledExecutorServiceNewScheduledThreadPool);
         }
-        atomicReference.lazySet(newScheduledThreadPool);
+        atomicReference.lazySet(scheduledExecutorServiceNewScheduledThreadPool);
     }
 }

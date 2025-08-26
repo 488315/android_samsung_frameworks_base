@@ -74,18 +74,18 @@ public class NNFileDescriptor implements Parcelable, Cloneable {
     }
 
     public Object clone() throws CloneNotSupportedException {
-        Object clone = super.clone();
+        Object objClone = super.clone();
         try {
             ParcelFileDescriptor parcelFileDescriptor = this.fd;
             if (parcelFileDescriptor != null) {
-                ((NNFileDescriptor) clone).fd = parcelFileDescriptor.dup();
-                return clone;
+                ((NNFileDescriptor) objClone).fd = parcelFileDescriptor.dup();
+                return objClone;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            ((NNFileDescriptor) clone).fd = null;
+            ((NNFileDescriptor) objClone).fd = null;
         }
-        return clone;
+        return objClone;
     }
 
     public Uri getPathUri() {

@@ -2,8 +2,13 @@ package com.samsung.android.app;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -14,13 +19,17 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.util.NtpTrustedTime;
+import android.util.Xml;
 import com.android.internal.R;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.util.SemLog;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public final class SemExecutableInfo implements Parcelable {
@@ -121,17 +130,17 @@ public final class SemExecutableInfo implements Parcelable {
         this.mActivityLaunchMode = parcel.readString();
     }
 
-    private void setId(String str) {
+    private void setId(String str) throws NumberFormatException {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(XML_ELEMENT_EXECUTABLE).authority(str);
-        String valueOf = String.valueOf((getAction() + getPackageName() + getComponentName() + getLaunchType() + getBundleString()).hashCode() & 4294967295L);
+        String strValueOf = String.valueOf((getAction() + getPackageName() + getComponentName() + getLaunchType() + getBundleString()).hashCode() & 4294967295L);
         try {
             SemLog.d(LOG_TAG, "Use defined mUid: " + Long.parseLong(this.mUid));
-            valueOf = this.mUid;
+            strValueOf = this.mUid;
         } catch (Exception unused) {
             SemLog.d(LOG_TAG, "Not set mUid: " + this.mUid);
         }
-        builder.appendPath(valueOf);
+        builder.appendPath(strValueOf);
         this.mUid = builder.toString();
     }
 
@@ -183,81 +192,53 @@ public final class SemExecutableInfo implements Parcelable {
         return this.mComponentName;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003e A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x003e A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getActivityLaunchMode() {
-        /*
-            r4 = this;
-            java.lang.String r0 = r4.mActivityLaunchMode
-            r1 = 0
-            if (r0 == 0) goto L42
-            int r0 = r0.length()
-            if (r0 != 0) goto Lc
-            goto L42
-        Lc:
-            java.lang.String r4 = r4.mActivityLaunchMode
-            java.lang.String r0 = "\\|"
-            java.lang.String[] r4 = r4.split(r0)
-            r0 = r1
-        L15:
-            int r2 = r4.length
-            if (r1 >= r2) goto L41
-            r2 = r4[r1]
-            java.lang.String r3 = "newTask"
-            boolean r3 = r3.equals(r2)
-            if (r3 == 0) goto L27
-            r3 = 268435456(0x10000000, float:2.524355E-29)
-        L25:
-            r0 = r0 | r3
-            goto L33
-        L27:
-            java.lang.String r3 = "singleTop"
-            boolean r3 = r3.equals(r2)
-            if (r3 == 0) goto L33
-            r3 = 536870912(0x20000000, float:1.0842022E-19)
-            goto L25
-        L33:
-            java.lang.String r3 = "clearTop"
-            boolean r2 = r3.equals(r2)
-            if (r2 == 0) goto L3e
-            r2 = 67108864(0x4000000, float:1.5046328E-36)
-            r0 = r0 | r2
-        L3e:
-            int r1 = r1 + 1
-            goto L15
-        L41:
-            return r0
-        L42:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.app.SemExecutableInfo.getActivityLaunchMode():int");
+        int i;
+        String str = this.mActivityLaunchMode;
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        int i2 = 0;
+        for (String str2 : this.mActivityLaunchMode.split("\\|")) {
+            if (!XML_ELEMENT_LAUCHMODE_NEWTASK.equals(str2)) {
+                i = XML_ELEMENT_LAUCHMODE_SINGLETOP.equals(str2) ? 536870912 : 268435456;
+                if (!XML_ELEMENT_LAUCHMODE_CLEARTOP.equals(str2)) {
+                    i2 |= 67108864;
+                }
+            }
+            i2 |= i;
+            if (!XML_ELEMENT_LAUCHMODE_CLEARTOP.equals(str2)) {
+            }
+        }
+        return i2;
     }
 
     private static SemExecutableInfo getActivityMetaData(Context context, AttributeSet attributeSet, ComponentName componentName) {
         SemExecutableInfo semExecutableInfo = new SemExecutableInfo();
-        Context createActivityContext = createActivityContext(context, componentName);
-        if (createActivityContext == null) {
+        Context contextCreateActivityContext = createActivityContext(context, componentName);
+        if (contextCreateActivityContext == null) {
             return null;
         }
-        TypedArray obtainStyledAttributes = createActivityContext.obtainStyledAttributes(attributeSet, R.styleable.command);
-        semExecutableInfo.mUid = obtainStyledAttributes.getString(3);
-        semExecutableInfo.mEnabled = obtainStyledAttributes.getBoolean(2, true);
-        semExecutableInfo.mLabelId = obtainStyledAttributes.getResourceId(0, 0);
-        semExecutableInfo.mIconId = obtainStyledAttributes.getResourceId(1, 0);
-        semExecutableInfo.mSmallIconId = obtainStyledAttributes.getResourceId(4, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = contextCreateActivityContext.obtainStyledAttributes(attributeSet, R.styleable.command);
+        semExecutableInfo.mUid = typedArrayObtainStyledAttributes.getString(3);
+        semExecutableInfo.mEnabled = typedArrayObtainStyledAttributes.getBoolean(2, true);
+        semExecutableInfo.mLabelId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        semExecutableInfo.mIconId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        semExecutableInfo.mSmallIconId = typedArrayObtainStyledAttributes.getResourceId(4, 0);
+        typedArrayObtainStyledAttributes.recycle();
         return semExecutableInfo;
     }
 
     private void addExtraAttribute(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.extrasCommand);
-        String string = obtainStyledAttributes.getString(0);
-        String string2 = obtainStyledAttributes.getString(2);
-        String string3 = obtainStyledAttributes.getString(1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.extrasCommand);
+        String string = typedArrayObtainStyledAttributes.getString(0);
+        String string2 = typedArrayObtainStyledAttributes.getString(2);
+        String string3 = typedArrayObtainStyledAttributes.getString(1);
         if (XML_ELEMENT_EXTRA_ATTR_LAUCHMODE.equals(string)) {
             this.mActivityLaunchMode = string3;
         } else if ("type".equals(string)) {
@@ -286,18 +267,23 @@ public final class SemExecutableInfo implements Parcelable {
         } else if ("extras".equals(string) && !TextUtils.isEmpty(string2) && !TextUtils.isEmpty(string3)) {
             this.mBundle.putString(string2, string3);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
-    private static void examineOrderInCategory(SemExecutableInfo semExecutableInfo, boolean z) {
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x009e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private static void examineOrderInCategory(SemExecutableInfo semExecutableInfo, boolean z) throws Throwable {
         StringBuilder sb = new StringBuilder();
         int i = !z ? ORDER_NOT_ALLOWED : ORDER_INIT_VALUE;
         if (semExecutableInfo.getCategories().isEmpty()) {
             return;
         }
         for (String str : semExecutableInfo.mCategory.split("\\|")) {
-            String[] split = str.split("@");
-            int length = split.length;
+            String[] strArrSplit = str.split("@");
+            int length = strArrSplit.length;
             if (length == 1) {
                 sb.append(str);
                 sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
@@ -311,23 +297,31 @@ public final class SemExecutableInfo implements Parcelable {
                 int i2 = -9998;
                 if (i != ORDER_NOT_ALLOWED) {
                     try {
-                        i = Integer.parseInt(split[0]);
+                        i = Integer.parseInt(strArrSplit[0]);
                         if (i < -1000 || i > 1000) {
                             i = -9999;
                         }
+                        if (i != -9999 || i == ORDER_NOT_ALLOWED || i == -9998) {
+                            sb.append(strArrSplit[1]);
+                            sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
+                        } else {
+                            sb.append(str);
+                            sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
+                        }
+                        i2 = i;
                     } catch (NumberFormatException e) {
                         try {
                             if (DEBUG) {
                                 SemLog.d(LOG_TAG, "Invalid order");
                                 e.printStackTrace();
                             }
-                            sb.append(split[1]);
+                            sb.append(strArrSplit[1]);
                             sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
                         } catch (Throwable th) {
                             th = th;
                             i = -9998;
                             if (i != -9999 || i == ORDER_NOT_ALLOWED || i == -9998) {
-                                sb.append(split[1]);
+                                sb.append(strArrSplit[1]);
                                 sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
                             } else {
                                 sb.append(str);
@@ -338,25 +332,22 @@ public final class SemExecutableInfo implements Parcelable {
                     } catch (Throwable th2) {
                         th = th2;
                         if (i != -9999) {
+                            sb.append(strArrSplit[1]);
+                            sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
                         }
-                        sb.append(split[1]);
-                        sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
                         throw th;
                     }
-                }
-                if (i == -9999 || i == ORDER_NOT_ALLOWED || i == -9998) {
-                    sb.append(split[1]);
+                    i = i2;
+                } else if (i != -9999) {
+                    sb.append(strArrSplit[1]);
                     sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
-                } else {
-                    sb.append(str);
-                    sb.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
+                    i2 = i;
+                    i = i2;
                 }
-                i2 = i;
-                i = i2;
             }
         }
-        String sb2 = sb.toString();
-        semExecutableInfo.mCategory = sb2.substring(0, sb2.length() - 1);
+        String string = sb.toString();
+        semExecutableInfo.mCategory = string.substring(0, string.length() - 1);
     }
 
     private static Context createActivityContext(Context context, ComponentName componentName) {
@@ -371,17 +362,147 @@ public final class SemExecutableInfo implements Parcelable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:91:0x01d4  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x0171 A[PHI: r16
+      0x0171: PHI (r16v2 boolean) = (r16v1 boolean), (r16v3 boolean) binds: [B:53:0x011b, B:58:0x0129] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x01d0  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x01d4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.util.List<com.samsung.android.app.SemExecutableInfo> scanExecutableInfos(android.content.Context r19) {
-        /*
-            Method dump skipped, instructions count: 535
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.app.SemExecutableInfo.scanExecutableInfos(android.content.Context):java.util.List");
+    public static List<SemExecutableInfo> scanExecutableInfos(Context context) throws Throwable {
+        boolean z;
+        boolean z2;
+        PackageItemInfo packageItemInfo;
+        ApplicationInfo applicationInfo;
+        boolean z3;
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
+        if (DEBUG) {
+            SemLog.d(LOG_TAG, "scan scanExecutableInfos start");
+        }
+        PackageManager packageManager = context.getPackageManager();
+        ArrayList arrayList = new ArrayList();
+        int i = 3;
+        boolean z4 = true;
+        int i2 = 2;
+        List[] listArr = {packageManager.queryIntentActivities(new Intent(MD_LABEL_EXECUTABLE), 640), packageManager.queryIntentServices(new Intent(MD_LABEL_EXECUTABLE), 640), packageManager.queryBroadcastReceivers(new Intent(MD_LABEL_EXECUTABLE), 640)};
+        int i3 = 0;
+        while (i3 < i) {
+            List<ResolveInfo> list = listArr[i3];
+            if (DEBUG) {
+                SemLog.d(LOG_TAG, "list size = " + list.size());
+            }
+            for (ResolveInfo resolveInfo : list) {
+                if (resolveInfo.activityInfo != null) {
+                    packageItemInfo = resolveInfo.activityInfo;
+                    applicationInfo = resolveInfo.activityInfo.applicationInfo;
+                    z2 = resolveInfo.activityInfo.applicationInfo.enabled ^ z4;
+                    z3 = resolveInfo.activityInfo.enabled;
+                } else if (resolveInfo.serviceInfo != null) {
+                    packageItemInfo = resolveInfo.serviceInfo;
+                    applicationInfo = resolveInfo.serviceInfo.applicationInfo;
+                    z2 = resolveInfo.serviceInfo.applicationInfo.enabled ^ z4;
+                    z3 = resolveInfo.serviceInfo.enabled;
+                } else {
+                    z = z4;
+                    z2 = z;
+                    packageItemInfo = null;
+                    applicationInfo = null;
+                    if (!z2 || z) {
+                        if (DEBUG) {
+                            SemLog.d(LOG_TAG, "skip disable component: " + z2 + ", " + z);
+                        }
+                    } else {
+                        ComponentName componentName = new ComponentName(packageItemInfo.packageName, packageItemInfo.name);
+                        try {
+                            xmlResourceParserLoadXmlMetaData = applicationInfo.loadXmlMetaData(context.getPackageManager(), MD_LABEL_EXECUTABLE);
+                        } catch (IOException e) {
+                            SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + componentName.flattenToShortString(), e);
+                        } catch (IllegalArgumentException e2) {
+                            SemLog.w(LOG_TAG, "Invalid attribute in metadata for " + componentName.flattenToShortString() + ": " + e2.getMessage());
+                        } catch (XmlPullParserException e3) {
+                            SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + componentName.flattenToShortString(), e3);
+                        } catch (Exception e4) {
+                            SemLog.w(LOG_TAG, "Unknown Exception while Reading SemExecutableInfo metadata", e4);
+                        }
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            int next = xmlResourceParserLoadXmlMetaData.next();
+                            boolean z5 = false;
+                            SemExecutableInfo activityMetaData = null;
+                            boolean z6 = false;
+                            while (next != z4) {
+                                String name = xmlResourceParserLoadXmlMetaData.getName();
+                                if (next == i2) {
+                                    if (XML_ELEMENT_EXECUTABLE.equals(name)) {
+                                        z5 = true;
+                                    }
+                                    if ("command".equals(name)) {
+                                        if (!z5) {
+                                            throw new XmlPullParserException("executable element wasn't started");
+                                        }
+                                        activityMetaData = getActivityMetaData(context, Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), componentName);
+                                        z6 = true;
+                                    }
+                                    SemExecutableInfo semExecutableInfo = activityMetaData;
+                                    if (XML_ELEMENT_EXTRA_ATTR.equals(name)) {
+                                        if (!z5 || !z6) {
+                                            throw new XmlPullParserException("executable or command element wasn't started");
+                                        }
+                                        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                                        if (semExecutableInfo != null) {
+                                            semExecutableInfo.addExtraAttribute(context, attributeSetAsAttributeSet);
+                                        }
+                                    }
+                                    activityMetaData = semExecutableInfo;
+                                } else if (next == 3) {
+                                    if (XML_ELEMENT_EXECUTABLE.equals(name)) {
+                                        z5 = false;
+                                    }
+                                    if ("command".equals(name)) {
+                                        if (checkValidate(activityMetaData)) {
+                                            SemExecutableInfo semExecutableInfo2 = activityMetaData;
+                                            examineOrderInCategory(semExecutableInfo2, SemExecutableWhitelist.getInstance().isAllowedToUseOrder(context, applicationInfo.packageName));
+                                            semExecutableInfo2.setId(applicationInfo.packageName);
+                                            Iterator it = arrayList.iterator();
+                                            boolean z7 = false;
+                                            while (it.hasNext()) {
+                                                if (TextUtils.equals(((SemExecutableInfo) it.next()).getId(), semExecutableInfo2.getId())) {
+                                                    z7 = true;
+                                                }
+                                            }
+                                            if (!z7) {
+                                                arrayList.add(semExecutableInfo2);
+                                            }
+                                        }
+                                        activityMetaData = null;
+                                        z6 = false;
+                                    }
+                                }
+                                next = xmlResourceParserLoadXmlMetaData.next();
+                                z4 = true;
+                                i2 = 2;
+                            }
+                        }
+                    }
+                    z4 = true;
+                    i2 = 2;
+                }
+                z = z3 ^ z4;
+                if (!z2) {
+                    if (DEBUG) {
+                    }
+                    z4 = true;
+                    i2 = 2;
+                }
+            }
+            i3++;
+            z4 = true;
+            i = 3;
+            i2 = 2;
+        }
+        if (DEBUG) {
+            SemLog.d(LOG_TAG, "scan SemExecutableInfo end: " + arrayList.size());
+        }
+        return arrayList;
     }
 
     private static boolean checkValidate(SemExecutableInfo semExecutableInfo) {

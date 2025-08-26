@@ -62,9 +62,9 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceManager)) {
-            return (IServiceManager) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IServiceManager)) {
+            return (IServiceManager) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -337,13 +337,13 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -505,9 +505,9 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
                     return;
                 case 2:
                     hwParcel.enforceInterface(android.internal.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    boolean add = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
+                    boolean zAdd = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(add);
+                    hwParcel2.writeBool(zAdd);
                     hwParcel2.send();
                     return;
                 case 3:
@@ -526,23 +526,23 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.internal.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    ArrayList<String> listByInterface = listByInterface(hwParcel.readString());
+                    ArrayList<String> arrayListListByInterface = listByInterface(hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(listByInterface);
+                    hwParcel2.writeStringVector(arrayListListByInterface);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(android.internal.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    boolean registerForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    boolean zRegisterForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(registerForNotifications);
+                    hwParcel2.writeBool(zRegisterForNotifications);
                     hwParcel2.send();
                     return;
                 case 7:
                     hwParcel.enforceInterface(android.internal.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    ArrayList<IServiceManager.InstanceDebugInfo> debugDump = debugDump();
+                    ArrayList<IServiceManager.InstanceDebugInfo> arrayListDebugDump = debugDump();
                     hwParcel2.writeStatus(0);
-                    IServiceManager.InstanceDebugInfo.writeVectorToParcel(hwParcel2, debugDump);
+                    IServiceManager.InstanceDebugInfo.writeVectorToParcel(hwParcel2, arrayListDebugDump);
                     hwParcel2.send();
                     return;
                 case 8:
@@ -553,18 +553,18 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
                     return;
                 case 9:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean unregisterForNotifications = unregisterForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    boolean zUnregisterForNotifications = unregisterForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(unregisterForNotifications);
+                    hwParcel2.writeBool(zUnregisterForNotifications);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -575,9 +575,9 @@ public interface IServiceManager extends android.internal.hidl.manager.V1_0.ISer
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

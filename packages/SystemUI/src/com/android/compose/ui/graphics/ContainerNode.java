@@ -19,7 +19,6 @@ import androidx.compose.ui.node.LayoutAwareModifierNode;
 import androidx.compose.ui.node.LayoutNodeDrawScope;
 import com.android.compose.ui.graphics.DrawInContainerNode;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContainerNode extends Modifier.Node implements LayoutAwareModifierNode, DrawModifierNode {
     public ContainerState state;
@@ -37,9 +36,9 @@ public final class ContainerNode extends Modifier.Node implements LayoutAwareMod
             DrawInContainerNode.LayerWithRenderer layerWithRenderer = (DrawInContainerNode.LayerWithRenderer) snapshotStateList.get(i);
             DrawInContainerNode drawInContainerNode = DrawInContainerNode.this;
             if (((Boolean) drawInContainerNode.enabled.invoke()).booleanValue()) {
-                long m400minusMKHz9U = Offset.m400minusMKHz9U(((Offset) ((SnapshotMutableStateImpl) drawInContainerNode.lastOffsetInWindow$delegate).getValue()).packedValue, ((Offset) ((SnapshotMutableStateImpl) drawInContainerNode.state.lastOffsetInWindow$delegate).getValue()).packedValue);
-                float intBitsToFloat = Float.intBitsToFloat((int) (m400minusMKHz9U >> 32));
-                float intBitsToFloat2 = Float.intBitsToFloat((int) (m400minusMKHz9U & 4294967295L));
+                long jM402minusMKHz9U = Offset.m402minusMKHz9U(((Offset) ((SnapshotMutableStateImpl) drawInContainerNode.lastOffsetInWindow$delegate).getValue()).packedValue, ((Offset) ((SnapshotMutableStateImpl) drawInContainerNode.state.lastOffsetInWindow$delegate).getValue()).packedValue);
+                float fIntBitsToFloat = Float.intBitsToFloat((int) (jM402minusMKHz9U >> 32));
+                float fIntBitsToFloat2 = Float.intBitsToFloat((int) (jM402minusMKHz9U & 4294967295L));
                 Path path = (Path) drawInContainerNode.clipPath.invoke(layoutNodeDrawScope.getLayoutDirection(), DelegatableNodeKt.requireLayoutNode(drawInContainerNode).density);
                 CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
                 GraphicsLayer graphicsLayer = layerWithRenderer.layer;
@@ -47,20 +46,20 @@ public final class ContainerNode extends Modifier.Node implements LayoutAwareMod
                     ClipOp.Companion.getClass();
                     int i2 = ClipOp.Intersect;
                     CanvasDrawScope$drawContext$1 canvasDrawScope$drawContext$1 = canvasDrawScope.drawContext;
-                    long m526getSizeNHjbRc = canvasDrawScope$drawContext$1.m526getSizeNHjbRc();
+                    long jM528getSizeNHjbRc = canvasDrawScope$drawContext$1.m528getSizeNHjbRc();
                     canvasDrawScope$drawContext$1.getCanvas().save();
                     try {
-                        ((CanvasDrawScope$drawContext$1) canvasDrawScope$drawContext$1.transform.$this_asDrawTransform).getCanvas().mo423clipPathmtrdDE(path, i2);
-                        canvasDrawScope.drawContext.transform.translate(intBitsToFloat, intBitsToFloat2);
+                        ((CanvasDrawScope$drawContext$1) canvasDrawScope$drawContext$1.transform.$this_asDrawTransform).getCanvas().mo425clipPathmtrdDE(path, i2);
+                        canvasDrawScope.drawContext.transform.translate(fIntBitsToFloat, fIntBitsToFloat2);
                         try {
                             GraphicsLayerKt.drawLayer(layoutNodeDrawScope, graphicsLayer);
                         } finally {
                         }
                     } finally {
-                        BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(canvasDrawScope$drawContext$1, m526getSizeNHjbRc);
+                        BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(canvasDrawScope$drawContext$1, jM528getSizeNHjbRc);
                     }
                 } else {
-                    canvasDrawScope.drawContext.transform.translate(intBitsToFloat, intBitsToFloat2);
+                    canvasDrawScope.drawContext.transform.translate(fIntBitsToFloat, fIntBitsToFloat2);
                     try {
                         GraphicsLayerKt.drawLayer(layoutNodeDrawScope, graphicsLayer);
                     } finally {
@@ -73,7 +72,7 @@ public final class ContainerNode extends Modifier.Node implements LayoutAwareMod
     @Override // androidx.compose.ui.node.LayoutAwareModifierNode
     public final void onPlaced(LayoutCoordinates layoutCoordinates) {
         ContainerState containerState = this.state;
-        long positionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
-        ((SnapshotMutableStateImpl) containerState.lastOffsetInWindow$delegate).setValue(Offset.m393boximpl(positionInWindow));
+        long jPositionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
+        ((SnapshotMutableStateImpl) containerState.lastOffsetInWindow$delegate).setValue(Offset.m395boximpl(jPositionInWindow));
     }
 }

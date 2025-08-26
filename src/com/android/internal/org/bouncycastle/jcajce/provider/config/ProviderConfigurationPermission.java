@@ -40,20 +40,20 @@ public class ProviderConfigurationPermission extends BasicPermission {
         StringTokenizer stringTokenizer = new StringTokenizer(Strings.toLowerCase(str), " ,");
         int i = 0;
         while (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (nextToken.equals(THREAD_LOCAL_EC_IMPLICITLY_CA_STR)) {
+            String strNextToken = stringTokenizer.nextToken();
+            if (strNextToken.equals(THREAD_LOCAL_EC_IMPLICITLY_CA_STR)) {
                 i |= 1;
-            } else if (nextToken.equals(EC_IMPLICITLY_CA_STR)) {
+            } else if (strNextToken.equals(EC_IMPLICITLY_CA_STR)) {
                 i |= 2;
-            } else if (nextToken.equals(THREAD_LOCAL_DH_DEFAULT_PARAMS_STR)) {
+            } else if (strNextToken.equals(THREAD_LOCAL_DH_DEFAULT_PARAMS_STR)) {
                 i |= 4;
-            } else if (nextToken.equals(DH_DEFAULT_PARAMS_STR)) {
+            } else if (strNextToken.equals(DH_DEFAULT_PARAMS_STR)) {
                 i |= 8;
-            } else if (nextToken.equals(ACCEPTABLE_EC_CURVES_STR)) {
+            } else if (strNextToken.equals(ACCEPTABLE_EC_CURVES_STR)) {
                 i |= 16;
-            } else if (nextToken.equals(ADDITIONAL_EC_PARAMETERS_STR)) {
+            } else if (strNextToken.equals(ADDITIONAL_EC_PARAMETERS_STR)) {
                 i |= 32;
-            } else if (nextToken.equals(ALL_STR)) {
+            } else if (strNextToken.equals(ALL_STR)) {
                 i = 63;
             }
         }

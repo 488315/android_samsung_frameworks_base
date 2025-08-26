@@ -65,14 +65,14 @@ public class BroadcastReceiverListParser {
         Iterator it = set.iterator();
         while (it.hasNext()) {
             String str2 = (String) it.next();
-            Set set2 = (Set) map.get(str2);
-            if (set2 == null) {
-                set2 = new HashSet();
+            Set hashSet = (Set) map.get(str2);
+            if (hashSet == null) {
+                hashSet = new HashSet();
             }
-            if (!set2.contains(str)) {
-                set2.add(str);
+            if (!hashSet.contains(str)) {
+                hashSet.add(str);
             }
-            map.put(str2, set2);
+            map.put(str2, hashSet);
         }
     }
 
@@ -141,15 +141,15 @@ public class BroadcastReceiverListParser {
         return this.mIntentMap.containsKey(str) && this.mIntentMap.get(str).contains(str2);
     }
 
-    public void parseAllowList() {
+    public void parseAllowList() throws XmlPullParserException, IOException {
         parseAllowList(null);
     }
 
-    public void parseAllowList(String str) {
+    public void parseAllowList(String str) throws XmlPullParserException, IOException {
         parseAllowListInternal(str);
     }
 
-    private void parseAllowListInternal(String str) {
+    private void parseAllowListInternal(String str) throws XmlPullParserException, IOException {
         if (TextUtils.isEmpty(str)) {
             str = Environment.getRootDirectory() + "/etc/broadcast_allowlist.xml";
         }
@@ -157,12 +157,12 @@ public class BroadcastReceiverListParser {
         if (!file.exists()) {
             Log.d(TAG, "No xml file exists.");
         }
-        XmlPullParser newPullParser = Xml.newPullParser();
+        XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
-                newPullParser.setInput(fileInputStream, null);
-                parseAllowListElement(newPullParser);
+                xmlPullParserNewPullParser.setInput(fileInputStream, null);
+                parseAllowListElement(xmlPullParserNewPullParser);
                 fileInputStream.close();
             } finally {
             }
@@ -176,23 +176,112 @@ public class BroadcastReceiverListParser {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:84:0x0063, code lost:
-    
-        if (r1.equals("feature") == false) goto L15;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x002c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void parseAllowListElement(org.xmlpull.v1.XmlPullParser r8) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
-        /*
-            Method dump skipped, instructions count: 338
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser.parseAllowListElement(org.xmlpull.v1.XmlPullParser):void");
+    private void parseAllowListElement(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+        xmlPullParser.next();
+        int depth = xmlPullParser.getDepth();
+        while (true) {
+            int next = xmlPullParser.next();
+            char c = 1;
+            if (next == 1) {
+                return;
+            }
+            if (next == 3 && xmlPullParser.getDepth() <= depth) {
+                return;
+            }
+            if (next != 3 && next != 4) {
+                String name = xmlPullParser.getName();
+                name.hashCode();
+                switch (name.hashCode()) {
+                    case -1183762788:
+                        if (name.equals("intent")) {
+                            c = 0;
+                            break;
+                        } else {
+                            c = 65535;
+                            break;
+                        }
+                    case -979207434:
+                        if (!name.equals("feature")) {
+                        }
+                        break;
+                    case 276706162:
+                        if (name.equals(TAG_ALLOWED_PACKAGE)) {
+                            c = 2;
+                            break;
+                        }
+                        break;
+                    case 351608024:
+                        if (name.equals("version")) {
+                            c = 3;
+                            break;
+                        }
+                        break;
+                    case 1153629669:
+                        if (name.equals(TAG_RESTRICTED_INTENTS)) {
+                            c = 4;
+                            break;
+                        }
+                        break;
+                    case 1583351327:
+                        if (name.equals(TAG_RESTRICTED_PACKAGE)) {
+                            c = 5;
+                            break;
+                        }
+                        break;
+                }
+                switch (c) {
+                    case 0:
+                        String attributeValue = xmlPullParser.getAttributeValue(null, "action");
+                        if (TextUtils.isEmpty(attributeValue)) {
+                            break;
+                        } else {
+                            this.mIntentMap.put(attributeValue, new HashSet(parsePackages(xmlPullParser)));
+                            break;
+                        }
+                    case 1:
+                        if (WORK_COMP_CHANGED.equals(xmlPullParser.getAttributeValue(null, "name"))) {
+                            this.mIsWorkCompChangedEnabled = Boolean.parseBoolean(xmlPullParser.getAttributeValue(null, "value"));
+                            break;
+                        } else {
+                            break;
+                        }
+                    case 2:
+                        for (String str : parsePackages(xmlPullParser)) {
+                            if (str.contains("*")) {
+                                this.mAllowedPkgPrefixNames.add(str.replace("*", ""));
+                            } else {
+                                this.mAllowedPkgNames.add(str);
+                            }
+                        }
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        this.mRestrictedIntents.addAll(parseIntents(xmlPullParser));
+                        break;
+                    case 5:
+                        for (String str2 : parsePackages(xmlPullParser)) {
+                            if (str2.contains("*")) {
+                                this.mRestrictedPkgPrefixNames.add(str2.replace("*", ""));
+                            } else {
+                                this.mRestrictedPkgNames.add(str2);
+                            }
+                        }
+                        break;
+                    default:
+                        Log.d(TAG, "Invalid element name: " + name);
+                        break;
+                }
+            }
+        }
     }
 
-    List<String> parsePackages(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    List<String> parsePackages(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int depth = xmlPullParser.getDepth();
         ArrayList arrayList = new ArrayList();
         while (true) {
@@ -210,7 +299,7 @@ public class BroadcastReceiverListParser {
         return arrayList;
     }
 
-    private List<String> parseIntents(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    private List<String> parseIntents(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int depth = xmlPullParser.getDepth();
         ArrayList arrayList = new ArrayList();
         while (true) {

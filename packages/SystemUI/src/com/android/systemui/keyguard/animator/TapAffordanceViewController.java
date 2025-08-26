@@ -12,7 +12,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TapAffordanceViewController extends ViewAnimationController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -22,7 +21,6 @@ public final class TapAffordanceViewController extends ViewAnimationController {
     public final List tapAffordanceViews;
     public final List tapSpringAnimationList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,7 @@ public final class TapAffordanceViewController extends ViewAnimationController {
             @Override // java.lang.Runnable
             public final void run() {
                 KeyguardTouchAnimator keyguardTouchAnimator2;
-                TapAffordanceViewController tapAffordanceViewController = TapAffordanceViewController.this;
+                TapAffordanceViewController tapAffordanceViewController = this.this$0;
                 int i = TapAffordanceViewController.$r8$clinit;
                 tapAffordanceViewController.getClass();
                 Log.d("KeyguardTouchAnimator", "restoreTapAffordanceAnimation");
@@ -57,9 +55,9 @@ public final class TapAffordanceViewController extends ViewAnimationController {
                 ArrayList arrayList = new ArrayList();
                 Iterator it = list.iterator();
                 while (true) {
-                    boolean hasNext = it.hasNext();
+                    boolean zHasNext = it.hasNext();
                     keyguardTouchAnimator2 = tapAffordanceViewController.keyguardTouchAnimator;
-                    if (!hasNext) {
+                    if (!zHasNext) {
                         break;
                     }
                     Object next = it.next();

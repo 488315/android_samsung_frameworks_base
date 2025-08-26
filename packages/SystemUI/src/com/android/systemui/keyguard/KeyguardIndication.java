@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardIndication {
     public final Drawable mBackground;
@@ -17,7 +16,6 @@ public class KeyguardIndication {
     public final Long mMinVisibilityMillis;
     public final View.OnClickListener mOnClickListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public boolean mForceAccessibilityLiveRegionAssertive;
         public CharSequence mMessage;
@@ -41,35 +39,35 @@ public class KeyguardIndication {
     }
 
     public final String toString() {
-        String str;
+        String strM;
         if (TextUtils.isEmpty(this.mMessage)) {
-            str = "KeyguardIndication{";
+            strM = "KeyguardIndication{";
         } else {
-            str = "KeyguardIndication{mMessage=" + ((Object) this.mMessage);
+            strM = "KeyguardIndication{mMessage=" + ((Object) this.mMessage);
         }
         if (this.mIcon != null) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, " mIcon=");
-            m.append(this.mIcon);
-            str = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, " mIcon=");
+            sbM.append(this.mIcon);
+            strM = sbM.toString();
         }
         if (this.mOnClickListener != null) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, " mOnClickListener=");
-            m2.append(this.mOnClickListener);
-            str = m2.toString();
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, " mOnClickListener=");
+            sbM2.append(this.mOnClickListener);
+            strM = sbM2.toString();
         }
         if (this.mBackground != null) {
-            StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, " mBackground=");
-            m3.append(this.mBackground);
-            str = m3.toString();
+            StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, " mBackground=");
+            sbM3.append(this.mBackground);
+            strM = sbM3.toString();
         }
         Long l = this.mMinVisibilityMillis;
         if (l != null) {
-            str = str + " mMinVisibilityMillis=" + l;
+            strM = strM + " mMinVisibilityMillis=" + l;
         }
         if (this.mForceAccessibilityLiveRegionAssertive) {
-            str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "mForceAccessibilityLiveRegionAssertive");
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "mForceAccessibilityLiveRegionAssertive");
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "}");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "}");
     }
 
     private KeyguardIndication(CharSequence charSequence, ColorStateList colorStateList, Drawable drawable, View.OnClickListener onClickListener, Drawable drawable2, Long l, Boolean bool) {

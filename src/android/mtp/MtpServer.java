@@ -45,25 +45,25 @@ public class MtpServer implements Runnable {
         Context context = mtpDatabase2.getContext();
         this.mContext = context;
         SharedPreferences sharedPreferences = context.getSharedPreferences("mtp-cfg", 0);
-        String str4 = null;
+        String randId = null;
         if (sharedPreferences.contains("mtp-id")) {
             String string = sharedPreferences.getString("mtp-id", null);
-            if (string != null) {
-                if (string.length() == 32) {
-                    for (int i = 0; i < string.length(); i++) {
-                        if (Character.digit(string.charAt(i), 16) == -1) {
-                            break;
-                        }
+            if (string == null) {
+                randId = string;
+            } else if (string.length() == 32) {
+                for (int i = 0; i < string.length(); i++) {
+                    if (Character.digit(string.charAt(i), 16) == -1) {
+                        break;
                     }
                 }
+                randId = string;
             }
-            str4 = string;
         }
-        if (str4 == null) {
-            str4 = getRandId();
-            sharedPreferences.edit().putString("mtp-id", str4).apply();
+        if (randId == null) {
+            randId = getRandId();
+            sharedPreferences.edit().putString("mtp-id", randId).apply();
         }
-        native_setup(mtpDatabase, fileDescriptor, z, str, str2, str3, str4);
+        native_setup(mtpDatabase, fileDescriptor, z, str, str2, str3, randId);
         mtpDatabase.setServer(this);
     }
 

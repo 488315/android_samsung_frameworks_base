@@ -107,7 +107,7 @@ public class X509V1CertificateGenerator {
         }
     }
 
-    public X509Certificate generateX509Certificate(PrivateKey privateKey) throws SecurityException, SignatureException, InvalidKeyException {
+    public X509Certificate generateX509Certificate(PrivateKey privateKey) throws SignatureException, SecurityException, InvalidKeyException {
         try {
             return generateX509Certificate(privateKey, BouncyCastleProvider.PROVIDER_NAME, null);
         } catch (NoSuchProviderException unused) {
@@ -115,7 +115,7 @@ public class X509V1CertificateGenerator {
         }
     }
 
-    public X509Certificate generateX509Certificate(PrivateKey privateKey, SecureRandom secureRandom) throws SecurityException, SignatureException, InvalidKeyException {
+    public X509Certificate generateX509Certificate(PrivateKey privateKey, SecureRandom secureRandom) throws SignatureException, SecurityException, InvalidKeyException {
         try {
             return generateX509Certificate(privateKey, BouncyCastleProvider.PROVIDER_NAME, secureRandom);
         } catch (NoSuchProviderException unused) {
@@ -123,11 +123,11 @@ public class X509V1CertificateGenerator {
         }
     }
 
-    public X509Certificate generateX509Certificate(PrivateKey privateKey, String str) throws NoSuchProviderException, SecurityException, SignatureException, InvalidKeyException {
+    public X509Certificate generateX509Certificate(PrivateKey privateKey, String str) throws SignatureException, SecurityException, InvalidKeyException, NoSuchProviderException {
         return generateX509Certificate(privateKey, str, null);
     }
 
-    public X509Certificate generateX509Certificate(PrivateKey privateKey, String str, SecureRandom secureRandom) throws NoSuchProviderException, SecurityException, SignatureException, InvalidKeyException {
+    public X509Certificate generateX509Certificate(PrivateKey privateKey, String str, SecureRandom secureRandom) throws SignatureException, InvalidKeyException, SecurityException, NoSuchProviderException {
         try {
             return generate(privateKey, str, secureRandom);
         } catch (InvalidKeyException e) {
@@ -141,27 +141,27 @@ public class X509V1CertificateGenerator {
         }
     }
 
-    public X509Certificate generate(PrivateKey privateKey) throws CertificateEncodingException, IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    public X509Certificate generate(PrivateKey privateKey) throws IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateEncodingException {
         return generate(privateKey, (SecureRandom) null);
     }
 
-    public X509Certificate generate(PrivateKey privateKey, SecureRandom secureRandom) throws CertificateEncodingException, IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
-        TBSCertificate generateTBSCertificate = this.tbsGen.generateTBSCertificate();
+    public X509Certificate generate(PrivateKey privateKey, SecureRandom secureRandom) throws IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateEncodingException {
+        TBSCertificate tBSCertificateGenerateTBSCertificate = this.tbsGen.generateTBSCertificate();
         try {
-            return generateJcaObject(generateTBSCertificate, X509Util.calculateSignature(this.sigOID, this.signatureAlgorithm, privateKey, secureRandom, generateTBSCertificate));
+            return generateJcaObject(tBSCertificateGenerateTBSCertificate, X509Util.calculateSignature(this.sigOID, this.signatureAlgorithm, privateKey, secureRandom, tBSCertificateGenerateTBSCertificate));
         } catch (IOException e) {
             throw new ExtCertificateEncodingException("exception encoding TBS cert", e);
         }
     }
 
-    public X509Certificate generate(PrivateKey privateKey, String str) throws CertificateEncodingException, IllegalStateException, NoSuchProviderException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    public X509Certificate generate(PrivateKey privateKey, String str) throws IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchProviderException, CertificateEncodingException {
         return generate(privateKey, str, null);
     }
 
-    public X509Certificate generate(PrivateKey privateKey, String str, SecureRandom secureRandom) throws CertificateEncodingException, IllegalStateException, NoSuchProviderException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
-        TBSCertificate generateTBSCertificate = this.tbsGen.generateTBSCertificate();
+    public X509Certificate generate(PrivateKey privateKey, String str, SecureRandom secureRandom) throws IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchProviderException, CertificateEncodingException {
+        TBSCertificate tBSCertificateGenerateTBSCertificate = this.tbsGen.generateTBSCertificate();
         try {
-            return generateJcaObject(generateTBSCertificate, X509Util.calculateSignature(this.sigOID, this.signatureAlgorithm, str, privateKey, secureRandom, generateTBSCertificate));
+            return generateJcaObject(tBSCertificateGenerateTBSCertificate, X509Util.calculateSignature(this.sigOID, this.signatureAlgorithm, str, privateKey, secureRandom, tBSCertificateGenerateTBSCertificate));
         } catch (IOException e) {
             throw new ExtCertificateEncodingException("exception encoding TBS cert", e);
         }

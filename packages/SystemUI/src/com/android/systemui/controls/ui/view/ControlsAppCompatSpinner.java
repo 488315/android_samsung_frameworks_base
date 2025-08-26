@@ -7,7 +7,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import androidx.appcompat.widget.AppCompatSpinner;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsAppCompatSpinner extends AppCompatSpinner {
     public final String description;

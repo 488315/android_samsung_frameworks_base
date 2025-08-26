@@ -8,7 +8,6 @@ import android.util.Log;
 import android.util.Pair;
 import com.android.systemui.assist.ui.CornerPathRenderer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PerimeterPathGuide {
     public final int mBottomCornerRadiusPx;
@@ -21,7 +20,6 @@ public class PerimeterPathGuide {
     public int mRotation = 0;
     public final RegionAttributes[] mRegions = new RegionAttributes[8];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Region {
         BOTTOM,
         BOTTOM_RIGHT,
@@ -33,7 +31,6 @@ public class PerimeterPathGuide {
         BOTTOM_LEFT
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RegionAttributes {
         public float absoluteLength;
         public float endCoordinate;
@@ -88,9 +85,9 @@ public class PerimeterPathGuide {
         CornerPathRenderer.Corner rotatedCorner3 = getRotatedCorner(CornerPathRenderer.Corner.TOP_LEFT);
         CornerPathRenderer.Corner rotatedCorner4 = getRotatedCorner(CornerPathRenderer.Corner.TOP_RIGHT);
         Region region = Region.BOTTOM_LEFT;
-        int ordinal = region.ordinal();
+        int iOrdinal = region.ordinal();
         RegionAttributes[] regionAttributesArr = this.mRegions;
-        RegionAttributes regionAttributes = regionAttributesArr[ordinal];
+        RegionAttributes regionAttributes = regionAttributesArr[iOrdinal];
         int i6 = this.mEdgeInset;
         CornerPathRenderer cornerPathRenderer = this.mCornerPathRenderer;
         regionAttributes.path = cornerPathRenderer.getInsetPath(rotatedCorner, i6);
@@ -142,16 +139,16 @@ public class PerimeterPathGuide {
     }
 
     public final CornerPathRenderer.Corner getRotatedCorner(CornerPathRenderer.Corner corner) {
-        int ordinal = corner.ordinal();
+        int iOrdinal = corner.ordinal();
         int i = this.mRotation;
         if (i == 1) {
-            ordinal += 3;
+            iOrdinal += 3;
         } else if (i == 2) {
-            ordinal += 2;
+            iOrdinal += 2;
         } else if (i == 3) {
-            ordinal++;
+            iOrdinal++;
         }
-        return CornerPathRenderer.Corner.values()[ordinal % 4];
+        return CornerPathRenderer.Corner.values()[iOrdinal % 4];
     }
 
     public final Pair placePoint(float f) {
@@ -161,8 +158,8 @@ public class PerimeterPathGuide {
             f = ((f % 1.0f) + 1.0f) % 1.0f;
         }
         float f2 = (f < 0.0f || f > 1.0f) ? ((f % 1.0f) + 1.0f) % 1.0f : f;
-        Region[] values = Region.values();
-        int length = values.length;
+        Region[] regionArrValues = Region.values();
+        int length = regionArrValues.length;
         int i = 0;
         while (true) {
             regionAttributesArr = this.mRegions;
@@ -171,7 +168,7 @@ public class PerimeterPathGuide {
                 region = Region.BOTTOM;
                 break;
             }
-            region = values[i];
+            region = regionArrValues[i];
             if (f2 <= regionAttributesArr[region.ordinal()].endCoordinate) {
                 break;
             }
@@ -190,22 +187,22 @@ public class PerimeterPathGuide {
     }
 
     public final void strokeSegmentInternal(Path path, float f, float f2) {
-        Pair placePoint = placePoint(f);
-        Pair placePoint2 = placePoint(f2);
-        if (((Region) placePoint.first).equals(placePoint2.first)) {
-            strokeRegion(path, (Region) placePoint.first, ((Float) placePoint.second).floatValue(), ((Float) placePoint2.second).floatValue());
+        Pair pairPlacePoint = placePoint(f);
+        Pair pairPlacePoint2 = placePoint(f2);
+        if (((Region) pairPlacePoint.first).equals(pairPlacePoint2.first)) {
+            strokeRegion(path, (Region) pairPlacePoint.first, ((Float) pairPlacePoint.second).floatValue(), ((Float) pairPlacePoint2.second).floatValue());
             return;
         }
-        strokeRegion(path, (Region) placePoint.first, ((Float) placePoint.second).floatValue(), 1.0f);
+        strokeRegion(path, (Region) pairPlacePoint.first, ((Float) pairPlacePoint.second).floatValue(), 1.0f);
         boolean z = false;
         for (Region region : Region.values()) {
-            if (region.equals(placePoint.first)) {
+            if (region.equals(pairPlacePoint.first)) {
                 z = true;
             } else if (!z) {
                 continue;
             } else {
-                if (region.equals(placePoint2.first)) {
-                    strokeRegion(path, region, 0.0f, ((Float) placePoint2.second).floatValue());
+                if (region.equals(pairPlacePoint2.first)) {
+                    strokeRegion(path, region, 0.0f, ((Float) pairPlacePoint2.second).floatValue());
                     return;
                 }
                 strokeRegion(path, region, 0.0f, 1.0f);

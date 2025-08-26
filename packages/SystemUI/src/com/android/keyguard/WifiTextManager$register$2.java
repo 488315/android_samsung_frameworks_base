@@ -12,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class WifiTextManager$register$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function2 $update;
@@ -49,7 +48,7 @@ final class WifiTextManager$register$2 extends SuspendLambda implements Function
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     boolean z = ((WifiNetworkModel) obj2) instanceof WifiNetworkModel.Active;
-                    WifiTextManager wifiTextManager2 = WifiTextManager.this;
+                    WifiTextManager wifiTextManager2 = wifiTextManager;
                     wifiTextManager2.connected = z;
                     function2.invoke(wifiTextManager2.ssid, Boolean.valueOf(z));
                     return Unit.INSTANCE;

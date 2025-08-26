@@ -217,9 +217,9 @@ public interface IImsRcsController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsRcsController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsRcsController)) {
-                return (IImsRcsController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsRcsController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsRcsController)) {
+                return (IImsRcsController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -293,181 +293,181 @@ public interface IImsRcsController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    IImsRegistrationCallback asInterface = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerImsRegistrationCallback(readInt, asInterface);
+                    registerImsRegistrationCallback(i3, iImsRegistrationCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    IImsRegistrationCallback asInterface2 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    IImsRegistrationCallback iImsRegistrationCallbackAsInterface2 = IImsRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterImsRegistrationCallback(readInt2, asInterface2);
+                    unregisterImsRegistrationCallback(i4, iImsRegistrationCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    IIntegerConsumer asInterface3 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    IIntegerConsumer iIntegerConsumerAsInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getImsRcsRegistrationState(readInt3, asInterface3);
+                    getImsRcsRegistrationState(i5, iIntegerConsumerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    IIntegerConsumer asInterface4 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    IIntegerConsumer iIntegerConsumerAsInterface2 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getImsRcsRegistrationTransportType(readInt4, asInterface4);
+                    getImsRcsRegistrationTransportType(i6, iIntegerConsumerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    IImsCapabilityCallback asInterface5 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRcsAvailabilityCallback(readInt5, asInterface5);
+                    registerRcsAvailabilityCallback(i7, iImsCapabilityCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
-                    IImsCapabilityCallback asInterface6 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface2 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRcsAvailabilityCallback(readInt6, asInterface6);
+                    unregisterRcsAvailabilityCallback(i8, iImsCapabilityCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCapable = isCapable(readInt7, readInt8, readInt9);
+                    boolean zIsCapable = isCapable(i9, i10, i11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCapable);
+                    parcel2.writeBoolean(zIsCapable);
                     return true;
                 case 8:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAvailable = isAvailable(readInt10, readInt11, readInt12);
+                    boolean zIsAvailable = isAvailable(i12, i13, i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAvailable);
+                    parcel2.writeBoolean(zIsAvailable);
                     return true;
                 case 9:
-                    int readInt13 = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(Uri.CREATOR);
-                    IRcsUceControllerCallback asInterface7 = IRcsUceControllerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i15 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(Uri.CREATOR);
+                    IRcsUceControllerCallback iRcsUceControllerCallbackAsInterface = IRcsUceControllerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestCapabilities(readInt13, readString, readString2, createTypedArrayList, asInterface7);
+                    requestCapabilities(i15, string, string2, arrayListCreateTypedArrayList, iRcsUceControllerCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt14 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    int i16 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    IRcsUceControllerCallback asInterface8 = IRcsUceControllerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRcsUceControllerCallback iRcsUceControllerCallbackAsInterface2 = IRcsUceControllerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestAvailability(readInt14, readString3, readString4, uri, asInterface8);
+                    requestAvailability(i16, string3, string4, uri, iRcsUceControllerCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int ucePublishState = getUcePublishState(readInt15);
+                    int ucePublishState = getUcePublishState(i17);
                     parcel2.writeNoException();
                     parcel2.writeInt(ucePublishState);
                     return true;
                 case 12:
-                    int readInt16 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isUceSettingEnabled = isUceSettingEnabled(readInt16, readString5, readString6);
+                    boolean zIsUceSettingEnabled = isUceSettingEnabled(i18, string5, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUceSettingEnabled);
+                    parcel2.writeBoolean(zIsUceSettingEnabled);
                     return true;
                 case 13:
-                    int readInt17 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i19 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setUceSettingEnabled(readInt17, readBoolean);
+                    setUceSettingEnabled(i19, z);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt18 = parcel.readInt();
-                    IRcsUcePublishStateCallback asInterface9 = IRcsUcePublishStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
+                    IRcsUcePublishStateCallback iRcsUcePublishStateCallbackAsInterface = IRcsUcePublishStateCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerUcePublishStateCallback(readInt18, asInterface9);
+                    registerUcePublishStateCallback(i20, iRcsUcePublishStateCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt19 = parcel.readInt();
-                    IRcsUcePublishStateCallback asInterface10 = IRcsUcePublishStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i21 = parcel.readInt();
+                    IRcsUcePublishStateCallback iRcsUcePublishStateCallbackAsInterface2 = IRcsUcePublishStateCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterUcePublishStateCallback(readInt19, asInterface10);
+                    unregisterUcePublishStateCallback(i21, iRcsUcePublishStateCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSipDelegateSupported = isSipDelegateSupported(readInt20);
+                    boolean zIsSipDelegateSupported = isSipDelegateSupported(i22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSipDelegateSupported);
+                    parcel2.writeBoolean(zIsSipDelegateSupported);
                     return true;
                 case 17:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     DelegateRequest delegateRequest = (DelegateRequest) parcel.readTypedObject(DelegateRequest.CREATOR);
-                    String readString7 = parcel.readString();
-                    ISipDelegateConnectionStateCallback asInterface11 = ISipDelegateConnectionStateCallback.Stub.asInterface(parcel.readStrongBinder());
-                    ISipDelegateMessageCallback asInterface12 = ISipDelegateMessageCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string7 = parcel.readString();
+                    ISipDelegateConnectionStateCallback iSipDelegateConnectionStateCallbackAsInterface = ISipDelegateConnectionStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISipDelegateMessageCallback iSipDelegateMessageCallbackAsInterface = ISipDelegateMessageCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    createSipDelegate(readInt21, delegateRequest, readString7, asInterface11, asInterface12);
+                    createSipDelegate(i23, delegateRequest, string7, iSipDelegateConnectionStateCallbackAsInterface, iSipDelegateMessageCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    int readInt22 = parcel.readInt();
-                    ISipDelegate asInterface13 = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt23 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    ISipDelegate iSipDelegateAsInterface = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    destroySipDelegate(readInt22, asInterface13, readInt23);
+                    destroySipDelegate(i24, iSipDelegateAsInterface, i25);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt24 = parcel.readInt();
-                    ISipDelegate asInterface14 = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt25 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    ISipDelegate iSipDelegateAsInterface2 = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
+                    int i27 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    triggerNetworkRegistration(readInt24, asInterface14, readInt25, readString8);
+                    triggerNetworkRegistration(i26, iSipDelegateAsInterface2, i27, string8);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt26 = parcel.readInt();
-                    ISipDialogStateCallback asInterface15 = ISipDialogStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i28 = parcel.readInt();
+                    ISipDialogStateCallback iSipDialogStateCallbackAsInterface = ISipDialogStateCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSipDialogStateCallback(readInt26, asInterface15);
+                    registerSipDialogStateCallback(i28, iSipDialogStateCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt27 = parcel.readInt();
-                    ISipDialogStateCallback asInterface16 = ISipDialogStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i29 = parcel.readInt();
+                    ISipDialogStateCallback iSipDialogStateCallbackAsInterface2 = ISipDialogStateCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSipDialogStateCallback(readInt27, asInterface16);
+                    unregisterSipDialogStateCallback(i29, iSipDialogStateCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt28 = parcel.readInt();
-                    IImsServiceFeatureCallback asInterface17 = IImsServiceFeatureCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i30 = parcel.readInt();
+                    IImsServiceFeatureCallback iImsServiceFeatureCallbackAsInterface = IImsServiceFeatureCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRcsFeatureCallback(readInt28, asInterface17);
+                    registerRcsFeatureCallback(i30, iImsServiceFeatureCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    IImsServiceFeatureCallback asInterface18 = IImsServiceFeatureCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsServiceFeatureCallback iImsServiceFeatureCallbackAsInterface2 = IImsServiceFeatureCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterImsFeatureCallback(asInterface18);
+                    unregisterImsFeatureCallback(iImsServiceFeatureCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -493,386 +493,386 @@ public interface IImsRcsController extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void registerImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void unregisterImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsRegistrationCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsRegistrationCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void getImsRcsRegistrationState(int i, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void getImsRcsRegistrationTransportType(int i, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void registerRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void unregisterRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public boolean isCapable(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public boolean isAvailable(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void requestCapabilities(int i, String str, String str2, List<Uri> list, IRcsUceControllerCallback iRcsUceControllerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iRcsUceControllerCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iRcsUceControllerCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void requestAvailability(int i, String str, String str2, Uri uri, IRcsUceControllerCallback iRcsUceControllerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeStrongInterface(iRcsUceControllerCallback);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeStrongInterface(iRcsUceControllerCallback);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public int getUcePublishState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public boolean isUceSettingEnabled(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void setUceSettingEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void registerUcePublishStateCallback(int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRcsUcePublishStateCallback);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRcsUcePublishStateCallback);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void unregisterUcePublishStateCallback(int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRcsUcePublishStateCallback);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRcsUcePublishStateCallback);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public boolean isSipDelegateSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void createSipDelegate(int i, DelegateRequest delegateRequest, String str, ISipDelegateConnectionStateCallback iSipDelegateConnectionStateCallback, ISipDelegateMessageCallback iSipDelegateMessageCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(delegateRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSipDelegateConnectionStateCallback);
-                    obtain.writeStrongInterface(iSipDelegateMessageCallback);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(delegateRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSipDelegateConnectionStateCallback);
+                    parcelObtain.writeStrongInterface(iSipDelegateMessageCallback);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void destroySipDelegate(int i, ISipDelegate iSipDelegate, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSipDelegate);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSipDelegate);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void triggerNetworkRegistration(int i, ISipDelegate iSipDelegate, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSipDelegate);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSipDelegate);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void registerSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSipDialogStateCallback);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSipDialogStateCallback);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void unregisterSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSipDialogStateCallback);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSipDialogStateCallback);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void registerRcsFeatureCallback(int i, IImsServiceFeatureCallback iImsServiceFeatureCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsServiceFeatureCallback);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsServiceFeatureCallback);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
             public void unregisterImsFeatureCallback(IImsServiceFeatureCallback iImsServiceFeatureCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsServiceFeatureCallback);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsRcsController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsServiceFeatureCallback);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.android.systemui.keyguard.ui.view.layout.sections;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
@@ -28,7 +29,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultDeviceEntrySection extends KeyguardSection {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +40,6 @@ public final class DefaultDeviceEntrySection extends KeyguardSection {
     public final FeatureFlags featureFlags;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -64,15 +63,15 @@ public final class DefaultDeviceEntrySection extends KeyguardSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         Lazy lazy = this.deviceEntryIconViewModel;
-        boolean booleanValue = ((Boolean) ((DeviceEntryIconViewModel) lazy.get()).isUdfpsSupported.$$delegate_0.getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) ((DeviceEntryIconViewModel) lazy.get()).isUdfpsSupported.$$delegate_0.getValue()).booleanValue();
         Logger logger = this.blueprintLogger;
         final int i = 0;
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultDeviceEntrySection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 switch (i) {
                     case 0:
@@ -83,16 +82,16 @@ public final class DefaultDeviceEntrySection extends KeyguardSection {
                         String str1 = logMessage.getStr1();
                         String str2 = logMessage.getStr2();
                         String str3 = logMessage.getStr3();
-                        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("udfpsLocation=", str1, ", scaledLocation=", str2, ", unusedAuthController=");
-                        m.append(str3);
-                        return m.toString();
+                        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("udfpsLocation=", str1, ", scaledLocation=", str2, ", unusedAuthController=");
+                        sbM.append(str3);
+                        return sbM.toString();
                 }
             }
         };
         LogLevel logLevel = LogLevel.DEBUG;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), logLevel, function1, null);
-        obtain.setBool1(booleanValue);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), logLevel, function1, null);
+        logMessageObtain.setBool1(zBooleanValue);
+        logger.getBuffer().commit(logMessageObtain);
         AuthController authController = this.authController;
         float f = authController.mScaleFactor;
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R$dimen.lock_icon_margin_bottom);
@@ -102,17 +101,17 @@ public final class DefaultDeviceEntrySection extends KeyguardSection {
         this.featureFlags.getClass();
         float f3 = bounds.bottom;
         int i2 = (int) ((DisplayMetrics.DENSITY_DEVICE_STABLE / 160.0f) * 36);
-        if (!booleanValue) {
+        if (!zBooleanValue) {
             centerIcon$frameworks__base__packages__SystemUI__android_common__SystemUI_core(new Point((int) (f2 / 2), (int) (f3 - ((dimensionPixelSize + i2) * f))), i2 * f, constraintSet);
             return;
         }
         SensorLocation sensorLocation = (SensorLocation) ((DeviceEntryIconViewModel) lazy.get()).udfpsLocation.$$delegate_0.getValue();
         if (sensorLocation != null) {
             final int i3 = 1;
-            LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), logLevel, new Function1() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultDeviceEntrySection$$ExternalSyntheticLambda0
+            LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), logLevel, new Function1() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.DefaultDeviceEntrySection$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     switch (i3) {
                         case 0:
@@ -123,19 +122,19 @@ public final class DefaultDeviceEntrySection extends KeyguardSection {
                             String str1 = logMessage.getStr1();
                             String str2 = logMessage.getStr2();
                             String str3 = logMessage.getStr3();
-                            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("udfpsLocation=", str1, ", scaledLocation=", str2, ", unusedAuthController=");
-                            m.append(str3);
-                            return m.toString();
+                            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("udfpsLocation=", str1, ", scaledLocation=", str2, ", unusedAuthController=");
+                            sbM.append(str3);
+                            return sbM.toString();
                     }
                 }
             }, null);
-            obtain2.setStr1(String.valueOf(sensorLocation));
+            logMessageObtain2.setStr1(String.valueOf(sensorLocation));
             int i4 = sensorLocation.naturalCenterX;
             float f4 = sensorLocation.scale;
             int i5 = sensorLocation.naturalCenterY;
-            obtain2.setStr2("(" + (i4 * f4) + ", " + (i5 * f4) + ")");
-            obtain2.setStr3(String.valueOf(authController.getUdfpsLocation()));
-            logger.getBuffer().commit(obtain2);
+            logMessageObtain2.setStr2("(" + (i4 * f4) + ", " + (i5 * f4) + ")");
+            logMessageObtain2.setStr3(String.valueOf(authController.getUdfpsLocation()));
+            logger.getBuffer().commit(logMessageObtain2);
             centerIcon$frameworks__base__packages__SystemUI__android_common__SystemUI_core(new Point((int) (((float) i4) * f4), (int) (((float) i5) * f4)), ((float) sensorLocation.naturalRadius) * f4, constraintSet);
         }
     }

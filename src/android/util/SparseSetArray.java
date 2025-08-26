@@ -12,8 +12,8 @@ public class SparseSetArray<T> {
         int size = sparseSetArray.size();
         this.mData = new SparseArray<>(size);
         for (int i = 0; i < size; i++) {
-            int keyAt = sparseSetArray.keyAt(i);
-            addAll(keyAt, sparseSetArray.get(keyAt));
+            int iKeyAt = sparseSetArray.keyAt(i);
+            addAll(iKeyAt, sparseSetArray.get(iKeyAt));
         }
     }
 
@@ -60,11 +60,11 @@ public class SparseSetArray<T> {
         if (arraySet == null) {
             return false;
         }
-        boolean remove = arraySet.remove(t);
+        boolean zRemove = arraySet.remove(t);
         if (arraySet.size() == 0) {
             this.mData.remove(i);
         }
-        return remove;
+        return zRemove;
     }
 
     public void remove(int i) {
@@ -80,11 +80,11 @@ public class SparseSetArray<T> {
     }
 
     public int sizeAt(int i) {
-        ArraySet<T> valueAt = this.mData.valueAt(i);
-        if (valueAt == null) {
+        ArraySet<T> arraySetValueAt = this.mData.valueAt(i);
+        if (arraySetValueAt == null) {
             return 0;
         }
-        return valueAt.size();
+        return arraySetValueAt.size();
     }
 
     public T valueAt(int i, int i2) {

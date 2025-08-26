@@ -137,104 +137,62 @@ public final class EuiccRulesAuthTable implements Parcelable {
         parcel.writeIntArray(this.mPolicyRuleFlags);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x004b, code lost:
-    
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj != null && getClass() == obj.getClass()) {
+            EuiccRulesAuthTable euiccRulesAuthTable = (EuiccRulesAuthTable) obj;
+            if (this.mCarrierIds.length != euiccRulesAuthTable.mCarrierIds.length) {
+                return false;
+            }
+            int i = 0;
+            while (true) {
+                CarrierIdentifier[][] carrierIdentifierArr = this.mCarrierIds;
+                if (i < carrierIdentifierArr.length) {
+                    CarrierIdentifier[] carrierIdentifierArr2 = carrierIdentifierArr[i];
+                    CarrierIdentifier[] carrierIdentifierArr3 = euiccRulesAuthTable.mCarrierIds[i];
+                    if (carrierIdentifierArr2 == null || carrierIdentifierArr3 == null) {
+                        if (carrierIdentifierArr2 != null || carrierIdentifierArr3 != null) {
+                            break;
+                        }
+                    } else {
+                        if (carrierIdentifierArr2.length != carrierIdentifierArr3.length) {
+                            return false;
+                        }
+                        for (int i2 = 0; i2 < carrierIdentifierArr2.length; i2++) {
+                            if (!carrierIdentifierArr2[i2].equals(carrierIdentifierArr3[i2])) {
+                                return false;
+                            }
+                        }
+                    }
+                    i++;
+                } else if (Arrays.equals(this.mPolicyRules, euiccRulesAuthTable.mPolicyRules) && Arrays.equals(this.mPolicyRuleFlags, euiccRulesAuthTable.mPolicyRuleFlags)) {
+                    return true;
+                }
+            }
+            return false;
+        }
         return false;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean equals(java.lang.Object r9) {
-        /*
-            r8 = this;
-            r0 = 1
-            if (r8 != r9) goto L4
-            return r0
-        L4:
-            r1 = 0
-            if (r9 == 0) goto L61
-            java.lang.Class r2 = r8.getClass()
-            java.lang.Class r3 = r9.getClass()
-            if (r2 == r3) goto L12
-            goto L61
-        L12:
-            android.telephony.euicc.EuiccRulesAuthTable r9 = (android.telephony.euicc.EuiccRulesAuthTable) r9
-            android.service.carrier.CarrierIdentifier[][] r2 = r8.mCarrierIds
-            int r2 = r2.length
-            android.service.carrier.CarrierIdentifier[][] r3 = r9.mCarrierIds
-            int r3 = r3.length
-            if (r2 == r3) goto L1d
-            return r1
-        L1d:
-            r2 = r1
-        L1e:
-            android.service.carrier.CarrierIdentifier[][] r3 = r8.mCarrierIds
-            int r4 = r3.length
-            if (r2 >= r4) goto L4c
-            r3 = r3[r2]
-            android.service.carrier.CarrierIdentifier[][] r4 = r9.mCarrierIds
-            r4 = r4[r2]
-            if (r3 == 0) goto L44
-            if (r4 == 0) goto L44
-            int r5 = r3.length
-            int r6 = r4.length
-            if (r5 == r6) goto L32
-            return r1
-        L32:
-            r5 = r1
-        L33:
-            int r6 = r3.length
-            if (r5 >= r6) goto L48
-            r6 = r3[r5]
-            r7 = r4[r5]
-            boolean r6 = r6.equals(r7)
-            if (r6 != 0) goto L41
-            return r1
-        L41:
-            int r5 = r5 + 1
-            goto L33
-        L44:
-            if (r3 != 0) goto L4b
-            if (r4 != 0) goto L4b
-        L48:
-            int r2 = r2 + 1
-            goto L1e
-        L4b:
-            return r1
-        L4c:
-            int[] r2 = r8.mPolicyRules
-            int[] r3 = r9.mPolicyRules
-            boolean r2 = java.util.Arrays.equals(r2, r3)
-            if (r2 == 0) goto L61
-            int[] r8 = r8.mPolicyRuleFlags
-            int[] r9 = r9.mPolicyRuleFlags
-            boolean r8 = java.util.Arrays.equals(r8, r9)
-            if (r8 == 0) goto L61
-            return r0
-        L61:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.euicc.EuiccRulesAuthTable.equals(java.lang.Object):boolean");
     }
 
     public int hashCode() {
-        int hashCode = (Arrays.hashCode(this.mPolicyRules) * 31) + Arrays.hashCode(this.mPolicyRuleFlags);
+        int iHashCode = (Arrays.hashCode(this.mPolicyRules) * 31) + Arrays.hashCode(this.mPolicyRuleFlags);
         int i = 0;
         while (true) {
             CarrierIdentifier[][] carrierIdentifierArr = this.mCarrierIds;
             if (i >= carrierIdentifierArr.length) {
-                return hashCode;
+                return iHashCode;
             }
-            hashCode = (hashCode * 31) + Arrays.hashCode(carrierIdentifierArr[i]);
+            iHashCode = (iHashCode * 31) + Arrays.hashCode(carrierIdentifierArr[i]);
             i++;
         }
     }
 
     private EuiccRulesAuthTable(Parcel parcel) {
-        int[] createIntArray = parcel.createIntArray();
-        this.mPolicyRules = createIntArray;
-        int length = createIntArray.length;
+        int[] iArrCreateIntArray = parcel.createIntArray();
+        this.mPolicyRules = iArrCreateIntArray;
+        int length = iArrCreateIntArray.length;
         this.mCarrierIds = new CarrierIdentifier[length][];
         for (int i = 0; i < length; i++) {
             this.mCarrierIds[i] = (CarrierIdentifier[]) parcel.createTypedArray(CarrierIdentifier.CREATOR);

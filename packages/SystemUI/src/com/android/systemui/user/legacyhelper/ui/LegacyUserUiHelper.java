@@ -6,7 +6,6 @@ import android.util.Log;
 import com.android.systemui.R;
 import com.android.systemui.user.data.source.UserRecord;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LegacyUserUiHelper {
     public static final LegacyUserUiHelper INSTANCE = new LegacyUserUiHelper();
@@ -17,9 +16,9 @@ public final class LegacyUserUiHelper {
     public static final String getUserRecordName(Context context, UserRecord userRecord, boolean z, boolean z2) {
         INSTANCE.getClass();
         boolean z3 = userRecord.isGuest;
-        Integer valueOf = (z3 && userRecord.isCurrent) ? Integer.valueOf(R.string.guest_exit_quick_settings_button) : (!z3 || userRecord.info == null) ? null : Integer.valueOf(android.R.string.network_available_sign_in_detailed);
-        if (valueOf != null) {
-            return context.getString(valueOf.intValue());
+        Integer numValueOf = (z3 && userRecord.isCurrent) ? Integer.valueOf(R.string.guest_exit_quick_settings_button) : (!z3 || userRecord.info == null) ? null : Integer.valueOf(android.R.string.network_logging_notification_title);
+        if (numValueOf != null) {
+            return context.getString(numValueOf.intValue());
         }
         UserInfo userInfo = userRecord.info;
         if (userInfo == null) {
@@ -48,7 +47,7 @@ public final class LegacyUserUiHelper {
             return R.string.guest_new_guest;
         }
         if ((z && z2) || z) {
-            return android.R.string.network_available_sign_in_detailed;
+            return android.R.string.network_logging_notification_title;
         }
         if (z4) {
             return R.string.user_add_user;
@@ -57,7 +56,7 @@ public final class LegacyUserUiHelper {
             return R.string.add_user_supervised;
         }
         if (z6) {
-            return android.R.string.midnight;
+            return android.R.string.mime_type_audio;
         }
         if (z8) {
             return R.string.manage_users;

@@ -70,12 +70,12 @@ public final class HdmiUtils {
     public static int getHdmiAddressRelativePosition(int i, int i2) {
         if (i != 65535 && i2 != 65535) {
             try {
-                int physicalAddressFirstDifferentDigitPos = physicalAddressFirstDifferentDigitPos(i, i2);
-                if (physicalAddressFirstDifferentDigitPos == -1) {
+                int iPhysicalAddressFirstDifferentDigitPos = physicalAddressFirstDifferentDigitPos(i, i2);
+                if (iPhysicalAddressFirstDifferentDigitPos == -1) {
                     return 3;
                 }
-                int i3 = 61440 >> (physicalAddressFirstDifferentDigitPos * 4);
-                int i4 = physicalAddressFirstDifferentDigitPos + 1;
+                int i3 = 61440 >> (iPhysicalAddressFirstDifferentDigitPos * 4);
+                int i4 = iPhysicalAddressFirstDifferentDigitPos + 1;
                 if ((i & i3) == 0) {
                     return (i4 == 4 || ((61440 >> (i4 * 4)) & i2) == 0) ? 4 : 5;
                 }

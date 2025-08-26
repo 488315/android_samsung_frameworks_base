@@ -133,10 +133,10 @@ public class PersistableBundleUtils {
         persistableBundle.putInt(COLLECTION_SIZE_KEY, map.size());
         int i = 0;
         for (Map.Entry<K, V> entry : map.entrySet()) {
-            String format = String.format(MAP_KEY_FORMAT, Integer.valueOf(i));
-            String format2 = String.format(MAP_VALUE_FORMAT, Integer.valueOf(i));
-            persistableBundle.putPersistableBundle(format, serializer.toPersistableBundle(entry.getKey()));
-            persistableBundle.putPersistableBundle(format2, serializer2.toPersistableBundle(entry.getValue()));
+            String str = String.format(MAP_KEY_FORMAT, Integer.valueOf(i));
+            String str2 = String.format(MAP_VALUE_FORMAT, Integer.valueOf(i));
+            persistableBundle.putPersistableBundle(str, serializer.toPersistableBundle(entry.getKey()));
+            persistableBundle.putPersistableBundle(str2, serializer2.toPersistableBundle(entry.getValue()));
             i++;
         }
         return persistableBundle;
@@ -146,9 +146,9 @@ public class PersistableBundleUtils {
         int i = persistableBundle.getInt(COLLECTION_SIZE_KEY);
         LinkedHashMap<K, V> linkedHashMap = new LinkedHashMap<>(i);
         for (int i2 = 0; i2 < i; i2++) {
-            String format = String.format(MAP_KEY_FORMAT, Integer.valueOf(i2));
-            String format2 = String.format(MAP_VALUE_FORMAT, Integer.valueOf(i2));
-            linkedHashMap.put(deserializer.fromPersistableBundle(persistableBundle.getPersistableBundle(format)), deserializer2.fromPersistableBundle(persistableBundle.getPersistableBundle(format2)));
+            String str = String.format(MAP_KEY_FORMAT, Integer.valueOf(i2));
+            String str2 = String.format(MAP_VALUE_FORMAT, Integer.valueOf(i2));
+            linkedHashMap.put(deserializer.fromPersistableBundle(persistableBundle.getPersistableBundle(str)), deserializer2.fromPersistableBundle(persistableBundle.getPersistableBundle(str2)));
         }
         return linkedHashMap;
     }
@@ -178,9 +178,9 @@ public class PersistableBundleUtils {
                 if (file.exists()) {
                     FileInputStream fileInputStream = new FileInputStream(file);
                     try {
-                        PersistableBundle readFromStream = PersistableBundle.readFromStream(fileInputStream);
+                        PersistableBundle fromStream = PersistableBundle.readFromStream(fileInputStream);
                         fileInputStream.close();
-                        return readFromStream;
+                        return fromStream;
                     } finally {
                     }
                 }
@@ -251,17 +251,17 @@ public class PersistableBundleUtils {
             return -1;
         }
         Iterator it = new TreeSet(persistableBundle.keySet()).iterator();
-        int i = 0;
+        int iHash = 0;
         while (it.hasNext()) {
             String str = (String) it.next();
             Object obj = persistableBundle.get(str);
             if (obj instanceof PersistableBundle) {
-                i = Objects.hash(Integer.valueOf(i), str, Integer.valueOf(getHashCode((PersistableBundle) obj)));
+                iHash = Objects.hash(Integer.valueOf(iHash), str, Integer.valueOf(getHashCode((PersistableBundle) obj)));
             } else {
-                i = Objects.hash(Integer.valueOf(i), str, obj);
+                iHash = Objects.hash(Integer.valueOf(iHash), str, obj);
             }
         }
-        return i;
+        return iHash;
     }
 
     public static boolean isEqual(PersistableBundle persistableBundle, PersistableBundle persistableBundle2) {

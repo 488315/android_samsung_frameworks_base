@@ -19,7 +19,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DebugModeFilterProvider implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -27,7 +26,6 @@ public final class DebugModeFilterProvider implements Dumpable {
     public List allowedPackages = EmptyList.INSTANCE;
     public final ListenerSet listeners = new ListenerSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +35,6 @@ public final class DebugModeFilterProvider implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotifFilterCommand implements Command {
         public NotifFilterCommand() {
         }
@@ -54,9 +51,9 @@ public final class DebugModeFilterProvider implements Dumpable {
         @Override // com.android.systemui.statusbar.commandline.Command
         public final void execute(PrintWriter printWriter, List list) {
             String str = (String) CollectionsKt___CollectionsKt.firstOrNull(list);
-            boolean areEqual = Intrinsics.areEqual(str, UniversalCredentialManager.RESET_APPLET_FORM_FACTOR);
+            boolean zAreEqual = Intrinsics.areEqual(str, UniversalCredentialManager.RESET_APPLET_FORM_FACTOR);
             DebugModeFilterProvider debugModeFilterProvider = DebugModeFilterProvider.this;
-            if (areEqual) {
+            if (zAreEqual) {
                 if (list.size() > 1) {
                     invalidCommand(printWriter, "Unexpected arguments for 'reset' command");
                     return;
@@ -98,18 +95,18 @@ public final class DebugModeFilterProvider implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        DumpUtilsKt.println(asIndenting, "initialized", Boolean.valueOf(!this.listeners.isEmpty()));
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "initialized", Boolean.valueOf(!this.listeners.isEmpty()));
         List list = this.allowedPackages;
-        asIndenting.append("allowedPackages").append((CharSequence) ": ").println(list.size());
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("allowedPackages").append((CharSequence) ": ").println(list.size());
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             Iterator it = list.iterator();
             while (it.hasNext()) {
-                asIndenting.println(it.next());
+                indentingPrintWriterAsIndenting.println(it.next());
             }
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 

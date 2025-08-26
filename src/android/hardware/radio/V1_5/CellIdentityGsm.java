@@ -36,13 +36,13 @@ public final class CellIdentityGsm {
 
     public static final ArrayList<CellIdentityGsm> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentityGsm> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 96, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityGsm cellIdentityGsm = new CellIdentityGsm();
-            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 96);
+            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 96);
             arrayList.add(cellIdentityGsm);
         }
         return arrayList;
@@ -52,13 +52,13 @@ public final class CellIdentityGsm {
         this.base.readEmbeddedFromParcel(hwParcel, hwBlob, j);
         long j2 = j + 80;
         int int32 = hwBlob.getInt32(j + 88);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j2, true);
         this.additionalPlmns.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.additionalPlmns.add(string);
         }
     }

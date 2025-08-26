@@ -23,7 +23,6 @@ import com.android.systemui.wallet.ui.WalletScreenController;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WalletCardCarousel extends RecyclerView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +41,6 @@ public class WalletCardCarousel extends RecyclerView {
     public int mTotalCardWidth;
     public final WalletCardCarouselAdapter mWalletCardCarouselAdapter;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CardCarouselAccessibilityDelegate extends RecyclerViewAccessibilityDelegate {
         public /* synthetic */ CardCarouselAccessibilityDelegate(WalletCardCarousel walletCardCarousel, WalletCardCarousel walletCardCarousel2) {
             this((RecyclerView) walletCardCarousel2);
@@ -63,7 +61,6 @@ public class WalletCardCarousel extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CardCarouselScrollListener extends RecyclerView.OnScrollListener {
         public int mOldState;
 
@@ -104,7 +101,6 @@ public class WalletCardCarousel extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CarouselSnapHelper extends PagerSnapHelper {
         public /* synthetic */ CarouselSnapHelper(WalletCardCarousel walletCardCarousel, int i) {
             this();
@@ -125,12 +121,12 @@ public class WalletCardCarousel extends RecyclerView {
 
                 @Override // androidx.recyclerview.widget.LinearSmoothScroller, androidx.recyclerview.widget.RecyclerView.SmoothScroller
                 public final void onTargetFound(View view, RecyclerView.SmoothScroller.Action action) {
-                    int[] calculateDistanceToFinalSnap = CarouselSnapHelper.this.calculateDistanceToFinalSnap(layoutManager, view);
-                    int i = calculateDistanceToFinalSnap[0];
-                    int i2 = calculateDistanceToFinalSnap[1];
-                    int calculateTimeForDeceleration = calculateTimeForDeceleration(Math.max(Math.abs(i), Math.abs(i2)));
-                    if (calculateTimeForDeceleration > 0) {
-                        action.update(i, i2, calculateTimeForDeceleration, this.mDecelerateInterpolator);
+                    int[] iArrCalculateDistanceToFinalSnap = CarouselSnapHelper.this.calculateDistanceToFinalSnap(layoutManager, view);
+                    int i = iArrCalculateDistanceToFinalSnap[0];
+                    int i2 = iArrCalculateDistanceToFinalSnap[1];
+                    int iCalculateTimeForDeceleration = calculateTimeForDeceleration(Math.max(Math.abs(i), Math.abs(i2)));
+                    if (iCalculateTimeForDeceleration > 0) {
+                        action.update(i, i2, iCalculateTimeForDeceleration, this.mDecelerateInterpolator);
                     }
                 }
             };
@@ -138,22 +134,21 @@ public class WalletCardCarousel extends RecyclerView {
 
         @Override // androidx.recyclerview.widget.PagerSnapHelper, androidx.recyclerview.widget.SnapHelper
         public final View findSnapView(RecyclerView.LayoutManager layoutManager) {
-            View findSnapView = super.findSnapView(layoutManager);
-            if (findSnapView == null) {
+            View viewFindSnapView = super.findSnapView(layoutManager);
+            if (viewFindSnapView == null) {
                 return null;
             }
-            WalletCardViewInfo walletCardViewInfo = ((WalletCardViewHolder) findSnapView.getTag()).mCardViewInfo;
+            WalletCardViewInfo walletCardViewInfo = ((WalletCardViewHolder) viewFindSnapView.getTag()).mCardViewInfo;
             WalletCardCarousel walletCardCarousel = WalletCardCarousel.this;
             walletCardCarousel.mSelectionListener.onCardSelected(walletCardViewInfo);
             walletCardCarousel.mCardScrollListener.onCardScroll(walletCardViewInfo, walletCardViewInfo, 0.0f);
-            return findSnapView;
+            return viewFindSnapView;
         }
 
         private CarouselSnapHelper() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WalletCardCarouselAdapter extends RecyclerView.Adapter {
         public List mData;
 
@@ -188,7 +183,7 @@ public class WalletCardCarousel extends RecyclerView {
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     WalletCard walletCard;
-                    WalletCardCarousel.WalletCardCarouselAdapter walletCardCarouselAdapter = WalletCardCarousel.WalletCardCarouselAdapter.this;
+                    WalletCardCarousel.WalletCardCarouselAdapter walletCardCarouselAdapter = this.f$0;
                     int i2 = i;
                     WalletCardViewInfo walletCardViewInfo2 = walletCardViewInfo;
                     WalletCardCarousel walletCardCarousel = WalletCardCarousel.this;
@@ -215,8 +210,8 @@ public class WalletCardCarousel extends RecyclerView {
 
         @Override // androidx.recyclerview.widget.RecyclerView.Adapter
         public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View m = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, R.layout.wallet_card_view, viewGroup, false);
-            WalletCardViewHolder walletCardViewHolder = new WalletCardViewHolder(m);
+            View viewM = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, R.layout.wallet_card_view, viewGroup, false);
+            WalletCardViewHolder walletCardViewHolder = new WalletCardViewHolder(viewM);
             WalletCardCarousel walletCardCarousel = WalletCardCarousel.this;
             float f = walletCardCarousel.mCornerRadiusPx;
             CardView cardView = walletCardViewHolder.mCardView;
@@ -224,7 +219,7 @@ public class WalletCardCarousel extends RecyclerView {
             ViewGroup.LayoutParams layoutParams = cardView.getLayoutParams();
             layoutParams.width = walletCardCarousel.mCardWidthPx;
             layoutParams.height = walletCardCarousel.mCardHeightPx;
-            m.setTag(walletCardViewHolder);
+            viewM.setTag(walletCardViewHolder);
             return walletCardViewHolder;
         }
 
@@ -260,7 +255,7 @@ public class WalletCardCarousel extends RecyclerView {
         view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.wallet.ui.WalletCardCarousel$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view2, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
-                WalletCardCarousel walletCardCarousel = WalletCardCarousel.this;
+                WalletCardCarousel walletCardCarousel = this.f$0;
                 View view3 = view;
                 int i10 = WalletCardCarousel.$r8$clinit;
                 walletCardCarousel.updateCardView(view3);
@@ -279,9 +274,9 @@ public class WalletCardCarousel extends RecyclerView {
         float width = getWidth() / 2.0f;
         float left = (view.getLeft() + view.getRight()) / 2.0f;
         float f = left - width;
-        float max = Math.max(0.83f, 1.0f - Math.abs(f / view.getWidth()));
-        cardView.setScaleX(max);
-        cardView.setScaleY(max);
+        float fMax = Math.max(0.83f, 1.0f - Math.abs(f / view.getWidth()));
+        cardView.setScaleX(fMax);
+        cardView.setScaleY(fMax);
         int right = left < width ? view.getRight() + this.mCardMarginPx : view.getLeft() - this.mCardMarginPx;
         if (Math.abs(f) >= this.mCardCenterToScreenCenterDistancePx || RecyclerView.getChildAdapterPosition(view) == -1) {
             return;
@@ -293,14 +288,14 @@ public class WalletCardCarousel extends RecyclerView {
 
     public final void updatePadding(int i) {
         int i2;
-        RecyclerView.ViewHolder findViewHolderForAdapterPosition;
-        int max = Math.max(0, ((i - this.mTotalCardWidth) / 2) - this.mCardMarginPx);
-        setPadding(max, getPaddingTop(), max, getPaddingBottom());
+        RecyclerView.ViewHolder viewHolderFindViewHolderForAdapterPosition;
+        int iMax = Math.max(0, ((i - this.mTotalCardWidth) / 2) - this.mCardMarginPx);
+        setPadding(iMax, getPaddingTop(), iMax, getPaddingBottom());
         WalletCardCarouselAdapter walletCardCarouselAdapter = this.mWalletCardCarouselAdapter;
-        if (walletCardCarouselAdapter == null || walletCardCarouselAdapter.mData.size() <= 0 || (i2 = this.mCenteredAdapterPosition) == -1 || (findViewHolderForAdapterPosition = findViewHolderForAdapterPosition(i2)) == null) {
+        if (walletCardCarouselAdapter == null || walletCardCarouselAdapter.mData.size() <= 0 || (i2 = this.mCenteredAdapterPosition) == -1 || (viewHolderFindViewHolderForAdapterPosition = findViewHolderForAdapterPosition(i2)) == null) {
             return;
         }
-        View view = findViewHolderForAdapterPosition.itemView;
+        View view = viewHolderFindViewHolderForAdapterPosition.itemView;
         scrollBy(((view.getRight() + view.getLeft()) / 2) - ((getRight() + getLeft()) / 2), 0);
     }
 

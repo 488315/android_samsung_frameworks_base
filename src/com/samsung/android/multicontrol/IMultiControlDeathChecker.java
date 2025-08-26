@@ -40,9 +40,9 @@ public interface IMultiControlDeathChecker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMultiControlDeathChecker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMultiControlDeathChecker)) {
-                return (IMultiControlDeathChecker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMultiControlDeathChecker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMultiControlDeathChecker)) {
+                return (IMultiControlDeathChecker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

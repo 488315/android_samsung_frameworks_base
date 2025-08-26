@@ -5,15 +5,14 @@ import androidx.compose.ui.graphics.AndroidMatrixConversions_androidKt;
 import androidx.compose.ui.graphics.MatrixKt;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LayerMatrixCache<T> {
     public Matrix androidMatrixCache;
     public final Function2 getMatrix;
     public boolean isDirty;
     public boolean isInverseDirty;
-    public final float[] matrixCache = androidx.compose.ui.graphics.Matrix.m481constructorimpl$default();
-    public final float[] inverseMatrixCache = androidx.compose.ui.graphics.Matrix.m481constructorimpl$default();
+    public final float[] matrixCache = androidx.compose.ui.graphics.Matrix.m483constructorimpl$default();
+    public final float[] inverseMatrixCache = androidx.compose.ui.graphics.Matrix.m483constructorimpl$default();
     public boolean isInverseValid = true;
     public boolean isIdentity = true;
 
@@ -22,11 +21,11 @@ public final class LayerMatrixCache<T> {
     }
 
     /* renamed from: calculateInverseMatrix-bWbORWo, reason: not valid java name */
-    public final float[] m705calculateInverseMatrixbWbORWo(Object obj) {
+    public final float[] m707calculateInverseMatrixbWbORWo(Object obj) {
         boolean z = this.isInverseDirty;
         float[] fArr = this.inverseMatrixCache;
         if (z) {
-            this.isInverseValid = InvertMatrixKt.m704invertToJiSxe2E(m706calculateMatrixGrdbGEg(obj), fArr);
+            this.isInverseValid = InvertMatrixKt.m706invertToJiSxe2E(m708calculateMatrixGrdbGEg(obj), fArr);
             this.isInverseDirty = false;
         }
         if (this.isInverseValid) {
@@ -36,7 +35,7 @@ public final class LayerMatrixCache<T> {
     }
 
     /* renamed from: calculateMatrix-GrdbGEg, reason: not valid java name */
-    public final float[] m706calculateMatrixGrdbGEg(Object obj) {
+    public final float[] m708calculateMatrixGrdbGEg(Object obj) {
         boolean z = this.isDirty;
         float[] fArr = this.matrixCache;
         if (!z) {
@@ -48,9 +47,9 @@ public final class LayerMatrixCache<T> {
             this.androidMatrixCache = matrix;
         }
         this.getMatrix.invoke(obj, matrix);
-        AndroidMatrixConversions_androidKt.m433setFromtUYjHk(matrix, fArr);
+        AndroidMatrixConversions_androidKt.m435setFromtUYjHk(matrix, fArr);
         this.isDirty = false;
-        this.isIdentity = MatrixKt.m489isIdentity58bKbWc(fArr);
+        this.isIdentity = MatrixKt.m491isIdentity58bKbWc(fArr);
         return fArr;
     }
 

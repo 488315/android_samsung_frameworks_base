@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
@@ -23,7 +22,6 @@ import com.samsung.android.view.animation.SineOut60;
 import java.util.Collections;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase {
     public ValueAnimator bigClockAnimatorAlpha;
@@ -44,7 +42,6 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
     public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
     public final QSAnimViewProvider viewProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -118,7 +115,7 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
             view.post(new Runnable() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator$onConfigurationChanged$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImmersiveScrollPopOverAnimator.this.updateAnimators();
+                    this.this$0.updateAnimators();
                 }
             });
         }
@@ -130,7 +127,6 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
         if (isThereNoView()) {
             return;
         }
-        ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onNotificationScrolled : ", "ImmersiveScrollPopOverAnimator");
         QsAnimatorState.isNotificationImmersiceScrolling = i != 0;
         int i2 = this.lastPosition;
         SpringForce springForce = this.immersiveScaleForce;
@@ -186,7 +182,7 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
             }
             this.isClockDisappearAnimationTriggered = true;
             this.isClockAppearAnimationTriggered = false;
-        } else if (i2 > i && i < this.qqsHeight && !this.isClockAppearAnimationTriggered) {
+        } else if (i2 > i && i <= this.qqsHeight && !this.isClockAppearAnimationTriggered) {
             springForce.mFinalPosition = 1.0f;
             SpringAnimation springAnimation5 = this.bigClockAnimatorScaleX;
             if (springAnimation5 != null) {
@@ -280,10 +276,10 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
         if (isThereNoView()) {
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        this.plmnAnimator = ofFloat;
-        if (ofFloat != null) {
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator$updateAnimators$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        this.plmnAnimator = valueAnimatorOfFloat;
+        if (valueAnimatorOfFloat != null) {
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator.updateAnimators.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     QSAnimView qSAnimView = ImmersiveScrollPopOverAnimator.this.plmn;
@@ -293,10 +289,10 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
                 }
             });
         }
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.clockAnimator = ofFloat2;
-        if (ofFloat2 != null) {
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator$updateAnimators$2
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.clockAnimator = valueAnimatorOfFloat2;
+        if (valueAnimatorOfFloat2 != null) {
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator.updateAnimators.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     QSAnimView qSAnimView = ImmersiveScrollPopOverAnimator.this.clock;
@@ -310,17 +306,17 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
         if (qSAnimView != null) {
             this.bigClockAnimatorScaleX = new SpringAnimation(qSAnimView.getView(), DynamicAnimation.SCALE_X);
             this.bigClockAnimatorScaleY = new SpringAnimation(qSAnimView.getView(), DynamicAnimation.SCALE_Y);
-            ValueAnimator ofFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
-            this.bigClockAnimatorAlpha = ofFloat3;
-            if (ofFloat3 != null) {
-                ofFloat3.setInterpolator(new SineOut60());
+            ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
+            this.bigClockAnimatorAlpha = valueAnimatorOfFloat3;
+            if (valueAnimatorOfFloat3 != null) {
+                valueAnimatorOfFloat3.setInterpolator(new SineOut60());
             }
             ValueAnimator valueAnimator = this.bigClockAnimatorAlpha;
             if (valueAnimator != null) {
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.animator.ImmersiveScrollPopOverAnimator$updateAnimators$3$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        QSAnimView.this.setAlpha(((Float) valueAnimator2.getAnimatedValue()).floatValue());
+                        qSAnimView.setAlpha(((Float) valueAnimator2.getAnimatedValue()).floatValue());
                     }
                 });
             }
@@ -332,14 +328,14 @@ public final class ImmersiveScrollPopOverAnimator extends SecQSImplAnimatorBase 
         QSAnimViewProvider.ViewType viewType = QSAnimViewProvider.ViewType.QS_HEADER_QQS;
         QSAnimViewProvider qSAnimViewProvider = this.viewProvider;
         QSAnimView qSAnimView = qSAnimViewProvider.get(viewType);
-        this.bigClockParent = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_CLOCK_DATE_PARENT);
+        this.bigClockParent = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.QS_HEADER_CLOCK_FOR_IMMERSIVE_POP_OVER);
         this.plmn = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PLMN);
         this.clock = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.POP_OVER_IMMERSIVE_CLOCK);
         SecPanelSplitHelper.Companion.getClass();
-        int i = 0;
+        int height = 0;
         if (!SecPanelSplitHelper.isEnabled && qSAnimView != null && (view = qSAnimView.getView()) != null) {
-            i = view.getHeight();
+            height = view.getHeight();
         }
-        this.qqsHeight = i;
+        this.qqsHeight = height;
     }
 }

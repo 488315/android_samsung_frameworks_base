@@ -4,7 +4,6 @@ import android.graphics.BlurMaskFilter;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShadowGenerator {
     public final BlurMaskFilter mDefaultBlurMaskFilter;
@@ -12,7 +11,6 @@ public class ShadowGenerator {
     public final Paint mBlurPaint = new Paint(3);
     public final Paint mDrawPaint = new Paint(3);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final int color;
         public float keyShadowDistance;

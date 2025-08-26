@@ -17,7 +17,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SmartMirroringClient {
     public final AudioManager audioManager;
@@ -26,7 +25,6 @@ public final class SmartMirroringClient {
     public boolean isScanStarted;
     public Messenger service;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,7 +36,6 @@ public final class SmartMirroringClient {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class REASON {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ REASON[] $VALUES;
@@ -72,7 +69,6 @@ public final class SmartMirroringClient {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class RESULT {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ RESULT[] $VALUES;
@@ -104,13 +100,11 @@ public final class SmartMirroringClient {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Response {
         public static final Companion Companion = new Companion(null);
         public final REASON reason;
         public final RESULT result;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -118,22 +112,22 @@ public final class SmartMirroringClient {
 
             public static Response getParseResponse(Bundle bundle) {
                 Object obj;
-                Object obj2;
+                Object next;
                 AbstractList abstractList = (AbstractList) RESULT.$ENTRIES;
                 abstractList.getClass();
                 AbstractList.IteratorImpl iteratorImpl = abstractList.new IteratorImpl();
                 while (true) {
                     obj = null;
                     if (!iteratorImpl.hasNext()) {
-                        obj2 = null;
+                        next = null;
                         break;
                     }
-                    obj2 = iteratorImpl.next();
-                    if (((RESULT) obj2).getValue() == bundle.getInt("result", -1)) {
+                    next = iteratorImpl.next();
+                    if (((RESULT) next).getValue() == bundle.getInt("result", -1)) {
                         break;
                     }
                 }
-                RESULT result = (RESULT) obj2;
+                RESULT result = (RESULT) next;
                 if (result == null) {
                     result = RESULT.UNKNOWN;
                 }
@@ -144,9 +138,9 @@ public final class SmartMirroringClient {
                     if (!iteratorImpl2.hasNext()) {
                         break;
                     }
-                    Object next = iteratorImpl2.next();
-                    if (((REASON) next).getValue() == bundle.getInt("reason", -1)) {
-                        obj = next;
+                    Object next2 = iteratorImpl2.next();
+                    if (((REASON) next2).getValue() == bundle.getInt("reason", -1)) {
+                        obj = next2;
                         break;
                     }
                 }
@@ -212,11 +206,11 @@ public final class SmartMirroringClient {
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
-            Result.m3421boximpl(failure);
+            Result.m3441boximpl(failure);
         }
     }
 }

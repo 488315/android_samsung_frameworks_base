@@ -3,15 +3,14 @@ package com.android.wm.shell.back;
 import android.graphics.RectF;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class CrossActivityBackAnimationKt {
     public static void scaleCentered$default(RectF rectF, float f) {
-        float width = (rectF.width() / 2) + rectF.left;
-        float height = (rectF.height() / 2) + rectF.top;
-        rectF.offset(-width, -height);
+        float fWidth = (rectF.width() / 2) + rectF.left;
+        float fHeight = (rectF.height() / 2) + rectF.top;
+        rectF.offset(-fWidth, -fHeight);
         rectF.scale(f);
-        rectF.offset(width, height);
+        rectF.offset(fWidth, fHeight);
     }
 
     public static final void setInterpolatedRectF(RectF rectF, RectF rectF2, RectF rectF3, float f) {

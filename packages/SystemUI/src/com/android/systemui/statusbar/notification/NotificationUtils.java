@@ -1,20 +1,20 @@
 package com.android.systemui.statusbar.notification;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.widget.ImageView;
 import com.android.internal.util.ContrastColorUtil;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.collection.PipelineEntry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationUtils {
-    public static int getFontScaledHeight(int i, Context context) {
+    public static int getFontScaledHeight(int i, Context context) throws Resources.NotFoundException {
         return (int) (context.getResources().getDimensionPixelSize(i) * Math.max(1.0f, context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density));
     }
 
-    public static int getFontScaledMarginHeight(int i, Context context) {
+    public static int getFontScaledMarginHeight(int i, Context context) throws Resources.NotFoundException {
         return (int) (context.getResources().getDimensionPixelSize(i) * ((((context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density) - 1.0f) / 2.0f) + 1.0f));
     }
 
@@ -31,9 +31,9 @@ public class NotificationUtils {
         if (tag != null) {
             return Boolean.TRUE.equals(tag);
         }
-        boolean isGrayscaleIcon = contrastColorUtil.isGrayscaleIcon(imageView.getDrawable());
-        imageView.setTag(R.id.icon_is_grayscale, Boolean.valueOf(isGrayscaleIcon));
-        return isGrayscaleIcon;
+        boolean zIsGrayscaleIcon = contrastColorUtil.isGrayscaleIcon(imageView.getDrawable());
+        imageView.setTag(R.id.icon_is_grayscale, Boolean.valueOf(zIsGrayscaleIcon));
+        return zIsGrayscaleIcon;
     }
 
     public static String logKey(PipelineEntry pipelineEntry) {

@@ -15,7 +15,6 @@ import kotlin.jvm.internal.TypeIntrinsics;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CellularIconViewModel$dexStatusBarIcon$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -53,7 +52,7 @@ final class CellularIconViewModel$dexStatusBarIcon$1 extends SuspendLambda imple
             final ?? r1 = new StatusBarSignalPolicy.DesktopCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModel$dexStatusBarIcon$1$callback$1
                 @Override // com.android.systemui.statusbar.phone.StatusBarSignalPolicy.DesktopCallback
                 public final void updateDesktopStatusBarIcons() {
-                    CellularIconViewModel cellularIconViewModel2 = CellularIconViewModel.this;
+                    CellularIconViewModel cellularIconViewModel2 = cellularIconViewModel;
                     CellularIconViewModel.access$sendDeXStatusBarIconModel(cellularIconViewModel2, (DeXStatusBarIconModel) cellularIconViewModel2.updateDeXStatusBarIconModel.$$delegate_0.getValue());
                 }
             };
@@ -63,7 +62,7 @@ final class CellularIconViewModel$dexStatusBarIcon$1 extends SuspendLambda imple
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     DeXStatusBarIconModel deXStatusBarIconModel = DeXStatusBarIconModelKt.DEFAULT_DEX_STATUS_BAR_ICON_MODEL;
-                    CellularIconViewModel cellularIconViewModel3 = CellularIconViewModel.this;
+                    CellularIconViewModel cellularIconViewModel3 = cellularIconViewModel2;
                     CellularIconViewModel.access$sendDeXStatusBarIconModel(cellularIconViewModel3, deXStatusBarIconModel);
                     CellularIconViewModel$dexStatusBarIcon$1$callback$1 cellularIconViewModel$dexStatusBarIcon$1$callback$1 = r1;
                     List list = cellularIconViewModel3.taskbarIndicatorController.mDesktopStatusBarIconCallback;

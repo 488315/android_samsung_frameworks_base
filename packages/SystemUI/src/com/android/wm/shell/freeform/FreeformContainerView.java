@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -44,7 +45,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 class FreeformContainerView extends FrameLayout implements FreeformContainerCallback {
     public static final float[] TAIL_ICON_ALPHA_ARRAY = {1.0f, 0.5f, 0.1f};
@@ -90,7 +90,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     public FreeformContainerViewController mViewController;
 
     /* renamed from: -$$Nest$msettleDownPointerEffect, reason: not valid java name */
-    public static void m3252$$Nest$msettleDownPointerEffect(FreeformContainerView freeformContainerView) {
+    public static void m3269$$Nest$msettleDownPointerEffect(FreeformContainerView freeformContainerView) {
         if (freeformContainerView.mPointerSettleDownEffectRequested) {
             freeformContainerView.mPointerSettleDownEffectRequested = false;
             int iconViewListCount = freeformContainerView.getIconViewListCount();
@@ -110,16 +110,16 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                     int i3 = (iconViewListCount - i2) - 1;
                     float f = TAIL_ICON_ALPHA_ARRAY[i3];
                     float f2 = TAIL_ICON_SCALE_ARRAY[i3];
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, f);
-                    ofFloat.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda4);
-                    ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, f2);
-                    ofFloat2.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda42);
-                    ValueAnimator ofFloat3 = ValueAnimator.ofFloat(y, y2);
-                    ofFloat3.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda43);
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, f);
+                    valueAnimatorOfFloat.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda4);
+                    ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, f2);
+                    valueAnimatorOfFloat2.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda42);
+                    ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(y, y2);
+                    valueAnimatorOfFloat3.addUpdateListener(freeformContainerView$$ExternalSyntheticLambda43);
                     ArrayList arrayList = new ArrayList();
-                    arrayList.add(ofFloat);
-                    arrayList.add(ofFloat2);
-                    arrayList.add(ofFloat3);
+                    arrayList.add(valueAnimatorOfFloat);
+                    arrayList.add(valueAnimatorOfFloat2);
+                    arrayList.add(valueAnimatorOfFloat3);
                     AnimatorSet animatorSet = new AnimatorSet();
                     animatorSet.setDuration(200L);
                     animatorSet.playTogether(arrayList);
@@ -145,7 +145,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         this.mTouchableRegion = new Region();
         this.mInsetsComputer = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda1
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                FreeformContainerView freeformContainerView = FreeformContainerView.this;
+                FreeformContainerView freeformContainerView = this.f$0;
                 float[] fArr = FreeformContainerView.TAIL_ICON_ALPHA_ARRAY;
                 freeformContainerView.getClass();
                 internalInsetsInfo.contentInsets.setEmpty();
@@ -160,7 +160,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         this.mSystemGestureExcludeUpdater = new ViewTreeObserver.OnDrawListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda2
             @Override // android.view.ViewTreeObserver.OnDrawListener
             public final void onDraw() {
-                FreeformContainerView freeformContainerView = FreeformContainerView.this;
+                FreeformContainerView freeformContainerView = this.f$0;
                 Rect rect = (Rect) freeformContainerView.mSystemGestureExclusionRects.get(0);
                 if (freeformContainerView.getIconViewListCount() > 0) {
                     freeformContainerView.getPointerViewBounds(rect);
@@ -224,9 +224,9 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     }
 
     public final void animateBackgroundDim(boolean z) {
-        ValueAnimator ofInt = z ? ValueAnimator.ofInt(0, 255) : ValueAnimator.ofInt(255, 0);
-        ofInt.setDuration(z ? 283L : 333L);
-        ofInt.addListener(z ? new AnimatorListenerAdapter() { // from class: com.android.wm.shell.freeform.FreeformContainerView.1
+        ValueAnimator valueAnimatorOfInt = z ? ValueAnimator.ofInt(0, 255) : ValueAnimator.ofInt(255, 0);
+        valueAnimatorOfInt.setDuration(z ? 283L : 333L);
+        valueAnimatorOfInt.addListener(z ? new AnimatorListenerAdapter() { // from class: com.android.wm.shell.freeform.FreeformContainerView.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
                 super.onAnimationStart(animator);
@@ -239,9 +239,9 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                 FreeformContainerView.this.mBackgroundDimView.setVisibility(8);
             }
         });
-        ofInt.setInterpolator(new LinearInterpolator());
-        ofInt.addUpdateListener(new FreeformContainerView$$ExternalSyntheticLambda4(this, ofInt, 3));
-        ofInt.start();
+        valueAnimatorOfInt.setInterpolator(new LinearInterpolator());
+        valueAnimatorOfInt.addUpdateListener(new FreeformContainerView$$ExternalSyntheticLambda4(this, valueAnimatorOfInt, 3));
+        valueAnimatorOfInt.start();
     }
 
     public final void buildSpringChainsOfAllAppIcons() {
@@ -296,14 +296,14 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                         imageView.setAlpha(f);
                     }
                 };
-                Spring createSpring = springChain.mSpringSystem.createSpring();
-                createSpring.addListener(springChain);
+                Spring springCreateSpring = springChain.mSpringSystem.createSpring();
+                springCreateSpring.addListener(springChain);
                 SpringConfig springConfig = springChain.mAttachmentSpringConfig;
                 if (springConfig == null) {
                     throw new IllegalArgumentException("springConfig is required");
                 }
-                createSpring.mSpringConfig = springConfig;
-                springChain.mSprings.add(createSpring);
+                springCreateSpring.mSpringConfig = springConfig;
+                springChain.mSprings.add(springCreateSpring);
                 springChain.mListeners.add(simpleSpringListener);
                 SpringChain springChain2 = this.mSpringChainY;
                 SimpleSpringListener simpleSpringListener2 = new SimpleSpringListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView.9
@@ -335,14 +335,14 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                         imageView.setTranslationY(((float) spring.mCurrentState.position) + (FreeformContainerView.this.mPointerSettleDownGap * i));
                     }
                 };
-                Spring createSpring2 = springChain2.mSpringSystem.createSpring();
-                createSpring2.addListener(springChain2);
+                Spring springCreateSpring2 = springChain2.mSpringSystem.createSpring();
+                springCreateSpring2.addListener(springChain2);
                 SpringConfig springConfig2 = springChain2.mAttachmentSpringConfig;
                 if (springConfig2 == null) {
                     throw new IllegalArgumentException("springConfig is required");
                 }
-                createSpring2.mSpringConfig = springConfig2;
-                springChain2.mSprings.add(createSpring2);
+                springCreateSpring2.mSpringConfig = springConfig2;
+                springChain2.mSprings.add(springCreateSpring2);
                 springChain2.mListeners.add(simpleSpringListener2);
             }
         }
@@ -358,12 +358,12 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
             FreeformContainerViewController freeformContainerViewController = this.mViewController;
             int keyCode = keyEvent.getKeyCode();
             if (!(freeformContainerViewController.mState == 1)) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyCode, "[ViewController] onKeyDown(", "), ");
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyCode, "[ViewController] onKeyDown(", "), ");
                 int i = freeformContainerViewController.mState;
-                m.append(i != -1 ? i != 0 ? i != 1 ? "UNKNOWN" : "CONTAINER_STATE_FOLDER" : "CONTAINER_STATE_POINTER" : "CONTAINER_STATE_UNDEFINED");
-                m.append(", should not be focused! lp=");
-                m.append(freeformContainerViewController.mLayoutParams);
-                Log.e("FreeformContainer", m.toString());
+                sbM.append(i != -1 ? i != 0 ? i != 1 ? "UNKNOWN" : "CONTAINER_STATE_FOLDER" : "CONTAINER_STATE_POINTER" : "CONTAINER_STATE_UNDEFINED");
+                sbM.append(", should not be focused! lp=");
+                sbM.append(freeformContainerViewController.mLayoutParams);
+                Log.e("FreeformContainer", sbM.toString());
                 freeformContainerViewController.setFocusable(false);
             } else if (keyCode == 4) {
                 Log.i("FreeformContainer", "[ViewController] onKeyDown(" + keyCode + "), close folder");
@@ -375,18 +375,18 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean gatherTransparentRegion(Region region) {
-        boolean gatherTransparentRegion = super.gatherTransparentRegion(region);
+        boolean zGatherTransparentRegion = super.gatherTransparentRegion(region);
         updateTouchableRegion();
         if (!((ArrayList) this.mViewController.mFullscreenModeRequests).isEmpty()) {
             region.setEmpty();
-            return gatherTransparentRegion;
+            return zGatherTransparentRegion;
         }
         if (this.mViewController.isPointerView()) {
             Region region2 = new Region(0, 0, getWidth(), getHeight());
             region2.op(this.mTouchableRegion, Region.Op.XOR);
             region.set(region2);
         }
-        return gatherTransparentRegion;
+        return zGatherTransparentRegion;
     }
 
     public final int getIconViewListCount() {
@@ -435,7 +435,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     }
 
     @Override // com.android.wm.shell.freeform.FreeformContainerCallback
-    public final void onItemAdded(FreeformContainerItem freeformContainerItem) {
+    public final void onItemAdded(FreeformContainerItem freeformContainerItem) throws Resources.NotFoundException {
         FreeformContainerItem itemByName;
         ImageView imageView = new ImageView(this.mContext);
         imageView.setImageDrawable(freeformContainerItem.mShowingIcon);
@@ -443,13 +443,13 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         imageView.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
         freeformContainerItem.setIconView(imageView);
         if (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW && (freeformContainerItem instanceof MultiInstanceItem) && (itemByName = this.mViewController.mItemController.getItemByName(freeformContainerItem.mPackageName)) != null && itemByName.asMultiInstanceItem() != null) {
-            MultiInstanceItem asMultiInstanceItem = itemByName.asMultiInstanceItem();
-            ImageView imageView2 = asMultiInstanceItem.mIconView;
+            MultiInstanceItem multiInstanceItemAsMultiInstanceItem = itemByName.asMultiInstanceItem();
+            ImageView imageView2 = multiInstanceItemAsMultiInstanceItem.mIconView;
             if (imageView2 != null) {
                 removeIconView(imageView2);
             }
-            asMultiInstanceItem.setIconView(imageView);
-            asMultiInstanceItem.mChildItemList.forEach(new MultiInstanceItem$$ExternalSyntheticLambda1(this.mViewController, 0));
+            multiInstanceItemAsMultiInstanceItem.setIconView(imageView);
+            multiInstanceItemAsMultiInstanceItem.mChildItemList.forEach(new MultiInstanceItem$$ExternalSyntheticLambda1(this.mViewController, 0));
         }
         this.mIconViewList.add(imageView);
         this.mPointerGroupView.addView(imageView);
@@ -482,7 +482,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     }
 
     @Override // com.android.wm.shell.freeform.FreeformContainerCallback
-    public final void onItemRemoved(FreeformContainerItem freeformContainerItem) {
+    public final void onItemRemoved(FreeformContainerItem freeformContainerItem) throws Resources.NotFoundException {
         if (!CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW || freeformContainerItem.asMultiInstanceItem() == null) {
             ImageView imageView = freeformContainerItem.mIconView;
             if (imageView != null) {
@@ -513,7 +513,11 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         updatePointerViewImmediately();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x003a  */
     @Override // android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         FreeformContainerViewController freeformContainerViewController = this.mViewController;
         if (freeformContainerViewController.mState == 1) {
@@ -526,10 +530,11 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                         FreeformContainerFolderView freeformContainerFolderView = freeformContainerViewController.mFolderView;
                         if (freeformContainerFolderView.mPopupWindow != null) {
                             freeformContainerFolderView.dismissMultiInstancePreviewPopup("outside_touch_folder");
+                        } else {
+                            Log.i("FreeformContainer", "[ViewController] onTouchEvent(" + action + "), close folder");
+                            freeformContainerViewController.updateContainerState(0, true, true);
                         }
                     }
-                    Log.i("FreeformContainer", "[ViewController] onTouchEvent(" + action + "), close folder");
-                    freeformContainerViewController.updateContainerState(0, true, true);
                 }
             }
         }
@@ -541,11 +546,11 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         if (this.mNeedInitPosition) {
             Log.i("FreeformContainer", "[ContainerView] savePositionToSharedPreferences, skip saving. Need to init position first");
         } else {
-            SharedPreferences.Editor edit = this.mContext.getSharedPreferences("freeform_container_pref", 0).edit();
-            edit.putFloat("position_x", this.mPointerPosition.x);
-            edit.putFloat("position_y", this.mPointerPosition.y);
-            edit.putInt("rotation", this.mContext.getDisplay().getRotation());
-            edit.commit();
+            SharedPreferences.Editor editorEdit = this.mContext.getSharedPreferences("freeform_container_pref", 0).edit();
+            editorEdit.putFloat("position_x", this.mPointerPosition.x);
+            editorEdit.putFloat("position_y", this.mPointerPosition.y);
+            editorEdit.putInt("rotation", this.mContext.getDisplay().getRotation());
+            editorEdit.commit();
         }
         ImageButton imageButton = this.mPointerView;
         if (imageButton != null) {
@@ -569,17 +574,17 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
         viewTreeObserver.removeOnDrawListener(this.mSystemGestureExcludeUpdater);
     }
 
-    public final void removeIconView(final ImageView imageView) {
+    public final void removeIconView(final ImageView imageView) throws Resources.NotFoundException {
         this.mIconViewList.remove(imageView);
         if (!this.mViewController.isPointerView() || getIconViewListCount() <= 0) {
             this.mPointerGroupView.removeView(imageView);
         } else {
-            Animation loadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.freeform_container_remove_icon_fade_out);
-            loadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView.3
+            Animation animationLoadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.freeform_container_remove_icon_fade_out);
+            animationLoadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView.3
                 @Override // android.view.animation.Animation.AnimationListener
                 public final void onAnimationEnd(Animation animation) {
                     FreeformContainerView.this.mPointerGroupView.removeView(imageView);
-                    FreeformContainerView.m3252$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
+                    FreeformContainerView.m3269$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
                 }
 
                 @Override // android.view.animation.Animation.AnimationListener
@@ -590,7 +595,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                 public final void onAnimationStart(Animation animation) {
                 }
             });
-            imageView.startAnimation(loadAnimation);
+            imageView.startAnimation(animationLoadAnimation);
         }
         buildSpringChainsOfAllAppIcons();
     }
@@ -662,25 +667,25 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     }
 
     public final void updatePointerViewDescription() {
-        String str;
-        final String str2;
+        String string;
+        final String str;
         final int iconViewListCount = getIconViewListCount();
         if (iconViewListCount == 1) {
-            str = ((FreeformContainerItem) this.mViewController.mItemController.mItemList.get(0)).mDescription;
-            str2 = getContext().getString(R.string.freeform_conatiner_activate) + " " + getContext().getString(R.string.freeform_container_double_tap_hold_to_move);
+            string = ((FreeformContainerItem) this.mViewController.mItemController.mItemList.get(0)).mDescription;
+            str = getContext().getString(R.string.freeform_conatiner_activate) + " " + getContext().getString(R.string.freeform_container_double_tap_hold_to_move);
         } else if (iconViewListCount >= 2) {
-            str = getContext().getString(R.string.freeform_container_minimized_windows_tray);
-            str2 = getContext().getString(R.string.freeform_conatiner_open) + " " + getContext().getString(R.string.freeform_container_double_tap_hold_to_move);
+            string = getContext().getString(R.string.freeform_container_minimized_windows_tray);
+            str = getContext().getString(R.string.freeform_conatiner_open) + " " + getContext().getString(R.string.freeform_container_double_tap_hold_to_move);
         } else {
+            string = "";
             str = "";
-            str2 = "";
         }
-        this.mPointerView.setContentDescription(str);
+        this.mPointerView.setContentDescription(string);
         this.mPointerView.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.freeform.FreeformContainerView.4
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(16, str2));
+                accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(16, str));
             }
 
             @Override // android.view.View.AccessibilityDelegate

@@ -23,16 +23,16 @@ public final class SQLiteDatabaseSharedConfiguration {
     public SQLiteDatabaseSharedConfiguration(SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration) {
         this.isSecureDb = (sQLiteDatabaseConfiguration.openFlags & 512) != 0;
         this.isMediaStoreDb = isMediaStoreDb(sQLiteDatabaseConfiguration.path);
-        boolean isSingleConnectionWalDb = isSingleConnectionWalDb(sQLiteDatabaseConfiguration.path);
-        this.useSingleConnectionWal = isSingleConnectionWalDb;
-        if (isSingleConnectionWalDb) {
+        boolean zIsSingleConnectionWalDb = isSingleConnectionWalDb(sQLiteDatabaseConfiguration.path);
+        this.useSingleConnectionWal = zIsSingleConnectionWalDb;
+        if (zIsSingleConnectionWalDb) {
             this.useWalModeByDefault = true;
         } else {
             this.useWalModeByDefault = isDefaultWalDb(sQLiteDatabaseConfiguration.path, sQLiteDatabaseConfiguration.openFlags);
         }
-        boolean isDefaultDumpCorruptDb = isDefaultDumpCorruptDb(sQLiteDatabaseConfiguration.path);
-        this.useDumpCorruptByDefault = isDefaultDumpCorruptDb;
-        this.useAssertionLog = isDefaultDumpCorruptDb;
+        boolean zIsDefaultDumpCorruptDb = isDefaultDumpCorruptDb(sQLiteDatabaseConfiguration.path);
+        this.useDumpCorruptByDefault = zIsDefaultDumpCorruptDb;
+        this.useAssertionLog = zIsDefaultDumpCorruptDb;
     }
 
     private boolean isDefaultWalDb(String str, int i) {

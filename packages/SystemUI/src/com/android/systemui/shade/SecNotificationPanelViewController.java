@@ -1,6 +1,8 @@
 package com.android.systemui.shade;
 
+import android.view.MotionEvent;
 import android.view.View;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
@@ -19,7 +21,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecNotificationPanelViewController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,7 +42,6 @@ public final class SecNotificationPanelViewController {
     public final ShadeRepository shadeRepository;
     public final Lazy statusBarWindowViewTouchedInteractor$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -128,5 +128,34 @@ public final class SecNotificationPanelViewController {
         if (this.isTrackingSupplier.getAsBoolean()) {
             this.onTrackingStoppedConsumer.accept(Boolean.TRUE);
         }
+    }
+
+    public final boolean onTouchEvent(MotionEvent motionEvent, boolean z) {
+        SecPanelSplitHelper secPanelSplitHelper = this.panelSplitHelper;
+        if (secPanelSplitHelper != null) {
+            if (z) {
+                if (motionEvent.getActionMasked() != 2) {
+                    secPanelSplitHelper.handleTouch(motionEvent);
+                }
+                ListPopupWindow$$ExternalSyntheticOutline0.m(motionEvent.getAction(), "onTouchEvent ignored : ", "QuickPanelLog");
+                return false;
+            }
+            SecPanelSplitHelper.Companion.getClass();
+            if (SecPanelSplitHelper.isEnabled) {
+                if ((motionEvent.getAction() == 1 || motionEvent.getAction() == 3) && secPanelSplitHelper != null) {
+                    secPanelSplitHelper.isOnceOverExpanded = false;
+                }
+                PanelSlideEventHandler panelSlideEventHandler = secPanelSplitHelper.panelSlideEventHandler;
+                if (!panelSlideEventHandler.slidingInitialized) {
+                    panelSlideEventHandler.initiateSlide(motionEvent);
+                }
+                if (secPanelSplitHelper.onIntercept(motionEvent)) {
+                    secPanelSplitHelper.handleTouch(motionEvent);
+                    onPanelSplitIntercepted();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

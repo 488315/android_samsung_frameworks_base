@@ -11,7 +11,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.shade.SecPanelSplitHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TouchInterceptFrameLayout extends FrameLayout {
     public View.OnClickListener customClickListener;
@@ -20,7 +19,6 @@ public final class TouchInterceptFrameLayout extends FrameLayout {
     public boolean isTouchInProgress;
     public View touchForwardView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -30,7 +28,6 @@ public final class TouchInterceptFrameLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         public final TouchInterceptFrameLayout view;
 
@@ -40,11 +37,13 @@ public final class TouchInterceptFrameLayout extends FrameLayout {
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
         public final boolean onSingleTapUp(MotionEvent motionEvent) {
-            Log.d("TouchInterceptFrameLayout", "onTouchEvent onSingleTapUp");
-            TouchInterceptFrameLayout touchInterceptFrameLayout = this.view;
-            View.OnClickListener onClickListener = touchInterceptFrameLayout.customClickListener;
-            if (onClickListener != null) {
-                onClickListener.onClick(touchInterceptFrameLayout);
+            if (!this.view.isAnimationInProgress) {
+                Log.d("TouchInterceptFrameLayout", "onTouchEvent onSingleTapUp");
+                TouchInterceptFrameLayout touchInterceptFrameLayout = this.view;
+                View.OnClickListener onClickListener = touchInterceptFrameLayout.customClickListener;
+                if (onClickListener != null) {
+                    onClickListener.onClick(touchInterceptFrameLayout);
+                }
             }
             SecPanelSplitHelper secPanelSplitHelper = (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
             if (secPanelSplitHelper.isReversed()) {
@@ -70,17 +69,13 @@ public final class TouchInterceptFrameLayout extends FrameLayout {
     @Override // android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         View view;
-        Integer valueOf = motionEvent != null ? Integer.valueOf(motionEvent.getAction()) : null;
-        if (valueOf != null && valueOf.intValue() == 0) {
+        Integer numValueOf = motionEvent != null ? Integer.valueOf(motionEvent.getAction()) : null;
+        if (numValueOf != null && numValueOf.intValue() == 0) {
             this.isTouchInProgress = true;
-        } else if (valueOf != null && valueOf.intValue() == 1) {
+        } else if (numValueOf != null && numValueOf.intValue() == 1) {
             this.isTouchInProgress = false;
-        } else if (valueOf != null && valueOf.intValue() == 3) {
+        } else if (numValueOf != null && numValueOf.intValue() == 3) {
             this.isTouchInProgress = false;
-        }
-        if (this.isAnimationInProgress) {
-            Log.d("TouchInterceptFrameLayout", "onTouchEvent Restrict Touch events - Animation is in progress");
-            return false;
         }
         if (!(motionEvent != null ? this.gestureDetector.onTouchEvent(motionEvent) : false) && (view = this.touchForwardView) != null) {
             view.onTouchEvent(motionEvent);

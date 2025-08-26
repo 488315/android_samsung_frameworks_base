@@ -54,21 +54,21 @@ public final class SoundTriggerManager {
         try {
             Identity identity = new Identity();
             identity.packageName = ActivityThread.currentOpPackageName();
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
-                SoundTrigger.ModuleProperties orElse = iSoundTriggerService.listModuleProperties(identity).stream().filter(new Predicate() { // from class: android.media.soundtrigger.SoundTriggerManager$$ExternalSyntheticLambda1
+                SoundTrigger.ModuleProperties modulePropertiesOrElse = iSoundTriggerService.listModuleProperties(identity).stream().filter(new Predicate() { // from class: android.media.soundtrigger.SoundTriggerManager$$ExternalSyntheticLambda1
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
                         return SoundTriggerManager.lambda$new$0((SoundTrigger.ModuleProperties) obj);
                     }
                 }).findFirst().orElse(null);
-                if (orElse != null) {
-                    this.mSoundTriggerSession = iSoundTriggerService.attachAsOriginator(identity, orElse, binder);
+                if (modulePropertiesOrElse != null) {
+                    this.mSoundTriggerSession = iSoundTriggerService.attachAsOriginator(identity, modulePropertiesOrElse, binder);
                 } else {
                     this.mSoundTriggerSession = null;
                 }
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
                 this.mContext = context;
                 this.mSoundTriggerService = iSoundTriggerService;
@@ -92,16 +92,14 @@ public final class SoundTriggerManager {
     }
 
     private final SoundTrigger.ModuleProperties getTestModuleProperties() {
-        SoundTrigger.ModuleProperties orElse = listModuleProperties().stream().filter(new Predicate() { // from class: android.media.soundtrigger.SoundTriggerManager$$ExternalSyntheticLambda0
+        SoundTrigger.ModuleProperties modulePropertiesOrElse = listModuleProperties().stream().filter(new Predicate() { // from class: android.media.soundtrigger.SoundTriggerManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((SoundTrigger.ModuleProperties) obj).getSupportedModelArch().equals("injection");
-                return equals;
+                return ((SoundTrigger.ModuleProperties) obj).getSupportedModelArch().equals("injection");
             }
         }).findFirst().orElse(null);
-        if (orElse != null) {
-            return orElse;
+        if (modulePropertiesOrElse != null) {
+            return modulePropertiesOrElse;
         }
         throw new AssertionError("Fake ST HAL should always be available");
     }
@@ -113,11 +111,11 @@ public final class SoundTriggerManager {
         try {
             Identity identity = new Identity();
             identity.packageName = ActivityThread.currentOpPackageName();
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
                 this.mSoundTriggerSession = iSoundTriggerService.attachAsOriginator(identity, (SoundTrigger.ModuleProperties) Objects.requireNonNull(moduleProperties), binder);
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
                 this.mContext = (Context) Objects.requireNonNull(context);
                 this.mSoundTriggerService = (ISoundTriggerService) Objects.requireNonNull(iSoundTriggerService);
@@ -130,16 +128,16 @@ public final class SoundTriggerManager {
 
     public static List<SoundTrigger.ModuleProperties> listModuleProperties() {
         try {
-            ISoundTriggerService asInterface = ISoundTriggerService.Stub.asInterface(ServiceManager.getService(Context.SOUND_TRIGGER_SERVICE));
+            ISoundTriggerService iSoundTriggerServiceAsInterface = ISoundTriggerService.Stub.asInterface(ServiceManager.getService(Context.SOUND_TRIGGER_SERVICE));
             Identity identity = new Identity();
             identity.packageName = ActivityThread.currentOpPackageName();
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
-                List<SoundTrigger.ModuleProperties> listModuleProperties = asInterface.listModuleProperties(identity);
-                if (create != null) {
-                    create.close();
+                List<SoundTrigger.ModuleProperties> listListModuleProperties = iSoundTriggerServiceAsInterface.listModuleProperties(identity);
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
-                return listModuleProperties;
+                return listListModuleProperties;
             } finally {
             }
         } catch (RemoteException e) {

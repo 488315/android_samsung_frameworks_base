@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DoNotDisturbQuickAffordanceConfig$lockScreenState$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,7 +51,7 @@ final class DoNotDisturbQuickAffordanceConfig$lockScreenState$2 extends SuspendL
             ?? r1 = new ZenModeController.Callback() { // from class: com.android.systemui.keyguard.data.quickaffordance.DoNotDisturbQuickAffordanceConfig$lockScreenState$2$callback$1
                 @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
                 public final void onZenAvailableChanged(boolean z) {
-                    DoNotDisturbQuickAffordanceConfig doNotDisturbQuickAffordanceConfig2 = DoNotDisturbQuickAffordanceConfig.this;
+                    DoNotDisturbQuickAffordanceConfig doNotDisturbQuickAffordanceConfig2 = doNotDisturbQuickAffordanceConfig;
                     doNotDisturbQuickAffordanceConfig2.oldIsAvailable = z;
                     ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, DoNotDisturbQuickAffordanceConfig.access$updateState(doNotDisturbQuickAffordanceConfig2), "DoNotDisturbQuickAffordanceConfig");
                     ((KeyguardShortcutManager) Dependency.sDependency.getDependencyInner(KeyguardShortcutManager.class)).updateShortcutIcons();
@@ -60,7 +59,7 @@ final class DoNotDisturbQuickAffordanceConfig$lockScreenState$2 extends SuspendL
 
                 @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
                 public final void onZenChanged(int i2) {
-                    DoNotDisturbQuickAffordanceConfig doNotDisturbQuickAffordanceConfig2 = DoNotDisturbQuickAffordanceConfig.this;
+                    DoNotDisturbQuickAffordanceConfig doNotDisturbQuickAffordanceConfig2 = doNotDisturbQuickAffordanceConfig;
                     doNotDisturbQuickAffordanceConfig2.zenMode = i2;
                     ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, DoNotDisturbQuickAffordanceConfig.access$updateState(doNotDisturbQuickAffordanceConfig2), "DoNotDisturbQuickAffordanceConfig");
                     ((KeyguardShortcutManager) Dependency.sDependency.getDependencyInner(KeyguardShortcutManager.class)).updateShortcutIcons();

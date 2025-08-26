@@ -86,18 +86,18 @@ public class CaptioningManager {
         if (TextUtils.isEmpty(rawLocale)) {
             return null;
         }
-        String[] split = rawLocale.split(Session.SESSION_SEPARATION_CHAR_CHILD);
-        int length = split.length;
+        String[] strArrSplit = rawLocale.split(Session.SESSION_SEPARATION_CHAR_CHILD);
+        int length = strArrSplit.length;
         if (length == 1) {
-            return new Locale(split[0]);
+            return new Locale(strArrSplit[0]);
         }
         if (length == 2) {
-            return new Locale(split[0], split[1]);
+            return new Locale(strArrSplit[0], strArrSplit[1]);
         }
         if (length != 3) {
             return null;
         }
-        return new Locale(split[0], split[1], split[2]);
+        return new Locale(strArrSplit[0], strArrSplit[1], strArrSplit[2]);
     }
 
     public final float getFontScale() {
@@ -187,11 +187,11 @@ public class CaptioningManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void notifyEnabledChanged() {
-        boolean isEnabled = isEnabled();
+        boolean zIsEnabled = isEnabled();
         synchronized (this.mListeners) {
             Iterator<CaptioningChangeListener> it = this.mListeners.iterator();
             while (it.hasNext()) {
-                it.next().onEnabledChanged(isEnabled);
+                it.next().onEnabledChanged(zIsEnabled);
             }
         }
     }
@@ -231,22 +231,22 @@ public class CaptioningManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void notifySystemAudioCaptionChanged() {
-        boolean isSystemAudioCaptioningEnabled = isSystemAudioCaptioningEnabled();
+        boolean zIsSystemAudioCaptioningEnabled = isSystemAudioCaptioningEnabled();
         synchronized (this.mListeners) {
             Iterator<CaptioningChangeListener> it = this.mListeners.iterator();
             while (it.hasNext()) {
-                it.next().onSystemAudioCaptioningChanged(isSystemAudioCaptioningEnabled);
+                it.next().onSystemAudioCaptioningChanged(zIsSystemAudioCaptioningEnabled);
             }
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void notifySystemAudioCaptionUiChanged() {
-        boolean isSystemAudioCaptioningUiEnabled = isSystemAudioCaptioningUiEnabled();
+        boolean zIsSystemAudioCaptioningUiEnabled = isSystemAudioCaptioningUiEnabled();
         synchronized (this.mListeners) {
             Iterator<CaptioningChangeListener> it = this.mListeners.iterator();
             while (it.hasNext()) {
-                it.next().onSystemAudioCaptioningUiChanged(isSystemAudioCaptioningUiEnabled);
+                it.next().onSystemAudioCaptioningUiChanged(zIsSystemAudioCaptioningUiEnabled);
             }
         }
     }
@@ -262,22 +262,22 @@ public class CaptioningManager {
         @Override // android.database.ContentObserver
         public void onChange(boolean z, Uri uri) {
             String path = uri.getPath();
-            String substring = path.substring(path.lastIndexOf(47) + 1);
-            if ("accessibility_captioning_enabled".equals(substring)) {
+            String strSubstring = path.substring(path.lastIndexOf(47) + 1);
+            if ("accessibility_captioning_enabled".equals(strSubstring)) {
                 CaptioningManager.this.notifyEnabledChanged();
                 return;
             }
-            if ("accessibility_captioning_locale".equals(substring)) {
+            if ("accessibility_captioning_locale".equals(strSubstring)) {
                 CaptioningManager.this.notifyLocaleChanged();
                 return;
             }
-            if ("accessibility_captioning_font_scale".equals(substring)) {
+            if ("accessibility_captioning_font_scale".equals(strSubstring)) {
                 CaptioningManager.this.notifyFontScaleChanged();
                 return;
             }
-            if (Settings.Secure.ODI_CAPTIONS_ENABLED.equals(substring)) {
+            if (Settings.Secure.ODI_CAPTIONS_ENABLED.equals(strSubstring)) {
                 CaptioningManager.this.notifySystemAudioCaptionChanged();
-            } else if (Settings.Secure.ODI_CAPTIONS_VOLUME_UI_ENABLED.equals(substring)) {
+            } else if (Settings.Secure.ODI_CAPTIONS_VOLUME_UI_ENABLED.equals(strSubstring)) {
                 CaptioningManager.this.notifySystemAudioCaptionUiChanged();
             } else {
                 this.mHandler.removeCallbacks(CaptioningManager.this.mStyleChangedRunnable);
@@ -322,21 +322,21 @@ public class CaptioningManager {
         }
 
         private CaptionStyle(int i, int i2, int i3, int i4, int i5, String str) {
-            boolean hasColor = hasColor(i);
-            this.mHasForegroundColor = hasColor;
-            boolean hasColor2 = hasColor(i2);
-            this.mHasBackgroundColor = hasColor2;
+            boolean zHasColor = hasColor(i);
+            this.mHasForegroundColor = zHasColor;
+            boolean zHasColor2 = hasColor(i2);
+            this.mHasBackgroundColor = zHasColor2;
             boolean z = i3 != -1;
             this.mHasEdgeType = z;
-            boolean hasColor3 = hasColor(i4);
-            this.mHasEdgeColor = hasColor3;
-            boolean hasColor4 = hasColor(i5);
-            this.mHasWindowColor = hasColor4;
-            this.foregroundColor = hasColor ? i : -1;
-            this.backgroundColor = hasColor2 ? i2 : -16777216;
+            boolean zHasColor3 = hasColor(i4);
+            this.mHasEdgeColor = zHasColor3;
+            boolean zHasColor4 = hasColor(i5);
+            this.mHasWindowColor = zHasColor4;
+            this.foregroundColor = zHasColor ? i : -1;
+            this.backgroundColor = zHasColor2 ? i2 : -16777216;
             this.edgeType = z ? i3 : 0;
-            this.edgeColor = hasColor3 ? i4 : -16777216;
-            this.windowColor = hasColor4 ? i5 : 255;
+            this.edgeColor = zHasColor3 ? i4 : -16777216;
+            this.windowColor = zHasColor4 ? i5 : 255;
             this.mRawTypeface = str;
         }
 

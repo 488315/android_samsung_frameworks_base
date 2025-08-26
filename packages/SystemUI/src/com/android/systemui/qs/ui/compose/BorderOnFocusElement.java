@@ -13,7 +13,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BorderOnFocusElement extends ModifierNodeElement<BorderOnFocusNode> {
     public final long color;
@@ -40,27 +39,27 @@ public final class BorderOnFocusElement extends ModifierNodeElement<BorderOnFocu
         BorderOnFocusElement borderOnFocusElement = (BorderOnFocusElement) obj;
         long j = borderOnFocusElement.color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.color, j) && Intrinsics.areEqual(this.cornerSize, borderOnFocusElement.cornerSize) && Dp.m836equalsimpl0(this.strokeWidth, borderOnFocusElement.strokeWidth) && Dp.m836equalsimpl0(this.padding, borderOnFocusElement.padding);
+        return ULong.m3447equalsimpl0(this.color, j) && Intrinsics.areEqual(this.cornerSize, borderOnFocusElement.cornerSize) && Dp.m838equalsimpl0(this.strokeWidth, borderOnFocusElement.strokeWidth) && Dp.m838equalsimpl0(this.padding, borderOnFocusElement.padding);
     }
 
     public final int hashCode() {
         Color.Companion companion = Color.Companion;
         int i = ULong.$r8$clinit;
-        int hashCode = (this.cornerSize.hashCode() + (Long.hashCode(this.color) * 31)) * 31;
+        int iHashCode = (this.cornerSize.hashCode() + (Long.hashCode(this.color) * 31)) * 31;
         Dp.Companion companion2 = Dp.Companion;
-        return Float.hashCode(this.padding) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.strokeWidth, hashCode, 31);
+        return Float.hashCode(this.padding) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.strokeWidth, iHashCode, 31);
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.color);
-        String m837toStringimpl = Dp.m837toStringimpl(this.strokeWidth);
-        String m837toStringimpl2 = Dp.m837toStringimpl(this.padding);
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("BorderOnFocusElement(color=", m462toStringimpl, ", cornerSize=");
-        m.append(this.cornerSize);
-        m.append(", strokeWidth=");
-        m.append(m837toStringimpl);
-        m.append(", padding=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, m837toStringimpl2, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.color);
+        String strM839toStringimpl = Dp.m839toStringimpl(this.strokeWidth);
+        String strM839toStringimpl2 = Dp.m839toStringimpl(this.padding);
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("BorderOnFocusElement(color=", strM464toStringimpl, ", cornerSize=");
+        sbM.append(this.cornerSize);
+        sbM.append(", strokeWidth=");
+        sbM.append(strM839toStringimpl);
+        sbM.append(", padding=");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, strM839toStringimpl2, ")");
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

@@ -7,7 +7,6 @@ import com.samsung.android.knox.AppIdentity;
 import com.samsung.android.knox.net.firewall.Firewall;
 import java.security.InvalidParameterException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FirewallRule implements Parcelable {
     public static final String ADDRESS = "address";
@@ -54,7 +53,6 @@ public class FirewallRule implements Parcelable {
     public String mTargetIp;
     public String mTargetPortNumber;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum RuleType {
         DENY,
         ALLOW,
@@ -62,7 +60,6 @@ public class FirewallRule implements Parcelable {
         REDIRECT_EXCEPTION
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Status {
         DISABLED,
         ENABLED,
@@ -97,20 +94,34 @@ public class FirewallRule implements Parcelable {
         return 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:133:0x016e, code lost:
-    
-        if (r3.equals(getRuleType()) != false) goto L93;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x0170  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean equals(java.lang.Object r6) {
-        /*
-            Method dump skipped, instructions count: 679
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.net.firewall.FirewallRule.equals(java.lang.Object):boolean");
+    public boolean equals(Object obj) {
+        boolean z = false;
+        if (!(obj instanceof FirewallRule)) {
+            return false;
+        }
+        FirewallRule firewallRule = (FirewallRule) obj;
+        boolean z2 = ((firewallRule.getAddressType() == null && getAddressType() == null) || (firewallRule.getAddressType() != null && firewallRule.getAddressType().equals(getAddressType()))) & ((firewallRule.getIpAddress() == null && getIpAddress() == null) || (firewallRule.getIpAddress() != null && firewallRule.getIpAddress().equals(getIpAddress()))) & ((firewallRule.getNetworkInterface() == null && getNetworkInterface() == null) || (firewallRule.getNetworkInterface() != null && firewallRule.getNetworkInterface().equals(getNetworkInterface()))) & ((firewallRule.getStrNetworkInterface() == null && getStrNetworkInterface() == null) || (firewallRule.getStrNetworkInterface() != null && firewallRule.getStrNetworkInterface().equals(getStrNetworkInterface()))) & ((firewallRule.getApplication() == null && getApplication() == null) || (firewallRule.getApplication() != null && getApplication() != null && firewallRule.getApplication().getPackageName() == null && getApplication().getPackageName() == null) || !(firewallRule.getApplication() == null || getApplication() == null || firewallRule.getApplication().getPackageName() == null || !firewallRule.getApplication().getPackageName().equals(getApplication().getPackageName()))) & ((firewallRule.getApplication() != null && getApplication() != null && firewallRule.getApplication().getSignature() == null && getApplication().getSignature() == null) || !(firewallRule.getApplication() == null || getApplication() == null || firewallRule.getApplication().getSignature() == null || !firewallRule.getApplication().getSignature().equals(getApplication().getSignature())));
+        RuleType ruleType = RuleType.DENY;
+        if (!ruleType.equals(firewallRule.getRuleType()) || !ruleType.equals(getRuleType())) {
+            RuleType ruleType2 = RuleType.ALLOW;
+            if (ruleType2.equals(firewallRule.getRuleType()) && ruleType2.equals(getRuleType())) {
+                z2 = z2 & ((firewallRule.getDirection() == null && getDirection() == null) || (firewallRule.getDirection() != null && firewallRule.getDirection().equals(getDirection()))) & ((firewallRule.getPortLocation() == null && getPortLocation() == null) || (firewallRule.getPortLocation() != null && firewallRule.getPortLocation().equals(getPortLocation())));
+            }
+        }
+        boolean z3 = z2 & ((firewallRule.getPortNumber() == null && getPortNumber() == null) || (firewallRule.getPortNumber() != null && firewallRule.getPortNumber().equals(getPortNumber()))) & ((firewallRule.getProtocol() == null && getProtocol() == null) || (firewallRule.getProtocol() != null && firewallRule.getProtocol().equals(getProtocol()))) & ((firewallRule.getRuleType() == null && getRuleType() == null) || (firewallRule.getRuleType() != null && firewallRule.getRuleType().equals(getRuleType()))) & ((firewallRule.getStatus() == null && getStatus() == null) || (firewallRule.getStatus() != null && firewallRule.getStatus().equals(getStatus())));
+        RuleType ruleType3 = RuleType.REDIRECT;
+        if (!ruleType3.equals(firewallRule.getRuleType()) || !ruleType3.equals(getRuleType())) {
+            return z3;
+        }
+        boolean z4 = z3 & ((firewallRule.getTargetIpAddress() == null && getTargetIpAddress() == null) || (firewallRule.getTargetIpAddress() != null && firewallRule.getTargetIpAddress().equals(getTargetIpAddress())));
+        if ((firewallRule.getTargetPortNumber() == null && getTargetPortNumber() == null) || (firewallRule.getTargetPortNumber() != null && firewallRule.getTargetPortNumber().equals(getTargetPortNumber()))) {
+            z = true;
+        }
+        return z4 & z;
     }
 
     public Firewall.AddressType getAddressType() {
@@ -191,31 +202,31 @@ public class FirewallRule implements Parcelable {
 
     public int hashCode() {
         String str = this.mAddress;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         Firewall.AddressType addressType = this.mAddressType;
-        int hashCode2 = (hashCode + (addressType == null ? 0 : addressType.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (addressType == null ? 0 : addressType.hashCode())) * 31;
         Firewall.Direction direction = this.mDirection;
-        int hashCode3 = (((hashCode2 + (direction == null ? 0 : direction.hashCode())) * 31) + this.mId) * 31;
+        int iHashCode3 = (((iHashCode2 + (direction == null ? 0 : direction.hashCode())) * 31) + this.mId) * 31;
         Firewall.NetworkInterface networkInterface = this.mNetworkInterface;
-        int hashCode4 = (hashCode3 + (networkInterface == null ? 0 : networkInterface.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (networkInterface == null ? 0 : networkInterface.hashCode())) * 31;
         AppIdentity appIdentity = this.mAppIdentity;
-        int hashCode5 = (hashCode4 + (appIdentity == null ? 0 : appIdentity.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (appIdentity == null ? 0 : appIdentity.hashCode())) * 31;
         Firewall.PortLocation portLocation = this.mPortLocation;
-        int hashCode6 = (hashCode5 + (portLocation == null ? 0 : portLocation.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (portLocation == null ? 0 : portLocation.hashCode())) * 31;
         String str2 = this.mPortNumber;
-        int hashCode7 = (hashCode6 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (str2 == null ? 0 : str2.hashCode())) * 31;
         Firewall.Protocol protocol = this.mProtocol;
-        int hashCode8 = (hashCode7 + (protocol == null ? 0 : protocol.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (protocol == null ? 0 : protocol.hashCode())) * 31;
         RuleType ruleType = this.mRuleType;
-        int hashCode9 = (hashCode8 + (ruleType == null ? 0 : ruleType.hashCode())) * 31;
+        int iHashCode9 = (iHashCode8 + (ruleType == null ? 0 : ruleType.hashCode())) * 31;
         Status status = this.mStatus;
-        int hashCode10 = (hashCode9 + (status == null ? 0 : status.hashCode())) * 31;
+        int iHashCode10 = (iHashCode9 + (status == null ? 0 : status.hashCode())) * 31;
         String str3 = this.mTargetIp;
-        int hashCode11 = (hashCode10 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode11 = (iHashCode10 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.mTargetPortNumber;
-        int hashCode12 = (hashCode11 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode12 = (iHashCode11 + (str4 == null ? 0 : str4.hashCode())) * 31;
         String str5 = this.mStrNetworkInterface;
-        return hashCode12 + (str5 != null ? str5.hashCode() : 0);
+        return iHashCode12 + (str5 != null ? str5.hashCode() : 0);
     }
 
     public void setApplication(AppIdentity appIdentity) {
@@ -328,8 +339,8 @@ public class FirewallRule implements Parcelable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        int ordinal = this.mRuleType.ordinal();
-        if (ordinal == 0 || ordinal == 1) {
+        int iOrdinal = this.mRuleType.ordinal();
+        if (iOrdinal == 0 || iOrdinal == 1) {
             sb.append("\nIP Address: " + getIpAddress());
             sb.append("\nPort Number: " + getPortNumber());
             sb.append("\nPort Location: " + getPortLocation());
@@ -343,7 +354,7 @@ public class FirewallRule implements Parcelable {
             sb.append("\nDirection: " + getDirection());
             sb.append("\nProtocol: " + getProtocol());
             sb.append("\nAddress Type: " + getAddressType() + "\n");
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             sb.append("\nSource IP Address: " + getIpAddress());
             sb.append("\nSource Port Number: " + getPortNumber());
             sb.append("\nTarget IP Address: " + getTargetIpAddress());
@@ -357,7 +368,7 @@ public class FirewallRule implements Parcelable {
             }
             sb.append("\nProtocol: " + getProtocol() + "\n");
             sb.append("\nAddress Type: " + getAddressType() + "\n");
-        } else if (ordinal == 3) {
+        } else if (iOrdinal == 3) {
             sb.append("\nIP Address: " + getIpAddress());
             sb.append("\nPort Number: " + getPortNumber());
             sb.append("\nPackage Name: " + getApplication().getPackageName());

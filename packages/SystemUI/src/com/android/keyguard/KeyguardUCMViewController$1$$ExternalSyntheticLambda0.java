@@ -3,11 +3,9 @@ package com.android.keyguard;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import com.android.keyguard.KeyguardUCMViewController;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardUCMViewController$1$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
@@ -25,19 +23,13 @@ public final /* synthetic */ class KeyguardUCMViewController$1$$ExternalSyntheti
 
     @Override // java.lang.Runnable
     public final void run() {
-        View view;
-        View view2;
-        View view3;
-        View view4;
-        View view5;
         switch (this.$r8$classId) {
             case 0:
                 KeyguardUCMViewController.AnonymousClass1 anonymousClass1 = (KeyguardUCMViewController.AnonymousClass1) this.f$0;
                 int i = this.f$1;
                 int i2 = this.f$2;
                 Bundle bundle = this.f$3;
-                view = ((ViewController) KeyguardUCMViewController.this).mView;
-                ((KeyguardUCMView) view).resetPasswordText(true, true);
+                ((KeyguardUCMView) ((ViewController) KeyguardUCMViewController.this).mView).resetPasswordText(true, true);
                 Log.d("KeyguardUCMPinView", "verifyPINAndUnlock : " + i);
                 if (KeyguardUCMViewController.this.mUnlockProgressDialog != null) {
                     Log.d("KeyguardUCMPinView", "mUnlockProgressDialog != null");
@@ -50,8 +42,7 @@ public final /* synthetic */ class KeyguardUCMViewController$1$$ExternalSyntheti
                 }
                 KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
                 keyguardUCMViewController.mCheckUcmPinThread = null;
-                view2 = ((ViewController) keyguardUCMViewController).mView;
-                ((KeyguardUCMView) view2).setKeepScreenOn(false);
+                ((KeyguardUCMView) ((ViewController) keyguardUCMViewController).mView).setKeepScreenOn(false);
                 KeyguardUCMViewController.this.mUnlockOngoing = false;
                 break;
             default:
@@ -59,13 +50,11 @@ public final /* synthetic */ class KeyguardUCMViewController$1$$ExternalSyntheti
                 int i3 = this.f$1;
                 int i4 = this.f$2;
                 Bundle bundle2 = this.f$3;
-                view3 = ((ViewController) KeyguardUCMViewController.this).mView;
-                ((KeyguardUCMView) view3).resetPasswordText(true, true);
+                ((KeyguardUCMView) ((ViewController) KeyguardUCMViewController.this).mView).resetPasswordText(true, true);
                 ProgressDialog progressDialog = KeyguardUCMViewController.this.mUnlockProgressDialog;
                 if (progressDialog != null) {
                     progressDialog.hide();
-                    view5 = ((ViewController) KeyguardUCMViewController.this).mView;
-                    ((KeyguardUCMView) view5).setKeepScreenOn(false);
+                    ((KeyguardUCMView) ((ViewController) KeyguardUCMViewController.this).mView).setKeepScreenOn(false);
                     KeyguardUCMViewController.this.mUnlockProgressDialog = null;
                 }
                 KeyguardUCMViewController.this.mStateMachine.setStateAndRefreshUIIfNeeded(i3, i4, false, bundle2);
@@ -74,8 +63,7 @@ public final /* synthetic */ class KeyguardUCMViewController$1$$ExternalSyntheti
                 }
                 KeyguardUCMViewController keyguardUCMViewController2 = KeyguardUCMViewController.this;
                 keyguardUCMViewController2.mCheckUcmPukThread = null;
-                view4 = ((ViewController) keyguardUCMViewController2).mView;
-                ((KeyguardUCMView) view4).setKeepScreenOn(false);
+                ((KeyguardUCMView) ((ViewController) keyguardUCMViewController2).mView).setKeepScreenOn(false);
                 KeyguardUCMViewController.this.mUnlockOngoing = false;
                 break;
         }

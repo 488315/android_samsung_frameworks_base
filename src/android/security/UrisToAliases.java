@@ -17,10 +17,10 @@ public final class UrisToAliases implements Parcelable {
     public static final Parcelable.Creator<UrisToAliases> CREATOR = new Parcelable.Creator<UrisToAliases>() { // from class: android.security.UrisToAliases.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public UrisToAliases createFromParcel(Parcel parcel) {
-            HashMap hashMap = new HashMap();
-            parcel.readMap(hashMap, String.class.getClassLoader());
-            return new UrisToAliases(hashMap);
+        public UrisToAliases createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
+            HashMap map = new HashMap();
+            parcel.readMap(map, String.class.getClassLoader());
+            return new UrisToAliases(map);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -55,8 +55,8 @@ public final class UrisToAliases implements Parcelable {
         this.mUrisToAliases.put(uri, str);
     }
 
-    public static UrisToAliases readFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
-        HashMap hashMap = new HashMap();
+    public static UrisToAliases readFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+        HashMap map = new HashMap();
         int depth = xmlPullParser.getDepth();
         while (true) {
             int next = xmlPullParser.next();
@@ -64,13 +64,13 @@ public final class UrisToAliases implements Parcelable {
                 break;
             }
             if (next != 3 && next != 4 && xmlPullParser.getName().equals(KEY_AUTHENTICATION_POLICY_URI_TO_ALIAS)) {
-                hashMap.put(Uri.parse(xmlPullParser.getAttributeValue(null, KEY_AUTHENTICATION_POLICY_URI)), xmlPullParser.getAttributeValue(null, KEY_AUTHENTICATION_POLICY_ALIAS));
+                map.put(Uri.parse(xmlPullParser.getAttributeValue(null, KEY_AUTHENTICATION_POLICY_URI)), xmlPullParser.getAttributeValue(null, KEY_AUTHENTICATION_POLICY_ALIAS));
             }
         }
-        return new UrisToAliases(hashMap);
+        return new UrisToAliases(map);
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         for (Map.Entry<Uri, String> entry : this.mUrisToAliases.entrySet()) {
             xmlSerializer.startTag(null, KEY_AUTHENTICATION_POLICY_URI_TO_ALIAS);
             xmlSerializer.attribute(null, KEY_AUTHENTICATION_POLICY_URI, entry.getKey().toString());

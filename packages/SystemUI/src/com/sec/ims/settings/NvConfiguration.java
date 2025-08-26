@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import com.sec.ims.configuration.DATA;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NvConfiguration {
     public static final String LOG_TAG = "NvConfiguration";
@@ -16,40 +15,40 @@ public class NvConfiguration {
     }
 
     public static String get(Context context, String str, String str2) {
-        Cursor query = context.getContentResolver().query(URI, new String[]{str}, null, null, null);
-        if (query == null) {
-            if (query != null) {
-                query.close();
+        Cursor cursorQuery = context.getContentResolver().query(URI, new String[]{str}, null, null, null);
+        if (cursorQuery == null) {
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return str2;
         }
         try {
-            if (query.moveToFirst()) {
-                str2 = query.getString(1);
+            if (cursorQuery.moveToFirst()) {
+                str2 = cursorQuery.getString(1);
             }
-            query.close();
+            cursorQuery.close();
             return str2;
         } finally {
         }
     }
 
     public static ContentValues getAll(Context context) {
-        Cursor query = context.getContentResolver().query(URI, null, null, null, null);
+        Cursor cursorQuery = context.getContentResolver().query(URI, null, null, null, null);
         ContentValues contentValues = null;
-        if (query == null) {
-            if (query != null) {
-                query.close();
+        if (cursorQuery == null) {
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         }
         try {
-            if (query.moveToFirst()) {
+            if (cursorQuery.moveToFirst()) {
                 contentValues = new ContentValues();
                 do {
-                    contentValues.put(query.getString(0), query.getString(1));
-                } while (query.moveToNext());
+                    contentValues.put(cursorQuery.getString(0), cursorQuery.getString(1));
+                } while (cursorQuery.moveToNext());
             }
-            query.close();
+            cursorQuery.close();
             return contentValues;
         } finally {
         }
@@ -82,18 +81,18 @@ public class NvConfiguration {
     }
 
     public static String get(Context context, String str, String str2, int i) {
-        Cursor query = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
-        if (query == null) {
-            if (query != null) {
-                query.close();
+        Cursor cursorQuery = context.getContentResolver().query(URI.buildUpon().fragment("simslot" + i).build(), new String[]{str}, null, null, null);
+        if (cursorQuery == null) {
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return str2;
         }
         try {
-            if (query.moveToFirst()) {
-                str2 = query.getString(1);
+            if (cursorQuery.moveToFirst()) {
+                str2 = cursorQuery.getString(1);
             }
-            query.close();
+            cursorQuery.close();
             return str2;
         } finally {
         }

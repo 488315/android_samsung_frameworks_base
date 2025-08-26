@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryImpl$subscriptions$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -44,11 +43,11 @@ final class MobileConnectionsRepositoryImpl$subscriptions$2 extends SuspendLambd
         ResultKt.throwOnFailure(obj);
         MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = this.this$0;
         for (Map.Entry entry : mobileConnectionsRepositoryImpl.subIdRepositoryCache.entrySet()) {
-            int intValue = ((Number) entry.getKey()).intValue();
+            int iIntValue = ((Number) entry.getKey()).intValue();
             FullMobileConnectionRepository fullMobileConnectionRepository = (FullMobileConnectionRepository) ((WeakReference) entry.getValue()).get();
             if (fullMobileConnectionRepository != null) {
                 Integer num = (Integer) mobileConnectionsRepositoryImpl.carrierMergedSubId.$$delegate_0.getValue();
-                fullMobileConnectionRepository._isCarrierMerged.updateState(null, Boolean.valueOf(num != null && intValue == num.intValue()));
+                fullMobileConnectionRepository._isCarrierMerged.updateState(null, Boolean.valueOf(num != null && iIntValue == num.intValue()));
             }
         }
         return Unit.INSTANCE;

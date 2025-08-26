@@ -8,7 +8,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Device implements Parcelable {
     public static final Parcelable.Creator<Device> CREATOR = new Creator();
@@ -20,7 +19,6 @@ public final class Device implements Parcelable {
     public final String roomId;
     public final String roomName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -71,10 +69,10 @@ public final class Device implements Parcelable {
         String str5 = this.locationName;
         String str6 = this.roomId;
         String str7 = this.roomName;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Device(deviceId=", str, ", deviceName=", str2, ", iconUrl=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, str3, ", locationId=", str4, ", locationName=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, str5, ", roomId=", str6, ", roomName=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, str7, ")");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Device(deviceId=", str, ", deviceName=", str2, ", iconUrl=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, str3, ", locationId=", str4, ", locationName=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, str5, ", roomId=", str6, ", roomName=");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, str7, ")");
     }
 
     @Override // android.os.Parcelable

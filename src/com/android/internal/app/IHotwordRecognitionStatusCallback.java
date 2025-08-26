@@ -135,9 +135,9 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHotwordRecognitionStatusCallback)) {
-                return (IHotwordRecognitionStatusCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHotwordRecognitionStatusCallback)) {
+                return (IHotwordRecognitionStatusCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -227,9 +227,9 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
                     onSoundTriggerFailure(soundTriggerFailure);
                     return true;
                 case 8:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onUnknownFailure(readString);
+                    onUnknownFailure(string);
                     return true;
                 case 9:
                     onRecognitionPaused();
@@ -238,18 +238,18 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
                     onRecognitionResumed();
                     return true;
                 case 11:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onStatusReported(readInt);
+                    onStatusReported(i3);
                     return true;
                 case 12:
                     onProcessRestarted();
                     return true;
                 case 13:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onOpenFile(readString2, androidFuture);
+                    onOpenFile(string2, androidFuture);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -274,156 +274,156 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent, HotwordDetectedResult hotwordDetectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(keyphraseRecognitionEvent, 0);
-                    obtain.writeTypedObject(hotwordDetectedResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyphraseRecognitionEvent, 0);
+                    parcelObtain.writeTypedObject(hotwordDetectedResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult hotwordDetectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(hotwordDetectedResult, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotwordDetectedResult, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(genericRecognitionEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(genericRecognitionEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onRejected(HotwordRejectedResult hotwordRejectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(hotwordRejectedResult, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotwordRejectedResult, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(hotwordDetectionServiceFailure, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotwordDetectionServiceFailure, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(visualQueryDetectionServiceFailure, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(visualQueryDetectionServiceFailure, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(soundTriggerFailure, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(soundTriggerFailure, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onUnknownFailure(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onRecognitionPaused() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onRecognitionResumed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onStatusReported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onProcessRestarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
             public void onOpenFile(String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

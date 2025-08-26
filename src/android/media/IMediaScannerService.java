@@ -52,9 +52,9 @@ public interface IMediaScannerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaScannerService)) {
-                return (IMediaScannerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaScannerService)) {
+                return (IMediaScannerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,17 +84,17 @@ public interface IMediaScannerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                IMediaScannerListener asInterface = IMediaScannerListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                IMediaScannerListener iMediaScannerListenerAsInterface = IMediaScannerListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                requestScanFile(readString, readString2, asInterface);
+                requestScanFile(string, string2, iMediaScannerListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                scanFile(readString3, readString4);
+                scanFile(string3, string4);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -120,34 +120,34 @@ public interface IMediaScannerService extends IInterface {
 
             @Override // android.media.IMediaScannerService
             public void requestScanFile(String str, String str2, IMediaScannerListener iMediaScannerListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iMediaScannerListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iMediaScannerListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaScannerService
             public void scanFile(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

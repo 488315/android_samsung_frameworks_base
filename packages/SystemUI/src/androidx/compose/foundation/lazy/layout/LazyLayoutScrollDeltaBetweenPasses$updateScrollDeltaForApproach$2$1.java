@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LazyLayoutScrollDeltaBetweenPasses$updateScrollDeltaForApproach$2$1 extends SuspendLambda implements Function2 {
     int label;
@@ -42,9 +41,9 @@ final class LazyLayoutScrollDeltaBetweenPasses$updateScrollDeltaForApproach$2$1 
             ResultKt.throwOnFailure(obj);
             AnimationState animationState = this.this$0._scrollDeltaBetweenPasses;
             Float f = new Float(0.0f);
-            SpringSpec spring$default = AnimationSpecKt.spring$default(0.0f, 400.0f, new Float(0.5f), 1);
+            SpringSpec springSpecSpring$default = AnimationSpecKt.spring$default(0.0f, 400.0f, new Float(0.5f), 1);
             this.label = 1;
-            if (SuspendAnimationKt.animateTo$default(animationState, f, spring$default, true, null, this, 8) == coroutineSingletons) {
+            if (SuspendAnimationKt.animateTo$default(animationState, f, springSpecSpring$default, true, null, this, 8) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

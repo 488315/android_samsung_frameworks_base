@@ -57,14 +57,14 @@ public class SystemService {
     }
 
     public static void waitForState(String str, State state, long j) throws TimeoutException {
-        long elapsedRealtime = SystemClock.elapsedRealtime() + j;
+        long jElapsedRealtime = SystemClock.elapsedRealtime() + j;
         while (true) {
             synchronized (sPropertyLock) {
                 State state2 = getState(str);
                 if (state.equals(state2)) {
                     return;
                 }
-                if (SystemClock.elapsedRealtime() >= elapsedRealtime) {
+                if (SystemClock.elapsedRealtime() >= jElapsedRealtime) {
                     throw new TimeoutException("Service " + str + " currently " + state2 + "; waited " + j + "ms for " + state);
                 }
                 try {

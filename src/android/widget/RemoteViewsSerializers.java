@@ -80,9 +80,9 @@ public class RemoteViewsSerializers {
 
     public static void writeIconToProto(ProtoOutputStream protoOutputStream, Resources resources, Icon icon) {
         if (icon.getTintList() != null) {
-            long start = protoOutputStream.start(1146756268034L);
+            long jStart = protoOutputStream.start(1146756268034L);
             icon.getTintList().writeToProto(protoOutputStream);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
         protoOutputStream.write(1120986464257L, BlendMode.toValue(icon.getTintBlendMode()));
         switch (icon.getType()) {
@@ -122,13 +122,13 @@ public class RemoteViewsSerializers {
                     longSparseArray.put(1120986464257L, Integer.valueOf(protoInputStream.readInt(1120986464257L)));
                     break;
                 case 2:
-                    long start = protoInputStream.start(1146756268034L);
+                    long jStart = protoInputStream.start(1146756268034L);
                     longSparseArray.put(1146756268034L, ColorStateList.createFromProto(protoInputStream));
-                    protoInputStream.end(start);
+                    protoInputStream.end(jStart);
                     break;
                 case 3:
-                    byte[] readBytes = protoInputStream.readBytes(1151051235331L);
-                    longSparseArray.put(1151051235331L, BitmapFactory.decodeByteArray(readBytes, 0, readBytes.length));
+                    byte[] bytes = protoInputStream.readBytes(1151051235331L);
+                    longSparseArray.put(1151051235331L, BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                     break;
                 case 4:
                     longSparseArray.put(1138166333444L, protoInputStream.readString(1138166333444L));
@@ -143,8 +143,8 @@ public class RemoteViewsSerializers {
                     longSparseArray.put(1138166333447L, protoInputStream.readString(1138166333447L));
                     break;
                 case 8:
-                    byte[] readBytes2 = protoInputStream.readBytes(1151051235336L);
-                    longSparseArray.put(1151051235336L, BitmapFactory.decodeByteArray(readBytes2, 0, readBytes2.length));
+                    byte[] bytes2 = protoInputStream.readBytes(1151051235336L);
+                    longSparseArray.put(1151051235336L, BitmapFactory.decodeByteArray(bytes2, 0, bytes2.length));
                     break;
                 default:
                     Log.w(TAG, "Unhandled field while reading Icon proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
@@ -154,14 +154,14 @@ public class RemoteViewsSerializers {
         return new Function() { // from class: android.widget.RemoteViewsSerializers$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return RemoteViewsSerializers.lambda$createIconFromProto$0(LongSparseArray.this, (Resources) obj);
+                return RemoteViewsSerializers.lambda$createIconFromProto$0(longSparseArray, (Resources) obj);
             }
         };
     }
 
     static /* synthetic */ Icon lambda$createIconFromProto$0(LongSparseArray longSparseArray, Resources resources) {
-        Icon createWithAdaptiveBitmapContentUri;
-        int intValue = ((Integer) longSparseArray.get(1120986464257L, -1)).intValue();
+        Icon iconCreateWithAdaptiveBitmapContentUri;
+        int iIntValue = ((Integer) longSparseArray.get(1120986464257L, -1)).intValue();
         ColorStateList colorStateList = (ColorStateList) longSparseArray.get(1146756268034L);
         Bitmap bitmap = (Bitmap) longSparseArray.get(1151051235331L);
         Bitmap bitmap2 = (Bitmap) longSparseArray.get(1151051235336L);
@@ -171,28 +171,28 @@ public class RemoteViewsSerializers {
         String str2 = (String) longSparseArray.get(1138166333446L);
         String str3 = (String) longSparseArray.get(1138166333447L);
         if (bitmap != null) {
-            createWithAdaptiveBitmapContentUri = Icon.createWithBitmap(bitmap);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithBitmap(bitmap);
         } else if (bitmap2 != null) {
-            createWithAdaptiveBitmapContentUri = Icon.createWithAdaptiveBitmap(bitmap2);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithAdaptiveBitmap(bitmap2);
         } else if (identifier != -1) {
-            createWithAdaptiveBitmapContentUri = Icon.createWithResource(resources, identifier);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithResource(resources, identifier);
         } else if (bArr != null) {
-            createWithAdaptiveBitmapContentUri = Icon.createWithData(bArr, 0, bArr.length);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithData(bArr, 0, bArr.length);
         } else if (str2 != null) {
-            createWithAdaptiveBitmapContentUri = Icon.createWithContentUri(str2);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithContentUri(str2);
         } else {
             if (str3 == null) {
                 return null;
             }
-            createWithAdaptiveBitmapContentUri = Icon.createWithAdaptiveBitmapContentUri(str3);
+            iconCreateWithAdaptiveBitmapContentUri = Icon.createWithAdaptiveBitmapContentUri(str3);
         }
         if (colorStateList != null) {
-            createWithAdaptiveBitmapContentUri.setTintList(colorStateList);
+            iconCreateWithAdaptiveBitmapContentUri.setTintList(colorStateList);
         }
-        if (intValue != -1) {
-            createWithAdaptiveBitmapContentUri.setTintBlendMode(BlendMode.fromValue(intValue));
+        if (iIntValue != -1) {
+            iconCreateWithAdaptiveBitmapContentUri.setTintBlendMode(BlendMode.fromValue(iIntValue));
         }
-        return createWithAdaptiveBitmapContentUri;
+        return iconCreateWithAdaptiveBitmapContentUri;
     }
 
     public static void writeCharSequenceToProto(ProtoOutputStream protoOutputStream, CharSequence charSequence) {
@@ -201,132 +201,132 @@ public class RemoteViewsSerializers {
             Spanned spanned = (Spanned) charSequence;
             for (Object obj : spanned.getSpans(0, charSequence.length(), Object.class)) {
                 Object underlying = obj instanceof CharacterStyle ? ((CharacterStyle) obj).getUnderlying() : obj;
-                long start = protoOutputStream.start(2246267895810L);
+                long jStart = protoOutputStream.start(2246267895810L);
                 protoOutputStream.write(1120986464257L, spanned.getSpanStart(obj));
                 protoOutputStream.write(1120986464258L, spanned.getSpanEnd(obj));
                 protoOutputStream.write(1120986464259L, spanned.getSpanFlags(obj));
                 if (underlying instanceof AbsoluteSizeSpan) {
-                    long start2 = protoOutputStream.start(2246267895812L);
+                    long jStart2 = protoOutputStream.start(2246267895812L);
                     writeAbsoluteSizeSpanToProto(protoOutputStream, (AbsoluteSizeSpan) underlying);
-                    protoOutputStream.end(start2);
+                    protoOutputStream.end(jStart2);
                 } else if (underlying instanceof AccessibilityClickableSpan) {
-                    long start3 = protoOutputStream.start(2246267895813L);
+                    long jStart3 = protoOutputStream.start(2246267895813L);
                     writeAccessibilityClickableSpanToProto(protoOutputStream, (AccessibilityClickableSpan) underlying);
-                    protoOutputStream.end(start3);
+                    protoOutputStream.end(jStart3);
                 } else if (underlying instanceof AccessibilityReplacementSpan) {
-                    long start4 = protoOutputStream.start(2246267895814L);
+                    long jStart4 = protoOutputStream.start(2246267895814L);
                     writeAccessibilityReplacementSpanToProto(protoOutputStream, (AccessibilityReplacementSpan) underlying);
-                    protoOutputStream.end(start4);
+                    protoOutputStream.end(jStart4);
                 } else if (underlying instanceof AccessibilityURLSpan) {
-                    long start5 = protoOutputStream.start(2246267895815L);
+                    long jStart5 = protoOutputStream.start(2246267895815L);
                     writeAccessibilityURLSpanToProto(protoOutputStream, (AccessibilityURLSpan) underlying);
-                    protoOutputStream.end(start5);
+                    protoOutputStream.end(jStart5);
                 } else if (underlying instanceof Annotation) {
-                    long start6 = protoOutputStream.start(2246267895817L);
+                    long jStart6 = protoOutputStream.start(2246267895817L);
                     writeAnnotationToProto(protoOutputStream, (Annotation) underlying);
-                    protoOutputStream.end(start6);
+                    protoOutputStream.end(jStart6);
                 } else if (underlying instanceof BackgroundColorSpan) {
-                    long start7 = protoOutputStream.start(2246267895818L);
+                    long jStart7 = protoOutputStream.start(2246267895818L);
                     writeBackgroundColorSpanToProto(protoOutputStream, (BackgroundColorSpan) underlying);
-                    protoOutputStream.end(start7);
+                    protoOutputStream.end(jStart7);
                 } else if (underlying instanceof BulletSpan) {
-                    long start8 = protoOutputStream.start(2246267895819L);
+                    long jStart8 = protoOutputStream.start(2246267895819L);
                     writeBulletSpanToProto(protoOutputStream, (BulletSpan) underlying);
-                    protoOutputStream.end(start8);
+                    protoOutputStream.end(jStart8);
                 } else if (underlying instanceof EasyEditSpan) {
-                    long start9 = protoOutputStream.start(2246267895820L);
+                    long jStart9 = protoOutputStream.start(2246267895820L);
                     writeEasyEditSpanToProto(protoOutputStream, (EasyEditSpan) underlying);
-                    protoOutputStream.end(start9);
+                    protoOutputStream.end(jStart9);
                 } else if (underlying instanceof ForegroundColorSpan) {
-                    long start10 = protoOutputStream.start(2246267895821L);
+                    long jStart10 = protoOutputStream.start(2246267895821L);
                     writeForegroundColorSpanToProto(protoOutputStream, (ForegroundColorSpan) underlying);
-                    protoOutputStream.end(start10);
+                    protoOutputStream.end(jStart10);
                 } else if (Flags.noBreakNoHyphenationSpan() && (underlying instanceof LineBreakConfigSpan)) {
-                    long start11 = protoOutputStream.start(2246267895824L);
+                    long jStart11 = protoOutputStream.start(2246267895824L);
                     writeLineBreakConfigSpanToProto(protoOutputStream, (LineBreakConfigSpan) underlying);
-                    protoOutputStream.end(start11);
+                    protoOutputStream.end(jStart11);
                 } else if (underlying instanceof LocaleSpan) {
-                    long start12 = protoOutputStream.start(2246267895826L);
+                    long jStart12 = protoOutputStream.start(2246267895826L);
                     writeLocaleSpanToProto(protoOutputStream, (LocaleSpan) underlying);
-                    protoOutputStream.end(start12);
+                    protoOutputStream.end(jStart12);
                 } else if (underlying instanceof QuoteSpan) {
-                    long start13 = protoOutputStream.start(2246267895827L);
+                    long jStart13 = protoOutputStream.start(2246267895827L);
                     writeQuoteSpanToProto(protoOutputStream, (QuoteSpan) underlying);
-                    protoOutputStream.end(start13);
+                    protoOutputStream.end(jStart13);
                 } else if (underlying instanceof RelativeSizeSpan) {
-                    long start14 = protoOutputStream.start(2246267895828L);
+                    long jStart14 = protoOutputStream.start(2246267895828L);
                     writeRelativeSizeSpanToProto(protoOutputStream, (RelativeSizeSpan) underlying);
-                    protoOutputStream.end(start14);
+                    protoOutputStream.end(jStart14);
                 } else if (underlying instanceof ScaleXSpan) {
-                    long start15 = protoOutputStream.start(2246267895829L);
+                    long jStart15 = protoOutputStream.start(2246267895829L);
                     writeScaleXSpanToProto(protoOutputStream, (ScaleXSpan) underlying);
-                    protoOutputStream.end(start15);
+                    protoOutputStream.end(jStart15);
                 } else if (underlying instanceof SpellCheckSpan) {
-                    long start16 = protoOutputStream.start(2246267895830L);
+                    long jStart16 = protoOutputStream.start(2246267895830L);
                     writeSpellCheckSpanToProto(protoOutputStream, (SpellCheckSpan) underlying);
-                    protoOutputStream.end(start16);
+                    protoOutputStream.end(jStart16);
                 } else if (underlying instanceof LineBackgroundSpan.Standard) {
-                    long start17 = protoOutputStream.start(2246267895823L);
+                    long jStart17 = protoOutputStream.start(2246267895823L);
                     writeLineBackgroundSpanStandardToProto(protoOutputStream, (LineBackgroundSpan.Standard) underlying);
-                    protoOutputStream.end(start17);
+                    protoOutputStream.end(jStart17);
                 } else if (underlying instanceof LineHeightSpan.Standard) {
-                    long start18 = protoOutputStream.start(2246267895825L);
+                    long jStart18 = protoOutputStream.start(2246267895825L);
                     writeLineHeightSpanStandardToProto(protoOutputStream, (LineHeightSpan.Standard) underlying);
-                    protoOutputStream.end(start18);
+                    protoOutputStream.end(jStart18);
                 } else if (underlying instanceof LeadingMarginSpan.Standard) {
-                    long start19 = protoOutputStream.start(2246267895822L);
+                    long jStart19 = protoOutputStream.start(2246267895822L);
                     writeLeadingMarginSpanStandardToProto(protoOutputStream, (LeadingMarginSpan.Standard) underlying);
-                    protoOutputStream.end(start19);
+                    protoOutputStream.end(jStart19);
                 } else if (underlying instanceof AlignmentSpan.Standard) {
-                    long start20 = protoOutputStream.start(2246267895816L);
+                    long jStart20 = protoOutputStream.start(2246267895816L);
                     writeAlignmentSpanStandardToProto(protoOutputStream, (AlignmentSpan.Standard) underlying);
-                    protoOutputStream.end(start20);
+                    protoOutputStream.end(jStart20);
                 } else if (underlying instanceof StrikethroughSpan) {
-                    long start21 = protoOutputStream.start(2246267895831L);
+                    long jStart21 = protoOutputStream.start(2246267895831L);
                     writeStrikethroughSpanToProto(protoOutputStream, (StrikethroughSpan) underlying);
-                    protoOutputStream.end(start21);
+                    protoOutputStream.end(jStart21);
                 } else if (underlying instanceof StyleSpan) {
-                    long start22 = protoOutputStream.start(2246267895832L);
+                    long jStart22 = protoOutputStream.start(2246267895832L);
                     writeStyleSpanToProto(protoOutputStream, (StyleSpan) underlying);
-                    protoOutputStream.end(start22);
+                    protoOutputStream.end(jStart22);
                 } else if (underlying instanceof SubscriptSpan) {
-                    long start23 = protoOutputStream.start(2246267895833L);
+                    long jStart23 = protoOutputStream.start(2246267895833L);
                     writeSubscriptSpanToProto(protoOutputStream, (SubscriptSpan) underlying);
-                    protoOutputStream.end(start23);
+                    protoOutputStream.end(jStart23);
                 } else if (underlying instanceof SuggestionRangeSpan) {
-                    long start24 = protoOutputStream.start(2246267895835L);
+                    long jStart24 = protoOutputStream.start(2246267895835L);
                     writeSuggestionRangeSpanToProto(protoOutputStream, (SuggestionRangeSpan) underlying);
-                    protoOutputStream.end(start24);
+                    protoOutputStream.end(jStart24);
                 } else if (underlying instanceof SuggestionSpan) {
-                    long start25 = protoOutputStream.start(2246267895834L);
+                    long jStart25 = protoOutputStream.start(2246267895834L);
                     writeSuggestionSpanToProto(protoOutputStream, (SuggestionSpan) underlying);
-                    protoOutputStream.end(start25);
+                    protoOutputStream.end(jStart25);
                 } else if (underlying instanceof SuperscriptSpan) {
-                    long start26 = protoOutputStream.start(2246267895836L);
+                    long jStart26 = protoOutputStream.start(2246267895836L);
                     writeSuperscriptSpanToProto(protoOutputStream, (SuperscriptSpan) underlying);
-                    protoOutputStream.end(start26);
+                    protoOutputStream.end(jStart26);
                 } else if (underlying instanceof TextAppearanceSpan) {
-                    long start27 = protoOutputStream.start(2246267895837L);
+                    long jStart27 = protoOutputStream.start(2246267895837L);
                     writeTextAppearanceSpanToProto(protoOutputStream, (TextAppearanceSpan) underlying);
-                    protoOutputStream.end(start27);
+                    protoOutputStream.end(jStart27);
                 } else if (underlying instanceof TtsSpan) {
-                    long start28 = protoOutputStream.start(2246267895838L);
+                    long jStart28 = protoOutputStream.start(2246267895838L);
                     writeTtsSpanToProto(protoOutputStream, (TtsSpan) underlying);
-                    protoOutputStream.end(start28);
+                    protoOutputStream.end(jStart28);
                 } else if (underlying instanceof TypefaceSpan) {
-                    long start29 = protoOutputStream.start(2246267895839L);
+                    long jStart29 = protoOutputStream.start(2246267895839L);
                     writeTypefaceSpanToProto(protoOutputStream, (TypefaceSpan) underlying);
-                    protoOutputStream.end(start29);
+                    protoOutputStream.end(jStart29);
                 } else if (underlying instanceof URLSpan) {
-                    long start30 = protoOutputStream.start(2246267895841L);
+                    long jStart30 = protoOutputStream.start(2246267895841L);
                     writeURLSpanToProto(protoOutputStream, (URLSpan) underlying);
-                    protoOutputStream.end(start30);
+                    protoOutputStream.end(jStart30);
                 } else if (underlying instanceof UnderlineSpan) {
-                    long start31 = protoOutputStream.start(2246267895840L);
+                    long jStart31 = protoOutputStream.start(2246267895840L);
                     writeUnderlineSpanToProto(protoOutputStream, (UnderlineSpan) underlying);
-                    protoOutputStream.end(start31);
+                    protoOutputStream.end(jStart31);
                 }
-                protoOutputStream.end(start);
+                protoOutputStream.end(jStart);
             }
         }
     }
@@ -339,9 +339,9 @@ public class RemoteViewsSerializers {
             if (fieldNumber == 1) {
                 spannableStringBuilder.append((CharSequence) protoInputStream.readString(1138166333441L));
             } else if (fieldNumber == 2) {
-                long start = protoInputStream.start(2246267895810L);
+                long jStart = protoInputStream.start(2246267895810L);
                 createSpanFromProto(protoInputStream, spannableStringBuilder);
-                protoInputStream.end(start);
+                protoInputStream.end(jStart);
                 z = true;
             } else {
                 Log.w(TAG, "Unhandled field while reading CharSequence proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
@@ -351,7 +351,7 @@ public class RemoteViewsSerializers {
     }
 
     private static void createSpanFromProto(ProtoInputStream protoInputStream, SpannableStringBuilder spannableStringBuilder) throws Exception {
-        Object createAbsoluteSizeSpanFromProto;
+        Object objCreateAbsoluteSizeSpanFromProto;
         int i = 0;
         int i2 = 0;
         Object obj = null;
@@ -368,164 +368,162 @@ public class RemoteViewsSerializers {
                     i2 = protoInputStream.readInt(1120986464259L);
                     continue;
                 case 4:
-                    long start = protoInputStream.start(2246267895812L);
-                    createAbsoluteSizeSpanFromProto = createAbsoluteSizeSpanFromProto(protoInputStream);
-                    protoInputStream.end(start);
+                    long jStart = protoInputStream.start(2246267895812L);
+                    objCreateAbsoluteSizeSpanFromProto = createAbsoluteSizeSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart);
                     break;
                 case 5:
-                    long start2 = protoInputStream.start(2246267895813L);
-                    createAbsoluteSizeSpanFromProto = createAccessibilityClickableSpanFromProto(protoInputStream);
-                    protoInputStream.end(start2);
+                    long jStart2 = protoInputStream.start(2246267895813L);
+                    objCreateAbsoluteSizeSpanFromProto = createAccessibilityClickableSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart2);
                     break;
                 case 6:
-                    long start3 = protoInputStream.start(2246267895814L);
-                    createAbsoluteSizeSpanFromProto = createAccessibilityReplacementSpanFromProto(protoInputStream);
-                    protoInputStream.end(start3);
+                    long jStart3 = protoInputStream.start(2246267895814L);
+                    objCreateAbsoluteSizeSpanFromProto = createAccessibilityReplacementSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart3);
                     break;
                 case 7:
-                    long start4 = protoInputStream.start(2246267895815L);
-                    createAbsoluteSizeSpanFromProto = createAccessibilityURLSpanFromProto(protoInputStream);
-                    protoInputStream.end(start4);
+                    long jStart4 = protoInputStream.start(2246267895815L);
+                    objCreateAbsoluteSizeSpanFromProto = createAccessibilityURLSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart4);
                     break;
                 case 8:
-                    long start5 = protoInputStream.start(2246267895816L);
-                    createAbsoluteSizeSpanFromProto = createAlignmentSpanStandardFromProto(protoInputStream);
-                    protoInputStream.end(start5);
+                    long jStart5 = protoInputStream.start(2246267895816L);
+                    objCreateAbsoluteSizeSpanFromProto = createAlignmentSpanStandardFromProto(protoInputStream);
+                    protoInputStream.end(jStart5);
                     break;
                 case 9:
-                    long start6 = protoInputStream.start(2246267895817L);
-                    createAbsoluteSizeSpanFromProto = createAnnotationFromProto(protoInputStream);
-                    protoInputStream.end(start6);
+                    long jStart6 = protoInputStream.start(2246267895817L);
+                    objCreateAbsoluteSizeSpanFromProto = createAnnotationFromProto(protoInputStream);
+                    protoInputStream.end(jStart6);
                     break;
                 case 10:
-                    long start7 = protoInputStream.start(2246267895818L);
-                    createAbsoluteSizeSpanFromProto = createBackgroundColorSpanFromProto(protoInputStream);
-                    protoInputStream.end(start7);
+                    long jStart7 = protoInputStream.start(2246267895818L);
+                    objCreateAbsoluteSizeSpanFromProto = createBackgroundColorSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart7);
                     break;
                 case 11:
-                    long start8 = protoInputStream.start(2246267895819L);
-                    createAbsoluteSizeSpanFromProto = createBulletSpanFromProto(protoInputStream);
-                    protoInputStream.end(start8);
+                    long jStart8 = protoInputStream.start(2246267895819L);
+                    objCreateAbsoluteSizeSpanFromProto = createBulletSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart8);
                     break;
                 case 12:
-                    long start9 = protoInputStream.start(2246267895820L);
-                    createAbsoluteSizeSpanFromProto = createEasyEditSpanFromProto(protoInputStream);
-                    protoInputStream.end(start9);
+                    long jStart9 = protoInputStream.start(2246267895820L);
+                    objCreateAbsoluteSizeSpanFromProto = createEasyEditSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart9);
                     break;
                 case 13:
-                    long start10 = protoInputStream.start(2246267895821L);
-                    createAbsoluteSizeSpanFromProto = createForegroundColorSpanFromProto(protoInputStream);
-                    protoInputStream.end(start10);
+                    long jStart10 = protoInputStream.start(2246267895821L);
+                    objCreateAbsoluteSizeSpanFromProto = createForegroundColorSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart10);
                     break;
                 case 14:
-                    long start11 = protoInputStream.start(2246267895822L);
-                    createAbsoluteSizeSpanFromProto = createLeadingMarginSpanStandardFromProto(protoInputStream);
-                    protoInputStream.end(start11);
+                    long jStart11 = protoInputStream.start(2246267895822L);
+                    objCreateAbsoluteSizeSpanFromProto = createLeadingMarginSpanStandardFromProto(protoInputStream);
+                    protoInputStream.end(jStart11);
                     break;
                 case 15:
-                    long start12 = protoInputStream.start(2246267895823L);
-                    createAbsoluteSizeSpanFromProto = createLineBackgroundSpanStandardFromProto(protoInputStream);
-                    protoInputStream.end(start12);
+                    long jStart12 = protoInputStream.start(2246267895823L);
+                    objCreateAbsoluteSizeSpanFromProto = createLineBackgroundSpanStandardFromProto(protoInputStream);
+                    protoInputStream.end(jStart12);
                     break;
                 case 16:
-                    if (!Flags.noBreakNoHyphenationSpan()) {
-                        break;
-                    } else {
-                        long start13 = protoInputStream.start(2246267895824L);
-                        createAbsoluteSizeSpanFromProto = createLineBreakConfigSpanFromProto(protoInputStream);
-                        protoInputStream.end(start13);
+                    if (Flags.noBreakNoHyphenationSpan()) {
+                        long jStart13 = protoInputStream.start(2246267895824L);
+                        objCreateAbsoluteSizeSpanFromProto = createLineBreakConfigSpanFromProto(protoInputStream);
+                        protoInputStream.end(jStart13);
                         break;
                     }
                 case 17:
-                    long start14 = protoInputStream.start(2246267895825L);
-                    createAbsoluteSizeSpanFromProto = createLineHeightSpanStandardFromProto(protoInputStream);
-                    protoInputStream.end(start14);
+                    long jStart14 = protoInputStream.start(2246267895825L);
+                    objCreateAbsoluteSizeSpanFromProto = createLineHeightSpanStandardFromProto(protoInputStream);
+                    protoInputStream.end(jStart14);
                     break;
                 case 18:
-                    long start15 = protoInputStream.start(2246267895826L);
-                    createAbsoluteSizeSpanFromProto = createLocaleSpanFromProto(protoInputStream);
-                    protoInputStream.end(start15);
+                    long jStart15 = protoInputStream.start(2246267895826L);
+                    objCreateAbsoluteSizeSpanFromProto = createLocaleSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart15);
                     break;
                 case 19:
-                    long start16 = protoInputStream.start(2246267895827L);
-                    createAbsoluteSizeSpanFromProto = createQuoteSpanFromProto(protoInputStream);
-                    protoInputStream.end(start16);
+                    long jStart16 = protoInputStream.start(2246267895827L);
+                    objCreateAbsoluteSizeSpanFromProto = createQuoteSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart16);
                     break;
                 case 20:
-                    long start17 = protoInputStream.start(2246267895828L);
-                    createAbsoluteSizeSpanFromProto = createRelativeSizeSpanFromProto(protoInputStream);
-                    protoInputStream.end(start17);
+                    long jStart17 = protoInputStream.start(2246267895828L);
+                    objCreateAbsoluteSizeSpanFromProto = createRelativeSizeSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart17);
                     break;
                 case 21:
-                    long start18 = protoInputStream.start(2246267895829L);
-                    createAbsoluteSizeSpanFromProto = createScaleXSpanFromProto(protoInputStream);
-                    protoInputStream.end(start18);
+                    long jStart18 = protoInputStream.start(2246267895829L);
+                    objCreateAbsoluteSizeSpanFromProto = createScaleXSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart18);
                     break;
                 case 22:
-                    long start19 = protoInputStream.start(2246267895830L);
-                    createAbsoluteSizeSpanFromProto = createSpellCheckSpanFromProto(protoInputStream);
-                    protoInputStream.end(start19);
+                    long jStart19 = protoInputStream.start(2246267895830L);
+                    objCreateAbsoluteSizeSpanFromProto = createSpellCheckSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart19);
                     break;
                 case 23:
-                    long start20 = protoInputStream.start(2246267895831L);
-                    createAbsoluteSizeSpanFromProto = createStrikethroughSpanFromProto(protoInputStream);
-                    protoInputStream.end(start20);
+                    long jStart20 = protoInputStream.start(2246267895831L);
+                    objCreateAbsoluteSizeSpanFromProto = createStrikethroughSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart20);
                     break;
                 case 24:
-                    long start21 = protoInputStream.start(2246267895832L);
-                    createAbsoluteSizeSpanFromProto = createStyleSpanFromProto(protoInputStream);
-                    protoInputStream.end(start21);
+                    long jStart21 = protoInputStream.start(2246267895832L);
+                    objCreateAbsoluteSizeSpanFromProto = createStyleSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart21);
                     break;
                 case 25:
-                    long start22 = protoInputStream.start(2246267895833L);
-                    createAbsoluteSizeSpanFromProto = createSubscriptSpanFromProto(protoInputStream);
-                    protoInputStream.end(start22);
+                    long jStart22 = protoInputStream.start(2246267895833L);
+                    objCreateAbsoluteSizeSpanFromProto = createSubscriptSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart22);
                     break;
                 case 26:
-                    long start23 = protoInputStream.start(2246267895834L);
-                    createAbsoluteSizeSpanFromProto = createSuggestionSpanFromProto(protoInputStream);
-                    protoInputStream.end(start23);
+                    long jStart23 = protoInputStream.start(2246267895834L);
+                    objCreateAbsoluteSizeSpanFromProto = createSuggestionSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart23);
                     break;
                 case 27:
-                    long start24 = protoInputStream.start(2246267895835L);
-                    createAbsoluteSizeSpanFromProto = createSuggestionRangeSpanFromProto(protoInputStream);
-                    protoInputStream.end(start24);
+                    long jStart24 = protoInputStream.start(2246267895835L);
+                    objCreateAbsoluteSizeSpanFromProto = createSuggestionRangeSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart24);
                     break;
                 case 28:
-                    long start25 = protoInputStream.start(2246267895836L);
-                    createAbsoluteSizeSpanFromProto = createSuperscriptSpanFromProto(protoInputStream);
-                    protoInputStream.end(start25);
+                    long jStart25 = protoInputStream.start(2246267895836L);
+                    objCreateAbsoluteSizeSpanFromProto = createSuperscriptSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart25);
                     break;
                 case 29:
-                    long start26 = protoInputStream.start(2246267895837L);
-                    createAbsoluteSizeSpanFromProto = createTextAppearanceSpanFromProto(protoInputStream);
-                    protoInputStream.end(start26);
+                    long jStart26 = protoInputStream.start(2246267895837L);
+                    objCreateAbsoluteSizeSpanFromProto = createTextAppearanceSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart26);
                     break;
                 case 30:
-                    long start27 = protoInputStream.start(2246267895838L);
-                    createAbsoluteSizeSpanFromProto = createTtsSpanFromProto(protoInputStream);
-                    protoInputStream.end(start27);
+                    long jStart27 = protoInputStream.start(2246267895838L);
+                    objCreateAbsoluteSizeSpanFromProto = createTtsSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart27);
                     break;
                 case 31:
-                    long start28 = protoInputStream.start(2246267895839L);
-                    createAbsoluteSizeSpanFromProto = createTypefaceSpanFromProto(protoInputStream);
-                    protoInputStream.end(start28);
+                    long jStart28 = protoInputStream.start(2246267895839L);
+                    objCreateAbsoluteSizeSpanFromProto = createTypefaceSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart28);
                     break;
                 case 32:
-                    long start29 = protoInputStream.start(2246267895840L);
-                    createAbsoluteSizeSpanFromProto = createUnderlineSpanFromProto(protoInputStream);
-                    protoInputStream.end(start29);
+                    long jStart29 = protoInputStream.start(2246267895840L);
+                    objCreateAbsoluteSizeSpanFromProto = createUnderlineSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart29);
                     break;
                 case 33:
-                    long start30 = protoInputStream.start(2246267895841L);
-                    createAbsoluteSizeSpanFromProto = createURLSpanFromProto(protoInputStream);
-                    protoInputStream.end(start30);
+                    long jStart30 = protoInputStream.start(2246267895841L);
+                    objCreateAbsoluteSizeSpanFromProto = createURLSpanFromProto(protoInputStream);
+                    protoInputStream.end(jStart30);
                     break;
                 default:
                     Log.w(TAG, "Unhandled field while reading CharSequence proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
                     continue;
             }
-            obj = createAbsoluteSizeSpanFromProto;
+            obj = objCreateAbsoluteSizeSpanFromProto;
         }
         if (obj == null) {
             return;
@@ -574,10 +572,10 @@ public class RemoteViewsSerializers {
         CharSequence charSequence = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                long start = protoInputStream.start(1146756268033L);
-                CharSequence createCharSequenceFromProto = createCharSequenceFromProto(protoInputStream);
-                protoInputStream.end(start);
-                charSequence = createCharSequenceFromProto;
+                long jStart = protoInputStream.start(1146756268033L);
+                CharSequence charSequenceCreateCharSequenceFromProto = createCharSequenceFromProto(protoInputStream);
+                protoInputStream.end(jStart);
+                charSequence = charSequenceCreateCharSequenceFromProto;
             } else {
                 Log.w("AccessibilityReplacemen", "Unhandled field while reading AccessibilityReplacementSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
@@ -586,24 +584,24 @@ public class RemoteViewsSerializers {
     }
 
     public static void writeAccessibilityReplacementSpanToProto(ProtoOutputStream protoOutputStream, AccessibilityReplacementSpan accessibilityReplacementSpan) {
-        long start = protoOutputStream.start(1146756268033L);
+        long jStart = protoOutputStream.start(1146756268033L);
         CharSequence contentDescription = accessibilityReplacementSpan.getContentDescription();
         if (contentDescription != null) {
             writeCharSequenceToProto(protoOutputStream, contentDescription);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static AccessibilityURLSpan createAccessibilityURLSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
+        String string = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else {
                 Log.w("AccessibilityURLSpan", "Unhandled field while reading AccessibilityURLSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new AccessibilityURLSpan(new URLSpan(str));
+        return new AccessibilityURLSpan(new URLSpan(string));
     }
 
     public static void writeAccessibilityURLSpanToProto(ProtoOutputStream protoOutputStream, AccessibilityURLSpan accessibilityURLSpan) {
@@ -611,15 +609,15 @@ public class RemoteViewsSerializers {
     }
 
     public static AlignmentSpan.Standard createAlignmentSpanStandardFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
+        String string = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else {
                 Log.w("AlignmentSpan", "Unhandled field while reading AlignmentSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new AlignmentSpan.Standard(Layout.Alignment.valueOf(str));
+        return new AlignmentSpan.Standard(Layout.Alignment.valueOf(string));
     }
 
     public static void writeAlignmentSpanStandardToProto(ProtoOutputStream protoOutputStream, AlignmentSpan.Standard standard) {
@@ -627,19 +625,19 @@ public class RemoteViewsSerializers {
     }
 
     public static Annotation createAnnotationFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
-        String str2 = null;
+        String string = null;
+        String string2 = null;
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else if (fieldNumber == 2) {
-                str2 = protoInputStream.readString(1138166333442L);
+                string2 = protoInputStream.readString(1138166333442L);
             } else {
                 Log.w("Annotation", "Unhandled field while reading Annotation proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new Annotation(str, str2);
+        return new Annotation(string, string2);
     }
 
     public static void writeAnnotationToProto(ProtoOutputStream protoOutputStream, Annotation annotation) {
@@ -791,15 +789,15 @@ public class RemoteViewsSerializers {
     }
 
     public static LocaleSpan createLocaleSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
+        String string = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else {
                 Log.w("LocaleSpan", "Unhandled field while reading LocaleSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new LocaleSpan(LocaleList.forLanguageTags(str));
+        return new LocaleSpan(LocaleList.forLanguageTags(string));
     }
 
     public static void writeLocaleSpanToProto(ProtoOutputStream protoOutputStream, LocaleSpan localeSpan) {
@@ -922,8 +920,8 @@ public class RemoteViewsSerializers {
         int i4 = 0;
         int i5 = 0;
         int i6 = 0;
-        String str = null;
-        String str2 = null;
+        String string = null;
+        String string2 = null;
         float f = 0.0f;
         float f2 = 0.0f;
         float f3 = 0.0f;
@@ -937,10 +935,10 @@ public class RemoteViewsSerializers {
                     i = protoInputStream.readInt(1120986464258L);
                     break;
                 case 3:
-                    str = protoInputStream.readString(1138166333443L);
+                    string = protoInputStream.readString(1138166333443L);
                     break;
                 case 4:
-                    str2 = protoInputStream.readString(1138166333444L);
+                    string2 = protoInputStream.readString(1138166333444L);
                     break;
                 case 5:
                     i2 = protoInputStream.readInt(1120986464261L);
@@ -976,7 +974,7 @@ public class RemoteViewsSerializers {
         }
         String[] strArr = new String[arrayList.size()];
         arrayList.toArray(strArr);
-        return new SuggestionSpan(strArr, i, str, str2, i2, i3, f, i4, f2, i5, f3, i6, f4);
+        return new SuggestionSpan(strArr, i, string, string2, i2, i3, f, i4, f2, i5, f3, i6, f4);
     }
 
     public static void writeSuggestionSpanToProto(ProtoOutputStream protoOutputStream, SuggestionSpan suggestionSpan) {
@@ -1004,12 +1002,12 @@ public class RemoteViewsSerializers {
     }
 
     public static TextAppearanceSpan createTextAppearanceSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
-        ColorStateList colorStateList = null;
-        ColorStateList colorStateList2 = null;
-        LocaleList localeList = null;
-        String str2 = null;
-        String str3 = null;
+        String string = null;
+        ColorStateList colorStateListCreateFromProto = null;
+        ColorStateList colorStateListCreateFromProto2 = null;
+        LocaleList localeListForLanguageTags = null;
+        String string2 = null;
+        String string3 = null;
         int i = 0;
         int i2 = 0;
         int i3 = 0;
@@ -1024,7 +1022,7 @@ public class RemoteViewsSerializers {
         while (protoInputStream.nextField() != -1) {
             switch (protoInputStream.getFieldNumber()) {
                 case 1:
-                    str = protoInputStream.readString(1138166333441L);
+                    string = protoInputStream.readString(1138166333441L);
                     break;
                 case 2:
                     i = protoInputStream.readInt(1120986464258L);
@@ -1033,14 +1031,14 @@ public class RemoteViewsSerializers {
                     i2 = protoInputStream.readInt(1120986464259L);
                     break;
                 case 4:
-                    long start = protoInputStream.start(1146756268036L);
-                    colorStateList = ColorStateList.createFromProto(protoInputStream);
-                    protoInputStream.end(start);
+                    long jStart = protoInputStream.start(1146756268036L);
+                    colorStateListCreateFromProto = ColorStateList.createFromProto(protoInputStream);
+                    protoInputStream.end(jStart);
                     break;
                 case 5:
-                    long start2 = protoInputStream.start(1146756268037L);
-                    colorStateList2 = ColorStateList.createFromProto(protoInputStream);
-                    protoInputStream.end(start2);
+                    long jStart2 = protoInputStream.start(1146756268037L);
+                    colorStateListCreateFromProto2 = ColorStateList.createFromProto(protoInputStream);
+                    protoInputStream.end(jStart2);
                     break;
                 case 6:
                 default:
@@ -1050,7 +1048,7 @@ public class RemoteViewsSerializers {
                     i3 = protoInputStream.readInt(1120986464263L);
                     break;
                 case 8:
-                    localeList = LocaleList.forLanguageTags(protoInputStream.readString(1138166333448L));
+                    localeListForLanguageTags = LocaleList.forLanguageTags(protoInputStream.readString(1138166333448L));
                     break;
                 case 9:
                     f = protoInputStream.readFloat(1108101562377L);
@@ -1077,14 +1075,14 @@ public class RemoteViewsSerializers {
                     f4 = protoInputStream.readFloat(1108101562384L);
                     break;
                 case 17:
-                    str2 = protoInputStream.readString(1138166333457L);
+                    string2 = protoInputStream.readString(1138166333457L);
                     break;
                 case 18:
-                    str3 = protoInputStream.readString(1138166333458L);
+                    string3 = protoInputStream.readString(1138166333458L);
                     break;
             }
         }
-        return new TextAppearanceSpan(str, i, i2, colorStateList, colorStateList2, null, i3, localeList, f, f2, f3, i4, z, z2, z3, f4, str2, str3);
+        return new TextAppearanceSpan(string, i, i2, colorStateListCreateFromProto, colorStateListCreateFromProto2, null, i3, localeListForLanguageTags, f, f2, f3, i4, z, z2, z3, f4, string2, string3);
     }
 
     public static void writeTextAppearanceSpanToProto(ProtoOutputStream protoOutputStream, TextAppearanceSpan textAppearanceSpan) {
@@ -1106,31 +1104,31 @@ public class RemoteViewsSerializers {
         protoOutputStream.write(1138166333457L, textAppearanceSpan.getFontFeatureSettings());
         protoOutputStream.write(1138166333458L, textAppearanceSpan.getFontVariationSettings());
         if (textAppearanceSpan.getTextColor() != null) {
-            long start = protoOutputStream.start(1146756268036L);
+            long jStart = protoOutputStream.start(1146756268036L);
             textAppearanceSpan.getTextColor().writeToProto(protoOutputStream);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
         if (textAppearanceSpan.getLinkTextColor() != null) {
-            long start2 = protoOutputStream.start(1146756268037L);
+            long jStart2 = protoOutputStream.start(1146756268037L);
             textAppearanceSpan.getLinkTextColor().writeToProto(protoOutputStream);
-            protoOutputStream.end(start2);
+            protoOutputStream.end(jStart2);
         }
     }
 
     public static TtsSpan createTtsSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
-        PersistableBundle persistableBundle = null;
+        String string = null;
+        PersistableBundle fromStream = null;
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else if (fieldNumber == 2) {
-                persistableBundle = PersistableBundle.readFromStream(new ByteArrayInputStream(protoInputStream.readString(1138166333442L).getBytes()));
+                fromStream = PersistableBundle.readFromStream(new ByteArrayInputStream(protoInputStream.readString(1138166333442L).getBytes()));
             } else {
                 Log.w("TtsSpan", "Unhandled field while reading TtsSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new TtsSpan(str, persistableBundle);
+        return new TtsSpan(string, fromStream);
     }
 
     public static void writeTtsSpanToProto(ProtoOutputStream protoOutputStream, TtsSpan ttsSpan) {
@@ -1147,15 +1145,15 @@ public class RemoteViewsSerializers {
     }
 
     public static TypefaceSpan createTypefaceSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
+        String string = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else {
                 Log.w("TypefaceSpan", "Unhandled field while reading TypefaceSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new TypefaceSpan(str);
+        return new TypefaceSpan(string);
     }
 
     public static void writeTypefaceSpanToProto(ProtoOutputStream protoOutputStream, TypefaceSpan typefaceSpan) {
@@ -1163,15 +1161,15 @@ public class RemoteViewsSerializers {
     }
 
     public static URLSpan createURLSpanFromProto(ProtoInputStream protoInputStream) throws Exception {
-        String str = null;
+        String string = null;
         while (protoInputStream.nextField() != -1) {
             if (protoInputStream.getFieldNumber() == 1) {
-                str = protoInputStream.readString(1138166333441L);
+                string = protoInputStream.readString(1138166333441L);
             } else {
                 Log.w("URLSpan", "Unhandled field while reading URLSpan proto!\n" + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
-        return new URLSpan(str);
+        return new URLSpan(string);
     }
 
     public static void writeURLSpanToProto(ProtoOutputStream protoOutputStream, URLSpan uRLSpan) {

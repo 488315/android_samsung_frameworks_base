@@ -120,11 +120,11 @@ public class BroadcastOptions extends ComponentOptions {
     }
 
     public static BroadcastOptions makeWithDeferUntilActive(boolean z) {
-        BroadcastOptions makeBasic = makeBasic();
+        BroadcastOptions broadcastOptionsMakeBasic = makeBasic();
         if (z) {
-            makeBasic.setDeferralPolicy(2);
+            broadcastOptionsMakeBasic.setDeferralPolicy(2);
         }
-        return makeBasic;
+        return broadcastOptionsMakeBasic;
     }
 
     @SystemApi

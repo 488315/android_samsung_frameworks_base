@@ -1,6 +1,7 @@
 package android.view;
 
 import android.animation.AnimationHandler;
+import android.app.ActivityThread;
 import android.app.jank.AppJankStats;
 import android.graphics.FrameInfo;
 import android.hardware.display.DisplayManagerGlobal;
@@ -16,6 +17,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.DisplayEventReceiver;
+import android.view.animation.AnimationUtils;
+import android.view.flags.Flags;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -82,12 +85,12 @@ public final class Choreographer {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.lang.ThreadLocal
         public Choreographer initialValue() {
-            Looper myLooper = Looper.myLooper();
-            if (myLooper == null) {
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper == null) {
                 throw new IllegalStateException("The current thread must have a looper!");
             }
-            Choreographer choreographer = new Choreographer(myLooper, 0);
-            if (myLooper == Looper.getMainLooper()) {
+            Choreographer choreographer = new Choreographer(looperMyLooper, 0);
+            if (looperMyLooper == Looper.getMainLooper()) {
                 Choreographer.mMainInstance = choreographer;
             }
             return choreographer;
@@ -98,11 +101,11 @@ public final class Choreographer {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.lang.ThreadLocal
         public Choreographer initialValue() {
-            Looper myLooper = Looper.myLooper();
-            if (myLooper == null) {
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper == null) {
                 throw new IllegalStateException("The current thread must have a looper!");
             }
-            return new Choreographer(myLooper, 1);
+            return new Choreographer(looperMyLooper, 1);
         }
     };
     private static final boolean USE_VSYNC = SystemProperties.getBoolean("debug.choreographer.vsync", true);
@@ -307,11 +310,11 @@ public final class Choreographer {
             this.mHandler.removeMessages(3);
             if (!z) {
                 this.mBgWaitingDelaySetting = true;
-                Message obtainMessage = this.mHandler.obtainMessage();
-                obtainMessage.what = 3;
-                obtainMessage.arg1 = !z ? 1 : 0;
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessageAtTime(obtainMessage, SystemClock.uptimeMillis() + maxAnimationCallbackDuration);
+                Message messageObtainMessage = this.mHandler.obtainMessage();
+                messageObtainMessage.what = 3;
+                messageObtainMessage.arg1 = !z ? 1 : 0;
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessageAtTime(messageObtainMessage, SystemClock.uptimeMillis() + maxAnimationCallbackDuration);
                 Log.d("BBA2", "setIsFg isFg = " + z + "; delayValue " + maxAnimationCallbackDuration + "ms");
             } else {
                 this.mIsFg = z;
@@ -338,20 +341,20 @@ public final class Choreographer {
                 }
                 this.mBgWaitingDelaySetting = false;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
-            long j2 = uptimeMillis + j;
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            long j2 = jUptimeMillis + j;
             if (this.mEnabledDebugCallback) {
                 this.mCallbackQueues[i].addCallbackLocked(j2, obj, obj2, Debug.getCallers(this.mDebugCallStackCnt, " "));
             } else {
                 this.mCallbackQueues[i].addCallbackLocked(j2, obj, obj2, null);
             }
-            if (j2 <= uptimeMillis) {
-                scheduleFrameLocked(uptimeMillis);
+            if (j2 <= jUptimeMillis) {
+                scheduleFrameLocked(jUptimeMillis);
             } else {
-                Message obtainMessage = this.mHandler.obtainMessage(2, obj);
-                obtainMessage.arg1 = i;
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessageAtTime(obtainMessage, j2);
+                Message messageObtainMessage = this.mHandler.obtainMessage(2, obj);
+                messageObtainMessage.arg1 = i;
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessageAtTime(messageObtainMessage, j2);
             }
         }
     }
@@ -409,22 +412,22 @@ public final class Choreographer {
     }
 
     public long getFrameTimeNanos() {
-        long nanoTime;
+        long jNanoTime;
         synchronized (this.mLock) {
             if (!this.mCallbacksRunning) {
                 throw new IllegalStateException("This method must only be called as part of a callback while a frame is in progress.");
             }
-            nanoTime = USE_FRAME_TIME ? this.mLastFrameTimeNanos : System.nanoTime();
+            jNanoTime = USE_FRAME_TIME ? this.mLastFrameTimeNanos : System.nanoTime();
         }
-        return nanoTime;
+        return jNanoTime;
     }
 
     public long getLastFrameTimeNanos() {
-        long nanoTime;
+        long jNanoTime;
         synchronized (this.mLock) {
-            nanoTime = USE_FRAME_TIME ? this.mLastFrameTimeNanos : System.nanoTime();
+            jNanoTime = USE_FRAME_TIME ? this.mLastFrameTimeNanos : System.nanoTime();
         }
-        return nanoTime;
+        return jNanoTime;
     }
 
     public long getExpectedPresentationTimeNanos() {
@@ -453,15 +456,15 @@ public final class Choreographer {
                 scheduleVsyncLocked();
                 return;
             }
-            Message obtainMessage = this.mHandler.obtainMessage(1);
-            obtainMessage.setAsynchronous(true);
-            this.mHandler.sendMessageAtFrontOfQueue(obtainMessage);
+            Message messageObtainMessage = this.mHandler.obtainMessage(1);
+            messageObtainMessage.setAsynchronous(true);
+            this.mHandler.sendMessageAtFrontOfQueue(messageObtainMessage);
             return;
         }
-        long max = Math.max((this.mLastFrameTimeNanos / 1000000) + sFrameDelay, j);
-        Message obtainMessage2 = this.mHandler.obtainMessage(0);
-        obtainMessage2.setAsynchronous(true);
-        this.mHandler.sendMessageAtTime(obtainMessage2, max);
+        long jMax = Math.max((this.mLastFrameTimeNanos / 1000000) + sFrameDelay, j);
+        Message messageObtainMessage2 = this.mHandler.obtainMessage(0);
+        messageObtainMessage2.setAsynchronous(true);
+        this.mHandler.sendMessageAtTime(messageObtainMessage2, jMax);
     }
 
     public long getVsyncId() {
@@ -532,51 +535,350 @@ public final class Choreographer {
         return BufferStuffingState.RecoveryAction.OFFSET;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:112:0x0228  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0062 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:175:0x0042 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0260  */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x01d4  */
+    /* JADX WARN: Removed duplicated region for block: B:152:0x0260  */
+    /* JADX WARN: Removed duplicated region for block: B:164:0x0062 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00cd A[Catch: all -> 0x00e2, TryCatch #0 {all -> 0x00e2, blocks: (B:46:0x00c7, B:48:0x00cd, B:49:0x00cf, B:45:0x00b1), top: B:155:0x00b1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void doFrame(long r31, int r33, android.view.DisplayEventReceiver.VsyncEventData r34) {
-        /*
-            Method dump skipped, instructions count: 615
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.Choreographer.doFrame(long, int, android.view.DisplayEventReceiver$VsyncEventData):void");
+    void doFrame(long j, int i, DisplayEventReceiver.VsyncEventData vsyncEventData) throws Throwable {
+        long j2;
+        long j3;
+        boolean z;
+        boolean z2;
+        Object obj;
+        Object obj2;
+        long j4;
+        long j5;
+        long j6;
+        boolean z3;
+        boolean z4;
+        long j7;
+        ActivityThread.currentActivityThread().getIdsController().closeIdsWindow();
+        long j8 = vsyncEventData.frameInterval;
+        if (Flags.bufferStuffingRecovery()) {
+            int iOrdinal = updateBufferStuffingState(j, vsyncEventData).ordinal();
+            if (iOrdinal != 1) {
+                if (iOrdinal == 2) {
+                    scheduleVsyncLocked();
+                    return;
+                }
+                j2 = j;
+            } else {
+                j2 = j - j8;
+            }
+        } else {
+            j2 = j;
+        }
+        try {
+            FrameTimeline frameTimelineUpdate = this.mFrameData.update(j2, vsyncEventData);
+            if (Trace.isTagEnabled(8L)) {
+                try {
+                    Trace.traceBegin(8L, "Choreographer#doFrame " + frameTimelineUpdate.mVsyncId);
+                    this.mInDoFrameCallback = true;
+                    obj = this.mLock;
+                    synchronized (obj) {
+                        try {
+                            if (this.mFrameScheduled) {
+                                this.mLastNoOffsetFrameTimeNanos = j;
+                                j3 = 8;
+                                try {
+                                    long jNanoTime = System.nanoTime();
+                                    long j9 = jNanoTime - j;
+                                    if (j9 < j8) {
+                                        j4 = j8;
+                                        j5 = 8;
+                                        j6 = j;
+                                        z3 = false;
+                                    } else if (j8 == 0) {
+                                        try {
+                                            Log.i(TAG, "Vsync data empty due to timeout");
+                                            j4 = j8;
+                                            j7 = jNanoTime;
+                                            j5 = 8;
+                                            if (this.mBufferStuffingState.isRecovering) {
+                                                j7 -= j4;
+                                            }
+                                            long j10 = j7;
+                                            frameTimelineUpdate = this.mFrameData.update(j10, this.mDisplayEventReceiver, j9);
+                                            j6 = j10;
+                                            z3 = true;
+                                        } catch (Throwable th) {
+                                            th = th;
+                                            obj2 = obj;
+                                            z2 = false;
+                                            z = false;
+                                            while (true) {
+                                                try {
+                                                    try {
+                                                        throw th;
+                                                    } catch (Throwable th2) {
+                                                        th = th2;
+                                                    }
+                                                } catch (Throwable th3) {
+                                                    th = th3;
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        try {
+                                            j7 = jNanoTime - (j9 % j8);
+                                            j4 = j8;
+                                            long j11 = j9 / j4;
+                                            j5 = 8;
+                                            if (j11 >= SKIPPED_FRAME_WARNING_LIMIT) {
+                                                try {
+                                                    Log.i(TAG, "Skipped " + j11 + " frames!  The application may be doing too much work on its main thread.");
+                                                } catch (Throwable th4) {
+                                                    th = th4;
+                                                    obj2 = obj;
+                                                    j3 = j5;
+                                                }
+                                            }
+                                            if (this.mBufferStuffingState.isRecovering) {
+                                            }
+                                            long j102 = j7;
+                                            frameTimelineUpdate = this.mFrameData.update(j102, this.mDisplayEventReceiver, j9);
+                                            j6 = j102;
+                                            z3 = true;
+                                        } catch (Throwable th5) {
+                                            th = th5;
+                                            obj2 = obj;
+                                            z2 = false;
+                                            z = false;
+                                            while (true) {
+                                                throw th;
+                                            }
+                                        }
+                                    }
+                                    FrameTimeline frameTimeline = frameTimelineUpdate;
+                                    try {
+                                        long j12 = this.mLastFrameTimeNanos;
+                                        try {
+                                            if (j6 < j12) {
+                                                traceMessage("Frame time goes backward");
+                                                if (this.mBufferStuffingState.isRecovering) {
+                                                    this.mBufferStuffingState.numberWaitsForNextVsync++;
+                                                }
+                                                scheduleVsyncLocked();
+                                                AnimationUtils.unlockAnimationClock();
+                                                this.mInDoFrameCallback = false;
+                                                if (z3) {
+                                                    Trace.traceEnd(j5);
+                                                }
+                                                Trace.traceEnd(j5);
+                                                return;
+                                            }
+                                            int i2 = this.mFPSDivisor;
+                                            boolean z5 = true;
+                                            if (i2 > 1) {
+                                                long j13 = j6 - j12;
+                                                if (j13 >= i2 * j4 || j13 <= 0) {
+                                                    z4 = false;
+                                                    z5 = true;
+                                                } else {
+                                                    try {
+                                                        traceMessage("Frame skipped due to FPSDivisor");
+                                                        if (this.mBufferStuffingState.isRecovering) {
+                                                            this.mBufferStuffingState.numberWaitsForNextVsync++;
+                                                        }
+                                                        scheduleVsyncLocked();
+                                                        AnimationUtils.unlockAnimationClock();
+                                                        this.mInDoFrameCallback = false;
+                                                        if (z3) {
+                                                            Trace.traceEnd(j5);
+                                                        }
+                                                        Trace.traceEnd(j5);
+                                                        return;
+                                                    } catch (Throwable th6) {
+                                                        th = th6;
+                                                        z = false;
+                                                        obj2 = obj;
+                                                        z2 = z3;
+                                                        j3 = j5;
+                                                    }
+                                                }
+                                            } else {
+                                                z4 = false;
+                                            }
+                                            try {
+                                                long j14 = j6;
+                                                obj2 = obj;
+                                                long j15 = j4;
+                                                z = false;
+                                                try {
+                                                    this.mFrameInfo.setVsync(j, j14, vsyncEventData.preferredFrameTimeline().vsyncId, vsyncEventData.preferredFrameTimeline().deadline, jNanoTime, vsyncEventData.frameInterval);
+                                                    this.mFrameScheduled = false;
+                                                    this.mLastFrameTimeNanos = j14;
+                                                    this.mLastFrameIntervalNanos = j15;
+                                                    this.mLastVsyncEventData.copyFrom(vsyncEventData);
+                                                    if (z3) {
+                                                        try {
+                                                            if (Trace.isTagEnabled(j5)) {
+                                                                j3 = j5;
+                                                                try {
+                                                                    Trace.traceBegin(j3, String.format("Choreographer#doFrame - resynced to %d in %.1fms", Long.valueOf(frameTimeline.mVsyncId), Float.valueOf((frameTimeline.mDeadlineNanos - jNanoTime) * 1.0E-6f)));
+                                                                } catch (Throwable th7) {
+                                                                    th = th7;
+                                                                    z2 = z3;
+                                                                    AnimationUtils.unlockAnimationClock();
+                                                                    this.mInDoFrameCallback = z;
+                                                                    if (z2) {
+                                                                    }
+                                                                    Trace.traceEnd(j3);
+                                                                    throw th;
+                                                                }
+                                                            } else {
+                                                                j3 = j5;
+                                                            }
+                                                        } catch (Throwable th8) {
+                                                            th = th8;
+                                                            j3 = j5;
+                                                            z2 = z3;
+                                                            AnimationUtils.unlockAnimationClock();
+                                                            this.mInDoFrameCallback = z;
+                                                            if (z2) {
+                                                            }
+                                                            Trace.traceEnd(j3);
+                                                            throw th;
+                                                        }
+                                                    }
+                                                    AnimationUtils.lockAnimationClock(j14 / 1000000, frameTimeline.mExpectedPresentationTimeNanos);
+                                                    this.mFrameInfo.markInputHandlingStart();
+                                                    doCallbacks(0, j15);
+                                                    this.mFrameInfo.markAnimationsStart();
+                                                    if (this.mIsFg || this.mIsVisible) {
+                                                        doCallbacks(1, j15);
+                                                    }
+                                                    if (!this.mIsFg && !this.mIsVisible && this.mIsFirstBBA) {
+                                                        this.mIsFirstBBA = false;
+                                                        Log.d(TAG, "CoreRune.SYSPERF_ACTIVE_APP_BBA_ENABLE : stop animation in background states");
+                                                    }
+                                                    doCallbacks(2, j15);
+                                                    this.mFrameInfo.markPerformTraversalsStart();
+                                                    doCallbacks(3, j15);
+                                                    doCallbacks(4, j15);
+                                                    AnimationUtils.unlockAnimationClock();
+                                                    this.mInDoFrameCallback = false;
+                                                    if (z3) {
+                                                        Trace.traceEnd(j3);
+                                                    }
+                                                    Trace.traceEnd(j3);
+                                                    return;
+                                                } catch (Throwable th9) {
+                                                    th = th9;
+                                                    j3 = j5;
+                                                    z2 = z3;
+                                                    while (true) {
+                                                        throw th;
+                                                    }
+                                                }
+                                            } catch (Throwable th10) {
+                                                th = th10;
+                                                z = z4;
+                                                obj2 = obj;
+                                            }
+                                        } catch (Throwable th11) {
+                                            th = th11;
+                                            obj2 = obj;
+                                            z2 = z3;
+                                            j3 = j5;
+                                        }
+                                    } catch (Throwable th12) {
+                                        th = th12;
+                                        obj2 = obj;
+                                        j3 = j5;
+                                        z = false;
+                                    }
+                                } catch (Throwable th13) {
+                                    th = th13;
+                                    obj2 = obj;
+                                    z = false;
+                                    z2 = false;
+                                    while (true) {
+                                        throw th;
+                                    }
+                                }
+                            } else {
+                                try {
+                                    traceMessage("Frame not scheduled");
+                                    AnimationUtils.unlockAnimationClock();
+                                    this.mInDoFrameCallback = false;
+                                    Trace.traceEnd(8L);
+                                    return;
+                                } catch (Throwable th14) {
+                                    th = th14;
+                                    obj2 = obj;
+                                    j3 = 8;
+                                }
+                            }
+                            z2 = false;
+                            z = false;
+                        } catch (Throwable th15) {
+                            th = th15;
+                            obj2 = obj;
+                            j3 = 8;
+                        }
+                        while (true) {
+                            throw th;
+                        }
+                    }
+                } catch (Throwable th16) {
+                    th = th16;
+                    j3 = 8;
+                    z2 = false;
+                    z = false;
+                }
+            } else {
+                obj = this.mLock;
+                synchronized (obj) {
+                }
+            }
+        } catch (Throwable th17) {
+            th = th17;
+            j3 = 8;
+            z = false;
+            z2 = false;
+        }
+        AnimationUtils.unlockAnimationClock();
+        this.mInDoFrameCallback = z;
+        if (z2) {
+            Trace.traceEnd(j3);
+        }
+        Trace.traceEnd(j3);
+        throw th;
     }
 
     void doCallbacks(int i, long j) {
         long j2 = this.mFrameData.mFrameTimeNanos;
         synchronized (this.mLock) {
-            long nanoTime = System.nanoTime();
-            CallbackRecord extractDueCallbacksLocked = this.mCallbackQueues[i].extractDueCallbacksLocked(nanoTime / 1000000);
-            if (extractDueCallbacksLocked == null) {
+            long jNanoTime = System.nanoTime();
+            CallbackRecord callbackRecordExtractDueCallbacksLocked = this.mCallbackQueues[i].extractDueCallbacksLocked(jNanoTime / 1000000);
+            if (callbackRecordExtractDueCallbacksLocked == null) {
                 return;
             }
             this.mCallbacksRunning = true;
             long j3 = 0;
             if (i == 4) {
-                long j4 = nanoTime - j2;
+                long j4 = jNanoTime - j2;
                 Trace.traceCounter(8L, "jitterNanos", (int) j4);
                 if (j > 0 && j4 >= 2 * j) {
-                    long j5 = nanoTime - ((j4 % j) + j);
+                    long j5 = jNanoTime - ((j4 % j) + j);
                     this.mLastFrameTimeNanos = j5;
                     this.mFrameData.update(j5, this.mDisplayEventReceiver, j4);
                 }
             }
             try {
                 Trace.traceBegin(8L, CALLBACK_TRACE_TITLES[i]);
-                CallbackRecord callbackRecord = extractDueCallbacksLocked;
+                CallbackRecord callbackRecord = callbackRecordExtractDueCallbacksLocked;
                 while (callbackRecord != null) {
-                    long elapsedRealtime = this.mEnabledDebugCallback ? SystemClock.elapsedRealtime() : j3;
+                    long jElapsedRealtime = this.mEnabledDebugCallback ? SystemClock.elapsedRealtime() : j3;
                     callbackRecord.run(this.mFrameData);
                     if (this.mEnabledDebugCallback && this.mDebugCallbackConsumer != null && callbackRecord.log != null) {
-                        long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                        if (elapsedRealtime2 >= this.mDebugDispatchThresholdMs) {
-                            this.mDebugCallbackConsumer.accept("RunCallback: type=" + i + ", action=" + callbackRecord.action + ", token=" + callbackRecord.token + ", latencyMillis=" + (SystemClock.uptimeMillis() - callbackRecord.dueTime) + ", dur=" + elapsedRealtime2 + "ms\n", callbackRecord.log);
+                        long jElapsedRealtime2 = SystemClock.elapsedRealtime() - jElapsedRealtime;
+                        if (jElapsedRealtime2 >= this.mDebugDispatchThresholdMs) {
+                            this.mDebugCallbackConsumer.accept("RunCallback: type=" + i + ", action=" + callbackRecord.action + ", token=" + callbackRecord.token + ", latencyMillis=" + (SystemClock.uptimeMillis() - callbackRecord.dueTime) + ", dur=" + jElapsedRealtime2 + "ms\n", callbackRecord.log);
                         }
                     }
                     callbackRecord = callbackRecord.next;
@@ -585,10 +887,10 @@ public final class Choreographer {
                 synchronized (this.mLock) {
                     this.mCallbacksRunning = false;
                     while (true) {
-                        CallbackRecord callbackRecord2 = extractDueCallbacksLocked.next;
-                        recycleCallbackLocked(extractDueCallbacksLocked);
+                        CallbackRecord callbackRecord2 = callbackRecordExtractDueCallbacksLocked.next;
+                        recycleCallbackLocked(callbackRecordExtractDueCallbacksLocked);
                         if (callbackRecord2 != null) {
-                            extractDueCallbacksLocked = callbackRecord2;
+                            callbackRecordExtractDueCallbacksLocked = callbackRecord2;
                         }
                     }
                 }
@@ -597,13 +899,13 @@ public final class Choreographer {
                 synchronized (this.mLock) {
                     this.mCallbacksRunning = false;
                     while (true) {
-                        CallbackRecord callbackRecord3 = extractDueCallbacksLocked.next;
-                        recycleCallbackLocked(extractDueCallbacksLocked);
+                        CallbackRecord callbackRecord3 = callbackRecordExtractDueCallbacksLocked.next;
+                        recycleCallbackLocked(callbackRecordExtractDueCallbacksLocked);
                         if (callbackRecord3 == null) {
                             Trace.traceEnd(8L);
                             throw th;
                         }
-                        extractDueCallbacksLocked = callbackRecord3;
+                        callbackRecordExtractDueCallbacksLocked = callbackRecord3;
                     }
                 }
             }
@@ -621,9 +923,9 @@ public final class Choreographer {
     void doScheduleCallback(int i) {
         synchronized (this.mLock) {
             if (!this.mFrameScheduled) {
-                long uptimeMillis = SystemClock.uptimeMillis();
-                if (this.mCallbackQueues[i].hasDueCallbacksLocked(uptimeMillis)) {
-                    scheduleFrameLocked(uptimeMillis);
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                if (this.mCallbackQueues[i].hasDueCallbacksLocked(jUptimeMillis)) {
+                    scheduleFrameLocked(jUptimeMillis);
                 }
             }
         }
@@ -777,12 +1079,12 @@ public final class Choreographer {
         }
 
         private void allocateFrameTimelines(int i) {
-            int max = Math.max(1, i);
+            int iMax = Math.max(1, i);
             FrameTimeline[] frameTimelineArr = this.mFrameTimelines;
-            if (frameTimelineArr != null && frameTimelineArr.length == max) {
+            if (frameTimelineArr != null && frameTimelineArr.length == iMax) {
                 return;
             }
-            this.mFrameTimelines = new FrameTimeline[max];
+            this.mFrameTimelines = new FrameTimeline[iMax];
             int i2 = 0;
             while (true) {
                 FrameTimeline[] frameTimelineArr2 = this.mFrameTimelines;
@@ -846,7 +1148,7 @@ public final class Choreographer {
         }
 
         @Override // android.os.Handler
-        public void handleMessage(Message message) {
+        public void handleMessage(Message message) throws Throwable {
             int i = message.what;
             if (i == 0) {
                 Choreographer.this.doFrame(System.nanoTime(), 0, new DisplayEventReceiver.VsyncEventData());
@@ -879,8 +1181,8 @@ public final class Choreographer {
         public void onVsyncSS(int i) {
             this.mTimestampNanos = System.nanoTime();
             this.mFrame = 0;
-            Message obtain = Message.obtain(Choreographer.this.mHandler, this);
-            obtain.setAsynchronous(true);
+            Message messageObtain = Message.obtain(Choreographer.this.mHandler, this);
+            messageObtain.setAsynchronous(true);
             DisplayEventReceiver.VsyncEventData latestVsyncEventData = getLatestVsyncEventData();
             if (latestVsyncEventData != null && latestVsyncEventData.frameTimelinesLength > 0) {
                 this.mLastVsyncEventData.preferredFrameTimelineIndex = latestVsyncEventData.preferredFrameTimelineIndex;
@@ -890,11 +1192,11 @@ public final class Choreographer {
                     this.mLastVsyncEventData.frameTimelines[i2].copyFrom(latestVsyncEventData.frameTimelines[i2]);
                 }
                 if (i == 0) {
-                    Choreographer.this.mHandler.sendMessage(obtain);
+                    Choreographer.this.mHandler.sendMessage(messageObtain);
                     return;
                 } else {
                     if (i == 1 || i == 2 || i == 3) {
-                        Choreographer.this.mHandler.sendMessageAtFrontOfQueue(obtain);
+                        Choreographer.this.mHandler.sendMessageAtFrontOfQueue(messageObtain);
                         return;
                     }
                     return;
@@ -925,10 +1227,10 @@ public final class Choreographer {
                 if (Trace.isTagEnabled(8L)) {
                     Trace.traceBegin(8L, "Choreographer#onVsync " + vsyncEventData.preferredFrameTimeline().vsyncId);
                 }
-                long nanoTime = System.nanoTime();
-                if (j > nanoTime) {
-                    Log.w(Choreographer.TAG, "Frame time is " + ((j - nanoTime) * 1.0E-6f) + " ms in the future!  Check that graphics HAL is generating vsync timestamps using the correct timebase.");
-                    j = nanoTime;
+                long jNanoTime = System.nanoTime();
+                if (j > jNanoTime) {
+                    Log.w(Choreographer.TAG, "Frame time is " + ((j - jNanoTime) * 1.0E-6f) + " ms in the future!  Check that graphics HAL is generating vsync timestamps using the correct timebase.");
+                    j = jNanoTime;
                 }
                 if (this.mHavePendingVsync) {
                     Log.w(Choreographer.TAG, "Already have a pending vsync event.  There should only be one at a time.");
@@ -938,16 +1240,16 @@ public final class Choreographer {
                 this.mTimestampNanos = j;
                 this.mFrame = i;
                 this.mLastVsyncEventData.copyFrom(vsyncEventData);
-                Message obtain = Message.obtain(Choreographer.this.mHandler, this);
-                obtain.setAsynchronous(true);
-                Choreographer.this.mHandler.sendMessageAtTime(obtain, j / 1000000);
+                Message messageObtain = Message.obtain(Choreographer.this.mHandler, this);
+                messageObtain.setAsynchronous(true);
+                Choreographer.this.mHandler.sendMessageAtTime(messageObtain, j / 1000000);
             } finally {
                 Trace.traceEnd(8L);
             }
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws Throwable {
             this.mHavePendingVsync = false;
             Choreographer.this.doFrame(this.mTimestampNanos, this.mFrame, this.mLastVsyncEventData);
         }
@@ -1016,15 +1318,15 @@ public final class Choreographer {
         }
 
         public void addCallbackLocked(long j, Object obj, Object obj2, String str) {
-            CallbackRecord obtainCallbackLocked = Choreographer.this.obtainCallbackLocked(j, obj, obj2, str);
+            CallbackRecord callbackRecordObtainCallbackLocked = Choreographer.this.obtainCallbackLocked(j, obj, obj2, str);
             CallbackRecord callbackRecord = this.mHead;
             if (callbackRecord == null) {
-                this.mHead = obtainCallbackLocked;
+                this.mHead = callbackRecordObtainCallbackLocked;
                 return;
             }
             if (j < callbackRecord.dueTime) {
-                obtainCallbackLocked.next = callbackRecord;
-                this.mHead = obtainCallbackLocked;
+                callbackRecordObtainCallbackLocked.next = callbackRecord;
+                this.mHead = callbackRecordObtainCallbackLocked;
                 return;
             }
             while (true) {
@@ -1032,12 +1334,12 @@ public final class Choreographer {
                     break;
                 }
                 if (j < callbackRecord.next.dueTime) {
-                    obtainCallbackLocked.next = callbackRecord.next;
+                    callbackRecordObtainCallbackLocked.next = callbackRecord.next;
                     break;
                 }
                 callbackRecord = callbackRecord.next;
             }
-            callbackRecord.next = obtainCallbackLocked;
+            callbackRecord.next = callbackRecordObtainCallbackLocked;
         }
 
         public void removeCallbacksLocked(Object obj, Object obj2) {

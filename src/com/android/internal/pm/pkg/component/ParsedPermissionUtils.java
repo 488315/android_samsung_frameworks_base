@@ -1,13 +1,17 @@
 package com.android.internal.pm.pkg.component;
 
+import android.content.pm.PermissionInfo;
 import android.content.pm.parsing.result.ParseInput;
 import android.content.pm.parsing.result.ParseResult;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.os.Build;
 import android.util.ArrayMap;
 import android.util.EventLog;
+import android.util.Slog;
 import com.android.internal.R;
+import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import java.io.IOException;
 import java.util.List;
@@ -18,70 +22,147 @@ import org.xmlpull.v1.XmlPullParserException;
 public class ParsedPermissionUtils {
     private static final String TAG = "PackageParsing";
 
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0186, code lost:
-    
-        r4.close();
-     */
-    /* JADX WARN: Removed duplicated region for block: B:76:0x01bf  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01c4  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedPermission> parsePermission(com.android.internal.pm.pkg.parsing.ParsingPackage r17, android.content.res.Resources r18, android.content.res.XmlResourceParser r19, boolean r20, android.content.pm.parsing.result.ParseInput r21, int r22) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
-        /*
-            Method dump skipped, instructions count: 479
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedPermissionUtils.parsePermission(com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, boolean, android.content.pm.parsing.result.ParseInput, int):android.content.pm.parsing.result.ParseResult");
-    }
-
-    public static ParseResult<ParsedPermission> parsePermissionTree(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws IOException, XmlPullParserException {
+    public static ParseResult<ParsedPermission> parsePermission(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput, int i) throws XmlPullParserException, IOException {
+        TypedArray typedArray;
+        ParseResult<?> component;
+        String packageName = parsingPackage.getPackageName();
         ParsedPermissionImpl parsedPermissionImpl = new ParsedPermissionImpl();
         String str = "<" + xmlResourceParser.getName() + ">";
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestPermissionTree);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestPermission);
         try {
-            ParseResult<?> parseComponent = ParsedComponentUtils.parseComponent(parsedPermissionImpl, str, parsingPackage, obtainAttributes, z, parseInput, 4, -1, 1, 0, 3, 2, 5);
-            if (parseComponent.isError()) {
-                return parseInput.error(parseComponent);
+            component = ParsedComponentUtils.parseComponent(parsedPermissionImpl, str, parsingPackage, typedArrayObtainAttributes, z, parseInput, 9, 5, 1, 0, 7, 2, 10);
+            typedArray = typedArrayObtainAttributes;
+        } catch (Throwable th) {
+            th = th;
+            typedArray = typedArrayObtainAttributes;
+        }
+        try {
+            if (component.isError()) {
+                ParseResult<ParsedPermission> parseResultError = parseInput.error(component);
+                if (typedArray != null) {
+                    typedArray.close();
+                }
+                return parseResultError;
             }
-            obtainAttributes.recycle();
-            int indexOf = parsedPermissionImpl.getName().indexOf(46);
-            if (indexOf > 0) {
-                indexOf = parsedPermissionImpl.getName().indexOf(46, indexOf + 1);
+            int i2 = typedArray.getInt(6, -1);
+            if (i2 != -1 && i2 < Build.VERSION.SDK_INT) {
+                ParseResult<ParsedPermission> parseResultSuccess = parseInput.success(null);
+                if (typedArray != null) {
+                    typedArray.close();
+                }
+                return parseResultSuccess;
             }
-            if (indexOf < 0) {
-                return parseInput.error("<permission-tree> name has less than three segments: " + parsedPermissionImpl.getName());
+            if (typedArray.hasValue(12)) {
+                boolean z2 = (i & 512) != 0;
+                if ("android".equals(packageName) || (Flags.replaceBodySensorPermissionEnabled() && z2)) {
+                    parsedPermissionImpl.setBackgroundPermission(typedArray.getNonResourceString(12));
+                } else {
+                    Slog.w("PackageParsing", packageName + " defines a background permission. Only the " + "'android'".concat(Flags.replaceBodySensorPermissionEnabled() ? " and APK_IN_APEX" : "") + " packages can do that.");
+                }
             }
-            parsedPermissionImpl.setProtectionLevel(0).setTree(true);
-            ParseResult<?> parseAllMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedPermissionImpl, parseInput);
-            if (parseAllMetaData.isError()) {
-                return parseInput.error(parseAllMetaData);
+            parsedPermissionImpl.setGroup(typedArray.getNonResourceString(4)).setRequestRes(typedArray.getResourceId(13, 0)).setProtectionLevel(typedArray.getInt(3, 0)).setFlags(typedArray.getInt(8, 0));
+            int resourceId = typedArray.getResourceId(11, 0);
+            if (resourceId != 0) {
+                if (resources.getResourceTypeName(resourceId).equals("array")) {
+                    String[] stringArray = resources.getStringArray(resourceId);
+                    if (stringArray != null) {
+                        parsedPermissionImpl.setKnownCerts(stringArray);
+                    }
+                } else {
+                    String string = resources.getString(resourceId);
+                    if (string != null) {
+                        parsedPermissionImpl.setKnownCert(string);
+                    }
+                }
+                if (parsedPermissionImpl.getKnownCerts().isEmpty()) {
+                    Slog.w("PackageParsing", packageName + " defines a knownSigner permission but the provided knownCerts resource is null");
+                }
+            } else {
+                String string2 = typedArray.getString(11);
+                if (string2 != null) {
+                    parsedPermissionImpl.setKnownCert(string2);
+                }
             }
-            return parseInput.success((ParsedPermission) parseAllMetaData.getResult());
-        } finally {
-            obtainAttributes.recycle();
+            if (!isRuntime(parsedPermissionImpl) || !"android".equals(parsedPermissionImpl.getPackageName())) {
+                parsedPermissionImpl.setFlags(parsedPermissionImpl.getFlags() & (-5));
+                parsedPermissionImpl.setFlags(parsedPermissionImpl.getFlags() & (-9));
+            } else if ((parsedPermissionImpl.getFlags() & 4) != 0 && (parsedPermissionImpl.getFlags() & 8) != 0) {
+                throw new IllegalStateException("Permission cannot be both soft and hard restricted: " + parsedPermissionImpl.getName());
+            }
+            if (typedArray != null) {
+                typedArray.close();
+            }
+            parsedPermissionImpl.setProtectionLevel(PermissionInfo.fixProtectionLevel(parsedPermissionImpl.getProtectionLevel()));
+            if ((getProtectionFlags(parsedPermissionImpl) & (-12353)) != 0 && getProtection(parsedPermissionImpl) != 2 && getProtection(parsedPermissionImpl) != 4) {
+                return parseInput.error("<permission> protectionLevel specifies a non-instant, non-appop, non-runtimeOnly flag but is not based on signature or internal type");
+            }
+            ParseResult<?> allMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedPermissionImpl, parseInput);
+            if (allMetaData.isError()) {
+                return parseInput.error(allMetaData);
+            }
+            return parseInput.success((ParsedPermission) allMetaData.getResult());
+        } catch (Throwable th2) {
+            th = th2;
+            Throwable th3 = th;
+            if (typedArray == null) {
+                throw th3;
+            }
+            try {
+                typedArray.close();
+                throw th3;
+            } catch (Throwable th4) {
+                th3.addSuppressed(th4);
+                throw th3;
+            }
         }
     }
 
-    public static ParseResult<ParsedPermissionGroup> parsePermissionGroup(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws IOException, XmlPullParserException {
+    public static ParseResult<ParsedPermission> parsePermissionTree(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws XmlPullParserException, IOException {
+        ParsedPermissionImpl parsedPermissionImpl = new ParsedPermissionImpl();
+        String str = "<" + xmlResourceParser.getName() + ">";
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestPermissionTree);
+        try {
+            ParseResult<?> component = ParsedComponentUtils.parseComponent(parsedPermissionImpl, str, parsingPackage, typedArrayObtainAttributes, z, parseInput, 4, -1, 1, 0, 3, 2, 5);
+            if (component.isError()) {
+                return parseInput.error(component);
+            }
+            typedArrayObtainAttributes.recycle();
+            int iIndexOf = parsedPermissionImpl.getName().indexOf(46);
+            if (iIndexOf > 0) {
+                iIndexOf = parsedPermissionImpl.getName().indexOf(46, iIndexOf + 1);
+            }
+            if (iIndexOf < 0) {
+                return parseInput.error("<permission-tree> name has less than three segments: " + parsedPermissionImpl.getName());
+            }
+            parsedPermissionImpl.setProtectionLevel(0).setTree(true);
+            ParseResult<?> allMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedPermissionImpl, parseInput);
+            if (allMetaData.isError()) {
+                return parseInput.error(allMetaData);
+            }
+            return parseInput.success((ParsedPermission) allMetaData.getResult());
+        } finally {
+            typedArrayObtainAttributes.recycle();
+        }
+    }
+
+    public static ParseResult<ParsedPermissionGroup> parsePermissionGroup(ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, boolean z, ParseInput parseInput) throws XmlPullParserException, IOException {
         ParsedPermissionGroupImpl parsedPermissionGroupImpl = new ParsedPermissionGroupImpl();
         String str = "<" + xmlResourceParser.getName() + ">";
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestPermissionGroup);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestPermissionGroup);
         try {
-            ParseResult<?> parseComponent = ParsedComponentUtils.parseComponent(parsedPermissionGroupImpl, str, parsingPackage, obtainAttributes, z, parseInput, 7, 4, 1, 0, 5, 2, 8);
-            if (parseComponent.isError()) {
-                return parseInput.error(parseComponent);
+            ParseResult<?> component = ParsedComponentUtils.parseComponent(parsedPermissionGroupImpl, str, parsingPackage, typedArrayObtainAttributes, z, parseInput, 7, 4, 1, 0, 5, 2, 8);
+            if (component.isError()) {
+                return parseInput.error(component);
             }
-            parsedPermissionGroupImpl.setRequestDetailRes(obtainAttributes.getResourceId(12, 0)).setBackgroundRequestRes(obtainAttributes.getResourceId(9, 0)).setBackgroundRequestDetailRes(obtainAttributes.getResourceId(10, 0)).setRequestRes(obtainAttributes.getResourceId(11, 0)).setPriority(obtainAttributes.getInt(3, 0)).setFlags(obtainAttributes.getInt(6, 0));
-            obtainAttributes.recycle();
-            ParseResult<?> parseAllMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedPermissionGroupImpl, parseInput);
-            if (parseAllMetaData.isError()) {
-                return parseInput.error(parseAllMetaData);
+            parsedPermissionGroupImpl.setRequestDetailRes(typedArrayObtainAttributes.getResourceId(12, 0)).setBackgroundRequestRes(typedArrayObtainAttributes.getResourceId(9, 0)).setBackgroundRequestDetailRes(typedArrayObtainAttributes.getResourceId(10, 0)).setRequestRes(typedArrayObtainAttributes.getResourceId(11, 0)).setPriority(typedArrayObtainAttributes.getInt(3, 0)).setFlags(typedArrayObtainAttributes.getInt(6, 0));
+            typedArrayObtainAttributes.recycle();
+            ParseResult<?> allMetaData = ComponentParseUtils.parseAllMetaData(parsingPackage, resources, xmlResourceParser, str, parsedPermissionGroupImpl, parseInput);
+            if (allMetaData.isError()) {
+                return parseInput.error(allMetaData);
             }
-            return parseInput.success((ParsedPermissionGroup) parseAllMetaData.getResult());
+            return parseInput.success((ParsedPermissionGroup) allMetaData.getResult());
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 

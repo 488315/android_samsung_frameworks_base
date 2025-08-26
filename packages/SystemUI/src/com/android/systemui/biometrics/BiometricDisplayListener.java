@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BiometricDisplayListener implements DisplayManager.DisplayListener {
     public final DisplayInfo cachedDisplayInfo;
@@ -23,10 +22,8 @@ public final class BiometricDisplayListener implements DisplayManager.DisplayLis
     public final Function0 onChanged;
     public final SensorType sensorType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SensorType {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Generic extends SensorType {
             public static final Generic INSTANCE = new Generic();
 
@@ -47,7 +44,6 @@ public final class BiometricDisplayListener implements DisplayManager.DisplayLis
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SideFingerprint extends SensorType {
             public final FingerprintSensorPropertiesInternal properties;
 
@@ -72,7 +68,6 @@ public final class BiometricDisplayListener implements DisplayManager.DisplayLis
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class UnderDisplayFingerprint extends SensorType {
             public static final UnderDisplayFingerprint INSTANCE = new UnderDisplayFingerprint();
 
@@ -112,8 +107,8 @@ public final class BiometricDisplayListener implements DisplayManager.DisplayLis
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
     public final void onDisplayChanged(int i) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("BiometricDisplayListener(" + this.sensorType + ")#onDisplayChanged");
         }
         try {
@@ -123,17 +118,15 @@ public final class BiometricDisplayListener implements DisplayManager.DisplayLis
                 display.getDisplayInfo(this.cachedDisplayInfo);
             }
             boolean z = i2 != this.cachedDisplayInfo.rotation;
-            if (this.sensorType instanceof SensorType.SideFingerprint) {
-                this.onChanged.invoke();
-            } else if (z) {
+            if ((this.sensorType instanceof SensorType.SideFingerprint) || z) {
                 this.onChanged.invoke();
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

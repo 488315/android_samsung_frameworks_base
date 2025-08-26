@@ -823,33 +823,13 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public KeyEvent(android.view.KeyEvent r10) {
-        /*
-            r9 = this;
-            int r2 = r10.mId
-            long r3 = r10.mEventTime
-            int r5 = r10.mAction
-            int r6 = r10.mRepeatCount
-            byte[] r0 = r10.mHmac
-            if (r0 != 0) goto Le
-            r0 = 0
-            goto L14
-        Le:
-            java.lang.Object r0 = r0.clone()
-            byte[] r0 = (byte[]) r0
-        L14:
-            r7 = r0
-            java.lang.String r8 = r10.mCharacters
-            r0 = r9
-            r1 = r10
-            r0.<init>(r1, r2, r3, r5, r6, r7, r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.KeyEvent.<init>(android.view.KeyEvent):void");
+    public KeyEvent(KeyEvent keyEvent) {
+        int i = keyEvent.mId;
+        long j = keyEvent.mEventTime;
+        int i2 = keyEvent.mAction;
+        int i3 = keyEvent.mRepeatCount;
+        byte[] bArr = keyEvent.mHmac;
+        this(keyEvent, i, j, i2, i3, bArr == null ? null : (byte[]) bArr.clone(), keyEvent.mCharacters);
     }
 
     @Deprecated
@@ -890,22 +870,22 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     private static KeyEvent obtain(int i, long j, long j2, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, byte[] bArr, String str) {
-        KeyEvent obtain = obtain();
-        obtain.mId = i;
-        obtain.mDownTime = j;
-        obtain.mEventTime = j2;
-        obtain.mAction = i2;
-        obtain.mKeyCode = i3;
-        obtain.mRepeatCount = i4;
-        obtain.mMetaState = i5;
-        obtain.mDeviceId = i6;
-        obtain.mScanCode = i7;
-        obtain.mFlags = i8;
-        obtain.mSource = i9;
-        obtain.mDisplayId = i10;
-        obtain.mHmac = bArr;
-        obtain.mCharacters = str;
-        return obtain;
+        KeyEvent keyEventObtain = obtain();
+        keyEventObtain.mId = i;
+        keyEventObtain.mDownTime = j;
+        keyEventObtain.mEventTime = j2;
+        keyEventObtain.mAction = i2;
+        keyEventObtain.mKeyCode = i3;
+        keyEventObtain.mRepeatCount = i4;
+        keyEventObtain.mMetaState = i5;
+        keyEventObtain.mDeviceId = i6;
+        keyEventObtain.mScanCode = i7;
+        keyEventObtain.mFlags = i8;
+        keyEventObtain.mSource = i9;
+        keyEventObtain.mDisplayId = i10;
+        keyEventObtain.mHmac = bArr;
+        keyEventObtain.mCharacters = str;
+        return keyEventObtain;
     }
 
     public static KeyEvent obtain(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, String str) {
@@ -917,23 +897,23 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     public static KeyEvent obtain(KeyEvent keyEvent) {
-        KeyEvent obtain = obtain();
-        obtain.mId = keyEvent.mId;
-        obtain.mDownTime = keyEvent.mDownTime;
-        obtain.mEventTime = keyEvent.mEventTime;
-        obtain.mAction = keyEvent.mAction;
-        obtain.mKeyCode = keyEvent.mKeyCode;
-        obtain.mRepeatCount = keyEvent.mRepeatCount;
-        obtain.mMetaState = keyEvent.mMetaState;
-        obtain.mDeviceId = keyEvent.mDeviceId;
-        obtain.mScanCode = keyEvent.mScanCode;
-        obtain.mFlags = keyEvent.mFlags;
-        obtain.mSource = keyEvent.mSource;
-        obtain.mDisplayId = keyEvent.mDisplayId;
+        KeyEvent keyEventObtain = obtain();
+        keyEventObtain.mId = keyEvent.mId;
+        keyEventObtain.mDownTime = keyEvent.mDownTime;
+        keyEventObtain.mEventTime = keyEvent.mEventTime;
+        keyEventObtain.mAction = keyEvent.mAction;
+        keyEventObtain.mKeyCode = keyEvent.mKeyCode;
+        keyEventObtain.mRepeatCount = keyEvent.mRepeatCount;
+        keyEventObtain.mMetaState = keyEvent.mMetaState;
+        keyEventObtain.mDeviceId = keyEvent.mDeviceId;
+        keyEventObtain.mScanCode = keyEvent.mScanCode;
+        keyEventObtain.mFlags = keyEvent.mFlags;
+        keyEventObtain.mSource = keyEvent.mSource;
+        keyEventObtain.mDisplayId = keyEvent.mDisplayId;
         byte[] bArr = keyEvent.mHmac;
-        obtain.mHmac = bArr == null ? null : (byte[]) bArr.clone();
-        obtain.mCharacters = keyEvent.mCharacters;
-        return obtain;
+        keyEventObtain.mHmac = bArr == null ? null : (byte[]) bArr.clone();
+        keyEventObtain.mCharacters = keyEvent.mCharacters;
+        return keyEventObtain;
     }
 
     @Override // android.view.InputEvent
@@ -1278,9 +1258,9 @@ public class KeyEvent extends InputEvent implements Parcelable {
         int i = this.mAction;
         if (i == 0) {
             this.mFlags &= -1073741825;
-            boolean onKeyDown = callback.onKeyDown(this.mKeyCode, this);
+            boolean zOnKeyDown = callback.onKeyDown(this.mKeyCode, this);
             if (dispatcherState != null) {
-                if (onKeyDown && this.mRepeatCount == 0 && (this.mFlags & 1073741824) != 0) {
+                if (zOnKeyDown && this.mRepeatCount == 0 && (this.mFlags & 1073741824) != 0) {
                     dispatcherState.startTracking(this, obj);
                 } else if (isLongPress() && dispatcherState.isTracking(this)) {
                     try {
@@ -1292,7 +1272,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
                     }
                 }
             }
-            return onKeyDown;
+            return zOnKeyDown;
         }
         if (i == 1) {
             if (dispatcherState != null) {
@@ -1300,7 +1280,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
             }
             return callback.onKeyUp(this.mKeyCode, this);
         }
-        boolean z = false;
+        boolean zOnKeyDown2 = false;
         if (i != 2) {
             return false;
         }
@@ -1312,15 +1292,15 @@ public class KeyEvent extends InputEvent implements Parcelable {
         if (i3 != 0) {
             this.mAction = 0;
             this.mRepeatCount = 0;
-            z = callback.onKeyDown(i3, this);
-            if (z) {
+            zOnKeyDown2 = callback.onKeyDown(i3, this);
+            if (zOnKeyDown2) {
                 this.mAction = 1;
                 callback.onKeyUp(i3, this);
             }
             this.mAction = 2;
             this.mRepeatCount = i2;
         }
-        return z;
+        return zOnKeyDown2;
     }
 
     public static class DispatcherState {
@@ -1359,10 +1339,10 @@ public class KeyEvent extends InputEvent implements Parcelable {
 
         public void handleUpEvent(KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
-            int indexOfKey = this.mActiveLongPresses.indexOfKey(keyCode);
-            if (indexOfKey >= 0) {
+            int iIndexOfKey = this.mActiveLongPresses.indexOfKey(keyCode);
+            if (iIndexOfKey >= 0) {
                 keyEvent.mFlags |= 288;
-                this.mActiveLongPresses.removeAt(indexOfKey);
+                this.mActiveLongPresses.removeAt(iIndexOfKey);
             }
             if (this.mDownKeyCode == keyCode) {
                 keyEvent.mFlags |= 512;
@@ -1418,27 +1398,27 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     public static String keyCodeToString(int i) {
-        String nativeKeyCodeToString = nativeKeyCodeToString(i);
-        if (nativeKeyCodeToString == null) {
+        String strNativeKeyCodeToString = nativeKeyCodeToString(i);
+        if (strNativeKeyCodeToString == null) {
             return Integer.toString(i);
         }
-        return LABEL_PREFIX + nativeKeyCodeToString;
+        return LABEL_PREFIX + strNativeKeyCodeToString;
     }
 
-    public static int keyCodeFromString(String str) {
+    public static int keyCodeFromString(String str) throws NumberFormatException {
         try {
-            int parseInt = Integer.parseInt(str);
-            if (keyCodeIsValid(parseInt)) {
-                return parseInt;
+            int i = Integer.parseInt(str);
+            if (keyCodeIsValid(i)) {
+                return i;
             }
         } catch (NumberFormatException unused) {
         }
         if (str.startsWith(LABEL_PREFIX)) {
             str = str.substring(8);
         }
-        int nativeKeyCodeFromString = nativeKeyCodeFromString(str);
-        if (keyCodeIsValid(nativeKeyCodeFromString)) {
-            return nativeKeyCodeFromString;
+        int iNativeKeyCodeFromString = nativeKeyCodeFromString(str);
+        if (keyCodeIsValid(iNativeKeyCodeFromString)) {
+            return iNativeKeyCodeFromString;
         }
         return 0;
     }

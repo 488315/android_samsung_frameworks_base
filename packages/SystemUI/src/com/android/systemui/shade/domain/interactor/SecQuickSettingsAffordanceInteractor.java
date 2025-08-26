@@ -27,7 +27,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQuickSettingsAffordanceInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -45,52 +44,52 @@ public final class SecQuickSettingsAffordanceInteractor {
         /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$broadcastReceiver$1$onReceive$1] */
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
-            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor = SecQuickSettingsAffordanceInteractor.this;
+            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor = this.this$0;
             int i = SecQuickSettingsAffordanceInteractor.$r8$clinit;
             if (secQuickSettingsAffordanceInteractor.isEnabled()) {
                 if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, "android.intent.action.SCREEN_OFF")) {
                     Log.d("SecQuickSettingsAffordanceInteractor", "onReceive : ACTION_SCREEN_OFF");
-                    SecQuickSettingsAffordanceInteractor.this.hideEffect();
+                    this.this$0.hideEffect();
                     return;
                 }
                 if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, "android.intent.action.SCREEN_ON")) {
                     Log.d("SecQuickSettingsAffordanceInteractor", "onReceive : ACTION_SCREEN_ON");
-                    if (SecQuickSettingsAffordanceInteractor.this.statusBarStateController.getState() != 1) {
-                        SecQuickSettingsAffordanceInteractor.this.hideEffect();
+                    if (this.this$0.statusBarStateController.getState() != 1) {
+                        this.this$0.hideEffect();
                         return;
                     }
-                    ListPopupWindow$$ExternalSyntheticOutline0.m(Prefs.getInt(SecQuickSettingsAffordanceInteractor.this.context, "PanelAffordanceCount", 0), "onReceive : ACTION_SCREEN_ON & KEYGUARD : ", "SecQuickSettingsAffordanceInteractor");
-                    if (SecQuickSettingsAffordanceInteractor.this.keyguardViewController.isBouncerShowing()) {
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(Prefs.getInt(this.this$0.context, "PanelAffordanceCount", 0), "onReceive : ACTION_SCREEN_ON & KEYGUARD : ", "SecQuickSettingsAffordanceInteractor");
+                    if (this.this$0.keyguardViewController.isBouncerShowing()) {
                         Log.d("SecQuickSettingsAffordanceInteractor", "onReceive : isBouncerShowing");
-                        SecQuickSettingsAffordanceInteractor.this.hideEffect();
+                        this.this$0.hideEffect();
                         return;
                     }
-                    if (!SecQuickSettingsAffordanceInteractor.this.isPanelAffordanceAvailableCount()) {
-                        SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor2 = SecQuickSettingsAffordanceInteractor.this;
+                    if (!this.this$0.isPanelAffordanceAvailableCount()) {
+                        SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor2 = this.this$0;
                         if (secQuickSettingsAffordanceInteractor2.secQuickSettingsAffordance != null) {
                             secQuickSettingsAffordanceInteractor2.hideEffect();
-                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor3 = SecQuickSettingsAffordanceInteractor.this;
+                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor3 = this.this$0;
                             secQuickSettingsAffordanceInteractor3.statusBarStateController.removeCallback(secQuickSettingsAffordanceInteractor3.statusBarStateListener);
-                            SecQuickSettingsAffordanceInteractor.this.broadcastDispatcher.unregisterReceiver(this);
-                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor4 = SecQuickSettingsAffordanceInteractor.this;
+                            this.this$0.broadcastDispatcher.unregisterReceiver(this);
+                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor4 = this.this$0;
                             ConfigurationController configurationController = secQuickSettingsAffordanceInteractor4.configurationController;
                             SecQuickSettingsAffordance secQuickSettingsAffordance = secQuickSettingsAffordanceInteractor4.secQuickSettingsAffordance;
                             secQuickSettingsAffordance.getClass();
                             ((ConfigurationControllerImpl) configurationController).removeCallback(secQuickSettingsAffordance);
-                            ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).removeCallback(SecQuickSettingsAffordanceInteractor.this.updateMonitorCallback);
-                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor5 = SecQuickSettingsAffordanceInteractor.this;
+                            ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).removeCallback(this.this$0.updateMonitorCallback);
+                            SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor5 = this.this$0;
                             secQuickSettingsAffordanceInteractor5.lockscreenShadeTransitionController.removeCallback(secQuickSettingsAffordanceInteractor5.transitionCallback);
-                            SecQuickSettingsAffordanceInteractor.this.secQuickSettingsAffordance = null;
+                            this.this$0.secQuickSettingsAffordance = null;
                             return;
                         }
                     }
-                    final SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor6 = SecQuickSettingsAffordanceInteractor.this;
+                    final SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor6 = this.this$0;
                     SecQuickSettingsAffordance secQuickSettingsAffordance2 = secQuickSettingsAffordanceInteractor6.secQuickSettingsAffordance;
                     if (secQuickSettingsAffordance2 != 0) {
                         secQuickSettingsAffordance2.displayEffect(AnimHelper.AnimationState.SHOWING, new Runnable() { // from class: com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$broadcastReceiver$1$onReceive$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                Context context2 = SecQuickSettingsAffordanceInteractor.this.context;
+                                Context context2 = secQuickSettingsAffordanceInteractor6.context;
                                 Prefs.putInt(context2, "PanelAffordanceCount", Prefs.getInt(context2, "PanelAffordanceCount", 0) + 1);
                             }
                         });
@@ -103,15 +102,15 @@ public final class SecQuickSettingsAffordanceInteractor {
         @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
         public final void onExpandedChanged(boolean z) {
             int i = SecQuickSettingsAffordanceInteractor.$r8$clinit;
-            SecQuickSettingsAffordanceInteractor.this.hideEffectIfNeeded("onExpandedChanged", z);
+            this.this$0.hideEffectIfNeeded("onExpandedChanged", z);
         }
 
         @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
         public final void onStatePreChange(int i, int i2) {
             boolean z = i2 != 1;
-            String m = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onStatePreChange ", " > ");
+            String strM = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onStatePreChange ", " > ");
             int i3 = SecQuickSettingsAffordanceInteractor.$r8$clinit;
-            SecQuickSettingsAffordanceInteractor.this.hideEffectIfNeeded(m, z);
+            this.this$0.hideEffectIfNeeded(strM, z);
         }
     };
     public final SecQuickSettingsAffordanceInteractor$updateMonitorCallback$1 updateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$updateMonitorCallback$1
@@ -119,13 +118,13 @@ public final class SecQuickSettingsAffordanceInteractor {
         public final void onDlsViewModeChanged(int i) {
             boolean z = i == 1;
             int i2 = SecQuickSettingsAffordanceInteractor.$r8$clinit;
-            SecQuickSettingsAffordanceInteractor.this.hideEffectIfNeeded("onDlsViewModeChanged", z);
+            this.this$0.hideEffectIfNeeded("onDlsViewModeChanged", z);
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onKeyguardBouncerStateChanged(boolean z) {
             int i = SecQuickSettingsAffordanceInteractor.$r8$clinit;
-            SecQuickSettingsAffordanceInteractor.this.hideEffectIfNeeded("onKeyguardBouncerStateChanged", z);
+            this.this$0.hideEffectIfNeeded("onKeyguardBouncerStateChanged", z);
         }
     };
     public final SecQuickSettingsAffordanceInteractor$transitionCallback$1 transitionCallback = new LockscreenShadeTransitionController.Callback() { // from class: com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor$transitionCallback$1
@@ -133,11 +132,10 @@ public final class SecQuickSettingsAffordanceInteractor {
         public final void onExpansionStarted() {
             Log.d("SecQuickSettingsAffordanceInteractor", "onExpansionStarted");
             int i = SecQuickSettingsAffordanceInteractor.$r8$clinit;
-            SecQuickSettingsAffordanceInteractor.this.hideEffect();
+            this.this$0.hideEffect();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

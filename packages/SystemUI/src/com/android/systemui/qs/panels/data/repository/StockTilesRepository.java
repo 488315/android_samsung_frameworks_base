@@ -8,7 +8,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StockTilesRepository {
     public final boolean shouldRemoveRbcTile;
@@ -17,9 +16,9 @@ public final class StockTilesRepository {
     public StockTilesRepository(Resources resources) {
         this.shouldRemoveRbcTile = resources.getBoolean(R.bool.config_isDesktopModeSupported);
         int i = 0;
-        List split$default = StringsKt__StringsKt.split$default(resources.getString(com.android.systemui.R.string.quick_settings_tiles_stock), new String[]{","}, 0, 6);
+        List listSplit$default = StringsKt__StringsKt.split$default(resources.getString(com.android.systemui.R.string.quick_settings_tiles_stock), new String[]{","}, 0, 6);
         ArrayList arrayList = new ArrayList();
-        for (Object obj : split$default) {
+        for (Object obj : listSplit$default) {
             String str = (String) obj;
             if (!this.shouldRemoveRbcTile || !str.equals("reduce_brightness")) {
                 arrayList.add(obj);

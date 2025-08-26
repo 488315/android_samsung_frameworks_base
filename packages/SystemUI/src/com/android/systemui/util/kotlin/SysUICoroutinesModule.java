@@ -21,7 +21,6 @@ import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.android.HandlerDispatcherKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUICoroutinesModule {
     public static final int $stable = 0;
@@ -31,17 +30,17 @@ public final class SysUICoroutinesModule {
     }
 
     public final CoroutineDispatcher bgDispatcher() {
-        final int availableProcessors = Runtime.getRuntime().availableProcessors();
-        if (availableProcessors < 1) {
-            throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(availableProcessors, "Expected at least one thread, but ", " specified").toString());
+        final int iAvailableProcessors = Runtime.getRuntime().availableProcessors();
+        if (iAvailableProcessors < 1) {
+            throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iAvailableProcessors, "Expected at least one thread, but ", " specified").toString());
         }
         final AtomicInteger atomicInteger = new AtomicInteger();
         final String str = "SystemUIBg";
-        ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(availableProcessors, new ThreadFactory() { // from class: kotlinx.coroutines.ThreadPoolDispatcherKt__ThreadPoolDispatcherKt$newFixedThreadPoolContext$executor$1
+        ScheduledExecutorService scheduledExecutorServiceNewScheduledThreadPool = Executors.newScheduledThreadPool(iAvailableProcessors, new ThreadFactory() { // from class: kotlinx.coroutines.ThreadPoolDispatcherKt__ThreadPoolDispatcherKt$newFixedThreadPoolContext$executor$1
             @Override // java.util.concurrent.ThreadFactory
             public final Thread newThread(Runnable runnable) {
                 String str2;
-                if (availableProcessors == 1) {
+                if (iAvailableProcessors == 1) {
                     str2 = str;
                 } else {
                     str2 = str + "-" + atomicInteger.incrementAndGet();
@@ -51,8 +50,8 @@ public final class SysUICoroutinesModule {
                 return thread;
             }
         });
-        newScheduledThreadPool.getClass();
-        return new ExecutorCoroutineDispatcherImpl(newScheduledThreadPool);
+        scheduledExecutorServiceNewScheduledThreadPool.getClass();
+        return new ExecutorCoroutineDispatcherImpl(scheduledExecutorServiceNewScheduledThreadPool);
     }
 
     public final CoroutineDispatcher notifInflationCoroutineDispatcher(Executor executor, CoroutineDispatcher coroutineDispatcher) {

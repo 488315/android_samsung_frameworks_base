@@ -6,12 +6,10 @@ import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class CrossAxisAlignment {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class CenterCrossAxisAlignment extends CrossAxisAlignment {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -29,7 +27,6 @@ public abstract class CrossAxisAlignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +36,6 @@ public abstract class CrossAxisAlignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class EndCrossAxisAlignment extends CrossAxisAlignment {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -60,7 +56,6 @@ public abstract class CrossAxisAlignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class HorizontalCrossAxisAlignment extends CrossAxisAlignment {
         public final Alignment.Horizontal horizontal;
 
@@ -90,7 +85,6 @@ public abstract class CrossAxisAlignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class StartCrossAxisAlignment extends CrossAxisAlignment {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -111,7 +105,6 @@ public abstract class CrossAxisAlignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class VerticalCrossAxisAlignment extends CrossAxisAlignment {
         public final Alignment.Vertical vertical;
 

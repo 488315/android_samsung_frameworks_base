@@ -1,12 +1,33 @@
 package com.android.systemui.controls.management;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.os.UserHandle;
+import android.service.controls.Control;
+import android.util.Log;
+import com.android.systemui.controls.controller.ControlInfo;
 import com.android.systemui.controls.controller.ControlsController;
+import com.android.systemui.controls.controller.ControlsControllerImpl;
+import com.android.systemui.controls.controller.Favorites;
 import com.android.systemui.controls.controller.SecControlsController;
+import com.android.systemui.controls.controller.StructureInfo;
+import com.android.systemui.controls.ui.SecControlsUiController;
+import com.android.systemui.controls.ui.SecControlsUiControllerImpl;
+import com.android.systemui.controls.ui.fragment.MainFragment;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsRequestReceiver extends BroadcastReceiver {
     public static final Companion Companion = new Companion(null);
@@ -14,7 +35,6 @@ public final class ControlsRequestReceiver extends BroadcastReceiver {
     public final Handler handler;
     public final SecControlsController secController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,126 +47,207 @@ public final class ControlsRequestReceiver extends BroadcastReceiver {
     public ControlsRequestReceiver() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x008f  */
+    /* JADX WARN: Removed duplicated region for block: B:50:? A[RETURN, SYNTHETIC] */
     @Override // android.content.BroadcastReceiver
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onReceive(android.content.Context r10, final android.content.Intent r11) {
-        /*
-            r9 = this;
-            java.lang.String r0 = "android.service.controls.extra.CONTROL"
-            java.lang.String r1 = "android.intent.extra.COMPONENT_NAME"
-            java.lang.String r2 = "ControlsRequestReceiver"
-            android.content.pm.PackageManager r3 = r10.getPackageManager()
-            java.lang.String r4 = "android.software.controls"
-            boolean r3 = r3.hasSystemFeature(r4)
-            if (r3 != 0) goto L14
-            goto La9
-        L14:
-            java.lang.Class<android.content.ComponentName> r3 = android.content.ComponentName.class
-            java.lang.Object r3 = r11.getParcelableExtra(r1, r3)     // Catch: java.lang.Exception -> Ld2
-            android.content.ComponentName r3 = (android.content.ComponentName) r3     // Catch: java.lang.Exception -> Ld2
-            if (r3 != 0) goto L24
-            java.lang.String r9 = "Null target component"
-            android.util.Log.e(r2, r9)
-            return
-        L24:
-            java.lang.Class<android.service.controls.Control> r4 = android.service.controls.Control.class
-            java.lang.Object r4 = r11.getParcelableExtra(r0, r4)     // Catch: java.lang.Exception -> Lcb
-            android.service.controls.Control r4 = (android.service.controls.Control) r4     // Catch: java.lang.Exception -> Lcb
-            if (r4 != 0) goto L34
-            java.lang.String r9 = "Null control"
-            android.util.Log.e(r2, r9)
-            return
-        L34:
-            java.lang.String r5 = r3.getPackageName()
-            com.android.systemui.controls.management.ControlsRequestReceiver$Companion r6 = com.android.systemui.controls.management.ControlsRequestReceiver.Companion
-            r6.getClass()
-            r6 = 0
-            android.content.pm.PackageManager r7 = r10.getPackageManager()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L75
-            int r5 = r7.getPackageUid(r5, r6)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L75
-            java.lang.Class<android.app.ActivityManager> r7 = android.app.ActivityManager.class
-            java.lang.Object r7 = r10.getSystemService(r7)
-            android.app.ActivityManager r7 = (android.app.ActivityManager) r7
-            if (r7 == 0) goto L55
-            int r7 = r7.getUidImportance(r5)
-            goto L57
-        L55:
-            r7 = 1000(0x3e8, float:1.401E-42)
-        L57:
-            r8 = 100
-            if (r7 == r8) goto L73
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r8 = "Uid "
-            r7.<init>(r8)
-            r7.append(r5)
-            java.lang.String r5 = " not in foreground"
-            r7.append(r5)
-            java.lang.String r5 = r7.toString()
-            android.util.Log.w(r2, r5)
-        L71:
-            r5 = r6
-            goto L8c
-        L73:
-            r5 = 1
-            goto L8c
-        L75:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r8 = "Package "
-            r7.<init>(r8)
-            r7.append(r5)
-            java.lang.String r5 = " not found"
-            r7.append(r5)
-            java.lang.String r5 = r7.toString()
-            android.util.Log.w(r2, r5)
-            goto L71
-        L8c:
-            if (r5 != 0) goto L8f
-            goto La9
-        L8f:
-            java.lang.String r5 = "android.service.controls.extra.CONTROL_AUTO_ADD"
-            boolean r5 = r11.getBooleanExtra(r5, r6)
-            if (r5 == 0) goto Laa
-            android.os.Handler r10 = r9.handler
-            if (r10 == 0) goto La4
-            com.android.systemui.controls.management.ControlsRequestReceiver$onReceive$1 r0 = new com.android.systemui.controls.management.ControlsRequestReceiver$onReceive$1
-            r0.<init>()
-            r10.post(r0)
-            goto La9
-        La4:
-            java.lang.String r9 = "onReceive handler is null"
-            android.util.Log.e(r2, r9)
-        La9:
-            return
-        Laa:
-            android.content.Intent r9 = new android.content.Intent
-            java.lang.Class<com.android.systemui.controls.management.ControlsRequestDialog> r11 = com.android.systemui.controls.management.ControlsRequestDialog.class
-            r9.<init>(r10, r11)
-            r9.putExtra(r1, r3)
-            r9.putExtra(r0, r4)
-            r11 = 268566528(0x10020000, float:2.563798E-29)
-            r9.addFlags(r11)
-            java.lang.String r11 = "android.intent.extra.USER_ID"
-            int r0 = r10.getUserId()
-            r9.putExtra(r11, r0)
-            android.os.UserHandle r11 = android.os.UserHandle.SYSTEM
-            r10.startActivityAsUser(r9, r11)
-            return
-        Lcb:
-            r9 = move-exception
-            java.lang.String r10 = "Malformed intent extra Control"
-            android.util.Log.e(r2, r10, r9)
-            return
-        Ld2:
-            r9 = move-exception
-            java.lang.String r10 = "Malformed intent extra ComponentName"
-            android.util.Log.e(r2, r10, r9)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.management.ControlsRequestReceiver.onReceive(android.content.Context, android.content.Intent):void");
+    public final void onReceive(Context context, final Intent intent) throws PackageManager.NameNotFoundException {
+        boolean z;
+        int packageUid;
+        ActivityManager activityManager;
+        if (!context.getPackageManager().hasSystemFeature("android.software.controls")) {
+            return;
+        }
+        try {
+            final ComponentName componentName = (ComponentName) intent.getParcelableExtra("android.intent.extra.COMPONENT_NAME", ComponentName.class);
+            if (componentName == null) {
+                Log.e("ControlsRequestReceiver", "Null target component");
+                return;
+            }
+            try {
+                final Control control = (Control) intent.getParcelableExtra("android.service.controls.extra.CONTROL", Control.class);
+                if (control == null) {
+                    Log.e("ControlsRequestReceiver", "Null control");
+                    return;
+                }
+                String packageName = componentName.getPackageName();
+                Companion.getClass();
+                try {
+                    packageUid = context.getPackageManager().getPackageUid(packageName, 0);
+                    activityManager = (ActivityManager) context.getSystemService(ActivityManager.class);
+                } catch (PackageManager.NameNotFoundException unused) {
+                    Log.w("ControlsRequestReceiver", "Package " + packageName + " not found");
+                }
+                if ((activityManager != null ? activityManager.getUidImportance(packageUid) : 1000) != 100) {
+                    Log.w("ControlsRequestReceiver", "Uid " + packageUid + " not in foreground");
+                    z = false;
+                    if (z) {
+                        return;
+                    }
+                    if (intent.getBooleanExtra("android.service.controls.extra.CONTROL_AUTO_ADD", false)) {
+                        Handler handler = this.handler;
+                        if (handler != null) {
+                            handler.post(new Runnable() { // from class: com.android.systemui.controls.management.ControlsRequestReceiver.onReceive.1
+                                /* JADX WARN: Removed duplicated region for block: B:4:0x001b  */
+                                @Override // java.lang.Runnable
+                                /*
+                                    Code decompiled incorrectly, please refer to instructions dump.
+                                */
+                                public final void run() {
+                                    ArrayList parcelableArrayListExtra;
+                                    ControlsRequestReceiver controlsRequestReceiver = ControlsRequestReceiver.this;
+                                    final ComponentName componentName2 = componentName;
+                                    Control control2 = control;
+                                    Intent intent2 = intent;
+                                    Companion companion = ControlsRequestReceiver.Companion;
+                                    controlsRequestReceiver.getClass();
+                                    ArrayList arrayList = null;
+                                    int i = 0;
+                                    if (intent2.hasExtra("android.service.controls.extra.CONTROLS")) {
+                                        try {
+                                            parcelableArrayListExtra = intent2.getParcelableArrayListExtra("android.service.controls.extra.CONTROLS");
+                                            if (parcelableArrayListExtra != null) {
+                                                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(parcelableArrayListExtra, 10));
+                                                int size = parcelableArrayListExtra.size();
+                                                int i2 = 0;
+                                                while (i2 < size) {
+                                                    Object obj = parcelableArrayListExtra.get(i2);
+                                                    i2++;
+                                                    arrayList2.add(((Control) obj).getControlId());
+                                                }
+                                                Log.d("ControlsRequestReceiver", "autoAddList: " + arrayList2);
+                                            }
+                                        } catch (ClassCastException e) {
+                                            Log.e("ControlsRequestReceiver", "Malformed intent extra Controls", e);
+                                        }
+                                    } else {
+                                        parcelableArrayListExtra = null;
+                                    }
+                                    if (parcelableArrayListExtra != null) {
+                                        arrayList = parcelableArrayListExtra;
+                                    } else if (control2 != null) {
+                                        Log.d("ControlsRequestReceiver", "autoAdd: " + control2.getControlId());
+                                        arrayList = new ArrayList();
+                                        arrayList.add(control2);
+                                    }
+                                    if (arrayList == null) {
+                                        Log.e("ControlsRequestReceiver", "Request did not contain control(s)");
+                                        return;
+                                    }
+                                    if (controlsRequestReceiver.controller != null) {
+                                        Favorites.INSTANCE.getClass();
+                                        List structuresForComponent = Favorites.getStructuresForComponent(componentName2);
+                                        if (structuresForComponent != null) {
+                                            final ArrayList arrayList3 = new ArrayList();
+                                            int size2 = arrayList.size();
+                                            int i3 = 0;
+                                            while (i3 < size2) {
+                                                Object obj2 = arrayList.get(i3);
+                                                i3++;
+                                                Control control3 = (Control) obj2;
+                                                List list = structuresForComponent;
+                                                if (!(list instanceof Collection) || !list.isEmpty()) {
+                                                    Iterator it = list.iterator();
+                                                    while (it.hasNext()) {
+                                                        List list2 = ((StructureInfo) it.next()).controls;
+                                                        if (!(list2 instanceof Collection) || !list2.isEmpty()) {
+                                                            Iterator it2 = list2.iterator();
+                                                            while (it2.hasNext()) {
+                                                                if (Intrinsics.areEqual(((ControlInfo) it2.next()).controlId, control3.getControlId())) {
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                arrayList3.add(obj2);
+                                            }
+                                            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList3, 10));
+                                            int size3 = arrayList3.size();
+                                            while (i < size3) {
+                                                Object obj3 = arrayList3.get(i);
+                                                i++;
+                                                arrayList4.add(((Control) obj3).getControlId());
+                                            }
+                                            List listMinus = CollectionsKt___CollectionsKt.minus((Iterable) arrayList, (Iterable) arrayList3);
+                                            ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listMinus, 10));
+                                            Iterator it3 = listMinus.iterator();
+                                            while (it3.hasNext()) {
+                                                arrayList5.add(((Control) it3.next()).getControlId());
+                                            }
+                                            Log.d("ControlsRequestReceiver", "add newControls = " + arrayList4 + ", already added Controls = " + arrayList5);
+                                            SecControlsController secControlsController = controlsRequestReceiver.secController;
+                                            if (secControlsController != null) {
+                                                final ControlsControllerImpl controlsControllerImpl = (ControlsControllerImpl) secControlsController;
+                                                if (controlsControllerImpl.confirmAvailability()) {
+                                                    controlsControllerImpl.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$addFavorites$1
+                                                        @Override // java.lang.Runnable
+                                                        public final void run() {
+                                                            Favorites favorites = Favorites.INSTANCE;
+                                                            ComponentName componentName3 = componentName2;
+                                                            ArrayList arrayList6 = arrayList3;
+                                                            favorites.getClass();
+                                                            if (Favorites.addFavorites(componentName3, arrayList6)) {
+                                                                controlsControllerImpl.persistenceWrapper.storeFavorites(Favorites.getAllStructures());
+                                                                ((ArrayList) controlsControllerImpl.autoAddList).addAll(arrayList3);
+                                                                SecControlsUiController secControlsUiController = controlsControllerImpl.secUiController;
+                                                                final ComponentName componentName4 = componentName2;
+                                                                final SecControlsUiControllerImpl secControlsUiControllerImpl = (SecControlsUiControllerImpl) secControlsUiController;
+                                                                MainFragment mainFragment = secControlsUiControllerImpl.mainFragment;
+                                                                if (mainFragment == null || mainFragment.mState < 7) {
+                                                                    Log.w("SecControlsUiControllerImpl", "notifyToUpdateComponent - ignore");
+                                                                } else {
+                                                                    secControlsUiControllerImpl.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$notifyToUpdateComponent$1
+                                                                        @Override // java.lang.Runnable
+                                                                        public final void run() {
+                                                                            SecControlsUiControllerImpl secControlsUiControllerImpl2 = secControlsUiControllerImpl;
+                                                                            int i4 = SecControlsUiControllerImpl.$r8$clinit;
+                                                                            secControlsUiControllerImpl2.loadComponentInfo();
+                                                                            SecControlsUiControllerImpl secControlsUiControllerImpl3 = secControlsUiControllerImpl;
+                                                                            SelectedItem selectedItem = secControlsUiControllerImpl3.selectedItem;
+                                                                            ComponentName componentName5 = componentName4;
+                                                                            if (Intrinsics.areEqual(selectedItem.getComponentName(), componentName5)) {
+                                                                                SecControlsUiControllerImpl.access$reload(secControlsUiControllerImpl3, selectedItem);
+                                                                                return;
+                                                                            }
+                                                                            Log.w("SecControlsUiControllerImpl", "notifyToUpdateComponent-Skip reload selectedCompInfo: " + selectedItem + ", updateComp: " + componentName5);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            return;
+                        } else {
+                            Log.e("ControlsRequestReceiver", "onReceive handler is null");
+                            return;
+                        }
+                    }
+                    Intent intent2 = new Intent(context, (Class<?>) ControlsRequestDialog.class);
+                    intent2.putExtra("android.intent.extra.COMPONENT_NAME", componentName);
+                    intent2.putExtra("android.service.controls.extra.CONTROL", control);
+                    intent2.addFlags(268566528);
+                    intent2.putExtra("android.intent.extra.USER_ID", context.getUserId());
+                    context.startActivityAsUser(intent2, UserHandle.SYSTEM);
+                    return;
+                }
+                z = true;
+                if (z) {
+                }
+            } catch (Exception e) {
+                Log.e("ControlsRequestReceiver", "Malformed intent extra Control", e);
+            }
+        } catch (Exception e2) {
+            Log.e("ControlsRequestReceiver", "Malformed intent extra ComponentName", e2);
+        }
     }
 
     public ControlsRequestReceiver(ControlsController controlsController, SecControlsController secControlsController, Handler handler) {

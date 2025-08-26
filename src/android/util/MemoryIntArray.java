@@ -64,9 +64,9 @@ public final class MemoryIntArray implements Parcelable, Closeable {
             throw new IllegalArgumentException("Max size is 1024");
         }
         this.mIsOwner = true;
-        int nativeCreate = nativeCreate(UUID.randomUUID().toString(), i);
-        this.mFd = nativeCreate;
-        this.mMemoryAddr = nativeOpen(nativeCreate, true);
+        int iNativeCreate = nativeCreate(UUID.randomUUID().toString(), i);
+        this.mFd = iNativeCreate;
+        this.mMemoryAddr = nativeOpen(iNativeCreate, true);
         this.mSize = nativeSize(this.mFd);
         closeGuard.open("MemoryIntArray.close");
     }
@@ -80,9 +80,9 @@ public final class MemoryIntArray implements Parcelable, Closeable {
         if (parcelFileDescriptor == null) {
             throw new IOException("No backing file descriptor");
         }
-        int detachFd = parcelFileDescriptor.detachFd();
-        this.mFd = detachFd;
-        this.mMemoryAddr = nativeOpen(detachFd, false);
+        int iDetachFd = parcelFileDescriptor.detachFd();
+        this.mFd = iDetachFd;
+        this.mMemoryAddr = nativeOpen(iDetachFd, false);
         this.mSize = nativeSize(this.mFd);
         closeGuard.open("MemoryIntArray.close");
     }
@@ -139,11 +139,11 @@ public final class MemoryIntArray implements Parcelable, Closeable {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         try {
-            ParcelFileDescriptor fromFd = ParcelFileDescriptor.fromFd(this.mFd);
+            ParcelFileDescriptor parcelFileDescriptorFromFd = ParcelFileDescriptor.fromFd(this.mFd);
             try {
-                parcel.writeParcelable(fromFd, i);
-                if (fromFd != null) {
-                    fromFd.close();
+                parcel.writeParcelable(parcelFileDescriptorFromFd, i);
+                if (parcelFileDescriptorFromFd != null) {
+                    parcelFileDescriptorFromFd.close();
                 }
             } finally {
             }

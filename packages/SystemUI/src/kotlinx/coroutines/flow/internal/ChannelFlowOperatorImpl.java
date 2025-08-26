@@ -10,7 +10,6 @@ import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ChannelFlowOperatorImpl extends ChannelFlowOperator {
     public /* synthetic */ ChannelFlowOperatorImpl(Flow flow, CoroutineContext coroutineContext, int i, BufferOverflow bufferOverflow, int i2, DefaultConstructorMarker defaultConstructorMarker) {
@@ -29,8 +28,8 @@ public final class ChannelFlowOperatorImpl extends ChannelFlowOperator {
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlowOperator
     public final Object flowCollect(FlowCollector flowCollector, Continuation continuation) {
-        Object collect = this.flow.collect(flowCollector, continuation);
-        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+        Object objCollect = this.flow.collect(flowCollector, continuation);
+        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
     }
 
     public ChannelFlowOperatorImpl(Flow flow, CoroutineContext coroutineContext, int i, BufferOverflow bufferOverflow) {

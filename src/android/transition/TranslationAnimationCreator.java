@@ -22,8 +22,8 @@ class TranslationAnimationCreator {
             f = (r2[0] - i) + translationX;
             f5 = (r2[1] - i2) + translationY;
         }
-        int round = i + Math.round(f - translationX);
-        int round2 = i2 + Math.round(f5 - translationY);
+        int iRound = i + Math.round(f - translationX);
+        int iRound2 = i2 + Math.round(f5 - translationY);
         view.setTranslationX(f);
         view.setTranslationY(f5);
         if (f == f3 && f5 == f4) {
@@ -32,13 +32,13 @@ class TranslationAnimationCreator {
         Path path = new Path();
         path.moveTo(f, f5);
         path.lineTo(f3, f4);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, View.TRANSLATION_Y, path);
-        TransitionPositionListener transitionPositionListener = new TransitionPositionListener(view, transitionValues.view, round, round2, translationX, translationY);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, View.TRANSLATION_Y, path);
+        TransitionPositionListener transitionPositionListener = new TransitionPositionListener(view, transitionValues.view, iRound, iRound2, translationX, translationY);
         transition.addListener(transitionPositionListener);
-        ofFloat.addListener(transitionPositionListener);
-        ofFloat.addPauseListener(transitionPositionListener);
-        ofFloat.setInterpolator(timeInterpolator);
-        return ofFloat;
+        objectAnimatorOfFloat.addListener(transitionPositionListener);
+        objectAnimatorOfFloat.addPauseListener(transitionPositionListener);
+        objectAnimatorOfFloat.setInterpolator(timeInterpolator);
+        return objectAnimatorOfFloat;
     }
 
     private static class TransitionPositionListener extends AnimatorListenerAdapter implements Transition.TransitionListener {

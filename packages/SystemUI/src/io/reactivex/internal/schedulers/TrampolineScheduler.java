@@ -10,12 +10,10 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TrampolineScheduler extends Scheduler {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SleepingRunnable implements Runnable {
         public final long execTime;
         public final Runnable run;
@@ -28,18 +26,18 @@ public final class TrampolineScheduler extends Scheduler {
         }
 
         @Override // java.lang.Runnable
-        public final void run() {
+        public final void run() throws InterruptedException {
             if (this.worker.disposed) {
                 return;
             }
             TrampolineWorker trampolineWorker = this.worker;
             TimeUnit timeUnit = TimeUnit.MILLISECONDS;
             trampolineWorker.getClass();
-            long convert = timeUnit.convert(System.currentTimeMillis(), timeUnit);
+            long jConvert = timeUnit.convert(System.currentTimeMillis(), timeUnit);
             long j = this.execTime;
-            if (j > convert) {
+            if (j > jConvert) {
                 try {
-                    Thread.sleep(j - convert);
+                    Thread.sleep(j - jConvert);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     RxJavaPlugins.onError(e);
@@ -53,7 +51,6 @@ public final class TrampolineScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TimedRunnable implements Comparable {
         public final int count;
         public volatile boolean disposed;
@@ -95,7 +92,7 @@ public final class TrampolineScheduler extends Scheduler {
     }
 
     @Override // io.reactivex.Scheduler
-    public final Disposable scheduleDirect(Runnable runnable, long j, TimeUnit timeUnit) {
+    public final Disposable scheduleDirect(Runnable runnable, long j, TimeUnit timeUnit) throws InterruptedException {
         try {
             timeUnit.sleep(j);
             int i = ObjectHelper.$r8$clinit;
@@ -107,14 +104,12 @@ public final class TrampolineScheduler extends Scheduler {
         return EmptyDisposable.INSTANCE;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrampolineWorker extends Scheduler.Worker {
         public volatile boolean disposed;
         public final PriorityBlockingQueue queue = new PriorityBlockingQueue();
         public final AtomicInteger wip = new AtomicInteger();
         public final AtomicInteger counter = new AtomicInteger();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class AppendToQueueTask implements Runnable {
             public final TimedRunnable timedRunnable;
 
@@ -143,12 +138,12 @@ public final class TrampolineScheduler extends Scheduler {
             if (this.wip.getAndIncrement() != 0) {
                 return Disposables.fromRunnable(new AppendToQueueTask(timedRunnable));
             }
-            int i = 1;
+            int iAddAndGet = 1;
             while (!this.disposed) {
                 TimedRunnable timedRunnable2 = (TimedRunnable) this.queue.poll();
                 if (timedRunnable2 == null) {
-                    i = this.wip.addAndGet(-i);
-                    if (i == 0) {
+                    iAddAndGet = this.wip.addAndGet(-iAddAndGet);
+                    if (iAddAndGet == 0) {
                         return EmptyDisposable.INSTANCE;
                     }
                 } else if (!timedRunnable2.disposed) {

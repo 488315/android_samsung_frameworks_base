@@ -2,7 +2,6 @@ package com.android.systemui.qs.bar;
 
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BarFactory {
     public final Provider mBottomLargeTileBarProvider;
@@ -21,7 +20,6 @@ public class BarFactory {
     public final Provider mVideoCallMicModeBarProvider;
     public final Provider mVolumeBarProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.BarFactory$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$qs$bar$BarType;

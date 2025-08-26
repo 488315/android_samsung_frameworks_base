@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CurrentAppShortcutsSource implements KeyboardShortcutGroupsSource {
     public final WindowManager windowManager;
@@ -25,7 +24,7 @@ public final class CurrentAppShortcutsSource implements KeyboardShortcutGroupsSo
         cancellableContinuationImpl.initCancellability();
         this.windowManager.requestAppKeyboardShortcuts(new WindowManager.KeyboardShortcutsReceiver() { // from class: com.android.systemui.keyboard.shortcut.data.source.CurrentAppShortcutsSource$shortcutGroups$2$shortcutsReceiver$1
             public final void onKeyboardShortcutsReceived(List list) {
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 int i2 = Result.$r8$clinit;
                 if (list == null) {
                     list = EmptyList.INSTANCE;

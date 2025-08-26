@@ -4,19 +4,17 @@ import androidx.compose.ui.geometry.Size;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Brush {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         /* renamed from: radialGradient-P_Vx-Ks$default, reason: not valid java name */
-        public static RadialGradient m450radialGradientP_VxKs$default(Companion companion, List list, long j, float f) {
+        public static RadialGradient m452radialGradientP_VxKs$default(Companion companion, List list, long j, float f) {
             TileMode.Companion.getClass();
             companion.getClass();
             return new RadialGradient(list, null, j, f, 0, null);
@@ -31,7 +29,7 @@ public abstract class Brush {
     }
 
     /* renamed from: applyTo-Pq9zytI, reason: not valid java name */
-    public abstract void mo449applyToPq9zytI(float f, long j, Paint paint);
+    public abstract void mo451applyToPq9zytI(float f, long j, Paint paint);
 
     private Brush() {
         Size.Companion.getClass();

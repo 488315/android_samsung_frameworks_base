@@ -5,7 +5,6 @@ import android.view.View;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TransitionViewState {
     public static final int $stable = 8;
@@ -81,11 +80,11 @@ public final class TransitionViewState {
         for (int i = 0; i < childCount; i++) {
             View childAt = transitionLayout.getChildAt(i);
             Map<Integer, WidgetState> map = this.widgetStates;
-            Integer valueOf = Integer.valueOf(childAt.getId());
-            WidgetState widgetState = map.get(valueOf);
+            Integer numValueOf = Integer.valueOf(childAt.getId());
+            WidgetState widgetState = map.get(numValueOf);
             if (widgetState == null) {
                 WidgetState widgetState2 = new WidgetState(0.0f, 0.0f, 0, 0, 0, 0, 0.0f, 0.0f, false, 384, null);
-                map.put(valueOf, widgetState2);
+                map.put(numValueOf, widgetState2);
                 widgetState = widgetState2;
             }
             widgetState.initFromLayout(childAt);

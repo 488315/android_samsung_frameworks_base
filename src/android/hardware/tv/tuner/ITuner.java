@@ -182,9 +182,9 @@ public interface ITuner extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITuner)) {
-                return (ITuner) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITuner)) {
+                return (ITuner) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -217,22 +217,22 @@ public interface ITuner extends IInterface {
                     parcel2.writeIntArray(frontendIds);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IFrontend openFrontendById = openFrontendById(readInt);
+                    IFrontend iFrontendOpenFrontendById = openFrontendById(i3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openFrontendById);
+                    parcel2.writeStrongInterface(iFrontendOpenFrontendById);
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
-                    if (readInt2 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt2);
+                    int i4 = parcel.readInt();
+                    if (i4 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i4);
                     }
-                    iArr = readInt2 >= 0 ? new int[readInt2] : null;
+                    iArr = i4 >= 0 ? new int[i4] : null;
                     parcel.enforceNoDataAvail();
-                    IDemux openDemux = openDemux(iArr);
+                    IDemux iDemuxOpenDemux = openDemux(iArr);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openDemux);
+                    parcel2.writeStrongInterface(iDemuxOpenDemux);
                     parcel2.writeIntArray(iArr);
                     return true;
                 case 4:
@@ -241,14 +241,14 @@ public interface ITuner extends IInterface {
                     parcel2.writeTypedObject(demuxCaps, 1);
                     return true;
                 case 5:
-                    IDescrambler openDescrambler = openDescrambler();
+                    IDescrambler iDescramblerOpenDescrambler = openDescrambler();
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openDescrambler);
+                    parcel2.writeStrongInterface(iDescramblerOpenDescrambler);
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FrontendInfo frontendInfo = getFrontendInfo(readInt3);
+                    FrontendInfo frontendInfo = getFrontendInfo(i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(frontendInfo, 1);
                     return true;
@@ -258,49 +258,49 @@ public interface ITuner extends IInterface {
                     parcel2.writeIntArray(lnbIds);
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ILnb openLnbById = openLnbById(readInt4);
+                    ILnb iLnbOpenLnbById = openLnbById(i6);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openLnbById);
+                    parcel2.writeStrongInterface(iLnbOpenLnbById);
                     return true;
                 case 9:
-                    String readString = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    if (readInt5 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt5);
+                    String string = parcel.readString();
+                    int i7 = parcel.readInt();
+                    if (i7 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i7);
                     }
-                    iArr = readInt5 >= 0 ? new int[readInt5] : null;
+                    iArr = i7 >= 0 ? new int[i7] : null;
                     parcel.enforceNoDataAvail();
-                    ILnb openLnbByName = openLnbByName(readString, iArr);
+                    ILnb iLnbOpenLnbByName = openLnbByName(string, iArr);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openLnbByName);
+                    parcel2.writeStrongInterface(iLnbOpenLnbByName);
                     parcel2.writeIntArray(iArr);
                     return true;
                 case 10:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLna(readBoolean);
+                    setLna(z);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMaxNumberOfFrontends(readInt6, readInt7);
+                    setMaxNumberOfFrontends(i8, i9);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int maxNumberOfFrontends = getMaxNumberOfFrontends(readInt8);
+                    int maxNumberOfFrontends = getMaxNumberOfFrontends(i10);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxNumberOfFrontends);
                     return true;
                 case 13:
-                    boolean isLnaSupported = isLnaSupported();
+                    boolean zIsLnaSupported = isLnaSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLnaSupported);
+                    parcel2.writeBoolean(zIsLnaSupported);
                     return true;
                 case 14:
                     int[] demuxIds = getDemuxIds();
@@ -308,16 +308,16 @@ public interface ITuner extends IInterface {
                     parcel2.writeIntArray(demuxIds);
                     return true;
                 case 15:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IDemux openDemuxById = openDemuxById(readInt9);
+                    IDemux iDemuxOpenDemuxById = openDemuxById(i11);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(openDemuxById);
+                    parcel2.writeStrongInterface(iDemuxOpenDemuxById);
                     return true;
                 case 16:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    DemuxInfo demuxInfo = getDemuxInfo(readInt10);
+                    DemuxInfo demuxInfo = getDemuxInfo(i12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(demuxInfo, 1);
                     return true;
@@ -346,303 +346,303 @@ public interface ITuner extends IInterface {
 
             @Override // android.hardware.tv.tuner.ITuner
             public int[] getFrontendIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFrontendIds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public IFrontend openFrontendById(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openFrontendById is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IFrontend.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IFrontend.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public IDemux openDemux(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(iArr.length);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(iArr.length);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openDemux is unimplemented.");
                     }
-                    obtain2.readException();
-                    IDemux asInterface = IDemux.Stub.asInterface(obtain2.readStrongBinder());
-                    obtain2.readIntArray(iArr);
-                    return asInterface;
+                    parcelObtain2.readException();
+                    IDemux iDemuxAsInterface = IDemux.Stub.asInterface(parcelObtain2.readStrongBinder());
+                    parcelObtain2.readIntArray(iArr);
+                    return iDemuxAsInterface;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public DemuxCapabilities getDemuxCaps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getDemuxCaps is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (DemuxCapabilities) obtain2.readTypedObject(DemuxCapabilities.CREATOR);
+                    parcelObtain2.readException();
+                    return (DemuxCapabilities) parcelObtain2.readTypedObject(DemuxCapabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public IDescrambler openDescrambler() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openDescrambler is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IDescrambler.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IDescrambler.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public FrontendInfo getFrontendInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getFrontendInfo is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (FrontendInfo) obtain2.readTypedObject(FrontendInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return (FrontendInfo) parcelObtain2.readTypedObject(FrontendInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public int[] getLnbIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getLnbIds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public ILnb openLnbById(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openLnbById is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ILnb.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ILnb.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public ILnb openLnbByName(String str, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(iArr.length);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(iArr.length);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openLnbByName is unimplemented.");
                     }
-                    obtain2.readException();
-                    ILnb asInterface = ILnb.Stub.asInterface(obtain2.readStrongBinder());
-                    obtain2.readIntArray(iArr);
-                    return asInterface;
+                    parcelObtain2.readException();
+                    ILnb iLnbAsInterface = ILnb.Stub.asInterface(parcelObtain2.readStrongBinder());
+                    parcelObtain2.readIntArray(iArr);
+                    return iLnbAsInterface;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public void setLna(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setLna is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public void setMaxNumberOfFrontends(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setMaxNumberOfFrontends is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public int getMaxNumberOfFrontends(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getMaxNumberOfFrontends is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public boolean isLnaSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(13, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isLnaSupported is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public int[] getDemuxIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(14, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getDemuxIds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public IDemux openDemuxById(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(15, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method openDemuxById is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IDemux.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IDemux.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public DemuxInfo getDemuxInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(16, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getDemuxInfo is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (DemuxInfo) obtain2.readTypedObject(DemuxInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return (DemuxInfo) parcelObtain2.readTypedObject(DemuxInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ITuner
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -651,18 +651,18 @@ public interface ITuner extends IInterface {
             @Override // android.hardware.tv.tuner.ITuner
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CommonRippleNode extends RippleNode {
     public final MutableScatterMap ripples;
@@ -33,7 +32,11 @@ public final class CommonRippleNode extends RippleNode {
         this(interactionSource, z, f, colorProducer, function0);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0058  */
     @Override // androidx.compose.material.ripple.RippleNode
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void addRipple$1(PressInteraction$Press pressInteraction$Press) {
         MutableScatterMap mutableScatterMap = this.ripples;
         Object[] objArr = mutableScatterMap.keys;
@@ -58,17 +61,16 @@ public final class CommonRippleNode extends RippleNode {
                     }
                     if (i2 != 8) {
                         break;
+                    } else if (i == length) {
+                        break;
+                    } else {
+                        i++;
                     }
-                }
-                if (i == length) {
-                    break;
-                } else {
-                    i++;
                 }
             }
         }
         boolean z = this.bounded;
-        RippleAnimation rippleAnimation2 = new RippleAnimation(z ? Offset.m393boximpl(pressInteraction$Press.pressPosition) : null, this.targetRadius, z, null);
+        RippleAnimation rippleAnimation2 = new RippleAnimation(z ? Offset.m395boximpl(pressInteraction$Press.pressPosition) : null, this.targetRadius, z, null);
         mutableScatterMap.set(pressInteraction$Press, rippleAnimation2);
         BuildersKt.launch$default(getCoroutineScope(), null, null, new CommonRippleNode$addRipple$2(rippleAnimation2, this, pressInteraction$Press, null), 3);
         DrawModifierNodeKt.invalidateDraw(this);
@@ -86,8 +88,6 @@ public final class CommonRippleNode extends RippleNode {
         Object[] objArr4;
         long j;
         int i;
-        long Color;
-        long Color2;
         CommonRippleNode commonRippleNode = this;
         float f3 = ((RippleAlpha) commonRippleNode.rippleAlpha.invoke()).pressedAlpha;
         if (f3 == 0.0f) {
@@ -113,61 +113,62 @@ public final class CommonRippleNode extends RippleNode {
                         int i6 = (i2 << 3) + i5;
                         Object obj = objArr5[i6];
                         RippleAnimation rippleAnimation = (RippleAnimation) objArr6[i6];
-                        Color = ColorKt.Color(Color.m461getRedimpl(r14), Color.m460getGreenimpl(r14), Color.m458getBlueimpl(r14), f3, Color.m459getColorSpaceimpl(commonRippleNode.color.mo261invoke0d7_KjU()));
+                        long jMo262invoke0d7_KjU = commonRippleNode.color.mo262invoke0d7_KjU();
+                        long jColor = ColorKt.Color(Color.m463getRedimpl(jMo262invoke0d7_KjU), Color.m462getGreenimpl(jMo262invoke0d7_KjU), Color.m460getBlueimpl(jMo262invoke0d7_KjU), f3, Color.m461getColorSpaceimpl(jMo262invoke0d7_KjU));
                         Float f4 = rippleAnimation.startRadius;
                         i = i3;
                         CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
                         if (f4 == null) {
-                            long mo545getSizeNHjbRc = canvasDrawScope.mo545getSizeNHjbRc();
+                            long jMo547getSizeNHjbRc = canvasDrawScope.mo547getSizeNHjbRc();
                             float f5 = RippleAnimationKt.BoundedRippleExtraRadius;
                             f2 = f3;
-                            rippleAnimation.startRadius = Float.valueOf(Math.max(Size.m417getWidthimpl(mo545getSizeNHjbRc), Size.m415getHeightimpl(mo545getSizeNHjbRc)) * 0.3f);
+                            rippleAnimation.startRadius = Float.valueOf(Math.max(Size.m419getWidthimpl(jMo547getSizeNHjbRc), Size.m417getHeightimpl(jMo547getSizeNHjbRc)) * 0.3f);
                         } else {
                             f2 = f3;
                         }
                         if (rippleAnimation.origin == null) {
-                            rippleAnimation.origin = Offset.m393boximpl(canvasDrawScope.mo544getCenterF1C5BW0());
+                            rippleAnimation.origin = Offset.m395boximpl(canvasDrawScope.mo546getCenterF1C5BW0());
                         }
                         if (rippleAnimation.targetCenter == null) {
-                            rippleAnimation.targetCenter = Offset.m393boximpl(OffsetKt.Offset(Size.m417getWidthimpl(canvasDrawScope.mo545getSizeNHjbRc()) / 2.0f, Size.m415getHeightimpl(canvasDrawScope.mo545getSizeNHjbRc()) / 2.0f));
+                            rippleAnimation.targetCenter = Offset.m395boximpl(OffsetKt.Offset(Size.m419getWidthimpl(canvasDrawScope.mo547getSizeNHjbRc()) / 2.0f, Size.m417getHeightimpl(canvasDrawScope.mo547getSizeNHjbRc()) / 2.0f));
                         }
-                        float floatValue = (!((Boolean) ((SnapshotMutableStateImpl) rippleAnimation.finishRequested$delegate).getValue()).booleanValue() || ((Boolean) ((SnapshotMutableStateImpl) rippleAnimation.finishedFadingIn$delegate).getValue()).booleanValue()) ? ((Number) rippleAnimation.animatedAlpha.internalState.getValue()).floatValue() : 1.0f;
+                        float fFloatValue = (!((Boolean) ((SnapshotMutableStateImpl) rippleAnimation.finishRequested$delegate).getValue()).booleanValue() || ((Boolean) ((SnapshotMutableStateImpl) rippleAnimation.finishedFadingIn$delegate).getValue()).booleanValue()) ? ((Number) rippleAnimation.animatedAlpha.internalState.getValue()).floatValue() : 1.0f;
                         Float f6 = rippleAnimation.startRadius;
                         f6.getClass();
-                        float f7 = floatValue;
+                        float f7 = fFloatValue;
                         jArr2 = jArr3;
-                        float lerp = MathHelpersKt.lerp(f6.floatValue(), rippleAnimation.radius, ((Number) rippleAnimation.animatedRadiusPercent.internalState.getValue()).floatValue());
+                        float fLerp = MathHelpersKt.lerp(f6.floatValue(), rippleAnimation.radius, ((Number) rippleAnimation.animatedRadiusPercent.internalState.getValue()).floatValue());
                         Offset offset = rippleAnimation.origin;
                         offset.getClass();
-                        float m398getXimpl = Offset.m398getXimpl(offset.packedValue);
+                        float fM400getXimpl = Offset.m400getXimpl(offset.packedValue);
                         Offset offset2 = rippleAnimation.targetCenter;
                         offset2.getClass();
                         objArr3 = objArr5;
-                        float m398getXimpl2 = Offset.m398getXimpl(offset2.packedValue);
+                        float fM400getXimpl2 = Offset.m400getXimpl(offset2.packedValue);
                         Animatable animatable = rippleAnimation.animatedCenterPercent;
                         objArr4 = objArr6;
-                        float lerp2 = MathHelpersKt.lerp(m398getXimpl, m398getXimpl2, ((Number) animatable.internalState.getValue()).floatValue());
+                        float fLerp2 = MathHelpersKt.lerp(fM400getXimpl, fM400getXimpl2, ((Number) animatable.internalState.getValue()).floatValue());
                         Offset offset3 = rippleAnimation.origin;
                         offset3.getClass();
                         j = j2;
-                        float m399getYimpl = Offset.m399getYimpl(offset3.packedValue);
+                        float fM401getYimpl = Offset.m401getYimpl(offset3.packedValue);
                         Offset offset4 = rippleAnimation.targetCenter;
                         offset4.getClass();
-                        long Offset = OffsetKt.Offset(lerp2, MathHelpersKt.lerp(m399getYimpl, Offset.m399getYimpl(offset4.packedValue), ((Number) animatable.internalState.getValue()).floatValue()));
-                        Color2 = ColorKt.Color(Color.m461getRedimpl(Color), Color.m460getGreenimpl(Color), Color.m458getBlueimpl(Color), Color.m457getAlphaimpl(Color) * f7, Color.m459getColorSpaceimpl(Color));
+                        long jOffset = OffsetKt.Offset(fLerp2, MathHelpersKt.lerp(fM401getYimpl, Offset.m401getYimpl(offset4.packedValue), ((Number) animatable.internalState.getValue()).floatValue()));
+                        long jColor2 = ColorKt.Color(Color.m463getRedimpl(jColor), Color.m462getGreenimpl(jColor), Color.m460getBlueimpl(jColor), Color.m459getAlphaimpl(jColor) * f7, Color.m461getColorSpaceimpl(jColor));
                         if (rippleAnimation.bounded) {
-                            float m417getWidthimpl = Size.m417getWidthimpl(canvasDrawScope.mo545getSizeNHjbRc());
-                            float m415getHeightimpl = Size.m415getHeightimpl(canvasDrawScope.mo545getSizeNHjbRc());
+                            float fM419getWidthimpl = Size.m419getWidthimpl(canvasDrawScope.mo547getSizeNHjbRc());
+                            float fM417getHeightimpl = Size.m417getHeightimpl(canvasDrawScope.mo547getSizeNHjbRc());
                             ClipOp.Companion.getClass();
                             int i7 = ClipOp.Intersect;
                             CanvasDrawScope$drawContext$1 canvasDrawScope$drawContext$1 = canvasDrawScope.drawContext;
-                            long m526getSizeNHjbRc = canvasDrawScope$drawContext$1.m526getSizeNHjbRc();
+                            long jM528getSizeNHjbRc = canvasDrawScope$drawContext$1.m528getSizeNHjbRc();
                             canvasDrawScope$drawContext$1.getCanvas().save();
-                            canvasDrawScope$drawContext$1.transform.m528clipRectN_I0leg(0.0f, 0.0f, m417getWidthimpl, m415getHeightimpl, i7);
-                            DrawScope.m532drawCircleVaOC9Bg$default(layoutNodeDrawScope, Color2, lerp, Offset, 0.0f, null, 0, 120);
-                            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(canvasDrawScope$drawContext$1, m526getSizeNHjbRc);
+                            canvasDrawScope$drawContext$1.transform.m530clipRectN_I0leg(0.0f, 0.0f, fM419getWidthimpl, fM417getHeightimpl, i7);
+                            DrawScope.m534drawCircleVaOC9Bg$default(layoutNodeDrawScope, jColor2, fLerp, jOffset, 0.0f, null, 0, 120);
+                            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(canvasDrawScope$drawContext$1, jM528getSizeNHjbRc);
                         } else {
-                            DrawScope.m532drawCircleVaOC9Bg$default(layoutNodeDrawScope, Color2, lerp, Offset, 0.0f, null, 0, 120);
+                            DrawScope.m534drawCircleVaOC9Bg$default(layoutNodeDrawScope, jColor2, fLerp, jOffset, 0.0f, null, 0, 120);
                         }
                     } else {
                         f2 = f3;

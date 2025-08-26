@@ -40,13 +40,13 @@ public final class NanoAppBinary {
 
     public static final ArrayList<NanoAppBinary> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NanoAppBinary> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NanoAppBinary nanoAppBinary = new NanoAppBinary();
-            nanoAppBinary.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            nanoAppBinary.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(nanoAppBinary);
         }
         return arrayList;
@@ -60,10 +60,10 @@ public final class NanoAppBinary {
         this.targetChreApiMinorVersion = hwBlob.getInt8(17 + j);
         long j2 = j + 24;
         int int32 = hwBlob.getInt32(j + 32);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
         this.customBinary.clear();
         for (int i = 0; i < int32; i++) {
-            this.customBinary.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.customBinary.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

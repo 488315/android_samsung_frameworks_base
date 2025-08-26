@@ -14,7 +14,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.SdkFoldUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkLog;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class DisplayStateMonitor {
     public static final boolean DEBUG = !SemSystemProperties.getBoolean("ro.product_ship", true);
@@ -24,14 +23,14 @@ public abstract class DisplayStateMonitor {
     public boolean mIsFolded = false;
     public final AnonymousClass1 mFoldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.samsung.android.wallpaper.live.sdk.service.displaymonitor.DisplayStateMonitor.1
         public final void onFoldStateChanged(final boolean z) {
-            final long elapsedRealtime = SystemClock.elapsedRealtime();
+            final long jElapsedRealtime = SystemClock.elapsedRealtime();
             DisplayStateMonitor.this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.wallpaper.live.sdk.service.displaymonitor.DisplayStateMonitor.1.1
                 public boolean mIsWaitingTriggered = false;
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                    if (elapsedRealtime2 < 200 && SdkFoldUtils.isFolded(DisplayStateMonitor.this.mContext) != z) {
+                    long jElapsedRealtime2 = SystemClock.elapsedRealtime() - jElapsedRealtime;
+                    if (jElapsedRealtime2 < 200 && SdkFoldUtils.isFolded(DisplayStateMonitor.this.mContext) != z) {
                         if (DisplayStateMonitor.DEBUG) {
                             SdkLog.i("DisplayStateMonitor", "onFoldStateChanged : LID state not updated yet. will dispatch later. which=" + DisplayStateMonitor.this.getCurrentWhich() + ", folded=" + z);
                         }
@@ -40,7 +39,7 @@ public abstract class DisplayStateMonitor {
                         return;
                     }
                     if (this.mIsWaitingTriggered) {
-                        SdkLog.i("DisplayStateMonitor", "onFoldStateChanged : waiting finished. which=" + DisplayStateMonitor.this.getCurrentWhich() + ", folded=" + z + ", elapsed=" + elapsedRealtime2);
+                        SdkLog.i("DisplayStateMonitor", "onFoldStateChanged : waiting finished. which=" + DisplayStateMonitor.this.getCurrentWhich() + ", folded=" + z + ", elapsed=" + jElapsedRealtime2);
                     }
                     DisplayStateMonitor displayStateMonitor = DisplayStateMonitor.this;
                     boolean z2 = z;

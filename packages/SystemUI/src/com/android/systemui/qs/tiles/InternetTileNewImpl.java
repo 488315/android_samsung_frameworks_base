@@ -31,7 +31,6 @@ import com.android.systemui.statusbar.pipeline.shared.ui.viewmodel.InternetTileV
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetTileNewImpl extends QSTileImpl {
     public static final Intent WIFI_SETTINGS;
@@ -41,7 +40,6 @@ public final class InternetTileNewImpl extends QSTileImpl {
     public final Handler mainHandler;
     public InternetTileModel model;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -95,7 +93,7 @@ public final class InternetTileNewImpl extends QSTileImpl {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleClick(final Expandable expandable) {
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.InternetTileNewImpl$handleClick$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.InternetTileNewImpl.handleClick.1
             @Override // java.lang.Runnable
             public final void run() {
                 InternetTileNewImpl internetTileNewImpl = InternetTileNewImpl.this;
@@ -134,9 +132,9 @@ public final class InternetTileNewImpl extends QSTileImpl {
         } else if (internetTileModel.getIconId() != null) {
             Integer iconId = internetTileModel.getIconId();
             iconId.getClass();
-            int intValue = iconId.intValue();
+            int iIntValue = iconId.intValue();
             int i3 = QsInCompose.$r8$clinit;
-            icon = QSTileImpl.ResourceIcon.get(intValue);
+            icon = QSTileImpl.ResourceIcon.get(iIntValue);
         } else {
             icon = null;
         }

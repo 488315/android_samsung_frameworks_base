@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQSExpansionStateRepository {
     public final StateFlowImpl _isCustomizerShowing;
@@ -38,7 +37,6 @@ public final class SecQSExpansionStateRepository {
     public final ReadonlyStateFlow panelTransitionEnabled;
     public final ReadonlyStateFlow panelTransitionState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.data.repository.SecQSExpansionStateRepository$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function6 {
         final /* synthetic */ Function1 $notify;
@@ -57,17 +55,17 @@ public final class SecQSExpansionStateRepository {
 
         @Override // kotlin.jvm.functions.Function6
         public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
-            boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-            boolean booleanValue3 = ((Boolean) obj3).booleanValue();
-            boolean booleanValue4 = ((Boolean) obj4).booleanValue();
-            boolean booleanValue5 = ((Boolean) obj5).booleanValue();
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+            boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+            boolean zBooleanValue4 = ((Boolean) obj4).booleanValue();
+            boolean zBooleanValue5 = ((Boolean) obj5).booleanValue();
             AnonymousClass1 anonymousClass1 = SecQSExpansionStateRepository.this.new AnonymousClass1(this.$notify, (Continuation) obj6);
-            anonymousClass1.Z$0 = booleanValue;
-            anonymousClass1.Z$1 = booleanValue2;
-            anonymousClass1.Z$2 = booleanValue3;
-            anonymousClass1.Z$3 = booleanValue4;
-            anonymousClass1.Z$4 = booleanValue5;
+            anonymousClass1.Z$0 = zBooleanValue;
+            anonymousClass1.Z$1 = zBooleanValue2;
+            anonymousClass1.Z$2 = zBooleanValue3;
+            anonymousClass1.Z$3 = zBooleanValue4;
+            anonymousClass1.Z$4 = zBooleanValue5;
             return anonymousClass1.invokeSuspend(Unit.INSTANCE);
         }
 
@@ -83,31 +81,30 @@ public final class SecQSExpansionStateRepository {
             boolean z3 = this.Z$2;
             boolean z4 = this.Z$3;
             boolean z5 = this.Z$4;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("expanded: ", " | CS: ", " | DO: ", z, z2);
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z3, " | DS: ", z4, " | DC: ");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, z5, "SecQSExpansionStateRepository");
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("expanded: ", " | CS: ", " | DO: ", z, z2);
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z3, " | DS: ", z4, " | DC: ");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, z5, "SecQSExpansionStateRepository");
             boolean z6 = (z2 || z3 || z4 || z5) ? false : z;
-            Boolean valueOf = Boolean.valueOf(z6);
+            Boolean boolValueOf = Boolean.valueOf(z6);
             SecQSExpansionStateRepository secQSExpansionStateRepository = SecQSExpansionStateRepository.this;
             if (secQSExpansionStateRepository.expandedWithCustomizerOrDetail == z6) {
-                valueOf = null;
+                boolValueOf = null;
             }
-            if (valueOf == null) {
+            if (boolValueOf == null) {
                 return null;
             }
             Function1 function1 = this.$notify;
-            boolean booleanValue = valueOf.booleanValue();
-            StringBuilder m2 = EmergencyButtonController$$ExternalSyntheticOutline0.m("notify expanded[", " => ", "] expanded: ", secQSExpansionStateRepository.expandedWithCustomizerOrDetail, booleanValue);
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m2, z, " | CS: ", z2, " | DO: ");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m2, z3, " | DS: ", z4, " | DC: ");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m2, z5, "SecQSExpansionStateRepository");
-            secQSExpansionStateRepository.expandedWithCustomizerOrDetail = booleanValue;
-            function1.mo779invoke(Boolean.valueOf(booleanValue));
+            boolean zBooleanValue = boolValueOf.booleanValue();
+            StringBuilder sbM2 = EmergencyButtonController$$ExternalSyntheticOutline0.m("notify expanded[", " => ", "] expanded: ", secQSExpansionStateRepository.expandedWithCustomizerOrDetail, zBooleanValue);
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM2, z, " | CS: ", z2, " | DO: ");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM2, z3, " | DS: ", z4, " | DC: ");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM2, z5, "SecQSExpansionStateRepository");
+            secQSExpansionStateRepository.expandedWithCustomizerOrDetail = zBooleanValue;
+            function1.mo781invoke(Boolean.valueOf(zBooleanValue));
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -123,35 +120,35 @@ public final class SecQSExpansionStateRepository {
 
     public SecQSExpansionStateRepository(CoroutineScope coroutineScope, ShadeRepository shadeRepository, Function1 function1) {
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isCustomizerShowing = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow);
-        this.isCustomizerShowing = asStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._isDetailOpening = MutableStateFlow2;
-        ReadonlyStateFlow asStateFlow2 = FlowKt.asStateFlow(MutableStateFlow2);
-        this.isDetailOpening = asStateFlow2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
-        this._isDetailShowing = MutableStateFlow3;
-        ReadonlyStateFlow asStateFlow3 = FlowKt.asStateFlow(MutableStateFlow3);
-        this.isDetailShowing = asStateFlow3;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
-        this._isDetailClosing = MutableStateFlow4;
-        ReadonlyStateFlow asStateFlow4 = FlowKt.asStateFlow(MutableStateFlow4);
-        this.isDetailClosing = asStateFlow4;
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(bool);
-        this._panelTransitionEnabled = MutableStateFlow5;
-        ReadonlyStateFlow asStateFlow5 = FlowKt.asStateFlow(MutableStateFlow5);
-        this.panelTransitionEnabled = asStateFlow5;
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(3);
-        this._panelTransitionState = MutableStateFlow6;
-        ReadonlyStateFlow asStateFlow6 = FlowKt.asStateFlow(MutableStateFlow6);
-        this.panelTransitionState = asStateFlow6;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isCustomizerShowing = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.isCustomizerShowing = readonlyStateFlowAsStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._isDetailOpening = stateFlowImplMutableStateFlow2;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow2 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        this.isDetailOpening = readonlyStateFlowAsStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(bool);
+        this._isDetailShowing = stateFlowImplMutableStateFlow3;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow3 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
+        this.isDetailShowing = readonlyStateFlowAsStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
+        this._isDetailClosing = stateFlowImplMutableStateFlow4;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow4 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
+        this.isDetailClosing = readonlyStateFlowAsStateFlow4;
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(bool);
+        this._panelTransitionEnabled = stateFlowImplMutableStateFlow5;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow5 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow5);
+        this.panelTransitionEnabled = readonlyStateFlowAsStateFlow5;
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(3);
+        this._panelTransitionState = stateFlowImplMutableStateFlow6;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow6 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow6);
+        this.panelTransitionState = readonlyStateFlowAsStateFlow6;
         ShadeRepositoryImpl shadeRepositoryImpl = (ShadeRepositoryImpl) shadeRepository;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(asStateFlow5, asStateFlow6, shadeRepositoryImpl.lockscreenShadeExpansion, shadeRepositoryImpl.qsExpansion, new SecQSExpansionStateRepository$expanded$1(this, null)));
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(readonlyStateFlowAsStateFlow5, readonlyStateFlowAsStateFlow6, shadeRepositoryImpl.lockscreenShadeExpansion, shadeRepositoryImpl.qsExpansion, new SecQSExpansionStateRepository$expanded$1(this, null)));
         SharingStarted.Companion.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(distinctUntilChanged, coroutineScope, SharingStarted.Companion.Eagerly, bool);
-        this.expanded = stateIn;
-        FlowKt.launchIn(FlowKt.distinctUntilChanged(FlowKt.combine(stateIn, asStateFlow, asStateFlow2, asStateFlow3, asStateFlow4, new AnonymousClass1(function1, null))), coroutineScope);
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowDistinctUntilChanged, coroutineScope, SharingStarted.Companion.Eagerly, bool);
+        this.expanded = readonlyStateFlowStateIn;
+        FlowKt.launchIn(FlowKt.distinctUntilChanged(FlowKt.combine(readonlyStateFlowStateIn, readonlyStateFlowAsStateFlow, readonlyStateFlowAsStateFlow2, readonlyStateFlowAsStateFlow3, readonlyStateFlowAsStateFlow4, new AnonymousClass1(function1, null))), coroutineScope);
     }
 }

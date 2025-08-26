@@ -18,7 +18,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.notification.row.HybridNotificationView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationMessagingTemplateViewWrapper extends NotificationTemplateViewWrapper {
     public ViewGroup mImageMessageContainer;
@@ -28,7 +27,6 @@ public class NotificationMessagingTemplateViewWrapper extends NotificationTempla
     public final View mTitle;
     public final View mTitleInHeader;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.wrapper.NotificationMessagingTemplateViewWrapper$1, reason: invalid class name */
     public class AnonymousClass1 extends ViewTransformationHelper.CustomTransformation {
         @Override // com.android.systemui.statusbar.ViewTransformationHelper.CustomTransformation

@@ -19,9 +19,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("3045AE6FC8422f64ED579528D38120EAE12196D5");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("3045AE6FC8422f64ED579528D38120EAE12196D5");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "03188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "03188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime192v2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.2
@@ -32,9 +32,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("31a92ee2029fd10d901b113e990710f0d21ac6b6");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("31a92ee2029fd10d901b113e990710f0d21ac6b6");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "03eea2bae7e1497842f2de7769cfe9c989c072ad696f48034a"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "03eea2bae7e1497842f2de7769cfe9c989c072ad696f48034a"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime192v3 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.3
@@ -45,9 +45,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("c469684435deb378c4b65ca9591e2a5763059a2e");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("c469684435deb378c4b65ca9591e2a5763059a2e");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "027d29778100c65a1da1783716588dce2b8b4aee8e228f1896"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "027d29778100c65a1da1783716588dce2b8b4aee8e228f1896"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime239v1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.4
@@ -58,9 +58,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("e43bb460f0b80cc0c0b075798e948060f8321b7d");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("e43bb460f0b80cc0c0b075798e948060f8321b7d");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "020ffa963cdca8816ccc33b8642bedf905c3d358573d3f27fbbd3b3cb9aaaf"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "020ffa963cdca8816ccc33b8642bedf905c3d358573d3f27fbbd3b3cb9aaaf"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime239v2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.5
@@ -71,9 +71,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("e8b4011604095303ca3b8099982be09fcb9ae616");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("e8b4011604095303ca3b8099982be09fcb9ae616");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0238af09d98727705120c921bb5e9e26296a3cdcf2f35757a0eafd87b830e7"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0238af09d98727705120c921bb5e9e26296a3cdcf2f35757a0eafd87b830e7"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime239v3 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.6
@@ -84,9 +84,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("7d7374168ffe3471b60a857686a19475d3bfa2ff");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("7d7374168ffe3471b60a857686a19475d3bfa2ff");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "036768ae8e18bb92cfcf005c949aa2c6d94853d0e660bbf854b1c9505fe95a"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "036768ae8e18bb92cfcf005c949aa2c6d94853d0e660bbf854b1c9505fe95a"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder prime256v1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.7
@@ -97,9 +97,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("c49d360886e704936a6678e1139d26b7819f7e90");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("c49d360886e704936a6678e1139d26b7819f7e90");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "036b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "036b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder c2pnb163v1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.8
@@ -110,9 +110,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("D2C0FB15760860DEF1EEF4D696E6768756151754");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("D2C0FB15760860DEF1EEF4D696E6768756151754");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0307AF69989546103D79329FCC3D74880F33BBE803CB"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0307AF69989546103D79329FCC3D74880F33BBE803CB"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder c2pnb163v2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.9
@@ -159,9 +159,9 @@ public class X962NamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("4E13CA542744D696E67687561517552F279A8C84");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("4E13CA542744D696E67687561517552F279A8C84");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0236B3DAF8A23206F9C4F299D7B21A9C369137F2C84AE1AA0D"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, X962NamedCurves.configureBasepoint(curve, "0236B3DAF8A23206F9C4F299D7B21A9C369137F2C84AE1AA0D"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder c2tnb191v2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.x9.X962NamedCurves.13

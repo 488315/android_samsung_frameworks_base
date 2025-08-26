@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LockscreenSceneTransitionInteractor$collectProgress$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ObservableTransitionState.Transition $transition;
@@ -49,19 +48,19 @@ final class LockscreenSceneTransitionInteractor$collectProgress$1 extends Suspen
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.scenetransition.LockscreenSceneTransitionInteractor$collectProgress$1.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    Object updateTransition;
-                    float floatValue = ((Number) obj2).floatValue();
-                    LockscreenSceneTransitionInteractor lockscreenSceneTransitionInteractor2 = LockscreenSceneTransitionInteractor.this;
+                    Object objUpdateTransition;
+                    float fFloatValue = ((Number) obj2).floatValue();
+                    LockscreenSceneTransitionInteractor lockscreenSceneTransitionInteractor2 = lockscreenSceneTransitionInteractor;
                     UUID uuid = lockscreenSceneTransitionInteractor2.currentTransitionId;
                     if (uuid == null) {
-                        updateTransition = Unit.INSTANCE;
+                        objUpdateTransition = Unit.INSTANCE;
                     } else {
-                        updateTransition = lockscreenSceneTransitionInteractor2.internalTransitionInteractor.updateTransition(uuid, RangesKt___RangesKt.coerceIn(floatValue, 0.0f, 1.0f), TransitionState.RUNNING, continuation);
-                        if (updateTransition != CoroutineSingletons.COROUTINE_SUSPENDED) {
-                            updateTransition = Unit.INSTANCE;
+                        objUpdateTransition = lockscreenSceneTransitionInteractor2.internalTransitionInteractor.updateTransition(uuid, RangesKt___RangesKt.coerceIn(fFloatValue, 0.0f, 1.0f), TransitionState.RUNNING, continuation);
+                        if (objUpdateTransition != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                            objUpdateTransition = Unit.INSTANCE;
                         }
                     }
-                    return updateTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? updateTransition : Unit.INSTANCE;
+                    return objUpdateTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? objUpdateTransition : Unit.INSTANCE;
                 }
             };
             this.label = 1;

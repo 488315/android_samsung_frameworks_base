@@ -16,11 +16,11 @@ public class TrustedCertificateStoreAdapter extends TrustedCertificateStore {
     }
 
     public X509Certificate findIssuer(X509Certificate x509Certificate) {
-        TrustAnchor findTrustAnchorByIssuerAndSignature = this.mConfig.findTrustAnchorByIssuerAndSignature(x509Certificate);
-        if (findTrustAnchorByIssuerAndSignature == null) {
+        TrustAnchor trustAnchorFindTrustAnchorByIssuerAndSignature = this.mConfig.findTrustAnchorByIssuerAndSignature(x509Certificate);
+        if (trustAnchorFindTrustAnchorByIssuerAndSignature == null) {
             return null;
         }
-        return findTrustAnchorByIssuerAndSignature.certificate;
+        return trustAnchorFindTrustAnchorByIssuerAndSignature.certificate;
     }
 
     public Set<X509Certificate> findAllIssuers(X509Certificate x509Certificate) {
@@ -28,19 +28,19 @@ public class TrustedCertificateStoreAdapter extends TrustedCertificateStore {
     }
 
     public X509Certificate getTrustAnchor(X509Certificate x509Certificate) {
-        TrustAnchor findTrustAnchorBySubjectAndPublicKey = this.mConfig.findTrustAnchorBySubjectAndPublicKey(x509Certificate);
-        if (findTrustAnchorBySubjectAndPublicKey == null) {
+        TrustAnchor trustAnchorFindTrustAnchorBySubjectAndPublicKey = this.mConfig.findTrustAnchorBySubjectAndPublicKey(x509Certificate);
+        if (trustAnchorFindTrustAnchorBySubjectAndPublicKey == null) {
             return null;
         }
-        return findTrustAnchorBySubjectAndPublicKey.certificate;
+        return trustAnchorFindTrustAnchorBySubjectAndPublicKey.certificate;
     }
 
     public boolean isUserAddedCertificate(X509Certificate x509Certificate) {
-        TrustAnchor findTrustAnchorBySubjectAndPublicKey = this.mConfig.findTrustAnchorBySubjectAndPublicKey(x509Certificate);
-        if (findTrustAnchorBySubjectAndPublicKey == null) {
+        TrustAnchor trustAnchorFindTrustAnchorBySubjectAndPublicKey = this.mConfig.findTrustAnchorBySubjectAndPublicKey(x509Certificate);
+        if (trustAnchorFindTrustAnchorBySubjectAndPublicKey == null) {
             return false;
         }
-        return findTrustAnchorBySubjectAndPublicKey.overridesPins;
+        return trustAnchorFindTrustAnchorBySubjectAndPublicKey.overridesPins;
     }
 
     public File getCertificateFile(File file, X509Certificate x509Certificate) {

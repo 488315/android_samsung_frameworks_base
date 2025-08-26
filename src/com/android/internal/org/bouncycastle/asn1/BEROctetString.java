@@ -21,16 +21,16 @@ public class BEROctetString extends ASN1OctetString {
         if (length == 1) {
             return aSN1OctetStringArr[0].string;
         }
-        int i = 0;
+        int length2 = 0;
         for (ASN1OctetString aSN1OctetString : aSN1OctetStringArr) {
-            i += aSN1OctetString.string.length;
+            length2 += aSN1OctetString.string.length;
         }
-        byte[] bArr = new byte[i];
-        int i2 = 0;
+        byte[] bArr = new byte[length2];
+        int length3 = 0;
         for (ASN1OctetString aSN1OctetString2 : aSN1OctetStringArr) {
             byte[] bArr2 = aSN1OctetString2.string;
-            System.arraycopy(bArr2, 0, bArr, i2, bArr2.length);
-            i2 += bArr2.length;
+            System.arraycopy(bArr2, 0, bArr, length3, bArr2.length);
+            length3 += bArr2.length;
         }
         return bArr;
     }
@@ -59,23 +59,23 @@ public class BEROctetString extends ASN1OctetString {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength(boolean z) throws IOException {
-        int i = z ? 4 : 3;
+        int iEncodedLength = z ? 4 : 3;
         if (this.elements == null) {
             int length = this.string.length;
-            int i2 = this.segmentLimit;
-            int i3 = length / i2;
-            int encodedLength = i + (DEROctetString.encodedLength(true, i2) * i3);
-            int length2 = this.string.length - (i3 * this.segmentLimit);
-            return length2 > 0 ? encodedLength + DEROctetString.encodedLength(true, length2) : encodedLength;
+            int i = this.segmentLimit;
+            int i2 = length / i;
+            int iEncodedLength2 = iEncodedLength + (DEROctetString.encodedLength(true, i) * i2);
+            int length2 = this.string.length - (i2 * this.segmentLimit);
+            return length2 > 0 ? iEncodedLength2 + DEROctetString.encodedLength(true, length2) : iEncodedLength2;
         }
-        int i4 = 0;
+        int i3 = 0;
         while (true) {
             ASN1OctetString[] aSN1OctetStringArr = this.elements;
-            if (i4 >= aSN1OctetStringArr.length) {
-                return i;
+            if (i3 >= aSN1OctetStringArr.length) {
+                return iEncodedLength;
             }
-            i += aSN1OctetStringArr[i4].encodedLength(true);
-            i4++;
+            iEncodedLength += aSN1OctetStringArr[i3].encodedLength(true);
+            i3++;
         }
     }
 
@@ -89,9 +89,9 @@ public class BEROctetString extends ASN1OctetString {
         } else {
             int i = 0;
             while (i < this.string.length) {
-                int min = Math.min(this.string.length - i, this.segmentLimit);
-                DEROctetString.encode(aSN1OutputStream, true, this.string, i, min);
-                i += min;
+                int iMin = Math.min(this.string.length - i, this.segmentLimit);
+                DEROctetString.encode(aSN1OutputStream, true, this.string, i, iMin);
+                i += iMin;
             }
         }
         aSN1OutputStream.write(0);

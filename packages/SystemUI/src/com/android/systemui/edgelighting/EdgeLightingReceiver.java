@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingReceiver extends BroadcastReceiver {
     public final AnonymousClass1 mHandler = new Handler(Looper.myLooper()) { // from class: com.android.systemui.edgelighting.EdgeLightingReceiver.1
@@ -74,21 +73,21 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
                     EdgeLightingSettingManager edgeLightingSettingManager2 = EdgeLightingSettingManager.getInstance(context);
                     edgeLightingSettingManager2.getClass();
                     SharedPreferences sharedPreferences2 = context.getSharedPreferences("edge_lighting_settings", 0);
-                    SharedPreferences.Editor edit = sharedPreferences2.edit();
+                    SharedPreferences.Editor editorEdit = sharedPreferences2.edit();
                     if (context.getPackageName().equals(string2)) {
                         Slog.d("EdgeLightingSettingManager", "removeSilentInstalledPackage : on, packageName = " + string2 + " return own package");
                         return;
                     }
-                    edit.putString("update_package_name", string2);
+                    editorEdit.putString("update_package_name", string2);
                     if (edgeLightingSettingManager2.mEnableSet.containsKey(string2)) {
-                        edit.putBoolean("update_package_enable", true);
+                        editorEdit.putBoolean("update_package_enable", true);
                     } else {
-                        edit.putBoolean("update_package_enable", false);
+                        editorEdit.putBoolean("update_package_enable", false);
                     }
                     if (EdgeLightingSettingUtils.isEdgeLightingEnabled(context.getContentResolver())) {
-                        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("removeSilentInstalledPackage : on, packageName = ", string2, " AllApplication = ");
-                        m.append(edgeLightingSettingManager2.mAllApplication);
-                        Slog.d("EdgeLightingSettingManager", m.toString());
+                        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("removeSilentInstalledPackage : on, packageName = ", string2, " AllApplication = ");
+                        sbM.append(edgeLightingSettingManager2.mAllApplication);
+                        Slog.d("EdgeLightingSettingManager", sbM.toString());
                         if (edgeLightingSettingManager2.mEnableSet.containsKey(string2)) {
                             edgeLightingSettingManager2.setDisablePackage(context, string2);
                             EdgeLightingPolicyManager.getInstance(context, false).updateEdgeLightingPolicy(context, edgeLightingSettingManager2.mAllApplication);
@@ -106,7 +105,7 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
                             EdgeLightingSettingManager.putStringSet(sharedPreferences2, "silent_add_list", stringSet4);
                         }
                     }
-                    edit.apply();
+                    editorEdit.apply();
                     return;
                 }
                 return;
@@ -139,9 +138,9 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
                 IntentFilter intentFilter = new IntentFilter("android.intent.action.PACKAGE_ADDED");
                 Class<?> cls = getClass();
                 EdgeLightingReceiver edgeLightingReceiver = EdgeLightingReceiver.this;
-                EdgeLightingReceiver.m2553$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_ADDED", intentFilter, cls);
-                EdgeLightingReceiver.m2553$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REMOVED", new IntentFilter("android.intent.action.PACKAGE_REMOVED"), getClass());
-                EdgeLightingReceiver.m2553$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REPLACED", new IntentFilter("android.intent.action.PACKAGE_REPLACED"), getClass());
+                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_ADDED", intentFilter, cls);
+                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REMOVED", new IntentFilter("android.intent.action.PACKAGE_REMOVED"), getClass());
+                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REPLACED", new IntentFilter("android.intent.action.PACKAGE_REPLACED"), getClass());
                 EdgeLightingPolicyManager.getInstance(context, false).updateEdgeLightingPolicy(context, EdgeLightingSettingManager.getInstance(context).mAllApplication);
                 return;
             }
@@ -166,7 +165,7 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
     };
 
     /* renamed from: -$$Nest$mregisterBroadcastReceiver, reason: not valid java name */
-    public static void m2553$$Nest$mregisterBroadcastReceiver(EdgeLightingReceiver edgeLightingReceiver, Context context, String str, IntentFilter intentFilter, Class cls) {
+    public static void m2570$$Nest$mregisterBroadcastReceiver(EdgeLightingReceiver edgeLightingReceiver, Context context, String str, IntentFilter intentFilter, Class cls) {
         edgeLightingReceiver.getClass();
         SemEventDelegationManager semEventDelegationManager = (SemEventDelegationManager) context.getSystemService("semeventdelegator");
         Intent intent = new Intent(str);
@@ -177,40 +176,40 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(action, " ");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(action, " ");
         Uri data = intent.getData();
-        m.append(data != null ? data.getSchemeSpecificPart() : null);
-        Slog.d("EdgeLightingReceiver", m.toString());
+        sbM.append(data != null ? data.getSchemeSpecificPart() : null);
+        Slog.d("EdgeLightingReceiver", sbM.toString());
         if ("com.samsung.android.app.edgelighting.PACKAGE_ADDED".equals(action)) {
             Uri data2 = intent.getData();
-            Bundle m2 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data2 != null ? data2.getSchemeSpecificPart() : null);
-            Message obtainMessage = obtainMessage(0, context);
-            obtainMessage.setData(m2);
-            sendMessage(obtainMessage);
+            Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data2 != null ? data2.getSchemeSpecificPart() : null);
+            Message messageObtainMessage = obtainMessage(0, context);
+            messageObtainMessage.setData(bundleM);
+            sendMessage(messageObtainMessage);
             return;
         }
         if ("com.samsung.android.app.edgelighting.PACKAGE_REMOVED".equals(action)) {
             Uri data3 = intent.getData();
-            Bundle m3 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data3 != null ? data3.getSchemeSpecificPart() : null);
-            Message obtainMessage2 = obtainMessage(1, context);
-            obtainMessage2.setData(m3);
-            sendMessage(obtainMessage2);
+            Bundle bundleM2 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data3 != null ? data3.getSchemeSpecificPart() : null);
+            Message messageObtainMessage2 = obtainMessage(1, context);
+            messageObtainMessage2.setData(bundleM2);
+            sendMessage(messageObtainMessage2);
             return;
         }
         if ("com.samsung.android.app.edgelighting.PACKAGE_REPLACED".equals(action)) {
             Uri data4 = intent.getData();
-            Bundle m4 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data4 != null ? data4.getSchemeSpecificPart() : null);
-            Message obtainMessage3 = obtainMessage(2, context);
-            obtainMessage3.setData(m4);
-            sendMessage(obtainMessage3);
+            Bundle bundleM3 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data4 != null ? data4.getSchemeSpecificPart() : null);
+            Message messageObtainMessage3 = obtainMessage(2, context);
+            messageObtainMessage3.setData(bundleM3);
+            sendMessage(messageObtainMessage3);
             return;
         }
         if ("android.intent.action.PACKAGE_CHANGED".equals(action)) {
             Uri data5 = intent.getData();
-            Bundle m5 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data5 != null ? data5.getSchemeSpecificPart() : null);
-            Message obtainMessage4 = obtainMessage(3, context);
-            obtainMessage4.setData(m5);
-            sendMessage(obtainMessage4);
+            Bundle bundleM4 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("pkg_name", data5 != null ? data5.getSchemeSpecificPart() : null);
+            Message messageObtainMessage4 = obtainMessage(3, context);
+            messageObtainMessage4.setData(bundleM4);
+            sendMessage(messageObtainMessage4);
             return;
         }
         if ("sec.app.policy.UPDATE.EdgeLighting".equals(action)) {

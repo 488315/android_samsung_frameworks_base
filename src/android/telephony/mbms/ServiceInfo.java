@@ -1,6 +1,7 @@
 package android.telephony.mbms;
 
 import android.os.Parcel;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -33,9 +34,9 @@ public class ServiceInfo {
         if (list.size() > 1000) {
             throw new RuntimeException("bad locales length " + list.size());
         }
-        HashMap hashMap = new HashMap(map.size());
-        this.names = hashMap;
-        hashMap.putAll(map);
+        HashMap map2 = new HashMap(map.size());
+        this.names = map2;
+        map2.putAll(map);
         this.className = str;
         this.locales = new ArrayList(list);
         this.serviceId = str2;
@@ -44,30 +45,30 @@ public class ServiceInfo {
     }
 
     protected ServiceInfo(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt > 1000 || readInt < 0) {
-            throw new RuntimeException("bad map length" + readInt);
+        int i = parcel.readInt();
+        if (i > 1000 || i < 0) {
+            throw new RuntimeException("bad map length" + i);
         }
-        this.names = new HashMap(readInt);
+        this.names = new HashMap(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
+            int i2 = i - 1;
+            if (i <= 0) {
                 break;
             }
             this.names.put((Locale) parcel.readSerializable(Locale.class.getClassLoader(), Locale.class), parcel.readString());
-            readInt = i;
+            i = i2;
         }
         this.className = parcel.readString();
-        int readInt2 = parcel.readInt();
-        if (readInt2 > 1000 || readInt2 < 0) {
-            throw new RuntimeException("bad locale length " + readInt2);
+        int i3 = parcel.readInt();
+        if (i3 > 1000 || i3 < 0) {
+            throw new RuntimeException("bad locale length " + i3);
         }
-        this.locales = new ArrayList(readInt2);
+        this.locales = new ArrayList(i3);
         while (true) {
-            int i2 = readInt2 - 1;
-            if (readInt2 > 0) {
+            int i4 = i3 - 1;
+            if (i3 > 0) {
                 this.locales.add((Locale) parcel.readSerializable(Locale.class.getClassLoader(), Locale.class));
-                readInt2 = i2;
+                i3 = i4;
             } else {
                 this.serviceId = parcel.readString();
                 this.sessionStartTime = (Date) parcel.readSerializable(Date.class.getClassLoader(), Date.class);
@@ -77,10 +78,10 @@ public class ServiceInfo {
         }
     }
 
-    public void writeToParcel(Parcel parcel, int i) {
-        Set<Locale> keySet = this.names.keySet();
-        parcel.writeInt(keySet.size());
-        for (Locale locale : keySet) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
+        Set<Locale> setKeySet = this.names.keySet();
+        parcel.writeInt(setKeySet.size());
+        for (Locale locale : setKeySet) {
             parcel.writeSerializable(locale);
             parcel.writeString(this.names.get(locale));
         }

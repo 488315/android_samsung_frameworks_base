@@ -166,10 +166,10 @@ public class Build {
     }
 
     public static String getSerial() {
-        IDeviceIdentifiersPolicyService asInterface = IDeviceIdentifiersPolicyService.Stub.asInterface(ServiceManager.getService(Context.DEVICE_IDENTIFIERS_SERVICE));
+        IDeviceIdentifiersPolicyService iDeviceIdentifiersPolicyServiceAsInterface = IDeviceIdentifiersPolicyService.Stub.asInterface(ServiceManager.getService(Context.DEVICE_IDENTIFIERS_SERVICE));
         try {
-            Application currentApplication = ActivityThread.currentApplication();
-            return asInterface.getSerialForPackage(currentApplication != null ? currentApplication.getPackageName() : null, null);
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            return iDeviceIdentifiersPolicyServiceAsInterface.getSerialForPackage(applicationCurrentApplication != null ? applicationCurrentApplication.getPackageName() : null, null);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return "unknown";
@@ -288,17 +288,17 @@ public class Build {
         return i % 100000;
     }
 
-    public static int parseFullVersion(String str) {
+    public static int parseFullVersion(String str) throws NumberFormatException {
         int i;
-        int indexOf = str.indexOf(46);
+        int iIndexOf = str.indexOf(46);
         int i2 = 0;
         try {
-            if (indexOf == -1) {
+            if (iIndexOf == -1) {
                 i = Integer.parseInt(str);
             } else {
-                int parseInt = Integer.parseInt(str.substring(0, indexOf));
-                i2 = Integer.parseInt(str.substring(indexOf + 1));
-                i = parseInt;
+                int i3 = Integer.parseInt(str.substring(0, iIndexOf));
+                i2 = Integer.parseInt(str.substring(iIndexOf + 1));
+                i = i3;
             }
             if (i < 0) {
                 throw new NumberFormatException("negative major version");
@@ -328,9 +328,9 @@ public class Build {
     /* JADX WARN: Multi-variable type inference failed */
     public static int getBackportedFixStatus(long j) {
         int callingUid = Binder.getCallingUid();
-        int isBitSet = (j <= 0 || j > 1023) ? 0 : isBitSet(BackportedFixesProperties.alias_bitset(), (int) j);
-        FrameworkStatsLog.write(987, callingUid, j, isBitSet);
-        return isBitSet;
+        int iIsBitSet = (j <= 0 || j > 1023) ? 0 : isBitSet(BackportedFixesProperties.alias_bitset(), (int) j);
+        FrameworkStatsLog.write(987, callingUid, j, iIsBitSet);
+        return iIsBitSet;
     }
 
     private static boolean isBitSet(List<Long> list, int i) {
@@ -364,11 +364,11 @@ public class Build {
             return true;
         }
         if (IS_TREBLE_ENABLED) {
-            int verifyBuildAtBoot = VintfObject.verifyBuildAtBoot();
-            if (verifyBuildAtBoot != 0) {
-                Slog.e(TAG, "Vendor interface is incompatible, error=" + String.valueOf(verifyBuildAtBoot));
+            int iVerifyBuildAtBoot = VintfObject.verifyBuildAtBoot();
+            if (iVerifyBuildAtBoot != 0) {
+                Slog.e(TAG, "Vendor interface is incompatible, error=" + String.valueOf(iVerifyBuildAtBoot));
             }
-            return verifyBuildAtBoot == 0;
+            return iVerifyBuildAtBoot == 0;
         }
         String str = SystemProperties.get("ro.system.build.fingerprint");
         String str2 = SystemProperties.get("ro.vendor.build.fingerprint");

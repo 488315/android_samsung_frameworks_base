@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SmartPopupViewService extends NotificationListenerService {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,7 +28,6 @@ public class SmartPopupViewService extends NotificationListenerService {
     public AnonymousClass1 mPackageRemovedReceiver = null;
     public final List mEnabledList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SmartPopupViewPackageListObserver extends ContentObserver {
         public final Uri mSmartPopupViewPackageListUri;
         public final Uri mZenModeUri;
@@ -101,10 +99,10 @@ public class SmartPopupViewService extends NotificationListenerService {
                 }
                 Uri data = intent2.getData();
                 Objects.requireNonNull(data);
-                String[] split = data.toString().split(":");
-                for (String str : split) {
+                String[] strArrSplit = data.toString().split(":");
+                for (String str : strArrSplit) {
                 }
-                String str2 = split[1];
+                String str2 = strArrSplit[1];
                 if (str2 != null) {
                     SmartPopupViewService smartPopupViewService = SmartPopupViewService.this;
                     int i = SmartPopupViewService.$r8$clinit;

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExtendedFloatingActionButton extends MaterialButton implements CoordinatorLayout.AttachedBehavior {
     public static final AnonymousClass7 HEIGHT;
@@ -52,7 +51,6 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
     public final ShowStrategy showStrategy;
     public final ChangeSizeStrategy shrinkStrategy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChangeSizeStrategy extends BaseMotionStrategy {
         public final boolean extending;
         public final Size size;
@@ -73,10 +71,10 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
                 motionSpec = this.defaultMotionSpec;
                 motionSpec.getClass();
             }
-            boolean hasPropertyValues = motionSpec.hasPropertyValues("width");
+            boolean zHasPropertyValues = motionSpec.hasPropertyValues("width");
             Size size = this.size;
             ExtendedFloatingActionButton extendedFloatingActionButton = ExtendedFloatingActionButton.this;
-            if (hasPropertyValues) {
+            if (zHasPropertyValues) {
                 PropertyValuesHolder[] propertyValues = motionSpec.getPropertyValues("width");
                 propertyValues[0].setFloatValues(extendedFloatingActionButton.getWidth(), size.getWidth());
                 motionSpec.setPropertyValues("width", propertyValues);
@@ -170,7 +168,6 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HideStrategy extends BaseMotionStrategy {
         public boolean isCancelled;
 
@@ -229,11 +226,9 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class OnChangedCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShowStrategy extends BaseMotionStrategy {
         public ShowStrategy(AnimatorTracker animatorTracker) {
             super(ExtendedFloatingActionButton.this, animatorTracker);
@@ -282,7 +277,6 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Size {
         int getHeight();
 
@@ -337,10 +331,10 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
             @Override // android.util.Property
             public final void set(Object obj, Object obj2) {
                 View view = (View) obj;
-                int intValue = ((Float) obj2).intValue();
+                int iIntValue = ((Float) obj2).intValue();
                 int paddingTop = view.getPaddingTop();
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                view.setPaddingRelative(intValue, paddingTop, view.getPaddingEnd(), view.getPaddingBottom());
+                view.setPaddingRelative(iIntValue, paddingTop, view.getPaddingEnd(), view.getPaddingBottom());
             }
         };
         PADDING_END = new Property(cls, "paddingEnd") { // from class: com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton.9
@@ -396,8 +390,8 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
             }
             int i2 = 0;
             extendedFloatingActionButton.measure(0, 0);
-            AnimatorSet createAnimator = baseMotionStrategy.createAnimator();
-            createAnimator.addListener(new AnimatorListenerAdapter(extendedFloatingActionButton) { // from class: com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton.5
+            AnimatorSet animatorSetCreateAnimator = baseMotionStrategy.createAnimator();
+            animatorSetCreateAnimator.addListener(new AnimatorListenerAdapter(extendedFloatingActionButton) { // from class: com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton.5
                 public boolean cancelled;
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -426,9 +420,9 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
             while (i2 < size) {
                 Object obj = arrayList.get(i2);
                 i2++;
-                createAnimator.addListener((Animator.AnimatorListener) obj);
+                animatorSetCreateAnimator.addListener((Animator.AnimatorListener) obj);
             }
-            createAnimator.start();
+            animatorSetCreateAnimator.start();
             return;
         }
         baseMotionStrategy.performNow();
@@ -492,7 +486,6 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
         this(context, attributeSet, R.attr.extendedFloatingActionButtonStyle);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtendedFloatingActionButtonBehavior<T extends ExtendedFloatingActionButton> extends CoordinatorLayout.Behavior {
         public final boolean autoHideEnabled;
         public final boolean autoShrinkEnabled;
@@ -598,10 +591,10 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
 
         public ExtendedFloatingActionButtonBehavior(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ExtendedFloatingActionButton_Behavior_Layout);
-            this.autoHideEnabled = obtainStyledAttributes.getBoolean(0, false);
-            this.autoShrinkEnabled = obtainStyledAttributes.getBoolean(1, true);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ExtendedFloatingActionButton_Behavior_Layout);
+            this.autoHideEnabled = typedArrayObtainStyledAttributes.getBoolean(0, false);
+            this.autoShrinkEnabled = typedArrayObtainStyledAttributes.getBoolean(1, true);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -617,13 +610,13 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
         this.isTransforming = false;
         Context context2 = getContext();
         this.behavior = new ExtendedFloatingActionButtonBehavior(context2, attributeSet);
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.ExtendedFloatingActionButton, i, R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon, new int[0]);
-        MotionSpec createFromAttribute = MotionSpec.createFromAttribute(context2, obtainStyledAttributes, 5);
-        MotionSpec createFromAttribute2 = MotionSpec.createFromAttribute(context2, obtainStyledAttributes, 4);
-        MotionSpec createFromAttribute3 = MotionSpec.createFromAttribute(context2, obtainStyledAttributes, 2);
-        MotionSpec createFromAttribute4 = MotionSpec.createFromAttribute(context2, obtainStyledAttributes, 6);
-        this.collapsedSize = obtainStyledAttributes.getDimensionPixelSize(0, -1);
-        int i2 = obtainStyledAttributes.getInt(3, 1);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.ExtendedFloatingActionButton, i, R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon, new int[0]);
+        MotionSpec motionSpecCreateFromAttribute = MotionSpec.createFromAttribute(context2, typedArrayObtainStyledAttributes, 5);
+        MotionSpec motionSpecCreateFromAttribute2 = MotionSpec.createFromAttribute(context2, typedArrayObtainStyledAttributes, 4);
+        MotionSpec motionSpecCreateFromAttribute3 = MotionSpec.createFromAttribute(context2, typedArrayObtainStyledAttributes, 2);
+        MotionSpec motionSpecCreateFromAttribute4 = MotionSpec.createFromAttribute(context2, typedArrayObtainStyledAttributes, 6);
+        this.collapsedSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
+        int i2 = typedArrayObtainStyledAttributes.getInt(3, 1);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         this.extendedPaddingStart = getPaddingStart();
         this.extendedPaddingEnd = getPaddingEnd();
@@ -783,11 +776,11 @@ public class ExtendedFloatingActionButton extends MaterialButton implements Coor
             }
         }, false);
         this.shrinkStrategy = changeSizeStrategy2;
-        showStrategy.motionSpec = createFromAttribute;
-        hideStrategy.motionSpec = createFromAttribute2;
-        changeSizeStrategy.motionSpec = createFromAttribute3;
-        changeSizeStrategy2.motionSpec = createFromAttribute4;
-        obtainStyledAttributes.recycle();
+        showStrategy.motionSpec = motionSpecCreateFromAttribute;
+        hideStrategy.motionSpec = motionSpecCreateFromAttribute2;
+        changeSizeStrategy.motionSpec = motionSpecCreateFromAttribute3;
+        changeSizeStrategy2.motionSpec = motionSpecCreateFromAttribute4;
+        typedArrayObtainStyledAttributes.recycle();
         setShapeAppearanceModel(ShapeAppearanceModel.builder(context2, attributeSet, i, R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon, ShapeAppearanceModel.PILL).build());
         this.originalTextCsl = getTextColors();
     }

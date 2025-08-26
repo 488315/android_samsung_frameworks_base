@@ -6,7 +6,6 @@ import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockDataImpl implements PluginLockData, PluginLockListener.State {
     private static final int DEFAULT_GRAVITY = -1;
@@ -245,9 +244,9 @@ public class PluginLockDataImpl implements PluginLockData, PluginLockListener.St
         if (dynamicLockData == null || dynamicLockData.isDlsData()) {
             return false;
         }
-        boolean isLandscape = isLandscape();
+        boolean zIsLandscape = isLandscape();
         DynamicLockData dynamicLockData2 = this.mData;
-        return isLandscape ? dynamicLockData2.isLandscapeAvailable() : dynamicLockData2.isPortraitAvailable();
+        return zIsLandscape ? dynamicLockData2.isLandscapeAvailable() : dynamicLockData2.isPortraitAvailable();
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State

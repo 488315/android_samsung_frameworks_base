@@ -42,7 +42,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void addAccount(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException {
+        public void addAccount(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws SecurityException, RemoteException {
             String str3;
             super.addAccount_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
@@ -56,45 +56,45 @@ public abstract class AbstractAccountAuthenticator {
             }
             try {
                 str3 = str;
-                try {
-                    Bundle addAccount = AbstractAccountAuthenticator.this.addAccount(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str3, str2, strArr, bundle);
-                    if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                        if (addAccount != null) {
-                            addAccount.keySet();
-                        }
-                        Log.v(AbstractAccountAuthenticator.TAG, "addAccount: result " + AccountManager.sanitizeResult(addAccount));
+            } catch (Exception e) {
+                e = e;
+                str3 = str;
+            }
+            try {
+                Bundle bundleAddAccount = AbstractAccountAuthenticator.this.addAccount(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str3, str2, strArr, bundle);
+                if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
+                    if (bundleAddAccount != null) {
+                        bundleAddAccount.keySet();
                     }
-                    if (addAccount != null) {
-                        iAccountAuthenticatorResponse.onResult(addAccount);
-                    } else {
-                        iAccountAuthenticatorResponse.onError(5, "null bundle returned");
-                    }
-                } catch (Exception e) {
-                    e = e;
-                    AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "addAccount", str3, e);
+                    Log.v(AbstractAccountAuthenticator.TAG, "addAccount: result " + AccountManager.sanitizeResult(bundleAddAccount));
+                }
+                if (bundleAddAccount != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleAddAccount);
+                } else {
+                    iAccountAuthenticatorResponse.onError(5, "null bundle returned");
                 }
             } catch (Exception e2) {
                 e = e2;
-                str3 = str;
+                AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "addAccount", str3, e);
             }
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void confirmCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException {
+        public void confirmCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws SecurityException, RemoteException {
             super.confirmCredentials_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "confirmCredentials: " + account);
             }
             try {
-                Bundle confirmCredentials = AbstractAccountAuthenticator.this.confirmCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, bundle);
+                Bundle bundleConfirmCredentials = AbstractAccountAuthenticator.this.confirmCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, bundle);
                 if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                    if (confirmCredentials != null) {
-                        confirmCredentials.keySet();
+                    if (bundleConfirmCredentials != null) {
+                        bundleConfirmCredentials.keySet();
                     }
-                    Log.v(AbstractAccountAuthenticator.TAG, "confirmCredentials: result " + AccountManager.sanitizeResult(confirmCredentials));
+                    Log.v(AbstractAccountAuthenticator.TAG, "confirmCredentials: result " + AccountManager.sanitizeResult(bundleConfirmCredentials));
                 }
-                if (confirmCredentials != null) {
-                    iAccountAuthenticatorResponse.onResult(confirmCredentials);
+                if (bundleConfirmCredentials != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleConfirmCredentials);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "confirmCredentials", account.toString(), e);
@@ -102,7 +102,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAuthTokenLabel(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException {
+        public void getAuthTokenLabel(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws SecurityException, RemoteException {
             super.getAuthTokenLabel_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "getAuthTokenLabel: authTokenType " + str);
@@ -121,7 +121,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAuthToken(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
+        public void getAuthToken(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws SecurityException, RemoteException {
             super.getAuthToken_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "getAuthToken: " + account + ", authTokenType " + str);
@@ -143,21 +143,21 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void updateCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
+        public void updateCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws SecurityException, RemoteException {
             super.updateCredentials_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "updateCredentials: " + account + ", authTokenType " + str);
             }
             try {
-                Bundle updateCredentials = AbstractAccountAuthenticator.this.updateCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str, bundle);
+                Bundle bundleUpdateCredentials = AbstractAccountAuthenticator.this.updateCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str, bundle);
                 if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                    if (updateCredentials != null) {
-                        updateCredentials.keySet();
+                    if (bundleUpdateCredentials != null) {
+                        bundleUpdateCredentials.keySet();
                     }
-                    Log.v(AbstractAccountAuthenticator.TAG, "updateCredentials: result " + AccountManager.sanitizeResult(updateCredentials));
+                    Log.v(AbstractAccountAuthenticator.TAG, "updateCredentials: result " + AccountManager.sanitizeResult(bundleUpdateCredentials));
                 }
-                if (updateCredentials != null) {
-                    iAccountAuthenticatorResponse.onResult(updateCredentials);
+                if (bundleUpdateCredentials != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleUpdateCredentials);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "updateCredentials", account.toString() + "," + str, e);
@@ -165,12 +165,12 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void editProperties(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException {
+        public void editProperties(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws SecurityException, RemoteException {
             super.editProperties_enforcePermission();
             try {
-                Bundle editProperties = AbstractAccountAuthenticator.this.editProperties(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str);
-                if (editProperties != null) {
-                    iAccountAuthenticatorResponse.onResult(editProperties);
+                Bundle bundleEditProperties = AbstractAccountAuthenticator.this.editProperties(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str);
+                if (bundleEditProperties != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleEditProperties);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "editProperties", str, e);
@@ -178,12 +178,12 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void hasFeatures(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String[] strArr) throws RemoteException {
+        public void hasFeatures(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String[] strArr) throws SecurityException, RemoteException {
             super.hasFeatures_enforcePermission();
             try {
-                Bundle hasFeatures = AbstractAccountAuthenticator.this.hasFeatures(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, strArr);
-                if (hasFeatures != null) {
-                    iAccountAuthenticatorResponse.onResult(hasFeatures);
+                Bundle bundleHasFeatures = AbstractAccountAuthenticator.this.hasFeatures(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, strArr);
+                if (bundleHasFeatures != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleHasFeatures);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "hasFeatures", account.toString(), e);
@@ -191,7 +191,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAccountRemovalAllowed(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException {
+        public void getAccountRemovalAllowed(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws SecurityException, RemoteException {
             super.getAccountRemovalAllowed_enforcePermission();
             try {
                 Bundle accountRemovalAllowed = AbstractAccountAuthenticator.this.getAccountRemovalAllowed(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account);
@@ -204,7 +204,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAccountCredentialsForCloning(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException {
+        public void getAccountCredentialsForCloning(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws SecurityException, RemoteException {
             super.getAccountCredentialsForCloning_enforcePermission();
             try {
                 Bundle accountCredentialsForCloning = AbstractAccountAuthenticator.this.getAccountCredentialsForCloning(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account);
@@ -217,12 +217,12 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void addAccountFromCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException {
+        public void addAccountFromCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws SecurityException, RemoteException {
             super.addAccountFromCredentials_enforcePermission();
             try {
-                Bundle addAccountFromCredentials = AbstractAccountAuthenticator.this.addAccountFromCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, bundle);
-                if (addAccountFromCredentials != null) {
-                    iAccountAuthenticatorResponse.onResult(addAccountFromCredentials);
+                Bundle bundleAddAccountFromCredentials = AbstractAccountAuthenticator.this.addAccountFromCredentials(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, bundle);
+                if (bundleAddAccountFromCredentials != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleAddAccountFromCredentials);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "addAccountFromCredentials", account.toString(), e);
@@ -230,7 +230,7 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void startAddAccountSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException {
+        public void startAddAccountSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws SecurityException, RemoteException {
             String str3;
             super.startAddAccountSession_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
@@ -244,43 +244,43 @@ public abstract class AbstractAccountAuthenticator {
             }
             try {
                 str3 = str;
-                try {
-                    Bundle startAddAccountSession = AbstractAccountAuthenticator.this.startAddAccountSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str3, str2, strArr, bundle);
-                    if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                        if (startAddAccountSession != null) {
-                            startAddAccountSession.keySet();
-                        }
-                        Log.v(AbstractAccountAuthenticator.TAG, "startAddAccountSession: result " + AccountManager.sanitizeResult(startAddAccountSession));
+            } catch (Exception e) {
+                e = e;
+                str3 = str;
+            }
+            try {
+                Bundle bundleStartAddAccountSession = AbstractAccountAuthenticator.this.startAddAccountSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str3, str2, strArr, bundle);
+                if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
+                    if (bundleStartAddAccountSession != null) {
+                        bundleStartAddAccountSession.keySet();
                     }
-                    if (startAddAccountSession != null) {
-                        iAccountAuthenticatorResponse.onResult(startAddAccountSession);
-                    }
-                } catch (Exception e) {
-                    e = e;
-                    AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "startAddAccountSession", str3, e);
+                    Log.v(AbstractAccountAuthenticator.TAG, "startAddAccountSession: result " + AccountManager.sanitizeResult(bundleStartAddAccountSession));
+                }
+                if (bundleStartAddAccountSession != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleStartAddAccountSession);
                 }
             } catch (Exception e2) {
                 e = e2;
-                str3 = str;
+                AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "startAddAccountSession", str3, e);
             }
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void startUpdateCredentialsSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
+        public void startUpdateCredentialsSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws SecurityException, RemoteException {
             super.startUpdateCredentialsSession_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "startUpdateCredentialsSession: " + account + ", authTokenType " + str);
             }
             try {
-                Bundle startUpdateCredentialsSession = AbstractAccountAuthenticator.this.startUpdateCredentialsSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str, bundle);
+                Bundle bundleStartUpdateCredentialsSession = AbstractAccountAuthenticator.this.startUpdateCredentialsSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str, bundle);
                 if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                    if (startUpdateCredentialsSession != null) {
-                        startUpdateCredentialsSession.keySet();
+                    if (bundleStartUpdateCredentialsSession != null) {
+                        bundleStartUpdateCredentialsSession.keySet();
                     }
-                    Log.v(AbstractAccountAuthenticator.TAG, "startUpdateCredentialsSession: result " + AccountManager.sanitizeResult(startUpdateCredentialsSession));
+                    Log.v(AbstractAccountAuthenticator.TAG, "startUpdateCredentialsSession: result " + AccountManager.sanitizeResult(bundleStartUpdateCredentialsSession));
                 }
-                if (startUpdateCredentialsSession != null) {
-                    iAccountAuthenticatorResponse.onResult(startUpdateCredentialsSession);
+                if (bundleStartUpdateCredentialsSession != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleStartUpdateCredentialsSession);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "startUpdateCredentialsSession", account.toString() + "," + str, e);
@@ -288,21 +288,21 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void finishSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, Bundle bundle) throws RemoteException {
+        public void finishSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, Bundle bundle) throws SecurityException, RemoteException {
             super.finishSession_enforcePermission();
             if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
                 Log.v(AbstractAccountAuthenticator.TAG, "finishSession: accountType " + str);
             }
             try {
-                Bundle finishSession = AbstractAccountAuthenticator.this.finishSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str, bundle);
-                if (finishSession != null) {
-                    finishSession.keySet();
+                Bundle bundleFinishSession = AbstractAccountAuthenticator.this.finishSession(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), str, bundle);
+                if (bundleFinishSession != null) {
+                    bundleFinishSession.keySet();
                 }
                 if (Log.isLoggable(AbstractAccountAuthenticator.TAG, 2)) {
-                    Log.v(AbstractAccountAuthenticator.TAG, "finishSession: result " + AccountManager.sanitizeResult(finishSession));
+                    Log.v(AbstractAccountAuthenticator.TAG, "finishSession: result " + AccountManager.sanitizeResult(bundleFinishSession));
                 }
-                if (finishSession != null) {
-                    iAccountAuthenticatorResponse.onResult(finishSession);
+                if (bundleFinishSession != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleFinishSession);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "finishSession", str, e);
@@ -310,12 +310,12 @@ public abstract class AbstractAccountAuthenticator {
         }
 
         @Override // android.accounts.IAccountAuthenticator
-        public void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str) throws RemoteException {
+        public void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str) throws SecurityException, RemoteException {
             super.isCredentialsUpdateSuggested_enforcePermission();
             try {
-                Bundle isCredentialsUpdateSuggested = AbstractAccountAuthenticator.this.isCredentialsUpdateSuggested(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str);
-                if (isCredentialsUpdateSuggested != null) {
-                    iAccountAuthenticatorResponse.onResult(isCredentialsUpdateSuggested);
+                Bundle bundleIsCredentialsUpdateSuggested = AbstractAccountAuthenticator.this.isCredentialsUpdateSuggested(new AccountAuthenticatorResponse(iAccountAuthenticatorResponse), account, str);
+                if (bundleIsCredentialsUpdateSuggested != null) {
+                    iAccountAuthenticatorResponse.onResult(bundleIsCredentialsUpdateSuggested);
                 }
             } catch (Exception e) {
                 AbstractAccountAuthenticator.this.handleException(iAccountAuthenticatorResponse, "isCredentialsUpdateSuggested", account.toString(), e);
@@ -445,7 +445,7 @@ public abstract class AbstractAccountAuthenticator {
         Bundle bundle5 = bundle.getBundle(KEY_OPTIONS);
         String[] stringArray = bundle.getStringArray(KEY_REQUIRED_FEATURES);
         Account account = (Account) bundle.getParcelable(KEY_ACCOUNT, Account.class);
-        boolean containsKey = bundle.containsKey(KEY_ACCOUNT);
+        boolean zContainsKey = bundle.containsKey(KEY_ACCOUNT);
         Bundle bundle6 = new Bundle(bundle);
         bundle6.remove(KEY_AUTH_TOKEN_TYPE);
         bundle6.remove(KEY_REQUIRED_FEATURES);
@@ -455,7 +455,7 @@ public abstract class AbstractAccountAuthenticator {
             bundle5.putAll(bundle6);
             bundle6 = bundle5;
         }
-        if (containsKey) {
+        if (zContainsKey) {
             return updateCredentials(accountAuthenticatorResponse, account, string, bundle5);
         }
         return addAccount(accountAuthenticatorResponse, str, string, stringArray, bundle6);

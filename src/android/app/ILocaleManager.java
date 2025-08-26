@@ -76,9 +76,9 @@ public interface ILocaleManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILocaleManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILocaleManager)) {
-                return (ILocaleManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILocaleManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILocaleManager)) {
+                return (ILocaleManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -117,18 +117,18 @@ public interface ILocaleManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 LocaleList localeList = (LocaleList) parcel.readTypedObject(LocaleList.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setApplicationLocales(readString, readInt, localeList, readBoolean);
+                setApplicationLocales(string, i3, localeList, z);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                LocaleList applicationLocales = getApplicationLocales(readString2, readInt2);
+                LocaleList applicationLocales = getApplicationLocales(string2, i4);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(applicationLocales, 1);
             } else if (i == 3) {
@@ -136,17 +136,17 @@ public interface ILocaleManager extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(systemLocales, 1);
             } else if (i == 4) {
-                String readString3 = parcel.readString();
-                int readInt3 = parcel.readInt();
+                String string3 = parcel.readString();
+                int i5 = parcel.readInt();
                 LocaleConfig localeConfig = (LocaleConfig) parcel.readTypedObject(LocaleConfig.CREATOR);
                 parcel.enforceNoDataAvail();
-                setOverrideLocaleConfig(readString3, readInt3, localeConfig);
+                setOverrideLocaleConfig(string3, i5, localeConfig);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                String readString4 = parcel.readString();
-                int readInt4 = parcel.readInt();
+                String string4 = parcel.readString();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                LocaleConfig overrideLocaleConfig = getOverrideLocaleConfig(readString4, readInt4);
+                LocaleConfig overrideLocaleConfig = getOverrideLocaleConfig(string4, i6);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(overrideLocaleConfig, 1);
             } else {
@@ -173,85 +173,85 @@ public interface ILocaleManager extends IInterface {
 
             @Override // android.app.ILocaleManager
             public void setApplicationLocales(String str, int i, LocaleList localeList, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(localeList, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(localeList, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ILocaleManager
             public LocaleList getApplicationLocales(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LocaleList) obtain2.readTypedObject(LocaleList.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LocaleList) parcelObtain2.readTypedObject(LocaleList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ILocaleManager
             public LocaleList getSystemLocales() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LocaleList) obtain2.readTypedObject(LocaleList.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LocaleList) parcelObtain2.readTypedObject(LocaleList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ILocaleManager
             public void setOverrideLocaleConfig(String str, int i, LocaleConfig localeConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(localeConfig, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(localeConfig, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ILocaleManager
             public LocaleConfig getOverrideLocaleConfig(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LocaleConfig) obtain2.readTypedObject(LocaleConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILocaleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LocaleConfig) parcelObtain2.readTypedObject(LocaleConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

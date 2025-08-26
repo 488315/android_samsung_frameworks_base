@@ -2,6 +2,7 @@ package com.android.wm.shell.desktopmode;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -42,7 +43,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksLimiter {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -59,7 +59,6 @@ public final class DesktopTasksLimiter {
     public final ShellTaskOrganizer shellTaskOrganizer;
     public int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,7 +68,6 @@ public final class DesktopTasksLimiter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LeftoverMinimizedTasksRemover implements DesktopRepository.ActiveTasksListener, UserChangeListener {
         public LeftoverMinimizedTasksRemover() {
         }
@@ -82,9 +80,9 @@ public final class DesktopTasksLimiter {
             WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
             DesktopTasksLimiter desktopTasksLimiter = DesktopTasksLimiter.this;
             DesktopRepository current = desktopTasksLimiter.desktopUserRepositories.getCurrent();
-            boolean isEmpty = ((ArrayList) current.getExpandedTasksOrdered(i)).isEmpty();
+            boolean zIsEmpty = ((ArrayList) current.getExpandedTasksOrdered(i)).isEmpty();
             ShellTaskOrganizer shellTaskOrganizer = desktopTasksLimiter.shellTaskOrganizer;
-            if (isEmpty) {
+            if (zIsEmpty) {
                 DesktopRepository.Desk activeDesk = current.desktopData.getActiveDesk(i);
                 ArraySet arraySet = new ArraySet(activeDesk != null ? activeDesk.minimizedTasks : null);
                 if (!arraySet.isEmpty()) {
@@ -112,7 +110,6 @@ public final class DesktopTasksLimiter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MinimizeTransitionObserver implements Transitions.TransitionObserver {
         public final Map pendingTransitionTokensAndTasks = new LinkedHashMap();
         public final Map pendingTransitionMinimizeAllTokensAndTasks = new LinkedHashMap();
@@ -149,14 +146,18 @@ public final class DesktopTasksLimiter {
             }
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:42:0x00b0  */
         @Override // com.android.wm.shell.transition.Transitions.TransitionObserver
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
             Set set;
-            Object obj;
-            Object obj2;
-            Object obj3;
-            Object obj4;
-            Object obj5;
+            Object next;
+            Object next2;
+            Object next3;
+            Object next4;
+            Object next5;
             DesktopTasksLimiter desktopTasksLimiter = DesktopTasksLimiter.this;
             DesktopRepository current = desktopTasksLimiter.desktopUserRepositories.getCurrent();
             TaskDetails taskDetails = (TaskDetails) this.pendingTransitionTokensAndTasks.remove(iBinder);
@@ -167,53 +168,54 @@ public final class DesktopTasksLimiter {
                     Iterator it = transitionInfo.getChanges().iterator();
                     while (true) {
                         if (!it.hasNext()) {
-                            obj4 = null;
+                            next4 = null;
                             break;
                         }
-                        obj4 = it.next();
-                        ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) obj4).getTaskInfo();
+                        next4 = it.next();
+                        ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) next4).getTaskInfo();
                         if (taskInfo != null && taskInfo.taskId == i) {
                             break;
                         }
                     }
-                    TransitionInfo.Change change = (TransitionInfo.Change) obj4;
+                    TransitionInfo.Change change = (TransitionInfo.Change) next4;
                     if (change == null ? !desktopUserRepositories.getCurrent().isVisibleTask(i) : change.getMode() == 4) {
                         taskDetails.transitionInfo = transitionInfo;
                         this.activeTransitionTokensAndTasks.put(iBinder, taskDetails);
                         Iterator it2 = transitionInfo.getChanges().iterator();
                         while (true) {
                             if (!it2.hasNext()) {
-                                obj5 = null;
+                                next5 = null;
                                 break;
                             }
-                            obj5 = it2.next();
-                            ActivityManager.RunningTaskInfo taskInfo2 = ((TransitionInfo.Change) obj5).getTaskInfo();
+                            next5 = it2.next();
+                            ActivityManager.RunningTaskInfo taskInfo2 = ((TransitionInfo.Change) next5).getTaskInfo();
                             if (taskInfo2 != null && taskInfo2.taskId == i) {
                                 break;
                             }
                         }
-                        TransitionInfo.Change change2 = (TransitionInfo.Change) obj5;
+                        TransitionInfo.Change change2 = (TransitionInfo.Change) next5;
                         current.boundsBeforeMinimizeByTaskId.set(i, new Rect(change2 != null ? change2.getStartAbsBounds() : null));
                         DesktopTasksLimiter.access$minimizeTask(desktopTasksLimiter, taskDetails.displayId, i);
-                    }
-                }
-                DesktopTasksLimiter.logV("task %d is not reordered to back nor invis", Integer.valueOf(i));
-                if (desktopTasksLimiter.minimizingList.contains(Integer.valueOf(i))) {
-                    Iterator it3 = transitionInfo.getChanges().iterator();
-                    while (true) {
-                        if (!it3.hasNext()) {
-                            obj3 = null;
-                            break;
+                    } else {
+                        DesktopTasksLimiter.logV("task %d is not reordered to back nor invis", Integer.valueOf(i));
+                        if (desktopTasksLimiter.minimizingList.contains(Integer.valueOf(i))) {
+                            Iterator it3 = transitionInfo.getChanges().iterator();
+                            while (true) {
+                                if (!it3.hasNext()) {
+                                    next3 = null;
+                                    break;
+                                }
+                                next3 = it3.next();
+                                ActivityManager.RunningTaskInfo taskInfo3 = ((TransitionInfo.Change) next3).getTaskInfo();
+                                if (taskInfo3 != null && taskInfo3.taskId == i) {
+                                    break;
+                                }
+                            }
+                            TransitionInfo.Change change3 = (TransitionInfo.Change) next3;
+                            current.boundsBeforeMinimizeByTaskId.set(i, new Rect(change3 != null ? change3.getStartAbsBounds() : null));
+                            DesktopTasksLimiter.logV("task %d is saved into repository for minimizing", Integer.valueOf(i));
                         }
-                        obj3 = it3.next();
-                        ActivityManager.RunningTaskInfo taskInfo3 = ((TransitionInfo.Change) obj3).getTaskInfo();
-                        if (taskInfo3 != null && taskInfo3.taskId == i) {
-                            break;
-                        }
                     }
-                    TransitionInfo.Change change3 = (TransitionInfo.Change) obj3;
-                    current.boundsBeforeMinimizeByTaskId.set(i, new Rect(change3 != null ? change3.getStartAbsBounds() : null));
-                    DesktopTasksLimiter.logV("task %d is saved into repository for minimizing", Integer.valueOf(i));
                 }
             }
             TaskDetails taskDetails2 = (TaskDetails) this.pendingUnminimizeTransitionTokensAndTasks.remove(iBinder);
@@ -226,44 +228,44 @@ public final class DesktopTasksLimiter {
             }
             Iterator it4 = set.iterator();
             while (it4.hasNext()) {
-                int intValue = ((Number) it4.next()).intValue();
+                int iIntValue = ((Number) it4.next()).intValue();
                 Iterator it5 = transitionInfo.getChanges().iterator();
                 while (true) {
                     if (!it5.hasNext()) {
-                        obj2 = null;
+                        next2 = null;
                         break;
                     }
-                    obj2 = it5.next();
-                    ActivityManager.RunningTaskInfo taskInfo4 = ((TransitionInfo.Change) obj2).getTaskInfo();
-                    if (taskInfo4 != null && taskInfo4.taskId == intValue) {
+                    next2 = it5.next();
+                    ActivityManager.RunningTaskInfo taskInfo4 = ((TransitionInfo.Change) next2).getTaskInfo();
+                    if (taskInfo4 != null && taskInfo4.taskId == iIntValue) {
                         break;
                     }
                 }
-                TransitionInfo.Change change4 = (TransitionInfo.Change) obj2;
-                if (!(change4 == null ? !desktopUserRepositories.getCurrent().isVisibleTask(intValue) : change4.getMode() == 4)) {
-                    DesktopTasksLimiter.logV("task %d is not reordered to back nor invis", Integer.valueOf(intValue));
+                TransitionInfo.Change change4 = (TransitionInfo.Change) next2;
+                if (!(change4 == null ? !desktopUserRepositories.getCurrent().isVisibleTask(iIntValue) : change4.getMode() == 4)) {
+                    DesktopTasksLimiter.logV("task %d is not reordered to back nor invis", Integer.valueOf(iIntValue));
                 }
             }
             taskDetails3.transitionInfo = transitionInfo;
             this.activeTransitionTokensAndTasks.put(iBinder, taskDetails3);
             Iterator it6 = taskDetails3.taskIds.iterator();
             while (it6.hasNext()) {
-                int intValue2 = ((Number) it6.next()).intValue();
+                int iIntValue2 = ((Number) it6.next()).intValue();
                 Iterator it7 = transitionInfo.getChanges().iterator();
                 while (true) {
                     if (!it7.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it7.next();
-                    ActivityManager.RunningTaskInfo taskInfo5 = ((TransitionInfo.Change) obj).getTaskInfo();
-                    if (taskInfo5 != null && taskInfo5.taskId == intValue2) {
+                    next = it7.next();
+                    ActivityManager.RunningTaskInfo taskInfo5 = ((TransitionInfo.Change) next).getTaskInfo();
+                    if (taskInfo5 != null && taskInfo5.taskId == iIntValue2) {
                         break;
                     }
                 }
-                TransitionInfo.Change change5 = (TransitionInfo.Change) obj;
-                current.boundsBeforeMinimizeByTaskId.set(intValue2, new Rect(change5 != null ? change5.getStartAbsBounds() : null));
-                DesktopTasksLimiter.access$minimizeTask(desktopTasksLimiter, taskDetails3.displayId, intValue2);
+                TransitionInfo.Change change5 = (TransitionInfo.Change) next;
+                current.boundsBeforeMinimizeByTaskId.set(iIntValue2, new Rect(change5 != null ? change5.getStartAbsBounds() : null));
+                DesktopTasksLimiter.access$minimizeTask(desktopTasksLimiter, taskDetails3.displayId, iIntValue2);
             }
         }
     }
@@ -273,8 +275,8 @@ public final class DesktopTasksLimiter {
     }
 
     /* JADX WARN: Type inference failed for: r5v2, types: [com.android.wm.shell.desktopmode.DesktopTasksLimiter$deskChangeListener$1, java.lang.Object] */
-    public DesktopTasksLimiter(Transitions transitions, DesktopUserRepositories desktopUserRepositories, ShellTaskOrganizer shellTaskOrganizer, DesksOrganizer desksOrganizer, Integer num, InteractionJankMonitor interactionJankMonitor, Context context, final Handler handler, DisplayController displayController, DesktopConfig desktopConfig, ShellExecutor shellExecutor) {
-        int intValue;
+    public DesktopTasksLimiter(Transitions transitions, DesktopUserRepositories desktopUserRepositories, ShellTaskOrganizer shellTaskOrganizer, DesksOrganizer desksOrganizer, Integer num, InteractionJankMonitor interactionJankMonitor, Context context, final Handler handler, DisplayController displayController, DesktopConfig desktopConfig, ShellExecutor shellExecutor) throws Resources.NotFoundException, Settings.SettingNotFoundException {
+        int iIntValue;
         this.desktopUserRepositories = desktopUserRepositories;
         this.shellTaskOrganizer = shellTaskOrganizer;
         this.desksOrganizer = desksOrganizer;
@@ -289,7 +291,7 @@ public final class DesktopTasksLimiter {
         ?? r5 = new DesktopRepository.DeskChangeListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksLimiter$deskChangeListener$1
             @Override // com.android.wm.shell.desktopmode.DesktopRepository.DeskChangeListener
             public final void onActiveDeskChanged(int i, int i2, int i3) {
-                DesktopTasksLimiter desktopTasksLimiter = DesktopTasksLimiter.this;
+                DesktopTasksLimiter desktopTasksLimiter = this.this$0;
                 if (i2 != -1) {
                     DesktopTasksLimiter.logV("onActiveDeskChanged activeDeskId=%s minimizingList=%s", Integer.valueOf(i2), desktopTasksLimiter.minimizingList);
                     ArrayList arrayList = desktopTasksLimiter.minimizingList;
@@ -318,17 +320,17 @@ public final class DesktopTasksLimiter {
         };
         this.deskChangeListener = r5;
         Integer num2 = this.maxTasksLimit;
-        if (num2 != null && (intValue = num2.intValue()) <= 0) {
-            throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(intValue, "DesktopTasksLimiter: maxTasksLimit should be greater than 0. Current value: ", ".").toString());
+        if (num2 != null && (iIntValue = num2.intValue()) <= 0) {
+            throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iIntValue, "DesktopTasksLimiter: maxTasksLimit should be greater than 0. Current value: ", ".").toString());
         }
         transitions.registerObserver(minimizeTransitionObserver);
         this.userId = ActivityManager.getCurrentUser();
         desktopUserRepositories.getCurrent().activeTasksListeners.add(leftoverMinimizedTasksRemover);
         context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("max_desktop_windowing_active_tasks"), false, new ContentObserver(handler) { // from class: com.android.wm.shell.desktopmode.DesktopTasksLimiter$registerContentObserver$settingsObserver$1
             @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri) {
+            public final void onChange(boolean z, Uri uri) throws Resources.NotFoundException, Settings.SettingNotFoundException {
                 super.onChange(z, uri);
-                DesktopTasksLimiter desktopTasksLimiter = DesktopTasksLimiter.this;
+                DesktopTasksLimiter desktopTasksLimiter = this.this$0;
                 int i = DesktopTasksLimiter.$r8$clinit;
                 desktopTasksLimiter.updateMaxTasksLimit();
             }
@@ -354,37 +356,37 @@ public final class DesktopTasksLimiter {
         if (num == null) {
             return list;
         }
-        List singletonList = Collections.singletonList(num);
+        List listSingletonList = Collections.singletonList(num);
         ArrayList arrayList = new ArrayList();
         for (Object obj : list) {
             if (((Number) obj).intValue() != num.intValue()) {
                 arrayList.add(obj);
             }
         }
-        return CollectionsKt___CollectionsKt.plus((Iterable) arrayList, (Collection) singletonList);
+        return CollectionsKt___CollectionsKt.plus((Iterable) arrayList, (Collection) listSingletonList);
     }
 
     public static List getTaskIdsToMinimize$default(DesktopTasksLimiter desktopTasksLimiter, List list, Integer num) {
         desktopTasksLimiter.getClass();
-        List createOrderedTaskListWithGivenTaskInFront = createOrderedTaskListWithGivenTaskInFront(list, num);
-        int size = createOrderedTaskListWithGivenTaskInFront.size();
+        List listCreateOrderedTaskListWithGivenTaskInFront = createOrderedTaskListWithGivenTaskInFront(list, num);
+        int size = listCreateOrderedTaskListWithGivenTaskInFront.size();
         Integer num2 = desktopTasksLimiter.maxTasksLimit;
         if (size <= (num2 != null ? num2.intValue() : 5)) {
             logV("No need to minimize; tasks below limit", new Object[0]);
             return null;
         }
-        int size2 = createOrderedTaskListWithGivenTaskInFront.size();
+        int size2 = listCreateOrderedTaskListWithGivenTaskInFront.size();
         Integer num3 = desktopTasksLimiter.maxTasksLimit;
-        List takeLast = CollectionsKt___CollectionsKt.takeLast(size2 - (num3 != null ? num3.intValue() : 5), createOrderedTaskListWithGivenTaskInFront);
-        logV("getTaskIdsToMinimize %s", takeLast.toString());
-        return takeLast;
+        List listTakeLast = CollectionsKt___CollectionsKt.takeLast(size2 - (num3 != null ? num3.intValue() : 5), listCreateOrderedTaskListWithGivenTaskInFront);
+        logV("getTaskIdsToMinimize %s", listTakeLast.toString());
+        return listTakeLast;
     }
 
     public static void logV(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksLimiter", objArr);
-        ProtoLog.v(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksLimiter", objArr);
+        ProtoLog.v(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public final void addPendingMinimizeChanges(IBinder iBinder, int i, List list, DesktopModeEventLogger.Companion.MinimizeReason minimizeReason) {
@@ -404,15 +406,22 @@ public final class DesktopTasksLimiter {
         if (deskIdForTask != null) {
             current.isDeskActive(deskIdForTask.intValue());
         }
-        this.minimizingList.addAll(list);
+        ArrayList arrayList = new ArrayList();
+        for (Object obj : list) {
+            if (!this.minimizingList.contains(Integer.valueOf(((Number) obj).intValue()))) {
+                arrayList.add(obj);
+            }
+        }
+        this.minimizingList.addAll(arrayList);
+        arrayList.isEmpty();
     }
 
     public final Integer getTaskIdToMinimize(List list, Integer num, boolean z) {
-        List createOrderedTaskListWithGivenTaskInFront = createOrderedTaskListWithGivenTaskInFront(list, num);
-        int size = createOrderedTaskListWithGivenTaskInFront.size() + (z ? 1 : 0);
+        List listCreateOrderedTaskListWithGivenTaskInFront = createOrderedTaskListWithGivenTaskInFront(list, num);
+        int size = listCreateOrderedTaskListWithGivenTaskInFront.size() + (z ? 1 : 0);
         Integer num2 = this.maxTasksLimit;
         if (size > (num2 != null ? num2.intValue() : Integer.MAX_VALUE)) {
-            return (Integer) CollectionsKt___CollectionsKt.last(createOrderedTaskListWithGivenTaskInFront);
+            return (Integer) CollectionsKt___CollectionsKt.last(listCreateOrderedTaskListWithGivenTaskInFront);
         }
         logV("No need to minimize; tasks below limit", new Object[0]);
         return null;
@@ -422,7 +431,7 @@ public final class DesktopTasksLimiter {
         return this.minimizeTransitionObserver;
     }
 
-    public final void updateMaxTasksLimit() {
+    public final void updateMaxTasksLimit() throws Resources.NotFoundException, Settings.SettingNotFoundException {
         int i;
         Collection collection;
         int i2;
@@ -436,18 +445,18 @@ public final class DesktopTasksLimiter {
             if (num != null && i == num.intValue()) {
                 return;
             }
-            int min = Math.min(i, 15);
-            this.maxTasksLimit = Integer.valueOf(min);
+            int iMin = Math.min(i, 15);
+            this.maxTasksLimit = Integer.valueOf(iMin);
             DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) this.desktopConfig;
-            if (desktopConfigImpl.maxTaskLimit != min && min > 0) {
-                desktopConfigImpl.maxTaskLimit = min;
+            if (desktopConfigImpl.maxTaskLimit != iMin && iMin > 0) {
+                desktopConfigImpl.maxTaskLimit = iMin;
             }
             DesktopRepository current = this.desktopUserRepositories.getCurrent();
             Iterator it = current.getAllDeskIds().iterator();
             while (it.hasNext()) {
-                int intValue = ((Number) it.next()).intValue();
-                if (current.isDeskActive(intValue)) {
-                    DesktopRepository.Desk desk = current.desktopData.getDesk(intValue);
+                int iIntValue = ((Number) it.next()).intValue();
+                if (current.isDeskActive(iIntValue)) {
+                    DesktopRepository.Desk desk = current.desktopData.getDesk(iIntValue);
                     if (desk == null || (collection = desk.visibleTasks) == null) {
                         collection = EmptyList.INSTANCE;
                     }
@@ -456,7 +465,7 @@ public final class DesktopTasksLimiter {
                         ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(((Number) CollectionsKt___CollectionsKt.first(taskIdsToMinimize$default)).intValue());
                         if (runningTaskInfo != null && (i2 = runningTaskInfo.displayId) != -1) {
                             DesktopTasksController desktopTasksController = this.desktopTasksController;
-                            (desktopTasksController != null ? desktopTasksController : null).minimizeTasks(taskIdsToMinimize$default, intValue, i2);
+                            (desktopTasksController != null ? desktopTasksController : null).minimizeTasks(taskIdsToMinimize$default, iIntValue, i2);
                         }
                     }
                 }
@@ -464,7 +473,6 @@ public final class DesktopTasksLimiter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TaskDetails {
         public final int displayId;
         public final DesktopModeEventLogger.Companion.MinimizeReason minimizeReason;
@@ -494,15 +502,15 @@ public final class DesktopTasksLimiter {
         }
 
         public final int hashCode() {
-            int m = ReorderTile$$ExternalSyntheticOutline0.m(this.taskId, Integer.hashCode(this.displayId) * 31, 31);
+            int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.taskId, Integer.hashCode(this.displayId) * 31, 31);
             Set set = this.taskIds;
-            int hashCode = (m + (set == null ? 0 : set.hashCode())) * 31;
+            int iHashCode = (iM + (set == null ? 0 : set.hashCode())) * 31;
             TransitionInfo transitionInfo = this.transitionInfo;
-            int hashCode2 = (hashCode + (transitionInfo == null ? 0 : transitionInfo.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (transitionInfo == null ? 0 : transitionInfo.hashCode())) * 31;
             DesktopModeEventLogger.Companion.MinimizeReason minimizeReason = this.minimizeReason;
-            int hashCode3 = (hashCode2 + (minimizeReason == null ? 0 : minimizeReason.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (minimizeReason == null ? 0 : minimizeReason.hashCode())) * 31;
             DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason = this.unminimizeReason;
-            return hashCode3 + (unminimizeReason != null ? unminimizeReason.hashCode() : 0);
+            return iHashCode3 + (unminimizeReason != null ? unminimizeReason.hashCode() : 0);
         }
 
         public final String toString() {

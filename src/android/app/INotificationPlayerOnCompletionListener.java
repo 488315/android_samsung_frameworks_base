@@ -44,9 +44,9 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INotificationPlayerOnCompletionListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INotificationPlayerOnCompletionListener)) {
-                return (INotificationPlayerOnCompletionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INotificationPlayerOnCompletionListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INotificationPlayerOnCompletionListener)) {
+                return (INotificationPlayerOnCompletionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -98,15 +98,15 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
 
             @Override // android.app.INotificationPlayerOnCompletionListener
             public void onCompletion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INotificationPlayerOnCompletionListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(INotificationPlayerOnCompletionListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

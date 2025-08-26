@@ -12,7 +12,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmbeddingBounds {
     public static final EmbeddingBounds BOUNDS_EXPANDED;
@@ -21,7 +20,6 @@ public final class EmbeddingBounds {
     public final Dimension height;
     public final Dimension width;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Alignment {
         public static final Alignment ALIGN_BOTTOM;
         public static final Alignment ALIGN_LEFT;
@@ -29,7 +27,6 @@ public final class EmbeddingBounds {
         public static final Alignment ALIGN_TOP;
         public final int value;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -86,7 +83,6 @@ public final class EmbeddingBounds {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -100,7 +96,6 @@ public final class EmbeddingBounds {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Dimension {
         public static final Companion Companion = new Companion(null);
         public static final Ratio DIMENSION_EXPANDED = new Ratio(1.0f);
@@ -108,7 +103,6 @@ public final class EmbeddingBounds {
         };
         public final String description;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -118,7 +112,6 @@ public final class EmbeddingBounds {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Pixel extends Dimension {
             public final int value;
 
@@ -131,7 +124,6 @@ public final class EmbeddingBounds {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Ratio extends Dimension {
             public final float value;
 

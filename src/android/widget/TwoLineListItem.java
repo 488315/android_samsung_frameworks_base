@@ -25,9 +25,9 @@ public class TwoLineListItem extends RelativeLayout {
 
     public TwoLineListItem(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TwoLineListItem, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TwoLineListItem, attributeSet, obtainStyledAttributes, i, i2);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TwoLineListItem, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TwoLineListItem, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.View

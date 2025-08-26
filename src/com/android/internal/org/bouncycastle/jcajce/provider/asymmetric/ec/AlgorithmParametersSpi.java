@@ -37,8 +37,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
                 throw new InvalidParameterSpecException("EC curve name not recognized: " + eCGenParameterSpec.getName());
             }
             this.curveName = eCGenParameterSpec.getName();
-            ECParameterSpec convertToSpec = EC5Util.convertToSpec(domainParametersFromGenSpec);
-            this.ecParameterSpec = new ECNamedCurveSpec(this.curveName, convertToSpec.getCurve(), convertToSpec.getGenerator(), convertToSpec.getOrder(), BigInteger.valueOf(convertToSpec.getCofactor()));
+            ECParameterSpec eCParameterSpecConvertToSpec = EC5Util.convertToSpec(domainParametersFromGenSpec);
+            this.ecParameterSpec = new ECNamedCurveSpec(this.curveName, eCParameterSpecConvertToSpec.getCurve(), eCParameterSpecConvertToSpec.getGenerator(), eCParameterSpecConvertToSpec.getOrder(), BigInteger.valueOf(eCParameterSpecConvertToSpec.getCofactor()));
             return;
         }
         if (algorithmParameterSpec instanceof ECParameterSpec) {
@@ -114,8 +114,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
             } else if (this.curveName != null) {
                 x962Parameters = new X962Parameters(ECUtil.getNamedCurveOid(this.curveName));
             } else {
-                com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec convertSpec = EC5Util.convertSpec(eCParameterSpec);
-                x962Parameters = new X962Parameters(new X9ECParameters(convertSpec.getCurve(), new X9ECPoint(convertSpec.getG(), false), convertSpec.getN(), convertSpec.getH(), convertSpec.getSeed()));
+                com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec eCParameterSpecConvertSpec = EC5Util.convertSpec(eCParameterSpec);
+                x962Parameters = new X962Parameters(new X9ECParameters(eCParameterSpecConvertSpec.getCurve(), new X9ECPoint(eCParameterSpecConvertSpec.getG(), false), eCParameterSpecConvertSpec.getN(), eCParameterSpecConvertSpec.getH(), eCParameterSpecConvertSpec.getSeed()));
             }
             return x962Parameters.getEncoded();
         }

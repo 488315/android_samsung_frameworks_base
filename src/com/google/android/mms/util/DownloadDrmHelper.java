@@ -39,9 +39,9 @@ public class DownloadDrmHelper {
         if (str == null) {
             return str;
         }
-        int lastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR);
-        if (lastIndexOf != -1) {
-            str = str.substring(0, lastIndexOf);
+        int iLastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR);
+        if (iLastIndexOf != -1) {
+            str = str.substring(0, iLastIndexOf);
         }
         return str.concat(EXTENSION_INTERNAL_FWDL);
     }

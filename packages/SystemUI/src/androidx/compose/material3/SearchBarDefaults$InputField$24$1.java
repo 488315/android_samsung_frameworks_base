@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SearchBarDefaults$InputField$24$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ FocusManager $focusManager;
@@ -57,7 +56,7 @@ final class SearchBarDefaults$InputField$24$1 extends SuspendLambda implements F
         FocusOwnerImpl focusOwnerImpl = (FocusOwnerImpl) this.$focusManager;
         focusOwnerImpl.getClass();
         FocusDirection.Companion.getClass();
-        focusOwnerImpl.m370clearFocusI7lrPNg(FocusDirection.Exit, false, true);
+        focusOwnerImpl.m372clearFocusI7lrPNg(FocusDirection.Exit, false, true);
         return Unit.INSTANCE;
     }
 }

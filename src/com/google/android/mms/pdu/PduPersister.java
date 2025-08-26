@@ -18,13 +18,16 @@ import android.util.Log;
 import com.google.android.mms.ContentType;
 import com.google.android.mms.InvalidHeaderValueException;
 import com.google.android.mms.MmsException;
+import com.google.android.mms.util.DownloadDrmHelper;
 import com.google.android.mms.util.PduCache;
 import com.google.android.mms.util.PduCacheEntry;
 import com.google.android.mms.util.SqliteWrapper;
 import com.samsung.android.feature.SemCscFeature;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,82 +110,82 @@ public class PduPersister {
     private static final String[] PART_PROJECTION = {"_id", Telephony.Mms.Part.CHARSET, Telephony.Mms.Part.CONTENT_DISPOSITION, "cid", Telephony.Mms.Part.CONTENT_LOCATION, "ct", Telephony.Mms.Part.FILENAME, "name", "text"};
 
     static {
-        HashMap<Uri, Integer> hashMap = new HashMap<>();
-        MESSAGE_BOX_MAP = hashMap;
-        hashMap.put(Telephony.Mms.Inbox.CONTENT_URI, 1);
-        hashMap.put(Telephony.Mms.Sent.CONTENT_URI, 2);
-        hashMap.put(Telephony.Mms.Draft.CONTENT_URI, 3);
-        hashMap.put(Telephony.Mms.Outbox.CONTENT_URI, 4);
-        hashMap.put(Uri.parse("content://spammms/inbox"), 1);
-        HashMap<Integer, Integer> hashMap2 = new HashMap<>();
-        CHARSET_COLUMN_INDEX_MAP = hashMap2;
-        hashMap2.put(150, 25);
-        hashMap2.put(154, 26);
-        HashMap<Integer, String> hashMap3 = new HashMap<>();
-        CHARSET_COLUMN_NAME_MAP = hashMap3;
-        hashMap3.put(150, Telephony.BaseMmsColumns.SUBJECT_CHARSET);
-        hashMap3.put(154, Telephony.BaseMmsColumns.RETRIEVE_TEXT_CHARSET);
-        HashMap<Integer, Integer> hashMap4 = new HashMap<>();
-        ENCODED_STRING_COLUMN_INDEX_MAP = hashMap4;
-        hashMap4.put(154, 3);
-        hashMap4.put(150, 4);
-        HashMap<Integer, String> hashMap5 = new HashMap<>();
-        ENCODED_STRING_COLUMN_NAME_MAP = hashMap5;
-        hashMap5.put(154, Telephony.BaseMmsColumns.RETRIEVE_TEXT);
-        hashMap5.put(150, Telephony.BaseMmsColumns.SUBJECT);
-        HashMap<Integer, Integer> hashMap6 = new HashMap<>();
-        TEXT_STRING_COLUMN_INDEX_MAP = hashMap6;
-        hashMap6.put(131, 5);
-        hashMap6.put(132, 6);
-        hashMap6.put(138, 7);
-        hashMap6.put(139, 8);
-        hashMap6.put(147, 9);
-        hashMap6.put(152, 10);
-        HashMap<Integer, String> hashMap7 = new HashMap<>();
-        TEXT_STRING_COLUMN_NAME_MAP = hashMap7;
-        hashMap7.put(131, Telephony.BaseMmsColumns.CONTENT_LOCATION);
-        hashMap7.put(132, Telephony.BaseMmsColumns.CONTENT_TYPE);
-        hashMap7.put(138, Telephony.BaseMmsColumns.MESSAGE_CLASS);
-        hashMap7.put(139, Telephony.BaseMmsColumns.MESSAGE_ID);
-        hashMap7.put(147, Telephony.BaseMmsColumns.RESPONSE_TEXT);
-        hashMap7.put(152, Telephony.BaseMmsColumns.TRANSACTION_ID);
-        HashMap<Integer, Integer> hashMap8 = new HashMap<>();
-        OCTET_COLUMN_INDEX_MAP = hashMap8;
-        hashMap8.put(186, 11);
-        hashMap8.put(134, 12);
-        hashMap8.put(140, 13);
-        hashMap8.put(141, 14);
-        hashMap8.put(143, 15);
-        hashMap8.put(144, 16);
-        hashMap8.put(155, 17);
-        hashMap8.put(145, 18);
-        hashMap8.put(153, 19);
-        hashMap8.put(149, 20);
-        HashMap<Integer, String> hashMap9 = new HashMap<>();
-        OCTET_COLUMN_NAME_MAP = hashMap9;
-        hashMap9.put(186, Telephony.BaseMmsColumns.CONTENT_CLASS);
-        hashMap9.put(134, Telephony.BaseMmsColumns.DELIVERY_REPORT);
-        hashMap9.put(140, Telephony.BaseMmsColumns.MESSAGE_TYPE);
-        hashMap9.put(141, "v");
-        hashMap9.put(143, Telephony.BaseMmsColumns.PRIORITY);
-        hashMap9.put(144, Telephony.BaseMmsColumns.READ_REPORT);
-        hashMap9.put(155, Telephony.BaseMmsColumns.READ_STATUS);
-        hashMap9.put(145, Telephony.BaseMmsColumns.REPORT_ALLOWED);
-        hashMap9.put(153, Telephony.BaseMmsColumns.RETRIEVE_STATUS);
-        hashMap9.put(149, Telephony.BaseMmsColumns.STATUS);
-        HashMap<Integer, Integer> hashMap10 = new HashMap<>();
-        LONG_COLUMN_INDEX_MAP = hashMap10;
-        hashMap10.put(133, 21);
-        hashMap10.put(135, 22);
-        hashMap10.put(136, 23);
-        hashMap10.put(142, 24);
-        HashMap<Integer, String> hashMap11 = new HashMap<>();
-        LONG_COLUMN_NAME_MAP = hashMap11;
-        hashMap11.put(133, "date");
-        hashMap11.put(135, Telephony.BaseMmsColumns.DELIVERY_TIME);
-        hashMap11.put(136, Telephony.BaseMmsColumns.EXPIRY);
-        hashMap11.put(142, Telephony.BaseMmsColumns.MESSAGE_SIZE);
-        hashMap11.put(192, "reserved");
+        HashMap<Uri, Integer> map = new HashMap<>();
+        MESSAGE_BOX_MAP = map;
+        map.put(Telephony.Mms.Inbox.CONTENT_URI, 1);
+        map.put(Telephony.Mms.Sent.CONTENT_URI, 2);
+        map.put(Telephony.Mms.Draft.CONTENT_URI, 3);
+        map.put(Telephony.Mms.Outbox.CONTENT_URI, 4);
+        map.put(Uri.parse("content://spammms/inbox"), 1);
+        HashMap<Integer, Integer> map2 = new HashMap<>();
+        CHARSET_COLUMN_INDEX_MAP = map2;
+        map2.put(150, 25);
+        map2.put(154, 26);
+        HashMap<Integer, String> map3 = new HashMap<>();
+        CHARSET_COLUMN_NAME_MAP = map3;
+        map3.put(150, Telephony.BaseMmsColumns.SUBJECT_CHARSET);
+        map3.put(154, Telephony.BaseMmsColumns.RETRIEVE_TEXT_CHARSET);
+        HashMap<Integer, Integer> map4 = new HashMap<>();
+        ENCODED_STRING_COLUMN_INDEX_MAP = map4;
+        map4.put(154, 3);
+        map4.put(150, 4);
+        HashMap<Integer, String> map5 = new HashMap<>();
+        ENCODED_STRING_COLUMN_NAME_MAP = map5;
+        map5.put(154, Telephony.BaseMmsColumns.RETRIEVE_TEXT);
+        map5.put(150, Telephony.BaseMmsColumns.SUBJECT);
+        HashMap<Integer, Integer> map6 = new HashMap<>();
+        TEXT_STRING_COLUMN_INDEX_MAP = map6;
+        map6.put(131, 5);
+        map6.put(132, 6);
+        map6.put(138, 7);
+        map6.put(139, 8);
+        map6.put(147, 9);
+        map6.put(152, 10);
+        HashMap<Integer, String> map7 = new HashMap<>();
+        TEXT_STRING_COLUMN_NAME_MAP = map7;
+        map7.put(131, Telephony.BaseMmsColumns.CONTENT_LOCATION);
+        map7.put(132, Telephony.BaseMmsColumns.CONTENT_TYPE);
+        map7.put(138, Telephony.BaseMmsColumns.MESSAGE_CLASS);
+        map7.put(139, Telephony.BaseMmsColumns.MESSAGE_ID);
+        map7.put(147, Telephony.BaseMmsColumns.RESPONSE_TEXT);
+        map7.put(152, Telephony.BaseMmsColumns.TRANSACTION_ID);
+        HashMap<Integer, Integer> map8 = new HashMap<>();
+        OCTET_COLUMN_INDEX_MAP = map8;
+        map8.put(186, 11);
+        map8.put(134, 12);
+        map8.put(140, 13);
+        map8.put(141, 14);
+        map8.put(143, 15);
+        map8.put(144, 16);
+        map8.put(155, 17);
+        map8.put(145, 18);
+        map8.put(153, 19);
+        map8.put(149, 20);
+        HashMap<Integer, String> map9 = new HashMap<>();
+        OCTET_COLUMN_NAME_MAP = map9;
+        map9.put(186, Telephony.BaseMmsColumns.CONTENT_CLASS);
+        map9.put(134, Telephony.BaseMmsColumns.DELIVERY_REPORT);
+        map9.put(140, Telephony.BaseMmsColumns.MESSAGE_TYPE);
+        map9.put(141, "v");
+        map9.put(143, Telephony.BaseMmsColumns.PRIORITY);
+        map9.put(144, Telephony.BaseMmsColumns.READ_REPORT);
+        map9.put(155, Telephony.BaseMmsColumns.READ_STATUS);
+        map9.put(145, Telephony.BaseMmsColumns.REPORT_ALLOWED);
+        map9.put(153, Telephony.BaseMmsColumns.RETRIEVE_STATUS);
+        map9.put(149, Telephony.BaseMmsColumns.STATUS);
+        HashMap<Integer, Integer> map10 = new HashMap<>();
+        LONG_COLUMN_INDEX_MAP = map10;
+        map10.put(133, 21);
+        map10.put(135, 22);
+        map10.put(136, 23);
+        map10.put(142, 24);
+        HashMap<Integer, String> map11 = new HashMap<>();
+        LONG_COLUMN_NAME_MAP = map11;
+        map11.put(133, "date");
+        map11.put(135, Telephony.BaseMmsColumns.DELIVERY_TIME);
+        map11.put(136, Telephony.BaseMmsColumns.EXPIRY);
+        map11.put(142, Telephony.BaseMmsColumns.MESSAGE_SIZE);
+        map11.put(192, "reserved");
         PDU_CACHE_INSTANCE = PduCache.getInstance();
     }
 
@@ -257,8 +260,8 @@ public class PduPersister {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:125:0x0213
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:110:0x0213
+        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1178)
         	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
         	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
         	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
@@ -266,7 +269,7 @@ public class PduPersister {
     public com.google.android.mms.pdu.GenericPdu load(android.net.Uri r13) throws com.google.android.mms.MmsException {
         /*
             Method dump skipped, instructions count: 604
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.load(android.net.Uri):com.google.android.mms.pdu.GenericPdu");
     }
@@ -282,21 +285,21 @@ public class PduPersister {
         return toIsoString(pduPart.getContentType());
     }
 
-    public Uri persistPart(PduPart pduPart, long j, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        return persistPart(pduPart, j, hashMap, 0, false, false);
+    public Uri persistPart(PduPart pduPart, long j, HashMap<Uri, InputStream> map) throws MmsException {
+        return persistPart(pduPart, j, map, 0, false, false);
     }
 
-    private void persistData(PduPart pduPart, Uri uri, String str, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        persistData(pduPart, uri, str, hashMap, false, false);
+    private void persistData(PduPart pduPart, Uri uri, String str, HashMap<Uri, InputStream> map) throws Throwable {
+        persistData(pduPart, uri, str, map, false, false);
     }
 
     private void updateAddress(long j, int i, EncodedStringValue[] encodedStringValueArr) {
         Context context = this.mContext;
         ContentResolver contentResolver = this.mContentResolver;
-        Uri parse = Uri.parse("content://mms/" + j + "/addr");
+        Uri uri = Uri.parse("content://mms/" + j + "/addr");
         StringBuilder sb = new StringBuilder("type=");
         sb.append(i);
-        SqliteWrapper.delete(context, contentResolver, parse, sb.toString(), null);
+        SqliteWrapper.delete(context, contentResolver, uri, sb.toString(), null);
         if (encodedStringValueArr != null) {
             persistAddress(j, i, encodedStringValueArr);
         }
@@ -306,7 +309,7 @@ public class PduPersister {
         updateHeaders(uri, sendReq, 0);
     }
 
-    private void updatePart(Uri uri, PduPart pduPart, HashMap<Uri, InputStream> hashMap) throws MmsException {
+    private void updatePart(Uri uri, PduPart pduPart, HashMap<Uri, InputStream> map) throws Throwable {
         ContentValues contentValues = new ContentValues(7);
         int charset = pduPart.getCharset();
         if (charset != 0) {
@@ -334,13 +337,13 @@ public class PduPersister {
             if (pduPart.getData() == null && uri.equals(pduPart.getDataUri())) {
                 return;
             }
-            persistData(pduPart, uri, isoString, hashMap);
+            persistData(pduPart, uri, isoString, map);
             return;
         }
         throw new MmsException("MIME type of the part must be set.");
     }
 
-    public void updateParts(Uri uri, PduBody pduBody, HashMap<Uri, InputStream> hashMap) throws MmsException {
+    public void updateParts(Uri uri, PduBody pduBody, HashMap<Uri, InputStream> map) throws MmsException {
         try {
             PduCache pduCache = PDU_CACHE_INSTANCE;
             synchronized (pduCache) {
@@ -354,19 +357,23 @@ public class PduPersister {
                     if (pduCacheEntry != null) {
                         ((MultimediaMessagePdu) pduCacheEntry.getPdu()).setBody(pduBody);
                     }
+                    PDU_CACHE_INSTANCE.setUpdating(uri, true);
+                } else {
+                    PDU_CACHE_INSTANCE.setUpdating(uri, true);
                 }
-                PDU_CACHE_INSTANCE.setUpdating(uri, true);
             }
             ArrayList arrayList = new ArrayList();
-            HashMap hashMap2 = new HashMap();
+            HashMap map2 = new HashMap();
             int partsNum = pduBody.getPartsNum();
             StringBuilder sb = new StringBuilder();
             sb.append('(');
             for (int i = 0; i < partsNum; i++) {
                 PduPart part = pduBody.getPart(i);
                 Uri dataUri = part.getDataUri();
-                if (dataUri != null && !TextUtils.isEmpty(dataUri.getAuthority()) && dataUri.getAuthority().startsWith("mms")) {
-                    hashMap2.put(dataUri, part);
+                if (dataUri == null || TextUtils.isEmpty(dataUri.getAuthority()) || !dataUri.getAuthority().startsWith("mms")) {
+                    arrayList.add(part);
+                } else {
+                    map2.put(dataUri, part);
                     if (sb.length() > 1) {
                         sb.append(" AND ");
                     }
@@ -374,17 +381,16 @@ public class PduPersister {
                     sb.append("!=");
                     DatabaseUtils.appendEscapedSQLString(sb, dataUri.getLastPathSegment());
                 }
-                arrayList.add(part);
             }
             sb.append(')');
-            long parseId = ContentUris.parseId(uri);
-            SqliteWrapper.delete(this.mContext, this.mContentResolver, Uri.parse(Telephony.Mms.CONTENT_URI + "/" + parseId + "/part"), sb.length() > 2 ? sb.toString() : null, null);
+            long id = ContentUris.parseId(uri);
+            SqliteWrapper.delete(this.mContext, this.mContentResolver, Uri.parse(Telephony.Mms.CONTENT_URI + "/" + id + "/part"), sb.length() > 2 ? sb.toString() : null, null);
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                persistPart((PduPart) it.next(), parseId, hashMap);
+                persistPart((PduPart) it.next(), id, map);
             }
-            for (Map.Entry entry : hashMap2.entrySet()) {
-                updatePart((Uri) entry.getKey(), (PduPart) entry.getValue(), hashMap);
+            for (Map.Entry entry : map2.entrySet()) {
+                updatePart((Uri) entry.getKey(), (PduPart) entry.getValue(), map);
             }
             PduCache pduCache2 = PDU_CACHE_INSTANCE;
             synchronized (pduCache2) {
@@ -401,19 +407,19 @@ public class PduPersister {
         }
     }
 
-    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        return persist(genericPdu, 0, uri, z, z2, hashMap, false, false);
+    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map) throws MmsException {
+        return persist(genericPdu, 0, uri, z, z2, map, false, false);
     }
 
-    private void loadRecipients(int i, HashSet<String> hashSet, HashMap<Integer, EncodedStringValue[]> hashMap, boolean z) {
-        EncodedStringValue[] encodedStringValueArr = hashMap.get(Integer.valueOf(i));
+    private void loadRecipients(int i, HashSet<String> hashSet, HashMap<Integer, EncodedStringValue[]> map, boolean z) {
+        EncodedStringValue[] encodedStringValueArr = map.get(Integer.valueOf(i));
         if (encodedStringValueArr == null) {
             return;
         }
-        SubscriptionManager from = SubscriptionManager.from(this.mContext);
+        SubscriptionManager subscriptionManagerFrom = SubscriptionManager.from(this.mContext);
         HashSet hashSet2 = new HashSet();
         if (z) {
-            Iterator<SubscriptionInfo> it = from.getActiveSubscriptionInfoList().iterator();
+            Iterator<SubscriptionInfo> it = subscriptionManagerFrom.getActiveSubscriptionInfoList().iterator();
             while (it.hasNext()) {
                 String line1Number = ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)).createForSubscriptionId(it.next().getSubscriptionId()).getLine1Number();
                 if (line1Number != null) {
@@ -443,8 +449,8 @@ public class PduPersister {
     }
 
     public Uri move(Uri uri, Uri uri2) throws MmsException {
-        long parseId = ContentUris.parseId(uri);
-        if (parseId == -1) {
+        long id = ContentUris.parseId(uri);
+        if (id == -1) {
             throw new MmsException("Error! ID of the message: -1.");
         }
         Integer num = MESSAGE_BOX_MAP.get(uri2);
@@ -454,7 +460,7 @@ public class PduPersister {
         ContentValues contentValues = new ContentValues(1);
         contentValues.put(Telephony.BaseMmsColumns.MESSAGE_BOX, num);
         SqliteWrapper.update(this.mContext, this.mContentResolver, uri, contentValues, null, null);
-        return ContentUris.withAppendedId(uri2, parseId);
+        return ContentUris.withAppendedId(uri2, id);
     }
 
     public static String toIsoString(byte[] bArr) {
@@ -481,9 +487,9 @@ public class PduPersister {
     }
 
     public Cursor getPendingMessages(long j) {
-        Uri.Builder buildUpon = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
-        buildUpon.appendQueryParameter("protocol", "mms");
-        return SqliteWrapper.query(this.mContext, this.mContentResolver, buildUpon.build(), null, "err_type < ? AND due_time <= ?", new String[]{String.valueOf(10), String.valueOf(j)}, Telephony.MmsSms.PendingMessages.DUE_TIME);
+        Uri.Builder builderBuildUpon = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
+        builderBuildUpon.appendQueryParameter("protocol", "mms");
+        return SqliteWrapper.query(this.mContext, this.mContentResolver, builderBuildUpon.build(), null, "err_type < ? AND due_time <= ?", new String[]{String.valueOf(10), String.valueOf(j)}, Telephony.MmsSms.PendingMessages.DUE_TIME);
     }
 
     public void updateHeaders(Uri uri, SendReq sendReq, int i) {
@@ -628,32 +634,144 @@ public class PduPersister {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0121 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:44:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x010b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r6v0, types: [com.google.android.mms.pdu.PduPart] */
     /* JADX WARN: Type inference failed for: r6v1 */
     /* JADX WARN: Type inference failed for: r6v17 */
     /* JADX WARN: Type inference failed for: r6v4, types: [java.io.InputStream, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r8v3, types: [java.lang.StringBuilder] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void persistData(com.google.android.mms.pdu.PduPart r6, android.net.Uri r7, java.lang.String r8, java.util.HashMap<android.net.Uri, java.io.InputStream> r9, boolean r10, boolean r11) throws com.google.android.mms.MmsException {
-        /*
-            Method dump skipped, instructions count: 407
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.persistData(com.google.android.mms.pdu.PduPart, android.net.Uri, java.lang.String, java.util.HashMap, boolean, boolean):void");
+    private void persistData(PduPart pduPart, Uri uri, String str, HashMap<Uri, InputStream> map, boolean z, boolean z2) throws Throwable {
+        InputStream inputStream;
+        if (map == null) {
+            Log.v(TAG, "preOpenedFiles is null");
+        }
+        OutputStream outputStream = null;
+        inputStreamOpenInputStream = null;
+        inputStreamOpenInputStream = null;
+        InputStream inputStreamOpenInputStream = null;
+        OutputStream outputStream2 = null;
+        outputStream = null;
+        try {
+            try {
+                byte[] data = pduPart.getData();
+                if ("text/plain".equals(str) || ContentType.APP_SMIL.equals(str) || "text/html".equals(str)) {
+                    ContentValues contentValues = new ContentValues();
+                    if (data == null) {
+                        contentValues.put("text", "");
+                    } else if (pduPart.getCharset() == 38) {
+                        contentValues.put("text", new EncodedStringValue(pduPart.getCharset(), data).getString());
+                        contentValues.put(Telephony.Mms.Part.CHARSET, (Integer) 106);
+                    } else {
+                        contentValues.put("text", new EncodedStringValue(data).getString());
+                    }
+                    if (this.mContentResolver.update(uri, contentValues, null, null) != 1) {
+                        throw new MmsException("unable to update " + uri.toString());
+                    }
+                    inputStream = null;
+                } else {
+                    DownloadDrmHelper.isDrmConvertNeeded(str);
+                    OutputStream outputStreamOpenOutputStream = this.mContentResolver.openOutputStream(uri);
+                    try {
+                        if (outputStreamOpenOutputStream == null) {
+                            throw new MmsException("unable to open output stream " + uri.toString());
+                        }
+                        if (data == null) {
+                            Uri dataUri = pduPart.getDataUri();
+                            if (dataUri != null && !dataUri.equals(uri)) {
+                                if (map != null && map.containsKey(dataUri)) {
+                                    inputStreamOpenInputStream = map.get(dataUri);
+                                }
+                                if (inputStreamOpenInputStream == null) {
+                                    inputStreamOpenInputStream = this.mContentResolver.openInputStream(dataUri);
+                                }
+                                byte[] bArr = new byte[8192];
+                                while (true) {
+                                    int i = inputStreamOpenInputStream.read(bArr);
+                                    if (i == -1) {
+                                        break;
+                                    } else {
+                                        outputStreamOpenOutputStream.write(bArr, 0, i);
+                                    }
+                                }
+                            }
+                            Log.w(TAG, "Can't find data for this part.");
+                            if (outputStreamOpenOutputStream != null) {
+                                try {
+                                    outputStreamOpenOutputStream.close();
+                                    return;
+                                } catch (IOException e) {
+                                    Log.e(TAG, "IOException while closing: " + outputStreamOpenOutputStream, e);
+                                    return;
+                                }
+                            }
+                            return;
+                        }
+                        outputStreamOpenOutputStream.write(data);
+                        inputStream = inputStreamOpenInputStream;
+                        outputStream2 = outputStreamOpenOutputStream;
+                    } catch (FileNotFoundException e2) {
+                        e = e2;
+                        Log.e(TAG, "Failed to open Input/Output stream.", e);
+                        throw new MmsException(e);
+                    } catch (IOException e3) {
+                        e = e3;
+                        Log.e(TAG, "Failed to read/write data.", e);
+                        throw new MmsException(e);
+                    } catch (Throwable th) {
+                        th = th;
+                        pduPart = 0;
+                        outputStream = outputStreamOpenOutputStream;
+                        if (outputStream != null) {
+                            try {
+                                outputStream.close();
+                            } catch (IOException e4) {
+                                Log.e(TAG, "IOException while closing: " + outputStream, e4);
+                            }
+                        }
+                        if (pduPart == 0) {
+                            throw th;
+                        }
+                        try {
+                            pduPart.close();
+                            throw th;
+                        } catch (IOException e5) {
+                            Log.e(TAG, "IOException while closing: " + pduPart, e5);
+                            throw th;
+                        }
+                    }
+                }
+                if (outputStream2 != null) {
+                    try {
+                        outputStream2.close();
+                    } catch (IOException e6) {
+                        Log.e(TAG, "IOException while closing: " + outputStream2, e6);
+                    }
+                }
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e7) {
+                        Log.e(TAG, "IOException while closing: " + inputStream, e7);
+                    }
+                }
+            } catch (Throwable th2) {
+                th = th2;
+            }
+        } catch (FileNotFoundException e8) {
+            e = e8;
+        } catch (IOException e9) {
+            e = e9;
+        } catch (Throwable th3) {
+            th = th3;
+            pduPart = 0;
+        }
     }
 
-    public Uri persistPart(PduPart pduPart, long j, HashMap<Uri, InputStream> hashMap, int i, boolean z, boolean z2) throws MmsException {
-        Uri parse;
+    public Uri persistPart(PduPart pduPart, long j, HashMap<Uri, InputStream> map, int i, boolean z, boolean z2) throws Throwable {
+        Uri uri;
         if (z) {
-            parse = Uri.parse("content://spammms/" + j + "/spampart");
+            uri = Uri.parse("content://spammms/" + j + "/spampart");
         } else {
-            parse = Uri.parse("content://mms/" + j + "/part");
+            uri = Uri.parse("content://mms/" + j + "/part");
         }
         ContentValues contentValues = new ContentValues(8);
         int charset = pduPart.getCharset();
@@ -710,13 +828,13 @@ public class PduPersister {
             if (pduPart.getContentLocation() != null) {
                 contentValues.put(Telephony.Mms.Part.CONTENT_LOCATION, toIsoString(pduPart.getContentLocation()));
             }
-            Uri insert = SqliteWrapper.insert(this.mContext, this.mContentResolver, parse, contentValues);
-            if (insert == null) {
+            Uri uriInsert = SqliteWrapper.insert(this.mContext, this.mContentResolver, uri, contentValues);
+            if (uriInsert == null) {
                 throw new MmsException("Failed to persist part, return null.");
             }
-            persistData(pduPart, insert, str, hashMap, z, z2);
-            pduPart.setDataUri(insert);
-            return insert;
+            persistData(pduPart, uriInsert, str, map, z, z2);
+            pduPart.setDataUri(uriInsert);
+            return uriInsert;
         }
         throw new MmsException("MIME type of the part must be set.");
     }
@@ -733,86 +851,86 @@ public class PduPersister {
     }
 
     private void loadAddress(long j, PduHeaders pduHeaders, boolean z) {
-        Cursor query;
+        Cursor cursorQuery;
         if (z) {
-            query = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://spammms/" + j + "/spamaddr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
+            cursorQuery = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://spammms/" + j + "/spamaddr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
         } else {
-            query = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + j + "/addr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
+            cursorQuery = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + j + "/addr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
         }
-        if (query != null) {
-            while (query.moveToNext()) {
+        if (cursorQuery != null) {
+            while (cursorQuery.moveToNext()) {
                 try {
-                    String string = query.getString(0);
+                    String string = cursorQuery.getString(0);
                     if (!TextUtils.isEmpty(string)) {
-                        int i = query.getInt(2);
+                        int i = cursorQuery.getInt(2);
                         if (i != 129 && i != 130) {
                             if (i == 137) {
-                                pduHeaders.setEncodedStringValue(new EncodedStringValue(query.getInt(1), getBytes(string)), i);
+                                pduHeaders.setEncodedStringValue(new EncodedStringValue(cursorQuery.getInt(1), getBytes(string)), i);
                             } else if (i != 151) {
                                 Log.e(TAG, "Unknown address type: " + i);
                             }
                         }
-                        pduHeaders.appendEncodedStringValue(new EncodedStringValue(query.getInt(1), getBytes(string)), i);
+                        pduHeaders.appendEncodedStringValue(new EncodedStringValue(cursorQuery.getInt(1), getBytes(string)), i);
                     }
                 } finally {
-                    query.close();
+                    cursorQuery.close();
                 }
             }
         }
     }
 
     private PduPart[] loadParts(long j, boolean z) throws MmsException {
-        Cursor query;
+        Cursor cursorQuery;
         Throwable th;
         IOException iOException;
         if (z) {
-            query = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://spammms/" + j + "/spampart"), PART_PROJECTION, null, null, null);
+            cursorQuery = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://spammms/" + j + "/spampart"), PART_PROJECTION, null, null, null);
         } else {
-            query = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + j + "/part"), PART_PROJECTION, null, null, null);
+            cursorQuery = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + j + "/part"), PART_PROJECTION, null, null, null);
         }
         InputStream inputStream = null;
-        if (query != null) {
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() != 0) {
-                    PduPart[] pduPartArr = new PduPart[query.getCount()];
+                if (cursorQuery.getCount() != 0) {
+                    PduPart[] pduPartArr = new PduPart[cursorQuery.getCount()];
                     int i = 0;
-                    while (query.moveToNext()) {
+                    while (cursorQuery.moveToNext()) {
                         PduPart pduPart = new PduPart();
-                        Integer integerFromPartColumn = getIntegerFromPartColumn(query, 1);
+                        Integer integerFromPartColumn = getIntegerFromPartColumn(cursorQuery, 1);
                         if (integerFromPartColumn != null) {
                             pduPart.setCharset(integerFromPartColumn.intValue());
                         }
-                        byte[] byteArrayFromPartColumn = getByteArrayFromPartColumn(query, 2);
+                        byte[] byteArrayFromPartColumn = getByteArrayFromPartColumn(cursorQuery, 2);
                         if (byteArrayFromPartColumn != null) {
                             pduPart.setContentDisposition(byteArrayFromPartColumn);
                         }
-                        byte[] byteArrayFromPartColumn2 = getByteArrayFromPartColumn(query, 3);
+                        byte[] byteArrayFromPartColumn2 = getByteArrayFromPartColumn(cursorQuery, 3);
                         if (byteArrayFromPartColumn2 != null) {
                             pduPart.setContentId(byteArrayFromPartColumn2);
                         }
-                        byte[] byteArrayFromPartColumn3 = getByteArrayFromPartColumn(query, 4);
+                        byte[] byteArrayFromPartColumn3 = getByteArrayFromPartColumn(cursorQuery, 4);
                         if (byteArrayFromPartColumn3 != null) {
                             pduPart.setContentLocation(byteArrayFromPartColumn3);
                         }
-                        byte[] byteArrayFromPartColumn4 = getByteArrayFromPartColumn(query, 5);
+                        byte[] byteArrayFromPartColumn4 = getByteArrayFromPartColumn(cursorQuery, 5);
                         if (byteArrayFromPartColumn4 != null) {
                             pduPart.setContentType(byteArrayFromPartColumn4);
-                            byte[] byteArrayFromPartColumn5 = getByteArrayFromPartColumn(query, 6);
+                            byte[] byteArrayFromPartColumn5 = getByteArrayFromPartColumn(cursorQuery, 6);
                             if (byteArrayFromPartColumn5 != null) {
                                 pduPart.setFilename(byteArrayFromPartColumn5);
                             }
-                            byte[] byteArrayFromPartColumn6 = getByteArrayFromPartColumn(query, 7);
+                            byte[] byteArrayFromPartColumn6 = getByteArrayFromPartColumn(cursorQuery, 7);
                             if (byteArrayFromPartColumn6 != null) {
                                 pduPart.setName(byteArrayFromPartColumn6);
                             }
-                            long j2 = query.getLong(0);
-                            Uri parse = z ? Uri.parse("content://spammms/spampart/" + j2) : Uri.parse("content://mms/part/" + j2);
-                            pduPart.setDataUri(parse);
+                            long j2 = cursorQuery.getLong(0);
+                            Uri uri = z ? Uri.parse("content://spammms/spampart/" + j2) : Uri.parse("content://mms/part/" + j2);
+                            pduPart.setDataUri(uri);
                             String isoString = toIsoString(byteArrayFromPartColumn4);
                             if (!ContentType.isImageType(isoString) && !ContentType.isAudioType(isoString) && !ContentType.isVideoType(isoString)) {
                                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                                 if ("text/plain".equals(isoString) || ContentType.APP_SMIL.equals(isoString) || "text/html".equals(isoString)) {
-                                    String string = query.getString(8);
+                                    String string = cursorQuery.getString(8);
                                     if (string == null) {
                                         string = "";
                                     }
@@ -821,31 +939,31 @@ public class PduPersister {
                                 } else {
                                     try {
                                         try {
-                                            InputStream openInputStream = this.mContentResolver.openInputStream(parse);
-                                            if (openInputStream == null) {
+                                            InputStream inputStreamOpenInputStream = this.mContentResolver.openInputStream(uri);
+                                            if (inputStreamOpenInputStream == null) {
                                                 throw new MmsException("Failed to load part data, return null.");
                                             }
                                             try {
                                                 byte[] bArr = new byte[256];
-                                                for (int read = openInputStream.read(bArr); read >= 0; read = openInputStream.read(bArr)) {
-                                                    byteArrayOutputStream.write(bArr, 0, read);
+                                                for (int i2 = inputStreamOpenInputStream.read(bArr); i2 >= 0; i2 = inputStreamOpenInputStream.read(bArr)) {
+                                                    byteArrayOutputStream.write(bArr, 0, i2);
                                                 }
-                                                if (openInputStream != null) {
+                                                if (inputStreamOpenInputStream != null) {
                                                     try {
-                                                        openInputStream.close();
+                                                        inputStreamOpenInputStream.close();
                                                     } catch (IOException e) {
                                                         Log.e(TAG, "Failed to close stream", e);
                                                     }
                                                 }
                                             } catch (IOException e2) {
                                                 iOException = e2;
-                                                inputStream = openInputStream;
+                                                inputStream = inputStreamOpenInputStream;
                                                 Log.e(TAG, "Failed to load part data", iOException);
-                                                query.close();
+                                                cursorQuery.close();
                                                 throw new MmsException(iOException);
                                             } catch (Throwable th2) {
                                                 th = th2;
-                                                inputStream = openInputStream;
+                                                inputStream = inputStreamOpenInputStream;
                                                 if (inputStream != null) {
                                                     try {
                                                         inputStream.close();
@@ -857,11 +975,11 @@ public class PduPersister {
                                                 }
                                                 throw th;
                                             }
-                                        } catch (Throwable th3) {
-                                            th = th3;
+                                        } catch (IOException e4) {
+                                            iOException = e4;
                                         }
-                                    } catch (IOException e4) {
-                                        iOException = e4;
+                                    } catch (Throwable th3) {
+                                        th = th3;
                                     }
                                 }
                                 pduPart.setData(byteArrayOutputStream.toByteArray());
@@ -872,16 +990,16 @@ public class PduPersister {
                             throw new MmsException("Content-Type must be set.");
                         }
                     }
-                    if (query != null) {
-                        query.close();
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return pduPartArr;
                 }
             } finally {
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return null;
     }
@@ -899,9 +1017,9 @@ public class PduPersister {
     }
 
     public Cursor getPendingMessages(int i, long j) {
-        Uri.Builder buildUpon = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
-        buildUpon.appendQueryParameter("protocol", "mms");
-        return SqliteWrapper.query(this.mContext, this.mContentResolver, buildUpon.build(), null, "err_type < ? AND due_time <= ? AND sim_slot2 = ?", new String[]{String.valueOf(10), String.valueOf(j), String.valueOf(i)}, Telephony.MmsSms.PendingMessages.DUE_TIME);
+        Uri.Builder builderBuildUpon = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
+        builderBuildUpon.appendQueryParameter("protocol", "mms");
+        return SqliteWrapper.query(this.mContext, this.mContentResolver, builderBuildUpon.build(), null, "err_type < ? AND due_time <= ? AND sim_slot2 = ?", new String[]{String.valueOf(10), String.valueOf(j), String.valueOf(i)}, Telephony.MmsSms.PendingMessages.DUE_TIME);
     }
 
     public Uri persist(GenericPdu genericPdu, Uri uri, int i, int i2) throws MmsException {
@@ -912,16 +1030,16 @@ public class PduPersister {
         return persist(genericPdu, i, uri, i2, i3, (HashMap<Uri, InputStream>) null);
     }
 
-    public Uri persist(GenericPdu genericPdu, Uri uri, int i, int i2, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        return persist(genericPdu, 0, uri, i, i2, hashMap);
+    public Uri persist(GenericPdu genericPdu, Uri uri, int i, int i2, HashMap<Uri, InputStream> map) throws MmsException {
+        return persist(genericPdu, 0, uri, i, i2, map);
     }
 
-    public Uri persist(GenericPdu genericPdu, int i, Uri uri, int i2, int i3, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        return persist(genericPdu, i, uri, i2, i3, hashMap, 0);
+    public Uri persist(GenericPdu genericPdu, int i, Uri uri, int i2, int i3, HashMap<Uri, InputStream> map) throws MmsException {
+        return persist(genericPdu, i, uri, i2, i3, map, 0);
     }
 
-    public Uri persist(GenericPdu genericPdu, int i, Uri uri, int i2, int i3, HashMap<Uri, InputStream> hashMap, int i4) throws MmsException {
-        EncodedStringValue[] encodedStringValueArr;
+    public Uri persist(GenericPdu genericPdu, int i, Uri uri, int i2, int i3, HashMap<Uri, InputStream> map, int i4) throws MmsException {
+        EncodedStringValue[] encodedStringValues;
         long orCreateThreadId;
         PduBody body;
         if (uri == null) {
@@ -961,11 +1079,11 @@ public class PduPersister {
             }
         }
         int[] iArr = ADDRESS_FIELDS;
-        HashMap hashMap2 = new HashMap(iArr.length);
+        HashMap map2 = new HashMap(iArr.length);
         int length = iArr.length;
         int i5 = 0;
         while (true) {
-            encodedStringValueArr = null;
+            encodedStringValues = null;
             if (i5 >= length) {
                 break;
             }
@@ -973,12 +1091,12 @@ public class PduPersister {
             if (i6 == 137) {
                 EncodedStringValue encodedStringValue2 = pduHeaders.getEncodedStringValue(i6);
                 if (encodedStringValue2 != null) {
-                    encodedStringValueArr = new EncodedStringValue[]{encodedStringValue2};
+                    encodedStringValues = new EncodedStringValue[]{encodedStringValue2};
                 }
             } else {
-                encodedStringValueArr = pduHeaders.getEncodedStringValues(i6);
+                encodedStringValues = pduHeaders.getEncodedStringValues(i6);
             }
-            hashMap2.put(Integer.valueOf(i6), encodedStringValueArr);
+            map2.put(Integer.valueOf(i6), encodedStringValues);
             i5++;
         }
         HashSet hashSet = new HashSet();
@@ -986,20 +1104,18 @@ public class PduPersister {
         this.mTelephonyManager.getLine1Number();
         if (messageType == 130 || messageType == 132 || messageType == 128) {
             if (messageType == 128) {
-                encodedStringValueArr = (EncodedStringValue[]) hashMap2.get(151);
+                encodedStringValues = (EncodedStringValue[]) map2.get(151);
             } else if (messageType == 130 || messageType == 132) {
-                encodedStringValueArr = (EncodedStringValue[]) hashMap2.get(137);
+                encodedStringValues = (EncodedStringValue[]) map2.get(137);
             }
-            if (encodedStringValueArr != null) {
-                for (EncodedStringValue encodedStringValue3 : encodedStringValueArr) {
+            if (encodedStringValues != null) {
+                for (EncodedStringValue encodedStringValue3 : encodedStringValues) {
                     if (encodedStringValue3 != null) {
                         hashSet.add(encodedStringValue3.getString());
                     }
                 }
             }
-            if (!this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false)) {
-                orCreateThreadId = Telephony.Threads.getOrCreateThreadId(this.mContext, hashSet);
-            } else if (i4 > 0) {
+            if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && i4 > 0) {
                 orCreateThreadId = Telephony.Threads.semGetOrCreateThreadId(this.mContext, hashSet, true, 0, i4);
             } else {
                 orCreateThreadId = Telephony.Threads.getOrCreateThreadId(this.mContext, hashSet);
@@ -1011,33 +1127,33 @@ public class PduPersister {
         if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && i4 > 0) {
             contentValues.put("using_mode", Integer.valueOf(i4));
         }
-        long nanoTime = System.nanoTime();
+        long jNanoTime = System.nanoTime();
         if ((genericPdu instanceof MultimediaMessagePdu) && (body = ((MultimediaMessagePdu) genericPdu).getBody()) != null) {
             int partsNum = body.getPartsNum();
             for (int i7 = 0; i7 < partsNum; i7++) {
-                persistPart(body.getPart(i7), nanoTime, hashMap);
+                persistPart(body.getPart(i7), jNanoTime, map);
             }
         }
         if (i2 > 0) {
             contentValues.put("app_id", Integer.valueOf(i2));
             contentValues.put("msg_id", Integer.valueOf(i3));
         }
-        Uri insert = SqliteWrapper.insert(this.mContext, this.mContentResolver, uri, contentValues);
-        if (insert == null) {
+        Uri uriInsert = SqliteWrapper.insert(this.mContext, this.mContentResolver, uri, contentValues);
+        if (uriInsert == null) {
             throw new MmsException("persist() failed: return null.");
         }
-        long parseId = ContentUris.parseId(insert);
+        long id = ContentUris.parseId(uriInsert);
         ContentValues contentValues2 = new ContentValues(1);
-        contentValues2.put(Telephony.Mms.Part.MSG_ID, Long.valueOf(parseId));
-        SqliteWrapper.update(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + nanoTime + "/part"), contentValues2, null, null);
-        Uri parse = Uri.parse(uri + "/" + parseId);
+        contentValues2.put(Telephony.Mms.Part.MSG_ID, Long.valueOf(id));
+        SqliteWrapper.update(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + jNanoTime + "/part"), contentValues2, null, null);
+        Uri uri2 = Uri.parse(uri + "/" + id);
         for (int i8 : ADDRESS_FIELDS) {
-            EncodedStringValue[] encodedStringValueArr2 = (EncodedStringValue[]) hashMap2.get(Integer.valueOf(i8));
-            if (encodedStringValueArr2 != null) {
-                persistAddress(parseId, i8, encodedStringValueArr2);
+            EncodedStringValue[] encodedStringValueArr = (EncodedStringValue[]) map2.get(Integer.valueOf(i8));
+            if (encodedStringValueArr != null) {
+                persistAddress(id, i8, encodedStringValueArr);
             }
         }
-        return parse;
+        return uri2;
     }
 
     public Uri persist(GenericPdu genericPdu, Uri uri) throws MmsException {
@@ -1048,32 +1164,192 @@ public class PduPersister {
         return persist(genericPdu, 0, uri, true, false, null, z, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:116:0x025d  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0269  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x02a0  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x02ef  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x030c  */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x02c7  */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x027b  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x01c7  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x01c0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.net.Uri persist(com.google.android.mms.pdu.GenericPdu r24, int r25, android.net.Uri r26, boolean r27, boolean r28, java.util.HashMap<android.net.Uri, java.io.InputStream> r29, boolean r30, boolean r31, int r32) throws com.google.android.mms.MmsException {
-        /*
-            Method dump skipped, instructions count: 835
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.persist(com.google.android.mms.pdu.GenericPdu, int, android.net.Uri, boolean, boolean, java.util.HashMap, boolean, boolean, int):android.net.Uri");
+    public Uri persist(GenericPdu genericPdu, int i, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map, boolean z3, boolean z4, int i2) throws Throwable {
+        long id;
+        long orCreateThreadId;
+        boolean z5;
+        PduPersister pduPersister;
+        int i3;
+        int i4;
+        Uri uri2;
+        long j;
+        Uri uriInsert;
+        PduBody body;
+        EncodedStringValue[] encodedStringValues;
+        PduPersister pduPersister2 = this;
+        if (uri == null) {
+            throw new MmsException("Uri may not be null.");
+        }
+        try {
+            id = ContentUris.parseId(uri);
+        } catch (NumberFormatException unused) {
+            id = -1;
+        }
+        int i5 = 0;
+        boolean z6 = id != -1;
+        if (!z6 && MESSAGE_BOX_MAP.get(uri) == null) {
+            throw new MmsException("Bad destination, must be one of content://mms/inbox, content://mms/sent, content://mms/drafts, content://mms/outbox, content://mms/temp.");
+        }
+        PduCache pduCache = PDU_CACHE_INSTANCE;
+        synchronized (pduCache) {
+            if (pduCache.isUpdating(uri)) {
+                try {
+                    pduCache.wait();
+                } catch (InterruptedException e) {
+                    Log.e(TAG, "persist1: ", e);
+                }
+            }
+        }
+        PDU_CACHE_INSTANCE.purge(uri);
+        PduHeaders pduHeaders = genericPdu.getPduHeaders();
+        ContentValues contentValues = new ContentValues();
+        for (Map.Entry<Integer, String> entry : ENCODED_STRING_COLUMN_NAME_MAP.entrySet()) {
+            Integer key = entry.getKey();
+            EncodedStringValue encodedStringValue = pduHeaders.getEncodedStringValue(key.intValue());
+            if (encodedStringValue != null) {
+                String str = CHARSET_COLUMN_NAME_MAP.get(key);
+                contentValues.put(entry.getValue(), toIsoString(encodedStringValue.getTextString()));
+                contentValues.put(str, Integer.valueOf(encodedStringValue.getCharacterSet()));
+            }
+        }
+        for (Map.Entry<Integer, String> entry2 : TEXT_STRING_COLUMN_NAME_MAP.entrySet()) {
+            byte[] textString = pduHeaders.getTextString(entry2.getKey().intValue());
+            if (textString != null) {
+                contentValues.put(entry2.getValue(), toIsoString(textString));
+            }
+        }
+        for (Map.Entry<Integer, String> entry3 : OCTET_COLUMN_NAME_MAP.entrySet()) {
+            int octet = pduHeaders.getOctet(entry3.getKey().intValue());
+            if (octet != 0) {
+                contentValues.put(entry3.getValue(), Integer.valueOf(octet));
+            }
+        }
+        for (Map.Entry<Integer, String> entry4 : LONG_COLUMN_NAME_MAP.entrySet()) {
+            long longInteger = pduHeaders.getLongInteger(entry4.getKey().intValue());
+            if (longInteger != -1) {
+                contentValues.put(entry4.getValue(), Long.valueOf(longInteger));
+            }
+        }
+        int[] iArr = ADDRESS_FIELDS;
+        HashMap<Integer, EncodedStringValue[]> map2 = new HashMap<>(iArr.length);
+        for (int i6 : iArr) {
+            if (i6 == 137) {
+                EncodedStringValue encodedStringValue2 = pduHeaders.getEncodedStringValue(i6);
+                encodedStringValues = encodedStringValue2 != null ? new EncodedStringValue[]{encodedStringValue2} : null;
+            } else {
+                encodedStringValues = pduHeaders.getEncodedStringValues(i6);
+            }
+            map2.put(Integer.valueOf(i6), encodedStringValues);
+        }
+        HashSet<String> hashSet = new HashSet<>();
+        int messageType = genericPdu.getMessageType();
+        pduPersister2.mTelephonyManager.getLine1Number();
+        if (messageType == 130 || messageType == 132 || messageType == 128) {
+            if (messageType == 128) {
+                pduPersister2.loadRecipients(151, hashSet, map2, false);
+            } else if (messageType == 130 || messageType == 132) {
+                pduPersister2.loadRecipients(137, hashSet, map2, false);
+                if (z2) {
+                    pduPersister2.loadRecipients(151, hashSet, map2, true);
+                    pduPersister2.loadRecipients(130, hashSet, map2, true);
+                }
+            }
+            if (!z || z3) {
+                orCreateThreadId = Long.MAX_VALUE;
+            } else if (pduPersister2.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && i2 > 0) {
+                orCreateThreadId = Telephony.Threads.semGetOrCreateThreadId(pduPersister2.mContext, hashSet, true, 0, i2);
+            } else {
+                orCreateThreadId = Telephony.Threads.getOrCreateThreadId(pduPersister2.mContext, hashSet);
+            }
+        }
+        if (!z3) {
+            contentValues.put("thread_id", Long.valueOf(orCreateThreadId));
+        }
+        if (pduPersister2.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && i2 > 0) {
+            contentValues.put("using_mode", Integer.valueOf(i2));
+        }
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (!(genericPdu instanceof MultimediaMessagePdu) || (body = ((MultimediaMessagePdu) genericPdu).getBody()) == null) {
+            z5 = z3;
+            pduPersister = pduPersister2;
+            i3 = 1;
+            i4 = 0;
+        } else {
+            int partsNum = body.getPartsNum();
+            i3 = partsNum > 2 ? 0 : 1;
+            int i7 = 0;
+            i4 = 0;
+            while (i7 < partsNum) {
+                int i8 = i7;
+                PduPart part = body.getPart(i8);
+                int dataLength = i4 + part.getDataLength();
+                pduPersister2.persistPart(part, jCurrentTimeMillis, map, i, z3, z4);
+                PduPersister pduPersister3 = pduPersister2;
+                String partContentType = getPartContentType(part);
+                if (partContentType != null && !ContentType.APP_SMIL.equals(partContentType) && !"text/plain".equals(partContentType)) {
+                    i3 = 0;
+                }
+                i7 = i8 + 1;
+                pduPersister2 = pduPersister3;
+                i4 = dataLength;
+            }
+            z5 = z3;
+            pduPersister = pduPersister2;
+        }
+        contentValues.put(Telephony.BaseMmsColumns.TEXT_ONLY, Integer.valueOf(i3));
+        if (contentValues.getAsInteger(Telephony.BaseMmsColumns.MESSAGE_SIZE) == null) {
+            contentValues.put(Telephony.BaseMmsColumns.MESSAGE_SIZE, Integer.valueOf(i4));
+        }
+        if (z6) {
+            uri2 = uri;
+            j = jCurrentTimeMillis;
+            SqliteWrapper.update(pduPersister.mContext, pduPersister.mContentResolver, uri2, contentValues, null, null);
+            uriInsert = uri2;
+        } else {
+            uri2 = uri;
+            j = jCurrentTimeMillis;
+            uriInsert = SqliteWrapper.insert(pduPersister.mContext, pduPersister.mContentResolver, uri2, contentValues);
+            if (uriInsert == null) {
+                throw new MmsException("persist() failed: return null.");
+            }
+            ContentUris.parseId(uriInsert);
+        }
+        long id2 = ContentUris.parseId(uriInsert);
+        ContentValues contentValues2 = new ContentValues(1);
+        contentValues2.put(Telephony.Mms.Part.MSG_ID, Long.valueOf(id2));
+        if (z5) {
+            SqliteWrapper.update(pduPersister.mContext, pduPersister.mContentResolver, Uri.parse("content://spammms/" + j + "/spampart"), contentValues2, null, null);
+        } else {
+            SqliteWrapper.update(pduPersister.mContext, pduPersister.mContentResolver, Uri.parse("content://mms/" + j + "/part"), contentValues2, null, null);
+        }
+        if (!z6) {
+            uriInsert = Uri.parse(uri2 + "/" + id2);
+        }
+        int[] iArr2 = ADDRESS_FIELDS;
+        int length = iArr2.length;
+        while (i5 < length) {
+            int i9 = iArr2[i5];
+            EncodedStringValue[] encodedStringValueArr = map2.get(Integer.valueOf(i9));
+            if (encodedStringValueArr != null) {
+                pduPersister.persistAddress(id2, i9, encodedStringValueArr, z5);
+            }
+            i5++;
+            pduPersister = this;
+            z5 = z3;
+        }
+        return uriInsert;
     }
 
-    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> hashMap, boolean z3) throws MmsException {
-        return persist(genericPdu, 0, uri, z, z2, hashMap, z3, true);
+    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map, boolean z3) throws MmsException {
+        return persist(genericPdu, 0, uri, z, z2, map, z3, true);
     }
 
-    public Uri persist(GenericPdu genericPdu, int i, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> hashMap) throws MmsException {
-        return persist(genericPdu, i, uri, z, z2, hashMap, false, false);
+    public Uri persist(GenericPdu genericPdu, int i, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map) throws MmsException {
+        return persist(genericPdu, i, uri, z, z2, map, false, false);
     }
 
     public Uri persist(GenericPdu genericPdu, int i, Uri uri) throws MmsException {
@@ -1084,12 +1360,12 @@ public class PduPersister {
         return persist(genericPdu, i, uri, true, false, null, z, true);
     }
 
-    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> hashMap, boolean z3, boolean z4) throws MmsException {
-        return persist(genericPdu, 0, uri, z, z2, hashMap, z3, z4);
+    public Uri persist(GenericPdu genericPdu, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map, boolean z3, boolean z4) throws MmsException {
+        return persist(genericPdu, 0, uri, z, z2, map, z3, z4);
     }
 
-    public Uri persist(GenericPdu genericPdu, int i, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> hashMap, boolean z3, boolean z4) throws MmsException {
-        return persist(genericPdu, i, uri, z, z2, hashMap, z3, z4, 0);
+    public Uri persist(GenericPdu genericPdu, int i, Uri uri, boolean z, boolean z2, HashMap<Uri, InputStream> map, boolean z3, boolean z4) throws MmsException {
+        return persist(genericPdu, i, uri, z, z2, map, z3, z4, 0);
     }
 
     private boolean isSupportOMA13NameEncoding(int i) {
@@ -1105,9 +1381,7 @@ public class PduPersister {
         return Arrays.stream(new String[]{"CHC", "CHM", "CHN", "KTC", "LUC", "SKC", "KOO", "K06", "K01"}).anyMatch(new Predicate() { // from class: com.google.android.mms.pdu.PduPersister$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((String) obj).equals(str);
-                return equals;
+                return ((String) obj).equals(str);
             }
         });
     }

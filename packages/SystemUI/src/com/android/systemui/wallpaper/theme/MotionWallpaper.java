@@ -5,11 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,21 +24,30 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.DisplayInfo;
+import android.view.WindowInsets;
 import android.widget.FrameLayout;
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
+import androidx.compose.material3.internal.colorUtil.Frame$$ExternalSyntheticOutline0;
 import androidx.picker3.widget.SeslColorSpectrumView$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.keyguard.DisplayLifecycle;
+import com.android.systemui.wallpaper.WallpaperUtils;
 import com.samsung.android.view.animation.SineOut33;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MotionWallpaper extends FrameLayout implements SensorEventListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -66,7 +79,6 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
     public final WallpaperManager mWallpaperManager;
     public String mXmlName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MotionBitmap implements Cloneable {
         public int alpha;
         public float calculatedSum;
@@ -145,21 +157,119 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
         this(context, null, null, false, i, null, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:65:0x018e  */
-    /* JADX WARN: Removed duplicated region for block: B:67:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x018e  */
+    /* JADX WARN: Removed duplicated region for block: B:79:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void init() {
-        /*
-            Method dump skipped, instructions count: 421
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.theme.MotionWallpaper.init():void");
+    public final void init() throws Resources.NotFoundException {
+        Consumer consumer;
+        float f;
+        float f2;
+        int dimensionPixelOffset;
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.mIsPreview ? "(Preview)" : "");
+        sb.append("init() : ");
+        sb.append(this);
+        Log.d("MotionWallpaper", sb.toString());
+        ArrayList arrayList = this.mMotionBitmapList;
+        if (arrayList == null) {
+            Log.e("MotionWallpaper", (this.mIsPreview ? "(Preview)" : "").concat("mMotionBitmapList == null || mMotionBitmapList.size() == 0"));
+            return;
+        }
+        int size = arrayList.size();
+        int i = 0;
+        while (i < size) {
+            Object obj = arrayList.get(i);
+            i++;
+            if (!((MotionBitmap) obj).bitmapLoaded) {
+                Log.e("MotionWallpaper", (this.mIsPreview ? "(Preview)" : "").concat("bitmapLoaded == false"));
+                return;
+            }
+        }
+        Context context = this.mContext;
+        int height = getHeight();
+        boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
+        if (context != null) {
+            WindowInsets rootWindowInsets = getRootWindowInsets();
+            DisplayCutout displayCutout = rootWindowInsets != null ? rootWindowInsets.getDisplayCutout() : null;
+            if (displayCutout != null) {
+                dimensionPixelOffset = displayCutout.getSafeInsetTop() - displayCutout.getSafeInsetBottom();
+                Log.d("WallpaperUtils", "updateStatusBarHeight - dc = " + displayCutout);
+            } else {
+                dimensionPixelOffset = -1;
+            }
+            ListPopupWindow$$ExternalSyntheticOutline0.m(dimensionPixelOffset, "Height from dc = ", "WallpaperUtils");
+            if (dimensionPixelOffset <= 0) {
+                dimensionPixelOffset = context.getResources().getDimensionPixelOffset(17106379);
+                ListPopupWindow$$ExternalSyntheticOutline0.m(dimensionPixelOffset, "Height from resource = ", "WallpaperUtils");
+            }
+            Log.i("WallpaperUtils", "statusbar statusBarSize = " + dimensionPixelOffset + ", view height = " + height);
+            if (height == dimensionPixelOffset) {
+                return;
+            }
+        }
+        this.mViewWidth = (getWidth() - ((FrameLayout) this).mPaddingLeft) - ((FrameLayout) this).mPaddingRight;
+        int height2 = (getHeight() - ((FrameLayout) this).mPaddingTop) - ((FrameLayout) this).mPaddingBottom;
+        this.mViewHeight = height2;
+        if (this.mViewWidth == 0 || height2 == 0) {
+            Log.e("MotionWallpaper", (this.mIsPreview ? "(Preview)" : "").concat("mViewWidth == 0 || mViewHeight == 0"));
+            return;
+        }
+        this.mRangeOfRotation = this.mMotionBitmapList.size() * 30;
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append(this.mIsPreview ? "(Preview)" : "");
+        sb2.append("mRangeOfRotation = ");
+        RecyclerView$$ExternalSyntheticOutline0.m(this.mRangeOfRotation, "MotionWallpaper", sb2);
+        this.mPrevAngularSum = 0.0f;
+        this.mAngularSum = 0.0f;
+        this.mDeltaOfAngularSum = 0.0f;
+        this.mTimestamp = 0L;
+        ArrayList arrayList2 = this.mMotionBitmapList;
+        int size2 = arrayList2.size();
+        int i2 = 0;
+        while (i2 < size2) {
+            Object obj2 = arrayList2.get(i2);
+            i2++;
+            MotionBitmap motionBitmap = (MotionBitmap) obj2;
+            Bitmap bitmap = motionBitmap.image;
+            if (bitmap == null || bitmap.isRecycled()) {
+                Log.e("MotionWallpaper", (this.mIsPreview ? "(Preview)" : "").concat("bitmap is wrong."));
+                consumer = this.mUpdateCallback;
+                if (consumer == null) {
+                    consumer.accept(0);
+                    return;
+                }
+                return;
+            }
+            int width = motionBitmap.image.getWidth();
+            int height3 = motionBitmap.image.getHeight();
+            int i3 = this.mViewHeight;
+            int i4 = width * i3;
+            int i5 = this.mViewWidth;
+            if (i4 > i5 * height3) {
+                f = i3;
+                f2 = height3;
+            } else {
+                f = i5;
+                f2 = width;
+            }
+            float f3 = (f / f2) * 1.0f;
+            float fM = Frame$$ExternalSyntheticOutline0.m(width, f3, i5, 0.5f);
+            float fM2 = Frame$$ExternalSyntheticOutline0.m(height3, f3, i3, 0.5f);
+            int iRound = Math.round(fM);
+            int iRound2 = Math.round(fM2);
+            motionBitmap.matrix.setScale(f3, f3);
+            motionBitmap.matrix.postTranslate(iRound, iRound2);
+            motionBitmap.isBackground = false;
+            motionBitmap.setAlpha(0.0f, 0.0f);
+        }
+        consumer = this.mUpdateCallback;
+        if (consumer == null) {
+        }
     }
 
-    public final void initializeMotionBitmaps() {
+    public final void initializeMotionBitmaps() throws Resources.NotFoundException {
         boolean z;
         Bitmap bitmap;
         ArrayList arrayList = this.mMotionBitmapList;
@@ -208,10 +318,10 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
                 int i5 = i4 + 1;
                 sb2.append(i4);
                 sb2.append(" ");
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb2.toString(), "URL :");
-                m.append(motionBitmap2.image);
-                m.append(" / ");
-                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("content = ", ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.stayPoint2, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.stayPoint1, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.type, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m.toString(), "type :")), "stayPoint1 :")), "stayPoint2 :")), "MotionWallpaper");
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb2.toString(), "URL :");
+                sbM.append(motionBitmap2.image);
+                sbM.append(" / ");
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("content = ", ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.stayPoint2, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.stayPoint1, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(motionBitmap2.type, " / ", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM.toString(), "type :")), "stayPoint1 :")), "stayPoint2 :")), "MotionWallpaper");
                 i4 = i5;
             }
         } else {
@@ -258,18 +368,147 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
         arrayList6.clear();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ef  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0246 A[ADDED_TO_REGION, ORIG_RETURN, RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0078 A[Catch: Exception -> 0x0019, TryCatch #2 {Exception -> 0x0019, blocks: (B:3:0x0009, B:6:0x0016, B:10:0x0028, B:12:0x0046, B:16:0x006c, B:18:0x0070, B:20:0x0078, B:24:0x0090, B:26:0x00b6, B:30:0x00c2, B:31:0x00dc, B:33:0x00e4, B:15:0x0068, B:9:0x001c), top: B:96:0x0009, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void loadMotionWallpaperBitmaps() {
-        /*
-            Method dump skipped, instructions count: 583
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.theme.MotionWallpaper.loadMotionWallpaperBitmaps():void");
+    public final void loadMotionWallpaperBitmaps() throws XmlPullParserException, Resources.NotFoundException, PackageManager.NameNotFoundException {
+        ArrayList xml;
+        String str;
+        Resources resourcesForApplication;
+        try {
+            XmlPullParserFactory.newInstance().newPullParser();
+            if (this.mIsPreview) {
+                this.mXmlName = "motion";
+            } else {
+                this.mPkgName = this.mWallpaperManager.getMotionWallpaperPkgName(this.mCurrentWhich);
+                this.mXmlName = "motion";
+            }
+            str = "/data/overlays/main_packages/" + this.mPkgName + ".apk";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (new File(str).exists()) {
+            try {
+                PackageInfo packageArchiveInfo = this.mContext.getPackageManager().getPackageArchiveInfo(str, PackageManager.PackageInfoFlags.of(0L));
+                packageArchiveInfo.applicationInfo.publicSourceDir = str;
+                resourcesForApplication = this.mContext.getPackageManager().getResourcesForApplication(packageArchiveInfo.applicationInfo);
+            } catch (PackageManager.NameNotFoundException e2) {
+                e2.printStackTrace();
+                resourcesForApplication = null;
+            }
+            this.mPkgResources = resourcesForApplication;
+            if (resourcesForApplication == null) {
+                Log.e("MotionWallpaper", "mPkgResources == null");
+            } else {
+                int identifier = this.mPkgResources.getIdentifier(this.mXmlName, "layout", this.mPkgName);
+                StringBuilder sb = new StringBuilder();
+                sb.append(this.mIsPreview ? "(Preview)" : "");
+                sb.append("pkg name (");
+                sb.append(this.mPkgName);
+                sb.append(") xml name(");
+                sb.append(this.mXmlName);
+                sb.append(")");
+                Log.d("MotionWallpaper", sb.toString());
+                if (identifier == 0) {
+                    StringBuilder sb2 = new StringBuilder();
+                    sb2.append(this.mIsPreview ? "(Preview)" : "");
+                    sb2.append("ERROR - chosen xml name(");
+                    sb2.append(this.mXmlName);
+                    sb2.append(") resource is not exist !!!");
+                    Log.e("MotionWallpaper", sb2.toString());
+                } else {
+                    XmlResourceParser xml2 = this.mPkgResources.getXml(identifier);
+                    if (xml2 != null) {
+                        xml = parseXML(xml2);
+                    }
+                }
+            }
+            xml = null;
+        }
+        if (xml == null || xml.size() <= 0) {
+            return;
+        }
+        ArrayList arrayList = this.mMotionBitmapList;
+        if (arrayList != null) {
+            int size = arrayList.size();
+            StringBuilder sb3 = new StringBuilder();
+            sb3.append(this.mIsPreview ? "(Preview)" : "");
+            sb3.append("collectOldBitmap: size = ");
+            sb3.append(size);
+            Log.i("MotionWallpaper", sb3.toString());
+            if (size > 0) {
+                ArrayList arrayList2 = this.mMotionBitmapList;
+                int size2 = arrayList2.size();
+                int i = 0;
+                while (i < size2) {
+                    Object obj = arrayList2.get(i);
+                    i++;
+                    this.mOldBitmapList.add((MotionBitmap) obj);
+                }
+            }
+        }
+        this.mMotionBitmapList = xml;
+        StringBuilder sb4 = new StringBuilder();
+        sb4.append(this.mIsPreview ? "(Preview)" : "");
+        sb4.append("BITMAP LOAD START ");
+        sb4.append(this);
+        Log.d("MotionWallpaper", sb4.toString());
+        ArrayList arrayList3 = this.mMotionBitmapList;
+        int size3 = arrayList3.size();
+        int i2 = 0;
+        while (i2 < size3) {
+            Object obj2 = arrayList3.get(i2);
+            i2++;
+            MotionBitmap motionBitmap = (MotionBitmap) obj2;
+            int i3 = motionBitmap.type;
+            if (i3 == 0) {
+                try {
+                    int identifier2 = this.mPkgResources.getIdentifier(motionBitmap.path, "drawable", this.mPkgName);
+                    if (identifier2 > 0) {
+                        Bitmap bitmap = ((BitmapDrawable) this.mPkgResources.getDrawable(identifier2)).getBitmap();
+                        motionBitmap.image = bitmap.copy(bitmap.getConfig(), true);
+                    } else {
+                        StringBuilder sb5 = new StringBuilder();
+                        sb5.append(this.mIsPreview ? "(Preview)" : "");
+                        sb5.append("Fail to get drawable");
+                        Log.w("MotionWallpaper", sb5.toString());
+                    }
+                } catch (Exception e3) {
+                    StringBuilder sb6 = new StringBuilder();
+                    sb6.append(this.mIsPreview ? "(Preview)" : "");
+                    sb6.append("loadDrawable exception");
+                    sb6.append(e3.toString());
+                    Log.e("MotionWallpaper", sb6.toString());
+                }
+            } else if (i3 == 1) {
+                File file = new File(motionBitmap.path);
+                if (!file.exists() || !file.canRead()) {
+                    return;
+                }
+                try {
+                    Bitmap bitmap2 = new BitmapDrawable(this.mPkgResources, motionBitmap.path).getBitmap();
+                    motionBitmap.image = bitmap2.copy(bitmap2.getConfig(), true);
+                } catch (Exception e4) {
+                    e4.printStackTrace();
+                    return;
+                }
+            } else if (i3 == 2) {
+                motionBitmap.image = null;
+            }
+            Matrix matrix = new Matrix();
+            StringBuilder sb7 = new StringBuilder();
+            sb7.append(this.mIsPreview ? "(Preview)" : "");
+            sb7.append("loadWallpapers: matrix ");
+            sb7.append(matrix);
+            Log.i("MotionWallpaper", sb7.toString());
+            motionBitmap.matrix = matrix;
+            int iIndexOf = this.mMotionBitmapList.indexOf(motionBitmap) * 30;
+            motionBitmap.stayPoint1 = iIndexOf - 3;
+            motionBitmap.stayPoint2 = iIndexOf + 3;
+            motionBitmap.isBackground = false;
+            motionBitmap.setAlpha(0.0f, 0.0f);
+        }
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -369,9 +608,9 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
                 this.mAngularSum = f4 + f2;
             }
             this.mDeltaOfAngularSum = Math.abs(this.mAngularSum - f4);
-            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("axisX: ", f, ", axisY: ", f2, ", axisZ: ");
-            m.append(f3);
-            Log.d("MotionWallpaper", m.toString());
+            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("axisX: ", f, ", axisY: ", f2, ", axisZ: ");
+            sbM.append(f3);
+            Log.d("MotionWallpaper", sbM.toString());
             StringBuilder sb = new StringBuilder("mAngularSum: ");
             sb.append(this.mAngularSum);
             sb.append(", mDeltaOfAngularSum: ");
@@ -397,7 +636,7 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
         this.mTimestamp = sensorEvent.timestamp;
     }
 
-    public final ArrayList parseXML(XmlPullParser xmlPullParser) {
+    public final ArrayList parseXML(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         String name;
         int eventType = xmlPullParser.getEventType();
         ArrayList arrayList = null;
@@ -443,98 +682,46 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
         this.mAlphaAnimator.setDuration((int) (Math.abs(f2 - this.mPrevAnimatedAngularSum) * 16.0f));
         this.mAlphaAnimator.setInterpolator(this.mInterpolator);
         this.mAlphaAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.theme.MotionWallpaper.3
-            /* JADX WARN: Code restructure failed: missing block: B:23:0x0028, code lost:
-            
-                if (r1 <= r7) goto L10;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:4:0x0019, code lost:
-            
-                if (r1 >= r7) goto L10;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:5:0x001c, code lost:
-            
-                r3 = false;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:7:0x001c  */
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onAnimationUpdate(android.animation.ValueAnimator r7) {
-                /*
-                    r6 = this;
-                    float r7 = r2
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r0 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    float r1 = r0.mPrevStartAngularSum
-                    int r1 = (r7 > r1 ? 1 : (r7 == r1 ? 0 : -1))
-                    r2 = 1028443341(0x3d4ccccd, float:0.05)
-                    r3 = 1
-                    r4 = 0
-                    if (r1 >= 0) goto L1e
-                    float r1 = r0.mAnimatedAngularSum
-                    float r5 = r1 - r7
-                    float r5 = r5 * r2
-                    float r1 = r1 - r5
-                    r0.mAnimatedAngularSum = r1
-                    int r7 = (r1 > r7 ? 1 : (r1 == r7 ? 0 : -1))
-                    if (r7 < 0) goto L1c
-                    goto L2a
-                L1c:
-                    r3 = r4
-                    goto L2a
-                L1e:
-                    float r1 = r0.mAnimatedAngularSum
-                    float r1 = androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(r7, r1, r2, r1)
-                    r0.mAnimatedAngularSum = r1
-                    int r7 = (r1 > r7 ? 1 : (r1 == r7 ? 0 : -1))
-                    if (r7 > 0) goto L1c
-                L2a:
-                    float r7 = r0.mPrevAnimatedAngularSum
-                    float r0 = r0.mAnimatedAngularSum
-                    float r7 = r7 - r0
-                    float r7 = java.lang.Math.abs(r7)
-                    r0 = 953267991(0x38d1b717, float:1.0E-4)
-                    int r7 = (r7 > r0 ? 1 : (r7 == r0 ? 0 : -1))
-                    if (r7 <= 0) goto L83
-                    if (r3 == 0) goto L83
-                    java.lang.StringBuilder r7 = new java.lang.StringBuilder
-                    java.lang.String r0 = "animatedAngle = "
-                    r7.<init>(r0)
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r0 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    float r0 = r0.mAnimatedAngularSum
-                    java.lang.String r1 = "MotionWallpaper"
-                    androidx.picker3.widget.SeslColorSpectrumView$$ExternalSyntheticOutline0.m(r0, r1, r7)
-                    r7 = r4
-                L4d:
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r0 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    java.util.ArrayList r0 = r0.mMotionBitmapList
-                    int r0 = r0.size()
-                    if (r7 >= r0) goto L6d
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r0 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    java.util.ArrayList r0 = r0.mMotionBitmapList
-                    java.lang.Object r0 = r0.get(r7)
-                    com.android.systemui.wallpaper.theme.MotionWallpaper$MotionBitmap r0 = (com.android.systemui.wallpaper.theme.MotionWallpaper.MotionBitmap) r0
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r1 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    float r2 = r1.mPrevAnimatedAngularSum
-                    float r1 = r1.mAnimatedAngularSum
-                    r0.setAlpha(r2, r1)
-                    int r7 = r7 + 1
-                    goto L4d
-                L6d:
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r7 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    java.util.function.Consumer r0 = r7.mUpdateCallback
-                    if (r0 == 0) goto L7d
-                    r7.getClass()
-                    java.lang.Integer r7 = java.lang.Integer.valueOf(r4)
-                    r0.accept(r7)
-                L7d:
-                    com.android.systemui.wallpaper.theme.MotionWallpaper r6 = com.android.systemui.wallpaper.theme.MotionWallpaper.this
-                    float r7 = r6.mAnimatedAngularSum
-                    r6.mPrevAnimatedAngularSum = r7
-                L83:
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.theme.MotionWallpaper.AnonymousClass3.onAnimationUpdate(android.animation.ValueAnimator):void");
+            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float f4 = f2;
+                MotionWallpaper motionWallpaper = MotionWallpaper.this;
+                boolean z2 = true;
+                if (f4 < motionWallpaper.mPrevStartAngularSum) {
+                    float f5 = motionWallpaper.mAnimatedAngularSum;
+                    float f6 = f5 - ((f5 - f4) * 0.05f);
+                    motionWallpaper.mAnimatedAngularSum = f6;
+                    if (f6 < f4) {
+                        z2 = false;
+                    }
+                } else {
+                    float f7 = motionWallpaper.mAnimatedAngularSum;
+                    float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f4, f7, 0.05f, f7);
+                    motionWallpaper.mAnimatedAngularSum = fM$1;
+                    if (fM$1 > f4) {
+                    }
+                }
+                if (Math.abs(motionWallpaper.mPrevAnimatedAngularSum - motionWallpaper.mAnimatedAngularSum) <= 1.0E-4f || !z2) {
+                    return;
+                }
+                SeslColorSpectrumView$$ExternalSyntheticOutline0.m(MotionWallpaper.this.mAnimatedAngularSum, "MotionWallpaper", new StringBuilder("animatedAngle = "));
+                for (int i = 0; i < MotionWallpaper.this.mMotionBitmapList.size(); i++) {
+                    MotionBitmap motionBitmap = (MotionBitmap) MotionWallpaper.this.mMotionBitmapList.get(i);
+                    MotionWallpaper motionWallpaper2 = MotionWallpaper.this;
+                    motionBitmap.setAlpha(motionWallpaper2.mPrevAnimatedAngularSum, motionWallpaper2.mAnimatedAngularSum);
+                }
+                MotionWallpaper motionWallpaper3 = MotionWallpaper.this;
+                Consumer consumer = motionWallpaper3.mUpdateCallback;
+                if (consumer != null) {
+                    motionWallpaper3.getClass();
+                    consumer.accept(0);
+                }
+                MotionWallpaper motionWallpaper4 = MotionWallpaper.this;
+                motionWallpaper4.mPrevAnimatedAngularSum = motionWallpaper4.mAnimatedAngularSum;
             }
         });
         this.mAlphaAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.wallpaper.theme.MotionWallpaper.4
@@ -551,7 +738,7 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
     }
 
     /* JADX WARN: Type inference failed for: r8v7, types: [com.android.systemui.wallpaper.theme.MotionWallpaper$1] */
-    public MotionWallpaper(Context context, String str, String str2, boolean z, int i, Consumer<Integer> consumer, boolean z2) {
+    public MotionWallpaper(Context context, String str, String str2, boolean z, int i, Consumer<Integer> consumer, boolean z2) throws XmlPullParserException, Resources.NotFoundException, PackageManager.NameNotFoundException {
         super(context);
         this.mMotionBitmapList = new ArrayList();
         this.mOldBitmapList = new ArrayList();
@@ -620,7 +807,7 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
         }
         this.mLoader = new AsyncTask() { // from class: com.android.systemui.wallpaper.theme.MotionWallpaper.1
             @Override // android.os.AsyncTask
-            public final Object doInBackground(Object[] objArr) {
+            public final Object doInBackground(Object[] objArr) throws XmlPullParserException, Resources.NotFoundException, PackageManager.NameNotFoundException {
                 MotionWallpaper motionWallpaper = MotionWallpaper.this;
                 int i2 = MotionWallpaper.$r8$clinit;
                 motionWallpaper.loadMotionWallpaperBitmaps();
@@ -628,7 +815,7 @@ public class MotionWallpaper extends FrameLayout implements SensorEventListener 
             }
 
             @Override // android.os.AsyncTask
-            public final void onPostExecute(Object obj) {
+            public final void onPostExecute(Object obj) throws Resources.NotFoundException {
                 MotionWallpaper motionWallpaper = MotionWallpaper.this;
                 int i2 = MotionWallpaper.$r8$clinit;
                 motionWallpaper.initializeMotionBitmaps();

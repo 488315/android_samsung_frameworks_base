@@ -167,7 +167,7 @@ public interface ServiceConnector<I extends IInterface> {
         public <R> Impl<I>.CompletionAwareJob<I, R> postForResult(Job<I, R> job) {
             Impl<I>.CompletionAwareJob<I, R> completionAwareJob = new CompletionAwareJob<>();
             completionAwareJob.mDelegate = (Job) Objects.requireNonNull(job);
-            enqueue((CompletionAwareJob) completionAwareJob);
+            enqueue((Impl<I>.CompletionAwareJob<I, ?>) completionAwareJob);
             return completionAwareJob;
         }
 
@@ -176,7 +176,7 @@ public interface ServiceConnector<I extends IInterface> {
             Impl<I>.CompletionAwareJob<I, ?> completionAwareJob = new CompletionAwareJob<>();
             completionAwareJob.mDelegate = (Job) Objects.requireNonNull(job);
             completionAwareJob.mAsync = true;
-            enqueue((CompletionAwareJob) completionAwareJob);
+            enqueue(completionAwareJob);
             return completionAwareJob;
         }
 
@@ -195,14 +195,14 @@ public interface ServiceConnector<I extends IInterface> {
                 if (i != null) {
                     this.mServiceConnectionFutureCache.complete(i);
                 } else {
-                    enqueue((CompletionAwareJob) this.mServiceConnectionFutureCache);
+                    enqueue((Impl<I>.CompletionAwareJob<I, ?>) this.mServiceConnectionFutureCache);
                 }
             }
             return this.mServiceConnectionFutureCache;
         }
 
         private void enqueue(Impl<I>.CompletionAwareJob<I, ?> completionAwareJob) {
-            if (enqueue((Job) completionAwareJob)) {
+            if (enqueue(completionAwareJob)) {
                 return;
             }
             completionAwareJob.completeExceptionally(new IllegalStateException("Failed to post a job to handler. Likely " + this.mHandler.getLooper() + " is exiting"));
@@ -213,7 +213,7 @@ public interface ServiceConnector<I extends IInterface> {
             return this.mHandler.post(new Runnable() { // from class: com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ServiceConnector.Impl.this.lambda$enqueue$1(job);
+                    this.f$0.lambda$enqueue$1(job);
                 }
             });
         }
@@ -270,24 +270,24 @@ public interface ServiceConnector<I extends IInterface> {
         private void processQueue() {
             I i;
             while (true) {
-                Job<I, ?> poll = this.mQueue.poll();
-                if (poll != null) {
-                    Impl<I>.CompletionAwareJob<I, ?> completionAwareJob = (CompletionAwareJob) castOrNull(poll, CompletionAwareJob.class);
+                Job<I, ?> jobPoll = this.mQueue.poll();
+                if (jobPoll != null) {
+                    Impl<I>.CompletionAwareJob<I, ?> completionAwareJob = (CompletionAwareJob) castOrNull(jobPoll, CompletionAwareJob.class);
                     try {
                         i = this.mService;
                     } catch (Throwable th) {
-                        completeExceptionally(poll, th);
+                        completeExceptionally(jobPoll, th);
                     }
                     if (i == null) {
                         return;
                     }
-                    Object run = poll.run(i);
+                    Object objRun = jobPoll.run(i);
                     if (completionAwareJob != null) {
                         if (completionAwareJob.mAsync) {
                             this.mUnfinishedJobs.add(completionAwareJob);
-                            ((CompletionStage) run).whenComplete(completionAwareJob);
+                            ((CompletionStage) objRun).whenComplete(completionAwareJob);
                         } else {
-                            completionAwareJob.complete(run);
+                            completionAwareJob.complete(objRun);
                         }
                     }
                 } else {
@@ -321,7 +321,7 @@ public interface ServiceConnector<I extends IInterface> {
             this.mHandler.post(new Runnable() { // from class: com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ServiceConnector.Impl.this.unbindJobThread();
+                    this.f$0.unbindJobThread();
                 }
             });
         }
@@ -364,11 +364,11 @@ public interface ServiceConnector<I extends IInterface> {
 
         protected void cancelPendingJobs() {
             while (true) {
-                Job<I, ?> poll = this.mQueue.poll();
-                if (poll == null) {
+                Job<I, ?> jobPoll = this.mQueue.poll();
+                if (jobPoll == null) {
                     return;
                 }
-                CompletionAwareJob completionAwareJob = (CompletionAwareJob) castOrNull(poll, CompletionAwareJob.class);
+                CompletionAwareJob completionAwareJob = (CompletionAwareJob) castOrNull(jobPoll, CompletionAwareJob.class);
                 if (completionAwareJob != null) {
                     completionAwareJob.cancel(false);
                 }
@@ -381,15 +381,15 @@ public interface ServiceConnector<I extends IInterface> {
                 Log.i(LOG_TAG, "Ignoring onServiceConnected due to ongoing unbinding: " + this);
                 return;
             }
-            I binderAsInterface = binderAsInterface(iBinder);
-            this.mService = binderAsInterface;
+            I i = (I) binderAsInterface(iBinder);
+            this.mService = i;
             this.mBinding = false;
             try {
                 iBinder.linkToDeath(this, 0);
             } catch (RemoteException e) {
                 Log.e(LOG_TAG, "onServiceConnected " + componentName + ": ", e);
             }
-            dispatchOnServiceConnectionStatusChanged(binderAsInterface, true);
+            dispatchOnServiceConnectionStatusChanged(i, true);
             processQueue();
         }
 

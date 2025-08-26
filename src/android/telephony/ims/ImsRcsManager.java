@@ -7,7 +7,6 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.telephony.BinderCacheManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ImsRcsManager;
 import android.telephony.ims.RegistrationManager;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
 import android.telephony.ims.aidl.IImsRcsController;
@@ -72,16 +71,16 @@ public class ImsRcsManager {
                 if (this.mOnAvailabilityChangedListener == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$AvailabilityCallbackAdapter$CapabilityBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ImsRcsManager.AvailabilityCallbackAdapter.CapabilityBinder.this.lambda$onCapabilitiesStatusChanged$0(i);
+                            this.f$0.lambda$onCapabilitiesStatusChanged$0(i);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -186,7 +185,7 @@ public class ImsRcsManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$stateCallback;
@@ -197,7 +196,7 @@ public class ImsRcsManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -239,7 +238,7 @@ public class ImsRcsManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$transportTypeCallback;
@@ -250,7 +249,7 @@ public class ImsRcsManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -288,12 +287,12 @@ public class ImsRcsManager {
             Log.w(TAG, "Remove availability changed listener: IImsRcsController is null");
             return;
         }
-        AvailabilityCallbackAdapter removeAvailabilityChangedListenerFromCollection = removeAvailabilityChangedListenerFromCollection(onAvailabilityChangedListener);
-        if (removeAvailabilityChangedListenerFromCollection == null) {
+        AvailabilityCallbackAdapter availabilityCallbackAdapterRemoveAvailabilityChangedListenerFromCollection = removeAvailabilityChangedListenerFromCollection(onAvailabilityChangedListener);
+        if (availabilityCallbackAdapterRemoveAvailabilityChangedListenerFromCollection == null) {
             return;
         }
         try {
-            iImsRcsController.unregisterRcsAvailabilityCallback(this.mSubId, removeAvailabilityChangedListenerFromCollection.getBinder());
+            iImsRcsController.unregisterRcsAvailabilityCallback(this.mSubId, availabilityCallbackAdapterRemoveAvailabilityChangedListenerFromCollection.getBinder());
         } catch (RemoteException e) {
             Log.w(TAG, "Error calling IImsRcsController#unregisterRcsAvailabilityCallback", e);
         }
@@ -339,12 +338,12 @@ public class ImsRcsManager {
         imsStateCallback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mTelephonyBinderCache;
         Objects.requireNonNull(imsStateCallback);
-        ITelephony listenOnBinder = binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
-        if (listenOnBinder == null) {
+        ITelephony iTelephony = (ITelephony) binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
+        if (iTelephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            listenOnBinder.registerImsStateCallback(this.mSubId, 2, imsStateCallback.getCallbackBinder(), this.mContext.getOpPackageName());
+            iTelephony.registerImsStateCallback(this.mSubId, 2, imsStateCallback.getCallbackBinder(), this.mContext.getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -354,10 +353,10 @@ public class ImsRcsManager {
 
     public void unregisterImsStateCallback(ImsStateCallback imsStateCallback) {
         Objects.requireNonNull(imsStateCallback, "Must include a non-null ImsStateCallback.");
-        ITelephony removeRunnable = this.mTelephonyBinderCache.removeRunnable(imsStateCallback);
-        if (removeRunnable != null) {
+        ITelephony iTelephony = (ITelephony) this.mTelephonyBinderCache.removeRunnable(imsStateCallback);
+        if (iTelephony != null) {
             try {
-                removeRunnable.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
+                iTelephony.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
             } catch (RemoteException unused) {
             }
         }
@@ -372,11 +371,11 @@ public class ImsRcsManager {
     }
 
     private AvailabilityCallbackAdapter removeAvailabilityChangedListenerFromCollection(OnAvailabilityChangedListener onAvailabilityChangedListener) {
-        AvailabilityCallbackAdapter remove;
+        AvailabilityCallbackAdapter availabilityCallbackAdapterRemove;
         synchronized (this.mAvailabilityChangedCallbacks) {
-            remove = this.mAvailabilityChangedCallbacks.remove(onAvailabilityChangedListener);
+            availabilityCallbackAdapterRemove = this.mAvailabilityChangedCallbacks.remove(onAvailabilityChangedListener);
         }
-        return remove;
+        return availabilityCallbackAdapterRemove;
     }
 
     private IImsRcsController getIImsRcsController() {

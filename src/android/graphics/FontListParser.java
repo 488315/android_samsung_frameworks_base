@@ -3,6 +3,7 @@ package android.graphics;
 import android.graphics.fonts.FontCustomizationParser;
 import android.graphics.fonts.FontStyle;
 import android.graphics.fonts.FontVariationAxis;
+import android.os.LocaleList;
 import android.text.FontConfig;
 import android.util.ArraySet;
 import android.util.Xml;
@@ -42,13 +43,13 @@ public class FontListParser {
     private static final String VARIANT_ELEGANT = "elegant";
 
     public static FontConfig parse(InputStream inputStream) throws XmlPullParserException, IOException {
-        XmlPullParser newPullParser = Xml.newPullParser();
-        newPullParser.setInput(inputStream, null);
-        newPullParser.nextTag();
-        return readFamilies(newPullParser, "/system/fonts/", new FontCustomizationParser.Result(), null, 0L, 0, true);
+        XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+        xmlPullParserNewPullParser.setInput(inputStream, null);
+        xmlPullParserNewPullParser.nextTag();
+        return readFamilies(xmlPullParserNewPullParser, "/system/fonts/", new FontCustomizationParser.Result(), null, 0L, 0, true);
     }
 
-    public static FontConfig parse(String str, String str2, String str3, String str4, Map<String, File> map, long j, int i) throws IOException, XmlPullParserException {
+    public static FontConfig parse(String str, String str2, String str3, String str4, Map<String, File> map, long j, int i) throws XmlPullParserException, IOException {
         FontCustomizationParser.Result result;
         if (str3 != null) {
             try {
@@ -67,12 +68,12 @@ public class FontListParser {
         FontCustomizationParser.Result result2 = result;
         FileInputStream fileInputStream2 = new FileInputStream(str);
         try {
-            XmlPullParser newPullParser = Xml.newPullParser();
-            newPullParser.setInput(fileInputStream2, null);
-            newPullParser.nextTag();
-            FontConfig readFamilies = readFamilies(newPullParser, str2, result2, map, j, i, false);
+            XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+            xmlPullParserNewPullParser.setInput(fileInputStream2, null);
+            xmlPullParserNewPullParser.nextTag();
+            FontConfig families = readFamilies(xmlPullParserNewPullParser, str2, result2, map, j, i, false);
             fileInputStream2.close();
-            return readFamilies;
+            return families;
         } finally {
         }
     }
@@ -94,31 +95,31 @@ public class FontListParser {
                 if (name.equals("family")) {
                     String attributeValue = xmlPullParser.getAttributeValue(null, "name");
                     if (attributeValue == null) {
-                        FontConfig.FontFamily readFamily = readFamily(xmlPullParser, str, map, z);
-                        if (readFamily != null) {
-                            arrayList.add(readFamily);
+                        FontConfig.FontFamily family = readFamily(xmlPullParser, str, map, z);
+                        if (family != null) {
+                            arrayList.add(family);
                             z2 = false;
                         }
                     } else {
-                        FontConfig.NamedFamilyList readNamedFamily = readNamedFamily(xmlPullParser, str, map, z);
-                        if (readNamedFamily != null) {
+                        FontConfig.NamedFamilyList namedFamily = readNamedFamily(xmlPullParser, str, map, z);
+                        if (namedFamily != null) {
                             if (!additionalNamedFamilies.containsKey(attributeValue)) {
-                                arrayList2.add(readNamedFamily);
+                                arrayList2.add(namedFamily);
                             }
                             if (z2) {
-                                arrayList.addAll(readNamedFamily.getFamilies());
+                                arrayList.addAll(namedFamily.getFamilies());
                             }
                             z2 = false;
                         }
                     }
                 } else if (name.equals("family-list")) {
-                    FontConfig.NamedFamilyList readNamedFamilyList = readNamedFamilyList(xmlPullParser, str, map, z);
-                    if (readNamedFamilyList != null) {
-                        if (!additionalNamedFamilies.containsKey(readNamedFamilyList.getName())) {
-                            arrayList2.add(readNamedFamilyList);
+                    FontConfig.NamedFamilyList namedFamilyList = readNamedFamilyList(xmlPullParser, str, map, z);
+                    if (namedFamilyList != null) {
+                        if (!additionalNamedFamilies.containsKey(namedFamilyList.getName())) {
+                            arrayList2.add(namedFamilyList);
                         }
                         if (z2) {
-                            arrayList.addAll(readNamedFamilyList.getFamilies());
+                            arrayList.addAll(namedFamilyList.getFamilies());
                         }
                         z2 = false;
                     }
@@ -152,80 +153,42 @@ public class FontListParser {
         return (next == 3 || next == 1) ? false : true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x0055, code lost:
-    
-        if (r1.equals(android.graphics.FontListParser.VARIANT_ELEGANT) != false) goto L22;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0058  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.text.FontConfig.FontFamily readFamily(org.xmlpull.v1.XmlPullParser r7, java.lang.String r8, java.util.Map<java.lang.String, java.io.File> r9, boolean r10) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            java.lang.String r0 = ""
-            java.lang.String r1 = "lang"
-            java.lang.String r0 = r7.getAttributeValue(r0, r1)
-            java.lang.String r1 = "variant"
-            r2 = 0
-            java.lang.String r1 = r7.getAttributeValue(r2, r1)
-            java.lang.String r3 = "ignore"
-            java.lang.String r3 = r7.getAttributeValue(r2, r3)
-            java.util.ArrayList r4 = new java.util.ArrayList
-            r4.<init>()
-        L1b:
-            boolean r5 = keepReading(r7)
-            r6 = 2
-            if (r5 == 0) goto L43
-            int r5 = r7.getEventType()
-            if (r5 == r6) goto L29
-            goto L1b
-        L29:
-            java.lang.String r5 = r7.getName()
-            java.lang.String r6 = "font"
-            boolean r5 = r5.equals(r6)
-            if (r5 == 0) goto L3f
-            android.text.FontConfig$Font r5 = readFont(r7, r8, r9, r10)
-            if (r5 == 0) goto L1b
-            r4.add(r5)
-            goto L1b
-        L3f:
-            skip(r7)
-            goto L1b
-        L43:
-            if (r1 == 0) goto L58
-            java.lang.String r7 = "compact"
-            boolean r7 = r1.equals(r7)
-            if (r7 == 0) goto L4f
-            r6 = 1
-            goto L59
-        L4f:
-            java.lang.String r7 = "elegant"
-            boolean r7 = r1.equals(r7)
-            if (r7 == 0) goto L58
-            goto L59
-        L58:
-            r6 = 0
-        L59:
-            if (r3 == 0) goto L6d
-            java.lang.String r7 = "true"
-            boolean r7 = r3.equals(r7)
-            if (r7 != 0) goto L73
-            java.lang.String r7 = "1"
-            boolean r7 = r3.equals(r7)
-            if (r7 == 0) goto L6d
-            goto L73
-        L6d:
-            boolean r7 = r4.isEmpty()
-            if (r7 == 0) goto L74
-        L73:
-            return r2
-        L74:
-            android.text.FontConfig$FontFamily r7 = new android.text.FontConfig$FontFamily
-            android.os.LocaleList r8 = android.os.LocaleList.forLanguageTags(r0)
-            r7.<init>(r4, r8, r6)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.FontListParser.readFamily(org.xmlpull.v1.XmlPullParser, java.lang.String, java.util.Map, boolean):android.text.FontConfig$FontFamily");
+    public static FontConfig.FontFamily readFamily(XmlPullParser xmlPullParser, String str, Map<String, File> map, boolean z) throws XmlPullParserException, IOException {
+        int i;
+        String attributeValue = xmlPullParser.getAttributeValue("", ATTR_LANG);
+        String attributeValue2 = xmlPullParser.getAttributeValue(null, "variant");
+        String attributeValue3 = xmlPullParser.getAttributeValue(null, "ignore");
+        ArrayList arrayList = new ArrayList();
+        while (true) {
+            i = 2;
+            if (!keepReading(xmlPullParser)) {
+                break;
+            }
+            if (xmlPullParser.getEventType() == 2) {
+                if (xmlPullParser.getName().equals("font")) {
+                    FontConfig.Font font = readFont(xmlPullParser, str, map, z);
+                    if (font != null) {
+                        arrayList.add(font);
+                    }
+                } else {
+                    skip(xmlPullParser);
+                }
+            }
+        }
+        if (attributeValue2 == null) {
+            i = 0;
+        } else if (attributeValue2.equals(VARIANT_COMPACT)) {
+            i = 1;
+        } else if (!attributeValue2.equals(VARIANT_ELEGANT)) {
+        }
+        if ((attributeValue3 == null || !(attributeValue3.equals("true") || attributeValue3.equals("1"))) && !arrayList.isEmpty()) {
+            return new FontConfig.FontFamily(arrayList, LocaleList.forLanguageTags(attributeValue), i);
+        }
+        return null;
     }
 
     private static void throwIfAttributeExists(String str, XmlPullParser xmlPullParser) {
@@ -240,11 +203,11 @@ public class FontListParser {
         throwIfAttributeExists(ATTR_LANG, xmlPullParser);
         throwIfAttributeExists("variant", xmlPullParser);
         throwIfAttributeExists("ignore", xmlPullParser);
-        FontConfig.FontFamily readFamily = readFamily(xmlPullParser, str, map, z);
-        if (readFamily == null) {
+        FontConfig.FontFamily family = readFamily(xmlPullParser, str, map, z);
+        if (family == null) {
             return null;
         }
-        return new FontConfig.NamedFamilyList(Collections.singletonList(readFamily), attributeValue);
+        return new FontConfig.NamedFamilyList(Collections.singletonList(family), attributeValue);
     }
 
     public static FontConfig.NamedFamilyList readNamedFamilyList(XmlPullParser xmlPullParser, String str, Map<String, File> map, boolean z) throws XmlPullParserException, IOException {
@@ -257,9 +220,9 @@ public class FontListParser {
                     throwIfAttributeExists(ATTR_LANG, xmlPullParser);
                     throwIfAttributeExists("variant", xmlPullParser);
                     throwIfAttributeExists("ignore", xmlPullParser);
-                    FontConfig.FontFamily readFamily = readFamily(xmlPullParser, str, map, z);
-                    if (readFamily != null) {
-                        arrayList.add(readFamily);
+                    FontConfig.FontFamily family = readFamily(xmlPullParser, str, map, z);
+                    if (family != null) {
+                        arrayList.add(family);
                     }
                 } else {
                     skip(xmlPullParser);
@@ -279,11 +242,11 @@ public class FontListParser {
         String str2;
         FontConfig.Font font = null;
         String attributeValue = xmlPullParser.getAttributeValue(null, "index");
-        int parseInt = attributeValue == null ? 0 : Integer.parseInt(attributeValue);
+        int i2 = attributeValue == null ? 0 : Integer.parseInt(attributeValue);
         ArrayList arrayList = new ArrayList();
         String attributeValue2 = xmlPullParser.getAttributeValue(null, "weight");
-        int parseInt2 = attributeValue2 == null ? 400 : Integer.parseInt(attributeValue2);
-        boolean equals = STYLE_ITALIC.equals(xmlPullParser.getAttributeValue(null, "style"));
+        int i3 = attributeValue2 == null ? 400 : Integer.parseInt(attributeValue2);
+        boolean zEquals = STYLE_ITALIC.equals(xmlPullParser.getAttributeValue(null, "style"));
         String attributeValue3 = xmlPullParser.getAttributeValue(null, ATTR_FALLBACK_FOR);
         String attributeValue4 = xmlPullParser.getAttributeValue(null, ATTR_POSTSCRIPT_NAME);
         String attributeValue5 = xmlPullParser.getAttributeValue(null, ATTR_SUPPORTED_AXES);
@@ -304,45 +267,45 @@ public class FontListParser {
                 }
             }
         }
-        String replaceAll = FILENAME_WHITESPACE_PATTERN.matcher(sb).replaceAll("");
+        String strReplaceAll = FILENAME_WHITESPACE_PATTERN.matcher(sb).replaceAll("");
         if (attributeValue5 != null) {
-            String[] split = attributeValue5.split(",");
-            int length = split.length;
-            int i2 = 0;
-            int i3 = 0;
-            while (i2 < length) {
+            String[] strArrSplit = attributeValue5.split(",");
+            int length = strArrSplit.length;
+            int i4 = 0;
+            int i5 = 0;
+            while (i4 < length) {
                 FontConfig.Font font2 = font;
-                String strip = split[i2].strip();
+                String strStrip = strArrSplit[i4].strip();
                 char c2 = c;
-                if (strip.equals(TAG_WGHT)) {
-                    i3 |= 1;
-                } else if (strip.equals(TAG_ITAL)) {
-                    i3 |= 2;
+                if (strStrip.equals(TAG_WGHT)) {
+                    i5 |= 1;
+                } else if (strStrip.equals(TAG_ITAL)) {
+                    i5 |= 2;
                 }
-                i2++;
+                i4++;
                 c = c2;
                 font = font2;
             }
-            i = i3;
+            i = i5;
         } else {
             i = 0;
         }
         FontConfig.Font font3 = font;
         if (attributeValue4 == null) {
-            attributeValue4 = replaceAll.substring(0, replaceAll.length() - 4);
+            attributeValue4 = strReplaceAll.substring(0, strReplaceAll.length() - 4);
         }
         String str3 = attributeValue4;
-        String findUpdatedFontFile = findUpdatedFontFile(str3, map);
-        if (findUpdatedFontFile != null) {
-            str2 = str + replaceAll;
+        String strFindUpdatedFontFile = findUpdatedFontFile(str3, map);
+        if (strFindUpdatedFontFile != null) {
+            str2 = str + strReplaceAll;
         } else {
-            findUpdatedFontFile = str + replaceAll;
+            strFindUpdatedFontFile = str + strReplaceAll;
             str2 = font3;
         }
         String fontVariationSettings = arrayList.isEmpty() ? "" : FontVariationAxis.toFontVariationSettings((FontVariationAxis[]) arrayList.toArray(new FontVariationAxis[0]));
-        File file = new File(findUpdatedFontFile);
+        File file = new File(strFindUpdatedFontFile);
         if (z || file.isFile()) {
-            return new FontConfig.Font(file, str2 == 0 ? font3 : new File(str2), str3, new FontStyle(parseInt2, equals ? 1 : 0), parseInt, fontVariationSettings, attributeValue3, i);
+            return new FontConfig.Font(file, str2 == 0 ? font3 : new File(str2), str3, new FontStyle(i3, zEquals ? 1 : 0), i2, fontVariationSettings, attributeValue3, i);
         }
         return font3;
     }
@@ -366,9 +329,9 @@ public class FontListParser {
         String attributeValue = xmlPullParser.getAttributeValue(null, "name");
         String attributeValue2 = xmlPullParser.getAttributeValue(null, "to");
         String attributeValue3 = xmlPullParser.getAttributeValue(null, "weight");
-        int parseInt = attributeValue3 == null ? 400 : Integer.parseInt(attributeValue3);
+        int i = attributeValue3 == null ? 400 : Integer.parseInt(attributeValue3);
         skip(xmlPullParser);
-        return new FontConfig.Alias(attributeValue, attributeValue2, parseInt);
+        return new FontConfig.Alias(attributeValue, attributeValue2, i);
     }
 
     public static void skip(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {

@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 import com.android.systemui.media.dialog.MediaOutputAdapterLegacy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MediaOutputAdapterLegacy$MediaDeviceViewHolderLegacy$$ExternalSyntheticLambda1 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -29,23 +27,24 @@ public final /* synthetic */ class MediaOutputAdapterLegacy$MediaDeviceViewHolde
                 MediaSwitchingController mediaSwitchingController = (MediaSwitchingController) obj;
                 DialogTransitionAnimator dialogTransitionAnimator = mediaSwitchingController.mDialogTransitionAnimator;
                 dialogTransitionAnimator.getClass();
-                DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
-                if (createActivityTransitionController$default == null || ((keyguardManager = mediaSwitchingController.mKeyGuardManager) != null && keyguardManager.isKeyguardLocked())) {
+                DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
+                if (anonymousClass1CreateActivityTransitionController$default == null || ((keyguardManager = mediaSwitchingController.mKeyGuardManager) != null && keyguardManager.isKeyguardLocked())) {
                     mediaSwitchingController.mCallback.dismissDialog();
                 }
-                Intent addFlags = new Intent("android.settings.BLUETOOTH_SETTINGS").addFlags(335544320);
+                Intent intentAddFlags = new Intent("android.settings.BLUETOOTH_SETTINGS").addFlags(335544320);
                 Intent intent = new Intent("android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY");
                 if (intent.resolveActivity(mediaSwitchingController.mContext.getPackageManager()) == null) {
-                    mediaSwitchingController.startActivity(addFlags, createActivityTransitionController$default);
+                    mediaSwitchingController.startActivity(intentAddFlags, anonymousClass1CreateActivityTransitionController$default);
                     break;
                 } else {
                     Log.d("MediaSwitchingController", "Device support split mode, launch page with deep link");
                     intent.setFlags(268435456);
-                    intent.putExtra("android.provider.extra.SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI", addFlags.toUri(1));
+                    intent.putExtra("android.provider.extra.SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI", intentAddFlags.toUri(1));
                     intent.putExtra("android.provider.extra.SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY", "top_level_connected_devices");
-                    mediaSwitchingController.startActivity(intent, createActivityTransitionController$default);
+                    mediaSwitchingController.startActivity(intent, anonymousClass1CreateActivityTransitionController$default);
                     break;
                 }
+                break;
             default:
                 int i2 = MediaOutputAdapterLegacy.MediaDeviceViewHolderLegacy.$r8$clinit;
                 MediaOutputAdapterBase mediaOutputAdapterBase = MediaOutputAdapterBase.this;

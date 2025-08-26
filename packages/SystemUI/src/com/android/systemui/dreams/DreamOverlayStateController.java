@@ -19,7 +19,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamOverlayStateController implements CallbackController {
     public final Executor mExecutor;
@@ -78,18 +77,18 @@ public class DreamOverlayStateController implements CallbackController {
     public final void setDreamOverlayStatusBarVisible(boolean z) {
         DreamLogger dreamLogger = this.mLogger;
         dreamLogger.getClass();
-        LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(0), null);
-        obtain.setBool1(z);
-        dreamLogger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(0), null);
+        logMessageObtain.setBool1(z);
+        dreamLogger.getBuffer().commit(logMessageObtain);
         modifyState(z ? 2 : 1, 32);
     }
 
     public final void setLowLightActive(boolean z) {
         DreamLogger dreamLogger = this.mLogger;
         dreamLogger.getClass();
-        LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(4), null);
-        obtain.setBool1(z);
-        dreamLogger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(4), null);
+        logMessageObtain.setBool1(z);
+        dreamLogger.getBuffer().commit(logMessageObtain);
         if (containsState(2) && !z) {
             this.mExecutor.execute(new DreamOverlayStateController$$ExternalSyntheticLambda1(this, new DreamOverlayStateController$$ExternalSyntheticLambda0(2), 1));
         }
@@ -99,9 +98,9 @@ public class DreamOverlayStateController implements CallbackController {
     public final void setOverlayActive(boolean z) {
         DreamLogger dreamLogger = this.mLogger;
         dreamLogger.getClass();
-        LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(3), null);
-        obtain.setBool1(z);
-        dreamLogger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(3), null);
+        logMessageObtain.setBool1(z);
+        dreamLogger.getBuffer().commit(logMessageObtain);
         modifyState(z ? 2 : 1, 1);
     }
 
@@ -115,7 +114,6 @@ public class DreamOverlayStateController implements CallbackController {
         this.mExecutor.execute(new DreamOverlayStateController$$ExternalSyntheticLambda2(this, callback, 0));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         default void onAvailableComplicationTypesChanged() {
         }

@@ -52,10 +52,10 @@ class LedSystemEventListenerDelegate extends INfcLedCoverTouchListenerCallback.S
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
     public void onSystemCoverEvent(int i, Bundle bundle) throws RemoteException {
-        Message obtainMessage = this.mHandler.obtainMessage(0);
-        obtainMessage.arg1 = i;
-        obtainMessage.obj = bundle;
-        obtainMessage.sendToTarget();
+        Message messageObtainMessage = this.mHandler.obtainMessage(0);
+        messageObtainMessage.arg1 = i;
+        messageObtainMessage.obj = bundle;
+        messageObtainMessage.sendToTarget();
     }
 
     private static class ListenerDelegateHandler extends Handler {

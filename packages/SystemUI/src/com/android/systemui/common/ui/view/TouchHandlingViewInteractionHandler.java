@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TouchHandlingViewInteractionHandler {
     public final int allowedTouchSlop;
@@ -25,10 +24,8 @@ public final class TouchHandlingViewInteractionHandler {
     public final Function2 postDelayed;
     public DisposableHandle scheduledLongPressHandle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class MotionEventModel {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Cancel extends MotionEventModel {
             public static final Cancel INSTANCE = new Cancel();
 
@@ -37,7 +34,6 @@ public final class TouchHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Down extends MotionEventModel {
             public final int x;
             public final int y;
@@ -71,7 +67,6 @@ public final class TouchHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Move extends MotionEventModel {
             public final float distanceMoved;
 
@@ -96,7 +91,6 @@ public final class TouchHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Other extends MotionEventModel {
             public static final Other INSTANCE = new Other();
 
@@ -105,7 +99,6 @@ public final class TouchHandlingViewInteractionHandler {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Up extends MotionEventModel {
             public final float distanceMoved;
             public final long gestureDuration;
@@ -156,7 +149,7 @@ public final class TouchHandlingViewInteractionHandler {
         new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.common.ui.view.TouchHandlingViewInteractionHandler$gestureDetector$1
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
             public final boolean onDoubleTap(MotionEvent motionEvent) {
-                TouchHandlingViewInteractionHandler.this.getClass();
+                this.this$0.getClass();
                 return false;
             }
         });

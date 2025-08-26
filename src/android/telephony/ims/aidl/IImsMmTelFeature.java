@@ -391,9 +391,9 @@ public interface IImsMmTelFeature extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsMmTelFeature.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsMmTelFeature)) {
-                return (IImsMmTelFeature) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsMmTelFeature.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsMmTelFeature)) {
+                return (IImsMmTelFeature) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -513,9 +513,9 @@ public interface IImsMmTelFeature extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IImsMmTelListener asInterface = IImsMmTelListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsMmTelListener iImsMmTelListenerAsInterface = IImsMmTelListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setListener(asInterface);
+                    setListener(iImsMmTelListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -524,32 +524,32 @@ public interface IImsMmTelFeature extends IInterface {
                     parcel2.writeInt(featureState);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ImsCallProfile createCallProfile = createCallProfile(readInt, readInt2);
+                    ImsCallProfile imsCallProfileCreateCallProfile = createCallProfile(i3, i4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createCallProfile, 1);
+                    parcel2.writeTypedObject(imsCallProfileCreateCallProfile, 1);
                     return true;
                 case 4:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(RtpHeaderExtensionType.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(RtpHeaderExtensionType.CREATOR);
                     parcel.enforceNoDataAvail();
-                    changeOfferedRtpHeaderExtensionTypes(createTypedArrayList);
+                    changeOfferedRtpHeaderExtensionTypes(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     ImsCallProfile imsCallProfile = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IImsCallSession createCallSession = createCallSession(imsCallProfile);
+                    IImsCallSession iImsCallSessionCreateCallSession = createCallSession(imsCallProfile);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createCallSession);
+                    parcel2.writeStrongInterface(iImsCallSessionCreateCallSession);
                     return true;
                 case 6:
-                    String[] createStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    int shouldProcessCall = shouldProcessCall(createStringArray);
+                    int iShouldProcessCall = shouldProcessCall(strArrCreateStringArray);
                     parcel2.writeNoException();
-                    parcel2.writeInt(shouldProcessCall);
+                    parcel2.writeInt(iShouldProcessCall);
                     return true;
                 case 7:
                     IImsUt utInterface = getUtInterface();
@@ -562,10 +562,10 @@ public interface IImsMmTelFeature extends IInterface {
                     parcel2.writeStrongInterface(ecbmInterface);
                     return true;
                 case 9:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Message message = (Message) parcel.readTypedObject(Message.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setUiTtyMode(readInt3, message);
+                    setUiTtyMode(i5, message);
                     parcel2.writeNoException();
                     return true;
                 case 10:
@@ -574,43 +574,43 @@ public interface IImsMmTelFeature extends IInterface {
                     parcel2.writeStrongInterface(multiEndpointInterface);
                     return true;
                 case 11:
-                    int queryCapabilityStatus = queryCapabilityStatus();
+                    int iQueryCapabilityStatus = queryCapabilityStatus();
                     parcel2.writeNoException();
-                    parcel2.writeInt(queryCapabilityStatus);
+                    parcel2.writeInt(iQueryCapabilityStatus);
                     return true;
                 case 12:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTerminalBasedCallWaitingStatus(readBoolean);
+                    setTerminalBasedCallWaitingStatus(z);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    IImsCapabilityCallback asInterface2 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addCapabilityCallback(asInterface2);
+                    addCapabilityCallback(iImsCapabilityCallbackAsInterface);
                     return true;
                 case 14:
-                    IImsCapabilityCallback asInterface3 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface2 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeCapabilityCallback(asInterface3);
+                    removeCapabilityCallback(iImsCapabilityCallbackAsInterface2);
                     return true;
                 case 15:
                     CapabilityChangeRequest capabilityChangeRequest = (CapabilityChangeRequest) parcel.readTypedObject(CapabilityChangeRequest.CREATOR);
-                    IImsCapabilityCallback asInterface4 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface3 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    changeCapabilitiesConfiguration(capabilityChangeRequest, asInterface4);
+                    changeCapabilitiesConfiguration(capabilityChangeRequest, iImsCapabilityCallbackAsInterface3);
                     return true;
                 case 16:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    IImsCapabilityCallback asInterface5 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    IImsCapabilityCallback iImsCapabilityCallbackAsInterface4 = IImsCapabilityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    queryCapabilityConfiguration(readInt4, readInt5, asInterface5);
+                    queryCapabilityConfiguration(i6, i7, iImsCapabilityCallbackAsInterface4);
                     return true;
                 case 17:
-                    ISrvccStartedCallback asInterface6 = ISrvccStartedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISrvccStartedCallback iSrvccStartedCallbackAsInterface = ISrvccStartedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    notifySrvccStarted(asInterface6);
+                    notifySrvccStarted(iSrvccStartedCallbackAsInterface);
                     return true;
                 case 18:
                     notifySrvccCompleted();
@@ -622,60 +622,60 @@ public interface IImsMmTelFeature extends IInterface {
                     notifySrvccCanceled();
                     return true;
                 case 21:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     MediaThreshold mediaThreshold = (MediaThreshold) parcel.readTypedObject(MediaThreshold.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setMediaQualityThreshold(readInt6, mediaThreshold);
+                    setMediaQualityThreshold(i8, mediaThreshold);
                     return true;
                 case 22:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    MediaQualityStatus queryMediaQualityStatus = queryMediaQualityStatus(readInt7);
+                    MediaQualityStatus mediaQualityStatusQueryMediaQualityStatus = queryMediaQualityStatus(i9);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryMediaQualityStatus, 1);
+                    parcel2.writeTypedObject(mediaQualityStatusQueryMediaQualityStatus, 1);
                     return true;
                 case 23:
-                    IImsSmsListener asInterface7 = IImsSmsListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsSmsListener iImsSmsListenerAsInterface = IImsSmsListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setSmsListener(asInterface7);
+                    setSmsListener(iImsSmsListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    sendSms(readInt8, readInt9, readString, readString2, readBoolean2, createByteArray);
+                    sendSms(i10, i11, string, string2, z2, bArrCreateByteArray);
                     return true;
                 case 25:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onMemoryAvailable(readInt10);
+                    onMemoryAvailable(i12);
                     return true;
                 case 26:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acknowledgeSms(readInt11, readInt12, readInt13);
+                    acknowledgeSms(i13, i14, i15);
                     return true;
                 case 27:
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    acknowledgeSmsWithPdu(readInt14, readInt15, readInt16, createByteArray2);
+                    acknowledgeSmsWithPdu(i16, i17, i18, bArrCreateByteArray2);
                     return true;
                 case 28:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acknowledgeSmsReport(readInt17, readInt18, readInt19);
+                    acknowledgeSmsReport(i19, i20, i21);
                     return true;
                 case 29:
                     String smsFormat = getSmsFormat();
@@ -686,15 +686,15 @@ public interface IImsMmTelFeature extends IInterface {
                     onSmsReady();
                     return true;
                 case 31:
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRetryCount(readInt20, readInt21);
+                    setRetryCount(i22, i23);
                     return true;
                 case 32:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setSmsc(readString3);
+                    setSmsc(string3);
                     parcel2.writeNoException();
                     return true;
                 case 33:
@@ -702,93 +702,93 @@ public interface IImsMmTelFeature extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeAudioPath(readInt22, readInt23);
+                    changeAudioPath(i24, i25);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int startLocalRingBackTone = startLocalRingBackTone(readInt24, readInt25, readInt26);
+                    int iStartLocalRingBackTone = startLocalRingBackTone(i26, i27, i28);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startLocalRingBackTone);
+                    parcel2.writeInt(iStartLocalRingBackTone);
                     return true;
                 case 36:
-                    int stopLocalRingBackTone = stopLocalRingBackTone();
+                    int iStopLocalRingBackTone = stopLocalRingBackTone();
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopLocalRingBackTone);
+                    parcel2.writeInt(iStopLocalRingBackTone);
                     return true;
                 case 37:
-                    int readInt27 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i29 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setVideoCrtAudio(readInt27, readBoolean3);
+                    setVideoCrtAudio(i29, z3);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt28 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i30 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendDtmfEvent(readInt28, readString4);
+                    sendDtmfEvent(i30, string4);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String trn = getTrn(readString5, readString6);
+                    String trn = getTrn(string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeString(trn);
                     return true;
                 case 40:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     PublishDialog publishDialog = (PublishDialog) parcel.readTypedObject(PublishDialog.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendPublishDialog(readInt29, publishDialog);
+                    sendPublishDialog(i31, publishDialog);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCmcEmergencyCallSupported = isCmcEmergencyCallSupported(readInt30);
+                    boolean zIsCmcEmergencyCallSupported = isCmcEmergencyCallSupported(i32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCmcEmergencyCallSupported);
+                    parcel2.writeBoolean(zIsCmcEmergencyCallSupported);
                     return true;
                 case 42:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTtyMode(readInt31);
+                    setTtyMode(i33);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int initialCallNetworkType = getInitialCallNetworkType(readInt32);
+                    int initialCallNetworkType = getInitialCallNetworkType(i34);
                     parcel2.writeNoException();
                     parcel2.writeInt(initialCallNetworkType);
                     return true;
                 case 44:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    triggerAutoConfigurationForApp(readInt33);
+                    triggerAutoConfigurationForApp(i35);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyEpsFallbackResult(readInt34, readInt35);
+                    notifyEpsFallbackResult(i36, i37);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt36 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i38 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    sendMmsProcType(readInt36, readBoolean4);
+                    sendMmsProcType(i38, z4);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -814,674 +814,674 @@ public interface IImsMmTelFeature extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setListener(IImsMmTelListener iImsMmTelListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsMmTelListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsMmTelListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int getFeatureState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public ImsCallProfile createCallProfile(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ImsCallProfile) obtain2.readTypedObject(ImsCallProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ImsCallProfile) parcelObtain2.readTypedObject(ImsCallProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public IImsCallSession createCallSession(ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int shouldProcessCall(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public IImsUt getUtInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsUt.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsUt.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public IImsEcbm getEcbmInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsEcbm.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsEcbm.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setUiTtyMode(int i, Message message) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(message, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(message, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public IImsMultiEndpoint getMultiEndpointInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsMultiEndpoint.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsMultiEndpoint.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int queryCapabilityStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setTerminalBasedCallWaitingStatus(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void addCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void removeCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void changeCapabilitiesConfiguration(CapabilityChangeRequest capabilityChangeRequest, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeTypedObject(capabilityChangeRequest, 0);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(capabilityChangeRequest, 0);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void queryCapabilityConfiguration(int i, int i2, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iImsCapabilityCallback);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iImsCapabilityCallback);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void notifySrvccStarted(ISrvccStartedCallback iSrvccStartedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSrvccStartedCallback);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSrvccStartedCallback);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void notifySrvccCompleted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void notifySrvccFailed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void notifySrvccCanceled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setMediaQualityThreshold(int i, MediaThreshold mediaThreshold) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(mediaThreshold, 0);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(mediaThreshold, 0);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public MediaQualityStatus queryMediaQualityStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (MediaQualityStatus) obtain2.readTypedObject(MediaQualityStatus.CREATOR);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (MediaQualityStatus) parcelObtain2.readTypedObject(MediaQualityStatus.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setSmsListener(IImsSmsListener iImsSmsListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsSmsListener);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsSmsListener);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void sendSms(int i, int i2, String str, String str2, boolean z, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void onMemoryAvailable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void acknowledgeSms(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void acknowledgeSmsWithPdu(int i, int i2, int i3, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void acknowledgeSmsReport(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public String getSmsFormat() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void onSmsReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setRetryCount(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(31, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setSmsc(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void initImsSmsImplAdapter() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void changeAudioPath(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int startLocalRingBackTone(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int stopLocalRingBackTone() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setVideoCrtAudio(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void sendDtmfEvent(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public String getTrn(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void sendPublishDialog(int i, PublishDialog publishDialog) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(publishDialog, 0);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(publishDialog, 0);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public boolean isCmcEmergencyCallSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void setTtyMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public int getInitialCallNetworkType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void triggerAutoConfigurationForApp(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void notifyEpsFallbackResult(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
             public void sendMmsProcType(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

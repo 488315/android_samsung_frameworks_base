@@ -75,11 +75,11 @@ public class VertexFrame extends Frame {
     @Override // android.filterfw.core.Frame
     public void setData(ByteBuffer byteBuffer, int i, int i2) {
         assertFrameMutable();
-        byte[] array = byteBuffer.array();
-        if (getFormat().getSize() != array.length) {
+        byte[] bArrArray = byteBuffer.array();
+        if (getFormat().getSize() != bArrArray.length) {
             throw new RuntimeException("Data size in setData does not match vertex frame size!");
         }
-        if (!setNativeData(array, i, i2)) {
+        if (!setNativeData(bArrArray, i, i2)) {
             throw new RuntimeException("Could not set vertex frame data!");
         }
     }

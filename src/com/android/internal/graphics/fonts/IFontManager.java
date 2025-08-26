@@ -70,9 +70,9 @@ public interface IFontManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFontManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFontManager)) {
-                return (IFontManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFontManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFontManager)) {
+                return (IFontManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,12 +106,12 @@ public interface IFontManager extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(fontConfig, 1);
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(FontUpdateRequest.CREATOR);
-                int readInt = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FontUpdateRequest.CREATOR);
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int updateFontFamily = updateFontFamily(createTypedArrayList, readInt);
+                int iUpdateFontFamily = updateFontFamily(arrayListCreateTypedArrayList, i3);
                 parcel2.writeNoException();
-                parcel2.writeInt(updateFontFamily);
+                parcel2.writeInt(iUpdateFontFamily);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -136,33 +136,33 @@ public interface IFontManager extends IInterface {
 
             @Override // com.android.internal.graphics.fonts.IFontManager
             public FontConfig getFontConfig() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFontManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FontConfig) obtain2.readTypedObject(FontConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFontManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FontConfig) parcelObtain2.readTypedObject(FontConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.graphics.fonts.IFontManager
             public int updateFontFamily(List<FontUpdateRequest> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFontManager.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IFontManager.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

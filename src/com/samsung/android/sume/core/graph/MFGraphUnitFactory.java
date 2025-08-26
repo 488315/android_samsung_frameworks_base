@@ -27,7 +27,7 @@ public abstract class MFGraphUnitFactory {
         builder.addCreator(AsyncFilter.class, new MediaFilterCreator() { // from class: com.samsung.android.sume.core.graph.MFGraphUnitFactory$$ExternalSyntheticLambda0
             @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
             public final MediaFilter newFilter(MediaFilterFactory mediaFilterFactory, MFDescriptor mFDescriptor, MediaFilter mediaFilter) {
-                return MFGraphUnitFactory.this.parallelizeFilter(mediaFilterFactory, mFDescriptor, mediaFilter);
+                return this.f$0.parallelizeFilter(mediaFilterFactory, mFDescriptor, mediaFilter);
             }
         });
         builder.addBufferChannelSupplier(new MFGraph$Builder$$ExternalSyntheticLambda0(this));

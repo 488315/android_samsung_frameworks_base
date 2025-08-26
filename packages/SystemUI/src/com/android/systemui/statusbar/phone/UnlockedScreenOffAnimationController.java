@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnlockedScreenOffAnimationController implements WakefulnessLifecycle.Observer, ScreenOffAnimation {
     public float animatorDurationScale = 1.0f;
@@ -94,24 +93,24 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
         this.shadeLockscreenInteractorLazy = lazy4;
         this.panelExpansionInteractorLazy = lazy5;
         this.handler = handler;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(LsRune.AOD_FULLSCREEN ? 650L : 500L);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(LsRune.AOD_FULLSCREEN ? 650L : 500L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                LightRevealScrim lightRevealScrim = UnlockedScreenOffAnimationController.this.lightRevealScrim;
+                LightRevealScrim lightRevealScrim = this.this$0.lightRevealScrim;
                 if (!((lightRevealScrim == null ? null : lightRevealScrim).revealEffect instanceof CircleReveal)) {
                     if (lightRevealScrim == null) {
                         lightRevealScrim = null;
                     }
                     lightRevealScrim.setRevealAmount(((Float) valueAnimator.getAnimatedValue()).floatValue());
                     boolean z = LsRune.AOD_FULLSCREEN;
-                    final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = UnlockedScreenOffAnimationController.this.helper;
+                    final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = this.this$0.helper;
                     Consumer consumer = new Consumer() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$1.1
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            SecUnlockedScreenOffAnimationHelper.this.onAmountChanged(((Number) obj).floatValue());
+                            secUnlockedScreenOffAnimationHelper2.onAmountChanged(((Number) obj).floatValue());
                         }
                     };
                     Float f = (Float) valueAnimator.getAnimatedValue();
@@ -120,18 +119,18 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
                         consumer.accept(f);
                     }
                 }
-                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = UnlockedScreenOffAnimationController.this;
+                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = this.this$0;
                 LightRevealScrim lightRevealScrim2 = unlockedScreenOffAnimationController.lightRevealScrim;
                 if ((lightRevealScrim2 != null ? lightRevealScrim2 : null).interpolatedRevealAmount >= 0.1f || !unlockedScreenOffAnimationController.interactionJankMonitor.isInstrumenting(40)) {
                     return;
                 }
-                UnlockedScreenOffAnimationController.this.interactionJankMonitor.end(40);
+                this.this$0.interactionJankMonitor.end(40);
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
-                LightRevealScrim lightRevealScrim = UnlockedScreenOffAnimationController.this.lightRevealScrim;
+                LightRevealScrim lightRevealScrim = this.this$0.lightRevealScrim;
                 if (!((lightRevealScrim == null ? null : lightRevealScrim).revealEffect instanceof CircleReveal)) {
                     if (lightRevealScrim == null) {
                         lightRevealScrim = null;
@@ -139,11 +138,11 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
                     lightRevealScrim.setRevealAmount(1.0f);
                 }
                 boolean z = LsRune.AOD_FULLSCREEN;
-                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = UnlockedScreenOffAnimationController.this.helper;
+                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = this.this$0.helper;
                 Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$2$onAnimationCancel$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = SecUnlockedScreenOffAnimationHelper.this;
+                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = secUnlockedScreenOffAnimationHelper2;
                         SecUnlockedScreenOffAnimationHelper.logD("onAnimationCancel deviceInteractive=" + secUnlockedScreenOffAnimationHelper3.deviceInteractive);
                         secUnlockedScreenOffAnimationHelper3.onAmountChanged(secUnlockedScreenOffAnimationHelper3.deviceInteractive ? 1.0f : 0.0f);
                     }
@@ -152,15 +151,15 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = UnlockedScreenOffAnimationController.this;
+                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = this.this$0;
                 unlockedScreenOffAnimationController.lightRevealAnimationPlaying = false;
                 unlockedScreenOffAnimationController.interactionJankMonitor.end(40);
                 boolean z = LsRune.AOD_FULLSCREEN;
-                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = UnlockedScreenOffAnimationController.this.helper;
+                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = this.this$0.helper;
                 Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$2$onAnimationEnd$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = SecUnlockedScreenOffAnimationHelper.this;
+                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = secUnlockedScreenOffAnimationHelper2;
                         secUnlockedScreenOffAnimationHelper3.getClass();
                         if (LsRune.AOD_TSP_CONTROL && secUnlockedScreenOffAnimationHelper3.aodAmbientWallpaperHelper.isAODFullScreenMode()) {
                             secUnlockedScreenOffAnimationHelper3.aodTouchModeManager.setTouchMode(AODTouchModeManager.TouchMode.DOUBLE);
@@ -186,14 +185,14 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
-                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = UnlockedScreenOffAnimationController.this;
+                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = this.this$0;
                 unlockedScreenOffAnimationController.interactionJankMonitor.begin(((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) unlockedScreenOffAnimationController.notifShadeWindowControllerLazy.get())).mWindowRootView, 40);
                 boolean z = LsRune.AOD_FULLSCREEN;
-                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = UnlockedScreenOffAnimationController.this.helper;
+                final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper2 = this.this$0.helper;
                 Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$lightRevealAnimator$1$2$onAnimationStart$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = SecUnlockedScreenOffAnimationHelper.this;
+                        SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper3 = secUnlockedScreenOffAnimationHelper2;
                         SecUnlockedScreenOffAnimationHelper.logD("onAnimationStart needUpdateSetLockScreenShown=" + secUnlockedScreenOffAnimationHelper3.needUpdateSetLockScreenShown);
                         if (secUnlockedScreenOffAnimationHelper3.needUpdateSetLockScreenShown) {
                             return;
@@ -205,7 +204,7 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
                 }, z);
             }
         });
-        this.lightRevealAnimator = ofFloat;
+        this.lightRevealAnimator = valueAnimatorOfFloat;
         this.startLightRevealCallback = new UnlockedScreenOffAnimationController$special$$inlined$namedRunnable$1("startLightReveal", this);
         this.animatorDurationScaleObserver = new ContentObserver() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$animatorDurationScaleObserver$1
             {
@@ -214,7 +213,7 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
 
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = UnlockedScreenOffAnimationController.this;
+                UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = this.this$0;
                 unlockedScreenOffAnimationController.animatorDurationScale = WindowManager.fixScale(unlockedScreenOffAnimationController.globalSettings.getFloat(SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE, 1.0f));
             }
         };
@@ -222,7 +221,7 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
 
     @Override // com.android.systemui.statusbar.phone.ScreenOffAnimation
     public final void animateInKeyguard(View view, final KeyguardSecVisibilityHelper$mSetVisibleEndRunnable$1 keyguardSecVisibilityHelper$mSetVisibleEndRunnable$1) {
-        String str;
+        String id;
         ClockConfig config;
         this.shouldAnimateInKeyguard = false;
         view.setAlpha(0.0f);
@@ -241,7 +240,7 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
         AnimationProperties animationProperties2 = new AnimationProperties();
         animationProperties2.delay = 0L;
         animationProperties2.duration = j;
-        animationProperties2.mAnimationEndAction = new Consumer() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$animateInKeyguard$1
+        animationProperties2.mAnimationEndAction = new Consumer() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController.animateInKeyguard.1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 ((KeyguardViewMediator) UnlockedScreenOffAnimationController.this.keyguardViewMediatorLazy.get()).maybeHandlePendingLock();
@@ -256,7 +255,7 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
                 unlockedScreenOffAnimationController.interactionJankMonitor.end(41);
             }
         };
-        animationProperties2.mAnimationCancelAction = new Consumer() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$animateInKeyguard$2
+        animationProperties2.mAnimationCancelAction = new Consumer() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController.animateInKeyguard.2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 UnlockedScreenOffAnimationController unlockedScreenOffAnimationController = UnlockedScreenOffAnimationController.this;
@@ -270,13 +269,13 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
         if (windowRootView == null) {
             throw new IllegalStateException("Required value was null.");
         }
-        InteractionJankMonitor.Configuration.Builder withView = InteractionJankMonitor.Configuration.Builder.withView(41, windowRootView);
+        InteractionJankMonitor.Configuration.Builder builderWithView = InteractionJankMonitor.Configuration.Builder.withView(41, windowRootView);
         ClockController clockController = ((KeyguardClockInteractor) this.statusBarStateControllerImpl.mKeyguardClockInteractorLazy.get()).clock$receiver.clock;
-        if (clockController == null || (config = clockController.getConfig()) == null || (str = config.getId()) == null) {
+        if (clockController == null || (config = clockController.getConfig()) == null || (id = config.getId()) == null) {
             Log.e(KeyguardClockInteractorKt.TAG, "No clock is available");
-            str = "MISSING_CLOCK_ID";
+            id = "MISSING_CLOCK_ID";
         }
-        this.interactionJankMonitor.begin(withView.setTag(str));
+        this.interactionJankMonitor.begin(builderWithView.setTag(id));
     }
 
     @Override // com.android.systemui.statusbar.phone.ScreenOffAnimation
@@ -388,17 +387,17 @@ public final class UnlockedScreenOffAnimationController implements WakefulnessLi
         }
         boolean z = LsRune.AOD_FULLSCREEN;
         final SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = this.helper;
-        Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$startAnimation$1
+        Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController.startAnimation.1
             @Override // java.lang.Runnable
             public final void run() {
-                SecUnlockedScreenOffAnimationHelper.this.onPrepare();
+                secUnlockedScreenOffAnimationHelper.onPrepare();
             }
         }, z);
         this.decidedToAnimateGoingToSleep = Boolean.TRUE;
         this.shouldAnimateInKeyguard = !z;
         this.lightRevealAnimationPlaying = z;
         DejankUtils.postAfterTraversal(this.startLightRevealCallback);
-        this.handler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$startAnimation$2
+        this.handler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController.startAnimation.2
             @Override // java.lang.Runnable
             public final void run() {
                 if (UnlockedScreenOffAnimationController.this.powerManager.isInteractive(0)) {

@@ -105,11 +105,11 @@ public class CocktailProviderInfo implements Parcelable {
 
     public static CocktailProviderInfo create(Context context, ResolveInfo resolveInfo, ComponentName componentName, XmlResourceParser xmlResourceParser, int i, int i2) {
         PackageManager packageManager = context.getPackageManager();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 Resources resourcesForApplicationAsUser = packageManager.getResourcesForApplicationAsUser(componentName.getPackageName(), UserHandle.getUserId(resolveInfo.activityInfo.applicationInfo.uid));
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 try {
                     CocktailProviderInfo cocktailProviderInfo = new CocktailProviderInfo(context, packageManager, resourcesForApplicationAsUser, componentName, xmlResourceParser, resolveInfo, i2);
                     if (enforceValidCategory(i, cocktailProviderInfo)) {
@@ -127,11 +127,11 @@ public class CocktailProviderInfo implements Parcelable {
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "failed to load find package", e);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return null;
             }
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -142,15 +142,15 @@ public class CocktailProviderInfo implements Parcelable {
         this.icon = xmlResourceParser.getAttributeResourceValue(null, "icon", 0);
         this.label = xmlResourceParser.getAttributeResourceValue(null, "label", 0);
         this.description = xmlResourceParser.getAttributeResourceValue(null, "description", 0);
-        String loadXmlString = loadXmlString(xmlResourceParser, resources, COCKTAIL_CATEGORY, "normal");
-        if (TextUtils.isEmpty(loadXmlString)) {
+        String strLoadXmlString = loadXmlString(xmlResourceParser, resources, COCKTAIL_CATEGORY, "normal");
+        if (TextUtils.isEmpty(strLoadXmlString)) {
             this.category = 1;
         } else {
             TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter('|');
-            simpleStringSplitter.setString(loadXmlString);
+            simpleStringSplitter.setString(strLoadXmlString);
             while (simpleStringSplitter.hasNext()) {
-                String trim = simpleStringSplitter.next().trim();
-                int categoryId = getCategoryId(trim);
+                String strTrim = simpleStringSplitter.next().trim();
+                int categoryId = getCategoryId(strTrim);
                 if (categoryId != -1) {
                     if (categoryId != 4) {
                         if (categoryId != 8 && categoryId != 16) {
@@ -165,7 +165,7 @@ public class CocktailProviderInfo implements Parcelable {
                     this.category = categoryId;
                     break;
                 }
-                Log.e(TAG, "Provider: " + componentName + " specified an invalid catetory of " + trim);
+                Log.e(TAG, "Provider: " + componentName + " specified an invalid catetory of " + strTrim);
                 this.category = -1;
                 return;
             }
@@ -186,9 +186,9 @@ public class CocktailProviderInfo implements Parcelable {
         this.updatePeriodMillis = loadXmlInt(xmlResourceParser, resources, COCKTAIL_UPDATE_TIME, 0);
         this.permitVisibilityChanged = loadXmlBoolean(xmlResourceParser, resources, COCKTAIL_PERMIT_VISIBILITY_CHANGED, false);
         this.pullToRefresh = loadXmlBoolean(xmlResourceParser, resources, COCKTAIL_PULL_TO_REFRESH, false);
-        String loadXmlString2 = loadXmlString(xmlResourceParser, resources, COCKTAIL_CONFIGURE, null);
-        if (loadXmlString2 != null) {
-            this.configure = new ComponentName(componentName.getPackageName(), loadXmlString2);
+        String strLoadXmlString2 = loadXmlString(xmlResourceParser, resources, COCKTAIL_CONFIGURE, null);
+        if (strLoadXmlString2 != null) {
+            this.configure = new ComponentName(componentName.getPackageName(), strLoadXmlString2);
         }
         this.cscPreviewImage = loadXmlBoolean(xmlResourceParser, resources, COCKTAIL_CSC_PREVIEW_IMAGE, false);
         if (this.category == 512) {
@@ -205,14 +205,14 @@ public class CocktailProviderInfo implements Parcelable {
     }
 
     public static int getCategoryIds(ArrayList<String> arrayList) {
-        int i = 0;
+        int categoryId = 0;
         if (arrayList != null && arrayList.size() != 0) {
             Iterator<String> it = arrayList.iterator();
             while (it.hasNext()) {
-                i |= getCategoryId(it.next());
+                categoryId |= getCategoryId(it.next());
             }
         }
-        return i;
+        return categoryId;
     }
 
     private static int getCategoryId(String str) {

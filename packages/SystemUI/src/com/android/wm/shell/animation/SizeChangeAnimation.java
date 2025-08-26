@@ -15,7 +15,6 @@ import android.view.animation.TranslateAnimation;
 import com.android.wm.shell.bubbles.bar.BubbleBarExpandedView;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SizeChangeAnimation {
     public final Animation mAnimation;
@@ -75,11 +74,11 @@ public class SizeChangeAnimation {
         boolean z = (rect2.height() + (rect2.width() - rect.width())) - rect.height() >= 0;
         long j = (long) (1000.0f * f2);
         float f3 = 1.0f - f2;
-        float height = ((rect.height() * f2) / rect2.height()) + f3;
+        float fHeight = ((rect.height() * f2) / rect2.height()) + f3;
         AnimationSet animationSet = new AnimationSet(true);
         Interpolator interpolator = Interpolators.LINEAR;
         animationSet.setInterpolator(interpolator);
-        ScaleAnimation scaleAnimation = new ScaleAnimation(((rect.width() * f2) / rect2.width()) + f3, 1.0f, height, 1.0f);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(((rect.width() * f2) / rect2.width()) + f3, 1.0f, fHeight, 1.0f);
         scaleAnimation.setDuration(j);
         long j2 = !z ? 1000 - j : 0L;
         scaleAnimation.setStartOffset(j2);
@@ -104,8 +103,8 @@ public class SizeChangeAnimation {
         animationSet.initialize(rect.width(), rect.height(), rect2.width(), rect2.height());
         this.mAnimation = animationSet;
         boolean z2 = (rect2.height() + (rect2.width() - rect.width())) - rect.height() >= 0;
-        float width = 1.0f / (((rect.width() * f2) / rect2.width()) + f3);
-        float height2 = 1.0f / (((rect.height() * f2) / rect2.height()) + f3);
+        float fWidth = 1.0f / (((rect.width() * f2) / rect2.width()) + f3);
+        float fHeight2 = 1.0f / (((rect.height() * f2) / rect2.height()) + f3);
         AnimationSet animationSet2 = new AnimationSet(true);
         animationSet2.setInterpolator(interpolator);
         AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
@@ -114,7 +113,7 @@ public class SizeChangeAnimation {
             alphaAnimation.setStartOffset(1000 - j);
         }
         animationSet2.addAnimation(alphaAnimation);
-        ScaleAnimation scaleAnimation3 = new ScaleAnimation(width, width, height2, height2);
+        ScaleAnimation scaleAnimation3 = new ScaleAnimation(fWidth, fWidth, fHeight2, fHeight2);
         scaleAnimation3.setDuration(1000L);
         animationSet2.addAnimation(scaleAnimation3);
         animationSet2.initialize(rect.width(), rect.height(), rect2.width(), rect2.height());

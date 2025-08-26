@@ -5,7 +5,6 @@ import com.google.dexmaker.dx.rop.type.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TypeId {
     public static final TypeId BOOLEAN;
@@ -41,17 +40,17 @@ public final class TypeId {
         TypeId typeId9 = new TypeId(Type.VOID);
         new TypeId(Type.OBJECT);
         new TypeId(Type.STRING);
-        HashMap hashMap = new HashMap();
-        PRIMITIVE_TO_TYPE = hashMap;
-        hashMap.put(Boolean.TYPE, typeId);
-        hashMap.put(Byte.TYPE, typeId2);
-        hashMap.put(Character.TYPE, typeId3);
-        hashMap.put(Double.TYPE, typeId4);
-        hashMap.put(Float.TYPE, typeId5);
-        hashMap.put(Integer.TYPE, typeId6);
-        hashMap.put(Long.TYPE, typeId7);
-        hashMap.put(Short.TYPE, typeId8);
-        hashMap.put(Void.TYPE, typeId9);
+        HashMap map = new HashMap();
+        PRIMITIVE_TO_TYPE = map;
+        map.put(Boolean.TYPE, typeId);
+        map.put(Byte.TYPE, typeId2);
+        map.put(Character.TYPE, typeId3);
+        map.put(Double.TYPE, typeId4);
+        map.put(Float.TYPE, typeId5);
+        map.put(Integer.TYPE, typeId6);
+        map.put(Long.TYPE, typeId7);
+        map.put(Short.TYPE, typeId8);
+        map.put(Void.TYPE, typeId9);
     }
 
     public TypeId(String str, Type type) {
@@ -67,12 +66,12 @@ public final class TypeId {
         if (cls.isPrimitive()) {
             return (TypeId) ((HashMap) PRIMITIVE_TO_TYPE).get(cls);
         }
-        String replace = cls.getName().replace('.', '/');
+        String strReplace = cls.getName().replace('.', '/');
         if (!cls.isArray()) {
-            replace = "L" + replace + ';';
+            strReplace = "L" + strReplace + ';';
         }
         try {
-            return new TypeId(replace, replace.equals("V") ? Type.VOID : Type.intern(replace));
+            return new TypeId(strReplace, strReplace.equals("V") ? Type.VOID : Type.intern(strReplace));
         } catch (NullPointerException unused) {
             throw new NullPointerException("descriptor == null");
         }

@@ -3,13 +3,20 @@ package com.android.systemui.volume.panel.component.captioning.ui.viewmodel;
 import android.content.Context;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.internal.logging.UiEventLogger;
+import com.android.systemui.R;
+import com.android.systemui.accessibility.data.repository.CaptioningRepositoryImpl;
 import com.android.systemui.accessibility.domain.interactor.CaptioningInteractor;
 import com.android.systemui.accessibility.domain.interactor.CaptioningInteractor$special$$inlined$map$1;
+import com.android.systemui.common.shared.model.Icon;
+import com.android.systemui.volume.panel.component.button.ui.viewmodel.ButtonViewModel;
 import com.android.systemui.volume.panel.ui.VolumePanelUiEvent;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -17,7 +24,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CaptioningViewModel {
     public final ReadonlyStateFlow buttonViewModel;
@@ -25,6 +31,53 @@ public final class CaptioningViewModel {
     public final Context context;
     public final CoroutineScope coroutineScope;
     public final UiEventLogger uiEventLogger;
+
+    /* renamed from: com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$setIsSystemAudioCaptioningEnabled$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $enabled;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$enabled = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return CaptioningViewModel.this.new AnonymousClass1(this.$enabled, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CaptioningInteractor captioningInteractor = CaptioningViewModel.this.captioningInteractor;
+                boolean z = this.$enabled;
+                this.label = 1;
+                Object isSystemAudioCaptioningEnabled = ((CaptioningRepositoryImpl) captioningInteractor.repository).setIsSystemAudioCaptioningEnabled(z, this);
+                if (isSystemAudioCaptioningEnabled != coroutineSingletons) {
+                    isSystemAudioCaptioningEnabled = Unit.INSTANCE;
+                }
+                if (isSystemAudioCaptioningEnabled == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public CaptioningViewModel(Context context, CaptioningInteractor captioningInteractor, CoroutineScope coroutineScope, UiEventLogger uiEventLogger) {
         this.context = context;
@@ -34,7 +87,6 @@ public final class CaptioningViewModel {
         final CaptioningInteractor$special$$inlined$map$1 captioningInteractor$special$$inlined$map$1 = captioningInteractor.isSystemAudioCaptioningEnabled;
         Flow flow = new Flow() { // from class: com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -63,80 +115,47 @@ public final class CaptioningViewModel {
                     this.this$0 = captioningViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L62
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        com.android.systemui.common.shared.model.Icon$Resource r7 = new com.android.systemui.common.shared.model.Icon$Resource
-                        if (r6 == 0) goto L40
-                        r2 = 2131233697(0x7f080ba1, float:1.8083539E38)
-                        goto L43
-                    L40:
-                        r2 = 2131233698(0x7f080ba2, float:1.808354E38)
-                    L43:
-                        r4 = 0
-                        r7.<init>(r2, r4)
-                        com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel r2 = r5.this$0
-                        android.content.Context r2 = r2.context
-                        r4 = 2131957408(0x7f1316a0, float:1.95514E38)
-                        java.lang.String r2 = r2.getString(r4)
-                        com.android.systemui.volume.panel.component.button.ui.viewmodel.ButtonViewModel r4 = new com.android.systemui.volume.panel.component.button.ui.viewmodel.ButtonViewModel
-                        r4.<init>(r7, r2, r6)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r4, r0)
-                        if (r5 != r1) goto L62
-                        return r1
-                    L62:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.captioning.ui.viewmodel.CaptioningViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                        ButtonViewModel buttonViewModel = new ButtonViewModel(new Icon.Resource(zBooleanValue ? R.drawable.ic_volume_odi_captions : R.drawable.ic_volume_odi_captions_disabled, null), this.this$0.context.getString(R.string.volume_panel_captioning_title), zBooleanValue);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(buttonViewModel, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = captioningInteractor$special$$inlined$map$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion.getClass();
@@ -145,6 +164,6 @@ public final class CaptioningViewModel {
 
     public final void setIsSystemAudioCaptioningEnabled(boolean z) {
         this.uiEventLogger.logWithPosition(VolumePanelUiEvent.VOLUME_PANEL_LIVE_CAPTION_TOGGLE_CLICKED, 0, (String) null, z ? 1 : 0);
-        CoroutineTracingKt.launchTraced$default(this.coroutineScope, null, null, new CaptioningViewModel$setIsSystemAudioCaptioningEnabled$1(this, z, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.coroutineScope, null, null, new AnonymousClass1(z, null), 7);
     }
 }

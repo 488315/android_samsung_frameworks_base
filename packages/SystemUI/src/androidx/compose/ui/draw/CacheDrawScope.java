@@ -13,7 +13,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CacheDrawScope implements Density {
     public BuildDrawCacheParams cacheParams = EmptyBuildDrawCacheParams.INSTANCE;
@@ -22,15 +21,15 @@ public final class CacheDrawScope implements Density {
     public Function0 graphicsContextProvider;
 
     /* renamed from: record-TdoYBX4$default, reason: not valid java name */
-    public static void m361recordTdoYBX4$default(final CacheDrawScope cacheDrawScope, GraphicsLayer graphicsLayer, final Function1 function1) {
+    public static void m362recordTdoYBX4$default(final CacheDrawScope cacheDrawScope, GraphicsLayer graphicsLayer, final Function1 function1) {
         final LayoutDirection layoutDirection = cacheDrawScope.cacheParams.getLayoutDirection();
-        long m863toIntSizeuvyYCjk = IntSizeKt.m863toIntSizeuvyYCjk(cacheDrawScope.cacheParams.mo360getSizeNHjbRc());
+        long jM865toIntSizeuvyYCjk = IntSizeKt.m865toIntSizeuvyYCjk(cacheDrawScope.cacheParams.mo361getSizeNHjbRc());
         final LayoutNodeDrawScope layoutNodeDrawScope = cacheDrawScope.contentDrawScope;
         layoutNodeDrawScope.getClass();
         CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
         final Density density = canvasDrawScope.drawContext.getDensity();
         final LayoutDirection layoutDirection2 = canvasDrawScope.drawContext.getLayoutDirection();
-        layoutNodeDrawScope.m646recordJVtK1S4(m863toIntSizeuvyYCjk, graphicsLayer, new Function1() { // from class: androidx.compose.ui.draw.CacheDrawScope$record$1$1
+        layoutNodeDrawScope.m648recordJVtK1S4(jM865toIntSizeuvyYCjk, graphicsLayer, new Function1() { // from class: androidx.compose.ui.draw.CacheDrawScope$record$1$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -38,7 +37,7 @@ public final class CacheDrawScope implements Density {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DrawScope drawScope = (DrawScope) obj;
                 CanvasDrawScope$drawContext$1 drawContext = drawScope.getDrawContext();
                 Density density2 = cacheDrawScope;
@@ -46,7 +45,7 @@ public final class CacheDrawScope implements Density {
                 drawContext.setDensity(density2);
                 drawContext.setLayoutDirection(layoutDirection3);
                 try {
-                    Function1.this.mo779invoke(layoutNodeDrawScope);
+                    function1.mo781invoke(layoutNodeDrawScope);
                     CanvasDrawScope$drawContext$1 drawContext2 = drawScope.getDrawContext();
                     Density density3 = density;
                     LayoutDirection layoutDirection4 = layoutDirection2;
@@ -76,16 +75,16 @@ public final class CacheDrawScope implements Density {
     }
 
     public final DrawResult onDrawBehind(final Function1 function1) {
-        return onDrawWithContent(new Function1() { // from class: androidx.compose.ui.draw.CacheDrawScope$onDrawBehind$1
+        return onDrawWithContent(new Function1() { // from class: androidx.compose.ui.draw.CacheDrawScope.onDrawBehind.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ContentDrawScope contentDrawScope = (ContentDrawScope) obj;
-                Function1.this.mo779invoke(contentDrawScope);
+                function1.mo781invoke(contentDrawScope);
                 ((LayoutNodeDrawScope) contentDrawScope).drawContent();
                 return Unit.INSTANCE;
             }

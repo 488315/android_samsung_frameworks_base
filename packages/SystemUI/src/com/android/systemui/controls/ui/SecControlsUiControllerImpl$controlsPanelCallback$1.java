@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsUiControllerImpl$controlsPanelCallback$1 {
     public final /* synthetic */ SecControlsUiControllerImpl this$0;
@@ -48,10 +47,9 @@ public final class SecControlsUiControllerImpl$controlsPanelCallback$1 {
                 final PendingIntent pendingIntent2 = pendingIntent;
                 TaskViewFactoryController.this.mShellExecutor.execute(new TaskViewFactoryController$TaskViewFactoryImpl$$ExternalSyntheticLambda0(taskViewFactoryImpl, context, secControlsUiControllerImpl3.uiExecutor, new Consumer() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$controlsPanelCallback$1$onPanelUpdated$1.1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.controls.ui.SecControlsUiControllerImpl$controlsPanelCallback$1$onPanelUpdated$1$1$1, reason: invalid class name and collision with other inner class name */
-                    final /* synthetic */ class C00921 extends FunctionReferenceImpl implements Function0 {
-                        public C00921(Object obj) {
+                    final /* synthetic */ class C01761 extends FunctionReferenceImpl implements Function0 {
+                        public C01761(Object obj) {
                             super(0, obj, Runnable.class, "run", "run()V", 0);
                         }
 
@@ -80,7 +78,7 @@ public final class SecControlsUiControllerImpl$controlsPanelCallback$1 {
                         taskView.getClass();
                         SecControlsActivity$onStart$1$1 secControlsActivity$onStart$1$1 = secControlsUiControllerImpl3.onDismiss;
                         secControlsActivity$onStart$1$1.getClass();
-                        PanelTaskViewController panelTaskViewController = new PanelTaskViewController(context2, delayableExecutor, pendingIntent3, taskView, new C00921(secControlsActivity$onStart$1$1));
+                        PanelTaskViewController panelTaskViewController = new PanelTaskViewController(context2, delayableExecutor, pendingIntent3, taskView, new C01761(secControlsActivity$onStart$1$1));
                         frameLayout2.addView(taskView);
                         panelTaskViewController.taskView.setListener(panelTaskViewController.uiExecutor, panelTaskViewController.stateCallback);
                         secControlsUiControllerImpl5.taskViewController = panelTaskViewController;

@@ -4,7 +4,6 @@ import com.android.systemui.kairos.util.Maybe;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda4;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EventsKt$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -20,12 +19,12 @@ public final /* synthetic */ class EventsKt$$ExternalSyntheticLambda0 implements
         TransactionScope transactionScope = (TransactionScope) obj;
         switch (this.$r8$classId) {
             case 0:
-                Object invoke = this.f$0.invoke(transactionScope, obj2);
-                if (invoke == null) {
+                Object objInvoke = this.f$0.invoke(transactionScope, obj2);
+                if (objInvoke == null) {
                     return Maybe.Absent.INSTANCE;
                 }
                 Maybe.Companion.getClass();
-                return Maybe.Present.m2573boximpl(invoke);
+                return Maybe.Present.m2590boximpl(objInvoke);
             default:
                 ((MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda4) this.f$0).invoke(transactionScope, obj2);
                 return obj2;

@@ -52,9 +52,9 @@ public class SemLockPatternUtils {
     }
 
     public boolean setLockCredential(String str, int i, String str2, int i2, int i3) {
-        LockscreenCredential createCredential = createCredential(str, i);
+        LockscreenCredential lockscreenCredentialCreateCredential = createCredential(str, i);
         try {
-            return this.mLockPatternUtils.setLockCredential(createCredential(str2, i2), createCredential, i3);
+            return this.mLockPatternUtils.setLockCredential(createCredential(str2, i2), lockscreenCredentialCreateCredential, i3);
         } catch (Exception e) {
             Log.i(TAG, "setLockCredential : catch exception", e);
             return false;
@@ -62,17 +62,17 @@ public class SemLockPatternUtils {
     }
 
     public boolean verifyCredential(String str, int i) {
-        LockscreenCredential createCredential = createCredential(str, this.mLockPatternUtils.getCredentialTypeForUser(i));
-        if (createCredential.isNone()) {
+        LockscreenCredential lockscreenCredentialCreateCredential = createCredential(str, this.mLockPatternUtils.getCredentialTypeForUser(i));
+        if (lockscreenCredentialCreateCredential.isNone()) {
             Log.i(TAG, "verifyCredential : credential is none.");
             return false;
         }
         try {
-            VerifyCredentialResponse verifyCredential = this.mLockPatternUtils.verifyCredential(createCredential, i, 0);
-            if (verifyCredential.getResponseCode() == 0) {
+            VerifyCredentialResponse verifyCredentialResponseVerifyCredential = this.mLockPatternUtils.verifyCredential(lockscreenCredentialCreateCredential, i, 0);
+            if (verifyCredentialResponseVerifyCredential.getResponseCode() == 0) {
                 return true;
             }
-            Log.i(TAG, "verifyCredential : return " + verifyCredential.getResponseCode());
+            Log.i(TAG, "verifyCredential : return " + verifyCredentialResponseVerifyCredential.getResponseCode());
             return false;
         } catch (Exception e) {
             Log.i(TAG, "verifyCredential : catch exception", e);
@@ -89,9 +89,9 @@ public class SemLockPatternUtils {
     }
 
     public boolean clearLock(String str, int i) {
-        LockscreenCredential createCredential = createCredential(str, this.mLockPatternUtils.getCredentialTypeForUser(i));
+        LockscreenCredential lockscreenCredentialCreateCredential = createCredential(str, this.mLockPatternUtils.getCredentialTypeForUser(i));
         try {
-            return this.mLockPatternUtils.setLockCredential(LockscreenCredential.createNone(), createCredential, i);
+            return this.mLockPatternUtils.setLockCredential(LockscreenCredential.createNone(), lockscreenCredentialCreateCredential, i);
         } catch (Exception e) {
             Log.i(TAG, "clearLock : catch exception", e);
             return false;

@@ -17,72 +17,72 @@ public class IPAddress {
         }
         int i = 0;
         for (int i2 = 0; i2 < 3; i2++) {
-            int indexOf = str.indexOf(46, i);
-            if (!isParseableIPv4Octet(str, i, indexOf)) {
+            int iIndexOf = str.indexOf(46, i);
+            if (!isParseableIPv4Octet(str, i, iIndexOf)) {
                 return false;
             }
-            i = indexOf + 1;
+            i = iIndexOf + 1;
         }
         return isParseableIPv4Octet(str, i, length);
     }
 
     public static boolean isValidIPv4WithNetmask(String str) {
-        int indexOf = str.indexOf("/");
-        if (indexOf < 1) {
+        int iIndexOf = str.indexOf("/");
+        if (iIndexOf < 1) {
             return false;
         }
-        String substring = str.substring(0, indexOf);
-        String substring2 = str.substring(indexOf + 1);
-        return isValidIPv4(substring) && (isValidIPv4(substring2) || isParseableIPv4Mask(substring2));
+        String strSubstring = str.substring(0, iIndexOf);
+        String strSubstring2 = str.substring(iIndexOf + 1);
+        return isValidIPv4(strSubstring) && (isValidIPv4(strSubstring2) || isParseableIPv4Mask(strSubstring2));
     }
 
     public static boolean isValidIPv6(String str) {
-        int indexOf;
+        int iIndexOf;
         if (str.length() == 0) {
             return false;
         }
-        char charAt = str.charAt(0);
-        if (charAt != ':' && Character.digit(charAt, 16) < 0) {
+        char cCharAt = str.charAt(0);
+        if (cCharAt != ':' && Character.digit(cCharAt, 16) < 0) {
             return false;
         }
         String str2 = str + ":";
         int i = 0;
         int i2 = 0;
         boolean z = false;
-        while (i < str2.length() && (indexOf = str2.indexOf(58, i)) >= i) {
+        while (i < str2.length() && (iIndexOf = str2.indexOf(58, i)) >= i) {
             if (i2 == 8) {
                 return false;
             }
-            if (i != indexOf) {
-                String substring = str2.substring(i, indexOf);
-                if (indexOf == str2.length() - 1 && substring.indexOf(46) > 0) {
+            if (i != iIndexOf) {
+                String strSubstring = str2.substring(i, iIndexOf);
+                if (iIndexOf == str2.length() - 1 && strSubstring.indexOf(46) > 0) {
                     i2++;
-                    if (i2 == 8 || !isValidIPv4(substring)) {
+                    if (i2 == 8 || !isValidIPv4(strSubstring)) {
                         return false;
                     }
-                } else if (!isParseableIPv6Segment(str2, i, indexOf)) {
+                } else if (!isParseableIPv6Segment(str2, i, iIndexOf)) {
                     return false;
                 }
             } else {
-                if (indexOf != 1 && indexOf != str2.length() - 1 && z) {
+                if (iIndexOf != 1 && iIndexOf != str2.length() - 1 && z) {
                     return false;
                 }
                 z = true;
             }
-            i = indexOf + 1;
+            i = iIndexOf + 1;
             i2++;
         }
         return i2 == 8 || z;
     }
 
     public static boolean isValidIPv6WithNetmask(String str) {
-        int indexOf = str.indexOf("/");
-        if (indexOf < 1) {
+        int iIndexOf = str.indexOf("/");
+        if (iIndexOf < 1) {
             return false;
         }
-        String substring = str.substring(0, indexOf);
-        String substring2 = str.substring(indexOf + 1);
-        return isValidIPv6(substring) && (isValidIPv6(substring2) || isParseableIPv6Mask(substring2));
+        String strSubstring = str.substring(0, iIndexOf);
+        String strSubstring2 = str.substring(iIndexOf + 1);
+        return isValidIPv6(strSubstring) && (isValidIPv6(strSubstring2) || isParseableIPv6Mask(strSubstring2));
     }
 
     private static boolean isParseableIPv4Mask(String str) {
@@ -112,11 +112,11 @@ public class IPAddress {
         int i8 = 0;
         while (i < i2) {
             int i9 = i + 1;
-            int digit = Character.digit(str.charAt(i), i3);
-            if (digit < 0) {
+            int iDigit = Character.digit(str.charAt(i), i3);
+            if (iDigit < 0) {
                 return false;
             }
-            i8 = (i8 * i3) + digit;
+            i8 = (i8 * i3) + iDigit;
             i = i9;
         }
         return (i8 >= i5) & (i8 <= i6);

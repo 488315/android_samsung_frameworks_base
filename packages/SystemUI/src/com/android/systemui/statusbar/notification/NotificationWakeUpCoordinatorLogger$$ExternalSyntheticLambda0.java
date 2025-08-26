@@ -7,14 +7,13 @@ import com.android.systemui.statusbar.StatusBarState;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -29,13 +28,13 @@ public final /* synthetic */ class NotificationWakeUpCoordinatorLogger$$External
                 double double1 = logMessage.getDouble1();
                 String str1 = logMessage.getStr1();
                 String str2 = logMessage.getStr2();
-                String statusBarState = StatusBarState.toString(logMessage.getInt1());
+                String string = StatusBarState.toString(logMessage.getInt1());
                 boolean bool1 = logMessage.getBool1();
                 StringBuilder sb = new StringBuilder("updateDozeAmount() inputLinear=");
                 sb.append(double1);
                 sb.append(" hardOverride=");
                 sb.append(str1);
-                MoveResult$$ExternalSyntheticOutline0.m(sb, " outputLinear=", str2, " state=", statusBarState);
+                MoveResult$$ExternalSyntheticOutline0.m(sb, " outputLinear=", str2, " state=", string);
                 sb.append(" changed=");
                 sb.append(bool1);
                 return sb.toString();

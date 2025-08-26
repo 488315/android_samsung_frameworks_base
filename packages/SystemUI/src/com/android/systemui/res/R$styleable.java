@@ -2,16 +2,15 @@ package com.android.systemui.res;
 
 import android.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class R$styleable {
+    public static final int[] Clock = null;
     public static final int[] AlphaTintDrawableWrapper = {R.attr.tint, R.attr.alpha};
     public static final int[] AnimatedImageView = {com.android.systemui.R.attr.hasOverlappingRendering};
     public static final int[] AutoReinflateContainer = {R.attr.layout};
     public static final int[] AutoSizingList = {com.android.systemui.R.attr.enableAutoSizing, com.android.systemui.R.attr.itemHeight};
     public static final int[] BatteryMeterView = {com.android.systemui.R.attr.frameColor, com.android.systemui.R.attr.textAppearance};
     public static final int[] CarrierText = {com.android.systemui.R.attr.allCaps, com.android.systemui.R.attr.debugLocation, com.android.systemui.R.attr.showAirplaneMode, com.android.systemui.R.attr.showMissingSim};
-    public static final int[] Clock = {com.android.systemui.R.attr.amPmStyle, com.android.systemui.R.attr.showDark};
     public static final int[] CropView = {com.android.systemui.R.attr.containerBackgroundColor, com.android.systemui.R.attr.handleColor, com.android.systemui.R.attr.handleThickness, com.android.systemui.R.attr.scrimAlpha, com.android.systemui.R.attr.scrimColor};
     public static final int[] DelayableMarqueeTextView = {com.android.systemui.R.attr.marqueeDelay};
     public static final int[] DreamOverlayDotImageView = {com.android.systemui.R.attr.dotColor};

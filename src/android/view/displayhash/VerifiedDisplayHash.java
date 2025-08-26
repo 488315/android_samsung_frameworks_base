@@ -104,17 +104,17 @@ public final class VerifiedDisplayHash implements Parcelable {
     }
 
     VerifiedDisplayHash(Parcel parcel) {
-        long readLong = parcel.readLong();
+        long j = parcel.readLong();
         Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-        String readString = parcel.readString();
-        byte[] createByteArray = parcel.createByteArray();
-        this.mTimeMillis = readLong;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, readLong);
+        String string = parcel.readString();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        this.mTimeMillis = j;
+        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, j);
         this.mBoundsInWindow = rect;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rect);
-        this.mHashAlgorithm = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mImageHash = createByteArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray);
+        this.mHashAlgorithm = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mImageHash = bArrCreateByteArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray);
     }
 }

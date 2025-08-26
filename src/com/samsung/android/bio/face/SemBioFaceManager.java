@@ -26,7 +26,6 @@ import android.os.Trace;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
-import com.samsung.android.bio.face.SemBioFaceManager;
 import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -299,16 +298,16 @@ public class SemBioFaceManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void authenticate(CryptoObject cryptoObject, CancellationSignal cancellationSignal, int i, AuthenticationCallback authenticationCallback, Handler handler, View view) {
         Bundle bundle;
         if (view != null) {
             Object tag = view.getTag();
-            if (tag instanceof Bundle) {
-                bundle = (Bundle) tag;
-                authenticate(cryptoObject, cancellationSignal, i, authenticationCallback, handler, this.mContext.getUserId(), bundle, view);
-            }
+            bundle = tag instanceof Bundle ? (Bundle) tag : null;
         }
-        bundle = null;
         authenticate(cryptoObject, cancellationSignal, i, authenticationCallback, handler, this.mContext.getUserId(), bundle, view);
     }
 
@@ -404,192 +403,111 @@ public class SemBioFaceManager {
     }
 
     public int getSecurityLevel(Context context) {
-        boolean isKeyguard = context == null ? false : isKeyguard(context.getOpPackageName());
+        boolean zIsKeyguard = context == null ? false : isKeyguard(context.getOpPackageName());
         if (this.mFaceManagerCompat.mHasFaceHAL) {
-            return this.mFaceManagerCompat.hGetSecurityLevel(isKeyguard);
+            return this.mFaceManagerCompat.hGetSecurityLevel(zIsKeyguard);
         }
         return 0;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x006d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x006d A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int getSepMappedAcquiredInfo(int r8, int r9) {
-        /*
-            r0 = 1009(0x3f1, float:1.414E-42)
-            r1 = 1011(0x3f3, float:1.417E-42)
-            r2 = 1013(0x3f5, float:1.42E-42)
-            r3 = 1007(0x3ef, float:1.411E-42)
-            r4 = 1015(0x3f7, float:1.422E-42)
-            r5 = 2
-            r6 = 3
-            r7 = 7
-            switch(r8) {
-                case 0: goto L7f;
-                case 1: goto L7e;
-                case 2: goto L7e;
-                case 3: goto L7d;
-                case 4: goto L7b;
-                case 5: goto L79;
-                case 6: goto L78;
-                case 7: goto L77;
-                case 8: goto L76;
-                case 9: goto L75;
-                case 10: goto L74;
-                case 11: goto L74;
-                case 12: goto L73;
-                case 13: goto L71;
-                case 14: goto L70;
-                case 15: goto L70;
-                case 16: goto L6f;
-                case 17: goto L6f;
-                case 18: goto L6f;
-                case 19: goto L6e;
-                case 20: goto L6d;
-                case 21: goto L6c;
-                case 22: goto L2c;
-                default: goto L10;
-            }
-        L10:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "getSepMappedAcquiredInfo: No data, "
-            r0.<init>(r1)
-            r0.append(r8)
-            java.lang.String r1 = ", "
-            r0.append(r1)
-            r0.append(r9)
-            java.lang.String r9 = r0.toString()
-            java.lang.String r0 = "SemBioFaceManager"
-            android.util.Log.d(r0, r9)
-            return r8
-        L2c:
-            r5 = 1001(0x3e9, float:1.403E-42)
-            if (r9 == r5) goto L6b
-            switch(r9) {
-                case 1005: goto L69;
-                case 1006: goto L66;
-                case 1007: goto L65;
-                case 1008: goto L62;
-                case 1009: goto L61;
-                default: goto L33;
-            }
-        L33:
-            switch(r9) {
-                case 1011: goto L60;
-                case 1012: goto L5d;
-                case 1013: goto L5c;
-                case 1014: goto L59;
-                case 1015: goto L58;
-                case 1016: goto L55;
-                case 1017: goto L52;
-                default: goto L36;
-            }
-        L36:
-            switch(r9) {
-                case 100001: goto L4e;
-                case 100002: goto L4a;
-                case 100003: goto L46;
-                case 100004: goto L42;
-                case 100005: goto L3e;
-                case 100006: goto L3a;
-                default: goto L39;
-            }
-        L39:
-            goto L6d
-        L3a:
-            r8 = 100006(0x186a6, float:1.40138E-40)
-            return r8
-        L3e:
-            r8 = 100005(0x186a5, float:1.40137E-40)
-            return r8
-        L42:
-            r8 = 100004(0x186a4, float:1.40135E-40)
-            return r8
-        L46:
-            r8 = 100003(0x186a3, float:1.40134E-40)
-            return r8
-        L4a:
-            r8 = 100002(0x186a2, float:1.40133E-40)
-            return r8
-        L4e:
-            r8 = 100001(0x186a1, float:1.40131E-40)
-            return r8
-        L52:
-            r8 = 1017(0x3f9, float:1.425E-42)
-            return r8
-        L55:
-            r8 = 1016(0x3f8, float:1.424E-42)
-            return r8
-        L58:
-            return r4
-        L59:
-            r8 = 1014(0x3f6, float:1.421E-42)
-            return r8
-        L5c:
-            return r2
-        L5d:
-            r8 = 1012(0x3f4, float:1.418E-42)
-            return r8
-        L60:
-            return r1
-        L61:
-            return r0
-        L62:
-            r8 = 1008(0x3f0, float:1.413E-42)
-            return r8
-        L65:
-            return r3
-        L66:
-            r8 = 1006(0x3ee, float:1.41E-42)
-            return r8
-        L69:
-            r8 = 4
-            return r8
-        L6b:
-            return r5
-        L6c:
-            return r6
-        L6d:
-            return r8
-        L6e:
-            return r5
-        L6f:
-            return r7
-        L70:
-            return r9
-        L71:
-            r8 = 1
-            return r8
-        L73:
-            return r7
-        L74:
-            return r5
-        L75:
-            return r0
-        L76:
-            return r1
-        L77:
-            return r2
-        L78:
-            return r3
-        L79:
-            r8 = 6
-            return r8
-        L7b:
-            r8 = 5
-            return r8
-        L7d:
-            return r4
-        L7e:
-            return r6
-        L7f:
-            r8 = 0
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.bio.face.SemBioFaceManager.getSepMappedAcquiredInfo(int, int):int");
+    public static int getSepMappedAcquiredInfo(int i, int i2) {
+        switch (i) {
+            case 0:
+                return 0;
+            case 1:
+            case 2:
+                return 3;
+            case 3:
+                return 1015;
+            case 4:
+                return 5;
+            case 5:
+                return 6;
+            case 6:
+                return 1007;
+            case 7:
+                return 1013;
+            case 8:
+                return 1011;
+            case 9:
+                return 1009;
+            case 10:
+            case 11:
+                return 2;
+            case 12:
+                return 7;
+            case 13:
+                return 1;
+            case 14:
+            case 15:
+                return i2;
+            case 16:
+            case 17:
+            case 18:
+                return 7;
+            case 19:
+                return 2;
+            case 20:
+                return i;
+            case 21:
+                return 3;
+            case 22:
+                if (i2 == 1001) {
+                    return 1001;
+                }
+                switch (i2) {
+                    case 1005:
+                        return 4;
+                    case 1006:
+                        return 1006;
+                    case 1007:
+                        return 1007;
+                    case 1008:
+                        return 1008;
+                    case 1009:
+                        return 1009;
+                    default:
+                        switch (i2) {
+                            case 1011:
+                                return 1011;
+                            case 1012:
+                                return 1012;
+                            case 1013:
+                                return 1013;
+                            case 1014:
+                                return 1014;
+                            case 1015:
+                                return 1015;
+                            case 1016:
+                                return 1016;
+                            case 1017:
+                                return 1017;
+                            default:
+                                switch (i2) {
+                                    case 100001:
+                                        return 100001;
+                                    case 100002:
+                                        return 100002;
+                                    case 100003:
+                                        return 100003;
+                                    case 100004:
+                                        return 100004;
+                                    case 100005:
+                                        return 100005;
+                                    case 100006:
+                                        return 100006;
+                                }
+                        }
+                }
+            default:
+                Log.d(TAG, "getSepMappedAcquiredInfo: No data, " + i + ", " + i2);
+                return i;
+        }
     }
 
     public static int getSepMappedError(int i, int i2) {
@@ -836,7 +754,7 @@ public class SemBioFaceManager {
                 cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.samsung.android.bio.face.SemBioFaceManager$FaceManagerCompat$$ExternalSyntheticLambda0
                     @Override // android.os.CancellationSignal.OnCancelListener
                     public final void onCancel() {
-                        SemBioFaceManager.FaceManagerCompat.this.lambda$hAuthenticate$0();
+                        this.f$0.lambda$hAuthenticate$0();
                     }
                 });
             }
@@ -851,9 +769,9 @@ public class SemBioFaceManager {
                 try {
                     try {
                         Trace.beginSection("SemBioFaceManager#hAuthenticate");
-                        FaceAuthenticateOptions build = new FaceAuthenticateOptions.Builder().setUserId(i2).setOpPackageName(SemBioFaceManager.this.mContext.getOpPackageName()).build();
+                        FaceAuthenticateOptions faceAuthenticateOptionsBuild = new FaceAuthenticateOptions.Builder().setUserId(i2).setOpPackageName(SemBioFaceManager.this.mContext.getOpPackageName()).build();
                         SemBioFaceManager semBioFaceManager = SemBioFaceManager.this;
-                        semBioFaceManager.mAuthRequestId = this.mServiceHAL.semAuthenticate(semBioFaceManager.mToken, opId, this.mServiceReceiverHAL, build, bundle2, fidoRequestData);
+                        semBioFaceManager.mAuthRequestId = this.mServiceHAL.semAuthenticate(semBioFaceManager.mToken, opId, this.mServiceReceiverHAL, faceAuthenticateOptionsBuild, bundle2, fidoRequestData);
                     } catch (Exception e) {
                         Log.w(SemBioFaceManager.TAG, "hAuthenticate: " + e.getMessage());
                         sendAuthError(authenticationCallback, 5);
@@ -885,7 +803,7 @@ public class SemBioFaceManager {
                 SemBioFaceManager.this.mHandler.post(new Runnable() { // from class: com.samsung.android.bio.face.SemBioFaceManager$FaceManagerCompat$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemBioFaceManager.AuthenticationCallback.this.onAuthenticationError(i, null);
+                        authenticationCallback.onAuthenticationError(i, null);
                     }
                 });
             }

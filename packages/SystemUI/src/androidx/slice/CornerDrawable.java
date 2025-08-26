@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CornerDrawable extends InsetDrawable {
     public final float mCornerRadius;
@@ -21,10 +20,10 @@ public class CornerDrawable extends InsetDrawable {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.clipPath(this.mPath);
         super.draw(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     @Override // android.graphics.drawable.InsetDrawable, android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable

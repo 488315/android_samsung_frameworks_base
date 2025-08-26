@@ -12,13 +12,13 @@ public final class HidlFaceSensorConfig extends SensorProps {
     private int mStrength;
 
     public void parse(String str, Context context) throws IllegalArgumentException {
-        String[] split = str.split(":");
-        if (split.length < 3) {
+        String[] strArrSplit = str.split(":");
+        if (strArrSplit.length < 3) {
             throw new IllegalArgumentException();
         }
-        this.mSensorId = Integer.parseInt(split[0]);
-        this.mModality = Integer.parseInt(split[1]);
-        this.mStrength = Integer.parseInt(split[2]);
+        this.mSensorId = Integer.parseInt(strArrSplit[0]);
+        this.mModality = Integer.parseInt(strArrSplit[1]);
+        this.mStrength = Integer.parseInt(strArrSplit[2]);
         mapHidlToAidlFaceSensorConfigurations(context);
     }
 

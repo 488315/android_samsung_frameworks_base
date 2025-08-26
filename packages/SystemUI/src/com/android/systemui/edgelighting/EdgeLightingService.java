@@ -1,8 +1,10 @@
 package com.android.systemui.edgelighting;
 
 import android.app.ActivityManager;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.SemStatusBarManager;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -17,8 +19,13 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Binder;
@@ -28,6 +35,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Message;
+import android.os.Parcelable;
 import android.os.PowerManager;
 import android.os.Process;
 import android.os.RemoteException;
@@ -45,6 +53,7 @@ import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyn
 import com.android.systemui.R;
 import com.android.systemui.edgelighting.EdgeLightingService;
 import com.android.systemui.edgelighting.data.EdgeLightingSettingItem;
+import com.android.systemui.edgelighting.data.policy.PolicyInfo;
 import com.android.systemui.edgelighting.device.EdgeLightingCoverManager;
 import com.android.systemui.edgelighting.effect.container.EdgeLightingDialog;
 import com.android.systemui.edgelighting.effect.container.NotificationEffect;
@@ -65,11 +74,14 @@ import com.android.systemui.edgelighting.scheduler.NotificationLightingScheduler
 import com.android.systemui.edgelighting.turnover.CallStateObserver;
 import com.android.systemui.edgelighting.turnover.TurnOverEdgeLighting;
 import com.android.systemui.edgelighting.utils.AppIconCache;
+import com.android.systemui.edgelighting.utils.DeviceColorMonitor;
 import com.android.systemui.edgelighting.utils.DrawableUtils;
 import com.android.systemui.edgelighting.utils.EdgeLightingAnalytics;
 import com.android.systemui.edgelighting.utils.EdgeLightingSettingUtils;
+import com.android.systemui.edgelighting.utils.SemEdgeLightingInfoUtils;
 import com.android.systemui.edgelighting.utils.Utils;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.edge.OnEdgeLightingCallback;
 import com.samsung.android.edge.SemEdgeLightingInfo;
@@ -92,7 +104,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingService extends Service {
     public static boolean sConfigured;
@@ -121,7 +132,6 @@ public class EdgeLightingService extends Service {
     public boolean mIsStarted = false;
     public int mCondition = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$1, reason: invalid class name */
     public class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
@@ -138,7 +148,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$3, reason: invalid class name */
     public class AnonymousClass3 implements OnEdgeLightingCallback {
         public AnonymousClass3() {
@@ -183,38 +192,38 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public final EdgeLightingDispatcher getUIController(boolean z) {
             final EdgeLightingService edgeLightingService = EdgeLightingService.this;
             if (edgeLightingService.mDispatcher == null) {
                 Slog.i("EdgeLightingService", "createEdgeLightingDialog make dispatcher " + z);
                 int intForUser = Settings.System.getIntForUser(edgeLightingService.getContentResolver(), "edge_lighting_show_condition", !Feature.FEATURE_SUPPORT_AOD ? 1 : 0, -2);
-                boolean z2 = ((intForUser == 1 ? 1 : intForUser == 2 ? 2 : 3) & 2) != 0;
+                boolean z2 = ((intForUser == 1 ? (char) 1 : intForUser == 2 ? (char) 2 : (char) 3) & 2) != 0;
                 EdgeLightingDispatcher edgeLightingDispatcher = new EdgeLightingDispatcher(edgeLightingService.getBaseContext(), z2 ? 2227 : 2228, z);
                 edgeLightingService.mDispatcher = edgeLightingDispatcher;
                 edgeLightingDispatcher.registerEdgeWindowCallback(new IEdgeLightingWindowCallback() { // from class: com.android.systemui.edgelighting.EdgeLightingService.5
                     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingWindowCallback
-                    public final void doActionNotification() {
-                        ArrayList arrayList;
+                    public final void doActionNotification() throws PendingIntent.CanceledException {
+                        ArrayList parcelableArrayList;
                         EdgeLightingScheduler edgeLightingScheduler = EdgeLightingService.this.mScheduler;
                         edgeLightingScheduler.getClass();
                         NotificationLightingScheduler notificationLightingScheduler = edgeLightingScheduler.mNotificationLightingScheduler;
                         if (notificationLightingScheduler != null) {
                             Bundle extra = notificationLightingScheduler.mCurrentLightingScheduleInfo.mLightingInfo.getExtra();
-                            if (extra == null || (arrayList = extra.getParcelableArrayList("noti_actions")) == null) {
-                                arrayList = null;
+                            if (extra == null || (parcelableArrayList = extra.getParcelableArrayList("noti_actions")) == null) {
+                                parcelableArrayList = null;
                             }
                             String string = edgeLightingScheduler.mTurnOverEdgeLighting.mContext.getString(R.string.restrict_mark_as_read);
-                            if (arrayList != null) {
-                                int size = arrayList.size();
+                            if (parcelableArrayList != null) {
+                                int size = parcelableArrayList.size();
                                 int i = 0;
                                 while (i < size) {
-                                    Object obj = arrayList.get(i);
+                                    Object obj = parcelableArrayList.get(i);
                                     i++;
                                     Notification.Action action = (Notification.Action) obj;
                                     if (TextUtils.equals(string, action.title)) {
@@ -323,7 +332,7 @@ public class EdgeLightingService extends Service {
                     /* JADX WARN: Type inference failed for: r6v3, types: [android.graphics.drawable.Drawable] */
                     /* JADX WARN: Type inference failed for: r6v4, types: [android.graphics.drawable.Drawable] */
                     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingWindowCallback
-                    public final void onFlingDownInWindow(boolean z3) {
+                    public final void onFlingDownInWindow(boolean z3) throws PackageManager.NameNotFoundException {
                         boolean z4 = EdgeLightingService.sConfigured;
                         Slog.i("EdgeLightingService", "onFlingDownInWindow " + z3);
                         EdgeLightingScheduler edgeLightingScheduler = EdgeLightingService.this.mScheduler;
@@ -351,9 +360,9 @@ public class EdgeLightingService extends Service {
                                 } catch (PackageManager.NameNotFoundException unused) {
                                     packageManager = packageManager.getDefaultActivityIcon();
                                 }
-                                Bitmap drawableToBitmap = DrawableUtils.drawableToBitmap(packageManager);
+                                Bitmap bitmapDrawableToBitmap = DrawableUtils.drawableToBitmap(packageManager);
                                 ImageView imageView = new ImageView(edgeLightingService2);
-                                imageView.setImageBitmap(drawableToBitmap);
+                                imageView.setImageBitmap(bitmapDrawableToBitmap);
                                 imageView.layout(0, 0, edgeLightingService2.getResources().getDimensionPixelSize(R.dimen.drag_and_drop_icon_size), edgeLightingService2.getResources().getDimensionPixelSize(R.dimen.drag_and_drop_icon_size));
                                 ClipDescription clipDescription = new ClipDescription("Drag And Drop(E)", new String[]{"application/vnd.android.activity"});
                                 Intent intent = new Intent();
@@ -420,29 +429,29 @@ public class EdgeLightingService extends Service {
                                     String notificationKey = lightingScheduleInfo.getNotificationKey();
                                     Bundle extra = lightingScheduleInfo.mLightingInfo.getExtra();
                                     semEdgeManager.cancelNotificationByGroupKey(str, notificationTag, notificationID, userId, notificationKey, extra != null ? extra.getString("group_key") : null);
-                                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" swipe cancel pkg: ", str, " , tag :  ");
-                                    m.append(lightingScheduleInfo.getNotificationTag());
-                                    m.append(" id: ");
-                                    m.append(lightingScheduleInfo.getNotificationID());
-                                    m.append(" , userid : ");
-                                    m.append(lightingScheduleInfo.getUserId());
-                                    m.append(" , key : ");
-                                    m.append(lightingScheduleInfo.getNotificationKey());
-                                    m.append(" , groupKey : ");
+                                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" swipe cancel pkg: ", str, " , tag :  ");
+                                    sbM.append(lightingScheduleInfo.getNotificationTag());
+                                    sbM.append(" id: ");
+                                    sbM.append(lightingScheduleInfo.getNotificationID());
+                                    sbM.append(" , userid : ");
+                                    sbM.append(lightingScheduleInfo.getUserId());
+                                    sbM.append(" , key : ");
+                                    sbM.append(lightingScheduleInfo.getNotificationKey());
+                                    sbM.append(" , groupKey : ");
                                     Bundle extra2 = lightingScheduleInfo.mLightingInfo.getExtra();
-                                    m.append(extra2 != null ? extra2.getString("group_key") : null);
-                                    Slog.i("EdgeLightingScheduler", m.toString());
+                                    sbM.append(extra2 != null ? extra2.getString("group_key") : null);
+                                    Slog.i("EdgeLightingScheduler", sbM.toString());
                                 } catch (RuntimeException unused) {
                                     edgeLightingScheduler.mEdgeManager.cancelNotification(lightingScheduleInfo.mPackageName, lightingScheduleInfo.getNotificationTag(), lightingScheduleInfo.getNotificationID(), lightingScheduleInfo.getUserId(), lightingScheduleInfo.getNotificationKey());
-                                    StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" swipe cancel pkg: ", str, " , tag :  ");
-                                    m2.append(lightingScheduleInfo.getNotificationTag());
-                                    m2.append(" id: ");
-                                    m2.append(lightingScheduleInfo.getNotificationID());
-                                    m2.append(" , userid : ");
-                                    m2.append(lightingScheduleInfo.getUserId());
-                                    m2.append(" , key : ");
-                                    m2.append(lightingScheduleInfo.getNotificationKey());
-                                    Slog.i("EdgeLightingScheduler", m2.toString());
+                                    StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" swipe cancel pkg: ", str, " , tag :  ");
+                                    sbM2.append(lightingScheduleInfo.getNotificationTag());
+                                    sbM2.append(" id: ");
+                                    sbM2.append(lightingScheduleInfo.getNotificationID());
+                                    sbM2.append(" , userid : ");
+                                    sbM2.append(lightingScheduleInfo.getUserId());
+                                    sbM2.append(" , key : ");
+                                    sbM2.append(lightingScheduleInfo.getNotificationKey());
+                                    Slog.i("EdgeLightingScheduler", sbM2.toString());
                                 }
                             }
                             edgeLightingScheduler.mNotificationLightingScheduler.flushNotiNow();
@@ -571,14 +580,12 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$7, reason: invalid class name */
     public class AnonymousClass7 {
         public AnonymousClass7() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.EdgeLightingService$9, reason: invalid class name */
     public class AnonymousClass9 extends ContentObserver {
         public AnonymousClass9(Handler handler) {
@@ -601,7 +608,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MainHandler extends Handler {
         public /* synthetic */ MainHandler(EdgeLightingService edgeLightingService, int i) {
             this();
@@ -631,7 +637,6 @@ public class EdgeLightingService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StatusbarStateReceiver extends BroadcastReceiver {
         public /* synthetic */ StatusbarStateReceiver(EdgeLightingService edgeLightingService, int i) {
             this();
@@ -641,9 +646,9 @@ public class EdgeLightingService extends Service {
         public final void onReceive(Context context, Intent intent) {
             NotificationLightingScheduler notificationLightingScheduler;
             String action = intent.getAction();
-            boolean equals = "com.samsung.systemui.statusbar.ANIMATING".equals(action);
-            boolean equals2 = "com.samsung.systemui.statusbar.EXPANDED".equals(action);
-            if (equals || equals2) {
+            boolean zEquals = "com.samsung.systemui.statusbar.ANIMATING".equals(action);
+            boolean zEquals2 = "com.samsung.systemui.statusbar.EXPANDED".equals(action);
+            if (zEquals || zEquals2) {
                 boolean z = EdgeLightingService.sConfigured;
                 Slog.d("EdgeLightingService", "ACTION_STATUS_OPEN");
                 EdgeLightingScheduler edgeLightingScheduler = EdgeLightingService.this.mScheduler;
@@ -680,10 +685,10 @@ public class EdgeLightingService extends Service {
             @Override // com.android.systemui.edgelighting.manager.EdgeLightingSettingsObserver.EdgeLightingObserver
             public final void onChange() {
                 EdgeLightingService edgeLightingService = EdgeLightingService.this;
-                boolean isEdgeLightingEnabled = EdgeLightingSettingUtils.isEdgeLightingEnabled(edgeLightingService.getContentResolver());
+                boolean zIsEdgeLightingEnabled = EdgeLightingSettingUtils.isEdgeLightingEnabled(edgeLightingService.getContentResolver());
                 boolean z = EdgeLightingService.sConfigured;
-                Slog.i("EdgeLightingService", "EdgeLightingObserver: !!!! enable " + isEdgeLightingEnabled);
-                if (!isEdgeLightingEnabled) {
+                Slog.i("EdgeLightingService", "EdgeLightingObserver: !!!! enable " + zIsEdgeLightingEnabled);
+                if (!zIsEdgeLightingEnabled) {
                     edgeLightingService.setProcessForeground(false);
                     edgeLightingService.stopForeground(true);
                     edgeLightingService.stopSelf();
@@ -701,8 +706,8 @@ public class EdgeLightingService extends Service {
                 if (iBinder == null) {
                     proxy = null;
                 } else {
-                    IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.edgelighting.interfaces.ISystemUIConditionListener");
-                    proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ISystemUIConditionListener)) ? new ISystemUIConditionListener.Stub.Proxy(iBinder) : (ISystemUIConditionListener) queryLocalInterface;
+                    IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.edgelighting.interfaces.ISystemUIConditionListener");
+                    proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISystemUIConditionListener)) ? new ISystemUIConditionListener.Stub.Proxy(iBinder) : (ISystemUIConditionListener) iInterfaceQueryLocalInterface;
                 }
                 edgeLightingService.mConditionListener = proxy;
             }
@@ -719,28 +724,28 @@ public class EdgeLightingService extends Service {
 
     public static String checkEdgeLightingAvailable() {
         int i = Utils.$r8$clinit;
-        int semGetMyUserId = UserHandle.semGetMyUserId();
-        Slog.i("Utils", "isCurrentUser current = " + semGetMyUserId + ", ownerId = 0");
-        return semGetMyUserId == 0 ? !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SYSTEMUI_SUPPORT_BRIEF_NOTIFICATION") ? "not Support" : "" : "not Owner";
+        int iSemGetMyUserId = UserHandle.semGetMyUserId();
+        Slog.i("Utils", "isCurrentUser current = " + iSemGetMyUserId + ", ownerId = 0");
+        return iSemGetMyUserId == 0 ? !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SYSTEMUI_SUPPORT_BRIEF_NOTIFICATION") ? "not Support" : "" : "not Owner";
     }
 
     @Override // android.app.Service
     public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         EdgeLightingSettingManager edgeLightingSettingManager = EdgeLightingSettingManager.getInstance(getApplicationContext());
         edgeLightingSettingManager.getClass();
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("Enable pkg ( ");
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m("Enable pkg ( ");
         if (edgeLightingSettingManager.mAllApplication) {
-            m.append("ALL");
+            sbM.append("ALL");
         } else {
-            m.append(edgeLightingSettingManager.mEnableSet.size());
+            sbM.append(edgeLightingSettingManager.mEnableSet.size());
         }
-        m.append(" )  : ");
+        sbM.append(" )  : ");
         Iterator it = edgeLightingSettingManager.mEnableSet.entrySet().iterator();
         while (it.hasNext()) {
-            m.append((String) ((Map.Entry) it.next()).getKey());
-            m.append(", ");
+            sbM.append((String) ((Map.Entry) it.next()).getKey());
+            sbM.append(", ");
         }
-        printWriter.println(m);
+        printWriter.println(sbM);
         super.dump(fileDescriptor, printWriter, strArr);
     }
 
@@ -750,13 +755,13 @@ public class EdgeLightingService extends Service {
     }
 
     @Override // android.app.Service
-    public final void onCreate() {
+    public final void onCreate() throws Resources.NotFoundException {
         super.onCreate();
         Slog.d("EdgeLightingService", "onCreate");
         this.mShouldKillMyself = true;
-        String checkEdgeLightingAvailable = checkEdgeLightingAvailable();
-        if (!"".equals(checkEdgeLightingAvailable)) {
-            Slog.e("EdgeLightingService", "OnCreate : edgelighting is not availabe now : ".concat(checkEdgeLightingAvailable));
+        String strCheckEdgeLightingAvailable = checkEdgeLightingAvailable();
+        if (!"".equals(strCheckEdgeLightingAvailable)) {
+            Slog.e("EdgeLightingService", "OnCreate : edgelighting is not availabe now : ".concat(strCheckEdgeLightingAvailable));
             this.mKillBot.run();
             return;
         }
@@ -862,19 +867,23 @@ public class EdgeLightingService extends Service {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:118:0x0367  */
     /* JADX WARN: Type inference failed for: r0v36, types: [com.android.systemui.edgelighting.device.EdgeLightingCoverManager$1] */
     /* JADX WARN: Type inference failed for: r0v48, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$5] */
     /* JADX WARN: Type inference failed for: r11v52, types: [com.android.systemui.edgelighting.EdgeLightingService$6] */
     /* JADX WARN: Type inference failed for: r3v23, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$6] */
     @Override // android.app.Service
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int onStartCommand(Intent intent, int i, int i2) {
         EdgeLightingService edgeLightingService;
         boolean z;
-        HashMap hashMap;
+        HashMap map;
         Uri uriFor;
-        String checkEdgeLightingAvailable = checkEdgeLightingAvailable();
-        if (!"".equals(checkEdgeLightingAvailable)) {
-            Slog.e("EdgeLightingService", "onStartCommand : edgelighting is not availabe now : ".concat(checkEdgeLightingAvailable));
+        String strCheckEdgeLightingAvailable = checkEdgeLightingAvailable();
+        if (!"".equals(strCheckEdgeLightingAvailable)) {
+            Slog.e("EdgeLightingService", "onStartCommand : edgelighting is not availabe now : ".concat(strCheckEdgeLightingAvailable));
             this.mKillBot.run();
             return 2;
         }
@@ -916,17 +925,17 @@ public class EdgeLightingService extends Service {
             edgeLightingScheduler.mDrawWakeLock = edgeLightingScheduler.mPm.newWakeLock(128, "Window:EdgeLightingWindow");
             if (edgeLightingScheduler.mTurnOverEdgeLighting == null) {
                 edgeLightingScheduler.mTurnOverEdgeLighting = new TurnOverEdgeLighting(this);
-                ?? anonymousClass5 = new Object() { // from class: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler.5
+                ?? r0 = new Object() { // from class: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler.5
                     public AnonymousClass5() {
                     }
                 };
-                ?? anonymousClass6 = new Object() { // from class: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler.6
+                ?? r3 = new Object() { // from class: com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler.6
                     public AnonymousClass6() {
                     }
                 };
                 TurnOverEdgeLighting turnOverEdgeLighting = edgeLightingScheduler.mTurnOverEdgeLighting;
-                turnOverEdgeLighting.mListener = anonymousClass5;
-                turnOverEdgeLighting.mRequestor = anonymousClass6;
+                turnOverEdgeLighting.mListener = r0;
+                turnOverEdgeLighting.mRequestor = r3;
                 turnOverEdgeLighting.setEnable();
             }
             EdgeLightingScheduler edgeLightingScheduler2 = this.mScheduler;
@@ -934,9 +943,9 @@ public class EdgeLightingService extends Service {
             edgeLightingScheduler2.mRequester = anonymousClass4;
             edgeLightingScheduler2.mIsScreenOnReceived = anonymousClass4.isScreenOn();
             EdgeLightingScreenStatus edgeLightingScreenStatus = edgeLightingScheduler2.mScreenStatusChecker;
-            boolean isScreenOn = edgeLightingScheduler2.mRequester.isScreenOn();
+            boolean zIsScreenOn = edgeLightingScheduler2.mRequester.isScreenOn();
             edgeLightingScreenStatus.getClass();
-            if (isScreenOn) {
+            if (zIsScreenOn) {
                 Slog.d("EdgeLightingScreenStatus", UniversalCredentialManager.RESET_APPLET_FORM_FACTOR);
                 System.currentTimeMillis();
             }
@@ -968,7 +977,7 @@ public class EdgeLightingService extends Service {
                 AnonymousClass7 anonymousClass7 = this.mCoverStateListener;
                 if (edgeLightingCoverManager.mSCoverStateListener == null) {
                     edgeLightingCoverManager.mSCoverManager = new ScoverManager(this);
-                    ?? r0 = new ScoverManager.CoverStateListener() { // from class: com.android.systemui.edgelighting.device.EdgeLightingCoverManager.1
+                    ?? r02 = new ScoverManager.CoverStateListener() { // from class: com.android.systemui.edgelighting.device.EdgeLightingCoverManager.1
                         @Override // com.samsung.android.sdk.cover.ScoverManager.CoverStateListener
                         public final void onCoverAttachStateChanged(boolean z2) {
                             boolean z3 = EdgeLightingCoverManager.DEBUG;
@@ -1027,9 +1036,9 @@ public class EdgeLightingService extends Service {
                             }
                         }
                     };
-                    edgeLightingCoverManager.mSCoverStateListener = r0;
+                    edgeLightingCoverManager.mSCoverStateListener = r02;
                     try {
-                        edgeLightingCoverManager.mSCoverManager.registerListener(r0);
+                        edgeLightingCoverManager.mSCoverManager.registerListener(r02);
                     } catch (SsdkUnsupportedException e) {
                         e.printStackTrace();
                     }
@@ -1048,10 +1057,10 @@ public class EdgeLightingService extends Service {
             AnonymousClass2 anonymousClass2 = this.mEdgeLightingObserver;
             edgeLightingSettingsObserver.getClass();
             if (Settings.System.class == Settings.System.class) {
-                hashMap = edgeLightingSettingsObserver.mSystemObservers;
+                map = edgeLightingSettingsObserver.mSystemObservers;
                 uriFor = Settings.System.getUriFor(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
             } else if (Settings.System.class == Settings.Global.class) {
-                hashMap = edgeLightingSettingsObserver.mGlobalObservers;
+                map = edgeLightingSettingsObserver.mGlobalObservers;
                 uriFor = Settings.Global.getUriFor(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
             } else {
                 Slog.e("EdgeLightingSettingsObserver", "registerContentObserver : wrong table");
@@ -1060,10 +1069,10 @@ public class EdgeLightingService extends Service {
                 this.mDBObserver.onChange(true, Settings.System.getUriFor(SettingsHelper.INDEX_COLOR_THEME_APP_ICON));
                 this.mDBObserver.onChange(true, Settings.System.getUriFor(SettingsHelper.NOTI_SETTINGS_SHOW_NOTIFICATION_APP_ICON));
             }
-            EdgeLightingSettingsObserver.ContentObserverWrapper contentObserverWrapper = (EdgeLightingSettingsObserver.ContentObserverWrapper) hashMap.get(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
+            EdgeLightingSettingsObserver.ContentObserverWrapper contentObserverWrapper = (EdgeLightingSettingsObserver.ContentObserverWrapper) map.get(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
             if (contentObserverWrapper == null) {
                 EdgeLightingSettingsObserver.ContentObserverWrapper contentObserverWrapper2 = new EdgeLightingSettingsObserver.ContentObserverWrapper(null);
-                hashMap.put(SettingsHelper.INDEX_EDGE_LIGHTING_ON, contentObserverWrapper2);
+                map.put(SettingsHelper.INDEX_EDGE_LIGHTING_ON, contentObserverWrapper2);
                 contentObserverWrapper2.mObservers.add(anonymousClass2);
                 contentResolver.registerContentObserver(uriFor, false, contentObserverWrapper2);
             } else if (!contentObserverWrapper.mObservers.contains(anonymousClass2)) {
@@ -1100,8 +1109,6 @@ public class EdgeLightingService extends Service {
                     edgeLightingService = this;
                     this.mHandler.post(new EdgeLightingService$$ExternalSyntheticLambda0(edgeLightingService, string, parcelable, i5, 0));
                     edgeLightingService.mShouldKillMyself = false;
-                    edgeLightingService.mIsStarted = true;
-                    return 1;
                 }
             } else {
                 Slog.d("EdgeLightingService", "start service for policy update");
@@ -1114,9 +1121,9 @@ public class EdgeLightingService extends Service {
                     for (String str : stringSet) {
                         edgeLightingSettingManager.mEnableSet.put(str, new EdgeLightingSettingItem(str, -11761985));
                     }
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.remove("silent_add_list");
-                    edit.apply();
+                    SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                    editorEdit.remove("silent_add_list");
+                    editorEdit.apply();
                     z = true;
                 } else {
                     z = false;
@@ -1128,17 +1135,17 @@ public class EdgeLightingService extends Service {
                     while (it.hasNext()) {
                         edgeLightingSettingManager.mEnableSet.remove(it.next());
                     }
-                    SharedPreferences.Editor edit2 = sharedPreferences.edit();
-                    edit2.remove("silent_remove_list");
-                    edit2.apply();
+                    SharedPreferences.Editor editorEdit2 = sharedPreferences.edit();
+                    editorEdit2.remove("silent_remove_list");
+                    editorEdit2.apply();
                     z2 = true;
                 }
                 if (z2) {
-                    SharedPreferences.Editor edit3 = sharedPreferences.edit();
-                    edit3.putInt("version", 1);
-                    edit3.putBoolean("all_application", false);
-                    edit3.putStringSet("enable_list", edgeLightingSettingManager.mEnableSet.keySet());
-                    edit3.apply();
+                    SharedPreferences.Editor editorEdit3 = sharedPreferences.edit();
+                    editorEdit3.putInt("version", 1);
+                    editorEdit3.putBoolean("all_application", false);
+                    editorEdit3.putStringSet("enable_list", edgeLightingSettingManager.mEnableSet.keySet());
+                    editorEdit3.apply();
                 }
                 edgeLightingSettingManager.removeBlockListInEnabledEdgeLightingList(this, (HashMap) edgeLightingPolicyManager.mPolicyInfoData.get(2));
                 edgeLightingPolicyManager.updateEdgeLightingPolicy(this, edgeLightingSettingManager.mAllApplication);
@@ -1163,22 +1170,191 @@ public class EdgeLightingService extends Service {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x0244  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x0276  */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x0381  */
-    /* JADX WARN: Removed duplicated region for block: B:166:0x03af  */
-    /* JADX WARN: Removed duplicated region for block: B:173:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:174:0x038a  */
-    /* JADX WARN: Removed duplicated region for block: B:176:0x024b  */
+    /* JADX WARN: Removed duplicated region for block: B:131:0x0241  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void startEdgeLighting(java.lang.String r13, com.samsung.android.edge.SemEdgeLightingInfo r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 957
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.edgelighting.EdgeLightingService.startEdgeLighting(java.lang.String, com.samsung.android.edge.SemEdgeLightingInfo, int):void");
+    public final void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
+        Drawable drawableLoadDrawable;
+        PolicyInfo policyInfo;
+        int deviceWallPaperColorIndex;
+        Bundle extra;
+        int i2;
+        if (str == null) {
+            MainHandler mainHandler = this.mHandler;
+            mainHandler.sendMessage(mainHandler.obtainMessage(1, "packageName null"));
+            return;
+        }
+        if (semEdgeLightingInfo.getExtra() == null) {
+            MainHandler mainHandler2 = this.mHandler;
+            mainHandler2.sendMessage(mainHandler2.obtainMessage(1, "reason is not notification"));
+            return;
+        }
+        SemStatusBarManager semStatusBarManager = (SemStatusBarManager) getSystemService(SemStatusBarManager.class);
+        if (i != 8 && (semStatusBarManager.getDisableFlags() & 262144) != 0) {
+            MainHandler mainHandler3 = this.mHandler;
+            mainHandler3.sendMessage(mainHandler3.obtainMessage(1, "disable_alert"));
+            return;
+        }
+        if (Utils.isLargeCoverFlipFolded()) {
+            if (Settings.Secure.getIntForUser(getContentResolver(), SettingsHelper.INDEX_COVER_SCREEN_SHOW_NOTIFICATION, 1, -2) != 1) {
+                MainHandler mainHandler4 = this.mHandler;
+                mainHandler4.sendMessage(mainHandler4.obtainMessage(1, "reason is turn off subscreen notification"));
+                return;
+            } else if (Settings.Secure.getIntForUser(getContentResolver(), SettingsHelper.INDEX_TURN_ON_COVER_SCREEN_FOR_NOTIFICATION, 1, -2) == 0 && !this.mPowerManager.isInteractive()) {
+                MainHandler mainHandler5 = this.mHandler;
+                mainHandler5.sendMessage(mainHandler5.obtainMessage(1, "reason is turn off \"Turn on screen for notifications\""));
+                return;
+            }
+        }
+        if (this.mConditionListener != null) {
+            String string = semEdgeLightingInfo.getExtra().getString("noti_key");
+            try {
+                if (this.mConditionListener.isInterrupted(string)) {
+                    boolean z = SemEdgeLightingInfoUtils.DEBUG;
+                    Bundle extra2 = semEdgeLightingInfo.getExtra();
+                    if ((8 & (extra2 != null ? extra2.getInt("flag", 0) : 0)) != 0) {
+                        MainHandler mainHandler6 = this.mHandler;
+                        mainHandler6.sendMessage(mainHandler6.obtainMessage(1, "interrupted"));
+                        return;
+                    }
+                }
+                if (this.mConditionListener.isRowPinned(string)) {
+                    MainHandler mainHandler7 = this.mHandler;
+                    mainHandler7.sendMessage(mainHandler7.obtainMessage(1, "isRowPinned"));
+                    return;
+                } else if (this.mConditionListener.isOngoingAcitivty(string)) {
+                    MainHandler mainHandler8 = this.mHandler;
+                    mainHandler8.sendMessage(mainHandler8.obtainMessage(1, "isOngoingActivity"));
+                    return;
+                } else if (!this.mConditionListener.isPanelsEnabled()) {
+                    MainHandler mainHandler9 = this.mHandler;
+                    mainHandler9.sendMessage(mainHandler9.obtainMessage(1, "isPanelsEnabled"));
+                    return;
+                }
+            } catch (RemoteException unused) {
+            }
+        }
+        CharSequence charSequence = semEdgeLightingInfo.getExtra().getCharSequence("channel_id");
+        if ((str.equals("com.android.systemui") || str.equals("com.samsung.android.app.cocktailbarservice")) && charSequence != null && charSequence.equals("edge_lighting_chnnel_id")) {
+            Slog.i("EdgeLightingService", "disable edge_lighting channel");
+            return;
+        }
+        if (str.equals("com.sec.android.app.desktoplauncher") && charSequence != null && charSequence.equals("desktop_launcher_chnnel_id")) {
+            Slog.i("EdgeLightingService", "disable desktop_launcher channel");
+            return;
+        }
+        if (this.mPowerManager.isInteractive() && ((KeyguardManager) getSystemService("keyguard")).semIsKeyguardShowingAndNotOccluded() && !Utils.isLargeCoverFlipFolded()) {
+            MainHandler mainHandler10 = this.mHandler;
+            mainHandler10.sendMessage(mainHandler10.obtainMessage(1, "keyguard && screenOn"));
+            return;
+        }
+        KeyguardManager keyguardManager = (KeyguardManager) getSystemService("keyguard");
+        Drawable applicationIcon = null;
+        if ((keyguardManager != null && keyguardManager.isKeyguardLocked()) != false) {
+            if ((this.mDevicePolicyManager.getKeyguardDisabledFeatures(null, UserHandle.semGetMyUserId()) & 4) != 0) {
+                MainHandler mainHandler11 = this.mHandler;
+                mainHandler11.sendMessage(mainHandler11.obtainMessage(1, "blockByDPM"));
+                return;
+            }
+            if (Settings.Secure.getIntForUser(getContentResolver(), SettingsHelper.INDEX_LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, -2) != 1) {
+                MainHandler mainHandler12 = this.mHandler;
+                mainHandler12.sendMessage(mainHandler12.obtainMessage(1, "keygaurdNotiOff"));
+                return;
+            }
+            boolean z2 = SemEdgeLightingInfoUtils.DEBUG;
+            Bundle extra3 = semEdgeLightingInfo.getExtra();
+            if ((extra3 != null ? extra3.getInt("noti_visiblity", 0) : 0) == -1) {
+                MainHandler mainHandler13 = this.mHandler;
+                mainHandler13.sendMessage(mainHandler13.obtainMessage(1, "secret && keyguard"));
+                return;
+            }
+            Bundle extra4 = semEdgeLightingInfo.getExtra();
+            if (extra4 != null && extra4.getInt("package_visiblity") == -1) {
+                MainHandler mainHandler14 = this.mHandler;
+                mainHandler14.sendMessage(mainHandler14.obtainMessage(1, "secret package && keyguard"));
+                return;
+            }
+        }
+        boolean z3 = SemEdgeLightingInfoUtils.DEBUG;
+        Bundle extra5 = semEdgeLightingInfo.getExtra();
+        if ((extra5 != null ? extra5.getBoolean(SystemUIAnalytics.QPNE_VID_BUBBLE, false) : false) && this.mPowerManager.isInteractive()) {
+            MainHandler mainHandler15 = this.mHandler;
+            mainHandler15.sendMessage(mainHandler15.obtainMessage(1, SystemUIAnalytics.QPNE_VID_BUBBLE));
+            return;
+        }
+        Configuration configuration = getResources().getConfiguration();
+        if (configuration != null && (i2 = configuration.FlipFont) > 0 && sFlipFont != i2) {
+            Typeface.setFlipFonts();
+            sFlipFont = configuration.FlipFont;
+        }
+        if (this.mScheduler != null) {
+            AppIconCache appIconCache = this.mAppIconCache;
+            appIconCache.getClass();
+            Bundle extra6 = semEdgeLightingInfo.getExtra();
+            if (extra6 != null) {
+                Parcelable parcelable = extra6.getParcelable(appIconCache.KEY_SMALL_ICON);
+                drawableLoadDrawable = parcelable instanceof Icon ? ((Icon) parcelable).loadDrawable(appIconCache.mContext) : null;
+            }
+            if (drawableLoadDrawable != null) {
+                appIconCache.mIconCache.put(str, drawableLoadDrawable);
+            } else {
+                drawableLoadDrawable = (Drawable) appIconCache.mIconCache.get(str);
+                if (drawableLoadDrawable == null) {
+                    try {
+                        applicationIcon = appIconCache.mContext.getPackageManager().getApplicationIcon(str);
+                        appIconCache.mIconCache.put(str, applicationIcon);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    drawableLoadDrawable = applicationIcon;
+                    if (drawableLoadDrawable != null) {
+                        appIconCache.mIconCache.put(str, drawableLoadDrawable);
+                    }
+                }
+            }
+            Drawable drawable = drawableLoadDrawable;
+            if (i != 0) {
+                boolean z4 = SemEdgeLightingInfoUtils.DEBUG;
+                int i3 = (semEdgeLightingInfo.getExtra() == null || semEdgeLightingInfo.getExtra().getParcelable(SemEdgeLightingInfoUtils.EXTRA_KEY_SMALL_ICON) == null || (extra = semEdgeLightingInfo.getExtra()) == null) ? 0 : extra.getInt("notification_color", 0);
+                int intForUser = Settings.System.getIntForUser(getContentResolver(), "edge_lighting_color_type", 1, -2);
+                if (intForUser == 0) {
+                    deviceWallPaperColorIndex = EdgeLightingSettingUtils.getEdgeLightingStylePreDefineColor(getBaseContext(), EdgeLightingSettingUtils.getEdgeLightingBasicColorIndex(getContentResolver()), false);
+                } else if (intForUser == 1) {
+                    deviceWallPaperColorIndex = EdgeLightingSettingUtils.loadAppCustomColor(getBaseContext(), str);
+                    if (deviceWallPaperColorIndex == 0 && (deviceWallPaperColorIndex = EdgeLightingPolicyManager.getInstance(getApplicationContext(), false).getEdgeLightingColor(getBaseContext(), str)) == -11761985 && i3 != 0) {
+                        Slog.i("EdgeLightingService", "Not exist color in white list.So using notification color  : " + Integer.toHexString(i3));
+                        deviceWallPaperColorIndex = i3;
+                    }
+                } else {
+                    deviceWallPaperColorIndex = intForUser == 3 ? DeviceColorMonitor.getDeviceWallPaperColorIndex(getContentResolver()) : Settings.Global.getInt(getApplicationContext().getContentResolver(), "edgelighting_custom_color", -11761985);
+                }
+                semEdgeLightingInfo.setEffectColors(new int[]{deviceWallPaperColorIndex, i3});
+            }
+            HashMap map = (HashMap) EdgeLightingPolicyManager.getInstance(getApplicationContext(), false).mPolicyInfoData.get(10);
+            int i4 = (map == null || (policyInfo = (PolicyInfo) map.get(str)) == null) ? 0 : policyInfo.priority;
+            EdgeLightingScheduler edgeLightingScheduler = this.mScheduler;
+            edgeLightingScheduler.getClass();
+            Slog.d("EdgeLightingScheduler", "startEdgeLighting: " + i + " " + str + " onGo=" + SemEdgeLightingInfoUtils.isOnGoing(semEdgeLightingInfo));
+            LightingScheduleInfo lightingScheduleInfo = new LightingScheduleInfo(str, null, semEdgeLightingInfo, drawable, i, i4);
+            int intForUser2 = Settings.System.getIntForUser(EdgeLightingService.this.getContentResolver(), "edge_lighting_show_condition", !Feature.FEATURE_SUPPORT_AOD ? 1 : 0, -2);
+            LightingScheduleInfo.LightingLogicPolicy lightingLogicPolicy = new LightingScheduleInfo.LightingLogicPolicy();
+            lightingScheduleInfo.mLightingLogicPolicy = lightingLogicPolicy;
+            if (intForUser2 == 0) {
+                lightingLogicPolicy.isNeedToKeepWhenLcdOff = true;
+            } else if (intForUser2 != 1 && intForUser2 == 2) {
+                lightingLogicPolicy.isNeedToKeepWhenLcdOff = true;
+            }
+            lightingScheduleInfo.setDuration(EdgeLightingSettingUtils.getEdgeLightingDuration(EdgeLightingSettingUtils.loadEdgeLightingDurationOptionType(edgeLightingScheduler.mTurnOverEdgeLighting.mContext)));
+            EdgeLightingScheduler.AnonymousClass1 anonymousClass1 = edgeLightingScheduler.mHandler;
+            anonymousClass1.sendMessage(Message.obtain(anonymousClass1, 0, lightingScheduleInfo));
+            ContextStatusLoggingManager.getInstance().updateStatusLoggingItem(this);
+            if (this.mConditionListener != null) {
+                try {
+                    this.mConditionListener.setInterruption(semEdgeLightingInfo.getExtra().getString("noti_key"));
+                } catch (RemoteException unused2) {
+                }
+            }
+        }
     }
 }

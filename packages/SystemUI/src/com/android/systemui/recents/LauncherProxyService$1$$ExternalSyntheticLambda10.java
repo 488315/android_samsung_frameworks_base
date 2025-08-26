@@ -4,7 +4,6 @@ import com.android.systemui.contextualeducation.GestureType;
 import com.android.systemui.recents.LauncherProxyService;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class LauncherProxyService$1$$ExternalSyntheticLambda10 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -31,9 +30,9 @@ public final /* synthetic */ class LauncherProxyService$1$$ExternalSyntheticLamb
                 boolean z = this.f$1;
                 String str = this.f$2;
                 LauncherProxyService launcherProxyService = LauncherProxyService.this;
-                GestureType valueOf = GestureType.valueOf(str);
+                GestureType gestureTypeValueOf = GestureType.valueOf(str);
                 for (int size = ((ArrayList) launcherProxyService.mConnectionCallbacks).size() - 1; size >= 0; size--) {
-                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).updateContextualEduStats(z, valueOf);
+                    ((LauncherProxyService.LauncherProxyListener) ((ArrayList) launcherProxyService.mConnectionCallbacks).get(size)).updateContextualEduStats(z, gestureTypeValueOf);
                 }
                 break;
         }

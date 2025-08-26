@@ -28,7 +28,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DrawInContainerNode extends Modifier.Node implements LayoutAwareModifierNode, DrawModifierNode, ModifierLocalModifierNode {
     public Function2 clipPath;
@@ -38,7 +37,6 @@ public final class DrawInContainerNode extends Modifier.Node implements LayoutAw
     public ContainerState state;
     public final MutableFloatState zIndex$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LayerWithRenderer {
         public final GraphicsLayer layer;
 
@@ -63,11 +61,11 @@ public final class DrawInContainerNode extends Modifier.Node implements LayoutAw
         if (graphicsLayer == null) {
             throw new IllegalArgumentException("Error: layer never initialized");
         }
-        layoutNodeDrawScope.m646recordJVtK1S4(IntSizeKt.m863toIntSizeuvyYCjk(layoutNodeDrawScope.canvasDrawScope.mo545getSizeNHjbRc()), graphicsLayer, new Function1() { // from class: com.android.compose.ui.graphics.DrawInContainerNode$$ExternalSyntheticLambda0
+        layoutNodeDrawScope.m648recordJVtK1S4(IntSizeKt.m865toIntSizeuvyYCjk(layoutNodeDrawScope.canvasDrawScope.mo547getSizeNHjbRc()), graphicsLayer, new Function1() { // from class: com.android.compose.ui.graphics.DrawInContainerNode$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                LayoutNodeDrawScope.this.drawContent();
+            public final Object mo781invoke(Object obj) {
+                layoutNodeDrawScope.drawContent();
                 return Unit.INSTANCE;
             }
         });
@@ -104,8 +102,8 @@ public final class DrawInContainerNode extends Modifier.Node implements LayoutAw
 
     @Override // androidx.compose.ui.node.LayoutAwareModifierNode
     public final void onPlaced(LayoutCoordinates layoutCoordinates) {
-        long positionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
-        ((SnapshotMutableStateImpl) this.lastOffsetInWindow$delegate).setValue(Offset.m393boximpl(positionInWindow));
+        long jPositionInWindow = LayoutCoordinatesKt.positionInWindow(layoutCoordinates);
+        ((SnapshotMutableStateImpl) this.lastOffsetInWindow$delegate).setValue(Offset.m395boximpl(jPositionInWindow));
     }
 
     public DrawInContainerNode(ContainerState containerState, Function0 function0, float f, Function2 function2) {
@@ -113,7 +111,7 @@ public final class DrawInContainerNode extends Modifier.Node implements LayoutAw
         this.enabled = function0;
         this.clipPath = function2;
         Offset.Companion.getClass();
-        this.lastOffsetInWindow$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m393boximpl(0L));
+        this.lastOffsetInWindow$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m395boximpl(0L));
         this.zIndex$delegate = PrimitiveSnapshotStateKt.mutableFloatStateOf(f);
     }
 }

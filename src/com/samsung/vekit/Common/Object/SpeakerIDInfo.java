@@ -24,7 +24,7 @@ public class SpeakerIDInfo {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SpeakerIDInfo m9805clone() {
+    public SpeakerIDInfo m9818clone() {
         return new SpeakerIDInfo(this.data, this.ID);
     }
 

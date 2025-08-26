@@ -10,7 +10,6 @@ import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda24 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,7 +22,7 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda2
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 return Boolean.valueOf(!((Boolean) ((ShadeInteractorImpl) ((CommunalViewModel) this.f$0).shadeInteractor).isAnyFullyExpanded.$$delegate_0.getValue()).booleanValue());
@@ -32,7 +31,7 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda2
                 return new DisposableEffectResult() { // from class: com.android.systemui.communal.ui.compose.CommunalContainerKt$ObserveOrientationChange$lambda$47$lambda$46$$inlined$onDispose$1
                     @Override // androidx.compose.runtime.DisposableEffectResult
                     public final void dispose() {
-                        ((CommunalSceneRepositoryImpl) CommunalViewModel.this.communalSceneInteractor.repository)._communalContainerOrientation.updateState(null, 0);
+                        ((CommunalSceneRepositoryImpl) communalViewModel.communalSceneInteractor.repository)._communalContainerOrientation.updateState(null, 0);
                     }
                 };
             default:

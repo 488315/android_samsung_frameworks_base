@@ -58,11 +58,11 @@ public final class IncrementalManager {
         Objects.requireNonNull(str);
         Objects.requireNonNull(dataLoaderParams);
         try {
-            int createStorage = this.mService.createStorage(str, dataLoaderParams.getData(), i);
-            if (createStorage < 0) {
+            int iCreateStorage = this.mService.createStorage(str, dataLoaderParams.getData(), i);
+            if (iCreateStorage < 0) {
                 return null;
             }
-            return new IncrementalStorage(this.mService, createStorage);
+            return new IncrementalStorage(this.mService, iCreateStorage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -70,32 +70,32 @@ public final class IncrementalManager {
 
     public IncrementalStorage openStorage(String str) {
         try {
-            int openStorage = this.mService.openStorage(str);
-            if (openStorage < 0) {
+            int iOpenStorage = this.mService.openStorage(str);
+            if (iOpenStorage < 0) {
                 return null;
             }
-            return new IncrementalStorage(this.mService, openStorage);
+            return new IncrementalStorage(this.mService, iOpenStorage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public IncrementalStorage createStorage(String str, IncrementalStorage incrementalStorage, int i) {
-        int i2 = -1;
+    public IncrementalStorage createStorage(String str, IncrementalStorage incrementalStorage, int i) throws ErrnoException {
+        int iCreateLinkedStorage = -1;
         try {
-            StructStat stat = Os.stat(str);
-            i2 = this.mService.createLinkedStorage(str, incrementalStorage.getId(), i);
-            if (i2 < 0) {
+            StructStat structStatStat = Os.stat(str);
+            iCreateLinkedStorage = this.mService.createLinkedStorage(str, incrementalStorage.getId(), i);
+            if (iCreateLinkedStorage < 0) {
                 return null;
             }
-            Os.chmod(str, stat.st_mode & 4095);
-            return new IncrementalStorage(this.mService, i2);
+            Os.chmod(str, structStatStat.st_mode & 4095);
+            return new IncrementalStorage(this.mService, iCreateLinkedStorage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ErrnoException e2) {
-            if (i2 >= 0) {
+            if (iCreateLinkedStorage >= 0) {
                 try {
-                    this.mService.deleteStorage(i2);
+                    this.mService.deleteStorage(iCreateLinkedStorage);
                 } catch (RemoteException e3) {
                     throw e3.rethrowFromSystemServer();
                 }
@@ -104,38 +104,38 @@ public final class IncrementalManager {
         }
     }
 
-    public void linkCodePath(File file, File file2) throws IllegalArgumentException, IOException {
+    public void linkCodePath(File file, File file2) throws Exception {
         File absoluteFile = file.getAbsoluteFile();
-        IncrementalStorage openStorage = openStorage(absoluteFile.toString());
-        if (openStorage == null) {
+        IncrementalStorage incrementalStorageOpenStorage = openStorage(absoluteFile.toString());
+        if (incrementalStorageOpenStorage == null) {
             throw new IllegalArgumentException("Not an Incremental path: " + absoluteFile);
         }
         String parent = file2.getAbsoluteFile().getParent();
-        IncrementalStorage createStorage = createStorage(parent, openStorage, 6);
-        if (createStorage == null) {
+        IncrementalStorage incrementalStorageCreateStorage = createStorage(parent, incrementalStorageOpenStorage, 6);
+        if (incrementalStorageCreateStorage == null) {
             throw new IOException("Failed to create linked storage at dir: " + parent);
         }
         try {
-            linkFiles(openStorage, absoluteFile, "", createStorage, file2.getName());
+            linkFiles(incrementalStorageOpenStorage, absoluteFile, "", incrementalStorageCreateStorage, file2.getName());
         } catch (Exception e) {
-            createStorage.unBind(parent);
+            incrementalStorageCreateStorage.unBind(parent);
             throw e;
         }
     }
 
     private void linkFiles(final IncrementalStorage incrementalStorage, File file, String str, final IncrementalStorage incrementalStorage2, String str2) throws IOException {
-        final Path resolve = file.toPath().resolve(str);
+        final Path pathResolve = file.toPath().resolve(str);
         final Path path = Paths.get(str2, new String[0]);
         Files.walkFileTree(file.toPath(), new SimpleFileVisitor<Path>(this) { // from class: android.os.incremental.IncrementalManager.1
             @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
             public FileVisitResult preVisitDirectory(Path path2, BasicFileAttributes basicFileAttributes) throws IOException {
-                incrementalStorage2.makeDirectory(path.resolve(resolve.relativize(path2)).toString());
+                incrementalStorage2.makeDirectory(path.resolve(pathResolve.relativize(path2)).toString());
                 return FileVisitResult.CONTINUE;
             }
 
             @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
             public FileVisitResult visitFile(Path path2, BasicFileAttributes basicFileAttributes) throws IOException {
-                incrementalStorage.makeLink(path2.toAbsolutePath().toString(), incrementalStorage2, path.resolve(resolve.relativize(path2)).toString());
+                incrementalStorage.makeLink(path2.toAbsolutePath().toString(), incrementalStorage2, path.resolve(pathResolve.relativize(path2)).toString());
                 return FileVisitResult.CONTINUE;
             }
         });
@@ -171,31 +171,31 @@ public final class IncrementalManager {
     public void rmPackageDir(File file) {
         try {
             String absolutePath = file.getAbsolutePath();
-            IncrementalStorage openStorage = openStorage(absolutePath);
-            if (openStorage == null) {
+            IncrementalStorage incrementalStorageOpenStorage = openStorage(absolutePath);
+            if (incrementalStorageOpenStorage == null) {
                 return;
             }
-            this.mLoadingProgressCallbacks.cleanUpCallbacks(openStorage);
-            openStorage.unBind(absolutePath);
+            this.mLoadingProgressCallbacks.cleanUpCallbacks(incrementalStorageOpenStorage);
+            incrementalStorageOpenStorage.unBind(absolutePath);
         } catch (IOException e) {
             Slog.w(TAG, "Failed to remove code path", e);
         }
     }
 
     public boolean registerLoadingProgressCallback(String str, IPackageLoadingProgressCallback iPackageLoadingProgressCallback) {
-        IncrementalStorage openStorage = openStorage(str);
-        if (openStorage == null) {
+        IncrementalStorage incrementalStorageOpenStorage = openStorage(str);
+        if (incrementalStorageOpenStorage == null) {
             return false;
         }
-        return this.mLoadingProgressCallbacks.registerCallback(openStorage, iPackageLoadingProgressCallback);
+        return this.mLoadingProgressCallbacks.registerCallback(incrementalStorageOpenStorage, iPackageLoadingProgressCallback);
     }
 
     public void unregisterLoadingProgressCallbacks(String str) {
-        IncrementalStorage openStorage = openStorage(str);
-        if (openStorage == null) {
+        IncrementalStorage incrementalStorageOpenStorage = openStorage(str);
+        if (incrementalStorageOpenStorage == null) {
             return;
         }
-        this.mLoadingProgressCallbacks.cleanUpCallbacks(openStorage);
+        this.mLoadingProgressCallbacks.cleanUpCallbacks(incrementalStorageOpenStorage);
     }
 
     private static class LoadingProgressCallbacks extends IStorageLoadingProgressListener.Stub {
@@ -206,15 +206,15 @@ public final class IncrementalManager {
         }
 
         public void cleanUpCallbacks(IncrementalStorage incrementalStorage) {
-            RemoteCallbackList<IPackageLoadingProgressCallback> removeReturnOld;
+            RemoteCallbackList<IPackageLoadingProgressCallback> remoteCallbackListRemoveReturnOld;
             int id = incrementalStorage.getId();
             synchronized (this.mCallbacks) {
-                removeReturnOld = this.mCallbacks.removeReturnOld(id);
+                remoteCallbackListRemoveReturnOld = this.mCallbacks.removeReturnOld(id);
             }
-            if (removeReturnOld == null) {
+            if (remoteCallbackListRemoveReturnOld == null) {
                 return;
             }
-            removeReturnOld.kill();
+            remoteCallbackListRemoveReturnOld.kill();
             incrementalStorage.unregisterLoadingProgressListener();
         }
 
@@ -243,10 +243,10 @@ public final class IncrementalManager {
             if (remoteCallbackList == null) {
                 return;
             }
-            int beginBroadcast = remoteCallbackList.beginBroadcast();
-            for (int i2 = 0; i2 < beginBroadcast; i2++) {
+            int iBeginBroadcast = remoteCallbackList.beginBroadcast();
+            for (int i2 = 0; i2 < iBeginBroadcast; i2++) {
                 try {
-                    remoteCallbackList.getBroadcastItem(i2).onPackageLoadingProgressChanged(f);
+                    ((IPackageLoadingProgressCallback) remoteCallbackList.getBroadcastItem(i2)).onPackageLoadingProgressChanged(f);
                 } catch (RemoteException unused) {
                 }
             }
@@ -255,10 +255,10 @@ public final class IncrementalManager {
     }
 
     public IncrementalMetrics getMetrics(String str) {
-        IncrementalStorage openStorage = openStorage(str);
-        if (openStorage == null) {
+        IncrementalStorage incrementalStorageOpenStorage = openStorage(str);
+        if (incrementalStorageOpenStorage == null) {
             return null;
         }
-        return new IncrementalMetrics(openStorage.getMetrics());
+        return new IncrementalMetrics(incrementalStorageOpenStorage.getMetrics());
     }
 }

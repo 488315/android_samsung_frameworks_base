@@ -54,9 +54,9 @@ public interface IShortcutChangeCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IShortcutChangeCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IShortcutChangeCallback)) {
-                return (IShortcutChangeCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IShortcutChangeCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IShortcutChangeCallback)) {
+                return (IShortcutChangeCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,17 +86,17 @@ public interface IShortcutChangeCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ShortcutInfo.CREATOR);
+                String string = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ShortcutInfo.CREATOR);
                 UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onShortcutsAddedOrUpdated(readString, createTypedArrayList, userHandle);
+                onShortcutsAddedOrUpdated(string, arrayListCreateTypedArrayList, userHandle);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(ShortcutInfo.CREATOR);
+                String string2 = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(ShortcutInfo.CREATOR);
                 UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onShortcutsRemoved(readString2, createTypedArrayList2, userHandle2);
+                onShortcutsRemoved(string2, arrayListCreateTypedArrayList2, userHandle2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -121,29 +121,29 @@ public interface IShortcutChangeCallback extends IInterface {
 
             @Override // android.content.pm.IShortcutChangeCallback
             public void onShortcutsAddedOrUpdated(String str, List<ShortcutInfo> list, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IShortcutChangeCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IShortcutChangeCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutChangeCallback
             public void onShortcutsRemoved(String str, List<ShortcutInfo> list, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IShortcutChangeCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IShortcutChangeCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

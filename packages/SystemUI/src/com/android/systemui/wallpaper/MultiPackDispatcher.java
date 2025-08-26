@@ -3,22 +3,29 @@ package com.android.systemui.wallpaper;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.text.TextUtils;
 import android.util.Log;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0;
+import com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0;
 import com.android.systemui.pluginlock.PluginLockUtils;
+import com.android.systemui.wallpaper.MultiPackDispatcher;
 import com.android.systemui.wallpaper.PluginWallpaperController;
 import com.android.systemui.wallpaper.log.WallpaperLogger;
 import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
+import java.io.File;
+import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiPackDispatcher {
     public static int mRetryCount;
@@ -30,130 +37,218 @@ public class MultiPackDispatcher {
     public final PluginLockUtils mPluginLockUtils;
     public final int mSelectedUserId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyHandler extends Handler {
         public MyHandler(Looper looper) {
             super(looper);
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x016e  */
-        /* JADX WARN: Removed duplicated region for block: B:34:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:67:0x016e  */
+        /* JADX WARN: Removed duplicated region for block: B:83:? A[RETURN, SYNTHETIC] */
         /* JADX WARN: Type inference failed for: r11v1 */
         /* JADX WARN: Type inference failed for: r11v2, types: [boolean, int] */
         /* JADX WARN: Type inference failed for: r11v3 */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void handleMessage(android.os.Message r23) {
-            /*
-                Method dump skipped, instructions count: 384
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.MultiPackDispatcher.MyHandler.handleMessage(android.os.Message):void");
+        public final void handleMessage(Message message) {
+            int i;
+            ?? r11;
+            int i2;
+            final int i3;
+            boolean z;
+            String string;
+            int i4;
+            Bundle data = message.getData();
+            if (message.what != 0 || data == null) {
+                return;
+            }
+            MultiPackDispatcher multiPackDispatcher = MultiPackDispatcher.this;
+            if (multiPackDispatcher.mSelectedUserId != 0) {
+                try {
+                    MultiPackDispatcher.m3226$$Nest$mrequestImageWallpaper(multiPackDispatcher, data.getString("wallpaper_path"));
+                    return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+            WallpaperLogger wallpaperLogger = multiPackDispatcher.mLoggerWrapper;
+            Uri uri = (Uri) data.getParcelable("uri");
+            if (uri == null) {
+                Log.d("MultiPackDispatcher", "request2DLS: uri is null.");
+                i3 = 4;
+                i = 1;
+            } else {
+                if (data.getInt(PluginLock.KEY_SCREEN, 0) == 1) {
+                    r11 = 1;
+                    i = 1;
+                } else {
+                    i = 1;
+                    r11 = 0;
+                }
+                boolean booleanQueryParameter = uri.getBooleanQueryParameter("isMigration", false);
+                boolean booleanQueryParameter2 = uri.getBooleanQueryParameter("isCustom", false);
+                String string2 = data.getString("wallpaper_path");
+                Log.i("MultiPackDispatcher", "request2DLS path= " + string2 + ", isSubDisplay = " + ((boolean) r11));
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
+                try {
+                    try {
+                        Bundle bundle = new Bundle();
+                        String str = booleanQueryParameter2 ? "USER.PACK." : "MULTI.PACK.";
+                        bundle.putString("name", r11 != 0 ? str.concat("02") : str.concat("01"));
+                        bundle.putString("wallpaper_path", string2);
+                        bundle.putInt(PluginLock.KEY_SCREEN, r11);
+                        bundle.putInt("isMigration", booleanQueryParameter ? 1 : 0);
+                        Bundle bundleRequestMultiPack = multiPackDispatcher.mPluginLockUtils.requestMultiPack(bundle);
+                        if (bundleRequestMultiPack != null) {
+                            i2 = 0;
+                            try {
+                                z = bundleRequestMultiPack.getBoolean("result", false);
+                                string = bundleRequestMultiPack.getString("reason");
+                            } catch (Exception e2) {
+                                e = e2;
+                                Log.e("MultiPackDispatcher", "request2DLS: error = " + e.toString());
+                                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                                ((WallpaperLoggerImpl) wallpaperLogger).log("MultiPackDispatcher", "request2DLS success.");
+                                i3 = i2;
+                                final int i5 = data.getInt(PluginLock.KEY_SCREEN);
+                                if (i3 != 0) {
+                                }
+                                if (multiPackDispatcher.mOnApplyMultipackListener == null) {
+                                }
+                            }
+                        } else {
+                            i2 = 0;
+                            z = false;
+                            string = "";
+                        }
+                    } catch (Exception e3) {
+                        e = e3;
+                        i2 = 0;
+                    }
+                    if (z) {
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
+                        ((WallpaperLoggerImpl) wallpaperLogger).log("MultiPackDispatcher", "request2DLS success.");
+                        i3 = i2;
+                    } else {
+                        if (!TextUtils.isEmpty(string)) {
+                            ((WallpaperLoggerImpl) wallpaperLogger).log("MultiPackDispatcher", "request2DLS fail." + string);
+                        }
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
+                        i3 = 3;
+                    }
+                } catch (Throwable th) {
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
+                    throw th;
+                }
+            }
+            final int i52 = data.getInt(PluginLock.KEY_SCREEN);
+            if (i3 != 0 || i3 == 2) {
+                if (multiPackDispatcher.mOnApplyMultipackListener == null) {
+                    multiPackDispatcher.mHandler.postDelayed(new Runnable(i3, i52) { // from class: com.android.systemui.wallpaper.MultiPackDispatcher$MyHandler$$ExternalSyntheticLambda0
+                        public final /* synthetic */ int f$1;
+
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MultiPackDispatcher.MyHandler myHandler = this.f$0;
+                            int i6 = this.f$1;
+                            MultiPackDispatcher.this.mOnApplyMultipackListener.getClass();
+                            PluginWallpaperController.AnonymousClass1.onMultipackApplied(i6);
+                        }
+                    }, 500L);
+                    return;
+                }
+                return;
+            }
+            if (i3 != 3) {
+                Log.e("MultiPackDispatcher", "handleMessage: NOT A CASE!");
+                return;
+            }
+            if (i52 == 0) {
+                i4 = MultiPackDispatcher.mRetryCount + 1;
+                MultiPackDispatcher.mRetryCount = i4;
+            } else {
+                i4 = MultiPackDispatcher.mRetryCountSub + 1;
+                MultiPackDispatcher.mRetryCountSub = i4;
+            }
+            if (i4 >= 20) {
+                if (multiPackDispatcher.mOnApplyMultipackListener != null) {
+                    PluginWallpaperController.AnonymousClass1.onMultipackApplied(i);
+                }
+            } else {
+                Message message2 = new Message();
+                Bundle bundle2 = new Bundle(data);
+                message2.what = message.what;
+                message2.setData(bundle2);
+                sendMessageDelayed(message2, 700L);
+            }
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0087 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x004a  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0078  */
     /* renamed from: -$$Nest$mrequestImageWallpaper, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m3209$$Nest$mrequestImageWallpaper(com.android.systemui.wallpaper.MultiPackDispatcher r9, java.lang.String r10) {
-        /*
-            com.android.systemui.wallpaper.log.WallpaperLogger r0 = r9.mLoggerWrapper
-            com.android.systemui.wallpaper.log.WallpaperLoggerImpl r0 = (com.android.systemui.wallpaper.log.WallpaperLoggerImpl) r0
-            java.lang.String r1 = "MultiPackDispatcher"
-            java.lang.String r2 = "requestImageWallpaper for subuser."
-            r0.log(r1, r2)
-            android.content.Context r0 = r9.mContext
-            android.app.WallpaperManager r2 = android.app.WallpaperManager.getInstance(r0)
-            java.io.File r0 = new java.io.File
-            r0.<init>(r10)
-            boolean r3 = r0.exists()
-            r4 = 0
-            if (r3 == 0) goto L47
-            java.io.File[] r0 = r0.listFiles()
-            if (r0 == 0) goto L40
-            int r3 = r0.length
-            if (r3 > 0) goto L28
-            goto L40
-        L28:
-            int r3 = r0.length
-            r5 = 0
-        L2a:
-            if (r5 >= r3) goto L47
-            r6 = r0[r5]
-            if (r6 == 0) goto L3d
-            java.lang.String r7 = r6.getName()
-            java.lang.String r8 = "1"
-            boolean r7 = r7.contains(r8)
-            if (r7 == 0) goto L3d
-            goto L48
-        L3d:
-            int r5 = r5 + 1
-            goto L2a
-        L40:
-            java.lang.String r10 = "getFirstImage list is empty."
-            android.util.Log.e(r1, r10)
-        L45:
-            r3 = r4
-            goto L7e
-        L47:
-            r6 = r4
-        L48:
-            if (r6 != 0) goto L50
-            java.lang.String r10 = "getFirstImage firstFile is null"
-            android.util.Log.d(r1, r10)
-            goto L45
-        L50:
-            java.lang.String r0 = r6.getPath()
-            java.lang.String r3 = "getFirstImage path = "
-            java.lang.String r5 = ", firstFilePath"
-            com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0.m(r3, r10, r5, r0, r1)
-            if (r10 == 0) goto L78
-            java.io.File r10 = new java.io.File     // Catch: java.lang.Exception -> L73
-            r10.<init>(r0)     // Catch: java.lang.Exception -> L73
-            boolean r3 = r10.exists()     // Catch: java.lang.Exception -> L73
-            if (r3 == 0) goto L78
-            boolean r10 = r10.canRead()     // Catch: java.lang.Exception -> L73
-            if (r10 == 0) goto L78
-            android.graphics.Bitmap r4 = android.graphics.BitmapFactory.decodeFile(r0)     // Catch: java.lang.Exception -> L73
-            goto L45
-        L73:
-            r0 = move-exception
-            r10 = r0
-            r10.printStackTrace()
-        L78:
-            java.lang.String r10 = "getFirstImage return null"
-            android.util.Log.e(r1, r10)
-            goto L45
-        L7e:
-            if (r3 != 0) goto L87
-            java.lang.String r9 = "requestImageWallpaper bitmap is null"
-            android.util.Log.e(r1, r9)
-            goto L9b
-        L87:
-            java.lang.String r10 = "requestImageWallpaper setBitmap"
-            android.util.Log.d(r1, r10)     // Catch: java.io.IOException -> L96
-            int r7 = r9.mSelectedUserId     // Catch: java.io.IOException -> L96
-            r5 = 0
-            r6 = 2
-            r4 = 0
-            r2.setBitmap(r3, r4, r5, r6, r7)     // Catch: java.io.IOException -> L96
-            goto L9b
-        L96:
-            r0 = move-exception
-            r9 = r0
-            r9.printStackTrace()
-        L9b:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.MultiPackDispatcher.m3209$$Nest$mrequestImageWallpaper(com.android.systemui.wallpaper.MultiPackDispatcher, java.lang.String):void");
+    public static void m3226$$Nest$mrequestImageWallpaper(MultiPackDispatcher multiPackDispatcher, String str) {
+        File file;
+        File file2;
+        ((WallpaperLoggerImpl) multiPackDispatcher.mLoggerWrapper).log("MultiPackDispatcher", "requestImageWallpaper for subuser.");
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(multiPackDispatcher.mContext);
+        File file3 = new File(str);
+        Bitmap bitmapDecodeFile = null;
+        if (file3.exists()) {
+            File[] fileArrListFiles = file3.listFiles();
+            if (fileArrListFiles == null || fileArrListFiles.length <= 0) {
+                Log.e("MultiPackDispatcher", "getFirstImage list is empty.");
+            } else {
+                int length = fileArrListFiles.length;
+                for (int i = 0; i < length; i++) {
+                    file = fileArrListFiles[i];
+                    if (file != null && file.getName().contains("1")) {
+                        break;
+                    }
+                }
+                file = null;
+                if (file != null) {
+                }
+            }
+        } else {
+            file = null;
+            if (file != null) {
+                Log.d("MultiPackDispatcher", "getFirstImage firstFile is null");
+            } else {
+                String path = file.getPath();
+                MediaSessions$H$$ExternalSyntheticOutline0.m("getFirstImage path = ", str, ", firstFilePath", path, "MultiPackDispatcher");
+                if (str != null) {
+                    try {
+                        file2 = new File(path);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (file2.exists() && file2.canRead()) {
+                        bitmapDecodeFile = BitmapFactory.decodeFile(path);
+                    } else {
+                        Log.e("MultiPackDispatcher", "getFirstImage return null");
+                    }
+                }
+            }
+        }
+        Bitmap bitmap = bitmapDecodeFile;
+        if (bitmap == null) {
+            Log.e("MultiPackDispatcher", "requestImageWallpaper bitmap is null");
+            return;
+        }
+        try {
+            Log.d("MultiPackDispatcher", "requestImageWallpaper setBitmap");
+            wallpaperManager.setBitmap(bitmap, null, false, 2, multiPackDispatcher.mSelectedUserId);
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
     }
 
     public MultiPackDispatcher(Context context, WallpaperLogger wallpaperLogger, PluginLockUtils pluginLockUtils, int i) {
@@ -184,23 +279,23 @@ public class MultiPackDispatcher {
 
     public final boolean startMultipack(int i) {
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this.mContext);
-        String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "startMultipack: which =");
+        String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "startMultipack: which =");
         WallpaperLoggerImpl wallpaperLoggerImpl = (WallpaperLoggerImpl) this.mLoggerWrapper;
-        wallpaperLoggerImpl.log("MultiPackDispatcher", m);
+        wallpaperLoggerImpl.log("MultiPackDispatcher", strM);
         if (!enableDlsIfDisabled(this.mContext)) {
             Log.e("MultiPackDispatcher", "startMultipack: Cannot start multipack. DLS is diabled.");
             return false;
         }
-        Uri semGetUri = wallpaperManager.semGetUri(i);
-        if (semGetUri == null) {
+        Uri uriSemGetUri = wallpaperManager.semGetUri(i);
+        if (uriSemGetUri == null) {
             wallpaperLoggerImpl.log("MultiPackDispatcher", "startMultipack: uri is null., uid = " + this.mContext.getUserId());
             return false;
         }
         if (this.mHandler == null) {
             this.mHandler = new MyHandler(Looper.myLooper());
         }
-        String m2 = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("/data/overlays/homewallpaper/", semGetUri.getHost() + semGetUri.getPath());
-        wallpaperLoggerImpl.log("MultiPackDispatcher", "startMultipack: uri = " + semGetUri + ", fullPath = " + m2 + ", which = " + i);
+        String strM2 = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("/data/overlays/homewallpaper/", uriSemGetUri.getHost() + uriSemGetUri.getPath());
+        wallpaperLoggerImpl.log("MultiPackDispatcher", "startMultipack: uri = " + uriSemGetUri + ", fullPath = " + strM2 + ", which = " + i);
         int i2 = i & 48;
         if (i2 != 0) {
             mRetryCountSub = 0;
@@ -211,8 +306,8 @@ public class MultiPackDispatcher {
         Bundle bundle = new Bundle();
         message.what = 0;
         bundle.putInt(PluginLock.KEY_SCREEN, i2 != 0 ? 1 : 0);
-        bundle.putString("wallpaper_path", m2);
-        bundle.putParcelable("uri", semGetUri);
+        bundle.putString("wallpaper_path", strM2);
+        bundle.putParcelable("uri", uriSemGetUri);
         message.setData(bundle);
         this.mHandler.sendMessageDelayed(message, 100L);
         return true;

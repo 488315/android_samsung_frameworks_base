@@ -1,12 +1,12 @@
 package com.android.systemui.screenshot.resources;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.systemui.R;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Messages {
     public final Context context;
@@ -25,7 +25,7 @@ public class Messages {
             }
 
             @Override // kotlin.jvm.functions.Function0
-            public final Object invoke() {
+            public final Object invoke() throws Resources.NotFoundException {
                 switch (i) {
                     case 0:
                         String string = this.f$0.context.getResources().getString(R.string.screenshot_saving_title);
@@ -57,7 +57,7 @@ public class Messages {
             }
 
             @Override // kotlin.jvm.functions.Function0
-            public final Object invoke() {
+            public final Object invoke() throws Resources.NotFoundException {
                 switch (i2) {
                     case 0:
                         String string = this.f$0.context.getResources().getString(R.string.screenshot_saving_title);
@@ -89,7 +89,7 @@ public class Messages {
             }
 
             @Override // kotlin.jvm.functions.Function0
-            public final Object invoke() {
+            public final Object invoke() throws Resources.NotFoundException {
                 switch (i3) {
                     case 0:
                         String string = this.f$0.context.getResources().getString(R.string.screenshot_saving_title);

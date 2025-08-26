@@ -88,9 +88,9 @@ public interface ITextServicesManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITextServicesManager)) {
-                return (ITextServicesManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITextServicesManager)) {
+                return (ITextServicesManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,49 +130,49 @@ public interface ITextServicesManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SpellCheckerInfo currentSpellChecker = getCurrentSpellChecker(readInt, readString);
+                    SpellCheckerInfo currentSpellChecker = getCurrentSpellChecker(i3, string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentSpellChecker, 1);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    SpellCheckerSubtype currentSpellCheckerSubtype = getCurrentSpellCheckerSubtype(readInt2, readBoolean);
+                    SpellCheckerSubtype currentSpellCheckerSubtype = getCurrentSpellCheckerSubtype(i4, z);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentSpellCheckerSubtype, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    ITextServicesSessionListener asInterface = ITextServicesSessionListener.Stub.asInterface(parcel.readStrongBinder());
-                    ISpellCheckerSessionListener asInterface2 = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    ITextServicesSessionListener iTextServicesSessionListenerAsInterface = ITextServicesSessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISpellCheckerSessionListener iSpellCheckerSessionListenerAsInterface = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getSpellCheckerService(readInt3, readString2, readString3, asInterface, asInterface2, bundle, readInt4);
+                    getSpellCheckerService(i5, string2, string3, iTextServicesSessionListenerAsInterface, iSpellCheckerSessionListenerAsInterface, bundle, i6);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    ISpellCheckerSessionListener asInterface3 = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
+                    ISpellCheckerSessionListener iSpellCheckerSessionListenerAsInterface2 = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    finishSpellCheckerService(readInt5, asInterface3);
+                    finishSpellCheckerService(i7, iSpellCheckerSessionListenerAsInterface2);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSpellCheckerEnabled = isSpellCheckerEnabled(readInt6);
+                    boolean zIsSpellCheckerEnabled = isSpellCheckerEnabled(i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpellCheckerEnabled);
+                    parcel2.writeBoolean(zIsSpellCheckerEnabled);
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SpellCheckerInfo[] enabledSpellCheckers = getEnabledSpellCheckers(readInt7);
+                    SpellCheckerInfo[] enabledSpellCheckers = getEnabledSpellCheckers(i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(enabledSpellCheckers, 1);
                     return true;
@@ -199,98 +199,98 @@ public interface ITextServicesManager extends IInterface {
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public SpellCheckerInfo getCurrentSpellChecker(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SpellCheckerInfo) obtain2.readTypedObject(SpellCheckerInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SpellCheckerInfo) parcelObtain2.readTypedObject(SpellCheckerInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public SpellCheckerSubtype getCurrentSpellCheckerSubtype(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SpellCheckerSubtype) obtain2.readTypedObject(SpellCheckerSubtype.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SpellCheckerSubtype) parcelObtain2.readTypedObject(SpellCheckerSubtype.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public void getSpellCheckerService(int i, String str, String str2, ITextServicesSessionListener iTextServicesSessionListener, ISpellCheckerSessionListener iSpellCheckerSessionListener, Bundle bundle, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iTextServicesSessionListener);
-                    obtain.writeStrongInterface(iSpellCheckerSessionListener);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iTextServicesSessionListener);
+                    parcelObtain.writeStrongInterface(iSpellCheckerSessionListener);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public void finishSpellCheckerService(int i, ISpellCheckerSessionListener iSpellCheckerSessionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSpellCheckerSessionListener);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSpellCheckerSessionListener);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public boolean isSpellCheckerEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
             public SpellCheckerInfo[] getEnabledSpellCheckers(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SpellCheckerInfo[]) obtain2.createTypedArray(SpellCheckerInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SpellCheckerInfo[]) parcelObtain2.createTypedArray(SpellCheckerInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

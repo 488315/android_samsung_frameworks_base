@@ -18,25 +18,25 @@ public class IpUtils {
     }
 
     public static int checksum(ByteBuffer byteBuffer, int i, int i2, int i3) {
-        int i4 = i + 65535;
-        int position = byteBuffer.position();
+        int iIntAbs = i + 65535;
+        int iPosition = byteBuffer.position();
         byteBuffer.position(i2);
-        ShortBuffer asShortBuffer = byteBuffer.asShortBuffer();
-        byteBuffer.position(position);
-        int i5 = (i3 - i2) / 2;
-        for (int i6 = 0; i6 < i5; i6++) {
-            i4 += intAbs(asShortBuffer.get(i6));
+        ShortBuffer shortBufferAsShortBuffer = byteBuffer.asShortBuffer();
+        byteBuffer.position(iPosition);
+        int i4 = (i3 - i2) / 2;
+        for (int i5 = 0; i5 < i4; i5++) {
+            iIntAbs += intAbs(shortBufferAsShortBuffer.get(i5));
         }
-        int i7 = i2 + (i5 * 2);
-        if (i3 != i7) {
-            short s = byteBuffer.get(i7);
+        int i6 = i2 + (i4 * 2);
+        if (i3 != i6) {
+            short s = byteBuffer.get(i6);
             if (s < 0) {
                 s = (short) (s + IGnss.GnssAidingData.DELETE_SVSTEER);
             }
-            i4 += s * IGnss.GnssAidingData.DELETE_SVSTEER;
+            iIntAbs += s * IGnss.GnssAidingData.DELETE_SVSTEER;
         }
-        int i8 = ((i4 >> 16) & 65535) + (i4 & 65535);
-        return (((i8 >> 16) & 65535) + (i8 & 65535)) ^ 65535;
+        int i7 = ((iIntAbs >> 16) & 65535) + (iIntAbs & 65535);
+        return (((i7 >> 16) & 65535) + (i7 & 65535)) ^ 65535;
     }
 
     private static int pseudoChecksumIPv4(ByteBuffer byteBuffer, int i, int i2, int i3) {
@@ -44,11 +44,11 @@ public class IpUtils {
     }
 
     private static int pseudoChecksumIPv6(ByteBuffer byteBuffer, int i, int i2, int i3) {
-        int i4 = i2 + i3;
-        for (int i5 = 8; i5 < 40; i5 += 2) {
-            i4 += intAbs(byteBuffer.getShort(i + i5));
+        int iIntAbs = i2 + i3;
+        for (int i4 = 8; i4 < 40; i4 += 2) {
+            iIntAbs += intAbs(byteBuffer.getShort(i + i4));
         }
-        return i4;
+        return iIntAbs;
     }
 
     private static byte ipversion(ByteBuffer byteBuffer, int i) {
@@ -60,23 +60,23 @@ public class IpUtils {
     }
 
     private static short transportChecksum(ByteBuffer byteBuffer, int i, int i2, int i3, int i4) {
-        int pseudoChecksumIPv6;
+        int iPseudoChecksumIPv6;
         if (i4 < 0) {
             throw new IllegalArgumentException("Transport length < 0: " + i4);
         }
-        byte ipversion = ipversion(byteBuffer, i2);
-        if (ipversion == 4) {
-            pseudoChecksumIPv6 = pseudoChecksumIPv4(byteBuffer, i2, i, i4);
-        } else if (ipversion == 6) {
-            pseudoChecksumIPv6 = pseudoChecksumIPv6(byteBuffer, i2, i, i4);
+        byte bIpversion = ipversion(byteBuffer, i2);
+        if (bIpversion == 4) {
+            iPseudoChecksumIPv6 = pseudoChecksumIPv4(byteBuffer, i2, i, i4);
+        } else if (bIpversion == 6) {
+            iPseudoChecksumIPv6 = pseudoChecksumIPv6(byteBuffer, i2, i, i4);
         } else {
             throw new UnsupportedOperationException("Checksum must be IPv4 or IPv6");
         }
-        int checksum = checksum(byteBuffer, pseudoChecksumIPv6, i3, i4 + i3);
-        if (i == OsConstants.IPPROTO_UDP && checksum == 0) {
-            checksum = -1;
+        int iChecksum = checksum(byteBuffer, iPseudoChecksumIPv6, i3, i4 + i3);
+        if (i == OsConstants.IPPROTO_UDP && iChecksum == 0) {
+            iChecksum = -1;
         }
-        return (short) checksum;
+        return (short) iChecksum;
     }
 
     public static short udpChecksum(ByteBuffer byteBuffer, int i, int i2) {

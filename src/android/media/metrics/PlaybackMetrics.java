@@ -240,43 +240,43 @@ public final class PlaybackMetrics implements Parcelable {
     }
 
     PlaybackMetrics(Parcel parcel) {
-        long readLong = parcel.readLong();
-        long readLong2 = parcel.readLong();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        int readInt5 = parcel.readInt();
-        String readString = (128 & readLong) == 0 ? null : parcel.readString();
-        String readString2 = (readLong & 256) == 0 ? null : parcel.readString();
-        long[] createLongArray = parcel.createLongArray();
-        int readInt6 = parcel.readInt();
-        int readInt7 = parcel.readInt();
-        int readInt8 = parcel.readInt();
-        long readLong3 = parcel.readLong();
-        long readLong4 = parcel.readLong();
-        long readLong5 = parcel.readLong();
+        long j = parcel.readLong();
+        long j2 = parcel.readLong();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        int i5 = parcel.readInt();
+        String string = (128 & j) == 0 ? null : parcel.readString();
+        String string2 = (j & 256) == 0 ? null : parcel.readString();
+        long[] jArrCreateLongArray = parcel.createLongArray();
+        int i6 = parcel.readInt();
+        int i7 = parcel.readInt();
+        int i8 = parcel.readInt();
+        long j3 = parcel.readLong();
+        long j4 = parcel.readLong();
+        long j5 = parcel.readLong();
         byte[] bArr = new byte[parcel.readInt()];
         parcel.readByteArray(bArr);
-        Bundle readBundle = parcel.readBundle();
-        this.mMediaDurationMillis = readLong2;
-        this.mStreamSource = readInt;
-        this.mStreamType = readInt2;
-        this.mPlaybackType = readInt3;
-        this.mDrmType = readInt4;
-        this.mContentType = readInt5;
-        this.mPlayerName = readString;
-        this.mPlayerVersion = readString2;
-        this.mExperimentIds = createLongArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createLongArray);
-        this.mVideoFramesPlayed = readInt6;
-        this.mVideoFramesDropped = readInt7;
-        this.mAudioUnderrunCount = readInt8;
-        this.mNetworkBytesRead = readLong3;
-        this.mLocalBytesRead = readLong4;
-        this.mNetworkTransferDurationMillis = readLong5;
+        Bundle bundle = parcel.readBundle();
+        this.mMediaDurationMillis = j2;
+        this.mStreamSource = i;
+        this.mStreamType = i2;
+        this.mPlaybackType = i3;
+        this.mDrmType = i4;
+        this.mContentType = i5;
+        this.mPlayerName = string;
+        this.mPlayerVersion = string2;
+        this.mExperimentIds = jArrCreateLongArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) jArrCreateLongArray);
+        this.mVideoFramesPlayed = i6;
+        this.mVideoFramesDropped = i7;
+        this.mAudioUnderrunCount = i8;
+        this.mNetworkBytesRead = j3;
+        this.mLocalBytesRead = j4;
+        this.mNetworkTransferDurationMillis = j5;
         this.mDrmSessionId = bArr;
-        this.mMetricsBundle = readBundle;
+        this.mMetricsBundle = bundle;
     }
 
     public static final class Builder {

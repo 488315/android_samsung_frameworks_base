@@ -1,10 +1,16 @@
 package androidx.viewpager2.widget;
 
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScrollEventAdapter extends RecyclerView.OnScrollListener {
     public int mAdapterState;
@@ -20,7 +26,6 @@ public final class ScrollEventAdapter extends RecyclerView.OnScrollListener {
     public int mTarget;
     public final ViewPager2 mViewPager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScrollEventValues {
         public float mOffset;
         public int mOffsetPx;
@@ -114,98 +119,62 @@ public final class ScrollEventAdapter extends RecyclerView.OnScrollListener {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0026, code lost:
-    
-        if ((r7 < 0) == (r5.mViewPager.mLayoutManager.getLayoutDirection() == 1)) goto L15;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0038  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0028  */
     @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onScrolled(androidx.recyclerview.widget.RecyclerView r6, int r7, int r8) {
-        /*
-            r5 = this;
-            r6 = 1
-            r5.mScrollHappened = r6
-            r5.updateScrollEventValues()
-            boolean r0 = r5.mDispatchSelected
-            androidx.viewpager2.widget.ScrollEventAdapter$ScrollEventValues r1 = r5.mScrollValues
-            r2 = -1
-            r3 = 0
-            if (r0 == 0) goto L40
-            r5.mDispatchSelected = r3
-            if (r8 > 0) goto L28
-            if (r8 != 0) goto L30
-            if (r7 >= 0) goto L18
-            r7 = r6
-            goto L19
-        L18:
-            r7 = r3
-        L19:
-            androidx.viewpager2.widget.ViewPager2 r8 = r5.mViewPager
-            androidx.viewpager2.widget.ViewPager2$LinearLayoutManagerImpl r8 = r8.mLayoutManager
-            int r8 = r8.getLayoutDirection()
-            if (r8 != r6) goto L25
-            r8 = r6
-            goto L26
-        L25:
-            r8 = r3
-        L26:
-            if (r7 != r8) goto L30
-        L28:
-            int r7 = r1.mOffsetPx
-            if (r7 == 0) goto L30
-            int r7 = r1.mPosition
-            int r7 = r7 + r6
-            goto L32
-        L30:
-            int r7 = r1.mPosition
-        L32:
-            r5.mTarget = r7
-            int r8 = r5.mDragStartPosition
-            if (r8 == r7) goto L50
-            androidx.viewpager2.widget.CompositeOnPageChangeCallback r8 = r5.mCallback
-            if (r8 == 0) goto L50
-            r8.onPageSelected(r7)
-            goto L50
-        L40:
-            int r7 = r5.mAdapterState
-            if (r7 != 0) goto L50
-            int r7 = r1.mPosition
-            if (r7 != r2) goto L49
-            r7 = r3
-        L49:
-            androidx.viewpager2.widget.CompositeOnPageChangeCallback r8 = r5.mCallback
-            if (r8 == 0) goto L50
-            r8.onPageSelected(r7)
-        L50:
-            int r7 = r1.mPosition
-            if (r7 != r2) goto L55
-            r7 = r3
-        L55:
-            float r8 = r1.mOffset
-            int r0 = r1.mOffsetPx
-            androidx.viewpager2.widget.CompositeOnPageChangeCallback r4 = r5.mCallback
-            if (r4 == 0) goto L60
-            r4.onPageScrolled(r8, r7, r0)
-        L60:
-            int r7 = r1.mPosition
-            int r8 = r5.mTarget
-            if (r7 == r8) goto L68
-            if (r8 != r2) goto L76
-        L68:
-            int r7 = r1.mOffsetPx
-            if (r7 != 0) goto L76
-            int r7 = r5.mScrollState
-            if (r7 == r6) goto L76
-            r5.dispatchStateChanged(r3)
-            r5.resetState()
-        L76:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.viewpager2.widget.ScrollEventAdapter.onScrolled(androidx.recyclerview.widget.RecyclerView, int, int):void");
+    public final void onScrolled(RecyclerView recyclerView, int i, int i2) {
+        int i3;
+        CompositeOnPageChangeCallback compositeOnPageChangeCallback;
+        this.mScrollHappened = true;
+        updateScrollEventValues();
+        boolean z = this.mDispatchSelected;
+        ScrollEventValues scrollEventValues = this.mScrollValues;
+        if (z) {
+            this.mDispatchSelected = false;
+            if (i2 > 0) {
+                i3 = scrollEventValues.mOffsetPx != 0 ? scrollEventValues.mPosition + 1 : scrollEventValues.mPosition;
+                this.mTarget = i3;
+                if (this.mDragStartPosition != i3 && (compositeOnPageChangeCallback = this.mCallback) != null) {
+                    compositeOnPageChangeCallback.onPageSelected(i3);
+                }
+            } else {
+                if (i2 == 0) {
+                    if ((i < 0) == (this.mViewPager.mLayoutManager.getLayoutDirection() == 1)) {
+                    }
+                }
+                this.mTarget = i3;
+                if (this.mDragStartPosition != i3) {
+                    compositeOnPageChangeCallback.onPageSelected(i3);
+                }
+            }
+        } else if (this.mAdapterState == 0) {
+            int i4 = scrollEventValues.mPosition;
+            if (i4 == -1) {
+                i4 = 0;
+            }
+            CompositeOnPageChangeCallback compositeOnPageChangeCallback2 = this.mCallback;
+            if (compositeOnPageChangeCallback2 != null) {
+                compositeOnPageChangeCallback2.onPageSelected(i4);
+            }
+        }
+        int i5 = scrollEventValues.mPosition;
+        if (i5 == -1) {
+            i5 = 0;
+        }
+        float f = scrollEventValues.mOffset;
+        int i6 = scrollEventValues.mOffsetPx;
+        CompositeOnPageChangeCallback compositeOnPageChangeCallback3 = this.mCallback;
+        if (compositeOnPageChangeCallback3 != null) {
+            compositeOnPageChangeCallback3.onPageScrolled(f, i5, i6);
+        }
+        int i7 = scrollEventValues.mPosition;
+        int i8 = this.mTarget;
+        if ((i7 == i8 || i8 == -1) && scrollEventValues.mOffsetPx == 0 && this.mScrollState != 1) {
+            dispatchStateChanged(0);
+            resetState();
+        }
     }
 
     public final void resetState() {
@@ -222,51 +191,134 @@ public final class ScrollEventAdapter extends RecyclerView.OnScrollListener {
         this.mDataSetChangeHappened = false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x013d, code lost:
-    
-        r13 = r0.getChildCount();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:56:0x0141, code lost:
-    
-        if (r3 >= r13) goto L81;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x014b, code lost:
-    
-        if (androidx.viewpager2.widget.AnimateLayoutChangeDetector.hasRunningChangingLayoutTransition(r0.getChildAt(r3)) != false) goto L82;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:59:0x014d, code lost:
-    
-        r3 = r3 + 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:62:0x0157, code lost:
-    
-        throw new java.lang.IllegalStateException("Page(s) contain a ViewGroup with a LayoutTransition (or animateLayoutChanges=\"true\"), which interferes with the scrolling animation. Make sure to call getLayoutTransition().setAnimateParentHierarchy(false) on all ViewGroups with a LayoutTransition before an animation is started.");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:64:0x0158, code lost:
-    
-        r0 = java.util.Locale.US;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0167, code lost:
-    
-        throw new java.lang.IllegalStateException(android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r2.mOffsetPx, "Page can only be offset by a positive amount, not by "));
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:70:0x0134, code lost:
-    
-        if (r5[r1 - 1][1] >= r4) goto L61;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x013b, code lost:
-    
-        if (r0.getChildCount() <= 1) goto L63;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0143  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateScrollEventValues() {
-        /*
-            Method dump skipped, instructions count: 370
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.viewpager2.widget.ScrollEventAdapter.updateScrollEventValues():void");
+        int top;
+        int childCount;
+        int top2;
+        int i;
+        int bottom;
+        int i2;
+        LinearLayoutManager linearLayoutManager = this.mLayoutManager;
+        int iFindFirstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+        ScrollEventValues scrollEventValues = this.mScrollValues;
+        scrollEventValues.mPosition = iFindFirstVisibleItemPosition;
+        if (iFindFirstVisibleItemPosition == -1) {
+            scrollEventValues.mPosition = -1;
+            scrollEventValues.mOffset = 0.0f;
+            scrollEventValues.mOffsetPx = 0;
+            return;
+        }
+        View viewFindViewByPosition = linearLayoutManager.findViewByPosition(iFindFirstVisibleItemPosition);
+        if (viewFindViewByPosition == null) {
+            scrollEventValues.mPosition = -1;
+            scrollEventValues.mOffset = 0.0f;
+            scrollEventValues.mOffsetPx = 0;
+            return;
+        }
+        int i3 = ((RecyclerView.LayoutParams) viewFindViewByPosition.getLayoutParams()).mDecorInsets.left;
+        int i4 = ((RecyclerView.LayoutParams) viewFindViewByPosition.getLayoutParams()).mDecorInsets.right;
+        int i5 = ((RecyclerView.LayoutParams) viewFindViewByPosition.getLayoutParams()).mDecorInsets.top;
+        int i6 = ((RecyclerView.LayoutParams) viewFindViewByPosition.getLayoutParams()).mDecorInsets.bottom;
+        ViewGroup.LayoutParams layoutParams = viewFindViewByPosition.getLayoutParams();
+        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
+            i3 += marginLayoutParams.leftMargin;
+            i4 += marginLayoutParams.rightMargin;
+            i5 += marginLayoutParams.topMargin;
+            i6 += marginLayoutParams.bottomMargin;
+        }
+        int height = viewFindViewByPosition.getHeight() + i5 + i6;
+        int width = viewFindViewByPosition.getWidth() + i3 + i4;
+        int i7 = linearLayoutManager.mOrientation;
+        ViewPager2.RecyclerViewImpl recyclerViewImpl = this.mRecyclerView;
+        if (i7 == 0) {
+            top = (viewFindViewByPosition.getLeft() - i3) - recyclerViewImpl.getPaddingLeft();
+            if (this.mViewPager.mLayoutManager.getLayoutDirection() == 1) {
+                top = -top;
+            }
+            height = width;
+        } else {
+            top = (viewFindViewByPosition.getTop() - i5) - recyclerViewImpl.getPaddingTop();
+        }
+        int i8 = -top;
+        scrollEventValues.mOffsetPx = i8;
+        if (i8 >= 0) {
+            scrollEventValues.mOffset = height != 0 ? i8 / height : 0.0f;
+            return;
+        }
+        AnimateLayoutChangeDetector animateLayoutChangeDetector = new AnimateLayoutChangeDetector(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager2 = animateLayoutChangeDetector.mLayoutManager;
+        int childCount2 = linearLayoutManager2.getChildCount();
+        if (childCount2 != 0) {
+            boolean z = linearLayoutManager2.mOrientation == 0;
+            int[][] iArr = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, childCount2, 2);
+            for (int i9 = 0; i9 < childCount2; i9++) {
+                View childAt = linearLayoutManager2.getChildAt(i9);
+                if (childAt == null) {
+                    throw new IllegalStateException("null view contained in the view hierarchy");
+                }
+                ViewGroup.LayoutParams layoutParams2 = childAt.getLayoutParams();
+                ViewGroup.MarginLayoutParams marginLayoutParams2 = layoutParams2 instanceof ViewGroup.MarginLayoutParams ? (ViewGroup.MarginLayoutParams) layoutParams2 : AnimateLayoutChangeDetector.ZERO_MARGIN_LAYOUT_PARAMS;
+                int[] iArr2 = iArr[i9];
+                if (z) {
+                    top2 = childAt.getLeft();
+                    i = marginLayoutParams2.leftMargin;
+                } else {
+                    top2 = childAt.getTop();
+                    i = marginLayoutParams2.topMargin;
+                }
+                iArr2[0] = top2 - i;
+                int[] iArr3 = iArr[i9];
+                if (z) {
+                    bottom = childAt.getRight();
+                    i2 = marginLayoutParams2.rightMargin;
+                } else {
+                    bottom = childAt.getBottom();
+                    i2 = marginLayoutParams2.bottomMargin;
+                }
+                iArr3[1] = bottom + i2;
+            }
+            Arrays.sort(iArr, new Comparator(animateLayoutChangeDetector) { // from class: androidx.viewpager2.widget.AnimateLayoutChangeDetector.1
+                public AnonymousClass1(AnimateLayoutChangeDetector animateLayoutChangeDetector2) {
+                }
+
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    return ((int[]) obj)[0] - ((int[]) obj2)[0];
+                }
+            });
+            int i10 = 1;
+            while (true) {
+                if (i10 >= childCount2) {
+                    int[] iArr4 = iArr[0];
+                    int i11 = iArr4[1];
+                    int i12 = iArr4[0];
+                    int i13 = i11 - i12;
+                    if (i12 > 0 || iArr[childCount2 - 1][1] < i13) {
+                        break;
+                    }
+                } else if (iArr[i10 - 1][1] != iArr[i10][0]) {
+                    break;
+                } else {
+                    i10++;
+                }
+            }
+            childCount = linearLayoutManager2.getChildCount();
+            for (int i14 = 0; i14 < childCount; i14++) {
+                if (AnimateLayoutChangeDetector.hasRunningChangingLayoutTransition(linearLayoutManager2.getChildAt(i14))) {
+                    throw new IllegalStateException("Page(s) contain a ViewGroup with a LayoutTransition (or animateLayoutChanges=\"true\"), which interferes with the scrolling animation. Make sure to call getLayoutTransition().setAnimateParentHierarchy(false) on all ViewGroups with a LayoutTransition before an animation is started.");
+                }
+            }
+        } else if (linearLayoutManager2.getChildCount() <= 1) {
+            childCount = linearLayoutManager2.getChildCount();
+            while (i14 < childCount) {
+            }
+        }
+        Locale locale = Locale.US;
+        throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(scrollEventValues.mOffsetPx, "Page can only be offset by a positive amount, not by "));
     }
 }

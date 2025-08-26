@@ -59,9 +59,9 @@ public interface IInlineContentProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineContentProvider.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineContentProvider)) {
-                return (IInlineContentProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineContentProvider.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineContentProvider)) {
+                return (IInlineContentProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,11 +94,11 @@ public interface IInlineContentProvider extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                IInlineContentCallback asInterface = IInlineContentCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                IInlineContentCallback iInlineContentCallbackAsInterface = IInlineContentCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                provideContent(readInt, readInt2, asInterface);
+                provideContent(i3, i4, iInlineContentCallbackAsInterface);
             } else if (i == 2) {
                 requestSurfacePackage();
             } else if (i == 3) {
@@ -127,37 +127,37 @@ public interface IInlineContentProvider extends IInterface {
 
             @Override // com.android.internal.view.inline.IInlineContentProvider
             public void provideContent(int i, int i2, IInlineContentCallback iInlineContentCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iInlineContentCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iInlineContentCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.inline.IInlineContentProvider
             public void requestSurfacePackage() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.inline.IInlineContentProvider
             public void onSurfacePackageReleased() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

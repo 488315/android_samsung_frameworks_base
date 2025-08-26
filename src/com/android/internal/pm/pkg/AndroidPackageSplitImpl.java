@@ -79,11 +79,11 @@ public class AndroidPackageSplitImpl implements AndroidPackageSplit {
     }
 
     public int hashCode() {
-        int hash = Objects.hash(this.mName, this.mPath, Integer.valueOf(this.mRevisionCode), Integer.valueOf(this.mFlags), this.mClassLoaderName);
+        int iHash = Objects.hash(this.mName, this.mPath, Integer.valueOf(this.mRevisionCode), Integer.valueOf(this.mFlags), this.mClassLoaderName);
         for (int i = 0; i < this.mDependencies.size(); i++) {
             String name = this.mDependencies.get(i).getName();
-            hash = (hash * 31) + (name == null ? 0 : name.hashCode());
+            iHash = (iHash * 31) + (name == null ? 0 : name.hashCode());
         }
-        return hash;
+        return iHash;
     }
 }

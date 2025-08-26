@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScreenBrightnessInteractor$gammaBrightness$1$1 extends SuspendLambda implements Function4 {
     /* synthetic */ float F$0;
@@ -50,6 +49,6 @@ final class ScreenBrightnessInteractor$gammaBrightness$1$1 extends SuspendLambda
         ScreenBrightnessInteractor screenBrightnessInteractor = this.this$0;
         int i = ScreenBrightnessInteractor.$r8$clinit;
         screenBrightnessInteractor.getClass();
-        return GammaBrightness.m1064boximpl(BrightnessUtils.convertLinearToGammaFloat(f, f2, f3));
+        return GammaBrightness.m1066boximpl(BrightnessUtils.convertLinearToGammaFloat(f, f2, f3));
     }
 }

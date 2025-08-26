@@ -1,6 +1,7 @@
 package com.android.systemui.globalactions.presentation.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import com.samsung.android.globalactions.presentation.view.ResourceType;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionInfo;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FrontLargeCoverContentItemView {
     public final Context mContext;
@@ -35,7 +35,7 @@ public class FrontLargeCoverContentItemView {
         this.mIsWhiteTheme = z2;
     }
 
-    public final void setViewAttrs(View view, boolean z) {
+    public final void setViewAttrs(View view, boolean z) throws Resources.NotFoundException {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(this.mResourceFactory.get(ResourceType.ID_COVER_BTN_BACKGROUND));
         ImageView imageView = (ImageView) view.findViewById(this.mResourceFactory.get(ResourceType.ID_ICON));
         TextView textView = (TextView) view.findViewById(this.mResourceFactory.get(ResourceType.ID_LABEL));
@@ -65,13 +65,13 @@ public class FrontLargeCoverContentItemView {
         imageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.globalactions.presentation.view.FrontLargeCoverContentItemView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                FrontLargeCoverContentItemView.this.mViewModel.onPress();
+                this.f$0.mViewModel.onPress();
             }
         });
         imageView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.globalactions.presentation.view.FrontLargeCoverContentItemView$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view2) {
-                FrontLargeCoverContentItemView.this.mViewModel.onLongPress();
+                this.f$0.mViewModel.onLongPress();
                 return true;
             }
         });

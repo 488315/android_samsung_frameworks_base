@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconsInteractorKairosAdapter implements MobileIconsInteractor, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -44,7 +43,6 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
     public final TableLogBufferFactory logFactory;
     public final MobileConnectionsRepository repo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Module {
         public static final Module INSTANCE = new Module();
 
@@ -58,21 +56,21 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
         this.kairosInteractor = mobileIconsInteractorKairos;
         this.repo = mobileConnectionsRepository;
         this.logFactory = tableLogBufferFactory;
-        Incremental buildIncremental = kairosBuilderImpl.buildIncremental(new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda4(this, 1));
-        Flow coldConflatedFlow = ToColdFlowKt.toColdConflatedFlow(buildIncremental, kairosNetwork);
+        Incremental incrementalBuildIncremental = kairosBuilderImpl.buildIncremental(new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda4(this, 1));
+        Flow coldConflatedFlow = ToColdFlowKt.toColdConflatedFlow(incrementalBuildIncremental, kairosNetwork);
         SharingStarted.Companion companion = SharingStarted.Companion;
         companion.getClass();
         this.interactorsBySubId = FlowKt.stateIn(coldConflatedFlow, coroutineScope, SharingStarted.Companion.Eagerly, MapsKt__MapsKt.emptyMap());
         MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl = (MobileIconsInteractorKairosImpl) mobileIconsInteractorKairos;
         FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.mobileIsDefault, kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepository.getMobileIsDefault().getValue());
         this.filteredSubscriptions = ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.filteredSubscriptions, kairosNetwork);
-        this.icons = FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(StateKt.map(buildIncremental, new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda1(0)), kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), EmptyList.INSTANCE);
+        this.icons = FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(StateKt.map(incrementalBuildIncremental, new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda1(0)), kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), EmptyList.INSTANCE);
         Flow coldConflatedFlow2 = ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.isStackable, kairosNetwork);
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        this.isStackable = FlowKt.stateIn(coldConflatedFlow2, coroutineScope, WhileSubscribed$default, bool);
+        this.isStackable = FlowKt.stateIn(coldConflatedFlow2, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
         FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.activeDataConnectionHasDataEnabled, kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.activeDataIconInteractor = FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(CombineKt.combine(mobileConnectionsRepositoryKairos.getActiveMobileDataSubscriptionId(), buildIncremental, new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda2()), kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.activeDataIconInteractor = FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(CombineKt.combine(mobileConnectionsRepositoryKairos.getActiveMobileDataSubscriptionId(), incrementalBuildIncremental, new MobileIconsInteractorKairosAdapter$$ExternalSyntheticLambda2()), kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
         FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.alwaysShowDataRatIcon, kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.alwaysUseCdmaLevel, kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this.isSingleCarrier = FlowKt.stateIn(ToColdFlowKt.toColdConflatedFlow(mobileIconsInteractorKairosImpl.isSingleCarrier, kairosNetwork), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
@@ -113,8 +111,8 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
     }
 
     @Override // com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractor
-    public final MobileIconInteractor getMobileConnectionInteractorForSubId(final int i) {
-        return new MobileIconInteractor(i) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1
+    public final MobileIconInteractor getMobileConnectionInteractorForSubId(int i) {
+        return new MobileIconInteractor(i) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter.getMobileConnectionInteractorForSubId.1
             public final /* synthetic */ int $subId;
             public final Flow activity;
             public final Flow alwaysShowDataRatIcon;
@@ -155,7 +153,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.activity = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i2) {
                             case 0:
@@ -221,7 +219,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.mobileIsDefault = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i3) {
                             case 0:
@@ -287,7 +285,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isDataConnected = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i4) {
                             case 0:
@@ -353,7 +351,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isInService = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i5) {
                             case 0:
@@ -419,7 +417,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isEmergencyOnly = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i6) {
                             case 0:
@@ -485,7 +483,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isDataEnabled = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i7) {
                             case 0:
@@ -551,7 +549,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.alwaysShowDataRatIcon = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i8) {
                             case 0:
@@ -617,7 +615,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.signalLevelIcon = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i9) {
                             case 0:
@@ -683,7 +681,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.networkTypeIconGroup = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i10) {
                             case 0:
@@ -749,7 +747,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.showSliceAttribution = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i11) {
                             case 0:
@@ -815,7 +813,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isNonTerrestrial = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i12) {
                             case 0:
@@ -881,7 +879,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.networkName = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i13) {
                             case 0:
@@ -947,7 +945,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.carrierName = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i14) {
                             case 0:
@@ -1013,7 +1011,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isSingleCarrier = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i15) {
                             case 0:
@@ -1079,7 +1077,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isRoaming = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i16) {
                             case 0:
@@ -1145,7 +1143,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.roamingId = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i17) {
                             case 0:
@@ -1211,7 +1209,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isForceHidden = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i18) {
                             case 0:
@@ -1277,7 +1275,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isAllowedDuringAirplaneMode = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i19) {
                             case 0:
@@ -1343,7 +1341,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.carrierNetworkChangeActive = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i20) {
                             case 0:
@@ -1409,7 +1407,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isSimOn = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i21) {
                             case 0:
@@ -1475,7 +1473,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isSim1On = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i22) {
                             case 0:
@@ -1541,7 +1539,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.mobileServiceState = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i23) {
                             case 0:
@@ -1607,7 +1605,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.disabledDataIcon = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i24) {
                             case 0:
@@ -1673,7 +1671,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.disabledActivityIcon = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i25) {
                             case 0:
@@ -1739,7 +1737,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.otherSlotInCallState = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i26) {
                             case 0:
@@ -1805,7 +1803,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.voiceNoServiceIcon = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i27) {
                             case 0:
@@ -1871,7 +1869,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.imsRegState = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i28) {
                             case 0:
@@ -1937,7 +1935,7 @@ public final class MobileIconsInteractorKairosAdapter implements MobileIconsInte
                 this.isVoWifiConnected = latest(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) obj;
                         switch (i29) {
                             case 0:

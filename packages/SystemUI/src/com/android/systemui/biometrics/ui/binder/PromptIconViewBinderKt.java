@@ -4,7 +4,6 @@ import com.android.systemui.R;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PromptIconViewBinderKt {
     public static final List sfpsFpToErrorAssets = Arrays.asList(Integer.valueOf(R.raw.biometricprompt_sfps_fingerprint_to_error), Integer.valueOf(R.raw.biometricprompt_sfps_fingerprint_to_error_90), Integer.valueOf(R.raw.biometricprompt_sfps_fingerprint_to_error_180), Integer.valueOf(R.raw.biometricprompt_sfps_fingerprint_to_error_270), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_to_error), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_to_error_90), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_to_error_180), Integer.valueOf(R.raw.biometricprompt_sfps_rear_display_fingerprint_to_error_270));

@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.usb.UsbInterface;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
+import android.sec.enterprise.EnterpriseDeviceManager;
+import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.FrameLayout;
@@ -223,6 +226,7 @@ public class SemPersonaManager {
     public static final int REMOVE_OP_SUCCESS = 0;
     public static final String SANITIZE_DATA_LOCKSCREEN = "knox-sanitize-data-lockscreen";
     public static final String SECUREFOLDER_ICON_CLASS_SWITCH_TO_HOME = "com.samsung.knox.securefolder.switcher.SwitchToPersonalIcon";
+    public static final String SECUREFOLDER_PACKAGE = "com.samsung.knox.securefolder";
     public static String SECURE_FOLDER_NAME = "secure-folder";
     public static final boolean SEC_PRODUCT_FEATURE_KNOX_SUPPORT_CONTAINER = true;
     private static final boolean SEC_PRODUCT_FEATURE_KNOX_SUPPORT_DUAL_DAR = true;
@@ -252,8 +256,7 @@ public class SemPersonaManager {
     public static final String[] excludedPackages = {getFloatingPackageName("SEC_FLOATING_FEATURE_MESSAGE_CONFIG_PACKAGE_NAME", SamsungThemeConstants.LEGACY_MESSAGE_PACKAGE_NAME), "com.android.settings", "com.sec.knox.knoxsetupwizardclient", "com.sec.chaton", "com.sec.pcw", "com.samsung.android.knox.containercore", "com.sec.watchon.phone", "com.sec.android.automotive.drivelink", "com.samsung.android.app.lifetimes", "com.sec.android.app.shealth", AsPackageName.VOICENOTE, "com.sec.android.app.kidshome", "com.sec.knox.app.container", "com.sec.knox.containeragent", "com.sec.android.app.samsungapps", "tv.peel.smartremote", "com.skt.prod.phonebook", "com.sec.enterprise.knox.express", "com.google.android.apps.walletnfcrel", "com.samsung.android.voc", "com.skt.tservice", "com.sktelecom.minit", "com.skt.prod.dialer", "com.skt.skaf.A000VODBOX", "com.skt.skaf.OA00050017", "com.skt.skaf.A000Z00040", "com.skt.skaf.OA00026910", "com.skt.skaf.l001mtm091", "com.skt.prod.phonebook", "com.skt.smartbill", "com.skt.tbagplus", "com.sktelecom.tguard", "com.skt.tdatacoupon", "com.skb.btvmobile", "com.iloen.melon", "com.nate.android.portalmini", "com.tms", "com.skmc.okcashbag.home_google", "com.elevenst", "com.elevenst.deals", "com.moent.vas", "com.skmnc.gifticon", "com.skt.tmaphot", "com.skplanet.mbuzzer", "com.skt.tgift", "com.sktelecom.tsmartpay", "com.cyworld.camera", "com.kt.android.showtouch", "com.kt.wificm", "com.ktshow.cs", "com.kt.olleh.storefront", "com.kth.kshop", "com.show.greenbill", "com.estsoft.alyac", "com.kt.accessory", "kt.navi", "com.olleh.android.oc2", "com.kt.ollehfamilybox", "com.kt.otv", "com.olleh.webtoon", "com.kt.shodoc", "com.ktmusic.geniemusic", "com.ktcs.whowho", "com.kt.apptong", "com.mtelo.ktAPP", "com.kt.bellringolleh", "com.kt.mpay", "com.kt.aljjapackplus", "com.lguplus.appstore", "com.uplus.onphone", "com.lguplus.mobile.cs", "lg.uplusbox", "com.lgu.app.appbundle", "lgt.call", "com.mnet.app", "com.lguplus.usimsvcm", "com.lguplus.navi", "com.lguplus.paynow", "com.uplus.movielte", "com.estsoft.alyac", "com.lguplus.ltealive", "com.uplus.ipagent", "com.lguplus.homeiot", "com.uplus.baseballhdtv", "com.lgu", "com.lgt.tmoney", "com.lguplus.smartotp", "net.daum.android.map", "com.sds.mms.ui", "com.navitime.local.naviwalk", "jp.id_credit_sp.android", "jp.id_credit_sp.android.devappli", "com.nttdocomo.android.dpoint", "com.nttdocomo.android.voicetranslation", "com.nttdocomo.android.moneyrecord", "com.kddi.android.videopass", "com.nttdocomo.android.photocollection", AsPackageName.SYSTEMUI, "com.sec.sprint.wfcstub", "com.sec.sprint.wfc", "com.oculus.horizon", "com.samsung.android.app.watchmanager", "com.samsung.android.spay", "com.sec.android.easyMover", "com.samsung.android.wms", "com.samsung.android.gear360manager", "com.samsung.android.samsunggear360manager", "com.samsung.android.video360", "com.samsung.android.app.vrsetupwizard", "com.oculus.horizon", "com.samsung.android.game.gamehome", "com.samsung.android.globalroaming", "com.samsung.android.visionintelligence", "com.samsung.android.oneconnect", UploaderBroadcaster.UPLOADER_PACKAGENAME};
     public static final String[] approvedPackages = {"com.android.chrome", "com.google.android.apps", "com.google.android.apps.plus", "com.google.android.apps.docs", "com.google.android.gm", "com.google.android.googlequicksearchbox", "com.google.android.talk", "com.google.android.apps.maps", "com.google.android.apps.books", "com.google.android.play.games", "com.google.android.music", "com.google.android.videos", "com.google.android.apps.magazines", "com.google.android.youtube", "com.samsung.android.app.memo", "com.sec.keystringscreen", "com.infraware.polarisoffice5", "com.microsoft.office.excel", "com.microsoft.office.powerpoint", "com.microsoft.office.word", "com.hancom.androidpc.viewer.launcher", "com.hancom.office.editor", "com.whatsapp", "com.tencent.mm", "com.facebook.katana", "com.facebook.orca", "com.instagram.android", "com.skype.raider", "com.microsoft.office.onenote", "com.microsoft.skydrive", "com.samsung.android.contacts", "com.sec.android.app.myfiles", SemShareConstants.GALLERY_PACKAGE, "com.samsung.android.app.notes", "com.samsung.android.calendar", "com.samsung.android.email.provider", "com.sec.android.app.camera", "com.sec.android.app.sbrowser"};
     public static final String[] mdmPackages = {"com.samsung.mdmtest1", "com.samsung.mdmtest2", "com.samsung.edmtest", "com.samsung.edmtest1", "com.samsung.edmtest2", "com.samsung.containertool"};
-    public static final String SECUREFOLDER_PACKAGE = "com.samsung.knox.securefolder";
-    private static List<String> skipPackagesListForNotification = Arrays.asList("android", SECUREFOLDER_PACKAGE);
+    private static List<String> skipPackagesListForNotification = Arrays.asList("android", "com.samsung.knox.securefolder");
     private static ISemPersonaManager _instance = null;
     private static final Object pmInstanceLock = new Object();
 
@@ -347,9 +350,9 @@ public class SemPersonaManager {
             if (i == 2) {
                 Iterator<Integer> it = knoxIds.iterator();
                 while (it.hasNext()) {
-                    int intValue = it.next().intValue();
-                    if (isSecureFolderId(intValue)) {
-                        return intValue;
+                    int iIntValue = it.next().intValue();
+                    if (isSecureFolderId(iIntValue)) {
+                        return iIntValue;
                     }
                 }
             }
@@ -406,15 +409,15 @@ public class SemPersonaManager {
         return checkContainerType(i, 32) || isSecureFolderId(i);
     }
 
-    private static boolean checkContainerType(int i, int i2) {
+    private static boolean checkContainerType(int i, int i2) throws NumberFormatException {
         String str = SystemProperties.get(PROPERTY_KNOX_CONTAINER_INFO);
         if (str != null && str.length() > 0) {
             for (String str2 : str.split(":")) {
-                String[] split = str2.split(",");
-                if (split != null && split.length == 2) {
-                    int parseInt = Integer.parseInt(split[0]);
-                    int parseInt2 = Integer.parseInt(split[1]);
-                    if (parseInt == i && (parseInt2 & i2) > 0) {
+                String[] strArrSplit = str2.split(",");
+                if (strArrSplit != null && strArrSplit.length == 2) {
+                    int i3 = Integer.parseInt(strArrSplit[0]);
+                    int i4 = Integer.parseInt(strArrSplit[1]);
+                    if (i3 == i && (i4 & i2) > 0) {
                         return true;
                     }
                 }
@@ -427,8 +430,8 @@ public class SemPersonaManager {
         String str = SystemProperties.get(PROPERTY_KNOX_CONTAINER_INFO);
         if (str != null && str.length() > 0) {
             for (String str2 : str.split(":")) {
-                String[] split = str2.split(",");
-                if (split != null && split.length == 2 && (Integer.parseInt(split[1]) & i) > 0) {
+                String[] strArrSplit = str2.split(",");
+                if (strArrSplit != null && strArrSplit.length == 2 && (Integer.parseInt(strArrSplit[1]) & i) > 0) {
                     return true;
                 }
             }
@@ -822,19 +825,19 @@ public class SemPersonaManager {
         }
     }
 
-    private HashMap<Integer, Integer> getContainerInfo() {
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
+    private HashMap<Integer, Integer> getContainerInfo() throws NumberFormatException {
+        HashMap<Integer, Integer> map = new HashMap<>();
         String str = SystemProperties.get(PROPERTY_KNOX_CONTAINER_INFO);
         Log.d("API test", "getContainerInfo: value is " + str);
         if (str != null && str.length() > 0) {
             for (String str2 : str.split(":")) {
-                String[] split = str2.split(",");
-                if (split != null && split.length == 2) {
-                    hashMap.put(Integer.valueOf(Integer.parseInt(split[0])), Integer.valueOf(Integer.parseInt(split[1])));
+                String[] strArrSplit = str2.split(",");
+                if (strArrSplit != null && strArrSplit.length == 2) {
+                    map.put(Integer.valueOf(Integer.parseInt(strArrSplit[0])), Integer.valueOf(Integer.parseInt(strArrSplit[1])));
                 }
             }
         }
-        return hashMap;
+        return map;
     }
 
     public int getFocusedKnoxId() {
@@ -868,9 +871,7 @@ public class SemPersonaManager {
         return ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_WORK_TAB, new Supplier() { // from class: com.samsung.android.knox.SemPersonaManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                String containerName;
-                containerName = SemPersonaManager.getContainerName(null, null, i);
-                return containerName;
+                return SemPersonaManager.getContainerName(null, null, i);
             }
         });
     }
@@ -973,7 +974,7 @@ public class SemPersonaManager {
         return new Pair<>(false, null);
     }
 
-    public static Pair<Boolean, Drawable> getNotificationBadge(UserHandle userHandle, int i, Context context) {
+    public static Pair<Boolean, Drawable> getNotificationBadge(UserHandle userHandle, int i, Context context) throws Resources.NotFoundException {
         byte[] customResource = getCustomResource(userHandle.getIdentifier(), CUSTOM_BADGE_ICON);
         if (customResource != null) {
             return new Pair<>(true, new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(customResource, 0, customResource.length)));
@@ -1038,7 +1039,7 @@ public class SemPersonaManager {
     private boolean isSecureFolderMetaDataEnabled() {
         Bundle bundle;
         try {
-            ApplicationInfo applicationInfo = this.mContext.getPackageManager().getApplicationInfo(SECUREFOLDER_PACKAGE, 128);
+            ApplicationInfo applicationInfo = this.mContext.getPackageManager().getApplicationInfo("com.samsung.knox.securefolder", 128);
             if (applicationInfo != null && (bundle = applicationInfo.metaData) != null) {
                 if (bundle.getBoolean("com.samsung.knox.securefolder.enable", false)) {
                     return true;
@@ -1090,15 +1091,15 @@ public class SemPersonaManager {
     }
 
     public HashMap<Integer, String> getAllKnoxNamesAndIds(boolean z) {
-        HashMap<Integer, String> hashMap = new HashMap<>();
+        HashMap<Integer, String> map = new HashMap<>();
         UserManager userManager = (UserManager) this.mContext.getSystemService("user");
         List<Integer> knoxIds = getKnoxIds(z);
         if (knoxIds != null && knoxIds.size() != 0) {
             for (Integer num : knoxIds) {
-                hashMap.put(num, userManager.getUserInfo(num.intValue()).name);
+                map.put(num, userManager.getUserInfo(num.intValue()).name);
             }
         }
-        return hashMap;
+        return map;
     }
 
     public static boolean isPkgAllowedToListenKnoxNoti(Context context, String str) {
@@ -1289,11 +1290,11 @@ public class SemPersonaManager {
         if (!isKnoxId(i)) {
             return null;
         }
-        Intent createConfirmDeviceCredentialIntent = getKeyguardManager().createConfirmDeviceCredentialIntent(charSequence, charSequence2, i);
-        if (createConfirmDeviceCredentialIntent != null) {
-            createConfirmDeviceCredentialIntent.setAction(INTENT_ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER);
+        Intent intentCreateConfirmDeviceCredentialIntent = getKeyguardManager().createConfirmDeviceCredentialIntent(charSequence, charSequence2, i);
+        if (intentCreateConfirmDeviceCredentialIntent != null) {
+            intentCreateConfirmDeviceCredentialIntent.setAction(INTENT_ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER);
         }
-        return createConfirmDeviceCredentialIntent;
+        return intentCreateConfirmDeviceCredentialIntent;
     }
 
     public static Intent createChangeCredentialIntent(int i, IntentSender intentSender) {
@@ -1317,9 +1318,7 @@ public class SemPersonaManager {
         return ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_WORK_TAB, new Supplier() { // from class: com.samsung.android.knox.SemPersonaManager$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                String string;
-                string = Context.this.getString(R.string.work_profile_name);
-                return string;
+                return context.getString(R.string.work_profile_name);
             }
         });
     }
@@ -1329,9 +1328,7 @@ public class SemPersonaManager {
             return ((DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_WORK_TAB, new Supplier() { // from class: com.samsung.android.knox.SemPersonaManager$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String string;
-                    string = Context.this.getString(R.string.work_name);
-                    return string;
+                    return context.getString(R.string.work_name);
                 }
             });
         } catch (Exception e) {
@@ -1341,7 +1338,7 @@ public class SemPersonaManager {
     }
 
     public static boolean isKnoxIcon(String str, String str2) {
-        if (SECUREFOLDER_PACKAGE.equals(str) && str2 != null && str2.contains(ICON_CLASS_SECUREFOLDER_FILE_STORE)) {
+        if ("com.samsung.knox.securefolder".equals(str) && str2 != null && str2.contains(ICON_CLASS_SECUREFOLDER_FILE_STORE)) {
             return true;
         }
         return "android".equals(str) && str2 != null && str2.contains(ICON_CLASS_FOR_INTENT_FORWARD_TO_PROFILE) && !str2.equals(ICON_CLASS_FOR_INTENT_FORWARD_TO_PROFILE);
@@ -1418,11 +1415,11 @@ public class SemPersonaManager {
         byte[] bArr = new byte[i];
         int i2 = 0;
         while (i2 < i) {
-            int read = fileInputStream.read(bArr, i2, i - i2);
-            if (read < 0) {
+            int i3 = fileInputStream.read(bArr, i2, i - i2);
+            if (i3 < 0) {
                 break;
             }
-            i2 += read;
+            i2 += i3;
         }
         if (i2 < i) {
             throw new IOException("The file was not completely read: " + file.getName());
@@ -1431,68 +1428,50 @@ public class SemPersonaManager {
         return bArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0036 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0037  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0036 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0037  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] getKnoxIcon(int r5) {
-        /*
-            com.samsung.android.knox.ISemPersonaManager r0 = getPersonaService()
-            r1 = 0
-            if (r0 != 0) goto L8
-            return r1
-        L8:
-            com.samsung.android.knox.ISemPersonaManager r0 = getPersonaService()     // Catch: android.os.RemoteException -> L2b
-            r2 = 0
-            r3 = 1
-            java.util.List r0 = r0.getProfiles(r2, r3)     // Catch: android.os.RemoteException -> L2b
-            java.util.Iterator r0 = r0.iterator()     // Catch: android.os.RemoteException -> L2b
-            r2 = r1
-        L17:
-            boolean r3 = r0.hasNext()     // Catch: android.os.RemoteException -> L29
-            if (r3 == 0) goto L34
-            java.lang.Object r3 = r0.next()     // Catch: android.os.RemoteException -> L29
-            android.content.pm.UserInfo r3 = (android.content.pm.UserInfo) r3     // Catch: android.os.RemoteException -> L29
-            int r4 = r3.id     // Catch: android.os.RemoteException -> L29
-            if (r4 != r5) goto L17
-            r2 = r3
-            goto L17
-        L29:
-            r0 = move-exception
-            goto L2d
-        L2b:
-            r0 = move-exception
-            r2 = r1
-        L2d:
-            java.lang.String r3 = com.samsung.android.knox.SemPersonaManager.TAG
-            java.lang.String r4 = "Could not getUserInfo"
-            android.util.Log.w(r3, r4, r0)
-        L34:
-            if (r2 != 0) goto L37
-            return r1
-        L37:
-            boolean r0 = r2.isSecureFolder()
-            if (r0 == 0) goto L44
-            java.lang.String r0 = "com.samsung.knox.securefolder"
-            byte[] r5 = getKnoxIcon(r0, r1, r5)
-            return r5
-        L44:
-            boolean r0 = r2.isManagedProfile()
-            if (r0 != 0) goto L4b
-            return r1
-        L4b:
-            byte[] r5 = getKnoxIcon(r1, r1, r5)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.SemPersonaManager.getKnoxIcon(int):byte[]");
+    public static byte[] getKnoxIcon(int i) {
+        UserInfo userInfo;
+        if (getPersonaService() == null) {
+            return null;
+        }
+        try {
+            userInfo = null;
+            for (UserInfo userInfo2 : getPersonaService().getProfiles(0, true)) {
+                try {
+                    if (userInfo2.id == i) {
+                        userInfo = userInfo2;
+                    }
+                } catch (RemoteException e) {
+                    e = e;
+                    Log.w(TAG, "Could not getUserInfo", e);
+                    if (userInfo != null) {
+                    }
+                }
+            }
+        } catch (RemoteException e2) {
+            e = e2;
+            userInfo = null;
+        }
+        if (userInfo != null) {
+            return null;
+        }
+        if (userInfo.isSecureFolder()) {
+            return getKnoxIcon("com.samsung.knox.securefolder", null, i);
+        }
+        if (userInfo.isManagedProfile()) {
+            return getKnoxIcon(null, null, i);
+        }
+        return null;
     }
 
     public static byte[] getKnoxIcon(String str, String str2, int i) {
         if (getPersonaService() != null) {
             try {
-                if (SECUREFOLDER_PACKAGE.equals(str) && str2 != null && str2.contains(ICON_CLASS_SECUREFOLDER_FILE_STORE)) {
+                if ("com.samsung.knox.securefolder".equals(str) && str2 != null && str2.contains(ICON_CLASS_SECUREFOLDER_FILE_STORE)) {
                     return null;
                 }
                 return getPersonaService().getKnoxIcon(str, str2, i);
@@ -1507,10 +1486,10 @@ public class SemPersonaManager {
         try {
             String stringForUser = Settings.Secure.getStringForUser(context.getContentResolver(), Settings.Secure.SECURE_FOLDER_IMAGE_NAME, 0);
             if (stringForUser != null && !stringForUser.isEmpty()) {
-                return context.getPackageManager().getApplicationIcon(SECUREFOLDER_PACKAGE);
+                return context.getPackageManager().getApplicationIcon("com.samsung.knox.securefolder");
             }
             context.getPackageManager();
-            return context.getPackageManager().semGetApplicationIconForIconTray(SECUREFOLDER_PACKAGE, 32);
+            return context.getPackageManager().semGetApplicationIconForIconTray("com.samsung.knox.securefolder", 32);
         } catch (Exception e) {
             Log.e(TAG, "Exception in getSecureFolderIcon : " + e.getMessage());
             return null;
@@ -1524,7 +1503,7 @@ public class SemPersonaManager {
             e.printStackTrace();
         }
         if (isSecureFolderId(i)) {
-            return (String) context.getPackageManager().getPackageInfo(SECUREFOLDER_PACKAGE, 0).applicationInfo.loadLabel(context.getPackageManager());
+            return (String) context.getPackageManager().getPackageInfo("com.samsung.knox.securefolder", 0).applicationInfo.loadLabel(context.getPackageManager());
         }
         if (isDualAppId(i)) {
             return (String) context.getPackageManager().getPackageInfo("com.samsung.android.da.daagent", 0).applicationInfo.loadLabel(context.getPackageManager());
@@ -1726,83 +1705,50 @@ public class SemPersonaManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x007e A[Catch: Exception -> 0x0087, TRY_LEAVE, TryCatch #2 {Exception -> 0x0087, blocks: (B:6:0x0009, B:8:0x0011, B:10:0x0036, B:18:0x003c, B:21:0x005d, B:14:0x007e, B:24:0x0073), top: B:5:0x0009 }] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x007e A[Catch: Exception -> 0x0087, TRY_LEAVE, TryCatch #2 {Exception -> 0x0087, blocks: (B:4:0x0009, B:6:0x0011, B:8:0x0036, B:10:0x003c, B:11:0x005d, B:20:0x007e, B:17:0x0073), top: B:30:0x0009 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean shouldBlockUsbInterface(int r6, android.hardware.usb.UsbInterface r7) {
-        /*
-            java.lang.String r0 = "Knox:: claimInterface : calling isPackageAllowedToAccessExternalSdcard allowed-"
-            java.lang.String r1 = "Knox:: claimInterface : calling isPackageAllowedToAccessExternalSdcard for user- "
-            java.lang.String r2 = "Knox:: claimInterface : request for user -"
-            r3 = 0
-            if (r7 == 0) goto L8f
-            int r4 = r7.getInterfaceClass()     // Catch: java.lang.Exception -> L87
-            r5 = 8
-            if (r4 != r5) goto L8f
-            java.lang.String r4 = com.samsung.android.knox.SemPersonaManager.TAG     // Catch: java.lang.Exception -> L87
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: java.lang.Exception -> L87
-            r5.<init>(r2)     // Catch: java.lang.Exception -> L87
-            r5.append(r6)     // Catch: java.lang.Exception -> L87
-            java.lang.String r2 = " and interface reuqest -"
-            r5.append(r2)     // Catch: java.lang.Exception -> L87
-            int r7 = r7.getInterfaceClass()     // Catch: java.lang.Exception -> L87
-            r5.append(r7)     // Catch: java.lang.Exception -> L87
-            java.lang.String r7 = r5.toString()     // Catch: java.lang.Exception -> L87
-            android.util.Log.d(r4, r7)     // Catch: java.lang.Exception -> L87
-            r7 = 220(0xdc, float:3.08E-43)
-            boolean r7 = isKnoxVersionSupported(r7)     // Catch: java.lang.Exception -> L87
-            if (r7 == 0) goto L8f
-            android.sec.enterprise.IEDMProxy r7 = android.sec.enterprise.EnterpriseDeviceManager.EDMProxyServiceHelper.getService()     // Catch: java.lang.Exception -> L87
-            if (r7 == 0) goto L7b
-            int r2 = android.os.Binder.getCallingUid()     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            java.lang.String r4 = com.samsung.android.knox.SemPersonaManager.TAG     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            r5.<init>(r1)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            r5.append(r6)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            java.lang.String r1 = " and callingUid-"
-            r5.append(r1)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            r5.append(r2)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            java.lang.String r1 = r5.toString()     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            android.util.Log.d(r4, r1)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            boolean r6 = r7.isPackageAllowedToAccessExternalSdcard(r6, r2)     // Catch: android.os.RemoteException -> L71 java.lang.Exception -> L87
-            java.lang.String r7 = com.samsung.android.knox.SemPersonaManager.TAG     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            r1.<init>(r0)     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            r1.append(r6)     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            java.lang.String r0 = r1.toString()     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            android.util.Log.d(r7, r0)     // Catch: android.os.RemoteException -> L6f java.lang.Exception -> L87
-            goto L7c
-        L6f:
-            r7 = move-exception
-            goto L73
-        L71:
-            r7 = move-exception
-            r6 = r3
-        L73:
-            java.lang.String r0 = com.samsung.android.knox.SemPersonaManager.TAG     // Catch: java.lang.Exception -> L87
-            java.lang.String r1 = "doBind(): isPackageAllowedToAccessExternalSdcard on EDMProxy failed! "
-            android.util.Log.w(r0, r1, r7)     // Catch: java.lang.Exception -> L87
-            goto L7c
-        L7b:
-            r6 = r3
-        L7c:
-            if (r6 != 0) goto L8f
-            java.lang.String r6 = com.samsung.android.knox.SemPersonaManager.TAG     // Catch: java.lang.Exception -> L87
-            java.lang.String r7 = "Knox:: claimInterface : blocking claim interface request"
-            android.util.Log.d(r6, r7)     // Catch: java.lang.Exception -> L87
-            r6 = 1
-            return r6
-        L87:
-            r6 = move-exception
-            java.lang.String r7 = com.samsung.android.knox.SemPersonaManager.TAG
-            java.lang.String r0 = "claimInterface exception "
-            android.util.Log.w(r7, r0, r6)
-        L8f:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.SemPersonaManager.shouldBlockUsbInterface(int, android.hardware.usb.UsbInterface):boolean");
+    public static boolean shouldBlockUsbInterface(int i, UsbInterface usbInterface) {
+        boolean zIsPackageAllowedToAccessExternalSdcard;
+        if (usbInterface != null) {
+            try {
+                if (usbInterface.getInterfaceClass() == 8) {
+                    Log.d(TAG, "Knox:: claimInterface : request for user -" + i + " and interface reuqest -" + usbInterface.getInterfaceClass());
+                    if (isKnoxVersionSupported(220)) {
+                        IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+                        if (service != null) {
+                            try {
+                                int callingUid = Binder.getCallingUid();
+                                Log.d(TAG, "Knox:: claimInterface : calling isPackageAllowedToAccessExternalSdcard for user- " + i + " and callingUid-" + callingUid);
+                                zIsPackageAllowedToAccessExternalSdcard = service.isPackageAllowedToAccessExternalSdcard(i, callingUid);
+                            } catch (RemoteException e) {
+                                e = e;
+                                zIsPackageAllowedToAccessExternalSdcard = false;
+                            }
+                            try {
+                                Log.d(TAG, "Knox:: claimInterface : calling isPackageAllowedToAccessExternalSdcard allowed-" + zIsPackageAllowedToAccessExternalSdcard);
+                            } catch (RemoteException e2) {
+                                e = e2;
+                                Log.w(TAG, "doBind(): isPackageAllowedToAccessExternalSdcard on EDMProxy failed! ", e);
+                                if (!zIsPackageAllowedToAccessExternalSdcard) {
+                                }
+                                return false;
+                            }
+                        } else {
+                            zIsPackageAllowedToAccessExternalSdcard = false;
+                        }
+                        if (!zIsPackageAllowedToAccessExternalSdcard) {
+                            Log.d(TAG, "Knox:: claimInterface : blocking claim interface request");
+                            return true;
+                        }
+                    }
+                }
+            } catch (Exception e3) {
+                Log.w(TAG, "claimInterface exception ", e3);
+            }
+        }
+        return false;
     }
 
     public boolean bindCoreServiceAsUser(ComponentName componentName, Intent intent, ServiceConnection serviceConnection, int i, UserHandle userHandle) {
@@ -1885,8 +1831,8 @@ public class SemPersonaManager {
             @Override // java.lang.Runnable
             public void run() {
                 try {
-                    ImageView imageView = new ImageView(Context.this);
-                    Drawable userBadgeForDensity = Context.this.getPackageManager().getUserBadgeForDensity(userHandle, 0);
+                    ImageView imageView = new ImageView(context);
+                    Drawable userBadgeForDensity = context.getPackageManager().getUserBadgeForDensity(userHandle, 0);
                     if (userBadgeForDensity != null) {
                         imageView.setImageDrawable(userBadgeForDensity);
                         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(userBadgeForDensity.getIntrinsicWidth(), userBadgeForDensity.getIntrinsicHeight());
@@ -2012,8 +1958,8 @@ public class SemPersonaManager {
         ArrayList<ComponentName> arrayList = new ArrayList<>();
         Iterator<String> it = list.iterator();
         while (it.hasNext()) {
-            String[] split = it.next().split("/");
-            arrayList.add(new ComponentName(split[0], split[1]));
+            String[] strArrSplit = it.next().split("/");
+            arrayList.add(new ComponentName(strArrSplit[0], strArrSplit[1]));
         }
         return arrayList;
     }

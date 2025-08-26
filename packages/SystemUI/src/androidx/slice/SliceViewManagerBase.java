@@ -15,13 +15,11 @@ import androidx.slice.SliceViewManager;
 import androidx.slice.widget.SliceLiveData;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SliceViewManagerBase extends SliceViewManager {
     public final Context mContext;
     public final ArrayMap mListenerLookup = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceListenerImpl {
         public final SliceViewManager.SliceCallback mCallback;
         public final Executor mExecutor;
@@ -51,11 +49,11 @@ public abstract class SliceViewManagerBase extends SliceViewManager {
                         arraySet2.add(sliceSpec == null ? null : new android.app.slice.SliceSpec(sliceSpec.mType, sliceSpec.mRevision));
                     }
                 }
-                final Slice wrap = SliceConvert.wrap(sliceManager.bindSlice(uri, arraySet2), context);
+                final Slice sliceWrap = SliceConvert.wrap(sliceManager.bindSlice(uri, arraySet2), context);
                 SliceListenerImpl.this.mExecutor.execute(new Runnable() { // from class: androidx.slice.SliceViewManagerBase.SliceListenerImpl.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SliceListenerImpl.this.mCallback.onSliceUpdated(wrap);
+                        SliceListenerImpl.this.mCallback.onSliceUpdated(sliceWrap);
                     }
                 });
             }
@@ -102,9 +100,9 @@ public abstract class SliceViewManagerBase extends SliceViewManager {
             }
         }
         SliceViewManagerBase sliceViewManagerBase2 = SliceViewManagerBase.this;
-        ContentProviderClient acquireContentProviderClient = sliceViewManagerBase2.mContext.getContentResolver().acquireContentProviderClient(sliceListenerImpl.mUri);
-        if (acquireContentProviderClient != null) {
-            acquireContentProviderClient.release();
+        ContentProviderClient contentProviderClientAcquireContentProviderClient = sliceViewManagerBase2.mContext.getContentResolver().acquireContentProviderClient(sliceListenerImpl.mUri);
+        if (contentProviderClientAcquireContentProviderClient != null) {
+            contentProviderClientAcquireContentProviderClient.release();
             sliceViewManagerBase2.mContext.getContentResolver().registerContentObserver(sliceListenerImpl.mUri, true, sliceListenerImpl.mObserver);
             if (sliceListenerImpl.mPinned) {
                 return;

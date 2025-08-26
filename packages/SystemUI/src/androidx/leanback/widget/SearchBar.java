@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SearchBar extends RelativeLayout {
     public boolean mAutoStartRecognition;
@@ -42,14 +41,12 @@ public class SearchBar extends RelativeLayout {
     public final int mTextHintColor;
     public final int mTextHintColorSpeechMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.leanback.widget.SearchBar$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.leanback.widget.SearchBar$6, reason: invalid class name */
     public class AnonymousClass6 implements View.OnClickListener {
         public AnonymousClass6() {
@@ -88,13 +85,13 @@ public class SearchBar extends RelativeLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mBarBackground = ((RelativeLayout) findViewById(R.id.lb_search_bar_items)).getBackground();
         this.mSearchTextEditor = (SearchEditText) findViewById(R.id.lb_search_text_editor);
         this.mSearchTextEditor.setOnFocusChangeListener(new View.OnFocusChangeListener() { // from class: androidx.leanback.widget.SearchBar.1
             @Override // android.view.View.OnFocusChangeListener
-            public final void onFocusChange(View view, boolean z) {
+            public final void onFocusChange(View view, boolean z) throws Resources.NotFoundException {
                 if (z) {
                     final SearchBar searchBar = SearchBar.this;
                     searchBar.mHandler.post(new Runnable() { // from class: androidx.leanback.widget.SearchBar.8
@@ -116,11 +113,11 @@ public class SearchBar extends RelativeLayout {
             @Override // java.lang.Runnable
             public final void run() {
                 SearchBar searchBar = SearchBar.this;
-                String editable = searchBar.mSearchTextEditor.getText().toString();
-                if (TextUtils.equals(searchBar.mSearchQuery, editable)) {
+                String string = searchBar.mSearchTextEditor.getText().toString();
+                if (TextUtils.equals(searchBar.mSearchQuery, string)) {
                     return;
                 }
-                searchBar.mSearchQuery = editable;
+                searchBar.mSearchQuery = string;
             }
         };
         this.mSearchTextEditor.addTextChangedListener(new TextWatcher() { // from class: androidx.leanback.widget.SearchBar.3
@@ -172,7 +169,7 @@ public class SearchBar extends RelativeLayout {
         speechOrbView.mListener = new AnonymousClass6();
         this.mSpeechOrbView.setOnFocusChangeListener(new View.OnFocusChangeListener() { // from class: androidx.leanback.widget.SearchBar.7
             @Override // android.view.View.OnFocusChangeListener
-            public final void onFocusChange(View view, boolean z) {
+            public final void onFocusChange(View view, boolean z) throws Resources.NotFoundException {
                 if (z) {
                     SearchBar searchBar = SearchBar.this;
                     searchBar.mInputMethodManager.hideSoftInputFromWindow(searchBar.mSearchTextEditor.getWindowToken(), 0);
@@ -199,7 +196,7 @@ public class SearchBar extends RelativeLayout {
         this.mSearchTextEditor.setNextFocusDownId(i);
     }
 
-    public final void updateHint() {
+    public final void updateHint() throws Resources.NotFoundException {
         String string = getResources().getString(R.string.lb_search_bar_hint);
         if (!TextUtils.isEmpty(null)) {
             string = this.mSpeechOrbView.isFocused() ? getResources().getString(R.string.lb_search_bar_hint_with_title_speech, null) : getResources().getString(R.string.lb_search_bar_hint_with_title, null);
@@ -213,7 +210,7 @@ public class SearchBar extends RelativeLayout {
         }
     }
 
-    public final void updateUi(boolean z) {
+    public final void updateUi(boolean z) throws Resources.NotFoundException {
         if (z) {
             this.mBarBackground.setAlpha(this.mBackgroundSpeechAlpha);
             if (this.mSpeechOrbView.isFocused()) {

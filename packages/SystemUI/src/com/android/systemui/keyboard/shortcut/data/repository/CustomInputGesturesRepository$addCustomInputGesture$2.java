@@ -14,7 +14,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomInputGesturesRepository$addCustomInputGesture$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ InputGestureData $inputGesture;
@@ -40,7 +39,7 @@ final class CustomInputGesturesRepository$addCustomInputGesture$2 extends Suspen
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        List list;
+        List customInputGestures;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -48,26 +47,26 @@ final class CustomInputGesturesRepository$addCustomInputGesture$2 extends Suspen
         ResultKt.throwOnFailure(obj);
         CustomInputGesturesRepository customInputGesturesRepository = this.this$0;
         int i = CustomInputGesturesRepository.$r8$clinit;
-        int addCustomInputGesture = customInputGesturesRepository.getInputManager().addCustomInputGesture(this.$inputGesture);
-        if (addCustomInputGesture == 1) {
+        int iAddCustomInputGesture = customInputGesturesRepository.getInputManager().addCustomInputGesture(this.$inputGesture);
+        if (iAddCustomInputGesture == 1) {
             CustomInputGesturesRepository customInputGesturesRepository2 = this.this$0;
             customInputGesturesRepository2.getClass();
             if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-                list = customInputGesturesRepository2.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-                list.getClass();
+                customInputGestures = customInputGesturesRepository2.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+                customInputGestures.getClass();
             } else {
-                list = EmptyList.INSTANCE;
+                customInputGestures = EmptyList.INSTANCE;
             }
-            customInputGesturesRepository2._customInputGesture.setValue(list);
+            customInputGesturesRepository2._customInputGesture.setValue(customInputGestures);
             return ShortcutCustomizationRequestResult.SUCCESS;
         }
-        if (addCustomInputGesture == 2) {
+        if (iAddCustomInputGesture == 2) {
             return ShortcutCustomizationRequestResult.ERROR_RESERVED_COMBINATION;
         }
-        if (addCustomInputGesture == 4) {
+        if (iAddCustomInputGesture == 4) {
             return ShortcutCustomizationRequestResult.ERROR_RESERVED_COMBINATION;
         }
-        Log.w("CustomInputGesturesRepository", "Attempted to add inputGesture: " + this.$inputGesture + " but ran into an error with code: " + addCustomInputGesture);
+        Log.w("CustomInputGesturesRepository", "Attempted to add inputGesture: " + this.$inputGesture + " but ran into an error with code: " + iAddCustomInputGesture);
         return ShortcutCustomizationRequestResult.ERROR_OTHER;
     }
 }

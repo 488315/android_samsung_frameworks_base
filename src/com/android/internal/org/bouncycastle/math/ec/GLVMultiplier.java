@@ -22,9 +22,9 @@ public class GLVMultiplier extends AbstractECMultiplier {
         if (!this.curve.equals(eCPoint.getCurve())) {
             throw new IllegalStateException();
         }
-        BigInteger[] decomposeScalar = this.glvEndomorphism.decomposeScalar(bigInteger.mod(eCPoint.getCurve().getOrder()));
-        BigInteger bigInteger2 = decomposeScalar[0];
-        BigInteger bigInteger3 = decomposeScalar[1];
+        BigInteger[] bigIntegerArrDecomposeScalar = this.glvEndomorphism.decomposeScalar(bigInteger.mod(eCPoint.getCurve().getOrder()));
+        BigInteger bigInteger2 = bigIntegerArrDecomposeScalar[0];
+        BigInteger bigInteger3 = bigIntegerArrDecomposeScalar[1];
         if (this.glvEndomorphism.hasEfficientPointMap()) {
             return ECAlgorithms.implShamirsTrickWNaf(this.glvEndomorphism, eCPoint, bigInteger2, bigInteger3);
         }

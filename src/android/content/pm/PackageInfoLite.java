@@ -81,12 +81,12 @@ public class PackageInfoLite implements Parcelable {
         this.installLocation = parcel.readInt();
         this.multiArch = parcel.readInt() != 0;
         this.debuggable = parcel.readInt() != 0;
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        if (i == 0) {
             this.verifiers = new VerifierInfo[0];
             return;
         }
-        VerifierInfo[] verifierInfoArr = new VerifierInfo[readInt];
+        VerifierInfo[] verifierInfoArr = new VerifierInfo[i];
         this.verifiers = verifierInfoArr;
         parcel.readTypedArray(verifierInfoArr, VerifierInfo.CREATOR);
     }

@@ -15,6 +15,7 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.graph.MFDescriptorGraph;
 import com.samsung.android.sume.core.graph.MFGraph;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -110,13 +111,13 @@ public class MFDescriptorGraph implements Parcelable {
             })).map(new Function() { // from class: com.samsung.android.sume.core.graph.MFDescriptorGraph$$ExternalSyntheticLambda1
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return MFDescriptorGraph.lambda$toMediaFilterGraph$2(MFGraphUnitFactory.this, (MFDescriptorGraph.DescriptorNode) obj);
+                    return MFDescriptorGraph.lambda$toMediaFilterGraph$2(mFGraphUnitFactory, (MFDescriptorGraph.DescriptorNode) obj);
                 }
             }).collect(Collectors.toList());
             list.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFDescriptorGraph$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    MFDescriptorGraph.lambda$toMediaFilterGraph$4(MFGraph.Builder.this, list, (Pair) obj);
+                    MFDescriptorGraph.lambda$toMediaFilterGraph$4(builder, list, (Pair) obj);
                 }
             });
         } catch (Exception e) {
@@ -257,7 +258,7 @@ public class MFDescriptorGraph implements Parcelable {
             this.channelMap.put(Integer.valueOf(descriptorNode.getId()), bufferChannelDescriptor);
         }
 
-        protected DescriptorNode(Parcel parcel) {
+        protected DescriptorNode(Parcel parcel) throws ClassNotFoundException, IOException {
             this.children = new ArrayList();
             this.evaluatorMap = new HashMap();
             this.channelMap = new HashMap();
@@ -269,7 +270,7 @@ public class MFDescriptorGraph implements Parcelable {
         }
 
         @Override // android.os.Parcelable
-        public void writeToParcel(Parcel parcel, int i) {
+        public void writeToParcel(Parcel parcel, int i) throws IOException {
             parcel.writeInt(this.id);
             parcel.writeSerializable(this.descriptor);
             parcel.writeIntArray(this.children.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray());

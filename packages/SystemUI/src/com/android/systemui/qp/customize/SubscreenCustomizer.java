@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -35,7 +36,6 @@ import com.android.systemui.qs.QSPanelControllerBase$TileRecord;
 import com.android.systemui.qs.SecPageIndicator;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenCustomizer extends QSPanel {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,7 +48,6 @@ public class SubscreenCustomizer extends QSPanel {
     public LinearLayout mQuickSettingsContainer;
     public final SubscreenQsPanelController mSubscreenQsPanelController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MessageObjectAnim {
         public int animationType;
         public SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord longClickedTileInfo;
@@ -82,23 +81,23 @@ public class SubscreenCustomizer extends QSPanel {
                         int i3 = messageObjectAnim.animationType;
                         if (i3 == 202) {
                             SubscreenTileLayout subscreenTileLayout = (SubscreenTileLayout) subscreenPagedTileLayout.mPages.get(currentItem);
-                            int indexOf = subscreenTileLayout.indexOf(subscreenTileRecord);
-                            if (indexOf < 0) {
+                            int iIndexOf = subscreenTileLayout.indexOf(subscreenTileRecord);
+                            if (iIndexOf < 0) {
                                 return;
                             }
-                            int min = Math.min(subscreenTileLayout.mColumns * subscreenTileLayout.mRows, subscreenTileLayout.mRecords.size());
-                            int i4 = min - 1;
+                            int iMin = Math.min(subscreenTileLayout.mColumns * subscreenTileLayout.mRows, subscreenTileLayout.mRecords.size());
+                            int i4 = iMin - 1;
                             if (i2 > i4) {
                                 i2 = i4;
                             }
-                            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(indexOf, i2, "moveTile from = ", " to  = ", "total = ");
-                            m.append(min);
-                            m.append("fromtileInfo = ");
-                            m.append(subscreenTileRecord.mTilespec);
-                            Log.d("SubscreenTileLayout", m.toString());
+                            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iIndexOf, i2, "moveTile from = ", " to  = ", "total = ");
+                            sbM.append(iMin);
+                            sbM.append("fromtileInfo = ");
+                            sbM.append(subscreenTileRecord.mTilespec);
+                            Log.d("SubscreenTileLayout", sbM.toString());
                             AnimatorSet animatorSet = new AnimatorSet();
-                            if (indexOf < i2) {
-                                int i5 = indexOf;
+                            if (iIndexOf < i2) {
+                                int i5 = iIndexOf;
                                 while (i5 < i2) {
                                     int i6 = i5 + 1;
                                     QSTileView qSTileView = ((QSPanelControllerBase$TileRecord) subscreenTileLayout.mRecords.get(i6)).tileView;
@@ -107,7 +106,7 @@ public class SubscreenCustomizer extends QSPanel {
                                     i5 = i6;
                                 }
                             } else {
-                                for (int i7 = indexOf; i7 > i2; i7--) {
+                                for (int i7 = iIndexOf; i7 > i2; i7--) {
                                     QSTileView qSTileView2 = ((QSPanelControllerBase$TileRecord) subscreenTileLayout.mRecords.get(i7 - 1)).tileView;
                                     animatorSet.playTogether(ObjectAnimator.ofFloat(qSTileView2, "x", ((FrameLayout) subscreenTileLayout.mBoundaryBox.get(r12)).getLeft(), ((FrameLayout) subscreenTileLayout.mBoundaryBox.get(i7)).getLeft()));
                                     animatorSet.playTogether(ObjectAnimator.ofFloat(qSTileView2, "y", ((FrameLayout) subscreenTileLayout.mBoundaryBox.get(r12)).getTop(), ((FrameLayout) subscreenTileLayout.mBoundaryBox.get(i7)).getTop()));
@@ -118,7 +117,7 @@ public class SubscreenCustomizer extends QSPanel {
                                 public final /* synthetic */ int val$emptyPos;
 
                                 public AnonymousClass3(int i22) {
-                                    r2 = i22;
+                                    i = i22;
                                 }
 
                                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -127,24 +126,24 @@ public class SubscreenCustomizer extends QSPanel {
                                     SubscreenTileLayout subscreenTileLayout2 = SubscreenTileLayout.this;
                                     int i8 = SubscreenTileLayout.$r8$clinit;
                                     subscreenTileLayout2.getClass();
-                                    ((FrameLayout) SubscreenTileLayout.this.mBoundaryBox.get(r2)).getLeft();
+                                    ((FrameLayout) SubscreenTileLayout.this.mBoundaryBox.get(i)).getLeft();
                                     throw null;
                                 }
                             });
                             animatorSet.start();
-                            QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord = (QSPanelControllerBase$TileRecord) subscreenTileLayout.mRecords.get(indexOf);
-                            subscreenTileLayout.mRecords.remove(indexOf);
+                            QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord = (QSPanelControllerBase$TileRecord) subscreenTileLayout.mRecords.get(iIndexOf);
+                            subscreenTileLayout.mRecords.remove(iIndexOf);
                             subscreenTileLayout.mRecords.add(i22, qSPanelControllerBase$TileRecord);
                             return;
                         }
                         if (i3 == 201) {
                             SubscreenTileLayout subscreenTileLayout2 = (SubscreenTileLayout) subscreenPagedTileLayout.mPages.get(currentItem);
-                            int indexOf2 = subscreenTileLayout2.indexOf(subscreenTileRecord);
-                            if (indexOf2 < 0) {
+                            int iIndexOf2 = subscreenTileLayout2.indexOf(subscreenTileRecord);
+                            if (iIndexOf2 < 0) {
                                 return;
                             }
-                            QSTileView qSTileView3 = ((QSPanelControllerBase$TileRecord) subscreenTileLayout2.mRecords.get(indexOf2)).tileView;
-                            Log.d("SubscreenTileLayout", "dropTile tileView =  " + qSTileView3 + ",position=" + indexOf2);
+                            QSTileView qSTileView3 = ((QSPanelControllerBase$TileRecord) subscreenTileLayout2.mRecords.get(iIndexOf2)).tileView;
+                            Log.d("SubscreenTileLayout", "dropTile tileView =  " + qSTileView3 + ",position=" + iIndexOf2);
                             qSTileView3.setAlpha(1.0f);
                             throw null;
                         }
@@ -168,9 +167,9 @@ public class SubscreenCustomizer extends QSPanel {
                         int columnCount = i8 == 204 ? 0 : (subscreenPagedTileLayout.getColumnCount() * 2) - 1;
                         int columnCount2 = i8 == 204 ? (subscreenPagedTileLayout.getColumnCount() * 2) - 1 : 0;
                         int columnCount3 = (subscreenPagedTileLayout.getColumnCount() * 2) - 1;
-                        StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(currentItem2, i9, "movePage, cur = ", ",pageOffset = ", ",removePos = ");
-                        ViewPager$$ExternalSyntheticOutline0.m(m2, columnCount, ",curAddPos = ", columnCount2, ",longClickedAddPos = ");
-                        RecyclerView$$ExternalSyntheticOutline0.m(columnCount3, "SubscreenPagedTileLayout", m2);
+                        StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(currentItem2, i9, "movePage, cur = ", ",pageOffset = ", ",removePos = ");
+                        ViewPager$$ExternalSyntheticOutline0.m(sbM2, columnCount, ",curAddPos = ", columnCount2, ",longClickedAddPos = ");
+                        RecyclerView$$ExternalSyntheticOutline0.m(columnCount3, "SubscreenPagedTileLayout", sbM2);
                         int i10 = currentItem2 + i9;
                         SubscreenTileLayout subscreenTileLayout3 = (SubscreenTileLayout) subscreenPagedTileLayout.mPages.get(i10);
                         subscreenTileLayout3.getClass();
@@ -196,20 +195,20 @@ public class SubscreenCustomizer extends QSPanel {
                             public final /* synthetic */ SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord val$removeTileRecord;
 
                             public AnonymousClass1(int currentItem22, int i92, SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord32, SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord22, int columnCount22) {
-                                r2 = currentItem22;
-                                r3 = i92;
-                                r4 = subscreenTileRecord32;
-                                r5 = subscreenTileRecord22;
-                                r6 = columnCount22;
+                                i = currentItem22;
+                                i = i92;
+                                subscreenTileRecord = subscreenTileRecord32;
+                                subscreenTileRecord = subscreenTileRecord22;
+                                i = columnCount22;
                             }
 
                             @Override // android.view.View.OnLayoutChangeListener
                             public final void onLayoutChange(View view, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18) {
-                                SubscreenPagedTileLayout.this.setCurrentItem(r2 + r3, true);
-                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(r2)).removeTile(r4);
-                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(r2)).addTile(r5, r6);
-                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(r2)).getClass();
-                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(r2 + r3)).removeOnLayoutChangeListener(this);
+                                SubscreenPagedTileLayout.this.setCurrentItem(i + i, true);
+                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(i)).removeTile(subscreenTileRecord);
+                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(i)).addTile(subscreenTileRecord, i);
+                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(i)).getClass();
+                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(i + i)).removeOnLayoutChangeListener(this);
                             }
                         });
                         subscreenPagedTileLayout.postDelayed(new Runnable() { // from class: com.android.systemui.qp.SubscreenPagedTileLayout.2
@@ -217,20 +216,20 @@ public class SubscreenCustomizer extends QSPanel {
                             public final /* synthetic */ int val$pageOffset;
 
                             public AnonymousClass2(int currentItem22, int i92) {
-                                r2 = currentItem22;
-                                r3 = i92;
+                                i = currentItem22;
+                                i = i92;
                             }
 
                             @Override // java.lang.Runnable
                             public final void run() {
                                 StringBuilder sb2 = new StringBuilder("cur ");
-                                sb2.append(r2);
+                                sb2.append(i);
                                 sb2.append("pageOffset");
-                                EmergencyButtonController$$ExternalSyntheticOutline0.m(sb2, r3, "requestLayout", "SubscreenPagedTileLayout");
-                                if (r2 >= SubscreenPagedTileLayout.this.mPages.size() || SubscreenPagedTileLayout.this.mPages.get(r2) == null) {
+                                EmergencyButtonController$$ExternalSyntheticOutline0.m(sb2, i, "requestLayout", "SubscreenPagedTileLayout");
+                                if (i >= SubscreenPagedTileLayout.this.mPages.size() || SubscreenPagedTileLayout.this.mPages.get(i) == null) {
                                     return;
                                 }
-                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(r2)).requestLayout();
+                                ((SubscreenTileLayout) SubscreenPagedTileLayout.this.mPages.get(i)).requestLayout();
                             }
                         }, 300L);
                         return;
@@ -246,9 +245,9 @@ public class SubscreenCustomizer extends QSPanel {
                 SubscreenCustomizer.this.mLongClickedViewInfo.getClass();
                 SubscreenCustomizer.this.mLongClickedViewInfo.getClass();
                 int action = dragEvent.getAction();
-                int intValue = ((Integer) view.getTag()).intValue();
+                int iIntValue = ((Integer) view.getTag()).intValue();
                 View view2 = (View) view.getParent().getParent();
-                Log.d("SubscreenCustomizer", MutableVectorKt$$ExternalSyntheticOutline0.m(action, intValue, "onDrag,event-", ",pos-", ",x-0.0,y=0.0"));
+                Log.d("SubscreenCustomizer", MutableVectorKt$$ExternalSyntheticOutline0.m(action, iIntValue, "onDrag,event-", ",pos-", ",x-0.0,y=0.0"));
                 if (action == 1) {
                     SubscreenCustomizer subscreenCustomizer = SubscreenCustomizer.this;
                     subscreenCustomizer.mIsDroppedOnView = false;
@@ -278,11 +277,11 @@ public class SubscreenCustomizer extends QSPanel {
                         qSHost.changeTilesByUser(new ArrayList(), arrayList);
                     }
                 } else if (action == 5 && view2.getId() == R.id.subscreen_customize_qs_paged) {
-                    NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(intValue, "ACTION_DRAG_ENTERED: pos: ", ",animateCurrentPage", "SubscreenCustomizer");
+                    NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(iIntValue, "ACTION_DRAG_ENTERED: pos: ", ",animateCurrentPage", "SubscreenCustomizer");
                     SubscreenCustomizer subscreenCustomizer5 = SubscreenCustomizer.this;
                     SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord = subscreenCustomizer5.mLongClickedViewInfo;
                     MessageObjectAnim messageObjectAnim = new MessageObjectAnim();
-                    messageObjectAnim.touchedPos = intValue;
+                    messageObjectAnim.touchedPos = iIntValue;
                     messageObjectAnim.longClickedTileInfo = subscreenTileRecord;
                     messageObjectAnim.animationType = 202;
                     if (subscreenCustomizer5.mHandler.hasMessages(102)) {
@@ -321,7 +320,7 @@ public class SubscreenCustomizer extends QSPanel {
         this.mFooterPageIndicator = (SecPageIndicator) findViewById(R.id.subscreen_customize_page_indicator);
     }
 
-    public final void updatePageIndicator$1() {
+    public final void updatePageIndicator$1() throws Resources.NotFoundException {
         SecPageIndicator secPageIndicator;
         SubscreenPagedTileLayout subscreenPagedTileLayout = this.mTileLayout;
         if (subscreenPagedTileLayout == null || (secPageIndicator = this.mFooterPageIndicator) == null) {

@@ -83,7 +83,7 @@ public final class SharedBufferManager {
         }
     }
 
-    public static void copyFromBuffer(MediaBuffer mediaBuffer, HardwareBuffer hardwareBuffer) {
+    public static void copyFromBuffer(MediaBuffer mediaBuffer, HardwareBuffer hardwareBuffer) throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             jSONObject.put("cols", mediaBuffer.getCols());

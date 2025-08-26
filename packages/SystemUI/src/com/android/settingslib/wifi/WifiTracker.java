@@ -49,7 +49,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WifiTracker implements LifecycleObserver {
     static final long MAX_SCAN_RESULT_AGE_MILLIS = 15000;
@@ -80,7 +79,6 @@ public class WifiTracker implements LifecycleObserver {
     Handler mWorkHandler;
     public HandlerThread mWorkThread;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Scanner extends Handler {
         public int mRetry = 0;
 
@@ -116,11 +114,9 @@ public class WifiTracker implements LifecycleObserver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WifiListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class WifiListenerExecutor implements WifiListener {
         public final WifiListener mDelegatee;
 
@@ -129,7 +125,6 @@ public class WifiTracker implements LifecycleObserver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiTrackerNetworkCallback extends ConnectivityManager.NetworkCallback {
         public /* synthetic */ WifiTrackerNetworkCallback(WifiTracker wifiTracker, int i) {
             this();
@@ -138,7 +133,7 @@ public class WifiTracker implements LifecycleObserver {
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
             if (network.equals(WifiTracker.this.mWifiManager.getCurrentNetwork())) {
-                WifiTracker.m994$$Nest$mupdateNetworkInfo(WifiTracker.this, null);
+                WifiTracker.m996$$Nest$mupdateNetworkInfo(WifiTracker.this, null);
             }
         }
 
@@ -147,7 +142,7 @@ public class WifiTracker implements LifecycleObserver {
     }
 
     /* renamed from: -$$Nest$mupdateNetworkInfo, reason: not valid java name */
-    public static void m994$$Nest$mupdateNetworkInfo(WifiTracker wifiTracker, NetworkInfo networkInfo) {
+    public static void m996$$Nest$mupdateNetworkInfo(WifiTracker wifiTracker, NetworkInfo networkInfo) {
         WifiManager wifiManager = wifiTracker.mWifiManager;
         if (wifiManager == null || !wifiManager.isWifiEnabled()) {
             wifiTracker.clearAccessPointsAndConditionallyUpdate();
@@ -194,9 +189,9 @@ public class WifiTracker implements LifecycleObserver {
                 boolean z2 = false;
                 for (int size = ((ArrayList) wifiTracker.mInternalAccessPoints).size() - 1; size >= 0; size--) {
                     AccessPoint accessPoint = (AccessPoint) ((ArrayList) wifiTracker.mInternalAccessPoints).get(size);
-                    boolean isActive = accessPoint.isActive();
+                    boolean zIsActive = accessPoint.isActive();
                     if (accessPoint.update(wifiConfiguration, wifiTracker.mLastInfo, wifiTracker.mLastNetworkInfo)) {
-                        if (isActive != accessPoint.isActive()) {
+                        if (zIsActive != accessPoint.isActive()) {
                             z = true;
                             z2 = true;
                         } else {
@@ -273,23 +268,27 @@ public class WifiTracker implements LifecycleObserver {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00ad  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void fetchScansAndConfigsAndUpdateAccessPoints() {
         ArrayList arrayList;
-        WifiConfiguration wifiConfiguration;
+        WifiConfiguration next;
         List<ScanResult> scanResults = this.mWifiManager.getScanResults();
         if (scanResults == null) {
             arrayList = null;
         } else {
-            boolean isEnhancedOpenSupported = this.mWifiManager.isEnhancedOpenSupported();
-            boolean isWpa3SaeSupported = this.mWifiManager.isWpa3SaeSupported();
-            boolean isWpa3SuiteBSupported = this.mWifiManager.isWpa3SuiteBSupported();
+            boolean zIsEnhancedOpenSupported = this.mWifiManager.isEnhancedOpenSupported();
+            boolean zIsWpa3SaeSupported = this.mWifiManager.isWpa3SaeSupported();
+            boolean zIsWpa3SuiteBSupported = this.mWifiManager.isWpa3SuiteBSupported();
             arrayList = new ArrayList();
             for (ScanResult scanResult : scanResults) {
                 if (scanResult.capabilities.contains("PSK")) {
                     arrayList.add(scanResult);
-                } else if (!scanResult.capabilities.contains("SUITE_B_192") || isWpa3SuiteBSupported) {
-                    if (!scanResult.capabilities.contains(WifiPolicy.SECURITY_TYPE_SAE) || isWpa3SaeSupported) {
-                        if (!scanResult.capabilities.contains("OWE") || isEnhancedOpenSupported) {
+                } else if (!scanResult.capabilities.contains("SUITE_B_192") || zIsWpa3SuiteBSupported) {
+                    if (!scanResult.capabilities.contains(WifiPolicy.SECURITY_TYPE_SAE) || zIsWpa3SaeSupported) {
+                        if (!scanResult.capabilities.contains("OWE") || zIsEnhancedOpenSupported) {
                             arrayList.add(scanResult);
                         }
                     }
@@ -306,26 +305,28 @@ public class WifiTracker implements LifecycleObserver {
             if (configuredNetworks != null) {
                 Iterator<WifiConfiguration> it = configuredNetworks.iterator();
                 while (it.hasNext()) {
-                    wifiConfiguration = it.next();
-                    if (this.mLastInfo != null && networkId == wifiConfiguration.networkId) {
+                    next = it.next();
+                    if (this.mLastInfo != null && networkId == next.networkId) {
                         break;
                     }
                 }
+                next = null;
+            } else {
+                next = null;
             }
         }
-        wifiConfiguration = null;
         synchronized (this.mLock) {
             try {
-                ArrayMap updateScanResultCache = updateScanResultCache(arrayList);
+                ArrayMap arrayMapUpdateScanResultCache = updateScanResultCache(arrayList);
                 List<AccessPoint> arrayList2 = new ArrayList<>(this.mInternalAccessPoints);
                 ArrayList arrayList3 = new ArrayList();
                 ArrayList arrayList4 = new ArrayList();
-                for (Map.Entry entry : updateScanResultCache.entrySet()) {
+                for (Map.Entry entry : arrayMapUpdateScanResultCache.entrySet()) {
                     Iterator it2 = ((List) entry.getValue()).iterator();
                     while (it2.hasNext()) {
-                        NetworkKey createFromScanResult = NetworkKey.createFromScanResult((ScanResult) it2.next());
-                        if (createFromScanResult != null && !((ArraySet) this.mRequestedScores).contains(createFromScanResult)) {
-                            arrayList4.add(createFromScanResult);
+                        NetworkKey networkKeyCreateFromScanResult = NetworkKey.createFromScanResult((ScanResult) it2.next());
+                        if (networkKeyCreateFromScanResult != null && !((ArraySet) this.mRequestedScores).contains(networkKeyCreateFromScanResult)) {
+                            arrayList4.add(networkKeyCreateFromScanResult);
                         }
                     }
                     List list = (List) entry.getValue();
@@ -341,7 +342,7 @@ public class WifiTracker implements LifecycleObserver {
                     List list2 = (List) configuredNetworks.stream().filter(new Predicate() { // from class: com.android.settingslib.wifi.WifiTracker$$ExternalSyntheticLambda0
                         @Override // java.util.function.Predicate
                         public final boolean test(Object obj) {
-                            return AccessPoint.this.matches((WifiConfiguration) obj);
+                            return cachedByKey.matches((WifiConfiguration) obj);
                         }
                     }).collect(Collectors.toList());
                     int size = list2.size();
@@ -350,9 +351,9 @@ public class WifiTracker implements LifecycleObserver {
                     } else if (size == 1) {
                         cachedByKey.update((WifiConfiguration) list2.get(0));
                     } else {
-                        Optional findFirst = list2.stream().filter(new WifiTracker$$ExternalSyntheticLambda1()).findFirst();
-                        if (findFirst.isPresent()) {
-                            cachedByKey.update((WifiConfiguration) findFirst.get());
+                        Optional optionalFindFirst = list2.stream().filter(new WifiTracker$$ExternalSyntheticLambda1()).findFirst();
+                        if (optionalFindFirst.isPresent()) {
+                            cachedByKey.update((WifiConfiguration) optionalFindFirst.get());
                         } else {
                             cachedByKey.update((WifiConfiguration) list2.get(0));
                         }
@@ -368,12 +369,12 @@ public class WifiTracker implements LifecycleObserver {
                     while (i2 < size2) {
                         Object obj = arrayList3.get(i2);
                         i2++;
-                        ((AccessPoint) obj).update(wifiConfiguration, this.mLastInfo, this.mLastNetworkInfo);
+                        ((AccessPoint) obj).update(next, this.mLastInfo, this.mLastNetworkInfo);
                     }
                 }
-                if (arrayList3.isEmpty() && wifiConfiguration != null) {
-                    AccessPoint accessPoint = new AccessPoint(this.mContext, wifiConfiguration);
-                    accessPoint.update(wifiConfiguration, this.mLastInfo, this.mLastNetworkInfo);
+                if (arrayList3.isEmpty() && next != null) {
+                    AccessPoint accessPoint = new AccessPoint(this.mContext, next);
+                    accessPoint.update(next, this.mLastInfo, this.mLastNetworkInfo);
                     arrayList3.add(accessPoint);
                     arrayList4.add(NetworkKey.createFromWifiInfo(this.mLastInfo));
                 }
@@ -545,9 +546,9 @@ public class WifiTracker implements LifecycleObserver {
 
     public List<AccessPoint> updateOsuAccessPoints(Map<OsuProvider, List<ScanResult>> map, List<AccessPoint> list) {
         ArrayList arrayList = new ArrayList();
-        Set keySet = this.mWifiManager.getMatchingPasspointConfigsForOsuProviders(map.keySet()).keySet();
+        Set setKeySet = this.mWifiManager.getMatchingPasspointConfigsForOsuProviders(map.keySet()).keySet();
         for (OsuProvider osuProvider : map.keySet()) {
-            if (!keySet.contains(osuProvider)) {
+            if (!setKeySet.contains(osuProvider)) {
                 List<ScanResult> list2 = map.get(osuProvider);
                 int i = AccessPoint.$r8$clinit;
                 AccessPoint cachedByKey = getCachedByKey("OSU:" + osuProvider.getFriendlyName() + ',' + osuProvider.getServerUri(), list);
@@ -595,10 +596,10 @@ public class WifiTracker implements LifecycleObserver {
             }
         }
         long j = this.mLastScanSucceeded ? MAX_SCAN_RESULT_AGE_MILLIS : 30000L;
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         Iterator it2 = this.mScanResultCache.values().iterator();
         while (it2.hasNext()) {
-            if (elapsedRealtime - (((ScanResult) it2.next()).timestamp / 1000) > j) {
+            if (jElapsedRealtime - (((ScanResult) it2.next()).timestamp / 1000) > j) {
                 it2.remove();
             }
         }
@@ -653,12 +654,12 @@ public class WifiTracker implements LifecycleObserver {
                         return;
                     }
                     if ("android.net.wifi.STATE_CHANGE".equals(action)) {
-                        WifiTracker.m994$$Nest$mupdateNetworkInfo(WifiTracker.this, (NetworkInfo) intent.getParcelableExtra(IMSParameter.GENERAL.NETWORK_INFO));
+                        WifiTracker.m996$$Nest$mupdateNetworkInfo(WifiTracker.this, (NetworkInfo) intent.getParcelableExtra(IMSParameter.GENERAL.NETWORK_INFO));
                         WifiTracker.this.fetchScansAndConfigsAndUpdateAccessPoints();
                         return;
                     } else {
                         if ("android.net.wifi.RSSI_CHANGED".equals(action)) {
-                            WifiTracker.m994$$Nest$mupdateNetworkInfo(WifiTracker.this, null);
+                            WifiTracker.m996$$Nest$mupdateNetworkInfo(WifiTracker.this, null);
                             return;
                         }
                         return;

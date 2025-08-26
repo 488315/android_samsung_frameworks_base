@@ -33,7 +33,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitScreenTransitions {
     public final ShellExecutor mAnimExecutor;
@@ -56,14 +55,13 @@ public class SplitScreenTransitions {
     public final SplitScreenTransitions$$ExternalSyntheticLambda1 mRemoteFinishCB = new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.splitscreen.SplitScreenTransitions$$ExternalSyntheticLambda1
         @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
         public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-            SplitScreenTransitions.this.onFinish(windowContainerTransaction);
+            this.f$0.onFinish(windowContainerTransaction);
         }
     };
     public final ArrayList mAnimations = new ArrayList();
     public Transitions.TransitionFinishCallback mFinishCallback = null;
     public float mDurationScale = 1.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.splitscreen.SplitScreenTransitions$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public final /* synthetic */ float val$end;
@@ -78,15 +76,14 @@ public class SplitScreenTransitions {
 
         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
         public final void onAnimationEnd(Animator animator) {
-            SurfaceControl.Transaction acquire = SplitScreenTransitions.this.mTransactionPool.acquire();
-            acquire.setAlpha(this.val$leash, this.val$end);
-            acquire.apply();
-            SplitScreenTransitions.this.mTransactionPool.release(acquire);
+            SurfaceControl.Transaction transactionAcquire = SplitScreenTransitions.this.mTransactionPool.acquire();
+            transactionAcquire.setAlpha(this.val$leash, this.val$end);
+            transactionAcquire.apply();
+            SplitScreenTransitions.this.mTransactionPool.release(transactionAcquire);
             SplitScreenTransitions.this.mTransitions.mMainExecutor.execute(new SplitScreenTransitions$$ExternalSyntheticLambda13(this, this.val$va, 1));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DismissSession extends TransitSession {
         public final int mDismissTop;
         public final boolean mIsMultiSplitDismissed;
@@ -104,7 +101,6 @@ public class SplitScreenTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EnterSession extends TransitSession {
         public final long mPendingStartedTime;
         public final boolean mResizeAnim;
@@ -117,7 +113,6 @@ public class SplitScreenTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TransitSession {
         public boolean mCanceled;
         public final TransitionConsumedCallback mConsumedCallback;
@@ -153,12 +148,10 @@ public class SplitScreenTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionConsumedCallback {
         void onConsumed();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionFinishedCallback {
         void onFinished(WindowContainerTransaction windowContainerTransaction, SurfaceControl.Transaction transaction);
     }
@@ -180,17 +173,17 @@ public class SplitScreenTransitions {
         SplitScreenTransitions$$ExternalSyntheticLambda0 splitScreenTransitions$$ExternalSyntheticLambda0 = new SplitScreenTransitions$$ExternalSyntheticLambda0(this, 2);
         Rect endAbsBounds = change.getEndAbsBounds();
         MultiTaskingTransitionProvider multiTaskingTransitionProvider = this.mMultiTaskingTransitions;
-        Animation loadAnimationFromResources = multiTaskingTransitionProvider.loadAnimationFromResources(i, endAbsBounds);
+        Animation animationLoadAnimationFromResources = multiTaskingTransitionProvider.loadAnimationFromResources(i, endAbsBounds);
         Context displayContext = multiTaskingTransitionProvider.mDisplayController.getDisplayContext(change.getEndDisplayId());
         AnimationLoader animationLoader = (AnimationLoader) multiTaskingTransitionProvider.mAnimationLoaderMap.get(1);
-        if (displayContext != null && animationLoader != null && animationLoader.getCornerRadius(displayContext) > 0.0f && (loadAnimationFromResources instanceof AnimationSet)) {
-            animationLoader.addRoundedClipAnimation(endAbsBounds, (AnimationSet) loadAnimationFromResources, displayContext);
+        if (displayContext != null && animationLoader != null && animationLoader.getCornerRadius(displayContext) > 0.0f && (animationLoadAnimationFromResources instanceof AnimationSet)) {
+            animationLoader.addRoundedClipAnimation(endAbsBounds, (AnimationSet) animationLoadAnimationFromResources, displayContext);
         }
-        float roundedCornerRadius = loadAnimationFromResources.hasRoundedCornerRadius() ? loadAnimationFromResources.getRoundedCornerRadius() : 0.0f;
+        float roundedCornerRadius = animationLoadAnimationFromResources.hasRoundedCornerRadius() ? animationLoadAnimationFromResources.getRoundedCornerRadius() : 0.0f;
         Point point = new Point(0, 0);
         Rect rect = new Rect(endAbsBounds);
         rect.offsetTo(0, 0);
-        multiTaskingTransitionProvider.buildSurfaceAnimator(this.mAnimations, loadAnimationFromResources, surfaceControl, splitScreenTransitions$$ExternalSyntheticLambda0, point, roundedCornerRadius, rect, false);
+        multiTaskingTransitionProvider.buildSurfaceAnimator(this.mAnimations, animationLoadAnimationFromResources, surfaceControl, splitScreenTransitions$$ExternalSyntheticLambda0, point, roundedCornerRadius, rect, false);
     }
 
     public final void cancelDividerFadeAnimation() {
@@ -336,43 +329,43 @@ public class SplitScreenTransitions {
     public final void startCustomFadeAnimation(final SurfaceControl surfaceControl, boolean z, boolean z2, boolean z3, boolean z4, boolean z5) {
         final float f = z ? 1.0f : 0.0f;
         float f2 = 1.0f - f;
-        final SurfaceControl.Transaction acquire = this.mTransactionPool.acquire();
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(f2, f);
+        final SurfaceControl.Transaction transactionAcquire = this.mTransactionPool.acquire();
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f2, f);
         if (z4) {
-            ofFloat.setDuration((long) (this.mDurationScale * 100.0f));
-            ofFloat.setStartDelay((long) (this.mDurationScale * 200.0f));
+            valueAnimatorOfFloat.setDuration((long) (this.mDurationScale * 100.0f));
+            valueAnimatorOfFloat.setStartDelay((long) (this.mDurationScale * 200.0f));
         } else if (!z2 || z3) {
-            ofFloat.setDuration((long) (this.mDurationScale * 133.0f));
+            valueAnimatorOfFloat.setDuration((long) (this.mDurationScale * 133.0f));
         } else {
-            ofFloat.setDuration((long) (this.mDurationScale * 100.0f));
-            ofFloat.setStartDelay((long) (this.mDurationScale * 300.0f));
-            acquire.setAlpha(surfaceControl, 0.0f).apply();
+            valueAnimatorOfFloat.setDuration((long) (this.mDurationScale * 100.0f));
+            valueAnimatorOfFloat.setStartDelay((long) (this.mDurationScale * 300.0f));
+            transactionAcquire.setAlpha(surfaceControl, 0.0f).apply();
             if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER && z5) {
-                this.mCellDividerFadeAnimation = ofFloat;
+                this.mCellDividerFadeAnimation = valueAnimatorOfFloat;
             } else {
-                this.mDividerFadeAnimation = ofFloat;
+                this.mDividerFadeAnimation = valueAnimatorOfFloat;
             }
         }
-        ofFloat.setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT);
+        valueAnimatorOfFloat.setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT);
         if (z3) {
             if (z2) {
-                ofFloat.setDuration(100L);
-                this.mDividerFadeAnimation = ofFloat;
+                valueAnimatorOfFloat.setDuration(100L);
+                this.mDividerFadeAnimation = valueAnimatorOfFloat;
             } else {
-                ofFloat.setDuration(300L);
-                ofFloat.setInterpolator(InterpolatorUtils.SINE_OUT_60);
+                valueAnimatorOfFloat.setDuration(300L);
+                valueAnimatorOfFloat.setInterpolator(InterpolatorUtils.SINE_OUT_60);
             }
         }
-        final SplitScreenTransitions$$ExternalSyntheticLambda4 splitScreenTransitions$$ExternalSyntheticLambda4 = new SplitScreenTransitions$$ExternalSyntheticLambda4(acquire, surfaceControl, f2, f, 1);
-        ofFloat.addUpdateListener(splitScreenTransitions$$ExternalSyntheticLambda4);
+        final SplitScreenTransitions$$ExternalSyntheticLambda4 splitScreenTransitions$$ExternalSyntheticLambda4 = new SplitScreenTransitions$$ExternalSyntheticLambda4(transactionAcquire, surfaceControl, f2, f, 1);
+        valueAnimatorOfFloat.addUpdateListener(splitScreenTransitions$$ExternalSyntheticLambda4);
         final Runnable runnable = new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenTransitions$$ExternalSyntheticLambda8
             @Override // java.lang.Runnable
             public final void run() {
-                SplitScreenTransitions splitScreenTransitions = SplitScreenTransitions.this;
-                SurfaceControl.Transaction transaction = acquire;
+                SplitScreenTransitions splitScreenTransitions = this.f$0;
+                SurfaceControl.Transaction transaction = transactionAcquire;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 float f3 = f;
-                ValueAnimator valueAnimator = ofFloat;
+                ValueAnimator valueAnimator = valueAnimatorOfFloat;
                 splitScreenTransitions.getClass();
                 transaction.setAlpha(surfaceControl2, f3);
                 transaction.apply();
@@ -380,7 +373,7 @@ public class SplitScreenTransitions {
                 splitScreenTransitions.mTransitions.mMainExecutor.execute(new SplitScreenTransitions$$ExternalSyntheticLambda13(splitScreenTransitions, valueAnimator, 0));
             }
         };
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.splitscreen.SplitScreenTransitions.2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.splitscreen.SplitScreenTransitions.2
             public boolean mFinished = false;
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -399,7 +392,7 @@ public class SplitScreenTransitions {
                 }
                 this.mFinished = true;
                 runnable.run();
-                ofFloat.removeUpdateListener(splitScreenTransitions$$ExternalSyntheticLambda4);
+                valueAnimatorOfFloat.removeUpdateListener(splitScreenTransitions$$ExternalSyntheticLambda4);
                 SplitScreenTransitions splitScreenTransitions = SplitScreenTransitions.this;
                 if (splitScreenTransitions.mDividerFadeAnimation != null) {
                     splitScreenTransitions.mDividerFadeAnimation = null;
@@ -410,7 +403,7 @@ public class SplitScreenTransitions {
                 splitScreenTransitions.mCellDividerFadeAnimation = null;
             }
         });
-        this.mAnimations.add(ofFloat);
+        this.mAnimations.add(valueAnimatorOfFloat);
         StringBuilder sb = new StringBuilder("startFadeAnimation: leash=");
         sb.append(surfaceControl);
         sb.append(", show=");
@@ -433,13 +426,13 @@ public class SplitScreenTransitions {
         if (CoreRune.MW_SPLIT_SHELL_TRANSITION && windowContainerTransaction.isDismissSplitWithAllApps()) {
             i3 = VolteConstants.ErrorCode.CALL_STATUS_CONF_ADD_USER_TO_SESSION_FAILURE;
         }
-        IBinder startTransition = this.mTransitions.startTransition(i3, windowContainerTransaction, transitionHandler);
+        IBinder iBinderStartTransition = this.mTransitions.startTransition(i3, windowContainerTransaction, transitionHandler);
         if (CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER) {
-            setDismissTransition(startTransition, i, i2, z);
-            return startTransition;
+            setDismissTransition(iBinderStartTransition, i, i2, z);
+            return iBinderStartTransition;
         }
-        setDismissTransition(startTransition, i, i2, false);
-        return startTransition;
+        setDismissTransition(iBinderStartTransition, i, i2, false);
+        return iBinderStartTransition;
     }
 
     public final void startEnterTransition(WindowContainerTransaction windowContainerTransaction, RemoteTransition remoteTransition, Transitions.TransitionHandler transitionHandler, int i, boolean z, int i2) {
@@ -471,13 +464,13 @@ public class SplitScreenTransitions {
             startCustomFadeAnimation(surfaceControl, false, false, false, false, false);
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(133L);
-        ofFloat.setInterpolator(Interpolators.ALPHA_OUT);
-        ofFloat.addUpdateListener(new SplitScreenTransitions$$ExternalSyntheticLambda4(this, surfaceControl, 1.0f, 0.0f, 0));
-        ofFloat.addListener(new AnonymousClass1(surfaceControl, 0.0f, ofFloat));
-        this.mAnimations.add(ofFloat);
-        this.mTransitions.mAnimExecutor.execute(new SplitScreenTransitions$$ExternalSyntheticLambda2(ofFloat));
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(133L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.ALPHA_OUT);
+        valueAnimatorOfFloat.addUpdateListener(new SplitScreenTransitions$$ExternalSyntheticLambda4(this, surfaceControl, 1.0f, 0.0f, 0));
+        valueAnimatorOfFloat.addListener(new AnonymousClass1(surfaceControl, 0.0f, valueAnimatorOfFloat));
+        this.mAnimations.add(valueAnimatorOfFloat);
+        this.mTransitions.mAnimExecutor.execute(new SplitScreenTransitions$$ExternalSyntheticLambda2(valueAnimatorOfFloat));
     }
 
     public final void startFullscreenTransition(WindowContainerTransaction windowContainerTransaction, RemoteTransition remoteTransition) {
@@ -486,7 +479,7 @@ public class SplitScreenTransitions {
         oneShotRemoteHandler.mTransition = transitions.startTransition(1, windowContainerTransaction, oneShotRemoteHandler);
     }
 
-    public final void startResizeTransition(WindowContainerTransaction windowContainerTransaction, StageCoordinator stageCoordinator, TransitionConsumedCallback transitionConsumedCallback, TransitionFinishedCallback transitionFinishedCallback, SplitDecorManager splitDecorManager, SplitDecorManager splitDecorManager2) {
+    public final void startResizeTransition(WindowContainerTransaction windowContainerTransaction, Transitions.TransitionHandler transitionHandler, TransitionConsumedCallback transitionConsumedCallback, TransitionFinishedCallback transitionFinishedCallback, SplitDecorManager splitDecorManager, SplitDecorManager splitDecorManager2) {
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 4324715850741661479L, 0, null);
         }
@@ -502,6 +495,6 @@ public class SplitScreenTransitions {
             this.mAnimations.clear();
             onFinish(null);
         }
-        this.mPendingResize = new TransitSession(this, this.mTransitions.startTransition(6, windowContainerTransaction, stageCoordinator), transitionConsumedCallback, transitionFinishedCallback);
+        this.mPendingResize = new TransitSession(this, this.mTransitions.startTransition(6, windowContainerTransaction, transitionHandler), transitionConsumedCallback, transitionFinishedCallback);
     }
 }

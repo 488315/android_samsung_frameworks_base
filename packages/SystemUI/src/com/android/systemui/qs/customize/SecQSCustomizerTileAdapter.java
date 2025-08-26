@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSCustomizerTileAdapter {
     public int mActiveCurrentPage;
@@ -49,9 +48,10 @@ public class SecQSCustomizerTileAdapter {
     }
 
     public final void updateTiles() {
-        QSTile createTile;
+        QSTile qSTileCreateTile;
         QSTile qSTile;
-        boolean isAvailable;
+        boolean zIsAvailable;
+        ServiceInfo serviceInfo;
         int i = 0;
         this.mIsLoadedAllTiles = false;
         this.mCurrentSpecs = new ArrayList();
@@ -79,33 +79,30 @@ public class SecQSCustomizerTileAdapter {
                 try {
                     qSTile = qSTile2;
                     try {
-                        ServiceInfo serviceInfo = AppGlobals.getPackageManager().getServiceInfo(componentFromSpec, 0L, ActivityManager.getCurrentUser());
+                        serviceInfo = AppGlobals.getPackageManager().getServiceInfo(componentFromSpec, 0L, ActivityManager.getCurrentUser());
                         if (serviceInfo == null) {
                             Log.d("SecQSCustomizerTileAdapter", "Can't find component " + componentFromSpec);
-                        }
-                        if (serviceInfo != null) {
-                            isAvailable = true;
                         }
                     } catch (RemoteException unused) {
                     }
                 } catch (RemoteException unused2) {
                     qSTile = qSTile2;
                 }
-                isAvailable = false;
+                zIsAvailable = serviceInfo != null;
             } else {
                 qSTile = qSTile2;
-                isAvailable = qSTile.isAvailable();
+                zIsAvailable = qSTile.isAvailable();
             }
-            if (isAvailable) {
+            if (zIsAvailable) {
                 CustomTileInfo customTileInfo = new CustomTileInfo();
                 customTileInfo.spec = qSTile.getTileSpec();
                 QSTile.State state = qSTile.getState();
                 customTileInfo.state = state;
                 state.dualTarget = false;
                 customTileInfo.isActive = true;
-                StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-                m.append((Object) customTileInfo.state.label);
-                customTileInfo.customizeTileContentDes = m.toString();
+                StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+                sbM.append((Object) customTileInfo.state.label);
+                customTileInfo.customizeTileContentDes = sbM.toString();
                 arrayList2.add(customTileInfo);
             }
         }
@@ -133,11 +130,11 @@ public class SecQSCustomizerTileAdapter {
             Object obj3 = arrayList4.get(i4);
             i4++;
             String str3 = (String) obj3;
-            if (!str3.startsWith("custom(") && (createTile = qSHost.createTile(str3)) != null) {
-                if (!createTile.isAvailable()) {
-                    createTile.destroy();
+            if (!str3.startsWith("custom(") && (qSTileCreateTile = qSHost.createTile(str3)) != null) {
+                if (!qSTileCreateTile.isAvailable()) {
+                    qSTileCreateTile.destroy();
                 } else if (!qSHost.shouldBeHiddenByKnox(str3)) {
-                    arrayList5.add(createTile);
+                    arrayList5.add(qSTileCreateTile);
                 }
             }
         }

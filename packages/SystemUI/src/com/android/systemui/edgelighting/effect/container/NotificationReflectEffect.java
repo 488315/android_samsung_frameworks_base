@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import com.android.systemui.edgelighting.effect.data.EdgeEffectInfo;
 import com.android.systemui.edgelighting.effect.view.ReflectEffectView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationReflectEffect extends NotificationEffect {
     public ReflectEffectView mReflectEffectView;
@@ -93,10 +92,10 @@ public class NotificationReflectEffect extends NotificationEffect {
             WindowManager windowManager = (WindowManager) reflectEffectView2.getContext().getSystemService("window");
             DisplayMetrics displayMetrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
-            int round = (int) Math.round(Math.sqrt(Math.pow(displayMetrics.heightPixels, 2.0d) + Math.pow(displayMetrics.widthPixels, 2.0d)));
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(round, round);
-            layoutParams.setMarginStart((displayMetrics.widthPixels - round) / 2);
-            layoutParams.topMargin = (displayMetrics.heightPixels - round) / 2;
+            int iRound = (int) Math.round(Math.sqrt(Math.pow(displayMetrics.heightPixels, 2.0d) + Math.pow(displayMetrics.widthPixels, 2.0d)));
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(iRound, iRound);
+            layoutParams.setMarginStart((displayMetrics.widthPixels - iRound) / 2);
+            layoutParams.topMargin = (displayMetrics.heightPixels - iRound) / 2;
             reflectEffectView2.mImageFrame.setLayoutParams(layoutParams);
             this.mReflectEffectView.startAnimation();
         }

@@ -6,7 +6,6 @@ import kotlin.Pair;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DerivedFlatten extends StateDerived {
     public final Function1 upstream;
@@ -18,11 +17,11 @@ public final class DerivedFlatten extends StateDerived {
 
     @Override // com.android.systemui.kairos.internal.StateDerived
     public final Pair recalc(EvalScope evalScope) {
-        Pair currentWithEpoch = ((StateImpl) this.upstream.mo779invoke(evalScope)).store.getCurrentWithEpoch(evalScope);
+        Pair currentWithEpoch = ((StateImpl) this.upstream.mo781invoke(evalScope)).store.getCurrentWithEpoch(evalScope);
         StateImpl stateImpl = (StateImpl) currentWithEpoch.component1();
-        long longValue = ((Number) currentWithEpoch.component2()).longValue();
+        long jLongValue = ((Number) currentWithEpoch.component2()).longValue();
         Pair currentWithEpoch2 = stateImpl.store.getCurrentWithEpoch(evalScope);
-        return new Pair(currentWithEpoch2.component1(), Long.valueOf(Math.max(longValue, ((Number) currentWithEpoch2.component2()).longValue())));
+        return new Pair(currentWithEpoch2.component1(), Long.valueOf(Math.max(jLongValue, ((Number) currentWithEpoch2.component2()).longValue())));
     }
 
     public final String toString() {

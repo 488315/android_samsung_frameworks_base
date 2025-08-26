@@ -110,9 +110,9 @@ public interface IKeystoreMaintenance extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeystoreMaintenance.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeystoreMaintenance)) {
-                return (IKeystoreMaintenance) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeystoreMaintenance.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeystoreMaintenance)) {
+                return (IKeystoreMaintenance) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -160,36 +160,36 @@ public interface IKeystoreMaintenance extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onUserAdded(readInt);
+                    onUserAdded(i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    initUserSuperKeys(readInt2, createByteArray, readBoolean);
+                    initUserSuperKeys(i4, bArrCreateByteArray, z);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onUserRemoved(readInt3);
+                    onUserRemoved(i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onUserLskfRemoved(readInt4);
+                    onUserLskfRemoved(i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i7 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    clearNamespace(readInt5, readLong);
+                    clearNamespace(i7, j);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -208,10 +208,10 @@ public interface IKeystoreMaintenance extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt6 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    long[] appUidsAffectedBySid = getAppUidsAffectedBySid(readInt6, readLong2);
+                    long[] appUidsAffectedBySid = getAppUidsAffectedBySid(i8, j2);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(appUidsAffectedBySid);
                     return true;
@@ -243,165 +243,165 @@ public interface IKeystoreMaintenance extends IInterface {
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void onUserAdded(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void initUserSuperKeys(int i, byte[] bArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void onUserRemoved(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void onUserLskfRemoved(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void clearNamespace(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void earlyBootEnded() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void migrateKeyNamespace(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    obtain.writeTypedObject(keyDescriptor2, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    parcelObtain.writeTypedObject(keyDescriptor2, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public void deleteAllKeys() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 32);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public long[] getAppUidsAffectedBySid(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(9, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
             public byte[] getRotValue() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 32);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IKeystoreMaintenance.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 32);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

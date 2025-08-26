@@ -2,7 +2,10 @@ package com.android.systemui.shade;
 
 import com.android.systemui.common.buffer.RingBuffer;
 import com.android.systemui.statusbar.StatusBarState;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import kotlin.Lazy;
@@ -10,7 +13,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationShadeWindowState {
     public static final List TABLE_HEADERS;
@@ -60,7 +62,6 @@ public final class NotificationShadeWindowState {
     public boolean userScreenTimeOut;
     public boolean windowNotTouchable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Buffer {
         public final RingBuffer buffer;
 
@@ -69,7 +70,6 @@ public final class NotificationShadeWindowState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -140,22 +140,15 @@ public final class NotificationShadeWindowState {
         this.asStringList$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.NotificationShadeWindowState$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                NotificationShadeWindowState notificationShadeWindowState = NotificationShadeWindowState.this;
+                NotificationShadeWindowState notificationShadeWindowState = this.f$0;
                 return Arrays.asList(String.valueOf(notificationShadeWindowState.keyguardShowing), String.valueOf(notificationShadeWindowState.keyguardOccluded), String.valueOf(notificationShadeWindowState.keyguardNeedsInput), String.valueOf(notificationShadeWindowState.panelVisible), String.valueOf(notificationShadeWindowState.shadeOrQsExpanded), String.valueOf(notificationShadeWindowState.notificationShadeFocusable), String.valueOf(notificationShadeWindowState.bouncerShowing), String.valueOf(notificationShadeWindowState.glanceableHubShowing), String.valueOf(notificationShadeWindowState.glanceableHubOrientationAware), String.valueOf(notificationShadeWindowState.keyguardFadingAway), String.valueOf(notificationShadeWindowState.keyguardGoingAway), String.valueOf(notificationShadeWindowState.qsExpanded), String.valueOf(notificationShadeWindowState.headsUpNotificationShowing), String.valueOf(notificationShadeWindowState.lightRevealScrimOpaque), String.valueOf(notificationShadeWindowState.isSwitchingUsers), String.valueOf(notificationShadeWindowState.forceWindowCollapsed), String.valueOf(notificationShadeWindowState.forceDozeBrightness), String.valueOf(notificationShadeWindowState.forceUserActivity), String.valueOf(notificationShadeWindowState.launchingActivityFromNotification), String.valueOf(notificationShadeWindowState.mediaBackdropShowing), String.valueOf(notificationShadeWindowState.windowNotTouchable), notificationShadeWindowState.componentsForcingTopUi.toString(), notificationShadeWindowState.forceOpenTokens.toString(), StatusBarState.toString(notificationShadeWindowState.statusBarState), String.valueOf(notificationShadeWindowState.remoteInputActive), String.valueOf(notificationShadeWindowState.forcePluginOpen), String.valueOf(notificationShadeWindowState.dozing), String.valueOf(notificationShadeWindowState.scrimsVisibility), String.valueOf(notificationShadeWindowState.backgroundBlurRadius), String.valueOf(notificationShadeWindowState.communalVisible), String.valueOf(notificationShadeWindowState.keyguardUserActivityTimeout), String.valueOf(notificationShadeWindowState.searchGridTileShowing));
             }
         });
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ NotificationShadeWindowState(boolean r44, boolean r45, boolean r46, boolean r47, boolean r48, boolean r49, boolean r50, boolean r51, boolean r52, boolean r53, boolean r54, boolean r55, boolean r56, boolean r57, boolean r58, boolean r59, boolean r60, boolean r61, boolean r62, boolean r63, boolean r64, java.util.Set r65, java.util.Set r66, int r67, boolean r68, boolean r69, boolean r70, boolean r71, int r72, int r73, boolean r74, boolean r75, boolean r76, long r77, long r79, boolean r81, boolean r82, boolean r83, boolean r84, boolean r85, int r86, long r87, boolean r89, boolean r90, int r91, int r92, kotlin.jvm.internal.DefaultConstructorMarker r93) {
-        /*
-            Method dump skipped, instructions count: 523
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationShadeWindowState.<init>(boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, boolean, java.util.Set, java.util.Set, int, boolean, boolean, boolean, boolean, int, int, boolean, boolean, boolean, long, long, boolean, boolean, boolean, boolean, boolean, int, long, boolean, boolean, int, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ NotificationShadeWindowState(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, boolean z9, boolean z10, boolean z11, boolean z12, boolean z13, boolean z14, boolean z15, boolean z16, boolean z17, boolean z18, boolean z19, boolean z20, boolean z21, Set set, Set set2, int i, boolean z22, boolean z23, boolean z24, boolean z25, int i2, int i3, boolean z26, boolean z27, boolean z28, long j, long j2, boolean z29, boolean z30, boolean z31, boolean z32, boolean z33, int i4, long j3, boolean z34, boolean z35, int i5, int i6, DefaultConstructorMarker defaultConstructorMarker) {
+        boolean z36 = (i5 & 1) != 0 ? false : z;
+        this(z36, (i5 & 2) != 0 ? false : z2, (i5 & 4) != 0 ? false : z3, (i5 & 8) != 0 ? false : z4, (i5 & 16) != 0 ? false : z5, (i5 & 32) != 0 ? false : z6, (i5 & 64) != 0 ? false : z7, (i5 & 128) != 0 ? false : z8, (i5 & 256) != 0 ? false : z9, (i5 & 512) != 0 ? false : z10, (i5 & 1024) != 0 ? false : z11, (i5 & 2048) != 0 ? false : z12, (i5 & 4096) != 0 ? false : z13, (i5 & 8192) != 0 ? false : z14, (i5 & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 ? false : z15, (i5 & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0 ? false : z16, (i5 & 65536) != 0 ? false : z17, (i5 & 131072) != 0 ? false : z18, (i5 & 262144) != 0 ? false : z19, (i5 & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0 ? false : z20, (i5 & 1048576) != 0 ? false : z21, (i5 & 2097152) != 0 ? new LinkedHashSet() : set, (i5 & 4194304) != 0 ? new LinkedHashSet() : set2, (i5 & 8388608) != 0 ? 0 : i, (i5 & 16777216) != 0 ? false : z22, (i5 & 33554432) != 0 ? false : z23, (i5 & 67108864) != 0 ? false : z24, (i5 & 134217728) != 0 ? false : z25, (i5 & 268435456) != 0 ? 0 : i2, (i5 & VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS) != 0 ? 0 : i3, (i5 & 1073741824) != 0 ? false : z26, (i5 & Integer.MIN_VALUE) != 0 ? false : z27, (i6 & 1) != 0 ? false : z28, (i6 & 2) != 0 ? 0L : j, (i6 & 4) == 0 ? j2 : 0L, (i6 & 8) != 0 ? false : z29, (i6 & 16) != 0 ? false : z30, (i6 & 32) != 0 ? false : z31, (i6 & 64) != 0 ? false : z32, (i6 & 128) != 0 ? false : z33, (i6 & 256) != 0 ? 0 : i4, (i6 & 512) != 0 ? -1L : j3, (i6 & 1024) != 0 ? false : z34, (i6 & 2048) != 0 ? false : z35);
     }
 }

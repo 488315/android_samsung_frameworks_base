@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PackageObserver implements Observer {
     private final Context mContext;
@@ -72,9 +71,7 @@ public class PackageObserver implements Observer {
         if (this.mCallbacks.removeIf(new Predicate() { // from class: com.android.systemui.util.service.PackageObserver$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$removeCallback$0;
-                lambda$removeCallback$0 = PackageObserver.lambda$removeCallback$0(Observer.Callback.this, (WeakReference) obj);
-                return lambda$removeCallback$0;
+                return PackageObserver.lambda$removeCallback$0(callback, (WeakReference) obj);
             }
         }) && this.mCallbacks.isEmpty()) {
             this.mContext.unregisterReceiver(this.mReceiver);

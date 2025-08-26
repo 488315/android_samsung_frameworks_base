@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardSecVisibilityHelper {
     public boolean isVisibilityAnimating;
@@ -25,10 +24,10 @@ public final class KeyguardSecVisibilityHelper {
     public final KeyguardSecVisibilityHelper$mSetInvisibleEndAction$1 mSetInvisibleEndAction = new Consumer() { // from class: com.android.keyguard.KeyguardSecVisibilityHelper$mSetInvisibleEndAction$1
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
-            KeyguardSecVisibilityHelper keyguardSecVisibilityHelper = KeyguardSecVisibilityHelper.this;
+            KeyguardSecVisibilityHelper keyguardSecVisibilityHelper = this.this$0;
             keyguardSecVisibilityHelper.isVisibilityAnimating = false;
             keyguardSecVisibilityHelper.mView.setVisibility(4);
-            LogBuffer logBuffer = KeyguardSecVisibilityHelper.this.mLogBuffer;
+            LogBuffer logBuffer = this.this$0.mLogBuffer;
             if (logBuffer != null) {
                 LogBuffer.log$default(logBuffer, "KeyguardSecVisibilityHelper", LogLevel.DEBUG, "Callback Set Visibility to INVISIBLE");
             }
@@ -37,10 +36,10 @@ public final class KeyguardSecVisibilityHelper {
     public final KeyguardSecVisibilityHelper$mSetGoneEndAction$1 mSetGoneEndAction = new Consumer() { // from class: com.android.keyguard.KeyguardSecVisibilityHelper$mSetGoneEndAction$1
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
-            KeyguardSecVisibilityHelper keyguardSecVisibilityHelper = KeyguardSecVisibilityHelper.this;
+            KeyguardSecVisibilityHelper keyguardSecVisibilityHelper = this.this$0;
             keyguardSecVisibilityHelper.isVisibilityAnimating = false;
             keyguardSecVisibilityHelper.mView.setVisibility(8);
-            LogBuffer logBuffer = KeyguardSecVisibilityHelper.this.mLogBuffer;
+            LogBuffer logBuffer = this.this$0.mLogBuffer;
             if (logBuffer != null) {
                 LogBuffer.log$default(logBuffer, "KeyguardSecVisibilityHelper", LogLevel.DEBUG, "CallbackSet Visibility to GONE");
             }
@@ -48,7 +47,6 @@ public final class KeyguardSecVisibilityHelper {
     };
     public final KeyguardSecVisibilityHelper$mSetVisibleEndRunnable$1 mSetVisibleEndRunnable = new KeyguardSecVisibilityHelper$mSetVisibleEndRunnable$1(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

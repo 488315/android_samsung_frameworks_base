@@ -45,9 +45,9 @@ public interface IGetAllProfilesCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetAllProfilesCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetAllProfilesCallback)) {
-                return (IGetAllProfilesCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetAllProfilesCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetAllProfilesCallback)) {
+                return (IGetAllProfilesCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IGetAllProfilesCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 EuiccProfileInfo[] euiccProfileInfoArr = (EuiccProfileInfo[]) parcel.createTypedArray(EuiccProfileInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onComplete(readInt, euiccProfileInfoArr);
+                onComplete(i3, euiccProfileInfoArr);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IGetAllProfilesCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.IGetAllProfilesCallback
             public void onComplete(int i, EuiccProfileInfo[] euiccProfileInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetAllProfilesCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(euiccProfileInfoArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetAllProfilesCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(euiccProfileInfoArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

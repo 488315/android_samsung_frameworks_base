@@ -15,7 +15,6 @@ import java.io.IOException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VideoPlayer {
     public static final int MEDIA_ERROR_NOT_PREPARED = -38;
@@ -38,7 +37,6 @@ public final class VideoPlayer {
     public static final Companion Companion = new Companion(null);
     private static final String TAG = "VideoPlayer";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         private Companion() {
         }
@@ -48,7 +46,6 @@ public final class VideoPlayer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum VideoState {
         IDLE,
         INITIALIZED,
@@ -60,9 +57,7 @@ public final class VideoPlayer {
         final SemMediaPlayer semMediaPlayer = new SemMediaPlayer();
         semMediaPlayer.setOnInitCompleteListener(new SemMediaPlayer.OnInitCompleteListener() { // from class: com.samsung.android.nexus.video.VideoPlayer$$special$$inlined$apply$lambda$1
             public final void onInitComplete(SemMediaPlayer semMediaPlayer2, SemMediaPlayer.TrackInfo[] trackInfoArr) {
-                String str;
-                str = VideoPlayer.TAG;
-                Log.i(str, "Prepare is done.");
+                Log.i(VideoPlayer.TAG, "Prepare is done.");
                 this.setMPlayerState(VideoPlayer.VideoState.INITIALIZED);
                 semMediaPlayer.setParameter(35004, 1);
                 semMediaPlayer.setParameter(37000, 1);
@@ -78,10 +73,8 @@ public final class VideoPlayer {
         });
         semMediaPlayer.setOnPlaybackCompleteListener(new SemMediaPlayer.OnPlaybackCompleteListener() { // from class: com.samsung.android.nexus.video.VideoPlayer$$special$$inlined$apply$lambda$2
             public final void onPlaybackComplete(SemMediaPlayer semMediaPlayer2) {
-                String str;
-                str = VideoPlayer.TAG;
-                Log.i(str, "Play completed.");
-                SemMediaPlayer.OnPlaybackCompleteListener completionListener = VideoPlayer.this.getCompletionListener();
+                Log.i(VideoPlayer.TAG, "Play completed.");
+                SemMediaPlayer.OnPlaybackCompleteListener completionListener = this.this$0.getCompletionListener();
                 if (completionListener != null) {
                     completionListener.onPlaybackComplete(semMediaPlayer2);
                 }
@@ -89,10 +82,8 @@ public final class VideoPlayer {
         });
         semMediaPlayer.setOnSeekCompleteListener(new SemMediaPlayer.OnSeekCompleteListener() { // from class: com.samsung.android.nexus.video.VideoPlayer$$special$$inlined$apply$lambda$3
             public final void onSeekComplete(SemMediaPlayer semMediaPlayer2) {
-                String str;
-                str = VideoPlayer.TAG;
-                Log.i(str, "seekTo completed.");
-                SemMediaPlayer.OnSeekCompleteListener seekCompleteListener = VideoPlayer.this.getSeekCompleteListener();
+                Log.i(VideoPlayer.TAG, "seekTo completed.");
+                SemMediaPlayer.OnSeekCompleteListener seekCompleteListener = this.this$0.getSeekCompleteListener();
                 if (seekCompleteListener != null) {
                     seekCompleteListener.onSeekComplete(semMediaPlayer2);
                 }
@@ -100,10 +91,8 @@ public final class VideoPlayer {
         });
         semMediaPlayer.setOnErrorListener(new SemMediaPlayer.OnErrorListener() { // from class: com.samsung.android.nexus.video.VideoPlayer$$special$$inlined$apply$lambda$4
             public final boolean onError(SemMediaPlayer semMediaPlayer2, int i, int i2) {
-                String str;
-                str = VideoPlayer.TAG;
-                Log.e(str, "error: mp = " + semMediaPlayer2 + ", what = " + i + ", extra = " + i2);
-                SemMediaPlayer.OnErrorListener errorListener = VideoPlayer.this.getErrorListener();
+                Log.e(VideoPlayer.TAG, "error: mp = " + semMediaPlayer2 + ", what = " + i + ", extra = " + i2);
+                SemMediaPlayer.OnErrorListener errorListener = this.this$0.getErrorListener();
                 if (errorListener == null) {
                     return true;
                 }
@@ -232,7 +221,7 @@ public final class VideoPlayer {
     }
 
     /* renamed from: getCurrentPosition, reason: collision with other method in class */
-    public final long m3290getCurrentPosition() {
+    public final long m3308getCurrentPosition() {
         return this.mMediaPlayer.getCurrentPosition();
     }
 
@@ -329,9 +318,9 @@ public final class VideoPlayer {
 
     public final void seekTo(int i) {
         String str = TAG;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Seek to position : ", " , state = ");
-        m.append(this.mPlayerState);
-        Log.i(str, m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Seek to position : ", " , state = ");
+        sbM.append(this.mPlayerState);
+        Log.i(str, sbM.toString());
         if (this.mPlayerState.compareTo(VideoState.IDLE) > 0) {
             try {
                 this.mMediaPlayer.seekTo(i);

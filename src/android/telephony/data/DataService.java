@@ -324,9 +324,9 @@ public abstract class DataService extends Service {
             DataServiceProvider dataServiceProvider = (DataServiceProvider) DataService.this.mServiceMap.get(i);
             switch (message.what) {
                 case 1:
-                    DataServiceProvider onCreateDataServiceProvider = DataService.this.onCreateDataServiceProvider(message.arg1);
-                    if (onCreateDataServiceProvider != null) {
-                        DataService.this.mServiceMap.put(i, onCreateDataServiceProvider);
+                    DataServiceProvider dataServiceProviderOnCreateDataServiceProvider = DataService.this.onCreateDataServiceProvider(message.arg1);
+                    if (dataServiceProviderOnCreateDataServiceProvider != null) {
+                        DataService.this.mServiceMap.put(i, dataServiceProviderOnCreateDataServiceProvider);
                         break;
                     }
                     break;

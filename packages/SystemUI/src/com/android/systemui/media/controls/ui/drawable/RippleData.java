@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RippleData {
     public float alpha;
@@ -48,15 +47,15 @@ public final class RippleData {
         float f5 = this.minSize;
         float f6 = this.maxSize;
         float f7 = this.highlight;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("RippleData(x=", f, ", y=", f2, ", alpha=");
-        m.append(f3);
-        m.append(", progress=");
-        m.append(f4);
-        m.append(", minSize=");
-        m.append(f5);
-        m.append(", maxSize=");
-        m.append(f6);
-        m.append(", highlight=");
-        return DpCornerSize$$ExternalSyntheticOutline0.m(f7, ")", m);
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("RippleData(x=", f, ", y=", f2, ", alpha=");
+        sbM.append(f3);
+        sbM.append(", progress=");
+        sbM.append(f4);
+        sbM.append(", minSize=");
+        sbM.append(f5);
+        sbM.append(", maxSize=");
+        sbM.append(f6);
+        sbM.append(", highlight=");
+        return DpCornerSize$$ExternalSyntheticOutline0.m(f7, ")", sbM);
     }
 }

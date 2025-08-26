@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class BooleanFlag implements ParcelableFlag {
     public static final Parcelable.Creator<BooleanFlag> CREATOR;
@@ -16,7 +15,6 @@ public abstract class BooleanFlag implements ParcelableFlag {
     public final boolean overridden;
     public final boolean teamfood;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,31 +92,11 @@ public abstract class BooleanFlag implements ParcelableFlag {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private BooleanFlag(android.os.Parcel r8) {
-        /*
-            r7 = this;
-            int r1 = r8.readInt()
-            java.lang.String r0 = r8.readString()
-            java.lang.String r2 = ""
-            if (r0 != 0) goto Ld
-            r0 = r2
-        Ld:
-            java.lang.String r3 = r8.readString()
-            if (r3 != 0) goto L14
-            r3 = r2
-        L14:
-            boolean r4 = r8.readBoolean()
-            boolean r5 = r8.readBoolean()
-            boolean r6 = r8.readBoolean()
-            r2 = r0
-            r0 = r7
-            r0.<init>(r1, r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.flags.BooleanFlag.<init>(android.os.Parcel):void");
+    private BooleanFlag(Parcel parcel) {
+        int i = parcel.readInt();
+        String string = parcel.readString();
+        string = string == null ? "" : string;
+        String string2 = parcel.readString();
+        this(i, string, string2 == null ? "" : string2, parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean());
     }
 }

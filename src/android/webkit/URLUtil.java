@@ -46,15 +46,15 @@ public final class URLUtil {
     }
 
     public static String composeSearchUrl(String str, String str2, String str3) {
-        int indexOf = str2.indexOf(str3);
-        if (indexOf < 0) {
+        int iIndexOf = str2.indexOf(str3);
+        if (iIndexOf < 0) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(str2.substring(0, indexOf));
+        sb.append(str2.substring(0, iIndexOf));
         try {
             sb.append(URLEncoder.encode(str, "utf-8"));
-            sb.append(str2.substring(indexOf + str3.length()));
+            sb.append(str2.substring(iIndexOf + str3.length()));
             return sb.toString();
         } catch (UnsupportedEncodingException unused) {
             return null;
@@ -69,17 +69,17 @@ public final class URLUtil {
         int i = 0;
         int i2 = 0;
         while (i < bArr.length) {
-            byte b = bArr[i];
-            if (b == 37) {
+            byte hex = bArr[i];
+            if (hex == 37) {
                 if (bArr.length - i > 2) {
-                    int parseHex = parseHex(bArr[i + 1]) * 16;
+                    int hex2 = parseHex(bArr[i + 1]) * 16;
                     i += 2;
-                    b = (byte) (parseHex + parseHex(bArr[i]));
+                    hex = (byte) (hex2 + parseHex(bArr[i]));
                 } else {
                     throw new IllegalArgumentException("Invalid format");
                 }
             }
-            bArr2[i2] = b;
+            bArr2[i2] = hex;
             i++;
             i2++;
         }
@@ -93,13 +93,13 @@ public final class URLUtil {
         if (length == 0) {
             return false;
         }
-        int indexOf = str.indexOf(37);
-        while (indexOf >= 0 && indexOf < length) {
-            if (indexOf < length - 2) {
+        int iIndexOf = str.indexOf(37);
+        while (iIndexOf >= 0 && iIndexOf < length) {
+            if (iIndexOf < length - 2) {
                 try {
-                    parseHex((byte) str.charAt(indexOf + 1));
-                    parseHex((byte) str.charAt(indexOf + 2));
-                    indexOf = str.indexOf(37, indexOf + 3);
+                    parseHex((byte) str.charAt(iIndexOf + 1));
+                    parseHex((byte) str.charAt(iIndexOf + 2));
+                    iIndexOf = str.indexOf(37, iIndexOf + 3);
                 } catch (IllegalArgumentException unused) {
                 }
             }
@@ -177,8 +177,8 @@ public final class URLUtil {
     }
 
     public static String stripAnchor(String str) {
-        int indexOf = str.indexOf(35);
-        return indexOf != -1 ? str.substring(0, indexOf) : str;
+        int iIndexOf = str.indexOf(35);
+        return iIndexOf != -1 ? str.substring(0, iIndexOf) : str;
     }
 
     public static String guessFileName(String str, String str2, String str3) {
@@ -189,72 +189,72 @@ public final class URLUtil {
     }
 
     private static String guessFileNameRfc2616(String str, String str2, String str3) {
-        String str4;
-        String decode;
-        int lastIndexOf;
-        int lastIndexOf2;
-        String str5 = null;
+        String strSubstring;
+        String strDecode;
+        int iLastIndexOf;
+        int iLastIndexOf2;
+        String strSubstring2 = null;
         if (str2 != null) {
-            str4 = parseContentDispositionRfc2616(str2);
-            if (str4 != null && (lastIndexOf2 = str4.lastIndexOf(47) + 1) > 0) {
-                str4 = str4.substring(lastIndexOf2);
+            strSubstring = parseContentDispositionRfc2616(str2);
+            if (strSubstring != null && (iLastIndexOf2 = strSubstring.lastIndexOf(47) + 1) > 0) {
+                strSubstring = strSubstring.substring(iLastIndexOf2);
             }
         } else {
-            str4 = null;
+            strSubstring = null;
         }
-        if (str4 == null && (decode = Uri.decode(str)) != null) {
-            int indexOf = decode.indexOf(63);
-            if (indexOf > 0) {
-                decode = decode.substring(0, indexOf);
+        if (strSubstring == null && (strDecode = Uri.decode(str)) != null) {
+            int iIndexOf = strDecode.indexOf(63);
+            if (iIndexOf > 0) {
+                strDecode = strDecode.substring(0, iIndexOf);
             }
-            if (!decode.endsWith("/") && (lastIndexOf = decode.lastIndexOf(47) + 1) > 0) {
-                str4 = decode.substring(lastIndexOf);
+            if (!strDecode.endsWith("/") && (iLastIndexOf = strDecode.lastIndexOf(47) + 1) > 0) {
+                strSubstring = strDecode.substring(iLastIndexOf);
             }
         }
-        if (str4 == null) {
-            str4 = "downloadfile";
+        if (strSubstring == null) {
+            strSubstring = "downloadfile";
         }
-        int indexOf2 = str4.indexOf(46);
-        if (indexOf2 < 0) {
-            if (str3 != null && (str5 = MimeTypeMap.getSingleton().getExtensionFromMimeType(str3)) != null) {
-                str5 = MediaMetrics.SEPARATOR + str5;
+        int iIndexOf2 = strSubstring.indexOf(46);
+        if (iIndexOf2 < 0) {
+            if (str3 != null && (strSubstring2 = MimeTypeMap.getSingleton().getExtensionFromMimeType(str3)) != null) {
+                strSubstring2 = MediaMetrics.SEPARATOR + strSubstring2;
             }
-            if (str5 == null) {
+            if (strSubstring2 == null) {
                 if (str3 != null && str3.toLowerCase(Locale.ROOT).startsWith("text/")) {
                     if (str3.equalsIgnoreCase("text/html")) {
-                        str5 = ".html";
+                        strSubstring2 = ".html";
                     } else {
-                        str5 = ".txt";
+                        strSubstring2 = ".txt";
                     }
                 } else {
-                    str5 = ".bin";
+                    strSubstring2 = ".bin";
                 }
             }
         } else {
             if (str3 != null) {
-                String mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(str4.substring(str4.lastIndexOf(46) + 1));
-                if (mimeTypeFromExtension != null && !mimeTypeFromExtension.equalsIgnoreCase(str3) && (str5 = MimeTypeMap.getSingleton().getExtensionFromMimeType(str3)) != null) {
-                    str5 = MediaMetrics.SEPARATOR + str5;
+                String mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(strSubstring.substring(strSubstring.lastIndexOf(46) + 1));
+                if (mimeTypeFromExtension != null && !mimeTypeFromExtension.equalsIgnoreCase(str3) && (strSubstring2 = MimeTypeMap.getSingleton().getExtensionFromMimeType(str3)) != null) {
+                    strSubstring2 = MediaMetrics.SEPARATOR + strSubstring2;
                 }
             }
-            if (str5 == null) {
-                str5 = str4.substring(indexOf2);
+            if (strSubstring2 == null) {
+                strSubstring2 = strSubstring.substring(iIndexOf2);
             }
-            str4 = str4.substring(0, indexOf2);
+            strSubstring = strSubstring.substring(0, iIndexOf2);
         }
-        return str4 + str5;
+        return strSubstring + strSubstring2;
     }
 
     private static String guessFileNameRfc6266(String str, String str2, String str3) {
         String filenameSuggestion = getFilenameSuggestion(str, str2);
-        String suggestExtensionFromMimeType = suggestExtensionFromMimeType(str3);
+        String strSuggestExtensionFromMimeType = suggestExtensionFromMimeType(str3);
         if (filenameSuggestion.indexOf(46) < 0) {
-            return filenameSuggestion + suggestExtensionFromMimeType;
+            return filenameSuggestion + strSuggestExtensionFromMimeType;
         }
         if (str3 == null || !extensionDifferentFromMimeType(filenameSuggestion, str3)) {
             return filenameSuggestion;
         }
-        return filenameSuggestion + suggestExtensionFromMimeType;
+        return filenameSuggestion + strSuggestExtensionFromMimeType;
     }
 
     private static String getFilenameSuggestion(String str, String str2) {
@@ -315,32 +315,32 @@ public final class URLUtil {
     }
 
     private static String getFilenameFromContentDispositionRfc6266(String str) {
-        String group;
-        String[] split = str.trim().split(NavigationBarInflaterView.GRAVITY_SEPARATOR, 2);
-        String str2 = null;
-        if (split.length < 2 || RecognizerResultsIntent.URI_SCHEME_INLINE.equalsIgnoreCase(split[0].trim())) {
+        String strGroup;
+        String[] strArrSplit = str.trim().split(NavigationBarInflaterView.GRAVITY_SEPARATOR, 2);
+        String extValueString = null;
+        if (strArrSplit.length < 2 || RecognizerResultsIntent.URI_SCHEME_INLINE.equalsIgnoreCase(strArrSplit[0].trim())) {
             return null;
         }
-        Matcher matcher = DISPOSITION_PATTERN.matcher(split[1]);
-        String str3 = null;
+        Matcher matcher = DISPOSITION_PATTERN.matcher(strArrSplit[1]);
+        String str2 = null;
         while (matcher.find()) {
-            String group2 = matcher.group(1);
+            String strGroup2 = matcher.group(1);
             if (matcher.group(2) != null) {
-                group = removeSlashEscapes(matcher.group(2));
+                strGroup = removeSlashEscapes(matcher.group(2));
             } else if (matcher.group(3) != null) {
-                group = removeSlashEscapes(matcher.group(3));
+                strGroup = removeSlashEscapes(matcher.group(3));
             } else {
-                group = matcher.group(4);
+                strGroup = matcher.group(4);
             }
-            if (group2 != null && group != null) {
-                if ("filename*".equalsIgnoreCase(group2)) {
-                    str2 = parseExtValueString(group);
-                } else if ("filename".equalsIgnoreCase(group2)) {
-                    str3 = group;
+            if (strGroup2 != null && strGroup != null) {
+                if ("filename*".equalsIgnoreCase(strGroup2)) {
+                    extValueString = parseExtValueString(strGroup);
+                } else if ("filename".equalsIgnoreCase(strGroup2)) {
+                    str2 = strGroup;
                 }
             }
         }
-        return str2 != null ? str2 : str3;
+        return extValueString != null ? extValueString : str2;
     }
 
     private static String removeSlashEscapes(String str) {
@@ -351,15 +351,15 @@ public final class URLUtil {
     }
 
     private static String parseExtValueString(String str) {
-        String[] split = str.split("'", 3);
-        if (split.length < 3) {
+        String[] strArrSplit = str.split("'", 3);
+        if (strArrSplit.length < 3) {
             return null;
         }
-        String str2 = split[0];
-        String str3 = split[2];
+        String str2 = strArrSplit[0];
+        String str3 = strArrSplit[2];
         try {
-            Charset forName = Charset.forName(str2);
-            return URLDecoder.decode(encodePlusCharacters(str3, forName), forName);
+            Charset charsetForName = Charset.forName(str2);
+            return URLDecoder.decode(encodePlusCharacters(str3, charsetForName), charsetForName);
         } catch (RuntimeException unused) {
             return null;
         }

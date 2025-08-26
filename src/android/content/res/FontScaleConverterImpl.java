@@ -30,14 +30,14 @@ public class FontScaleConverterImpl implements FontScaleConverter {
         float f2;
         float f3;
         float f4;
-        float constrainedMap;
-        float abs = Math.abs(f);
-        float signum = Math.signum(f);
-        int binarySearch = Arrays.binarySearch(fArr, abs);
-        if (binarySearch >= 0) {
-            constrainedMap = fArr2[binarySearch];
+        float fConstrainedMap;
+        float fAbs = Math.abs(f);
+        float fSignum = Math.signum(f);
+        int iBinarySearch = Arrays.binarySearch(fArr, fAbs);
+        if (iBinarySearch >= 0) {
+            fConstrainedMap = fArr2[iBinarySearch];
         } else {
-            int i = -(binarySearch + 1);
+            int i = -(iBinarySearch + 1);
             int i2 = i - 1;
             float f5 = 0.0f;
             if (i2 >= fArr.length - 1) {
@@ -59,9 +59,9 @@ public class FontScaleConverterImpl implements FontScaleConverter {
                 f3 = fArr2[i];
                 f4 = f8;
             }
-            constrainedMap = MathUtils.constrainedMap(f5, f3, f4, f2, abs);
+            fConstrainedMap = MathUtils.constrainedMap(f5, f3, f4, f2, fAbs);
         }
-        return signum * constrainedMap;
+        return fSignum * fConstrainedMap;
     }
 
     public boolean equals(Object obj) {

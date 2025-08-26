@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICmcCallEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.cmc.ICmcCallEventListener";
@@ -31,7 +30,6 @@ public interface ICmcCallEventListener extends IInterface {
 
     void onIncomingCall(CmcCallEventInfo cmcCallEventInfo) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICmcCallEventListener {
         static final int TRANSACTION_onCallEnded = 6;
         static final int TRANSACTION_onCallError = 7;
@@ -44,7 +42,6 @@ public interface ICmcCallEventListener extends IInterface {
         static final int TRANSACTION_onEarlyMediaStarted = 4;
         static final int TRANSACTION_onIncomingCall = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICmcCallEventListener {
             private IBinder mRemote;
 
@@ -63,153 +60,153 @@ public interface ICmcCallEventListener extends IInterface {
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallEnded(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallError(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallEstablished(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallHeld(CmcCallEventInfo cmcCallEventInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallRecording(CmcRecordEventInfo cmcRecordEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcRecordEventInfo, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcRecordEventInfo, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallResumed(CmcCallEventInfo cmcCallEventInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCallRingingBack(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onCalling(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onEarlyMediaStarted(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.cmc.ICmcCallEventListener
             public void onIncomingCall(CmcCallEventInfo cmcCallEventInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(cmcCallEventInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICmcCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cmcCallEventInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -222,8 +219,8 @@ public interface ICmcCallEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICmcCallEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICmcCallEventListener)) ? new Proxy(iBinder) : (ICmcCallEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICmcCallEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICmcCallEventListener)) ? new Proxy(iBinder) : (ICmcCallEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -280,16 +277,16 @@ public interface ICmcCallEventListener extends IInterface {
                     return true;
                 case 8:
                     CmcCallEventInfo cmcCallEventInfo8 = (CmcCallEventInfo) parcel.readTypedObject(CmcCallEventInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCallHeld(cmcCallEventInfo8, readInt);
+                    onCallHeld(cmcCallEventInfo8, i3);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     CmcCallEventInfo cmcCallEventInfo9 = (CmcCallEventInfo) parcel.readTypedObject(CmcCallEventInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCallResumed(cmcCallEventInfo9, readInt2);
+                    onCallResumed(cmcCallEventInfo9, i4);
                     parcel2.writeNoException();
                     return true;
                 case 10:
@@ -309,7 +306,6 @@ public interface ICmcCallEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICmcCallEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

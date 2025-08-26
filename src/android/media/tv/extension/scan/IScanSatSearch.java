@@ -45,9 +45,9 @@ public interface IScanSatSearch extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IScanSatSearch");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScanSatSearch)) {
-                return (IScanSatSearch) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IScanSatSearch");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScanSatSearch)) {
+                return (IScanSatSearch) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IScanSatSearch extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int customizedLnb = setCustomizedLnb(readString);
+                int customizedLnb = setCustomizedLnb(string);
                 parcel2.writeNoException();
                 parcel2.writeInt(customizedLnb);
                 return true;
@@ -102,17 +102,17 @@ public interface IScanSatSearch extends IInterface {
 
             @Override // android.media.tv.extension.scan.IScanSatSearch
             public int setCustomizedLnb(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IScanSatSearch");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IScanSatSearch");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

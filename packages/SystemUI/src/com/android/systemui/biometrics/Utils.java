@@ -18,7 +18,6 @@ import java.util.List;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Utils {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -67,7 +66,7 @@ public final class Utils {
     }
 
     public static final Bitmap toBitmap(Drawable drawable) {
-        Bitmap createBitmap;
+        Bitmap bitmapCreateBitmap;
         if (drawable == null) {
             return null;
         }
@@ -75,15 +74,15 @@ public final class Utils {
             return ((BitmapDrawable) drawable).getBitmap();
         }
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            createBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-            createBitmap.getClass();
+            bitmapCreateBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap.getClass();
         } else {
-            createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            createBitmap.getClass();
+            bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap.getClass();
         }
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 }

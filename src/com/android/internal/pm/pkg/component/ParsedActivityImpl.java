@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.internal.pm.parsing.pkg.PackageImpl;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
@@ -212,7 +213,7 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
     }
 
     @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         super.writeToParcel(parcel, i);
         parcel.writeInt(this.theme);
         parcel.writeInt(this.uiOptions);

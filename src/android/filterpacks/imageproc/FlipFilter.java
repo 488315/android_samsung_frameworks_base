@@ -45,9 +45,9 @@ public class FlipFilter extends Filter {
 
     public void initProgram(FilterContext filterContext, int i) {
         if (i == 3) {
-            ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-            createIdentity.setMaximumTileSize(this.mTileSize);
-            this.mProgram = createIdentity;
+            ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+            shaderProgramCreateIdentity.setMaximumTileSize(this.mTileSize);
+            this.mProgram = shaderProgramCreateIdentity;
             this.mTarget = i;
             updateParameters();
             return;
@@ -64,15 +64,15 @@ public class FlipFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void updateParameters() {

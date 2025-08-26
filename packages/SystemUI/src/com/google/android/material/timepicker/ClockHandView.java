@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class ClockHandView extends View {
     public final TimeInterpolator animationInterpolator;
@@ -40,7 +39,6 @@ class ClockHandView extends View {
     public final int selectorRadius;
     public final int selectorStrokeWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnRotateListener {
     }
 
@@ -60,15 +58,15 @@ class ClockHandView extends View {
         int width = getWidth() / 2;
         float f = width;
         float leveledCircleRadius = getLeveledCircleRadius(this.currentLevel);
-        float cos = (((float) Math.cos(this.degRad)) * leveledCircleRadius) + f;
+        float fCos = (((float) Math.cos(this.degRad)) * leveledCircleRadius) + f;
         float f2 = height;
-        float sin = (leveledCircleRadius * ((float) Math.sin(this.degRad))) + f2;
+        float fSin = (leveledCircleRadius * ((float) Math.sin(this.degRad))) + f2;
         this.paint.setStrokeWidth(0.0f);
-        canvas.drawCircle(cos, sin, this.selectorRadius, this.paint);
-        double sin2 = Math.sin(this.degRad);
-        double cos2 = Math.cos(this.degRad);
+        canvas.drawCircle(fCos, fSin, this.selectorRadius, this.paint);
+        double dSin = Math.sin(this.degRad);
+        double dCos = Math.cos(this.degRad);
         this.paint.setStrokeWidth(this.selectorStrokeWidth);
-        canvas.drawLine(f, f2, width + ((int) (cos2 * r2)), height + ((int) (r2 * sin2)), this.paint);
+        canvas.drawLine(f, f2, width + ((int) (dCos * d)), height + ((int) (d * dSin)), this.paint);
         canvas.drawCircle(f, f2, this.centerDotRadius, this.paint);
     }
 
@@ -111,14 +109,12 @@ class ClockHandView extends View {
         }
         float f = i;
         boolean z5 = this.originalDeg != f;
-        if (!z || !z5) {
-            if (z5 || z2) {
-                setHandRotation(f);
-            }
-            this.changedDuringTouch = z4 | z3;
-            return true;
+        if (z && z5) {
+            z3 = true;
+        } else if (z5 || z2) {
+            setHandRotation(f);
+            z3 = true;
         }
-        z3 = true;
         this.changedDuringTouch = z4 | z3;
         return true;
     }
@@ -134,11 +130,11 @@ class ClockHandView extends View {
         int height = getHeight() / 2;
         int width = getWidth() / 2;
         float leveledCircleRadius = getLeveledCircleRadius(this.currentLevel);
-        float cos = (((float) Math.cos(this.degRad)) * leveledCircleRadius) + width;
-        float sin = (leveledCircleRadius * ((float) Math.sin(this.degRad))) + height;
+        float fCos = (((float) Math.cos(this.degRad)) * leveledCircleRadius) + width;
+        float fSin = (leveledCircleRadius * ((float) Math.sin(this.degRad))) + height;
         RectF rectF = this.selectorBox;
         float f3 = this.selectorRadius;
-        rectF.set(cos - f3, sin - f3, cos + f3, sin + f3);
+        rectF.set(fCos - f3, fSin - f3, fCos + f3, fSin + f3);
         ArrayList arrayList = (ArrayList) this.listeners;
         int size = arrayList.size();
         int i = 0;
@@ -166,20 +162,20 @@ class ClockHandView extends View {
         this.paint = paint;
         this.selectorBox = new RectF();
         this.currentLevel = 1;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockHandView, i, R.style.Widget_MaterialComponents_TimePicker_Clock);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockHandView, i, R.style.Widget_MaterialComponents_TimePicker_Clock);
         MotionUtils.resolveThemeDuration(context, R.attr.motionDurationLong2, 200);
         this.animationInterpolator = MotionUtils.resolveThemeInterpolator(context, R.attr.motionEasingEmphasizedInterpolator, AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
-        this.circleRadius = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        this.selectorRadius = obtainStyledAttributes.getDimensionPixelSize(2, 0);
+        this.circleRadius = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        this.selectorRadius = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0);
         this.selectorStrokeWidth = getResources().getDimensionPixelSize(R.dimen.material_clock_hand_stroke_width);
         this.centerDotRadius = r3.getDimensionPixelSize(R.dimen.material_clock_hand_center_dot_radius);
-        int color = obtainStyledAttributes.getColor(0, 0);
+        int color = typedArrayObtainStyledAttributes.getColor(0, 0);
         paint.setAntiAlias(true);
         paint.setColor(color);
         setHandRotation(0.0f);
         ViewConfiguration.get(context).getScaledTouchSlop();
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         setImportantForAccessibility(2);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

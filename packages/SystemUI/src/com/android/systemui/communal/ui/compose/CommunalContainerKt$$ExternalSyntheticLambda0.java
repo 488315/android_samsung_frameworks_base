@@ -23,7 +23,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.time.Duration;
 import kotlin.time.DurationUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -34,7 +33,7 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         int i = 2;
         int i2 = 5;
         int i3 = 4;
@@ -43,14 +42,14 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
             case 0:
                 SceneTransitionsBuilderImpl sceneTransitionsBuilderImpl = (SceneTransitionsBuilderImpl) obj;
                 SceneKey sceneKey = CommunalScenes.Communal;
-                sceneTransitionsBuilderImpl.transition(null, sceneKey, (r14 & 2) != 0 ? null : null, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(17));
+                sceneTransitionsBuilderImpl.transition(null, sceneKey, (30 & 2) != 0 ? null : null, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(17));
                 CommunalTransitionKeys.INSTANCE.getClass();
                 TransitionKey transitionKey = CommunalTransitionKeys.Swipe;
-                sceneTransitionsBuilderImpl.transition(null, sceneKey, (r14 & 2) != 0 ? null : transitionKey, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(19));
+                sceneTransitionsBuilderImpl.transition(null, sceneKey, (30 & 2) != 0 ? null : transitionKey, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(19));
                 SceneKey sceneKey2 = CommunalScenes.Blank;
-                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (r14 & 2) != 0 ? null : null, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(20));
-                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (r14 & 2) != 0 ? null : CommunalTransitionKeys.SwipeInLandscape, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(21));
-                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (r14 & 2) != 0 ? null : transitionKey, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(22));
+                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (30 & 2) != 0 ? null : null, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(20));
+                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (30 & 2) != 0 ? null : CommunalTransitionKeys.SwipeInLandscape, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(21));
+                sceneTransitionsBuilderImpl.transition(null, sceneKey2, (30 & 2) != 0 ? null : transitionKey, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(22));
                 break;
             case 1:
                 TransitionBuilderImpl transitionBuilderImpl = (TransitionBuilderImpl) obj;
@@ -132,13 +131,13 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
                 SceneKey sceneKey3 = CommunalScenes.Communal;
                 CommunalTransitionKeys.INSTANCE.getClass();
                 TransitionKey transitionKey2 = CommunalTransitionKeys.SimpleFade;
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (r14 & 2) != 0 ? null : transitionKey2, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(23));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (30 & 2) != 0 ? null : transitionKey2, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(23));
                 SceneKey sceneKey4 = CommunalScenes.Blank;
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (r14 & 2) != 0 ? null : transitionKey2, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(24));
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (r14 & 2) != 0 ? null : null, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(25));
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (r14 & 2) != 0 ? null : null, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(1));
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (r14 & 2) != 0 ? null : CommunalTransitionKeys.ToEditMode, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(i));
-                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (r14 & 2) != 0 ? null : CommunalTransitionKeys.FromEditMode, (r14 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(3));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (30 & 2) != 0 ? null : transitionKey2, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(24));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (30 & 2) != 0 ? null : null, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(25));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (30 & 2) != 0 ? null : null, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(1));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey4, (30 & 2) != 0 ? null : CommunalTransitionKeys.ToEditMode, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(i));
+                sceneTransitionsBuilderImpl2.transition(null, sceneKey3, (30 & 2) != 0 ? null : CommunalTransitionKeys.FromEditMode, (30 & 4) != 0 ? null : null, null, new CommunalContainerKt$$ExternalSyntheticLambda0(3));
                 break;
             case 12:
                 Communal$Elements.INSTANCE.getClass();
@@ -182,13 +181,13 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
             case 20:
                 TransitionBuilderImpl transitionBuilderImpl7 = (TransitionBuilderImpl) obj;
                 FromPrimaryBouncerTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl7.spec = AnimationSpecKt.tween$default(Duration.m3444toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl7.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 transitionBuilderImpl7.fade(AllElements.INSTANCE);
                 break;
             case 21:
                 TransitionBuilderImpl transitionBuilderImpl8 = (TransitionBuilderImpl) obj;
                 FromGlanceableHubTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl8.spec = AnimationSpecKt.tween$default(Duration.m3444toIntimpl(FromGlanceableHubTransitionInteractor.TO_LOCKSCREEN_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl8.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromGlanceableHubTransitionInteractor.TO_LOCKSCREEN_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 Communal$Elements.INSTANCE.getClass();
                 BaseTransitionBuilder.translate$default(transitionBuilderImpl8, Communal$Elements.Grid, Edge.End);
                 TransitionBuilderImpl.timestampRange$default(transitionBuilderImpl8, null, 167, new CommunalContainerKt$$ExternalSyntheticLambda0(9), 5);
@@ -210,7 +209,7 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
             case 24:
                 TransitionBuilderImpl transitionBuilderImpl11 = (TransitionBuilderImpl) obj;
                 FromPrimaryBouncerTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl11.spec = AnimationSpecKt.tween$default(Duration.m3444toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl11.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 transitionBuilderImpl11.fade(AllElements.INSTANCE);
                 break;
             default:

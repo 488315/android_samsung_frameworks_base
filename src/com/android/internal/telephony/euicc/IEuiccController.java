@@ -215,9 +215,9 @@ public interface IEuiccController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEuiccController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEuiccController)) {
-                return (IEuiccController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEuiccController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEuiccController)) {
+                return (IEuiccController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -291,175 +291,175 @@ public interface IEuiccController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    continueOperation(readInt, intent, bundle);
+                    continueOperation(i3, intent, bundle);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     DownloadableSubscription downloadableSubscription = (DownloadableSubscription) parcel.readTypedObject(DownloadableSubscription.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getDownloadableSubscriptionMetadata(readInt2, downloadableSubscription, readString, pendingIntent);
+                    getDownloadableSubscriptionMetadata(i4, downloadableSubscription, string, pendingIntent);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string2 = parcel.readString();
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getDefaultDownloadableSubscriptionList(readInt3, readString2, pendingIntent2);
+                    getDefaultDownloadableSubscriptionList(i5, string2, pendingIntent2);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String eid = getEid(readInt4, readString3);
+                    String eid = getEid(i6, string3);
                     parcel2.writeNoException();
                     parcel2.writeString(eid);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int otaStatus = getOtaStatus(readInt5);
+                    int otaStatus = getOtaStatus(i7);
                     parcel2.writeNoException();
                     parcel2.writeInt(otaStatus);
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     DownloadableSubscription downloadableSubscription2 = (DownloadableSubscription) parcel.readTypedObject(DownloadableSubscription.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    String string4 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     PendingIntent pendingIntent3 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    downloadSubscription(readInt6, downloadableSubscription2, readBoolean, readString4, bundle2, pendingIntent3);
+                    downloadSubscription(i8, downloadableSubscription2, z, string4, bundle2, pendingIntent3);
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    EuiccInfo euiccInfo = getEuiccInfo(readInt7);
+                    EuiccInfo euiccInfo = getEuiccInfo(i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(euiccInfo, 1);
                     return true;
                 case 8:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string5 = parcel.readString();
                     PendingIntent pendingIntent4 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deleteSubscription(readInt8, readInt9, readString5, pendingIntent4);
+                    deleteSubscription(i10, i11, string5, pendingIntent4);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    String string6 = parcel.readString();
                     PendingIntent pendingIntent5 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    switchToSubscription(readInt10, readInt11, readString6, pendingIntent5);
+                    switchToSubscription(i12, i13, string6, pendingIntent5);
                     return true;
                 case 10:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    String string7 = parcel.readString();
                     PendingIntent pendingIntent6 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    switchToSubscriptionWithPort(readInt12, readInt13, readInt14, readString7, pendingIntent6);
+                    switchToSubscriptionWithPort(i14, i15, i16, string7, pendingIntent6);
                     return true;
                 case 11:
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     PendingIntent pendingIntent7 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateSubscriptionNickname(readInt15, readInt16, readString8, readString9, pendingIntent7);
+                    updateSubscriptionNickname(i17, i18, string8, string9, pendingIntent7);
                     return true;
                 case 12:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     PendingIntent pendingIntent8 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    eraseSubscriptions(readInt17, pendingIntent8);
+                    eraseSubscriptions(i19, pendingIntent8);
                     return true;
                 case 13:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     PendingIntent pendingIntent9 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    eraseSubscriptionsWithOptions(readInt18, readInt19, pendingIntent9);
+                    eraseSubscriptionsWithOptions(i20, i21, pendingIntent9);
                     return true;
                 case 14:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     PendingIntent pendingIntent10 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    retainSubscriptionsForFactoryReset(readInt20, pendingIntent10);
+                    retainSubscriptionsForFactoryReset(i22, pendingIntent10);
                     return true;
                 case 15:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    boolean z2 = parcel.readBoolean();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    setSupportedCountries(readBoolean2, createStringArrayList);
+                    setSupportedCountries(z2, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<String> supportedCountries = getSupportedCountries(readBoolean3);
+                    List<String> supportedCountries = getSupportedCountries(z3);
                     parcel2.writeNoException();
                     parcel2.writeStringList(supportedCountries);
                     return true;
                 case 17:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSupportedCountry = isSupportedCountry(readString10);
+                    boolean zIsSupportedCountry = isSupportedCountry(string10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportedCountry);
+                    parcel2.writeBoolean(zIsSupportedCountry);
                     return true;
                 case 18:
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
-                    String readString11 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSimPortAvailable = isSimPortAvailable(readInt21, readInt22, readString11);
+                    boolean zIsSimPortAvailable = isSimPortAvailable(i23, i24, string11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSimPortAvailable);
+                    parcel2.writeBoolean(zIsSimPortAvailable);
                     return true;
                 case 19:
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasCarrierPrivilegesForPackageOnAnyPhone = hasCarrierPrivilegesForPackageOnAnyPhone(readString12);
+                    boolean zHasCarrierPrivilegesForPackageOnAnyPhone = hasCarrierPrivilegesForPackageOnAnyPhone(string12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasCarrierPrivilegesForPackageOnAnyPhone);
+                    parcel2.writeBoolean(zHasCarrierPrivilegesForPackageOnAnyPhone);
                     return true;
                 case 20:
-                    String readString13 = parcel.readString();
-                    long readLong = parcel.readLong();
+                    String string13 = parcel.readString();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean isCompatChangeEnabled = isCompatChangeEnabled(readString13, readLong);
+                    boolean zIsCompatChangeEnabled = isCompatChangeEnabled(string13, j);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCompatChangeEnabled);
+                    parcel2.writeBoolean(zIsCompatChangeEnabled);
                     return true;
                 case 21:
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    setPsimConversionSupportedCarriers(createIntArray);
+                    setPsimConversionSupportedCarriers(iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPsimConversionSupported = isPsimConversionSupported(readInt23);
+                    boolean zIsPsimConversionSupported = isPsimConversionSupported(i25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPsimConversionSupported);
+                    parcel2.writeBoolean(zIsPsimConversionSupported);
                     return true;
                 case 23:
-                    int readInt24 = parcel.readInt();
-                    String readString14 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long availableMemoryInBytes = getAvailableMemoryInBytes(readInt24, readString14);
+                    long availableMemoryInBytes = getAvailableMemoryInBytes(i26, string14);
                     parcel2.writeNoException();
                     parcel2.writeLong(availableMemoryInBytes);
                     return true;
@@ -486,359 +486,359 @@ public interface IEuiccController extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void continueOperation(int i, Intent intent, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void getDownloadableSubscriptionMetadata(int i, DownloadableSubscription downloadableSubscription, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(downloadableSubscription, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(downloadableSubscription, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void getDefaultDownloadableSubscriptionList(int i, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public String getEid(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public int getOtaStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void downloadSubscription(int i, DownloadableSubscription downloadableSubscription, boolean z, String str, Bundle bundle, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(downloadableSubscription, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(downloadableSubscription, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public EuiccInfo getEuiccInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EuiccInfo) obtain2.readTypedObject(EuiccInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EuiccInfo) parcelObtain2.readTypedObject(EuiccInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void deleteSubscription(int i, int i2, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void switchToSubscription(int i, int i2, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void switchToSubscriptionWithPort(int i, int i2, int i3, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void updateSubscriptionNickname(int i, int i2, String str, String str2, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void eraseSubscriptions(int i, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void eraseSubscriptionsWithOptions(int i, int i2, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void retainSubscriptionsForFactoryReset(int i, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void setSupportedCountries(boolean z, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public List<String> getSupportedCountries(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public boolean isSupportedCountry(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public boolean isSimPortAvailable(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public boolean hasCarrierPrivilegesForPackageOnAnyPhone(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public boolean isCompatChangeEnabled(String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public void setPsimConversionSupportedCarriers(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public boolean isPsimConversionSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
             public long getAvailableMemoryInBytes(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IEuiccController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

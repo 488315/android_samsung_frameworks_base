@@ -60,13 +60,13 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.jvm.internal.Lambda;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.text.MatchResult;
 import kotlin.text.MatcherMatchResult;
 import kotlin.text.Regex;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RecordingInputConnection implements InputConnection {
     public final boolean autoCorrect;
@@ -80,6 +80,20 @@ public final class RecordingInputConnection implements InputConnection {
     public final TextFieldSelectionManager textFieldSelectionManager;
     public TextFieldValue textFieldValue;
     public final ViewConfiguration viewConfiguration;
+
+    /* renamed from: androidx.compose.foundation.text.input.internal.RecordingInputConnection$performHandwritingGesture$1, reason: invalid class name */
+    final class AnonymousClass1 extends Lambda implements Function1 {
+        public AnonymousClass1() {
+            super(1);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            RecordingInputConnection.this.addEditCommandWithBatch((EditCommand) obj);
+            return Unit.INSTANCE;
+        }
+    }
 
     public RecordingInputConnection(TextFieldValue textFieldValue, InputEventCallback2 inputEventCallback2, boolean z, LegacyTextFieldState legacyTextFieldState, TextFieldSelectionManager textFieldSelectionManager, ViewConfiguration viewConfiguration) {
         this.eventCallback = inputEventCallback2;
@@ -125,7 +139,7 @@ public final class RecordingInputConnection implements InputConnection {
         ((ArrayList) this.editCommands).clear();
         this.batchDepth = 0;
         this.isActive = false;
-        LegacyTextInputMethodRequest legacyTextInputMethodRequest = ((LegacyTextInputMethodRequest$createInputConnection$1) this.eventCallback).this$0;
+        LegacyTextInputMethodRequest legacyTextInputMethodRequest = LegacyTextInputMethodRequest.this;
         int size = ((ArrayList) legacyTextInputMethodRequest.ics).size();
         for (int i = 0; i < size; i++) {
             if (Intrinsics.areEqual(((WeakReference) ((ArrayList) legacyTextInputMethodRequest.ics).get(i)).get(), this)) {
@@ -197,7 +211,7 @@ public final class RecordingInputConnection implements InputConnection {
         int i = this.batchDepth - 1;
         this.batchDepth = i;
         if (i == 0 && !this.editCommands.isEmpty()) {
-            ((LegacyTextInputMethodRequest$createInputConnection$1) this.eventCallback).this$0.onEditCommand.mo779invoke(new ArrayList(this.editCommands));
+            LegacyTextInputMethodRequest.this.onEditCommand.mo781invoke(new ArrayList(this.editCommands));
             ((ArrayList) this.editCommands).clear();
         }
         return this.batchDepth > 0;
@@ -216,7 +230,7 @@ public final class RecordingInputConnection implements InputConnection {
     @Override // android.view.inputmethod.InputConnection
     public final int getCursorCapsMode(int i) {
         TextFieldValue textFieldValue = this.textFieldValue;
-        return TextUtils.getCapsMode(textFieldValue.annotatedString.text, TextRange.m750getMinimpl(textFieldValue.selection), i);
+        return TextUtils.getCapsMode(textFieldValue.annotatedString.text, TextRange.m752getMinimpl(textFieldValue.selection), i);
     }
 
     @Override // android.view.inputmethod.InputConnection
@@ -236,7 +250,7 @@ public final class RecordingInputConnection implements InputConnection {
 
     @Override // android.view.inputmethod.InputConnection
     public final CharSequence getSelectedText(int i) {
-        if (TextRange.m747getCollapsedimpl(this.textFieldValue.selection)) {
+        if (TextRange.m749getCollapsedimpl(this.textFieldValue.selection)) {
             return null;
         }
         return TextFieldValueKt.getSelectedText(this.textFieldValue).text;
@@ -320,19 +334,21 @@ public final class RecordingInputConnection implements InputConnection {
             ImeAction.Companion.getClass();
             i2 = ImeAction.Default;
         }
-        ((LegacyTextInputMethodRequest$createInputConnection$1) this.eventCallback).this$0.onImeActionPerformed.mo779invoke(ImeAction.m772boximpl(i2));
+        LegacyTextInputMethodRequest.this.onImeActionPerformed.mo781invoke(ImeAction.m774boximpl(i2));
         return true;
     }
 
     @Override // android.view.inputmethod.InputConnection
     public final void performHandwritingGesture(HandwritingGesture handwritingGesture, Executor executor, final IntConsumer intConsumer) {
         int i;
-        long j;
+        long jM737getRangeForRect86BmAI;
         char c;
-        String sb;
+        String string;
         int i2;
+        int iM216access$getOffsetForHandwritingGestured4ec7I;
         TextLayoutResultProxy layoutResult;
         TextLayoutResult textLayoutResult;
+        int iM216access$getOffsetForHandwritingGestured4ec7I2;
         TextLayoutResultProxy layoutResult2;
         TextLayoutResult textLayoutResult2;
         TextLayoutResult textLayoutResult3;
@@ -341,9 +357,9 @@ public final class RecordingInputConnection implements InputConnection {
         LegacyTextFieldState legacyTextFieldState = this.legacyTextFieldState;
         TextFieldSelectionManager textFieldSelectionManager = this.textFieldSelectionManager;
         ViewConfiguration viewConfiguration = this.viewConfiguration;
-        RecordingInputConnection$performHandwritingGesture$1 recordingInputConnection$performHandwritingGesture$1 = new RecordingInputConnection$performHandwritingGesture$1(this);
+        AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         api34LegacyPerformHandwritingGestureImpl.getClass();
-        final int i3 = 3;
+        final int iFallbackOnLegacyTextField = 3;
         if (legacyTextFieldState != null) {
             HandwritingGestureApi34.INSTANCE.getClass();
             AnnotatedString annotatedString = legacyTextFieldState.untransformedText;
@@ -353,155 +369,145 @@ public final class RecordingInputConnection implements InputConnection {
                     if (handwritingGesture instanceof SelectGesture) {
                         SelectGesture selectGesture = (SelectGesture) handwritingGesture;
                         Rect composeRect = RectHelper_androidKt.toComposeRect(selectGesture.getSelectionArea());
-                        int m214toTextGranularityNUwxegE = HandwritingGestureApi34.m214toTextGranularityNUwxegE(selectGesture.getGranularity());
+                        int iM215toTextGranularityNUwxegE = HandwritingGestureApi34.m215toTextGranularityNUwxegE(selectGesture.getGranularity());
                         TextInclusionStrategy.Companion.getClass();
-                        long m218getRangeForScreenRectOH9lIzo = HandwritingGesture_androidKt.m218getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect, m214toTextGranularityNUwxegE, TextInclusionStrategy.Companion.ContainsCenter);
-                        if (TextRange.m747getCollapsedimpl(m218getRangeForScreenRectOH9lIzo)) {
-                            i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(selectGesture, recordingInputConnection$performHandwritingGesture$1);
+                        long jM219getRangeForScreenRectOH9lIzo = HandwritingGesture_androidKt.m219getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect, iM215toTextGranularityNUwxegE, TextInclusionStrategy.Companion.ContainsCenter);
+                        if (TextRange.m749getCollapsedimpl(jM219getRangeForScreenRectOH9lIzo)) {
+                            iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(selectGesture, anonymousClass1);
                         } else {
-                            recordingInputConnection$performHandwritingGesture$1.mo779invoke(new SetSelectionCommand((int) (m218getRangeForScreenRectOH9lIzo >> 32), (int) (m218getRangeForScreenRectOH9lIzo & 4294967295L)));
+                            anonymousClass1.mo781invoke(new SetSelectionCommand((int) (jM219getRangeForScreenRectOH9lIzo >> 32), (int) (jM219getRangeForScreenRectOH9lIzo & 4294967295L)));
                             if (textFieldSelectionManager != null) {
                                 textFieldSelectionManager.enterSelectionMode$foundation_release(true);
                             }
-                            i3 = 1;
+                            iFallbackOnLegacyTextField = 1;
                         }
                     } else {
                         if (handwritingGesture instanceof DeleteGesture) {
                             DeleteGesture deleteGesture = (DeleteGesture) handwritingGesture;
-                            int m214toTextGranularityNUwxegE2 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(deleteGesture.getGranularity());
+                            int iM215toTextGranularityNUwxegE2 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(deleteGesture.getGranularity());
                             Rect composeRect2 = RectHelper_androidKt.toComposeRect(deleteGesture.getDeletionArea());
                             TextInclusionStrategy.Companion.getClass();
-                            long m218getRangeForScreenRectOH9lIzo2 = HandwritingGesture_androidKt.m218getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect2, m214toTextGranularityNUwxegE2, TextInclusionStrategy.Companion.ContainsCenter);
-                            if (TextRange.m747getCollapsedimpl(m218getRangeForScreenRectOH9lIzo2)) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(deleteGesture, recordingInputConnection$performHandwritingGesture$1);
+                            long jM219getRangeForScreenRectOH9lIzo2 = HandwritingGesture_androidKt.m219getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect2, iM215toTextGranularityNUwxegE2, TextInclusionStrategy.Companion.ContainsCenter);
+                            if (TextRange.m749getCollapsedimpl(jM219getRangeForScreenRectOH9lIzo2)) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(deleteGesture, anonymousClass1);
                             } else {
                                 TextGranularity.Companion.getClass();
-                                HandwritingGestureApi34.m213performDeletionOnLegacyTextFieldvJH6DeI(m218getRangeForScreenRectOH9lIzo2, annotatedString, m214toTextGranularityNUwxegE2 == TextGranularity.Word, recordingInputConnection$performHandwritingGesture$1);
-                                i3 = 1;
+                                HandwritingGestureApi34.m214performDeletionOnLegacyTextFieldvJH6DeI(jM219getRangeForScreenRectOH9lIzo2, annotatedString, iM215toTextGranularityNUwxegE2 == TextGranularity.Word, anonymousClass1);
+                                iFallbackOnLegacyTextField = 1;
                             }
                         } else if (handwritingGesture instanceof SelectRangeGesture) {
                             SelectRangeGesture selectRangeGesture = (SelectRangeGesture) handwritingGesture;
                             Rect composeRect3 = RectHelper_androidKt.toComposeRect(selectRangeGesture.getSelectionStartArea());
                             Rect composeRect4 = RectHelper_androidKt.toComposeRect(selectRangeGesture.getSelectionEndArea());
-                            int m214toTextGranularityNUwxegE3 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(selectRangeGesture.getGranularity());
+                            int iM215toTextGranularityNUwxegE3 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(selectRangeGesture.getGranularity());
                             TextInclusionStrategy.Companion.getClass();
-                            long m216access$getRangeForScreenRectsO048IG0 = HandwritingGesture_androidKt.m216access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect3, composeRect4, m214toTextGranularityNUwxegE3, TextInclusionStrategy.Companion.ContainsCenter);
-                            if (TextRange.m747getCollapsedimpl(m216access$getRangeForScreenRectsO048IG0)) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(selectRangeGesture, recordingInputConnection$performHandwritingGesture$1);
+                            long jM217access$getRangeForScreenRectsO048IG0 = HandwritingGesture_androidKt.m217access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect3, composeRect4, iM215toTextGranularityNUwxegE3, TextInclusionStrategy.Companion.ContainsCenter);
+                            if (TextRange.m749getCollapsedimpl(jM217access$getRangeForScreenRectsO048IG0)) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(selectRangeGesture, anonymousClass1);
                             } else {
-                                recordingInputConnection$performHandwritingGesture$1.mo779invoke(new SetSelectionCommand((int) (m216access$getRangeForScreenRectsO048IG0 >> 32), (int) (m216access$getRangeForScreenRectsO048IG0 & 4294967295L)));
+                                anonymousClass1.mo781invoke(new SetSelectionCommand((int) (jM217access$getRangeForScreenRectsO048IG0 >> 32), (int) (jM217access$getRangeForScreenRectsO048IG0 & 4294967295L)));
                                 if (textFieldSelectionManager != null) {
                                     textFieldSelectionManager.enterSelectionMode$foundation_release(true);
                                 }
-                                i3 = 1;
+                                iFallbackOnLegacyTextField = 1;
                             }
                         } else if (handwritingGesture instanceof DeleteRangeGesture) {
                             DeleteRangeGesture deleteRangeGesture = (DeleteRangeGesture) handwritingGesture;
-                            int m214toTextGranularityNUwxegE4 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(deleteRangeGesture.getGranularity());
+                            int iM215toTextGranularityNUwxegE4 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(deleteRangeGesture.getGranularity());
                             Rect composeRect5 = RectHelper_androidKt.toComposeRect(deleteRangeGesture.getDeletionStartArea());
                             Rect composeRect6 = RectHelper_androidKt.toComposeRect(deleteRangeGesture.getDeletionEndArea());
                             TextInclusionStrategy.Companion.getClass();
-                            long m216access$getRangeForScreenRectsO048IG02 = HandwritingGesture_androidKt.m216access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect5, composeRect6, m214toTextGranularityNUwxegE4, TextInclusionStrategy.Companion.ContainsCenter);
-                            if (TextRange.m747getCollapsedimpl(m216access$getRangeForScreenRectsO048IG02)) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(deleteRangeGesture, recordingInputConnection$performHandwritingGesture$1);
+                            long jM217access$getRangeForScreenRectsO048IG02 = HandwritingGesture_androidKt.m217access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect5, composeRect6, iM215toTextGranularityNUwxegE4, TextInclusionStrategy.Companion.ContainsCenter);
+                            if (TextRange.m749getCollapsedimpl(jM217access$getRangeForScreenRectsO048IG02)) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(deleteRangeGesture, anonymousClass1);
                             } else {
                                 TextGranularity.Companion.getClass();
-                                HandwritingGestureApi34.m213performDeletionOnLegacyTextFieldvJH6DeI(m216access$getRangeForScreenRectsO048IG02, annotatedString, m214toTextGranularityNUwxegE4 == TextGranularity.Word, recordingInputConnection$performHandwritingGesture$1);
-                                i3 = 1;
+                                HandwritingGestureApi34.m214performDeletionOnLegacyTextFieldvJH6DeI(jM217access$getRangeForScreenRectsO048IG02, annotatedString, iM215toTextGranularityNUwxegE4 == TextGranularity.Word, anonymousClass1);
+                                iFallbackOnLegacyTextField = 1;
                             }
                         } else if (handwritingGesture instanceof JoinOrSplitGesture) {
                             JoinOrSplitGesture joinOrSplitGesture = (JoinOrSplitGesture) handwritingGesture;
-                            if (viewConfiguration == null) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(joinOrSplitGesture, recordingInputConnection$performHandwritingGesture$1);
+                            if (viewConfiguration == null || (iM216access$getOffsetForHandwritingGestured4ec7I2 = HandwritingGesture_androidKt.m216access$getOffsetForHandwritingGestured4ec7I(legacyTextFieldState, HandwritingGesture_androidKt.access$toOffset(joinOrSplitGesture.getJoinOrSplitPoint()), viewConfiguration)) == -1 || ((layoutResult2 = legacyTextFieldState.getLayoutResult()) != null && (textLayoutResult2 = layoutResult2.value) != null && HandwritingGesture_androidKt.access$isBiDiBoundary(textLayoutResult2, iM216access$getOffsetForHandwritingGestured4ec7I2))) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(joinOrSplitGesture, anonymousClass1);
                             } else {
-                                int m215access$getOffsetForHandwritingGestured4ec7I = HandwritingGesture_androidKt.m215access$getOffsetForHandwritingGestured4ec7I(legacyTextFieldState, HandwritingGesture_androidKt.access$toOffset(joinOrSplitGesture.getJoinOrSplitPoint()), viewConfiguration);
-                                if (m215access$getOffsetForHandwritingGestured4ec7I == -1 || !((layoutResult2 = legacyTextFieldState.getLayoutResult()) == null || (textLayoutResult2 = layoutResult2.value) == null || !HandwritingGesture_androidKt.access$isBiDiBoundary(textLayoutResult2, m215access$getOffsetForHandwritingGestured4ec7I))) {
-                                    i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(joinOrSplitGesture, recordingInputConnection$performHandwritingGesture$1);
-                                } else {
-                                    int i4 = m215access$getOffsetForHandwritingGestured4ec7I;
-                                    while (i4 > 0) {
-                                        int codePointBefore = Character.codePointBefore(annotatedString, i4);
-                                        if (!HandwritingGesture_androidKt.isWhitespace(codePointBefore)) {
-                                            break;
-                                        } else {
-                                            i4 -= Character.charCount(codePointBefore);
-                                        }
-                                    }
-                                    while (m215access$getOffsetForHandwritingGestured4ec7I < annotatedString.text.length()) {
-                                        int codePointAt = Character.codePointAt(annotatedString, m215access$getOffsetForHandwritingGestured4ec7I);
-                                        if (!HandwritingGesture_androidKt.isWhitespace(codePointAt)) {
-                                            break;
-                                        } else {
-                                            m215access$getOffsetForHandwritingGestured4ec7I += Character.charCount(codePointAt);
-                                        }
-                                    }
-                                    long TextRange = TextRangeKt.TextRange(i4, m215access$getOffsetForHandwritingGestured4ec7I);
-                                    if (TextRange.m747getCollapsedimpl(TextRange)) {
-                                        int i5 = (int) (TextRange >> 32);
-                                        recordingInputConnection$performHandwritingGesture$1.mo779invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i5, i5), new CommitTextCommand(" ", 1)}));
+                                int iCharCount = iM216access$getOffsetForHandwritingGestured4ec7I2;
+                                while (iCharCount > 0) {
+                                    int iCodePointBefore = Character.codePointBefore(annotatedString, iCharCount);
+                                    if (!HandwritingGesture_androidKt.isWhitespace(iCodePointBefore)) {
+                                        break;
                                     } else {
-                                        HandwritingGestureApi34.m213performDeletionOnLegacyTextFieldvJH6DeI(TextRange, annotatedString, false, recordingInputConnection$performHandwritingGesture$1);
+                                        iCharCount -= Character.charCount(iCodePointBefore);
                                     }
-                                    i3 = 1;
                                 }
+                                while (iM216access$getOffsetForHandwritingGestured4ec7I2 < annotatedString.text.length()) {
+                                    int iCodePointAt = Character.codePointAt(annotatedString, iM216access$getOffsetForHandwritingGestured4ec7I2);
+                                    if (!HandwritingGesture_androidKt.isWhitespace(iCodePointAt)) {
+                                        break;
+                                    } else {
+                                        iM216access$getOffsetForHandwritingGestured4ec7I2 += Character.charCount(iCodePointAt);
+                                    }
+                                }
+                                long jTextRange = TextRangeKt.TextRange(iCharCount, iM216access$getOffsetForHandwritingGestured4ec7I2);
+                                if (TextRange.m749getCollapsedimpl(jTextRange)) {
+                                    int i3 = (int) (jTextRange >> 32);
+                                    anonymousClass1.mo781invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i3, i3), new CommitTextCommand(" ", 1)}));
+                                } else {
+                                    HandwritingGestureApi34.m214performDeletionOnLegacyTextFieldvJH6DeI(jTextRange, annotatedString, false, anonymousClass1);
+                                }
+                                iFallbackOnLegacyTextField = 1;
                             }
                         } else if (handwritingGesture instanceof InsertGesture) {
                             InsertGesture insertGesture = (InsertGesture) handwritingGesture;
-                            if (viewConfiguration == null) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(insertGesture, recordingInputConnection$performHandwritingGesture$1);
+                            if (viewConfiguration == null || (iM216access$getOffsetForHandwritingGestured4ec7I = HandwritingGesture_androidKt.m216access$getOffsetForHandwritingGestured4ec7I(legacyTextFieldState, HandwritingGesture_androidKt.access$toOffset(insertGesture.getInsertionPoint()), viewConfiguration)) == -1 || ((layoutResult = legacyTextFieldState.getLayoutResult()) != null && (textLayoutResult = layoutResult.value) != null && HandwritingGesture_androidKt.access$isBiDiBoundary(textLayoutResult, iM216access$getOffsetForHandwritingGestured4ec7I))) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(insertGesture, anonymousClass1);
                             } else {
-                                int m215access$getOffsetForHandwritingGestured4ec7I2 = HandwritingGesture_androidKt.m215access$getOffsetForHandwritingGestured4ec7I(legacyTextFieldState, HandwritingGesture_androidKt.access$toOffset(insertGesture.getInsertionPoint()), viewConfiguration);
-                                if (m215access$getOffsetForHandwritingGestured4ec7I2 == -1 || !((layoutResult = legacyTextFieldState.getLayoutResult()) == null || (textLayoutResult = layoutResult.value) == null || !HandwritingGesture_androidKt.access$isBiDiBoundary(textLayoutResult, m215access$getOffsetForHandwritingGestured4ec7I2))) {
-                                    i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(insertGesture, recordingInputConnection$performHandwritingGesture$1);
-                                } else {
-                                    recordingInputConnection$performHandwritingGesture$1.mo779invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(m215access$getOffsetForHandwritingGestured4ec7I2, m215access$getOffsetForHandwritingGestured4ec7I2), new CommitTextCommand(insertGesture.getTextToInsert(), 1)}));
-                                    i3 = 1;
-                                }
+                                anonymousClass1.mo781invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(iM216access$getOffsetForHandwritingGestured4ec7I, iM216access$getOffsetForHandwritingGestured4ec7I), new CommitTextCommand(insertGesture.getTextToInsert(), 1)}));
+                                iFallbackOnLegacyTextField = 1;
                             }
                         } else if (handwritingGesture instanceof RemoveSpaceGesture) {
                             RemoveSpaceGesture removeSpaceGesture = (RemoveSpaceGesture) handwritingGesture;
                             TextLayoutResultProxy layoutResult4 = legacyTextFieldState.getLayoutResult();
                             TextLayoutResult textLayoutResult4 = layoutResult4 != null ? layoutResult4.value : null;
-                            long access$toOffset = HandwritingGesture_androidKt.access$toOffset(removeSpaceGesture.getStartPoint());
-                            long access$toOffset2 = HandwritingGesture_androidKt.access$toOffset(removeSpaceGesture.getEndPoint());
+                            long jAccess$toOffset = HandwritingGesture_androidKt.access$toOffset(removeSpaceGesture.getStartPoint());
+                            long jAccess$toOffset2 = HandwritingGesture_androidKt.access$toOffset(removeSpaceGesture.getEndPoint());
                             LayoutCoordinates layoutCoordinates = legacyTextFieldState.getLayoutCoordinates();
                             if (textLayoutResult4 == null || layoutCoordinates == null) {
                                 i = 0;
                                 TextRange.Companion.getClass();
-                                j = TextRange.Zero;
+                                jM737getRangeForRect86BmAI = TextRange.Zero;
                             } else {
-                                long mo616screenToLocalMKHz9U = layoutCoordinates.mo616screenToLocalMKHz9U(access$toOffset);
-                                long mo616screenToLocalMKHz9U2 = layoutCoordinates.mo616screenToLocalMKHz9U(access$toOffset2);
+                                long jMo618screenToLocalMKHz9U = layoutCoordinates.mo618screenToLocalMKHz9U(jAccess$toOffset);
+                                long jMo618screenToLocalMKHz9U2 = layoutCoordinates.mo618screenToLocalMKHz9U(jAccess$toOffset2);
                                 MultiParagraph multiParagraph = textLayoutResult4.multiParagraph;
-                                int m217getLineForHandwritingGestured4ec7I = HandwritingGesture_androidKt.m217getLineForHandwritingGestured4ec7I(multiParagraph, mo616screenToLocalMKHz9U, viewConfiguration);
-                                int m217getLineForHandwritingGestured4ec7I2 = HandwritingGesture_androidKt.m217getLineForHandwritingGestured4ec7I(multiParagraph, mo616screenToLocalMKHz9U2, viewConfiguration);
-                                if (m217getLineForHandwritingGestured4ec7I != -1) {
-                                    if (m217getLineForHandwritingGestured4ec7I2 != -1) {
-                                        m217getLineForHandwritingGestured4ec7I = Math.min(m217getLineForHandwritingGestured4ec7I, m217getLineForHandwritingGestured4ec7I2);
+                                int iM218getLineForHandwritingGestured4ec7I = HandwritingGesture_androidKt.m218getLineForHandwritingGestured4ec7I(multiParagraph, jMo618screenToLocalMKHz9U, viewConfiguration);
+                                int iM218getLineForHandwritingGestured4ec7I2 = HandwritingGesture_androidKt.m218getLineForHandwritingGestured4ec7I(multiParagraph, jMo618screenToLocalMKHz9U2, viewConfiguration);
+                                if (iM218getLineForHandwritingGestured4ec7I != -1) {
+                                    if (iM218getLineForHandwritingGestured4ec7I2 != -1) {
+                                        iM218getLineForHandwritingGestured4ec7I = Math.min(iM218getLineForHandwritingGestured4ec7I, iM218getLineForHandwritingGestured4ec7I2);
                                     }
-                                    m217getLineForHandwritingGestured4ec7I2 = m217getLineForHandwritingGestured4ec7I;
-                                } else if (m217getLineForHandwritingGestured4ec7I2 == -1) {
+                                    iM218getLineForHandwritingGestured4ec7I2 = iM218getLineForHandwritingGestured4ec7I;
+                                } else if (iM218getLineForHandwritingGestured4ec7I2 == -1) {
                                     TextRange.Companion.getClass();
-                                    j = TextRange.Zero;
+                                    jM737getRangeForRect86BmAI = TextRange.Zero;
                                     i = 0;
                                 }
-                                float lineBottom = (multiParagraph.getLineBottom(m217getLineForHandwritingGestured4ec7I2) + multiParagraph.getLineTop(m217getLineForHandwritingGestured4ec7I2)) / 2;
-                                int i6 = (int) (mo616screenToLocalMKHz9U >> 32);
-                                int i7 = (int) (mo616screenToLocalMKHz9U2 >> 32);
-                                Rect rect = new Rect(Math.min(Float.intBitsToFloat(i6), Float.intBitsToFloat(i7)), lineBottom - 0.1f, Math.max(Float.intBitsToFloat(i6), Float.intBitsToFloat(i7)), lineBottom + 0.1f);
+                                float lineBottom = (multiParagraph.getLineBottom(iM218getLineForHandwritingGestured4ec7I2) + multiParagraph.getLineTop(iM218getLineForHandwritingGestured4ec7I2)) / 2;
+                                int i4 = (int) (jMo618screenToLocalMKHz9U >> 32);
+                                int i5 = (int) (jMo618screenToLocalMKHz9U2 >> 32);
+                                Rect rect = new Rect(Math.min(Float.intBitsToFloat(i4), Float.intBitsToFloat(i5)), lineBottom - 0.1f, Math.max(Float.intBitsToFloat(i4), Float.intBitsToFloat(i5)), lineBottom + 0.1f);
                                 TextGranularity.Companion.getClass();
                                 TextInclusionStrategy.Companion.getClass();
                                 i = 0;
-                                j = multiParagraph.m735getRangeForRect86BmAI(rect, 0, TextInclusionStrategy.Companion.AnyOverlap);
+                                jM737getRangeForRect86BmAI = multiParagraph.m737getRangeForRect86BmAI(rect, 0, TextInclusionStrategy.Companion.AnyOverlap);
                             }
-                            if (TextRange.m747getCollapsedimpl(j)) {
-                                i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(removeSpaceGesture, recordingInputConnection$performHandwritingGesture$1);
+                            if (TextRange.m749getCollapsedimpl(jM737getRangeForRect86BmAI)) {
+                                iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(removeSpaceGesture, anonymousClass1);
                             } else {
                                 final Ref$IntRef ref$IntRef = new Ref$IntRef();
                                 ref$IntRef.element = -1;
                                 final Ref$IntRef ref$IntRef2 = new Ref$IntRef();
                                 ref$IntRef2.element = -1;
-                                String str = annotatedString.subSequence(TextRange.m750getMinimpl(j), TextRange.m749getMaximpl(j)).text;
+                                String str = annotatedString.subSequence(TextRange.m752getMinimpl(jM737getRangeForRect86BmAI), TextRange.m751getMaximpl(jM737getRangeForRect86BmAI)).text;
                                 Regex regex = new Regex("\\s+");
                                 Function1 function1 = new Function1() { // from class: androidx.compose.foundation.text.input.internal.HandwritingGestureApi34$performRemoveSpaceGesture$newText$2
                                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -511,9 +517,9 @@ public final class RecordingInputConnection implements InputConnection {
 
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
+                                    public final Object mo781invoke(Object obj) {
                                         MatchResult matchResult = (MatchResult) obj;
-                                        Ref$IntRef ref$IntRef3 = Ref$IntRef.this;
+                                        Ref$IntRef ref$IntRef3 = ref$IntRef;
                                         if (ref$IntRef3.element == -1) {
                                             Matcher matcher = ((MatcherMatchResult) matchResult).matcher;
                                             ref$IntRef3.element = RangesKt___RangesKt.until(matcher.start(), matcher.end()).first;
@@ -524,42 +530,42 @@ public final class RecordingInputConnection implements InputConnection {
                                         return "";
                                     }
                                 };
-                                MatcherMatchResult find = regex.find(str);
-                                if (find == null) {
-                                    sb = str.toString();
+                                MatcherMatchResult matcherMatchResultFind = regex.find(str);
+                                if (matcherMatchResultFind == null) {
+                                    string = str.toString();
                                     c = ' ';
                                 } else {
                                     int length = str.length();
-                                    StringBuilder sb2 = new StringBuilder(length);
+                                    StringBuilder sb = new StringBuilder(length);
                                     c = ' ';
                                     do {
-                                        Matcher matcher = find.matcher;
-                                        sb2.append((CharSequence) str, i, RangesKt___RangesKt.until(matcher.start(), matcher.end()).first);
-                                        function1.mo779invoke(find);
-                                        sb2.append((CharSequence) "");
-                                        Matcher matcher2 = find.matcher;
+                                        Matcher matcher = matcherMatchResultFind.matcher;
+                                        sb.append((CharSequence) str, i, RangesKt___RangesKt.until(matcher.start(), matcher.end()).first);
+                                        function1.mo781invoke(matcherMatchResultFind);
+                                        sb.append((CharSequence) "");
+                                        Matcher matcher2 = matcherMatchResultFind.matcher;
                                         i = RangesKt___RangesKt.until(matcher2.start(), matcher2.end()).last + 1;
-                                        find = find.next();
+                                        matcherMatchResultFind = matcherMatchResultFind.next();
                                         if (i >= length) {
                                             break;
                                         }
-                                    } while (find != null);
+                                    } while (matcherMatchResultFind != null);
                                     if (i < length) {
-                                        sb2.append((CharSequence) str, i, length);
+                                        sb.append((CharSequence) str, i, length);
                                     }
-                                    sb = sb2.toString();
+                                    string = sb.toString();
                                 }
-                                int i8 = ref$IntRef.element;
-                                if (i8 == -1 || (i2 = ref$IntRef2.element) == -1) {
-                                    i3 = HandwritingGestureApi34.fallbackOnLegacyTextField(removeSpaceGesture, recordingInputConnection$performHandwritingGesture$1);
+                                int i6 = ref$IntRef.element;
+                                if (i6 == -1 || (i2 = ref$IntRef2.element) == -1) {
+                                    iFallbackOnLegacyTextField = HandwritingGestureApi34.fallbackOnLegacyTextField(removeSpaceGesture, anonymousClass1);
                                 } else {
-                                    int i9 = (int) (j >> c);
-                                    recordingInputConnection$performHandwritingGesture$1.mo779invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i9 + i8, i9 + i2), new CommitTextCommand(sb.substring(i8, sb.length() - (TextRange.m748getLengthimpl(j) - ref$IntRef2.element)), 1)}));
-                                    i3 = 1;
+                                    int i7 = (int) (jM737getRangeForRect86BmAI >> c);
+                                    anonymousClass1.mo781invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i7 + i6, i7 + i2), new CommitTextCommand(string.substring(i6, string.length() - (TextRange.m750getLengthimpl(jM737getRangeForRect86BmAI) - ref$IntRef2.element)), 1)}));
+                                    iFallbackOnLegacyTextField = 1;
                                 }
                             }
                         } else {
-                            i3 = 2;
+                            iFallbackOnLegacyTextField = 2;
                         }
                     }
                 }
@@ -573,13 +579,13 @@ public final class RecordingInputConnection implements InputConnection {
                 @Override // java.lang.Runnable
                 public final void run() {
                     IntConsumer intConsumer2 = intConsumer;
-                    int i10 = i3;
+                    int i8 = iFallbackOnLegacyTextField;
                     Api34LegacyPerformHandwritingGestureImpl api34LegacyPerformHandwritingGestureImpl2 = Api34LegacyPerformHandwritingGestureImpl.INSTANCE;
-                    intConsumer2.accept(i10);
+                    intConsumer2.accept(i8);
                 }
             });
         } else {
-            intConsumer.accept(i3);
+            intConsumer.accept(iFallbackOnLegacyTextField);
         }
     }
 
@@ -616,26 +622,26 @@ public final class RecordingInputConnection implements InputConnection {
             SelectGesture selectGesture = (SelectGesture) previewableHandwritingGesture;
             if (textFieldSelectionManager != null) {
                 Rect composeRect = RectHelper_androidKt.toComposeRect(selectGesture.getSelectionArea());
-                int m214toTextGranularityNUwxegE = HandwritingGestureApi34.m214toTextGranularityNUwxegE(selectGesture.getGranularity());
+                int iM215toTextGranularityNUwxegE = HandwritingGestureApi34.m215toTextGranularityNUwxegE(selectGesture.getGranularity());
                 TextInclusionStrategy.Companion.getClass();
-                textFieldSelectionManager.m242setSelectionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m218getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect, m214toTextGranularityNUwxegE, TextInclusionStrategy.Companion.ContainsCenter));
+                textFieldSelectionManager.m243setSelectionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m219getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect, iM215toTextGranularityNUwxegE, TextInclusionStrategy.Companion.ContainsCenter));
             }
         } else if (previewableHandwritingGesture instanceof DeleteGesture) {
             DeleteGesture deleteGesture = (DeleteGesture) previewableHandwritingGesture;
             if (textFieldSelectionManager != null) {
                 Rect composeRect2 = RectHelper_androidKt.toComposeRect(deleteGesture.getDeletionArea());
-                int m214toTextGranularityNUwxegE2 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(deleteGesture.getGranularity());
+                int iM215toTextGranularityNUwxegE2 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(deleteGesture.getGranularity());
                 TextInclusionStrategy.Companion.getClass();
-                textFieldSelectionManager.m241setDeletionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m218getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect2, m214toTextGranularityNUwxegE2, TextInclusionStrategy.Companion.ContainsCenter));
+                textFieldSelectionManager.m242setDeletionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m219getRangeForScreenRectOH9lIzo(legacyTextFieldState, composeRect2, iM215toTextGranularityNUwxegE2, TextInclusionStrategy.Companion.ContainsCenter));
             }
         } else if (previewableHandwritingGesture instanceof SelectRangeGesture) {
             SelectRangeGesture selectRangeGesture = (SelectRangeGesture) previewableHandwritingGesture;
             if (textFieldSelectionManager != null) {
                 Rect composeRect3 = RectHelper_androidKt.toComposeRect(selectRangeGesture.getSelectionStartArea());
                 Rect composeRect4 = RectHelper_androidKt.toComposeRect(selectRangeGesture.getSelectionEndArea());
-                int m214toTextGranularityNUwxegE3 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(selectRangeGesture.getGranularity());
+                int iM215toTextGranularityNUwxegE3 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(selectRangeGesture.getGranularity());
                 TextInclusionStrategy.Companion.getClass();
-                textFieldSelectionManager.m242setSelectionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m216access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect3, composeRect4, m214toTextGranularityNUwxegE3, TextInclusionStrategy.Companion.ContainsCenter));
+                textFieldSelectionManager.m243setSelectionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m217access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect3, composeRect4, iM215toTextGranularityNUwxegE3, TextInclusionStrategy.Companion.ContainsCenter));
             }
         } else {
             if (!(previewableHandwritingGesture instanceof DeleteRangeGesture)) {
@@ -645,9 +651,9 @@ public final class RecordingInputConnection implements InputConnection {
             if (textFieldSelectionManager != null) {
                 Rect composeRect5 = RectHelper_androidKt.toComposeRect(deleteRangeGesture.getDeletionStartArea());
                 Rect composeRect6 = RectHelper_androidKt.toComposeRect(deleteRangeGesture.getDeletionEndArea());
-                int m214toTextGranularityNUwxegE4 = HandwritingGestureApi34.m214toTextGranularityNUwxegE(deleteRangeGesture.getGranularity());
+                int iM215toTextGranularityNUwxegE4 = HandwritingGestureApi34.m215toTextGranularityNUwxegE(deleteRangeGesture.getGranularity());
                 TextInclusionStrategy.Companion.getClass();
-                textFieldSelectionManager.m241setDeletionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m216access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect5, composeRect6, m214toTextGranularityNUwxegE4, TextInclusionStrategy.Companion.ContainsCenter));
+                textFieldSelectionManager.m242setDeletionPreviewHighlight5zctL8$foundation_release(HandwritingGesture_androidKt.m217access$getRangeForScreenRectsO048IG0(legacyTextFieldState, composeRect5, composeRect6, iM215toTextGranularityNUwxegE4, TextInclusionStrategy.Companion.ContainsCenter));
             }
         }
         if (cancellationSignal == null) {
@@ -656,14 +662,14 @@ public final class RecordingInputConnection implements InputConnection {
         cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: androidx.compose.foundation.text.input.internal.HandwritingGestureApi34$$ExternalSyntheticLambda0
             @Override // android.os.CancellationSignal.OnCancelListener
             public final void onCancel() {
-                TextFieldSelectionManager textFieldSelectionManager2 = TextFieldSelectionManager.this;
+                TextFieldSelectionManager textFieldSelectionManager2 = textFieldSelectionManager;
                 HandwritingGestureApi34 handwritingGestureApi34 = HandwritingGestureApi34.INSTANCE;
                 if (textFieldSelectionManager2 != null) {
                     LegacyTextFieldState legacyTextFieldState2 = textFieldSelectionManager2.state;
                     if (legacyTextFieldState2 != null) {
                         TextRange.Companion.getClass();
                         long j = TextRange.Zero;
-                        ((SnapshotMutableStateImpl) legacyTextFieldState2.deletionPreviewHighlightRange$delegate).setValue(TextRange.m745boximpl(j));
+                        ((SnapshotMutableStateImpl) legacyTextFieldState2.deletionPreviewHighlightRange$delegate).setValue(TextRange.m747boximpl(j));
                     }
                     LegacyTextFieldState legacyTextFieldState3 = textFieldSelectionManager2.state;
                     if (legacyTextFieldState3 == null) {
@@ -671,7 +677,7 @@ public final class RecordingInputConnection implements InputConnection {
                     }
                     TextRange.Companion.getClass();
                     long j2 = TextRange.Zero;
-                    ((SnapshotMutableStateImpl) legacyTextFieldState3.selectionPreviewHighlightRange$delegate).setValue(TextRange.m745boximpl(j2));
+                    ((SnapshotMutableStateImpl) legacyTextFieldState3.selectionPreviewHighlightRange$delegate).setValue(TextRange.m747boximpl(j2));
                 }
             }
         });
@@ -701,7 +707,7 @@ public final class RecordingInputConnection implements InputConnection {
             z5 = true;
             z6 = true;
         }
-        LegacyCursorAnchorInfoController legacyCursorAnchorInfoController = ((LegacyTextInputMethodRequest$createInputConnection$1) this.eventCallback).this$0.cursorAnchorInfoController;
+        LegacyCursorAnchorInfoController legacyCursorAnchorInfoController = LegacyTextInputMethodRequest.this.cursorAnchorInfoController;
         synchronized (legacyCursorAnchorInfoController.lock) {
             try {
                 legacyCursorAnchorInfoController.includeInsertionMarker = z4;
@@ -729,7 +735,7 @@ public final class RecordingInputConnection implements InputConnection {
         if (!z) {
             return z;
         }
-        ((BaseInputConnection) ((LegacyTextInputMethodRequest$createInputConnection$1) this.eventCallback).this$0.baseInputConnection$delegate.getValue()).sendKeyEvent(keyEvent);
+        ((BaseInputConnection) LegacyTextInputMethodRequest.this.baseInputConnection$delegate.getValue()).sendKeyEvent(keyEvent);
         return true;
     }
 

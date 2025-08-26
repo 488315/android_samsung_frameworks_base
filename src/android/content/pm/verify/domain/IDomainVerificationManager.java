@@ -110,9 +110,9 @@ public interface IDomainVerificationManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDomainVerificationManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDomainVerificationManager)) {
-                return (IDomainVerificationManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDomainVerificationManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDomainVerificationManager)) {
+                return (IDomainVerificationManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -158,72 +158,72 @@ public interface IDomainVerificationManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    List<String> queryValidVerificationPackageNames = queryValidVerificationPackageNames();
+                    List<String> listQueryValidVerificationPackageNames = queryValidVerificationPackageNames();
                     parcel2.writeNoException();
-                    parcel2.writeStringList(queryValidVerificationPackageNames);
+                    parcel2.writeStringList(listQueryValidVerificationPackageNames);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    DomainVerificationInfo domainVerificationInfo = getDomainVerificationInfo(readString);
+                    DomainVerificationInfo domainVerificationInfo = getDomainVerificationInfo(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(domainVerificationInfo, 1);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    DomainVerificationUserState domainVerificationUserState = getDomainVerificationUserState(readString2, readInt);
+                    DomainVerificationUserState domainVerificationUserState = getDomainVerificationUserState(string2, i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(domainVerificationUserState, 1);
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<DomainOwner> ownersForDomain = getOwnersForDomain(readString3, readInt2);
+                    List<DomainOwner> ownersForDomain = getOwnersForDomain(string3, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(ownersForDomain, 1);
                     return true;
                 case 5:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     DomainSet domainSet = (DomainSet) parcel.readTypedObject(DomainSet.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int domainVerificationStatus = setDomainVerificationStatus(readString4, domainSet, readInt3);
+                    int domainVerificationStatus = setDomainVerificationStatus(string4, domainSet, i5);
                     parcel2.writeNoException();
                     parcel2.writeInt(domainVerificationStatus);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDomainVerificationLinkHandlingAllowed(readString5, readBoolean, readInt4);
+                    setDomainVerificationLinkHandlingAllowed(string5, z, i6);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     DomainSet domainSet2 = (DomainSet) parcel.readTypedObject(DomainSet.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt5 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int domainVerificationUserSelection = setDomainVerificationUserSelection(readString6, domainSet2, readBoolean2, readInt5);
+                    int domainVerificationUserSelection = setDomainVerificationUserSelection(string6, domainSet2, z2, i7);
                     parcel2.writeNoException();
                     parcel2.writeInt(domainVerificationUserSelection);
                     return true;
                 case 8:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setUriRelativeFilterGroups(readString7, bundle);
+                    setUriRelativeFilterGroups(string7, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string8 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    Bundle uriRelativeFilterGroups = getUriRelativeFilterGroups(readString8, createStringArrayList);
+                    Bundle uriRelativeFilterGroups = getUriRelativeFilterGroups(string8, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(uriRelativeFilterGroups, 1);
                     return true;
@@ -250,153 +250,153 @@ public interface IDomainVerificationManager extends IInterface {
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public List<String> queryValidVerificationPackageNames() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public DomainVerificationInfo getDomainVerificationInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DomainVerificationInfo) obtain2.readTypedObject(DomainVerificationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DomainVerificationInfo) parcelObtain2.readTypedObject(DomainVerificationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public DomainVerificationUserState getDomainVerificationUserState(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DomainVerificationUserState) obtain2.readTypedObject(DomainVerificationUserState.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DomainVerificationUserState) parcelObtain2.readTypedObject(DomainVerificationUserState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public List<DomainOwner> getOwnersForDomain(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DomainOwner.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DomainOwner.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public int setDomainVerificationStatus(String str, DomainSet domainSet, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(domainSet, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(domainSet, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public void setDomainVerificationLinkHandlingAllowed(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public int setDomainVerificationUserSelection(String str, DomainSet domainSet, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(domainSet, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(domainSet, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public void setUriRelativeFilterGroups(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
             public Bundle getUriRelativeFilterGroups(String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDomainVerificationManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

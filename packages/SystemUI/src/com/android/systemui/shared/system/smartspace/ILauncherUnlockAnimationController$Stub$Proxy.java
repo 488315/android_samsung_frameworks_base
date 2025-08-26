@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ILauncherUnlockAnimationController$Stub$Proxy implements IInterface {
     public final IBinder mRemote;
@@ -20,43 +19,43 @@ public class ILauncherUnlockAnimationController$Stub$Proxy implements IInterface
     }
 
     public final void playUnlockAnimation(long j, long j2) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
         try {
-            obtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
-            obtain.writeBoolean(true);
-            obtain.writeLong(j);
-            obtain.writeLong(j2);
-            this.mRemote.transact(3, obtain, null, 1);
+            parcelObtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
+            parcelObtain.writeBoolean(true);
+            parcelObtain.writeLong(j);
+            parcelObtain.writeLong(j2);
+            this.mRemote.transact(3, parcelObtain, null, 1);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public final void prepareForUnlock(Rect rect) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
-        Parcel obtain2 = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain2 = Parcel.obtain();
         try {
-            obtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
-            obtain.writeBoolean(false);
-            obtain.writeTypedObject(rect, 0);
-            obtain.writeInt(0);
-            this.mRemote.transact(1, obtain, obtain2, 0);
-            obtain2.readException();
+            parcelObtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
+            parcelObtain.writeBoolean(false);
+            parcelObtain.writeTypedObject(rect, 0);
+            parcelObtain.writeInt(0);
+            this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+            parcelObtain2.readException();
         } finally {
-            obtain2.recycle();
-            obtain.recycle();
+            parcelObtain2.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public final void setUnlockAmount(boolean z) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
         try {
-            obtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
-            obtain.writeFloat(1.0f);
-            obtain.writeBoolean(z);
-            this.mRemote.transact(2, obtain, null, 1);
+            parcelObtain.writeInterfaceToken("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
+            parcelObtain.writeFloat(1.0f);
+            parcelObtain.writeBoolean(z);
+            this.mRemote.transact(2, parcelObtain, null, 1);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

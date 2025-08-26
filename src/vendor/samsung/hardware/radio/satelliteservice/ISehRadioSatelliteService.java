@@ -146,9 +146,9 @@ public interface ISehRadioSatelliteService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISehRadioSatelliteService)) {
-                return (ISehRadioSatelliteService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISehRadioSatelliteService)) {
+                return (ISehRadioSatelliteService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -175,80 +175,80 @@ public interface ISehRadioSatelliteService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ISehRadioSatelliteServiceResponse asInterface = ISehRadioSatelliteServiceResponse.Stub.asInterface(parcel.readStrongBinder());
-                    ISehRadioSatelliteServiceIndication asInterface2 = ISehRadioSatelliteServiceIndication.Stub.asInterface(parcel.readStrongBinder());
+                    ISehRadioSatelliteServiceResponse iSehRadioSatelliteServiceResponseAsInterface = ISehRadioSatelliteServiceResponse.Stub.asInterface(parcel.readStrongBinder());
+                    ISehRadioSatelliteServiceIndication iSehRadioSatelliteServiceIndicationAsInterface = ISehRadioSatelliteServiceIndication.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setResponseFunctions(asInterface, asInterface2);
+                    setResponseFunctions(iSehRadioSatelliteServiceResponseAsInterface, iSehRadioSatelliteServiceIndicationAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    requestSatelliteEnabled(readInt, readInt2, readInt3, readInt4, readString, readString2);
+                    requestSatelliteEnabled(i3, i4, i5, i6, string, string2);
                     return true;
                 case 3:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestIsSatelliteEnabled(readInt5);
+                    requestIsSatelliteEnabled(i7);
                     return true;
                 case 4:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestIsSatelliteSupported(readInt6);
+                    requestIsSatelliteSupported(i8);
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestSatelliteCapabilities(readInt7);
+                    requestSatelliteCapabilities(i9);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendSatelliteDatagram(readInt8, createByteArray, readInt9);
+                    sendSatelliteDatagram(i10, bArrCreateByteArray, i11);
                     return true;
                 case 7:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestSatelliteModemState(readInt10);
+                    requestSatelliteModemState(i12);
                     return true;
                 case 8:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestNtnSignalStrength(readInt11);
+                    requestNtnSignalStrength(i13);
                     return true;
                 case 9:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableTerrestrialNetworkScanWhileSatelliteModeIsOn(readInt12, readInt13);
+                    enableTerrestrialNetworkScanWhileSatelliteModeIsOn(i14, i15);
                     return true;
                 case 10:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startSendingSatellitePointingInfo(readInt14);
+                    startSendingSatellitePointingInfo(i16);
                     return true;
                 case 11:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopSendingSatellitePointingInfo(readInt15);
+                    stopSendingSatellitePointingInfo(i17);
                     return true;
                 case 12:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    abortSendingSatelliteDatagrams(readInt16);
+                    abortSendingSatelliteDatagrams(i18);
                     return true;
                 case 13:
-                    int readInt17 = parcel.readInt();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(SehSystemSelectionSpecifier.CREATOR);
+                    int i19 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SehSystemSelectionSpecifier.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateSystemSelectionChannels(readInt17, createTypedArrayList);
+                    updateSystemSelectionChannels(i19, arrayListCreateTypedArrayList);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -275,224 +275,224 @@ public interface ISehRadioSatelliteService extends IInterface {
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void setResponseFunctions(ISehRadioSatelliteServiceResponse iSehRadioSatelliteServiceResponse, ISehRadioSatelliteServiceIndication iSehRadioSatelliteServiceIndication) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iSehRadioSatelliteServiceResponse);
-                    obtain.writeStrongInterface(iSehRadioSatelliteServiceIndication);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSehRadioSatelliteServiceResponse);
+                    parcelObtain.writeStrongInterface(iSehRadioSatelliteServiceIndication);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setResponseFunctions is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestSatelliteEnabled(int i, int i2, int i3, int i4, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestSatelliteEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestIsSatelliteEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestIsSatelliteEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestIsSatelliteSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestIsSatelliteSupported is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestSatelliteCapabilities(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestSatelliteCapabilities is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void sendSatelliteDatagram(int i, byte[] bArr, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendSatelliteDatagram is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestSatelliteModemState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestSatelliteModemState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void requestNtnSignalStrength(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestNtnSignalStrength is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method enableTerrestrialNetworkScanWhileSatelliteModeIsOn is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void startSendingSatellitePointingInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method startSendingSatellitePointingInfo is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void stopSendingSatellitePointingInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method stopSendingSatellitePointingInfo is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void abortSendingSatelliteDatagrams(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method abortSendingSatelliteDatagrams is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public void updateSystemSelectionChannels(int i, List<SehSystemSelectionSpecifier> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method updateSystemSelectionChannels is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -501,18 +501,18 @@ public interface ISehRadioSatelliteService extends IInterface {
             @Override // vendor.samsung.hardware.radio.satelliteservice.ISehRadioSatelliteService
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

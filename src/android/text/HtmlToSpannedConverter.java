@@ -93,15 +93,15 @@ class HtmlToSpannedConverter implements ContentHandler {
     }
 
     static {
-        HashMap hashMap = new HashMap();
-        sColorMap = hashMap;
-        hashMap.put("darkgray", -5658199);
-        hashMap.put("gray", -8355712);
-        hashMap.put("lightgray", -2894893);
-        hashMap.put("darkgrey", -5658199);
-        hashMap.put("grey", -8355712);
-        hashMap.put("lightgrey", -2894893);
-        hashMap.put("green", -16744448);
+        HashMap map = new HashMap();
+        sColorMap = map;
+        map.put("darkgray", -5658199);
+        map.put("gray", -8355712);
+        map.put("lightgray", -2894893);
+        map.put("darkgrey", -5658199);
+        map.put("grey", -8355712);
+        map.put("lightgrey", -2894893);
+        map.put("green", -16744448);
     }
 
     private static Pattern getTextAlignPattern() {
@@ -140,7 +140,7 @@ class HtmlToSpannedConverter implements ContentHandler {
         this.mFlags = i;
     }
 
-    public Spanned convert() {
+    public Spanned convert() throws SAXException, IOException {
         this.mReader.setContentHandler(this);
         try {
             this.mReader.parse(new InputSource(new StringReader(this.mSource)));
@@ -167,7 +167,7 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    private void handleStartTag(String str, Attributes attributes) {
+    private void handleStartTag(String str, Attributes attributes) throws Resources.NotFoundException {
         if (str.equalsIgnoreCase(TtmlUtils.TAG_BR)) {
             return;
         }
@@ -443,12 +443,12 @@ class HtmlToSpannedConverter implements ContentHandler {
         if (value != null) {
             Matcher matcher = getTextAlignPattern().matcher(value);
             if (matcher.find()) {
-                String group = matcher.group(1);
-                if (group.equalsIgnoreCase("start")) {
+                String strGroup = matcher.group(1);
+                if (strGroup.equalsIgnoreCase("start")) {
                     start(editable, new Alignment(Layout.Alignment.ALIGN_NORMAL));
-                } else if (group.equalsIgnoreCase("center")) {
+                } else if (strGroup.equalsIgnoreCase("center")) {
                     start(editable, new Alignment(Layout.Alignment.ALIGN_CENTER));
-                } else if (group.equalsIgnoreCase("end")) {
+                } else if (strGroup.equalsIgnoreCase("end")) {
                     start(editable, new Alignment(Layout.Alignment.ALIGN_OPPOSITE));
                 }
             }
@@ -573,7 +573,7 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
     }
 
-    private static void startImg(Editable editable, Attributes attributes, Html.ImageGetter imageGetter) {
+    private static void startImg(Editable editable, Attributes attributes, Html.ImageGetter imageGetter) throws Resources.NotFoundException {
         String value = attributes.getValue("", "src");
         Drawable drawable = imageGetter != null ? imageGetter.getDrawable(value) : null;
         if (drawable == null) {
@@ -641,7 +641,7 @@ class HtmlToSpannedConverter implements ContentHandler {
     }
 
     @Override // org.xml.sax.ContentHandler
-    public void startElement(String str, String str2, String str3, Attributes attributes) throws SAXException {
+    public void startElement(String str, String str2, String str3, Attributes attributes) throws Resources.NotFoundException, SAXException {
         handleStartTag(str2, attributes);
     }
 
@@ -652,7 +652,7 @@ class HtmlToSpannedConverter implements ContentHandler {
 
     @Override // org.xml.sax.ContentHandler
     public void characters(char[] cArr, int i, int i2) throws SAXException {
-        char charAt;
+        char cCharAt;
         StringBuilder sb = new StringBuilder();
         for (int i3 = 0; i3 < i2; i3++) {
             char c = cArr[i3 + i];
@@ -660,11 +660,11 @@ class HtmlToSpannedConverter implements ContentHandler {
                 int length = sb.length();
                 if (length == 0) {
                     int length2 = this.mSpannableStringBuilder.length();
-                    charAt = length2 == 0 ? '\n' : this.mSpannableStringBuilder.charAt(length2 - 1);
+                    cCharAt = length2 == 0 ? '\n' : this.mSpannableStringBuilder.charAt(length2 - 1);
                 } else {
-                    charAt = sb.charAt(length - 1);
+                    cCharAt = sb.charAt(length - 1);
                 }
-                if (charAt != ' ' && charAt != '\n') {
+                if (cCharAt != ' ' && cCharAt != '\n') {
                     sb.append(' ');
                 }
             } else {

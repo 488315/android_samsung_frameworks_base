@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import com.android.systemui.widget.SystemUIImageView;
 import com.android.wm.shell.animation.FlingAnimationUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardAffordanceView extends SystemUIImageView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -99,17 +98,17 @@ public class KeyguardAffordanceView extends SystemUIImageView {
                 keyguardAffordanceView.getClass();
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ImageView);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ImageView);
         try {
             Paint paint = new Paint();
             paint.setAntiAlias(true);
             paint.setColor(-1);
-            obtainStyledAttributes.getColor(5, -1);
+            typedArrayObtainStyledAttributes.getColor(5, -1);
             ((ImageView) this).mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_affordance_min_background_radius);
             new ArgbEvaluator();
             new FlingAnimationUtils(((ImageView) this).mContext.getResources().getDisplayMetrics(), 0.3f);
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 }

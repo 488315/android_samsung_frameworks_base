@@ -44,9 +44,9 @@ public interface IRegionChannelListListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IRegionChannelListListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRegionChannelListListener)) {
-                return (IRegionChannelListListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IRegionChannelListListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRegionChannelListListener)) {
+                return (IRegionChannelListListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IRegionChannelListListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String[] createStringArray = parcel.createStringArray();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                onDetectRegionChannelList(createStringArray);
+                onDetectRegionChannelList(strArrCreateStringArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IRegionChannelListListener extends IInterface {
 
             @Override // android.media.tv.extension.scan.IRegionChannelListListener
             public void onDetectRegionChannelList(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelListListener");
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelListListener");
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

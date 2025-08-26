@@ -10,14 +10,14 @@ public final class SurroundingText implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SurroundingText createFromParcel(Parcel parcel) {
-            CharSequence createFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            if (createFromParcel == null) {
-                createFromParcel = "";
+            CharSequence charSequenceCreateFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            if (charSequenceCreateFromParcel == null) {
+                charSequenceCreateFromParcel = "";
             }
-            return new SurroundingText(createFromParcel, readInt, readInt2, readInt3);
+            return new SurroundingText(charSequenceCreateFromParcel, i, i2, i3);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -68,18 +68,18 @@ public final class SurroundingText implements Parcelable {
     }
 
     private static CharSequence copyWithParcelableSpans(CharSequence charSequence) {
-        Parcel parcel = null;
+        Parcel parcelObtain = null;
         if (charSequence == null) {
             return null;
         }
         try {
-            parcel = Parcel.obtain();
-            TextUtils.writeToParcel(charSequence, parcel, 0);
-            parcel.setDataPosition(0);
-            return TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+            parcelObtain = Parcel.obtain();
+            TextUtils.writeToParcel(charSequence, parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcelObtain);
         } finally {
-            if (parcel != null) {
-                parcel.recycle();
+            if (parcelObtain != null) {
+                parcelObtain.recycle();
             }
         }
     }

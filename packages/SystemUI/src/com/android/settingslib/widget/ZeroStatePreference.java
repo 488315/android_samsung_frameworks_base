@@ -12,7 +12,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ZeroStatePreference extends Preference {
     public final Drawable tintedIcon;
@@ -26,14 +25,14 @@ public final class ZeroStatePreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.itemView.setFocusable(false);
         preferenceViewHolder.itemView.setClickable(false);
-        View findViewById = preferenceViewHolder.findViewById(R.id.icon);
-        ImageView imageView = findViewById instanceof ImageView ? (ImageView) findViewById : null;
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.icon);
+        ImageView imageView = viewFindViewById instanceof ImageView ? (ImageView) viewFindViewById : null;
         if (imageView != null) {
-            Drawable drawable = this.tintedIcon;
-            if (drawable == null) {
-                drawable = getIcon();
+            Drawable icon = this.tintedIcon;
+            if (icon == null) {
+                icon = getIcon();
             }
-            imageView.setImageDrawable(drawable);
+            imageView.setImageDrawable(icon);
         }
     }
 
@@ -56,9 +55,9 @@ public final class ZeroStatePreference extends Preference {
         this.mLayoutResId = com.android.systemui.R.layout.settingslib_expressive_preference_zerostate;
         Drawable icon = getIcon();
         if (icon != null) {
-            Drawable mutate = icon.mutate();
-            mutate.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-            this.tintedIcon = mutate;
+            Drawable drawableMutate = icon.mutate();
+            drawableMutate.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+            this.tintedIcon = drawableMutate;
         }
     }
 }

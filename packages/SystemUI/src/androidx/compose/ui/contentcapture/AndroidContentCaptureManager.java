@@ -1,5 +1,6 @@
 package androidx.compose.ui.contentcapture;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.LongSparseArray;
@@ -18,6 +19,9 @@ import androidx.collection.MutableScatterMap;
 import androidx.compose.ui.autofill.AndroidAutofill$$ExternalSyntheticOutline0;
 import androidx.compose.ui.contentcapture.AndroidContentCaptureManager;
 import androidx.compose.ui.contentcapture.ContentCaptureManager;
+import androidx.compose.ui.geometry.Rect;
+import androidx.compose.ui.node.DelegatableNodeKt;
+import androidx.compose.ui.node.NodeCoordinator;
 import androidx.compose.ui.node.Owner;
 import androidx.compose.ui.platform.AndroidComposeView;
 import androidx.compose.ui.platform.SemanticsNodeCopy;
@@ -27,6 +31,7 @@ import androidx.compose.ui.platform.coreshims.AutofillIdCompat;
 import androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat;
 import androidx.compose.ui.platform.coreshims.ViewStructureCompat;
 import androidx.compose.ui.semantics.AccessibilityAction;
+import androidx.compose.ui.semantics.Role;
 import androidx.compose.ui.semantics.SemanticsActions;
 import androidx.compose.ui.semantics.SemanticsConfiguration;
 import androidx.compose.ui.semantics.SemanticsConfigurationKt;
@@ -34,14 +39,21 @@ import androidx.compose.ui.semantics.SemanticsNode;
 import androidx.compose.ui.semantics.SemanticsProperties;
 import androidx.compose.ui.semantics.SemanticsPropertyKey;
 import androidx.compose.ui.text.AnnotatedString;
+import androidx.compose.ui.text.TextLayoutInput;
+import androidx.compose.ui.text.TextLayoutResult;
+import androidx.compose.ui.unit.Density;
+import androidx.compose.ui.unit.TextUnit;
 import androidx.compose.ui.util.ListUtilsKt;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import com.samsung.android.knox.lockscreen.LSOAttrConst;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
@@ -49,9 +61,9 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.channels.BufferedChannel;
+import kotlinx.coroutines.channels.BufferedChannel.BufferedChannelIterator;
 import kotlinx.coroutines.channels.ChannelKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidContentCaptureManager implements ContentCaptureManager, DefaultLifecycleObserver, View.OnAttachStateChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -71,7 +83,6 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
     public final BufferedChannel boundsUpdateChannel = ChannelKt.Channel$default(1, null, null, 6);
     public final Handler handler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -83,7 +94,6 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TranslateStatus {
         public static final /* synthetic */ TranslateStatus[] $VALUES;
         public static final TranslateStatus SHOW_ORIGINAL;
@@ -112,7 +122,6 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewTranslationHelperMethods {
         public static final ViewTranslationHelperMethods INSTANCE = new ViewTranslationHelperMethods();
 
@@ -127,9 +136,9 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
             Function1 function1;
             int size = longSparseArray.size();
             for (int i = 0; i < size; i++) {
-                long keyAt = longSparseArray.keyAt(i);
-                ViewTranslationResponse viewTranslationResponse = (ViewTranslationResponse) longSparseArray.get(keyAt);
-                if (viewTranslationResponse != null && (value = viewTranslationResponse.getValue(LSOAttrConst.ATTR_TEXT)) != null && (text = value.getText()) != null && (semanticsNodeWithAdjustedBounds = (SemanticsNodeWithAdjustedBounds) androidContentCaptureManager.getCurrentSemanticsNodes$ui_release().get((int) keyAt)) != null && (semanticsNode = semanticsNodeWithAdjustedBounds.semanticsNode) != null) {
+                long jKeyAt = longSparseArray.keyAt(i);
+                ViewTranslationResponse viewTranslationResponse = (ViewTranslationResponse) longSparseArray.get(jKeyAt);
+                if (viewTranslationResponse != null && (value = viewTranslationResponse.getValue(LSOAttrConst.ATTR_TEXT)) != null && (text = value.getText()) != null && (semanticsNodeWithAdjustedBounds = (SemanticsNodeWithAdjustedBounds) androidContentCaptureManager.getCurrentSemanticsNodes$ui_release().get((int) jKeyAt)) != null && (semanticsNode = semanticsNodeWithAdjustedBounds.semanticsNode) != null) {
                     SemanticsActions.INSTANCE.getClass();
                     AccessibilityAction accessibilityAction = (AccessibilityAction) SemanticsConfigurationKt.getOrNull(semanticsNode.unmergedConfig, SemanticsActions.SetTextSubstitution);
                     if (accessibilityAction != null && (function1 = (Function1) accessibilityAction.action) != null) {
@@ -139,7 +148,6 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -199,7 +207,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                 long j9;
                 long j10;
                 boolean z3 = true;
-                AndroidContentCaptureManager androidContentCaptureManager = AndroidContentCaptureManager.this;
+                AndroidContentCaptureManager androidContentCaptureManager = this.f$0;
                 int i4 = AndroidContentCaptureManager.$r8$clinit;
                 if (androidContentCaptureManager.isEnabled$ui_release()) {
                     AndroidComposeView androidComposeView2 = androidContentCaptureManager.view;
@@ -231,7 +239,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                                         } else {
                                             j9 = j12;
                                             ((ArrayList) androidContentCaptureManager.bufferedEvents).add(new ContentCaptureEvent(i9, androidContentCaptureManager.currentSemanticsNodesSnapshotTimestampMillis, ContentCaptureEventType.VIEW_DISAPPEAR, null));
-                                            androidContentCaptureManager.boundsUpdateChannel.mo3456trySendJP2dKIU(Unit.INSTANCE);
+                                            androidContentCaptureManager.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
                                         }
                                     } else {
                                         z2 = z3;
@@ -314,21 +322,21 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                                                                 SemanticsPropertyKey semanticsPropertyKey2 = SemanticsProperties.Text;
                                                                 if (Intrinsics.areEqual(semanticsPropertyKey, semanticsPropertyKey2)) {
                                                                     List list = (List) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, semanticsPropertyKey2);
-                                                                    String valueOf = String.valueOf(list != null ? (AnnotatedString) CollectionsKt___CollectionsKt.firstOrNull(list) : null);
+                                                                    String strValueOf = String.valueOf(list != null ? (AnnotatedString) CollectionsKt___CollectionsKt.firstOrNull(list) : null);
                                                                     ContentCaptureSessionCompat contentCaptureSessionCompat = androidContentCaptureManager.contentCaptureSession;
                                                                     if (contentCaptureSessionCompat != null) {
                                                                         i3 = length2;
-                                                                        AutofillId newAutofillId = contentCaptureSessionCompat.newAutofillId(i14);
-                                                                        if (newAutofillId == null) {
+                                                                        AutofillId autofillIdNewAutofillId = contentCaptureSessionCompat.newAutofillId(i14);
+                                                                        if (autofillIdNewAutofillId == null) {
                                                                             throw AndroidAutofill$$ExternalSyntheticOutline0.m("Invalid content capture ID");
                                                                         }
-                                                                        ((ContentCaptureSession) contentCaptureSessionCompat.mWrappedObj).notifyViewTextChanged(newAutofillId, valueOf);
-                                                                        j14 = j8 >> i15;
-                                                                        i18++;
-                                                                        length2 = i3;
-                                                                        currentSemanticsNodes$ui_release = intObjectMap3;
+                                                                        ((ContentCaptureSession) contentCaptureSessionCompat.mWrappedObj).notifyViewTextChanged(autofillIdNewAutofillId, strValueOf);
                                                                     }
                                                                 }
+                                                                j14 = j8 >> i15;
+                                                                i18++;
+                                                                length2 = i3;
+                                                                currentSemanticsNodes$ui_release = intObjectMap3;
                                                             } else {
                                                                 intObjectMap3 = currentSemanticsNodes$ui_release;
                                                                 j8 = j14;
@@ -394,21 +402,21 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                                                                     List list3 = (List) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, semanticsPropertyKey4);
                                                                     AnnotatedString annotatedString2 = list3 != null ? (AnnotatedString) CollectionsKt___CollectionsKt.firstOrNull(list3) : null;
                                                                     if (!Intrinsics.areEqual(annotatedString, annotatedString2)) {
-                                                                        String valueOf2 = String.valueOf(annotatedString2);
+                                                                        String strValueOf2 = String.valueOf(annotatedString2);
                                                                         ContentCaptureSessionCompat contentCaptureSessionCompat2 = androidContentCaptureManager.contentCaptureSession;
                                                                         if (contentCaptureSessionCompat2 != null) {
                                                                             j7 = j15;
-                                                                            AutofillId newAutofillId2 = contentCaptureSessionCompat2.newAutofillId(i14);
-                                                                            if (newAutofillId2 == null) {
+                                                                            AutofillId autofillIdNewAutofillId2 = contentCaptureSessionCompat2.newAutofillId(i14);
+                                                                            if (autofillIdNewAutofillId2 == null) {
                                                                                 throw AndroidAutofill$$ExternalSyntheticOutline0.m("Invalid content capture ID");
                                                                             }
-                                                                            ((ContentCaptureSession) contentCaptureSessionCompat2.mWrappedObj).notifyViewTextChanged(newAutofillId2, valueOf2);
-                                                                            j15 = j7 >> 8;
-                                                                            i21++;
-                                                                            jArr8 = jArr4;
+                                                                            ((ContentCaptureSession) contentCaptureSessionCompat2.mWrappedObj).notifyViewTextChanged(autofillIdNewAutofillId2, strValueOf2);
                                                                         }
                                                                     }
                                                                 }
+                                                                j15 = j7 >> 8;
+                                                                i21++;
+                                                                jArr8 = jArr4;
                                                             } else {
                                                                 jArr4 = jArr8;
                                                             }
@@ -531,7 +539,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
             androidContentCaptureManager.view.post(new Runnable() { // from class: androidx.compose.ui.contentcapture.AndroidContentCaptureManager$ViewTranslationHelperMethods$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AndroidContentCaptureManager androidContentCaptureManager2 = AndroidContentCaptureManager.this;
+                    AndroidContentCaptureManager androidContentCaptureManager2 = this.f$0;
                     LongSparseArray longSparseArray2 = longSparseArray;
                     AndroidContentCaptureManager.ViewTranslationHelperMethods.INSTANCE.getClass();
                     AndroidContentCaptureManager.ViewTranslationHelperMethods.doTranslation(androidContentCaptureManager2, longSparseArray2);
@@ -540,114 +548,89 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0093, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x0093, code lost:
     
         if (kotlinx.coroutines.DelayKt.delay(r5, r0) == r1) goto L32;
      */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:24:0x0093 -> B:11:0x0031). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0096  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:31:0x0093 -> B:13:0x0031). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object boundsUpdatesEventLoop$ui_release(kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r8 = this;
-            boolean r0 = r9 instanceof androidx.compose.ui.contentcapture.AndroidContentCaptureManager$boundsUpdatesEventLoop$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            androidx.compose.ui.contentcapture.AndroidContentCaptureManager$boundsUpdatesEventLoop$1 r0 = (androidx.compose.ui.contentcapture.AndroidContentCaptureManager$boundsUpdatesEventLoop$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.ui.contentcapture.AndroidContentCaptureManager$boundsUpdatesEventLoop$1 r0 = new androidx.compose.ui.contentcapture.AndroidContentCaptureManager$boundsUpdatesEventLoop$1
-            r0.<init>(r8, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L49
-            if (r2 == r4) goto L3d
-            if (r2 != r3) goto L35
-            java.lang.Object r8 = r0.L$1
-            kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator r8 = (kotlinx.coroutines.channels.BufferedChannel.BufferedChannelIterator) r8
-            java.lang.Object r2 = r0.L$0
-            androidx.compose.ui.contentcapture.AndroidContentCaptureManager r2 = (androidx.compose.ui.contentcapture.AndroidContentCaptureManager) r2
-            kotlin.ResultKt.throwOnFailure(r9)
-        L31:
-            r7 = r2
-            r2 = r8
-            r8 = r7
-            goto L56
-        L35:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L3d:
-            java.lang.Object r8 = r0.L$1
-            kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator r8 = (kotlinx.coroutines.channels.BufferedChannel.BufferedChannelIterator) r8
-            java.lang.Object r2 = r0.L$0
-            androidx.compose.ui.contentcapture.AndroidContentCaptureManager r2 = (androidx.compose.ui.contentcapture.AndroidContentCaptureManager) r2
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L66
-        L49:
-            kotlin.ResultKt.throwOnFailure(r9)
-            kotlinx.coroutines.channels.BufferedChannel r9 = r8.boundsUpdateChannel
-            r9.getClass()
-            kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator r2 = new kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator
-            r2.<init>()
-        L56:
-            r0.L$0 = r8
-            r0.L$1 = r2
-            r0.label = r4
-            java.lang.Object r9 = r2.hasNext(r0)
-            if (r9 != r1) goto L63
-            goto L95
-        L63:
-            r7 = r2
-            r2 = r8
-            r8 = r7
-        L66:
-            java.lang.Boolean r9 = (java.lang.Boolean) r9
-            boolean r9 = r9.booleanValue()
-            if (r9 == 0) goto L96
-            r8.next()
-            boolean r9 = r2.isEnabled$ui_release()
-            if (r9 == 0) goto L7a
-            r2.notifyContentCaptureChanges()
-        L7a:
-            boolean r9 = r2.checkingForSemanticsChanges
-            if (r9 != 0) goto L87
-            r2.checkingForSemanticsChanges = r4
-            android.os.Handler r9 = r2.handler
-            androidx.compose.ui.contentcapture.AndroidContentCaptureManager$$ExternalSyntheticLambda0 r5 = r2.contentCaptureChangeChecker
-            r9.post(r5)
-        L87:
-            long r5 = r2.SendRecurringContentCaptureEventsIntervalMillis
-            r0.L$0 = r2
-            r0.L$1 = r8
-            r0.label = r3
-            java.lang.Object r9 = kotlinx.coroutines.DelayKt.delay(r5, r0)
-            if (r9 != r1) goto L31
-        L95:
-            return r1
-        L96:
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.contentcapture.AndroidContentCaptureManager.boundsUpdatesEventLoop$ui_release(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object boundsUpdatesEventLoop$ui_release(ContinuationImpl continuationImpl) throws Throwable {
+        AndroidContentCaptureManager$boundsUpdatesEventLoop$1 androidContentCaptureManager$boundsUpdatesEventLoop$1;
+        BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
+        BufferedChannel.BufferedChannelIterator bufferedChannelIterator2;
+        AndroidContentCaptureManager androidContentCaptureManager;
+        if (continuationImpl instanceof AndroidContentCaptureManager$boundsUpdatesEventLoop$1) {
+            androidContentCaptureManager$boundsUpdatesEventLoop$1 = (AndroidContentCaptureManager$boundsUpdatesEventLoop$1) continuationImpl;
+            int i = androidContentCaptureManager$boundsUpdatesEventLoop$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                androidContentCaptureManager$boundsUpdatesEventLoop$1.label = i - Integer.MIN_VALUE;
+            } else {
+                androidContentCaptureManager$boundsUpdatesEventLoop$1 = new AndroidContentCaptureManager$boundsUpdatesEventLoop$1(this, continuationImpl);
+            }
+        }
+        Object objHasNext = androidContentCaptureManager$boundsUpdatesEventLoop$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = androidContentCaptureManager$boundsUpdatesEventLoop$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objHasNext);
+            BufferedChannel bufferedChannel = this.boundsUpdateChannel;
+            bufferedChannel.getClass();
+            bufferedChannelIterator = bufferedChannel.new BufferedChannelIterator();
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.L$0 = this;
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.L$1 = bufferedChannelIterator;
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.label = 1;
+            objHasNext = bufferedChannelIterator.hasNext(androidContentCaptureManager$boundsUpdatesEventLoop$1);
+            if (objHasNext != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            bufferedChannelIterator2 = (BufferedChannel.BufferedChannelIterator) androidContentCaptureManager$boundsUpdatesEventLoop$1.L$1;
+            androidContentCaptureManager = (AndroidContentCaptureManager) androidContentCaptureManager$boundsUpdatesEventLoop$1.L$0;
+            ResultKt.throwOnFailure(objHasNext);
+            AndroidContentCaptureManager androidContentCaptureManager2 = androidContentCaptureManager;
+            bufferedChannelIterator = bufferedChannelIterator2;
+            this = androidContentCaptureManager2;
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.L$0 = this;
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.L$1 = bufferedChannelIterator;
+            androidContentCaptureManager$boundsUpdatesEventLoop$1.label = 1;
+            objHasNext = bufferedChannelIterator.hasNext(androidContentCaptureManager$boundsUpdatesEventLoop$1);
+            if (objHasNext != coroutineSingletons) {
+                BufferedChannel.BufferedChannelIterator bufferedChannelIterator3 = bufferedChannelIterator;
+                androidContentCaptureManager = this;
+                bufferedChannelIterator2 = bufferedChannelIterator3;
+                if (((Boolean) objHasNext).booleanValue()) {
+                    return Unit.INSTANCE;
+                }
+                bufferedChannelIterator2.next();
+                if (androidContentCaptureManager.isEnabled$ui_release()) {
+                    androidContentCaptureManager.notifyContentCaptureChanges();
+                }
+                if (!androidContentCaptureManager.checkingForSemanticsChanges) {
+                    androidContentCaptureManager.checkingForSemanticsChanges = true;
+                    androidContentCaptureManager.handler.post(androidContentCaptureManager.contentCaptureChangeChecker);
+                }
+                long j = androidContentCaptureManager.SendRecurringContentCaptureEventsIntervalMillis;
+                androidContentCaptureManager$boundsUpdatesEventLoop$1.L$0 = androidContentCaptureManager;
+                androidContentCaptureManager$boundsUpdatesEventLoop$1.L$1 = bufferedChannelIterator2;
+                androidContentCaptureManager$boundsUpdatesEventLoop$1.label = 2;
+            }
+            return coroutineSingletons;
+        }
+        bufferedChannelIterator2 = (BufferedChannel.BufferedChannelIterator) androidContentCaptureManager$boundsUpdatesEventLoop$1.L$1;
+        androidContentCaptureManager = (AndroidContentCaptureManager) androidContentCaptureManager$boundsUpdatesEventLoop$1.L$0;
+        ResultKt.throwOnFailure(objHasNext);
+        if (((Boolean) objHasNext).booleanValue()) {
+        }
     }
 
     public final void fastForEachReplacedVisibleChildren(SemanticsNode semanticsNode, Function2 function2) {
@@ -679,7 +662,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
     }
 
     public final void notifyContentCaptureChanges() {
-        AutofillId newAutofillId;
+        AutofillId autofillIdNewAutofillId;
         ContentCaptureSessionCompat contentCaptureSessionCompat = this.contentCaptureSession;
         if (contentCaptureSessionCompat == null || ((ArrayList) this.bufferedEvents).isEmpty()) {
             return;
@@ -701,8 +684,8 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                 if (viewStructureCompat != null) {
                     ((ContentCaptureSession) obj).notifyViewAppeared((ViewStructure) viewStructureCompat.mWrappedObj);
                 }
-            } else if (i2 == 2 && (newAutofillId = contentCaptureSessionCompat.newAutofillId(contentCaptureEvent.id)) != null) {
-                ((ContentCaptureSession) obj).notifyViewDisappeared(newAutofillId);
+            } else if (i2 == 2 && (autofillIdNewAutofillId = contentCaptureSessionCompat.newAutofillId(contentCaptureEvent.id)) != null) {
+                ((ContentCaptureSession) obj).notifyViewDisappeared(autofillIdNewAutofillId);
             }
             i++;
         }
@@ -750,7 +733,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
 
     public final void onCreateVirtualViewTranslationRequests$ui_release(long[] jArr, Consumer consumer) {
         SemanticsNode semanticsNode;
-        String fastJoinToString$default;
+        String strFastJoinToString$default;
         ViewTranslationHelperMethods.INSTANCE.getClass();
         for (long j : jArr) {
             SemanticsNodeWithAdjustedBounds semanticsNodeWithAdjustedBounds = (SemanticsNodeWithAdjustedBounds) getCurrentSemanticsNodes$ui_release().get((int) j);
@@ -758,8 +741,8 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                 ViewTranslationRequest.Builder builder = new ViewTranslationRequest.Builder(this.view.getAutofillId(), semanticsNode.id);
                 SemanticsProperties.INSTANCE.getClass();
                 List list = (List) SemanticsConfigurationKt.getOrNull(semanticsNode.unmergedConfig, SemanticsProperties.Text);
-                if (list != null && (fastJoinToString$default = ListUtilsKt.fastJoinToString$default(list, "\n", null, 62)) != null) {
-                    builder.setValue(LSOAttrConst.ATTR_TEXT, TranslationRequestValue.forText(new AnnotatedString(fastJoinToString$default, null, 2, null)));
+                if (list != null && (strFastJoinToString$default = ListUtilsKt.fastJoinToString$default(list, "\n", null, 62)) != null) {
+                    builder.setValue(LSOAttrConst.ATTR_TEXT, TranslationRequestValue.forText(new AnnotatedString(strFastJoinToString$default, null, 2, null)));
                     consumer.accept(builder.build());
                 }
             }
@@ -867,7 +850,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
     }
 
     public final void sendContentCaptureAppearEvents(SemanticsNode semanticsNode, final SemanticsNodeCopy semanticsNodeCopy) {
-        fastForEachReplacedVisibleChildren(semanticsNode, new Function2() { // from class: androidx.compose.ui.contentcapture.AndroidContentCaptureManager$sendContentCaptureAppearEvents$1
+        fastForEachReplacedVisibleChildren(semanticsNode, new Function2() { // from class: androidx.compose.ui.contentcapture.AndroidContentCaptureManager.sendContentCaptureAppearEvents.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
@@ -875,13 +858,13 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                int intValue = ((Number) obj).intValue();
+                int iIntValue = ((Number) obj).intValue();
                 SemanticsNode semanticsNode2 = (SemanticsNode) obj2;
-                if (!SemanticsNodeCopy.this.children.contains(semanticsNode2.id)) {
+                if (!semanticsNodeCopy.children.contains(semanticsNode2.id)) {
                     AndroidContentCaptureManager androidContentCaptureManager = this;
                     int i = AndroidContentCaptureManager.$r8$clinit;
-                    androidContentCaptureManager.updateBuffersOnAppeared(intValue, semanticsNode2);
-                    this.boundsUpdateChannel.mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    androidContentCaptureManager.updateBuffersOnAppeared(iIntValue, semanticsNode2);
+                    this.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
                 return Unit.INSTANCE;
             }
@@ -906,49 +889,119 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
         }
     }
 
-    /*  JADX ERROR: JadxRuntimeException in pass: IfRegionVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r4v24 android.view.autofill.AutofillId, still in use, count: 2, list:
-          (r4v24 android.view.autofill.AutofillId) from 0x0091: IF  (r4v24 android.view.autofill.AutofillId) == (null android.view.autofill.AutofillId)  -> B:16:0x0076 A[HIDDEN] (LINE:146)
-          (r4v24 android.view.autofill.AutofillId) from 0x0098: PHI (r4v8 android.view.autofill.AutofillId) = (r4v7 android.view.autofill.AutofillId), (r4v24 android.view.autofill.AutofillId) binds: [B:65:0x0094, B:24:0x0091] A[DONT_GENERATE, DONT_INLINE]
-        	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-        	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-        	at jadx.core.dex.visitors.regions.TernaryMod.makeTernaryInsn(TernaryMod.java:114)
-        	at jadx.core.dex.visitors.regions.TernaryMod.processRegion(TernaryMod.java:62)
-        	at jadx.core.dex.visitors.regions.TernaryMod.enterRegion(TernaryMod.java:45)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:67)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
-        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
-        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverse(DepthRegionTraversal.java:19)
-        	at jadx.core.dex.visitors.regions.TernaryMod.process(TernaryMod.java:35)
-        	at jadx.core.dex.visitors.regions.IfRegionVisitor.process(IfRegionVisitor.java:34)
-        	at jadx.core.dex.visitors.regions.IfRegionVisitor.visit(IfRegionVisitor.java:30)
-        */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x01ba  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0076  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x019b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateBuffersOnAppeared(int r21, androidx.compose.ui.semantics.SemanticsNode r22) {
-        /*
-            Method dump skipped, instructions count: 471
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.contentcapture.AndroidContentCaptureManager.updateBuffersOnAppeared(int, androidx.compose.ui.semantics.SemanticsNode):void");
+    public final void updateBuffersOnAppeared(int i, SemanticsNode semanticsNode) {
+        Function1 function1;
+        AutofillId autofillIdNewAutofillId;
+        NodeCoordinator nodeCoordinatorFindCoordinatorToGetBounds$ui_release;
+        Rect rectLocalBoundingBoxOf;
+        ViewStructureCompat viewStructureCompat;
+        String strM712toLegacyClassNameV4PA4sw;
+        Function1 function12;
+        if (isEnabled$ui_release()) {
+            SemanticsConfiguration semanticsConfiguration = semanticsNode.unmergedConfig;
+            SemanticsProperties.INSTANCE.getClass();
+            Boolean bool = (Boolean) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsProperties.IsShowingTextSubstitution);
+            if (this.translateStatus == TranslateStatus.SHOW_ORIGINAL && Intrinsics.areEqual(bool, Boolean.TRUE)) {
+                SemanticsActions.INSTANCE.getClass();
+                AccessibilityAction accessibilityAction = (AccessibilityAction) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsActions.ShowTextSubstitution);
+                if (accessibilityAction != null && (function12 = (Function1) accessibilityAction.action) != null) {
+                }
+            } else if (this.translateStatus == TranslateStatus.SHOW_TRANSLATED && Intrinsics.areEqual(bool, Boolean.FALSE)) {
+                SemanticsActions.INSTANCE.getClass();
+                AccessibilityAction accessibilityAction2 = (AccessibilityAction) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsActions.ShowTextSubstitution);
+                if (accessibilityAction2 != null && (function1 = (Function1) accessibilityAction2.action) != null) {
+                }
+            }
+            ContentCaptureSessionCompat contentCaptureSessionCompat = this.contentCaptureSession;
+            if (contentCaptureSessionCompat == null) {
+                viewStructureCompat = null;
+            } else {
+                AutofillIdCompat autofillIdCompat = AutofillIdCompat.toAutofillIdCompat(this.view.getAutofillId());
+                if (semanticsNode.getParent() != null) {
+                    autofillIdNewAutofillId = contentCaptureSessionCompat.newAutofillId(r5.id);
+                    if (autofillIdNewAutofillId == null) {
+                    }
+                } else {
+                    autofillIdNewAutofillId = (AutofillId) autofillIdCompat.mWrappedObj;
+                }
+                int i2 = semanticsNode.id;
+                ViewStructureCompat viewStructureCompat2 = ViewStructureCompat.toViewStructureCompat(((ContentCaptureSession) contentCaptureSessionCompat.mWrappedObj).newVirtualViewStructure(autofillIdNewAutofillId, i2));
+                SemanticsPropertyKey semanticsPropertyKey = SemanticsProperties.Password;
+                SemanticsConfiguration semanticsConfiguration2 = semanticsNode.unmergedConfig;
+                if (!semanticsConfiguration2.props.containsKey(semanticsPropertyKey)) {
+                    Object obj = viewStructureCompat2.mWrappedObj;
+                    ViewStructure viewStructure = (ViewStructure) obj;
+                    Bundle extras = viewStructure.getExtras();
+                    if (extras != null) {
+                        extras.putLong("android.view.contentcapture.EventTimestamp", this.currentSemanticsNodesSnapshotTimestampMillis);
+                        extras.putInt("android.view.ViewStructure.extra.EXTRA_VIEW_NODE_INDEX", i);
+                    }
+                    String str = (String) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.TestTag);
+                    if (str != null) {
+                        viewStructure.setId(i2, null, null, str);
+                    }
+                    if (((Boolean) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.IsTraversalGroup)) != null) {
+                        ((ViewStructure) obj).setClassName("android.widget.ViewGroup");
+                    }
+                    List list = (List) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.Text);
+                    if (list != null) {
+                        ((ViewStructure) obj).setClassName("android.widget.TextView");
+                        ((ViewStructure) obj).setText(ListUtilsKt.fastJoinToString$default(list, "\n", null, 62));
+                    }
+                    AnnotatedString annotatedString = (AnnotatedString) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.EditableText);
+                    if (annotatedString != null) {
+                        ((ViewStructure) obj).setClassName("android.widget.EditText");
+                        ((ViewStructure) obj).setText(annotatedString);
+                    }
+                    List list2 = (List) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.ContentDescription);
+                    if (list2 != null) {
+                        viewStructure.setContentDescription(ListUtilsKt.fastJoinToString$default(list2, "\n", null, 62));
+                    }
+                    Role role = (Role) SemanticsConfigurationKt.getOrNull(semanticsConfiguration2, SemanticsProperties.Role);
+                    if (role != null && (strM712toLegacyClassNameV4PA4sw = SemanticsUtils_androidKt.m712toLegacyClassNameV4PA4sw(role.value)) != null) {
+                        ((ViewStructure) obj).setClassName(strM712toLegacyClassNameV4PA4sw);
+                    }
+                    TextLayoutResult textLayoutResult = SemanticsUtils_androidKt.getTextLayoutResult(semanticsConfiguration2);
+                    if (textLayoutResult != null) {
+                        TextLayoutInput textLayoutInput = textLayoutResult.layoutInput;
+                        float fM870getValueimpl = TextUnit.m870getValueimpl(textLayoutInput.style.spanStyle.fontSize);
+                        Density density = textLayoutInput.density;
+                        viewStructure.setTextStyle(density.getFontScale() * density.getDensity() * fM870getValueimpl, 0, 0, 0);
+                    }
+                    SemanticsNode parent = semanticsNode.getParent();
+                    if (parent != null && (nodeCoordinatorFindCoordinatorToGetBounds$ui_release = semanticsNode.findCoordinatorToGetBounds$ui_release()) != null) {
+                        NodeCoordinator nodeCoordinator = nodeCoordinatorFindCoordinatorToGetBounds$ui_release.getTail().isAttached ? nodeCoordinatorFindCoordinatorToGetBounds$ui_release : null;
+                        if (nodeCoordinator != null) {
+                            rectLocalBoundingBoxOf = DelegatableNodeKt.m634requireCoordinator64DMado(parent.outerSemanticsNode, 8).localBoundingBoxOf(nodeCoordinator, true);
+                        } else {
+                            Rect.Companion.getClass();
+                            rectLocalBoundingBoxOf = Rect.Zero;
+                        }
+                        float f = rectLocalBoundingBoxOf.left;
+                        float f2 = rectLocalBoundingBoxOf.top;
+                        viewStructure.setDimens((int) f, (int) f2, 0, 0, (int) (rectLocalBoundingBoxOf.right - f), (int) (rectLocalBoundingBoxOf.bottom - f2));
+                        viewStructureCompat = viewStructureCompat2;
+                    }
+                }
+            }
+            if (viewStructureCompat != null) {
+                ((ArrayList) this.bufferedEvents).add(new ContentCaptureEvent(semanticsNode.id, this.currentSemanticsNodesSnapshotTimestampMillis, ContentCaptureEventType.VIEW_APPEAR, viewStructureCompat));
+            }
+            fastForEachReplacedVisibleChildren(semanticsNode, new Function2() { // from class: androidx.compose.ui.contentcapture.AndroidContentCaptureManager.updateBuffersOnAppeared.1
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj2, Object obj3) {
+                    AndroidContentCaptureManager androidContentCaptureManager = AndroidContentCaptureManager.this;
+                    int i3 = AndroidContentCaptureManager.$r8$clinit;
+                    androidContentCaptureManager.updateBuffersOnAppeared(((Number) obj2).intValue(), (SemanticsNode) obj3);
+                    return Unit.INSTANCE;
+                }
+            });
+        }
     }
 
     public final void updateBuffersOnDisappeared(SemanticsNode semanticsNode) {

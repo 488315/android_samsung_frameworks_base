@@ -419,8 +419,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda62
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onServiceStateChanged$1(phoneStateListener, serviceState);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onServiceStateChanged$1(phoneStateListener, serviceState);
                 }
             });
         }
@@ -430,7 +430,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onServiceStateChanged(serviceState);
+                    phoneStateListener.onServiceStateChanged(serviceState);
                 }
             });
         }
@@ -443,8 +443,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda17
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onSignalStrengthChanged$3(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onSignalStrengthChanged$3(phoneStateListener, i);
                 }
             });
         }
@@ -454,7 +454,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda14
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onSignalStrengthChanged(i);
+                    phoneStateListener.onSignalStrengthChanged(i);
                 }
             });
         }
@@ -467,8 +467,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda19
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onMessageWaitingIndicatorChanged$5(phoneStateListener, z);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onMessageWaitingIndicatorChanged$5(phoneStateListener, z);
                 }
             });
         }
@@ -478,7 +478,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda37
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onMessageWaitingIndicatorChanged(z);
+                    phoneStateListener.onMessageWaitingIndicatorChanged(z);
                 }
             });
         }
@@ -491,8 +491,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda50
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCallForwardingIndicatorChanged$7(phoneStateListener, z);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCallForwardingIndicatorChanged$7(phoneStateListener, z);
                 }
             });
         }
@@ -502,7 +502,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda41
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCallForwardingIndicatorChanged(z);
+                    phoneStateListener.onCallForwardingIndicatorChanged(z);
                 }
             });
         }
@@ -516,8 +516,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda34
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCellLocationChanged$9(phoneStateListener, empty);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCellLocationChanged$9(phoneStateListener, empty);
                 }
             });
         }
@@ -527,7 +527,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda53
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCellLocationChanged(cellLocation);
+                    phoneStateListener.onCellLocationChanged(cellLocation);
                 }
             });
         }
@@ -540,8 +540,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda21
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onLegacyCallStateChanged$11(phoneStateListener, i, str);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onLegacyCallStateChanged$11(phoneStateListener, i, str);
                 }
             });
         }
@@ -551,7 +551,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda43
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCallStateChanged(i, str);
+                    phoneStateListener.onCallStateChanged(i, str);
                 }
             });
         }
@@ -565,15 +565,15 @@ public class PhoneStateListener {
             if (i == 4 && VMRuntime.getRuntime().getTargetSdkVersion() < 30) {
                 Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda58
                     @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                    public final void runOrThrow() {
-                        PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDataConnectionStateChanged$13(phoneStateListener, i2);
+                    public final void runOrThrow() throws Exception {
+                        this.f$0.lambda$onDataConnectionStateChanged$13(phoneStateListener, i2);
                     }
                 });
             } else {
                 Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda59
                     @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                    public final void runOrThrow() {
-                        PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDataConnectionStateChanged$15(phoneStateListener, i, i2);
+                    public final void runOrThrow() throws Exception {
+                        this.f$0.lambda$onDataConnectionStateChanged$15(phoneStateListener, i, i2);
                     }
                 });
             }
@@ -584,7 +584,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.IPhoneStateListenerStub.lambda$onDataConnectionStateChanged$12(PhoneStateListener.this, i);
+                    PhoneStateListener.IPhoneStateListenerStub.lambda$onDataConnectionStateChanged$12(phoneStateListener, i);
                 }
             });
         }
@@ -599,7 +599,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda61
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.IPhoneStateListenerStub.lambda$onDataConnectionStateChanged$14(PhoneStateListener.this, i, i2);
+                    PhoneStateListener.IPhoneStateListenerStub.lambda$onDataConnectionStateChanged$14(phoneStateListener, i, i2);
                 }
             });
         }
@@ -617,8 +617,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda28
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDataActivity$17(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onDataActivity$17(phoneStateListener, i);
                 }
             });
         }
@@ -628,7 +628,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda57
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onDataActivity(i);
+                    phoneStateListener.onDataActivity(i);
                 }
             });
         }
@@ -641,8 +641,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda31
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onSignalStrengthsChanged$19(phoneStateListener, signalStrength);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onSignalStrengthsChanged$19(phoneStateListener, signalStrength);
                 }
             });
         }
@@ -652,7 +652,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda51
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onSignalStrengthsChanged(signalStrength);
+                    phoneStateListener.onSignalStrengthsChanged(signalStrength);
                 }
             });
         }
@@ -665,8 +665,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda46
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCellInfoChanged$21(phoneStateListener, list);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCellInfoChanged$21(phoneStateListener, list);
                 }
             });
         }
@@ -676,7 +676,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda39
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCellInfoChanged(list);
+                    phoneStateListener.onCellInfoChanged(list);
                 }
             });
         }
@@ -689,8 +689,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda45
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onPreciseCallStateChanged$23(phoneStateListener, preciseCallState);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onPreciseCallStateChanged$23(phoneStateListener, preciseCallState);
                 }
             });
         }
@@ -700,7 +700,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda25
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onPreciseCallStateChanged(preciseCallState);
+                    phoneStateListener.onPreciseCallStateChanged(preciseCallState);
                 }
             });
         }
@@ -713,8 +713,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda26
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCallDisconnectCauseChanged$25(phoneStateListener, i, i2);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCallDisconnectCauseChanged$25(phoneStateListener, i, i2);
                 }
             });
         }
@@ -724,7 +724,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCallDisconnectCauseChanged(i, i2);
+                    phoneStateListener.onCallDisconnectCauseChanged(i, i2);
                 }
             });
         }
@@ -737,8 +737,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda22
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onPreciseDataConnectionStateChanged$27(phoneStateListener, preciseDataConnectionState);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onPreciseDataConnectionStateChanged$27(phoneStateListener, preciseDataConnectionState);
                 }
             });
         }
@@ -748,7 +748,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda27
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onPreciseDataConnectionStateChanged(preciseDataConnectionState);
+                    phoneStateListener.onPreciseDataConnectionStateChanged(preciseDataConnectionState);
                 }
             });
         }
@@ -761,8 +761,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda7
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDataConnectionRealTimeInfoChanged$29(phoneStateListener, dataConnectionRealTimeInfo);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onDataConnectionRealTimeInfoChanged$29(phoneStateListener, dataConnectionRealTimeInfo);
                 }
             });
         }
@@ -772,7 +772,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda16
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onDataConnectionRealTimeInfoChanged(dataConnectionRealTimeInfo);
+                    phoneStateListener.onDataConnectionRealTimeInfoChanged(dataConnectionRealTimeInfo);
                 }
             });
         }
@@ -785,8 +785,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda35
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onSrvccStateChanged$31(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onSrvccStateChanged$31(phoneStateListener, i);
                 }
             });
         }
@@ -796,7 +796,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda20
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onSrvccStateChanged(i);
+                    phoneStateListener.onSrvccStateChanged(i);
                 }
             });
         }
@@ -809,8 +809,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda10
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onVoiceActivationStateChanged$33(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onVoiceActivationStateChanged$33(phoneStateListener, i);
                 }
             });
         }
@@ -820,7 +820,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda56
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onVoiceActivationStateChanged(i);
+                    phoneStateListener.onVoiceActivationStateChanged(i);
                 }
             });
         }
@@ -833,8 +833,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDataActivationStateChanged$35(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onDataActivationStateChanged$35(phoneStateListener, i);
                 }
             });
         }
@@ -844,7 +844,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda47
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onDataActivationStateChanged(i);
+                    phoneStateListener.onDataActivationStateChanged(i);
                 }
             });
         }
@@ -857,8 +857,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda18
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onUserMobileDataStateChanged$37(phoneStateListener, z);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onUserMobileDataStateChanged$37(phoneStateListener, z);
                 }
             });
         }
@@ -868,7 +868,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onUserMobileDataStateChanged(z);
+                    phoneStateListener.onUserMobileDataStateChanged(z);
                 }
             });
         }
@@ -881,8 +881,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onDisplayInfoChanged$39(phoneStateListener, telephonyDisplayInfo);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onDisplayInfoChanged$39(phoneStateListener, telephonyDisplayInfo);
                 }
             });
         }
@@ -892,7 +892,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda23
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onDisplayInfoChanged(telephonyDisplayInfo);
+                    phoneStateListener.onDisplayInfoChanged(telephonyDisplayInfo);
                 }
             });
         }
@@ -905,8 +905,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda42
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onOemHookRawEvent$41(phoneStateListener, bArr);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onOemHookRawEvent$41(phoneStateListener, bArr);
                 }
             });
         }
@@ -916,7 +916,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda36
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onOemHookRawEvent(bArr);
+                    phoneStateListener.onOemHookRawEvent(bArr);
                 }
             });
         }
@@ -929,8 +929,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda9
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCarrierNetworkChange$43(phoneStateListener, z);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCarrierNetworkChange$43(phoneStateListener, z);
                 }
             });
         }
@@ -940,7 +940,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda55
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCarrierNetworkChange(z);
+                    phoneStateListener.onCarrierNetworkChange(z);
                 }
             });
         }
@@ -953,8 +953,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda48
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onEmergencyNumberListChanged$45(phoneStateListener, map);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onEmergencyNumberListChanged$45(phoneStateListener, map);
                 }
             });
         }
@@ -964,7 +964,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda12
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onEmergencyNumberListChanged(map);
+                    phoneStateListener.onEmergencyNumberListChanged(map);
                 }
             });
         }
@@ -977,8 +977,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda54
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onOutgoingEmergencyCall$47(phoneStateListener, emergencyNumber, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onOutgoingEmergencyCall$47(phoneStateListener, emergencyNumber, i);
                 }
             });
         }
@@ -988,7 +988,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda40
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onOutgoingEmergencyCall(emergencyNumber, i);
+                    phoneStateListener.onOutgoingEmergencyCall(emergencyNumber, i);
                 }
             });
         }
@@ -1001,8 +1001,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda13
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onOutgoingEmergencySms$49(phoneStateListener, emergencyNumber, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onOutgoingEmergencySms$49(phoneStateListener, emergencyNumber, i);
                 }
             });
         }
@@ -1012,7 +1012,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda24
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onOutgoingEmergencySms(emergencyNumber, i);
+                    phoneStateListener.onOutgoingEmergencySms(emergencyNumber, i);
                 }
             });
         }
@@ -1025,8 +1025,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda63
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onPhoneCapabilityChanged$51(phoneStateListener, phoneCapability);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onPhoneCapabilityChanged$51(phoneStateListener, phoneCapability);
                 }
             });
         }
@@ -1036,7 +1036,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda38
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onPhoneCapabilityChanged(phoneCapability);
+                    phoneStateListener.onPhoneCapabilityChanged(phoneCapability);
                 }
             });
         }
@@ -1049,8 +1049,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda52
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onRadioPowerStateChanged$53(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onRadioPowerStateChanged$53(phoneStateListener, i);
                 }
             });
         }
@@ -1060,7 +1060,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda49
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onRadioPowerStateChanged(i);
+                    phoneStateListener.onRadioPowerStateChanged(i);
                 }
             });
         }
@@ -1075,25 +1075,25 @@ public class PhoneStateListener {
             if (list.isEmpty()) {
                 callAttributes = new CallAttributes(new PreciseCallState(0, 0, 0, -1, -1), 0, new CallQuality());
             } else {
-                int i = 0;
-                int i2 = 0;
-                int i3 = 0;
-                for (CallState callState : list) {
-                    int callClassification = callState.getCallClassification();
+                int callState = 0;
+                int callState2 = 0;
+                int callState3 = 0;
+                for (CallState callState4 : list) {
+                    int callClassification = callState4.getCallClassification();
                     if (callClassification == 0) {
-                        i = callState.getCallState();
+                        callState = callState4.getCallState();
                     } else if (callClassification == 1) {
-                        i2 = callState.getCallState();
+                        callState2 = callState4.getCallState();
                     } else if (callClassification == 2) {
-                        i3 = callState.getCallState();
+                        callState3 = callState4.getCallState();
                     }
                 }
-                callAttributes = new CallAttributes(new PreciseCallState(i, i2, i3, -1, -1), list.get(0).getNetworkType(), list.get(0).getCallQuality());
+                callAttributes = new CallAttributes(new PreciseCallState(callState, callState2, callState3, -1, -1), list.get(0).getNetworkType(), list.get(0).getCallQuality());
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda29
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onCallStatesChanged$55(phoneStateListener, callAttributes);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onCallStatesChanged$55(phoneStateListener, callAttributes);
                 }
             });
         }
@@ -1103,7 +1103,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda30
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onCallAttributesChanged(callAttributes);
+                    phoneStateListener.onCallAttributesChanged(callAttributes);
                 }
             });
         }
@@ -1116,8 +1116,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda32
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onActiveDataSubIdChanged$57(phoneStateListener, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onActiveDataSubIdChanged$57(phoneStateListener, i);
                 }
             });
         }
@@ -1127,7 +1127,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda15
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onActiveDataSubscriptionIdChanged(i);
+                    phoneStateListener.onActiveDataSubscriptionIdChanged(i);
                 }
             });
         }
@@ -1140,8 +1140,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda4
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onImsCallDisconnectCauseChanged$59(phoneStateListener, imsReasonInfo);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onImsCallDisconnectCauseChanged$59(phoneStateListener, imsReasonInfo);
                 }
             });
         }
@@ -1151,7 +1151,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda33
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onImsCallDisconnectCauseChanged(imsReasonInfo);
+                    phoneStateListener.onImsCallDisconnectCauseChanged(imsReasonInfo);
                 }
             });
         }
@@ -1164,8 +1164,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda60
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onRegistrationFailed$61(phoneStateListener, cellIdentity, str, i, i2, i3);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onRegistrationFailed$61(phoneStateListener, cellIdentity, str, i, i2, i3);
                 }
             });
         }
@@ -1175,7 +1175,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onRegistrationFailed(cellIdentity, str, i, i2, i3);
+                    phoneStateListener.onRegistrationFailed(cellIdentity, str, i, i2, i3);
                 }
             });
         }
@@ -1188,8 +1188,8 @@ public class PhoneStateListener {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda2
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PhoneStateListener.IPhoneStateListenerStub.this.lambda$onBarringInfoChanged$63(phoneStateListener, barringInfo);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onBarringInfoChanged$63(phoneStateListener, barringInfo);
                 }
             });
         }
@@ -1199,7 +1199,7 @@ public class PhoneStateListener {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.PhoneStateListener$IPhoneStateListenerStub$$ExternalSyntheticLambda44
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PhoneStateListener.this.onBarringInfoChanged(barringInfo);
+                    phoneStateListener.onBarringInfoChanged(barringInfo);
                 }
             });
         }

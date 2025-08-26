@@ -9,7 +9,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileSignalTransitionManager {
     public int currentSignalStrength;
@@ -22,7 +21,6 @@ public final class MobileSignalTransitionManager {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionSignalState {
         public static final /* synthetic */ TransitionSignalState[] $VALUES;
         public static final TransitionSignalState IN_SERVICE;
@@ -50,7 +48,6 @@ public final class MobileSignalTransitionManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -100,7 +97,7 @@ public final class MobileSignalTransitionManager {
                 }
                 MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 = this.updateCallback;
                 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.getClass();
-                ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.$$this$conflatedCallbackFlow).mo3456trySendJP2dKIU(-1);
+                ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(-1);
                 return;
             }
             MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$12 = this.updateCallback;
@@ -109,8 +106,8 @@ public final class MobileSignalTransitionManager {
             mobileIconInteractorImpl.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1$postUpdate$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MobileIconInteractorImpl mobileIconInteractorImpl2 = MobileIconInteractorImpl.this;
-                    mobileIconInteractorImpl2.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) MobileIconInteractorImpl.this.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) MobileIconInteractorImpl.this.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl2.isInService.getValue()).booleanValue());
+                    MobileIconInteractorImpl mobileIconInteractorImpl2 = mobileIconInteractorImpl;
+                    mobileIconInteractorImpl2.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) mobileIconInteractorImpl.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) mobileIconInteractorImpl.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl2.isInService.getValue()).booleanValue());
                 }
             }, 100L);
             this.isTransition = true;
@@ -140,8 +137,8 @@ public final class MobileSignalTransitionManager {
                 mobileIconInteractorImpl2.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1$postUpdate$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MobileIconInteractorImpl mobileIconInteractorImpl22 = MobileIconInteractorImpl.this;
-                        mobileIconInteractorImpl22.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) MobileIconInteractorImpl.this.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) MobileIconInteractorImpl.this.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl22.isInService.getValue()).booleanValue());
+                        MobileIconInteractorImpl mobileIconInteractorImpl22 = mobileIconInteractorImpl2;
+                        mobileIconInteractorImpl22.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) mobileIconInteractorImpl2.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) mobileIconInteractorImpl2.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl22.isInService.getValue()).booleanValue());
                     }
                 }, j);
                 return;
@@ -158,15 +155,15 @@ public final class MobileSignalTransitionManager {
         }
         MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14 = this.updateCallback;
         mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.getClass();
-        ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.$$this$conflatedCallbackFlow).mo3456trySendJP2dKIU(Integer.valueOf(this.currentSignalStrength));
+        ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(Integer.valueOf(this.currentSignalStrength));
         MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15 = this.updateCallback;
         mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15.getClass();
         final MobileIconInteractorImpl mobileIconInteractorImpl3 = mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15.this$0;
         mobileIconInteractorImpl3.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1$postUpdate$1
             @Override // java.lang.Runnable
             public final void run() {
-                MobileIconInteractorImpl mobileIconInteractorImpl22 = MobileIconInteractorImpl.this;
-                mobileIconInteractorImpl22.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) MobileIconInteractorImpl.this.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) MobileIconInteractorImpl.this.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl22.isInService.getValue()).booleanValue());
+                MobileIconInteractorImpl mobileIconInteractorImpl22 = mobileIconInteractorImpl3;
+                mobileIconInteractorImpl22.mobileSignalTransition.updateSignalOneLevelPerSec(((Number) mobileIconInteractorImpl3.cellularShownLevel.$$delegate_0.getValue()).intValue(), ((Number) mobileIconInteractorImpl3.numberOfLevels.getValue()).intValue(), ((Boolean) mobileIconInteractorImpl22.isInService.getValue()).booleanValue());
             }
         }, j);
     }

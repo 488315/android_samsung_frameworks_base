@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothLeBroadcastSubgroup;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.os.Bundle;
@@ -55,7 +56,6 @@ import kotlin.jvm.internal.StringCompanionObject;
 import kotlin.text.Charsets;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
     static final int BROADCAST_CODE_MAX_LENGTH = 16;
@@ -76,7 +76,6 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
     public boolean mIsStopbyUpdateBroadcastCode;
     public int mRetryCount;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.dialog.MediaOutputBroadcastDialog$3, reason: invalid class name */
     public class AnonymousClass3 implements BluetoothLeBroadcastAssistant.Callback {
         public AnonymousClass3() {
@@ -370,15 +369,15 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
     }
 
     public final void launchBroadcastUpdatedDialog(String str, final boolean z) {
-        View inflate = LayoutInflater.from(((MediaOutputBaseDialog) this).mContext).inflate(R.layout.media_output_broadcast_update_dialog, (ViewGroup) null);
-        final EditText editText = (EditText) inflate.requireViewById(R.id.broadcast_edit_text);
+        View viewInflate = LayoutInflater.from(((MediaOutputBaseDialog) this).mContext).inflate(R.layout.media_output_broadcast_update_dialog, (ViewGroup) null);
+        final EditText editText = (EditText) viewInflate.requireViewById(R.id.broadcast_edit_text);
         editText.setText(str);
         editText.addTextChangedListener(z ? this.mBroadcastCodeTextWatcher : this.mBroadcastNameTextWatcher);
-        this.mBroadcastErrorMessage = (TextView) inflate.requireViewById(R.id.broadcast_error_message);
-        AlertDialog create = new AlertDialog.Builder(((MediaOutputBaseDialog) this).mContext).setTitle(z ? R.string.media_output_broadcast_code : R.string.media_output_broadcast_name).setView(inflate).setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null).setPositiveButton(R.string.media_output_broadcast_dialog_save, new DialogInterface.OnClickListener() { // from class: com.android.systemui.media.dialog.MediaOutputBroadcastDialog$$ExternalSyntheticLambda4
+        this.mBroadcastErrorMessage = (TextView) viewInflate.requireViewById(R.id.broadcast_error_message);
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(((MediaOutputBaseDialog) this).mContext).setTitle(z ? R.string.media_output_broadcast_code : R.string.media_output_broadcast_name).setView(viewInflate).setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null).setPositiveButton(R.string.media_output_broadcast_dialog_save, new DialogInterface.OnClickListener() { // from class: com.android.systemui.media.dialog.MediaOutputBroadcastDialog$$ExternalSyntheticLambda4
             @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i) {
-                MediaOutputBroadcastDialog mediaOutputBroadcastDialog = MediaOutputBroadcastDialog.this;
+            public final void onClick(DialogInterface dialogInterface, int i) throws PackageManager.NameNotFoundException {
+                MediaOutputBroadcastDialog mediaOutputBroadcastDialog = this.f$0;
                 boolean z2 = z;
                 EditText editText2 = editText;
                 int i2 = MediaOutputBroadcastDialog.BROADCAST_CODE_MAX_LENGTH;
@@ -386,8 +385,8 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                 mediaOutputBroadcastDialog.updateBroadcastInfo(z2, editText2.getText().toString());
             }
         }).create();
-        this.mAlertDialog = create;
-        create.getWindow().setType(2009);
+        this.mAlertDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().setType(2009);
         SystemUIDialog.setShowForAllUsers(this.mAlertDialog);
         SystemUIDialog.registerDismissListener(this.mAlertDialog);
         this.mAlertDialog.show();
@@ -417,22 +416,22 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                         MediaSwitchingController.BroadcastNotifyDialog broadcastNotifyDialog = MediaSwitchingController.BroadcastNotifyDialog.ACTION_BROADCAST_INFO_ICON;
                         mediaSwitchingController.getClass();
                         AlertDialog.Builder builder = new AlertDialog.Builder(mediaSwitchingController.mContext);
-                        int ordinal = broadcastNotifyDialog.ordinal();
-                        if (ordinal == 0) {
+                        int iOrdinal = broadcastNotifyDialog.ordinal();
+                        if (iOrdinal == 0) {
                             builder.setTitle(R.string.media_output_first_broadcast_title);
                             builder.setMessage(R.string.media_output_first_notify_broadcast_message);
                             builder.setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null);
                             builder.setPositiveButton(R.string.media_output_broadcast, (DialogInterface.OnClickListener) null);
-                        } else if (ordinal == 1) {
+                        } else if (iOrdinal == 1) {
                             builder.setTitle(R.string.media_output_broadcast);
                             builder.setMessage(R.string.media_output_broadcasting_message);
                             builder.setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null);
                         }
-                        AlertDialog create = builder.create();
-                        create.getWindow().setType(2009);
-                        SystemUIDialog.setShowForAllUsers(create);
-                        SystemUIDialog.registerDismissListener(create);
-                        create.show();
+                        AlertDialog alertDialogCreate = builder.create();
+                        alertDialogCreate.getWindow().setType(2009);
+                        SystemUIDialog.setShowForAllUsers(alertDialogCreate);
+                        SystemUIDialog.registerDismissListener(alertDialogCreate);
+                        alertDialogCreate.show();
                         break;
                     case 1:
                         mediaOutputBroadcastDialog.launchBroadcastUpdatedDialog(mediaOutputBroadcastDialog.mBroadcastName.getText().toString(), false);
@@ -467,22 +466,22 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                         MediaSwitchingController.BroadcastNotifyDialog broadcastNotifyDialog = MediaSwitchingController.BroadcastNotifyDialog.ACTION_BROADCAST_INFO_ICON;
                         mediaSwitchingController.getClass();
                         AlertDialog.Builder builder = new AlertDialog.Builder(mediaSwitchingController.mContext);
-                        int ordinal = broadcastNotifyDialog.ordinal();
-                        if (ordinal == 0) {
+                        int iOrdinal = broadcastNotifyDialog.ordinal();
+                        if (iOrdinal == 0) {
                             builder.setTitle(R.string.media_output_first_broadcast_title);
                             builder.setMessage(R.string.media_output_first_notify_broadcast_message);
                             builder.setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null);
                             builder.setPositiveButton(R.string.media_output_broadcast, (DialogInterface.OnClickListener) null);
-                        } else if (ordinal == 1) {
+                        } else if (iOrdinal == 1) {
                             builder.setTitle(R.string.media_output_broadcast);
                             builder.setMessage(R.string.media_output_broadcasting_message);
                             builder.setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null);
                         }
-                        AlertDialog create = builder.create();
-                        create.getWindow().setType(2009);
-                        SystemUIDialog.setShowForAllUsers(create);
-                        SystemUIDialog.registerDismissListener(create);
-                        create.show();
+                        AlertDialog alertDialogCreate = builder.create();
+                        alertDialogCreate.getWindow().setType(2009);
+                        SystemUIDialog.setShowForAllUsers(alertDialogCreate);
+                        SystemUIDialog.registerDismissListener(alertDialogCreate);
+                        alertDialogCreate.show();
                         break;
                     case 1:
                         mediaOutputBroadcastDialog.launchBroadcastUpdatedDialog(mediaOutputBroadcastDialog.mBroadcastName.getText().toString(), false);
@@ -519,22 +518,22 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                         MediaSwitchingController.BroadcastNotifyDialog broadcastNotifyDialog = MediaSwitchingController.BroadcastNotifyDialog.ACTION_BROADCAST_INFO_ICON;
                         mediaSwitchingController.getClass();
                         AlertDialog.Builder builder = new AlertDialog.Builder(mediaSwitchingController.mContext);
-                        int ordinal = broadcastNotifyDialog.ordinal();
-                        if (ordinal == 0) {
+                        int iOrdinal = broadcastNotifyDialog.ordinal();
+                        if (iOrdinal == 0) {
                             builder.setTitle(R.string.media_output_first_broadcast_title);
                             builder.setMessage(R.string.media_output_first_notify_broadcast_message);
                             builder.setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null);
                             builder.setPositiveButton(R.string.media_output_broadcast, (DialogInterface.OnClickListener) null);
-                        } else if (ordinal == 1) {
+                        } else if (iOrdinal == 1) {
                             builder.setTitle(R.string.media_output_broadcast);
                             builder.setMessage(R.string.media_output_broadcasting_message);
                             builder.setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null);
                         }
-                        AlertDialog create = builder.create();
-                        create.getWindow().setType(2009);
-                        SystemUIDialog.setShowForAllUsers(create);
-                        SystemUIDialog.registerDismissListener(create);
-                        create.show();
+                        AlertDialog alertDialogCreate = builder.create();
+                        alertDialogCreate.getWindow().setType(2009);
+                        SystemUIDialog.setShowForAllUsers(alertDialogCreate);
+                        SystemUIDialog.registerDismissListener(alertDialogCreate);
+                        alertDialogCreate.show();
                         break;
                     case 1:
                         mediaOutputBroadcastDialog.launchBroadcastUpdatedDialog(mediaOutputBroadcastDialog.mBroadcastName.getText().toString(), false);
@@ -568,22 +567,22 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                         MediaSwitchingController.BroadcastNotifyDialog broadcastNotifyDialog = MediaSwitchingController.BroadcastNotifyDialog.ACTION_BROADCAST_INFO_ICON;
                         mediaSwitchingController.getClass();
                         AlertDialog.Builder builder = new AlertDialog.Builder(mediaSwitchingController.mContext);
-                        int ordinal = broadcastNotifyDialog.ordinal();
-                        if (ordinal == 0) {
+                        int iOrdinal = broadcastNotifyDialog.ordinal();
+                        if (iOrdinal == 0) {
                             builder.setTitle(R.string.media_output_first_broadcast_title);
                             builder.setMessage(R.string.media_output_first_notify_broadcast_message);
                             builder.setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null);
                             builder.setPositiveButton(R.string.media_output_broadcast, (DialogInterface.OnClickListener) null);
-                        } else if (ordinal == 1) {
+                        } else if (iOrdinal == 1) {
                             builder.setTitle(R.string.media_output_broadcast);
                             builder.setMessage(R.string.media_output_broadcasting_message);
                             builder.setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null);
                         }
-                        AlertDialog create = builder.create();
-                        create.getWindow().setType(2009);
-                        SystemUIDialog.setShowForAllUsers(create);
-                        SystemUIDialog.registerDismissListener(create);
-                        create.show();
+                        AlertDialog alertDialogCreate = builder.create();
+                        alertDialogCreate.getWindow().setType(2009);
+                        SystemUIDialog.setShowForAllUsers(alertDialogCreate);
+                        SystemUIDialog.registerDismissListener(alertDialogCreate);
+                        alertDialogCreate.show();
                         break;
                     case 1:
                         mediaOutputBroadcastDialog.launchBroadcastUpdatedDialog(mediaOutputBroadcastDialog.mBroadcastName.getText().toString(), false);
@@ -666,24 +665,24 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                 for (BluetoothLeBroadcastSubgroup bluetoothLeBroadcastSubgroup : bluetoothLeBroadcastMetadata.getSubgroups()) {
                     List<BluetoothLeBroadcastChannel> channels = bluetoothLeBroadcastSubgroup.getChannels();
                     BluetoothLeBroadcastMetadataExt.INSTANCE.getClass();
+                    int channelIndex = 0;
                     int i2 = 0;
-                    int i3 = 0;
                     for (BluetoothLeBroadcastChannel bluetoothLeBroadcastChannel : channels) {
                         if (bluetoothLeBroadcastChannel.getChannelIndex() > 0) {
-                            i3++;
-                            int i4 = UInt.$r8$clinit;
+                            i2++;
+                            int i3 = UInt.$r8$clinit;
                             if (bluetoothLeBroadcastChannel.isSelected()) {
-                                i2 |= 1 << (bluetoothLeBroadcastChannel.getChannelIndex() - 1);
+                                channelIndex |= 1 << (bluetoothLeBroadcastChannel.getChannelIndex() - 1);
                             }
                         }
                     }
-                    Pair pair = i2 == 0 ? new Pair(UInt.m3425boximpl(-1), UInt.m3425boximpl(i3)) : new Pair(UInt.m3425boximpl(i2), UInt.m3425boximpl(i3));
-                    int i5 = ((UInt) pair.component1()).data;
-                    int i6 = ((UInt) pair.component2()).data;
-                    int i7 = StringCompanionObject.$r8$clinit;
-                    arrayList.add(new Pair("BS", String.format("%X", Arrays.copyOf(new Object[]{Long.valueOf(i5 & 4294967295L)}, 1))));
-                    if (Integer.compareUnsigned(i6, 0) > 0) {
-                        arrayList.add(new Pair("NB", String.format("%X", Arrays.copyOf(new Object[]{Long.valueOf(i6 & 4294967295L)}, 1))));
+                    Pair pair = channelIndex == 0 ? new Pair(UInt.m3445boximpl(-1), UInt.m3445boximpl(i2)) : new Pair(UInt.m3445boximpl(channelIndex), UInt.m3445boximpl(i2));
+                    int i4 = ((UInt) pair.component1()).data;
+                    int i5 = ((UInt) pair.component2()).data;
+                    int i6 = StringCompanionObject.$r8$clinit;
+                    arrayList.add(new Pair("BS", String.format("%X", Arrays.copyOf(new Object[]{Long.valueOf(i4 & 4294967295L)}, 1))));
+                    if (Integer.compareUnsigned(i5, 0) > 0) {
+                        arrayList.add(new Pair("NB", String.format("%X", Arrays.copyOf(new Object[]{Long.valueOf(i5 & 4294967295L)}, 1))));
                     }
                     if (bluetoothLeBroadcastSubgroup.getContentMetadata().getRawMetadata().length != 0) {
                         arrayList.add(new Pair("SM", Base64.encodeToString(bluetoothLeBroadcastSubgroup.getContentMetadata().getRawMetadata(), 2)));
@@ -691,17 +690,17 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                 }
                 ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
                 int size = arrayList.size();
-                int i8 = 0;
-                while (i8 < size) {
-                    Object obj = arrayList.get(i8);
-                    i8++;
+                int i7 = 0;
+                while (i7 < size) {
+                    Object obj = arrayList.get(i7);
+                    i7++;
                     Pair pair2 = (Pair) obj;
                     arrayList2.add(pair2.getFirst() + ":" + pair2.getSecond());
                 }
-                String m = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("BLUETOOTH:UUID:184F;", CollectionsKt___CollectionsKt.joinToString$default(arrayList2, ";", null, null, null, 62), ";;");
-                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Generated QR string : ", m, "BtLeBroadcastMetadataExt");
-                if (m != null) {
-                    str = m;
+                String strM = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("BLUETOOTH:UUID:184F;", CollectionsKt___CollectionsKt.joinToString$default(arrayList2, ";", null, null, null, 62), ";;");
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Generated QR string : ", strM, "BtLeBroadcastMetadataExt");
+                if (strM != null) {
+                    str = strM;
                 }
             }
         }
@@ -722,7 +721,7 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
     @Override // com.android.systemui.media.dialog.MediaOutputBaseDialog, com.android.systemui.statusbar.phone.SystemUIDialog
     public final void start() {
         BluetoothLeBroadcastMetadata latestBluetoothLeBroadcastMetadata;
-        boolean isEmpty;
+        boolean zIsEmpty;
         boolean z;
         super.start();
         if (!this.mIsLeBroadcastAssistantCallbackRegistered) {
@@ -739,7 +738,7 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
             }
         }
         LocalBluetoothLeBroadcast localBluetoothLeBroadcast = this.mMediaSwitchingController.mLocalBluetoothManager.mProfileManager.mLeAudioBroadcast;
-        List<BluetoothDevice> list = null;
+        List<BluetoothDevice> arrayList = null;
         if (localBluetoothLeBroadcast == null) {
             Log.d("MediaSwitchingController", "getBroadcastMetadata: LE Audio Broadcast is null");
             latestBluetoothLeBroadcastMetadata = null;
@@ -755,20 +754,20 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
             Log.d("MediaSwitchingController", "getConnectedBroadcastSinkDevices: The broadcast assistant profile is null");
         } else {
             BluetoothLeBroadcastAssistant bluetoothLeBroadcastAssistant = localBluetoothLeBroadcastAssistant2.mService;
-            list = bluetoothLeBroadcastAssistant == null ? new ArrayList(0) : bluetoothLeBroadcastAssistant.getDevicesMatchingConnectionStates(new int[]{2, 1, 3});
+            arrayList = bluetoothLeBroadcastAssistant == null ? new ArrayList(0) : bluetoothLeBroadcastAssistant.getDevicesMatchingConnectionStates(new int[]{2, 1, 3});
         }
-        for (BluetoothDevice bluetoothDevice : list) {
+        for (BluetoothDevice bluetoothDevice : arrayList) {
             Log.d("MediaOutputBroadcastDialog", "The broadcastMetadata broadcastId: " + latestBluetoothLeBroadcastMetadata.getBroadcastId() + ", the device: " + bluetoothDevice.getAnonymizedAddress());
             LocalBluetoothLeBroadcastAssistant localBluetoothLeBroadcastAssistant3 = this.mMediaSwitchingController.mLocalBluetoothManager.mProfileManager.mLeAudioBroadcastAssistant;
             if (localBluetoothLeBroadcastAssistant3 == null) {
                 Log.d("MediaSwitchingController", "isThereAnyBroadcastSourceIntoSinkDevice: The broadcast assistant profile is null");
-                isEmpty = false;
+                zIsEmpty = false;
             } else {
                 List allSources = localBluetoothLeBroadcastAssistant3.getAllSources(bluetoothDevice);
                 Log.d("MediaSwitchingController", "isThereAnyBroadcastSourceIntoSinkDevice: List size: " + allSources.size());
-                isEmpty = allSources.isEmpty() ^ true;
+                zIsEmpty = allSources.isEmpty() ^ true;
             }
-            if (isEmpty) {
+            if (zIsEmpty) {
                 Log.d("MediaOutputBroadcastDialog", "The sink device has the broadcast source now.");
                 return;
             }
@@ -816,7 +815,7 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
         }
     }
 
-    public void updateBroadcastInfo(boolean z, String str) {
+    public void updateBroadcastInfo(boolean z, String str) throws PackageManager.NameNotFoundException {
         Button button = this.mAlertDialog.getButton(-1);
         if (button != null) {
             button.setEnabled(false);

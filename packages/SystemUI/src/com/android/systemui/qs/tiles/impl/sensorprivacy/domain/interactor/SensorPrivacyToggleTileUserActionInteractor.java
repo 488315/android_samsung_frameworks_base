@@ -16,7 +16,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SensorPrivacyToggleTileUserActionInteractor implements QSTileUserActionInteractor {
     public final ActivityStarter activityStarter;
@@ -48,7 +47,7 @@ public final class SensorPrivacyToggleTileUserActionInteractor implements QSTile
                     this.activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.impl.sensorprivacy.domain.interactor.SensorPrivacyToggleTileUserActionInteractor$handleInput$2$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SensorPrivacyToggleTileUserActionInteractor sensorPrivacyToggleTileUserActionInteractor = SensorPrivacyToggleTileUserActionInteractor.this;
+                            SensorPrivacyToggleTileUserActionInteractor sensorPrivacyToggleTileUserActionInteractor = this.this$0;
                             ((IndividualSensorPrivacyControllerImpl) sensorPrivacyToggleTileUserActionInteractor.sensorPrivacyController).setSensorBlocked(1, sensorPrivacyToggleTileUserActionInteractor.sensorId, !z);
                         }
                     });

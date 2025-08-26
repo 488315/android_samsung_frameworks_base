@@ -4,6 +4,7 @@ import android.R;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +13,18 @@ import android.view.animation.AnimationSet;
 import android.view.animation.Transformation;
 import androidx.core.view.OneShotPreDrawListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentAnim {
     private FragmentAnim() {
     }
 
-    public static int toActivityTransitResId(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(R.style.Animation.Activity, new int[]{i});
-        int resourceId = obtainStyledAttributes.getResourceId(0, -1);
-        obtainStyledAttributes.recycle();
+    public static int toActivityTransitResId(int i, Context context) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(R.style.Animation.Activity, new int[]{i});
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
         return resourceId;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationOrAnimator {
         public final Animation animation;
         public final AnimatorSet animator;
@@ -49,7 +48,6 @@ public class FragmentAnim {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EndViewTransitionAnimation extends AnimationSet implements Runnable {
         public boolean mAnimating;
         public final View mChild;

@@ -128,9 +128,9 @@ public interface IPeopleManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPeopleManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPeopleManager)) {
-                return (IPeopleManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPeopleManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPeopleManager)) {
+                return (IPeopleManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -182,11 +182,11 @@ public interface IPeopleManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ConversationChannel conversation = getConversation(readString, readInt, readString2);
+                    ConversationChannel conversation = getConversation(string, i3, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(conversation, 1);
                     return true;
@@ -196,11 +196,11 @@ public interface IPeopleManager extends IInterface {
                     parcel2.writeTypedObject(recentConversations, 1);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeRecentConversation(readString3, readInt2, readString4);
+                    removeRecentConversation(string3, i4, string4);
                     parcel2.writeNoException();
                     return true;
                 case 4:
@@ -208,71 +208,71 @@ public interface IPeopleManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isConversation = isConversation(readString5, readInt3, readString6);
+                    boolean zIsConversation = isConversation(string5, i5, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isConversation);
+                    parcel2.writeBoolean(zIsConversation);
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long lastInteraction = getLastInteraction(readString7, readInt4, readString8);
+                    long lastInteraction = getLastInteraction(string7, i6, string8);
                     parcel2.writeNoException();
                     parcel2.writeLong(lastInteraction);
                     return true;
                 case 7:
-                    String readString9 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string10 = parcel.readString();
                     ConversationStatus conversationStatus = (ConversationStatus) parcel.readTypedObject(ConversationStatus.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addOrUpdateStatus(readString9, readInt5, readString10, conversationStatus);
+                    addOrUpdateStatus(string9, i7, string10, conversationStatus);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString11 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
+                    String string11 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearStatus(readString11, readInt6, readString12, readString13);
+                    clearStatus(string11, i8, string12, string13);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString14 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearStatuses(readString14, readInt7, readString15);
+                    clearStatuses(string14, i9, string15);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString16 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    String readString17 = parcel.readString();
+                    String string16 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice statuses = getStatuses(readString16, readInt8, readString17);
+                    ParceledListSlice statuses = getStatuses(string16, i10, string17);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(statuses, 1);
                     return true;
                 case 11:
-                    String readString18 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    String readString19 = parcel.readString();
-                    IConversationListener asInterface = IConversationListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string18 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string19 = parcel.readString();
+                    IConversationListener iConversationListenerAsInterface = IConversationListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerConversationListener(readString18, readInt9, readString19, asInterface);
+                    registerConversationListener(string18, i11, string19, iConversationListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IConversationListener asInterface2 = IConversationListener.Stub.asInterface(parcel.readStrongBinder());
+                    IConversationListener iConversationListenerAsInterface2 = IConversationListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterConversationListener(asInterface2);
+                    unregisterConversationListener(iConversationListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -298,205 +298,205 @@ public interface IPeopleManager extends IInterface {
 
             @Override // android.app.people.IPeopleManager
             public ConversationChannel getConversation(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ConversationChannel) obtain2.readTypedObject(ConversationChannel.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ConversationChannel) parcelObtain2.readTypedObject(ConversationChannel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public ParceledListSlice getRecentConversations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void removeRecentConversation(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void removeAllRecentConversations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public boolean isConversation(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public long getLastInteraction(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void addOrUpdateStatus(String str, int i, String str2, ConversationStatus conversationStatus) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(conversationStatus, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(conversationStatus, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void clearStatus(String str, int i, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void clearStatuses(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public ParceledListSlice getStatuses(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void registerConversationListener(String str, int i, String str2, IConversationListener iConversationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iConversationListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iConversationListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.people.IPeopleManager
             public void unregisterConversationListener(IConversationListener iConversationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iConversationListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iConversationListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

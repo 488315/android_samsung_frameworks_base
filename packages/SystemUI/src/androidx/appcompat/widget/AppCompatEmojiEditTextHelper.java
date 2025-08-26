@@ -15,7 +15,6 @@ import androidx.emoji2.viewsintegration.EmojiInputConnection;
 import androidx.emoji2.viewsintegration.EmojiKeyListener;
 import androidx.emoji2.viewsintegration.EmojiTextWatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatEmojiEditTextHelper {
     public final EmojiEditTextHelper mEmojiEditTextHelper;
@@ -41,10 +40,10 @@ public class AppCompatEmojiEditTextHelper {
     }
 
     public final void loadFromAttributes(AttributeSet attributeSet, int i) {
-        TypedArray obtainStyledAttributes = this.mView.getContext().obtainStyledAttributes(attributeSet, R$styleable.AppCompatTextView, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = this.mView.getContext().obtainStyledAttributes(attributeSet, R$styleable.AppCompatTextView, i, 0);
         try {
-            boolean z = obtainStyledAttributes.hasValue(14) ? obtainStyledAttributes.getBoolean(14, true) : true;
-            obtainStyledAttributes.recycle();
+            boolean z = typedArrayObtainStyledAttributes.hasValue(14) ? typedArrayObtainStyledAttributes.getBoolean(14, true) : true;
+            typedArrayObtainStyledAttributes.recycle();
             EmojiTextWatcher emojiTextWatcher = this.mEmojiEditTextHelper.mHelper.mTextWatcher;
             if (emojiTextWatcher.mEnabled != z) {
                 if (emojiTextWatcher.mInitCallback != null) {
@@ -65,7 +64,7 @@ public class AppCompatEmojiEditTextHelper {
                 }
             }
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

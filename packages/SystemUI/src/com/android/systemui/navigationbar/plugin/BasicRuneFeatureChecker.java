@@ -4,7 +4,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.util.DeviceType;
 import com.samsung.systemui.splugins.navigationbar.FeatureChecker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BasicRuneFeatureChecker implements FeatureChecker {
     @Override // com.samsung.systemui.splugins.navigationbar.FeatureChecker

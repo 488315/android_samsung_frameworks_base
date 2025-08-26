@@ -3,6 +3,7 @@ package com.android.wm.shell.back;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -39,7 +40,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
     public final BackAnimationRunner backAnimationRunner;
@@ -84,7 +84,6 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
     public final SpringForce postCommitFlingSpring = new SpringForce(100.0f).setStiffness(200.0f).setDampingRatio(0.75f);
     public final ProgressVelocityTracker velocityTracker = new ProgressVelocityTracker();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback extends IOnBackInvokedCallback.Default {
         public Callback() {
         }
@@ -95,7 +94,7 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
             crossActivityBackAnimation.progressAnimator.onBackCancelled(new Runnable() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation$Callback$onBackCancelled$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CrossActivityBackAnimation.this.finishAnimation();
+                    crossActivityBackAnimation.finishAnimation();
                 }
             });
         }
@@ -121,23 +120,23 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
             final CrossActivityBackAnimation crossActivityBackAnimation = CrossActivityBackAnimation.this;
             crossActivityBackAnimation.progressAnimator.onBackStarted(backMotionEvent, new BackProgressAnimator.ProgressCallback() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation$Callback$onBackStarted$1
                 public final void onProgressUpdate(BackEvent backEvent) {
-                    CrossActivityBackAnimation crossActivityBackAnimation2 = CrossActivityBackAnimation.this;
+                    CrossActivityBackAnimation crossActivityBackAnimation2 = crossActivityBackAnimation;
                     float interpolation = crossActivityBackAnimation2.gestureInterpolator.getInterpolation(backEvent.getProgress());
                     crossActivityBackAnimation2.gestureProgress = interpolation;
                     CrossActivityBackAnimationKt.setInterpolatedRectF(crossActivityBackAnimation2.currentClosingRect, crossActivityBackAnimation2.startClosingRect, crossActivityBackAnimation2.targetClosingRect, interpolation);
                     RectF rectF = crossActivityBackAnimation2.currentClosingRect;
                     float touchY = backEvent.getTouchY();
-                    int height = crossActivityBackAnimation2.backAnimRect.height();
+                    int iHeight = crossActivityBackAnimation2.backAnimRect.height();
                     float f = touchY - crossActivityBackAnimation2.initialTouchPos.y;
-                    float f2 = height;
+                    float f2 = iHeight;
                     float f3 = f2 / 2.0f;
-                    float max = Math.max(0.0f, ((f2 - rectF.height()) / 2.0f) - crossActivityBackAnimation2.displayBoundsMargin) * ((DecelerateInterpolator) crossActivityBackAnimation2.verticalMoveInterpolator).getInterpolation(Math.min(f3, Math.abs(f)) / f3) * (f < 0.0f ? -1 : 1);
-                    crossActivityBackAnimation2.currentClosingRect.offset(0.0f, max);
+                    float fMax = Math.max(0.0f, ((f2 - rectF.height()) / 2.0f) - crossActivityBackAnimation2.displayBoundsMargin) * ((DecelerateInterpolator) crossActivityBackAnimation2.verticalMoveInterpolator).getInterpolation(Math.min(f3, Math.abs(f)) / f3) * (f < 0.0f ? -1 : 1);
+                    crossActivityBackAnimation2.currentClosingRect.offset(0.0f, fMax);
                     RemoteAnimationTarget remoteAnimationTarget = crossActivityBackAnimation2.closingTarget;
                     CrossActivityBackAnimation.applyTransform$default(crossActivityBackAnimation2, remoteAnimationTarget != null ? remoteAnimationTarget.leash : null, crossActivityBackAnimation2.currentClosingRect, 1.0f, null, null, 24);
                     CrossActivityBackAnimationKt.setInterpolatedRectF(crossActivityBackAnimation2.currentEnteringRect, crossActivityBackAnimation2.startEnteringRect, crossActivityBackAnimation2.targetEnteringRect, interpolation);
                     if (crossActivityBackAnimation2.getAllowEnteringYShift()) {
-                        crossActivityBackAnimation2.currentEnteringRect.offset(0.0f, max);
+                        crossActivityBackAnimation2.currentEnteringRect.offset(0.0f, fMax);
                     }
                     Transformation preCommitEnteringBaseTransformation = crossActivityBackAnimation2.getPreCommitEnteringBaseTransformation(interpolation);
                     RemoteAnimationTarget remoteAnimationTarget2 = crossActivityBackAnimation2.enteringTarget;
@@ -155,7 +154,6 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -167,7 +165,6 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingMode {
         public static final /* synthetic */ FlingMode[] $VALUES;
         public static final FlingMode FLING_BOUNCE;
@@ -198,7 +195,6 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Runner extends IRemoteAnimationRunner.Default {
         public Runner() {
         }
@@ -260,11 +256,11 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
         }
         this.tempRectF.set(rectF);
         if (flingMode != FlingMode.NO_FLING) {
-            float min = Math.min(this.postCommitFlingScale.getValue() / 100.0f, flingMode == FlingMode.FLING_BOUNCE ? 1.0f : this.lastPostCommitFlingScale);
-            this.lastPostCommitFlingScale = min;
-            CrossActivityBackAnimationKt.scaleCentered$default(this.tempRectF, min);
+            float fMin = Math.min(this.postCommitFlingScale.getValue() / 100.0f, flingMode == FlingMode.FLING_BOUNCE ? 1.0f : this.lastPostCommitFlingScale);
+            this.lastPostCommitFlingScale = fMin;
+            CrossActivityBackAnimationKt.scaleCentered$default(this.tempRectF, fMin);
         }
-        float width = this.tempRectF.width() / this.backAnimRect.width();
+        float fWidth = this.tempRectF.width() / this.backAnimRect.width();
         if (transformation == null || (matrix = transformation.getMatrix()) == null) {
             matrix = this.transformMatrix;
             matrix.reset();
@@ -276,7 +272,7 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
         } else {
             f2 = 0.0f;
         }
-        matrix.postScale(width, width, f2, 0.0f);
+        matrix.postScale(fWidth, fWidth, f2, 0.0f);
         RectF rectF2 = this.tempRectF;
         matrix.postTranslate(rectF2.left, rectF2.top);
         this.transaction.setAlpha(surfaceControl, f).setMatrix(surfaceControl, matrix, this.tmpFloat9).setCrop(surfaceControl, this.cropRect).setCornerRadius(surfaceControl, this.cornerRadius);
@@ -285,12 +281,12 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
     public final SurfaceControl ensureLetterbox(Rect rect) {
         SurfaceControl.Builder hidden = new SurfaceControl.Builder().setName("Cross-Activity back animation letterbox").setCallsite("CrossActivityBackAnimation").setColorLayer().setOpaque(true).setHidden(false);
         this.rootTaskDisplayAreaOrganizer.attachToDisplayArea(0, hidden);
-        SurfaceControl build = hidden.build();
-        SurfaceControl.Transaction crop = this.transaction.setColor(build, new float[]{Color.red(this.letterboxColor) / 255.0f, Color.green(this.letterboxColor) / 255.0f, Color.blue(this.letterboxColor) / 255.0f}).setCrop(build, rect);
+        SurfaceControl surfaceControlBuild = hidden.build();
+        SurfaceControl.Transaction crop = this.transaction.setColor(surfaceControlBuild, new float[]{Color.red(this.letterboxColor) / 255.0f, Color.green(this.letterboxColor) / 255.0f, Color.blue(this.letterboxColor) / 255.0f}).setCrop(surfaceControlBuild, rect);
         RemoteAnimationTarget remoteAnimationTarget = this.closingTarget;
         remoteAnimationTarget.getClass();
-        crop.setRelativeLayer(build, remoteAnimationTarget.leash, 1).show(build);
-        return build;
+        crop.setRelativeLayer(surfaceControlBuild, remoteAnimationTarget.leash, 1).show(surfaceControlBuild);
+        return surfaceControlBuild;
     }
 
     public void finishAnimation() {
@@ -395,7 +391,7 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
                         spring.start();
                         spring.doAnimationFrame(Choreographer.getInstance().getLastFrameTimeNanos() / 1000000);
                         ValueAnimator duration = ValueAnimator.ofFloat(1.0f, 0.0f).setDuration(getPostCommitAnimationDuration());
-                        duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation$onGestureCommitted$1
+                        duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation.onGestureCommitted.1
                             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                                 float animatedFraction = valueAnimator.getAnimatedFraction();
@@ -405,7 +401,7 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
                                 }
                             }
                         });
-                        duration.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation$onGestureCommitted$2
+                        duration.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.back.CrossActivityBackAnimation.onGestureCommitted.2
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                             public final void onAnimationEnd(Animator animator) {
                                 CrossActivityBackAnimation.this.background.mCustomizer.customizeStatusBarAppearance(null);
@@ -438,20 +434,140 @@ public abstract class CrossActivityBackAnimation extends ShellBackAnimation {
 
     public abstract void preparePreCommitEnteringRectMovement();
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x017c  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0097  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void startBackAnimation(android.window.BackMotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 556
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.back.CrossActivityBackAnimation.startBackAnimation(android.window.BackMotionEvent):void");
+    public void startBackAnimation(BackMotionEvent backMotionEvent) {
+        boolean z;
+        int i;
+        Rect rect;
+        Rect bounds;
+        if (this.enteringTarget == null || this.closingTarget == null) {
+            ProtoLog.d(ShellProtoLogGroup.WM_SHELL_BACK_PREVIEW, "Entering target or closing target is null.", new Object[0]);
+            return;
+        }
+        this.swipeEdge = backMotionEvent.getSwipeEdge();
+        this.triggerBack = backMotionEvent.getTriggerBack();
+        this.initialTouchPos.set(backMotionEvent.getTouchX(), backMotionEvent.getTouchY());
+        this.transaction.setAnimationTransaction();
+        RemoteAnimationTarget remoteAnimationTarget = this.closingTarget;
+        remoteAnimationTarget.getClass();
+        boolean zIsTopActivityLetterboxed = remoteAnimationTarget.taskInfo.appCompatTaskInfo.isTopActivityLetterboxed();
+        this.isLetterboxed = zIsTopActivityLetterboxed;
+        if (zIsTopActivityLetterboxed) {
+            RemoteAnimationTarget remoteAnimationTarget2 = this.closingTarget;
+            remoteAnimationTarget2.getClass();
+            Rect rect2 = remoteAnimationTarget2.localBounds;
+            RemoteAnimationTarget remoteAnimationTarget3 = this.enteringTarget;
+            remoteAnimationTarget3.getClass();
+            z = rect2.equals(remoteAnimationTarget3.localBounds);
+        }
+        this.enteringHasSameLetterbox = z;
+        if (!this.isLetterboxed || z) {
+            Rect rect3 = this.backAnimRect;
+            RemoteAnimationTarget remoteAnimationTarget4 = this.closingTarget;
+            remoteAnimationTarget4.getClass();
+            rect3.set(remoteAnimationTarget4.localBounds);
+        } else {
+            Rect rect4 = this.backAnimRect;
+            RemoteAnimationTarget remoteAnimationTarget5 = this.closingTarget;
+            remoteAnimationTarget5.getClass();
+            rect4.set(remoteAnimationTarget5.windowConfiguration.getBounds());
+        }
+        this.backAnimRect.offsetTo(0, 0);
+        preparePreCommitClosingRectMovement(backMotionEvent.getSwipeEdge());
+        preparePreCommitEnteringRectMovement();
+        RemoteAnimationTarget remoteAnimationTarget6 = this.closingTarget;
+        remoteAnimationTarget6.getClass();
+        Rect bounds2 = remoteAnimationTarget6.windowConfiguration.getBounds();
+        int backgroundColor = this.customizedBackgroundColor;
+        if (backgroundColor == 0) {
+            if (this.isLetterboxed) {
+                backgroundColor = this.letterboxColor;
+            } else {
+                RemoteAnimationTarget remoteAnimationTarget7 = this.enteringTarget;
+                if (remoteAnimationTarget7 != null) {
+                    ActivityManager.TaskDescription taskDescription = remoteAnimationTarget7.taskInfo.taskDescription;
+                    taskDescription.getClass();
+                    backgroundColor = taskDescription.getBackgroundColor();
+                } else {
+                    i = 0;
+                }
+            }
+            i = backgroundColor;
+        } else {
+            i = backgroundColor;
+        }
+        SurfaceControl.Transaction transaction = this.transaction;
+        int i2 = this.statusbarHeight;
+        RemoteAnimationTarget remoteAnimationTarget8 = this.closingTarget;
+        remoteAnimationTarget8.getClass();
+        if (remoteAnimationTarget8.windowConfiguration.tasksAreFloating()) {
+            RemoteAnimationTarget remoteAnimationTarget9 = this.closingTarget;
+            remoteAnimationTarget9.getClass();
+            rect = remoteAnimationTarget9.localBounds;
+        } else {
+            rect = null;
+        }
+        Rect rect5 = rect;
+        float f = this.cornerRadius;
+        RemoteAnimationTarget remoteAnimationTarget10 = this.closingTarget;
+        remoteAnimationTarget10.getClass();
+        remoteAnimationTarget10.taskInfo.getDisplayId();
+        this.background.ensureBackground(bounds2, i, transaction, i2, rect5, f);
+        if (this.scrimLayer == null) {
+            boolean z2 = (this.context.getResources().getConfiguration().uiMode & 48) == 32;
+            SurfaceControl.Builder hidden = new SurfaceControl.Builder().setName("Cross-Activity back animation scrim").setCallsite("CrossActivityBackAnimation").setColorLayer().setOpaque(false).setHidden(false);
+            this.rootTaskDisplayAreaOrganizer.attachToDisplayArea(0, hidden);
+            this.scrimLayer = hidden.build();
+            float[] fArr = {0.0f, 0.0f, 0.0f};
+            this.maxScrimAlpha = z2 ? 0.8f : 0.2f;
+            if (this.isLetterboxed) {
+                RemoteAnimationTarget remoteAnimationTarget11 = this.closingTarget;
+                remoteAnimationTarget11.getClass();
+                bounds = remoteAnimationTarget11.windowConfiguration.getBounds();
+            } else {
+                RemoteAnimationTarget remoteAnimationTarget12 = this.closingTarget;
+                remoteAnimationTarget12.getClass();
+                bounds = remoteAnimationTarget12.localBounds;
+            }
+            SurfaceControl.Transaction color = this.transaction.setColor(this.scrimLayer, fArr);
+            SurfaceControl surfaceControl = this.scrimLayer;
+            surfaceControl.getClass();
+            SurfaceControl.Transaction alpha = color.setAlpha(surfaceControl, this.maxScrimAlpha);
+            SurfaceControl surfaceControl2 = this.scrimLayer;
+            surfaceControl2.getClass();
+            SurfaceControl.Transaction crop = alpha.setCrop(surfaceControl2, bounds);
+            SurfaceControl surfaceControl3 = this.scrimLayer;
+            surfaceControl3.getClass();
+            RemoteAnimationTarget remoteAnimationTarget13 = this.closingTarget;
+            remoteAnimationTarget13.getClass();
+            crop.setRelativeLayer(surfaceControl3, remoteAnimationTarget13.leash, -1).show(this.scrimLayer);
+        }
+        if (this.isLetterboxed && this.enteringHasSameLetterbox) {
+            Rect rect6 = this.cropRect;
+            RemoteAnimationTarget remoteAnimationTarget14 = this.closingTarget;
+            remoteAnimationTarget14.getClass();
+            int i3 = remoteAnimationTarget14.localBounds.left;
+            RemoteAnimationTarget remoteAnimationTarget15 = this.closingTarget;
+            remoteAnimationTarget15.getClass();
+            int i4 = remoteAnimationTarget15.localBounds.right;
+            RemoteAnimationTarget remoteAnimationTarget16 = this.closingTarget;
+            remoteAnimationTarget16.getClass();
+            rect6.set(i3, 0, i4, remoteAnimationTarget16.windowConfiguration.getBounds().height());
+            RemoteAnimationTarget remoteAnimationTarget17 = this.closingTarget;
+            if (remoteAnimationTarget17 != null) {
+                if (remoteAnimationTarget17.localBounds.left != 0 && this.leftLetterboxLayer == null) {
+                    this.leftLetterboxLayer = ensureLetterbox(new Rect(0, remoteAnimationTarget17.windowConfiguration.getBounds().top, remoteAnimationTarget17.localBounds.left, remoteAnimationTarget17.windowConfiguration.getBounds().bottom));
+                }
+                if (remoteAnimationTarget17.localBounds.right != remoteAnimationTarget17.windowConfiguration.getBounds().right && this.rightLetterboxLayer == null) {
+                    this.rightLetterboxLayer = ensureLetterbox(new Rect(remoteAnimationTarget17.localBounds.right, remoteAnimationTarget17.windowConfiguration.getBounds().top, remoteAnimationTarget17.windowConfiguration.getBounds().right, remoteAnimationTarget17.windowConfiguration.getBounds().bottom));
+                }
+            }
+        } else {
+            this.cropRect.set(this.backAnimRect);
+        }
+        applyTransaction();
     }
 }

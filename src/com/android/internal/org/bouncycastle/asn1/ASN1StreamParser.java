@@ -29,38 +29,38 @@ public class ASN1StreamParser {
     }
 
     public ASN1Encodable readObject() throws IOException {
-        int read = this._in.read();
-        if (read < 0) {
+        int i = this._in.read();
+        if (i < 0) {
             return null;
         }
-        return implParseObject(read);
+        return implParseObject(i);
     }
 
     ASN1Encodable implParseObject(int i) throws IOException {
         set00Check(false);
-        int readTagNumber = ASN1InputStream.readTagNumber(this._in, i);
-        int readLength = ASN1InputStream.readLength(this._in, this._limit, readTagNumber == 3 || readTagNumber == 4 || readTagNumber == 16 || readTagNumber == 17 || readTagNumber == 8);
-        if (readLength < 0) {
+        int tagNumber = ASN1InputStream.readTagNumber(this._in, i);
+        int length = ASN1InputStream.readLength(this._in, this._limit, tagNumber == 3 || tagNumber == 4 || tagNumber == 16 || tagNumber == 17 || tagNumber == 8);
+        if (length < 0) {
             if ((i & 32) == 0) {
                 throw new IOException("indefinite-length primitive encoding encountered");
             }
             ASN1StreamParser aSN1StreamParser = new ASN1StreamParser(new IndefiniteLengthInputStream(this._in, this._limit), this._limit, this.tmpBuffers);
             int i2 = i & 192;
             if (i2 != 0) {
-                return new BERTaggedObjectParser(i2, readTagNumber, aSN1StreamParser);
+                return new BERTaggedObjectParser(i2, tagNumber, aSN1StreamParser);
             }
-            return aSN1StreamParser.parseImplicitConstructedIL(readTagNumber);
+            return aSN1StreamParser.parseImplicitConstructedIL(tagNumber);
         }
-        DefiniteLengthInputStream definiteLengthInputStream = new DefiniteLengthInputStream(this._in, readLength, this._limit);
+        DefiniteLengthInputStream definiteLengthInputStream = new DefiniteLengthInputStream(this._in, length, this._limit);
         if ((i & 224) == 0) {
-            return parseImplicitPrimitive(readTagNumber, definiteLengthInputStream);
+            return parseImplicitPrimitive(tagNumber, definiteLengthInputStream);
         }
         ASN1StreamParser aSN1StreamParser2 = new ASN1StreamParser(definiteLengthInputStream, definiteLengthInputStream.getLimit(), this.tmpBuffers);
         int i3 = i & 192;
         if (i3 != 0) {
-            return new DLTaggedObjectParser(i3, readTagNumber, (i & 32) != 0, aSN1StreamParser2);
+            return new DLTaggedObjectParser(i3, tagNumber, (i & 32) != 0, aSN1StreamParser2);
         }
-        return aSN1StreamParser2.parseImplicitConstructedDL(readTagNumber);
+        return aSN1StreamParser2.parseImplicitConstructedDL(tagNumber);
     }
 
     ASN1Primitive loadTaggedDL(int i, int i2, boolean z) throws IOException {
@@ -143,42 +143,42 @@ public class ASN1StreamParser {
         if (i < 0 || i > 30) {
             throw new IllegalArgumentException("invalid universal tag number: " + i);
         }
-        int read = this._in.read();
-        if (read < 0) {
+        int i2 = this._in.read();
+        if (i2 < 0) {
             return null;
         }
-        if ((read & (-33)) != i) {
-            throw new IOException("unexpected identifier encountered: " + read);
+        if ((i2 & (-33)) != i) {
+            throw new IOException("unexpected identifier encountered: " + i2);
         }
-        return implParseObject(read);
+        return implParseObject(i2);
     }
 
     ASN1TaggedObjectParser parseTaggedObject() throws IOException {
-        int read = this._in.read();
-        if (read < 0) {
+        int i = this._in.read();
+        if (i < 0) {
             return null;
         }
-        if ((read & 192) == 0) {
+        if ((i & 192) == 0) {
             throw new ASN1Exception("no tagged object found");
         }
-        return (ASN1TaggedObjectParser) implParseObject(read);
+        return (ASN1TaggedObjectParser) implParseObject(i);
     }
 
     ASN1EncodableVector readVector() throws IOException {
-        int read = this._in.read();
-        if (read < 0) {
+        int i = this._in.read();
+        if (i < 0) {
             return new ASN1EncodableVector(0);
         }
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
         do {
-            ASN1Encodable implParseObject = implParseObject(read);
-            if (implParseObject instanceof InMemoryRepresentable) {
-                aSN1EncodableVector.add(((InMemoryRepresentable) implParseObject).getLoadedObject());
+            ASN1Encodable aSN1EncodableImplParseObject = implParseObject(i);
+            if (aSN1EncodableImplParseObject instanceof InMemoryRepresentable) {
+                aSN1EncodableVector.add(((InMemoryRepresentable) aSN1EncodableImplParseObject).getLoadedObject());
             } else {
-                aSN1EncodableVector.add(implParseObject.toASN1Primitive());
+                aSN1EncodableVector.add(aSN1EncodableImplParseObject.toASN1Primitive());
             }
-            read = this._in.read();
-        } while (read >= 0);
+            i = this._in.read();
+        } while (i >= 0);
         return aSN1EncodableVector;
     }
 

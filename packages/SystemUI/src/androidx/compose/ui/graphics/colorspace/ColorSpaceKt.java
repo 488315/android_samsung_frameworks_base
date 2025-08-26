@@ -4,14 +4,13 @@ import androidx.appcompat.animation.SeslRecoilAnimator$Holder$$ExternalSynthetic
 import androidx.compose.ui.graphics.colorspace.Connector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ColorSpaceKt {
     public static ColorSpace adapt$default(ColorSpace colorSpace, WhitePoint whitePoint) {
         Adaptation.Companion.getClass();
         Adaptation$Companion$Bradford$1 adaptation$Companion$Bradford$1 = Adaptation.Bradford;
         ColorModel.Companion.getClass();
-        if (ColorModel.m508equalsimpl0(colorSpace.model, ColorModel.Rgb)) {
+        if (ColorModel.m510equalsimpl0(colorSpace.model, ColorModel.Rgb)) {
             Rgb rgb = (Rgb) colorSpace;
             WhitePoint whitePoint2 = rgb.whitePoint;
             if (!compare(whitePoint2, whitePoint)) {
@@ -22,9 +21,9 @@ public abstract class ColorSpaceKt {
     }
 
     public static final float[] chromaticAdaptation(float[] fArr, float[] fArr2, float[] fArr3) {
-        float[] mul3x3Float3 = mul3x3Float3(fArr, fArr2);
-        float[] mul3x3Float32 = mul3x3Float3(fArr, fArr3);
-        return mul3x3(inverse3x3(fArr), mul3x3Diag(new float[]{mul3x3Float32[0] / mul3x3Float3[0], mul3x3Float32[1] / mul3x3Float3[1], mul3x3Float32[2] / mul3x3Float3[2]}, fArr));
+        float[] fArrMul3x3Float3 = mul3x3Float3(fArr, fArr2);
+        float[] fArrMul3x3Float32 = mul3x3Float3(fArr, fArr3);
+        return mul3x3(inverse3x3(fArr), mul3x3Diag(new float[]{fArrMul3x3Float32[0] / fArrMul3x3Float3[0], fArrMul3x3Float32[1] / fArrMul3x3Float3[1], fArrMul3x3Float32[2] / fArrMul3x3Float3[2]}, fArr));
     }
 
     public static final boolean compare(WhitePoint whitePoint, WhitePoint whitePoint2) {
@@ -35,7 +34,7 @@ public abstract class ColorSpaceKt {
     }
 
     /* renamed from: createConnector-YBCOT_4, reason: not valid java name */
-    public static final Connector m511createConnectorYBCOT_4(ColorSpace colorSpace, ColorSpace colorSpace2) {
+    public static final Connector m513createConnectorYBCOT_4(ColorSpace colorSpace, ColorSpace colorSpace2) {
         if (colorSpace == colorSpace2) {
             Connector.Companion.getClass();
             RenderIntent.Companion.getClass();
@@ -45,7 +44,7 @@ public abstract class ColorSpaceKt {
         long j = ColorModel.Rgb;
         int i = 0;
         DefaultConstructorMarker defaultConstructorMarker = null;
-        return (ColorModel.m508equalsimpl0(colorSpace.model, j) && ColorModel.m508equalsimpl0(colorSpace2.model, j)) ? new Connector.RgbConnector((Rgb) colorSpace, (Rgb) colorSpace2, i, defaultConstructorMarker) : new Connector(colorSpace, colorSpace2, i, defaultConstructorMarker);
+        return (ColorModel.m510equalsimpl0(colorSpace.model, j) && ColorModel.m510equalsimpl0(colorSpace2.model, j)) ? new Connector.RgbConnector((Rgb) colorSpace, (Rgb) colorSpace2, i, defaultConstructorMarker) : new Connector(colorSpace, colorSpace2, i, defaultConstructorMarker);
     }
 
     public static final float[] inverse3x3(float[] fArr) {
@@ -134,10 +133,7 @@ public abstract class ColorSpaceKt {
     }
 
     public static final float[] mul3x3Float3(float[] fArr, float[] fArr2) {
-        if (fArr.length < 9) {
-            return fArr2;
-        }
-        if (fArr2.length < 3) {
+        if (fArr.length < 9 || fArr2.length < 3) {
             return fArr2;
         }
         float f = fArr2[0];

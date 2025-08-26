@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.support.v4.media.session.MediaSessionCompat;
 import androidx.collection.ArrayMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MediaMetadataCompat implements Parcelable {
     public static final Parcelable.Creator<MediaMetadataCompat> CREATOR;
@@ -69,13 +68,13 @@ public final class MediaMetadataCompat implements Parcelable {
         if (obj == null) {
             return null;
         }
-        Parcel obtain = Parcel.obtain();
-        ((MediaMetadata) obj).writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        MediaMetadataCompat createFromParcel = CREATOR.createFromParcel(obtain);
-        obtain.recycle();
-        createFromParcel.getClass();
-        return createFromParcel;
+        Parcel parcelObtain = Parcel.obtain();
+        ((MediaMetadata) obj).writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        MediaMetadataCompat mediaMetadataCompatCreateFromParcel = CREATOR.createFromParcel(parcelObtain);
+        parcelObtain.recycle();
+        mediaMetadataCompatCreateFromParcel.getClass();
+        return mediaMetadataCompatCreateFromParcel;
     }
 
     @Override // android.os.Parcelable

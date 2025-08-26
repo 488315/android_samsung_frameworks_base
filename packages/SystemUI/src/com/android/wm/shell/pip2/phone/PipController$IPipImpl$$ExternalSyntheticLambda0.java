@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.PictureInPictureParams;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.IInterface;
@@ -21,7 +22,6 @@ import com.android.wm.shell.pip2.phone.PipController;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipController$IPipImpl$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId = 0;
@@ -38,7 +38,7 @@ public final /* synthetic */ class PipController$IPipImpl$$ExternalSyntheticLamb
     }
 
     @Override // java.util.function.Consumer
-    public final void accept(Object obj) {
+    public final void accept(Object obj) throws Resources.NotFoundException {
         DisplayLayout displayLayout;
         switch (this.$r8$classId) {
             case 0:
@@ -94,9 +94,9 @@ public final /* synthetic */ class PipController$IPipImpl$$ExternalSyntheticLamb
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
                     ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 8767559398966243625L, 0, String.valueOf(componentName2));
                 }
-                boolean isTrue = DesktopExperienceFlags.ENABLE_CONNECTED_DISPLAYS_PIP.isTrue();
+                boolean zIsTrue = DesktopExperienceFlags.ENABLE_CONNECTED_DISPLAYS_PIP.isTrue();
                 PipDisplayLayoutState pipDisplayLayoutState = pipController2.mPipDisplayLayoutState;
-                if (isTrue && (displayLayout = pipController2.mDisplayController.getDisplayLayout(i5)) != null) {
+                if (zIsTrue && (displayLayout = pipController2.mDisplayController.getDisplayLayout(i5)) != null) {
                     pipDisplayLayoutState.mDisplayId = i5;
                     pipDisplayLayoutState.mDisplayLayout.set(displayLayout);
                 }

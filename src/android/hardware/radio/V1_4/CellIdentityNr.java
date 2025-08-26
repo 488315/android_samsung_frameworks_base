@@ -42,13 +42,13 @@ public final class CellIdentityNr {
 
     public static final ArrayList<CellIdentityNr> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentityNr> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityNr cellIdentityNr = new CellIdentityNr();
-            cellIdentityNr.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            cellIdentityNr.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             arrayList.add(cellIdentityNr);
         }
         return arrayList;

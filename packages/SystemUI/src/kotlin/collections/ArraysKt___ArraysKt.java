@@ -2,6 +2,7 @@ package kotlin.collections;
 
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import com.android.systemui.media.mediaoutput.ext.BitmapExtKt$$ExternalSyntheticLambda0;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,7 +17,6 @@ import kotlin.ranges.IntRange;
 import kotlin.sequences.EmptySequence;
 import kotlin.sequences.Sequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ArraysKt___ArraysKt extends ArraysKt___ArraysJvmKt {
     public static Iterable asIterable(Object[] objArr) {
@@ -114,7 +114,7 @@ public class ArraysKt___ArraysKt extends ArraysKt___ArraysJvmKt {
         return -1;
     }
 
-    public static String joinToString$default(byte[] bArr, CharSequence charSequence, BitmapExtKt$$ExternalSyntheticLambda0 bitmapExtKt$$ExternalSyntheticLambda0, int i) {
+    public static String joinToString$default(byte[] bArr, CharSequence charSequence, BitmapExtKt$$ExternalSyntheticLambda0 bitmapExtKt$$ExternalSyntheticLambda0, int i) throws IOException {
         String str = (i & 2) != 0 ? "" : "[";
         String str2 = (i & 4) == 0 ? "]" : "";
         if ((i & 32) != 0) {
@@ -129,7 +129,7 @@ public class ArraysKt___ArraysKt extends ArraysKt___ArraysJvmKt {
                 sb.append(charSequence);
             }
             if (bitmapExtKt$$ExternalSyntheticLambda0 != null) {
-                sb.append((CharSequence) bitmapExtKt$$ExternalSyntheticLambda0.mo779invoke(Byte.valueOf(b)));
+                sb.append((CharSequence) bitmapExtKt$$ExternalSyntheticLambda0.mo781invoke(Byte.valueOf(b)));
             } else {
                 sb.append((CharSequence) String.valueOf((int) b));
             }
@@ -167,9 +167,9 @@ public class ArraysKt___ArraysKt extends ArraysKt___ArraysJvmKt {
     }
 
     public static List zip(int[] iArr, int[] iArr2) {
-        int min = Math.min(iArr.length, iArr2.length);
-        ArrayList arrayList = new ArrayList(min);
-        for (int i = 0; i < min; i++) {
+        int iMin = Math.min(iArr.length, iArr2.length);
+        ArrayList arrayList = new ArrayList(iMin);
+        for (int i = 0; i < iMin; i++) {
             arrayList.add(new Pair(Integer.valueOf(iArr[i]), Integer.valueOf(iArr2[i])));
         }
         return arrayList;

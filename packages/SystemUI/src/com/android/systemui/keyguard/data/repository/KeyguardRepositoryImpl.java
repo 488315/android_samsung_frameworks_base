@@ -47,7 +47,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardRepositoryImpl implements KeyguardRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -102,7 +101,6 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
     public final UserTracker userTracker;
     public final StateFlowImpl zoomOut;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -128,7 +126,7 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 StateFlowImpl stateFlowImpl = KeyguardRepositoryImpl.this.isKeyguardShowing;
-                C01181 c01181 = new FlowCollector() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl.1.1
+                C02191 c02191 = new FlowCollector() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         ((Boolean) obj2).booleanValue();
@@ -136,7 +134,7 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
                     }
                 };
                 this.label = 1;
-                if (stateFlowImpl.collect(c01181, this) == coroutineSingletons) {
+                if (stateFlowImpl.collect(c02191, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -149,7 +147,6 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -159,7 +156,6 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -247,60 +243,59 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
         this.dreamOverlayCallbackController = dreamOverlayCallbackController;
         this.systemClock = systemClock;
         this.userTracker = userTracker;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(DismissAction.None.INSTANCE);
-        this._dismissAction = MutableStateFlow;
-        this.dismissAction = FlowKt.asStateFlow(MutableStateFlow);
-        SharedFlowImpl MutableSharedFlow$default = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
-        this._keyguardDone = MutableSharedFlow$default;
-        this.keyguardDone = FlowKt.asSharedFlow(MutableSharedFlow$default);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(DismissAction.None.INSTANCE);
+        this._dismissAction = stateFlowImplMutableStateFlow;
+        this.dismissAction = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        SharedFlowImpl sharedFlowImplMutableSharedFlow$default = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
+        this._keyguardDone = sharedFlowImplMutableSharedFlow$default;
+        this.keyguardDone = FlowKt.asSharedFlow(sharedFlowImplMutableSharedFlow$default);
         this.keyguardDoneAnimationsFinished = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._animateBottomAreaDozingTransitions = MutableStateFlow2;
-        this.animateBottomAreaDozingTransitions = FlowKt.asStateFlow(MutableStateFlow2);
-        Float valueOf = Float.valueOf(1.0f);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(valueOf);
-        this._keyguardAlpha = MutableStateFlow3;
-        FlowKt.asStateFlow(MutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._animateBottomAreaDozingTransitions = stateFlowImplMutableStateFlow2;
+        this.animateBottomAreaDozingTransitions = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        Float fValueOf = Float.valueOf(1.0f);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._keyguardAlpha = stateFlowImplMutableStateFlow3;
+        FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.onCameraLaunchDetected = StateFlowKt.MutableStateFlow(new CameraLaunchSourceModel(null, 0L, 3, null));
-        this.panelAlpha = StateFlowKt.MutableStateFlow(valueOf);
+        this.panelAlpha = StateFlowKt.MutableStateFlow(fValueOf);
         this.zoomOut = StateFlowKt.MutableStateFlow(Float.valueOf(0.0f));
         this.topClippingBounds = StateFlowKt.MutableStateFlow(null);
         KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) keyguardStateController;
         this.isKeyguardShowing = StateFlowKt.MutableStateFlow(Boolean.valueOf(keyguardStateControllerImpl.mShowing));
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
-        this._isAodAvailable = MutableStateFlow4;
-        this.isAodAvailable = FlowKt.asStateFlow(MutableStateFlow4);
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(bool);
+        this._isAodAvailable = stateFlowImplMutableStateFlow4;
+        this.isAodAvailable = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
         this.isKeyguardOccluded = StateFlowKt.MutableStateFlow(Boolean.valueOf(keyguardStateControllerImpl.mOccluded));
         this.isKeyguardDismissible = StateFlowKt.MutableStateFlow(Boolean.valueOf(keyguardStateController.isUnlocked()));
         KeyguardStateControllerImpl keyguardStateControllerImpl2 = (KeyguardStateControllerImpl) keyguardStateController;
         this.isKeyguardGoingAway = StateFlowKt.MutableStateFlow(Boolean.valueOf(keyguardStateControllerImpl2.mKeyguardGoingAway));
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(Boolean.valueOf(!lockPatternUtils.isLockScreenDisabled(((UserTrackerImpl) userTracker).getUserId())));
-        this._isKeyguardEnabled = MutableStateFlow5;
-        this.isKeyguardEnabled = FlowKt.asStateFlow(MutableStateFlow5);
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
-        this._canIgnoreAuthAndReturnToGone = MutableStateFlow6;
-        this.canIgnoreAuthAndReturnToGone = FlowKt.asStateFlow(MutableStateFlow6);
-        StateFlowImpl MutableStateFlow7 = StateFlowKt.MutableStateFlow(Boolean.valueOf(statusBarStateController.isDozing()));
-        this._isDozing = MutableStateFlow7;
-        this.isDozing = FlowKt.asStateFlow(MutableStateFlow7);
-        StateFlowImpl MutableStateFlow8 = StateFlowKt.MutableStateFlow(0L);
-        this._dozeTimeTick = MutableStateFlow8;
-        this.dozeTimeTick = FlowKt.asStateFlow(MutableStateFlow8);
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(Boolean.valueOf(!lockPatternUtils.isLockScreenDisabled(((UserTrackerImpl) userTracker).getUserId())));
+        this._isKeyguardEnabled = stateFlowImplMutableStateFlow5;
+        this.isKeyguardEnabled = FlowKt.asStateFlow(stateFlowImplMutableStateFlow5);
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
+        this._canIgnoreAuthAndReturnToGone = stateFlowImplMutableStateFlow6;
+        this.canIgnoreAuthAndReturnToGone = FlowKt.asStateFlow(stateFlowImplMutableStateFlow6);
+        StateFlowImpl stateFlowImplMutableStateFlow7 = StateFlowKt.MutableStateFlow(Boolean.valueOf(statusBarStateController.isDozing()));
+        this._isDozing = stateFlowImplMutableStateFlow7;
+        this.isDozing = FlowKt.asStateFlow(stateFlowImplMutableStateFlow7);
+        StateFlowImpl stateFlowImplMutableStateFlow8 = StateFlowKt.MutableStateFlow(0L);
+        this._dozeTimeTick = stateFlowImplMutableStateFlow8;
+        this.dozeTimeTick = FlowKt.asStateFlow(stateFlowImplMutableStateFlow8);
         this.showDismissibleKeyguard = StateFlowKt.MutableStateFlow(0L);
-        StateFlowImpl MutableStateFlow9 = StateFlowKt.MutableStateFlow(null);
-        this._lastDozeTapToWakePosition = MutableStateFlow9;
-        this.lastDozeTapToWakePosition = FlowKt.asStateFlow(MutableStateFlow9);
+        StateFlowImpl stateFlowImplMutableStateFlow9 = StateFlowKt.MutableStateFlow(null);
+        this._lastDozeTapToWakePosition = stateFlowImplMutableStateFlow9;
+        this.lastDozeTapToWakePosition = FlowKt.asStateFlow(stateFlowImplMutableStateFlow9);
         this.lastRootViewTapPosition = StateFlowKt.MutableStateFlow(null);
         this.ambientIndicationVisible = StateFlowKt.MutableStateFlow(bool);
         this.isDreamingWithOverlay = FlowKt.distinctUntilChanged(FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$isDreamingWithOverlay$1(this, null)));
         this.isDreaming = StateFlowKt.MutableStateFlow(bool);
         this._preSceneLinearDozeAmount = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$_preSceneLinearDozeAmount$1(statusBarStateController, null));
         this.dozeTransitionModel = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$dozeTransitionModel$1(this, null));
-        final Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$isEncryptedOrLockdown$1(this, null));
+        final Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$isEncryptedOrLockdown$1(this, null));
         this.isEncryptedOrLockdown = FlowKt.flowOn(FlowKt.mapLatest(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new KeyguardRepositoryImpl$isEncryptedOrLockdown$3(this, null), new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -330,88 +325,64 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
                     this.this$0 = keyguardRepositoryImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L50
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        java.lang.Number r6 = (java.lang.Number) r6
-                        int r6 = r6.intValue()
-                        com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl r2 = r4.this$0
-                        com.android.systemui.settings.UserTracker r2 = r2.userTracker
-                        com.android.systemui.settings.UserTrackerImpl r2 = (com.android.systemui.settings.UserTrackerImpl) r2
-                        int r2 = r2.getUserId()
-                        if (r6 != r2) goto L50
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L50
-                        return r1
-                    L50:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((Number) obj).intValue() == ((UserTrackerImpl) this.this$0.userTracker).getUserId()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowConflatedCallbackFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new KeyguardRepositoryImpl$isEncryptedOrLockdown$4(this, null)), coroutineDispatcher);
-        Flow conflatedCallbackFlow2 = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$statusBarState$1(statusBarStateController, this, null));
+        Flow flowConflatedCallbackFlow2 = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$statusBarState$1(statusBarStateController, this, null));
         SharingStarted.Companion.getClass();
-        this.statusBarState = FlowKt.stateIn(conflatedCallbackFlow2, coroutineScope, SharingStarted.Companion.Eagerly, statusBarStateIntToObject(statusBarStateController.getState()));
-        StateFlowImpl MutableStateFlow10 = StateFlowKt.MutableStateFlow(new BiometricUnlockModel(BiometricUnlockMode.NONE, null));
-        this._biometricUnlockState = MutableStateFlow10;
-        this.biometricUnlockState = FlowKt.asStateFlow(MutableStateFlow10);
+        this.statusBarState = FlowKt.stateIn(flowConflatedCallbackFlow2, coroutineScope, SharingStarted.Companion.Eagerly, statusBarStateIntToObject(statusBarStateController.getState()));
+        StateFlowImpl stateFlowImplMutableStateFlow10 = StateFlowKt.MutableStateFlow(new BiometricUnlockModel(BiometricUnlockMode.NONE, null));
+        this._biometricUnlockState = stateFlowImplMutableStateFlow10;
+        this.biometricUnlockState = FlowKt.asStateFlow(stateFlowImplMutableStateFlow10);
         this.fingerprintSensorLocation = FlowConflatedKt.conflatedCallbackFlow(new KeyguardRepositoryImpl$fingerprintSensorLocation$1(this, null));
         this.faceSensorLocation = ((FacePropertyRepositoryImpl) facePropertyRepository).sensorLocation;
-        StateFlowImpl MutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
-        this._isQuickSettingsVisible = MutableStateFlow11;
-        this.isQuickSettingsVisible = FlowKt.asStateFlow(MutableStateFlow11);
+        StateFlowImpl stateFlowImplMutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
+        this._isQuickSettingsVisible = stateFlowImplMutableStateFlow11;
+        this.isQuickSettingsVisible = FlowKt.asStateFlow(stateFlowImplMutableStateFlow11);
         final ?? r1 = new KeyguardStateController.Callback() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$callback$1
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onKeyguardShowingChanged() {
-                KeyguardRepositoryImpl keyguardRepositoryImpl = KeyguardRepositoryImpl.this;
+                KeyguardRepositoryImpl keyguardRepositoryImpl = this.this$0;
                 StateFlowImpl stateFlowImpl = keyguardRepositoryImpl.isKeyguardShowing;
                 KeyguardStateController keyguardStateController2 = keyguardRepositoryImpl.keyguardStateController;
                 stateFlowImpl.updateState(null, Boolean.valueOf(((KeyguardStateControllerImpl) keyguardStateController2).mShowing));
@@ -421,7 +392,7 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
 
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onUnlockedChanged() {
-                KeyguardRepositoryImpl keyguardRepositoryImpl = KeyguardRepositoryImpl.this;
+                KeyguardRepositoryImpl keyguardRepositoryImpl = this.this$0;
                 keyguardRepositoryImpl.isKeyguardDismissible.updateState(null, Boolean.valueOf(keyguardRepositoryImpl.keyguardStateController.isUnlocked()));
             }
         };
@@ -429,8 +400,8 @@ public final class KeyguardRepositoryImpl implements KeyguardRepository {
         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(null), 7).invokeOnCompletion(new Function1() { // from class: com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((KeyguardStateControllerImpl) KeyguardRepositoryImpl.this.keyguardStateController).removeCallback(r1);
+            public final Object mo781invoke(Object obj) {
+                ((KeyguardStateControllerImpl) this.f$0.keyguardStateController).removeCallback(r1);
                 return Unit.INSTANCE;
             }
         });

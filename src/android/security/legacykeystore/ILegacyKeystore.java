@@ -72,9 +72,9 @@ public interface ILegacyKeystore extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILegacyKeystore.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILegacyKeystore)) {
-                return (ILegacyKeystore) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILegacyKeystore.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILegacyKeystore)) {
+                return (ILegacyKeystore) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,30 +110,30 @@ public interface ILegacyKeystore extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                byte[] bArr = get(readString, readInt);
+                byte[] bArr = get(string, i3);
                 parcel2.writeNoException();
                 parcel2.writeByteArray(bArr);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                put(readString2, readInt2, createByteArray);
+                put(string2, i4, bArrCreateByteArray);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString3 = parcel.readString();
-                int readInt3 = parcel.readInt();
+                String string3 = parcel.readString();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                remove(readString3, readInt3);
+                remove(string3, i5);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                int readInt4 = parcel.readInt();
+                String string4 = parcel.readString();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                String[] list = list(readString4, readInt4);
+                String[] list = list(string4, i6);
                 parcel2.writeNoException();
                 parcel2.writeStringArray(list);
             } else {
@@ -160,68 +160,68 @@ public interface ILegacyKeystore extends IInterface {
 
             @Override // android.security.legacykeystore.ILegacyKeystore
             public byte[] get(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.legacykeystore.ILegacyKeystore
             public void put(String str, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.legacykeystore.ILegacyKeystore
             public void remove(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.legacykeystore.ILegacyKeystore
             public String[] list(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(ILegacyKeystore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

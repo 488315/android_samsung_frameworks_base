@@ -7,11 +7,17 @@ import com.android.systemui.bouncer.data.repository.KeyguardBouncerRepositoryImp
 import com.android.systemui.keyguard.data.repository.KeyguardRepository;
 import com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import com.android.systemui.keyguard.shared.model.KeyguardState;
 import com.android.systemui.keyguard.shared.model.StatusBarState;
+import com.android.systemui.keyguard.shared.model.TransitionState;
+import com.android.systemui.keyguard.shared.model.TransitionStep;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
+import com.android.systemui.power.shared.model.ScreenPowerState;
 import com.android.systemui.scrim.ScrimView;
 import com.android.systemui.shade.data.repository.ShadeRepository;
 import com.android.systemui.shade.data.repository.ShadeRepositoryImpl;
+import com.android.systemui.statusbar.phone.QSScrimViewSwitch;
+import kotlin.NoWhenBranchMatchedException;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -30,7 +36,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class QSScrimViewSwitch {
     public final StateFlowImpl _scrimBehindAlpha;
@@ -40,7 +45,6 @@ public final class QSScrimViewSwitch {
     public final ScrimView scrimInFront;
     public int visibility;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.QSScrimViewSwitch$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function3 {
         /* synthetic */ int I$0;
@@ -53,11 +57,11 @@ public final class QSScrimViewSwitch {
 
         @Override // kotlin.jvm.functions.Function3
         public final Object invoke(Object obj, Object obj2, Object obj3) {
-            int intValue = ((Number) obj).intValue();
-            boolean booleanValue = ((Boolean) obj2).booleanValue();
+            int iIntValue = ((Number) obj).intValue();
+            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
             AnonymousClass2 anonymousClass2 = QSScrimViewSwitch.this.new AnonymousClass2((Continuation) obj3);
-            anonymousClass2.I$0 = intValue;
-            anonymousClass2.Z$0 = booleanValue;
+            anonymousClass2.I$0 = iIntValue;
+            anonymousClass2.Z$0 = zBooleanValue;
             return anonymousClass2.invokeSuspend(Unit.INSTANCE);
         }
 
@@ -78,20 +82,19 @@ public final class QSScrimViewSwitch {
                 return null;
             }
             QSScrimViewSwitch qSScrimViewSwitch = QSScrimViewSwitch.this;
-            int intValue = num.intValue();
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(qSScrimViewSwitch.currentVisibility, intValue, "set visibility[", " => ", "] vis: ");
-            m.append(i);
-            m.append(" | pbs: ");
-            m.append(z);
-            Log.d("QSScrimViewSwitch", m.toString());
-            qSScrimViewSwitch.currentVisibility = intValue;
-            qSScrimViewSwitch.scrimBehind.setVisibility(intValue);
-            qSScrimViewSwitch.scrimInFront.setVisibility(intValue);
+            int iIntValue = num.intValue();
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(qSScrimViewSwitch.currentVisibility, iIntValue, "set visibility[", " => ", "] vis: ");
+            sbM.append(i);
+            sbM.append(" | pbs: ");
+            sbM.append(z);
+            Log.d("QSScrimViewSwitch", sbM.toString());
+            qSScrimViewSwitch.currentVisibility = iIntValue;
+            qSScrimViewSwitch.scrimBehind.setVisibility(iIntValue);
+            qSScrimViewSwitch.scrimInFront.setVisibility(iIntValue);
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,7 +104,6 @@ public final class QSScrimViewSwitch {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -130,15 +132,14 @@ public final class QSScrimViewSwitch {
     public QSScrimViewSwitch(KeyguardBouncerRepository keyguardBouncerRepository, KeyguardRepository keyguardRepository, KeyguardTransitionInteractor keyguardTransitionInteractor, PowerInteractor powerInteractor, ShadeRepository shadeRepository, CoroutineScope coroutineScope, ScrimView scrimView, ScrimView scrimView2) {
         this.scrimBehind = scrimView;
         this.scrimInFront = scrimView2;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Float.valueOf(0.0f));
-        this._scrimBehindAlpha = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow);
-        this.scrimBehindAlpha = asStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Float.valueOf(0.0f));
+        this._scrimBehindAlpha = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.scrimBehindAlpha = readonlyStateFlowAsStateFlow;
         ShadeRepositoryImpl shadeRepositoryImpl = (ShadeRepositoryImpl) shadeRepository;
-        final Flow[] flowArr = {((KeyguardRepositoryImpl) keyguardRepository).statusBarState, keyguardTransitionInteractor.currentKeyguardState, keyguardTransitionInteractor.transitionState, powerInteractor.screenPowerState, shadeRepositoryImpl.lockscreenShadeExpansion, shadeRepositoryImpl.legacyShadeExpansion, shadeRepositoryImpl.qsExpansion, asStateFlow};
+        final Flow[] flowArr = {((KeyguardRepositoryImpl) keyguardRepository).statusBarState, keyguardTransitionInteractor.currentKeyguardState, keyguardTransitionInteractor.transitionState, powerInteractor.screenPowerState, shadeRepositoryImpl.lockscreenShadeExpansion, shadeRepositoryImpl.legacyShadeExpansion, shadeRepositoryImpl.qsExpansion, readonlyStateFlowAsStateFlow};
         FlowKt.launchIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -160,32 +161,104 @@ public final class QSScrimViewSwitch {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:20:0x00eb  */
-                /* JADX WARN: Removed duplicated region for block: B:27:0x0177 A[RETURN] */
+                /* JADX WARN: Removed duplicated region for block: B:17:0x0077  */
+                /* JADX WARN: Removed duplicated region for block: B:54:0x00eb  */
+                /* JADX WARN: Removed duplicated region for block: B:60:0x0166  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invokeSuspend(java.lang.Object r19) {
-                    /*
-                        Method dump skipped, instructions count: 379
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                public final Object invokeSuspend(Object obj) {
+                    Integer num;
+                    int iIntValue;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        FlowCollector flowCollector = (FlowCollector) this.L$0;
+                        Object[] objArr = (Object[]) this.L$1;
+                        Object obj2 = objArr[0];
+                        Object obj3 = objArr[1];
+                        Object obj4 = objArr[2];
+                        Object obj5 = objArr[3];
+                        Object obj6 = objArr[4];
+                        Object obj7 = objArr[5];
+                        Object obj8 = objArr[6];
+                        float fFloatValue = ((Number) objArr[7]).floatValue();
+                        float fFloatValue2 = ((Number) obj8).floatValue();
+                        float fFloatValue3 = ((Number) obj7).floatValue();
+                        float fFloatValue4 = ((Number) obj6).floatValue();
+                        ScreenPowerState screenPowerState = (ScreenPowerState) obj5;
+                        TransitionStep transitionStep = (TransitionStep) obj4;
+                        KeyguardState keyguardState = (KeyguardState) obj3;
+                        StatusBarState statusBarState = (StatusBarState) obj2;
+                        int i2 = QSScrimViewSwitch.WhenMappings.$EnumSwitchMapping$0[statusBarState.ordinal()];
+                        if (i2 == 1) {
+                            if (keyguardState == KeyguardState.DOZING) {
+                                num = new Integer(0);
+                            } else if (fFloatValue4 > 0.0f || fFloatValue2 > 0.0f) {
+                                num = new Integer(8);
+                            } else if (fFloatValue4 == 0.0f && fFloatValue2 == 0.0f && fFloatValue == 0.0f) {
+                                num = new Integer(0);
+                            }
+                            if (num != null) {
+                            }
+                        } else if (i2 == 2) {
+                            if (keyguardState == KeyguardState.DOZING) {
+                                num = new Integer(0);
+                            } else if (fFloatValue3 > 0.0f) {
+                                if (screenPowerState == ScreenPowerState.SCREEN_TURNING_ON) {
+                                    num = new Integer(0);
+                                } else if (transitionStep.transitionState == TransitionState.FINISHED) {
+                                    num = new Integer(8);
+                                }
+                            } else if (fFloatValue3 == 0.0f && fFloatValue == 0.0f) {
+                                num = new Integer(0);
+                            }
+                            if (num != null) {
+                            }
+                        } else {
+                            if (i2 != 3) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            num = (fFloatValue4 > 0.0f || fFloatValue2 > 0.0f) ? new Integer(8) : null;
+                            if (num != null) {
+                                Integer num2 = this.this$0.visibility != num.intValue() ? num : null;
+                                if (num2 != null) {
+                                    int iIntValue2 = num2.intValue();
+                                    Log.d("QSScrimViewSwitch", this.this$0.visibility + " => " + iIntValue2 + ": sb: " + statusBarState + " | cks: " + keyguardState + " | ts: " + transitionStep.transitionState + " | sps: " + screenPowerState + " | lsse: " + fFloatValue4 + " | lse: " + fFloatValue3 + " | qe: " + fFloatValue2 + " | sba: " + fFloatValue);
+                                    this.this$0.visibility = iIntValue2;
+                                    iIntValue = num2.intValue();
+                                } else {
+                                    iIntValue = this.this$0.visibility;
+                                }
+                                Integer num3 = new Integer(iIntValue);
+                                this.label = 1;
+                                if (flowCollector.emit(num3, this) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            }
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.phone.QSScrimViewSwitch$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }), ((KeyguardBouncerRepositoryImpl) keyguardBouncerRepository).primaryBouncerShow, new AnonymousClass2(null)), coroutineScope);
     }

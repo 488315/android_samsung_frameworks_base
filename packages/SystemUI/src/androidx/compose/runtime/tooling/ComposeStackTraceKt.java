@@ -7,7 +7,6 @@ import kotlin.ExceptionsKt__ExceptionsKt;
 import kotlin.internal.PlatformImplementationsKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ComposeStackTraceKt {
     public static final boolean tryAttachComposeStackTrace(Throwable th, Function0 function0) {
@@ -24,9 +23,9 @@ public abstract class ComposeStackTraceKt {
         }
         try {
             List list = (List) function0.invoke();
-            boolean isEmpty = list.isEmpty();
-            z = !isEmpty;
-            diagnosticComposeException = !isEmpty ? new DiagnosticComposeException(list) : null;
+            boolean zIsEmpty = list.isEmpty();
+            z = !zIsEmpty;
+            diagnosticComposeException = !zIsEmpty ? new DiagnosticComposeException(list) : null;
         } catch (Throwable th2) {
             diagnosticComposeException = th2;
         }

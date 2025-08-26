@@ -150,13 +150,13 @@ public abstract class TvInputService extends Service {
                 if (iTvInputSessionCallback == null) {
                     return;
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = inputChannel;
-                obtain.arg2 = iTvInputSessionCallback;
-                obtain.arg3 = str;
-                obtain.arg4 = str2;
-                obtain.arg5 = attributionSource;
-                TvInputService.this.mServiceHandler.obtainMessage(1, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = inputChannel;
+                someArgsObtain.arg2 = iTvInputSessionCallback;
+                someArgsObtain.arg3 = str;
+                someArgsObtain.arg4 = str2;
+                someArgsObtain.arg5 = attributionSource;
+                TvInputService.this.mServiceHandler.obtainMessage(1, someArgsObtain).sendToTarget();
             }
 
             @Override // android.media.tv.ITvInputService
@@ -164,11 +164,11 @@ public abstract class TvInputService extends Service {
                 if (iTvInputSessionCallback == null) {
                     return;
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = iTvInputSessionCallback;
-                obtain.arg2 = str;
-                obtain.arg3 = str2;
-                TvInputService.this.mServiceHandler.obtainMessage(3, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = iTvInputSessionCallback;
+                someArgsObtain.arg2 = str;
+                someArgsObtain.arg3 = str2;
+                TvInputService.this.mServiceHandler.obtainMessage(3, someArgsObtain).sendToTarget();
             }
 
             @Override // android.media.tv.ITvInputService
@@ -219,9 +219,9 @@ public abstract class TvInputService extends Service {
                 TvInputService.this.mServiceHandler.obtainMessage(8, hdmiDeviceInfo).sendToTarget();
             }
         };
-        IBinder createExtension = createExtension();
-        if (createExtension != null) {
-            stub.setExtension(createExtension);
+        IBinder iBinderCreateExtension = createExtension();
+        if (iBinderCreateExtension != null) {
+            stub.setExtension(iBinderCreateExtension);
         }
         return stub;
     }
@@ -665,28 +665,28 @@ public abstract class TvInputService extends Service {
 
         public void notifyAdBufferConsumed(AdBuffer adBuffer) {
             try {
-                final AdBuffer dupAdBuffer = AdBuffer.dupAdBuffer(adBuffer);
+                final AdBuffer adBufferDupAdBuffer = AdBuffer.dupAdBuffer(adBuffer);
                 executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.TvInputService.Session.17
                     @Override // java.lang.Runnable
                     public void run() {
                         try {
                             try {
                                 if (Session.this.mSessionCallback != null) {
-                                    Session.this.mSessionCallback.onAdBufferConsumed(dupAdBuffer);
+                                    Session.this.mSessionCallback.onAdBufferConsumed(adBufferDupAdBuffer);
                                 }
-                                AdBuffer adBuffer2 = dupAdBuffer;
+                                AdBuffer adBuffer2 = adBufferDupAdBuffer;
                                 if (adBuffer2 != null) {
                                     adBuffer2.getSharedMemory().close();
                                 }
                             } catch (RemoteException e) {
                                 Log.w(TvInputService.TAG, "error in notifyAdBufferConsumed", e);
-                                AdBuffer adBuffer3 = dupAdBuffer;
+                                AdBuffer adBuffer3 = adBufferDupAdBuffer;
                                 if (adBuffer3 != null) {
                                     adBuffer3.getSharedMemory().close();
                                 }
                             }
                         } catch (Throwable th) {
-                            AdBuffer adBuffer4 = dupAdBuffer;
+                            AdBuffer adBuffer4 = adBufferDupAdBuffer;
                             if (adBuffer4 != null) {
                                 adBuffer4.getSharedMemory().close();
                             }
@@ -936,9 +936,9 @@ public abstract class TvInputService extends Service {
             this.mOverlayFrame = rect;
             onOverlayViewSizeChanged(rect.right - rect.left, rect.bottom - rect.top);
             if (this.mOverlayViewEnabled) {
-                View onCreateOverlayView = onCreateOverlayView();
-                this.mOverlayView = onCreateOverlayView;
-                if (onCreateOverlayView == null) {
+                View viewOnCreateOverlayView = onCreateOverlayView();
+                this.mOverlayView = viewOnCreateOverlayView;
+                if (viewOnCreateOverlayView == null) {
                     return;
                 }
                 OverlayViewCleanUpTask overlayViewCleanUpTask = this.mOverlayViewCleanUpTask;
@@ -1071,13 +1071,13 @@ public abstract class TvInputService extends Service {
 
         int dispatchInputEvent(InputEvent inputEvent, InputEventReceiver inputEventReceiver) {
             boolean z;
-            boolean z2;
+            boolean zIsNavigationKey;
             if (inputEvent instanceof KeyEvent) {
                 KeyEvent keyEvent = (KeyEvent) inputEvent;
                 if (keyEvent.dispatch(this, this.mDispatcherState, this)) {
                     return 1;
                 }
-                z2 = TvInputService.isNavigationKey(keyEvent.getKeyCode());
+                zIsNavigationKey = TvInputService.isNavigationKey(keyEvent.getKeyCode());
                 z = KeyEvent.isMediaSessionKey(keyEvent.getKeyCode()) || keyEvent.getKeyCode() == 222;
             } else {
                 if (inputEvent instanceof MotionEvent) {
@@ -1096,7 +1096,7 @@ public abstract class TvInputService extends Service {
                     }
                 }
                 z = false;
-                z2 = false;
+                zIsNavigationKey = false;
             }
             FrameLayout frameLayout = this.mOverlayViewContainer;
             if (frameLayout == null || !frameLayout.isAttachedToWindow() || z) {
@@ -1105,7 +1105,7 @@ public abstract class TvInputService extends Service {
             if (!this.mOverlayViewContainer.hasWindowFocus()) {
                 this.mOverlayViewContainer.getViewRootImpl().windowFocusChanged(true);
             }
-            if (z2 && this.mOverlayViewContainer.hasFocusable()) {
+            if (zIsNavigationKey && this.mOverlayViewContainer.hasFocusable()) {
                 this.mOverlayViewContainer.getViewRootImpl().dispatchInputEvent(inputEvent);
                 return 1;
             }
@@ -1143,19 +1143,19 @@ public abstract class TvInputService extends Service {
 
             @Override // java.lang.Runnable
             public void run() {
-                long onTimeShiftGetStartPosition = Session.this.onTimeShiftGetStartPosition();
-                if (Session.this.mStartPositionMs == Long.MIN_VALUE || Session.this.mStartPositionMs != onTimeShiftGetStartPosition) {
-                    Session.this.mStartPositionMs = onTimeShiftGetStartPosition;
-                    Session.this.notifyTimeShiftStartPositionChanged(onTimeShiftGetStartPosition);
+                long jOnTimeShiftGetStartPosition = Session.this.onTimeShiftGetStartPosition();
+                if (Session.this.mStartPositionMs == Long.MIN_VALUE || Session.this.mStartPositionMs != jOnTimeShiftGetStartPosition) {
+                    Session.this.mStartPositionMs = jOnTimeShiftGetStartPosition;
+                    Session.this.notifyTimeShiftStartPositionChanged(jOnTimeShiftGetStartPosition);
                 }
-                long onTimeShiftGetCurrentPosition = Session.this.onTimeShiftGetCurrentPosition();
-                if (onTimeShiftGetCurrentPosition < Session.this.mStartPositionMs) {
-                    Log.w(TvInputService.TAG, "Current position (" + onTimeShiftGetCurrentPosition + ") cannot be earlier than start position (" + Session.this.mStartPositionMs + "). Reset to the start position.");
-                    onTimeShiftGetCurrentPosition = Session.this.mStartPositionMs;
+                long jOnTimeShiftGetCurrentPosition = Session.this.onTimeShiftGetCurrentPosition();
+                if (jOnTimeShiftGetCurrentPosition < Session.this.mStartPositionMs) {
+                    Log.w(TvInputService.TAG, "Current position (" + jOnTimeShiftGetCurrentPosition + ") cannot be earlier than start position (" + Session.this.mStartPositionMs + "). Reset to the start position.");
+                    jOnTimeShiftGetCurrentPosition = Session.this.mStartPositionMs;
                 }
-                if (Session.this.mCurrentPositionMs == Long.MIN_VALUE || Session.this.mCurrentPositionMs != onTimeShiftGetCurrentPosition) {
-                    Session.this.mCurrentPositionMs = onTimeShiftGetCurrentPosition;
-                    Session.this.notifyTimeShiftCurrentPositionChanged(onTimeShiftGetCurrentPosition);
+                if (Session.this.mCurrentPositionMs == Long.MIN_VALUE || Session.this.mCurrentPositionMs != jOnTimeShiftGetCurrentPosition) {
+                    Session.this.mCurrentPositionMs = jOnTimeShiftGetCurrentPosition;
+                    Session.this.notifyTimeShiftCurrentPositionChanged(jOnTimeShiftGetCurrentPosition);
                 }
                 Session.this.mHandler.removeCallbacks(Session.this.mTimeShiftPositionTrackingRunnable);
                 Session.this.mHandler.postDelayed(Session.this.mTimeShiftPositionTrackingRunnable, 1000L);
@@ -1169,7 +1169,7 @@ public abstract class TvInputService extends Service {
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
-        public Void doInBackground(View... viewArr) {
+        public Void doInBackground(View... viewArr) throws InterruptedException {
             View view = viewArr[0];
             try {
                 Thread.sleep(5000L);
@@ -1358,21 +1358,21 @@ public abstract class TvInputService extends Service {
                 @Override // android.media.tv.TvInputManager.SessionCallback
                 public void onSessionCreated(TvInputManager.Session session) {
                     HardwareSession.this.mHardwareSession = session;
-                    SomeArgs obtain = SomeArgs.obtain();
+                    SomeArgs someArgsObtain = SomeArgs.obtain();
                     if (session != null) {
-                        obtain.arg1 = HardwareSession.this;
-                        obtain.arg2 = HardwareSession.this.mProxySession;
-                        obtain.arg3 = HardwareSession.this.mProxySessionCallback;
-                        obtain.arg4 = session.getToken();
+                        someArgsObtain.arg1 = HardwareSession.this;
+                        someArgsObtain.arg2 = HardwareSession.this.mProxySession;
+                        someArgsObtain.arg3 = HardwareSession.this.mProxySessionCallback;
+                        someArgsObtain.arg4 = session.getToken();
                         session.tune(TvContract.buildChannelUriForPassthroughInput(HardwareSession.this.getHardwareInputId()));
                     } else {
-                        obtain.arg1 = null;
-                        obtain.arg2 = null;
-                        obtain.arg3 = HardwareSession.this.mProxySessionCallback;
-                        obtain.arg4 = null;
+                        someArgsObtain.arg1 = null;
+                        someArgsObtain.arg2 = null;
+                        someArgsObtain.arg3 = HardwareSession.this.mProxySessionCallback;
+                        someArgsObtain.arg4 = null;
                         HardwareSession.this.onRelease();
                     }
-                    HardwareSession.this.mServiceHandler.obtainMessage(2, obtain).sendToTarget();
+                    HardwareSession.this.mServiceHandler.obtainMessage(2, someArgsObtain).sendToTarget();
                 }
 
                 @Override // android.media.tv.TvInputManager.SessionCallback
@@ -1422,8 +1422,8 @@ public abstract class TvInputService extends Service {
         }
 
         private void broadcastAddHardwareInput(int i, TvInputInfo tvInputInfo) {
-            int beginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
-            for (int i2 = 0; i2 < beginBroadcast; i2++) {
+            int iBeginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
+            for (int i2 = 0; i2 < iBeginBroadcast; i2++) {
                 try {
                     ((ITvInputServiceCallback) TvInputService.this.mCallbacks.getBroadcastItem(i2)).addHardwareInput(i, tvInputInfo);
                 } catch (RemoteException e) {
@@ -1434,8 +1434,8 @@ public abstract class TvInputService extends Service {
         }
 
         private void broadcastAddHdmiInput(int i, TvInputInfo tvInputInfo) {
-            int beginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
-            for (int i2 = 0; i2 < beginBroadcast; i2++) {
+            int iBeginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
+            for (int i2 = 0; i2 < iBeginBroadcast; i2++) {
                 try {
                     ((ITvInputServiceCallback) TvInputService.this.mCallbacks.getBroadcastItem(i2)).addHdmiInput(i, tvInputInfo);
                 } catch (RemoteException e) {
@@ -1446,8 +1446,8 @@ public abstract class TvInputService extends Service {
         }
 
         private void broadcastRemoveHardwareInput(String str) {
-            int beginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
-            for (int i = 0; i < beginBroadcast; i++) {
+            int iBeginBroadcast = TvInputService.this.mCallbacks.beginBroadcast();
+            for (int i = 0; i < iBeginBroadcast; i++) {
                 try {
                     ((ITvInputServiceCallback) TvInputService.this.mCallbacks.getBroadcastItem(i)).removeHardwareInput(str);
                 } catch (RemoteException e) {
@@ -1468,8 +1468,8 @@ public abstract class TvInputService extends Service {
                     String str2 = (String) someArgs.arg4;
                     AttributionSource attributionSource = (AttributionSource) someArgs.arg5;
                     someArgs.recycle();
-                    Session onCreateSession = TvInputService.this.onCreateSession(str, str2, attributionSource);
-                    if (onCreateSession == null) {
+                    Session sessionOnCreateSession = TvInputService.this.onCreateSession(str, str2, attributionSource);
+                    if (sessionOnCreateSession == null) {
                         try {
                             iTvInputSessionCallback.onSessionCreated(null, null);
                             break;
@@ -1478,9 +1478,9 @@ public abstract class TvInputService extends Service {
                             return;
                         }
                     } else {
-                        ITvInputSessionWrapper iTvInputSessionWrapper = new ITvInputSessionWrapper(TvInputService.this, onCreateSession, inputChannel);
-                        if (onCreateSession instanceof HardwareSession) {
-                            HardwareSession hardwareSession = (HardwareSession) onCreateSession;
+                        ITvInputSessionWrapper iTvInputSessionWrapper = new ITvInputSessionWrapper(TvInputService.this, sessionOnCreateSession, inputChannel);
+                        if (sessionOnCreateSession instanceof HardwareSession) {
+                            HardwareSession hardwareSession = (HardwareSession) sessionOnCreateSession;
                             String hardwareInputId = hardwareSession.getHardwareInputId();
                             if (TextUtils.isEmpty(hardwareInputId) || !TvInputService.this.isPassthroughInput(hardwareInputId)) {
                                 if (TextUtils.isEmpty(hardwareInputId)) {
@@ -1488,7 +1488,7 @@ public abstract class TvInputService extends Service {
                                 } else {
                                     Log.w(TvInputService.TAG, "Invalid hardware input id : " + hardwareInputId);
                                 }
-                                onCreateSession.onRelease();
+                                sessionOnCreateSession.onRelease();
                                 try {
                                     iTvInputSessionCallback.onSessionCreated(null, null);
                                     break;
@@ -1504,12 +1504,12 @@ public abstract class TvInputService extends Service {
                                 break;
                             }
                         } else {
-                            SomeArgs obtain = SomeArgs.obtain();
-                            obtain.arg1 = onCreateSession;
-                            obtain.arg2 = iTvInputSessionWrapper;
-                            obtain.arg3 = iTvInputSessionCallback;
-                            obtain.arg4 = null;
-                            TvInputService.this.mServiceHandler.obtainMessage(2, obtain).sendToTarget();
+                            SomeArgs someArgsObtain = SomeArgs.obtain();
+                            someArgsObtain.arg1 = sessionOnCreateSession;
+                            someArgsObtain.arg2 = iTvInputSessionWrapper;
+                            someArgsObtain.arg3 = iTvInputSessionCallback;
+                            someArgsObtain.arg4 = null;
+                            TvInputService.this.mServiceHandler.obtainMessage(2, someArgsObtain).sendToTarget();
                             break;
                         }
                     }
@@ -1535,8 +1535,8 @@ public abstract class TvInputService extends Service {
                     String str3 = (String) someArgs3.arg2;
                     String str4 = (String) someArgs3.arg3;
                     someArgs3.recycle();
-                    RecordingSession onCreateRecordingSession = TvInputService.this.onCreateRecordingSession(str3, str4);
-                    if (onCreateRecordingSession == null) {
+                    RecordingSession recordingSessionOnCreateRecordingSession = TvInputService.this.onCreateRecordingSession(str3, str4);
+                    if (recordingSessionOnCreateRecordingSession == null) {
                         try {
                             iTvInputSessionCallback3.onSessionCreated(null, null);
                             break;
@@ -1546,40 +1546,40 @@ public abstract class TvInputService extends Service {
                         }
                     } else {
                         try {
-                            iTvInputSessionCallback3.onSessionCreated(new ITvInputSessionWrapper(TvInputService.this, onCreateRecordingSession), null);
+                            iTvInputSessionCallback3.onSessionCreated(new ITvInputSessionWrapper(TvInputService.this, recordingSessionOnCreateRecordingSession), null);
                         } catch (RemoteException e5) {
                             Log.e(TvInputService.TAG, "error in onSessionCreated", e5);
                         }
-                        onCreateRecordingSession.initialize(iTvInputSessionCallback3);
+                        recordingSessionOnCreateRecordingSession.initialize(iTvInputSessionCallback3);
                         break;
                     }
                 case 4:
                     TvInputHardwareInfo tvInputHardwareInfo = (TvInputHardwareInfo) message.obj;
-                    TvInputInfo onHardwareAdded = TvInputService.this.onHardwareAdded(tvInputHardwareInfo);
-                    if (onHardwareAdded != null) {
-                        broadcastAddHardwareInput(tvInputHardwareInfo.getDeviceId(), onHardwareAdded);
+                    TvInputInfo tvInputInfoOnHardwareAdded = TvInputService.this.onHardwareAdded(tvInputHardwareInfo);
+                    if (tvInputInfoOnHardwareAdded != null) {
+                        broadcastAddHardwareInput(tvInputHardwareInfo.getDeviceId(), tvInputInfoOnHardwareAdded);
                         break;
                     }
                     break;
                 case 5:
-                    String onHardwareRemoved = TvInputService.this.onHardwareRemoved((TvInputHardwareInfo) message.obj);
-                    if (onHardwareRemoved != null) {
-                        broadcastRemoveHardwareInput(onHardwareRemoved);
+                    String strOnHardwareRemoved = TvInputService.this.onHardwareRemoved((TvInputHardwareInfo) message.obj);
+                    if (strOnHardwareRemoved != null) {
+                        broadcastRemoveHardwareInput(strOnHardwareRemoved);
                         break;
                     }
                     break;
                 case 6:
                     HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) message.obj;
-                    TvInputInfo onHdmiDeviceAdded = TvInputService.this.onHdmiDeviceAdded(hdmiDeviceInfo);
-                    if (onHdmiDeviceAdded != null) {
-                        broadcastAddHdmiInput(hdmiDeviceInfo.getId(), onHdmiDeviceAdded);
+                    TvInputInfo tvInputInfoOnHdmiDeviceAdded = TvInputService.this.onHdmiDeviceAdded(hdmiDeviceInfo);
+                    if (tvInputInfoOnHdmiDeviceAdded != null) {
+                        broadcastAddHdmiInput(hdmiDeviceInfo.getId(), tvInputInfoOnHdmiDeviceAdded);
                         break;
                     }
                     break;
                 case 7:
-                    String onHdmiDeviceRemoved = TvInputService.this.onHdmiDeviceRemoved((HdmiDeviceInfo) message.obj);
-                    if (onHdmiDeviceRemoved != null) {
-                        broadcastRemoveHardwareInput(onHdmiDeviceRemoved);
+                    String strOnHdmiDeviceRemoved = TvInputService.this.onHdmiDeviceRemoved((HdmiDeviceInfo) message.obj);
+                    if (strOnHdmiDeviceRemoved != null) {
+                        broadcastRemoveHardwareInput(strOnHdmiDeviceRemoved);
                         break;
                     }
                     break;

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CACertificateInfo implements Parcelable {
     public static final Parcelable.Creator<CACertificateInfo> CREATOR = new Parcelable.Creator<CACertificateInfo>() { // from class: com.samsung.android.knox.ucm.configurator.CACertificateInfo.1
@@ -34,10 +33,10 @@ public class CACertificateInfo implements Parcelable {
 
     public final void readFromParcel(Parcel parcel) {
         this.bundle = (Bundle) parcel.readParcelable(Bundle.class.getClassLoader());
-        int readInt = parcel.readInt();
-        this.certLength = readInt;
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        this.certLength = i;
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.certificate = bArr;
             parcel.readByteArray(bArr);
         }

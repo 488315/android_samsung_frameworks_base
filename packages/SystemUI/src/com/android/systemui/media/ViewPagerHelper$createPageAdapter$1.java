@@ -12,9 +12,8 @@ import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.TransformingIndexedSequence;
-import kotlin.sequences.TransformingIndexedSequence$iterator$1;
+import kotlin.sequences.TransformingIndexedSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ViewPagerHelper$createPageAdapter$1 extends PagerAdapter {
     public final /* synthetic */ MediaType $type;
@@ -39,7 +38,7 @@ public final class ViewPagerHelper$createPageAdapter$1 extends PagerAdapter {
     @Override // androidx.viewpager.widget.PagerAdapter
     public final int getItemPosition(Object obj) {
         ArrayList sortedMediaPlayers;
-        Object obj2;
+        Object next;
         ViewPagerHelper viewPagerHelper = this.this$0;
         Function function = viewPagerHelper.mediaPlayerDataFunction;
         MediaType mediaType = this.$type;
@@ -47,24 +46,24 @@ public final class ViewPagerHelper$createPageAdapter$1 extends PagerAdapter {
         if (secMediaPlayerData == null || (sortedMediaPlayers = secMediaPlayerData.getSortedMediaPlayers()) == null) {
             return -2;
         }
-        TransformingIndexedSequence$iterator$1 transformingIndexedSequence$iterator$1 = new TransformingIndexedSequence$iterator$1(new TransformingIndexedSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(sortedMediaPlayers), new ViewPagerHelper$createPageAdapter$1$$ExternalSyntheticLambda0()));
+        TransformingIndexedSequence.AnonymousClass1 anonymousClass1 = new TransformingIndexedSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(sortedMediaPlayers), new ViewPagerHelper$createPageAdapter$1$$ExternalSyntheticLambda0()).new AnonymousClass1();
         while (true) {
-            if (!transformingIndexedSequence$iterator$1.iterator.hasNext()) {
-                obj2 = null;
+            if (!anonymousClass1.iterator.hasNext()) {
+                next = null;
                 break;
             }
-            obj2 = transformingIndexedSequence$iterator$1.next();
-            if (Intrinsics.areEqual(((Pair) obj2).getSecond(), obj)) {
+            next = anonymousClass1.next();
+            if (Intrinsics.areEqual(((Pair) next).getSecond(), obj)) {
                 break;
             }
         }
-        Pair pair = (Pair) obj2;
+        Pair pair = (Pair) next;
         if (pair == null) {
             return -2;
         }
-        int intValue = ((Number) pair.getFirst()).intValue();
+        int iIntValue = ((Number) pair.getFirst()).intValue();
         int i = ViewPagerHelper.$r8$clinit;
-        return viewPagerHelper.isRTLSupplier.getAsInt() == 1 ? (viewPagerHelper.getPlayersCount(mediaType) - 1) - intValue : intValue;
+        return viewPagerHelper.isRTLSupplier.getAsInt() == 1 ? (viewPagerHelper.getPlayersCount(mediaType) - 1) - iIntValue : iIntValue;
     }
 
     @Override // androidx.viewpager.widget.PagerAdapter

@@ -3,19 +3,24 @@ package com.android.systemui.haptics.slider;
 import android.os.VibrationEffect;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SliderStateTracker extends SliderTracker {
     public final SeekableSliderTrackerConfig config;
     public float latestProgress;
     public StandaloneCoroutine timerJob;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -89,6 +94,61 @@ public final class SliderStateTracker extends SliderTracker {
             } catch (NoSuchFieldError unused16) {
             }
             $EnumSwitchMapping$1 = iArr2;
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.slider.SliderStateTracker$launchTimer$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = SliderStateTracker.this.new AnonymousClass1(continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineScope coroutineScope;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope2 = (CoroutineScope) this.L$0;
+                long j = SliderStateTracker.this.config.waitTimeMillis;
+                this.L$0 = coroutineScope2;
+                this.label = 1;
+                if (DelayKt.delay(j, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                coroutineScope = coroutineScope2;
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                coroutineScope = (CoroutineScope) this.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            if (CoroutineScopeKt.isActive(coroutineScope)) {
+                SliderStateTracker sliderStateTracker = SliderStateTracker.this;
+                if (sliderStateTracker.currentState == SliderState.WAIT) {
+                    sliderStateTracker.setState(SliderState.DRAG_HANDLE_ACQUIRED_BY_TOUCH);
+                    SliderStateTracker sliderStateTracker2 = SliderStateTracker.this;
+                    sliderStateTracker2.executeOnState(sliderStateTracker2.currentState);
+                }
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -274,10 +334,10 @@ public final class SliderStateTracker extends SliderTracker {
                 break;
             case 10:
                 SliderEventType sliderEventType6 = sliderEvent.type;
-                boolean bookendReached = bookendReached(sliderEvent.currentProgress);
+                boolean zBookendReached = bookendReached(sliderEvent.currentProgress);
                 int i4 = WhenMappings.$EnumSwitchMapping$1[sliderEventType6.ordinal()];
                 if (i4 != 3) {
-                    sliderState2 = i4 != 4 ? i4 != 5 ? SliderState.ARROW_HANDLE_MOVES_CONTINUOUSLY : SliderState.IDLE : bookendReached ? SliderState.ARROW_HANDLE_REACHED_BOOKEND : SliderState.ARROW_HANDLE_MOVES_CONTINUOUSLY;
+                    sliderState2 = i4 != 4 ? i4 != 5 ? SliderState.ARROW_HANDLE_MOVES_CONTINUOUSLY : SliderState.IDLE : zBookendReached ? SliderState.ARROW_HANDLE_REACHED_BOOKEND : SliderState.ARROW_HANDLE_MOVES_CONTINUOUSLY;
                 } else {
                     this.timerJob = launchTimer();
                     sliderState2 = SliderState.WAIT;
@@ -295,7 +355,7 @@ public final class SliderStateTracker extends SliderTracker {
     }
 
     public final StandaloneCoroutine launchTimer() {
-        return CoroutineTracingKt.launchTraced$default(this.scope, null, null, new SliderStateTracker$launchTimer$1(this, null), 7);
+        return CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AnonymousClass1(null), 7);
     }
 
     public final void resetState() {

@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKnoxPushServiceCallback extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.kpm.IKnoxPushServiceCallback";
@@ -17,13 +16,11 @@ public interface IKnoxPushServiceCallback extends IInterface {
 
     void onUnRegistrationFinished(KnoxPushServiceResult knoxPushServiceResult) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKnoxPushServiceCallback {
         public static final int TRANSACTION_onRegistrationFinished = 1;
         public static final int TRANSACTION_onRegistrationStatus = 3;
         public static final int TRANSACTION_onUnRegistrationFinished = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKnoxPushServiceCallback {
             public IBinder mRemote;
 
@@ -42,46 +39,46 @@ public interface IKnoxPushServiceCallback extends IInterface {
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushServiceCallback
             public void onRegistrationFinished(KnoxPushServiceResult knoxPushServiceResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxPushServiceResult, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxPushServiceResult, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushServiceCallback
             public void onRegistrationStatus(KnoxPushServiceResult knoxPushServiceResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxPushServiceResult, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxPushServiceResult, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.kpm.IKnoxPushServiceCallback
             public void onUnRegistrationFinished(KnoxPushServiceResult knoxPushServiceResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxPushServiceResult, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxPushServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxPushServiceResult, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -94,8 +91,8 @@ public interface IKnoxPushServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxPushServiceCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKnoxPushServiceCallback)) ? new Proxy(iBinder) : (IKnoxPushServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxPushServiceCallback.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKnoxPushServiceCallback)) ? new Proxy(iBinder) : (IKnoxPushServiceCallback) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -135,7 +132,6 @@ public interface IKnoxPushServiceCallback extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKnoxPushServiceCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -22,9 +22,9 @@ public final class GLUtils {
         if (bitmap.isRecycled()) {
             throw new IllegalArgumentException("bitmap is recycled");
         }
-        int native_getInternalFormat = native_getInternalFormat(bitmap);
-        if (native_getInternalFormat >= 0) {
-            return native_getInternalFormat;
+        int iNative_getInternalFormat = native_getInternalFormat(bitmap);
+        if (iNative_getInternalFormat >= 0) {
+            return iNative_getInternalFormat;
         }
         throw new IllegalArgumentException("Unknown internalformat");
     }
@@ -36,9 +36,9 @@ public final class GLUtils {
         if (bitmap.isRecycled()) {
             throw new IllegalArgumentException("bitmap is recycled");
         }
-        int native_getType = native_getType(bitmap);
-        if (native_getType >= 0) {
-            return native_getType;
+        int iNative_getType = native_getType(bitmap);
+        if (iNative_getType >= 0) {
+            return iNative_getType;
         }
         throw new IllegalArgumentException("Unknown type");
     }

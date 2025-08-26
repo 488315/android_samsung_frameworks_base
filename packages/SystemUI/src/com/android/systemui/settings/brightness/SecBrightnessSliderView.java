@@ -10,7 +10,6 @@ import java.util.function.Supplier;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecBrightnessSliderView {
     public int dualSeekBarThreshold;
@@ -18,7 +17,6 @@ public final class SecBrightnessSliderView {
     public boolean isGradient;
     public final Supplier sliderSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -67,9 +65,9 @@ public final class SecBrightnessSliderView {
     public final void updateSliderResources() {
         ToggleSeekBar toggleSeekBar = (ToggleSeekBar) this.sliderSupplier.get();
         if (toggleSeekBar != null) {
-            int floor = (int) Math.floor((toggleSeekBar.getMax() * toggleSeekBar.getContext().getResources().getInteger(R.integer.sec_brightness_slider_warning_percent)) / 100);
-            this.dualSeekBarThreshold = floor;
-            setDualSeekBarResources(floor <= toggleSeekBar.getProgress());
+            int iFloor = (int) Math.floor((toggleSeekBar.getMax() * toggleSeekBar.getContext().getResources().getInteger(R.integer.sec_brightness_slider_warning_percent)) / 100);
+            this.dualSeekBarThreshold = iFloor;
+            setDualSeekBarResources(iFloor <= toggleSeekBar.getProgress());
             Unit unit = Unit.INSTANCE;
         }
     }

@@ -3,6 +3,7 @@ package com.samsung.context.sdk.samsunganalytics.internal.sender.buffering.datab
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import com.samsung.android.knox.restriction.PhoneRestrictionPolicy;
 import com.samsung.context.sdk.samsunganalytics.DBOpenHelper;
@@ -11,7 +12,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.sender.SimpleLog;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DbManager {
     public final DBOpenHelper dbOpenHelper;
@@ -32,13 +32,13 @@ public class DbManager {
 
     public final Queue select(String str) {
         ((LinkedBlockingQueue) this.list).clear();
-        Cursor rawQuery = this.dbOpenHelper.getReadableDatabase().rawQuery(str, null);
-        while (rawQuery.moveToNext()) {
+        Cursor cursorRawQuery = this.dbOpenHelper.getReadableDatabase().rawQuery(str, null);
+        while (cursorRawQuery.moveToNext()) {
             SimpleLog simpleLog = new SimpleLog();
-            simpleLog._id = rawQuery.getString(rawQuery.getColumnIndex("_id"));
-            simpleLog.data = rawQuery.getString(rawQuery.getColumnIndex("data"));
-            simpleLog.timestamp = rawQuery.getLong(rawQuery.getColumnIndex(PhoneRestrictionPolicy.TIMESTAMP));
-            String string = rawQuery.getString(rawQuery.getColumnIndex("logtype"));
+            simpleLog._id = cursorRawQuery.getString(cursorRawQuery.getColumnIndex("_id"));
+            simpleLog.data = cursorRawQuery.getString(cursorRawQuery.getColumnIndex("data"));
+            simpleLog.timestamp = cursorRawQuery.getLong(cursorRawQuery.getColumnIndex(PhoneRestrictionPolicy.TIMESTAMP));
+            String string = cursorRawQuery.getString(cursorRawQuery.getColumnIndex("logtype"));
             LogType logType = LogType.DEVICE;
             if (!string.equals(logType.getAbbrev())) {
                 logType = LogType.UIX;
@@ -46,11 +46,11 @@ public class DbManager {
             simpleLog.type = logType;
             this.list.add(simpleLog);
         }
-        rawQuery.close();
+        cursorRawQuery.close();
         return this.list;
     }
 
-    public DbManager(DBOpenHelper dBOpenHelper) {
+    public DbManager(DBOpenHelper dBOpenHelper) throws SQLException {
         this.list = new LinkedBlockingQueue();
         if (dBOpenHelper != null) {
             this.dbOpenHelper = dBOpenHelper;

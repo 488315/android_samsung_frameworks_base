@@ -9,7 +9,10 @@ public class MPSplitter {
     private native String native_split(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, String str);
 
     static {
-        System.loadLibrary(Def.MP_NATIVE_LIB);
+        String property = System.getProperty(Def.JUNIT_TEST_EXECUTION_MODE);
+        if (property == null || !Boolean.parseBoolean(property)) {
+            System.loadLibrary(Def.MP_NATIVE_LIB);
+        }
     }
 
     public String split(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, String str) {

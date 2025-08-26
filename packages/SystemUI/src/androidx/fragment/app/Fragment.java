@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuListener, LifecycleOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory, SavedStateRegistryOwner {
     public static final Object USE_DEFAULT_TRANSITION = new Object();
@@ -100,7 +99,6 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
     public final MutableLiveData mViewLifecycleOwnerLiveData;
     public String mWho;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.fragment.app.Fragment$2, reason: invalid class name */
     public class AnonymousClass2 extends OnPreAttachedListener {
         public AnonymousClass2() {
@@ -117,7 +115,6 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.fragment.app.Fragment$5, reason: invalid class name */
     public class AnonymousClass5 extends FragmentContainer {
         public AnonymousClass5() {
@@ -139,7 +136,6 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationInfo {
         public int mEnterAnim;
         public int mExitAnim;
@@ -165,14 +161,12 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InstantiationException extends RuntimeException {
         public InstantiationException(String str, Exception exc) {
             super(str, exc);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class OnPreAttachedListener {
         private OnPreAttachedListener() {
         }
@@ -487,9 +481,9 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         if (fragmentHostCallback == null) {
             throw new IllegalStateException("onGetLayoutInflater() cannot be executed until the Fragment is attached to the FragmentManager.");
         }
-        LayoutInflater onGetLayoutInflater = fragmentHostCallback.onGetLayoutInflater();
-        onGetLayoutInflater.setFactory2(this.mChildFragmentManager.mLayoutInflaterFactory);
-        return onGetLayoutInflater;
+        LayoutInflater layoutInflaterOnGetLayoutInflater = fragmentHostCallback.onGetLayoutInflater();
+        layoutInflaterOnGetLayoutInflater.setFactory2(this.mChildFragmentManager.mLayoutInflaterFactory);
+        return layoutInflaterOnGetLayoutInflater;
     }
 
     @Override // android.content.ComponentCallbacks
@@ -523,15 +517,15 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         this.mViewLifecycleOwner = new FragmentViewLifecycleOwner(this, getViewModelStore(), new Runnable() { // from class: androidx.fragment.app.Fragment$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                Fragment fragment = Fragment.this;
+                Fragment fragment = this.f$0;
                 FragmentViewLifecycleOwner fragmentViewLifecycleOwner = fragment.mViewLifecycleOwner;
                 fragmentViewLifecycleOwner.mSavedStateRegistryController.performRestore(fragment.mSavedViewRegistryState);
                 fragment.mSavedViewRegistryState = null;
             }
         });
-        View onCreateView = onCreateView(layoutInflater, viewGroup, bundle);
-        this.mView = onCreateView;
-        if (onCreateView == null) {
+        View viewOnCreateView = onCreateView(layoutInflater, viewGroup, bundle);
+        this.mView = viewOnCreateView;
+        if (viewOnCreateView == null) {
             if (this.mViewLifecycleOwner.mLifecycleRegistry != null) {
                 throw new IllegalStateException("Called getViewLifecycleOwner() but onCreateView() returned null");
             }
@@ -618,7 +612,7 @@ public class Fragment implements ComponentCallbacks, View.OnCreateContextMenuLis
         if (fragmentManager != null && fragmentManager2 != null && fragmentManager != fragmentManager2) {
             throw new IllegalArgumentException("Fragment " + preferenceFragmentCompat + " must share the same FragmentManager to be set as a target fragment");
         }
-        for (Fragment fragment = preferenceFragmentCompat; fragment != null; fragment = fragment.getTargetFragment(false)) {
+        for (Fragment targetFragment = preferenceFragmentCompat; targetFragment != null; targetFragment = targetFragment.getTargetFragment(false)) {
             if (super.equals(this)) {
                 throw new IllegalArgumentException("Setting " + preferenceFragmentCompat + " as the target of " + this + " would create a target cycle");
             }

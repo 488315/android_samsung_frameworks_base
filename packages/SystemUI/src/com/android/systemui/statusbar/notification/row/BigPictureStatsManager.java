@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BigPictureStatsManager implements Dumpable {
     public final List durations;
@@ -57,32 +56,32 @@ public final class BigPictureStatsManager implements Dumpable {
                     comparable = comparable2;
                 }
             }
-            int intValue = ((Number) comparable).intValue();
+            int iIntValue = ((Number) comparable).intValue();
             ArrayList arrayList = (ArrayList) this.durations;
             int size = arrayList.size();
             int i = 0;
-            double d = 0.0d;
+            double dIntValue = 0.0d;
             int i2 = 0;
             while (i2 < size) {
                 Object obj = arrayList.get(i2);
                 i2++;
-                d += ((Number) obj).intValue();
+                dIntValue += ((Number) obj).intValue();
                 i++;
                 if (i < 0) {
                     CollectionsKt__CollectionsKt.throwCountOverflow();
                     throw null;
                 }
             }
-            int roundToInt = MathKt__MathJVMKt.roundToInt(i == 0 ? Double.NaN : d / i);
-            int percentile = percentile(this.durations, 90.0d);
-            int percentile2 = percentile(this.durations, 99.0d);
+            int iRoundToInt = MathKt__MathJVMKt.roundToInt(i == 0 ? Double.NaN : dIntValue / i);
+            int iPercentile = percentile(this.durations, 90.0d);
+            int iPercentile2 = percentile(this.durations, 99.0d);
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
             indentingPrintWriter.println("Lazy-loaded " + ((ArrayList) this.durations).size() + " images:");
             indentingPrintWriter.increaseIndent();
-            indentingPrintWriter.println("Avg: " + roundToInt + " ms");
-            indentingPrintWriter.println("Max: " + intValue + " ms");
-            indentingPrintWriter.println("P90: " + percentile + " ms");
-            indentingPrintWriter.println("P99: " + percentile2 + " ms");
+            indentingPrintWriter.println("Avg: " + iRoundToInt + " ms");
+            indentingPrintWriter.println("Max: " + iIntValue + " ms");
+            indentingPrintWriter.println("P90: " + iPercentile + " ms");
+            indentingPrintWriter.println("P99: " + iPercentile2 + " ms");
             Unit unit = Unit.INSTANCE;
         }
     }

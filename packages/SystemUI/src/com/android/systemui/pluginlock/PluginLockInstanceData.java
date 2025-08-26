@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockInstanceData {
     private static final int MAIN_HOME = 4;
@@ -23,7 +22,6 @@ public class PluginLockInstanceData {
     @SerializedName("version")
     private Integer mVersion = 3;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Data {
 
         @SerializedName(CABContract.CABBusinessContactPhone.NUMBER)
@@ -144,16 +142,15 @@ public class PluginLockInstanceData {
         }
 
         public String toString() {
-            String l;
+            String string;
             if (LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION) {
-                l = this.mTimeStampList.get(0) + ", " + this.mTimeStampList.get(1);
+                string = this.mTimeStampList.get(0) + ", " + this.mTimeStampList.get(1);
             } else {
-                l = this.mTimeStamp.toString();
+                string = this.mTimeStamp.toString();
             }
-            return "[" + this.mPackageName + "," + this.mNumber + "," + l + "," + this.mWhich + ", " + this.mRecoverData + "]";
+            return "[" + this.mPackageName + "," + this.mNumber + "," + string + "," + this.mWhich + ", " + this.mRecoverData + "]";
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class RecoverData {
 
             @SerializedName("clock_state")

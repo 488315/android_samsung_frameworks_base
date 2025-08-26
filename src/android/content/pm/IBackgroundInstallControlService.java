@@ -60,9 +60,9 @@ public interface IBackgroundInstallControlService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBackgroundInstallControlService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackgroundInstallControlService)) {
-                return (IBackgroundInstallControlService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBackgroundInstallControlService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackgroundInstallControlService)) {
+                return (IBackgroundInstallControlService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,21 +95,21 @@ public interface IBackgroundInstallControlService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ParceledListSlice backgroundInstalledPackages = getBackgroundInstalledPackages(readLong, readInt);
+                ParceledListSlice backgroundInstalledPackages = getBackgroundInstalledPackages(j, i3);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(backgroundInstalledPackages, 1);
             } else if (i == 2) {
-                IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerBackgroundInstallCallback(asInterface);
+                registerBackgroundInstallCallback(iRemoteCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IRemoteCallback asInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteCallback iRemoteCallbackAsInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterBackgroundInstallCallback(asInterface2);
+                unregisterBackgroundInstallCallback(iRemoteCallbackAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -135,48 +135,48 @@ public interface IBackgroundInstallControlService extends IInterface {
 
             @Override // android.content.pm.IBackgroundInstallControlService
             public ParceledListSlice getBackgroundInstalledPackages(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IBackgroundInstallControlService
             public void registerBackgroundInstallCallback(IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IBackgroundInstallControlService
             public void unregisterBackgroundInstallCallback(IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBackgroundInstallControlService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

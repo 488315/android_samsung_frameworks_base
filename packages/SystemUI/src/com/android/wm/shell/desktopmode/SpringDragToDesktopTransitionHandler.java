@@ -32,7 +32,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTransitionHandler {
     public static final Companion Companion;
@@ -45,34 +44,33 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
     public final PhysicsAnimator.SpringConfig positionSpringConfig;
     public final PhysicsAnimator.SpringConfig sizeSpringConfig;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public final float getAnimationFraction(Rect rect, Rect rect2, Rect rect3) {
-            float height;
-            int height2;
-            int height3;
+            float fHeight;
+            int iHeight;
+            int iHeight2;
             if (rect.width() != rect2.width()) {
-                height = rect3.width() - rect.width();
-                height2 = rect2.width();
-                height3 = rect.width();
+                fHeight = rect3.width() - rect.width();
+                iHeight = rect2.width();
+                iHeight2 = rect.width();
             } else {
                 if (rect.height() == rect2.height()) {
                     String str = "same start and end sizes, returning 0: startBounds=" + rect + ", endBounds=" + rect2 + ", animBounds=" + rect3;
                     ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-                    String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-                    SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "SpringDragToDesktopTransitionHandler", new Object[0]);
-                    ProtoLog.v(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+                    String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+                    SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "SpringDragToDesktopTransitionHandler", new Object[0]);
+                    ProtoLog.v(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
                     return 0.0f;
                 }
-                height = rect3.height() - rect.height();
-                height2 = rect2.height();
-                height3 = rect.height();
+                fHeight = rect3.height() - rect.height();
+                iHeight = rect2.height();
+                iHeight2 = rect.height();
             }
-            return height / (height2 - height3);
+            return fHeight / (iHeight - iHeight2);
         }
 
         public final float propertyValue(String str, float f, float f2) {
@@ -103,28 +101,28 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
 
     @Override // com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler
     public final void animateEndDragToDesktop(SurfaceControl.Transaction transaction, final Transitions.TransitionFinishCallback transitionFinishCallback) {
-        final DragToDesktopTransitionHandler.TransitionState requireTransitionState = requireTransitionState();
-        TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+        final DragToDesktopTransitionHandler.TransitionState transitionStateRequireTransitionState = requireTransitionState();
+        TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
         if (draggedTaskChange == null) {
             throw new IllegalStateException("Expected non-null change of dragged task");
         }
         final SurfaceControl leash = draggedTaskChange.getLeash();
-        final List freeformTaskChanges = requireTransitionState.getFreeformTaskChanges();
+        final List freeformTaskChanges = transitionStateRequireTransitionState.getFreeformTaskChanges();
         final Rect startAbsBounds = draggedTaskChange.getStartAbsBounds();
         final Rect endAbsBounds = draggedTaskChange.getEndAbsBounds();
-        MoveToDesktopAnimator dragAnimator = requireTransitionState.getDragAnimator();
+        MoveToDesktopAnimator dragAnimator = transitionStateRequireTransitionState.getDragAnimator();
         dragAnimator.velocityTracker.computeCurrentVelocity(1000);
         PointF pointF = new PointF(dragAnimator.velocityTracker.getXVelocity(), dragAnimator.velocityTracker.getYVelocity());
-        requireTransitionState.getDragAnimator().cancelAnimator();
-        final float scale = requireTransitionState.getDragAnimator().getScale();
-        PointF pointF2 = requireTransitionState.getDragAnimator().position;
+        transitionStateRequireTransitionState.getDragAnimator().cancelAnimator();
+        final float scale = transitionStateRequireTransitionState.getDragAnimator().getScale();
+        PointF pointF2 = transitionStateRequireTransitionState.getDragAnimator().position;
         Rect rect = new Rect(startAbsBounds);
         rect.offset((int) pointF2.x, (int) pointF2.y);
         Companion.getClass();
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", "animateEndDragToDesktop: startBounds=" + startAbsBounds + ", endBounds=" + endAbsBounds + ", startScale=" + scale + ", startPosition=" + pointF2 + ", startBoundsWithOffset=" + rect);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "SpringDragToDesktopTransitionHandler", new Object[0]);
-        ProtoLog.v(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", "animateEndDragToDesktop: startBounds=" + startAbsBounds + ", endBounds=" + endAbsBounds + ", startScale=" + scale + ", startPosition=" + pointF2 + ", startBoundsWithOffset=" + rect);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "SpringDragToDesktopTransitionHandler", new Object[0]);
+        ProtoLog.v(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
         DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
         if (desktopTasksController$dragToDesktopStateListener$1 != null) {
             desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
@@ -133,7 +131,7 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
         if (desktopModeOnTaskResizeAnimationListener == null) {
             desktopModeOnTaskResizeAnimationListener = null;
         }
-        desktopModeOnTaskResizeAnimationListener.onAnimationStart(requireTransitionState.getDraggedTaskId(), transaction, rect);
+        desktopModeOnTaskResizeAnimationListener.onAnimationStart(transitionStateRequireTransitionState.getDraggedTaskId(), transaction, rect);
         final SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) this.transactionSupplier.get();
         PhysicsAnimator.Companion.getClass();
         PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(rect);
@@ -144,55 +142,55 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
         companion.spring(floatProperties$Companion$RECT_X$1, f, f2, springConfig);
         companion.spring(FloatProperties.RECT_Y, endAbsBounds.top, pointF.y, springConfig);
         FloatProperties$Companion$RECT_WIDTH$1 floatProperties$Companion$RECT_WIDTH$1 = FloatProperties.RECT_WIDTH;
-        float width = endAbsBounds.width();
+        float fWidth = endAbsBounds.width();
         PhysicsAnimator.SpringConfig springConfig2 = this.sizeSpringConfig;
-        companion.spring(floatProperties$Companion$RECT_WIDTH$1, width, 0.0f, springConfig2);
+        companion.spring(floatProperties$Companion$RECT_WIDTH$1, fWidth, 0.0f, springConfig2);
         companion.spring(FloatProperties.RECT_HEIGHT, endAbsBounds.height(), 0.0f, springConfig2);
-        companion.updateListeners.add(new PhysicsAnimator.UpdateListener() { // from class: com.android.wm.shell.desktopmode.SpringDragToDesktopTransitionHandler$animateEndDragToDesktop$1
+        companion.updateListeners.add(new PhysicsAnimator.UpdateListener() { // from class: com.android.wm.shell.desktopmode.SpringDragToDesktopTransitionHandler.animateEndDragToDesktop.1
             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
             public final void onAnimationUpdateForProperty(Object obj) {
                 Rect rect2 = (Rect) obj;
                 float animationFraction = SpringDragToDesktopTransitionHandler.Companion.getAnimationFraction(startAbsBounds, endAbsBounds, rect2);
                 float f3 = 1;
                 float f4 = scale;
-                float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f3, f4, animationFraction, f4);
+                float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f3, f4, animationFraction, f4);
                 float f5 = SpringDragToDesktopTransitionHandler.FREEFORM_TASKS_ANIM_OFFSET;
-                float max = f5 != 1.0f ? Math.max(animationFraction - f5, 0.0f) / (1.0f - f5) : 0.0f;
+                float fMax = f5 != 1.0f ? Math.max(animationFraction - f5, 0.0f) / (1.0f - f5) : 0.0f;
                 float f6 = SpringDragToDesktopTransitionHandler.FREEFORM_TASKS_INITIAL_SCALE;
-                float m$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f3, f6, max, f6);
+                float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f3, f6, fMax, f6);
                 SurfaceControl.Transaction transaction3 = transaction2;
                 SurfaceControl surfaceControl = leash;
                 List<TransitionInfo.Change> list = freeformTaskChanges;
-                transaction3.setScale(surfaceControl, m$1, m$1);
+                transaction3.setScale(surfaceControl, fM$1, fM$1);
                 transaction3.setPosition(surfaceControl, rect2.left, rect2.top);
                 for (TransitionInfo.Change change : list) {
-                    float f7 = f3 - m$12;
+                    float f7 = f3 - fM$12;
                     float f8 = 2;
                     transaction3.setPosition(change.getLeash(), ((change.getEndAbsBounds().width() * f7) / f8) + change.getEndAbsBounds().left, ((change.getEndAbsBounds().height() * f7) / f8) + change.getEndAbsBounds().top);
                     if (change.getMode() == 4) {
-                        transaction3.setAlpha(change.getLeash(), f3 - max);
+                        transaction3.setAlpha(change.getLeash(), f3 - fMax);
                     } else {
-                        transaction3.setScale(change.getLeash(), m$12, m$12);
-                        transaction3.setAlpha(change.getLeash(), max);
+                        transaction3.setScale(change.getLeash(), fM$12, fM$12);
+                        transaction3.setAlpha(change.getLeash(), fMax);
                     }
                 }
                 DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = this.onTaskResizeAnimationListener;
                 if (desktopModeOnTaskResizeAnimationListener2 == null) {
                     desktopModeOnTaskResizeAnimationListener2 = null;
                 }
-                desktopModeOnTaskResizeAnimationListener2.onBoundsChange(requireTransitionState.getDraggedTaskId(), transaction2, rect2);
+                desktopModeOnTaskResizeAnimationListener2.onBoundsChange(transitionStateRequireTransitionState.getDraggedTaskId(), transaction2, rect2);
             }
         });
         companion.withEndActions(new Function0() { // from class: com.android.wm.shell.desktopmode.SpringDragToDesktopTransitionHandler$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 SpringDragToDesktopTransitionHandler.Companion companion2 = SpringDragToDesktopTransitionHandler.Companion;
-                SpringDragToDesktopTransitionHandler springDragToDesktopTransitionHandler = SpringDragToDesktopTransitionHandler.this;
+                SpringDragToDesktopTransitionHandler springDragToDesktopTransitionHandler = this.f$0;
                 DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = springDragToDesktopTransitionHandler.onTaskResizeAnimationListener;
                 if (desktopModeOnTaskResizeAnimationListener2 == null) {
                     desktopModeOnTaskResizeAnimationListener2 = null;
                 }
-                desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(requireTransitionState.getDraggedTaskId());
+                desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(transitionStateRequireTransitionState.getDraggedTaskId());
                 transitionFinishCallback.onTransitionFinished(null);
                 springDragToDesktopTransitionHandler.transitionState = null;
                 springDragToDesktopTransitionHandler.interactionJankMonitor.end(116);
@@ -212,11 +210,11 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
         super.setupEndDragToDesktop(transitionInfo, transaction, transaction2);
         for (TransitionInfo.Change change : requireTransitionState().getFreeformTaskChanges()) {
             float f = change.getEndAbsBounds().left;
-            float width = change.getEndAbsBounds().width();
+            float fWidth = change.getEndAbsBounds().width();
             float f2 = FREEFORM_TASKS_INITIAL_SCALE;
             float f3 = 1 - f2;
             float f4 = 2;
-            transaction.setPosition(change.getLeash(), ((width * f3) / f4) + f, ((change.getEndAbsBounds().height() * f3) / f4) + change.getEndAbsBounds().top);
+            transaction.setPosition(change.getLeash(), ((fWidth * f3) / f4) + f, ((change.getEndAbsBounds().height() * f3) / f4) + change.getEndAbsBounds().top);
             transaction.setScale(change.getLeash(), f2, f2);
             transaction.setAlpha(change.getLeash(), 0.0f);
         }

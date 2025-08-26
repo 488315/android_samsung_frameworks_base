@@ -1,8 +1,13 @@
 package com.airbnb.lottie.compose;
 
+import android.graphics.Bitmap;
+import android.graphics.ColorFilter;
+import android.graphics.PointF;
+import android.graphics.Typeface;
+import com.airbnb.lottie.value.ScaleXY;
+import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LottieDynamicProperties {
     public final List bitmapProperties;
@@ -27,16 +32,62 @@ public final class LottieDynamicProperties {
         this.charSequenceProperties = list9;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public LottieDynamicProperties(java.util.List<? extends com.airbnb.lottie.compose.LottieDynamicProperty> r12) {
-        /*
-            Method dump skipped, instructions count: 295
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.airbnb.lottie.compose.LottieDynamicProperties.<init>(java.util.List):void");
+    public LottieDynamicProperties(List<? extends LottieDynamicProperty> list) {
+        List<? extends LottieDynamicProperty> list2 = list;
+        ArrayList arrayList = new ArrayList();
+        for (Object obj : list2) {
+            if (((LottieDynamicProperty) obj).property instanceof Integer) {
+                arrayList.add(obj);
+            }
+        }
+        ArrayList arrayList2 = new ArrayList();
+        for (Object obj2 : list2) {
+            if (((LottieDynamicProperty) obj2).property instanceof PointF) {
+                arrayList2.add(obj2);
+            }
+        }
+        ArrayList arrayList3 = new ArrayList();
+        for (Object obj3 : list2) {
+            if (((LottieDynamicProperty) obj3).property instanceof Float) {
+                arrayList3.add(obj3);
+            }
+        }
+        ArrayList arrayList4 = new ArrayList();
+        for (Object obj4 : list2) {
+            if (((LottieDynamicProperty) obj4).property instanceof ScaleXY) {
+                arrayList4.add(obj4);
+            }
+        }
+        ArrayList arrayList5 = new ArrayList();
+        for (Object obj5 : list2) {
+            if (((LottieDynamicProperty) obj5).property instanceof ColorFilter) {
+                arrayList5.add(obj5);
+            }
+        }
+        ArrayList arrayList6 = new ArrayList();
+        for (Object obj6 : list2) {
+            if (((LottieDynamicProperty) obj6).property instanceof Object[]) {
+                arrayList6.add(obj6);
+            }
+        }
+        ArrayList arrayList7 = new ArrayList();
+        for (Object obj7 : list2) {
+            if (((LottieDynamicProperty) obj7).property instanceof Typeface) {
+                arrayList7.add(obj7);
+            }
+        }
+        ArrayList arrayList8 = new ArrayList();
+        for (Object obj8 : list2) {
+            if (((LottieDynamicProperty) obj8).property instanceof Bitmap) {
+                arrayList8.add(obj8);
+            }
+        }
+        ArrayList arrayList9 = new ArrayList();
+        for (Object obj9 : list2) {
+            if (((LottieDynamicProperty) obj9).property instanceof CharSequence) {
+                arrayList9.add(obj9);
+            }
+        }
+        this(arrayList, arrayList2, arrayList3, arrayList4, arrayList5, arrayList6, arrayList7, arrayList8, arrayList9);
     }
 }

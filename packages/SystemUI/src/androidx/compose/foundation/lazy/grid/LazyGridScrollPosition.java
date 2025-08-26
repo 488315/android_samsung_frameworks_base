@@ -7,7 +7,6 @@ import androidx.compose.runtime.SnapshotIntStateKt;
 import androidx.compose.runtime.SnapshotMutableIntStateImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridScrollPosition {
     public boolean hadFirstNotEmptyLayout;
@@ -17,20 +16,9 @@ public final class LazyGridScrollPosition {
     public final MutableIntState scrollOffset$delegate;
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public LazyGridScrollPosition() {
-        /*
-            r3 = this;
-            r0 = 3
-            r1 = 0
-            r2 = 0
-            r3.<init>(r2, r2, r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.grid.LazyGridScrollPosition.<init>():void");
+        int i = 0;
+        this(i, i, 3, null);
     }
 
     public final int getIndex() {

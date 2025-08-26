@@ -17,9 +17,9 @@ import kotlin.jvm.functions.Function6;
 import kotlin.jvm.functions.Function7;
 import kotlin.jvm.functions.Function8;
 import kotlin.jvm.functions.Function9;
+import kotlin.jvm.internal.AdaptedFunctionReference;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposableLambdaImpl implements ComposableLambda {
     public Object _block;
@@ -27,6 +27,20 @@ public final class ComposableLambdaImpl implements ComposableLambda {
     public RecomposeScopeImpl scope;
     public List scopes;
     public final boolean tracked;
+
+    /* renamed from: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$1, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass1 extends AdaptedFunctionReference implements Function2 {
+        public AnonymousClass1(Object obj) {
+            super(2, obj, ComposableLambdaImpl.class, "invoke", "invoke(Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;", 8);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            int iIntValue = ((Number) obj2).intValue();
+            ((ComposableLambdaImpl) this.receiver).invoke(iIntValue, (Composer) obj);
+            return Unit.INSTANCE;
+        }
+    }
 
     public ComposableLambdaImpl(int i, boolean z, Object obj) {
         this.key = i;
@@ -95,42 +109,42 @@ public final class ComposableLambdaImpl implements ComposableLambda {
     }
 
     public final Object invoke(int i, Composer composer) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 0);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 0);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 0);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 0);
         }
-        int i2 = i | bitsForSlot;
+        int i2 = i | iBitsForSlot;
         Object obj = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(2, obj);
-        Object invoke = ((Function2) obj).invoke(composerImpl, Integer.valueOf(i2));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new ComposableLambdaImpl$invoke$1(this);
+        Object objInvoke = ((Function2) obj).invoke(composerImpl, Integer.valueOf(i2));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new AnonymousClass1(this);
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 1);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 1);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 1);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 1);
         }
         Object obj2 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(3, obj2);
-        Object invoke = ((Function3) obj2).invoke(obj, composerImpl, Integer.valueOf(bitsForSlot | i));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$2
+        Object objInvoke = ((Function3) obj2).invoke(obj, composerImpl, Integer.valueOf(iBitsForSlot | i));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -144,25 +158,25 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 2);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 2);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 2);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 2);
         }
         Object obj3 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(4, obj3);
-        Object invoke = ((Function4) obj3).invoke(obj, obj2, composerImpl, Integer.valueOf(bitsForSlot | i));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$3
+        Object objInvoke = ((Function4) obj3).invoke(obj, obj2, composerImpl, Integer.valueOf(iBitsForSlot | i));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.3
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -176,25 +190,25 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 3);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 3);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 3);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 3);
         }
         Object obj4 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(5, obj4);
-        Object invoke = ((Function5) obj4).invoke(obj, obj2, obj3, composerImpl, Integer.valueOf(bitsForSlot | i));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$4
+        Object objInvoke = ((Function5) obj4).invoke(obj, obj2, obj3, composerImpl, Integer.valueOf(iBitsForSlot | i));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.4
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -208,25 +222,25 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, final Object obj4, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 4);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 4);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 4);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 4);
         }
         Object obj5 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(6, obj5);
-        Object invoke = ((Function6) obj5).invoke(obj, obj2, obj3, obj4, composerImpl, Integer.valueOf(bitsForSlot | i));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$5
+        Object objInvoke = ((Function6) obj5).invoke(obj, obj2, obj3, obj4, composerImpl, Integer.valueOf(iBitsForSlot | i));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.5
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -240,25 +254,25 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, final Object obj4, final Object obj5, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 5);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 5);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 5);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 5);
         }
         Object obj6 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(7, obj6);
-        Object invoke = ((Function7) obj6).invoke(obj, obj2, obj3, obj4, obj5, composerImpl, Integer.valueOf(i | bitsForSlot));
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$6
+        Object objInvoke = ((Function7) obj6).invoke(obj, obj2, obj3, obj4, obj5, composerImpl, Integer.valueOf(i | iBitsForSlot));
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.6
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -272,28 +286,28 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, final Object obj4, final Object obj5, final Object obj6, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 6);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 6);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 6);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 6);
         }
         Object obj7 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(8, obj7);
-        Integer valueOf = Integer.valueOf(i | bitsForSlot);
+        Integer numValueOf = Integer.valueOf(i | iBitsForSlot);
         ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) ((Function8) obj7);
         composableLambdaImpl.getClass();
-        Object invoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, composerImpl, valueOf.intValue());
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$7
+        Object objInvoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, composerImpl, numValueOf.intValue());
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.7
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -307,28 +321,28 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, final Object obj4, final Object obj5, final Object obj6, final Object obj7, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 7);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 7);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 7);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 7);
         }
         Object obj8 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(9, obj8);
-        Integer valueOf = Integer.valueOf(i | bitsForSlot);
+        Integer numValueOf = Integer.valueOf(i | iBitsForSlot);
         ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) ((Function9) obj8);
         composableLambdaImpl.getClass();
-        Object invoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, obj7, composerImpl, valueOf.intValue());
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$8
+        Object objInvoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, obj7, composerImpl, numValueOf.intValue());
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.8
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -342,28 +356,28 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 
     public final Object invoke(final Object obj, final Object obj2, final Object obj3, final Object obj4, final Object obj5, final Object obj6, final Object obj7, final Object obj8, Composer composer, final int i) {
-        int bitsForSlot;
+        int iBitsForSlot;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(this.key);
         trackRead(composerImpl);
         if (composerImpl.changed(this)) {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(2, 8);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(2, 8);
         } else {
-            bitsForSlot = ComposableLambdaKt.bitsForSlot(1, 8);
+            iBitsForSlot = ComposableLambdaKt.bitsForSlot(1, 8);
         }
         Object obj9 = this._block;
         TypeIntrinsics.beforeCheckcastToFunctionOfArity(10, obj9);
-        Integer valueOf = Integer.valueOf(i | bitsForSlot);
+        Integer numValueOf = Integer.valueOf(i | iBitsForSlot);
         ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) ((Function10) obj9);
         composableLambdaImpl.getClass();
-        Object invoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, obj7, obj8, composerImpl, valueOf.intValue());
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl$invoke$9
+        Object objInvoke = composableLambdaImpl.invoke(obj, obj2, obj3, obj4, obj5, obj6, obj7, obj8, composerImpl, numValueOf.intValue());
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.runtime.internal.ComposableLambdaImpl.invoke.9
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -377,6 +391,6 @@ public final class ComposableLambdaImpl implements ComposableLambda {
                 }
             };
         }
-        return invoke;
+        return objInvoke;
     }
 }

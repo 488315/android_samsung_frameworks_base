@@ -69,13 +69,13 @@ public final class AdRequest implements Parcelable {
     private AdRequest(Parcel parcel) {
         this.mId = parcel.readInt();
         this.mRequestType = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        if (i == 1) {
             this.mFileDescriptor = ParcelFileDescriptor.CREATOR.createFromParcel(parcel);
             this.mUri = null;
-        } else if (readInt == 2) {
-            String readString = parcel.readString();
-            this.mUri = readString == null ? null : Uri.parse(readString);
+        } else if (i == 2) {
+            String string = parcel.readString();
+            this.mUri = string == null ? null : Uri.parse(string);
             this.mFileDescriptor = null;
         } else {
             this.mFileDescriptor = null;

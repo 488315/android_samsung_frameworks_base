@@ -1,6 +1,7 @@
 package com.android.systemui.qs.tileimpl;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -29,7 +30,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LabelTileView extends QSTileView implements LaunchableView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -39,7 +39,6 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
     public final LinearLayout labelContainer;
     public final LaunchableViewDelegate launchableViewDelegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,17 +52,17 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
         new Companion(null);
     }
 
-    public LabelTileView(Context context, SecQSPanelResourcePicker secQSPanelResourcePicker) {
+    public LabelTileView(Context context, SecQSPanelResourcePicker secQSPanelResourcePicker) throws Resources.NotFoundException {
         super(context);
         QSIconViewImpl qSIconViewImpl = new QSIconViewImpl(context);
         this.iconView = qSIconViewImpl;
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.qs.tileimpl.LabelTileView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
                 int i = LabelTileView.$r8$clinit;
-                LabelTileView.this.setVisibility(intValue);
+                this.f$0.setVisibility(iIntValue);
                 return Unit.INSTANCE;
             }
         });
@@ -72,9 +71,9 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
         FrameLayout frameLayout = secQSCommonTileView.iconFrame;
         addView(frameLayout);
         this.iconFrame = frameLayout;
-        LinearLayout createLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_tile_label, this);
-        addView(createLabel);
-        this.labelContainer = createLabel;
+        LinearLayout linearLayoutCreateLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_tile_label, this);
+        addView(linearLayoutCreateLabel);
+        this.labelContainer = linearLayoutCreateLabel;
         setClipChildren(false);
         setClipToPadding(false);
         setClickable(true);
@@ -86,17 +85,20 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
         LinearLayout.LayoutParams layoutParams2 = layoutParams instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams : null;
         if (layoutParams2 != null) {
             layoutParams2.width = -1;
-            layoutParams2.topMargin = frameLayout.getResources().getDimensionPixelSize(R.dimen.label_tile_icon_top_padding);
+            int dimensionPixelSize = frameLayout.getResources().getDimensionPixelSize(R.dimen.label_tile_icon_top_padding);
+            int touchIconSize = secQSPanelResourcePicker.getTouchIconSize(frameLayout.getContext());
+            int i = layoutParams2.height;
+            layoutParams2.topMargin = i + dimensionPixelSize > touchIconSize ? touchIconSize - i : dimensionPixelSize;
             layoutParams2.bottomMargin = frameLayout.getResources().getDimensionPixelSize(R.dimen.label_tile_icon_bottom_padding);
             frameLayout.setLayoutParams(layoutParams2);
         }
         frameLayout.setLayerType(2, null);
-        if (createLabel != null) {
-            ViewGroup.LayoutParams layoutParams3 = createLabel.getLayoutParams();
+        if (linearLayoutCreateLabel != null) {
+            ViewGroup.LayoutParams layoutParams3 = linearLayoutCreateLabel.getLayoutParams();
             LinearLayout.LayoutParams layoutParams4 = layoutParams3 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams3 : null;
             if (layoutParams4 != null) {
-                layoutParams4.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getLabelHeight(createLabel.getContext());
-                createLabel.setLayoutParams(layoutParams4);
+                layoutParams4.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getLabelHeight(linearLayoutCreateLabel.getContext());
+                linearLayoutCreateLabel.setLayoutParams(layoutParams4);
             }
         }
         setLayoutParams(new LinearLayout.LayoutParams(-1, -1));
@@ -124,16 +126,16 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
         this.commonTileView.tileSpec = qSTile.getTileSpec();
         this.iconFrame.setBackground(null);
         this.iconView.setBackground(null);
-        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.LabelTileView$init$1
+        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.LabelTileView.init.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSTile.this.click(expandable$Companion$fromView$1);
+                qSTile.click(expandable$Companion$fromView$1);
             }
         });
-        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.LabelTileView$init$2
+        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.LabelTileView.init.2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSTile.this.longClick(expandable$Companion$fromView$1);
+                qSTile.longClick(expandable$Companion$fromView$1);
                 this.setPressed(false);
                 return true;
             }
@@ -164,7 +166,7 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
 
     @Override // com.android.systemui.plugins.qs.QSTileView
     public final void onStateChanged(final QSTile.State state) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.LabelTileView$onStateChanged$1
+        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.LabelTileView.onStateChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 SecQSCommonTileView secQSCommonTileView = LabelTileView.this.commonTileView;
@@ -181,7 +183,7 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
     }
 
     @Override // android.view.View
-    public final String toString() {
+    public final String toString() throws Resources.NotFoundException {
         TextView textView = (TextView) findViewById(R.id.tile_label);
         if (textView == null) {
             return super.toString();
@@ -192,9 +194,9 @@ public final class LabelTileView extends QSTileView implements LaunchableView {
         String idSting3 = viewUtil.toIdSting(this.iconFrame);
         String idSting4 = viewUtil.toIdSting(this.iconView);
         String shortIdSting = viewUtil.toShortIdSting(this.commonTileView);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LabelTileView{", idSting, ", label = ", idSting2, ", iconFrame = ");
-        MoveResult$$ExternalSyntheticOutline0.m(m, idSting3, ", icon = ", idSting4, ", common = ");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, shortIdSting, "}");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LabelTileView{", idSting, ", label = ", idSting2, ", iconFrame = ");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, idSting3, ", icon = ", idSting4, ", common = ");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, shortIdSting, "}");
     }
 
     @Override // com.android.systemui.plugins.qs.QSTileView

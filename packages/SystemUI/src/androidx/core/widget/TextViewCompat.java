@@ -16,11 +16,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextViewCompat {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OreoCallback implements ActionMode.Callback {
         public final ActionMode.Callback mCallback;
         public boolean mCanUseMenuBuilderReferences;
@@ -50,7 +48,8 @@ public final class TextViewCompat {
         }
 
         @Override // android.view.ActionMode.Callback
-        public final boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+        public final boolean onPrepareActionMode(ActionMode actionMode, Menu menu) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
+            String str;
             Context context = this.mTextView.getContext();
             PackageManager packageManager = context.getPackageManager();
             if (!this.mInitializedMenuBuilderReferences) {
@@ -79,10 +78,7 @@ public final class TextViewCompat {
                     for (ResolveInfo resolveInfo : packageManager.queryIntentActivities(new Intent().setAction("android.intent.action.PROCESS_TEXT").setType("text/plain"), 0)) {
                         if (!context.getPackageName().equals(resolveInfo.activityInfo.packageName)) {
                             ActivityInfo activityInfo = resolveInfo.activityInfo;
-                            if (activityInfo.exported) {
-                                String str = activityInfo.permission;
-                                if (str != null && context.checkSelfPermission(str) != 0) {
-                                }
+                            if (activityInfo.exported && ((str = activityInfo.permission) == null || context.checkSelfPermission(str) == 0)) {
                             }
                         }
                         arrayList.add(resolveInfo);
@@ -90,11 +86,11 @@ public final class TextViewCompat {
                 }
                 for (int i = 0; i < arrayList.size(); i++) {
                     ResolveInfo resolveInfo2 = (ResolveInfo) arrayList.get(i);
-                    MenuItem add = menu.add(0, 0, i + 100, resolveInfo2.loadLabel(packageManager));
+                    MenuItem menuItemAdd = menu.add(0, 0, i + 100, resolveInfo2.loadLabel(packageManager));
                     TextView textView = this.mTextView;
-                    Intent putExtra = new Intent().setAction("android.intent.action.PROCESS_TEXT").setType("text/plain").putExtra("android.intent.extra.PROCESS_TEXT_READONLY", !((textView instanceof Editable) && textView.onCheckIsTextEditor() && textView.isEnabled()));
+                    Intent intentPutExtra = new Intent().setAction("android.intent.action.PROCESS_TEXT").setType("text/plain").putExtra("android.intent.extra.PROCESS_TEXT_READONLY", !((textView instanceof Editable) && textView.onCheckIsTextEditor() && textView.isEnabled()));
                     ActivityInfo activityInfo2 = resolveInfo2.activityInfo;
-                    add.setIntent(putExtra.setClassName(activityInfo2.packageName, activityInfo2.name)).setShowAsAction(1);
+                    menuItemAdd.setIntent(intentPutExtra.setClassName(activityInfo2.packageName, activityInfo2.name)).setShowAsAction(1);
                 }
             } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException unused2) {
             }

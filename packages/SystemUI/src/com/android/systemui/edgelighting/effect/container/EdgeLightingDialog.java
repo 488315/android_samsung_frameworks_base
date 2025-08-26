@@ -27,7 +27,6 @@ import com.android.systemui.edgelighting.plus.NotificationELPlusEffect;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.util.SemLog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingDialog extends Dialog implements IEdgeLightingController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +43,6 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
     public IEdgeLightingWindowCallback mWindowCallback;
     public final int mWindowType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.effect.container.EdgeLightingDialog$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
@@ -56,13 +54,12 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
             if (applicationEffect == null || !applicationEffect.isShown()) {
                 NotificationEffect notificationEffect = edgeLightingDialog.mNotificationEffect;
                 if (notificationEffect == null || !notificationEffect.isShown()) {
-                    EdgeLightingDialog.m2555$$Nest$mselfDismissWindow(edgeLightingDialog);
+                    EdgeLightingDialog.m2572$$Nest$mselfDismissWindow(edgeLightingDialog);
                 }
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AODShowState extends ContentObserver {
         public AODShowState(Handler handler) {
             super(handler);
@@ -96,7 +93,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
     }
 
     /* renamed from: -$$Nest$mdismissInternal, reason: not valid java name */
-    public static void m2554$$Nest$mdismissInternal(EdgeLightingDialog edgeLightingDialog) {
+    public static void m2571$$Nest$mdismissInternal(EdgeLightingDialog edgeLightingDialog) {
         if (edgeLightingDialog.mAODShowState != null) {
             edgeLightingDialog.getContext().getContentResolver().unregisterContentObserver(edgeLightingDialog.mAODShowState);
             edgeLightingDialog.mAODShowState = null;
@@ -124,7 +121,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
     }
 
     /* renamed from: -$$Nest$mselfDismissWindow, reason: not valid java name */
-    public static void m2555$$Nest$mselfDismissWindow(EdgeLightingDialog edgeLightingDialog) {
+    public static void m2572$$Nest$mselfDismissWindow(EdgeLightingDialog edgeLightingDialog) {
         IEdgeLightingWindowCallback iEdgeLightingWindowCallback = edgeLightingDialog.mWindowCallback;
         if (iEdgeLightingWindowCallback != null) {
             iEdgeLightingWindowCallback.onDismissEdgeWindow();
@@ -154,60 +151,60 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
                 if (message.what != 1) {
                     return;
                 }
-                EdgeLightingDialog.m2554$$Nest$mdismissInternal(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2571$$Nest$mdismissInternal(EdgeLightingDialog.this);
             }
         };
         this.mEdgeAnimationListener = new AnonymousClass4();
     }
 
     public final NotificationEffect makeEffectType(EdgeEffectInfo edgeEffectInfo, boolean z) {
-        NotificationEffect notificationEffect;
+        NotificationEffect notificationNormalEffect;
         int i = edgeEffectInfo.mEffectType;
         if (i == 1) {
-            notificationEffect = new NotificationNormalEffect(getContext());
+            notificationNormalEffect = new NotificationNormalEffect(getContext());
         } else if (i != 4) {
             switch (i) {
                 case 7:
-                    notificationEffect = new NotificationHeartEffect(getContext());
+                    notificationNormalEffect = new NotificationHeartEffect(getContext());
                     break;
                 case 8:
-                    notificationEffect = new NotificationFireworksEffect(getContext());
+                    notificationNormalEffect = new NotificationFireworksEffect(getContext());
                     break;
                 case 9:
-                    notificationEffect = new NotificationEclipseEffect(getContext());
+                    notificationNormalEffect = new NotificationEclipseEffect(getContext());
                     break;
                 case 10:
-                    notificationEffect = new NotificationEchoEffect(getContext());
+                    notificationNormalEffect = new NotificationEchoEffect(getContext());
                     break;
                 case 11:
-                    notificationEffect = new NotificationSpotlightEffect(getContext());
+                    notificationNormalEffect = new NotificationSpotlightEffect(getContext());
                     break;
                 default:
-                    NotificationNormalEffect notificationNormalEffect = new NotificationNormalEffect(getContext());
-                    notificationNormalEffect.mLightEffectView.mIsNoFrame = true;
-                    notificationEffect = notificationNormalEffect;
+                    NotificationNormalEffect notificationNormalEffect2 = new NotificationNormalEffect(getContext());
+                    notificationNormalEffect2.mLightEffectView.mIsNoFrame = true;
+                    notificationNormalEffect = notificationNormalEffect2;
                     break;
             }
         } else {
-            notificationEffect = new NotificationReflectEffect(getContext());
+            notificationNormalEffect = new NotificationReflectEffect(getContext());
         }
         Bundle bundle = edgeEffectInfo.mPlusEffectBundle;
-        NotificationEffect notificationEffect2 = notificationEffect;
+        NotificationEffect notificationEffect = notificationNormalEffect;
         if (bundle != null) {
-            NotificationEffect notificationEffect3 = notificationEffect;
-            notificationEffect3 = notificationEffect;
+            NotificationEffect notificationEffect2 = notificationNormalEffect;
+            notificationEffect2 = notificationNormalEffect;
             if (edgeEffectInfo.mEffectType == 100 && z) {
                 NotificationELPlusEffect notificationELPlusEffect = new NotificationELPlusEffect(getContext(), bundle, edgeEffectInfo);
                 notificationELPlusEffect.mIsUsedAppIconForEdgeLightingPlus = bundle.getBoolean("isUsedAppIcon", false);
-                notificationEffect3 = notificationELPlusEffect;
+                notificationEffect2 = notificationELPlusEffect;
             }
-            notificationEffect3.mIsHideBriefPopupForEdgeLightingPlus = bundle.getBoolean("isHideBriefPopup", false);
-            notificationEffect3.mIsSingleTapDisabledForEdgeLightingPlus = bundle.getBoolean("isDisableSingleTap", false);
-            notificationEffect3.mIsSwipeDownDisabledForEdgeLightingPlus = bundle.getBoolean("isDisableSwipeDown", false);
-            notificationEffect2 = notificationEffect3;
+            notificationEffect2.mIsHideBriefPopupForEdgeLightingPlus = bundle.getBoolean("isHideBriefPopup", false);
+            notificationEffect2.mIsSingleTapDisabledForEdgeLightingPlus = bundle.getBoolean("isDisableSingleTap", false);
+            notificationEffect2.mIsSwipeDownDisabledForEdgeLightingPlus = bundle.getBoolean("isDisableSwipeDown", false);
+            notificationEffect = notificationEffect2;
         }
-        notificationEffect2.setIsMultiResolutionSupoorted(edgeEffectInfo.mIsMultiResolutionSupoorted);
-        return notificationEffect2;
+        notificationEffect.setIsMultiResolutionSupoorted(edgeEffectInfo.mIsMultiResolutionSupoorted);
+        return notificationEffect;
     }
 
     @Override // android.app.Dialog, android.view.Window.Callback
@@ -287,9 +284,9 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
                 relativeLayout.removeView(notificationEffect);
                 this.mLightingPreview = null;
             }
-            NotificationEffect makeEffectType = makeEffectType(edgeEffectInfo, false);
-            this.mLightingPreview = makeEffectType;
-            this.mDialogMain.addView(makeEffectType, -1, -1);
+            NotificationEffect notificationEffectMakeEffectType = makeEffectType(edgeEffectInfo, false);
+            this.mLightingPreview = notificationEffectMakeEffectType;
+            this.mDialogMain.addView(notificationEffectMakeEffectType, -1, -1);
             this.mLightingPreview.mEdgeListener = this.mEdgeAnimationListener;
             getWindow().addFlags(16);
         }
@@ -319,7 +316,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
         new Handler().postDelayed(new Runnable() { // from class: com.android.systemui.edgelighting.effect.container.EdgeLightingDialog.3
             @Override // java.lang.Runnable
             public final void run() {
-                EdgeLightingDialog.m2555$$Nest$mselfDismissWindow(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2572$$Nest$mselfDismissWindow(EdgeLightingDialog.this);
             }
         }, 500L);
     }
@@ -377,7 +374,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
                 if (message.what != 1) {
                     return;
                 }
-                EdgeLightingDialog.m2554$$Nest$mdismissInternal(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2571$$Nest$mdismissInternal(EdgeLightingDialog.this);
             }
         };
         this.mEdgeAnimationListener = new AnonymousClass4();

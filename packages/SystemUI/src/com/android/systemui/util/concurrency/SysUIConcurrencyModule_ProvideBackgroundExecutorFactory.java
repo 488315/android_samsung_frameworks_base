@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideBackgroundExecutorFactory implements Provider {
     private final Provider looperProvider;
@@ -19,9 +18,9 @@ public final class SysUIConcurrencyModule_ProvideBackgroundExecutorFactory imple
     }
 
     public static Executor provideBackgroundExecutor(Looper looper) {
-        Executor provideBackgroundExecutor = SysUIConcurrencyModule.INSTANCE.provideBackgroundExecutor(looper);
-        provideBackgroundExecutor.getClass();
-        return provideBackgroundExecutor;
+        Executor executorProvideBackgroundExecutor = SysUIConcurrencyModule.INSTANCE.provideBackgroundExecutor(looper);
+        executorProvideBackgroundExecutor.getClass();
+        return executorProvideBackgroundExecutor;
     }
 
     public static SysUIConcurrencyModule_ProvideBackgroundExecutorFactory create(Provider provider) {

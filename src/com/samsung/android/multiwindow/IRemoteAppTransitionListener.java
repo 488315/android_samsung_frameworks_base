@@ -65,9 +65,9 @@ public interface IRemoteAppTransitionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteAppTransitionListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteAppTransitionListener)) {
-                return (IRemoteAppTransitionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteAppTransitionListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteAppTransitionListener)) {
+                return (IRemoteAppTransitionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -103,22 +103,22 @@ public interface IRemoteAppTransitionListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onStartRecentsAnimation(readBoolean);
+                onStartRecentsAnimation(z);
             } else if (i == 2) {
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onFinishRecentsAnimation(readBoolean2);
+                onFinishRecentsAnimation(z2);
             } else if (i == 3) {
-                boolean readBoolean3 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onStartHomeAnimation(readBoolean3);
+                onStartHomeAnimation(z3);
             } else if (i == 4) {
-                boolean readBoolean4 = parcel.readBoolean();
-                boolean readBoolean5 = parcel.readBoolean();
+                boolean z4 = parcel.readBoolean();
+                boolean z5 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onWallpaperVisibilityChanged(readBoolean4, readBoolean5);
+                onWallpaperVisibilityChanged(z4, z5);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -143,50 +143,50 @@ public interface IRemoteAppTransitionListener extends IInterface {
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
             public void onStartRecentsAnimation(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
             public void onFinishRecentsAnimation(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
             public void onStartHomeAnimation(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
             public void onWallpaperVisibilityChanged(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

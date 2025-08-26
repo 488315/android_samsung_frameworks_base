@@ -13,9 +13,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.permission.IPermissionController;
-import android.permission.PermissionControllerManager;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
@@ -112,15 +112,15 @@ public final class PermissionControllerManager {
                 Intent intent = new Intent(PermissionControllerService.SERVICE_INTERFACE);
                 String permissionControllerPackageName = context.getPackageManager().getPermissionControllerPackageName();
                 intent.setPackage(permissionControllerPackageName);
-                ResolveInfo resolveService = context.getPackageManager().resolveService(intent, 0);
-                if (resolveService == null) {
+                ResolveInfo resolveInfoResolveService = context.getPackageManager().resolveService(intent, 0);
+                if (resolveInfoResolveService == null) {
                     String str = "No PermissionController package (" + permissionControllerPackageName + ") for user " + context.getUserId();
                     Log.wtf(TAG, str);
                     throw new IllegalStateException(str);
                 }
                 permissionControllerManager = this;
                 handler2 = handler;
-                ServiceConnector.Impl<IPermissionController> impl = new ServiceConnector.Impl<IPermissionController>(ActivityThread.currentApplication(), new Intent(PermissionControllerService.SERVICE_INTERFACE).setComponent(resolveService.getComponentInfo().getComponentName()), 0, context.getUserId(), new Function() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda31
+                ServiceConnector.Impl<IPermissionController> impl = new ServiceConnector.Impl<IPermissionController>(ActivityThread.currentApplication(), new Intent(PermissionControllerService.SERVICE_INTERFACE).setComponent(resolveInfoResolveService.getComponentInfo().getComponentName()), 0, context.getUserId(), new Function() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda31
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
                         return IPermissionController.Stub.asInterface((IBinder) obj);
@@ -174,14 +174,12 @@ public final class PermissionControllerManager {
         this.mRemoteService.postAsync(new ServiceConnector.Job() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda14
             @Override // com.android.internal.infra.ServiceConnector.Job
             public final Object run(Object obj) {
-                CompletableFuture lambda$revokeRuntimePermissions$0;
-                lambda$revokeRuntimePermissions$0 = PermissionControllerManager.this.lambda$revokeRuntimePermissions$0(map, z, i, (IPermissionController) obj);
-                return lambda$revokeRuntimePermissions$0;
+                return this.f$0.lambda$revokeRuntimePermissions$0(map, z, i, (IPermissionController) obj);
             }
         }).whenCompleteAsync((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda15
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                PermissionControllerManager.lambda$revokeRuntimePermissions$1(PermissionControllerManager.OnRevokeRuntimePermissionsCallback.this, (Map) obj, (Throwable) obj2);
+                PermissionControllerManager.lambda$revokeRuntimePermissions$1(onRevokeRuntimePermissionsCallback, (Map) obj, (Throwable) obj2);
             }
         }, executor);
     }
@@ -198,7 +196,7 @@ public final class PermissionControllerManager {
     }
 
     static /* synthetic */ void lambda$revokeRuntimePermissions$1(OnRevokeRuntimePermissionsCallback onRevokeRuntimePermissionsCallback, Map map, Throwable th) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 Log.e(TAG, "Failure when revoking runtime permissions " + map, th);
@@ -207,7 +205,7 @@ public final class PermissionControllerManager {
                 onRevokeRuntimePermissionsCallback.onRevokeRuntimePermissions(map);
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -236,7 +234,7 @@ public final class PermissionControllerManager {
     }
 
     static /* synthetic */ void lambda$setRuntimePermissionGrantStateByDeviceAdmin$3(String str, Consumer consumer, Boolean bool, Throwable th) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 Log.e(TAG, "Error setting permissions state for device admin " + str, th);
@@ -245,7 +243,7 @@ public final class PermissionControllerManager {
                 consumer.accept(Boolean.valueOf(Boolean.TRUE.equals(bool)));
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -257,14 +255,12 @@ public final class PermissionControllerManager {
         this.mRemoteService.postAsync(new ServiceConnector.Job() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda20
             @Override // com.android.internal.infra.ServiceConnector.Job
             public final Object run(Object obj) {
-                CompletableFuture receiveBytes;
-                receiveBytes = RemoteStream.receiveBytes(new FunctionalUtils.ThrowingConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda36
+                return RemoteStream.receiveBytes(new FunctionalUtils.ThrowingConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda36
                     @Override // com.android.internal.util.FunctionalUtils.ThrowingConsumer
-                    public final void acceptOrThrow(Object obj2) {
-                        IPermissionController.this.getRuntimePermissionBackup(r2, (ParcelFileDescriptor) obj2);
+                    public final void acceptOrThrow(Object obj2) throws RemoteException {
+                        iPermissionController.getRuntimePermissionBackup(userHandle, (ParcelFileDescriptor) obj2);
                     }
                 });
-                return receiveBytes;
             }
         }).whenCompleteAsync((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda21
             @Override // java.util.function.BiConsumer
@@ -290,14 +286,12 @@ public final class PermissionControllerManager {
         this.mRemoteService.postAsync(new ServiceConnector.Job() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda12
             @Override // com.android.internal.infra.ServiceConnector.Job
             public final Object run(Object obj) {
-                CompletableFuture sendBytes;
-                sendBytes = RemoteStream.sendBytes((FunctionalUtils.ThrowingConsumer<ParcelFileDescriptor>) new FunctionalUtils.ThrowingConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda28
+                return RemoteStream.sendBytes((FunctionalUtils.ThrowingConsumer<ParcelFileDescriptor>) new FunctionalUtils.ThrowingConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda28
                     @Override // com.android.internal.util.FunctionalUtils.ThrowingConsumer
-                    public final void acceptOrThrow(Object obj2) {
-                        IPermissionController.this.stageAndApplyRuntimePermissionsBackup(r2, (ParcelFileDescriptor) obj2);
+                    public final void acceptOrThrow(Object obj2) throws RemoteException {
+                        iPermissionController.stageAndApplyRuntimePermissionsBackup(userHandle, (ParcelFileDescriptor) obj2);
                     }
                 }, bArr);
-                return sendBytes;
             }
         }).whenComplete((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda13
             @Override // java.util.function.BiConsumer
@@ -339,7 +333,7 @@ public final class PermissionControllerManager {
     }
 
     static /* synthetic */ void lambda$applyStagedRuntimePermissionBackup$11(String str, Consumer consumer, Boolean bool, Throwable th) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 Log.e(TAG, "Error restoring delayed permissions for " + str, th);
@@ -348,7 +342,7 @@ public final class PermissionControllerManager {
                 consumer.accept(Boolean.valueOf(Boolean.TRUE.equals(bool)));
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -357,14 +351,12 @@ public final class PermissionControllerManager {
             this.mRemoteService.postAsync(new ServiceConnector.Job() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda24
                 @Override // com.android.internal.infra.ServiceConnector.Job
                 public final Object run(Object obj) {
-                    CompletableFuture runAsync;
-                    runAsync = AndroidFuture.runAsync(FunctionalUtils.uncheckExceptions(new FunctionalUtils.ThrowingRunnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda30
+                    return AndroidFuture.runAsync(FunctionalUtils.uncheckExceptions(new FunctionalUtils.ThrowingRunnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda30
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                        public final void runOrThrow() {
-                            IPermissionController.this.asBinder().dump(r2, r3);
+                        public final void runOrThrow() throws RemoteException {
+                            iPermissionController.asBinder().dump(fileDescriptor, strArr);
                         }
                     }), BackgroundThread.getExecutor());
-                    return runAsync;
                 }
             }).get(REQUEST_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
@@ -386,10 +378,10 @@ public final class PermissionControllerManager {
         }).whenComplete((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda38
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                Handler.this.post(new Runnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda40
+                handler.post(new Runnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda40
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PermissionControllerManager.lambda$getAppPermissions$15(r1, r2, r3);
+                        PermissionControllerManager.lambda$getAppPermissions$15(th, onGetAppPermissionResultCallback, list);
                     }
                 });
             }
@@ -416,7 +408,7 @@ public final class PermissionControllerManager {
         Preconditions.checkNotNull(str2);
         this.mRemoteService.run(new ServiceConnector.VoidJob() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda27
             @Override // com.android.internal.infra.ServiceConnector.VoidJob
-            public final void runNoResult(Object obj) {
+            public final void runNoResult(Object obj) throws RemoteException {
                 ((IPermissionController) obj).revokeRuntimePermission(str, str2);
             }
         });
@@ -437,10 +429,10 @@ public final class PermissionControllerManager {
         }).whenComplete((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda7
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                Handler.this.post(new Runnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda29
+                handler.post(new Runnable() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda29
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PermissionControllerManager.lambda$countPermissionApps$19(r1, r2, r3);
+                        PermissionControllerManager.lambda$countPermissionApps$19(th, onCountPermissionAppsResultCallback, num);
                     }
                 });
             }
@@ -474,7 +466,7 @@ public final class PermissionControllerManager {
         }).whenCompleteAsync((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda11
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                PermissionControllerManager.lambda$getPermissionUsages$22(PermissionControllerManager.OnPermissionUsageResultCallback.this, (List) obj, (Throwable) obj2);
+                PermissionControllerManager.lambda$getPermissionUsages$22(onPermissionUsageResultCallback, (List) obj, (Throwable) obj2);
             }
         }, executor);
     }
@@ -490,11 +482,11 @@ public final class PermissionControllerManager {
             Log.e(TAG, "Error getting permission usages", th);
             onPermissionUsageResultCallback.onPermissionUsageResult(Collections.EMPTY_LIST);
         } else {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 onPermissionUsageResultCallback.onPermissionUsageResult(CollectionUtils.emptyIfNull(list));
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -592,7 +584,7 @@ public final class PermissionControllerManager {
     public void notifyOneTimePermissionSessionTimeout(final String str, final int i) {
         this.mRemoteService.run(new ServiceConnector.VoidJob() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda39
             @Override // com.android.internal.infra.ServiceConnector.VoidJob
-            public final void runNoResult(Object obj) {
+            public final void runNoResult(Object obj) throws RemoteException {
                 ((IPermissionController) obj).notifyOneTimePermissionSessionTimeout(str, i);
             }
         });
@@ -619,7 +611,7 @@ public final class PermissionControllerManager {
     }
 
     static /* synthetic */ void lambda$getPlatformPermissionsForGroup$31(String str, Consumer consumer, List list, Throwable th) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 Log.e(TAG, "Failed to get permissions of " + str, th);
@@ -628,7 +620,7 @@ public final class PermissionControllerManager {
                 consumer.accept(list);
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -653,7 +645,7 @@ public final class PermissionControllerManager {
     }
 
     static /* synthetic */ void lambda$getGroupOfPlatformPermission$33(String str, Consumer consumer, String str2, Throwable th) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (th != null) {
                 Log.e(TAG, "Failed to get group of " + str, th);
@@ -662,7 +654,7 @@ public final class PermissionControllerManager {
                 consumer.accept(str2);
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -693,11 +685,11 @@ public final class PermissionControllerManager {
             Log.e(TAG, "Error getting unused app count", th);
             intConsumer.accept(0);
         } else {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 intConsumer.accept(num.intValue());
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -729,11 +721,11 @@ public final class PermissionControllerManager {
             Log.e(TAG, "Error getting hibernation eligibility", th);
             intConsumer.accept(-1);
         } else {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 intConsumer.accept(num.intValue());
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -742,14 +734,12 @@ public final class PermissionControllerManager {
         this.mRemoteService.postAsync(new ServiceConnector.Job() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda22
             @Override // com.android.internal.infra.ServiceConnector.Job
             public final Object run(Object obj) {
-                CompletableFuture lambda$revokeSelfPermissionsOnKill$38;
-                lambda$revokeSelfPermissionsOnKill$38 = PermissionControllerManager.this.lambda$revokeSelfPermissionsOnKill$38(str, list, (IPermissionController) obj);
-                return lambda$revokeSelfPermissionsOnKill$38;
+                return this.f$0.lambda$revokeSelfPermissionsOnKill$38(str, list, (IPermissionController) obj);
             }
         }).whenComplete((BiConsumer<? super R, ? super Throwable>) new BiConsumer() { // from class: android.permission.PermissionControllerManager$$ExternalSyntheticLambda23
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                PermissionControllerManager.this.lambda$revokeSelfPermissionsOnKill$39(list, str, (Void) obj, (Throwable) obj2);
+                this.f$0.lambda$revokeSelfPermissionsOnKill$39(list, str, (Void) obj, (Throwable) obj2);
             }
         });
     }

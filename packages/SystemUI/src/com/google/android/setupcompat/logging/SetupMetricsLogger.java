@@ -6,7 +6,6 @@ import com.google.android.setupcompat.internal.Preconditions;
 import com.google.android.setupcompat.internal.SetupCompatServiceInvoker;
 import com.google.android.setupcompat.util.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SetupMetricsLogger {
     public static final /* synthetic */ int $r8$clinit = 0;

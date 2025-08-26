@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelsKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -52,7 +51,7 @@ final class NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1 extends S
             StylusManager.StylusCallback stylusCallback = new StylusManager.StylusCallback() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createStylusEverUsedFlow$1$callback$1
                 @Override // com.android.systemui.stylus.StylusManager.StylusCallback
                 public final void onStylusFirstUsed() {
-                    ChannelsKt.trySendBlocking(ProducerScope.this, Boolean.valueOf(InputSettings.isStylusEverUsed(context)));
+                    ChannelsKt.trySendBlocking(producerScope, Boolean.valueOf(InputSettings.isStylusEverUsed(context)));
                 }
             };
             this.$this_createStylusEverUsedFlow.stylusCallbacks.add(stylusCallback);

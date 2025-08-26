@@ -52,9 +52,9 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVisualQueryDetectionAttentionListener)) {
-                return (IVisualQueryDetectionAttentionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVisualQueryDetectionAttentionListener)) {
+                return (IVisualQueryDetectionAttentionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,9 +88,9 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
                 parcel.enforceNoDataAvail();
                 onAttentionGained(visualQueryAttentionResult);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onAttentionLost(readInt);
+                onAttentionLost(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
 
             @Override // com.android.internal.app.IVisualQueryDetectionAttentionListener
             public void onAttentionGained(VisualQueryAttentionResult visualQueryAttentionResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
-                    obtain.writeTypedObject(visualQueryAttentionResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(visualQueryAttentionResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVisualQueryDetectionAttentionListener
             public void onAttentionLost(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

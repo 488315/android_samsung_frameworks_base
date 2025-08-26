@@ -8,7 +8,6 @@ import androidx.reflect.SeslBaseReflector;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslViewReflector {
     public static final Class mClass = View.class;
@@ -43,9 +42,9 @@ public class SeslViewReflector {
     public static boolean isVisibleToUser(View view) {
         Method declaredMethod = SeslBaseReflector.getDeclaredMethod(mClass, "isVisibleToUser", Rect.class);
         if (declaredMethod != null) {
-            Object invoke = SeslBaseReflector.invoke(view, declaredMethod, null);
-            if (invoke instanceof Boolean) {
-                return ((Boolean) invoke).booleanValue();
+            Object objInvoke = SeslBaseReflector.invoke(view, declaredMethod, null);
+            if (objInvoke instanceof Boolean) {
+                return ((Boolean) objInvoke).booleanValue();
             }
         }
         return false;

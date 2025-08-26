@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyItem {
     public final PrivacyApplication application;
@@ -27,14 +26,14 @@ public final class PrivacyItem {
         String str = privacyApplication.packageName;
         int i = privacyApplication.uid;
         long j3 = this.timeStampRemoved;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("(", logName, ", ", str, "(");
-        m.append(i);
-        m.append("), ");
-        m.append(j);
-        m.append(", paused=");
-        m.append(z);
-        m.append(", removed=");
-        this.log = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j3, ")", m);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("(", logName, ", ", str, "(");
+        sbM.append(i);
+        sbM.append("), ");
+        sbM.append(j);
+        sbM.append(", paused=");
+        sbM.append(z);
+        sbM.append(", removed=");
+        this.log = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j3, ")", sbM);
     }
 
     public final boolean equals(Object obj) {

@@ -93,7 +93,7 @@ public class NinePatchDrawable extends Drawable {
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
         boolean z;
-        int i;
+        int alpha;
         NinePatchState ninePatchState = this.mNinePatchState;
         Rect bounds = getBounds();
         if (this.mBlendModeFilter == null || getPaint().getColorFilter() != null) {
@@ -102,15 +102,15 @@ public class NinePatchDrawable extends Drawable {
             this.mPaint.setColorFilter(this.mBlendModeFilter);
             z = true;
         }
-        int i2 = -1;
+        int iSave = -1;
         if (ninePatchState.mBaseAlpha != 1.0f) {
-            i = getPaint().getAlpha();
-            this.mPaint.setAlpha((int) ((i * ninePatchState.mBaseAlpha) + 0.5f));
+            alpha = getPaint().getAlpha();
+            this.mPaint.setAlpha((int) ((alpha * ninePatchState.mBaseAlpha) + 0.5f));
         } else {
-            i = -1;
+            alpha = -1;
         }
         if (canvas.getDensity() == 0 && ninePatchState.mNinePatch.getDensity() != 0) {
-            i2 = canvas.save();
+            iSave = canvas.save();
             float density = this.mTargetDensity / ninePatchState.mNinePatch.getDensity();
             canvas.scale(density, density, bounds.left, bounds.top);
             if (this.mTempRect == null) {
@@ -124,20 +124,20 @@ public class NinePatchDrawable extends Drawable {
             bounds = rect;
         }
         if (needsMirroring()) {
-            if (i2 < 0) {
-                i2 = canvas.save();
+            if (iSave < 0) {
+                iSave = canvas.save();
             }
             canvas.scale(-1.0f, 1.0f, (bounds.left + bounds.right) / 2.0f, (bounds.top + bounds.bottom) / 2.0f);
         }
         ninePatchState.mNinePatch.draw(canvas, bounds, this.mPaint);
-        if (i2 >= 0) {
-            canvas.restoreToCount(i2);
+        if (iSave >= 0) {
+            canvas.restoreToCount(iSave);
         }
         if (z) {
             this.mPaint.setColorFilter(null);
         }
-        if (i >= 0) {
-            this.mPaint.setAlpha(i);
+        if (alpha >= 0) {
+            this.mPaint.setAlpha(alpha);
         }
     }
 
@@ -252,15 +252,15 @@ public class NinePatchDrawable extends Drawable {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.NinePatchDrawable);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.NinePatchDrawable);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         updateLocalState(resources);
     }
 
-    private void updateStateFromTypedArray(TypedArray typedArray) throws XmlPullParserException {
+    private void updateStateFromTypedArray(TypedArray typedArray) throws XmlPullParserException, Resources.NotFoundException, IOException {
         Resources resources = typedArray.getResources();
         NinePatchState ninePatchState = this.mNinePatchState;
         ninePatchState.mChangingConfigurations |= typedArray.getChangingConfigurations();
@@ -271,32 +271,32 @@ public class NinePatchDrawable extends Drawable {
         if (resourceId != 0) {
             final Rect rect = new Rect();
             Rect rect2 = new Rect();
-            Bitmap bitmap = null;
+            Bitmap bitmapDecodeBitmap = null;
             try {
                 TypedValue typedValue = new TypedValue();
-                InputStream openRawResource = resources.openRawResource(resourceId, typedValue);
+                InputStream inputStreamOpenRawResource = resources.openRawResource(resourceId, typedValue);
                 if (typedValue.density == 0) {
                     i = 160;
                 } else if (typedValue.density != 65535) {
                     i = typedValue.density;
                 }
-                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(resources, openRawResource, i), new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.NinePatchDrawable$$ExternalSyntheticLambda0
+                bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(resources, inputStreamOpenRawResource, i), new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.NinePatchDrawable$$ExternalSyntheticLambda0
                     @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                     public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                        NinePatchDrawable.lambda$updateStateFromTypedArray$0(Rect.this, imageDecoder, imageInfo, source);
+                        NinePatchDrawable.lambda$updateStateFromTypedArray$0(rect, imageDecoder, imageInfo, source);
                     }
                 });
-                openRawResource.close();
+                inputStreamOpenRawResource.close();
             } catch (IOException unused) {
             }
-            if (bitmap == null) {
+            if (bitmapDecodeBitmap == null) {
                 throw new XmlPullParserException(typedArray.getPositionDescription() + ": <nine-patch> requires a valid src attribute");
             }
-            if (bitmap.getNinePatchChunk() == null) {
+            if (bitmapDecodeBitmap.getNinePatchChunk() == null) {
                 throw new XmlPullParserException(typedArray.getPositionDescription() + ": <nine-patch> requires a valid 9-patch source image");
             }
-            bitmap.getOpticalInsets(rect2);
-            ninePatchState.mNinePatch = new NinePatch(bitmap, bitmap.getNinePatchChunk());
+            bitmapDecodeBitmap.getOpticalInsets(rect2);
+            ninePatchState.mNinePatch = new NinePatch(bitmapDecodeBitmap, bitmapDecodeBitmap.getNinePatchChunk());
             ninePatchState.mPadding = rect;
             ninePatchState.mOpticalInsets = Insets.of(rect2);
         }
@@ -325,15 +325,15 @@ public class NinePatchDrawable extends Drawable {
             return;
         }
         if (ninePatchState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(ninePatchState.mThemeAttrs, R.styleable.NinePatchDrawable);
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(ninePatchState.mThemeAttrs, R.styleable.NinePatchDrawable);
             try {
                 try {
-                    updateStateFromTypedArray(resolveAttributes);
+                    updateStateFromTypedArray(typedArrayResolveAttributes);
                 } catch (XmlPullParserException e) {
                     rethrowAsRuntimeException(e);
                 }
             } finally {
-                resolveAttributes.recycle();
+                typedArrayResolveAttributes.recycle();
             }
         }
         if (ninePatchState.mTint != null && ninePatchState.mTint.canApplyTheme()) {
@@ -503,6 +503,7 @@ public class NinePatchDrawable extends Drawable {
             return (colorStateList != null && colorStateList.canApplyTheme()) || super.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new NinePatchDrawable(this, null);

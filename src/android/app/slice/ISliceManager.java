@@ -120,9 +120,9 @@ public interface ISliceManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISliceManager)) {
-                return (ISliceManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISliceManager)) {
+                return (ISliceManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -172,92 +172,92 @@ public interface ISliceManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     SliceSpec[] sliceSpecArr = (SliceSpec[]) parcel.createTypedArray(SliceSpec.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    pinSlice(readString, uri, sliceSpecArr, readStrongBinder);
+                    pinSlice(string, uri, sliceSpecArr, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    unpinSlice(readString2, uri2, readStrongBinder2);
+                    unpinSlice(string2, uri2, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasSliceAccess = hasSliceAccess(readString3);
+                    boolean zHasSliceAccess = hasSliceAccess(string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasSliceAccess);
+                    parcel2.writeBoolean(zHasSliceAccess);
                     return true;
                 case 4:
                     Uri uri3 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SliceSpec[] pinnedSpecs = getPinnedSpecs(uri3, readString4);
+                    SliceSpec[] pinnedSpecs = getPinnedSpecs(uri3, string4);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(pinnedSpecs, 1);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Uri[] pinnedSlices = getPinnedSlices(readString5);
+                    Uri[] pinnedSlices = getPinnedSlices(string5);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(pinnedSlices, 1);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] backupPayload = getBackupPayload(readInt);
+                    byte[] backupPayload = getBackupPayload(i3);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(backupPayload);
                     return true;
                 case 7:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt2 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    applyRestore(createByteArray, readInt2);
+                    applyRestore(bArrCreateByteArray, i4);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     Uri uri4 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     parcel.enforceNoDataAvail();
-                    grantSlicePermission(readString6, readString7, uri4);
+                    grantSlicePermission(string6, string7, uri4);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     Uri uri5 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     parcel.enforceNoDataAvail();
-                    revokeSlicePermission(readString8, readString9, uri5);
+                    revokeSlicePermission(string8, string9, uri5);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     Uri uri6 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    String readString10 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
+                    String string10 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    int checkSlicePermission = checkSlicePermission(uri6, readString10, readInt3, readInt4, createStringArray);
+                    int iCheckSlicePermission = checkSlicePermission(uri6, string10, i5, i6, strArrCreateStringArray);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkSlicePermission);
+                    parcel2.writeInt(iCheckSlicePermission);
                     return true;
                 case 11:
                     Uri uri7 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    grantPermissionFromUser(uri7, readString11, readString12, readBoolean);
+                    grantPermissionFromUser(uri7, string11, string12, z);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -283,189 +283,189 @@ public interface ISliceManager extends IInterface {
 
             @Override // android.app.slice.ISliceManager
             public void pinSlice(String str, Uri uri, SliceSpec[] sliceSpecArr, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedArray(sliceSpecArr, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedArray(sliceSpecArr, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public void unpinSlice(String str, Uri uri, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public boolean hasSliceAccess(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public SliceSpec[] getPinnedSpecs(Uri uri, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SliceSpec[]) obtain2.createTypedArray(SliceSpec.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SliceSpec[]) parcelObtain2.createTypedArray(SliceSpec.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public Uri[] getPinnedSlices(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Uri[]) obtain2.createTypedArray(Uri.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Uri[]) parcelObtain2.createTypedArray(Uri.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public byte[] getBackupPayload(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public void applyRestore(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public void grantSlicePermission(String str, String str2, Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public void revokeSlicePermission(String str, String str2, Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public int checkSlicePermission(Uri uri, String str, int i, int i2, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.slice.ISliceManager
             public void grantPermissionFromUser(Uri uri, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

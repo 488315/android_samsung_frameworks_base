@@ -13,7 +13,6 @@ import androidx.compose.runtime.DynamicProvidableCompositionLocal;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LocalOnBackPressedDispatcherOwner {
     public static final LocalOnBackPressedDispatcherOwner INSTANCE = new LocalOnBackPressedDispatcherOwner();
@@ -43,18 +42,18 @@ public final class LocalOnBackPressedDispatcherOwner {
         }
         if (onBackPressedDispatcherOwner == null) {
             composerImpl.startReplaceGroup(544168748);
-            Object obj = (Context) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalContext);
+            Object baseContext = (Context) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalContext);
             while (true) {
-                if (!(obj instanceof ContextWrapper)) {
-                    obj = null;
+                if (!(baseContext instanceof ContextWrapper)) {
+                    baseContext = null;
                     break;
                 }
-                if (obj instanceof OnBackPressedDispatcherOwner) {
+                if (baseContext instanceof OnBackPressedDispatcherOwner) {
                     break;
                 }
-                obj = ((ContextWrapper) obj).getBaseContext();
+                baseContext = ((ContextWrapper) baseContext).getBaseContext();
             }
-            onBackPressedDispatcherOwner = (OnBackPressedDispatcherOwner) obj;
+            onBackPressedDispatcherOwner = (OnBackPressedDispatcherOwner) baseContext;
             composerImpl.end(false);
         } else {
             composerImpl.startReplaceGroup(544164377);

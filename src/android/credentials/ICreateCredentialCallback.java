@@ -59,9 +59,9 @@ public interface ICreateCredentialCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICreateCredentialCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICreateCredentialCallback)) {
-                return (ICreateCredentialCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICreateCredentialCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICreateCredentialCallback)) {
+                return (ICreateCredentialCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -102,10 +102,10 @@ public interface ICreateCredentialCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onResponse(createCredentialResponse);
             } else if (i == 3) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readString, readString2);
+                onError(string, string2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -130,38 +130,38 @@ public interface ICreateCredentialCallback extends IInterface {
 
             @Override // android.credentials.ICreateCredentialCallback
             public void onPendingIntent(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICreateCredentialCallback
             public void onResponse(CreateCredentialResponse createCredentialResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(createCredentialResponse, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(createCredentialResponse, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICreateCredentialCallback
             public void onError(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

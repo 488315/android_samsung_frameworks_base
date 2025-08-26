@@ -8,10 +8,8 @@ import android.view.animation.DecelerateInterpolator;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.desktopmode.DesktopModeVisualIndicator;
 import com.android.wm.shell.desktopmode.VisualIndicatorViewContainer;
-import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.tiling.SnapEventHandler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VisualIndicatorViewContainer$fadeOutIndicator$1 implements Runnable {
     public final /* synthetic */ DesktopModeVisualIndicator.IndicatorType $currentType;
@@ -40,17 +38,12 @@ public final class VisualIndicatorViewContainer$fadeOutIndicator$1 implements Ru
             int i = this.$displayId;
             SnapEventHandler snapEventHandler = this.$snapEventHandler;
             final Runnable runnable = this.$finishCallback;
-            DesktopModeVisualIndicator.IndicatorType valueOf = DesktopModeVisualIndicator.IndicatorType.valueOf(indicatorType.name());
+            DesktopModeVisualIndicator.IndicatorType indicatorTypeValueOf = DesktopModeVisualIndicator.IndicatorType.valueOf(indicatorType.name());
             VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getClass();
-            Rect indicatorBounds = VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout, valueOf, visualIndicatorViewContainer.bubbleBoundsProvider, i, snapEventHandler);
-            Rect minBounds = VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getMinBounds(indicatorBounds);
-            DesktopStateImpl.Companion.getClass();
-            if (!DesktopStateImpl.Companion.inDesktopWindowing(i)) {
-                view.getBackground().setBounds(indicatorBounds);
-            }
-            VisualIndicatorViewContainer.VisualIndicatorAnimator visualIndicatorAnimator = new VisualIndicatorViewContainer.VisualIndicatorAnimator(view, indicatorBounds, minBounds, displayLayout, i);
+            Rect indicatorBounds = VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout, indicatorTypeValueOf, visualIndicatorViewContainer.bubbleBoundsProvider, i, snapEventHandler);
+            VisualIndicatorViewContainer.VisualIndicatorAnimator visualIndicatorAnimator = new VisualIndicatorViewContainer.VisualIndicatorAnimator(view, indicatorBounds, VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getMinBounds(indicatorBounds), displayLayout, i);
             visualIndicatorAnimator.setInterpolator(new DecelerateInterpolator());
-            VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.setupIndicatorAnimation(visualIndicatorAnimator, VisualIndicatorViewContainer.VisualIndicatorAnimator.AlphaAnimType.ALPHA_FADE_OUT_ANIM, valueOf);
+            VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.setupIndicatorAnimation(visualIndicatorAnimator, VisualIndicatorViewContainer.VisualIndicatorAnimator.AlphaAnimType.ALPHA_FADE_OUT_ANIM, indicatorTypeValueOf);
             visualIndicatorAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$fadeOutIndicator$1$1$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {

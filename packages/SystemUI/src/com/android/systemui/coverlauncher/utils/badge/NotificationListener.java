@@ -22,7 +22,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NotificationListener extends NotificationListenerService {
     public static final Companion Companion = new Companion(null);
@@ -31,7 +30,6 @@ public final class NotificationListener extends NotificationListenerService {
     public final NotificationListenerService.Ranking mTempRanking = new NotificationListenerService.Ranking();
     public boolean mIsRegister = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,9 +64,9 @@ public final class NotificationListener extends NotificationListenerService {
     }
 
     private final void updateBadge(StatusBarNotification statusBarNotification) {
-        boolean shouldBeFilteredOut = shouldBeFilteredOut(statusBarNotification);
-        int semGetIdentifier = statusBarNotification.getUser().semGetIdentifier();
-        NotificationItem notificationItem = new NotificationItem(statusBarNotification.getKey(), getTargetActivity(statusBarNotification) + ":" + semGetIdentifier, statusBarNotification.getNotification().number);
+        boolean zShouldBeFilteredOut = shouldBeFilteredOut(statusBarNotification);
+        int iSemGetIdentifier = statusBarNotification.getUser().semGetIdentifier();
+        NotificationItem notificationItem = new NotificationItem(statusBarNotification.getKey(), getTargetActivity(statusBarNotification) + ":" + iSemGetIdentifier, statusBarNotification.getNotification().number);
         StringBuilder sb = new StringBuilder("updateBadge item=");
         sb.append(notificationItem);
         Log.i("CoverLauncher_NotificationListener", sb.toString());
@@ -77,7 +75,7 @@ public final class NotificationListener extends NotificationListenerService {
         BadgeManager companion = BadgeManager.Companion.getInstance();
         BadgeItem badgeItem = (BadgeItem) companion.items.get(notificationItem.info);
         if (badgeItem == null) {
-            if (shouldBeFilteredOut) {
+            if (zShouldBeFilteredOut) {
                 return;
             }
             BadgeItem badgeItem2 = new BadgeItem(notificationItem.info);
@@ -85,7 +83,7 @@ public final class NotificationListener extends NotificationListenerService {
             companion.addItem(notificationItem.info, badgeItem2);
             return;
         }
-        if (!shouldBeFilteredOut) {
+        if (!zShouldBeFilteredOut) {
             badgeItem.addOrUpdateNotificationItem(notificationItem);
         } else if (((ArrayList) badgeItem.mNotificationItems).remove(notificationItem)) {
             badgeItem.mTotalCount -= notificationItem.count;
@@ -175,15 +173,15 @@ public final class NotificationListener extends NotificationListenerService {
                     i4++;
                     StatusBarNotification statusBarNotification2 = (StatusBarNotification) obj;
                     if (statusBarNotification2 != null && !shouldBeFilteredOut(statusBarNotification2)) {
-                        int semGetIdentifier = statusBarNotification2.getUser().semGetIdentifier();
-                        arrayList2.add(new NotificationItem(statusBarNotification2.getKey(), getTargetActivity(statusBarNotification2) + ":" + semGetIdentifier, statusBarNotification2.getNotification().number));
+                        int iSemGetIdentifier = statusBarNotification2.getUser().semGetIdentifier();
+                        arrayList2.add(new NotificationItem(statusBarNotification2.getKey(), getTargetActivity(statusBarNotification2) + ":" + iSemGetIdentifier, statusBarNotification2.getNotification().number));
                     }
                 }
                 BadgeManager.Companion.getClass();
                 BadgeManager.Companion.getInstance();
                 BadgeManager companion = BadgeManager.Companion.getInstance();
-                HashMap hashMap = companion.items;
-                HashMap hashMap2 = new HashMap(hashMap);
+                HashMap map = companion.items;
+                HashMap map2 = new HashMap(map);
                 int size2 = arrayList2.size();
                 while (i < size2) {
                     Object obj2 = arrayList2.get(i);
@@ -196,11 +194,11 @@ public final class NotificationListener extends NotificationListenerService {
                     }
                     badgeItem.addOrUpdateNotificationItem(notificationItem);
                 }
-                for (String str : hashMap.keySet()) {
-                    BadgeItem badgeItem2 = (BadgeItem) hashMap2.get(str);
+                for (String str : map.keySet()) {
+                    BadgeItem badgeItem2 = (BadgeItem) map2.get(str);
                     BadgeItem badgeItem3 = (BadgeItem) companion.items.get(str);
                     if (badgeItem2 == null) {
-                        hashMap2.put(str, badgeItem3);
+                        map2.put(str, badgeItem3);
                     } else {
                         if (Intrinsics.areEqual(badgeItem2.mInfo, badgeItem3 != null ? badgeItem3.mInfo : null)) {
                             if (badgeItem3 != null) {
@@ -213,10 +211,10 @@ public final class NotificationListener extends NotificationListenerService {
                                 }
                             }
                         }
-                        hashMap2.remove(str);
+                        map2.remove(str);
                     }
                 }
-                hashMap2.isEmpty();
+                map2.isEmpty();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -256,18 +254,18 @@ public final class NotificationListener extends NotificationListenerService {
         if (statusBarNotification == null) {
             return;
         }
-        int semGetIdentifier = statusBarNotification.getUser().semGetIdentifier();
-        NotificationItem notificationItem = new NotificationItem(statusBarNotification.getKey(), getTargetActivity(statusBarNotification) + ":" + semGetIdentifier, statusBarNotification.getNotification().number);
+        int iSemGetIdentifier = statusBarNotification.getUser().semGetIdentifier();
+        NotificationItem notificationItem = new NotificationItem(statusBarNotification.getKey(), getTargetActivity(statusBarNotification) + ":" + iSemGetIdentifier, statusBarNotification.getNotification().number);
         BadgeManager.Companion.getClass();
         BadgeManager.Companion.getInstance();
         BadgeManager companion = BadgeManager.Companion.getInstance();
         BadgeItem badgeItem = (BadgeItem) companion.items.get(notificationItem.info);
         if (badgeItem != null) {
-            boolean remove = ((ArrayList) badgeItem.mNotificationItems).remove(notificationItem);
-            if (remove) {
+            boolean zRemove = ((ArrayList) badgeItem.mNotificationItems).remove(notificationItem);
+            if (zRemove) {
                 badgeItem.mTotalCount -= notificationItem.count;
             }
-            if (remove && ((ArrayList) badgeItem.mNotificationItems).isEmpty()) {
+            if (zRemove && ((ArrayList) badgeItem.mNotificationItems).isEmpty()) {
                 String str = notificationItem.info;
                 KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("remove item, key : ", str, "CoverLauncher_BadgeManager");
                 companion.items.remove(str);

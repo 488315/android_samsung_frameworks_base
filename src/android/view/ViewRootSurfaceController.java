@@ -45,9 +45,9 @@ public class ViewRootSurfaceController {
         Iterator<Map.Entry<Integer, Integer>> it = this.mMetaDataMaps.entrySet().iterator();
         while (it.hasNext()) {
             Integer key = it.next().getKey();
-            int intValue = key.intValue();
-            if (canApplyMetaData(intValue)) {
-                transaction.setMetadata(this.mViewRoot.getSurfaceControl(), intValue, this.mMetaDataMaps.get(key).intValue());
+            int iIntValue = key.intValue();
+            if (canApplyMetaData(iIntValue)) {
+                transaction.setMetadata(this.mViewRoot.getSurfaceControl(), iIntValue, this.mMetaDataMaps.get(key).intValue());
             }
         }
         transaction.apply();

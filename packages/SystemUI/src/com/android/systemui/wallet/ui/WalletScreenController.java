@@ -3,6 +3,7 @@ package com.android.systemui.wallet.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Handler;
@@ -32,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WalletScreenController implements QuickAccessWalletClient.OnWalletCardsRetrievedCallback, KeyguardStateController.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -51,7 +51,7 @@ public class WalletScreenController implements QuickAccessWalletClient.OnWalletC
     public final WalletScreenController$$ExternalSyntheticLambda0 mSelectionRunnable = new Runnable() { // from class: com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            WalletScreenController walletScreenController = WalletScreenController.this;
+            WalletScreenController walletScreenController = this.f$0;
             int i = WalletScreenController.$r8$clinit;
             walletScreenController.selectCard();
         }
@@ -60,7 +60,6 @@ public class WalletScreenController implements QuickAccessWalletClient.OnWalletC
     public final QuickAccessWalletClient mWalletClient;
     public final WalletView mWalletView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class QAWalletCardViewInfo implements WalletCardViewInfo {
         public final Drawable mCardDrawable;
         public final Drawable mIconDrawable;
@@ -132,8 +131,8 @@ public class WalletScreenController implements QuickAccessWalletClient.OnWalletC
     public final void onWalletCardRetrievalError(final GetWalletCardsError getWalletCardsError) {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
-            public final void run() {
-                WalletScreenController walletScreenController = WalletScreenController.this;
+            public final void run() throws Resources.NotFoundException {
+                WalletScreenController walletScreenController = this.f$0;
                 GetWalletCardsError getWalletCardsError2 = getWalletCardsError;
                 if (walletScreenController.mIsDismissed) {
                     return;
@@ -160,13 +159,13 @@ public class WalletScreenController implements QuickAccessWalletClient.OnWalletC
         final List list = (List) WalletCardUtilsKt.getPaymentCards(getWalletCardsResponse.getWalletCards()).stream().map(new Function() { // from class: com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return new WalletScreenController.QAWalletCardViewInfo(WalletScreenController.this.mContext, (WalletCard) obj);
+                return new WalletScreenController.QAWalletCardViewInfo(this.f$0.mContext, (WalletCard) obj);
             }
         }).collect(Collectors.toList());
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                final WalletScreenController walletScreenController = WalletScreenController.this;
+                final WalletScreenController walletScreenController = this.f$0;
                 List list2 = list;
                 GetWalletCardsResponse getWalletCardsResponse2 = getWalletCardsResponse;
                 if (walletScreenController.mIsDismissed) {
@@ -227,13 +226,13 @@ public class WalletScreenController implements QuickAccessWalletClient.OnWalletC
         Drawable logo = this.mWalletClient.getLogo();
         CharSequence serviceLabel = this.mWalletClient.getServiceLabel();
         CharSequence shortcutLongLabel = this.mWalletClient.getShortcutLongLabel();
-        final Intent createWalletIntent = this.mWalletClient.createWalletIntent();
-        if (logo != null && !TextUtils.isEmpty(serviceLabel) && !TextUtils.isEmpty(shortcutLongLabel) && createWalletIntent != null) {
+        final Intent intentCreateWalletIntent = this.mWalletClient.createWalletIntent();
+        if (logo != null && !TextUtils.isEmpty(serviceLabel) && !TextUtils.isEmpty(shortcutLongLabel) && intentCreateWalletIntent != null) {
             this.mWalletView.showEmptyStateView(logo, serviceLabel, shortcutLongLabel, new View.OnClickListener() { // from class: com.android.systemui.wallet.ui.WalletScreenController$$ExternalSyntheticLambda4
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    WalletScreenController walletScreenController = WalletScreenController.this;
-                    walletScreenController.mActivityStarter.startActivity(createWalletIntent, true);
+                    WalletScreenController walletScreenController = this.f$0;
+                    walletScreenController.mActivityStarter.startActivity(intentCreateWalletIntent, true);
                 }
             });
             return;

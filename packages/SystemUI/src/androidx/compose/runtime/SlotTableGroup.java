@@ -4,7 +4,6 @@ import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SlotTableGroup implements Iterable<Object>, KMappedMarker {
     public final int group;
@@ -20,11 +19,11 @@ final class SlotTableGroup implements Iterable<Object>, KMappedMarker {
         if (this.table.version != this.version) {
             SlotTableKt.throwConcurrentModificationException();
         }
-        GroupSourceInformation sourceInformationOf = this.table.sourceInformationOf(this.group);
-        if (sourceInformationOf != null) {
+        GroupSourceInformation groupSourceInformationSourceInformationOf = this.table.sourceInformationOf(this.group);
+        if (groupSourceInformationSourceInformationOf != null) {
             SlotTable slotTable = this.table;
             int i = this.group;
-            return new SourceInformationGroupIterator(slotTable, i, sourceInformationOf, new AnchoredGroupPath(i));
+            return new SourceInformationGroupIterator(slotTable, i, groupSourceInformationSourceInformationOf, new AnchoredGroupPath(i));
         }
         SlotTable slotTable2 = this.table;
         int i2 = this.group;

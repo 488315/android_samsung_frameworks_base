@@ -2,18 +2,18 @@ package androidx.compose.ui.layout;
 
 import androidx.collection.MutableOrderedScatterSet;
 import androidx.collection.MutableOrderedSetWrapper;
-import androidx.collection.MutableOrderedSetWrapper$iterator$1;
+import androidx.collection.MutableOrderedSetWrapper.AnonymousClass1;
+import androidx.collection.OrderedScatterSetKt;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Predicate;
 import kotlin.jvm.internal.CollectionToArray;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface SubcomposeSlotReusePolicy {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SlotIdsSet implements Collection<Object>, KMappedMarker {
         public final MutableOrderedScatterSet set;
 
@@ -61,7 +61,7 @@ public interface SubcomposeSlotReusePolicy {
         public final Iterator iterator() {
             MutableOrderedScatterSet mutableOrderedScatterSet = this.set;
             mutableOrderedScatterSet.getClass();
-            return new MutableOrderedSetWrapper$iterator$1(new MutableOrderedSetWrapper(mutableOrderedScatterSet));
+            return new MutableOrderedSetWrapper(mutableOrderedScatterSet).new AnonymousClass1();
         }
 
         @Override // java.util.Collection
@@ -103,27 +103,13 @@ public interface SubcomposeSlotReusePolicy {
             return CollectionToArray.toArray(this, objArr);
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public SlotIdsSet(androidx.collection.MutableOrderedScatterSet r2, int r3, kotlin.jvm.internal.DefaultConstructorMarker r4) {
-            /*
-                r1 = this;
-                r4 = 1
-                r3 = r3 & r4
-                if (r3 == 0) goto Ld
-                int r2 = androidx.collection.OrderedScatterSetKt.$r8$clinit
-                androidx.collection.MutableOrderedScatterSet r2 = new androidx.collection.MutableOrderedScatterSet
-                r3 = 0
-                r0 = 0
-                r2.<init>(r0, r4, r3)
-            Ld:
-                r1.<init>(r2)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.layout.SubcomposeSlotReusePolicy.SlotIdsSet.<init>(androidx.collection.MutableOrderedScatterSet, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public SlotIdsSet(MutableOrderedScatterSet mutableOrderedScatterSet, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            int i2 = 1;
+            if ((i & 1) != 0) {
+                int i3 = OrderedScatterSetKt.$r8$clinit;
+                mutableOrderedScatterSet = new MutableOrderedScatterSet(0, i2, null);
+            }
+            this(mutableOrderedScatterSet);
         }
     }
 

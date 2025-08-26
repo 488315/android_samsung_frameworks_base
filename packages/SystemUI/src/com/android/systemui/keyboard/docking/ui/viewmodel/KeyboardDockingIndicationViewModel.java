@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyboardDockingIndicationViewModel {
     public final StateFlowImpl _edgeGlow;
@@ -35,7 +34,6 @@ public final class KeyboardDockingIndicationViewModel {
     public final Flow keyboardConnected;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyboard.docking.ui.viewmodel.KeyboardDockingIndicationViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ ConfigurationInteractor $configurationInteractor;
@@ -70,7 +68,7 @@ public final class KeyboardDockingIndicationViewModel {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyboard.docking.ui.viewmodel.KeyboardDockingIndicationViewModel.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        KeyboardDockingIndicationViewModel keyboardDockingIndicationViewModel2 = KeyboardDockingIndicationViewModel.this;
+                        KeyboardDockingIndicationViewModel keyboardDockingIndicationViewModel2 = keyboardDockingIndicationViewModel;
                         keyboardDockingIndicationViewModel2._edgeGlow.updateState(null, keyboardDockingIndicationViewModel2.createEffectConfig());
                         return Unit.INSTANCE;
                     }
@@ -89,7 +87,6 @@ public final class KeyboardDockingIndicationViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,13 +103,17 @@ public final class KeyboardDockingIndicationViewModel {
     public KeyboardDockingIndicationViewModel(WindowManager windowManager, Context context, KeyboardDockingIndicationInteractor keyboardDockingIndicationInteractor, ConfigurationInteractor configurationInteractor, CoroutineScope coroutineScope) {
         this.windowManager = windowManager;
         this.context = context;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(createEffectConfig());
-        this._edgeGlow = MutableStateFlow;
-        this.edgeGlow = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(createEffectConfig());
+        this._edgeGlow = stateFlowImplMutableStateFlow;
+        this.edgeGlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.keyboardConnected = keyboardDockingIndicationInteractor.onKeyboardConnected;
         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(configurationInteractor, this, null), 7);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0034  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final GlowBoxConfig createEffectConfig() {
         float f;
         float f2;
@@ -121,40 +122,38 @@ public final class KeyboardDockingIndicationViewModel {
         float f5;
         float f6;
         Rect bounds = this.windowManager.getCurrentWindowMetrics().getBounds();
-        float width = bounds.width();
-        float height = bounds.height();
+        float fWidth = bounds.width();
+        float fHeight = bounds.height();
         int rotation = this.context.getDisplay().getRotation();
-        if (rotation != 0) {
-            if (rotation == 1) {
-                f4 = width;
-                f = 20.0f;
-                f3 = 0.5f * width;
-                f2 = f3;
-                f5 = -300.0f;
-                f6 = 0.0f;
-            } else if (rotation == 2) {
-                f = height;
-                f4 = 20.0f;
-                f5 = 0.5f * height;
-                f6 = f5;
-                f3 = -300.0f;
-                f2 = 0.0f;
-            } else if (rotation == 3) {
-                f6 = height;
-                f4 = width;
-                f5 = height + 300.0f;
-                f = 20.0f;
-                f3 = width * 0.5f;
-                f2 = f3;
-            }
-            return new GlowBoxConfig(f3, f5, f2, f6, f4, f, Utils.getColorAttr(R.attr.colorAccent, this.context).getDefaultColor(), 700.0f, 3000L, 800L, 800L);
+        if (rotation == 0) {
+            f = fHeight;
+            f2 = fWidth;
+            f3 = fWidth + 300.0f;
+            f4 = 20.0f;
+            f5 = fHeight * 0.5f;
+            f6 = f5;
+        } else if (rotation == 1) {
+            f4 = fWidth;
+            f = 20.0f;
+            f3 = 0.5f * fWidth;
+            f2 = f3;
+            f5 = -300.0f;
+            f6 = 0.0f;
+        } else if (rotation == 2) {
+            f = fHeight;
+            f4 = 20.0f;
+            f5 = 0.5f * fHeight;
+            f6 = f5;
+            f3 = -300.0f;
+            f2 = 0.0f;
+        } else if (rotation == 3) {
+            f6 = fHeight;
+            f4 = fWidth;
+            f5 = fHeight + 300.0f;
+            f = 20.0f;
+            f3 = fWidth * 0.5f;
+            f2 = f3;
         }
-        f = height;
-        f2 = width;
-        f3 = width + 300.0f;
-        f4 = 20.0f;
-        f5 = height * 0.5f;
-        f6 = f5;
         return new GlowBoxConfig(f3, f5, f2, f6, f4, f, Utils.getColorAttr(R.attr.colorAccent, this.context).getDefaultColor(), 700.0f, 3000L, 800L, 800L);
     }
 }

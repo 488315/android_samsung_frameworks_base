@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.reflect.KClass;
 import kotlinx.serialization.KSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SerialModuleImpl extends SerializersModule {
     public final Map class2ContextualFactory;
@@ -24,9 +23,9 @@ public final class SerialModuleImpl extends SerializersModule {
 
     public final KSerializer getContextual(KClass kClass, List list) {
         ContextualProvider contextualProvider = (ContextualProvider) this.class2ContextualFactory.get(kClass);
-        KSerializer invoke = contextualProvider != null ? contextualProvider.invoke() : null;
-        if (invoke != null) {
-            return invoke;
+        KSerializer kSerializerInvoke = contextualProvider != null ? contextualProvider.invoke() : null;
+        if (kSerializerInvoke != null) {
+            return kSerializerInvoke;
         }
         return null;
     }

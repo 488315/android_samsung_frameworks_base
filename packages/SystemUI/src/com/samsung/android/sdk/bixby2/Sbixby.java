@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Sbixby {
     public static Map appMetaInfoMap;
@@ -19,11 +18,9 @@ public class Sbixby {
 
     public static synchronized Sbixby getInstance() {
         Sbixby sbixby;
-        synchronized (Sbixby.class) {
-            sbixby = mInstance;
-            if (sbixby == null) {
-                throw new IllegalStateException("The Sbixby instance is NULL. do initialize Sbixby before accessing instance.");
-            }
+        sbixby = mInstance;
+        if (sbixby == null) {
+            throw new IllegalStateException("The Sbixby instance is NULL. do initialize Sbixby before accessing instance.");
         }
         return sbixby;
     }

@@ -61,49 +61,49 @@ public class AlsaDevicesParser {
             int i = 0;
             int i2 = 0;
             while (true) {
-                int nextToken = AlsaDevicesParser.mTokenizer.nextToken(str, i);
-                if (nextToken == -1) {
+                int iNextToken = AlsaDevicesParser.mTokenizer.nextToken(str, i);
+                if (iNextToken == -1) {
                     return true;
                 }
-                int nextDelimiter = AlsaDevicesParser.mTokenizer.nextDelimiter(str, nextToken);
-                int length = nextDelimiter == -1 ? str.length() : nextDelimiter;
-                String substring = str.substring(nextToken, length);
+                int iNextDelimiter = AlsaDevicesParser.mTokenizer.nextDelimiter(str, iNextToken);
+                int length = iNextDelimiter == -1 ? str.length() : iNextDelimiter;
+                String strSubstring = str.substring(iNextToken, length);
                 if (i2 == 1) {
-                    this.mCardNum = Integer.parseInt(substring);
+                    this.mCardNum = Integer.parseInt(strSubstring);
                     if (str.charAt(length) != '-') {
                         i2++;
                     }
                 } else if (i2 == 2) {
-                    this.mDeviceNum = Integer.parseInt(substring);
+                    this.mDeviceNum = Integer.parseInt(strSubstring);
                 } else if (i2 != 3) {
                     if (i2 != 4) {
                         if (i2 != 5) {
                             continue;
                         } else {
                             try {
-                                if (substring.equals("capture")) {
+                                if (strSubstring.equals("capture")) {
                                     this.mDeviceDir = 0;
                                     AlsaDevicesParser.this.mHasCaptureDevices = true;
-                                } else if (substring.equals(AppJankStats.WIDGET_STATE_PLAYBACK)) {
+                                } else if (strSubstring.equals(AppJankStats.WIDGET_STATE_PLAYBACK)) {
                                     this.mDeviceDir = 1;
                                     AlsaDevicesParser.this.mHasPlaybackDevices = true;
                                 }
                             } catch (NumberFormatException unused) {
-                                Slog.e(AlsaDevicesParser.TAG, "Failed to parse token " + i2 + " of /proc/asound/devices token: " + substring);
+                                Slog.e(AlsaDevicesParser.TAG, "Failed to parse token " + i2 + " of /proc/asound/devices token: " + strSubstring);
                                 return false;
                             }
                         }
-                    } else if (substring.equals("audio")) {
+                    } else if (strSubstring.equals("audio")) {
                         this.mDeviceType = 0;
-                    } else if (substring.equals("midi")) {
+                    } else if (strSubstring.equals("midi")) {
                         this.mDeviceType = 2;
                         AlsaDevicesParser.this.mHasMIDIDevices = true;
                     }
-                } else if (!substring.equals("digital")) {
-                    if (substring.equals(Downloads.Impl.COLUMN_CONTROL)) {
+                } else if (!strSubstring.equals("digital")) {
+                    if (strSubstring.equals(Downloads.Impl.COLUMN_CONTROL)) {
                         this.mDeviceType = 1;
                     } else {
-                        substring.equals("raw");
+                        strSubstring.equals("raw");
                     }
                 }
                 i2++;
@@ -173,19 +173,19 @@ public class AlsaDevicesParser {
         return str.charAt(5) == '[';
     }
 
-    public int scan() {
+    public int scan() throws IOException {
         this.mDeviceRecords.clear();
         try {
             FileReader fileReader = new FileReader(new File(kDevicesFilePath));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while (true) {
-                String readLine = bufferedReader.readLine();
-                if (readLine == null) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
                     break;
                 }
-                if (isLineDeviceRecord(readLine)) {
+                if (isLineDeviceRecord(line)) {
                     AlsaDeviceRecord alsaDeviceRecord = new AlsaDeviceRecord();
-                    alsaDeviceRecord.parse(readLine);
+                    alsaDeviceRecord.parse(line);
                     Slog.i(TAG, alsaDeviceRecord.textFormat());
                     this.mDeviceRecords.add(alsaDeviceRecord);
                 }

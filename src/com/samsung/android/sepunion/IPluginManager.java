@@ -46,9 +46,9 @@ public interface IPluginManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPluginManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPluginManager)) {
-                return (IPluginManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPluginManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPluginManager)) {
+                return (IPluginManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IPluginManager extends IInterface {
 
             @Override // com.samsung.android.sepunion.IPluginManager
             public CoverState getCoverState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPluginManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CoverState) obtain2.readTypedObject(CoverState.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPluginManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CoverState) parcelObtain2.readTypedObject(CoverState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

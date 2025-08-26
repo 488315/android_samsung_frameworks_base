@@ -54,17 +54,17 @@ public class ScrollCaptureInternal {
     }
 
     public ScrollCaptureCallback requestCallback(View view, Rect rect, Point point) {
-        int detectScrollingType = detectScrollingType(view);
-        if (detectScrollingType == 1) {
+        int iDetectScrollingType = detectScrollingType(view);
+        if (iDetectScrollingType == 1) {
             return new ScrollCaptureViewSupport((ViewGroup) view, new ScrollViewCaptureHelper());
         }
-        if (detectScrollingType == 2) {
+        if (iDetectScrollingType == 2) {
             if (view instanceof ListView) {
                 return new ScrollCaptureViewSupport((ListView) view, new ListViewCaptureHelper());
             }
             return new ScrollCaptureViewSupport((ViewGroup) view, new RecyclerViewCaptureHelper());
         }
-        if (detectScrollingType != 3 || !(view instanceof WebView)) {
+        if (iDetectScrollingType != 3 || !(view instanceof WebView)) {
             return null;
         }
         Log.d(TAG, "scroll capture: Using WebView support");

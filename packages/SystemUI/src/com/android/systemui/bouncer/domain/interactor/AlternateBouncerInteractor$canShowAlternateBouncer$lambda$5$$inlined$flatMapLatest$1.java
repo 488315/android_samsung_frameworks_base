@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AlternateBouncerInteractor$canShowAlternateBouncer$lambda$5$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -42,7 +41,7 @@ public final class AlternateBouncerInteractor$canShowAlternateBouncer$lambda$5$$
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -51,15 +50,15 @@ public final class AlternateBouncerInteractor$canShowAlternateBouncer$lambda$5$$
             Pair pair = (Pair) this.L$1;
             KeyguardState keyguardState = (KeyguardState) pair.component1();
             if (keyguardState == KeyguardState.GONE) {
-                combine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+                flowCombine = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
             } else {
                 FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 = ((DeviceEntryBiometricsAllowedInteractor) this.this$0.deviceEntryBiometricsAllowedInteractor.get()).isFingerprintAuthCurrentlyAllowed;
                 StateFlowImpl stateFlowImpl = ((KeyguardInteractor) this.this$0.keyguardInteractor.get()).isKeyguardDismissible;
                 AlternateBouncerInteractor alternateBouncerInteractor = this.this$0;
-                combine = FlowKt.combine(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1, stateFlowImpl, ((KeyguardBouncerRepositoryImpl) alternateBouncerInteractor.bouncerRepository).primaryBouncerShow, alternateBouncerInteractor.isDozingOrAod, new AlternateBouncerInteractor$canShowAlternateBouncer$1$4$1(null));
+                flowCombine = FlowKt.combine(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1, stateFlowImpl, ((KeyguardBouncerRepositoryImpl) alternateBouncerInteractor.bouncerRepository).primaryBouncerShow, alternateBouncerInteractor.isDozingOrAod, new AlternateBouncerInteractor$canShowAlternateBouncer$1$4$1(null));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -10,7 +10,6 @@ import kotlin.Pair;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ResizingState {
     public final AnchoredDraggableState anchoredDraggableState;
@@ -18,19 +17,16 @@ public final class ResizingState {
     public final State finalResizeOperation$delegate;
     public final State temporaryResizeOperation$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ResizeOperation {
         public final TileSpec spec;
         public final boolean toIcon;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class FinalResizeOperation extends ResizeOperation {
             public FinalResizeOperation(TileSpec tileSpec, boolean z) {
                 super(tileSpec, z, null);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TemporaryResizeOperation extends ResizeOperation {
             public TemporaryResizeOperation(TileSpec tileSpec, boolean z) {
                 super(tileSpec, z, null);
@@ -52,14 +48,14 @@ public final class ResizingState {
         this.bounds$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.systemui.qs.panels.ui.compose.selection.ResizingState$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                ResizingState resizingState = ResizingState.this;
-                float minPosition = resizingState.anchoredDraggableState.getAnchors().minPosition();
-                Float valueOf = Float.valueOf(minPosition);
-                if (Float.isNaN(minPosition)) {
-                    valueOf = null;
+                ResizingState resizingState = this.f$0;
+                float fMinPosition = resizingState.anchoredDraggableState.getAnchors().minPosition();
+                Float fValueOf = Float.valueOf(fMinPosition);
+                if (Float.isNaN(fMinPosition)) {
+                    fValueOf = null;
                 }
-                float maxPosition = resizingState.anchoredDraggableState.getAnchors().maxPosition();
-                return new Pair(valueOf, Float.isNaN(maxPosition) ? null : Float.valueOf(maxPosition));
+                float fMaxPosition = resizingState.anchoredDraggableState.getAnchors().maxPosition();
+                return new Pair(fValueOf, Float.isNaN(fMaxPosition) ? null : Float.valueOf(fMaxPosition));
             }
         });
         final int i = 0;

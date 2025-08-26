@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class BatteryViewModel$_glyphList$1$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -25,9 +24,9 @@ final class BatteryViewModel$_glyphList$1$1 extends SuspendLambda implements Fun
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         BatteryViewModel$_glyphList$1$1 batteryViewModel$_glyphList$1$1 = new BatteryViewModel$_glyphList$1$1((Continuation) obj4);
-        batteryViewModel$_glyphList$1$1.Z$0 = booleanValue;
+        batteryViewModel$_glyphList$1$1.Z$0 = zBooleanValue;
         batteryViewModel$_glyphList$1$1.L$0 = (List) obj2;
         batteryViewModel$_glyphList$1$1.L$1 = (AttributionGlyph) obj3;
         return batteryViewModel$_glyphList$1$1.invokeSuspend(Unit.INSTANCE);

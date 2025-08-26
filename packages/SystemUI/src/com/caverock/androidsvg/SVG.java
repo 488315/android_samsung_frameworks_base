@@ -19,14 +19,12 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SVG {
     public Svg rootElement = null;
     public final CSSParser.Ruleset cssRules = new CSSParser.Ruleset();
     public final Map idToElementMap = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.caverock.androidsvg.SVG$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$caverock$androidsvg$SVG$Unit;
@@ -73,7 +71,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CSSClipRect {
         public final Length bottom;
         public final Length left;
@@ -88,7 +85,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Circle extends GraphicsElement {
         public Length cx;
         public Length cy;
@@ -100,7 +96,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClipPath extends Group implements NotDirectlyRendered {
         public Boolean clipPathUnitsAreUser;
 
@@ -110,7 +105,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Colour extends SvgPaint {
         public static final Colour BLACK = new Colour(-16777216);
         public static final Colour TRANSPARENT = new Colour(0);
@@ -125,7 +119,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CurrentColor extends SvgPaint {
         public static final CurrentColor instance = new CurrentColor();
 
@@ -133,7 +126,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Defs extends Group implements NotDirectlyRendered {
         @Override // com.caverock.androidsvg.SVG.Group, com.caverock.androidsvg.SVG.SvgObject
         public final String getNodeName() {
@@ -141,7 +133,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Ellipse extends GraphicsElement {
         public Length cx;
         public Length cy;
@@ -154,7 +145,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class GradientElement extends SvgElementBase implements SvgContainer {
         public List children = new ArrayList();
         public Matrix gradientTransform;
@@ -163,7 +153,7 @@ public class SVG {
         public GradientSpread spreadMethod;
 
         @Override // com.caverock.androidsvg.SVG.SvgContainer
-        public final void addChild(SvgObject svgObject) {
+        public final void addChild(SvgObject svgObject) throws SVGParseException {
             if (svgObject instanceof Stop) {
                 ((ArrayList) this.children).add(svgObject);
                 return;
@@ -177,7 +167,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum GradientSpread {
         /* JADX INFO: Fake field, exist only in values array */
         pad,
@@ -185,7 +174,6 @@ public class SVG {
         repeat
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class GraphicsElement extends SvgConditionalElement implements HasTransform {
         public Matrix transform;
 
@@ -195,7 +183,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Group extends SvgConditionalContainer implements HasTransform {
         public Matrix transform;
 
@@ -210,12 +197,10 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface HasTransform {
         void setTransform(Matrix matrix);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Image extends SvgPreserveAspectRatioContainer implements HasTransform {
         public Length height;
         public String href;
@@ -235,7 +220,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Line extends GraphicsElement {
         public Length x1;
         public Length x2;
@@ -248,7 +232,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Marker extends SvgViewBoxContainer implements NotDirectlyRendered {
         public Length markerHeight;
         public boolean markerUnitsAreUser;
@@ -263,7 +246,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Mask extends SvgConditionalContainer implements NotDirectlyRendered {
         public Length height;
         public Boolean maskContentUnitsAreUser;
@@ -276,11 +258,9 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NotDirectlyRendered {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PaintReference extends SvgPaint {
         public final SvgPaint fallback;
         public final String href;
@@ -295,7 +275,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Path extends GraphicsElement {
         public PathDefinition d;
 
@@ -305,7 +284,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathDefinition implements PathInterface {
         public int commandsLength = 0;
         public int coordsLength = 0;
@@ -473,7 +451,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PathInterface {
         void arcTo(float f, float f2, float f3, boolean z, boolean z2, float f4, float f5);
 
@@ -488,7 +465,6 @@ public class SVG {
         void quadTo(float f, float f2, float f3, float f4);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Pattern extends SvgViewBoxContainer implements NotDirectlyRendered {
         public Length height;
         public String href;
@@ -505,7 +481,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PolyLine extends GraphicsElement {
         public float[] points;
 
@@ -515,7 +490,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Polygon extends PolyLine {
         @Override // com.caverock.androidsvg.SVG.PolyLine, com.caverock.androidsvg.SVG.SvgObject
         public final String getNodeName() {
@@ -523,7 +497,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Rect extends GraphicsElement {
         public Length height;
         public Length rx;
@@ -538,7 +511,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Style implements Cloneable {
         public CSSClipRect clip;
         public String clipPath;
@@ -580,48 +552,41 @@ public class SVG {
         public Float viewportFillOpacity;
         public Boolean visibility;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum FillRule {
             NonZero,
             EvenOdd
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum FontStyle {
             Normal,
             Italic,
             Oblique
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum LineCap {
             Butt,
             Round,
             Square
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum LineJoin {
             Miter,
             Round,
             Bevel
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum RenderQuality {
             auto,
             optimizeQuality,
             optimizeSpeed
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum TextAnchor {
             Start,
             Middle,
             End
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum TextDecoration {
             None,
             Underline,
@@ -630,13 +595,11 @@ public class SVG {
             Blink
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum TextDirection {
             LTR,
             RTL
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum VectorEffect {
             None,
             NonScalingStroke
@@ -649,17 +612,17 @@ public class SVG {
             style.fill = colour;
             FillRule fillRule = FillRule.NonZero;
             style.fillRule = fillRule;
-            Float valueOf = Float.valueOf(1.0f);
-            style.fillOpacity = valueOf;
+            Float fValueOf = Float.valueOf(1.0f);
+            style.fillOpacity = fValueOf;
             style.stroke = null;
-            style.strokeOpacity = valueOf;
+            style.strokeOpacity = fValueOf;
             style.strokeWidth = new Length(1.0f);
             style.strokeLineCap = LineCap.Butt;
             style.strokeLineJoin = LineJoin.Miter;
             style.strokeMiterLimit = Float.valueOf(4.0f);
             style.strokeDashArray = null;
             style.strokeDashOffset = new Length(0.0f);
-            style.opacity = valueOf;
+            style.opacity = fValueOf;
             style.color = colour;
             style.fontFamily = null;
             style.fontSize = new Length(12.0f, Unit.pt);
@@ -677,14 +640,14 @@ public class SVG {
             style.display = bool;
             style.visibility = bool;
             style.stopColor = colour;
-            style.stopOpacity = valueOf;
+            style.stopOpacity = fValueOf;
             style.clipPath = null;
             style.clipRule = fillRule;
             style.mask = null;
             style.solidColor = null;
-            style.solidOpacity = valueOf;
+            style.solidOpacity = fValueOf;
             style.viewportFill = null;
-            style.viewportFillOpacity = valueOf;
+            style.viewportFillOpacity = fValueOf;
             style.vectorEffect = VectorEffect.None;
             style.imageRendering = RenderQuality.auto;
             return style;
@@ -700,7 +663,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Svg extends SvgViewBoxContainer {
         public Length height;
         public Length width;
@@ -713,7 +675,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SvgConditional {
         String getRequiredExtensions();
 
@@ -736,7 +697,6 @@ public class SVG {
         void setSystemLanguage(Set set);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgConditionalContainer extends SvgElement implements SvgContainer, SvgConditional {
         public Set systemLanguage;
         public List children = new ArrayList();
@@ -806,7 +766,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgConditionalElement extends SvgElement implements SvgConditional {
         public Set requiredFeatures = null;
         public String requiredExtensions = null;
@@ -865,19 +824,16 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SvgContainer {
         void addChild(SvgObject svgObject);
 
         List getChildren();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgElement extends SvgElementBase {
         public Box boundingBox = null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgElementBase extends SvgObject {
         public String id = null;
         public Boolean spacePreserve = null;
@@ -890,7 +846,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SvgLinearGradient extends GradientElement {
         public Length x1;
         public Length x2;
@@ -903,7 +858,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SvgObject {
         public SVG document;
         public SvgContainer parent;
@@ -913,16 +867,13 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgPaint implements Cloneable {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgPreserveAspectRatioContainer extends SvgConditionalContainer {
         public PreserveAspectRatio preserveAspectRatio = null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SvgRadialGradient extends GradientElement {
         public Length cx;
         public Length cy;
@@ -936,12 +887,10 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SvgViewBoxContainer extends SvgPreserveAspectRatioContainer {
         public Box viewBox;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Switch extends Group {
         @Override // com.caverock.androidsvg.SVG.Group, com.caverock.androidsvg.SVG.SvgObject
         public final String getNodeName() {
@@ -949,7 +898,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Symbol extends SvgViewBoxContainer implements NotDirectlyRendered {
         @Override // com.caverock.androidsvg.SVG.SvgObject
         public final String getNodeName() {
@@ -957,7 +905,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TRef extends TextContainer implements TextChild {
         public String href;
         public Text textRoot;
@@ -973,7 +920,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TSpan extends TextPositionedContainer implements TextChild {
         public Text textRoot;
 
@@ -988,7 +934,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Text extends TextPositionedContainer implements HasTransform {
         public Matrix transform;
 
@@ -1003,15 +948,13 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TextChild {
         Text getTextRoot();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TextContainer extends SvgConditionalContainer {
         @Override // com.caverock.androidsvg.SVG.SvgConditionalContainer, com.caverock.androidsvg.SVG.SvgContainer
-        public final void addChild(SvgObject svgObject) {
+        public final void addChild(SvgObject svgObject) throws SVGParseException {
             if (svgObject instanceof TextChild) {
                 ((ArrayList) this.children).add(svgObject);
                 return;
@@ -1020,7 +963,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextPath extends TextContainer implements TextChild {
         public String href;
         public Length startOffset;
@@ -1037,7 +979,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TextPositionedContainer extends TextContainer {
         public List dx;
         public List dy;
@@ -1045,7 +986,6 @@ public class SVG {
         public List y;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextSequence extends SvgObject implements TextChild {
         public String text;
 
@@ -1063,7 +1003,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Unit {
         px,
         em,
@@ -1076,7 +1015,6 @@ public class SVG {
         percent
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Use extends Group {
         public Length height;
         public String href;
@@ -1090,7 +1028,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class View extends SvgViewBoxContainer implements NotDirectlyRendered {
         @Override // com.caverock.androidsvg.SVG.SvgObject
         public final String getNodeName() {
@@ -1126,9 +1063,9 @@ public class SVG {
         }
         try {
             inputStream.mark(3);
-            int read = inputStream.read() + (inputStream.read() << 8);
+            int i = inputStream.read() + (inputStream.read() << 8);
             inputStream.reset();
-            if (read == 35615) {
+            if (i == 35615) {
                 inputStream = new BufferedInputStream(new GZIPInputStream(inputStream));
             }
         } catch (IOException unused) {
@@ -1188,7 +1125,7 @@ public class SVG {
     }
 
     public final SvgElementBase resolveIRI(String str) {
-        String substring;
+        String strSubstring;
         if (str == null) {
             return null;
         }
@@ -1197,18 +1134,18 @@ public class SVG {
         } else if (str.startsWith("'") && str.endsWith("'")) {
             str = str.substring(1, str.length() - 1).replace("\\'", "'");
         }
-        String replace = str.replace("\\\n", "").replace("\\A", "\n");
-        if (replace.length() <= 1 || !replace.startsWith("#") || (substring = replace.substring(1)) == null || substring.length() == 0) {
+        String strReplace = str.replace("\\\n", "").replace("\\A", "\n");
+        if (strReplace.length() <= 1 || !strReplace.startsWith("#") || (strSubstring = strReplace.substring(1)) == null || strSubstring.length() == 0) {
             return null;
         }
-        if (substring.equals(this.rootElement.id)) {
+        if (strSubstring.equals(this.rootElement.id)) {
             return this.rootElement;
         }
-        if (((HashMap) this.idToElementMap).containsKey(substring)) {
-            return (SvgElementBase) ((HashMap) this.idToElementMap).get(substring);
+        if (((HashMap) this.idToElementMap).containsKey(strSubstring)) {
+            return (SvgElementBase) ((HashMap) this.idToElementMap).get(strSubstring);
         }
-        SvgElementBase elementById = getElementById(this.rootElement, substring);
-        ((HashMap) this.idToElementMap).put(substring, elementById);
+        SvgElementBase elementById = getElementById(this.rootElement, strSubstring);
+        ((HashMap) this.idToElementMap).put(strSubstring, elementById);
         return elementById;
     }
 
@@ -1228,7 +1165,6 @@ public class SVG {
         svg.width = new Length(f);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Length implements Cloneable {
         public final Unit unit;
         public final float value;
@@ -1251,14 +1187,14 @@ public class SVG {
             if (box == null) {
                 return this.value;
             }
-            float f2 = box.width;
-            if (f2 == box.height) {
+            float fSqrt = box.width;
+            if (fSqrt == box.height) {
                 f = this.value;
             } else {
-                f2 = (float) (Math.sqrt((r0 * r0) + (f2 * f2)) / 1.414213562373095d);
+                fSqrt = (float) (Math.sqrt((r0 * r0) + (fSqrt * fSqrt)) / 1.414213562373095d);
                 f = this.value;
             }
-            return (f * f2) / 100.0f;
+            return (f * fSqrt) / 100.0f;
         }
 
         public final float floatValueX(SVGAndroidRenderer sVGAndroidRenderer) {
@@ -1345,7 +1281,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Box {
         public float height;
         public float minX;
@@ -1386,7 +1321,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SolidColor extends SvgElementBase implements SvgContainer {
         @Override // com.caverock.androidsvg.SVG.SvgContainer
         public final List getChildren() {
@@ -1403,7 +1337,6 @@ public class SVG {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Stop extends SvgElementBase implements SvgContainer {
         public Float offset;
 

@@ -56,15 +56,15 @@ public class DdmHandleViewDebug extends DdmHandle {
         if (i == CHUNK_VULW) {
             return listWindows();
         }
-        ByteBuffer wrapChunk = wrapChunk(chunk);
-        int i2 = wrapChunk.getInt();
-        View rootView = getRootView(wrapChunk);
+        ByteBuffer byteBufferWrapChunk = wrapChunk(chunk);
+        int i2 = byteBufferWrapChunk.getInt();
+        View rootView = getRootView(byteBufferWrapChunk);
         if (rootView == null) {
             return createFailChunk(-2, "Invalid View Root");
         }
         if (i == CHUNK_VURT) {
             if (i2 == 1) {
-                return dumpHierarchy(rootView, wrapChunk);
+                return dumpHierarchy(rootView, byteBufferWrapChunk);
             }
             if (i2 == 2) {
                 return captureLayers(rootView);
@@ -74,7 +74,7 @@ public class DdmHandleViewDebug extends DdmHandle {
             }
             return createFailChunk(-1, "Unknown view root operation: " + i2);
         }
-        View targetView = getTargetView(rootView, wrapChunk);
+        View targetView = getTargetView(rootView, byteBufferWrapChunk);
         if (targetView == null) {
             return createFailChunk(-2, "Invalid target view");
         }
@@ -91,28 +91,28 @@ public class DdmHandleViewDebug extends DdmHandle {
             return profileView(rootView, targetView);
         }
         if (i2 == 4) {
-            return invokeViewMethod(rootView, targetView, wrapChunk);
+            return invokeViewMethod(rootView, targetView, byteBufferWrapChunk);
         }
         if (i2 == 5) {
-            return setLayoutParameter(rootView, targetView, wrapChunk);
+            return setLayoutParameter(rootView, targetView, byteBufferWrapChunk);
         }
         return createFailChunk(-1, "Unknown view operation: " + i2);
     }
 
     private Chunk listWindows() {
         String[] viewRootNames = WindowManagerGlobal.getInstance().getViewRootNames();
-        int i = 4;
+        int length = 4;
         for (String str : viewRootNames) {
-            i = i + 4 + (str.length() * 2);
+            length = length + 4 + (str.length() * 2);
         }
-        ByteBuffer allocate = ByteBuffer.allocate(i);
-        allocate.order(ChunkHandler.CHUNK_ORDER);
-        allocate.putInt(viewRootNames.length);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(length);
+        byteBufferAllocate.order(ChunkHandler.CHUNK_ORDER);
+        byteBufferAllocate.putInt(viewRootNames.length);
         for (String str2 : viewRootNames) {
-            allocate.putInt(str2.length());
-            putString(allocate, str2);
+            byteBufferAllocate.putInt(str2.length());
+            putString(byteBufferAllocate, str2);
         }
-        return new Chunk(CHUNK_VULW, allocate);
+        return new Chunk(CHUNK_VULW, byteBufferAllocate);
     }
 
     private View getRootView(ByteBuffer byteBuffer) {
@@ -132,11 +132,11 @@ public class DdmHandleViewDebug extends DdmHandle {
     }
 
     private Chunk dumpHierarchy(View view, ByteBuffer byteBuffer) {
-        int i = 1;
+        int length = 1;
         boolean z = byteBuffer.getInt() > 0;
         boolean z2 = byteBuffer.getInt() > 0;
         boolean z3 = byteBuffer.hasRemaining() && byteBuffer.getInt() > 0;
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(2097152);
         try {
             if (z3) {
@@ -144,13 +144,13 @@ public class DdmHandleViewDebug extends DdmHandle {
             } else {
                 ViewDebug.dump(view, z, z2, byteArrayOutputStream);
             }
-            Log.d(TAG, "Time to obtain view hierarchy (ms): " + (System.currentTimeMillis() - currentTimeMillis));
+            Log.d(TAG, "Time to obtain view hierarchy (ms): " + (System.currentTimeMillis() - jCurrentTimeMillis));
             byte[] byteArray = byteArrayOutputStream.toByteArray();
-            int i2 = CHUNK_VURT;
-            i = byteArray.length;
-            return new Chunk(i2, byteArray, 0, i);
+            int i = CHUNK_VURT;
+            length = byteArray.length;
+            return new Chunk(i, byteArray, 0, length);
         } catch (IOException | InterruptedException e) {
-            return createFailChunk(i, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
+            return createFailChunk(length, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
         }
     }
 
@@ -162,23 +162,23 @@ public class DdmHandleViewDebug extends DdmHandle {
                 ViewDebug.captureLayers(view, dataOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 return new Chunk(CHUNK_VURT, byteArray, 0, byteArray.length);
-            } catch (IOException e) {
-                Chunk createFailChunk = createFailChunk(1, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
+            } finally {
                 try {
                     dataOutputStream.close();
                 } catch (IOException unused) {
                 }
-                return createFailChunk;
             }
-        } finally {
+        } catch (IOException e) {
+            Chunk chunkCreateFailChunk = createFailChunk(1, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
             try {
                 dataOutputStream.close();
             } catch (IOException unused2) {
             }
+            return chunkCreateFailChunk;
         }
     }
 
-    private Chunk dumpTheme(View view) {
+    private Chunk dumpTheme(View view) throws Throwable {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(1024);
         try {
             ViewDebug.dumpTheme(view, byteArrayOutputStream);
@@ -189,7 +189,7 @@ public class DdmHandleViewDebug extends DdmHandle {
         }
     }
 
-    private Chunk captureView(View view, View view2) {
+    private Chunk captureView(View view, View view2) throws Throwable {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(1024);
         try {
             ViewDebug.capture(view, byteArrayOutputStream, view2);
@@ -212,8 +212,8 @@ public class DdmHandleViewDebug extends DdmHandle {
 
     private Chunk invokeViewMethod(View view, View view2, ByteBuffer byteBuffer) {
         try {
-            byte[] invokeViewMethod = ViewDebug.invokeViewMethod(view2, getString(byteBuffer, byteBuffer.getInt()), byteBuffer);
-            return new Chunk(CHUNK_VUOP, invokeViewMethod, 0, invokeViewMethod.length);
+            byte[] bArrInvokeViewMethod = ViewDebug.invokeViewMethod(view2, getString(byteBuffer, byteBuffer.getInt()), byteBuffer);
+            return new Chunk(CHUNK_VUOP, bArrInvokeViewMethod, 0, bArrInvokeViewMethod.length);
         } catch (ViewDebug.ViewMethodInvocationSerializationException e) {
             return createFailChunk(-2, e.getMessage());
         } catch (Exception e2) {
@@ -232,7 +232,7 @@ public class DdmHandleViewDebug extends DdmHandle {
         }
     }
 
-    private Chunk profileView(View view, View view2) {
+    private Chunk profileView(View view, View view2) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(32768);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(byteArrayOutputStream), 32768);
         try {
@@ -240,19 +240,19 @@ public class DdmHandleViewDebug extends DdmHandle {
                 ViewDebug.profileViewAndChildren(view2, bufferedWriter);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 return new Chunk(CHUNK_VUOP, byteArray, 0, byteArray.length);
-            } finally {
+            } catch (IOException e) {
+                Chunk chunkCreateFailChunk = createFailChunk(1, "Unexpected error while profiling view: " + e.getMessage());
                 try {
                     bufferedWriter.close();
                 } catch (IOException unused) {
                 }
+                return chunkCreateFailChunk;
             }
-        } catch (IOException e) {
-            Chunk createFailChunk = createFailChunk(1, "Unexpected error while profiling view: " + e.getMessage());
+        } finally {
             try {
                 bufferedWriter.close();
             } catch (IOException unused2) {
             }
-            return createFailChunk;
         }
     }
 }

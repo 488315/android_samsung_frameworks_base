@@ -37,13 +37,13 @@ public final class NrSignalStrength {
 
     public static final ArrayList<NrSignalStrength> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NrSignalStrength> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NrSignalStrength nrSignalStrength = new NrSignalStrength();
-            nrSignalStrength.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            nrSignalStrength.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(nrSignalStrength);
         }
         return arrayList;
@@ -54,10 +54,10 @@ public final class NrSignalStrength {
         this.csiCqiTableIndex = hwBlob.getInt32(24 + j);
         long j2 = j + 32;
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
         this.csiCqiReport.clear();
         for (int i = 0; i < int32; i++) {
-            this.csiCqiReport.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.csiCqiReport.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

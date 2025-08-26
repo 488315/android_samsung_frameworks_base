@@ -29,15 +29,15 @@ public class RetargetFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public FrameFormat getOutputFormat(String str, FrameFormat frameFormat) {
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
-        mutableCopy.setTarget(this.mTarget);
-        return mutableCopy;
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
+        mutableFrameFormatMutableCopy.setTarget(this.mTarget);
+        return mutableFrameFormatMutableCopy;
     }
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame duplicateFrameToTarget = filterContext.getFrameManager().duplicateFrameToTarget(pullInput("frame"), this.mTarget);
-        pushOutput("frame", duplicateFrameToTarget);
-        duplicateFrameToTarget.release();
+        Frame frameDuplicateFrameToTarget = filterContext.getFrameManager().duplicateFrameToTarget(pullInput("frame"), this.mTarget);
+        pushOutput("frame", frameDuplicateFrameToTarget);
+        frameDuplicateFrameToTarget.release();
     }
 }

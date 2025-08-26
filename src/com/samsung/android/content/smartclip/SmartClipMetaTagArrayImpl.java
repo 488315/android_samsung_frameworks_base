@@ -125,13 +125,13 @@ public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implemen
 
     public void readFromParcel(Parcel parcel) {
         SemSmartClipMetaTag semSmartClipMetaTag;
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
-            if (readString.equals("BasicMetaTag")) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
+            if (string.equals("BasicMetaTag")) {
                 semSmartClipMetaTag = new SemSmartClipMetaTag(parcel.readString(), parcel.readString());
             } else {
-                semSmartClipMetaTag = readString.equals("ParcelableMetaTag") ? (SemSmartClipMetaTag) parcel.readParcelable(null) : null;
+                semSmartClipMetaTag = string.equals("ParcelableMetaTag") ? (SemSmartClipMetaTag) parcel.readParcelable(null) : null;
             }
             if (semSmartClipMetaTag == null) {
                 Log.e(TAG, "readFromParcel : Could not read tag!!");

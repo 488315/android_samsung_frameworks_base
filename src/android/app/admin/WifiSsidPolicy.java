@@ -4,6 +4,7 @@ import android.net.wifi.WifiSsid;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -63,7 +64,7 @@ public final class WifiSsidPolicy implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mPolicyType);
         parcel.writeArraySet(this.mSsids);
     }

@@ -25,9 +25,9 @@ public class FastDataInput implements DataInput, Closeable {
         if (i < 8) {
             throw new IllegalArgumentException();
         }
-        byte[] newByteArray = newByteArray(i);
-        this.mBuffer = newByteArray;
-        this.mBufferCap = newByteArray.length;
+        byte[] bArrNewByteArray = newByteArray(i);
+        this.mBuffer = bArrNewByteArray;
+        this.mBufferCap = bArrNewByteArray.length;
     }
 
     public static FastDataInput obtain(InputStream inputStream) {
@@ -119,24 +119,24 @@ public class FastDataInput implements DataInput, Closeable {
 
     @Override // java.io.DataInput
     public String readUTF() throws IOException {
-        int readUnsignedShort = readUnsignedShort();
-        if (this.mBufferCap > readUnsignedShort) {
-            if (this.mBufferLim - this.mBufferPos < readUnsignedShort) {
-                fill(readUnsignedShort);
+        int unsignedShort = readUnsignedShort();
+        if (this.mBufferCap > unsignedShort) {
+            if (this.mBufferLim - this.mBufferPos < unsignedShort) {
+                fill(unsignedShort);
             }
-            String decode = ModifiedUtf8.decode(this.mBuffer, new char[readUnsignedShort], this.mBufferPos, readUnsignedShort);
-            this.mBufferPos += readUnsignedShort;
-            return decode;
+            String strDecode = ModifiedUtf8.decode(this.mBuffer, new char[unsignedShort], this.mBufferPos, unsignedShort);
+            this.mBufferPos += unsignedShort;
+            return strDecode;
         }
-        byte[] newByteArray = newByteArray(readUnsignedShort + 1);
-        readFully(newByteArray, 0, readUnsignedShort);
-        return ModifiedUtf8.decode(newByteArray, new char[readUnsignedShort], 0, readUnsignedShort);
+        byte[] bArrNewByteArray = newByteArray(unsignedShort + 1);
+        readFully(bArrNewByteArray, 0, unsignedShort);
+        return ModifiedUtf8.decode(bArrNewByteArray, new char[unsignedShort], 0, unsignedShort);
     }
 
     public String readInternedUTF() throws IOException {
-        int readUnsignedShort = readUnsignedShort();
-        if (readUnsignedShort == 65535) {
-            String readUTF = readUTF();
+        int unsignedShort = readUnsignedShort();
+        if (unsignedShort == 65535) {
+            String utf = readUTF();
             int i = this.mStringRefCount;
             if (i < 65535) {
                 String[] strArr = this.mStringRefs;
@@ -146,15 +146,15 @@ public class FastDataInput implements DataInput, Closeable {
                 String[] strArr2 = this.mStringRefs;
                 int i2 = this.mStringRefCount;
                 this.mStringRefCount = i2 + 1;
-                strArr2[i2] = readUTF;
+                strArr2[i2] = utf;
             }
-            return readUTF;
+            return utf;
         }
         String[] strArr3 = this.mStringRefs;
-        if (readUnsignedShort >= strArr3.length) {
-            throw new IOException("Invalid interned string reference " + readUnsignedShort + " for " + this.mStringRefs.length + " interned strings");
+        if (unsignedShort >= strArr3.length) {
+            throw new IOException("Invalid interned string reference " + unsignedShort + " for " + this.mStringRefs.length + " interned strings");
         }
-        return strArr3[readUnsignedShort];
+        return strArr3[unsignedShort];
     }
 
     @Override // java.io.DataInput

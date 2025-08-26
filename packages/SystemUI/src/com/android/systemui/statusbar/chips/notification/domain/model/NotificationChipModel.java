@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.notification.promoted.shared.model.Promote
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationChipModel {
     public final String appName;
@@ -43,13 +42,13 @@ public final class NotificationChipModel {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.appName);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.key.hashCode() * 31, 31, this.appName);
         StatusBarIconView statusBarIconView = this.statusBarChipIconView;
-        int m2 = TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((this.promotedContent.hashCode() + ((m + (statusBarIconView == null ? 0 : statusBarIconView.hashCode())) * 31)) * 31, 31, this.creationTime), 31, this.isAppVisible);
+        int iM2 = TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((this.promotedContent.hashCode() + ((iM + (statusBarIconView == null ? 0 : statusBarIconView.hashCode())) * 31)) * 31, 31, this.creationTime), 31, this.isAppVisible);
         Long l = this.lastAppVisibleTime;
-        int hashCode = (m2 + (l == null ? 0 : l.hashCode())) * 31;
+        int iHashCode = (iM2 + (l == null ? 0 : l.hashCode())) * 31;
         InstanceId instanceId = this.instanceId;
-        return hashCode + (instanceId != null ? instanceId.hashCode() : 0);
+        return iHashCode + (instanceId != null ? instanceId.hashCode() : 0);
     }
 
     public final String toString() {

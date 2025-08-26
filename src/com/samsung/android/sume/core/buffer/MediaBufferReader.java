@@ -16,9 +16,7 @@ public interface MediaBufferReader<T> {
             return new MediaBufferReader() { // from class: com.samsung.android.sume.core.buffer.MediaBufferReader$$ExternalSyntheticLambda0
                 @Override // com.samsung.android.sume.core.buffer.MediaBufferReader
                 public final Object get() {
-                    Object shape;
-                    shape = MediaBuffer.this.getFormat().getShape();
-                    return shape;
+                    return mediaBuffer.getFormat().getShape();
                 }
             };
         }

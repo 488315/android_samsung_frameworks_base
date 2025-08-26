@@ -58,11 +58,11 @@ public class SemShareLogging {
         this.mContext.sendBroadcast(getSurveyIntent(bundle));
     }
 
-    private void insertLogWithDimension(String str, HashMap<String, String> hashMap) {
+    private void insertLogWithDimension(String str, HashMap<String, String> map) {
         if (this.mHasDMA && hasSurveyPermission()) {
             Bundle featureBundle = getFeatureBundle(str);
-            if (hashMap != null) {
-                featureBundle.putSerializable(SemShareConstants.SURVEY_CONTENT_DIMENSION, hashMap);
+            if (map != null) {
+                featureBundle.putSerializable(SemShareConstants.SURVEY_CONTENT_DIMENSION, map);
             }
             sendLog(featureBundle);
         }
@@ -71,19 +71,19 @@ public class SemShareLogging {
     public void semInsertStartSelectLog(String str, String str2, String str3, String str4, boolean z) {
         String str5;
         if (this.mHasDMA && hasSurveyPermission()) {
-            HashMap<String, String> hashMap = new HashMap<>();
-            hashMap.put("caller", str);
-            hashMap.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_CALLEE, str2);
-            hashMap.put("mime", str3);
-            hashMap.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_MIME_CALLEE, String.format("%s_%s", str3, str2));
-            hashMap.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_ACTION, str4);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("caller", str);
+            map.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_CALLEE, str2);
+            map.put("mime", str3);
+            map.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_MIME_CALLEE, String.format("%s_%s", str3, str2));
+            map.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_ACTION, str4);
             if (z) {
                 str5 = "0";
             } else {
                 str5 = "1";
             }
-            hashMap.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_ONCE_ALWAYS, str5);
-            insertLogWithDimension(SemShareConstants.DMA_SURVEY_FEATURE_RESOLVER, hashMap);
+            map.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_ONCE_ALWAYS, str5);
+            insertLogWithDimension(SemShareConstants.DMA_SURVEY_FEATURE_RESOLVER, map);
         }
     }
 }

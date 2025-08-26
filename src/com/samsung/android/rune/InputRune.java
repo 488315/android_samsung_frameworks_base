@@ -203,10 +203,10 @@ public class InputRune {
         SAFE_DEBUG = Debug.semIsProductDev();
         PWM_KEY_SA_LOGGING = CoreRune.FW_SA_LOGGING;
         PWM_SUPPORT_BIXBY_ONBOARDING_SERVICE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_BIXBY_SUPPORT_LONG_KEY_SERVICE");
-        boolean equals = "true".equals(SystemProperties.get("ro.bbt.support.circle2search"));
-        PWM_SUPPORT_BIXBY_TOUCH_CHN = equals;
-        boolean equals2 = "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
-        PWM_SUPPORT_SEARCLE = equals2;
+        boolean zEquals = "true".equals(SystemProperties.get("ro.bbt.support.circle2search"));
+        PWM_SUPPORT_BIXBY_TOUCH_CHN = zEquals;
+        boolean zEquals2 = "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
+        PWM_SUPPORT_SEARCLE = zEquals2;
         PWM_POWER_KEY_DOUBLE_PRESS_ATT_TV_MODE = SemCscFeature.getInstance().getString("CscFeature_SystemUI_ConfigDefQuickSettingItem", "").contains("TvMode");
         boolean z2 = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SETTINGS_SUPPORT_FUNCTION_KEY_MENU");
         PWM_SIDE_KEY = z2;
@@ -221,7 +221,7 @@ public class InputRune {
         PWM_SIDE_KEY_DOUBLE_PRESS_SECURE_FOLDER = z2 && SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportPrivateMode");
         PWM_KEY_COMBINATION_GLOBAL_ACTION = z2;
         PWM_KEY_COMBINATION_SCREENSHOT_SIDE_KEY = z2;
-        PWM_HOME_KEY_LONG_PRESS_SEARCLE = equals2 || equals;
+        PWM_HOME_KEY_LONG_PRESS_SEARCLE = zEquals2 || zEquals;
         PWM_SKT_PHONE_RELAX_MODE = "tphone".equalsIgnoreCase(SemCscFeature.getInstance().getString("CscFeature_Setting_ConfigOperatorCallService"));
         PWM_FINGERPRINT_SIDE_TOUCH = false;
         PWM_SUPPORT_TOOLBAR_SHORTCUT = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SIP_SUPPORT_EMOJI_SHORTCUT");
@@ -242,9 +242,9 @@ public class InputRune {
         PWM_XCOVER_TOP_KEY_B2B_DELTA = false;
         PWM_B2B_DEDICATED_APP = true;
         PWM_KODIAK_DEDICATED_PTT_APP = false;
-        boolean equalsIgnoreCase = "PanicMode".equalsIgnoreCase(SemCscFeature.getInstance().getString("CscFeature_Framework_ConfigActionForMultiPowerPress"));
-        PWM_SIDE_KEY_TRIPLE_PRESS_PANIC_CALL = equalsIgnoreCase;
-        PWM_SIDE_KEY_QUINTUPLE_PRESS_EMERGENCY_SOS = !equalsIgnoreCase;
+        boolean zEqualsIgnoreCase = "PanicMode".equalsIgnoreCase(SemCscFeature.getInstance().getString("CscFeature_Framework_ConfigActionForMultiPowerPress"));
+        PWM_SIDE_KEY_TRIPLE_PRESS_PANIC_CALL = zEqualsIgnoreCase;
+        PWM_SIDE_KEY_QUINTUPLE_PRESS_EMERGENCY_SOS = !zEqualsIgnoreCase;
         PWM_QUICK_LAUNCH_CAMERA = !z2;
         PWM_SKIP_TOO_FAST_DOUBLE_PRESS = false;
         KNOX_CAPTURE_XCOVER_OR_TOP_KEY = false;

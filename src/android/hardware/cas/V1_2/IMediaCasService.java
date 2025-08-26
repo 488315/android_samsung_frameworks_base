@@ -60,9 +60,9 @@ public interface IMediaCasService extends android.hardware.cas.V1_1.IMediaCasSer
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaCasService)) {
-            return (IMediaCasService) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IMediaCasService)) {
+            return (IMediaCasService) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -283,13 +283,13 @@ public interface IMediaCasService extends android.hardware.cas.V1_1.IMediaCasSer
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -444,53 +444,53 @@ public interface IMediaCasService extends android.hardware.cas.V1_1.IMediaCasSer
             switch (i) {
                 case 1:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.IMediaCasService.kInterfaceName);
-                    ArrayList<HidlCasPluginDescriptor> enumeratePlugins = enumeratePlugins();
+                    ArrayList<HidlCasPluginDescriptor> arrayListEnumeratePlugins = enumeratePlugins();
                     hwParcel2.writeStatus(0);
-                    HidlCasPluginDescriptor.writeVectorToParcel(hwParcel2, enumeratePlugins);
+                    HidlCasPluginDescriptor.writeVectorToParcel(hwParcel2, arrayListEnumeratePlugins);
                     hwParcel2.send();
                     return;
                 case 2:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.IMediaCasService.kInterfaceName);
-                    boolean isSystemIdSupported = isSystemIdSupported(hwParcel.readInt32());
+                    boolean zIsSystemIdSupported = isSystemIdSupported(hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(isSystemIdSupported);
+                    hwParcel2.writeBool(zIsSystemIdSupported);
                     hwParcel2.send();
                     return;
                 case 3:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.IMediaCasService.kInterfaceName);
-                    android.hardware.cas.V1_0.ICas createPlugin = createPlugin(hwParcel.readInt32(), android.hardware.cas.V1_0.ICasListener.asInterface(hwParcel.readStrongBinder()));
+                    android.hardware.cas.V1_0.ICas iCasCreatePlugin = createPlugin(hwParcel.readInt32(), android.hardware.cas.V1_0.ICasListener.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStrongBinder(createPlugin != null ? createPlugin.asBinder() : null);
+                    hwParcel2.writeStrongBinder(iCasCreatePlugin != null ? iCasCreatePlugin.asBinder() : null);
                     hwParcel2.send();
                     return;
                 case 4:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.IMediaCasService.kInterfaceName);
-                    boolean isDescramblerSupported = isDescramblerSupported(hwParcel.readInt32());
+                    boolean zIsDescramblerSupported = isDescramblerSupported(hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(isDescramblerSupported);
+                    hwParcel2.writeBool(zIsDescramblerSupported);
                     hwParcel2.send();
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.IMediaCasService.kInterfaceName);
-                    IDescramblerBase createDescrambler = createDescrambler(hwParcel.readInt32());
+                    IDescramblerBase iDescramblerBaseCreateDescrambler = createDescrambler(hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStrongBinder(createDescrambler != null ? createDescrambler.asBinder() : null);
+                    hwParcel2.writeStrongBinder(iDescramblerBaseCreateDescrambler != null ? iDescramblerBaseCreateDescrambler.asBinder() : null);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(android.hardware.cas.V1_1.IMediaCasService.kInterfaceName);
-                    android.hardware.cas.V1_1.ICas createPluginExt = createPluginExt(hwParcel.readInt32(), android.hardware.cas.V1_1.ICasListener.asInterface(hwParcel.readStrongBinder()));
+                    android.hardware.cas.V1_1.ICas iCasCreatePluginExt = createPluginExt(hwParcel.readInt32(), android.hardware.cas.V1_1.ICasListener.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStrongBinder(createPluginExt != null ? createPluginExt.asBinder() : null);
+                    hwParcel2.writeStrongBinder(iCasCreatePluginExt != null ? iCasCreatePluginExt.asBinder() : null);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -501,9 +501,9 @@ public interface IMediaCasService extends android.hardware.cas.V1_1.IMediaCasSer
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

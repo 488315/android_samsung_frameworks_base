@@ -189,110 +189,110 @@ public interface WindowManagerProtos {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.orientation;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
             }
             int i2 = this.insetLeft;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
             }
             int i3 = this.insetTop;
             if (i3 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
             }
             int i4 = this.insetRight;
             if (i4 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i4);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i4);
             }
             int i5 = this.insetBottom;
             if (i5 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(5, i5);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(5, i5);
             }
             boolean z = this.isRealSnapshot;
             if (z) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(6, z);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(6, z);
             }
             int i6 = this.windowingMode;
             if (i6 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i6);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i6);
             }
             int i7 = this.systemUiVisibility;
             if (i7 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(8, i7);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(8, i7);
             }
             boolean z2 = this.isTranslucent;
             if (z2) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(9, z2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(9, z2);
             }
             if (!this.topActivityComponent.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(10, this.topActivityComponent);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(10, this.topActivityComponent);
             }
             if (Float.floatToIntBits(this.legacyScale) != Float.floatToIntBits(0.0f)) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeFloatSize(11, this.legacyScale);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeFloatSize(11, this.legacyScale);
             }
             long j = this.id;
             if (j != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(12, j);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(12, j);
             }
             int i8 = this.rotation;
             if (i8 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(13, i8);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(13, i8);
             }
             int i9 = this.taskWidth;
             if (i9 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(14, i9);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(14, i9);
             }
             int i10 = this.taskHeight;
             if (i10 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(15, i10);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(15, i10);
             }
             int i11 = this.appearance;
             if (i11 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(16, i11);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(16, i11);
             }
             int i12 = this.letterboxInsetLeft;
             if (i12 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(17, i12);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(17, i12);
             }
             int i13 = this.letterboxInsetTop;
             if (i13 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(18, i13);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(18, i13);
             }
             int i14 = this.letterboxInsetRight;
             if (i14 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(19, i14);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(19, i14);
             }
             int i15 = this.letterboxInsetBottom;
             if (i15 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(20, i15);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(20, i15);
             }
             int i16 = this.uiMode;
             if (i16 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(21, i16);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(21, i16);
             }
             int i17 = this.cutoutInsetLeft;
             if (i17 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(101, i17);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(101, i17);
             }
             int i18 = this.cutoutInsetTop;
             if (i18 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(102, i18);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(102, i18);
             }
             int i19 = this.cutoutInsetRight;
             if (i19 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(103, i19);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(103, i19);
             }
             int i20 = this.cutoutInsetBottom;
-            return i20 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(104, i20) : computeSerializedSize;
+            return i20 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(104, i20) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public TaskSnapshotProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                switch (readTag) {
+                int tag = codedInputByteBufferNano.readTag();
+                switch (tag) {
                     case 0:
                         break;
                     case 8:
@@ -371,7 +371,7 @@ public interface WindowManagerProtos {
                         this.cutoutInsetBottom = codedInputByteBufferNano.readInt32();
                         break;
                     default:
-                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                             break;
                         } else {
                             break;
@@ -450,53 +450,53 @@ public interface WindowManagerProtos {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.letterboxPositionForHorizontalReachability;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
             }
             int i2 = this.letterboxPositionForVerticalReachability;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i2);
             }
             int i3 = this.letterboxPositionForBookModeReachability;
             if (i3 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i3);
             }
             int i4 = this.letterboxPositionForTabletopModeReachability;
-            return i4 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i4) : computeSerializedSize;
+            return i4 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i4) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public LetterboxProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 8) {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2) {
-                        this.letterboxPositionForHorizontalReachability = readInt32;
+                if (tag == 8) {
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2) {
+                        this.letterboxPositionForHorizontalReachability = int32;
                     }
-                } else if (readTag == 16) {
-                    int readInt322 = codedInputByteBufferNano.readInt32();
-                    if (readInt322 == 0 || readInt322 == 1 || readInt322 == 2) {
-                        this.letterboxPositionForVerticalReachability = readInt322;
+                } else if (tag == 16) {
+                    int int322 = codedInputByteBufferNano.readInt32();
+                    if (int322 == 0 || int322 == 1 || int322 == 2) {
+                        this.letterboxPositionForVerticalReachability = int322;
                     }
-                } else if (readTag == 24) {
-                    int readInt323 = codedInputByteBufferNano.readInt32();
-                    if (readInt323 == 0 || readInt323 == 1 || readInt323 == 2) {
-                        this.letterboxPositionForBookModeReachability = readInt323;
+                } else if (tag == 24) {
+                    int int323 = codedInputByteBufferNano.readInt32();
+                    if (int323 == 0 || int323 == 1 || int323 == 2) {
+                        this.letterboxPositionForBookModeReachability = int323;
                     }
-                } else if (readTag != 32) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 32) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt324 = codedInputByteBufferNano.readInt32();
-                    if (readInt324 == 0 || readInt324 == 1 || readInt324 == 2) {
-                        this.letterboxPositionForTabletopModeReachability = readInt324;
+                    int int324 = codedInputByteBufferNano.readInt32();
+                    if (int324 == 0 || int324 == 1 || int324 == 2) {
+                        this.letterboxPositionForTabletopModeReachability = int324;
                     }
                 }
             }

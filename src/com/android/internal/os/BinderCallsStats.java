@@ -30,12 +30,15 @@ import com.android.internal.os.BinderLatencyObserver;
 import com.android.internal.os.BinderStats;
 import com.android.internal.os.CachedDeviceState;
 import com.samsung.android.rune.CoreRune;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -209,7 +212,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
                             int size2 = arrayMap.size();
                             ArrayList arrayList = new ArrayList(size2);
                             for (int i3 = 0; i3 < size2; i3++) {
-                                arrayList.add(((CallStat) arrayMap.valueAt(i3)).m8184clone());
+                                arrayList.add(((CallStat) arrayMap.valueAt(i3)).m8195clone());
                             }
                             BinderCallsStats.this.mCallStatsObserver.noteCallStats(uidEntry.workSourceUid, uidEntry.incrementalCallCount, arrayList);
                             uidEntry.incrementalCallCount = 0L;
@@ -244,7 +247,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         this.mEnablePackageStats = z;
     }
 
-    public void init() {
+    public void init() throws Throwable {
         FileInputStream fileInputStream = null;
         try {
             try {
@@ -284,13 +287,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
                         }
                         throw th;
                     }
-                } catch (FileNotFoundException e4) {
-                    e = e4;
-                } catch (Exception e5) {
-                    e = e5;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (FileNotFoundException e4) {
+                e = e4;
+            } catch (Exception e5) {
+                e = e5;
             }
         } catch (Exception e6) {
             Slog.e(TAG, "Failed to close file, /data/log/binder_calls_stats", e6);
@@ -314,31 +317,31 @@ public class BinderCallsStats implements BinderInternal.Observer {
     @Override // com.android.internal.os.BinderInternal.Observer
     public BinderInternal.CallSession callStarted(Binder binder, int i, int i2) {
         noteNativeThreadId();
-        boolean canCollect = canCollect();
-        if (!this.mCollectLatencyData && !canCollect) {
+        boolean zCanCollect = canCollect();
+        if (!this.mCollectLatencyData && !zCanCollect) {
             return null;
         }
-        BinderInternal.CallSession obtainCallSession = obtainCallSession();
-        obtainCallSession.binderClass = binder.getClass();
-        obtainCallSession.transactionCode = i;
-        obtainCallSession.exceptionThrown = false;
-        obtainCallSession.cpuTimeStarted = -1L;
-        obtainCallSession.timeStarted = -1L;
-        obtainCallSession.recordedCall = shouldRecordDetailedData();
-        if (canCollect && (this.mRecordingAllTransactionsForUid || obtainCallSession.recordedCall)) {
-            obtainCallSession.cpuTimeStarted = getThreadTimeMicro();
-            obtainCallSession.timeStarted = getElapsedRealtimeMicro();
-            return obtainCallSession;
+        BinderInternal.CallSession callSessionObtainCallSession = obtainCallSession();
+        callSessionObtainCallSession.binderClass = binder.getClass();
+        callSessionObtainCallSession.transactionCode = i;
+        callSessionObtainCallSession.exceptionThrown = false;
+        callSessionObtainCallSession.cpuTimeStarted = -1L;
+        callSessionObtainCallSession.timeStarted = -1L;
+        callSessionObtainCallSession.recordedCall = shouldRecordDetailedData();
+        if (zCanCollect && (this.mRecordingAllTransactionsForUid || callSessionObtainCallSession.recordedCall)) {
+            callSessionObtainCallSession.cpuTimeStarted = getThreadTimeMicro();
+            callSessionObtainCallSession.timeStarted = getElapsedRealtimeMicro();
+            return callSessionObtainCallSession;
         }
         if (this.mCollectLatencyData) {
-            obtainCallSession.timeStarted = getElapsedRealtimeMicro();
+            callSessionObtainCallSession.timeStarted = getElapsedRealtimeMicro();
         }
-        return obtainCallSession;
+        return callSessionObtainCallSession;
     }
 
     private BinderInternal.CallSession obtainCallSession() {
-        BinderInternal.CallSession poll = this.mCallSessionsPool.poll();
-        return poll == null ? new BinderInternal.CallSession() : poll;
+        BinderInternal.CallSession callSessionPoll = this.mCallSessionsPool.poll();
+        return callSessionPoll == null ? new BinderInternal.CallSession() : callSessionPoll;
     }
 
     @Override // com.android.internal.os.BinderInternal.Observer
@@ -355,13 +358,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
     private void processCallEnded(BinderInternal.CallSession callSession, int i, int i2, int i3) {
         UidEntry uidEntry;
         boolean z;
-        long j;
-        long j2;
+        long threadTimeMicro;
+        long elapsedRealtimeMicro;
         if (this.mCollectLatencyData) {
             this.mLatencyObserver.callEnded(callSession);
         }
         if (canCollect()) {
-            String str = null;
+            String packageName = null;
             if (callSession.recordedCall) {
                 uidEntry = null;
                 z = true;
@@ -373,22 +376,22 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 z = false;
             }
             if (z) {
-                j = getThreadTimeMicro() - callSession.cpuTimeStarted;
-                j2 = getElapsedRealtimeMicro() - callSession.timeStarted;
+                threadTimeMicro = getThreadTimeMicro() - callSession.cpuTimeStarted;
+                elapsedRealtimeMicro = getElapsedRealtimeMicro() - callSession.timeStarted;
             } else {
-                j = 0;
-                j2 = 0;
+                threadTimeMicro = 0;
+                elapsedRealtimeMicro = 0;
             }
-            boolean isScreenInteractive = this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
+            boolean zIsScreenInteractive = this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
             int callingUid = this.mTrackDirectCallingUid ? getCallingUid() : -1;
             int callingPid = getCallingPid();
             if (this.mEnablePackageStats) {
-                str = callingPid > 0 ? getPackageName(callingPid, callingUid) : "async";
+                packageName = callingPid > 0 ? getPackageName(callingPid, callingUid) : "async";
             }
-            String str2 = str;
+            String str = packageName;
             synchronized (this.mLock) {
                 boolean z2 = z;
-                this.mCollectedCpuTime += j;
+                this.mCollectedCpuTime += threadTimeMicro;
                 this.mCollectedCallCount++;
                 if (canCollect()) {
                     if (uidEntry == null) {
@@ -397,26 +400,26 @@ public class BinderCallsStats implements BinderInternal.Observer {
                     uidEntry.callCount++;
                     uidEntry.incrementalCallCount++;
                     if (z2) {
-                        uidEntry.cpuTimeMicros += j;
+                        uidEntry.cpuTimeMicros += threadTimeMicro;
                         uidEntry.recordedCallCount++;
-                        CallStat orCreate = uidEntry.getOrCreate(callingUid, callSession.binderClass, callSession.transactionCode, isScreenInteractive, this.mCallStatsCount >= ((long) this.mMaxBinderCallStatsCount), str2);
+                        CallStat orCreate = uidEntry.getOrCreate(callingUid, callSession.binderClass, callSession.transactionCode, zIsScreenInteractive, this.mCallStatsCount >= ((long) this.mMaxBinderCallStatsCount), str);
                         if (orCreate.callCount == 0) {
                             this.mCallStatsCount++;
                         }
                         orCreate.callCount++;
                         orCreate.incrementalCallCount++;
                         orCreate.recordedCallCount++;
-                        orCreate.cpuTimeMicros += j;
-                        orCreate.maxCpuTimeMicros = Math.max(orCreate.maxCpuTimeMicros, j);
-                        orCreate.latencyMicros += j2;
-                        orCreate.maxLatencyMicros = Math.max(orCreate.maxLatencyMicros, j2);
+                        orCreate.cpuTimeMicros += threadTimeMicro;
+                        orCreate.maxCpuTimeMicros = Math.max(orCreate.maxCpuTimeMicros, threadTimeMicro);
+                        orCreate.latencyMicros += elapsedRealtimeMicro;
+                        orCreate.maxLatencyMicros = Math.max(orCreate.maxLatencyMicros, elapsedRealtimeMicro);
                         if (this.mDetailedTracking) {
                             orCreate.exceptionCount += callSession.exceptionThrown ? 1L : 0L;
                             orCreate.maxRequestSizeBytes = Math.max(orCreate.maxRequestSizeBytes, i);
                             orCreate.maxReplySizeBytes = Math.max(orCreate.maxReplySizeBytes, i2);
                         }
                     } else {
-                        CallStat callStat = uidEntry.get(callingUid, callSession.binderClass, callSession.transactionCode, isScreenInteractive, str2);
+                        CallStat callStat = uidEntry.get(callingUid, callSession.binderClass, callSession.transactionCode, zIsScreenInteractive, str);
                         if (callStat != null) {
                             callStat.callCount++;
                             callStat.incrementalCallCount++;
@@ -462,7 +465,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         if (callSession == null) {
             return;
         }
-        int i = 1;
+        int iIntValue = 1;
         callSession.exceptionThrown = true;
         try {
             String name = exc.getClass().getName();
@@ -473,9 +476,9 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 Integer num = this.mExceptionCounts.get(name);
                 ArrayMap<String, Integer> arrayMap = this.mExceptionCounts;
                 if (num != null) {
-                    i = 1 + num.intValue();
+                    iIntValue = 1 + num.intValue();
                 }
-                arrayMap.put(name, Integer.valueOf(i));
+                arrayMap.put(name, Integer.valueOf(iIntValue));
             }
         } catch (RuntimeException unused) {
             Slog.wtf(TAG, "Unexpected exception while updating mExceptionCounts");
@@ -515,7 +518,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return (readonly == null || readonly.isCharging()) ? false : true;
     }
 
-    public ArrayList<ExportedCallStat> getExportedCallStatsPerPackage() {
+    public ArrayList<ExportedCallStat> getExportedCallStatsPerPackage() throws NoSuchMethodException, SecurityException {
         if (!this.mDetailedTracking) {
             return new ArrayList<>();
         }
@@ -523,10 +526,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
         synchronized (this.mLock) {
             int size = this.mUidAllEntries.size();
             for (int i = 0; i < size; i++) {
-                UidEntry valueAt = this.mUidAllEntries.valueAt(i);
-                Iterator<CallStat> it = valueAt.getCallStatsList().iterator();
+                UidEntry uidEntryValueAt = this.mUidAllEntries.valueAt(i);
+                Iterator<CallStat> it = uidEntryValueAt.getCallStatsList().iterator();
                 while (it.hasNext()) {
-                    arrayList.add(getExportedCallStatPerPackage(valueAt.workSourceUid, it.next()));
+                    arrayList.add(getExportedCallStatPerPackage(uidEntryValueAt.workSourceUid, it.next()));
                 }
             }
         }
@@ -541,7 +544,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return arrayList;
     }
 
-    public ArrayList<ExportedCallStat> getExportedCallStatsPerPackage(int i) {
+    public ArrayList<ExportedCallStat> getExportedCallStatsPerPackage(int i) throws NoSuchMethodException, SecurityException {
         ArrayList<ExportedCallStat> arrayList = new ArrayList<>();
         synchronized (this.mLock) {
             Iterator<CallStat> it = getUidEntry(i * (-1)).getCallStatsList().iterator();
@@ -592,8 +595,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
     }
 
-    public HeavyBinderCallerInfo getHeaviestApplicationUid(int i) {
-        String str;
+    public HeavyBinderCallerInfo getHeaviestApplicationUid(int i) throws NoSuchMethodException, SecurityException {
+        String nameForUid;
         if (!canCollect()) {
             return null;
         }
@@ -602,16 +605,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
         if (size > 0) {
             long j = 0;
             for (int i2 = 0; i2 < size; i2++) {
-                UidEntry valueAt = this.mUidAllEntries.valueAt(i2);
-                arrayList.add(valueAt);
-                j += valueAt.cpuTimeMicros;
+                UidEntry uidEntryValueAt = this.mUidAllEntries.valueAt(i2);
+                arrayList.add(uidEntryValueAt);
+                j += uidEntryValueAt.cpuTimeMicros;
             }
             arrayList.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda3
                 @Override // java.util.function.ToLongFunction
                 public final long applyAsLong(Object obj) {
-                    long j2;
-                    j2 = ((BinderCallsStats.UidEntry) obj).cpuTimeMicros;
-                    return j2;
+                    return ((BinderCallsStats.UidEntry) obj).cpuTimeMicros;
                 }
             }).reversed());
             if (size >= 3) {
@@ -639,28 +640,28 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 Slog.i(TAG, "Heavy Binder Caller is detected. It occupies " + String.format("%.2f", Float.valueOf(f)) + "% in the binder_calls_stats");
                 String extraInfo = uidEntry.getExtraInfo(5);
                 try {
-                    str = AppGlobals.getPackageManager().getNameForUid(uidEntry.workSourceUid);
-                    if (str == null) {
-                        str = "UID:" + String.valueOf(uidEntry.workSourceUid);
+                    nameForUid = AppGlobals.getPackageManager().getNameForUid(uidEntry.workSourceUid);
+                    if (nameForUid == null) {
+                        nameForUid = "UID:" + String.valueOf(uidEntry.workSourceUid);
                     }
                 } catch (RemoteException e) {
                     Slog.e(TAG, "failed to get package name for UID " + uidEntry.workSourceUid, e);
-                    str = "UID:" + String.valueOf(uidEntry.workSourceUid);
+                    nameForUid = "UID:" + String.valueOf(uidEntry.workSourceUid);
                 }
                 Slog.i(TAG, "extra info : " + extraInfo);
-                return HeavyBinderCallerInfo.create(str, uidEntry.workSourceUid, f, extraInfo);
+                return HeavyBinderCallerInfo.create(nameForUid, uidEntry.workSourceUid, f, extraInfo);
             }
         }
         return null;
     }
 
     public boolean isNeededResetData() {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         synchronized (this.mLock) {
-            if (!canCollect() || this.mDeviceState.isScreenInteractive() || this.mCallStatsCount < this.mMaxBinderCallStatsCount || currentTimeMillis - this.mNeededResetDataTime <= 43200000) {
+            if (!canCollect() || this.mDeviceState.isScreenInteractive() || (this.mCallStatsCount < this.mMaxBinderCallStatsCount && jCurrentTimeMillis - this.mNeededResetDataTime <= 43200000)) {
                 return false;
             }
-            this.mNeededResetDataTime = currentTimeMillis;
+            this.mNeededResetDataTime = jCurrentTimeMillis;
             return true;
         }
     }
@@ -669,26 +670,26 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return getExportedCallStats(false);
     }
 
-    public ArrayList<ExportedCallStat> getExportedCallStats(boolean z) {
+    public ArrayList<ExportedCallStat> getExportedCallStats(boolean z) throws NoSuchMethodException, SecurityException {
         if (!this.mDetailedTracking) {
             return new ArrayList<>();
         }
         store(5, this.mCpuUsageThreshold);
         C1ExportedCallStatKey c1ExportedCallStatKey = new C1ExportedCallStatKey(this);
         final ArrayList<ExportedCallStat> arrayList = new ArrayList<>();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         synchronized (this.mLock) {
             int size = this.mUidAllEntries.size();
             for (int i = 0; i < size; i++) {
-                UidEntry valueAt = this.mUidAllEntries.valueAt(i);
-                for (CallStat callStat : valueAt.getCallStatsList()) {
-                    if (shouldExport(getExportedCallStat(valueAt.workSourceUid, callStat), z)) {
+                UidEntry uidEntryValueAt = this.mUidAllEntries.valueAt(i);
+                for (CallStat callStat : uidEntryValueAt.getCallStatsList()) {
+                    if (shouldExport(getExportedCallStat(uidEntryValueAt.workSourceUid, callStat), z)) {
                         c1ExportedCallStatKey.transactionCode = callStat.transactionCode;
                         c1ExportedCallStatKey.screenInteractive = callStat.screenInteractive;
                         c1ExportedCallStatKey.binderClass = callStat.binderClass;
-                        ExportedCallStat exportedCallStat = (ExportedCallStat) hashMap.get(c1ExportedCallStatKey);
+                        ExportedCallStat exportedCallStat = (ExportedCallStat) map.get(c1ExportedCallStatKey);
                         if (exportedCallStat == null) {
-                            hashMap.put(new C1ExportedCallStatKey(this, callStat.transactionCode, callStat.screenInteractive, callStat.binderClass), getExportedCallStat(valueAt.workSourceUid, callStat));
+                            map.put(new C1ExportedCallStatKey(this, callStat.transactionCode, callStat.screenInteractive, callStat.binderClass), getExportedCallStat(uidEntryValueAt.workSourceUid, callStat));
                         } else {
                             exportedCallStat.cpuTimeMicros += callStat.cpuTimeMicros;
                             exportedCallStat.maxCpuTimeMicros += callStat.maxCpuTimeMicros;
@@ -702,13 +703,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
                         }
                     }
                 }
-                hashMap.entrySet().iterator().forEachRemaining(new Consumer() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda0
+                map.entrySet().iterator().forEachRemaining(new Consumer() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         arrayList.add((BinderCallsStats.ExportedCallStat) ((Map.Entry) obj).getValue());
                     }
                 });
-                hashMap.clear();
+                map.clear();
             }
         }
         resolveBinderMethodNames(arrayList);
@@ -768,7 +769,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return getExportedCallStats(i, false);
     }
 
-    public ArrayList<ExportedCallStat> getExportedCallStats(int i, boolean z) {
+    public ArrayList<ExportedCallStat> getExportedCallStats(int i, boolean z) throws NoSuchMethodException, SecurityException {
         ArrayList<ExportedCallStat> arrayList = new ArrayList<>();
         store(5, this.mCpuUsageThreshold);
         synchronized (this.mLock) {
@@ -804,37 +805,35 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return exportedCallStat;
     }
 
-    private void resolveBinderMethodNames(ArrayList<ExportedCallStat> arrayList) {
+    private void resolveBinderMethodNames(ArrayList<ExportedCallStat> arrayList) throws NoSuchMethodException, SecurityException {
         arrayList.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda4
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compareByBinderClassAndCode;
-                compareByBinderClassAndCode = BinderCallsStats.compareByBinderClassAndCode((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                return compareByBinderClassAndCode;
+                return BinderCallsStats.compareByBinderClassAndCode((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
             }
         });
         BinderTransactionNameResolver binderTransactionNameResolver = new BinderTransactionNameResolver();
         Iterator<ExportedCallStat> it = arrayList.iterator();
         ExportedCallStat exportedCallStat = null;
-        String str = null;
+        String methodName = null;
         while (it.hasNext()) {
             ExportedCallStat next = it.next();
             boolean z = exportedCallStat == null || !exportedCallStat.className.equals(next.className);
             boolean z2 = exportedCallStat == null || exportedCallStat.transactionCode != next.transactionCode;
             if (z || z2) {
-                str = binderTransactionNameResolver.getMethodName(next.binderClass, next.transactionCode);
+                methodName = binderTransactionNameResolver.getMethodName(next.binderClass, next.transactionCode);
             }
-            next.methodName = str;
+            next.methodName = methodName;
             exportedCallStat = next;
         }
     }
 
     private ExportedCallStat createDebugEntry(String str, long j) {
-        int myUid = Process.myUid();
+        int iMyUid = Process.myUid();
         ExportedCallStat exportedCallStat = new ExportedCallStat();
         exportedCallStat.className = "";
-        exportedCallStat.workSourceUid = myUid;
-        exportedCallStat.callingUid = myUid;
+        exportedCallStat.workSourceUid = iMyUid;
+        exportedCallStat.callingUid = iMyUid;
         exportedCallStat.recordedCallCount = 1L;
         exportedCallStat.callCount = 1L;
         exportedCallStat.methodName = "__DEBUG_" + str;
@@ -856,7 +855,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
     }
 
-    public void dump(PrintWriter printWriter, AppIdToPackageMap appIdToPackageMap, int i, boolean z) {
+    public void dump(PrintWriter printWriter, AppIdToPackageMap appIdToPackageMap, int i, boolean z) throws NoSuchMethodException, SecurityException {
         store(5, this.mCpuUsageThreshold);
         synchronized (this.mLock) {
             dumpLocked(printWriter, appIdToPackageMap, i, z);
@@ -891,29 +890,27 @@ public class BinderCallsStats implements BinderInternal.Observer {
     }
 
     private void printCallStatsByPackage(PrintWriter printWriter, UidEntry uidEntry) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (CallStat callStat : uidEntry.getCallStatsList()) {
-            C1SimpleCallStat c1SimpleCallStat = (C1SimpleCallStat) hashMap.get(callStat.packageName);
+            C1SimpleCallStat c1SimpleCallStat = (C1SimpleCallStat) map.get(callStat.packageName);
             if (c1SimpleCallStat == null) {
                 C1SimpleCallStat c1SimpleCallStat2 = new C1SimpleCallStat(this);
                 c1SimpleCallStat2.packageName = callStat.packageName;
                 c1SimpleCallStat2.cpuTimeMicros += callStat.cpuTimeMicros;
                 c1SimpleCallStat2.recordedCallCount = (int) (c1SimpleCallStat2.recordedCallCount + callStat.recordedCallCount);
                 c1SimpleCallStat2.callCount = (int) (c1SimpleCallStat2.callCount + callStat.callCount);
-                hashMap.put(callStat.packageName, c1SimpleCallStat2);
+                map.put(callStat.packageName, c1SimpleCallStat2);
             } else {
                 c1SimpleCallStat.cpuTimeMicros += callStat.cpuTimeMicros;
                 c1SimpleCallStat.recordedCallCount = (int) (c1SimpleCallStat.recordedCallCount + callStat.recordedCallCount);
                 c1SimpleCallStat.callCount = (int) (c1SimpleCallStat.callCount + callStat.callCount);
             }
         }
-        ArrayList<C1SimpleCallStat> arrayList = new ArrayList(hashMap.values());
+        ArrayList<C1SimpleCallStat> arrayList = new ArrayList(map.values());
         arrayList.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda1
             @Override // java.util.function.ToLongFunction
             public final long applyAsLong(Object obj) {
-                long j;
-                j = ((BinderCallsStats.C1SimpleCallStat) obj).cpuTimeMicros;
-                return j;
+                return ((BinderCallsStats.C1SimpleCallStat) obj).cpuTimeMicros;
             }
         }).reversed());
         for (C1SimpleCallStat c1SimpleCallStat3 : arrayList) {
@@ -950,9 +947,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         exportedCallStatsPerPackage.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda5
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compareByCpuDesc;
-                compareByCpuDesc = BinderCallsStats.compareByCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                return compareByCpuDesc;
+                return BinderCallsStats.compareByCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
             }
         });
         for (ExportedCallStat exportedCallStat : exportedCallStatsPerPackage) {
@@ -1006,11 +1001,11 @@ public class BinderCallsStats implements BinderInternal.Observer {
             long j5 = 0;
             long j6 = 0;
             for (int size = this.mUidAllEntries.size(); i2 < size; size = size) {
-                UidEntry valueAt = this.mUidAllEntries.valueAt(i2);
-                arrayList.add(valueAt);
-                j6 += valueAt.cpuTimeMicros;
-                j4 += valueAt.recordedCallCount;
-                j5 += valueAt.callCount;
+                UidEntry uidEntryValueAt = this.mUidAllEntries.valueAt(i2);
+                arrayList.add(uidEntryValueAt);
+                j6 += uidEntryValueAt.cpuTimeMicros;
+                j4 += uidEntryValueAt.recordedCallCount;
+                j5 += uidEntryValueAt.callCount;
                 i2++;
             }
             arrayList.sort(Comparator.comparingDouble(new ToDoubleFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda6
@@ -1021,8 +1016,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
                     	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
                     	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
                     	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:468)
+                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:97)
                     */
                 @Override // java.util.function.ToDoubleFunction
                 public final double applyAsDouble(java.lang.Object r1) {
@@ -1049,8 +1044,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
                     	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
                     	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
                     	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:468)
+                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:97)
                     */
                 @Override // java.util.function.ToDoubleFunction
                 public final double applyAsDouble(java.lang.Object r1) {
@@ -1093,15 +1088,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
         this.mExceptionCounts.entrySet().iterator().forEachRemaining(new Consumer() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda8
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                arrayList2.add(Pair.create((String) r1.getKey(), (Integer) ((Map.Entry) obj).getValue()));
+                Map.Entry entry = (Map.Entry) obj;
+                arrayList2.add(Pair.create((String) entry.getKey(), (Integer) entry.getValue()));
             }
         });
         arrayList2.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda9
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((Integer) ((Pair) obj2).second).intValue(), ((Integer) ((Pair) obj).second).intValue());
-                return compare;
+                return Integer.compare(((Integer) ((Pair) obj2).second).intValue(), ((Integer) ((Pair) obj).second).intValue());
             }
         });
         for (Pair pair : arrayList2) {
@@ -1130,129 +1124,85 @@ public class BinderCallsStats implements BinderInternal.Observer {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x008a  */
     /* JADX WARN: Type inference failed for: r6v1 */
     /* JADX WARN: Type inference failed for: r6v18 */
     /* JADX WARN: Type inference failed for: r6v19 */
     /* JADX WARN: Type inference failed for: r6v20 */
     /* JADX WARN: Type inference failed for: r6v7 */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:57:0x0055 -> B:21:0x0075). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:21:0x0055 -> B:62:0x0075). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected java.lang.String getPackageName(int r6, int r7) {
-        /*
-            r5 = this;
-            int r0 = r5.getHashCode(r6, r7)
-            java.lang.Object r1 = r5.mLock
-            monitor-enter(r1)
-            android.util.SparseArray<java.lang.String> r2 = r5.mPidToPackageMap     // Catch: java.lang.Throwable -> Lb2
-            boolean r2 = r2.contains(r0)     // Catch: java.lang.Throwable -> Lb2
-            r3 = 0
-            if (r2 == 0) goto L19
-            android.util.SparseArray<java.lang.String> r2 = r5.mPidToPackageMap     // Catch: java.lang.Throwable -> Lb2
-            java.lang.Object r2 = r2.get(r0)     // Catch: java.lang.Throwable -> Lb2
-            java.lang.String r2 = (java.lang.String) r2     // Catch: java.lang.Throwable -> Lb2
-            goto L1a
-        L19:
-            r2 = r3
-        L1a:
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> Lb2
-            if (r2 == 0) goto L26
-            java.lang.String r1 = "<pre-initialized>"
-            boolean r1 = r2.equals(r1)
-            if (r1 != 0) goto L26
-            return r2
-        L26:
-            java.io.BufferedReader r1 = new java.io.BufferedReader     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.io.FileReader r2 = new java.io.FileReader     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.lang.String r4 = "/proc/%d/cmdline"
-            java.lang.Integer r6 = java.lang.Integer.valueOf(r6)     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.lang.Object[] r6 = new java.lang.Object[]{r6}     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.lang.String r6 = java.lang.String.format(r4, r6)     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.nio.charset.Charset r4 = java.nio.charset.Charset.defaultCharset()     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            r2.<init>(r6, r4)     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            r1.<init>(r2)     // Catch: java.lang.Throwable -> L63 java.io.IOException -> L65
-            java.lang.String r6 = r1.readLine()     // Catch: java.lang.Throwable -> L5d java.io.IOException -> L60
-            if (r6 == 0) goto L4d
-            java.lang.String r6 = r6.trim()     // Catch: java.lang.Throwable -> L5d java.io.IOException -> L60
-            goto L50
-        L4d:
-            java.lang.String r6 = "unknown"
-        L50:
-            r1.close()     // Catch: java.io.IOException -> L54
-            goto L75
-        L54:
-            r1 = move-exception
-            java.lang.String r2 = "BinderCallsStats"
-            java.lang.String r3 = "IO errors occurred during closing file..."
-            android.util.Slog.e(r2, r3, r1)
-            goto L75
-        L5d:
-            r5 = move-exception
-            r3 = r1
-            goto La3
-        L60:
-            r6 = move-exception
-            r3 = r1
-            goto L66
-        L63:
-            r5 = move-exception
-            goto La3
-        L65:
-            r6 = move-exception
-        L66:
-            java.lang.String r1 = "BinderCallsStats"
-            java.lang.String r2 = "IO errors occurred ..."
-            android.util.Slog.e(r1, r2, r6)     // Catch: java.lang.Throwable -> L63
-            java.lang.String r6 = "unknown"
-            if (r3 == 0) goto L75
-            r3.close()     // Catch: java.io.IOException -> L54
-        L75:
-            java.lang.String r1 = "dumpsys"
-            boolean r1 = r6.startsWith(r1)
-            if (r1 != 0) goto L8a
-            java.lang.Object r1 = r5.mLock
-            monitor-enter(r1)
-            android.util.SparseArray<java.lang.String> r5 = r5.mPidToPackageMap     // Catch: java.lang.Throwable -> L87
-            r5.append(r0, r6)     // Catch: java.lang.Throwable -> L87
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> L87
-            goto La2
-        L87:
-            r5 = move-exception
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> L87
-            throw r5
-        L8a:
-            java.lang.String r5 = "BinderCallsStats"
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "This is dumpsys command...from (uid: "
-            r0.<init>(r1)
-            r0.append(r7)
-            java.lang.String r7 = ") We will not add it into HashMap"
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            android.util.Slog.i(r5, r7)
-        La2:
-            return r6
-        La3:
-            if (r3 == 0) goto Lb1
-            r3.close()     // Catch: java.io.IOException -> La9
-            goto Lb1
-        La9:
-            r6 = move-exception
-            java.lang.String r7 = "BinderCallsStats"
-            java.lang.String r0 = "IO errors occurred during closing file..."
-            android.util.Slog.e(r7, r0, r6)
-        Lb1:
-            throw r5
-        Lb2:
-            r5 = move-exception
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> Lb2
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.BinderCallsStats.getPackageName(int, int):java.lang.String");
+    protected String getPackageName(int i, int i2) throws Throwable {
+        BufferedReader bufferedReader;
+        String str;
+        BufferedReader bufferedReader2;
+        String strTrim;
+        int hashCode = getHashCode(i, i2);
+        synchronized (this.mLock) {
+            bufferedReader = null;
+            str = this.mPidToPackageMap.contains(hashCode) ? this.mPidToPackageMap.get(hashCode) : null;
+        }
+        if (str != null && !str.equals("<pre-initialized>")) {
+            return str;
+        }
+        try {
+            try {
+                try {
+                    bufferedReader2 = new BufferedReader(new FileReader(String.format("/proc/%d/cmdline", Integer.valueOf(i)), Charset.defaultCharset()));
+                } catch (Throwable th) {
+                    th = th;
+                }
+            } catch (IOException e) {
+                e = e;
+            }
+        } catch (IOException e2) {
+            Slog.e(TAG, "IO errors occurred during closing file...", e2);
+            i = i;
+        }
+        try {
+            String line = bufferedReader2.readLine();
+            if (line != null) {
+                strTrim = line.trim();
+            } else {
+                strTrim = "unknown";
+            }
+            bufferedReader2.close();
+            i = strTrim;
+        } catch (IOException e3) {
+            e = e3;
+            bufferedReader = bufferedReader2;
+            Slog.e(TAG, "IO errors occurred ...", e);
+            i = "unknown";
+            if (bufferedReader != null) {
+                bufferedReader.close();
+                i = i;
+            }
+            if (i.startsWith("dumpsys")) {
+            }
+            return i;
+        } catch (Throwable th2) {
+            th = th2;
+            bufferedReader = bufferedReader2;
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e4) {
+                    Slog.e(TAG, "IO errors occurred during closing file...", e4);
+                }
+            }
+            throw th;
+        }
+        if (i.startsWith("dumpsys")) {
+            synchronized (this.mLock) {
+                this.mPidToPackageMap.append(hashCode, i);
+            }
+        } else {
+            Slog.i(TAG, "This is dumpsys command...from (uid: " + i2 + ") We will not add it into HashMap");
+        }
+        return i;
     }
 
     public int[] getNativeTids() {
@@ -1398,7 +1348,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
     }
 
-    public void writeToFile() {
+    public void writeToFile() throws Throwable {
+        FileOutputStream fileOutputStream;
         synchronized (this.mEntryLock) {
             if (this.mEntries.size() == 0) {
                 Slog.i(TAG, "Nothing to write to file. Just return");
@@ -1406,13 +1357,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
             }
             this.mBinderStats.addData(this.mEntries);
             this.mEntries.clear();
-            Parcel obtain = Parcel.obtain();
-            obtain.setDataPosition(0);
-            this.mBinderStats.writeToParcel(obtain, 0);
-            if (obtain.dataSize() >= 2097152) {
-                Slog.e(TAG, "The state of stats data looks abnormal. parcel(" + obtain.dataSize() + "), entry_num(" + this.mBinderStats.getSize() + NavigationBarInflaterView.KEY_CODE_END);
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.setDataPosition(0);
+            this.mBinderStats.writeToParcel(parcelObtain, 0);
+            if (parcelObtain.dataSize() >= 2097152) {
+                Slog.e(TAG, "The state of stats data looks abnormal. parcel(" + parcelObtain.dataSize() + "), entry_num(" + this.mBinderStats.getSize() + NavigationBarInflaterView.KEY_CODE_END);
             }
-            FileOutputStream fileOutputStream = null;
+            FileOutputStream fileOutputStream2 = null;
             try {
                 try {
                     try {
@@ -1421,39 +1372,40 @@ public class BinderCallsStats implements BinderInternal.Observer {
                             file.createNewFile();
                             file.setWritable(true, true);
                         }
-                        FileOutputStream fileOutputStream2 = new FileOutputStream(file, false);
-                        try {
-                            fileOutputStream2.write(obtain.marshall());
-                            fileOutputStream2.flush();
-                            obtain.recycle();
-                            fileOutputStream2.close();
-                        } catch (Exception e) {
-                            e = e;
-                            fileOutputStream = fileOutputStream2;
-                            Slog.e(TAG, "Exception occurred during writing file", e);
-                            obtain.recycle();
-                            if (fileOutputStream != null) {
-                                fileOutputStream.close();
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            fileOutputStream = fileOutputStream2;
-                            obtain.recycle();
-                            if (fileOutputStream != null) {
-                                try {
-                                    fileOutputStream.close();
-                                } catch (IOException unused) {
-                                }
-                            }
-                            throw th;
-                        }
-                    } catch (Exception e2) {
-                        e = e2;
+                        fileOutputStream = new FileOutputStream(file, false);
+                    } catch (IOException unused) {
+                        return;
                     }
-                } catch (IOException unused2) {
+                } catch (Exception e) {
+                    e = e;
+                }
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                fileOutputStream.write(parcelObtain.marshall());
+                fileOutputStream.flush();
+                parcelObtain.recycle();
+                fileOutputStream.close();
+            } catch (Exception e2) {
+                e = e2;
+                fileOutputStream2 = fileOutputStream;
+                Slog.e(TAG, "Exception occurred during writing file", e);
+                parcelObtain.recycle();
+                if (fileOutputStream2 != null) {
+                    fileOutputStream2.close();
                 }
             } catch (Throwable th2) {
                 th = th2;
+                fileOutputStream2 = fileOutputStream;
+                parcelObtain.recycle();
+                if (fileOutputStream2 != null) {
+                    try {
+                        fileOutputStream2.close();
+                    } catch (IOException unused2) {
+                    }
+                }
+                throw th;
             }
         }
     }
@@ -1462,7 +1414,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return exportedCallStat.packageName == null && exportedCallStat.methodName.startsWith("__DEBUG_") && exportedCallStat.cpuTimeMicros == 0;
     }
 
-    private ArrayList<ExportedCallStat> prepareExportedCallStats(int i) {
+    private ArrayList<ExportedCallStat> prepareExportedCallStats(int i) throws NoSuchMethodException, SecurityException {
         boolean z = i >= this.mCpuUsageThreshold;
         ArrayList<ExportedCallStat> arrayList = new ArrayList<>();
         synchronized (this.mLock) {
@@ -1471,15 +1423,15 @@ public class BinderCallsStats implements BinderInternal.Observer {
             this.mCollectedCallCount = 0L;
             int size = this.mUidEntries.size();
             for (int i2 = 0; i2 < size; i2++) {
-                UidEntry valueAt = this.mUidEntries.valueAt(i2);
-                UidEntry uidEntry = getUidEntry(valueAt.workSourceUid * (-1));
-                uidEntry.recordedCallCount += valueAt.recordedCallCount;
-                uidEntry.callCount += valueAt.callCount;
-                uidEntry.cpuTimeMicros += valueAt.cpuTimeMicros;
-                uidEntry.incrementalCallCount += valueAt.incrementalCallCount;
-                for (CallStat callStat : valueAt.getCallStatsList()) {
+                UidEntry uidEntryValueAt = this.mUidEntries.valueAt(i2);
+                UidEntry uidEntry = getUidEntry(uidEntryValueAt.workSourceUid * (-1));
+                uidEntry.recordedCallCount += uidEntryValueAt.recordedCallCount;
+                uidEntry.callCount += uidEntryValueAt.callCount;
+                uidEntry.cpuTimeMicros += uidEntryValueAt.cpuTimeMicros;
+                uidEntry.incrementalCallCount += uidEntryValueAt.incrementalCallCount;
+                for (CallStat callStat : uidEntryValueAt.getCallStatsList()) {
                     if (z) {
-                        arrayList.add(getExportedCallStatPerPackage(valueAt.workSourceUid, callStat));
+                        arrayList.add(getExportedCallStatPerPackage(uidEntryValueAt.workSourceUid, callStat));
                     }
                     CallStat orCreate = uidEntry.getOrCreate(callStat.callingUid, callStat.binderClass, callStat.transactionCode, callStat.screenInteractive, false, callStat.packageName);
                     orCreate.recordedCallCount += callStat.recordedCallCount;
@@ -1510,24 +1462,22 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return arrayList;
     }
 
-    public void store(int i, int i2) {
-        ArrayList<ExportedCallStat> prepareExportedCallStats = prepareExportedCallStats(i2);
+    public void store(int i, int i2) throws NoSuchMethodException, SecurityException {
+        ArrayList<ExportedCallStat> arrayListPrepareExportedCallStats = prepareExportedCallStats(i2);
         long j = this.mStartCurrentTimeForSEC;
         resetForSEC();
         if (i2 >= this.mCpuUsageThreshold) {
-            prepareExportedCallStats.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda2
+            arrayListPrepareExportedCallStats.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda2
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int compareByActCpuDesc;
-                    compareByActCpuDesc = BinderCallsStats.compareByActCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                    return compareByActCpuDesc;
+                    return BinderCallsStats.compareByActCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
                 }
             });
             BinderStats.BinderStatsEntry binderStatsEntry = new BinderStats.BinderStatsEntry();
             binderStatsEntry.mStartTime = j;
             binderStatsEntry.mEndTime = System.currentTimeMillis();
             int i3 = 0;
-            for (ExportedCallStat exportedCallStat : prepareExportedCallStats) {
+            for (ExportedCallStat exportedCallStat : arrayListPrepareExportedCallStats) {
                 if (!isDebugEntry(exportedCallStat)) {
                     BinderStats.BinderStatsUnit binderStatsUnit = new BinderStats.BinderStatsUnit();
                     binderStatsUnit.callingUid = exportedCallStat.callingUid;
@@ -1579,7 +1529,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public CallStat m8184clone() {
+        public CallStat m8195clone() {
             CallStat callStat = new CallStat(this.callingUid, this.binderClass, this.transactionCode, this.screenInteractive, this.packageName);
             callStat.recordedCallCount = this.recordedCallCount;
             callStat.callCount = this.callCount;
@@ -1595,7 +1545,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
             return callStat;
         }
 
-        public String toString() {
+        public String toString() throws NoSuchMethodException, SecurityException {
             return "CallStat{packageName=" + this.packageName + ", callingUid=" + this.callingUid + ", transaction=" + this.binderClass.getSimpleName() + '.' + new BinderTransactionNameResolver().getMethodName(this.binderClass, this.transactionCode) + ", callCount=" + this.callCount + ", incrementalCallCount=" + this.incrementalCallCount + ", recordedCallCount=" + this.recordedCallCount + ", cpuTimeMicros=" + this.cpuTimeMicros + ", latencyMicros=" + this.latencyMicros + '}';
         }
     }
@@ -1686,14 +1636,12 @@ public class BinderCallsStats implements BinderInternal.Observer {
             return this.mCallStats.values();
         }
 
-        public String getExtraInfo(int i) {
+        public String getExtraInfo(int i) throws NoSuchMethodException, SecurityException {
             ArrayList<CallStat> arrayList = new ArrayList(this.mCallStats.values());
             arrayList.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$UidEntry$$ExternalSyntheticLambda0
                 @Override // java.util.function.ToLongFunction
                 public final long applyAsLong(Object obj) {
-                    long j;
-                    j = ((BinderCallsStats.CallStat) obj).cpuTimeMicros;
-                    return j;
+                    return ((BinderCallsStats.CallStat) obj).cpuTimeMicros;
                 }
             }).reversed());
             StringBuilder sb = new StringBuilder();
@@ -1748,18 +1696,18 @@ public class BinderCallsStats implements BinderInternal.Observer {
         ArrayList arrayList = new ArrayList(list);
         arrayList.sort(Comparator.comparingDouble(toDoubleFunction).reversed());
         Iterator<T> it = list.iterator();
-        double d2 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-        double d3 = 0.0d;
+        double dApplyAsDouble = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+        double dApplyAsDouble2 = 0.0d;
         while (it.hasNext()) {
-            d3 += toDoubleFunction.applyAsDouble(it.next());
+            dApplyAsDouble2 += toDoubleFunction.applyAsDouble(it.next());
         }
         ArrayList arrayList2 = new ArrayList();
         for (Object obj : arrayList) {
-            if (d2 > d * d3) {
+            if (dApplyAsDouble > d * dApplyAsDouble2) {
                 break;
             }
             arrayList2.add(obj);
-            d2 += toDoubleFunction.applyAsDouble(obj);
+            dApplyAsDouble += toDoubleFunction.applyAsDouble(obj);
         }
         return arrayList2;
     }
@@ -1776,8 +1724,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int compareByBinderClassAndCode(ExportedCallStat exportedCallStat, ExportedCallStat exportedCallStat2) {
-        int compareTo = exportedCallStat.className.compareTo(exportedCallStat2.className);
-        return compareTo != 0 ? compareTo : Integer.compare(exportedCallStat.transactionCode, exportedCallStat2.transactionCode);
+        int iCompareTo = exportedCallStat.className.compareTo(exportedCallStat2.className);
+        return iCompareTo != 0 ? iCompareTo : Integer.compare(exportedCallStat.transactionCode, exportedCallStat2.transactionCode);
     }
 
     public static void startForBluetooth(Context context) {

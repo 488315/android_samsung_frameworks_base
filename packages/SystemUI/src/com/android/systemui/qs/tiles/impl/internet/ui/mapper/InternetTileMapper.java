@@ -21,7 +21,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetTileMapper implements QSTileDataToStateMapper {
     public final Context context;
@@ -46,10 +45,10 @@ public final class InternetTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.internet.ui.mapper.InternetTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 CharSequence secondaryTitle;
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                InternetTileMapper internetTileMapper = InternetTileMapper.this;
+                InternetTileMapper internetTileMapper = this.f$0;
                 builder.label = internetTileMapper.resources.getString(R.string.quick_settings_internet_label);
                 builder.expandedAccessibilityClass = Reflection.getOrCreateKotlinClass(Switch.class);
                 InternetTileModel internetTileModel2 = internetTileModel;

@@ -2,13 +2,19 @@ package com.android.systemui.widget;
 
 import android.app.SemWallpaperColors;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
+import com.android.internal.util.ContrastColorUtil;
+import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.lockstar.PluginLockStarManager;
 import com.android.systemui.pluginlock.PluginLockManager;
@@ -17,7 +23,6 @@ import com.android.systemui.res.R$styleable;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemUIImageView extends ImageView implements SystemUIWidgetCallback {
     public String mDefaultArea;
@@ -34,7 +39,6 @@ public class SystemUIImageView extends ImageView implements SystemUIWidgetCallba
     public long mUpdateFlag;
     public final SystemUIWidgetRes mWidgetRes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResData {
         public String mGroup;
         public boolean mLockStar;
@@ -258,19 +262,119 @@ public class SystemUIImageView extends ImageView implements SystemUIWidgetCallba
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x01a8  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x01ee  */
-    /* JADX WARN: Removed duplicated region for block: B:51:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00ce A[PHI: r3 r4 r6
+      0x00ce: PHI (r3v7 int) = (r3v3 int), (r3v3 int), (r3v20 int), (r3v20 int), (r3v34 int), (r3v34 int) binds: [B:73:0x0183, B:75:0x0187, B:55:0x0123, B:57:0x0127, B:34:0x00b0, B:36:0x00b4] A[DONT_GENERATE, DONT_INLINE]
+      0x00ce: PHI (r4v4 int) = (r4v3 int), (r4v3 int), (r4v11 int), (r4v11 int), (r4v18 int), (r4v18 int) binds: [B:73:0x0183, B:75:0x0187, B:55:0x0123, B:57:0x0127, B:34:0x00b0, B:36:0x00b4] A[DONT_GENERATE, DONT_INLINE]
+      0x00ce: PHI (r6v3 boolean) = (r6v2 boolean), (r6v2 boolean), (r6v8 boolean), (r6v8 boolean), (r6v10 boolean), (r6v10 boolean) binds: [B:73:0x0183, B:75:0x0187, B:55:0x0123, B:57:0x0127, B:34:0x00b0, B:36:0x00b4] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateImage() {
-        /*
-            Method dump skipped, instructions count: 515
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.widget.SystemUIImageView.updateImage():void");
+        PorterDuffColorFilter porterDuffColorFilter;
+        if (this.mIsLockStarEnabled && this.mResData.mLockStar) {
+            Log.d("SystemUIImageView", "return - set image from lock star : " + this);
+            return;
+        }
+        setImageTintList(null);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(this.mResData.mWallpaperArea);
+        ResData resData = this.mResData;
+        int i = zIsWhiteKeyguardWallpaper ? resData.mWhiteBgImageId : resData.mOriginImageId;
+        ResData resData2 = this.mResData;
+        int i2 = zIsWhiteKeyguardWallpaper ? resData2.mWhiteBgBackgroundId : resData2.mOriginBackgroundId;
+        boolean z = true;
+        boolean z2 = false;
+        if ((this.mUpdateFlag & 1) == 0 || !WallpaperUtils.isOpenThemeLook()) {
+            if (zIsWhiteKeyguardWallpaper) {
+                ResData resData3 = this.mResData;
+                if (resData3.mWhiteBgImage != null || resData3.mWhiteBgColor != null) {
+                    Log.d("SystemUIImageView", "apply style: white-bg");
+                    int i3 = this.mResData.mWhiteBgImageId;
+                    if (i3 <= 0) {
+                        ClockEventController$$ExternalSyntheticOutline0.m(i3, "white-bg res invalid = ", "SystemUIImageView");
+                        if (this.mResData.mWhiteBgColorId > 0) {
+                            setImageTintList(ColorStateList.valueOf(((ImageView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null)));
+                        }
+                        i3 = this.mResData.mOriginImageId;
+                    } else {
+                        z = false;
+                    }
+                    i = i3;
+                    ResData resData4 = this.mResData;
+                    i2 = resData4.mWhiteBgBackgroundId;
+                    porterDuffColorFilter = (i2 <= 0 || resData4.mWhiteBgColorId <= 0) ? null : new PorterDuffColorFilter(((ImageView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null), PorterDuff.Mode.SRC_ATOP);
+                    z2 = z;
+                }
+            }
+            Log.d("SystemUIImageView", "apply style: default");
+            porterDuffColorFilter = null;
+        } else if (SystemUIWidgetUtil.needsBlackComponent(((ImageView) this).mContext, SystemUIWidgetUtil.convertFlag(this.mResData.mWallpaperArea), this.mResData.mThemePolicyIgnorable)) {
+            Log.d("SystemUIImageView", "apply style: theme : white");
+            ResData resData5 = this.mResData;
+            int i4 = resData5.mThemeBlackImageId;
+            if (i4 <= 0) {
+                if (resData5.mThemeBlackColorId > 0) {
+                    setImageTintList(ColorStateList.valueOf(((ImageView) this).mContext.getResources().getColor(this.mResData.mThemeBlackColorId, null)));
+                } else if (zIsWhiteKeyguardWallpaper && resData5.mWhiteBgColorId > 0) {
+                    setImageTintList(ColorStateList.valueOf(((ImageView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null)));
+                }
+                i = this.mResData.mWhiteBgImageId;
+            } else {
+                i = i4;
+                z = false;
+            }
+            ResData resData6 = this.mResData;
+            i2 = resData6.mThemeBlackBackgroundId;
+            if (i2 > 0 && resData6.mThemeBlackColorId > 0) {
+                porterDuffColorFilter = new PorterDuffColorFilter(((ImageView) this).mContext.getResources().getColor(this.mResData.mThemeBlackColorId, null), PorterDuff.Mode.SRC_ATOP);
+            }
+            z2 = z;
+        } else {
+            Log.d("SystemUIImageView", "apply style: theme");
+            ResData resData7 = this.mResData;
+            int i5 = resData7.mThemeImageId;
+            if (i5 <= 0) {
+                if (resData7.mThemeColorId > 0) {
+                    setImageTintList(ColorStateList.valueOf(((ImageView) this).mContext.getResources().getColor(this.mResData.mThemeColorId, null)));
+                } else if (zIsWhiteKeyguardWallpaper && resData7.mWhiteBgColorId > 0) {
+                    setImageTintList(ColorStateList.valueOf(((ImageView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null)));
+                }
+                i = zIsWhiteKeyguardWallpaper ? this.mResData.mWhiteBgImageId : this.mResData.mOriginImageId;
+            } else {
+                i = i5;
+                z = false;
+            }
+            ResData resData8 = this.mResData;
+            i2 = resData8.mThemeBackgroundId;
+            if (i2 > 0 && resData8.mThemeColorId > 0) {
+                porterDuffColorFilter = new PorterDuffColorFilter(((ImageView) this).mContext.getResources().getColor(this.mResData.mThemeColorId, null), PorterDuff.Mode.SRC_ATOP);
+            }
+            z2 = z;
+        }
+        if (i > 0) {
+            Log.d("SystemUIImageView", "set Image Drawable!!");
+            Drawable drawable = ((ImageView) this).mContext.getDrawable(i);
+            if (drawable == null) {
+                Log.d("SystemUIImageView", "drawable is null res = " + toString());
+            }
+            if (z2 && drawable != null) {
+                drawable = drawable.mutate();
+            }
+            if (!ContrastColorUtil.getInstance(getContext()).isGrayscaleIcon(drawable)) {
+                setImageTintList(null);
+            }
+            if (drawable != null) {
+                drawable.setColorFilter(porterDuffColorFilter);
+            }
+            setImageDrawable(drawable);
+        }
+        if (i2 > 0) {
+            Log.e("SystemUIImageView", "set Background Drawable!!");
+            Drawable drawable2 = ((ImageView) this).mContext.getDrawable(i2);
+            if (drawable2 != null) {
+                drawable2.setColorFilter(porterDuffColorFilter);
+            }
+            setBackground(drawable2);
+        }
     }
 
     @Override // com.android.systemui.widget.SystemUIWidgetCallback
@@ -334,58 +438,58 @@ public class SystemUIImageView extends ImageView implements SystemUIWidgetCallba
             }
         };
         this.mWidgetRes = SystemUIWidgetRes.getInstance(context);
-        TypedArray obtainStyledAttributes = ((ImageView) this).mContext.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
-        if (obtainStyledAttributes != null) {
-            int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = ((ImageView) this).mContext.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
+        if (typedArrayObtainStyledAttributes != null) {
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             if (indexCount > 0) {
                 this.mHasAttr = true;
             }
             for (int i3 = 0; i3 < indexCount; i3++) {
-                int index = obtainStyledAttributes.getIndex(i3);
+                int index = typedArrayObtainStyledAttributes.getIndex(i3);
                 if (index == 23) {
-                    this.mResData.mWallpaperArea = obtainStyledAttributes.getString(index);
+                    this.mResData.mWallpaperArea = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 0) {
                     ResData resData = this.mResData;
-                    obtainStyledAttributes.getString(index);
+                    typedArrayObtainStyledAttributes.getString(index);
                     resData.getClass();
                 } else if (index == 9) {
-                    this.mResData.mOriginColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 26) {
-                    this.mResData.mWhiteBgColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 18) {
-                    this.mResData.mThemeColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 15) {
-                    this.mResData.mThemeBlackColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 10) {
-                    this.mResData.mOriginImage = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginImage = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 19) {
-                    this.mResData.mThemeImage = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeImage = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 16) {
-                    this.mResData.mThemeBlackImage = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackImage = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 27) {
-                    this.mResData.mWhiteBgImage = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgImage = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 29) {
-                    this.mResData.mWhiteBgTintColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgTintColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 8) {
-                    this.mResData.mOriginBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 25) {
-                    this.mResData.mWhiteBgBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 13) {
-                    this.mResData.mThemeBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 14) {
-                    this.mResData.mThemeBlackBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 7) {
-                    this.mResData.mMovable = obtainStyledAttributes.getBoolean(index, false);
+                    this.mResData.mMovable = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 } else if (index == 6) {
-                    this.mResData.mLockStar = obtainStyledAttributes.getBoolean(index, false);
+                    this.mResData.mLockStar = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 } else if (index == 5) {
-                    this.mResData.mGroup = obtainStyledAttributes.getString(index);
+                    this.mResData.mGroup = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 20) {
-                    this.mResData.mThemePolicyIgnorable = obtainStyledAttributes.getBoolean(index, false);
+                    this.mResData.mThemePolicyIgnorable = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 }
             }
             refreshResIds$3();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

@@ -3,14 +3,17 @@ package android.os;
 import android.Manifest;
 import android.annotation.SystemApi;
 import android.app.KeyguardManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.hardware.display.DisplayManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.IRecoverySystemProgressListener;
+import android.os.IVold;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.sec.enterprise.EnterpriseDeviceManager;
@@ -30,6 +33,7 @@ import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,6 +55,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import sun.security.pkcs.PKCS7;
@@ -140,7 +148,7 @@ public class RecoverySystem {
         sRequestLock = new Object();
     }
 
-    private static HashSet<X509Certificate> getTrustedCerts(File file) throws IOException, GeneralSecurityException {
+    private static HashSet<X509Certificate> getTrustedCerts(File file) throws GeneralSecurityException, IOException {
         HashSet<X509Certificate> hashSet = new HashSet<>();
         if (file == null) {
             file = DEFAULT_KEYSTORE;
@@ -148,9 +156,9 @@ public class RecoverySystem {
         ZipFile zipFile = new ZipFile(file);
         try {
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            while (entries.hasMoreElements()) {
-                InputStream inputStream = zipFile.getInputStream(entries.nextElement());
+            Enumeration<? extends ZipEntry> enumerationEntries = zipFile.entries();
+            while (enumerationEntries.hasMoreElements()) {
+                InputStream inputStream = zipFile.getInputStream(enumerationEntries.nextElement());
                 try {
                     hashSet.add((X509Certificate) certificateFactory.generateCertificate(inputStream));
                     inputStream.close();
@@ -175,9 +183,9 @@ public class RecoverySystem {
                         if (inputStream.read(bArr) > 0) {
                             String str = new String(bArr);
                             Log.i(TAG, "!@RecoverySystem super_used_size: ".concat(str));
-                            long parseLong = Long.parseLong(str);
+                            long j = Long.parseLong(str);
                             zipFile.close();
-                            return parseLong;
+                            return j;
                         }
                         Log.e(TAG, "!@RecoverySystem failed to read super_used_size");
                         inputStream.close();
@@ -198,11 +206,11 @@ public class RecoverySystem {
         }
     }
 
-    public static void verifyPackage(File file, ProgressListener progressListener, File file2) throws IOException, GeneralSecurityException {
+    public static void verifyPackage(File file, ProgressListener progressListener, File file2) throws GeneralSecurityException, IOException {
         long length = file.length();
         RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
         try {
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             if (progressListener != null) {
                 progressListener.onProgress(0);
             }
@@ -241,7 +249,7 @@ public class RecoverySystem {
             while (it.hasNext()) {
                 if (it.next().getPublicKey().equals(publicKey)) {
                     randomAccessFile.seek(0L);
-                    SignerInfo verify = pkcs7.verify(signerInfo, new InputStream(length, i, currentTimeMillis, randomAccessFile, progressListener) { // from class: android.os.RecoverySystem.1
+                    SignerInfo signerInfoVerify = pkcs7.verify(signerInfo, new InputStream(length, i, jCurrentTimeMillis, randomAccessFile, progressListener) { // from class: android.os.RecoverySystem.1
                         long lastPublishTime;
                         long toRead;
                         final /* synthetic */ int val$commentSize;
@@ -255,11 +263,11 @@ public class RecoverySystem {
                         {
                             this.val$fileLen = length;
                             this.val$commentSize = i;
-                            this.val$startTimeMillis = currentTimeMillis;
+                            this.val$startTimeMillis = jCurrentTimeMillis;
                             this.val$raf = randomAccessFile;
                             this.val$listenerForInner = progressListener;
                             this.toRead = (length - i) - 2;
-                            this.lastPublishTime = currentTimeMillis;
+                            this.lastPublishTime = jCurrentTimeMillis;
                         }
 
                         @Override // java.io.InputStream
@@ -278,28 +286,28 @@ public class RecoverySystem {
                             if (j2 > j3) {
                                 i6 = (int) (j3 - j);
                             }
-                            int read = this.val$raf.read(bArr3, i5, i6);
-                            this.soFar += read;
+                            int i7 = this.val$raf.read(bArr3, i5, i6);
+                            this.soFar += i7;
                             if (this.val$listenerForInner != null) {
-                                long currentTimeMillis2 = System.currentTimeMillis();
-                                int i7 = (int) ((this.soFar * 100) / this.toRead);
-                                if (i7 > this.lastPercent && currentTimeMillis2 - this.lastPublishTime > RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
-                                    this.lastPercent = i7;
-                                    this.lastPublishTime = currentTimeMillis2;
-                                    this.val$listenerForInner.onProgress(i7);
+                                long jCurrentTimeMillis2 = System.currentTimeMillis();
+                                int i8 = (int) ((this.soFar * 100) / this.toRead);
+                                if (i8 > this.lastPercent && jCurrentTimeMillis2 - this.lastPublishTime > RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
+                                    this.lastPercent = i8;
+                                    this.lastPublishTime = jCurrentTimeMillis2;
+                                    this.val$listenerForInner.onProgress(i8);
                                 }
                             }
-                            return read;
+                            return i7;
                         }
                     });
-                    boolean interrupted = Thread.interrupted();
+                    boolean zInterrupted = Thread.interrupted();
                     if (progressListener != null) {
                         progressListener.onProgress(100);
                     }
-                    if (interrupted) {
+                    if (zInterrupted) {
                         throw new SignatureException("verification was interrupted");
                     }
-                    if (verify == null) {
+                    if (signerInfoVerify == null) {
                         throw new SignatureException("signature digest verification failed");
                     }
                     return;
@@ -345,15 +353,15 @@ public class RecoverySystem {
 
         @Override // android.os.IRecoverySystemProgressListener
         public void onProgress(final int i) {
-            final long currentTimeMillis = System.currentTimeMillis();
+            final long jCurrentTimeMillis = System.currentTimeMillis();
             this.val$progressHandler.post(new Runnable() { // from class: android.os.RecoverySystem.2.1
                 @Override // java.lang.Runnable
                 public void run() {
-                    if (i <= AnonymousClass2.this.lastProgress || currentTimeMillis - AnonymousClass2.this.lastPublishTime <= RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
+                    if (i <= AnonymousClass2.this.lastProgress || jCurrentTimeMillis - AnonymousClass2.this.lastPublishTime <= RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
                         return;
                     }
                     AnonymousClass2.this.lastProgress = i;
-                    AnonymousClass2.this.lastPublishTime = currentTimeMillis;
+                    AnonymousClass2.this.lastPublishTime = jCurrentTimeMillis;
                     AnonymousClass2.this.val$listener.onProgress(i);
                 }
             });
@@ -369,103 +377,144 @@ public class RecoverySystem {
         installPackage(context, file, false);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:104:0x01c3 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x011f A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x013c A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x014e A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x017f A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x01cb A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x01eb A[Catch: all -> 0x0293, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x026a A[Catch: all -> 0x0293, TryCatch #1 {, blocks: (B:4:0x000d, B:6:0x0058, B:8:0x0066, B:9:0x0071, B:10:0x007f, B:14:0x0086, B:17:0x008f, B:18:0x009d, B:19:0x009e, B:21:0x00b7, B:23:0x00c0, B:26:0x00d7, B:25:0x00c6, B:29:0x00e0, B:30:0x00e3, B:31:0x00e4, B:33:0x011f, B:34:0x0130, B:36:0x013c, B:42:0x017f, B:43:0x018e, B:45:0x0194, B:47:0x01b6, B:49:0x01bb, B:51:0x01c3, B:54:0x01e3, B:56:0x01eb, B:57:0x01f2, B:59:0x020d, B:69:0x0223, B:71:0x023b, B:73:0x024e, B:74:0x025f, B:75:0x0269, B:66:0x021a, B:65:0x0217, B:68:0x021c, B:76:0x026a, B:77:0x0278, B:52:0x01cb, B:85:0x0284, B:86:0x0292, B:83:0x0282, B:82:0x027f, B:37:0x014e, B:39:0x015a, B:40:0x016c, B:20:0x00a3), top: B:92:0x000d, inners: #3, #6, #7 }] */
     @SystemApi
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void installPackage(Context context, File file, boolean z) throws IOException {
         String str;
-        FileWriter fileWriter;
+        int i;
         synchronized (sRequestLock) {
             LOG_FILE.delete();
             File file2 = UNCRYPT_PACKAGE_FILE;
             file2.delete();
             String canonicalPath = file.getCanonicalPath();
             Log.w(TAG, "!!! REBOOTING TO INSTALL " + canonicalPath + " !!!");
-            boolean endsWith = canonicalPath.endsWith("_s.zip");
-            boolean startsWith = canonicalPath.startsWith("/data/");
+            boolean zEndsWith = canonicalPath.endsWith("_s.zip");
+            boolean zStartsWith = canonicalPath.startsWith("/data/");
             String str2 = "--update_org_package=" + canonicalPath + ShaderAssembler.NEWLINE;
-            long parseSuperUsedSize = parseSuperUsedSize(file);
-            if (parseSuperUsedSize > 0) {
-                if (!((StorageManager) context.getSystemService(StorageManager.class)).shrinkDataDdp(parseSuperUsedSize)) {
+            long superUsedSize = parseSuperUsedSize(file);
+            if (superUsedSize > 0) {
+                if (!((StorageManager) context.getSystemService(StorageManager.class)).shrinkDataDdp(superUsedSize)) {
                     Log.e(TAG, "[DDP] Failed to shrink /data to expand super partition");
                     throw new IOException("Failed to shrink /data to expand super partition");
                 }
-                SystemProperties.set("persist.sys.ddp.super_used_size", Long.toString(parseSuperUsedSize));
+                SystemProperties.set("persist.sys.ddp.super_used_size", Long.toString(superUsedSize));
             }
-            if (startsWith) {
+            if (zStartsWith) {
                 if (z) {
                     if (!BLOCK_MAP_FILE.exists()) {
                         Log.e(TAG, "Package claimed to have been processed but failed to find the block map file.");
                         throw new IOException("Failed to find block map file");
                     }
                 } else {
-                    FileWriter fileWriter2 = new FileWriter(file2);
+                    FileWriter fileWriter = new FileWriter(file2);
                     try {
-                        fileWriter2.write(canonicalPath + ShaderAssembler.NEWLINE);
-                        fileWriter2.close();
+                        fileWriter.write(canonicalPath + ShaderAssembler.NEWLINE);
+                        fileWriter.close();
                         if (!file2.setReadable(true, false) || !file2.setWritable(true, false)) {
                             Log.e(TAG, "Error setting permission for " + file2);
                         }
                         BLOCK_MAP_FILE.delete();
                     } catch (Throwable th) {
-                        fileWriter2.close();
+                        fileWriter.close();
                         throw th;
                     }
                 }
                 canonicalPath = "@/cache/recovery/block.map";
-            }
-            String str3 = ("--update_package=" + canonicalPath + ShaderAssembler.NEWLINE) + ("--locale=" + Locale.getDefault().toLanguageTag() + ShaderAssembler.NEWLINE);
-            if (endsWith) {
-                str3 = str3 + "--security\n";
-            }
-            if ("com.ws.dm".equals(context.getPackageName())) {
-                str = str3 + "--carry_out=att_fota\n";
-            } else if ("com.samsung.sdm.sdmviewer".equals(context.getPackageName())) {
-                str = str3 + "--carry_out=vzw_fota\n";
-            } else {
-                str = str3 + "--carry_out=open_fota\n";
-            }
-            if (startsWith) {
-                str = str + str2;
-            }
-            COMMAND_FILE.delete();
-            int i = 3;
-            while (true) {
-                try {
+                String str3 = ("--update_package=" + canonicalPath + ShaderAssembler.NEWLINE) + ("--locale=" + Locale.getDefault().toLanguageTag() + ShaderAssembler.NEWLINE);
+                if (zEndsWith) {
+                }
+                if (!"com.ws.dm".equals(context.getPackageName())) {
+                }
+                if (zStartsWith) {
+                }
+                COMMAND_FILE.delete();
+                i = 3;
+                while (true) {
                     RandomAccessFile randomAccessFile = new RandomAccessFile(COMMAND_FILE, "rwd");
-                    try {
-                        randomAccessFile.writeBytes(str);
-                        Log.i(TAG, "!@RecoverySystem before fsync syscall!!");
-                        randomAccessFile.getFD().sync();
-                        Log.i(TAG, "!@RecoverySystem after fsync syscall!!");
-                        randomAccessFile.close();
-                        i--;
-                        if (COMMAND_FILE.exists()) {
-                            Log.i(TAG, "COMMAND_FILE is already exist!!");
-                            break;
-                        }
-                        Log.i(TAG, "Retry_count : " + i);
-                        if (i <= 0) {
-                            break;
-                        }
-                    } finally {
+                    randomAccessFile.writeBytes(str);
+                    Log.i(TAG, "!@RecoverySystem before fsync syscall!!");
+                    randomAccessFile.getFD().sync();
+                    Log.i(TAG, "!@RecoverySystem after fsync syscall!!");
+                    randomAccessFile.close();
+                    i--;
+                    if (!COMMAND_FILE.exists()) {
                     }
-                } catch (IOException e) {
-                    Log.e(TAG, "IOException when writing command cause:", e);
+                }
+                if (COMMAND_FILE.exists()) {
+                }
+            } else {
+                String str32 = ("--update_package=" + canonicalPath + ShaderAssembler.NEWLINE) + ("--locale=" + Locale.getDefault().toLanguageTag() + ShaderAssembler.NEWLINE);
+                if (zEndsWith) {
+                    str32 = str32 + "--security\n";
+                }
+                if (!"com.ws.dm".equals(context.getPackageName())) {
+                    str = str32 + "--carry_out=att_fota\n";
+                } else if ("com.samsung.sdm.sdmviewer".equals(context.getPackageName())) {
+                    str = str32 + "--carry_out=vzw_fota\n";
+                } else {
+                    str = str32 + "--carry_out=open_fota\n";
+                }
+                if (zStartsWith) {
+                    str = str + str2;
+                }
+                COMMAND_FILE.delete();
+                i = 3;
+                while (true) {
+                    try {
+                        RandomAccessFile randomAccessFile2 = new RandomAccessFile(COMMAND_FILE, "rwd");
+                        try {
+                            randomAccessFile2.writeBytes(str);
+                            Log.i(TAG, "!@RecoverySystem before fsync syscall!!");
+                            randomAccessFile2.getFD().sync();
+                            Log.i(TAG, "!@RecoverySystem after fsync syscall!!");
+                            randomAccessFile2.close();
+                            i--;
+                            if (!COMMAND_FILE.exists()) {
+                                Log.i(TAG, "COMMAND_FILE is already exist!!");
+                                break;
+                            }
+                            Log.i(TAG, "Retry_count : " + i);
+                            if (i <= 0) {
+                                break;
+                            }
+                        } finally {
+                        }
+                    } catch (IOException e) {
+                        Log.e(TAG, "IOException when writing command cause:", e);
+                        throw new IOException("failed to create command file");
+                    }
+                }
+                if (COMMAND_FILE.exists()) {
+                    Log.i(TAG, "!@ command file absent, throw exception");
                     throw new IOException("failed to create command file");
                 }
-            }
-            if (!COMMAND_FILE.exists()) {
-                Log.i(TAG, "!@ command file absent, throw exception");
-                throw new IOException("failed to create command file");
-            }
-            Log.d(TAG, "!@[reset tracking] installPackage write to recovery_cause");
-            try {
-                fileWriter = new FileWriter("/sys/class/sec/sec_debug/recovery_cause");
-            } catch (IOException e2) {
-                Log.e(TAG, "IOException when writing /sys/class/sec/sec_debug/recovery_cause:", e2);
-            }
-            try {
-                fileWriter.write("RecoverySystem installPackage: " + str);
-                fileWriter.close();
+                Log.d(TAG, "!@[reset tracking] installPackage write to recovery_cause");
+                try {
+                    FileWriter fileWriter2 = new FileWriter("/sys/class/sec/sec_debug/recovery_cause");
+                    try {
+                        fileWriter2.write("RecoverySystem installPackage: " + str);
+                        fileWriter2.close();
+                    } catch (Throwable th2) {
+                        try {
+                            fileWriter2.close();
+                        } catch (Throwable th3) {
+                            th2.addSuppressed(th3);
+                        }
+                        throw th2;
+                    }
+                } catch (IOException e2) {
+                    Log.e(TAG, "IOException when writing /sys/class/sec/sec_debug/recovery_cause:", e2);
+                }
                 PowerManager powerManager = (PowerManager) context.getSystemService("power");
                 String str4 = PowerManager.REBOOT_RECOVERY_UPDATE;
                 if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK) && ((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplay(0).getState() != 2) {
@@ -473,13 +522,6 @@ public class RecoverySystem {
                 }
                 powerManager.reboot(str4);
                 throw new IOException("Reboot failed (no permissions?)");
-            } catch (Throwable th2) {
-                try {
-                    fileWriter.close();
-                } catch (Throwable th3) {
-                    th2.addSuppressed(th3);
-                }
-                throw th2;
             }
         }
     }
@@ -528,12 +570,12 @@ public class RecoverySystem {
     @SystemApi
     public static void scheduleUpdateOnBoot(Context context, File file) throws IOException {
         String canonicalPath = file.getCanonicalPath();
-        boolean endsWith = canonicalPath.endsWith("_s.zip");
+        boolean zEndsWith = canonicalPath.endsWith("_s.zip");
         if (canonicalPath.startsWith("/data/")) {
             canonicalPath = "@/cache/recovery/block.map";
         }
         String str = ("--update_package=" + canonicalPath + ShaderAssembler.NEWLINE) + ("--locale=" + Locale.getDefault().toLanguageTag() + ShaderAssembler.NEWLINE);
-        if (endsWith) {
+        if (zEndsWith) {
             str = str + "--security\n";
         }
         if (!((RecoverySystem) context.getSystemService("recovery")).setupBcb(str)) {
@@ -548,33 +590,33 @@ public class RecoverySystem {
         }
     }
 
-    public static void rebootWipeUserData(Context context) throws IOException {
+    public static void rebootWipeUserData(Context context) throws IOException, RemoteException {
         rebootWipeUserData(context, false, context.getPackageName(), false, false);
     }
 
-    public static void rebootWipeUserData(Context context, String str) throws IOException {
+    public static void rebootWipeUserData(Context context, String str) throws IOException, RemoteException {
         rebootWipeUserData(context, false, str, false, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean z) throws IOException {
+    public static void rebootWipeUserData(Context context, boolean z) throws IOException, RemoteException {
         rebootWipeUserData(context, z, context.getPackageName(), false, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2) throws IOException {
+    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2) throws IOException, RemoteException {
         rebootWipeUserData(context, z, str, z2, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3) throws IOException {
+    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3) throws IOException, RemoteException {
         rebootWipeUserData(context, z, str, z2, z3, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3, boolean z4) throws IOException {
+    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3, boolean z4) throws IOException, RemoteException {
         rebootWipeUserData(context, z, str, z2, z3, z4, null);
     }
 
-    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3, boolean z4, String str2) throws IOException {
+    public static void rebootWipeUserData(Context context, boolean z, String str, boolean z2, boolean z3, boolean z4, String str2) throws IOException, RemoteException {
+        String string;
         String str3;
-        String str4;
         RestrictionPolicy restrictionPolicy;
         Log.i(TAG, "rebootWipeUserData++");
         if (!z2 && (restrictionPolicy = EnterpriseDeviceManager.getInstance().getRestrictionPolicy()) != null && !restrictionPolicy.isFactoryResetAllowed()) {
@@ -597,7 +639,7 @@ public class RecoverySystem {
             @Override // android.content.BroadcastReceiver
             public void onReceive(Context context2, Intent intent2) {
                 Log.i(RecoverySystem.TAG, "rebootWipeUserData: onReceive");
-                ConditionVariable.this.open();
+                conditionVariable.open();
             }
         }, new Handler(handlerThread.getLooper()), 0, null, null);
         Log.i(TAG, "rebootWipeUserData: wait intent to complete");
@@ -610,134 +652,101 @@ public class RecoverySystem {
         } else {
             removeEuiccInvisibleSubs(context, euiccManager);
         }
-        String str5 = z ? "--shutdown_after" : null;
+        String str4 = z ? "--shutdown_after" : null;
         if (TextUtils.isEmpty(str)) {
-            str3 = null;
+            string = null;
         } else {
-            String charSequence = DateFormat.format("yyyy-MM-ddTHH:mm:ssZ", System.currentTimeMillis()).toString();
+            String string2 = DateFormat.format("yyyy-MM-ddTHH:mm:ssZ", System.currentTimeMillis()).toString();
             StringBuilder sb = new StringBuilder("--reason=");
-            sb.append(sanitizeArg(str + "," + charSequence));
-            str3 = sb.toString();
+            sb.append(sanitizeArg(str + "," + string2));
+            string = sb.toString();
         }
-        String str6 = z4 ? "--keep_memtag_mode" : null;
-        String str7 = "--locale=" + Locale.getDefault().toLanguageTag();
+        String str5 = z4 ? "--keep_memtag_mode" : null;
+        String str6 = "--locale=" + Locale.getDefault().toLanguageTag();
         if (TextUtils.isEmpty(str2)) {
-            str4 = "";
+            str3 = "";
         } else {
-            str4 = "--" + sanitizeArg(str2);
+            str3 = "--" + sanitizeArg(str2);
         }
         try {
-            Log.d(TAG, "!@[RecoverySystem] rebootWipeUserData: wipeDataArg:[--wipe_data], extraCmdArg:[" + str4 + NavigationBarInflaterView.SIZE_MOD_END);
-            bootCommand(context, str5, RECOVERY_WIPE_DATA_COMMAND, str4, str3, str7, str6);
+            Log.d(TAG, "!@[RecoverySystem] rebootWipeUserData: wipeDataArg:[--wipe_data], extraCmdArg:[" + str3 + NavigationBarInflaterView.SIZE_MOD_END);
+            bootCommand(context, str4, RECOVERY_WIPE_DATA_COMMAND, str3, string, str6, str5);
         } catch (IOException e) {
             AuditLog.logEvent(42, e.getMessage());
             throw e;
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0091 A[Catch: all -> 0x00aa, InterruptedException -> 0x00ac, TRY_LEAVE, TryCatch #0 {InterruptedException -> 0x00ac, blocks: (B:12:0x006d, B:15:0x0089, B:17:0x0091), top: B:11:0x006d, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0091 A[Catch: all -> 0x00aa, InterruptedException -> 0x00ac, TRY_LEAVE, TryCatch #0 {InterruptedException -> 0x00ac, blocks: (B:11:0x006d, B:17:0x0089, B:19:0x0091), top: B:32:0x006d, outer: #1 }] */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x009e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean wipeEuiccData(android.content.Context r10, java.lang.String r11) {
-        /*
-            android.content.ContentResolver r0 = r10.getContentResolver()
-            java.lang.String r1 = "euicc_provisioned"
-            r2 = 0
-            int r0 = android.provider.Settings.Global.getInt(r0, r1, r2)
-            r1 = 1
-            java.lang.String r3 = "RecoverySystem"
-            if (r0 != 0) goto L16
-            java.lang.String r10 = "Skipping eUICC wipe/retain as it is not provisioned"
-            android.util.Log.d(r3, r10)
-            return r1
-        L16:
-            java.lang.String r0 = "euicc"
-            java.lang.Object r0 = r10.getSystemService(r0)
-            android.telephony.euicc.EuiccManager r0 = (android.telephony.euicc.EuiccManager) r0
-            if (r0 == 0) goto Lc2
-            boolean r4 = r0.isEnabled()
-            if (r4 == 0) goto Lc2
-            java.util.concurrent.CountDownLatch r4 = new java.util.concurrent.CountDownLatch
-            r4.<init>(r1)
-            java.util.concurrent.atomic.AtomicBoolean r1 = new java.util.concurrent.atomic.AtomicBoolean
-            r1.<init>(r2)
-            android.os.RecoverySystem$4 r5 = new android.os.RecoverySystem$4
-            r5.<init>()
-            android.content.Intent r6 = new android.content.Intent
-            java.lang.String r7 = "com.android.internal.action.EUICC_FACTORY_RESET"
-            r6.<init>(r7)
-            r6.setPackage(r11)
-            r11 = 201326592(0xc000000, float:9.8607613E-32)
-            android.os.UserHandle r8 = android.os.UserHandle.SYSTEM
-            android.app.PendingIntent r11 = android.app.PendingIntent.getBroadcastAsUser(r10, r2, r6, r11, r8)
-            android.content.IntentFilter r6 = new android.content.IntentFilter
-            r6.<init>()
-            r6.addAction(r7)
-            android.os.HandlerThread r7 = new android.os.HandlerThread
-            java.lang.String r8 = "euiccWipeFinishReceiverThread"
-            r7.<init>(r8)
-            r7.start()
-            android.os.Handler r8 = new android.os.Handler
-            android.os.Looper r7 = r7.getLooper()
-            r8.<init>(r7)
-            android.content.Context r7 = r10.getApplicationContext()
-            r9 = 0
-            r7.registerReceiver(r5, r6, r9, r8)
-            r0.eraseSubscriptions(r11)
-            android.content.ContentResolver r11 = r10.getContentResolver()     // Catch: java.lang.Throwable -> Laa java.lang.InterruptedException -> Lac
-            java.lang.String r0 = "euicc_factory_reset_timeout_millis"
-            r6 = 30000(0x7530, double:1.4822E-319)
-            long r6 = android.provider.Settings.Global.getLong(r11, r0, r6)     // Catch: java.lang.Throwable -> Laa java.lang.InterruptedException -> Lac
-            r8 = 5000(0x1388, double:2.4703E-320)
-            int r11 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r11 >= 0) goto L81
-        L7f:
-            r6 = r8
-            goto L89
-        L81:
-            r8 = 60000(0xea60, double:2.9644E-319)
-            int r11 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r11 <= 0) goto L89
-            goto L7f
-        L89:
-            java.util.concurrent.TimeUnit r11 = java.util.concurrent.TimeUnit.MILLISECONDS     // Catch: java.lang.Throwable -> Laa java.lang.InterruptedException -> Lac
-            boolean r11 = r4.await(r6, r11)     // Catch: java.lang.Throwable -> Laa java.lang.InterruptedException -> Lac
-            if (r11 != 0) goto L9e
-            java.lang.String r11 = "Timeout wiping eUICC data."
-            android.util.Log.e(r3, r11)     // Catch: java.lang.Throwable -> Laa java.lang.InterruptedException -> Lac
-        L96:
-            android.content.Context r10 = r10.getApplicationContext()
-            r10.unregisterReceiver(r5)
-            return r2
-        L9e:
-            android.content.Context r10 = r10.getApplicationContext()
-            r10.unregisterReceiver(r5)
-            boolean r10 = r1.get()
-            return r10
-        Laa:
-            r11 = move-exception
-            goto Lba
-        Lac:
-            r11 = move-exception
-            java.lang.Thread r0 = java.lang.Thread.currentThread()     // Catch: java.lang.Throwable -> Laa
-            r0.interrupt()     // Catch: java.lang.Throwable -> Laa
-            java.lang.String r0 = "Wiping eUICC data interrupted"
-            android.util.Log.e(r3, r0, r11)     // Catch: java.lang.Throwable -> Laa
-            goto L96
-        Lba:
-            android.content.Context r10 = r10.getApplicationContext()
-            r10.unregisterReceiver(r5)
-            throw r11
-        Lc2:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.wipeEuiccData(android.content.Context, java.lang.String):boolean");
+    public static boolean wipeEuiccData(Context context, String str) {
+        if (Settings.Global.getInt(context.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 0) == 0) {
+            Log.d(TAG, "Skipping eUICC wipe/retain as it is not provisioned");
+            return true;
+        }
+        EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+        if (euiccManager == null || !euiccManager.isEnabled()) {
+            return false;
+        }
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: android.os.RecoverySystem.4
+            @Override // android.content.BroadcastReceiver
+            public void onReceive(Context context2, Intent intent) {
+                if (RecoverySystem.ACTION_EUICC_FACTORY_RESET.equals(intent.getAction())) {
+                    if (getResultCode() != 0) {
+                        Log.e(RecoverySystem.TAG, "Error wiping euicc data, Detailed code = " + intent.getIntExtra(EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE, 0));
+                    } else {
+                        Log.d(RecoverySystem.TAG, "Successfully wiped euicc data.");
+                        atomicBoolean.set(true);
+                    }
+                    countDownLatch.countDown();
+                }
+            }
+        };
+        Intent intent = new Intent(ACTION_EUICC_FACTORY_RESET);
+        intent.setPackage(str);
+        PendingIntent broadcastAsUser = PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, UserHandle.SYSTEM);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_EUICC_FACTORY_RESET);
+        HandlerThread handlerThread = new HandlerThread("euiccWipeFinishReceiverThread");
+        handlerThread.start();
+        context.getApplicationContext().registerReceiver(broadcastReceiver, intentFilter, null, new Handler(handlerThread.getLooper()));
+        euiccManager.eraseSubscriptions(broadcastAsUser);
+        try {
+            try {
+                long j = Settings.Global.getLong(context.getContentResolver(), Settings.Global.EUICC_FACTORY_RESET_TIMEOUT_MILLIS, 30000L);
+                long j2 = 5000;
+                if (j < 5000) {
+                    j = j2;
+                    if (countDownLatch.await(j, TimeUnit.MILLISECONDS)) {
+                        Log.e(TAG, "Timeout wiping eUICC data.");
+                    } else {
+                        context.getApplicationContext().unregisterReceiver(broadcastReceiver);
+                        return atomicBoolean.get();
+                    }
+                } else {
+                    j2 = 60000;
+                    if (j > 60000) {
+                        j = j2;
+                    }
+                    if (countDownLatch.await(j, TimeUnit.MILLISECONDS)) {
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                Log.e(TAG, "Wiping eUICC data interrupted", e);
+            }
+            return false;
+        } finally {
+            context.getApplicationContext().unregisterReceiver(broadcastReceiver);
+        }
     }
 
-    private static void removeEuiccInvisibleSubs(Context context, EuiccManager euiccManager) {
+    private static void removeEuiccInvisibleSubs(Context context, EuiccManager euiccManager) throws RemoteException {
         if (Settings.Global.getInt(context.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 0) == 0) {
             Log.i(TAG, "Skip removing eUICC invisible profiles as it is not provisioned.");
             return;
@@ -760,163 +769,162 @@ public class RecoverySystem {
         removeEuiccInvisibleSubs(context, arrayList, euiccManager);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00be A[Catch: all -> 0x00e4, InterruptedException -> 0x00e6, Merged into TryCatch #1 {all -> 0x00e4, InterruptedException -> 0x00e6, blocks: (B:10:0x0099, B:13:0x00b6, B:15:0x00be, B:28:0x00e7), top: B:9:0x0099 }, TRY_LEAVE] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00ce  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static boolean removeEuiccInvisibleSubs(android.content.Context r12, java.util.List<android.telephony.SubscriptionInfo> r13, android.telephony.euicc.EuiccManager r14) {
-        /*
-            Method dump skipped, instructions count: 271
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.removeEuiccInvisibleSubs(android.content.Context, java.util.List, android.telephony.euicc.EuiccManager):boolean");
+    private static boolean removeEuiccInvisibleSubs(Context context, List<SubscriptionInfo> list, EuiccManager euiccManager) {
+        if (list == null || list.isEmpty()) {
+            Log.i(TAG, "There are no eUICC invisible profiles needed to be removed.");
+            return true;
+        }
+        final CountDownLatch countDownLatch = new CountDownLatch(list.size());
+        final AtomicInteger atomicInteger = new AtomicInteger(0);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: android.os.RecoverySystem.5
+            @Override // android.content.BroadcastReceiver
+            public void onReceive(Context context2, Intent intent) {
+                if (RecoverySystem.ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS.equals(intent.getAction())) {
+                    if (getResultCode() != 0) {
+                        Log.e(RecoverySystem.TAG, "Error removing euicc opportunistic profile, Detailed code = " + intent.getIntExtra(EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE, 0));
+                    } else {
+                        Log.e(RecoverySystem.TAG, "Successfully remove euicc opportunistic profile.");
+                        atomicInteger.incrementAndGet();
+                    }
+                    countDownLatch.countDown();
+                }
+            }
+        };
+        Intent intent = new Intent(ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS);
+        intent.setPackage("android");
+        PendingIntent broadcastAsUser = PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, UserHandle.SYSTEM);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS);
+        HandlerThread handlerThread = new HandlerThread("euiccRemovingSubsReceiverThread");
+        handlerThread.start();
+        context.getApplicationContext().registerReceiver(broadcastReceiver, intentFilter, null, new Handler(handlerThread.getLooper()));
+        for (SubscriptionInfo subscriptionInfo : list) {
+            Log.i(TAG, "Remove invisible subscription " + subscriptionInfo.getSubscriptionId() + " from card " + subscriptionInfo.getCardId());
+            euiccManager.createForCardId(subscriptionInfo.getCardId()).deleteSubscription(subscriptionInfo.getSubscriptionId(), broadcastAsUser);
+        }
+        try {
+            long j = Settings.Global.getLong(context.getContentResolver(), Settings.Global.EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS, DEFAULT_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS);
+            long j2 = MIN_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS;
+            if (j < MIN_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS) {
+                j = j2;
+            } else {
+                j2 = MAX_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS;
+                if (j > MAX_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS) {
+                    j = j2;
+                }
+            }
+            if (!countDownLatch.await(j, TimeUnit.MILLISECONDS)) {
+                Log.e(TAG, "Timeout removing invisible euicc profiles.");
+                return false;
+            }
+            context.getApplicationContext().unregisterReceiver(broadcastReceiver);
+            handlerThread.quit();
+            return atomicInteger.get() == list.size();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            Log.e(TAG, "Removing invisible euicc profiles interrupted", e);
+            return false;
+        } finally {
+            context.getApplicationContext().unregisterReceiver(broadcastReceiver);
+            handlerThread.quit();
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0028 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0043  */
-    @android.annotation.SystemApi
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0043  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0028 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    @SystemApi
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void rebootPromptAndWipeUserData(android.content.Context r6, java.lang.String r7) throws java.io.IOException {
-        /*
-            java.lang.String r0 = "rescueparty"
-            java.lang.String r1 = "RecoverySystem"
-            r2 = 0
-            r3 = 0
-            java.lang.String r4 = "vold"
-            android.os.IBinder r4 = android.os.ServiceManager.checkService(r4)     // Catch: java.lang.Exception -> L1f
-            android.os.IVold r4 = android.os.IVold.Stub.asInterface(r4)     // Catch: java.lang.Exception -> L1f
-            if (r4 == 0) goto L19
-            boolean r5 = r4.needsCheckpoint()     // Catch: java.lang.Exception -> L20
-            goto L26
-        L19:
-            java.lang.String r5 = "Failed to get vold"
-            android.util.Log.w(r1, r5)     // Catch: java.lang.Exception -> L20
-            goto L25
-        L1f:
-            r4 = r3
-        L20:
-            java.lang.String r5 = "Failed to check for checkpointing"
-            android.util.Log.w(r1, r5)
-        L25:
-            r5 = r2
-        L26:
-            if (r5 == 0) goto L43
-            r4.abortChanges(r0, r2)     // Catch: java.lang.Exception -> L31
-            java.lang.String r7 = "Rescue Party requested wipe. Aborting update"
-            android.util.Log.i(r1, r7)     // Catch: java.lang.Exception -> L31
-            goto L42
-        L31:
-            java.lang.String r7 = "Rescue Party requested wipe. Rebooting instead."
-            android.util.Log.i(r1, r7)
-            java.lang.String r7 = "power"
-            java.lang.Object r6 = r6.getSystemService(r7)
-            android.os.PowerManager r6 = (android.os.PowerManager) r6
-            r6.reboot(r0)
-        L42:
-            return
-        L43:
-            boolean r0 = android.text.TextUtils.isEmpty(r7)
-            if (r0 != 0) goto L5c
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "--reason="
-            r0.<init>(r1)
-            java.lang.String r7 = sanitizeArg(r7)
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            goto L5d
-        L5c:
-            r7 = r3
-        L5d:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "--locale="
-            r0.<init>(r1)
-            java.util.Locale r1 = java.util.Locale.getDefault()
-            java.lang.String r1 = r1.toString()
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            java.lang.String r1 = "--prompt_and_wipe_data"
-            java.lang.String[] r7 = new java.lang.String[]{r3, r1, r7, r0}
-            bootCommand(r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.rebootPromptAndWipeUserData(android.content.Context, java.lang.String):void");
+    public static void rebootPromptAndWipeUserData(Context context, String str) throws IOException {
+        IVold iVoldAsInterface;
+        boolean zNeedsCheckpoint;
+        String str2;
+        try {
+            iVoldAsInterface = IVold.Stub.asInterface(ServiceManager.checkService("vold"));
+            try {
+            } catch (Exception unused) {
+                Log.w(TAG, "Failed to check for checkpointing");
+                zNeedsCheckpoint = false;
+                if (zNeedsCheckpoint) {
+                }
+            }
+        } catch (Exception unused2) {
+            iVoldAsInterface = null;
+        }
+        if (iVoldAsInterface != null) {
+            zNeedsCheckpoint = iVoldAsInterface.needsCheckpoint();
+            if (zNeedsCheckpoint) {
+                try {
+                    iVoldAsInterface.abortChanges("rescueparty", false);
+                    Log.i(TAG, "Rescue Party requested wipe. Aborting update");
+                    return;
+                } catch (Exception unused3) {
+                    Log.i(TAG, "Rescue Party requested wipe. Rebooting instead.");
+                    ((PowerManager) context.getSystemService("power")).reboot("rescueparty");
+                    return;
+                }
+            }
+            if (TextUtils.isEmpty(str)) {
+                str2 = null;
+            } else {
+                str2 = "--reason=" + sanitizeArg(str);
+            }
+            bootCommand(context, null, "--prompt_and_wipe_data", str2, "--locale=" + Locale.getDefault().toString());
+            return;
+        }
+        Log.w(TAG, "Failed to get vold");
+        zNeedsCheckpoint = false;
+        if (zNeedsCheckpoint) {
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0028 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0043  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0043  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0028 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void rebootPromptAndWipeAppData(android.content.Context r6, java.lang.String r7) throws java.io.IOException {
-        /*
-            java.lang.String r0 = "rescueparty"
-            java.lang.String r1 = "RecoverySystem"
-            r2 = 0
-            r3 = 0
-            java.lang.String r4 = "vold"
-            android.os.IBinder r4 = android.os.ServiceManager.checkService(r4)     // Catch: java.lang.Exception -> L1f
-            android.os.IVold r4 = android.os.IVold.Stub.asInterface(r4)     // Catch: java.lang.Exception -> L1f
-            if (r4 == 0) goto L19
-            boolean r5 = r4.needsCheckpoint()     // Catch: java.lang.Exception -> L20
-            goto L26
-        L19:
-            java.lang.String r5 = "Failed to get vold"
-            android.util.Log.w(r1, r5)     // Catch: java.lang.Exception -> L20
-            goto L25
-        L1f:
-            r4 = r3
-        L20:
-            java.lang.String r5 = "Failed to check for checkpointing"
-            android.util.Log.w(r1, r5)
-        L25:
-            r5 = r2
-        L26:
-            if (r5 == 0) goto L43
-            r4.abortChanges(r0, r2)     // Catch: java.lang.Exception -> L31
-            java.lang.String r7 = "Rescue Party requested wipe. Aborting update"
-            android.util.Log.i(r1, r7)     // Catch: java.lang.Exception -> L31
-            goto L42
-        L31:
-            java.lang.String r7 = "Rescue Party requested wipe. Rebooting instead."
-            android.util.Log.i(r1, r7)
-            java.lang.String r7 = "power"
-            java.lang.Object r6 = r6.getSystemService(r7)
-            android.os.PowerManager r6 = (android.os.PowerManager) r6
-            r6.reboot(r0)
-        L42:
-            return
-        L43:
-            boolean r0 = android.text.TextUtils.isEmpty(r7)
-            if (r0 != 0) goto L5c
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "--reason="
-            r0.<init>(r1)
-            java.lang.String r7 = sanitizeArg(r7)
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            goto L5d
-        L5c:
-            r7 = r3
-        L5d:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "--locale="
-            r0.<init>(r1)
-            java.util.Locale r1 = java.util.Locale.getDefault()
-            java.lang.String r1 = r1.toString()
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            java.lang.String r1 = "--prompt_and_wipe_app_data"
-            java.lang.String[] r7 = new java.lang.String[]{r3, r1, r7, r0}
-            bootCommand(r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.rebootPromptAndWipeAppData(android.content.Context, java.lang.String):void");
+    public static void rebootPromptAndWipeAppData(Context context, String str) throws IOException {
+        IVold iVoldAsInterface;
+        boolean zNeedsCheckpoint;
+        String str2;
+        try {
+            iVoldAsInterface = IVold.Stub.asInterface(ServiceManager.checkService("vold"));
+            try {
+            } catch (Exception unused) {
+                Log.w(TAG, "Failed to check for checkpointing");
+                zNeedsCheckpoint = false;
+                if (zNeedsCheckpoint) {
+                }
+            }
+        } catch (Exception unused2) {
+            iVoldAsInterface = null;
+        }
+        if (iVoldAsInterface != null) {
+            zNeedsCheckpoint = iVoldAsInterface.needsCheckpoint();
+            if (zNeedsCheckpoint) {
+                try {
+                    iVoldAsInterface.abortChanges("rescueparty", false);
+                    Log.i(TAG, "Rescue Party requested wipe. Aborting update");
+                    return;
+                } catch (Exception unused3) {
+                    Log.i(TAG, "Rescue Party requested wipe. Rebooting instead.");
+                    ((PowerManager) context.getSystemService("power")).reboot("rescueparty");
+                    return;
+                }
+            }
+            if (TextUtils.isEmpty(str)) {
+                str2 = null;
+            } else {
+                str2 = "--reason=" + sanitizeArg(str);
+            }
+            bootCommand(context, null, "--prompt_and_wipe_app_data", str2, "--locale=" + Locale.getDefault().toString());
+            return;
+        }
+        Log.w(TAG, "Failed to get vold");
+        zNeedsCheckpoint = false;
+        if (zNeedsCheckpoint) {
+        }
     }
 
     public static void rebootWipeCache(Context context) throws IOException {
@@ -968,7 +976,6 @@ public class RecoverySystem {
     }
 
     private static void bootCommand(Context context, String... strArr) throws IOException {
-        FileOutputStream fileOutputStream;
         synchronized (mShutdownIsInProgressLock) {
             if (mShutdownIsInProgress.booleanValue()) {
                 return;
@@ -987,17 +994,17 @@ public class RecoverySystem {
                 RECOVERY_DIR.mkdirs();
                 COMMAND_FILE.delete();
                 LOG_FILE.delete();
-                String str = null;
+                String recoveryReason = null;
                 int i = 3;
                 while (true) {
                     RandomAccessFile randomAccessFile = new RandomAccessFile(COMMAND_FILE, "rwd");
                     try {
-                        for (String str2 : strArr) {
-                            if (!TextUtils.isEmpty(str2)) {
-                                randomAccessFile.writeBytes(str2);
+                        for (String str : strArr) {
+                            if (!TextUtils.isEmpty(str)) {
+                                randomAccessFile.writeBytes(str);
                                 randomAccessFile.writeBytes(ShaderAssembler.NEWLINE);
-                                if (str2.startsWith("--reason=")) {
-                                    str = getRecoveryReason(str2);
+                                if (str.startsWith("--reason=")) {
+                                    recoveryReason = getRecoveryReason(str);
                                 }
                             }
                         }
@@ -1027,62 +1034,318 @@ public class RecoverySystem {
                     deleteSecrets();
                 }
                 PowerManager powerManager = (PowerManager) context.getSystemService("power");
-                String str3 = SystemProperties.get("persist.sys.reboot.reason");
-                if ("nvrecovery".equals(str3)) {
+                String str2 = SystemProperties.get("persist.sys.reboot.reason");
+                if ("nvrecovery".equals(str2)) {
                     Log.i(TAG, "FactoryTest ->nvrecovery ");
                     powerManager.reboot("nvrecovery");
-                } else if (Context.DOWNLOAD_SERVICE.equals(str3)) {
+                } else if (Context.DOWNLOAD_SERVICE.equals(str2)) {
                     Log.i(TAG, "FactoryTest ->download ");
                     powerManager.reboot(Context.DOWNLOAD_SERVICE);
                 } else {
                     Log.d(TAG, "calling pm.reboot");
-                    if (str == null) {
-                        str = "bootCommand()";
+                    if (recoveryReason == null) {
+                        recoveryReason = "bootCommand()";
                     }
-                    Log.d(TAG, "!@[RecoverySystem] bootCommand: [reset tracking] write to recovery_cause : " + str);
+                    Log.d(TAG, "!@[RecoverySystem] bootCommand: [reset tracking] write to recovery_cause : " + recoveryReason);
                     try {
-                        fileOutputStream = new FileOutputStream("/sys/class/sec/sec_debug/recovery_cause");
+                        FileOutputStream fileOutputStream = new FileOutputStream("/sys/class/sec/sec_debug/recovery_cause");
+                        try {
+                            fileOutputStream.write(("RecoverySystem " + recoveryReason).getBytes(StandardCharsets.UTF_8));
+                            fileOutputStream.close();
+                        } catch (Throwable th2) {
+                            try {
+                                fileOutputStream.close();
+                            } catch (Throwable th3) {
+                                th2.addSuppressed(th3);
+                            }
+                            throw th2;
+                        }
                     } catch (IOException e) {
                         Log.e(TAG, "IOException when writing /sys/class/sec/sec_debug/recovery_cause:", e);
                     }
-                    try {
-                        fileOutputStream.write(("RecoverySystem " + str).getBytes(StandardCharsets.UTF_8));
-                        fileOutputStream.close();
-                        powerManager.reboot("recovery");
-                    } catch (Throwable th2) {
-                        try {
-                            fileOutputStream.close();
-                        } catch (Throwable th3) {
-                            th2.addSuppressed(th3);
-                        }
-                        throw th2;
-                    }
+                    powerManager.reboot("recovery");
                 }
                 throw new IOException("Reboot failed (no permissions?)");
             }
         }
     }
 
-    /* JADX WARN: Not initialized variable reg: 4, insn: 0x024e: MOVE (r2 I:??[OBJECT, ARRAY]) = (r4 I:??[OBJECT, ARRAY]), block:B:116:0x024e */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0251 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0052 A[Catch: IOException -> 0x0078, FileNotFoundException -> 0x007a, all -> 0x024d, TryCatch #4 {all -> 0x024d, blocks: (B:20:0x004a, B:22:0x0052, B:23:0x0067, B:25:0x006d, B:111:0x0081, B:107:0x0090), top: B:16:0x003c }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x006d A[Catch: IOException -> 0x0078, FileNotFoundException -> 0x007a, all -> 0x024d, TRY_LEAVE, TryCatch #4 {all -> 0x024d, blocks: (B:20:0x004a, B:22:0x0052, B:23:0x0067, B:25:0x006d, B:111:0x0081, B:107:0x0090), top: B:16:0x003c }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0192  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01ac  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01e5  */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x00e2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:121:0x009e -> B:28:0x00a5). Please report as a decompilation issue!!! */
+    /* JADX WARN: Can't wrap try/catch for region: R(19:9|10|(2:143|11)|17|136|(9:133|18|19|141|20|(1:22)|23|(1:25)|26)|135|48|(8:134|50|139|51|(1:53)|54|55|65)|66|(2:68|(3:127|70|(2:77|(1:79)(1:80))))|81|(1:83)|84|(2:86|(1:88)(1:89))|90|(3:94|(1:154)(2:113|148)|114)|147|115) */
+    /* JADX WARN: Code restructure failed: missing block: B:46:0x009d, code lost:
+    
+        r9 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:47:0x009e, code lost:
+    
+        android.util.Log.e(android.os.RecoverySystem.TAG, "IOException when close last_recovery_mode file:", r9);
+     */
+    /* JADX WARN: Not initialized variable reg: 4, insn: 0x024e: MOVE (r2 I:??[OBJECT, ARRAY]) = (r4 I:??[OBJECT, ARRAY]), block:B:117:0x024e */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x0251 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x00e2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0052 A[Catch: IOException -> 0x0078, FileNotFoundException -> 0x007a, all -> 0x024d, TryCatch #4 {all -> 0x024d, blocks: (B:20:0x004a, B:22:0x0052, B:23:0x0067, B:25:0x006d, B:36:0x0081, B:42:0x0090), top: B:133:0x003c }] */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x006d A[Catch: IOException -> 0x0078, FileNotFoundException -> 0x007a, all -> 0x024d, TRY_LEAVE, TryCatch #4 {all -> 0x024d, blocks: (B:20:0x004a, B:22:0x0052, B:23:0x0067, B:25:0x006d, B:36:0x0081, B:42:0x0090), top: B:133:0x003c }] */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x012d  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x0192  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x01ac  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x01e5  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:47:0x009e -> B:135:0x00a5). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String handleAftermath(android.content.Context r9) {
-        /*
-            Method dump skipped, instructions count: 609
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.handleAftermath(android.content.Context):java.lang.String");
+    public static String handleAftermath(Context context) throws Throwable {
+        String textFile;
+        int i;
+        File file;
+        RandomAccessFile randomAccessFile;
+        boolean zExists;
+        File file2;
+        File file3;
+        String[] list;
+        FileInputStream fileInputStream;
+        FileInputStream fileInputStream2;
+        File file4;
+        int i2;
+        synchronized (mShutdownIsInProgressLock) {
+            FileInputStream fileInputStream3 = null;
+            String textFile2 = null;
+            if (mShutdownIsInProgress.booleanValue()) {
+                Log.i(TAG, "!@[RecoverySystem] handleAftermath: disabled, as shutdown in progress");
+                return null;
+            }
+            Log.i(TAG, "!@[RecoverySystem] handleAftermath");
+            try {
+                textFile = FileUtils.readTextFile(LOG_FILE, -65536, "...\n");
+            } catch (FileNotFoundException unused) {
+                Log.i(TAG, "No recovery log file");
+                textFile = null;
+                try {
+                    file4 = new File("/cache/recovery/last_recovery_mode");
+                    fileInputStream = new FileInputStream(file4);
+                    try {
+                        byte[] bArr = new byte[21];
+                        i2 = fileInputStream.read(bArr);
+                        if (i2 > 0) {
+                        }
+                        if (!file4.delete()) {
+                        }
+                        fileInputStream.close();
+                    } catch (FileNotFoundException e) {
+                        e = e;
+                        Log.e(TAG, "FileNotFoundException when open /cache/recovery/last_recovery_mode:", e);
+                        if (fileInputStream != null) {
+                            fileInputStream.close();
+                        }
+                        File file5 = RECOVERY_DIR;
+                        copyFile(new File(file5, "last_history"), new File("/data/log/recovery_history.log"));
+                        copyFile(new File(file5, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
+                        copyFile(new File(file5, "last_recovery"), new File("/data/log/recovery.log"));
+                        file = RECOVERY_RESCUEPARTY_FILE;
+                        if (file.exists()) {
+                        }
+                        zExists = BLOCK_MAP_FILE.exists();
+                        if (!zExists) {
+                        }
+                        Log.i(TAG, "copy sudden_reset_log to /data/log/");
+                        File file6 = RECOVERY_DIR;
+                        file2 = new File(file6, SUDDEN_RESET_LAST_KMSG_NAME);
+                        if (file2.exists()) {
+                        }
+                        file3 = new File(TMP_RECOVERY_LOG_PATH);
+                        if (file3.exists()) {
+                        }
+                        list = file6.list();
+                        while (list != null) {
+                            if (list[i].startsWith(LAST_PREFIX)) {
+                            }
+                        }
+                        return textFile;
+                    } catch (IOException e2) {
+                        e = e2;
+                        Log.e(TAG, "IOException when read /cache/recovery/last_recovery_mode:", e);
+                        if (fileInputStream != null) {
+                            fileInputStream.close();
+                        }
+                        File file52 = RECOVERY_DIR;
+                        copyFile(new File(file52, "last_history"), new File("/data/log/recovery_history.log"));
+                        copyFile(new File(file52, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
+                        copyFile(new File(file52, "last_recovery"), new File("/data/log/recovery.log"));
+                        file = RECOVERY_RESCUEPARTY_FILE;
+                        if (file.exists()) {
+                        }
+                        zExists = BLOCK_MAP_FILE.exists();
+                        if (!zExists) {
+                        }
+                        Log.i(TAG, "copy sudden_reset_log to /data/log/");
+                        File file62 = RECOVERY_DIR;
+                        file2 = new File(file62, SUDDEN_RESET_LAST_KMSG_NAME);
+                        if (file2.exists()) {
+                        }
+                        file3 = new File(TMP_RECOVERY_LOG_PATH);
+                        if (file3.exists()) {
+                        }
+                        list = file62.list();
+                        while (list != null) {
+                        }
+                        return textFile;
+                    }
+                    File file522 = RECOVERY_DIR;
+                    copyFile(new File(file522, "last_history"), new File("/data/log/recovery_history.log"));
+                    copyFile(new File(file522, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
+                    copyFile(new File(file522, "last_recovery"), new File("/data/log/recovery.log"));
+                    file = RECOVERY_RESCUEPARTY_FILE;
+                    if (file.exists()) {
+                    }
+                    zExists = BLOCK_MAP_FILE.exists();
+                    if (!zExists) {
+                    }
+                    Log.i(TAG, "copy sudden_reset_log to /data/log/");
+                    File file622 = RECOVERY_DIR;
+                    file2 = new File(file622, SUDDEN_RESET_LAST_KMSG_NAME);
+                    if (file2.exists()) {
+                    }
+                    file3 = new File(TMP_RECOVERY_LOG_PATH);
+                    if (file3.exists()) {
+                    }
+                    list = file622.list();
+                    while (list != null) {
+                    }
+                    return textFile;
+                } catch (Throwable th) {
+                    th = th;
+                    fileInputStream3 = fileInputStream2;
+                    if (fileInputStream3 != null) {
+                        try {
+                            fileInputStream3.close();
+                        } catch (IOException e3) {
+                            Log.e(TAG, "IOException when close last_recovery_mode file:", e3);
+                        }
+                    }
+                    throw th;
+                }
+            } catch (IOException e4) {
+                Log.e(TAG, "Error reading recovery log", e4);
+                textFile = null;
+                file4 = new File("/cache/recovery/last_recovery_mode");
+                fileInputStream = new FileInputStream(file4);
+                byte[] bArr2 = new byte[21];
+                i2 = fileInputStream.read(bArr2);
+                if (i2 > 0) {
+                }
+                if (!file4.delete()) {
+                }
+                fileInputStream.close();
+                File file5222 = RECOVERY_DIR;
+                copyFile(new File(file5222, "last_history"), new File("/data/log/recovery_history.log"));
+                copyFile(new File(file5222, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
+                copyFile(new File(file5222, "last_recovery"), new File("/data/log/recovery.log"));
+                file = RECOVERY_RESCUEPARTY_FILE;
+                if (file.exists()) {
+                }
+                zExists = BLOCK_MAP_FILE.exists();
+                if (!zExists) {
+                }
+                Log.i(TAG, "copy sudden_reset_log to /data/log/");
+                File file6222 = RECOVERY_DIR;
+                file2 = new File(file6222, SUDDEN_RESET_LAST_KMSG_NAME);
+                if (file2.exists()) {
+                }
+                file3 = new File(TMP_RECOVERY_LOG_PATH);
+                if (file3.exists()) {
+                }
+                list = file6222.list();
+                while (list != null) {
+                }
+                return textFile;
+            }
+            try {
+                file4 = new File("/cache/recovery/last_recovery_mode");
+                fileInputStream = new FileInputStream(file4);
+                byte[] bArr22 = new byte[21];
+                i2 = fileInputStream.read(bArr22);
+                if (i2 > 0) {
+                    String str = new String(bArr22, 0, i2, StandardCharsets.UTF_8);
+                    Log.i(TAG, "last_recovery_mode : ".concat(str));
+                    SystemProperties.set(LAST_RECOVERY_MODE, str);
+                }
+                if (!file4.delete()) {
+                    Log.i(TAG, "Failed to delete /cache/recovery/last_recovery_mode");
+                }
+                fileInputStream.close();
+            } catch (FileNotFoundException e5) {
+                e = e5;
+                fileInputStream = null;
+            } catch (IOException e6) {
+                e = e6;
+                fileInputStream = null;
+            } catch (Throwable th2) {
+                th = th2;
+                if (fileInputStream3 != null) {
+                }
+                throw th;
+            }
+            File file52222 = RECOVERY_DIR;
+            copyFile(new File(file52222, "last_history"), new File("/data/log/recovery_history.log"));
+            copyFile(new File(file52222, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
+            copyFile(new File(file52222, "last_recovery"), new File("/data/log/recovery.log"));
+            file = RECOVERY_RESCUEPARTY_FILE;
+            if (file.exists()) {
+                try {
+                    randomAccessFile = new RandomAccessFile(file, "rw");
+                } catch (IOException e7) {
+                    Log.e(TAG, "IOException with rescueparty_log :", e7);
+                }
+                try {
+                    if (randomAccessFile.length() > 524288) {
+                        randomAccessFile.setLength(524288L);
+                    }
+                    randomAccessFile.close();
+                    randomAccessFile.close();
+                    copyFile(new File(RECOVERY_DIR, "rescueparty_log"), new File("/data/log/rescueparty_log"));
+                } finally {
+                }
+            }
+            zExists = BLOCK_MAP_FILE.exists();
+            if (!zExists) {
+                File file7 = UNCRYPT_PACKAGE_FILE;
+                if (file7.exists()) {
+                    try {
+                        textFile2 = FileUtils.readTextFile(file7, 0, null);
+                    } catch (IOException e8) {
+                        Log.e(TAG, "Error reading uncrypt file", e8);
+                    }
+                    if (textFile2 != null && textFile2.startsWith("/data")) {
+                        if (UNCRYPT_PACKAGE_FILE.delete()) {
+                            Log.i(TAG, "Deleted: " + textFile2);
+                        } else {
+                            Log.e(TAG, "Can't delete: " + textFile2);
+                        }
+                    }
+                }
+            }
+            Log.i(TAG, "copy sudden_reset_log to /data/log/");
+            File file62222 = RECOVERY_DIR;
+            file2 = new File(file62222, SUDDEN_RESET_LAST_KMSG_NAME);
+            if (file2.exists()) {
+                copyFile(file2, new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
+            }
+            file3 = new File(TMP_RECOVERY_LOG_PATH);
+            if (file3.exists()) {
+                copyFile(file3, new File(LAST_CACHE_SUDDEN_RESET_LOG_PATH));
+                copyFile(new File("/proc/last_kmsg"), new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
+                if (file3.delete()) {
+                    Log.i(TAG, "Deleted: /efs/recovery/tmp_recovery.log");
+                } else {
+                    Log.e(TAG, "Can't delete: /efs/recovery/tmp_recovery.log");
+                }
+            }
+            list = file62222.list();
+            for (i = 0; list != null && i < list.length; i++) {
+                if (list[i].startsWith(LAST_PREFIX) && !list[i].equals(LAST_INSTALL_PATH) && ((!zExists || !list[i].equals(BLOCK_MAP_FILE.getName())) && ((!zExists || !list[i].equals(UNCRYPT_PACKAGE_FILE.getName())) && !list[i].equals(RECOVERY_RESCUEPARTY_FILE.getName()) && !list[i].equals(COMMAND_FILE.getName())))) {
+                    recursiveDelete(new File(RECOVERY_DIR, list[i]));
+                }
+            }
+            return textFile;
+        }
     }
 
     private static void deleteSecrets() {
@@ -1146,9 +1409,9 @@ public class RecoverySystem {
     private boolean requestLskf(String str, IntentSender intentSender) throws IOException {
         Log.i(TAG, TextUtils.formatSimple("Package<%s> requesting LSKF", str));
         try {
-            boolean requestLskf = this.mService.requestLskf(str, intentSender);
-            Log.i(TAG, TextUtils.formatSimple("LSKF Request isValid = %b", Boolean.valueOf(requestLskf)));
-            return requestLskf;
+            boolean zRequestLskf = this.mService.requestLskf(str, intentSender);
+            Log.i(TAG, TextUtils.formatSimple("LSKF Request isValid = %b", Boolean.valueOf(zRequestLskf)));
+            return zRequestLskf;
         } catch (RemoteException | SecurityException e) {
             throw new IOException("could not request LSKF capture", e);
         }
@@ -1198,91 +1461,92 @@ public class RecoverySystem {
         this.mService = iRecoverySystem;
     }
 
-    private static void copyFile(File file, File file2) {
+    private static void copyFile(File file, File file2) throws Throwable {
         Throwable th;
-        FileChannel fileChannel;
-        FileChannel fileChannel2 = null;
+        FileChannel channel;
+        FileChannel channel2;
+        FileChannel fileChannel = null;
         try {
             try {
                 try {
-                    FileChannel channel = new FileInputStream(file).getChannel();
+                    channel2 = new FileInputStream(file).getChannel();
                     try {
-                        fileChannel = new FileOutputStream(file2).getChannel();
-                        try {
-                            fileChannel.transferFrom(channel, 0L, channel.size());
-                            Os.chmod(file2.getPath(), 416);
-                            Os.chown(file2.getPath(), 1000, 1007);
-                            if (channel != null) {
-                                channel.close();
-                            }
-                            if (fileChannel != null) {
-                                fileChannel.close();
-                            }
-                        } catch (ErrnoException e) {
-                            e = e;
-                            fileChannel2 = channel;
-                            Log.e(TAG, "copyFile: Error chmod recovery logs", e);
-                            if (fileChannel2 != null) {
-                                fileChannel2.close();
-                            }
-                            if (fileChannel != null) {
-                                fileChannel.close();
-                            }
-                            Log.i(TAG, "copyFile: " + file + " -> " + file2);
-                        } catch (IOException e2) {
-                            e = e2;
-                            fileChannel2 = channel;
-                            Log.e(TAG, "copyFile: Error copy recovery logs", e);
-                            if (fileChannel2 != null) {
-                                fileChannel2.close();
-                            }
-                            if (fileChannel != null) {
-                                fileChannel.close();
-                            }
-                            Log.i(TAG, "copyFile: " + file + " -> " + file2);
-                        } catch (Throwable th2) {
-                            th = th2;
-                            fileChannel2 = channel;
-                            if (fileChannel2 != null) {
-                                try {
-                                    fileChannel2.close();
-                                } catch (IOException e3) {
-                                    Log.e(TAG, "copyFile: Error close FileChannel ", e3);
-                                    throw th;
-                                }
-                            }
-                            if (fileChannel == null) {
-                                throw th;
-                            }
-                            fileChannel.close();
-                            throw th;
-                        }
-                    } catch (ErrnoException e4) {
-                        e = e4;
-                        fileChannel = null;
-                    } catch (IOException e5) {
-                        e = e5;
-                        fileChannel = null;
-                    } catch (Throwable th3) {
-                        th = th3;
-                        fileChannel = null;
+                        channel = new FileOutputStream(file2).getChannel();
+                    } catch (ErrnoException e) {
+                        e = e;
+                        channel = null;
+                    } catch (IOException e2) {
+                        e = e2;
+                        channel = null;
+                    } catch (Throwable th2) {
+                        th = th2;
+                        channel = null;
                     }
-                } catch (ErrnoException e6) {
-                    e = e6;
-                    fileChannel = null;
-                } catch (IOException e7) {
-                    e = e7;
-                    fileChannel = null;
-                } catch (Throwable th4) {
-                    th = th4;
-                    fileChannel = null;
+                } catch (IOException e3) {
+                    Log.e(TAG, "copyFile: Error close FileChannel ", e3);
                 }
-            } catch (IOException e8) {
-                Log.e(TAG, "copyFile: Error close FileChannel ", e8);
+            } catch (ErrnoException e4) {
+                e = e4;
+                channel = null;
+            } catch (IOException e5) {
+                e = e5;
+                channel = null;
+            } catch (Throwable th3) {
+                th = th3;
+                channel = null;
+            }
+        } catch (Throwable th4) {
+            th = th4;
+        }
+        try {
+            channel.transferFrom(channel2, 0L, channel2.size());
+            Os.chmod(file2.getPath(), 416);
+            Os.chown(file2.getPath(), 1000, 1007);
+            if (channel2 != null) {
+                channel2.close();
+            }
+            if (channel != null) {
+                channel.close();
+            }
+        } catch (ErrnoException e6) {
+            e = e6;
+            fileChannel = channel2;
+            Log.e(TAG, "copyFile: Error chmod recovery logs", e);
+            if (fileChannel != null) {
+                fileChannel.close();
+            }
+            if (channel != null) {
+                channel.close();
+            }
+            Log.i(TAG, "copyFile: " + file + " -> " + file2);
+        } catch (IOException e7) {
+            e = e7;
+            fileChannel = channel2;
+            Log.e(TAG, "copyFile: Error copy recovery logs", e);
+            if (fileChannel != null) {
+                fileChannel.close();
+            }
+            if (channel != null) {
+                channel.close();
             }
             Log.i(TAG, "copyFile: " + file + " -> " + file2);
         } catch (Throwable th5) {
             th = th5;
+            fileChannel = channel2;
+            if (fileChannel != null) {
+                try {
+                    fileChannel.close();
+                } catch (IOException e8) {
+                    Log.e(TAG, "copyFile: Error close FileChannel ", e8);
+                    throw th;
+                }
+            }
+            if (channel == null) {
+                throw th;
+            }
+            channel.close();
+            throw th;
         }
+        Log.i(TAG, "copyFile: " + file + " -> " + file2);
     }
 }

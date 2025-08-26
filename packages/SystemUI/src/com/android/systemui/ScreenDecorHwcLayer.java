@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import com.android.systemui.util.DumpUtilsKt;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
     public final int bgColor;
@@ -125,56 +124,56 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
             }
         }
         if (!this.protectionRect.isEmpty()) {
-            float centerX = this.protectionRect.centerX();
-            float centerY = this.protectionRect.centerY();
+            float fCenterX = this.protectionRect.centerX();
+            float fCenterY = this.protectionRect.centerY();
             RectF rectF = this.protectionRect;
-            float f = centerX - rectF.left;
+            float f = fCenterX - rectF.left;
             float f2 = this.cameraProtectionProgress;
             float f3 = f * f2;
-            float f4 = (centerY - rectF.top) * f2;
-            this.tempRect.set((int) Math.floor(centerX - f3), (int) Math.floor(centerY - f4), (int) Math.ceil(centerX + f3), (int) Math.ceil(centerY + f4));
+            float f4 = (fCenterY - rectF.top) * f2;
+            this.tempRect.set((int) Math.floor(fCenterX - f3), (int) Math.floor(fCenterY - f4), (int) Math.ceil(fCenterX + f3), (int) Math.ceil(fCenterY + f4));
             Rect rect5 = this.tempRect;
             int i9 = rect5.left;
             int i10 = rect5.top;
             int width = getWidth() - this.tempRect.right;
             int height = getHeight() - this.tempRect.bottom;
             int[] iArr = {i10, width, height};
-            int i11 = i9;
-            for (int i12 = 0; i12 < 3; i12++) {
-                i11 = Math.min(i11, iArr[i12]);
+            int iMin = i9;
+            for (int i11 = 0; i11 < 3; i11++) {
+                iMin = Math.min(iMin, iArr[i11]);
             }
-            if (i11 == i9) {
+            if (iMin == i9) {
                 Rect rect6 = this.transparentRect;
-                int i13 = this.tempRect.right;
-                int i14 = rect6.left;
-                if (i13 < i14) {
-                    i13 = i14;
+                int i12 = this.tempRect.right;
+                int i13 = rect6.left;
+                if (i12 < i13) {
+                    i12 = i13;
                 }
-                rect6.left = i13;
-            } else if (i11 == i10) {
+                rect6.left = i12;
+            } else if (iMin == i10) {
                 Rect rect7 = this.transparentRect;
-                int i15 = this.tempRect.bottom;
-                int i16 = rect7.top;
-                if (i15 < i16) {
-                    i15 = i16;
+                int i14 = this.tempRect.bottom;
+                int i15 = rect7.top;
+                if (i14 < i15) {
+                    i14 = i15;
                 }
-                rect7.top = i15;
-            } else if (i11 == width) {
+                rect7.top = i14;
+            } else if (iMin == width) {
                 Rect rect8 = this.transparentRect;
-                int i17 = this.tempRect.left;
-                int i18 = rect8.right;
-                if (i17 > i18) {
-                    i17 = i18;
+                int i16 = this.tempRect.left;
+                int i17 = rect8.right;
+                if (i16 > i17) {
+                    i16 = i17;
                 }
-                rect8.right = i17;
-            } else if (i11 == height) {
+                rect8.right = i16;
+            } else if (iMin == height) {
                 Rect rect9 = this.transparentRect;
-                int i19 = this.tempRect.top;
-                int i20 = rect9.bottom;
-                if (i19 > i20) {
-                    i19 = i20;
+                int i18 = this.tempRect.top;
+                int i19 = rect9.bottom;
+                if (i18 > i19) {
+                    i18 = i19;
                 }
-                rect9.bottom = i19;
+                rect9.bottom = i18;
             }
         }
         DisplayCutout displayCutout2 = this.displayInfo.displayCutout;
@@ -190,15 +189,15 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
                 Rect rect10 = this.transparentRect;
                 int roundedCornerSizeByPosition = getRoundedCornerSizeByPosition(1);
                 Rect rect11 = this.transparentRect;
-                int i21 = rect11.top;
-                if (roundedCornerSizeByPosition < i21) {
-                    roundedCornerSizeByPosition = i21;
+                int i20 = rect11.top;
+                if (roundedCornerSizeByPosition < i20) {
+                    roundedCornerSizeByPosition = i20;
                 }
                 rect10.top = roundedCornerSizeByPosition;
                 int height2 = getHeight() - getRoundedCornerSizeByPosition(3);
-                int i22 = this.transparentRect.bottom;
-                if (height2 > i22) {
-                    height2 = i22;
+                int i21 = this.transparentRect.bottom;
+                if (height2 > i21) {
+                    height2 = i21;
                 }
                 rect11.bottom = height2;
                 return;
@@ -206,15 +205,15 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
             Rect rect12 = this.transparentRect;
             int roundedCornerSizeByPosition2 = getRoundedCornerSizeByPosition(0);
             Rect rect13 = this.transparentRect;
-            int i23 = rect13.left;
-            if (roundedCornerSizeByPosition2 < i23) {
-                roundedCornerSizeByPosition2 = i23;
+            int i22 = rect13.left;
+            if (roundedCornerSizeByPosition2 < i22) {
+                roundedCornerSizeByPosition2 = i22;
             }
             rect12.left = roundedCornerSizeByPosition2;
             int width2 = getWidth() - getRoundedCornerSizeByPosition(2);
-            int i24 = this.transparentRect.right;
-            if (width2 > i24) {
-                width2 = i24;
+            int i23 = this.transparentRect.right;
+            if (width2 > i23) {
+                width2 = i23;
             }
             rect13.right = width2;
             return;
@@ -223,15 +222,15 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
             Rect rect14 = this.transparentRect;
             int roundedCornerSizeByPosition3 = getRoundedCornerSizeByPosition(0);
             Rect rect15 = this.transparentRect;
-            int i25 = rect15.left;
-            if (roundedCornerSizeByPosition3 < i25) {
-                roundedCornerSizeByPosition3 = i25;
+            int i24 = rect15.left;
+            if (roundedCornerSizeByPosition3 < i24) {
+                roundedCornerSizeByPosition3 = i24;
             }
             rect14.left = roundedCornerSizeByPosition3;
             int width3 = getWidth() - getRoundedCornerSizeByPosition(2);
-            int i26 = this.transparentRect.right;
-            if (width3 > i26) {
-                width3 = i26;
+            int i25 = this.transparentRect.right;
+            if (width3 > i25) {
+                width3 = i25;
             }
             rect15.right = width3;
             return;
@@ -239,15 +238,15 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
         Rect rect16 = this.transparentRect;
         int roundedCornerSizeByPosition4 = getRoundedCornerSizeByPosition(1);
         Rect rect17 = this.transparentRect;
-        int i27 = rect17.top;
-        if (roundedCornerSizeByPosition4 < i27) {
-            roundedCornerSizeByPosition4 = i27;
+        int i26 = rect17.top;
+        if (roundedCornerSizeByPosition4 < i26) {
+            roundedCornerSizeByPosition4 = i26;
         }
         rect16.top = roundedCornerSizeByPosition4;
         int height3 = getHeight() - getRoundedCornerSizeByPosition(3);
-        int i28 = this.transparentRect.bottom;
-        if (height3 > i28) {
-            height3 = i28;
+        int i27 = this.transparentRect.bottom;
+        if (height3 > i27) {
+            height3 = i27;
         }
         rect17.bottom = height3;
     }
@@ -293,17 +292,17 @@ public class ScreenDecorHwcLayer extends DisplayCutoutBaseView {
 
     @Override // com.android.systemui.DisplayCutoutBaseView
     public void dump(PrintWriter printWriter) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
-        asIndenting.println("ScreenDecorHwcLayer:");
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.println("ScreenDecorHwcLayer:");
         super.dump(printWriter);
-        asIndenting.println("this=" + this);
-        asIndenting.println("transparentRect=" + this.transparentRect);
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasTopRoundedCorner=", this.hasTopRoundedCorner, asIndenting);
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasBottomRoundedCorner=", this.hasBottomRoundedCorner, asIndenting);
-        asIndenting.println("roundedCornerTopSize=" + this.roundedCornerTopSize);
-        asIndenting.println("roundedCornerBottomSize=" + this.roundedCornerBottomSize);
-        asIndenting.decreaseIndent();
+        indentingPrintWriterAsIndenting.println("this=" + this);
+        indentingPrintWriterAsIndenting.println("transparentRect=" + this.transparentRect);
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasTopRoundedCorner=", this.hasTopRoundedCorner, indentingPrintWriterAsIndenting);
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasBottomRoundedCorner=", this.hasBottomRoundedCorner, indentingPrintWriterAsIndenting);
+        indentingPrintWriterAsIndenting.println("roundedCornerTopSize=" + this.roundedCornerTopSize);
+        indentingPrintWriterAsIndenting.println("roundedCornerBottomSize=" + this.roundedCornerBottomSize);
+        indentingPrintWriterAsIndenting.decreaseIndent();
     }
 
     @Override // android.view.View

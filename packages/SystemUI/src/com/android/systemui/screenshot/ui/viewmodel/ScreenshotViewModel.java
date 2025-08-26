@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotViewModel {
     public final StateFlowImpl _actions;
@@ -27,7 +26,6 @@ public final class ScreenshotViewModel {
     public final StateFlowImpl scrollableRect;
     public final StateFlowImpl scrollingScrim;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,29 +41,29 @@ public final class ScreenshotViewModel {
 
     public ScreenshotViewModel(AccessibilityManager accessibilityManager) {
         this.accessibilityManager = accessibilityManager;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this._preview = MutableStateFlow;
-        this.preview = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
-        this._scrollingScrim = MutableStateFlow2;
-        this.scrollingScrim = MutableStateFlow2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(null);
-        this._badge = MutableStateFlow3;
-        this.badge = MutableStateFlow3;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(null);
-        this._previewAction = MutableStateFlow4;
-        this.previewAction = MutableStateFlow4;
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._actions = MutableStateFlow5;
-        this.actions = MutableStateFlow5;
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(AnimationState.NOT_STARTED);
-        this._animationState = MutableStateFlow6;
-        this.animationState = MutableStateFlow6;
-        StateFlowImpl MutableStateFlow7 = StateFlowKt.MutableStateFlow(Boolean.FALSE);
-        this._isAnimating = MutableStateFlow7;
-        this.isAnimating = MutableStateFlow7;
-        StateFlowImpl MutableStateFlow8 = StateFlowKt.MutableStateFlow(null);
-        this._scrollableRect = MutableStateFlow8;
-        this.scrollableRect = MutableStateFlow8;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this._preview = stateFlowImplMutableStateFlow;
+        this.preview = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
+        this._scrollingScrim = stateFlowImplMutableStateFlow2;
+        this.scrollingScrim = stateFlowImplMutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(null);
+        this._badge = stateFlowImplMutableStateFlow3;
+        this.badge = stateFlowImplMutableStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(null);
+        this._previewAction = stateFlowImplMutableStateFlow4;
+        this.previewAction = stateFlowImplMutableStateFlow4;
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._actions = stateFlowImplMutableStateFlow5;
+        this.actions = stateFlowImplMutableStateFlow5;
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(AnimationState.NOT_STARTED);
+        this._animationState = stateFlowImplMutableStateFlow6;
+        this.animationState = stateFlowImplMutableStateFlow6;
+        StateFlowImpl stateFlowImplMutableStateFlow7 = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this._isAnimating = stateFlowImplMutableStateFlow7;
+        this.isAnimating = stateFlowImplMutableStateFlow7;
+        StateFlowImpl stateFlowImplMutableStateFlow8 = StateFlowKt.MutableStateFlow(null);
+        this._scrollableRect = stateFlowImplMutableStateFlow8;
+        this.scrollableRect = stateFlowImplMutableStateFlow8;
     }
 }

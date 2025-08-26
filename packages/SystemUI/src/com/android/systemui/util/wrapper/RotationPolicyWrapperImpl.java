@@ -7,7 +7,6 @@ import com.android.internal.view.RotationPolicy;
 import com.android.systemui.util.settings.SecureSettings;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RotationPolicyWrapperImpl implements RotationPolicyWrapper {
     public static final int $stable = 8;
@@ -46,15 +45,15 @@ public final class RotationPolicyWrapperImpl implements RotationPolicyWrapper {
 
     @Override // com.android.systemui.util.wrapper.RotationPolicyWrapper
     public void setRotationLock(boolean z, String str) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("RotationPolicyWrapperImpl#setRotationLock");
         }
         try {
             RotationPolicy.setRotationLock(this.context, z, str);
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }

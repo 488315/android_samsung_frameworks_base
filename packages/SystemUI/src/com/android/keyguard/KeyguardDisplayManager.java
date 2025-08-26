@@ -2,6 +2,7 @@ package com.android.keyguard;
 
 import android.app.Presentation;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.display.DisplayManager;
@@ -13,14 +14,19 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.DisplayInfo;
+import android.view.WindowManager;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation;
+import com.android.keyguard.KeyguardScreenSaver;
 import com.android.systemui.LsRune;
+import com.android.systemui.facewidget.plugin.PluginFaceWidgetManager;
 import com.android.systemui.keyguard.KeyguardFoldController;
 import com.android.systemui.keyguard.KeyguardFoldControllerImpl;
 import com.android.systemui.keyguard.KeyguardVisibilityMonitor;
+import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.NavigationBarControllerImpl;
 import com.android.systemui.navigationbar.views.NavigationBarView;
+import com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView;
 import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.settings.DisplayTrackerImpl;
 import com.android.systemui.shade.data.repository.ShadeDisplaysRepository;
@@ -29,6 +35,7 @@ import com.android.systemui.shade.shared.flag.ShadeWindowGoesAround;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.util.LogUtil;
 import com.android.systemui.util.kotlin.JavaAdapterKt;
 import dagger.Lazy;
 import java.util.ArrayList;
@@ -38,7 +45,6 @@ import java.util.function.IntConsumer;
 import javax.inject.Provider;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardDisplayManager {
     public final ConnectedDisplayKeyguardPresentation.Factory mConnectedDisplayKeyguardPresentationFactory;
@@ -49,21 +55,26 @@ public class KeyguardDisplayManager {
     public final DisplayTracker mDisplayTracker;
     public final Lazy mKeyguardDeskTopStateMonitorLazy;
     public final KeyguardFoldController mKeyguardFoldController;
+    public KeyguardScreenSaver mKeyguardScreenSaver;
+    public final KeyguardScreenSaver.Factory mKeyguardScreenSaverFactory;
     public final KeyguardStateController mKeyguardStateController;
     public final KeyguardVisibilityMonitor mKeyguardVisibilityMonitor;
     public final Lazy mNavigationBarControllerLazy;
     public final Provider mShadePositionRepositoryProvider;
     public boolean mShowing;
+    public final WakefulnessLifecycle mWakefulnessLifecycle;
+    public Display mWirelessDisplay;
     public final KeyguardDisplayManager$$ExternalSyntheticLambda0 mVisibilityListener = new IntConsumer() { // from class: com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda0
         @Override // java.util.function.IntConsumer
         public final void accept(int i) {
-            KeyguardDisplayManager keyguardDisplayManager = KeyguardDisplayManager.this;
+            KeyguardDisplayManager keyguardDisplayManager = this.f$0;
             if (i != 0) {
                 ((ArrayList) keyguardDisplayManager.mKeyguardVisibilityMonitor.visibilityChangedListeners).remove(keyguardDisplayManager.mVisibilityListener);
                 keyguardDisplayManager.hide();
             }
         }
     };
+    public boolean mIsDexOccluded = false;
     public MediaRouter mMediaRouter = null;
     public final DisplayInfo mTmpDisplayInfo = new DisplayInfo();
     public final SparseArray mPresentations = new SparseArray();
@@ -87,7 +98,20 @@ public class KeyguardDisplayManager {
             Trace.endSection();
         }
     };
-    public final AnonymousClass4 mMediaRouterCallback = new MediaRouter.SimpleCallback() { // from class: com.android.keyguard.KeyguardDisplayManager.4
+    public final AnonymousClass3 mObserver = new WakefulnessLifecycle.Observer() { // from class: com.android.keyguard.KeyguardDisplayManager.3
+        @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
+        public final void onFinishedWakingUp() {
+            Log.d("KeyguardDisplayManager", "onFinishedWakingUp()");
+            KeyguardDisplayManager.this.notifyScreenState(true);
+        }
+
+        @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
+        public final void onStartedGoingToSleep() {
+            Log.d("KeyguardDisplayManager", "onStartedGoingToSleep()");
+            KeyguardDisplayManager.this.notifyScreenState(false);
+        }
+    };
+    public final AnonymousClass5 mMediaRouterCallback = new MediaRouter.SimpleCallback() { // from class: com.android.keyguard.KeyguardDisplayManager.5
         @Override // android.media.MediaRouter.Callback
         public final void onRoutePresentationDisplayChanged(MediaRouter mediaRouter, MediaRouter.RouteInfo routeInfo) {
             Log.d("KeyguardDisplayManager", "onRoutePresentationDisplayChanged: info=" + routeInfo);
@@ -110,7 +134,6 @@ public class KeyguardDisplayManager {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DeviceStateHelper implements DeviceStateManager.DeviceStateCallback {
         public DeviceState mDeviceState;
 
@@ -123,18 +146,21 @@ public class KeyguardDisplayManager {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.keyguard.KeyguardDisplayManager$4] */
-    public KeyguardDisplayManager(Context context, KeyguardFoldController keyguardFoldController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, KeyguardPresentationDisabler keyguardPresentationDisabler, CommandQueue commandQueue, Lazy lazy, Lazy lazy2, DisplayTracker displayTracker, Executor executor, Executor executor2, DeviceStateHelper deviceStateHelper, final KeyguardStateController keyguardStateController, ConnectedDisplayKeyguardPresentation.Factory factory, Provider provider, CoroutineScope coroutineScope) {
+    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda0] */
+    /* JADX WARN: Type inference failed for: r2v4, types: [com.android.keyguard.KeyguardDisplayManager$3] */
+    /* JADX WARN: Type inference failed for: r2v5, types: [com.android.keyguard.KeyguardDisplayManager$5] */
+    public KeyguardDisplayManager(Context context, KeyguardFoldController keyguardFoldController, KeyguardVisibilityMonitor keyguardVisibilityMonitor, KeyguardPresentationDisabler keyguardPresentationDisabler, CommandQueue commandQueue, Lazy lazy, KeyguardScreenSaver.Factory factory, WakefulnessLifecycle wakefulnessLifecycle, Lazy lazy2, DisplayTracker displayTracker, Executor executor, Executor executor2, DeviceStateHelper deviceStateHelper, final KeyguardStateController keyguardStateController, ConnectedDisplayKeyguardPresentation.Factory factory2, Provider provider, CoroutineScope coroutineScope) {
         this.mDisableHandler = keyguardPresentationDisabler;
         this.mKeyguardVisibilityMonitor = keyguardVisibilityMonitor;
+        this.mWakefulnessLifecycle = wakefulnessLifecycle;
+        this.mKeyguardScreenSaverFactory = factory;
         this.mContext = context;
         this.mNavigationBarControllerLazy = lazy2;
         this.mShadePositionRepositoryProvider = provider;
         executor2.execute(new Runnable() { // from class: com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardDisplayManager keyguardDisplayManager = KeyguardDisplayManager.this;
+                KeyguardDisplayManager keyguardDisplayManager = this.f$0;
                 keyguardDisplayManager.mMediaRouter = (MediaRouter) keyguardDisplayManager.mContext.getSystemService(MediaRouter.class);
             }
         });
@@ -142,15 +168,15 @@ public class KeyguardDisplayManager {
         this.mDisplayTracker = displayTracker;
         this.mDeviceStateHelper = deviceStateHelper;
         this.mKeyguardStateController = keyguardStateController;
-        this.mConnectedDisplayKeyguardPresentationFactory = factory;
+        this.mConnectedDisplayKeyguardPresentationFactory = factory2;
         if (ShadeWindowGoesAround.isEnabled()) {
             JavaAdapterKt.collectFlow(coroutineScope, ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) provider.get())).displayId, new Consumer() { // from class: com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    KeyguardDisplayManager keyguardDisplayManager = KeyguardDisplayManager.this;
-                    int intValue = ((Integer) obj).intValue();
+                    KeyguardDisplayManager keyguardDisplayManager = this.f$0;
+                    int iIntValue = ((Integer) obj).intValue();
                     if (keyguardDisplayManager.mShowing) {
-                        keyguardDisplayManager.hidePresentation(intValue);
+                        keyguardDisplayManager.hidePresentation(iIntValue);
                         keyguardDisplayManager.updateDisplays(true);
                     }
                 }
@@ -161,14 +187,14 @@ public class KeyguardDisplayManager {
             ((KeyguardFoldControllerImpl) keyguardFoldController).addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda3
                 @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                 public final void onFoldStateChanged(boolean z) {
-                    final KeyguardDisplayManager keyguardDisplayManager = KeyguardDisplayManager.this;
+                    final KeyguardDisplayManager keyguardDisplayManager = this.f$0;
                     if (LsRune.KEYGUARD_SUB_DISPLAY_LARGE_FRONT) {
                         KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) keyguardDisplayManager.mKeyguardStateController;
                         if (keyguardStateControllerImpl.mSecure || keyguardDisplayManager.isExternalDesktopWindowing()) {
                             return;
                         }
                         if (!z) {
-                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.keyguard.KeyguardDisplayManager.3
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.keyguard.KeyguardDisplayManager.4
                                 @Override // java.lang.Runnable
                                 public final void run() {
                                     if (((KeyguardFoldControllerImpl) KeyguardDisplayManager.this.mKeyguardFoldController).isFoldOpened()) {
@@ -197,6 +223,10 @@ public class KeyguardDisplayManager {
                 Log.i("KeyguardDisplayManager", sb.toString());
                 Trace.beginSection("KeyguardDisplayManager#onDisplayAddSystemDecorations(displayId=" + i + ")");
                 Display display = keyguardDisplayManager.mDisplayService.getDisplay(i);
+                if (display.getDisplayId() != 0 && display.semGetType() == 3 && (display.getFlags() & 131072) != 0) {
+                    keyguardDisplayManager.mWirelessDisplay = display;
+                    keyguardDisplayManager.mWakefulnessLifecycle.addObserver(keyguardDisplayManager.mObserver);
+                }
                 if (keyguardDisplayManager.mShowing) {
                     keyguardDisplayManager.updateNavigationBarVisibility(i, false);
                     keyguardDisplayManager.showPresentation(display);
@@ -212,7 +242,13 @@ public class KeyguardDisplayManager {
             public final void onDisplayRemoveSystemDecorations(int i) {
                 Log.i("KeyguardDisplayManager", "onDisplayRemoveSystemDecorations : " + i);
                 Trace.beginSection("KeyguardDisplayManager#onDisplayRemoveSystemDecorations(displayId=" + i + ")");
-                KeyguardDisplayManager.this.hidePresentation(i);
+                KeyguardDisplayManager keyguardDisplayManager = KeyguardDisplayManager.this;
+                Display display = keyguardDisplayManager.mWirelessDisplay;
+                if (display != null && display.getDisplayId() == i) {
+                    keyguardDisplayManager.mWirelessDisplay = null;
+                    keyguardDisplayManager.mWakefulnessLifecycle.removeObserver(keyguardDisplayManager.mObserver);
+                }
+                keyguardDisplayManager.hidePresentation(i);
                 Trace.endSection();
             }
 
@@ -265,6 +301,30 @@ public class KeyguardDisplayManager {
         return ((KeyguardDeskTopStateMonitor) lazy.get()).mIsExternalDesktopWindowing;
     }
 
+    public final void notifyScreenState(boolean z) {
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("notifyScreenState() : ", "KeyguardDisplayManager", z);
+        if (!z) {
+            Log.d("KeyguardDisplayManager", "showPresentationLockForWireless()");
+            Display display = this.mWirelessDisplay;
+            if (display != null) {
+                KeyguardScreenSaver keyguardScreenSaverCreate = this.mKeyguardScreenSaverFactory.create(display);
+                this.mKeyguardScreenSaver = keyguardScreenSaverCreate;
+                keyguardScreenSaverCreate.show();
+                return;
+            }
+            return;
+        }
+        Log.d("KeyguardDisplayManager", "hidePresentationLockForWireless()");
+        KeyguardScreenSaver keyguardScreenSaver = this.mKeyguardScreenSaver;
+        if (keyguardScreenSaver != null) {
+            keyguardScreenSaver.dismiss();
+            this.mKeyguardScreenSaver = null;
+            if (this.mPresentations.contains(this.mWirelessDisplay.getDisplayId())) {
+                ((Presentation) this.mPresentations.get(this.mWirelessDisplay.getDisplayId())).show();
+            }
+        }
+    }
+
     public final void show() {
         if (!this.mShowing) {
             MediaRouter mediaRouter = this.mMediaRouter;
@@ -278,19 +338,94 @@ public class KeyguardDisplayManager {
         this.mShowing = true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x00ee  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean showPresentation(android.view.Display r7) {
-        /*
-            Method dump skipped, instructions count: 306
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardDisplayManager.showPresentation(android.view.Display):boolean");
+    public final boolean showPresentation(Display display) {
+        DeviceState deviceState;
+        boolean zIsEnabled;
+        if (display.getDisplayId() != 0 && display.getDisplayId() != -1) {
+            KeyguardDeskTopStateMonitor keyguardDeskTopStateMonitor = (KeyguardDeskTopStateMonitor) this.mKeyguardDeskTopStateMonitorLazy.get();
+            boolean z = (display.getFlags() & 131072) != 0;
+            if (keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing != z) {
+                PluginKeyguardStatusView pluginKeyguardStatusView = ((PluginFaceWidgetManager) keyguardDeskTopStateMonitor.mFaceWidgetManagerLazy.get()).mFaceWidgetPlugin;
+                if (pluginKeyguardStatusView != null) {
+                    pluginKeyguardStatusView.setIsExternalDesktopWindowing(z);
+                }
+                keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing = z;
+            }
+        }
+        if (ShadeWindowGoesAround.isEnabled()) {
+            if (display.getDisplayId() == ((Integer) ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.mShadePositionRepositoryProvider.get())).displayId.getValue()).intValue()) {
+                Log.i("KeyguardDisplayManager", "Do not show KeyguardPresentation on the shade window display");
+            } else {
+                display.getDisplayInfo(this.mTmpDisplayInfo);
+                LogUtil.d("KeyguardDisplayManager", "display type=0x%x, flags=0x%x, displayGroupId=0x%x", Integer.valueOf(this.mTmpDisplayInfo.type), Integer.valueOf(this.mTmpDisplayInfo.flags), Integer.valueOf(this.mTmpDisplayInfo.displayGroupId));
+                int i = this.mTmpDisplayInfo.flags;
+                if ((i & 4) != 0) {
+                    Log.i("KeyguardDisplayManager", "Do not show KeyguardPresentation on a private display");
+                } else if ((i & 512) != 0) {
+                    Log.i("KeyguardDisplayManager", "Do not show KeyguardPresentation on an unlocked display");
+                } else {
+                    DeviceStateHelper deviceStateHelper = this.mDeviceStateHelper;
+                    DeviceState deviceState2 = deviceStateHelper.mDeviceState;
+                    boolean z2 = ((deviceState2 == null || !deviceState2.hasProperty(17) || (display.getFlags() & 8192) == 0) && ((deviceState = deviceStateHelper.mDeviceState) == null || !deviceState.hasProperty(1001) || (display.getFlags() & 8192) == 0)) ? false : true;
+                    KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
+                    if (keyguardStateControllerImpl.mOccluded && z2) {
+                        Log.i("KeyguardDisplayManager", "Do not show KeyguardPresentation when occluded and concurrent or rear display is active");
+                    } else if (LsRune.KEYGUARD_SUB_DISPLAY_LARGE_FRONT && !keyguardStateControllerImpl.mSecure && !((KeyguardFoldControllerImpl) this.mKeyguardFoldController).isFoldOpened() && !isExternalDesktopWindowing()) {
+                        Log.d("KeyguardDisplayManager", "Do not show KeyguardPresentation to the large front sub display when non-secure");
+                    } else if (this.mIsDexOccluded) {
+                        Log.d("KeyguardDisplayManager", "Do not show KeyguardPresentation when occluded in dex mode");
+                    } else if (keyguardStateControllerImpl.mShowing) {
+                        zIsEnabled = this.mDisableHandler.isEnabled(this.mTmpDisplayInfo);
+                    } else {
+                        Log.d("KeyguardDisplayManager", "Do not show KeyguardPresentation when keyguard in main not showing");
+                    }
+                }
+            }
+            zIsEnabled = false;
+        } else {
+            int displayId = display.getDisplayId();
+            this.mDisplayTracker.getClass();
+            if (displayId == 0) {
+                Log.i("KeyguardDisplayManager", "Do not show KeyguardPresentation on the default display");
+            }
+            zIsEnabled = false;
+        }
+        if (zIsEnabled) {
+            Log.i("KeyguardDisplayManager", "Keyguard enabled on display: " + display);
+            final int displayId2 = display.getDisplayId();
+            if (((Presentation) this.mPresentations.get(displayId2)) == null) {
+                final ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentationCreate = this.mConnectedDisplayKeyguardPresentationFactory.create(display);
+                connectedDisplayKeyguardPresentationCreate.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.keyguard.KeyguardDisplayManager$$ExternalSyntheticLambda4
+                    @Override // android.content.DialogInterface.OnDismissListener
+                    public final void onDismiss(DialogInterface dialogInterface) {
+                        KeyguardDisplayManager keyguardDisplayManager = this.f$0;
+                        ConnectedDisplayKeyguardPresentation connectedDisplayKeyguardPresentation = connectedDisplayKeyguardPresentationCreate;
+                        int i2 = displayId2;
+                        if (connectedDisplayKeyguardPresentation.equals(keyguardDisplayManager.mPresentations.get(i2))) {
+                            keyguardDisplayManager.mPresentations.remove(i2);
+                        }
+                    }
+                });
+                try {
+                    connectedDisplayKeyguardPresentationCreate.setCancelable(false);
+                    if (this.mKeyguardScreenSaver == null) {
+                        connectedDisplayKeyguardPresentationCreate.show();
+                    }
+                } catch (WindowManager.InvalidDisplayException e) {
+                    Log.w("KeyguardDisplayManager", "Invalid display:", e);
+                    connectedDisplayKeyguardPresentationCreate = null;
+                }
+                if (connectedDisplayKeyguardPresentationCreate != null) {
+                    this.mPresentations.append(displayId2, connectedDisplayKeyguardPresentationCreate);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public final void updateDisplays(boolean z) {

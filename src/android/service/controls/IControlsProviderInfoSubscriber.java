@@ -44,9 +44,9 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IControlsProviderInfoSubscriber.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IControlsProviderInfoSubscriber)) {
-                return (IControlsProviderInfoSubscriber) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IControlsProviderInfoSubscriber.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IControlsProviderInfoSubscriber)) {
+                return (IControlsProviderInfoSubscriber) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 ControlsProviderInfo controlsProviderInfo = (ControlsProviderInfo) parcel.readTypedObject(ControlsProviderInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onNext(readStrongBinder, controlsProviderInfo);
+                onNext(strongBinder, controlsProviderInfo);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
 
             @Override // android.service.controls.IControlsProviderInfoSubscriber
             public void onNext(IBinder iBinder, ControlsProviderInfo controlsProviderInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsProviderInfoSubscriber.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(controlsProviderInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsProviderInfoSubscriber.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(controlsProviderInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

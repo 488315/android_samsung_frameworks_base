@@ -5,7 +5,6 @@ import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.telephony.ims.ImsUtListener;
-import android.telephony.ims.stub.ImsUtImplBase;
 import android.util.Log;
 import com.android.ims.internal.IImsUt;
 import com.android.ims.internal.IImsUtListener;
@@ -143,7 +142,7 @@ public class ImsUtImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda13
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsUtImplBase.AnonymousClass1.this.lambda$close$0();
+                    this.f$0.lambda$close$0();
                 }
             }, "close");
         }
@@ -158,9 +157,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda9
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCallBarring$1;
-                    lambda$queryCallBarring$1 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCallBarring$1(i);
-                    return lambda$queryCallBarring$1;
+                    return this.f$0.lambda$queryCallBarring$1(i);
                 }
             }, "queryCallBarring")).intValue();
         }
@@ -175,9 +172,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda5
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCallForward$2;
-                    lambda$queryCallForward$2 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCallForward$2(i, str);
-                    return lambda$queryCallForward$2;
+                    return this.f$0.lambda$queryCallForward$2(i, str);
                 }
             }, "queryCallForward")).intValue();
         }
@@ -192,9 +187,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda6
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCallWaiting$3;
-                    lambda$queryCallWaiting$3 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCallWaiting$3();
-                    return lambda$queryCallWaiting$3;
+                    return this.f$0.lambda$queryCallWaiting$3();
                 }
             }, "queryCallWaiting")).intValue();
         }
@@ -209,9 +202,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda3
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCLIR$4;
-                    lambda$queryCLIR$4 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCLIR$4();
-                    return lambda$queryCLIR$4;
+                    return this.f$0.lambda$queryCLIR$4();
                 }
             }, "queryCLIR")).intValue();
         }
@@ -226,9 +217,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda2
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCLIP$5;
-                    lambda$queryCLIP$5 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCLIP$5();
-                    return lambda$queryCLIP$5;
+                    return this.f$0.lambda$queryCLIP$5();
                 }
             }, "queryCLIP")).intValue();
         }
@@ -243,9 +232,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda10
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCOLR$6;
-                    lambda$queryCOLR$6 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCOLR$6();
-                    return lambda$queryCOLR$6;
+                    return this.f$0.lambda$queryCOLR$6();
                 }
             }, "queryCOLR")).intValue();
         }
@@ -260,9 +247,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCOLP$7;
-                    lambda$queryCOLP$7 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCOLP$7();
-                    return lambda$queryCOLP$7;
+                    return this.f$0.lambda$queryCOLP$7();
                 }
             }, "queryCOLP")).intValue();
         }
@@ -277,9 +262,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda14
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$transact$8;
-                    lambda$transact$8 = ImsUtImplBase.AnonymousClass1.this.lambda$transact$8(bundle);
-                    return lambda$transact$8;
+                    return this.f$0.lambda$transact$8(bundle);
                 }
             }, "transact")).intValue();
         }
@@ -294,9 +277,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda8
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCallBarring$9;
-                    lambda$updateCallBarring$9 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCallBarring$9(i, i2, strArr);
-                    return lambda$updateCallBarring$9;
+                    return this.f$0.lambda$updateCallBarring$9(i, i2, strArr);
                 }
             }, "updateCallBarring")).intValue();
         }
@@ -311,9 +292,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda15
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCallForward$10;
-                    lambda$updateCallForward$10 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCallForward$10(i, i2, str, i3, i4);
-                    return lambda$updateCallForward$10;
+                    return this.f$0.lambda$updateCallForward$10(i, i2, str, i3, i4);
                 }
             }, "updateCallForward")).intValue();
         }
@@ -328,9 +307,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda16
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCallWaiting$11;
-                    lambda$updateCallWaiting$11 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCallWaiting$11(z, i);
-                    return lambda$updateCallWaiting$11;
+                    return this.f$0.lambda$updateCallWaiting$11(z, i);
                 }
             }, "updateCallWaiting")).intValue();
         }
@@ -345,9 +322,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda4
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCLIR$12;
-                    lambda$updateCLIR$12 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCLIR$12(i);
-                    return lambda$updateCLIR$12;
+                    return this.f$0.lambda$updateCLIR$12(i);
                 }
             }, "updateCLIR")).intValue();
         }
@@ -362,9 +337,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda21
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCLIP$13;
-                    lambda$updateCLIP$13 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCLIP$13(z);
-                    return lambda$updateCLIP$13;
+                    return this.f$0.lambda$updateCLIP$13(z);
                 }
             }, "updateCLIP")).intValue();
         }
@@ -379,9 +352,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda11
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCOLR$14;
-                    lambda$updateCOLR$14 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCOLR$14(i);
-                    return lambda$updateCOLR$14;
+                    return this.f$0.lambda$updateCOLR$14(i);
                 }
             }, "updateCOLR")).intValue();
         }
@@ -396,9 +367,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda12
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCOLP$15;
-                    lambda$updateCOLP$15 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCOLP$15(z);
-                    return lambda$updateCOLP$15;
+                    return this.f$0.lambda$updateCOLP$15(z);
                 }
             }, "updateCOLP")).intValue();
         }
@@ -408,7 +377,7 @@ public class ImsUtImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsUtImplBase.AnonymousClass1.this.lambda$setListener$16(iImsUtListener);
+                    this.f$0.lambda$setListener$16(iImsUtListener);
                 }
             }, "setListener");
         }
@@ -444,9 +413,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda20
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$queryCallBarringForServiceClass$17;
-                    lambda$queryCallBarringForServiceClass$17 = ImsUtImplBase.AnonymousClass1.this.lambda$queryCallBarringForServiceClass$17(i, i2);
-                    return lambda$queryCallBarringForServiceClass$17;
+                    return this.f$0.lambda$queryCallBarringForServiceClass$17(i, i2);
                 }
             }, "queryCallBarringForServiceClass")).intValue();
         }
@@ -461,9 +428,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda17
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCallBarringForServiceClass$18;
-                    lambda$updateCallBarringForServiceClass$18 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCallBarringForServiceClass$18(i, i2, strArr, i3);
-                    return lambda$updateCallBarringForServiceClass$18;
+                    return this.f$0.lambda$updateCallBarringForServiceClass$18(i, i2, strArr, i3);
                 }
             }, "updateCallBarringForServiceClass")).intValue();
         }
@@ -478,9 +443,7 @@ public class ImsUtImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$updateCallBarringWithPassword$19;
-                    lambda$updateCallBarringWithPassword$19 = ImsUtImplBase.AnonymousClass1.this.lambda$updateCallBarringWithPassword$19(i, i2, strArr, i3, str);
-                    return lambda$updateCallBarringWithPassword$19;
+                    return this.f$0.lambda$updateCallBarringWithPassword$19(i, i2, strArr, i3, str);
                 }
             }, "updateCallBarringWithPassword")).intValue();
         }
@@ -504,9 +467,7 @@ public class ImsUtImplBase {
                 return (T) CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.stub.ImsUtImplBase$1$$ExternalSyntheticLambda19
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Object runWithCleanCallingIdentity;
-                        runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) supplier);
-                        return runWithCleanCallingIdentity;
+                        return TelephonyUtils.runWithCleanCallingIdentity(supplier);
                     }
                 }, ImsUtImplBase.this.mExecutor).get();
             } catch (InterruptedException | ExecutionException e) {

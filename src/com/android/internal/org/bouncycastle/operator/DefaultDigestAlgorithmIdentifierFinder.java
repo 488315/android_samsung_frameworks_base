@@ -62,19 +62,19 @@ public class DefaultDigestAlgorithmIdentifierFinder implements DigestAlgorithmId
 
     @Override // com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierFinder
     public AlgorithmIdentifier find(AlgorithmIdentifier algorithmIdentifier) {
-        ASN1ObjectIdentifier aSN1ObjectIdentifier;
-        ASN1ObjectIdentifier algorithm = algorithmIdentifier.getAlgorithm();
-        if (shake256oids.contains(algorithm)) {
+        ASN1ObjectIdentifier algorithm;
+        ASN1ObjectIdentifier algorithm2 = algorithmIdentifier.getAlgorithm();
+        if (shake256oids.contains(algorithm2)) {
             return new AlgorithmIdentifier(NISTObjectIdentifiers.id_shake256_len, new ASN1Integer(512L));
         }
-        if (algorithm.equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
-            aSN1ObjectIdentifier = RSASSAPSSparams.getInstance(algorithmIdentifier.getParameters()).getHashAlgorithm().getAlgorithm();
-        } else if (algorithm.equals((ASN1Primitive) PKCSObjectIdentifiers.id_alg_hss_lms_hashsig)) {
-            aSN1ObjectIdentifier = NISTObjectIdentifiers.id_sha256;
+        if (algorithm2.equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+            algorithm = RSASSAPSSparams.getInstance(algorithmIdentifier.getParameters()).getHashAlgorithm().getAlgorithm();
+        } else if (algorithm2.equals((ASN1Primitive) PKCSObjectIdentifiers.id_alg_hss_lms_hashsig)) {
+            algorithm = NISTObjectIdentifiers.id_sha256;
         } else {
-            aSN1ObjectIdentifier = (ASN1ObjectIdentifier) digestOids.get(algorithm);
+            algorithm = (ASN1ObjectIdentifier) digestOids.get(algorithm2);
         }
-        return find(aSN1ObjectIdentifier);
+        return find(algorithm);
     }
 
     @Override // com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierFinder

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.service.controls.actions.BooleanAction;
 import android.service.controls.actions.CommandAction;
 import android.service.controls.actions.ControlAction;
@@ -20,9 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.android.systemui.R;
 import com.google.android.material.textfield.TextInputLayout;
-import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChallengeDialogs {
     public static final ChallengeDialogs INSTANCE = new ChallengeDialogs();
@@ -79,7 +78,7 @@ public final class ChallengeDialogs {
                     Dialog dialog = (Dialog) dialogInterface;
                     EditText editText = ((TextInputLayout) dialog.requireViewById(R.id.controls_pin_input_layout)).editText;
                     editText.getClass();
-                    ControlViewHolder.this.action(ChallengeDialogs.access$addChallengeValue(ChallengeDialogs.INSTANCE, controlAction, editText.getText().toString()));
+                    controlViewHolder.action(ChallengeDialogs.access$addChallengeValue(ChallengeDialogs.INSTANCE, controlAction, editText.getText().toString()));
                     dialog.dismiss();
                 }
             }
@@ -87,7 +86,7 @@ public final class ChallengeDialogs {
         r3.setButton(-2, r3.getContext().getText(R.string.controls_dialog_cancel), new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecPinDialog$2$2
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i2) {
-                Function0.this.invoke();
+                controlViewHolder$$ExternalSyntheticLambda0.invoke();
                 dialogInterface.cancel();
             }
         });
@@ -101,7 +100,7 @@ public final class ChallengeDialogs {
         }
         r3.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecPinDialog$2$3
             @Override // android.content.DialogInterface.OnShowListener
-            public final void onShow(DialogInterface dialogInterface) {
+            public final void onShow(DialogInterface dialogInterface) throws Resources.NotFoundException {
                 TextInputLayout textInputLayout = (TextInputLayout) requireViewById(R.id.controls_pin_input_layout);
                 final EditText editText = textInputLayout.editText;
                 editText.getClass();
@@ -111,15 +110,15 @@ public final class ChallengeDialogs {
                 }
                 ((TextView) requireViewById(R.id.controls_pin_use_alpha_text)).setText(R.string.sec_controls_pin_use_alphanumeric);
                 int color = getContext().getResources().getColor(R.color.basic_interaction_dialog_button, getContext().getTheme());
-                ChallengeDialogs$createSecPinDialog$1 challengeDialogs$createSecPinDialog$1 = ChallengeDialogs$createSecPinDialog$1.this;
+                ChallengeDialogs$createSecPinDialog$1 challengeDialogs$createSecPinDialog$1 = r3;
                 challengeDialogs$createSecPinDialog$1.getButton(-1).setTextColor(color);
                 challengeDialogs$createSecPinDialog$1.getButton(-2).setTextColor(color);
                 final CheckBox checkBox = (CheckBox) requireViewById(R.id.controls_pin_use_alpha);
                 checkBox.setChecked(z);
                 ChallengeDialogs challengeDialogs = ChallengeDialogs.INSTANCE;
-                boolean isChecked = checkBox.isChecked();
+                boolean zIsChecked = checkBox.isChecked();
                 challengeDialogs.getClass();
-                if (isChecked) {
+                if (zIsChecked) {
                     editText.setInputType(129);
                 } else {
                     editText.setInputType(18);
@@ -129,9 +128,9 @@ public final class ChallengeDialogs {
                     public final void onClick(View view) {
                         ChallengeDialogs challengeDialogs2 = ChallengeDialogs.INSTANCE;
                         EditText editText2 = editText;
-                        boolean isChecked2 = checkBox.isChecked();
+                        boolean zIsChecked2 = checkBox.isChecked();
                         challengeDialogs2.getClass();
-                        if (isChecked2) {
+                        if (zIsChecked2) {
                             editText2.setInputType(129);
                         } else {
                             editText2.setInputType(18);

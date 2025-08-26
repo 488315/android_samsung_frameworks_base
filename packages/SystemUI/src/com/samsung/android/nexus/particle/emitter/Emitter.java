@@ -8,7 +8,6 @@ import com.samsung.android.nexus.particle.emitter.texture.BitmapParticleTexture;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Emitter {
     public final EmissionRule mEmissionRule;
@@ -25,10 +24,10 @@ public class Emitter {
 
     public final void destroy() {
         int size = this.mEmitters.size();
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "destroy: size = [", "]");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "destroy: size = [", "]");
         ParticleRule particleRule = this.mParticleRule;
-        m.append(particleRule);
-        Log.d("Nexus[Emitter]", m.toString());
+        sbM.append(particleRule);
+        Log.d("Nexus[Emitter]", sbM.toString());
         for (int i = 0; i < size; i++) {
             Emitter emitter = (Emitter) this.mEmitters.get(i);
             if (emitter != null) {

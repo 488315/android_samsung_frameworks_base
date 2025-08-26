@@ -38,13 +38,13 @@ public abstract class ChooserTargetService extends Service {
 
         @Override // android.service.chooser.IChooserTargetService
         public void getChooserTargets(ComponentName componentName, IntentFilter intentFilter, IChooserTargetResult iChooserTargetResult) throws RemoteException {
-            long clearCallingIdentity = clearCallingIdentity();
+            long jClearCallingIdentity = clearCallingIdentity();
             try {
-                List<ChooserTarget> onGetChooserTargets = ChooserTargetService.this.onGetChooserTargets(componentName, intentFilter);
-                restoreCallingIdentity(clearCallingIdentity);
-                iChooserTargetResult.sendResult(onGetChooserTargets);
+                List<ChooserTarget> listOnGetChooserTargets = ChooserTargetService.this.onGetChooserTargets(componentName, intentFilter);
+                restoreCallingIdentity(jClearCallingIdentity);
+                iChooserTargetResult.sendResult(listOnGetChooserTargets);
             } catch (Throwable th) {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
                 iChooserTargetResult.sendResult(null);
                 throw th;
             }

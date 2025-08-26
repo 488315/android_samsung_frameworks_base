@@ -1,5 +1,6 @@
 package android.webkit;
 
+import android.app.blob.XmlTags;
 import android.provider.Telephony;
 import java.util.Locale;
 import java.util.regex.MatchResult;
@@ -46,13 +47,13 @@ class FindAddress {
             this.mException2 = i3;
         }
 
-        boolean matches(String str) {
-            int parseInt = Integer.parseInt(str.substring(0, 2));
-            return (this.mLow <= parseInt && parseInt <= this.mHigh) || parseInt == this.mException1 || parseInt == this.mException2;
+        boolean matches(String str) throws NumberFormatException {
+            int i = Integer.parseInt(str.substring(0, 2));
+            return (this.mLow <= i && i <= this.mHigh) || i == this.mException1 || i == this.mException2;
         }
     }
 
-    private static boolean checkHouseNumber(String str) {
+    private static boolean checkHouseNumber(String str) throws NumberFormatException {
         int i = 0;
         for (int i2 = 0; i2 < str.length(); i2++) {
             if (Character.isDigit(str.charAt(i2))) {
@@ -66,31 +67,31 @@ class FindAddress {
         if (!matcher.find()) {
             return true;
         }
-        int parseInt = Integer.parseInt(matcher.group(1));
-        if (parseInt == 0) {
+        int i3 = Integer.parseInt(matcher.group(1));
+        if (i3 == 0) {
             return false;
         }
         String lowerCase = matcher.group(2).toLowerCase(Locale.getDefault());
-        int i3 = parseInt % 10;
-        if (i3 == 1) {
-            return lowerCase.equals(parseInt % 100 != 11 ? Telephony.BaseMmsColumns.STATUS : "th");
+        int i4 = i3 % 10;
+        if (i4 == 1) {
+            return lowerCase.equals(i3 % 100 != 11 ? Telephony.BaseMmsColumns.STATUS : "th");
         }
-        if (i3 == 2) {
-            return lowerCase.equals(parseInt % 100 != 12 ? "nd" : "th");
+        if (i4 == 2) {
+            return lowerCase.equals(i3 % 100 != 12 ? "nd" : "th");
         }
-        if (i3 != 3) {
+        if (i4 != 3) {
             return lowerCase.equals("th");
         }
-        return lowerCase.equals(parseInt % 100 != 13 ? "rd" : "th");
+        return lowerCase.equals(i3 % 100 != 13 ? "rd" : "th");
     }
 
     private static MatchResult matchHouseNumber(String str, int i) {
         if (i > 0 && HOUSE_PRE_DELIM.indexOf(str.charAt(i - 1)) == -1) {
             return null;
         }
-        Matcher region = sHouseNumberRe.matcher(str).region(i, str.length());
-        if (region.lookingAt()) {
-            MatchResult matchResult = region.toMatchResult();
+        Matcher matcherRegion = sHouseNumberRe.matcher(str).region(i, str.length());
+        if (matcherRegion.lookingAt()) {
+            MatchResult matchResult = matcherRegion.toMatchResult();
             if (checkHouseNumber(matchResult.group(0))) {
                 return matchResult;
             }
@@ -102,9 +103,9 @@ class FindAddress {
         if (i > 0 && WORD_DELIM.indexOf(str.charAt(i - 1)) == -1) {
             return null;
         }
-        Matcher region = sStateRe.matcher(str).region(i, str.length());
-        if (region.lookingAt()) {
-            return region.toMatchResult();
+        Matcher matcherRegion = sStateRe.matcher(str).region(i, str.length());
+        if (matcherRegion.lookingAt()) {
+            return matcherRegion.toMatchResult();
         }
         return null;
     }
@@ -113,171 +114,137 @@ class FindAddress {
         if (matchResult == null) {
             return false;
         }
-        int groupCount = matchResult.groupCount();
+        int iGroupCount = matchResult.groupCount();
         while (true) {
-            if (groupCount <= 0) {
+            if (iGroupCount <= 0) {
                 break;
             }
-            int i = groupCount - 1;
-            if (matchResult.group(groupCount) != null) {
-                groupCount = i;
+            int i = iGroupCount - 1;
+            if (matchResult.group(iGroupCount) != null) {
+                iGroupCount = i;
                 break;
             }
-            groupCount = i;
+            iGroupCount = i;
         }
-        return sZipCodeRe.matcher(str).matches() && sStateZipCodeRanges[groupCount].matches(str);
+        return sZipCodeRe.matcher(str).matches() && sStateZipCodeRanges[iGroupCount].matches(str);
     }
 
     private static boolean isValidLocationName(String str) {
         return sLocationNameRe.matcher(str).matches();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x0026, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:58:0x00d5, code lost:
+    
+        if (r10 <= 0) goto L60;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:59:0x00d7, code lost:
+    
+        return r10;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x00d8, code lost:
+    
+        if (r9 <= 0) goto L62;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:62:0x00db, code lost:
+    
+        r9 = r14;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:64:0x00dd, code lost:
+    
+        return -r9;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:9:0x0026, code lost:
     
         return -r13;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int attemptMatch(java.lang.String r13, java.util.regex.MatchResult r14) {
-        /*
-            int r14 = r14.end()
-            java.util.regex.Pattern r0 = android.webkit.FindAddress.sWordRe
-            java.util.regex.Matcher r0 = r0.matcher(r13)
-            r1 = -1
-            r2 = 1
-            r3 = 0
-            java.lang.String r4 = ""
-            r9 = r1
-            r10 = r9
-            r5 = r2
-            r6 = r5
-            r7 = r6
-            r8 = r3
-        L15:
-            int r11 = r13.length()
-            if (r14 >= r11) goto Ld5
-            boolean r11 = r0.find(r14)
-            if (r11 != 0) goto L27
-            int r13 = r13.length()
-        L25:
-            int r13 = -r13
-            return r13
-        L27:
-            int r11 = r0.end()
-            int r12 = r0.start()
-            int r11 = r11 - r12
-            r12 = 25
-            if (r11 <= r12) goto L39
-            int r13 = r0.end()
-            goto L25
-        L39:
-            int r11 = r0.start()
-            if (r14 >= r11) goto L51
-            int r11 = r14 + 1
-            char r14 = r13.charAt(r14)
-            java.lang.String r12 = "\n\u000b\f\r\u0085\u2028\u2029"
-            int r14 = r12.indexOf(r14)
-            if (r14 == r1) goto L4f
-            int r5 = r5 + 1
-        L4f:
-            r14 = r11
-            goto L39
-        L51:
-            r11 = 5
-            if (r5 <= r11) goto L56
-            goto Ld5
-        L56:
-            int r6 = r6 + r2
-            r12 = 14
-            if (r6 <= r12) goto L5d
-            goto Ld5
-        L5d:
-            java.util.regex.MatchResult r12 = matchHouseNumber(r13, r14)
-            if (r12 == 0) goto L6d
-            if (r7 == 0) goto L69
-            if (r5 <= r2) goto L69
-            int r13 = -r14
-            return r13
-        L69:
-            if (r9 != r1) goto Lcb
-            r9 = r14
-            goto Lcb
-        L6d:
-            java.lang.String r7 = r0.group(r3)
-            boolean r7 = isValidLocationName(r7)
-            if (r7 == 0) goto L7a
-            r8 = r2
-        L78:
-            r7 = r3
-            goto Lcb
-        L7a:
-            if (r6 != r11) goto L83
-            if (r8 != 0) goto L83
-            int r14 = r0.end()
-            goto Ld5
-        L83:
-            if (r8 == 0) goto L78
-            r7 = 4
-            if (r6 <= r7) goto L78
-            java.util.regex.MatchResult r14 = matchState(r13, r14)
-            if (r14 == 0) goto L78
-            java.lang.String r7 = "et"
-            boolean r4 = r4.equals(r7)
-            if (r4 == 0) goto La7
-            java.lang.String r4 = r14.group(r3)
-            java.lang.String r7 = "al"
-            boolean r4 = r4.equals(r7)
-            if (r4 == 0) goto La7
-            int r14 = r14.end()
-            goto Ld5
-        La7:
-            java.util.regex.Pattern r4 = android.webkit.FindAddress.sWordRe
-            java.util.regex.Matcher r4 = r4.matcher(r13)
-            int r7 = r14.end()
-            boolean r7 = r4.find(r7)
-            if (r7 == 0) goto Lc6
-            java.lang.String r7 = r4.group(r3)
-            boolean r14 = isValidZipCode(r7, r14)
-            if (r14 == 0) goto L78
-            int r13 = r4.end()
-            return r13
-        Lc6:
-            int r10 = r14.end()
-            goto L78
-        Lcb:
-            java.lang.String r4 = r0.group(r3)
-            int r14 = r0.end()
-            goto L15
-        Ld5:
-            if (r10 <= 0) goto Ld8
-            return r10
-        Ld8:
-            if (r9 <= 0) goto Ldb
-            goto Ldc
-        Ldb:
-            r9 = r14
-        Ldc:
-            int r13 = -r9
-            return r13
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.webkit.FindAddress.attemptMatch(java.lang.String, java.util.regex.MatchResult):int");
+    private static int attemptMatch(String str, MatchResult matchResult) {
+        int length;
+        MatchResult matchResultMatchState;
+        int iEnd = matchResult.end();
+        Matcher matcher = sWordRe.matcher(str);
+        String strGroup = "";
+        int i = -1;
+        int iEnd2 = -1;
+        int i2 = 1;
+        int i3 = 1;
+        boolean z = true;
+        boolean z2 = false;
+        while (true) {
+            if (iEnd < str.length()) {
+                if (!matcher.find(iEnd)) {
+                    length = str.length();
+                    break;
+                }
+                if (matcher.end() - matcher.start() > 25) {
+                    length = matcher.end();
+                    break;
+                }
+                while (iEnd < matcher.start()) {
+                    int i4 = iEnd + 1;
+                    if (NL.indexOf(str.charAt(iEnd)) != -1) {
+                        i2++;
+                    }
+                    iEnd = i4;
+                }
+                if (i2 > 5 || (i3 = i3 + 1) > 14) {
+                    break;
+                }
+                if (matchHouseNumber(str, iEnd) == null) {
+                    if (!isValidLocationName(matcher.group(0))) {
+                        if (i3 == 5 && !z2) {
+                            iEnd = matcher.end();
+                            break;
+                        }
+                        if (z2 && i3 > 4 && (matchResultMatchState = matchState(str, iEnd)) != null) {
+                            if (strGroup.equals("et") && matchResultMatchState.group(0).equals(XmlTags.ATTR_ALGO)) {
+                                iEnd = matchResultMatchState.end();
+                                break;
+                            }
+                            Matcher matcher2 = sWordRe.matcher(str);
+                            if (matcher2.find(matchResultMatchState.end())) {
+                                if (isValidZipCode(matcher2.group(0), matchResultMatchState)) {
+                                    return matcher2.end();
+                                }
+                            } else {
+                                iEnd2 = matchResultMatchState.end();
+                            }
+                        }
+                    } else {
+                        z2 = true;
+                    }
+                    z = false;
+                } else {
+                    if (z && i2 > 1) {
+                        return -iEnd;
+                    }
+                    if (i == -1) {
+                        i = iEnd;
+                    }
+                }
+                strGroup = matcher.group(0);
+                iEnd = matcher.end();
+            } else {
+                break;
+            }
+        }
     }
 
     static String findAddress(String str) {
         Matcher matcher = sHouseNumberRe.matcher(str);
-        int i = 0;
-        while (matcher.find(i)) {
+        int iEnd = 0;
+        while (matcher.find(iEnd)) {
             if (checkHouseNumber(matcher.group(0))) {
-                int start = matcher.start();
-                int attemptMatch = attemptMatch(str, matcher);
-                if (attemptMatch > 0) {
-                    return str.substring(start, attemptMatch);
+                int iStart = matcher.start();
+                int iAttemptMatch = attemptMatch(str, matcher);
+                if (iAttemptMatch > 0) {
+                    return str.substring(iStart, iAttemptMatch);
                 }
-                i = -attemptMatch;
+                iEnd = -iAttemptMatch;
             } else {
-                i = matcher.end();
+                iEnd = matcher.end();
             }
         }
         return null;

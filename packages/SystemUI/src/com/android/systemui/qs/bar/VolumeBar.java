@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -27,7 +28,6 @@ import com.android.systemui.volume.view.icon.QPVolumeIcon;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class VolumeBar extends BarItemImpl implements TileHostable {
     public final Context mContext;
@@ -89,9 +89,9 @@ public class VolumeBar extends BarItemImpl implements TileHostable {
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
         Log.i(this.TAG, "inflateViews");
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_volume_bar, viewGroup, false);
-        this.mBarRootView = inflate;
-        this.mTileLayout = (LinearLayout) inflate.findViewById(R.id.volume_tile_layout);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_volume_bar, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        this.mTileLayout = (LinearLayout) viewInflate.findViewById(R.id.volume_tile_layout);
         this.mSliderContainer = (RelativeLayout) this.mBarRootView.findViewById(R.id.slider_container);
         this.mSlider = (VolumeToggleSeekBar) this.mBarRootView.findViewById(R.id.slider);
         this.mVolumeIcon = (QPVolumeIcon) this.mBarRootView.findViewById(R.id.qs_volume_button);
@@ -105,8 +105,8 @@ public class VolumeBar extends BarItemImpl implements TileHostable {
         }
         this.mBarRootView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.bar.VolumeBar$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                VolumeBar volumeBar = VolumeBar.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                VolumeBar volumeBar = this.f$0;
                 volumeBar.mSecQSDetailController.showTargetDetail(volumeBar.mSoundCraftQpDetailAdapter);
                 SystemUIAnalytics.sendRunstoneEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_BRIGHTNESS_EXPAND, SystemUIAnalytics.RUNESTONE_LABEL_QP_LAYOUT);
                 SystemUIAnalytics.sendScreenViewLog(SystemUIAnalytics.SID_BRIGHTNESS_DETAIL);
@@ -122,9 +122,9 @@ public class VolumeBar extends BarItemImpl implements TileHostable {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void makeCloneBar() {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_volume_bar, (ViewGroup) null);
-        this.mClonedBarView = inflate;
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.volume_tile_layout);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_volume_bar, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.volume_tile_layout);
         ViewGroup viewGroup = (ViewGroup) this.mClonedBarView.findViewById(R.id.slider_container);
         VolumeToggleSeekBar volumeToggleSeekBar = (VolumeToggleSeekBar) this.mClonedBarView.findViewById(R.id.slider);
         volumeToggleSeekBar.setImportantForAccessibility(2);

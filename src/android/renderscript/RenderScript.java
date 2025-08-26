@@ -467,7 +467,7 @@ public class RenderScript {
         rsnContextDestroy(j);
     }
 
-    synchronized void nContextSetSurface(int i, int i2, Surface surface) {
+    synchronized void nContextSetSurface(int i, int i2, Surface surface) throws Throwable {
         try {
             try {
                 validate();
@@ -482,7 +482,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nContextSetSurfaceTexture(int i, int i2, SurfaceTexture surfaceTexture) {
+    synchronized void nContextSetSurfaceTexture(int i, int i2, SurfaceTexture surfaceTexture) throws Throwable {
         try {
             try {
                 validate();
@@ -563,23 +563,23 @@ public class RenderScript {
     }
 
     synchronized long nClosureCreate(long j, long j2, long[] jArr, long[] jArr2, int[] iArr, long[] jArr3, long[] jArr4) {
-        long rsnClosureCreate;
+        long jRsnClosureCreate;
         validate();
-        rsnClosureCreate = rsnClosureCreate(this.mContext, j, j2, jArr, jArr2, iArr, jArr3, jArr4);
-        if (rsnClosureCreate == 0) {
+        jRsnClosureCreate = rsnClosureCreate(this.mContext, j, j2, jArr, jArr2, iArr, jArr3, jArr4);
+        if (jRsnClosureCreate == 0) {
             throw new RSRuntimeException("Failed creating closure.");
         }
-        return rsnClosureCreate;
+        return jRsnClosureCreate;
     }
 
     synchronized long nInvokeClosureCreate(long j, byte[] bArr, long[] jArr, long[] jArr2, int[] iArr) {
-        long rsnInvokeClosureCreate;
+        long jRsnInvokeClosureCreate;
         validate();
-        rsnInvokeClosureCreate = rsnInvokeClosureCreate(this.mContext, j, bArr, jArr, jArr2, iArr);
-        if (rsnInvokeClosureCreate == 0) {
+        jRsnInvokeClosureCreate = rsnInvokeClosureCreate(this.mContext, j, bArr, jArr, jArr2, iArr);
+        if (jRsnInvokeClosureCreate == 0) {
             throw new RSRuntimeException("Failed creating closure.");
         }
-        return rsnInvokeClosureCreate;
+        return jRsnInvokeClosureCreate;
     }
 
     synchronized void nClosureSetArg(long j, int i, long j2, int i2) {
@@ -592,13 +592,13 @@ public class RenderScript {
         rsnClosureSetGlobal(this.mContext, j, j2, j3, i);
     }
 
-    synchronized long nScriptGroup2Create(String str, String str2, long[] jArr) {
+    synchronized long nScriptGroup2Create(String str, String str2, long[] jArr) throws Throwable {
         try {
             try {
                 validate();
-                long rsnScriptGroup2Create = rsnScriptGroup2Create(this.mContext, str, str2, jArr);
-                if (rsnScriptGroup2Create != 0) {
-                    return rsnScriptGroup2Create;
+                long jRsnScriptGroup2Create = rsnScriptGroup2Create(this.mContext, str, str2, jArr);
+                if (jRsnScriptGroup2Create != 0) {
+                    return jRsnScriptGroup2Create;
                 }
                 throw new RSRuntimeException("Failed creating script group.");
             } catch (Throwable th) {
@@ -643,31 +643,31 @@ public class RenderScript {
         }
     }
 
-    synchronized long nElementCreate(long j, int i, boolean z, int i2) {
+    synchronized long nElementCreate(long j, int i, boolean z, int i2) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnElementCreate(this.mContext, j, i, z, i2);
+            try {
+                validate();
+                return rsnElementCreate(this.mContext, j, i, z, i2);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nElementCreate2(long[] jArr, String[] strArr, int[] iArr) {
+    synchronized long nElementCreate2(long[] jArr, String[] strArr, int[] iArr) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnElementCreate2(this.mContext, jArr, strArr, iArr);
+            try {
+                validate();
+                return rsnElementCreate2(this.mContext, jArr, strArr, iArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -688,15 +688,15 @@ public class RenderScript {
 
     synchronized void nElementGetSubElements(long j, long[] jArr, String[] strArr, int[] iArr) {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            rsnElementGetSubElements(this.mContext, j, jArr, strArr, iArr);
+            try {
+                validate();
+                rsnElementGetSubElements(this.mContext, j, jArr, strArr, iArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -705,7 +705,7 @@ public class RenderScript {
         return rsnTypeCreate(this.mContext, j, i, i2, i3, z, z2, i4);
     }
 
-    synchronized void nTypeGetNativeData(long j, long[] jArr) {
+    synchronized void nTypeGetNativeData(long j, long[] jArr) throws Throwable {
         try {
             try {
                 validate();
@@ -725,49 +725,49 @@ public class RenderScript {
         return rsnAllocationCreateTyped(this.mContext, j, i, i2, j2);
     }
 
-    synchronized long nAllocationCreateFromBitmap(long j, int i, Bitmap bitmap, int i2) {
+    synchronized long nAllocationCreateFromBitmap(long j, int i, Bitmap bitmap, int i2) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnAllocationCreateFromBitmap(this.mContext, j, i, bitmap, i2);
+            try {
+                validate();
+                return rsnAllocationCreateFromBitmap(this.mContext, j, i, bitmap, i2);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nAllocationCreateBitmapBackedAllocation(long j, int i, Bitmap bitmap, int i2) {
+    synchronized long nAllocationCreateBitmapBackedAllocation(long j, int i, Bitmap bitmap, int i2) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnAllocationCreateBitmapBackedAllocation(this.mContext, j, i, bitmap, i2);
+            try {
+                validate();
+                return rsnAllocationCreateBitmapBackedAllocation(this.mContext, j, i, bitmap, i2);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
     synchronized long nAllocationCubeCreateFromBitmap(long j, int i, Bitmap bitmap, int i2) {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnAllocationCubeCreateFromBitmap(this.mContext, j, i, bitmap, i2);
+            try {
+                validate();
+                return rsnAllocationCubeCreateFromBitmap(this.mContext, j, i, bitmap, i2);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized void nAllocationCopyToBitmap(long j, Bitmap bitmap) {
+    synchronized void nAllocationCopyToBitmap(long j, Bitmap bitmap) throws Throwable {
         try {
             try {
                 validate();
@@ -782,7 +782,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nAllocationSyncAll(long j, int i) {
+    synchronized void nAllocationSyncAll(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -867,7 +867,7 @@ public class RenderScript {
         rsnAllocationGenerateMipmaps(this.mContext, j);
     }
 
-    synchronized void nAllocationCopyFromBitmap(long j, Bitmap bitmap) {
+    synchronized void nAllocationCopyFromBitmap(long j, Bitmap bitmap) throws Throwable {
         try {
             try {
                 validate();
@@ -947,7 +947,7 @@ public class RenderScript {
         return rsnAllocationGetType(this.mContext, j);
     }
 
-    synchronized void nAllocationResize1D(long j, int i) {
+    synchronized void nAllocationResize1D(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -962,7 +962,7 @@ public class RenderScript {
         }
     }
 
-    synchronized long nAllocationAdapterCreate(long j, long j2) {
+    synchronized long nAllocationAdapterCreate(long j, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1002,21 +1002,21 @@ public class RenderScript {
         return rsnFileA3DGetNumIndexEntries(this.mContext, j);
     }
 
-    synchronized void nFileA3DGetIndexEntries(long j, int i, int[] iArr, String[] strArr) {
+    synchronized void nFileA3DGetIndexEntries(long j, int i, int[] iArr, String[] strArr) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            rsnFileA3DGetIndexEntries(this.mContext, j, i, iArr, strArr);
+            try {
+                validate();
+                rsnFileA3DGetIndexEntries(this.mContext, j, i, iArr, strArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nFileA3DGetEntryByIndex(long j, int i) {
+    synchronized long nFileA3DGetEntryByIndex(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1031,49 +1031,49 @@ public class RenderScript {
         }
     }
 
-    synchronized long nFontCreateFromFile(String str, float f, int i) {
+    synchronized long nFontCreateFromFile(String str, float f, int i) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnFontCreateFromFile(this.mContext, str, f, i);
+            try {
+                validate();
+                return rsnFontCreateFromFile(this.mContext, str, f, i);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nFontCreateFromAssetStream(String str, float f, int i, long j) {
+    synchronized long nFontCreateFromAssetStream(String str, float f, int i, long j) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnFontCreateFromAssetStream(this.mContext, str, f, i, j);
+            try {
+                validate();
+                return rsnFontCreateFromAssetStream(this.mContext, str, f, i, j);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nFontCreateFromAsset(AssetManager assetManager, String str, float f, int i) {
+    synchronized long nFontCreateFromAsset(AssetManager assetManager, String str, float f, int i) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnFontCreateFromAsset(this.mContext, assetManager, str, f, i);
+            try {
+                validate();
+                return rsnFontCreateFromAsset(this.mContext, assetManager, str, f, i);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized void nScriptBindAllocation(long j, long j2, int i) {
+    synchronized void nScriptBindAllocation(long j, long j2, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1088,7 +1088,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetTimeZone(long j, byte[] bArr) {
+    synchronized void nScriptSetTimeZone(long j, byte[] bArr) throws Throwable {
         try {
             try {
                 validate();
@@ -1103,7 +1103,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptInvoke(long j, int i) {
+    synchronized void nScriptInvoke(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1128,7 +1128,7 @@ public class RenderScript {
         rsnScriptReduce(this.mContext, j, i, jArr, j2, iArr);
     }
 
-    synchronized void nScriptInvokeV(long j, int i, byte[] bArr) {
+    synchronized void nScriptInvokeV(long j, int i, byte[] bArr) throws Throwable {
         try {
             try {
                 validate();
@@ -1143,7 +1143,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetVarI(long j, int i, int i2) {
+    synchronized void nScriptSetVarI(long j, int i, int i2) throws Throwable {
         try {
             try {
                 validate();
@@ -1158,7 +1158,7 @@ public class RenderScript {
         }
     }
 
-    synchronized int nScriptGetVarI(long j, int i) {
+    synchronized int nScriptGetVarI(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1173,7 +1173,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetVarJ(long j, int i, long j2) {
+    synchronized void nScriptSetVarJ(long j, int i, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1188,7 +1188,7 @@ public class RenderScript {
         }
     }
 
-    synchronized long nScriptGetVarJ(long j, int i) {
+    synchronized long nScriptGetVarJ(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1203,7 +1203,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetVarF(long j, int i, float f) {
+    synchronized void nScriptSetVarF(long j, int i, float f) throws Throwable {
         try {
             try {
                 validate();
@@ -1218,7 +1218,7 @@ public class RenderScript {
         }
     }
 
-    synchronized float nScriptGetVarF(long j, int i) {
+    synchronized float nScriptGetVarF(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1233,7 +1233,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetVarD(long j, int i, double d) {
+    synchronized void nScriptSetVarD(long j, int i, double d) throws Throwable {
         try {
             try {
                 validate();
@@ -1248,7 +1248,7 @@ public class RenderScript {
         }
     }
 
-    synchronized double nScriptGetVarD(long j, int i) {
+    synchronized double nScriptGetVarD(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1263,7 +1263,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptSetVarV(long j, int i, byte[] bArr) {
+    synchronized void nScriptSetVarV(long j, int i, byte[] bArr) throws Throwable {
         try {
             try {
                 validate();
@@ -1278,7 +1278,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nScriptGetVarV(long j, int i, byte[] bArr) {
+    synchronized void nScriptGetVarV(long j, int i, byte[] bArr) throws Throwable {
         try {
             try {
                 validate();
@@ -1298,7 +1298,7 @@ public class RenderScript {
         rsnScriptSetVarVE(this.mContext, j, i, bArr, j2, iArr);
     }
 
-    synchronized void nScriptSetVarObj(long j, int i, long j2) {
+    synchronized void nScriptSetVarObj(long j, int i, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1313,21 +1313,21 @@ public class RenderScript {
         }
     }
 
-    synchronized long nScriptCCreate(String str, String str2, byte[] bArr, int i) {
+    synchronized long nScriptCCreate(String str, String str2, byte[] bArr, int i) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnScriptCCreate(this.mContext, str, str2, bArr, i);
+            try {
+                validate();
+                return rsnScriptCCreate(this.mContext, str, str2, bArr, i);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nScriptIntrinsicCreate(int i, long j) {
+    synchronized long nScriptIntrinsicCreate(int i, long j) throws Throwable {
         try {
             try {
                 validate();
@@ -1342,21 +1342,21 @@ public class RenderScript {
         }
     }
 
-    synchronized long nScriptKernelIDCreate(long j, int i, int i2) {
+    synchronized long nScriptKernelIDCreate(long j, int i, int i2) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnScriptKernelIDCreate(this.mContext, j, i, i2);
+            try {
+                validate();
+                return rsnScriptKernelIDCreate(this.mContext, j, i, i2);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nScriptInvokeIDCreate(long j, int i) {
+    synchronized long nScriptInvokeIDCreate(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1371,7 +1371,7 @@ public class RenderScript {
         }
     }
 
-    synchronized long nScriptFieldIDCreate(long j, int i) {
+    synchronized long nScriptFieldIDCreate(long j, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1386,17 +1386,17 @@ public class RenderScript {
         }
     }
 
-    synchronized long nScriptGroupCreate(long[] jArr, long[] jArr2, long[] jArr3, long[] jArr4, long[] jArr5) {
+    synchronized long nScriptGroupCreate(long[] jArr, long[] jArr2, long[] jArr3, long[] jArr4, long[] jArr5) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnScriptGroupCreate(this.mContext, jArr, jArr2, jArr3, jArr4, jArr5);
+            try {
+                validate();
+                return rsnScriptGroupCreate(this.mContext, jArr, jArr2, jArr3, jArr4, jArr5);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -1430,7 +1430,7 @@ public class RenderScript {
         return rsnProgramRasterCreate(this.mContext, z, i);
     }
 
-    synchronized void nProgramBindConstants(long j, int i, long j2) {
+    synchronized void nProgramBindConstants(long j, int i, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1445,7 +1445,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nProgramBindTexture(long j, int i, long j2) {
+    synchronized void nProgramBindTexture(long j, int i, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1460,7 +1460,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nProgramBindSampler(long j, int i, long j2) {
+    synchronized void nProgramBindSampler(long j, int i, long j2) throws Throwable {
         try {
             try {
                 validate();
@@ -1475,45 +1475,45 @@ public class RenderScript {
         }
     }
 
-    synchronized long nProgramFragmentCreate(String str, String[] strArr, long[] jArr) {
+    synchronized long nProgramFragmentCreate(String str, String[] strArr, long[] jArr) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnProgramFragmentCreate(this.mContext, str, strArr, jArr);
+            try {
+                validate();
+                return rsnProgramFragmentCreate(this.mContext, str, strArr, jArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nProgramVertexCreate(String str, String[] strArr, long[] jArr) {
+    synchronized long nProgramVertexCreate(String str, String[] strArr, long[] jArr) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnProgramVertexCreate(this.mContext, str, strArr, jArr);
+            try {
+                validate();
+                return rsnProgramVertexCreate(this.mContext, str, strArr, jArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
-    synchronized long nMeshCreate(long[] jArr, long[] jArr2, int[] iArr) {
+    synchronized long nMeshCreate(long[] jArr, long[] jArr2, int[] iArr) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            return rsnMeshCreate(this.mContext, jArr, jArr2, iArr);
+            try {
+                validate();
+                return rsnMeshCreate(this.mContext, jArr, jArr2, iArr);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -1527,7 +1527,7 @@ public class RenderScript {
         return rsnMeshGetIndexCount(this.mContext, j);
     }
 
-    synchronized void nMeshGetVertices(long j, long[] jArr, int i) {
+    synchronized void nMeshGetVertices(long j, long[] jArr, int i) throws Throwable {
         try {
             try {
                 validate();
@@ -1542,17 +1542,17 @@ public class RenderScript {
         }
     }
 
-    synchronized void nMeshGetIndices(long j, long[] jArr, int[] iArr, int i) {
+    synchronized void nMeshGetIndices(long j, long[] jArr, int[] iArr, int i) throws Throwable {
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            validate();
-            rsnMeshGetIndices(this.mContext, j, jArr, iArr, i);
+            try {
+                validate();
+                rsnMeshGetIndices(this.mContext, j, jArr, iArr, i);
+            } catch (Throwable th) {
+                th = th;
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
     }
 
@@ -1657,11 +1657,11 @@ public class RenderScript {
             while (this.mRun) {
                 iArr[0] = 0;
                 RenderScript renderScript2 = this.mRS;
-                int nContextPeekMessage = renderScript2.nContextPeekMessage(renderScript2.mContext, this.mAuxData);
+                int iNContextPeekMessage = renderScript2.nContextPeekMessage(renderScript2.mContext, this.mAuxData);
                 int[] iArr2 = this.mAuxData;
                 int i = iArr2[1];
                 int i2 = iArr2[0];
-                if (nContextPeekMessage == 4) {
+                if (iNContextPeekMessage == 4) {
                     if ((i >> 2) >= iArr.length) {
                         iArr = new int[(i + 3) >> 2];
                     }
@@ -1677,20 +1677,20 @@ public class RenderScript {
                     } else {
                         throw new RSInvalidStateException("Received a message from the script with no message handler installed.");
                     }
-                } else if (nContextPeekMessage == 3) {
+                } else if (iNContextPeekMessage == 3) {
                     RenderScript renderScript4 = this.mRS;
-                    String nContextGetErrorMessage = renderScript4.nContextGetErrorMessage(renderScript4.mContext);
+                    String strNContextGetErrorMessage = renderScript4.nContextGetErrorMessage(renderScript4.mContext);
                     if (i2 >= 4096 || (i2 >= 2048 && (this.mRS.mContextType != ContextType.DEBUG || this.mRS.mErrorCallback == null))) {
-                        throw new RSRuntimeException("Fatal error " + i2 + ", details: " + nContextGetErrorMessage);
+                        throw new RSRuntimeException("Fatal error " + i2 + ", details: " + strNContextGetErrorMessage);
                     }
                     if (this.mRS.mErrorCallback != null) {
-                        this.mRS.mErrorCallback.mErrorMessage = nContextGetErrorMessage;
+                        this.mRS.mErrorCallback.mErrorMessage = strNContextGetErrorMessage;
                         this.mRS.mErrorCallback.mErrorNum = i2;
                         this.mRS.mErrorCallback.run();
                     } else {
-                        Log.e(RenderScript.LOG_TAG, "non fatal RS error, " + nContextGetErrorMessage);
+                        Log.e(RenderScript.LOG_TAG, "non fatal RS error, " + strNContextGetErrorMessage);
                     }
-                } else if (nContextPeekMessage == 5) {
+                } else if (iNContextPeekMessage == 5) {
                     RenderScript renderScript5 = this.mRS;
                     if (renderScript5.nContextGetUserMessage(renderScript5.mContext, iArr) != 5) {
                         throw new RSDriverException("Error processing message from RenderScript.");
@@ -1718,19 +1718,15 @@ public class RenderScript {
     }
 
     static synchronized String getCachePath() {
-        String str;
-        synchronized (RenderScript.class) {
-            if (mCachePath == null) {
-                if (RenderScriptCacheDir.mCacheDir == null) {
-                    throw new RSRuntimeException("RenderScript code cache directory uninitialized.");
-                }
-                File file = new File(RenderScriptCacheDir.mCacheDir, "com.android.renderscript.cache");
-                mCachePath = file.getAbsolutePath();
-                file.mkdirs();
+        if (mCachePath == null) {
+            if (RenderScriptCacheDir.mCacheDir == null) {
+                throw new RSRuntimeException("RenderScript code cache directory uninitialized.");
             }
-            str = mCachePath;
+            File file = new File(RenderScriptCacheDir.mCacheDir, "com.android.renderscript.cache");
+            mCachePath = file.getAbsolutePath();
+            file.mkdirs();
         }
-        return str;
+        return mCachePath;
     }
 
     private static RenderScript internalCreate(Context context, int i, ContextType contextType, int i2) {
@@ -1742,12 +1738,12 @@ public class RenderScript {
             throw new RSIllegalArgumentException("Invalid flags passed.");
         }
         RenderScript renderScript = new RenderScript(context);
-        long nContextCreate = renderScript.nContextCreate(renderScript.nDeviceCreate(), i2, i, contextType.mID);
-        renderScript.mContext = nContextCreate;
+        long jNContextCreate = renderScript.nContextCreate(renderScript.nDeviceCreate(), i2, i, contextType.mID);
+        renderScript.mContext = jNContextCreate;
         renderScript.mContextType = contextType;
         renderScript.mContextFlags = i2;
         renderScript.mContextSdkVersion = i;
-        if (nContextCreate == 0) {
+        if (jNContextCreate == 0) {
             throw new RSDriverException("Failed to create RS context.");
         }
         renderScript.nContextSetCacheDir(getCachePath());
@@ -1785,10 +1781,10 @@ public class RenderScript {
                     return next;
                 }
             }
-            RenderScript internalCreate = internalCreate(context, i, contextType, i2);
-            internalCreate.mIsProcessContext = true;
-            mProcessContextList.add(internalCreate);
-            return internalCreate;
+            RenderScript renderScriptInternalCreate = internalCreate(context, i, contextType, i2);
+            renderScriptInternalCreate.mIsProcessContext = true;
+            mProcessContextList.add(renderScriptInternalCreate);
+            return renderScriptInternalCreate;
         }
     }
 

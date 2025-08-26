@@ -1,6 +1,5 @@
 package com.google.common.collect;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class RegularImmutableSet<E> extends ImmutableSet<E> {
     public static final RegularImmutableSet EMPTY;
@@ -31,9 +30,9 @@ final class RegularImmutableSet<E> extends ImmutableSet<E> {
         if (obj == null || objArr.length == 0) {
             return false;
         }
-        int smearedHash = Hashing.smearedHash(obj);
+        int iSmearedHash = Hashing.smearedHash(obj);
         while (true) {
-            int i = smearedHash & this.mask;
+            int i = iSmearedHash & this.mask;
             Object obj2 = objArr[i];
             if (obj2 == null) {
                 return false;
@@ -41,7 +40,7 @@ final class RegularImmutableSet<E> extends ImmutableSet<E> {
             if (obj2.equals(obj)) {
                 return true;
             }
-            smearedHash = i + 1;
+            iSmearedHash = i + 1;
         }
     }
 

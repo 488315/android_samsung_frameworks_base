@@ -54,15 +54,15 @@ public class WatchHeaderListView extends ListView {
     @Override // android.widget.ListView, android.view.ViewGroup, android.view.View
     protected View findViewTraversal(int i) {
         View view;
-        View findViewTraversal = super.findViewTraversal(i);
-        return (findViewTraversal != null || (view = this.mTopPanel) == null || view.isRootNamespace()) ? findViewTraversal : this.mTopPanel.findViewById(i);
+        View viewFindViewTraversal = super.findViewTraversal(i);
+        return (viewFindViewTraversal != null || (view = this.mTopPanel) == null || view.isRootNamespace()) ? viewFindViewTraversal : this.mTopPanel.findViewById(i);
     }
 
     @Override // android.widget.ListView, android.view.ViewGroup, android.view.View
     protected View findViewWithTagTraversal(Object obj) {
         View view;
-        View findViewWithTagTraversal = super.findViewWithTagTraversal(obj);
-        return (findViewWithTagTraversal != null || (view = this.mTopPanel) == null || view.isRootNamespace()) ? findViewWithTagTraversal : this.mTopPanel.findViewWithTag(obj);
+        View viewFindViewWithTagTraversal = super.findViewWithTagTraversal(obj);
+        return (viewFindViewWithTagTraversal != null || (view = this.mTopPanel) == null || view.isRootNamespace()) ? viewFindViewWithTagTraversal : this.mTopPanel.findViewWithTag(obj);
     }
 
     @Override // android.widget.ListView, android.view.ViewGroup, android.view.View

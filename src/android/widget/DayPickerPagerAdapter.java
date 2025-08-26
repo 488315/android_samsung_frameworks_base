@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.icu.util.Calendar;
@@ -51,9 +52,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
         this.mInflater = LayoutInflater.from(context);
         this.mLayoutResId = i;
         this.mCalendarViewId = i2;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843820});
-        this.mDayHighlightColor = obtainStyledAttributes.getColorStateList(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843820});
+        this.mDayHighlightColor = typedArrayObtainStyledAttributes.getColorStateList(0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void setRange(Calendar calendar, Calendar calendar2) {
@@ -160,9 +161,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
     }
 
     @Override // com.android.internal.widget.PagerAdapter
-    public Object instantiateItem(ViewGroup viewGroup, int i) {
-        View inflate = this.mInflater.inflate(this.mLayoutResId, viewGroup, false);
-        SimpleMonthView simpleMonthView = (SimpleMonthView) inflate.findViewById(this.mCalendarViewId);
+    public Object instantiateItem(ViewGroup viewGroup, int i) throws Resources.NotFoundException {
+        View viewInflate = this.mInflater.inflate(this.mLayoutResId, viewGroup, false);
+        SimpleMonthView simpleMonthView = (SimpleMonthView) viewInflate.findViewById(this.mCalendarViewId);
         simpleMonthView.setOnDayClickListener(this.mOnDayClickListener);
         simpleMonthView.setMonthTextAppearance(this.mMonthTextAppearance);
         simpleMonthView.setDayOfWeekTextAppearance(this.mDayOfWeekTextAppearance);
@@ -186,9 +187,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
         Calendar calendar = this.mSelectedDay;
         int i2 = (calendar != null && calendar.get(2) == monthForPosition && this.mSelectedDay.get(1) == yearForPosition) ? this.mSelectedDay.get(5) : -1;
         simpleMonthView.setMonthParams(i2, monthForPosition, yearForPosition, this.mFirstDayOfWeek, (this.mMinDate.get(2) == monthForPosition && this.mMinDate.get(1) == yearForPosition) ? this.mMinDate.get(5) : 1, (this.mMaxDate.get(2) == monthForPosition && this.mMaxDate.get(1) == yearForPosition) ? this.mMaxDate.get(5) : 31);
-        ViewHolder viewHolder = new ViewHolder(i, inflate, simpleMonthView);
+        ViewHolder viewHolder = new ViewHolder(i, viewInflate, simpleMonthView);
         this.mItems.put(i, viewHolder);
-        viewGroup.addView(inflate);
+        viewGroup.addView(viewInflate);
         return viewHolder;
     }
 

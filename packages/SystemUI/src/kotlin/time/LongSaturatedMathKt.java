@@ -2,7 +2,6 @@ package kotlin.time;
 
 import kotlin.time.Duration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class LongSaturatedMathKt {
     public static final long infinityOfSign(long j) {
@@ -21,12 +20,12 @@ public abstract class LongSaturatedMathKt {
         }
         DurationUnit durationUnit2 = DurationUnit.MILLISECONDS;
         if (durationUnit.compareTo(durationUnit2) >= 0) {
-            return Duration.m3447unaryMinusUwyO8pc(infinityOfSign(j3));
+            return Duration.m3467unaryMinusUwyO8pc(infinityOfSign(j3));
         }
-        long convert = durationUnit.getTimeUnit$kotlin_stdlib().convert(1L, durationUnit2.getTimeUnit$kotlin_stdlib());
-        long j4 = (j / convert) - (j2 / convert);
-        long j5 = (j % convert) - (j2 % convert);
+        long jConvert = durationUnit.getTimeUnit$kotlin_stdlib().convert(1L, durationUnit2.getTimeUnit$kotlin_stdlib());
+        long j4 = (j / jConvert) - (j2 / jConvert);
+        long j5 = (j % jConvert) - (j2 % jConvert);
         Duration.Companion companion = Duration.Companion;
-        return Duration.m3441plusLRDsOJo(DurationKt.toDuration(j4, durationUnit2), DurationKt.toDuration(j5, durationUnit));
+        return Duration.m3461plusLRDsOJo(DurationKt.toDuration(j4, durationUnit2), DurationKt.toDuration(j5, durationUnit));
     }
 }

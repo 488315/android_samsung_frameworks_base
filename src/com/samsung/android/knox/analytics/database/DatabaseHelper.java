@@ -85,14 +85,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
     @Override // android.database.sqlite.SQLiteOpenHelper
     public void onConfigure(SQLiteDatabase sQLiteDatabase) {
         super.onConfigure(sQLiteDatabase);
-        Cursor rawQuery = sQLiteDatabase.rawQuery("PRAGMA journal_mode = OFF;", null);
-        if (rawQuery != null) {
-            rawQuery.close();
+        Cursor cursorRawQuery = sQLiteDatabase.rawQuery("PRAGMA journal_mode = OFF;", null);
+        if (cursorRawQuery != null) {
+            cursorRawQuery.close();
         }
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
-    public void onCreate(SQLiteDatabase sQLiteDatabase) {
+    public void onCreate(SQLiteDatabase sQLiteDatabase) throws SQLException {
         sQLiteDatabase.execSQL(EVENTS_CREATE_TABLE);
         sQLiteDatabase.execSQL(VERSIONING_CREATE_TABLE);
         sQLiteDatabase.execSQL(FEATURES_BLACKLIST_CREATE_TABLE);
@@ -106,7 +106,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
-    public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
+    public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) throws SQLException {
         Log.d(TAG, String.format("oldVersion=%d, newVersion=%d", Integer.valueOf(i), Integer.valueOf(i2)));
         if (i < 2) {
             sQLiteDatabase.execSQL("DROP TABLE IF EXISTS events");
@@ -171,8 +171,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public long addEvent(ContentValues contentValues, int i) {
         String str;
-        int intValue;
-        long insert;
+        int iIntValue;
+        long jInsert;
         if (!isContentValuesValid(contentValues, i)) {
             Log.e(TAG, "addEvent() : Invalid content values");
             return -1L;
@@ -186,22 +186,22 @@ class DatabaseHelper extends SQLiteOpenHelper {
             return -1L;
         }
         if (i == 0) {
-            intValue = 1;
+            iIntValue = 1;
             if (hasCleanedEventRow()) {
-                insert = updateCleanedEvent(contentValues, writableDatabase, contentValues.getAsInteger("reason").intValue());
+                jInsert = updateCleanedEvent(contentValues, writableDatabase, contentValues.getAsInteger("reason").intValue());
             } else {
-                insert = writableDatabase.insert(tableAndWhereClauseFromType[0], null, contentValues);
+                jInsert = writableDatabase.insert(tableAndWhereClauseFromType[0], null, contentValues);
             }
         } else {
-            intValue = contentValues.getAsInteger("bulk").intValue();
-            insert = writableDatabase.insert(tableAndWhereClauseFromType[0], null, contentValues);
+            iIntValue = contentValues.getAsInteger("bulk").intValue();
+            jInsert = writableDatabase.insert(tableAndWhereClauseFromType[0], null, contentValues);
         }
-        if (insert == -1) {
+        if (jInsert == -1) {
             Log.e(str2, "addEvent(): Couldn't add event");
-            return insert;
+            return jInsert;
         }
-        updateLastId((intValue + insert) - 1);
-        return insert;
+        updateLastId((iIntValue + jInsert) - 1);
+        return jInsert;
     }
 
     private String[] getTableAndWhereClauseFromType(int i) {
@@ -223,34 +223,34 @@ class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getEventChunk(Integer num) {
         int i;
         Log.d(TAG, "getEventChunk()");
-        Cursor query = getReadableDatabase().query("events", new String[]{"id", "vid", "bulk", "data"}, null, null, null, null, null, null);
+        Cursor cursorQuery = getReadableDatabase().query("events", new String[]{"id", "vid", "bulk", "data"}, null, null, null, null, null, null);
         if (num == null) {
-            return query;
+            return cursorQuery;
         }
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{"id", "vid", "bulk", "data"}, 1);
-        if (query != null && query.getCount() > 0) {
-            int columnIndex = query.getColumnIndex("id");
-            int columnIndex2 = query.getColumnIndex("vid");
-            int columnIndex3 = query.getColumnIndex("bulk");
-            int columnIndex4 = query.getColumnIndex("data");
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            int columnIndex = cursorQuery.getColumnIndex("id");
+            int columnIndex2 = cursorQuery.getColumnIndex("vid");
+            int columnIndex3 = cursorQuery.getColumnIndex("bulk");
+            int columnIndex4 = cursorQuery.getColumnIndex("data");
             int i2 = 0;
-            while (query.moveToNext() && (i2 = i2 + (i = query.getInt(columnIndex3))) <= num.intValue()) {
-                matrixCursor.addRow(new Object[]{Long.valueOf(query.getLong(columnIndex)), Integer.valueOf(query.getInt(columnIndex2)), Integer.valueOf(i), query.getBlob(columnIndex4)});
+            while (cursorQuery.moveToNext() && (i2 = i2 + (i = cursorQuery.getInt(columnIndex3))) <= num.intValue()) {
+                matrixCursor.addRow(new Object[]{Long.valueOf(cursorQuery.getLong(columnIndex)), Integer.valueOf(cursorQuery.getInt(columnIndex2)), Integer.valueOf(i), cursorQuery.getBlob(columnIndex4)});
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return matrixCursor;
     }
 
     public Cursor getLastId() {
         Log.d(TAG, "getLastId()");
-        Cursor query = getReadableDatabase().query(LAST_EVENT_ID_TABLE, new String[]{LAST_EVENT_ID_FIELD}, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query(LAST_EVENT_ID_TABLE, new String[]{LAST_EVENT_ID_FIELD}, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
     private void updateLastId(long j) {
@@ -281,61 +281,61 @@ class DatabaseHelper extends SQLiteOpenHelper {
     Cursor getCompressedEventChunk(Integer num) {
         String str = TAG;
         Log.d(str, "getCompressedEventChunk()");
-        Cursor query = getReadableDatabase().query("compressed_events", null, null, null, null, null, "id ASC", num != null ? String.valueOf(num) : null);
-        if (query != null && query.getCount() > 0) {
-            return query;
+        Cursor cursorQuery = getReadableDatabase().query("compressed_events", null, null, null, null, null, "id ASC", num != null ? String.valueOf(num) : null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            return cursorQuery;
         }
         Log.d(str, "getCompressedEventChunk(): There is no compressed data");
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return null;
     }
 
-    public long getEventCountValue() {
-        Cursor cursor;
+    public long getEventCountValue() throws Throwable {
+        Cursor eventCountCursor;
         try {
-            cursor = getEventCountCursor();
-            if (cursor != null) {
+            eventCountCursor = getEventCountCursor();
+            if (eventCountCursor != null) {
                 try {
-                    if (cursor.getCount() > 0) {
+                    if (eventCountCursor.getCount() > 0) {
                         int i = 0;
-                        while (cursor.moveToNext()) {
-                            i += cursor.getInt(0);
+                        while (eventCountCursor.moveToNext()) {
+                            i += eventCountCursor.getInt(0);
                         }
-                        if (cursor != null) {
-                            cursor.close();
+                        if (eventCountCursor != null) {
+                            eventCountCursor.close();
                         }
                         return i;
                     }
                 } catch (Throwable th) {
                     th = th;
-                    if (cursor != null) {
-                        cursor.close();
+                    if (eventCountCursor != null) {
+                        eventCountCursor.close();
                     }
                     throw th;
                 }
             }
             long j = 0;
-            if (cursor != null) {
-                cursor.close();
+            if (eventCountCursor != null) {
+                eventCountCursor.close();
             }
             return j;
         } catch (Throwable th2) {
             th = th2;
-            cursor = null;
+            eventCountCursor = null;
         }
     }
 
     public Cursor getEventCountCursor() {
-        Cursor query = getReadableDatabase().query("events", new String[]{"bulk"}, null, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            return query;
+        Cursor cursorQuery = getReadableDatabase().query("events", new String[]{"bulk"}, null, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            return cursorQuery;
         }
-        if (query == null) {
+        if (cursorQuery == null) {
             return null;
         }
-        query.close();
+        cursorQuery.close();
         return null;
     }
 
@@ -367,15 +367,15 @@ class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getTotalCompressedEventCursor(String str) {
         String str2 = TAG;
         Log.d(str2, "getTotalCompressedEventCursor(" + str + NavigationBarInflaterView.KEY_CODE_END);
-        Cursor query = getReadableDatabase().query("compressed_events", new String[]{"bulk"}, null, null, null, null, null, str);
-        if (query != null && query.getCount() > 0) {
-            return query;
+        Cursor cursorQuery = getReadableDatabase().query("compressed_events", new String[]{"bulk"}, null, null, null, null, null, str);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            return cursorQuery;
         }
         Log.d(str2, "getTotalCompressedEventCursor(): There is no compressed events");
-        if (query == null) {
+        if (cursorQuery == null) {
             return null;
         }
-        query.close();
+        cursorQuery.close();
         return null;
     }
 
@@ -402,9 +402,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
             Log.d(TAG, "deleteEventsUpToSyntheticId(): No legacy content");
             return;
         }
-        int delete = writableDatabase.delete("events", "id <= ?", new String[]{String.valueOf(syntheticRowId)});
-        if (delete > 1) {
-            Log.d(TAG, "deleteEventsUpToSyntheticId(): " + delete + " events, up to " + syntheticRowId + "have been deleted");
+        int iDelete = writableDatabase.delete("events", "id <= ?", new String[]{String.valueOf(syntheticRowId)});
+        if (iDelete > 1) {
+            Log.d(TAG, "deleteEventsUpToSyntheticId(): " + iDelete + " events, up to " + syntheticRowId + "have been deleted");
             ContentValues contentValues = new ContentValues();
             contentValues.put("row_id", "-1");
             writableDatabase.update("synthetic_key", contentValues, null, null);
@@ -438,57 +438,47 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private Cursor getCurrentVersioningId() {
-        Cursor query = getReadableDatabase().query("version", new String[]{"id"}, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query("version", new String[]{"id"}, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0026  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getCurrentVersioningIdInternal() {
-        /*
-            r1 = this;
-            android.database.Cursor r1 = r1.getCurrentVersioningId()
-            if (r1 == 0) goto L23
-            int r0 = r1.getCount()     // Catch: java.lang.Throwable -> L17
-            if (r0 <= 0) goto L23
-            java.lang.String r0 = "id"
-            int r0 = r1.getColumnIndex(r0)     // Catch: java.lang.Throwable -> L17
-            int r0 = r1.getInt(r0)     // Catch: java.lang.Throwable -> L17
-            goto L24
-        L17:
-            r0 = move-exception
-            if (r1 == 0) goto L22
-            r1.close()     // Catch: java.lang.Throwable -> L1e
-            goto L22
-        L1e:
-            r1 = move-exception
-            r0.addSuppressed(r1)
-        L22:
-            throw r0
-        L23:
-            r0 = -1
-        L24:
-            if (r1 == 0) goto L29
-            r1.close()
-        L29:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.database.DatabaseHelper.getCurrentVersioningIdInternal():int");
+        int i;
+        Cursor currentVersioningId = getCurrentVersioningId();
+        if (currentVersioningId != null) {
+            try {
+                i = currentVersioningId.getCount() > 0 ? currentVersioningId.getInt(currentVersioningId.getColumnIndex("id")) : -1;
+            } catch (Throwable th) {
+                if (currentVersioningId != null) {
+                    try {
+                        currentVersioningId.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
+                    }
+                }
+                throw th;
+            }
+        }
+        if (currentVersioningId != null) {
+            currentVersioningId.close();
+        }
+        return i;
     }
 
     public Cursor getCleanedEventsCursor() {
         Log.d(TAG, "getCleanedEventsCursor()");
-        Cursor query = getReadableDatabase().query("cleaned_events", null, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query("cleaned_events", null, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
     public Cursor getVersioningBlob() {
@@ -496,7 +486,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int addVersioningBlob(ContentValues contentValues) {
-        long j;
+        long jInsert;
         String str = TAG;
         Log.d(str, "addVersioningBlob()");
         if (contentValues == null || !contentValues.containsKey("id") || !contentValues.containsKey("data") || !contentValues.containsKey(Contract.Versioning.AUX_FIELD_EVENT_ID) || contentValues.size() != 3) {
@@ -511,11 +501,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
         Long asLong = contentValues.getAsLong(Contract.Versioning.AUX_FIELD_EVENT_ID);
         if (asLong != null) {
             contentValues.remove(Contract.Versioning.AUX_FIELD_EVENT_ID);
-            j = getWritableDatabase().insert("version", null, contentValues);
+            jInsert = getWritableDatabase().insert("version", null, contentValues);
         } else {
-            j = -1;
+            jInsert = -1;
         }
-        if (asLong == null || j == -1) {
+        if (asLong == null || jInsert == -1) {
             Log.e(str, "addVersioningBlob(): error");
             return -1;
         }
@@ -540,11 +530,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getFeaturesBlacklist() {
         Log.d(TAG, "getFeaturesBlacklist()");
-        Cursor query = getReadableDatabase().query("feature_blocklist", new String[]{"feature", "event"}, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query("feature_blocklist", new String[]{"feature", "event"}, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
     public long deleteFeaturesBlacklist() {
@@ -553,24 +543,24 @@ class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     int getSyntheticRowId() {
-        Cursor query = getReadableDatabase().query("synthetic_key", new String[]{"row_id"}, null, null, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = getReadableDatabase().query("synthetic_key", new String[]{"row_id"}, null, null, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() > 0) {
-                    query.moveToFirst();
-                    int i = query.getInt(query.getColumnIndex("row_id"));
+                if (cursorQuery.getCount() > 0) {
+                    cursorQuery.moveToFirst();
+                    int i = cursorQuery.getInt(cursorQuery.getColumnIndex("row_id"));
                     Log.d(TAG, "getSyntheticRowId(): " + i);
-                    if (query != null) {
-                        query.close();
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return i;
                 }
             } catch (Throwable th) {
-                if (query == null) {
+                if (cursorQuery == null) {
                     throw th;
                 }
                 try {
-                    query.close();
+                    cursorQuery.close();
                     throw th;
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
@@ -579,12 +569,16 @@ class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         Log.d(TAG, "getSyntheticRowId(): Key is deleted or it is not generated yet.");
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return -1;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x005c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setSyntheticRowId() {
         String str = TAG;
         Log.d(str, "setSyntheticRowId()");
@@ -593,12 +587,16 @@ class DatabaseHelper extends SQLiteOpenHelper {
         Cursor lastId = getLastId();
         if (lastId != null) {
             try {
-                if (lastId.getCount() > 0) {
+                if (lastId.getCount() <= 0) {
+                    Log.d(str, "setSyntheticRowId(): There is no data in events table.");
+                    if (lastId != null) {
+                        lastId.close();
+                    }
+                } else {
                     contentValues.put("row_id", Integer.valueOf(lastId.getInt(lastId.getColumnIndex(LAST_EVENT_ID_FIELD))));
                     Log.d(str, "setSyntheticRowId(): Marked event id = " + writableDatabase.insert("synthetic_key", null, contentValues));
                     if (lastId != null) {
                         lastId.close();
-                        return;
                     }
                 }
             } catch (Throwable th) {
@@ -611,10 +609,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
                 }
                 throw th;
             }
-        }
-        Log.d(str, "setSyntheticRowId(): There is no data in events table.");
-        if (lastId != null) {
-            lastId.close();
+        } else {
+            Log.d(str, "setSyntheticRowId(): There is no data in events table.");
+            if (lastId != null) {
+            }
         }
     }
 
@@ -636,7 +634,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
         SQLiteDatabase writableDatabase = getWritableDatabase();
-        int intValue = contentValues.getAsInteger("plainEventsSize").intValue();
+        int iIntValue = contentValues.getAsInteger("plainEventsSize").intValue();
         contentValues.remove("plainEventsSize");
         writableDatabase.beginTransaction();
         try {
@@ -644,7 +642,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
                 if (writableDatabase.insert("compressed_events", null, contentValues) == -1) {
                     throw new SQLException("Transaction Failure. Not possible to insert compressed events.");
                 }
-                if (writableDatabase.delete("events", EVENTS_DELETE, new String[]{String.valueOf(intValue)}) == 0) {
+                if (writableDatabase.delete("events", EVENTS_DELETE, new String[]{String.valueOf(iIntValue)}) == 0) {
                     throw new SQLException("Transaction Failure. Not possible to delete plain-text events.");
                 }
                 writableDatabase.setTransactionSuccessful();
@@ -676,11 +674,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getFeaturesWhitelist() {
         Log.d(TAG, "getFeaturesWhitelist()");
-        Cursor query = getReadableDatabase().query("features_whitelist", new String[]{"feature", "enable_type"}, null, null, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query("features_whitelist", new String[]{"feature", "enable_type"}, null, null, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
     public long deleteFeaturesWhitelist(String[] strArr) {
@@ -688,11 +686,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
         if (strArr == null || strArr.length == 0) {
             return getWritableDatabase().delete("features_whitelist", null, null);
         }
-        long j = 0;
+        long jDeleteFeatureWhitelist = 0;
         for (String str : strArr) {
-            j += deleteFeatureWhitelist(str);
+            jDeleteFeatureWhitelist += deleteFeatureWhitelist(str);
         }
-        return j;
+        return jDeleteFeatureWhitelist;
     }
 
     public long deleteFeatureWhitelist(String str) {
@@ -714,11 +712,11 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getB2CFeatures(String[] strArr) {
         Log.d(TAG, "getB2CFeatures()");
-        Cursor query = getReadableDatabase().query("package_feature_b2c", new String[]{"packageName", "feature_name"}, (strArr == null || strArr.length <= 0) ? null : B2C_FEATURE_QUERY, strArr, null, null, null);
-        if (query != null && query.getCount() > 0) {
-            query.moveToFirst();
+        Cursor cursorQuery = getReadableDatabase().query("package_feature_b2c", new String[]{"packageName", "feature_name"}, (strArr == null || strArr.length <= 0) ? null : B2C_FEATURE_QUERY, strArr, null, null, null);
+        if (cursorQuery != null && cursorQuery.getCount() > 0) {
+            cursorQuery.moveToFirst();
         }
-        return query;
+        return cursorQuery;
     }
 
     public long deleteB2CFeatures(String[] strArr) {
@@ -730,192 +728,73 @@ class DatabaseHelper extends SQLiteOpenHelper {
         return writableDatabase.delete("package_feature_b2c", B2C_FEATURE_QUERY, strArr);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0038  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public boolean hasCleanedEventRow() {
-        /*
-            r9 = this;
-            java.lang.String r0 = "hasCleanedEventsRow(): "
-            android.database.sqlite.SQLiteDatabase r1 = r9.getReadableDatabase()
-            java.lang.String r9 = "id"
-            java.lang.String[] r3 = new java.lang.String[]{r9}
-            r7 = 0
-            r8 = 0
-            java.lang.String r2 = "cleaned_events"
-            r4 = 0
-            r5 = 0
-            r6 = 0
-            android.database.Cursor r9 = r1.query(r2, r3, r4, r5, r6, r7, r8)
-            if (r9 == 0) goto L24
-            int r1 = r9.getCount()     // Catch: java.lang.Throwable -> L21
-            if (r1 <= 0) goto L24
-            r1 = 1
-            goto L25
-        L21:
-            r0 = move-exception
-            r1 = r0
-            goto L3c
-        L24:
-            r1 = 0
-        L25:
-            java.lang.String r2 = com.samsung.android.knox.analytics.database.DatabaseHelper.TAG     // Catch: java.lang.Throwable -> L21
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L21
-            r3.<init>(r0)     // Catch: java.lang.Throwable -> L21
-            r3.append(r1)     // Catch: java.lang.Throwable -> L21
-            java.lang.String r0 = r3.toString()     // Catch: java.lang.Throwable -> L21
-            com.samsung.android.knox.analytics.util.Log.d(r2, r0)     // Catch: java.lang.Throwable -> L21
-            if (r9 == 0) goto L3b
-            r9.close()
-        L3b:
-            return r1
-        L3c:
-            if (r9 == 0) goto L47
-            r9.close()     // Catch: java.lang.Throwable -> L42
-            goto L47
-        L42:
-            r0 = move-exception
-            r9 = r0
-            r1.addSuppressed(r9)
-        L47:
-            throw r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.database.DatabaseHelper.hasCleanedEventRow():boolean");
+        boolean z;
+        Cursor cursorQuery = getReadableDatabase().query("cleaned_events", new String[]{"id"}, null, null, null, null, null);
+        if (cursorQuery != null) {
+            try {
+                z = cursorQuery.getCount() > 0;
+            } finally {
+            }
+        }
+        Log.d(TAG, "hasCleanedEventsRow(): " + z);
+        if (cursorQuery != null) {
+            cursorQuery.close();
+        }
+        return z;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x001f, code lost:
-    
-        if (r12 != null) goto L7;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public long updateCleanedEvent(android.content.ContentValues r13, android.database.sqlite.SQLiteDatabase r14, int r15) {
-        /*
-            r12 = this;
-            java.lang.String r0 = "id"
-            java.lang.String r1 = "reason"
-            java.lang.String r2 = "lastTimestamp"
-            java.lang.String r3 = "removedSize"
-            java.lang.String r4 = "removedEvents"
-            java.lang.String r5 = "counter"
-            r6 = -1
-            android.database.Cursor r12 = r12.getExistingCleanEventValues()     // Catch: java.lang.IllegalArgumentException -> Ldb
-            if (r12 != 0) goto L28
-            java.lang.String r13 = com.samsung.android.knox.analytics.database.DatabaseHelper.TAG     // Catch: java.lang.Throwable -> L25
-            java.lang.String r14 = "updateCleanedEvent(): No existing clean event"
-            com.samsung.android.knox.analytics.util.Log.d(r13, r14)     // Catch: java.lang.Throwable -> L25
-            if (r12 == 0) goto L24
-        L21:
-            r12.close()     // Catch: java.lang.IllegalArgumentException -> Ldb
-        L24:
-            return r6
-        L25:
-            r13 = move-exception
-            goto Ld0
-        L28:
-            int r8 = r12.getColumnIndexOrThrow(r2)     // Catch: java.lang.Throwable -> L25
-            long r8 = r12.getLong(r8)     // Catch: java.lang.Throwable -> L25
-            java.lang.Long r8 = java.lang.Long.valueOf(r8)     // Catch: java.lang.Throwable -> L25
-            r13.put(r2, r8)     // Catch: java.lang.Throwable -> L25
-            java.lang.Integer r2 = r13.getAsInteger(r5)     // Catch: java.lang.Throwable -> L25
-            r8 = 0
-            if (r2 == 0) goto L47
-            java.lang.Integer r2 = r13.getAsInteger(r5)     // Catch: java.lang.Throwable -> L25
-            int r2 = r2.intValue()     // Catch: java.lang.Throwable -> L25
-            goto L48
-        L47:
-            r2 = r8
-        L48:
-            int r9 = r12.getColumnIndexOrThrow(r5)     // Catch: java.lang.Throwable -> L25
-            int r9 = r12.getInt(r9)     // Catch: java.lang.Throwable -> L25
-            int r2 = r2 + r9
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r2)     // Catch: java.lang.Throwable -> L25
-            r13.put(r5, r2)     // Catch: java.lang.Throwable -> L25
-            java.lang.Integer r2 = r13.getAsInteger(r4)     // Catch: java.lang.Throwable -> L25
-            if (r2 == 0) goto L66
-            java.lang.Integer r2 = r13.getAsInteger(r4)     // Catch: java.lang.Throwable -> L25
-            int r8 = r2.intValue()     // Catch: java.lang.Throwable -> L25
-        L66:
-            int r2 = r12.getColumnIndexOrThrow(r4)     // Catch: java.lang.Throwable -> L25
-            int r2 = r12.getInt(r2)     // Catch: java.lang.Throwable -> L25
-            int r8 = r8 + r2
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r8)     // Catch: java.lang.Throwable -> L25
-            r13.put(r4, r2)     // Catch: java.lang.Throwable -> L25
-            java.lang.Long r2 = r13.getAsLong(r3)     // Catch: java.lang.Throwable -> L25
-            r4 = 0
-            if (r2 == 0) goto L87
-            java.lang.Long r2 = r13.getAsLong(r3)     // Catch: java.lang.Throwable -> L25
-            long r8 = r2.longValue()     // Catch: java.lang.Throwable -> L25
-            goto L88
-        L87:
-            r8 = r4
-        L88:
-            int r2 = r12.getColumnIndexOrThrow(r3)     // Catch: java.lang.Throwable -> L25
-            int r2 = r12.getInt(r2)     // Catch: java.lang.Throwable -> L25
-            long r10 = (long) r2     // Catch: java.lang.Throwable -> L25
-            long r8 = r8 + r10
-            java.lang.Long r2 = java.lang.Long.valueOf(r8)     // Catch: java.lang.Throwable -> L25
-            r13.put(r3, r2)     // Catch: java.lang.Throwable -> L25
-            int r2 = r12.getColumnIndex(r1)     // Catch: java.lang.Throwable -> L25
-            int r2 = r12.getInt(r2)     // Catch: java.lang.Throwable -> L25
-            if (r15 <= r2) goto Laa
-            java.lang.Integer r15 = java.lang.Integer.valueOf(r15)     // Catch: java.lang.Throwable -> L25
-            r13.put(r1, r15)     // Catch: java.lang.Throwable -> L25
-        Laa:
-            java.lang.String r15 = "cleaned_events"
-            r1 = 0
-            int r14 = r14.update(r15, r13, r1, r1)     // Catch: java.lang.Throwable -> L25
-            if (r14 <= 0) goto Lcb
-            java.lang.String r14 = com.samsung.android.knox.analytics.database.DatabaseHelper.TAG     // Catch: java.lang.Throwable -> L25
-            java.lang.String r15 = "updateCleanedEvent(): Clean events updated"
-            com.samsung.android.knox.analytics.util.Log.d(r14, r15)     // Catch: java.lang.Throwable -> L25
-            java.lang.Integer r14 = r13.getAsInteger(r0)     // Catch: java.lang.Throwable -> L25
-            if (r14 == 0) goto Lca
-            java.lang.Integer r13 = r13.getAsInteger(r0)     // Catch: java.lang.Throwable -> L25
-            int r13 = r13.intValue()     // Catch: java.lang.Throwable -> L25
-            long r4 = (long) r13
-        Lca:
-            r6 = r4
-        Lcb:
-            if (r12 == 0) goto Lcf
-            goto L21
-        Lcf:
-            return r6
-        Ld0:
-            if (r12 == 0) goto Lda
-            r12.close()     // Catch: java.lang.Throwable -> Ld6
-            goto Lda
-        Ld6:
-            r12 = move-exception
-            r13.addSuppressed(r12)     // Catch: java.lang.IllegalArgumentException -> Ldb
-        Lda:
-            throw r13     // Catch: java.lang.IllegalArgumentException -> Ldb
-        Ldb:
-            r12 = move-exception
-            java.lang.String r13 = com.samsung.android.knox.analytics.database.DatabaseHelper.TAG
-            java.lang.String r14 = "updateCleanedEvent(): Failed to load ContentValues"
-            com.samsung.android.knox.analytics.util.Log.e(r13, r14, r12)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.database.DatabaseHelper.updateCleanedEvent(android.content.ContentValues, android.database.sqlite.SQLiteDatabase, int):long");
+    public long updateCleanedEvent(ContentValues contentValues, SQLiteDatabase sQLiteDatabase, int i) {
+        long jIntValue = -1;
+        try {
+            Cursor existingCleanEventValues = getExistingCleanEventValues();
+            try {
+                if (existingCleanEventValues == null) {
+                    Log.d(TAG, "updateCleanedEvent(): No existing clean event");
+                    if (existingCleanEventValues != null) {
+                    }
+                    return jIntValue;
+                }
+                contentValues.put("lastTimestamp", Long.valueOf(existingCleanEventValues.getLong(existingCleanEventValues.getColumnIndexOrThrow("lastTimestamp"))));
+                contentValues.put("counter", Integer.valueOf((contentValues.getAsInteger("counter") != null ? contentValues.getAsInteger("counter").intValue() : 0) + existingCleanEventValues.getInt(existingCleanEventValues.getColumnIndexOrThrow("counter"))));
+                contentValues.put("removedEvents", Integer.valueOf((contentValues.getAsInteger("removedEvents") != null ? contentValues.getAsInteger("removedEvents").intValue() : 0) + existingCleanEventValues.getInt(existingCleanEventValues.getColumnIndexOrThrow("removedEvents"))));
+                contentValues.put("removedSize", Long.valueOf((contentValues.getAsLong("removedSize") != null ? contentValues.getAsLong("removedSize").longValue() : 0L) + existingCleanEventValues.getInt(existingCleanEventValues.getColumnIndexOrThrow("removedSize"))));
+                if (i > existingCleanEventValues.getInt(existingCleanEventValues.getColumnIndex("reason"))) {
+                    contentValues.put("reason", Integer.valueOf(i));
+                }
+                if (sQLiteDatabase.update("cleaned_events", contentValues, null, null) > 0) {
+                    Log.d(TAG, "updateCleanedEvent(): Clean events updated");
+                    jIntValue = contentValues.getAsInteger("id") != null ? contentValues.getAsInteger("id").intValue() : 0L;
+                }
+                if (existingCleanEventValues == null) {
+                    return jIntValue;
+                }
+                existingCleanEventValues.close();
+                return jIntValue;
+            } finally {
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "updateCleanedEvent(): Failed to load ContentValues", e);
+            return -1L;
+        }
     }
 
     private Cursor getExistingCleanEventValues() {
         SQLiteDatabase readableDatabase = getReadableDatabase();
-        Cursor cursor = null;
+        Cursor cursorQuery = null;
         try {
-            cursor = readableDatabase.query("cleaned_events", null, null, null, null, null, null);
-            if (cursor != null && cursor.getCount() > 0) {
-                cursor.moveToFirst();
+            cursorQuery = readableDatabase.query("cleaned_events", null, null, null, null, null, null);
+            if (cursorQuery != null && cursorQuery.getCount() > 0) {
+                cursorQuery.moveToFirst();
             }
-            return cursor;
+            return cursorQuery;
         } catch (Throwable th) {
             Log.e(TAG, "getExistingCleanEventValues(): Failed: ", th);
-            return cursor;
+            return cursorQuery;
         }
     }
 }

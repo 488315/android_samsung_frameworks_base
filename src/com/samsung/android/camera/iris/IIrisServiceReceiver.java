@@ -86,9 +86,9 @@ public interface IIrisServiceReceiver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIrisServiceReceiver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIrisServiceReceiver)) {
-                return (IIrisServiceReceiver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIrisServiceReceiver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIrisServiceReceiver)) {
+                return (IIrisServiceReceiver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,51 +130,51 @@ public interface IIrisServiceReceiver extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEnrollResult(readLong, readInt, readInt2, readInt3);
+                    onEnrollResult(j, i3, i4, i5);
                     return true;
                 case 2:
-                    long readLong2 = parcel.readLong();
-                    int readInt4 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAcquired(readLong2, readInt4);
+                    onAcquired(j2, i6);
                     return true;
                 case 3:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     Iris iris = (Iris) parcel.readTypedObject(Iris.CREATOR);
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    onAuthenticationSucceeded(readLong3, iris, createByteArray);
+                    onAuthenticationSucceeded(j3, iris, bArrCreateByteArray);
                     return true;
                 case 4:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onAuthenticationFailed(readLong4);
+                    onAuthenticationFailed(j4);
                     return true;
                 case 5:
-                    long readLong5 = parcel.readLong();
-                    int readInt5 = parcel.readInt();
+                    long j5 = parcel.readLong();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onError(readLong5, readInt5);
+                    onError(j5, i7);
                     return true;
                 case 6:
-                    long readLong6 = parcel.readLong();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    long j6 = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRemoved(readLong6, readInt6, readInt7);
+                    onRemoved(j6, i8, i9);
                     return true;
                 case 7:
-                    long readLong7 = parcel.readLong();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    long j7 = parcel.readLong();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onIRImage(readLong7, createByteArray2, readInt8, readInt9);
+                    onIRImage(j7, bArrCreateByteArray2, i10, i11);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -199,97 +199,97 @@ public interface IIrisServiceReceiver extends IInterface {
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onEnrollResult(long j, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onAcquired(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onAuthenticationSucceeded(long j, Iris iris, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(iris, 0);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(iris, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onAuthenticationFailed(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onError(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onRemoved(long j, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
             public void onIRImage(long j, byte[] bArr, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

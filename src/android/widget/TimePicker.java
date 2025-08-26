@@ -138,11 +138,11 @@ public class TimePicker extends FrameLayout {
         if (getImportantForAutofill() == 0) {
             setImportantForAutofill(1);
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TimePicker, attributeSet, obtainStyledAttributes, i, i2);
-        boolean z = obtainStyledAttributes.getBoolean(10, false);
-        int i3 = obtainStyledAttributes.getInt(8, 1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TimePicker, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(10, false);
+        int i3 = typedArrayObtainStyledAttributes.getInt(8, 1);
+        typedArrayObtainStyledAttributes.recycle();
         if (i3 == 2 && z) {
             this.mMode = context.getResources().getInteger(R.integer.time_picker_mode);
         } else {
@@ -156,7 +156,7 @@ public class TimePicker extends FrameLayout {
         this.mDelegate.setAutoFillChangeListener(new OnTimeChangedListener() { // from class: android.widget.TimePicker$$ExternalSyntheticLambda0
             @Override // android.widget.TimePicker.OnTimeChangedListener
             public final void onTimeChanged(TimePicker timePicker, int i4, int i5) {
-                TimePicker.this.lambda$new$0(context, timePicker, i4, i5);
+                this.f$0.lambda$new$0(context, timePicker, i4, i5);
             }
         });
     }

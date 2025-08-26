@@ -379,13 +379,13 @@ public class SemExtendedFormat {
         if (SEFJNI.isSEFFile(canonicalPath) == 0) {
             return false;
         }
-        int[] listSEFDataTypes = listSEFDataTypes(file);
-        if (listSEFDataTypes == null) {
+        int[] iArrListSEFDataTypes = listSEFDataTypes(file);
+        if (iArrListSEFDataTypes == null) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        for (int length = listSEFDataTypes.length - 1; length > -1; length--) {
-            if (i == listSEFDataTypes[length]) {
+        for (int length = iArrListSEFDataTypes.length - 1; length > -1; length--) {
+            if (i == iArrListSEFDataTypes[length]) {
                 return true;
             }
         }
@@ -401,17 +401,17 @@ public class SemExtendedFormat {
         if (SEFJNI.isSEFFile(canonicalPath) == 0) {
             return false;
         }
-        String[] listKeyNames = listKeyNames(file);
-        if (listKeyNames == null) {
+        String[] strArrListKeyNames = listKeyNames(file);
+        if (strArrListKeyNames == null) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        if (listKeyNames.length <= 0) {
+        if (strArrListKeyNames.length <= 0) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        for (int length = listKeyNames.length - 1; length > -1; length--) {
-            if (str.equals(listKeyNames[length])) {
+        for (int length = strArrListKeyNames.length - 1; length > -1; length--) {
+            if (str.equals(strArrListKeyNames[length])) {
                 return true;
             }
         }
@@ -448,13 +448,13 @@ public class SemExtendedFormat {
         if (SEFJNI.isSEFFile(canonicalPath) == 0) {
             return false;
         }
-        int[] listSEFDataTypes = listSEFDataTypes(file);
-        if (listSEFDataTypes == null) {
+        int[] iArrListSEFDataTypes = listSEFDataTypes(file);
+        if (iArrListSEFDataTypes == null) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        for (int length = listSEFDataTypes.length - 1; length > -1; length--) {
-            if (i == listSEFDataTypes[length]) {
+        for (int length = iArrListSEFDataTypes.length - 1; length > -1; length--) {
+            if (i == iArrListSEFDataTypes[length]) {
                 return true;
             }
         }
@@ -470,17 +470,17 @@ public class SemExtendedFormat {
         if (SEFJNI.isSEFFile(canonicalPath) == 0) {
             return false;
         }
-        String[] listKeyNames = listKeyNames(file);
-        if (listKeyNames == null) {
+        String[] strArrListKeyNames = listKeyNames(file);
+        if (strArrListKeyNames == null) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        if (listKeyNames.length <= 0) {
+        if (strArrListKeyNames.length <= 0) {
             Log.e(TAG, "Invalid file : " + canonicalPath);
             return false;
         }
-        for (int length = listKeyNames.length - 1; length > -1; length--) {
-            if (str.equals(listKeyNames[length])) {
+        for (int length = strArrListKeyNames.length - 1; length > -1; length--) {
+            if (str.equals(strArrListKeyNames[length])) {
                 return true;
             }
         }
@@ -495,13 +495,13 @@ public class SemExtendedFormat {
         if (SEFJNI.isSEFFile(str) == 0) {
             return false;
         }
-        int[] listSEFDataTypes = listSEFDataTypes(str);
-        if (listSEFDataTypes == null) {
+        int[] iArrListSEFDataTypes = listSEFDataTypes(str);
+        if (iArrListSEFDataTypes == null) {
             Log.e(TAG, "Invalid file : " + str);
             return false;
         }
-        for (int length = listSEFDataTypes.length - 1; length > -1; length--) {
-            if (i == listSEFDataTypes[length]) {
+        for (int length = iArrListSEFDataTypes.length - 1; length > -1; length--) {
+            if (i == iArrListSEFDataTypes[length]) {
                 return true;
             }
         }
@@ -576,16 +576,16 @@ public class SemExtendedFormat {
     }
 
     public static long addSEFDataByteBufferAddTag(ByteBuffer byteBuffer, String str, int i, byte[] bArr, int i2, byte[] bArr2, int i3, int i4, int i5) {
-        byte[] array = byteBuffer.array();
-        long position = byteBuffer.position();
-        long capacity = byteBuffer.capacity();
-        long arrayOffset = byteBuffer.arrayOffset();
-        if (capacity <= 0) {
+        byte[] bArrArray = byteBuffer.array();
+        long jPosition = byteBuffer.position();
+        long jCapacity = byteBuffer.capacity();
+        long jArrayOffset = byteBuffer.arrayOffset();
+        if (jCapacity <= 0) {
             return 0L;
         }
-        long addSEFDataBufferAddTag = SEFJNI.addSEFDataBufferAddTag(array, capacity, position, arrayOffset, str, i, bArr, i2, bArr2, i3, i4, i5);
-        byteBuffer.position((int) addSEFDataBufferAddTag);
-        return addSEFDataBufferAddTag;
+        long jAddSEFDataBufferAddTag = SEFJNI.addSEFDataBufferAddTag(bArrArray, jCapacity, jPosition, jArrayOffset, str, i, bArr, i2, bArr2, i3, i4, i5);
+        byteBuffer.position((int) jAddSEFDataBufferAddTag);
+        return jAddSEFDataBufferAddTag;
     }
 
     public static long addData(ByteBuffer byteBuffer, String str, byte[] bArr, int i, int i2) {
@@ -966,10 +966,11 @@ public class SemExtendedFormat {
         return SEFJNI.listKeyNamesByDataType(canonicalPath, i);
     }
 
-    public static byte[] getData(File file, String str) throws IOException {
+    public static byte[] getData(File file, String str) throws Throwable {
         byte[] bArr;
+        FileInputStream fileInputStream;
         String canonicalPath = file.getCanonicalPath();
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         if (canonicalPath == null || canonicalPath.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + canonicalPath);
             return null;
@@ -980,10 +981,76 @@ public class SemExtendedFormat {
         }
         try {
             try {
-                FileInputStream fileInputStream2 = new FileInputStream(canonicalPath);
+                fileInputStream = new FileInputStream(canonicalPath);
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                try {
+                    DataPosition dataPosition = getDataPosition(file, str);
+                    if (dataPosition == null) {
+                        fileInputStream.close();
+                        fileInputStream.close();
+                        return null;
+                    }
+                    long j = dataPosition.offset;
+                    byte[] bArr2 = new byte[(int) dataPosition.length];
+                    if (j < 0) {
+                        fileInputStream.close();
+                        return null;
+                    }
+                    try {
+                        if (fileInputStream.skip(j) == 0) {
+                            fileInputStream.close();
+                            return null;
+                        }
+                        if (fileInputStream.read(bArr2) == 0) {
+                            fileInputStream.close();
+                            return null;
+                        }
+                        fileInputStream.close();
+                        return bArr2;
+                    } catch (IOException e) {
+                        bArr = bArr2;
+                        e = e;
+                        fileInputStream2 = fileInputStream;
+                        e.printStackTrace();
+                        if (fileInputStream2 != null) {
+                            fileInputStream2.close();
+                        }
+                        return bArr;
+                    }
+                } catch (IOException e2) {
+                    e = e2;
+                    bArr = null;
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                fileInputStream2 = fileInputStream;
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                throw th;
+            }
+        } catch (IOException e3) {
+            e = e3;
+            bArr = null;
+        }
+    }
+
+    public static byte[] getData(ParcelFileDescriptor parcelFileDescriptor, String str) throws Throwable {
+        byte[] bArr;
+        FileInputStream fileInputStream = null;
+        if (str == null || str.length() <= 0) {
+            Log.e(TAG, "Invalid key name: " + str);
+            return null;
+        }
+        try {
+            try {
+                FileInputStream fileInputStream2 = new FileInputStream(parcelFileDescriptor.getFileDescriptor());
                 try {
                     try {
-                        DataPosition dataPosition = getDataPosition(file, str);
+                        DataPosition dataPosition = getDataPosition(parcelFileDescriptor, str);
                         if (dataPosition == null) {
                             fileInputStream2.close();
                             fileInputStream2.close();
@@ -1034,73 +1101,6 @@ public class SemExtendedFormat {
             }
         } catch (Throwable th2) {
             th = th2;
-        }
-    }
-
-    public static byte[] getData(ParcelFileDescriptor parcelFileDescriptor, String str) throws IOException {
-        byte[] bArr;
-        FileInputStream fileInputStream;
-        FileInputStream fileInputStream2 = null;
-        if (str == null || str.length() <= 0) {
-            Log.e(TAG, "Invalid key name: " + str);
-            return null;
-        }
-        try {
-            try {
-                fileInputStream = new FileInputStream(parcelFileDescriptor.getFileDescriptor());
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                try {
-                    DataPosition dataPosition = getDataPosition(parcelFileDescriptor, str);
-                    if (dataPosition == null) {
-                        fileInputStream.close();
-                        fileInputStream.close();
-                        return null;
-                    }
-                    long j = dataPosition.offset;
-                    byte[] bArr2 = new byte[(int) dataPosition.length];
-                    if (j < 0) {
-                        fileInputStream.close();
-                        return null;
-                    }
-                    try {
-                        if (fileInputStream.skip(j) == 0) {
-                            fileInputStream.close();
-                            return null;
-                        }
-                        if (fileInputStream.read(bArr2) == 0) {
-                            fileInputStream.close();
-                            return null;
-                        }
-                        fileInputStream.close();
-                        return bArr2;
-                    } catch (IOException e) {
-                        bArr = bArr2;
-                        e = e;
-                        fileInputStream2 = fileInputStream;
-                        e.printStackTrace();
-                        if (fileInputStream2 != null) {
-                            fileInputStream2.close();
-                        }
-                        return bArr;
-                    }
-                } catch (IOException e2) {
-                    e = e2;
-                    bArr = null;
-                }
-            } catch (Throwable th2) {
-                th = th2;
-                fileInputStream2 = fileInputStream;
-                if (fileInputStream2 != null) {
-                    fileInputStream2.close();
-                }
-                throw th;
-            }
-        } catch (IOException e3) {
-            e = e3;
-            bArr = null;
         }
     }
 
@@ -1265,10 +1265,11 @@ public class SemExtendedFormat {
         return null;
     }
 
-    public static byte[] getSEFData(File file, String str) throws IOException {
+    public static byte[] getSEFData(File file, String str) throws Throwable {
         byte[] bArr;
+        FileInputStream fileInputStream;
         String canonicalPath = file.getCanonicalPath();
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         if (canonicalPath == null || canonicalPath.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + canonicalPath);
             return null;
@@ -1279,10 +1280,80 @@ public class SemExtendedFormat {
         }
         try {
             try {
-                FileInputStream fileInputStream2 = new FileInputStream(canonicalPath);
+                fileInputStream = new FileInputStream(canonicalPath);
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                try {
+                    SEFDataPosition sEFDataPosition = getSEFDataPosition(canonicalPath, str);
+                    if (sEFDataPosition == null) {
+                        fileInputStream.close();
+                        fileInputStream.close();
+                        return null;
+                    }
+                    long j = sEFDataPosition.offset;
+                    byte[] bArr2 = new byte[(int) sEFDataPosition.length];
+                    if (j < 0) {
+                        fileInputStream.close();
+                        return null;
+                    }
+                    try {
+                        if (fileInputStream.skip(j) == 0) {
+                            fileInputStream.close();
+                            return null;
+                        }
+                        if (fileInputStream.read(bArr2) == 0) {
+                            fileInputStream.close();
+                            return null;
+                        }
+                        fileInputStream.close();
+                        return bArr2;
+                    } catch (IOException e) {
+                        bArr = bArr2;
+                        e = e;
+                        fileInputStream2 = fileInputStream;
+                        e.printStackTrace();
+                        if (fileInputStream2 != null) {
+                            fileInputStream2.close();
+                        }
+                        return bArr;
+                    }
+                } catch (IOException e2) {
+                    e = e2;
+                    bArr = null;
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                fileInputStream2 = fileInputStream;
+                if (fileInputStream2 != null) {
+                    fileInputStream2.close();
+                }
+                throw th;
+            }
+        } catch (IOException e3) {
+            e = e3;
+            bArr = null;
+        }
+    }
+
+    public static byte[] getSEFData(String str, String str2) throws Throwable {
+        byte[] bArr;
+        FileInputStream fileInputStream = null;
+        if (str == null || str.length() <= 0) {
+            Log.e(TAG, "Invalid file name: " + str);
+            return null;
+        }
+        if (str2 == null || str2.length() <= 0) {
+            Log.e(TAG, "Invalid key name: " + str2);
+            return null;
+        }
+        try {
+            try {
+                FileInputStream fileInputStream2 = new FileInputStream(str);
                 try {
                     try {
-                        SEFDataPosition sEFDataPosition = getSEFDataPosition(canonicalPath, str);
+                        SEFDataPosition sEFDataPosition = getSEFDataPosition(str, str2);
                         if (sEFDataPosition == null) {
                             fileInputStream2.close();
                             fileInputStream2.close();
@@ -1333,77 +1404,6 @@ public class SemExtendedFormat {
             }
         } catch (Throwable th2) {
             th = th2;
-        }
-    }
-
-    public static byte[] getSEFData(String str, String str2) throws IOException {
-        byte[] bArr;
-        FileInputStream fileInputStream;
-        FileInputStream fileInputStream2 = null;
-        if (str == null || str.length() <= 0) {
-            Log.e(TAG, "Invalid file name: " + str);
-            return null;
-        }
-        if (str2 == null || str2.length() <= 0) {
-            Log.e(TAG, "Invalid key name: " + str2);
-            return null;
-        }
-        try {
-            try {
-                fileInputStream = new FileInputStream(str);
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                try {
-                    SEFDataPosition sEFDataPosition = getSEFDataPosition(str, str2);
-                    if (sEFDataPosition == null) {
-                        fileInputStream.close();
-                        fileInputStream.close();
-                        return null;
-                    }
-                    long j = sEFDataPosition.offset;
-                    byte[] bArr2 = new byte[(int) sEFDataPosition.length];
-                    if (j < 0) {
-                        fileInputStream.close();
-                        return null;
-                    }
-                    try {
-                        if (fileInputStream.skip(j) == 0) {
-                            fileInputStream.close();
-                            return null;
-                        }
-                        if (fileInputStream.read(bArr2) == 0) {
-                            fileInputStream.close();
-                            return null;
-                        }
-                        fileInputStream.close();
-                        return bArr2;
-                    } catch (IOException e) {
-                        bArr = bArr2;
-                        e = e;
-                        fileInputStream2 = fileInputStream;
-                        e.printStackTrace();
-                        if (fileInputStream2 != null) {
-                            fileInputStream2.close();
-                        }
-                        return bArr;
-                    }
-                } catch (IOException e2) {
-                    e = e2;
-                    bArr = null;
-                }
-            } catch (Throwable th2) {
-                th = th2;
-                fileInputStream2 = fileInputStream;
-                if (fileInputStream2 != null) {
-                    fileInputStream2.close();
-                }
-                throw th;
-            }
-        } catch (IOException e3) {
-            e = e3;
-            bArr = null;
         }
     }
 
@@ -1467,7 +1467,7 @@ public class SemExtendedFormat {
     }
 
     public static int getMajorDataType(String str) {
-        int[] listSEFDataTypes;
+        int[] iArrListSEFDataTypes;
         if (str == null || str.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + str);
             return -1;
@@ -1476,16 +1476,16 @@ public class SemExtendedFormat {
             return -1;
         }
         try {
-            listSEFDataTypes = listSEFDataTypes(new File(str));
+            iArrListSEFDataTypes = listSEFDataTypes(new File(str));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (listSEFDataTypes == null) {
+        if (iArrListSEFDataTypes == null) {
             Log.e(TAG, "No data type has been found : " + str);
             return -1;
         }
-        for (int length = listSEFDataTypes.length - 1; length > -1; length--) {
-            int i = listSEFDataTypes[length];
+        for (int length = iArrListSEFDataTypes.length - 1; length > -1; length--) {
+            int i = iArrListSEFDataTypes[length];
             if (i >= 2048 && i <= 16384 && (i & 15) == 0) {
                 return i;
             }

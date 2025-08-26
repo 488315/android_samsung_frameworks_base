@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DrawableKt {
     public static final Bitmap toBitmap(Drawable drawable, int i, int i2, Bitmap.Config config) {
@@ -27,10 +26,10 @@ public abstract class DrawableKt {
         if (config == null) {
             config = Bitmap.Config.ARGB_8888;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, config);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, config);
         drawable.setBounds(0, 0, i, i2);
-        drawable.draw(new Canvas(createBitmap));
+        drawable.draw(new Canvas(bitmapCreateBitmap));
         drawable.setBounds(i3, i4, i5, i6);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 }

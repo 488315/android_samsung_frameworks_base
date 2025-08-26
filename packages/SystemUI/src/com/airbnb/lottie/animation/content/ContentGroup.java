@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.RectF;
+import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieDrawable;
 import com.airbnb.lottie.animation.LPaint;
 import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation;
@@ -11,13 +12,14 @@ import com.airbnb.lottie.animation.keyframe.TransformKeyframeAnimation;
 import com.airbnb.lottie.model.KeyPath;
 import com.airbnb.lottie.model.KeyPathElement;
 import com.airbnb.lottie.model.animatable.AnimatableTransform;
+import com.airbnb.lottie.model.content.ContentModel;
+import com.airbnb.lottie.model.content.ShapeGroup;
 import com.airbnb.lottie.model.layer.BaseLayer;
 import com.airbnb.lottie.utils.Utils;
 import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ContentGroup implements DrawingContent, PathContent, BaseKeyframeAnimation.AnimationListener, KeyPathElement {
     public final List contents;
@@ -32,60 +34,32 @@ public class ContentGroup implements DrawingContent, PathContent, BaseKeyframeAn
     public final RectF rect;
     public final TransformKeyframeAnimation transformAnimation;
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ContentGroup(com.airbnb.lottie.LottieDrawable r8, com.airbnb.lottie.model.layer.BaseLayer r9, com.airbnb.lottie.model.content.ShapeGroup r10, com.airbnb.lottie.LottieComposition r11) {
-        /*
-            r7 = this;
-            java.lang.String r3 = r10.name
-            java.util.List r0 = r10.items
-            java.util.ArrayList r5 = new java.util.ArrayList
-            int r1 = r0.size()
-            r5.<init>(r1)
-            r1 = 0
-            r2 = r1
-        Lf:
-            int r4 = r0.size()
-            if (r2 >= r4) goto L27
-            java.lang.Object r4 = r0.get(r2)
-            com.airbnb.lottie.model.content.ContentModel r4 = (com.airbnb.lottie.model.content.ContentModel) r4
-            com.airbnb.lottie.animation.content.Content r4 = r4.toContent(r8, r11, r9)
-            if (r4 == 0) goto L24
-            r5.add(r4)
-        L24:
-            int r2 = r2 + 1
-            goto Lf
-        L27:
-            java.util.List r11 = r10.items
-        L29:
-            int r0 = r11.size()
-            if (r1 >= r0) goto L40
-            java.lang.Object r0 = r11.get(r1)
-            com.airbnb.lottie.model.content.ContentModel r0 = (com.airbnb.lottie.model.content.ContentModel) r0
-            boolean r2 = r0 instanceof com.airbnb.lottie.model.animatable.AnimatableTransform
-            if (r2 == 0) goto L3d
-            com.airbnb.lottie.model.animatable.AnimatableTransform r0 = (com.airbnb.lottie.model.animatable.AnimatableTransform) r0
-        L3b:
-            r6 = r0
-            goto L42
-        L3d:
-            int r1 = r1 + 1
-            goto L29
-        L40:
-            r0 = 0
-            goto L3b
-        L42:
-            boolean r4 = r10.hidden
-            r0 = r7
-            r1 = r8
-            r2 = r9
-            r0.<init>(r1, r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.airbnb.lottie.animation.content.ContentGroup.<init>(com.airbnb.lottie.LottieDrawable, com.airbnb.lottie.model.layer.BaseLayer, com.airbnb.lottie.model.content.ShapeGroup, com.airbnb.lottie.LottieComposition):void");
+    public ContentGroup(LottieDrawable lottieDrawable, BaseLayer baseLayer, ShapeGroup shapeGroup, LottieComposition lottieComposition) {
+        AnimatableTransform animatableTransform;
+        String str = shapeGroup.name;
+        List list = shapeGroup.items;
+        ArrayList arrayList = new ArrayList(list.size());
+        int i = 0;
+        for (int i2 = 0; i2 < list.size(); i2++) {
+            Content content = ((ContentModel) list.get(i2)).toContent(lottieDrawable, lottieComposition, baseLayer);
+            if (content != null) {
+                arrayList.add(content);
+            }
+        }
+        List list2 = shapeGroup.items;
+        while (true) {
+            if (i >= list2.size()) {
+                animatableTransform = null;
+                break;
+            }
+            ContentModel contentModel = (ContentModel) list2.get(i);
+            if (contentModel instanceof AnimatableTransform) {
+                animatableTransform = (AnimatableTransform) contentModel;
+                break;
+            }
+            i++;
+        }
+        this(lottieDrawable, baseLayer, str, shapeGroup.hidden, arrayList, animatableTransform);
     }
 
     @Override // com.airbnb.lottie.model.KeyPathElement
@@ -216,11 +190,11 @@ public class ContentGroup implements DrawingContent, PathContent, BaseKeyframeAn
                 }
             }
             if (keyPath.propagateToChildren(i, str)) {
-                int incrementDepthBy = keyPath.incrementDepthBy(i, str) + i;
+                int iIncrementDepthBy = keyPath.incrementDepthBy(i, str) + i;
                 for (int i2 = 0; i2 < this.contents.size(); i2++) {
                     Content content = (Content) this.contents.get(i2);
                     if (content instanceof KeyPathElement) {
-                        ((KeyPathElement) content).resolveKeyPath(keyPath, incrementDepthBy, list, keyPath2);
+                        ((KeyPathElement) content).resolveKeyPath(keyPath, iIncrementDepthBy, list, keyPath2);
                     }
                 }
             }

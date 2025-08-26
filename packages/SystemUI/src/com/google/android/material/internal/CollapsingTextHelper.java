@@ -29,7 +29,6 @@ import com.google.android.material.resources.TextAppearance;
 import com.google.android.material.resources.TypefaceUtils;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CollapsingTextHelper {
     public boolean boundsChanged;
@@ -135,13 +134,13 @@ public final class CollapsingTextHelper {
         float f3;
         Typeface typeface;
         boolean z2;
-        StaticLayout staticLayout;
+        StaticLayout staticLayoutBuild;
         Layout.Alignment alignment;
         if (this.text == null) {
             return;
         }
-        float width = this.collapsedBounds.width();
-        float width2 = this.expandedBounds.width();
+        float fWidth = this.collapsedBounds.width();
+        float fWidth2 = this.expandedBounds.width();
         if (Math.abs(f - 1.0f) < 1.0E-5f) {
             f2 = this.collapsedTextSize;
             f3 = this.collapsedLetterSpacing;
@@ -157,17 +156,17 @@ public final class CollapsingTextHelper {
                 this.scale = lerp(this.expandedTextSize, this.collapsedTextSize, f, this.textSizeInterpolator) / this.expandedTextSize;
             }
             float f6 = this.collapsedTextSize / this.expandedTextSize;
-            width = (z || width2 * f6 <= width) ? width2 : Math.min(width / f6, width2);
+            fWidth = (z || fWidth2 * f6 <= fWidth) ? fWidth2 : Math.min(fWidth / f6, fWidth2);
             f2 = f4;
             f3 = f5;
             typeface = typeface2;
         }
-        if (width > 0.0f) {
+        if (fWidth > 0.0f) {
             boolean z3 = this.currentTextSize != f2;
             boolean z4 = this.currentLetterSpacing != f3;
             boolean z5 = this.currentTypeface != typeface;
-            StaticLayout staticLayout2 = this.textLayout;
-            boolean z6 = z3 || z4 || (staticLayout2 != null && (width > ((float) staticLayout2.getWidth()) ? 1 : (width == ((float) staticLayout2.getWidth()) ? 0 : -1)) != 0) || z5 || this.boundsChanged;
+            StaticLayout staticLayout = this.textLayout;
+            boolean z6 = z3 || z4 || (staticLayout != null && (fWidth > ((float) staticLayout.getWidth()) ? 1 : (fWidth == ((float) staticLayout.getWidth()) ? 0 : -1)) != 0) || z5 || this.boundsChanged;
             this.currentTextSize = f2;
             this.currentLetterSpacing = f3;
             this.currentTypeface = typeface;
@@ -181,40 +180,40 @@ public final class CollapsingTextHelper {
             this.textPaint.setTextSize(this.currentTextSize);
             this.textPaint.setTypeface(this.currentTypeface);
             this.textPaint.setLetterSpacing(this.currentLetterSpacing);
-            boolean calculateIsRtl = calculateIsRtl(this.text);
-            this.isRtl = calculateIsRtl;
+            boolean zCalculateIsRtl = calculateIsRtl(this.text);
+            this.isRtl = zCalculateIsRtl;
             int i = this.maxLines;
-            if (i <= 1 || calculateIsRtl) {
+            if (i <= 1 || zCalculateIsRtl) {
                 i = 1;
             }
             try {
                 if (i == 1) {
                     alignment = Layout.Alignment.ALIGN_NORMAL;
                 } else {
-                    int absoluteGravity = Gravity.getAbsoluteGravity(this.expandedTextGravity, calculateIsRtl ? 1 : 0) & 7;
+                    int absoluteGravity = Gravity.getAbsoluteGravity(this.expandedTextGravity, zCalculateIsRtl ? 1 : 0) & 7;
                     alignment = absoluteGravity != 1 ? absoluteGravity != 5 ? this.isRtl ? Layout.Alignment.ALIGN_OPPOSITE : Layout.Alignment.ALIGN_NORMAL : this.isRtl ? Layout.Alignment.ALIGN_NORMAL : Layout.Alignment.ALIGN_OPPOSITE : Layout.Alignment.ALIGN_CENTER;
                 }
-                StaticLayoutBuilderCompat obtain = StaticLayoutBuilderCompat.obtain(this.text, this.textPaint, (int) width);
-                obtain.ellipsize = this.titleTextEllipsize;
-                obtain.isRtl = calculateIsRtl;
-                obtain.alignment = alignment;
-                obtain.includePad = false;
-                obtain.maxLines = i;
-                obtain.lineSpacingMultiplier = this.lineSpacingMultiplier;
-                obtain.hyphenationFrequency = this.hyphenationFrequency;
-                staticLayout = obtain.build();
+                StaticLayoutBuilderCompat staticLayoutBuilderCompatObtain = StaticLayoutBuilderCompat.obtain(this.text, this.textPaint, (int) fWidth);
+                staticLayoutBuilderCompatObtain.ellipsize = this.titleTextEllipsize;
+                staticLayoutBuilderCompatObtain.isRtl = zCalculateIsRtl;
+                staticLayoutBuilderCompatObtain.alignment = alignment;
+                staticLayoutBuilderCompatObtain.includePad = false;
+                staticLayoutBuilderCompatObtain.maxLines = i;
+                staticLayoutBuilderCompatObtain.lineSpacingMultiplier = this.lineSpacingMultiplier;
+                staticLayoutBuilderCompatObtain.hyphenationFrequency = this.hyphenationFrequency;
+                staticLayoutBuild = staticLayoutBuilderCompatObtain.build();
             } catch (StaticLayoutBuilderCompat.StaticLayoutBuilderCompatException e) {
                 Log.e("CollapsingTextHelper", e.getCause().getMessage(), e);
-                staticLayout = null;
+                staticLayoutBuild = null;
             }
-            staticLayout.getClass();
-            this.textLayout = staticLayout;
-            this.textToDraw = staticLayout.getText();
+            staticLayoutBuild.getClass();
+            this.textLayout = staticLayoutBuild;
+            this.textToDraw = staticLayoutBuild.getText();
         }
     }
 
     public final void draw(Canvas canvas) {
-        int save = canvas.save();
+        int iSave = canvas.save();
         if (this.textToDraw == null || this.currentBounds.width() <= 0.0f || this.currentBounds.height() <= 0.0f) {
             return;
         }
@@ -245,14 +244,14 @@ public final class CollapsingTextHelper {
             float f5 = lineBaseline;
             canvas.drawText(charSequence, 0, charSequence.length(), 0.0f, f5, this.textPaint);
             this.textPaint.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, this.currentShadowColor);
-            String trim = this.textToDrawCollapsed.toString().trim();
-            if (trim.endsWith("…")) {
-                trim = trim.substring(0, trim.length() - 1);
+            String strTrim = this.textToDrawCollapsed.toString().trim();
+            if (strTrim.endsWith("…")) {
+                strTrim = strTrim.substring(0, strTrim.length() - 1);
             }
             this.textPaint.setAlpha(alpha);
-            canvas.drawText(trim, 0, Math.min(this.textLayout.getLineEnd(0), trim.length()), 0.0f, f5, (Paint) this.textPaint);
+            canvas.drawText(strTrim, 0, Math.min(this.textLayout.getLineEnd(0), strTrim.length()), 0.0f, f5, (Paint) this.textPaint);
         }
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     public final float getCollapsedTextHeight() {
@@ -294,7 +293,7 @@ public final class CollapsingTextHelper {
     }
 
     public final void recalculate(boolean z) {
-        float measureText;
+        float fMeasureText;
         StaticLayout staticLayout;
         if ((this.view.getHeight() <= 0 || this.view.getWidth() <= 0) && !z) {
             return;
@@ -332,9 +331,9 @@ public final class CollapsingTextHelper {
         StaticLayout staticLayout2 = this.textLayout;
         if (staticLayout2 == null || this.maxLines <= 1) {
             CharSequence charSequence3 = this.textToDraw;
-            measureText = charSequence3 != null ? this.textPaint.measureText(charSequence3, 0, charSequence3.length()) : 0.0f;
+            fMeasureText = charSequence3 != null ? this.textPaint.measureText(charSequence3, 0, charSequence3.length()) : 0.0f;
         } else {
-            measureText = staticLayout2.getWidth();
+            fMeasureText = staticLayout2.getWidth();
         }
         StaticLayout staticLayout3 = this.textLayout;
         this.expandedLineCount = staticLayout3 != null ? staticLayout3.getLineCount() : 0;
@@ -349,11 +348,11 @@ public final class CollapsingTextHelper {
         }
         int i4 = absoluteGravity2 & 8388615;
         if (i4 == 1) {
-            this.expandedDrawX = this.expandedBounds.centerX() - (measureText / 2.0f);
+            this.expandedDrawX = this.expandedBounds.centerX() - (fMeasureText / 2.0f);
         } else if (i4 != 5) {
             this.expandedDrawX = this.expandedBounds.left;
         } else {
-            this.expandedDrawX = this.expandedBounds.right - measureText;
+            this.expandedDrawX = this.expandedBounds.right - fMeasureText;
         }
         Bitmap bitmap = this.expandedTitleTexture;
         if (bitmap != null) {
@@ -393,9 +392,9 @@ public final class CollapsingTextHelper {
         this.currentShadowRadius = AnimationUtils.lerp(this.expandedShadowRadius, this.collapsedShadowRadius, f);
         this.currentShadowDx = AnimationUtils.lerp(this.expandedShadowDx, this.collapsedShadowDx, f);
         this.currentShadowDy = AnimationUtils.lerp(this.expandedShadowDy, this.collapsedShadowDy, f);
-        int blendARGB = blendARGB(f, getCurrentColor(this.expandedShadowColor), getCurrentColor(this.collapsedShadowColor));
-        this.currentShadowColor = blendARGB;
-        this.textPaint.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, blendARGB);
+        int iBlendARGB = blendARGB(f, getCurrentColor(this.expandedShadowColor), getCurrentColor(this.collapsedShadowColor));
+        this.currentShadowColor = iBlendARGB;
+        this.textPaint.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, iBlendARGB);
         this.view.postInvalidateOnAnimation();
     }
 
@@ -454,12 +453,12 @@ public final class CollapsingTextHelper {
             return false;
         }
         this.collapsedTypefaceDefault = typeface;
-        Typeface maybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(this.view.getContext().getResources().getConfiguration(), typeface);
-        this.collapsedTypefaceBold = maybeCopyWithFontWeightAdjustment;
-        if (maybeCopyWithFontWeightAdjustment == null) {
-            maybeCopyWithFontWeightAdjustment = this.collapsedTypefaceDefault;
+        Typeface typefaceMaybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(this.view.getContext().getResources().getConfiguration(), typeface);
+        this.collapsedTypefaceBold = typefaceMaybeCopyWithFontWeightAdjustment;
+        if (typefaceMaybeCopyWithFontWeightAdjustment == null) {
+            typefaceMaybeCopyWithFontWeightAdjustment = this.collapsedTypefaceDefault;
         }
-        this.collapsedTypeface = maybeCopyWithFontWeightAdjustment;
+        this.collapsedTypeface = typefaceMaybeCopyWithFontWeightAdjustment;
         return true;
     }
 
@@ -509,53 +508,53 @@ public final class CollapsingTextHelper {
             return false;
         }
         this.expandedTypefaceDefault = typeface;
-        Typeface maybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(this.view.getContext().getResources().getConfiguration(), typeface);
-        this.expandedTypefaceBold = maybeCopyWithFontWeightAdjustment;
-        if (maybeCopyWithFontWeightAdjustment == null) {
-            maybeCopyWithFontWeightAdjustment = this.expandedTypefaceDefault;
+        Typeface typefaceMaybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(this.view.getContext().getResources().getConfiguration(), typeface);
+        this.expandedTypefaceBold = typefaceMaybeCopyWithFontWeightAdjustment;
+        if (typefaceMaybeCopyWithFontWeightAdjustment == null) {
+            typefaceMaybeCopyWithFontWeightAdjustment = this.expandedTypefaceDefault;
         }
-        this.expandedTypeface = maybeCopyWithFontWeightAdjustment;
+        this.expandedTypeface = typefaceMaybeCopyWithFontWeightAdjustment;
         return true;
     }
 
     public final void setExpansionFraction(float f) {
-        float clamp = MathUtils.clamp(f, 0.0f, 1.0f);
-        if (clamp != this.expandedFraction) {
-            this.expandedFraction = clamp;
-            this.currentBounds.left = lerp(this.expandedBounds.left, this.collapsedBounds.left, clamp, this.positionInterpolator);
-            this.currentBounds.top = lerp(this.expandedDrawY, this.collapsedDrawY, clamp, this.positionInterpolator);
-            this.currentBounds.right = lerp(this.expandedBounds.right, this.collapsedBounds.right, clamp, this.positionInterpolator);
-            this.currentBounds.bottom = lerp(this.expandedBounds.bottom, this.collapsedBounds.bottom, clamp, this.positionInterpolator);
-            this.currentDrawX = lerp(this.expandedDrawX, this.collapsedDrawX, clamp, this.positionInterpolator);
-            this.currentDrawY = lerp(this.expandedDrawY, this.collapsedDrawY, clamp, this.positionInterpolator);
-            setInterpolatedTextSize(clamp);
+        float fClamp = MathUtils.clamp(f, 0.0f, 1.0f);
+        if (fClamp != this.expandedFraction) {
+            this.expandedFraction = fClamp;
+            this.currentBounds.left = lerp(this.expandedBounds.left, this.collapsedBounds.left, fClamp, this.positionInterpolator);
+            this.currentBounds.top = lerp(this.expandedDrawY, this.collapsedDrawY, fClamp, this.positionInterpolator);
+            this.currentBounds.right = lerp(this.expandedBounds.right, this.collapsedBounds.right, fClamp, this.positionInterpolator);
+            this.currentBounds.bottom = lerp(this.expandedBounds.bottom, this.collapsedBounds.bottom, fClamp, this.positionInterpolator);
+            this.currentDrawX = lerp(this.expandedDrawX, this.collapsedDrawX, fClamp, this.positionInterpolator);
+            this.currentDrawY = lerp(this.expandedDrawY, this.collapsedDrawY, fClamp, this.positionInterpolator);
+            setInterpolatedTextSize(fClamp);
             FastOutSlowInInterpolator fastOutSlowInInterpolator = AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
-            this.collapsedTextBlend = 1.0f - lerp(0.0f, 1.0f, 1.0f - clamp, fastOutSlowInInterpolator);
+            this.collapsedTextBlend = 1.0f - lerp(0.0f, 1.0f, 1.0f - fClamp, fastOutSlowInInterpolator);
             View view = this.view;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             view.postInvalidateOnAnimation();
-            this.expandedTextBlend = lerp(1.0f, 0.0f, clamp, fastOutSlowInInterpolator);
+            this.expandedTextBlend = lerp(1.0f, 0.0f, fClamp, fastOutSlowInInterpolator);
             this.view.postInvalidateOnAnimation();
             ColorStateList colorStateList = this.collapsedTextColor;
             ColorStateList colorStateList2 = this.expandedTextColor;
             if (colorStateList != colorStateList2) {
-                this.textPaint.setColor(blendARGB(clamp, getCurrentColor(colorStateList2), getCurrentColor(this.collapsedTextColor)));
+                this.textPaint.setColor(blendARGB(fClamp, getCurrentColor(colorStateList2), getCurrentColor(this.collapsedTextColor)));
             } else {
                 this.textPaint.setColor(getCurrentColor(colorStateList));
             }
             float f2 = this.collapsedLetterSpacing;
             float f3 = this.expandedLetterSpacing;
             if (f2 != f3) {
-                this.textPaint.setLetterSpacing(lerp(f3, f2, clamp, fastOutSlowInInterpolator));
+                this.textPaint.setLetterSpacing(lerp(f3, f2, fClamp, fastOutSlowInInterpolator));
             } else {
                 this.textPaint.setLetterSpacing(f2);
             }
-            this.currentShadowRadius = AnimationUtils.lerp(this.expandedShadowRadius, this.collapsedShadowRadius, clamp);
-            this.currentShadowDx = AnimationUtils.lerp(this.expandedShadowDx, this.collapsedShadowDx, clamp);
-            this.currentShadowDy = AnimationUtils.lerp(this.expandedShadowDy, this.collapsedShadowDy, clamp);
-            int blendARGB = blendARGB(clamp, getCurrentColor(this.expandedShadowColor), getCurrentColor(this.collapsedShadowColor));
-            this.currentShadowColor = blendARGB;
-            this.textPaint.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, blendARGB);
+            this.currentShadowRadius = AnimationUtils.lerp(this.expandedShadowRadius, this.collapsedShadowRadius, fClamp);
+            this.currentShadowDx = AnimationUtils.lerp(this.expandedShadowDx, this.collapsedShadowDx, fClamp);
+            this.currentShadowDy = AnimationUtils.lerp(this.expandedShadowDy, this.collapsedShadowDy, fClamp);
+            int iBlendARGB = blendARGB(fClamp, getCurrentColor(this.expandedShadowColor), getCurrentColor(this.collapsedShadowColor));
+            this.currentShadowColor = iBlendARGB;
+            this.textPaint.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, iBlendARGB);
             this.view.postInvalidateOnAnimation();
         }
     }

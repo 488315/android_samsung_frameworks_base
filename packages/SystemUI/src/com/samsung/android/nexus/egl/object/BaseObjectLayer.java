@@ -9,7 +9,6 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BaseObjectLayer extends BaseLayer {
     public final int[] mElementHandles;
@@ -27,12 +26,12 @@ public abstract class BaseObjectLayer extends BaseLayer {
 
     public BaseObjectLayer() {
         this.mStrideSize = 0;
-        int[] generateElementSizeList = generateElementSizeList();
-        this.mElementSizeList = generateElementSizeList;
-        String[] generateElementNameList = generateElementNameList();
-        this.mElementNameList = generateElementNameList;
-        this.mElementHandles = new int[generateElementNameList.length];
-        for (int i : generateElementSizeList) {
+        int[] iArrGenerateElementSizeList = generateElementSizeList();
+        this.mElementSizeList = iArrGenerateElementSizeList;
+        String[] strArrGenerateElementNameList = generateElementNameList();
+        this.mElementNameList = strArrGenerateElementNameList;
+        this.mElementHandles = new int[strArrGenerateElementNameList.length];
+        for (int i : iArrGenerateElementSizeList) {
             this.mTotalElementSize += i;
         }
         this.mStrideSize = this.mTotalElementSize * 4;

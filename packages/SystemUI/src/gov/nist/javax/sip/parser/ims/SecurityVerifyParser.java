@@ -6,7 +6,6 @@ import gov.nist.javax.sip.header.ims.SecurityVerify;
 import gov.nist.javax.sip.header.ims.SecurityVerifyList;
 import gov.nist.javax.sip.parser.Lexer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SecurityVerifyParser extends SecurityAgreeParser {
     public SecurityVerifyParser(String str) {

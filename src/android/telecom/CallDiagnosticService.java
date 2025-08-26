@@ -8,7 +8,6 @@ import android.os.HandlerExecutor;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.telecom.Call;
-import android.telecom.CallDiagnosticService;
 import android.telecom.CallDiagnostics;
 import android.telephony.CallQuality;
 import android.util.ArrayMap;
@@ -87,7 +86,7 @@ public abstract class CallDiagnosticService extends Service {
             CallDiagnosticService.this.getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$CallDiagnosticServiceBinder$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallDiagnosticService.CallDiagnosticServiceBinder.this.lambda$updateCallAudioState$0(callAudioState);
+                    this.f$0.lambda$updateCallAudioState$0(callAudioState);
                 }
             });
         }
@@ -132,28 +131,28 @@ public abstract class CallDiagnosticService extends Service {
     public void handleCallAdded(ParcelableCall parcelableCall) {
         final String id = parcelableCall.getId();
         Log.i(this, "handleCallAdded: callId=%s - added", id);
-        final Call.Details createFromParcelableCall = Call.Details.createFromParcelableCall(parcelableCall);
+        final Call.Details detailsCreateFromParcelableCall = Call.Details.createFromParcelableCall(parcelableCall);
         synchronized (this.mLock) {
-            this.mCallByTelecomCallId.put(id, createFromParcelableCall);
+            this.mCallByTelecomCallId.put(id, detailsCreateFromParcelableCall);
         }
         getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                CallDiagnosticService.this.lambda$handleCallAdded$0(createFromParcelableCall, id);
+                this.f$0.lambda$handleCallAdded$0(detailsCreateFromParcelableCall, id);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$handleCallAdded$0(Call.Details details, String str) {
-        CallDiagnostics onInitializeCallDiagnostics = onInitializeCallDiagnostics(details);
-        if (onInitializeCallDiagnostics == null) {
+        CallDiagnostics callDiagnosticsOnInitializeCallDiagnostics = onInitializeCallDiagnostics(details);
+        if (callDiagnosticsOnInitializeCallDiagnostics == null) {
             throw new IllegalArgumentException("A valid DiagnosticCall instance was not provided.");
         }
         synchronized (this.mLock) {
-            onInitializeCallDiagnostics.setListener(this.mDiagnosticCallListener);
-            onInitializeCallDiagnostics.setCallId(str);
-            this.mDiagnosticCallByTelecomCallId.put(str, onInitializeCallDiagnostics);
+            callDiagnosticsOnInitializeCallDiagnostics.setListener(this.mDiagnosticCallListener);
+            callDiagnosticsOnInitializeCallDiagnostics.setCallId(str);
+            this.mDiagnosticCallByTelecomCallId.put(str, callDiagnosticsOnInitializeCallDiagnostics);
         }
     }
 
@@ -161,17 +160,17 @@ public abstract class CallDiagnosticService extends Service {
     public void handleCallUpdated(ParcelableCall parcelableCall) {
         String id = parcelableCall.getId();
         Log.i(this, "handleCallUpdated: callId=%s - updated", id);
-        final Call.Details createFromParcelableCall = Call.Details.createFromParcelableCall(parcelableCall);
+        final Call.Details detailsCreateFromParcelableCall = Call.Details.createFromParcelableCall(parcelableCall);
         synchronized (this.mLock) {
             final CallDiagnostics callDiagnostics = this.mDiagnosticCallByTelecomCallId.get(id);
             if (callDiagnostics == null) {
                 return;
             }
-            this.mCallByTelecomCallId.put(id, createFromParcelableCall);
+            this.mCallByTelecomCallId.put(id, detailsCreateFromParcelableCall);
             getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallDiagnostics.this.handleCallUpdated(createFromParcelableCall);
+                    callDiagnostics.handleCallUpdated(detailsCreateFromParcelableCall);
                 }
             });
         }
@@ -179,19 +178,19 @@ public abstract class CallDiagnosticService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleCallRemoved(String str) {
-        final CallDiagnostics remove;
+        final CallDiagnostics callDiagnosticsRemove;
         Log.i(this, "handleCallRemoved: callId=%s - removed", str);
         synchronized (this.mLock) {
             if (this.mCallByTelecomCallId.containsKey(str)) {
                 this.mCallByTelecomCallId.remove(str);
             }
-            remove = this.mDiagnosticCallByTelecomCallId.containsKey(str) ? this.mDiagnosticCallByTelecomCallId.remove(str) : null;
+            callDiagnosticsRemove = this.mDiagnosticCallByTelecomCallId.containsKey(str) ? this.mDiagnosticCallByTelecomCallId.remove(str) : null;
         }
-        if (remove != null) {
+        if (callDiagnosticsRemove != null) {
             getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallDiagnosticService.this.lambda$handleCallRemoved$2(remove);
+                    this.f$0.lambda$handleCallRemoved$2(callDiagnosticsRemove);
                 }
             });
         }
@@ -208,7 +207,7 @@ public abstract class CallDiagnosticService extends Service {
             getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CallDiagnostics.this.onReceiveDeviceToDeviceMessage(i, i2);
+                    callDiagnostics.onReceiveDeviceToDeviceMessage(i, i2);
                 }
             });
         }
@@ -217,18 +216,18 @@ public abstract class CallDiagnosticService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void handleCallDisconnected(String str, DisconnectCause disconnectCause) {
         CallDiagnostics callDiagnostics;
-        CharSequence onCallDisconnected;
+        CharSequence charSequenceOnCallDisconnected;
         Log.i(this, "handleCallDisconnected: call=%s; cause=%s", str, disconnectCause);
         synchronized (this.mLock) {
             callDiagnostics = this.mDiagnosticCallByTelecomCallId.get(str);
         }
         if (disconnectCause.getImsReasonInfo() != null) {
-            onCallDisconnected = callDiagnostics.onCallDisconnected(disconnectCause.getImsReasonInfo());
+            charSequenceOnCallDisconnected = callDiagnostics.onCallDisconnected(disconnectCause.getImsReasonInfo());
         } else {
-            onCallDisconnected = callDiagnostics.onCallDisconnected(disconnectCause.getTelephonyDisconnectCause(), disconnectCause.getTelephonyPreciseDisconnectCause());
+            charSequenceOnCallDisconnected = callDiagnostics.onCallDisconnected(disconnectCause.getTelephonyDisconnectCause(), disconnectCause.getTelephonyPreciseDisconnectCause());
         }
         try {
-            this.mAdapter.overrideDisconnectMessage(str, onCallDisconnected);
+            this.mAdapter.overrideDisconnectMessage(str, charSequenceOnCallDisconnected);
         } catch (RemoteException e) {
             Log.w(this, "handleCallDisconnected: call=%s; cause=%s; %s", str, disconnectCause, e);
         }
@@ -240,7 +239,7 @@ public abstract class CallDiagnosticService extends Service {
         getExecutor().execute(new Runnable() { // from class: android.telecom.CallDiagnosticService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CallDiagnosticService.this.lambda$handleBluetoothCallQualityReport$4(bluetoothCallQualityReport);
+                this.f$0.lambda$handleBluetoothCallQualityReport$4(bluetoothCallQualityReport);
             }
         });
     }

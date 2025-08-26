@@ -21,9 +21,9 @@ public final class NetworkSecurityConfigProvider extends Provider {
     public static void install(Context context) {
         ApplicationConfig applicationConfig = new ApplicationConfig(new ManifestConfigSource(context));
         ApplicationConfig.setDefaultInstance(applicationConfig);
-        int insertProviderAt = Security.insertProviderAt(new NetworkSecurityConfigProvider(), 1);
-        if (insertProviderAt != 1) {
-            throw new RuntimeException("Failed to install provider as highest priority provider. Provider was installed at position " + insertProviderAt);
+        int iInsertProviderAt = Security.insertProviderAt(new NetworkSecurityConfigProvider(), 1);
+        if (iInsertProviderAt != 1) {
+            throw new RuntimeException("Failed to install provider as highest priority provider. Provider was installed at position " + iInsertProviderAt);
         }
         NetworkSecurityPolicy.setInstance(new ConfigNetworkSecurityPolicy(applicationConfig));
     }

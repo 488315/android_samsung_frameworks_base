@@ -6,6 +6,7 @@ import android.hardware.display.IDisplayManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
@@ -46,15 +47,20 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldController.StateListener {
     public final AODAmbientWallpaperHelper aodAmbientWallpaperHelper;
@@ -101,21 +107,61 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
     public final WakefulnessLifecycle wakefulnessLifecycle;
     public final WallpaperManager wallpaperManager;
 
+    /* renamed from: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$playWallpaperAnimation$1, reason: invalid class name and case insensitive filesystem */
+    final class C10901 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10901(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SecUnlockedScreenOffAnimationHelper.this.new C10901(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10901) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            SecUnlockedScreenOffAnimationHelper.this.getClass();
+            SecUnlockedScreenOffAnimationHelper.logD("playWallpaperAnimation");
+            SecUnlockedScreenOffAnimationHelper.this.wallpaperManager.semSendWallpaperCommand(1, "samsung.android.wallpaper.goingtosleep", new Bundle());
+            int i = ((KeyguardFoldControllerImpl) SecUnlockedScreenOffAnimationHelper.this.keyguardFoldController).isFoldOpened() ? 4 : 16;
+            if (!SecUnlockedScreenOffAnimationHelper.this.wallpaperManager.isSystemAndLockPaired(i)) {
+                SecUnlockedScreenOffAnimationHelper.this.wallpaperManager.semSendWallpaperCommand(i | 2, "samsung.android.wallpaper.goingtosleep", new Bundle());
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0005  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean $r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper) {
         boolean z;
-        if (!LsRune.KEYGUARD_FIX_ROTATION_FOR_FACTORY) {
+        if (LsRune.KEYGUARD_FIX_ROTATION_FOR_FACTORY) {
+            z = true;
+        } else {
             int rotation = secUnlockedScreenOffAnimationHelper.context.getDisplay().getRotation();
             secUnlockedScreenOffAnimationHelper.curRotation = rotation;
             KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("getRotation: curRotation=", rotation, ", settingsHelper.isRotationLocked=", secUnlockedScreenOffAnimationHelper.settingsHelper.isRotationLocked(), "UnlockedScreenOffAnimation");
             int i = secUnlockedScreenOffAnimationHelper.curRotation;
-            boolean isLockScreenRotationAllowed = secUnlockedScreenOffAnimationHelper.settingsHelper.isLockScreenRotationAllowed();
-            boolean isRotationLocked = secUnlockedScreenOffAnimationHelper.settingsHelper.isRotationLocked();
-            if (((!isLockScreenRotationAllowed || isRotationLocked) && i != 0) || ((isLockScreenRotationAllowed && i != 0 && (WallpaperUtils.isVideoWallpaper(secUnlockedScreenOffAnimationHelper.context) || ((PluginLockMediator) secUnlockedScreenOffAnimationHelper.pluginLockMediatorLazy.get()).isRotateMenuHide())) || (!isRotationLocked && isLockScreenRotationAllowed && i == 2))) {
+            boolean zIsLockScreenRotationAllowed = secUnlockedScreenOffAnimationHelper.settingsHelper.isLockScreenRotationAllowed();
+            boolean zIsRotationLocked = secUnlockedScreenOffAnimationHelper.settingsHelper.isRotationLocked();
+            if (((!zIsLockScreenRotationAllowed || zIsRotationLocked) && i != 0) || ((zIsLockScreenRotationAllowed && i != 0 && (WallpaperUtils.isVideoWallpaper(secUnlockedScreenOffAnimationHelper.context) || ((PluginLockMediator) secUnlockedScreenOffAnimationHelper.pluginLockMediatorLazy.get()).isRotateMenuHide())) || (!zIsRotationLocked && zIsLockScreenRotationAllowed && i == 2))) {
                 z = false;
-                return !z;
             }
         }
-        z = true;
         return !z;
     }
 
@@ -210,8 +256,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i4) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -224,8 +268,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -236,8 +279,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -255,8 +297,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i5) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -269,8 +309,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -281,8 +320,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -300,8 +338,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i6) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -314,8 +350,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -326,8 +361,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -345,8 +379,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i7) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -359,8 +391,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -371,8 +402,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -390,8 +420,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i8) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -404,8 +432,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -416,8 +443,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -435,8 +461,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i9) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -449,8 +473,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -461,8 +484,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -480,8 +502,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i10) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -494,8 +514,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -506,8 +525,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -525,8 +543,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i11) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -539,8 +555,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -551,8 +566,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -570,8 +584,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i12) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -584,8 +596,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -596,8 +607,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -615,8 +625,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i13) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -629,8 +637,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -641,8 +648,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -660,8 +666,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i14) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -674,8 +678,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -686,8 +689,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -705,8 +707,6 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                boolean isAnimationRemoved;
-                boolean isUltraPowerSavingMode;
                 switch (i15) {
                     case 0:
                         return Boolean.valueOf(SecUnlockedScreenOffAnimationHelper.$r8$lambda$eEKgOiEEeeWpWotBHBwR98uuBco(this.f$0));
@@ -719,8 +719,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                         }
                         return (Boolean) unlockedScreenOffAnimationController$$ExternalSyntheticLambda0.invoke();
                     case 3:
-                        isAnimationRemoved = this.f$0.settingsHelper.isAnimationRemoved();
-                        return Boolean.valueOf(isAnimationRemoved);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isAnimationRemoved());
                     case 4:
                         return Boolean.valueOf(this.f$0.statusBarStateControllerImpl.mState != 0);
                     case 5:
@@ -731,8 +730,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                     case 7:
                         return Boolean.valueOf(this.f$0.isPanelOpenedOnGoingToSleep);
                     case 8:
-                        isUltraPowerSavingMode = this.f$0.settingsHelper.isUltraPowerSavingMode();
-                        return Boolean.valueOf(isUltraPowerSavingMode);
+                        return Boolean.valueOf(this.f$0.settingsHelper.isUltraPowerSavingMode());
                     case 9:
                         return Boolean.valueOf(((PluginAODManager) this.f$0.pluginAODManagerLazy.get()).mStartedByFolderClosed);
                     case 10:
@@ -747,13 +745,13 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
         this.updateSetLockScreenShownRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$updateSetLockScreenShownRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                if (((KeyguardViewMediator) SecUnlockedScreenOffAnimationHelper.this.keyguardViewMediatorLazy.get()).getViewMediatorCallback().isScreenOn()) {
-                    SecUnlockedScreenOffAnimationHelper.this.getClass();
+                if (((KeyguardViewMediator) this.this$0.keyguardViewMediatorLazy.get()).getViewMediatorCallback().isScreenOn()) {
+                    this.this$0.getClass();
                     SecUnlockedScreenOffAnimationHelper.logD("updateSetLockScreenShownRunnable do not run after onStartedWakingUp");
                     return;
                 }
-                SecUnlockedScreenOffAnimationHelper.logD("updateSetLockScreenShownRunnable called needUpdateSetLockScreenShown=" + SecUnlockedScreenOffAnimationHelper.this.needUpdateSetLockScreenShown);
-                SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = SecUnlockedScreenOffAnimationHelper.this;
+                SecUnlockedScreenOffAnimationHelper.logD("updateSetLockScreenShownRunnable called needUpdateSetLockScreenShown=" + this.this$0.needUpdateSetLockScreenShown);
+                SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = this.this$0;
                 if (secUnlockedScreenOffAnimationHelper.needUpdateSetLockScreenShown) {
                     return;
                 }
@@ -764,24 +762,19 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
         this.aodStateCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$aodStateCallback$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                SettingsHelper settingsHelper2;
-                SettingsHelper settingsHelper3;
-                SettingsHelper settingsHelper4;
                 if (uri != null) {
-                    boolean areEqual = Intrinsics.areEqual(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), uri);
-                    SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = SecUnlockedScreenOffAnimationHelper.this;
-                    if (!areEqual) {
+                    boolean zAreEqual = Intrinsics.areEqual(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), uri);
+                    SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = this.this$0;
+                    if (!zAreEqual) {
                         if (Intrinsics.areEqual(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_LOCKSCREEN_WALLPAPER), uri)) {
-                            settingsHelper2 = secUnlockedScreenOffAnimationHelper.settingsHelper;
-                            EmergencyButtonController$$ExternalSyntheticOutline0.m("aodStateCallback isAODShowLockWallpaper=", "UnlockedScreenOffAnimation", settingsHelper2.isAODShowLockWallpaper());
+                            EmergencyButtonController$$ExternalSyntheticOutline0.m("aodStateCallback isAODShowLockWallpaper=", "UnlockedScreenOffAnimation", secUnlockedScreenOffAnimationHelper.settingsHelper.isAODShowLockWallpaper());
                             CentralSurfacesImpl centralSurfacesImpl = secUnlockedScreenOffAnimationHelper.centralSurfaces;
                             (centralSurfacesImpl != null ? centralSurfacesImpl : null).mLightRevealScrim.setAlpha(secUnlockedScreenOffAnimationHelper.aodAmbientWallpaperHelper.getAlpha());
                             return;
                         }
                         return;
                     }
-                    settingsHelper3 = secUnlockedScreenOffAnimationHelper.settingsHelper;
-                    ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("aodStateCallback isAODShown=", ", needUpdateSetLockScreenShown=", " deviceInteractive=", settingsHelper3.isAODShown(), secUnlockedScreenOffAnimationHelper.needUpdateSetLockScreenShown), secUnlockedScreenOffAnimationHelper.deviceInteractive, "UnlockedScreenOffAnimation");
+                    ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("aodStateCallback isAODShown=", ", needUpdateSetLockScreenShown=", " deviceInteractive=", secUnlockedScreenOffAnimationHelper.settingsHelper.isAODShown(), secUnlockedScreenOffAnimationHelper.needUpdateSetLockScreenShown), secUnlockedScreenOffAnimationHelper.deviceInteractive, "UnlockedScreenOffAnimation");
                     if (secUnlockedScreenOffAnimationHelper.deviceInteractive) {
                         return;
                     }
@@ -807,8 +800,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                             return;
                         }
                         secUnlockedScreenOffAnimationHelper.needUpdateSetLockScreenShown = true;
-                        settingsHelper4 = secUnlockedScreenOffAnimationHelper.settingsHelper;
-                        secUnlockedScreenOffAnimationHelper.updateSetLockScreenShown(true ^ settingsHelper4.isAODShown());
+                        secUnlockedScreenOffAnimationHelper.updateSetLockScreenShown(true ^ secUnlockedScreenOffAnimationHelper.settingsHelper.isAODShown());
                     }
                 }
             }
@@ -831,24 +823,24 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
         this.isFalseDecidedToAnimateGoingToSleep = unlockedScreenOffAnimationController$$ExternalSyntheticLambda0;
         this.clearDecidedToAnimateGoingToSleep = unlockedScreenOffAnimationController$$ExternalSyntheticLambda02;
         this.settingsHelper.registerCallback(this.aodStateCallback, Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_LOCKSCREEN_WALLPAPER));
-        this.wakefulnessLifecycle.addObserver(new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$init$1
+        this.wakefulnessLifecycle.addObserver(new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper.init.1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedGoingToSleep() {
                 SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = SecUnlockedScreenOffAnimationHelper.this;
                 secUnlockedScreenOffAnimationHelper.deviceInteractive = false;
-                boolean shouldPlayUnlockedScreenOffAnimation = secUnlockedScreenOffAnimationHelper.shouldPlayUnlockedScreenOffAnimation();
+                boolean zShouldPlayUnlockedScreenOffAnimation = secUnlockedScreenOffAnimationHelper.shouldPlayUnlockedScreenOffAnimation();
                 AODAmbientWallpaperHelper aODAmbientWallpaperHelper = secUnlockedScreenOffAnimationHelper.aodAmbientWallpaperHelper;
-                boolean isAODFullScreenMode = aODAmbientWallpaperHelper.isAODFullScreenMode();
-                String access$getReasonLog = SecUnlockedScreenOffAnimationHelper.access$getReasonLog(secUnlockedScreenOffAnimationHelper, secUnlockedScreenOffAnimationHelper.lastReason);
+                boolean zIsAODFullScreenMode = aODAmbientWallpaperHelper.isAODFullScreenMode();
+                String strAccess$getReasonLog = SecUnlockedScreenOffAnimationHelper.access$getReasonLog(secUnlockedScreenOffAnimationHelper, secUnlockedScreenOffAnimationHelper.lastReason);
                 boolean z = secUnlockedScreenOffAnimationHelper.needUpdateSetLockScreenShown;
-                StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("onStartedGoingToSleep: isAODFullScreenMode=", ", shouldPlayUnlockedScreenOffAnimation=", " / reason=", isAODFullScreenMode, shouldPlayUnlockedScreenOffAnimation);
-                m.append(access$getReasonLog);
-                m.append(", needUpdateSetLockScreenShown=");
-                m.append(z);
-                SecUnlockedScreenOffAnimationHelper.logD(m.toString());
+                StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("onStartedGoingToSleep: isAODFullScreenMode=", ", shouldPlayUnlockedScreenOffAnimation=", " / reason=", zIsAODFullScreenMode, zShouldPlayUnlockedScreenOffAnimation);
+                sbM.append(strAccess$getReasonLog);
+                sbM.append(", needUpdateSetLockScreenShown=");
+                sbM.append(z);
+                SecUnlockedScreenOffAnimationHelper.logD(sbM.toString());
                 if (!aODAmbientWallpaperHelper.isAODFullScreenMode()) {
                     secUnlockedScreenOffAnimationHelper.playWallpaperAnimation();
-                } else if (shouldPlayUnlockedScreenOffAnimation) {
+                } else if (zShouldPlayUnlockedScreenOffAnimation) {
                     ((StatusBarKeyguardViewManager) secUnlockedScreenOffAnimationHelper.statusBarKeyguardViewManagerLazy.get()).updateNavigationBarVisibility(false);
                 } else {
                     secUnlockedScreenOffAnimationHelper.playWallpaperAnimation();
@@ -888,7 +880,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
                 }
             }
         });
-        this.screenLifecycle.addObserver(new ScreenLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$init$2
+        this.screenLifecycle.addObserver(new ScreenLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper.init.2
             @Override // com.android.systemui.keyguard.ScreenLifecycle.Observer
             public final void onScreenTurningOff() {
                 SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = SecUnlockedScreenOffAnimationHelper.this;
@@ -915,13 +907,13 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
             }
         }
         PluginLockStarManager pluginLockStarManager = (PluginLockStarManager) this.pluginLockStarManagerLazy.get();
-        Float valueOf = Float.valueOf(1 - f);
+        Float fValueOf = Float.valueOf(1 - f);
         PluginLockStar pluginLockStar = pluginLockStarManager.mPluginLockStar;
         if (pluginLockStar == null) {
             return;
         }
         try {
-            pluginLockStar.setDarkAmount(valueOf);
+            pluginLockStar.setDarkAmount(fValueOf);
         } catch (Throwable unused) {
         }
     }
@@ -959,7 +951,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
     }
 
     public final void playWallpaperAnimation() {
-        BuildersKt.launch$default(this.scope, this.backgroundDispatcher, null, new SecUnlockedScreenOffAnimationHelper$playWallpaperAnimation$1(this, null), 2);
+        BuildersKt.launch$default(this.scope, this.backgroundDispatcher, null, new C10901(null), 2);
     }
 
     public final void setSkipAnimationInOthers(boolean z) {
@@ -1008,7 +1000,7 @@ public final class SecUnlockedScreenOffAnimationHelper implements KeyguardFoldCo
 
     public final void updateSetLockScreenShown(final boolean z) {
         com.android.systemui.keyguard.Log.i("UnlockedScreenOffAnimation", "updateSetLockScreenShown: wakingUp=" + z);
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper$updateSetLockScreenShown$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.SecUnlockedScreenOffAnimationHelper.updateSetLockScreenShown.1
             @Override // java.lang.Runnable
             public final void run() {
                 ((KeyguardViewMediator) SecUnlockedScreenOffAnimationHelper.this.keyguardViewMediatorLazy.get()).setDozing(!z);

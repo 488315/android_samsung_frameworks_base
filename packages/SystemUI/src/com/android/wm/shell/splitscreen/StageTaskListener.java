@@ -6,7 +6,6 @@ import android.app.TaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -44,7 +43,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
     public final StageListenerCallbacks mCallbacks;
@@ -69,7 +67,6 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
     public boolean mVisible = false;
     public boolean mHasChildren = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RunningTaskInfoList extends SparseArray {
         public final ArraySet mClosingTaskIds;
         public final ArrayList mInfos;
@@ -98,12 +95,12 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
         public final void put(int i, Object obj) {
             ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) obj;
             if (contains(i)) {
-                int indexOf = this.mTaskIds.indexOf(Integer.valueOf(i));
-                this.mTaskIds.remove(indexOf);
-                this.mInfos.remove(indexOf);
+                int iIndexOf = this.mTaskIds.indexOf(Integer.valueOf(i));
+                this.mTaskIds.remove(iIndexOf);
+                this.mInfos.remove(iIndexOf);
                 if (!runningTaskInfo.isTopTaskInStage) {
-                    this.mTaskIds.add(indexOf, Integer.valueOf(i));
-                    this.mInfos.add(indexOf, runningTaskInfo);
+                    this.mTaskIds.add(iIndexOf, Integer.valueOf(i));
+                    this.mInfos.add(iIndexOf, runningTaskInfo);
                     return;
                 }
             }
@@ -113,9 +110,9 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
 
         @Override // android.util.SparseArray
         public final void remove(int i) {
-            int indexOf = this.mTaskIds.indexOf(Integer.valueOf(i));
-            this.mTaskIds.remove(indexOf);
-            this.mInfos.remove(indexOf);
+            int iIndexOf = this.mTaskIds.indexOf(Integer.valueOf(i));
+            this.mTaskIds.remove(iIndexOf);
+            this.mInfos.remove(iIndexOf);
             if (CoreRune.MW_SPLIT_STACKING && this.mClosingTaskIds.contains(Integer.valueOf(i))) {
                 this.mClosingTaskIds.remove(Integer.valueOf(i));
                 Slog.d("StageTaskListener", "removeToClosingTaskIds: #" + i + ", " + StageTaskListener.this);
@@ -139,7 +136,6 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface StageListenerCallbacks {
         void onRootTaskAppeared();
     }
@@ -254,22 +250,22 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
     public final void dump$2(PrintWriter printWriter, String str) {
         RunningTaskInfoList runningTaskInfoList;
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
-        String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "  ");
         if (this.mChildrenTaskInfo.mTaskIds.size() > 0) {
             QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str, "Children list:");
             for (int size = this.mChildrenTaskInfo.mTaskIds.size() - 1; size >= 0; size += -1) {
                 ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) this.mChildrenTaskInfo.valueAt(size);
-                printWriter.println(m2 + "Task#" + size + " taskID=" + runningTaskInfo.taskId + " baseActivity=" + runningTaskInfo.baseActivity);
+                printWriter.println(strM2 + "Task#" + size + " taskID=" + runningTaskInfo.taskId + " baseActivity=" + runningTaskInfo.baseActivity);
             }
         }
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "mHasRootTask="), this.mHasRootTask, printWriter, str, "mVisible="), this.mVisible, printWriter, str, "mHasChildren="), this.mHasChildren, printWriter);
         if (!CoreRune.MW_SPLIT_STACKING || (runningTaskInfoList = this.mRunningTaskInfoList) == null || runningTaskInfoList.mClosingTaskIds.isEmpty()) {
             return;
         }
-        StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, "ClosingTaskIds=");
-        m3.append(runningTaskInfoList.mClosingTaskIds);
-        printWriter.println(m3.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, "ClosingTaskIds=");
+        sbM.append(runningTaskInfoList.mClosingTaskIds);
+        printWriter.println(sbM.toString());
     }
 
     public final void evictAllChildren(WindowContainerTransaction windowContainerTransaction) {
@@ -288,14 +284,14 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
     }
 
     public final void evictNonOpeningChildren(RemoteAnimationTarget[] remoteAnimationTargetArr, WindowContainerTransaction windowContainerTransaction) {
-        SparseArray clone = this.mChildrenTaskInfo.clone();
+        SparseArray sparseArrayClone = this.mChildrenTaskInfo.clone();
         for (RemoteAnimationTarget remoteAnimationTarget : remoteAnimationTargetArr) {
             if (remoteAnimationTarget.mode == 0) {
-                clone.remove(remoteAnimationTarget.taskId);
+                sparseArrayClone.remove(remoteAnimationTarget.taskId);
             }
         }
-        for (int size = clone.size() - 1; size >= 0; size--) {
-            evictChild(windowContainerTransaction, (ActivityManager.RunningTaskInfo) clone.valueAt(size), "non-opening");
+        for (int size = sparseArrayClone.size() - 1; size >= 0; size--) {
+            evictChild(windowContainerTransaction, (ActivityManager.RunningTaskInfo) sparseArrayClone.valueAt(size), "non-opening");
         }
     }
 
@@ -397,12 +393,12 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
         StageCoordinator stageCoordinator = (StageCoordinator) this.mCallbacks;
         stageCoordinator.getClass();
         Slog.d("StageCoordinator", "onSplitLayoutChangeRequested: " + taskOrganizerInfo);
-        boolean isChangeToHorizontalSplitLayout = taskOrganizerInfo.isChangeToHorizontalSplitLayout();
+        boolean zIsChangeToHorizontalSplitLayout = taskOrganizerInfo.isChangeToHorizontalSplitLayout();
         StageTaskListener stageTaskListener = stageCoordinator.mSideStage;
         StageTaskListener stageTaskListener2 = stageCoordinator.mCellStage;
         StageTaskListener stageTaskListener3 = stageCoordinator.mMainStage;
         ShellTaskOrganizer shellTaskOrganizer = stageCoordinator.mTaskOrganizer;
-        if (isChangeToHorizontalSplitLayout) {
+        if (zIsChangeToHorizontalSplitLayout) {
             if (stageTaskListener3.mIsActive && (stageTaskListener2 == null || !stageTaskListener2.mIsActive)) {
                 SplitLayout splitLayout = stageCoordinator.mSplitLayout;
                 if (splitLayout.mDividerPosition != splitLayout.getDividePositionByRatio()) {
@@ -419,11 +415,11 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
                     windowContainerTransaction2.setChangeTransitMode(stageTaskListener3.mRootTaskInfo.token, 1, "change_to_horizontal_split_layout");
                     windowContainerTransaction2.setChangeTransitMode(stageTaskListener.mRootTaskInfo.token, 1, "change_to_horizontal_split_layout");
                     shellTaskOrganizer.applyTransaction(windowContainerTransaction2);
-                    SurfaceControl.Transaction acquire = stageCoordinator.mTransactionPool.acquire();
-                    stageCoordinator.updateSurfaceBounds(stageCoordinator.mSplitLayout, acquire, false);
-                    stageTaskListener3.onResized(acquire);
-                    stageTaskListener.onResized(acquire);
-                    acquire.apply();
+                    SurfaceControl.Transaction transactionAcquire = stageCoordinator.mTransactionPool.acquire();
+                    stageCoordinator.updateSurfaceBounds(stageCoordinator.mSplitLayout, transactionAcquire, false);
+                    stageTaskListener3.onResized(transactionAcquire);
+                    stageTaskListener.onResized(transactionAcquire);
+                    transactionAcquire.apply();
                 }
             }
         } else if (taskOrganizerInfo.isChangeSplitLayoutForLaunchAdjacent()) {
@@ -455,21 +451,7 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
             SplitLayout splitLayout2 = stageCoordinator.mSplitLayout;
             int i = splitLayout2.mSplitScreenFeasibleMode;
             if (!CoreRune.MW_MULTI_SPLIT_FOLDING_POLICY || !stageCoordinator.mIsFolded || i == 0 || splitFeasibleMode == 0) {
-                if (i == 2 && splitFeasibleMode == 1 && splitLayout2.getDisplayLayout(splitLayout2.mContext) != null) {
-                    Rect rect = new Rect();
-                    splitLayout2.getDisplayLayout(splitLayout2.mContext).getStableBounds(rect, true);
-                    if (splitLayout2.mRootBounds.width() != rect.width() && splitLayout2.mRootBounds.height() != rect.height()) {
-                        boolean isSplitScreenFeasible = splitLayout2.isSplitScreenFeasible(true);
-                        boolean isSplitScreenFeasible2 = splitLayout2.isSplitScreenFeasible(false);
-                        if (isSplitScreenFeasible) {
-                            splitLayout2.mPossibleSplitDivision = 1;
-                        } else if (isSplitScreenFeasible2) {
-                            splitLayout2.mPossibleSplitDivision = 0;
-                        }
-                        Slog.d("SplitLayout", "possibleSplitDivision=" + splitLayout2.mPossibleSplitDivision);
-                    }
-                }
-                splitLayout2.mSplitScreenFeasibleMode = splitFeasibleMode;
+                splitLayout2.updateSplitScreenFeasibleMode(splitFeasibleMode);
                 if (i > splitFeasibleMode) {
                     stageCoordinator.mRecentTasks.ifPresent(new StageCoordinator$$ExternalSyntheticLambda11());
                 }
@@ -487,21 +469,23 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
                         shellTaskOrganizer.applyTransaction(windowContainerTransaction5);
                     }
                 }
+            } else if (splitFeasibleMode == 2) {
+                splitLayout2.updateSplitScreenFeasibleMode(splitFeasibleMode);
             }
         }
         if (taskOrganizerInfo.getAssistantActivityIntent() != null) {
             Intent assistantActivityIntent = taskOrganizerInfo.getAssistantActivityIntent();
             float requestedSplitRatio = taskOrganizerInfo.getRequestedSplitRatio();
             boolean deferSplitRotationInPort = taskOrganizerInfo.getDeferSplitRotationInPort();
-            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(stageCoordinator.mContext, 0, assistantActivityIntent, 201326592, null, UserHandle.SYSTEM);
+            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(stageCoordinator.mContext, 0, assistantActivityIntent, 201326592, null, UserHandle.CURRENT);
             if (activityAsUser == null) {
                 Slog.w("StageCoordinator", "assistantPendingIntent null");
                 return;
             }
             WindowContainerTransaction windowContainerTransaction6 = new WindowContainerTransaction();
-            Bundle resolveStartStage = stageCoordinator.resolveStartStage(-1, 1, null, windowContainerTransaction6, CoreRune.MW_MULTI_SPLIT_FREE_POSITION ? (stageCoordinator.isLandscape() || deferSplitRotationInPort) ? 0 : 1 : -1);
-            float f = (stageCoordinator.isLandscape() || deferSplitRotationInPort) ? requestedSplitRatio : 0.5f;
-            windowContainerTransaction6.sendPendingIntent(activityAsUser, assistantActivityIntent, resolveStartStage);
+            Bundle bundleResolveStartStage = stageCoordinator.resolveStartStage(-1, 1, null, windowContainerTransaction6, CoreRune.MW_MULTI_SPLIT_FREE_POSITION ? (CoreRune.MW_MULTI_SPLIT_FOLDING_POLICY || stageCoordinator.isLandscape() || deferSplitRotationInPort) ? 0 : 1 : -1);
+            float f = (CoreRune.MW_MULTI_SPLIT_FOLDING_POLICY || !(stageCoordinator.isLandscape() || deferSplitRotationInPort)) ? 0.5f : requestedSplitRatio;
+            windowContainerTransaction6.sendPendingIntent(activityAsUser, assistantActivityIntent, bundleResolveStartStage);
             if (!stageTaskListener3.mIsActive) {
                 windowContainerTransaction = windowContainerTransaction6;
                 stageCoordinator.prepareActiveSplit(windowContainerTransaction, null, -1, false, f);
@@ -535,8 +519,8 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
 
     public final void onSplitScreenListenerRegistered(SplitScreen.SplitScreenListener splitScreenListener, int i) {
         for (int size = this.mChildrenTaskInfo.mTaskIds.size() - 1; size >= 0; size--) {
-            int keyAt = this.mChildrenTaskInfo.keyAt(size);
-            splitScreenListener.onTaskStageChanged(keyAt, i, ((ActivityManager.RunningTaskInfo) this.mChildrenTaskInfo.get(keyAt)).isVisible);
+            int iKeyAt = this.mChildrenTaskInfo.keyAt(size);
+            splitScreenListener.onTaskStageChanged(iKeyAt, i, ((ActivityManager.RunningTaskInfo) this.mChildrenTaskInfo.get(iKeyAt)).isVisible);
         }
     }
 
@@ -568,10 +552,10 @@ public class StageTaskListener implements ShellTaskOrganizer.TaskListener {
                 return;
             }
             stageCoordinator.getClass();
-            ((HandlerExecutor) stageCoordinator.mMainExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda23
+            ((HandlerExecutor) stageCoordinator.mMainExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda26
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StageCoordinator.this.onNoLongerSupportMultiWindow(this, runningTaskInfo);
+                    stageCoordinator.onNoLongerSupportMultiWindow(this, runningTaskInfo);
                 }
             }, 500L);
             return;

@@ -1,16 +1,21 @@
 package com.android.systemui.back.domain.interactor;
 
 import android.util.Log;
+import android.view.ViewRootImpl;
 import android.window.OnBackInvokedCallback;
+import android.window.WindowOnBackInvokedDispatcher;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.keyguard.KeyguardSecPatternView$$ExternalSyntheticOutline0;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.Dependency;
 import com.android.systemui.facewidget.plugin.PluginFaceWidgetManager;
+import com.android.systemui.pluginlock.PluginLockMediator;
 import com.android.systemui.plugins.qs.QS;
 import com.android.systemui.qs.SecQSPanelController;
 import com.android.systemui.scene.domain.interactor.WindowRootViewVisibilityInteractor;
+import com.android.systemui.scene.ui.view.WindowRootView;
 import com.android.systemui.shade.NotificationPanelViewController;
+import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
 import com.android.systemui.shade.QuickSettingsController;
 import com.android.systemui.shade.SecQuickSettingsControllerImpl;
 import com.android.systemui.shade.ShadeController;
@@ -19,21 +24,30 @@ import com.android.systemui.statusbar.NotificationShadeWindowController;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackActionInteractor implements CoreStartable {
     public final BackActionInteractor$callback$2 callback = new OnBackInvokedCallback() { // from class: com.android.systemui.back.domain.interactor.BackActionInteractor$callback$2
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            BackActionInteractor.this.onBackRequested();
+            this.this$0.onBackRequested();
         }
     };
     public boolean isCallbackRegistered;
     public final NotificationPanelViewController notificationPanelViewController;
     public final NotificationShadeWindowController notificationShadeWindowController;
+    public final PluginLockMediator pluginLockMediator;
     public final QuickSettingsController qsController;
     public final CoroutineScope scope;
     public final ShadeBackActionInteractor shadeBackActionInteractor;
@@ -42,7 +56,6 @@ public final class BackActionInteractor implements CoreStartable {
     public final SysuiStatusBarStateController statusBarStateController;
     public final WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,12 +65,86 @@ public final class BackActionInteractor implements CoreStartable {
         }
     }
 
+    /* renamed from: com.android.systemui.back.domain.interactor.BackActionInteractor$start$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return BackActionInteractor.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final BackActionInteractor backActionInteractor = BackActionInteractor.this;
+                ReadonlyStateFlow readonlyStateFlow = backActionInteractor.windowRootViewVisibilityInteractor.isLockscreenOrShadeVisibleAndInteractive;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.back.domain.interactor.BackActionInteractor.start.1.1
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        ViewRootImpl viewRootImpl;
+                        ViewRootImpl viewRootImpl2;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        WindowOnBackInvokedDispatcher onBackInvokedDispatcher = null;
+                        BackActionInteractor backActionInteractor2 = backActionInteractor;
+                        if (zBooleanValue) {
+                            if (!backActionInteractor2.isCallbackRegistered) {
+                                WindowRootView windowRootView = ((NotificationShadeWindowControllerImpl) backActionInteractor2.notificationShadeWindowController).mWindowRootView;
+                                if (windowRootView != null && (viewRootImpl2 = windowRootView.getViewRootImpl()) != null) {
+                                    onBackInvokedDispatcher = viewRootImpl2.getOnBackInvokedDispatcher();
+                                }
+                                if (onBackInvokedDispatcher != null) {
+                                    onBackInvokedDispatcher.registerOnBackInvokedCallback(0, backActionInteractor2.callback);
+                                    backActionInteractor2.isCallbackRegistered = true;
+                                    Log.d("BackActionInteractor", "registerBackCallback");
+                                }
+                            }
+                        } else if (backActionInteractor2.isCallbackRegistered) {
+                            WindowRootView windowRootView2 = ((NotificationShadeWindowControllerImpl) backActionInteractor2.notificationShadeWindowController).mWindowRootView;
+                            if (windowRootView2 != null && (viewRootImpl = windowRootView2.getViewRootImpl()) != null) {
+                                onBackInvokedDispatcher = viewRootImpl.getOnBackInvokedDispatcher();
+                            }
+                            if (onBackInvokedDispatcher != null) {
+                                onBackInvokedDispatcher.unregisterOnBackInvokedCallback(backActionInteractor2.callback);
+                                backActionInteractor2.isCallbackRegistered = false;
+                                Log.d("BackActionInteractor", "unregisterBackCallback");
+                            }
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (readonlyStateFlow.$$delegate_0.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+    }
+
     static {
         new Companion(null);
     }
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.back.domain.interactor.BackActionInteractor$callback$2] */
-    public BackActionInteractor(CoroutineScope coroutineScope, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, ShadeController shadeController, NotificationShadeWindowController notificationShadeWindowController, WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor, ShadeBackActionInteractor shadeBackActionInteractor, QuickSettingsController quickSettingsController, NotificationPanelViewController notificationPanelViewController) {
+    public BackActionInteractor(CoroutineScope coroutineScope, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, ShadeController shadeController, NotificationShadeWindowController notificationShadeWindowController, WindowRootViewVisibilityInteractor windowRootViewVisibilityInteractor, ShadeBackActionInteractor shadeBackActionInteractor, QuickSettingsController quickSettingsController, NotificationPanelViewController notificationPanelViewController, PluginLockMediator pluginLockMediator) {
         this.scope = coroutineScope;
         this.statusBarStateController = sysuiStatusBarStateController;
         this.statusBarKeyguardViewManager = statusBarKeyguardViewManager;
@@ -67,6 +154,7 @@ public final class BackActionInteractor implements CoreStartable {
         this.shadeBackActionInteractor = shadeBackActionInteractor;
         this.qsController = quickSettingsController;
         this.notificationPanelViewController = notificationPanelViewController;
+        this.pluginLockMediator = pluginLockMediator;
     }
 
     public final boolean onBackRequested() {
@@ -82,6 +170,7 @@ public final class BackActionInteractor implements CoreStartable {
         StatusBarKeyguardViewManager statusBarKeyguardViewManager = this.statusBarKeyguardViewManager;
         if (statusBarKeyguardViewManager.canHandleBackPressed()) {
             statusBarKeyguardViewManager.onBackPressed();
+            this.pluginLockMediator.onBackPressed();
             Log.d("BackActionInteractor", "onBackRequested: statusBarKeyguardViewManager.onBackPressed()");
             return true;
         }
@@ -145,6 +234,6 @@ public final class BackActionInteractor implements CoreStartable {
 
     @Override // com.android.systemui.CoreStartable
     public final void start() {
-        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new BackActionInteractor$start$1(this, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AnonymousClass1(null), 7);
     }
 }

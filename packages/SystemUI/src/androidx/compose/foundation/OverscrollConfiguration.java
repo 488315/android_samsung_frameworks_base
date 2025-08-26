@@ -8,7 +8,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OverscrollConfiguration {
     public final PaddingValues drawPadding;
@@ -28,7 +27,7 @@ public final class OverscrollConfiguration {
         OverscrollConfiguration overscrollConfiguration = (OverscrollConfiguration) obj;
         long j = overscrollConfiguration.glowColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.drawPadding, overscrollConfiguration.drawPadding);
+        return ULong.m3447equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.drawPadding, overscrollConfiguration.drawPadding);
     }
 
     public final int hashCode() {
@@ -51,6 +50,6 @@ public final class OverscrollConfiguration {
     }
 
     public /* synthetic */ OverscrollConfiguration(long j, PaddingValues paddingValues, int i, DefaultConstructorMarker defaultConstructorMarker) {
-        this((i & 1) != 0 ? ColorKt.Color(4284900966L) : j, (i & 2) != 0 ? PaddingKt.m121PaddingValuesYgX7TsA$default(0.0f, 3) : paddingValues, null);
+        this((i & 1) != 0 ? ColorKt.Color(4284900966L) : j, (i & 2) != 0 ? PaddingKt.m122PaddingValuesYgX7TsA$default(0.0f, 3) : paddingValues, null);
     }
 }

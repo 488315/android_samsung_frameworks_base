@@ -9,7 +9,6 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.ScopeCoroutine;
 import kotlinx.coroutines.intrinsics.UndispatchedKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CoroutineScopeKt {
     public static final ContextScope CoroutineScope(CoroutineContext coroutineContext) {
@@ -30,9 +29,9 @@ public abstract class CoroutineScopeKt {
 
     public static final Object coroutineScope(Function2 function2, Continuation continuation) {
         ScopeCoroutine scopeCoroutine = new ScopeCoroutine(continuation.getContext(), continuation);
-        Object startUndispatchedOrReturn = UndispatchedKt.startUndispatchedOrReturn(scopeCoroutine, scopeCoroutine, function2);
+        Object objStartUndispatchedOrReturn = UndispatchedKt.startUndispatchedOrReturn(scopeCoroutine, scopeCoroutine, function2);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        return startUndispatchedOrReturn;
+        return objStartUndispatchedOrReturn;
     }
 
     public static final boolean isActive(CoroutineScope coroutineScope) {

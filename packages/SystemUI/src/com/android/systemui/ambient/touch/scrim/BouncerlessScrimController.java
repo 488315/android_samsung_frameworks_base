@@ -7,7 +7,6 @@ import com.android.systemui.unfold.util.CallbackController;
 import java.util.HashSet;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BouncerlessScrimController implements ScrimController, CallbackController {
     public final HashSet mCallbacks = new HashSet();
@@ -28,7 +27,7 @@ public class BouncerlessScrimController implements ScrimController, CallbackCont
             this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.ambient.touch.scrim.BouncerlessScrimController$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BouncerlessScrimController.this.mCallbacks.forEach(new BouncerlessScrimController$$ExternalSyntheticLambda5());
+                    this.f$0.mCallbacks.forEach(new BouncerlessScrimController$$ExternalSyntheticLambda5());
                 }
             });
         }

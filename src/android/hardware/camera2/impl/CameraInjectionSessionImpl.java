@@ -61,11 +61,11 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
                     CameraInjectionSessionImpl.this.mInjectionStatusCallback.onInjectionError(1);
                 }
             };
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(runnable);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -82,16 +82,16 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
                 return;
             }
             this.mInjectionSession = iCameraInjectionSession;
-            IBinder asBinder = iCameraInjectionSession.asBinder();
-            if (asBinder == null) {
+            IBinder iBinderAsBinder = iCameraInjectionSession.asBinder();
+            if (iBinderAsBinder == null) {
                 Log.e(TAG, "The camera injection session has encountered a serious error");
                 scheduleNotifyError(0);
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    asBinder.linkToDeath(this, 0);
+                    iBinderAsBinder.linkToDeath(this, 0);
                     this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.CameraInjectionSessionImpl.2
                         @Override // java.lang.Runnable
                         public void run() {
@@ -102,7 +102,7 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
                     scheduleNotifyError(0);
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -127,7 +127,7 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
     }
 
     private void scheduleNotifyError(int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.hardware.camera2.impl.CameraInjectionSessionImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
@@ -136,7 +136,7 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
                 }
             }, this, Integer.valueOf(i)).recycleOnUse());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

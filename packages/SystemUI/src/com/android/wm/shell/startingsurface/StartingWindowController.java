@@ -21,12 +21,10 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.shared.TransactionPool;
 import com.android.wm.shell.startingsurface.SplashscreenContentDrawer;
-import com.android.wm.shell.startingsurface.StartingWindowController;
 import com.android.wm.shell.sysui.ShellController;
 import com.android.wm.shell.sysui.ShellInit;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StartingWindowController implements RemoteCallable {
     public final Context mContext;
@@ -39,7 +37,6 @@ public class StartingWindowController implements RemoteCallable {
     public final StartingSurfaceImpl mImpl = new StartingSurfaceImpl(this, 0);
     public final SparseIntArray mTaskBackgroundColors = new SparseIntArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IStartingWindowImpl extends IStartingWindow$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public StartingWindowController mController;
@@ -49,25 +46,25 @@ public class StartingWindowController implements RemoteCallable {
                 Integer num = (Integer) obj;
                 Integer num2 = (Integer) obj2;
                 Integer num3 = (Integer) obj3;
-                IInterface iInterface = StartingWindowController.IStartingWindowImpl.this.mListener.mListener;
+                IInterface iInterface = this.f$0.mListener.mListener;
                 if (iInterface == null) {
                     Slog.e("SingleInstanceRemoteListener", "Failed remote call on null listener");
                     return;
                 }
                 try {
                     IStartingWindowListener$Stub$Proxy iStartingWindowListener$Stub$Proxy = (IStartingWindowListener$Stub$Proxy) iInterface;
-                    int intValue = num.intValue();
-                    int intValue2 = num2.intValue();
-                    int intValue3 = num3.intValue();
-                    Parcel obtain = Parcel.obtain(iStartingWindowListener$Stub$Proxy.mRemote);
+                    int iIntValue = num.intValue();
+                    int iIntValue2 = num2.intValue();
+                    int iIntValue3 = num3.intValue();
+                    Parcel parcelObtain = Parcel.obtain(iStartingWindowListener$Stub$Proxy.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.wm.shell.startingsurface.IStartingWindowListener");
-                        obtain.writeInt(intValue);
-                        obtain.writeInt(intValue2);
-                        obtain.writeInt(intValue3);
-                        iStartingWindowListener$Stub$Proxy.mRemote.transact(1, obtain, null, 1);
+                        parcelObtain.writeInterfaceToken("com.android.wm.shell.startingsurface.IStartingWindowListener");
+                        parcelObtain.writeInt(iIntValue);
+                        parcelObtain.writeInt(iIntValue2);
+                        parcelObtain.writeInt(iIntValue3);
+                        iStartingWindowListener$Stub$Proxy.mRemote.transact(1, parcelObtain, null, 1);
                     } finally {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                     }
                 } catch (RemoteException e) {
                     Slog.e("SingleInstanceRemoteListener", "Failed remote call", e);
@@ -81,7 +78,7 @@ public class StartingWindowController implements RemoteCallable {
             this.mListener = new SingleInstanceRemoteListener(startingWindowController, new Consumer() { // from class: com.android.wm.shell.startingsurface.StartingWindowController$IStartingWindowImpl$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((StartingWindowController) obj).setStartingWindowListener(StartingWindowController.IStartingWindowImpl.this.mStartingWindowListener);
+                    ((StartingWindowController) obj).setStartingWindowListener(this.f$0.mStartingWindowListener);
                 }
             }, new StartingWindowController$IStartingWindowImpl$$ExternalSyntheticLambda3());
         }
@@ -93,7 +90,6 @@ public class StartingWindowController implements RemoteCallable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StartingSurfaceImpl {
         public /* synthetic */ StartingSurfaceImpl(StartingWindowController startingWindowController, int i) {
             this();
@@ -102,39 +98,39 @@ public class StartingWindowController implements RemoteCallable {
         public final int getBackgroundColor(TaskInfo taskInfo) {
             synchronized (StartingWindowController.this.mTaskBackgroundColors) {
                 try {
-                    int indexOfKey = StartingWindowController.this.mTaskBackgroundColors.indexOfKey(taskInfo.taskId);
-                    if (indexOfKey >= 0) {
-                        return StartingWindowController.this.mTaskBackgroundColors.valueAt(indexOfKey);
+                    int iIndexOfKey = StartingWindowController.this.mTaskBackgroundColors.indexOfKey(taskInfo.taskId);
+                    if (iIndexOfKey >= 0) {
+                        return StartingWindowController.this.mTaskBackgroundColors.valueAt(iIndexOfKey);
                     }
                     SplashscreenWindowCreator splashscreenWindowCreator = StartingWindowController.this.mStartingSurfaceDrawer.mSplashscreenWindowCreator;
                     splashscreenWindowCreator.getClass();
                     ActivityInfo activityInfo = taskInfo.topActivityInfo;
-                    int i = 0;
+                    int iPeekWindowBGColor = 0;
                     if (activityInfo != null) {
                         String str = activityInfo.packageName;
-                        int i2 = taskInfo.userId;
+                        int i = taskInfo.userId;
                         try {
-                            Context createPackageContextAsUser = splashscreenWindowCreator.mContext.createPackageContextAsUser(str, 4, UserHandle.of(i2));
+                            Context contextCreatePackageContextAsUser = splashscreenWindowCreator.mContext.createPackageContextAsUser(str, 4, UserHandle.of(i));
                             try {
-                                String splashScreenTheme = ActivityThread.getPackageManager().getSplashScreenTheme(str, i2);
-                                int splashScreenTheme2 = AbsSplashWindowCreator.getSplashScreenTheme(splashScreenTheme != null ? createPackageContextAsUser.getResources().getIdentifier(splashScreenTheme, null, null) : 0, activityInfo);
-                                if (splashScreenTheme2 != createPackageContextAsUser.getThemeResId()) {
-                                    createPackageContextAsUser.setTheme(splashScreenTheme2);
+                                String splashScreenTheme = ActivityThread.getPackageManager().getSplashScreenTheme(str, i);
+                                int splashScreenTheme2 = AbsSplashWindowCreator.getSplashScreenTheme(splashScreenTheme != null ? contextCreatePackageContextAsUser.getResources().getIdentifier(splashScreenTheme, null, null) : 0, activityInfo);
+                                if (splashScreenTheme2 != contextCreatePackageContextAsUser.getThemeResId()) {
+                                    contextCreatePackageContextAsUser.setTheme(splashScreenTheme2);
                                 }
                                 splashscreenWindowCreator.mSplashscreenContentDrawer.getClass();
                                 SplashscreenContentDrawer.SplashScreenWindowAttrs splashScreenWindowAttrs = new SplashscreenContentDrawer.SplashScreenWindowAttrs();
-                                SplashscreenContentDrawer.getWindowAttrs(createPackageContextAsUser, splashScreenWindowAttrs);
-                                i = SplashscreenContentDrawer.peekWindowBGColor(createPackageContextAsUser, splashScreenWindowAttrs);
+                                SplashscreenContentDrawer.getWindowAttrs(contextCreatePackageContextAsUser, splashScreenWindowAttrs);
+                                iPeekWindowBGColor = SplashscreenContentDrawer.peekWindowBGColor(contextCreatePackageContextAsUser, splashScreenWindowAttrs);
                             } catch (RemoteException | RuntimeException e) {
                                 Slog.w("ShellStartingWindow", "failed get starting window background color at taskId: " + taskInfo.taskId, e);
                             }
                         } catch (PackageManager.NameNotFoundException e2) {
-                            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed creating package context with package name ", str, " for user ");
-                            m.append(taskInfo.userId);
-                            Slog.w("ShellStartingWindow", m.toString(), e2);
+                            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed creating package context with package name ", str, " for user ");
+                            sbM.append(taskInfo.userId);
+                            Slog.w("ShellStartingWindow", sbM.toString(), e2);
                         }
                     }
-                    return i != 0 ? i : SplashscreenContentDrawer.getSystemBGColor();
+                    return iPeekWindowBGColor != 0 ? iPeekWindowBGColor : SplashscreenContentDrawer.getSystemBGColor();
                 } finally {
                 }
             }

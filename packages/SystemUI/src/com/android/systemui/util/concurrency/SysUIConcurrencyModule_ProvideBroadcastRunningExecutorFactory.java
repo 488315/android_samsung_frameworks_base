@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideBroadcastRunningExecutorFactory implements Provider {
     private final Provider looperProvider;
@@ -19,9 +18,9 @@ public final class SysUIConcurrencyModule_ProvideBroadcastRunningExecutorFactory
     }
 
     public static Executor provideBroadcastRunningExecutor(Looper looper) {
-        Executor provideBroadcastRunningExecutor = SysUIConcurrencyModule.INSTANCE.provideBroadcastRunningExecutor(looper);
-        provideBroadcastRunningExecutor.getClass();
-        return provideBroadcastRunningExecutor;
+        Executor executorProvideBroadcastRunningExecutor = SysUIConcurrencyModule.INSTANCE.provideBroadcastRunningExecutor(looper);
+        executorProvideBroadcastRunningExecutor.getClass();
+        return executorProvideBroadcastRunningExecutor;
     }
 
     public static SysUIConcurrencyModule_ProvideBroadcastRunningExecutorFactory create(Provider provider) {

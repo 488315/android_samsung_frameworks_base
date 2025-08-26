@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RouterInfoMediaManager extends InfoMediaManager {
     public final ControllerCallback mControllerCallback;
@@ -33,7 +32,6 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
     public MediaRouter2.ScanToken mScanToken;
     public final TransferCallback mTransferCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ControllerCallback extends MediaRouter2.ControllerCallback {
         public /* synthetic */ ControllerCallback(RouterInfoMediaManager routerInfoMediaManager, int i) {
             this();
@@ -48,7 +46,6 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RouteCallback extends MediaRouter2.RouteCallback {
         public /* synthetic */ RouteCallback(RouterInfoMediaManager routerInfoMediaManager, int i) {
             this();
@@ -67,7 +64,6 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransferCallback extends MediaRouter2.TransferCallback {
         public /* synthetic */ TransferCallback(RouterInfoMediaManager routerInfoMediaManager, int i) {
             this();
@@ -97,8 +93,8 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
     }
 
     public RouterInfoMediaManager(Context context, String str, UserHandle userHandle, LocalBluetoothManager localBluetoothManager, MediaController mediaController) throws InfoMediaManager.PackageNotAvailableException {
-        super(context, str, userHandle, localBluetoothManager, mediaController);
         MediaRouter2 mediaRouter2;
+        super(context, str, userHandle, localBluetoothManager, mediaController);
         this.mExecutor = Executors.newSingleThreadExecutor();
         int i = 0;
         this.mRouteCallback = new RouteCallback(this, i);
@@ -169,9 +165,9 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
     @Override // com.android.settingslib.media.InfoMediaManager
     public final List getTransferableRoutes(RoutingSessionInfo routingSessionInfo) {
         MediaRouter2.RoutingController controllerForSession = getControllerForSession(routingSessionInfo);
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (controllerForSession != null) {
-            controllerForSession.getTransferableRoutes().forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(hashMap, 0));
+            controllerForSession.getTransferableRoutes().forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(map, 0));
             if (controllerForSession.getRoutingSessionInfo().isSystemSession()) {
                 final int i = 0;
                 this.mRouter.getRoutes().stream().filter(new Predicate() { // from class: com.android.settingslib.media.RouterInfoMediaManager$$ExternalSyntheticLambda4
@@ -185,7 +181,7 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
                                 return mediaRoute2Info.isSystemRoute();
                         }
                     }
-                }).forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(hashMap, 1));
+                }).forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(map, 1));
             } else {
                 final int i2 = 1;
                 this.mRouter.getRoutes().stream().filter(new Predicate() { // from class: com.android.settingslib.media.RouterInfoMediaManager$$ExternalSyntheticLambda4
@@ -199,10 +195,10 @@ public final class RouterInfoMediaManager extends InfoMediaManager {
                                 return mediaRoute2Info.isSystemRoute();
                         }
                     }
-                }).forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(hashMap, 2));
+                }).forEach(new RouterInfoMediaManager$$ExternalSyntheticLambda3(map, 2));
             }
         }
-        return new ArrayList(hashMap.values());
+        return new ArrayList(map.values());
     }
 
     @Override // com.android.settingslib.media.InfoMediaManager

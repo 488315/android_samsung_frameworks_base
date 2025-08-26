@@ -14,12 +14,10 @@ import java.util.HashSet;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationMemoryViewWalker {
     public static final NotificationMemoryViewWalker INSTANCE = new NotificationMemoryViewWalker();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UsageBuilder {
         public int customViews;
         public int largeIcon;
@@ -42,50 +40,50 @@ public final class NotificationMemoryViewWalker {
             } else {
                 view.getClass();
                 if ((view instanceof ImageView) && (drawable = (imageView = (ImageView) view).getDrawable()) != null) {
-                    int identityHashCode = System.identityHashCode(drawable);
-                    if (!hashSet.contains(Integer.valueOf(identityHashCode))) {
+                    int iIdentityHashCode = System.identityHashCode(drawable);
+                    if (!hashSet.contains(Integer.valueOf(iIdentityHashCode))) {
                         boolean z = drawable instanceof BitmapDrawable;
-                        int i = 0;
+                        int allocationByteCount = 0;
                         if (z && (bitmap = ((BitmapDrawable) drawable).getBitmap()) != null) {
-                            int identityHashCode2 = System.identityHashCode(bitmap);
-                            if (!hashSet.contains(Integer.valueOf(identityHashCode2))) {
-                                hashSet.add(Integer.valueOf(identityHashCode2));
-                                i = bitmap.getAllocationByteCount();
+                            int iIdentityHashCode2 = System.identityHashCode(bitmap);
+                            if (!hashSet.contains(Integer.valueOf(iIdentityHashCode2))) {
+                                hashSet.add(Integer.valueOf(iIdentityHashCode2));
+                                allocationByteCount = bitmap.getAllocationByteCount();
                             }
                         }
                         switch (imageView.getId()) {
                             case R.id.icon:
                             case R.id.dvorak:
                             case R.id.multipleChoice:
-                                usageBuilder.smallIcon += i;
+                                usageBuilder.smallIcon += allocationByteCount;
                                 break;
                             case R.id.autofill_dataset_icon:
                             case R.id.floating:
                             case R.id.game:
-                            case R.id.sequentially:
-                            case R.id.stateUnspecified:
-                                usageBuilder.systemIcons += i;
+                            case R.id.serial_number:
+                            case R.id.stateVisible:
+                                usageBuilder.systemIcons += allocationByteCount;
                                 break;
                             case R.id.checked:
-                                usageBuilder.style += i;
+                                usageBuilder.style += allocationByteCount;
                                 break;
-                            case R.id.tag_top_animator:
-                                usageBuilder.largeIcon += i;
+                            case R.id.tag_top_override:
+                                usageBuilder.largeIcon += allocationByteCount;
                                 break;
                             default:
                                 if (Log.isLoggable("NotificationMemory", 3)) {
                                     MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Custom view: ", view.getId() == -1 ? "no-id" : view.getResources().getResourceName(view.getId()), "NotificationMemory");
                                 }
-                                usageBuilder.customViews += i;
+                                usageBuilder.customViews += allocationByteCount;
                                 break;
                         }
                         if (z) {
                             Bitmap bitmap2 = ((BitmapDrawable) drawable).getBitmap();
                             if ((bitmap2 != null ? bitmap2.getConfig() : null) != Bitmap.Config.HARDWARE) {
-                                usageBuilder.softwareBitmaps += i;
+                                usageBuilder.softwareBitmaps += allocationByteCount;
                             }
                         }
-                        hashSet.add(Integer.valueOf(identityHashCode));
+                        hashSet.add(Integer.valueOf(iIdentityHashCode));
                     }
                 }
             }

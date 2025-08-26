@@ -2,12 +2,15 @@ package com.android.systemui.statusbar.notification.stack.ui.viewmodel;
 
 import android.util.IndentingPrintWriter;
 import androidx.compose.runtime.State;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.compose.animation.scene.ObservableTransitionState;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.FeatureFlagsClassic;
 import com.android.systemui.flags.Flags;
 import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.lifecycle.Hydrator;
 import com.android.systemui.scene.domain.interactor.SceneInteractor;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.scene.shared.model.Overlays;
 import com.android.systemui.scene.shared.model.Scenes;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
@@ -18,22 +21,28 @@ import com.android.systemui.shade.shared.model.ShadeMode;
 import com.android.systemui.statusbar.domain.interactor.RemoteInputInteractor;
 import com.android.systemui.statusbar.domain.interactor.RemoteInputInteractor$special$$inlined$mapNotNull$1;
 import com.android.systemui.statusbar.notification.domain.interactor.HeadsUpNotificationInteractor;
+import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.stack.domain.interactor.NotificationStackAppearanceInteractor;
 import com.android.systemui.util.kotlin.ActivatableFlowDumper;
 import com.android.systemui.util.kotlin.ActivatableFlowDumperImpl;
 import java.io.PrintWriter;
+import kotlin.KotlinNothingValueException;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationsPlaceholderViewModel extends ExclusiveActivatable implements ActivatableFlowDumper {
     public final /* synthetic */ ActivatableFlowDumperImpl $$delegate_0;
@@ -53,8 +62,348 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
     public final StateFlow shadeToQsFraction;
     public final Flow syntheticScroll;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return NotificationsPlaceholderViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ NotificationsPlaceholderViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(NotificationsPlaceholderViewModel notificationsPlaceholderViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = notificationsPlaceholderViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Hydrator hydrator = this.this$0.hydrator;
+                    this.label = 1;
+                    if (hydrator.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$2, reason: invalid class name and collision with other inner class name */
+        final class C05232 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ NotificationsPlaceholderViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C05232(NotificationsPlaceholderViewModel notificationsPlaceholderViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = notificationsPlaceholderViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C05232(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C05232) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final StateFlow stateFlowIsAnyExpanded = ((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.isAnyExpanded();
+                    Flow flow = new Flow() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$2$invokeSuspend$$inlined$filter$1
+
+                        /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$2$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                        public final class AnonymousClass2 implements FlowCollector {
+                            public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                            /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$2$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                            public final class AnonymousClass1 extends ContinuationImpl {
+                                Object L$0;
+                                Object L$1;
+                                int label;
+                                /* synthetic */ Object result;
+
+                                public AnonymousClass1(Continuation continuation) {
+                                    super(continuation);
+                                }
+
+                                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                public final Object invokeSuspend(Object obj) {
+                                    this.result = obj;
+                                    this.label |= Integer.MIN_VALUE;
+                                    return AnonymousClass2.this.emit(null, this);
+                                }
+                            }
+
+                            public AnonymousClass2(FlowCollector flowCollector) {
+                                this.$this_unsafeFlow = flowCollector;
+                            }
+
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    if (((Boolean) obj).booleanValue()) {
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }
+
+                        @Override // kotlinx.coroutines.flow.Flow
+                        public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                            Object objCollect = stateFlowIsAnyExpanded.collect(new AnonymousClass2(flowCollector), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                        }
+                    };
+                    final NotificationsPlaceholderViewModel notificationsPlaceholderViewModel = this.this$0;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel.onActivated.2.2.2
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            ((Boolean) obj2).getClass();
+                            ((HeadsUpManagerImpl) notificationsPlaceholderViewModel.headsUpNotificationInteractor.headsUpRepository).unpinAll();
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    if (flow.collect(flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$3, reason: invalid class name */
+        final class AnonymousClass3 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ NotificationsPlaceholderViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass3(NotificationsPlaceholderViewModel notificationsPlaceholderViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = notificationsPlaceholderViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass3(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass3) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final ReadonlyStateFlow readonlyStateFlow = this.this$0.sceneInteractor.transitionState;
+                    Flow flow = new Flow() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$3$invokeSuspend$$inlined$filter$1
+
+                        /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$3$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                        public final class AnonymousClass2 implements FlowCollector {
+                            public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                            /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2$3$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                            public final class AnonymousClass1 extends ContinuationImpl {
+                                Object L$0;
+                                Object L$1;
+                                int label;
+                                /* synthetic */ Object result;
+
+                                public AnonymousClass1(Continuation continuation) {
+                                    super(continuation);
+                                }
+
+                                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                public final Object invokeSuspend(Object obj) {
+                                    this.result = obj;
+                                    this.label |= Integer.MIN_VALUE;
+                                    return AnonymousClass2.this.emit(null, this);
+                                }
+                            }
+
+                            public AnonymousClass2(FlowCollector flowCollector) {
+                                this.$this_unsafeFlow = flowCollector;
+                            }
+
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    if (((ObservableTransitionState) obj) instanceof ObservableTransitionState.Idle) {
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }
+
+                        @Override // kotlinx.coroutines.flow.Flow
+                        public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                            Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                        }
+                    };
+                    final NotificationsPlaceholderViewModel notificationsPlaceholderViewModel = this.this$0;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel.onActivated.2.3.2
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            ((HeadsUpManagerImpl) notificationsPlaceholderViewModel.headsUpNotificationInteractor.headsUpRepository).getClass();
+                            SceneContainerFlag.isUnexpectedlyInLegacyMode();
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    if (flow.collect(flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = NotificationsPlaceholderViewModel.this.new AnonymousClass2(continuation);
+            anonymousClass2.L$0 = obj;
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(NotificationsPlaceholderViewModel.this, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C05232(NotificationsPlaceholderViewModel.this, null), 7);
+            return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(NotificationsPlaceholderViewModel.this, null), 7);
+        }
     }
 
     public NotificationsPlaceholderViewModel(NotificationStackAppearanceInteractor notificationStackAppearanceInteractor, SceneInteractor sceneInteractor, ShadeInteractor shadeInteractor, ShadeModeInteractor shadeModeInteractor, HeadsUpNotificationInteractor headsUpNotificationInteractor, RemoteInputInteractor remoteInputInteractor, FeatureFlagsClassic featureFlagsClassic, DumpManager dumpManager) {
@@ -65,14 +414,13 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
         this.sceneInteractor = sceneInteractor;
         this.shadeInteractor = shadeInteractor;
         this.headsUpNotificationInteractor = headsUpNotificationInteractor;
-        Hydrator hydrator = new Hydrator("NotificationsPlaceholderViewModel", null, 2, 0 == true ? 1 : 0);
+        Hydrator hydrator = new Hydrator("NotificationsPlaceholderViewModel", null, 2, null);
         this.hydrator = hydrator;
         ShadeModeInteractorImpl shadeModeInteractorImpl = (ShadeModeInteractorImpl) shadeModeInteractor;
         Object obj2 = ((ShadeMode) shadeModeInteractorImpl.shadeMode.$$delegate_0.getValue()) instanceof ShadeMode.Dual ? Overlays.NotificationsShade : Scenes.Shade;
         final ReadonlyStateFlow readonlyStateFlow = shadeModeInteractorImpl.shadeMode;
         this.notificationsShadeContentKey$delegate = hydrator.hydratedStateOf("notificationsShadeContentKey", obj2, new Flow() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -101,73 +449,47 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
                     this.this$0 = notificationsPlaceholderViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4d
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.shade.shared.model.ShadeMode r5 = (com.android.systemui.shade.shared.model.ShadeMode) r5
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel r6 = r4.this$0
-                        r6.getClass()
-                        boolean r5 = r5 instanceof com.android.systemui.shade.shared.model.ShadeMode.Dual
-                        if (r5 == 0) goto L40
-                        com.android.compose.animation.scene.OverlayKey r5 = com.android.systemui.scene.shared.model.Overlays.NotificationsShade
-                        goto L42
-                    L40:
-                        com.android.compose.animation.scene.SceneKey r5 = com.android.systemui.scene.shared.model.Scenes.Shade
-                    L42:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4d
-                        return r1
-                    L4d:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        this.this$0.getClass();
+                        Object obj3 = ((ShadeMode) obj) instanceof ShadeMode.Dual ? Overlays.NotificationsShade : Scenes.Shade;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(obj3, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         ShadeMode shadeMode = (ShadeMode) readonlyStateFlow.$$delegate_0.getValue();
@@ -183,7 +505,6 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
         }
         this.quickSettingsShadeContentKey$delegate = hydrator.hydratedStateOf("quickSettingsShadeContentKey", obj, new Flow() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -212,84 +533,58 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
                     this.this$0 = notificationsPlaceholderViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L58
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.shade.shared.model.ShadeMode r5 = (com.android.systemui.shade.shared.model.ShadeMode) r5
-                        com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel r6 = r4.this$0
-                        r6.getClass()
-                        boolean r6 = r5 instanceof com.android.systemui.shade.shared.model.ShadeMode.Single
-                        if (r6 == 0) goto L40
-                        com.android.compose.animation.scene.SceneKey r5 = com.android.systemui.scene.shared.model.Scenes.QuickSettings
-                        goto L4d
-                    L40:
-                        boolean r6 = r5 instanceof com.android.systemui.shade.shared.model.ShadeMode.Split
-                        if (r6 == 0) goto L47
-                        com.android.compose.animation.scene.SceneKey r5 = com.android.systemui.scene.shared.model.Scenes.Shade
-                        goto L4d
-                    L47:
-                        boolean r5 = r5 instanceof com.android.systemui.shade.shared.model.ShadeMode.Dual
-                        if (r5 == 0) goto L5b
-                        com.android.compose.animation.scene.OverlayKey r5 = com.android.systemui.scene.shared.model.Overlays.QuickSettingsShade
-                    L4d:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L58
-                        return r1
-                    L58:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    L5b:
-                        kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-                        r4.<init>()
-                        throw r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object obj2;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj3 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj3);
+                        ShadeMode shadeMode = (ShadeMode) obj;
+                        this.this$0.getClass();
+                        if (shadeMode instanceof ShadeMode.Single) {
+                            obj2 = Scenes.QuickSettings;
+                        } else if (shadeMode instanceof ShadeMode.Split) {
+                            obj2 = Scenes.Shade;
+                        } else {
+                            if (!(shadeMode instanceof ShadeMode.Dual)) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            obj2 = Overlays.QuickSettingsShade;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(obj2, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj3);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.isCurrentGestureOverscroll$delegate = hydrator.hydratedStateOf("isCurrentGestureOverscroll", Boolean.FALSE, notificationStackAppearanceInteractor.isCurrentGestureOverscroll);
@@ -335,86 +630,48 @@ public final class NotificationsPlaceholderViewModel extends ExclusiveActivatabl
         return this.$$delegate_0.dumpWhileCollecting(flow, str);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0058, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0058, code lost:
     
-        if (r6.$$delegate_0.activateFlowDumper(r0) != r1) goto L22;
+        if (r6.$$delegate_0.activateFlowDumper(r0) == r1) goto L21;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x005a, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x004b, code lost:
-    
-        if (kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r7, r0) == r1) goto L21;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r7) {
-        /*
-            r6 = this;
-            boolean r0 = r7 instanceof com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1 r0 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1 r0 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$1
-            r0.<init>(r6, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 2
-            r5 = 1
-            if (r2 == 0) goto L3b
-            if (r2 == r5) goto L33
-            if (r2 == r4) goto L2f
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L5b
-        L33:
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel r6 = (com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel) r6
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L4e
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2 r7 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel$onActivated$2
-            r7.<init>(r6, r3)
-            r0.L$0 = r6
-            r0.label = r5
-            java.lang.Object r7 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r7, r0)
-            if (r7 != r1) goto L4e
-            goto L5a
-        L4e:
-            r0.L$0 = r3
-            r0.label = r4
-            com.android.systemui.util.kotlin.ActivatableFlowDumperImpl r6 = r6.$$delegate_0
-            java.lang.Object r6 = r6.activateFlowDumper(r0)
-            if (r6 != r1) goto L5b
-        L5a:
-            return r1
-        L5b:
-            kotlin.KotlinNothingValueException r6 = new kotlin.KotlinNothingValueException
-            r6.<init>()
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.NotificationsPlaceholderViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(null);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            if (CoroutineScopeKt.coroutineScope(anonymousClass2, anonymousClass1) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            throw new KotlinNothingValueException();
+        }
+        this = (NotificationsPlaceholderViewModel) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        anonymousClass1.L$0 = null;
+        anonymousClass1.label = 2;
     }
 }

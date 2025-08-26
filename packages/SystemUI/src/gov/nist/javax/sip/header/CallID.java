@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import java.text.ParseException;
 import javax.sip.header.CallIdHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CallID extends SIPHeader implements CallIdHeader {
     private static final long serialVersionUID = -6463630258703731156L;
@@ -41,7 +40,7 @@ public class CallID extends SIPHeader implements CallIdHeader {
         return false;
     }
 
-    public final void setCallId(String str) {
+    public final void setCallId(String str) throws ParseException {
         try {
             this.callIdentifier = new CallIdentifier(str);
         } catch (IllegalArgumentException unused) {

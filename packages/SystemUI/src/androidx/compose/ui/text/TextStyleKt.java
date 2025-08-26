@@ -27,11 +27,9 @@ import java.util.ArrayList;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TextStyleKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -85,7 +83,7 @@ public abstract class TextStyleKt {
             FontStyle.Companion.getClass();
             i = 0;
         }
-        FontStyle m764boximpl = FontStyle.m764boximpl(i);
+        FontStyle fontStyleM766boximpl = FontStyle.m766boximpl(i);
         FontSynthesis fontSynthesis = spanStyle.fontSynthesis;
         if (fontSynthesis != null) {
             i2 = fontSynthesis.value;
@@ -93,7 +91,7 @@ public abstract class TextStyleKt {
             FontSynthesis.Companion.getClass();
             i2 = FontSynthesis.All;
         }
-        FontSynthesis m766boximpl = FontSynthesis.m766boximpl(i2);
+        FontSynthesis fontSynthesisM768boximpl = FontSynthesis.m768boximpl(i2);
         FontFamily fontFamily = spanStyle.fontFamily;
         if (fontFamily == null) {
             FontFamily.Companion.getClass();
@@ -116,7 +114,7 @@ public abstract class TextStyleKt {
             BaselineShift.Companion.getClass();
             f = 0.0f;
         }
-        BaselineShift m791boximpl = BaselineShift.m791boximpl(f);
+        BaselineShift baselineShiftM793boximpl = BaselineShift.m793boximpl(f);
         TextGeometricTransform textGeometricTransform = spanStyle.textGeometricTransform;
         if (textGeometricTransform == null) {
             TextGeometricTransform.Companion.getClass();
@@ -182,7 +180,7 @@ public abstract class TextStyleKt {
         }
         FontWeight fontWeight4 = fontWeight;
         Shadow shadow2 = shadow;
-        SpanStyle spanStyle2 = new SpanStyle(textForegroundStyle, j, fontWeight4, m764boximpl, m766boximpl, fontFamily2, str2, j4, m791boximpl, textGeometricTransform2, localeList5, j5, textDecoration, shadow2, spanStyle.platformStyle, drawStyle, (DefaultConstructorMarker) null);
+        SpanStyle spanStyle2 = new SpanStyle(textForegroundStyle, j, fontWeight4, fontStyleM766boximpl, fontSynthesisM768boximpl, fontFamily2, str2, j4, baselineShiftM793boximpl, textGeometricTransform2, localeList5, j5, textDecoration, shadow2, spanStyle.platformStyle, drawStyle, (DefaultConstructorMarker) null);
         int i5 = ParagraphStyleKt.$r8$clinit;
         ParagraphStyle paragraphStyle = textStyle.paragraphStyle;
         int i6 = paragraphStyle.textAlign;

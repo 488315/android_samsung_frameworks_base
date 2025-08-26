@@ -30,7 +30,6 @@ import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.bubbles.BubbleTransitions;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.desktopmode.DesktopModeVisualIndicator;
-import com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.shared.animation.Interpolators;
@@ -40,6 +39,7 @@ import com.android.wm.shell.transition.Transitions;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
 import com.android.wm.shell.windowdecor.MoveToDesktopAnimator;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+import com.samsung.android.rune.CoreRune;
 import com.sec.ims.volte2.data.VolteConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
@@ -59,7 +59,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class DragToDesktopTransitionHandler implements Transitions.TransitionHandler {
     public final Optional bubbleController;
@@ -78,7 +77,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CancelState {
         public static final /* synthetic */ CancelState[] $VALUES;
         public static final CancelState CANCEL_BUBBLE_LEFT;
@@ -118,7 +116,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -131,7 +128,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragToDesktopLayers {
         public final int dragLayer;
         public final int topAppLayer;
@@ -172,7 +168,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TransitionState {
         public /* synthetic */ TransitionState(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -243,7 +238,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         private TransitionState() {
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class FromSplit extends TransitionState {
             public Animator activeCancelAnimation;
             public CancelState cancelState;
@@ -372,29 +366,29 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             }
 
             public final int hashCode() {
-                int hashCode = (this.startTransitionToken.hashCode() + ((this.dragAnimator.hashCode() + (Integer.hashCode(this.draggedTaskId) * 31)) * 31)) * 31;
+                int iHashCode = (this.startTransitionToken.hashCode() + ((this.dragAnimator.hashCode() + (Integer.hashCode(this.draggedTaskId) * 31)) * 31)) * 31;
                 Transitions.TransitionFinishCallback transitionFinishCallback = this.startTransitionFinishCb;
-                int hashCode2 = (hashCode + (transitionFinishCallback == null ? 0 : transitionFinishCallback.hashCode())) * 31;
+                int iHashCode2 = (iHashCode + (transitionFinishCallback == null ? 0 : transitionFinishCallback.hashCode())) * 31;
                 SurfaceControl.Transaction transaction = this.startTransitionFinishTransaction;
-                int hashCode3 = (hashCode2 + (transaction == null ? 0 : transaction.hashCode())) * 31;
+                int iHashCode3 = (iHashCode2 + (transaction == null ? 0 : transaction.hashCode())) * 31;
                 IBinder iBinder = this.cancelTransitionToken;
-                int hashCode4 = (hashCode3 + (iBinder == null ? 0 : iBinder.hashCode())) * 31;
+                int iHashCode4 = (iHashCode3 + (iBinder == null ? 0 : iBinder.hashCode())) * 31;
                 TransitionInfo.Change change = this.homeChange;
-                int hashCode5 = (hashCode4 + (change == null ? 0 : change.hashCode())) * 31;
+                int iHashCode5 = (iHashCode4 + (change == null ? 0 : change.hashCode())) * 31;
                 TransitionInfo.Change change2 = this.draggedTaskChange;
-                int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.freeformTaskChanges, (hashCode5 + (change2 == null ? 0 : change2.hashCode())) * 31, 31);
+                int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.freeformTaskChanges, (iHashCode5 + (change2 == null ? 0 : change2.hashCode())) * 31, 31);
                 DragToDesktopLayers dragToDesktopLayers = this.surfaceLayers;
-                int m2 = TransitionData$$ExternalSyntheticOutline0.m((this.cancelState.hashCode() + ((m + (dragToDesktopLayers == null ? 0 : dragToDesktopLayers.hashCode())) * 31)) * 31, 31, this.startAborted);
+                int iM2 = TransitionData$$ExternalSyntheticOutline0.m((this.cancelState.hashCode() + ((iM + (dragToDesktopLayers == null ? 0 : dragToDesktopLayers.hashCode())) * 31)) * 31, 31, this.startAborted);
                 DesktopModeVisualIndicator desktopModeVisualIndicator = this.visualIndicator;
-                int m3 = TransitionData$$ExternalSyntheticOutline0.m((m2 + (desktopModeVisualIndicator == null ? 0 : desktopModeVisualIndicator.hashCode())) * 31, 31, this.startInterrupted);
+                int iM3 = TransitionData$$ExternalSyntheticOutline0.m((iM2 + (desktopModeVisualIndicator == null ? 0 : desktopModeVisualIndicator.hashCode())) * 31, 31, this.startInterrupted);
                 IBinder iBinder2 = this.endTransitionToken;
-                int m4 = TransitionData$$ExternalSyntheticOutline0.m((m3 + (iBinder2 == null ? 0 : iBinder2.hashCode())) * 31, 31, this.mergedEndTransition);
+                int iM4 = TransitionData$$ExternalSyntheticOutline0.m((iM3 + (iBinder2 == null ? 0 : iBinder2.hashCode())) * 31, 31, this.mergedEndTransition);
                 Animator animator = this.activeCancelAnimation;
-                int hashCode6 = (m4 + (animator == null ? 0 : animator.hashCode())) * 31;
+                int iHashCode6 = (iM4 + (animator == null ? 0 : animator.hashCode())) * 31;
                 Runnable runnable = this.dragCancelCallback;
-                int hashCode7 = (hashCode6 + (runnable == null ? 0 : runnable.hashCode())) * 31;
+                int iHashCode7 = (iHashCode6 + (runnable == null ? 0 : runnable.hashCode())) * 31;
                 TransitionInfo.Change change3 = this.splitRootChange;
-                return Integer.hashCode(this.otherSplitTask) + ((hashCode7 + (change3 != null ? change3.hashCode() : 0)) * 31);
+                return Integer.hashCode(this.otherSplitTask) + ((iHashCode7 + (change3 != null ? change3.hashCode() : 0)) * 31);
             }
 
             @Override // com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler.TransitionState
@@ -491,7 +485,6 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class FromFullscreen extends TransitionState {
             public Animator activeCancelAnimation;
             public CancelState cancelState;
@@ -620,29 +613,29 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             }
 
             public final int hashCode() {
-                int hashCode = (this.startTransitionToken.hashCode() + ((this.dragAnimator.hashCode() + (Integer.hashCode(this.draggedTaskId) * 31)) * 31)) * 31;
+                int iHashCode = (this.startTransitionToken.hashCode() + ((this.dragAnimator.hashCode() + (Integer.hashCode(this.draggedTaskId) * 31)) * 31)) * 31;
                 Transitions.TransitionFinishCallback transitionFinishCallback = this.startTransitionFinishCb;
-                int hashCode2 = (hashCode + (transitionFinishCallback == null ? 0 : transitionFinishCallback.hashCode())) * 31;
+                int iHashCode2 = (iHashCode + (transitionFinishCallback == null ? 0 : transitionFinishCallback.hashCode())) * 31;
                 SurfaceControl.Transaction transaction = this.startTransitionFinishTransaction;
-                int hashCode3 = (hashCode2 + (transaction == null ? 0 : transaction.hashCode())) * 31;
+                int iHashCode3 = (iHashCode2 + (transaction == null ? 0 : transaction.hashCode())) * 31;
                 IBinder iBinder = this.cancelTransitionToken;
-                int hashCode4 = (hashCode3 + (iBinder == null ? 0 : iBinder.hashCode())) * 31;
+                int iHashCode4 = (iHashCode3 + (iBinder == null ? 0 : iBinder.hashCode())) * 31;
                 TransitionInfo.Change change = this.homeChange;
-                int hashCode5 = (hashCode4 + (change == null ? 0 : change.hashCode())) * 31;
+                int iHashCode5 = (iHashCode4 + (change == null ? 0 : change.hashCode())) * 31;
                 TransitionInfo.Change change2 = this.draggedTaskChange;
-                int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.freeformTaskChanges, (hashCode5 + (change2 == null ? 0 : change2.hashCode())) * 31, 31);
+                int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.freeformTaskChanges, (iHashCode5 + (change2 == null ? 0 : change2.hashCode())) * 31, 31);
                 DragToDesktopLayers dragToDesktopLayers = this.surfaceLayers;
-                int m2 = TransitionData$$ExternalSyntheticOutline0.m((this.cancelState.hashCode() + ((m + (dragToDesktopLayers == null ? 0 : dragToDesktopLayers.hashCode())) * 31)) * 31, 31, this.startAborted);
+                int iM2 = TransitionData$$ExternalSyntheticOutline0.m((this.cancelState.hashCode() + ((iM + (dragToDesktopLayers == null ? 0 : dragToDesktopLayers.hashCode())) * 31)) * 31, 31, this.startAborted);
                 DesktopModeVisualIndicator desktopModeVisualIndicator = this.visualIndicator;
-                int m3 = TransitionData$$ExternalSyntheticOutline0.m((m2 + (desktopModeVisualIndicator == null ? 0 : desktopModeVisualIndicator.hashCode())) * 31, 31, this.startInterrupted);
+                int iM3 = TransitionData$$ExternalSyntheticOutline0.m((iM2 + (desktopModeVisualIndicator == null ? 0 : desktopModeVisualIndicator.hashCode())) * 31, 31, this.startInterrupted);
                 IBinder iBinder2 = this.endTransitionToken;
-                int m4 = TransitionData$$ExternalSyntheticOutline0.m((m3 + (iBinder2 == null ? 0 : iBinder2.hashCode())) * 31, 31, this.mergedEndTransition);
+                int iM4 = TransitionData$$ExternalSyntheticOutline0.m((iM3 + (iBinder2 == null ? 0 : iBinder2.hashCode())) * 31, 31, this.mergedEndTransition);
                 Animator animator = this.activeCancelAnimation;
-                int hashCode6 = (m4 + (animator == null ? 0 : animator.hashCode())) * 31;
+                int iHashCode6 = (iM4 + (animator == null ? 0 : animator.hashCode())) * 31;
                 Runnable runnable = this.dragCancelCallback;
-                int hashCode7 = (hashCode6 + (runnable == null ? 0 : runnable.hashCode())) * 31;
+                int iHashCode7 = (iHashCode6 + (runnable == null ? 0 : runnable.hashCode())) * 31;
                 SurfaceControl surfaceControl = this.transitionRootLeash;
-                return this.otherRootChanges.hashCode() + ((hashCode7 + (surfaceControl != null ? surfaceControl.hashCode() : 0)) * 31);
+                return this.otherRootChanges.hashCode() + ((iHashCode7 + (surfaceControl != null ? surfaceControl.hashCode() : 0)) * 31);
             }
 
             @Override // com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler.TransitionState
@@ -749,31 +742,31 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     }
 
     public static ValueAnimator createInterruptAlphaAnimator(final SurfaceControl.Transaction transaction, final SurfaceControl surfaceControl, boolean z) {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
         transaction.show(surfaceControl);
-        ofFloat.setDuration(336L);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$createInterruptAlphaAnimator$1$1
+        valueAnimatorOfFloat.setDuration(336L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$createInterruptAlphaAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 transaction.setAlpha(surfaceControl, ((Float) valueAnimator.getAnimatedValue()).floatValue()).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     public static void logV$4(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DragToDesktopTransitionHandler", objArr);
-        ProtoLog.v(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DragToDesktopTransitionHandler", objArr);
+        ProtoLog.v(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logW$2(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DragToDesktopTransitionHandler", objArr);
-        ProtoLog.w(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DragToDesktopTransitionHandler", objArr);
+        ProtoLog.w(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void restoreWindowOrder(WindowContainerTransaction windowContainerTransaction, TransitionState transitionState) {
@@ -821,22 +814,22 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     }
 
     public void animateEndDragToDesktop(SurfaceControl.Transaction transaction, final Transitions.TransitionFinishCallback transitionFinishCallback) {
-        final TransitionState requireTransitionState = requireTransitionState();
-        TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+        final TransitionState transitionStateRequireTransitionState = requireTransitionState();
+        TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
         if (draggedTaskChange == null) {
             throw new IllegalStateException("Expected non-null change of dragged task");
         }
         final SurfaceControl leash = draggedTaskChange.getLeash();
         Rect startAbsBounds = draggedTaskChange.getStartAbsBounds();
         Rect endAbsBounds = draggedTaskChange.getEndAbsBounds();
-        requireTransitionState.getDragAnimator().cancelAnimator();
-        final float scale = requireTransitionState.getDragAnimator().getScale();
-        PointF pointF = requireTransitionState.getDragAnimator().position;
-        int width = startAbsBounds.width();
-        int height = startAbsBounds.height();
+        transitionStateRequireTransitionState.getDragAnimator().cancelAnimator();
+        final float scale = transitionStateRequireTransitionState.getDragAnimator().getScale();
+        PointF pointF = transitionStateRequireTransitionState.getDragAnimator().position;
+        int iWidth = startAbsBounds.width();
+        int iHeight = startAbsBounds.height();
         int i = (int) pointF.x;
         int i2 = (int) pointF.y;
-        Rect rect = new Rect(i, i2, width + i, height + i2);
+        Rect rect = new Rect(i, i2, iWidth + i, iHeight + i2);
         DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
         if (desktopTasksController$dragToDesktopStateListener$1 != null) {
             desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
@@ -845,7 +838,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         if (desktopModeOnTaskResizeAnimationListener == null) {
             desktopModeOnTaskResizeAnimationListener = null;
         }
-        desktopModeOnTaskResizeAnimationListener.onAnimationStart(requireTransitionState.getDraggedTaskId(), transaction, rect);
+        desktopModeOnTaskResizeAnimationListener.onAnimationStart(transitionStateRequireTransitionState.getDraggedTaskId(), transaction, rect);
         final SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) this.transactionSupplier.get();
         ValueAnimator duration = ValueAnimator.ofObject(this.rectEvaluator, rect, endAbsBounds).setDuration(336L);
         duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$animateEndDragToDesktop$1$1
@@ -854,29 +847,29 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 Rect rect2 = (Rect) valueAnimator.getAnimatedValue();
                 float animatedFraction = valueAnimator.getAnimatedFraction();
                 float f = scale;
-                float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1, f, animatedFraction, f);
+                float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1, f, animatedFraction, f);
                 SurfaceControl.Transaction transaction3 = transaction2;
                 SurfaceControl surfaceControl = leash;
-                transaction3.setScale(surfaceControl, m$1, m$1);
+                transaction3.setScale(surfaceControl, fM$1, fM$1);
                 transaction3.setPosition(surfaceControl, rect2.left, rect2.top);
                 transaction3.setWindowCrop(surfaceControl, rect2.width(), rect2.height());
                 DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = this.onTaskResizeAnimationListener;
                 if (desktopModeOnTaskResizeAnimationListener2 == null) {
                     desktopModeOnTaskResizeAnimationListener2 = null;
                 }
-                desktopModeOnTaskResizeAnimationListener2.onBoundsChange(requireTransitionState.getDraggedTaskId(), transaction2, rect2);
+                desktopModeOnTaskResizeAnimationListener2.onBoundsChange(transitionStateRequireTransitionState.getDraggedTaskId(), transaction2, rect2);
             }
         });
         duration.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$animateEndDragToDesktop$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = DragToDesktopTransitionHandler.this.onTaskResizeAnimationListener;
+                DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener desktopModeOnTaskResizeAnimationListener2 = this.this$0.onTaskResizeAnimationListener;
                 if (desktopModeOnTaskResizeAnimationListener2 == null) {
                     desktopModeOnTaskResizeAnimationListener2 = null;
                 }
-                desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(requireTransitionState.getDraggedTaskId());
+                desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(transitionStateRequireTransitionState.getDraggedTaskId());
                 transitionFinishCallback.onTransitionFinished(null);
-                DragToDesktopTransitionHandler dragToDesktopTransitionHandler = DragToDesktopTransitionHandler.this;
+                DragToDesktopTransitionHandler dragToDesktopTransitionHandler = this.this$0;
                 dragToDesktopTransitionHandler.transitionState = null;
                 dragToDesktopTransitionHandler.interactionJankMonitor.end(116);
             }
@@ -894,41 +887,41 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             logV$4("cancelDragToDesktop: not in progress, returning", new Object[0]);
             return;
         }
-        TransitionState requireTransitionState = requireTransitionState();
-        if (requireTransitionState.getStartAborted()) {
+        TransitionState transitionStateRequireTransitionState = requireTransitionState();
+        if (transitionStateRequireTransitionState.getStartAborted()) {
             logV$4("cancelDragToDesktop: start was aborted, clearing state", new Object[0]);
             this.transitionState = null;
             return;
         }
-        if (requireTransitionState.getStartInterrupted()) {
+        if (transitionStateRequireTransitionState.getStartInterrupted()) {
             logV$4("cancelDragToDesktop: start was interrupted, returning", new Object[0]);
             return;
         }
-        requireTransitionState.setCancelState(cancelState);
-        if (requireTransitionState.getDraggedTaskChange() != null && cancelState == CancelState.STANDARD_CANCEL) {
-            requireTransitionState.setActiveCancelAnimation(startCancelAnimation());
+        transitionStateRequireTransitionState.setCancelState(cancelState);
+        if (transitionStateRequireTransitionState.getDraggedTaskChange() != null && cancelState == CancelState.STANDARD_CANCEL) {
+            transitionStateRequireTransitionState.setActiveCancelAnimation(startCancelAnimation());
             return;
         }
-        if (requireTransitionState.getDraggedTaskChange() == null || !(cancelState == (cancelState2 = CancelState.CANCEL_SPLIT_LEFT) || cancelState == CancelState.CANCEL_SPLIT_RIGHT)) {
-            if (requireTransitionState.getDraggedTaskChange() != null) {
+        if (transitionStateRequireTransitionState.getDraggedTaskChange() == null || !(cancelState == (cancelState2 = CancelState.CANCEL_SPLIT_LEFT) || cancelState == CancelState.CANCEL_SPLIT_RIGHT)) {
+            if (transitionStateRequireTransitionState.getDraggedTaskChange() != null) {
                 CancelState cancelState3 = CancelState.CANCEL_BUBBLE_LEFT;
                 if (cancelState == cancelState3 || cancelState == CancelState.CANCEL_BUBBLE_RIGHT) {
-                    if (this.bubbleController.isEmpty() || !(requireTransitionState instanceof TransitionState.FromFullscreen)) {
-                        requireTransitionState.setActiveCancelAnimation(startCancelAnimation());
+                    if (this.bubbleController.isEmpty() || !(transitionStateRequireTransitionState instanceof TransitionState.FromFullscreen)) {
+                        transitionStateRequireTransitionState.setActiveCancelAnimation(startCancelAnimation());
                         return;
                     }
                     WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                    restoreWindowOrder(windowContainerTransaction, requireTransitionState);
+                    restoreWindowOrder(windowContainerTransaction, transitionStateRequireTransitionState);
                     boolean z = cancelState == cancelState3;
-                    TransitionState requireTransitionState2 = requireTransitionState();
-                    TransitionInfo.Change draggedTaskChange = requireTransitionState2.getDraggedTaskChange();
+                    TransitionState transitionStateRequireTransitionState2 = requireTransitionState();
+                    TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState2.getDraggedTaskChange();
                     if (draggedTaskChange == null || draggedTaskChange.getTaskInfo() == null) {
                         throw new IllegalStateException("Expected non-null taskInfo");
                     }
-                    PointF pointF = new PointF(requireTransitionState2.getDragAnimator().position);
-                    float scale = requireTransitionState2.getDragAnimator().getScale();
-                    float f = requireTransitionState2.getDragAnimator().cornerRadius;
-                    requireTransitionState2.getDragAnimator().cancelAnimator();
+                    PointF pointF = new PointF(transitionStateRequireTransitionState2.getDragAnimator().position);
+                    float scale = transitionStateRequireTransitionState2.getDragAnimator().getScale();
+                    float f = transitionStateRequireTransitionState2.getDragAnimator().cornerRadius;
+                    transitionStateRequireTransitionState2.getDragAnimator().cancelAnimator();
                     BubbleController bubbleController = (BubbleController) this.bubbleController.orElseThrow(DragToDesktopTransitionHandler$requestBubble$controller$1.INSTANCE);
                     new BubbleTransitions.DragData(z, scale, f, pointF, windowContainerTransaction);
                     bubbleController.getClass();
@@ -940,34 +933,34 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         }
         int i = cancelState != cancelState2 ? 1 : 0;
         WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
-        restoreWindowOrder(windowContainerTransaction2, requireTransitionState);
-        SurfaceControl.Transaction startTransitionFinishTransaction = requireTransitionState.getStartTransitionFinishTransaction();
+        restoreWindowOrder(windowContainerTransaction2, transitionStateRequireTransitionState);
+        SurfaceControl.Transaction startTransitionFinishTransaction = transitionStateRequireTransitionState.getStartTransitionFinishTransaction();
         if (startTransitionFinishTransaction != null) {
             startTransitionFinishTransaction.apply();
         }
-        Transitions.TransitionFinishCallback startTransitionFinishCb = requireTransitionState.getStartTransitionFinishCb();
+        Transitions.TransitionFinishCallback startTransitionFinishCb = transitionStateRequireTransitionState.getStartTransitionFinishCb();
         if (startTransitionFinishCb != null) {
             startTransitionFinishCb.onTransitionFinished(null);
         }
-        TransitionState requireTransitionState3 = requireTransitionState();
-        TransitionInfo.Change draggedTaskChange2 = requireTransitionState3.getDraggedTaskChange();
+        TransitionState transitionStateRequireTransitionState3 = requireTransitionState();
+        TransitionInfo.Change draggedTaskChange2 = transitionStateRequireTransitionState3.getDraggedTaskChange();
         if (draggedTaskChange2 == null || (taskInfo = draggedTaskChange2.getTaskInfo()) == null) {
             throw new IllegalStateException("Expected non-null taskInfo");
         }
-        TransitionState requireTransitionState4 = requireTransitionState();
-        TransitionInfo.Change draggedTaskChange3 = requireTransitionState4.getDraggedTaskChange();
+        TransitionState transitionStateRequireTransitionState4 = requireTransitionState();
+        TransitionInfo.Change draggedTaskChange3 = transitionStateRequireTransitionState4.getDraggedTaskChange();
         if (draggedTaskChange3 == null || (taskInfo2 = draggedTaskChange3.getTaskInfo()) == null) {
             throw new IllegalStateException("Expected non-null taskInfo");
         }
         Rect rect = new Rect(taskInfo2.configuration.windowConfiguration.getBounds());
-        float scale2 = requireTransitionState4.getDragAnimator().getScale();
-        float width = rect.width() * scale2;
-        float height = rect.height() * scale2;
-        PointF pointF2 = new PointF(requireTransitionState4.getDragAnimator().position);
+        float scale2 = transitionStateRequireTransitionState4.getDragAnimator().getScale();
+        float fWidth = rect.width() * scale2;
+        float fHeight = rect.height() * scale2;
+        PointF pointF2 = new PointF(transitionStateRequireTransitionState4.getDragAnimator().position);
         float f2 = pointF2.x;
         float f3 = pointF2.y;
-        Rect rect2 = new Rect((int) f2, (int) f3, (int) (f2 + width), (int) (f3 + height));
-        requireTransitionState3.getDragAnimator().cancelAnimator();
+        Rect rect2 = new Rect((int) f2, (int) f3, (int) (f2 + fWidth), (int) (f3 + fHeight));
+        transitionStateRequireTransitionState3.getDragAnimator().cancelAnimator();
         requestSplitSelect(i, taskInfo, rect2, windowContainerTransaction2);
         this.transitionState = null;
     }
@@ -990,34 +983,44 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     public final void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, IBinder iBinder2, Transitions.TransitionFinishCallback transitionFinishCallback) {
         SurfaceControl leash;
         SurfaceControl leash2;
-        final TransitionState requireTransitionState = requireTransitionState();
-        if (requireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_LEFT || requireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_RIGHT) {
+        final TransitionState transitionStateRequireTransitionState = requireTransitionState();
+        if (transitionStateRequireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_LEFT || transitionStateRequireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_RIGHT) {
             logV$4("mergeAnimation: cancel through split", new Object[0]);
             this.transitionState = null;
             return;
         }
         if (transitionInfo.getType() == 1024) {
             logV$4("mergeAnimation: convert-to-bubble", new Object[0]);
-            Transitions.TransitionFinishCallback startTransitionFinishCb = requireTransitionState.getStartTransitionFinishCb();
+            Transitions.TransitionFinishCallback startTransitionFinishCb = transitionStateRequireTransitionState.getStartTransitionFinishCb();
             if (startTransitionFinishCb != null) {
                 startTransitionFinishCb.onTransitionFinished(null);
             }
             this.transitionState = null;
             return;
         }
-        boolean z = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, requireTransitionState.getCancelTransitionToken()) && Intrinsics.areEqual(iBinder2, requireTransitionState.getStartTransitionToken());
-        boolean z2 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder2, requireTransitionState.getStartTransitionToken());
-        SurfaceControl.Transaction startTransitionFinishTransaction = requireTransitionState.getStartTransitionFinishTransaction();
+        boolean z = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getCancelTransitionToken()) && Intrinsics.areEqual(iBinder2, transitionStateRequireTransitionState.getStartTransitionToken());
+        boolean z2 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder2, transitionStateRequireTransitionState.getStartTransitionToken());
+        if (transitionInfo.getType() == 1109 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getStartTransitionToken())) {
+            logV$4("reversed transition. clear DragToDesktop state", new Object[0]);
+            this.transitionState = null;
+            DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
+            if (desktopTasksController$dragToDesktopStateListener$1 != null) {
+                desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
+                return;
+            }
+            return;
+        }
+        SurfaceControl.Transaction startTransitionFinishTransaction = transitionStateRequireTransitionState.getStartTransitionFinishTransaction();
         if (startTransitionFinishTransaction == null) {
             throw new IllegalStateException("Start transition expected to be waiting for merge but wasn't");
         }
-        Transitions.TransitionFinishCallback startTransitionFinishCb2 = requireTransitionState.getStartTransitionFinishCb();
+        Transitions.TransitionFinishCallback startTransitionFinishCb2 = transitionStateRequireTransitionState.getStartTransitionFinishCb();
         if (startTransitionFinishCb2 == null) {
             throw new IllegalStateException("Start transition expected to be waiting for merge but wasn't");
         }
         if (z2) {
             logV$4("mergeAnimation: end-transition, target=" + iBinder2, new Object[0]);
-            requireTransitionState.setMergedEndTransition();
+            transitionStateRequireTransitionState.setMergedEndTransition();
             setupEndDragToDesktop(transitionInfo, transaction, startTransitionFinishTransaction);
             transitionFinishCallback.onTransitionFinished(null);
             LatencyTracker.getInstance(this.context).onActionEnd(30);
@@ -1038,11 +1041,11 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             return;
         }
         logW$2("unhandled merge transition: transitionInfo=" + transitionInfo, new Object[0]);
-        if (Intrinsics.areEqual(iBinder2, requireTransitionState.getStartTransitionToken()) && !requireTransitionState.getMergedEndTransition() && DesktopModeFlags.ENABLE_DRAG_TO_DESKTOP_INCOMING_TRANSITIONS_BUGFIX.isTrue()) {
-            if (requireTransitionState.getCancelTransitionToken() == null && requireTransitionState.getEndTransitionToken() == null) {
+        if (Intrinsics.areEqual(iBinder2, transitionStateRequireTransitionState.getStartTransitionToken()) && !transitionStateRequireTransitionState.getMergedEndTransition() && DesktopModeFlags.ENABLE_DRAG_TO_DESKTOP_INCOMING_TRANSITIONS_BUGFIX.isTrue()) {
+            if (transitionStateRequireTransitionState.getCancelTransitionToken() == null && transitionStateRequireTransitionState.getEndTransitionToken() == null) {
                 logV$4("interruptStartTransition, bookend not requested -> animate to Home", new Object[0]);
-                requireTransitionState.getDragAnimator().cancelAnimator();
-                Runnable dragCancelCallback = requireTransitionState.getDragCancelCallback();
+                transitionStateRequireTransitionState.getDragAnimator().cancelAnimator();
+                Runnable dragCancelCallback = transitionStateRequireTransitionState.getDragCancelCallback();
                 if (dragCancelCallback != null) {
                     dragCancelCallback.run();
                 }
@@ -1050,25 +1053,25 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 final Runnable runnable = new Runnable() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$interruptStartTransition$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Transitions.TransitionFinishCallback startTransitionFinishCb3 = DragToDesktopTransitionHandler.TransitionState.this.getStartTransitionFinishCb();
+                        Transitions.TransitionFinishCallback startTransitionFinishCb3 = transitionStateRequireTransitionState.getStartTransitionFinishCb();
                         if (startTransitionFinishCb3 != null) {
                             startTransitionFinishCb3.onTransitionFinished(null);
                         }
                         this.transitionState = null;
                     }
                 };
-                TransitionInfo.Change homeChange = requireTransitionState.getHomeChange();
+                TransitionInfo.Change homeChange = transitionStateRequireTransitionState.getHomeChange();
                 if (homeChange == null || (leash = homeChange.getLeash()) == null) {
                     throw new IllegalStateException("Expected home leash to be non-null");
                 }
-                TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+                TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
                 if (draggedTaskChange == null || (leash2 = draggedTaskChange.getLeash()) == null) {
                     throw new IllegalStateException("Expected dragged leash to be non-null");
                 }
-                ValueAnimator createInterruptAlphaAnimator = createInterruptAlphaAnimator(transaction3, leash, true);
-                ValueAnimator createInterruptAlphaAnimator2 = createInterruptAlphaAnimator(transaction3, leash2, false);
+                ValueAnimator valueAnimatorCreateInterruptAlphaAnimator = createInterruptAlphaAnimator(transaction3, leash, true);
+                ValueAnimator valueAnimatorCreateInterruptAlphaAnimator2 = createInterruptAlphaAnimator(transaction3, leash2, false);
                 AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playTogether(createInterruptAlphaAnimator, createInterruptAlphaAnimator2);
+                animatorSet.playTogether(valueAnimatorCreateInterruptAlphaAnimator, valueAnimatorCreateInterruptAlphaAnimator2);
                 animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$createInterruptToHomeAnimator$1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
@@ -1078,25 +1081,25 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 animatorSet.start();
             } else {
                 logV$4("interruptStartTransition, bookend requested -> finish start transition", new Object[0]);
-                Transitions.TransitionFinishCallback startTransitionFinishCb3 = requireTransitionState.getStartTransitionFinishCb();
+                Transitions.TransitionFinishCallback startTransitionFinishCb3 = transitionStateRequireTransitionState.getStartTransitionFinishCb();
                 if (startTransitionFinishCb3 != null) {
                     startTransitionFinishCb3.onTransitionFinished(null);
                 }
-                requireTransitionState.getDragAnimator().cancelAnimator();
+                transitionStateRequireTransitionState.getDragAnimator().cancelAnimator();
             }
-            Animator activeCancelAnimation = requireTransitionState.getActiveCancelAnimation();
+            Animator activeCancelAnimation = transitionStateRequireTransitionState.getActiveCancelAnimation();
             if (activeCancelAnimation != null) {
                 activeCancelAnimation.removeAllListeners();
             }
-            Animator activeCancelAnimation2 = requireTransitionState.getActiveCancelAnimation();
+            Animator activeCancelAnimation2 = transitionStateRequireTransitionState.getActiveCancelAnimation();
             if (activeCancelAnimation2 != null) {
                 activeCancelAnimation2.cancel();
             }
-            requireTransitionState.setActiveCancelAnimation(null);
-            requireTransitionState.setStartInterrupted();
-            DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
-            if (desktopTasksController$dragToDesktopStateListener$1 != null) {
-                desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
+            transitionStateRequireTransitionState.setActiveCancelAnimation(null);
+            transitionStateRequireTransitionState.setStartInterrupted();
+            DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$12 = this.dragToDesktopStateListener;
+            if (desktopTasksController$dragToDesktopStateListener$12 != null) {
+                desktopTasksController$dragToDesktopStateListener$12.removeVisualIndicator();
             }
             this.interactionJankMonitor.cancel(107);
             this.interactionJankMonitor.cancel(116);
@@ -1164,7 +1167,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         SurfaceControl leash;
         SurfaceControl surfaceControl;
         ActivityManager.RunningTaskInfo taskInfo;
-        TransitionState requireTransitionState = requireTransitionState();
+        TransitionState transitionStateRequireTransitionState = requireTransitionState();
         ArrayList arrayList = new ArrayList();
         int i = 0;
         for (Object obj : transitionInfo.getChanges()) {
@@ -1174,7 +1177,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 throw null;
             }
             TransitionInfo.Change change = (TransitionInfo.Change) obj;
-            if ((requireTransitionState instanceof TransitionState.FromSplit) && (taskInfo = change.getTaskInfo()) != null && taskInfo.taskId == ((TransitionState.FromSplit) requireTransitionState).otherSplitTask) {
+            if ((transitionStateRequireTransitionState instanceof TransitionState.FromSplit) && (taskInfo = change.getTaskInfo()) != null && taskInfo.taskId == ((TransitionState.FromSplit) transitionStateRequireTransitionState).otherSplitTask) {
                 transaction.hide(change.getLeash());
                 transaction2.hide(change.getLeash());
             } else if (change.getMode() == 2) {
@@ -1182,10 +1185,10 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 transaction2.hide(change.getLeash());
             } else {
                 ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
-                if (taskInfo2 == null || taskInfo2.taskId != requireTransitionState.getDraggedTaskId()) {
+                if (taskInfo2 == null || taskInfo2.taskId != transitionStateRequireTransitionState.getDraggedTaskId()) {
                     ActivityManager.RunningTaskInfo taskInfo3 = change.getTaskInfo();
                     if (taskInfo3 != null && taskInfo3.getWindowingMode() == 5) {
-                        TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+                        TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
                         if (draggedTaskChange == null || (leash = draggedTaskChange.getLeash()) == null) {
                             throw new IllegalStateException("Expected dragged leash to be non-null");
                         }
@@ -1197,12 +1200,12 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 } else {
                     transaction.show(change.getLeash());
                     transaction2.show(change.getLeash());
-                    requireTransitionState.setDraggedTaskChange(change);
-                    if ((requireTransitionState instanceof TransitionState.FromFullscreen) && (surfaceControl = ((TransitionState.FromFullscreen) requireTransitionState).transitionRootLeash) != null && surfaceControl.isValid()) {
+                    transitionStateRequireTransitionState.setDraggedTaskChange(change);
+                    if ((transitionStateRequireTransitionState instanceof TransitionState.FromFullscreen) && (surfaceControl = ((TransitionState.FromFullscreen) transitionStateRequireTransitionState).transitionRootLeash) != null && surfaceControl.isValid()) {
                         logV$4("reparent " + change.getLeash() + " to " + surfaceControl, new Object[0]);
                         transaction.reparent(change.getLeash(), surfaceControl);
                     }
-                    DragToDesktopLayers surfaceLayers = requireTransitionState.getSurfaceLayers();
+                    DragToDesktopLayers surfaceLayers = transitionStateRequireTransitionState.getSurfaceLayers();
                     if (surfaceLayers != null) {
                         transaction.setLayer(change.getLeash(), surfaceLayers.dragLayer);
                     }
@@ -1210,21 +1213,24 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             }
             i = i2;
         }
-        requireTransitionState.setFreeformTaskChanges(arrayList);
+        transitionStateRequireTransitionState.setFreeformTaskChanges(arrayList);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0172  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
-        boolean z;
         SurfaceControl surfaceControl;
-        TransitionState requireTransitionState = requireTransitionState();
+        TransitionState transitionStateRequireTransitionState = requireTransitionState();
         if (DesktopModeFlags.ENABLE_DRAG_TO_DESKTOP_INCOMING_TRANSITIONS_BUGFIX.isTrue()) {
-            boolean z2 = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, requireTransitionState.getCancelTransitionToken());
-            boolean z3 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder, requireTransitionState.getEndTransitionToken());
-            if (z2 || z3) {
-                if (requireTransitionState.getStartInterrupted()) {
-                    logV$4("startAnimation: interrupted -> isCancel=" + z2 + ", isEnd=" + z3, new Object[0]);
-                    if (z3) {
+            boolean z = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getCancelTransitionToken());
+            boolean z2 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getEndTransitionToken());
+            if (z || z2) {
+                if (transitionStateRequireTransitionState.getStartInterrupted()) {
+                    logV$4("startAnimation: interrupted -> isCancel=" + z + ", isEnd=" + z2, new Object[0]);
+                    if (z2) {
                         setupEndDragToDesktop(transitionInfo, transaction, transaction2);
                         animateEndDragToDesktop(transaction, transitionFinishCallback);
                     } else {
@@ -1238,22 +1244,22 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                     this.transitionState = null;
                     return true;
                 }
-                logW$2("Not interrupted, but received startAnimation for cancel/end drag.isCancel=" + z2 + ", isEnd=" + z3, new Object[0]);
+                logW$2("Not interrupted, but received startAnimation for cancel/end drag.isCancel=" + z + ", isEnd=" + z2, new Object[0]);
             }
         }
-        if (transitionInfo.getType() != 1109 || !Intrinsics.areEqual(iBinder, requireTransitionState.getStartTransitionToken())) {
+        if (transitionInfo.getType() != 1109 || !Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getStartTransitionToken())) {
             return false;
         }
-        DragToDesktopLayers calculateStartDragToDesktopLayers = calculateStartDragToDesktopLayers(transitionInfo);
+        DragToDesktopLayers dragToDesktopLayersCalculateStartDragToDesktopLayers = calculateStartDragToDesktopLayers(transitionInfo);
         TransitionUtil.LeafTaskFilter leafTaskFilter = new TransitionUtil.LeafTaskFilter();
         Iterator it = new IndexingIterable(new CollectionsKt___CollectionsKt$$ExternalSyntheticLambda0(transitionInfo.getChanges())).iterator();
         while (true) {
             IndexingIterator indexingIterator = (IndexingIterator) it;
             if (!indexingIterator.iterator.hasNext()) {
-                requireTransitionState.setSurfaceLayers(calculateStartDragToDesktopLayers);
-                requireTransitionState.setStartTransitionFinishCb(transitionFinishCallback);
-                requireTransitionState.setStartTransitionFinishTransaction(transaction2);
-                TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+                transitionStateRequireTransitionState.setSurfaceLayers(dragToDesktopLayersCalculateStartDragToDesktopLayers);
+                transitionStateRequireTransitionState.setStartTransitionFinishCb(transitionFinishCallback);
+                transitionStateRequireTransitionState.setStartTransitionFinishTransaction(transaction2);
+                TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
                 if (draggedTaskChange == null) {
                     throw new IllegalStateException("Expected non-null task change.");
                 }
@@ -1263,13 +1269,16 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 }
                 if (DesktopModeFlags.ENABLE_VISUAL_INDICATOR_IN_TRANSITION_BUGFIX.isTrue()) {
                     TransitionInfo.Root root = transitionInfo.getRoot(transitionInfo.findRootIndex(taskInfo.displayId));
-                    DesktopModeVisualIndicator visualIndicator = requireTransitionState.getVisualIndicator();
+                    DesktopModeVisualIndicator visualIndicator = transitionStateRequireTransitionState.getVisualIndicator();
                     if (visualIndicator != null) {
                         SurfaceControl leash = root.getLeash();
                         final VisualIndicatorViewContainer visualIndicatorViewContainer = visualIndicator.mVisualIndicatorViewContainer;
                         SurfaceControl surfaceControl2 = visualIndicatorViewContainer.indicatorLeash;
                         if (surfaceControl2 != null) {
                             transaction.reparent(surfaceControl2, leash);
+                            if (CoreRune.DW_TASK_SNAPSHOT_BLUR && (surfaceControl = visualIndicatorViewContainer.taskSnapshotLeash) != null) {
+                                transaction.reparent(surfaceControl, leash);
+                            }
                         }
                         DesktopModeVisualIndicator.IndicatorType indicatorType = visualIndicator.mCurrentType;
                         if (indicatorType != DesktopModeVisualIndicator.IndicatorType.NO_INDICATOR && indicatorType != DesktopModeVisualIndicator.IndicatorType.TO_DESKTOP_MAXIMIZED_WINDOW) {
@@ -1280,7 +1289,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                                 visualIndicatorViewContainer.desktopExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$fadeInIndicator$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        VisualIndicatorViewContainer visualIndicatorViewContainer2 = VisualIndicatorViewContainer.this;
+                                        VisualIndicatorViewContainer visualIndicatorViewContainer2 = visualIndicatorViewContainer;
                                         visualIndicatorViewContainer2.fadeInIndicatorInternal(displayLayout, indicatorType2, i, visualIndicatorViewContainer2.snapEventHandler);
                                     }
                                 });
@@ -1289,67 +1298,57 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                     }
                 }
                 transaction.apply();
-                if (requireTransitionState.getCancelState() == CancelState.NO_CANCEL) {
-                    DesktopModeVisualIndicator visualIndicator2 = requireTransitionState.getVisualIndicator();
-                    if (visualIndicator2 != null && (surfaceControl = visualIndicator2.mVisualIndicatorViewContainer.indicatorLeash) != null) {
-                        requireTransitionState.getDragAnimator().indicatorLeash = surfaceControl;
+                if (transitionStateRequireTransitionState.getCancelState() == CancelState.NO_CANCEL) {
+                    DesktopModeVisualIndicator visualIndicator2 = transitionStateRequireTransitionState.getVisualIndicator();
+                    if (visualIndicator2 != null && visualIndicator2.mVisualIndicatorViewContainer.indicatorLeash != null) {
+                        transitionStateRequireTransitionState.getDragAnimator().getClass();
                     }
-                    MoveToDesktopAnimator dragAnimator = requireTransitionState.getDragAnimator();
-                    SurfaceControl surfaceControl3 = dragAnimator.indicatorLeash;
-                    if (surfaceControl3 == null || !surfaceControl3.isValid()) {
-                        z = true;
-                    } else {
-                        SurfaceControl.Transaction transaction3 = new SurfaceControl.Transaction();
-                        SurfaceControl surfaceControl4 = dragAnimator.indicatorLeash;
-                        surfaceControl4.getClass();
-                        z = true;
-                        transaction3.setLayer(surfaceControl4, Integer.MAX_VALUE).setRelativeLayer(dragAnimator.taskSurface, dragAnimator.indicatorLeash, 1).apply();
-                    }
-                    dragAnimator.allowSurfaceChangesOnMove = z;
+                    MoveToDesktopAnimator dragAnimator = transitionStateRequireTransitionState.getDragAnimator();
+                    dragAnimator.allowSurfaceChangesOnMove = true;
                     dragAnimator.dragToDesktopAnimator.start();
-                    return z;
+                    return true;
                 }
-                if (requireTransitionState.getCancelState() == CancelState.STANDARD_CANCEL) {
+                if (transitionStateRequireTransitionState.getCancelState() == CancelState.STANDARD_CANCEL) {
                     startCancelDragToDesktopTransition();
                     return true;
                 }
-                CancelState cancelState = requireTransitionState.getCancelState();
+                CancelState cancelState = transitionStateRequireTransitionState.getCancelState();
                 CancelState cancelState2 = CancelState.CANCEL_SPLIT_LEFT;
-                if (cancelState == cancelState2 || requireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_RIGHT) {
-                    int i2 = requireTransitionState.getCancelState() == cancelState2 ? 0 : 1;
+                if (cancelState == cancelState2 || transitionStateRequireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_RIGHT) {
+                    int i2 = transitionStateRequireTransitionState.getCancelState() == cancelState2 ? 0 : 1;
                     WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
                     restoreWindowOrder(windowContainerTransaction, requireTransitionState());
-                    SurfaceControl.Transaction startTransitionFinishTransaction = requireTransitionState.getStartTransitionFinishTransaction();
+                    SurfaceControl.Transaction startTransitionFinishTransaction = transitionStateRequireTransitionState.getStartTransitionFinishTransaction();
                     if (startTransitionFinishTransaction != null) {
                         startTransitionFinishTransaction.apply();
                     }
-                    Transitions.TransitionFinishCallback startTransitionFinishCb = requireTransitionState.getStartTransitionFinishCb();
+                    Transitions.TransitionFinishCallback startTransitionFinishCb = transitionStateRequireTransitionState.getStartTransitionFinishCb();
                     if (startTransitionFinishCb != null) {
                         startTransitionFinishCb.onTransitionFinished(null);
                     }
                     requestSplitSelect(i2, taskInfo, new Rect(taskInfo.configuration.windowConfiguration.getBounds()), windowContainerTransaction);
                     return true;
                 }
-                CancelState cancelState3 = requireTransitionState.getCancelState();
+                CancelState cancelState3 = transitionStateRequireTransitionState.getCancelState();
                 CancelState cancelState4 = CancelState.CANCEL_BUBBLE_LEFT;
-                if (cancelState3 != cancelState4 && requireTransitionState.getCancelState() != CancelState.CANCEL_BUBBLE_RIGHT) {
+                if (cancelState3 != cancelState4 && transitionStateRequireTransitionState.getCancelState() != CancelState.CANCEL_BUBBLE_RIGHT) {
                     return true;
                 }
-                if (this.bubbleController.isEmpty() || !(requireTransitionState instanceof TransitionState.FromFullscreen)) {
+                if (this.bubbleController.isEmpty() || !(transitionStateRequireTransitionState instanceof TransitionState.FromFullscreen)) {
                     startCancelDragToDesktopTransition();
                     return true;
                 }
-                TransitionState.FromFullscreen fromFullscreen = (TransitionState.FromFullscreen) requireTransitionState;
+                TransitionState.FromFullscreen fromFullscreen = (TransitionState.FromFullscreen) transitionStateRequireTransitionState;
                 TransitionInfo.Change change2 = fromFullscreen.draggedTaskChange;
                 if (change2 == null || change2.getTaskInfo() == null) {
                     throw new IllegalStateException("Expected non-null task info.");
                 }
                 WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
                 restoreWindowOrder(windowContainerTransaction2, requireTransitionState());
-                boolean z4 = fromFullscreen.cancelState == cancelState4;
+                boolean z3 = fromFullscreen.cancelState == cancelState4;
                 PointF pointF = new PointF(0.0f, 0.0f);
                 BubbleController bubbleController = (BubbleController) this.bubbleController.orElseThrow(DragToDesktopTransitionHandler$requestBubble$controller$1.INSTANCE);
-                new BubbleTransitions.DragData(z4, 1.0f, 0.0f, pointF, windowContainerTransaction2);
+                new BubbleTransitions.DragData(z3, 1.0f, 0.0f, pointF, windowContainerTransaction2);
                 bubbleController.getClass();
                 return true;
             }
@@ -1357,20 +1356,20 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             int i3 = indexedValue.index;
             TransitionInfo.Change change3 = (TransitionInfo.Change) indexedValue.value;
             if (TransitionUtil.isWallpaper(change3)) {
-                transaction.setLayer(change3.getLeash(), calculateStartDragToDesktopLayers.topWallpaperLayer - i3);
+                transaction.setLayer(change3.getLeash(), dragToDesktopLayersCalculateStartDragToDesktopLayers.topWallpaperLayer - i3);
                 transaction.show(change3.getLeash());
             } else if (isHomeChange(change3)) {
-                requireTransitionState.setHomeChange(change3);
-                transaction.setLayer(change3.getLeash(), calculateStartDragToDesktopLayers.topHomeLayer - i3);
+                transitionStateRequireTransitionState.setHomeChange(change3);
+                transaction.setLayer(change3.getLeash(), dragToDesktopLayersCalculateStartDragToDesktopLayers.topHomeLayer - i3);
                 transaction.show(change3.getLeash());
             } else {
-                boolean isIndependent = TransitionInfo.isIndependent(change3, transitionInfo);
-                int i4 = calculateStartDragToDesktopLayers.dragLayer;
-                if (isIndependent) {
-                    boolean z5 = requireTransitionState instanceof TransitionState.FromSplit;
-                    int i5 = calculateStartDragToDesktopLayers.topAppLayer;
-                    if (z5) {
-                        TransitionState.FromSplit fromSplit = (TransitionState.FromSplit) requireTransitionState;
+                boolean zIsIndependent = TransitionInfo.isIndependent(change3, transitionInfo);
+                int i4 = dragToDesktopLayersCalculateStartDragToDesktopLayers.dragLayer;
+                if (zIsIndependent) {
+                    boolean z4 = transitionStateRequireTransitionState instanceof TransitionState.FromSplit;
+                    int i5 = dragToDesktopLayersCalculateStartDragToDesktopLayers.topAppLayer;
+                    if (z4) {
+                        TransitionState.FromSplit fromSplit = (TransitionState.FromSplit) transitionStateRequireTransitionState;
                         fromSplit.splitRootChange = change3;
                         if (fromSplit.cancelState == CancelState.NO_CANCEL) {
                             i4 = i5 - i3;
@@ -1378,12 +1377,12 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                         transaction.setLayer(change3.getLeash(), i4);
                         transaction.show(change3.getLeash());
                     } else {
-                        if (!(requireTransitionState instanceof TransitionState.FromFullscreen)) {
+                        if (!(transitionStateRequireTransitionState instanceof TransitionState.FromFullscreen)) {
                             throw new NoWhenBranchMatchedException();
                         }
                         ActivityManager.RunningTaskInfo taskInfo2 = change3.getTaskInfo();
                         if (taskInfo2 != null) {
-                            TransitionState.FromFullscreen fromFullscreen2 = (TransitionState.FromFullscreen) requireTransitionState;
+                            TransitionState.FromFullscreen fromFullscreen2 = (TransitionState.FromFullscreen) transitionStateRequireTransitionState;
                             if (taskInfo2.taskId == fromFullscreen2.draggedTaskId) {
                                 fromFullscreen2.draggedTaskChange = change3;
                                 ActivityManager.RunningTaskInfo taskInfo3 = change3.getTaskInfo();
@@ -1396,21 +1395,22 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                                 transaction.setLayer(change3.getLeash(), i4);
                                 transaction.setWindowCrop(change3.getLeash(), endAbsBounds.width(), endAbsBounds.height());
                                 transaction.show(change3.getLeash());
+                            } else {
+                                ((TransitionState.FromFullscreen) transitionStateRequireTransitionState).otherRootChanges.add(change3);
+                                Rect endAbsBounds2 = change3.getEndAbsBounds();
+                                transaction.setLayer(change3.getLeash(), i5 - i3);
+                                transaction.setWindowCrop(change3.getLeash(), endAbsBounds2.width(), endAbsBounds2.height());
+                                transaction.show(change3.getLeash());
                             }
                         }
-                        ((TransitionState.FromFullscreen) requireTransitionState).otherRootChanges.add(change3);
-                        Rect endAbsBounds2 = change3.getEndAbsBounds();
-                        transaction.setLayer(change3.getLeash(), i5 - i3);
-                        transaction.setWindowCrop(change3.getLeash(), endAbsBounds2.width(), endAbsBounds2.height());
-                        transaction.show(change3.getLeash());
                     }
                 } else if (leafTaskFilter.test(change3)) {
                     ActivityManager.RunningTaskInfo taskInfo4 = change3.getTaskInfo();
-                    if (taskInfo4 != null && taskInfo4.taskId == requireTransitionState.getDraggedTaskId() && requireTransitionState.getCancelState() != CancelState.STANDARD_CANCEL) {
-                        requireTransitionState.setDraggedTaskChange(change3);
+                    if (taskInfo4 != null && taskInfo4.taskId == transitionStateRequireTransitionState.getDraggedTaskId() && transitionStateRequireTransitionState.getCancelState() != CancelState.STANDARD_CANCEL) {
+                        transitionStateRequireTransitionState.setDraggedTaskChange(change3);
                     }
                     ActivityManager.RunningTaskInfo taskInfo5 = change3.getTaskInfo();
-                    if (taskInfo5 != null && taskInfo5.taskId == requireTransitionState.getDraggedTaskId() && requireTransitionState.getCancelState() == CancelState.NO_CANCEL) {
+                    if (taskInfo5 != null && taskInfo5.taskId == transitionStateRequireTransitionState.getDraggedTaskId() && transitionStateRequireTransitionState.getCancelState() == CancelState.NO_CANCEL) {
                         this.taskDisplayAreaOrganizer.reparentToDisplayArea(change3.getEndDisplayId(), transaction, change3.getLeash());
                         Rect endAbsBounds3 = change3.getEndAbsBounds();
                         transaction.setLayer(change3.getLeash(), i4);
@@ -1423,9 +1423,9 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     }
 
     public final Animator startCancelAnimation() {
-        final TransitionState requireTransitionState = requireTransitionState();
-        MoveToDesktopAnimator dragAnimator = requireTransitionState.getDragAnimator();
-        TransitionInfo.Change draggedTaskChange = requireTransitionState.getDraggedTaskChange();
+        final TransitionState transitionStateRequireTransitionState = requireTransitionState();
+        MoveToDesktopAnimator dragAnimator = transitionStateRequireTransitionState.getDragAnimator();
+        TransitionInfo.Change draggedTaskChange = transitionStateRequireTransitionState.getDraggedTaskChange();
         if (draggedTaskChange == null) {
             throw new IllegalStateException("Expected non-null task change");
         }
@@ -1441,14 +1441,14 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$startCancelAnimation$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 float animatedFraction = valueAnimator.getAnimatedFraction();
                 float f5 = (f3 * animatedFraction) + f;
                 float f6 = (f4 * animatedFraction) + f2;
                 SurfaceControl.Transaction transaction2 = transaction;
                 SurfaceControl surfaceControl = leash;
                 transaction2.setPosition(surfaceControl, f5, f6);
-                transaction2.setScale(surfaceControl, floatValue, floatValue);
+                transaction2.setScale(surfaceControl, fFloatValue, fFloatValue);
                 transaction2.show(surfaceControl);
                 transaction2.apply();
             }
@@ -1456,7 +1456,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         duration.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.DragToDesktopTransitionHandler$startCancelAnimation$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                DragToDesktopTransitionHandler.TransitionState.this.setActiveCancelAnimation(null);
+                transitionStateRequireTransitionState.setActiveCancelAnimation(null);
                 DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
                 if (desktopTasksController$dragToDesktopStateListener$1 != null) {
                     desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
@@ -1469,10 +1469,10 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     }
 
     public final void startCancelDragToDesktopTransition() {
-        TransitionState requireTransitionState = requireTransitionState();
+        TransitionState transitionStateRequireTransitionState = requireTransitionState();
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-        restoreWindowOrder(windowContainerTransaction, requireTransitionState);
-        requireTransitionState.setCancelTransitionToken(this.transitions.startTransition(VolteConstants.ErrorCode.CALL_HOLD_FAILED, windowContainerTransaction, this));
+        restoreWindowOrder(windowContainerTransaction, transitionStateRequireTransitionState);
+        transitionStateRequireTransitionState.setCancelTransitionToken(this.transitions.startTransition(VolteConstants.ErrorCode.CALL_HOLD_FAILED, windowContainerTransaction, this));
     }
 
     private DragToDesktopTransitionHandler(Context context, Transitions transitions, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DesktopUserRepositories desktopUserRepositories, InteractionJankMonitor interactionJankMonitor, Optional<BubbleController> optional, Supplier<SurfaceControl.Transaction> supplier, DesktopState desktopState) {

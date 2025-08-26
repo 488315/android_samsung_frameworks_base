@@ -17,11 +17,11 @@ public abstract class VerifiedInputEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public VerifiedInputEvent createFromParcel(Parcel parcel) {
-            int peekInt = VerifiedInputEvent.peekInt(parcel);
-            if (peekInt == 1) {
+            int iPeekInt = VerifiedInputEvent.peekInt(parcel);
+            if (iPeekInt == 1) {
                 return VerifiedKeyEvent.CREATOR.createFromParcel(parcel);
             }
-            if (peekInt == 2) {
+            if (iPeekInt == 2) {
                 return VerifiedMotionEvent.CREATOR.createFromParcel(parcel);
             }
             throw new IllegalArgumentException("Unexpected input event type in parcel.");
@@ -54,9 +54,9 @@ public abstract class VerifiedInputEvent implements Parcelable {
     }
 
     protected VerifiedInputEvent(Parcel parcel, int i) {
-        int readInt = parcel.readInt();
-        this.mType = readInt;
-        if (readInt != i) {
+        int i2 = parcel.readInt();
+        this.mType = i2;
+        if (i2 != i) {
             throw new IllegalArgumentException("Unexpected input event type token in parcel.");
         }
         this.mDeviceId = parcel.readInt();
@@ -92,10 +92,10 @@ public abstract class VerifiedInputEvent implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int peekInt(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
-        parcel.setDataPosition(dataPosition);
-        return readInt;
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
+        parcel.setDataPosition(iDataPosition);
+        return i;
     }
 
     public boolean equals(Object obj) {

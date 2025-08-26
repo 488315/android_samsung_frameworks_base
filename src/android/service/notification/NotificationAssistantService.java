@@ -170,11 +170,11 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationEnqueuedWithChannelFull(StatusBarNotification statusBarNotification, NotificationChannel notificationChannel, NotificationRankingUpdate notificationRankingUpdate) {
             NotificationAssistantService.this.applyUpdateLocked(notificationRankingUpdate);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = statusBarNotification;
-            obtain.arg2 = notificationChannel;
-            obtain.arg3 = NotificationAssistantService.this.getCurrentRanking();
-            NotificationAssistantService.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = statusBarNotification;
+            someArgsObtain.arg2 = notificationChannel;
+            someArgsObtain.arg3 = NotificationAssistantService.this.getCurrentRanking();
+            NotificationAssistantService.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
@@ -193,24 +193,24 @@ public abstract class NotificationAssistantService extends NotificationListenerS
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationSnoozedUntilContextFull(StatusBarNotification statusBarNotification, String str) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = statusBarNotification;
-            obtain.arg2 = str;
-            NotificationAssistantService.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = statusBarNotification;
+            someArgsObtain.arg2 = str;
+            NotificationAssistantService.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationsSeen(List<String> list) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = list;
-            NotificationAssistantService.this.mHandler.obtainMessage(3, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = list;
+            NotificationAssistantService.this.mHandler.obtainMessage(3, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onPanelRevealed(int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            NotificationAssistantService.this.mHandler.obtainMessage(9, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            NotificationAssistantService.this.mHandler.obtainMessage(9, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
@@ -220,51 +220,51 @@ public abstract class NotificationAssistantService extends NotificationListenerS
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationVisibilityChanged(String str, boolean z) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = z ? 1 : 0;
-            NotificationAssistantService.this.mHandler.obtainMessage(11, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = z ? 1 : 0;
+            NotificationAssistantService.this.mHandler.obtainMessage(11, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationExpansionChanged(String str, boolean z, boolean z2) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = z ? 1 : 0;
-            obtain.argi2 = z2 ? 1 : 0;
-            NotificationAssistantService.this.mHandler.obtainMessage(4, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = z ? 1 : 0;
+            someArgsObtain.argi2 = z2 ? 1 : 0;
+            NotificationAssistantService.this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationDirectReply(String str) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            NotificationAssistantService.this.mHandler.obtainMessage(5, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            NotificationAssistantService.this.mHandler.obtainMessage(5, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onSuggestedReplySent(String str, CharSequence charSequence, int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = charSequence;
-            obtain.argi2 = i;
-            NotificationAssistantService.this.mHandler.obtainMessage(6, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = charSequence;
+            someArgsObtain.argi2 = i;
+            NotificationAssistantService.this.mHandler.obtainMessage(6, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onActionClicked(String str, Notification.Action action, int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = action;
-            obtain.argi2 = i;
-            NotificationAssistantService.this.mHandler.obtainMessage(7, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = action;
+            someArgsObtain.argi2 = i;
+            NotificationAssistantService.this.mHandler.obtainMessage(7, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationClicked(String str) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            NotificationAssistantService.this.mHandler.obtainMessage(12, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            NotificationAssistantService.this.mHandler.obtainMessage(12, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
@@ -275,11 +275,11 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
         public void onNotificationFeedbackReceived(String str, NotificationRankingUpdate notificationRankingUpdate, Bundle bundle) {
             NotificationAssistantService.this.applyUpdateLocked(notificationRankingUpdate);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = NotificationAssistantService.this.getCurrentRanking();
-            obtain.arg3 = bundle;
-            NotificationAssistantService.this.mHandler.obtainMessage(13, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = NotificationAssistantService.this.getCurrentRanking();
+            someArgsObtain.arg3 = bundle;
+            NotificationAssistantService.this.mHandler.obtainMessage(13, someArgsObtain).sendToTarget();
         }
     }
 
@@ -319,15 +319,15 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                     NotificationChannel notificationChannel = (NotificationChannel) someArgs.arg2;
                     NotificationListenerService.RankingMap rankingMap = (NotificationListenerService.RankingMap) someArgs.arg3;
                     someArgs.recycle();
-                    Adjustment onNotificationEnqueued = NotificationAssistantService.this.onNotificationEnqueued(statusBarNotification, notificationChannel, rankingMap);
-                    NotificationAssistantService.this.setAdjustmentIssuer(onNotificationEnqueued);
-                    if (onNotificationEnqueued != null) {
+                    Adjustment adjustmentOnNotificationEnqueued = NotificationAssistantService.this.onNotificationEnqueued(statusBarNotification, notificationChannel, rankingMap);
+                    NotificationAssistantService.this.setAdjustmentIssuer(adjustmentOnNotificationEnqueued);
+                    if (adjustmentOnNotificationEnqueued != null) {
                         if (!NotificationAssistantService.this.isBound()) {
                             Log.w(NotificationAssistantService.TAG, "MSG_ON_NOTIFICATION_ENQUEUED: service not bound, skip.");
                             return;
                         }
                         try {
-                            NotificationAssistantService.this.getNotificationInterface().applyEnqueuedAdjustmentFromAssistant(NotificationAssistantService.this.mWrapper, onNotificationEnqueued);
+                            NotificationAssistantService.this.getNotificationInterface().applyEnqueuedAdjustmentFromAssistant(NotificationAssistantService.this.mWrapper, adjustmentOnNotificationEnqueued);
                             return;
                         } catch (RemoteException e) {
                             Log.v(NotificationAssistantService.TAG, "Unable to contact notification manager", e);

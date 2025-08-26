@@ -36,15 +36,15 @@ public class TypedArray implements AutoCloseable {
     XmlBlock.Parser mXml;
 
     static TypedArray obtain(Resources resources, int i) {
-        TypedArray acquire = resources.mTypedArrayPool.acquire();
-        if (acquire == null) {
-            acquire = new TypedArray(resources);
+        TypedArray typedArrayAcquire = resources.mTypedArrayPool.acquire();
+        if (typedArrayAcquire == null) {
+            typedArrayAcquire = new TypedArray(resources);
         }
-        acquire.mRecycled = false;
-        acquire.mAssets = resources.getAssets();
-        acquire.mMetrics = resources.getDisplayMetrics();
-        acquire.resize(i);
-        return acquire;
+        typedArrayAcquire.mRecycled = false;
+        typedArrayAcquire.mAssets = resources.getAssets();
+        typedArrayAcquire.mMetrics = resources.getDisplayMetrics();
+        typedArrayAcquire.resize(i);
+        return typedArrayAcquire;
     }
 
     private void resize(int i) {
@@ -123,9 +123,9 @@ public class TypedArray implements AutoCloseable {
         }
         TypedValue typedValue = this.mValue;
         if (getValueAt(i2, typedValue)) {
-            CharSequence coerceToString = typedValue.coerceToString();
-            if (coerceToString != null) {
-                return coerceToString.toString();
+            CharSequence charSequenceCoerceToString = typedValue.coerceToString();
+            if (charSequenceCoerceToString != null) {
+                return charSequenceCoerceToString.toString();
             }
             return null;
         }
@@ -142,11 +142,11 @@ public class TypedArray implements AutoCloseable {
         if (iArr[i2] != 3 || iArr[i2 + 2] >= 0) {
             return null;
         }
-        String charSequence = this.mXml.getPooledString(iArr[i2 + 1]).toString();
-        if (charSequence != null && (parser = this.mXml) != null && parser.mValidator != null) {
-            this.mXml.mValidator.validateResStrAttr(this.mXml, i2, charSequence);
+        String string = this.mXml.getPooledString(iArr[i2 + 1]).toString();
+        if (string != null && (parser = this.mXml) != null && parser.mValidator != null) {
+            this.mXml.mValidator.validateResStrAttr(this.mXml, i2, string);
         }
-        return charSequence;
+        return string;
     }
 
     public String getNonConfigurationString(int i, int i2) {
@@ -164,9 +164,9 @@ public class TypedArray implements AutoCloseable {
         }
         TypedValue typedValue = this.mValue;
         if (getValueAt(i3, typedValue)) {
-            CharSequence coerceToString = typedValue.coerceToString();
-            if (coerceToString != null) {
-                return coerceToString.toString();
+            CharSequence charSequenceCoerceToString = typedValue.coerceToString();
+            if (charSequenceCoerceToString != null) {
+                return charSequenceCoerceToString.toString();
             }
             return null;
         }
@@ -216,7 +216,7 @@ public class TypedArray implements AutoCloseable {
     }
 
     public float getFloat(int i, float f) {
-        CharSequence coerceToString;
+        CharSequence charSequenceCoerceToString;
         if (this.mRecycled) {
             throw new RuntimeException("Cannot make calls to a recycled instance!");
         }
@@ -233,9 +233,9 @@ public class TypedArray implements AutoCloseable {
             return iArr[i2 + 1];
         }
         TypedValue typedValue = this.mValue;
-        if (getValueAt(i2, typedValue) && (coerceToString = typedValue.coerceToString()) != null) {
+        if (getValueAt(i2, typedValue) && (charSequenceCoerceToString = typedValue.coerceToString()) != null) {
             StrictMode.noteResourceMismatch(typedValue);
-            return Float.parseFloat(coerceToString.toString());
+            return Float.parseFloat(charSequenceCoerceToString.toString());
         }
         throw new RuntimeException("getFloat of bad type: 0x" + Integer.toHexString(i3));
     }
@@ -457,7 +457,7 @@ public class TypedArray implements AutoCloseable {
         return getDrawableForDensity(i, 0);
     }
 
-    public Drawable getDrawableForDensity(int i, int i2) {
+    public Drawable getDrawableForDensity(int i, int i2) throws Resources.NotFoundException {
         if (this.mRecycled) {
             throw new RuntimeException("Cannot make calls to a recycled instance!");
         }
@@ -610,14 +610,14 @@ public class TypedArray implements AutoCloseable {
         }
         int[] iArr = this.mData;
         int length = length();
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            int i3 = i2 * 7;
-            if (iArr[i3] != 0) {
-                i |= ActivityInfo.activityInfoConfigNativeToJava(iArr[i3 + 4]);
+        int iActivityInfoConfigNativeToJava = 0;
+        for (int i = 0; i < length; i++) {
+            int i2 = i * 7;
+            if (iArr[i2] != 0) {
+                iActivityInfoConfigNativeToJava |= ActivityInfo.activityInfoConfigNativeToJava(iArr[i2 + 4]);
             }
         }
-        return i;
+        return iActivityInfoConfigNativeToJava;
     }
 
     private boolean getValueAt(int i, TypedValue typedValue) {

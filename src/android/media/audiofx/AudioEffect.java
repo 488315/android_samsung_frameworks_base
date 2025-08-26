@@ -186,7 +186,7 @@ public class AudioEffect {
         }
     }
 
-    public AudioEffect(UUID uuid, UUID uuid2, int i, int i2) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public AudioEffect(UUID uuid, UUID uuid2, int i, int i2) throws RuntimeException {
         this(uuid, uuid2, i, i2, null);
     }
 
@@ -195,14 +195,14 @@ public class AudioEffect {
         this(EFFECT_TYPE_NULL, (UUID) Objects.requireNonNull(uuid), 0, -2, (AudioDeviceAttributes) Objects.requireNonNull(audioDeviceAttributes));
     }
 
-    private AudioEffect(UUID uuid, UUID uuid2, int i, int i2, AudioDeviceAttributes audioDeviceAttributes) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private AudioEffect(UUID uuid, UUID uuid2, int i, int i2, AudioDeviceAttributes audioDeviceAttributes) throws RuntimeException {
         this(uuid, uuid2, i, i2, audioDeviceAttributes, false);
     }
 
-    private AudioEffect(UUID uuid, UUID uuid2, int i, int i2, AudioDeviceAttributes audioDeviceAttributes, boolean z) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
-        String str;
+    private AudioEffect(UUID uuid, UUID uuid2, int i, int i2, AudioDeviceAttributes audioDeviceAttributes, boolean z) throws RuntimeException {
+        String address;
         int i3;
-        int convertDeviceTypeToInternalInputDevice;
+        int iConvertDeviceTypeToInternalInputDevice;
         this.mState = 0;
         Object obj = new Object();
         this.mStateLock = obj;
@@ -215,32 +215,32 @@ public class AudioEffect {
         int[] iArr = new int[1];
         Descriptor[] descriptorArr = new Descriptor[1];
         if (audioDeviceAttributes == null) {
-            str = "";
+            address = "";
             i3 = 0;
         } else {
             if (audioDeviceAttributes.getRole() == 2) {
-                convertDeviceTypeToInternalInputDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(audioDeviceAttributes.getType());
+                iConvertDeviceTypeToInternalInputDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(audioDeviceAttributes.getType());
             } else {
-                convertDeviceTypeToInternalInputDevice = AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(audioDeviceAttributes.getType(), audioDeviceAttributes.getAddress());
+                iConvertDeviceTypeToInternalInputDevice = AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(audioDeviceAttributes.getType(), audioDeviceAttributes.getAddress());
             }
-            i3 = convertDeviceTypeToInternalInputDevice;
-            str = audioDeviceAttributes.getAddress();
+            i3 = iConvertDeviceTypeToInternalInputDevice;
+            address = audioDeviceAttributes.getAddress();
         }
-        AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), uuid.toString(), uuid2.toString(), i, i2, i3, str, iArr, descriptorArr, asScopedParcelState.getParcel(), z);
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), uuid.toString(), uuid2.toString(), i, i2, i3, address, iArr, descriptorArr, scopedParcelStateAsScopedParcelState.getParcel(), z);
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
-            if (native_setup != 0 && native_setup != -2) {
-                Log.e(TAG, "Error code " + native_setup + " when initializing AudioEffect.");
-                if (native_setup == -5) {
+            if (iNative_setup != 0 && iNative_setup != -2) {
+                Log.e(TAG, "Error code " + iNative_setup + " when initializing AudioEffect.");
+                if (iNative_setup == -5) {
                     throw new UnsupportedOperationException("Effect library not loaded");
                 }
-                if (native_setup == -4) {
+                if (iNative_setup == -4) {
                     throw new IllegalArgumentException("Effect type: " + uuid + " not supported.");
                 }
-                throw new RuntimeException("Cannot initialize effect engine for type: " + uuid + " Error: " + native_setup);
+                throw new RuntimeException("Cannot initialize effect engine for type: " + uuid + " Error: " + iNative_setup);
             }
             this.mId = iArr[0];
             this.mDescriptor = descriptorArr[0];
@@ -289,11 +289,11 @@ public class AudioEffect {
     }
 
     public static boolean isEffectTypeAvailable(UUID uuid) {
-        Descriptor[] queryEffects = queryEffects();
-        if (queryEffects == null) {
+        Descriptor[] descriptorArrQueryEffects = queryEffects();
+        if (descriptorArrQueryEffects == null) {
             return false;
         }
-        for (Descriptor descriptor : queryEffects) {
+        for (Descriptor descriptor : descriptorArrQueryEffects) {
             if (descriptor.type.equals(uuid)) {
                 return true;
             }
@@ -327,41 +327,41 @@ public class AudioEffect {
         if (iArr.length > 2 || iArr2.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
-        byte[] intToByteArray2 = intToByteArray(iArr2[0]);
+        byte[] bArrIntToByteArray2 = intToByteArray(iArr2[0]);
         if (iArr2.length > 1) {
-            intToByteArray2 = concatArrays(intToByteArray2, intToByteArray(iArr2[1]));
+            bArrIntToByteArray2 = concatArrays(bArrIntToByteArray2, intToByteArray(iArr2[1]));
         }
-        return setParameter(intToByteArray, intToByteArray2);
+        return setParameter(bArrIntToByteArray, bArrIntToByteArray2);
     }
 
     public int setParameter(int[] iArr, short[] sArr) throws IllegalStateException {
         if (iArr.length > 2 || sArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
-        byte[] shortToByteArray = shortToByteArray(sArr[0]);
+        byte[] bArrShortToByteArray = shortToByteArray(sArr[0]);
         if (sArr.length > 1) {
-            shortToByteArray = concatArrays(shortToByteArray, shortToByteArray(sArr[1]));
+            bArrShortToByteArray = concatArrays(bArrShortToByteArray, shortToByteArray(sArr[1]));
         }
-        return setParameter(intToByteArray, shortToByteArray);
+        return setParameter(bArrIntToByteArray, bArrShortToByteArray);
     }
 
     public int setParameter(int[] iArr, byte[] bArr) throws IllegalStateException {
         if (iArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
-        return setParameter(intToByteArray, bArr);
+        return setParameter(bArrIntToByteArray, bArr);
     }
 
     public int getParameter(byte[] bArr, byte[] bArr2) throws IllegalStateException {
@@ -377,9 +377,9 @@ public class AudioEffect {
         if (iArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(i);
+        byte[] bArrIntToByteArray = intToByteArray(i);
         byte[] bArr = new byte[iArr.length * 4];
-        int parameter = getParameter(intToByteArray, bArr);
+        int parameter = getParameter(bArrIntToByteArray, bArr);
         if (parameter != 4 && parameter != 8) {
             return -1;
         }
@@ -394,9 +394,9 @@ public class AudioEffect {
         if (sArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(i);
+        byte[] bArrIntToByteArray = intToByteArray(i);
         byte[] bArr = new byte[sArr.length * 2];
-        int parameter = getParameter(intToByteArray, bArr);
+        int parameter = getParameter(bArrIntToByteArray, bArr);
         if (parameter != 2 && parameter != 4) {
             return -1;
         }
@@ -411,12 +411,12 @@ public class AudioEffect {
         if (iArr.length > 2 || iArr2.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
         byte[] bArr = new byte[iArr2.length * 4];
-        int parameter = getParameter(intToByteArray, bArr);
+        int parameter = getParameter(bArrIntToByteArray, bArr);
         if (parameter != 4 && parameter != 8) {
             return -1;
         }
@@ -431,12 +431,12 @@ public class AudioEffect {
         if (iArr.length > 2 || sArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
         byte[] bArr = new byte[sArr.length * 2];
-        int parameter = getParameter(intToByteArray, bArr);
+        int parameter = getParameter(bArrIntToByteArray, bArr);
         if (parameter != 2 && parameter != 4) {
             return -1;
         }
@@ -451,11 +451,11 @@ public class AudioEffect {
         if (iArr.length > 2) {
             return -4;
         }
-        byte[] intToByteArray = intToByteArray(iArr[0]);
+        byte[] bArrIntToByteArray = intToByteArray(iArr[0]);
         if (iArr.length > 1) {
-            intToByteArray = concatArrays(intToByteArray, intToByteArray(iArr[1]));
+            bArrIntToByteArray = concatArrays(bArrIntToByteArray, intToByteArray(iArr[1]));
         }
-        return getParameter(intToByteArray, bArr);
+        return getParameter(bArrIntToByteArray, bArr);
     }
 
     public int command(int i, byte[] bArr, byte[] bArr2) throws IllegalStateException {
@@ -509,9 +509,9 @@ public class AudioEffect {
     }
 
     private void createNativeEventHandler() {
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mNativeEventHandler = new NativeEventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mNativeEventHandler = new NativeEventHandler(this, looperMyLooper);
             return;
         }
         Looper mainLooper = Looper.getMainLooper();
@@ -566,14 +566,14 @@ public class AudioEffect {
                 if (onParameterChangeListener != null) {
                     int i2 = message.arg1;
                     byte[] bArr = (byte[]) message.obj;
-                    int byteArrayToInt = AudioEffect.byteArrayToInt(bArr, 0);
-                    int byteArrayToInt2 = AudioEffect.byteArrayToInt(bArr, 4);
-                    int byteArrayToInt3 = AudioEffect.byteArrayToInt(bArr, 8);
-                    byte[] bArr2 = new byte[byteArrayToInt2];
-                    byte[] bArr3 = new byte[byteArrayToInt3];
-                    System.arraycopy(bArr, 12, bArr2, 0, byteArrayToInt2);
-                    System.arraycopy(bArr, i2, bArr3, 0, byteArrayToInt3);
-                    onParameterChangeListener.onParameterChange(this.mAudioEffect, byteArrayToInt, bArr2, bArr3);
+                    int iByteArrayToInt = AudioEffect.byteArrayToInt(bArr, 0);
+                    int iByteArrayToInt2 = AudioEffect.byteArrayToInt(bArr, 4);
+                    int iByteArrayToInt3 = AudioEffect.byteArrayToInt(bArr, 8);
+                    byte[] bArr2 = new byte[iByteArrayToInt2];
+                    byte[] bArr3 = new byte[iByteArrayToInt3];
+                    System.arraycopy(bArr, 12, bArr2, 0, iByteArrayToInt2);
+                    System.arraycopy(bArr, i2, bArr3, 0, iByteArrayToInt3);
+                    onParameterChangeListener.onParameterChange(this.mAudioEffect, iByteArrayToInt, bArr2, bArr3);
                     return;
                 }
                 return;
@@ -616,16 +616,16 @@ public class AudioEffect {
     }
 
     public static int byteArrayToInt(byte[] bArr, int i) {
-        ByteBuffer wrap = ByteBuffer.wrap(bArr);
-        wrap.order(ByteOrder.nativeOrder());
-        return wrap.getInt(i);
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+        byteBufferWrap.order(ByteOrder.nativeOrder());
+        return byteBufferWrap.getInt(i);
     }
 
     public static byte[] intToByteArray(int i) {
-        ByteBuffer allocate = ByteBuffer.allocate(4);
-        allocate.order(ByteOrder.nativeOrder());
-        allocate.putInt(i);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4);
+        byteBufferAllocate.order(ByteOrder.nativeOrder());
+        byteBufferAllocate.putInt(i);
+        return byteBufferAllocate.array();
     }
 
     public static short byteArrayToShort(byte[] bArr) {
@@ -633,16 +633,16 @@ public class AudioEffect {
     }
 
     public static short byteArrayToShort(byte[] bArr, int i) {
-        ByteBuffer wrap = ByteBuffer.wrap(bArr);
-        wrap.order(ByteOrder.nativeOrder());
-        return wrap.getShort(i);
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+        byteBufferWrap.order(ByteOrder.nativeOrder());
+        return byteBufferWrap.getShort(i);
     }
 
     public static byte[] shortToByteArray(short s) {
-        ByteBuffer allocate = ByteBuffer.allocate(2);
-        allocate.order(ByteOrder.nativeOrder());
-        allocate.putShort(s);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(2);
+        byteBufferAllocate.order(ByteOrder.nativeOrder());
+        byteBufferAllocate.putShort(s);
+        return byteBufferAllocate.array();
     }
 
     public static float byteArrayToFloat(byte[] bArr) {
@@ -650,28 +650,28 @@ public class AudioEffect {
     }
 
     public static float byteArrayToFloat(byte[] bArr, int i) {
-        ByteBuffer wrap = ByteBuffer.wrap(bArr);
-        wrap.order(ByteOrder.nativeOrder());
-        return wrap.getFloat(i);
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+        byteBufferWrap.order(ByteOrder.nativeOrder());
+        return byteBufferWrap.getFloat(i);
     }
 
     public static byte[] floatToByteArray(float f) {
-        ByteBuffer allocate = ByteBuffer.allocate(4);
-        allocate.order(ByteOrder.nativeOrder());
-        allocate.putFloat(f);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4);
+        byteBufferAllocate.order(ByteOrder.nativeOrder());
+        byteBufferAllocate.putFloat(f);
+        return byteBufferAllocate.array();
     }
 
     public static byte[] concatArrays(byte[]... bArr) {
-        int i = 0;
+        int length = 0;
         for (byte[] bArr2 : bArr) {
-            i += bArr2.length;
+            length += bArr2.length;
         }
-        byte[] bArr3 = new byte[i];
-        int i2 = 0;
+        byte[] bArr3 = new byte[length];
+        int length2 = 0;
         for (byte[] bArr4 : bArr) {
-            System.arraycopy(bArr4, 0, bArr3, i2, bArr4.length);
-            i2 += bArr4.length;
+            System.arraycopy(bArr4, 0, bArr3, length2, bArr4.length);
+            length2 += bArr4.length;
         }
         return bArr3;
     }

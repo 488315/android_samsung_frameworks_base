@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WifiRepositorySwitcher implements WifiRepository {
     public final ReadonlyStateFlow activeRepo;
@@ -33,23 +32,23 @@ public final class WifiRepositorySwitcher implements WifiRepository {
         this.realImpl = realWifiRepository;
         this.demoImpl = demoWifiRepository;
         this.demoModeController = demoModeController;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new WifiRepositorySwitcher$isDemoMode$1(this, null));
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new WifiRepositorySwitcher$isDemoMode$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         demoModeController.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, WhileSubscribed$default, Boolean.FALSE);
-        this.isDemoMode = stateIn;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.mapLatest(stateIn, new WifiRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository);
-        this.activeRepo = stateIn2;
-        this.isWifiEnabled = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.isWifiEnabled().getValue());
-        this.isWifiDefault = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.isWifiDefault().getValue());
-        this.wifiNetwork = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiNetwork().getValue());
-        this.secondaryNetworks = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$4(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getSecondaryNetworks().getValue());
-        this.wifiActivity = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$5(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiActivity().getValue());
-        this.wifiScanResults = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$6(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiScanResults().getValue());
-        this.hideDuringMobileSwitching = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$7(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getHideDuringMobileSwitching().getValue());
-        this.wifiConnectivityTestReported = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$8(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiConnectivityTestReported().getValue());
-        this.receivedInetCondition = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$9(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getReceivedInetCondition().getValue());
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Boolean.FALSE);
+        this.isDemoMode = readonlyStateFlowStateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.mapLatest(readonlyStateFlowStateIn, new WifiRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository);
+        this.activeRepo = readonlyStateFlowStateIn2;
+        this.isWifiEnabled = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.isWifiEnabled().getValue());
+        this.isWifiDefault = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.isWifiDefault().getValue());
+        this.wifiNetwork = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiNetwork().getValue());
+        this.secondaryNetworks = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$4(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getSecondaryNetworks().getValue());
+        this.wifiActivity = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$5(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiActivity().getValue());
+        this.wifiScanResults = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$6(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiScanResults().getValue());
+        this.hideDuringMobileSwitching = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$7(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getHideDuringMobileSwitching().getValue());
+        this.wifiConnectivityTestReported = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$8(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getWifiConnectivityTestReported().getValue());
+        this.receivedInetCondition = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new WifiRepositorySwitcher$special$$inlined$flatMapLatest$9(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realWifiRepository.getReceivedInetCondition().getValue());
     }
 
     @Override // com.android.systemui.statusbar.pipeline.wifi.data.repository.WifiRepository

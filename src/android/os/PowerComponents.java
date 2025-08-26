@@ -171,9 +171,9 @@ class PowerComponents {
             int i4 = 0;
             while (i4 < length2) {
                 BatteryConsumer.Key key = keys[i4];
-                long convertMahToDeciCoulombs = BatteryConsumer.convertMahToDeciCoulombs(powerComponents.getConsumedPower(key.powerComponentId, key.processState, key.screenState, key.powerState));
+                long jConvertMahToDeciCoulombs = BatteryConsumer.convertMahToDeciCoulombs(powerComponents.getConsumedPower(key.powerComponentId, key.processState, key.screenState, key.powerState));
                 long usageDurationMillis = powerComponents.getUsageDurationMillis(key.powerComponentId, key.processState, key.screenState, key.powerState);
-                if (convertMahToDeciCoulombs == 0 && usageDurationMillis == 0) {
+                if (jConvertMahToDeciCoulombs == 0 && usageDurationMillis == 0) {
                     i = i3;
                 } else {
                     if (protoOutputStream == null) {
@@ -181,9 +181,9 @@ class PowerComponents {
                     }
                     if (key.processState == 0) {
                         i = i3;
-                        powerComponents.writePowerComponentUsage(protoOutputStream, 2246267895810L, i, convertMahToDeciCoulombs, usageDurationMillis);
+                        powerComponents.writePowerComponentUsage(protoOutputStream, 2246267895810L, i, jConvertMahToDeciCoulombs, usageDurationMillis);
                     } else {
-                        writePowerUsageSlice(protoOutputStream, i3, convertMahToDeciCoulombs, usageDurationMillis, key.processState);
+                        writePowerUsageSlice(protoOutputStream, i3, jConvertMahToDeciCoulombs, usageDurationMillis, key.processState);
                         i = i3;
                     }
                     z = true;
@@ -199,7 +199,7 @@ class PowerComponents {
     }
 
     private void writePowerUsageSlice(ProtoOutputStream protoOutputStream, int i, long j, long j2, int i2) {
-        long start = protoOutputStream.start(2246267895811L);
+        long jStart = protoOutputStream.start(2246267895811L);
         writePowerComponentUsage(protoOutputStream, 1146756268033L, i, j, j2);
         int i3 = 1;
         if (i2 != 1) {
@@ -215,15 +215,15 @@ class PowerComponents {
             }
         }
         protoOutputStream.write(1159641169922L, i3);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private void writePowerComponentUsage(ProtoOutputStream protoOutputStream, long j, int i, long j2, long j3) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1112396529666L, j2);
         protoOutputStream.write(1112396529667L, j3);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     void writeToXml(TypedXmlSerializer typedXmlSerializer) throws IOException {
@@ -258,8 +258,11 @@ class PowerComponents {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0061  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     static void parseXml(TypedXmlPullParser typedXmlPullParser, Builder builder) throws XmlPullParserException, IOException {
-        char c;
         int eventType = typedXmlPullParser.getEventType();
         int i = 2;
         if (eventType != 2 || !typedXmlPullParser.getName().equals("power_components")) {
@@ -273,86 +276,39 @@ class PowerComponents {
                 String name = typedXmlPullParser.getName();
                 name.hashCode();
                 if (name.equals("component") || name.equals(XML_TAG_CUSTOM_COMPONENT_COMPAT)) {
-                    double d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-                    long j = 0;
-                    int i2 = 0;
-                    int i3 = 0;
-                    int i4 = 0;
-                    int i5 = -1;
-                    for (int i6 = 0; i6 < typedXmlPullParser.getAttributeCount(); i6++) {
-                        String attributeName = typedXmlPullParser.getAttributeName(i6);
+                    double attributeDouble = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+                    long attributeLong = 0;
+                    int attributeInt = 0;
+                    int attributeInt2 = 0;
+                    int attributeInt3 = 0;
+                    int attributeInt4 = -1;
+                    for (int i2 = 0; i2 < typedXmlPullParser.getAttributeCount(); i2++) {
+                        String attributeName = typedXmlPullParser.getAttributeName(i2);
                         attributeName.hashCode();
-                        switch (attributeName.hashCode()) {
-                            case -1992012396:
-                                if (attributeName.equals("duration")) {
-                                    c = 0;
-                                    break;
-                                }
-                                c = 65535;
+                        switch (attributeName) {
+                            case "duration":
+                                attributeLong = typedXmlPullParser.getAttributeLong(i2);
                                 break;
-                            case -1336023298:
-                                if (attributeName.equals("screen_state")) {
-                                    c = 1;
-                                    break;
-                                }
-                                c = 65535;
+                            case "screen_state":
+                                attributeInt3 = typedXmlPullParser.getAttributeInt(i2);
                                 break;
-                            case 3355:
-                                if (attributeName.equals("id")) {
-                                    c = 2;
-                                    break;
-                                }
-                                c = 65535;
+                            case "id":
+                                attributeInt4 = typedXmlPullParser.getAttributeInt(i2);
                                 break;
-                            case 106858757:
-                                if (attributeName.equals("power")) {
-                                    c = 3;
-                                    break;
-                                }
-                                c = 65535;
+                            case "power":
+                                attributeDouble = typedXmlPullParser.getAttributeDouble(i2);
                                 break;
-                            case 783947991:
-                                if (attributeName.equals("power_state")) {
-                                    c = 4;
-                                    break;
-                                }
-                                c = 65535;
+                            case "power_state":
+                                attributeInt = typedXmlPullParser.getAttributeInt(i2);
                                 break;
-                            case 1664710337:
-                                if (attributeName.equals("process_state")) {
-                                    c = 5;
-                                    break;
-                                }
-                                c = 65535;
-                                break;
-                            default:
-                                c = 65535;
-                                break;
-                        }
-                        switch (c) {
-                            case 0:
-                                j = typedXmlPullParser.getAttributeLong(i6);
-                                break;
-                            case 1:
-                                i4 = typedXmlPullParser.getAttributeInt(i6);
-                                break;
-                            case 2:
-                                i5 = typedXmlPullParser.getAttributeInt(i6);
-                                break;
-                            case 3:
-                                d = typedXmlPullParser.getAttributeDouble(i6);
-                                break;
-                            case 4:
-                                i2 = typedXmlPullParser.getAttributeInt(i6);
-                                break;
-                            case 5:
-                                i3 = typedXmlPullParser.getAttributeInt(i6);
+                            case "process_state":
+                                attributeInt2 = typedXmlPullParser.getAttributeInt(i2);
                                 break;
                         }
                     }
-                    BatteryConsumer.Key key = builder.mData.layout.getKey(i5, i3, i4, i2);
-                    builder.addConsumedPower(key, d);
-                    builder.addUsageDurationMillis(key, j);
+                    BatteryConsumer.Key key = builder.mData.layout.getKey(attributeInt4, attributeInt2, attributeInt3, attributeInt);
+                    builder.addConsumedPower(key, attributeDouble);
+                    builder.addUsageDurationMillis(key, attributeLong);
                 }
             }
             eventType = typedXmlPullParser.next();

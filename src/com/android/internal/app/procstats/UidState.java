@@ -27,7 +27,7 @@ public final class UidState {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public UidState m7967clone() {
+    public UidState m7978clone() {
         UidState uidState = new UidState(this.mStats, this.mUid);
         uidState.mDurations.addDurations(this.mDurations);
         uidState.mCurCombinedState = this.mCurCombinedState;
@@ -121,8 +121,8 @@ public final class UidState {
     public boolean hasPackage(String str) {
         int size = this.mProcesses.size();
         for (int i = 0; i < size; i++) {
-            ProcessState valueAt = this.mProcesses.valueAt(i);
-            if (TextUtils.equals(str, valueAt.getName()) && TextUtils.equals(str, valueAt.getPackage())) {
+            ProcessState processStateValueAt = this.mProcesses.valueAt(i);
+            if (TextUtils.equals(str, processStateValueAt.getName()) && TextUtils.equals(str, processStateValueAt.getPackage())) {
                 return true;
             }
         }

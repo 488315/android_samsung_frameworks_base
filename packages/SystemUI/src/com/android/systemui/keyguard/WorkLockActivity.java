@@ -27,7 +27,6 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.devicesecurity.IPasswordPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WorkLockActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -39,7 +38,7 @@ public class WorkLockActivity extends Activity {
     public final WorkLockActivity$$ExternalSyntheticLambda0 mBackCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.keyguard.WorkLockActivity$$ExternalSyntheticLambda0
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            WorkLockActivity workLockActivity = WorkLockActivity.this;
+            WorkLockActivity workLockActivity = this.f$0;
             int i = WorkLockActivity.$r8$clinit;
             workLockActivity.getClass();
         }
@@ -119,10 +118,10 @@ public class WorkLockActivity extends Activity {
             try {
                 String stringExtra = activity.getIntent().getStringExtra("componentName");
                 int i = workLockActivityHelper.mUserId;
-                ComponentName unflattenFromString = (stringExtra == null && SemPersonaManager.isSecureFolderId(i)) ? ComponentName.unflattenFromString("com.samsung.knox.securefolder/.launcher.view.LauncherActivity") : ComponentName.unflattenFromString(stringExtra);
+                ComponentName componentNameUnflattenFromString = (stringExtra == null && SemPersonaManager.isSecureFolderId(i)) ? ComponentName.unflattenFromString("com.samsung.knox.securefolder/.launcher.view.LauncherActivity") : ComponentName.unflattenFromString(stringExtra);
                 PackageManager packageManager = activity.getPackageManager();
-                textView.setText(String.format(workLockActivityHelper.mContext.getString(R.string.unlock_workwindow_appname), AppGlobals.getPackageManager().getActivityInfo(unflattenFromString, 0L, i).loadLabel(packageManager).toString()));
-                ((ImageView) activity.findViewById(R.id.switcher_pkgIcon)).setImageDrawable(packageManager.getUserBadgedIcon(activity.getApplicationContext().createPackageContextAsUser(unflattenFromString.getPackageName(), 0, new UserHandle(i)).getApplicationInfo().loadIcon(packageManager), new UserHandle(i)));
+                textView.setText(String.format(workLockActivityHelper.mContext.getString(R.string.unlock_workwindow_appname), AppGlobals.getPackageManager().getActivityInfo(componentNameUnflattenFromString, 0L, i).loadLabel(packageManager).toString()));
+                ((ImageView) activity.findViewById(R.id.switcher_pkgIcon)).setImageDrawable(packageManager.getUserBadgedIcon(activity.getApplicationContext().createPackageContextAsUser(componentNameUnflattenFromString.getPackageName(), 0, new UserHandle(i)).getApplicationInfo().loadIcon(packageManager), new UserHandle(i)));
             } catch (Exception e) {
                 android.util.Log.e("WorkLockActivityHelper", "Failed to load icon and label", e);
             }
@@ -168,36 +167,36 @@ public class WorkLockActivity extends Activity {
 
     @Override // android.app.Activity, android.view.Window.Callback
     public final void onWindowFocusChanged(boolean z) {
-        Intent createConfirmDeviceCredentialIntent;
-        if (!z || isFinishing() || !getKeyguardManager().isDeviceLocked(getTargetUserId()) || (createConfirmDeviceCredentialIntent = getKeyguardManager().createConfirmDeviceCredentialIntent(null, null, getTargetUserId(), true)) == null) {
+        Intent intentCreateConfirmDeviceCredentialIntent;
+        if (!z || isFinishing() || !getKeyguardManager().isDeviceLocked(getTargetUserId()) || (intentCreateConfirmDeviceCredentialIntent = getKeyguardManager().createConfirmDeviceCredentialIntent(null, null, getTargetUserId(), true)) == null) {
             return;
         }
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchTaskId(getTaskId());
-        PendingIntent activity = PendingIntent.getActivity(this, -1, getIntent(), 1409286144, makeBasic.toBundle());
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchTaskId(getTaskId());
+        PendingIntent activity = PendingIntent.getActivity(this, -1, getIntent(), 1409286144, activityOptionsMakeBasic.toBundle());
         if (activity != null) {
-            createConfirmDeviceCredentialIntent.putExtra("android.intent.extra.INTENT", activity.getIntentSender());
+            intentCreateConfirmDeviceCredentialIntent.putExtra("android.intent.extra.INTENT", activity.getIntentSender());
         }
-        createConfirmDeviceCredentialIntent.putExtra("android.intent.extra.PACKAGE_NAME", getIntent().getStringExtra("android.intent.extra.PACKAGE_NAME"));
+        intentCreateConfirmDeviceCredentialIntent.putExtra("android.intent.extra.PACKAGE_NAME", getIntent().getStringExtra("android.intent.extra.PACKAGE_NAME"));
         int targetUserId = getTargetUserId();
         try {
-            IPasswordPolicy asInterface = IPasswordPolicy.Stub.asInterface(ServiceManager.getService("password_policy"));
-            if (asInterface != null) {
-                if (asInterface.isChangeRequestedAsUser(targetUserId) > 0) {
-                    createConfirmDeviceCredentialIntent.setFlags(276840448);
-                    startActivity(createConfirmDeviceCredentialIntent);
+            IPasswordPolicy iPasswordPolicyAsInterface = IPasswordPolicy.Stub.asInterface(ServiceManager.getService("password_policy"));
+            if (iPasswordPolicyAsInterface != null) {
+                if (iPasswordPolicyAsInterface.isChangeRequestedAsUser(targetUserId) > 0) {
+                    intentCreateConfirmDeviceCredentialIntent.setFlags(276840448);
+                    startActivity(intentCreateConfirmDeviceCredentialIntent);
                     return;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ActivityOptions makeBasic2 = ActivityOptions.makeBasic();
-        makeBasic2.setLaunchTaskId(getTaskId());
-        makeBasic2.setTaskOverlay(true, true);
-        createConfirmDeviceCredentialIntent.putExtra("android.app.KeyguardManager.FORCE_TASK_OVERLAY", true);
-        createConfirmDeviceCredentialIntent.putExtra("knox.container.proxy.EXTRA_TASK_ID", getTaskId());
-        startActivityForResult(createConfirmDeviceCredentialIntent, 1, makeBasic2.toBundle());
+        ActivityOptions activityOptionsMakeBasic2 = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic2.setLaunchTaskId(getTaskId());
+        activityOptionsMakeBasic2.setTaskOverlay(true, true);
+        intentCreateConfirmDeviceCredentialIntent.putExtra("android.app.KeyguardManager.FORCE_TASK_OVERLAY", true);
+        intentCreateConfirmDeviceCredentialIntent.putExtra("knox.container.proxy.EXTRA_TASK_ID", getTaskId());
+        startActivityForResult(intentCreateConfirmDeviceCredentialIntent, 1, activityOptionsMakeBasic2.toBundle());
     }
 
     public void unregisterBroadcastReceiver() {

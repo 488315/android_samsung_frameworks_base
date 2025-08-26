@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MainSwitchPreference extends TwoStatePreference implements CompoundButton.OnCheckedChangeListener {
     public final List mSwitchChangeListeners;
@@ -41,7 +40,7 @@ public class MainSwitchPreference extends TwoStatePreference implements Compound
         mainSwitchBar.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.MainSwitchPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MainSwitchPreference mainSwitchPreference = MainSwitchPreference.this;
+                MainSwitchPreference mainSwitchPreference = this.f$0;
                 MainSwitchBar mainSwitchBar2 = mainSwitchBar;
                 boolean z = mainSwitchPreference.mChecked;
                 if (mainSwitchPreference.callChangeListener(Boolean.valueOf(z))) {

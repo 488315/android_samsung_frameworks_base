@@ -3,13 +3,11 @@ package androidx.core.os;
 import android.os.LocaleList;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LocaleListCompat {
     public static final LocaleListCompat sEmptyLocaleList = wrap(new LocaleList(new Locale[0]));
     public final LocaleListInterface mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api21Impl {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -31,11 +29,11 @@ public final class LocaleListCompat {
         if (str == null || str.isEmpty()) {
             return sEmptyLocaleList;
         }
-        String[] split = str.split(",", -1);
-        int length = split.length;
+        String[] strArrSplit = str.split(",", -1);
+        int length = strArrSplit.length;
         Locale[] localeArr = new Locale[length];
         for (int i = 0; i < length; i++) {
-            String str2 = split[i];
+            String str2 = strArrSplit[i];
             int i2 = Api21Impl.$r8$clinit;
             localeArr[i] = Locale.forLanguageTag(str2);
         }

@@ -54,15 +54,15 @@ public class FontFamily {
     }
 
     public FontFamily(String[] strArr, int i) {
-        String str;
+        String strJoin;
         if (strArr == null || strArr.length == 0) {
-            str = null;
+            strJoin = null;
         } else if (strArr.length == 1) {
-            str = strArr[0];
+            strJoin = strArr[0];
         } else {
-            str = TextUtils.join(",", strArr);
+            strJoin = TextUtils.join(",", strArr);
         }
-        this.mBuilderPtr = nInitBuilder(str, i);
+        this.mBuilderPtr = nInitBuilder(strJoin, i);
         this.mNativeBuilderCleaner = NoImagePreloadHolder.sBuilderRegistry.registerNativeAllocation(this, this.mBuilderPtr);
     }
 
@@ -88,7 +88,7 @@ public class FontFamily {
         this.mBuilderPtr = 0L;
     }
 
-    public boolean addFont(String str, int i, FontVariationAxis[] fontVariationAxisArr, int i2, int i3) {
+    public boolean addFont(String str, int i, FontVariationAxis[] fontVariationAxisArr, int i2, int i3) throws IOException {
         if (this.mBuilderPtr == 0) {
             throw new IllegalStateException("Unable to call addFont after freezing.");
         }
@@ -102,9 +102,9 @@ public class FontFamily {
                         nAddAxisValue(this.mBuilderPtr, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
                     }
                 }
-                boolean nAddFont = nAddFont(this.mBuilderPtr, map, i, i2, i3);
+                boolean zNAddFont = nAddFont(this.mBuilderPtr, map, i, i2, i3);
                 fileInputStream.close();
-                return nAddFont;
+                return zNAddFont;
             } finally {
             }
         } catch (IOException unused) {

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -178,19 +180,19 @@ public class SemTipPopup {
         this.mState = 1;
         this.mType = 0;
         this.mMode = i;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes((AttributeSet) null, R.styleable.SemTipPopup);
-        this.mBackgroundColor = obtainStyledAttributes.getColor(0, -16777216);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes((AttributeSet) null, R.styleable.SemTipPopup);
+        this.mBackgroundColor = typedArrayObtainStyledAttributes.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes.recycle();
         initInterpolator();
-        LayoutInflater from = LayoutInflater.from(context);
-        this.mBubbleView = from.inflate(R.layout.sem_tip_popup_bubble, (ViewGroup) null);
-        View inflate = from.inflate(R.layout.sem_tip_popup_balloon, (ViewGroup) null);
-        this.mBalloonView = inflate;
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+        this.mBubbleView = layoutInflaterFrom.inflate(R.layout.sem_tip_popup_bubble, (ViewGroup) null);
+        View viewInflate = layoutInflaterFrom.inflate(R.layout.sem_tip_popup_balloon, (ViewGroup) null);
+        this.mBalloonView = viewInflate;
         initBubblePopup(i);
         initBalloonPopup(i);
-        TextView textView = (TextView) inflate.findViewById(R.id.sem_tip_popup_message);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.sem_tip_popup_message);
         this.mMessageView = textView;
-        Button button = (Button) inflate.findViewById(R.id.sem_tip_popup_action);
+        Button button = (Button) viewInflate.findViewById(R.id.sem_tip_popup_action);
         this.mActionView = button;
         textView.setVisibility(8);
         button.setVisibility(8);
@@ -242,7 +244,7 @@ public class SemTipPopup {
                 }
             }
         });
-        inflate.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.samsung.android.widget.SemTipPopup.3
+        viewInflate.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.samsung.android.widget.SemTipPopup.3
             @Override // android.view.View.AccessibilityDelegate
             public void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
@@ -364,9 +366,9 @@ public class SemTipPopup {
 
     public boolean isShowing() {
         TipWindow tipWindow = this.mBubblePopup;
-        boolean isShowing = tipWindow != null ? tipWindow.isShowing() : false;
+        boolean zIsShowing = tipWindow != null ? tipWindow.isShowing() : false;
         TipWindow tipWindow2 = this.mBalloonPopup;
-        return isShowing || (tipWindow2 != null ? tipWindow2.isShowing() : false);
+        return zIsShowing || (tipWindow2 != null ? tipWindow2.isShowing() : false);
     }
 
     public void dismiss(boolean z) {
@@ -415,11 +417,11 @@ public class SemTipPopup {
         this.mHintDescription = charSequence;
     }
 
-    public void update() {
+    public void update() throws Resources.NotFoundException {
         update(this.mArrowDirection, false);
     }
 
-    public void update(int i, boolean z) {
+    public void update(int i, boolean z) throws Resources.NotFoundException {
         TipWindow tipWindow;
         TipWindow tipWindow2;
         if (!isShowing() || this.mParentView == null) {
@@ -494,7 +496,7 @@ public class SemTipPopup {
         debugLog("clipping enabled : " + z);
     }
 
-    private void setInternal() {
+    private void setInternal() throws Resources.NotFoundException {
         CharSequence charSequence;
         if (mHandler == null) {
             mHandler = new Handler(Looper.getMainLooper()) { // from class: com.samsung.android.widget.SemTipPopup.5
@@ -705,18 +707,204 @@ public class SemTipPopup {
         this.mBubblePopup.setHeight(this.mBubbleHeight + (this.mScaleMargin * 2));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0130  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0260  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0130  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x0260  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void setBalloonPanel() {
-        /*
-            Method dump skipped, instructions count: 835
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.widget.SemTipPopup.setBalloonPanel():void");
+    private void setBalloonPanel() throws Resources.NotFoundException {
+        int i;
+        int i2;
+        int i3;
+        int i4;
+        float f;
+        float f2;
+        float f3;
+        if (this.mBalloonPopup == null) {
+            return;
+        }
+        debugLog("setBalloonPanel()");
+        int i5 = this.mBubbleX;
+        int i6 = this.mBalloonX;
+        int i7 = i5 - i6;
+        int i8 = (i6 + this.mBalloonWidth) - i5;
+        int i9 = this.mBubbleY;
+        int i10 = this.mBalloonY;
+        int i11 = i9 - i10;
+        int i12 = (i10 + this.mBalloonHeight) - (i9 + this.mBubbleHeight);
+        this.mWindowManager.getDefaultDisplay().getRealMetrics(new DisplayMetrics());
+        int iCeil = (int) Math.ceil(r1.density);
+        int dimensionPixelSize = this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_balloon_background_minwidth);
+        debugLog("leftMargin[" + i7 + NavigationBarInflaterView.SIZE_MOD_END);
+        debugLog("rightMargin[" + i8 + "] mBalloonWidth[" + this.mBalloonWidth + NavigationBarInflaterView.SIZE_MOD_END);
+        int dimensionPixelSize2 = this.mHorizontalTextMargin - this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_button_padding_horizontal);
+        int dimensionPixelSize3 = this.mActionView.getVisibility() == 0 ? this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_button_padding_vertical) : 0;
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) this.mBalloonBubble.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) this.mBalloonPanel.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) this.mBalloonContent.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams4 = (FrameLayout.LayoutParams) this.mBalloonBg1.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams5 = (FrameLayout.LayoutParams) this.mBalloonBg2.getLayoutParams();
+        if (this.mMode == 1) {
+            this.mBalloonBubbleHint.setImageResource(R.drawable.sem_tip_popup_hint_background_translucent);
+            this.mBalloonBubbleHint.setImageTintList(null);
+            if (isRTL() && isMirroringSupportedInRTL()) {
+                this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon_translucent_rtl);
+            } else {
+                this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon_translucent);
+            }
+            this.mBalloonBubbleIcon.setImageTintList(null);
+            layoutParams.width = this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_bubble_width_translucent);
+            layoutParams.height = this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_bubble_height_translucent);
+        } else if (Color.alpha(this.mBackgroundColor) < 255) {
+            debugLog("Updating scaleFactor to 0 because transparency is applied to background.");
+        } else {
+            i = iCeil;
+            i2 = this.mArrowDirection;
+            int i13 = i;
+            if (i2 != 0) {
+                i3 = i11;
+                TipWindow tipWindow = this.mBalloonPopup;
+                int i14 = this.mArrowPositionX - this.mBalloonX;
+                int i15 = this.mScaleMargin;
+                i4 = i7;
+                tipWindow.setPivot(i14 + i15, this.mBalloonHeight + i15);
+                if (this.mMode == 0) {
+                    this.mBalloonBubbleHint.setImageResource(R.drawable.sem_tip_popup_hint_background_03);
+                    this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon);
+                    f = 180.0f;
+                } else {
+                    f = 180.0f;
+                    this.mBalloonBubbleHint.setRotationX(180.0f);
+                }
+                this.mBalloonBg1.setRotationX(f);
+                this.mBalloonBg2.setRotationX(f);
+                layoutParams5.gravity = 85;
+                layoutParams4.gravity = 85;
+                layoutParams.gravity = 85;
+                int i16 = this.mBubbleWidth;
+                if (i8 - i16 < dimensionPixelSize) {
+                    int i17 = this.mBalloonWidth - dimensionPixelSize;
+                    layoutParams4.setMargins(0, 0, dimensionPixelSize, 0);
+                    layoutParams5.setMargins(i17 - i13, 0, 0, 0);
+                    debugLog("Right Margin is less then minimum background width!");
+                    debugLog("updated !! leftMargin[" + i17 + "],  rightMargin[" + dimensionPixelSize + NavigationBarInflaterView.SIZE_MOD_END);
+                } else {
+                    layoutParams4.setMargins(0, 0, i8 - i16, 0);
+                    layoutParams5.setMargins((i4 + this.mBubbleWidth) - i13, 0, 0, 0);
+                }
+                int i18 = this.mVerticalTextMargin;
+                layoutParams3.setMargins(dimensionPixelSize2, i18, dimensionPixelSize2, (this.mArrowHeight + i18) - dimensionPixelSize3);
+            } else if (i2 != 1) {
+                if (i2 == 2) {
+                    TipWindow tipWindow2 = this.mBalloonPopup;
+                    int i19 = this.mArrowPositionX - this.mBalloonX;
+                    tipWindow2.setPivot(i19 + r4, this.mScaleMargin);
+                    if (this.mMode == 0) {
+                        this.mBalloonBubbleHint.setImageResource(R.drawable.sem_tip_popup_hint_background_01);
+                        this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon);
+                    }
+                    layoutParams5.gravity = 53;
+                    layoutParams4.gravity = 53;
+                    layoutParams.gravity = 53;
+                    layoutParams4.setMargins(0, 0, i8 - this.mBubbleWidth, 0);
+                    layoutParams5.setMargins((this.mBubbleWidth + i7) - i13, 0, 0, 0);
+                    int i20 = this.mArrowHeight;
+                    int i21 = this.mVerticalTextMargin;
+                    layoutParams3.setMargins(dimensionPixelSize2, i20 + i21, dimensionPixelSize2, i21 - dimensionPixelSize3);
+                } else if (i2 == 3) {
+                    TipWindow tipWindow3 = this.mBalloonPopup;
+                    int i22 = this.mArrowPositionX - this.mBalloonX;
+                    tipWindow3.setPivot(i22 + r4, this.mScaleMargin);
+                    if (this.mMode == 0) {
+                        this.mBalloonBubbleHint.setImageResource(R.drawable.sem_tip_popup_hint_background_02);
+                        this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon);
+                        f3 = 180.0f;
+                    } else {
+                        f3 = 180.0f;
+                        this.mBalloonBubbleHint.setRotationY(180.0f);
+                    }
+                    this.mBalloonBg1.setRotationY(f3);
+                    this.mBalloonBg2.setRotationY(f3);
+                    layoutParams5.gravity = 51;
+                    layoutParams4.gravity = 51;
+                    layoutParams.gravity = 51;
+                    layoutParams4.setMargins(i7, 0, 0, 0);
+                    layoutParams5.setMargins(0, 0, i8 - i13, 0);
+                    int i23 = this.mArrowHeight;
+                    int i24 = this.mVerticalTextMargin;
+                    layoutParams3.setMargins(dimensionPixelSize2, i23 + i24, dimensionPixelSize2, i24 - dimensionPixelSize3);
+                }
+                i4 = i7;
+                i3 = i11;
+            } else {
+                TipWindow tipWindow4 = this.mBalloonPopup;
+                i3 = i11;
+                int i25 = this.mArrowPositionX - this.mBalloonX;
+                int i26 = this.mScaleMargin;
+                tipWindow4.setPivot(i25 + i26, this.mBalloonHeight + i26);
+                if (this.mMode == 0) {
+                    this.mBalloonBubbleHint.setImageResource(R.drawable.sem_tip_popup_hint_background_04);
+                    this.mBalloonBubbleIcon.setImageResource(R.drawable.sem_tip_popup_hint_icon);
+                    f2 = 180.0f;
+                } else {
+                    f2 = 180.0f;
+                    this.mBalloonBubbleHint.setRotation(180.0f);
+                }
+                this.mBalloonBg1.setRotation(f2);
+                this.mBalloonBg2.setRotation(f2);
+                layoutParams5.gravity = 83;
+                layoutParams4.gravity = 83;
+                layoutParams.gravity = 83;
+                if (i7 < dimensionPixelSize) {
+                    int i27 = this.mBalloonWidth - dimensionPixelSize;
+                    layoutParams4.setMargins(dimensionPixelSize, 0, 0, 0);
+                    layoutParams5.setMargins(0, 0, i27 - i13, 0);
+                    debugLog("Left Margin is less then minimum background width!");
+                    debugLog("updated !! leftMargin[" + dimensionPixelSize + "],  rightMargin[" + i27 + NavigationBarInflaterView.SIZE_MOD_END);
+                } else {
+                    layoutParams4.setMargins(i7, 0, 0, 0);
+                    layoutParams5.setMargins(0, 0, i8 - i13, 0);
+                }
+                int i28 = this.mVerticalTextMargin;
+                layoutParams3.setMargins(dimensionPixelSize2, i28, dimensionPixelSize2, (this.mArrowHeight + i28) - dimensionPixelSize3);
+                i4 = i7;
+            }
+            int i29 = this.mScaleMargin;
+            layoutParams.setMargins(i4 + i29, i3 + i29, (i8 - this.mBubbleWidth) + i29, i12 + i29);
+            int i30 = this.mScaleMargin;
+            layoutParams2.setMargins(i30, i30, i30, i30);
+            int i31 = this.mBalloonX;
+            int i32 = this.mScaleMargin;
+            this.mBalloonPopupX = i31 - i32;
+            this.mBalloonPopupY = this.mBalloonY - i32;
+            this.mBalloonBubble.setLayoutParams(layoutParams);
+            this.mBalloonPanel.setLayoutParams(layoutParams2);
+            this.mBalloonBg1.setLayoutParams(layoutParams4);
+            this.mBalloonBg2.setLayoutParams(layoutParams5);
+            this.mBalloonContent.setLayoutParams(layoutParams3);
+            this.mBalloonPopup.setWidth(this.mBalloonWidth + (this.mScaleMargin * 2));
+            this.mBalloonPopup.setHeight(this.mBalloonHeight + (this.mScaleMargin * 2));
+        }
+        i = 0;
+        i2 = this.mArrowDirection;
+        int i132 = i;
+        if (i2 != 0) {
+        }
+        int i292 = this.mScaleMargin;
+        layoutParams.setMargins(i4 + i292, i3 + i292, (i8 - this.mBubbleWidth) + i292, i12 + i292);
+        int i302 = this.mScaleMargin;
+        layoutParams2.setMargins(i302, i302, i302, i302);
+        int i312 = this.mBalloonX;
+        int i322 = this.mScaleMargin;
+        this.mBalloonPopupX = i312 - i322;
+        this.mBalloonPopupY = this.mBalloonY - i322;
+        this.mBalloonBubble.setLayoutParams(layoutParams);
+        this.mBalloonPanel.setLayoutParams(layoutParams2);
+        this.mBalloonBg1.setLayoutParams(layoutParams4);
+        this.mBalloonBg2.setLayoutParams(layoutParams5);
+        this.mBalloonContent.setLayoutParams(layoutParams3);
+        this.mBalloonPopup.setWidth(this.mBalloonWidth + (this.mScaleMargin * 2));
+        this.mBalloonPopup.setHeight(this.mBalloonHeight + (this.mScaleMargin * 2));
     }
 
     private void calculateArrowDirection(int i, int i2) {
@@ -772,20 +960,65 @@ public class SemTipPopup {
         debugLog("calculateArrowPosition mArrowPosition : " + this.mArrowPositionX + ", " + this.mArrowPositionY);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0069, code lost:
-    
-        if (r0 <= 1280) goto L24;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     private void calculatePopupSize() {
-        /*
-            Method dump skipped, instructions count: 284
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.widget.SemTipPopup.calculatePopupSize():void");
+        int measuredWidth;
+        float f;
+        this.mDisplayMetrics = this.mResources.getDisplayMetrics();
+        int i = this.mResources.getConfiguration().screenWidthDp;
+        int i2 = this.mArrowWidth + (this.mHorizontalTextMargin * 2);
+        if (this.mContext.getResources().getConfiguration().semDesktopModeEnabled == 1) {
+            measuredWidth = this.mParentView.getRootView().getMeasuredWidth();
+            int[] iArr = new int[2];
+            this.mParentView.getRootView().getLocationOnScreen(iArr);
+            int i3 = iArr[0];
+            if (i3 < 0) {
+                measuredWidth += i3;
+            }
+            debugLog("Window width in DexMode " + measuredWidth);
+            if (measuredWidth > 480) {
+                if (measuredWidth > 960) {
+                    f = measuredWidth <= 1280 ? measuredWidth * 0.45f : measuredWidth * 0.25f;
+                }
+                f = measuredWidth * 0.6f;
+            }
+            f = measuredWidth * 0.83f;
+        } else {
+            debugLog("screen width DP " + i);
+            if (i <= 480) {
+                measuredWidth = this.mDisplayMetrics.widthPixels;
+                f = measuredWidth * 0.83f;
+            } else if (i <= 960) {
+                measuredWidth = this.mDisplayMetrics.widthPixels;
+                f = measuredWidth * 0.6f;
+            } else if (i <= 1280) {
+                measuredWidth = this.mDisplayMetrics.widthPixels;
+            } else {
+                measuredWidth = this.mDisplayMetrics.widthPixels;
+            }
+        }
+        int i4 = (int) f;
+        if (!this.mIsMessageViewMeasured) {
+            this.mMessageView.measure(0, 0);
+            this.mInitialmMessageViewWidth = this.mMessageView.getMeasuredWidth();
+            this.mIsMessageViewMeasured = true;
+        }
+        int i5 = this.mInitialmMessageViewWidth;
+        int i6 = this.mHorizontalTextMargin;
+        int i7 = i5 + (i6 * 2);
+        if (i7 >= i2) {
+            i2 = i7 > i4 ? i4 : i7;
+        }
+        this.mBalloonWidth = i2;
+        this.mMessageView.setWidth(i2 - (i6 * 2));
+        this.mMessageView.measure(0, 0);
+        this.mBalloonHeight = this.mMessageView.getMeasuredHeight() + (this.mVerticalTextMargin * 2) + this.mArrowHeight;
+        if (this.mType == 1) {
+            this.mActionView.measure(0, 0);
+            if (this.mBalloonWidth < this.mActionView.getMeasuredWidth()) {
+                this.mBalloonWidth = this.mActionView.getMeasuredWidth() + (this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_button_padding_horizontal) * 2);
+            }
+            this.mBalloonHeight += this.mActionView.getMeasuredHeight() - this.mResources.getDimensionPixelSize(R.dimen.sem_tip_popup_button_padding_vertical);
+        }
     }
 
     private void calculatePopupPosition() {
@@ -955,7 +1188,7 @@ public class SemTipPopup {
         float width;
         int height;
         float f;
-        float f2;
+        float width2;
         int i = this.mArrowDirection;
         if (i != 0) {
             width = 0.0f;
@@ -963,17 +1196,17 @@ public class SemTipPopup {
                 height = this.mBubblePopup.getHeight();
             } else {
                 if (i != 2) {
-                    f2 = 0.0f;
+                    width2 = 0.0f;
                     f = 0.0f;
                 } else {
-                    f2 = this.mBubblePopup.getWidth();
+                    width2 = this.mBubblePopup.getWidth();
                     f = 0.0f;
                 }
                 final AnimationSet animationSet = new AnimationSet(false);
-                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, 0, f2, 0, f);
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, 0, width2, 0, f);
                 scaleAnimation.setDuration(167L);
                 scaleAnimation.setInterpolator(INTERPOLATOR_SINE_IN_OUT_70);
-                ScaleAnimation scaleAnimation2 = new ScaleAnimation(1.0f, 0.833f, 1.0f, 0.833f, 0, f2, 0, f);
+                ScaleAnimation scaleAnimation2 = new ScaleAnimation(1.0f, 0.833f, 1.0f, 0.833f, 0, width2, 0, f);
                 scaleAnimation2.setStartOffset(167L);
                 scaleAnimation2.setDuration(250L);
                 scaleAnimation2.setInterpolator(INTERPOLATOR_SINE_IN_OUT_33);
@@ -1005,12 +1238,12 @@ public class SemTipPopup {
             height = this.mBubblePopup.getHeight();
         }
         f = height;
-        f2 = width;
+        width2 = width;
         final AnimationSet animationSet2 = new AnimationSet(false);
-        ScaleAnimation scaleAnimation3 = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, 0, f2, 0, f);
+        ScaleAnimation scaleAnimation3 = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, 0, width2, 0, f);
         scaleAnimation3.setDuration(167L);
         scaleAnimation3.setInterpolator(INTERPOLATOR_SINE_IN_OUT_70);
-        ScaleAnimation scaleAnimation22 = new ScaleAnimation(1.0f, 0.833f, 1.0f, 0.833f, 0, f2, 0, f);
+        ScaleAnimation scaleAnimation22 = new ScaleAnimation(1.0f, 0.833f, 1.0f, 0.833f, 0, width2, 0, f);
         scaleAnimation22.setStartOffset(167L);
         scaleAnimation22.setDuration(250L);
         scaleAnimation22.setInterpolator(INTERPOLATOR_SINE_IN_OUT_33);
@@ -1180,7 +1413,7 @@ public class SemTipPopup {
     private void getDisplayFrame(Rect rect) {
         DisplayCutout displayCutout;
         int navagationbarHeight = getNavagationbarHeight();
-        boolean isNavigationbarHide = isNavigationbarHide();
+        boolean zIsNavigationbarHide = isNavigationbarHide();
         int rotation = this.mWindowManager.getDefaultDisplay().getRotation();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         this.mWindowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
@@ -1207,14 +1440,14 @@ public class SemTipPopup {
         debugLog("Bounds = " + rect2);
         if (isTablet()) {
             debugLog(BnRConstants.DEVICETYPE_TABLET);
-            if (displayMetrics.widthPixels == this.mDisplayMetrics.widthPixels && displayMetrics.heightPixels - this.mDisplayMetrics.heightPixels == navagationbarHeight && isNavigationbarHide) {
+            if (displayMetrics.widthPixels == this.mDisplayMetrics.widthPixels && displayMetrics.heightPixels - this.mDisplayMetrics.heightPixels == navagationbarHeight && zIsNavigationbarHide) {
                 rect.bottom += navagationbarHeight;
             }
         } else {
             debugLog("phone");
             if (rotation != 0) {
                 if (rotation == 1) {
-                    if (displayMetrics.heightPixels == this.mDisplayMetrics.heightPixels && displayMetrics.widthPixels - this.mDisplayMetrics.widthPixels == navagationbarHeight && isNavigationbarHide) {
+                    if (displayMetrics.heightPixels == this.mDisplayMetrics.heightPixels && displayMetrics.widthPixels - this.mDisplayMetrics.widthPixels == navagationbarHeight && zIsNavigationbarHide) {
                         rect.right += navagationbarHeight;
                     }
                     WindowInsets rootWindowInsets = this.mParentView.getRootWindowInsets();
@@ -1226,7 +1459,7 @@ public class SemTipPopup {
                 } else if (rotation != 2) {
                     if (rotation == 3) {
                         if (displayMetrics.heightPixels == this.mDisplayMetrics.heightPixels && displayMetrics.widthPixels - this.mDisplayMetrics.widthPixels == navagationbarHeight) {
-                            if (isNavigationbarHide) {
+                            if (zIsNavigationbarHide) {
                                 rect.right += navagationbarHeight;
                             } else {
                                 rect.left += navagationbarHeight;
@@ -1239,7 +1472,7 @@ public class SemTipPopup {
                         }
                     }
                 } else if (displayMetrics.widthPixels == this.mDisplayMetrics.widthPixels && displayMetrics.heightPixels - this.mDisplayMetrics.heightPixels == navagationbarHeight) {
-                    if (isNavigationbarHide) {
+                    if (zIsNavigationbarHide) {
                         rect.bottom += navagationbarHeight;
                     } else {
                         rect.top += navagationbarHeight;
@@ -1250,7 +1483,7 @@ public class SemTipPopup {
                     rect.top += navagationbarHeight;
                     rect.bottom += navagationbarHeight;
                 }
-            } else if (displayMetrics.widthPixels == this.mDisplayMetrics.widthPixels && displayMetrics.heightPixels - this.mDisplayMetrics.heightPixels == navagationbarHeight && isNavigationbarHide) {
+            } else if (displayMetrics.widthPixels == this.mDisplayMetrics.widthPixels && displayMetrics.heightPixels - this.mDisplayMetrics.heightPixels == navagationbarHeight && zIsNavigationbarHide) {
                 rect.bottom += navagationbarHeight;
             }
         }
@@ -1346,7 +1579,7 @@ public class SemTipPopup {
         @Override // com.samsung.android.widget.SemTipPopup.TipWindow
         protected void animateViewOut() {
             View contentView = getContentView();
-            View findViewById = contentView.findViewById(R.id.sem_tip_popup_message);
+            View viewFindViewById = contentView.findViewById(R.id.sem_tip_popup_message);
             ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 0.32f, 1.0f, 0.32f, 0, this.mPivotX, 0, this.mPivotY);
             scaleAnimation.setInterpolator(SemTipPopup.INTERPOLATOR_ELASTIC_CUSTOM);
             scaleAnimation.setDuration(500L);
@@ -1371,7 +1604,7 @@ public class SemTipPopup {
                 }
             });
             contentView.startAnimation(animationSet);
-            findViewById.startAnimation(alphaAnimation);
+            viewFindViewById.startAnimation(alphaAnimation);
         }
     }
 

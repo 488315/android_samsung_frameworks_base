@@ -21,7 +21,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DualDarInnerLockScreenController {
     public KeyguardInputView mBaseView;
@@ -48,12 +47,11 @@ public class DualDarInnerLockScreenController {
             if (dualDarInnerLockScreenController.mUpdateMonitor.isDualDarInnerAuthRequired(i)) {
                 return;
             }
-            DualDarInnerLockScreenController.m946$$Nest$mdismissInnerLockScreen(dualDarInnerLockScreenController, i);
+            DualDarInnerLockScreenController.m948$$Nest$mdismissInnerLockScreen(dualDarInnerLockScreenController, i);
         }
     };
     public final AnonymousClass4 mCallback = new AnonymousClass4();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.DualDarInnerLockScreenController$4, reason: invalid class name */
     public class AnonymousClass4 implements KeyguardSecurityCallback {
         public AnonymousClass4() {
@@ -115,7 +113,6 @@ public class DualDarInnerLockScreenController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final Context mContext;
         public final Handler mHandler;
@@ -137,7 +134,7 @@ public class DualDarInnerLockScreenController {
     }
 
     /* renamed from: -$$Nest$mdismissInnerLockScreen, reason: not valid java name */
-    public static void m946$$Nest$mdismissInnerLockScreen(DualDarInnerLockScreenController dualDarInnerLockScreenController, int i) {
+    public static void m948$$Nest$mdismissInnerLockScreen(DualDarInnerLockScreenController dualDarInnerLockScreenController, int i) {
         dualDarInnerLockScreenController.mHandler.removeCallbacksAndMessages(null);
         int mainUserId = ((KnoxStateMonitorImpl) dualDarInnerLockScreenController.mKnoxStateMonitor).getMainUserId(i);
         KeyguardInputView keyguardInputView = dualDarInnerLockScreenController.mBaseView;
@@ -191,30 +188,30 @@ public class DualDarInnerLockScreenController {
         Resources resources = keyguardSecurityContainer.getResources();
         int i4 = 0;
         this.mIsPassword = this.mLockPatternUtils.getCredentialTypeForUser(((KnoxStateMonitorImpl) this.mKnoxStateMonitor).getInnerAuthUserId(UserHandle.getCallingUserId())) == 4;
-        this.mNavigationBarHeight = resources.getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
-        boolean isTablet = DeviceType.isTablet();
+        this.mNavigationBarHeight = resources.getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size);
+        boolean zIsTablet = DeviceType.isTablet();
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
-        if (isTablet) {
+        if (zIsTablet) {
             int dimensionPixelSize = keyguardSecurityContainer.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.kg_emergency_button_margin_bottom_for_tablet_fingerprint) + DeviceState.getInDisplayFingerprintHeight();
-            boolean isInDisplayFingerprintMarginAccepted = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
+            boolean zIsInDisplayFingerprintMarginAccepted = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
             if (rotation == 1 || rotation == 2 || rotation == 3) {
                 if (!this.mIsPassword || !this.mIsImeShown) {
                     i4 = this.mNavigationBarHeight;
                 }
             } else if (!this.mIsPassword || !this.mIsImeShown) {
-                i4 = isInDisplayFingerprintMarginAccepted ? dimensionPixelSize : this.mNavigationBarHeight;
+                i4 = zIsInDisplayFingerprintMarginAccepted ? dimensionPixelSize : this.mNavigationBarHeight;
             }
             updateLayoutParams(0, 0, i4, keyguardSecurityContainer, view);
             return;
         }
         if (DeviceState.shouldEnableKeyguardScreenRotation(this.mContext) || LsRune.SECURITY_FINGERPRINT_IN_DISPLAY || !this.mBaseViewController.needsInput()) {
             int inDisplayFingerprintHeight = DeviceState.getInDisplayFingerprintHeight();
-            boolean isInDisplayFingerprintMarginAccepted2 = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
+            boolean zIsInDisplayFingerprintMarginAccepted2 = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
             if (rotation == 1) {
                 i = this.mNavigationBarHeight;
                 i2 = i;
             } else if (rotation != 3) {
-                boolean z = (!DeviceState.isInDisplayFpSensorPositionHigh()) & isInDisplayFingerprintMarginAccepted2;
+                boolean z = (!DeviceState.isInDisplayFpSensorPositionHigh()) & zIsInDisplayFingerprintMarginAccepted2;
                 if (this.mIsPassword && this.mIsImeShown) {
                     inDisplayFingerprintHeight = 0;
                 } else if (!z) {
@@ -224,7 +221,7 @@ public class DualDarInnerLockScreenController {
                 i = 0;
                 i2 = 0;
             } else {
-                if (!isInDisplayFingerprintMarginAccepted2) {
+                if (!zIsInDisplayFingerprintMarginAccepted2) {
                     inDisplayFingerprintHeight = this.mNavigationBarHeight;
                 }
                 i2 = this.mNavigationBarHeight;

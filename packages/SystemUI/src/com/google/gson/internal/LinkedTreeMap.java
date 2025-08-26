@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Serializable {
     static final /* synthetic */ boolean $assertionsDisabled = false;
@@ -33,7 +32,6 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
     Node<K, V> root;
     int size;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class EntrySet extends AbstractSet<Map.Entry<Object, Object>> {
         public EntrySet() {
         }
@@ -64,11 +62,11 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public boolean remove(Object obj) {
-            Node<K, V> findByEntry;
-            if (!(obj instanceof Map.Entry) || (findByEntry = LinkedTreeMap.this.findByEntry((Map.Entry) obj)) == null) {
+            Node<K, V> nodeFindByEntry;
+            if (!(obj instanceof Map.Entry) || (nodeFindByEntry = LinkedTreeMap.this.findByEntry((Map.Entry) obj)) == null) {
                 return false;
             }
-            LinkedTreeMap.this.removeInternal(findByEntry, true);
+            LinkedTreeMap.this.removeInternal(nodeFindByEntry, true);
             return true;
         }
 
@@ -78,7 +76,6 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class KeySet extends AbstractSet<Object> {
         public KeySet() {
         }
@@ -118,7 +115,6 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     abstract class LinkedTreeMapIterator<T> implements Iterator<T> {
         int expectedModCount;
         Node<Object, Object> lastReturned = null;
@@ -251,9 +247,9 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         replaceInParent(node, node3);
         node3.left = node;
         node.parent = node3;
-        int max = Math.max(node2 != null ? node2.height : 0, node4 != null ? node4.height : 0) + 1;
-        node.height = max;
-        node3.height = Math.max(max, node5 != null ? node5.height : 0) + 1;
+        int iMax = Math.max(node2 != null ? node2.height : 0, node4 != null ? node4.height : 0) + 1;
+        node.height = iMax;
+        node3.height = Math.max(iMax, node5 != null ? node5.height : 0) + 1;
     }
 
     private void rotateRight(Node<K, V> node) {
@@ -268,9 +264,9 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         replaceInParent(node, node2);
         node2.right = node;
         node.parent = node2;
-        int max = Math.max(node3 != null ? node3.height : 0, node5 != null ? node5.height : 0) + 1;
-        node.height = max;
-        node2.height = Math.max(max, node4 != null ? node4.height : 0) + 1;
+        int iMax = Math.max(node3 != null ? node3.height : 0, node5 != null ? node5.height : 0) + 1;
+        node.height = iMax;
+        node2.height = Math.max(iMax, node4 != null ? node4.height : 0) + 1;
     }
 
     private Object writeReplace() throws ObjectStreamException {
@@ -304,25 +300,25 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
     }
 
     public Node<K, V> find(K k, boolean z) {
-        int i;
+        int iCompareTo;
         Node<K, V> node;
         Comparator<? super K> comparator = this.comparator;
         Node<K, V> node2 = this.root;
         if (node2 != null) {
             Comparable comparable = comparator == NATURAL_ORDER ? (Comparable) k : null;
             while (true) {
-                i = comparable != null ? comparable.compareTo(node2.key) : comparator.compare(k, node2.key);
-                if (i == 0) {
+                iCompareTo = comparable != null ? comparable.compareTo(node2.key) : comparator.compare(k, node2.key);
+                if (iCompareTo == 0) {
                     return node2;
                 }
-                Node<K, V> node3 = i < 0 ? node2.left : node2.right;
+                Node<K, V> node3 = iCompareTo < 0 ? node2.left : node2.right;
                 if (node3 == null) {
                     break;
                 }
                 node2 = node3;
             }
         } else {
-            i = 0;
+            iCompareTo = 0;
         }
         if (!z) {
             return null;
@@ -330,7 +326,7 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         Node<K, V> node4 = this.header;
         if (node2 != null) {
             node = new Node<>(node2, k, node4, node4.prev);
-            if (i < 0) {
+            if (iCompareTo < 0) {
                 node2.left = node;
             } else {
                 node2.right = node;
@@ -349,11 +345,11 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
     }
 
     public Node<K, V> findByEntry(Map.Entry<?, ?> entry) {
-        Node<K, V> findByObject = findByObject(entry.getKey());
-        if (findByObject == null || !equal(findByObject.value, entry.getValue())) {
+        Node<K, V> nodeFindByObject = findByObject(entry.getKey());
+        if (nodeFindByObject == null || !equal(nodeFindByObject.value, entry.getValue())) {
             return null;
         }
-        return findByObject;
+        return nodeFindByObject;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -369,9 +365,9 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
 
     @Override // java.util.AbstractMap, java.util.Map
     public V get(Object obj) {
-        Node<K, V> findByObject = findByObject(obj);
-        if (findByObject != null) {
-            return findByObject.value;
+        Node<K, V> nodeFindByObject = findByObject(obj);
+        if (nodeFindByObject != null) {
+            return nodeFindByObject.value;
         }
         return null;
     }
@@ -392,17 +388,17 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         if (k == null) {
             throw new NullPointerException("key == null");
         }
-        Node<K, V> find = find(k, true);
-        V v2 = find.value;
-        find.value = v;
+        Node<K, V> nodeFind = find(k, true);
+        V v2 = nodeFind.value;
+        nodeFind.value = v;
         return v2;
     }
 
     @Override // java.util.AbstractMap, java.util.Map
     public V remove(Object obj) {
-        Node<K, V> removeInternalByKey = removeInternalByKey(obj);
-        if (removeInternalByKey != null) {
-            return removeInternalByKey.value;
+        Node<K, V> nodeRemoveInternalByKey = removeInternalByKey(obj);
+        if (nodeRemoveInternalByKey != null) {
+            return nodeRemoveInternalByKey.value;
         }
         return null;
     }
@@ -433,13 +429,13 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
             this.modCount++;
             return;
         }
-        Node<K, V> last = node3.height > node4.height ? node3.last() : node4.first();
-        removeInternal(last, false);
+        Node<K, V> nodeLast = node3.height > node4.height ? node3.last() : node4.first();
+        removeInternal(nodeLast, false);
         Node<K, V> node6 = node.left;
         if (node6 != null) {
             i = node6.height;
-            last.left = node6;
-            node6.parent = last;
+            nodeLast.left = node6;
+            node6.parent = nodeLast;
             node.left = null;
         } else {
             i = 0;
@@ -447,20 +443,20 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         Node<K, V> node7 = node.right;
         if (node7 != null) {
             i2 = node7.height;
-            last.right = node7;
-            node7.parent = last;
+            nodeLast.right = node7;
+            node7.parent = nodeLast;
             node.right = null;
         }
-        last.height = Math.max(i, i2) + 1;
-        replaceInParent(node, last);
+        nodeLast.height = Math.max(i, i2) + 1;
+        replaceInParent(node, nodeLast);
     }
 
     public Node<K, V> removeInternalByKey(Object obj) {
-        Node<K, V> findByObject = findByObject(obj);
-        if (findByObject != null) {
-            removeInternal(findByObject, true);
+        Node<K, V> nodeFindByObject = findByObject(obj);
+        if (nodeFindByObject != null) {
+            removeInternal(nodeFindByObject, true);
         }
-        return findByObject;
+        return nodeFindByObject;
     }
 
     @Override // java.util.AbstractMap, java.util.Map
@@ -475,7 +471,6 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         this.comparator = comparator == null ? NATURAL_ORDER : comparator;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Node<K, V> implements Map.Entry<K, V> {
         int height;
         final K key;
@@ -537,9 +532,9 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
         @Override // java.util.Map.Entry
         public int hashCode() {
             K k = this.key;
-            int hashCode = k == null ? 0 : k.hashCode();
+            int iHashCode = k == null ? 0 : k.hashCode();
             V v = this.value;
-            return hashCode ^ (v != null ? v.hashCode() : 0);
+            return iHashCode ^ (v != null ? v.hashCode() : 0);
         }
 
         public Node<K, V> last() {

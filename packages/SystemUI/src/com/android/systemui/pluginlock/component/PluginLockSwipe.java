@@ -6,7 +6,6 @@ import com.android.systemui.pluginlock.PluginLockInstanceState;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockSwipe extends AbstractPluginLockItem {
     private static final String TAG = "PluginLockSwipe";

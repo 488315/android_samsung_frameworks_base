@@ -111,14 +111,14 @@ public final class VisualQueryAttentionResult implements Parcelable {
     }
 
     VisualQueryAttentionResult(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        this.mInteractionIntention = readInt;
-        if (readInt != 0 && readInt != 1) {
-            throw new IllegalArgumentException("interactionIntention was " + readInt + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0), INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1)");
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        this.mInteractionIntention = i;
+        if (i != 0 && i != 1) {
+            throw new IllegalArgumentException("interactionIntention was " + i + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0), INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1)");
         }
-        this.mEngagementLevel = readInt2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt2, "from", 1L, "to", 100L);
+        this.mEngagementLevel = i2;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 1L, "to", 100L);
     }
 
     public static final class Builder {

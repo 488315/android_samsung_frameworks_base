@@ -13,7 +13,6 @@ import com.android.systemui.audio.soundcraft.utils.SoundCraftSALogging;
 import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseToggleViewModel;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SpatialAudioSwitchViewModel extends BaseToggleViewModel {
     public final Context context;
@@ -21,7 +20,6 @@ public final class SpatialAudioSwitchViewModel extends BaseToggleViewModel {
     public final RoutineManager routineManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -51,9 +49,9 @@ public final class SpatialAudioSwitchViewModel extends BaseToggleViewModel {
         }
         if (effectModel != null) {
             Boolean bool = effectModel.spatialAudio;
-            boolean booleanValue = bool != null ? bool.booleanValue() : false;
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("spatialAudio=", "SoundCraft.SpatialAudioSwitchViewModel", booleanValue);
-            this.isChecked.setValue(Boolean.valueOf(booleanValue));
+            boolean zBooleanValue = bool != null ? bool.booleanValue() : false;
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("spatialAudio=", "SoundCraft.SpatialAudioSwitchViewModel", zBooleanValue);
+            this.isChecked.setValue(Boolean.valueOf(zBooleanValue));
         }
     }
 
@@ -62,9 +60,9 @@ public final class SpatialAudioSwitchViewModel extends BaseToggleViewModel {
         ModelProvider modelProvider = this.modelProvider;
         Boolean bool = modelProvider.effectModel.spatialAudio;
         if (bool != null) {
-            boolean booleanValue = bool.booleanValue();
-            this.isSelected.setValue(Boolean.valueOf(!booleanValue));
-            if (booleanValue) {
+            boolean zBooleanValue = bool.booleanValue();
+            this.isSelected.setValue(Boolean.valueOf(!zBooleanValue));
+            if (zBooleanValue) {
                 BudsModel budsModel = modelProvider.budsModel;
                 Boolean bool2 = Boolean.FALSE;
                 budsModel.setSpatialAudio(bool2);
@@ -92,7 +90,7 @@ public final class SpatialAudioSwitchViewModel extends BaseToggleViewModel {
             } else {
                 this.wearableManager.updateBudsModel(modelProvider.budsModel);
             }
-            SoundCraftSALogging.sendEventLog$default(SoundCraftSALogging.INSTANCE, SoundCraftSALogging.ScreenId.EID_BUDS_DETAIL_SETTING, SoundCraftSALogging.Event.SPATIAL_AUDIO, !booleanValue ? "1" : "0", 8);
+            SoundCraftSALogging.sendEventLog$default(SoundCraftSALogging.INSTANCE, SoundCraftSALogging.ScreenId.EID_BUDS_DETAIL_SETTING, SoundCraftSALogging.Event.SPATIAL_AUDIO, !zBooleanValue ? "1" : "0", 8);
         }
         notifyChange();
     }

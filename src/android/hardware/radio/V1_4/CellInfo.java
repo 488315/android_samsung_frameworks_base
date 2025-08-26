@@ -218,13 +218,13 @@ public final class CellInfo {
 
         public static final ArrayList<Info> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Info> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 128, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 128, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Info info = new Info();
-                info.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 128);
+                info.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 128);
                 arrayList.add(info);
             }
             return arrayList;
@@ -343,13 +343,13 @@ public final class CellInfo {
 
     public static final ArrayList<CellInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 136, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 136, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellInfo cellInfo = new CellInfo();
-            cellInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 136);
+            cellInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 136);
             arrayList.add(cellInfo);
         }
         return arrayList;

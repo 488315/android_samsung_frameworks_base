@@ -8,7 +8,6 @@ import java.util.function.Function;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MapHolder implements MapK, Map, KMappedMarker {
     public final Map unwrapped;
@@ -18,7 +17,7 @@ public final class MapHolder implements MapK, Map, KMappedMarker {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ MapHolder m2569boximpl(Map map) {
+    public static final /* synthetic */ MapHolder m2586boximpl(Map map) {
         return new MapHolder(map);
     }
 

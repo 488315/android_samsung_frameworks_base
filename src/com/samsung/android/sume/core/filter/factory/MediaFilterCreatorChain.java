@@ -73,7 +73,7 @@ class MediaFilterCreatorChain implements MediaFilterCreator {
         return new DescriptorFinder() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterCreatorChain$$ExternalSyntheticLambda0
             @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreatorChain.DescriptorFinder
             public final MFDescriptor find(MFDescriptor mFDescriptor) {
-                return MediaFilterCreatorChain.lambda$prepare$2(MediaFilterCreator.this, mFDescriptor);
+                return MediaFilterCreatorChain.lambda$prepare$2(mediaFilterCreator, mFDescriptor);
             }
         };
     }
@@ -101,25 +101,23 @@ class MediaFilterCreatorChain implements MediaFilterCreator {
         return (MediaFilter) Optional.ofNullable(this.descriptorFinder).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterCreatorChain$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MFDescriptor find;
-                find = ((MediaFilterCreatorChain.DescriptorFinder) obj).find(MFDescriptor.this);
-                return find;
+                return ((MediaFilterCreatorChain.DescriptorFinder) obj).find(mFDescriptor);
             }
         }).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.MediaFilterCreatorChain$$ExternalSyntheticLambda7
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MediaFilterCreatorChain.this.m9560xeb0b27c7(mediaFilterFactory, mediaFilter, (MFDescriptor) obj);
+                return this.f$0.m9573xeb0b27c7(mediaFilterFactory, mediaFilter, (MFDescriptor) obj);
             }
         }).orElse(null);
     }
 
     /* renamed from: lambda$newFilter$7$com-samsung-android-sume-core-filter-factory-MediaFilterCreatorChain, reason: not valid java name */
-    /* synthetic */ MediaFilter m9560xeb0b27c7(MediaFilterFactory mediaFilterFactory, MediaFilter mediaFilter, MFDescriptor mFDescriptor) {
+    /* synthetic */ MediaFilter m9573xeb0b27c7(MediaFilterFactory mediaFilterFactory, MediaFilter mediaFilter, MFDescriptor mFDescriptor) {
         Iterator<MediaFilterCreator> it = this.creators.iterator();
-        MediaFilter mediaFilter2 = null;
+        MediaFilter mediaFilterNewFilter = null;
         while (it.hasNext()) {
-            mediaFilter2 = it.next().newFilter(mediaFilterFactory, mFDescriptor, mediaFilter);
+            mediaFilterNewFilter = it.next().newFilter(mediaFilterFactory, mFDescriptor, mediaFilter);
         }
-        return mediaFilter2;
+        return mediaFilterNewFilter;
     }
 }

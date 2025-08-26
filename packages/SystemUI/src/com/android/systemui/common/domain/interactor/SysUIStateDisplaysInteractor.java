@@ -4,13 +4,11 @@ import com.android.app.displaylib.PerDisplayRepository;
 import com.android.systemui.display.data.repository.DisplayRepository;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SysUIStateDisplaysInteractor {
     public final DisplayRepository displayRepository;
     public final PerDisplayRepository sysUIStateRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

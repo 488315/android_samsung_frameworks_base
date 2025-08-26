@@ -1,5 +1,7 @@
 package com.samsung.android.game;
 
+import android.app.PendingIntent;
+import android.app.admin.PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.Parcel;
@@ -51,12 +53,12 @@ public class SemGameManager {
         if (gMSBinder == null) {
             throw new IllegalStateException("gamemanager system service is not available");
         }
-        IGameManagerService asInterface = IGameManagerService.Stub.asInterface(gMSBinder);
-        if (asInterface == null) {
+        IGameManagerService iGameManagerServiceAsInterface = IGameManagerService.Stub.asInterface(gMSBinder);
+        if (iGameManagerServiceAsInterface == null) {
             throw new IllegalStateException("gamemanager system service is not available");
         }
         try {
-            boolean z = asInterface.identifyGamePackage(str) == 1;
+            boolean z = iGameManagerServiceAsInterface.identifyGamePackage(str) == 1;
             GmsLog.d(TAG, "isGamePackage(), pkgName=" + str + ", ret=" + z);
             return z;
         } catch (RemoteException unused) {
@@ -138,9 +140,9 @@ public class SemGameManager {
             throw new IllegalStateException("gamemanager system service is not available");
         }
         try {
-            String requestWithJson = iGameManagerService.requestWithJson(str, str2);
-            GmsLog.d(TAG, "requestWithJson(), command=" + str + ", jsonParam=" + str2 + ", ret=" + requestWithJson);
-            return requestWithJson;
+            String strRequestWithJson = iGameManagerService.requestWithJson(str, str2);
+            GmsLog.d(TAG, "requestWithJson(), command=" + str + ", jsonParam=" + str2 + ", ret=" + strRequestWithJson);
+            return strRequestWithJson;
         } catch (RemoteException unused) {
             throw new IllegalStateException("failed to call gamemanager system service");
         }
@@ -160,38 +162,38 @@ public class SemGameManager {
         }
     }
 
-    public int getTargetFrameRate() {
+    public int getTargetFrameRate() throws IllegalStateException {
         IBinder service = ServiceManager.getService("SurfaceFlinger");
         if (service == null) {
             throw new IllegalStateException("failed to get SurfaceFlinger");
         }
-        boolean z = false;
+        boolean zTransact = false;
         int i = -1;
         try {
             String foregroundApp = getForegroundApp();
-            Parcel obtain = Parcel.obtain();
-            if (obtain != null) {
-                obtain.writeInterfaceToken("android.ui.ISurfaceComposer");
-                obtain.writeString16(foregroundApp);
-                Parcel obtain2 = Parcel.obtain();
-                if (obtain2 != null) {
-                    z = service.transact(1124, obtain, obtain2, 0);
-                    if (z) {
-                        i = obtain2.readInt();
+            Parcel parcelObtain = Parcel.obtain();
+            if (parcelObtain != null) {
+                parcelObtain.writeInterfaceToken("android.ui.ISurfaceComposer");
+                parcelObtain.writeString16(foregroundApp);
+                Parcel parcelObtain2 = Parcel.obtain();
+                if (parcelObtain2 != null) {
+                    zTransact = service.transact(1124, parcelObtain, parcelObtain2, 0);
+                    if (zTransact) {
+                        i = parcelObtain2.readInt();
                         GmsLog.d(TAG, "getTargetFrameRate(), transactGetDFS: " + i);
                     } else {
                         GmsLog.e(TAG, "getTargetFrameRate(), transactRet: false");
                     }
-                    obtain2.recycle();
+                    parcelObtain2.recycle();
                 }
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         } catch (RemoteException unused) {
             GmsLog.e(TAG, "getTargetFrameRate(), RemoteException!");
         } catch (SecurityException unused2) {
             GmsLog.e(TAG, "getTargetFrameRate(), SecurityException: Need system privilege");
         }
-        if (!z) {
+        if (!zTransact) {
             throw new IllegalStateException("failed to transact SurfaceFlinger");
         }
         GmsLog.d(TAG, "getTargetFrameRate(), ret=" + i);
@@ -258,6 +260,36 @@ public class SemGameManager {
     public boolean isDynamicSurfaceScalingSupported() {
         GmsLog.d(TAG, "isDynamicSurfaceScalingSupported(), ret=true");
         return true;
+    }
+
+    public void registerGameEventListener(PendingIntent pendingIntent, List<Integer> list, boolean z, List<String> list2) throws IllegalStateException, SecurityException {
+        if (this.mService == null) {
+            throw new IllegalStateException("gamemanager system service is not available");
+        }
+        if (pendingIntent == null || list == null) {
+            throw new IllegalArgumentException("pendingIntent or targetEvents is null");
+        }
+        GmsLog.d(TAG, "registerGameEventListener(), pendingIntentCreator=" + pendingIntent.getCreatorPackage() + " /" + pendingIntent.getCreatorUserHandle().semGetIdentifier() + ", targetEvents=" + list + ", targetAllUsersEnabled=" + z + ", targetPackageNames=" + list2);
+        try {
+            this.mService.registerGameEventListener(pendingIntent, list.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray(), z, list2);
+        } catch (RemoteException unused) {
+            throw new IllegalStateException("failed to call gamemanager system service");
+        }
+    }
+
+    public void unregisterGameEventListener(PendingIntent pendingIntent) throws IllegalStateException {
+        if (this.mService == null) {
+            throw new IllegalStateException("gamemanager system service is not available");
+        }
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("pendingIntent is null");
+        }
+        GmsLog.d(TAG, "unregisterGameEventListener(), pendingIntentCreator=" + pendingIntent.getCreatorPackage() + " /" + pendingIntent.getCreatorUserHandle().semGetIdentifier());
+        try {
+            this.mService.unregisterGameEventListener(pendingIntent);
+        } catch (RemoteException unused) {
+            throw new IllegalStateException("failed to call gamemanager system service");
+        }
     }
 
     public static IBinder getGMSBinder() {

@@ -155,9 +155,8 @@ public class OperatorWrapper extends OpPriorityComputable implements Operator {
         return new OperatorMap((Map) map.entrySet().stream().collect(Collectors.toMap(new OperatorWrapper$$ExternalSyntheticLambda3(), new Function() { // from class: com.samsung.android.sume.core.functional.OperatorWrapper$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Operator of;
-                of = OperatorWrapper.of((Enum) r1.getKey(), (Operator) ((Map.Entry) obj).getValue());
-                return of;
+                Map.Entry entry = (Map.Entry) obj;
+                return OperatorWrapper.of((Enum) entry.getKey(), (Operator) entry.getValue());
             }
         })));
     }

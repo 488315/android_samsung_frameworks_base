@@ -1,31 +1,130 @@
 package com.google.android.setupdesign.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.android.keyguard.KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.internal.TemplateLayout;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
+import com.google.android.setupcompat.util.Logger;
+import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.view.RichTextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TextViewPartnerStyler {
     private TextViewPartnerStyler() {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:62:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x010b A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x00f2  */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x00fc  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x0108  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x010b A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void applyPartnerCustomizationStyle(android.widget.TextView r8, com.google.android.setupdesign.util.TextViewPartnerStyler.TextPartnerConfigs r9) {
-        /*
-            Method dump skipped, instructions count: 331
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupdesign.util.TextViewPartnerStyler.applyPartnerCustomizationStyle(android.widget.TextView, com.google.android.setupdesign.util.TextViewPartnerStyler$TextPartnerConfigs):void");
+    public static void applyPartnerCustomizationStyle(TextView textView, TextPartnerConfigs textPartnerConfigs) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        String string;
+        boolean z;
+        PartnerConfig partnerConfig;
+        PartnerConfig partnerConfig2;
+        Typeface typefaceCreate;
+        PartnerConfig partnerConfig3;
+        boolean zShouldApplyDynamicColor;
+        int color;
+        View viewFindViewById;
+        int color2;
+        Context context = textView.getContext();
+        PartnerConfig partnerConfig4 = textPartnerConfigs.textColorConfig;
+        if (partnerConfig4 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig4) && (color2 = PartnerConfigHelper.get(context).getColor(context, partnerConfig4)) != 0) {
+            textView.setTextColor(color2);
+        }
+        Typeface typefaceCreate2 = null;
+        PartnerConfig partnerConfig5 = textPartnerConfigs.textLinkedColorConfig;
+        if (partnerConfig5 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig5)) {
+            Context context2 = textView.getContext();
+            try {
+                Logger logger = PartnerCustomizationLayout.LOG;
+                Activity activityLookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(context2);
+                TemplateLayout templateLayout = (activityLookupActivityFromContext == null || (viewFindViewById = activityLookupActivityFromContext.findViewById(R.id.suc_layout_status)) == null) ? null : (TemplateLayout) viewFindViewById.getParent();
+                zShouldApplyDynamicColor = templateLayout instanceof GlifLayout ? ((GlifLayout) templateLayout).shouldApplyDynamicColor() : PartnerConfigHelper.isSetupWizardFullDynamicColorEnabled(activityLookupActivityFromContext);
+            } catch (ClassCastException | IllegalArgumentException unused) {
+                zShouldApplyDynamicColor = false;
+            }
+            if (!zShouldApplyDynamicColor && (color = PartnerConfigHelper.get(context).getColor(context, partnerConfig5)) != 0) {
+                textView.setLinkTextColor(color);
+            }
+        }
+        PartnerConfig partnerConfig6 = textPartnerConfigs.textSizeConfig;
+        if (partnerConfig6 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig6)) {
+            float dimension = PartnerConfigHelper.get(context).getDimension(context, partnerConfig6, 0.0f);
+            if (dimension > 0.0f) {
+                textView.setTextSize(0, dimension);
+            }
+        }
+        PartnerConfig partnerConfig7 = textPartnerConfigs.textFontVariationSettingsConfig;
+        if (partnerConfig7 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig7)) {
+            string = PartnerConfigHelper.get(context).getString(context, partnerConfig7);
+            if ((string == null || TextUtils.isEmpty(string)) ? false : true) {
+                z = true;
+            }
+            partnerConfig = textPartnerConfigs.textFontFamilyConfig;
+            if (partnerConfig != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig) && !z) {
+                typefaceCreate2 = Typeface.create(PartnerConfigHelper.get(context).getString(context, partnerConfig), 0);
+            }
+            if (PartnerConfigHelper.isFontWeightEnabled(context) && (partnerConfig3 = textPartnerConfigs.textFontWeightConfig) != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig3) && !z) {
+                int integer = PartnerConfigHelper.get(context).getInteger(context, partnerConfig3, 400);
+                if (typefaceCreate2 == null) {
+                    typefaceCreate2 = textView.getTypeface();
+                }
+                typefaceCreate2 = Typeface.create(typefaceCreate2, integer, false);
+            }
+            if (typefaceCreate2 != null) {
+                textView.setTypeface(typefaceCreate2);
+            }
+            if (string == null && !TextUtils.isEmpty(string)) {
+                try {
+                    textView.setFontVariationSettings(string);
+                } catch (Exception e) {
+                    KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed to set font variation settings: "), "TextViewPartnerStyler");
+                }
+            }
+            if ((textView instanceof RichTextView) && (partnerConfig2 = textPartnerConfigs.textLinkFontFamilyConfig) != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig2) && (typefaceCreate = Typeface.create(PartnerConfigHelper.get(context).getString(context, partnerConfig2), 0)) != null) {
+                RichTextView.setSpanTypeface(typefaceCreate);
+            }
+            applyPartnerCustomizationVerticalMargins(textView, textPartnerConfigs);
+            textView.setGravity(textPartnerConfigs.textGravity);
+        }
+        string = null;
+        z = false;
+        partnerConfig = textPartnerConfigs.textFontFamilyConfig;
+        if (partnerConfig != null) {
+            typefaceCreate2 = Typeface.create(PartnerConfigHelper.get(context).getString(context, partnerConfig), 0);
+        }
+        if (PartnerConfigHelper.isFontWeightEnabled(context)) {
+            int integer2 = PartnerConfigHelper.get(context).getInteger(context, partnerConfig3, 400);
+            if (typefaceCreate2 == null) {
+            }
+            typefaceCreate2 = Typeface.create(typefaceCreate2, integer2, false);
+        }
+        if (typefaceCreate2 != null) {
+        }
+        if (string == null && !TextUtils.isEmpty(string)) {
+        }
+        if (textView instanceof RichTextView) {
+            RichTextView.setSpanTypeface(typefaceCreate);
+        }
+        applyPartnerCustomizationVerticalMargins(textView, textPartnerConfigs);
+        textView.setGravity(textPartnerConfigs.textGravity);
     }
 
     public static void applyPartnerCustomizationVerticalMargins(TextView textView, TextPartnerConfigs textPartnerConfigs) {
@@ -43,7 +142,6 @@ public final class TextViewPartnerStyler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextPartnerConfigs {
         public final PartnerConfig textColorConfig;
         public final PartnerConfig textFontFamilyConfig;

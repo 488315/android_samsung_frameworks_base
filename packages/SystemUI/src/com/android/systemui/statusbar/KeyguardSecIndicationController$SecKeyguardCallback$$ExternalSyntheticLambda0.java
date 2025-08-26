@@ -1,10 +1,10 @@
 package com.android.systemui.statusbar;
 
+import android.content.res.Resources;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.KeyguardSecIndicationController;
 import io.reactivex.functions.Action;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KeyguardSecIndicationController$SecKeyguardCallback$$ExternalSyntheticLambda0 implements Action {
     public final /* synthetic */ int $r8$classId;
@@ -16,10 +16,10 @@ public final /* synthetic */ class KeyguardSecIndicationController$SecKeyguardCa
     }
 
     @Override // io.reactivex.functions.Action
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
-                KeyguardSecIndicationController.m2944$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController.this);
+                KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController.this);
                 break;
             case 1:
                 KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
@@ -40,7 +40,7 @@ public final /* synthetic */ class KeyguardSecIndicationController$SecKeyguardCa
                     keyguardSecIndicationController2.addIndicationTimeout(IndicationEventType.BIOMETRICS_HELP, string, keyguardSecIndicationController2.mErrorColor, false);
                     break;
                 } else {
-                    KeyguardSecIndicationController.m2944$$Nest$mupdateDefaultIndications(keyguardSecIndicationController2);
+                    KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController2);
                     break;
                 }
         }

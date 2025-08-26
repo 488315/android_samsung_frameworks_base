@@ -9,6 +9,7 @@ import androidx.compose.runtime.EffectsKt;
 import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.saveable.SaveableStateRegistry;
+import androidx.compose.runtime.saveable.SaveableStateRegistryImpl;
 import androidx.compose.runtime.snapshots.SnapshotMutableState;
 import java.util.Arrays;
 import kotlin.Unit;
@@ -18,7 +19,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.CharsKt__CharJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RememberSaveableKt {
     public static final String generateCannotBeSavedErrorMessage(Object obj) {
@@ -28,7 +28,7 @@ public abstract class RememberSaveableKt {
     public static final Object rememberSaveable(Object[] objArr, SaverKt$Saver$1 saverKt$Saver$1, String str, Function0 function0, Composer composer, int i, int i2) {
         Object[] objArr2;
         final Object obj;
-        Object consumeRestored;
+        Object objConsumeRestored;
         if ((i2 & 2) != 0) {
             saverKt$Saver$1 = SaverKt.AutoSaver;
         }
@@ -47,31 +47,31 @@ public abstract class RememberSaveableKt {
         final String str2 = str;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         final SaveableStateRegistry saveableStateRegistry = (SaveableStateRegistry) composerImpl.consume(SaveableStateRegistryKt.LocalSaveableStateRegistry);
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            Object mo779invoke = (saveableStateRegistry == null || (consumeRestored = saveableStateRegistry.consumeRestored(str2)) == null) ? null : saverKt$Saver$12.$restore.mo779invoke(consumeRestored);
-            if (mo779invoke == null) {
-                mo779invoke = function0.invoke();
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            Object objMo781invoke = (saveableStateRegistry == null || (objConsumeRestored = saveableStateRegistry.consumeRestored(str2)) == null) ? null : saverKt$Saver$12.$restore.mo781invoke(objConsumeRestored);
+            if (objMo781invoke == null) {
+                objMo781invoke = function0.invoke();
             }
             objArr2 = objArr;
-            SaveableHolder saveableHolder = new SaveableHolder(saverKt$Saver$12, saveableStateRegistry, str2, mo779invoke, objArr2);
+            SaveableHolder saveableHolder = new SaveableHolder(saverKt$Saver$12, saveableStateRegistry, str2, objMo781invoke, objArr2);
             composerImpl.updateRememberedValue(saveableHolder);
-            rememberedValue = saveableHolder;
+            objRememberedValue = saveableHolder;
         } else {
             objArr2 = objArr;
         }
-        final SaveableHolder saveableHolder2 = (SaveableHolder) rememberedValue;
-        Object obj2 = Arrays.equals(objArr2, saveableHolder2.inputs) ? saveableHolder2.value : null;
-        if (obj2 == null) {
-            obj2 = function0.invoke();
+        final SaveableHolder saveableHolder2 = (SaveableHolder) objRememberedValue;
+        Object objInvoke = Arrays.equals(objArr2, saveableHolder2.inputs) ? saveableHolder2.value : null;
+        if (objInvoke == null) {
+            objInvoke = function0.invoke();
         }
-        boolean changedInstance = composerImpl.changedInstance(saveableHolder2) | composerImpl.changedInstance(saverKt$Saver$12) | composerImpl.changedInstance(saveableStateRegistry) | composerImpl.changed(str2) | composerImpl.changedInstance(obj2) | composerImpl.changedInstance(objArr2);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
+        boolean zChangedInstance = composerImpl.changedInstance(saveableHolder2) | composerImpl.changedInstance(saverKt$Saver$12) | composerImpl.changedInstance(saveableStateRegistry) | composerImpl.changed(str2) | composerImpl.changedInstance(objInvoke) | composerImpl.changedInstance(objArr2);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
             final Object[] objArr3 = objArr2;
-            obj = obj2;
+            obj = objInvoke;
             Function0 function02 = new Function0() { // from class: androidx.compose.runtime.saveable.RememberSaveableKt$rememberSaveable$1$1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
@@ -85,7 +85,7 @@ public abstract class RememberSaveableKt {
                     Saver<Object, ? extends Object> saver = saverKt$Saver$12;
                     SaveableStateRegistry saveableStateRegistry2 = saveableStateRegistry;
                     String str3 = str2;
-                    Object obj3 = obj;
+                    Object obj2 = obj;
                     Object[] objArr4 = objArr3;
                     boolean z2 = true;
                     if (saveableHolder3.registry != saveableStateRegistry2) {
@@ -100,11 +100,11 @@ public abstract class RememberSaveableKt {
                         saveableHolder3.key = str3;
                     }
                     saveableHolder3.saver = saver;
-                    saveableHolder3.value = obj3;
+                    saveableHolder3.value = obj2;
                     saveableHolder3.inputs = objArr4;
                     SaveableStateRegistry.Entry entry = saveableHolder3.entry;
                     if (entry != null && z2) {
-                        ((SaveableStateRegistryImpl$registerProvider$3) entry).unregister();
+                        ((SaveableStateRegistryImpl.AnonymousClass3) entry).unregister();
                         saveableHolder3.entry = null;
                         saveableHolder3.register$1();
                     }
@@ -112,11 +112,11 @@ public abstract class RememberSaveableKt {
                 }
             };
             composerImpl.updateRememberedValue(function02);
-            rememberedValue2 = function02;
+            objRememberedValue2 = function02;
         } else {
-            obj = obj2;
+            obj = objInvoke;
         }
-        EffectsKt.SideEffect((Function0) rememberedValue2, composerImpl);
+        EffectsKt.SideEffect((Function0) objRememberedValue2, composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
@@ -127,7 +127,7 @@ public abstract class RememberSaveableKt {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.runtime.saveable.rememberSaveable (RememberSaveable.kt:122)");
         }
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
         Function2 function2 = new Function2() { // from class: androidx.compose.runtime.saveable.RememberSaveableKt$mutableStateSaver$1$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
@@ -141,9 +141,9 @@ public abstract class RememberSaveableKt {
                 if (!(mutableState instanceof SnapshotMutableState)) {
                     throw new IllegalArgumentException("If you use a custom MutableState implementation you have to write a custom Saver and pass it as a saver param to rememberSaveable()");
                 }
-                Object save = saverKt$Saver$1.save(saverScope, mutableState.getValue());
-                if (save != null) {
-                    return SnapshotStateKt.mutableStateOf(save, ((SnapshotMutableState) mutableState).getPolicy());
+                Object objSave = saverKt$Saver$1.save(saverScope, mutableState.getValue());
+                if (objSave != null) {
+                    return SnapshotStateKt.mutableStateOf(objSave, ((SnapshotMutableState) mutableState).getPolicy());
                 }
                 return null;
             }
@@ -156,8 +156,8 @@ public abstract class RememberSaveableKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Object obj2;
+            public final Object mo781invoke(Object obj) {
+                Object objRestore;
                 MutableState mutableState = (MutableState) obj;
                 if (!(mutableState instanceof SnapshotMutableState)) {
                     throw new IllegalArgumentException("Failed requirement.");
@@ -166,15 +166,15 @@ public abstract class RememberSaveableKt {
                     Saver<Object, Object> saver = saverKt$Saver$1;
                     Object value = mutableState.getValue();
                     value.getClass();
-                    obj2 = saver.restore(value);
+                    objRestore = saver.restore(value);
                 } else {
-                    obj2 = null;
+                    objRestore = null;
                 }
-                return SnapshotStateKt.mutableStateOf(obj2, ((SnapshotMutableState) mutableState).getPolicy());
+                return SnapshotStateKt.mutableStateOf(objRestore, ((SnapshotMutableState) mutableState).getPolicy());
             }
         };
         SaverKt$Saver$1 saverKt$Saver$12 = SaverKt.AutoSaver;
-        MutableState mutableState = (MutableState) rememberSaveable(copyOf, new SaverKt$Saver$1(function2, function1), null, function0, composer, 3072, 0);
+        MutableState mutableState = (MutableState) rememberSaveable(objArrCopyOf, new SaverKt$Saver$1(function2, function1), null, function0, composer, 3072, 0);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }

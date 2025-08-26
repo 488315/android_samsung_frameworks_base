@@ -4,6 +4,8 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelKt;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger;
 import com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.inputdevice.tutorial.domain.interactor.ConnectionState;
@@ -14,6 +16,8 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.touchpad.tutorial.domain.interactor.TouchpadGesturesInteractor;
+import com.android.systemui.util.SystemUIAnalytics;
+import java.util.Collections;
 import java.util.Optional;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.Pair;
@@ -27,17 +31,19 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.time.Duration;
 import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
+import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyboardTouchpadTutorialViewModel extends ViewModel implements DefaultLifecycleObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -54,7 +60,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
     public final ScreenSequence screenSequence;
     public final ArrayDeque screensBackStack;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -84,18 +89,18 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel2 = KeyboardTouchpadTutorialViewModel.this;
+                        KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel2 = keyboardTouchpadTutorialViewModel;
                         InputDeviceTutorialLogger inputDeviceTutorialLogger = keyboardTouchpadTutorialViewModel2.logger;
                         ConnectionState connectionState = keyboardTouchpadTutorialViewModel2.connectionState;
                         inputDeviceTutorialLogger.getClass();
                         InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(0);
                         LogLevel logLevel = LogLevel.INFO;
                         LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
-                        LogMessage obtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.bool1 = connectionState.touchpadConnected;
                         logMessageImpl.bool2 = connectionState.keyboardConnected;
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                         keyboardTouchpadTutorialViewModel2.connectionState = (ConnectionState) obj2;
                         return Unit.INSTANCE;
                     }
@@ -114,12 +119,10 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$2$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function3 {
             /* synthetic */ Object L$0;
@@ -180,7 +183,7 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
                         Screen screen2 = (Screen) pair.component2();
                         if (screen2 != null) {
                             int i2 = KeyboardTouchpadTutorialViewModel.$r8$clinit;
-                            KeyboardTouchpadTutorialViewModel.this.setupDeviceState(screen, screen2);
+                            keyboardTouchpadTutorialViewModel.setupDeviceState(screen, screen2);
                         }
                         return Unit.INSTANCE;
                     }
@@ -199,7 +202,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         int label;
@@ -228,7 +230,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
                 final StateFlowImpl stateFlowImpl = keyboardTouchpadTutorialViewModel._screen;
                 Flow flow = new Flow() { // from class: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -258,82 +259,57 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
                             this.this$0 = keyboardTouchpadTutorialViewModel;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                            /*
-                                r5 = this;
-                                boolean r0 = r7 instanceof com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1
-                                if (r0 == 0) goto L13
-                                r0 = r7
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1$2$1 r0 = (com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1) r0
-                                int r1 = r0.label
-                                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r3 = r1 & r2
-                                if (r3 == 0) goto L13
-                                int r1 = r1 - r2
-                                r0.label = r1
-                                goto L18
-                            L13:
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1$2$1 r0 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1$2$1
-                                r0.<init>(r7)
-                            L18:
-                                java.lang.Object r7 = r0.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r0.label
-                                r3 = 1
-                                if (r2 == 0) goto L2f
-                                if (r2 != r3) goto L27
-                                kotlin.ResultKt.throwOnFailure(r7)
-                                goto L54
-                            L27:
-                                java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                                java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                                r5.<init>(r6)
-                                throw r5
-                            L2f:
-                                kotlin.ResultKt.throwOnFailure(r7)
-                                r7 = r6
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen r7 = (com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen) r7
-                                int r2 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.$r8$clinit
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel r2 = r5.this$0
-                                r2.getClass()
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.RequiredHardware r7 = r7.getRequiredHardware()
-                                com.android.systemui.inputdevice.tutorial.ui.viewmodel.RequiredHardware r4 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.RequiredHardware.TOUCHPAD
-                                if (r7 != r4) goto L54
-                                boolean r7 = r2.hasTouchpadTutorialScreens
-                                if (r7 == 0) goto L49
-                                goto L54
-                            L49:
-                                r0.label = r3
-                                kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                                java.lang.Object r5 = r5.emit(r6, r0)
-                                if (r5 != r1) goto L54
-                                return r1
-                            L54:
-                                kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                                return r5
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                int i3 = KeyboardTouchpadTutorialViewModel.$r8$clinit;
+                                KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel = this.this$0;
+                                keyboardTouchpadTutorialViewModel.getClass();
+                                if (((Screen) obj).getRequiredHardware() == RequiredHardware.TOUCHPAD && !keyboardTouchpadTutorialViewModel.hasTouchpadTutorialScreens) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, keyboardTouchpadTutorialViewModel), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = stateFlowImpl.collect(new AnonymousClass2(flowCollector, keyboardTouchpadTutorialViewModel), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };
                 final KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel2 = KeyboardTouchpadTutorialViewModel.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.3.2
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel3 = KeyboardTouchpadTutorialViewModel.this;
+                        KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel3 = keyboardTouchpadTutorialViewModel2;
                         ConstantStringsLoggerImpl constantStringsLoggerImpl = keyboardTouchpadTutorialViewModel3.logger.$$delegate_0;
                         constantStringsLoggerImpl.getClass();
                         LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.ERROR, "Touchpad is connected but touchpad module is missing, something went wrong");
@@ -355,11 +331,9 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AllSupportedScreens implements ScreenSequence {
         public static final AllSupportedScreens INSTANCE = new AllSupportedScreens();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -400,7 +374,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -410,14 +383,12 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory extends AbstractSavedStateViewModelFactory {
         public final Optional gesturesInteractor;
         public final boolean hasTouchpadTutorialScreens;
         public final KeyboardTouchpadConnectionInteractor keyboardTouchpadConnected;
         public final InputDeviceTutorialLogger logger;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface ViewModelFactoryAssistedProvider {
             Factory create(boolean z);
         }
@@ -435,12 +406,10 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ScreenSequence {
         Screen nextScreen(Screen screen);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SingleScreenOnly implements ScreenSequence {
         public static final SingleScreenOnly INSTANCE = new SingleScreenOnly();
 
@@ -453,7 +422,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -471,6 +439,24 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
+    /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1, reason: invalid class name and case insensitive filesystem */
+    final class C08751 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08751(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return KeyboardTouchpadTutorialViewModel.this.onAutoProceed(this);
+        }
+    }
+
     static {
         new Companion(null);
         Duration.Companion companion = Duration.Companion;
@@ -478,22 +464,6 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0032, code lost:
-    
-        if (r5.equals("touchpad_back") == false) goto L25;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0054, code lost:
-    
-        r5 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen.BACK_GESTURE;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0047, code lost:
-    
-        if (r5.equals(com.android.systemui.util.SystemUIAnalytics.QPNE_VID_COVER_ALL) == false) goto L25;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0051, code lost:
-    
-        if (r5.equals("touchpad") == false) goto L25;
-     */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -501,128 +471,143 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0057  */
     /* JADX WARN: Type inference failed for: r7v2, types: [com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public KeyboardTouchpadTutorialViewModel(java.util.Optional<com.android.systemui.touchpad.tutorial.domain.interactor.TouchpadGesturesInteractor> r4, com.android.systemui.inputdevice.tutorial.domain.interactor.KeyboardTouchpadConnectionInteractor r5, boolean r6, com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger r7, androidx.lifecycle.SavedStateHandle r8) {
-        /*
-            r3 = this;
-            r3.<init>()
-            r3.gesturesInteractor = r4
-            r3.keyboardTouchpadConnectionInteractor = r5
-            r3.hasTouchpadTutorialScreens = r6
-            r3.logger = r7
-            java.lang.String r4 = "tutorial_scope"
-            java.lang.Object r5 = r8.get(r4)
-            java.lang.String r5 = (java.lang.String) r5
-            java.lang.String r6 = "touchpad_back"
-            java.lang.String r0 = "touchpad_home"
-            if (r5 == 0) goto L57
-            int r1 = r5.hashCode()
-            switch(r1) {
-                case -819522316: goto L4a;
-                case 96673: goto L41;
-                case 503739367: goto L35;
-                case 1475125586: goto L2e;
-                case 1475318090: goto L24;
-                default: goto L23;
+    public KeyboardTouchpadTutorialViewModel(Optional<TouchpadGesturesInteractor> optional, KeyboardTouchpadConnectionInteractor keyboardTouchpadConnectionInteractor, boolean z, InputDeviceTutorialLogger inputDeviceTutorialLogger, SavedStateHandle savedStateHandle) {
+        Screen screen;
+        this.gesturesInteractor = optional;
+        this.keyboardTouchpadConnectionInteractor = keyboardTouchpadConnectionInteractor;
+        this.hasTouchpadTutorialScreens = z;
+        this.logger = inputDeviceTutorialLogger;
+        String str = (String) savedStateHandle.get("tutorial_scope");
+        if (str != null) {
+            switch (str.hashCode()) {
+                case -819522316:
+                    if (!str.equals("touchpad")) {
+                        ConstantStringsLoggerImpl constantStringsLoggerImpl = inputDeviceTutorialLogger.$$delegate_0;
+                        constantStringsLoggerImpl.getClass();
+                        LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.WARNING, "Intent didn't specify tutorial scope, starting with default");
+                        screen = Screen.BACK_GESTURE;
+                        break;
+                    } else {
+                        screen = Screen.BACK_GESTURE;
+                        break;
+                    }
+                case 96673:
+                    if (!str.equals(SystemUIAnalytics.QPNE_VID_COVER_ALL)) {
+                    }
+                    break;
+                case 503739367:
+                    if (str.equals("keyboard")) {
+                        screen = Screen.ACTION_KEY;
+                        break;
+                    }
+                    break;
+                case 1475125586:
+                    if (!str.equals("touchpad_back")) {
+                    }
+                    break;
+                case 1475318090:
+                    if (str.equals("touchpad_home")) {
+                        screen = Screen.HOME_GESTURE;
+                        break;
+                    }
+                    break;
             }
-        L23:
-            goto L57
-        L24:
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L2b
-            goto L57
-        L2b:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen r5 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen.HOME_GESTURE
-            goto L69
-        L2e:
-            boolean r5 = r5.equals(r6)
-            if (r5 != 0) goto L54
-            goto L57
-        L35:
-            java.lang.String r1 = "keyboard"
-            boolean r5 = r5.equals(r1)
-            if (r5 != 0) goto L3e
-            goto L57
-        L3e:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen r5 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen.ACTION_KEY
-            goto L69
-        L41:
-            java.lang.String r1 = "all"
-            boolean r5 = r5.equals(r1)
-            if (r5 != 0) goto L54
-            goto L57
-        L4a:
-            java.lang.String r1 = "touchpad"
-            boolean r5 = r5.equals(r1)
-            if (r5 != 0) goto L54
-            goto L57
-        L54:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen r5 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen.BACK_GESTURE
-            goto L69
-        L57:
-            com.android.systemui.log.ConstantStringsLoggerImpl r5 = r7.$$delegate_0
-            r5.getClass()
-            com.android.systemui.log.core.LogLevel r7 = com.android.systemui.log.core.LogLevel.WARNING
-            java.lang.String r1 = r5.tag
-            com.android.systemui.log.LogBuffer r5 = r5.buffer
-            java.lang.String r2 = "Intent didn't specify tutorial scope, starting with default"
-            com.android.systemui.log.LogBuffer.log$default(r5, r1, r7, r2)
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen r5 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.Screen.BACK_GESTURE
-        L69:
-            kotlinx.coroutines.flow.StateFlowImpl r5 = kotlinx.coroutines.flow.StateFlowKt.MutableStateFlow(r5)
-            r3._screen = r5
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1 r7 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1
-            r7.<init>()
-            r3.screen = r7
-            java.lang.Boolean r7 = java.lang.Boolean.FALSE
-            kotlinx.coroutines.flow.StateFlowImpl r7 = kotlinx.coroutines.flow.StateFlowKt.MutableStateFlow(r7)
-            r3._closeActivity = r7
-            r3.closeActivity = r7
-            java.lang.Object r4 = r8.get(r4)
-            java.lang.String r4 = (java.lang.String) r4
-            boolean r7 = kotlin.jvm.internal.Intrinsics.areEqual(r4, r0)
-            if (r7 != 0) goto L96
-            boolean r4 = kotlin.jvm.internal.Intrinsics.areEqual(r4, r6)
-            if (r4 == 0) goto L93
-            goto L96
-        L93:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$AllSupportedScreens r4 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.AllSupportedScreens.INSTANCE
-            goto L98
-        L96:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$SingleScreenOnly r4 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.SingleScreenOnly.INSTANCE
-        L98:
-            r3.screenSequence = r4
-            kotlin.collections.ArrayDeque r4 = new kotlin.collections.ArrayDeque
-            java.lang.Object r5 = r5.getValue()
-            java.util.List r5 = java.util.Collections.singletonList(r5)
-            java.util.Collection r5 = (java.util.Collection) r5
-            r4.<init>(r5)
-            r3.screensBackStack = r4
-            com.android.systemui.inputdevice.tutorial.domain.interactor.ConnectionState r4 = new com.android.systemui.inputdevice.tutorial.domain.interactor.ConnectionState
-            r5 = 0
-            r4.<init>(r5, r5)
-            r3.connectionState = r4
-            androidx.lifecycle.viewmodel.internal.CloseableCoroutineScope r4 = androidx.lifecycle.ViewModelKt.getViewModelScope(r3)
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$1 r5 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$1
-            r6 = 0
-            r5.<init>(r6)
-            r7 = 7
-            com.android.app.tracing.coroutines.CoroutineTracingKt.launchTraced$default(r4, r6, r6, r5, r7)
-            androidx.lifecycle.viewmodel.internal.CloseableCoroutineScope r4 = androidx.lifecycle.ViewModelKt.getViewModelScope(r3)
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$2 r5 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$2
-            r5.<init>(r6)
-            com.android.app.tracing.coroutines.CoroutineTracingKt.launchTraced$default(r4, r6, r6, r5, r7)
-            androidx.lifecycle.viewmodel.internal.CloseableCoroutineScope r4 = androidx.lifecycle.ViewModelKt.getViewModelScope(r3)
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3 r5 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$3
-            r5.<init>(r6)
-            com.android.app.tracing.coroutines.CoroutineTracingKt.launchTraced$default(r4, r6, r6, r5, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.<init>(java.util.Optional, com.android.systemui.inputdevice.tutorial.domain.interactor.KeyboardTouchpadConnectionInteractor, boolean, com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger, androidx.lifecycle.SavedStateHandle):void");
+        }
+        final StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(screen);
+        this._screen = stateFlowImplMutableStateFlow;
+        this.screen = new Flow() { // from class: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1
+
+            /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                public final /* synthetic */ KeyboardTouchpadTutorialViewModel this$0;
+
+                /* renamed from: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$special$$inlined$filter$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    Object L$0;
+                    Object L$1;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector, KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel) {
+                    this.$this_unsafeFlow = flowCollector;
+                    this.this$0 = keyboardTouchpadTutorialViewModel;
+                }
+
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        int i3 = KeyboardTouchpadTutorialViewModel.$r8$clinit;
+                        KeyboardTouchpadTutorialViewModel keyboardTouchpadTutorialViewModel = this.this$0;
+                        keyboardTouchpadTutorialViewModel.getClass();
+                        if (((Screen) obj).getRequiredHardware() != RequiredHardware.TOUCHPAD || keyboardTouchpadTutorialViewModel.hasTouchpadTutorialScreens) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = stateFlowImplMutableStateFlow.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        };
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this._closeActivity = stateFlowImplMutableStateFlow2;
+        this.closeActivity = stateFlowImplMutableStateFlow2;
+        String str2 = (String) savedStateHandle.get("tutorial_scope");
+        this.screenSequence = (Intrinsics.areEqual(str2, "touchpad_home") || Intrinsics.areEqual(str2, "touchpad_back")) ? SingleScreenOnly.INSTANCE : AllSupportedScreens.INSTANCE;
+        this.screensBackStack = new ArrayDeque(Collections.singletonList(stateFlowImplMutableStateFlow.getValue()));
+        this.connectionState = new ConnectionState(false, false);
+        CoroutineTracingKt.launchTraced$default(ViewModelKt.getViewModelScope(this), null, null, new AnonymousClass1(null), 7);
+        CoroutineTracingKt.launchTraced$default(ViewModelKt.getViewModelScope(this), null, null, new AnonymousClass2(null), 7);
+        CoroutineTracingKt.launchTraced$default(ViewModelKt.getViewModelScope(this), null, null, new AnonymousClass3(null), 7);
     }
 
     public final void clearDeviceStateForScreen(Screen screen) {
@@ -634,59 +619,40 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onAutoProceed(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1 r0 = (com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1 r0 = new com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel$onAutoProceed$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel r4 = (com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L43
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r5)
-            r0.L$0 = r4
-            r0.label = r3
-            long r2 = com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.AUTO_PROCEED_DELAY
-            java.lang.Object r5 = kotlinx.coroutines.DelayKt.m3449delayVtjQ1oo(r2, r0)
-            if (r5 != r1) goto L43
-            return r1
-        L43:
-            r4.progressToNextScreen()
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.ui.viewmodel.KeyboardTouchpadTutorialViewModel.onAutoProceed(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onAutoProceed(Continuation continuation) {
+        C08751 c08751;
+        if (continuation instanceof C08751) {
+            c08751 = (C08751) continuation;
+            int i = c08751.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08751.label = i - Integer.MIN_VALUE;
+            } else {
+                c08751 = new C08751(continuation);
+            }
+        }
+        Object obj = c08751.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08751.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            c08751.L$0 = this;
+            c08751.label = 1;
+            if (DelayKt.m3469delayVtjQ1oo(AUTO_PROCEED_DELAY, c08751) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (KeyboardTouchpadTutorialViewModel) c08751.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        this.progressToNextScreen();
+        return Unit.INSTANCE;
     }
 
     public final void onBack() {
@@ -702,9 +668,9 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(6);
         LogLevel logLevel = LogLevel.INFO;
         LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = screen.toString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = screen.toString();
+        logBuffer.commit(logMessageObtain);
         this._screen.setValue(arrayDeque.last());
     }
 
@@ -729,13 +695,13 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         StateFlowImpl stateFlowImpl = this._screen;
         Screen screen = (Screen) stateFlowImpl.getValue();
         ScreenSequence screenSequence = this.screenSequence;
-        Screen nextScreen = screenSequence.nextScreen(screen);
+        Screen screenNextScreen = screenSequence.nextScreen(screen);
         while (true) {
             inputDeviceTutorialLogger = this.logger;
-            if (nextScreen == null) {
+            if (screenNextScreen == null) {
                 break;
             }
-            int i = WhenMappings.$EnumSwitchMapping$0[nextScreen.getRequiredHardware().ordinal()];
+            int i = WhenMappings.$EnumSwitchMapping$0[screenNextScreen.getRequiredHardware().ordinal()];
             if (i == 1) {
                 z = this.connectionState.touchpadConnected;
             } else {
@@ -751,12 +717,12 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
             LogLevel logLevel = LogLevel.WARNING;
             InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = nextScreen.toString();
-            logBuffer.commit(obtain);
-            nextScreen = screenSequence.nextScreen(nextScreen);
+            LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = screenNextScreen.toString();
+            logBuffer.commit(logMessageObtain);
+            screenNextScreen = screenSequence.nextScreen(screenNextScreen);
         }
-        if (nextScreen == null) {
+        if (screenNextScreen == null) {
             ConstantStringsLoggerImpl constantStringsLoggerImpl = inputDeviceTutorialLogger.$$delegate_0;
             constantStringsLoggerImpl.getClass();
             LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, "Final screen reached, closing tutorial");
@@ -767,28 +733,28 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
         InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda02 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(8);
         LogLevel logLevel2 = LogLevel.INFO;
         LogBuffer logBuffer2 = inputDeviceTutorialLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("InputDeviceTutorial", logLevel2, inputDeviceTutorialLogger$$ExternalSyntheticLambda02, null);
-        ((LogMessageImpl) obtain2).str1 = nextScreen.toString();
-        logBuffer2.commit(obtain2);
-        stateFlowImpl.updateState(null, nextScreen);
-        this.screensBackStack.addLast(nextScreen);
+        LogMessage logMessageObtain2 = logBuffer2.obtain("InputDeviceTutorial", logLevel2, inputDeviceTutorialLogger$$ExternalSyntheticLambda02, null);
+        ((LogMessageImpl) logMessageObtain2).str1 = screenNextScreen.toString();
+        logBuffer2.commit(logMessageObtain2);
+        stateFlowImpl.updateState(null, screenNextScreen);
+        this.screensBackStack.addLast(screenNextScreen);
     }
 
     public final void setupDeviceState(Screen screen, Screen screen2) {
-        String str;
+        String string;
         InputDeviceTutorialLogger inputDeviceTutorialLogger = this.logger;
         inputDeviceTutorialLogger.getClass();
         InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(2);
         LogLevel logLevel = LogLevel.INFO;
         LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
-        if (screen == null || (str = screen.toString()) == null) {
-            str = "NO_SCREEN";
+        LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+        if (screen == null || (string = screen.toString()) == null) {
+            string = "NO_SCREEN";
         }
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        logMessageImpl.str1 = str;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.str1 = string;
         logMessageImpl.str2 = screen2.toString();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if ((screen != null ? screen.getRequiredHardware() : null) == screen2.getRequiredHardware()) {
             return;
         }

@@ -68,8 +68,8 @@ public class KnoxKeyStoreHelper {
     public static void checkCertificateTrustful(byte[] bArr, byte[] bArr2) throws KeyStoreException {
         CertificatePolicy certificatePolicy = EnterpriseDeviceManager.getInstance().getCertificatePolicy();
         if (bArr != null) {
-            List<X509Certificate> mergeUserCertAndChain = mergeUserCertAndChain(bArr, bArr2);
-            bArr2 = convertCertificatesToPem((Certificate[]) mergeUserCertAndChain.toArray(new X509Certificate[mergeUserCertAndChain.size()]));
+            List<X509Certificate> listMergeUserCertAndChain = mergeUserCertAndChain(bArr, bArr2);
+            bArr2 = convertCertificatesToPem((Certificate[]) listMergeUserCertAndChain.toArray(new X509Certificate[listMergeUserCertAndChain.size()]));
         } else if (bArr2 == null) {
             bArr2 = null;
         }

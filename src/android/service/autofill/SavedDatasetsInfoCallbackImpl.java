@@ -27,18 +27,18 @@ final class SavedDatasetsInfoCallbackImpl implements SavedDatasetsInfoCallback {
             send(1, null);
             return;
         }
-        int i = -1;
+        int count = -1;
         for (SavedDatasetsInfo savedDatasetsInfo : set) {
             if (this.mType.equals(savedDatasetsInfo.getType())) {
-                i = savedDatasetsInfo.getCount();
+                count = savedDatasetsInfo.getCount();
             }
         }
-        if (i < 0) {
+        if (count < 0) {
             send(1, null);
             return;
         }
         Bundle bundle = new Bundle(1);
-        bundle.putInt("result", i);
+        bundle.putInt("result", count);
         send(0, bundle);
     }
 

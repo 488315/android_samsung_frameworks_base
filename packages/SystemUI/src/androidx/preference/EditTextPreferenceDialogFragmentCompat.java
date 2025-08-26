@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EditTextPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat {
     public EditText mEditText;
@@ -61,10 +60,10 @@ public class EditTextPreferenceDialogFragmentCompat extends PreferenceDialogFrag
     @Override // androidx.preference.PreferenceDialogFragmentCompat
     public final void onDialogClosed(boolean z) {
         if (z) {
-            String obj = this.mEditText.getText().toString();
+            String string = this.mEditText.getText().toString();
             EditTextPreference editTextPreference = (EditTextPreference) getPreference();
-            if (editTextPreference.callChangeListener(obj)) {
-                editTextPreference.setText(obj);
+            if (editTextPreference.callChangeListener(string)) {
+                editTextPreference.setText(string);
             }
         }
     }

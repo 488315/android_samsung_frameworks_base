@@ -118,6 +118,7 @@ public final class SurfaceControl implements Parcelable {
     private final CloseGuard mCloseGuard;
     private Runnable mFreeNativeResources;
     private int mHeight;
+    private boolean mIsInsetsLeash;
     private WeakReference<View> mLocalOwnerView;
     private final Object mLock;
     private String mName;
@@ -299,6 +300,8 @@ public final class SurfaceControl implements Parcelable {
     public static native void nativeMergeTransaction(long j, long j2);
 
     private static native long nativeMirrorSurface(long j);
+
+    private static native long nativeMirrorSurfaceWithStopLayer(long j, long j2);
 
     private static native void nativeNotifyHFRmode(IBinder iBinder, int i);
 
@@ -656,21 +659,21 @@ public final class SurfaceControl implements Parcelable {
         }
 
         OnJankDataListenerRegistration(SurfaceControl surfaceControl, OnJankDataListener onJankDataListener) {
-            Runnable registerNativeAllocation;
+            Runnable runnableRegisterNativeAllocation;
             this.mRemoved = false;
-            long nativeCreateJankDataListenerWrapper = SurfaceControl.nativeCreateJankDataListenerWrapper(surfaceControl.mNativeObject, onJankDataListener);
-            this.mNativeObject = nativeCreateJankDataListenerWrapper;
-            if (nativeCreateJankDataListenerWrapper == 0) {
-                registerNativeAllocation = new Runnable() { // from class: android.view.SurfaceControl$OnJankDataListenerRegistration$$ExternalSyntheticLambda0
+            long jNativeCreateJankDataListenerWrapper = SurfaceControl.nativeCreateJankDataListenerWrapper(surfaceControl.mNativeObject, onJankDataListener);
+            this.mNativeObject = jNativeCreateJankDataListenerWrapper;
+            if (jNativeCreateJankDataListenerWrapper == 0) {
+                runnableRegisterNativeAllocation = new Runnable() { // from class: android.view.SurfaceControl$OnJankDataListenerRegistration$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
                         SurfaceControl.OnJankDataListenerRegistration.lambda$new$1();
                     }
                 };
             } else {
-                registerNativeAllocation = sRegistry.registerNativeAllocation(this, nativeCreateJankDataListenerWrapper);
+                runnableRegisterNativeAllocation = sRegistry.registerNativeAllocation(this, jNativeCreateJankDataListenerWrapper);
             }
-            this.mFreeNativeResources = registerNativeAllocation;
+            this.mFreeNativeResources = runnableRegisterNativeAllocation;
             this.mListener = onJankDataListener;
         }
 
@@ -693,25 +696,25 @@ public final class SurfaceControl implements Parcelable {
     }
 
     public boolean addOnReparentListener(OnReparentListener onReparentListener) {
-        boolean add;
+        boolean zAdd;
         synchronized (this.mLock) {
             if (this.mReparentListeners == null) {
                 this.mReparentListeners = new ArrayList<>(1);
             }
-            add = this.mReparentListeners.add(onReparentListener);
+            zAdd = this.mReparentListeners.add(onReparentListener);
         }
-        return add;
+        return zAdd;
     }
 
     public boolean removeOnReparentListener(OnReparentListener onReparentListener) {
-        boolean remove;
+        boolean zRemove;
         synchronized (this.mLock) {
-            remove = this.mReparentListeners.remove(onReparentListener);
+            zRemove = this.mReparentListeners.remove(onReparentListener);
             if (this.mReparentListeners.isEmpty()) {
                 this.mReparentListeners = null;
             }
         }
-        return remove;
+        return zRemove;
     }
 
     private void assignNativeObject(long j, String str) {
@@ -741,6 +744,9 @@ public final class SurfaceControl implements Parcelable {
         this.mName = surfaceControl.mName;
         this.mWidth = surfaceControl.mWidth;
         this.mHeight = surfaceControl.mHeight;
+        if (CoreRune.FW_TEMP_TOO_MANY_INSETS_LEASH_BUG_FIX) {
+            this.mIsInsetsLeash = surfaceControl.mIsInsetsLeash;
+        }
         this.mLocalOwnerView = surfaceControl.mLocalOwnerView;
         assignNativeObject(nativeCopyFromSurfaceControl(surfaceControl.mNativeObject), str);
     }
@@ -906,6 +912,7 @@ public final class SurfaceControl implements Parcelable {
 
     private SurfaceControl(SurfaceSession surfaceSession, String str, int i, int i2, int i3, int i4, SurfaceControl surfaceControl, SparseIntArray sparseIntArray, WeakReference<View> weakReference, String str2) throws Surface.OutOfResourcesException, IllegalArgumentException {
         this.mCloseGuard = CloseGuard.get();
+        this.mIsInsetsLeash = false;
         this.mChoreographerLock = new Object();
         this.mLock = new Object();
         this.mReleaseStack = null;
@@ -916,28 +923,28 @@ public final class SurfaceControl implements Parcelable {
         this.mWidth = i;
         this.mHeight = i2;
         this.mLocalOwnerView = weakReference;
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         if (sparseIntArray != null) {
             try {
                 if (sparseIntArray.size() > 0) {
-                    obtain.writeInt(sparseIntArray.size());
+                    parcelObtain.writeInt(sparseIntArray.size());
                     for (int i5 = 0; i5 < sparseIntArray.size(); i5++) {
-                        obtain.writeInt(sparseIntArray.keyAt(i5));
-                        obtain.writeByteArray(ByteBuffer.allocate(4).order(ByteOrder.nativeOrder()).putInt(sparseIntArray.valueAt(i5)).array());
+                        parcelObtain.writeInt(sparseIntArray.keyAt(i5));
+                        parcelObtain.writeByteArray(ByteBuffer.allocate(4).order(ByteOrder.nativeOrder()).putInt(sparseIntArray.valueAt(i5)).array());
                     }
-                    obtain.setDataPosition(0);
+                    parcelObtain.setDataPosition(0);
                 }
             } catch (Throwable th) {
-                obtain.recycle();
+                parcelObtain.recycle();
                 throw th;
             }
         }
-        long nativeCreate = nativeCreate(surfaceSession, str, i, i2, i3, i4, surfaceControl != null ? surfaceControl.mNativeObject : 0L, obtain);
-        obtain.recycle();
-        if (nativeCreate == 0) {
+        long jNativeCreate = nativeCreate(surfaceSession, str, i, i2, i3, i4, surfaceControl != null ? surfaceControl.mNativeObject : 0L, parcelObtain);
+        parcelObtain.recycle();
+        if (jNativeCreate == 0) {
             throw new Surface.OutOfResourcesException("Couldn't allocate SurfaceControl native object");
         }
-        assignNativeObject(nativeCreate, str2);
+        assignNativeObject(jNativeCreate, str2);
         if (CoreRune.FW_SURFACE_DEBUG_CREATION) {
             SurfaceControlRegistry.getProcessInstance().checkCallStackDebugging("SurfaceControl is created", null, this, null, true);
         }
@@ -945,6 +952,7 @@ public final class SurfaceControl implements Parcelable {
 
     public SurfaceControl(SurfaceControl surfaceControl, String str) {
         this.mCloseGuard = CloseGuard.get();
+        this.mIsInsetsLeash = false;
         this.mChoreographerLock = new Object();
         this.mLock = new Object();
         this.mReleaseStack = null;
@@ -953,6 +961,7 @@ public final class SurfaceControl implements Parcelable {
 
     private SurfaceControl(Parcel parcel) {
         this.mCloseGuard = CloseGuard.get();
+        this.mIsInsetsLeash = false;
         this.mChoreographerLock = new Object();
         this.mLock = new Object();
         this.mReleaseStack = null;
@@ -961,9 +970,18 @@ public final class SurfaceControl implements Parcelable {
 
     public SurfaceControl() {
         this.mCloseGuard = CloseGuard.get();
+        this.mIsInsetsLeash = false;
         this.mChoreographerLock = new Object();
         this.mLock = new Object();
         this.mReleaseStack = null;
+    }
+
+    public void setIsInsetsLeash() {
+        this.mIsInsetsLeash = true;
+    }
+
+    public boolean isInsetsLeash() {
+        return this.mIsInsetsLeash;
     }
 
     public void readFromParcel(Parcel parcel) {
@@ -973,6 +991,9 @@ public final class SurfaceControl implements Parcelable {
         this.mName = parcel.readString8();
         this.mWidth = parcel.readInt();
         this.mHeight = parcel.readInt();
+        if (CoreRune.FW_TEMP_TOO_MANY_INSETS_LEASH_BUG_FIX) {
+            this.mIsInsetsLeash = parcel.readBoolean();
+        }
         assignNativeObject(parcel.readInt() != 0 ? nativeReadFromParcel(parcel) : 0L, "readFromParcel");
     }
 
@@ -984,6 +1005,9 @@ public final class SurfaceControl implements Parcelable {
         parcel.writeString8(this.mName);
         parcel.writeInt(this.mWidth);
         parcel.writeInt(this.mHeight);
+        if (CoreRune.FW_TEMP_TOO_MANY_INSETS_LEASH_BUG_FIX) {
+            parcel.writeBoolean(this.mIsInsetsLeash);
+        }
         if (this.mNativeObject == 0) {
             parcel.writeInt(0);
         } else {
@@ -1055,11 +1079,11 @@ public final class SurfaceControl implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, System.identityHashCode(this));
         protoOutputStream.write(1138166333442L, this.mName);
         protoOutputStream.write(1120986464259L, getLayerId());
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     protected void finalize() throws Throwable {
@@ -1549,14 +1573,14 @@ public final class SurfaceControl implements Parcelable {
     }
 
     public static ColorSpace[] getCompositionColorSpaces() {
-        int[] nativeGetCompositionDataspaces = nativeGetCompositionDataspaces();
+        int[] iArrNativeGetCompositionDataspaces = nativeGetCompositionDataspaces();
         ColorSpace colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
         ColorSpace[] colorSpaceArr = new ColorSpace[2];
         colorSpaceArr[0] = colorSpace;
         colorSpaceArr[1] = colorSpace;
-        if (nativeGetCompositionDataspaces != null && nativeGetCompositionDataspaces.length == 2) {
+        if (iArrNativeGetCompositionDataspaces != null && iArrNativeGetCompositionDataspaces.length == 2) {
             for (int i = 0; i < 2; i++) {
-                ColorSpace fromDataSpace = ColorSpace.getFromDataSpace(nativeGetCompositionDataspaces[i]);
+                ColorSpace fromDataSpace = ColorSpace.getFromDataSpace(iArrNativeGetCompositionDataspaces[i]);
                 if (fromDataSpace != null) {
                     colorSpaceArr[i] = fromDataSpace;
                 }
@@ -1633,11 +1657,15 @@ public final class SurfaceControl implements Parcelable {
     }
 
     public static SurfaceControl mirrorSurface(SurfaceControl surfaceControl) {
-        long nativeMirrorSurface = nativeMirrorSurface(surfaceControl.mNativeObject);
-        SurfaceControl surfaceControl2 = new SurfaceControl();
-        surfaceControl2.mName = surfaceControl.mName + " (mirror)";
-        surfaceControl2.assignNativeObject(nativeMirrorSurface, "mirrorSurface");
-        return surfaceControl2;
+        return mirrorSurface(surfaceControl, null);
+    }
+
+    public static SurfaceControl mirrorSurface(SurfaceControl surfaceControl, SurfaceControl surfaceControl2) {
+        long jNativeMirrorSurfaceWithStopLayer = nativeMirrorSurfaceWithStopLayer(surfaceControl.mNativeObject, surfaceControl2 != null ? surfaceControl2.mNativeObject : 0L);
+        SurfaceControl surfaceControl3 = new SurfaceControl();
+        surfaceControl3.mName = surfaceControl.mName + " (mirror)";
+        surfaceControl3.assignNativeObject(jNativeMirrorSurfaceWithStopLayer, "mirrorSurface");
+        return surfaceControl3;
     }
 
     private static void validateColorArg(float[] fArr) {
@@ -1742,9 +1770,9 @@ public final class SurfaceControl implements Parcelable {
         public abstract void onTrustedPresentationChanged(boolean z);
 
         private TrustedPresentationCallback() {
-            long nativeCreateTpc = SurfaceControl.nativeCreateTpc(this);
-            this.mNativeObject = nativeCreateTpc;
-            this.mFreeNativeResources = sRegistry.registerNativeAllocation(this, nativeCreateTpc);
+            long jNativeCreateTpc = SurfaceControl.nativeCreateTpc(this);
+            this.mNativeObject = jNativeCreateTpc;
+            this.mFreeNativeResources = sRegistry.registerNativeAllocation(this, jNativeCreateTpc);
         }
     }
 
@@ -1900,10 +1928,10 @@ public final class SurfaceControl implements Parcelable {
 
         protected void applyResizedSurfaces() {
             for (int size = this.mResizedSurfaces.size() - 1; size >= 0; size--) {
-                Point valueAt = this.mResizedSurfaces.valueAt(size);
-                SurfaceControl keyAt = this.mResizedSurfaces.keyAt(size);
-                synchronized (keyAt.mLock) {
-                    keyAt.resize(valueAt.x, valueAt.y);
+                Point pointValueAt = this.mResizedSurfaces.valueAt(size);
+                SurfaceControl surfaceControlKeyAt = this.mResizedSurfaces.keyAt(size);
+                synchronized (surfaceControlKeyAt.mLock) {
+                    surfaceControlKeyAt.resize(pointValueAt.x, pointValueAt.y);
                 }
             }
             this.mResizedSurfaces.clear();
@@ -1911,11 +1939,11 @@ public final class SurfaceControl implements Parcelable {
 
         protected void notifyReparentedSurfaces() {
             for (int size = this.mReparentedSurfaces.size() - 1; size >= 0; size--) {
-                SurfaceControl keyAt = this.mReparentedSurfaces.keyAt(size);
-                synchronized (keyAt.mLock) {
-                    int size2 = keyAt.mReparentListeners != null ? keyAt.mReparentListeners.size() : 0;
+                SurfaceControl surfaceControlKeyAt = this.mReparentedSurfaces.keyAt(size);
+                synchronized (surfaceControlKeyAt.mLock) {
+                    int size2 = surfaceControlKeyAt.mReparentListeners != null ? surfaceControlKeyAt.mReparentListeners.size() : 0;
                     for (int i = 0; i < size2; i++) {
-                        ((OnReparentListener) keyAt.mReparentListeners.get(i)).onReparent(this, this.mReparentedSurfaces.valueAt(size));
+                        ((OnReparentListener) surfaceControlKeyAt.mReparentListeners.get(i)).onReparent(this, this.mReparentedSurfaces.valueAt(size));
                     }
                     this.mReparentedSurfaces.removeAt(size);
                 }
@@ -2475,13 +2503,13 @@ public final class SurfaceControl implements Parcelable {
         }
 
         public Transaction setMetadata(SurfaceControl surfaceControl, int i, int i2) {
-            Parcel obtain = Parcel.obtain();
-            obtain.writeInt(i2);
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.writeInt(i2);
             try {
-                setMetadata(surfaceControl, i, obtain);
+                setMetadata(surfaceControl, i, parcelObtain);
                 return this;
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
 
@@ -2509,10 +2537,10 @@ public final class SurfaceControl implements Parcelable {
                 Log.w(SurfaceControl.TAG, "setBorderSettings was called butenable_border_settings flag is disabled");
                 return this;
             }
-            Parcel obtain = Parcel.obtain();
-            borderSettings.writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            SurfaceControl.nativeSetBorderSettings(this.mNativeObject, surfaceControl.mNativeObject, obtain);
+            Parcel parcelObtain = Parcel.obtain();
+            borderSettings.writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            SurfaceControl.nativeSetBorderSettings(this.mNativeObject, surfaceControl.mNativeObject, parcelObtain);
             return this;
         }
 
@@ -2847,7 +2875,7 @@ public final class SurfaceControl implements Parcelable {
             executor.execute(new Runnable() { // from class: android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceControl.TransactionCommittedListener.this.onTransactionCommitted();
+                    transactionCommittedListener.onTransactionCommitted();
                 }
             });
         }
@@ -2863,12 +2891,12 @@ public final class SurfaceControl implements Parcelable {
                     executor.execute(new Runnable() { // from class: android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.andThen(new Consumer() { // from class: android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda0
+                            consumer.andThen(new Consumer() { // from class: android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda0
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj2) {
                                     ((SurfaceControl.TransactionStats) obj2).close();
                                 }
-                            }).accept(r2);
+                            }).accept(transactionStats);
                         }
                     });
                 }
@@ -2970,9 +2998,9 @@ public final class SurfaceControl implements Parcelable {
         private void readFromParcel(Parcel parcel) {
             this.mNativeObject = 0L;
             if (parcel.readInt() != 0) {
-                long nativeReadTransactionFromParcel = SurfaceControl.nativeReadTransactionFromParcel(parcel);
-                this.mNativeObject = nativeReadTransactionFromParcel;
-                this.mFreeNativeResources = sRegistry.registerNativeAllocation(this, nativeReadTransactionFromParcel);
+                long jNativeReadTransactionFromParcel = SurfaceControl.nativeReadTransactionFromParcel(parcel);
+                this.mNativeObject = jNativeReadTransactionFromParcel;
+                this.mFreeNativeResources = sRegistry.registerNativeAllocation(this, jNativeReadTransactionFromParcel);
                 if (CoreRune.FW_SURFACE_DEBUG_APPLY) {
                     this.mDebugName = parcel.readString();
                     this.mLowDebugName = parcel.readString();

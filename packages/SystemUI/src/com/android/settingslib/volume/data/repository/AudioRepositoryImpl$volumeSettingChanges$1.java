@@ -13,7 +13,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioRepositoryImpl$volumeSettingChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Uri $uri;
@@ -51,7 +50,7 @@ final class AudioRepositoryImpl$volumeSettingChanges$1 extends SuspendLambda imp
             ContentObserver contentObserver = new ContentObserver(directExecutor) { // from class: com.android.settingslib.volume.data.repository.AudioRepositoryImpl$volumeSettingChanges$1$observer$1
                 @Override // android.database.ContentObserver
                 public final void onChange(boolean z) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new AudioRepositoryImpl$volumeSettingChanges$1$observer$1$onChange$1(producerScope2, null), 3);
                 }
             };

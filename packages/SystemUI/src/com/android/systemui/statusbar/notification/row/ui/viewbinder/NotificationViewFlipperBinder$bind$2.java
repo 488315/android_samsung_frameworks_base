@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationViewFlipperBinder$bind$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ ViewFlipper $viewFlipper;
@@ -21,7 +20,6 @@ final class NotificationViewFlipperBinder$bind$2 extends SuspendLambda implement
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.ui.viewbinder.NotificationViewFlipperBinder$bind$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ ViewFlipper $viewFlipper;
@@ -56,11 +54,11 @@ final class NotificationViewFlipperBinder$bind$2 extends SuspendLambda implement
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.row.ui.viewbinder.NotificationViewFlipperBinder.bind.2.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                         NotificationViewFlipperBinder notificationViewFlipperBinder = NotificationViewFlipperBinder.INSTANCE;
                         ViewFlipper viewFlipper2 = viewFlipper;
                         notificationViewFlipperBinder.getClass();
-                        if (booleanValue) {
+                        if (zBooleanValue) {
                             viewFlipper2.stopFlipping();
                         } else if (viewFlipper2.isAutoStart()) {
                             viewFlipper2.startFlipping();

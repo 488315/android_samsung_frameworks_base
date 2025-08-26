@@ -15,15 +15,15 @@ public class UpdateEngineStable {
     }
 
     public UpdateEngineStable() {
-        IUpdateEngineStable asInterface = IUpdateEngineStable.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_STABLE_SERVICE));
-        this.mUpdateEngineStable = asInterface;
-        if (asInterface == null) {
+        IUpdateEngineStable iUpdateEngineStableAsInterface = IUpdateEngineStable.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_STABLE_SERVICE));
+        this.mUpdateEngineStable = iUpdateEngineStableAsInterface;
+        if (iUpdateEngineStableAsInterface == null) {
             throw new IllegalStateException("Failed to find android.os.UpdateEngineStableService");
         }
     }
 
     public boolean bind(final UpdateEngineStableCallback updateEngineStableCallback, final Handler handler) {
-        boolean bind;
+        boolean zBind;
         synchronized (this.mUpdateEngineStableCallbackLock) {
             IUpdateEngineStableCallback.Stub stub = new IUpdateEngineStableCallback.Stub(this) { // from class: android.os.UpdateEngineStable.1
                 @Override // android.os.IUpdateEngineStableCallback
@@ -68,12 +68,12 @@ public class UpdateEngineStable {
             };
             this.mUpdateEngineStableCallback = stub;
             try {
-                bind = this.mUpdateEngineStable.bind(stub);
+                zBind = this.mUpdateEngineStable.bind(stub);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        return bind;
+        return zBind;
     }
 
     public boolean bind(UpdateEngineStableCallback updateEngineStableCallback) {
@@ -95,9 +95,9 @@ public class UpdateEngineStable {
                 return true;
             }
             try {
-                boolean unbind = this.mUpdateEngineStable.unbind(iUpdateEngineStableCallback);
+                boolean zUnbind = this.mUpdateEngineStable.unbind(iUpdateEngineStableCallback);
                 this.mUpdateEngineStableCallback = null;
-                return unbind;
+                return zUnbind;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

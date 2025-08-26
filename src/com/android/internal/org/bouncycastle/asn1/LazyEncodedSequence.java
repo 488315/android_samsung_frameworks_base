@@ -115,9 +115,9 @@ class LazyEncodedSequence extends ASN1Sequence {
         if (this.encoded != null) {
             ASN1InputStream aSN1InputStream = new ASN1InputStream(this.encoded, true);
             try {
-                ASN1EncodableVector readVector = aSN1InputStream.readVector();
+                ASN1EncodableVector vector = aSN1InputStream.readVector();
                 aSN1InputStream.close();
-                this.elements = readVector.takeElements();
+                this.elements = vector.takeElements();
                 this.encoded = null;
             } catch (IOException e) {
                 throw new ASN1ParsingException("malformed ASN.1: " + e, e);

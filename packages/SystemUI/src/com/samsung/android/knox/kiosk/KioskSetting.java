@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KioskSetting implements Parcelable {
     public static final Parcelable.Creator<KioskSetting> CREATOR = new Parcelable.Creator<KioskSetting>() { // from class: com.samsung.android.knox.kiosk.KioskSetting.1
@@ -52,9 +51,9 @@ public class KioskSetting implements Parcelable {
         this.airCommand = parcel.readInt() != 0;
         this.airView = parcel.readInt() != 0;
         if (parcel.readInt() != 0) {
-            int[] createIntArray = parcel.createIntArray();
+            int[] iArrCreateIntArray = parcel.createIntArray();
             this.hardwareKey = new ArrayList();
-            for (int i : createIntArray) {
+            for (int i : iArrCreateIntArray) {
                 this.hardwareKey.add(Integer.valueOf(i));
             }
         }

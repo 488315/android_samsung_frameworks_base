@@ -171,7 +171,7 @@ public class BCDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier {
         return this.attrCarrier.getBagAttributeKeys();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         this.dhSpec = new DHParameterSpec((BigInteger) objectInputStream.readObject(), (BigInteger) objectInputStream.readObject(), objectInputStream.readInt());
         this.info = null;

@@ -67,15 +67,15 @@ public class AnimatedStateListDrawable extends StateListDrawable {
 
     @Override // android.graphics.drawable.StateListDrawable, android.graphics.drawable.DrawableContainer, android.graphics.drawable.Drawable
     protected boolean onStateChange(int[] iArr) {
-        int indexOfKeyframe = this.mState.indexOfKeyframe(iArr);
-        boolean z = indexOfKeyframe != getCurrentIndex() && (selectTransition(indexOfKeyframe) || selectDrawable(indexOfKeyframe));
+        int iIndexOfKeyframe = this.mState.indexOfKeyframe(iArr);
+        boolean z = iIndexOfKeyframe != getCurrentIndex() && (selectTransition(iIndexOfKeyframe) || selectDrawable(iIndexOfKeyframe));
         Drawable current = getCurrent();
         return current != null ? current.setState(iArr) | z : z;
     }
 
     private boolean selectTransition(int i) {
         int currentIndex;
-        int indexOfTransition;
+        int iIndexOfTransition;
         Transition animatableTransition;
         Transition transition = this.mTransition;
         if (transition != null) {
@@ -99,16 +99,16 @@ public class AnimatedStateListDrawable extends StateListDrawable {
         AnimatedStateListState animatedStateListState = this.mState;
         int keyframeIdAt = animatedStateListState.getKeyframeIdAt(currentIndex);
         int keyframeIdAt2 = animatedStateListState.getKeyframeIdAt(i);
-        if (keyframeIdAt2 == 0 || keyframeIdAt == 0 || (indexOfTransition = animatedStateListState.indexOfTransition(keyframeIdAt, keyframeIdAt2)) < 0) {
+        if (keyframeIdAt2 == 0 || keyframeIdAt == 0 || (iIndexOfTransition = animatedStateListState.indexOfTransition(keyframeIdAt, keyframeIdAt2)) < 0) {
             return false;
         }
-        boolean transitionHasReversibleFlag = animatedStateListState.transitionHasReversibleFlag(keyframeIdAt, keyframeIdAt2);
-        selectDrawable(indexOfTransition);
+        boolean zTransitionHasReversibleFlag = animatedStateListState.transitionHasReversibleFlag(keyframeIdAt, keyframeIdAt2);
+        selectDrawable(iIndexOfTransition);
         Object current = getCurrent();
         if (current instanceof AnimationDrawable) {
-            animatableTransition = new AnimationDrawableTransition((AnimationDrawable) current, animatedStateListState.isTransitionReversed(keyframeIdAt, keyframeIdAt2), transitionHasReversibleFlag);
+            animatableTransition = new AnimationDrawableTransition((AnimationDrawable) current, animatedStateListState.isTransitionReversed(keyframeIdAt, keyframeIdAt2), zTransitionHasReversibleFlag);
         } else if (current instanceof AnimatedVectorDrawable) {
-            animatableTransition = new AnimatedVectorDrawableTransition((AnimatedVectorDrawable) current, animatedStateListState.isTransitionReversed(keyframeIdAt, keyframeIdAt2), transitionHasReversibleFlag);
+            animatableTransition = new AnimatedVectorDrawableTransition((AnimatedVectorDrawable) current, animatedStateListState.isTransitionReversed(keyframeIdAt, keyframeIdAt2), zTransitionHasReversibleFlag);
         } else {
             if (current instanceof Animatable) {
                 animatableTransition = new AnimatableTransition((Animatable) current);
@@ -167,12 +167,12 @@ public class AnimatedStateListDrawable extends StateListDrawable {
             int i = z ? numberOfFrames - 1 : 0;
             int i2 = z ? 0 : numberOfFrames - 1;
             FrameInterpolator frameInterpolator = new FrameInterpolator(animationDrawable, z);
-            ObjectAnimator ofInt = ObjectAnimator.ofInt(animationDrawable, "currentIndex", i, i2);
-            ofInt.setAutoCancel(true);
-            ofInt.setDuration(frameInterpolator.getTotalDuration());
-            ofInt.setInterpolator(frameInterpolator);
+            ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(animationDrawable, "currentIndex", i, i2);
+            objectAnimatorOfInt.setAutoCancel(true);
+            objectAnimatorOfInt.setDuration(frameInterpolator.getTotalDuration());
+            objectAnimatorOfInt.setInterpolator(frameInterpolator);
             this.mHasReversibleFlag = z2;
-            this.mAnim = ofInt;
+            this.mAnim = objectAnimatorOfInt;
         }
 
         @Override // android.graphics.drawable.AnimatedStateListDrawable.Transition
@@ -252,11 +252,11 @@ public class AnimatedStateListDrawable extends StateListDrawable {
 
     @Override // android.graphics.drawable.StateListDrawable, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawable);
-        super.inflateWithAttributes(resources, xmlPullParser, obtainAttributes, 1);
-        updateStateFromTypedArray(obtainAttributes);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawable);
+        super.inflateWithAttributes(resources, xmlPullParser, typedArrayObtainAttributes, 1);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
         updateDensity(resources);
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         init();
     }
@@ -268,9 +268,9 @@ public class AnimatedStateListDrawable extends StateListDrawable {
         if (animatedStateListState == null || animatedStateListState.mAnimThemeAttrs == null) {
             return;
         }
-        TypedArray resolveAttributes = theme.resolveAttributes(animatedStateListState.mAnimThemeAttrs, R.styleable.AnimatedRotateDrawable);
-        updateStateFromTypedArray(resolveAttributes);
-        resolveAttributes.recycle();
+        TypedArray typedArrayResolveAttributes = theme.resolveAttributes(animatedStateListState.mAnimThemeAttrs, R.styleable.AnimatedRotateDrawable);
+        updateStateFromTypedArray(typedArrayResolveAttributes);
+        typedArrayResolveAttributes.recycle();
         init();
     }
 
@@ -313,12 +313,12 @@ public class AnimatedStateListDrawable extends StateListDrawable {
 
     private int parseTransition(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         int next;
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawableTransition);
-        int resourceId = obtainAttributes.getResourceId(2, 0);
-        int resourceId2 = obtainAttributes.getResourceId(1, 0);
-        boolean z = obtainAttributes.getBoolean(3, false);
-        Drawable drawable = obtainAttributes.getDrawable(0);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawableTransition);
+        int resourceId = typedArrayObtainAttributes.getResourceId(2, 0);
+        int resourceId2 = typedArrayObtainAttributes.getResourceId(1, 0);
+        boolean z = typedArrayObtainAttributes.getBoolean(3, false);
+        Drawable drawable = typedArrayObtainAttributes.getDrawable(0);
+        typedArrayObtainAttributes.recycle();
         if (drawable == null) {
             do {
                 next = xmlPullParser.next();
@@ -333,11 +333,11 @@ public class AnimatedStateListDrawable extends StateListDrawable {
 
     private int parseItem(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         int next;
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawableItem);
-        int resourceId = obtainAttributes.getResourceId(0, 0);
-        Drawable drawable = obtainAttributes.getDrawable(1);
-        obtainAttributes.recycle();
-        int[] extractStateSet = extractStateSet(attributeSet);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedStateListDrawableItem);
+        int resourceId = typedArrayObtainAttributes.getResourceId(0, 0);
+        Drawable drawable = typedArrayObtainAttributes.getDrawable(1);
+        typedArrayObtainAttributes.recycle();
+        int[] iArrExtractStateSet = extractStateSet(attributeSet);
         if (drawable == null) {
             do {
                 next = xmlPullParser.next();
@@ -347,7 +347,7 @@ public class AnimatedStateListDrawable extends StateListDrawable {
             }
             drawable = Drawable.createFromXmlInner(resources, xmlPullParser, attributeSet, theme);
         }
-        return this.mState.addStateSet(extractStateSet, drawable, resourceId);
+        return this.mState.addStateSet(iArrExtractStateSet, drawable, resourceId);
     }
 
     @Override // android.graphics.drawable.StateListDrawable, android.graphics.drawable.DrawableContainer, android.graphics.drawable.Drawable
@@ -396,31 +396,31 @@ public class AnimatedStateListDrawable extends StateListDrawable {
 
         @Override // android.graphics.drawable.StateListDrawable.StateListState
         void mutate() {
-            this.mTransitions = this.mTransitions.m5520clone();
-            this.mStateIds = this.mStateIds.m5532clone();
+            this.mTransitions = this.mTransitions.m5527clone();
+            this.mStateIds = this.mStateIds.m5539clone();
         }
 
         int addTransition(int i, int i2, Drawable drawable, boolean z) {
-            int addChild = super.addChild(drawable);
-            long generateTransitionKey = generateTransitionKey(i, i2);
+            int iAddChild = super.addChild(drawable);
+            long jGenerateTransitionKey = generateTransitionKey(i, i2);
             long j = z ? 8589934592L : 0L;
-            long j2 = addChild;
-            this.mTransitions.append(generateTransitionKey, j2 | j);
+            long j2 = iAddChild;
+            this.mTransitions.append(jGenerateTransitionKey, j2 | j);
             if (z) {
                 this.mTransitions.append(generateTransitionKey(i2, i), 4294967296L | j2 | j);
             }
-            return addChild;
+            return iAddChild;
         }
 
         int addStateSet(int[] iArr, Drawable drawable, int i) {
-            int addStateSet = super.addStateSet(iArr, drawable);
-            this.mStateIds.put(addStateSet, i);
-            return addStateSet;
+            int iAddStateSet = super.addStateSet(iArr, drawable);
+            this.mStateIds.put(iAddStateSet, i);
+            return iAddStateSet;
         }
 
         int indexOfKeyframe(int[] iArr) {
-            int indexOfStateSet = super.indexOfStateSet(iArr);
-            return indexOfStateSet >= 0 ? indexOfStateSet : super.indexOfStateSet(StateSet.WILD_CARD);
+            int iIndexOfStateSet = super.indexOfStateSet(iArr);
+            return iIndexOfStateSet >= 0 ? iIndexOfStateSet : super.indexOfStateSet(StateSet.WILD_CARD);
         }
 
         int getKeyframeIdAt(int i) {
@@ -447,6 +447,7 @@ public class AnimatedStateListDrawable extends StateListDrawable {
             return this.mAnimThemeAttrs != null || super.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.StateListDrawable.StateListState, android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new AnimatedStateListDrawable(this, null);

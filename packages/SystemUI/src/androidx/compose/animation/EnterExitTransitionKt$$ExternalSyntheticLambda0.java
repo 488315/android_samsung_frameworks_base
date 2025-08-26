@@ -2,7 +2,6 @@ package androidx.compose.animation;
 
 import androidx.compose.animation.core.Transition;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class EnterExitTransitionKt$$ExternalSyntheticLambda0 implements GraphicsLayerBlockForEnterExit {
     public final /* synthetic */ Transition.DeferredAnimation f$0;

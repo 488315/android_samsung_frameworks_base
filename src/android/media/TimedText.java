@@ -146,8 +146,8 @@ public final class TimedText {
 
     public TimedText(Parcel parcel) {
         this.mParcel = Parcel.obtain();
-        HashMap<Integer, Object> hashMap = new HashMap<>();
-        this.mKeyObjectMap = hashMap;
+        HashMap<Integer, Object> map = new HashMap<>();
+        this.mKeyObjectMap = map;
         this.mDisplayFlags = -1;
         this.mBackgroundColorRGBA = -1;
         this.mHighlightColorRGBA = -1;
@@ -161,12 +161,12 @@ public final class TimedText {
         this.mHyperTextList = null;
         this.mTextBounds = null;
         this.mTextChars = null;
-        byte[] marshall = parcel.marshall();
-        this.mParcel.unmarshall(marshall, 0, marshall.length);
+        byte[] bArrMarshall = parcel.marshall();
+        this.mParcel.unmarshall(bArrMarshall, 0, bArrMarshall.length);
         if (parseParcel(this.mParcel)) {
             return;
         }
-        hashMap.clear();
+        map.clear();
         Log.w(TAG, "parseParcel() fails");
     }
 
@@ -205,111 +205,112 @@ public final class TimedText {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private synchronized boolean parseParcel(Parcel parcel) {
-        Object obj;
+        Object objValueOf;
         parcel.setDataPosition(0);
         if (parcel.dataAvail() == 0) {
             return false;
         }
-        int readInt = parcel.readInt();
-        if (readInt == 3017) {
-            this.mKeyObjectMap.put(Integer.valueOf(readInt), Integer.valueOf(parcel.readInt()));
-            readInt = parcel.readInt();
+        int i = parcel.readInt();
+        if (i == 3017) {
+            this.mKeyObjectMap.put(Integer.valueOf(i), Integer.valueOf(parcel.readInt()));
+            i = parcel.readInt();
         }
-        if (readInt == 102) {
-            int readInt2 = parcel.readInt();
-            if (readInt2 != 7) {
+        if (i == 102) {
+            int i2 = parcel.readInt();
+            if (i2 != 7) {
                 return false;
             }
-            this.mKeyObjectMap.put(Integer.valueOf(readInt2), Integer.valueOf(parcel.readInt()));
+            this.mKeyObjectMap.put(Integer.valueOf(i2), Integer.valueOf(parcel.readInt()));
             if (parcel.readInt() != 16) {
                 return false;
             }
             parcel.readInt();
-            byte[] createByteArray = parcel.createByteArray();
-            if (createByteArray != null && createByteArray.length != 0) {
-                this.mTextChars = new String(createByteArray);
+            byte[] bArrCreateByteArray = parcel.createByteArray();
+            if (bArrCreateByteArray == null || bArrCreateByteArray.length == 0) {
+                this.mTextChars = null;
+            } else {
+                this.mTextChars = new String(bArrCreateByteArray);
             }
-            this.mTextChars = null;
-        } else if (readInt != 101) {
-            Log.w(TAG, "Invalid timed text key found: " + readInt);
+        } else if (i != 101) {
+            Log.w(TAG, "Invalid timed text key found: " + i);
             return false;
         }
         while (parcel.dataAvail() > 0) {
-            int readInt3 = parcel.readInt();
-            if (!isValidKey(readInt3)) {
-                Log.w(TAG, "Invalid timed text key found: " + readInt3);
+            int i3 = parcel.readInt();
+            if (!isValidKey(i3)) {
+                Log.w(TAG, "Invalid timed text key found: " + i3);
                 return false;
             }
-            switch (readInt3) {
+            switch (i3) {
                 case 1:
-                    int readInt4 = parcel.readInt();
-                    this.mDisplayFlags = readInt4;
-                    obj = Integer.valueOf(readInt4);
+                    int i4 = parcel.readInt();
+                    this.mDisplayFlags = i4;
+                    objValueOf = Integer.valueOf(i4);
                     break;
                 case 2:
                 case 7:
                 default:
-                    obj = null;
+                    objValueOf = null;
                     break;
                 case 3:
-                    int readInt5 = parcel.readInt();
-                    this.mBackgroundColorRGBA = readInt5;
-                    obj = Integer.valueOf(readInt5);
+                    int i5 = parcel.readInt();
+                    this.mBackgroundColorRGBA = i5;
+                    objValueOf = Integer.valueOf(i5);
                     break;
                 case 4:
-                    int readInt6 = parcel.readInt();
-                    this.mHighlightColorRGBA = readInt6;
-                    obj = Integer.valueOf(readInt6);
+                    int i6 = parcel.readInt();
+                    this.mHighlightColorRGBA = i6;
+                    objValueOf = Integer.valueOf(i6);
                     break;
                 case 5:
-                    int readInt7 = parcel.readInt();
-                    this.mScrollDelay = readInt7;
-                    obj = Integer.valueOf(readInt7);
+                    int i7 = parcel.readInt();
+                    this.mScrollDelay = i7;
+                    objValueOf = Integer.valueOf(i7);
                     break;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    this.mWrapText = readInt8;
-                    obj = Integer.valueOf(readInt8);
+                    int i8 = parcel.readInt();
+                    this.mWrapText = i8;
+                    objValueOf = Integer.valueOf(i8);
                     break;
                 case 8:
                     readBlinkingText(parcel);
-                    obj = this.mBlinkingPosList;
+                    objValueOf = this.mBlinkingPosList;
                     break;
                 case 9:
                     readFont(parcel);
-                    obj = this.mFontList;
+                    objValueOf = this.mFontList;
                     break;
                 case 10:
                     readHighlight(parcel);
-                    obj = this.mHighlightPosList;
+                    objValueOf = this.mHighlightPosList;
                     break;
                 case 11:
                     readHyperText(parcel);
-                    obj = this.mHyperTextList;
+                    objValueOf = this.mHyperTextList;
                     break;
                 case 12:
                     readKaraoke(parcel);
-                    obj = this.mKaraokeList;
+                    objValueOf = this.mKaraokeList;
                     break;
                 case 13:
                     readStyle(parcel);
-                    obj = this.mStyleList;
+                    objValueOf = this.mStyleList;
                     break;
                 case 14:
                     this.mTextBounds = new Rect(parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt());
-                    obj = null;
+                    objValueOf = null;
                     break;
                 case 15:
                     Justification justification = new Justification(parcel.readInt(), parcel.readInt());
                     this.mJustification = justification;
-                    obj = justification;
+                    objValueOf = justification;
                     break;
             }
-            if (obj != null) {
-                if (this.mKeyObjectMap.containsKey(Integer.valueOf(readInt3))) {
-                    this.mKeyObjectMap.remove(Integer.valueOf(readInt3));
+            if (objValueOf != null) {
+                if (this.mKeyObjectMap.containsKey(Integer.valueOf(i3))) {
+                    this.mKeyObjectMap.remove(Integer.valueOf(i3));
                 }
-                this.mKeyObjectMap.put(Integer.valueOf(readInt3), obj);
+                this.mKeyObjectMap.put(Integer.valueOf(i3), objValueOf);
             }
         }
         this.mParcel.recycle();
@@ -327,9 +328,9 @@ public final class TimedText {
         int i5 = -1;
         boolean z4 = false;
         while (!z4 && parcel.dataAvail() > 0) {
-            int readInt = parcel.readInt();
-            if (readInt != 2) {
-                switch (readInt) {
+            int i6 = parcel.readInt();
+            if (i6 != 2) {
+                switch (i6) {
                     case 103:
                         i = parcel.readInt();
                         break;
@@ -351,10 +352,10 @@ public final class TimedText {
                         break;
                 }
             } else {
-                int readInt2 = parcel.readInt();
-                z = readInt2 % 2 == 1;
-                z2 = readInt2 % 4 >= 2;
-                z3 = readInt2 / 4 == 1;
+                int i7 = parcel.readInt();
+                z = i7 % 2 == 1;
+                z2 = i7 % 4 >= 2;
+                z3 = i7 / 4 == 1;
             }
         }
         Style style = new Style(i, i2, i3, z, z2, z3, i4, i5);
@@ -365,8 +366,8 @@ public final class TimedText {
     }
 
     private void readFont(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             Font font = new Font(parcel.readInt(), new String(parcel.createByteArray(), 0, parcel.readInt()));
             if (this.mFontList == null) {
                 this.mFontList = new ArrayList();
@@ -384,8 +385,8 @@ public final class TimedText {
     }
 
     private void readKaraoke(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             Karaoke karaoke = new Karaoke(parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt());
             if (this.mKaraokeList == null) {
                 this.mKaraokeList = new ArrayList();

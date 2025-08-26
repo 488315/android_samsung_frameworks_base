@@ -35,7 +35,7 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public Cipher createCipher(String str) throws NoSuchAlgorithmException, NoSuchPaddingException {
+    public Cipher createCipher(String str) throws NoSuchPaddingException, NoSuchAlgorithmException {
         return Cipher.getInstance(str, this.provider);
     }
 

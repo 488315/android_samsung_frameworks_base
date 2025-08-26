@@ -36,7 +36,6 @@ import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarContentInsetsProviderImpl implements StatusBarContentInsetsProvider, ConfigurationController.ConfigurationListener, Dumpable {
     public final String commandName;
@@ -53,7 +52,6 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
     public final CopyOnWriteArraySet listeners = new CopyOnWriteArraySet();
     public final Lazy isPrivacyDotEnabled$delegate = LazyKt__LazyJVMKt.lazy(LazyThreadSafetyMode.PUBLICATION, new StatusBarContentInsetsProviderImpl$$ExternalSyntheticLambda0(this, 0));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CacheKey {
         public final DisplayCutout displayCutout;
         public final Rect displaySize;
@@ -77,9 +75,9 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
         }
 
         public final int hashCode() {
-            int hashCode = (this.displaySize.hashCode() + (Integer.hashCode(this.rotation) * 31)) * 31;
+            int iHashCode = (this.displaySize.hashCode() + (Integer.hashCode(this.rotation) * 31)) * 31;
             DisplayCutout displayCutout = this.displayCutout;
-            return hashCode + (displayCutout == null ? 0 : displayCutout.hashCode());
+            return iHashCode + (displayCutout == null ? 0 : displayCutout.hashCode());
         }
 
         public final String toString() {
@@ -87,7 +85,6 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         StatusBarContentInsetsProviderImpl create(Context context, ConfigurationController configurationController, SysUICutoutProvider sysUICutoutProvider);
     }
@@ -100,14 +97,14 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
         this.sysUICutoutProvider = sysUICutoutProvider;
         this.indicatorGardenPresenter = indicatorGardenPresenter;
         this.indicatorScaleGardener = indicatorScaleGardener;
-        String valueOf = context.getDisplayId() == 0 ? "" : String.valueOf(context.getDisplayId());
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("StatusBarInsetsProvider", valueOf);
-        this.dumpableName = m;
-        String m2 = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("status-bar-insets", valueOf);
-        this.commandName = m2;
+        String strValueOf = context.getDisplayId() == 0 ? "" : String.valueOf(context.getDisplayId());
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("StatusBarInsetsProvider", strValueOf);
+        this.dumpableName = strM;
+        String strM2 = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("status-bar-insets", strValueOf);
+        this.commandName = strM2;
         ((ConfigurationControllerImpl) configurationController).addCallback(this);
-        dumpManager.registerNormalDumpable(m, this);
-        commandRegistry.registerCommand(m2, new StatusBarContentInsetsProviderImpl$$ExternalSyntheticLambda0(this, 1));
+        dumpManager.registerNormalDumpable(strM, this);
+        commandRegistry.registerCommand(strM2, new StatusBarContentInsetsProviderImpl$$ExternalSyntheticLambda0(this, 1));
         this.marginBottomOverrides = new LinkedHashMap();
     }
 
@@ -144,10 +141,10 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
         printWriter.println("Bottom margin overrides: " + this.marginBottomOverrides);
     }
 
-    public final Rect getAndSetCalculatedAreaForRotation(int i, SysUICutoutInformation sysUICutoutInformation, Resources resources, CacheKey cacheKey) {
+    public final Rect getAndSetCalculatedAreaForRotation(int i, SysUICutoutInformation sysUICutoutInformation, Resources resources, CacheKey cacheKey) throws Resources.NotFoundException {
+        int iMax;
+        int iMax2;
         int i2;
-        int max;
-        int i3;
         int dimensionPixelSize;
         int exactRotation = RotationUtils.getExactRotation(this.context);
         int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.rounded_corner_content_padding);
@@ -156,42 +153,42 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
         int dimensionPixelSize4 = ((Boolean) lazy.getValue()).booleanValue() ? resources.getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter) : 0;
         ConfigurationControllerImpl configurationControllerImpl = (ConfigurationControllerImpl) this.configurationController;
         if (configurationControllerImpl.isLayoutRtl()) {
-            max = dimensionPixelSize2;
-            i2 = Math.max(dimensionPixelSize3, dimensionPixelSize2);
+            iMax2 = dimensionPixelSize2;
+            iMax = Math.max(dimensionPixelSize3, dimensionPixelSize2);
         } else {
-            i2 = dimensionPixelSize2;
-            max = Math.max(dimensionPixelSize3, dimensionPixelSize2);
+            iMax = dimensionPixelSize2;
+            iMax2 = Math.max(dimensionPixelSize3, dimensionPixelSize2);
         }
         Integer num = (Integer) ((LinkedHashMap) this.marginBottomOverrides).get(Integer.valueOf(i));
         if (num != null) {
             dimensionPixelSize = num.intValue();
         } else {
             if (i == 0) {
-                i3 = R.dimen.status_bar_bottom_aligned_margin_rotation_0;
+                i2 = R.dimen.status_bar_bottom_aligned_margin_rotation_0;
             } else if (i == 1) {
-                i3 = R.dimen.status_bar_bottom_aligned_margin_rotation_90;
+                i2 = R.dimen.status_bar_bottom_aligned_margin_rotation_90;
             } else if (i == 2) {
-                i3 = R.dimen.status_bar_bottom_aligned_margin_rotation_180;
+                i2 = R.dimen.status_bar_bottom_aligned_margin_rotation_180;
             } else {
                 if (i != 3) {
                     throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown rotation: "));
                 }
-                i3 = R.dimen.status_bar_bottom_aligned_margin_rotation_270;
+                i2 = R.dimen.status_bar_bottom_aligned_margin_rotation_270;
             }
-            dimensionPixelSize = resources.getDimensionPixelSize(i3);
+            dimensionPixelSize = resources.getDimensionPixelSize(i2);
         }
-        Rect calculateInsetsForRotationWithRotatedResources = StatusBarContentInsetsProviderKt.calculateInsetsForRotationWithRotatedResources(exactRotation, i, sysUICutoutInformation, this.context.getResources().getConfiguration().windowConfiguration.getMaxBounds(), SystemBarUtils.getStatusBarHeightForRotation(this.context, i), i2, max, configurationControllerImpl.isLayoutRtl(), dimensionPixelSize4, dimensionPixelSize, resources.getDimensionPixelSize(R.dimen.status_bar_icon_size_sp));
-        this.insetsCache.put(cacheKey, calculateInsetsForRotationWithRotatedResources);
-        return calculateInsetsForRotationWithRotatedResources;
+        Rect rectCalculateInsetsForRotationWithRotatedResources = StatusBarContentInsetsProviderKt.calculateInsetsForRotationWithRotatedResources(exactRotation, i, sysUICutoutInformation, this.context.getResources().getConfiguration().windowConfiguration.getMaxBounds(), SystemBarUtils.getStatusBarHeightForRotation(this.context, i), iMax, iMax2, configurationControllerImpl.isLayoutRtl(), dimensionPixelSize4, dimensionPixelSize, resources.getDimensionPixelSize(R.dimen.status_bar_icon_size_sp));
+        this.insetsCache.put(cacheKey, rectCalculateInsetsForRotationWithRotatedResources);
+        return rectCalculateInsetsForRotationWithRotatedResources;
     }
 
     public final Rect getBoundingRectForPrivacyChipForRotation(int i, DisplayCutout displayCutout) {
-        Rect rect = (Rect) this.insetsCache.get(getCacheKey(i, displayCutout));
-        if (rect == null) {
-            rect = getStatusBarContentAreaForRotation(i);
+        Rect statusBarContentAreaForRotation = (Rect) this.insetsCache.get(getCacheKey(i, displayCutout));
+        if (statusBarContentAreaForRotation == null) {
+            statusBarContentAreaForRotation = getStatusBarContentAreaForRotation(i);
         }
         Resources resourcesForRotation = RotationUtils.getResourcesForRotation(i, this.context);
-        return StatusBarContentInsetsProviderKt.getPrivacyChipBoundingRectForInsets(rect, resourcesForRotation.getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter), resourcesForRotation.getDimensionPixelSize(R.dimen.ongoing_appops_chip_max_width), ((ConfigurationControllerImpl) this.configurationController).isLayoutRtl());
+        return StatusBarContentInsetsProviderKt.getPrivacyChipBoundingRectForInsets(statusBarContentAreaForRotation, resourcesForRotation.getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter), resourcesForRotation.getDimensionPixelSize(R.dimen.ongoing_appops_chip_max_width), ((ConfigurationControllerImpl) this.configurationController).isLayoutRtl());
     }
 
     public final CacheKey getCacheKey(int i, DisplayCutout displayCutout) {
@@ -199,21 +196,21 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
     }
 
     public final Rect getStatusBarContentAreaForRotation(int i) {
-        SysUICutoutInformation cutoutInfoForCurrentDisplayAndRotation = ((SysUICutoutProviderImpl) this.sysUICutoutProvider).cutoutInfoForCurrentDisplayAndRotation();
-        CacheKey cacheKey = getCacheKey(i, cutoutInfoForCurrentDisplayAndRotation != null ? cutoutInfoForCurrentDisplayAndRotation.cutout : null);
+        SysUICutoutInformation sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation = ((SysUICutoutProviderImpl) this.sysUICutoutProvider).cutoutInfoForCurrentDisplayAndRotation();
+        CacheKey cacheKey = getCacheKey(i, sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation != null ? sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation.cutout : null);
         Rect rect = (Rect) this.insetsCache.get(cacheKey);
-        return rect == null ? getAndSetCalculatedAreaForRotation(i, cutoutInfoForCurrentDisplayAndRotation, RotationUtils.getResourcesForRotation(i, this.context), cacheKey) : rect;
+        return rect == null ? getAndSetCalculatedAreaForRotation(i, sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation, RotationUtils.getResourcesForRotation(i, this.context), cacheKey) : rect;
     }
 
     public final Insets getStatusBarContentInsetsForCurrentRotation() {
         int exactRotation = RotationUtils.getExactRotation(this.context);
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("StatusBarContentInsetsProvider.getStatusBarContentInsetsForRotation");
         }
         try {
-            SysUICutoutInformation cutoutInfoForCurrentDisplayAndRotation = ((SysUICutoutProviderImpl) this.sysUICutoutProvider).cutoutInfoForCurrentDisplayAndRotation();
-            CacheKey cacheKey = getCacheKey(exactRotation, cutoutInfoForCurrentDisplayAndRotation != null ? cutoutInfoForCurrentDisplayAndRotation.cutout : null);
+            SysUICutoutInformation sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation = ((SysUICutoutProviderImpl) this.sysUICutoutProvider).cutoutInfoForCurrentDisplayAndRotation();
+            CacheKey cacheKey = getCacheKey(exactRotation, sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation != null ? sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation.cutout : null);
             Rect maxBounds = this.context.getResources().getConfiguration().windowConfiguration.getMaxBounds();
             Point point = new Point(maxBounds.width(), maxBounds.height());
             int exactRotation2 = RotationUtils.getExactRotation(this.context);
@@ -223,17 +220,17 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
                 point.x = i;
             }
             int i2 = (exactRotation == 0 || exactRotation == 2) ? point.x : point.y;
-            Rect rect = (Rect) this.insetsCache.get(cacheKey);
-            if (rect == null) {
-                rect = getAndSetCalculatedAreaForRotation(exactRotation, cutoutInfoForCurrentDisplayAndRotation, RotationUtils.getResourcesForRotation(exactRotation, this.context), cacheKey);
+            Rect andSetCalculatedAreaForRotation = (Rect) this.insetsCache.get(cacheKey);
+            if (andSetCalculatedAreaForRotation == null) {
+                andSetCalculatedAreaForRotation = getAndSetCalculatedAreaForRotation(exactRotation, sysUICutoutInformationCutoutInfoForCurrentDisplayAndRotation, RotationUtils.getResourcesForRotation(exactRotation, this.context), cacheKey);
             }
-            Insets of = Insets.of(rect.left, rect.top, i2 - rect.right, 0);
-            if (isEnabled) {
+            Insets insetsOf = Insets.of(andSetCalculatedAreaForRotation.left, andSetCalculatedAreaForRotation.top, i2 - andSetCalculatedAreaForRotation.right, 0);
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
-            return of;
+            return insetsOf;
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -241,11 +238,11 @@ public final class StatusBarContentInsetsProviderImpl implements StatusBarConten
     }
 
     public final int getStatusBarPaddingTop() {
-        int roundToInt = MathKt__MathJVMKt.roundToInt(this.context.getResources().getDimensionPixelSize(R.dimen.privacy_dot_padding_top) * this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio);
-        int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.samsung_status_bar_battery_icon_height);
-        int dimensionPixelSize2 = this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter);
+        float f = this.indicatorScaleGardener.getLatestScaleModel(this.context).ratio;
+        float dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.samsung_status_bar_battery_icon_height) * f;
+        float dimensionPixelSize2 = this.context.getResources().getDimensionPixelSize(R.dimen.ongoing_appops_dot_diameter) * f;
         IndicatorGardenPresenter indicatorGardenPresenter = this.indicatorGardenPresenter;
-        return (MathKt__MathJVMKt.roundToInt(((indicatorGardenPresenter.gardenAlgorithm.calculateCameraTopMargin() + dimensionPixelSize) - indicatorGardenPresenter.gardenAlgorithm.calculateCameraBottomMargin()) * 0.5d) - dimensionPixelSize2) + roundToInt;
+        return MathKt__MathJVMKt.roundToInt(((indicatorGardenPresenter.gardenAlgorithm.calculateCameraTopMargin() + dimensionPixelSize) - indicatorGardenPresenter.gardenAlgorithm.calculateCameraBottomMargin()) - dimensionPixelSize2);
     }
 
     public final void notifyInsetsChanged() {

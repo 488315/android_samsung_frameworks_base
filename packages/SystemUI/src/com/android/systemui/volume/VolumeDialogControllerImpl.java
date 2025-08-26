@@ -3,8 +3,10 @@ package com.android.systemui.volume;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.NotificationManager;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -24,6 +26,7 @@ import android.os.HandlerExecutor;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.VibrationEffect;
 import android.provider.Settings;
@@ -32,6 +35,7 @@ import android.service.notification.ZenModeConfig;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.CaptioningManager;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
@@ -79,8 +83,10 @@ import com.android.systemui.util.kotlin.JavaAdapter;
 import com.android.systemui.volume.domain.interactor.AudioSharingInteractor;
 import com.android.systemui.volume.shared.VolumeLogger;
 import com.android.systemui.volume.soundassistant.SoundAssistantChecker;
+import com.android.systemui.volume.util.BluetoothA2dpUtil;
 import com.android.systemui.volume.util.BluetoothAdapterWrapper;
 import com.android.systemui.volume.util.BluetoothAudioCastWrapper;
+import com.android.systemui.volume.util.BluetoothCommonUtil;
 import com.android.systemui.volume.util.BluetoothIconUtil;
 import com.android.systemui.volume.util.BroadcastReceiverManager;
 import com.android.systemui.volume.util.DesktopManagerWrapper;
@@ -88,19 +94,25 @@ import com.android.systemui.volume.util.DeviceStateManagerWrapper;
 import com.android.systemui.volume.util.DisplayManagerWrapper;
 import com.android.systemui.volume.util.SALoggingWrapper;
 import com.android.systemui.volume.util.SoundAssistantManagerWrapper;
+import com.android.systemui.volume.util.StreamUtil;
 import com.android.systemui.volume.util.SystemServiceExtension;
+import com.samsung.android.bluetooth.SemBluetoothAudioCast;
+import com.samsung.android.bluetooth.SemBluetoothCastDevice;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import dalvik.annotation.optimization.NeverCompile;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Predicate;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpable {
     public static final int DEFAULT_MAX_LEVEL;
@@ -166,7 +178,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     public static final String TAG = Util.logTag(VolumeDialogControllerImpl.class);
     public static final AudioAttributes SONIFICIATION_VIBRATION_ATTRIBUTES = new AudioAttributes.Builder().setContentType(4).setUsage(13).build();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaSessionsCallbacks implements MediaSessions.Callbacks {
         public final HashMap mRemoteStreams = new HashMap();
         public int mNextStream = 100;
@@ -182,7 +193,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                         String str2 = VolumeDialogControllerImpl.TAG;
                         Log.d(str2, str + ": added stream " + this.mNextStream + " from token + " + media.toString());
                         this.mNextStream = this.mNextStream + 1;
-                        if ("com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3195$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPackageName())) {
+                        if ("com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPackageName())) {
                             VolumeDialogControllerImpl.this.mIsAudioMirroringEnabled = true;
                             Log.d(str2, str.concat(": - AudioMirroring is on"));
                         }
@@ -200,16 +211,16 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                         Log.d(VolumeDialogControllerImpl.TAG, "onRemoteRemoved: stream doesn't exist, aborting remote removed for token:" + media.toString());
                         return;
                     }
-                    int intValue = ((Integer) this.mRemoteStreams.get(media)).intValue();
+                    int iIntValue = ((Integer) this.mRemoteStreams.get(media)).intValue();
                     VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
-                    if (volumeDialogControllerImpl.mIsAudioMirroringEnabled && "com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3195$$Nest$mgetMediaControllerFromSessionId(volumeDialogControllerImpl, media).getPackageName())) {
+                    if (volumeDialogControllerImpl.mIsAudioMirroringEnabled && "com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(volumeDialogControllerImpl, media).getPackageName())) {
                         VolumeDialogControllerImpl.this.mIsAudioMirroringEnabled = false;
-                        NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(intValue, "onRemoteRemoved ", " - AudioMirroring is off", VolumeDialogControllerImpl.TAG);
+                        NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(iIntValue, "onRemoteRemoved ", " - AudioMirroring is off", VolumeDialogControllerImpl.TAG);
                     }
-                    VolumeDialogControllerImpl.this.mState.states.remove(intValue);
-                    VolumeDialogControllerImpl.this.mVolumeManager.updateRemoteVolume(false, intValue, 0, 0, 0, media.token, false);
+                    VolumeDialogControllerImpl.this.mState.states.remove(iIntValue);
+                    VolumeDialogControllerImpl.this.mVolumeManager.updateRemoteVolume(false, iIntValue, 0, 0, 0, media.token, false);
                     VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
-                    if (volumeDialogControllerImpl2.mState.activeStream == intValue) {
+                    if (volumeDialogControllerImpl2.mState.activeStream == iIntValue) {
                         volumeDialogControllerImpl2.updateActiveStreamW(-1);
                     }
                     VolumeDialogControllerImpl volumeDialogControllerImpl3 = VolumeDialogControllerImpl.this;
@@ -221,7 +232,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Receiver extends BroadcastReceiver {
         public /* synthetic */ Receiver(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
             this();
@@ -230,7 +240,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            boolean z = false;
+            boolean zUpdateEffectsSuppressorW = false;
             if (action.equals("android.media.STREAM_DEVICES_CHANGED_ACTION")) {
                 int intExtra = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1);
                 int intExtra2 = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_DEVICES", -1);
@@ -241,11 +251,11 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                 if (intExtra != -1) {
                     VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
                     String str = VolumeDialogControllerImpl.TAG;
-                    boolean checkRoutedToBluetoothW = volumeDialogControllerImpl.checkRoutedToBluetoothW(intExtra);
+                    boolean zCheckRoutedToBluetoothW = volumeDialogControllerImpl.checkRoutedToBluetoothW(intExtra);
                     if (intExtra == 3) {
-                        checkRoutedToBluetoothW = checkRoutedToBluetoothW | VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(21) | VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(22);
+                        zCheckRoutedToBluetoothW = zCheckRoutedToBluetoothW | VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(21) | VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(22);
                     }
-                    z = checkRoutedToBluetoothW | VolumeDialogControllerImpl.this.onVolumeChangedW(intExtra, 0);
+                    zUpdateEffectsSuppressorW = zCheckRoutedToBluetoothW | VolumeDialogControllerImpl.this.onVolumeChangedW(intExtra, 0);
                 }
             } else if (action.equals("android.media.STREAM_MUTE_CHANGED_ACTION")) {
                 int intExtra4 = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1);
@@ -256,15 +266,15 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                 if (intExtra4 != -1) {
                     VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
                     String str2 = VolumeDialogControllerImpl.TAG;
-                    z = volumeDialogControllerImpl2.updateStreamMuteW(intExtra4, booleanExtra);
+                    zUpdateEffectsSuppressorW = volumeDialogControllerImpl2.updateStreamMuteW(intExtra4, booleanExtra);
                 }
-                VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, intExtra4);
+                VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, intExtra4);
                 if (intExtra4 == 3) {
                     VolumeDialogControllerImpl.this.updateStreamMuteW(21, booleanExtra);
-                    VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 21);
+                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 21);
                     ActionBarContextView$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onReceive STREAM_MUTE_CHANGED_ACTION : stream=", intExtra4, ", muted=", booleanExtra, ", mState.dualAudio="), VolumeDialogControllerImpl.this.mState.dualAudio, VolumeDialogControllerImpl.TAG);
                     VolumeDialogControllerImpl.this.updateStreamMuteW(22, booleanExtra);
-                    VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 22);
+                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 22);
                 }
             } else if (action.equals("android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED")) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl3 = VolumeDialogControllerImpl.this;
@@ -279,7 +289,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     Log.d(VolumeDialogControllerImpl.TAG, "onReceive ACTION_EFFECTS_SUPPRESSOR_CHANGED");
                 }
                 VolumeDialogControllerImpl volumeDialogControllerImpl4 = VolumeDialogControllerImpl.this;
-                z = volumeDialogControllerImpl4.updateEffectsSuppressorW(volumeDialogControllerImpl4.mNoMan.getEffectsSuppressor());
+                zUpdateEffectsSuppressorW = volumeDialogControllerImpl4.updateEffectsSuppressorW(volumeDialogControllerImpl4.mNoMan.getEffectsSuppressor());
             } else if (action.equals("android.intent.action.CONFIGURATION_CHANGED")) {
                 if (D.BUG) {
                     Log.d(VolumeDialogControllerImpl.TAG, "onReceive ACTION_CONFIGURATION_CHANGED");
@@ -302,7 +312,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                 }
                 VolumeDialogControllerImpl.this.updateVolumeBar();
             }
-            if (z) {
+            if (zUpdateEffectsSuppressorW) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl5 = VolumeDialogControllerImpl.this;
                 volumeDialogControllerImpl5.mCallbacks.onStateChanged(volumeDialogControllerImpl5.mState);
             }
@@ -312,14 +322,12 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RingerModeObservers {
         public final RingerModeLiveData mRingerMode;
         public final RingerModeLiveData mRingerModeInternal;
         public final AnonymousClass1 mRingerModeObserver = new AnonymousClass1();
         public final AnonymousClass2 mRingerModeInternalObserver = new AnonymousClass2();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.volume.VolumeDialogControllerImpl$RingerModeObservers$1, reason: invalid class name */
         public class AnonymousClass1 implements Observer {
             public AnonymousClass1() {
@@ -331,7 +339,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.volume.VolumeDialogControllerImpl$RingerModeObservers$2, reason: invalid class name */
         public class AnonymousClass2 implements Observer {
             public AnonymousClass2() {
@@ -349,7 +356,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingObserver extends ContentObserver {
         public final Uri ALL_SOUND_MUTE_URI;
         public final Uri ZEN_MODE_CONFIG_URI;
@@ -364,28 +370,28 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
-            boolean z2;
+            boolean zUpdateZenConfig;
             if (this.ZEN_MODE_URI.equals(uri)) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
                 String str = VolumeDialogControllerImpl.TAG;
-                z2 = volumeDialogControllerImpl.updateZenModeW();
+                zUpdateZenConfig = volumeDialogControllerImpl.updateZenModeW();
             } else {
-                z2 = false;
+                zUpdateZenConfig = false;
             }
             if (this.ZEN_MODE_CONFIG_URI.equals(uri)) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
                 String str2 = VolumeDialogControllerImpl.TAG;
-                z2 |= volumeDialogControllerImpl2.updateZenConfig();
+                zUpdateZenConfig |= volumeDialogControllerImpl2.updateZenConfig();
             }
             if (this.ALL_SOUND_MUTE_URI.equals(uri)) {
-                boolean z3 = Settings.Global.getInt(VolumeDialogControllerImpl.this.mContext.getContentResolver(), "all_sound_off", 0) != 0;
+                boolean z2 = Settings.Global.getInt(VolumeDialogControllerImpl.this.mContext.getContentResolver(), "all_sound_off", 0) != 0;
                 VolumeDialogControllerImpl volumeDialogControllerImpl3 = VolumeDialogControllerImpl.this;
-                if (volumeDialogControllerImpl3.mAllSoundMute != z3) {
-                    volumeDialogControllerImpl3.mAllSoundMute = z3;
-                    z2 = true;
+                if (volumeDialogControllerImpl3.mAllSoundMute != z2) {
+                    volumeDialogControllerImpl3.mAllSoundMute = z2;
+                    zUpdateZenConfig = true;
                 }
             }
-            if (z2) {
+            if (zUpdateZenConfig) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl4 = VolumeDialogControllerImpl.this;
                 String str3 = VolumeDialogControllerImpl.TAG;
                 volumeDialogControllerImpl4.updateVolumeBar();
@@ -395,7 +401,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VC extends IVolumeController.Stub {
         public final String TAG;
 
@@ -488,7 +493,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class W extends Handler {
         public W(Looper looper) {
             super(looper);
@@ -521,26 +525,26 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     String str2 = VolumeDialogControllerImpl.TAG;
                     volumeDialogControllerImpl2.getClass();
                     for (Integer num : VolumeDialogControllerImpl.STREAMS.keySet()) {
-                        int intValue = num.intValue();
-                        volumeDialogControllerImpl2.updateStreamLevelW(intValue, volumeDialogControllerImpl2.getLastAudibleStreamVolume(intValue));
-                        volumeDialogControllerImpl2.streamStateW(intValue).levelMin = volumeDialogControllerImpl2.getAudioManagerStreamMinVolume(intValue);
-                        volumeDialogControllerImpl2.streamStateW(intValue).levelMax = volumeDialogControllerImpl2.getAudioManagerStreamMaxVolume(intValue);
-                        volumeDialogControllerImpl2.updateStreamMuteW(intValue, (intValue == 20 || intValue == 23) ? false : (intValue == 21 || intValue == 22) ? volumeDialogControllerImpl2.mAudio.isStreamMute(3) : volumeDialogControllerImpl2.mAudio.isStreamMute(intValue));
-                        VolumeDialogController.StreamState streamStateW = volumeDialogControllerImpl2.streamStateW(intValue);
-                        streamStateW.muteSupported = volumeDialogControllerImpl2.mAudio.isStreamMutableByUi(intValue);
-                        streamStateW.name = ((Integer) VolumeDialogControllerImpl.STREAMS.get(num)).intValue();
-                        volumeDialogControllerImpl2.checkRoutedToBluetoothW(intValue);
-                        streamStateW.nameRes = volumeDialogControllerImpl2.mContext.getResources().getResourceName(streamStateW.name);
+                        int iIntValue = num.intValue();
+                        volumeDialogControllerImpl2.updateStreamLevelW(iIntValue, volumeDialogControllerImpl2.getLastAudibleStreamVolume(iIntValue));
+                        volumeDialogControllerImpl2.streamStateW(iIntValue).levelMin = volumeDialogControllerImpl2.getAudioManagerStreamMinVolume(iIntValue);
+                        volumeDialogControllerImpl2.streamStateW(iIntValue).levelMax = volumeDialogControllerImpl2.getAudioManagerStreamMaxVolume(iIntValue);
+                        volumeDialogControllerImpl2.updateStreamMuteW(iIntValue, (iIntValue == 20 || iIntValue == 23) ? false : (iIntValue == 21 || iIntValue == 22) ? volumeDialogControllerImpl2.mAudio.isStreamMute(3) : volumeDialogControllerImpl2.mAudio.isStreamMute(iIntValue));
+                        VolumeDialogController.StreamState streamStateStreamStateW = volumeDialogControllerImpl2.streamStateW(iIntValue);
+                        streamStateStreamStateW.muteSupported = volumeDialogControllerImpl2.mAudio.isStreamMutableByUi(iIntValue);
+                        streamStateStreamStateW.name = ((Integer) VolumeDialogControllerImpl.STREAMS.get(num)).intValue();
+                        volumeDialogControllerImpl2.checkRoutedToBluetoothW(iIntValue);
+                        streamStateStreamStateW.nameRes = volumeDialogControllerImpl2.mContext.getResources().getResourceName(streamStateStreamStateW.name);
                     }
                     Integer value = volumeDialogControllerImpl2.mRingerModeObservers.mRingerMode.getValue();
-                    int intValue2 = value.intValue();
+                    int iIntValue2 = value.intValue();
                     VolumeDialogController.State state = volumeDialogControllerImpl2.mState;
-                    if (intValue2 != state.ringerModeExternal) {
-                        if (intValue2 == 1 && !volumeDialogControllerImpl2.mIsVibrating) {
+                    if (iIntValue2 != state.ringerModeExternal) {
+                        if (iIntValue2 == 1 && !volumeDialogControllerImpl2.mIsVibrating) {
                             volumeDialogControllerImpl2.mIsVibrating = true;
                             volumeDialogControllerImpl2.mWorker.postDelayed(new VolumeDialogControllerImpl$$ExternalSyntheticLambda6(volumeDialogControllerImpl2, 0), 800L);
                         }
-                        state.ringerModeExternal = intValue2;
+                        state.ringerModeExternal = iIntValue2;
                         Events.writeEvent(12, value);
                     }
                     volumeDialogControllerImpl2.updateZenModeW();
@@ -709,13 +713,13 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     }
                 case 19:
                     VolumeDialogControllerImpl volumeDialogControllerImpl13 = VolumeDialogControllerImpl.this;
-                    boolean booleanValue = ((Boolean) message.obj).booleanValue();
+                    boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
                     CaptioningManager captioningManager3 = (CaptioningManager) volumeDialogControllerImpl13.mCaptioningManager.get();
                     if (captioningManager3 == null) {
                         Log.e(VolumeDialogControllerImpl.TAG, "onGetCaptionsEnabledStateW(), null captioningManager");
                         return;
                     } else {
-                        captioningManager3.setSystemAudioCaptioningEnabled(booleanValue);
+                        captioningManager3.setSystemAudioCaptioningEnabled(zBooleanValue);
                         volumeDialogControllerImpl13.mCallbacks.onCaptionEnabledStateChanged(Boolean.valueOf(captioningManager3.isSystemAudioCaptioningEnabled()), Boolean.FALSE);
                         return;
                     }
@@ -730,9 +734,9 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     String str10 = VolumeDialogControllerImpl.TAG;
                     volumeDialogControllerImpl14.getClass();
                     if (D.BUG) {
-                        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i10, i11, "onSetStreamVolumeDualAudioW ", " level=", " btDeviceAddress=");
-                        m.append(str9);
-                        Log.d(VolumeDialogControllerImpl.TAG, m.toString());
+                        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i10, i11, "onSetStreamVolumeDualAudioW ", " level=", " btDeviceAddress=");
+                        sbM.append(str9);
+                        Log.d(VolumeDialogControllerImpl.TAG, sbM.toString());
                     }
                     volumeDialogControllerImpl14.setStreamVolume(i10, i11, str9);
                     return;
@@ -743,78 +747,57 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     /* renamed from: -$$Nest$mgetMediaControllerFromSessionId, reason: not valid java name */
-    public static MediaController m3195$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl volumeDialogControllerImpl, MediaSessions.SessionId.Media media) {
+    public static MediaController m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl volumeDialogControllerImpl, MediaSessions.SessionId.Media media) {
         volumeDialogControllerImpl.getClass();
         return new MediaController(volumeDialogControllerImpl.mContext, media.token);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000d  */
     /* renamed from: -$$Nest$mupdateRemoteFixedVolumeSession, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m3196$$Nest$mupdateRemoteFixedVolumeSession(com.android.systemui.volume.VolumeDialogControllerImpl r1, int r2, android.media.session.MediaController.PlaybackInfo r3) {
-        /*
-            if (r3 == 0) goto Ld
-            r1.getClass()
-            int r3 = r3.getVolumeControl()
-            if (r3 != 0) goto Ld
-            r3 = 1
-            goto Le
-        Ld:
-            r3 = 0
-        Le:
-            com.android.systemui.plugins.VolumeDialogController$StreamState r1 = r1.streamStateW(r2)
-            boolean r0 = r1.remoteFixedVolume
-            if (r0 != r3) goto L17
-            goto L39
-        L17:
-            r1.remoteFixedVolume = r3
-            boolean r1 = com.android.systemui.volume.D.BUG
-            if (r1 == 0) goto L39
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r0 = "updateRemoteFixedVolumeSession stream="
-            r1.<init>(r0)
-            r1.append(r2)
-            java.lang.String r2 = " remoteFixedVolume="
-            r1.append(r2)
-            r1.append(r3)
-            java.lang.String r1 = r1.toString()
-            java.lang.String r2 = com.android.systemui.volume.VolumeDialogControllerImpl.TAG
-            android.util.Log.d(r2, r1)
-        L39:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.m3196$$Nest$mupdateRemoteFixedVolumeSession(com.android.systemui.volume.VolumeDialogControllerImpl, int, android.media.session.MediaController$PlaybackInfo):void");
+    public static void m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl volumeDialogControllerImpl, int i, MediaController.PlaybackInfo playbackInfo) {
+        boolean z;
+        if (playbackInfo != null) {
+            volumeDialogControllerImpl.getClass();
+            z = playbackInfo.getVolumeControl() == 0;
+        }
+        VolumeDialogController.StreamState streamStateStreamStateW = volumeDialogControllerImpl.streamStateW(i);
+        if (streamStateStreamStateW.remoteFixedVolume == z) {
+            return;
+        }
+        streamStateStreamStateW.remoteFixedVolume = z;
+        if (D.BUG) {
+            Log.d(TAG, "updateRemoteFixedVolumeSession stream=" + i + " remoteFixedVolume=" + z);
+        }
     }
 
     /* renamed from: -$$Nest$mupdateStreamVolume, reason: not valid java name */
-    public static void m3197$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
+    public static void m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
         volumeDialogControllerImpl.updateStreamLevelW(i, volumeDialogControllerImpl.getLastAudibleStreamVolume(i));
     }
 
     static {
         ArrayMap arrayMap = new ArrayMap();
         STREAMS = arrayMap;
-        Integer valueOf = Integer.valueOf(R.string.volume_icon_description_incall);
-        arrayMap.put(0, valueOf);
+        Integer numValueOf = Integer.valueOf(R.string.volume_icon_description_incall);
+        arrayMap.put(0, numValueOf);
         arrayMap.put(1, Integer.valueOf(R.string.volumepanel_system));
         arrayMap.put(2, Integer.valueOf(R.string.volumepanel_ringtone));
-        Integer valueOf2 = Integer.valueOf(R.string.volumepanel_media);
-        arrayMap.put(3, valueOf2);
+        Integer numValueOf2 = Integer.valueOf(R.string.volumepanel_media);
+        arrayMap.put(3, numValueOf2);
         arrayMap.put(4, Integer.valueOf(R.string.volume_alarm));
         arrayMap.put(5, Integer.valueOf(R.string.volumepanel_notification));
-        arrayMap.put(6, valueOf);
+        arrayMap.put(6, numValueOf);
         arrayMap.put(7, Integer.valueOf(R.string.stream_system_enforced));
         arrayMap.put(8, Integer.valueOf(R.string.stream_dtmf));
         arrayMap.put(9, Integer.valueOf(R.string.stream_tts));
         arrayMap.put(10, Integer.valueOf(R.string.stream_accessibility));
-        arrayMap.put(20, valueOf2);
-        arrayMap.put(21, valueOf2);
+        arrayMap.put(20, numValueOf2);
+        arrayMap.put(21, numValueOf2);
         arrayMap.put(11, Integer.valueOf(R.string.volumepanel_bixby_voice));
-        arrayMap.put(22, valueOf2);
+        arrayMap.put(22, numValueOf2);
         arrayMap.put(23, Integer.valueOf(R.string.volumepanel_music_share));
         DEFAULT_MAX_LEVEL = 15;
         FLAG_SMART_VIEW_NONE = -1;
@@ -878,13 +861,13 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         this.mPackageManager = packageManager;
         this.mWakefulnessLifecycle = wakefulnessLifecycle;
         Events.writeEvent(5, new Object[0]);
-        Looper buildLooperOnNewThread = threadFactory.buildLooperOnNewThread("VolumeDialogControllerImpl");
-        W w = new W(buildLooperOnNewThread);
+        Looper looperBuildLooperOnNewThread = threadFactory.buildLooperOnNewThread("VolumeDialogControllerImpl");
+        W w = new W(looperBuildLooperOnNewThread);
         this.mWorker = w;
         this.mRouter2Manager = MediaRouter2Manager.getInstance(applicationContext);
         MediaSessionsCallbacks mediaSessionsCallbacks = new MediaSessionsCallbacks();
         this.mMediaSessionsCallbacksW = mediaSessionsCallbacks;
-        this.mMediaSessions = new MediaSessions(applicationContext, buildLooperOnNewThread, mediaSessionsCallbacks);
+        this.mMediaSessions = new MediaSessions(applicationContext, looperBuildLooperOnNewThread, mediaSessionsCallbacks);
         this.mAudioSharingInteractor = audioSharingInteractor;
         this.mJavaAdapter = javaAdapter;
         this.mVolumeLogger = volumeLogger;
@@ -894,16 +877,16 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         RingerModeObservers ringerModeObservers = new RingerModeObservers((RingerModeLiveData) ringerModeTracker.getRingerMode(), (RingerModeLiveData) ringerModeTracker.getRingerModeInternal());
         this.mRingerModeObservers = ringerModeObservers;
         RingerModeLiveData ringerModeLiveData = ringerModeObservers.mRingerMode;
-        int intValue = ringerModeLiveData.getValue().intValue();
+        int iIntValue = ringerModeLiveData.getValue().intValue();
         VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
-        if (intValue != -1) {
-            volumeDialogControllerImpl.mState.ringerModeExternal = intValue;
+        if (iIntValue != -1) {
+            volumeDialogControllerImpl.mState.ringerModeExternal = iIntValue;
         }
         ringerModeLiveData.observeForever(ringerModeObservers.mRingerModeObserver);
         RingerModeLiveData ringerModeLiveData2 = ringerModeObservers.mRingerModeInternal;
-        int intValue2 = ringerModeLiveData2.getValue().intValue();
-        if (intValue2 != -1) {
-            volumeDialogControllerImpl.mState.ringerModeInternal = intValue2;
+        int iIntValue2 = ringerModeLiveData2.getValue().intValue();
+        if (iIntValue2 != -1) {
+            volumeDialogControllerImpl.mState.ringerModeInternal = iIntValue2;
         }
         ringerModeLiveData2.observeForever(ringerModeObservers.mRingerModeInternalObserver);
         this.mBroadcastDispatcher = broadcastDispatcher;
@@ -952,14 +935,14 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         try {
             boolean z = false;
             int i2 = Settings.Global.getInt(applicationContext.getContentResolver(), "zen_mode", 0);
-            int semGetFineVolume = audioManager.semGetFineVolume(3);
-            int semGetCurrentDeviceType = audioManager.semGetCurrentDeviceType();
-            boolean isBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
+            int iSemGetFineVolume = audioManager.semGetFineVolume(3);
+            int iSemGetCurrentDeviceType = audioManager.semGetCurrentDeviceType();
+            boolean zIsBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
             boolean z2 = this.mAllSoundMute;
             if (i2 == 1 && (notificationManager.getConsolidatedNotificationPolicy().priorityCategories & 64) == 0) {
                 z = true;
             }
-            VolumeModel volumeModel = new VolumeModel(semGetFineVolume, 0, 150, semGetCurrentDeviceType, true, isBluetoothLeBroadcastEnabled, z2, i2, z, isSmartViewEnabled(), isMusicShareEnabled(), this.mIsDisallowAdjustVolume);
+            VolumeModel volumeModel = new VolumeModel(iSemGetFineVolume, 0, 150, iSemGetCurrentDeviceType, true, zIsBluetoothLeBroadcastEnabled, z2, i2, z, isSmartViewEnabled(), isMusicShareEnabled(), this.mIsDisallowAdjustVolume);
             volumeManager.volumeModel = volumeModel;
             Log.i("SoundCraft.VolumeManager", "updateVolumeState " + volumeModel);
             volumeManager.updateCurrentVolume();
@@ -1010,10 +993,10 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
             int devicesForStream = this.mAudio.getDevicesForStream(3);
             boolean z = (67108876 & devicesForStream) != 0;
             boolean z2 = ((671089568 & devicesForStream) == 0 || (devicesForStream == 536870914 && this.mBluetoothAdapterManager.getConnectedLeDevices().isEmpty())) ? false : true;
-            boolean isBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
+            boolean zIsBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
             VolumeDialogController.State state = this.mState;
-            state.isLeBroadcasting = isBluetoothLeBroadcastEnabled;
-            state.broadcastMode = isBluetoothLeBroadcastEnabled ? z2 ? 1 : 2 : 0;
+            state.isLeBroadcasting = zIsBluetoothLeBroadcastEnabled;
+            state.broadcastMode = zIsBluetoothLeBroadcastEnabled ? z2 ? 1 : 2 : 0;
             return (isMusicShareEnabled() ? updateStreamRoutedToBluetoothW(i, true) : updateStreamRoutedToBluetoothW(i, z2)) | updateStreamRoutedToHeadsetW(i, z);
         }
         if (i != 21) {
@@ -1025,21 +1008,21 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
             }
             return false;
         }
-        int semGetPinDevice = this.mAudio.semGetPinDevice();
-        boolean z3 = (67108876 & semGetPinDevice) != 0;
-        boolean z4 = (671089568 & semGetPinDevice) != 0;
-        boolean z5 = (semGetPinDevice & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0;
-        boolean updateStreamRoutedToBluetoothW = updateStreamRoutedToBluetoothW(i, z4) | updateStreamRoutedToHeadsetW(i, z3);
-        VolumeDialogController.StreamState streamStateW = streamStateW(i);
-        if (streamStateW.appMirroring == z5) {
-            r0 = false;
+        int iSemGetPinDevice = this.mAudio.semGetPinDevice();
+        boolean z3 = (67108876 & iSemGetPinDevice) != 0;
+        boolean z4 = (671089568 & iSemGetPinDevice) != 0;
+        boolean z5 = (iSemGetPinDevice & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0;
+        boolean zUpdateStreamRoutedToBluetoothW = updateStreamRoutedToBluetoothW(i, z4) | updateStreamRoutedToHeadsetW(i, z3);
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(i);
+        if (streamStateStreamStateW.appMirroring == z5) {
+            z = false;
         } else {
-            streamStateW.appMirroring = z5;
+            streamStateStreamStateW.appMirroring = z5;
             if (D.BUG) {
                 Log.d(TAG, "updateStreamRoutedToAppMirroring stream=" + i + " appMirroring=" + z5);
             }
         }
-        return updateStreamRoutedToBluetoothW | r0;
+        return zUpdateStreamRoutedToBluetoothW | z;
     }
 
     @Override // com.android.systemui.Dumpable
@@ -1085,7 +1068,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         this.mWorker.post(new Runnable() { // from class: com.android.systemui.volume.VolumeDialogControllerImpl$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
+                VolumeDialogControllerImpl volumeDialogControllerImpl = this.f$0;
                 volumeDialogControllerImpl.mAudio.forceVolumeControlStream(i);
             }
         });
@@ -1146,130 +1129,59 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public final boolean getDisallowAdjustVolume() {
-        boolean hasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
-        Log.i(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", hasUserRestriction));
-        return hasUserRestriction;
+        boolean zHasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
+        Log.i(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", zHasUserRestriction));
+        return zHasUserRestriction;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0087  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0024 A[PHI: r0
+      0x0024: PHI (r0v4 java.util.List) = (r0v3 java.util.List), (r0v12 java.util.List) binds: [B:5:0x0011, B:7:0x0020] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int getLastAudibleStreamVolume(int r7) {
-        /*
-            r6 = this;
-            boolean r0 = isMediaStream(r7)
-            r1 = 0
-            if (r0 == 0) goto L9f
-            java.util.ArrayList r0 = new java.util.ArrayList
-            r0.<init>()
-            com.android.systemui.plugins.VolumeDialogController$State r2 = r6.mState
-            boolean r3 = r2.dualAudio
-            r4 = 1
-            if (r3 == 0) goto L24
-            com.android.systemui.volume.util.BluetoothAdapterWrapper r0 = r6.mBluetoothAdapterManager
-            boolean r2 = r2.isLeBroadcasting
-            java.util.List r0 = r0.getConnectedDevices(r2)
-            int r2 = r0.size()
-            r3 = 2
-            if (r2 != r3) goto L24
-            r2 = r4
-            goto L25
-        L24:
-            r2 = r1
-        L25:
-            android.util.Pair r3 = new android.util.Pair
-            java.lang.Boolean r2 = java.lang.Boolean.valueOf(r2)
-            r3.<init>(r2, r0)
-            java.lang.Object r0 = r3.first
-            java.lang.Boolean r0 = (java.lang.Boolean) r0
-            boolean r0 = r0.booleanValue()
-            r2 = 3
-            r5 = 21
-            if (r0 == 0) goto L87
-            java.lang.Object r0 = r3.second
-            java.util.List r0 = (java.util.List) r0
-            boolean r3 = r6.isMultiSoundBT()
-            if (r3 == 0) goto L63
-            if (r7 != r2) goto L4e
-            android.media.AudioManager r6 = r6.mAudio
-            int r6 = r6.semGetFineVolume(r2)
-            goto L9c
-        L4e:
-            android.media.AudioManager r6 = r6.mAudio
-            if (r7 != r5) goto L59
-            java.lang.Object r7 = r0.get(r1)
-        L56:
-            android.bluetooth.BluetoothDevice r7 = (android.bluetooth.BluetoothDevice) r7
-            goto L5e
-        L59:
-            java.lang.Object r7 = r0.get(r4)
-            goto L56
-        L5e:
-            int r6 = r6.semGetFineVolume(r7, r2)
-            goto L9c
-        L63:
-            if (r7 != r5) goto L72
-            android.media.AudioManager r7 = r6.mAudio
-            int r7 = r7.semGetPinDevice()
-            android.media.AudioManager r6 = r6.mAudio
-            int r6 = r6.getFineVolume(r2, r7)
-            goto L9c
-        L72:
-            android.media.AudioManager r6 = r6.mAudio
-            if (r7 != r2) goto L7d
-            java.lang.Object r7 = r0.get(r1)
-        L7a:
-            android.bluetooth.BluetoothDevice r7 = (android.bluetooth.BluetoothDevice) r7
-            goto L82
-        L7d:
-            java.lang.Object r7 = r0.get(r4)
-            goto L7a
-        L82:
-            int r6 = r6.semGetFineVolume(r7, r2)
-            goto L9c
-        L87:
-            if (r7 != r5) goto L96
-            android.media.AudioManager r7 = r6.mAudio
-            int r7 = r7.semGetPinDevice()
-            android.media.AudioManager r6 = r6.mAudio
-            int r6 = r6.getFineVolume(r2, r7)
-            goto L9c
-        L96:
-            android.media.AudioManager r6 = r6.mAudio
-            int r6 = r6.semGetFineVolume(r2)
-        L9c:
-            int r6 = r6 * 10
-            return r6
-        L9f:
-            r0 = 20
-            if (r7 != r0) goto Lae
-            boolean r7 = r6.isSmartViewEnabled()
-            if (r7 == 0) goto Lc2
-            com.android.systemui.volume.util.DisplayManagerWrapper r6 = r6.mDisplayManagerWrapper
-            int r6 = r6.displayCurrentVolume
-            return r6
-        Lae:
-            r0 = 23
-            if (r7 != r0) goto Lc3
-            boolean r7 = r6.mIsBudsTogetherEnabled
-            if (r7 == 0) goto Lc2
-            com.android.systemui.volume.util.BluetoothAudioCastWrapper r6 = r6.mBluetoothAudioCastWrapper
-            com.samsung.android.bluetooth.SemBluetoothAudioCast r6 = r6.service
-            if (r6 == 0) goto Lc2
-            r7 = 0
-            int r6 = r6.getAudioSharingDeviceVolume(r7)
-            return r6
-        Lc2:
-            return r1
-        Lc3:
-            android.media.AudioManager r6 = r6.mAudio
-            int r6 = r6.getStreamVolume(r7)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.getLastAudibleStreamVolume(int):int");
+    public final int getLastAudibleStreamVolume(int i) {
+        SemBluetoothAudioCast semBluetoothAudioCast;
+        boolean z;
+        int fineVolume;
+        if (!isMediaStream(i)) {
+            if (i == 20) {
+                if (isSmartViewEnabled()) {
+                    return this.mDisplayManagerWrapper.displayCurrentVolume;
+                }
+            } else {
+                if (i != 23) {
+                    return this.mAudio.getStreamVolume(i);
+                }
+                if (this.mIsBudsTogetherEnabled && (semBluetoothAudioCast = this.mBluetoothAudioCastWrapper.service) != null) {
+                    return semBluetoothAudioCast.getAudioSharingDeviceVolume((SemBluetoothCastDevice) null);
+                }
+            }
+            return 0;
+        }
+        List arrayList = new ArrayList();
+        VolumeDialogController.State state = this.mState;
+        if (state.dualAudio) {
+            arrayList = this.mBluetoothAdapterManager.getConnectedDevices(state.isLeBroadcasting);
+            z = arrayList.size() == 2;
+        }
+        Pair pair = new Pair(Boolean.valueOf(z), arrayList);
+        if (((Boolean) pair.first).booleanValue()) {
+            List list = (List) pair.second;
+            if (isMultiSoundBT()) {
+                if (i == 3) {
+                    fineVolume = this.mAudio.semGetFineVolume(3);
+                } else {
+                    fineVolume = this.mAudio.semGetFineVolume((BluetoothDevice) (i == 21 ? list.get(0) : list.get(1)), 3);
+                }
+            } else if (i == 21) {
+                fineVolume = this.mAudio.getFineVolume(3, this.mAudio.semGetPinDevice());
+            } else {
+                fineVolume = this.mAudio.semGetFineVolume((BluetoothDevice) (i == 3 ? list.get(0) : list.get(1)), 3);
+            }
+        } else {
+            fineVolume = i == 21 ? this.mAudio.getFineVolume(3, this.mAudio.semGetPinDevice()) : this.mAudio.semGetFineVolume(3);
+        }
+        return fineVolume * 10;
     }
 
     @Override // com.android.systemui.plugins.VolumeDialogController
@@ -1348,36 +1260,488 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         this.mWorker.obtainMessage(12, z ? 1 : 0, 0).sendToTarget();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x02fd  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0311  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0316  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x031d  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0322  */
-    /* JADX WARN: Removed duplicated region for block: B:124:0x036a  */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x0389  */
-    /* JADX WARN: Removed duplicated region for block: B:145:0x03bb A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x037a  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x037e  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x035b  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x031f  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x020f  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x021c  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0229  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0236  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0254  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0266  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x029f  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x02f5  */
+    /* JADX WARN: Removed duplicated region for block: B:125:0x020f  */
+    /* JADX WARN: Removed duplicated region for block: B:128:0x0217  */
+    /* JADX WARN: Removed duplicated region for block: B:131:0x021c  */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x0224  */
+    /* JADX WARN: Removed duplicated region for block: B:137:0x0229  */
+    /* JADX WARN: Removed duplicated region for block: B:140:0x0231  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x0236  */
+    /* JADX WARN: Removed duplicated region for block: B:146:0x023e  */
+    /* JADX WARN: Removed duplicated region for block: B:149:0x0254  */
+    /* JADX WARN: Removed duplicated region for block: B:154:0x0266  */
+    /* JADX WARN: Removed duplicated region for block: B:173:0x029c  */
+    /* JADX WARN: Removed duplicated region for block: B:175:0x029f  */
+    /* JADX WARN: Removed duplicated region for block: B:178:0x02f5  */
+    /* JADX WARN: Removed duplicated region for block: B:180:0x02fd  */
+    /* JADX WARN: Removed duplicated region for block: B:182:0x0311  */
+    /* JADX WARN: Removed duplicated region for block: B:184:0x0316  */
+    /* JADX WARN: Removed duplicated region for block: B:187:0x031d  */
+    /* JADX WARN: Removed duplicated region for block: B:188:0x031f  */
+    /* JADX WARN: Removed duplicated region for block: B:190:0x0322  */
+    /* JADX WARN: Removed duplicated region for block: B:202:0x035b  */
+    /* JADX WARN: Removed duplicated region for block: B:206:0x036a  */
+    /* JADX WARN: Removed duplicated region for block: B:209:0x0372  */
+    /* JADX WARN: Removed duplicated region for block: B:211:0x037a  */
+    /* JADX WARN: Removed duplicated region for block: B:216:0x0386  */
+    /* JADX WARN: Removed duplicated region for block: B:218:0x0389  */
+    /* JADX WARN: Removed duplicated region for block: B:236:0x03bb A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onVolumeChangedW(int r20, int r21) {
-        /*
-            Method dump skipped, instructions count: 977
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.onVolumeChangedW(int, int):boolean");
+    public final boolean onVolumeChangedW(int i, int i2) {
+        boolean z;
+        List listMapNames;
+        boolean z2;
+        String castDeviceConnectedName;
+        String str;
+        boolean z3;
+        boolean z4;
+        int i3;
+        int lastAudibleStreamVolume;
+        boolean zUpdateStreamLevelW;
+        C c;
+        VolumeDialogController.StreamState streamStateStreamStateW;
+        int i4;
+        boolean zIsMediaStream;
+        char c2;
+        boolean zShouldShowUI = shouldShowUI(i2);
+        boolean z5 = (i2 & 4096) != 0;
+        boolean z6 = (i2 & 2048) != 0;
+        boolean z7 = (i2 & 128) != 0;
+        boolean z8 = (262144 & i2) != 0;
+        VolumeDialogController.State state = this.mState;
+        state.fixedSCOVolume = z8;
+        state.remoteMic = (67108864 & i2) != 0;
+        int i5 = (8388608 & i2) != 0 ? 21 : i;
+        if ((4194304 & i2) != 0) {
+            this.mSmartViewFlag = FLAG_SMART_VIEW_NONE;
+            i5 = 20;
+            streamStateW(20).levelMin = getAudioManagerStreamMinVolume(20);
+            streamStateW(20).levelMax = getAudioManagerStreamMaxVolume(20);
+        }
+        boolean zIsBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
+        state.isLeBroadcasting = zIsBluetoothLeBroadcastEnabled;
+        BluetoothAdapterWrapper bluetoothAdapterWrapper = this.mBluetoothAdapterManager;
+        List connectedDevices = bluetoothAdapterWrapper.getConnectedDevices(zIsBluetoothLeBroadcastEnabled);
+        state.dualAudio = (524288 & i2) != 0 && connectedDevices.size() == 2 && shouldDualAudioUIEnabled();
+        BluetoothDevice bluetoothDevice = connectedDevices.isEmpty() ? null : (BluetoothDevice) connectedDevices.get(0);
+        BluetoothDevice bluetoothDevice2 = (!state.dualAudio || connectedDevices.size() < 2) ? null : (BluetoothDevice) connectedDevices.get(1);
+        VolumeDialogController.StreamState streamStateStreamStateW2 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+        VolumeDialogController.StreamState streamStateStreamStateW3 = streamStateW(22);
+        int iSemGetCurrentDeviceType = this.mAudio.semGetCurrentDeviceType();
+        if ((iSemGetCurrentDeviceType != 23 || bluetoothAdapterWrapper.getHearingAidDevices().isEmpty()) && (!(iSemGetCurrentDeviceType == 26 || state.isLeBroadcasting) || bluetoothAdapterWrapper.getConnectedLeHearingAidDevice().isEmpty())) {
+            streamStateStreamStateW2.routedToHearingAid = false;
+        } else {
+            streamStateStreamStateW2.routedToHearingAid = true;
+        }
+        String address = bluetoothDevice != null ? bluetoothDevice.getAddress() : null;
+        String address2 = bluetoothDevice2 != null ? bluetoothDevice2.getAddress() : null;
+        if (Objects.equals(address, streamStateStreamStateW2.bluetoothDeviceAddress) && Objects.equals(address2, streamStateStreamStateW3.bluetoothDeviceAddress)) {
+            z = false;
+        } else {
+            streamStateStreamStateW2.bluetoothDeviceAddress = address;
+            streamStateStreamStateW3.bluetoothDeviceAddress = address2;
+            z = true;
+        }
+        VolumeDialogController.StreamState streamStateStreamStateW4 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+        VolumeDialogController.StreamState streamStateStreamStateW5 = streamStateW(22);
+        if (isMusicShareEnabled()) {
+            castDeviceConnectedName = this.mBluetoothAudioCastWrapper.getCastDeviceConnectedName();
+            z2 = z;
+        } else {
+            if (state.isLeBroadcasting) {
+                BluetoothCommonUtil bluetoothCommonUtil = BluetoothCommonUtil.INSTANCE;
+                List connectedLeDevices = bluetoothAdapterWrapper.getConnectedLeDevices();
+                bluetoothCommonUtil.getClass();
+                listMapNames = BluetoothCommonUtil.mapNames(connectedLeDevices);
+            } else {
+                int iSemGetCurrentDeviceType2 = bluetoothAdapterWrapper.audioManager.am.semGetCurrentDeviceType();
+                if (iSemGetCurrentDeviceType2 == 23) {
+                    BluetoothCommonUtil bluetoothCommonUtil2 = BluetoothCommonUtil.INSTANCE;
+                    List hearingAidDevices = bluetoothAdapterWrapper.getHearingAidDevices();
+                    bluetoothCommonUtil2.getClass();
+                    listMapNames = BluetoothCommonUtil.mapNames(hearingAidDevices);
+                } else if (iSemGetCurrentDeviceType2 == 26 || iSemGetCurrentDeviceType2 == 27) {
+                    BluetoothCommonUtil bluetoothCommonUtil3 = BluetoothCommonUtil.INSTANCE;
+                    List connectedLeDevices2 = bluetoothAdapterWrapper.getConnectedLeDevices();
+                    bluetoothCommonUtil3.getClass();
+                    listMapNames = BluetoothCommonUtil.mapNames(connectedLeDevices2);
+                } else {
+                    BluetoothA2dp bluetoothA2dp = bluetoothAdapterWrapper.a2dp;
+                    if (bluetoothA2dp != null) {
+                        BluetoothA2dpUtil.INSTANCE.getClass();
+                        BluetoothCommonUtil bluetoothCommonUtil4 = BluetoothCommonUtil.INSTANCE;
+                        List orderConnectedDevices = BluetoothA2dpUtil.getOrderConnectedDevices(bluetoothA2dp);
+                        bluetoothCommonUtil4.getClass();
+                        listMapNames = BluetoothCommonUtil.mapNames(orderConnectedDevices);
+                    } else {
+                        listMapNames = null;
+                    }
+                    if (!(listMapNames != null ? !listMapNames.isEmpty() : false)) {
+                        listMapNames = null;
+                    }
+                    if (listMapNames == null) {
+                        listMapNames = EmptyList.INSTANCE;
+                    }
+                }
+            }
+            if (listMapNames.isEmpty()) {
+                if (streamStateStreamStateW4.bluetoothDeviceName == null) {
+                    z2 = z;
+                    z3 = false;
+                    boolean z9 = z2 | z3;
+                    VolumeDialogController.StreamState streamStateStreamStateW6 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                    VolumeDialogController.StreamState streamStateStreamStateW7 = streamStateW(22);
+                    updateStreamRoutedToBudsW(bluetoothDevice, streamStateStreamStateW6);
+                    updateStreamRoutedToBudsW(bluetoothDevice2, streamStateStreamStateW7);
+                    streamStateStreamStateW6.routedToHomeMini = bluetoothDevice != null && BluetoothIconUtil.isHomeMini(bluetoothDevice);
+                    streamStateStreamStateW7.routedToHomeMini = bluetoothDevice2 != null && BluetoothIconUtil.isHomeMini(bluetoothDevice2);
+                    streamStateStreamStateW6.routedToMusicFrame = bluetoothDevice != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice);
+                    streamStateStreamStateW7.routedToMusicFrame = bluetoothDevice2 != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice2);
+                    boolean zUpdateStreamLevelW2 = z9 | updateStreamLevelW(22, getLastAudibleStreamVolume(22)) | checkRoutedToBluetoothW(22);
+                    if (zShouldShowUI) {
+                    }
+                    z4 = BasicRune.VOLUME_HOME_IOT;
+                    if (z4) {
+                    }
+                    if (zShouldShowUI) {
+                    }
+                    lastAudibleStreamVolume = getLastAudibleStreamVolume(i5);
+                    zUpdateStreamLevelW = zUpdateStreamLevelW2 | updateStreamLevelW(i5, lastAudibleStreamVolume);
+                    VolumeDialogController.StreamState streamStateStreamStateW8 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i2, "onVolumeChangedW stream = ", ", flags = ", ", lastAudibleStreamVolume = ");
+                    sbM.append(lastAudibleStreamVolume);
+                    sbM.append(", changed = ");
+                    sbM.append(zUpdateStreamLevelW);
+                    sbM.append(", showUI = ");
+                    sbM.append(zShouldShowUI);
+                    sbM.append(", dualAudio = ");
+                    sbM.append(state.dualAudio);
+                    sbM.append(", musicStreamState=");
+                    sbM.append(streamStateStreamStateW8);
+                    Log.d(TAG, sbM.toString());
+                    c = this.mCallbacks;
+                    if (zUpdateStreamLevelW) {
+                    }
+                    if (zShouldShowUI) {
+                    }
+                    if (z6) {
+                    }
+                    if (z7) {
+                    }
+                    if ((i2 & 4) != 0) {
+                    }
+                    if (z4) {
+                    }
+                    streamStateStreamStateW = streamStateW(i5);
+                    i4 = streamStateStreamStateW.level;
+                    if (i4 != streamStateStreamStateW.levelMin) {
+                        zIsMediaStream = isMediaStream(i5);
+                        int i6 = streamStateStreamStateW.levelMax;
+                        if (zIsMediaStream) {
+                        }
+                        if (i4 == i6) {
+                        }
+                    }
+                    if (z5) {
+                    }
+                    if (zUpdateStreamLevelW) {
+                        Events.writeEvent(4, Integer.valueOf(i5), Integer.valueOf(lastAudibleStreamVolume));
+                        c.onVolumeChangedFromKey();
+                    }
+                    return zUpdateStreamLevelW;
+                }
+                streamStateStreamStateW4.bluetoothDeviceName = null;
+                streamStateStreamStateW5.bluetoothDeviceName = null;
+                z2 = z;
+                z3 = true;
+                boolean z92 = z2 | z3;
+                VolumeDialogController.StreamState streamStateStreamStateW62 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                VolumeDialogController.StreamState streamStateStreamStateW72 = streamStateW(22);
+                updateStreamRoutedToBudsW(bluetoothDevice, streamStateStreamStateW62);
+                updateStreamRoutedToBudsW(bluetoothDevice2, streamStateStreamStateW72);
+                streamStateStreamStateW62.routedToHomeMini = bluetoothDevice != null && BluetoothIconUtil.isHomeMini(bluetoothDevice);
+                streamStateStreamStateW72.routedToHomeMini = bluetoothDevice2 != null && BluetoothIconUtil.isHomeMini(bluetoothDevice2);
+                streamStateStreamStateW62.routedToMusicFrame = bluetoothDevice != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice);
+                streamStateStreamStateW72.routedToMusicFrame = bluetoothDevice2 != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice2);
+                boolean zUpdateStreamLevelW22 = z92 | updateStreamLevelW(22, getLastAudibleStreamVolume(22)) | checkRoutedToBluetoothW(22);
+                if (zShouldShowUI) {
+                    zUpdateStreamLevelW22 |= checkRoutedToBluetoothW(i5);
+                    if (i5 == 3) {
+                        zUpdateStreamLevelW22 |= checkRoutedToBluetoothW(21);
+                    }
+                }
+                z4 = BasicRune.VOLUME_HOME_IOT;
+                if (z4) {
+                    VolumeDialogController.StreamState streamStateStreamStateW9 = streamStateW(i5);
+                    int lastAudibleStreamVolume2 = getLastAudibleStreamVolume(i5);
+                    if (streamStateStreamStateW9.levelMin == (isMediaStream(i5) ? lastAudibleStreamVolume2 / 100 : lastAudibleStreamVolume2) && streamStateStreamStateW9.level == lastAudibleStreamVolume2) {
+                        i3 = 2;
+                    } else {
+                        i3 = (streamStateStreamStateW9.levelMax == (isMediaStream(i5) ? lastAudibleStreamVolume2 / 100 : lastAudibleStreamVolume2) && streamStateStreamStateW9.level == lastAudibleStreamVolume2) ? 3 : streamStateStreamStateW9.level < lastAudibleStreamVolume2 ? 1 : 0;
+                    }
+                }
+                if (zShouldShowUI) {
+                    zUpdateStreamLevelW22 |= updateActiveStreamW(i5);
+                }
+                lastAudibleStreamVolume = getLastAudibleStreamVolume(i5);
+                zUpdateStreamLevelW = zUpdateStreamLevelW22 | updateStreamLevelW(i5, lastAudibleStreamVolume);
+                VolumeDialogController.StreamState streamStateStreamStateW82 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i2, "onVolumeChangedW stream = ", ", flags = ", ", lastAudibleStreamVolume = ");
+                sbM2.append(lastAudibleStreamVolume);
+                sbM2.append(", changed = ");
+                sbM2.append(zUpdateStreamLevelW);
+                sbM2.append(", showUI = ");
+                sbM2.append(zShouldShowUI);
+                sbM2.append(", dualAudio = ");
+                sbM2.append(state.dualAudio);
+                sbM2.append(", musicStreamState=");
+                sbM2.append(streamStateStreamStateW82);
+                Log.d(TAG, sbM2.toString());
+                c = this.mCallbacks;
+                if (zUpdateStreamLevelW) {
+                    c.onStateChanged(state);
+                    updateVolumeBar();
+                }
+                if (zShouldShowUI) {
+                    this.mCallbacks.onShowRequested(1, this.mKeyguardManager.isKeyguardLocked(), this.mActivityManager.getLockTaskModeState());
+                }
+                if (z6) {
+                    c.onShowVibrateHint();
+                }
+                if (z7) {
+                    c.onShowSilentHint();
+                }
+                boolean z10 = (i2 & 4) != 0;
+                if (z4) {
+                    if (zShouldShowUI) {
+                        if (z10 || i3 == 3 || i3 == 2) {
+                            c.onPlaySound(i5, z5, i3);
+                        }
+                        int i7 = isMediaStream(i5) ? lastAudibleStreamVolume / 100 : lastAudibleStreamVolume;
+                        Intent intent = new Intent("com.android.server.LightsService.action.LED_CONTROL_WHITE_LED_PATTERN");
+                        intent.putExtra("details", "Volume:Light");
+                        intent.putExtra("mode", 10);
+                        intent.putExtra("extra", i7);
+                        this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
+                    }
+                } else if (z10) {
+                    c.onPlaySound(i5, z5);
+                }
+                streamStateStreamStateW = streamStateW(i5);
+                i4 = streamStateStreamStateW.level;
+                if (i4 != streamStateStreamStateW.levelMin || (i2 & 65536) == 0) {
+                    zIsMediaStream = isMediaStream(i5);
+                    int i62 = streamStateStreamStateW.levelMax;
+                    if (zIsMediaStream) {
+                        i62 *= 100;
+                    }
+                    c2 = (i4 == i62 || (i2 & 131072) == 0) ? (char) 0 : (char) 1;
+                } else {
+                    c2 = 65535;
+                }
+                if (z5) {
+                    if (c2 == 0 || !zShouldShowUI) {
+                        if (this.mKeyDown) {
+                            this.mKeyDown = false;
+                            c.onKeyEvent(false, this.mIsVibrating);
+                        }
+                    } else if (!this.mKeyDown) {
+                        this.mKeyDown = true;
+                        c.onKeyEvent(true, this.mIsVibrating || (this.mAudio.getRingerModeInternal() == 1 && state.ringerModeInternal == 2));
+                    }
+                }
+                if (zUpdateStreamLevelW && z5) {
+                    Events.writeEvent(4, Integer.valueOf(i5), Integer.valueOf(lastAudibleStreamVolume));
+                    c.onVolumeChangedFromKey();
+                }
+                return zUpdateStreamLevelW;
+            }
+            String str2 = (String) listMapNames.get(0);
+            if (state.dualAudio) {
+                z2 = z;
+                if (listMapNames.size() == 2) {
+                    String str3 = (String) listMapNames.get(1);
+                    castDeviceConnectedName = str2;
+                    str = str3;
+                    if (Objects.equals(castDeviceConnectedName, streamStateStreamStateW4.bluetoothDeviceName) || !Objects.equals(str, streamStateStreamStateW5.bluetoothDeviceName)) {
+                        streamStateStreamStateW4.bluetoothDeviceName = castDeviceConnectedName;
+                        streamStateStreamStateW5.bluetoothDeviceName = str;
+                        z3 = true;
+                        boolean z922 = z2 | z3;
+                        VolumeDialogController.StreamState streamStateStreamStateW622 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                        VolumeDialogController.StreamState streamStateStreamStateW722 = streamStateW(22);
+                        updateStreamRoutedToBudsW(bluetoothDevice, streamStateStreamStateW622);
+                        updateStreamRoutedToBudsW(bluetoothDevice2, streamStateStreamStateW722);
+                        streamStateStreamStateW622.routedToHomeMini = bluetoothDevice != null && BluetoothIconUtil.isHomeMini(bluetoothDevice);
+                        streamStateStreamStateW722.routedToHomeMini = bluetoothDevice2 != null && BluetoothIconUtil.isHomeMini(bluetoothDevice2);
+                        streamStateStreamStateW622.routedToMusicFrame = bluetoothDevice != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice);
+                        streamStateStreamStateW722.routedToMusicFrame = bluetoothDevice2 != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice2);
+                        boolean zUpdateStreamLevelW222 = z922 | updateStreamLevelW(22, getLastAudibleStreamVolume(22)) | checkRoutedToBluetoothW(22);
+                        if (zShouldShowUI) {
+                        }
+                        z4 = BasicRune.VOLUME_HOME_IOT;
+                        if (z4) {
+                        }
+                        if (zShouldShowUI) {
+                        }
+                        lastAudibleStreamVolume = getLastAudibleStreamVolume(i5);
+                        zUpdateStreamLevelW = zUpdateStreamLevelW222 | updateStreamLevelW(i5, lastAudibleStreamVolume);
+                        VolumeDialogController.StreamState streamStateStreamStateW822 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                        StringBuilder sbM22 = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i2, "onVolumeChangedW stream = ", ", flags = ", ", lastAudibleStreamVolume = ");
+                        sbM22.append(lastAudibleStreamVolume);
+                        sbM22.append(", changed = ");
+                        sbM22.append(zUpdateStreamLevelW);
+                        sbM22.append(", showUI = ");
+                        sbM22.append(zShouldShowUI);
+                        sbM22.append(", dualAudio = ");
+                        sbM22.append(state.dualAudio);
+                        sbM22.append(", musicStreamState=");
+                        sbM22.append(streamStateStreamStateW822);
+                        Log.d(TAG, sbM22.toString());
+                        c = this.mCallbacks;
+                        if (zUpdateStreamLevelW) {
+                        }
+                        if (zShouldShowUI) {
+                        }
+                        if (z6) {
+                        }
+                        if (z7) {
+                        }
+                        if ((i2 & 4) != 0) {
+                        }
+                        if (z4) {
+                        }
+                        streamStateStreamStateW = streamStateW(i5);
+                        i4 = streamStateStreamStateW.level;
+                        if (i4 != streamStateStreamStateW.levelMin) {
+                        }
+                        if (z5) {
+                        }
+                        if (zUpdateStreamLevelW) {
+                        }
+                        return zUpdateStreamLevelW;
+                    }
+                    z3 = false;
+                    boolean z9222 = z2 | z3;
+                    VolumeDialogController.StreamState streamStateStreamStateW6222 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                    VolumeDialogController.StreamState streamStateStreamStateW7222 = streamStateW(22);
+                    updateStreamRoutedToBudsW(bluetoothDevice, streamStateStreamStateW6222);
+                    updateStreamRoutedToBudsW(bluetoothDevice2, streamStateStreamStateW7222);
+                    streamStateStreamStateW6222.routedToHomeMini = bluetoothDevice != null && BluetoothIconUtil.isHomeMini(bluetoothDevice);
+                    streamStateStreamStateW7222.routedToHomeMini = bluetoothDevice2 != null && BluetoothIconUtil.isHomeMini(bluetoothDevice2);
+                    streamStateStreamStateW6222.routedToMusicFrame = bluetoothDevice != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice);
+                    streamStateStreamStateW7222.routedToMusicFrame = bluetoothDevice2 != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice2);
+                    boolean zUpdateStreamLevelW2222 = z9222 | updateStreamLevelW(22, getLastAudibleStreamVolume(22)) | checkRoutedToBluetoothW(22);
+                    if (zShouldShowUI) {
+                    }
+                    z4 = BasicRune.VOLUME_HOME_IOT;
+                    if (z4) {
+                    }
+                    if (zShouldShowUI) {
+                    }
+                    lastAudibleStreamVolume = getLastAudibleStreamVolume(i5);
+                    zUpdateStreamLevelW = zUpdateStreamLevelW2222 | updateStreamLevelW(i5, lastAudibleStreamVolume);
+                    VolumeDialogController.StreamState streamStateStreamStateW8222 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+                    StringBuilder sbM222 = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i2, "onVolumeChangedW stream = ", ", flags = ", ", lastAudibleStreamVolume = ");
+                    sbM222.append(lastAudibleStreamVolume);
+                    sbM222.append(", changed = ");
+                    sbM222.append(zUpdateStreamLevelW);
+                    sbM222.append(", showUI = ");
+                    sbM222.append(zShouldShowUI);
+                    sbM222.append(", dualAudio = ");
+                    sbM222.append(state.dualAudio);
+                    sbM222.append(", musicStreamState=");
+                    sbM222.append(streamStateStreamStateW8222);
+                    Log.d(TAG, sbM222.toString());
+                    c = this.mCallbacks;
+                    if (zUpdateStreamLevelW) {
+                    }
+                    if (zShouldShowUI) {
+                    }
+                    if (z6) {
+                    }
+                    if (z7) {
+                    }
+                    if ((i2 & 4) != 0) {
+                    }
+                    if (z4) {
+                    }
+                    streamStateStreamStateW = streamStateW(i5);
+                    i4 = streamStateStreamStateW.level;
+                    if (i4 != streamStateStreamStateW.levelMin) {
+                    }
+                    if (z5) {
+                    }
+                    if (zUpdateStreamLevelW) {
+                    }
+                    return zUpdateStreamLevelW;
+                }
+            } else {
+                z2 = z;
+            }
+            castDeviceConnectedName = str2;
+        }
+        str = null;
+        if (Objects.equals(castDeviceConnectedName, streamStateStreamStateW4.bluetoothDeviceName)) {
+        }
+        streamStateStreamStateW4.bluetoothDeviceName = castDeviceConnectedName;
+        streamStateStreamStateW5.bluetoothDeviceName = str;
+        z3 = true;
+        boolean z92222 = z2 | z3;
+        VolumeDialogController.StreamState streamStateStreamStateW62222 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+        VolumeDialogController.StreamState streamStateStreamStateW72222 = streamStateW(22);
+        updateStreamRoutedToBudsW(bluetoothDevice, streamStateStreamStateW62222);
+        updateStreamRoutedToBudsW(bluetoothDevice2, streamStateStreamStateW72222);
+        streamStateStreamStateW62222.routedToHomeMini = bluetoothDevice != null && BluetoothIconUtil.isHomeMini(bluetoothDevice);
+        streamStateStreamStateW72222.routedToHomeMini = bluetoothDevice2 != null && BluetoothIconUtil.isHomeMini(bluetoothDevice2);
+        streamStateStreamStateW62222.routedToMusicFrame = bluetoothDevice != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice);
+        streamStateStreamStateW72222.routedToMusicFrame = bluetoothDevice2 != null && BluetoothIconUtil.isMusicFrame(bluetoothDevice2);
+        boolean zUpdateStreamLevelW22222 = z92222 | updateStreamLevelW(22, getLastAudibleStreamVolume(22)) | checkRoutedToBluetoothW(22);
+        if (zShouldShowUI) {
+        }
+        z4 = BasicRune.VOLUME_HOME_IOT;
+        if (z4) {
+        }
+        if (zShouldShowUI) {
+        }
+        lastAudibleStreamVolume = getLastAudibleStreamVolume(i5);
+        zUpdateStreamLevelW = zUpdateStreamLevelW22222 | updateStreamLevelW(i5, lastAudibleStreamVolume);
+        VolumeDialogController.StreamState streamStateStreamStateW82222 = streamStateW(StreamUtil.getMusicStream(isMultiSoundBT()));
+        StringBuilder sbM2222 = MutableObjectList$$ExternalSyntheticOutline0.m(i5, i2, "onVolumeChangedW stream = ", ", flags = ", ", lastAudibleStreamVolume = ");
+        sbM2222.append(lastAudibleStreamVolume);
+        sbM2222.append(", changed = ");
+        sbM2222.append(zUpdateStreamLevelW);
+        sbM2222.append(", showUI = ");
+        sbM2222.append(zShouldShowUI);
+        sbM2222.append(", dualAudio = ");
+        sbM2222.append(state.dualAudio);
+        sbM2222.append(", musicStreamState=");
+        sbM2222.append(streamStateStreamStateW82222);
+        Log.d(TAG, sbM2222.toString());
+        c = this.mCallbacks;
+        if (zUpdateStreamLevelW) {
+        }
+        if (zShouldShowUI) {
+        }
+        if (z6) {
+        }
+        if (z7) {
+        }
+        if ((i2 & 4) != 0) {
+        }
+        if (z4) {
+        }
+        streamStateStreamStateW = streamStateW(i5);
+        i4 = streamStateStreamStateW.level;
+        if (i4 != streamStateStreamStateW.levelMin) {
+        }
+        if (z5) {
+        }
+        if (zUpdateStreamLevelW) {
+        }
+        return zUpdateStreamLevelW;
     }
 
     @Override // com.android.systemui.plugins.VolumeDialogController
@@ -1436,12 +1800,12 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public boolean shouldDualAudioUIEnabled() {
-        int semGetCurrentDeviceType = this.mAudio.semGetCurrentDeviceType();
-        if (semGetCurrentDeviceType == 8) {
+        int iSemGetCurrentDeviceType = this.mAudio.semGetCurrentDeviceType();
+        if (iSemGetCurrentDeviceType == 8) {
             return true;
         }
         SoundAssistantManagerWrapper soundAssistantManagerWrapper = this.mSoundAssistantManagerWrapper;
-        return (soundAssistantManagerWrapper == null || !soundAssistantManagerWrapper.satMananger.isMultiSoundOn() || semGetCurrentDeviceType == soundAssistantManagerWrapper.satMananger.getMultiSoundDevice()) ? false : true;
+        return (soundAssistantManagerWrapper == null || !soundAssistantManagerWrapper.satMananger.isMultiSoundOn() || iSemGetCurrentDeviceType == soundAssistantManagerWrapper.satMananger.getMultiSoundDevice()) ? false : true;
     }
 
     public final boolean shouldShowUI(int i) {
@@ -1494,52 +1858,29 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         return true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x002e, code lost:
-    
-        if (r3.length() > 0) goto L13;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean updateEffectsSuppressorW(android.content.ComponentName r4) {
-        /*
-            r3 = this;
-            com.android.systemui.plugins.VolumeDialogController$State r0 = r3.mState
-            android.content.ComponentName r1 = r0.effectsSuppressor
-            boolean r1 = java.util.Objects.equals(r1, r4)
-            r2 = 0
-            if (r1 == 0) goto Lc
-            return r2
-        Lc:
-            r0.effectsSuppressor = r4
-            android.content.pm.PackageManager r3 = r3.mPackageManager
-            if (r4 != 0) goto L14
-            r3 = 0
-            goto L32
-        L14:
-            java.lang.String r4 = r4.getPackageName()
-            android.content.pm.ApplicationInfo r1 = r3.getApplicationInfo(r4, r2)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L31
-            java.lang.CharSequence r3 = r1.loadLabel(r3)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L31
-            java.lang.String r1 = ""
-            java.lang.String r3 = java.util.Objects.toString(r3, r1)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L31
-            java.lang.String r3 = r3.trim()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L31
-            int r1 = r3.length()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L31
-            if (r1 <= 0) goto L31
-            goto L32
-        L31:
-            r3 = r4
-        L32:
-            r0.effectsSuppressorName = r3
-            android.content.ComponentName r3 = r0.effectsSuppressor
-            java.lang.String r4 = r0.effectsSuppressorName
-            java.lang.Object[] r3 = new java.lang.Object[]{r3, r4}
-            r4 = 14
-            com.android.systemui.volume.Events.writeEvent(r4, r3)
-            r3 = 1
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.updateEffectsSuppressorW(android.content.ComponentName):boolean");
+    public final boolean updateEffectsSuppressorW(ComponentName componentName) {
+        String strTrim;
+        VolumeDialogController.State state = this.mState;
+        if (Objects.equals(state.effectsSuppressor, componentName)) {
+            return false;
+        }
+        state.effectsSuppressor = componentName;
+        PackageManager packageManager = this.mPackageManager;
+        if (componentName == null) {
+            strTrim = null;
+        } else {
+            String packageName = componentName.getPackageName();
+            try {
+                strTrim = Objects.toString(packageManager.getApplicationInfo(packageName, 0).loadLabel(packageManager), "").trim();
+            } catch (PackageManager.NameNotFoundException unused) {
+            }
+            if (strTrim.length() <= 0) {
+                strTrim = packageName;
+            }
+        }
+        state.effectsSuppressorName = strTrim;
+        Events.writeEvent(14, state.effectsSuppressor, state.effectsSuppressorName);
+        return true;
     }
 
     public final boolean updateRingerModeInternalW(int i) {
@@ -1563,11 +1904,11 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public final boolean updateStreamLevelW(int i, int i2) {
-        VolumeDialogController.StreamState streamStateW = streamStateW(i);
-        if (streamStateW.level == i2) {
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(i);
+        if (streamStateStreamStateW.level == i2) {
             return false;
         }
-        streamStateW.level = i2;
+        streamStateStreamStateW.level = i2;
         if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5) {
             Events.writeEvent(10, Integer.valueOf(i), Integer.valueOf(i2));
         }
@@ -1575,11 +1916,11 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public final boolean updateStreamMuteW(int i, boolean z) {
-        VolumeDialogController.StreamState streamStateW = streamStateW(i);
-        if (streamStateW.muted == z) {
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(i);
+        if (streamStateStreamStateW.muted == z) {
             return false;
         }
-        streamStateW.muted = z;
+        streamStateStreamStateW.muted = z;
         if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5) {
             Events.writeEvent(15, Integer.valueOf(i), Boolean.valueOf(z));
         }
@@ -1591,19 +1932,19 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public final void updateStreamNameMusicShare() {
-        VolumeDialogController.StreamState streamStateW = streamStateW(3);
-        streamStateW.nameRes = this.mContext.getResources().getResourceName(isMusicShareEnabled() ? R.string.volumepanel_music_share : streamStateW.name);
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(3);
+        streamStateStreamStateW.nameRes = this.mContext.getResources().getResourceName(isMusicShareEnabled() ? R.string.volumepanel_music_share : streamStateStreamStateW.name);
         if (D.BUG) {
             Log.d(TAG, "updateStreamNameMusicShare " + isMusicShareEnabled());
         }
     }
 
     public final boolean updateStreamRoutedToBluetoothW(int i, boolean z) {
-        VolumeDialogController.StreamState streamStateW = streamStateW(i);
-        if (streamStateW.routedToBluetooth == z) {
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(i);
+        if (streamStateStreamStateW.routedToBluetooth == z) {
             return false;
         }
-        streamStateW.routedToBluetooth = z;
+        streamStateStreamStateW.routedToBluetooth = z;
         if (!D.BUG) {
             return true;
         }
@@ -1621,11 +1962,11 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     public final boolean updateStreamRoutedToHeadsetW(int i, boolean z) {
-        VolumeDialogController.StreamState streamStateW = streamStateW(i);
-        if (streamStateW.routedToHeadset == z) {
+        VolumeDialogController.StreamState streamStateStreamStateW = streamStateW(i);
+        if (streamStateStreamStateW.routedToHeadset == z) {
             return false;
         }
-        streamStateW.routedToHeadset = z;
+        streamStateStreamStateW.routedToHeadset = z;
         if (!D.BUG) {
             return true;
         }
@@ -1633,95 +1974,53 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003a A[Catch: Exception -> 0x0089, TryCatch #0 {Exception -> 0x0089, blocks: (B:3:0x0006, B:5:0x000d, B:7:0x0011, B:13:0x002a, B:15:0x002f, B:17:0x0033, B:19:0x0040, B:22:0x004a, B:24:0x0054, B:28:0x005b, B:18:0x003a, B:12:0x0023), top: B:33:0x0006 }] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x005a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateVolumeBar() {
-        /*
-            r19 = this;
-            r0 = r19
-            com.android.systemui.audio.soundcraft.interfaces.volume.VolumeManager r1 = r0.mVolumeManager
-            com.android.systemui.plugins.VolumeDialogController$State r2 = r0.mState
-            boolean r3 = r2.isLeBroadcasting     // Catch: java.lang.Exception -> L89
-            r4 = 8
-            r5 = 1
-            if (r3 == 0) goto L23
-            int r3 = r2.broadcastMode     // Catch: java.lang.Exception -> L89
-            if (r3 != r5) goto L23
-            com.android.systemui.volume.util.BluetoothAdapterWrapper r3 = r0.mBluetoothAdapterManager     // Catch: java.lang.Exception -> L89
-            java.util.List r3 = r3.getConnectedLeHearingAidDevice()     // Catch: java.lang.Exception -> L89
-            boolean r3 = r3.isEmpty()     // Catch: java.lang.Exception -> L89
-            if (r3 != 0) goto L21
-            r3 = 23
-        L1f:
-            r10 = r3
-            goto L2a
-        L21:
-            r10 = r4
-            goto L2a
-        L23:
-            android.media.AudioManager r3 = r0.mAudio     // Catch: java.lang.Exception -> L89
-            int r3 = r3.semGetCurrentDeviceType()     // Catch: java.lang.Exception -> L89
-            goto L1f
-        L2a:
-            com.android.systemui.audio.soundcraft.model.common.VolumeModel r6 = new com.android.systemui.audio.soundcraft.model.common.VolumeModel     // Catch: java.lang.Exception -> L89
-            r3 = 3
-            if (r10 != r4) goto L3a
-            android.bluetooth.BluetoothDevice r4 = r0.mActiveBtDevice     // Catch: java.lang.Exception -> L89
-            if (r4 == 0) goto L3a
-            android.media.AudioManager r7 = r0.mAudio     // Catch: java.lang.Exception -> L89
-            int r4 = r7.semGetFineVolume(r4, r3)     // Catch: java.lang.Exception -> L89
-            goto L40
-        L3a:
-            android.media.AudioManager r4 = r0.mAudio     // Catch: java.lang.Exception -> L89
-            int r4 = r4.semGetFineVolume(r3)     // Catch: java.lang.Exception -> L89
-        L40:
-            com.android.systemui.plugins.VolumeDialogController$StreamState r3 = r0.streamStateW(r3)     // Catch: java.lang.Exception -> L89
-            boolean r3 = r3.muted     // Catch: java.lang.Exception -> L89
-            r7 = 0
-            if (r3 == 0) goto L4a
-            r4 = r7
-        L4a:
-            boolean r12 = r0.isBluetoothLeBroadcastEnabled()     // Catch: java.lang.Exception -> L89
-            boolean r13 = r0.mAllSoundMute     // Catch: java.lang.Exception -> L89
-            int r14 = r2.zenMode     // Catch: java.lang.Exception -> L89
-            if (r14 != r5) goto L5a
-            boolean r2 = r2.disallowMedia     // Catch: java.lang.Exception -> L89
-            if (r2 == 0) goto L5a
-            r15 = r5
-            goto L5b
-        L5a:
-            r15 = r7
-        L5b:
-            boolean r16 = r0.isSmartViewEnabled()     // Catch: java.lang.Exception -> L89
-            boolean r17 = r0.isMusicShareEnabled()     // Catch: java.lang.Exception -> L89
-            boolean r0 = r0.mIsDisallowAdjustVolume     // Catch: java.lang.Exception -> L89
-            r9 = 150(0x96, float:2.1E-43)
-            r11 = 1
-            r8 = 0
-            r18 = r0
-            r7 = r4
-            r6.<init>(r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18)     // Catch: java.lang.Exception -> L89
-            r1.volumeModel = r6     // Catch: java.lang.Exception -> L89
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder     // Catch: java.lang.Exception -> L89
-            java.lang.String r2 = "updateVolumeState "
-            r0.<init>(r2)     // Catch: java.lang.Exception -> L89
-            r0.append(r6)     // Catch: java.lang.Exception -> L89
-            java.lang.String r0 = r0.toString()     // Catch: java.lang.Exception -> L89
-            java.lang.String r2 = "SoundCraft.VolumeManager"
-            android.util.Log.i(r2, r0)     // Catch: java.lang.Exception -> L89
-            r1.updateCurrentVolume()     // Catch: java.lang.Exception -> L89
-            return
-        L89:
-            r0 = move-exception
-            java.lang.String r1 = com.android.systemui.volume.VolumeDialogControllerImpl.TAG
-            java.lang.String r2 = "updateVolumeBar failed"
-            android.util.Log.w(r1, r2, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.updateVolumeBar():void");
+        int iSemGetCurrentDeviceType;
+        int i;
+        BluetoothDevice bluetoothDevice;
+        VolumeManager volumeManager = this.mVolumeManager;
+        VolumeDialogController.State state = this.mState;
+        try {
+            if (!state.isLeBroadcasting || state.broadcastMode != 1) {
+                iSemGetCurrentDeviceType = this.mAudio.semGetCurrentDeviceType();
+            } else {
+                if (this.mBluetoothAdapterManager.getConnectedLeHearingAidDevice().isEmpty()) {
+                    i = 8;
+                    int iSemGetFineVolume = (i == 8 || (bluetoothDevice = this.mActiveBtDevice) == null) ? this.mAudio.semGetFineVolume(3) : this.mAudio.semGetFineVolume(bluetoothDevice, 3);
+                    if (streamStateW(3).muted) {
+                        iSemGetFineVolume = 0;
+                    }
+                    boolean zIsBluetoothLeBroadcastEnabled = isBluetoothLeBroadcastEnabled();
+                    boolean z = this.mAllSoundMute;
+                    int i2 = state.zenMode;
+                    VolumeModel volumeModel = new VolumeModel(iSemGetFineVolume, 0, 150, i, true, zIsBluetoothLeBroadcastEnabled, z, i2, i2 != 1 && state.disallowMedia, isSmartViewEnabled(), isMusicShareEnabled(), this.mIsDisallowAdjustVolume);
+                    volumeManager.volumeModel = volumeModel;
+                    Log.i("SoundCraft.VolumeManager", "updateVolumeState " + volumeModel);
+                    volumeManager.updateCurrentVolume();
+                }
+                iSemGetCurrentDeviceType = 23;
+            }
+            i = iSemGetCurrentDeviceType;
+            if (i == 8) {
+            }
+            if (streamStateW(3).muted) {
+            }
+            boolean zIsBluetoothLeBroadcastEnabled2 = isBluetoothLeBroadcastEnabled();
+            boolean z2 = this.mAllSoundMute;
+            int i22 = state.zenMode;
+            VolumeModel volumeModel2 = new VolumeModel(iSemGetFineVolume, 0, 150, i, true, zIsBluetoothLeBroadcastEnabled2, z2, i22, i22 != 1 && state.disallowMedia, isSmartViewEnabled(), isMusicShareEnabled(), this.mIsDisallowAdjustVolume);
+            volumeManager.volumeModel = volumeModel2;
+            Log.i("SoundCraft.VolumeManager", "updateVolumeState " + volumeModel2);
+            volumeManager.updateCurrentVolume();
+        } catch (Exception e) {
+            Log.w(TAG, "updateVolumeBar failed", e);
+        }
     }
 
     public final boolean updateZenConfig() {
@@ -1730,16 +2029,16 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         boolean z = (i & 32) == 0;
         boolean z2 = (i & 64) == 0;
         boolean z3 = (i & 128) == 0;
-        boolean areAllPriorityOnlyRingerSoundsMuted = ZenModeConfig.areAllPriorityOnlyRingerSoundsMuted(consolidatedNotificationPolicy);
+        boolean zAreAllPriorityOnlyRingerSoundsMuted = ZenModeConfig.areAllPriorityOnlyRingerSoundsMuted(consolidatedNotificationPolicy);
         VolumeDialogController.State state = this.mState;
-        if (state.disallowAlarms == z && state.disallowMedia == z2 && state.disallowRinger == areAllPriorityOnlyRingerSoundsMuted && state.disallowSystem == z3) {
+        if (state.disallowAlarms == z && state.disallowMedia == z2 && state.disallowRinger == zAreAllPriorityOnlyRingerSoundsMuted && state.disallowSystem == z3) {
             return false;
         }
         state.disallowAlarms = z;
         state.disallowMedia = z2;
         state.disallowSystem = z3;
-        state.disallowRinger = areAllPriorityOnlyRingerSoundsMuted;
-        Events.writeEvent(17, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("disallowAlarms=", " disallowMedia=", " disallowSystem=", z, z2), z3, " disallowRinger=", areAllPriorityOnlyRingerSoundsMuted));
+        state.disallowRinger = zAreAllPriorityOnlyRingerSoundsMuted;
+        Events.writeEvent(17, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("disallowAlarms=", " disallowMedia=", " disallowSystem=", z, z2), z3, " disallowRinger=", zAreAllPriorityOnlyRingerSoundsMuted));
         return true;
     }
 
@@ -1766,7 +2065,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         this.mVibrator.vibrate(vibrationEffect, SONIFICIATION_VIBRATION_ATTRIBUTES);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class C implements VolumeDialogController.Callbacks {
         public final Map mCallbackMap = new ConcurrentHashMap();
 
@@ -1943,12 +2241,12 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onStateChanged(VolumeDialogController.State state) {
             System.currentTimeMillis();
-            final VolumeDialogController.State copy = state.copy();
+            final VolumeDialogController.State stateCopy = state.copy();
             for (final Map.Entry entry : ((ConcurrentHashMap) this.mCallbackMap).entrySet()) {
                 ((Handler) entry.getValue()).post(new Runnable(this) { // from class: com.android.systemui.volume.VolumeDialogControllerImpl.C.3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ((VolumeDialogController.Callbacks) entry.getKey()).onStateChanged(copy);
+                        ((VolumeDialogController.Callbacks) entry.getKey()).onStateChanged(stateCopy);
                     }
                 });
             }
@@ -1981,97 +2279,60 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0071  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0033 A[PHI: r0
+      0x0033: PHI (r0v3 java.util.List) = (r0v2 java.util.List), (r0v10 java.util.List), (r0v10 java.util.List), (r0v10 java.util.List) binds: [B:8:0x0019, B:10:0x0027, B:11:0x0029, B:13:0x002f] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setStreamVolume(int r6, int r7, final java.lang.String r8) {
-        /*
-            r5 = this;
-            r0 = 20
-            if (r6 != r0) goto L6
-            goto L9b
-        L6:
-            boolean r0 = isMediaStream(r6)
-            r1 = 0
-            r2 = 0
-            if (r0 == 0) goto L87
-            int r7 = r7 / 10
-            java.util.ArrayList r0 = new java.util.ArrayList
-            r0.<init>()
-            com.android.systemui.plugins.VolumeDialogController$State r3 = r5.mState
-            boolean r4 = r3.dualAudio
-            if (r4 == 0) goto L33
-            com.android.systemui.volume.util.BluetoothAdapterWrapper r0 = r5.mBluetoothAdapterManager
-            boolean r3 = r3.isLeBroadcasting
-            java.util.List r0 = r0.getConnectedDevices(r3)
-            boolean r3 = r0.isEmpty()
-            if (r3 != 0) goto L33
-            if (r8 == 0) goto L33
-            boolean r3 = r8.isEmpty()
-            if (r3 != 0) goto L33
-            r3 = 1
-            goto L34
-        L33:
-            r3 = r1
-        L34:
-            android.util.Pair r4 = new android.util.Pair
-            java.lang.Boolean r3 = java.lang.Boolean.valueOf(r3)
-            r4.<init>(r3, r0)
-            java.lang.Object r0 = r4.first
-            java.lang.Boolean r0 = (java.lang.Boolean) r0
-            boolean r0 = r0.booleanValue()
-            r3 = 3
-            if (r0 == 0) goto L71
-            java.lang.Object r6 = r4.second
-            java.util.List r6 = (java.util.List) r6
-            java.util.stream.Stream r6 = r6.stream()
-            com.android.systemui.volume.VolumeDialogControllerImpl$$ExternalSyntheticLambda5 r0 = new com.android.systemui.volume.VolumeDialogControllerImpl$$ExternalSyntheticLambda5
-            r0.<init>()
-            java.util.stream.Stream r6 = r6.filter(r0)
-            java.util.Optional r6 = r6.findFirst()
-            java.lang.Object r6 = r6.orElse(r2)
-            android.bluetooth.BluetoothDevice r6 = (android.bluetooth.BluetoothDevice) r6
-            if (r6 == 0) goto L6b
-            android.media.AudioManager r5 = r5.mAudio
-            r5.semSetFineVolume(r6, r3, r7, r1)
-            return
-        L6b:
-            android.media.AudioManager r5 = r5.mAudio
-            r5.semSetFineVolume(r3, r7, r1)
-            return
-        L71:
-            r8 = 21
-            if (r6 != r8) goto L81
-            android.media.AudioManager r6 = r5.mAudio
-            int r6 = r6.semGetPinDevice()
-            android.media.AudioManager r5 = r5.mAudio
-            r5.setFineVolume(r3, r7, r1, r6)
-            return
-        L81:
-            android.media.AudioManager r5 = r5.mAudio
-            r5.semSetFineVolume(r3, r7, r1)
-            return
-        L87:
-            r8 = 23
-            if (r6 != r8) goto L9c
-            boolean r8 = r5.mIsBudsTogetherEnabled
-            if (r8 == 0) goto L9b
-            com.android.systemui.volume.util.BluetoothAudioCastWrapper r8 = r5.mBluetoothAudioCastWrapper
-            com.samsung.android.bluetooth.SemBluetoothAudioCast r8 = r8.service
-            if (r8 == 0) goto L98
-            r8.setAudioSharingDeviceVolume(r2, r7)
-        L98:
-            r5.onVolumeChangedW(r6, r1)
-        L9b:
-            return
-        L9c:
-            android.media.AudioManager r5 = r5.mAudio
-            r5.setStreamVolume(r6, r7, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.VolumeDialogControllerImpl.setStreamVolume(int, int, java.lang.String):void");
+    public final void setStreamVolume(int i, int i2, final String str) {
+        boolean z;
+        if (i == 20) {
+            return;
+        }
+        if (!isMediaStream(i)) {
+            if (i == 23) {
+                if (this.mIsBudsTogetherEnabled) {
+                    SemBluetoothAudioCast semBluetoothAudioCast = this.mBluetoothAudioCastWrapper.service;
+                    if (semBluetoothAudioCast != null) {
+                        semBluetoothAudioCast.setAudioSharingDeviceVolume((SemBluetoothCastDevice) null, i2);
+                    }
+                    onVolumeChangedW(i, 0);
+                    return;
+                }
+                return;
+            }
+            this.mAudio.setStreamVolume(i, i2, 0);
+            return;
+        }
+        int i3 = i2 / 10;
+        List arrayList = new ArrayList();
+        VolumeDialogController.State state = this.mState;
+        if (state.dualAudio) {
+            arrayList = this.mBluetoothAdapterManager.getConnectedDevices(state.isLeBroadcasting);
+            z = (arrayList.isEmpty() || str == null || str.isEmpty()) ? false : true;
+        }
+        Pair pair = new Pair(Boolean.valueOf(z), arrayList);
+        if (!((Boolean) pair.first).booleanValue()) {
+            if (i == 21) {
+                this.mAudio.setFineVolume(3, i3, 0, this.mAudio.semGetPinDevice());
+                return;
+            } else {
+                this.mAudio.semSetFineVolume(3, i3, 0);
+                return;
+            }
+        }
+        BluetoothDevice bluetoothDevice = (BluetoothDevice) ((List) pair.second).stream().filter(new Predicate() { // from class: com.android.systemui.volume.VolumeDialogControllerImpl$$ExternalSyntheticLambda5
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                String str2 = str;
+                String str3 = VolumeDialogControllerImpl.TAG;
+                return str2.equals(((BluetoothDevice) obj).getAddress());
+            }
+        }).findFirst().orElse(null);
+        if (bluetoothDevice != null) {
+            this.mAudio.semSetFineVolume(bluetoothDevice, 3, i3, 0);
+        } else {
+            this.mAudio.semSetFineVolume(3, i3, 0);
+        }
     }
 }

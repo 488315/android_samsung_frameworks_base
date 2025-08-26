@@ -12,7 +12,6 @@ import com.android.systemui.util.DeviceState;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdmMonitor extends ISystemUIAdapterCallback.Stub implements Dumpable {
     public final KnoxStateMonitorImpl knoxStateMonitor;
@@ -130,17 +129,17 @@ public class EdmMonitor extends ISystemUIAdapterCallback.Stub implements Dumpabl
     }
 
     public final int getCurrentFailedAttempts() {
-        Cursor query = this.knoxStateMonitor.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/PasswordPolicy2"), null, "getCurrentFailedPasswordAttempts", null, null);
-        if (query == null) {
+        Cursor cursorQuery = this.knoxStateMonitor.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/PasswordPolicy2"), null, "getCurrentFailedPasswordAttempts", null, null);
+        if (cursorQuery == null) {
             return 0;
         }
         try {
-            query.moveToFirst();
-            return query.getInt(query.getColumnIndex("getCurrentFailedPasswordAttempts"));
+            cursorQuery.moveToFirst();
+            return cursorQuery.getInt(cursorQuery.getColumnIndex("getCurrentFailedPasswordAttempts"));
         } catch (Exception unused) {
             return 0;
         } finally {
-            query.close();
+            cursorQuery.close();
         }
     }
 

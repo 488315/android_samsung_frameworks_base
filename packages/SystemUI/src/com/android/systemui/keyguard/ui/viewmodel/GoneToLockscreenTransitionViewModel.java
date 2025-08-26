@@ -15,7 +15,6 @@ import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GoneToLockscreenTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryBackgroundViewAlpha;
@@ -30,13 +29,13 @@ public final class GoneToLockscreenTransitionViewModel implements DeviceEntryIco
         SceneKey sceneKey = Scenes.Gone;
         KeyguardState keyguardState = KeyguardState.LOCKSCREEN;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GONE, keyguardState, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GONE, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
         Duration.Companion companion2 = Duration.Companion;
-        KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 m2599sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, DurationUnit.MILLISECONDS), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), 0L, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getAppsButtonState);
-        this.shortcutsAlpha = m2599sharedFlow74qcysc$default;
-        this.lockscreenAlpha = m2599sharedFlow74qcysc$default;
-        this.deviceEntryBackgroundViewAlpha = m.immediatelyTransitionTo(1.0f);
-        this.deviceEntryParentViewAlpha = m.immediatelyTransitionTo(1.0f);
+        KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, DurationUnit.MILLISECONDS), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), 0L, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getAppsButtonState);
+        this.shortcutsAlpha = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default;
+        this.lockscreenAlpha = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default;
+        this.deviceEntryBackgroundViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
+        this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogStreamModel {
     public final boolean isActive;
@@ -63,9 +62,9 @@ public final class VolumeDialogStreamModel {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.name, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.levelMax, ReorderTile$$ExternalSyntheticOutline0.m(this.levelMin, ReorderTile$$ExternalSyntheticOutline0.m(this.level, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.stream) * 31, 31, this.isDynamic), 31, this.isActive), 31), 31), 31), 31, this.muted), 31, this.muteSupported), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.name, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.levelMax, ReorderTile$$ExternalSyntheticOutline0.m(this.levelMin, ReorderTile$$ExternalSyntheticOutline0.m(this.level, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Integer.hashCode(this.stream) * 31, 31, this.isDynamic), 31, this.isActive), 31), 31), 31), 31, this.muted), 31, this.muteSupported), 31);
         String str = this.remoteLabel;
-        return Boolean.hashCode(this.routedToBluetooth) + ((m + (str == null ? 0 : str.hashCode())) * 31);
+        return Boolean.hashCode(this.routedToBluetooth) + ((iM + (str == null ? 0 : str.hashCode())) * 31);
     }
 
     public final String toString() {

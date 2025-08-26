@@ -2,7 +2,6 @@ package com.android.systemui.util;
 
 import android.os.Looper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Assert {
     private static final Looper sMainLooper = Looper.getMainLooper();
@@ -43,18 +42,18 @@ public class Assert {
             runnable.run();
             return;
         }
-        Thread currentThread = Thread.currentThread();
+        Thread threadCurrentThread = Thread.currentThread();
         Thread thread = sTestThread;
-        if (thread == currentThread) {
+        if (thread == threadCurrentThread) {
             runnable.run();
             return;
         }
         if (thread == null) {
-            sTestThread = currentThread;
+            sTestThread = threadCurrentThread;
             runnable.run();
             sTestThread = null;
         } else {
-            throw new AssertionError("Can't run with current thread (" + currentThread + ") as main thread; test thread is already set to " + thread);
+            throw new AssertionError("Can't run with current thread (" + threadCurrentThread + ") as main thread; test thread is already set to " + thread);
         }
     }
 

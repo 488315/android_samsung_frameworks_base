@@ -4,11 +4,9 @@ import android.net.Uri;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface LottieCompositionSpec {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Asset implements LottieCompositionSpec {
         public final String assetName;
 
@@ -28,7 +26,6 @@ public interface LottieCompositionSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ContentProvider implements LottieCompositionSpec {
         public final Uri uri;
 
@@ -45,7 +42,6 @@ public interface LottieCompositionSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class File implements LottieCompositionSpec {
         public final String fileName;
 
@@ -65,7 +61,6 @@ public interface LottieCompositionSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class JsonString implements LottieCompositionSpec {
         public final String jsonString;
 
@@ -85,7 +80,6 @@ public interface LottieCompositionSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RawRes implements LottieCompositionSpec {
         public final int resId;
 
@@ -94,7 +88,7 @@ public interface LottieCompositionSpec {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ RawRes m899boximpl(int i) {
+        public static final /* synthetic */ RawRes m901boximpl(int i) {
             return new RawRes(i);
         }
 
@@ -114,7 +108,6 @@ public interface LottieCompositionSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Url implements LottieCompositionSpec {
         public final String url;
 

@@ -55,9 +55,9 @@ public interface IOperatorDetection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IOperatorDetection");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOperatorDetection)) {
-                return (IOperatorDetection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IOperatorDetection");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOperatorDetection)) {
+                return (IOperatorDetection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,9 +93,9 @@ public interface IOperatorDetection extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeInt(operatorDetection);
             } else if (i == 2) {
-                IOperatorDetectionListener asInterface = IOperatorDetectionListener.Stub.asInterface(parcel.readStrongBinder());
+                IOperatorDetectionListener iOperatorDetectionListenerAsInterface = IOperatorDetectionListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int listener = setListener(asInterface);
+                int listener = setListener(iOperatorDetectionListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(listener);
             } else {
@@ -122,33 +122,33 @@ public interface IOperatorDetection extends IInterface {
 
             @Override // android.media.tv.extension.scan.IOperatorDetection
             public int setOperatorDetection(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetection");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetection");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.IOperatorDetection
             public int setListener(IOperatorDetectionListener iOperatorDetectionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetection");
-                    obtain.writeStrongInterface(iOperatorDetectionListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IOperatorDetection");
+                    parcelObtain.writeStrongInterface(iOperatorDetectionListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

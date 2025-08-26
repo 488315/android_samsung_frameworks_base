@@ -54,22 +54,20 @@ public abstract class MessageSubscriberBase implements MessageSubscriber {
         if (Message.isError(code)) {
             this.errorListener.forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((MessageConsumer) obj).onMessageReceived(Message.this);
+                public final void accept(Object obj) throws UnsupportedOperationException {
+                    ((MessageConsumer) obj).onMessageReceived(message);
                 }
             });
         } else {
             Stream.concat((Stream) Optional.ofNullable(this.messageConsumers.get(Integer.valueOf(code))).map(new ContentProtectionEventProcessor$$ExternalSyntheticLambda8()).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Stream of;
-                    of = Stream.of((Object[]) new MessageConsumer[0]);
-                    return of;
+                    return Stream.of((Object[]) new MessageConsumer[0]);
                 }
             }), this.eventListener.stream()).forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((MessageConsumer) obj).onMessageReceived(Message.this);
+                public final void accept(Object obj) throws UnsupportedOperationException {
+                    ((MessageConsumer) obj).onMessageReceived(message);
                 }
             });
         }
@@ -103,7 +101,7 @@ public abstract class MessageSubscriberBase implements MessageSubscriber {
         this.messageConsumers.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda3
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                ((List) obj2).remove(MessageConsumer.this);
+                ((List) obj2).remove(messageConsumer);
             }
         });
     }

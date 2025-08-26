@@ -232,11 +232,11 @@ public class ShortcutManager {
 
     public Intent createShortcutResultIntent(ShortcutInfo shortcutInfo) {
         try {
-            Intent createShortcutResultIntent = this.mService.createShortcutResultIntent(this.mContext.getPackageName(), shortcutInfo, injectMyUserId());
-            if (createShortcutResultIntent != null) {
-                createShortcutResultIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+            Intent intentCreateShortcutResultIntent = this.mService.createShortcutResultIntent(this.mContext.getPackageName(), shortcutInfo, injectMyUserId());
+            if (intentCreateShortcutResultIntent != null) {
+                intentCreateShortcutResultIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
             }
-            return createShortcutResultIntent;
+            return intentCreateShortcutResultIntent;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

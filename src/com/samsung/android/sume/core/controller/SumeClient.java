@@ -69,9 +69,7 @@ public class SumeClient implements MediaController<Future<Response>>, MediaContr
         return (Future) Optional.ofNullable(this.serviceProxy).map(new Function() { // from class: com.samsung.android.sume.core.controller.SumeClient$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Future request;
-                request = ((ServiceProxy) obj).request(Request.of(901).setInputBuffer((List<MediaBuffer>) list).setOutputBuffer((List<MediaBuffer>) list2));
-                return request;
+                return ((ServiceProxy) obj).request(Request.of(901).setInputBuffer((List<MediaBuffer>) list).setOutputBuffer((List<MediaBuffer>) list2));
             }
         }).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.controller.SumeClient$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
@@ -95,9 +93,7 @@ public class SumeClient implements MediaController<Future<Response>>, MediaContr
         return (Future) Optional.ofNullable(this.serviceProxy).map(new Function() { // from class: com.samsung.android.sume.core.controller.SumeClient$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Future request2;
-                request2 = ((ServiceProxy) obj).request(Request.this);
-                return request2;
+                return ((ServiceProxy) obj).request(request);
             }
         }).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.controller.SumeClient$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier

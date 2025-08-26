@@ -33,7 +33,6 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.settings.SecureSettings;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamTile extends QSTileImpl {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -140,40 +139,44 @@ public class DreamTile extends QSTileImpl {
         this.mDreamSettingObserver.setListening(z);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x005f  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleUpdateState(QSTile.State state, Object obj) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void handleUpdateState(QSTile.State state, Object obj) throws PackageManager.NameNotFoundException {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         booleanState.label = getTileLabel();
         ComponentName activeDream = getActiveDream();
-        boolean z = false;
-        CharSequence charSequence = null;
+        boolean zIsDreaming = false;
+        CharSequence charSequenceLoadLabel = null;
         if (activeDream != null) {
             PackageManager packageManager = this.mContext.getPackageManager();
             try {
                 ServiceInfo serviceInfo = packageManager.getServiceInfo(activeDream, 0);
                 if (serviceInfo != null) {
-                    charSequence = serviceInfo.loadLabel(packageManager);
+                    charSequenceLoadLabel = serviceInfo.loadLabel(packageManager);
                 }
             } catch (PackageManager.NameNotFoundException unused) {
             }
         }
-        booleanState.secondaryLabel = charSequence;
-        booleanState.contentDescription = getContentDescription(charSequence);
+        booleanState.secondaryLabel = charSequenceLoadLabel;
+        booleanState.contentDescription = getContentDescription(charSequenceLoadLabel);
         int i = this.mIsDocked ? R.drawable.ic_qs_screen_saver : R.drawable.ic_qs_screen_saver_undocked;
         int i2 = QsInCompose.$r8$clinit;
         booleanState.icon = QSTileImpl.ResourceIcon.get(i);
         if (getActiveDream() != null) {
             if (this.mEnabledSettingObserver.getValue() == 1) {
                 try {
-                    z = this.mDreamManager.isDreaming();
+                    zIsDreaming = this.mDreamManager.isDreaming();
                 } catch (RemoteException e) {
                     Log.e("QSDream", "Can't check if dreaming", e);
                 }
-                booleanState.state = z ? 2 : 1;
-                booleanState.expandedAccessibilityClassName = Switch.class.getName();
+                booleanState.state = zIsDreaming ? 2 : 1;
+            } else {
+                booleanState.state = 0;
             }
         }
-        booleanState.state = 0;
         booleanState.expandedAccessibilityClassName = Switch.class.getName();
     }
 

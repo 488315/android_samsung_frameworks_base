@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Capabilities implements Parcelable, Cloneable {
     public static final Parcelable.Creator<Capabilities> CREATOR;
@@ -378,16 +377,16 @@ public class Capabilities implements Parcelable, Cloneable {
     }
 
     public String getExtFeatureAsJoinedString() {
-        String join;
+        String strJoin;
         synchronized (this.mExtFeatureLock) {
             try {
                 List<String> list = this.mExtFeatures;
-                join = (list == null || list.isEmpty()) ? "" : String.join(",", this.mExtFeatures);
+                strJoin = (list == null || list.isEmpty()) ? "" : String.join(",", this.mExtFeatures);
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return join;
+        return strJoin;
     }
 
     public String getExtendedMessagingVersion() {
@@ -584,11 +583,11 @@ public class Capabilities implements Parcelable, Cloneable {
         sb.append(", mContactId=");
         sb.append(this.mContactId);
         sb.append(", mNumber=");
-        String str = this.mNumber;
+        String stringLimit = this.mNumber;
         if (z) {
-            str = toStringLimit(str);
+            stringLimit = toStringLimit(stringLimit);
         }
-        sb.append(str);
+        sb.append(stringLimit);
         sb.append(", mIsAvailable=");
         sb.append(this.mIsAvailable);
         sb.append(", mFeatures=");
@@ -723,7 +722,7 @@ public class Capabilities implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Capabilities m3409clone() throws CloneNotSupportedException {
+    public Capabilities m3429clone() throws CloneNotSupportedException {
         return (Capabilities) super.clone();
     }
 

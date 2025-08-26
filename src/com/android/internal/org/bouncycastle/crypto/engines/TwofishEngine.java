@@ -103,12 +103,12 @@ public final class TwofishEngine implements BlockCipher {
         for (int i = 0; i < 256; i++) {
             byte[][] bArr = P;
             int i2 = bArr[0][i] & 255;
-            int Mx_X = Mx_X(i2) & 255;
-            int Mx_Y = Mx_Y(i2) & 255;
+            int iMx_X = Mx_X(i2) & 255;
+            int iMx_Y = Mx_Y(i2) & 255;
             int i3 = bArr[1][i] & 255;
             int[] iArr = {i2, i3};
-            int[] iArr2 = {Mx_X, Mx_X(i3) & 255};
-            int[] iArr3 = {Mx_Y, Mx_Y(i3) & 255};
+            int[] iArr2 = {iMx_X, Mx_X(i3) & 255};
+            int[] iArr3 = {iMx_Y, Mx_Y(i3) & 255};
             int[] iArr4 = this.gMDS0;
             int i4 = iArr[1] | (iArr2[1] << 8);
             int i5 = iArr3[1];
@@ -178,169 +178,169 @@ public final class TwofishEngine implements BlockCipher {
     }
 
     private void setKey(byte[] bArr) {
-        int b0;
-        int b1;
-        int b2;
-        int b3;
-        int i;
-        int i2;
-        int i3;
-        int i4;
+        int iB0;
+        int iB1;
+        int iB2;
+        int iB3;
+        int iB22;
+        int iB12;
+        int iB02;
+        int iB32;
         int[] iArr = new int[4];
         int[] iArr2 = new int[4];
         int[] iArr3 = new int[4];
         this.gSubKeys = new int[40];
-        for (int i5 = 0; i5 < this.k64Cnt; i5++) {
-            int i6 = i5 * 8;
-            iArr[i5] = Pack.littleEndianToInt(bArr, i6);
-            int littleEndianToInt = Pack.littleEndianToInt(bArr, i6 + 4);
-            iArr2[i5] = littleEndianToInt;
-            iArr3[(this.k64Cnt - 1) - i5] = RS_MDS_Encode(iArr[i5], littleEndianToInt);
+        for (int i = 0; i < this.k64Cnt; i++) {
+            int i2 = i * 8;
+            iArr[i] = Pack.littleEndianToInt(bArr, i2);
+            int iLittleEndianToInt = Pack.littleEndianToInt(bArr, i2 + 4);
+            iArr2[i] = iLittleEndianToInt;
+            iArr3[(this.k64Cnt - 1) - i] = RS_MDS_Encode(iArr[i], iLittleEndianToInt);
         }
-        for (int i7 = 0; i7 < 20; i7++) {
-            int i8 = SK_STEP * i7;
-            int F32 = F32(i8, iArr);
-            int rotateLeft = Integers.rotateLeft(F32(i8 + 16843009, iArr2), 8);
-            int i9 = F32 + rotateLeft;
+        for (int i3 = 0; i3 < 20; i3++) {
+            int i4 = SK_STEP * i3;
+            int iF32 = F32(i4, iArr);
+            int iRotateLeft = Integers.rotateLeft(F32(i4 + 16843009, iArr2), 8);
+            int i5 = iF32 + iRotateLeft;
             int[] iArr4 = this.gSubKeys;
-            int i10 = i7 * 2;
-            iArr4[i10] = i9;
-            int i11 = i9 + rotateLeft;
-            iArr4[i10 + 1] = (i11 << 9) | (i11 >>> 23);
+            int i6 = i3 * 2;
+            iArr4[i6] = i5;
+            int i7 = i5 + iRotateLeft;
+            iArr4[i6 + 1] = (i7 << 9) | (i7 >>> 23);
         }
-        int i12 = iArr3[0];
-        int i13 = iArr3[1];
-        int i14 = 2;
-        int i15 = iArr3[2];
-        int i16 = iArr3[3];
+        int i8 = iArr3[0];
+        int i9 = iArr3[1];
+        int i10 = 2;
+        int i11 = iArr3[2];
+        int i12 = iArr3[3];
         this.gSBox = new int[1024];
-        int i17 = 0;
-        while (i17 < 256) {
-            int i18 = this.k64Cnt & 3;
-            if (i18 != 0) {
-                if (i18 == 1) {
+        int i13 = 0;
+        while (i13 < 256) {
+            int i14 = this.k64Cnt & 3;
+            if (i14 != 0) {
+                if (i14 == 1) {
                     int[] iArr5 = this.gSBox;
-                    int i19 = i17 * 2;
+                    int i15 = i13 * 2;
                     int[] iArr6 = this.gMDS0;
                     byte[][] bArr2 = P;
-                    iArr5[i19] = iArr6[(bArr2[0][i17] & 255) ^ b0(i12)];
-                    this.gSBox[i19 + 1] = this.gMDS1[(bArr2[0][i17] & 255) ^ b1(i12)];
-                    this.gSBox[i19 + 512] = this.gMDS2[(bArr2[1][i17] & 255) ^ b2(i12)];
-                    this.gSBox[i19 + 513] = this.gMDS3[(bArr2[1][i17] & 255) ^ b3(i12)];
-                } else if (i18 == i14) {
-                    i4 = i17;
-                    i3 = i4;
-                    i2 = i3;
-                    i = i2;
+                    iArr5[i15] = iArr6[(bArr2[0][i13] & 255) ^ b0(i8)];
+                    this.gSBox[i15 + 1] = this.gMDS1[(bArr2[0][i13] & 255) ^ b1(i8)];
+                    this.gSBox[i15 + 512] = this.gMDS2[(bArr2[1][i13] & 255) ^ b2(i8)];
+                    this.gSBox[i15 + 513] = this.gMDS3[(bArr2[1][i13] & 255) ^ b3(i8)];
+                } else if (i14 == i10) {
+                    iB32 = i13;
+                    iB02 = iB32;
+                    iB12 = iB02;
+                    iB22 = iB12;
                     int[] iArr7 = this.gSBox;
-                    int i20 = i17 * 2;
+                    int i16 = i13 * 2;
                     int[] iArr8 = this.gMDS0;
                     byte[][] bArr3 = P;
                     byte[] bArr4 = bArr3[0];
-                    iArr7[i20] = iArr8[(bArr4[(bArr4[i3] & 255) ^ b0(i13)] & 255) ^ b0(i12)];
-                    this.gSBox[i20 + 1] = this.gMDS1[(bArr3[0][(bArr3[1][i2] & 255) ^ b1(i13)] & 255) ^ b1(i12)];
-                    this.gSBox[i20 + 512] = this.gMDS2[(bArr3[1][(bArr3[0][i] & 255) ^ b2(i13)] & 255) ^ b2(i12)];
+                    iArr7[i16] = iArr8[(bArr4[(bArr4[iB02] & 255) ^ b0(i9)] & 255) ^ b0(i8)];
+                    this.gSBox[i16 + 1] = this.gMDS1[(bArr3[0][(bArr3[1][iB12] & 255) ^ b1(i9)] & 255) ^ b1(i8)];
+                    this.gSBox[i16 + 512] = this.gMDS2[(bArr3[1][(bArr3[0][iB22] & 255) ^ b2(i9)] & 255) ^ b2(i8)];
                     int[] iArr9 = this.gMDS3;
                     byte[] bArr5 = bArr3[1];
-                    this.gSBox[i20 + 513] = iArr9[(bArr5[(bArr5[i4] & 255) ^ b3(i13)] & 255) ^ b3(i12)];
-                } else if (i18 == 3) {
-                    b3 = i17;
-                    b0 = b3;
-                    b1 = b0;
-                    b2 = b1;
+                    this.gSBox[i16 + 513] = iArr9[(bArr5[(bArr5[iB32] & 255) ^ b3(i9)] & 255) ^ b3(i8)];
+                } else if (i14 == 3) {
+                    iB3 = i13;
+                    iB0 = iB3;
+                    iB1 = iB0;
+                    iB2 = iB1;
                 }
-                i17++;
-                i14 = 2;
+                i13++;
+                i10 = 2;
             } else {
                 byte[][] bArr6 = P;
-                b0 = (bArr6[1][i17] & 255) ^ b0(i16);
-                b1 = (bArr6[0][i17] & 255) ^ b1(i16);
-                b2 = (bArr6[0][i17] & 255) ^ b2(i16);
-                b3 = (bArr6[1][i17] & 255) ^ b3(i16);
+                iB0 = (bArr6[1][i13] & 255) ^ b0(i12);
+                iB1 = (bArr6[0][i13] & 255) ^ b1(i12);
+                iB2 = (bArr6[0][i13] & 255) ^ b2(i12);
+                iB3 = (bArr6[1][i13] & 255) ^ b3(i12);
             }
             byte[][] bArr7 = P;
-            i3 = (bArr7[1][b0] & 255) ^ b0(i15);
-            i2 = (bArr7[1][b1] & 255) ^ b1(i15);
-            i = (bArr7[0][b2] & 255) ^ b2(i15);
-            i4 = (bArr7[0][b3] & 255) ^ b3(i15);
+            iB02 = (bArr7[1][iB0] & 255) ^ b0(i11);
+            iB12 = (bArr7[1][iB1] & 255) ^ b1(i11);
+            iB22 = (bArr7[0][iB2] & 255) ^ b2(i11);
+            iB32 = (bArr7[0][iB3] & 255) ^ b3(i11);
             int[] iArr72 = this.gSBox;
-            int i202 = i17 * 2;
+            int i162 = i13 * 2;
             int[] iArr82 = this.gMDS0;
             byte[][] bArr32 = P;
             byte[] bArr42 = bArr32[0];
-            iArr72[i202] = iArr82[(bArr42[(bArr42[i3] & 255) ^ b0(i13)] & 255) ^ b0(i12)];
-            this.gSBox[i202 + 1] = this.gMDS1[(bArr32[0][(bArr32[1][i2] & 255) ^ b1(i13)] & 255) ^ b1(i12)];
-            this.gSBox[i202 + 512] = this.gMDS2[(bArr32[1][(bArr32[0][i] & 255) ^ b2(i13)] & 255) ^ b2(i12)];
+            iArr72[i162] = iArr82[(bArr42[(bArr42[iB02] & 255) ^ b0(i9)] & 255) ^ b0(i8)];
+            this.gSBox[i162 + 1] = this.gMDS1[(bArr32[0][(bArr32[1][iB12] & 255) ^ b1(i9)] & 255) ^ b1(i8)];
+            this.gSBox[i162 + 512] = this.gMDS2[(bArr32[1][(bArr32[0][iB22] & 255) ^ b2(i9)] & 255) ^ b2(i8)];
             int[] iArr92 = this.gMDS3;
             byte[] bArr52 = bArr32[1];
-            this.gSBox[i202 + 513] = iArr92[(bArr52[(bArr52[i4] & 255) ^ b3(i13)] & 255) ^ b3(i12)];
-            i17++;
-            i14 = 2;
+            this.gSBox[i162 + 513] = iArr92[(bArr52[(bArr52[iB32] & 255) ^ b3(i9)] & 255) ^ b3(i8)];
+            i13++;
+            i10 = 2;
         }
     }
 
     private void encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
         int i3 = 0;
-        int littleEndianToInt = Pack.littleEndianToInt(bArr, i) ^ this.gSubKeys[0];
-        int littleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4) ^ this.gSubKeys[1];
+        int iLittleEndianToInt = Pack.littleEndianToInt(bArr, i) ^ this.gSubKeys[0];
+        int iLittleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4) ^ this.gSubKeys[1];
         int i4 = 2;
-        int littleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8) ^ this.gSubKeys[2];
-        int littleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12) ^ this.gSubKeys[3];
+        int iLittleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8) ^ this.gSubKeys[2];
+        int iLittleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12) ^ this.gSubKeys[3];
         int i5 = 8;
         while (i3 < 16) {
-            int Fe32_0 = Fe32_0(littleEndianToInt);
-            int Fe32_3 = Fe32_3(littleEndianToInt2);
-            littleEndianToInt3 = Integers.rotateRight(littleEndianToInt3 ^ ((Fe32_0 + Fe32_3) + this.gSubKeys[i5]), 1);
-            littleEndianToInt4 = Integers.rotateLeft(littleEndianToInt4, 1) ^ ((Fe32_0 + (Fe32_3 * i4)) + this.gSubKeys[i5 + 1]);
-            int Fe32_02 = Fe32_0(littleEndianToInt3);
-            int Fe32_32 = Fe32_3(littleEndianToInt4);
+            int iFe32_0 = Fe32_0(iLittleEndianToInt);
+            int iFe32_3 = Fe32_3(iLittleEndianToInt2);
+            iLittleEndianToInt3 = Integers.rotateRight(iLittleEndianToInt3 ^ ((iFe32_0 + iFe32_3) + this.gSubKeys[i5]), 1);
+            iLittleEndianToInt4 = Integers.rotateLeft(iLittleEndianToInt4, 1) ^ ((iFe32_0 + (iFe32_3 * i4)) + this.gSubKeys[i5 + 1]);
+            int iFe32_02 = Fe32_0(iLittleEndianToInt3);
+            int iFe32_32 = Fe32_3(iLittleEndianToInt4);
             int i6 = i4;
             int i7 = i5 + 3;
-            littleEndianToInt = Integers.rotateRight(littleEndianToInt ^ ((Fe32_02 + Fe32_32) + this.gSubKeys[i5 + 2]), 1);
+            iLittleEndianToInt = Integers.rotateRight(iLittleEndianToInt ^ ((iFe32_02 + iFe32_32) + this.gSubKeys[i5 + 2]), 1);
             i5 += 4;
-            littleEndianToInt2 = Integers.rotateLeft(littleEndianToInt2, 1) ^ ((Fe32_02 + (Fe32_32 * 2)) + this.gSubKeys[i7]);
+            iLittleEndianToInt2 = Integers.rotateLeft(iLittleEndianToInt2, 1) ^ ((iFe32_02 + (iFe32_32 * 2)) + this.gSubKeys[i7]);
             i3 += 2;
             i4 = i6;
         }
-        Pack.intToLittleEndian(this.gSubKeys[4] ^ littleEndianToInt3, bArr2, i2);
-        Pack.intToLittleEndian(littleEndianToInt4 ^ this.gSubKeys[5], bArr2, i2 + 4);
-        Pack.intToLittleEndian(this.gSubKeys[6] ^ littleEndianToInt, bArr2, i2 + 8);
-        Pack.intToLittleEndian(this.gSubKeys[7] ^ littleEndianToInt2, bArr2, i2 + 12);
+        Pack.intToLittleEndian(this.gSubKeys[4] ^ iLittleEndianToInt3, bArr2, i2);
+        Pack.intToLittleEndian(iLittleEndianToInt4 ^ this.gSubKeys[5], bArr2, i2 + 4);
+        Pack.intToLittleEndian(this.gSubKeys[6] ^ iLittleEndianToInt, bArr2, i2 + 8);
+        Pack.intToLittleEndian(this.gSubKeys[7] ^ iLittleEndianToInt2, bArr2, i2 + 12);
     }
 
     private void decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
-        int littleEndianToInt = Pack.littleEndianToInt(bArr, i) ^ this.gSubKeys[4];
-        int littleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4) ^ this.gSubKeys[5];
-        int littleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8) ^ this.gSubKeys[6];
-        int littleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12) ^ this.gSubKeys[7];
+        int iLittleEndianToInt = Pack.littleEndianToInt(bArr, i) ^ this.gSubKeys[4];
+        int iLittleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4) ^ this.gSubKeys[5];
+        int iLittleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8) ^ this.gSubKeys[6];
+        int iLittleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12) ^ this.gSubKeys[7];
         int i3 = 39;
         for (int i4 = 0; i4 < 16; i4 += 2) {
-            int Fe32_0 = Fe32_0(littleEndianToInt);
-            int Fe32_3 = Fe32_3(littleEndianToInt2);
-            int i5 = littleEndianToInt4 ^ (((Fe32_3 * 2) + Fe32_0) + this.gSubKeys[i3]);
-            littleEndianToInt3 = Integers.rotateLeft(littleEndianToInt3, 1) ^ ((Fe32_0 + Fe32_3) + this.gSubKeys[i3 - 1]);
-            littleEndianToInt4 = Integers.rotateRight(i5, 1);
-            int Fe32_02 = Fe32_0(littleEndianToInt3);
-            int Fe32_32 = Fe32_3(littleEndianToInt4);
+            int iFe32_0 = Fe32_0(iLittleEndianToInt);
+            int iFe32_3 = Fe32_3(iLittleEndianToInt2);
+            int i5 = iLittleEndianToInt4 ^ (((iFe32_3 * 2) + iFe32_0) + this.gSubKeys[i3]);
+            iLittleEndianToInt3 = Integers.rotateLeft(iLittleEndianToInt3, 1) ^ ((iFe32_0 + iFe32_3) + this.gSubKeys[i3 - 1]);
+            iLittleEndianToInt4 = Integers.rotateRight(i5, 1);
+            int iFe32_02 = Fe32_0(iLittleEndianToInt3);
+            int iFe32_32 = Fe32_3(iLittleEndianToInt4);
             int i6 = i3 - 3;
-            int i7 = littleEndianToInt2 ^ (((Fe32_32 * 2) + Fe32_02) + this.gSubKeys[i3 - 2]);
+            int i7 = iLittleEndianToInt2 ^ (((iFe32_32 * 2) + iFe32_02) + this.gSubKeys[i3 - 2]);
             i3 -= 4;
-            littleEndianToInt = Integers.rotateLeft(littleEndianToInt, 1) ^ ((Fe32_02 + Fe32_32) + this.gSubKeys[i6]);
-            littleEndianToInt2 = Integers.rotateRight(i7, 1);
+            iLittleEndianToInt = Integers.rotateLeft(iLittleEndianToInt, 1) ^ ((iFe32_02 + iFe32_32) + this.gSubKeys[i6]);
+            iLittleEndianToInt2 = Integers.rotateRight(i7, 1);
         }
-        Pack.intToLittleEndian(littleEndianToInt3 ^ this.gSubKeys[0], bArr2, i2);
-        Pack.intToLittleEndian(littleEndianToInt4 ^ this.gSubKeys[1], bArr2, i2 + 4);
-        Pack.intToLittleEndian(this.gSubKeys[2] ^ littleEndianToInt, bArr2, i2 + 8);
-        Pack.intToLittleEndian(this.gSubKeys[3] ^ littleEndianToInt2, bArr2, i2 + 12);
+        Pack.intToLittleEndian(iLittleEndianToInt3 ^ this.gSubKeys[0], bArr2, i2);
+        Pack.intToLittleEndian(iLittleEndianToInt4 ^ this.gSubKeys[1], bArr2, i2 + 4);
+        Pack.intToLittleEndian(this.gSubKeys[2] ^ iLittleEndianToInt, bArr2, i2 + 8);
+        Pack.intToLittleEndian(this.gSubKeys[3] ^ iLittleEndianToInt2, bArr2, i2 + 12);
     }
 
     private int F32(int i, int[] iArr) {
         int i2;
         int i3;
-        int b0 = b0(i);
-        int b1 = b1(i);
-        int b2 = b2(i);
-        int b3 = b3(i);
+        int iB0 = b0(i);
+        int iB1 = b1(i);
+        int iB2 = b2(i);
+        int iB3 = b3(i);
         int i4 = iArr[0];
         int i5 = iArr[1];
         int i6 = iArr[2];
@@ -350,8 +350,8 @@ public final class TwofishEngine implements BlockCipher {
             if (i8 == 1) {
                 int[] iArr2 = this.gMDS0;
                 byte[][] bArr = P;
-                i2 = (iArr2[(bArr[0][b0] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr[0][b1] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr[1][b2] & 255) ^ b2(i4)];
-                i3 = this.gMDS3[b3(i4) ^ (bArr[1][b3] & 255)];
+                i2 = (iArr2[(bArr[0][iB0] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr[0][iB1] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr[1][iB2] & 255) ^ b2(i4)];
+                i3 = this.gMDS3[b3(i4) ^ (bArr[1][iB3] & 255)];
                 return i3 ^ i2;
             }
             if (i8 != 2) {
@@ -362,29 +362,29 @@ public final class TwofishEngine implements BlockCipher {
             int[] iArr3 = this.gMDS0;
             byte[][] bArr2 = P;
             byte[] bArr3 = bArr2[0];
-            i2 = (iArr3[(bArr3[(bArr3[b0] & 255) ^ b0(i5)] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr2[0][(bArr2[1][b1] & 255) ^ b1(i5)] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr2[1][(bArr2[0][b2] & 255) ^ b2(i5)] & 255) ^ b2(i4)];
+            i2 = (iArr3[(bArr3[(bArr3[iB0] & 255) ^ b0(i5)] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr2[0][(bArr2[1][iB1] & 255) ^ b1(i5)] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr2[1][(bArr2[0][iB2] & 255) ^ b2(i5)] & 255) ^ b2(i4)];
             int[] iArr4 = this.gMDS3;
             byte[] bArr4 = bArr2[1];
-            i3 = iArr4[b3(i4) ^ (bArr4[(bArr4[b3] & 255) ^ b3(i5)] & 255)];
+            i3 = iArr4[b3(i4) ^ (bArr4[(bArr4[iB3] & 255) ^ b3(i5)] & 255)];
             return i3 ^ i2;
         }
         byte[][] bArr5 = P;
-        b0 = (bArr5[1][b0] & 255) ^ b0(i7);
-        b1 = (bArr5[0][b1] & 255) ^ b1(i7);
-        b2 = (bArr5[0][b2] & 255) ^ b2(i7);
-        b3 = (bArr5[1][b3] & 255) ^ b3(i7);
+        iB0 = (bArr5[1][iB0] & 255) ^ b0(i7);
+        iB1 = (bArr5[0][iB1] & 255) ^ b1(i7);
+        iB2 = (bArr5[0][iB2] & 255) ^ b2(i7);
+        iB3 = (bArr5[1][iB3] & 255) ^ b3(i7);
         byte[][] bArr6 = P;
-        b0 = (bArr6[1][b0] & 255) ^ b0(i6);
-        b1 = (bArr6[1][b1] & 255) ^ b1(i6);
-        b2 = (bArr6[0][b2] & 255) ^ b2(i6);
-        b3 = (bArr6[0][b3] & 255) ^ b3(i6);
+        iB0 = (bArr6[1][iB0] & 255) ^ b0(i6);
+        iB1 = (bArr6[1][iB1] & 255) ^ b1(i6);
+        iB2 = (bArr6[0][iB2] & 255) ^ b2(i6);
+        iB3 = (bArr6[0][iB3] & 255) ^ b3(i6);
         int[] iArr32 = this.gMDS0;
         byte[][] bArr22 = P;
         byte[] bArr32 = bArr22[0];
-        i2 = (iArr32[(bArr32[(bArr32[b0] & 255) ^ b0(i5)] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr22[0][(bArr22[1][b1] & 255) ^ b1(i5)] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr22[1][(bArr22[0][b2] & 255) ^ b2(i5)] & 255) ^ b2(i4)];
+        i2 = (iArr32[(bArr32[(bArr32[iB0] & 255) ^ b0(i5)] & 255) ^ b0(i4)] ^ this.gMDS1[(bArr22[0][(bArr22[1][iB1] & 255) ^ b1(i5)] & 255) ^ b1(i4)]) ^ this.gMDS2[(bArr22[1][(bArr22[0][iB2] & 255) ^ b2(i5)] & 255) ^ b2(i4)];
         int[] iArr42 = this.gMDS3;
         byte[] bArr42 = bArr22[1];
-        i3 = iArr42[b3(i4) ^ (bArr42[(bArr42[b3] & 255) ^ b3(i5)] & 255)];
+        i3 = iArr42[b3(i4) ^ (bArr42[(bArr42[iB3] & 255) ^ b3(i5)] & 255)];
         return i3 ^ i2;
     }
 
@@ -392,11 +392,11 @@ public final class TwofishEngine implements BlockCipher {
         for (int i3 = 0; i3 < 4; i3++) {
             i2 = RS_rem(i2);
         }
-        int i4 = i ^ i2;
-        for (int i5 = 0; i5 < 4; i5++) {
-            i4 = RS_rem(i4);
+        int iRS_rem = i ^ i2;
+        for (int i4 = 0; i4 < 4; i4++) {
+            iRS_rem = RS_rem(iRS_rem);
         }
-        return i4;
+        return iRS_rem;
     }
 
     private int Mx_X(int i) {

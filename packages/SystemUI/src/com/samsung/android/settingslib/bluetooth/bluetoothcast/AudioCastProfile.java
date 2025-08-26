@@ -13,7 +13,6 @@ import com.samsung.android.bluetooth.SemBluetoothCastProfile;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AudioCastProfile implements LocalBluetoothCastProfile {
     public final String TAG;
@@ -40,32 +39,32 @@ public class AudioCastProfile implements LocalBluetoothCastProfile {
                 for (SemBluetoothCastDevice semBluetoothCastDevice : audioCastDevices) {
                     int remoteDeviceRole = semBluetoothCastDevice.getRemoteDeviceRole();
                     if (remoteDeviceRole == 2) {
-                        CachedBluetoothCastDevice findCastDevice = AudioCastProfile.this.mCastDeviceManager.findCastDevice(semBluetoothCastDevice);
-                        if (findCastDevice == null && ((connectionState = AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice)) == 2 || connectionState == 1)) {
+                        CachedBluetoothCastDevice cachedBluetoothCastDeviceFindCastDevice = AudioCastProfile.this.mCastDeviceManager.findCastDevice(semBluetoothCastDevice);
+                        if (cachedBluetoothCastDeviceFindCastDevice == null && ((connectionState = AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice)) == 2 || connectionState == 1)) {
                             AudioCastProfile audioCastProfile = AudioCastProfile.this;
-                            findCastDevice = audioCastProfile.mCastDeviceManager.addCastDevice(audioCastProfile.mCastProfileManager, semBluetoothCastDevice);
+                            cachedBluetoothCastDeviceFindCastDevice = audioCastProfile.mCastDeviceManager.addCastDevice(audioCastProfile.mCastProfileManager, semBluetoothCastDevice);
                         }
-                        if (findCastDevice != null) {
+                        if (cachedBluetoothCastDeviceFindCastDevice != null) {
                             Log.d(AudioCastProfile.this.TAG, "add castdevice " + semBluetoothCastDevice.getAddressForLog() + "/" + String.valueOf(AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice)));
                             AudioCastProfile audioCastProfile2 = AudioCastProfile.this;
-                            findCastDevice.onCastProfileStateChanged(audioCastProfile2, audioCastProfile2.mService.getConnectionState(semBluetoothCastDevice));
-                            findCastDevice.dispatchAttributesChanged();
+                            cachedBluetoothCastDeviceFindCastDevice.onCastProfileStateChanged(audioCastProfile2, audioCastProfile2.mService.getConnectionState(semBluetoothCastDevice));
+                            cachedBluetoothCastDeviceFindCastDevice.dispatchAttributesChanged();
                         }
                     } else if (remoteDeviceRole == 1) {
                         LocalBluetoothManager localBluetoothManager = LocalBluetoothManager.getInstance(AudioCastProfile.this.mContext, null);
                         BluetoothDevice remoteDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(semBluetoothCastDevice.getAddress());
                         if (localBluetoothManager != null) {
-                            CachedBluetoothDevice findDevice = localBluetoothManager.mCachedDeviceManager.findDevice(remoteDevice);
-                            if (findDevice == null) {
+                            CachedBluetoothDevice cachedBluetoothDeviceFindDevice = localBluetoothManager.mCachedDeviceManager.findDevice(remoteDevice);
+                            if (cachedBluetoothDeviceFindDevice == null) {
                                 Log.d(AudioCastProfile.this.TAG, "cacheddevice is null");
                             } else {
-                                Log.d(AudioCastProfile.this.TAG, "change cacheddevice " + findDevice.mDevice + "/" + String.valueOf(AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice)));
+                                Log.d(AudioCastProfile.this.TAG, "change cacheddevice " + cachedBluetoothDeviceFindDevice.mDevice + "/" + String.valueOf(AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice)));
                                 if (AudioCastProfile.this.mService.getConnectionState(semBluetoothCastDevice) == 2) {
-                                    findDevice.mBluetoothCastMsg = findDevice.mContext.getString(R.string.bluetooth_cast_shared_with, semBluetoothCastDevice.getPeerName());
+                                    cachedBluetoothDeviceFindDevice.mBluetoothCastMsg = cachedBluetoothDeviceFindDevice.mContext.getString(R.string.bluetooth_cast_shared_with, semBluetoothCastDevice.getPeerName());
                                 } else {
-                                    findDevice.mBluetoothCastMsg = null;
+                                    cachedBluetoothDeviceFindDevice.mBluetoothCastMsg = null;
                                 }
-                                findDevice.refresh();
+                                cachedBluetoothDeviceFindDevice.refresh();
                             }
                         }
                     }
@@ -88,7 +87,7 @@ public class AudioCastProfile implements LocalBluetoothCastProfile {
         SemBluetoothAudioCast.getProxy(context, (SemBluetoothCastProfile.BluetoothCastProfileListener) r1);
     }
 
-    public final void finalize() {
+    public final void finalize() throws Throwable {
         super.finalize();
         SemBluetoothAudioCast semBluetoothAudioCast = this.mService;
         if (semBluetoothAudioCast != null) {

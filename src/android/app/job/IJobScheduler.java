@@ -209,9 +209,9 @@ public interface IJobScheduler extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IJobScheduler)) {
-                return (IJobScheduler) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IJobScheduler)) {
+                return (IJobScheduler) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -277,38 +277,38 @@ public interface IJobScheduler extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     JobInfo jobInfo = (JobInfo) parcel.readTypedObject(JobInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int schedule = schedule(readString, jobInfo);
+                    int iSchedule = schedule(string, jobInfo);
                     parcel2.writeNoException();
-                    parcel2.writeInt(schedule);
+                    parcel2.writeInt(iSchedule);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     JobInfo jobInfo2 = (JobInfo) parcel.readTypedObject(JobInfo.CREATOR);
                     JobWorkItem jobWorkItem = (JobWorkItem) parcel.readTypedObject(JobWorkItem.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int enqueue = enqueue(readString2, jobInfo2, jobWorkItem);
+                    int iEnqueue = enqueue(string2, jobInfo2, jobWorkItem);
                     parcel2.writeNoException();
-                    parcel2.writeInt(enqueue);
+                    parcel2.writeInt(iEnqueue);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     JobInfo jobInfo3 = (JobInfo) parcel.readTypedObject(JobInfo.CREATOR);
-                    String readString4 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int scheduleAsPackage = scheduleAsPackage(readString3, jobInfo3, readString4, readInt, readString5);
+                    int iScheduleAsPackage = scheduleAsPackage(string3, jobInfo3, string4, i3, string5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(scheduleAsPackage);
+                    parcel2.writeInt(iScheduleAsPackage);
                     return true;
                 case 4:
-                    String readString6 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    cancel(readString6, readInt2);
+                    cancel(string6, i4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
@@ -316,9 +316,9 @@ public interface IJobScheduler extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelAllInNamespace(readString7);
+                    cancelAllInNamespace(string7);
                     parcel2.writeNoException();
                     return true;
                 case 7:
@@ -331,64 +331,64 @@ public interface IJobScheduler extends IInterface {
                         allPendingJobs.forEach(new BiConsumer() { // from class: android.app.job.IJobScheduler$Stub$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IJobScheduler.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (ParceledListSlice) obj2);
+                                IJobScheduler.Stub.lambda$onTransact$0(parcel2, (String) obj, (ParceledListSlice) obj2);
                             }
                         });
                     }
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice<JobInfo> allPendingJobsInNamespace = getAllPendingJobsInNamespace(readString8);
+                    ParceledListSlice<JobInfo> allPendingJobsInNamespace = getAllPendingJobsInNamespace(string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(allPendingJobsInNamespace, 1);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    JobInfo pendingJob = getPendingJob(readString9, readInt3);
+                    JobInfo pendingJob = getPendingJob(string9, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(pendingJob, 1);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int pendingJobReason = getPendingJobReason(readString10, readInt4);
+                    int pendingJobReason = getPendingJobReason(string10, i6);
                     parcel2.writeNoException();
                     parcel2.writeInt(pendingJobReason);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] pendingJobReasons = getPendingJobReasons(readString11, readInt5);
+                    int[] pendingJobReasons = getPendingJobReasons(string11, i7);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(pendingJobReasons);
                     return true;
                 case 12:
-                    String readString12 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PendingJobReasonsInfo> pendingJobReasonsHistory = getPendingJobReasonsHistory(readString12, readInt6);
+                    List<PendingJobReasonsInfo> pendingJobReasonsHistory = getPendingJobReasonsHistory(string12, i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(pendingJobReasonsHistory, 1);
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean canRunUserInitiatedJobs = canRunUserInitiatedJobs(readString13);
+                    boolean zCanRunUserInitiatedJobs = canRunUserInitiatedJobs(string13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canRunUserInitiatedJobs);
+                    parcel2.writeBoolean(zCanRunUserInitiatedJobs);
                     return true;
                 case 14:
-                    String readString14 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasRunUserInitiatedJobsPermission = hasRunUserInitiatedJobsPermission(readString14, readInt7);
+                    boolean zHasRunUserInitiatedJobsPermission = hasRunUserInitiatedJobsPermission(string14, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasRunUserInitiatedJobsPermission);
+                    parcel2.writeBoolean(zHasRunUserInitiatedJobsPermission);
                     return true;
                 case 15:
                     List<JobInfo> startedJobs = getStartedJobs();
@@ -401,23 +401,23 @@ public interface IJobScheduler extends IInterface {
                     parcel2.writeTypedObject(allJobSnapshots, 1);
                     return true;
                 case 17:
-                    IUserVisibleJobObserver asInterface = IUserVisibleJobObserver.Stub.asInterface(parcel.readStrongBinder());
+                    IUserVisibleJobObserver iUserVisibleJobObserverAsInterface = IUserVisibleJobObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerUserVisibleJobObserver(asInterface);
+                    registerUserVisibleJobObserver(iUserVisibleJobObserverAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    IUserVisibleJobObserver asInterface2 = IUserVisibleJobObserver.Stub.asInterface(parcel.readStrongBinder());
+                    IUserVisibleJobObserver iUserVisibleJobObserverAsInterface2 = IUserVisibleJobObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterUserVisibleJobObserver(asInterface2);
+                    unregisterUserVisibleJobObserver(iUserVisibleJobObserverAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    String readString15 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    String readString16 = parcel.readString();
+                    String string15 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notePendingUserRequestedAppStop(readString15, readInt8, readString16);
+                    notePendingUserRequestedAppStop(string15, i10, string16);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -449,318 +449,319 @@ public interface IJobScheduler extends IInterface {
 
             @Override // android.app.job.IJobScheduler
             public int schedule(String str, JobInfo jobInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(jobInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(jobInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public int enqueue(String str, JobInfo jobInfo, JobWorkItem jobWorkItem) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(jobInfo, 0);
-                    obtain.writeTypedObject(jobWorkItem, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(jobInfo, 0);
+                    parcelObtain.writeTypedObject(jobWorkItem, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public int scheduleAsPackage(String str, JobInfo jobInfo, String str2, int i, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(jobInfo, 0);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(jobInfo, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void cancel(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void cancelAll() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void cancelAllInNamespace(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public Map<String, ParceledListSlice<JobInfo>> getAllPendingJobs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                final Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                final Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    final HashMap hashMap = readInt < 0 ? null : new HashMap();
-                    IntStream.range(0, readInt).forEach(new IntConsumer() { // from class: android.app.job.IJobScheduler$Stub$Proxy$$ExternalSyntheticLambda0
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    final HashMap map = i < 0 ? null : new HashMap();
+                    IntStream.range(0, i).forEach(new IntConsumer() { // from class: android.app.job.IJobScheduler$Stub$Proxy$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            hashMap.put(r0.readString(), (ParceledListSlice) Parcel.this.readTypedObject(ParceledListSlice.CREATOR));
+                        public final void accept(int i2) {
+                            Parcel parcel = parcelObtain2;
+                            map.put(parcel.readString(), (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR));
                         }
                     });
-                    return hashMap;
+                    return map;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public ParceledListSlice<JobInfo> getAllPendingJobsInNamespace(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public JobInfo getPendingJob(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (JobInfo) obtain2.readTypedObject(JobInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (JobInfo) parcelObtain2.readTypedObject(JobInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public int getPendingJobReason(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public int[] getPendingJobReasons(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public List<PendingJobReasonsInfo> getPendingJobReasonsHistory(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PendingJobReasonsInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PendingJobReasonsInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public boolean canRunUserInitiatedJobs(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public boolean hasRunUserInitiatedJobsPermission(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public List<JobInfo> getStartedJobs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(JobInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(JobInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public ParceledListSlice getAllJobSnapshots() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void registerUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUserVisibleJobObserver);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUserVisibleJobObserver);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUserVisibleJobObserver);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUserVisibleJobObserver);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.job.IJobScheduler
             public void notePendingUserRequestedAppStop(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

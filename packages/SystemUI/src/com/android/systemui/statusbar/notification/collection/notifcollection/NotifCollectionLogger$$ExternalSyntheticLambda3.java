@@ -9,7 +9,6 @@ import com.android.systemui.log.core.LogMessage;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambda3 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +19,7 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -28,26 +27,26 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
                 String str2 = logMessage.getStr2();
                 int int1 = logMessage.getInt1();
                 int int2 = logMessage.getInt2();
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LOCALLY DISMISS Already Dismissed Child ", str1, " of parent ", str2, " (");
-                m.append(int1);
-                m.append("/");
-                m.append(int2);
-                m.append(")");
-                return m.toString();
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LOCALLY DISMISS Already Dismissed Child ", str1, " of parent ", str2, " (");
+                sbM.append(int1);
+                sbM.append("/");
+                sbM.append(int2);
+                sbM.append(")");
+                return sbM.toString();
             case 1:
                 String str12 = logMessage.getStr1();
                 String str22 = logMessage.getStr2();
                 String str3 = logMessage.getStr3();
-                StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("UPDATED INTERNALLY ", str12, " BY ", str22, " BECAUSE ");
-                m2.append(str3);
-                return m2.toString();
+                StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("UPDATED INTERNALLY ", str12, " BY ", str22, " BECAUSE ");
+                sbM2.append(str3);
+                return sbM2.toString();
             case 2:
                 String str13 = logMessage.getStr1();
                 String str23 = logMessage.getStr2();
                 String str32 = logMessage.getStr3();
-                StringBuilder m3 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("FAILED INTERNAL UPDATE ", str13, " BY ", str23, " BECAUSE ");
-                m3.append(str32);
-                return m3.toString();
+                StringBuilder sbM3 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("FAILED INTERNAL UPDATE ", str13, " BY ", str23, " BECAUSE ");
+                sbM3.append(str32);
+                return sbM3.toString();
             case 3:
                 return AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("No notification to remove with key ", logMessage.getStr1(), " reason=", NotifCollectionLoggerKt.cancellationReasonDebugString(logMessage.getInt1()));
             case 4:
@@ -62,9 +61,9 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
                 String str24 = logMessage.getStr2();
                 String str33 = logMessage.getStr3();
                 String str14 = logMessage.getStr1();
-                StringBuilder m4 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Mismatch: current ", str24, " is ", str33, " for: ");
-                m4.append(str14);
-                return m4.toString();
+                StringBuilder sbM4 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Mismatch: current ", str24, " is ", str33, " for: ");
+                sbM4.append(str14);
+                return sbM4.toString();
             case 9:
                 return ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m(logMessage.getInt1(), "POSTED GROUP ", logMessage.getStr1(), " (", " events)");
             case 10:
@@ -73,7 +72,7 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Registered: ", logMessage.getStr1());
             case 12:
                 String str15 = logMessage.getStr1();
-                return ReorderTile$$ExternalSyntheticOutline0.m(logMessage.getInt2(), ")", ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(logMessage.getInt1(), "LOCALLY DISMISS Non Existent ", str15, " (", "/"));
+                return ReorderTile$$ExternalSyntheticOutline0.m(logMessage.getInt2(), ")", ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(logMessage.getInt1(), "LOCALLY DISMISS Non Existent ", str15, " (", "/"));
             case 13:
                 return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("LOCALLY DISMISSED Already Canceled ", logMessage.getStr1(), ". Trying to remove.");
             case 14:
@@ -84,13 +83,13 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
                 int int22 = logMessage.getInt2();
                 String str25 = logMessage.getStr2();
                 String str34 = logMessage.getStr3();
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(int12, "LOCALLY DISMISS Mismatch ", str16, " (", "/");
-                m888m.append(int22);
-                m888m.append("): dismissing @");
-                m888m.append(str25);
-                m888m.append(" but stored @");
-                m888m.append(str34);
-                return m888m.toString();
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(int12, "LOCALLY DISMISS Mismatch ", str16, " (", "/");
+                sbM890m.append(int22);
+                sbM890m.append("): dismissing @");
+                sbM890m.append(str25);
+                sbM890m.append(" but stored @");
+                sbM890m.append(str34);
+                return sbM890m.toString();
             case 16:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("ENTER CANCELED_ENTRY: ", logMessage.getStr1());
             default:
@@ -98,12 +97,12 @@ public final /* synthetic */ class NotifCollectionLogger$$ExternalSyntheticLambd
                 String str26 = logMessage.getStr2();
                 int int13 = logMessage.getInt1();
                 int int23 = logMessage.getInt2();
-                StringBuilder m5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LOCALLY DISMISSED CHILD (inferred): ", str17, " of parent ", str26, " (");
-                m5.append(int13);
-                m5.append("/");
-                m5.append(int23);
-                m5.append(")");
-                return m5.toString();
+                StringBuilder sbM5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LOCALLY DISMISSED CHILD (inferred): ", str17, " of parent ", str26, " (");
+                sbM5.append(int13);
+                sbM5.append("/");
+                sbM5.append(int23);
+                sbM5.append(")");
+                return sbM5.toString();
         }
     }
 }

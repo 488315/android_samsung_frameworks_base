@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubBlurProvider {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 enterBlurRadius;
@@ -18,16 +17,16 @@ public final class GlanceableHubBlurProvider {
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i2 = i;
-                float floatValue = ((Float) obj).floatValue();
+                float fFloatValue = ((Float) obj).floatValue();
                 switch (i2) {
                     case 0:
                         BlurConfig blurConfig2 = blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, fFloatValue));
                     default:
                         BlurConfig blurConfig3 = blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig3.minBlurRadiusPx, blurConfig3.maxBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig3.minBlurRadiusPx, blurConfig3.maxBlurRadiusPx, fFloatValue));
                 }
             }
         };
@@ -75,7 +74,7 @@ public final class GlanceableHubBlurProvider {
             }
         };
         final int i3 = 2;
-        this.exitBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(flowBuilder, 0L, function1, 0L, function0, function02, new Function0() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda1
+        this.exitBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, 0L, function1, 0L, function0, function02, new Function0() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 switch (i3) {
@@ -100,16 +99,16 @@ public final class GlanceableHubBlurProvider {
         Function1 function12 = new Function1() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i22 = i4;
-                float floatValue = ((Float) obj).floatValue();
+                float fFloatValue = ((Float) obj).floatValue();
                 switch (i22) {
                     case 0:
                         BlurConfig blurConfig2 = blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, fFloatValue));
                     default:
                         BlurConfig blurConfig3 = blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig3.minBlurRadiusPx, blurConfig3.maxBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig3.minBlurRadiusPx, blurConfig3.maxBlurRadiusPx, fFloatValue));
                 }
             }
         };
@@ -158,7 +157,7 @@ public final class GlanceableHubBlurProvider {
             }
         };
         final int i7 = 5;
-        this.enterBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(flowBuilder, 0L, function12, 0L, function03, function04, new Function0() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda1
+        this.enterBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, 0L, function12, 0L, function03, function04, new Function0() { // from class: com.android.systemui.keyguard.ui.transitions.GlanceableHubBlurProvider$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 switch (i7) {

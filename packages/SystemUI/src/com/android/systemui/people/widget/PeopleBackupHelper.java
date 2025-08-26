@@ -1,7 +1,10 @@
 package com.android.systemui.people.widget;
 
+import android.app.backup.BackupDataInputStream;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.SharedPreferencesBackupHelper;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.app.people.IPeopleManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -12,14 +15,18 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
+import com.android.systemui.people.PeopleBackupFollowUpJob;
+import com.android.systemui.people.SharedPreferencesHelper;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +34,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -37,7 +43,6 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
     public final PackageManager mPackageManager;
     public final UserHandle mUserHandle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum SharedFileEntryType {
         UNKNOWN,
         WIDGET_ID,
@@ -68,20 +73,20 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
                     Log.w("PeopleBackupHelper", "Malformed value, skipping:" + entry.getValue());
                     return SharedFileEntryType.UNKNOWN;
                 }
-            } catch (Exception unused2) {
-                Log.w("PeopleBackupHelper", "Malformed value, skipping:" + entry.getValue());
-                return SharedFileEntryType.UNKNOWN;
+            } catch (NumberFormatException unused2) {
+                if (PeopleTileKey.fromString(str) != null) {
+                    return SharedFileEntryType.PEOPLE_TILE_KEY;
+                }
+                try {
+                    Uri.parse(str);
+                    return SharedFileEntryType.CONTACT_URI;
+                } catch (Exception unused3) {
+                    return SharedFileEntryType.UNKNOWN;
+                }
             }
-        } catch (NumberFormatException unused3) {
-            if (PeopleTileKey.fromString(str) != null) {
-                return SharedFileEntryType.PEOPLE_TILE_KEY;
-            }
-            try {
-                Uri.parse(str);
-                return SharedFileEntryType.CONTACT_URI;
-            } catch (Exception unused4) {
-                return SharedFileEntryType.UNKNOWN;
-            }
+        } catch (Exception unused4) {
+            Log.w("PeopleBackupHelper", "Malformed value, skipping:" + entry.getValue());
+            return SharedFileEntryType.UNKNOWN;
         }
     }
 
@@ -115,16 +120,16 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
         if (defaultSharedPreferences.getAll().isEmpty()) {
             return;
         }
-        final SharedPreferences.Editor edit = this.mContext.getSharedPreferences("shared_backup", 0).edit();
-        edit.clear();
+        final SharedPreferences.Editor editorEdit = this.mContext.getSharedPreferences("shared_backup", 0).edit();
+        editorEdit.clear();
         int identifier = this.mUserHandle.getIdentifier();
         final ArrayList arrayList = new ArrayList();
         AppWidgetManager appWidgetManager = this.mAppWidgetManager;
         if (appWidgetManager != null) {
             for (int i : appWidgetManager.getAppWidgetIds(new ComponentName(this.mContext, (Class<?>) PeopleSpaceWidgetProvider.class))) {
-                String valueOf = String.valueOf(i);
-                if (this.mContext.getSharedPreferences(valueOf, 0).getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, -1) == identifier) {
-                    arrayList.add(valueOf);
+                String strValueOf = String.valueOf(i);
+                if (this.mContext.getSharedPreferences(strValueOf, 0).getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, -1) == identifier) {
+                    arrayList.add(strValueOf);
                 }
             }
         }
@@ -133,9 +138,9 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
         }
         defaultSharedPreferences.getAll().entrySet().forEach(new Consumer() { // from class: com.android.systemui.people.widget.PeopleBackupHelper$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PeopleBackupHelper peopleBackupHelper = PeopleBackupHelper.this;
-                SharedPreferences.Editor editor = edit;
+            public final void accept(Object obj) throws NumberFormatException {
+                PeopleBackupHelper peopleBackupHelper = this.f$0;
+                SharedPreferences.Editor editor = editorEdit;
                 final List list = arrayList;
                 Map.Entry entry = (Map.Entry) obj;
                 int i2 = PeopleBackupHelper.$r8$clinit;
@@ -143,24 +148,24 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
                 if (TextUtils.isEmpty(str)) {
                     return;
                 }
-                int ordinal = PeopleBackupHelper.getEntryType(entry).ordinal();
-                if (ordinal == 1) {
-                    String valueOf2 = String.valueOf(entry.getValue());
+                int iOrdinal = PeopleBackupHelper.getEntryType(entry).ordinal();
+                if (iOrdinal == 1) {
+                    String strValueOf2 = String.valueOf(entry.getValue());
                     if (((ArrayList) list).contains(str)) {
-                        Uri parse = Uri.parse(valueOf2);
-                        if (ContentProvider.uriHasUserId(parse)) {
-                            editor.putInt("add_user_id_to_uri_" + str, ContentProvider.getUserIdFromUri(parse));
-                            parse = ContentProvider.getUriWithoutUserId(parse);
+                        Uri uriWithoutUserId = Uri.parse(strValueOf2);
+                        if (ContentProvider.uriHasUserId(uriWithoutUserId)) {
+                            editor.putInt("add_user_id_to_uri_" + str, ContentProvider.getUserIdFromUri(uriWithoutUserId));
+                            uriWithoutUserId = ContentProvider.getUriWithoutUserId(uriWithoutUserId);
                         }
-                        editor.putString(str, parse.toString());
+                        editor.putString(str, uriWithoutUserId.toString());
                         return;
                     }
                     return;
                 }
-                if (ordinal == 2) {
+                if (iOrdinal == 2) {
                     Set set = (Set) entry.getValue();
-                    PeopleTileKey fromString = PeopleTileKey.fromString(str);
-                    if (fromString.mUserId != peopleBackupHelper.mUserHandle.getIdentifier()) {
+                    PeopleTileKey peopleTileKeyFromString = PeopleTileKey.fromString(str);
+                    if (peopleTileKeyFromString.mUserId != peopleBackupHelper.mUserHandle.getIdentifier()) {
                         return;
                     }
                     Set<String> set2 = (Set) set.stream().filter(new Predicate() { // from class: com.android.systemui.people.widget.PeopleBackupHelper$$ExternalSyntheticLambda1
@@ -173,48 +178,108 @@ public class PeopleBackupHelper extends SharedPreferencesBackupHelper {
                     if (set2.isEmpty()) {
                         return;
                     }
-                    fromString.mUserId = -1;
-                    editor.putStringSet(fromString.toString(), set2);
+                    peopleTileKeyFromString.mUserId = -1;
+                    editor.putStringSet(peopleTileKeyFromString.toString(), set2);
                     return;
                 }
-                if (ordinal != 3) {
+                if (iOrdinal != 3) {
                     MotionLayout$$ExternalSyntheticOutline0.m("Key not identified, skipping: ", str, "PeopleBackupHelper");
                     return;
                 }
                 Set<String> set3 = (Set) entry.getValue();
-                Uri parse2 = Uri.parse(String.valueOf(str));
-                if (!ContentProvider.uriHasUserId(parse2)) {
+                Uri uri = Uri.parse(String.valueOf(str));
+                if (!ContentProvider.uriHasUserId(uri)) {
                     if (peopleBackupHelper.mUserHandle.isSystem()) {
-                        editor.putStringSet(parse2.toString(), set3);
+                        editor.putStringSet(uri.toString(), set3);
                         return;
                     }
                     return;
                 }
-                int userIdFromUri = ContentProvider.getUserIdFromUri(parse2);
+                int userIdFromUri = ContentProvider.getUserIdFromUri(uri);
                 if (userIdFromUri == peopleBackupHelper.mUserHandle.getIdentifier()) {
-                    Uri uriWithoutUserId = ContentProvider.getUriWithoutUserId(parse2);
-                    editor.putInt("add_user_id_to_uri_" + uriWithoutUserId.toString(), userIdFromUri);
-                    editor.putStringSet(uriWithoutUserId.toString(), set3);
+                    Uri uriWithoutUserId2 = ContentProvider.getUriWithoutUserId(uri);
+                    editor.putInt("add_user_id_to_uri_" + uriWithoutUserId2.toString(), userIdFromUri);
+                    editor.putStringSet(uriWithoutUserId2.toString(), set3);
                 }
             }
         });
-        edit.apply();
+        editorEdit.apply();
         super.performBackup(parcelFileDescriptor, backupDataOutput, parcelFileDescriptor2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00fc A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0031 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00fc A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0031 A[SYNTHETIC] */
     @Override // android.app.backup.SharedPreferencesBackupHelper, android.app.backup.BackupHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void restoreEntity(android.app.backup.BackupDataInputStream r13) {
-        /*
-            Method dump skipped, instructions count: 338
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.widget.PeopleBackupHelper.restoreEntity(android.app.backup.BackupDataInputStream):void");
+    public final void restoreEntity(BackupDataInputStream backupDataInputStream) throws NumberFormatException {
+        boolean zIsReadyForRestore;
+        super.restoreEntity(backupDataInputStream);
+        SharedPreferences sharedPreferences = this.mContext.getSharedPreferences("shared_backup", 0);
+        SharedPreferences.Editor editorEdit = PreferenceManager.getDefaultSharedPreferences(this.mContext).edit();
+        SharedPreferences.Editor editorEdit2 = this.mContext.getSharedPreferences("shared_follow_up", 0).edit();
+        boolean z = false;
+        for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet()) {
+            String key = entry.getKey();
+            SharedFileEntryType entryType = getEntryType(entry);
+            int i = sharedPreferences.getInt("add_user_id_to_uri_" + key, -1);
+            int iOrdinal = entryType.ordinal();
+            if (iOrdinal == 1) {
+                Uri uriCreateContentUriForUser = Uri.parse(String.valueOf(entry.getValue()));
+                if (i != -1) {
+                    uriCreateContentUriForUser = ContentProvider.createContentUriForUser(uriCreateContentUriForUser, UserHandle.of(i));
+                }
+                editorEdit.putString(key, uriCreateContentUriForUser.toString());
+            } else if (iOrdinal == 2) {
+                Set<String> set = (Set) entry.getValue();
+                PeopleTileKey peopleTileKeyFromString = PeopleTileKey.fromString(key);
+                if (peopleTileKeyFromString != null) {
+                    peopleTileKeyFromString.mUserId = this.mUserHandle.getIdentifier();
+                    if (PeopleTileKey.isValid(peopleTileKeyFromString)) {
+                        zIsReadyForRestore = isReadyForRestore(this.mIPeopleManager, this.mPackageManager, peopleTileKeyFromString);
+                        if (!zIsReadyForRestore) {
+                            editorEdit2.putStringSet(peopleTileKeyFromString.toString(), set);
+                        }
+                        editorEdit.putStringSet(peopleTileKeyFromString.toString(), set);
+                        Context context = this.mContext;
+                        Iterator<String> it = set.iterator();
+                        while (it.hasNext()) {
+                            SharedPreferencesHelper.setPeopleTileKey(context.getSharedPreferences(it.next(), 0), peopleTileKeyFromString);
+                        }
+                    }
+                }
+                if (zIsReadyForRestore) {
+                    z = true;
+                }
+            } else if (iOrdinal != 3) {
+                Log.e("PeopleBackupHelper", "Key not identified, skipping:" + key);
+            } else {
+                Set<String> set2 = (Set) entry.getValue();
+                Uri uriCreateContentUriForUser2 = Uri.parse(key);
+                if (i != -1) {
+                    uriCreateContentUriForUser2 = ContentProvider.createContentUriForUser(uriCreateContentUriForUser2, UserHandle.of(i));
+                }
+                editorEdit.putStringSet(uriCreateContentUriForUser2.toString(), set2);
+            }
+            zIsReadyForRestore = true;
+            if (zIsReadyForRestore) {
+            }
+        }
+        editorEdit.apply();
+        editorEdit2.apply();
+        SharedPreferences.Editor editorEdit3 = sharedPreferences.edit();
+        editorEdit3.clear();
+        editorEdit3.apply();
+        if (z) {
+            Context context2 = this.mContext;
+            int i2 = PeopleBackupFollowUpJob.$r8$clinit;
+            JobScheduler jobScheduler = (JobScheduler) context2.getSystemService(JobScheduler.class);
+            PersistableBundle persistableBundle = new PersistableBundle();
+            persistableBundle.putLong("start_date", System.currentTimeMillis());
+            jobScheduler.schedule(new JobInfo.Builder(74823873, new ComponentName(context2, (Class<?>) PeopleBackupFollowUpJob.class)).setPeriodic(PeopleBackupFollowUpJob.JOB_PERIODIC_DURATION).setExtras(persistableBundle).build());
+        }
+        updateWidgets(this.mContext);
     }
 
     public PeopleBackupHelper(Context context, UserHandle userHandle, String[] strArr, PackageManager packageManager, IPeopleManager iPeopleManager) {

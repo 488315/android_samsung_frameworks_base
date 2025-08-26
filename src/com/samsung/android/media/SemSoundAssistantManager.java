@@ -138,14 +138,14 @@ public class SemSoundAssistantManager {
     }
 
     static {
-        final HashSet newHashSet = Sets.newHashSet(1, 2);
-        VOLUME_MODE_ALL = newHashSet;
+        final HashSet hashSetNewHashSet = Sets.newHashSet(1, 2);
+        VOLUME_MODE_ALL = hashSetNewHashSet;
         VOLUME_MODE_KEY = new String[]{"", ADJUST_MEDIA_ONLY, MUTE_MEDIA_BY_VIBRATE_OR_SILENT_MODE};
-        Objects.requireNonNull(newHashSet);
+        Objects.requireNonNull(hashSetNewHashSet);
         VOLUME_MODE_PREDICATE = new IntPredicate() { // from class: com.samsung.android.media.SemSoundAssistantManager$$ExternalSyntheticLambda0
             @Override // java.util.function.IntPredicate
             public final boolean test(int i) {
-                return newHashSet.contains(Integer.valueOf(i));
+                return hashSetNewHashSet.contains(Integer.valueOf(i));
             }
         };
         sIsRunning = false;
@@ -199,9 +199,9 @@ public class SemSoundAssistantManager {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 
     public void initApplicationVolume(int i) {
@@ -269,10 +269,10 @@ public class SemSoundAssistantManager {
         ArrayList<Integer> arrayList = new ArrayList<>();
         StringTokenizer stringTokenizer = new StringTokenizer(str, NavigationBarInflaterView.GRAVITY_SEPARATOR);
         while (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (nextToken.length() != 0) {
+            String strNextToken = stringTokenizer.nextToken();
+            if (strNextToken.length() != 0) {
                 try {
-                    arrayList.add(Integer.valueOf(nextToken));
+                    arrayList.add(Integer.valueOf(strNextToken));
                 } catch (NumberFormatException unused) {
                 }
             }
@@ -307,7 +307,7 @@ public class SemSoundAssistantManager {
         setSoundAssistantParam(VOLUME_MODE_KEY[i] + "=" + (z ? 1 : 0));
     }
 
-    public boolean getVolumeMode(int i) {
+    public boolean getVolumeMode(int i) throws NumberFormatException {
         int i2;
         if (!VOLUME_MODE_PREDICATE.test(i)) {
             Log.e(TAG, "Invalid mode.");
@@ -414,9 +414,9 @@ public class SemSoundAssistantManager {
         if (i != 1 && i != 2) {
             return false;
         }
-        int convertDeviceTypeToInternalDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(this.mAudioManager.semGetCurrentDeviceType());
+        int iConvertDeviceTypeToInternalDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(this.mAudioManager.semGetCurrentDeviceType());
         AudioDeviceInfo[] devices = this.mAudioManager.getDevices(2);
-        String str = "";
+        String address = "";
         if (i == 1) {
             int[] iArr = {32768, 8, 4, 67108864, 8192, 16384, 4096, 1024, 2048, 2};
             for (int i2 = 0; i2 < 10; i2++) {
@@ -430,8 +430,8 @@ public class SemSoundAssistantManager {
                     }
                     AudioDeviceInfo audioDeviceInfo = devices[i4];
                     if ((audioDeviceInfo.getType() != 25 || "0".equals(audioDeviceInfo.getAddress())) && audioDeviceInfo.getDeviceId() == i3) {
-                        str = audioDeviceInfo.getAddress();
-                        convertDeviceTypeToInternalDevice = i3;
+                        address = audioDeviceInfo.getAddress();
+                        iConvertDeviceTypeToInternalDevice = i3;
                         z2 = true;
                         break;
                     }
@@ -451,9 +451,9 @@ public class SemSoundAssistantManager {
                 }
                 AudioDeviceInfo audioDeviceInfo2 = devices[i5];
                 if (audioDeviceInfo2.getDeviceId() == 128) {
-                    str = audioDeviceInfo2.getAddress();
+                    address = audioDeviceInfo2.getAddress();
                     z = true;
-                    convertDeviceTypeToInternalDevice = 128;
+                    iConvertDeviceTypeToInternalDevice = 128;
                     break;
                 }
                 i5++;
@@ -462,7 +462,7 @@ public class SemSoundAssistantManager {
                 return false;
             }
         }
-        return this.mAudioManager.setDeviceToForceByUser(convertDeviceTypeToInternalDevice, str, false) == 0;
+        return this.mAudioManager.setDeviceToForceByUser(iConvertDeviceTypeToInternalDevice, address, false) == 0;
     }
 
     public void setMediaVolumeInterval(int i) {
@@ -511,8 +511,8 @@ public class SemSoundAssistantManager {
     }
 
     public void setDeviceForStream(int i, int i2) {
+        int iIntValue;
         int i3;
-        int i4;
         if (i != 2 && i != 5 && i != 4) {
             Log.e(TAG, "Invalid parameter");
             return;
@@ -522,33 +522,33 @@ public class SemSoundAssistantManager {
             return;
         }
         try {
-            i3 = Integer.valueOf(getSoundAssistantParam(SETTING_RINGTONE_THROUGH_HEADSET_ONLY)).intValue();
+            iIntValue = Integer.valueOf(getSoundAssistantParam(SETTING_RINGTONE_THROUGH_HEADSET_ONLY)).intValue();
         } catch (NumberFormatException unused) {
-            i3 = 0;
+            iIntValue = 0;
         }
         if (isSeparateStreamForHeadsetOnly()) {
-            i3 &= -5;
-            i4 = i == 2 ? 1 : i == 5 ? 32 : 16;
+            iIntValue &= -5;
+            i3 = i == 2 ? 1 : i == 5 ? 32 : 16;
         } else {
-            i4 = 49;
+            i3 = 49;
         }
-        setSoundAssistantProperty("ring_through_headset=" + (i2 == 3 ? i4 | i3 : (~i4) & i3));
+        setSoundAssistantProperty("ring_through_headset=" + (i2 == 3 ? i3 | iIntValue : (~i3) & iIntValue));
     }
 
     public int getDeviceForStream(int i) {
-        int i2;
+        int iIntValue;
         if (i != 2 && i != 5 && i != 4) {
             Log.e(TAG, "Invalid parameter");
         }
         try {
-            i2 = Integer.valueOf(getSoundAssistantParam(SETTING_RINGTONE_THROUGH_HEADSET_ONLY)).intValue();
+            iIntValue = Integer.valueOf(getSoundAssistantParam(SETTING_RINGTONE_THROUGH_HEADSET_ONLY)).intValue();
         } catch (NumberFormatException unused) {
-            i2 = 0;
+            iIntValue = 0;
         }
         if (isSeparateStreamForHeadsetOnly()) {
-            return (i2 & (i != 2 ? i == 5 ? 32 : 16 : 1)) != 0 ? 3 : 0;
+            return (iIntValue & (i != 2 ? i == 5 ? 32 : 16 : 1)) != 0 ? 3 : 0;
         }
-        return (i2 & 1) != 0 ? 3 : 0;
+        return (iIntValue & 1) != 0 ? 3 : 0;
     }
 
     private String getSoundAssistantParam(String str) {
@@ -593,7 +593,7 @@ public class SemSoundAssistantManager {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws IllegalStateException, InterruptedException {
             try {
                 playDummyAudio();
             } catch (UnsupportedOperationException e) {
@@ -602,27 +602,27 @@ public class SemSoundAssistantManager {
             SemSoundAssistantManager.sIsRunning = false;
         }
 
-        private void playDummyAudio() throws UnsupportedOperationException {
+        private void playDummyAudio() throws UnsupportedOperationException, IllegalStateException, InterruptedException {
             int i = this.mPlayTimeMs * 192;
             byte[] bArr = new byte[i];
             for (int i2 = 0; i2 < i; i2++) {
                 bArr[i2] = 0;
             }
-            AudioTrack build = new AudioTrack.Builder().setAudioAttributes(new AudioAttributes.Builder().setContentType(4).setUsage(13).addTag(AudioTag.TAG_FAST_AUDIO_PRE_OPEN).build()).setPerformanceMode(1).setAudioFormat(new AudioFormat.Builder().setEncoding(2).setSampleRate(48000).setChannelMask(12).build()).setBufferSizeInBytes(i).setTransferMode(0).build();
-            build.setVolume(0.0f);
-            build.write(bArr, 0, i, 0);
+            AudioTrack audioTrackBuild = new AudioTrack.Builder().setAudioAttributes(new AudioAttributes.Builder().setContentType(4).setUsage(13).addTag(AudioTag.TAG_FAST_AUDIO_PRE_OPEN).build()).setPerformanceMode(1).setAudioFormat(new AudioFormat.Builder().setEncoding(2).setSampleRate(48000).setChannelMask(12).build()).setBufferSizeInBytes(i).setTransferMode(0).build();
+            audioTrackBuild.setVolume(0.0f);
+            audioTrackBuild.write(bArr, 0, i, 0);
             int i3 = this.mPlayTimeMs / 100;
             while (true) {
                 int i4 = i3 - 1;
                 if (i3 > 0) {
-                    build.play();
+                    audioTrackBuild.play();
                     SemSoundAssistantManager.sleep(100L);
-                    build.pause();
+                    audioTrackBuild.pause();
                     SemSoundAssistantManager.sleep(2500L);
                     i3 = i4;
                 } else {
-                    build.stop();
-                    build.release();
+                    audioTrackBuild.stop();
+                    audioTrackBuild.release();
                     return;
                 }
             }
@@ -630,7 +630,7 @@ public class SemSoundAssistantManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void sleep(long j) {
+    public static void sleep(long j) throws InterruptedException {
         try {
             Thread.sleep(j);
         } catch (InterruptedException unused) {
@@ -647,7 +647,7 @@ public class SemSoundAssistantManager {
     }
 
     public void addOnMediaKeyEventSessionChangedListener(OnMediaKeyEventSessionChangedListener onMediaKeyEventSessionChangedListener) {
-        Executor newSingleThreadExecutor;
+        Executor executorNewSingleThreadExecutor;
         Objects.requireNonNull(onMediaKeyEventSessionChangedListener, "listener shouldn't be null");
         synchronized (mLock) {
             List<OnMediaKeyEventSessionChangedListener> list = sMediaKeySessionChangedCallbacks;
@@ -656,16 +656,16 @@ public class SemSoundAssistantManager {
                 return;
             }
             if (list.size() == 0) {
-                Looper myLooper = Looper.myLooper();
-                if (myLooper == null) {
-                    myLooper = Looper.getMainLooper();
+                Looper looperMyLooper = Looper.myLooper();
+                if (looperMyLooper == null) {
+                    looperMyLooper = Looper.getMainLooper();
                 }
-                if (myLooper != null) {
-                    newSingleThreadExecutor = new HandlerExecutor(new Handler(myLooper));
+                if (looperMyLooper != null) {
+                    executorNewSingleThreadExecutor = new HandlerExecutor(new Handler(looperMyLooper));
                 } else {
-                    newSingleThreadExecutor = Executors.newSingleThreadExecutor();
+                    executorNewSingleThreadExecutor = Executors.newSingleThreadExecutor();
                 }
-                ((MediaSessionManager) getContext().getSystemService(Context.MEDIA_SESSION_SERVICE)).addOnMediaKeyEventSessionChangedListener(newSingleThreadExecutor, sMediaKeySessionChangedListener);
+                ((MediaSessionManager) getContext().getSystemService(Context.MEDIA_SESSION_SERVICE)).addOnMediaKeyEventSessionChangedListener(executorNewSingleThreadExecutor, sMediaKeySessionChangedListener);
             }
             list.add(onMediaKeyEventSessionChangedListener);
         }
@@ -720,9 +720,9 @@ public class SemSoundAssistantManager {
         intent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
         intent.putExtra("android.intent.extra.PACKAGE_NAME", getContext().getPackageName());
         intent.setPackage(str);
-        BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
-        makeBasic.setTemporaryAppAllowlist(10000L, 0, 313, "");
-        makeBasic.setBackgroundActivityStartsAllowed(true);
-        getContext().sendBroadcast(intent, (String) null, makeBasic.toBundle());
+        BroadcastOptions broadcastOptionsMakeBasic = BroadcastOptions.makeBasic();
+        broadcastOptionsMakeBasic.setTemporaryAppAllowlist(10000L, 0, 313, "");
+        broadcastOptionsMakeBasic.setBackgroundActivityStartsAllowed(true);
+        getContext().sendBroadcast(intent, (String) null, broadcastOptionsMakeBasic.toBundle());
     }
 }

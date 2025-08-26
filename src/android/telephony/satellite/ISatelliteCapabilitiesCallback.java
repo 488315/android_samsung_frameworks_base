@@ -44,9 +44,9 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteCapabilitiesCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteCapabilitiesCallback)) {
-                return (ISatelliteCapabilitiesCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteCapabilitiesCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteCapabilitiesCallback)) {
+                return (ISatelliteCapabilitiesCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
 
             @Override // android.telephony.satellite.ISatelliteCapabilitiesCallback
             public void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteCapabilitiesCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteCapabilities, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteCapabilitiesCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteCapabilities, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

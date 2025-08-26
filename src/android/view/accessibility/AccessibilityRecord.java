@@ -59,21 +59,21 @@ public class AccessibilityRecord {
     }
 
     public void setSource(View view, int i) {
-        boolean z;
-        int i2;
+        boolean zIsImportantForAccessibility;
+        int accessibilityViewId;
         enforceNotSealed();
         this.mSourceWindowId = -1;
         if (view != null) {
-            z = view.isImportantForAccessibility();
-            i2 = view.getAccessibilityViewId();
+            zIsImportantForAccessibility = view.isImportantForAccessibility();
+            accessibilityViewId = view.getAccessibilityViewId();
             this.mSourceWindowId = view.getAccessibilityWindowId();
             setBooleanProperty(1024, view.isAccessibilityDataSensitive());
         } else {
-            z = true;
-            i2 = Integer.MAX_VALUE;
+            zIsImportantForAccessibility = true;
+            accessibilityViewId = Integer.MAX_VALUE;
         }
-        setBooleanProperty(512, z);
-        this.mSourceNodeId = AccessibilityNodeInfo.makeNodeId(i2, i);
+        setBooleanProperty(512, zIsImportantForAccessibility);
+        this.mSourceNodeId = AccessibilityNodeInfo.makeNodeId(accessibilityViewId, i);
     }
 
     public void setSourceNodeId(long j) {
@@ -366,9 +366,9 @@ public class AccessibilityRecord {
 
     @Deprecated
     public static AccessibilityRecord obtain(AccessibilityRecord accessibilityRecord) {
-        AccessibilityRecord obtain = obtain();
-        obtain.init(accessibilityRecord);
-        return obtain;
+        AccessibilityRecord accessibilityRecordObtain = obtain();
+        accessibilityRecordObtain.init(accessibilityRecord);
+        return accessibilityRecordObtain;
     }
 
     @Deprecated

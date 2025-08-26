@@ -34,11 +34,11 @@ public class SoundTriggerModule {
         this.mId = i;
         this.mEventHandlerDelegate = new EventHandlerDelegate(this, statusListener, looper);
         try {
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
                 this.mService = iSoundTriggerMiddlewareService.attachAsOriginator(i, identity, this.mEventHandlerDelegate);
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
                 this.mService.asBinder().linkToDeath(this.mEventHandlerDelegate, 0);
             } finally {
@@ -52,11 +52,11 @@ public class SoundTriggerModule {
         this.mId = i;
         this.mEventHandlerDelegate = new EventHandlerDelegate(this, statusListener, looper);
         try {
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
                 this.mService = iSoundTriggerMiddlewareService.attachAsMiddleman(i, identity, identity2, this.mEventHandlerDelegate, z);
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
                 this.mService.asBinder().linkToDeath(this.mEventHandlerDelegate, 0);
             } finally {
@@ -88,14 +88,14 @@ public class SoundTriggerModule {
     public synchronized int loadSoundModel(SoundTrigger.SoundModel soundModel, int[] iArr) {
         try {
             if (soundModel instanceof SoundTrigger.GenericSoundModel) {
-                SoundModel api2aidlGenericSoundModel = ConversionUtil.api2aidlGenericSoundModel((SoundTrigger.GenericSoundModel) soundModel);
+                SoundModel soundModelApi2aidlGenericSoundModel = ConversionUtil.api2aidlGenericSoundModel((SoundTrigger.GenericSoundModel) soundModel);
                 try {
-                    iArr[0] = this.mService.loadModel(api2aidlGenericSoundModel);
+                    iArr[0] = this.mService.loadModel(soundModelApi2aidlGenericSoundModel);
                     return 0;
                 } finally {
-                    if (api2aidlGenericSoundModel.data != null) {
+                    if (soundModelApi2aidlGenericSoundModel.data != null) {
                         try {
-                            api2aidlGenericSoundModel.data.close();
+                            soundModelApi2aidlGenericSoundModel.data.close();
                         } catch (IOException e) {
                             Log.e(TAG, "Failed to close file", e);
                         }
@@ -103,14 +103,14 @@ public class SoundTriggerModule {
                 }
             }
             if (soundModel instanceof SoundTrigger.KeyphraseSoundModel) {
-                PhraseSoundModel api2aidlPhraseSoundModel = ConversionUtil.api2aidlPhraseSoundModel((SoundTrigger.KeyphraseSoundModel) soundModel);
+                PhraseSoundModel phraseSoundModelApi2aidlPhraseSoundModel = ConversionUtil.api2aidlPhraseSoundModel((SoundTrigger.KeyphraseSoundModel) soundModel);
                 try {
-                    iArr[0] = this.mService.loadPhraseModel(api2aidlPhraseSoundModel);
+                    iArr[0] = this.mService.loadPhraseModel(phraseSoundModelApi2aidlPhraseSoundModel);
                     return 0;
                 } finally {
-                    if (api2aidlPhraseSoundModel.common.data != null) {
+                    if (phraseSoundModelApi2aidlPhraseSoundModel.common.data != null) {
                         try {
-                            api2aidlPhraseSoundModel.common.data.close();
+                            phraseSoundModelApi2aidlPhraseSoundModel.common.data.close();
                         } catch (IOException e2) {
                             Log.e(TAG, "Failed to close file", e2);
                         }

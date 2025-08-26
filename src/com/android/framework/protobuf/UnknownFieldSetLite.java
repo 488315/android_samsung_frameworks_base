@@ -24,11 +24,11 @@ public final class UnknownFieldSetLite {
 
     static UnknownFieldSetLite mutableCopyOf(UnknownFieldSetLite unknownFieldSetLite, UnknownFieldSetLite unknownFieldSetLite2) {
         int i = unknownFieldSetLite.count + unknownFieldSetLite2.count;
-        int[] copyOf = Arrays.copyOf(unknownFieldSetLite.tags, i);
-        System.arraycopy(unknownFieldSetLite2.tags, 0, copyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
-        Object[] copyOf2 = Arrays.copyOf(unknownFieldSetLite.objects, i);
-        System.arraycopy(unknownFieldSetLite2.objects, 0, copyOf2, unknownFieldSetLite.count, unknownFieldSetLite2.count);
-        return new UnknownFieldSetLite(i, copyOf, copyOf2, true);
+        int[] iArrCopyOf = Arrays.copyOf(unknownFieldSetLite.tags, i);
+        System.arraycopy(unknownFieldSetLite2.tags, 0, iArrCopyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
+        Object[] objArrCopyOf = Arrays.copyOf(unknownFieldSetLite.objects, i);
+        System.arraycopy(unknownFieldSetLite2.objects, 0, objArrCopyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
+        return new UnknownFieldSetLite(i, iArrCopyOf, objArrCopyOf, true);
     }
 
     private UnknownFieldSetLite() {
@@ -147,16 +147,16 @@ public final class UnknownFieldSetLite {
         if (i != -1) {
             return i;
         }
-        int i2 = 0;
-        for (int i3 = 0; i3 < this.count; i3++) {
-            i2 += CodedOutputStream.computeRawMessageSetExtensionSize(WireFormat.getTagFieldNumber(this.tags[i3]), (ByteString) this.objects[i3]);
+        int iComputeRawMessageSetExtensionSize = 0;
+        for (int i2 = 0; i2 < this.count; i2++) {
+            iComputeRawMessageSetExtensionSize += CodedOutputStream.computeRawMessageSetExtensionSize(WireFormat.getTagFieldNumber(this.tags[i2]), (ByteString) this.objects[i2]);
         }
-        this.memoizedSerializedSize = i2;
-        return i2;
+        this.memoizedSerializedSize = iComputeRawMessageSetExtensionSize;
+        return iComputeRawMessageSetExtensionSize;
     }
 
     public int getSerializedSize() {
-        int computeUInt64Size;
+        int iComputeUInt64Size;
         int i = this.memoizedSerializedSize;
         if (i != -1) {
             return i;
@@ -167,19 +167,19 @@ public final class UnknownFieldSetLite {
             int tagFieldNumber = WireFormat.getTagFieldNumber(i4);
             int tagWireType = WireFormat.getTagWireType(i4);
             if (tagWireType == 0) {
-                computeUInt64Size = CodedOutputStream.computeUInt64Size(tagFieldNumber, ((Long) this.objects[i3]).longValue());
+                iComputeUInt64Size = CodedOutputStream.computeUInt64Size(tagFieldNumber, ((Long) this.objects[i3]).longValue());
             } else if (tagWireType == 1) {
-                computeUInt64Size = CodedOutputStream.computeFixed64Size(tagFieldNumber, ((Long) this.objects[i3]).longValue());
+                iComputeUInt64Size = CodedOutputStream.computeFixed64Size(tagFieldNumber, ((Long) this.objects[i3]).longValue());
             } else if (tagWireType == 2) {
-                computeUInt64Size = CodedOutputStream.computeBytesSize(tagFieldNumber, (ByteString) this.objects[i3]);
+                iComputeUInt64Size = CodedOutputStream.computeBytesSize(tagFieldNumber, (ByteString) this.objects[i3]);
             } else if (tagWireType == 3) {
-                computeUInt64Size = (CodedOutputStream.computeTagSize(tagFieldNumber) * 2) + ((UnknownFieldSetLite) this.objects[i3]).getSerializedSize();
+                iComputeUInt64Size = (CodedOutputStream.computeTagSize(tagFieldNumber) * 2) + ((UnknownFieldSetLite) this.objects[i3]).getSerializedSize();
             } else if (tagWireType == 5) {
-                computeUInt64Size = CodedOutputStream.computeFixed32Size(tagFieldNumber, ((Integer) this.objects[i3]).intValue());
+                iComputeUInt64Size = CodedOutputStream.computeFixed32Size(tagFieldNumber, ((Integer) this.objects[i3]).intValue());
             } else {
                 throw new IllegalStateException(InvalidProtocolBufferException.invalidWireType());
             }
-            i2 += computeUInt64Size;
+            i2 += iComputeUInt64Size;
         }
         this.memoizedSerializedSize = i2;
         return i2;
@@ -224,11 +224,11 @@ public final class UnknownFieldSetLite {
     }
 
     private static int hashCode(Object[] objArr, int i) {
-        int i2 = 17;
-        for (int i3 = 0; i3 < i; i3++) {
-            i2 = (i2 * 31) + objArr[i3].hashCode();
+        int iHashCode = 17;
+        for (int i2 = 0; i2 < i; i2++) {
+            iHashCode = (iHashCode * 31) + objArr[i2].hashCode();
         }
-        return i2;
+        return iHashCode;
     }
 
     public int hashCode() {
@@ -320,13 +320,13 @@ public final class UnknownFieldSetLite {
     }
 
     private UnknownFieldSetLite mergeFrom(CodedInputStream codedInputStream) throws IOException {
-        int readTag;
+        int tag;
         do {
-            readTag = codedInputStream.readTag();
-            if (readTag == 0) {
+            tag = codedInputStream.readTag();
+            if (tag == 0) {
                 break;
             }
-        } while (mergeFieldFrom(readTag, codedInputStream));
+        } while (mergeFieldFrom(tag, codedInputStream));
         return this;
     }
 

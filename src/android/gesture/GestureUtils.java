@@ -1,10 +1,12 @@
 package android.gesture;
 
+import android.graphics.RectF;
 import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /* loaded from: classes.dex */
 public final class GestureUtils {
@@ -28,32 +30,148 @@ public final class GestureUtils {
         return spatialSampling(gesture, i, false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x0023, code lost:
-    
-        if (r7 < r8) goto L8;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x0026, code lost:
-    
-        r7 = r8;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x0027, code lost:
-    
-        r8 = r7;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:75:0x0039, code lost:
-    
-        if (r7 < r8) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0026  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static float[] spatialSampling(android.gesture.Gesture r24, int r25, boolean r26) {
-        /*
-            Method dump skipped, instructions count: 380
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.gesture.GestureUtils.spatialSampling(android.gesture.Gesture, int, boolean):float[]");
+    public static float[] spatialSampling(Gesture gesture, int i, boolean z) {
+        float f;
+        float[] fArr;
+        float f2;
+        float f3;
+        float f4;
+        float f5;
+        float f6 = i - 1;
+        float[] fArr2 = new float[i * i];
+        float f7 = 0.0f;
+        Arrays.fill(fArr2, 0.0f);
+        RectF boundingBox = gesture.getBoundingBox();
+        float fWidth = boundingBox.width();
+        float fHeight = boundingBox.height();
+        float f8 = f6 / fWidth;
+        float f9 = f6 / fHeight;
+        float f10 = 1.0f;
+        if (z) {
+            if (f8 >= f9) {
+                f8 = f9;
+            }
+            f9 = f8;
+        } else {
+            float f11 = fWidth / fHeight;
+            if (f11 > 1.0f) {
+                f11 = 1.0f / f11;
+            }
+            if (f11 < SCALING_THRESHOLD) {
+                if (f8 >= f9) {
+                }
+                f9 = f8;
+            } else if (f8 > f9) {
+                float f12 = NONUNIFORM_SCALE * f9;
+                if (f12 < f8) {
+                    f8 = f12;
+                }
+            } else {
+                float f13 = NONUNIFORM_SCALE * f8;
+                if (f13 < f9) {
+                    f9 = f13;
+                }
+            }
+        }
+        float f14 = -boundingBox.centerX();
+        float f15 = -boundingBox.centerY();
+        float f16 = f6 / 2.0f;
+        ArrayList<GestureStroke> strokes = gesture.getStrokes();
+        int size = strokes.size();
+        int i2 = 0;
+        while (i2 < size) {
+            float[] fArr3 = strokes.get(i2).points;
+            int length = fArr3.length;
+            float f17 = f7;
+            float[] fArr4 = new float[length];
+            float f18 = f10;
+            for (int i3 = 0; i3 < length; i3 += 2) {
+                fArr4[i3] = ((fArr3[i3] + f14) * f8) + f16;
+                int i4 = i3 + 1;
+                fArr4[i4] = ((fArr3[i4] + f15) * f9) + f16;
+            }
+            float f19 = -1.0f;
+            float f20 = -1.0f;
+            int i5 = 0;
+            while (i5 < length) {
+                float f21 = fArr4[i5];
+                if (f21 < f17) {
+                    f21 = f17;
+                }
+                float f22 = fArr4[i5 + 1];
+                if (f22 < f17) {
+                    f22 = f17;
+                }
+                if (f21 > f6) {
+                    f = f6;
+                } else {
+                    f = f6;
+                    f6 = f21;
+                }
+                if (f22 > f) {
+                    fArr = fArr4;
+                    f2 = f;
+                } else {
+                    fArr = fArr4;
+                    f2 = f22;
+                }
+                plot(f6, f2, fArr2, i);
+                if (f19 != -1.0f) {
+                    if (f19 > f6) {
+                        f4 = f15;
+                        f5 = f14;
+                        float fCeil = (float) Math.ceil(f6);
+                        float f23 = (f20 - f2) / (f19 - f6);
+                        while (fCeil < f19) {
+                            plot(fCeil, ((fCeil - f6) * f23) + f2, fArr2, i);
+                            fCeil += f18;
+                            f6 = f6;
+                        }
+                        f3 = f6;
+                    } else {
+                        f3 = f6;
+                        f4 = f15;
+                        f5 = f14;
+                        if (f19 < f3) {
+                            float f24 = (f20 - f2) / (f19 - f3);
+                            for (float fCeil2 = (float) Math.ceil(f19); fCeil2 < f3; fCeil2 += f18) {
+                                plot(fCeil2, ((fCeil2 - f3) * f24) + f2, fArr2, i);
+                            }
+                        }
+                    }
+                    if (f20 > f2) {
+                        float f25 = (f19 - f3) / (f20 - f2);
+                        for (float fCeil3 = (float) Math.ceil(f2); fCeil3 < f20; fCeil3 += f18) {
+                            plot(((fCeil3 - f2) * f25) + f3, fCeil3, fArr2, i);
+                        }
+                    } else if (f20 < f2) {
+                        float f26 = (f19 - f3) / (f20 - f2);
+                        for (float fCeil4 = (float) Math.ceil(f20); fCeil4 < f2; fCeil4 += f18) {
+                            plot(((fCeil4 - f2) * f26) + f3, fCeil4, fArr2, i);
+                        }
+                    }
+                } else {
+                    f3 = f6;
+                    f4 = f15;
+                    f5 = f14;
+                }
+                i5 += 2;
+                f20 = f2;
+                fArr4 = fArr;
+                f14 = f5;
+                f6 = f;
+                f15 = f4;
+                f19 = f3;
+            }
+            i2++;
+            f7 = f17;
+            f10 = f18;
+        }
+        return fArr2;
     }
 
     private static void plot(float f, float f2, float[] fArr, int i) {
@@ -64,47 +182,47 @@ public final class GestureUtils {
             f2 = 0.0f;
         }
         double d = f;
-        int floor = (int) Math.floor(d);
-        int ceil = (int) Math.ceil(d);
+        int iFloor = (int) Math.floor(d);
+        int iCeil = (int) Math.ceil(d);
         double d2 = f2;
-        int floor2 = (int) Math.floor(d2);
-        int ceil2 = (int) Math.ceil(d2);
-        if (f == floor && f2 == floor2) {
-            int i2 = (ceil2 * i) + ceil;
+        int iFloor2 = (int) Math.floor(d2);
+        int iCeil2 = (int) Math.ceil(d2);
+        if (f == iFloor && f2 == iFloor2) {
+            int i2 = (iCeil2 * i) + iCeil;
             if (fArr[i2] < 1.0f) {
                 fArr[i2] = 1.0f;
                 return;
             }
             return;
         }
-        double pow = Math.pow(r4 - f, 2.0d);
-        double pow2 = Math.pow(floor2 - f2, 2.0d);
-        double pow3 = Math.pow(ceil - f, 2.0d);
-        double pow4 = Math.pow(ceil2 - f2, 2.0d);
-        float sqrt = (float) Math.sqrt(pow + pow2);
-        float sqrt2 = (float) Math.sqrt(pow2 + pow3);
-        float sqrt3 = (float) Math.sqrt(pow + pow4);
-        float sqrt4 = (float) Math.sqrt(pow3 + pow4);
-        float f3 = sqrt + sqrt2 + sqrt3 + sqrt4;
-        float f4 = sqrt / f3;
-        int i3 = floor2 * i;
-        int i4 = i3 + floor;
+        double dPow = Math.pow(r4 - f, 2.0d);
+        double dPow2 = Math.pow(iFloor2 - f2, 2.0d);
+        double dPow3 = Math.pow(iCeil - f, 2.0d);
+        double dPow4 = Math.pow(iCeil2 - f2, 2.0d);
+        float fSqrt = (float) Math.sqrt(dPow + dPow2);
+        float fSqrt2 = (float) Math.sqrt(dPow2 + dPow3);
+        float fSqrt3 = (float) Math.sqrt(dPow + dPow4);
+        float fSqrt4 = (float) Math.sqrt(dPow3 + dPow4);
+        float f3 = fSqrt + fSqrt2 + fSqrt3 + fSqrt4;
+        float f4 = fSqrt / f3;
+        int i3 = iFloor2 * i;
+        int i4 = i3 + iFloor;
         if (f4 > fArr[i4]) {
             fArr[i4] = f4;
         }
-        float f5 = sqrt2 / f3;
-        int i5 = i3 + ceil;
+        float f5 = fSqrt2 / f3;
+        int i5 = i3 + iCeil;
         if (f5 > fArr[i5]) {
             fArr[i5] = f5;
         }
-        float f6 = sqrt3 / f3;
-        int i6 = ceil2 * i;
-        int i7 = floor + i6;
+        float f6 = fSqrt3 / f3;
+        int i6 = iCeil2 * i;
+        int i7 = iFloor + i6;
         if (f6 > fArr[i7]) {
             fArr[i7] = f6;
         }
-        float f7 = sqrt4 / f3;
-        int i8 = i6 + ceil;
+        float f7 = fSqrt4 / f3;
+        int i8 = i6 + iCeil;
         if (f7 > fArr[i8]) {
             fArr[i8] = f7;
         }
@@ -142,10 +260,10 @@ public final class GestureUtils {
             float f10 = f6 - f3;
             float[] fArr3 = fArr2;
             float f11 = f;
-            float hypot = (float) Math.hypot(f9, f10);
-            float f12 = f7 + hypot;
+            float fHypot = (float) Math.hypot(f9, f10);
+            float f12 = f7 + fHypot;
             if (f12 >= f11) {
-                float f13 = (f11 - f7) / hypot;
+                float f13 = (f11 - f7) / fHypot;
                 f2 += f9 * f13;
                 f3 += f13 * f10;
                 fArr[i2] = f2;
@@ -216,11 +334,11 @@ public final class GestureUtils {
 
     static float computeTotalLength(float[] fArr) {
         int length = fArr.length - 4;
-        float f = 0.0f;
+        float fHypot = 0.0f;
         for (int i = 0; i < length; i += 2) {
-            f = (float) (f + Math.hypot(fArr[r3] - fArr[i], fArr[i + 3] - fArr[i + 1]));
+            fHypot = (float) (fHypot + Math.hypot(fArr[r3] - fArr[i], fArr[i + 3] - fArr[i + 1]));
         }
-        return f;
+        return fHypot;
     }
 
     static float computeStraightness(float[] fArr) {
@@ -251,7 +369,7 @@ public final class GestureUtils {
     }
 
     static float minimumCosineDistance(float[] fArr, float[] fArr2, int i) {
-        double acos;
+        double dAcos;
         int length = fArr.length;
         float f = 0.0f;
         float f2 = 0.0f;
@@ -268,14 +386,14 @@ public final class GestureUtils {
             return 1.5707964f;
         }
         double d = f2 / f;
-        double atan = Math.atan(d);
-        if (i > 2 && Math.abs(atan) >= 3.141592653589793d / i) {
-            acos = Math.acos(f);
+        double dAtan = Math.atan(d);
+        if (i > 2 && Math.abs(dAtan) >= 3.141592653589793d / i) {
+            dAcos = Math.acos(f);
         } else {
-            double cos = Math.cos(atan);
-            acos = Math.acos((f * cos) + (f2 * d * cos));
+            double dCos = Math.cos(dAtan);
+            dAcos = Math.acos((f * dCos) + (f2 * d * dCos));
         }
-        return (float) acos;
+        return (float) dAcos;
     }
 
     public static OrientedBoundingBox computeOrientedBoundingBox(ArrayList<GesturePoint> arrayList) {
@@ -300,15 +418,15 @@ public final class GestureUtils {
     }
 
     private static OrientedBoundingBox computeOrientedBoundingBox(float[] fArr, float[] fArr2) {
-        float atan2;
+        float fAtan2;
         translate(fArr, -fArr2[0], -fArr2[1]);
-        float[] computeOrientation = computeOrientation(computeCoVariance(fArr));
-        float f = computeOrientation[0];
-        if (f == 0.0f && computeOrientation[1] == 0.0f) {
-            atan2 = -1.5707964f;
+        float[] fArrComputeOrientation = computeOrientation(computeCoVariance(fArr));
+        float f = fArrComputeOrientation[0];
+        if (f == 0.0f && fArrComputeOrientation[1] == 0.0f) {
+            fAtan2 = -1.5707964f;
         } else {
-            atan2 = (float) Math.atan2(computeOrientation[1], f);
-            rotate(fArr, -atan2);
+            fAtan2 = (float) Math.atan2(fArrComputeOrientation[1], f);
+            rotate(fArr, -fAtan2);
         }
         int length = fArr.length;
         float f2 = Float.MIN_VALUE;
@@ -331,7 +449,7 @@ public final class GestureUtils {
                 f5 = f7;
             }
         }
-        return new OrientedBoundingBox((float) ((atan2 * 180.0f) / 3.141592653589793d), fArr2[0], fArr2[1], f2 - f3, f5 - f4);
+        return new OrientedBoundingBox((float) ((fAtan2 * 180.0f) / 3.141592653589793d), fArr2[0], fArr2[1], f2 - f3, f5 - f4);
     }
 
     private static float[] computeOrientation(float[][] fArr) {
@@ -343,10 +461,10 @@ public final class GestureUtils {
         }
         float f = fArr3[0];
         float f2 = ((-f) - fArr[1][1]) / 2.0f;
-        float sqrt = (float) Math.sqrt(Math.pow(f2, 2.0d) - ((f * r9) - (fArr3[1] * r8[0])));
+        float fSqrt = (float) Math.sqrt(Math.pow(f2, 2.0d) - ((f * r9) - (fArr3[1] * r8[0])));
         float f3 = -f2;
-        float f4 = f3 + sqrt;
-        float f5 = f3 - sqrt;
+        float f4 = f3 + fSqrt;
+        float f5 = f3 - fSqrt;
         if (f4 == f5) {
             fArr2[0] = 0.0f;
             fArr2[1] = 0.0f;
@@ -363,15 +481,15 @@ public final class GestureUtils {
 
     static float[] rotate(float[] fArr, float f) {
         double d = f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
         int length = fArr.length;
         for (int i = 0; i < length; i += 2) {
             float f2 = fArr[i];
             int i2 = i + 1;
             float f3 = fArr[i2];
-            fArr[i] = (f2 * cos) - (f3 * sin);
-            fArr[i2] = (f2 * sin) + (f3 * cos);
+            fArr[i] = (f2 * fCos) - (f3 * fSin);
+            fArr[i2] = (f2 * fSin) + (f3 * fCos);
         }
         return fArr;
     }

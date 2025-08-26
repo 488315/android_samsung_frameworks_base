@@ -68,8 +68,8 @@ public class MbmsTempFileProvider extends ContentProvider {
         this.mContext = context;
     }
 
-    public static Uri getUriForFile(Context context, String str, File file) {
-        String substring;
+    public static Uri getUriForFile(Context context, String str, File file) throws IOException {
+        String strSubstring;
         try {
             String canonicalPath = file.getCanonicalPath();
             File embmsTempFileDir = getEmbmsTempFileDir(context);
@@ -79,11 +79,11 @@ public class MbmsTempFileProvider extends ContentProvider {
             try {
                 String canonicalPath2 = embmsTempFileDir.getCanonicalPath();
                 if (canonicalPath2.endsWith("/")) {
-                    substring = canonicalPath.substring(canonicalPath2.length());
+                    strSubstring = canonicalPath.substring(canonicalPath2.length());
                 } else {
-                    substring = canonicalPath.substring(canonicalPath2.length() + 1);
+                    strSubstring = canonicalPath.substring(canonicalPath2.length() + 1);
                 }
-                return new Uri.Builder().scheme("content").authority(str).encodedPath(Uri.encode(substring)).build();
+                return new Uri.Builder().scheme("content").authority(str).encodedPath(Uri.encode(strSubstring)).build();
             } catch (IOException unused) {
                 throw new RuntimeException("Could not get canonical path for temp file root dir " + embmsTempFileDir);
             }
@@ -92,17 +92,17 @@ public class MbmsTempFileProvider extends ContentProvider {
         }
     }
 
-    public static File getFileForUri(Context context, String str, Uri uri) throws FileNotFoundException {
+    public static File getFileForUri(Context context, String str, Uri uri) throws IOException {
         if (!"content".equals(uri.getScheme())) {
             throw new IllegalArgumentException("Uri must have scheme content");
         }
         if (!Objects.equals(str, uri.getAuthority())) {
             throw new IllegalArgumentException("Uri does not have a matching authority: " + str + ", " + uri.getAuthority());
         }
-        String decode = Uri.decode(uri.getEncodedPath());
+        String strDecode = Uri.decode(uri.getEncodedPath());
         try {
             File canonicalFile = getEmbmsTempFileDir(context).getCanonicalFile();
-            File canonicalFile2 = new File(canonicalFile, decode).getCanonicalFile();
+            File canonicalFile2 = new File(canonicalFile, strDecode).getCanonicalFile();
             if (canonicalFile2.getPath().startsWith(canonicalFile.getPath())) {
                 return canonicalFile2;
             }

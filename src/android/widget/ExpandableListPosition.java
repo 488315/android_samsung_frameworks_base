@@ -62,9 +62,9 @@ class ExpandableListPosition {
     private static ExpandableListPosition getRecycledOrCreate() {
         synchronized (sPool) {
             if (sPool.size() > 0) {
-                ExpandableListPosition remove = sPool.remove(0);
-                remove.resetState();
-                return remove;
+                ExpandableListPosition expandableListPositionRemove = sPool.remove(0);
+                expandableListPositionRemove.resetState();
+                return expandableListPositionRemove;
             }
             return new ExpandableListPosition();
         }

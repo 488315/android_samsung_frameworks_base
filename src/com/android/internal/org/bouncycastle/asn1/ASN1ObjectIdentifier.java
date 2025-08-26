@@ -67,7 +67,7 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
         StringBuilder sb = new StringBuilder();
         boolean z2 = true;
         long j = 0;
-        BigInteger bigInteger = null;
+        BigInteger bigIntegerShiftLeft = null;
         for (int i = 0; i != bArr2.length; i++) {
             byte b = bArr2[i];
             if (j <= LONG_LIMIT) {
@@ -92,19 +92,19 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
                     j = j2 << 7;
                 }
             } else {
-                BigInteger or = (bigInteger == null ? BigInteger.valueOf(j) : bigInteger).or(BigInteger.valueOf(b & Byte.MAX_VALUE));
+                BigInteger bigIntegerOr = (bigIntegerShiftLeft == null ? BigInteger.valueOf(j) : bigIntegerShiftLeft).or(BigInteger.valueOf(b & Byte.MAX_VALUE));
                 if ((b & 128) == 0) {
                     if (z2) {
                         sb.append('2');
-                        or = or.subtract(BigInteger.valueOf(80L));
+                        bigIntegerOr = bigIntegerOr.subtract(BigInteger.valueOf(80L));
                         z2 = false;
                     }
                     sb.append('.');
-                    sb.append(or);
+                    sb.append(bigIntegerOr);
                     j = 0;
-                    bigInteger = null;
+                    bigIntegerShiftLeft = null;
                 } else {
-                    bigInteger = or.shiftLeft(7);
+                    bigIntegerShiftLeft = bigIntegerOr.shiftLeft(7);
                 }
             }
         }
@@ -145,19 +145,19 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
 
     private void doOutput(ByteArrayOutputStream byteArrayOutputStream) {
         OIDTokenizer oIDTokenizer = new OIDTokenizer(this.identifier);
-        int parseInt = Integer.parseInt(oIDTokenizer.nextToken()) * 40;
-        String nextToken = oIDTokenizer.nextToken();
-        if (nextToken.length() <= 18) {
-            ASN1RelativeOID.writeField(byteArrayOutputStream, parseInt + Long.parseLong(nextToken));
+        int i = Integer.parseInt(oIDTokenizer.nextToken()) * 40;
+        String strNextToken = oIDTokenizer.nextToken();
+        if (strNextToken.length() <= 18) {
+            ASN1RelativeOID.writeField(byteArrayOutputStream, i + Long.parseLong(strNextToken));
         } else {
-            ASN1RelativeOID.writeField(byteArrayOutputStream, new BigInteger(nextToken).add(BigInteger.valueOf(parseInt)));
+            ASN1RelativeOID.writeField(byteArrayOutputStream, new BigInteger(strNextToken).add(BigInteger.valueOf(i)));
         }
         while (oIDTokenizer.hasMoreTokens()) {
-            String nextToken2 = oIDTokenizer.nextToken();
-            if (nextToken2.length() <= 18) {
-                ASN1RelativeOID.writeField(byteArrayOutputStream, Long.parseLong(nextToken2));
+            String strNextToken2 = oIDTokenizer.nextToken();
+            if (strNextToken2.length() <= 18) {
+                ASN1RelativeOID.writeField(byteArrayOutputStream, Long.parseLong(strNextToken2));
             } else {
-                ASN1RelativeOID.writeField(byteArrayOutputStream, new BigInteger(nextToken2));
+                ASN1RelativeOID.writeField(byteArrayOutputStream, new BigInteger(strNextToken2));
             }
         }
     }
@@ -202,8 +202,8 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
     }
 
     private static boolean isValidIdentifier(String str) {
-        char charAt;
-        if (str.length() < 3 || str.charAt(1) != '.' || (charAt = str.charAt(0)) < '0' || charAt > '2') {
+        char cCharAt;
+        if (str.length() < 3 || str.charAt(1) != '.' || (cCharAt = str.charAt(0)) < '0' || cCharAt > '2') {
             return false;
         }
         return ASN1RelativeOID.isValidIdentifier(str, 2);

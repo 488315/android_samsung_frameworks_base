@@ -237,17 +237,17 @@ public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
     public int hashCode() {
         int i = (((this.userId + 31) * 31) + this.state) * 31;
         String str = this.packageName;
-        int hashCode = (i + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (i + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.overlayName;
-        int hashCode2 = (hashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.targetPackageName;
-        int hashCode3 = (hashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.targetOverlayableName;
-        int hashCode4 = (hashCode3 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str4 == null ? 0 : str4.hashCode())) * 31;
         String str5 = this.category;
-        int hashCode5 = (hashCode4 + (str5 == null ? 0 : str5.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (str5 == null ? 0 : str5.hashCode())) * 31;
         String str6 = this.baseCodePath;
-        return ((hashCode5 + (str6 == null ? 0 : str6.hashCode())) * 31) + (this.constraints.isEmpty() ? 0 : this.constraints.hashCode());
+        return ((iHashCode5 + (str6 == null ? 0 : str6.hashCode())) * 31) + (this.constraints.isEmpty() ? 0 : this.constraints.hashCode());
     }
 
     public boolean equals(Object obj) {

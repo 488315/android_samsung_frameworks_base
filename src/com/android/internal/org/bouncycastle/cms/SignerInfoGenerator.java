@@ -96,20 +96,20 @@ public class SignerInfoGenerator {
         return this.signer.getOutputStream();
     }
 
-    public SignerInfo generate(ASN1ObjectIdentifier aSN1ObjectIdentifier) throws CMSException {
+    public SignerInfo generate(ASN1ObjectIdentifier aSN1ObjectIdentifier) throws IOException, CMSException {
         AlgorithmIdentifier algorithmIdentifier;
         ASN1Set aSN1Set;
         try {
-            AlgorithmIdentifier findEncryptionAlgorithm = this.sigEncAlgFinder.findEncryptionAlgorithm(this.signer.getAlgorithmIdentifier());
-            ASN1Set aSN1Set2 = null;
+            AlgorithmIdentifier algorithmIdentifierFindEncryptionAlgorithm = this.sigEncAlgFinder.findEncryptionAlgorithm(this.signer.getAlgorithmIdentifier());
+            ASN1Set attributeSet = null;
             if (this.sAttrGen != null) {
                 algorithmIdentifier = this.digester.getAlgorithmIdentifier();
                 this.calculatedDigest = this.digester.getDigest();
-                ASN1Set attributeSet = getAttributeSet(this.sAttrGen.getAttributes(Collections.unmodifiableMap(getBaseParameters(aSN1ObjectIdentifier, this.digester.getAlgorithmIdentifier(), findEncryptionAlgorithm, this.calculatedDigest))));
+                ASN1Set attributeSet2 = getAttributeSet(this.sAttrGen.getAttributes(Collections.unmodifiableMap(getBaseParameters(aSN1ObjectIdentifier, this.digester.getAlgorithmIdentifier(), algorithmIdentifierFindEncryptionAlgorithm, this.calculatedDigest))));
                 OutputStream outputStream = this.signer.getOutputStream();
-                outputStream.write(attributeSet.getEncoded(ASN1Encoding.DER));
+                outputStream.write(attributeSet2.getEncoded(ASN1Encoding.DER));
                 outputStream.close();
-                aSN1Set = attributeSet;
+                aSN1Set = attributeSet2;
             } else {
                 algorithmIdentifier = this.digestAlgorithm;
                 DigestCalculator digestCalculator = this.digester;
@@ -123,11 +123,11 @@ public class SignerInfoGenerator {
             AlgorithmIdentifier algorithmIdentifier2 = algorithmIdentifier;
             byte[] signature = this.signer.getSignature();
             if (this.unsAttrGen != null) {
-                Map baseParameters = getBaseParameters(aSN1ObjectIdentifier, algorithmIdentifier2, findEncryptionAlgorithm, this.calculatedDigest);
+                Map baseParameters = getBaseParameters(aSN1ObjectIdentifier, algorithmIdentifier2, algorithmIdentifierFindEncryptionAlgorithm, this.calculatedDigest);
                 baseParameters.put(CMSAttributeTableGenerator.SIGNATURE, Arrays.clone(signature));
-                aSN1Set2 = getAttributeSet(this.unsAttrGen.getAttributes(Collections.unmodifiableMap(baseParameters)));
+                attributeSet = getAttributeSet(this.unsAttrGen.getAttributes(Collections.unmodifiableMap(baseParameters)));
             }
-            return new SignerInfo(this.signerIdentifier, algorithmIdentifier2, aSN1Set, findEncryptionAlgorithm, new DEROctetString(signature), aSN1Set2);
+            return new SignerInfo(this.signerIdentifier, algorithmIdentifier2, aSN1Set, algorithmIdentifierFindEncryptionAlgorithm, new DEROctetString(signature), attributeSet);
         } catch (IOException e) {
             throw new CMSException("encoding error.", e);
         }
@@ -145,14 +145,14 @@ public class SignerInfoGenerator {
     }
 
     private Map getBaseParameters(ASN1ObjectIdentifier aSN1ObjectIdentifier, AlgorithmIdentifier algorithmIdentifier, AlgorithmIdentifier algorithmIdentifier2, byte[] bArr) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (aSN1ObjectIdentifier != null) {
-            hashMap.put("contentType", aSN1ObjectIdentifier);
+            map.put("contentType", aSN1ObjectIdentifier);
         }
-        hashMap.put(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER, algorithmIdentifier);
-        hashMap.put(CMSAttributeTableGenerator.SIGNATURE_ALGORITHM_IDENTIFIER, algorithmIdentifier2);
-        hashMap.put(CMSAttributeTableGenerator.DIGEST, Arrays.clone(bArr));
-        return hashMap;
+        map.put(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER, algorithmIdentifier);
+        map.put(CMSAttributeTableGenerator.SIGNATURE_ALGORITHM_IDENTIFIER, algorithmIdentifier2);
+        map.put(CMSAttributeTableGenerator.DIGEST, Arrays.clone(bArr));
+        return map;
     }
 
     public byte[] getCalculatedDigest() {

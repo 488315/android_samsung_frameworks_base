@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 /* loaded from: classes6.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_APP_CONTENT_SHARING, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY_NO_VIRTUAL_DEVICE, Flags.FLAG_SHOW_STOP_DIALOG_POST_CALL_END, Flags.FLAG_STOP_MEDIA_PROJECTION_ON_CALL_END, ""));
+    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_APP_CONTENT_SHARING, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY_NO_VIRTUAL_DEVICE, Flags.FLAG_RECORDING_OVERLAY, Flags.FLAG_SHOW_STOP_DIALOG_POST_CALL_END, Flags.FLAG_STOP_MEDIA_PROJECTION_ON_CALL_END, ""));
 
     private boolean isOptimizationEnabled() {
         return false;
@@ -51,6 +51,16 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     @Override // com.android.media.projection.flags.FeatureFlags
+    public boolean recordingOverlay() {
+        return getValue(Flags.FLAG_RECORDING_OVERLAY, new Predicate() { // from class: com.android.media.projection.flags.CustomFeatureFlags$$ExternalSyntheticLambda5
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                return ((FeatureFlags) obj).recordingOverlay();
+            }
+        });
+    }
+
+    @Override // com.android.media.projection.flags.FeatureFlags
     public boolean showStopDialogPostCallEnd() {
         return getValue(Flags.FLAG_SHOW_STOP_DIALOG_POST_CALL_END, new Predicate() { // from class: com.android.media.projection.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
@@ -79,6 +89,6 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_APP_CONTENT_SHARING, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY_NO_VIRTUAL_DEVICE, Flags.FLAG_SHOW_STOP_DIALOG_POST_CALL_END, Flags.FLAG_STOP_MEDIA_PROJECTION_ON_CALL_END);
+        return Arrays.asList(Flags.FLAG_APP_CONTENT_SHARING, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY, Flags.FLAG_MEDIA_PROJECTION_CONNECTED_DISPLAY_NO_VIRTUAL_DEVICE, Flags.FLAG_RECORDING_OVERLAY, Flags.FLAG_SHOW_STOP_DIALOG_POST_CALL_END, Flags.FLAG_STOP_MEDIA_PROJECTION_ON_CALL_END);
     }
 }

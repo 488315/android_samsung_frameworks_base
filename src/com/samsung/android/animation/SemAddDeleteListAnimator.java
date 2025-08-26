@@ -143,19 +143,19 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
             @Override // java.lang.Runnable
             public void run() {
                 int width;
-                int i;
-                int i2;
+                int childMaxHeight;
+                int left;
                 int top;
-                float f;
-                ListView listView;
-                int i3;
-                float f2;
-                int i4;
-                SemAbsAddDeleteAnimator.ViewInfo remove;
-                int i5;
-                int i6;
                 float top2;
-                int i7;
+                ListView listView;
+                int i;
+                float f;
+                int i2;
+                SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove;
+                int i3;
+                int i4;
+                float top3;
+                int i5;
                 ListView listView2 = SemAddDeleteListAnimator.this.mListView;
                 int childCount2 = listView2.getChildCount();
                 int firstVisiblePosition2 = listView2.getFirstVisiblePosition();
@@ -165,124 +165,124 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
                 int count = adapter.getCount();
                 ArrayList arrayList3 = new ArrayList();
                 if (childCount2 > headerViewsCount) {
-                    i = SemAddDeleteListAnimator.this.getChildMaxHeight() + listView2.getDividerHeight();
-                    i2 = listView2.getChildAt(headerViewsCount).getLeft();
+                    childMaxHeight = SemAddDeleteListAnimator.this.getChildMaxHeight() + listView2.getDividerHeight();
+                    left = listView2.getChildAt(headerViewsCount).getLeft();
                     width = listView2.getChildAt(headerViewsCount).getWidth();
                 } else {
                     width = listView2.getWidth();
-                    i = 0;
-                    i2 = 0;
+                    childMaxHeight = 0;
+                    left = 0;
                 }
-                int i8 = firstVisiblePosition - firstVisiblePosition2;
+                int i6 = firstVisiblePosition - firstVisiblePosition2;
                 boolean z = true;
-                int i9 = lastVisiblePosition + 1 + (childCount - childCount2);
-                int i10 = i8;
+                int i7 = lastVisiblePosition + 1 + (childCount - childCount2);
+                int i8 = i6;
                 boolean z2 = true;
-                int i11 = 0;
-                while (i11 < childCount2) {
+                int i9 = 0;
+                while (i9 < childCount2) {
                     boolean z3 = z;
-                    View childAt = listView2.getChildAt(i11);
-                    int i12 = i11 + firstVisiblePosition2;
-                    int i13 = firstVisiblePosition2;
-                    long itemId = adapter.getItemId(i12);
-                    float top3 = childAt.getTop();
+                    View childAt = listView2.getChildAt(i9);
+                    int i10 = i9 + firstVisiblePosition2;
+                    int i11 = firstVisiblePosition2;
+                    long itemId = adapter.getItemId(i10);
+                    float top4 = childAt.getTop();
                     if (itemId == -1) {
-                        if (i12 < headerViewsCount) {
-                            f2 = top3;
-                            i7 = i12 + 1;
-                            i4 = i9;
+                        if (i10 < headerViewsCount) {
+                            f = top4;
+                            i5 = i10 + 1;
+                            i2 = i7;
                         } else {
-                            f2 = top3;
-                            i4 = i9;
-                            if (i12 >= count - footerViewsCount) {
-                                i7 = -(((i12 + footerViewsCount) - count) + 1);
+                            f = top4;
+                            i2 = i7;
+                            if (i10 >= count - footerViewsCount) {
+                                i5 = -(((i10 + footerViewsCount) - count) + 1);
                             }
-                            remove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId));
+                            viewInfoRemove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId));
                         }
-                        itemId = i7;
-                        remove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId));
+                        itemId = i5;
+                        viewInfoRemove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId));
                     } else {
-                        f2 = top3;
-                        i4 = i9;
-                        remove = SemAddDeleteListAnimator.this.mOldViewCache.remove(Long.valueOf(itemId));
+                        f = top4;
+                        i2 = i7;
+                        viewInfoRemove = SemAddDeleteListAnimator.this.mOldViewCache.remove(Long.valueOf(itemId));
                     }
-                    if (remove != null) {
-                        remove.recycleBitmap();
-                        if (remove.top == f2) {
-                            i9 = i4;
+                    if (viewInfoRemove != null) {
+                        viewInfoRemove.recycleBitmap();
+                        if (viewInfoRemove.top == f) {
+                            i7 = i2;
                             z2 = false;
-                            i11++;
+                            i9++;
                             z = z3;
-                            firstVisiblePosition2 = i13;
+                            firstVisiblePosition2 = i11;
                         } else {
-                            top2 = remove.top - f2;
-                            i6 = i4;
+                            top3 = viewInfoRemove.top - f;
+                            i4 = i2;
                             z2 = false;
                         }
                     } else {
-                        if (i10 <= 0 || !z2) {
-                            i5 = i4 - i12;
-                            i6 = i4 + 1;
+                        if (i8 <= 0 || !z2) {
+                            i3 = i2 - i10;
+                            i4 = i2 + 1;
                         } else {
-                            i5 = -i8;
-                            i10--;
-                            i6 = i4;
+                            i3 = -i6;
+                            i8--;
+                            i4 = i2;
                         }
-                        top2 = (childAt.getTop() + (i5 * i)) - f2;
+                        top3 = (childAt.getTop() + (i3 * childMaxHeight)) - f;
                     }
-                    arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt, 0.0f, top2));
-                    i9 = i6;
-                    i11++;
+                    arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt, 0.0f, top3));
+                    i7 = i4;
+                    i9++;
                     z = z3;
-                    firstVisiblePosition2 = i13;
+                    firstVisiblePosition2 = i11;
                 }
-                int i14 = firstVisiblePosition2;
+                int i12 = firstVisiblePosition2;
                 boolean z4 = z;
                 Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it = SemAddDeleteListAnimator.this.mOldViewCache.entrySet().iterator();
                 boolean z5 = false;
                 while (it.hasNext()) {
                     SemAbsAddDeleteAnimator.ViewInfo value = it.next().getValue();
                     SemAddDeleteListAnimator.this.mGhostViewSnapshots.add(value);
-                    Rect rect = new Rect(i2, value.top, i2 + width, value.bottom);
+                    Rect rect = new Rect(left, value.top, left + width, value.bottom);
                     int newPosition = SemAddDeleteListAnimator.this.getNewPosition(value.oldPosition, arrayList2);
-                    boolean contains = hashSet.contains(Integer.valueOf(value.oldPosition));
-                    int i15 = newPosition - i14;
-                    if (i15 < 0 || i15 >= childCount2) {
+                    boolean zContains = hashSet.contains(Integer.valueOf(value.oldPosition));
+                    int i13 = newPosition - i12;
+                    if (i13 < 0 || i13 >= childCount2) {
                         if (childCount2 == 0) {
                             top = listView2.getPaddingTop();
                         } else {
                             top = listView2.getChildAt(0).getTop();
                         }
-                        f = (top - value.top) - ((-i15) * i);
+                        top2 = (top - value.top) - ((-i13) * childMaxHeight);
                     } else {
-                        f = listView2.getChildAt(i15).getTop() - value.top;
+                        top2 = listView2.getChildAt(i13).getTop() - value.top;
                     }
                     Rect rect2 = new Rect(rect);
-                    rect2.offset(0, (int) f);
-                    if (contains) {
-                        int width2 = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.width());
-                        int height = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.height());
+                    rect2.offset(0, (int) top2);
+                    if (zContains) {
+                        int iWidth = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.width());
+                        int iHeight = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.height());
                         listView = listView2;
-                        i3 = childCount2;
-                        rect2 = new Rect(rect2.left + width2, rect2.top + height, rect2.right - width2, rect2.bottom - height);
+                        i = childCount2;
+                        rect2 = new Rect(rect2.left + iWidth, rect2.top + iHeight, rect2.right - iWidth, rect2.bottom - iHeight);
                     } else {
                         listView = listView2;
-                        i3 = childCount2;
+                        i = childCount2;
                     }
-                    PropertyValuesHolder ofObject = PropertyValuesHolder.ofObject("bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
-                    PropertyValuesHolder ofInt = PropertyValuesHolder.ofInt("alpha", 255, 0);
+                    PropertyValuesHolder propertyValuesHolderOfObject = PropertyValuesHolder.ofObject("bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
+                    PropertyValuesHolder propertyValuesHolderOfInt = PropertyValuesHolder.ofInt("alpha", 255, 0);
                     BitmapDrawable bitmapDrawable = value.viewSnapshot;
                     PropertyValuesHolder[] propertyValuesHolderArr = new PropertyValuesHolder[2];
-                    propertyValuesHolderArr[0] = ofObject;
-                    propertyValuesHolderArr[z4 ? 1 : 0] = ofInt;
-                    ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(bitmapDrawable, propertyValuesHolderArr);
+                    propertyValuesHolderArr[0] = propertyValuesHolderOfObject;
+                    propertyValuesHolderArr[z4 ? 1 : 0] = propertyValuesHolderOfInt;
+                    ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(bitmapDrawable, propertyValuesHolderArr);
                     if (!z5) {
-                        ofPropertyValuesHolder.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
+                        objectAnimatorOfPropertyValuesHolder.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
                         z5 = z4 ? 1 : 0;
                     }
-                    arrayList3.add(ofPropertyValuesHolder);
+                    arrayList3.add(objectAnimatorOfPropertyValuesHolder);
                     listView2 = listView;
-                    childCount2 = i3;
+                    childCount2 = i;
                 }
                 SemAddDeleteListAnimator.this.mOldViewCache.clear();
                 SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.clear();
@@ -487,22 +487,22 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
             i3++;
             i2 = 1;
         }
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         for (int i5 = 0; i5 < arrayList2.size(); i5++) {
             Integer num = (Integer) arrayList2.get(i5);
             View childAt2 = listView.getChildAt((num.intValue() - i5) - firstVisiblePosition);
             if (childAt2 != null) {
-                hashMap.put(num, Integer.valueOf(childAt2.getTop()));
+                map.put(num, Integer.valueOf(childAt2.getTop()));
             }
         }
         this.mInsertRunnable = new Runnable() { // from class: com.samsung.android.animation.SemAddDeleteListAnimator.5
             @Override // java.lang.Runnable
             public void run() {
                 int width;
+                int left;
+                int childMaxHeight;
+                int top;
                 int i6;
-                int i7;
-                int i8;
-                int i9;
                 ObjectAnimator translateAnim;
                 ListView listView2 = SemAddDeleteListAnimator.this.mListView;
                 int firstVisiblePosition2 = listView2.getFirstVisiblePosition();
@@ -512,83 +512,83 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
                 int count2 = adapter.getCount();
                 ArrayList arrayList3 = new ArrayList();
                 if (childCount2 > headerViewsCount) {
-                    i7 = SemAddDeleteListAnimator.this.getChildMaxHeight() + listView2.getDividerHeight();
-                    i6 = listView2.getChildAt(headerViewsCount).getLeft();
+                    childMaxHeight = SemAddDeleteListAnimator.this.getChildMaxHeight() + listView2.getDividerHeight();
+                    left = listView2.getChildAt(headerViewsCount).getLeft();
                     width = listView2.getChildAt(0).getWidth();
                 } else {
                     width = listView2.getWidth();
-                    i6 = 0;
-                    i7 = 0;
+                    left = 0;
+                    childMaxHeight = 0;
                 }
-                int i10 = 0;
-                while (i10 < childCount2) {
-                    int i11 = i10 + firstVisiblePosition2;
-                    long itemId2 = adapter.getItemId(i11);
-                    View childAt3 = listView2.getChildAt(i10);
-                    float top = childAt3.getTop();
-                    int i12 = firstVisiblePosition2;
+                int i7 = 0;
+                while (i7 < childCount2) {
+                    int i8 = i7 + firstVisiblePosition2;
+                    long itemId2 = adapter.getItemId(i8);
+                    View childAt3 = listView2.getChildAt(i7);
+                    float top2 = childAt3.getTop();
+                    int i9 = firstVisiblePosition2;
                     if (itemId2 == -1) {
-                        SemAbsAddDeleteAnimator.ViewInfo remove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(-(((i11 + footerViewsCount2) - count2) + 1)));
-                        if (remove == null) {
+                        SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(-(((i8 + footerViewsCount2) - count2) + 1)));
+                        if (viewInfoRemove == null) {
                             Log.e(SemAddDeleteListAnimator.TAG, "AFTER header/footer SOMETHING WENT WRONG, in the new layout, header/footer is appearing that was not present before!");
                         } else {
-                            remove.recycleBitmap();
-                            if (remove.top == top) {
-                                Log.e(SemAddDeleteListAnimator.TAG, "AFTER header/footer something strange is happening, the coordinates are same after layout, viewInfo.top=" + remove.top + ", newY=" + top);
+                            viewInfoRemove.recycleBitmap();
+                            if (viewInfoRemove.top == top2) {
+                                Log.e(SemAddDeleteListAnimator.TAG, "AFTER header/footer something strange is happening, the coordinates are same after layout, viewInfo.top=" + viewInfoRemove.top + ", newY=" + top2);
                             } else {
-                                arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, remove.top - top));
+                                arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, viewInfoRemove.top - top2));
                             }
                         }
-                        i9 = footerViewsCount2;
+                        i6 = footerViewsCount2;
                     } else {
-                        i9 = footerViewsCount2;
-                        Integer num2 = (Integer) hashMap.remove(Integer.valueOf(i11));
-                        SemAbsAddDeleteAnimator.ViewInfo remove2 = SemAddDeleteListAnimator.this.mOldViewCache.remove(Long.valueOf(itemId2));
-                        if (remove2 != null) {
-                            remove2.recycleBitmap();
-                            if (remove2.top != top) {
-                                arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, remove2.top - top));
+                        i6 = footerViewsCount2;
+                        Integer num2 = (Integer) map.remove(Integer.valueOf(i8));
+                        SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove2 = SemAddDeleteListAnimator.this.mOldViewCache.remove(Long.valueOf(itemId2));
+                        if (viewInfoRemove2 != null) {
+                            viewInfoRemove2.recycleBitmap();
+                            if (viewInfoRemove2.top != top2) {
+                                arrayList3.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, viewInfoRemove2.top - top2));
                             }
                         } else if (num2 != null) {
-                            arrayList3.add(SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, num2.intValue() - top));
+                            arrayList3.add(SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, num2.intValue() - top2));
                         } else {
-                            float top2 = (childAt3.getTop() - ((i11 - (i11 - SemAddDeleteListAnimator.this.getShiftCount(i11, arrayList2))) * i7)) - top;
-                            if (hashSet.contains(Integer.valueOf(i11))) {
-                                translateAnim = SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, top2);
+                            float top3 = (childAt3.getTop() - ((i8 - (i8 - SemAddDeleteListAnimator.this.getShiftCount(i8, arrayList2))) * childMaxHeight)) - top2;
+                            if (hashSet.contains(Integer.valueOf(i8))) {
+                                translateAnim = SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, top3);
                             } else {
-                                translateAnim = SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, top2);
+                                translateAnim = SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, top3);
                             }
                             arrayList3.add(translateAnim);
                         }
                     }
-                    i10++;
-                    firstVisiblePosition2 = i12;
-                    footerViewsCount2 = i9;
+                    i7++;
+                    firstVisiblePosition2 = i9;
+                    footerViewsCount2 = i6;
                 }
-                hashMap.clear();
+                map.clear();
                 Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it = SemAddDeleteListAnimator.this.mOldViewCache.entrySet().iterator();
                 int lastVisiblePosition = listView2.getLastVisiblePosition();
                 boolean z = false;
                 while (it.hasNext()) {
-                    int i13 = lastVisiblePosition + 1;
-                    if (arrayList2.contains(Integer.valueOf(i13))) {
-                        lastVisiblePosition = i13;
+                    int i10 = lastVisiblePosition + 1;
+                    if (arrayList2.contains(Integer.valueOf(i10))) {
+                        lastVisiblePosition = i10;
                     } else {
                         SemAbsAddDeleteAnimator.ViewInfo value = it.next().getValue();
                         int newPositionForInsert = SemAddDeleteListAnimator.this.getNewPositionForInsert(value.oldPosition, arrayList2);
                         if (newPositionForInsert < listView2.getFirstVisiblePosition()) {
-                            i8 = listView2.getChildAt(0).getTop() - ((listView2.getFirstVisiblePosition() - newPositionForInsert) * i7);
+                            top = listView2.getChildAt(0).getTop() - ((listView2.getFirstVisiblePosition() - newPositionForInsert) * childMaxHeight);
                         } else {
-                            i8 = value.top + ((i13 - value.oldPosition) * i7);
-                            lastVisiblePosition = i13;
+                            top = value.top + ((i10 - value.oldPosition) * childMaxHeight);
+                            lastVisiblePosition = i10;
                         }
-                        Rect rect = new Rect(i6, value.top, i6 + width, value.bottom);
-                        Rect rect2 = new Rect(i6, i8, rect.width() + i6, rect.height() + i8);
+                        Rect rect = new Rect(left, value.top, left + width, value.bottom);
+                        Rect rect2 = new Rect(left, top, rect.width() + left, rect.height() + top);
                         SemAddDeleteListAnimator.this.mGhostViewSnapshots.add(value);
-                        ObjectAnimator ofObject = ObjectAnimator.ofObject(value.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
-                        arrayList3.add(ofObject);
+                        ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(value.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
+                        arrayList3.add(objectAnimatorOfObject);
                         if (!z) {
-                            ofObject.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
+                            objectAnimatorOfObject.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
                             z = true;
                         }
                     }
@@ -596,15 +596,15 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
                 Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it2 = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.entrySet().iterator();
                 while (it2.hasNext()) {
                     SemAbsAddDeleteAnimator.ViewInfo value2 = it2.next().getValue();
-                    int size = value2.top + (arrayList2.size() * i7);
-                    Rect rect3 = new Rect(i6, value2.top, i6 + width, value2.bottom);
-                    Rect rect4 = new Rect(i6, size, rect3.width() + i6, rect3.height() + size);
+                    int size = value2.top + (arrayList2.size() * childMaxHeight);
+                    Rect rect3 = new Rect(left, value2.top, left + width, value2.bottom);
+                    Rect rect4 = new Rect(left, size, rect3.width() + left, rect3.height() + size);
                     SemAddDeleteListAnimator.this.mGhostViewSnapshots.add(value2);
-                    ObjectAnimator ofObject2 = ObjectAnimator.ofObject(value2.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect3, rect4);
+                    ObjectAnimator objectAnimatorOfObject2 = ObjectAnimator.ofObject(value2.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect3, rect4);
                     if (!z) {
-                        ofObject2.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
+                        objectAnimatorOfObject2.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
                     }
-                    arrayList3.add(ofObject2);
+                    arrayList3.add(objectAnimatorOfObject2);
                 }
                 SemAddDeleteListAnimator.this.mOldViewCache.clear();
                 SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.clear();
@@ -796,34 +796,252 @@ public class SemAddDeleteListAnimator extends SemAbsAddDeleteAnimator {
             i4 = i + 1;
             z2 = z;
         }
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         for (int i6 = 0; i6 < arrayList3.size(); i6++) {
             Integer num = (Integer) arrayList3.get(i6);
-            int intValue = num.intValue() - i6;
+            int iIntValue = num.intValue() - i6;
             for (int i7 = 0; i7 < arrayList4.size(); i7++) {
-                if (((Integer) arrayList4.get(i7)).intValue() <= intValue) {
-                    intValue++;
+                if (((Integer) arrayList4.get(i7)).intValue() <= iIntValue) {
+                    iIntValue++;
                 }
             }
-            View childAt2 = this.mListView.getChildAt(intValue - firstVisiblePosition);
+            View childAt2 = this.mListView.getChildAt(iIntValue - firstVisiblePosition);
             if (childAt2 != null) {
-                hashMap.put(num, Integer.valueOf(childAt2.getTop()));
+                map.put(num, Integer.valueOf(childAt2.getTop()));
             }
         }
         this.mInsertDeleteRunnable = new Runnable() { // from class: com.samsung.android.animation.SemAddDeleteListAnimator.7
-            /* JADX WARN: Removed duplicated region for block: B:13:0x009c  */
-            /* JADX WARN: Removed duplicated region for block: B:17:0x00a7  */
+            /* JADX WARN: Removed duplicated region for block: B:18:0x009c  */
+            /* JADX WARN: Removed duplicated region for block: B:19:0x00a7  */
             @Override // java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
             public void run() {
-                /*
-                    Method dump skipped, instructions count: 915
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemAddDeleteListAnimator.AnonymousClass7.run():void");
+                int width;
+                int childMaxHeight;
+                int left;
+                float top;
+                int top2;
+                ListView listView;
+                Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it;
+                boolean z3;
+                ObjectAnimator objectAnimatorOfObject;
+                int top3;
+                int i8;
+                int i9;
+                long j;
+                SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove;
+                ListView listView2 = SemAddDeleteListAnimator.this.mListView;
+                int firstVisiblePosition2 = listView2.getFirstVisiblePosition();
+                int lastVisiblePosition = listView2.getLastVisiblePosition();
+                int headerViewsCount2 = listView2.getHeaderViewsCount();
+                int footerViewsCount2 = listView2.getFooterViewsCount();
+                int childCount2 = listView2.getChildCount();
+                int count2 = adapter.getCount();
+                ArrayList arrayList5 = new ArrayList();
+                if (childCount2 > headerViewsCount2) {
+                    childMaxHeight = SemAddDeleteListAnimator.this.getChildMaxHeight() + listView2.getDividerHeight();
+                    left = listView2.getChildAt(headerViewsCount2).getLeft();
+                    width = listView2.getChildAt(0).getWidth();
+                } else {
+                    width = listView2.getWidth();
+                    childMaxHeight = 0;
+                    left = 0;
+                }
+                boolean z4 = true;
+                int i10 = lastVisiblePosition + 1 + (childCount - childCount2);
+                int i11 = firstVisiblePosition2;
+                int i12 = 0;
+                boolean z5 = true;
+                while (i12 < childCount2) {
+                    boolean z6 = z4;
+                    int i13 = i12 + firstVisiblePosition2;
+                    long itemId2 = adapter.getItemId(i13);
+                    View childAt3 = listView2.getChildAt(i12);
+                    int i14 = firstVisiblePosition2;
+                    float top4 = childAt3.getTop();
+                    int i15 = i10;
+                    if (itemId2 == -1) {
+                        if (i13 < headerViewsCount2) {
+                            i8 = headerViewsCount2;
+                            j = i13 + 1;
+                        } else {
+                            i8 = headerViewsCount2;
+                            if (i13 >= count2 - footerViewsCount2) {
+                                j = -(((i13 + footerViewsCount2) - count2) + 1);
+                            }
+                            viewInfoRemove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId2));
+                            if (viewInfoRemove != null) {
+                                Log.e(SemAddDeleteListAnimator.TAG, "AFTER header/footer SOMETHING WENT WRONG, in the new layout, header/footer is appearing that was not present before!");
+                            } else {
+                                viewInfoRemove.recycleBitmap();
+                                if (viewInfoRemove.top == top4) {
+                                    Log.e(SemAddDeleteListAnimator.TAG, "AFTER header/footer something strange is happening, the coordinates are same after layout, viewInfo.top=" + viewInfoRemove.top + ", newY=" + top4);
+                                } else {
+                                    arrayList5.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, viewInfoRemove.top - top4));
+                                }
+                            }
+                        }
+                        itemId2 = j;
+                        viewInfoRemove = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.remove(Long.valueOf(itemId2));
+                        if (viewInfoRemove != null) {
+                        }
+                    } else {
+                        i8 = headerViewsCount2;
+                        Integer num2 = (Integer) map.remove(Integer.valueOf(i13));
+                        SemAbsAddDeleteAnimator.ViewInfo viewInfoRemove2 = SemAddDeleteListAnimator.this.mOldViewCache.remove(Long.valueOf(itemId2));
+                        if (viewInfoRemove2 != null) {
+                            viewInfoRemove2.recycleBitmap();
+                            if (viewInfoRemove2.top != top4) {
+                                arrayList5.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, viewInfoRemove2.top - top4));
+                            }
+                            i10 = i15;
+                            z5 = false;
+                        } else if (num2 != null) {
+                            arrayList5.add(SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, num2.intValue() - top4));
+                        } else if (hashSet.contains(Integer.valueOf(i13))) {
+                            arrayList5.add(SemAddDeleteListAnimator.this.getInsertTranslateAlphaScaleAnim(childAt3, 0.0f, (childAt3.getTop() - ((i13 - (i13 - SemAddDeleteListAnimator.this.getShiftCount(i13, arrayList3, arrayList4))) * childMaxHeight)) - top4));
+                        } else {
+                            if (i11 <= 0 || !z5) {
+                                i9 = i15 - i13;
+                                i10 = i15 + 1;
+                            } else {
+                                i9 = -SemAddDeleteListAnimator.this.getShiftCount(i13, arrayList3, arrayList4);
+                                i11--;
+                                i10 = i15;
+                            }
+                            arrayList5.add(SemAddDeleteListAnimator.this.getTranslateAnim(childAt3, 0.0f, (childAt3.getTop() + (i9 * childMaxHeight)) - top4));
+                        }
+                        i12++;
+                        z4 = z6;
+                        firstVisiblePosition2 = i14;
+                        headerViewsCount2 = i8;
+                    }
+                    i10 = i15;
+                    i12++;
+                    z4 = z6;
+                    firstVisiblePosition2 = i14;
+                    headerViewsCount2 = i8;
+                }
+                int i16 = firstVisiblePosition2;
+                boolean z7 = z4;
+                map.clear();
+                Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it2 = SemAddDeleteListAnimator.this.mOldViewCache.entrySet().iterator();
+                boolean z8 = false;
+                while (it2.hasNext()) {
+                    SemAbsAddDeleteAnimator.ViewInfo value = it2.next().getValue();
+                    SemAddDeleteListAnimator.this.mGhostViewSnapshots.add(value);
+                    Rect rect = new Rect(left, value.top, left + width, value.bottom);
+                    int newPosition = SemAddDeleteListAnimator.this.getNewPosition(value.oldPosition, arrayList3, arrayList4);
+                    boolean zContains = hashSet2.contains(Integer.valueOf(value.oldPosition));
+                    int i17 = newPosition - i16;
+                    if (i17 < 0) {
+                        if (childCount2 == 0) {
+                            top3 = listView2.getPaddingTop();
+                        } else {
+                            top3 = listView2.getChildAt(0).getTop();
+                        }
+                        top = (top3 - value.top) - ((-i17) * childMaxHeight);
+                    } else if (i17 >= childCount2) {
+                        int i18 = childCount2 - 1;
+                        if (listView2.getChildAt(i18) == null) {
+                            top2 = 0 - value.top;
+                        } else {
+                            top2 = listView2.getChildAt(i18).getTop() - value.top;
+                        }
+                        top = top2 + (((i17 - childCount2) + 1) * childMaxHeight);
+                    } else {
+                        top = listView2.getChildAt(i17).getTop() - value.top;
+                    }
+                    Rect rect2 = new Rect(rect);
+                    rect2.offset(0, (int) top);
+                    if (zContains) {
+                        int iWidth = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.width());
+                        int iHeight = (int) (((1.0f - SemAbsAddDeleteAnimator.START_SCALE_FACTOR) / 2.0f) * rect2.height());
+                        listView = listView2;
+                        it = it2;
+                        z3 = z8;
+                        PropertyValuesHolder propertyValuesHolderOfObject = PropertyValuesHolder.ofObject("bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, new Rect(rect2.left + iWidth, rect2.top + iHeight, rect2.right - iWidth, rect2.bottom - iHeight));
+                        PropertyValuesHolder propertyValuesHolderOfInt = PropertyValuesHolder.ofInt("alpha", 255, 0);
+                        BitmapDrawable bitmapDrawable = value.viewSnapshot;
+                        PropertyValuesHolder[] propertyValuesHolderArr = new PropertyValuesHolder[2];
+                        propertyValuesHolderArr[0] = propertyValuesHolderOfObject;
+                        propertyValuesHolderArr[z7 ? 1 : 0] = propertyValuesHolderOfInt;
+                        objectAnimatorOfObject = ObjectAnimator.ofPropertyValuesHolder(bitmapDrawable, propertyValuesHolderArr);
+                    } else {
+                        listView = listView2;
+                        it = it2;
+                        z3 = z8;
+                        objectAnimatorOfObject = ObjectAnimator.ofObject(value.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect, rect2);
+                    }
+                    if (z3) {
+                        z8 = z3;
+                    } else {
+                        objectAnimatorOfObject.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
+                        z8 = z7 ? 1 : 0;
+                    }
+                    arrayList5.add(objectAnimatorOfObject);
+                    listView2 = listView;
+                    it2 = it;
+                }
+                boolean z9 = z8;
+                Iterator<Map.Entry<Long, SemAbsAddDeleteAnimator.ViewInfo>> it3 = SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.entrySet().iterator();
+                while (it3.hasNext()) {
+                    SemAbsAddDeleteAnimator.ViewInfo value2 = it3.next().getValue();
+                    int size = value2.top + (arrayList3.size() * childMaxHeight);
+                    Rect rect3 = new Rect(left, value2.top, left + width, value2.bottom);
+                    Rect rect4 = new Rect(left, size, rect3.width() + left, rect3.height() + size);
+                    SemAddDeleteListAnimator.this.mGhostViewSnapshots.add(value2);
+                    ObjectAnimator objectAnimatorOfObject2 = ObjectAnimator.ofObject(value2.viewSnapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, rect3, rect4);
+                    if (!z9) {
+                        objectAnimatorOfObject2.addUpdateListener(SemAddDeleteListAnimator.this.mBitmapUpdateListener);
+                    }
+                    arrayList5.add(objectAnimatorOfObject2);
+                }
+                SemAddDeleteListAnimator.this.mOldViewCache.clear();
+                SemAddDeleteListAnimator.this.mOldHeaderFooterViewCache.clear();
+                AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.playTogether(arrayList5);
+                animatorSet.setInterpolator(SemAbsAddDeleteAnimator.INSERT_INTERPOLATOR);
+                animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemAddDeleteListAnimator.7.1
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animator) {
+                        Log.i(SemAddDeleteListAnimator.TAG, "onAnimationStart #3");
+                        if (SemAddDeleteListAnimator.this.mListView.isPressed()) {
+                            SemAddDeleteListAnimator.this.mListView.setPressed(false);
+                        }
+                        SemAddDeleteListAnimator.this.mListView.setEnabled(false);
+                        if (SemAddDeleteListAnimator.this.mOnAddDeleteListener != null) {
+                            SemAddDeleteListAnimator.this.mOnAddDeleteListener.onAnimationStart(true);
+                        }
+                    }
+
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animator) {
+                        Log.i(SemAddDeleteListAnimator.TAG, "onAnimationEnd #3");
+                        SemAddDeleteListAnimator.this.mHandler.removeCallbacks(SemAddDeleteListAnimator.this.mAniTimeoutRunnable);
+                        SemAddDeleteListAnimator.this.mGhostViewSnapshots.clear();
+                        SemAddDeleteListAnimator.this.mListView.invalidate();
+                        SemAddDeleteListAnimator.this.mListView.setEnabled(true);
+                        if (SemAddDeleteListAnimator.this.mOnAddDeleteListener != null) {
+                            SemAddDeleteListAnimator.this.mOnAddDeleteListener.onAnimationEnd(true);
+                        }
+                    }
+
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animator) {
+                        Log.i(SemAddDeleteListAnimator.TAG, "onAnimationCancel #3");
+                        SemAddDeleteListAnimator.this.mHandler.removeCallbacks(SemAddDeleteListAnimator.this.mAniTimeoutRunnable);
+                        SemAddDeleteListAnimator.this.mGhostViewSnapshots.clear();
+                        SemAddDeleteListAnimator.this.mListView.invalidate();
+                        SemAddDeleteListAnimator.this.mListView.setEnabled(true);
+                    }
+                });
+                animatorSet.setDuration(SemAddDeleteListAnimator.this.mTranslationDuration);
+                animatorSet.start();
+                Log.i(SemAddDeleteListAnimator.TAG, "postDelayed #3 mAniTimeoutRunnable delay = " + (SemAddDeleteListAnimator.this.mTranslationDuration + 100));
+                SemAddDeleteListAnimator.this.mHandler.postDelayed(SemAddDeleteListAnimator.this.mAniTimeoutRunnable, (long) (SemAddDeleteListAnimator.this.mTranslationDuration + 100));
             }
         };
     }

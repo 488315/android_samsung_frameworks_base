@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalDatabase_Impl extends CommunalDatabase {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -50,7 +49,7 @@ public final class CommunalDatabase_Impl extends CommunalDatabase {
     public final RoomOpenDelegate createOpenDelegate() {
         return new RoomOpenDelegate(5, "a83f96ef4babe730b3a00e8acb777a25", "00c4799cc21dd74a230a6173b8d645a3") { // from class: com.android.systemui.communal.data.db.CommunalDatabase_Impl.1
             @Override // androidx.room.RoomOpenDelegate
-            public final void createAllTables(SQLiteConnection sQLiteConnection) {
+            public final void createAllTables(SQLiteConnection sQLiteConnection) throws Exception {
                 SQLite.execSQL(sQLiteConnection, "CREATE TABLE IF NOT EXISTS `communal_widget_table` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `widget_id` INTEGER NOT NULL, `component_name` TEXT NOT NULL, `item_id` INTEGER NOT NULL, `user_serial_number` INTEGER NOT NULL DEFAULT -1, `span_y` INTEGER NOT NULL DEFAULT 3, `span_y_new` INTEGER NOT NULL DEFAULT 1)");
                 SQLite.execSQL(sQLiteConnection, "CREATE TABLE IF NOT EXISTS `communal_item_rank_table` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `rank` INTEGER NOT NULL DEFAULT 0)");
                 SQLite.execSQL(sQLiteConnection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
@@ -58,46 +57,46 @@ public final class CommunalDatabase_Impl extends CommunalDatabase {
             }
 
             @Override // androidx.room.RoomOpenDelegate
-            public final void dropAllTables(SQLiteConnection sQLiteConnection) {
+            public final void dropAllTables(SQLiteConnection sQLiteConnection) throws Exception {
                 SQLite.execSQL(sQLiteConnection, "DROP TABLE IF EXISTS `communal_widget_table`");
                 SQLite.execSQL(sQLiteConnection, "DROP TABLE IF EXISTS `communal_item_rank_table`");
             }
 
             @Override // androidx.room.RoomOpenDelegate
-            public final void onOpen(SQLiteConnection sQLiteConnection) {
+            public final void onOpen(SQLiteConnection sQLiteConnection) throws Exception {
                 int i = CommunalDatabase_Impl.$r8$clinit;
                 CommunalDatabase_Impl.this.internalInitInvalidationTracker(sQLiteConnection);
             }
 
             @Override // androidx.room.RoomOpenDelegate
-            public final void onPreMigrate(SQLiteConnection sQLiteConnection) {
+            public final void onPreMigrate(SQLiteConnection sQLiteConnection) throws Exception {
                 DBUtil.dropFtsSyncTriggers(sQLiteConnection);
             }
 
             @Override // androidx.room.RoomOpenDelegate
-            public final RoomOpenDelegate.ValidationResult onValidateSchema(SQLiteConnection sQLiteConnection) {
-                HashMap hashMap = new HashMap(7);
-                hashMap.put(NetworkAnalyticsConstants.DataPoints.UID, new TableInfo.Column(NetworkAnalyticsConstants.DataPoints.UID, "INTEGER", true, 1, null, 1));
-                hashMap.put("widget_id", new TableInfo.Column("widget_id", "INTEGER", true, 0, null, 1));
-                hashMap.put("component_name", new TableInfo.Column("component_name", ImsSettings.TYPE_TEXT, true, 0, null, 1));
-                hashMap.put("item_id", new TableInfo.Column("item_id", "INTEGER", true, 0, null, 1));
-                hashMap.put("user_serial_number", new TableInfo.Column("user_serial_number", "INTEGER", true, 0, "-1", 1));
-                hashMap.put("span_y", new TableInfo.Column("span_y", "INTEGER", true, 0, "3", 1));
-                hashMap.put("span_y_new", new TableInfo.Column("span_y_new", "INTEGER", true, 0, "1", 1));
-                TableInfo tableInfo = new TableInfo("communal_widget_table", hashMap, new HashSet(0), new HashSet(0));
-                TableInfo read = TableInfo.read(sQLiteConnection, "communal_widget_table");
-                if (!tableInfo.equals(read)) {
-                    return new RoomOpenDelegate.ValidationResult(false, "communal_widget_table(com.android.systemui.communal.data.db.CommunalWidgetItem).\n Expected:\n" + tableInfo + "\n Found:\n" + read);
+            public final RoomOpenDelegate.ValidationResult onValidateSchema(SQLiteConnection sQLiteConnection) throws Exception {
+                HashMap map = new HashMap(7);
+                map.put(NetworkAnalyticsConstants.DataPoints.UID, new TableInfo.Column(NetworkAnalyticsConstants.DataPoints.UID, "INTEGER", true, 1, null, 1));
+                map.put("widget_id", new TableInfo.Column("widget_id", "INTEGER", true, 0, null, 1));
+                map.put("component_name", new TableInfo.Column("component_name", ImsSettings.TYPE_TEXT, true, 0, null, 1));
+                map.put("item_id", new TableInfo.Column("item_id", "INTEGER", true, 0, null, 1));
+                map.put("user_serial_number", new TableInfo.Column("user_serial_number", "INTEGER", true, 0, "-1", 1));
+                map.put("span_y", new TableInfo.Column("span_y", "INTEGER", true, 0, "3", 1));
+                map.put("span_y_new", new TableInfo.Column("span_y_new", "INTEGER", true, 0, "1", 1));
+                TableInfo tableInfo = new TableInfo("communal_widget_table", map, new HashSet(0), new HashSet(0));
+                TableInfo tableInfo2 = TableInfo.read(sQLiteConnection, "communal_widget_table");
+                if (!tableInfo.equals(tableInfo2)) {
+                    return new RoomOpenDelegate.ValidationResult(false, "communal_widget_table(com.android.systemui.communal.data.db.CommunalWidgetItem).\n Expected:\n" + tableInfo + "\n Found:\n" + tableInfo2);
                 }
-                HashMap hashMap2 = new HashMap(2);
-                hashMap2.put(NetworkAnalyticsConstants.DataPoints.UID, new TableInfo.Column(NetworkAnalyticsConstants.DataPoints.UID, "INTEGER", true, 1, null, 1));
-                hashMap2.put("rank", new TableInfo.Column("rank", "INTEGER", true, 0, "0", 1));
-                TableInfo tableInfo2 = new TableInfo("communal_item_rank_table", hashMap2, new HashSet(0), new HashSet(0));
-                TableInfo read2 = TableInfo.read(sQLiteConnection, "communal_item_rank_table");
-                if (tableInfo2.equals(read2)) {
+                HashMap map2 = new HashMap(2);
+                map2.put(NetworkAnalyticsConstants.DataPoints.UID, new TableInfo.Column(NetworkAnalyticsConstants.DataPoints.UID, "INTEGER", true, 1, null, 1));
+                map2.put("rank", new TableInfo.Column("rank", "INTEGER", true, 0, "0", 1));
+                TableInfo tableInfo3 = new TableInfo("communal_item_rank_table", map2, new HashSet(0), new HashSet(0));
+                TableInfo tableInfo4 = TableInfo.read(sQLiteConnection, "communal_item_rank_table");
+                if (tableInfo3.equals(tableInfo4)) {
                     return new RoomOpenDelegate.ValidationResult(true, null);
                 }
-                return new RoomOpenDelegate.ValidationResult(false, "communal_item_rank_table(com.android.systemui.communal.data.db.CommunalItemRank).\n Expected:\n" + tableInfo2 + "\n Found:\n" + read2);
+                return new RoomOpenDelegate.ValidationResult(false, "communal_item_rank_table(com.android.systemui.communal.data.db.CommunalItemRank).\n Expected:\n" + tableInfo3 + "\n Found:\n" + tableInfo4);
             }
 
             @Override // androidx.room.RoomOpenDelegate
@@ -122,8 +121,8 @@ public final class CommunalDatabase_Impl extends CommunalDatabase {
 
     @Override // androidx.room.RoomDatabase
     public final Map getRequiredTypeConverters() {
-        HashMap hashMap = new HashMap();
-        hashMap.put(CommunalWidgetDao.class, Collections.EMPTY_LIST);
-        return hashMap;
+        HashMap map = new HashMap();
+        map.put(CommunalWidgetDao.class, Collections.EMPTY_LIST);
+        return map;
     }
 }

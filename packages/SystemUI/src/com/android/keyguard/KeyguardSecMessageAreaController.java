@@ -7,7 +7,6 @@ import android.view.animation.AnimationUtils;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecMessageAreaController extends KeyguardMessageAreaController {
     public KeyguardSecMessageAreaController(BouncerKeyguardMessageArea bouncerKeyguardMessageArea, KeyguardUpdateMonitor keyguardUpdateMonitor, ConfigurationController configurationController) {
@@ -55,7 +54,7 @@ public class KeyguardSecMessageAreaController extends KeyguardMessageAreaControl
         ((BouncerKeyguardMessageArea) this.mView).setLayoutParams(layoutParams);
     }
 
-    public final void setMaxFontScale(float f) {
+    public final void setMaxFontScale(float f) throws Resources.NotFoundException {
         ((BouncerKeyguardMessageArea) this.mView).setMaxFontScale(1.1f);
     }
 

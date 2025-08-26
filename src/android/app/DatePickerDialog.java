@@ -54,8 +54,8 @@ public class DatePickerDialog extends AlertDialog implements DialogInterface.OnC
         };
         this.mValidationCallback = validationCallback;
         Context context2 = getContext();
-        View inflate = LayoutInflater.from(context2).inflate(R.layout.date_picker_dialog, (ViewGroup) null);
-        setView(inflate);
+        View viewInflate = LayoutInflater.from(context2).inflate(R.layout.date_picker_dialog, (ViewGroup) null);
+        setView(viewInflate);
         setButton(-1, context2.getString(17039370), this);
         setButton(-2, context2.getString(17039360), this);
         setButtonPanelLayoutHint(1);
@@ -64,7 +64,7 @@ public class DatePickerDialog extends AlertDialog implements DialogInterface.OnC
             i3 = calendar.get(2);
             i4 = calendar.get(5);
         }
-        DatePicker datePicker = (DatePicker) inflate.findViewById(R.id.datePicker);
+        DatePicker datePicker = (DatePicker) viewInflate.findViewById(R.id.datePicker);
         this.mDatePicker = datePicker;
         datePicker.init(i2, i3, i4, this);
         datePicker.setValidationCallback(validationCallback);
@@ -114,11 +114,11 @@ public class DatePickerDialog extends AlertDialog implements DialogInterface.OnC
 
     @Override // android.app.Dialog
     public Bundle onSaveInstanceState() {
-        Bundle onSaveInstanceState = super.onSaveInstanceState();
-        onSaveInstanceState.putInt("year", this.mDatePicker.getYear());
-        onSaveInstanceState.putInt("month", this.mDatePicker.getMonth());
-        onSaveInstanceState.putInt("day", this.mDatePicker.getDayOfMonth());
-        return onSaveInstanceState;
+        Bundle bundleOnSaveInstanceState = super.onSaveInstanceState();
+        bundleOnSaveInstanceState.putInt("year", this.mDatePicker.getYear());
+        bundleOnSaveInstanceState.putInt("month", this.mDatePicker.getMonth());
+        bundleOnSaveInstanceState.putInt("day", this.mDatePicker.getDayOfMonth());
+        return bundleOnSaveInstanceState;
     }
 
     @Override // android.app.Dialog

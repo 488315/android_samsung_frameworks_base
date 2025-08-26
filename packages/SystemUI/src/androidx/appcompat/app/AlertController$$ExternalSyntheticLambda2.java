@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AlertController$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ LinearLayout f$0;
@@ -25,7 +24,7 @@ public final /* synthetic */ class AlertController$$ExternalSyntheticLambda2 imp
     @Override // java.lang.Runnable
     public final void run() {
         final SeslTouchTargetDelegate.Builder builder;
-        final SeslTouchTargetDelegate.ExtraInsets of;
+        final SeslTouchTargetDelegate.ExtraInsets extraInsetsOf;
         LinearLayout linearLayout = this.f$0;
         ArrayList arrayList = new ArrayList();
         int childCount = linearLayout.getChildCount();
@@ -51,7 +50,7 @@ public final /* synthetic */ class AlertController$$ExternalSyntheticLambda2 imp
                 arrayList2.add(SeslTouchTargetDelegate.calculateViewBounds(linearLayout, (View) obj));
             }
             SeslTouchDelegateFactory$$ExternalSyntheticLambda0 seslTouchDelegateFactory$$ExternalSyntheticLambda0 = linearLayout.getOrientation() == 0 ? new SeslTouchDelegateFactory$$ExternalSyntheticLambda0(rect, 0) : new SeslTouchDelegateFactory$$ExternalSyntheticLambda0(rect, 1);
-            Rect rect2 = (Rect) AlertController$$ExternalSyntheticOutline0.m(arrayList2, 1);
+            Rect rect2 = (Rect) AlertController$$ExternalSyntheticOutline0.m(1, arrayList2);
             arrayList2.add(new Rect(Math.max(0, width - rect2.right) + width, Math.max(0, height - rect2.bottom) + height, width, height));
             Rect rect3 = new Rect(0, 0, 0, 0);
             SeslTouchTargetDelegate.Builder builder2 = new SeslTouchTargetDelegate.Builder(linearLayout);
@@ -62,18 +61,18 @@ public final /* synthetic */ class AlertController$$ExternalSyntheticLambda2 imp
                 switch (seslTouchDelegateFactory$$ExternalSyntheticLambda0.$r8$classId) {
                     case 0:
                         Rect rect6 = seslTouchDelegateFactory$$ExternalSyntheticLambda0.f$0;
-                        of = SeslTouchTargetDelegate.ExtraInsets.of(rect4.left - rect3.right, rect4.top - rect6.top, Math.max(0, rect5.left - rect4.right) / 2, rect6.bottom - rect4.bottom);
+                        extraInsetsOf = SeslTouchTargetDelegate.ExtraInsets.of(rect4.left - rect3.right, rect4.top - rect6.top, Math.max(0, rect5.left - rect4.right) / 2, rect6.bottom - rect4.bottom);
                         break;
                     default:
                         Rect rect7 = seslTouchDelegateFactory$$ExternalSyntheticLambda0.f$0;
-                        of = SeslTouchTargetDelegate.ExtraInsets.of(rect4.left - rect7.left, rect4.top - rect3.bottom, rect7.right - rect4.right, Math.max(0, rect5.top - rect4.bottom) / 2);
+                        extraInsetsOf = SeslTouchTargetDelegate.ExtraInsets.of(rect4.left - rect7.left, rect4.top - rect3.bottom, rect7.right - rect4.right, Math.max(0, rect5.top - rect4.bottom) / 2);
                         break;
                 }
                 final View view = (View) arrayList.get(i);
                 ((LinkedList) builder2.mQueue).add(new Consumer() { // from class: androidx.core.view.SeslTouchTargetDelegate$Builder$$ExternalSyntheticLambda2
                     @Override // androidx.core.util.Consumer
                     public final void accept(Object obj2) {
-                        ((SeslTouchTargetDelegate) obj2).addTouchDelegate(view, of);
+                        ((SeslTouchTargetDelegate) obj2).addTouchDelegate(view, extraInsetsOf);
                     }
                 });
                 rect3 = rect4;
@@ -88,7 +87,7 @@ public final /* synthetic */ class AlertController$$ExternalSyntheticLambda2 imp
             builder.mAnchorView.post(new Runnable() { // from class: androidx.core.view.SeslTouchTargetDelegate$Builder$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SeslTouchTargetDelegate.Builder builder3 = SeslTouchTargetDelegate.Builder.this;
+                    SeslTouchTargetDelegate.Builder builder3 = builder;
                     SeslTouchTargetDelegate$Builder$$ExternalSyntheticLambda0 seslTouchTargetDelegate$Builder$$ExternalSyntheticLambda02 = seslTouchTargetDelegate$Builder$$ExternalSyntheticLambda0;
                     SeslTouchTargetDelegate seslTouchTargetDelegate = new SeslTouchTargetDelegate(builder3.mAnchorView);
                     Iterator it = builder3.mQueue.iterator();

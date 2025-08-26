@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composer;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SlotReader {
     public boolean closed;
@@ -37,12 +36,12 @@ public final class SlotReader {
 
     public final Anchor anchor(int i) {
         ArrayList arrayList = this.table.anchors;
-        int search = SlotTableKt.search(arrayList, i, this.groupsSize);
-        if (search >= 0) {
-            return (Anchor) arrayList.get(search);
+        int iSearch = SlotTableKt.search(arrayList, i, this.groupsSize);
+        if (iSearch >= 0) {
+            return (Anchor) arrayList.get(iSearch);
         }
         Anchor anchor = new Anchor(i);
-        arrayList.add(-(search + 1), anchor);
+        arrayList.add(-(iSearch + 1), anchor);
         return anchor;
     }
 
@@ -81,12 +80,12 @@ public final class SlotReader {
             this.parent = i2;
             int i3 = this.groupsSize;
             this.currentEnd = i2 < 0 ? i3 : SlotTableKt.access$groupSize(i2, iArr) + i2;
-            int pop = this.currentSlotStack.pop();
-            if (pop < 0) {
+            int iPop = this.currentSlotStack.pop();
+            if (iPop < 0) {
                 this.currentSlot = 0;
                 this.currentSlotEnd = 0;
             } else {
-                this.currentSlot = pop;
+                this.currentSlot = iPop;
                 this.currentSlotEnd = i2 >= i3 - 1 ? this.slotsSize : iArr[((i2 + 1) * 5) + 4];
             }
         }
@@ -110,9 +109,9 @@ public final class SlotReader {
 
     public final Object groupGet(int i, int i2) {
         int[] iArr = this.groups;
-        int access$slotAnchor = SlotTableKt.access$slotAnchor(i, iArr);
+        int iAccess$slotAnchor = SlotTableKt.access$slotAnchor(i, iArr);
         int i3 = i + 1;
-        int i4 = access$slotAnchor + i2;
+        int i4 = iAccess$slotAnchor + i2;
         if (i4 < (i3 < this.groupsSize ? iArr[(i3 * 5) + 4] : this.slotsSize)) {
             return this.slots[i4];
         }

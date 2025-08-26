@@ -45,9 +45,9 @@ public interface IVrListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVrListener)) {
-                return (IVrListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVrListener)) {
+                return (IVrListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IVrListener extends IInterface {
             }
             if (i == 1) {
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                int readInt = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                focusedActivityChanged(componentName, readBoolean, readInt);
+                focusedActivityChanged(componentName, z, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,15 +102,15 @@ public interface IVrListener extends IInterface {
 
             @Override // android.service.vr.IVrListener
             public void focusedActivityChanged(ComponentName componentName, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -96,22 +96,18 @@ public class ContentProtectionEventProcessor {
         }).findFirst().ifPresent(new Consumer() { // from class: android.view.contentprotection.ContentProtectionEventProcessor$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ContentProtectionEventProcessor.this.lambda$processViewAppearedEvent$2((ContentProtectionEventProcessor.SearchGroup) obj);
+                this.f$0.lambda$processViewAppearedEvent$2((ContentProtectionEventProcessor.SearchGroup) obj);
             }
         });
         if (this.mGroupsRequired.stream().allMatch(new Predicate() { // from class: android.view.contentprotection.ContentProtectionEventProcessor$$ExternalSyntheticLambda4
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean z;
-                z = ((ContentProtectionEventProcessor.SearchGroup) obj).mFound;
-                return z;
+                return ((ContentProtectionEventProcessor.SearchGroup) obj).mFound;
             }
         }) && this.mGroupsOptional.stream().filter(new Predicate() { // from class: android.view.contentprotection.ContentProtectionEventProcessor$$ExternalSyntheticLambda5
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean z;
-                z = ((ContentProtectionEventProcessor.SearchGroup) obj).mFound;
-                return z;
+                return ((ContentProtectionEventProcessor.SearchGroup) obj).mFound;
             }
         }).count() >= this.mOptions.optionalGroupsThreshold) {
             loginDetected();
@@ -168,19 +164,19 @@ public class ContentProtectionEventProcessor {
 
     private void flush() {
         this.mLastFlushTime = Instant.now();
-        final ParceledListSlice<ContentCaptureEvent> clearEvents = clearEvents();
+        final ParceledListSlice<ContentCaptureEvent> parceledListSliceClearEvents = clearEvents();
         this.mHandler.post(new Runnable() { // from class: android.view.contentprotection.ContentProtectionEventProcessor$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                ContentProtectionEventProcessor.this.lambda$flush$6(clearEvents);
+                this.f$0.lambda$flush$6(parceledListSliceClearEvents);
             }
         });
     }
 
     private ParceledListSlice<ContentCaptureEvent> clearEvents() {
-        List asList = Arrays.asList(this.mEventBuffer.toArray());
+        List listAsList = Arrays.asList(this.mEventBuffer.toArray());
         this.mEventBuffer.clear();
-        return new ParceledListSlice<>(asList);
+        return new ParceledListSlice<>(listAsList);
     }
 
     /* JADX INFO: Access modifiers changed from: private */

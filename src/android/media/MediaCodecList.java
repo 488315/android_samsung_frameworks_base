@@ -68,16 +68,16 @@ public final class MediaCodecList {
     private static final void initCodecList() {
         synchronized (sInitLock) {
             if (sRegularCodecInfos == null) {
-                int native_getCodecCount = native_getCodecCount();
+                int iNative_getCodecCount = native_getCodecCount();
                 ArrayList arrayList = new ArrayList();
                 ArrayList arrayList2 = new ArrayList();
-                for (int i = 0; i < native_getCodecCount; i++) {
+                for (int i = 0; i < iNative_getCodecCount; i++) {
                     try {
                         MediaCodecInfo newCodecInfoAt = getNewCodecInfoAt(i);
                         arrayList2.add(newCodecInfoAt);
-                        MediaCodecInfo makeRegular = newCodecInfoAt.makeRegular();
-                        if (makeRegular != null) {
-                            arrayList.add(makeRegular);
+                        MediaCodecInfo mediaCodecInfoMakeRegular = newCodecInfoAt.makeRegular();
+                        if (mediaCodecInfoMakeRegular != null) {
+                            arrayList.add(mediaCodecInfoMakeRegular);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Could not get codec capabilities", e);

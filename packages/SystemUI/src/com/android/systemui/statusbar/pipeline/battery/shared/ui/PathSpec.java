@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PathSpec {
     public final Path path;
@@ -26,24 +25,24 @@ public final class PathSpec {
             return false;
         }
         PathSpec pathSpec = (PathSpec) obj;
-        return Intrinsics.areEqual(this.path, pathSpec.path) && Dp.m836equalsimpl0(this.viewportWidth, pathSpec.viewportWidth) && Dp.m836equalsimpl0(this.viewportHeight, pathSpec.viewportHeight);
+        return Intrinsics.areEqual(this.path, pathSpec.path) && Dp.m838equalsimpl0(this.viewportWidth, pathSpec.viewportWidth) && Dp.m838equalsimpl0(this.viewportHeight, pathSpec.viewportHeight);
     }
 
     public final int hashCode() {
-        int hashCode = this.path.hashCode() * 31;
+        int iHashCode = this.path.hashCode() * 31;
         Dp.Companion companion = Dp.Companion;
-        return Float.hashCode(this.viewportHeight) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.viewportWidth, hashCode, 31);
+        return Float.hashCode(this.viewportHeight) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.viewportWidth, iHashCode, 31);
     }
 
     public final String toString() {
-        String m837toStringimpl = Dp.m837toStringimpl(this.viewportWidth);
-        String m837toStringimpl2 = Dp.m837toStringimpl(this.viewportHeight);
+        String strM839toStringimpl = Dp.m839toStringimpl(this.viewportWidth);
+        String strM839toStringimpl2 = Dp.m839toStringimpl(this.viewportHeight);
         StringBuilder sb = new StringBuilder("PathSpec(path=");
         sb.append(this.path);
         sb.append(", viewportWidth=");
-        sb.append(m837toStringimpl);
+        sb.append(strM839toStringimpl);
         sb.append(", viewportHeight=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(sb, m837toStringimpl2, ")");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sb, strM839toStringimpl2, ")");
     }
 
     private PathSpec(Path path, float f, float f2) {

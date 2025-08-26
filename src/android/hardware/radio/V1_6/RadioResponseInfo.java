@@ -38,13 +38,13 @@ public final class RadioResponseInfo {
 
     public static final ArrayList<RadioResponseInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<RadioResponseInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             RadioResponseInfo radioResponseInfo = new RadioResponseInfo();
-            radioResponseInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 12);
+            radioResponseInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 12);
             arrayList.add(radioResponseInfo);
         }
         return arrayList;

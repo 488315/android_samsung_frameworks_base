@@ -45,9 +45,9 @@ public interface IStatusBarNotificationHolder extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStatusBarNotificationHolder)) {
-                return (IStatusBarNotificationHolder) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStatusBarNotificationHolder)) {
+                return (IStatusBarNotificationHolder) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,16 +100,16 @@ public interface IStatusBarNotificationHolder extends IInterface {
 
             @Override // android.service.notification.IStatusBarNotificationHolder
             public StatusBarNotification get() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusBarNotification) obtain2.readTypedObject(StatusBarNotification.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusBarNotification) parcelObtain2.readTypedObject(StatusBarNotification.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

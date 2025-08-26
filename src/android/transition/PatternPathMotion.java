@@ -26,15 +26,15 @@ public class PatternPathMotion extends PathMotion {
     public PatternPathMotion(Context context, AttributeSet attributeSet) {
         this.mPatternPath = new Path();
         this.mTempMatrix = new Matrix();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PatternPathMotion);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PatternPathMotion);
         try {
-            String string = obtainStyledAttributes.getString(0);
+            String string = typedArrayObtainStyledAttributes.getString(0);
             if (string == null) {
                 throw new RuntimeException("pathData must be supplied for patternPathMotion");
             }
             setPatternPath(PathParser.createPathFromPathData(string));
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -63,8 +63,8 @@ public class PatternPathMotion extends PathMotion {
         this.mTempMatrix.setTranslate(-f3, -f4);
         double d = f - f3;
         double d2 = f2 - f4;
-        float hypot = 1.0f / ((float) Math.hypot(d, d2));
-        this.mTempMatrix.postScale(hypot, hypot);
+        float fHypot = 1.0f / ((float) Math.hypot(d, d2));
+        this.mTempMatrix.postScale(fHypot, fHypot);
         this.mTempMatrix.postRotate((float) Math.toDegrees(-Math.atan2(d2, d)));
         path.transform(this.mTempMatrix, this.mPatternPath);
         this.mOriginalPatternPath = path;
@@ -74,10 +74,10 @@ public class PatternPathMotion extends PathMotion {
     public Path getPath(float f, float f2, float f3, float f4) {
         double d = f3 - f;
         double d2 = f4 - f2;
-        float hypot = (float) Math.hypot(d, d2);
-        double atan2 = Math.atan2(d2, d);
-        this.mTempMatrix.setScale(hypot, hypot);
-        this.mTempMatrix.postRotate((float) Math.toDegrees(atan2));
+        float fHypot = (float) Math.hypot(d, d2);
+        double dAtan2 = Math.atan2(d2, d);
+        this.mTempMatrix.setScale(fHypot, fHypot);
+        this.mTempMatrix.postRotate((float) Math.toDegrees(dAtan2));
         this.mTempMatrix.postTranslate(f, f2);
         Path path = new Path();
         this.mPatternPath.transform(this.mTempMatrix, path);

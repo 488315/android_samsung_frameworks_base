@@ -3,6 +3,7 @@ package com.android.systemui.widget;
 import android.app.SemWallpaperColors;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -12,17 +13,19 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
+import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
+import com.android.systemui.R;
 import com.android.systemui.pluginlock.PluginLockManager;
 import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.android.systemui.res.R$styleable;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.wallpaper.KeyguardWallpaperController;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemUITextView extends TextView implements SystemUIWidgetCallback {
     public final int mAttrCount;
@@ -43,7 +46,6 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     public final ResData mResData;
     public long mUpdateFlag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BlurSettingsListener implements SettingsHelper.OnChangedCallback {
         public BlurSettingsListener() {
             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(this, Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY));
@@ -54,14 +56,13 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
             Log.d("SystemUITextView", "onChanged " + uri);
             SystemUITextView.this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.widget.SystemUITextView$BlurSettingsListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
+                public final void run() throws Resources.NotFoundException {
                     SystemUITextView.this.updateTextView();
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResData {
         public String mCompoundDrawable;
         public int mCompoundDrawableId;
@@ -125,7 +126,7 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     }
 
     @Override // android.widget.TextView, android.view.View
-    public void onConfigurationChanged(Configuration configuration) {
+    public void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         updateFontSizeInKeyguardBoundary(false, configuration);
     }
@@ -144,7 +145,7 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     }
 
     @Override // android.view.View
-    public void onFinishInflate() {
+    public void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         float textSize = getTextSize();
         if (getContext().getResources().getDisplayMetrics().density > 0.0f) {
@@ -246,7 +247,7 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         }
     }
 
-    public final void setMaxFontScale(float f) {
+    public final void setMaxFontScale(float f) throws Resources.NotFoundException {
         if (f < 1.0f || f > 1.2f) {
             f = this.mMaxFontScale;
         }
@@ -266,7 +267,11 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         }
     }
 
-    public final void updateCompoundDrawable(boolean z) {
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00f6  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void updateCompoundDrawable(boolean z) throws Resources.NotFoundException {
         PorterDuffColorFilter porterDuffColorFilter;
         if (!z) {
             setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -287,25 +292,18 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         if ((this.mUpdateFlag & 1) == 0 || !WallpaperUtils.isOpenThemeLook()) {
             if (WallpaperUtils.isWhiteKeyguardWallpaper(this.mResData.mWallpaperArea)) {
                 ResData resData2 = this.mResData;
-                if (resData2.mWhiteBgColor != null && resData2.mWhiteBgShadowColor != null && resData2.mWhiteBgColorId > 0) {
-                    porterDuffColorFilter = new PorterDuffColorFilter(((TextView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null), PorterDuff.Mode.SRC_ATOP);
-                }
+                porterDuffColorFilter = (resData2.mWhiteBgColor == null || resData2.mWhiteBgShadowColor == null || resData2.mWhiteBgColorId <= 0) ? null : new PorterDuffColorFilter(((TextView) this).mContext.getResources().getColor(this.mResData.mWhiteBgColorId, null), PorterDuff.Mode.SRC_ATOP);
             }
-            porterDuffColorFilter = null;
         } else if (WallpaperUtils.isOpenThemeLockWallpaper() || !WallpaperUtils.isWhiteKeyguardWallpaper(this.mResData.mWallpaperArea)) {
             if (this.mResData.mThemeColorId > 0) {
                 int color = ((TextView) this).mContext.getResources().getColor(this.mResData.mThemeColorId, null);
                 Log.d("SystemUITextView", "filter: ".concat(String.format("#%08X", Integer.valueOf(color))));
                 porterDuffColorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
             }
-            porterDuffColorFilter = null;
-        } else {
-            if (this.mResData.mThemeBlackColorId > 0) {
-                int color2 = ((TextView) this).mContext.getResources().getColor(this.mResData.mThemeBlackColorId, null);
-                Log.d("SystemUITextView", "filter: ".concat(String.format("#%08X", Integer.valueOf(color2))));
-                porterDuffColorFilter = new PorterDuffColorFilter(color2, PorterDuff.Mode.SRC_ATOP);
-            }
-            porterDuffColorFilter = null;
+        } else if (this.mResData.mThemeBlackColorId > 0) {
+            int color2 = ((TextView) this).mContext.getResources().getColor(this.mResData.mThemeBlackColorId, null);
+            Log.d("SystemUITextView", "filter: ".concat(String.format("#%08X", Integer.valueOf(color2))));
+            porterDuffColorFilter = new PorterDuffColorFilter(color2, PorterDuff.Mode.SRC_ATOP);
         }
         if (drawable != null) {
             drawable.setColorFilter(porterDuffColorFilter);
@@ -320,10 +318,10 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         }
     }
 
-    public final void updateFontSizeInKeyguardBoundary(boolean z, Configuration configuration) {
+    public final void updateFontSizeInKeyguardBoundary(boolean z, Configuration configuration) throws Resources.NotFoundException {
         boolean z2;
         boolean z3 = true;
-        float max = !this.mIsFixedFontSize ? Math.max(1.0f, Math.min(1.2f, Math.min(configuration.fontScale, this.mMaxFontScale))) : 1.0f;
+        float fMax = !this.mIsFixedFontSize ? Math.max(1.0f, Math.min(1.2f, Math.min(configuration.fontScale, this.mMaxFontScale))) : 1.0f;
         int i = configuration.densityDpi;
         if (i != this.mDensityDpi) {
             this.mDensityDpi = i;
@@ -331,8 +329,8 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         } else {
             z2 = false;
         }
-        if (Float.compare(this.mFontScale, max) != 0) {
-            this.mFontScale = max;
+        if (Float.compare(this.mFontScale, fMax) != 0) {
+            this.mFontScale = fMax;
         } else {
             z3 = z2;
         }
@@ -343,7 +341,7 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
     }
 
     @Override // com.android.systemui.widget.SystemUIWidgetCallback
-    public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) {
+    public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) throws Resources.NotFoundException {
         if (j == 0) {
             return;
         }
@@ -358,35 +356,95 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
         updateCompoundDrawable(this.mCompoundVisible);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0095, code lost:
-    
-        if (r6 > 0) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0097, code lost:
-    
-        r5 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0098, code lost:
-    
-        r6 = r7;
-        r7 = r10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x00af, code lost:
-    
-        if (r6 > 0) goto L28;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:37:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0097 A[PHI: r6 r7 r10
+      0x0097: PHI (r6v17 int) = (r6v15 int), (r6v20 int) binds: [B:38:0x00af, B:27:0x0095] A[DONT_GENERATE, DONT_INLINE]
+      0x0097: PHI (r7v6 int) = (r7v2 int), (r7v7 int) binds: [B:38:0x00af, B:27:0x0095] A[DONT_GENERATE, DONT_INLINE]
+      0x0097: PHI (r10v18 int) = (r10v15 int), (r10v20 int) binds: [B:38:0x00af, B:27:0x0095] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x011f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateTextView() {
-        /*
-            Method dump skipped, instructions count: 343
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.widget.SystemUITextView.updateTextView():void");
+    public final void updateTextView() throws Resources.NotFoundException {
+        int i;
+        int i2;
+        int i3;
+        semClearAllTextEffect();
+        KeyguardWallpaperController keyguardWallpaperController = KeyguardWallpaperController.sController;
+        if (keyguardWallpaperController == null) {
+            return;
+        }
+        SemWallpaperColors.Item hint = keyguardWallpaperController.getHint(SystemUIWidgetUtil.convertFlag(this.mResData.mWallpaperArea), false);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(this.mResData.mWallpaperArea);
+        int fontColorRgb = hint.getFontColorRgb(getCurrentTextColor());
+        int alphaComponent = ColorUtils.setAlphaComponent(zIsWhiteKeyguardWallpaper ? getContext().getColor(R.color.black_font_shadow_color) : getContext().getColor(R.color.white_font_shadow_color), (int) (hint.getShadowOpacity() * 255.0f));
+        float shadowSize = hint.getShadowSize();
+        ResData resData = this.mResData;
+        int i4 = zIsWhiteKeyguardWallpaper ? resData.mWhiteBgBackgroundId : resData.mOriginBackgroundId;
+        if ((this.mUpdateFlag & 1) == 0 || !WallpaperUtils.isOpenThemeLook()) {
+            ResData resData2 = this.mResData;
+            if (resData2.mWallpaperColorIgnorable) {
+                int i5 = zIsWhiteKeyguardWallpaper ? resData2.mWhiteBgColorId : resData2.mOriginColorId;
+                int i6 = zIsWhiteKeyguardWallpaper ? resData2.mWhiteBgShadowColorId : resData2.mOriginShadowColorId;
+                if (i5 > 0) {
+                    fontColorRgb = ((TextView) this).mContext.getResources().getColor(i5, null);
+                }
+                if (i6 > 0) {
+                    alphaComponent = ((TextView) this).mContext.getResources().getColor(i6, null);
+                }
+            }
+            i = -1;
+        } else if (SystemUIWidgetUtil.needsBlackComponent(((TextView) this).mContext, SystemUIWidgetUtil.convertFlag(this.mResData.mWallpaperArea), this.mResData.mThemePolicyIgnorable)) {
+            Log.d("SystemUITextView", "apply style: theme : white");
+            ResData resData3 = this.mResData;
+            i2 = resData3.mThemeBlackColorId;
+            if (i2 <= 0) {
+                i2 = -1;
+            }
+            int i7 = resData3.mThemeBlackShadowColorId;
+            i = i7 > 0 ? i7 : -1;
+            i3 = resData3.mThemeBlackBackgroundId;
+            if (i3 > 0) {
+                i4 = i3;
+            }
+            i = i;
+            i = i2;
+        } else {
+            Log.d("SystemUITextView", "apply style: theme : black");
+            ResData resData4 = this.mResData;
+            i2 = resData4.mThemeColorId;
+            if (i2 <= 0) {
+                i2 = -1;
+            }
+            int i8 = resData4.mThemeShadowColorId;
+            i = i8 > 0 ? i8 : -1;
+            i3 = resData4.mThemeBackgroundId;
+            if (i3 > 0) {
+            }
+            i = i;
+            i = i2;
+        }
+        if (this.mResData.mReduceTransparency) {
+            this.mBlurSettings.getClass();
+            if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled()) {
+                setTextColor(((TextView) this).mContext.getResources().getColor(zIsWhiteKeyguardWallpaper ? this.mResData.mOriginColorId : this.mResData.mWhiteBgColorId, null));
+                setShadowLayer(0.0f, getShadowDx(), getShadowDy(), 0);
+            } else {
+                if (i > 0) {
+                    fontColorRgb = ((TextView) this).mContext.getResources().getColor(i, null);
+                }
+                setTextColor(fontColorRgb);
+                float shadowDx = getShadowDx();
+                float shadowDy = getShadowDy();
+                if (i > 0) {
+                    alphaComponent = ((TextView) this).mContext.getResources().getColor(i, null);
+                }
+                setShadowLayer(shadowSize, shadowDx, shadowDy, alphaComponent);
+            }
+        }
+        if (i4 > 0) {
+            Log.e("SystemUITextView", "set Background Drawable!!");
+            setBackground(((TextView) this).mContext.getDrawable(i4));
+        }
     }
 
     public SystemUITextView(Context context, AttributeSet attributeSet) {
@@ -427,66 +485,66 @@ public class SystemUITextView extends TextView implements SystemUIWidgetCallback
             }
         };
         this.mBlurSettings = new BlurSettingsListener();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyguardFontSize);
-        this.mIsFixedFontSize = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyguardFontSize);
+        this.mIsFixedFontSize = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
         this.mResData = new ResData();
-        if (obtainStyledAttributes2 != null) {
-            this.mAttrCount = obtainStyledAttributes2.getIndexCount();
+        if (typedArrayObtainStyledAttributes2 != null) {
+            this.mAttrCount = typedArrayObtainStyledAttributes2.getIndexCount();
             for (int i3 = 0; i3 < this.mAttrCount; i3++) {
-                int index = obtainStyledAttributes2.getIndex(i3);
+                int index = typedArrayObtainStyledAttributes2.getIndex(i3);
                 if (index == 23) {
-                    this.mResData.mWallpaperArea = obtainStyledAttributes2.getString(index);
+                    this.mResData.mWallpaperArea = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 0) {
                     ResData resData = this.mResData;
-                    obtainStyledAttributes2.getString(index);
+                    typedArrayObtainStyledAttributes2.getString(index);
                     resData.getClass();
                 } else if (index == 9) {
-                    this.mResData.mOriginColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mOriginColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 26) {
-                    this.mResData.mWhiteBgColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mWhiteBgColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 18) {
-                    this.mResData.mThemeColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 15) {
-                    this.mResData.mThemeBlackColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeBlackColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 11) {
-                    this.mResData.mOriginShadowColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mOriginShadowColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 28) {
-                    this.mResData.mWhiteBgShadowColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mWhiteBgShadowColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 21) {
-                    this.mResData.mThemeShadowColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeShadowColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 17) {
-                    this.mResData.mThemeBlackShadowColor = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeBlackShadowColor = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 8) {
-                    this.mResData.mOriginBackground = obtainStyledAttributes2.getString(index);
+                    this.mResData.mOriginBackground = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 25) {
-                    this.mResData.mWhiteBgBackground = obtainStyledAttributes2.getString(index);
+                    this.mResData.mWhiteBgBackground = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 13) {
-                    this.mResData.mThemeBackground = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeBackground = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 14) {
-                    this.mResData.mThemeBlackBackground = obtainStyledAttributes2.getString(index);
+                    this.mResData.mThemeBlackBackground = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 2) {
-                    this.mResData.mCompoundDrawable = obtainStyledAttributes2.getString(index);
+                    this.mResData.mCompoundDrawable = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 4) {
-                    this.mResData.mCompoundScale = obtainStyledAttributes2.getString(index);
+                    this.mResData.mCompoundScale = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 3) {
-                    this.mResData.mCompoundPadding = obtainStyledAttributes2.getString(index);
+                    this.mResData.mCompoundPadding = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 7) {
-                    this.mResData.mMovable = obtainStyledAttributes2.getBoolean(index, false);
+                    this.mResData.mMovable = typedArrayObtainStyledAttributes2.getBoolean(index, false);
                 } else if (index == 5) {
-                    this.mResData.mGroup = obtainStyledAttributes2.getString(index);
+                    this.mResData.mGroup = typedArrayObtainStyledAttributes2.getString(index);
                 } else if (index == 12) {
-                    this.mResData.mReduceTransparency = obtainStyledAttributes2.getBoolean(index, false);
+                    this.mResData.mReduceTransparency = typedArrayObtainStyledAttributes2.getBoolean(index, false);
                 } else if (index == 20) {
-                    this.mResData.mThemePolicyIgnorable = obtainStyledAttributes2.getBoolean(index, false);
+                    this.mResData.mThemePolicyIgnorable = typedArrayObtainStyledAttributes2.getBoolean(index, false);
                 } else if (index == 24) {
-                    this.mResData.mWallpaperColorIgnorable = obtainStyledAttributes2.getBoolean(index, false);
+                    this.mResData.mWallpaperColorIgnorable = typedArrayObtainStyledAttributes2.getBoolean(index, false);
                 }
             }
             refreshResIds$4();
         }
-        obtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes2.recycle();
         this.mMainExecutor = context.getMainExecutor();
     }
 }

@@ -35,58 +35,58 @@ public class HwuiStatsLog {
     public static final int TEXTURE_VIEW_EVENT = 947;
 
     public static void write(int i, int i2, int i3, boolean z, int i4) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
         if (977 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.writeInt(i3);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i4);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, int i2, long j, int i3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeInt(i2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeInt(i2);
         if (946 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
         if (947 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.writeLong(j);
-        newBuilder.writeInt(i3);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static StatsEvent buildStatsEvent(int i, String str, long j, long j2, long j3, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, byte[] bArr, byte[] bArr2, long j4, boolean z, int i10) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeString(str);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeLong(j3);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
-        newBuilder.writeInt(i4);
-        newBuilder.writeInt(i5);
-        newBuilder.writeInt(i6);
-        newBuilder.writeInt(i7);
-        newBuilder.writeInt(i8);
-        newBuilder.writeInt(i9);
-        newBuilder.writeByteArray(bArr == null ? new byte[0] : bArr);
-        newBuilder.writeByteArray(bArr2 == null ? new byte[0] : bArr2);
-        newBuilder.writeLong(j4);
-        newBuilder.writeBoolean(z);
-        newBuilder.writeInt(i10);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeString(str);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeLong(j3);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
+        builderNewBuilder.writeInt(i4);
+        builderNewBuilder.writeInt(i5);
+        builderNewBuilder.writeInt(i6);
+        builderNewBuilder.writeInt(i7);
+        builderNewBuilder.writeInt(i8);
+        builderNewBuilder.writeInt(i9);
+        builderNewBuilder.writeByteArray(bArr == null ? new byte[0] : bArr);
+        builderNewBuilder.writeByteArray(bArr2 == null ? new byte[0] : bArr2);
+        builderNewBuilder.writeLong(j4);
+        builderNewBuilder.writeBoolean(z);
+        builderNewBuilder.writeInt(i10);
         if (10068 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        return newBuilder.build();
+        return builderNewBuilder.build();
     }
 }

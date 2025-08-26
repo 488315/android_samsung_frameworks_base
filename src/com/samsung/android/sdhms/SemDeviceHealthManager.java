@@ -172,12 +172,16 @@ public class SemDeviceHealthManager {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0024 A[Catch: all -> 0x0028, TRY_LEAVE, TryCatch #1 {, blocks: (B:3:0x0001, B:5:0x0005, B:7:0x000e, B:9:0x0016, B:12:0x0021, B:13:0x0024), top: B:21:0x0001, inners: #0 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private synchronized ISamsungDeviceHealthManager getService() {
         IBinder service;
         if (this.mService == null && (service = ServiceManager.getService("sdhms")) != null) {
-            ISamsungDeviceHealthManager asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service);
-            this.mService = asInterface;
-            if (asInterface != null) {
+            ISamsungDeviceHealthManager iSamsungDeviceHealthManagerAsInterface = ISamsungDeviceHealthManager.Stub.asInterface(service);
+            this.mService = iSamsungDeviceHealthManagerAsInterface;
+            if (iSamsungDeviceHealthManagerAsInterface != null) {
                 try {
                     service.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.sdhms.SemDeviceHealthManager.1
                         @Override // android.os.IBinder.DeathRecipient

@@ -31,57 +31,34 @@ class PEMUtil {
         this._supportedBoundaries = new Boundaries[]{new Boundaries(str), new Boundaries("X509 " + str), new Boundaries("PKCS7")};
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x001e, code lost:
-    
-        if (r4.length() == 0) goto L33;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private java.lang.String readLine(java.io.InputStream r5) throws java.io.IOException {
-        /*
-            r4 = this;
-            java.lang.StringBuffer r4 = new java.lang.StringBuffer
-            r4.<init>()
-        L5:
-            int r0 = r5.read()
-            r1 = 10
-            r2 = 13
-            if (r0 == r2) goto L18
-            if (r0 == r1) goto L18
-            if (r0 < 0) goto L18
-            char r0 = (char) r0
-            r4.append(r0)
-            goto L5
-        L18:
-            if (r0 < 0) goto L20
-            int r3 = r4.length()
-            if (r3 == 0) goto L5
-        L20:
-            if (r0 >= 0) goto L2f
-            int r5 = r4.length()
-            if (r5 != 0) goto L2a
-            r4 = 0
-            return r4
-        L2a:
-            java.lang.String r4 = r4.toString()
-            return r4
-        L2f:
-            if (r0 != r2) goto L43
-            r0 = 1
-            r5.mark(r0)
-            int r2 = r5.read()
-            if (r2 != r1) goto L3e
-            r5.mark(r0)
-        L3e:
-            if (r2 <= 0) goto L43
-            r5.reset()
-        L43:
-            java.lang.String r4 = r4.toString()
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.PEMUtil.readLine(java.io.InputStream):java.lang.String");
+    private String readLine(InputStream inputStream) throws IOException {
+        int i;
+        StringBuffer stringBuffer = new StringBuffer();
+        while (true) {
+            i = inputStream.read();
+            if (i != 13 && i != 10 && i >= 0) {
+                stringBuffer.append((char) i);
+            } else if (i < 0 || stringBuffer.length() != 0) {
+                break;
+            }
+        }
+        if (i < 0) {
+            if (stringBuffer.length() == 0) {
+                return null;
+            }
+            return stringBuffer.toString();
+        }
+        if (i == 13) {
+            inputStream.mark(1);
+            int i2 = inputStream.read();
+            if (i2 == 10) {
+                inputStream.mark(1);
+            }
+            if (i2 > 0) {
+                inputStream.reset();
+            }
+        }
+        return stringBuffer.toString();
     }
 
     private Boundaries getBoundaries(String str) {
@@ -105,12 +82,12 @@ class PEMUtil {
         StringBuffer stringBuffer = new StringBuffer();
         Boundaries boundaries = null;
         while (boundaries == null) {
-            String readLine = readLine(inputStream);
-            if (readLine == null) {
+            String line = readLine(inputStream);
+            if (line == null) {
                 break;
             }
-            boundaries = getBoundaries(readLine);
-            if (boundaries != null && !boundaries.isTheExpectedHeader(readLine)) {
+            boundaries = getBoundaries(line);
+            if (boundaries != null && !boundaries.isTheExpectedHeader(line)) {
                 throw new IOException("malformed PEM data: found footer where header was expected");
             }
         }
@@ -122,17 +99,17 @@ class PEMUtil {
         }
         Boundaries boundaries2 = null;
         while (boundaries2 == null) {
-            String readLine2 = readLine(inputStream);
-            if (readLine2 == null) {
+            String line2 = readLine(inputStream);
+            if (line2 == null) {
                 break;
             }
-            boundaries2 = getBoundaries(readLine2);
+            boundaries2 = getBoundaries(line2);
             if (boundaries2 != null) {
-                if (!boundaries.isTheExpectedFooter(readLine2)) {
+                if (!boundaries.isTheExpectedFooter(line2)) {
                     throw new IOException("malformed PEM data: header/footer mismatch");
                 }
             } else {
-                stringBuffer.append(readLine2);
+                stringBuffer.append(line2);
             }
         }
         if (boundaries2 == null) {

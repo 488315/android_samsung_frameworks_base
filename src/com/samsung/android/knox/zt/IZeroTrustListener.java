@@ -65,9 +65,9 @@ public interface IZeroTrustListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IZeroTrustListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IZeroTrustListener)) {
-                return (IZeroTrustListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IZeroTrustListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IZeroTrustListener)) {
+                return (IZeroTrustListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,27 +100,28 @@ public interface IZeroTrustListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onEventSimplified(readInt, readString);
+                onEventSimplified(i3, string);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                final HashMap hashMap = readInt3 < 0 ? null : new HashMap();
-                IntStream.range(0, readInt3).forEach(new IntConsumer() { // from class: com.samsung.android.knox.zt.IZeroTrustListener$Stub$$ExternalSyntheticLambda0
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                final HashMap map = i5 < 0 ? null : new HashMap();
+                IntStream.range(0, i5).forEach(new IntConsumer() { // from class: com.samsung.android.knox.zt.IZeroTrustListener$Stub$$ExternalSyntheticLambda0
                     @Override // java.util.function.IntConsumer
-                    public final void accept(int i3) {
-                        hashMap.put(r0.readString(), Parcel.this.readString());
+                    public final void accept(int i6) {
+                        Parcel parcel3 = parcel;
+                        map.put(parcel3.readString(), parcel3.readString());
                     }
                 });
                 parcel.enforceNoDataAvail();
-                onEventGeneralized(readInt2, hashMap);
+                onEventGeneralized(i4, map);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onEvent(readInt4, bundle);
+                onEvent(i6, bundle);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -146,37 +147,37 @@ public interface IZeroTrustListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.IZeroTrustListener
             public void onEventSimplified(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.IZeroTrustListener
             public void onEventGeneralized(int i, Map<String, String> map) throws RemoteException {
-                final Parcel obtain = Parcel.obtain(asBinder());
+                final Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
                     if (map == null) {
-                        obtain.writeInt(-1);
+                        parcelObtain.writeInt(-1);
                     } else {
-                        obtain.writeInt(map.size());
+                        parcelObtain.writeInt(map.size());
                         map.forEach(new BiConsumer() { // from class: com.samsung.android.knox.zt.IZeroTrustListener$Stub$Proxy$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IZeroTrustListener.Stub.Proxy.lambda$onEventGeneralized$0(Parcel.this, (String) obj, (String) obj2);
+                                IZeroTrustListener.Stub.Proxy.lambda$onEventGeneralized$0(parcelObtain, (String) obj, (String) obj2);
                             }
                         });
                     }
-                    this.mRemote.transact(2, obtain, null, 1);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -187,14 +188,14 @@ public interface IZeroTrustListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.IZeroTrustListener
             public void onEvent(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IZeroTrustListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

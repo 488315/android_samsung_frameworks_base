@@ -18,7 +18,6 @@ import androidx.appcompat.app.AlertController$$ExternalSyntheticOutline0;
 import com.android.settingslib.Utils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PageIndicator extends ViewGroup {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -51,13 +50,13 @@ public class PageIndicator extends ViewGroup {
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.tint});
-        if (obtainStyledAttributes.hasValue(0)) {
-            this.mTint = obtainStyledAttributes.getColorStateList(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.tint});
+        if (typedArrayObtainStyledAttributes.hasValue(0)) {
+            this.mTint = typedArrayObtainStyledAttributes.getColorStateList(0);
         } else {
             this.mTint = Utils.getColorAttr(R.attr.colorAccent, context);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         Resources resources = context.getResources();
         this.mPageIndicatorWidth = resources.getDimensionPixelSize(com.android.systemui.R.dimen.qs_page_indicator_width);
         this.mPageIndicatorHeight = resources.getDimensionPixelSize(com.android.systemui.R.dimen.qs_page_indicator_height);
@@ -74,7 +73,7 @@ public class PageIndicator extends ViewGroup {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         boolean z;
         super.onConfigurationChanged(configuration);
         Resources resources = getResources();
@@ -121,10 +120,10 @@ public class PageIndicator extends ViewGroup {
             super.onMeasure(i, i2);
             return;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mPageIndicatorWidth, 1073741824);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mPageIndicatorHeight, 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mPageIndicatorWidth, 1073741824);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(this.mPageIndicatorHeight, 1073741824);
         for (int i3 = 0; i3 < childCount; i3++) {
-            getChildAt(i3).measure(makeMeasureSpec, makeMeasureSpec2);
+            getChildAt(i3).measure(iMakeMeasureSpec, iMakeMeasureSpec2);
         }
         int i4 = this.mPageIndicatorWidth;
         int i5 = this.mPageDotWidth;
@@ -147,11 +146,11 @@ public class PageIndicator extends ViewGroup {
         int i = (int) f;
         setContentDescription(getContext().getString(com.android.systemui.R.string.accessibility_quick_settings_page, Integer.valueOf(i + 1), Integer.valueOf(getChildCount())));
         int i2 = (f != ((float) i) ? 1 : 0) | (i << 1);
-        int i3 = this.mPosition;
+        int iIntValue = this.mPosition;
         if (this.mQueuedPositions.size() != 0) {
-            i3 = ((Integer) AlertController$$ExternalSyntheticOutline0.m(this.mQueuedPositions, 1)).intValue();
+            iIntValue = ((Integer) AlertController$$ExternalSyntheticOutline0.m(1, this.mQueuedPositions)).intValue();
         }
-        if (i2 == i3) {
+        if (i2 == iIntValue) {
             return;
         }
         if (this.mAnimating) {
@@ -195,13 +194,13 @@ public class PageIndicator extends ViewGroup {
             setIndex(i3);
             boolean z = (i2 & 1) != 0;
             boolean z2 = !z ? i2 >= i : i2 <= i;
-            int min = Math.min(i3, i4);
-            int max = Math.max(i3, i4);
-            if (max == min) {
-                max++;
+            int iMin = Math.min(i3, i4);
+            int iMax = Math.max(i3, i4);
+            if (iMax == iMin) {
+                iMax++;
             }
-            ImageView imageView = (ImageView) getChildAt(min);
-            ImageView imageView2 = (ImageView) getChildAt(max);
+            ImageView imageView = (ImageView) getChildAt(iMin);
+            ImageView imageView2 = (ImageView) getChildAt(iMax);
             if (imageView != null && imageView2 != null) {
                 imageView2.setTranslationX(imageView.getX() - imageView2.getX());
                 AnimatedVectorDrawable animatedVectorDrawable = (AnimatedVectorDrawable) getContext().getDrawable(getTransition(z, z2, false));

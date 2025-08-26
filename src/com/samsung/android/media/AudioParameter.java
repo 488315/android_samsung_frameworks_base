@@ -227,11 +227,11 @@ public class AudioParameter {
             StringTokenizer stringTokenizer = new StringTokenizer(str, NavigationBarInflaterView.GRAVITY_SEPARATOR);
             while (stringTokenizer.hasMoreTokens()) {
                 StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "=");
-                String nextToken = stringTokenizer2.hasMoreTokens() ? stringTokenizer2.nextToken() : null;
-                String nextToken2 = stringTokenizer2.hasMoreTokens() ? stringTokenizer2.nextToken() : "";
-                if (nextToken != null && nextToken2 != null) {
-                    this.mHasLocalParameter |= nextToken.startsWith(SEC_LOCAL_PREFIX);
-                    this.mAudioParams.put(nextToken, nextToken2);
+                String strNextToken = stringTokenizer2.hasMoreTokens() ? stringTokenizer2.nextToken() : null;
+                String strNextToken2 = stringTokenizer2.hasMoreTokens() ? stringTokenizer2.nextToken() : "";
+                if (strNextToken != null && strNextToken2 != null) {
+                    this.mHasLocalParameter |= strNextToken.startsWith(SEC_LOCAL_PREFIX);
+                    this.mAudioParams.put(strNextToken, strNextToken2);
                 }
             }
         }
@@ -245,9 +245,7 @@ public class AudioParameter {
             this.mHasLocalParameter = linkedHashMap.keySet().stream().anyMatch(new Predicate() { // from class: com.samsung.android.media.AudioParameter$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean startsWith;
-                    startsWith = ((String) obj).startsWith(AudioParameter.SEC_LOCAL_PREFIX);
-                    return startsWith;
+                    return ((String) obj).startsWith(AudioParameter.SEC_LOCAL_PREFIX);
                 }
             });
         }

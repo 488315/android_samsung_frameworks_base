@@ -75,7 +75,7 @@ public class SearchRecentSuggestions {
     /* JADX INFO: Access modifiers changed from: private */
     public void saveRecentQueryBlocking(String str, String str2) {
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(SuggestionColumns.DISPLAY1, str);
@@ -83,7 +83,7 @@ public class SearchRecentSuggestions {
                 contentValues.put(SuggestionColumns.DISPLAY2, str2);
             }
             contentValues.put("query", str);
-            contentValues.put("date", Long.valueOf(currentTimeMillis));
+            contentValues.put("date", Long.valueOf(jCurrentTimeMillis));
             contentResolver.insert(this.mSuggestionsUri, contentValues);
         } catch (RuntimeException e) {
             Log.e(LOG_TAG, "saveRecentQuery", e);

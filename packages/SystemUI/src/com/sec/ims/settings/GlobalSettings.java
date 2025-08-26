@@ -7,7 +7,6 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GlobalSettings {
     private static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/global");
@@ -62,26 +61,26 @@ public class GlobalSettings {
     public static GlobalSettings getInstance(Context context, int i) {
         Log.d("GlobalSettings[" + i + "]", "getInstance:");
         ContentValues contentValues = new ContentValues();
-        Uri build = CONTENT_URI.buildUpon().fragment("simslot" + Integer.toString(i)).build();
-        Log.d(LOG_TAG, "getInstance, uri = " + build);
-        Cursor query = context.getContentResolver().query(build, null, null, null, null);
-        if (query != null) {
+        Uri uriBuild = CONTENT_URI.buildUpon().fragment("simslot" + Integer.toString(i)).build();
+        Log.d(LOG_TAG, "getInstance, uri = " + uriBuild);
+        Cursor cursorQuery = context.getContentResolver().query(uriBuild, null, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() != 0) {
-                    if (!query.moveToFirst()) {
-                        query.close();
+                if (cursorQuery.getCount() != 0) {
+                    if (!cursorQuery.moveToFirst()) {
+                        cursorQuery.close();
                         return null;
                     }
-                    DatabaseUtils.cursorRowToContentValues(query, contentValues);
-                    query.close();
+                    DatabaseUtils.cursorRowToContentValues(cursorQuery, contentValues);
+                    cursorQuery.close();
                     return new GlobalSettings(contentValues, i);
                 }
             } catch (Throwable th) {
-                if (query == null) {
+                if (cursorQuery == null) {
                     throw th;
                 }
                 try {
-                    query.close();
+                    cursorQuery.close();
                     throw th;
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
@@ -90,8 +89,8 @@ public class GlobalSettings {
             }
         }
         Log.d(LOG_TAG, "getInstance, cursor is invalid");
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return null;
     }

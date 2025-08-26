@@ -43,7 +43,7 @@ public class CredentialManagementApp {
         }
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.attribute(null, "package_name", this.mPackageName);
         AppUriAuthenticationPolicy appUriAuthenticationPolicy = this.mAuthenticationPolicy;
         if (appUriAuthenticationPolicy != null) {

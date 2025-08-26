@@ -36,12 +36,12 @@ public class PowerOffLockStrategy implements SecureConfirmStrategy {
         this.mBiometricPromptWrapper.setRunnable(new Runnable() { // from class: com.samsung.android.globalactions.features.PowerOffLockStrategy$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ActionViewModel.this.onPressSecureConfirm();
+                actionViewModel.onPressSecureConfirm();
             }
         }, new Runnable() { // from class: com.samsung.android.globalactions.features.PowerOffLockStrategy$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                SamsungGlobalActions.this.dismissDialog(false);
+                samsungGlobalActions.dismissDialog(false);
             }
         });
         this.mBiometricPromptWrapper.buildAndRun(cancellationSignal);

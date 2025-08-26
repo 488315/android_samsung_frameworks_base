@@ -593,6 +593,7 @@ Si malgré tout vous décidez de l'installer, lisez attentivement l'avis de conf
     <string name="call_notification_screening_text">"Filtrage d'un appel entrant"</string>
     <string name="camera_restrict">"La politique de sécurité empêche l'utilisation de l'appareil photo."</string>
     <string name="can_not_install_app">"Impossible d'installer l'application. Celle-ci n'est pas optimisée pour une utilisation avec %s."</string>
+    <string name="can_not_open_searcle_on_the_external_display">"Impossible d'ouvrir la fonction Entourer pour chercher sur un affichage connecté."</string>
     <string name="can_not_open_searcle_on_the_lockscreen">"Impossible d'ouvrir la fonction Entourer pour chercher sur l'écran de verrouillage."</string>
     <string name="cannot_open_app_concentration_mode">"Impossible d'ouvrir l'application"</string>
     <string name="capability_desc_canCaptureFingerprintGestures">"Peut enregistrer des gestes effectués sur le lecteur d'empreinte digitale de l'appareil."</string>
@@ -674,6 +675,7 @@ Si malgré tout vous décidez de l'installer, lisez attentivement l'avis de conf
     <string name="common_secure_boot_nwlock_notification_text">"Cette carte SIM n'est pas prise en charge."</string>
     <string name="common_secure_boot_nwlock_notification_title">Carte SIM insérée non valide</string>
     <string name="compat_restart_education_text">"Si l'affichage de cette application est incorrect, essayez de la fermer puis de la rouvrir."</string>
+    <string name="compat_restart_menu_education_text">"Si cette application ne s'affiche pas correctement, redémarrez-la depuis le menu Plus."</string>
     <string name="concurrent_display_notification_active_content">%1$s utilise les deux écrans pour afficher du contenu</string>
     <string name="concurrent_display_notification_active_title">Dual Screen activé</string>
     <string name="concurrent_display_notification_name">Dual Screen</string>
@@ -2920,7 +2922,7 @@ L'écoute prolongée à un volume élevé peut endommager vos facultés auditive
     <string name="satellite_notification_manual_title">Utiliser la messagerie par satellite ?</string>
     <string name="satellite_notification_open_message">Ouvrir Messages</string>
     <string name="satellite_notification_summary">Vous pouvez envoyer et recevoir des messages sans connexion au réseau mobile ou Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">Vous pouvez envoyer ou recevoir des messages et utiliser une certaine quantité de données par satellite</string>
+    <string name="satellite_notification_summary_with_data">Vous pouvez envoyer et recevoir des messages et utiliser certaines applis par satellite</string>
     <string name="satellite_notification_title">Connecté automatiquement au réseau satellite</string>
     <string name="satellite_sos_available_notification_summary">"Vous pouvez envoyer des messages aux services d'urgence s'il n'y a pas de réseau mobile ou Wi-Fi. Google Messages doit être votre application de messagerie par défaut."</string>
     <string name="satellite_sos_available_notification_title">SOS par satellite est maintenant disponible</string>

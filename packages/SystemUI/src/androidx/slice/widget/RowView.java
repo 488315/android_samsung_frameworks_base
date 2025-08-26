@@ -5,11 +5,15 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Handler;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +39,7 @@ import androidx.core.view.ViewCompat;
 import androidx.slice.ArrayUtils;
 import androidx.slice.CornerDrawable;
 import androidx.slice.SliceItem;
+import androidx.slice.SliceStructure;
 import androidx.slice.core.SliceActionImpl;
 import androidx.slice.core.SliceQuery;
 import com.android.systemui.R;
@@ -48,7 +53,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RowView extends SliceChildView implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     public final View mActionDivider;
@@ -95,7 +99,6 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     public final LinearLayout mSubContent;
     public final ArrayMap mToggles;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DateSetListener implements DatePickerDialog.OnDateSetListener {
         public final SliceItem mActionItem;
         public final int mRowIndex;
@@ -124,7 +127,6 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TimeSetListener implements TimePickerDialog.OnTimeSetListener {
         public final SliceItem mActionItem;
         public final int mRowIndex;
@@ -173,10 +175,10 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
             public final void onProgressChanged(SeekBar seekBar, int i, boolean z) {
                 RowView rowView = RowView.this;
                 rowView.mRangeValue = i + rowView.mRangeMinValue;
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 RowView rowView2 = RowView.this;
                 long j = rowView2.mLastSentRangeUpdate;
-                if (j != 0 && currentTimeMillis - j > 200) {
+                if (j != 0 && jCurrentTimeMillis - j > 200) {
                     rowView2.mRangeUpdaterRunning = false;
                     rowView2.mHandler.removeCallbacks(rowView2.mRangeUpdater);
                     RowView.this.sendSliderValue();
@@ -213,10 +215,10 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
             @Override // android.widget.RatingBar.OnRatingBarChangeListener
             public final void onRatingChanged(RatingBar ratingBar, float f, boolean z) {
                 RowView.this.mRangeValue = Math.round(f + r6.mRangeMinValue);
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 RowView rowView = RowView.this;
                 long j = rowView.mLastSentRangeUpdate;
-                if (j != 0 && currentTimeMillis - j > 200) {
+                if (j != 0 && jCurrentTimeMillis - j > 200) {
                     rowView.mRangeUpdaterRunning = false;
                     rowView.mHandler.removeCallbacks(rowView.mRangeUpdater);
                     RowView.this.sendSliderValue();
@@ -278,8 +280,8 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
         if (viewGroup.getVisibility() == 8) {
             viewGroup.setVisibility(0);
         }
-        boolean isToggle = sliceActionImpl.isToggle();
-        EventInfo eventInfo = new EventInfo(2, !isToggle ? 1 : 0, isToggle ? 3 : 0, this.mRowIndex);
+        boolean zIsToggle = sliceActionImpl.isToggle();
+        EventInfo eventInfo = new EventInfo(2, !zIsToggle ? 1 : 0, zIsToggle ? 3 : 0, this.mRowIndex);
         if (z) {
             eventInfo.actionPosition = 0;
             eventInfo.actionIndex = 0;
@@ -303,7 +305,7 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
             sliceActionView.mActionView.setVisibility(8);
             sliceActionView.mProgressView.setVisibility(0);
         }
-        if (isToggle) {
+        if (zIsToggle) {
             this.mToggles.put(sliceActionImpl, sliceActionView);
         } else {
             this.mActions.put(sliceActionImpl, sliceActionView);
@@ -311,108 +313,178 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005f  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0076  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x0134  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x016f A[RETURN] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean addItem(SliceItem sliceItem, int i, boolean z) {
+        TextView textView;
         IconCompat iconCompat;
         SliceItem sliceItem2;
         int i2;
         ViewGroup viewGroup = z ? this.mStartContainer : this.mEndContainer;
-        if ("slice".equals(sliceItem.mFormat) || "action".equals(sliceItem.mFormat)) {
+        if (!"slice".equals(sliceItem.mFormat) && !"action".equals(sliceItem.mFormat)) {
+            textView = null;
+            if (!"image".equals(sliceItem.mFormat)) {
+            }
+            if (iconCompat == null) {
+            }
+            if (textView == null) {
+            }
+        } else {
             if (ArrayUtils.contains(sliceItem.mHints, "shortcut")) {
                 addAction(new SliceActionImpl(sliceItem), i, viewGroup, z);
                 return true;
             }
             if (Arrays.asList(sliceItem.getSlice().mItems).size() != 0) {
                 sliceItem = (SliceItem) Arrays.asList(sliceItem.getSlice().mItems).get(0);
-            }
-        }
-        TextView textView = null;
-        if ("image".equals(sliceItem.mFormat)) {
-            iconCompat = (IconCompat) sliceItem.mObj;
-            sliceItem2 = null;
-        } else if ("long".equals(sliceItem.mFormat)) {
-            sliceItem2 = sliceItem;
-            iconCompat = null;
-        } else {
-            iconCompat = null;
-            sliceItem2 = null;
-        }
-        if (iconCompat != null) {
-            boolean contains = ArrayUtils.contains(sliceItem.mHints, "no_tint");
-            boolean contains2 = ArrayUtils.contains(sliceItem.mHints, "raw");
-            float f = getResources().getDisplayMetrics().density;
-            ImageView imageView = new ImageView(getContext());
-            Drawable loadDrawable = iconCompat.loadDrawable(getContext());
-            SliceStyle sliceStyle = this.mSliceStyle;
-            if (sliceStyle == null || sliceStyle.mImageCornerRadius <= 0.0f || !ArrayUtils.contains(sliceItem.mHints, "large")) {
-                imageView.setImageDrawable(loadDrawable);
-            } else {
-                imageView.setImageDrawable(new CornerDrawable(loadDrawable, this.mSliceStyle.mImageCornerRadius));
-            }
-            if (!contains && i != -1) {
-                imageView.setColorFilter(i);
-            }
-            if (this.mIsRangeSliding) {
-                viewGroup.removeAllViews();
-                viewGroup.addView(imageView);
-            } else {
-                viewGroup.addView(imageView);
-            }
-            RowStyle rowStyle = this.mRowStyle;
-            if (rowStyle != null) {
-                int i3 = rowStyle.mIconSize;
-                if (i3 <= 0) {
-                    i3 = this.mIconSize;
+                textView = null;
+                if (!"image".equals(sliceItem.mFormat)) {
+                    iconCompat = (IconCompat) sliceItem.mObj;
+                    sliceItem2 = null;
+                } else if ("long".equals(sliceItem.mFormat)) {
+                    sliceItem2 = sliceItem;
+                    iconCompat = null;
+                } else {
+                    iconCompat = null;
+                    sliceItem2 = null;
                 }
-                this.mIconSize = i3;
-                int i4 = rowStyle.mImageSize;
-                if (i4 <= 0) {
-                    i4 = this.mImageSize;
+                if (iconCompat == null) {
+                    boolean zContains = ArrayUtils.contains(sliceItem.mHints, "no_tint");
+                    boolean zContains2 = ArrayUtils.contains(sliceItem.mHints, "raw");
+                    float f = getResources().getDisplayMetrics().density;
+                    ImageView imageView = new ImageView(getContext());
+                    Drawable drawableLoadDrawable = iconCompat.loadDrawable(getContext());
+                    SliceStyle sliceStyle = this.mSliceStyle;
+                    if (sliceStyle == null || sliceStyle.mImageCornerRadius <= 0.0f || !ArrayUtils.contains(sliceItem.mHints, "large")) {
+                        imageView.setImageDrawable(drawableLoadDrawable);
+                    } else {
+                        imageView.setImageDrawable(new CornerDrawable(drawableLoadDrawable, this.mSliceStyle.mImageCornerRadius));
+                    }
+                    if (!zContains && i != -1) {
+                        imageView.setColorFilter(i);
+                    }
+                    if (this.mIsRangeSliding) {
+                        viewGroup.removeAllViews();
+                        viewGroup.addView(imageView);
+                    } else {
+                        viewGroup.addView(imageView);
+                    }
+                    RowStyle rowStyle = this.mRowStyle;
+                    if (rowStyle != null) {
+                        int i3 = rowStyle.mIconSize;
+                        if (i3 <= 0) {
+                            i3 = this.mIconSize;
+                        }
+                        this.mIconSize = i3;
+                        int i4 = rowStyle.mImageSize;
+                        if (i4 <= 0) {
+                            i4 = this.mImageSize;
+                        }
+                        this.mImageSize = i4;
+                    }
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+                    layoutParams.width = zContains2 ? Math.round(drawableLoadDrawable.getIntrinsicWidth() / f) : this.mImageSize;
+                    layoutParams.height = zContains2 ? Math.round(drawableLoadDrawable.getIntrinsicHeight() / f) : this.mImageSize;
+                    imageView.setLayoutParams(layoutParams);
+                    if (zContains) {
+                        i2 = 0;
+                    } else {
+                        int i5 = this.mImageSize;
+                        i2 = i5 == -1 ? this.mIconSize / 2 : (i5 - this.mIconSize) / 2;
+                    }
+                    imageView.setPadding(i2, i2, i2, i2);
+                    textView = imageView;
+                } else if (sliceItem2 != null) {
+                    textView = new TextView(getContext());
+                    textView.setText(SliceViewUtil.getTimestampString(getContext(), sliceItem.getLong()));
+                    if (this.mSliceStyle != null) {
+                        textView.setTextSize(0, r10.mSubtitleSize);
+                        RowStyle rowStyle2 = this.mRowStyle;
+                        Integer num = rowStyle2.mSubtitleColor;
+                        textView.setTextColor(num != null ? num.intValue() : rowStyle2.mSliceStyle.mSubtitleColor);
+                    }
+                    viewGroup.addView(textView);
                 }
-                this.mImageSize = i4;
+                if (textView == null) {
+                    return true;
+                }
             }
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-            layoutParams.width = contains2 ? Math.round(loadDrawable.getIntrinsicWidth() / f) : this.mImageSize;
-            layoutParams.height = contains2 ? Math.round(loadDrawable.getIntrinsicHeight() / f) : this.mImageSize;
-            imageView.setLayoutParams(layoutParams);
-            if (contains) {
-                i2 = 0;
-            } else {
-                int i5 = this.mImageSize;
-                i2 = i5 == -1 ? this.mIconSize / 2 : (i5 - this.mIconSize) / 2;
-            }
-            imageView.setPadding(i2, i2, i2, i2);
-            textView = imageView;
-        } else if (sliceItem2 != null) {
-            textView = new TextView(getContext());
-            textView.setText(SliceViewUtil.getTimestampString(getContext(), sliceItem.getLong()));
-            if (this.mSliceStyle != null) {
-                textView.setTextSize(0, r10.mSubtitleSize);
-                RowStyle rowStyle2 = this.mRowStyle;
-                Integer num = rowStyle2.mSubtitleColor;
-                textView.setTextColor(num != null ? num.intValue() : rowStyle2.mSliceStyle.mSubtitleColor);
-            }
-            viewGroup.addView(textView);
         }
-        return textView != null;
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00ae  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x014c  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x014e  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x008d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addSubtitle(boolean r9) {
-        /*
-            Method dump skipped, instructions count: 393
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.slice.widget.RowView.addSubtitle(boolean):void");
+    public final void addSubtitle(boolean z) throws Resources.NotFoundException {
+        String string;
+        String quantityString;
+        RowContent rowContent = this.mRowContent;
+        if (rowContent != null) {
+            if (rowContent.mRange == null || this.mStartItem == null) {
+                SliceItem sliceItem = rowContent.mSubtitleItem;
+                if (this.mShowLastUpdated) {
+                    long j = this.mLastUpdated;
+                    if (j != -1) {
+                        long jCurrentTimeMillis = System.currentTimeMillis() - j;
+                        if (jCurrentTimeMillis > 31449600000L) {
+                            int i = (int) (jCurrentTimeMillis / 31449600000L);
+                            quantityString = getResources().getQuantityString(R.plurals.abc_slice_duration_years, i, Integer.valueOf(i));
+                        } else if (jCurrentTimeMillis > 86400000) {
+                            int i2 = (int) (jCurrentTimeMillis / 86400000);
+                            quantityString = getResources().getQuantityString(R.plurals.abc_slice_duration_days, i2, Integer.valueOf(i2));
+                        } else if (jCurrentTimeMillis > 60000) {
+                            int i3 = (int) (jCurrentTimeMillis / 60000);
+                            quantityString = getResources().getQuantityString(R.plurals.abc_slice_duration_min, i3, Integer.valueOf(i3));
+                        } else {
+                            quantityString = null;
+                        }
+                        string = quantityString != null ? getResources().getString(R.string.abc_slice_updated, quantityString) : null;
+                    }
+                }
+                CharSequence sanitizedText = sliceItem != null ? sliceItem.getSanitizedText() : null;
+                boolean z2 = !TextUtils.isEmpty(sanitizedText) || (sliceItem != null && ArrayUtils.contains(sliceItem.mHints, "partial"));
+                if (z2) {
+                    this.mSecondaryText.setText(sanitizedText);
+                    if (this.mSliceStyle != null) {
+                        this.mSecondaryText.setTextSize(0, this.mIsHeader ? r3.mHeaderSubtitleSize : r3.mSubtitleSize);
+                        TextView textView = this.mSecondaryText;
+                        RowStyle rowStyle = this.mRowStyle;
+                        Integer num = rowStyle.mSubtitleColor;
+                        textView.setTextColor(num != null ? num.intValue() : rowStyle.mSliceStyle.mSubtitleColor);
+                        this.mSecondaryText.setPadding(0, this.mIsHeader ? this.mSliceStyle.mVerticalHeaderTextPadding : this.mSliceStyle.mVerticalTextPadding, 0, 0);
+                    }
+                }
+                if (string != null) {
+                    if (!TextUtils.isEmpty(sanitizedText)) {
+                        string = " · " + ((Object) string);
+                    }
+                    SpannableString spannableString = new SpannableString(string);
+                    spannableString.setSpan(new StyleSpan(2), 0, string.length(), 0);
+                    this.mLastUpdatedText.setText(spannableString);
+                    if (this.mSliceStyle != null) {
+                        this.mLastUpdatedText.setTextSize(0, this.mIsHeader ? r2.mHeaderSubtitleSize : r2.mSubtitleSize);
+                        TextView textView2 = this.mLastUpdatedText;
+                        RowStyle rowStyle2 = this.mRowStyle;
+                        Integer num2 = rowStyle2.mSubtitleColor;
+                        textView2.setTextColor(num2 != null ? num2.intValue() : rowStyle2.mSliceStyle.mSubtitleColor);
+                    }
+                }
+                this.mLastUpdatedText.setVisibility(TextUtils.isEmpty(string) ? 8 : 0);
+                this.mSecondaryText.setVisibility(z2 ? 0 : 8);
+                int i4 = ((this.mRowContent.mIsHeader && !this.mAllowTwoLines) || z || !z2 || !TextUtils.isEmpty(string)) ? 1 : 2;
+                this.mSecondaryText.setSingleLine(i4 == 1);
+                this.mSecondaryText.setMaxLines(i4);
+                this.mSecondaryText.requestLayout();
+                this.mLastUpdatedText.requestLayout();
+            }
+        }
     }
 
     public final int getRowContentHeight() {
@@ -499,16 +571,16 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
         if (this.mRowAction == null) {
             return;
         }
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("ASDF", ":", z);
-        m.append(this.mRowAction.mSliceItem);
-        Log.d("ASDF", m.toString());
-        SliceItem findSubtype = SliceQuery.findSubtype(this.mRowAction.mSliceItem, "long", "millis");
-        if (findSubtype == null) {
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("ASDF", ":", z);
+        sbM.append(this.mRowAction.mSliceItem);
+        Log.d("ASDF", sbM.toString());
+        SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(this.mRowAction.mSliceItem, "long", "millis");
+        if (sliceItemFindSubtype == null) {
             return;
         }
         int i = this.mRowIndex;
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date(findSubtype.getLong()));
+        calendar.setTime(new Date(sliceItemFindSubtype.getLong()));
         if (z) {
             new DatePickerDialog(getContext(), R.style.DialogTheme, new DateSetListener(this.mRowAction.mSliceItem, i), calendar.get(1), calendar.get(2), calendar.get(5)).show();
         } else {
@@ -553,41 +625,44 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
 
     @Override // android.widget.FrameLayout, android.view.View
     public final void onMeasure(int i, int i2) {
-        int i3;
+        int iMax;
         int rowContentHeight = getRowContentHeight();
         if (rowContentHeight != 0) {
             this.mRootView.setVisibility(0);
             measureChildWithExactHeight(this.mRootView, i, rowContentHeight);
-            i3 = this.mRootView.getMeasuredWidth();
+            iMax = this.mRootView.getMeasuredWidth();
         } else {
             this.mRootView.setVisibility(8);
-            i3 = 0;
+            iMax = 0;
         }
         View view = this.mRangeBar;
         if (view == null || this.mStartItem != null) {
             Spinner spinner = this.mSelectionSpinner;
             if (spinner != null) {
                 measureChildWithExactHeight(spinner, i, this.mSliceStyle.mRowSelectionHeight);
-                i3 = Math.max(i3, this.mSelectionSpinner.getMeasuredWidth());
+                iMax = Math.max(iMax, this.mSelectionSpinner.getMeasuredWidth());
             }
         } else {
             measureChildWithExactHeight(view, i, this.mSliceStyle.mRowRangeHeight);
             this.mMeasuredRangeHeight = this.mRangeBar.getMeasuredHeight();
-            i3 = Math.max(i3, this.mRangeBar.getMeasuredWidth());
+            iMax = Math.max(iMax, this.mRangeBar.getMeasuredWidth());
         }
-        int max = Math.max(i3 + this.mInsetStart + this.mInsetEnd, getSuggestedMinimumWidth());
+        int iMax2 = Math.max(iMax + this.mInsetStart + this.mInsetEnd, getSuggestedMinimumWidth());
         RowContent rowContent = this.mRowContent;
-        setMeasuredDimension(FrameLayout.resolveSizeAndState(max, i, 0), (rowContent != null ? rowContent.getHeight(this.mSliceStyle, this.mViewPolicy) : 0) + this.mInsetTop + this.mInsetBottom);
+        setMeasuredDimension(FrameLayout.resolveSizeAndState(iMax2, i, 0), (rowContent != null ? rowContent.getHeight(this.mSliceStyle, this.mViewPolicy) : 0) + this.mInsetTop + this.mInsetBottom);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public final void populateViews(boolean z) {
+    /* JADX WARN: Removed duplicated region for block: B:82:0x0128  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void populateViews(boolean z) throws Resources.NotFoundException {
         ProgressBar progressBar;
         IconCompat iconCompat;
-        Drawable loadDrawable;
-        boolean z2;
-        boolean z3 = z && this.mIsRangeSliding;
-        if (!z3) {
+        Drawable drawableLoadDrawable;
+        boolean z2 = z && this.mIsRangeSliding;
+        if (!z2) {
             resetViewState();
         }
         if (this.mRowContent.getLayoutDir() != -1) {
@@ -646,14 +721,14 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
             this.mContent.setContentDescription(charSequence);
         }
         RowContent rowContent = this.mRowContent;
-        boolean z4 = rowContent.mIsHeader;
-        SliceItem sliceItem2 = (!z4 || rowContent.mShowTitleItems) ? rowContent.mStartItem : null;
+        boolean z3 = rowContent.mIsHeader;
+        SliceItem sliceItem2 = (!z3 || rowContent.mShowTitleItems) ? rowContent.mStartItem : null;
         this.mStartItem = sliceItem2;
-        boolean z5 = sliceItem2 != null && (!z4 || rowContent.mShowTitleItems);
-        if (z5) {
-            z5 = addItem(sliceItem2, this.mTintColor, true);
+        boolean zAddItem = sliceItem2 != null && (!z3 || rowContent.mShowTitleItems);
+        if (zAddItem) {
+            zAddItem = addItem(sliceItem2, this.mTintColor, true);
         }
-        this.mStartContainer.setVisibility(z5 ? 0 : 8);
+        this.mStartContainer.setVisibility(zAddItem ? 0 : 8);
         SliceItem sliceItem3 = this.mRowContent.mTitleItem;
         if (sliceItem3 != null) {
             this.mPrimaryText.setText(sliceItem3.getSanitizedText());
@@ -675,41 +750,15 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
             if (sliceActionImpl.getSubtype() != null) {
                 String subtype = this.mRowAction.getSubtype();
                 subtype.getClass();
-                switch (subtype.hashCode()) {
-                    case -868304044:
-                        if (subtype.equals("toggle")) {
-                            z2 = false;
-                            break;
-                        }
-                        z2 = -1;
-                        break;
-                    case 759128640:
-                        if (subtype.equals("time_picker")) {
-                            z2 = true;
-                            break;
-                        }
-                        z2 = -1;
-                        break;
-                    case 1250407999:
-                        if (subtype.equals("date_picker")) {
-                            z2 = 2;
-                            break;
-                        }
-                        z2 = -1;
-                        break;
-                    default:
-                        z2 = -1;
-                        break;
-                }
-                switch (z2) {
-                    case false:
+                switch (subtype) {
+                    case "toggle":
                         addAction(this.mRowAction, this.mTintColor, this.mEndContainer, false);
                         setViewClickable(this.mRootView, true);
                         break;
-                    case true:
+                    case "time_picker":
                         setViewClickable(this.mRootView, true);
                         break;
-                    case true:
+                    case "date_picker":
                         setViewClickable(this.mRootView, true);
                         break;
                 }
@@ -722,22 +771,22 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
                 setViewClickable(this.mRootView, true);
             }
             this.mRangeItem = sliceItem5;
-            SliceItem findSubtype = SliceQuery.findSubtype(sliceItem5, "int", "range_mode");
-            if (findSubtype != null) {
-                this.mIsStarRating = findSubtype.getInt() == 2;
+            SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(sliceItem5, "int", "range_mode");
+            if (sliceItemFindSubtype != null) {
+                this.mIsStarRating = sliceItemFindSubtype.getInt() == 2;
             }
-            if (!z3) {
-                SliceItem findSubtype2 = SliceQuery.findSubtype(this.mRangeItem, "int", "min");
-                int i2 = findSubtype2 != null ? findSubtype2.getInt() : 0;
+            if (!z2) {
+                SliceItem sliceItemFindSubtype2 = SliceQuery.findSubtype(this.mRangeItem, "int", "min");
+                int i2 = sliceItemFindSubtype2 != null ? sliceItemFindSubtype2.getInt() : 0;
                 this.mRangeMinValue = i2;
-                SliceItem findSubtype3 = SliceQuery.findSubtype(this.mRangeItem, "int", "max");
+                SliceItem sliceItemFindSubtype3 = SliceQuery.findSubtype(this.mRangeItem, "int", "max");
                 int i3 = this.mIsStarRating ? 5 : 100;
-                if (findSubtype3 != null) {
-                    i3 = findSubtype3.getInt();
+                if (sliceItemFindSubtype3 != null) {
+                    i3 = sliceItemFindSubtype3.getInt();
                 }
                 this.mRangeMaxValue = i3;
-                SliceItem findSubtype4 = SliceQuery.findSubtype(this.mRangeItem, "int", "value");
-                this.mRangeValue = findSubtype4 != null ? findSubtype4.getInt() - i2 : 0;
+                SliceItem sliceItemFindSubtype4 = SliceQuery.findSubtype(this.mRangeItem, "int", "value");
+                this.mRangeValue = sliceItemFindSubtype4 != null ? sliceItemFindSubtype4.getInt() - i2 : 0;
                 if (this.mHandler == null) {
                     this.mHandler = new Handler();
                 }
@@ -756,12 +805,12 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
                     ratingBar.setOnRatingBarChangeListener(this.mRatingBarChangeListener);
                     this.mRangeBar = linearLayout;
                 } else {
-                    SliceItem findSubtype5 = SliceQuery.findSubtype(this.mRangeItem, "int", "range_mode");
-                    boolean z6 = findSubtype5 != null && findSubtype5.getInt() == 1;
-                    boolean equals = "action".equals(this.mRangeItem.mFormat);
-                    boolean z7 = this.mStartItem == null;
-                    if (!equals) {
-                        if (z7) {
+                    SliceItem sliceItemFindSubtype5 = SliceQuery.findSubtype(this.mRangeItem, "int", "range_mode");
+                    boolean z4 = sliceItemFindSubtype5 != null && sliceItemFindSubtype5.getInt() == 1;
+                    boolean zEquals = "action".equals(this.mRangeItem.mFormat);
+                    boolean z5 = this.mStartItem == null;
+                    if (!zEquals) {
+                        if (z5) {
                             progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                         } else {
                             progressBar = (ProgressBar) LayoutInflater.from(getContext()).inflate(R.layout.abc_slice_progress_inline_view, (ViewGroup) this, false);
@@ -777,10 +826,10 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
                                 setViewSidePaddings(progressBar, rowStyle3.mProgressBarStartPadding, rowStyle3.mProgressBarEndPadding);
                             }
                         }
-                        if (z6) {
+                        if (z4) {
                             progressBar.setIndeterminate(true);
                         }
-                    } else if (z7) {
+                    } else if (z5) {
                         progressBar = new SeekBar(getContext());
                     } else {
                         progressBar = (SeekBar) LayoutInflater.from(getContext()).inflate(R.layout.abc_slice_seekbar_view, (ViewGroup) this, false);
@@ -794,11 +843,11 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
                             }
                         }
                     }
-                    Drawable indeterminateDrawable = z6 ? progressBar.getIndeterminateDrawable() : progressBar.getProgressDrawable();
+                    Drawable indeterminateDrawable = z4 ? progressBar.getIndeterminateDrawable() : progressBar.getProgressDrawable();
                     int i6 = this.mTintColor;
                     if (i6 != -1 && indeterminateDrawable != null) {
                         indeterminateDrawable.setTint(i6);
-                        if (z6) {
+                        if (z4) {
                             progressBar.setIndeterminateDrawable(indeterminateDrawable);
                         } else {
                             progressBar.setProgressDrawable(indeterminateDrawable);
@@ -814,11 +863,11 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
                         this.mContent.addView(progressBar, 1);
                     }
                     this.mRangeBar = progressBar;
-                    if (equals) {
+                    if (zEquals) {
                         SliceItem inputRangeThumb = this.mRowContent.getInputRangeThumb();
                         SeekBar seekBar = (SeekBar) this.mRangeBar;
-                        if (inputRangeThumb != null && (iconCompat = (IconCompat) inputRangeThumb.mObj) != null && (loadDrawable = iconCompat.loadDrawable(getContext())) != null) {
-                            seekBar.setThumb(loadDrawable);
+                        if (inputRangeThumb != null && (iconCompat = (IconCompat) inputRangeThumb.mObj) != null && (drawableLoadDrawable = iconCompat.loadDrawable(getContext())) != null) {
+                            seekBar.setThumb(drawableLoadDrawable);
                         }
                         Drawable thumb = seekBar.getThumb();
                         int i7 = this.mTintColor;
@@ -846,15 +895,15 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
         }
         this.mSelectionOptionKeys = new ArrayList();
         this.mSelectionOptionValues = new ArrayList();
-        List asList = Arrays.asList(sliceItem6.getSlice().mItems);
-        for (int i8 = 0; i8 < asList.size(); i8++) {
-            SliceItem sliceItem7 = (SliceItem) asList.get(i8);
+        List listAsList = Arrays.asList(sliceItem6.getSlice().mItems);
+        for (int i8 = 0; i8 < listAsList.size(); i8++) {
+            SliceItem sliceItem7 = (SliceItem) listAsList.get(i8);
             if (ArrayUtils.contains(sliceItem7.mHints, "selection_option")) {
-                SliceItem findSubtype6 = SliceQuery.findSubtype(sliceItem7, "text", "selection_option_key");
-                SliceItem findSubtype7 = SliceQuery.findSubtype(sliceItem7, "text", "selection_option_value");
-                if (findSubtype6 != null && findSubtype7 != null) {
-                    this.mSelectionOptionKeys.add(((CharSequence) findSubtype6.mObj).toString());
-                    this.mSelectionOptionValues.add(findSubtype7.getSanitizedText());
+                SliceItem sliceItemFindSubtype6 = SliceQuery.findSubtype(sliceItem7, "text", "selection_option_key");
+                SliceItem sliceItemFindSubtype7 = SliceQuery.findSubtype(sliceItem7, "text", "selection_option_value");
+                if (sliceItemFindSubtype6 != null && sliceItemFindSubtype7 != null) {
+                    this.mSelectionOptionKeys.add(((CharSequence) sliceItemFindSubtype6.mObj).toString());
+                    this.mSelectionOptionValues.add(sliceItemFindSubtype7.getSanitizedText());
                 }
             }
         }
@@ -940,7 +989,7 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     @Override // androidx.slice.widget.SliceChildView
-    public final void setAllowTwoLines(boolean z) {
+    public final void setAllowTwoLines(boolean z) throws Resources.NotFoundException {
         this.mAllowTwoLines = z;
         if (this.mRowContent != null) {
             populateViews(true);
@@ -954,7 +1003,7 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     @Override // androidx.slice.widget.SliceChildView
-    public final void setLastUpdated(long j) {
+    public final void setLastUpdated(long j) throws Resources.NotFoundException {
         this.mLastUpdated = j;
         RowContent rowContent = this.mRowContent;
         if (rowContent != null) {
@@ -976,7 +1025,7 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     @Override // androidx.slice.widget.SliceChildView
-    public final void setShowLastUpdated(boolean z) {
+    public final void setShowLastUpdated(boolean z) throws Resources.NotFoundException {
         this.mShowLastUpdated = z;
         if (this.mRowContent != null) {
             populateViews(true);
@@ -991,70 +1040,36 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x003f, code lost:
-    
-        if (r2 != false) goto L24;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0042  */
     @Override // androidx.slice.widget.SliceChildView
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setSliceItem(androidx.slice.widget.SliceContent r4, boolean r5, int r6, int r7, com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda5 r8) {
-        /*
-            r3 = this;
-            r3.mObserver = r8
-            androidx.slice.widget.RowContent r7 = r3.mRowContent
-            r8 = 0
-            if (r7 == 0) goto L42
-            boolean r7 = r7.isValid()
-            if (r7 == 0) goto L42
-            androidx.slice.widget.RowContent r7 = r3.mRowContent
-            if (r7 == 0) goto L19
-            androidx.slice.SliceStructure r0 = new androidx.slice.SliceStructure
-            androidx.slice.SliceItem r7 = r7.mSliceItem
-            r0.<init>(r7)
-            goto L1a
-        L19:
-            r0 = 0
-        L1a:
-            androidx.slice.SliceStructure r7 = new androidx.slice.SliceStructure
-            androidx.slice.SliceItem r1 = r4.mSliceItem
-            androidx.slice.Slice r1 = r1.getSlice()
-            r7.<init>(r1)
-            r1 = 1
-            if (r0 == 0) goto L30
-            boolean r2 = r0.equals(r7)
-            if (r2 == 0) goto L30
-            r2 = r1
-            goto L31
-        L30:
-            r2 = r8
-        L31:
-            if (r0 == 0) goto L42
-            android.net.Uri r0 = r0.mUri
-            if (r0 == 0) goto L42
-            android.net.Uri r7 = r7.mUri
-            boolean r7 = r0.equals(r7)
-            if (r7 == 0) goto L42
-            if (r2 == 0) goto L42
-            goto L43
-        L42:
-            r1 = r8
-        L43:
-            r3.mShowActionSpinner = r8
-            r3.mIsHeader = r5
-            androidx.slice.widget.RowContent r4 = (androidx.slice.widget.RowContent) r4
-            r3.mRowContent = r4
-            r3.mRowIndex = r6
-            r3.populateViews(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.slice.widget.RowView.setSliceItem(androidx.slice.widget.SliceContent, boolean, int, int, com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda5):void");
+    public final void setSliceItem(SliceContent sliceContent, boolean z, int i, int i2, VolumePanelDialog$$ExternalSyntheticLambda5 volumePanelDialog$$ExternalSyntheticLambda5) throws Resources.NotFoundException {
+        boolean z2;
+        Uri uri;
+        this.mObserver = volumePanelDialog$$ExternalSyntheticLambda5;
+        RowContent rowContent = this.mRowContent;
+        if (rowContent == null || !rowContent.isValid()) {
+            z2 = false;
+        } else {
+            RowContent rowContent2 = this.mRowContent;
+            SliceStructure sliceStructure = rowContent2 != null ? new SliceStructure(rowContent2.mSliceItem) : null;
+            SliceStructure sliceStructure2 = new SliceStructure(sliceContent.mSliceItem.getSlice());
+            z2 = true;
+            boolean z3 = sliceStructure != null && sliceStructure.equals(sliceStructure2);
+            if (sliceStructure == null || (uri = sliceStructure.mUri) == null || !uri.equals(sliceStructure2.mUri) || !z3) {
+            }
+        }
+        this.mShowActionSpinner = false;
+        this.mIsHeader = z;
+        this.mRowContent = (RowContent) sliceContent;
+        this.mRowIndex = i;
+        populateViews(z2);
     }
 
     @Override // androidx.slice.widget.SliceChildView
-    public final void setStyle(SliceStyle sliceStyle, RowStyle rowStyle) {
+    public final void setStyle(SliceStyle sliceStyle, RowStyle rowStyle) throws Resources.NotFoundException {
         this.mSliceStyle = sliceStyle;
         this.mRowStyle = rowStyle;
         if (sliceStyle != null) {
@@ -1104,7 +1119,7 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     @Override // androidx.slice.widget.SliceChildView
-    public final void setTint(int i) {
+    public final void setTint(int i) throws Resources.NotFoundException {
         this.mTintColor = i;
         if (this.mRowContent != null) {
             populateViews(true);
@@ -1122,18 +1137,86 @@ public class RowView extends SliceChildView implements View.OnClickListener, Ada
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0137  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0137  */
     /* JADX WARN: Type inference failed for: r3v0, types: [java.util.List] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateEndItems() {
-        /*
-            Method dump skipped, instructions count: 318
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.slice.widget.RowView.updateEndItems():void");
+        boolean z;
+        SliceActionImpl sliceActionImpl;
+        RowContent rowContent = this.mRowContent;
+        if (rowContent != null) {
+            if (rowContent.mRange == null || this.mStartItem != null) {
+                this.mEndContainer.removeAllViews();
+                RowContent rowContent2 = this.mRowContent;
+                ArrayList arrayList = rowContent2.mEndItems;
+                ?? r3 = this.mHeaderActions;
+                if (r3 != 0) {
+                    arrayList = r3;
+                }
+                if (rowContent2.mIsHeader && this.mStartItem != null && arrayList.isEmpty() && !this.mRowContent.mShowTitleItems) {
+                    arrayList.add(this.mStartItem);
+                }
+                SliceItem sliceItem = null;
+                int i = 0;
+                boolean z2 = false;
+                boolean z3 = false;
+                for (int i2 = 0; i2 < arrayList.size(); i2++) {
+                    SliceItem sliceItem2 = arrayList.get(i2) instanceof SliceItem ? (SliceItem) arrayList.get(i2) : ((SliceActionImpl) arrayList.get(i2)).mSliceItem;
+                    if (i < 3 && addItem(sliceItem2, this.mTintColor, false)) {
+                        if (sliceItem == null && SliceQuery.find(sliceItem2, "action", (String[]) null, (String[]) null) != null) {
+                            sliceItem = sliceItem2;
+                        }
+                        i++;
+                        if (i == 1) {
+                            z2 = !this.mToggles.isEmpty() && SliceQuery.find(sliceItem2.getSlice(), "image", (String[]) null, (String[]) null) == null;
+                            z3 = arrayList.size() == 1 && SliceQuery.find(sliceItem2, "action", (String[]) null, (String[]) null) != null;
+                        }
+                    }
+                }
+                int i3 = 8;
+                this.mEndContainer.setVisibility(i > 0 ? 0 : 8);
+                View view = this.mActionDivider;
+                if (this.mRowAction != null && (z2 || (this.mRowContent.mShowActionDivider && z3))) {
+                    i3 = 0;
+                }
+                view.setVisibility(i3);
+                SliceItem sliceItem3 = this.mStartItem;
+                boolean z4 = (sliceItem3 == null || SliceQuery.find(sliceItem3, "action", (String[]) null, (String[]) null) == null) ? false : true;
+                boolean z5 = sliceItem != null;
+                if (this.mRowAction == null) {
+                    if (z5 != z4 && (i == 1 || z4)) {
+                        if (!this.mToggles.isEmpty()) {
+                            this.mRowAction = (SliceActionImpl) this.mToggles.keySet().iterator().next();
+                        } else if (!this.mActions.isEmpty() && this.mActions.size() == 1) {
+                            this.mRowAction = ((SliceActionView) this.mActions.valueAt(0)).mSliceAction;
+                        }
+                        setViewClickable(this.mRootView, true);
+                        z = true;
+                    }
+                    sliceActionImpl = this.mRowAction;
+                    if (sliceActionImpl != null && !z && this.mLoadingActions.contains(sliceActionImpl.mSliceItem)) {
+                        this.mShowActionSpinner = true;
+                    }
+                    LinearLayout linearLayout = this.mRootView;
+                    int i4 = linearLayout.isClickable() ? 0 : 2;
+                    WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+                    linearLayout.setImportantForAccessibility(i4);
+                }
+                setViewClickable(this.mRootView, true);
+                z = false;
+                sliceActionImpl = this.mRowAction;
+                if (sliceActionImpl != null) {
+                    this.mShowActionSpinner = true;
+                }
+                LinearLayout linearLayout2 = this.mRootView;
+                if (linearLayout2.isClickable()) {
+                }
+                WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
+                linearLayout2.setImportantForAccessibility(i4);
+            }
+        }
     }
 
     @Override // android.widget.AdapterView.OnItemSelectedListener

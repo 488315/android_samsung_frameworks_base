@@ -51,7 +51,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DefaultClockController implements ClockController {
     public final float burmeseLineSpacing;
@@ -65,7 +64,6 @@ public final class DefaultClockController implements ClockController {
     public final Resources resources;
     public final DefaultClockFaceController smallClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationState {
         public float fraction;
         public boolean isActive;
@@ -89,7 +87,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -102,7 +99,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultClockAnimations implements ClockAnimations {
         public final AnimationState dozeState;
         public final AnimationState foldState;
@@ -137,10 +133,10 @@ public final class DefaultClockController implements ClockController {
                 animatableClockView.setTextStyle(((Boolean) defaultClockController$$ExternalSyntheticLambda0.invoke()).booleanValue() ? animatableClockView.getLockScreenWeight() : animatableClockView.getDozingWeight(), null, true, null, 500L, animatableClockView.chargeAnimationDelay, new Runnable() { // from class: com.android.systemui.shared.clocks.AnimatableClockView$animateCharge$startAnimPhase2$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AnimatableClockView animatableClockView2 = AnimatableClockView.this;
-                        boolean booleanValue = ((Boolean) defaultClockController$$ExternalSyntheticLambda0.invoke()).booleanValue();
-                        AnimatableClockView animatableClockView3 = AnimatableClockView.this;
-                        int dozingWeight = booleanValue ? animatableClockView3.getDozingWeight() : animatableClockView3.getLockScreenWeight();
+                        AnimatableClockView animatableClockView2 = animatableClockView;
+                        boolean zBooleanValue = ((Boolean) defaultClockController$$ExternalSyntheticLambda0.invoke()).booleanValue();
+                        AnimatableClockView animatableClockView3 = animatableClockView;
+                        int dozingWeight = zBooleanValue ? animatableClockView3.getDozingWeight() : animatableClockView3.getLockScreenWeight();
                         String str = AnimatableClockView.TAG;
                         animatableClockView2.setTextStyle(dozingWeight, null, true, null, 1000L, 0L, null);
                     }
@@ -151,11 +147,11 @@ public final class DefaultClockController implements ClockController {
         @Override // com.android.systemui.plugins.clocks.ClockAnimations
         public final void doze(float f) {
             AnimationState animationState = this.dozeState;
-            Pair update = animationState.update(f);
-            boolean booleanValue = ((Boolean) update.component1()).booleanValue();
-            boolean booleanValue2 = ((Boolean) update.component2()).booleanValue();
-            if (booleanValue) {
-                this.view.animateDoze(animationState.isActive, !booleanValue2);
+            Pair pairUpdate = animationState.update(f);
+            boolean zBooleanValue = ((Boolean) pairUpdate.component1()).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) pairUpdate.component2()).booleanValue();
+            if (zBooleanValue) {
+                this.view.animateDoze(animationState.isActive, !zBooleanValue2);
             }
         }
 
@@ -174,11 +170,11 @@ public final class DefaultClockController implements ClockController {
 
         @Override // com.android.systemui.plugins.clocks.ClockAnimations
         public final void fold(float f) {
-            Pair update = this.foldState.update(f);
-            boolean booleanValue = ((Boolean) update.component1()).booleanValue();
-            boolean booleanValue2 = ((Boolean) update.component2()).booleanValue();
-            if (booleanValue) {
-                this.view.animateFoldAppear(!booleanValue2);
+            Pair pairUpdate = this.foldState.update(f);
+            boolean zBooleanValue = ((Boolean) pairUpdate.component1()).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) pairUpdate.component2()).booleanValue();
+            if (zBooleanValue) {
+                this.view.animateFoldAppear(!zBooleanValue2);
             }
         }
 
@@ -207,7 +203,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultClockFaceController implements ClockFaceController {
         public DefaultClockAnimations animations;
         public final ClockFaceConfig config;
@@ -267,7 +262,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LargeClockFaceController extends DefaultClockFaceController {
         public final ClockFaceConfig config;
         public final DefaultClockFaceLayout layout;
@@ -355,18 +349,17 @@ public final class DefaultClockController implements ClockController {
         largeClockFaceController.animations = new LargeClockAnimations(largeClockFaceController.view, f, f2);
         DefaultClockFaceController defaultClockFaceController = this.smallClock;
         defaultClockFaceController.animations = new DefaultClockAnimations(this, defaultClockFaceController.view, f, f2);
-        ThemeConfig copy$default = ThemeConfig.copy$default(largeClockFaceController.theme, z, null, 2, null);
+        ThemeConfig themeConfigCopy$default = ThemeConfig.copy$default(largeClockFaceController.theme, z, null, 2, null);
         DefaultClockController$DefaultClockFaceController$events$1 defaultClockController$DefaultClockFaceController$events$1 = largeClockFaceController.events;
-        defaultClockController$DefaultClockFaceController$events$1.onThemeChanged(copy$default);
-        ThemeConfig copy$default2 = ThemeConfig.copy$default(defaultClockFaceController.theme, z, null, 2, null);
+        defaultClockController$DefaultClockFaceController$events$1.onThemeChanged(themeConfigCopy$default);
+        ThemeConfig themeConfigCopy$default2 = ThemeConfig.copy$default(defaultClockFaceController.theme, z, null, 2, null);
         DefaultClockController$DefaultClockFaceController$events$1 defaultClockController$DefaultClockFaceController$events$12 = defaultClockFaceController.events;
-        defaultClockController$DefaultClockFaceController$events$12.onThemeChanged(copy$default2);
+        defaultClockController$DefaultClockFaceController$events$12.onThemeChanged(themeConfigCopy$default2);
         this.events.onTimeZoneChanged(TimeZone.getDefault());
         defaultClockController$DefaultClockFaceController$events$12.onTimeTick();
         defaultClockController$DefaultClockFaceController$events$1.onTimeTick();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LargeClockAnimations extends DefaultClockAnimations {
         public LargeClockAnimations(AnimatableClockView animatableClockView, float f, float f2) {
             super(DefaultClockController.this, animatableClockView, f, f2);
@@ -408,7 +401,6 @@ public final class DefaultClockController implements ClockController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DefaultClockEvents implements ClockEvents {
         public boolean isReactiveTouchInteractionEnabled;
 
@@ -422,9 +414,9 @@ public final class DefaultClockController implements ClockController {
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onLocaleChanged(Locale locale) {
-            String format = NumberFormat.getInstance(locale).format(1234567890L);
+            String str = NumberFormat.getInstance(locale).format(1234567890L);
             DefaultClockController defaultClockController = DefaultClockController.this;
-            if (Intrinsics.areEqual(format, defaultClockController.burmeseNumerals)) {
+            if (Intrinsics.areEqual(str, defaultClockController.burmeseNumerals)) {
                 Iterator it = defaultClockController.clocks.iterator();
                 while (it.hasNext()) {
                     ((AnimatableClockView) it.next()).setLineSpacing(0.0f, defaultClockController.burmeseLineSpacing);
@@ -453,13 +445,13 @@ public final class DefaultClockController implements ClockController {
             for (AnimatableClockView animatableClockView : DefaultClockController.this.clocks) {
                 ClockLogger logger = animatableClockView.getLogger();
                 AnimatableClockView$$ExternalSyntheticLambda0 animatableClockView$$ExternalSyntheticLambda0 = new AnimatableClockView$$ExternalSyntheticLambda0(4);
-                String str = null;
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, animatableClockView$$ExternalSyntheticLambda0, null);
+                String string = null;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, animatableClockView$$ExternalSyntheticLambda0, null);
                 if (timeZone != null) {
-                    str = timeZone.toString();
+                    string = timeZone.toString();
                 }
-                obtain.setStr1(str);
-                logger.getBuffer().commit(obtain);
+                logMessageObtain.setStr1(string);
+                logger.getBuffer().commit(logMessageObtain);
                 animatableClockView.time.setTimeZone(timeZone);
                 animatableClockView.refreshFormat(DateFormat.is24HourFormat(animatableClockView.getContext()));
             }

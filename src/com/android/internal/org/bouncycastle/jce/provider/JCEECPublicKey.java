@@ -166,8 +166,8 @@ public class JCEECPublicKey implements ECPublicKey, com.android.internal.org.bou
         } else if (eCParameterSpec == null) {
             x962Parameters = new X962Parameters((ASN1Null) DERNull.INSTANCE);
         } else {
-            ECCurve convertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
-            x962Parameters = new X962Parameters(new X9ECParameters(convertCurve, new X9ECPoint(EC5Util.convertPoint(convertCurve, this.ecSpec.getGenerator()), this.withCompression), this.ecSpec.getOrder(), BigInteger.valueOf(this.ecSpec.getCofactor()), this.ecSpec.getCurve().getSeed()));
+            ECCurve eCCurveConvertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
+            x962Parameters = new X962Parameters(new X9ECParameters(eCCurveConvertCurve, new X9ECPoint(EC5Util.convertPoint(eCCurveConvertCurve, this.ecSpec.getGenerator()), this.withCompression), this.ecSpec.getOrder(), BigInteger.valueOf(this.ecSpec.getCofactor()), this.ecSpec.getCurve().getSeed()));
         }
         return KeyUtil.getEncodedSubjectPublicKeyInfo(new SubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, x962Parameters), getQ().getEncoded(this.withCompression)));
     }
@@ -225,10 +225,10 @@ public class JCEECPublicKey implements ECPublicKey, com.android.internal.org.bou
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("EC Public Key");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(lineSeparator);
-        stringBuffer.append("            X: ").append(this.q.getAffineXCoord().toBigInteger().toString(16)).append(lineSeparator);
-        stringBuffer.append("            Y: ").append(this.q.getAffineYCoord().toBigInteger().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(strLineSeparator);
+        stringBuffer.append("            X: ").append(this.q.getAffineXCoord().toBigInteger().toString(16)).append(strLineSeparator);
+        stringBuffer.append("            Y: ").append(this.q.getAffineYCoord().toBigInteger().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 

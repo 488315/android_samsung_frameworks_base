@@ -1,14 +1,20 @@
 package com.android.systemui.statusbar.phone.logo;
 
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.RepeatOnLifecycleKt;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dumpable;
@@ -23,6 +29,7 @@ import com.android.systemui.slimindicator.SlimIndicatorViewSubscriber;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.SimType;
 import com.android.systemui.statusbar.pipeline.mobile.util.SimCardInfoUtil;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
@@ -33,15 +40,29 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.ViewController;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.EmptyCoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
+import kotlin.ranges.IntRange;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CarrierHomeLogoViewController extends ViewController implements Dumpable, ConfigurationController.ConfigurationListener {
     public final CarrierConfigTracker carrierConfigTracker;
@@ -68,7 +89,6 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
     public boolean userSetup;
     public final LinkedList visibilityHistory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public final BroadcastDispatcher broadcastDispatcher;
         public final CarrierConfigTracker carrierConfigTracker;
@@ -109,6 +129,287 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         }
     }
 
+    /* renamed from: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$onViewAttached$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function3 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$onViewAttached$1$1, reason: invalid class name and collision with other inner class name */
+        final class C05371 extends SuspendLambda implements Function2 {
+            private /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ CarrierHomeLogoViewController this$0;
+
+            /* renamed from: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$onViewAttached$1$1$1, reason: invalid class name and collision with other inner class name */
+            final class C05381 extends SuspendLambda implements Function2 {
+                int label;
+                final /* synthetic */ CarrierHomeLogoViewController this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public C05381(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = carrierHomeLogoViewController;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new C05381(this.this$0, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((C05381) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        final CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
+                        FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = carrierHomeLogoViewController.simStateChanged;
+                        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController.onViewAttached.1.1.1.1
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            public final Object emit(Object obj2, Continuation continuation) {
+                                CarrierHomeLogoViewController carrierHomeLogoViewController2 = carrierHomeLogoViewController;
+                                CarrierHomeLogoViewController.access$updateSimTypes(carrierHomeLogoViewController2);
+                                carrierHomeLogoViewController2.updateCarrierLogoVisibility();
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        this.label = 1;
+                        if (flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(flowCollector, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* renamed from: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$onViewAttached$1$1$2, reason: invalid class name */
+            final class AnonymousClass2 extends SuspendLambda implements Function2 {
+                int label;
+                final /* synthetic */ CarrierHomeLogoViewController this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public AnonymousClass2(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = carrierHomeLogoViewController;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new AnonymousClass2(this.this$0, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        final CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
+                        CarrierHomeLogoViewController$special$$inlined$map$1 carrierHomeLogoViewController$special$$inlined$map$1 = carrierHomeLogoViewController.serviceStateChanged;
+                        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController.onViewAttached.1.1.2.1
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            public final Object emit(Object obj2, Continuation continuation) {
+                                CarrierHomeLogoViewController carrierHomeLogoViewController2 = carrierHomeLogoViewController;
+                                carrierHomeLogoViewController2.getClass();
+                                boolean z = false;
+                                CarrierInfraMediator carrierInfraMediator = carrierHomeLogoViewController2.carrierInfraMediator;
+                                int i2 = carrierHomeLogoViewController2.slotId;
+                                boolean zAreEqual = Intrinsics.areEqual(carrierInfraMediator.get(CarrierInfraMediator.Values.ICON_BRANDING, i2, new Object[0]), "ORANGE");
+                                CarrierLogoVisibilityManager carrierLogoVisibilityManager = carrierHomeLogoViewController2.carrierLogoVisibilityManager;
+                                if (!zAreEqual) {
+                                    List<SubscriptionInfo> completeActiveSubscriptionInfoList = carrierHomeLogoViewController2.subscriptionManager.getCompleteActiveSubscriptionInfoList();
+                                    ArrayList arrayList = new ArrayList();
+                                    for (Object obj3 : completeActiveSubscriptionInfoList) {
+                                        SubscriptionInfo subscriptionInfo = (SubscriptionInfo) obj3;
+                                        Object obj4 = carrierInfraMediator.get(CarrierInfraMediator.Values.ICON_BRANDING, i2, new Object[0]);
+                                        boolean zAreEqual2 = Intrinsics.areEqual(obj4, "SKT");
+                                        SimCardInfoUtil simCardInfoUtil = carrierHomeLogoViewController2.simCardInfoUtil;
+                                        if (zAreEqual2) {
+                                            if (SimType.SKT == simCardInfoUtil.getSimCardInfo(subscriptionInfo.getSubscriptionId())) {
+                                                arrayList.add(obj3);
+                                            }
+                                        } else if (Intrinsics.areEqual(obj4, "KTT")) {
+                                            if (SimType.KT == simCardInfoUtil.getSimCardInfo(subscriptionInfo.getSubscriptionId())) {
+                                                arrayList.add(obj3);
+                                            }
+                                        } else if (Intrinsics.areEqual(obj4, "LGT") && SimType.LGT == simCardInfoUtil.getSimCardInfo(subscriptionInfo.getSubscriptionId())) {
+                                            arrayList.add(obj3);
+                                        }
+                                    }
+                                    if (!arrayList.isEmpty()) {
+                                        ListIterator listIterator = arrayList.listIterator();
+                                        while (listIterator.hasNext()) {
+                                            ServiceStateModel serviceStateModel = (ServiceStateModel) carrierLogoVisibilityManager.serviceStateHash.get(Integer.valueOf(SubscriptionManager.getSlotIndex(((SubscriptionInfo) listIterator.next()).getSubscriptionId())));
+                                            boolean z2 = (serviceStateModel == null || !serviceStateModel.connected || serviceStateModel.roaming) ? false : true;
+                                            carrierLogoVisibilityManager.networkCondition = z2;
+                                            if (z2) {
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        carrierLogoVisibilityManager.networkCondition = false;
+                                    }
+                                } else {
+                                    ServiceStateModel serviceStateModel2 = (ServiceStateModel) carrierLogoVisibilityManager.serviceStateHash.get(Integer.valueOf(SubscriptionManager.getSlotIndex(SubscriptionManager.getDefaultSubscriptionId())));
+                                    if (serviceStateModel2 != null) {
+                                        if (serviceStateModel2.connected && !serviceStateModel2.roaming) {
+                                            z = true;
+                                        }
+                                        carrierLogoVisibilityManager.networkCondition = z;
+                                    }
+                                }
+                                carrierHomeLogoViewController2.updateCarrierLogoVisibility();
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        this.label = 1;
+                        if (carrierHomeLogoViewController$special$$inlined$map$1.collect(flowCollector, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* renamed from: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$onViewAttached$1$1$3, reason: invalid class name */
+            final class AnonymousClass3 extends SuspendLambda implements Function2 {
+                int label;
+                final /* synthetic */ CarrierHomeLogoViewController this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public AnonymousClass3(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = carrierHomeLogoViewController;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new AnonymousClass3(this.this$0, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((AnonymousClass3) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        final CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
+                        Flow flow = carrierHomeLogoViewController.spnUpdated;
+                        FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController.onViewAttached.1.1.3.1
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            public final Object emit(Object obj2, Continuation continuation) {
+                                CarrierHomeLogoViewController carrierHomeLogoViewController2 = carrierHomeLogoViewController;
+                                CarrierHomeLogoViewController.access$updateSimTypes(carrierHomeLogoViewController2);
+                                carrierHomeLogoViewController2.updateCarrierLogoVisibility();
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        this.label = 1;
+                        if (flow.collect(flowCollector, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C05371(CarrierHomeLogoViewController carrierHomeLogoViewController, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = carrierHomeLogoViewController;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C05371 c05371 = new C05371(this.this$0, continuation);
+                c05371.L$0 = obj;
+                return c05371;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C05371) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                BuildersKt.launch$default(coroutineScope, null, null, new C05381(this.this$0, null), 3);
+                BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(this.this$0, null), 3);
+                BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass3(this.this$0, null), 3);
+                return Unit.INSTANCE;
+            }
+        }
+
+        public AnonymousClass1(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            AnonymousClass1 anonymousClass1 = CarrierHomeLogoViewController.this.new AnonymousClass1((Continuation) obj3);
+            anonymousClass1.L$0 = (LifecycleOwner) obj;
+            return anonymousClass1.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
+                Lifecycle.State state = Lifecycle.State.STARTED;
+                C05371 c05371 = new C05371(CarrierHomeLogoViewController.this, null);
+                this.label = 1;
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c05371, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r2v15, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$deviceProvisionedListener$1] */
     /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$defaultDataListener$1] */
     /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$quickStarListener$1] */
@@ -132,29 +433,24 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         this.settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$settingsListener$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                SettingsHelper settingsHelper2;
-                SettingsHelper settingsHelper3;
-                CarrierHomeLogoViewController carrierHomeLogoViewController = CarrierHomeLogoViewController.this;
-                CarrierLogoVisibilityManager carrierLogoVisibilityManager2 = carrierHomeLogoViewController.carrierLogoVisibilityManager;
-                settingsHelper2 = carrierHomeLogoViewController.settingsHelper;
-                carrierLogoVisibilityManager2.settingEnabled = settingsHelper2.isCarrierLogoEnabled();
+                CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
+                carrierHomeLogoViewController.carrierLogoVisibilityManager.settingEnabled = carrierHomeLogoViewController.settingsHelper.isCarrierLogoEnabled();
                 carrierHomeLogoViewController.updateCarrierLogoVisibility();
-                settingsHelper3 = carrierHomeLogoViewController.settingsHelper;
-                EmergencyButtonController$$ExternalSyntheticOutline0.m("Carrier logo setting changed=", "CarrierHomeLogoViewController", settingsHelper3.isCarrierLogoEnabled());
+                EmergencyButtonController$$ExternalSyntheticOutline0.m("Carrier logo setting changed=", "CarrierHomeLogoViewController", carrierHomeLogoViewController.settingsHelper.isCarrierLogoEnabled());
             }
         };
         this.defaultDataListener = new CarrierConfigTracker.DefaultDataSubscriptionChangedListener() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$defaultDataListener$1
             @Override // com.android.systemui.util.CarrierConfigTracker.DefaultDataSubscriptionChangedListener
             public final void onDefaultSubscriptionChanged(int i2) {
-                CarrierHomeLogoViewController carrierHomeLogoViewController = CarrierHomeLogoViewController.this;
+                CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
                 CarrierLogoVisibilityManager carrierLogoVisibilityManager2 = carrierHomeLogoViewController.carrierLogoVisibilityManager;
                 int slotIndex = SubscriptionManager.getSlotIndex(i2);
                 carrierLogoVisibilityManager2.defaultSubscriptionSlotId = slotIndex;
                 CarrierInfraMediator carrierInfraMediator2 = carrierLogoVisibilityManager2.carrierInfraMediator;
                 CarrierInfraMediator.Conditions conditions = carrierLogoVisibilityManager2.featureName;
-                boolean isEnabled = carrierInfraMediator2.isEnabled(conditions, slotIndex, new Object[0]);
-                carrierLogoVisibilityManager2.featureEnabled = isEnabled;
-                Log.d("CarrierLogoVisibilityManager", "Default data subscription is changed to slot" + carrierLogoVisibilityManager2.defaultSubscriptionSlotId + " " + conditions + "=" + isEnabled);
+                boolean zIsEnabled = carrierInfraMediator2.isEnabled(conditions, slotIndex, new Object[0]);
+                carrierLogoVisibilityManager2.featureEnabled = zIsEnabled;
+                Log.d("CarrierLogoVisibilityManager", "Default data subscription is changed to slot" + carrierLogoVisibilityManager2.defaultSubscriptionSlotId + " " + conditions + "=" + zIsEnabled);
                 carrierHomeLogoViewController.updateCarrierLogoVisibility();
             }
         };
@@ -162,7 +458,7 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         this.quickStarListener = new SlimIndicatorViewSubscriber() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$quickStarListener$1
             @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
             public final void updateQuickStarStyle() {
-                CarrierHomeLogoViewController carrierHomeLogoViewController = CarrierHomeLogoViewController.this;
+                CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
                 CarrierLogoVisibilityManager carrierLogoVisibilityManager2 = carrierHomeLogoViewController.carrierLogoVisibilityManager;
                 SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl = (SlimIndicatorViewMediatorImpl) carrierHomeLogoViewController.slimIndicatorViewMediator;
                 carrierLogoVisibilityManager2.quickStarEnabled = !(slimIndicatorViewMediatorImpl.mPluginMediator.mIsSPluginConnected && slimIndicatorViewMediatorImpl.mCarrierCrew.mIsHomeCarrierDisabled == 1);
@@ -175,42 +471,78 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         this.deviceProvisionedListener = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController$deviceProvisionedListener$1
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onUserSetupChanged() {
-                CarrierHomeLogoViewController carrierHomeLogoViewController = CarrierHomeLogoViewController.this;
+                CarrierHomeLogoViewController carrierHomeLogoViewController = this.this$0;
                 carrierHomeLogoViewController.userSetup = ((DeviceProvisionedControllerImpl) carrierHomeLogoViewController.deviceProvisionedController).isCurrentUserSetup();
             }
         };
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0064, code lost:
-    
-        if (r4 == com.android.systemui.statusbar.pipeline.mobile.data.model.SimType.SKT) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0066, code lost:
-    
-        r4 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0076, code lost:
-    
-        if (r4 == com.android.systemui.statusbar.pipeline.mobile.data.model.SimType.KT) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0083, code lost:
-    
-        if (r4 == com.android.systemui.statusbar.pipeline.mobile.data.model.SimType.LGT) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x0101, code lost:
-    
-        if (r4 == false) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0069  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void access$updateSimTypes(com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController r10) {
-        /*
-            Method dump skipped, instructions count: 267
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController.access$updateSimTypes(com.android.systemui.statusbar.phone.logo.CarrierHomeLogoViewController):void");
+    public static final void access$updateSimTypes(CarrierHomeLogoViewController carrierHomeLogoViewController) {
+        boolean zAreEqual;
+        boolean z;
+        List<SubscriptionInfo> completeActiveSubscriptionInfoList = carrierHomeLogoViewController.subscriptionManager.getCompleteActiveSubscriptionInfoList();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(completeActiveSubscriptionInfoList, 10));
+        Iterator<T> it = completeActiveSubscriptionInfoList.iterator();
+        while (it.hasNext()) {
+            arrayList.add(carrierHomeLogoViewController.simCardInfoUtil.getSimCardInfo(((SubscriptionInfo) it.next()).getSubscriptionId()));
+        }
+        CarrierLogoVisibilityManager carrierLogoVisibilityManager = carrierHomeLogoViewController.carrierLogoVisibilityManager;
+        carrierLogoVisibilityManager.simTypes = arrayList;
+        boolean z2 = false;
+        if (!arrayList.isEmpty()) {
+            int size = arrayList.size();
+            int i = 0;
+            while (true) {
+                if (i >= size) {
+                    break;
+                }
+                Object obj = arrayList.get(i);
+                i++;
+                SimType simType = (SimType) obj;
+                Object obj2 = carrierLogoVisibilityManager.carrierInfraMediator.get(CarrierInfraMediator.Values.ICON_BRANDING, carrierLogoVisibilityManager.defaultSubscriptionSlotId, new Object[0]);
+                if (Intrinsics.areEqual(obj2, "SKT")) {
+                    z = simType == SimType.SKT;
+                } else if (Intrinsics.areEqual(obj2, "KTT")) {
+                    if (simType == SimType.KT) {
+                    }
+                } else if (!Intrinsics.areEqual(obj2, "LGT")) {
+                    if (Intrinsics.areEqual(obj2, "ORANGE") && simType == SimType.ORANGE) {
+                        int i2 = carrierLogoVisibilityManager.defaultSubscriptionSlotId;
+                        SimCardInfoUtil simCardInfoUtil = carrierLogoVisibilityManager.simCardInfoUtil;
+                        String simOperatorNameForPhone = simCardInfoUtil.telephonyManager.getSimOperatorNameForPhone(i2);
+                        if (Intrinsics.areEqual(simOperatorNameForPhone, "Orange F")) {
+                            String simOperatorNumericForPhone = simCardInfoUtil.telephonyManager.getSimOperatorNumericForPhone(i2);
+                            String networkOperatorForPhone = simCardInfoUtil.telephonyManager.getNetworkOperatorForPhone(i2);
+                            Log.d("SimCardInfoUtil", "numeric information, sim=" + simOperatorNumericForPhone + " plmn=" + networkOperatorForPhone);
+                            if (simOperatorNumericForPhone.length() >= 3 && networkOperatorForPhone.length() >= 3) {
+                                IntRange intRange = new IntRange(0, 2);
+                                String strSubstring = simOperatorNumericForPhone.substring(intRange.first, intRange.last + 1);
+                                IntRange intRange2 = new IntRange(0, 2);
+                                zAreEqual = Intrinsics.areEqual(strSubstring, networkOperatorForPhone.substring(intRange2.first, intRange2.last + 1));
+                            }
+                            if (!zAreEqual) {
+                            }
+                        } else {
+                            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("spn isn't matched with Orange=", simOperatorNameForPhone, "SimCardInfoUtil");
+                        }
+                        zAreEqual = false;
+                        if (!zAreEqual) {
+                        }
+                    }
+                } else if (simType == SimType.LGT) {
+                }
+                if (z) {
+                    z2 = true;
+                    break;
+                }
+            }
+        }
+        carrierLogoVisibilityManager.matchedSim = z2;
     }
 
     @Override // com.android.systemui.Dumpable
@@ -228,7 +560,7 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public final void onDensityOrFontScaleChanged() {
+    public final void onDensityOrFontScaleChanged() throws Resources.NotFoundException {
         float f = this.indicatorScaleGardener.getLatestScaleModel(getContext()).ratio;
         CarrierLogoView carrierLogoView = this.logoView;
         if (carrierLogoView != null) {
@@ -241,20 +573,31 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public final void onDisplayDeviceTypeChanged() {
+    public final void onDisplayDeviceTypeChanged() throws Resources.NotFoundException {
         if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
             onDensityOrFontScaleChanged();
         }
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
+    java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
+    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
+    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.visitRegion(SwitchOverStringVisitor.java:66)
+    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
+    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
+     */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00b8  */
     @Override // com.android.systemui.util.ViewController
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onViewAttached() {
-        String str;
+        String string;
         this.carrierConfigTracker.addDefaultDataSubscriptionChangedListener(this.defaultDataListener);
-        boolean isCarrierLogoEnabled = this.settingsHelper.isCarrierLogoEnabled();
+        boolean zIsCarrierLogoEnabled = this.settingsHelper.isCarrierLogoEnabled();
         CarrierLogoVisibilityManager carrierLogoVisibilityManager = this.carrierLogoVisibilityManager;
-        carrierLogoVisibilityManager.settingEnabled = isCarrierLogoEnabled;
+        carrierLogoVisibilityManager.settingEnabled = zIsCarrierLogoEnabled;
         boolean z = false;
         this.settingsHelper.registerCallback(this.settingsListener, Settings.System.getUriFor(SettingsHelper.INDEX_INDICATOR_SHOW_NETWORK_INFORMATION));
         CarrierLogoView carrierLogoView = this.logoView;
@@ -264,41 +607,36 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
             int i = this.slotId;
             Object obj = carrierInfraMediator.get(values, i, new Object[0]);
             carrierLogoView.setImageResource(Intrinsics.areEqual(obj, "SKT") ? R.drawable.stat_notify_operator_logo_skt : Intrinsics.areEqual(obj, "KTT") ? R.drawable.stat_notify_operator_logo_kt : Intrinsics.areEqual(obj, "LGT") ? R.drawable.stat_notify_operator_logo_lgu : Intrinsics.areEqual(obj, "ORANGE") ? R.drawable.stat_notify_operator_logo_org : 0);
-            String str2 = (String) carrierInfraMediator.get(values, i, new Object[0]);
-            switch (str2.hashCode()) {
+            String str = (String) carrierInfraMediator.get(values, i, new Object[0]);
+            switch (str.hashCode()) {
                 case -1955522002:
-                    if (str2.equals("ORANGE")) {
-                        str = "Orange F";
+                    if (!str.equals("ORANGE")) {
+                        string = "";
+                        break;
+                    } else {
+                        string = "Orange F";
                         break;
                     }
-                    str = "";
-                    break;
                 case 74763:
-                    if (str2.equals("KTT")) {
-                        str = getContext().getString(R.string.status_bar_carrier_logo_kt_tts);
+                    if (str.equals("KTT")) {
+                        string = getContext().getString(R.string.status_bar_carrier_logo_kt_tts);
                         break;
                     }
-                    str = "";
                     break;
                 case 75321:
-                    if (str2.equals("LGT")) {
-                        str = getContext().getString(R.string.status_bar_carrier_logo_lgu_tts);
+                    if (str.equals("LGT")) {
+                        string = getContext().getString(R.string.status_bar_carrier_logo_lgu_tts);
                         break;
                     }
-                    str = "";
                     break;
                 case 82172:
-                    if (str2.equals("SKT")) {
-                        str = getContext().getString(R.string.status_bar_carrier_logo_skt_tts);
+                    if (str.equals("SKT")) {
+                        string = getContext().getString(R.string.status_bar_carrier_logo_skt_tts);
                         break;
                     }
-                    str = "";
-                    break;
-                default:
-                    str = "";
                     break;
             }
-            carrierLogoView.setContentDescription(str);
+            carrierLogoView.setContentDescription(string);
             this.darkIconDispatcher.addDarkReceiver(carrierLogoView);
         }
         ((DeviceProvisionedControllerImpl) this.deviceProvisionedController).addCallback(this.deviceProvisionedListener);
@@ -310,7 +648,7 @@ public final class CarrierHomeLogoViewController extends ViewController implemen
         carrierLogoVisibilityManager.quickStarEnabled = !z;
         slimIndicatorViewMediatorImpl.registerSubscriber("CarrierHomeLogoViewController", this.quickStarListener);
         this.dumpManager.registerNormalDumpable("CarrierHomeLogoViewController", this);
-        RepeatWhenAttachedKt.repeatWhenAttached(this.mView, EmptyCoroutineContext.INSTANCE, new CarrierHomeLogoViewController$onViewAttached$1(this, null));
+        RepeatWhenAttachedKt.repeatWhenAttached(this.mView, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
     }
 
     @Override // com.android.systemui.util.ViewController

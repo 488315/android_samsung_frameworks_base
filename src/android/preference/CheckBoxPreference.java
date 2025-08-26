@@ -17,11 +17,11 @@ public class CheckBoxPreference extends TwoStatePreference {
 
     public CheckBoxPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CheckBoxPreference, i, i2);
-        setSummaryOn(obtainStyledAttributes.getString(0));
-        setSummaryOff(obtainStyledAttributes.getString(1));
-        setDisableDependentsState(obtainStyledAttributes.getBoolean(2, false));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CheckBoxPreference, i, i2);
+        setSummaryOn(typedArrayObtainStyledAttributes.getString(0));
+        setSummaryOff(typedArrayObtainStyledAttributes.getString(1));
+        setDisableDependentsState(typedArrayObtainStyledAttributes.getBoolean(2, false));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public CheckBoxPreference(Context context, AttributeSet attributeSet) {
@@ -35,9 +35,9 @@ public class CheckBoxPreference extends TwoStatePreference {
     @Override // android.preference.Preference
     protected void onBindView(View view) {
         super.onBindView(view);
-        KeyEvent.Callback findViewById = view.findViewById(16908289);
-        if (findViewById != null && (findViewById instanceof Checkable)) {
-            ((Checkable) findViewById).setChecked(this.mChecked);
+        KeyEvent.Callback callbackFindViewById = view.findViewById(16908289);
+        if (callbackFindViewById != null && (callbackFindViewById instanceof Checkable)) {
+            ((Checkable) callbackFindViewById).setChecked(this.mChecked);
         }
         syncSummaryView(view);
     }

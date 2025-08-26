@@ -10,7 +10,6 @@ import kotlin.Pair;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TagsHandler extends Handler {
     public final IssueRecordingState state;
@@ -30,9 +29,9 @@ public final class TagsHandler extends Handler {
         if (stringArrayList == null || stringArrayList2 == null) {
             throw new IllegalArgumentException("Neither keys: " + stringArrayList + ", nor values: " + stringArrayList2 + " can be null");
         }
-        List<Pair> zip = CollectionsKt___CollectionsKt.zip(stringArrayList, stringArrayList2);
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(zip, 10));
-        for (Pair pair : zip) {
+        List<Pair> listZip = CollectionsKt___CollectionsKt.zip(stringArrayList, stringArrayList2);
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listZip, 10));
+        for (Pair pair : listZip) {
             arrayList.add(pair.getFirst() + ": " + pair.getSecond());
         }
         this.state.getPrefs().edit().putStringSet("key_tagTitles", CollectionsKt___CollectionsKt.toSet(arrayList)).apply();

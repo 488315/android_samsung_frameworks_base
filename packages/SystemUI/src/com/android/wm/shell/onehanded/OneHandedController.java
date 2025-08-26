@@ -3,6 +3,7 @@ package com.android.wm.shell.onehanded;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -36,7 +37,6 @@ import com.android.wm.shell.sysui.UserChangeListener;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedController implements RemoteCallable, DisplayChangeController.OnDisplayChangingListener, ConfigurationChangeListener, KeyguardChangeListener, UserChangeListener {
     public final AccessibilityManager mAccessibilityManager;
@@ -147,7 +147,6 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IOneHandedImpl extends IOneHanded$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public OneHandedController mController;
@@ -162,7 +161,6 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OneHandedImpl implements OneHanded {
         public /* synthetic */ OneHandedImpl(OneHandedController oneHandedController, int i) {
             this();
@@ -291,9 +289,9 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
             Slog.w("OneHandedController", "Shortcut not enabled, skip onActivatedActionChanged()");
             return;
         }
-        boolean isOneHandedEnabled = isOneHandedEnabled();
+        boolean zIsOneHandedEnabled = isOneHandedEnabled();
         OneHandedSettingsUtil oneHandedSettingsUtil = this.mOneHandedSettingsUtil;
-        if (!isOneHandedEnabled) {
+        if (!zIsOneHandedEnabled) {
             ContentResolver contentResolver = this.mContext.getContentResolver();
             int i = this.mUserId;
             oneHandedSettingsUtil.getClass();
@@ -343,7 +341,7 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
     }
 
     @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
-    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
+    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) throws Resources.NotFoundException {
         if (isInitialized()) {
             ContentResolver contentResolver = this.mContext.getContentResolver();
             int i4 = this.mUserId;
@@ -388,10 +386,10 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
         int i = this.mUserId;
         this.mOneHandedSettingsUtil.getClass();
         String stringForUser = Settings.Secure.getStringForUser(contentResolver, "accessibility_button_targets", i);
-        boolean isEmpty = TextUtils.isEmpty(stringForUser);
+        boolean zIsEmpty = TextUtils.isEmpty(stringForUser);
         String str = OneHandedSettingsUtil.ONE_HANDED_MODE_TARGET_NAME;
         boolean z = true;
-        if (isEmpty || !stringForUser.contains(str)) {
+        if (zIsEmpty || !stringForUser.contains(str)) {
             String stringForUser2 = Settings.Secure.getStringForUser(contentResolver, "accessibility_shortcut_target_service", i);
             if (TextUtils.isEmpty(stringForUser2) || !stringForUser2.contains(str)) {
                 z = false;
@@ -477,10 +475,10 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
             return;
         }
         oneHandedState.setState(1);
-        int round = Math.round(oneHandedDisplayAreaOrganizer.mDisplayLayout.mHeight * this.mOffSetFraction);
+        int iRound = Math.round(oneHandedDisplayAreaOrganizer.mDisplayLayout.mHeight * this.mOffSetFraction);
         OneHandedAccessibilityUtil oneHandedAccessibilityUtil = this.mOneHandedAccessibilityUtil;
         oneHandedAccessibilityUtil.announcementForScreenReader(oneHandedAccessibilityUtil.mStartOneHandedDescription);
-        oneHandedDisplayAreaOrganizer.scheduleOffset(round);
+        oneHandedDisplayAreaOrganizer.scheduleOffset(iRound);
         this.mTimeoutHandler.resetTimer();
         this.mOneHandedUiEventLogger.writeEvent(0);
     }
@@ -499,9 +497,9 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
         OneHandedTutorialHandler oneHandedTutorialHandler = this.mTutorialHandler;
         oneHandedTutorialHandler.getClass();
         oneHandedTutorialHandler.mDisplayBounds = new Rect(0, 0, displayLayout.mWidth, displayLayout.mHeight);
-        int round = Math.round(r0.height() * oneHandedTutorialHandler.mTutorialHeightRatio);
-        oneHandedTutorialHandler.mTutorialAreaHeight = round;
-        oneHandedTutorialHandler.mAlphaTransitionStart = round * 0.6f;
+        int iRound = Math.round(r0.height() * oneHandedTutorialHandler.mTutorialHeightRatio);
+        oneHandedTutorialHandler.mTutorialAreaHeight = iRound;
+        oneHandedTutorialHandler.mAlphaTransitionStart = iRound * 0.6f;
         BackgroundWindowManager backgroundWindowManager = oneHandedTutorialHandler.mBackgroundWindowManager;
         backgroundWindowManager.getClass();
         backgroundWindowManager.mDisplayBounds = new Rect(0, 0, displayLayout.mWidth, displayLayout.mHeight);
@@ -530,8 +528,8 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
     }
 
     public final void updateSettings() {
-        boolean isEmpty;
-        boolean isEmpty2;
+        boolean zIsEmpty;
+        boolean zIsEmpty2;
         OneHandedSettingsUtil oneHandedSettingsUtil = this.mOneHandedSettingsUtil;
         ContentResolver contentResolver = this.mContext.getContentResolver();
         int i = this.mUserId;
@@ -558,11 +556,11 @@ public class OneHandedController implements RemoteCallable, DisplayChangeControl
             TaskStackListenerImpl taskStackListenerImpl = this.mTaskStackListener;
             AnonymousClass4 anonymousClass4 = this.mTaskStackListenerCallback;
             synchronized (taskStackListenerImpl.mTaskStackListeners) {
-                isEmpty = ((ArrayList) taskStackListenerImpl.mTaskStackListeners).isEmpty();
+                zIsEmpty = ((ArrayList) taskStackListenerImpl.mTaskStackListeners).isEmpty();
                 ((ArrayList) taskStackListenerImpl.mTaskStackListeners).remove(anonymousClass4);
-                isEmpty2 = ((ArrayList) taskStackListenerImpl.mTaskStackListeners).isEmpty();
+                zIsEmpty2 = ((ArrayList) taskStackListenerImpl.mTaskStackListeners).isEmpty();
             }
-            if (!isEmpty && isEmpty2) {
+            if (!zIsEmpty && zIsEmpty2) {
                 try {
                     taskStackListenerImpl.mActivityTaskManager.unregisterTaskStackListener(taskStackListenerImpl);
                 } catch (Exception e) {

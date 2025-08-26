@@ -22,7 +22,6 @@ import java.util.Iterator;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitionStub {
     public final int firstTaskId;
@@ -48,7 +47,7 @@ public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitio
     /* JADX WARN: Type inference failed for: r0v7, types: [java.lang.Object] */
     /* JADX WARN: Type inference failed for: r12v12, types: [T, android.window.TransitionInfo$Change] */
     public final void startAnimation(IBinder iBinder, TransitionInfo transitionInfo, final SurfaceControl.Transaction transaction, final IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) {
-        T t;
+        T next;
         ActivityManager.RunningTaskInfo taskInfo;
         final AnimatorSet animatorSet = new AnimatorSet();
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
@@ -56,21 +55,21 @@ public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitio
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                t = 0;
+                next = 0;
                 break;
             }
-            t = it.next();
-            TransitionInfo.Change change = (TransitionInfo.Change) t;
+            next = it.next();
+            TransitionInfo.Change change = (TransitionInfo.Change) next;
             ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
             if ((taskInfo2 != null && taskInfo2.taskId == this.firstTaskId) || ((taskInfo = change.getTaskInfo()) != null && taskInfo.taskId == this.secondTaskId)) {
                 break;
             }
         }
-        ref$ObjectRef.element = t;
-        if (t == 0) {
+        ref$ObjectRef.element = next;
+        if (next == 0) {
             throw new IllegalStateException("Could not find a split root candidate");
         }
-        WindowContainerToken parent = ((TransitionInfo.Change) t).getParent();
+        WindowContainerToken parent = ((TransitionInfo.Change) next).getParent();
         while (parent != null) {
             ?? change2 = transitionInfo.getChange(parent);
             if (change2 == 0) {
@@ -89,10 +88,10 @@ public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitio
         final int i3 = rect.left;
         final int i4 = rect.top;
         final float f = 0.25f;
-        ViewCapture.MAIN_EXECUTOR.execute(new Runnable() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner$startAnimation$3
+        ViewCapture.MAIN_EXECUTOR.execute(new Runnable() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner.startAnimation.3
             @Override // java.lang.Runnable
             public final void run() {
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
                 final int i5 = i;
                 final int i6 = i3;
                 final int i7 = i2;
@@ -102,33 +101,33 @@ public final class RemoteRecentSplitTaskTransitionRunner extends RemoteTransitio
                 final Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
                 final RemoteRecentSplitTaskTransitionRunner remoteRecentSplitTaskTransitionRunner = this;
                 final IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback2 = iRemoteTransitionFinishedCallback;
-                ofFloat.setInterpolator(new DecelerateInterpolator(1.5f));
-                ofFloat.setDuration(336L);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner$startAnimation$3$1$1
+                valueAnimatorOfFloat.setInterpolator(new DecelerateInterpolator(1.5f));
+                valueAnimatorOfFloat.setDuration(336L);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner$startAnimation$3$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         float animatedFraction = valueAnimator.getAnimatedFraction();
                         float f3 = ((i6 - r0) * animatedFraction) + i5;
                         float f4 = ((i8 - r1) * animatedFraction) + i7;
                         float f5 = f2;
-                        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1, f5, animatedFraction, f5);
+                        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1, f5, animatedFraction, f5);
                         SurfaceControl.Transaction transaction3 = transaction2;
                         transaction3.getClass();
-                        transaction3.setPosition(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), f3, f4).setScale(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), m$1, m$1).setAlpha(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), animatedFraction).apply();
+                        transaction3.setPosition(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), f3, f4).setScale(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), fM$1, fM$1).setAlpha(((TransitionInfo.Change) ref$ObjectRef2.element).getLeash(), animatedFraction).apply();
                     }
                 });
-                ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner$startAnimation$3$1$2
+                valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.mediaprojection.appselector.view.RemoteRecentSplitTaskTransitionRunner$startAnimation$3$1$2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         try {
-                            RemoteRecentSplitTaskTransitionRunner.this.handleResult.invoke();
+                            remoteRecentSplitTaskTransitionRunner.handleResult.invoke();
                             iRemoteTransitionFinishedCallback2.onTransitionFinished((WindowContainerTransaction) null, (SurfaceControl.Transaction) null);
                         } catch (RemoteException e) {
                             Log.e("MediaProjectionAppSelectorActivity", "Failed to call transition finished callback", e);
                         }
                     }
                 });
-                animatorSet.play(ofFloat);
+                animatorSet.play(valueAnimatorOfFloat);
                 animatorSet.start();
             }
         });

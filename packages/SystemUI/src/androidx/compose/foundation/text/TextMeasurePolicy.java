@@ -17,7 +17,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TextMeasurePolicy implements MeasurePolicy {
     public final Function0 placements;
@@ -32,7 +31,6 @@ final class TextMeasurePolicy implements MeasurePolicy {
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo3measure3p2s80s(MeasureScope measureScope, List list, long j) {
         final ArrayList arrayList;
-        MeasureResult layout$1;
         ArrayList arrayList2;
         Pair pair;
         ArrayList arrayList3 = new ArrayList(list.size());
@@ -58,7 +56,7 @@ final class TextMeasurePolicy implements MeasurePolicy {
                     arrayList2 = arrayList4;
                     float f3 = rect.bottom;
                     float f4 = rect.top;
-                    pair = new Pair(measurable.mo608measureBRTryo0(ConstraintsKt.Constraints$default(0, (int) Math.floor(f - f2), 0, (int) Math.floor(f3 - f4), 5)), IntOffset.m847boximpl((Math.round(f4) & 4294967295L) | (Math.round(f2) << 32)));
+                    pair = new Pair(measurable.mo610measureBRTryo0(ConstraintsKt.Constraints$default(0, (int) Math.floor(f - f2), 0, (int) Math.floor(f3 - f4), 5)), IntOffset.m849boximpl((Math.round(f4) & 4294967295L) | (Math.round(f2) << 32)));
                 } else {
                     arrayList2 = arrayList4;
                     pair = null;
@@ -82,8 +80,8 @@ final class TextMeasurePolicy implements MeasurePolicy {
                 arrayList6.add(obj2);
             }
         }
-        final List access$measureWithTextRangeMeasureConstraints = BasicTextKt.access$measureWithTextRangeMeasureConstraints(arrayList6, this.shouldMeasureLinks);
-        layout$1 = measureScope.layout$1(Constraints.m821getMaxWidthimpl(j), Constraints.m820getMaxHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.text.TextMeasurePolicy$measure$1
+        final List listAccess$measureWithTextRangeMeasureConstraints = BasicTextKt.access$measureWithTextRangeMeasureConstraints(arrayList6, this.shouldMeasureLinks);
+        return measureScope.layout$1(Constraints.m823getMaxWidthimpl(j), Constraints.m822getMaxHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.text.TextMeasurePolicy$measure$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             /* JADX WARN: Multi-variable type inference failed */
             {
@@ -92,7 +90,7 @@ final class TextMeasurePolicy implements MeasurePolicy {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj3) {
+            public final Object mo781invoke(Object obj3) {
                 long j2;
                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj3;
                 List<Pair<Placeable, IntOffset>> list4 = arrayList;
@@ -100,10 +98,10 @@ final class TextMeasurePolicy implements MeasurePolicy {
                     int size4 = list4.size();
                     for (int i4 = 0; i4 < size4; i4++) {
                         Pair<Placeable, IntOffset> pair2 = list4.get(i4);
-                        Placeable.PlacementScope.m626place70tqf50$default(placementScope, (Placeable) pair2.component1(), ((IntOffset) pair2.component2()).packedValue);
+                        Placeable.PlacementScope.m628place70tqf50$default(placementScope, (Placeable) pair2.component1(), ((IntOffset) pair2.component2()).packedValue);
                     }
                 }
-                List<Pair<Placeable, Function0>> list5 = access$measureWithTextRangeMeasureConstraints;
+                List<Pair<Placeable, Function0>> list5 = listAccess$measureWithTextRangeMeasureConstraints;
                 if (list5 != null) {
                     int size5 = list5.size();
                     for (int i5 = 0; i5 < size5; i5++) {
@@ -116,12 +114,11 @@ final class TextMeasurePolicy implements MeasurePolicy {
                             IntOffset.Companion.getClass();
                             j2 = 0;
                         }
-                        Placeable.PlacementScope.m626place70tqf50$default(placementScope, placeable, j2);
+                        Placeable.PlacementScope.m628place70tqf50$default(placementScope, placeable, j2);
                     }
                 }
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 }

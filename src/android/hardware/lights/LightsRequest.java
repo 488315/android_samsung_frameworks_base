@@ -14,12 +14,12 @@ public final class LightsRequest {
     final Map<Light, LightState> mRequests;
 
     private LightsRequest(Map<Light, LightState> map) {
-        HashMap hashMap = new HashMap();
-        this.mRequests = hashMap;
+        HashMap map2 = new HashMap();
+        this.mRequests = map2;
         this.mLightIds = new ArrayList();
         this.mLightStates = new ArrayList();
-        hashMap.putAll(map);
-        ArrayList arrayList = new ArrayList(hashMap.keySet());
+        map2.putAll(map);
+        ArrayList arrayList = new ArrayList(map2.keySet());
         for (int i = 0; i < arrayList.size(); i++) {
             Light light = (Light) arrayList.get(i);
             this.mLightIds.add(i, Integer.valueOf(light.getId()));

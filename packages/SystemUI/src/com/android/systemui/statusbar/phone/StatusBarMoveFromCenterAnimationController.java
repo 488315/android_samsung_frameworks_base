@@ -8,7 +8,6 @@ import com.android.systemui.unfold.system.ActivityManagerActivityTypeProvider;
 import com.android.systemui.unfold.util.CurrentActivityTypeProvider;
 import com.android.systemui.unfold.util.ScopedUnfoldTransitionProgressProvider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarMoveFromCenterAnimationController {
     public final CurrentActivityTypeProvider currentActivityTypeProvider;
@@ -17,13 +16,11 @@ public final class StatusBarMoveFromCenterAnimationController {
     public final ScopedUnfoldTransitionProgressProvider progressProvider;
     public final TransitionListener transitionListener = new TransitionListener();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatusBarIconsAlphaProvider implements UnfoldMoveFromCenterAnimator.AlphaProvider {
         public StatusBarIconsAlphaProvider() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionListener implements UnfoldTransitionProgressProvider.TransitionProgressListener {
         public TransitionListener() {
         }

@@ -146,7 +146,7 @@ public abstract class MediaRoute2ProviderService extends Service {
         }
     }
 
-    public final MediaStreams notifySystemRoutingSessionCreated(long j, final RoutingSessionInfo routingSessionInfo, MediaStreamsFormats mediaStreamsFormats) {
+    public final MediaStreams notifySystemRoutingSessionCreated(long j, final RoutingSessionInfo routingSessionInfo, MediaStreamsFormats mediaStreamsFormats) throws IllegalArgumentException {
         Integer num;
         Objects.requireNonNull(routingSessionInfo, "sessionInfo must not be null");
         Objects.requireNonNull(mediaStreamsFormats, "formats must not be null");
@@ -164,15 +164,15 @@ public abstract class MediaRoute2ProviderService extends Service {
             throw new IllegalStateException("Unexpected: remote callback is null.");
         }
         MediaRoute2ProviderInfo mediaRoute2ProviderInfo = this.mProviderInfo;
-        int i = 0;
+        int supportedRoutingTypes = 0;
         for (String str : routingSessionInfo.getSelectedRoutes()) {
             MediaRoute2Info mediaRoute2Info = mediaRoute2ProviderInfo.mRoutes.get(str);
             if (mediaRoute2Info == null) {
                 throw new IllegalArgumentException("Invalid selected route with id: " + str);
             }
-            i |= mediaRoute2Info.getSupportedRoutingTypes();
+            supportedRoutingTypes |= mediaRoute2Info.getSupportedRoutingTypes();
         }
-        if ((i & 1) == 0) {
+        if ((supportedRoutingTypes & 1) == 0) {
             throw new IllegalArgumentException("Selected routes for system media don't support any system media routing types.");
         }
         AudioFormat audioFormat = mediaStreamsFormats.mAudioFormat;
@@ -180,13 +180,13 @@ public abstract class MediaRoute2ProviderService extends Service {
         if (audioFormat != null) {
             populateAudioStream(audioFormat, num.intValue(), builder);
         }
-        MediaStreams build = builder.build();
-        if (build.mAudioRecord == null) {
+        MediaStreams mediaStreamsBuild = builder.build();
+        if (mediaStreamsBuild.mAudioRecord == null) {
             Log.e(TAG, "Audio record is not populated. Returning an empty stream and scheduling the session release for: " + routingSessionInfo);
             this.mHandler.post(new Runnable() { // from class: android.media.MediaRoute2ProviderService$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaRoute2ProviderService.this.lambda$notifySystemRoutingSessionCreated$0(routingSessionInfo);
+                    this.f$0.lambda$notifySystemRoutingSessionCreated$0(routingSessionInfo);
                 }
             });
             notifyRequestFailed(j, 6);
@@ -198,9 +198,9 @@ public abstract class MediaRoute2ProviderService extends Service {
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            this.mOngoingMediaStreams.put(routingSessionInfo.getOriginalId(), build);
+            this.mOngoingMediaStreams.put(routingSessionInfo.getOriginalId(), mediaStreamsBuild);
         }
-        return build;
+        return mediaStreamsBuild;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -208,28 +208,28 @@ public abstract class MediaRoute2ProviderService extends Service {
         onReleaseSession(0L, routingSessionInfo.getOriginalId());
     }
 
-    private void populateAudioStream(AudioFormat audioFormat, int i, MediaStreams.Builder builder) {
-        AudioMixingRule.Builder addRule = new AudioMixingRule.Builder().addRule(new AudioAttributes.Builder().setUsage(1).build(), 1);
+    private void populateAudioStream(AudioFormat audioFormat, int i, MediaStreams.Builder builder) throws IllegalArgumentException {
+        AudioMixingRule.Builder builderAddRule = new AudioMixingRule.Builder().addRule(new AudioAttributes.Builder().setUsage(1).build(), 1);
         if (i != -1) {
-            addRule.addMixRule(4, Integer.valueOf(i));
+            builderAddRule.addMixRule(4, Integer.valueOf(i));
         }
-        android.media.audiopolicy.AudioMix build = new AudioMix.Builder(addRule.build()).setFormat(audioFormat).setRouteFlags(2).build();
-        AudioPolicy build2 = new AudioPolicy.Builder(this).setLooper(this.mHandler.getLooper()).addMix(build).build();
+        android.media.audiopolicy.AudioMix audioMixBuild = new AudioMix.Builder(builderAddRule.build()).setFormat(audioFormat).setRouteFlags(2).build();
+        AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this).setLooper(this.mHandler.getLooper()).addMix(audioMixBuild).build();
         AudioManager audioManager = (AudioManager) getSystemService(AudioManager.class);
         if (audioManager == null) {
             Log.e(TAG, "Couldn't fetch the audio manager.");
             return;
         }
-        if (audioManager.registerAudioPolicy(build2) != 0) {
+        if (audioManager.registerAudioPolicy(audioPolicyBuild) != 0) {
             Log.e(TAG, "Failed to register the audio policy.");
             return;
         }
-        AudioRecord createAudioRecordSink = build2.createAudioRecordSink(build);
-        if (createAudioRecordSink == null) {
+        AudioRecord audioRecordCreateAudioRecordSink = audioPolicyBuild.createAudioRecordSink(audioMixBuild);
+        if (audioRecordCreateAudioRecordSink == null) {
             Log.e(TAG, "Audio record creation failed.");
-            audioManager.unregisterAudioPolicy(build2);
+            audioManager.unregisterAudioPolicy(audioPolicyBuild);
         } else {
-            builder.setAudioStream(build2, createAudioRecordSink);
+            builder.setAudioStream(audioPolicyBuild, audioRecordCreateAudioRecordSink);
         }
     }
 
@@ -261,16 +261,16 @@ public abstract class MediaRoute2ProviderService extends Service {
             Log.d(TAG, "notifySessionReleased: Releasing session id=" + str);
         }
         synchronized (this.mSessionLock) {
-            RoutingSessionInfo remove = this.mSessionInfos.remove(str);
+            RoutingSessionInfo routingSessionInfoRemove = this.mSessionInfos.remove(str);
             if (Flags.enableMirroringInMediaRouter2()) {
-                if (remove == null) {
-                    remove = maybeReleaseMediaStreams(str);
+                if (routingSessionInfoRemove == null) {
+                    routingSessionInfoRemove = maybeReleaseMediaStreams(str);
                 }
-                if (remove == null) {
-                    remove = this.mPendingSystemSessionReleases.remove(str);
+                if (routingSessionInfoRemove == null) {
+                    routingSessionInfoRemove = this.mPendingSystemSessionReleases.remove(str);
                 }
             }
-            if (remove == null) {
+            if (routingSessionInfoRemove == null) {
                 Log.w(TAG, "notifySessionReleased: Ignoring unknown session info.");
                 return;
             }
@@ -279,7 +279,7 @@ public abstract class MediaRoute2ProviderService extends Service {
                 return;
             }
             try {
-                iMediaRoute2ProviderServiceCallback.notifySessionReleased(remove);
+                iMediaRoute2ProviderServiceCallback.notifySessionReleased(routingSessionInfoRemove);
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed to notify session released.", e);
             }
@@ -292,16 +292,16 @@ public abstract class MediaRoute2ProviderService extends Service {
             return null;
         }
         synchronized (this.mSessionLock) {
-            MediaStreams remove = this.mOngoingMediaStreams.remove(str);
-            if (remove == null) {
+            MediaStreams mediaStreamsRemove = this.mOngoingMediaStreams.remove(str);
+            if (mediaStreamsRemove == null) {
                 return null;
             }
-            releaseAudioStream(remove.mAudioPolicy, remove.mAudioRecord);
-            return remove.mSessionInfo;
+            releaseAudioStream(mediaStreamsRemove.mAudioPolicy, mediaStreamsRemove.mAudioRecord);
+            return mediaStreamsRemove.mSessionInfo;
         }
     }
 
-    private void releaseAudioStream(AudioPolicy audioPolicy, AudioRecord audioRecord) {
+    private void releaseAudioStream(AudioPolicy audioPolicy, AudioRecord audioRecord) throws IllegalStateException {
         AudioManager audioManager;
         if (audioPolicy == null || (audioManager = (AudioManager) getSystemService(AudioManager.class)) == null) {
             return;
@@ -334,7 +334,7 @@ public abstract class MediaRoute2ProviderService extends Service {
         this.mHandler.post(new Runnable() { // from class: android.media.MediaRoute2ProviderService$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                MediaRoute2ProviderService.this.lambda$onCreateSystemRoutingSession$1(j);
+                this.f$0.lambda$onCreateSystemRoutingSession$1(j);
             }
         });
     }
@@ -368,7 +368,7 @@ public abstract class MediaRoute2ProviderService extends Service {
             this.mHandler.post(new Runnable() { // from class: android.media.MediaRoute2ProviderService$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaRoute2ProviderService.this.publishState();
+                    this.f$0.publishState();
                 }
             });
         }
@@ -391,7 +391,7 @@ public abstract class MediaRoute2ProviderService extends Service {
             this.mHandler.post(new Runnable() { // from class: android.media.MediaRoute2ProviderService$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaRoute2ProviderService.this.updateSessions();
+                    this.f$0.updateSessions();
                 }
             });
         }
@@ -431,11 +431,11 @@ public abstract class MediaRoute2ProviderService extends Service {
     }
 
     private boolean removeRequestId(long j) {
-        boolean removeFirstOccurrence;
+        boolean zRemoveFirstOccurrence;
         synchronized (this.mRequestIdsLock) {
-            removeFirstOccurrence = this.mRequestIds.removeFirstOccurrence(Long.valueOf(j));
+            zRemoveFirstOccurrence = this.mRequestIds.removeFirstOccurrence(Long.valueOf(j));
         }
-        return removeFirstOccurrence;
+        return zRemoveFirstOccurrence;
     }
 
     final class MediaRoute2ProviderServiceStub extends IMediaRoute2ProviderService.Stub {
@@ -447,19 +447,19 @@ public abstract class MediaRoute2ProviderService extends Service {
         }
 
         private boolean checkSessionIdIsValid(String str, String str2) {
-            boolean z;
+            boolean zContainsKey;
             if (TextUtils.isEmpty(str)) {
                 Log.w(MediaRoute2ProviderService.TAG, str2 + ": Ignoring empty sessionId from system service.");
                 return false;
             }
             if (Flags.enableMirroringInMediaRouter2()) {
                 synchronized (MediaRoute2ProviderService.this.mSessionLock) {
-                    z = MediaRoute2ProviderService.this.mOngoingMediaStreams.containsKey(str);
+                    zContainsKey = MediaRoute2ProviderService.this.mOngoingMediaStreams.containsKey(str);
                 }
             } else {
-                z = false;
+                zContainsKey = false;
             }
-            if (z || MediaRoute2ProviderService.this.getSessionInfo(str) != null) {
+            if (zContainsKey || MediaRoute2ProviderService.this.getSessionInfo(str) != null) {
                 return true;
             }
             Log.w(MediaRoute2ProviderService.TAG, str2 + ": Ignoring unknown session from system service. sessionId=" + str);
@@ -603,9 +603,9 @@ public abstract class MediaRoute2ProviderService extends Service {
         public void releaseSession(long j, String str) {
             if (checkCallerIsSystem()) {
                 synchronized (MediaRoute2ProviderService.this.mSessionLock) {
-                    RoutingSessionInfo maybeReleaseMediaStreams = MediaRoute2ProviderService.this.maybeReleaseMediaStreams(str);
-                    if (maybeReleaseMediaStreams != null) {
-                        MediaRoute2ProviderService.this.mPendingSystemSessionReleases.put(str, maybeReleaseMediaStreams);
+                    RoutingSessionInfo routingSessionInfoMaybeReleaseMediaStreams = MediaRoute2ProviderService.this.maybeReleaseMediaStreams(str);
+                    if (routingSessionInfoMaybeReleaseMediaStreams != null) {
+                        MediaRoute2ProviderService.this.mPendingSystemSessionReleases.put(str, routingSessionInfoMaybeReleaseMediaStreams);
                     } else if (!checkSessionIdIsValid(str, "releaseSession")) {
                         return;
                     }

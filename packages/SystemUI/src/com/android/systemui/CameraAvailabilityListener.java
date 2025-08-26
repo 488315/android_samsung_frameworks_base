@@ -26,7 +26,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CameraAvailabilityListener {
     public static final Factory Factory = new Factory(null);
@@ -42,7 +41,6 @@ public final class CameraAvailabilityListener {
     public final Set unavailablePhysicalCameras = new LinkedHashSet();
     public final List listeners = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public /* synthetic */ Factory(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,7 +50,6 @@ public final class CameraAvailabilityListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OpenCameraInfo {
         public final String logicalCameraId;
         public final String packageId;
@@ -93,37 +90,37 @@ public final class CameraAvailabilityListener {
         this.handler = handler;
         new CameraManager.AvailabilityCallback() { // from class: com.android.systemui.CameraAvailabilityListener$availabilityCallback$1
             public final void onCameraClosed(String str2) {
-                CameraAvailabilityListener cameraAvailabilityListener = CameraAvailabilityListener.this;
+                CameraAvailabilityListener cameraAvailabilityListener = this.this$0;
                 cameraAvailabilityListener.openCamera = null;
                 CameraProtectionInfo cameraProtectionInfo = cameraAvailabilityListener.activeProtectionInfo;
                 if (Intrinsics.areEqual(cameraProtectionInfo != null ? cameraProtectionInfo.logicalCameraId : null, str2)) {
-                    CameraAvailabilityListener.access$notifyCameraInactive(CameraAvailabilityListener.this);
+                    CameraAvailabilityListener.access$notifyCameraInactive(this.this$0);
                 }
-                CameraAvailabilityListener.this.activeProtectionInfo = null;
+                this.this$0.activeProtectionInfo = null;
             }
 
             public final void onCameraOpened(String str2, String str3) {
-                Object obj;
-                CameraAvailabilityListener.this.openCamera = new CameraAvailabilityListener.OpenCameraInfo(str2, str3);
-                if (CameraAvailabilityListener.this.excludedPackageIds.contains(str3)) {
+                Object next;
+                this.this$0.openCamera = new CameraAvailabilityListener.OpenCameraInfo(str2, str3);
+                if (this.this$0.excludedPackageIds.contains(str3)) {
                     return;
                 }
-                CameraAvailabilityListener cameraAvailabilityListener = CameraAvailabilityListener.this;
+                CameraAvailabilityListener cameraAvailabilityListener = this.this$0;
                 Iterator it = cameraAvailabilityListener.cameraProtectionInfoList.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it.next();
-                    CameraProtectionInfo cameraProtectionInfo = (CameraProtectionInfo) obj;
+                    next = it.next();
+                    CameraProtectionInfo cameraProtectionInfo = (CameraProtectionInfo) next;
                     if (Intrinsics.areEqual(str2, cameraProtectionInfo.logicalCameraId) && !CollectionsKt___CollectionsKt.contains(cameraAvailabilityListener.unavailablePhysicalCameras, cameraProtectionInfo.physicalCameraId)) {
                         break;
                     }
                 }
-                CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) obj;
+                CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) next;
                 if (cameraProtectionInfo2 != null) {
-                    CameraAvailabilityListener cameraAvailabilityListener2 = CameraAvailabilityListener.this;
+                    CameraAvailabilityListener cameraAvailabilityListener2 = this.this$0;
                     cameraAvailabilityListener2.activeProtectionInfo = cameraProtectionInfo2;
                     cameraAvailabilityListener2.notifyCameraActive(cameraProtectionInfo2);
                 }
@@ -131,27 +128,27 @@ public final class CameraAvailabilityListener {
 
             @Override // android.hardware.camera2.CameraManager.AvailabilityCallback
             public final void onPhysicalCameraAvailable(String str2, String str3) {
-                Object obj;
-                CameraAvailabilityListener.this.unavailablePhysicalCameras.remove(str3);
-                CameraAvailabilityListener.OpenCameraInfo openCameraInfo = CameraAvailabilityListener.this.openCamera;
-                if (openCameraInfo == null || !Intrinsics.areEqual(openCameraInfo.logicalCameraId, str2) || CameraAvailabilityListener.this.excludedPackageIds.contains(openCameraInfo.packageId)) {
+                Object next;
+                this.this$0.unavailablePhysicalCameras.remove(str3);
+                CameraAvailabilityListener.OpenCameraInfo openCameraInfo = this.this$0.openCamera;
+                if (openCameraInfo == null || !Intrinsics.areEqual(openCameraInfo.logicalCameraId, str2) || this.this$0.excludedPackageIds.contains(openCameraInfo.packageId)) {
                     return;
                 }
-                Iterator it = CameraAvailabilityListener.this.cameraProtectionInfoList.iterator();
+                Iterator it = this.this$0.cameraProtectionInfoList.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it.next();
-                    CameraProtectionInfo cameraProtectionInfo = (CameraProtectionInfo) obj;
+                    next = it.next();
+                    CameraProtectionInfo cameraProtectionInfo = (CameraProtectionInfo) next;
                     if (Intrinsics.areEqual(cameraProtectionInfo.logicalCameraId, str2) && Intrinsics.areEqual(cameraProtectionInfo.physicalCameraId, str3)) {
                         break;
                     }
                 }
-                CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) obj;
+                CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) next;
                 if (cameraProtectionInfo2 != null) {
-                    CameraAvailabilityListener cameraAvailabilityListener = CameraAvailabilityListener.this;
+                    CameraAvailabilityListener cameraAvailabilityListener = this.this$0;
                     cameraAvailabilityListener.activeProtectionInfo = cameraProtectionInfo2;
                     cameraAvailabilityListener.notifyCameraActive(cameraProtectionInfo2);
                 }
@@ -159,10 +156,10 @@ public final class CameraAvailabilityListener {
 
             @Override // android.hardware.camera2.CameraManager.AvailabilityCallback
             public final void onPhysicalCameraUnavailable(String str2, String str3) {
-                CameraAvailabilityListener.this.unavailablePhysicalCameras.add(str3);
-                CameraProtectionInfo cameraProtectionInfo = CameraAvailabilityListener.this.activeProtectionInfo;
+                this.this$0.unavailablePhysicalCameras.add(str3);
+                CameraProtectionInfo cameraProtectionInfo = this.this$0.activeProtectionInfo;
                 if (cameraProtectionInfo != null && Intrinsics.areEqual(cameraProtectionInfo.logicalCameraId, str2) && Intrinsics.areEqual(cameraProtectionInfo.physicalCameraId, str3)) {
-                    CameraAvailabilityListener cameraAvailabilityListener = CameraAvailabilityListener.this;
+                    CameraAvailabilityListener cameraAvailabilityListener = this.this$0;
                     cameraAvailabilityListener.activeProtectionInfo = null;
                     CameraAvailabilityListener.access$notifyCameraInactive(cameraAvailabilityListener);
                 }
@@ -171,36 +168,36 @@ public final class CameraAvailabilityListener {
         this.cameraDeviceStates = new HashMap();
         this.cameraDeviceStateCallback = new CameraManager.SemCameraDeviceStateCallback() { // from class: com.android.systemui.CameraAvailabilityListener$cameraDeviceStateCallback$1
             public final void onCameraDeviceStateChanged(String str2, int i, int i2, String str3) {
-                CameraAvailabilityListener cameraAvailabilityListener = CameraAvailabilityListener.this;
+                CameraAvailabilityListener cameraAvailabilityListener = this.this$0;
                 CameraAvailabilityListener.Factory factory = CameraAvailabilityListener.Factory;
                 cameraAvailabilityListener.getClass();
                 String str4 = i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? "" : "CAMERA_STATE_CLOSED" : "CAMERA_STATE_IDLE" : "CAMERA_STATE_ACTIVE" : "CAMERA_STATE_OPEN";
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "onCameraDeviceStateChanged: id=", str2, ", facing=", ", state=");
-                m888m.append(str4);
-                m888m.append(", client=");
-                m888m.append(str3);
-                Log.d("CameraAvailabilityListener", m888m.toString());
-                if (str3 == null || !CameraAvailabilityListener.this.excludedPackageIds.contains(str3)) {
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "onCameraDeviceStateChanged: id=", str2, ", facing=", ", state=");
+                sbM890m.append(str4);
+                sbM890m.append(", client=");
+                sbM890m.append(str3);
+                Log.d("CameraAvailabilityListener", sbM890m.toString());
+                if (str3 == null || !this.this$0.excludedPackageIds.contains(str3)) {
                     if (i == 1) {
-                        CameraAvailabilityListener.this.cameraDeviceStates.put(str2, Integer.valueOf(i2));
+                        this.this$0.cameraDeviceStates.put(str2, Integer.valueOf(i2));
                     }
-                    HashMap hashMap = CameraAvailabilityListener.this.cameraDeviceStates;
+                    HashMap map = this.this$0.cameraDeviceStates;
                     LinkedHashMap linkedHashMap = new LinkedHashMap();
-                    for (Map.Entry entry : hashMap.entrySet()) {
-                        int intValue = ((Number) entry.getValue()).intValue();
-                        if (intValue == 1 || intValue == 0) {
+                    for (Map.Entry entry : map.entrySet()) {
+                        int iIntValue = ((Number) entry.getValue()).intValue();
+                        if (iIntValue == 1 || iIntValue == 0) {
                             linkedHashMap.put(entry.getKey(), entry.getValue());
                         }
                     }
                     int size = linkedHashMap.size();
                     if (size <= 0) {
                         if (size == 0 && i2 == 3) {
-                            CameraAvailabilityListener.access$notifyCameraInactive(CameraAvailabilityListener.this);
+                            CameraAvailabilityListener.access$notifyCameraInactive(this.this$0);
                             return;
                         }
                         return;
                     }
-                    ArrayList arrayList = (ArrayList) CameraAvailabilityListener.this.listeners;
+                    ArrayList arrayList = (ArrayList) this.this$0.listeners;
                     int size2 = arrayList.size();
                     int i3 = 0;
                     while (i3 < size2) {

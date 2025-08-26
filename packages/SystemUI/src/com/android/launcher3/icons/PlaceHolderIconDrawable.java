@@ -11,7 +11,6 @@ import android.graphics.drawable.ColorDrawable;
 import androidx.core.graphics.ColorUtils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PlaceHolderIconDrawable extends FastBitmapDrawable {
     public final Path mProgressPath;
@@ -23,18 +22,18 @@ public class PlaceHolderIconDrawable extends FastBitmapDrawable {
         this.mProgressPath = new Path(adaptiveIconDrawable.getIconMask());
         Paint paint = this.mPaint;
         GraphicsUtils$$ExternalSyntheticLambda0 graphicsUtils$$ExternalSyntheticLambda0 = GraphicsUtils.sOnNewBitmapRunnable;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.loadingIconColor});
-        int color = obtainStyledAttributes.getColor(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.loadingIconColor});
+        int color = typedArrayObtainStyledAttributes.getColor(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         paint.setColor(ColorUtils.compositeColors(color, bitmapInfo.color));
     }
 
     @Override // com.android.launcher3.icons.FastBitmapDrawable
     public final void drawInternal(Canvas canvas, Rect rect) {
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.translate(rect.left, rect.top);
         canvas.scale(rect.width() / 100.0f, rect.height() / 100.0f);
         canvas.drawPath(this.mProgressPath, this.mPaint);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 }

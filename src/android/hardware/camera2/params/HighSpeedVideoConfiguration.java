@@ -21,15 +21,15 @@ public final class HighSpeedVideoConfiguration {
             throw new IllegalArgumentException("fpsMax must be at least 120");
         }
         this.mFpsMax = i4;
-        int checkArgumentPositive = Preconditions.checkArgumentPositive(i, "width must be positive");
-        this.mWidth = checkArgumentPositive;
-        int checkArgumentPositive2 = Preconditions.checkArgumentPositive(i2, "height must be positive");
-        this.mHeight = checkArgumentPositive2;
-        int checkArgumentPositive3 = Preconditions.checkArgumentPositive(i3, "fpsMin must be positive");
-        this.mFpsMin = checkArgumentPositive3;
-        this.mSize = new Size(checkArgumentPositive, checkArgumentPositive2);
+        int iCheckArgumentPositive = Preconditions.checkArgumentPositive(i, "width must be positive");
+        this.mWidth = iCheckArgumentPositive;
+        int iCheckArgumentPositive2 = Preconditions.checkArgumentPositive(i2, "height must be positive");
+        this.mHeight = iCheckArgumentPositive2;
+        int iCheckArgumentPositive3 = Preconditions.checkArgumentPositive(i3, "fpsMin must be positive");
+        this.mFpsMin = iCheckArgumentPositive3;
+        this.mSize = new Size(iCheckArgumentPositive, iCheckArgumentPositive2);
         this.mBatchSizeMax = Preconditions.checkArgumentPositive(i5, "batchSizeMax must be positive");
-        this.mFpsRange = new Range<>(Integer.valueOf(checkArgumentPositive3), Integer.valueOf(i4));
+        this.mFpsRange = new Range<>(Integer.valueOf(iCheckArgumentPositive3), Integer.valueOf(i4));
     }
 
     public int getWidth() {

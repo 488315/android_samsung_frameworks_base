@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SnapHelper extends RecyclerView.OnFlingListener {
     public RecyclerView mRecyclerView;
@@ -76,12 +75,12 @@ public abstract class SnapHelper extends RecyclerView.OnFlingListener {
                     if (recyclerView == null) {
                         return;
                     }
-                    int[] calculateDistanceToFinalSnap = snapHelper.calculateDistanceToFinalSnap(recyclerView.mLayout, view);
-                    int i = calculateDistanceToFinalSnap[0];
-                    int i2 = calculateDistanceToFinalSnap[1];
-                    int calculateTimeForDeceleration = calculateTimeForDeceleration(Math.max(Math.abs(i), Math.abs(i2)));
-                    if (calculateTimeForDeceleration > 0) {
-                        action.update(i, i2, calculateTimeForDeceleration, this.mDecelerateInterpolator);
+                    int[] iArrCalculateDistanceToFinalSnap = snapHelper.calculateDistanceToFinalSnap(recyclerView.mLayout, view);
+                    int i = iArrCalculateDistanceToFinalSnap[0];
+                    int i2 = iArrCalculateDistanceToFinalSnap[1];
+                    int iCalculateTimeForDeceleration = calculateTimeForDeceleration(Math.max(Math.abs(i), Math.abs(i2)));
+                    if (iCalculateTimeForDeceleration > 0) {
+                        action.update(i, i2, iCalculateTimeForDeceleration, this.mDecelerateInterpolator);
                     }
                 }
             };
@@ -95,16 +94,16 @@ public abstract class SnapHelper extends RecyclerView.OnFlingListener {
 
     public final void snapToTargetExistingView() {
         RecyclerView.LayoutManager layoutManager;
-        View findSnapView;
+        View viewFindSnapView;
         RecyclerView recyclerView = this.mRecyclerView;
-        if (recyclerView == null || (layoutManager = recyclerView.mLayout) == null || (findSnapView = findSnapView(layoutManager)) == null) {
+        if (recyclerView == null || (layoutManager = recyclerView.mLayout) == null || (viewFindSnapView = findSnapView(layoutManager)) == null) {
             return;
         }
-        int[] calculateDistanceToFinalSnap = calculateDistanceToFinalSnap(layoutManager, findSnapView);
-        int i = calculateDistanceToFinalSnap[0];
-        if (i == 0 && calculateDistanceToFinalSnap[1] == 0) {
+        int[] iArrCalculateDistanceToFinalSnap = calculateDistanceToFinalSnap(layoutManager, viewFindSnapView);
+        int i = iArrCalculateDistanceToFinalSnap[0];
+        if (i == 0 && iArrCalculateDistanceToFinalSnap[1] == 0) {
             return;
         }
-        this.mRecyclerView.smoothScrollBy(i, calculateDistanceToFinalSnap[1]);
+        this.mRecyclerView.smoothScrollBy(i, iArrCalculateDistanceToFinalSnap[1]);
     }
 }

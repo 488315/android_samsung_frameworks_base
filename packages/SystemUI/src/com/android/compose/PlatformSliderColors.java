@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlatformSliderColors {
     public final long disabledIconColor;
@@ -34,7 +33,7 @@ public final class PlatformSliderColors {
         PlatformSliderColors platformSliderColors = (PlatformSliderColors) obj;
         long j = platformSliderColors.trackColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.trackColor, j) && ULong.m3427equalsimpl0(this.indicatorColor, platformSliderColors.indicatorColor) && ULong.m3427equalsimpl0(this.iconColor, platformSliderColors.iconColor) && ULong.m3427equalsimpl0(this.labelColorOnIndicator, platformSliderColors.labelColorOnIndicator) && ULong.m3427equalsimpl0(this.labelColorOnTrack, platformSliderColors.labelColorOnTrack) && ULong.m3427equalsimpl0(this.disabledTrackColor, platformSliderColors.disabledTrackColor) && ULong.m3427equalsimpl0(this.disabledIndicatorColor, platformSliderColors.disabledIndicatorColor) && ULong.m3427equalsimpl0(this.disabledIconColor, platformSliderColors.disabledIconColor) && ULong.m3427equalsimpl0(this.disabledLabelColor, platformSliderColors.disabledLabelColor);
+        return ULong.m3447equalsimpl0(this.trackColor, j) && ULong.m3447equalsimpl0(this.indicatorColor, platformSliderColors.indicatorColor) && ULong.m3447equalsimpl0(this.iconColor, platformSliderColors.iconColor) && ULong.m3447equalsimpl0(this.labelColorOnIndicator, platformSliderColors.labelColorOnIndicator) && ULong.m3447equalsimpl0(this.labelColorOnTrack, platformSliderColors.labelColorOnTrack) && ULong.m3447equalsimpl0(this.disabledTrackColor, platformSliderColors.disabledTrackColor) && ULong.m3447equalsimpl0(this.disabledIndicatorColor, platformSliderColors.disabledIndicatorColor) && ULong.m3447equalsimpl0(this.disabledIconColor, platformSliderColors.disabledIconColor) && ULong.m3447equalsimpl0(this.disabledLabelColor, platformSliderColors.disabledLabelColor);
     }
 
     public final int hashCode() {
@@ -44,20 +43,20 @@ public final class PlatformSliderColors {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.trackColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.indicatorColor);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.iconColor);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.labelColorOnIndicator);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.labelColorOnTrack);
-        String m462toStringimpl6 = Color.m462toStringimpl(this.disabledTrackColor);
-        String m462toStringimpl7 = Color.m462toStringimpl(this.disabledIndicatorColor);
-        String m462toStringimpl8 = Color.m462toStringimpl(this.disabledIconColor);
-        String m462toStringimpl9 = Color.m462toStringimpl(this.disabledLabelColor);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("PlatformSliderColors(trackColor=", m462toStringimpl, ", indicatorColor=", m462toStringimpl2, ", iconColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", labelColorOnIndicator=", m462toStringimpl4, ", labelColorOnTrack=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl5, ", disabledTrackColor=", m462toStringimpl6, ", disabledIndicatorColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl7, ", disabledIconColor=", m462toStringimpl8, ", disabledLabelColor=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, m462toStringimpl9, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.trackColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.indicatorColor);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.iconColor);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.labelColorOnIndicator);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.labelColorOnTrack);
+        String strM464toStringimpl6 = Color.m464toStringimpl(this.disabledTrackColor);
+        String strM464toStringimpl7 = Color.m464toStringimpl(this.disabledIndicatorColor);
+        String strM464toStringimpl8 = Color.m464toStringimpl(this.disabledIconColor);
+        String strM464toStringimpl9 = Color.m464toStringimpl(this.disabledLabelColor);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("PlatformSliderColors(trackColor=", strM464toStringimpl, ", indicatorColor=", strM464toStringimpl2, ", iconColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", labelColorOnIndicator=", strM464toStringimpl4, ", labelColorOnTrack=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl5, ", disabledTrackColor=", strM464toStringimpl6, ", disabledIndicatorColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl7, ", disabledIconColor=", strM464toStringimpl8, ", disabledLabelColor=");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl9, ")");
     }
 
     private PlatformSliderColors(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9) {

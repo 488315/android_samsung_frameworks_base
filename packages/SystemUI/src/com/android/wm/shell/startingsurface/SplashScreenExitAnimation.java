@@ -2,6 +2,7 @@ package com.android.wm.shell.startingsurface;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.view.SurfaceControl;
 import android.view.View;
@@ -10,7 +11,6 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.systemui.R;
 import com.android.wm.shell.shared.TransactionPool;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashScreenExitAnimation implements Animator.AnimatorListener {
     public final int mAnimationDuration;
@@ -27,7 +27,7 @@ public class SplashScreenExitAnimation implements Animator.AnimatorListener {
     public final SplashScreenView mSplashScreenView;
     public final TransactionPool mTransactionPool;
 
-    public SplashScreenExitAnimation(Context context, SplashScreenView splashScreenView, SurfaceControl surfaceControl, Rect rect, int i, TransactionPool transactionPool, Runnable runnable, float f) {
+    public SplashScreenExitAnimation(Context context, SplashScreenView splashScreenView, SurfaceControl surfaceControl, Rect rect, int i, TransactionPool transactionPool, Runnable runnable, float f) throws Resources.NotFoundException {
         Rect rect2 = new Rect();
         this.mFirstWindowFrame = rect2;
         this.mSplashScreenView = splashScreenView;

@@ -8,13 +8,11 @@ import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScrimLogger {
     public static final String TAG;
     public final LogBuffer buffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,16 +34,16 @@ public final class ScrimLogger {
     }
 
     public final void d(String str, String str2, Object obj) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "::");
-        m.append(TAG);
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "::");
+        sbM.append(TAG);
+        String string = sbM.toString();
         LogLevel logLevel = LogLevel.DEBUG;
         ScrimLogger$$ExternalSyntheticLambda0 scrimLogger$$ExternalSyntheticLambda0 = new ScrimLogger$$ExternalSyntheticLambda0();
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain(sb, logLevel, scrimLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(string, logLevel, scrimLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str2;
         logMessageImpl.str2 = obj.toString();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

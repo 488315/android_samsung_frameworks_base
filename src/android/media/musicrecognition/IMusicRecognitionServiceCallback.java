@@ -53,9 +53,9 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMusicRecognitionServiceCallback)) {
-                return (IMusicRecognitionServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMusicRecognitionServiceCallback)) {
+                return (IMusicRecognitionServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -90,9 +90,9 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onRecognitionSucceeded(mediaMetadata, bundle);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRecognitionFailed(readInt);
+                onRecognitionFailed(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,26 +117,26 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
 
             @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
             public void onRecognitionSucceeded(MediaMetadata mediaMetadata, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(mediaMetadata, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(mediaMetadata, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
             public void onRecognitionFailed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

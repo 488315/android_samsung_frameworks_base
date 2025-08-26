@@ -51,9 +51,9 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioDeviceVolumeDispatcher)) {
-                return (IAudioDeviceVolumeDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioDeviceVolumeDispatcher)) {
+                return (IAudioDeviceVolumeDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -90,10 +90,10 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
             } else if (i == 2) {
                 AudioDeviceAttributes audioDeviceAttributes2 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                 VolumeInfo volumeInfo2 = (VolumeInfo) parcel.readTypedObject(VolumeInfo.CREATOR);
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                dispatchDeviceVolumeAdjusted(audioDeviceAttributes2, volumeInfo2, readInt, readInt2);
+                dispatchDeviceVolumeAdjusted(audioDeviceAttributes2, volumeInfo2, i3, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,29 +118,29 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
 
             @Override // android.media.IAudioDeviceVolumeDispatcher
             public void dispatchDeviceVolumeChanged(AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeTypedObject(volumeInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeTypedObject(volumeInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioDeviceVolumeDispatcher
             public void dispatchDeviceVolumeAdjusted(AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeTypedObject(volumeInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeTypedObject(volumeInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

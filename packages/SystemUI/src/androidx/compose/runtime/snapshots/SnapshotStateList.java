@@ -16,12 +16,10 @@ import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMutableList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SnapshotStateList<T> implements StateObject, List<T>, RandomAccess, KMutableList {
     public StateListStateRecord firstStateRecord;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateListStateRecord<T> extends StateRecord {
         public PersistentList list;
         public int modification;
@@ -85,8 +83,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final boolean add(Object obj) {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -95,24 +93,24 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentList add = persistentList.add(obj);
-            if (add.equals(persistentList)) {
+            PersistentList persistentListAdd = persistentList.add(obj);
+            if (persistentListAdd.equals(persistentList)) {
                 return false;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i, add, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i, persistentListAdd, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return true;
     }
 
     @Override // java.util.List
     public final boolean addAll(final int i, final Collection collection) {
-        return mutateBoolean(new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotStateList$addAll$1
+        return mutateBoolean(new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotStateList.addAll.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -120,7 +118,7 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(((List) obj).addAll(i, collection));
             }
         });
@@ -128,12 +126,12 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
 
     @Override // java.util.List, java.util.Collection
     public final void clear() {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         StateListStateRecord stateListStateRecord = this.firstStateRecord;
         synchronized (SnapshotKt.lock) {
             Snapshot.Companion.getClass();
-            currentSnapshot = SnapshotKt.currentSnapshot();
-            StateListStateRecord stateListStateRecord2 = (StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord, this, currentSnapshot);
+            snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+            StateListStateRecord stateListStateRecord2 = (StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord, this, snapshotCurrentSnapshot);
             synchronized (SnapshotStateListKt.sync) {
                 SmallPersistentVector.Companion.getClass();
                 stateListStateRecord2.list = SmallPersistentVector.EMPTY;
@@ -141,7 +139,7 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 stateListStateRecord2.structuralChange++;
             }
         }
-        SnapshotKt.notifyWrite(currentSnapshot, this);
+        SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
     }
 
     @Override // java.util.List, java.util.Collection
@@ -200,9 +198,9 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final boolean mutateBoolean(Function1 function1) {
         int i;
         PersistentList persistentList;
-        Object mo779invoke;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Object objMo781invoke;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -211,21 +209,21 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentVectorBuilder builder = persistentList.builder();
-            mo779invoke = function1.mo779invoke(builder);
-            PersistentList build = builder.build();
-            if (Intrinsics.areEqual(build, persistentList)) {
+            PersistentVectorBuilder persistentVectorBuilderBuilder = persistentList.builder();
+            objMo781invoke = function1.mo781invoke(persistentVectorBuilderBuilder);
+            PersistentList persistentListBuild = persistentVectorBuilderBuilder.build();
+            if (Intrinsics.areEqual(persistentListBuild, persistentList)) {
                 break;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i, build, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i, persistentListBuild, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
-        return ((Boolean) mo779invoke).booleanValue();
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
+        return ((Boolean) objMo781invoke).booleanValue();
     }
 
     @Override // androidx.compose.runtime.snapshots.StateObject
@@ -238,8 +236,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final Object remove(int i) {
         int i2;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         Object obj = get(i);
         do {
             synchronized (SnapshotStateListKt.sync) {
@@ -249,18 +247,18 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentList removeAt = persistentList.removeAt(i);
-            if (Intrinsics.areEqual(removeAt, persistentList)) {
+            PersistentList persistentListRemoveAt = persistentList.removeAt(i);
+            if (Intrinsics.areEqual(persistentListRemoveAt, persistentList)) {
                 break;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i2, removeAt, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i2, persistentListRemoveAt, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return obj;
     }
 
@@ -268,8 +266,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final boolean removeAll(Collection collection) {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -278,24 +276,24 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentList removeAll = ((AbstractPersistentList) persistentList).removeAll(collection);
-            if (Intrinsics.areEqual(removeAll, persistentList)) {
+            PersistentList persistentListRemoveAll = ((AbstractPersistentList) persistentList).removeAll(collection);
+            if (Intrinsics.areEqual(persistentListRemoveAll, persistentList)) {
                 return false;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i, removeAll, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i, persistentListRemoveAll, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return true;
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean retainAll(final Collection collection) {
-        return mutateBoolean(new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotStateList$retainAll$1
+        return mutateBoolean(new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotStateList.retainAll.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -303,7 +301,7 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(((List) obj).retainAll(collection));
             }
         });
@@ -313,8 +311,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final Object set(int i, Object obj) {
         int i2;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         Object obj2 = get(i);
         do {
             synchronized (SnapshotStateListKt.sync) {
@@ -331,11 +329,11 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i2, persistentList2, false);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i2, persistentList2, false);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return obj2;
     }
 
@@ -365,8 +363,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final boolean addAll(Collection collection) {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -375,18 +373,18 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentList addAll = persistentList.addAll(collection);
-            if (Intrinsics.areEqual(addAll, persistentList)) {
+            PersistentList persistentListAddAll = persistentList.addAll(collection);
+            if (Intrinsics.areEqual(persistentListAddAll, persistentList)) {
                 return false;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i, addAll, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i, persistentListAddAll, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return true;
     }
 
@@ -401,9 +399,9 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     }
 
     public SnapshotStateList(PersistentList<? extends T> persistentList) {
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        StateListStateRecord stateListStateRecord = new StateListStateRecord(currentSnapshot.getSnapshotId(), persistentList);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        StateListStateRecord stateListStateRecord = new StateListStateRecord(snapshotCurrentSnapshot.getSnapshotId(), persistentList);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             stateListStateRecord.next = new StateListStateRecord(1, persistentList);
         }
         this.firstStateRecord = stateListStateRecord;
@@ -413,8 +411,8 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
     public final void add(int i, Object obj) {
         int i2;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -423,26 +421,26 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentList add = persistentList.add(i, obj);
-            if (add.equals(persistentList)) {
+            PersistentList persistentListAdd = persistentList.add(i, obj);
+            if (persistentListAdd.equals(persistentList)) {
                 return;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i2, add, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i2, persistentListAdd, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean remove(Object obj) {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         do {
             synchronized (SnapshotStateListKt.sync) {
                 StateListStateRecord stateListStateRecord = (StateListStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -452,22 +450,22 @@ public final class SnapshotStateList<T> implements StateObject, List<T>, RandomA
             }
             persistentList.getClass();
             AbstractPersistentList abstractPersistentList = (AbstractPersistentList) persistentList;
-            int indexOf = abstractPersistentList.indexOf(obj);
-            PersistentList persistentList2 = abstractPersistentList;
-            if (indexOf != -1) {
-                persistentList2 = abstractPersistentList.removeAt(indexOf);
+            int iIndexOf = abstractPersistentList.indexOf(obj);
+            PersistentList persistentListRemoveAt = abstractPersistentList;
+            if (iIndexOf != -1) {
+                persistentListRemoveAt = abstractPersistentList.removeAt(iIndexOf);
             }
-            if (Intrinsics.areEqual(persistentList2, persistentList)) {
+            if (Intrinsics.areEqual(persistentListRemoveAt, persistentList)) {
                 return false;
             }
             StateListStateRecord stateListStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, currentSnapshot), i, persistentList2, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = attemptUpdate((StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, this, snapshotCurrentSnapshot), i, persistentListRemoveAt, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAttemptUpdate);
         return true;
     }
 }

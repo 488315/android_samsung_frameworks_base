@@ -8,7 +8,6 @@ import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogRingerModel {
     public final List availableModes;
@@ -38,13 +37,13 @@ public final class VolumeDialogRingerModel {
     }
 
     public final int hashCode() {
-        int hashCode = this.availableModes.hashCode() * 31;
+        int iHashCode = this.availableModes.hashCode() * 31;
         Set set = RingerMode.supportedRingerModes;
-        return Boolean.hashCode(this.isSingleVolume) + ReorderTile$$ExternalSyntheticOutline0.m(this.levelMax, ReorderTile$$ExternalSyntheticOutline0.m(this.level, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.currentRingerMode, hashCode, 31), 31, this.isMuted), 31), 31);
+        return Boolean.hashCode(this.isSingleVolume) + ReorderTile$$ExternalSyntheticOutline0.m(this.levelMax, ReorderTile$$ExternalSyntheticOutline0.m(this.level, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.currentRingerMode, iHashCode, 31), 31, this.isMuted), 31), 31);
     }
 
     public final String toString() {
-        return "VolumeDialogRingerModel(availableModes=" + this.availableModes + ", currentRingerMode=" + RingerMode.m992toStringimpl(this.currentRingerMode) + ", isMuted=" + this.isMuted + ", level=" + this.level + ", levelMax=" + this.levelMax + ", isSingleVolume=" + this.isSingleVolume + ")";
+        return "VolumeDialogRingerModel(availableModes=" + this.availableModes + ", currentRingerMode=" + RingerMode.m994toStringimpl(this.currentRingerMode) + ", isMuted=" + this.isMuted + ", level=" + this.level + ", levelMax=" + this.levelMax + ", isSingleVolume=" + this.isSingleVolume + ")";
     }
 
     private VolumeDialogRingerModel(List<RingerMode> list, int i, boolean z, int i2, int i3, boolean z2) {

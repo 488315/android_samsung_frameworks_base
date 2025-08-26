@@ -22,7 +22,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CombinedCondition$lazilyEvaluate$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Collection<Condition> $conditions;
@@ -40,12 +39,23 @@ final class CombinedCondition$lazilyEvaluate$1 extends SuspendLambda implements 
         this.this$0 = combinedCondition;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:35:0x006e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final void invokeSuspend$cancelAllExcept(List list, Collection collection, List list2, int i) {
         Object obj;
         int size = list.size();
         for (final int i2 = 0; i2 < size; i2++) {
             if (i2 != i) {
-                if (i != -1) {
+                if (i == -1) {
+                    Job job = (Job) list.get(i2);
+                    if (job != null) {
+                        job.cancel(null);
+                    }
+                    list.set(i2, null);
+                    list2.set(i2, null);
+                } else {
                     Collection collection2 = collection;
                     boolean z = collection2 instanceof List;
                     if (z) {
@@ -54,14 +64,14 @@ final class CombinedCondition$lazilyEvaluate$1 extends SuspendLambda implements 
                         Function1 function1 = new Function1() { // from class: kotlin.collections.CollectionsKt___CollectionsKt$$ExternalSyntheticLambda1
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj2) {
                                 ((Integer) obj2).intValue();
                                 throw new IndexOutOfBoundsException(BackEventCompat$$ExternalSyntheticOutline0.m(new StringBuilder("Collection doesn't contain element at index "), i2, '.'));
                             }
                         };
                         if (!z) {
                             if (i2 < 0) {
-                                function1.mo779invoke(Integer.valueOf(i2));
+                                function1.mo781invoke(Integer.valueOf(i2));
                                 throw null;
                             }
                             int i3 = 0;
@@ -73,49 +83,43 @@ final class CombinedCondition$lazilyEvaluate$1 extends SuspendLambda implements 
                                     i3 = i4;
                                 }
                             }
-                            function1.mo779invoke(Integer.valueOf(i2));
+                            function1.mo781invoke(Integer.valueOf(i2));
                             throw null;
                         }
                         List list3 = (List) collection2;
                         if (i2 < 0 || i2 >= list3.size()) {
-                            function1.mo779invoke(Integer.valueOf(i2));
+                            function1.mo781invoke(Integer.valueOf(i2));
                             throw null;
                         }
                         obj = list3.get(i2);
                     }
-                    if (((Condition) obj).getStartStrategy() != 2) {
+                    if (((Condition) obj).getStartStrategy() == 2) {
                     }
                 }
-                Job job = (Job) list.get(i2);
-                if (job != null) {
-                    job.cancel(null);
-                }
-                list.set(i2, null);
-                list2.set(i2, null);
             }
         }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public static final void invokeSuspend$collectFlow(List list, int i, CombinedCondition combinedCondition, ProducerScope producerScope, List list2, Collection collection, List list3, boolean z) {
-        Boolean bool = null;
+        Boolean boolThreeValuedAndOrOr = null;
         if (!list.isEmpty() && i != -1) {
             list3.set(i, BuildersKt.launch$default(combinedCondition.scope, null, null, new CombinedCondition$lazilyEvaluate$1$collectFlow$1(list, i, list2, combinedCondition, producerScope, list3, collection, z, null), 3));
             return;
         }
-        List filterNotNull = z ? CollectionsKt___CollectionsKt.filterNotNull(list2) : list2;
+        List listFilterNotNull = z ? CollectionsKt___CollectionsKt.filterNotNull(list2) : list2;
         Evaluator evaluator = Evaluator.INSTANCE;
-        List list4 = filterNotNull;
+        List list4 = listFilterNotNull;
         int i2 = combinedCondition.operand;
         evaluator.getClass();
         if (!list4.isEmpty()) {
             if (i2 == 0) {
-                bool = Evaluator.threeValuedAndOrOr(list4, false);
+                boolThreeValuedAndOrOr = Evaluator.threeValuedAndOrOr(list4, false);
             } else if (i2 == 1) {
-                bool = Evaluator.threeValuedAndOrOr(list4, true);
+                boolThreeValuedAndOrOr = Evaluator.threeValuedAndOrOr(list4, true);
             }
         }
-        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(bool);
+        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(boolThreeValuedAndOrOr);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl

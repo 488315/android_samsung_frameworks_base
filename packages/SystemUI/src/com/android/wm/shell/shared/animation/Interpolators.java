@@ -7,7 +7,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
 import androidx.core.animation.PathInterpolator$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Interpolators {
     public static final Interpolator BACK_GESTURE;
@@ -26,10 +25,10 @@ public class Interpolators {
     public static final Interpolator LINEAR_OUT_SLOW_IN = new PathInterpolator(0.0f, 0.0f, 0.2f, 1.0f);
 
     static {
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
-        m.cubicTo(0.05f, 0.0f, 0.133333f, 0.06f, 0.166666f, 0.4f);
-        m.cubicTo(0.208333f, 0.82f, 0.25f, 1.0f, 1.0f, 1.0f);
-        EMPHASIZED = new PathInterpolator(m);
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(0.0f, 0.0f);
+        pathM.cubicTo(0.05f, 0.0f, 0.133333f, 0.06f, 0.166666f, 0.4f);
+        pathM.cubicTo(0.208333f, 0.82f, 0.25f, 1.0f, 1.0f, 1.0f);
+        EMPHASIZED = new PathInterpolator(pathM);
         EMPHASIZED_ACCELERATE = new PathInterpolator(0.3f, 0.0f, 0.8f, 0.15f);
         EMPHASIZED_DECELERATE = new PathInterpolator(0.05f, 0.7f, 0.1f, 1.0f);
         STANDARD_ACCELERATE = new PathInterpolator(0.3f, 0.0f, 1.0f, 1.0f);

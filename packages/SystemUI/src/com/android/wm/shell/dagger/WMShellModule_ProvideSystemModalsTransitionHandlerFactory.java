@@ -13,7 +13,6 @@ import com.android.wm.shell.transition.Transitions;
 import dagger.internal.Provider;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellModule_ProvideSystemModalsTransitionHandlerFactory implements Provider {
     public final Provider animExecutorProvider;
@@ -37,9 +36,9 @@ public final class WMShellModule_ProvideSystemModalsTransitionHandlerFactory imp
     }
 
     public static Optional provideSystemModalsTransitionHandler(Context context, ShellExecutor shellExecutor, ShellExecutor shellExecutor2, ShellInit shellInit, Transitions transitions, DesktopUserRepositories desktopUserRepositories, DesktopModeCompatPolicy desktopModeCompatPolicy, DesktopState desktopState) {
-        Optional of = (((DesktopStateImpl) desktopState).canEnterDesktopMode && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODALS_POLICY.isTrue() && DesktopModeFlags.ENABLE_DESKTOP_SYSTEM_DIALOGS_TRANSITIONS.isTrue()) ? Optional.of(new SystemModalsTransitionHandler(context, shellExecutor, shellExecutor2, shellInit, transitions, desktopUserRepositories, desktopModeCompatPolicy)) : Optional.empty();
-        of.getClass();
-        return of;
+        Optional optionalOf = (((DesktopStateImpl) desktopState).canEnterDesktopMode && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODALS_POLICY.isTrue() && DesktopModeFlags.ENABLE_DESKTOP_SYSTEM_DIALOGS_TRANSITIONS.isTrue()) ? Optional.of(new SystemModalsTransitionHandler(context, shellExecutor, shellExecutor2, shellInit, transitions, desktopUserRepositories, desktopModeCompatPolicy)) : Optional.empty();
+        optionalOf.getClass();
+        return optionalOf;
     }
 
     @Override // javax.inject.Provider

@@ -7,7 +7,6 @@ import com.android.systemui.util.ListenerSet;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarBoundsProvider {
     public final View endSideContent;
@@ -17,11 +16,11 @@ public final class StatusBarBoundsProvider {
     public final StatusBarBoundsProvider$layoutListener$1 layoutListener = new View.OnLayoutChangeListener() { // from class: com.android.systemui.statusbar.layout.StatusBarBoundsProvider$layoutListener$1
         @Override // android.view.View.OnLayoutChangeListener
         public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-            BoundsPair boundsPair = new BoundsPair(ConvenienceExtensionsKt.getBoundsOnScreen(StatusBarBoundsProvider.this.startSideContent), ConvenienceExtensionsKt.getBoundsOnScreen(StatusBarBoundsProvider.this.endSideContent));
-            if (Intrinsics.areEqual(StatusBarBoundsProvider.this.previousBounds, boundsPair)) {
+            BoundsPair boundsPair = new BoundsPair(ConvenienceExtensionsKt.getBoundsOnScreen(this.this$0.startSideContent), ConvenienceExtensionsKt.getBoundsOnScreen(this.this$0.endSideContent));
+            if (Intrinsics.areEqual(this.this$0.previousBounds, boundsPair)) {
                 return;
             }
-            StatusBarBoundsProvider statusBarBoundsProvider = StatusBarBoundsProvider.this;
+            StatusBarBoundsProvider statusBarBoundsProvider = this.this$0;
             statusBarBoundsProvider.previousBounds = boundsPair;
             Iterator<E> it = statusBarBoundsProvider.changeListeners.iterator();
             while (it.hasNext()) {

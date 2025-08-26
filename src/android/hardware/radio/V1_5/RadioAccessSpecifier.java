@@ -165,13 +165,13 @@ public final class RadioAccessSpecifier {
 
         public static final ArrayList<Bands> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Bands> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Bands bands = new Bands();
-                bands.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+                bands.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
                 arrayList.add(bands);
             }
             return arrayList;
@@ -184,10 +184,10 @@ public final class RadioAccessSpecifier {
             if (int8 == 0) {
                 this.hidl_o = new ArrayList();
                 int int32 = hwBlob.getInt32(j + 16);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 8, true);
+                HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 8, true);
                 ((ArrayList) this.hidl_o).clear();
                 while (i < int32) {
-                    ((ArrayList) this.hidl_o).add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+                    ((ArrayList) this.hidl_o).add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
                     i++;
                 }
                 return;
@@ -195,10 +195,10 @@ public final class RadioAccessSpecifier {
             if (int8 == 1) {
                 this.hidl_o = new ArrayList();
                 int int322 = hwBlob.getInt32(j + 16);
-                HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 8, true);
+                HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 8, true);
                 ((ArrayList) this.hidl_o).clear();
                 while (i < int322) {
-                    ((ArrayList) this.hidl_o).add(Integer.valueOf(readEmbeddedBuffer2.getInt32(i * 4)));
+                    ((ArrayList) this.hidl_o).add(Integer.valueOf(embeddedBuffer2.getInt32(i * 4)));
                     i++;
                 }
                 return;
@@ -206,10 +206,10 @@ public final class RadioAccessSpecifier {
             if (int8 == 2) {
                 this.hidl_o = new ArrayList();
                 int int323 = hwBlob.getInt32(j + 16);
-                HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 4, hwBlob.handle(), j + 8, true);
+                HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 4, hwBlob.handle(), j + 8, true);
                 ((ArrayList) this.hidl_o).clear();
                 while (i < int323) {
-                    ((ArrayList) this.hidl_o).add(Integer.valueOf(readEmbeddedBuffer3.getInt32(i * 4)));
+                    ((ArrayList) this.hidl_o).add(Integer.valueOf(embeddedBuffer3.getInt32(i * 4)));
                     i++;
                 }
                 return;
@@ -217,10 +217,10 @@ public final class RadioAccessSpecifier {
             if (int8 == 3) {
                 this.hidl_o = new ArrayList();
                 int int324 = hwBlob.getInt32(j + 16);
-                HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 4, hwBlob.handle(), j + 8, true);
+                HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 4, hwBlob.handle(), j + 8, true);
                 ((ArrayList) this.hidl_o).clear();
                 while (i < int324) {
-                    ((ArrayList) this.hidl_o).add(Integer.valueOf(readEmbeddedBuffer4.getInt32(i * 4)));
+                    ((ArrayList) this.hidl_o).add(Integer.valueOf(embeddedBuffer4.getInt32(i * 4)));
                     i++;
                 }
                 return;
@@ -332,13 +332,13 @@ public final class RadioAccessSpecifier {
 
     public static final ArrayList<RadioAccessSpecifier> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<RadioAccessSpecifier> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             RadioAccessSpecifier radioAccessSpecifier = new RadioAccessSpecifier();
-            radioAccessSpecifier.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            radioAccessSpecifier.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(radioAccessSpecifier);
         }
         return arrayList;
@@ -349,10 +349,10 @@ public final class RadioAccessSpecifier {
         this.bands.readEmbeddedFromParcel(hwParcel, hwBlob, 8 + j);
         long j2 = j + 32;
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j2, true);
         this.channels.clear();
         for (int i = 0; i < int32; i++) {
-            this.channels.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+            this.channels.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
         }
     }
 

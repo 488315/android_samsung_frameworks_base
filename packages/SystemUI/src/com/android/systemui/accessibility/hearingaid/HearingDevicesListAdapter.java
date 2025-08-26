@@ -29,13 +29,11 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import java.util.List;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesListAdapter extends RecyclerView.Adapter {
     public final HearingDeviceItemCallback mCallback;
     public final List mItemList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DeviceItemViewHolder extends RecyclerView.ViewHolder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final View mContainer;
@@ -60,7 +58,6 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface HearingDeviceItemCallback {
     }
 
@@ -85,7 +82,7 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
         view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesListAdapter$DeviceItemViewHolder$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                boolean removeActiveDevice;
+                boolean zRemoveActiveDevice;
                 switch (i2) {
                     case 0:
                         HearingDevicesListAdapter.HearingDeviceItemCallback hearingDeviceItemCallback2 = hearingDeviceItemCallback;
@@ -123,15 +120,15 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
                                     if (hearingAidProfile != null && cachedBluetoothDevice.isConnectedProfile(hearingAidProfile)) {
                                         BluetoothDevice bluetoothDevice3 = cachedBluetoothDevice.mDevice;
                                         if (hearingAidProfile.mBluetoothAdapter == null) {
-                                            removeActiveDevice = false;
+                                            zRemoveActiveDevice = false;
                                         } else {
                                             int mode = ((AudioManager) hearingAidProfile.mContext.getSystemService(AudioManager.class)).getMode();
                                             if (mode != 1 && mode != 2 && mode != 3) {
                                                 i5 = 0;
                                             }
-                                            removeActiveDevice = bluetoothDevice3 == null ? hearingAidProfile.mBluetoothAdapter.removeActiveDevice(i5) : hearingAidProfile.mBluetoothAdapter.setActiveDevice(bluetoothDevice3, i5);
+                                            zRemoveActiveDevice = bluetoothDevice3 == null ? hearingAidProfile.mBluetoothAdapter.removeActiveDevice(i5) : hearingAidProfile.mBluetoothAdapter.setActiveDevice(bluetoothDevice3, i5);
                                         }
-                                        if (removeActiveDevice) {
+                                        if (zRemoveActiveDevice) {
                                             Log.i("CachedBluetoothDevice", "OnPreferenceClickListener: Hearing Aid active device=" + cachedBluetoothDevice);
                                         }
                                     }
@@ -169,10 +166,10 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
                         }
                         Bundle bundle = new Bundle();
                         bundle.putString("device_address", deviceItem3.cachedBluetoothDevice.mDevice.getAddress());
-                        Intent putExtra = new Intent("com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS").setPackage(hearingDevicesDialogDelegate2.mQSSettingsPackageRepository.getSettingsPackageName()).putExtra(":settings:show_fragment_args", bundle);
+                        Intent intentPutExtra = new Intent("com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS").setPackage(hearingDevicesDialogDelegate2.mQSSettingsPackageRepository.getSettingsPackageName()).putExtra(":settings:show_fragment_args", bundle);
                         DialogTransitionAnimator dialogTransitionAnimator = hearingDevicesDialogDelegate2.mDialogTransitionAnimator;
                         dialogTransitionAnimator.getClass();
-                        hearingDevicesDialogDelegate2.mActivityStarter.postStartActivityDismissingKeyguard(putExtra, 0, DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2));
+                        hearingDevicesDialogDelegate2.mActivityStarter.postStartActivityDismissingKeyguard(intentPutExtra, 0, DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2));
                         break;
                 }
             }
@@ -203,7 +200,7 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
         deviceItemViewHolder.mGearView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesListAdapter$DeviceItemViewHolder$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                boolean removeActiveDevice;
+                boolean zRemoveActiveDevice;
                 switch (i4) {
                     case 0:
                         HearingDevicesListAdapter.HearingDeviceItemCallback hearingDeviceItemCallback2 = hearingDeviceItemCallback;
@@ -241,15 +238,15 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
                                     if (hearingAidProfile != null && cachedBluetoothDevice.isConnectedProfile(hearingAidProfile)) {
                                         BluetoothDevice bluetoothDevice3 = cachedBluetoothDevice.mDevice;
                                         if (hearingAidProfile.mBluetoothAdapter == null) {
-                                            removeActiveDevice = false;
+                                            zRemoveActiveDevice = false;
                                         } else {
                                             int mode = ((AudioManager) hearingAidProfile.mContext.getSystemService(AudioManager.class)).getMode();
                                             if (mode != 1 && mode != 2 && mode != 3) {
                                                 i5 = 0;
                                             }
-                                            removeActiveDevice = bluetoothDevice3 == null ? hearingAidProfile.mBluetoothAdapter.removeActiveDevice(i5) : hearingAidProfile.mBluetoothAdapter.setActiveDevice(bluetoothDevice3, i5);
+                                            zRemoveActiveDevice = bluetoothDevice3 == null ? hearingAidProfile.mBluetoothAdapter.removeActiveDevice(i5) : hearingAidProfile.mBluetoothAdapter.setActiveDevice(bluetoothDevice3, i5);
                                         }
-                                        if (removeActiveDevice) {
+                                        if (zRemoveActiveDevice) {
                                             Log.i("CachedBluetoothDevice", "OnPreferenceClickListener: Hearing Aid active device=" + cachedBluetoothDevice);
                                         }
                                     }
@@ -287,10 +284,10 @@ public class HearingDevicesListAdapter extends RecyclerView.Adapter {
                         }
                         Bundle bundle = new Bundle();
                         bundle.putString("device_address", deviceItem3.cachedBluetoothDevice.mDevice.getAddress());
-                        Intent putExtra = new Intent("com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS").setPackage(hearingDevicesDialogDelegate2.mQSSettingsPackageRepository.getSettingsPackageName()).putExtra(":settings:show_fragment_args", bundle);
+                        Intent intentPutExtra = new Intent("com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS").setPackage(hearingDevicesDialogDelegate2.mQSSettingsPackageRepository.getSettingsPackageName()).putExtra(":settings:show_fragment_args", bundle);
                         DialogTransitionAnimator dialogTransitionAnimator = hearingDevicesDialogDelegate2.mDialogTransitionAnimator;
                         dialogTransitionAnimator.getClass();
-                        hearingDevicesDialogDelegate2.mActivityStarter.postStartActivityDismissingKeyguard(putExtra, 0, DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2));
+                        hearingDevicesDialogDelegate2.mActivityStarter.postStartActivityDismissingKeyguard(intentPutExtra, 0, DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2));
                         break;
                 }
             }

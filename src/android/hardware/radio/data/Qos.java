@@ -111,17 +111,17 @@ public final class Qos implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (EpsQos) parcel.readTypedObject(EpsQos.CREATOR));
-        } else if (readInt == 2) {
-            _set(readInt, (NrQos) parcel.readTypedObject(NrQos.CREATOR));
+        if (i == 1) {
+            _set(i, (EpsQos) parcel.readTypedObject(EpsQos.CREATOR));
+        } else if (i == 2) {
+            _set(i, (NrQos) parcel.readTypedObject(NrQos.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

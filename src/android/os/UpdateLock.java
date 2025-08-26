@@ -73,47 +73,29 @@ public class UpdateLock {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000a, code lost:
-    
-        if (r0 == 0) goto L6;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void releaseLocked() {
-        /*
-            r2 = this;
-            boolean r0 = r2.mRefCounted
-            if (r0 == 0) goto Lc
-            int r0 = r2.mCount
-            int r0 = r0 + (-1)
-            r2.mCount = r0
-            if (r0 != 0) goto L20
-        Lc:
-            android.os.IUpdateLock r0 = android.os.UpdateLock.sService
-            if (r0 == 0) goto L1d
-            android.os.IBinder r1 = r2.mToken     // Catch: android.os.RemoteException -> L16
-            r0.releaseUpdateLock(r1)     // Catch: android.os.RemoteException -> L16
-            goto L1d
-        L16:
-            java.lang.String r0 = "UpdateLock"
-            java.lang.String r1 = "Unable to contact service to release"
-            android.util.Log.e(r0, r1)
-        L1d:
-            r0 = 0
-            r2.mHeld = r0
-        L20:
-            int r2 = r2.mCount
-            if (r2 < 0) goto L25
-            return
-        L25:
-            java.lang.RuntimeException r2 = new java.lang.RuntimeException
-            java.lang.String r0 = "UpdateLock under-locked"
-            r2.<init>(r0)
-            throw r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.UpdateLock.releaseLocked():void");
+        if (this.mRefCounted) {
+            int i = this.mCount - 1;
+            this.mCount = i;
+            if (i == 0) {
+                IUpdateLock iUpdateLock = sService;
+                if (iUpdateLock != null) {
+                    try {
+                        iUpdateLock.releaseUpdateLock(this.mToken);
+                    } catch (RemoteException unused) {
+                        Log.e(TAG, "Unable to contact service to release");
+                    }
+                }
+                this.mHeld = false;
+            }
+        }
+        if (this.mCount < 0) {
+            throw new RuntimeException("UpdateLock under-locked");
+        }
     }
 
     protected void finalize() throws Throwable {

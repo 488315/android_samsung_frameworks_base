@@ -67,9 +67,9 @@ public interface ITransportSelectorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITransportSelectorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITransportSelectorCallback)) {
-                return (ITransportSelectorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITransportSelectorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITransportSelectorCallback)) {
+                return (ITransportSelectorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,21 +105,21 @@ public interface ITransportSelectorCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IDomainSelector asInterface = IDomainSelector.Stub.asInterface(parcel.readStrongBinder());
+                IDomainSelector iDomainSelectorAsInterface = IDomainSelector.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCreated(asInterface);
+                onCreated(iDomainSelectorAsInterface);
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onWlanSelected(readBoolean);
+                onWlanSelected(z);
             } else if (i == 3) {
-                ITransportSelectorResultCallback asInterface2 = ITransportSelectorResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                ITransportSelectorResultCallback iTransportSelectorResultCallbackAsInterface = ITransportSelectorResultCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onWwanSelectedAsync(asInterface2);
+                onWwanSelectedAsync(iTransportSelectorResultCallbackAsInterface);
             } else if (i == 4) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSelectionTerminated(readInt);
+                onSelectionTerminated(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -144,49 +144,49 @@ public interface ITransportSelectorCallback extends IInterface {
 
             @Override // com.android.internal.telephony.ITransportSelectorCallback
             public void onCreated(IDomainSelector iDomainSelector) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDomainSelector);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDomainSelector);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITransportSelectorCallback
             public void onWlanSelected(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITransportSelectorCallback
             public void onWwanSelectedAsync(ITransportSelectorResultCallback iTransportSelectorResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransportSelectorResultCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransportSelectorResultCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITransportSelectorCallback
             public void onSelectionTerminated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -35,7 +35,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelExpandView extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public int activeStream;
@@ -55,7 +54,6 @@ public final class VolumePanelExpandView extends FrameLayout implements VolumeOb
     public TextView titleView;
     public VolumePanelMotion volumePanelMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,7 +63,6 @@ public final class VolumePanelExpandView extends FrameLayout implements VolumeOb
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -159,7 +156,7 @@ public final class VolumePanelExpandView extends FrameLayout implements VolumeOb
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
                 view.removeOnLayoutChangeListener(this);
-                ((HorizontalScrollView) VolumePanelExpandView.this.requireViewById(R.id.volume_row_container_scroll_view)).fullScroll(66);
+                ((HorizontalScrollView) this.this$0.requireViewById(R.id.volume_row_container_scroll_view)).fullScroll(66);
             }
         });
     }
@@ -225,7 +222,7 @@ public final class VolumePanelExpandView extends FrameLayout implements VolumeOb
         if (imageButton == null) {
             imageButton = null;
         }
-        imageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$onFinishInflate$1
+        imageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView.onFinishInflate.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_SETTINGS_BUTTON_CLICKED), true, VolumePanelExpandView.this.storeInteractor, false);
@@ -233,7 +230,7 @@ public final class VolumePanelExpandView extends FrameLayout implements VolumeOb
         });
         ImageButton imageButton2 = (ImageButton) requireViewById(R.id.volume_live_caption_button);
         this.liveCaptionButton = imageButton2;
-        (imageButton2 != null ? imageButton2 : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$onFinishInflate$2
+        (imageButton2 != null ? imageButton2 : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView.onFinishInflate.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CAPTION_CHANGED), true, VolumePanelExpandView.this.storeInteractor, false);

@@ -20,14 +20,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneContainerPlugin {
     public static final Companion Companion = null;
     public static final Map EvaluatorByFlag = null;
     public final Lazy shadeDisplaysRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +35,6 @@ public final class SceneContainerPlugin {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SceneContainerPluginState {
         public final boolean invisibleDueToOcclusion;
         public final boolean isVisible;
@@ -85,7 +82,7 @@ public final class SceneContainerPlugin {
         Pair pair = new Pair(1073741824L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i) {
@@ -150,7 +147,7 @@ public final class SceneContainerPlugin {
         Pair pair2 = new Pair(4L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i2) {
@@ -215,7 +212,7 @@ public final class SceneContainerPlugin {
         Pair pair3 = new Pair(2048L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i3) {
@@ -280,7 +277,7 @@ public final class SceneContainerPlugin {
         Pair pair4 = new Pair(8L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i4) {
@@ -345,7 +342,7 @@ public final class SceneContainerPlugin {
         Pair pair5 = new Pair(64L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i5) {
@@ -410,7 +407,7 @@ public final class SceneContainerPlugin {
         Pair pair6 = new Pair(512L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i6) {
@@ -475,7 +472,7 @@ public final class SceneContainerPlugin {
         MapsKt__MapsKt.mapOf(pair, pair2, pair3, pair4, pair5, pair6, new Pair(34359738368L, new Function1() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z = false;
                 SceneContainerPlugin.SceneContainerPluginState sceneContainerPluginState = (SceneContainerPlugin.SceneContainerPluginState) obj;
                 switch (i7) {
@@ -543,7 +540,7 @@ public final class SceneContainerPlugin {
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.model.SceneContainerPlugin$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) SceneContainerPlugin.this.shadeDisplaysRepository.get())).displayId;
+                return ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.f$0.shadeDisplaysRepository.get())).displayId;
             }
         });
     }

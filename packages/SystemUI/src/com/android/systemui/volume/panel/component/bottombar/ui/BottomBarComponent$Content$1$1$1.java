@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class BottomBarComponent$Content$1$1$1 extends FunctionReferenceImpl implements Function0 {
     public BottomBarComponent$Content$1$1$1(Object obj) {
@@ -22,7 +21,7 @@ final /* synthetic */ class BottomBarComponent$Content$1$1$1 extends FunctionRef
         bottomBarViewModel.activityStarter.startActivityDismissingKeyguard(new Intent("android.settings.SOUND_SETTINGS"), false, true, false, new ActivityStarter.Callback() { // from class: com.android.systemui.volume.panel.component.bottombar.ui.viewmodel.BottomBarViewModel$onSettingsClicked$1
             @Override // com.android.systemui.plugins.ActivityStarter.Callback
             public final void onActivityStarted(int i) {
-                BottomBarViewModel.this.volumePanelViewModel.volumePanelGlobalStateInteractor.setVisible(false);
+                bottomBarViewModel.volumePanelViewModel.volumePanelGlobalStateInteractor.setVisible(false);
             }
         }, 131072, null, null);
         return Unit.INSTANCE;

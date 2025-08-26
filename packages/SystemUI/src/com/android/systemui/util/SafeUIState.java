@@ -4,7 +4,6 @@ import android.os.ServiceManager;
 import android.util.Slog;
 import com.android.internal.statusbar.IStatusBarService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SafeUIState {
     private static final String TAG = "SafeUIState";
@@ -12,15 +11,15 @@ public class SafeUIState {
 
     /* JADX WARN: Multi-variable type inference failed */
     public static boolean isSysUiSafeModeEnabled() {
-        int i;
+        int iIsSysUiSafeModeEnabled;
         if (sSafeMode == -1) {
             try {
-                i = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar")).isSysUiSafeModeEnabled();
+                iIsSysUiSafeModeEnabled = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar")).isSysUiSafeModeEnabled();
             } catch (Exception e) {
                 Slog.e(TAG, "SAFEMODE Exception occurs! " + e.getMessage());
-                i = 0;
+                iIsSysUiSafeModeEnabled = 0;
             }
-            sSafeMode = i;
+            sSafeMode = iIsSysUiSafeModeEnabled;
         }
         return sSafeMode == 1;
     }

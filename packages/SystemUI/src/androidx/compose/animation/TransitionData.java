@@ -5,7 +5,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransitionData {
     public final ChangeSize changeSize;
@@ -32,13 +31,13 @@ public final class TransitionData {
 
     public final int hashCode() {
         Fade fade = this.fade;
-        int hashCode = (fade == null ? 0 : fade.hashCode()) * 31;
+        int iHashCode = (fade == null ? 0 : fade.hashCode()) * 31;
         Slide slide = this.slide;
-        int hashCode2 = (hashCode + (slide == null ? 0 : slide.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (slide == null ? 0 : slide.hashCode())) * 31;
         ChangeSize changeSize = this.changeSize;
-        int hashCode3 = (hashCode2 + (changeSize == null ? 0 : changeSize.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (changeSize == null ? 0 : changeSize.hashCode())) * 31;
         Scale scale = this.scale;
-        return this.effectsMap.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode3 + (scale != null ? scale.hashCode() : 0)) * 31, 31, this.hold);
+        return this.effectsMap.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode3 + (scale != null ? scale.hashCode() : 0)) * 31, 31, this.hold);
     }
 
     public final String toString() {

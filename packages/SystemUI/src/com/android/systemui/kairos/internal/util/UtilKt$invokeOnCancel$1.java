@@ -13,13 +13,11 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UtilKt$invokeOnCancel$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $block;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.kairos.internal.util.UtilKt$invokeOnCancel$1$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass1(Object obj) {
@@ -28,7 +26,7 @@ public final class UtilKt$invokeOnCancel$1 extends SuspendLambda implements Func
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             ((Function0) this.receiver).invoke();
             return Unit.INSTANCE;
         }

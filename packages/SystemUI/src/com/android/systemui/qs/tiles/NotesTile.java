@@ -32,7 +32,6 @@ import com.android.systemui.qs.tiles.impl.notes.ui.mapper.NotesTileMapper;
 import com.android.systemui.qs.tiles.impl.notes.ui.mapper.NotesTileMapper$$ExternalSyntheticLambda0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NotesTile extends QSTileImpl {
     public final ActivityStarter activityStarter;
@@ -44,7 +43,6 @@ public final class NotesTile extends QSTileImpl {
     public QSTileState tileState;
     public final NotesTileUserActionInteractor userActionInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -92,7 +90,7 @@ public final class NotesTile extends QSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleUpdateState(QSTile.State state, Object obj) {
+    public final void handleUpdateState(QSTile.State state, Object obj) throws Resources.NotFoundException {
         if (!(obj instanceof NotesTileModel)) {
             this.dataInteractor.getClass();
             NotesTileModel notesTileModel = NotesTileModel.INSTANCE;
@@ -105,18 +103,18 @@ public final class NotesTile extends QSTileImpl {
         QSTileUIConfig qSTileUIConfig = this.config.uiConfig;
         NotesTileMapper$$ExternalSyntheticLambda0 notesTileMapper$$ExternalSyntheticLambda0 = new NotesTileMapper$$ExternalSyntheticLambda0(notesTileMapper);
         companion.getClass();
-        QSTileState build = QSTileState.Companion.build(resources, theme, qSTileUIConfig, notesTileMapper$$ExternalSyntheticLambda0);
-        this.tileState = build;
+        QSTileState qSTileStateBuild = QSTileState.Companion.build(resources, theme, qSTileUIConfig, notesTileMapper$$ExternalSyntheticLambda0);
+        this.tileState = qSTileStateBuild;
         if (state != null) {
-            state.state = build.activationState.getLegacyState();
+            state.state = qSTileStateBuild.activationState.getLegacyState();
             QSTileState qSTileState = this.tileState;
             if (qSTileState == null) {
                 qSTileState = null;
             }
             Integer num = ((Icon.Loaded) qSTileState.icon).res;
-            int intValue = num != null ? num.intValue() : R.drawable.ic_qs_notes;
+            int iIntValue = num != null ? num.intValue() : R.drawable.ic_qs_notes;
             int i = QsInCompose.$r8$clinit;
-            state.icon = QSTileImpl.ResourceIcon.get(intValue);
+            state.icon = QSTileImpl.ResourceIcon.get(iIntValue);
             QSTileState qSTileState2 = this.tileState;
             state.label = (qSTileState2 == null ? null : qSTileState2).label;
             state.contentDescription = (qSTileState2 == null ? null : qSTileState2).contentDescription;

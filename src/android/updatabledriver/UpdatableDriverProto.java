@@ -279,7 +279,7 @@ public final class UpdatableDriverProto {
 
         @Override // com.android.framework.protobuf.GeneratedMessageLite
         protected final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke, Object obj, Object obj2) {
-            Parser parser;
+            Parser defaultInstanceBasedParser;
             int i = AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
             AnonymousClass1 anonymousClass1 = null;
             switch (i) {
@@ -292,18 +292,18 @@ public final class UpdatableDriverProto {
                 case 4:
                     return DEFAULT_INSTANCE;
                 case 5:
-                    Parser<Denylist> parser2 = PARSER;
-                    if (parser2 != null) {
-                        return parser2;
+                    Parser<Denylist> parser = PARSER;
+                    if (parser != null) {
+                        return parser;
                     }
                     synchronized (Denylist.class) {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     }
-                    return parser;
+                    return defaultInstanceBasedParser;
                 case 6:
                     return (byte) 1;
                 case 7:
@@ -581,7 +581,7 @@ public final class UpdatableDriverProto {
 
         @Override // com.android.framework.protobuf.GeneratedMessageLite
         protected final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke, Object obj, Object obj2) {
-            Parser parser;
+            Parser defaultInstanceBasedParser;
             int i = AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
             AnonymousClass1 anonymousClass1 = null;
             switch (i) {
@@ -594,18 +594,18 @@ public final class UpdatableDriverProto {
                 case 4:
                     return DEFAULT_INSTANCE;
                 case 5:
-                    Parser<Denylists> parser2 = PARSER;
-                    if (parser2 != null) {
-                        return parser2;
+                    Parser<Denylists> parser = PARSER;
+                    if (parser != null) {
+                        return parser;
                     }
                     synchronized (Denylists.class) {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     }
-                    return parser;
+                    return defaultInstanceBasedParser;
                 case 6:
                     return (byte) 1;
                 case 7:

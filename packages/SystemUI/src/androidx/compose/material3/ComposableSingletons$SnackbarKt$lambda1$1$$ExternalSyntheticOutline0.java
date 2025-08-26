@@ -2,7 +2,6 @@ package androidx.compose.material3;
 
 import androidx.compose.ui.graphics.vector.PathBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* renamed from: androidx.compose.material3.ComposableSingletons$SnackbarKt$lambda-1$1$$ExternalSyntheticOutline0, reason: invalid class name */
 /* loaded from: classes.dex */
 public abstract /* synthetic */ class ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0 {

@@ -11,18 +11,28 @@ import com.android.compose.animation.scene.transformation.SharedElementTransform
 import com.android.compose.animation.scene.transformation.Transformation;
 import com.android.compose.animation.scene.transformation.TransformationMatcher;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt__CollectionsJVMKt;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
+import kotlin.collections.EmptySet;
 import kotlin.collections.builders.ListBuilder;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 import kotlinx.coroutines.BuildersKt;
@@ -31,7 +41,6 @@ import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableSceneTransitionLayoutStateImpl implements MutableSceneTransitionLayoutState {
     public Function1 canChangeScene;
@@ -48,119 +57,89 @@ public final class MutableSceneTransitionLayoutStateImpl implements MutableScene
     public final MutableState transitionStates$delegate;
     public SceneTransitions transitions;
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MutableSceneTransitionLayoutStateImpl(com.android.compose.animation.scene.SceneKey r19, androidx.compose.material3.MotionScheme r20, com.android.compose.animation.scene.SceneTransitions r21, java.util.Set r22, kotlin.jvm.functions.Function1 r23, kotlin.jvm.functions.Function1 r24, kotlin.jvm.functions.Function1 r25, kotlin.jvm.functions.Function2 r26, kotlin.jvm.functions.Function1 r27, kotlin.jvm.functions.Function1 r28, boolean r29, int r30, kotlin.jvm.internal.DefaultConstructorMarker r31) {
-        /*
-            r18 = this;
-            r0 = r30
-            r1 = 1
-            r2 = 0
-            r3 = r0 & 4
-            if (r3 == 0) goto L1a
-            com.android.compose.animation.scene.SceneTransitionsBuilderImpl r3 = new com.android.compose.animation.scene.SceneTransitionsBuilderImpl
-            r3.<init>()
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            com.android.compose.animation.scene.SceneTransitions r4 = new com.android.compose.animation.scene.SceneTransitions
-            java.util.List r5 = r3.transitionSpecs
-            com.android.compose.animation.scene.DefaultInterruptionHandler r3 = r3.interruptionHandler
-            r4.<init>(r5, r3)
-            r9 = r4
-            goto L1c
-        L1a:
-            r9 = r21
-        L1c:
-            r3 = r0 & 8
-            if (r3 == 0) goto L24
-            kotlin.collections.EmptySet r3 = kotlin.collections.EmptySet.INSTANCE
-            r10 = r3
-            goto L26
-        L24:
-            r10 = r22
-        L26:
-            r3 = r0 & 16
-            if (r3 == 0) goto L31
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0 r3 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0
-            r3.<init>(r2)
-            r11 = r3
-            goto L33
-        L31:
-            r11 = r23
-        L33:
-            r3 = r0 & 32
-            if (r3 == 0) goto L3e
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0 r3 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0
-            r3.<init>(r1)
-            r12 = r3
-            goto L40
-        L3e:
-            r12 = r24
-        L40:
-            r3 = r0 & 64
-            if (r3 == 0) goto L4b
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0 r3 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0
-            r3.<init>(r1)
-            r13 = r3
-            goto L4d
-        L4b:
-            r13 = r25
-        L4d:
-            r1 = r0 & 128(0x80, float:1.8E-43)
-            if (r1 == 0) goto L58
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda2 r1 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda2
-            r1.<init>()
-            r14 = r1
-            goto L5a
-        L58:
-            r14 = r26
-        L5a:
-            r1 = r0 & 256(0x100, float:3.59E-43)
-            if (r1 == 0) goto L66
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0 r1 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0
-            r3 = 2
-            r1.<init>(r3)
-            r15 = r1
-            goto L68
-        L66:
-            r15 = r27
-        L68:
-            r1 = r0 & 512(0x200, float:7.17E-43)
-            if (r1 == 0) goto L75
-            com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0 r1 = new com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0
-            r3 = 3
-            r1.<init>(r3)
-            r16 = r1
-            goto L77
-        L75:
-            r16 = r28
-        L77:
-            r0 = r0 & 1024(0x400, float:1.435E-42)
-            if (r0 == 0) goto L84
-            r17 = r2
-        L7d:
-            r6 = r18
-            r7 = r19
-            r8 = r20
-            goto L87
-        L84:
-            r17 = r29
-            goto L7d
-        L87:
-            r6.<init>(r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl.<init>(com.android.compose.animation.scene.SceneKey, androidx.compose.material3.MotionScheme, com.android.compose.animation.scene.SceneTransitions, java.util.Set, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    /* renamed from: com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$startTransition$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return MutableSceneTransitionLayoutStateImpl.this.startTransition(null, false, this);
+        }
+    }
+
+    /* renamed from: com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$startTransitionImmediately$1, reason: invalid class name and case insensitive filesystem */
+    final class C07681 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $chain;
+        final /* synthetic */ TransitionState.Transition $transition;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C07681(TransitionState.Transition transition, boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$transition = transition;
+            this.$chain = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return MutableSceneTransitionLayoutStateImpl.this.new C07681(this.$transition, this.$chain, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C07681) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = MutableSceneTransitionLayoutStateImpl.this;
+                TransitionState.Transition transition = this.$transition;
+                boolean z = this.$chain;
+                this.label = 1;
+                if (mutableSceneTransitionLayoutStateImpl.startTransition(transition, z, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    public MutableSceneTransitionLayoutStateImpl(SceneKey sceneKey, MotionScheme motionScheme, SceneTransitions sceneTransitions, Set set, Function1 function1, Function1 function12, Function1 function13, Function2 function2, Function1 function14, Function1 function15, boolean z, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        SceneTransitions sceneTransitions2;
+        if ((i & 4) != 0) {
+            SceneTransitionsBuilderImpl sceneTransitionsBuilderImpl = new SceneTransitionsBuilderImpl();
+            Unit unit = Unit.INSTANCE;
+            sceneTransitions2 = new SceneTransitions(sceneTransitionsBuilderImpl.transitionSpecs, sceneTransitionsBuilderImpl.interruptionHandler);
+        } else {
+            sceneTransitions2 = sceneTransitions;
+        }
+        this(sceneKey, motionScheme, sceneTransitions2, (i & 8) != 0 ? EmptySet.INSTANCE : set, (i & 16) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0(0) : function1, (i & 32) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0(1) : function12, (i & 64) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0(1) : function13, (i & 128) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda2() : function2, (i & 256) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0(2) : function14, (i & 512) != 0 ? new MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda0(3) : function15, (i & 1024) != 0 ? false : z);
     }
 
     public final void checkThread$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout() {
-        Thread currentThread = Thread.currentThread();
-        if (currentThread == this.creationThread) {
+        Thread threadCurrentThread = Thread.currentThread();
+        if (threadCurrentThread == this.creationThread) {
             return;
         }
-        throw new IllegalStateException(StringsKt__IndentKt.trimIndent("\n                    Only the original thread that created a SceneTransitionLayoutState can mutate it\n                      Expected: " + this.creationThread.getName() + "\n                      Current: " + currentThread.getName() + "\n                ").toString());
+        throw new IllegalStateException(StringsKt__IndentKt.trimIndent("\n                    Only the original thread that created a SceneTransitionLayoutState can mutate it\n                      Expected: " + this.creationThread.getName() + "\n                      Current: " + threadCurrentThread.getName() + "\n                ").toString());
     }
 
     public final void finishTransition(TransitionState.Transition transition) {
@@ -251,24 +230,93 @@ public final class MutableSceneTransitionLayoutStateImpl implements MutableScene
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r8v10 */
     /* JADX WARN: Type inference failed for: r8v5, types: [java.lang.Object, kotlin.Unit] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object startTransition(com.android.compose.animation.scene.content.state.TransitionState.Transition r9, boolean r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            Method dump skipped, instructions count: 245
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl.startTransition(com.android.compose.animation.scene.content.state.TransitionState$Transition, boolean, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object startTransition(TransitionState.Transition transition, boolean z, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        ?? r8;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                Log.i("SceneTransitionLayoutState", "startTransition(transition=" + transition + ", chain=" + z + ")");
+                checkThread$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout();
+                TransitionState transitionState = getTransitionState();
+                transition.currentSceneWhenTransitionStarted = transitionState.getCurrentScene();
+                transition.currentOverlaysWhenTransitionStarted = transitionState.getCurrentOverlays();
+                SceneTransitions sceneTransitions = this.transitions;
+                TransitionKey key = transition.getKey();
+                LinkedHashMap linkedHashMap = (LinkedHashMap) sceneTransitions.transitionCache;
+                ContentKey contentKey = transition.fromContent;
+                Object linkedHashMap2 = linkedHashMap.get(contentKey);
+                if (linkedHashMap2 == null) {
+                    linkedHashMap2 = new LinkedHashMap();
+                    linkedHashMap.put(contentKey, linkedHashMap2);
+                }
+                Map map = (Map) linkedHashMap2;
+                ContentKey contentKey2 = transition.toContent;
+                Object linkedHashMap3 = map.get(contentKey2);
+                if (linkedHashMap3 == null) {
+                    linkedHashMap3 = new LinkedHashMap();
+                    map.put(contentKey2, linkedHashMap3);
+                }
+                Map map2 = (Map) linkedHashMap3;
+                Object objFindSpec = map2.get(key);
+                if (objFindSpec == null) {
+                    objFindSpec = sceneTransitions.findSpec(contentKey, contentKey2, key);
+                    map2.put(key, objFindSpec);
+                }
+                TransitionSpecImpl transitionSpecImpl = (TransitionSpecImpl) objFindSpec;
+                transition._cuj = transitionSpecImpl.cuj;
+                transition.transformationSpec = (TransformationSpecImpl) transitionSpecImpl.transformationSpec.mo781invoke(transition);
+                Function1 function1 = transitionSpecImpl.previewTransformationSpec;
+                transition.previewTransformationSpec = function1 != null ? (TransformationSpecImpl) function1.mo781invoke(transition) : null;
+                startTransitionInternal(transition, z);
+                this.onTransitionStart.mo781invoke(transition);
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = transition;
+                anonymousClass1.label = 1;
+                this = this;
+                if (transition.runInternal$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(anonymousClass1) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                transition = (TransitionState.Transition) anonymousClass1.L$1;
+                MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = (MutableSceneTransitionLayoutStateImpl) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(obj);
+                r8 = mutableSceneTransitionLayoutStateImpl;
+            }
+            r8.finishTransition(transition);
+            r8.onTransitionEnd.mo781invoke(transition);
+            this = Unit.INSTANCE;
+            return this;
+        } catch (Throwable th) {
+            this.finishTransition(transition);
+            this.onTransitionEnd.mo781invoke(transition);
+            throw th;
+        }
     }
 
     public final StandaloneCoroutine startTransitionImmediately(CoroutineScope coroutineScope, TransitionState.Transition transition, boolean z) {
-        return BuildersKt.launch$default(coroutineScope, null, CoroutineStart.UNDISPATCHED, new MutableSceneTransitionLayoutStateImpl$startTransitionImmediately$1(this, transition, z, null), 1);
+        return BuildersKt.launch$default(coroutineScope, null, CoroutineStart.UNDISPATCHED, new C07681(transition, z, null), 1);
     }
 
     public final void startTransitionInternal(TransitionState.Transition transition, boolean z) {
@@ -334,8 +382,8 @@ public final class MutableSceneTransitionLayoutStateImpl implements MutableScene
         this.transformationFactoriesWithElevation$delegate = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                List transitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = MutableSceneTransitionLayoutStateImpl.this.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout();
-                ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                List transitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = this.f$0.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout();
+                ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
                 int size = transitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout.size();
                 for (int i = 0; i < size; i++) {
                     TransitionState transitionState = (TransitionState) transitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout.get(i);
@@ -345,12 +393,12 @@ public final class MutableSceneTransitionLayoutStateImpl implements MutableScene
                         for (int i2 = 0; i2 < size2; i2++) {
                             Transformation.Factory factory = ((TransformationMatcher) list.get(i2)).factory;
                             if ((factory instanceof SharedElementTransformation.Factory) && ((SharedElementTransformation.Factory) factory).elevateInContent != null) {
-                                createListBuilder.add(factory);
+                                listBuilderCreateListBuilder.add(factory);
                             }
                         }
                     }
                 }
-                return createListBuilder.build();
+                return listBuilderCreateListBuilder.build();
             }
         });
         this.finishedTransitions = new LinkedHashSet();

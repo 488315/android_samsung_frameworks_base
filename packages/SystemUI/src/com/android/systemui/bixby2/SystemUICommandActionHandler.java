@@ -39,7 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SystemUICommandActionHandler implements ICommandActionHandler {
     private static final String CAPSULE_ID = "viv.systemApp";
@@ -49,7 +48,7 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
     private final Context mContext;
     SubscreenNotificationController mSubscreenNotificationController;
 
-    public SystemUICommandActionHandler(Context context, AppControlActionInteractor appControlActionInteractor, DeviceControlActionInteractor deviceControlActionInteractor, MusicControlActionInteractor musicControlActionInteractor, NotificationControlActionInteractor notificationControlActionInteractor, ScreenControlActionInteractor screenControlActionInteractor, ShareViaActionInteractor shareViaActionInteractor, SubscreenNotificationController subscreenNotificationController) {
+    public SystemUICommandActionHandler(Context context, AppControlActionInteractor appControlActionInteractor, DeviceControlActionInteractor deviceControlActionInteractor, MusicControlActionInteractor musicControlActionInteractor, NotificationControlActionInteractor notificationControlActionInteractor, ScreenControlActionInteractor screenControlActionInteractor, ShareViaActionInteractor shareViaActionInteractor, SubscreenNotificationController subscreenNotificationController) throws NumberFormatException {
         Log.d(TAG, "SystemUICommandActionHandler()");
         this.mContext = context;
         this.mActionInteractors.add(appControlActionInteractor);
@@ -69,7 +68,7 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
         }
         Sbixby.initialize(context);
         Sbixby sbixby = Sbixby.getInstance();
-        int parseInt = Integer.parseInt(SystemProperties.get("ro.build.version.release"));
+        int i = Integer.parseInt(SystemProperties.get("ro.build.version.release"));
         sbixby.getClass();
         if (TextUtils.isEmpty(CAPSULE_ID)) {
             throw new IllegalArgumentException("capsuleId cannot be null or empty");
@@ -77,7 +76,7 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
         if (Sbixby.appMetaInfoMap == null) {
             Sbixby.appMetaInfoMap = new HashMap();
         }
-        ((HashMap) Sbixby.appMetaInfoMap).put(CAPSULE_ID, new AppMetaInfo(CAPSULE_ID, parseInt));
+        ((HashMap) Sbixby.appMetaInfoMap).put(CAPSULE_ID, new AppMetaInfo(CAPSULE_ID, i));
         updateSbixbyStateChange();
     }
 
@@ -111,11 +110,11 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
                 Object obj = arrayList.get(i);
                 i++;
                 String str = (String) obj;
-                String uri = new Uri.Builder().scheme("command").authority(this.mContext.getPackageName() + ".command").appendPath(str).build().toString();
-                Command.StatelessBuilder statelessBuilder = new Command.StatelessBuilder(uri);
+                String string = new Uri.Builder().scheme("command").authority(this.mContext.getPackageName() + ".command").appendPath(str).build().toString();
+                Command.StatelessBuilder statelessBuilder = new Command.StatelessBuilder(string);
                 statelessBuilder.mTitle = str;
                 statelessBuilder.mStatus = 0;
-                this.mCommandMap.put(uri, statelessBuilder.build());
+                this.mCommandMap.put(string, statelessBuilder.build());
             }
         }
     }
@@ -138,7 +137,7 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
                     JsonParser jsonParser = new JsonParser();
                     JsonArray jsonArray4 = new JsonArray();
                     JsonArray jsonArray5 = new JsonArray();
-                    String str = null;
+                    String string = null;
                     if (!NotiRune.NOTI_SUBSCREEN_ALL || (subscreenDeviceModelParent = SystemUICommandActionHandler.this.mSubscreenNotificationController.mDeviceModel) == null || (subscreenSubRoomNotification = subscreenDeviceModelParent.mSubRoomNotification) == null) {
                         jsonArray = jsonArray4;
                         jsonArray2 = jsonArray5;
@@ -184,12 +183,12 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
                                     JsonObject jsonObject5 = new JsonObject();
                                     JsonArray jsonArray7 = jsonArray5;
                                     int i10 = i8;
-                                    SubscreenNotificationInfo createItemsData = subscreenSubRoomNotification.mNotificationInfoManager.createItemsData((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i8));
-                                    if (createItemsData.mRemoteinput) {
-                                        boolean bixbyNotificationVisible2 = (subscreenSubRoomNotification.mIsShownGroup || subscreenSubRoomNotification.mIsShownDetail) ? subscreenSubRoomNotification.getBixbyNotificationVisible(createItemsData.mKey) : z;
-                                        jsonObject5.addProperty("notiID", createItemsData.mKey);
-                                        jsonObject5.addProperty("notiTitle", createItemsData.getTitle());
-                                        jsonObject5.addProperty("notiAppname", createItemsData.mAppName);
+                                    SubscreenNotificationInfo subscreenNotificationInfoCreateItemsData = subscreenSubRoomNotification.mNotificationInfoManager.createItemsData((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i8));
+                                    if (subscreenNotificationInfoCreateItemsData.mRemoteinput) {
+                                        boolean bixbyNotificationVisible2 = (subscreenSubRoomNotification.mIsShownGroup || subscreenSubRoomNotification.mIsShownDetail) ? subscreenSubRoomNotification.getBixbyNotificationVisible(subscreenNotificationInfoCreateItemsData.mKey) : z;
+                                        jsonObject5.addProperty("notiID", subscreenNotificationInfoCreateItemsData.mKey);
+                                        jsonObject5.addProperty("notiTitle", subscreenNotificationInfoCreateItemsData.getTitle());
+                                        jsonObject5.addProperty("notiAppname", subscreenNotificationInfoCreateItemsData.mAppName);
                                         jsonObject5.addProperty("notiVisible", Boolean.valueOf(bixbyNotificationVisible2));
                                         jsonArray6.add(jsonObject5);
                                         i7++;
@@ -225,9 +224,9 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
                         jsonObject6.addProperty("capsuleId", SystemUICommandActionHandler.CAPSULE_ID);
                         jsonObject6.addProperty("appId", "com.sec.android.app.system");
                         jsonObject6.addProperty("appVersionCode", (Number) 1200004531);
-                        str = jsonObject6.toString();
+                        string = jsonObject6.toString();
                     }
-                    JsonObject jsonObject9 = str != null ? (JsonObject) jsonParser.parse(str) : new JsonObject();
+                    JsonObject jsonObject9 = string != null ? (JsonObject) jsonParser.parse(string) : new JsonObject();
                     jsonObject.addProperty("type", "CloseQuickPanelScreen");
                     jsonObject2.addProperty("panelExpanded", Boolean.valueOf(SystemUICommandActionHandler.this.isPanelBarExpanded()));
                     JsonArray jsonArray10 = jsonArray2;
@@ -268,9 +267,9 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
             String lastPathSegment = Uri.parse(command.mCommandId).getLastPathSegment();
             Iterator<ActionInteractor> it = this.mActionInteractors.iterator();
             while (it.hasNext()) {
-                Command loadStatefulCommandInteractor = it.next().loadStatefulCommandInteractor(lastPathSegment, command);
-                if (loadStatefulCommandInteractor != null) {
-                    return loadStatefulCommandInteractor;
+                Command commandLoadStatefulCommandInteractor = it.next().loadStatefulCommandInteractor(lastPathSegment, command);
+                if (commandLoadStatefulCommandInteractor != null) {
+                    return commandLoadStatefulCommandInteractor;
                 }
             }
         }
@@ -285,9 +284,9 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
     @Override // com.samsung.android.sdk.command.provider.ICommandActionHandler
     public void performCommandAction(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) {
         Log.d(TAG, "performCommandAction(), commandId = " + str);
-        Command loadStatefulCommand = loadStatefulCommand(str);
-        if (loadStatefulCommand != null) {
-            String lastPathSegment = Uri.parse(loadStatefulCommand.mCommandId).getLastPathSegment();
+        Command commandLoadStatefulCommand = loadStatefulCommand(str);
+        if (commandLoadStatefulCommand != null) {
+            String lastPathSegment = Uri.parse(commandLoadStatefulCommand.mCommandId).getLastPathSegment();
             Iterator<ActionInteractor> it = this.mActionInteractors.iterator();
             while (it.hasNext()) {
                 it.next().performCommandActionInteractor(lastPathSegment, commandAction, iCommandActionCallback);
@@ -304,9 +303,9 @@ public class SystemUICommandActionHandler implements ICommandActionHandler {
             String lastPathSegment = Uri.parse(command.mCommandId).getLastPathSegment();
             Iterator<ActionInteractor> it = this.mActionInteractors.iterator();
             while (it.hasNext()) {
-                Command loadStatefulCommandInteractor = it.next().loadStatefulCommandInteractor(lastPathSegment, command, commandAction);
-                if (loadStatefulCommandInteractor != null) {
-                    return loadStatefulCommandInteractor;
+                Command commandLoadStatefulCommandInteractor = it.next().loadStatefulCommandInteractor(lastPathSegment, command, commandAction);
+                if (commandLoadStatefulCommandInteractor != null) {
+                    return commandLoadStatefulCommandInteractor;
                 }
             }
         }

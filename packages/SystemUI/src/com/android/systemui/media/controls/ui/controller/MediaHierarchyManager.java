@@ -50,6 +50,7 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.statusbar.policy.SplitShadeStateController;
 import com.android.systemui.statusbar.policy.SplitShadeStateControllerImpl;
+import com.android.systemui.util.animation.UniqueObjectHostView;
 import com.android.systemui.util.settings.SecureSettings;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -77,7 +78,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaHierarchyManager implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -135,7 +135,6 @@ public final class MediaHierarchyManager implements Dumpable {
     public int crossFadeAnimationEndLocation = -1;
     public Rect targetBounds = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$10, reason: invalid class name */
     final class AnonymousClass10 extends SuspendLambda implements Function2 {
         final /* synthetic */ ShadeInteractor $shadeInteractor;
@@ -170,9 +169,9 @@ public final class MediaHierarchyManager implements Dumpable {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.10.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        float floatValue = ((Number) obj2).floatValue();
-                        if (floatValue >= 1.0f || floatValue <= 0.0f) {
-                            MediaHierarchyManager.this.setTransitionToFullShadeAmount(floatValue);
+                        float fFloatValue = ((Number) obj2).floatValue();
+                        if (fFloatValue >= 1.0f || fFloatValue <= 0.0f) {
+                            mediaHierarchyManager.setTransitionToFullShadeAmount(fFloatValue);
                         }
                         return Unit.INSTANCE;
                     }
@@ -191,7 +190,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$11, reason: invalid class name */
     final class AnonymousClass11 extends SuspendLambda implements Function2 {
         final /* synthetic */ CommunalTransitionViewModel $communalTransitionViewModel;
@@ -199,7 +197,6 @@ public final class MediaHierarchyManager implements Dumpable {
         int label;
         final /* synthetic */ MediaHierarchyManager this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$11$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             /* synthetic */ float F$0;
@@ -232,7 +229,6 @@ public final class MediaHierarchyManager implements Dumpable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$11$4, reason: invalid class name */
         final /* synthetic */ class AnonymousClass4 extends AdaptedFunctionReference implements Function4 {
             public static final AnonymousClass4 INSTANCE = new AnonymousClass4();
@@ -253,7 +249,6 @@ public final class MediaHierarchyManager implements Dumpable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$11$5, reason: invalid class name */
         final class AnonymousClass5 extends SuspendLambda implements Function2 {
             /* synthetic */ Object L$0;
@@ -286,14 +281,14 @@ public final class MediaHierarchyManager implements Dumpable {
                 }
                 ResultKt.throwOnFailure(obj);
                 Triple triple = (Triple) this.L$0;
-                boolean booleanValue = ((Boolean) triple.component1()).booleanValue();
-                boolean booleanValue2 = ((Boolean) triple.component2()).booleanValue();
-                boolean booleanValue3 = ((Boolean) triple.component3()).booleanValue();
+                boolean zBooleanValue = ((Boolean) triple.component1()).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) triple.component2()).booleanValue();
+                boolean zBooleanValue3 = ((Boolean) triple.component3()).booleanValue();
                 MediaHierarchyManager mediaHierarchyManager = this.this$0;
-                mediaHierarchyManager.isCommunalShowing = booleanValue;
+                mediaHierarchyManager.isCommunalShowing = zBooleanValue;
                 boolean z = false;
-                mediaHierarchyManager.onCommunalDreamingAndShadeExpanding = booleanValue && booleanValue2 && booleanValue3;
-                if (booleanValue && !booleanValue2) {
+                mediaHierarchyManager.onCommunalDreamingAndShadeExpanding = zBooleanValue && zBooleanValue2 && zBooleanValue3;
+                if (zBooleanValue && !zBooleanValue2) {
                     z = true;
                 }
                 mediaHierarchyManager.onCommunalNotDreaming = z;
@@ -327,10 +322,10 @@ public final class MediaHierarchyManager implements Dumpable {
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 combine = FlowKt.combine(this.$communalTransitionViewModel.isUmoOnCommunal, this.this$0.keyguardInteractor.isDreaming, FlowKt.distinctUntilChanged(FlowKt.mapLatest(((ShadeInteractorImpl) this.$shadeInteractor).baseShadeInteractor.getShadeExpansion(), new AnonymousClass1(null))), AnonymousClass4.INSTANCE);
+                FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine = FlowKt.combine(this.$communalTransitionViewModel.isUmoOnCommunal, this.this$0.keyguardInteractor.isDreaming, FlowKt.distinctUntilChanged(FlowKt.mapLatest(((ShadeInteractorImpl) this.$shadeInteractor).baseShadeInteractor.getShadeExpansion(), new AnonymousClass1(null))), AnonymousClass4.INSTANCE);
                 AnonymousClass5 anonymousClass5 = new AnonymousClass5(this.this$0, null);
                 this.label = 1;
-                if (FlowKt.collectLatest(combine, anonymousClass5, this) == coroutineSingletons) {
+                if (FlowKt.collectLatest(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine, anonymousClass5, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -343,7 +338,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$5, reason: invalid class name */
     final /* synthetic */ class AnonymousClass5 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass5(Object obj) {
@@ -359,7 +353,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$7, reason: invalid class name */
     final class AnonymousClass7 extends SuspendLambda implements Function2 {
         final /* synthetic */ ShadeInteractor $shadeInteractor;
@@ -389,20 +382,20 @@ public final class MediaHierarchyManager implements Dumpable {
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                Flow isQsBypassingShade = ((ShadeInteractorImpl) this.$shadeInteractor).baseShadeInteractor.isQsBypassingShade();
+                Flow flowIsQsBypassingShade = ((ShadeInteractorImpl) this.$shadeInteractor).baseShadeInteractor.isQsBypassingShade();
                 final MediaHierarchyManager mediaHierarchyManager = this.this$0;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.7.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        MediaHierarchyManager mediaHierarchyManager2 = MediaHierarchyManager.this;
-                        mediaHierarchyManager2.skipQqsOnExpansion = booleanValue;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        MediaHierarchyManager mediaHierarchyManager2 = mediaHierarchyManager;
+                        mediaHierarchyManager2.skipQqsOnExpansion = zBooleanValue;
                         MediaHierarchyManager.updateDesiredLocation$default(mediaHierarchyManager2, false, 3);
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (isQsBypassingShade.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowIsQsBypassingShade.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -415,7 +408,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$8, reason: invalid class name */
     final class AnonymousClass8 extends SuspendLambda implements Function2 {
         final /* synthetic */ ShadeInteractor $shadeInteractor;
@@ -450,9 +442,9 @@ public final class MediaHierarchyManager implements Dumpable {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.8.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        MediaHierarchyManager mediaHierarchyManager2 = MediaHierarchyManager.this;
-                        mediaHierarchyManager2.isAnyShadeFullyExpanded = booleanValue;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        MediaHierarchyManager mediaHierarchyManager2 = mediaHierarchyManager;
+                        mediaHierarchyManager2.isAnyShadeFullyExpanded = zBooleanValue;
                         mediaHierarchyManager2.updateUserVisibility();
                         return Unit.INSTANCE;
                     }
@@ -471,7 +463,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$9, reason: invalid class name */
     final class AnonymousClass9 extends SuspendLambda implements Function2 {
         int label;
@@ -501,9 +492,9 @@ public final class MediaHierarchyManager implements Dumpable {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.9.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        MediaHierarchyManager mediaHierarchyManager2 = MediaHierarchyManager.this;
-                        mediaHierarchyManager2.isPrimaryBouncerShowing = booleanValue;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        MediaHierarchyManager mediaHierarchyManager2 = mediaHierarchyManager;
+                        mediaHierarchyManager2.isPrimaryBouncerShowing = zBooleanValue;
                         mediaHierarchyManager2.updateUserVisibility();
                         return Unit.INSTANCE;
                     }
@@ -522,7 +513,6 @@ public final class MediaHierarchyManager implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -552,29 +542,29 @@ public final class MediaHierarchyManager implements Dumpable {
         this.logger = mediaViewLogger;
         this.lockScreenMediaPlayerUri = secureSettings.getUriFor("media_controls_lock_screen");
         this.statusbarState = sysuiStatusBarStateController.getState();
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$animator$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$animator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float lerp;
-                MediaHierarchyManager mediaHierarchyManager = MediaHierarchyManager.this;
+                float fLerp;
+                MediaHierarchyManager mediaHierarchyManager = this.this$0;
                 int i = MediaHierarchyManager.$r8$clinit;
                 mediaHierarchyManager.updateTargetState();
-                float animatedFraction = ofFloat.getAnimatedFraction();
-                MediaHierarchyManager mediaHierarchyManager2 = MediaHierarchyManager.this;
+                float animatedFraction = valueAnimatorOfFloat.getAnimatedFraction();
+                MediaHierarchyManager mediaHierarchyManager2 = this.this$0;
                 if (mediaHierarchyManager2.isCrossFadeAnimatorRunning) {
-                    mediaHierarchyManager2.animationCrossFadeProgress = MathUtils.lerp(mediaHierarchyManager2.animationStartCrossFadeProgress, 1.0f, ofFloat.getAnimatedFraction());
-                    float f = MediaHierarchyManager.this.animationCrossFadeProgress;
+                    mediaHierarchyManager2.animationCrossFadeProgress = MathUtils.lerp(mediaHierarchyManager2.animationStartCrossFadeProgress, 1.0f, valueAnimatorOfFloat.getAnimatedFraction());
+                    float f = this.this$0.animationCrossFadeProgress;
                     float f2 = f < 0.5f ? 0.0f : 1.0f;
-                    lerp = f <= 0.5f ? 1.0f - (f / 0.5f) : (f - 0.5f) / 0.5f;
+                    fLerp = f <= 0.5f ? 1.0f - (f / 0.5f) : (f - 0.5f) / 0.5f;
                     animatedFraction = f2;
                 } else {
-                    lerp = MathUtils.lerp(mediaHierarchyManager2.animationStartAlpha, 1.0f, ofFloat.getAnimatedFraction());
+                    fLerp = MathUtils.lerp(mediaHierarchyManager2.animationStartAlpha, 1.0f, valueAnimatorOfFloat.getAnimatedFraction());
                 }
-                MediaHierarchyManager mediaHierarchyManager3 = MediaHierarchyManager.this;
+                MediaHierarchyManager mediaHierarchyManager3 = this.this$0;
                 MediaHierarchyManager.interpolateBounds(mediaHierarchyManager3.animationStartBounds, mediaHierarchyManager3.targetBounds, animatedFraction, mediaHierarchyManager3.currentBounds);
-                MediaHierarchyManager mediaHierarchyManager4 = MediaHierarchyManager.this;
+                MediaHierarchyManager mediaHierarchyManager4 = this.this$0;
                 Rect rect = mediaHierarchyManager4.currentClipping;
                 if (mediaHierarchyManager4.animationStartClipping.isEmpty()) {
                     rect.set(mediaHierarchyManager4.targetClipping);
@@ -583,28 +573,28 @@ public final class MediaHierarchyManager implements Dumpable {
                 } else {
                     rect.setIntersect(mediaHierarchyManager4.animationStartClipping, mediaHierarchyManager4.targetClipping);
                 }
-                MediaHierarchyManager mediaHierarchyManager5 = MediaHierarchyManager.this;
-                MediaHierarchyManager.applyState$default(mediaHierarchyManager5, mediaHierarchyManager5.currentBounds, lerp, mediaHierarchyManager5.currentClipping, 4);
+                MediaHierarchyManager mediaHierarchyManager5 = this.this$0;
+                MediaHierarchyManager.applyState$default(mediaHierarchyManager5, mediaHierarchyManager5.currentBounds, fLerp, mediaHierarchyManager5.currentClipping, 4);
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$animator$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$animator$1$2
             public boolean cancelled;
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
                 this.cancelled = true;
-                MediaHierarchyManager mediaHierarchyManager = MediaHierarchyManager.this;
+                MediaHierarchyManager mediaHierarchyManager = this.this$0;
                 mediaHierarchyManager.animationPending = false;
                 View view = mediaHierarchyManager.rootView;
                 if (view != null) {
                     view.removeCallbacks(mediaHierarchyManager.startAnimation);
                 }
-                MediaHierarchyManager.this.isCrossFadeAnimatorRunning = false;
+                this.this$0.isCrossFadeAnimatorRunning = false;
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                MediaHierarchyManager mediaHierarchyManager = MediaHierarchyManager.this;
+                MediaHierarchyManager mediaHierarchyManager = this.this$0;
                 mediaHierarchyManager.isCrossFadeAnimatorRunning = false;
                 if (this.cancelled) {
                     return;
@@ -615,10 +605,10 @@ public final class MediaHierarchyManager implements Dumpable {
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
                 this.cancelled = false;
-                MediaHierarchyManager.this.animationPending = false;
+                this.this$0.animationPending = false;
             }
         });
-        this.animator = ofFloat;
+        this.animator = valueAnimatorOfFloat;
         this.mediaHosts = new MediaHost[6];
         this.previousLocation = -1;
         this.desiredLocation = -1;
@@ -626,7 +616,7 @@ public final class MediaHierarchyManager implements Dumpable {
         this.startAnimation = new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$startAnimation$1
             @Override // java.lang.Runnable
             public final void run() {
-                MediaHierarchyManager.this.animator.start();
+                this.this$0.animator.start();
             }
         };
         this.animationCrossFadeProgress = 1.0f;
@@ -733,9 +723,9 @@ public final class MediaHierarchyManager implements Dumpable {
             @Override // com.android.systemui.dreams.DreamOverlayStateController.Callback
             public final void onStateChanged() {
                 MediaHierarchyManager mediaHierarchyManager = MediaHierarchyManager.this;
-                boolean containsState = mediaHierarchyManager.dreamOverlayStateController.containsState(1);
-                if (mediaHierarchyManager.dreamOverlayActive != containsState) {
-                    mediaHierarchyManager.dreamOverlayActive = containsState;
+                boolean zContainsState = mediaHierarchyManager.dreamOverlayStateController.containsState(1);
+                if (mediaHierarchyManager.dreamOverlayActive != zContainsState) {
+                    mediaHierarchyManager.dreamOverlayActive = zContainsState;
                     MediaHierarchyManager.updateDesiredLocation$default(mediaHierarchyManager, true, 2);
                 }
             }
@@ -774,7 +764,7 @@ public final class MediaHierarchyManager implements Dumpable {
         Function0 function0 = new Function0() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                for (MediaHost mediaHost : MediaHierarchyManager.this.mediaHosts) {
+                for (MediaHost mediaHost : this.f$0.mediaHosts) {
                     if (mediaHost != null) {
                         mediaHost.updateViewVisibility();
                     }
@@ -791,8 +781,8 @@ public final class MediaHierarchyManager implements Dumpable {
         secureSettings.registerContentObserverForUserAsync("media_controls_lock_screen", new ContentObserver(handler) { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$settingsObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z, Uri uri) {
-                if (Intrinsics.areEqual(uri, MediaHierarchyManager.this.lockScreenMediaPlayerUri)) {
-                    MediaHierarchyManager mediaHierarchyManager = MediaHierarchyManager.this;
+                if (Intrinsics.areEqual(uri, this.this$0.lockScreenMediaPlayerUri)) {
+                    MediaHierarchyManager mediaHierarchyManager = this.this$0;
                     mediaHierarchyManager.allowMediaPlayerOnLockScreen = mediaHierarchyManager.secureSettings.getBoolForUser("media_controls_lock_screen", true, -2);
                 }
             }
@@ -811,21 +801,20 @@ public final class MediaHierarchyManager implements Dumpable {
     }
 
     public static void applyState$default(MediaHierarchyManager mediaHierarchyManager, Rect rect, float f, Rect rect2, int i) {
-        int i2;
         boolean z = true;
         boolean z2 = (i & 4) == 0;
         if ((i & 8) != 0) {
             rect2 = MediaHierarchyManagerKt.EMPTY_RECT;
         }
         MediaCarouselController mediaCarouselController = mediaHierarchyManager.mediaCarouselController;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("MediaHierarchyManager#applyState");
         }
         try {
             mediaHierarchyManager.currentBounds.set(rect);
             mediaHierarchyManager.currentClipping = rect2;
-            float f2 = 1.0f;
+            float transformationProgress = 1.0f;
             if (!(mediaHierarchyManager.isTransitioningToFullShade() ? true : mediaHierarchyManager.isCrossFadeAnimatorRunning)) {
                 f = 1.0f;
             }
@@ -838,19 +827,11 @@ public final class MediaHierarchyManager implements Dumpable {
                     z = false;
                 }
             }
-            int i3 = z ? -1 : mediaHierarchyManager.previousLocation;
+            int i2 = z ? -1 : mediaHierarchyManager.previousLocation;
             if (!z) {
-                f2 = mediaHierarchyManager.getTransformationProgress();
+                transformationProgress = mediaHierarchyManager.getTransformationProgress();
             }
-            if (mediaHierarchyManager.isCrossFadeAnimatorRunning) {
-                if (mediaHierarchyManager.animationCrossFadeProgress <= 0.5d && mediaHierarchyManager.previousLocation != -1) {
-                    i2 = mediaHierarchyManager.crossFadeAnimationStartLocation;
-                }
-                i2 = mediaHierarchyManager.crossFadeAnimationEndLocation;
-            } else {
-                i2 = mediaHierarchyManager.desiredLocation;
-            }
-            mediaCarouselController.setCurrentState(i3, i2, f2, z2);
+            mediaCarouselController.setCurrentState(i2, mediaHierarchyManager.isCrossFadeAnimatorRunning ? (((double) mediaHierarchyManager.animationCrossFadeProgress) > 0.5d || mediaHierarchyManager.previousLocation == -1) ? mediaHierarchyManager.crossFadeAnimationEndLocation : mediaHierarchyManager.crossFadeAnimationStartLocation : mediaHierarchyManager.desiredLocation, transformationProgress, z2);
             if (mediaHierarchyManager.currentAttachmentLocation == -1000) {
                 if (!mediaHierarchyManager.currentClipping.isEmpty()) {
                     mediaHierarchyManager.currentBounds.intersect(mediaHierarchyManager.currentClipping);
@@ -860,11 +841,11 @@ public final class MediaHierarchyManager implements Dumpable {
                 viewGroup.setLeftTopRightBottom(rect3.left, rect3.top, rect3.right, rect3.bottom);
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -872,14 +853,14 @@ public final class MediaHierarchyManager implements Dumpable {
     }
 
     public static Rect interpolateBounds(Rect rect, Rect rect2, float f, Rect rect3) {
-        int lerp = (int) MathUtils.lerp(rect.left, rect2.left, f);
-        int lerp2 = (int) MathUtils.lerp(rect.top, rect2.top, f);
-        int lerp3 = (int) MathUtils.lerp(rect.right, rect2.right, f);
-        int lerp4 = (int) MathUtils.lerp(rect.bottom, rect2.bottom, f);
+        int iLerp = (int) MathUtils.lerp(rect.left, rect2.left, f);
+        int iLerp2 = (int) MathUtils.lerp(rect.top, rect2.top, f);
+        int iLerp3 = (int) MathUtils.lerp(rect.right, rect2.right, f);
+        int iLerp4 = (int) MathUtils.lerp(rect.bottom, rect2.bottom, f);
         if (rect3 == null) {
             rect3 = new Rect();
         }
-        rect3.set(lerp, lerp2, lerp3, lerp4);
+        rect3.set(iLerp, iLerp2, iLerp3, iLerp4);
         return rect3;
     }
 
@@ -897,6 +878,11 @@ public final class MediaHierarchyManager implements Dumpable {
         applyState$default(this, this.targetBounds, this.carouselAlpha, this.targetClipping, 4);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:29:0x003c  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x0064  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int calculateLocation() {
         int i;
         MediaHost host;
@@ -907,23 +893,17 @@ public final class MediaHierarchyManager implements Dumpable {
         boolean z2 = (this.onCommunalNotDreaming && this.qsExpansion == 0.0f) || this.onCommunalDreamingAndShadeExpanding;
         if (this.dreamOverlayActive && this.dreamMediaComplicationActive) {
             i = 3;
+        } else if (z2) {
+            i = 4;
         } else {
-            if (!z2) {
-                float f = this.qsExpansion;
-                if ((f > 0.0f && !z) || (f > 0.4f && z)) {
-                    i = 0;
-                } else {
-                    if (!z || !isTransitioningToFullShade() || this.fullShadeTransitionProgress <= 0.5f) {
-                        if (!this.isCommunalShowing) {
-                            if (z && this.allowMediaPlayerOnLockScreen) {
-                                i = 2;
-                            }
-                        }
-                    }
-                    i = 1;
+            float f = this.qsExpansion;
+            if ((f > 0.0f && !z) || (f > 0.4f && z)) {
+                i = 0;
+            } else if (!z || !isTransitioningToFullShade() || this.fullShadeTransitionProgress <= 0.5f) {
+                if (!this.isCommunalShowing) {
+                    i = (z && this.allowMediaPlayerOnLockScreen) ? 2 : 1;
                 }
             }
-            i = 4;
         }
         if ((i != 2 || (((host = getHost(i)) != null && host.state.visible) || this.statusBarStateController.isDozing())) && (i != 2 || this.desiredLocation != 0 || !this.collapsingShadeFromQS)) {
             if (i != 2 && this.desiredLocation == 2 && !this.fullyAwake) {
@@ -960,10 +940,10 @@ public final class MediaHierarchyManager implements Dumpable {
         int i = this.currentAttachmentLocation;
         int i2 = this.desiredLocation;
         MediaHost host = getHost(i2);
-        Boolean valueOf = host != null ? Boolean.valueOf(host.state.visible) : null;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "current attachment: ", ", desired location: ", ", visible ");
-        m.append(valueOf);
-        printWriter.println(m.toString());
+        Boolean boolValueOf = host != null ? Boolean.valueOf(host.state.visible) : null;
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "current attachment: ", ", desired location: ", ", visible ");
+        sbM.append(boolValueOf);
+        printWriter.println(sbM.toString());
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("previous location: ", this.previousLocation, printWriter);
         printWriter.println("bounds: " + this.currentBounds + ", target " + this.targetBounds);
         printWriter.println("clipping: " + this.currentClipping + ", target " + this.targetClipping);
@@ -1039,29 +1019,159 @@ public final class MediaHierarchyManager implements Dumpable {
         return (this.fullShadeTransitionProgress == 0.0f || this.bypassController.getBypassEnabled() || this.statusbarState != 1) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0083 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:16:0x00e7, B:23:0x0038, B:25:0x0047, B:28:0x004d, B:31:0x0054, B:32:0x0073, B:35:0x007d, B:37:0x0083, B:40:0x008b, B:42:0x00a6, B:44:0x00d8, B:46:0x00dc, B:48:0x008f, B:50:0x0095, B:53:0x009c, B:56:0x0065, B:57:0x00e4, B:58:0x00ef, B:63:0x00f8), top: B:4:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d8 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:16:0x00e7, B:23:0x0038, B:25:0x0047, B:28:0x004d, B:31:0x0054, B:32:0x0073, B:35:0x007d, B:37:0x0083, B:40:0x008b, B:42:0x00a6, B:44:0x00d8, B:46:0x00dc, B:48:0x008f, B:50:0x0095, B:53:0x009c, B:56:0x0065, B:57:0x00e4, B:58:0x00ef, B:63:0x00f8), top: B:4:0x000b }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x007c  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x007a  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x007c  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0083 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:54:0x00e7, B:19:0x0038, B:21:0x0047, B:25:0x004d, B:28:0x0054, B:30:0x0073, B:34:0x007d, B:36:0x0083, B:39:0x008b, B:48:0x00a6, B:50:0x00d8, B:52:0x00dc, B:41:0x008f, B:43:0x0095, B:46:0x009c, B:29:0x0065, B:53:0x00e4, B:58:0x00ef, B:62:0x00f8), top: B:69:0x000b }] */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00a4  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00d8 A[Catch: all -> 0x0033, TryCatch #0 {all -> 0x0033, blocks: (B:5:0x000b, B:9:0x0013, B:13:0x0025, B:15:0x002e, B:54:0x00e7, B:19:0x0038, B:21:0x0047, B:25:0x004d, B:28:0x0054, B:30:0x0073, B:34:0x007d, B:36:0x0083, B:39:0x008b, B:48:0x00a6, B:50:0x00d8, B:52:0x00dc, B:41:0x008f, B:43:0x0095, B:46:0x009c, B:29:0x0065, B:53:0x00e4, B:58:0x00ef, B:62:0x00f8), top: B:69:0x000b }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void performTransitionToNewLocation(boolean r7, boolean r8) {
-        /*
-            Method dump skipped, instructions count: 263
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.performTransitionToNewLocation(boolean, boolean):void");
+    public final void performTransitionToNewLocation(boolean z, boolean z2) {
+        int i;
+        View view;
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
+            TraceUtilsKt.beginSlice("MediaHierarchyManager#performTransitionToNewLocation");
+        }
+        try {
+            if (this.previousLocation >= 0 && !z) {
+                MediaHost host = getHost(this.desiredLocation);
+                MediaHost host2 = getHost(this.previousLocation);
+                if (host != null && host2 != null) {
+                    updateTargetState();
+                    if (isCurrentlyInGuidedTransformation()) {
+                        applyTargetStateIfNotAnimating();
+                    } else if (z2) {
+                        boolean z3 = this.isCrossFadeAnimatorRunning;
+                        float f = this.animationCrossFadeProgress;
+                        this.animator.cancel();
+                        if (this.currentAttachmentLocation != this.previousLocation) {
+                            this.animationStartBounds.set(this.currentBounds);
+                            this.animationStartClipping.set(this.currentClipping);
+                            boolean z4 = calculateTransformationType() == 1;
+                            int i2 = this.previousLocation;
+                            if (!z3) {
+                                if (z4) {
+                                    f = (1.0f - this.carouselAlpha) / 2.0f;
+                                }
+                                i = i2;
+                                this.isCrossFadeAnimatorRunning = z4;
+                                this.crossFadeAnimationStartLocation = i;
+                                int i3 = this.desiredLocation;
+                                this.crossFadeAnimationEndLocation = i3;
+                                this.animationStartAlpha = this.carouselAlpha;
+                                this.animationStartCrossFadeProgress = f;
+                                Pair animationParams = getAnimationParams(i2, i3);
+                                long jLongValue = ((Number) animationParams.component1()).longValue();
+                                long jLongValue2 = ((Number) animationParams.component2()).longValue();
+                                ValueAnimator valueAnimator = this.animator;
+                                valueAnimator.setDuration(jLongValue);
+                                valueAnimator.setStartDelay(jLongValue2);
+                                if (!this.animationPending) {
+                                }
+                            } else if (this.currentAttachmentLocation == this.crossFadeAnimationEndLocation) {
+                                f = z4 ? 1.0f - f : 0.0f;
+                                i = i2;
+                                this.isCrossFadeAnimatorRunning = z4;
+                                this.crossFadeAnimationStartLocation = i;
+                                int i32 = this.desiredLocation;
+                                this.crossFadeAnimationEndLocation = i32;
+                                this.animationStartAlpha = this.carouselAlpha;
+                                this.animationStartCrossFadeProgress = f;
+                                Pair animationParams2 = getAnimationParams(i2, i32);
+                                long jLongValue3 = ((Number) animationParams2.component1()).longValue();
+                                long jLongValue22 = ((Number) animationParams2.component2()).longValue();
+                                ValueAnimator valueAnimator2 = this.animator;
+                                valueAnimator2.setDuration(jLongValue3);
+                                valueAnimator2.setStartDelay(jLongValue22);
+                                if (!this.animationPending && (view = this.rootView) != null) {
+                                    this.animationPending = true;
+                                    view.postOnAnimation(this.startAnimation);
+                                }
+                            } else {
+                                i = this.crossFadeAnimationStartLocation;
+                                if (i == this.desiredLocation) {
+                                    f = 1.0f - f;
+                                } else {
+                                    z4 = true;
+                                }
+                                this.isCrossFadeAnimatorRunning = z4;
+                                this.crossFadeAnimationStartLocation = i;
+                                int i322 = this.desiredLocation;
+                                this.crossFadeAnimationEndLocation = i322;
+                                this.animationStartAlpha = this.carouselAlpha;
+                                this.animationStartCrossFadeProgress = f;
+                                Pair animationParams22 = getAnimationParams(i2, i322);
+                                long jLongValue32 = ((Number) animationParams22.component1()).longValue();
+                                long jLongValue222 = ((Number) animationParams22.component2()).longValue();
+                                ValueAnimator valueAnimator22 = this.animator;
+                                valueAnimator22.setDuration(jLongValue32);
+                                valueAnimator22.setStartDelay(jLongValue222);
+                                if (!this.animationPending) {
+                                    this.animationPending = true;
+                                    view.postOnAnimation(this.startAnimation);
+                                }
+                            }
+                        } else {
+                            UniqueObjectHostView uniqueObjectHostView = host2.hostView;
+                            if (uniqueObjectHostView == null) {
+                                uniqueObjectHostView = null;
+                            }
+                            if (uniqueObjectHostView.isAttachedToWindow()) {
+                                this.animationStartBounds.set(host2.getCurrentBounds());
+                                this.animationStartClipping.set(host2.currentClipping);
+                                if (calculateTransformationType() == 1) {
+                                }
+                                int i22 = this.previousLocation;
+                                if (!z3) {
+                                }
+                            } else {
+                                this.animationStartBounds.set(this.currentBounds);
+                                this.animationStartClipping.set(this.currentClipping);
+                                if (calculateTransformationType() == 1) {
+                                }
+                                int i222 = this.previousLocation;
+                                if (!z3) {
+                                }
+                            }
+                        }
+                    } else {
+                        cancelAnimationAndApplyDesiredState();
+                    }
+                    Unit unit = Unit.INSTANCE;
+                    if (zIsEnabled) {
+                        TraceUtilsKt.endSlice();
+                        return;
+                    }
+                    return;
+                }
+                cancelAnimationAndApplyDesiredState();
+                if (zIsEnabled) {
+                    TraceUtilsKt.endSlice();
+                    return;
+                }
+                return;
+            }
+            cancelAnimationAndApplyDesiredState();
+            if (zIsEnabled) {
+                TraceUtilsKt.endSlice();
+            }
+        } catch (Throwable th) {
+            if (zIsEnabled) {
+                TraceUtilsKt.endSlice();
+            }
+            throw th;
+        }
     }
 
     public final void setTransitionToFullShadeAmount(float f) {
-        float saturate = MathUtils.saturate(f / this.distanceForFullShadeTransition);
-        if (this.fullShadeTransitionProgress == saturate) {
+        float fSaturate = MathUtils.saturate(f / this.distanceForFullShadeTransition);
+        if (this.fullShadeTransitionProgress == fSaturate) {
             return;
         }
-        this.fullShadeTransitionProgress = saturate;
+        this.fullShadeTransitionProgress = fSaturate;
         if (this.bypassController.getBypassEnabled()) {
             return;
         }
@@ -1069,7 +1179,7 @@ public final class MediaHierarchyManager implements Dumpable {
             return;
         }
         updateDesiredLocation$default(this, isTransitioningToFullShade() ? true : this.isCrossFadeAnimatorRunning, 2);
-        if (saturate >= 0.0f) {
+        if (fSaturate >= 0.0f) {
             updateTargetState();
             float f2 = this.fullShadeTransitionProgress;
             float f3 = f2 <= 0.5f ? 1.0f - (f2 / 0.5f) : (f2 - 0.5f) / 0.5f;
@@ -1112,124 +1222,49 @@ public final class MediaHierarchyManager implements Dumpable {
         return true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0023, code lost:
-    
-        if (r5 != false) goto L50;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0025  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateDesiredLocation(boolean r11, boolean r12) {
-        /*
-            r10 = this;
-            boolean r1 = android.os.Trace.isEnabled()
-            if (r1 == 0) goto Lb
-            java.lang.String r0 = "MediaHierarchyManager#updateDesiredLocation"
-            com.android.app.tracing.TraceUtilsKt.beginSlice(r0)
-        Lb:
-            int r3 = r10.calculateLocation()     // Catch: java.lang.Throwable -> L2c
-            int r0 = r10.desiredLocation     // Catch: java.lang.Throwable -> L2c
-            r2 = 1
-            r4 = 0
-            if (r3 != r0) goto L25
-            if (r12 == 0) goto La0
-            boolean r5 = r10.goingToSleep     // Catch: java.lang.Throwable -> L2c
-            if (r5 != 0) goto L22
-            boolean r5 = r10.dozeAnimationRunning     // Catch: java.lang.Throwable -> L2c
-            if (r5 == 0) goto L20
-            goto L22
-        L20:
-            r5 = r4
-            goto L23
-        L22:
-            r5 = r2
-        L23:
-            if (r5 != 0) goto La0
-        L25:
-            if (r0 < 0) goto L30
-            if (r3 == r0) goto L30
-            r10.previousLocation = r0     // Catch: java.lang.Throwable -> L2c
-            goto L4c
-        L2c:
-            r0 = move-exception
-            r10 = r0
-            goto La8
-        L30:
-            if (r12 == 0) goto L4c
-            com.android.systemui.statusbar.phone.KeyguardBypassController r12 = r10.bypassController     // Catch: java.lang.Throwable -> L2c
-            boolean r12 = r12.getBypassEnabled()     // Catch: java.lang.Throwable -> L2c
-            if (r12 != 0) goto L40
-            int r12 = r10.statusbarState     // Catch: java.lang.Throwable -> L2c
-            if (r12 != r2) goto L40
-            r12 = r2
-            goto L41
-        L40:
-            r12 = r4
-        L41:
-            if (r3 != 0) goto L4c
-            int r0 = r10.previousLocation     // Catch: java.lang.Throwable -> L2c
-            r5 = 2
-            if (r0 != r5) goto L4c
-            if (r12 != 0) goto L4c
-            r10.previousLocation = r2     // Catch: java.lang.Throwable -> L2c
-        L4c:
-            int r12 = r10.desiredLocation     // Catch: java.lang.Throwable -> L2c
-            r0 = -1
-            if (r12 != r0) goto L53
-            r12 = r2
-            goto L54
-        L53:
-            r12 = r4
-        L54:
-            r10.desiredLocation = r3     // Catch: java.lang.Throwable -> L2c
-            if (r11 != 0) goto L62
-            int r11 = r10.previousLocation     // Catch: java.lang.Throwable -> L2c
-            boolean r11 = r10.shouldAnimateTransition(r3, r11)     // Catch: java.lang.Throwable -> L2c
-            if (r11 == 0) goto L62
-            r5 = r2
-            goto L63
-        L62:
-            r5 = r4
-        L63:
-            int r11 = r10.previousLocation     // Catch: java.lang.Throwable -> L2c
-            kotlin.Pair r11 = r10.getAnimationParams(r11, r3)     // Catch: java.lang.Throwable -> L2c
-            java.lang.Object r0 = r11.component1()     // Catch: java.lang.Throwable -> L2c
-            java.lang.Number r0 = (java.lang.Number) r0     // Catch: java.lang.Throwable -> L2c
-            long r6 = r0.longValue()     // Catch: java.lang.Throwable -> L2c
-            java.lang.Object r11 = r11.component2()     // Catch: java.lang.Throwable -> L2c
-            java.lang.Number r11 = (java.lang.Number) r11     // Catch: java.lang.Throwable -> L2c
-            long r8 = r11.longValue()     // Catch: java.lang.Throwable -> L2c
-            com.android.systemui.media.controls.ui.view.MediaHost r4 = r10.getHost(r3)     // Catch: java.lang.Throwable -> L2c
-            int r11 = r10.calculateTransformationType()     // Catch: java.lang.Throwable -> L2c
-            if (r11 != r2) goto L8f
-            boolean r11 = r10.isCurrentlyInGuidedTransformation()     // Catch: java.lang.Throwable -> L2c
-            if (r11 != 0) goto L8f
-            if (r5 != 0) goto L9d
-        L8f:
-            com.android.systemui.media.controls.ui.controller.MediaViewLogger r11 = r10.logger     // Catch: java.lang.Throwable -> L2c
-            java.lang.String r0 = "no fade"
-            int r2 = r10.currentAttachmentLocation     // Catch: java.lang.Throwable -> L2c
-            r11.logMediaLocation(r2, r3, r0)     // Catch: java.lang.Throwable -> L2c
-            com.android.systemui.media.controls.ui.controller.MediaCarouselController r2 = r10.mediaCarouselController     // Catch: java.lang.Throwable -> L2c
-            r2.onDesiredLocationChanged(r3, r4, r5, r6, r8)     // Catch: java.lang.Throwable -> L2c
-        L9d:
-            r10.performTransitionToNewLocation(r12, r5)     // Catch: java.lang.Throwable -> L2c
-        La0:
-            kotlin.Unit r10 = kotlin.Unit.INSTANCE     // Catch: java.lang.Throwable -> L2c
-            if (r1 == 0) goto La7
-            com.android.app.tracing.TraceUtilsKt.endSlice()
-        La7:
-            return
-        La8:
-            if (r1 == 0) goto Lad
-            com.android.app.tracing.TraceUtilsKt.endSlice()
-        Lad:
-            throw r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager.updateDesiredLocation(boolean, boolean):void");
+    public final void updateDesiredLocation(boolean z, boolean z2) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
+            TraceUtilsKt.beginSlice("MediaHierarchyManager#updateDesiredLocation");
+        }
+        try {
+            int iCalculateLocation = calculateLocation();
+            int i = this.desiredLocation;
+            if (iCalculateLocation != i) {
+                if (i >= 0 && iCalculateLocation != i) {
+                    this.previousLocation = i;
+                } else if (z2) {
+                    boolean z3 = !this.bypassController.getBypassEnabled() && this.statusbarState == 1;
+                    if (iCalculateLocation == 0 && this.previousLocation == 2 && !z3) {
+                        this.previousLocation = 1;
+                    }
+                }
+                boolean z4 = this.desiredLocation == -1;
+                this.desiredLocation = iCalculateLocation;
+                boolean z5 = !z && shouldAnimateTransition(iCalculateLocation, this.previousLocation);
+                Pair animationParams = getAnimationParams(this.previousLocation, iCalculateLocation);
+                long jLongValue = ((Number) animationParams.component1()).longValue();
+                long jLongValue2 = ((Number) animationParams.component2()).longValue();
+                MediaHost host = getHost(iCalculateLocation);
+                if (calculateTransformationType() != 1 || isCurrentlyInGuidedTransformation() || !z5) {
+                    this.logger.logMediaLocation(this.currentAttachmentLocation, iCalculateLocation, "no fade");
+                    this.mediaCarouselController.onDesiredLocationChanged(iCalculateLocation, host, z5, jLongValue, jLongValue2);
+                }
+                performTransitionToNewLocation(z4, z5);
+            } else if (z2) {
+                if (!(this.goingToSleep || this.dozeAnimationRunning)) {
+                }
+            }
+            Unit unit = Unit.INSTANCE;
+            if (zIsEnabled) {
+                TraceUtilsKt.endSlice();
+            }
+        } finally {
+        }
     }
 
     public final void updateTargetState() {
@@ -1259,28 +1294,28 @@ public final class MediaHierarchyManager implements Dumpable {
 
     public final void updateUserVisibility() {
         SysuiStatusBarStateController sysuiStatusBarStateController = this.statusBarStateController;
-        boolean isDozing = sysuiStatusBarStateController.isDozing();
+        boolean zIsDozing = sysuiStatusBarStateController.isDozing();
         KeyguardViewController keyguardViewController = this.keyguardViewController;
         boolean z = false;
-        boolean z2 = (!isDozing && !keyguardViewController.isBouncerShowing() && sysuiStatusBarStateController.getState() == 1 && this.allowMediaPlayerOnLockScreen && sysuiStatusBarStateController.isExpanded() && !this.qsExpanded) || !(sysuiStatusBarStateController.isDozing() || keyguardViewController.isBouncerShowing() || (sysuiStatusBarStateController.getState() != 2 && (sysuiStatusBarStateController.getState() != 1 || !this.qsExpanded))) || ((!sysuiStatusBarStateController.isDozing() && sysuiStatusBarStateController.getState() == 0 && sysuiStatusBarStateController.isExpanded()) || !(!this.isCommunalShowing || this.isPrimaryBouncerShowing || this.isAnyShadeFullyExpanded));
+        boolean z2 = (!zIsDozing && !keyguardViewController.isBouncerShowing() && sysuiStatusBarStateController.getState() == 1 && this.allowMediaPlayerOnLockScreen && sysuiStatusBarStateController.isExpanded() && !this.qsExpanded) || !(sysuiStatusBarStateController.isDozing() || keyguardViewController.isBouncerShowing() || (sysuiStatusBarStateController.getState() != 2 && (sysuiStatusBarStateController.getState() != 1 || !this.qsExpanded))) || ((!sysuiStatusBarStateController.isDozing() && sysuiStatusBarStateController.getState() == 0 && sysuiStatusBarStateController.isExpanded()) || !(!this.isCommunalShowing || this.isPrimaryBouncerShowing || this.isAnyShadeFullyExpanded));
         boolean z3 = this.qsExpanded || this.mediaManager.hasActiveMediaOrRecommendation();
         MediaViewLogger mediaViewLogger = this.logger;
         mediaViewLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         MediaViewLogger$$ExternalSyntheticLambda0 mediaViewLogger$$ExternalSyntheticLambda0 = new MediaViewLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = mediaViewLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MediaView", logLevel, mediaViewLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MediaView", logLevel, mediaViewLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z2;
         logMessageImpl.bool2 = z3;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselController.mediaCarouselScrollHandler;
         if (z2 && z3) {
             z = true;
         }
         if (mediaCarouselScrollHandler.visibleToUser != z) {
             mediaCarouselScrollHandler.visibleToUser = z;
-            mediaCarouselScrollHandler.seekBarUpdateListener.mo779invoke(Boolean.valueOf(z));
+            mediaCarouselScrollHandler.seekBarUpdateListener.mo781invoke(Boolean.valueOf(z));
             mediaCarouselScrollHandler.visibleStateLogger.log(String.valueOf(mediaCarouselScrollHandler.visibleToUser));
         }
     }

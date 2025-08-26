@@ -65,11 +65,11 @@ public abstract class VisualVoicemailService extends Service {
         }
 
         public final void finish() {
-            Message obtain = Message.obtain();
+            Message messageObtain = Message.obtain();
             try {
-                obtain.what = 4;
-                obtain.arg1 = this.mTaskId;
-                this.mReplyTo.send(obtain);
+                messageObtain.what = 4;
+                messageObtain.arg1 = this.mTaskId;
+                this.mReplyTo.send(messageObtain);
             } catch (RemoteException unused) {
                 Log.e(VisualVoicemailService.TAG, "Cannot send MSG_TASK_ENDED, remote handler no longer exist");
             }

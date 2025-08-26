@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.icu.text.DateTimePatternGenerator;
@@ -27,6 +28,7 @@ import android.view.inspector.PropertyReader;
 import android.widget.RemoteViews;
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.Instant;
@@ -146,7 +148,7 @@ public class TextClock extends TextView {
         this.mTicker = new Runnable() { // from class: android.widget.TextClock.2
             @Override // java.lang.Runnable
             public void run() {
-                ZonedDateTime withNano;
+                ZonedDateTime zonedDateTimeWithNano;
                 TextClock.this.removeCallbacks(this);
                 if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
                     return;
@@ -155,11 +157,11 @@ public class TextClock extends TextView {
                 Instant instant = TextClock.this.mTime.toInstant();
                 ZoneId zoneId = TextClock.this.mTime.getTimeZone().toZoneId();
                 if (TextClock.this.mHasSeconds) {
-                    withNano = instant.atZone(zoneId).plusSeconds(1L).withNano(0);
+                    zonedDateTimeWithNano = instant.atZone(zoneId).plusSeconds(1L).withNano(0);
                 } else {
-                    withNano = instant.atZone(zoneId).plusMinutes(1L).withSecond(0).withNano(0);
+                    zonedDateTimeWithNano = instant.atZone(zoneId).plusMinutes(1L).withSecond(0).withNano(0);
                 }
-                long millis = Duration.between(instant, withNano.toInstant()).toMillis();
+                long millis = Duration.between(instant, zonedDateTimeWithNano.toInstant()).toMillis();
                 if (millis <= 0) {
                     millis = 1000;
                 }
@@ -196,7 +198,7 @@ public class TextClock extends TextView {
         this.mTicker = new Runnable() { // from class: android.widget.TextClock.2
             @Override // java.lang.Runnable
             public void run() {
-                ZonedDateTime withNano;
+                ZonedDateTime zonedDateTimeWithNano;
                 TextClock.this.removeCallbacks(this);
                 if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
                     return;
@@ -205,27 +207,27 @@ public class TextClock extends TextView {
                 Instant instant = TextClock.this.mTime.toInstant();
                 ZoneId zoneId = TextClock.this.mTime.getTimeZone().toZoneId();
                 if (TextClock.this.mHasSeconds) {
-                    withNano = instant.atZone(zoneId).plusSeconds(1L).withNano(0);
+                    zonedDateTimeWithNano = instant.atZone(zoneId).plusSeconds(1L).withNano(0);
                 } else {
-                    withNano = instant.atZone(zoneId).plusMinutes(1L).withSecond(0).withNano(0);
+                    zonedDateTimeWithNano = instant.atZone(zoneId).plusMinutes(1L).withSecond(0).withNano(0);
                 }
-                long millis = Duration.between(instant, withNano.toInstant()).toMillis();
+                long millis = Duration.between(instant, zonedDateTimeWithNano.toInstant()).toMillis();
                 if (millis <= 0) {
                     millis = 1000;
                 }
                 TextClock.this.postDelayed(this, millis);
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextClock, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TextClock, attributeSet, obtainStyledAttributes, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextClock, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TextClock, attributeSet, typedArrayObtainStyledAttributes, i, i2);
         try {
-            this.mFormat12 = obtainStyledAttributes.getText(0);
-            this.mFormat24 = obtainStyledAttributes.getText(1);
-            this.mTimeZone = obtainStyledAttributes.getString(2);
-            obtainStyledAttributes.recycle();
+            this.mFormat12 = typedArrayObtainStyledAttributes.getText(0);
+            this.mFormat24 = typedArrayObtainStyledAttributes.getText(1);
+            this.mTimeZone = typedArrayObtainStyledAttributes.getString(2);
+            typedArrayObtainStyledAttributes.recycle();
             init();
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }
@@ -338,18 +340,18 @@ public class TextClock extends TextView {
     /* JADX INFO: Access modifiers changed from: private */
     public void chooseFormat() {
         if (is24HourModeEnabled()) {
-            CharSequence abc = abc(this.mFormat24, this.mFormat12, getBestDateTimePattern("Hm"));
-            this.mFormat = abc;
-            this.mDescFormat = abc(this.mDescFormat24, this.mDescFormat12, abc);
+            CharSequence charSequenceAbc = abc(this.mFormat24, this.mFormat12, getBestDateTimePattern("Hm"));
+            this.mFormat = charSequenceAbc;
+            this.mDescFormat = abc(this.mDescFormat24, this.mDescFormat12, charSequenceAbc);
         } else {
-            CharSequence abc2 = abc(this.mFormat12, this.mFormat24, getBestDateTimePattern("hm"));
-            this.mFormat = abc2;
-            this.mDescFormat = abc(this.mDescFormat12, this.mDescFormat24, abc2);
+            CharSequence charSequenceAbc2 = abc(this.mFormat12, this.mFormat24, getBestDateTimePattern("hm"));
+            this.mFormat = charSequenceAbc2;
+            this.mDescFormat = abc(this.mDescFormat12, this.mDescFormat24, charSequenceAbc2);
         }
         boolean z = this.mHasSeconds;
-        boolean hasSeconds = DateFormat.hasSeconds(this.mFormat);
-        this.mHasSeconds = hasSeconds;
-        if (!this.mShouldRunTicker || z == hasSeconds) {
+        boolean zHasSeconds = DateFormat.hasSeconds(this.mFormat);
+        this.mHasSeconds = zHasSeconds;
+        if (!this.mShouldRunTicker || z == zHasSeconds) {
             return;
         }
         this.mTicker.run();
@@ -437,7 +439,7 @@ public class TextClock extends TextView {
     }
 
     @Override // android.widget.TextView, android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws Resources.NotFoundException, IOException {
         super.encodeProperties(viewHierarchyEncoder);
         CharSequence format12Hour = getFormat12Hour();
         viewHierarchyEncoder.addProperty("format12Hour", format12Hour == null ? null : format12Hour.toString());

@@ -4,6 +4,6 @@
     <shape android:shape="rectangle"
       xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
         <corners android:radius="30.0dip" />
-        <stroke android:width="3.0dip" android:color="@android:color/secondary_text_material_dark" />
+        <stroke android:width="3.0dip" android:color="@android:color/notification_primary_text_color_current" />
     </shape>
 </inset>

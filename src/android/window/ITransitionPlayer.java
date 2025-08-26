@@ -59,9 +59,9 @@ public interface ITransitionPlayer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITransitionPlayer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITransitionPlayer)) {
-                return (ITransitionPlayer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITransitionPlayer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITransitionPlayer)) {
+                return (ITransitionPlayer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,21 +94,21 @@ public interface ITransitionPlayer extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 TransitionInfo transitionInfo = (TransitionInfo) parcel.readTypedObject(TransitionInfo.CREATOR);
                 SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) parcel.readTypedObject(SurfaceControl.Transaction.CREATOR);
                 SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) parcel.readTypedObject(SurfaceControl.Transaction.CREATOR);
                 parcel.enforceNoDataAvail();
-                onTransitionReady(readStrongBinder, transitionInfo, transaction, transaction2);
+                onTransitionReady(strongBinder, transitionInfo, transaction, transaction2);
             } else if (i == 2) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 TransitionRequestInfo transitionRequestInfo = (TransitionRequestInfo) parcel.readTypedObject(TransitionRequestInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                requestStartTransition(readStrongBinder2, transitionRequestInfo);
+                requestStartTransition(strongBinder2, transitionRequestInfo);
             } else if (i == 3) {
-                IBinder readStrongBinder3 = parcel.readStrongBinder();
+                IBinder strongBinder3 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                transitionAborted(readStrongBinder3);
+                transitionAborted(strongBinder3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -133,41 +133,41 @@ public interface ITransitionPlayer extends IInterface {
 
             @Override // android.window.ITransitionPlayer
             public void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(transitionInfo, 0);
-                    obtain.writeTypedObject(transaction, 0);
-                    obtain.writeTypedObject(transaction2, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(transitionInfo, 0);
+                    parcelObtain.writeTypedObject(transaction, 0);
+                    parcelObtain.writeTypedObject(transaction2, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITransitionPlayer
             public void requestStartTransition(IBinder iBinder, TransitionRequestInfo transitionRequestInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(transitionRequestInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(transitionRequestInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITransitionPlayer
             public void transitionAborted(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

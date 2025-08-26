@@ -39,9 +39,9 @@ class KeyStoreCertificateSource implements CertificateSource {
             try {
                 TrustedCertificateIndex trustedCertificateIndex = new TrustedCertificateIndex();
                 ArraySet arraySet = new ArraySet(this.mKeyStore.size());
-                Enumeration<String> aliases = this.mKeyStore.aliases();
-                while (aliases.hasMoreElements()) {
-                    X509Certificate x509Certificate = (X509Certificate) this.mKeyStore.getCertificate(aliases.nextElement());
+                Enumeration<String> enumerationAliases = this.mKeyStore.aliases();
+                while (enumerationAliases.hasMoreElements()) {
+                    X509Certificate x509Certificate = (X509Certificate) this.mKeyStore.getCertificate(enumerationAliases.nextElement());
                     if (x509Certificate != null) {
                         arraySet.add(x509Certificate);
                         trustedCertificateIndex.index(x509Certificate);
@@ -58,32 +58,32 @@ class KeyStoreCertificateSource implements CertificateSource {
     @Override // android.security.net.config.CertificateSource
     public X509Certificate findBySubjectAndPublicKey(X509Certificate x509Certificate) {
         ensureInitialized();
-        java.security.cert.TrustAnchor findBySubjectAndPublicKey = this.mIndex.findBySubjectAndPublicKey(x509Certificate);
-        if (findBySubjectAndPublicKey == null) {
+        java.security.cert.TrustAnchor trustAnchorFindBySubjectAndPublicKey = this.mIndex.findBySubjectAndPublicKey(x509Certificate);
+        if (trustAnchorFindBySubjectAndPublicKey == null) {
             return null;
         }
-        return findBySubjectAndPublicKey.getTrustedCert();
+        return trustAnchorFindBySubjectAndPublicKey.getTrustedCert();
     }
 
     @Override // android.security.net.config.CertificateSource
     public X509Certificate findByIssuerAndSignature(X509Certificate x509Certificate) {
         ensureInitialized();
-        java.security.cert.TrustAnchor findByIssuerAndSignature = this.mIndex.findByIssuerAndSignature(x509Certificate);
-        if (findByIssuerAndSignature == null) {
+        java.security.cert.TrustAnchor trustAnchorFindByIssuerAndSignature = this.mIndex.findByIssuerAndSignature(x509Certificate);
+        if (trustAnchorFindByIssuerAndSignature == null) {
             return null;
         }
-        return findByIssuerAndSignature.getTrustedCert();
+        return trustAnchorFindByIssuerAndSignature.getTrustedCert();
     }
 
     @Override // android.security.net.config.CertificateSource
     public Set<X509Certificate> findAllByIssuerAndSignature(X509Certificate x509Certificate) {
         ensureInitialized();
-        Set findAllByIssuerAndSignature = this.mIndex.findAllByIssuerAndSignature(x509Certificate);
-        if (findAllByIssuerAndSignature.isEmpty()) {
+        Set setFindAllByIssuerAndSignature = this.mIndex.findAllByIssuerAndSignature(x509Certificate);
+        if (setFindAllByIssuerAndSignature.isEmpty()) {
             return Collections.EMPTY_SET;
         }
-        ArraySet arraySet = new ArraySet(findAllByIssuerAndSignature.size());
-        Iterator it = findAllByIssuerAndSignature.iterator();
+        ArraySet arraySet = new ArraySet(setFindAllByIssuerAndSignature.size());
+        Iterator it = setFindAllByIssuerAndSignature.iterator();
         while (it.hasNext()) {
             arraySet.add(((java.security.cert.TrustAnchor) it.next()).getTrustedCert());
         }

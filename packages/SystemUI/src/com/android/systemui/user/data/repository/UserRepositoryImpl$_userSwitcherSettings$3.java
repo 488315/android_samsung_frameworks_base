@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserRepositoryImpl$_userSwitcherSettings$3 extends SuspendLambda implements Function2 {
     int label;
@@ -32,7 +31,7 @@ final class UserRepositoryImpl$_userSwitcherSettings$3 extends SuspendLambda imp
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i != 0) {
@@ -47,7 +46,7 @@ final class UserRepositoryImpl$_userSwitcherSettings$3 extends SuspendLambda imp
         this.label = 1;
         int i2 = UserRepositoryImpl.$r8$clinit;
         userRepositoryImpl.getClass();
-        Object withContext = BuildersKt.withContext(userRepositoryImpl.backgroundDispatcher, new UserRepositoryImpl$getSettings$2(userRepositoryImpl, null), this);
-        return withContext == coroutineSingletons ? coroutineSingletons : withContext;
+        Object objWithContext = BuildersKt.withContext(userRepositoryImpl.backgroundDispatcher, new UserRepositoryImpl$getSettings$2(userRepositoryImpl, null), this);
+        return objWithContext == coroutineSingletons ? coroutineSingletons : objWithContext;
     }
 }

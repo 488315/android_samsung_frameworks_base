@@ -15,7 +15,6 @@ import androidx.appcompat.view.menu.MenuView;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClickListener {
     public MenuAdapter mAdapter;
@@ -27,7 +26,6 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
     public ExpandedMenuView mMenuView;
     public final int mThemeRes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MenuAdapter extends BaseAdapter {
         public int mExpandedIndex = -1;
 
@@ -177,9 +175,9 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
             alertParams.mTitle = menuBuilder.mHeaderTitle;
         }
         alertParams.mOnKeyListener = menuDialogHelper;
-        AlertDialog create = builder.create();
-        menuDialogHelper.mDialog = create;
-        create.setOnDismissListener(menuDialogHelper);
+        AlertDialog alertDialogCreate = builder.create();
+        menuDialogHelper.mDialog = alertDialogCreate;
+        alertDialogCreate.setOnDismissListener(menuDialogHelper);
         WindowManager.LayoutParams attributes = menuDialogHelper.mDialog.getWindow().getAttributes();
         attributes.type = 1003;
         attributes.flags |= 131072;

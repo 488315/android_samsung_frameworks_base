@@ -28,13 +28,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MediaControllerCompat {
     public final MediaControllerImplApi29 mImpl;
     public final Set mRegisteredCallbacks;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaControllerImplApi21 {
         public final MediaController mControllerFwk;
         public final MediaSessionCompat.Token mSessionToken;
@@ -42,7 +40,6 @@ public final class MediaControllerCompat {
         public final List mPendingCallbacks = new ArrayList();
         public final HashMap mCallbackMap = new HashMap();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class ExtraBinderRequestResultReceiver extends ResultReceiver {
             public final WeakReference mMediaControllerImpl;
 
@@ -59,9 +56,9 @@ public final class MediaControllerCompat {
                 }
                 synchronized (mediaControllerImplApi21.mLock) {
                     MediaSessionCompat.Token token = mediaControllerImplApi21.mSessionToken;
-                    IMediaSession asInterface = IMediaSession.Stub.asInterface(bundle.getBinder("android.support.v4.media.session.EXTRA_BINDER"));
+                    IMediaSession iMediaSessionAsInterface = IMediaSession.Stub.asInterface(bundle.getBinder("android.support.v4.media.session.EXTRA_BINDER"));
                     synchronized (token.mLock) {
-                        token.mExtraBinder = asInterface;
+                        token.mExtraBinder = iMediaSessionAsInterface;
                     }
                     MediaSessionCompat.Token token2 = mediaControllerImplApi21.mSessionToken;
                     VersionedParcelable versionedParcelable = ParcelUtils.getVersionedParcelable(bundle);
@@ -73,7 +70,6 @@ public final class MediaControllerCompat {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ExtraCallback extends Callback.StubCompat {
             public ExtraCallback(Callback callback) {
                 super(callback);
@@ -144,7 +140,6 @@ public final class MediaControllerCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaControllerImplApi29 extends MediaControllerImplApi21 {
         public MediaControllerImplApi29(Context context, MediaSessionCompat.Token token) {
             super(context, token);
@@ -163,42 +158,21 @@ public final class MediaControllerCompat {
         this(context, mediaSessionCompat.mImpl.getSessionToken());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlaybackInfo {
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public PlaybackInfo(int r3, int r4, int r5, int r6, int r7) {
-            /*
-                r2 = this;
-                androidx.media.AudioAttributesCompat$Builder r0 = new androidx.media.AudioAttributesCompat$Builder
-                r0.<init>()
-                androidx.media.AudioAttributesImplApi26$Builder r0 = r0.mBuilderImpl
-                android.media.AudioAttributes$Builder r1 = r0.mFwkBuilder
-                r1.setLegacyStreamType(r4)
-                androidx.media.AudioAttributesCompat r4 = new androidx.media.AudioAttributesCompat
-                androidx.media.AudioAttributesImplApi26 r1 = new androidx.media.AudioAttributesImplApi26
-                android.media.AudioAttributes$Builder r0 = r0.mFwkBuilder
-                android.media.AudioAttributes r0 = r0.build()
-                r1.<init>(r0)
-                r4.<init>(r1)
-                r2.<init>(r3, r4, r5, r6, r7)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.support.v4.media.session.MediaControllerCompat.PlaybackInfo.<init>(int, int, int, int, int):void");
+        public PlaybackInfo(int i, int i2, int i3, int i4, int i5) {
+            AudioAttributesImplApi26.Builder builder = new AudioAttributesCompat.Builder().mBuilderImpl;
+            builder.mFwkBuilder.setLegacyStreamType(i2);
+            this(i, new AudioAttributesCompat(new AudioAttributesImplApi26(builder.mFwkBuilder.build())), i3, i4, i5);
         }
 
         public PlaybackInfo(int i, AudioAttributesCompat audioAttributesCompat, int i2, int i3, int i4) {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback implements IBinder.DeathRecipient {
         public MediaControllerImplApi21.ExtraCallback mIControllerCallback;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class MediaControllerCallbackApi21 extends MediaController.Callback {
             public final WeakReference mCallback;
 
@@ -281,7 +255,6 @@ public final class MediaControllerCompat {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class StubCompat extends IMediaControllerCallback.Stub {
             public final WeakReference mCallback;
 

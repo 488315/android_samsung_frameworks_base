@@ -12,7 +12,6 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda5 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -34,27 +33,27 @@ public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda5 imple
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).intValue();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
-                CommunalHubKt.ObserveNewWidgetAddedEffect((List) this.f$0, (LazyGridState) this.f$1, (BaseCommunalViewModel) this.f$2, (Composer) obj, updateChangedFlags);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                CommunalHubKt.ObserveNewWidgetAddedEffect((List) this.f$0, (LazyGridState) this.f$1, (BaseCommunalViewModel) this.f$2, (Composer) obj, iUpdateChangedFlags);
                 break;
             case 1:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
                 BaseCommunalViewModel baseCommunalViewModel = (BaseCommunalViewModel) this.f$2;
                 Modifier modifier = (Modifier) this.f$1;
-                CommunalHubKt.DisabledWidgetPlaceholder((CommunalContentModel.WidgetContent.DisabledWidget) this.f$0, baseCommunalViewModel, modifier, (Composer) obj, updateChangedFlags2);
+                CommunalHubKt.DisabledWidgetPlaceholder((CommunalContentModel.WidgetContent.DisabledWidget) this.f$0, baseCommunalViewModel, modifier, (Composer) obj, iUpdateChangedFlags2);
                 break;
             case 2:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                int iUpdateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
                 ContentScope contentScope = (ContentScope) this.f$0;
                 Modifier modifier2 = (Modifier) this.f$1;
-                CommunalHubKt.Umo((BaseCommunalViewModel) this.f$2, contentScope, modifier2, (Composer) obj, updateChangedFlags3);
+                CommunalHubKt.Umo((BaseCommunalViewModel) this.f$2, contentScope, modifier2, (Composer) obj, iUpdateChangedFlags3);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags4 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
-                CommunalHubKt.SmartspaceContent((RemoteViews.InteractionHandler) this.f$0, (CommunalContentModel.Smartspace) this.f$1, (Modifier) this.f$2, (Composer) obj, updateChangedFlags4);
+                int iUpdateChangedFlags4 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                CommunalHubKt.SmartspaceContent((RemoteViews.InteractionHandler) this.f$0, (CommunalContentModel.Smartspace) this.f$1, (Modifier) this.f$2, (Composer) obj, iUpdateChangedFlags4);
                 break;
         }
         return Unit.INSTANCE;

@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface INotificationSideChannel extends IInterface {
     public static final String DESCRIPTOR = "android$support$v4$app$INotificationSideChannel".replace('$', '.');
@@ -17,11 +16,9 @@ public interface INotificationSideChannel extends IInterface {
 
     void notify(String str, int i, String str2, Notification notification2);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements INotificationSideChannel {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements INotificationSideChannel {
             public final IBinder mRemote;
 
@@ -36,47 +33,47 @@ public interface INotificationSideChannel extends IInterface {
 
             @Override // android.support.v4.app.INotificationSideChannel
             public final void cancel(int i, String str, String str2) {
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.support.v4.app.INotificationSideChannel
             public final void cancelAll(String str) {
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.support.v4.app.INotificationSideChannel
             public final void notify(String str, int i, String str2, Notification notification2) {
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
+                    parcelObtain.writeInterfaceToken(INotificationSideChannel.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
                     if (notification2 != null) {
-                        obtain.writeInt(1);
-                        notification2.writeToParcel(obtain, 0);
+                        parcelObtain.writeInt(1);
+                        notification2.writeToParcel(parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(1, obtain, null, 1);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

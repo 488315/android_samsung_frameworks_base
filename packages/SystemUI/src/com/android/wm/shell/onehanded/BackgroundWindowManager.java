@@ -19,7 +19,6 @@ import android.view.WindowlessWindowManager;
 import android.window.InputTransferToken;
 import androidx.core.view.ViewCompat$$ExternalSyntheticLambda0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BackgroundWindowManager extends WindowlessWindowManager {
     public View mBackgroundView;
@@ -37,9 +36,9 @@ public final class BackgroundWindowManager extends WindowlessWindowManager {
     }
 
     public final SurfaceControl getParentSurface(IWindow iWindow, WindowManager.LayoutParams layoutParams) {
-        SurfaceControl build = new SurfaceControl.Builder().setColorLayer().setBufferSize(this.mDisplayBounds.width(), this.mDisplayBounds.height()).setFormat(3).setOpaque(true).setName("BackgroundWindowManager").setCallsite("BackgroundWindowManager#attachToParentSurface").build();
-        this.mLeash = build;
-        return build;
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setColorLayer().setBufferSize(this.mDisplayBounds.width(), this.mDisplayBounds.height()).setFormat(3).setOpaque(true).setName("BackgroundWindowManager").setCallsite("BackgroundWindowManager#attachToParentSurface").build();
+        this.mLeash = surfaceControlBuild;
+        return surfaceControlBuild;
     }
 
     public final SurfaceControl getSurfaceControl(IWindow iWindow) {

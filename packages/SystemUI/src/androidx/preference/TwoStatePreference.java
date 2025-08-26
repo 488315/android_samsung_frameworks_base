@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.AbsSavedState;
+import android.view.View;
+import android.widget.TextView;
 import androidx.preference.Preference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TwoStatePreference extends Preference {
     public boolean mChecked;
@@ -62,11 +64,11 @@ public abstract class TwoStatePreference extends Preference {
         if (obj == null) {
             obj = Boolean.FALSE;
         }
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         if (shouldPersist()) {
-            booleanValue = this.mPreferenceManager.getSharedPreferences().getBoolean(this.mKey, booleanValue);
+            zBooleanValue = this.mPreferenceManager.getSharedPreferences().getBoolean(this.mKey, zBooleanValue);
         }
-        setChecked(booleanValue);
+        setChecked(zBooleanValue);
     }
 
     public final void setChecked(boolean z) {
@@ -87,67 +89,50 @@ public abstract class TwoStatePreference extends Preference {
         return (this.mDisableDependentsState ? this.mChecked : !this.mChecked) || super.shouldDisableDependents();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0030  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:20:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0030  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0041  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void syncSummaryView(android.view.View r4) {
-        /*
-            r3 = this;
-            boolean r0 = r4 instanceof android.widget.TextView
-            if (r0 != 0) goto L5
-            goto L4c
-        L5:
-            android.widget.TextView r4 = (android.widget.TextView) r4
-            boolean r0 = r3.mChecked
-            r1 = 0
-            if (r0 == 0) goto L1b
-            java.lang.CharSequence r0 = r3.mSummaryOn
-            boolean r0 = android.text.TextUtils.isEmpty(r0)
-            if (r0 != 0) goto L1b
-            java.lang.CharSequence r0 = r3.mSummaryOn
-            r4.setText(r0)
-        L19:
-            r0 = r1
-            goto L2e
-        L1b:
-            boolean r0 = r3.mChecked
-            if (r0 != 0) goto L2d
-            java.lang.CharSequence r0 = r3.mSummaryOff
-            boolean r0 = android.text.TextUtils.isEmpty(r0)
-            if (r0 != 0) goto L2d
-            java.lang.CharSequence r0 = r3.mSummaryOff
-            r4.setText(r0)
-            goto L19
-        L2d:
-            r0 = 1
-        L2e:
-            if (r0 == 0) goto L3e
-            java.lang.CharSequence r3 = r3.getSummary()
-            boolean r2 = android.text.TextUtils.isEmpty(r3)
-            if (r2 != 0) goto L3e
-            r4.setText(r3)
-            r0 = r1
-        L3e:
-            if (r0 != 0) goto L41
-            goto L43
-        L41:
-            r1 = 8
-        L43:
-            int r3 = r4.getVisibility()
-            if (r1 == r3) goto L4c
-            r4.setVisibility(r1)
-        L4c:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.preference.TwoStatePreference.syncSummaryView(android.view.View):void");
+    public final void syncSummaryView(View view) {
+        boolean z;
+        int i;
+        if (!(view instanceof TextView)) {
+            return;
+        }
+        TextView textView = (TextView) view;
+        if (this.mChecked && !TextUtils.isEmpty(this.mSummaryOn)) {
+            textView.setText(this.mSummaryOn);
+        } else {
+            if (this.mChecked || TextUtils.isEmpty(this.mSummaryOff)) {
+                z = true;
+                if (z) {
+                    CharSequence summary = getSummary();
+                    if (!TextUtils.isEmpty(summary)) {
+                        textView.setText(summary);
+                        z = false;
+                    }
+                }
+                i = z ? 8 : 0;
+                if (i == textView.getVisibility()) {
+                    textView.setVisibility(i);
+                    return;
+                }
+                return;
+            }
+            textView.setText(this.mSummaryOff);
+        }
+        z = false;
+        if (z) {
+        }
+        if (z) {
+        }
+        if (i == textView.getVisibility()) {
+        }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends Preference.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.preference.TwoStatePreference.SavedState.1
             @Override // android.os.Parcelable.Creator

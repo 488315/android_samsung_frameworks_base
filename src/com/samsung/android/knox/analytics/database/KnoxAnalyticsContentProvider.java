@@ -52,47 +52,47 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Uri insert(Uri uri, ContentValues contentValues) {
-        Uri insertIntoEvents;
-        long j;
+    public Uri insert(Uri uri, ContentValues contentValues) throws Throwable {
+        Uri uriInsertIntoEvents;
+        long jClearCallingIdentity;
         String str = TAG;
         Log.d(str, "insert()");
         SecurityUtils.enforceProviderCaller(getContext(), getCallingPackage());
-        int match = sUriMatcher.match(uri);
-        if (match == 1) {
-            insertIntoEvents = insertIntoEvents(contentValues);
-        } else if (match == 3) {
-            insertIntoEvents = insertIntoFeaturesBlacklist(contentValues);
-        } else if (match == 4) {
-            insertIntoEvents = insertIntoVersion(contentValues);
-        } else if (match == 5) {
-            insertIntoEvents = insertIntoCleanedEvents(contentValues);
-        } else if (match == 6) {
-            insertIntoEvents = insertIntoFeaturesWhitelist(contentValues);
-        } else if (match == 7) {
-            insertIntoEvents = insertIntoB2CFeatures(contentValues);
+        int iMatch = sUriMatcher.match(uri);
+        if (iMatch == 1) {
+            uriInsertIntoEvents = insertIntoEvents(contentValues);
+        } else if (iMatch == 3) {
+            uriInsertIntoEvents = insertIntoFeaturesBlacklist(contentValues);
+        } else if (iMatch == 4) {
+            uriInsertIntoEvents = insertIntoVersion(contentValues);
+        } else if (iMatch == 5) {
+            uriInsertIntoEvents = insertIntoCleanedEvents(contentValues);
+        } else if (iMatch == 6) {
+            uriInsertIntoEvents = insertIntoFeaturesWhitelist(contentValues);
+        } else if (iMatch == 7) {
+            uriInsertIntoEvents = insertIntoB2CFeatures(contentValues);
         } else {
             Log.d(str, "insert(): no match for URI");
             return null;
         }
-        if (insertIntoEvents == null) {
-            return insertIntoEvents;
+        if (uriInsertIntoEvents == null) {
+            return uriInsertIntoEvents;
         }
-        Log.d(str, "insert(): notifyChange(" + insertIntoEvents.toString() + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(str, "insert(): notifyChange(" + uriInsertIntoEvents.toString() + NavigationBarInflaterView.KEY_CODE_END);
         try {
-            j = Binder.clearCallingIdentity();
-        } catch (Throwable th) {
-            th = th;
-            j = -1;
-        }
-        try {
-            getContext().getContentResolver().notifyChange(insertIntoEvents, null);
-            Binder.restoreCallingIdentity(j);
-            return insertIntoEvents;
+            jClearCallingIdentity = Binder.clearCallingIdentity();
+            try {
+                getContext().getContentResolver().notifyChange(uriInsertIntoEvents, null);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                return uriInsertIntoEvents;
+            } catch (Throwable th) {
+                th = th;
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            Binder.restoreCallingIdentity(j);
-            throw th;
+            jClearCallingIdentity = -1;
         }
     }
 
@@ -126,58 +126,58 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public int delete(Uri uri, String str, String[] strArr) {
-        long deleteFromEvents;
-        long j;
+    public int delete(Uri uri, String str, String[] strArr) throws Throwable {
+        long jDeleteFromEvents;
+        long jClearCallingIdentity;
         String str2 = TAG;
         Log.d(str2, "delete() - " + uri);
         SecurityUtils.enforceProviderCaller(getContext(), getCallingPackage());
         switch (sUriMatcher.match(uri)) {
             case 1:
-                deleteFromEvents = deleteFromEvents(str, strArr, 1);
+                jDeleteFromEvents = deleteFromEvents(str, strArr, 1);
                 break;
             case 2:
             default:
                 Log.d(str2, "delete(): no match for URI");
                 return 0;
             case 3:
-                deleteFromEvents = deleteFromFeaturesBlacklist(str, strArr);
+                jDeleteFromEvents = deleteFromFeaturesBlacklist(str, strArr);
                 break;
             case 4:
-                deleteFromEvents = deleteFromVersion(str, strArr);
+                jDeleteFromEvents = deleteFromVersion(str, strArr);
                 break;
             case 5:
-                deleteFromEvents = deleteFromEvents(str, strArr, 0);
+                jDeleteFromEvents = deleteFromEvents(str, strArr, 0);
                 break;
             case 6:
-                deleteFromEvents = deleteFromFeaturesWhitelist(str, strArr);
+                jDeleteFromEvents = deleteFromFeaturesWhitelist(str, strArr);
                 break;
             case 7:
-                deleteFromEvents = deleteFromB2CFeatures(str, strArr);
+                jDeleteFromEvents = deleteFromB2CFeatures(str, strArr);
                 break;
             case 8:
-                deleteFromEvents = deleteFromAllEventTables();
+                jDeleteFromEvents = deleteFromAllEventTables();
                 break;
         }
-        int i = (int) deleteFromEvents;
+        int i = (int) jDeleteFromEvents;
         if (i <= 0 || uri == null) {
             return i;
         }
         ContentResolver contentResolver = getContext().getContentResolver();
         try {
-            j = Binder.clearCallingIdentity();
-        } catch (Throwable th) {
-            th = th;
-            j = -1;
-        }
-        try {
-            contentResolver.notifyChange(uri, null);
-            Binder.restoreCallingIdentity(j);
-            return i;
+            jClearCallingIdentity = Binder.clearCallingIdentity();
+            try {
+                contentResolver.notifyChange(uri, null);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                return i;
+            } catch (Throwable th) {
+                th = th;
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            Binder.restoreCallingIdentity(j);
-            throw th;
+            jClearCallingIdentity = -1;
         }
     }
 
@@ -195,17 +195,17 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
             case "databaseClean":
                 return callDatabaseClean(str2, bundle);
             case "insertBulkEvents":
-                long addBulkEvents = getDatabaseCryptoAdapter().addBulkEvents(bundle);
-                if (addBulkEvents >= 0) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jAddBulkEvents = getDatabaseCryptoAdapter().addBulkEvents(bundle);
+                if (jAddBulkEvents >= 0) {
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         getContext().getContentResolver().notifyChange(Contract.CONTENT_URI, null);
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
                 Bundle bundle2 = new Bundle();
-                bundle2.putLong("lastEventId", addBulkEvents);
+                bundle2.putLong("lastEventId", jAddBulkEvents);
                 return bundle2;
             case "notifyVersioningCompleted":
                 getDatabaseCryptoAdapter().notifyVersioningCompleted();
@@ -265,19 +265,19 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
 
     private Integer getFinalChunkSize(String str, String[] strArr) {
         Log.d(TAG, "getFinalChunkSize()");
-        Integer valueOf = Contract.Events.Selection.CHUNK_SIZE.equals(str) ? Integer.valueOf(strArr[0]) : null;
-        if (getDatabaseCryptoAdapter().getCompressedEventsCount() == 0 || valueOf == null || valueOf.intValue() % 1000 == 0) {
-            return valueOf;
+        Integer numValueOf = Contract.Events.Selection.CHUNK_SIZE.equals(str) ? Integer.valueOf(strArr[0]) : null;
+        if (getDatabaseCryptoAdapter().getCompressedEventsCount() == 0 || numValueOf == null || numValueOf.intValue() % 1000 == 0) {
+            return numValueOf;
         }
         throw new IllegalArgumentException("query(): Selection argument must be null or multiples of 1000");
     }
 
     private Uri insertIntoEvents(ContentValues contentValues) {
-        long addEvent = getDatabaseCryptoAdapter().addEvent(contentValues);
-        if (addEvent == -1) {
+        long jAddEvent = getDatabaseCryptoAdapter().addEvent(contentValues);
+        if (jAddEvent == -1) {
             return null;
         }
-        return ContentUris.withAppendedId(Contract.Events.CONTENT_URI, addEvent);
+        return ContentUris.withAppendedId(Contract.Events.CONTENT_URI, jAddEvent);
     }
 
     private Uri insertIntoFeaturesBlacklist(ContentValues contentValues) {
@@ -306,149 +306,89 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
 
     private Uri insertIntoVersion(ContentValues contentValues) {
         Log.d(TAG, "insertIntoVersion()");
-        long addVersioningBlob = getDatabaseCryptoAdapter().addVersioningBlob(contentValues);
-        if (addVersioningBlob == -1) {
+        long jAddVersioningBlob = getDatabaseCryptoAdapter().addVersioningBlob(contentValues);
+        if (jAddVersioningBlob == -1) {
             return null;
         }
-        return ContentUris.withAppendedId(Contract.Versioning.CONTENT_URI, addVersioningBlob);
+        return ContentUris.withAppendedId(Contract.Versioning.CONTENT_URI, jAddVersioningBlob);
     }
 
     private Uri insertIntoCleanedEvents(ContentValues contentValues) {
         Log.d(TAG, "insertIntoCleanedEvents()");
-        long addCleanedEvent = getDatabaseCryptoAdapter().addCleanedEvent(contentValues);
-        if (addCleanedEvent == -1) {
+        long jAddCleanedEvent = getDatabaseCryptoAdapter().addCleanedEvent(contentValues);
+        if (jAddCleanedEvent == -1) {
             return null;
         }
-        return ContentUris.withAppendedId(Contract.DatabaseClean.CONTENT_URI, addCleanedEvent);
+        return ContentUris.withAppendedId(Contract.DatabaseClean.CONTENT_URI, jAddCleanedEvent);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x006f, code lost:
-    
-        if (r12.equals(com.samsung.android.knox.analytics.database.Contract.Events.Selection.DELETE_BY_SIZE) == false) goto L20;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private long deleteFromEvents(java.lang.String r12, java.lang.String[] r13, int r14) {
-        /*
-            r11 = this;
-            java.lang.String r0 = com.samsung.android.knox.analytics.database.KnoxAnalyticsContentProvider.TAG
-            java.lang.String r1 = "deleteFromEvents()"
-            com.samsung.android.knox.analytics.util.Log.d(r0, r1)
-            r1 = 0
-            if (r13 == 0) goto La3
-            int r3 = r13.length
-            if (r3 != 0) goto L10
-            goto La3
-        L10:
-            r3 = 0
-            r4 = r13[r3]
-            boolean r4 = r4.isEmpty()
-            if (r4 == 0) goto L1f
-            java.lang.String r11 = "deleteFromEvents(): empty selectionArgs[0]"
-            com.samsung.android.knox.analytics.util.Log.e(r0, r11)
-            return r1
-        L1f:
-            r4 = r13[r3]     // Catch: java.lang.NumberFormatException -> L8d
-            java.lang.Long r4 = java.lang.Long.valueOf(r4)     // Catch: java.lang.NumberFormatException -> L8d
-            long r6 = r4.longValue()     // Catch: java.lang.NumberFormatException -> L8d
-            int r4 = r13.length     // Catch: java.lang.NumberFormatException -> L8d
-            r5 = 2
-            r8 = 1
-            if (r4 != r5) goto L41
-            r4 = r13[r8]     // Catch: java.lang.NumberFormatException -> L8d
-            boolean r4 = r4.isEmpty()     // Catch: java.lang.NumberFormatException -> L8d
-            if (r4 != 0) goto L41
-            r4 = r13[r8]     // Catch: java.lang.NumberFormatException -> L8d
-            java.lang.Long r4 = java.lang.Long.valueOf(r4)     // Catch: java.lang.NumberFormatException -> L8d
-            long r9 = r4.longValue()     // Catch: java.lang.NumberFormatException -> L8d
-            goto L42
-        L41:
-            r9 = r1
-        L42:
-            com.samsung.android.knox.analytics.database.DatabaseCryptoAdapter r11 = r11.getDatabaseCryptoAdapter()
-            r12.hashCode()
-            int r13 = r12.hashCode()
-            r4 = -1
-            switch(r13) {
-                case -774791398: goto L69;
-                case -707369028: goto L5e;
-                case -17614173: goto L53;
-                default: goto L51;
+    private long deleteFromEvents(String str, String[] strArr, int i) {
+        String str2 = TAG;
+        Log.d(str2, "deleteFromEvents()");
+        if (strArr == null || strArr.length == 0) {
+            Log.e(str2, "deleteFromEvents(): no selectionArgs");
+            return 0L;
+        }
+        boolean z = false;
+        if (strArr[0].isEmpty()) {
+            Log.e(str2, "deleteFromEvents(): empty selectionArgs[0]");
+            return 0L;
+        }
+        try {
+            long jLongValue = Long.valueOf(strArr[0]).longValue();
+            long jLongValue2 = (strArr.length != 2 || strArr[1].isEmpty()) ? 0L : Long.valueOf(strArr[1]).longValue();
+            DatabaseCryptoAdapter databaseCryptoAdapter = getDatabaseCryptoAdapter();
+            str.hashCode();
+            switch (str.hashCode()) {
+                case -774791398:
+                    if (!str.equals(Contract.Events.Selection.DELETE_BY_SIZE)) {
+                        z = -1;
+                        break;
+                    }
+                    break;
+                case -707369028:
+                    if (str.equals(Contract.Events.Selection.DELETE_UP_TO_ID)) {
+                        z = true;
+                        break;
+                    }
+                    break;
+                case -17614173:
+                    if (str.equals(Contract.Events.Selection.DELETE_UNTIL_TARGET_DB_SIZE)) {
+                        z = 2;
+                        break;
+                    }
+                    break;
             }
-        L51:
-            r3 = r4
-            goto L72
-        L53:
-            java.lang.String r13 = "deleteUntilTargetDbSize"
-            boolean r12 = r12.equals(r13)
-            if (r12 != 0) goto L5c
-            goto L51
-        L5c:
-            r3 = r5
-            goto L72
-        L5e:
-            java.lang.String r13 = "deleteUpToId"
-            boolean r12 = r12.equals(r13)
-            if (r12 != 0) goto L67
-            goto L51
-        L67:
-            r3 = r8
-            goto L72
-        L69:
-            java.lang.String r13 = "deleteChunkBySize"
-            boolean r12 = r12.equals(r13)
-            if (r12 != 0) goto L72
-            goto L51
-        L72:
-            switch(r3) {
-                case 0: goto L85;
-                case 1: goto L80;
-                case 2: goto L7b;
-                default: goto L75;
+            switch (z) {
+                case false:
+                    break;
+                case true:
+                    break;
+                case true:
+                    break;
+                default:
+                    Log.e(str2, "deleteFromEvents(): invalid selection");
+                    break;
             }
-        L75:
-            java.lang.String r11 = "deleteFromEvents(): invalid selection"
-            com.samsung.android.knox.analytics.util.Log.e(r0, r11)
-            return r1
-        L7b:
-            long r11 = r11.deleteUntilTargetDbSize(r6)
-            return r11
-        L80:
-            long r11 = r11.deleteUpTo(r6)
-            return r11
-        L85:
-            r5 = r11
-            r8 = r9
-            r10 = r14
-            long r11 = r5.deleteEventChunk(r6, r8, r10)
-            return r11
-        L8d:
-            java.lang.String r11 = com.samsung.android.knox.analytics.database.KnoxAnalyticsContentProvider.TAG
-            java.lang.StringBuilder r12 = new java.lang.StringBuilder
-            java.lang.String r14 = "deleteFromEvents(): invalid number "
-            r12.<init>(r14)
-            r13 = r13[r3]
-            r12.append(r13)
-            java.lang.String r12 = r12.toString()
-            com.samsung.android.knox.analytics.util.Log.e(r11, r12)
-            return r1
-        La3:
-            java.lang.String r11 = "deleteFromEvents(): no selectionArgs"
-            com.samsung.android.knox.analytics.util.Log.e(r0, r11)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.database.KnoxAnalyticsContentProvider.deleteFromEvents(java.lang.String, java.lang.String[], int):long");
+        } catch (NumberFormatException unused) {
+            Log.e(TAG, "deleteFromEvents(): invalid number " + strArr[0]);
+            return 0L;
+        }
+        return 0L;
     }
 
     private long deleteFromAllEventTables() {
-        long deleteFromAllEventTables;
+        long jDeleteFromAllEventTables;
         synchronized (this.mDeactivationLock) {
-            deleteFromAllEventTables = getDatabaseCryptoAdapter().deleteFromAllEventTables();
+            jDeleteFromAllEventTables = getDatabaseCryptoAdapter().deleteFromAllEventTables();
         }
-        return deleteFromAllEventTables;
+        return jDeleteFromAllEventTables;
     }
 
     private long deleteFromFeaturesBlacklist(String str, String[] strArr) {
@@ -492,10 +432,10 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
         }
         Log.d(TAG, "callDatabaseClean()");
         long databaseSizeInBytes = getDatabaseCryptoAdapter().getDatabaseSizeInBytes();
-        long cleanCompressedEventsTable = cleanCompressedEventsTable(bundle.getLong(Contract.DatabaseClean.Extra.TARGET_DB_SIZE));
+        long jCleanCompressedEventsTable = cleanCompressedEventsTable(bundle.getLong(Contract.DatabaseClean.Extra.TARGET_DB_SIZE));
         long databaseSizeInBytes2 = getDatabaseCryptoAdapter().getDatabaseSizeInBytes();
         Bundle bundle2 = new Bundle();
-        bundle2.putLong(Contract.DatabaseClean.Extra.DELETED_EVENTS_COUNT, cleanCompressedEventsTable);
+        bundle2.putLong(Contract.DatabaseClean.Extra.DELETED_EVENTS_COUNT, jCleanCompressedEventsTable);
         bundle2.putLong(Contract.DatabaseClean.Extra.DELETED_SIZE_BYTES, databaseSizeInBytes - databaseSizeInBytes2);
         return bundle2;
     }
@@ -511,10 +451,10 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
             }
             i++;
             int totalCompressedEvents = databaseCryptoAdapter.getTotalCompressedEvents((int) 1);
-            long deleteCompressedEventChunk = databaseCryptoAdapter.deleteCompressedEventChunk(1L);
+            long jDeleteCompressedEventChunk = databaseCryptoAdapter.deleteCompressedEventChunk(1L);
             String str = TAG;
-            Log.d(str, "IT=" + i + " curS=" + databaseSizeInBytes + " tlDel=" + j2 + " nxtCh=" + totalCompressedEvents + " delRows=" + deleteCompressedEventChunk);
-            if (deleteCompressedEventChunk == 0) {
+            Log.d(str, "IT=" + i + " curS=" + databaseSizeInBytes + " tlDel=" + j2 + " nxtCh=" + totalCompressedEvents + " delRows=" + jDeleteCompressedEventChunk);
+            if (jDeleteCompressedEventChunk == 0) {
                 Log.e(str, "cleanCompressedEventsTable(): error deleting or db is empty");
                 break;
             }
@@ -526,15 +466,15 @@ public class KnoxAnalyticsContentProvider extends ContentProvider {
     }
 
     public Bundle debugCall(String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             getContext().getContentResolver().notifyChange(Uri.withAppendedPath(Contract.Debug.CONTENT_URI, str), null);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             Bundle bundle = new Bundle();
             bundle.putBoolean("result", true);
             return bundle;
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }

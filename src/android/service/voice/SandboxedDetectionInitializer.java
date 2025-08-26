@@ -27,7 +27,7 @@ public interface SandboxedDetectionInitializer {
             return new IntConsumer() { // from class: android.service.voice.SandboxedDetectionInitializer$$ExternalSyntheticLambda0
                 @Override // java.util.function.IntConsumer
                 public final void accept(int i) {
-                    SandboxedDetectionInitializer.lambda$createInitializationStatusConsumer$0(IRemoteCallback.this, i);
+                    SandboxedDetectionInitializer.lambda$createInitializationStatusConsumer$0(iRemoteCallback, i);
                 }
             };
         }

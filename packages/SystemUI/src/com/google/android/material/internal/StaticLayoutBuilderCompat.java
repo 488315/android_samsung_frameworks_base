@@ -6,7 +6,6 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextPaint;
 import android.text.TextUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class StaticLayoutBuilderCompat {
     public int end;
@@ -21,7 +20,6 @@ public final class StaticLayoutBuilderCompat {
     public boolean includePad = true;
     public TextUtils.TruncateAt ellipsize = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class StaticLayoutBuilderCompatException extends Exception {
         public StaticLayoutBuilderCompatException(Throwable th) {
             super("Error thrown initializing StaticLayout " + th.getMessage(), th);
@@ -43,32 +41,32 @@ public final class StaticLayoutBuilderCompat {
         if (this.source == null) {
             this.source = "";
         }
-        int max = Math.max(0, this.width);
-        CharSequence charSequence = this.source;
+        int iMax = Math.max(0, this.width);
+        CharSequence charSequenceEllipsize = this.source;
         if (this.maxLines == 1) {
-            charSequence = TextUtils.ellipsize(charSequence, this.paint, max, this.ellipsize);
+            charSequenceEllipsize = TextUtils.ellipsize(charSequenceEllipsize, this.paint, iMax, this.ellipsize);
         }
-        int min = Math.min(charSequence.length(), this.end);
-        this.end = min;
+        int iMin = Math.min(charSequenceEllipsize.length(), this.end);
+        this.end = iMin;
         if (this.isRtl && this.maxLines == 1) {
             this.alignment = Layout.Alignment.ALIGN_OPPOSITE;
         }
-        StaticLayout.Builder obtain = StaticLayout.Builder.obtain(charSequence, 0, min, this.paint, max);
-        obtain.setAlignment(this.alignment);
-        obtain.setIncludePad(this.includePad);
-        obtain.setTextDirection(this.isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR);
+        StaticLayout.Builder builderObtain = StaticLayout.Builder.obtain(charSequenceEllipsize, 0, iMin, this.paint, iMax);
+        builderObtain.setAlignment(this.alignment);
+        builderObtain.setIncludePad(this.includePad);
+        builderObtain.setTextDirection(this.isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR);
         TextUtils.TruncateAt truncateAt = this.ellipsize;
         if (truncateAt != null) {
-            obtain.setEllipsize(truncateAt);
+            builderObtain.setEllipsize(truncateAt);
         }
-        obtain.setMaxLines(this.maxLines);
+        builderObtain.setMaxLines(this.maxLines);
         float f = this.lineSpacingMultiplier;
         if (f != 1.0f) {
-            obtain.setLineSpacing(0.0f, f);
+            builderObtain.setLineSpacing(0.0f, f);
         }
         if (this.maxLines > 1) {
-            obtain.setHyphenationFrequency(this.hyphenationFrequency);
+            builderObtain.setHyphenationFrequency(this.hyphenationFrequency);
         }
-        return obtain.build();
+        return builderObtain.build();
     }
 }

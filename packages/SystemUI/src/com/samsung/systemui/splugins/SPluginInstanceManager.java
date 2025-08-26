@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SPluginInstanceManager<T extends SPlugin> {
     private static final boolean DEBUG = false;
@@ -49,7 +48,6 @@ public class SPluginInstanceManager<T extends SPlugin> {
     private final SVersionInfo mVersion;
     private final ArraySet<String> mWhitelistedPlugins;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class MainHandler extends Handler {
         private static final int PLUGIN_CONNECTED = 1;
         private static final int PLUGIN_DISCONNECTED = 2;
@@ -62,7 +60,7 @@ public class SPluginInstanceManager<T extends SPlugin> {
         /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Handler
         public void handleMessage(Message message) {
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             try {
                 PluginInfo pluginInfo = (PluginInfo) message.obj;
                 int i = message.what;
@@ -104,14 +102,13 @@ public class SPluginInstanceManager<T extends SPlugin> {
                     sb.append("], what=");
                     sb.append(message.what);
                     sb.append(" elapsed=");
-                    sb.append(System.currentTimeMillis() - currentTimeMillis);
+                    sb.append(System.currentTimeMillis() - jCurrentTimeMillis);
                     ExifInterface$$ExternalSyntheticOutline0.m(sb, "ms", SPluginInstanceManager.TAG);
                 }
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PluginHandler extends Handler {
         private static final int QUERY_ALL = 1;
         private static final int QUERY_PKG = 2;
@@ -125,10 +122,10 @@ public class SPluginInstanceManager<T extends SPlugin> {
         }
 
         private SVersionInfo checkVersion(Class<?> cls, SPlugin sPlugin, SVersionInfo sVersionInfo) throws SVersionInfo.InvalidVersionException {
-            SVersionInfo addClass = new SVersionInfo().addClass(cls);
-            if (addClass.hasVersionInfo()) {
-                sVersionInfo.checkVersion(addClass);
-                return addClass;
+            SVersionInfo sVersionInfoAddClass = new SVersionInfo().addClass(cls);
+            if (sVersionInfoAddClass.hasVersionInfo()) {
+                sVersionInfo.checkVersion(sVersionInfoAddClass);
+                return sVersionInfoAddClass;
             }
             if (sPlugin.getVersion() == sVersionInfo.getDefaultVersion()) {
                 return null;
@@ -146,21 +143,21 @@ public class SPluginInstanceManager<T extends SPlugin> {
                     intent.setPackage(str);
                 }
             }
-            List queryIntentServicesAsUser = SPluginInstanceManager.this.mPm.queryIntentServicesAsUser(intent, 0, SPluginInstanceManager.this.mActivityManagerProxy.getCurrentUser());
-            if (queryIntentServicesAsUser.size() > 1 && !SPluginInstanceManager.this.mAllowMultiple) {
+            List listQueryIntentServicesAsUser = SPluginInstanceManager.this.mPm.queryIntentServicesAsUser(intent, 0, SPluginInstanceManager.this.mActivityManagerProxy.getCurrentUser());
+            if (listQueryIntentServicesAsUser.size() > 1 && !SPluginInstanceManager.this.mAllowMultiple) {
                 Log.w(SPluginInstanceManager.TAG, "Multiple plugins found for " + SPluginInstanceManager.this.mAction);
                 return;
             }
-            if (queryIntentServicesAsUser.size() == 0 && str != null) {
+            if (listQueryIntentServicesAsUser.size() == 0 && str != null) {
                 SPluginInstanceManager.this.mPolicyInteractor.applyUrgentOSUpgradePolicy(str);
             }
-            Iterator it = queryIntentServicesAsUser.iterator();
+            Iterator it = listQueryIntentServicesAsUser.iterator();
             while (it.hasNext()) {
                 ServiceInfo serviceInfo = ((ResolveInfo) it.next()).serviceInfo;
-                PluginInfo<SPlugin> handleLoadPlugin = handleLoadPlugin(new ComponentName(serviceInfo.packageName, serviceInfo.name));
-                if (handleLoadPlugin != null) {
-                    SPluginInstanceManager.this.mMainHandler.obtainMessage(1, handleLoadPlugin).sendToTarget();
-                    this.mPlugins.add(handleLoadPlugin);
+                PluginInfo<SPlugin> pluginInfoHandleLoadPlugin = handleLoadPlugin(new ComponentName(serviceInfo.packageName, serviceInfo.name));
+                if (pluginInfoHandleLoadPlugin != null) {
+                    SPluginInstanceManager.this.mMainHandler.obtainMessage(1, pluginInfoHandleLoadPlugin).sendToTarget();
+                    this.mPlugins.add(pluginInfoHandleLoadPlugin);
                 }
             }
         }
@@ -179,9 +176,9 @@ public class SPluginInstanceManager<T extends SPlugin> {
                 Class<?> cls = Class.forName(className, true, classLoader);
                 SPlugin sPlugin = (SPlugin) cls.newInstance();
                 try {
-                    SVersionInfo checkVersion = checkVersion(cls, sPlugin, SPluginInstanceManager.this.mVersion);
+                    SVersionInfo sVersionInfoCheckVersion = checkVersion(cls, sPlugin, SPluginInstanceManager.this.mVersion);
                     SPluginInstanceManager.this.mPolicyInteractor.onPluginLoaded(packageName);
-                    return new PluginInfo<>(packageName, className, sPlugin, pluginContextWrapper, checkVersion);
+                    return new PluginInfo<>(packageName, className, sPlugin, pluginContextWrapper, sVersionInfoCheckVersion);
                 } catch (SVersionInfo.InvalidVersionException unused) {
                     SPluginInstanceManager.this.mPolicyInteractor.onPluginLoadFailed(packageName);
                     SPluginInstanceManager.this.mListener.onPluginLoadFailed(0);
@@ -236,7 +233,6 @@ public class SPluginInstanceManager<T extends SPlugin> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PluginInfo<T> {
         private String mClass;
         String mPackage;
@@ -392,7 +388,6 @@ public class SPluginInstanceManager<T extends SPlugin> {
         this.mPolicyInteractor = sPluginPolicyInteractor;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PluginContextWrapper extends ContextWrapper {
         private final ClassLoader mClassLoader;
         private LayoutInflater mInflater;

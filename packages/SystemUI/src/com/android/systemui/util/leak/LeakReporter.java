@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LeakReporter {
     public static final String FILEPROVIDER_AUTHORITY = "com.android.systemui.fileprovider";
@@ -43,7 +42,7 @@ public class LeakReporter {
         this.mLeakReportEmail = str;
     }
 
-    private Intent getIntent(File file, File file2) {
+    private Intent getIntent(File file, File file2) throws IOException {
         Uri uriForFile = FileProvider.getUriForFile(this.mContext, FILEPROVIDER_AUTHORITY, file2);
         Uri uriForFile2 = FileProvider.getUriForFile(this.mContext, FILEPROVIDER_AUTHORITY, file);
         Intent intent = new Intent("android.intent.action.SEND_MULTIPLE");
@@ -53,18 +52,18 @@ public class LeakReporter {
         intent.putExtra("android.intent.extra.SUBJECT", "SystemUI leak report");
         intent.putExtra("android.intent.extra.TEXT", "Build info: " + SystemProperties.get("ro.build.description"));
         ClipData clipData = new ClipData(null, new String[]{"application/vnd.android.leakreport"}, new ClipData.Item(null, null, null, uriForFile));
-        ArrayList<? extends Parcelable> newArrayList = Lists.newArrayList(new Uri[]{uriForFile});
+        ArrayList<? extends Parcelable> arrayListNewArrayList = Lists.newArrayList(new Uri[]{uriForFile});
         clipData.addItem(new ClipData.Item(null, null, null, uriForFile2));
-        newArrayList.add(uriForFile2);
+        arrayListNewArrayList.add(uriForFile2);
         intent.setClipData(clipData);
-        intent.putParcelableArrayListExtra("android.intent.extra.STREAM", newArrayList);
+        intent.putParcelableArrayListExtra("android.intent.extra.STREAM", arrayListNewArrayList);
         if (!TextUtils.isEmpty(this.mLeakReportEmail)) {
             intent.putExtra("android.intent.extra.EMAIL", new String[]{this.mLeakReportEmail});
         }
         return intent;
     }
 
-    public void dumpLeak(int i) {
+    public void dumpLeak(int i) throws IOException {
         try {
             File file = new File(this.mContext.getCacheDir(), LEAK_DIR);
             file.mkdir();

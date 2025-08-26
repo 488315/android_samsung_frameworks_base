@@ -6,17 +6,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.DisplayCutout;
 import android.view.WindowInsets;
-import androidx.reflect.SeslBaseReflector;
 import androidx.reflect.view.SeslWindowInsetsReflector;
 import com.android.systemui.BasicRune;
 import com.android.systemui.keyguard.DisplayLifecycle;
-import java.lang.reflect.Method;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorCutoutUtil {
     public static final Companion Companion = new Companion(null);
@@ -28,28 +24,13 @@ public final class IndicatorCutoutUtil {
     public boolean isFrontCameraUsing;
     public final boolean isUDCModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static WindowInsets getHidWindowInsetsFromUDC(WindowInsets windowInsets) {
-            DisplayCutout displayCutout;
-            if (windowInsets.getDisplayCutout() != null) {
-                return windowInsets;
-            }
-            WindowInsets.Builder builder = new WindowInsets.Builder(windowInsets);
-            Method declaredMethod = SeslBaseReflector.getDeclaredMethod(SeslWindowInsetsReflector.mClass, "hidden_getDisplayCutoutForUdc", new Class[0]);
-            if (declaredMethod != null) {
-                Object invoke = SeslBaseReflector.invoke(windowInsets, declaredMethod, new Object[0]);
-                if (invoke instanceof DisplayCutout) {
-                    displayCutout = (DisplayCutout) invoke;
-                    return builder.setDisplayCutout(displayCutout).build();
-                }
-            }
-            displayCutout = null;
-            return builder.setDisplayCutout(displayCutout).build();
+            return windowInsets.getDisplayCutout() != null ? windowInsets : new WindowInsets.Builder(windowInsets).setDisplayCutout(SeslWindowInsetsReflector.getDisplayCutoutForUdc(windowInsets)).build();
         }
 
         private Companion() {
@@ -91,7 +72,7 @@ public final class IndicatorCutoutUtil {
         return stream.filter(new Predicate() { // from class: com.android.systemui.statusbar.phone.IndicatorCutoutUtilKt$sam$java_util_function_Predicate$0
             @Override // java.util.function.Predicate
             public final /* synthetic */ boolean test(Object obj) {
-                return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                return ((Boolean) indicatorCutoutUtil$$ExternalSyntheticLambda0.mo781invoke(obj)).booleanValue();
             }
         }).findFirst().orElse(null);
     }

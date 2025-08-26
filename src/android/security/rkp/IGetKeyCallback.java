@@ -65,9 +65,9 @@ public interface IGetKeyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetKeyCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetKeyCallback)) {
-                return (IGetKeyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetKeyCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetKeyCallback)) {
+                return (IGetKeyCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,10 +106,10 @@ public interface IGetKeyCallback extends IInterface {
             } else if (i == 2) {
                 onCancel();
             } else if (i == 3) {
-                byte readByte = parcel.readByte();
-                String readString = parcel.readString();
+                byte b = parcel.readByte();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readByte, readString);
+                onError(b, string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -134,37 +134,37 @@ public interface IGetKeyCallback extends IInterface {
 
             @Override // android.security.rkp.IGetKeyCallback
             public void onSuccess(RemotelyProvisionedKey remotelyProvisionedKey) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(remotelyProvisionedKey, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remotelyProvisionedKey, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IGetKeyCallback
             public void onCancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IGetKeyCallback
             public void onError(byte b, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetKeyCallback.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

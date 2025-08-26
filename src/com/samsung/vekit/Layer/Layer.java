@@ -50,7 +50,7 @@ public class Layer extends Element implements HierarchyInterface<Item> {
     }
 
     public Layer setPanel(Panel panel) {
-        this.panel = panel.m9809clone();
+        this.panel = panel.m9822clone();
         return this;
     }
 
@@ -159,10 +159,10 @@ public class Layer extends Element implements HierarchyInterface<Item> {
 
     @Override // com.samsung.vekit.Interface.HierarchyInterface
     public void swap(Item item, Item item2) {
-        int indexOf = this.itemList.indexOf(item);
-        int indexOf2 = this.itemList.indexOf(item2);
-        Collections.swap(this.itemList, indexOf, indexOf2);
-        this.context.getNativeInterface().swap(this, indexOf, indexOf2);
+        int iIndexOf = this.itemList.indexOf(item);
+        int iIndexOf2 = this.itemList.indexOf(item2);
+        Collections.swap(this.itemList, iIndexOf, iIndexOf2);
+        this.context.getNativeInterface().swap(this, iIndexOf, iIndexOf2);
     }
 
     @Override // com.samsung.vekit.Interface.HierarchyInterface
@@ -302,7 +302,7 @@ public class Layer extends Element implements HierarchyInterface<Item> {
         if (itemTypeArr != null && !Arrays.stream(itemTypeArr).anyMatch(new Predicate() { // from class: com.samsung.vekit.Layer.Layer$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return Layer.lambda$checkValidItem$0(Item.this, (ItemType) obj);
+                return Layer.lambda$checkValidItem$0(item, (ItemType) obj);
             }
         })) {
             throw new Exception("isInvalidElement : please attach correct Item.");

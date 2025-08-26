@@ -70,8 +70,8 @@ public class ScheduleCalendar {
         if (closestActualTime > j) {
             return closestActualTime;
         }
-        long addDays = addDays(closestActualTime, 1);
-        return z ? getClosestActualTime(addDays, i, i2) : getTime(addDays, i, i2);
+        long jAddDays = addDays(closestActualTime, 1);
+        return z ? getClosestActualTime(jAddDays, i, i2) : getTime(jAddDays, i, i2);
     }
 
     private long getTime(long j, int i, int i2) {

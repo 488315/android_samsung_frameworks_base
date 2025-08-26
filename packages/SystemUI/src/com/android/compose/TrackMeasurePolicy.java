@@ -16,7 +16,6 @@ import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TrackMeasurePolicy implements MeasurePolicy {
     public final boolean enabled;
@@ -39,14 +38,13 @@ public final class TrackMeasurePolicy implements MeasurePolicy {
         Object obj;
         Object obj2;
         DrawingState drawingState;
-        MeasureResult layout$1;
-        int m821getMaxWidthimpl = Constraints.m821getMaxWidthimpl(j) + this.thumbSize;
-        int m820getMaxHeightimpl = Constraints.m820getMaxHeightimpl(j);
+        int iM823getMaxWidthimpl = Constraints.m823getMaxWidthimpl(j) + this.thumbSize;
+        int iM822getMaxHeightimpl = Constraints.m822getMaxHeightimpl(j);
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Measurable measurable = (Measurable) list.get(i);
             if (LayoutIdKt.getLayoutId(measurable) == TrackComponent.Background) {
-                final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(ConstraintsKt.Constraints(m821getMaxWidthimpl, m821getMaxWidthimpl, m820getMaxHeightimpl, m820getMaxHeightimpl));
+                final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(ConstraintsKt.Constraints(iM823getMaxWidthimpl, iM823getMaxWidthimpl, iM822getMaxHeightimpl, iM822getMaxHeightimpl));
                 List list2 = list;
                 int size2 = list2.size();
                 int i2 = 0;
@@ -62,9 +60,9 @@ public final class TrackMeasurePolicy implements MeasurePolicy {
                     i2++;
                 }
                 Measurable measurable2 = (Measurable) obj;
-                final Placeable mo608measureBRTryo02 = measurable2 != null ? measurable2.mo608measureBRTryo0(ConstraintsKt.Constraints(m820getMaxHeightimpl, m820getMaxHeightimpl, m820getMaxHeightimpl, m820getMaxHeightimpl)) : null;
-                int i3 = mo608measureBRTryo02 != null ? mo608measureBRTryo02.width : 0;
-                int i4 = this.enabled ? (m821getMaxWidthimpl - i3) / 2 : m821getMaxWidthimpl - i3;
+                final Placeable placeableMo610measureBRTryo02 = measurable2 != null ? measurable2.mo610measureBRTryo0(ConstraintsKt.Constraints(iM822getMaxHeightimpl, iM822getMaxHeightimpl, iM822getMaxHeightimpl, iM822getMaxHeightimpl)) : null;
+                int i3 = placeableMo610measureBRTryo02 != null ? placeableMo610measureBRTryo02.width : 0;
+                int i4 = this.enabled ? (iM823getMaxWidthimpl - i3) / 2 : iM823getMaxWidthimpl - i3;
                 int size3 = list2.size();
                 int i5 = 0;
                 while (true) {
@@ -79,37 +77,36 @@ public final class TrackMeasurePolicy implements MeasurePolicy {
                     i5++;
                 }
                 Measurable measurable3 = (Measurable) obj2;
-                final Placeable mo608measureBRTryo03 = measurable3 != null ? measurable3.mo608measureBRTryo0(ConstraintsKt.Constraints(0, i4, m820getMaxHeightimpl, m820getMaxHeightimpl)) : null;
+                final Placeable placeableMo610measureBRTryo03 = measurable3 != null ? measurable3.mo610measureBRTryo0(ConstraintsKt.Constraints(0, i4, iM822getMaxHeightimpl, iM822getMaxHeightimpl)) : null;
                 boolean z = this.isRtl;
                 SliderState sliderState = this.sliderState;
                 if (z) {
-                    float f = m821getMaxWidthimpl;
-                    float f2 = m820getMaxHeightimpl;
-                    drawingState = new DrawingState(true, f, f2, (1 - PlatformSliderKt.access$getCoercedNormalizedValue(sliderState)) * (m821getMaxWidthimpl - i3), 0.0f, f, f2, i3, mo608measureBRTryo03 != null ? mo608measureBRTryo03.width : 0.0f);
+                    float f = iM823getMaxWidthimpl;
+                    float f2 = iM822getMaxHeightimpl;
+                    drawingState = new DrawingState(true, f, f2, (1 - PlatformSliderKt.access$getCoercedNormalizedValue(sliderState)) * (iM823getMaxWidthimpl - i3), 0.0f, f, f2, i3, placeableMo610measureBRTryo03 != null ? placeableMo610measureBRTryo03.width : 0.0f);
                 } else {
-                    float f3 = m820getMaxHeightimpl;
+                    float f3 = iM822getMaxHeightimpl;
                     float f4 = i3;
-                    drawingState = new DrawingState(false, m821getMaxWidthimpl, f3, 0.0f, 0.0f, (PlatformSliderKt.access$getCoercedNormalizedValue(sliderState) * (m821getMaxWidthimpl - i3)) + f4, f3, f4, mo608measureBRTryo03 != null ? mo608measureBRTryo03.width : 0.0f);
+                    drawingState = new DrawingState(false, iM823getMaxWidthimpl, f3, 0.0f, 0.0f, (PlatformSliderKt.access$getCoercedNormalizedValue(sliderState) * (iM823getMaxWidthimpl - i3)) + f4, f3, f4, placeableMo610measureBRTryo03 != null ? placeableMo610measureBRTryo03.width : 0.0f);
                 }
-                this.onDrawingStateMeasured.mo779invoke(drawingState);
-                layout$1 = measureScope.layout$1(m821getMaxWidthimpl, m820getMaxHeightimpl, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.compose.TrackMeasurePolicy$$ExternalSyntheticLambda0
+                this.onDrawingStateMeasured.mo781invoke(drawingState);
+                return measureScope.layout$1(iM823getMaxWidthimpl, iM822getMaxHeightimpl, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.compose.TrackMeasurePolicy$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj3) {
+                    public final Object mo781invoke(Object obj3) {
                         Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj3;
-                        placementScope.placeRelative(Placeable.this, 0, 0, TrackComponent.Background.getZIndex());
-                        Placeable placeable = mo608measureBRTryo02;
+                        placementScope.placeRelative(placeableMo610measureBRTryo0, 0, 0, TrackComponent.Background.getZIndex());
+                        Placeable placeable = placeableMo610measureBRTryo02;
                         if (placeable != null) {
                             placementScope.placeRelative(placeable, 0, 0, TrackComponent.Icon.getZIndex());
                         }
-                        Placeable placeable2 = mo608measureBRTryo03;
+                        Placeable placeable2 = placeableMo610measureBRTryo03;
                         if (placeable2 != null) {
                             placementScope.placeRelative(placeable2, 0, 0, TrackComponent.Label.getZIndex());
                         }
                         return Unit.INSTANCE;
                     }
                 });
-                return layout$1;
             }
         }
         ListUtilsKt.throwNoSuchElementException("Collection contains no element matching the predicate.");

@@ -3,8 +3,8 @@ package gov.nist.javax.sip.parser;
 import gov.nist.javax.sip.header.ProxyRequire;
 import gov.nist.javax.sip.header.ProxyRequireList;
 import gov.nist.javax.sip.header.SIPHeader;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ProxyRequireParser extends HeaderParser {
     public ProxyRequireParser(String str) {
@@ -12,7 +12,7 @@ public class ProxyRequireParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         ProxyRequireList proxyRequireList = new ProxyRequireList();
         headerName(2074);
         while (this.lexer.lookAhead(0) != '\n') {

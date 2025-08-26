@@ -190,9 +190,9 @@ public class JankTracker {
     /* JADX INFO: Access modifiers changed from: private */
     public void registerJankDataListener() {
         if (this.mSurfaceControl != null && com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.jankApi()) {
-            SurfaceControl.OnJankDataListenerRegistration registerOnJankDataListener = this.mSurfaceControl.registerOnJankDataListener(this.mHandlerThread.getThreadExecutor(), this.mJankDataListener);
-            this.mJankDataListenerRegistration = registerOnJankDataListener;
-            if (registerOnJankDataListener == SurfaceControl.OnJankDataListenerRegistration.NONE) {
+            SurfaceControl.OnJankDataListenerRegistration onJankDataListenerRegistrationRegisterOnJankDataListener = this.mSurfaceControl.registerOnJankDataListener(this.mHandlerThread.getThreadExecutor(), this.mJankDataListener);
+            this.mJankDataListenerRegistration = onJankDataListenerRegistrationRegisterOnJankDataListener;
+            if (onJankDataListenerRegistrationRegisterOnJankDataListener == SurfaceControl.OnJankDataListenerRegistration.NONE) {
                 return;
             }
             this.mListenersRegistered = true;

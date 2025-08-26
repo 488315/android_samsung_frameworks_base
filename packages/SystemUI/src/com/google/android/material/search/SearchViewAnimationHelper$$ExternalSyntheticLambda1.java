@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import com.google.android.material.internal.FadeThroughDrawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class SearchViewAnimationHelper$$ExternalSyntheticLambda1 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId = 0;
@@ -17,9 +16,9 @@ public final /* synthetic */ class SearchViewAnimationHelper$$ExternalSyntheticL
         switch (i) {
             case 0:
                 DrawerArrowDrawable drawerArrowDrawable = (DrawerArrowDrawable) obj;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                if (drawerArrowDrawable.mProgress != floatValue) {
-                    drawerArrowDrawable.mProgress = floatValue;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                if (drawerArrowDrawable.mProgress != fFloatValue) {
+                    drawerArrowDrawable.mProgress = fFloatValue;
                     drawerArrowDrawable.invalidateSelf();
                     break;
                 }

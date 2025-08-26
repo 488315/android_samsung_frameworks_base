@@ -9,7 +9,7 @@ import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class Utils {
     private static final String LOG_TAG = "ProtoLogUtils";
 
@@ -17,7 +17,7 @@ public class Utils {
         protoLogDataSource.trace(new TraceFunction() { // from class: com.android.internal.protolog.Utils$$ExternalSyntheticLambda0
             @Override // android.tracing.perfetto.TraceFunction
             public final void trace(TracingContext tracingContext) {
-                Utils.lambda$dumpViewerConfig$0(ViewerConfigInputStreamProvider.this, tracingContext);
+                Utils.lambda$dumpViewerConfig$0(viewerConfigInputStreamProvider, tracingContext);
             }
         });
     }
@@ -27,18 +27,18 @@ public class Utils {
             AutoClosableProtoInputStream inputStream = viewerConfigInputStreamProvider.getInputStream();
             try {
                 ProtoInputStream protoInputStream = inputStream.get();
-                ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                newTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
-                long start = newTracePacket.start(1146756268137L);
+                ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                protoOutputStreamNewTracePacket.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
+                long jStart = protoOutputStreamNewTracePacket.start(1146756268137L);
                 while (protoInputStream.nextField() != -1) {
                     if (protoInputStream.getFieldNumber() == 1) {
-                        writeViewerConfigMessage(protoInputStream, newTracePacket);
+                        writeViewerConfigMessage(protoInputStream, protoOutputStreamNewTracePacket);
                     }
                     if (protoInputStream.getFieldNumber() == 2) {
-                        writeViewerConfigGroup(protoInputStream, newTracePacket);
+                        writeViewerConfigGroup(protoInputStream, protoOutputStreamNewTracePacket);
                     }
                 }
-                newTracePacket.end(start);
+                protoOutputStreamNewTracePacket.end(jStart);
                 if (inputStream != null) {
                     inputStream.close();
                 }
@@ -50,8 +50,8 @@ public class Utils {
     }
 
     private static void writeViewerConfigGroup(ProtoInputStream protoInputStream, ProtoOutputStream protoOutputStream) throws IOException {
-        long start = protoInputStream.start(2246267895810L);
-        long start2 = protoOutputStream.start(2246267895810L);
+        long jStart = protoInputStream.start(2246267895810L);
+        long jStart2 = protoOutputStream.start(2246267895810L);
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
@@ -64,13 +64,13 @@ public class Utils {
                 Log.e(LOG_TAG, "Unexpected field id " + protoInputStream.getFieldNumber());
             }
         }
-        protoInputStream.end(start);
-        protoOutputStream.end(start2);
+        protoInputStream.end(jStart);
+        protoOutputStream.end(jStart2);
     }
 
     private static void writeViewerConfigMessage(ProtoInputStream protoInputStream, ProtoOutputStream protoOutputStream) throws IOException {
-        long start = protoInputStream.start(2246267895809L);
-        long start2 = protoOutputStream.start(2246267895809L);
+        long jStart = protoInputStream.start(2246267895809L);
+        long jStart2 = protoOutputStream.start(2246267895809L);
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
@@ -87,7 +87,7 @@ public class Utils {
                 Log.e(LOG_TAG, "Unexpected field id " + protoInputStream.getFieldNumber());
             }
         }
-        protoInputStream.end(start);
-        protoOutputStream.end(start2);
+        protoInputStream.end(jStart);
+        protoOutputStream.end(jStart2);
     }
 }

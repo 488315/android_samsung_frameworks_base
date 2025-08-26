@@ -75,9 +75,9 @@ public abstract class ServiceStub extends Service implements ServiceController, 
 
     @Override // com.samsung.android.sume.core.service.ServiceController
     public void releaseMediaFilterController(int i) {
-        MediaFilterController remove = this.mediaFilterControllers.remove(Integer.valueOf(i));
-        if (remove != null) {
-            remove.release();
+        MediaFilterController mediaFilterControllerRemove = this.mediaFilterControllers.remove(Integer.valueOf(i));
+        if (mediaFilterControllerRemove != null) {
+            mediaFilterControllerRemove.release();
         }
     }
 
@@ -87,7 +87,7 @@ public abstract class ServiceStub extends Service implements ServiceController, 
         if (mediaFilterController == null && Stream.of((Object[]) new Integer[]{900, 904}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.service.ServiceStub$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return ServiceStub.lambda$request$0(Request.this, (Integer) obj);
+                return ServiceStub.lambda$request$0(request, (Integer) obj);
             }
         })) {
             Log.d(TAG, "no mediaFilterController given, maybe canceled");

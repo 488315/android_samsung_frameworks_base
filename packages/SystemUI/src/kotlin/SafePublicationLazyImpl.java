@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SafePublicationLazyImpl<T> implements Lazy, Serializable {
     public static final AtomicReferenceFieldUpdater valueUpdater;
@@ -15,7 +14,6 @@ final class SafePublicationLazyImpl<T> implements Lazy, Serializable {
     private final Object f130final;
     private volatile Function0 initializer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,10 +48,10 @@ final class SafePublicationLazyImpl<T> implements Lazy, Serializable {
         }
         Function0 function0 = this.initializer;
         if (function0 != null) {
-            Object invoke = function0.invoke();
-            if (valueUpdater.compareAndSet(this, uninitialized_value, invoke)) {
+            Object objInvoke = function0.invoke();
+            if (valueUpdater.compareAndSet(this, uninitialized_value, objInvoke)) {
                 this.initializer = null;
-                return invoke;
+                return objInvoke;
             }
         }
         return this._value;

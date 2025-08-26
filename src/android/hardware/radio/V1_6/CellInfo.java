@@ -218,13 +218,13 @@ public final class CellInfo {
 
         public static final ArrayList<CellInfoRatSpecificInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<CellInfoRatSpecificInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 200, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 200, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 CellInfoRatSpecificInfo cellInfoRatSpecificInfo = new CellInfoRatSpecificInfo();
-                cellInfoRatSpecificInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 200);
+                cellInfoRatSpecificInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 200);
                 arrayList.add(cellInfoRatSpecificInfo);
             }
             return arrayList;
@@ -343,13 +343,13 @@ public final class CellInfo {
 
     public static final ArrayList<CellInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 208, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 208, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellInfo cellInfo = new CellInfo();
-            cellInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 208);
+            cellInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 208);
             arrayList.add(cellInfo);
         }
         return arrayList;

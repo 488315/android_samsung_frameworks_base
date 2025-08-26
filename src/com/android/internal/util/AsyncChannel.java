@@ -71,8 +71,8 @@ public class AsyncChannel {
     }
 
     public int fullyConnectSync(Context context, Handler handler, Handler handler2) {
-        int connectSync = connectSync(context, handler, handler2);
-        return connectSync == 0 ? sendMessageSynchronously(CMD_CHANNEL_FULL_CONNECTION).arg1 : connectSync;
+        int iConnectSync = connectSync(context, handler, handler2);
+        return iConnectSync == 0 ? sendMessageSynchronously(CMD_CHANNEL_FULL_CONNECTION).arg1 : iConnectSync;
     }
 
     public void connect(Context context, Handler handler, String str, String str2) {
@@ -138,10 +138,10 @@ public class AsyncChannel {
             this.mConnection = null;
         }
         try {
-            Message obtain = Message.obtain();
-            obtain.what = CMD_CHANNEL_DISCONNECTED;
-            obtain.replyTo = this.mSrcMessenger;
-            this.mDstMessenger.send(obtain);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = CMD_CHANNEL_DISCONNECTED;
+            messageObtain.replyTo = this.mSrcMessenger;
+            this.mDstMessenger.send(messageObtain);
         } catch (Exception unused) {
         }
         replyDisconnected(0);
@@ -163,40 +163,40 @@ public class AsyncChannel {
     }
 
     public void sendMessage(int i) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        sendMessage(messageObtain);
     }
 
     public void sendMessage(int i, int i2) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        sendMessage(messageObtain);
     }
 
     public void sendMessage(int i, int i2, int i3) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        sendMessage(messageObtain);
     }
 
     public void sendMessage(int i, int i2, int i3, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        obtain.obj = obj;
-        sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        messageObtain.obj = obj;
+        sendMessage(messageObtain);
     }
 
     public void sendMessage(int i, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.obj = obj;
-        sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.obj = obj;
+        sendMessage(messageObtain);
     }
 
     public void replyToMessage(Message message, Message message2) {
@@ -210,40 +210,40 @@ public class AsyncChannel {
     }
 
     public void replyToMessage(Message message, int i) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        replyToMessage(message, obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        replyToMessage(message, messageObtain);
     }
 
     public void replyToMessage(Message message, int i, int i2) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        replyToMessage(message, obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        replyToMessage(message, messageObtain);
     }
 
     public void replyToMessage(Message message, int i, int i2, int i3) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        replyToMessage(message, obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        replyToMessage(message, messageObtain);
     }
 
     public void replyToMessage(Message message, int i, int i2, int i3, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        obtain.obj = obj;
-        replyToMessage(message, obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        messageObtain.obj = obj;
+        replyToMessage(message, messageObtain);
     }
 
     public void replyToMessage(Message message, int i, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.obj = obj;
-        replyToMessage(message, obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.obj = obj;
+        replyToMessage(message, messageObtain);
     }
 
     public Message sendMessageSynchronously(Message message) {
@@ -251,40 +251,40 @@ public class AsyncChannel {
     }
 
     public Message sendMessageSynchronously(int i) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        return sendMessageSynchronously(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        return sendMessageSynchronously(messageObtain);
     }
 
     public Message sendMessageSynchronously(int i, int i2) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        return sendMessageSynchronously(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        return sendMessageSynchronously(messageObtain);
     }
 
     public Message sendMessageSynchronously(int i, int i2, int i3) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        return sendMessageSynchronously(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        return sendMessageSynchronously(messageObtain);
     }
 
     public Message sendMessageSynchronously(int i, int i2, int i3, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.arg1 = i2;
-        obtain.arg2 = i3;
-        obtain.obj = obj;
-        return sendMessageSynchronously(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.arg1 = i2;
+        messageObtain.arg2 = i3;
+        messageObtain.obj = obj;
+        return sendMessageSynchronously(messageObtain);
     }
 
     public Message sendMessageSynchronously(int i, Object obj) {
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.obj = obj;
-        return sendMessageSynchronously(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.obj = obj;
+        return sendMessageSynchronously(messageObtain);
     }
 
     private static class SyncMessenger {
@@ -308,34 +308,34 @@ public class AsyncChannel {
 
             @Override // android.os.Handler
             public void handleMessage(Message message) {
-                Message obtain = Message.obtain();
-                obtain.copyFrom(message);
+                Message messageObtain = Message.obtain();
+                messageObtain.copyFrom(message);
                 synchronized (this.mLockObject) {
-                    this.mResultMsg = obtain;
+                    this.mResultMsg = messageObtain;
                     this.mLockObject.notify();
                 }
             }
         }
 
         private static SyncMessenger obtain() {
-            SyncMessenger pop;
+            SyncMessenger syncMessengerPop;
             synchronized (sStack) {
                 if (sStack.isEmpty()) {
-                    pop = new SyncMessenger();
+                    syncMessengerPop = new SyncMessenger();
                     StringBuilder sb = new StringBuilder("SyncHandler-");
                     int i = sCount;
                     sCount = i + 1;
                     sb.append(i);
                     HandlerThread handlerThread = new HandlerThread(sb.toString());
-                    pop.mHandlerThread = handlerThread;
+                    syncMessengerPop.mHandlerThread = handlerThread;
                     handlerThread.start();
-                    pop.mHandler = new SyncHandler(pop.mHandlerThread.getLooper());
-                    pop.mMessenger = new Messenger(pop.mHandler);
+                    syncMessengerPop.mHandler = new SyncHandler(syncMessengerPop.mHandlerThread.getLooper());
+                    syncMessengerPop.mMessenger = new Messenger(syncMessengerPop.mHandler);
                 } else {
-                    pop = sStack.pop();
+                    syncMessengerPop = sStack.pop();
                 }
             }
-            return pop;
+            return syncMessengerPop;
         }
 
         private void recycle() {
@@ -345,8 +345,8 @@ public class AsyncChannel {
         }
 
         /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:22:0x0047
-            	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+            jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:16:0x0047
+            	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1178)
             	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
             	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
             	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
@@ -361,25 +361,25 @@ public class AsyncChannel {
                 android.os.Messenger r2 = r0.mMessenger     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
                 r6.replyTo = r2     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r2 = r0.mHandler     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
-                java.lang.Object r2 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8322$$Nest$fgetmLockObject(r2)     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
+                java.lang.Object r2 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8333$$Nest$fgetmLockObject(r2)     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
                 monitor-enter(r2)     // Catch: android.os.RemoteException -> L4a java.lang.InterruptedException -> L53
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r3 = r0.mHandler     // Catch: java.lang.Throwable -> L47
-                android.os.Message r3 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8323$$Nest$fgetmResultMsg(r3)     // Catch: java.lang.Throwable -> L47
+                android.os.Message r3 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8334$$Nest$fgetmResultMsg(r3)     // Catch: java.lang.Throwable -> L47
                 if (r3 == 0) goto L29
                 java.lang.String r3 = "AsyncChannel"
                 java.lang.String r4 = "mResultMsg should be null here"
                 android.util.Log.wtf(r3, r4)     // Catch: java.lang.Throwable -> L47
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r3 = r0.mHandler     // Catch: java.lang.Throwable -> L47
-                com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8324$$Nest$fputmResultMsg(r3, r1)     // Catch: java.lang.Throwable -> L47
+                com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8335$$Nest$fputmResultMsg(r3, r1)     // Catch: java.lang.Throwable -> L47
             L29:
                 r5.send(r6)     // Catch: java.lang.Throwable -> L47
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r5 = r0.mHandler     // Catch: java.lang.Throwable -> L47
-                java.lang.Object r5 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8322$$Nest$fgetmLockObject(r5)     // Catch: java.lang.Throwable -> L47
+                java.lang.Object r5 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8333$$Nest$fgetmLockObject(r5)     // Catch: java.lang.Throwable -> L47
                 r5.wait()     // Catch: java.lang.Throwable -> L47
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r5 = r0.mHandler     // Catch: java.lang.Throwable -> L47
-                android.os.Message r5 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8323$$Nest$fgetmResultMsg(r5)     // Catch: java.lang.Throwable -> L47
+                android.os.Message r5 = com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8334$$Nest$fgetmResultMsg(r5)     // Catch: java.lang.Throwable -> L47
                 com.android.internal.util.AsyncChannel$SyncMessenger$SyncHandler r6 = r0.mHandler     // Catch: java.lang.Throwable -> L43
-                com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8324$$Nest$fputmResultMsg(r6, r1)     // Catch: java.lang.Throwable -> L43
+                com.android.internal.util.AsyncChannel.SyncMessenger.SyncHandler.m8335$$Nest$fputmResultMsg(r6, r1)     // Catch: java.lang.Throwable -> L43
                 monitor-exit(r2)     // Catch: java.lang.Throwable -> L43
                 r1 = r5
                 goto L5b
@@ -414,14 +414,14 @@ public class AsyncChannel {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void replyHalfConnected(int i) {
-        Message obtainMessage = this.mSrcHandler.obtainMessage(69632);
-        obtainMessage.arg1 = i;
-        obtainMessage.obj = this;
-        obtainMessage.replyTo = this.mDstMessenger;
+        Message messageObtainMessage = this.mSrcHandler.obtainMessage(69632);
+        messageObtainMessage.arg1 = i;
+        messageObtainMessage.obj = this;
+        messageObtainMessage.replyTo = this.mDstMessenger;
         if (!linkToDeathMonitor()) {
-            obtainMessage.arg1 = 1;
+            messageObtainMessage.arg1 = 1;
         }
-        this.mSrcHandler.sendMessage(obtainMessage);
+        this.mSrcHandler.sendMessage(messageObtainMessage);
     }
 
     private boolean linkToDeathMonitor() {
@@ -444,11 +444,11 @@ public class AsyncChannel {
         if (handler == null) {
             return;
         }
-        Message obtainMessage = handler.obtainMessage(CMD_CHANNEL_DISCONNECTED);
-        obtainMessage.arg1 = i;
-        obtainMessage.obj = this;
-        obtainMessage.replyTo = this.mDstMessenger;
-        this.mSrcHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = handler.obtainMessage(CMD_CHANNEL_DISCONNECTED);
+        messageObtainMessage.arg1 = i;
+        messageObtainMessage.obj = this;
+        messageObtainMessage.replyTo = this.mDstMessenger;
+        this.mSrcHandler.sendMessage(messageObtainMessage);
     }
 
     class AsyncChannelConnection implements ServiceConnection {

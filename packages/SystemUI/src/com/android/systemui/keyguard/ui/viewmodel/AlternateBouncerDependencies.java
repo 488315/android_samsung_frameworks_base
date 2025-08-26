@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.gesture.TapGestureDetector;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlternateBouncerDependencies {
     public final TouchHandlingViewLogger logger;
@@ -20,7 +19,6 @@ public final class AlternateBouncerDependencies {
     public final AlternateBouncerUdfpsIconViewModel udfpsIconViewModel;
     public final AlternateBouncerViewModel viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

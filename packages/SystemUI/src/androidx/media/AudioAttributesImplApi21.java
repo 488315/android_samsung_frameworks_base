@@ -2,7 +2,6 @@ package androidx.media;
 
 import android.media.AudioAttributes;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AudioAttributesImplApi21 implements AudioAttributesImpl {
     public AudioAttributes mAudioAttributes;
@@ -32,7 +31,6 @@ public class AudioAttributesImplApi21 implements AudioAttributesImpl {
         return "AudioAttributesCompat: audioattributes=" + this.mAudioAttributes;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final AudioAttributes.Builder mFwkBuilder;
 

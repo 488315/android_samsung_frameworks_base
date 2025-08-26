@@ -4,7 +4,6 @@ import com.android.systemui.dreams.DreamOverlayService;
 import com.android.systemui.scene.shared.model.Overlays;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DreamOverlayService$2$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
@@ -32,9 +31,9 @@ public final /* synthetic */ class DreamOverlayService$2$$ExternalSyntheticLambd
                 DreamOverlayService.AnonymousClass3 anonymousClass3 = (DreamOverlayService.AnonymousClass3) this.f$0;
                 Boolean bool2 = (Boolean) this.f$1;
                 DreamOverlayService dreamOverlayService = anonymousClass3.this$0;
-                boolean booleanValue = bool2.booleanValue();
-                if (dreamOverlayService.mBouncerShowing != booleanValue) {
-                    dreamOverlayService.mBouncerShowing = booleanValue;
+                boolean zBooleanValue = bool2.booleanValue();
+                if (dreamOverlayService.mBouncerShowing != zBooleanValue) {
+                    dreamOverlayService.mBouncerShowing = zBooleanValue;
                     dreamOverlayService.updateLifecycleStateLocked();
                     dreamOverlayService.updateGestureBlockingLocked();
                     break;
@@ -44,9 +43,9 @@ public final /* synthetic */ class DreamOverlayService$2$$ExternalSyntheticLambd
                 DreamOverlayService.AnonymousClass4 anonymousClass4 = (DreamOverlayService.AnonymousClass4) this.f$0;
                 Set set = (Set) this.f$1;
                 DreamOverlayService dreamOverlayService2 = anonymousClass4.this$0;
-                boolean contains = set.contains(Overlays.Bouncer);
-                if (dreamOverlayService2.mBouncerShowing != contains) {
-                    dreamOverlayService2.mBouncerShowing = contains;
+                boolean zContains = set.contains(Overlays.Bouncer);
+                if (dreamOverlayService2.mBouncerShowing != zContains) {
+                    dreamOverlayService2.mBouncerShowing = zContains;
                     dreamOverlayService2.updateLifecycleStateLocked();
                     dreamOverlayService2.updateGestureBlockingLocked();
                     break;

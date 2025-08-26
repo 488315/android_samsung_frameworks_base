@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FingerprintPropertyRepositoryImpl$propertiesInitialized$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -41,9 +40,9 @@ final class FingerprintPropertyRepositoryImpl$propertiesInitialized$2 extends Su
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Boolean valueOf = Boolean.valueOf(!Intrinsics.areEqual(this.this$0.props.$$delegate_0.getValue(), FingerprintPropertyRepositoryImpl.UNINITIALIZED_PROPS));
+            Boolean boolValueOf = Boolean.valueOf(!Intrinsics.areEqual(this.this$0.props.$$delegate_0.getValue(), FingerprintPropertyRepositoryImpl.UNINITIALIZED_PROPS));
             this.label = 1;
-            if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+            if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

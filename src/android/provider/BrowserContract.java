@@ -7,6 +7,7 @@ import android.content.ContentProviderOperation;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.SyncStateContract;
@@ -105,9 +106,9 @@ public class BrowserContract {
         }
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "bookmarks");
-            CONTENT_URI = withAppendedPath;
-            CONTENT_URI_DEFAULT_FOLDER = Uri.withAppendedPath(withAppendedPath, "folder");
+            Uri uriWithAppendedPath = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "bookmarks");
+            CONTENT_URI = uriWithAppendedPath;
+            CONTENT_URI_DEFAULT_FOLDER = Uri.withAppendedPath(uriWithAppendedPath, "folder");
         }
 
         public static final Uri buildFolderUri(long j) {
@@ -201,54 +202,23 @@ public class BrowserContract {
         private Settings() {
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x0035, code lost:
-        
-            r1.close();
-         */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public static boolean isSyncEnabled(android.content.Context r8) {
-            /*
-                r1 = 0
-                android.content.ContentResolver r2 = r8.getContentResolver()     // Catch: java.lang.Throwable -> L39
-                android.net.Uri r3 = android.provider.BrowserContract.Settings.CONTENT_URI     // Catch: java.lang.Throwable -> L39
-                java.lang.String r8 = "value"
-                java.lang.String[] r4 = new java.lang.String[]{r8}     // Catch: java.lang.Throwable -> L39
-                java.lang.String r5 = "key=?"
-                java.lang.String r8 = "sync_enabled"
-                java.lang.String[] r6 = new java.lang.String[]{r8}     // Catch: java.lang.Throwable -> L39
-                r7 = 0
-                android.database.Cursor r1 = r2.query(r3, r4, r5, r6, r7)     // Catch: java.lang.Throwable -> L39
-                r8 = 0
-                if (r1 == 0) goto L33
-                boolean r0 = r1.moveToFirst()     // Catch: java.lang.Throwable -> L39
-                if (r0 != 0) goto L26
-                goto L33
-            L26:
-                int r0 = r1.getInt(r8)     // Catch: java.lang.Throwable -> L39
-                if (r0 == 0) goto L2d
-                r8 = 1
-            L2d:
-                if (r1 == 0) goto L32
-                r1.close()
-            L32:
-                return r8
-            L33:
-                if (r1 == 0) goto L38
-                r1.close()
-            L38:
-                return r8
-            L39:
-                r0 = move-exception
-                r8 = r0
-                if (r1 == 0) goto L40
-                r1.close()
-            L40:
-                throw r8
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.provider.BrowserContract.Settings.isSyncEnabled(android.content.Context):boolean");
+        public static boolean isSyncEnabled(Context context) {
+            Cursor cursorQuery = null;
+            try {
+                cursorQuery = context.getContentResolver().query(CONTENT_URI, new String[]{"value"}, "key=?", new String[]{KEY_SYNC_ENABLED}, null);
+                if (cursorQuery != null && cursorQuery.moveToFirst()) {
+                    boolean z = cursorQuery.getInt(0) != 0;
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
+                    }
+                    return z;
+                }
+                if (cursorQuery != null) {
+                    cursorQuery.close();
+                }
+                return false;
+            } finally {
+            }
         }
 
         public static void setSyncEnabled(Context context, boolean z) {

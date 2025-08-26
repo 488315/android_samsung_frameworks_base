@@ -7,12 +7,10 @@ import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class UByteArray implements Collection, KMappedMarker {
     public final byte[] storage;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Iterator implements java.util.Iterator, KMappedMarker {
         public final byte[] array;
         public int index;
@@ -34,7 +32,7 @@ public final class UByteArray implements Collection, KMappedMarker {
                 throw new NoSuchElementException(String.valueOf(this.index));
             }
             this.index = i + 1;
-            return UByte.m3424boximpl(bArr[i]);
+            return UByte.m3444boximpl(bArr[i]);
         }
 
         @Override // java.util.Iterator

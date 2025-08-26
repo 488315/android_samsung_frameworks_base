@@ -1,21 +1,30 @@
 package com.android.systemui.qs.tiles;
 
+import android.app.KeyguardManager;
 import android.app.SemStatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.sysprop.TelephonyProperties;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.Dependency;
+import com.android.systemui.Operator;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.Rune;
@@ -29,6 +38,7 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qp.SubscreenQsPanelController;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.SettingObserver;
@@ -39,16 +49,18 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.statusbar.connectivity.NetworkController;
 import com.android.systemui.statusbar.connectivity.NetworkControllerImpl;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.statusbar.policy.SatelliteEnabledListener;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
+import com.android.systemui.statusbar.policy.SatelliteTrtListener;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.settings.GlobalSettings;
 import dagger.Lazy;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AirplaneModeTile extends SQSTileImpl {
     public boolean mAirplaneTileModeChanged;
@@ -57,24 +69,34 @@ public class AirplaneModeTile extends SQSTileImpl {
     public final QSTileImpl.AnimationIcon mDisable;
     public final DisplayLifecycle mDisplayLifecycle;
     public final QSTileImpl.AnimationIcon mEnable;
-    public final AnonymousClass3 mFoldStateChangedListener;
+    public final AnonymousClass5 mFoldStateChangedListener;
+    public boolean mIsSatelliteEnabled;
     public boolean mIsSatelliteModeOn;
+    public boolean mIsSupportedEsos;
+    public boolean mIsUsingTerrestrialNetwork;
     public boolean mIsWiFiOnlyDevice;
     public final KeyguardStateController mKeyguardStateController;
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final Lazy mLazyConnectivityManager;
     public boolean mListening;
     public final NetworkController mNetworkController;
-    public final AnonymousClass5 mReceiver;
+    public final AnonymousClass7 mReceiver;
+    public final AnonymousClass2 mSatelliteEsosCallback;
     public final AnonymousClass1 mSatelliteModeCallback;
     public final SatelliteModeObserverHelper mSatelliteModeObserverHelper;
-    public final AnonymousClass2 mSetting;
+    public final AnonymousClass3 mSatelliteTrtCallback;
+    public final AnonymousClass4 mSetting;
     private final SettingsHelper mSettingsHelper;
     public final QSTile.BooleanState mStateBeforeClick;
     public SubscreenAirplaneModeTileReceiver mSubscreenAirplaneModeTileReceiver;
     public final SubscreenQsPanelController mSubscreenQsPanelController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    /* renamed from: com.android.systemui.qs.tiles.AirplaneModeTile$2, reason: invalid class name */
+    public class AnonymousClass2 {
+        public AnonymousClass2() {
+        }
+    }
+
     public class SubscreenAirplaneModeTileReceiver extends BroadcastReceiver {
         public SubscreenAirplaneModeTileReceiver() {
         }
@@ -97,10 +119,11 @@ public class AirplaneModeTile extends SQSTileImpl {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Type inference failed for: r2v11, types: [com.android.systemui.qs.tiles.AirplaneModeTile$4] */
     /* JADX WARN: Type inference failed for: r2v6, types: [com.android.systemui.qs.tiles.AirplaneModeTile$1] */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.systemui.qs.tiles.AirplaneModeTile$2] */
-    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.qs.tiles.AirplaneModeTile$3, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.qs.tiles.AirplaneModeTile$5] */
+    /* JADX WARN: Type inference failed for: r2v8, types: [com.android.systemui.qs.tiles.AirplaneModeTile$3] */
+    /* JADX WARN: Type inference failed for: r3v3, types: [com.android.systemui.qs.tiles.AirplaneModeTile$5, java.lang.Object] */
+    /* JADX WARN: Type inference failed for: r4v2, types: [com.android.systemui.qs.tiles.AirplaneModeTile$7] */
     public AirplaneModeTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BroadcastDispatcher broadcastDispatcher, Lazy lazy, GlobalSettings globalSettings, NetworkController networkController, SettingsHelper settingsHelper, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UserTracker userTracker, SatelliteModeObserverHelper satelliteModeObserverHelper, DisplayLifecycle displayLifecycle) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mStateBeforeClick = new QSTile.BooleanState();
@@ -109,16 +132,30 @@ public class AirplaneModeTile extends SQSTileImpl {
         QSTileImpl.ResourceIcon.get(android.R.drawable.item_background_material_dark);
         this.mAirplaneTileModeChanged = false;
         this.mIsSatelliteModeOn = false;
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mIsSatelliteEnabled = false;
+        this.mIsSupportedEsos = false;
+        this.mIsUsingTerrestrialNetwork = false;
+        this.mSatelliteModeCallback = new SatelliteEnabledListener() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteEnabledListener
+            public final void onSatelliteEnabledChanged(boolean z) {
                 AirplaneModeTile airplaneModeTile = AirplaneModeTile.this;
-                airplaneModeTile.mIsSatelliteModeOn = z;
+                airplaneModeTile.mIsSatelliteEnabled = z;
+                airplaneModeTile.mIsSatelliteModeOn = (z || airplaneModeTile.mIsUsingTerrestrialNetwork) && airplaneModeTile.mIsSupportedEsos;
+                airplaneModeTile.refreshState(null);
+            }
+        };
+        this.mSatelliteEsosCallback = new AnonymousClass2();
+        this.mSatelliteTrtCallback = new SatelliteTrtListener() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.3
+            @Override // com.android.systemui.statusbar.policy.SatelliteTrtListener
+            public final void onSatelliteTrtChanged(boolean z) {
+                AirplaneModeTile airplaneModeTile = AirplaneModeTile.this;
+                airplaneModeTile.mIsUsingTerrestrialNetwork = z;
+                airplaneModeTile.mIsSatelliteModeOn = (airplaneModeTile.mIsSatelliteEnabled || z) && airplaneModeTile.mIsSupportedEsos;
                 airplaneModeTile.refreshState(null);
             }
         };
         this.mSubscreenQsPanelController = null;
-        ?? r3 = new DisplayLifecycle.Observer() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.3
+        ?? r3 = new DisplayLifecycle.Observer() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.5
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
             public final void onFolderStateChanged(boolean z) {
                 if (QpRune.QUICK_SUBSCREEN_PANEL) {
@@ -133,7 +170,7 @@ public class AirplaneModeTile extends SQSTileImpl {
             }
         };
         this.mFoldStateChangedListener = r3;
-        this.mReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.5
+        this.mReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.7
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
                 Log.d(AirplaneModeTile.this.TAG, "onReceive " + intent.getAction());
@@ -170,13 +207,13 @@ public class AirplaneModeTile extends SQSTileImpl {
             this.mSubscreenAirplaneModeTileReceiver = subscreenAirplaneModeTileReceiver;
             broadcastDispatcher.registerReceiver(subscreenAirplaneModeTileReceiver, new IntentFilter("AIRPLANE_MODE_CHANGE"), null, UserHandle.ALL, 2, "com.samsung.systemui.permission.AIRPLANE_STATE_CHANGE");
         }
-        this.mSetting = new SettingObserver(globalSettings, ((SQSTileImpl) this).mHandler, SettingsHelper.INDEX_AIRPLANE_MODE_ON) { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.2
+        this.mSetting = new SettingObserver(globalSettings, ((SQSTileImpl) this).mHandler, SettingsHelper.INDEX_AIRPLANE_MODE_ON) { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.4
             @Override // com.android.systemui.qs.SettingObserver
             public final void handleValueChanged(int i, boolean z) {
                 String str = AirplaneModeTile.this.TAG;
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "handleValueChanged, value = ", ",mSetting.getValue() = ");
-                m.append(getValue());
-                Log.d(str, m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "handleValueChanged, value = ", ",mSetting.getValue() = ");
+                sbM.append(getValue());
+                Log.d(str, sbM.toString());
                 AirplaneModeTile.this.handleRefreshState(Integer.valueOf(i));
             }
         };
@@ -204,18 +241,120 @@ public class AirplaneModeTile extends SQSTileImpl {
         return this.mContext.getString(R.string.quick_settings_airplane_mode_label);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0102  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00ff  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x0102  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleClick(final com.android.systemui.animation.Expandable r12) {
-        /*
-            Method dump skipped, instructions count: 537
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.AirplaneModeTile.handleClick(com.android.systemui.animation.Expandable):void");
+    public final void handleClick(final Expandable expandable) {
+        boolean z;
+        boolean z2;
+        PackageManager packageManager;
+        if (this.mIsSatelliteModeOn) {
+            Context context = this.mContext;
+            Toast.makeText(context, context.getString(R.string.sec_satellite_mode_airplane_mode_toast_text), 0).show();
+            return;
+        }
+        if (((QSTile.BooleanState) this.mState).state == 0) {
+            return;
+        }
+        if (this.mSettingsHelper.getEmergencyState() == 1) {
+            Context context2 = this.mContext;
+            Toast.makeText(context2, context2.getString(R.string.airplane_mode_toast_emergency_sharing_on), 0).show();
+            return;
+        }
+        if (!DeviceState.isTelephonyIdle(this.mContext) && !((QSTile.BooleanState) this.mState).value) {
+            Context context3 = this.mContext;
+            Toast.makeText(context3, context3.getString(R.string.airplane_mode_toast_impossible_during_call), 0).show();
+            return;
+        }
+        if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isAirplaneModeTileBlocked()) {
+            if (QpRune.QUICK_SUBSCREEN_PANEL) {
+                showItPolicyToastOnSubScreen(getSubScreenContext());
+                return;
+            } else {
+                showItPolicyToast();
+                return;
+            }
+        }
+        boolean z3 = ((QSTile.BooleanState) this.mState).value;
+        boolean z4 = !z3;
+        MetricsLogger.action(this.mContext, 112, z4);
+        ActivityStarter activityStarter = this.mActivityStarter;
+        if (!z3 && ((Boolean) TelephonyProperties.in_ecm_mode().orElse(Boolean.FALSE)).booleanValue()) {
+            activityStarter.postStartActivityDismissingKeyguard(new Intent("android.telephony.action.SHOW_NOTICE_ECM_BLOCK_OTHERS"), 0);
+            return;
+        }
+        String str = this.TAG;
+        Log.d(str, "handleClick");
+        if (Operator.QUICK_IS_SKT_BRANDING) {
+            KeyguardManager keyguardManager = (KeyguardManager) this.mContext.getSystemService("keyguard");
+            if (keyguardManager != null && keyguardManager.isKeyguardSecure() && keyguardManager.inKeyguardRestrictedInputMode()) {
+                try {
+                    packageManager = this.mContext.getPackageManager();
+                } catch (Exception unused) {
+                }
+                if (packageManager != null) {
+                    z2 = packageManager.getApplicationInfo("com.skt.t_smart_charge", 0) != null;
+                    if (z2) {
+                        Log.d(str, "supportTLockPackage()");
+                    }
+                } else {
+                    z2 = false;
+                }
+                if (z2 && Settings.System.getInt(this.mContext.getContentResolver(), "off_menu_setting", 0) == 1) {
+                    z = true;
+                }
+                if (z) {
+                }
+            } else {
+                z = false;
+                if (z) {
+                    Context context4 = this.mContext;
+                    Toast.makeText(context4, context4.getString(R.string.airplane_mode_show_popup_safelock), 0).show();
+                    return;
+                }
+            }
+        }
+        KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
+        boolean z5 = keyguardStateControllerImpl.mShowing;
+        DisplayLifecycle displayLifecycle = this.mDisplayLifecycle;
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
+        if (z5 && keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) && this.mSettingsHelper.isLockFunctionsEnabled()) {
+            if (!QpRune.QUICK_SUBSCREEN_PANEL || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
+                activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        this.f$0.handleClick(expandable);
+                    }
+                });
+                return;
+            } else {
+                ((SubscreenUtil) Dependency.sDependency.getDependencyInner(SubscreenUtil.class)).showLockscreenOnCoverScreen(this.mContext, "AIRPLANE_MODE_CHANGE");
+                return;
+            }
+        }
+        Log.d(str, "isKeyguardVisible() = " + keyguardStateControllerImpl.mShowing + ", isSecure() = " + keyguardUpdateMonitor.isSecure() + ", canSkipBouncer() = " + keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) + ", isLockFunctionsEnabled() = " + this.mSettingsHelper.isLockFunctionsEnabled());
+        if (Operator.QUICK_IS_OJT_BRANDING && !((QSTile.BooleanState) this.mState).value && !DeviceType.isMultiSimSupported()) {
+            Context context5 = this.mContext;
+            Toast.makeText(context5, context5.getString(R.string.airplane_mode_show_toast_turn_on_wifi_for_wificalling), 0).show();
+        }
+        ((QSTile.BooleanState) this.mState).copyTo(this.mStateBeforeClick);
+        refreshState(z3 ? null : SQSTileImpl.ARG_SHOW_TRANSIENT_ENABLING);
+        if (((Boolean) TelephonyProperties.in_ecm_mode().orElse(Boolean.FALSE)).booleanValue()) {
+            Intent intent = new Intent("android.telephony.action.SHOW_NOTICE_ECM_BLOCK_OTHERS", (Uri) null);
+            intent.addFlags(268435456);
+            activityStarter.postStartActivityDismissingKeyguard(intent, 0);
+        } else {
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("setEnabled :", str, z4);
+            this.mAirplaneTileModeChanged = true;
+            ((ConnectivityManager) this.mLazyConnectivityManager.get()).setAirplaneMode(z4);
+        }
+        if ((!QpRune.QUICK_SUBSCREEN_PANEL && !QpRune.QUICK_SUBSCREEN_FULLSCREEN_PANEL) || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
+            return;
+        }
+        SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_AIRPLANEMODE_COVER);
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
@@ -226,16 +365,16 @@ public class AirplaneModeTile extends SQSTileImpl {
         String str = this.TAG;
         Log.d(str, "handleDestroy");
         try {
-            this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.4
+            this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.AirplaneModeTile.6
                 @Override // java.lang.Runnable
                 public final void run() {
                     DisplayLifecycle displayLifecycle;
                     AirplaneModeTile airplaneModeTile = AirplaneModeTile.this;
-                    AnonymousClass3 anonymousClass3 = airplaneModeTile.mFoldStateChangedListener;
-                    if (anonymousClass3 == null || (displayLifecycle = airplaneModeTile.mDisplayLifecycle) == null) {
+                    AnonymousClass5 anonymousClass5 = airplaneModeTile.mFoldStateChangedListener;
+                    if (anonymousClass5 == null || (displayLifecycle = airplaneModeTile.mDisplayLifecycle) == null) {
                         return;
                     }
-                    displayLifecycle.removeObserver(anonymousClass3);
+                    displayLifecycle.removeObserver(anonymousClass5);
                 }
             });
         } catch (Exception e) {
@@ -262,20 +401,26 @@ public class AirplaneModeTile extends SQSTileImpl {
             return;
         }
         this.mListening = z;
+        AnonymousClass3 anonymousClass3 = this.mSatelliteTrtCallback;
         AnonymousClass1 anonymousClass1 = this.mSatelliteModeCallback;
         SatelliteModeObserverHelper satelliteModeObserverHelper = this.mSatelliteModeObserverHelper;
-        AnonymousClass5 anonymousClass5 = this.mReceiver;
+        AnonymousClass7 anonymousClass7 = this.mReceiver;
         BroadcastDispatcher broadcastDispatcher = this.mBroadcastDispatcher;
+        AnonymousClass2 anonymousClass2 = this.mSatelliteEsosCallback;
         if (z) {
-            IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.AIRPLANE_MODE", "android.intent.action.SERVICE_STATE");
+            IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.AIRPLANE_MODE", "android.intent.action.SERVICE_STATE");
             if (satelliteModeObserverHelper != null) {
                 satelliteModeObserverHelper.addCallback(anonymousClass1);
+                satelliteModeObserverHelper.addCallback(anonymousClass2);
+                satelliteModeObserverHelper.addCallback(anonymousClass3);
             }
-            broadcastDispatcher.registerReceiver(m, anonymousClass5);
+            broadcastDispatcher.registerReceiver(intentFilterM, anonymousClass7);
         } else {
-            broadcastDispatcher.unregisterReceiver(anonymousClass5);
+            broadcastDispatcher.unregisterReceiver(anonymousClass7);
             if (satelliteModeObserverHelper != null) {
                 satelliteModeObserverHelper.removeCallback(anonymousClass1);
+                satelliteModeObserverHelper.removeCallback(anonymousClass2);
+                satelliteModeObserverHelper.removeCallback(anonymousClass3);
             }
         }
         setListening(z);
@@ -286,37 +431,37 @@ public class AirplaneModeTile extends SQSTileImpl {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         checkIfRestrictionEnforcedByAdminOnly(booleanState, "no_airplane_mode");
         boolean z = obj == SQSTileImpl.ARG_SHOW_TRANSIENT_ENABLING;
-        boolean isNoSimState = DeviceState.isNoSimState(this.mContext);
+        boolean zIsNoSimState = DeviceState.isNoSimState(this.mContext);
         this.mIsWiFiOnlyDevice = DeviceType.isWiFiOnlyDevice();
-        boolean isPowerOffServiceState = ((NetworkControllerImpl) this.mNetworkController).isPowerOffServiceState();
+        boolean zIsPowerOffServiceState = ((NetworkControllerImpl) this.mNetworkController).isPowerOffServiceState();
         StringBuilder sb = new StringBuilder(" handleUpdateState mIsWiFiOnlyDevice ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mIsWiFiOnlyDevice, " isNoSimState ", isNoSimState, " isPowerOffServiceState ");
-        sb.append(isPowerOffServiceState);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mIsWiFiOnlyDevice, " isNoSimState ", zIsNoSimState, " isPowerOffServiceState ");
+        sb.append(zIsPowerOffServiceState);
         sb.append(" mSetting.getValue() ");
-        AnonymousClass2 anonymousClass2 = this.mSetting;
-        sb.append(anonymousClass2.getValue());
+        AnonymousClass4 anonymousClass4 = this.mSetting;
+        sb.append(anonymousClass4.getValue());
         sb.append(" isSatelliteModeOn ");
         sb.append(this.mIsSatelliteModeOn);
         sb.append(" isChinaDevice ");
         boolean z2 = Rune.SYSUI_CHINA_FEATURE;
         sb.append(z2);
-        String sb2 = sb.toString();
+        String string = sb.toString();
         String str = this.TAG;
-        Log.d(str, sb2);
+        Log.d(str, string);
         if (z) {
             booleanState.value = ((QSTile.BooleanState) this.mState).value;
             booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_airplane_mode_dim);
             booleanState.state = 0;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m(" handleUpdateState:  isTransient  ", "state.value ", z);
-            m.append(booleanState.value);
-            m.append("state.state ");
-            RecyclerView$$ExternalSyntheticOutline0.m(booleanState.state, str, m);
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m(" handleUpdateState:  isTransient  ", "state.value ", z);
+            sbM.append(booleanState.value);
+            sbM.append("state.state ");
+            RecyclerView$$ExternalSyntheticOutline0.m(booleanState.state, str, sbM);
         } else {
-            if (anonymousClass2.getValue() == 1 && (this.mIsWiFiOnlyDevice || isNoSimState || ((this.mIsSatelliteModeOn && z2) || isPowerOffServiceState))) {
+            if (anonymousClass4.getValue() == 1 && (this.mIsWiFiOnlyDevice || zIsNoSimState || ((this.mIsSatelliteModeOn && z2) || zIsPowerOffServiceState))) {
                 booleanState.value = true;
                 booleanState.icon = this.mEnable;
                 booleanState.state = 2;
-            } else if (anonymousClass2.getValue() == 0 && (this.mIsWiFiOnlyDevice || isNoSimState || ((this.mIsSatelliteModeOn && z2) || !isPowerOffServiceState))) {
+            } else if (anonymousClass4.getValue() == 0 && (this.mIsWiFiOnlyDevice || zIsNoSimState || ((this.mIsSatelliteModeOn && z2) || !zIsPowerOffServiceState))) {
                 booleanState.value = false;
                 booleanState.icon = this.mDisable;
                 booleanState.state = 1;
@@ -326,10 +471,10 @@ public class AirplaneModeTile extends SQSTileImpl {
                 booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_airplane_mode_dim);
                 booleanState.state = 0;
             }
-            StringBuilder sb3 = new StringBuilder(" handleUpdateState:  value = ");
-            sb3.append(booleanState.value);
-            sb3.append(", state = ");
-            RecyclerView$$ExternalSyntheticOutline0.m(booleanState.state, str, sb3);
+            StringBuilder sb2 = new StringBuilder(" handleUpdateState:  value = ");
+            sb2.append(booleanState.value);
+            sb2.append(", state = ");
+            RecyclerView$$ExternalSyntheticOutline0.m(booleanState.state, str, sb2);
         }
         booleanState.dualTarget = true;
         booleanState.label = this.mContext.getString(R.string.quick_settings_airplane_mode_label);

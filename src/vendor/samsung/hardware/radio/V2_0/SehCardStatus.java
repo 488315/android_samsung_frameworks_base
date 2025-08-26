@@ -45,13 +45,13 @@ public final class SehCardStatus {
 
     public static final ArrayList<SehCardStatus> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehCardStatus> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehCardStatus sehCardStatus = new SehCardStatus();
-            sehCardStatus.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 80);
+            sehCardStatus.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 80);
             arrayList.add(sehCardStatus);
         }
         return arrayList;
@@ -64,11 +64,11 @@ public final class SehCardStatus {
         this.cdmaSubscriptionAppIndex = hwBlob.getInt32(12 + j);
         this.imsSubscriptionAppIndex = hwBlob.getInt32(16 + j);
         int int32 = hwBlob.getInt32(32 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j + 24, true);
         this.applications.clear();
         for (int i = 0; i < int32; i++) {
             SehAppStatus sehAppStatus = new SehAppStatus();
-            sehAppStatus.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            sehAppStatus.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             this.applications.add(sehAppStatus);
         }
         this.physicalSlotId = hwBlob.getInt32(40 + j);

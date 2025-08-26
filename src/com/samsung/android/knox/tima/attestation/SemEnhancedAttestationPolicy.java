@@ -17,32 +17,28 @@ public class SemEnhancedAttestationPolicy {
     }
 
     public static synchronized boolean isSupported(Context context) {
-        synchronized (SemEnhancedAttestationPolicy.class) {
-            Log.d(TAG, "isSupported: ");
-            if (context == null) {
-                Log.e(TAG, "isSupported: Context null");
-                return false;
-            }
-            return EnhancedAttestationPolicy.getInstance(context).isSupported();
+        Log.d(TAG, "isSupported: ");
+        if (context == null) {
+            Log.e(TAG, "isSupported: Context null");
+            return false;
         }
+        return EnhancedAttestationPolicy.getInstance(context).isSupported();
     }
 
     public static synchronized SemEnhancedAttestationPolicy getInstance(Context context) {
-        synchronized (SemEnhancedAttestationPolicy.class) {
-            Log.d(TAG, "getInstance");
-            if (context == null) {
-                Log.e(TAG, "getInstance: Context null");
-                return null;
-            }
-            if (!isSupported(context)) {
-                Log.e(TAG, "getInstance: not supported");
-                return null;
-            }
-            if (mEnhancedAttestationPolicy == null) {
-                mEnhancedAttestationPolicy = new SemEnhancedAttestationPolicy(context);
-            }
-            return mEnhancedAttestationPolicy;
+        Log.d(TAG, "getInstance");
+        if (context == null) {
+            Log.e(TAG, "getInstance: Context null");
+            return null;
         }
+        if (!isSupported(context)) {
+            Log.e(TAG, "getInstance: not supported");
+            return null;
+        }
+        if (mEnhancedAttestationPolicy == null) {
+            mEnhancedAttestationPolicy = new SemEnhancedAttestationPolicy(context);
+        }
+        return mEnhancedAttestationPolicy;
     }
 
     public void attest(String str, SemEnhancedAttestationPolicyCallback semEnhancedAttestationPolicyCallback) {

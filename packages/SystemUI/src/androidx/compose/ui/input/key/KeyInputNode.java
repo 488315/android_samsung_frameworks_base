@@ -3,7 +3,6 @@ package androidx.compose.ui.input.key;
 import androidx.compose.ui.Modifier;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class KeyInputNode extends Modifier.Node implements KeyInputModifierNode {
     public Function1 onEvent;
@@ -19,7 +18,7 @@ final class KeyInputNode extends Modifier.Node implements KeyInputModifierNode {
     public final boolean mo15onKeyEventZmokQxo(android.view.KeyEvent keyEvent) {
         Function1 function1 = this.onEvent;
         if (function1 != null) {
-            return ((Boolean) function1.mo779invoke(KeyEvent.m577boximpl(keyEvent))).booleanValue();
+            return ((Boolean) function1.mo781invoke(KeyEvent.m579boximpl(keyEvent))).booleanValue();
         }
         return false;
     }
@@ -29,7 +28,7 @@ final class KeyInputNode extends Modifier.Node implements KeyInputModifierNode {
     public final boolean mo17onPreKeyEventZmokQxo(android.view.KeyEvent keyEvent) {
         Function1 function1 = this.onPreEvent;
         if (function1 != null) {
-            return ((Boolean) function1.mo779invoke(KeyEvent.m577boximpl(keyEvent))).booleanValue();
+            return ((Boolean) function1.mo781invoke(KeyEvent.m579boximpl(keyEvent))).booleanValue();
         }
         return false;
     }

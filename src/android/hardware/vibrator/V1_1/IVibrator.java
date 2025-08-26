@@ -67,9 +67,9 @@ public interface IVibrator extends android.hardware.vibrator.V1_0.IVibrator {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IVibrator)) {
-            return (IVibrator) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IVibrator)) {
+            return (IVibrator) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -289,13 +289,13 @@ public interface IVibrator extends android.hardware.vibrator.V1_0.IVibrator {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -450,23 +450,23 @@ public interface IVibrator extends android.hardware.vibrator.V1_0.IVibrator {
             switch (i) {
                 case 1:
                     hwParcel.enforceInterface(android.hardware.vibrator.V1_0.IVibrator.kInterfaceName);
-                    int on = on(hwParcel.readInt32());
+                    int iOn = on(hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(on);
+                    hwParcel2.writeInt32(iOn);
                     hwParcel2.send();
                     return;
                 case 2:
                     hwParcel.enforceInterface(android.hardware.vibrator.V1_0.IVibrator.kInterfaceName);
-                    int off = off();
+                    int iOff = off();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(off);
+                    hwParcel2.writeInt32(iOff);
                     hwParcel2.send();
                     return;
                 case 3:
                     hwParcel.enforceInterface(android.hardware.vibrator.V1_0.IVibrator.kInterfaceName);
-                    boolean supportsAmplitudeControl = supportsAmplitudeControl();
+                    boolean zSupportsAmplitudeControl = supportsAmplitudeControl();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(supportsAmplitudeControl);
+                    hwParcel2.writeBool(zSupportsAmplitudeControl);
                     hwParcel2.send();
                     return;
                 case 4:
@@ -504,9 +504,9 @@ public interface IVibrator extends android.hardware.vibrator.V1_0.IVibrator {
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -517,9 +517,9 @@ public interface IVibrator extends android.hardware.vibrator.V1_0.IVibrator {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

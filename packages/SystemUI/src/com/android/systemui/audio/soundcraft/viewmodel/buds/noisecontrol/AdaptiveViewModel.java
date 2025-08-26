@@ -1,13 +1,13 @@
 package com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.systemui.R;
 import com.android.systemui.audio.soundcraft.interfaces.connectivity.BluetoothDeviceManager;
 import com.android.systemui.audio.soundcraft.model.ModelProvider;
 import com.android.systemui.audio.soundcraft.utils.SoundCraftSALogging;
 import com.android.systemui.audio.soundcraft.utils.ToastUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AdaptiveViewModel extends NoiseControlIconViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
@@ -21,7 +21,7 @@ public final class AdaptiveViewModel extends NoiseControlIconViewModel {
     }
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
-    public final boolean checkWearingOn() {
+    public final boolean checkWearingOn() throws Resources.NotFoundException {
         if (isWearingL() || isWearingR()) {
             return true;
         }

@@ -8,6 +8,7 @@ import java.util.List;
 /* loaded from: classes.dex */
 public class StringParceledListSlice extends BaseParceledListSlice<String> {
     public static final Parcelable.ClassLoaderCreator<StringParceledListSlice> CREATOR = new Parcelable.ClassLoaderCreator<StringParceledListSlice>() { // from class: android.content.pm.StringParceledListSlice.1
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Parcelable.Creator
         public StringParceledListSlice createFromParcel(Parcel parcel) {
             return new StringParceledListSlice(parcel, null);

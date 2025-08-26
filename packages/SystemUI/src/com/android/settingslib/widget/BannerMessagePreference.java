@@ -22,7 +22,6 @@ import com.android.systemui.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BannerMessagePreference extends Preference {
     public AttentionLevel mAttentionLevel;
@@ -33,7 +32,6 @@ public class BannerMessagePreference extends Preference {
     public final ButtonInfo mPositiveButtonInfo;
     public CharSequence mSubtitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum AttentionLevel {
         HIGH(0, R.color.banner_background_attention_high, R.color.banner_accent_attention_high, R.color.settingslib_banner_button_background_high, R.color.settingslib_banner_filled_button_content_high),
         /* JADX INFO: Fake field, exist only in values array */
@@ -82,7 +80,6 @@ public class BannerMessagePreference extends Preference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ButtonInfo {
         public ColorStateList mBackgroundColor;
         public Button mButton;
@@ -132,7 +129,6 @@ public class BannerMessagePreference extends Preference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DismissButtonInfo {
         public ImageButton mButton;
     }
@@ -150,17 +146,17 @@ public class BannerMessagePreference extends Preference {
         setSelectable(false);
         this.mLayoutResId = SettingsThemeHelper.isExpressiveTheme(context) ? R.layout.settingslib_expressive_banner_message : R.layout.settingslib_banner_message;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BannerMessagePreference);
-            this.mAttentionLevel = AttentionLevel.fromAttr(obtainStyledAttributes.getInt(0, 0));
-            this.mSubtitle = obtainStyledAttributes.getString(3);
-            this.mHeader = obtainStyledAttributes.getString(1);
-            this.mButtonOrientation = obtainStyledAttributes.getInt(2, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BannerMessagePreference);
+            this.mAttentionLevel = AttentionLevel.fromAttr(typedArrayObtainStyledAttributes.getInt(0, 0));
+            this.mSubtitle = typedArrayObtainStyledAttributes.getString(3);
+            this.mHeader = typedArrayObtainStyledAttributes.getString(1);
+            this.mButtonOrientation = typedArrayObtainStyledAttributes.getInt(2, 0);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
     @Override // androidx.preference.Preference
-    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
+    public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) throws Resources.NotFoundException {
         super.onBindViewHolder(preferenceViewHolder);
         Context context = this.mContext;
         Resources resources = context.getResources();
@@ -204,9 +200,9 @@ public class BannerMessagePreference extends Preference {
         ColorStateList colorStateList4 = this.mAttentionLevel == attentionLevel2 ? colorStateList : resources.getColorStateList(R.color.settingslib_banner_outline_button_content, theme);
         preferenceViewHolder.mDividerAllowedAbove = false;
         preferenceViewHolder.mDividerAllowedBelow = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.banner_background);
-        if (findViewById != null && !SettingsThemeHelper.isExpressiveTheme(context)) {
-            findViewById.getBackground().setTint(color2);
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.banner_background);
+        if (viewFindViewById != null && !SettingsThemeHelper.isExpressiveTheme(context)) {
+            viewFindViewById.getBackground().setTint(color2);
         }
         ButtonInfo buttonInfo = this.mPositiveButtonInfo;
         buttonInfo.mColor = color;
@@ -235,10 +231,10 @@ public class BannerMessagePreference extends Preference {
         }
         this.mPositiveButtonInfo.setUpButton();
         this.mNegativeButtonInfo.setUpButton();
-        View findViewById2 = preferenceViewHolder.findViewById(R.id.banner_buttons_frame);
-        if (findViewById2 != null) {
-            findViewById2.setVisibility((this.mPositiveButtonInfo.shouldBeVisible() || this.mNegativeButtonInfo.shouldBeVisible()) ? 0 : 8);
-            LinearLayout linearLayout = (LinearLayout) findViewById2;
+        View viewFindViewById2 = preferenceViewHolder.findViewById(R.id.banner_buttons_frame);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setVisibility((this.mPositiveButtonInfo.shouldBeVisible() || this.mNegativeButtonInfo.shouldBeVisible()) ? 0 : 8);
+            LinearLayout linearLayout = (LinearLayout) viewFindViewById2;
             if (this.mButtonOrientation != linearLayout.getOrientation()) {
                 for (int childCount = linearLayout.getChildCount() - 1; childCount >= 0; childCount--) {
                     View childAt = linearLayout.getChildAt(childCount);
@@ -248,12 +244,12 @@ public class BannerMessagePreference extends Preference {
                 linearLayout.setOrientation(this.mButtonOrientation);
             }
         }
-        View findViewById3 = preferenceViewHolder.findViewById(R.id.banner_button_space);
-        if (findViewById3 != null) {
+        View viewFindViewById3 = preferenceViewHolder.findViewById(R.id.banner_button_space);
+        if (viewFindViewById3 != null) {
             if (this.mPositiveButtonInfo.shouldBeVisible() && this.mNegativeButtonInfo.shouldBeVisible()) {
-                findViewById3.setVisibility(0);
+                viewFindViewById3.setVisibility(0);
             } else {
-                findViewById3.setVisibility(8);
+                viewFindViewById3.setVisibility(8);
             }
         }
     }

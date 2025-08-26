@@ -27,58 +27,57 @@ public class KernelCpuSpeedReader {
     }
 
     public long[] readDelta() {
-        BufferedReader bufferedReader;
-        String readLine;
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        String line;
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             try {
-                bufferedReader = new BufferedReader(new FileReader(this.mProcFile));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(this.mProcFile));
+                try {
+                    TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(' ');
+                    for (int i = 0; i < this.mLastSpeedTimesMs.length && (line = bufferedReader.readLine()) != null; i++) {
+                        simpleStringSplitter.setString(line);
+                        simpleStringSplitter.next();
+                        long j = Long.parseLong(simpleStringSplitter.next()) * this.mJiffyMillis;
+                        long[] jArr = this.mLastSpeedTimesMs;
+                        long j2 = jArr[i];
+                        if (j < j2) {
+                            this.mDeltaSpeedTimesMs[i] = j;
+                        } else {
+                            this.mDeltaSpeedTimesMs[i] = j - j2;
+                        }
+                        jArr[i] = j;
+                    }
+                    bufferedReader.close();
+                } catch (Throwable th) {
+                    try {
+                        bufferedReader.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
+                    }
+                    throw th;
+                }
             } catch (IOException e) {
                 Slog.e(TAG, "Failed to read cpu-freq: " + e.getMessage());
                 Arrays.fill(this.mDeltaSpeedTimesMs, 0L);
             }
-            try {
-                TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(' ');
-                for (int i = 0; i < this.mLastSpeedTimesMs.length && (readLine = bufferedReader.readLine()) != null; i++) {
-                    simpleStringSplitter.setString(readLine);
-                    simpleStringSplitter.next();
-                    long parseLong = Long.parseLong(simpleStringSplitter.next()) * this.mJiffyMillis;
-                    long[] jArr = this.mLastSpeedTimesMs;
-                    long j = jArr[i];
-                    if (parseLong < j) {
-                        this.mDeltaSpeedTimesMs[i] = parseLong;
-                    } else {
-                        this.mDeltaSpeedTimesMs[i] = parseLong - j;
-                    }
-                    jArr[i] = parseLong;
-                }
-                bufferedReader.close();
-                StrictMode.setThreadPolicy(allowThreadDiskReads);
-                return this.mDeltaSpeedTimesMs;
-            } catch (Throwable th) {
-                try {
-                    bufferedReader.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
-            }
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
+            return this.mDeltaSpeedTimesMs;
         } catch (Throwable th3) {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             throw th3;
         }
     }
 
     public long[] readAbsolute() {
-        String readLine;
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        String line;
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         long[] jArr = new long[this.mNumSpeedSteps];
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(this.mProcFile));
             try {
                 TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(' ');
-                for (int i = 0; i < this.mNumSpeedSteps && (readLine = bufferedReader.readLine()) != null; i++) {
-                    simpleStringSplitter.setString(readLine);
+                for (int i = 0; i < this.mNumSpeedSteps && (line = bufferedReader.readLine()) != null; i++) {
+                    simpleStringSplitter.setString(line);
                     simpleStringSplitter.next();
                     jArr[i] = Long.parseLong(simpleStringSplitter.next()) * this.mJiffyMillis;
                 }
@@ -97,7 +96,7 @@ public class KernelCpuSpeedReader {
             Arrays.fill(jArr, 0L);
             return jArr;
         } finally {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
         }
     }
 }

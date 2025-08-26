@@ -1,5 +1,6 @@
 package com.android.systemui.volume.dialog.sliders.ui.viewmodel;
 
+import com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent;
 import com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -16,7 +17,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.SafeFlow;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogOverscrollViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -46,8 +46,8 @@ public final class VolumeDialogOverscrollViewModel$special$$inlined$flatMapLates
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            float floatValue = ((Number) this.L$1).floatValue();
-            if (floatValue == 0.0f) {
+            float fFloatValue = ((Number) this.L$1).floatValue();
+            if (fFloatValue == 0.0f) {
                 safeFlow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new VolumeDialogOverscrollViewModel.OverscrollEventModel.Animate(0.0f));
             } else {
                 VolumeDialogOverscrollViewModel volumeDialogOverscrollViewModel = this.this$0;
@@ -56,7 +56,6 @@ public final class VolumeDialogOverscrollViewModel$special$$inlined$flatMapLates
                 final ChannelLimitedFlowMerge channelLimitedFlowMerge = volumeDialogOverscrollViewModel.inputEventsInteractor.event;
                 safeFlow = new SafeFlow(new VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$transform$1(new Flow() { // from class: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -83,74 +82,51 @@ public final class VolumeDialogOverscrollViewModel$special$$inlined$flatMapLates
                             this.$this_unsafeFlow = flowCollector;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                            /*
-                                r4 = this;
-                                boolean r0 = r6 instanceof com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1
-                                if (r0 == 0) goto L13
-                                r0 = r6
-                                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1$2$1 r0 = (com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1.AnonymousClass2.AnonymousClass1) r0
-                                int r1 = r0.label
-                                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r3 = r1 & r2
-                                if (r3 == 0) goto L13
-                                int r1 = r1 - r2
-                                r0.label = r1
-                                goto L18
-                            L13:
-                                com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1$2$1 r0 = new com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1$2$1
-                                r0.<init>(r6)
-                            L18:
-                                java.lang.Object r6 = r0.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r0.label
-                                r3 = 1
-                                if (r2 == 0) goto L2f
-                                if (r2 != r3) goto L27
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                goto L49
-                            L27:
-                                java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                r4.<init>(r5)
-                                throw r4
-                            L2f:
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent r5 = (com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent) r5
-                                boolean r6 = r5 instanceof com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent.Touch
-                                if (r6 == 0) goto L3b
-                                com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent$Touch r5 = (com.android.systemui.volume.dialog.sliders.shared.model.SliderInputEvent.Touch) r5
-                                goto L3c
-                            L3b:
-                                r5 = 0
-                            L3c:
-                                if (r5 == 0) goto L49
-                                r0.label = r3
-                                kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                java.lang.Object r4 = r4.emit(r5, r0)
-                                if (r4 != r1) goto L49
-                                return r1
-                            L49:
-                                kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                return r4
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogOverscrollViewModel$overscrollEvents$$inlined$mapNotNull$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                SliderInputEvent sliderInputEvent = (SliderInputEvent) obj;
+                                SliderInputEvent.Touch touch = sliderInputEvent instanceof SliderInputEvent.Touch ? (SliderInputEvent.Touch) sliderInputEvent : null;
+                                if (touch != null) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(touch, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector2), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = channelLimitedFlowMerge.collect(new AnonymousClass2(flowCollector2), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
-                }, null, ref$ObjectRef, volumeDialogOverscrollViewModel, floatValue));
+                }, null, ref$ObjectRef, volumeDialogOverscrollViewModel, fFloatValue));
             }
             this.label = 1;
             if (FlowKt.emitAll(flowCollector, safeFlow, this) == coroutineSingletons) {

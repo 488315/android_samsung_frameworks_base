@@ -12,7 +12,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'INT' uses e
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class JavaType {
     public static final /* synthetic */ JavaType[] $VALUES;

@@ -83,9 +83,9 @@ public interface IContextHubClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHubClient)) {
-                return (IContextHubClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHubClient)) {
+                return (IContextHubClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,9 +127,9 @@ public interface IContextHubClient extends IInterface {
                 case 1:
                     NanoAppMessage nanoAppMessage = (NanoAppMessage) parcel.readTypedObject(NanoAppMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int sendMessageToNanoApp = sendMessageToNanoApp(nanoAppMessage);
+                    int iSendMessageToNanoApp = sendMessageToNanoApp(nanoAppMessage);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendMessageToNanoApp);
+                    parcel2.writeInt(iSendMessageToNanoApp);
                     return true;
                 case 2:
                     close();
@@ -145,19 +145,19 @@ public interface IContextHubClient extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt = parcel.readInt();
-                    byte readByte = parcel.readByte();
+                    int i3 = parcel.readInt();
+                    byte b = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    reliableMessageCallbackFinished(readInt, readByte);
+                    reliableMessageCallbackFinished(i3, b);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     NanoAppMessage nanoAppMessage2 = (NanoAppMessage) parcel.readTypedObject(NanoAppMessage.CREATOR);
-                    IContextHubTransactionCallback asInterface = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int sendReliableMessageToNanoApp = sendReliableMessageToNanoApp(nanoAppMessage2, asInterface);
+                    int iSendReliableMessageToNanoApp = sendReliableMessageToNanoApp(nanoAppMessage2, iContextHubTransactionCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendReliableMessageToNanoApp);
+                    parcel2.writeInt(iSendReliableMessageToNanoApp);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -182,93 +182,93 @@ public interface IContextHubClient extends IInterface {
 
             @Override // android.hardware.location.IContextHubClient
             public int sendMessageToNanoApp(NanoAppMessage nanoAppMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(nanoAppMessage, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(nanoAppMessage, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClient
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClient
             public int getId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClient
             public void callbackFinished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClient
             public void reliableMessageCallbackFinished(int i, byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByte(b);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByte(b);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClient
             public int sendReliableMessageToNanoApp(NanoAppMessage nanoAppMessage, IContextHubTransactionCallback iContextHubTransactionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(nanoAppMessage, 0);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(nanoAppMessage, 0);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

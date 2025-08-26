@@ -201,17 +201,17 @@ public final class MediaSessionManager {
     public void removeOnActiveSessionsChangedListener(OnActiveSessionsChangedListener onActiveSessionsChangedListener) {
         Objects.requireNonNull(onActiveSessionsChangedListener, "sessionListener shouldn't be null");
         synchronized (this.mLock) {
-            SessionsChangedWrapper remove = this.mListeners.remove(onActiveSessionsChangedListener);
+            SessionsChangedWrapper sessionsChangedWrapperRemove = this.mListeners.remove(onActiveSessionsChangedListener);
             try {
-                if (remove != null) {
+                if (sessionsChangedWrapperRemove != null) {
                     try {
-                        this.mService.removeSessionsListener(remove.mStub);
+                        this.mService.removeSessionsListener(sessionsChangedWrapperRemove.mStub);
                     } catch (RemoteException e) {
                         Log.e(TAG, "Error in removeOnActiveSessionsChangedListener.", e);
                     }
                 }
             } finally {
-                remove.release();
+                sessionsChangedWrapperRemove.release();
             }
         }
     }
@@ -250,14 +250,14 @@ public final class MediaSessionManager {
     }
 
     public void removeOnSession2TokensChangedListener(OnSession2TokensChangedListener onSession2TokensChangedListener) {
-        Session2TokensChangedWrapper remove;
+        Session2TokensChangedWrapper session2TokensChangedWrapperRemove;
         Objects.requireNonNull(onSession2TokensChangedListener, "listener shouldn't be null");
         synchronized (this.mLock) {
-            remove = this.mSession2TokensListeners.remove(onSession2TokensChangedListener);
+            session2TokensChangedWrapperRemove = this.mSession2TokensListeners.remove(onSession2TokensChangedListener);
         }
-        if (remove != null) {
+        if (session2TokensChangedWrapperRemove != null) {
             try {
-                this.mService.removeSession2TokensListener(remove.getStub());
+                this.mService.removeSession2TokensListener(session2TokensChangedWrapperRemove.getStub());
             } catch (RemoteException e) {
                 Log.e(TAG, "Error in removeSessionTokensListener.", e);
                 e.rethrowFromSystemServer();
@@ -265,7 +265,11 @@ public final class MediaSessionManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void registerRemoteSessionCallback(Executor executor, RemoteSessionCallback remoteSessionCallback) {
         boolean z;
         Objects.requireNonNull(executor, "executor shouldn't be null");
@@ -275,10 +279,10 @@ public final class MediaSessionManager {
             this.mRemoteSessionCallbacks.put(remoteSessionCallback, executor);
             if (size == 0) {
                 z = true;
-                if (this.mRemoteSessionCallbacks.size() == 1) {
+                if (this.mRemoteSessionCallbacks.size() != 1) {
+                    z = false;
                 }
             }
-            z = false;
         }
         if (z) {
             try {
@@ -456,11 +460,11 @@ public final class MediaSessionManager {
         synchronized (this.mLock) {
             try {
                 this.mOnMediaKeyEventDispatchedListeners.put(onMediaKeyEventDispatchedListener, executor);
-                if (this.mOnMediaKeyEventDispatchedListeners.size() == 1) {
-                    this.mService.addOnMediaKeyEventDispatchedListener(this.mOnMediaKeyEventDispatchedListenerStub);
-                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to set media key listener", e);
+            }
+            if (this.mOnMediaKeyEventDispatchedListeners.size() == 1) {
+                this.mService.addOnMediaKeyEventDispatchedListener(this.mOnMediaKeyEventDispatchedListenerStub);
             }
         }
     }
@@ -471,11 +475,11 @@ public final class MediaSessionManager {
         synchronized (this.mLock) {
             try {
                 this.mOnMediaKeyEventDispatchedListeners.remove(onMediaKeyEventDispatchedListener);
-                if (this.mOnMediaKeyEventDispatchedListeners.size() == 0) {
-                    this.mService.removeOnMediaKeyEventDispatchedListener(this.mOnMediaKeyEventDispatchedListenerStub);
-                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to set media key event dispatched listener", e);
+            }
+            if (this.mOnMediaKeyEventDispatchedListeners.size() == 0) {
+                this.mService.removeOnMediaKeyEventDispatchedListener(this.mOnMediaKeyEventDispatchedListenerStub);
             }
         }
     }
@@ -492,7 +496,7 @@ public final class MediaSessionManager {
                 executor.execute(new Runnable() { // from class: android.media.session.MediaSessionManager$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MediaSessionManager.this.lambda$addOnMediaKeyEventSessionChangedListener$0(onMediaKeyEventSessionChangedListener);
+                        this.f$0.lambda$addOnMediaKeyEventSessionChangedListener$0(onMediaKeyEventSessionChangedListener);
                     }
                 });
             } catch (RemoteException e) {
@@ -510,11 +514,11 @@ public final class MediaSessionManager {
         Objects.requireNonNull(onMediaKeyEventSessionChangedListener, "listener shouldn't be null");
         synchronized (this.mLock) {
             try {
-                if (this.mMediaKeyEventSessionChangedCallbacks.remove(onMediaKeyEventSessionChangedListener) != null && this.mMediaKeyEventSessionChangedCallbacks.isEmpty()) {
-                    this.mService.removeOnMediaKeyEventSessionChangedListener(this.mOnMediaKeyEventSessionChangedListenerStub);
-                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to remove MediaKeyEventSessionChangedListener", e);
+            }
+            if (this.mMediaKeyEventSessionChangedCallbacks.remove(onMediaKeyEventSessionChangedListener) != null && this.mMediaKeyEventSessionChangedCallbacks.isEmpty()) {
+                this.mService.removeOnMediaKeyEventSessionChangedListener(this.mOnMediaKeyEventSessionChangedListenerStub);
             }
         }
     }
@@ -635,7 +639,7 @@ public final class MediaSessionManager {
                     SessionsChangedWrapper.this.mExecutor.execute(new Runnable() { // from class: android.media.session.MediaSessionManager$SessionsChangedWrapper$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaSessionManager.SessionsChangedWrapper.AnonymousClass1.this.lambda$onActiveSessionsChanged$0(list);
+                            this.f$0.lambda$onActiveSessionsChanged$0(list);
                         }
                     });
                 }
@@ -692,7 +696,7 @@ public final class MediaSessionManager {
                 Session2TokensChangedWrapper.this.mExecutor.execute(new Runnable() { // from class: android.media.session.MediaSessionManager$Session2TokensChangedWrapper$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MediaSessionManager.Session2TokensChangedWrapper.AnonymousClass1.this.lambda$onSession2TokensChanged$0(list);
+                        this.f$0.lambda$onSession2TokensChanged$0(list);
                     }
                 });
             }
@@ -751,11 +755,11 @@ public final class MediaSessionManager {
                 handler.post(new Runnable() { // from class: android.media.session.MediaSessionManager.OnMediaKeyListenerImpl.1
                     @Override // java.lang.Runnable
                     public void run() {
-                        boolean onMediaKey = OnMediaKeyListenerImpl.this.mListener.onMediaKey(keyEvent);
-                        Log.d(MediaSessionManager.TAG, "The media key listener is returned " + onMediaKey);
+                        boolean zOnMediaKey = OnMediaKeyListenerImpl.this.mListener.onMediaKey(keyEvent);
+                        Log.d(MediaSessionManager.TAG, "The media key listener is returned " + zOnMediaKey);
                         ResultReceiver resultReceiver2 = resultReceiver;
                         if (resultReceiver2 != null) {
-                            resultReceiver2.send(onMediaKey ? 1 : 0, null);
+                            resultReceiver2.send(zOnMediaKey ? 1 : 0, null);
                         }
                     }
                 });

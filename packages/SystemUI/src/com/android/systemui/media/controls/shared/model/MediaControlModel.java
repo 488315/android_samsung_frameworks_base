@@ -10,7 +10,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaControlModel {
     public final List actionsToShowInCollapsed;
@@ -65,27 +64,27 @@ public final class MediaControlModel {
     }
 
     public final int hashCode() {
-        int hashCode = (this.instanceId.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Integer.hashCode(this.uid) * 31, 31, this.packageName)) * 31;
+        int iHashCode = (this.instanceId.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Integer.hashCode(this.uid) * 31, 31, this.packageName)) * 31;
         MediaSession.Token token = this.token;
-        int hashCode2 = (hashCode + (token == null ? 0 : token.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (token == null ? 0 : token.hashCode())) * 31;
         Icon icon = this.appIcon;
-        int hashCode3 = (hashCode2 + (icon == null ? 0 : icon.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (icon == null ? 0 : icon.hashCode())) * 31;
         PendingIntent pendingIntent = this.clickIntent;
-        int hashCode4 = (hashCode3 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
         String str = this.appName;
-        int hashCode5 = (hashCode4 + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (str == null ? 0 : str.hashCode())) * 31;
         CharSequence charSequence = this.songName;
-        int hashCode6 = (hashCode5 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         CharSequence charSequence2 = this.artistName;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode6 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31, 31, this.showExplicit);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode6 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31, 31, this.showExplicit);
         Icon icon2 = this.artwork;
-        int hashCode7 = (m + (icon2 == null ? 0 : icon2.hashCode())) * 31;
+        int iHashCode7 = (iM + (icon2 == null ? 0 : icon2.hashCode())) * 31;
         MediaDeviceData mediaDeviceData = this.deviceData;
-        int hashCode8 = (hashCode7 + (mediaDeviceData == null ? 0 : mediaDeviceData.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (mediaDeviceData == null ? 0 : mediaDeviceData.hashCode())) * 31;
         MediaButton mediaButton = this.semanticActionButtons;
-        int m2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionsToShowInCollapsed, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.notificationActionButtons, (hashCode8 + (mediaButton == null ? 0 : mediaButton.hashCode())) * 31, 31), 31), 31, this.isDismissible), 31, this.isResume);
+        int iM2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.actionsToShowInCollapsed, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.notificationActionButtons, (iHashCode8 + (mediaButton == null ? 0 : mediaButton.hashCode())) * 31, 31), 31), 31, this.isDismissible), 31, this.isResume);
         Double d = this.resumeProgress;
-        return m2 + (d != null ? d.hashCode() : 0);
+        return iM2 + (d != null ? d.hashCode() : 0);
     }
 
     public final String toString() {

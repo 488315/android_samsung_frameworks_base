@@ -26,7 +26,6 @@ import androidx.reflect.view.SeslViewRuneReflector;
 import com.android.systemui.R;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatPopupWindow extends PopupWindow {
     public static final boolean ONEUI_5_1_1;
@@ -70,17 +69,17 @@ public class AppCompatPopupWindow extends PopupWindow {
         int[] iArr = new int[2];
         view.getLocationOnScreen(iArr);
         if (ONEUI_5_1_1 && (context = this.mContext) != null && (displayManager = (DisplayManager) context.getSystemService("display")) != null && (display = displayManager.getDisplay(0)) != null && SeslSemWindowManagerReflector.isTableMode()) {
-            Context context2 = this.mContext;
+            Context baseContext = this.mContext;
             while (true) {
-                if (!(context2 instanceof ContextWrapper)) {
+                if (!(baseContext instanceof ContextWrapper)) {
                     activity = null;
                     break;
                 }
-                if (context2 instanceof Activity) {
-                    activity = (Activity) context2;
+                if (baseContext instanceof Activity) {
+                    activity = (Activity) baseContext;
                     break;
                 }
-                context2 = ((ContextWrapper) context2).getBaseContext();
+                baseContext = ((ContextWrapper) baseContext).getBaseContext();
             }
             if (activity == null || !activity.isInMultiWindowMode()) {
                 Point point = new Point();
@@ -103,47 +102,47 @@ public class AppCompatPopupWindow extends PopupWindow {
         if (i2 == 0 || i7 < i2) {
             i2 = rect.top;
         }
-        int max = Math.max(height, (i7 - i2) + i);
+        int iMax = Math.max(height, (i7 - i2) + i);
         if (getBackground() == null) {
-            return max;
+            return iMax;
         }
         getBackground().getPadding(this.mTempRect);
         Rect rect2 = this.mTempRect;
-        return max - (rect2.top + rect2.bottom);
+        return iMax - (rect2.top + rect2.bottom);
     }
 
     public final Transition getTransition(int i) {
-        Transition inflateTransition;
-        if (i == 0 || i == 17760256 || (inflateTransition = TransitionInflater.from(this.mContext).inflateTransition(i)) == null) {
+        Transition transitionInflateTransition;
+        if (i == 0 || i == 17760256 || (transitionInflateTransition = TransitionInflater.from(this.mContext).inflateTransition(i)) == null) {
             return null;
         }
-        if ((inflateTransition instanceof TransitionSet) && ((TransitionSet) inflateTransition).getTransitionCount() == 0) {
+        if ((transitionInflateTransition instanceof TransitionSet) && ((TransitionSet) transitionInflateTransition).getTransitionCount() == 0) {
             return null;
         }
-        return inflateTransition;
+        return transitionInflateTransition;
     }
 
     public final void init(Context context, AttributeSet attributeSet, int i, int i2) {
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, R$styleable.PopupWindow, i, i2);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, R$styleable.PopupWindow, i, i2);
         boolean z = false;
-        if (obtainStyledAttributes.mWrapped.hasValue(2)) {
-            setOverlapAnchor(obtainStyledAttributes.mWrapped.getBoolean(2, false));
+        if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(2)) {
+            setOverlapAnchor(tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(2, false));
         }
         this.mContext = context;
-        Transition transition = getTransition(obtainStyledAttributes.mWrapped.getResourceId(3, 0));
-        Transition transition2 = getTransition(obtainStyledAttributes.mWrapped.getResourceId(4, 0));
+        Transition transition = getTransition(tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(3, 0));
+        Transition transition2 = getTransition(tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(4, 0));
         setEnterTransition(transition);
         setExitTransition(transition2);
-        int resourceId = obtainStyledAttributes.mWrapped.getResourceId(0, -1);
+        int resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(0, -1);
         boolean z2 = false;
         for (int i3 : ONEUI_BLUR_POPUP_BACKGROUND_RES) {
             if (i3 == resourceId) {
                 z2 = true;
             }
         }
-        setBackgroundDrawable(obtainStyledAttributes.getDrawable(0));
+        setBackgroundDrawable(tintTypedArrayObtainStyledAttributes.getDrawable(0));
         this.mIsReplacedPoupBackground = !z2;
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         if (!ViewConfiguration.get(ActionBarPolicy.get(context).mContext).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(4)) {
             z = true;
         }

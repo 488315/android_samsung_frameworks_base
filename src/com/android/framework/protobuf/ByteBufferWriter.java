@@ -24,9 +24,9 @@ final class ByteBufferWriter {
     }
 
     static {
-        Class<?> safeGetClass = safeGetClass("java.io.FileOutputStream");
-        FILE_OUTPUT_STREAM_CLASS = safeGetClass;
-        CHANNEL_FIELD_OFFSET = getChannelFieldOffset(safeGetClass);
+        Class<?> clsSafeGetClass = safeGetClass("java.io.FileOutputStream");
+        FILE_OUTPUT_STREAM_CLASS = clsSafeGetClass;
+        CHANNEL_FIELD_OFFSET = getChannelFieldOffset(clsSafeGetClass);
     }
 
     static void clearCachedBuffer() {
@@ -34,31 +34,31 @@ final class ByteBufferWriter {
     }
 
     static void write(ByteBuffer byteBuffer, OutputStream outputStream) throws IOException {
-        int position = byteBuffer.position();
+        int iPosition = byteBuffer.position();
         try {
             if (byteBuffer.hasArray()) {
                 outputStream.write(byteBuffer.array(), byteBuffer.arrayOffset() + byteBuffer.position(), byteBuffer.remaining());
             } else if (!writeToChannel(byteBuffer, outputStream)) {
                 byte[] orCreateBuffer = getOrCreateBuffer(byteBuffer.remaining());
                 while (byteBuffer.hasRemaining()) {
-                    int min = Math.min(byteBuffer.remaining(), orCreateBuffer.length);
-                    byteBuffer.get(orCreateBuffer, 0, min);
-                    outputStream.write(orCreateBuffer, 0, min);
+                    int iMin = Math.min(byteBuffer.remaining(), orCreateBuffer.length);
+                    byteBuffer.get(orCreateBuffer, 0, iMin);
+                    outputStream.write(orCreateBuffer, 0, iMin);
                 }
             }
         } finally {
-            byteBuffer.position(position);
+            byteBuffer.position(iPosition);
         }
     }
 
     private static byte[] getOrCreateBuffer(int i) {
-        int max = Math.max(i, 1024);
+        int iMax = Math.max(i, 1024);
         byte[] buffer = getBuffer();
-        if (buffer != null && !needToReallocate(max, buffer.length)) {
+        if (buffer != null && !needToReallocate(iMax, buffer.length)) {
             return buffer;
         }
-        byte[] bArr = new byte[max];
-        if (max <= 16384) {
+        byte[] bArr = new byte[iMax];
+        if (iMax <= 16384) {
             setBuffer(bArr);
         }
         return bArr;

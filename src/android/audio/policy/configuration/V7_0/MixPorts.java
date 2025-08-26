@@ -127,7 +127,7 @@ public class MixPorts {
             this.preferredUsage = list;
         }
 
-        static MixPort read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static MixPort read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             int next;
             MixPort mixPort = new MixPort();
             String attributeValue = xmlPullParser.getAttributeValue(null, "name");
@@ -193,7 +193,7 @@ public class MixPorts {
         return this.mixPort;
     }
 
-    static MixPorts read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static MixPorts read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         MixPorts mixPorts = new MixPorts();
         xmlPullParser.getDepth();

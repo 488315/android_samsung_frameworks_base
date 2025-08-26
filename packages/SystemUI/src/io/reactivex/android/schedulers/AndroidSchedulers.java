@@ -6,12 +6,10 @@ import io.reactivex.Scheduler;
 import io.reactivex.internal.util.ExceptionHelper;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AndroidSchedulers {
     public static final Scheduler MAIN_THREAD;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MainHolder {
         public static final HandlerScheduler DEFAULT = new HandlerScheduler(new Handler(Looper.getMainLooper()), false);
 

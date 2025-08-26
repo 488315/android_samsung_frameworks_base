@@ -63,28 +63,28 @@ public class BitmapOverlayFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
         if (this.mBitmap != null) {
-            Frame createBitmapFrame = createBitmapFrame(filterContext);
-            this.mProgram.process(new Frame[]{pullInput, createBitmapFrame}, newFrame);
-            createBitmapFrame.release();
+            Frame frameCreateBitmapFrame = createBitmapFrame(filterContext);
+            this.mProgram.process(new Frame[]{framePullInput, frameCreateBitmapFrame}, frameNewFrame);
+            frameCreateBitmapFrame.release();
         } else {
-            newFrame.setDataFromFrame(pullInput);
+            frameNewFrame.setDataFromFrame(framePullInput);
         }
-        pushOutput("image", newFrame);
-        newFrame.release();
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private Frame createBitmapFrame(FilterContext filterContext) {
-        Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mBitmap.getWidth(), this.mBitmap.getHeight(), 3, 3));
-        newFrame.setBitmap(this.mBitmap);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mBitmap.getWidth(), this.mBitmap.getHeight(), 3, 3));
+        frameNewFrame.setBitmap(this.mBitmap);
         this.mBitmap.recycle();
         this.mBitmap = null;
-        return newFrame;
+        return frameNewFrame;
     }
 }

@@ -118,11 +118,11 @@ public final class CarrierInfo implements Parcelable {
     }
 
     private String getPrintableImsi() {
-        boolean isLoggable = com.android.telephony.Rlog.isLoggable("CarrierInfo", 2);
+        boolean zIsLoggable = com.android.telephony.Rlog.isLoggable("CarrierInfo", 2);
         String str = this.mImsiPrefix;
         if (str == null || str.length() <= 6) {
             return this.mImsiPrefix;
         }
-        return this.mImsiPrefix.substring(0, 6) + com.android.telephony.Rlog.pii(isLoggable, this.mImsiPrefix.substring(6));
+        return this.mImsiPrefix.substring(0, 6) + com.android.telephony.Rlog.pii(zIsLoggable, this.mImsiPrefix.substring(6));
     }
 }

@@ -892,11 +892,11 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             this.buffers.addFirst(allocatedBuffer);
             this.allocatedBuffer = allocatedBuffer;
             this.buffer = allocatedBuffer.array();
-            int arrayOffset = allocatedBuffer.arrayOffset();
-            this.limit = allocatedBuffer.limit() + arrayOffset;
-            int position = arrayOffset + allocatedBuffer.position();
-            this.offset = position;
-            this.offsetMinusOne = position - 1;
+            int iArrayOffset = allocatedBuffer.arrayOffset();
+            this.limit = allocatedBuffer.limit() + iArrayOffset;
+            int iPosition = iArrayOffset + allocatedBuffer.position();
+            this.offset = iPosition;
+            this.offsetMinusOne = iPosition - 1;
             int i = this.limit - 1;
             this.limitMinusOne = i;
             this.pos = i;
@@ -1443,12 +1443,12 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             int i;
             int i2;
             int i3;
-            char charAt;
+            char cCharAt;
             requireSpace(str.length());
             int length = str.length() - 1;
             this.pos -= length;
-            while (length >= 0 && (charAt = str.charAt(length)) < 128) {
-                this.buffer[this.pos + length] = (byte) charAt;
+            while (length >= 0 && (cCharAt = str.charAt(length)) < 128) {
+                this.buffer[this.pos + length] = (byte) cCharAt;
                 length--;
             }
             if (length == -1) {
@@ -1457,35 +1457,35 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             }
             this.pos += length;
             while (length >= 0) {
-                char charAt2 = str.charAt(length);
-                if (charAt2 < 128 && (i3 = this.pos) > this.offsetMinusOne) {
+                char cCharAt2 = str.charAt(length);
+                if (cCharAt2 < 128 && (i3 = this.pos) > this.offsetMinusOne) {
                     byte[] bArr = this.buffer;
                     this.pos = i3 - 1;
-                    bArr[i3] = (byte) charAt2;
-                } else if (charAt2 < 2048 && (i2 = this.pos) > this.offset) {
+                    bArr[i3] = (byte) cCharAt2;
+                } else if (cCharAt2 < 2048 && (i2 = this.pos) > this.offset) {
                     byte[] bArr2 = this.buffer;
                     int i4 = i2 - 1;
                     this.pos = i4;
-                    bArr2[i2] = (byte) ((charAt2 & '?') | 128);
+                    bArr2[i2] = (byte) ((cCharAt2 & '?') | 128);
                     this.pos = i2 - 2;
-                    bArr2[i4] = (byte) ((charAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960);
-                } else if ((charAt2 < 55296 || 57343 < charAt2) && (i = this.pos) > this.offset + 1) {
+                    bArr2[i4] = (byte) ((cCharAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960);
+                } else if ((cCharAt2 < 55296 || 57343 < cCharAt2) && (i = this.pos) > this.offset + 1) {
                     byte[] bArr3 = this.buffer;
                     int i5 = i - 1;
                     this.pos = i5;
-                    bArr3[i] = (byte) ((charAt2 & '?') | 128);
+                    bArr3[i] = (byte) ((cCharAt2 & '?') | 128);
                     int i6 = i - 2;
                     this.pos = i6;
-                    bArr3[i5] = (byte) (((charAt2 >>> 6) & 63) | 128);
+                    bArr3[i5] = (byte) (((cCharAt2 >>> 6) & 63) | 128);
                     this.pos = i - 3;
-                    bArr3[i6] = (byte) ((charAt2 >>> '\f') | 480);
+                    bArr3[i6] = (byte) ((cCharAt2 >>> '\f') | 480);
                 } else {
                     if (this.pos > this.offset + 2) {
                         if (length != 0) {
-                            char charAt3 = str.charAt(length - 1);
-                            if (Character.isSurrogatePair(charAt3, charAt2)) {
+                            char cCharAt3 = str.charAt(length - 1);
+                            if (Character.isSurrogatePair(cCharAt3, cCharAt2)) {
                                 length--;
-                                int codePoint = Character.toCodePoint(charAt3, charAt2);
+                                int codePoint = Character.toCodePoint(cCharAt3, cCharAt2);
                                 byte[] bArr4 = this.buffer;
                                 int i7 = this.pos;
                                 int i8 = i7 - 1;
@@ -1543,26 +1543,26 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                nextBuffer(remaining);
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                nextBuffer(iRemaining);
             }
-            int i = this.pos - remaining;
+            int i = this.pos - iRemaining;
             this.pos = i;
-            byteBuffer.get(this.buffer, i + 1, remaining);
+            byteBuffer.get(this.buffer, i + 1, iRemaining);
         }
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void writeLazy(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                this.totalDoneBytes += remaining;
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                this.totalDoneBytes += iRemaining;
                 this.buffers.addFirst(AllocatedBuffer.wrap(byteBuffer));
                 nextBuffer();
             }
-            int i = this.pos - remaining;
+            int i = this.pos - iRemaining;
             this.pos = i;
-            byteBuffer.get(this.buffer, i + 1, remaining);
+            byteBuffer.get(this.buffer, i + 1, iRemaining);
         }
 
         @Override // com.android.framework.protobuf.BinaryWriter
@@ -1622,11 +1622,11 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             this.buffers.addFirst(allocatedBuffer);
             this.allocatedBuffer = allocatedBuffer;
             this.buffer = allocatedBuffer.array();
-            long arrayOffset = allocatedBuffer.arrayOffset();
-            this.limit = allocatedBuffer.limit() + arrayOffset;
-            long position = arrayOffset + allocatedBuffer.position();
-            this.offset = position;
-            this.offsetMinusOne = position - 1;
+            long jArrayOffset = allocatedBuffer.arrayOffset();
+            this.limit = allocatedBuffer.limit() + jArrayOffset;
+            long jPosition = jArrayOffset + allocatedBuffer.position();
+            this.offset = jPosition;
+            this.offsetMinusOne = jPosition - 1;
             long j = this.limit - 1;
             this.limitMinusOne = j;
             this.pos = j;
@@ -2232,93 +2232,95 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             UnsafeUtil.putByte(bArr8, j9, (byte) (((int) j) & 255));
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:17:0x0049  */
+        /* JADX WARN: Removed duplicated region for block: B:22:0x0074  */
+        /* JADX WARN: Removed duplicated region for block: B:29:0x00b6  */
         @Override // com.android.framework.protobuf.BinaryWriter
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         void writeString(String str) {
-            char charAt;
+            char cCharAt;
             requireSpace(str.length());
             int length = str.length();
             while (true) {
                 length--;
-                if (length < 0 || (charAt = str.charAt(length)) >= 128) {
+                if (length < 0 || (cCharAt = str.charAt(length)) >= 128) {
                     break;
                 }
                 byte[] bArr = this.buffer;
                 long j = this.pos;
                 this.pos = j - 1;
-                UnsafeUtil.putByte(bArr, j, (byte) charAt);
+                UnsafeUtil.putByte(bArr, j, (byte) cCharAt);
             }
             if (length == -1) {
                 return;
             }
             while (length >= 0) {
-                char charAt2 = str.charAt(length);
-                if (charAt2 < 128) {
+                char cCharAt2 = str.charAt(length);
+                if (cCharAt2 < 128) {
                     long j2 = this.pos;
                     if (j2 > this.offsetMinusOne) {
                         byte[] bArr2 = this.buffer;
                         this.pos = j2 - 1;
-                        UnsafeUtil.putByte(bArr2, j2, (byte) charAt2);
-                        length--;
-                    }
-                }
-                if (charAt2 < 2048) {
-                    long j3 = this.pos;
-                    if (j3 > this.offset) {
-                        byte[] bArr3 = this.buffer;
-                        this.pos = j3 - 1;
-                        UnsafeUtil.putByte(bArr3, j3, (byte) ((charAt2 & '?') | 128));
-                        byte[] bArr4 = this.buffer;
-                        long j4 = this.pos;
-                        this.pos = j4 - 1;
-                        UnsafeUtil.putByte(bArr4, j4, (byte) ((charAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
-                        length--;
-                    }
-                }
-                if (charAt2 < 55296 || 57343 < charAt2) {
-                    long j5 = this.pos;
-                    if (j5 > this.offset + 1) {
-                        byte[] bArr5 = this.buffer;
-                        this.pos = j5 - 1;
-                        UnsafeUtil.putByte(bArr5, j5, (byte) ((charAt2 & '?') | 128));
-                        byte[] bArr6 = this.buffer;
-                        long j6 = this.pos;
-                        this.pos = j6 - 1;
-                        UnsafeUtil.putByte(bArr6, j6, (byte) (((charAt2 >>> 6) & 63) | 128));
-                        byte[] bArr7 = this.buffer;
-                        long j7 = this.pos;
-                        this.pos = j7 - 1;
-                        UnsafeUtil.putByte(bArr7, j7, (byte) ((charAt2 >>> '\f') | 480));
-                        length--;
-                    }
-                }
-                if (this.pos > this.offset + 2) {
-                    if (length != 0) {
-                        char charAt3 = str.charAt(length - 1);
-                        if (Character.isSurrogatePair(charAt3, charAt2)) {
-                            length--;
-                            int codePoint = Character.toCodePoint(charAt3, charAt2);
-                            byte[] bArr8 = this.buffer;
-                            long j8 = this.pos;
-                            this.pos = j8 - 1;
-                            UnsafeUtil.putByte(bArr8, j8, (byte) ((codePoint & 63) | 128));
-                            byte[] bArr9 = this.buffer;
-                            long j9 = this.pos;
-                            this.pos = j9 - 1;
-                            UnsafeUtil.putByte(bArr9, j9, (byte) (((codePoint >>> 6) & 63) | 128));
-                            byte[] bArr10 = this.buffer;
-                            long j10 = this.pos;
-                            this.pos = j10 - 1;
-                            UnsafeUtil.putByte(bArr10, j10, (byte) (((codePoint >>> 12) & 63) | 128));
-                            byte[] bArr11 = this.buffer;
-                            long j11 = this.pos;
-                            this.pos = j11 - 1;
-                            UnsafeUtil.putByte(bArr11, j11, (byte) ((codePoint >>> 18) | 240));
+                        UnsafeUtil.putByte(bArr2, j2, (byte) cCharAt2);
+                    } else if (cCharAt2 < 2048) {
+                        long j3 = this.pos;
+                        if (j3 > this.offset) {
+                            byte[] bArr3 = this.buffer;
+                            this.pos = j3 - 1;
+                            UnsafeUtil.putByte(bArr3, j3, (byte) ((cCharAt2 & '?') | 128));
+                            byte[] bArr4 = this.buffer;
+                            long j4 = this.pos;
+                            this.pos = j4 - 1;
+                            UnsafeUtil.putByte(bArr4, j4, (byte) ((cCharAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                        } else if (cCharAt2 < 55296 || 57343 < cCharAt2) {
+                            long j5 = this.pos;
+                            if (j5 > this.offset + 1) {
+                                byte[] bArr5 = this.buffer;
+                                this.pos = j5 - 1;
+                                UnsafeUtil.putByte(bArr5, j5, (byte) ((cCharAt2 & '?') | 128));
+                                byte[] bArr6 = this.buffer;
+                                long j6 = this.pos;
+                                this.pos = j6 - 1;
+                                UnsafeUtil.putByte(bArr6, j6, (byte) (((cCharAt2 >>> 6) & 63) | 128));
+                                byte[] bArr7 = this.buffer;
+                                long j7 = this.pos;
+                                this.pos = j7 - 1;
+                                UnsafeUtil.putByte(bArr7, j7, (byte) ((cCharAt2 >>> '\f') | 480));
+                            } else {
+                                if (this.pos > this.offset + 2) {
+                                    if (length != 0) {
+                                        char cCharAt3 = str.charAt(length - 1);
+                                        if (Character.isSurrogatePair(cCharAt3, cCharAt2)) {
+                                            length--;
+                                            int codePoint = Character.toCodePoint(cCharAt3, cCharAt2);
+                                            byte[] bArr8 = this.buffer;
+                                            long j8 = this.pos;
+                                            this.pos = j8 - 1;
+                                            UnsafeUtil.putByte(bArr8, j8, (byte) ((codePoint & 63) | 128));
+                                            byte[] bArr9 = this.buffer;
+                                            long j9 = this.pos;
+                                            this.pos = j9 - 1;
+                                            UnsafeUtil.putByte(bArr9, j9, (byte) (((codePoint >>> 6) & 63) | 128));
+                                            byte[] bArr10 = this.buffer;
+                                            long j10 = this.pos;
+                                            this.pos = j10 - 1;
+                                            UnsafeUtil.putByte(bArr10, j10, (byte) (((codePoint >>> 12) & 63) | 128));
+                                            byte[] bArr11 = this.buffer;
+                                            long j11 = this.pos;
+                                            this.pos = j11 - 1;
+                                            UnsafeUtil.putByte(bArr11, j11, (byte) ((codePoint >>> 18) | 240));
+                                        }
+                                    }
+                                    throw new Utf8.UnpairedSurrogateException(length - 1, length);
+                                }
+                                requireSpace(length);
+                                length++;
+                            }
                         }
                     }
-                    throw new Utf8.UnpairedSurrogateException(length - 1, length);
                 }
-                requireSpace(length);
-                length++;
                 length--;
             }
         }
@@ -2358,22 +2360,22 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            requireSpace(remaining);
-            this.pos -= remaining;
-            byteBuffer.get(this.buffer, arrayPos() + 1, remaining);
+            int iRemaining = byteBuffer.remaining();
+            requireSpace(iRemaining);
+            this.pos -= iRemaining;
+            byteBuffer.get(this.buffer, arrayPos() + 1, iRemaining);
         }
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void writeLazy(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                this.totalDoneBytes += remaining;
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                this.totalDoneBytes += iRemaining;
                 this.buffers.addFirst(AllocatedBuffer.wrap(byteBuffer));
                 nextBuffer();
             }
-            this.pos -= remaining;
-            byteBuffer.get(this.buffer, arrayPos() + 1, remaining);
+            this.pos -= iRemaining;
+            byteBuffer.get(this.buffer, arrayPos() + 1, iRemaining);
         }
 
         @Override // com.android.framework.protobuf.BinaryWriter
@@ -2406,19 +2408,19 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             if (!allocatedBuffer.hasNioBuffer()) {
                 throw new RuntimeException("Allocated buffer does not have NIO buffer");
             }
-            ByteBuffer nioBuffer = allocatedBuffer.nioBuffer();
-            if (!nioBuffer.isDirect()) {
+            ByteBuffer byteBufferNioBuffer = allocatedBuffer.nioBuffer();
+            if (!byteBufferNioBuffer.isDirect()) {
                 throw new RuntimeException("Allocator returned non-direct buffer");
             }
             finishCurrentBuffer();
             this.buffers.addFirst(allocatedBuffer);
-            this.buffer = nioBuffer;
-            nioBuffer.limit(nioBuffer.capacity());
+            this.buffer = byteBufferNioBuffer;
+            byteBufferNioBuffer.limit(byteBufferNioBuffer.capacity());
             this.buffer.position(0);
             this.buffer.order(ByteOrder.LITTLE_ENDIAN);
-            int limit = this.buffer.limit() - 1;
-            this.limitMinusOne = limit;
-            this.pos = limit;
+            int iLimit = this.buffer.limit() - 1;
+            this.limitMinusOne = iLimit;
+            this.pos = iLimit;
         }
 
         @Override // com.android.framework.protobuf.BinaryWriter
@@ -2774,12 +2776,12 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             int i;
             int i2;
             int i3;
-            char charAt;
+            char cCharAt;
             requireSpace(str.length());
             int length = str.length() - 1;
             this.pos -= length;
-            while (length >= 0 && (charAt = str.charAt(length)) < 128) {
-                this.buffer.put(this.pos + length, (byte) charAt);
+            while (length >= 0 && (cCharAt = str.charAt(length)) < 128) {
+                this.buffer.put(this.pos + length, (byte) cCharAt);
                 length--;
             }
             if (length == -1) {
@@ -2788,38 +2790,38 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             }
             this.pos += length;
             while (length >= 0) {
-                char charAt2 = str.charAt(length);
-                if (charAt2 < 128 && (i3 = this.pos) >= 0) {
+                char cCharAt2 = str.charAt(length);
+                if (cCharAt2 < 128 && (i3 = this.pos) >= 0) {
                     ByteBuffer byteBuffer = this.buffer;
                     this.pos = i3 - 1;
-                    byteBuffer.put(i3, (byte) charAt2);
-                } else if (charAt2 < 2048 && (i2 = this.pos) > 0) {
+                    byteBuffer.put(i3, (byte) cCharAt2);
+                } else if (cCharAt2 < 2048 && (i2 = this.pos) > 0) {
                     ByteBuffer byteBuffer2 = this.buffer;
                     this.pos = i2 - 1;
-                    byteBuffer2.put(i2, (byte) ((charAt2 & '?') | 128));
+                    byteBuffer2.put(i2, (byte) ((cCharAt2 & '?') | 128));
                     ByteBuffer byteBuffer3 = this.buffer;
                     int i4 = this.pos;
                     this.pos = i4 - 1;
-                    byteBuffer3.put(i4, (byte) ((charAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
-                } else if ((charAt2 < 55296 || 57343 < charAt2) && (i = this.pos) > 1) {
+                    byteBuffer3.put(i4, (byte) ((cCharAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                } else if ((cCharAt2 < 55296 || 57343 < cCharAt2) && (i = this.pos) > 1) {
                     ByteBuffer byteBuffer4 = this.buffer;
                     this.pos = i - 1;
-                    byteBuffer4.put(i, (byte) ((charAt2 & '?') | 128));
+                    byteBuffer4.put(i, (byte) ((cCharAt2 & '?') | 128));
                     ByteBuffer byteBuffer5 = this.buffer;
                     int i5 = this.pos;
                     this.pos = i5 - 1;
-                    byteBuffer5.put(i5, (byte) (((charAt2 >>> 6) & 63) | 128));
+                    byteBuffer5.put(i5, (byte) (((cCharAt2 >>> 6) & 63) | 128));
                     ByteBuffer byteBuffer6 = this.buffer;
                     int i6 = this.pos;
                     this.pos = i6 - 1;
-                    byteBuffer6.put(i6, (byte) ((charAt2 >>> '\f') | 480));
+                    byteBuffer6.put(i6, (byte) ((cCharAt2 >>> '\f') | 480));
                 } else {
                     if (this.pos > 2) {
                         if (length != 0) {
-                            char charAt3 = str.charAt(length - 1);
-                            if (Character.isSurrogatePair(charAt3, charAt2)) {
+                            char cCharAt3 = str.charAt(length - 1);
+                            if (Character.isSurrogatePair(cCharAt3, cCharAt2)) {
                                 length--;
-                                int codePoint = Character.toCodePoint(charAt3, charAt2);
+                                int codePoint = Character.toCodePoint(cCharAt3, cCharAt2);
                                 ByteBuffer byteBuffer7 = this.buffer;
                                 int i7 = this.pos;
                                 this.pos = i7 - 1;
@@ -2882,11 +2884,11 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                nextBuffer(remaining);
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                nextBuffer(iRemaining);
             }
-            int i = this.pos - remaining;
+            int i = this.pos - iRemaining;
             this.pos = i;
             this.buffer.position(i + 1);
             this.buffer.put(byteBuffer);
@@ -2894,13 +2896,13 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void writeLazy(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                this.totalDoneBytes += remaining;
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                this.totalDoneBytes += iRemaining;
                 this.buffers.addFirst(AllocatedBuffer.wrap(byteBuffer));
                 nextBuffer();
             } else {
-                int i = this.pos - remaining;
+                int i = this.pos - iRemaining;
                 this.pos = i;
                 this.buffer.position(i + 1);
                 this.buffer.put(byteBuffer);
@@ -2943,20 +2945,20 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             if (!allocatedBuffer.hasNioBuffer()) {
                 throw new RuntimeException("Allocated buffer does not have NIO buffer");
             }
-            ByteBuffer nioBuffer = allocatedBuffer.nioBuffer();
-            if (!nioBuffer.isDirect()) {
+            ByteBuffer byteBufferNioBuffer = allocatedBuffer.nioBuffer();
+            if (!byteBufferNioBuffer.isDirect()) {
                 throw new RuntimeException("Allocator returned non-direct buffer");
             }
             finishCurrentBuffer();
             this.buffers.addFirst(allocatedBuffer);
-            this.buffer = nioBuffer;
-            nioBuffer.limit(nioBuffer.capacity());
+            this.buffer = byteBufferNioBuffer;
+            byteBufferNioBuffer.limit(byteBufferNioBuffer.capacity());
             this.buffer.position(0);
-            long addressOffset = UnsafeUtil.addressOffset(this.buffer);
-            this.bufferOffset = addressOffset;
-            long limit = addressOffset + (this.buffer.limit() - 1);
-            this.limitMinusOne = limit;
-            this.pos = limit;
+            long jAddressOffset = UnsafeUtil.addressOffset(this.buffer);
+            this.bufferOffset = jAddressOffset;
+            long jLimit = jAddressOffset + (this.buffer.limit() - 1);
+            this.limitMinusOne = jLimit;
+            this.pos = jLimit;
         }
 
         @Override // com.android.framework.protobuf.BinaryWriter
@@ -3494,82 +3496,84 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             UnsafeUtil.putByte(j9, (byte) (((int) j) & 255));
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:17:0x0045  */
+        /* JADX WARN: Removed duplicated region for block: B:22:0x006c  */
+        /* JADX WARN: Removed duplicated region for block: B:29:0x00a8  */
         @Override // com.android.framework.protobuf.BinaryWriter
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         void writeString(String str) {
-            char charAt;
+            char cCharAt;
             requireSpace(str.length());
             int length = str.length();
             while (true) {
                 length--;
-                if (length < 0 || (charAt = str.charAt(length)) >= 128) {
+                if (length < 0 || (cCharAt = str.charAt(length)) >= 128) {
                     break;
                 }
                 long j = this.pos;
                 this.pos = j - 1;
-                UnsafeUtil.putByte(j, (byte) charAt);
+                UnsafeUtil.putByte(j, (byte) cCharAt);
             }
             if (length == -1) {
                 return;
             }
             while (length >= 0) {
-                char charAt2 = str.charAt(length);
-                if (charAt2 < 128) {
+                char cCharAt2 = str.charAt(length);
+                if (cCharAt2 < 128) {
                     long j2 = this.pos;
                     if (j2 >= this.bufferOffset) {
                         this.pos = j2 - 1;
-                        UnsafeUtil.putByte(j2, (byte) charAt2);
-                        length--;
-                    }
-                }
-                if (charAt2 < 2048) {
-                    long j3 = this.pos;
-                    if (j3 > this.bufferOffset) {
-                        this.pos = j3 - 1;
-                        UnsafeUtil.putByte(j3, (byte) ((charAt2 & '?') | 128));
-                        long j4 = this.pos;
-                        this.pos = j4 - 1;
-                        UnsafeUtil.putByte(j4, (byte) ((charAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
-                        length--;
-                    }
-                }
-                if (charAt2 < 55296 || 57343 < charAt2) {
-                    long j5 = this.pos;
-                    if (j5 > this.bufferOffset + 1) {
-                        this.pos = j5 - 1;
-                        UnsafeUtil.putByte(j5, (byte) ((charAt2 & '?') | 128));
-                        long j6 = this.pos;
-                        this.pos = j6 - 1;
-                        UnsafeUtil.putByte(j6, (byte) (((charAt2 >>> 6) & 63) | 128));
-                        long j7 = this.pos;
-                        this.pos = j7 - 1;
-                        UnsafeUtil.putByte(j7, (byte) ((charAt2 >>> '\f') | 480));
-                        length--;
-                    }
-                }
-                if (this.pos > this.bufferOffset + 2) {
-                    if (length != 0) {
-                        char charAt3 = str.charAt(length - 1);
-                        if (Character.isSurrogatePair(charAt3, charAt2)) {
-                            length--;
-                            int codePoint = Character.toCodePoint(charAt3, charAt2);
-                            long j8 = this.pos;
-                            this.pos = j8 - 1;
-                            UnsafeUtil.putByte(j8, (byte) ((codePoint & 63) | 128));
-                            long j9 = this.pos;
-                            this.pos = j9 - 1;
-                            UnsafeUtil.putByte(j9, (byte) (((codePoint >>> 6) & 63) | 128));
-                            long j10 = this.pos;
-                            this.pos = j10 - 1;
-                            UnsafeUtil.putByte(j10, (byte) (((codePoint >>> 12) & 63) | 128));
-                            long j11 = this.pos;
-                            this.pos = j11 - 1;
-                            UnsafeUtil.putByte(j11, (byte) ((codePoint >>> 18) | 240));
+                        UnsafeUtil.putByte(j2, (byte) cCharAt2);
+                    } else if (cCharAt2 < 2048) {
+                        long j3 = this.pos;
+                        if (j3 > this.bufferOffset) {
+                            this.pos = j3 - 1;
+                            UnsafeUtil.putByte(j3, (byte) ((cCharAt2 & '?') | 128));
+                            long j4 = this.pos;
+                            this.pos = j4 - 1;
+                            UnsafeUtil.putByte(j4, (byte) ((cCharAt2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                        } else if (cCharAt2 < 55296 || 57343 < cCharAt2) {
+                            long j5 = this.pos;
+                            if (j5 > this.bufferOffset + 1) {
+                                this.pos = j5 - 1;
+                                UnsafeUtil.putByte(j5, (byte) ((cCharAt2 & '?') | 128));
+                                long j6 = this.pos;
+                                this.pos = j6 - 1;
+                                UnsafeUtil.putByte(j6, (byte) (((cCharAt2 >>> 6) & 63) | 128));
+                                long j7 = this.pos;
+                                this.pos = j7 - 1;
+                                UnsafeUtil.putByte(j7, (byte) ((cCharAt2 >>> '\f') | 480));
+                            } else {
+                                if (this.pos > this.bufferOffset + 2) {
+                                    if (length != 0) {
+                                        char cCharAt3 = str.charAt(length - 1);
+                                        if (Character.isSurrogatePair(cCharAt3, cCharAt2)) {
+                                            length--;
+                                            int codePoint = Character.toCodePoint(cCharAt3, cCharAt2);
+                                            long j8 = this.pos;
+                                            this.pos = j8 - 1;
+                                            UnsafeUtil.putByte(j8, (byte) ((codePoint & 63) | 128));
+                                            long j9 = this.pos;
+                                            this.pos = j9 - 1;
+                                            UnsafeUtil.putByte(j9, (byte) (((codePoint >>> 6) & 63) | 128));
+                                            long j10 = this.pos;
+                                            this.pos = j10 - 1;
+                                            UnsafeUtil.putByte(j10, (byte) (((codePoint >>> 12) & 63) | 128));
+                                            long j11 = this.pos;
+                                            this.pos = j11 - 1;
+                                            UnsafeUtil.putByte(j11, (byte) ((codePoint >>> 18) | 240));
+                                        }
+                                    }
+                                    throw new Utf8.UnpairedSurrogateException(length - 1, length);
+                                }
+                                requireSpace(length);
+                                length++;
+                            }
                         }
                     }
-                    throw new Utf8.UnpairedSurrogateException(length - 1, length);
                 }
-                requireSpace(length);
-                length++;
                 length--;
             }
         }
@@ -3606,24 +3610,24 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                nextBuffer(remaining);
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                nextBuffer(iRemaining);
             }
-            this.pos -= remaining;
+            this.pos -= iRemaining;
             this.buffer.position(bufferPos() + 1);
             this.buffer.put(byteBuffer);
         }
 
         @Override // com.android.framework.protobuf.ByteOutput
         public void writeLazy(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining();
-            if (spaceLeft() < remaining) {
-                this.totalDoneBytes += remaining;
+            int iRemaining = byteBuffer.remaining();
+            if (spaceLeft() < iRemaining) {
+                this.totalDoneBytes += iRemaining;
                 this.buffers.addFirst(AllocatedBuffer.wrap(byteBuffer));
                 nextBuffer();
             } else {
-                this.pos -= remaining;
+                this.pos -= iRemaining;
                 this.buffer.position(bufferPos() + 1);
                 this.buffer.put(byteBuffer);
             }

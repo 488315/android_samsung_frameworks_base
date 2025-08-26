@@ -488,7 +488,7 @@ public final class Telephony {
             }
 
             public static SmsMessage[] getMessagesFromIntent(Intent intent) {
-                int i;
+                int phoneId;
                 try {
                     Object[] objArr = (Object[]) intent.getSerializableExtra("pdus");
                     if (objArr == null) {
@@ -499,15 +499,15 @@ public final class Telephony {
                     int intExtra = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1);
                     if (intExtra == -1) {
                         Rlog.v(Telephony.TAG, "getMessagesFromIntent");
-                        i = Integer.MAX_VALUE;
+                        phoneId = Integer.MAX_VALUE;
                     } else {
                         Rlog.v(Telephony.TAG, "getMessagesFromIntent with valid subId : " + intExtra);
-                        i = SubscriptionManager.getPhoneId(intExtra);
+                        phoneId = SubscriptionManager.getPhoneId(intExtra);
                     }
                     int length = objArr.length;
                     SmsMessage[] smsMessageArr = new SmsMessage[length];
-                    for (int i2 = 0; i2 < length; i2++) {
-                        smsMessageArr[i2] = SmsMessage.semCreateFromPdu(i, (byte[]) objArr[i2], stringExtra);
+                    for (int i = 0; i < length; i++) {
+                        smsMessageArr[i] = SmsMessage.semCreateFromPdu(phoneId, (byte[]) objArr[i], stringExtra);
                     }
                     return smsMessageArr;
                 } catch (ClassCastException e) {
@@ -529,9 +529,9 @@ public final class Telephony {
         private static final Uri THREAD_ID_CONTENT_URI = Uri.parse("content://mms-sms/threadID");
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(MmsSms.CONTENT_URI, "conversations");
-            CONTENT_URI = withAppendedPath;
-            OBSOLETE_THREADS_URI = Uri.withAppendedPath(withAppendedPath, "obsolete");
+            Uri uriWithAppendedPath = Uri.withAppendedPath(MmsSms.CONTENT_URI, "conversations");
+            CONTENT_URI = uriWithAppendedPath;
+            OBSOLETE_THREADS_URI = Uri.withAppendedPath(uriWithAppendedPath, "obsolete");
         }
 
         private Threads() {
@@ -544,23 +544,23 @@ public final class Telephony {
         }
 
         public static long getOrCreateThreadId(Context context, Set<String> set) {
-            Uri.Builder buildUpon = THREAD_ID_CONTENT_URI.buildUpon();
-            for (String str : set) {
-                if (Mms.isEmailAddress(str)) {
-                    str = Mms.extractAddrSpec(str);
+            Uri.Builder builderBuildUpon = THREAD_ID_CONTENT_URI.buildUpon();
+            for (String strExtractAddrSpec : set) {
+                if (Mms.isEmailAddress(strExtractAddrSpec)) {
+                    strExtractAddrSpec = Mms.extractAddrSpec(strExtractAddrSpec);
                 }
-                buildUpon.appendQueryParameter("recipient", str);
+                builderBuildUpon.appendQueryParameter("recipient", strExtractAddrSpec);
             }
-            Cursor query = SqliteWrapper.query(context, context.getContentResolver(), buildUpon.build(), ID_PROJECTION, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = SqliteWrapper.query(context, context.getContentResolver(), builderBuildUpon.build(), ID_PROJECTION, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (!query.moveToFirst()) {
+                    if (!cursorQuery.moveToFirst()) {
                         Rlog.e(Telephony.TAG, "getOrCreateThreadId returned no rows!");
                     } else {
-                        return query.getLong(0);
+                        return cursorQuery.getLong(0);
                     }
                 } finally {
-                    query.close();
+                    cursorQuery.close();
                 }
             }
             Rlog.e(Telephony.TAG, "getOrCreateThreadId failed with " + set.size() + " recipients");
@@ -591,30 +591,30 @@ public final class Telephony {
         }
 
         public static long semGetOrCreateThreadId(Context context, Set<String> set, boolean z, int i, int i2) {
-            Uri.Builder buildUpon = THREAD_ID_CONTENT_URI.buildUpon();
+            Uri.Builder builderBuildUpon = THREAD_ID_CONTENT_URI.buildUpon();
             if (isTempRecipient(set)) {
                 return 9223372036854775806L;
             }
-            for (String str : set) {
-                if (Mms.isEmailAddress(str)) {
-                    str = Mms.extractAddrSpec(str);
+            for (String strExtractAddrSpec : set) {
+                if (Mms.isEmailAddress(strExtractAddrSpec)) {
+                    strExtractAddrSpec = Mms.extractAddrSpec(strExtractAddrSpec);
                 }
-                buildUpon.appendQueryParameter("recipient", str);
+                builderBuildUpon.appendQueryParameter("recipient", strExtractAddrSpec);
             }
-            buildUpon.appendQueryParameter("createthread", String.valueOf(z));
-            buildUpon.appendQueryParameter("sim_slot", String.valueOf(i));
+            builderBuildUpon.appendQueryParameter("createthread", String.valueOf(z));
+            builderBuildUpon.appendQueryParameter("sim_slot", String.valueOf(i));
             if (SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && i2 > 0) {
-                buildUpon.appendQueryParameter("usingmode", String.valueOf(i2));
+                builderBuildUpon.appendQueryParameter("usingmode", String.valueOf(i2));
             }
-            Cursor query = SqliteWrapper.query(context, context.getContentResolver(), buildUpon.build(), ID_PROJECTION, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = SqliteWrapper.query(context, context.getContentResolver(), builderBuildUpon.build(), ID_PROJECTION, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToFirst()) {
-                        return query.getLong(0);
+                    if (cursorQuery.moveToFirst()) {
+                        return cursorQuery.getLong(0);
                     }
                     Rlog.e(Telephony.TAG, "getOrCreateThreadId returned no rows!");
                 } finally {
-                    query.close();
+                    cursorQuery.close();
                 }
             }
             if (z) {
@@ -635,10 +635,10 @@ public final class Telephony {
         }
 
         static {
-            Uri parse = Uri.parse("content://mms");
-            CONTENT_URI = parse;
-            REPORT_REQUEST_URI = Uri.withAppendedPath(parse, "report-request");
-            REPORT_STATUS_URI = Uri.withAppendedPath(parse, "report-status");
+            Uri uri = Uri.parse("content://mms");
+            CONTENT_URI = uri;
+            REPORT_REQUEST_URI = Uri.withAppendedPath(uri, "report-request");
+            REPORT_STATUS_URI = Uri.withAppendedPath(uri, "report-status");
             NAME_ADDR_EMAIL_PATTERN = Pattern.compile("\\s*(\"[^\"]*\"|[^<>\"]+)\\s*<([^<>]+)>\\s*");
         }
 

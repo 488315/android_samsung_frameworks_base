@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataStoreImpl$readDataAndUpdateCache$3 extends SuspendLambda implements Function1 {
     Object L$0;
@@ -28,14 +27,14 @@ final class DataStoreImpl$readDataAndUpdateCache$3 extends SuspendLambda impleme
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((DataStoreImpl$readDataAndUpdateCache$3) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         Throwable th;
-        State state;
+        State readException;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         try {
@@ -66,12 +65,12 @@ final class DataStoreImpl$readDataAndUpdateCache$3 extends SuspendLambda impleme
                 }
                 th = (Throwable) this.L$0;
                 ResultKt.throwOnFailure(obj);
-                state = new ReadException(th, ((Number) obj).intValue());
-                return new Pair(state, Boolean.TRUE);
+                readException = new ReadException(th, ((Number) obj).intValue());
+                return new Pair(readException, Boolean.TRUE);
             }
             ResultKt.throwOnFailure(obj);
         }
-        state = (State) obj;
-        return new Pair(state, Boolean.TRUE);
+        readException = (State) obj;
+        return new Pair(readException, Boolean.TRUE);
     }
 }

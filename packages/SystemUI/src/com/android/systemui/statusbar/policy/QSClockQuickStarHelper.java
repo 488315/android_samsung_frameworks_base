@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QSClockQuickStarHelper implements SlimIndicatorViewSubscriber {
     public final Context mContext;
@@ -105,7 +104,7 @@ public class QSClockQuickStarHelper implements SlimIndicatorViewSubscriber {
         ((SecPanelExpansionStateInteractor) Dependency.sDependency.getDependencyInner(SecPanelExpansionStateInteractor.class)).registerListener(new SecPanelExpansionStateListener() { // from class: com.android.systemui.statusbar.policy.QSClockQuickStarHelper$$ExternalSyntheticLambda0
             @Override // com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener
             public final void onPanelExpansionStateChanged(SecPanelExpansionStateChangeEvent secPanelExpansionStateChangeEvent) {
-                QSClockQuickStarHelper qSClockQuickStarHelper = QSClockQuickStarHelper.this;
+                QSClockQuickStarHelper qSClockQuickStarHelper = this.f$0;
                 qSClockQuickStarHelper.getClass();
                 qSClockQuickStarHelper.mPanelState = secPanelExpansionStateChangeEvent.panelExpansionState;
                 qSClockQuickStarHelper.updateSecondsClockHandler();
@@ -123,19 +122,19 @@ public class QSClockQuickStarHelper implements SlimIndicatorViewSubscriber {
 
     @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
     public final void updateQuickStarStyle() {
-        boolean shouldShowSecondsClock = ((SlimIndicatorViewMediatorImpl) this.mSlimIndicatorViewMediator).shouldShowSecondsClock();
-        Log.d("QSClockBellTower", "updateQuickStarStyle() shouldShowSecondsClock(" + this.mShouldShowSecondsClockByQuickStar + " >> " + shouldShowSecondsClock + ")");
-        if (this.mShouldShowSecondsClockByQuickStar != shouldShowSecondsClock) {
-            this.mShouldShowSecondsClockByQuickStar = shouldShowSecondsClock;
+        boolean zShouldShowSecondsClock = ((SlimIndicatorViewMediatorImpl) this.mSlimIndicatorViewMediator).shouldShowSecondsClock();
+        Log.d("QSClockBellTower", "updateQuickStarStyle() shouldShowSecondsClock(" + this.mShouldShowSecondsClockByQuickStar + " >> " + zShouldShowSecondsClock + ")");
+        if (this.mShouldShowSecondsClockByQuickStar != zShouldShowSecondsClock) {
+            this.mShouldShowSecondsClockByQuickStar = zShouldShowSecondsClock;
             updateSecondsClockHandler();
         }
         this.mRingBellOfTowerRunnable.run();
     }
 
     public final void updateSecondsClockHandler() {
-        boolean shouldShowSecondsClock = shouldShowSecondsClock();
+        boolean zShouldShowSecondsClock = shouldShowSecondsClock();
         AnonymousClass1 anonymousClass1 = this.mSecondTick;
-        if (shouldShowSecondsClock) {
+        if (zShouldShowSecondsClock) {
             if (this.mSecondsHandler == null) {
                 Handler handler = new Handler();
                 this.mSecondsHandler = handler;

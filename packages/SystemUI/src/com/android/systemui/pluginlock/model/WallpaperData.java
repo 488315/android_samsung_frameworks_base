@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WallpaperData {
 
@@ -74,7 +73,7 @@ public class WallpaperData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public WallpaperData m2667clone() throws CloneNotSupportedException {
+    public WallpaperData m2685clone() throws CloneNotSupportedException {
         return (WallpaperData) super.clone();
     }
 }

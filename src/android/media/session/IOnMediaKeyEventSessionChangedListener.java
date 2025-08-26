@@ -45,9 +45,9 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnMediaKeyEventSessionChangedListener)) {
-                return (IOnMediaKeyEventSessionChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnMediaKeyEventSessionChangedListener)) {
+                return (IOnMediaKeyEventSessionChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 MediaSession.Token token = (MediaSession.Token) parcel.readTypedObject(MediaSession.Token.CREATOR);
                 parcel.enforceNoDataAvail();
-                onMediaKeyEventSessionChanged(readString, token);
+                onMediaKeyEventSessionChanged(string, token);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
 
             @Override // android.media.session.IOnMediaKeyEventSessionChangedListener
             public void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

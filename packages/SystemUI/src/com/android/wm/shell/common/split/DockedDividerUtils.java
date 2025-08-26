@@ -3,7 +3,6 @@ package com.android.wm.shell.common.split;
 import android.graphics.Rect;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DockedDividerUtils {
     public static void calculateBoundsForCellWithPosition(Rect rect, Rect rect2, int i, int i2, int i3) {

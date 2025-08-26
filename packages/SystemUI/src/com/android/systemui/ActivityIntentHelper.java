@@ -10,7 +10,6 @@ import android.content.pm.ResolveInfo;
 import com.android.internal.widget.LockPatternUtils;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActivityIntentHelper {
     public final KeyguardManager mKm;
@@ -24,34 +23,34 @@ public class ActivityIntentHelper {
     }
 
     public final ActivityInfo getPendingTargetActivityInfo(int i, PendingIntent pendingIntent) {
-        List queryIntentComponents = pendingIntent.queryIntentComponents(852096);
-        if (queryIntentComponents.size() == 0) {
+        List listQueryIntentComponents = pendingIntent.queryIntentComponents(852096);
+        if (listQueryIntentComponents.size() == 0) {
             return null;
         }
-        if (queryIntentComponents.size() == 1) {
-            return ((ResolveInfo) queryIntentComponents.get(0)).activityInfo;
+        if (listQueryIntentComponents.size() == 1) {
+            return ((ResolveInfo) listQueryIntentComponents.get(0)).activityInfo;
         }
-        ResolveInfo resolveActivityAsUser = this.mPm.resolveActivityAsUser(pendingIntent.getIntent(), 852096, i);
-        if (resolveActivityAsUser == null || wouldLaunchResolverActivity(resolveActivityAsUser, queryIntentComponents)) {
+        ResolveInfo resolveInfoResolveActivityAsUser = this.mPm.resolveActivityAsUser(pendingIntent.getIntent(), 852096, i);
+        if (resolveInfoResolveActivityAsUser == null || wouldLaunchResolverActivity(resolveInfoResolveActivityAsUser, listQueryIntentComponents)) {
             return null;
         }
-        return resolveActivityAsUser.activityInfo;
+        return resolveInfoResolveActivityAsUser.activityInfo;
     }
 
     public final ActivityInfo getTargetActivityInfo(Intent intent, boolean z, int i) {
         int i2 = !z ? 852096 : 65664;
-        List queryIntentActivitiesAsUser = this.mPm.queryIntentActivitiesAsUser(intent, i2, i);
-        if (queryIntentActivitiesAsUser.size() == 0) {
+        List listQueryIntentActivitiesAsUser = this.mPm.queryIntentActivitiesAsUser(intent, i2, i);
+        if (listQueryIntentActivitiesAsUser.size() == 0) {
             return null;
         }
-        if (queryIntentActivitiesAsUser.size() == 1) {
-            return ((ResolveInfo) queryIntentActivitiesAsUser.get(0)).activityInfo;
+        if (listQueryIntentActivitiesAsUser.size() == 1) {
+            return ((ResolveInfo) listQueryIntentActivitiesAsUser.get(0)).activityInfo;
         }
-        ResolveInfo resolveActivityAsUser = this.mPm.resolveActivityAsUser(intent, i2, i);
-        if (resolveActivityAsUser == null || wouldLaunchResolverActivity(resolveActivityAsUser, queryIntentActivitiesAsUser)) {
+        ResolveInfo resolveInfoResolveActivityAsUser = this.mPm.resolveActivityAsUser(intent, i2, i);
+        if (resolveInfoResolveActivityAsUser == null || wouldLaunchResolverActivity(resolveInfoResolveActivityAsUser, listQueryIntentActivitiesAsUser)) {
             return null;
         }
-        return resolveActivityAsUser.activityInfo;
+        return resolveInfoResolveActivityAsUser.activityInfo;
     }
 
     public final boolean wouldLaunchResolverActivity(int i, Intent intent) {

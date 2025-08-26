@@ -252,7 +252,7 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
 
     public WindowManager.LayoutParams createLayoutParams() {
         Log.i(TAG, "createLayoutParams");
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(2002, R.string.config_defaultSearchSelectorPackageName, -3);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(2002, R.string.config_defaultQrCodeComponent, -3);
         layoutParams.privateFlags |= 16;
         layoutParams.softInputMode = 32;
         layoutParams.setTitle(getClass().getName());

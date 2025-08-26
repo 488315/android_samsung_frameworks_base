@@ -44,9 +44,9 @@ public interface ICocktailBarStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICocktailBarStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICocktailBarStateCallback)) {
-                return (ICocktailBarStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICocktailBarStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICocktailBarStateCallback)) {
+                return (ICocktailBarStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ICocktailBarStateCallback extends IInterface {
 
             @Override // com.samsung.android.cocktailbar.ICocktailBarStateCallback
             public void onCocktailBarStateChanged(CocktailBarStateInfo cocktailBarStateInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICocktailBarStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(cocktailBarStateInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICocktailBarStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cocktailBarStateInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

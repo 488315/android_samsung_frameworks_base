@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnchoredDraggableState$draggableState$1 implements DraggableState {
     public final AnchoredDraggableState$draggableState$1$dragScope$1 dragScope;
@@ -24,11 +23,11 @@ public final class AnchoredDraggableState$draggableState$1 implements DraggableS
             public final void dragBy(float f) {
                 AnchoredDraggableState anchoredDraggableState2 = anchoredDraggableState;
                 AnchoredDraggableState$anchoredDragScope$1 anchoredDraggableState$anchoredDragScope$1 = anchoredDraggableState2.anchoredDragScope;
-                float newOffsetForDelta$material3_release = anchoredDraggableState2.newOffsetForDelta$material3_release(f);
+                float fNewOffsetForDelta$material3_release = anchoredDraggableState2.newOffsetForDelta$material3_release(f);
                 anchoredDraggableState$anchoredDragScope$1.getClass();
                 int i = AnchoredDraggableState.$r8$clinit;
                 AnchoredDraggableState anchoredDraggableState3 = anchoredDraggableState$anchoredDragScope$1.this$0;
-                ((SnapshotMutableFloatStateImpl) anchoredDraggableState3.offset$delegate).setFloatValue(newOffsetForDelta$material3_release);
+                ((SnapshotMutableFloatStateImpl) anchoredDraggableState3.offset$delegate).setFloatValue(fNewOffsetForDelta$material3_release);
                 ((SnapshotMutableFloatStateImpl) anchoredDraggableState3.lastVelocity$delegate).setFloatValue(0.0f);
             }
         };
@@ -36,7 +35,7 @@ public final class AnchoredDraggableState$draggableState$1 implements DraggableS
 
     @Override // androidx.compose.foundation.gestures.DraggableState
     public final Object drag(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
-        Object anchoredDrag = this.this$0.anchoredDrag(mutatePriority, new AnchoredDraggableState$draggableState$1$drag$2(this, function2, null), (ContinuationImpl) continuation);
-        return anchoredDrag == CoroutineSingletons.COROUTINE_SUSPENDED ? anchoredDrag : Unit.INSTANCE;
+        Object objAnchoredDrag = this.this$0.anchoredDrag(mutatePriority, new AnchoredDraggableState$draggableState$1$drag$2(this, function2, null), (ContinuationImpl) continuation);
+        return objAnchoredDrag == CoroutineSingletons.COROUTINE_SUSPENDED ? objAnchoredDrag : Unit.INSTANCE;
     }
 }

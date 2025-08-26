@@ -11,19 +11,16 @@ import androidx.compose.ui.unit.IntSize;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NodeMeasuringIntrinsics {
     public static final NodeMeasuringIntrinsics INSTANCE = new NodeMeasuringIntrinsics();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ApproachMeasureBlock {
         /* renamed from: measure-3p2s80s */
-        MeasureResult mo605measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j);
+        MeasureResult mo607measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j);
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DefaultIntrinsicMeasurable implements Measurable {
         public final IntrinsicMeasurable measurable;
         public final IntrinsicMinMax minMax;
@@ -52,15 +49,15 @@ public final class NodeMeasuringIntrinsics {
 
         @Override // androidx.compose.ui.layout.Measurable
         /* renamed from: measure-BRTryo0 */
-        public final Placeable mo608measureBRTryo0(long j) {
+        public final Placeable mo610measureBRTryo0(long j) {
             IntrinsicWidthHeight intrinsicWidthHeight = this.widthHeight;
             IntrinsicWidthHeight intrinsicWidthHeight2 = IntrinsicWidthHeight.Width;
             IntrinsicMinMax intrinsicMinMax = this.minMax;
             IntrinsicMeasurable intrinsicMeasurable = this.measurable;
             if (intrinsicWidthHeight == intrinsicWidthHeight2) {
-                return new EmptyPlaceable(intrinsicMinMax == IntrinsicMinMax.Max ? intrinsicMeasurable.maxIntrinsicWidth(Constraints.m820getMaxHeightimpl(j)) : intrinsicMeasurable.minIntrinsicWidth(Constraints.m820getMaxHeightimpl(j)), Constraints.m816getHasBoundedHeightimpl(j) ? Constraints.m820getMaxHeightimpl(j) : 32767);
+                return new EmptyPlaceable(intrinsicMinMax == IntrinsicMinMax.Max ? intrinsicMeasurable.maxIntrinsicWidth(Constraints.m822getMaxHeightimpl(j)) : intrinsicMeasurable.minIntrinsicWidth(Constraints.m822getMaxHeightimpl(j)), Constraints.m818getHasBoundedHeightimpl(j) ? Constraints.m822getMaxHeightimpl(j) : 32767);
             }
-            return new EmptyPlaceable(Constraints.m817getHasBoundedWidthimpl(j) ? Constraints.m821getMaxWidthimpl(j) : 32767, intrinsicMinMax == IntrinsicMinMax.Max ? intrinsicMeasurable.maxIntrinsicHeight(Constraints.m821getMaxWidthimpl(j)) : intrinsicMeasurable.minIntrinsicHeight(Constraints.m821getMaxWidthimpl(j)));
+            return new EmptyPlaceable(Constraints.m819getHasBoundedWidthimpl(j) ? Constraints.m823getMaxWidthimpl(j) : 32767, intrinsicMinMax == IntrinsicMinMax.Max ? intrinsicMeasurable.maxIntrinsicHeight(Constraints.m823getMaxWidthimpl(j)) : intrinsicMeasurable.minIntrinsicHeight(Constraints.m823getMaxWidthimpl(j)));
         }
 
         @Override // androidx.compose.ui.layout.IntrinsicMeasurable
@@ -77,7 +74,6 @@ public final class NodeMeasuringIntrinsics {
     /* JADX INFO: Access modifiers changed from: package-private */
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntrinsicMinMax {
         public static final /* synthetic */ IntrinsicMinMax[] $VALUES;
         public static final IntrinsicMinMax Max;
@@ -108,7 +104,6 @@ public final class NodeMeasuringIntrinsics {
     /* JADX INFO: Access modifiers changed from: package-private */
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntrinsicWidthHeight {
         public static final /* synthetic */ IntrinsicWidthHeight[] $VALUES;
         public static final IntrinsicWidthHeight Height;
@@ -139,11 +134,10 @@ public final class NodeMeasuringIntrinsics {
     private NodeMeasuringIntrinsics() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class EmptyPlaceable extends Placeable {
         public EmptyPlaceable(int i, int i2) {
             IntSize.Companion companion = IntSize.Companion;
-            m624setMeasuredSizeozmzZPI((i2 & 4294967295L) | (i << 32));
+            m626setMeasuredSizeozmzZPI((i2 & 4294967295L) | (i << 32));
         }
 
         @Override // androidx.compose.ui.layout.Measured
@@ -153,7 +147,7 @@ public final class NodeMeasuringIntrinsics {
 
         @Override // androidx.compose.ui.layout.Placeable
         /* renamed from: placeAt-f8xVGno */
-        public final void mo609placeAtf8xVGno(long j, float f, Function1 function1) {
+        public final void mo611placeAtf8xVGno(long j, float f, Function1 function1) {
         }
     }
 }

@@ -3,7 +3,6 @@ package androidx.compose.ui.text.input;
 import androidx.compose.ui.text.internal.InlineClassHelperKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PartialGapBuffer {
     public GapBuffer buffer;
@@ -11,7 +10,6 @@ public final class PartialGapBuffer {
     public int bufStart = -1;
     public int bufEnd = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,17 +44,17 @@ public final class PartialGapBuffer {
         }
         GapBuffer gapBuffer = this.buffer;
         if (gapBuffer == null) {
-            int max = Math.max(255, str.length() + 128);
-            char[] cArr = new char[max];
-            int min = Math.min(i, 64);
-            int min2 = Math.min(this.text.length() - i2, 64);
-            int i3 = i - min;
+            int iMax = Math.max(255, str.length() + 128);
+            char[] cArr = new char[iMax];
+            int iMin = Math.min(i, 64);
+            int iMin2 = Math.min(this.text.length() - i2, 64);
+            int i3 = i - iMin;
             this.text.getChars(i3, i, cArr, 0);
-            int i4 = max - min2;
-            int i5 = min2 + i2;
+            int i4 = iMax - iMin2;
+            int i5 = iMin2 + i2;
             this.text.getChars(i2, i5, cArr, i4);
-            str.getChars(0, str.length(), cArr, min);
-            this.buffer = new GapBuffer(cArr, str.length() + min, i4);
+            str.getChars(0, str.length(), cArr, iMin);
+            this.buffer = new GapBuffer(cArr, str.length() + iMin, i4);
             this.bufStart = i3;
             this.bufEnd = i5;
             return;
@@ -74,11 +72,11 @@ public final class PartialGapBuffer {
         }
         int length = str.length() - (i8 - i7);
         if (length > gapBuffer.gapLength()) {
-            int gapLength = length - gapBuffer.gapLength();
+            int iGapLength = length - gapBuffer.gapLength();
             int i9 = gapBuffer.capacity;
             do {
                 i9 *= 2;
-            } while (i9 - gapBuffer.capacity < gapLength);
+            } while (i9 - gapBuffer.capacity < iGapLength);
             char[] cArr2 = new char[i9];
             System.arraycopy(gapBuffer.buffer, 0, cArr2, 0, gapBuffer.gapStart);
             int i10 = gapBuffer.capacity;
@@ -98,14 +96,14 @@ public final class PartialGapBuffer {
             gapBuffer.gapStart = i7;
             gapBuffer.gapEnd -= i15;
         } else if (i7 >= i14 || i8 < i14) {
-            int gapLength2 = i7 + gapBuffer.gapLength();
-            int gapLength3 = i8 + gapBuffer.gapLength();
+            int iGapLength2 = i7 + gapBuffer.gapLength();
+            int iGapLength3 = i8 + gapBuffer.gapLength();
             int i16 = gapBuffer.gapEnd;
-            int i17 = gapLength2 - i16;
+            int i17 = iGapLength2 - i16;
             char[] cArr4 = gapBuffer.buffer;
             System.arraycopy(cArr4, i16, cArr4, gapBuffer.gapStart, i17);
             gapBuffer.gapStart += i17;
-            gapBuffer.gapEnd = gapLength3;
+            gapBuffer.gapEnd = iGapLength3;
         } else {
             gapBuffer.gapEnd = i8 + gapBuffer.gapLength();
             gapBuffer.gapStart = i7;

@@ -4,7 +4,6 @@ import com.sec.ims.presence.ServiceTuple;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RealBufferedSink implements Sink, WritableByteChannel {
     public final Buffer bufferField = new Buffer();
@@ -16,7 +15,7 @@ public final class RealBufferedSink implements Sink, WritableByteChannel {
     }
 
     @Override // okio.Sink, java.lang.AutoCloseable, java.nio.channels.Channel
-    public final void close() {
+    public final void close() throws Throwable {
         if (this.closed) {
             return;
         }
@@ -92,9 +91,9 @@ public final class RealBufferedSink implements Sink, WritableByteChannel {
         if (this.closed) {
             throw new IllegalStateException(ServiceTuple.BASIC_STATUS_CLOSED);
         }
-        int write = this.bufferField.write(byteBuffer);
+        int iWrite = this.bufferField.write(byteBuffer);
         emitCompleteSegments();
-        return write;
+        return iWrite;
     }
 
     @Override // okio.Sink

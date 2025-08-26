@@ -25,7 +25,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -51,7 +50,7 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
     public final Object invokeSuspend(Object obj) {
         Pair pair;
         LetterboxAppearance letterboxAppearance;
-        Object obj2;
+        Object next;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -67,18 +66,22 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
         List list2 = statusBarAttributes.letterboxDetails;
         int i = StatusBarModePerDisplayRepositoryImpl.$r8$clinit;
         statusBarModePerDisplayRepositoryImpl.getClass();
-        boolean isEmpty = list2.isEmpty();
+        boolean zIsEmpty = list2.isEmpty();
         int i2 = statusBarAttributes.appearance;
-        if (isEmpty) {
+        if (zIsEmpty) {
             pair = new Pair(Integer.valueOf(i2), list);
         } else {
-            Integer valueOf = Integer.valueOf(i2);
+            Integer numValueOf = Integer.valueOf(i2);
             LetterboxAppearanceCalculator letterboxAppearanceCalculator = statusBarModePerDisplayRepositoryImpl.letterboxAppearanceCalculator;
-            letterboxAppearanceCalculator.lastAppearance = valueOf;
+            letterboxAppearanceCalculator.lastAppearance = numValueOf;
             letterboxAppearanceCalculator.lastAppearanceRegions = list;
             letterboxAppearanceCalculator.lastLetterboxes = list2;
             LetterboxBackgroundProvider letterboxBackgroundProvider = letterboxAppearanceCalculator.letterboxBackgroundProvider;
-            if (!letterboxBackgroundProvider.isLetterboxBackgroundMultiColored) {
+            if (letterboxBackgroundProvider.isLetterboxBackgroundMultiColored) {
+                letterboxAppearance = new LetterboxAppearance(i2 | 32, list);
+                letterboxAppearanceCalculator.lastLetterboxAppearance = letterboxAppearance;
+                pair = new Pair(Integer.valueOf(letterboxAppearance.appearance), letterboxAppearance.appearanceRegions);
+            } else {
                 List<LetterboxDetails> list3 = list2;
                 if (!(list3 instanceof Collection) || !list3.isEmpty()) {
                     for (LetterboxDetails letterboxDetails : list3) {
@@ -90,6 +93,7 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
                             if ((letterboxInnerBounds2.contains(rect2) || rect2.contains(letterboxInnerBounds2)) ? false : letterboxInnerBounds2.intersects(rect2.left, rect2.top, rect2.right, rect2.bottom)) {
                             }
                         }
+                        letterboxAppearance = new LetterboxAppearance(i2 | 32, list);
                     }
                 }
                 int i3 = i2 & (-33);
@@ -99,15 +103,15 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
                     Iterator it = list3.iterator();
                     while (true) {
                         if (!it.hasNext()) {
-                            obj2 = null;
+                            next = null;
                             break;
                         }
-                        obj2 = it.next();
-                        if (Intrinsics.areEqual(((LetterboxDetails) obj2).getLetterboxFullBounds(), appearanceRegion.getBounds())) {
+                        next = it.next();
+                        if (Intrinsics.areEqual(((LetterboxDetails) next).getLetterboxFullBounds(), appearanceRegion.getBounds())) {
                             break;
                         }
                     }
-                    LetterboxDetails letterboxDetails2 = (LetterboxDetails) obj2;
+                    LetterboxDetails letterboxDetails2 = (LetterboxDetails) next;
                     if (letterboxDetails2 != null) {
                         appearanceRegion = new AppearanceRegion(appearanceRegion.getAppearance(), letterboxDetails2.getLetterboxInnerBounds());
                     }
@@ -123,20 +127,20 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
                     Rect letterboxFullBounds = letterboxDetails3.getLetterboxFullBounds();
                     Iterator it3 = it2;
                     LetterboxBackgroundProvider letterboxBackgroundProvider2 = letterboxBackgroundProvider;
-                    List asList = Arrays.asList(new Rect(letterboxFullBounds.left, letterboxFullBounds.top, letterboxInnerBounds3.left, letterboxFullBounds.bottom), new Rect(letterboxFullBounds.left, letterboxFullBounds.top, letterboxFullBounds.right, letterboxInnerBounds3.top), new Rect(letterboxInnerBounds3.right, letterboxFullBounds.top, letterboxFullBounds.right, letterboxFullBounds.bottom), new Rect(letterboxFullBounds.left, letterboxInnerBounds3.bottom, letterboxFullBounds.right, letterboxFullBounds.bottom));
+                    List listAsList = Arrays.asList(new Rect(letterboxFullBounds.left, letterboxFullBounds.top, letterboxInnerBounds3.left, letterboxFullBounds.bottom), new Rect(letterboxFullBounds.left, letterboxFullBounds.top, letterboxFullBounds.right, letterboxInnerBounds3.top), new Rect(letterboxInnerBounds3.right, letterboxFullBounds.top, letterboxFullBounds.right, letterboxFullBounds.bottom), new Rect(letterboxFullBounds.left, letterboxInnerBounds3.bottom, letterboxFullBounds.right, letterboxFullBounds.bottom));
                     ArrayList arrayList3 = new ArrayList();
-                    for (Object obj3 : asList) {
-                        if (!((Rect) obj3).isEmpty()) {
-                            arrayList3.add(obj3);
+                    for (Object obj2 : listAsList) {
+                        if (!((Rect) obj2).isEmpty()) {
+                            arrayList3.add(obj2);
                         }
                     }
                     ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList3, 10));
                     int size = arrayList3.size();
                     int i6 = 0;
                     while (i6 < size) {
-                        Object obj4 = arrayList3.get(i6);
+                        Object obj3 = arrayList3.get(i6);
                         i6++;
-                        arrayList4.add(new AppearanceRegion(i5, (Rect) obj4));
+                        arrayList4.add(new AppearanceRegion(i5, (Rect) obj3));
                     }
                     arrayList2.add(arrayList4);
                     it2 = it3;
@@ -146,9 +150,6 @@ final class StatusBarModePerDisplayRepositoryImpl$modifiedStatusBarAttributes$1 
                 letterboxAppearanceCalculator.lastLetterboxAppearance = letterboxAppearance;
                 pair = new Pair(Integer.valueOf(letterboxAppearance.appearance), letterboxAppearance.appearanceRegions);
             }
-            letterboxAppearance = new LetterboxAppearance(i2 | 32, list);
-            letterboxAppearanceCalculator.lastLetterboxAppearance = letterboxAppearance;
-            pair = new Pair(Integer.valueOf(letterboxAppearance.appearance), letterboxAppearance.appearanceRegions);
         }
         return new StatusBarModePerDisplayRepositoryImpl.ModifiedStatusBarAttributes(((Number) pair.component1()).intValue(), (List) pair.component2(), statusBarAttributes.navbarColorManagedByIme, boundsPair);
     }

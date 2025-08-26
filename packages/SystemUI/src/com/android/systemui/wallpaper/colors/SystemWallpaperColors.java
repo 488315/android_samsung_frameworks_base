@@ -6,7 +6,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SystemWallpaperColors {
     public final SparseArray mSystemWallpaperColors = new SparseArray();
@@ -28,9 +27,9 @@ public final class SystemWallpaperColors {
         if (semWallpaperColors != null) {
             return semWallpaperColors;
         }
-        SemWallpaperColors semGetWallpaperColors = this.mWallpaperManager.semGetWallpaperColors(i);
-        this.mSystemWallpaperColors.put(i, semGetWallpaperColors);
-        Log.i("SystemWallpaperColors", "getColor : put color for which " + i + ", color = " + semGetWallpaperColors);
-        return semGetWallpaperColors;
+        SemWallpaperColors semWallpaperColorsSemGetWallpaperColors = this.mWallpaperManager.semGetWallpaperColors(i);
+        this.mSystemWallpaperColors.put(i, semWallpaperColorsSemGetWallpaperColors);
+        Log.i("SystemWallpaperColors", "getColor : put color for which " + i + ", color = " + semWallpaperColorsSemGetWallpaperColors);
+        return semWallpaperColorsSemGetWallpaperColors;
     }
 }

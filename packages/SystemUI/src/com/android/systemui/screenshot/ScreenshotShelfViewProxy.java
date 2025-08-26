@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.Region;
@@ -39,7 +40,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotShelfViewProxy {
     public final ScreenshotAnimationController animationController;
@@ -57,12 +57,10 @@ public final class ScreenshotShelfViewProxy {
     public final ScreenshotViewModel viewModel;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ScreenshotShelfViewProxy getProxy(Context context, int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ScreenshotViewCallback {
         void onDismiss();
 
@@ -71,7 +69,7 @@ public final class ScreenshotShelfViewProxy {
         void onUserInteraction();
     }
 
-    public ScreenshotShelfViewProxy(UiEventLogger uiEventLogger, ScreenshotViewModel screenshotViewModel, WindowManager windowManager, ScreenshotShelfViewBinder screenshotShelfViewBinder, ThumbnailObserver thumbnailObserver, Context context, int i) {
+    public ScreenshotShelfViewProxy(UiEventLogger uiEventLogger, ScreenshotViewModel screenshotViewModel, WindowManager windowManager, ScreenshotShelfViewBinder screenshotShelfViewBinder, ThumbnailObserver thumbnailObserver, Context context, int i) throws Resources.NotFoundException {
         this.logger = uiEventLogger;
         this.viewModel = screenshotViewModel;
         this.windowManager = windowManager;
@@ -95,7 +93,7 @@ public final class ScreenshotShelfViewProxy {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i2) {
                     case 0:
                         this.f$0.requestDismissal(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER, null);
@@ -111,8 +109,8 @@ public final class ScreenshotShelfViewProxy {
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
                 DebugLogger debugLogger = DebugLogger.INSTANCE;
-                Reflection.getOrCreateKotlinClass(ScreenshotShelfViewProxy.this.getClass()).getSimpleName();
-                function1.mo779invoke(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER);
+                Reflection.getOrCreateKotlinClass(this.this$0.getClass()).getSimpleName();
+                function1.mo781invoke(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER);
             }
         };
         screenshotShelfView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.systemui.screenshot.ScreenshotShelfViewProxy$addPredictiveBackListener$1
@@ -120,9 +118,9 @@ public final class ScreenshotShelfViewProxy {
             public final void onViewAttachedToWindow(View view) {
                 DebugLogger debugLogger = DebugLogger.INSTANCE;
                 Reflection.getOrCreateKotlinClass(ScreenshotShelfViewProxy$addPredictiveBackListener$1.class).getSimpleName();
-                OnBackInvokedDispatcher findOnBackInvokedDispatcher = ScreenshotShelfViewProxy.this.view.findOnBackInvokedDispatcher();
-                if (findOnBackInvokedDispatcher != null) {
-                    findOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, onBackInvokedCallback);
+                OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = this.this$0.view.findOnBackInvokedDispatcher();
+                if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+                    onBackInvokedDispatcherFindOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, onBackInvokedCallback);
                 }
             }
 
@@ -130,9 +128,9 @@ public final class ScreenshotShelfViewProxy {
             public final void onViewDetachedFromWindow(View view) {
                 DebugLogger debugLogger = DebugLogger.INSTANCE;
                 Reflection.getOrCreateKotlinClass(ScreenshotShelfViewProxy$addPredictiveBackListener$1.class).getSimpleName();
-                OnBackInvokedDispatcher findOnBackInvokedDispatcher = view.findOnBackInvokedDispatcher();
-                if (findOnBackInvokedDispatcher != null) {
-                    findOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(onBackInvokedCallback);
+                OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = view.findOnBackInvokedDispatcher();
+                if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+                    onBackInvokedDispatcherFindOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(onBackInvokedCallback);
                 }
             }
         });
@@ -146,7 +144,7 @@ public final class ScreenshotShelfViewProxy {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i3) {
                     case 0:
                         this.f$0.requestDismissal(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER, null);
@@ -166,7 +164,7 @@ public final class ScreenshotShelfViewProxy {
                 }
                 DebugLogger debugLogger = DebugLogger.INSTANCE;
                 Reflection.getOrCreateKotlinClass(ScreenshotShelfViewProxy$setOnKeyListener$1.class).getSimpleName();
-                Function1.this.mo779invoke(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER);
+                function12.mo781invoke(ScreenshotEvent.SCREENSHOT_DISMISSED_OTHER);
                 return true;
             }
         });
@@ -195,7 +193,7 @@ public final class ScreenshotShelfViewProxy {
                         if (inputEvent instanceof MotionEvent) {
                             MotionEvent motionEvent = (MotionEvent) inputEvent;
                             if (motionEvent.getActionMasked() == 0) {
-                                ScreenshotShelfViewProxy screenshotShelfViewProxy2 = ScreenshotShelfViewProxy.this;
+                                ScreenshotShelfViewProxy screenshotShelfViewProxy2 = screenshotShelfViewProxy;
                                 if (ScreenshotShelfViewProxy.access$getTouchRegion(screenshotShelfViewProxy2).contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY()) || (screenshotViewCallback = screenshotShelfViewProxy2.callbacks) == null) {
                                     return;
                                 }
@@ -219,22 +217,22 @@ public final class ScreenshotShelfViewProxy {
         ScreenshotShelfView screenshotShelfView = screenshotShelfViewProxy.view;
         screenshotShelfView.getClass();
         Region region = new Region();
-        int dpToPx = (int) FloatingWindowUtil.dpToPx(screenshotShelfView.displayMetrics, -12.0f);
+        int iDpToPx = (int) FloatingWindowUtil.dpToPx(screenshotShelfView.displayMetrics, -12.0f);
         ImageView imageView = screenshotShelfView.screenshotPreview;
         if (imageView == null) {
             imageView = null;
         }
-        screenshotShelfView.addInsetView(region, imageView, dpToPx);
+        screenshotShelfView.addInsetView(region, imageView, iDpToPx);
         View view = screenshotShelfView.actionsContainerBackground;
         if (view == null) {
             view = null;
         }
-        screenshotShelfView.addInsetView(region, view, dpToPx);
+        screenshotShelfView.addInsetView(region, view, iDpToPx);
         View view2 = screenshotShelfView.dismissButton;
-        screenshotShelfView.addInsetView(region, view2 != null ? view2 : null, dpToPx);
-        View findViewById = screenshotShelfView.findViewById(R.id.screenshot_message_container);
-        if (findViewById != null) {
-            screenshotShelfView.addInsetView(region, findViewById, dpToPx);
+        screenshotShelfView.addInsetView(region, view2 != null ? view2 : null, iDpToPx);
+        View viewFindViewById = screenshotShelfView.findViewById(R.id.screenshot_message_container);
+        if (viewFindViewById != null) {
+            screenshotShelfView.addInsetView(region, viewFindViewById, iDpToPx);
         }
         if (screenshotShelfView.getResources().getInteger(android.R.integer.config_screenTimeoutOverride) == 2) {
             Rect rect = new Rect(0, 0, insets.left, screenshotShelfView.displayMetrics.heightPixels);
@@ -264,27 +262,27 @@ public final class ScreenshotShelfViewProxy {
             animator.cancel();
         }
         ScreenshotShelfView screenshotShelfView = screenshotAnimationController.view;
-        float f2 = 1.5f;
+        float fMax = 1.5f;
         if (f != null && Math.abs(f.floatValue()) >= 0.005f) {
-            f2 = Math.max(1.5f, Math.abs(f.floatValue())) * Math.signum(f.floatValue());
+            fMax = Math.max(1.5f, Math.abs(f.floatValue())) * Math.signum(f.floatValue());
         } else if (screenshotShelfView.getResources().getConfiguration().getLayoutDirection() == 0) {
-            f2 = -1.5f;
+            fMax = -1.5f;
         }
-        float right = f2 < 0.0f ? screenshotAnimationController.actionContainer.getRight() * (-1.0f) : screenshotShelfView.getResources().getDisplayMetrics().widthPixels - screenshotAnimationController.actionContainer.getLeft();
+        float right = fMax < 0.0f ? screenshotAnimationController.actionContainer.getRight() * (-1.0f) : screenshotShelfView.getResources().getDisplayMetrics().widthPixels - screenshotAnimationController.actionContainer.getLeft();
         float translationX = right - screenshotShelfView.getTranslationX();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(screenshotShelfView.getTranslationX(), right);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(screenshotShelfView.getTranslationX(), right);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                ScreenshotAnimationController.this.view.setTranslationX(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                ScreenshotAnimationController.this.view.setAlpha(1.0f - valueAnimator.getAnimatedFraction());
+                screenshotAnimationController.view.setTranslationX(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                screenshotAnimationController.view.setAlpha(1.0f - valueAnimator.getAnimatedFraction());
             }
         });
-        ofFloat.setDuration((long) Math.abs(translationX / f2));
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$$inlined$doOnStart$1
+        valueAnimatorOfFloat.setDuration((long) Math.abs(translationX / fMax));
+        valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$$inlined$doOnStart$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
-                ScreenshotViewModel screenshotViewModel = ScreenshotAnimationController.this.viewModel;
+                ScreenshotViewModel screenshotViewModel = screenshotAnimationController.viewModel;
                 screenshotViewModel._isAnimating.updateState(null, Boolean.TRUE);
             }
 
@@ -300,10 +298,10 @@ public final class ScreenshotShelfViewProxy {
             public final void onAnimationRepeat(Animator animator2) {
             }
         });
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$$inlined$doOnEnd$1
+        valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotAnimationController$getSwipeDismissAnimation$$inlined$doOnEnd$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
-                ScreenshotViewModel screenshotViewModel = ScreenshotAnimationController.this.viewModel;
+                ScreenshotViewModel screenshotViewModel = screenshotAnimationController.viewModel;
                 screenshotViewModel._isAnimating.updateState(null, Boolean.FALSE);
             }
 
@@ -319,13 +317,13 @@ public final class ScreenshotShelfViewProxy {
             public final void onAnimationStart(Animator animator2) {
             }
         });
-        screenshotAnimationController.animator = ofFloat;
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.screenshot.ScreenshotShelfViewProxy$requestDismissal$4
+        screenshotAnimationController.animator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.screenshot.ScreenshotShelfViewProxy.requestDismissal.4
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
                 ScreenshotShelfViewProxy screenshotShelfViewProxy = ScreenshotShelfViewProxy.this;
                 screenshotShelfViewProxy.isDismissing = false;
-                ScreenshotShelfViewProxy.ScreenshotViewCallback screenshotViewCallback = screenshotShelfViewProxy.callbacks;
+                ScreenshotViewCallback screenshotViewCallback = screenshotShelfViewProxy.callbacks;
                 if (screenshotViewCallback != null) {
                     screenshotViewCallback.onDismiss();
                 }
@@ -336,7 +334,7 @@ public final class ScreenshotShelfViewProxy {
                 ScreenshotShelfViewProxy.this.isDismissing = true;
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public final void reset() {

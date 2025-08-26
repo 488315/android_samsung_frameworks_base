@@ -14,7 +14,6 @@ import com.android.systemui.tuner.TunerService;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarSwitch extends SwitchPreference implements TunerService.Tunable {
     public Set mHideList;

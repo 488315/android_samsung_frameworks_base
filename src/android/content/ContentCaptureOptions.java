@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.contentcapture.ContentCaptureManager;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +26,12 @@ public final class ContentCaptureOptions implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ContentCaptureOptions createFromParcel(Parcel parcel) {
-            boolean readBoolean = parcel.readBoolean();
-            int readInt = parcel.readInt();
-            if (readBoolean) {
-                return new ContentCaptureOptions(readInt);
+            boolean z = parcel.readBoolean();
+            int i = parcel.readInt();
+            if (z) {
+                return new ContentCaptureOptions(i);
             }
-            return new ContentCaptureOptions(readInt, parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), ContentProtectionOptions.createFromParcel(parcel), parcel.readArraySet(null));
+            return new ContentCaptureOptions(i, parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), ContentProtectionOptions.createFromParcel(parcel), parcel.readArraySet(null));
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -86,11 +87,11 @@ public final class ContentCaptureOptions implements Parcelable {
     }
 
     public static ContentCaptureOptions forWhitelistingItself() {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        if (currentActivityThread == null) {
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        if (activityThreadCurrentActivityThread == null) {
             throw new IllegalStateException("No ActivityThread");
         }
-        String packageName = currentActivityThread.getApplication().getPackageName();
+        String packageName = activityThreadCurrentActivityThread.getApplication().getPackageName();
         if (!"android.contentcaptureservice.cts".equals(packageName) && !"android.translation.cts".equals(packageName)) {
             Log.e(TAG, "forWhitelistingItself(): called by " + packageName);
             throw new SecurityException("Thou shall not pass!");
@@ -169,7 +170,7 @@ public final class ContentCaptureOptions implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeBoolean(this.lite);
         parcel.writeInt(this.loggingLevel);
         if (this.lite) {
@@ -242,23 +243,23 @@ public final class ContentCaptureOptions implements Parcelable {
             list.forEach(new Consumer() { // from class: android.content.ContentCaptureOptions$ContentProtectionOptions$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Parcel.this.writeStringList((List) obj);
+                    parcel.writeStringList((List) obj);
                 }
             });
         }
 
         private static List<List<String>> createGroupsFromParcel(final Parcel parcel) {
-            Stream mapToObj = IntStream.range(0, parcel.readInt()).mapToObj(new IntFunction() { // from class: android.content.ContentCaptureOptions$ContentProtectionOptions$$ExternalSyntheticLambda1
+            Stream streamMapToObj = IntStream.range(0, parcel.readInt()).mapToObj(new IntFunction() { // from class: android.content.ContentCaptureOptions$ContentProtectionOptions$$ExternalSyntheticLambda1
                 @Override // java.util.function.IntFunction
                 public final Object apply(int i) {
                     return ContentCaptureOptions.ContentProtectionOptions.lambda$createGroupsFromParcel$0(i);
                 }
             });
             Objects.requireNonNull(parcel);
-            return (List) mapToObj.peek(new Consumer() { // from class: android.content.ContentCaptureOptions$ContentProtectionOptions$$ExternalSyntheticLambda2
+            return (List) streamMapToObj.peek(new Consumer() { // from class: android.content.ContentCaptureOptions$ContentProtectionOptions$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Parcel.this.readStringList((ArrayList) obj);
+                    parcel.readStringList((ArrayList) obj);
                 }
             }).collect(Collectors.toUnmodifiableList());
         }

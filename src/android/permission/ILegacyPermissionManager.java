@@ -102,9 +102,9 @@ public interface ILegacyPermissionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILegacyPermissionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILegacyPermissionManager)) {
-                return (ILegacyPermissionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILegacyPermissionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILegacyPermissionManager)) {
+                return (ILegacyPermissionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -150,74 +150,74 @@ public interface ILegacyPermissionManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkDeviceIdentifierAccess = checkDeviceIdentifierAccess(readString, readString2, readString3, readInt, readInt2);
+                    int iCheckDeviceIdentifierAccess = checkDeviceIdentifierAccess(string, string2, string3, i3, i4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkDeviceIdentifierAccess);
+                    parcel2.writeInt(iCheckDeviceIdentifierAccess);
                     return true;
                 case 2:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkPhoneNumberAccess = checkPhoneNumberAccess(readString4, readString5, readString6, readInt3, readInt4);
+                    int iCheckPhoneNumberAccess = checkPhoneNumberAccess(string4, string5, string6, i5, i6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkPhoneNumberAccess);
+                    parcel2.writeInt(iCheckPhoneNumberAccess);
                     return true;
                 case 3:
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt5 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDefaultPermissionsToEnabledCarrierApps(createStringArray, readInt5);
+                    grantDefaultPermissionsToEnabledCarrierApps(strArrCreateStringArray, i7);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String[] createStringArray2 = parcel.createStringArray();
-                    int readInt6 = parcel.readInt();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDefaultPermissionsToEnabledImsServices(createStringArray2, readInt6);
+                    grantDefaultPermissionsToEnabledImsServices(strArrCreateStringArray2, i8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String[] createStringArray3 = parcel.createStringArray();
-                    int readInt7 = parcel.readInt();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDefaultPermissionsToEnabledTelephonyDataServices(createStringArray3, readInt7);
+                    grantDefaultPermissionsToEnabledTelephonyDataServices(strArrCreateStringArray3, i9);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String[] createStringArray4 = parcel.createStringArray();
-                    int readInt8 = parcel.readInt();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    revokeDefaultPermissionsFromDisabledTelephonyDataServices(createStringArray4, readInt8);
+                    revokeDefaultPermissionsFromDisabledTelephonyDataServices(strArrCreateStringArray4, i10);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDefaultPermissionsToActiveLuiApp(readString7, readInt9);
+                    grantDefaultPermissionsToActiveLuiApp(string7, i11);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String[] createStringArray5 = parcel.createStringArray();
-                    int readInt10 = parcel.readInt();
+                    String[] strArrCreateStringArray5 = parcel.createStringArray();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    revokeDefaultPermissionsFromLuiApps(createStringArray5, readInt10);
+                    revokeDefaultPermissionsFromLuiApps(strArrCreateStringArray5, i12);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDefaultPermissionsToCarrierServiceApp(readString8, readInt11);
+                    grantDefaultPermissionsToCarrierServiceApp(string8, i13);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -243,153 +243,153 @@ public interface ILegacyPermissionManager extends IInterface {
 
             @Override // android.permission.ILegacyPermissionManager
             public int checkDeviceIdentifierAccess(String str, String str2, String str3, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public int checkPhoneNumberAccess(String str, String str2, String str3, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void grantDefaultPermissionsToEnabledCarrierApps(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void grantDefaultPermissionsToEnabledImsServices(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void grantDefaultPermissionsToEnabledTelephonyDataServices(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void revokeDefaultPermissionsFromDisabledTelephonyDataServices(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void grantDefaultPermissionsToActiveLuiApp(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void revokeDefaultPermissionsFromLuiApps(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.ILegacyPermissionManager
             public void grantDefaultPermissionsToCarrierServiceApp(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILegacyPermissionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

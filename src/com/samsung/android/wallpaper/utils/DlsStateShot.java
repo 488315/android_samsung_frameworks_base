@@ -59,8 +59,8 @@ class DlsStateShot {
     }
 
     private int getDlsState(int i) {
-        int semGetIntForUser = Settings.System.semGetIntForUser(this.mContext.getContentResolver(), "dls_state", 2, i);
-        Log.d(TAG, "getDlsState: " + semGetIntForUser + ", userId=" + i);
-        return semGetIntForUser;
+        int iSemGetIntForUser = Settings.System.semGetIntForUser(this.mContext.getContentResolver(), "dls_state", 2, i);
+        Log.d(TAG, "getDlsState: " + iSemGetIntForUser + ", userId=" + i);
+        return iSemGetIntForUser;
     }
 }

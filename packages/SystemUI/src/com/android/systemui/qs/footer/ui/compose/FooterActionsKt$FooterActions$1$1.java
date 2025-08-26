@@ -20,7 +20,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -33,7 +32,6 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Context $context;
@@ -79,7 +77,6 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ MutableState<FooterActionsForegroundServicesButtonViewModel> $foregroundServices$delegate;
@@ -90,7 +87,6 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$2$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             final /* synthetic */ MutableState<FooterActionsSecurityButtonViewModel> $security$delegate;
@@ -143,15 +139,14 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$2$2, reason: invalid class name and collision with other inner class name */
-        final class C02462 extends SuspendLambda implements Function2 {
+        final class C03912 extends SuspendLambda implements Function2 {
             final /* synthetic */ MutableState<FooterActionsForegroundServicesButtonViewModel> $foregroundServices$delegate;
             final /* synthetic */ FooterActionsViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02462(FooterActionsViewModel footerActionsViewModel, MutableState<FooterActionsForegroundServicesButtonViewModel> mutableState, Continuation continuation) {
+            public C03912(FooterActionsViewModel footerActionsViewModel, MutableState<FooterActionsForegroundServicesButtonViewModel> mutableState, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = footerActionsViewModel;
                 this.$foregroundServices$delegate = mutableState;
@@ -159,12 +154,12 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02462(this.$viewModel, this.$foregroundServices$delegate, continuation);
+                return new C03912(this.$viewModel, this.$foregroundServices$delegate, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02462) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C03912) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -196,7 +191,6 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$2$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ MutableState<FooterActionsButtonViewModel> $userSwitcher$delegate;
@@ -249,7 +243,6 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.footer.ui.compose.FooterActionsKt$FooterActions$1$1$2$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ MutableState<FooterActionsButtonViewModel> $power$delegate;
@@ -333,7 +326,7 @@ final class FooterActionsKt$FooterActions$1$1 extends SuspendLambda implements F
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(this.$viewModel, this.$security$delegate, null), 3);
-            BuildersKt.launch$default(coroutineScope, null, null, new C02462(this.$viewModel, this.$foregroundServices$delegate, null), 3);
+            BuildersKt.launch$default(coroutineScope, null, null, new C03912(this.$viewModel, this.$foregroundServices$delegate, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$userSwitcher$delegate, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass4(this.$viewModel, this.$power$delegate, null), 3);
             return Unit.INSTANCE;

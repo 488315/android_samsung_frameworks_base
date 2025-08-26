@@ -52,13 +52,13 @@ public class AlphabetIndexer extends DataSetObserver implements SectionIndexer {
     }
 
     protected int compare(String str, String str2) {
-        String substring;
+        String strSubstring;
         if (str.length() == 0) {
-            substring = " ";
+            strSubstring = " ";
         } else {
-            substring = str.substring(0, 1);
+            strSubstring = str.substring(0, 1);
         }
-        return this.mCollator.compare(substring, str2);
+        return this.mCollator.compare(strSubstring, str2);
     }
 
     @Override // android.widget.SectionIndexer
@@ -67,59 +67,61 @@ public class AlphabetIndexer extends DataSetObserver implements SectionIndexer {
         int i3;
         SparseIntArray sparseIntArray = this.mAlphaMap;
         Cursor cursor = this.mDataCursor;
-        int i4 = 0;
+        int iAbs = 0;
         if (cursor == null || this.mAlphabet == null || i <= 0) {
             return 0;
         }
-        int i5 = this.mAlphabetLength;
-        if (i >= i5) {
-            i = i5 - 1;
+        int i4 = this.mAlphabetLength;
+        if (i >= i4) {
+            i = i4 - 1;
         }
         int position = cursor.getPosition();
         int count = cursor.getCount();
-        char charAt = this.mAlphabet.charAt(i);
-        String ch = Character.toString(charAt);
-        int i6 = sparseIntArray.get(charAt, Integer.MIN_VALUE);
-        if (Integer.MIN_VALUE == i6) {
+        char cCharAt = this.mAlphabet.charAt(i);
+        String string = Character.toString(cCharAt);
+        int i5 = sparseIntArray.get(cCharAt, Integer.MIN_VALUE);
+        if (Integer.MIN_VALUE == i5) {
             i2 = count;
         } else {
-            if (i6 >= 0) {
-                return i6;
+            if (i5 >= 0) {
+                return i5;
             }
-            i2 = -i6;
+            i2 = -i5;
         }
         if (i > 0 && (i3 = sparseIntArray.get(this.mAlphabet.charAt(i - 1), Integer.MIN_VALUE)) != Integer.MIN_VALUE) {
-            i4 = Math.abs(i3);
+            iAbs = Math.abs(i3);
         }
-        int i7 = (i2 + i4) / 2;
-        while (i7 < i2) {
-            cursor.moveToPosition(i7);
-            String string = cursor.getString(this.mColumnIndex);
-            if (string != null) {
-                int compare = compare(string, ch);
-                if (compare == 0) {
-                    if (i4 == i7) {
+        int i6 = (i2 + iAbs) / 2;
+        while (i6 < i2) {
+            cursor.moveToPosition(i6);
+            String string2 = cursor.getString(this.mColumnIndex);
+            if (string2 != null) {
+                int iCompare = compare(string2, string);
+                if (iCompare == 0) {
+                    if (iAbs == i6) {
                         break;
                     }
-                } else if (compare < 0) {
-                    int i8 = i7 + 1;
-                    if (i8 >= count) {
-                        break;
+                } else {
+                    if (iCompare < 0) {
+                        int i7 = i6 + 1;
+                        if (i7 >= count) {
+                            break;
+                        }
+                        iAbs = i7;
                     }
-                    i4 = i8;
-                    i7 = (i4 + i2) / 2;
+                    i6 = (iAbs + i2) / 2;
                 }
-                i2 = i7;
-                i7 = (i4 + i2) / 2;
+                i2 = i6;
+                i6 = (iAbs + i2) / 2;
             } else {
-                if (i7 == 0) {
+                if (i6 == 0) {
                     break;
                 }
-                i7--;
+                i6--;
             }
         }
-        count = i7;
-        sparseIntArray.put(charAt, count);
+        count = i6;
+        sparseIntArray.put(cCharAt, count);
         cursor.moveToPosition(position);
         return count;
     }

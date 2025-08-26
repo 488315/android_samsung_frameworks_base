@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SequenceBuilderIterator extends SequenceScope implements Iterator, Continuation, KMappedMarker {
     public Iterator nextIterator;
@@ -37,7 +36,7 @@ public final class SequenceBuilderIterator extends SequenceScope implements Iter
     }
 
     @Override // java.util.Iterator
-    public final boolean hasNext() {
+    public final boolean hasNext() throws Throwable {
         while (true) {
             int i = this.state;
             if (i != 0) {
@@ -68,7 +67,7 @@ public final class SequenceBuilderIterator extends SequenceScope implements Iter
     }
 
     @Override // java.util.Iterator
-    public final Object next() {
+    public final Object next() throws Throwable {
         int i = this.state;
         if (i == 0 || i == 1) {
             if (hasNext()) {

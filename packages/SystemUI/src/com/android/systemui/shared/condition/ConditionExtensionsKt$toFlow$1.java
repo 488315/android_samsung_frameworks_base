@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConditionExtensionsKt$toFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Condition $this_toFlow;
@@ -52,11 +51,11 @@ final class ConditionExtensionsKt$toFlow$1 extends SuspendLambda implements Func
                 public final void onConditionChanged(Condition condition) {
                     Boolean bool = condition._isConditionMet;
                     boolean z = bool != null;
-                    SendChannel sendChannel = ProducerScope.this;
+                    SendChannel sendChannel = producerScope;
                     if (z) {
-                        ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(Boolean.valueOf(Boolean.TRUE.equals(bool)));
+                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(Boolean.valueOf(Boolean.TRUE.equals(bool)));
                     } else {
-                        ((ChannelCoroutine) sendChannel).mo3456trySendJP2dKIU(null);
+                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(null);
                     }
                 }
             };
@@ -66,7 +65,7 @@ final class ConditionExtensionsKt$toFlow$1 extends SuspendLambda implements Func
             Function0 function0 = new Function0() { // from class: com.android.systemui.shared.condition.ConditionExtensionsKt$toFlow$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Condition.this.removeCallback(r1);
+                    condition.removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

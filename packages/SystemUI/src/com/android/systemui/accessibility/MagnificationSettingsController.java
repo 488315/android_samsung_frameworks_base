@@ -19,7 +19,6 @@ import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 import kotlin.Unit;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MagnificationSettingsController implements ComponentCallbacks {
     public static final Range A11Y_ACTION_SCALE_RANGE = new Range(Float.valueOf(1.0f), Float.valueOf(MagnificationConstants.SCALE_MAX_VALUE));
@@ -30,7 +29,6 @@ public class MagnificationSettingsController implements ComponentCallbacks {
     public final WindowMagnificationSettings mWindowMagnificationSettings;
     final WindowMagnificationSettingsCallback mWindowMagnificationSettingsCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.MagnificationSettingsController$1, reason: invalid class name */
     public class AnonymousClass1 implements WindowMagnificationSettingsCallback {
         public AnonymousClass1() {
@@ -41,12 +39,12 @@ public class MagnificationSettingsController implements ComponentCallbacks {
             MagnificationSettingsController magnificationSettingsController = MagnificationSettingsController.this;
             Callback callback = magnificationSettingsController.mSettingsControllerCallback;
             int i = magnificationSettingsController.mDisplayId;
-            float floatValue = ((Float) MagnificationSettingsController.A11Y_ACTION_SCALE_RANGE.clamp(Float.valueOf(f))).floatValue();
+            float fFloatValue = ((Float) MagnificationSettingsController.A11Y_ACTION_SCALE_RANGE.clamp(Float.valueOf(f))).floatValue();
             MagnificationImpl.AnonymousClass4 anonymousClass4 = (MagnificationImpl.AnonymousClass4) callback;
             MagnificationConnectionImpl magnificationConnectionImpl = MagnificationImpl.this.mMagnificationConnectionImpl;
             if (magnificationConnectionImpl != null && (iMagnificationConnectionCallback = magnificationConnectionImpl.mConnectionCallback) != null) {
                 try {
-                    iMagnificationConnectionCallback.onPerformScaleAction(i, floatValue, z);
+                    iMagnificationConnectionCallback.onPerformScaleAction(i, fFloatValue, z);
                 } catch (RemoteException e) {
                     Log.e("WindowMagnificationConnectionImpl", "Failed to inform performing scale action", e);
                 }
@@ -55,10 +53,10 @@ public class MagnificationSettingsController implements ComponentCallbacks {
             AccessibilityLogger.MagnificationSettingsEvent magnificationSettingsEvent = AccessibilityLogger.MagnificationSettingsEvent.MAGNIFICATION_SETTINGS_ZOOM_SLIDER_CHANGED;
             synchronized (accessibilityLogger.clock) {
                 try {
-                    long elapsedRealtime = accessibilityLogger.clock.elapsedRealtime();
-                    boolean z2 = Intrinsics.areEqual(magnificationSettingsEvent, accessibilityLogger.lastEventThrottled) && elapsedRealtime - accessibilityLogger.lastTimeThrottledMs < ((long) 2000);
+                    long jElapsedRealtime = accessibilityLogger.clock.elapsedRealtime();
+                    boolean z2 = Intrinsics.areEqual(magnificationSettingsEvent, accessibilityLogger.lastEventThrottled) && jElapsedRealtime - accessibilityLogger.lastTimeThrottledMs < ((long) 2000);
                     accessibilityLogger.lastEventThrottled = magnificationSettingsEvent;
-                    accessibilityLogger.lastTimeThrottledMs = elapsedRealtime;
+                    accessibilityLogger.lastTimeThrottledMs = jElapsedRealtime;
                     if (z2) {
                         return;
                     }
@@ -71,7 +69,6 @@ public class MagnificationSettingsController implements ComponentCallbacks {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
@@ -81,25 +78,25 @@ public class MagnificationSettingsController implements ComponentCallbacks {
 
     @Override // android.content.ComponentCallbacks
     public final void onConfigurationChanged(Configuration configuration) {
-        int diff = configuration.diff(this.mConfiguration);
+        int iDiff = configuration.diff(this.mConfiguration);
         this.mConfiguration.setTo(configuration);
-        onConfigurationChanged(diff);
+        onConfigurationChanged(iDiff);
     }
 
     public MagnificationSettingsController(Context context, SfVsyncFrameCallbackProvider sfVsyncFrameCallbackProvider, Callback callback, SecureSettings secureSettings, WindowManagerProvider windowManagerProvider, WindowMagnificationSettings windowMagnificationSettings) {
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mWindowMagnificationSettingsCallback = anonymousClass1;
-        Context createWindowContext = context.createWindowContext(context.getDisplay(), 2024, null);
-        this.mContext = createWindowContext;
-        createWindowContext.setTheme(R.style.Theme_SystemUI);
-        this.mDisplayId = createWindowContext.getDisplayId();
-        this.mConfiguration = new Configuration(createWindowContext.getResources().getConfiguration());
+        Context contextCreateWindowContext = context.createWindowContext(context.getDisplay(), 2024, null);
+        this.mContext = contextCreateWindowContext;
+        contextCreateWindowContext.setTheme(R.style.Theme_SystemUI);
+        this.mDisplayId = contextCreateWindowContext.getDisplayId();
+        this.mConfiguration = new Configuration(contextCreateWindowContext.getResources().getConfiguration());
         this.mSettingsControllerCallback = callback;
         if (windowMagnificationSettings != null) {
             this.mWindowMagnificationSettings = windowMagnificationSettings;
         } else {
             ((WindowManagerProviderImpl) windowManagerProvider).getClass();
-            this.mWindowMagnificationSettings = new WindowMagnificationSettings(createWindowContext, anonymousClass1, sfVsyncFrameCallbackProvider, secureSettings, WindowManagerUtils.getWindowManager(createWindowContext));
+            this.mWindowMagnificationSettings = new WindowMagnificationSettings(contextCreateWindowContext, anonymousClass1, sfVsyncFrameCallbackProvider, secureSettings, WindowManagerUtils.getWindowManager(contextCreateWindowContext));
         }
     }
 

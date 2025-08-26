@@ -138,14 +138,14 @@ public class DiskInfo implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public DiskInfo m3700clone() {
-        Parcel obtain = Parcel.obtain();
+    public DiskInfo m3707clone() {
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            return CREATOR.createFromParcel(obtain);
+            writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return CREATOR.createFromParcel(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

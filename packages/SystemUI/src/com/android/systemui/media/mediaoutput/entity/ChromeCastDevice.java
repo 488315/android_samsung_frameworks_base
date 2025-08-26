@@ -26,7 +26,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChromeCastDevice implements RouteDevice {
     public final boolean cancelable;
@@ -82,9 +81,9 @@ public final class ChromeCastDevice implements RouteDevice {
 
     @Override // com.android.systemui.media.mediaoutput.entity.AudioDevice
     public final AudioDevice clone() {
-        ChromeCastDevice copy$default = copy$default(this, 8191);
-        copy$default.isInAppCasting = this.isInAppCasting;
-        return copy$default;
+        ChromeCastDevice chromeCastDeviceCopy$default = copy$default(this, 8191);
+        chromeCastDeviceCopy$default.isInAppCasting = this.isInAppCasting;
+        return chromeCastDeviceCopy$default;
     }
 
     public final boolean equals(Object obj) {
@@ -136,15 +135,17 @@ public final class ChromeCastDevice implements RouteDevice {
     public final CharSequence getDescription() {
         MediaRoute2Info mediaRoute2Info = this.mediaRoute2Info;
         List<String> features = mediaRoute2Info.getFeatures();
-        if (!(features instanceof Collection) || !features.isEmpty()) {
+        if ((features instanceof Collection) && features.isEmpty()) {
+            mediaRoute2Info = null;
+        } else {
             for (String str : features) {
                 str.getClass();
                 if (StringsKt__StringsKt.contains(str, ServiceTuple.MEDIA_CAP_VIDEO, true)) {
                     break;
                 }
             }
+            mediaRoute2Info = null;
         }
-        mediaRoute2Info = null;
         ResourceString resourceString = mediaRoute2Info != null ? new ResourceString(R.string.cast_video, null, 2, null) : null;
         CharSequence description = super.getDescription();
         return description != null ? resourceString != null ? new MultiSequenceString(Arrays.asList(description, resourceString), "\n") : description : resourceString;
@@ -211,11 +212,11 @@ public final class ChromeCastDevice implements RouteDevice {
     }
 
     public final int hashCode() {
-        int hashCode = (this.mediaRoute2Info.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + ((this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name)) * 31)) * 31, 31), 31), 31, this.selectable), 31, this.deselectable), 31, this.transferable), 31, this.cancelable)) * 31;
+        int iHashCode = (this.mediaRoute2Info.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31)) * 31, 31), 31), 31, this.selectable), 31, this.deselectable), 31, this.transferable), 31, this.cancelable)) * 31;
         RouteListingPreference.Item item = this.preferenceItem;
-        int hashCode2 = (hashCode + (item == null ? 0 : item.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (item == null ? 0 : item.hashCode())) * 31;
         ComponentName componentName = this.linkedItemComponentName;
-        return hashCode2 + (componentName != null ? componentName.hashCode() : 0);
+        return iHashCode2 + (componentName != null ? componentName.hashCode() : 0);
     }
 
     public final String toString() {

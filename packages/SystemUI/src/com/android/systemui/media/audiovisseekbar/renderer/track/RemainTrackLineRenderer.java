@@ -9,7 +9,6 @@ import com.android.systemui.media.audiovisseekbar.config.RendererConfig;
 import com.android.systemui.media.audiovisseekbar.renderer.BaseRenderer;
 import com.android.systemui.media.audiovisseekbar.utils.DimensionUtilsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RemainTrackLineRenderer extends BaseRenderer {
     public final Paint trackBorderPaint;
@@ -41,11 +40,11 @@ public final class RemainTrackLineRenderer extends BaseRenderer {
     public final void onThumbLocationChanged(float f) {
         RectF rectF = this.bounds;
         RendererConfig.INSTANCE.getClass();
-        float dpToPx = DimensionUtilsKt.dpToPx(8.0f) + f;
+        float fDpToPx = DimensionUtilsKt.dpToPx(8.0f) + f;
         float remainTrackBorderBound = this.bounds.right - RendererConfig.getRemainTrackBorderBound();
-        if (dpToPx > remainTrackBorderBound) {
-            dpToPx = remainTrackBorderBound;
+        if (fDpToPx > remainTrackBorderBound) {
+            fDpToPx = remainTrackBorderBound;
         }
-        rectF.left = dpToPx;
+        rectF.left = fDpToPx;
     }
 }

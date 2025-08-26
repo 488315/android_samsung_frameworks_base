@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.google.android.material.animation.AnimationUtils;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialSideContainerBackHelper extends MaterialBackAnimationHelper {
     public final float maxScaleXDistanceGrow;
@@ -49,11 +48,11 @@ public class MaterialSideContainerBackHelper extends MaterialBackAnimationHelper
             if (!z3) {
                 f5 = -f4;
             }
-            float lerp = AnimationUtils.lerp(0.0f, f5, interpolation);
-            float f7 = lerp + 1.0f;
+            float fLerp = AnimationUtils.lerp(0.0f, f5, interpolation);
+            float f7 = fLerp + 1.0f;
             this.view.setScaleX(f7);
-            float lerp2 = 1.0f - AnimationUtils.lerp(0.0f, f6, interpolation);
-            this.view.setScaleY(lerp2);
+            float fLerp2 = 1.0f - AnimationUtils.lerp(0.0f, f6, interpolation);
+            this.view.setScaleY(fLerp2);
             View view3 = this.view;
             if (view3 instanceof ViewGroup) {
                 ViewGroup viewGroup = (ViewGroup) view3;
@@ -61,8 +60,8 @@ public class MaterialSideContainerBackHelper extends MaterialBackAnimationHelper
                     View childAt = viewGroup.getChildAt(i2);
                     childAt.setPivotX(z2 ? childAt.getWidth() + (width - childAt.getRight()) : -childAt.getLeft());
                     childAt.setPivotY(-childAt.getTop());
-                    float f8 = z3 ? 1.0f - lerp : 1.0f;
-                    float f9 = lerp2 != 0.0f ? (f7 / lerp2) * f8 : 1.0f;
+                    float f8 = z3 ? 1.0f - fLerp : 1.0f;
+                    float f9 = fLerp2 != 0.0f ? (f7 / fLerp2) * f8 : 1.0f;
                     childAt.setScaleX(f8);
                     childAt.setScaleY(f9);
                 }

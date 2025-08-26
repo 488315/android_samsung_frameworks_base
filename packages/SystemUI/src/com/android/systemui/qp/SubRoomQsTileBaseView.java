@@ -17,7 +17,6 @@ import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.tileimpl.QSIconViewImpl;
 import com.android.systemui.qs.tileimpl.SecQSTileBaseView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubRoomQsTileBaseView extends SecQSTileBaseView {
     public int mCircleColor;
@@ -37,10 +36,10 @@ public class SubRoomQsTileBaseView extends SecQSTileBaseView {
         this.mIconFrame.addView(this.mBg, new FrameLayout.LayoutParams(dimension, dimension, 17));
         this.mIconFrame.addView(this.mIcon, new FrameLayout.LayoutParams(dimension, dimension, 17));
         this.mIconFrame.setLayoutParams(new LinearLayout.LayoutParams(-2, -2));
-        Drawable newTileBackground = newTileBackground();
-        this.mTileBackground = newTileBackground;
-        if (newTileBackground instanceof RippleDrawable) {
-            ((RippleDrawable) newTileBackground).setColor(ColorStateList.valueOf(context.getColor(R.color.sec_qs_ripple_background)));
+        Drawable drawableNewTileBackground = newTileBackground();
+        this.mTileBackground = drawableNewTileBackground;
+        if (drawableNewTileBackground instanceof RippleDrawable) {
+            ((RippleDrawable) drawableNewTileBackground).setColor(ColorStateList.valueOf(context.getColor(R.color.sec_qs_ripple_background)));
             setRipple((RippleDrawable) this.mTileBackground);
         }
         this.mQSIconViewImpl = new QSIconViewImpl(context);
@@ -62,7 +61,7 @@ public class SubRoomQsTileBaseView extends SecQSTileBaseView {
     @Override // com.android.systemui.qs.tileimpl.SecQSTileBaseView
     public final void handleStateChanged(QSTile.State state) {
         int i;
-        String str;
+        String strConcat;
         Context context;
         int i2;
         super.handleStateChanged(state);
@@ -82,10 +81,10 @@ public class SubRoomQsTileBaseView extends SecQSTileBaseView {
             this.mQSIconViewImpl.setTint(this.mBg, i);
             this.mCircleColor = i;
         }
-        Drawable newTileBackground = newTileBackground();
-        this.mTileBackground = newTileBackground;
-        if (newTileBackground instanceof RippleDrawable) {
-            ((RippleDrawable) newTileBackground).setColor(ColorStateList.valueOf(((LinearLayout) this).mContext.getColor(R.color.sec_qs_ripple_background)));
+        Drawable drawableNewTileBackground = newTileBackground();
+        this.mTileBackground = drawableNewTileBackground;
+        if (drawableNewTileBackground instanceof RippleDrawable) {
+            ((RippleDrawable) drawableNewTileBackground).setColor(ColorStateList.valueOf(((LinearLayout) this).mContext.getColor(R.color.sec_qs_ripple_background)));
             setRipple((RippleDrawable) this.mTileBackground);
         }
         updateSubscreenTileStroke();
@@ -94,14 +93,14 @@ public class SubRoomQsTileBaseView extends SecQSTileBaseView {
         if (charSequence != null) {
             StringBuilder sb = new StringBuilder(charSequence.length());
             sb.append(state.label);
-            str = sb.toString();
+            strConcat = sb.toString();
         } else {
-            str = null;
+            strConcat = null;
         }
         if (state.contentDescription != null) {
-            str = ((Object) state.contentDescription) + ",";
-        } else if (str != null) {
-            str = str.concat(",");
+            strConcat = ((Object) state.contentDescription) + ",";
+        } else if (strConcat != null) {
+            strConcat = strConcat.concat(",");
         }
         if (state.state == 2) {
             context = getContext();
@@ -111,7 +110,7 @@ public class SubRoomQsTileBaseView extends SecQSTileBaseView {
             i2 = R.string.accessibility_desc_off;
         }
         state.stateDescription = context.getString(i2);
-        this.mIconFrame.setContentDescription(str);
+        this.mIconFrame.setContentDescription(strConcat);
         this.mIconFrame.setStateDescription(state.stateDescription);
     }
 

@@ -5,6 +5,7 @@ import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -45,7 +46,7 @@ public final class TranslationSpec implements Parcelable {
         return 0;
     }
 
-    void parcelLocale(Parcel parcel, int i) {
+    void parcelLocale(Parcel parcel, int i) throws IOException {
         parcel.writeSerializable(this.mLocale);
     }
 
@@ -102,22 +103,22 @@ public final class TranslationSpec implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mLanguage);
         parcelLocale(parcel, i);
         parcel.writeInt(this.mDataFormat);
     }
 
     TranslationSpec(Parcel parcel) {
-        String readString = parcel.readString();
-        ULocale unparcelLocale = unparcelLocale(parcel);
-        int readInt = parcel.readInt();
-        this.mLanguage = readString;
-        AnnotationValidations.validate((Class<? extends Annotation>) Deprecated.class, (Annotation) null, readString);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mLocale = unparcelLocale;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelLocale);
-        this.mDataFormat = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) DataFormat.class, (Annotation) null, readInt);
+        String string = parcel.readString();
+        ULocale uLocaleUnparcelLocale = unparcelLocale(parcel);
+        int i = parcel.readInt();
+        this.mLanguage = string;
+        AnnotationValidations.validate((Class<? extends Annotation>) Deprecated.class, (Annotation) null, string);
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mLocale = uLocaleUnparcelLocale;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) uLocaleUnparcelLocale);
+        this.mDataFormat = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) DataFormat.class, (Annotation) null, i);
     }
 }

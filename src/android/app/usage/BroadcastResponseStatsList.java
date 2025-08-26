@@ -34,14 +34,14 @@ public final class BroadcastResponseStatsList implements Parcelable {
 
     private BroadcastResponseStatsList(Parcel parcel) {
         this.mBroadcastResponseStats = new ArrayList();
-        byte[] readBlob = parcel.readBlob();
-        Parcel obtain = Parcel.obtain();
+        byte[] blob = parcel.readBlob();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            obtain.unmarshall(readBlob, 0, readBlob.length);
-            obtain.setDataPosition(0);
-            obtain.readTypedList(this.mBroadcastResponseStats, BroadcastResponseStats.CREATOR);
+            parcelObtain.unmarshall(blob, 0, blob.length);
+            parcelObtain.setDataPosition(0);
+            parcelObtain.readTypedList(this.mBroadcastResponseStats, BroadcastResponseStats.CREATOR);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -52,12 +52,12 @@ public final class BroadcastResponseStatsList implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            obtain.writeTypedList(this.mBroadcastResponseStats);
-            parcel.writeBlob(obtain.marshall());
+            parcelObtain.writeTypedList(this.mBroadcastResponseStats);
+            parcel.writeBlob(parcelObtain.marshall());
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

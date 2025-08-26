@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentStore {
     public FragmentManagerViewModel mNonConfig;
@@ -36,12 +35,12 @@ public class FragmentStore {
     public final Fragment findFragmentByWho(String str) {
         for (FragmentStateManager fragmentStateManager : this.mActive.values()) {
             if (fragmentStateManager != null) {
-                Fragment fragment = fragmentStateManager.mFragment;
-                if (!str.equals(fragment.mWho)) {
-                    fragment = fragment.mChildFragmentManager.mFragmentStore.findFragmentByWho(str);
+                Fragment fragmentFindFragmentByWho = fragmentStateManager.mFragment;
+                if (!str.equals(fragmentFindFragmentByWho.mWho)) {
+                    fragmentFindFragmentByWho = fragmentFindFragmentByWho.mChildFragmentManager.mFragmentStore.findFragmentByWho(str);
                 }
-                if (fragment != null) {
-                    return fragment;
+                if (fragmentFindFragmentByWho != null) {
+                    return fragmentFindFragmentByWho;
                 }
             }
         }

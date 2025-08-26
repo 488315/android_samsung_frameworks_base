@@ -145,15 +145,15 @@ public final class InputManagerGlobal {
     }
 
     public InputManagerGlobal(IInputManager iInputManager) {
-        String str;
+        String velocityTrackerStrategy;
         this.mIm = iInputManager;
         try {
-            str = iInputManager.getVelocityTrackerStrategy();
+            velocityTrackerStrategy = iInputManager.getVelocityTrackerStrategy();
         } catch (RemoteException e) {
             Log.w(TAG, "Could not get VelocityTracker strategy: " + e);
-            str = null;
+            velocityTrackerStrategy = null;
         }
-        this.mVelocityTrackerStrategy = str;
+        this.mVelocityTrackerStrategy = velocityTrackerStrategy;
     }
 
     public static InputManagerGlobal getInstance() {
@@ -180,7 +180,7 @@ public final class InputManagerGlobal {
             testSession = new TestSession() { // from class: android.hardware.input.InputManagerGlobal$$ExternalSyntheticLambda0
                 @Override // android.hardware.input.InputManagerGlobal.TestSession, java.lang.AutoCloseable
                 public final void close() {
-                    InputManagerGlobal.sInstance = InputManagerGlobal.this;
+                    InputManagerGlobal.sInstance = this.f$0;
                 }
             };
         }
@@ -194,22 +194,22 @@ public final class InputManagerGlobal {
     public InputDevice getInputDevice(int i) {
         synchronized (this.mInputDeviceListeners) {
             populateInputDevicesLocked();
-            int indexOfKey = this.mInputDevices.indexOfKey(i);
-            if (indexOfKey < 0) {
+            int iIndexOfKey = this.mInputDevices.indexOfKey(i);
+            if (iIndexOfKey < 0) {
                 return null;
             }
-            InputDevice valueAt = this.mInputDevices.valueAt(indexOfKey);
-            if (valueAt == null) {
+            InputDevice inputDeviceValueAt = this.mInputDevices.valueAt(iIndexOfKey);
+            if (inputDeviceValueAt == null) {
                 try {
-                    valueAt = this.mIm.getInputDevice(i);
-                    if (valueAt != null) {
-                        this.mInputDevices.setValueAt(indexOfKey, valueAt);
+                    inputDeviceValueAt = this.mIm.getInputDevice(i);
+                    if (inputDeviceValueAt != null) {
+                        this.mInputDevices.setValueAt(iIndexOfKey, inputDeviceValueAt);
                     }
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
             }
-            return valueAt;
+            return inputDeviceValueAt;
         }
     }
 
@@ -248,8 +248,8 @@ public final class InputManagerGlobal {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onInputDevicesChanged(int[] iArr) {
-        boolean debug = debug();
-        if (debug) {
+        boolean zDebug = debug();
+        if (zDebug) {
             Log.d(TAG, "Received input devices changed: " + Arrays.toString(iArr));
         }
         synchronized (this.mInputDeviceListeners) {
@@ -259,31 +259,31 @@ public final class InputManagerGlobal {
                 if (size <= 0) {
                     break;
                 }
-                int keyAt = this.mInputDevices.keyAt(size);
-                if (!containsDeviceId(iArr, keyAt)) {
-                    if (debug) {
-                        InputDevice valueAt = this.mInputDevices.valueAt(size);
-                        Log.d(TAG, "Device removed: " + keyAt + " (" + (valueAt != null ? valueAt.getName() : "<null>") + NavigationBarInflaterView.KEY_CODE_END);
+                int iKeyAt = this.mInputDevices.keyAt(size);
+                if (!containsDeviceId(iArr, iKeyAt)) {
+                    if (zDebug) {
+                        InputDevice inputDeviceValueAt = this.mInputDevices.valueAt(size);
+                        Log.d(TAG, "Device removed: " + iKeyAt + " (" + (inputDeviceValueAt != null ? inputDeviceValueAt.getName() : "<null>") + NavigationBarInflaterView.KEY_CODE_END);
                     }
                     this.mInputDevices.removeAt(size);
                     InputDeviceSensorManager inputDeviceSensorManager = this.mInputDeviceSensorManager;
                     if (inputDeviceSensorManager != null) {
-                        inputDeviceSensorManager.onInputDeviceRemoved(keyAt);
+                        inputDeviceSensorManager.onInputDeviceRemoved(iKeyAt);
                     }
-                    sendMessageToInputDeviceListenersLocked(2, keyAt);
+                    sendMessageToInputDeviceListenersLocked(2, iKeyAt);
                 }
             }
             for (int i = 0; i < iArr.length; i += 2) {
                 int i2 = iArr[i];
-                int indexOfKey = this.mInputDevices.indexOfKey(i2);
-                if (indexOfKey >= 0) {
-                    InputDevice valueAt2 = this.mInputDevices.valueAt(indexOfKey);
-                    if (valueAt2 != null) {
-                        if (valueAt2.getGeneration() != iArr[i + 1]) {
-                            if (debug) {
-                                Log.d(TAG, "Device changed: " + i2 + " (" + valueAt2.getName() + NavigationBarInflaterView.KEY_CODE_END);
+                int iIndexOfKey = this.mInputDevices.indexOfKey(i2);
+                if (iIndexOfKey >= 0) {
+                    InputDevice inputDeviceValueAt2 = this.mInputDevices.valueAt(iIndexOfKey);
+                    if (inputDeviceValueAt2 != null) {
+                        if (inputDeviceValueAt2.getGeneration() != iArr[i + 1]) {
+                            if (zDebug) {
+                                Log.d(TAG, "Device changed: " + i2 + " (" + inputDeviceValueAt2.getName() + NavigationBarInflaterView.KEY_CODE_END);
                             }
-                            this.mInputDevices.setValueAt(indexOfKey, null);
+                            this.mInputDevices.setValueAt(iIndexOfKey, null);
                             InputDeviceSensorManager inputDeviceSensorManager2 = this.mInputDeviceSensorManager;
                             if (inputDeviceSensorManager2 != null) {
                                 inputDeviceSensorManager2.onInputDeviceChanged(i2);
@@ -292,7 +292,7 @@ public final class InputManagerGlobal {
                         }
                     }
                 } else {
-                    if (debug) {
+                    if (zDebug) {
                         Log.d(TAG, "Device added: " + i2);
                     }
                     this.mInputDevices.put(i2, null);
@@ -365,10 +365,10 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mInputDeviceListeners) {
-            int findInputDeviceListenerLocked = findInputDeviceListenerLocked(inputDeviceListener);
-            if (findInputDeviceListenerLocked >= 0) {
-                this.mInputDeviceListeners.get(findInputDeviceListenerLocked).removeCallbacksAndMessages(null);
-                this.mInputDeviceListeners.remove(findInputDeviceListenerLocked);
+            int iFindInputDeviceListenerLocked = findInputDeviceListenerLocked(inputDeviceListener);
+            if (iFindInputDeviceListenerLocked >= 0) {
+                this.mInputDeviceListeners.get(iFindInputDeviceListenerLocked).removeCallbacksAndMessages(null);
+                this.mInputDeviceListeners.remove(iFindInputDeviceListenerLocked);
             }
         }
     }
@@ -402,10 +402,10 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mMultiFingerGestureLock) {
-            int findOnMultiFingerGestureListenerLocked = findOnMultiFingerGestureListenerLocked(semOnMultiFingerGestureListener);
-            if (findOnMultiFingerGestureListenerLocked >= 0) {
-                this.mOnMultiFingerGestureListeners.get(findOnMultiFingerGestureListenerLocked).removeCallbacksAndMessages(null);
-                this.mOnMultiFingerGestureListeners.remove(findOnMultiFingerGestureListenerLocked);
+            int iFindOnMultiFingerGestureListenerLocked = findOnMultiFingerGestureListenerLocked(semOnMultiFingerGestureListener);
+            if (iFindOnMultiFingerGestureListenerLocked >= 0) {
+                this.mOnMultiFingerGestureListeners.get(iFindOnMultiFingerGestureListenerLocked).removeCallbacksAndMessages(null);
+                this.mOnMultiFingerGestureListeners.remove(iFindOnMultiFingerGestureListenerLocked);
             }
         }
     }
@@ -437,10 +437,10 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mSwitchEventChangedLock) {
-            int findOnSwitchEventChangedListenerLocked = findOnSwitchEventChangedListenerLocked(semOnSwitchEventChangedListener);
-            if (findOnSwitchEventChangedListenerLocked >= 0) {
-                this.mOnSwitchEventChangedListeners.get(findOnSwitchEventChangedListenerLocked).removeCallbacksAndMessages(null);
-                this.mOnSwitchEventChangedListeners.remove(findOnSwitchEventChangedListenerLocked);
+            int iFindOnSwitchEventChangedListenerLocked = findOnSwitchEventChangedListenerLocked(semOnSwitchEventChangedListener);
+            if (iFindOnSwitchEventChangedListenerLocked >= 0) {
+                this.mOnSwitchEventChangedListeners.get(iFindOnSwitchEventChangedListenerLocked).removeCallbacksAndMessages(null);
+                this.mOnSwitchEventChangedListeners.remove(iFindOnSwitchEventChangedListenerLocked);
             }
         }
     }
@@ -587,12 +587,12 @@ public final class InputManagerGlobal {
         }
 
         public void sendSwitchEventChanged(int i, int i2, int i3, int i4) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = i3;
-            obtain.argi4 = i4;
-            obtainMessage(0, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = i3;
+            someArgsObtain.argi4 = i4;
+            obtainMessage(0, someArgsObtain).sendToTarget();
         }
 
         @Override // android.os.Handler
@@ -704,9 +704,9 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mLidStateLock) {
-            int findSemOnLidStateChangedListenerLocked = findSemOnLidStateChangedListenerLocked(semOnLidStateChangedListener);
-            if (findSemOnLidStateChangedListenerLocked >= 0) {
-                this.mSemOnLidStateChangedListeners.remove(findSemOnLidStateChangedListenerLocked).removeCallbacksAndMessages(null);
+            int iFindSemOnLidStateChangedListenerLocked = findSemOnLidStateChangedListenerLocked(semOnLidStateChangedListener);
+            if (iFindSemOnLidStateChangedListenerLocked >= 0) {
+                this.mSemOnLidStateChangedListeners.remove(iFindSemOnLidStateChangedListenerLocked).removeCallbacksAndMessages(null);
             }
         }
     }
@@ -751,27 +751,33 @@ public final class InputManagerGlobal {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0043 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0045 A[SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     InputDevice getInputDeviceByDescriptor(String str) {
         Objects.requireNonNull(str, "descriptor must not be null.");
         synchronized (this.mInputDeviceListeners) {
             populateInputDevicesLocked();
             int size = this.mInputDevices.size();
             for (int i = 0; i < size; i++) {
-                InputDevice valueAt = this.mInputDevices.valueAt(i);
-                if (valueAt == null) {
+                InputDevice inputDeviceValueAt = this.mInputDevices.valueAt(i);
+                if (inputDeviceValueAt == null) {
                     try {
-                        valueAt = this.mIm.getInputDevice(this.mInputDevices.keyAt(i));
-                        if (valueAt == null) {
+                        inputDeviceValueAt = this.mIm.getInputDevice(this.mInputDevices.keyAt(i));
+                        if (inputDeviceValueAt == null) {
                             continue;
                         } else {
-                            this.mInputDevices.setValueAt(i, valueAt);
+                            this.mInputDevices.setValueAt(i, inputDeviceValueAt);
+                            if (!str.equals(inputDeviceValueAt.getDescriptor())) {
+                                return inputDeviceValueAt;
+                            }
                         }
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
-                }
-                if (str.equals(valueAt.getDescriptor())) {
-                    return valueAt;
+                } else if (!str.equals(inputDeviceValueAt.getDescriptor())) {
                 }
             }
             return null;
@@ -854,11 +860,11 @@ public final class InputManagerGlobal {
         }
 
         public void sendLidStateChanged(long j, boolean z) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = (int) j;
-            obtain.argi2 = (int) (j >> 32);
-            obtain.arg1 = Boolean.valueOf(z);
-            obtainMessage(0, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = (int) j;
+            someArgsObtain.argi2 = (int) (j >> 32);
+            someArgsObtain.arg1 = Boolean.valueOf(z);
+            obtainMessage(0, someArgsObtain).sendToTarget();
         }
 
         @Override // android.os.Handler
@@ -903,11 +909,11 @@ public final class InputManagerGlobal {
         }
 
         public void sendTabletModeChanged(long j, boolean z) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = (int) j;
-            obtain.argi2 = (int) (j >> 32);
-            obtain.arg1 = Boolean.valueOf(z);
-            obtainMessage(0, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = (int) j;
+            someArgsObtain.argi2 = (int) (j >> 32);
+            someArgsObtain.arg1 = Boolean.valueOf(z);
+            obtainMessage(0, someArgsObtain).sendToTarget();
         }
 
         @Override // android.os.Handler
@@ -933,9 +939,9 @@ public final class InputManagerGlobal {
     void unregisterOnTabletModeChangedListener(InputManager.OnTabletModeChangedListener onTabletModeChangedListener) {
         Objects.requireNonNull(onTabletModeChangedListener, "listener must not be null");
         synchronized (this.mOnTabletModeChangedListeners) {
-            int findOnTabletModeChangedListenerLocked = findOnTabletModeChangedListenerLocked(onTabletModeChangedListener);
-            if (findOnTabletModeChangedListenerLocked >= 0) {
-                this.mOnTabletModeChangedListeners.remove(findOnTabletModeChangedListenerLocked).removeCallbacksAndMessages(null);
+            int iFindOnTabletModeChangedListenerLocked = findOnTabletModeChangedListenerLocked(onTabletModeChangedListener);
+            if (iFindOnTabletModeChangedListenerLocked >= 0) {
+                this.mOnTabletModeChangedListeners.remove(iFindOnTabletModeChangedListenerLocked).removeCallbacksAndMessages(null);
             }
         }
     }
@@ -981,7 +987,7 @@ public final class InputManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.input.InputManagerGlobal$InputDeviceBatteryListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InputManagerGlobal.InputDeviceBatteryListenerDelegate.this.lambda$notifyBatteryStateChanged$0(iInputDeviceBatteryState);
+                    this.f$0.lambda$notifyBatteryStateChanged$0(iInputDeviceBatteryState);
                 }
             });
         }
@@ -1140,7 +1146,7 @@ public final class InputManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.input.InputManagerGlobal$KeyboardBacklightListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InputManagerGlobal.KeyboardBacklightListenerDelegate.this.lambda$notifyKeyboardBacklightChange$0(i, iKeyboardBacklightState, z);
+                    this.f$0.lambda$notifyKeyboardBacklightChange$0(i, iKeyboardBacklightState, z);
                 }
             });
         }
@@ -1223,7 +1229,7 @@ public final class InputManagerGlobal {
             arrayList.removeIf(new Predicate() { // from class: android.hardware.input.InputManagerGlobal$$ExternalSyntheticLambda1
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return InputManagerGlobal.lambda$unregisterKeyboardBacklightListener$1(InputManager.KeyboardBacklightListener.this, (InputManagerGlobal.KeyboardBacklightListenerDelegate) obj);
+                    return InputManagerGlobal.lambda$unregisterKeyboardBacklightListener$1(keyboardBacklightListener, (InputManagerGlobal.KeyboardBacklightListenerDelegate) obj);
                 }
             });
             if (this.mKeyboardBacklightListeners.isEmpty()) {
@@ -1256,7 +1262,7 @@ public final class InputManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.input.InputManagerGlobal$StickyModifierStateListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InputManagerGlobal.StickyModifierStateListenerDelegate.this.lambda$notifyStickyModifierStateChange$0(i, i2);
+                    this.f$0.lambda$notifyStickyModifierStateChange$0(i, i2);
                 }
             });
         }
@@ -1379,7 +1385,7 @@ public final class InputManagerGlobal {
             arrayList.removeIf(new Predicate() { // from class: android.hardware.input.InputManagerGlobal$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return InputManagerGlobal.lambda$unregisterStickyModifierStateListener$2(InputManager.StickyModifierStateListener.this, (InputManagerGlobal.StickyModifierStateListenerDelegate) obj);
+                    return InputManagerGlobal.lambda$unregisterStickyModifierStateListener$2(stickyModifierStateListener, (InputManagerGlobal.StickyModifierStateListenerDelegate) obj);
                 }
             });
             if (this.mStickyModifierStateListeners.isEmpty()) {
@@ -1417,7 +1423,7 @@ public final class InputManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.input.InputManagerGlobal$KeyGestureEventListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InputManagerGlobal.KeyGestureEventListenerDelegate.this.lambda$onKeyGestureEvent$0(keyGestureEvent);
+                    this.f$0.lambda$onKeyGestureEvent$0(keyGestureEvent);
                 }
             });
         }
@@ -1476,7 +1482,7 @@ public final class InputManagerGlobal {
             arrayList.removeIf(new Predicate() { // from class: android.hardware.input.InputManagerGlobal$$ExternalSyntheticLambda3
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return InputManagerGlobal.lambda$unregisterKeyGestureEventListener$3(InputManager.KeyGestureEventListener.this, (InputManagerGlobal.KeyGestureEventListenerDelegate) obj);
+                    return InputManagerGlobal.lambda$unregisterKeyGestureEventListener$3(keyGestureEventListener, (InputManagerGlobal.KeyGestureEventListenerDelegate) obj);
                 }
             });
             if (this.mKeyGestureEventListeners.isEmpty()) {
@@ -1528,11 +1534,11 @@ public final class InputManagerGlobal {
             }
             Iterator<Integer> it = list.iterator();
             while (it.hasNext()) {
-                int intValue = it.next().intValue();
-                if (this.mKeyGesturesToHandlerMap.contains(intValue)) {
-                    throw new IllegalArgumentException("Key gesture " + intValue + " is already registered by another handler!");
+                int iIntValue = it.next().intValue();
+                if (this.mKeyGesturesToHandlerMap.contains(iIntValue)) {
+                    throw new IllegalArgumentException("Key gesture " + iIntValue + " is already registered by another handler!");
                 }
-                intArray.add(intValue);
+                intArray.add(iIntValue);
             }
             try {
                 IKeyGestureHandler iKeyGestureHandler = this.mKeyGestureHandler;
@@ -1590,7 +1596,7 @@ public final class InputManagerGlobal {
     }
 
     boolean registerKeyEventActivityListener(InputManager.KeyEventActivityListener keyEventActivityListener) {
-        boolean z;
+        boolean zRegisterKeyEventActivityListener;
         Objects.requireNonNull(keyEventActivityListener, "listener should not be null");
         synchronized (this.mKeyEventActivityLock) {
             if (this.mKeyEventActivityListener == null) {
@@ -1598,40 +1604,40 @@ public final class InputManagerGlobal {
                 LocalKeyEventActivityListener localKeyEventActivityListener = new LocalKeyEventActivityListener();
                 this.mKeyEventActivityListener = localKeyEventActivityListener;
                 try {
-                    z = this.mIm.registerKeyEventActivityListener(localKeyEventActivityListener);
+                    zRegisterKeyEventActivityListener = this.mIm.registerKeyEventActivityListener(localKeyEventActivityListener);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
             } else {
-                z = false;
+                zRegisterKeyEventActivityListener = false;
             }
             if (this.mKeyEventActivityListeners.contains(keyEventActivityListener)) {
                 throw new IllegalArgumentException("Listener has already been registered!");
             }
             this.mKeyEventActivityListeners.add(keyEventActivityListener);
         }
-        return z;
+        return zRegisterKeyEventActivityListener;
     }
 
     boolean unregisterKeyEventActivityListener(InputManager.KeyEventActivityListener keyEventActivityListener) {
         Objects.requireNonNull(keyEventActivityListener, "listener should not be null");
         synchronized (this.mKeyEventActivityLock) {
             ArrayList<InputManager.KeyEventActivityListener> arrayList = this.mKeyEventActivityListeners;
-            boolean z = true;
+            boolean zUnregisterKeyEventActivityListener = true;
             if (arrayList == null) {
                 return true;
             }
             arrayList.remove(keyEventActivityListener);
             if (this.mKeyEventActivityListeners.isEmpty()) {
                 try {
-                    z = this.mIm.unregisterKeyEventActivityListener(this.mKeyEventActivityListener);
+                    zUnregisterKeyEventActivityListener = this.mIm.unregisterKeyEventActivityListener(this.mKeyEventActivityListener);
                     this.mKeyEventActivityListeners = null;
                     this.mKeyEventActivityListener = null;
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
             }
-            return z;
+            return zUnregisterKeyEventActivityListener;
         }
     }
 
@@ -1994,10 +2000,10 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mPointerIconLock) {
-            int findOnPointerIconChangedListenerLocked = findOnPointerIconChangedListenerLocked(semOnPointerIconChangedListener);
-            if (findOnPointerIconChangedListenerLocked >= 0) {
-                this.mOnPointerIconChangedListeners.get(findOnPointerIconChangedListenerLocked).removeCallbacksAndMessages(null);
-                this.mOnPointerIconChangedListeners.remove(findOnPointerIconChangedListenerLocked);
+            int iFindOnPointerIconChangedListenerLocked = findOnPointerIconChangedListenerLocked(semOnPointerIconChangedListener);
+            if (iFindOnPointerIconChangedListenerLocked >= 0) {
+                this.mOnPointerIconChangedListeners.get(iFindOnPointerIconChangedListenerLocked).removeCallbacksAndMessages(null);
+                this.mOnPointerIconChangedListeners.remove(iFindOnPointerIconChangedListenerLocked);
             }
         }
     }
@@ -2138,9 +2144,9 @@ public final class InputManagerGlobal {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mWirelessKeyboardShareLock) {
-            int findOnWirelessKeyboardShareChangedListenerLocked = findOnWirelessKeyboardShareChangedListenerLocked(onWirelessKeyboardShareChangedListener);
-            if (findOnWirelessKeyboardShareChangedListenerLocked >= 0) {
-                this.mOnWirelessKeyboardShareChangedListeners.remove(findOnWirelessKeyboardShareChangedListenerLocked).removeCallbacksAndMessages(null);
+            int iFindOnWirelessKeyboardShareChangedListenerLocked = findOnWirelessKeyboardShareChangedListenerLocked(onWirelessKeyboardShareChangedListener);
+            if (iFindOnWirelessKeyboardShareChangedListenerLocked >= 0) {
+                this.mOnWirelessKeyboardShareChangedListeners.remove(iFindOnWirelessKeyboardShareChangedListenerLocked).removeCallbacksAndMessages(null);
             }
         }
     }
@@ -2198,12 +2204,12 @@ public final class InputManagerGlobal {
         }
 
         public void sendWirelessKeyboardShareChanged(long j, int i, String str) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = (int) j;
-            obtain.argi2 = (int) (j >> 32);
-            obtain.argi3 = i;
-            obtain.arg1 = str;
-            obtainMessage(0, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = (int) j;
+            someArgsObtain.argi2 = (int) (j >> 32);
+            someArgsObtain.argi3 = i;
+            someArgsObtain.arg1 = str;
+            obtainMessage(0, someArgsObtain).sendToTarget();
         }
 
         @Override // android.os.Handler

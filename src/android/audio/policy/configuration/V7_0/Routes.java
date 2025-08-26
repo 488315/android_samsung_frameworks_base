@@ -52,7 +52,7 @@ public class Routes {
             this.sources = str;
         }
 
-        static Route read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Route read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             Route route = new Route();
             String attributeValue = xmlPullParser.getAttributeValue(null, "type");
             if (attributeValue != null) {
@@ -78,7 +78,7 @@ public class Routes {
         return this.route;
     }
 
-    static Routes read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Routes read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         Routes routes = new Routes();
         xmlPullParser.getDepth();

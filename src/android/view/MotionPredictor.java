@@ -33,9 +33,9 @@ public final class MotionPredictor {
 
     public MotionPredictor(boolean z, int i) {
         this.mIsPredictionEnabled = z;
-        long nativeInitialize = nativeInitialize(i);
-        this.mPtr = nativeInitialize;
-        RegistryHolder.REGISTRY.registerNativeAllocation(this, nativeInitialize);
+        long jNativeInitialize = nativeInitialize(i);
+        this.mPtr = jNativeInitialize;
+        RegistryHolder.REGISTRY.registerNativeAllocation(this, jNativeInitialize);
     }
 
     public void record(MotionEvent motionEvent) {

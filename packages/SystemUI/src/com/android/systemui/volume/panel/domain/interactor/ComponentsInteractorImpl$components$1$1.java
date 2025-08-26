@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ComponentsInteractorImpl$components$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $componentKey;
@@ -56,11 +55,11 @@ final class ComponentsInteractorImpl$components$1$1 extends SuspendLambda implem
         LogLevel logLevel = LogLevel.DEBUG;
         VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = volumePanelLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

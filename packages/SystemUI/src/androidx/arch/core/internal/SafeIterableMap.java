@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SafeIterableMap implements Iterable {
     public Entry mEnd;
@@ -12,7 +11,6 @@ public class SafeIterableMap implements Iterable {
     public int mSize = 0;
     public Entry mStart;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AscendingIterator extends ListIterator {
         public AscendingIterator(Entry entry, Entry entry2) {
             super(entry, entry2);
@@ -29,7 +27,6 @@ public class SafeIterableMap implements Iterable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DescendingIterator extends ListIterator {
         public DescendingIterator(Entry entry, Entry entry2) {
             super(entry, entry2);
@@ -46,7 +43,6 @@ public class SafeIterableMap implements Iterable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Entry implements Map.Entry {
         public final Object mKey;
         public Entry mNext;
@@ -95,7 +91,6 @@ public class SafeIterableMap implements Iterable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IteratorWithAdditions extends SupportRemove implements Iterator {
         public boolean mBeforeStart = true;
         public Entry mCurrent;
@@ -135,7 +130,6 @@ public class SafeIterableMap implements Iterable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ListIterator extends SupportRemove implements Iterator {
         public Entry mExpectedEnd;
         public Entry mNext;
@@ -164,102 +158,78 @@ public class SafeIterableMap implements Iterable {
 
         @Override // androidx.arch.core.internal.SafeIterableMap.SupportRemove
         public final void supportRemove(Entry entry) {
-            Entry entry2 = null;
+            Entry entryForward = null;
             if (this.mExpectedEnd == entry && entry == this.mNext) {
                 this.mNext = null;
                 this.mExpectedEnd = null;
             }
-            Entry entry3 = this.mExpectedEnd;
-            if (entry3 == entry) {
-                this.mExpectedEnd = backward(entry3);
+            Entry entry2 = this.mExpectedEnd;
+            if (entry2 == entry) {
+                this.mExpectedEnd = backward(entry2);
             }
-            Entry entry4 = this.mNext;
-            if (entry4 == entry) {
-                Entry entry5 = this.mExpectedEnd;
-                if (entry4 != entry5 && entry5 != null) {
-                    entry2 = forward(entry4);
+            Entry entry3 = this.mNext;
+            if (entry3 == entry) {
+                Entry entry4 = this.mExpectedEnd;
+                if (entry3 != entry4 && entry4 != null) {
+                    entryForward = forward(entry3);
                 }
-                this.mNext = entry2;
+                this.mNext = entryForward;
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SupportRemove {
         public abstract void supportRemove(Entry entry);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0048, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x0048, code lost:
     
         if (r1.hasNext() != false) goto L28;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0050, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x0050, code lost:
     
         if (((androidx.arch.core.internal.SafeIterableMap.ListIterator) r6).hasNext() != false) goto L28;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0052, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x0052, code lost:
     
         return true;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0053, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x0053, code lost:
     
         return false;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean equals(java.lang.Object r6) {
-        /*
-            r5 = this;
-            r0 = 1
-            if (r6 != r5) goto L4
-            return r0
-        L4:
-            boolean r1 = r6 instanceof androidx.arch.core.internal.SafeIterableMap
-            r2 = 0
-            if (r1 != 0) goto La
-            return r2
-        La:
-            androidx.arch.core.internal.SafeIterableMap r6 = (androidx.arch.core.internal.SafeIterableMap) r6
-            int r1 = r5.mSize
-            int r3 = r6.mSize
-            if (r1 == r3) goto L13
-            return r2
-        L13:
-            java.util.Iterator r5 = r5.iterator()
-            java.util.Iterator r6 = r6.iterator()
-        L1b:
-            r1 = r5
-            androidx.arch.core.internal.SafeIterableMap$ListIterator r1 = (androidx.arch.core.internal.SafeIterableMap.ListIterator) r1
-            boolean r3 = r1.hasNext()
-            if (r3 == 0) goto L44
-            r3 = r6
-            androidx.arch.core.internal.SafeIterableMap$ListIterator r3 = (androidx.arch.core.internal.SafeIterableMap.ListIterator) r3
-            boolean r4 = r3.hasNext()
-            if (r4 == 0) goto L44
-            java.lang.Object r1 = r1.next()
-            java.util.Map$Entry r1 = (java.util.Map.Entry) r1
-            java.lang.Object r3 = r3.next()
-            if (r1 != 0) goto L3b
-            if (r3 != 0) goto L43
-        L3b:
-            if (r1 == 0) goto L1b
-            boolean r1 = r1.equals(r3)
-            if (r1 != 0) goto L1b
-        L43:
-            return r2
-        L44:
-            boolean r5 = r1.hasNext()
-            if (r5 != 0) goto L53
-            androidx.arch.core.internal.SafeIterableMap$ListIterator r6 = (androidx.arch.core.internal.SafeIterableMap.ListIterator) r6
-            boolean r5 = r6.hasNext()
-            if (r5 != 0) goto L53
-            return r0
-        L53:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.arch.core.internal.SafeIterableMap.equals(java.lang.Object):boolean");
+    public final boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof SafeIterableMap)) {
+            return false;
+        }
+        SafeIterableMap safeIterableMap = (SafeIterableMap) obj;
+        if (this.mSize != safeIterableMap.mSize) {
+            return false;
+        }
+        Iterator it = iterator();
+        Iterator it2 = safeIterableMap.iterator();
+        while (true) {
+            ListIterator listIterator = (ListIterator) it;
+            if (!listIterator.hasNext()) {
+                break;
+            }
+            ListIterator listIterator2 = (ListIterator) it2;
+            if (!listIterator2.hasNext()) {
+                break;
+            }
+            Map.Entry entry = (Map.Entry) listIterator.next();
+            Object next = listIterator2.next();
+            if ((entry == null && next != null) || (entry != null && !entry.equals(next))) {
+                break;
+            }
+        }
+        return false;
     }
 
     public Entry get(Object obj) {
@@ -272,13 +242,13 @@ public class SafeIterableMap implements Iterable {
 
     public final int hashCode() {
         Iterator it = iterator();
-        int i = 0;
+        int iHashCode = 0;
         while (true) {
             ListIterator listIterator = (ListIterator) it;
             if (!listIterator.hasNext()) {
-                return i;
+                return iHashCode;
             }
-            i += ((Map.Entry) listIterator.next()).hashCode();
+            iHashCode += ((Map.Entry) listIterator.next()).hashCode();
         }
     }
 

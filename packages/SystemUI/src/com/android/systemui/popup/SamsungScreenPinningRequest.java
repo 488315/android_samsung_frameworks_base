@@ -12,9 +12,12 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -41,8 +44,9 @@ import com.android.systemui.shared.system.PackageManagerWrapper;
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.util.SettingsHelper;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SamsungScreenPinningRequest implements DialogInterface.OnClickListener, NavigationModeController.ModeChangedListener {
     private static final String AUTHORITY_PHONE = "com.samsung.android.app.parentalcare.provider";
@@ -74,6 +78,8 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
             SamsungScreenPinningRequest.this.clearPrompt();
         }
     };
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private ActivityManagerWrapper mActivityManagerWrapper = ActivityManagerWrapper.sInstance;
     private PackageManagerWrapper mPackageManagerWrapper = PackageManagerWrapper.sInstance;
     private int mNavBarMode = ((NavigationModeController) Dependency.sDependency.getDependencyInner(NavigationModeController.class)).addListener(this);
@@ -89,10 +95,10 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
         if (i == 0) {
             builder.setTitle(R.string.lock_to_app_dex_title);
             builder.setMessage(R.string.lock_to_app_dex_desc);
-            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.popup.SamsungScreenPinningRequest$$ExternalSyntheticLambda0
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.popup.SamsungScreenPinningRequest$$ExternalSyntheticLambda2
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i2) {
-                    SamsungScreenPinningRequest.this.lambda$createDialog$0(dialogInterface, i2);
+                    this.f$0.lambda$createDialog$2(dialogInterface, i2);
                 }
             });
         } else if (i == 1) {
@@ -104,9 +110,9 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
             builder.setView(linearLayout);
             builder.setPositiveButton(R.string.lock_to_app_positive, this);
         }
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.getWindow().getAttributes().setTitle(TAG);
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().getAttributes().setTitle(TAG);
         this.mDialog.getWindow().setType(2008);
         this.mDialog.getWindow().getAttributes().semAddPrivateFlags(16);
         this.mDialog.show();
@@ -138,11 +144,11 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
                 int i4 = recentTaskInfo.id;
                 activityManagerWrapper.getClass();
                 PackageManager packageManager = context.getPackageManager();
-                String charSequence = activityInfo.loadLabel(packageManager).toString();
+                String string = activityInfo.loadLabel(packageManager).toString();
                 if (i4 != UserHandle.myUserId()) {
-                    charSequence = packageManager.getUserBadgedLabel(charSequence, new UserHandle(i4)).toString();
+                    string = packageManager.getUserBadgedLabel(string, new UserHandle(i4)).toString();
                 }
-                this.mAppName = charSequence;
+                this.mAppName = string;
                 boolean z = (recentTaskInfo.baseIntent.getFlags() & 8388608) != 0;
                 this.mIsExcluded = z;
                 if (z) {
@@ -156,11 +162,11 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
         this.mLogWrapper.d(TAG, "New taskId: " + String.valueOf(this.mTaskId));
     }
 
-    private LinearLayout getContentsView() {
-        boolean isGesturalMode = BasicRune.NAVBAR_GESTURE ? QuickStepContract.isGesturalMode(this.mNavBarMode) : false;
-        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_Dialog_Alert)).inflate(hasNavigationBar(this.mContext.getDisplayId()) ? isGesturalMode ? R.layout.screen_pinning_content_view_gesture : R.layout.screen_pinning_content_view_swkey : R.layout.screen_pinning_content_view_hwkey, (ViewGroup) null);
-        setPinWindowsOptionalText(isGesturalMode, linearLayout);
-        if (!isGesturalMode) {
+    private LinearLayout getContentsView() throws Resources.NotFoundException {
+        boolean zIsGesturalMode = BasicRune.NAVBAR_GESTURE ? QuickStepContract.isGesturalMode(this.mNavBarMode) : false;
+        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_Dialog_Alert)).inflate(hasNavigationBar(this.mContext.getDisplayId()) ? zIsGesturalMode ? R.layout.screen_pinning_content_view_gesture : R.layout.screen_pinning_content_view_swkey : R.layout.screen_pinning_content_view_hwkey, (ViewGroup) null);
+        setPinWindowsOptionalText(zIsGesturalMode, linearLayout);
+        if (!zIsGesturalMode) {
             int i = Settings.Global.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATIONBAR_KEY_ORDER, 0);
             setPinWindowsKeyImage(linearLayout, i);
             setPinWindowsGestureImage(linearLayout, i);
@@ -179,22 +185,22 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
 
     private boolean isAppNotAllowedForChildAccount() {
         try {
-            Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.samsung.android.app.parentalcare.provider/careapps/" + this.mActivityManagerWrapper.getRunningTask().topActivity.getPackageName()), null, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.samsung.android.app.parentalcare.provider/careapps/" + this.mActivityManagerWrapper.getRunningTask().topActivity.getPackageName()), null, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToFirst()) {
-                        if (query.getInt(query.getColumnIndexOrThrow(HAS_PERMISSION_COLUMN)) == 0) {
-                            query.close();
+                    if (cursorQuery.moveToFirst()) {
+                        if (cursorQuery.getInt(cursorQuery.getColumnIndexOrThrow(HAS_PERMISSION_COLUMN)) == 0) {
+                            cursorQuery.close();
                             return true;
                         }
                     }
                 } finally {
                 }
             }
-            if (query == null) {
+            if (cursorQuery == null) {
                 return false;
             }
-            query.close();
+            cursorQuery.close();
             return false;
         } catch (Exception e) {
             Log.d(TAG, "Error querying app permission", e);
@@ -204,9 +210,9 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
 
     private boolean isParentalControlEnabled() {
         try {
-            Bundle call = this.mContext.getContentResolver().call(Uri.parse(URI_REQUEST), METHOD_GET_SPC_INFO, (String) null, (Bundle) null);
-            if (call != null) {
-                if (call.getInt(KEY_SPC_ENABLED, 0) == 1) {
+            Bundle bundleCall = this.mContext.getContentResolver().call(Uri.parse(URI_REQUEST), METHOD_GET_SPC_INFO, (String) null, (Bundle) null);
+            if (bundleCall != null) {
+                if (bundleCall.getInt(KEY_SPC_ENABLED, 0) == 1) {
                     return true;
                 }
             }
@@ -217,8 +223,30 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$createDialog$0(DialogInterface dialogInterface, int i) {
+    public /* synthetic */ void lambda$createDialog$2(DialogInterface dialogInterface, int i) {
         clearPrompt();
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public /* synthetic */ void lambda$showPrompt$0(boolean z, boolean z2) {
+        if (this.mIsExcluded || (z && z2)) {
+            createDialog(1, null);
+        } else {
+            createDialog(2, getContentsView());
+        }
+        this.mLogWrapper.d(TAG, "New taskId: " + this.mTaskId + " mIsExcluded: " + this.mIsExcluded);
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public /* synthetic */ void lambda$showPrompt$1() {
+        final boolean zIsParentalControlEnabled = isParentalControlEnabled();
+        final boolean zIsAppNotAllowedForChildAccount = isAppNotAllowedForChildAccount();
+        this.mHandler.post(new Runnable() { // from class: com.android.systemui.popup.SamsungScreenPinningRequest$$ExternalSyntheticLambda0
+            @Override // java.lang.Runnable
+            public final void run() {
+                this.f$0.lambda$showPrompt$0(zIsParentalControlEnabled, zIsAppNotAllowedForChildAccount);
+            }
+        });
     }
 
     private void setPinWindowsGestureImage(LinearLayout linearLayout, int i) {
@@ -237,7 +265,7 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
         }
     }
 
-    private void setPinWindowsKeyImage(LinearLayout linearLayout, int i) {
+    private void setPinWindowsKeyImage(LinearLayout linearLayout, int i) throws Resources.NotFoundException {
         ImageView imageView = (ImageView) linearLayout.findViewById(R.id.left_key);
         ImageView imageView2 = (ImageView) linearLayout.findViewById(R.id.right_key);
         int i2 = R.drawable.pin_windows_ic_recent;
@@ -332,12 +360,12 @@ public class SamsungScreenPinningRequest implements DialogInterface.OnClickListe
         this.mIsExcluded = z;
         this.mTaskId = i;
         registerReceivers();
-        if (this.mIsExcluded || (isParentalControlEnabled() && isAppNotAllowedForChildAccount())) {
-            createDialog(1, null);
-        } else {
-            createDialog(2, getContentsView());
-        }
-        this.mLogWrapper.d(TAG, "New taskId: " + String.valueOf(this.mTaskId) + "mIsExcluded: " + this.mIsExcluded);
+        this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.popup.SamsungScreenPinningRequest$$ExternalSyntheticLambda1
+            @Override // java.lang.Runnable
+            public final void run() {
+                this.f$0.lambda$showPrompt$1();
+            }
+        });
     }
 
     public void unregisterReceivers() {

@@ -77,130 +77,51 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0051, code lost:
-    
-        if (r2 != r12.mCmdTuneFreq) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0053, code lost:
-    
-        r11 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0055, code lost:
-    
-        r11 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x0061, code lost:
-    
-        if (r2 == r12.mPreviousTuneFreq) goto L21;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0055  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public byte[] queryInfo() {
-        /*
-            r12 = this;
-            r0 = 12
-            byte[] r6 = new byte[r0]
-            r9 = 0
-            r1 = r9
-        L6:
-            if (r1 >= r0) goto Le
-            r2 = -1
-            r6[r1] = r2
-            int r1 = r1 + 1
-            goto L6
-        Le:
-            boolean r0 = com.android.server.PlayerExternalChipsetBes.FEATURE_SUPPORT_RDS
-            if (r0 != 0) goto L7c
-            r0 = 1
-            r11 = r0
-            r10 = r9
-        L15:
-            r2 = 400(0x190, float:5.6E-43)
-            if (r10 >= r2) goto L91
-            android.hardware.usb.UsbDeviceConnection r1 = r12.mUsbDeviceConnection
-            r7 = 12
-            r8 = 4000(0xfa0, float:5.605E-42)
-            r2 = 192(0xc0, float:2.69E-43)
-            r3 = 163(0xa3, float:2.28E-43)
-            r4 = 0
-            r5 = 0
-            int r1 = r1.controlTransfer(r2, r3, r4, r5, r6, r7, r8)
-            r2 = 50
-            r12.threadSleep(r2)
-            r2 = 2
-            r2 = r6[r2]
-            r2 = r2 & 255(0xff, float:3.57E-43)
-            r3 = 3
-            r3 = r6[r3]
-            int r3 = r3 << 8
-            r4 = 65535(0xffff, float:9.1834E-41)
-            r3 = r3 & r4
-            int r2 = r2 + r3
-            r3 = r6[r0]
-            if (r3 != 0) goto L47
-            r2 = 300(0x12c, float:4.2E-43)
-            if (r10 >= r2) goto L64
-            r10 = r2
-            goto L64
-        L47:
-            boolean r3 = r12.mIsTuning
-            if (r3 == 0) goto L57
-            r3 = r6[r9]
-            if (r3 != r0) goto L64
-            int r3 = r12.mCmdTuneFreq
-            if (r2 == r3) goto L55
-        L53:
-            r11 = r0
-            goto L64
-        L55:
-            r11 = r9
-            goto L64
-        L57:
-            boolean r3 = r12.mIsSeeking
-            if (r3 == 0) goto L64
-            r3 = r6[r9]
-            if (r3 != 0) goto L64
-            int r3 = r12.mPreviousTuneFreq
-            if (r2 != r3) goto L55
-            goto L53
-        L64:
-            if (r11 == 0) goto L76
-            boolean r2 = r12.mIsSeekTuneing
-            if (r2 == 0) goto L76
-            java.lang.Thread r2 = java.lang.Thread.currentThread()
-            boolean r2 = r2.isInterrupted()
-            if (r2 != 0) goto L76
-            r11 = r0
-            goto L77
-        L76:
-            r11 = r9
-        L77:
-            if (r11 != 0) goto L7a
-            goto L91
-        L7a:
-            int r10 = r10 + r0
-            goto L15
-        L7c:
-            android.hardware.usb.UsbDeviceConnection r1 = r12.mUsbDeviceConnection
-            r7 = 12
-            r8 = 4000(0xfa0, float:5.605E-42)
-            r2 = 192(0xc0, float:2.69E-43)
-            r3 = 163(0xa3, float:2.28E-43)
-            r4 = 0
-            r5 = 0
-            int r1 = r1.controlTransfer(r2, r3, r4, r5, r6, r7, r8)
-            r2 = 10
-            r12.threadSleep(r2)
-        L91:
-            if (r1 <= 0) goto L94
-            return r6
-        L94:
-            r12 = 0
-            return r12
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.PlayerExternalChipsetBes.queryInfo():byte[]");
+    public byte[] queryInfo() throws InterruptedException {
+        byte[] bArr = new byte[12];
+        int iControlTransfer = 0;
+        while (iControlTransfer < 12) {
+            bArr[iControlTransfer] = -1;
+            iControlTransfer++;
+        }
+        if (FEATURE_SUPPORT_RDS) {
+            iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 163, 0, 0, bArr, 12, 4000);
+            threadSleep(10L);
+        } else {
+            boolean z = true;
+            int i = 0;
+            while (i < 400) {
+                iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 163, 0, 0, bArr, 12, 4000);
+                threadSleep(50L);
+                int i2 = (bArr[2] & 255) + ((bArr[3] << 8) & 65535);
+                if (bArr[1] == 0) {
+                    if (i < 300) {
+                        i = 300;
+                    }
+                } else if (this.mIsTuning) {
+                    if (bArr[0] == 1) {
+                        z = i2 != this.mCmdTuneFreq;
+                    }
+                } else if (this.mIsSeeking && bArr[0] == 0) {
+                    if (i2 == this.mPreviousTuneFreq) {
+                    }
+                }
+                z = z && this.mIsSeekTuneing && !Thread.currentThread().isInterrupted();
+                if (!z) {
+                    break;
+                }
+                i++;
+            }
+        }
+        if (iControlTransfer > 0) {
+            return bArr;
+        }
+        return null;
     }
 
     protected void initEndpointBes() {
@@ -265,32 +186,32 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
             super("FMNotifyWorkerThread");
         }
 
-        private int verifyInfo(byte[] bArr) {
+        private int verifyInfo(byte[] bArr) throws InterruptedException {
             if (PlayerExternalChipsetBes.this.startsWith(bArr, new byte[]{1, 0, 8, 0, 0}) && PlayerExternalChipsetBes.this.mUsbDevice.getDeviceClass() != 2) {
-                byte[] queryInfo = PlayerExternalChipsetBes.this.queryInfo();
-                if (queryInfo != null) {
-                    Log.d("FMRadioBestechnic", "buffer: " + PlayerExternalChipsetBes.this.toHex(queryInfo));
+                byte[] bArrQueryInfo = PlayerExternalChipsetBes.this.queryInfo();
+                if (bArrQueryInfo != null) {
+                    Log.d("FMRadioBestechnic", "buffer: " + PlayerExternalChipsetBes.this.toHex(bArrQueryInfo));
                 }
-                if (queryInfo == null) {
+                if (bArrQueryInfo == null) {
                     return 0;
                 }
                 Log.d("FMRadioBestechnic", "has result");
-                if (PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{1, 1}) || PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{1, 0})) {
-                    if (PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{1, 0})) {
+                if (PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{1, 1}) || PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{1, 0})) {
+                    if (PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{1, 0})) {
                         Log.d("FMRadioBestechnic", "tune fail");
                     } else {
-                        byte b = queryInfo[2];
-                        byte b2 = queryInfo[3];
-                        PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(queryInfo[4]);
+                        byte b = bArrQueryInfo[2];
+                        byte b2 = bArrQueryInfo[3];
+                        PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(bArrQueryInfo[4]);
                     }
                     return 1;
                 }
-                if (PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{0, 1}) || PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{0, 0})) {
-                    if (PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{0, 0})) {
+                if (PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{0, 1}) || PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{0, 0})) {
+                    if (PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{0, 0})) {
                         Log.d("FMRadioBestechnic", "seek fail");
                     } else {
-                        int i = (queryInfo[2] & 255) + ((queryInfo[3] << 8) & 65535);
-                        PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(queryInfo[4]);
+                        int i = (bArrQueryInfo[2] & 255) + ((bArrQueryInfo[3] << 8) & 65535);
+                        PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(bArrQueryInfo[4]);
                         if (i > 10800 || i < 8700) {
                             PlayerExternalChipsetBes.this.mSeekFreq = -1;
                         }
@@ -298,8 +219,8 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                     }
                     return 2;
                 }
-                if (PlayerExternalChipsetBes.this.startsWith(queryInfo, new byte[]{2}) || PlayerExternalChipsetBes.this.mIsRDSEnabled) {
-                    PlayerExternalChipsetBes.this.rdsParser.parseData(new ExtRDSData(queryInfo));
+                if (PlayerExternalChipsetBes.this.startsWith(bArrQueryInfo, new byte[]{2}) || PlayerExternalChipsetBes.this.mIsRDSEnabled) {
+                    PlayerExternalChipsetBes.this.rdsParser.parseData(new ExtRDSData(bArrQueryInfo));
                     if (PlayerExternalChipsetBes.this.rdsParser.isRDSDataValid()) {
                         Log.d("FMRadioBestechnic", "RDSDataValid, PS: " + PlayerExternalChipsetBes.this.rdsParser.getProgramService() + " - RT: " + PlayerExternalChipsetBes.this.rdsParser.getRadioText());
                         FMPlayerNativeBase.RDSData rDSData = new FMPlayerNativeBase.RDSData((long) PlayerExternalChipsetBes.this.getTunedFrequency(), PlayerExternalChipsetBes.this.rdsParser.getProgramService(), PlayerExternalChipsetBes.this.rdsParser.getRadioText());
@@ -313,7 +234,7 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public void run() {
+        public void run() throws InterruptedException {
             Log.d("FMRadioBestechnic", "notify thread is running");
             int maxPacketSize = PlayerExternalChipsetBes.this.mUsbEndpoint.getMaxPacketSize();
             byte[] bArr = new byte[maxPacketSize];
@@ -325,32 +246,29 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                 if (!PlayerExternalChipsetBes.this.mIsRDSEnabled && (!PlayerExternalChipsetBes.this.mIsRunning || Thread.currentThread().isInterrupted())) {
                     return;
                 }
-                int bulkTransfer = PlayerExternalChipsetBes.this.mUsbDeviceConnection.bulkTransfer(PlayerExternalChipsetBes.this.mUsbEndpoint, bArr, maxPacketSize, 1000);
-                if (bulkTransfer < 0) {
+                int iBulkTransfer = PlayerExternalChipsetBes.this.mUsbDeviceConnection.bulkTransfer(PlayerExternalChipsetBes.this.mUsbEndpoint, bArr, maxPacketSize, 1000);
+                if (iBulkTransfer < 0) {
                     i2++;
                     if (i2 == 50 && PlayerExternalChipsetBes.this.mUsbDevice != null) {
                         PlayerExternalChipsetBes.this.releaseInterfaceBes();
                         PlayerExternalChipsetBes.this.initEndpointBes();
                         i2 = 0;
                     }
-                    PlayerExternalChipsetBes.this.threadSleep(10L);
-                } else if (bulkTransfer > 0) {
+                } else if (iBulkTransfer > 0) {
                     Log.d("FMRadioBestechnic", "Received NOTIFY: " + PlayerExternalChipsetBes.this.toHex(bArr));
-                    int verifyInfo = verifyInfo(Arrays.copyOfRange(bArr, 0, bulkTransfer));
-                    if (verifyInfo == 0) {
+                    int iVerifyInfo = verifyInfo(Arrays.copyOfRange(bArr, 0, iBulkTransfer));
+                    if (iVerifyInfo == 0) {
                         Log.d("FMRadioBestechnic", "no result complete");
-                    } else if (verifyInfo == 1 || verifyInfo == 2) {
+                    } else if (iVerifyInfo == 1 || iVerifyInfo == 2) {
                         Log.d("FMRadioBestechnic", "seek or tune complete");
                         PlayerExternalChipsetBes.this.mIsSeekTuneing = false;
-                    } else if (verifyInfo == 3) {
+                    } else if (iVerifyInfo == 3) {
                         Log.d("FMRadioBestechnic", "rds segment complete");
                         PlayerExternalChipsetBes.this.mIsGettingRds = false;
                     }
                     i2 = 0;
-                    PlayerExternalChipsetBes.this.threadSleep(10L);
-                } else {
-                    PlayerExternalChipsetBes.this.threadSleep(10L);
                 }
+                PlayerExternalChipsetBes.this.threadSleep(10L);
             }
         }
 
@@ -380,7 +298,7 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
         return true;
     }
 
-    protected void threadSleep(long j) {
+    protected void threadSleep(long j) throws InterruptedException {
         try {
             Thread.sleep(j);
         } catch (InterruptedException unused) {

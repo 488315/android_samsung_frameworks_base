@@ -3,7 +3,6 @@ package com.android.wm.shell.bubbles.animation;
 import android.graphics.Matrix;
 import androidx.dynamicanimation.animation.FloatPropertyCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AnimatableScaleMatrix extends Matrix {
     public static final AnonymousClass1 SCALE_X = new FloatPropertyCompat("matrixScaleX") { // from class: com.android.wm.shell.bubbles.animation.AnimatableScaleMatrix.1

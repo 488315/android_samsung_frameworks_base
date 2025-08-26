@@ -25,30 +25,30 @@ public class OneShotScheduler extends RoundRobinScheduler {
     public Filter scheduleNextNode() {
         Filter filter = null;
         while (true) {
-            Filter scheduleNextNode = super.scheduleNextNode();
-            if (scheduleNextNode == null) {
+            Filter filterScheduleNextNode = super.scheduleNextNode();
+            if (filterScheduleNextNode == null) {
                 if (this.mLogVerbose) {
                     Log.v(TAG, "No filters available to run.");
                 }
                 return null;
             }
-            if (!this.scheduled.containsKey(scheduleNextNode.getName())) {
-                if (scheduleNextNode.getNumberOfConnectedInputs() == 0) {
-                    this.scheduled.put(scheduleNextNode.getName(), 1);
+            if (!this.scheduled.containsKey(filterScheduleNextNode.getName())) {
+                if (filterScheduleNextNode.getNumberOfConnectedInputs() == 0) {
+                    this.scheduled.put(filterScheduleNextNode.getName(), 1);
                 }
                 if (this.mLogVerbose) {
-                    Log.v(TAG, "Scheduling filter \"" + scheduleNextNode.getName() + "\" of type " + scheduleNextNode.getFilterClassName());
+                    Log.v(TAG, "Scheduling filter \"" + filterScheduleNextNode.getName() + "\" of type " + filterScheduleNextNode.getFilterClassName());
                 }
-                return scheduleNextNode;
+                return filterScheduleNextNode;
             }
-            if (filter == scheduleNextNode) {
+            if (filter == filterScheduleNextNode) {
                 if (this.mLogVerbose) {
                     Log.v(TAG, "One pass through graph completed.");
                 }
                 return null;
             }
             if (filter == null) {
-                filter = scheduleNextNode;
+                filter = filterScheduleNextNode;
             }
         }
     }

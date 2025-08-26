@@ -7,7 +7,6 @@ import com.android.wm.shell.onehanded.OneHandedController;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda9 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +31,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda9 im
                     bubble.inflate(new BubbleViewInfoTask.Callback() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda22
                         @Override // com.android.wm.shell.bubbles.BubbleViewInfoTask.Callback
                         public final void onBubbleViewsReady(Bubble bubble2) {
-                            BubbleController.this.mBubbleData.overflowBubble(15, bubble);
+                            bubbleController.mBubbleData.overflowBubble(15, bubble);
                         }
                     }, bubbleController.mContext, bubbleController.mExpandedViewManager, bubbleController.mBubbleTaskViewFactory, bubbleController.mBubblePositioner, bubbleController.mStackView, null, bubbleController.mBubbleIconFactory, bubbleController.mBubbleBadgeIconFactory, true);
                     break;

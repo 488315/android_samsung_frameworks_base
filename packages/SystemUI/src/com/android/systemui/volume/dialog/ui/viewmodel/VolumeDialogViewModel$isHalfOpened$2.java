@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogViewModel$isHalfOpened$2 extends SuspendLambda implements Function3 {
     /* synthetic */ int I$0;
@@ -24,9 +23,9 @@ final class VolumeDialogViewModel$isHalfOpened$2 extends SuspendLambda implement
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         VolumeDialogViewModel$isHalfOpened$2 volumeDialogViewModel$isHalfOpened$2 = new VolumeDialogViewModel$isHalfOpened$2(this.this$0, (Continuation) obj3);
-        volumeDialogViewModel$isHalfOpened$2.I$0 = intValue;
+        volumeDialogViewModel$isHalfOpened$2.I$0 = iIntValue;
         volumeDialogViewModel$isHalfOpened$2.L$0 = (Configuration) obj2;
         return volumeDialogViewModel$isHalfOpened$2.invokeSuspend(Unit.INSTANCE);
     }

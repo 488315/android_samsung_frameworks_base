@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteRepositorySwitcher implements DeviceBasedSatelliteRepository {
     public final ReadonlyStateFlow activeRepo;
@@ -29,19 +28,19 @@ public final class DeviceBasedSatelliteRepositorySwitcher implements DeviceBased
         this.realImpl = realDeviceBasedSatelliteRepository;
         this.demoImpl = demoDeviceBasedSatelliteRepository;
         this.demoModeController = demoModeController;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1(this, null));
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         demoModeController.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, WhileSubscribed$default, Boolean.FALSE);
-        this.isDemoMode = stateIn;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.mapLatest(stateIn, new DeviceBasedSatelliteRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realDeviceBasedSatelliteRepository);
-        this.activeRepo = stateIn2;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Boolean.FALSE);
+        this.isDemoMode = readonlyStateFlowStateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.mapLatest(readonlyStateFlowStateIn, new DeviceBasedSatelliteRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), realDeviceBasedSatelliteRepository);
+        this.activeRepo = readonlyStateFlowStateIn2;
         DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl = (DeviceBasedSatelliteRepositoryImpl) realDeviceBasedSatelliteRepository;
-        this.isSatelliteProvisioned = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.isSatelliteProvisioned.$$delegate_0.getValue());
-        this.connectionState = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.connectionState.$$delegate_0.getValue());
-        this.signalStrength = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.signalStrength.$$delegate_0.getValue());
-        this.isSatelliteAllowedForCurrentLocation = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$4(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.isSatelliteAllowedForCurrentLocation.$$delegate_0.getValue());
+        this.isSatelliteProvisioned = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.isSatelliteProvisioned.$$delegate_0.getValue());
+        this.connectionState = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.connectionState.$$delegate_0.getValue());
+        this.signalStrength = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.signalStrength.$$delegate_0.getValue());
+        this.isSatelliteAllowedForCurrentLocation = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new DeviceBasedSatelliteRepositorySwitcher$special$$inlined$flatMapLatest$4(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), deviceBasedSatelliteRepositoryImpl.isSatelliteAllowedForCurrentLocation.$$delegate_0.getValue());
     }
 
     @Override // com.android.systemui.statusbar.pipeline.satellite.data.DeviceBasedSatelliteRepository

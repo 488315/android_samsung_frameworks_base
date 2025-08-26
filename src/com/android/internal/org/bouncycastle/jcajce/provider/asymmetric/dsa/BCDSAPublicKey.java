@@ -103,9 +103,9 @@ public class BCDSAPublicKey implements DSAPublicKey {
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("DSA Public Key [");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(DSAUtil.generateKeyFingerprint(this.y, getParams())).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("            Y: ").append(getY().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(DSAUtil.generateKeyFingerprint(this.y, getParams())).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("            Y: ").append(getY().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 
@@ -124,7 +124,7 @@ public class BCDSAPublicKey implements DSAPublicKey {
         return this.dsaSpec != null ? getY().equals(dSAPublicKey.getY()) && dSAPublicKey.getParams() != null && getParams().getG().equals(dSAPublicKey.getParams().getG()) && getParams().getP().equals(dSAPublicKey.getParams().getP()) && getParams().getQ().equals(dSAPublicKey.getParams().getQ()) : getY().equals(dSAPublicKey.getY()) && dSAPublicKey.getParams() == null;
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         BigInteger bigInteger = (BigInteger) objectInputStream.readObject();
         if (bigInteger.equals(ZERO)) {

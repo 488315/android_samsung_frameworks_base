@@ -40,14 +40,14 @@ public interface X509ObjectIdentifiers {
         id_ecdsa_with_shake256 = aSN1ObjectIdentifier.branch("6.33");
         id_pe = aSN1ObjectIdentifier.branch("1");
         id_ce = new ASN1ObjectIdentifier("2.5.29");
-        ASN1ObjectIdentifier branch = aSN1ObjectIdentifier.branch("48");
-        id_ad = branch;
-        ASN1ObjectIdentifier intern = branch.branch("2").intern();
-        id_ad_caIssuers = intern;
-        ASN1ObjectIdentifier intern2 = branch.branch("1").intern();
-        id_ad_ocsp = intern2;
-        ocspAccessMethod = intern2;
-        crlAccessMethod = intern;
+        ASN1ObjectIdentifier aSN1ObjectIdentifierBranch = aSN1ObjectIdentifier.branch("48");
+        id_ad = aSN1ObjectIdentifierBranch;
+        ASN1ObjectIdentifier aSN1ObjectIdentifierIntern = aSN1ObjectIdentifierBranch.branch("2").intern();
+        id_ad_caIssuers = aSN1ObjectIdentifierIntern;
+        ASN1ObjectIdentifier aSN1ObjectIdentifierIntern2 = aSN1ObjectIdentifierBranch.branch("1").intern();
+        id_ad_ocsp = aSN1ObjectIdentifierIntern2;
+        ocspAccessMethod = aSN1ObjectIdentifierIntern2;
+        crlAccessMethod = aSN1ObjectIdentifierIntern;
         id_PasswordBasedMac = new ASN1ObjectIdentifier("1.2.840.113533.7.66.13");
     }
 }

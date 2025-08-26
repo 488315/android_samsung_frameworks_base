@@ -469,9 +469,9 @@ public interface IUsbManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUsbManager)) {
-                return (IUsbManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUsbManager)) {
+                return (IUsbManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -616,12 +616,12 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeTypedObject(bundle, 1);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor openDevice = openDevice(readString, readString2);
+                    ParcelFileDescriptor parcelFileDescriptorOpenDevice = openDevice(string, string2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(openDevice, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorOpenDevice, 1);
                     return true;
                 case 3:
                     UsbAccessory currentAccessory = getCurrentAccessory();
@@ -631,180 +631,180 @@ public interface IUsbManager extends IInterface {
                 case 4:
                     UsbAccessory usbAccessory = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor openAccessory = openAccessory(usbAccessory);
+                    ParcelFileDescriptor parcelFileDescriptorOpenAccessory = openAccessory(usbAccessory);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(openAccessory, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorOpenAccessory, 1);
                     return true;
                 case 5:
                     UsbDevice usbDevice = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString3 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDevicePackage(usbDevice, readString3, readInt);
+                    setDevicePackage(usbDevice, string3, i3);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     UsbAccessory usbAccessory2 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    String readString4 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAccessoryPackage(usbAccessory2, readString4, readInt2);
+                    setAccessoryPackage(usbAccessory2, string4, i4);
                     parcel2.writeNoException();
                     return true;
                 case 7:
                     UsbDevice usbDevice2 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addDevicePackagesToPreferenceDenied(usbDevice2, createStringArray, userHandle);
+                    addDevicePackagesToPreferenceDenied(usbDevice2, strArrCreateStringArray, userHandle);
                     parcel2.writeNoException();
                     return true;
                 case 8:
                     UsbAccessory usbAccessory3 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    String[] createStringArray2 = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addAccessoryPackagesToPreferenceDenied(usbAccessory3, createStringArray2, userHandle2);
+                    addAccessoryPackagesToPreferenceDenied(usbAccessory3, strArrCreateStringArray2, userHandle2);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     UsbDevice usbDevice3 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String[] createStringArray3 = parcel.createStringArray();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    removeDevicePackagesFromPreferenceDenied(usbDevice3, createStringArray3, userHandle3);
+                    removeDevicePackagesFromPreferenceDenied(usbDevice3, strArrCreateStringArray3, userHandle3);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     UsbAccessory usbAccessory4 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    String[] createStringArray4 = parcel.createStringArray();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
                     UserHandle userHandle4 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    removeAccessoryPackagesFromPreferenceDenied(usbAccessory4, createStringArray4, userHandle4);
+                    removeAccessoryPackagesFromPreferenceDenied(usbAccessory4, strArrCreateStringArray4, userHandle4);
                     parcel2.writeNoException();
                     return true;
                 case 11:
                     UsbDevice usbDevice4 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     UserHandle userHandle5 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDevicePersistentPermission(usbDevice4, readInt3, userHandle5, readBoolean);
+                    setDevicePersistentPermission(usbDevice4, i5, userHandle5, z);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     UsbAccessory usbAccessory5 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     UserHandle userHandle6 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAccessoryPersistentPermission(usbAccessory5, readInt4, userHandle6, readBoolean2);
+                    setAccessoryPersistentPermission(usbAccessory5, i6, userHandle6, z2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
                     UsbDevice usbDevice5 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasDevicePermission = hasDevicePermission(usbDevice5, readString5);
+                    boolean zHasDevicePermission = hasDevicePermission(usbDevice5, string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasDevicePermission);
+                    parcel2.writeBoolean(zHasDevicePermission);
                     return true;
                 case 14:
                     UsbDevice usbDevice6 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString6 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasDevicePermissionWithIdentity = hasDevicePermissionWithIdentity(usbDevice6, readString6, readInt5, readInt6);
+                    boolean zHasDevicePermissionWithIdentity = hasDevicePermissionWithIdentity(usbDevice6, string6, i7, i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasDevicePermissionWithIdentity);
+                    parcel2.writeBoolean(zHasDevicePermissionWithIdentity);
                     return true;
                 case 15:
                     UsbAccessory usbAccessory6 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasAccessoryPermission = hasAccessoryPermission(usbAccessory6);
+                    boolean zHasAccessoryPermission = hasAccessoryPermission(usbAccessory6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasAccessoryPermission);
+                    parcel2.writeBoolean(zHasAccessoryPermission);
                     return true;
                 case 16:
                     UsbAccessory usbAccessory7 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasAccessoryPermissionWithIdentity = hasAccessoryPermissionWithIdentity(usbAccessory7, readInt7, readInt8);
+                    boolean zHasAccessoryPermissionWithIdentity = hasAccessoryPermissionWithIdentity(usbAccessory7, i9, i10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasAccessoryPermissionWithIdentity);
+                    parcel2.writeBoolean(zHasAccessoryPermissionWithIdentity);
                     return true;
                 case 17:
                     UsbDevice usbDevice7 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestDevicePermission(usbDevice7, readString7, pendingIntent);
+                    requestDevicePermission(usbDevice7, string7, pendingIntent);
                     parcel2.writeNoException();
                     return true;
                 case 18:
                     UsbAccessory usbAccessory8 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestAccessoryPermission(usbAccessory8, readString8, pendingIntent2);
+                    requestAccessoryPermission(usbAccessory8, string8, pendingIntent2);
                     parcel2.writeNoException();
                     return true;
                 case 19:
                     UsbDevice usbDevice8 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantDevicePermission(usbDevice8, readInt9);
+                    grantDevicePermission(usbDevice8, i11);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     UsbAccessory usbAccessory9 = (UsbAccessory) parcel.readTypedObject(UsbAccessory.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantAccessoryPermission(usbAccessory9, readInt10);
+                    grantAccessoryPermission(usbAccessory9, i12);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    String readString9 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasDefaults = hasDefaults(readString9, readInt11);
+                    boolean zHasDefaults = hasDefaults(string9, i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasDefaults);
+                    parcel2.writeBoolean(zHasDefaults);
                     return true;
                 case 22:
-                    String readString10 = parcel.readString();
-                    int readInt12 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearDefaults(readString10, readInt12);
+                    clearDefaults(string10, i14);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isFunctionEnabled = isFunctionEnabled(readString11);
+                    boolean zIsFunctionEnabled = isFunctionEnabled(string11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFunctionEnabled);
+                    parcel2.writeBoolean(zIsFunctionEnabled);
                     return true;
                 case 24:
-                    boolean isUvcGadgetSupportEnabled = isUvcGadgetSupportEnabled();
+                    boolean zIsUvcGadgetSupportEnabled = isUvcGadgetSupportEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUvcGadgetSupportEnabled);
+                    parcel2.writeBoolean(zIsUvcGadgetSupportEnabled);
                     return true;
                 case 25:
-                    long readLong = parcel.readLong();
-                    int readInt13 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCurrentFunctions(readLong, readInt13);
+                    setCurrentFunctions(j, i15);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    String readString12 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt14 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCurrentFunction(readString12, readBoolean3, readInt14);
+                    setCurrentFunction(string12, z3, i16);
                     parcel2.writeNoException();
                     return true;
                 case 27:
@@ -823,9 +823,9 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeInt(gadgetHalVersion);
                     return true;
                 case 30:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setScreenUnlockedFunctions(readLong2);
+                    setScreenUnlockedFunctions(j2);
                     parcel2.writeNoException();
                     return true;
                 case 31:
@@ -838,29 +838,29 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    String readString13 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    IUsbOperationInternal asInterface = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
+                    String string13 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    IUsbOperationInternal iUsbOperationInternalAsInterface = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    resetUsbPort(readString13, readInt15, asInterface);
+                    resetUsbPort(string13, i17, iUsbOperationInternalAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String readString14 = parcel.readString();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int readInt16 = parcel.readInt();
-                    IUsbOperationInternal asInterface2 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
+                    String string14 = parcel.readString();
+                    boolean z4 = parcel.readBoolean();
+                    int i18 = parcel.readInt();
+                    IUsbOperationInternal iUsbOperationInternalAsInterface2 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean enableUsbData = enableUsbData(readString14, readBoolean4, readInt16, asInterface2);
+                    boolean zEnableUsbData = enableUsbData(string14, z4, i18, iUsbOperationInternalAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableUsbData);
+                    parcel2.writeBoolean(zEnableUsbData);
                     return true;
                 case 35:
-                    String readString15 = parcel.readString();
-                    int readInt17 = parcel.readInt();
-                    IUsbOperationInternal asInterface3 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
+                    String string15 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    IUsbOperationInternal iUsbOperationInternalAsInterface3 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    enableUsbDataWhileDocked(readString15, readInt17, asInterface3);
+                    enableUsbDataWhileDocked(string15, i19, iUsbOperationInternalAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 36:
@@ -869,9 +869,9 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeInt(usbHalVersion);
                     return true;
                 case 37:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor controlFd = getControlFd(readLong3);
+                    ParcelFileDescriptor controlFd = getControlFd(j3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(controlFd, 1);
                     return true;
@@ -881,41 +881,41 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeTypedList(ports, 1);
                     return true;
                 case 39:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsbPortStatus portStatus = getPortStatus(readString16);
+                    UsbPortStatus portStatus = getPortStatus(string16);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(portStatus, 1);
                     return true;
                 case 40:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isModeChangeSupported = isModeChangeSupported(readString17);
+                    boolean zIsModeChangeSupported = isModeChangeSupported(string17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isModeChangeSupported);
+                    parcel2.writeBoolean(zIsModeChangeSupported);
                     return true;
                 case 41:
-                    String readString18 = parcel.readString();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPortRoles(readString18, readInt18, readInt19);
+                    setPortRoles(string18, i20, i21);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    String readString19 = parcel.readString();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int readInt20 = parcel.readInt();
-                    IUsbOperationInternal asInterface4 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
+                    String string19 = parcel.readString();
+                    boolean z5 = parcel.readBoolean();
+                    int i22 = parcel.readInt();
+                    IUsbOperationInternal iUsbOperationInternalAsInterface4 = IUsbOperationInternal.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    enableLimitPowerTransfer(readString19, readBoolean5, readInt20, asInterface4);
+                    enableLimitPowerTransfer(string19, z5, i22, iUsbOperationInternalAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    String readString20 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    String string20 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    enableContaminantDetection(readString20, readBoolean6);
+                    enableContaminantDetection(string20, z6);
                     parcel2.writeNoException();
                     return true;
                 case 44:
@@ -925,72 +925,72 @@ public interface IUsbManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    IDisplayPortAltModeInfoListener asInterface5 = IDisplayPortAltModeInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListenerAsInterface = IDisplayPortAltModeInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerForDisplayPortEvents = registerForDisplayPortEvents(asInterface5);
+                    boolean zRegisterForDisplayPortEvents = registerForDisplayPortEvents(iDisplayPortAltModeInfoListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerForDisplayPortEvents);
+                    parcel2.writeBoolean(zRegisterForDisplayPortEvents);
                     return true;
                 case 46:
-                    IDisplayPortAltModeInfoListener asInterface6 = IDisplayPortAltModeInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListenerAsInterface2 = IDisplayPortAltModeInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterForDisplayPortEvents(asInterface6);
+                    unregisterForDisplayPortEvents(iDisplayPortAltModeInfoListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    boolean isUsbBlocked = isUsbBlocked();
+                    boolean zIsUsbBlocked = isUsbBlocked();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbBlocked);
+                    parcel2.writeBoolean(zIsUsbBlocked);
                     return true;
                 case 48:
-                    boolean isSupportDexRestrict = isSupportDexRestrict();
+                    boolean zIsSupportDexRestrict = isSupportDexRestrict();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportDexRestrict);
+                    parcel2.writeBoolean(zIsSupportDexRestrict);
                     return true;
                 case 49:
-                    boolean readBoolean7 = parcel.readBoolean();
-                    String readString21 = parcel.readString();
+                    boolean z7 = parcel.readBoolean();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int restrictUsbHostInterface = restrictUsbHostInterface(readBoolean7, readString21);
+                    int iRestrictUsbHostInterface = restrictUsbHostInterface(z7, string21);
                     parcel2.writeNoException();
-                    parcel2.writeInt(restrictUsbHostInterface);
+                    parcel2.writeInt(iRestrictUsbHostInterface);
                     return true;
                 case 50:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setUsbHiddenMenuState(readBoolean8);
+                    setUsbHiddenMenuState(z8);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    semSetMode(readInt21);
+                    semSetMode(i23);
                     parcel2.writeNoException();
                     return true;
                 case 52:
                     UsbDevice usbDevice9 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString22 = parcel.readString();
-                    int readInt22 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    semSetDevicePackage(usbDevice9, readString22, readInt22);
+                    semSetDevicePackage(usbDevice9, string22, i24);
                     parcel2.writeNoException();
                     return true;
                 case 53:
                     UsbDevice usbDevice10 = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    semGrantDevicePermission(usbDevice10, readInt23);
+                    semGrantDevicePermission(usbDevice10, i25);
                     parcel2.writeNoException();
                     return true;
                 case 54:
-                    int semGetPowerRoleStatus = semGetPowerRoleStatus();
+                    int iSemGetPowerRoleStatus = semGetPowerRoleStatus();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetPowerRoleStatus);
+                    parcel2.writeInt(iSemGetPowerRoleStatus);
                     return true;
                 case 55:
-                    int semGetDataRoleStatus = semGetDataRoleStatus();
+                    int iSemGetDataRoleStatus = semGetDataRoleStatus();
                     parcel2.writeNoException();
-                    parcel2.writeInt(semGetDataRoleStatus);
+                    parcel2.writeInt(iSemGetDataRoleStatus);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -1015,894 +1015,894 @@ public interface IUsbManager extends IInterface {
 
             @Override // android.hardware.usb.IUsbManager
             public void getDeviceList(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public ParcelFileDescriptor openDevice(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public UsbAccessory getCurrentAccessory() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsbAccessory) obtain2.readTypedObject(UsbAccessory.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsbAccessory) parcelObtain2.readTypedObject(UsbAccessory.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public ParcelFileDescriptor openAccessory(UsbAccessory usbAccessory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setDevicePackage(UsbDevice usbDevice, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setAccessoryPackage(UsbAccessory usbAccessory, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void addDevicePackagesToPreferenceDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void addAccessoryPackagesToPreferenceDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void removeDevicePackagesFromPreferenceDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void removeAccessoryPackagesFromPreferenceDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setDevicePersistentPermission(UsbDevice usbDevice, int i, UserHandle userHandle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setAccessoryPersistentPermission(UsbAccessory usbAccessory, int i, UserHandle userHandle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean hasDevicePermission(UsbDevice usbDevice, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean hasDevicePermissionWithIdentity(UsbDevice usbDevice, String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean hasAccessoryPermission(UsbAccessory usbAccessory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean hasAccessoryPermissionWithIdentity(UsbAccessory usbAccessory, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void requestDevicePermission(UsbDevice usbDevice, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void requestAccessoryPermission(UsbAccessory usbAccessory, String str, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void grantDevicePermission(UsbDevice usbDevice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void grantAccessoryPermission(UsbAccessory usbAccessory, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbAccessory, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbAccessory, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean hasDefaults(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void clearDefaults(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean isFunctionEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean isUvcGadgetSupportEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setCurrentFunctions(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setCurrentFunction(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public long getCurrentFunctions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int getCurrentUsbSpeed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int getGadgetHalVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setScreenUnlockedFunctions(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public long getScreenUnlockedFunctions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void resetUsbGadget() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void resetUsbPort(String str, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iUsbOperationInternal);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iUsbOperationInternal);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean enableUsbData(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iUsbOperationInternal);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iUsbOperationInternal);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void enableUsbDataWhileDocked(String str, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iUsbOperationInternal);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iUsbOperationInternal);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int getUsbHalVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public ParcelFileDescriptor getControlFd(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public List<ParcelableUsbPort> getPorts() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ParcelableUsbPort.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ParcelableUsbPort.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public UsbPortStatus getPortStatus(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsbPortStatus) obtain2.readTypedObject(UsbPortStatus.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsbPortStatus) parcelObtain2.readTypedObject(UsbPortStatus.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean isModeChangeSupported(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setPortRoles(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void enableLimitPowerTransfer(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iUsbOperationInternal);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iUsbOperationInternal);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void enableContaminantDetection(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setUsbDeviceConnectionHandler(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDisplayPortAltModeInfoListener);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDisplayPortAltModeInfoListener);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDisplayPortAltModeInfoListener);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDisplayPortAltModeInfoListener);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean isUsbBlocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public boolean isSupportDexRestrict() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int restrictUsbHostInterface(boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void setUsbHiddenMenuState(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void semSetMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void semSetDevicePackage(UsbDevice usbDevice, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public void semGrantDevicePermission(UsbDevice usbDevice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int semGetPowerRoleStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.usb.IUsbManager
             public int semGetDataRoleStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

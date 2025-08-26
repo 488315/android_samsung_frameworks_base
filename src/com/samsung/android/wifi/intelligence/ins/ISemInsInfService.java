@@ -40,9 +40,9 @@ public interface ISemInsInfService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInsInfService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInsInfService)) {
-                return (ISemInsInfService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInsInfService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInsInfService)) {
+                return (ISemInsInfService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

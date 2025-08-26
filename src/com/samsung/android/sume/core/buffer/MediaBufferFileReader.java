@@ -44,9 +44,7 @@ public class MediaBufferFileReader {
         List<String> list = (List) Arrays.stream(ColorFormat.values()).skip(0L).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String lowerCase;
-                lowerCase = ((ColorFormat) obj).name().toLowerCase(Locale.ROOT);
-                return lowerCase;
+                return ((ColorFormat) obj).name().toLowerCase(Locale.ROOT);
             }
         }).collect(Collectors.toList());
         imageExt = list;
@@ -69,7 +67,7 @@ public class MediaBufferFileReader {
 
     public MediaBufferFileReader setShape(Shape shape) {
         if (this.format == null) {
-            this.format = m9512x86d04131(this.paths.get(0));
+            this.format = m9525x86d04131(this.paths.get(0));
         }
         this.format = this.format.toMutableFormat().setShape(shape).toMediaFormat();
         return this;
@@ -86,19 +84,19 @@ public class MediaBufferFileReader {
     }
 
     private MediaFormat getImageFormatFromName(String str, String str2) {
-        ColorFormat valueOf;
-        MutableMediaFormat mutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
+        ColorFormat colorFormatValueOf;
+        MutableMediaFormat mutableMediaFormatMutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
         ColorFormat colorFormat = ColorFormat.NONE;
         if (Arrays.asList("jpg", "heic", "png", "jpeg").contains(str2.toLowerCase())) {
-            mutableImageOf.setMediaType(MediaType.COMPRESSED_IMAGE);
+            mutableMediaFormatMutableImageOf.setMediaType(MediaType.COMPRESSED_IMAGE);
         } else {
-            mutableImageOf.setMediaType(MediaType.RAW_IMAGE);
+            mutableMediaFormatMutableImageOf.setMediaType(MediaType.RAW_IMAGE);
             if ("i420".equals(str2)) {
-                valueOf = ColorFormat.YUV420;
+                colorFormatValueOf = ColorFormat.YUV420;
             } else {
-                valueOf = ColorFormat.valueOf(str2.toUpperCase(Locale.ROOT));
+                colorFormatValueOf = ColorFormat.valueOf(str2.toUpperCase(Locale.ROOT));
             }
-            colorFormat = valueOf;
+            colorFormat = colorFormatValueOf;
             Matcher matcher = Pattern.compile("\\d+x\\d+").matcher(str);
             if (matcher.find()) {
                 Integer[] numArr = (Integer[]) Arrays.stream(matcher.group().split("x")).map(new MediaBufferFileReader$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda1
@@ -107,15 +105,15 @@ public class MediaBufferFileReader {
                         return MediaBufferFileReader.lambda$getImageFormatFromName$1(i);
                     }
                 });
-                mutableImageOf.setCols(numArr[0].intValue());
-                mutableImageOf.setRows(numArr[1].intValue());
+                mutableMediaFormatMutableImageOf.setCols(numArr[0].intValue());
+                mutableMediaFormatMutableImageOf.setRows(numArr[1].intValue());
             } else {
                 throw new UnsupportedOperationException("not supported yet");
             }
         }
-        mutableImageOf.setColorFormat(colorFormat);
-        mutableImageOf.setDataType(DataType.of(DataType.U8, colorFormat.getChannels()));
-        return mutableImageOf.toMediaFormat();
+        mutableMediaFormatMutableImageOf.setColorFormat(colorFormat);
+        mutableMediaFormatMutableImageOf.setDataType(DataType.of(DataType.U8, colorFormat.getChannels()));
+        return mutableMediaFormatMutableImageOf.toMediaFormat();
     }
 
     static /* synthetic */ Integer[] lambda$getImageFormatFromName$1(int i) {
@@ -123,15 +121,15 @@ public class MediaBufferFileReader {
     }
 
     private MediaFormat getVideoFormatFromName(String str, String str2) {
-        MutableMediaFormat mutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
-        mutableImageOf.setMediaType(MediaType.COMPRESSED_VIDEO);
-        mutableImageOf.setDataType(DataType.U8C3);
-        return mutableImageOf.toMediaFormat();
+        MutableMediaFormat mutableMediaFormatMutableImageOf = MediaFormat.mutableImageOf(new Object[0]);
+        mutableMediaFormatMutableImageOf.setMediaType(MediaType.COMPRESSED_VIDEO);
+        mutableMediaFormatMutableImageOf.setDataType(DataType.U8C3);
+        return mutableMediaFormatMutableImageOf.toMediaFormat();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: getFormatFromName, reason: merged with bridge method [inline-methods] */
-    public MediaFormat m9512x86d04131(String str) {
+    public MediaFormat m9525x86d04131(String str) {
         String extension = getExtension(str);
         if (isImage(extension)) {
             return getImageFormatFromName(str, extension);
@@ -146,27 +144,26 @@ public class MediaBufferFileReader {
         return str.substring(str.lastIndexOf(MediaMetrics.SEPARATOR) + 1).toLowerCase(Locale.ROOT);
     }
 
-    private static ExifInterface readExif(String str) {
+    private static ExifInterface readExif(String str) throws IOException {
         Exception e;
         ExifInterface exifInterface;
-        FileInputStream fileInputStream;
         try {
-            fileInputStream = new FileInputStream(str);
+            FileInputStream fileInputStream = new FileInputStream(str);
             try {
                 exifInterface = new ExifInterface(fileInputStream);
+                try {
+                    fileInputStream.close();
+                    return exifInterface;
+                } catch (Exception e2) {
+                    e = e2;
+                    e.printStackTrace();
+                    return exifInterface;
+                }
             } finally {
             }
-        } catch (Exception e2) {
-            e = e2;
-            exifInterface = null;
-        }
-        try {
-            fileInputStream.close();
-            return exifInterface;
         } catch (Exception e3) {
             e = e3;
-            e.printStackTrace();
-            return exifInterface;
+            exifInterface = null;
         }
     }
 
@@ -182,7 +179,7 @@ public class MediaBufferFileReader {
         List list = (List) this.paths.stream().map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda8
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MediaBufferFileReader.this.m9513xa4e33a0c((String) obj);
+                return this.f$0.m9526xa4e33a0c((String) obj);
             }
         }).filter(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda9
             @Override // java.util.function.Predicate
@@ -197,11 +194,11 @@ public class MediaBufferFileReader {
     }
 
     /* renamed from: lambda$read$7$com-samsung-android-sume-core-buffer-MediaBufferFileReader, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9513xa4e33a0c(final String str) {
+    /* synthetic */ MediaBuffer m9526xa4e33a0c(final String str) throws IOException {
         final MediaFormat mediaFormat = (MediaFormat) Optional.ofNullable(this.format).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
-                return MediaBufferFileReader.this.m9512x86d04131(str);
+                return this.f$0.m9525x86d04131(str);
             }
         });
         int i = AnonymousClass1.$SwitchMap$com$samsung$android$sume$core$types$MediaType[mediaFormat.getMediaType().ordinal()];
@@ -213,7 +210,7 @@ public class MediaBufferFileReader {
                 return (MediaBuffer) Optional.ofNullable(this.compressedMediaReader).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda6
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
-                        return MediaBufferFileReader.lambda$read$5(MediaFormat.this, str, (BiFunction) obj);
+                        return MediaBufferFileReader.lambda$read$5(mediaFormat, str, (BiFunction) obj);
                     }
                 }).orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda7
                     @Override // java.util.function.Supplier
@@ -227,7 +224,7 @@ public class MediaBufferFileReader {
         MediaBuffer mediaBuffer = (MediaBuffer) Optional.ofNullable(this.compressedMediaReader).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MediaBufferFileReader.lambda$read$3(MediaFormat.this, str, (BiFunction) obj);
+                return MediaBufferFileReader.lambda$read$3(mediaFormat, str, (BiFunction) obj);
             }
         }).orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda5
             @Override // java.util.function.Supplier
@@ -235,10 +232,10 @@ public class MediaBufferFileReader {
                 return MediaBufferFileReader.lambda$read$4();
             }
         });
-        ExifInterface readExif = readExif(str);
-        if (readExif != null) {
+        ExifInterface exif = readExif(str);
+        if (exif != null) {
             int i2 = 0;
-            switch (readExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0)) {
+            switch (exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0)) {
                 case 3:
                 case 4:
                     i2 = 180;
@@ -257,7 +254,7 @@ public class MediaBufferFileReader {
             }
             Consumer<ExifInterface> consumer = this.exifConsumer;
             if (consumer != null) {
-                consumer.accept(readExif);
+                consumer.accept(exif);
             }
         }
         return mediaBuffer;
@@ -301,18 +298,18 @@ public class MediaBufferFileReader {
         return new IllegalArgumentException("not implement internal compress image reader yet, plz should set explicitly");
     }
 
-    private MediaBuffer readRawImage(MediaFormat mediaFormat, String str) {
+    private MediaBuffer readRawImage(MediaFormat mediaFormat, String str) throws IOException {
         File file = new File(str);
         Def.check(file.exists(), "not exist input file " + str, new Object[0]);
         Def.require(file.length() >= mediaFormat.size());
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
-                ByteBuffer order = ByteBuffer.allocateDirect((int) file.length()).order(ByteOrder.nativeOrder());
-                fileInputStream.getChannel().read(order);
-                MediaBuffer of = MediaBuffer.of(mediaFormat, order);
+                ByteBuffer byteBufferOrder = ByteBuffer.allocateDirect((int) file.length()).order(ByteOrder.nativeOrder());
+                fileInputStream.getChannel().read(byteBufferOrder);
+                MediaBuffer mediaBufferOf = MediaBuffer.of(mediaFormat, byteBufferOrder);
                 fileInputStream.close();
-                return of;
+                return mediaBufferOf;
             } finally {
             }
         } catch (IOException e) {

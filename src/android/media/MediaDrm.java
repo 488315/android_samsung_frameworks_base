@@ -156,7 +156,7 @@ public final class MediaDrm implements AutoCloseable {
     /* JADX INFO: Access modifiers changed from: private */
     public static final native byte[] encryptNative(MediaDrm mediaDrm, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
-    private native KeyRequest getKeyRequestNative(byte[] bArr, byte[] bArr2, String str, int i, HashMap<String, String> hashMap) throws NotProvisionedException;
+    private native KeyRequest getKeyRequestNative(byte[] bArr, byte[] bArr2, String str, int i, HashMap<String, String> map) throws NotProvisionedException;
 
     public static final int getMaxSecurityLevel() {
         return 6;
@@ -174,7 +174,7 @@ public final class MediaDrm implements AutoCloseable {
 
     private final native void native_setup(Object obj, byte[] bArr, String str);
 
-    private native byte[] openSessionNative(int i) throws NotProvisionedException, ResourceBusyException;
+    private native byte[] openSessionNative(int i) throws ResourceBusyException, NotProvisionedException;
 
     private native Certificate provideProvisionResponseNative(byte[] bArr) throws DeniedByServerException;
 
@@ -223,7 +223,7 @@ public final class MediaDrm implements AutoCloseable {
 
     public final native void native_release();
 
-    public native byte[] provideKeyResponse(byte[] bArr, byte[] bArr2) throws NotProvisionedException, DeniedByServerException;
+    public native byte[] provideKeyResponse(byte[] bArr, byte[] bArr2) throws DeniedByServerException, NotProvisionedException;
 
     public native HashMap<String, String> queryKeyStatus(byte[] bArr);
 
@@ -293,9 +293,9 @@ public final class MediaDrm implements AutoCloseable {
     }
 
     private Handler createHandler() {
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            return new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            return new Handler(looperMyLooper);
         }
         Looper mainLooper = Looper.getMainLooper();
         if (mainLooper != null) {
@@ -322,11 +322,11 @@ public final class MediaDrm implements AutoCloseable {
         };
         this.mListenerMap = new ConcurrentHashMap();
         this.mPlaybackComponentMap = new ConcurrentHashMap();
-        String currentOpPackageName = ActivityThread.currentOpPackageName();
-        this.mAppPackageName = currentOpPackageName;
-        native_setup(new WeakReference(this), getByteArrayFromUUID(uuid), currentOpPackageName);
+        String strCurrentOpPackageName = ActivityThread.currentOpPackageName();
+        this.mAppPackageName = strCurrentOpPackageName;
+        native_setup(new WeakReference(this), getByteArrayFromUUID(uuid), strCurrentOpPackageName);
         this.mContext = ActivityThread.currentApplication();
-        if (!currentOpPackageName.contains("rkpdapp")) {
+        if (!strCurrentOpPackageName.contains("rkpdapp")) {
             Intent intent = new Intent();
             intent.setPackage("com.samsung.drmboost");
             intent.setAction("com.samsung.intent.action.START_MY_SERVICE");
@@ -583,7 +583,7 @@ public final class MediaDrm implements AutoCloseable {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaDrm.this.lambda$createOnEventListener$0(onEventListener, (MediaDrm.ListenerArgs) obj);
+                this.f$0.lambda$createOnEventListener$0(onEventListener, (MediaDrm.ListenerArgs) obj);
             }
         };
     }
@@ -603,7 +603,7 @@ public final class MediaDrm implements AutoCloseable {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaDrm.this.lambda$createOnKeyStatusChangeListener$1(onKeyStatusChangeListener, (MediaDrm.ListenerArgs) obj);
+                this.f$0.lambda$createOnKeyStatusChangeListener$1(onKeyStatusChangeListener, (MediaDrm.ListenerArgs) obj);
             }
         };
     }
@@ -624,7 +624,7 @@ public final class MediaDrm implements AutoCloseable {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaDrm.this.lambda$createOnExpirationUpdateListener$2(onExpirationUpdateListener, (MediaDrm.ListenerArgs) obj);
+                this.f$0.lambda$createOnExpirationUpdateListener$2(onExpirationUpdateListener, (MediaDrm.ListenerArgs) obj);
             }
         };
     }
@@ -644,7 +644,7 @@ public final class MediaDrm implements AutoCloseable {
         return new Consumer() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda7
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaDrm.this.lambda$createOnSessionLostStateListener$3(onSessionLostStateListener, (MediaDrm.ListenerArgs) obj);
+                this.f$0.lambda$createOnSessionLostStateListener$3(onSessionLostStateListener, (MediaDrm.ListenerArgs) obj);
             }
         };
     }
@@ -689,15 +689,15 @@ public final class MediaDrm implements AutoCloseable {
     }
 
     private List<KeyStatus> keyStatusListFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        ArrayList arrayList = new ArrayList(readInt);
+        int i = parcel.readInt();
+        ArrayList arrayList = new ArrayList(i);
         while (true) {
-            int i = readInt - 1;
-            if (readInt <= 0) {
+            int i2 = i - 1;
+            if (i <= 0) {
                 return arrayList;
             }
             arrayList.add(new KeyStatus(parcel.createByteArray(), parcel.readInt()));
-            readInt = i;
+            i = i2;
         }
     }
 
@@ -716,7 +716,7 @@ public final class MediaDrm implements AutoCloseable {
                     listenerWithExecutor.mExecutor.execute(new Runnable() { // from class: android.media.MediaDrm$$ExternalSyntheticLambda8
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaDrm.lambda$postEventFromNative$4(MediaDrm.this, i2, i3, bArr, bArr2, j, list, z, listenerWithExecutor);
+                            MediaDrm.lambda$postEventFromNative$4(this.f$0, i2, i3, bArr, bArr2, j, list, z, listenerWithExecutor);
                         }
                     });
                     break;
@@ -736,14 +736,14 @@ public final class MediaDrm implements AutoCloseable {
         }
     }
 
-    public byte[] openSession() throws NotProvisionedException, ResourceBusyException {
+    public byte[] openSession() throws ResourceBusyException, NotProvisionedException {
         return openSession(getMaxSecurityLevel());
     }
 
-    public byte[] openSession(int i) throws NotProvisionedException, ResourceBusyException {
-        byte[] openSessionNative = openSessionNative(i);
-        this.mPlaybackComponentMap.put(ByteBuffer.wrap(openSessionNative), new PlaybackComponent(openSessionNative));
-        return openSessionNative;
+    public byte[] openSession(int i) throws ResourceBusyException, NotProvisionedException {
+        byte[] bArrOpenSessionNative = openSessionNative(i);
+        this.mPlaybackComponentMap.put(ByteBuffer.wrap(bArrOpenSessionNative), new PlaybackComponent(bArrOpenSessionNative));
+        return bArrOpenSessionNative;
     }
 
     public void closeSession(byte[] bArr) {
@@ -789,29 +789,29 @@ public final class MediaDrm implements AutoCloseable {
         }
     }
 
-    public KeyRequest getKeyRequest(byte[] bArr, byte[] bArr2, String str, int i, HashMap<String, String> hashMap) throws NotProvisionedException {
-        HashMap<String, String> hashMap2;
-        if (hashMap == null) {
-            hashMap2 = new HashMap<>();
+    public KeyRequest getKeyRequest(byte[] bArr, byte[] bArr2, String str, int i, HashMap<String, String> map) throws NotProvisionedException {
+        HashMap<String, String> map2;
+        if (map == null) {
+            map2 = new HashMap<>();
         } else {
-            hashMap2 = new HashMap<>(hashMap);
+            map2 = new HashMap<>(map);
         }
         byte[] newestAvailablePackageCertificateRawBytes = getNewestAvailablePackageCertificateRawBytes();
         byte[] digestBytes = newestAvailablePackageCertificateRawBytes != null ? getDigestBytes(newestAvailablePackageCertificateRawBytes, "SHA-256") : null;
         if (digestBytes != null) {
-            hashMap2.put("package_certificate_hash_bytes", Base64.getEncoder().encodeToString(digestBytes));
+            map2.put("package_certificate_hash_bytes", Base64.getEncoder().encodeToString(digestBytes));
         }
-        return getKeyRequestNative(bArr, bArr2, str, i, hashMap2);
+        return getKeyRequestNative(bArr, bArr2, str, i, map2);
     }
 
     private byte[] getNewestAvailablePackageCertificateRawBytes() {
         PackageInfo packageInfo;
-        Application currentApplication = ActivityThread.currentApplication();
-        if (currentApplication == null) {
+        Application applicationCurrentApplication = ActivityThread.currentApplication();
+        if (applicationCurrentApplication == null) {
             Log.w(TAG, "pkg cert: Application is null");
             return null;
         }
-        PackageManager packageManager = currentApplication.getPackageManager();
+        PackageManager packageManager = applicationCurrentApplication.getPackageManager();
         if (packageManager == null) {
             Log.w(TAG, "pkg cert: PackageManager is null");
             return null;

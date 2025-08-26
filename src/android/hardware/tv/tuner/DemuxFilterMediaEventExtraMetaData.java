@@ -109,17 +109,17 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (AudioExtraMetaData) parcel.readTypedObject(AudioExtraMetaData.CREATOR));
-        } else if (readInt == 2) {
-            _set(readInt, (AudioPresentation[]) parcel.createTypedArray(AudioPresentation.CREATOR));
+        if (i == 1) {
+            _set(i, (AudioExtraMetaData) parcel.readTypedObject(AudioExtraMetaData.CREATOR));
+        } else if (i == 2) {
+            _set(i, (AudioPresentation[]) parcel.createTypedArray(AudioPresentation.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 
@@ -140,11 +140,11 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
             return 0;
         }
         if (obj instanceof Object[]) {
-            int i = 0;
+            int iDescribeContents = 0;
             for (Object obj2 : (Object[]) obj) {
-                i |= describeContents(obj2);
+                iDescribeContents |= describeContents(obj2);
             }
-            return i;
+            return iDescribeContents;
         }
         if (obj instanceof Parcelable) {
             return ((Parcelable) obj).describeContents();

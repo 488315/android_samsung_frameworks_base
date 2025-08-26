@@ -180,9 +180,9 @@ public interface IWificond extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWificond.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWificond)) {
-                return (IWificond) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWificond.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWificond)) {
+                return (IWificond) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -246,46 +246,46 @@ public interface IWificond extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IApInterface createApInterface = createApInterface(readString);
+                    IApInterface iApInterfaceCreateApInterface = createApInterface(string);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createApInterface);
+                    parcel2.writeStrongInterface(iApInterfaceCreateApInterface);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IClientInterface createClientInterface = createClientInterface(readString2);
+                    IClientInterface iClientInterfaceCreateClientInterface = createClientInterface(string2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createClientInterface);
+                    parcel2.writeStrongInterface(iClientInterfaceCreateClientInterface);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean tearDownApInterface = tearDownApInterface(readString3);
+                    boolean zTearDownApInterface = tearDownApInterface(string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(tearDownApInterface);
+                    parcel2.writeBoolean(zTearDownApInterface);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean tearDownClientInterface = tearDownClientInterface(readString4);
+                    boolean zTearDownClientInterface = tearDownClientInterface(string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(tearDownClientInterface);
+                    parcel2.writeBoolean(zTearDownClientInterface);
                     return true;
                 case 5:
                     tearDownInterfaces();
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    List<IBinder> GetClientInterfaces = GetClientInterfaces();
+                    List<IBinder> listGetClientInterfaces = GetClientInterfaces();
                     parcel2.writeNoException();
-                    parcel2.writeBinderList(GetClientInterfaces);
+                    parcel2.writeBinderList(listGetClientInterfaces);
                     return true;
                 case 7:
-                    List<IBinder> GetApInterfaces = GetApInterfaces();
+                    List<IBinder> listGetApInterfaces = GetApInterfaces();
                     parcel2.writeNoException();
-                    parcel2.writeBinderList(GetApInterfaces);
+                    parcel2.writeBinderList(listGetApInterfaces);
                     return true;
                 case 8:
                     int[] available2gChannels = getAvailable2gChannels();
@@ -313,29 +313,29 @@ public interface IWificond extends IInterface {
                     parcel2.writeIntArray(available60gChannels);
                     return true;
                 case 13:
-                    IInterfaceEventCallback asInterface = IInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInterfaceEventCallback iInterfaceEventCallbackAsInterface = IInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    RegisterCallback(asInterface);
+                    RegisterCallback(iInterfaceEventCallbackAsInterface);
                     return true;
                 case 14:
-                    IInterfaceEventCallback asInterface2 = IInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInterfaceEventCallback iInterfaceEventCallbackAsInterface2 = IInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    UnregisterCallback(asInterface2);
+                    UnregisterCallback(iInterfaceEventCallbackAsInterface2);
                     return true;
                 case 15:
-                    IWificondEventCallback asInterface3 = IWificondEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWificondEventCallback iWificondEventCallbackAsInterface = IWificondEventCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerWificondEventCallback(asInterface3);
+                    registerWificondEventCallback(iWificondEventCallbackAsInterface);
                     return true;
                 case 16:
-                    IWificondEventCallback asInterface4 = IWificondEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWificondEventCallback iWificondEventCallbackAsInterface2 = IWificondEventCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterWificondEventCallback(asInterface4);
+                    unregisterWificondEventCallback(iWificondEventCallbackAsInterface2);
                     return true;
                 case 17:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    DeviceWiphyCapabilities deviceWiphyCapabilities = getDeviceWiphyCapabilities(readString5);
+                    DeviceWiphyCapabilities deviceWiphyCapabilities = getDeviceWiphyCapabilities(string5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(deviceWiphyCapabilities, 1);
                     return true;
@@ -365,259 +365,259 @@ public interface IWificond extends IInterface {
 
             @Override // android.net.wifi.nl80211.IWificond
             public IApInterface createApInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IApInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IApInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public IClientInterface createClientInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IClientInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IClientInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public boolean tearDownApInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public boolean tearDownClientInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void tearDownInterfaces() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public List<IBinder> GetClientInterfaces() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createBinderArrayList();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createBinderArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public List<IBinder> GetApInterfaces() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createBinderArrayList();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createBinderArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public int[] getAvailable2gChannels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public int[] getAvailable5gNonDFSChannels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public int[] getAvailableDFSChannels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public int[] getAvailable6gChannels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public int[] getAvailable60gChannels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void RegisterCallback(IInterfaceEventCallback iInterfaceEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInterfaceEventCallback);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInterfaceEventCallback);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void UnregisterCallback(IInterfaceEventCallback iInterfaceEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInterfaceEventCallback);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInterfaceEventCallback);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void registerWificondEventCallback(IWificondEventCallback iWificondEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWificondEventCallback);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWificondEventCallback);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void unregisterWificondEventCallback(IWificondEventCallback iWificondEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWificondEventCallback);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWificondEventCallback);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public DeviceWiphyCapabilities getDeviceWiphyCapabilities(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DeviceWiphyCapabilities) obtain2.readTypedObject(DeviceWiphyCapabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DeviceWiphyCapabilities) parcelObtain2.readTypedObject(DeviceWiphyCapabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IWificond
             public void notifyCountryCodeChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWificond.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWificond.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

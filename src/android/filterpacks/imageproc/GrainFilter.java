@@ -92,11 +92,11 @@ public class GrainFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         ImageFormat.create(format.getWidth() / 2, format.getHeight() / 2, 3, 3);
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        Frame newFrame2 = filterContext.getFrameManager().newFrame(format);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        Frame frameNewFrame2 = filterContext.getFrameManager().newFrame(format);
         if (this.mNoiseProgram == null || this.mGrainProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
             updateParameters();
@@ -104,10 +104,10 @@ public class GrainFilter extends Filter {
         if (format.getWidth() != this.mWidth || format.getHeight() != this.mHeight) {
             updateFrameSize(format.getWidth(), format.getHeight());
         }
-        this.mNoiseProgram.process(new Frame[0], newFrame);
-        this.mGrainProgram.process(new Frame[]{pullInput, newFrame}, newFrame2);
-        pushOutput("image", newFrame2);
-        newFrame2.release();
-        newFrame.release();
+        this.mNoiseProgram.process(new Frame[0], frameNewFrame);
+        this.mGrainProgram.process(new Frame[]{framePullInput, frameNewFrame}, frameNewFrame2);
+        pushOutput("image", frameNewFrame2);
+        frameNewFrame2.release();
+        frameNewFrame.release();
     }
 }

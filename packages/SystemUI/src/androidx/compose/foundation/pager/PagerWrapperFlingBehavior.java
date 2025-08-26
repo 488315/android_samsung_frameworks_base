@@ -1,113 +1,109 @@
 package androidx.compose.foundation.pager;
 
 import androidx.compose.foundation.gestures.FlingBehavior;
+import androidx.compose.foundation.gestures.ScrollScope;
 import androidx.compose.foundation.gestures.TargetedFlingBehavior;
+import androidx.compose.foundation.gestures.snapping.SnapFlingBehavior;
+import androidx.compose.runtime.SnapshotMutableIntStateImpl;
+import androidx.compose.runtime.SnapshotMutableStateImpl;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function1;
+import kotlin.math.MathKt__MathJVMKt;
+import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PagerWrapperFlingBehavior implements FlingBehavior {
     public final TargetedFlingBehavior originalFlingBehavior;
     public final PagerState pagerState;
+
+    /* renamed from: androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PagerWrapperFlingBehavior.this.performFling(null, 0.0f, this);
+        }
+    }
 
     public PagerWrapperFlingBehavior(TargetedFlingBehavior targetedFlingBehavior, PagerState pagerState) {
         this.originalFlingBehavior = targetedFlingBehavior;
         this.pagerState = pagerState;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // androidx.compose.foundation.gestures.FlingBehavior
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object performFling(final androidx.compose.foundation.gestures.ScrollScope r5, float r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r4 = this;
-            boolean r0 = r7 instanceof androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1 r0 = (androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1 r0 = new androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$1
-            r0.<init>(r4, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            androidx.compose.foundation.pager.PagerWrapperFlingBehavior r4 = (androidx.compose.foundation.pager.PagerWrapperFlingBehavior) r4
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L4a
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r7)
-            androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$resultVelocity$1$1 r7 = new androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$resultVelocity$1$1
-            r7.<init>()
-            r0.L$0 = r4
-            r0.label = r3
-            androidx.compose.foundation.gestures.TargetedFlingBehavior r2 = r4.originalFlingBehavior
-            androidx.compose.foundation.gestures.snapping.SnapFlingBehavior r2 = (androidx.compose.foundation.gestures.snapping.SnapFlingBehavior) r2
-            java.lang.Object r7 = r2.performFling(r5, r6, r7, r0)
-            if (r7 != r1) goto L4a
-            return r1
-        L4a:
-            java.lang.Number r7 = (java.lang.Number) r7
-            float r5 = r7.floatValue()
-            androidx.compose.foundation.pager.PagerState r6 = r4.pagerState
-            float r6 = r6.getCurrentPageOffsetFraction()
-            r7 = 0
-            int r6 = (r6 > r7 ? 1 : (r6 == r7 ? 0 : -1))
-            androidx.compose.foundation.pager.PagerState r4 = r4.pagerState
-            if (r6 != 0) goto L5e
-            goto L97
-        L5e:
-            float r6 = r4.getCurrentPageOffsetFraction()
-            float r6 = java.lang.Math.abs(r6)
-            double r0 = (double) r6
-            r2 = 4562254508917369340(0x3f50624dd2f1a9fc, double:0.001)
-            int r6 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r6 >= 0) goto L97
-            int r6 = r4.getCurrentPage()
-            androidx.compose.foundation.gestures.ScrollableState r0 = r4.scrollableState
-            boolean r0 = r0.isScrollInProgress()
-            if (r0 == 0) goto L92
-            androidx.compose.runtime.MutableState r0 = r4.pagerLayoutInfoState
-            androidx.compose.runtime.SnapshotMutableStateImpl r0 = (androidx.compose.runtime.SnapshotMutableStateImpl) r0
-            java.lang.Object r0 = r0.getValue()
-            androidx.compose.foundation.pager.PagerMeasureResult r0 = (androidx.compose.foundation.pager.PagerMeasureResult) r0
-            kotlinx.coroutines.CoroutineScope r0 = r0.coroutineScope
-            androidx.compose.foundation.pager.PagerState$requestScrollToPage$1 r1 = new androidx.compose.foundation.pager.PagerState$requestScrollToPage$1
-            r2 = 0
-            r1.<init>(r4, r2)
-            r3 = 3
-            kotlinx.coroutines.BuildersKt.launch$default(r0, r2, r2, r1, r3)
-        L92:
-            r0 = 0
-            r4.snapToItem$foundation_release(r7, r0, r6)
-            goto L9a
-        L97:
-            r4.getCurrentPageOffsetFraction()
-        L9a:
-            java.lang.Float r4 = new java.lang.Float
-            r4.<init>(r5)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.pager.PagerWrapperFlingBehavior.performFling(androidx.compose.foundation.gestures.ScrollScope, float, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object performFling(final ScrollScope scrollScope, float f, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objPerformFling = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objPerformFling);
+            Function1 function1 = new Function1() { // from class: androidx.compose.foundation.pager.PagerWrapperFlingBehavior$performFling$resultVelocity$1$1
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                {
+                    super(1);
+                }
+
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj) {
+                    int currentPage = this.this$0.pagerState.getCurrentPage() + MathKt__MathJVMKt.roundToInt(this.this$0.pagerState.getPageSizeWithSpacing$foundation_release() != 0 ? ((Number) obj).floatValue() / this.this$0.pagerState.getPageSizeWithSpacing$foundation_release() : 0.0f);
+                    PagerState pagerState = this.this$0.pagerState;
+                    ((SnapshotMutableIntStateImpl) pagerState.programmaticScrollTargetPage$delegate).setIntValue(pagerState.coerceInPageRange(currentPage));
+                    return Unit.INSTANCE;
+                }
+            };
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objPerformFling = ((SnapFlingBehavior) this.originalFlingBehavior).performFling(scrollScope, f, function1, anonymousClass1);
+            if (objPerformFling == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (PagerWrapperFlingBehavior) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(objPerformFling);
+        }
+        float fFloatValue = ((Number) objPerformFling).floatValue();
+        float currentPageOffsetFraction = this.pagerState.getCurrentPageOffsetFraction();
+        PagerState pagerState = this.pagerState;
+        if (currentPageOffsetFraction != 0.0f && Math.abs(pagerState.getCurrentPageOffsetFraction()) < 0.001d) {
+            int currentPage = pagerState.getCurrentPage();
+            if (pagerState.scrollableState.isScrollInProgress()) {
+                BuildersKt.launch$default(((PagerMeasureResult) ((SnapshotMutableStateImpl) pagerState.pagerLayoutInfoState).getValue()).coroutineScope, null, null, new PagerState$requestScrollToPage$1(pagerState, null), 3);
+            }
+            pagerState.snapToItem$foundation_release(0.0f, false, currentPage);
+        } else {
+            pagerState.getCurrentPageOffsetFraction();
+        }
+        return new Float(fFloatValue);
     }
 }

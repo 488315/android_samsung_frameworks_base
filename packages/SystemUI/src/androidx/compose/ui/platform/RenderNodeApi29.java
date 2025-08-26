@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.BlendMode;
 import androidx.compose.ui.graphics.ColorFilter;
 import androidx.compose.ui.graphics.CompositingStrategy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RenderNodeApi29 implements DeviceRenderNode {
     public int blendMode;
@@ -24,7 +23,7 @@ public final class RenderNodeApi29 implements DeviceRenderNode {
     }
 
     /* renamed from: applyCompositingStrategy-Qu9p0E8, reason: not valid java name */
-    public final void m709applyCompositingStrategyQu9p0E8(RenderNode renderNode, int i) {
+    public final void m711applyCompositingStrategyQu9p0E8(RenderNode renderNode, int i) {
         CompositingStrategy.Companion.getClass();
         if (i == CompositingStrategy.Offscreen) {
             AndroidPaint androidPaint = this.layerPaint;
@@ -53,12 +52,12 @@ public final class RenderNodeApi29 implements DeviceRenderNode {
             int i3 = this.blendMode;
             BlendMode.Companion.getClass();
             if (i3 == BlendMode.SrcOver && this.colorFilter == null) {
-                m709applyCompositingStrategyQu9p0E8(this.renderNode, this.internalCompositingStrategy);
+                m711applyCompositingStrategyQu9p0E8(this.renderNode, this.internalCompositingStrategy);
                 return;
             }
         }
         RenderNode renderNode = this.renderNode;
         companion.getClass();
-        m709applyCompositingStrategyQu9p0E8(renderNode, i2);
+        m711applyCompositingStrategyQu9p0E8(renderNode, i2);
     }
 }

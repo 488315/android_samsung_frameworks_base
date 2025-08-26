@@ -20,7 +20,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = PluginSubScreen.ACTION, version = 1)
 /* loaded from: classes2.dex */
 public interface PluginSubScreen extends Plugin {
@@ -93,7 +92,6 @@ public interface PluginSubScreen extends Plugin {
     default void requestOpenAppPopup(PendingIntent pendingIntent, boolean z, String str) {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         default View createBatteryView() {
             return null;

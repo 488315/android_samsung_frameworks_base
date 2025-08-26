@@ -16,11 +16,9 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface IMediaSession extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static Object access$000(Parcel parcel, Parcelable.Creator creator) {
             if (parcel.readInt() != 0) {
@@ -137,10 +135,8 @@ public interface IMediaSession extends IInterface {
 
     void unregisterCallbackListener(IMediaControllerCallback iMediaControllerCallback);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMediaSession {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMediaSession {
             public final IBinder mRemote;
 
@@ -155,16 +151,16 @@ public interface IMediaSession extends IInterface {
 
             @Override // android.support.v4.media.session.IMediaSession
             public final void registerCallbackListener(IMediaControllerCallback iMediaControllerCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.support.v4.media.session.IMediaSession");
-                    obtain.writeStrongInterface(iMediaControllerCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.support.v4.media.session.IMediaSession");
+                    parcelObtain.writeStrongInterface(iMediaControllerCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -182,8 +178,8 @@ public interface IMediaSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.support.v4.media.session.IMediaSession");
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IMediaSession)) ? new Proxy(iBinder) : (IMediaSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.support.v4.media.session.IMediaSession");
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMediaSession)) ? new Proxy(iBinder) : (IMediaSession) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -195,39 +191,39 @@ public interface IMediaSession extends IInterface {
                 parcel2.writeString("android.support.v4.media.session.IMediaSession");
                 return true;
             }
-            IMediaControllerCallback iMediaControllerCallback = null;
+            IMediaControllerCallback proxy = null;
             switch (i) {
                 case 1:
                     sendCommand(parcel.readString(), (Bundle) _Parcel.access$000(parcel, Bundle.CREATOR), (MediaSessionCompat.ResultReceiverWrapper) _Parcel.access$000(parcel, MediaSessionCompat.ResultReceiverWrapper.CREATOR));
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    boolean sendMediaButton = sendMediaButton((KeyEvent) _Parcel.access$000(parcel, KeyEvent.CREATOR));
+                    boolean zSendMediaButton = sendMediaButton((KeyEvent) _Parcel.access$000(parcel, KeyEvent.CREATOR));
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendMediaButton ? 1 : 0);
+                    parcel2.writeInt(zSendMediaButton ? 1 : 0);
                     return true;
                 case 3:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("android.support.v4.media.session.IMediaControllerCallback");
-                        iMediaControllerCallback = (queryLocalInterface == null || !(queryLocalInterface instanceof IMediaControllerCallback)) ? new IMediaControllerCallback.Stub.Proxy(readStrongBinder) : (IMediaControllerCallback) queryLocalInterface;
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder != null) {
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("android.support.v4.media.session.IMediaControllerCallback");
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMediaControllerCallback)) ? new IMediaControllerCallback.Stub.Proxy(strongBinder) : (IMediaControllerCallback) iInterfaceQueryLocalInterface;
                     }
-                    registerCallbackListener(iMediaControllerCallback);
+                    registerCallbackListener(proxy);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    if (readStrongBinder2 != null) {
-                        IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("android.support.v4.media.session.IMediaControllerCallback");
-                        iMediaControllerCallback = (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IMediaControllerCallback)) ? new IMediaControllerCallback.Stub.Proxy(readStrongBinder2) : (IMediaControllerCallback) queryLocalInterface2;
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    if (strongBinder2 != null) {
+                        IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("android.support.v4.media.session.IMediaControllerCallback");
+                        proxy = (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IMediaControllerCallback)) ? new IMediaControllerCallback.Stub.Proxy(strongBinder2) : (IMediaControllerCallback) iInterfaceQueryLocalInterface2;
                     }
-                    unregisterCallbackListener(iMediaControllerCallback);
+                    unregisterCallbackListener(proxy);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    boolean isTransportControlEnabled = isTransportControlEnabled();
+                    boolean zIsTransportControlEnabled = isTransportControlEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isTransportControlEnabled ? 1 : 0);
+                    parcel2.writeInt(zIsTransportControlEnabled ? 1 : 0);
                     return true;
                 case 6:
                     String packageName = getPackageName();
@@ -255,17 +251,17 @@ public interface IMediaSession extends IInterface {
                     _Parcel.writeTypedObject(parcel2, volumeAttributes, 1);
                     return true;
                 case 11:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.readString();
-                    adjustVolume(readInt, readInt2);
+                    adjustVolume(i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.readString();
-                    setVolumeTo(readInt3, readInt4);
+                    setVolumeTo(i5, i6);
                     parcel2.writeNoException();
                     return true;
                 case 13:

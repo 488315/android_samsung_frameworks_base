@@ -3,35 +3,53 @@ package com.android.systemui.navigationbar.gestural;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.ActivityTaskManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.graphics.PointF;
+import android.hardware.input.InputManager;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.RemoteException;
+import android.os.SystemClock;
+import android.os.UserHandle;
+import android.util.Log;
+import android.view.Choreographer;
+import android.view.InputEvent;
 import android.view.InputMonitor;
 import android.view.MotionEvent;
 import android.view.animation.DecelerateInterpolator;
 import androidx.appcompat.app.AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0;
+import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.android.systemui.assist.AssistManager;
+import com.android.systemui.assist.ui.DefaultUiController;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.navigationbar.NavBarHelper;
 import com.android.systemui.navigationbar.store.NavBarStateManager;
+import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import com.android.systemui.recents.LauncherProxyService;
 import com.android.systemui.settings.UserTracker;
+import com.android.systemui.settings.UserTrackerImpl;
+import com.android.systemui.shared.system.ActivityManagerWrapper;
+import com.android.systemui.shared.system.InputChannelCompat$InputEventListener;
 import com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver;
+import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.util.SettingsHelper;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CornerGestureHandler {
     public final String ACTION_LOCK_TASK_MODE;
@@ -66,7 +84,6 @@ public final class CornerGestureHandler {
     public final UserTracker userTracker;
     public final VibratorHelper vibratorHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,15 +114,15 @@ public final class CornerGestureHandler {
         this.downPos = new PointF();
         this.touchSlop = context.getResources().getDimension(R.dimen.gestures_assistant_drag_threshold);
         this.timeFraction = 1.0f;
-        this.progressTouchSlop = context.getResources().getDimension(android.R.dimen.secondary_waterfall_display_left_edge_size) * 0.5f;
+        this.progressTouchSlop = context.getResources().getDimension(android.R.dimen.secondary_waterfall_display_right_edge_size) * 0.5f;
         this.FLAG_NAVSTAR_ASSISTANT_ENABLED = 8;
         this.ACTION_LOCK_TASK_MODE = "com.samsung.android.action.LOCK_TASK_MODE";
         this.broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$broadcastReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, CornerGestureHandler.this.ACTION_LOCK_TASK_MODE)) {
-                    CornerGestureHandler.this.isInLockTaskMode = intent.getBooleanExtra("enable", false);
-                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isInLockTaskMode=", "CornerGestureHandler", CornerGestureHandler.this.isInLockTaskMode);
+                if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, this.this$0.ACTION_LOCK_TASK_MODE)) {
+                    this.this$0.isInLockTaskMode = intent.getBooleanExtra("enable", false);
+                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isInLockTaskMode=", "CornerGestureHandler", this.this$0.isInLockTaskMode);
                 }
             }
         };
@@ -115,22 +132,22 @@ public final class CornerGestureHandler {
 
     public final void cancelGesture(MotionEvent motionEvent) {
         if (this.allowGesture && !this.startAssistant) {
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(this.lastProgress, 0.0f);
-            ofFloat.setDuration(300L);
-            ofFloat.setInterpolator(new DecelerateInterpolator(2.0f));
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$cancelGesture$1$1
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.lastProgress, 0.0f);
+            valueAnimatorOfFloat.setDuration(300L);
+            valueAnimatorOfFloat.setInterpolator(new DecelerateInterpolator(2.0f));
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$cancelGesture$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ((AssistManager) CornerGestureHandler.this.assistManagerLazy.get()).onInvocationProgress(((Float) ofFloat.getAnimatedValue()).floatValue());
+                    ((AssistManager) this.this$0.assistManagerLazy.get()).onInvocationProgress(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$cancelGesture$1$2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$cancelGesture$1$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    ((AssistManager) CornerGestureHandler.this.assistManagerLazy.get()).onInvocationProgress(0.0f);
+                    ((AssistManager) this.this$0.assistManagerLazy.get()).onInvocationProgress(0.0f);
                 }
             });
-            ofFloat.start();
+            valueAnimatorOfFloat.start();
         }
         this.timeFraction = 1.0f;
         this.allowGesture = false;
@@ -138,119 +155,177 @@ public final class CornerGestureHandler {
         this.isPilfered = false;
         this.lastProgress = 0.0f;
         this.distance = 0.0f;
-        MotionEvent obtain = MotionEvent.obtain(motionEvent);
-        obtain.setAction(3);
-        obtain.recycle();
+        MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+        motionEventObtain.setAction(3);
+        motionEventObtain.recycle();
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(16:0|1|(4:7|(1:9)|10|(13:16|17|(1:19)|20|(1:22)|23|(5:25|(1:27)(1:32)|28|(1:30)|31)|33|34|35|(1:37)|38|39))|43|17|(0)|20|(0)|23|(0)|33|34|35|(0)|38|39) */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateIsEnabled() {
-        /*
-            r14 = this;
-            dagger.Lazy r0 = r14.assistManagerLazy
-            java.lang.Object r0 = r0.get()
-            com.android.systemui.assist.AssistManager r0 = (com.android.systemui.assist.AssistManager) r0
-            com.android.systemui.settings.UserTracker r1 = r14.userTracker
-            com.android.systemui.settings.UserTrackerImpl r1 = (com.android.systemui.settings.UserTrackerImpl) r1
-            int r1 = r1.getUserId()
-            com.android.internal.app.AssistUtils r0 = r0.mAssistUtils
-            android.content.ComponentName r0 = r0.getAssistComponentForUser(r1)
-            r1 = 0
-            r2 = 1
-            r3 = 0
-            if (r0 == 0) goto L43
-            boolean r0 = r14.isAttached
-            if (r0 == 0) goto L43
-            com.android.systemui.navigationbar.store.NavBarStateManager r0 = r14.navBarStateManager
-            com.android.systemui.navigationbar.store.NavBarStateManagerImpl r0 = (com.android.systemui.navigationbar.store.NavBarStateManagerImpl) r0
-            boolean r0 = r0.isGestureMode()
-            if (r0 != 0) goto L43
-            com.android.systemui.navigationbar.NavBarHelper r0 = r14.navBarHelper
-            if (r0 != 0) goto L2e
-            r0 = r3
-        L2e:
-            boolean r0 = r0.mLongPressHomeEnabled
-            if (r0 == 0) goto L43
-            boolean r0 = com.android.systemui.BasicRune.SUPPORT_AI_AGENT
-            if (r0 == 0) goto L41
-            com.android.systemui.util.SettingsHelper r0 = r14.settingsHelper
-            int r0 = r0.getNavigationBarSPluginFlags()
-            int r4 = r14.FLAG_NAVSTAR_ASSISTANT_ENABLED
-            r0 = r0 & r4
-            if (r0 == 0) goto L43
-        L41:
-            r0 = r2
-            goto L44
-        L43:
-            r0 = r1
-        L44:
-            com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver r4 = r14.inputEventReceiver
-            if (r4 == 0) goto L4b
-            r4.dispose()
-        L4b:
-            r14.inputEventReceiver = r3
-            android.view.InputMonitor r4 = r14.inputMonitor
-            if (r4 == 0) goto L54
-            r4.dispose()
-        L54:
-            r14.inputMonitor = r3
-            com.android.systemui.navigationbar.gestural.CornerGestureHandler$broadcastReceiver$1 r4 = r14.broadcastReceiver
-            com.android.systemui.broadcast.BroadcastDispatcher r5 = r14.broadcastDispatcher
-            r5.unregisterReceiver(r4)
-            if (r0 == 0) goto La1
-            android.content.Context r0 = r14.context
-            java.lang.Class<android.hardware.input.InputManager> r4 = android.hardware.input.InputManager.class
-            java.lang.Object r0 = r0.getSystemService(r4)
-            android.hardware.input.InputManager r0 = (android.hardware.input.InputManager) r0
-            if (r0 == 0) goto L74
-            java.lang.String r4 = "corner-swipe"
-            int r5 = r14.displayId
-            android.view.InputMonitor r0 = r0.monitorGestureInput(r4, r5)
-            goto L75
-        L74:
-            r0 = r3
-        L75:
-            r14.inputMonitor = r0
-            com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver r4 = new com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver
-            if (r0 == 0) goto L7f
-            android.view.InputChannel r3 = r0.getInputChannel()
-        L7f:
-            android.os.Looper r0 = android.os.Looper.getMainLooper()
-            android.view.Choreographer r5 = android.view.Choreographer.getInstance()
-            com.android.systemui.navigationbar.gestural.CornerGestureHandler$setInputChannel$1 r6 = new com.android.systemui.navigationbar.gestural.CornerGestureHandler$setInputChannel$1
-            r6.<init>()
-            r4.<init>(r3, r0, r5, r6)
-            r14.inputEventReceiver = r4
-            com.android.systemui.navigationbar.gestural.CornerGestureHandler$broadcastReceiver$1 r8 = r14.broadcastReceiver
-            android.content.IntentFilter r9 = r14.intentFilter
-            android.os.UserHandle r11 = android.os.UserHandle.ALL
-            android.os.Handler r10 = r14.bgHandler
-            r12 = 0
-            com.android.systemui.broadcast.BroadcastDispatcher r7 = r14.broadcastDispatcher
-            r13 = 48
-            com.android.systemui.broadcast.BroadcastDispatcher.registerReceiverWithHandler$default(r7, r8, r9, r10, r11, r12, r13)
-        La1:
-            com.android.systemui.shared.system.ActivityManagerWrapper r0 = com.android.systemui.shared.system.ActivityManagerWrapper.sInstance
-            r0.getClass()
-            android.app.IActivityTaskManager r0 = android.app.ActivityTaskManager.getService()     // Catch: android.os.RemoteException -> Lb1
-            int r0 = r0.getLockTaskModeState()     // Catch: android.os.RemoteException -> Lb1
-            if (r0 == 0) goto Lb1
-            r1 = r2
-        Lb1:
-            r14.isInLockTaskMode = r1
-            java.lang.String r14 = "isInLockTaskMode="
-            java.lang.String r0 = "CornerGestureHandler"
-            com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m(r14, r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.gestural.CornerGestureHandler.updateIsEnabled():void");
+        boolean z;
+        boolean z2 = false;
+        if (((AssistManager) this.assistManagerLazy.get()).mAssistUtils.getAssistComponentForUser(((UserTrackerImpl) this.userTracker).getUserId()) == null || !this.isAttached || ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode()) {
+            z = false;
+        } else {
+            NavBarHelper navBarHelper = this.navBarHelper;
+            if (navBarHelper == null) {
+                navBarHelper = null;
+            }
+            if (navBarHelper.mLongPressHomeEnabled && (!BasicRune.SUPPORT_AI_AGENT || (this.settingsHelper.getNavigationBarSPluginFlags() & this.FLAG_NAVSTAR_ASSISTANT_ENABLED) != 0)) {
+                z = true;
+            }
+        }
+        InputChannelCompat$InputEventReceiver inputChannelCompat$InputEventReceiver = this.inputEventReceiver;
+        if (inputChannelCompat$InputEventReceiver != null) {
+            inputChannelCompat$InputEventReceiver.dispose();
+        }
+        this.inputEventReceiver = null;
+        InputMonitor inputMonitor = this.inputMonitor;
+        if (inputMonitor != null) {
+            inputMonitor.dispose();
+        }
+        this.inputMonitor = null;
+        this.broadcastDispatcher.unregisterReceiver(this.broadcastReceiver);
+        if (z) {
+            InputManager inputManager = (InputManager) this.context.getSystemService(InputManager.class);
+            InputMonitor inputMonitorMonitorGestureInput = inputManager != null ? inputManager.monitorGestureInput("corner-swipe", this.displayId) : null;
+            this.inputMonitor = inputMonitorMonitorGestureInput;
+            this.inputEventReceiver = new InputChannelCompat$InputEventReceiver(inputMonitorMonitorGestureInput != null ? inputMonitorMonitorGestureInput.getInputChannel() : null, Looper.getMainLooper(), Choreographer.getInstance(), new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.navigationbar.gestural.CornerGestureHandler$setInputChannel$1
+                /* JADX WARN: Removed duplicated region for block: B:53:0x0142  */
+                /* JADX WARN: Removed duplicated region for block: B:62:0x0161  */
+                /* JADX WARN: Removed duplicated region for block: B:67:0x016a  */
+                /* JADX WARN: Removed duplicated region for block: B:80:0x019a  */
+                /* JADX WARN: Removed duplicated region for block: B:90:0x01b8  */
+                @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final void onInputEvent(InputEvent inputEvent) throws PackageManager.NameNotFoundException {
+                    CornerGestureHandler cornerGestureHandler = this.$tmp0;
+                    cornerGestureHandler.getClass();
+                    if (inputEvent instanceof MotionEvent) {
+                        MotionEvent motionEvent = (MotionEvent) inputEvent;
+                        int actionMasked = motionEvent.getActionMasked();
+                        boolean z3 = true;
+                        if (actionMasked == 0) {
+                            if (BasicRune.NAVBAR_SUPPORT_SEARCLE) {
+                                float x = motionEvent.getX();
+                                float y = motionEvent.getY();
+                                NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) cornerGestureHandler.navBarStateManager;
+                                int i = navBarStateManagerImpl.states.rotation;
+                                float navBarHeight = navBarStateManagerImpl.getNavBarHeight(0);
+                                if (i == 0) {
+                                    float f = navBarStateManagerImpl.states.displaySize.y;
+                                    float f2 = f - navBarHeight;
+                                    float spaceWidth = navBarStateManagerImpl.getSpaceWidth(false);
+                                    float f3 = navBarStateManagerImpl.states.displaySize.x;
+                                    if (f2 > y || y > f || ((0.0f > x || x > spaceWidth) && (f3 - spaceWidth > x || x > f3))) {
+                                        z3 = false;
+                                    } else if (!QuickStepContract.isAssistantGestureDisabled(((NavBarStoreImpl) cornerGestureHandler.navBarStore).sysUiFlagContainer.getFlags())) {
+                                        NavBarHelper navBarHelper2 = cornerGestureHandler.navBarHelper;
+                                        if (navBarHelper2 == null) {
+                                            navBarHelper2 = null;
+                                        }
+                                        if (!navBarHelper2.mAssistantTouchGestureEnabled || cornerGestureHandler.isInLockTaskMode) {
+                                        }
+                                    }
+                                } else if (i == 1) {
+                                    Point point = navBarStateManagerImpl.states.displaySize;
+                                    float f4 = point.y;
+                                    float f5 = f4 - navBarHeight;
+                                    if (0.0f > x || x > navBarHeight) {
+                                        float f6 = point.x;
+                                        float f7 = f6 - navBarHeight;
+                                        if (x <= f6 && f7 <= x) {
+                                            if (f5 > y || y > f4) {
+                                            }
+                                        }
+                                        z3 = false;
+                                    }
+                                } else {
+                                    if (i != 2) {
+                                        if (i == 3) {
+                                        }
+                                    }
+                                    z3 = false;
+                                }
+                            }
+                            cornerGestureHandler.allowGesture = z3;
+                            if (z3) {
+                                Log.d("CornerGestureHandler", "allow down x: " + motionEvent.getX() + ", y:" + motionEvent.getY());
+                                cornerGestureHandler.downPos.set(motionEvent.getX(), motionEvent.getY());
+                                cornerGestureHandler.downTime = SystemClock.uptimeMillis();
+                                return;
+                            }
+                            return;
+                        }
+                        if (actionMasked != 1) {
+                            if (actionMasked == 2) {
+                                if (!cornerGestureHandler.allowGesture || cornerGestureHandler.startAssistant) {
+                                    return;
+                                }
+                                float fHypot = (float) Math.hypot(motionEvent.getX() - cornerGestureHandler.downPos.x, motionEvent.getY() - cornerGestureHandler.downPos.y);
+                                cornerGestureHandler.distance = fHypot;
+                                boolean z4 = cornerGestureHandler.isPilfered;
+                                float f8 = cornerGestureHandler.progressTouchSlop;
+                                if (!z4 && fHypot > f8) {
+                                    InputMonitor inputMonitor2 = cornerGestureHandler.inputMonitor;
+                                    if (inputMonitor2 != null) {
+                                        inputMonitor2.pilferPointers();
+                                    }
+                                    cornerGestureHandler.isPilfered = true;
+                                }
+                                float f9 = cornerGestureHandler.distance;
+                                float f10 = cornerGestureHandler.touchSlop;
+                                Lazy lazy = cornerGestureHandler.assistManagerLazy;
+                                if (f9 <= f10) {
+                                    if (f9 >= f8) {
+                                        cornerGestureHandler.lastProgress = Math.min((f9 - f8) / (f10 - f8), Math.min(cornerGestureHandler.timeFraction, 1.0f));
+                                        ((AssistManager) lazy.get()).onInvocationProgress(cornerGestureHandler.lastProgress);
+                                        return;
+                                    }
+                                    return;
+                                }
+                                float fUptimeMillis = SystemClock.uptimeMillis() - cornerGestureHandler.downTime;
+                                cornerGestureHandler.timeFraction = Math.min(fUptimeMillis / 50, 1.0f);
+                                double dAbs = Math.abs((((float) Math.atan2(r5, r0)) * 180) / 3.141592653589793d);
+                                if (dAbs > cornerGestureHandler.degreeEnd || cornerGestureHandler.degreeStart > dAbs || cornerGestureHandler.timeFraction < 1.0f) {
+                                    Log.d("CornerGestureHandler", "cancelGesture by degree=" + dAbs + " diff=" + fUptimeMillis + " timeFraction=" + cornerGestureHandler.timeFraction);
+                                    cornerGestureHandler.cancelGesture(motionEvent);
+                                    return;
+                                }
+                                Log.d("CornerGestureHandler", "Execute Assistant");
+                                DefaultUiController defaultUiController = ((AssistManager) lazy.get()).mUiController;
+                                defaultUiController.animateInvocationCompletion();
+                                defaultUiController.logInvocationProgressMetrics(1.0f, defaultUiController.mInvocationInProgress);
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("invocation_type", 1);
+                                ((AssistManager) lazy.get()).startAssist(bundle);
+                                cornerGestureHandler.startAssistant = true;
+                                cornerGestureHandler.vibratorHelper.vibrateGesture();
+                                return;
+                            }
+                            if (actionMasked != 3 && actionMasked != 5 && actionMasked != 6) {
+                                return;
+                            }
+                        }
+                        cornerGestureHandler.cancelGesture(motionEvent);
+                    }
+                }
+            });
+            BroadcastDispatcher.registerReceiverWithHandler$default(this.broadcastDispatcher, this.broadcastReceiver, this.intentFilter, this.bgHandler, UserHandle.ALL, null, 48);
+        }
+        ActivityManagerWrapper.sInstance.getClass();
+        try {
+            if (ActivityTaskManager.getService().getLockTaskModeState() != 0) {
+                z2 = true;
+            }
+        } catch (RemoteException unused) {
+        }
+        this.isInLockTaskMode = z2;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isInLockTaskMode=", "CornerGestureHandler", z2);
     }
 }

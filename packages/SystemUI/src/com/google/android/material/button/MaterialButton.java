@@ -44,7 +44,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialButton extends AppCompatButton implements Checkable, Shapeable {
     public static final int[] CHECKABLE_STATE_SET = {R.attr.state_checkable};
@@ -64,7 +63,6 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
     public final LinkedHashSet onCheckedChangeListeners;
     public MaterialButtonToggleGroup.PressedStateTracker onPressedChangeListenerInternal;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends AbsSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.ClassLoaderCreator() { // from class: com.google.android.material.button.MaterialButton.SavedState.1
             @Override // android.os.Parcelable.ClassLoaderCreator
@@ -151,15 +149,15 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
 
     @Override // android.widget.TextView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 2);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 2);
         MaterialButtonHelper materialButtonHelper = this.materialButtonHelper;
         if (materialButtonHelper != null && materialButtonHelper.checkable) {
-            Button.mergeDrawableStates(onCreateDrawableState, CHECKABLE_STATE_SET);
+            Button.mergeDrawableStates(iArrOnCreateDrawableState, CHECKABLE_STATE_SET);
         }
         if (this.checked) {
-            Button.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            Button.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // androidx.appcompat.widget.AppCompatButton, android.view.View
@@ -420,25 +418,25 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
     public final void updateIcon(boolean z) {
         Drawable drawable = this.icon;
         if (drawable != null) {
-            Drawable mutate = drawable.mutate();
-            this.icon = mutate;
-            mutate.setTintList(this.iconTint);
+            Drawable drawableMutate = drawable.mutate();
+            this.icon = drawableMutate;
+            drawableMutate.setTintList(this.iconTint);
             PorterDuff.Mode mode = this.iconTintMode;
             if (mode != null) {
                 this.icon.setTintMode(mode);
             }
-            int i = this.iconSize;
-            if (i == 0) {
-                i = this.icon.getIntrinsicWidth();
+            int intrinsicWidth = this.iconSize;
+            if (intrinsicWidth == 0) {
+                intrinsicWidth = this.icon.getIntrinsicWidth();
             }
-            int i2 = this.iconSize;
-            if (i2 == 0) {
-                i2 = this.icon.getIntrinsicHeight();
+            int intrinsicHeight = this.iconSize;
+            if (intrinsicHeight == 0) {
+                intrinsicHeight = this.icon.getIntrinsicHeight();
             }
             Drawable drawable2 = this.icon;
-            int i3 = this.iconLeft;
-            int i4 = this.iconTop;
-            drawable2.setBounds(i3, i4, i + i3, i2 + i4);
+            int i = this.iconLeft;
+            int i2 = this.iconTop;
+            drawable2.setBounds(i, i2, intrinsicWidth + i, intrinsicHeight + i2);
             this.icon.setVisible(true, z);
         }
         if (z) {
@@ -449,15 +447,15 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
         Drawable drawable3 = compoundDrawablesRelative[0];
         Drawable drawable4 = compoundDrawablesRelative[1];
         Drawable drawable5 = compoundDrawablesRelative[2];
-        int i5 = this.iconGravity;
-        if (((i5 == 1 || i5 == 2) && drawable3 != this.icon) || (((i5 == 3 || i5 == 4) && drawable5 != this.icon) || ((i5 == 16 || i5 == 32) && drawable4 != this.icon))) {
+        int i3 = this.iconGravity;
+        if (((i3 == 1 || i3 == 2) && drawable3 != this.icon) || (((i3 == 3 || i3 == 4) && drawable5 != this.icon) || ((i3 == 16 || i3 == 32) && drawable4 != this.icon))) {
             resetIconDrawable();
         }
     }
 
     public final void updateIconPosition(int i, int i2) {
         Layout.Alignment alignment;
-        int min;
+        int iMin;
         if (this.icon == null || getLayout() == null) {
             return;
         }
@@ -470,25 +468,25 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
                     updateIcon(false);
                     return;
                 }
-                int i4 = this.iconSize;
-                if (i4 == 0) {
-                    i4 = this.icon.getIntrinsicHeight();
+                int intrinsicHeight = this.iconSize;
+                if (intrinsicHeight == 0) {
+                    intrinsicHeight = this.icon.getIntrinsicHeight();
                 }
                 if (getLineCount() > 1) {
-                    min = getLayout().getHeight();
+                    iMin = getLayout().getHeight();
                 } else {
                     TextPaint paint = getPaint();
-                    String charSequence = getText().toString();
+                    String string = getText().toString();
                     if (getTransformationMethod() != null) {
-                        charSequence = getTransformationMethod().getTransformation(charSequence, this).toString();
+                        string = getTransformationMethod().getTransformation(string, this).toString();
                     }
                     Rect rect = new Rect();
-                    paint.getTextBounds(charSequence, 0, charSequence.length(), rect);
-                    min = Math.min(rect.height(), getLayout().getHeight());
+                    paint.getTextBounds(string, 0, string.length(), rect);
+                    iMin = Math.min(rect.height(), getLayout().getHeight());
                 }
-                int max = Math.max(0, (((((i2 - min) - getPaddingTop()) - i4) - this.iconPadding) - getPaddingBottom()) / 2);
-                if (this.iconTop != max) {
-                    this.iconTop = max;
+                int iMax = Math.max(0, (((((i2 - iMin) - getPaddingTop()) - intrinsicHeight) - this.iconPadding) - getPaddingBottom()) / 2);
+                if (this.iconTop != iMax) {
+                    this.iconTop = iMax;
                     updateIcon(false);
                     return;
                 }
@@ -504,24 +502,24 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             int gravity = getGravity() & 8388615;
             alignment = gravity != 1 ? (gravity == 5 || gravity == 8388613) ? Layout.Alignment.ALIGN_OPPOSITE : Layout.Alignment.ALIGN_NORMAL : Layout.Alignment.ALIGN_CENTER;
         }
-        int i5 = this.iconGravity;
-        if (i5 == 1 || i5 == 3 || ((i5 == 2 && alignment == Layout.Alignment.ALIGN_NORMAL) || (i5 == 4 && alignment == Layout.Alignment.ALIGN_OPPOSITE))) {
+        int i4 = this.iconGravity;
+        if (i4 == 1 || i4 == 3 || ((i4 == 2 && alignment == Layout.Alignment.ALIGN_NORMAL) || (i4 == 4 && alignment == Layout.Alignment.ALIGN_OPPOSITE))) {
             this.iconLeft = 0;
             updateIcon(false);
             return;
         }
-        int i6 = this.iconSize;
-        if (i6 == 0) {
-            i6 = this.icon.getIntrinsicWidth();
+        int intrinsicWidth = this.iconSize;
+        if (intrinsicWidth == 0) {
+            intrinsicWidth = this.icon.getIntrinsicWidth();
         }
         int lineCount = getLineCount();
-        float f = 0.0f;
-        for (int i7 = 0; i7 < lineCount; i7++) {
-            f = Math.max(f, getLayout().getLineWidth(i7));
+        float fMax = 0.0f;
+        for (int i5 = 0; i5 < lineCount; i5++) {
+            fMax = Math.max(fMax, getLayout().getLineWidth(i5));
         }
-        int ceil = i - ((int) Math.ceil(f));
+        int iCeil = i - ((int) Math.ceil(fMax));
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        int paddingEnd = (((ceil - getPaddingEnd()) - i6) - this.iconPadding) - getPaddingStart();
+        int paddingEnd = (((iCeil - getPaddingEnd()) - intrinsicWidth) - this.iconPadding) - getPaddingStart();
         if (alignment == Layout.Alignment.ALIGN_CENTER) {
             paddingEnd /= 2;
         }
@@ -543,52 +541,52 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
     /* JADX WARN: Type inference failed for: r16v1 */
     /* JADX WARN: Type inference failed for: r16v2 */
     public MaterialButton(Context context, AttributeSet attributeSet, int i) {
-        super(MaterialThemeOverlay.wrap(context, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_Button), attributeSet, i);
         boolean z;
-        int i2;
+        int color;
         ?? r16;
         boolean z2;
+        super(MaterialThemeOverlay.wrap(context, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_Button), attributeSet, i);
         this.onCheckedChangeListeners = new LinkedHashSet();
         this.checked = false;
         this.broadcasting = false;
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialButton, i, com.android.systemui.R.style.Widget_MaterialComponents_Button, new int[0]);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(12, 0);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialButton, i, com.android.systemui.R.style.Widget_MaterialComponents_Button, new int[0]);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, 0);
         this.iconPadding = dimensionPixelSize;
-        int i3 = obtainStyledAttributes.getInt(15, -1);
+        int i2 = typedArrayObtainStyledAttributes.getInt(15, -1);
         PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-        this.iconTintMode = ViewUtils.parseTintMode(i3, mode);
-        this.iconTint = MaterialResources.getColorStateList(getContext(), obtainStyledAttributes, 14);
-        this.icon = MaterialResources.getDrawable(getContext(), obtainStyledAttributes, 10);
-        this.iconGravity = obtainStyledAttributes.getInteger(11, 1);
-        this.iconSize = obtainStyledAttributes.getDimensionPixelSize(13, 0);
+        this.iconTintMode = ViewUtils.parseTintMode(i2, mode);
+        this.iconTint = MaterialResources.getColorStateList(getContext(), typedArrayObtainStyledAttributes, 14);
+        this.icon = MaterialResources.getDrawable(getContext(), typedArrayObtainStyledAttributes, 10);
+        this.iconGravity = typedArrayObtainStyledAttributes.getInteger(11, 1);
+        this.iconSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(13, 0);
         MaterialButtonHelper materialButtonHelper = new MaterialButtonHelper(this, ShapeAppearanceModel.builder(context2, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_Button).build());
         this.materialButtonHelper = materialButtonHelper;
-        materialButtonHelper.insetLeft = obtainStyledAttributes.getDimensionPixelOffset(1, 0);
-        materialButtonHelper.insetRight = obtainStyledAttributes.getDimensionPixelOffset(2, 0);
-        materialButtonHelper.insetTop = obtainStyledAttributes.getDimensionPixelOffset(3, 0);
-        materialButtonHelper.insetBottom = obtainStyledAttributes.getDimensionPixelOffset(4, 0);
-        if (obtainStyledAttributes.hasValue(8)) {
-            int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(8, -1);
+        materialButtonHelper.insetLeft = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, 0);
+        materialButtonHelper.insetRight = typedArrayObtainStyledAttributes.getDimensionPixelOffset(2, 0);
+        materialButtonHelper.insetTop = typedArrayObtainStyledAttributes.getDimensionPixelOffset(3, 0);
+        materialButtonHelper.insetBottom = typedArrayObtainStyledAttributes.getDimensionPixelOffset(4, 0);
+        if (typedArrayObtainStyledAttributes.hasValue(8)) {
+            int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, -1);
             materialButtonHelper.cornerRadius = dimensionPixelSize2;
             materialButtonHelper.setShapeAppearanceModel(materialButtonHelper.shapeAppearanceModel.withCornerSize(dimensionPixelSize2));
             materialButtonHelper.cornerRadiusSet = true;
         }
-        materialButtonHelper.strokeWidth = obtainStyledAttributes.getDimensionPixelSize(20, 0);
-        materialButtonHelper.backgroundTintMode = ViewUtils.parseTintMode(obtainStyledAttributes.getInt(7, -1), mode);
+        materialButtonHelper.strokeWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(20, 0);
+        materialButtonHelper.backgroundTintMode = ViewUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(7, -1), mode);
         MaterialButton materialButton = materialButtonHelper.materialButton;
-        materialButtonHelper.backgroundTint = MaterialResources.getColorStateList(materialButton.getContext(), obtainStyledAttributes, 6);
-        materialButtonHelper.strokeColor = MaterialResources.getColorStateList(materialButton.getContext(), obtainStyledAttributes, 19);
-        materialButtonHelper.rippleColor = MaterialResources.getColorStateList(materialButton.getContext(), obtainStyledAttributes, 16);
-        materialButtonHelper.checkable = obtainStyledAttributes.getBoolean(5, false);
-        materialButtonHelper.elevation = obtainStyledAttributes.getDimensionPixelSize(9, 0);
-        materialButtonHelper.toggleCheckedStateOnClick = obtainStyledAttributes.getBoolean(21, true);
+        materialButtonHelper.backgroundTint = MaterialResources.getColorStateList(materialButton.getContext(), typedArrayObtainStyledAttributes, 6);
+        materialButtonHelper.strokeColor = MaterialResources.getColorStateList(materialButton.getContext(), typedArrayObtainStyledAttributes, 19);
+        materialButtonHelper.rippleColor = MaterialResources.getColorStateList(materialButton.getContext(), typedArrayObtainStyledAttributes, 16);
+        materialButtonHelper.checkable = typedArrayObtainStyledAttributes.getBoolean(5, false);
+        materialButtonHelper.elevation = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, 0);
+        materialButtonHelper.toggleCheckedStateOnClick = typedArrayObtainStyledAttributes.getBoolean(21, true);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         int paddingStart = materialButton.getPaddingStart();
         int paddingTop = materialButton.getPaddingTop();
         int paddingEnd = materialButton.getPaddingEnd();
         int paddingBottom = materialButton.getPaddingBottom();
-        if (obtainStyledAttributes.hasValue(0)) {
+        if (typedArrayObtainStyledAttributes.hasValue(0)) {
             materialButtonHelper.backgroundOverwritten = true;
             materialButton.setSupportBackgroundTintList(materialButtonHelper.backgroundTint);
             materialButton.setSupportBackgroundTintMode(materialButtonHelper.backgroundTintMode);
@@ -612,23 +610,23 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             materialShapeDrawable2.setTint(0);
             float f2 = materialButtonHelper.strokeWidth;
             if (materialButtonHelper.shouldDrawSurfaceColorStroke) {
-                i2 = MaterialColors.getColor(materialButton, com.android.systemui.R.attr.colorSurface);
+                color = MaterialColors.getColor(materialButton, com.android.systemui.R.attr.colorSurface);
                 r16 = 0;
             } else {
-                i2 = 0;
+                color = 0;
                 r16 = 0;
             }
             materialShapeDrawable2.drawableState.strokeWidth = f2;
             materialShapeDrawable2.invalidateSelf();
-            materialShapeDrawable2.setStrokeColor(ColorStateList.valueOf(i2));
+            materialShapeDrawable2.setStrokeColor(ColorStateList.valueOf(color));
             MaterialShapeDrawable materialShapeDrawable3 = new MaterialShapeDrawable(materialButtonHelper.shapeAppearanceModel);
             materialButtonHelper.maskDrawable = materialShapeDrawable3;
             materialShapeDrawable3.setTint(-1);
-            ColorStateList sanitizeRippleDrawableColor = RippleUtils.sanitizeRippleDrawableColor(materialButtonHelper.rippleColor);
+            ColorStateList colorStateListSanitizeRippleDrawableColor = RippleUtils.sanitizeRippleDrawableColor(materialButtonHelper.rippleColor);
             Drawable[] drawableArr = new Drawable[2];
             drawableArr[r16] = materialShapeDrawable2;
             drawableArr[1] = materialShapeDrawable;
-            RippleDrawable rippleDrawable = new RippleDrawable(sanitizeRippleDrawableColor, new InsetDrawable((Drawable) new LayerDrawable(drawableArr), materialButtonHelper.insetLeft, materialButtonHelper.insetTop, materialButtonHelper.insetRight, materialButtonHelper.insetBottom), materialButtonHelper.maskDrawable);
+            RippleDrawable rippleDrawable = new RippleDrawable(colorStateListSanitizeRippleDrawableColor, new InsetDrawable((Drawable) new LayerDrawable(drawableArr), materialButtonHelper.insetLeft, materialButtonHelper.insetTop, materialButtonHelper.insetRight, materialButtonHelper.insetBottom), materialButtonHelper.maskDrawable);
             materialButtonHelper.rippleDrawable = rippleDrawable;
             super.setBackgroundDrawable(rippleDrawable);
             z2 = r16;
@@ -639,7 +637,7 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             }
         }
         materialButton.setPaddingRelative(paddingStart + materialButtonHelper.insetLeft, paddingTop + materialButtonHelper.insetTop, paddingEnd + materialButtonHelper.insetRight, paddingBottom + materialButtonHelper.insetBottom);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setCompoundDrawablePadding(dimensionPixelSize);
         updateIcon(this.icon != null ? z : z2);
     }

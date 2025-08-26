@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NetspeedView extends LinearLayout implements DarkIconDispatcher.DarkReceiver, Observer {
     public int mContentMarginEnd;
@@ -29,7 +28,6 @@ public class NetspeedView extends LinearLayout implements DarkIconDispatcher.Dar
     public int mScreenOrientation;
     public final StableWidthHelper mStableWidthHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class StableWidthHelper extends LinkedList<Integer> {
         private int mWidthSum = 0;
 
@@ -51,16 +49,16 @@ public class NetspeedView extends LinearLayout implements DarkIconDispatcher.Dar
 
         @Override // java.util.LinkedList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List, java.util.Deque, java.util.Queue
         public final boolean add(Integer num) {
-            boolean add = super.add((StableWidthHelper) num);
-            if (add) {
+            boolean zAdd = super.add((StableWidthHelper) num);
+            if (zAdd) {
                 this.mWidthSum = num.intValue() + this.mWidthSum;
                 if (size() > 10) {
-                    int intValue = get(0).intValue();
+                    int iIntValue = get(0).intValue();
                     removeFirst();
-                    this.mWidthSum -= intValue;
+                    this.mWidthSum -= iIntValue;
                 }
             }
-            return add;
+            return zAdd;
         }
     }
 
@@ -108,7 +106,7 @@ public class NetspeedView extends LinearLayout implements DarkIconDispatcher.Dar
         if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT && this.mInStatusBar) {
             IndicatorCutoutUtil indicatorCutoutUtil = this.mIndicatorCutoutUtil;
             Rect displayCutoutAreaToExclude = indicatorCutoutUtil != null ? indicatorCutoutUtil.getDisplayCutoutAreaToExclude() : null;
-            int i5 = 0;
+            final int i5 = 0;
             if (displayCutoutAreaToExclude != null) {
                 Rect rect = new Rect();
                 this.mContentView.getGlobalVisibleRect(rect);
@@ -125,9 +123,16 @@ public class NetspeedView extends LinearLayout implements DarkIconDispatcher.Dar
             if (i5 != this.mContentMarginEnd) {
                 this.mContentMarginEnd = i5;
                 this.mStableWidthHelper.reset();
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mContentView.getLayoutParams();
-                layoutParams.setMarginEnd(i5);
-                this.mContentView.setLayoutParams(layoutParams);
+                this.mContentView.post(new Runnable() { // from class: com.android.systemui.statusbar.policy.NetspeedView$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        NetspeedView netspeedView = this.f$0;
+                        int i7 = i5;
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) netspeedView.mContentView.getLayoutParams();
+                        layoutParams.setMarginEnd(i7);
+                        netspeedView.mContentView.setLayoutParams(layoutParams);
+                    }
+                });
             }
         }
     }

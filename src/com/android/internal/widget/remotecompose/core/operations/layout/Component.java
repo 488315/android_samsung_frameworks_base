@@ -874,14 +874,14 @@ public class Component extends PaintOperation implements Container, Measurable, 
 
     public int getComponentCount() {
         Iterator<Operation> it = this.mList.iterator();
-        int i = 0;
+        int componentCount = 0;
         while (it.hasNext()) {
             Operation next = it.next();
             if (next instanceof Component) {
-                i += ((Component) next).getComponentCount() + 1;
+                componentCount += ((Component) next).getComponentCount() + 1;
             }
         }
-        return i;
+        return componentCount;
     }
 
     public int getPaintId() {

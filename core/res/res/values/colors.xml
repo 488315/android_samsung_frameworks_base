@@ -479,7 +479,7 @@
     <color name="circle_cue_ignore_solid_color">#1fd00000</color>
     <color name="circle_cue_ignore_stroke_color">#ffd00000</color>
     <color name="circle_cue_stroke_color">#ff0381fe</color>
-    <color name="clone_profile_badge">#ff666668</color>
+    <color name="clone_profile_badge">#ff1d92ff</color>
     <color name="color_lens_azure">#ff007fff</color>
     <color name="color_lens_blue">#ff0000ff</color>
     <color name="color_lens_chartreuse_green">#ff7fff00</color>
@@ -995,7 +995,6 @@
     <color name="sem_spinner_item_text_color_normal_dark">#fffafaff</color>
     <color name="sem_spinner_normal_material">#ff3b3b3b</color>
     <color name="sem_spinner_normal_material_dark">#ffd9d9d9</color>
-    <color name="sem_suggestion_popup_button_text_color">#ff0072de</color>
     <color name="sem_switch_dim_mtrl">#fffcfcff</color>
     <color name="sem_switch_dim_mtrl_dark">#ff858585</color>
     <color name="sem_switch_dim_off_mtrl">#fffcfcff</color>

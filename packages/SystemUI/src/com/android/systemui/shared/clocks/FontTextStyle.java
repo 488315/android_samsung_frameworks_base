@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FontTextStyle {
     public final Float fontSizeScale;
@@ -30,11 +29,11 @@ public final class FontTextStyle {
 
     public final int hashCode() {
         Float f = this.lineHeight;
-        int hashCode = (f == null ? 0 : f.hashCode()) * 31;
+        int iHashCode = (f == null ? 0 : f.hashCode()) * 31;
         Float f2 = this.fontSizeScale;
-        int m = MoveResult$$ExternalSyntheticOutline0.m((hashCode + (f2 == null ? 0 : f2.hashCode())) * 31, 31, this.transitionDuration);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m((iHashCode + (f2 == null ? 0 : f2.hashCode())) * 31, 31, this.transitionDuration);
         Interpolator interpolator = this.transitionInterpolator;
-        return m + (interpolator != null ? interpolator.hashCode() : 0);
+        return iM + (interpolator != null ? interpolator.hashCode() : 0);
     }
 
     public final String toString() {

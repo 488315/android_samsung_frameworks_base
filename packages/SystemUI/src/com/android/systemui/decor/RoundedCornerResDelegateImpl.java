@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RoundedCornerResDelegateImpl implements RoundedCornerResDelegate {
     public Drawable bottomRoundedDrawable;
@@ -25,7 +24,7 @@ public final class RoundedCornerResDelegateImpl implements RoundedCornerResDeleg
     public Size bottomRoundedSize = new Size(0, 0);
     public float physicalPixelDisplaySizeRatio = 1.0f;
 
-    public RoundedCornerResDelegateImpl(Resources resources, String str) {
+    public RoundedCornerResDelegateImpl(Resources resources, String str) throws Resources.NotFoundException {
         this.res = resources;
         this.displayUniqueId = str;
         reloadRes();
@@ -92,18 +91,18 @@ public final class RoundedCornerResDelegateImpl implements RoundedCornerResDeleg
         }
     }
 
-    public final void reloadRes() {
+    public final void reloadRes() throws Resources.NotFoundException {
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(this.res, this.displayUniqueId);
         boolean z = this.res.getBoolean(R.bool.config_enableRoundedCorner);
         this.hasTop = z;
         this.hasBottom = z;
-        TypedArray obtainTypedArray = this.res.obtainTypedArray(R.array.config_roundedCornerTopDrawableArray);
-        Drawable drawable = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= obtainTypedArray.length()) ? this.res.getDrawable(R.drawable.rounded_corner_top, null) : obtainTypedArray.getDrawable(displayUniqueIdConfigIndex);
-        obtainTypedArray.recycle();
+        TypedArray typedArrayObtainTypedArray = this.res.obtainTypedArray(R.array.config_roundedCornerTopDrawableArray);
+        Drawable drawable = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= typedArrayObtainTypedArray.length()) ? this.res.getDrawable(R.drawable.rounded_corner_top, null) : typedArrayObtainTypedArray.getDrawable(displayUniqueIdConfigIndex);
+        typedArrayObtainTypedArray.recycle();
         this.topRoundedDrawable = drawable;
-        TypedArray obtainTypedArray2 = this.res.obtainTypedArray(R.array.config_roundedCornerBottomDrawableArray);
-        Drawable drawable2 = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= obtainTypedArray2.length()) ? this.res.getDrawable(R.drawable.rounded_corner_bottom, null) : obtainTypedArray2.getDrawable(displayUniqueIdConfigIndex);
-        obtainTypedArray2.recycle();
+        TypedArray typedArrayObtainTypedArray2 = this.res.obtainTypedArray(R.array.config_roundedCornerBottomDrawableArray);
+        Drawable drawable2 = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= typedArrayObtainTypedArray2.length()) ? this.res.getDrawable(R.drawable.rounded_corner_bottom, null) : typedArrayObtainTypedArray2.getDrawable(displayUniqueIdConfigIndex);
+        typedArrayObtainTypedArray2.recycle();
         this.bottomRoundedDrawable = drawable2;
     }
 
@@ -117,7 +116,7 @@ public final class RoundedCornerResDelegateImpl implements RoundedCornerResDeleg
     }
 
     @Override // com.android.systemui.decor.RoundedCornerResDelegate
-    public final void updateDisplayUniqueId(String str, Integer num) {
+    public final void updateDisplayUniqueId(String str, Integer num) throws Resources.NotFoundException {
         if (Intrinsics.areEqual(this.displayUniqueId, str)) {
             if (num == null || this.reloadToken == num.intValue()) {
                 return;

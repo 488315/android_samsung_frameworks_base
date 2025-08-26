@@ -23,7 +23,6 @@ import com.android.systemui.util.wakelock.WakeLock;
 import com.samsung.android.aod.AODManager;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscreenNotificationPresentation extends Dialog {
     public final ViewGroup contents;
@@ -107,7 +106,7 @@ public final class SubscreenNotificationPresentation extends Dialog {
         View decorView;
         super.onCreate(bundle);
         NotificationEntry notificationEntry = this.mDeviceModel.currentPresentationEntry;
-        Integer num = null;
+        Integer numValueOf = null;
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(" PRESENTATION ON - ", notificationEntry != null ? notificationEntry.mKey : null, "S.S.N.");
         int fullPopupWindowType = this.mDeviceModel.getFullPopupWindowType();
         Window window2 = getWindow();
@@ -122,9 +121,9 @@ public final class SubscreenNotificationPresentation extends Dialog {
         if (!NotiRune.NOTI_SUBSCREEN_CLEAR_COVER) {
             Window window4 = getWindow();
             if (window4 != null && (attributes2 = window4.getAttributes()) != null) {
-                num = Integer.valueOf(attributes2.screenOrientation);
+                numValueOf = Integer.valueOf(attributes2.screenOrientation);
             }
-            if (num == -1 && (window = getWindow()) != null && (attributes = window.getAttributes()) != null) {
+            if (numValueOf == -1 && (window = getWindow()) != null && (attributes = window.getAttributes()) != null) {
                 attributes.screenOrientation = 8;
             }
         }
@@ -189,12 +188,12 @@ public final class SubscreenNotificationPresentation extends Dialog {
         int i4 = iArr[1];
         int i5 = iArr[2];
         int i6 = iArr[3];
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, " PRESENTATION updateAODTspRect(", ", ", ", ");
-        m.append(i5);
-        m.append(", ");
-        m.append(i6);
-        m.append(")");
-        Log.d("S.S.N.", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, " PRESENTATION updateAODTspRect(", ", ", ", ");
+        sbM.append(i5);
+        sbM.append(", ");
+        sbM.append(i6);
+        sbM.append(")");
+        Log.d("S.S.N.", sbM.toString());
         aODManager.updateAODTspRect(iArr[0], iArr[1], iArr[2], iArr[3], "cover_detailed_popup");
         this.mDeviceModel.registerAODTspReceiver();
         Animator popUpViewShowAnimator = this.mDeviceModel.getPopUpViewShowAnimator(this.contents);
@@ -205,7 +204,7 @@ public final class SubscreenNotificationPresentation extends Dialog {
             popUpViewShowAnimator.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationPresentation$show$$inlined$doOnStart$1
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator) {
-                    SubscreenNotificationPresentation.this.contents.setAlpha(0.0f);
+                    this.this$0.contents.setAlpha(0.0f);
                     super/*android.app.Dialog*/.show();
                 }
 

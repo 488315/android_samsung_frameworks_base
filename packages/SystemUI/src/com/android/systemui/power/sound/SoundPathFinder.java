@@ -14,7 +14,6 @@ import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0;
 import com.android.systemui.PowerUiRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SoundPathFinder {
     public static boolean checkDefaultCondition(String str) {
@@ -101,9 +100,9 @@ public class SoundPathFinder {
         int currentUser = ActivityManager.getCurrentUser();
         String stringForUser = Settings.System.getStringForUser(context.getContentResolver(), "system_sound", currentUser);
         String stringForUser2 = Settings.System.getStringForUser(context.getContentResolver(), "prev_system_sound", currentUser);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("getThemeAndPrevSound - themeName : ", stringForUser, ", prevSound : ", stringForUser2, ", userID : ");
-        m.append(currentUser);
-        Log.d("PowerUI-SoundPathFinder", m.toString());
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("getThemeAndPrevSound - themeName : ", stringForUser, ", prevSound : ", stringForUser2, ", userID : ");
+        sbM.append(currentUser);
+        Log.d("PowerUI-SoundPathFinder", sbM.toString());
         return new Pair(stringForUser, stringForUser2);
     }
 }

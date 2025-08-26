@@ -58,9 +58,9 @@ public interface IScanEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IScanEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScanEvent)) {
-                return (IScanEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IScanEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScanEvent)) {
+                return (IScanEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,9 +97,9 @@ public interface IScanEvent extends IInterface {
             } else if (i == 2) {
                 OnScanFailed();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                OnScanRequestFailed(readInt);
+                OnScanRequestFailed(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -124,35 +124,35 @@ public interface IScanEvent extends IInterface {
 
             @Override // android.net.wifi.nl80211.IScanEvent
             public void OnScanResultReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IScanEvent
             public void OnScanFailed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IScanEvent
             public void OnScanRequestFailed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScanEvent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

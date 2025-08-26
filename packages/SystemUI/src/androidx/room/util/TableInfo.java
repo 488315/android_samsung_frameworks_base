@@ -2,7 +2,10 @@ package androidx.room.util;
 
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 import androidx.room.util.TableInfo;
+import androidx.sqlite.SQLiteConnection;
+import androidx.sqlite.SQLiteStatement;
 import com.sec.ims.settings.ImsSettings;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -14,7 +17,11 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.collections.EmptySet;
+import kotlin.collections.MapsKt__MapsKt;
+import kotlin.collections.builders.MapBuilder;
+import kotlin.collections.builders.SetBuilder;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
+import kotlin.jdk7.AutoCloseableKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
@@ -24,7 +31,6 @@ import kotlin.text.StringsKt__IndentKt$$ExternalSyntheticLambda0;
 import kotlin.text.StringsKt__StringsKt;
 import kotlin.text.StringsKt__StringsKt$lineSequence$$inlined$Sequence$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TableInfo {
     public static final Companion Companion = new Companion(null);
@@ -33,7 +39,6 @@ public final class TableInfo {
     public final Set indices;
     public final String name;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +48,6 @@ public final class TableInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ForeignKey {
         public final List columnNames;
         public final String onDelete;
@@ -77,8 +81,7 @@ public final class TableInfo {
             return this.referenceColumnNames.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.columnNames, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.referenceTable.hashCode() * 31, 31, this.onDelete), 31, this.onUpdate), 31);
         }
 
-        public final String toString() {
-            String joinToString$default;
+        public final String toString() throws IOException {
             StringBuilder sb = new StringBuilder("\n            |ForeignKey {\n            |   referenceTable = '");
             sb.append(this.referenceTable);
             sb.append("',\n            |   onDelete = '");
@@ -95,8 +98,7 @@ public final class TableInfo {
             SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(" }"), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
             sb.append(unit);
             sb.append("\n            |}\n        ");
-            joinToString$default = SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
-            return joinToString$default;
+            return SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
         }
     }
 
@@ -104,25 +106,135 @@ public final class TableInfo {
         this(str, map, set, EmptySet.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:68:0x01e7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:67:0x01e7, code lost:
     
         r10 = r8.build();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x01eb, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x01eb, code lost:
     
         r2.close();
      */
     /* JADX WARN: Finally extract failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.room.util.TableInfo read(androidx.sqlite.SQLiteConnection r31, java.lang.String r32) {
-        /*
-            Method dump skipped, instructions count: 527
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.util.TableInfo.read(androidx.sqlite.SQLiteConnection, java.lang.String):androidx.room.util.TableInfo");
+    public static final TableInfo read(SQLiteConnection sQLiteConnection, String str) throws Exception {
+        long j;
+        Map mapBuild;
+        SetBuilder setBuilderBuild;
+        Companion.getClass();
+        SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("PRAGMA table_info(`" + str + "`)");
+        try {
+            long j2 = 0;
+            if (sQLiteStatementPrepare.step()) {
+                int iColumnIndexOf = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "name");
+                int iColumnIndexOf2 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "type");
+                int iColumnIndexOf3 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "notnull");
+                int iColumnIndexOf4 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "pk");
+                int iColumnIndexOf5 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "dflt_value");
+                MapBuilder mapBuilder = new MapBuilder();
+                while (true) {
+                    String text = sQLiteStatementPrepare.getText(iColumnIndexOf);
+                    j = j2;
+                    mapBuilder.put(text, new Column(text, sQLiteStatementPrepare.getText(iColumnIndexOf2), sQLiteStatementPrepare.getLong(iColumnIndexOf3) != j2, (int) sQLiteStatementPrepare.getLong(iColumnIndexOf4), sQLiteStatementPrepare.isNull(iColumnIndexOf5) ? null : sQLiteStatementPrepare.getText(iColumnIndexOf5), 2));
+                    if (!sQLiteStatementPrepare.step()) {
+                        break;
+                    }
+                    j2 = j;
+                }
+                mapBuild = mapBuilder.build();
+                sQLiteStatementPrepare.close();
+            } else {
+                mapBuild = MapsKt__MapsKt.emptyMap();
+                sQLiteStatementPrepare.close();
+                j = 0;
+            }
+            sQLiteStatementPrepare = sQLiteConnection.prepare("PRAGMA foreign_key_list(`" + str + "`)");
+            try {
+                int iColumnIndexOf6 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "id");
+                int iColumnIndexOf7 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "seq");
+                int iColumnIndexOf8 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "table");
+                int iColumnIndexOf9 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "on_delete");
+                int iColumnIndexOf10 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "on_update");
+                List foreignKeyFieldMappings = SchemaInfoUtilKt.readForeignKeyFieldMappings(sQLiteStatementPrepare);
+                sQLiteStatementPrepare.reset();
+                SetBuilder setBuilder = new SetBuilder();
+                while (sQLiteStatementPrepare.step()) {
+                    if (sQLiteStatementPrepare.getLong(iColumnIndexOf7) == j) {
+                        int i = (int) sQLiteStatementPrepare.getLong(iColumnIndexOf6);
+                        ArrayList arrayList = new ArrayList();
+                        ArrayList arrayList2 = new ArrayList();
+                        int i2 = iColumnIndexOf6;
+                        ArrayList arrayList3 = new ArrayList();
+                        for (Object obj : foreignKeyFieldMappings) {
+                            int i3 = iColumnIndexOf7;
+                            List list = foreignKeyFieldMappings;
+                            if (((ForeignKeyWithSequence) obj).id == i) {
+                                arrayList3.add(obj);
+                            }
+                            iColumnIndexOf7 = i3;
+                            foreignKeyFieldMappings = list;
+                        }
+                        int i4 = iColumnIndexOf7;
+                        List list2 = foreignKeyFieldMappings;
+                        int size = arrayList3.size();
+                        int i5 = 0;
+                        while (i5 < size) {
+                            Object obj2 = arrayList3.get(i5);
+                            i5++;
+                            ForeignKeyWithSequence foreignKeyWithSequence = (ForeignKeyWithSequence) obj2;
+                            arrayList.add(foreignKeyWithSequence.from);
+                            arrayList2.add(foreignKeyWithSequence.to);
+                            arrayList3 = arrayList3;
+                        }
+                        setBuilder.add(new ForeignKey(sQLiteStatementPrepare.getText(iColumnIndexOf8), sQLiteStatementPrepare.getText(iColumnIndexOf9), sQLiteStatementPrepare.getText(iColumnIndexOf10), arrayList, arrayList2));
+                        iColumnIndexOf6 = i2;
+                        iColumnIndexOf7 = i4;
+                        foreignKeyFieldMappings = list2;
+                    }
+                }
+                SetBuilder setBuilderBuild2 = setBuilder.build();
+                sQLiteStatementPrepare.close();
+                sQLiteStatementPrepare = sQLiteConnection.prepare("PRAGMA index_list(`" + str + "`)");
+                try {
+                    int iColumnIndexOf11 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "name");
+                    int iColumnIndexOf12 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "origin");
+                    int iColumnIndexOf13 = SQLiteStatementUtil.columnIndexOf(sQLiteStatementPrepare, "unique");
+                    if (iColumnIndexOf11 == -1 || iColumnIndexOf12 == -1 || iColumnIndexOf13 == -1) {
+                        AutoCloseableKt.closeFinally(sQLiteStatementPrepare, null);
+                        setBuilderBuild = null;
+                    } else {
+                        SetBuilder setBuilder2 = new SetBuilder();
+                        while (true) {
+                            if (!sQLiteStatementPrepare.step()) {
+                                break;
+                            }
+                            if ("c".equals(sQLiteStatementPrepare.getText(iColumnIndexOf12))) {
+                                Index index = SchemaInfoUtilKt.readIndex(sQLiteConnection, sQLiteStatementPrepare.getText(iColumnIndexOf11), sQLiteStatementPrepare.getLong(iColumnIndexOf13) == 1);
+                                if (index == null) {
+                                    sQLiteStatementPrepare.close();
+                                    setBuilderBuild = null;
+                                    break;
+                                }
+                                setBuilder2.add(index);
+                            }
+                        }
+                    }
+                    return new TableInfo(str, mapBuild, setBuilderBuild2, setBuilderBuild);
+                } finally {
+                }
+            } catch (Throwable th) {
+                try {
+                    throw th;
+                } finally {
+                }
+            }
+        } finally {
+            try {
+                throw th;
+            } finally {
+            }
+        }
     }
 
     public final boolean equals(Object obj) {
@@ -149,7 +261,7 @@ public final class TableInfo {
     }
 
     public final String toString() {
-        Collection collection;
+        Collection collectionSortedWith;
         StringBuilder sb = new StringBuilder("\n            |TableInfo {\n            |    name = '");
         sb.append(this.name);
         sb.append("',\n            |    columns = {");
@@ -163,15 +275,15 @@ public final class TableInfo {
         sb.append(TableInfoKt.formatString(this.foreignKeys));
         sb.append("\n            |    indices = {");
         Set set = this.indices;
-        if (set == null || (collection = CollectionsKt___CollectionsKt.sortedWith(set, new Comparator() { // from class: androidx.room.util.TableInfoKt$toStringCommon$$inlined$sortedBy$2
+        if (set == null || (collectionSortedWith = CollectionsKt___CollectionsKt.sortedWith(set, new Comparator() { // from class: androidx.room.util.TableInfoKt$toStringCommon$$inlined$sortedBy$2
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
                 return ComparisonsKt__ComparisonsKt.compareValues(((TableInfo.Index) obj).name, ((TableInfo.Index) obj2).name);
             }
         })) == null) {
-            collection = EmptyList.INSTANCE;
+            collectionSortedWith = EmptyList.INSTANCE;
         }
-        sb.append(TableInfoKt.formatString(collection));
+        sb.append(TableInfoKt.formatString(collectionSortedWith));
         sb.append("\n            |}\n        ");
         return StringsKt__IndentKt.trimMargin$default(sb.toString());
     }
@@ -183,14 +295,12 @@ public final class TableInfo {
         this.indices = set2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Index {
         public final List columns;
         public final String name;
         public final List orders;
         public final boolean unique;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -213,15 +323,15 @@ public final class TableInfo {
             this.unique = z;
             this.columns = list;
             this.orders = list2;
-            List<String> list3 = list2;
-            if (list3.isEmpty()) {
+            List<String> arrayList = list2;
+            if (arrayList.isEmpty()) {
                 int size = list.size();
-                list3 = new ArrayList(size);
+                arrayList = new ArrayList(size);
                 for (int i = 0; i < size; i++) {
-                    list3.add("ASC");
+                    arrayList.add("ASC");
                 }
             }
-            this.orders = (List) list3;
+            this.orders = (List) arrayList;
         }
 
         public final boolean equals(Object obj) {
@@ -236,9 +346,9 @@ public final class TableInfo {
                 return false;
             }
             String str = this.name;
-            boolean startsWith = str.startsWith("index_");
+            boolean zStartsWith = str.startsWith("index_");
             String str2 = index.name;
-            return startsWith ? str2.startsWith("index_") : str.equals(str2);
+            return zStartsWith ? str2.startsWith("index_") : str.equals(str2);
         }
 
         public final int hashCode() {
@@ -246,8 +356,7 @@ public final class TableInfo {
             return this.orders.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.columns, (((str.startsWith("index_") ? -1184239155 : str.hashCode()) * 31) + (this.unique ? 1 : 0)) * 31, 31);
         }
 
-        public final String toString() {
-            String joinToString$default;
+        public final String toString() throws IOException {
             StringBuilder sb = new StringBuilder("\n            |Index {\n            |   name = '");
             sb.append(this.name);
             sb.append("',\n            |   unique = '");
@@ -262,33 +371,16 @@ public final class TableInfo {
             SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(" }"), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
             sb.append(unit);
             sb.append("\n            |}\n        ");
-            joinToString$default = SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
-            return joinToString$default;
+            return SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public Index(java.lang.String r5, boolean r6, java.util.List<java.lang.String> r7) {
-            /*
-                r4 = this;
-                int r0 = r7.size()
-                java.util.ArrayList r1 = new java.util.ArrayList
-                r1.<init>(r0)
-                r2 = 0
-            La:
-                if (r2 >= r0) goto L14
-                java.lang.String r3 = "ASC"
-                r1.add(r3)
-                int r2 = r2 + 1
-                goto La
-            L14:
-                r4.<init>(r5, r6, r7, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.room.util.TableInfo.Index.<init>(java.lang.String, boolean, java.util.List):void");
+        public Index(String str, boolean z, List<String> list) {
+            int size = list.size();
+            ArrayList arrayList = new ArrayList(size);
+            for (int i = 0; i < size; i++) {
+                arrayList.add("ASC");
+            }
+            this(str, z, list, arrayList);
         }
     }
 
@@ -296,7 +388,6 @@ public final class TableInfo {
         this(str, map, set, (i & 8) != 0 ? null : set2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Column {
         public final int affinity;
         public final int createdFrom;
@@ -306,7 +397,6 @@ public final class TableInfo {
         public final int primaryKeyPosition;
         public final String type;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -364,7 +454,6 @@ public final class TableInfo {
         }
 
         public final String toString() {
-            String joinToString$default;
             StringBuilder sb = new StringBuilder("\n            |Column {\n            |   name = '");
             sb.append(this.name);
             sb.append("',\n            |   type = '");
@@ -382,8 +471,7 @@ public final class TableInfo {
             }
             sb.append(str);
             sb.append("'\n            |}\n        ");
-            joinToString$default = SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
-            return joinToString$default;
+            return SequencesKt___SequencesKt.joinToString$default(new TransformingSequence(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(StringsKt__IndentKt.trimMargin$default(sb.toString())), new StringsKt__IndentKt$$ExternalSyntheticLambda0()), "\n", null, 62);
         }
 
         public Column(String str, String str2, boolean z, int i) {

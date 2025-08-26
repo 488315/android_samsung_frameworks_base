@@ -49,24 +49,24 @@ public class HdmiDeviceInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public HdmiDeviceInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            if (readInt == 0) {
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
-                String readString = parcel.readString();
-                return HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(readInt4).setPhysicalAddress(readInt2).setPortId(readInt3).setDeviceType(readInt5).setVendorId(readInt6).setDisplayName(readString).setDevicePowerStatus(readInt7).setCecVersion(parcel.readInt()).build();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            if (i == 0) {
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                String string = parcel.readString();
+                return HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(i4).setPhysicalAddress(i2).setPortId(i3).setDeviceType(i5).setVendorId(i6).setDisplayName(string).setDevicePowerStatus(i7).setCecVersion(parcel.readInt()).build();
             }
-            if (readInt == 1) {
-                return HdmiDeviceInfo.mhlDevice(readInt2, readInt3, parcel.readInt(), parcel.readInt());
+            if (i == 1) {
+                return HdmiDeviceInfo.mhlDevice(i2, i3, parcel.readInt(), parcel.readInt());
             }
-            if (readInt == 2) {
-                return HdmiDeviceInfo.hardwarePort(readInt2, readInt3);
+            if (i == 2) {
+                return HdmiDeviceInfo.hardwarePort(i2, i3);
             }
-            if (readInt != 100) {
+            if (i != 100) {
                 return null;
             }
             return HdmiDeviceInfo.INACTIVE_DEVICE;

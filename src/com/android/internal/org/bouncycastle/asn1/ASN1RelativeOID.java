@@ -71,7 +71,7 @@ public class ASN1RelativeOID extends ASN1Primitive {
         byte[] bArr2 = bArr;
         StringBuffer stringBuffer = new StringBuffer();
         boolean z2 = true;
-        BigInteger bigInteger = null;
+        BigInteger bigIntegerShiftLeft = null;
         long j = 0;
         for (int i = 0; i != bArr2.length; i++) {
             byte b = bArr2[i];
@@ -89,18 +89,18 @@ public class ASN1RelativeOID extends ASN1Primitive {
                     j = j2 << 7;
                 }
             } else {
-                BigInteger or = (bigInteger == null ? BigInteger.valueOf(j) : bigInteger).or(BigInteger.valueOf(b & Byte.MAX_VALUE));
+                BigInteger bigIntegerOr = (bigIntegerShiftLeft == null ? BigInteger.valueOf(j) : bigIntegerShiftLeft).or(BigInteger.valueOf(b & Byte.MAX_VALUE));
                 if ((b & 128) == 0) {
                     if (z2) {
                         z2 = false;
                     } else {
                         stringBuffer.append('.');
                     }
-                    stringBuffer.append(or);
-                    bigInteger = null;
+                    stringBuffer.append(bigIntegerOr);
+                    bigIntegerShiftLeft = null;
                     j = 0;
                 } else {
-                    bigInteger = or.shiftLeft(7);
+                    bigIntegerShiftLeft = bigIntegerOr.shiftLeft(7);
                 }
             }
         }
@@ -149,11 +149,11 @@ public class ASN1RelativeOID extends ASN1Primitive {
     private void doOutput(ByteArrayOutputStream byteArrayOutputStream) {
         OIDTokenizer oIDTokenizer = new OIDTokenizer(this.identifier);
         while (oIDTokenizer.hasMoreTokens()) {
-            String nextToken = oIDTokenizer.nextToken();
-            if (nextToken.length() <= 18) {
-                writeField(byteArrayOutputStream, Long.parseLong(nextToken));
+            String strNextToken = oIDTokenizer.nextToken();
+            if (strNextToken.length() <= 18) {
+                writeField(byteArrayOutputStream, Long.parseLong(strNextToken));
             } else {
-                writeField(byteArrayOutputStream, new BigInteger(nextToken));
+                writeField(byteArrayOutputStream, new BigInteger(strNextToken));
             }
         }
     }
@@ -171,59 +171,36 @@ public class ASN1RelativeOID extends ASN1Primitive {
         return new ASN1RelativeOID(bArr, z);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x002d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:13:0x0022, code lost:
     
         return false;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    static boolean isValidIdentifier(java.lang.String r8, int r9) {
-        /*
-            int r0 = r8.length()
-            r1 = 0
-            r2 = r1
-        L6:
-            int r3 = r0 + (-1)
-            r4 = 48
-            r5 = 1
-            if (r3 < r9) goto L2e
-            char r6 = r8.charAt(r3)
-            r7 = 46
-            if (r6 != r7) goto L23
-            if (r2 == 0) goto L22
-            if (r2 <= r5) goto L20
-            char r0 = r8.charAt(r0)
-            if (r0 != r4) goto L20
-            goto L22
-        L20:
-            r2 = r1
-            goto L2b
-        L22:
-            return r1
-        L23:
-            if (r4 > r6) goto L2d
-            r0 = 57
-            if (r6 > r0) goto L2d
-            int r2 = r2 + 1
-        L2b:
-            r0 = r3
-            goto L6
-        L2d:
-            return r1
-        L2e:
-            if (r2 == 0) goto L3a
-            if (r2 <= r5) goto L39
-            char r8 = r8.charAt(r0)
-            if (r8 != r4) goto L39
-            goto L3a
-        L39:
-            return r5
-        L3a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.asn1.ASN1RelativeOID.isValidIdentifier(java.lang.String, int):boolean");
+    static boolean isValidIdentifier(String str, int i) {
+        int length = str.length();
+        int i2 = 0;
+        while (true) {
+            int i3 = length - 1;
+            if (i3 < i) {
+                return i2 != 0 && (i2 <= 1 || str.charAt(length) != '0');
+            }
+            char cCharAt = str.charAt(i3);
+            if (cCharAt == '.') {
+                if (i2 == 0 || (i2 > 1 && str.charAt(length) == '0')) {
+                    break;
+                }
+                i2 = 0;
+            } else {
+                if ('0' > cCharAt || cCharAt > '9') {
+                    break;
+                }
+                i2++;
+            }
+            length = i3;
+        }
+        return false;
     }
 
     static void writeField(ByteArrayOutputStream byteArrayOutputStream, long j) {
@@ -239,18 +216,18 @@ public class ASN1RelativeOID extends ASN1Primitive {
     }
 
     static void writeField(ByteArrayOutputStream byteArrayOutputStream, BigInteger bigInteger) {
-        int bitLength = (bigInteger.bitLength() + 6) / 7;
-        if (bitLength == 0) {
+        int iBitLength = (bigInteger.bitLength() + 6) / 7;
+        if (iBitLength == 0) {
             byteArrayOutputStream.write(0);
             return;
         }
-        byte[] bArr = new byte[bitLength];
-        int i = bitLength - 1;
+        byte[] bArr = new byte[iBitLength];
+        int i = iBitLength - 1;
         for (int i2 = i; i2 >= 0; i2--) {
             bArr[i2] = (byte) (bigInteger.intValue() | 128);
             bigInteger = bigInteger.shiftRight(7);
         }
         bArr[i] = (byte) (bArr[i] & Byte.MAX_VALUE);
-        byteArrayOutputStream.write(bArr, 0, bitLength);
+        byteArrayOutputStream.write(bArr, 0, iBitLength);
     }
 }

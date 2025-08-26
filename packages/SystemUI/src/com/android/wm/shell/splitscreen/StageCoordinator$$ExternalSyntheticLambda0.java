@@ -4,7 +4,6 @@ import android.view.SurfaceControl;
 import android.window.WindowContainerTransaction;
 import com.android.wm.shell.splitscreen.SplitScreenTransitions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class StageCoordinator$$ExternalSyntheticLambda0 implements SplitScreenTransitions.TransitionConsumedCallback, SplitScreenTransitions.TransitionFinishedCallback {
     public final /* synthetic */ int $r8$classId;
@@ -21,8 +20,11 @@ public final /* synthetic */ class StageCoordinator$$ExternalSyntheticLambda0 im
             case 0:
                 this.f$0.mSplitLayout.setDividerInteractive("handleLayoutSizeChange", true, false);
                 break;
-            default:
+            case 1:
                 this.f$0.mSplitLayout.setDividerInteractive("onSplitResizeConsumed", true, false);
+                break;
+            default:
+                this.f$0.mSplitLayout.setDividerInteractive("swapParallelStageTasks", true, false);
                 break;
         }
     }
@@ -35,8 +37,15 @@ public final /* synthetic */ class StageCoordinator$$ExternalSyntheticLambda0 im
                 stageCoordinator.mSplitLayout.setDividerInteractive("onSplitResizeFinish", true, false);
                 stageCoordinator.mSplitLayout.populateTouchZones();
                 break;
+            case 3:
             default:
+                this.f$0.prepareExitSplitScreen(-1, 0, windowContainerTransaction, true);
+                break;
+            case 4:
                 this.f$0.mSplitLayout.setDividerInteractive("handleLayoutSizeChange", true, false);
+                break;
+            case 5:
+                this.f$0.mSplitLayout.setDividerInteractive("swapParallelStageTasks", true, false);
                 break;
         }
     }

@@ -7,7 +7,6 @@ import com.android.systemui.touchpad.tutorial.ui.viewmodel.GestureRecognizerAdap
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HomeGestureRecognizer implements GestureRecognizer {
     public final DistanceTracker distanceTracker;
@@ -30,27 +29,27 @@ public final class HomeGestureRecognizer implements GestureRecognizer {
         if (GestureRecognizerKt.isMultifingerTouchpadSwipe(motionEvent)) {
             if (!GestureRecognizerKt.isNFingerTouchpadSwipe(motionEvent, 3)) {
                 if (motionEvent.getActionMasked() == 1) {
-                    this.gestureStateChangedCallback.mo779invoke(GestureState.Error.INSTANCE);
+                    this.gestureStateChangedCallback.mo781invoke(GestureState.Error.INSTANCE);
                     return;
                 }
                 return;
             }
-            DistanceGestureState processEvent = this.distanceTracker.processEvent(motionEvent);
+            DistanceGestureState distanceGestureStateProcessEvent = this.distanceTracker.processEvent(motionEvent);
             this.velocityTracker.accept(motionEvent);
             Function1 function1 = this.gestureStateChangedCallback;
-            if (processEvent instanceof Finished) {
-                if ((-((Finished) processEvent).deltaY) < this.gestureDistanceThresholdPx || Math.abs(((VerticalVelocityTracker) this.velocityTracker).velocityTracker.calculateVelocity() / 1000) < this.velocityThresholdPxPerMs) {
-                    function1.mo779invoke(GestureState.Error.INSTANCE);
+            if (distanceGestureStateProcessEvent instanceof Finished) {
+                if ((-((Finished) distanceGestureStateProcessEvent).deltaY) < this.gestureDistanceThresholdPx || Math.abs(((VerticalVelocityTracker) this.velocityTracker).velocityTracker.calculateVelocity() / 1000) < this.velocityThresholdPxPerMs) {
+                    function1.mo781invoke(GestureState.Error.INSTANCE);
                     return;
                 } else {
-                    function1.mo779invoke(GestureState.Finished.INSTANCE);
+                    function1.mo781invoke(GestureState.Finished.INSTANCE);
                     return;
                 }
             }
-            if (processEvent instanceof Moving) {
-                function1.mo779invoke(new GestureState.InProgress(MathUtils.saturate((-((Moving) processEvent).deltaY) / this.gestureDistanceThresholdPx), null, 2, null));
-            } else if (processEvent instanceof Started) {
-                function1.mo779invoke(new GestureState.InProgress(0.0f, null, 3, null));
+            if (distanceGestureStateProcessEvent instanceof Moving) {
+                function1.mo781invoke(new GestureState.InProgress(MathUtils.saturate((-((Moving) distanceGestureStateProcessEvent).deltaY) / this.gestureDistanceThresholdPx), null, 2, null));
+            } else if (distanceGestureStateProcessEvent instanceof Started) {
+                function1.mo781invoke(new GestureState.InProgress(0.0f, null, 3, null));
             }
         }
     }

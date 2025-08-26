@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DemoMobileConnectionRepositoryKairos implements MobileConnectionRepositoryKairos, KairosBuilder {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -61,7 +60,6 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
     public final int subId;
     public final TableLogBuffer tableLogBuffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,7 +84,7 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
         this.lastMobileEvent = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
                 Events events4 = events;
                 BuildScope buildScope = (BuildScope) obj;
@@ -95,35 +93,35 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
                         return ((BuildScopeImpl) buildScope).stateScope.holdState(events4, demoMobileConnectionRepositoryKairos.initialState);
                     case 1:
                         int i3 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
-                        return holdState;
+                        StateInit stateInitHoldState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
+                        return stateInitHoldState;
                     default:
                         int i4 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
-                        return holdState2;
+                        StateInit stateInitHoldState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
+                        return stateInitHoldState2;
                 }
             }
         });
-        State buildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda11
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda11
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i3 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                EventsInit mapCheap = EventsKt.mapCheap(Events.this, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(15));
-                EventsInit mapCheap2 = EventsKt.mapCheap(events3, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(16));
+                EventsInit eventsInitMapCheap = EventsKt.mapCheap(events, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(15));
+                EventsInit eventsInitMapCheap2 = EventsKt.mapCheap(events3, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(16));
                 DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
-                return ((BuildScopeImpl) ((BuildScope) obj)).stateScope.holdState(MergeKt.mergeLeft(mapCheap, mapCheap2, EventsKt.mapCheap(events2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34(demoMobileConnectionRepositoryKairos, 0))), Either.First.m2571boximpl(demoMobileConnectionRepositoryKairos.initialState));
+                return ((BuildScopeImpl) ((BuildScope) obj)).stateScope.holdState(MergeKt.mergeLeft(eventsInitMapCheap, eventsInitMapCheap2, EventsKt.mapCheap(events2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34(demoMobileConnectionRepositoryKairos, 0))), Either.First.m2588boximpl(demoMobileConnectionRepositoryKairos.initialState));
             }
         });
-        this.lastEvent = buildState;
-        final StateInit map = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(9));
+        this.lastEvent = stateBuildState;
+        final StateInit map = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(9));
         final int i3 = 3;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
@@ -163,10 +161,10 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
         });
         this.carrierId = map;
         final int i4 = 1;
-        State buildState2 = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
+        State stateBuildState2 = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
                 Events events4 = events;
                 BuildScope buildScope = (BuildScope) obj;
@@ -175,28 +173,28 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
                         return ((BuildScopeImpl) buildScope).stateScope.holdState(events4, demoMobileConnectionRepositoryKairos.initialState);
                     case 1:
                         int i32 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
-                        return holdState;
+                        StateInit stateInitHoldState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
+                        return stateInitHoldState;
                     default:
                         int i42 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
-                        return holdState2;
+                        StateInit stateInitHoldState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
+                        return stateInitHoldState2;
                 }
             }
         });
-        this.inflateSignalStrength = buildState2;
+        this.inflateSignalStrength = stateBuildState2;
         Boolean bool = Boolean.TRUE;
         this.allowNetworkSliceIndicator = StateKt.stateOf(bool);
         Boolean bool2 = Boolean.FALSE;
         this.isEmergencyOnly = StateKt.stateOf(bool2);
-        final StateInit map2 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(10));
+        final StateInit map2 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(10));
         final int i5 = 4;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i5) {
                     case 0:
@@ -235,12 +233,12 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         this.isRoaming = map2;
-        final StateInit map3 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(11));
+        final StateInit map3 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(11));
         final int i6 = 5;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i6) {
                     case 0:
@@ -279,12 +277,12 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         this.operatorAlphaShort = map3;
-        final StateInit map4 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(12));
+        final StateInit map4 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(12));
         final int i7 = 0;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i7) {
                     case 0:
@@ -327,7 +325,7 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
         this.isNonTerrestrial = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
                 Events events4 = events;
                 BuildScope buildScope = (BuildScope) obj;
@@ -336,24 +334,24 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
                         return ((BuildScopeImpl) buildScope).stateScope.holdState(events4, demoMobileConnectionRepositoryKairos.initialState);
                     case 1:
                         int i32 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
-                        return holdState;
+                        StateInit stateInitHoldState = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(14)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "inflate");
+                        return stateInitHoldState;
                     default:
                         int i42 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                        StateInit holdState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
-                        DiffableKt.logBooleanDiffsForTable(buildScope, holdState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
-                        return holdState2;
+                        StateInit stateInitHoldState2 = ((BuildScopeImpl) buildScope).stateScope.holdState(EventsKt.map(events4, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(17)), Boolean.FALSE);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitHoldState2, demoMobileConnectionRepositoryKairos.tableLogBuffer, "", "isNtn");
+                        return stateInitHoldState2;
                 }
             }
         });
         this.isGsm = StateKt.stateOf(bool2);
-        final StateInit map5 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(0));
+        final StateInit map5 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(0));
         final int i9 = 6;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i9) {
                     case 0:
@@ -392,12 +390,12 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         this.cdmaLevel = map5;
-        final StateInit map6 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(18));
+        final StateInit map6 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(18));
         final int i10 = 7;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i10) {
                     case 0:
@@ -436,55 +434,55 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         this.primaryLevel = map6;
-        final StateInit stateOf = StateKt.stateOf(0);
+        final StateInit stateInitStateOf = StateKt.stateOf(0);
         final int i11 = 8;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i11) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "");
                         break;
                     case 2:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 3:
-                        DiffableKt.logIntDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "carrierId");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "carrierId");
                         break;
                     case 4:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "roaming");
                         break;
                     case 5:
                         DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = stateOf;
+                        StateInit stateInit = stateInitStateOf;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(demoMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 6:
-                        DiffableKt.logIntDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                     case 7:
-                        DiffableKt.logIntDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, stateOf, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitStateOf, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.satelliteLevel = stateOf;
+        this.satelliteLevel = stateInitStateOf;
         final int i12 = 0;
-        final State buildState3 = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda8
+        final State stateBuildState3 = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda8
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Object obj2 = events;
                 Object obj3 = events3;
                 BuildScope buildScope = (BuildScope) obj;
@@ -502,8 +500,8 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda8
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Object obj2 = buildState3;
+            public final Object mo781invoke(Object obj) {
+                Object obj2 = stateBuildState3;
                 Object obj3 = this;
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i13) {
@@ -516,13 +514,13 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
                 }
             }
         });
-        this.dataConnectionState = buildState3;
-        final StateInit map7 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(1));
+        this.dataConnectionState = stateBuildState3;
+        final StateInit map7 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(1));
         final int i14 = 1;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i14) {
                     case 0:
@@ -561,12 +559,12 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         this.dataActivityDirection = map7;
-        final StateInit map8 = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(2));
+        final StateInit map8 = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(2));
         final int i15 = 2;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i15) {
                     case 0:
@@ -608,24 +606,24 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
         this.resolvedNetworkType = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.demo.DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda15
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
-                DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = DemoMobileConnectionRepositoryKairos.this;
+                DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this.f$0;
                 DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34 demoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34 = new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34(demoMobileConnectionRepositoryKairos, 1);
                 StateScopeImpl stateScopeImpl = ((BuildScopeImpl) buildScope).stateScope;
                 stateScopeImpl.getClass();
-                StateInit sampleTransactionals = stateScopeImpl.sampleTransactionals(StateKt.map(demoMobileConnectionRepositoryKairos.lastEvent, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(demoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34, 0)));
-                DiffableKt.logDiffsForTable(buildScope, sampleTransactionals, demoMobileConnectionRepositoryKairos.tableLogBuffer, "");
-                return sampleTransactionals;
+                StateInit stateInitSampleTransactionals = stateScopeImpl.sampleTransactionals(StateKt.map(demoMobileConnectionRepositoryKairos.lastEvent, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(demoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34, 0)));
+                DiffableKt.logDiffsForTable(buildScope, stateInitSampleTransactionals, demoMobileConnectionRepositoryKairos.tableLogBuffer, "");
+                return stateInitSampleTransactionals;
             }
         });
-        this.numberOfLevels = StateKt.map(buildState2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(3));
+        this.numberOfLevels = StateKt.map(stateBuildState2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(3));
         this.dataEnabled = StateKt.stateOf(bool);
-        this.cdmaRoaming = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(4));
-        this.networkName = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(5));
-        this.carrierName = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(6));
-        this.isAllowedDuringAirplaneMode = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(7));
-        this.hasPrioritizedNetworkCapabilities = StateKt.map(buildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(8));
+        this.cdmaRoaming = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(4));
+        this.networkName = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(5));
+        this.carrierName = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(6));
+        this.isAllowedDuringAirplaneMode = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(7));
+        this.hasPrioritizedNetworkCapabilities = StateKt.map(stateBuildState, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(8));
         this.isInEcmMode = StateKt.stateOf(bool2);
     }
 

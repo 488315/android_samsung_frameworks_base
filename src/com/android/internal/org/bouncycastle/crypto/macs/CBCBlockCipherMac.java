@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.macs;
 
 import com.android.internal.org.bouncycastle.crypto.BlockCipher;
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.modes.CBCBlockCipher;
 import com.android.internal.org.bouncycastle.crypto.paddings.BlockCipherPadding;
@@ -45,7 +46,7 @@ public class CBCBlockCipherMac implements Mac {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Mac
-    public void init(CipherParameters cipherParameters) {
+    public void init(CipherParameters cipherParameters) throws IllegalArgumentException {
         reset();
         this.cipher.init(true, cipherParameters);
     }
@@ -56,7 +57,7 @@ public class CBCBlockCipherMac implements Mac {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Mac
-    public void update(byte b) {
+    public void update(byte b) throws IllegalStateException, DataLengthException {
         int i = this.bufOff;
         byte[] bArr = this.buf;
         if (i == bArr.length) {
@@ -70,7 +71,7 @@ public class CBCBlockCipherMac implements Mac {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Mac
-    public void update(byte[] bArr, int i, int i2) {
+    public void update(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException {
         if (i2 < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -94,7 +95,7 @@ public class CBCBlockCipherMac implements Mac {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Mac
-    public int doFinal(byte[] bArr, int i) {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         int blockSize = this.cipher.getBlockSize();
         if (this.padding == null) {
             while (true) {

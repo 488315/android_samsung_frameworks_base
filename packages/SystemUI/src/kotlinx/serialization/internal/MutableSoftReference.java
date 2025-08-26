@@ -3,7 +3,6 @@ package kotlinx.serialization.internal;
 import java.lang.ref.SoftReference;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MutableSoftReference {
     public volatile SoftReference reference = new SoftReference(null);
@@ -13,8 +12,8 @@ public final class MutableSoftReference {
         if (obj != null) {
             return obj;
         }
-        Object invoke = function0.invoke();
-        this.reference = new SoftReference(invoke);
-        return invoke;
+        Object objInvoke = function0.invoke();
+        this.reference = new SoftReference(objInvoke);
+        return objInvoke;
     }
 }

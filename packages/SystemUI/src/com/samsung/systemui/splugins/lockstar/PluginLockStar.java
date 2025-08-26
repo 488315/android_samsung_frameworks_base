@@ -12,7 +12,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = PluginLockStar.ACTION, version = 4002)
 /* loaded from: classes4.dex */
 public interface PluginLockStar extends SPlugin {
@@ -35,7 +34,6 @@ public interface PluginLockStar extends SPlugin {
     public static final int VERSION = 4002;
     public static final String WIDGET_TYPE = "Widget";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Deprecated
     public interface Modifier<T> extends Consumer<T> {
     }
@@ -112,7 +110,6 @@ public interface PluginLockStar extends SPlugin {
     @Requires(target = PluginLockStar.class, version = 1007)
     void setDarkAmount(Float f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PluginLockStarCallback {
         <T> T get(String str);
 

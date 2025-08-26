@@ -5,7 +5,6 @@ import androidx.compose.ui.platform.AndroidComposeView;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LayoutNodeLayoutDelegate {
     public int childrenAccessingCoordinatesDuringPlacement;
@@ -54,7 +53,7 @@ public final class LayoutNodeLayoutDelegate {
     }
 
     /* renamed from: performLookaheadMeasure-BRTryo0$ui_release, reason: not valid java name */
-    public final void m648performLookaheadMeasureBRTryo0$ui_release(final long j) {
+    public final void m650performLookaheadMeasureBRTryo0$ui_release(final long j) {
         final LookaheadPassDelegate lookaheadPassDelegate = this.lookaheadPassDelegate;
         if (lookaheadPassDelegate != null) {
             LayoutNode.LayoutState layoutState = LayoutNode.LayoutState.LookaheadMeasuring;
@@ -71,9 +70,9 @@ public final class LayoutNodeLayoutDelegate {
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    LookaheadDelegate lookaheadDelegate = LookaheadPassDelegate.this.layoutNodeLayoutDelegate.getOuterCoordinator().getLookaheadDelegate();
+                    LookaheadDelegate lookaheadDelegate = lookaheadPassDelegate.layoutNodeLayoutDelegate.getOuterCoordinator().getLookaheadDelegate();
                     lookaheadDelegate.getClass();
-                    lookaheadDelegate.mo608measureBRTryo0(j);
+                    lookaheadDelegate.mo610measureBRTryo0(j);
                     return Unit.INSTANCE;
                 }
             };
@@ -85,9 +84,9 @@ public final class LayoutNodeLayoutDelegate {
             }
             layoutNodeLayoutDelegate.lookaheadLayoutPending = true;
             layoutNodeLayoutDelegate.lookaheadLayoutPendingForAlignment = true;
-            boolean isOutMostLookaheadRoot = LayoutNodeLayoutDelegateKt.isOutMostLookaheadRoot(layoutNode);
+            boolean zIsOutMostLookaheadRoot = LayoutNodeLayoutDelegateKt.isOutMostLookaheadRoot(layoutNode);
             MeasurePassDelegate measurePassDelegate = layoutNodeLayoutDelegate.measurePassDelegate;
-            if (isOutMostLookaheadRoot) {
+            if (zIsOutMostLookaheadRoot) {
                 measurePassDelegate.layoutPending = true;
                 measurePassDelegate.layoutPendingForAlignment = true;
             } else {

@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LogcatEchoTrackerDebug$clearAllOverrides$1 extends SuspendLambda implements Function2 {
     int label;
@@ -42,11 +41,11 @@ final class LogcatEchoTrackerDebug$clearAllOverrides$1 extends SuspendLambda imp
         ResultKt.throwOnFailure(obj);
         this.this$0.bufferOverrides = MapsKt__MapsKt.emptyMap();
         this.this$0.tagOverrides = MapsKt__MapsKt.emptyMap();
-        List listEchoOverrides = this.this$0.listEchoOverrides();
+        List listListEchoOverrides = this.this$0.listEchoOverrides();
         LogcatEchoTrackerDebug logcatEchoTrackerDebug = this.this$0;
         GlobalSettings globalSettings = logcatEchoTrackerDebug.globalSettings;
         logcatEchoTrackerDebug.settingFormat.getClass();
-        globalSettings.putString("systemui/logbuffer_echo_overrides", LogcatEchoSettingFormat.stringifyOverrides(listEchoOverrides));
+        globalSettings.putString("systemui/logbuffer_echo_overrides", LogcatEchoSettingFormat.stringifyOverrides(listListEchoOverrides));
         return Unit.INSTANCE;
     }
 }

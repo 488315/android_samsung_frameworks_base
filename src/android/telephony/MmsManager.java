@@ -20,22 +20,22 @@ public class MmsManager {
 
     public void sendMultimediaMessage(int i, Uri uri, String str, Bundle bundle, PendingIntent pendingIntent, long j) {
         try {
-            IMms asInterface = IMms.Stub.asInterface(ServiceManager.getService("imms"));
-            if (asInterface == null) {
+            IMms iMmsAsInterface = IMms.Stub.asInterface(ServiceManager.getService("imms"));
+            if (iMmsAsInterface == null) {
                 return;
             }
-            asInterface.sendMessage(i, -10000, ActivityThread.currentPackageName(), uri, str, bundle, pendingIntent, j, this.mContext.getAttributionTag());
+            iMmsAsInterface.sendMessage(i, -10000, ActivityThread.currentPackageName(), uri, str, bundle, pendingIntent, j, this.mContext.getAttributionTag());
         } catch (RemoteException unused) {
         }
     }
 
     public void downloadMultimediaMessage(int i, String str, Uri uri, Bundle bundle, PendingIntent pendingIntent, long j) {
         try {
-            IMms asInterface = IMms.Stub.asInterface(ServiceManager.getService("imms"));
-            if (asInterface == null) {
+            IMms iMmsAsInterface = IMms.Stub.asInterface(ServiceManager.getService("imms"));
+            if (iMmsAsInterface == null) {
                 return;
             }
-            asInterface.downloadMessage(i, -10000, ActivityThread.currentPackageName(), str, uri, bundle, pendingIntent, j, this.mContext.getAttributionTag());
+            iMmsAsInterface.downloadMessage(i, -10000, ActivityThread.currentPackageName(), str, uri, bundle, pendingIntent, j, this.mContext.getAttributionTag());
         } catch (RemoteException unused) {
         }
     }

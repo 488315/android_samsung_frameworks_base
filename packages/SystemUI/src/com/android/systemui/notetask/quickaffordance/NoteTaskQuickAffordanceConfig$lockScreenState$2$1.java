@@ -1,5 +1,6 @@
 package com.android.systemui.notetask.quickaffordance;
 
+import android.content.res.Resources;
 import android.os.Build;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
@@ -13,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NoteTaskQuickAffordanceConfig$lockScreenState$2$1 extends SuspendLambda implements Function5 {
     /* synthetic */ boolean Z$0;
@@ -31,20 +31,20 @@ final class NoteTaskQuickAffordanceConfig$lockScreenState$2$1 extends SuspendLam
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj3).booleanValue();
-        boolean booleanValue4 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue4 = ((Boolean) obj4).booleanValue();
         NoteTaskQuickAffordanceConfig$lockScreenState$2$1 noteTaskQuickAffordanceConfig$lockScreenState$2$1 = new NoteTaskQuickAffordanceConfig$lockScreenState$2$1(this.this$0, (Continuation) obj5);
-        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$0 = booleanValue;
-        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$1 = booleanValue2;
-        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$2 = booleanValue3;
-        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$3 = booleanValue4;
+        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$0 = zBooleanValue;
+        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$1 = zBooleanValue2;
+        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$2 = zBooleanValue3;
+        noteTaskQuickAffordanceConfig$lockScreenState$2$1.Z$3 = zBooleanValue4;
         return noteTaskQuickAffordanceConfig$lockScreenState$2$1.invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");

@@ -3,7 +3,6 @@ package com.samsung.android.knox.zt.config.securelog;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SignalName {
     public static final String ACCESSIBILITY_EVENT = "ACCESSIBILITY_EVENT";
@@ -157,7 +156,6 @@ public class SignalName {
     public static final String USER_INTERACTION_CONTROL_CAPABILITY = "USER_INTERACTION_CONTROL_CAPABILITY";
     public static final String VIDEO_CAPTURE_PERMISSION = "VIDEO_CAPTURE_PERMISSION";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface SignalNameType {
     }

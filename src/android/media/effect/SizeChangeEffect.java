@@ -11,13 +11,13 @@ public class SizeChangeEffect extends SingleFilterEffect {
     @Override // android.media.effect.SingleFilterEffect, android.media.effect.Effect
     public void apply(int i, int i2, int i3, int i4) {
         beginGLEffect();
-        Frame frameFromTexture = frameFromTexture(i, i2, i3);
-        Frame executeWithArgList = this.mFunction.executeWithArgList(this.mInputName, frameFromTexture);
-        Frame frameFromTexture2 = frameFromTexture(i4, executeWithArgList.getFormat().getWidth(), executeWithArgList.getFormat().getHeight());
-        frameFromTexture2.setDataFromFrame(executeWithArgList);
-        frameFromTexture.release();
-        frameFromTexture2.release();
-        executeWithArgList.release();
+        Frame frameFrameFromTexture = frameFromTexture(i, i2, i3);
+        Frame frameExecuteWithArgList = this.mFunction.executeWithArgList(this.mInputName, frameFrameFromTexture);
+        Frame frameFrameFromTexture2 = frameFromTexture(i4, frameExecuteWithArgList.getFormat().getWidth(), frameExecuteWithArgList.getFormat().getHeight());
+        frameFrameFromTexture2.setDataFromFrame(frameExecuteWithArgList);
+        frameFrameFromTexture.release();
+        frameFrameFromTexture2.release();
+        frameExecuteWithArgList.release();
         endGLEffect();
     }
 }

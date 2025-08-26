@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.telephony.IBooleanConsumer;
 import android.telephony.IIntegerConsumer;
 import android.telephony.satellite.stub.ISatellite;
-import android.telephony.satellite.stub.SatelliteImplBase;
 import android.util.Log;
 import com.android.internal.telephony.util.TelephonyUtils;
 import java.util.List;
@@ -107,7 +106,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda17
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$setSatelliteListener$0(iSatelliteListener);
+                    this.f$0.lambda$setSatelliteListener$0(iSatelliteListener);
                 }
             }, "setSatelliteListener");
         }
@@ -122,7 +121,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda16
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestSatelliteListeningEnabled$1(z, i, iIntegerConsumer);
+                    this.f$0.lambda$requestSatelliteListeningEnabled$1(z, i, iIntegerConsumer);
                 }
             }, "requestSatelliteListeningEnabled");
         }
@@ -137,7 +136,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda12
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$enableTerrestrialNetworkScanWhileSatelliteModeIsOn$2(z, iIntegerConsumer);
+                    this.f$0.lambda$enableTerrestrialNetworkScanWhileSatelliteModeIsOn$2(z, iIntegerConsumer);
                 }
             }, "enableTerrestrialNetworkScanWhileSatelliteModeIsOn");
         }
@@ -152,7 +151,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda21
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestSatelliteEnabled$3(satelliteModemEnableRequestAttributes, iIntegerConsumer);
+                    this.f$0.lambda$requestSatelliteEnabled$3(satelliteModemEnableRequestAttributes, iIntegerConsumer);
                 }
             }, "requestSatelliteEnabled");
         }
@@ -167,7 +166,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestIsSatelliteEnabled$4(iIntegerConsumer, iBooleanConsumer);
+                    this.f$0.lambda$requestIsSatelliteEnabled$4(iIntegerConsumer, iBooleanConsumer);
                 }
             }, "requestIsSatelliteEnabled");
         }
@@ -182,7 +181,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestIsSatelliteSupported$5(iIntegerConsumer, iBooleanConsumer);
+                    this.f$0.lambda$requestIsSatelliteSupported$5(iIntegerConsumer, iBooleanConsumer);
                 }
             }, "requestIsSatelliteSupported");
         }
@@ -197,7 +196,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestSatelliteCapabilities$6(iIntegerConsumer, iSatelliteCapabilitiesConsumer);
+                    this.f$0.lambda$requestSatelliteCapabilities$6(iIntegerConsumer, iSatelliteCapabilitiesConsumer);
                 }
             }, "requestSatelliteCapabilities");
         }
@@ -212,7 +211,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$startSendingSatellitePointingInfo$7(iIntegerConsumer);
+                    this.f$0.lambda$startSendingSatellitePointingInfo$7(iIntegerConsumer);
                 }
             }, "startSendingSatellitePointingInfo");
         }
@@ -227,7 +226,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$stopSendingSatellitePointingInfo$8(iIntegerConsumer);
+                    this.f$0.lambda$stopSendingSatellitePointingInfo$8(iIntegerConsumer);
                 }
             }, "stopSendingSatellitePointingInfo");
         }
@@ -242,7 +241,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda20
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$pollPendingSatelliteDatagrams$9(iIntegerConsumer);
+                    this.f$0.lambda$pollPendingSatelliteDatagrams$9(iIntegerConsumer);
                 }
             }, "pollPendingSatelliteDatagrams");
         }
@@ -257,7 +256,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$sendSatelliteDatagram$10(satelliteDatagram, z, iIntegerConsumer);
+                    this.f$0.lambda$sendSatelliteDatagram$10(satelliteDatagram, z, iIntegerConsumer);
                 }
             }, "sendDatagram");
         }
@@ -272,7 +271,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda15
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestSatelliteModemState$11(iIntegerConsumer, iIntegerConsumer2);
+                    this.f$0.lambda$requestSatelliteModemState$11(iIntegerConsumer, iIntegerConsumer2);
                 }
             }, "requestSatelliteModemState");
         }
@@ -287,7 +286,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestTimeForNextSatelliteVisibility$12(iIntegerConsumer, iIntegerConsumer2);
+                    this.f$0.lambda$requestTimeForNextSatelliteVisibility$12(iIntegerConsumer, iIntegerConsumer2);
                 }
             }, "requestTimeForNextSatelliteVisibility");
         }
@@ -302,7 +301,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda19
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$setSatellitePlmn$13(i, list, list2, iIntegerConsumer);
+                    this.f$0.lambda$setSatellitePlmn$13(i, list, list2, iIntegerConsumer);
                 }
             }, "setSatellitePlmn");
         }
@@ -317,7 +316,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$setSatelliteEnabledForCarrier$14(i, z, iIntegerConsumer);
+                    this.f$0.lambda$setSatelliteEnabledForCarrier$14(i, z, iIntegerConsumer);
                 }
             }, "setSatelliteEnabledForCarrier");
         }
@@ -332,7 +331,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestIsSatelliteEnabledForCarrier$15(i, iIntegerConsumer, iBooleanConsumer);
+                    this.f$0.lambda$requestIsSatelliteEnabledForCarrier$15(i, iIntegerConsumer, iBooleanConsumer);
                 }
             }, "requestIsSatelliteEnabledForCarrier");
         }
@@ -347,7 +346,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda14
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$requestSignalStrength$16(iIntegerConsumer, iNtnSignalStrengthConsumer);
+                    this.f$0.lambda$requestSignalStrength$16(iIntegerConsumer, iNtnSignalStrengthConsumer);
                 }
             }, "requestSignalStrength");
         }
@@ -362,7 +361,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda22
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$startSendingNtnSignalStrength$17(iIntegerConsumer);
+                    this.f$0.lambda$startSendingNtnSignalStrength$17(iIntegerConsumer);
                 }
             }, "startSendingNtnSignalStrength");
         }
@@ -377,7 +376,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$stopSendingNtnSignalStrength$18(iIntegerConsumer);
+                    this.f$0.lambda$stopSendingNtnSignalStrength$18(iIntegerConsumer);
                 }
             }, "stopSendingNtnSignalStrength");
         }
@@ -392,7 +391,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda18
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$abortSendingSatelliteDatagrams$19(iIntegerConsumer);
+                    this.f$0.lambda$abortSendingSatelliteDatagrams$19(iIntegerConsumer);
                 }
             }, "abortSendingSatelliteDatagrams");
         }
@@ -412,7 +411,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda13
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$updateSatelliteSubscription$20(str, iIntegerConsumer);
+                    this.f$0.lambda$updateSatelliteSubscription$20(str, iIntegerConsumer);
                 }
             }, "updateSatelliteSubscription");
         }
@@ -427,7 +426,7 @@ public class SatelliteImplBase extends SatelliteService {
             executeMethodAsync(new Runnable() { // from class: android.telephony.satellite.stub.SatelliteImplBase$1$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SatelliteImplBase.AnonymousClass1.this.lambda$updateSystemSelectionChannels$21(list, iIntegerConsumer);
+                    this.f$0.lambda$updateSystemSelectionChannels$21(list, iIntegerConsumer);
                 }
             }, "updateSystemSelectionChannels");
         }

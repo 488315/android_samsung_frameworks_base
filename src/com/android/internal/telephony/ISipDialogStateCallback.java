@@ -47,9 +47,9 @@ public interface ISipDialogStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipDialogStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISipDialogStateCallback)) {
-                return (ISipDialogStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipDialogStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISipDialogStateCallback)) {
+                return (ISipDialogStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,9 +76,9 @@ public interface ISipDialogStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SipDialogState.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SipDialogState.CREATOR);
                 parcel.enforceNoDataAvail();
-                onActiveSipDialogsChanged(createTypedArrayList);
+                onActiveSipDialogsChanged(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,13 +102,13 @@ public interface ISipDialogStateCallback extends IInterface {
 
             @Override // com.android.internal.telephony.ISipDialogStateCallback
             public void onActiveSipDialogsChanged(List<SipDialogState> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDialogStateCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDialogStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

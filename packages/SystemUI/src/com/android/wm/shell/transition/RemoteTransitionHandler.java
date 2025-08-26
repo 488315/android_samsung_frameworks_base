@@ -19,7 +19,10 @@ import android.window.TransitionRequestInfo;
 import android.window.WindowAnimationState;
 import android.window.WindowContainerTransaction;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
+import com.android.systemui.animation.RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0;
 import com.android.wm.shell.common.ShellExecutor;
+import com.android.wm.shell.desktopmode.compatui.SystemModalsTransitionHandler$handoverIfNeeded$1;
+import com.android.wm.shell.keyguard.KeyguardTransitionHandler;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.transition.Transitions;
@@ -27,8 +30,9 @@ import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RemoteTransitionHandler implements Transitions.TransitionHandler {
     public static final boolean SUPPORT_MINIMIZE_REMOTE_TRANSITION = SystemProperties.getBoolean("persist.mt.debug.minimize_remote_transition", false);
@@ -41,7 +45,6 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
     public final ArrayMap mDeathHandlers = new ArrayMap();
     public final ArrayMap mRequestedInfoList = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.transition.RemoteTransitionHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends IRemoteTransitionFinishedCallback.Stub {
         public final /* synthetic */ Transitions.TransitionFinishCallback val$finishCallback;
@@ -58,10 +61,10 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
 
         public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction, SurfaceControl.Transaction transaction) {
             RemoteTransitionHandler remoteTransitionHandler = RemoteTransitionHandler.this;
-            IBinder asBinder = this.val$remote.asBinder();
+            IBinder iBinderAsBinder = this.val$remote.asBinder();
             Transitions.TransitionFinishCallback transitionFinishCallback = this.val$finishCallback;
             boolean z = RemoteTransitionHandler.SUPPORT_MINIMIZE_REMOTE_TRANSITION;
-            remoteTransitionHandler.unhandleDeath(asBinder, transitionFinishCallback);
+            remoteTransitionHandler.unhandleDeath(iBinderAsBinder, transitionFinishCallback);
             if (transaction != null) {
                 this.val$finishTransaction.merge(transaction);
             }
@@ -69,7 +72,6 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.transition.RemoteTransitionHandler$2, reason: invalid class name */
     public class AnonymousClass2 extends IRemoteTransitionFinishedCallback.Stub {
         public final /* synthetic */ Transitions.TransitionFinishCallback val$finishCallback;
@@ -96,7 +98,6 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RemoteDeathHandler implements IBinder.DeathRecipient {
         public final IBinder mRemote;
         public final ArrayList mPendingFinishCallbacks = new ArrayList();
@@ -120,13 +121,13 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
         if (iRemoteTransition.asBinder().queryLocalInterface("android.window.IRemoteTransition") == null) {
             return transaction;
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            transaction.writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            return (SurfaceControl.Transaction) SurfaceControl.Transaction.CREATOR.createFromParcel(obtain);
+            transaction.writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return (SurfaceControl.Transaction) SurfaceControl.Transaction.CREATOR.createFromParcel(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -152,6 +153,37 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
             anonymousClass2.onTransitionFinished(null, null);
         } catch (RemoteException unused) {
         }
+    }
+
+    @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
+    public final Transitions.TransitionHandler getHandlerForHandover(IBinder iBinder, TransitionInfo transitionInfo, Function function) {
+        if (!Transitions.SHELL_TRANSITIONS_ROTATION && TransitionUtil.hasDisplayChange(transitionInfo)) {
+            this.mRequestedRemotes.remove(iBinder);
+            return null;
+        }
+        if (((RemoteTransition) this.mRequestedRemotes.get(iBinder)) == null) {
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -9146248499991136778L, 0, String.valueOf(transitionInfo));
+            }
+            for (int size = this.mFilters.size() - 1; size >= 0; size--) {
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7551344402092077994L, 0, String.valueOf(this.mFilters.get(size)));
+                }
+                if (((TransitionFilter) ((Pair) this.mFilters.get(size)).first).matches(transitionInfo)) {
+                    if (function != null) {
+                        if (((Boolean) ((SystemModalsTransitionHandler$handoverIfNeeded$1) function).apply(((RemoteTransition) ((Pair) this.mFilters.get(size)).second).getDebugName())).booleanValue()) {
+                        }
+                    }
+                    Slog.d("RemoteTransitionHandler", "Found filter" + this.mFilters.get(size));
+                    this.mRequestedRemotes.put(iBinder, (RemoteTransition) ((Pair) this.mFilters.get(size)).second);
+                    return this;
+                }
+            }
+        }
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
+            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, 1741514098865223203L, 1, Long.valueOf(transitionInfo.getDebugId()));
+        }
+        return null;
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -216,18 +248,104 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
         return new WindowContainerTransaction();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:77:0x015e A[Catch: RemoteException -> 0x0179, TryCatch #1 {RemoteException -> 0x0179, blocks: (B:15:0x004c, B:18:0x0058, B:20:0x005c, B:22:0x0060, B:24:0x0066, B:26:0x006c, B:27:0x007e, B:29:0x0088, B:32:0x00da, B:34:0x00e7, B:36:0x00f7, B:38:0x00ff, B:40:0x0107, B:43:0x0110, B:44:0x0114, B:46:0x0123, B:48:0x0126, B:50:0x012c, B:52:0x0132, B:53:0x0145, B:63:0x0152, B:65:0x0175, B:75:0x0158, B:77:0x015e, B:78:0x0171, B:80:0x009f, B:82:0x00ae, B:84:0x00be, B:87:0x00c4, B:89:0x00cd, B:91:0x00cf, B:98:0x0054), top: B:14:0x004c }] */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void mergeAnimation(android.os.IBinder r18, android.window.TransitionInfo r19, android.view.SurfaceControl.Transaction r20, android.view.SurfaceControl.Transaction r21, android.os.IBinder r22, com.android.wm.shell.transition.Transitions.TransitionFinishCallback r23) {
-        /*
-            Method dump skipped, instructions count: 386
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.transition.RemoteTransitionHandler.mergeAnimation(android.os.IBinder, android.window.TransitionInfo, android.view.SurfaceControl$Transaction, android.view.SurfaceControl$Transaction, android.os.IBinder, com.android.wm.shell.transition.Transitions$TransitionFinishCallback):void");
+    public final void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, IBinder iBinder2, Transitions.TransitionFinishCallback transitionFinishCallback) {
+        IBinder iBinder3;
+        char c;
+        RemoteTransition remoteTransition = (RemoteTransition) this.mRequestedRemotes.get(iBinder2);
+        if (remoteTransition == null) {
+            return;
+        }
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -3133681306894255105L, 0, String.valueOf(remoteTransition));
+        }
+        IRemoteTransition remoteTransition2 = remoteTransition.getRemoteTransition();
+        if (remoteTransition2 == null) {
+            return;
+        }
+        AnonymousClass2 anonymousClass2 = new AnonymousClass2(transitionInfo, (CoreRune.FW_SHELL_TRANSITION_MERGE_TRANSFER && CoreRune.FW_SURFACE_DEBUG_APPLY) ? transaction.mDebugName : null, transaction, iBinder2, transitionFinishCallback);
+        try {
+            SurfaceControl.Transaction transactionCopyIfLocal = copyIfLocal(transaction, remoteTransition2);
+            TransitionInfo transitionInfoLocalRemoteCopy = transactionCopyIfLocal == transaction ? transitionInfo : transitionInfo.localRemoteCopy();
+            if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
+                if (!CoreRune.FW_SHELL_TRANSITION_BUG_FIX || !KeyguardTransitionHandler.handles(transitionInfo)) {
+                    TransitionInfo transitionInfo2 = (TransitionInfo) this.mRequestedInfoList.get(iBinder2);
+                    if (transitionInfo2 != null) {
+                        if (TransitionUtil.isOpeningType(transitionInfo.getType()) == TransitionUtil.isOpeningType(transitionInfo2.getType())) {
+                            int size = transitionInfo.getChanges().size() - 1;
+                            c = 1;
+                            int i = 0;
+                            int i2 = 0;
+                            while (true) {
+                                if (size < 0) {
+                                    if (i2 != i || i2 <= 0) {
+                                        break;
+                                    }
+                                } else {
+                                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(size);
+                                    if (!change.hasFlags(64) && change.getTaskInfo() == null) {
+                                        break;
+                                    }
+                                    i2++;
+                                    if (change.hasFlags(4)) {
+                                        i++;
+                                    }
+                                    size--;
+                                }
+                            }
+                        } else {
+                            c = 1;
+                        }
+                        ArrayList mergeableTasks = null;
+                        for (int size2 = transitionInfo.getChanges().size() - 1; size2 >= 0; size2--) {
+                            final TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(size2);
+                            if (change2.hasFlags(64) && change2.getTaskIdForActivity() != -1 && change2.getMode() != 6 && !change2.hasFixedRotationTransform()) {
+                                if (mergeableTasks == null) {
+                                    mergeableTasks = TransitionUtil.getMergeableTasks(transitionInfo2);
+                                }
+                                if (mergeableTasks.stream().anyMatch(new Predicate() { // from class: com.android.wm.shell.transition.RemoteTransitionHandler$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        TransitionInfo.Change change3 = change2;
+                                        boolean z = RemoteTransitionHandler.SUPPORT_MINIMIZE_REMOTE_TRANSITION;
+                                        return ((TransitionInfo.Change) obj).getTaskInfo().taskId == change3.getTaskIdForActivity();
+                                    }
+                                })) {
+                                }
+                            }
+                            if (transitionInfo.canMergeAsNoAnimation()) {
+                                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[c]) {
+                                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 5187832162080602232L, 0, String.valueOf(remoteTransition));
+                                }
+                                transaction.apply();
+                                transitionInfo.releaseAnimSurfaces();
+                                try {
+                                    anonymousClass2.onTransitionFinished(null, null);
+                                    return;
+                                } catch (RemoteException unused) {
+                                    return;
+                                }
+                            }
+                            prepareMergeOrTransferAnimationIfNeeded(iBinder, remoteTransition, transitionInfo, transitionInfo2);
+                            iBinder3 = iBinder;
+                        }
+                        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[c]) {
+                            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -5160684155544653374L, 0, String.valueOf(remoteTransition));
+                        }
+                        mergeAnimationIfNeeded(transitionInfo, transaction, anonymousClass2);
+                        return;
+                    }
+                } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -7675690055976013271L, 0, null);
+                }
+                iBinder3 = iBinder;
+            } else {
+                iBinder3 = iBinder;
+            }
+            remoteTransition2.mergeAnimation(iBinder3, transitionInfoLocalRemoteCopy, transactionCopyIfLocal, iBinder2, anonymousClass2);
+        } catch (RemoteException e) {
+            Log.e("ShellTransitions", "Error attempting to merge remote transition.", e);
+        }
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -309,19 +427,108 @@ public class RemoteTransitionHandler implements Transitions.TransitionHandler {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0185 A[Catch: RemoteException -> 0x01a1, TryCatch #0 {RemoteException -> 0x01a1, blocks: (B:56:0x0142, B:58:0x0146, B:60:0x0151, B:62:0x015f, B:64:0x0165, B:67:0x0178, B:69:0x0185, B:71:0x01a3, B:73:0x016c, B:75:0x0170, B:80:0x01a6), top: B:55:0x0142 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01a3 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0073  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean startAnimation(android.os.IBinder r17, android.window.TransitionInfo r18, android.view.SurfaceControl.Transaction r19, android.view.SurfaceControl.Transaction r20, com.android.wm.shell.transition.Transitions.TransitionFinishCallback r21) {
-        /*
-            Method dump skipped, instructions count: 495
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.transition.RemoteTransitionHandler.startAnimation(android.os.IBinder, android.window.TransitionInfo, android.view.SurfaceControl$Transaction, android.view.SurfaceControl$Transaction, com.android.wm.shell.transition.Transitions$TransitionFinishCallback):boolean");
+    public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
+        TransitionInfo.Change change;
+        if (!Transitions.SHELL_TRANSITIONS_ROTATION && TransitionUtil.hasDisplayChange(transitionInfo)) {
+            this.mRequestedRemotes.remove(iBinder);
+            if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
+                this.mRequestedInfoList.remove(iBinder);
+                return false;
+            }
+        } else if (!CoreRune.MW_FREEFORM_SHELL_TRANSITION || SUPPORT_MINIMIZE_REMOTE_TRANSITION) {
+            RemoteTransition remoteTransition = (RemoteTransition) this.mRequestedRemotes.get(iBinder);
+            if (remoteTransition == null) {
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -9146248499991136778L, 0, String.valueOf(transitionInfo));
+                }
+                int size = this.mFilters.size() - 1;
+                while (true) {
+                    if (size < 0) {
+                        break;
+                    }
+                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7551344402092077994L, 0, String.valueOf(this.mFilters.get(size)));
+                    }
+                    if (((TransitionFilter) ((Pair) this.mFilters.get(size)).first).matches(transitionInfo)) {
+                        Slog.d("RemoteTransitionHandler", "Found filter" + this.mFilters.get(size));
+                        remoteTransition = (RemoteTransition) ((Pair) this.mFilters.get(size)).second;
+                        this.mRequestedRemotes.put(iBinder, remoteTransition);
+                        break;
+                    }
+                    size--;
+                }
+            }
+            RemoteTransition remoteTransition2 = remoteTransition;
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -957464960872531856L, 1, Long.valueOf(transitionInfo.getDebugId()), String.valueOf(remoteTransition2));
+            }
+            if (remoteTransition2 != null) {
+                if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
+                    this.mRequestedInfoList.put(iBinder, transitionInfo);
+                }
+                AnonymousClass1 anonymousClass1 = new AnonymousClass1(remoteTransition2, transitionFinishCallback, transaction2, iBinder);
+                SurfaceControl.Transaction transactionCopyIfLocal = copyIfLocal(transaction, remoteTransition2.getRemoteTransition());
+                TransitionInfo transitionInfoLocalRemoteCopy = transactionCopyIfLocal == transaction ? transitionInfo : transitionInfo.localRemoteCopy();
+                try {
+                    if (CoreRune.FW_SHELL_TRANSITION_REMOTE) {
+                        for (int size2 = transitionInfoLocalRemoteCopy.getChanges().size() - 1; size2 >= 0; size2--) {
+                            TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfoLocalRemoteCopy.getChanges().get(size2);
+                            if ((CoreRune.FW_REMOTE_WALLPAPER_ANIM && TransitionUtil.isWallpaper(change2) && change2.getParent() != null) || (CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION && MultiTaskingTransitionProvider.buildForceHideAnimationIfNeeded("RemoteTransitionHandler", change2, this.mMultiTaskingTransitions))) {
+                                transitionInfoLocalRemoteCopy.getChanges().remove(change2);
+                                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 8970935360874034163L, 1, Long.valueOf(transitionInfo.getDebugId()), String.valueOf(change2));
+                                }
+                            }
+                        }
+                    }
+                    handleDeath(remoteTransition2.asBinder(), transitionFinishCallback);
+                    remoteTransition2.getRemoteTransition().startAnimation(iBinder, transitionInfoLocalRemoteCopy, transactionCopyIfLocal, anonymousClass1);
+                    transaction.clear();
+                    Transitions.setRunningRemoteTransitionDelegate(remoteTransition2.getAppThread());
+                    return true;
+                } catch (RemoteException e) {
+                    Log.e("ShellTransitions", "Error running remote transition.", e);
+                    if (transactionCopyIfLocal != transaction) {
+                        transactionCopyIfLocal.close();
+                    }
+                    transaction.apply();
+                    unhandleDeath(remoteTransition2.asBinder(), transitionFinishCallback);
+                    this.mRequestedRemotes.remove(iBinder);
+                    if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
+                        this.mRequestedInfoList.remove(iBinder);
+                    }
+                    this.mMainExecutor.execute(new RemoteTransitionHandler$$ExternalSyntheticLambda1(transitionFinishCallback, 0));
+                    return true;
+                }
+            }
+        } else {
+            int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+            while (true) {
+                if (iM < 0) {
+                    change = null;
+                    break;
+                }
+                change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
+                if (change.getMinimizeAnimState() != 0) {
+                    break;
+                }
+                iM--;
+            }
+            if (change != null) {
+                Log.d("RemoteTransitionHandler", "startAnimation: skipped by minimize, transit=" + iBinder + ", minimizeChange=" + change);
+                this.mRequestedRemotes.remove(iBinder);
+                if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
+                    this.mRequestedInfoList.remove(iBinder);
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler

@@ -57,11 +57,11 @@ public final class AppLinkInfo implements Parcelable {
     }
 
     AppLinkInfo(Parcel parcel) {
-        ComponentName readFromParcel = ComponentName.readFromParcel(parcel);
-        this.mComponentName = readFromParcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readFromParcel.getPackageName());
+        ComponentName fromParcel = ComponentName.readFromParcel(parcel);
+        this.mComponentName = fromParcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) fromParcel.getPackageName());
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mComponentName.getClassName());
-        String readString = parcel.readString();
-        this.mUri = readString != null ? Uri.parse(readString) : null;
+        String string = parcel.readString();
+        this.mUri = string != null ? Uri.parse(string) : null;
     }
 }

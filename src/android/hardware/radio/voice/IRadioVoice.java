@@ -327,9 +327,9 @@ public interface IRadioVoice extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioVoice)) {
-                return (IRadioVoice) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRadioVoice)) {
+                return (IRadioVoice) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -356,225 +356,225 @@ public interface IRadioVoice extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acceptCall(readInt);
+                    acceptCall(i3);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    cancelPendingUssd(readInt2);
+                    cancelPendingUssd(i4);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    conference(readInt3);
+                    conference(i5);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     Dial dial = (Dial) parcel.readTypedObject(Dial.CREATOR);
                     parcel.enforceNoDataAvail();
-                    dial(readInt4, dial);
+                    dial(i6, dial);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     Dial dial2 = (Dial) parcel.readTypedObject(Dial.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i9 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    emergencyDial(readInt5, dial2, readInt6, createStringArray, readInt7, readBoolean, readBoolean2);
+                    emergencyDial(i7, dial2, i8, strArrCreateStringArray, i9, z, z2);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    exitEmergencyCallbackMode(readInt8);
+                    exitEmergencyCallbackMode(i10);
                     return true;
                 case 7:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    explicitCallTransfer(readInt9);
+                    explicitCallTransfer(i11);
                     return true;
                 case 8:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     CallForwardInfo callForwardInfo = (CallForwardInfo) parcel.readTypedObject(CallForwardInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getCallForwardStatus(readInt10, callForwardInfo);
+                    getCallForwardStatus(i12, callForwardInfo);
                     return true;
                 case 9:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCallWaiting(readInt11, readInt12);
+                    getCallWaiting(i13, i14);
                     return true;
                 case 10:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getClip(readInt13);
+                    getClip(i15);
                     return true;
                 case 11:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getClir(readInt14);
+                    getClir(i16);
                     return true;
                 case 12:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCurrentCalls(readInt15);
+                    getCurrentCalls(i17);
                     return true;
                 case 13:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getLastCallFailCause(readInt16);
+                    getLastCallFailCause(i18);
                     return true;
                 case 14:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getMute(readInt17);
+                    getMute(i19);
                     return true;
                 case 15:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getPreferredVoicePrivacy(readInt18);
+                    getPreferredVoicePrivacy(i20);
                     return true;
                 case 16:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getTtyMode(readInt19);
+                    getTtyMode(i21);
                     return true;
                 case 17:
-                    int readInt20 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i22 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    handleStkCallSetupRequestFromSim(readInt20, readBoolean3);
+                    handleStkCallSetupRequestFromSim(i22, z3);
                     return true;
                 case 18:
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hangup(readInt21, readInt22);
+                    hangup(i23, i24);
                     return true;
                 case 19:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hangupForegroundResumeBackground(readInt23);
+                    hangupForegroundResumeBackground(i25);
                     return true;
                 case 20:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hangupWaitingOrBackground(readInt24);
+                    hangupWaitingOrBackground(i26);
                     return true;
                 case 21:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isVoNrEnabled(readInt25);
+                    isVoNrEnabled(i27);
                     return true;
                 case 22:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    rejectCall(readInt26);
+                    rejectCall(i28);
                     return true;
                 case 23:
                     responseAcknowledgement();
                     return true;
                 case 24:
-                    int readInt27 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendBurstDtmf(readInt27, readString, readInt28, readInt29);
+                    sendBurstDtmf(i29, string, i30, i31);
                     return true;
                 case 25:
-                    int readInt30 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i32 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendCdmaFeatureCode(readInt30, readString2);
+                    sendCdmaFeatureCode(i32, string2);
                     return true;
                 case 26:
-                    int readInt31 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i33 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendDtmf(readInt31, readString3);
+                    sendDtmf(i33, string3);
                     return true;
                 case 27:
-                    int readInt32 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i34 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendUssd(readInt32, readString4);
+                    sendUssd(i34, string4);
                     return true;
                 case 28:
-                    int readInt33 = parcel.readInt();
-                    int readInt34 = parcel.readInt();
+                    int i35 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    separateConnection(readInt33, readInt34);
+                    separateConnection(i35, i36);
                     return true;
                 case 29:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     CallForwardInfo callForwardInfo2 = (CallForwardInfo) parcel.readTypedObject(CallForwardInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setCallForward(readInt35, callForwardInfo2);
+                    setCallForward(i37, callForwardInfo2);
                     return true;
                 case 30:
-                    int readInt36 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int readInt37 = parcel.readInt();
+                    int i38 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCallWaiting(readInt36, readBoolean4, readInt37);
+                    setCallWaiting(i38, z4, i39);
                     return true;
                 case 31:
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setClir(readInt38, readInt39);
+                    setClir(i40, i41);
                     return true;
                 case 32:
-                    int readInt40 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i42 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMute(readInt40, readBoolean5);
+                    setMute(i42, z5);
                     return true;
                 case 33:
-                    int readInt41 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i43 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPreferredVoicePrivacy(readInt41, readBoolean6);
+                    setPreferredVoicePrivacy(i43, z6);
                     return true;
                 case 34:
-                    IRadioVoiceResponse asInterface = IRadioVoiceResponse.Stub.asInterface(parcel.readStrongBinder());
-                    IRadioVoiceIndication asInterface2 = IRadioVoiceIndication.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioVoiceResponse iRadioVoiceResponseAsInterface = IRadioVoiceResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioVoiceIndication iRadioVoiceIndicationAsInterface = IRadioVoiceIndication.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setResponseFunctions(asInterface, asInterface2);
+                    setResponseFunctions(iRadioVoiceResponseAsInterface, iRadioVoiceIndicationAsInterface);
                     return true;
                 case 35:
-                    int readInt42 = parcel.readInt();
-                    int readInt43 = parcel.readInt();
+                    int i44 = parcel.readInt();
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTtyMode(readInt42, readInt43);
+                    setTtyMode(i44, i45);
                     return true;
                 case 36:
-                    int readInt44 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i46 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setVoNrEnabled(readInt44, readBoolean7);
+                    setVoNrEnabled(i46, z7);
                     return true;
                 case 37:
-                    int readInt45 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    int i47 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    startDtmf(readInt45, readString5);
+                    startDtmf(i47, string5);
                     return true;
                 case 38:
-                    int readInt46 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopDtmf(readInt46);
+                    stopDtmf(i48);
                     return true;
                 case 39:
-                    int readInt47 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    switchWaitingOrHoldingAndActive(readInt47);
+                    switchWaitingOrHoldingAndActive(i49);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -601,629 +601,629 @@ public interface IRadioVoice extends IInterface {
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void acceptCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method acceptCall is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void cancelPendingUssd(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method cancelPendingUssd is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void conference(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method conference is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void dial(int i, Dial dial) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(dial, 0);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(dial, 0);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method dial is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void emergencyDial(int i, Dial dial, int i2, String[] strArr, int i3, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(dial, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(dial, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method emergencyDial is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void exitEmergencyCallbackMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method exitEmergencyCallbackMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void explicitCallTransfer(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method explicitCallTransfer is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getCallForwardStatus(int i, CallForwardInfo callForwardInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(callForwardInfo, 0);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(callForwardInfo, 0);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCallForwardStatus is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getCallWaiting(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCallWaiting is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getClip(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getClip is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getClir(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getClir is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getCurrentCalls(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCurrentCalls is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getLastCallFailCause(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getLastCallFailCause is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getMute(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getMute is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getPreferredVoicePrivacy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(15, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(15, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getPreferredVoicePrivacy is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void getTtyMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(16, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(16, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getTtyMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void handleStkCallSetupRequestFromSim(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(17, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(17, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method handleStkCallSetupRequestFromSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void hangup(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(18, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(18, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method hangup is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void hangupForegroundResumeBackground(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(19, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(19, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method hangupForegroundResumeBackground is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void hangupWaitingOrBackground(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(20, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(20, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method hangupWaitingOrBackground is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void isVoNrEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(21, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(21, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isVoNrEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void rejectCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(22, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(22, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method rejectCall is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void responseAcknowledgement() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (this.mRemote.transact(23, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (this.mRemote.transact(23, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void sendBurstDtmf(int i, String str, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    if (this.mRemote.transact(24, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    if (this.mRemote.transact(24, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendBurstDtmf is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void sendCdmaFeatureCode(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(25, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(25, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCdmaFeatureCode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void sendDtmf(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(26, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(26, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendDtmf is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void sendUssd(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(27, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(27, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendUssd is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void separateConnection(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(28, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(28, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method separateConnection is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setCallForward(int i, CallForwardInfo callForwardInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(callForwardInfo, 0);
-                    if (this.mRemote.transact(29, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(callForwardInfo, 0);
+                    if (this.mRemote.transact(29, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCallForward is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setCallWaiting(int i, boolean z, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(30, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(30, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCallWaiting is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setClir(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(31, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(31, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setClir is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setMute(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(32, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(32, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setMute is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setPreferredVoicePrivacy(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(33, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(33, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setPreferredVoicePrivacy is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setResponseFunctions(IRadioVoiceResponse iRadioVoiceResponse, IRadioVoiceIndication iRadioVoiceIndication) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iRadioVoiceResponse);
-                    obtain.writeStrongInterface(iRadioVoiceIndication);
-                    if (this.mRemote.transact(34, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRadioVoiceResponse);
+                    parcelObtain.writeStrongInterface(iRadioVoiceIndication);
+                    if (this.mRemote.transact(34, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setResponseFunctions is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setTtyMode(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(35, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(35, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setTtyMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void setVoNrEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(36, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(36, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setVoNrEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void startDtmf(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(37, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(37, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method startDtmf is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void stopDtmf(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(38, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(38, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method stopDtmf is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public void switchWaitingOrHoldingAndActive(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(39, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(39, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method switchWaitingOrHoldingAndActive is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -1232,18 +1232,18 @@ public interface IRadioVoice extends IInterface {
             @Override // android.hardware.radio.voice.IRadioVoice
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

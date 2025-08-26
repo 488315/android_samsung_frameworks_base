@@ -65,28 +65,122 @@ public class CompatibilityInfo implements Parcelable {
         this(applicationInfo, i, i2, z, f, f);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x006c, code lost:
-    
-        if ((r6.flags & 524288) != 0) goto L50;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x007b, code lost:
-    
-        r8 = r8 | 4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:56:0x0079, code lost:
-    
-        if ((r6.flags & 2048) != 0) goto L50;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x007b A[PHI: r8
+      0x007b: PHI (r8v17 int) = (r8v9 int), (r8v19 int) binds: [B:49:0x0079, B:43:0x006c] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x008e  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00a5  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x00df  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public CompatibilityInfo(android.content.pm.ApplicationInfo r6, int r7, int r8, boolean r9, float r10, float r11) {
-        /*
-            Method dump skipped, instructions count: 282
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.CompatibilityInfo.<init>(android.content.pm.ApplicationInfo, int, int, boolean, float, float):void");
+    public CompatibilityInfo(ApplicationInfo applicationInfo, int i, int i2, boolean z, float f, float f2) {
+        int i3;
+        int i4;
+        boolean z2;
+        this.applicationDisplayRotation = -1;
+        int i5 = 0;
+        int i6 = applicationInfo.targetSdkVersion < 26 ? 16 : 0;
+        if (f != 1.0f || f2 != 1.0f) {
+            this.applicationScale = f;
+            this.applicationInvertedScale = 1.0f / f;
+            this.applicationDensityScale = f2;
+            float f3 = 1.0f / f2;
+            this.applicationDensityInvertedScale = f3;
+            this.applicationDensity = (int) ((DisplayMetrics.DENSITY_DEVICE_STABLE * f3) + 0.5f);
+            this.mCompatibilityFlags = 36;
+            return;
+        }
+        if (applicationInfo.requiresSmallestWidthDp != 0 || applicationInfo.compatibleWidthLimitDp != 0 || applicationInfo.largestWidthLimitDp != 0) {
+            if (applicationInfo.requiresSmallestWidthDp != 0) {
+                i3 = applicationInfo.requiresSmallestWidthDp;
+            } else {
+                i3 = applicationInfo.compatibleWidthLimitDp;
+            }
+            i3 = i3 == 0 ? applicationInfo.largestWidthLimitDp : i3;
+            int i7 = applicationInfo.compatibleWidthLimitDp != 0 ? applicationInfo.compatibleWidthLimitDp : i3;
+            i7 = i7 < i3 ? i3 : i7;
+            int i8 = applicationInfo.largestWidthLimitDp;
+            if (i3 <= 320) {
+                if (i8 != 0 && i2 > i8) {
+                    i6 |= 10;
+                } else if (i7 >= i2) {
+                    i6 |= 4;
+                } else if (z) {
+                    i6 |= 8;
+                }
+                this.applicationDensity = DisplayMetrics.DENSITY_DEVICE;
+                this.applicationScale = 1.0f;
+                this.applicationInvertedScale = 1.0f;
+                this.applicationDensityScale = 1.0f;
+                this.applicationDensityInvertedScale = 1.0f;
+                i4 = i6;
+            }
+        } else {
+            boolean z3 = true;
+            if ((applicationInfo.flags & 2048) == 0) {
+                z2 = false;
+            } else if (z) {
+                z2 = true;
+                i5 = 8;
+            } else {
+                i5 = 42;
+                z2 = true;
+            }
+            if ((applicationInfo.flags & 524288) != 0) {
+                i5 = z ? i5 : i5 | 34;
+                z2 = true;
+            }
+            if ((applicationInfo.flags & 4096) != 0) {
+                i5 |= 2;
+            } else {
+                z3 = z2;
+            }
+            i5 = z ? i5 & (-3) : i5;
+            i4 = i6 | 8;
+            int i9 = i & 15;
+            if (i9 == 3) {
+                i4 = (i5 & 8) != 0 ? i4 & (-9) : i4;
+                if ((applicationInfo.flags & 2048) != 0) {
+                }
+                if ((i & 268435456) != 0) {
+                }
+                if ((applicationInfo.flags & 8192) == 0) {
+                }
+            } else {
+                if (i9 == 4) {
+                    i4 = (i5 & 32) != 0 ? i4 & (-9) : i4;
+                    if ((applicationInfo.flags & 524288) != 0) {
+                        i4 |= 4;
+                    }
+                }
+                if ((i & 268435456) != 0) {
+                    i4 = (i4 & (-9)) | 4;
+                } else if ((i5 & 2) != 0) {
+                    i4 &= -9;
+                } else if (!z3) {
+                    i4 |= 2;
+                }
+                if ((applicationInfo.flags & 8192) == 0) {
+                    this.applicationDensity = DisplayMetrics.DENSITY_DEVICE;
+                    this.applicationScale = 1.0f;
+                    this.applicationInvertedScale = 1.0f;
+                    this.applicationDensityScale = 1.0f;
+                    this.applicationDensityInvertedScale = 1.0f;
+                } else {
+                    this.applicationDensity = 160;
+                    float f4 = DisplayMetrics.DENSITY_DEVICE / 160.0f;
+                    this.applicationScale = f4;
+                    this.applicationInvertedScale = 1.0f / f4;
+                    float f5 = DisplayMetrics.DENSITY_DEVICE / 160.0f;
+                    this.applicationDensityScale = f5;
+                    this.applicationDensityInvertedScale = 1.0f / f5;
+                    i4 |= 1;
+                }
+            }
+        }
+        this.mCompatibilityFlags = i4;
     }
 
     private CompatibilityInfo(int i, int i2, float f, float f2) {

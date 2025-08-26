@@ -4,7 +4,6 @@ import android.view.Choreographer;
 import com.android.wm.shell.common.ShellExecutor;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellConcurrencyModule_ProvideShellMainChoreographerFactory implements Provider {
     public final Provider executorProvider;

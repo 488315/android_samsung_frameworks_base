@@ -59,47 +59,47 @@ public final class CameraExtensionUtils {
 
     public static SurfaceInfo querySurface(Surface surface) {
         SurfaceInfo surfaceInfo = new SurfaceInfo();
-        int detectSurfaceFormat = SurfaceUtils.detectSurfaceFormat(surface);
+        int iDetectSurfaceFormat = SurfaceUtils.detectSurfaceFormat(surface);
         int surfaceDataspace = SurfaceUtils.getSurfaceDataspace(surface);
         Size surfaceSize = SurfaceUtils.getSurfaceSize(surface);
-        surfaceInfo.mFormat = detectSurfaceFormat;
+        surfaceInfo.mFormat = iDetectSurfaceFormat;
         surfaceInfo.mWidth = surfaceSize.getWidth();
         surfaceInfo.mHeight = surfaceSize.getHeight();
         surfaceInfo.mUsage = SurfaceUtils.getSurfaceUsage(surface);
-        if (detectSurfaceFormat == 33 && surfaceDataspace == 146931712) {
+        if (iDetectSurfaceFormat == 33 && surfaceDataspace == 146931712) {
             surfaceInfo.mFormat = 256;
             return surfaceInfo;
         }
-        if (detectSurfaceFormat == 33 && surfaceDataspace == 4101) {
+        if (iDetectSurfaceFormat == 33 && surfaceDataspace == 4101) {
             surfaceInfo.mFormat = 4101;
             return surfaceInfo;
         }
-        if (Flags.depthJpegExtensions() && detectSurfaceFormat == 33 && surfaceDataspace == 4098) {
+        if (Flags.depthJpegExtensions() && iDetectSurfaceFormat == 33 && surfaceDataspace == 4098) {
             surfaceInfo.mFormat = ImageFormat.DEPTH_JPEG;
         }
         return surfaceInfo;
     }
 
-    public static Surface getPostviewSurface(OutputConfiguration outputConfiguration, HashMap<Integer, List<Size>> hashMap, int i) {
+    public static Surface getPostviewSurface(OutputConfiguration outputConfiguration, HashMap<Integer, List<Size>> map, int i) {
         if (outputConfiguration == null) {
             return null;
         }
-        SurfaceInfo querySurface = querySurface(outputConfiguration.getSurface());
-        if (hashMap.get(Integer.valueOf(querySurface.mFormat)).contains(new Size(querySurface.mWidth, querySurface.mHeight))) {
+        SurfaceInfo surfaceInfoQuerySurface = querySurface(outputConfiguration.getSurface());
+        if (map.get(Integer.valueOf(surfaceInfoQuerySurface.mFormat)).contains(new Size(surfaceInfoQuerySurface.mWidth, surfaceInfoQuerySurface.mHeight))) {
             return outputConfiguration.getSurface();
         }
         throw new IllegalArgumentException("Postview size not supported!");
     }
 
-    public static Surface getBurstCaptureSurface(List<OutputConfiguration> list, HashMap<Integer, List<Size>> hashMap) {
+    public static Surface getBurstCaptureSurface(List<OutputConfiguration> list, HashMap<Integer, List<Size>> map) {
         Integer[] numArr = (Integer[]) SUPPORTED_CAPTURE_OUTPUT_FORMATS.toArray(new Integer[SUPPORTED_CAPTURE_OUTPUT_FORMATS.size()]);
         for (OutputConfiguration outputConfiguration : list) {
-            SurfaceInfo querySurface = querySurface(outputConfiguration.getSurface());
+            SurfaceInfo surfaceInfoQuerySurface = querySurface(outputConfiguration.getSurface());
             for (Integer num : numArr) {
-                if (querySurface.mFormat == num.intValue()) {
-                    Size size = new Size(querySurface.mWidth, querySurface.mHeight);
-                    if (hashMap.containsKey(num)) {
-                        if (hashMap.get(Integer.valueOf(querySurface.mFormat)).contains(size)) {
+                if (surfaceInfoQuerySurface.mFormat == num.intValue()) {
+                    Size size = new Size(surfaceInfoQuerySurface.mWidth, surfaceInfoQuerySurface.mHeight);
+                    if (map.containsKey(num)) {
+                        if (map.get(Integer.valueOf(surfaceInfoQuerySurface.mFormat)).contains(size)) {
                             return outputConfiguration.getSurface();
                         }
                         throw new IllegalArgumentException("Capture size not supported!");
@@ -113,9 +113,9 @@ public final class CameraExtensionUtils {
 
     public static Surface getRepeatingRequestSurface(List<OutputConfiguration> list, List<Size> list2) {
         for (OutputConfiguration outputConfiguration : list) {
-            SurfaceInfo querySurface = querySurface(outputConfiguration.getSurface());
-            if (querySurface.mFormat == 34 || (querySurface.mUsage & 2048) != 0 || querySurface.mFormat == 1) {
-                Size size = new Size(querySurface.mWidth, querySurface.mHeight);
+            SurfaceInfo surfaceInfoQuerySurface = querySurface(outputConfiguration.getSurface());
+            if (surfaceInfoQuerySurface.mFormat == 34 || (surfaceInfoQuerySurface.mUsage & 2048) != 0 || surfaceInfoQuerySurface.mFormat == 1) {
+                Size size = new Size(surfaceInfoQuerySurface.mWidth, surfaceInfoQuerySurface.mHeight);
                 if (list2 == null || !list2.contains(size)) {
                     throw new IllegalArgumentException("Repeating request surface size " + size + " not supported!");
                 }
@@ -126,10 +126,10 @@ public final class CameraExtensionUtils {
     }
 
     public static Map<String, CameraMetadataNative> getCharacteristicsMapNative(Map<String, CameraCharacteristics> map) {
-        HashMap hashMap = new HashMap();
+        HashMap map2 = new HashMap();
         for (Map.Entry<String, CameraCharacteristics> entry : map.entrySet()) {
-            hashMap.put(entry.getKey(), entry.getValue().getNativeMetadata());
+            map2.put(entry.getKey(), entry.getValue().getNativeMetadata());
         }
-        return hashMap;
+        return map2;
     }
 }

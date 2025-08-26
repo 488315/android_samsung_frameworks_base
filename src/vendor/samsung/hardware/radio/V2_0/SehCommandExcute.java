@@ -36,13 +36,13 @@ public final class SehCommandExcute {
 
     public static final ArrayList<SehCommandExcute> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehCommandExcute> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehCommandExcute sehCommandExcute = new SehCommandExcute();
-            sehCommandExcute.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            sehCommandExcute.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(sehCommandExcute);
         }
         return arrayList;

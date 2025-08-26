@@ -5,13 +5,11 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PathNode {
     public final boolean isCurve;
     public final boolean isQuad;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ArcTo extends PathNode {
         public final float arcStartX;
         public final float arcStartY;
@@ -22,27 +20,16 @@ public abstract class PathNode {
         public final float verticalEllipseRadius;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public ArcTo(float r4, float r5, float r6, boolean r7, boolean r8, float r9, float r10) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.horizontalEllipseRadius = r4
-                r3.verticalEllipseRadius = r5
-                r3.theta = r6
-                r3.isMoreThanHalf = r7
-                r3.isPositiveArc = r8
-                r3.arcStartX = r9
-                r3.arcStartY = r10
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.ArcTo.<init>(float, float, float, boolean, boolean, float, float):void");
+        public ArcTo(float f, float f2, float f3, boolean z, boolean z2, float f4, float f5) {
+            boolean z3 = false;
+            super(z3, z3, 3, null);
+            this.horizontalEllipseRadius = f;
+            this.verticalEllipseRadius = f2;
+            this.theta = f3;
+            this.isMoreThanHalf = z;
+            this.isPositiveArc = z2;
+            this.arcStartX = f4;
+            this.arcStartY = f5;
         }
 
         public final boolean equals(Object obj) {
@@ -78,29 +65,16 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Close extends PathNode {
         public static final Close INSTANCE = new Close();
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private Close() {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.Close.<init>():void");
+            boolean z = false;
+            super(z, z, 3, null);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CurveTo extends PathNode {
         public final float x1;
         public final float x2;
@@ -150,26 +124,14 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HorizontalTo extends PathNode {
         public final float x;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public HorizontalTo(float r4) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.x = r4
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.HorizontalTo.<init>(float):void");
+        public HorizontalTo(float f) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.x = f;
         }
 
         public final boolean equals(Object obj) {
@@ -188,28 +150,16 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LineTo extends PathNode {
         public final float x;
         public final float y;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public LineTo(float r4, float r5) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.x = r4
-                r3.y = r5
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.LineTo.<init>(float, float):void");
+        public LineTo(float f, float f2) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.x = f;
+            this.y = f2;
         }
 
         public final boolean equals(Object obj) {
@@ -235,28 +185,16 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MoveTo extends PathNode {
         public final float x;
         public final float y;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public MoveTo(float r4, float r5) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.x = r4
-                r3.y = r5
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.MoveTo.<init>(float, float):void");
+        public MoveTo(float f, float f2) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.x = f;
+            this.y = f2;
         }
 
         public final boolean equals(Object obj) {
@@ -282,7 +220,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QuadTo extends PathNode {
         public final float x1;
         public final float x2;
@@ -290,7 +227,7 @@ public abstract class PathNode {
         public final float y2;
 
         public QuadTo(float f, float f2, float f3, float f4) {
-            super(false, true, true ? 1 : 0, null);
+            super(false, true, 1 == true ? 1 : 0, null);
             this.x1 = f;
             this.y1 = f2;
             this.x2 = f3;
@@ -324,7 +261,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReflectiveCurveTo extends PathNode {
         public final float x1;
         public final float x2;
@@ -366,13 +302,12 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReflectiveQuadTo extends PathNode {
         public final float x;
         public final float y;
 
         public ReflectiveQuadTo(float f, float f2) {
-            super(false, true, true ? 1 : 0, null);
+            super(false, true, 1 == true ? 1 : 0, null);
             this.x = f;
             this.y = f2;
         }
@@ -400,7 +335,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeArcTo extends PathNode {
         public final float arcStartDx;
         public final float arcStartDy;
@@ -411,27 +345,16 @@ public abstract class PathNode {
         public final float verticalEllipseRadius;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public RelativeArcTo(float r4, float r5, float r6, boolean r7, boolean r8, float r9, float r10) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.horizontalEllipseRadius = r4
-                r3.verticalEllipseRadius = r5
-                r3.theta = r6
-                r3.isMoreThanHalf = r7
-                r3.isPositiveArc = r8
-                r3.arcStartDx = r9
-                r3.arcStartDy = r10
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.RelativeArcTo.<init>(float, float, float, boolean, boolean, float, float):void");
+        public RelativeArcTo(float f, float f2, float f3, boolean z, boolean z2, float f4, float f5) {
+            boolean z3 = false;
+            super(z3, z3, 3, null);
+            this.horizontalEllipseRadius = f;
+            this.verticalEllipseRadius = f2;
+            this.theta = f3;
+            this.isMoreThanHalf = z;
+            this.isPositiveArc = z2;
+            this.arcStartDx = f4;
+            this.arcStartDy = f5;
         }
 
         public final boolean equals(Object obj) {
@@ -467,7 +390,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeCurveTo extends PathNode {
         public final float dx1;
         public final float dx2;
@@ -517,26 +439,14 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeHorizontalTo extends PathNode {
         public final float dx;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public RelativeHorizontalTo(float r4) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.dx = r4
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.RelativeHorizontalTo.<init>(float):void");
+        public RelativeHorizontalTo(float f) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.dx = f;
         }
 
         public final boolean equals(Object obj) {
@@ -555,28 +465,16 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeLineTo extends PathNode {
         public final float dx;
         public final float dy;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public RelativeLineTo(float r4, float r5) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.dx = r4
-                r3.dy = r5
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.RelativeLineTo.<init>(float, float):void");
+        public RelativeLineTo(float f, float f2) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.dx = f;
+            this.dy = f2;
         }
 
         public final boolean equals(Object obj) {
@@ -602,28 +500,16 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeMoveTo extends PathNode {
         public final float dx;
         public final float dy;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public RelativeMoveTo(float r4, float r5) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.dx = r4
-                r3.dy = r5
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.RelativeMoveTo.<init>(float, float):void");
+        public RelativeMoveTo(float f, float f2) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.dx = f;
+            this.dy = f2;
         }
 
         public final boolean equals(Object obj) {
@@ -649,7 +535,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeQuadTo extends PathNode {
         public final float dx1;
         public final float dx2;
@@ -657,7 +542,7 @@ public abstract class PathNode {
         public final float dy2;
 
         public RelativeQuadTo(float f, float f2, float f3, float f4) {
-            super(false, true, true ? 1 : 0, null);
+            super(false, true, 1 == true ? 1 : 0, null);
             this.dx1 = f;
             this.dy1 = f2;
             this.dx2 = f3;
@@ -691,7 +576,6 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeReflectiveCurveTo extends PathNode {
         public final float dx1;
         public final float dx2;
@@ -733,13 +617,12 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeReflectiveQuadTo extends PathNode {
         public final float dx;
         public final float dy;
 
         public RelativeReflectiveQuadTo(float f, float f2) {
-            super(false, true, true ? 1 : 0, null);
+            super(false, true, 1 == true ? 1 : 0, null);
             this.dx = f;
             this.dy = f2;
         }
@@ -767,26 +650,14 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RelativeVerticalTo extends PathNode {
         public final float dy;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public RelativeVerticalTo(float r4) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.dy = r4
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.RelativeVerticalTo.<init>(float):void");
+        public RelativeVerticalTo(float f) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.dy = f;
         }
 
         public final boolean equals(Object obj) {
@@ -805,26 +676,14 @@ public abstract class PathNode {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VerticalTo extends PathNode {
         public final float y;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public VerticalTo(float r4) {
-            /*
-                r3 = this;
-                r0 = 3
-                r1 = 0
-                r2 = 0
-                r3.<init>(r2, r2, r0, r1)
-                r3.y = r4
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.PathNode.VerticalTo.<init>(float):void");
+        public VerticalTo(float f) {
+            boolean z = false;
+            super(z, z, 3, null);
+            this.y = f;
         }
 
         public final boolean equals(Object obj) {

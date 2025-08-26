@@ -178,9 +178,9 @@ public class SemCapabilityManager {
             Log.e(this.LOG_TAG, "registerListener: not connected.");
             this.mQueuedCapabilityListener.add(semCapabilityListener);
         } else {
-            String registerListener = semImsCapabilityService.registerListener(semCapabilityListener.callback, this.mPhoneId);
-            if (registerListener != null) {
-                semCapabilityListener.setToken(registerListener);
+            String strRegisterListener = semImsCapabilityService.registerListener(semCapabilityListener.callback, this.mPhoneId);
+            if (strRegisterListener != null) {
+                semCapabilityListener.setToken(strRegisterListener);
             }
         }
     }

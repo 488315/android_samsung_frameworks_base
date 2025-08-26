@@ -20,6 +20,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.AdaptedFunctionReference;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -27,7 +28,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardEnabledInteractor {
     public final CoroutineDispatcher backgroundDispatcher;
@@ -38,14 +38,12 @@ public final class KeyguardEnabledInteractor {
     public final SelectedUserInteractor selectedUserInteractor;
     public final KeyguardEnabledInteractor$special$$inlined$map$1 showKeyguardWhenReenabled;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ InternalKeyguardTransitionInteractor $internalTransitionInteractor;
         final /* synthetic */ Lazy $keyguardDismissTransitionInteractor;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$4, reason: invalid class name */
         final /* synthetic */ class AnonymousClass4 extends AdaptedFunctionReference implements Function3 {
             public static final AnonymousClass4 INSTANCE = new AnonymousClass4();
@@ -88,9 +86,8 @@ public final class KeyguardEnabledInteractor {
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 final ReadonlyStateFlow readonlyStateFlow = ((KeyguardRepositoryImpl) KeyguardEnabledInteractor.this.repository).isKeyguardEnabled;
-                Flow sample = FlowKt.sample(new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1
+                Flow flowSample = FlowKt.sample(new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -118,67 +115,47 @@ public final class KeyguardEnabledInteractor {
                             this.$this_unsafeFlow = flowCollector;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                            /*
-                                r4 = this;
-                                boolean r0 = r6 instanceof com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                                if (r0 == 0) goto L13
-                                r0 = r6
-                                com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1$2$1 r0 = (com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                                int r1 = r0.label
-                                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r3 = r1 & r2
-                                if (r3 == 0) goto L13
-                                int r1 = r1 - r2
-                                r0.label = r1
-                                goto L18
-                            L13:
-                                com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1$2$1 r0 = new com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1$2$1
-                                r0.<init>(r6)
-                            L18:
-                                java.lang.Object r6 = r0.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r0.label
-                                r3 = 1
-                                if (r2 == 0) goto L2f
-                                if (r2 != r3) goto L27
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                goto L46
-                            L27:
-                                java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                r4.<init>(r5)
-                                throw r4
-                            L2f:
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                r6 = r5
-                                java.lang.Boolean r6 = (java.lang.Boolean) r6
-                                boolean r6 = r6.booleanValue()
-                                if (r6 != 0) goto L46
-                                r0.label = r3
-                                kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                java.lang.Object r4 = r4.emit(r5, r0)
-                                if (r4 != r1) goto L46
-                                return r1
-                            L46:
-                                kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                return r4
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$1$invokeSuspend$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (!((Boolean) obj).booleanValue()) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 }, ((BiometricSettingsRepositoryImpl) KeyguardEnabledInteractor.this.biometricSettingsRepository).isCurrentUserInLockdown, AnonymousClass4.INSTANCE);
                 final InternalKeyguardTransitionInteractor internalKeyguardTransitionInteractor = this.$internalTransitionInteractor;
@@ -186,15 +163,15 @@ public final class KeyguardEnabledInteractor {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor.1.5
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) ((Pair) obj2).component2()).booleanValue();
-                        if (InternalKeyguardTransitionInteractor.this.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core().to != KeyguardState.GONE && !booleanValue) {
+                        boolean zBooleanValue = ((Boolean) ((Pair) obj2).component2()).booleanValue();
+                        if (internalKeyguardTransitionInteractor.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core().to != KeyguardState.GONE && !zBooleanValue) {
                             KeyguardDismissTransitionInteractor.startDismissKeyguardTransition$default((KeyguardDismissTransitionInteractor) lazy.get(), "keyguard disabled");
                         }
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (sample.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -204,6 +181,23 @@ public final class KeyguardEnabledInteractor {
                 ResultKt.throwOnFailure(obj);
             }
             return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1, reason: invalid class name and case insensitive filesystem */
+    final class C09041 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C09041(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return KeyguardEnabledInteractor.this.isKeyguardEnabledAndNotSuppressed(this);
         }
     }
 
@@ -217,9 +211,8 @@ public final class KeyguardEnabledInteractor {
         ReadonlyStateFlow readonlyStateFlow = ((KeyguardRepositoryImpl) keyguardRepository).isKeyguardEnabled;
         this.isKeyguardEnabled = readonlyStateFlow;
         final FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(readonlyStateFlow, new KeyguardEnabledInteractor$showKeyguardWhenReenabled$1(null));
-        final Flow sample = FlowKt.sample(new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1
+        final Flow flowSample = FlowKt.sample(new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -247,72 +240,51 @@ public final class KeyguardEnabledInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L46
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 != 0) goto L46
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L46
-                        return r1
-                    L46:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (!((Boolean) obj).booleanValue()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$onEach$$inlined$unsafeTransform$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, ((BiometricSettingsRepositoryImpl) biometricSettingsRepository).isCurrentUserInLockdown, KeyguardEnabledInteractor$showKeyguardWhenReenabled$5.INSTANCE);
         this.showKeyguardWhenReenabled = new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ InternalKeyguardTransitionInteractor $internalTransitionInteractor$inlined;
@@ -341,154 +313,85 @@ public final class KeyguardEnabledInteractor {
                     this.$internalTransitionInteractor$inlined = internalKeyguardTransitionInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L5e
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.component2()
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        com.android.systemui.keyguard.domain.interactor.InternalKeyguardTransitionInteractor r6 = r4.$internalTransitionInteractor$inlined
-                        com.android.systemui.keyguard.shared.model.TransitionInfo r6 = r6.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core()
-                        com.android.systemui.keyguard.shared.model.KeyguardState r6 = r6.to
-                        com.android.systemui.keyguard.shared.model.KeyguardState r2 = com.android.systemui.keyguard.shared.model.KeyguardState.GONE
-                        if (r6 == r2) goto L4e
-                        if (r5 != 0) goto L4e
-                        r5 = r3
-                        goto L4f
-                    L4e:
-                        r5 = 0
-                    L4f:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L5e
-                        return r1
-                    L5e:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf((this.$internalTransitionInteractor$inlined.currentTransitionInfoInternal$frameworks__base__packages__SystemUI__android_common__SystemUI_core().to == KeyguardState.GONE || ((Boolean) ((Pair) obj).component2()).booleanValue()) ? false : true);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, internalKeyguardTransitionInteractor), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample.collect(new AnonymousClass2(flowCollector, internalKeyguardTransitionInteractor), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(internalKeyguardTransitionInteractor, lazy, null), 7);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x005f, code lost:
-    
-        if (((java.lang.Boolean) r6).booleanValue() != false) goto L22;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object isKeyguardEnabledAndNotSuppressed(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1 r0 = (com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1 r0 = new com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardEnabledAndNotSuppressed$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L59
-        L27:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            kotlinx.coroutines.flow.ReadonlyStateFlow r6 = r5.isKeyguardEnabled
-            kotlinx.coroutines.flow.StateFlow r6 = r6.$$delegate_0
-            java.lang.Object r6 = r6.getValue()
-            java.lang.Boolean r6 = (java.lang.Boolean) r6
-            boolean r6 = r6.booleanValue()
-            if (r6 == 0) goto L62
-            r0.label = r3
-            com.android.systemui.user.domain.interactor.SelectedUserInteractor r6 = r5.selectedUserInteractor
-            int r6 = r6.getSelectedUserId()
-            com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardSuppressed$2 r2 = new com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor$isKeyguardSuppressed$2
-            r4 = 0
-            r2.<init>(r5, r6, r4)
-            kotlinx.coroutines.CoroutineDispatcher r5 = r5.backgroundDispatcher
-            java.lang.Object r6 = kotlinx.coroutines.BuildersKt.withContext(r5, r2, r0)
-            if (r6 != r1) goto L59
-            return r1
-        L59:
-            java.lang.Boolean r6 = (java.lang.Boolean) r6
-            boolean r5 = r6.booleanValue()
-            if (r5 != 0) goto L62
-            goto L63
-        L62:
-            r3 = 0
-        L63:
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r3)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.KeyguardEnabledInteractor.isKeyguardEnabledAndNotSuppressed(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object isKeyguardEnabledAndNotSuppressed(ContinuationImpl continuationImpl) throws Throwable {
+        C09041 c09041;
+        if (continuationImpl instanceof C09041) {
+            c09041 = (C09041) continuationImpl;
+            int i = c09041.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c09041.label = i - Integer.MIN_VALUE;
+            } else {
+                c09041 = new C09041(continuationImpl);
+            }
+        }
+        Object objWithContext = c09041.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c09041.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            if (((Boolean) this.isKeyguardEnabled.$$delegate_0.getValue()).booleanValue()) {
+                c09041.label = 1;
+                objWithContext = BuildersKt.withContext(this.backgroundDispatcher, new KeyguardEnabledInteractor$isKeyguardSuppressed$2(this, this.selectedUserInteractor.getSelectedUserId(), null), c09041);
+                if (objWithContext == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            }
+            return Boolean.valueOf(z);
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(objWithContext);
+        boolean z = ((Boolean) objWithContext).booleanValue() ? false : true;
+        return Boolean.valueOf(z);
     }
 }

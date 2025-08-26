@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ConfigurationChangedListenerController;
 import android.os.IBinder;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +25,9 @@ class ConfigurationChangedListenerController {
 
     void removeListener(Consumer<IBinder> consumer) {
         synchronized (this.mLock) {
-            int indexOf = indexOf(consumer);
-            if (indexOf > -1) {
-                this.mListenerContainers.remove(indexOf);
+            int iIndexOf = indexOf(consumer);
+            if (iIndexOf > -1) {
+                this.mListenerContainers.remove(iIndexOf);
             }
         }
     }
@@ -75,7 +74,7 @@ class ConfigurationChangedListenerController {
             this.mExecutor.execute(new Runnable() { // from class: android.app.ConfigurationChangedListenerController$ListenerContainer$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConfigurationChangedListenerController.ListenerContainer.this.lambda$accept$0(iBinder);
+                    this.f$0.lambda$accept$0(iBinder);
                 }
             });
         }

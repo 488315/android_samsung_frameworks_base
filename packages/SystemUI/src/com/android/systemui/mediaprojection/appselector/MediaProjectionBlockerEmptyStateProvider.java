@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.android.systemui.mediaprojection.devicepolicy.ScreenCaptureDevicePolicyResolver;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionBlockerEmptyStateProvider implements AbstractMultiProfilePagerAdapter.EmptyStateProvider {
     public final Context context;
@@ -24,12 +23,12 @@ public final class MediaProjectionBlockerEmptyStateProvider implements AbstractM
     }
 
     public final AbstractMultiProfilePagerAdapter.EmptyState getEmptyState(ResolverListAdapter resolverListAdapter) {
-        boolean isScreenCaptureAllowed = this.policyResolver.isScreenCaptureAllowed(resolverListAdapter.getUserHandle(), this.hostAppHandle);
-        final int i = Intrinsics.areEqual(this.hostAppHandle, this.personalProfileHandle) ? 17042688 : 17042689;
-        if (isScreenCaptureAllowed) {
+        boolean zIsScreenCaptureAllowed = this.policyResolver.isScreenCaptureAllowed(resolverListAdapter.getUserHandle(), this.hostAppHandle);
+        final int i = Intrinsics.areEqual(this.hostAppHandle, this.personalProfileHandle) ? 17042692 : 17042693;
+        if (zIsScreenCaptureAllowed) {
             return null;
         }
-        return new AbstractMultiProfilePagerAdapter.EmptyState() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionBlockerEmptyStateProvider$getEmptyState$1
+        return new AbstractMultiProfilePagerAdapter.EmptyState() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionBlockerEmptyStateProvider.getEmptyState.1
             public final String getSubtitle() {
                 return MediaProjectionBlockerEmptyStateProvider.this.context.getResources().getString(i);
             }

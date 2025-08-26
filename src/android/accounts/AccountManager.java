@@ -787,8 +787,8 @@ public class AccountManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void ensureNotOnMainThread() {
-        Looper myLooper = Looper.myLooper();
-        if (myLooper == null || myLooper != this.mContext.getMainLooper()) {
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper == null || looperMyLooper != this.mContext.getMainLooper()) {
             return;
         }
         IllegalStateException illegalStateException = new IllegalStateException("calling this from your main thread can lead to deadlock");
@@ -898,27 +898,27 @@ public class AccountManager {
                             return get();
                         }
                         return get(l.longValue(), timeUnit);
-                    } catch (InterruptedException | CancellationException | TimeoutException e) {
-                        throw new OperationCanceledException(e);
+                    } catch (ExecutionException e) {
+                        Throwable cause = e.getCause();
+                        if (cause instanceof IOException) {
+                            throw ((IOException) cause);
+                        }
+                        if (cause instanceof UnsupportedOperationException) {
+                            throw new AuthenticatorException(cause);
+                        }
+                        if (cause instanceof AuthenticatorException) {
+                            throw ((AuthenticatorException) cause);
+                        }
+                        if (cause instanceof RuntimeException) {
+                            throw ((RuntimeException) cause);
+                        }
+                        if (cause instanceof Error) {
+                            throw ((Error) cause);
+                        }
+                        throw new IllegalStateException(cause);
                     }
-                } catch (ExecutionException e2) {
-                    Throwable cause = e2.getCause();
-                    if (cause instanceof IOException) {
-                        throw ((IOException) cause);
-                    }
-                    if (cause instanceof UnsupportedOperationException) {
-                        throw new AuthenticatorException(cause);
-                    }
-                    if (cause instanceof AuthenticatorException) {
-                        throw ((AuthenticatorException) cause);
-                    }
-                    if (cause instanceof RuntimeException) {
-                        throw ((RuntimeException) cause);
-                    }
-                    if (cause instanceof Error) {
-                        throw ((Error) cause);
-                    }
-                    throw new IllegalStateException(cause);
+                } catch (InterruptedException | CancellationException | TimeoutException e2) {
+                    throw new OperationCanceledException(e2);
                 }
             } finally {
                 cancel(true);
@@ -1025,11 +1025,11 @@ public class AccountManager {
             @Override // android.accounts.IAccountManagerResponse
             public void onResult(Bundle bundle) {
                 try {
-                    Object bundleToResult = BaseFutureTask.this.bundleToResult(bundle);
-                    if (bundleToResult == null) {
+                    Object objBundleToResult = BaseFutureTask.this.bundleToResult(bundle);
+                    if (objBundleToResult == null) {
                         return;
                     }
-                    BaseFutureTask.this.set(bundleToResult);
+                    BaseFutureTask.this.set(objBundleToResult);
                 } catch (AuthenticatorException | ClassCastException unused) {
                     onError(5, "no result in response");
                 }
@@ -1080,31 +1080,31 @@ public class AccountManager {
                 try {
                     try {
                         return l == null ? (T) get() : (T) get(l.longValue(), timeUnit);
-                    } catch (ExecutionException e) {
-                        Throwable cause = e.getCause();
-                        if (cause instanceof IOException) {
-                            throw ((IOException) cause);
-                        }
-                        if (cause instanceof UnsupportedOperationException) {
-                            throw new AuthenticatorException(cause);
-                        }
-                        if (cause instanceof AuthenticatorException) {
-                            throw ((AuthenticatorException) cause);
-                        }
-                        if (cause instanceof RuntimeException) {
-                            throw ((RuntimeException) cause);
-                        }
-                        if (cause instanceof Error) {
-                            throw ((Error) cause);
-                        }
-                        throw new IllegalStateException(cause);
+                    } catch (InterruptedException | CancellationException | TimeoutException unused) {
+                        cancel(true);
+                        throw new OperationCanceledException();
                     }
-                } finally {
-                    cancel(true);
+                } catch (ExecutionException e) {
+                    Throwable cause = e.getCause();
+                    if (cause instanceof IOException) {
+                        throw ((IOException) cause);
+                    }
+                    if (cause instanceof UnsupportedOperationException) {
+                        throw new AuthenticatorException(cause);
+                    }
+                    if (cause instanceof AuthenticatorException) {
+                        throw ((AuthenticatorException) cause);
+                    }
+                    if (cause instanceof RuntimeException) {
+                        throw ((RuntimeException) cause);
+                    }
+                    if (cause instanceof Error) {
+                        throw ((Error) cause);
+                    }
+                    throw new IllegalStateException(cause);
                 }
-            } catch (InterruptedException | CancellationException | TimeoutException unused) {
+            } finally {
                 cancel(true);
-                throw new OperationCanceledException();
             }
         }
 
@@ -1264,8 +1264,8 @@ public class AccountManager {
 
     public static Intent newChooseAccountIntent(Account account, List<Account> list, String[] strArr, String str, String str2, String[] strArr2, Bundle bundle) {
         Intent intent = new Intent();
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_chooseTypeAndAccountActivity));
-        intent.setClassName(unflattenFromString.getPackageName(), unflattenFromString.getClassName());
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_chooseTypeAndAccountActivity));
+        intent.setClassName(componentNameUnflattenFromString.getPackageName(), componentNameUnflattenFromString.getClassName());
         intent.putExtra(ChooseTypeAndAccountActivity.EXTRA_ALLOWABLE_ACCOUNTS_ARRAYLIST, list == null ? null : new ArrayList(list));
         intent.putExtra(ChooseTypeAndAccountActivity.EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY, strArr);
         intent.putExtra(ChooseTypeAndAccountActivity.EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE, bundle);
@@ -1288,14 +1288,14 @@ public class AccountManager {
             if (this.mAccountsUpdatedListeners.containsKey(onAccountsUpdateListener)) {
                 throw new IllegalStateException("this listener is already added");
             }
-            boolean isEmpty = this.mAccountsUpdatedListeners.isEmpty();
+            boolean zIsEmpty = this.mAccountsUpdatedListeners.isEmpty();
             this.mAccountsUpdatedListeners.put(onAccountsUpdateListener, handler);
             if (strArr != null) {
                 this.mAccountsUpdatedListenersTypes.put(onAccountsUpdateListener, new HashSet(Arrays.asList(strArr)));
             } else {
                 this.mAccountsUpdatedListenersTypes.put(onAccountsUpdateListener, null);
             }
-            if (isEmpty) {
+            if (zIsEmpty) {
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(ACTION_VISIBLE_ACCOUNTS_CHANGED);
                 intentFilter.addAction(Intent.ACTION_DEVICE_STORAGE_OK);

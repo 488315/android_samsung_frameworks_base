@@ -20,12 +20,12 @@ public class KeyValueListParser {
         if (str != null) {
             this.mSplitter.setString(str);
             for (String str2 : this.mSplitter) {
-                int indexOf = str2.indexOf(61);
-                if (indexOf < 0) {
+                int iIndexOf = str2.indexOf(61);
+                if (iIndexOf < 0) {
                     this.mValues.clear();
                     throw new IllegalArgumentException("'" + str2 + "' in '" + str + "' is not a valid key-value pair");
                 }
-                this.mValues.put(str2.substring(0, indexOf).trim(), str2.substring(indexOf + 1).trim());
+                this.mValues.put(str2.substring(0, iIndexOf).trim(), str2.substring(iIndexOf + 1).trim());
             }
         }
     }
@@ -83,11 +83,11 @@ public class KeyValueListParser {
         String str2 = this.mValues.get(str);
         if (str2 != null) {
             try {
-                String[] split = str2.split(":");
-                if (split.length > 0) {
-                    int[] iArr2 = new int[split.length];
-                    for (int i = 0; i < split.length; i++) {
-                        iArr2[i] = Integer.parseInt(split[i]);
+                String[] strArrSplit = str2.split(":");
+                if (strArrSplit.length > 0) {
+                    int[] iArr2 = new int[strArrSplit.length];
+                    for (int i = 0; i < strArrSplit.length; i++) {
+                        iArr2[i] = Integer.parseInt(strArrSplit[i]);
                     }
                     return iArr2;
                 }

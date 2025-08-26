@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SecVolumeBarViewModel$getMusicStreamVolume$volume$1 extends SuspendLambda implements Function2 {
     int label;
@@ -42,10 +41,10 @@ final class SecVolumeBarViewModel$getMusicStreamVolume$volume$1 extends SuspendL
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             AudioVolumeInteractor audioVolumeInteractor = this.this$0.volumeInteractor;
-            AudioStream.m989constructorimpl(3);
-            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 m984getAudioStreamtLTdkI8 = audioVolumeInteractor.m984getAudioStreamtLTdkI8(3);
+            AudioStream.m991constructorimpl(3);
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8 = audioVolumeInteractor.m986getAudioStreamtLTdkI8(3);
             this.label = 1;
-            obj = FlowKt.first(m984getAudioStreamtLTdkI8, this);
+            obj = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8, this);
             if (obj == coroutineSingletons) {
                 return coroutineSingletons;
             }

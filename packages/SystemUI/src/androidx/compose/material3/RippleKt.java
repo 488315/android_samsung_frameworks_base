@@ -9,7 +9,6 @@ import kotlin.ULong;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RippleKt {
     public static final RippleNodeFactory DefaultBoundedRipple;
@@ -31,7 +30,7 @@ public abstract class RippleKt {
     }
 
     /* renamed from: ripple-H2RKhps$default, reason: not valid java name */
-    public static IndicationNodeFactory m280rippleH2RKhps$default(float f, boolean z, int i) {
+    public static IndicationNodeFactory m281rippleH2RKhps$default(float f, boolean z, int i) {
         if ((i & 1) != 0) {
             z = true;
         }
@@ -45,9 +44,9 @@ public abstract class RippleKt {
         companion.getClass();
         long j = Color.Unspecified;
         Dp.Companion.getClass();
-        if (Dp.m836equalsimpl0(f2, Dp.Unspecified)) {
+        if (Dp.m838equalsimpl0(f2, Dp.Unspecified)) {
             companion.getClass();
-            if (ULong.m3427equalsimpl0(j, j)) {
+            if (ULong.m3447equalsimpl0(j, j)) {
                 return z2 ? DefaultBoundedRipple : DefaultUnboundedRipple;
             }
         }

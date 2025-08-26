@@ -23,7 +23,6 @@ import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SideCoverViewAnimator implements GlobalActionsAnimator {
     public SideCoverContentView.AnonymousClass1 mCallback;
@@ -47,12 +46,12 @@ public class SideCoverViewAnimator implements GlobalActionsAnimator {
     public final AnimatorSet getDefaultConfirmAnimatorSet(boolean z) {
         AnimatorSet animatorSet = new AnimatorSet();
         ViewGroup viewGroup = this.mConfirmIconLabelView;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(viewGroup, "x", viewGroup.getX(), z ? this.mOriginalConfirmLocationX : ((View) this.mSelectedActionView.getParent()).getLeft() + this.mSelectedActionView.getLeft());
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewGroup, "x", viewGroup.getX(), z ? this.mOriginalConfirmLocationX : ((View) this.mSelectedActionView.getParent()).getLeft() + this.mSelectedActionView.getLeft());
         ViewGroup viewGroup2 = this.mConfirmIconLabelView;
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(viewGroup2, "y", viewGroup2.getY(), z ? this.mOriginalConfirmLocationY : ((View) this.mSelectedActionView.getParent()).getTop() + this.mSelectedActionView.getTop());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mConfirmDescriptionView, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
-        ofFloat3.setDuration(125L);
-        animatorSet.playTogether(ofFloat2, ofFloat, ofFloat3);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(viewGroup2, "y", viewGroup2.getY(), z ? this.mOriginalConfirmLocationY : ((View) this.mSelectedActionView.getParent()).getTop() + this.mSelectedActionView.getTop());
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mConfirmDescriptionView, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
+        objectAnimatorOfFloat3.setDuration(125L);
+        animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat, objectAnimatorOfFloat3);
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.setDuration(125L);
         if (z) {
@@ -154,9 +153,9 @@ public class SideCoverViewAnimator implements GlobalActionsAnimator {
         SideCoverContentItemView sideCoverContentItemView = new SideCoverContentItemView(sideCoverContentView.mDialog.getContext(), sideCoverContentView.mSelectedViewModel, sideCoverContentView.mConfirmView, sideCoverContentView.mResourceFactory, false, false);
         sideCoverContentView.mConfirmView.removeAllViews();
         ViewGroup viewGroup = sideCoverContentView.mConfirmView;
-        View inflateView = sideCoverContentItemView.inflateView();
-        sideCoverContentItemView.setViewAttrs(inflateView);
-        viewGroup.addView(inflateView);
+        View viewInflateView = sideCoverContentItemView.inflateView();
+        sideCoverContentItemView.setViewAttrs(viewInflateView);
+        viewGroup.addView(viewInflateView);
         sideCoverContentView.mConfirmView.setVisibility(0);
         SideCoverContentView sideCoverContentView2 = SideCoverContentView.this;
         ViewGroup viewGroup2 = sideCoverContentView2.mConfirmView;
@@ -169,7 +168,7 @@ public class SideCoverViewAnimator implements GlobalActionsAnimator {
         this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.globalactions.presentation.view.SideCoverViewAnimator$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                SideCoverViewAnimator sideCoverViewAnimator = SideCoverViewAnimator.this;
+                SideCoverViewAnimator sideCoverViewAnimator = this.f$0;
                 sideCoverViewAnimator.mConfirmView.getViewTreeObserver().removeOnGlobalLayoutListener(sideCoverViewAnimator.mViewTreeObserverListener);
                 sideCoverViewAnimator.mOriginalConfirmLocationX = sideCoverViewAnimator.mConfirmIconLabelView.getLeft();
                 sideCoverViewAnimator.mOriginalConfirmLocationY = sideCoverViewAnimator.mConfirmIconLabelView.getTop();
@@ -196,7 +195,7 @@ public class SideCoverViewAnimator implements GlobalActionsAnimator {
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.globalactions.presentation.view.SideCoverViewAnimator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SideCoverViewAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
+                this.f$0.mViewStateController.setState(ViewAnimationState.IDLE);
             }
         }, 125L);
     }

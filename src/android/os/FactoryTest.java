@@ -16,8 +16,6 @@ public final class FactoryTest {
     public static final int OPTION_FACTORY_APP = 1;
     public static final int OPTION_SCREEN_LOCK = 0;
     private static final String TAG = "FactoryTest";
-    private static String mFactoryMode = null;
-    private static boolean mIsFactoryMode = false;
 
     public static int getMode() {
         return RoSystemProperties.FACTORYTEST;
@@ -31,6 +29,7 @@ public final class FactoryTest {
         return SystemProperties.get("ril.factory_mode").equals("PBA");
     }
 
+    @Deprecated
     public static boolean isFactoryMode(Context context, TelephonyManager telephonyManager) {
         if (isFactoryBinary()) {
             Log.d(TAG, "Binary type is Factory by Case #0");
@@ -40,10 +39,14 @@ public final class FactoryTest {
             Log.d(TAG, "Factory mode is enabled by Case #1");
             return true;
         }
-        if (telephonyManager == null || !"999999999999999".equals(telephonyManager.getSubscriberId())) {
+        if (telephonyManager != null && "999999999999999".equals(telephonyManager.getSubscriberId())) {
+            Log.d(TAG, "Factory mode is enabled by Case #2");
+            return true;
+        }
+        if (!isFactoryApk()) {
             return false;
         }
-        Log.d(TAG, "Factory mode is enabled by Case #2");
+        Log.d(TAG, "Factory mode is enabled by Case #3");
         return true;
     }
 
@@ -80,7 +83,7 @@ public final class FactoryTest {
     }
 
     public static boolean isFactoryMode() {
-        return isFactoryBinary();
+        return isFactoryBinary() || isFactoryApk();
     }
 
     public static boolean isFactoryBinary() {
@@ -88,7 +91,7 @@ public final class FactoryTest {
     }
 
     public static boolean isFactoryApk() {
-        return new File("/data/log/factorystate").exists();
+        return new File("/data/data/com.samsung.android.FactoryTestLauncher/factoryMode").exists();
     }
 
     public String getBuildType() {
@@ -99,14 +102,14 @@ public final class FactoryTest {
 
     public static boolean isRunningFactoryApp() {
         String str = SystemProperties.get("sys.factory.runningFactoryApp", "false");
-        boolean parseBoolean = Boolean.parseBoolean(str);
-        Boolean valueOf = Boolean.valueOf(parseBoolean);
-        valueOf.getClass();
-        if (parseBoolean) {
+        boolean z = Boolean.parseBoolean(str);
+        Boolean boolValueOf = Boolean.valueOf(z);
+        boolValueOf.getClass();
+        if (z) {
             Log.i(TAG, "isRunningFactoryApp=" + str);
         }
-        valueOf.getClass();
-        return parseBoolean;
+        boolValueOf.getClass();
+        return z;
     }
 
     public static boolean setRunningFactoryApp(Context context, boolean z) {
@@ -123,14 +126,14 @@ public final class FactoryTest {
             return false;
         }
         String str = SystemProperties.get("sys.factory.blockingPowerKey", "false");
-        boolean parseBoolean = Boolean.parseBoolean(str);
-        Boolean valueOf = Boolean.valueOf(parseBoolean);
-        valueOf.getClass();
-        if (parseBoolean) {
+        boolean z = Boolean.parseBoolean(str);
+        Boolean boolValueOf = Boolean.valueOf(z);
+        boolValueOf.getClass();
+        if (z) {
             Log.i(TAG, "needBlockingPowerKey=" + str);
         }
-        valueOf.getClass();
-        return parseBoolean;
+        boolValueOf.getClass();
+        return z;
     }
 
     public static boolean setBlockingPowerKey(Context context, boolean z) {

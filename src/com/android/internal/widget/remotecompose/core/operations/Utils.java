@@ -108,17 +108,17 @@ public class Utils {
         StackTraceElement[] stackTrace = new Throwable().getStackTrace();
         for (int i2 = 1; i2 < i + 1; i2++) {
             StackTraceElement stackTraceElement = stackTrace[i2];
-            String replace = new String(new char[i2]).replace((char) 0, ' ');
-            System.out.println(replace + NavigationBarInflaterView.KEY_CODE_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getLineNumber() + ")." + str);
+            String strReplace = new String(new char[i2]).replace((char) 0, ' ');
+            System.out.println(strReplace + NavigationBarInflaterView.KEY_CODE_START + stackTraceElement.getFileName() + ":" + stackTraceElement.getLineNumber() + ")." + str);
         }
     }
 
     public static boolean isVariable(float f) {
-        int idFromNan;
-        if (!Float.isNaN(f) || (idFromNan = idFromNan(f)) == 0) {
+        int iIdFromNan;
+        if (!Float.isNaN(f) || (iIdFromNan = idFromNan(f)) == 0) {
             return false;
         }
-        return idFromNan > 40 || idFromNan < 10;
+        return iIdFromNan > 40 || iIdFromNan < 10;
     }
 
     public static String colorInt(int i) {
@@ -133,24 +133,24 @@ public class Utils {
             return i2;
         }
         int i3 = (i >> 24) & 255;
-        float pow = (float) Math.pow(((i >> 16) & 255) / 255.0f, 2.2d);
-        float pow2 = (float) Math.pow(((i >> 8) & 255) / 255.0f, 2.2d);
-        float pow3 = (float) Math.pow((i & 255) / 255.0f, 2.2d);
+        float fPow = (float) Math.pow(((i >> 16) & 255) / 255.0f, 2.2d);
+        float fPow2 = (float) Math.pow(((i >> 8) & 255) / 255.0f, 2.2d);
+        float fPow3 = (float) Math.pow((i & 255) / 255.0f, 2.2d);
         float f2 = i3 / 255.0f;
-        float pow4 = (float) Math.pow(((i2 >> 16) & 255) / 255.0f, 2.2d);
-        float pow5 = pow2 + ((((float) Math.pow(((i2 >> 8) & 255) / 255.0f, 2.2d)) - pow2) * f);
+        float fPow4 = (float) Math.pow(((i2 >> 16) & 255) / 255.0f, 2.2d);
+        float fPow5 = fPow2 + ((((float) Math.pow(((i2 >> 8) & 255) / 255.0f, 2.2d)) - fPow2) * f);
         float f3 = f2 + (f * ((((i2 >> 24) & 255) / 255.0f) - f2));
-        return clamp((int) (((float) Math.pow(pow3 + ((((float) Math.pow((i2 & 255) / 255.0f, 2.2d)) - pow3) * f), 0.45454545454545453d)) * 255.0f)) | (clamp((int) (((float) Math.pow(pow + ((pow4 - pow) * f), 0.45454545454545453d)) * 255.0f)) << 16) | (clamp((int) (f3 * 255.0f)) << 24) | (clamp((int) (((float) Math.pow(pow5, 0.45454545454545453d)) * 255.0f)) << 8);
+        return clamp((int) (((float) Math.pow(fPow3 + ((((float) Math.pow((i2 & 255) / 255.0f, 2.2d)) - fPow3) * f), 0.45454545454545453d)) * 255.0f)) | (clamp((int) (((float) Math.pow(fPow + ((fPow4 - fPow) * f), 0.45454545454545453d)) * 255.0f)) << 16) | (clamp((int) (f3 * 255.0f)) << 24) | (clamp((int) (((float) Math.pow(fPow5, 0.45454545454545453d)) * 255.0f)) << 8);
     }
 
     public static float getHue(int i) {
         float f = ((i >> 16) & 255) / 255.0f;
         float f2 = ((i >> 8) & 255) / 255.0f;
         float f3 = (i & 255) / 255.0f;
-        float max = Math.max(f, Math.max(f2, f3));
-        float min = Math.min(f, Math.min(f2, f3));
-        float f4 = max - min;
-        float f5 = ((max == min ? 0.0f : max == f ? ((f2 - f3) / f4) % 6.0f : max == f2 ? ((f3 - f) / f4) + 2.0f : ((f - f2) / f4) + 4.0f) * 60.0f) % 360.0f;
+        float fMax = Math.max(f, Math.max(f2, f3));
+        float fMin = Math.min(f, Math.min(f2, f3));
+        float f4 = fMax - fMin;
+        float f5 = ((fMax == fMin ? 0.0f : fMax == f ? ((f2 - f3) / f4) % 6.0f : fMax == f2 ? ((f3 - f) / f4) + 2.0f : ((f - f2) / f4) + 4.0f) * 60.0f) % 360.0f;
         if (f5 < 0.0f) {
             f5 += 360.0f;
         }
@@ -161,11 +161,11 @@ public class Utils {
         float f = ((i >> 16) & 255) / 255.0f;
         float f2 = ((i >> 8) & 255) / 255.0f;
         float f3 = (i & 255) / 255.0f;
-        float max = Math.max(f, Math.max(f2, f3));
-        float min = Math.min(f, Math.min(f2, f3));
-        float f4 = max - min;
-        float f5 = (max + min) / 2.0f;
-        if (max == min) {
+        float fMax = Math.max(f, Math.max(f2, f3));
+        float fMin = Math.min(f, Math.min(f2, f3));
+        float f4 = fMax - fMin;
+        float f5 = (fMax + fMin) / 2.0f;
+        if (fMax == fMin) {
             return 0.0f;
         }
         return f4 / (1.0f - Math.abs((f5 * 2.0f) - 1.0f));

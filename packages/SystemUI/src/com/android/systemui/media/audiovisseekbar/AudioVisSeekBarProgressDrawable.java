@@ -1,26 +1,38 @@
 package com.android.systemui.media.audiovisseekbar;
 
+import android.animation.ArgbEvaluator;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.view.animation.PathInterpolator;
 import android.widget.SeekBar;
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import com.android.systemui.media.audiovisseekbar.config.AudioVisSeekBarConfig;
+import com.android.systemui.media.audiovisseekbar.config.RendererConfig;
 import com.android.systemui.media.audiovisseekbar.renderer.TrackRendererFactory;
 import com.android.systemui.media.audiovisseekbar.renderer.TrackRendererType;
 import com.android.systemui.media.audiovisseekbar.renderer.track.RemainTrackLineRenderer;
 import com.android.systemui.media.audiovisseekbar.renderer.track.auto.MultiWaveAreaTrackRenderer;
+import com.android.systemui.media.audiovisseekbar.utils.DimensionUtilsKt;
 import com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValueAnimator;
+import com.android.systemui.media.audiovisseekbar.utils.easing.CustomPathInterpolator;
 import com.android.systemui.media.audiovisseekbar.utils.easing.Interpolators;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
+import kotlin.internal.ProgressionUtilKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioVisSeekBarProgressDrawable extends Drawable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,10 +74,10 @@ public final class AudioVisSeekBarProgressDrawable extends Drawable {
                         return new SingleStateValueAnimator(1.0f, 0L, Interpolators.MOTION_ACTIVITY_EASING, new Function1() { // from class: com.android.systemui.media.audiovisseekbar.AudioVisSeekBarProgressDrawable$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
-                                float floatValue = ((Float) obj).floatValue();
-                                MultiWaveAreaTrackRenderer multiWaveAreaTrackRenderer = AudioVisSeekBarProgressDrawable.this.trackRenderer;
-                                multiWaveAreaTrackRenderer.motionActivity = floatValue;
+                            public final Object mo781invoke(Object obj) {
+                                float fFloatValue = ((Float) obj).floatValue();
+                                MultiWaveAreaTrackRenderer multiWaveAreaTrackRenderer = audioVisSeekBarProgressDrawable.trackRenderer;
+                                multiWaveAreaTrackRenderer.motionActivity = fFloatValue;
                                 multiWaveAreaTrackRenderer.view.invalidate();
                                 return Unit.INSTANCE;
                             }
@@ -98,10 +110,10 @@ public final class AudioVisSeekBarProgressDrawable extends Drawable {
                         return new SingleStateValueAnimator(1.0f, 0L, Interpolators.MOTION_ACTIVITY_EASING, new Function1() { // from class: com.android.systemui.media.audiovisseekbar.AudioVisSeekBarProgressDrawable$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
-                                float floatValue = ((Float) obj).floatValue();
-                                MultiWaveAreaTrackRenderer multiWaveAreaTrackRenderer = AudioVisSeekBarProgressDrawable.this.trackRenderer;
-                                multiWaveAreaTrackRenderer.motionActivity = floatValue;
+                            public final Object mo781invoke(Object obj) {
+                                float fFloatValue = ((Float) obj).floatValue();
+                                MultiWaveAreaTrackRenderer multiWaveAreaTrackRenderer = audioVisSeekBarProgressDrawable.trackRenderer;
+                                multiWaveAreaTrackRenderer.motionActivity = fFloatValue;
                                 multiWaveAreaTrackRenderer.view.invalidate();
                                 return Unit.INSTANCE;
                             }
@@ -111,21 +123,186 @@ public final class AudioVisSeekBarProgressDrawable extends Drawable {
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0232  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x024d A[LOOP:1: B:17:0x00f0->B:37:0x024d, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x025b A[EDGE_INSN: B:38:0x025b->B:39:0x025b BREAK  A[LOOP:1: B:17:0x00f0->B:37:0x024d], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0245  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0181  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x021f  */
     @Override // android.graphics.drawable.Drawable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void draw(android.graphics.Canvas r25) {
-        /*
-            Method dump skipped, instructions count: 724
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.audiovisseekbar.AudioVisSeekBarProgressDrawable.draw(android.graphics.Canvas):void");
+    public final void draw(Canvas canvas) {
+        float f;
+        float f2;
+        char c;
+        float f3;
+        float interpolation;
+        double d;
+        int i;
+        float fM$1;
+        RemainTrackLineRenderer remainTrackLineRenderer = (RemainTrackLineRenderer) this.remainTrackRenderer$delegate.getValue();
+        float f4 = remainTrackLineRenderer.bounds.left;
+        float centerY = remainTrackLineRenderer.getCenterY();
+        float f5 = remainTrackLineRenderer.bounds.right;
+        RendererConfig rendererConfig = RendererConfig.INSTANCE;
+        rendererConfig.getClass();
+        canvas.drawLine(f4, centerY, f5 - RendererConfig.getRemainTrackBorderBound(), remainTrackLineRenderer.getCenterY(), remainTrackLineRenderer.trackPaint);
+        canvas.drawRoundRect(remainTrackLineRenderer.bounds.left - RendererConfig.getRemainTrackBorderBound(), remainTrackLineRenderer.getCenterY() - RendererConfig.getRemainTrackBorderBound(), remainTrackLineRenderer.bounds.right, RendererConfig.getRemainTrackBorderBound() + remainTrackLineRenderer.getCenterY(), RendererConfig.getRemainTrackBorderBound(), RendererConfig.getRemainTrackBorderBound(), remainTrackLineRenderer.trackBorderPaint);
+        MultiWaveAreaTrackRenderer multiWaveAreaTrackRenderer = this.trackRenderer;
+        float f6 = 0.0f;
+        if (multiWaveAreaTrackRenderer.thumbX == 0.0f) {
+            return;
+        }
+        float width = multiWaveAreaTrackRenderer.view.getWidth();
+        rendererConfig.getClass();
+        float fDpToPx = width - (DimensionUtilsKt.dpToPx(8.0f) * 2.0f);
+        char c2 = 2;
+        float f7 = 2;
+        float fDpToPx2 = DimensionUtilsKt.dpToPx(8.0f) / f7;
+        int i2 = 0;
+        int i3 = 0;
+        while (true) {
+            int i4 = multiWaveAreaTrackRenderer.numWaves;
+            if (i3 >= i4) {
+                return;
+            }
+            Paint paint = multiWaveAreaTrackRenderer.pathPaint;
+            ArgbEvaluator argbEvaluator = multiWaveAreaTrackRenderer.evaluator;
+            float f8 = multiWaveAreaTrackRenderer.motionActivity;
+            AudioVisSeekBarConfig audioVisSeekBarConfig = multiWaveAreaTrackRenderer.config;
+            paint.setColor(((Integer) argbEvaluator.evaluate(f8, Integer.valueOf(audioVisSeekBarConfig.secondaryColor), Integer.valueOf(i3 == 0 ? audioVisSeekBarConfig.primaryColor : audioVisSeekBarConfig.secondaryColor))).intValue());
+            int i5 = 1;
+            paint.setAlpha(i3 == 1 ? 186 : 200);
+            float height = ((((multiWaveAreaTrackRenderer.view.getHeight() / 1.1f) - fDpToPx2) / f7) - DimensionUtilsKt.dpToPx(3.0f)) * ((i4 - i3) / i4);
+            multiWaveAreaTrackRenderer.path.reset();
+            int iRoundToInt = MathKt__MathJVMKt.roundToInt(multiWaveAreaTrackRenderer.thumbX);
+            int i6 = multiWaveAreaTrackRenderer.stepX;
+            if (i6 <= 0) {
+                throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i6, "Step must be positive, was: ", "."));
+            }
+            int progressionLastElement = ProgressionUtilKt.getProgressionLastElement(i2, iRoundToInt, i6);
+            if (progressionLastElement >= 0) {
+                float f9 = f6;
+                c = c2;
+                int i7 = i2;
+                while (true) {
+                    float f10 = i7;
+                    int i8 = i2;
+                    int i9 = i5;
+                    int i10 = i7;
+                    f2 = fDpToPx2;
+                    double dSin = Math.sin(((f10 / fDpToPx) * 6.283185307179586d * multiWaveAreaTrackRenderer.cycleCount) + (multiWaveAreaTrackRenderer.phase * (i3 + 1)));
+                    float fWidth = f10 / multiWaveAreaTrackRenderer.bounds.width();
+                    CustomPathInterpolator customPathInterpolator = multiWaveAreaTrackRenderer.scalePath;
+                    customPathInterpolator.pathMeasure.getPosTan(fWidth * customPathInterpolator.pathLegth, customPathInterpolator.point, null);
+                    double d2 = (((height * r6) * dSin) - height) * customPathInterpolator.point[i9] * multiWaveAreaTrackRenderer.motionActivity * multiWaveAreaTrackRenderer.widthScale.value * 1.1f;
+                    float fWidth2 = multiWaveAreaTrackRenderer.leftCornerBounds.width() * 0.5f;
+                    if (f10 <= fWidth2) {
+                        d = d2 * 0.0f;
+                        f = fDpToPx;
+                    } else if (f10 > fWidth2) {
+                        float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(iRoundToInt, fWidth2, 0.5f, fWidth2);
+                        if (f10 <= fM$12) {
+                            f = fDpToPx;
+                            interpolation = new PathInterpolator(0.22f, 0.25f, 0.63f, 1.0f).getInterpolation((f10 - fWidth2) / fM$12);
+                        } else {
+                            f = fDpToPx;
+                            float fM$13 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(iRoundToInt, fWidth2, 0.5f, fWidth2);
+                            interpolation = new PathInterpolator(0.25f, 0.25f, 0.63f, 1.0f).getInterpolation(1.0f - (((f10 - fWidth2) - fM$13) / fM$13));
+                        }
+                        d = d2 * interpolation;
+                    }
+                    float centerY2 = (float) ((multiWaveAreaTrackRenderer.getCenterY() - f2) + d);
+                    if (multiWaveAreaTrackRenderer.motionActivity < 1.0f) {
+                        RectF rectF = multiWaveAreaTrackRenderer.leftCornerBounds;
+                        float f11 = rectF.left;
+                        if (f10 > rectF.centerX() || f11 > f10) {
+                            i = i9;
+                        } else {
+                            CustomPathInterpolator customPathInterpolator2 = multiWaveAreaTrackRenderer.leftTopCornerPath;
+                            PointF[] pointFArr = customPathInterpolator2.samplingPoints;
+                            int length = pointFArr.length - 1;
+                            PointF pointF = pointFArr[i8];
+                            if (f10 <= pointF.x) {
+                                fM$1 = pointF.y;
+                            } else {
+                                PointF pointF2 = pointFArr[length];
+                                if (f10 >= pointF2.x) {
+                                    fM$1 = pointF2.y;
+                                } else {
+                                    int i11 = i8;
+                                    while (true) {
+                                        i = i9;
+                                        if (length - i11 <= i) {
+                                            break;
+                                        }
+                                        int i12 = (i11 + length) / 2;
+                                        if (f10 < customPathInterpolator2.samplingPoints[i12].x) {
+                                            length = i12;
+                                        } else {
+                                            i11 = i12;
+                                        }
+                                        i9 = i;
+                                    }
+                                    PointF[] pointFArr2 = customPathInterpolator2.samplingPoints;
+                                    PointF pointF3 = pointFArr2[length];
+                                    float f12 = pointF3.x;
+                                    PointF pointF4 = pointFArr2[i11];
+                                    float f13 = pointF4.x;
+                                    float f14 = f12 - f13;
+                                    if (f14 == 0.0f) {
+                                        fM$1 = pointF4.y;
+                                    } else {
+                                        float f15 = pointF4.y;
+                                        fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF3.y, f15, (f10 - f13) / f14, f15);
+                                    }
+                                    centerY2 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(centerY2, fM$1, multiWaveAreaTrackRenderer.motionActivity, fM$1);
+                                }
+                            }
+                            i = i9;
+                            centerY2 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(centerY2, fM$1, multiWaveAreaTrackRenderer.motionActivity, fM$1);
+                        }
+                        float f16 = i8;
+                        if (f10 <= (multiWaveAreaTrackRenderer.leftCornerBounds.width() * 0.5f) + f16) {
+                            multiWaveAreaTrackRenderer.path.moveTo((multiWaveAreaTrackRenderer.leftCornerBounds.width() * 0.5f) + f16, centerY2);
+                            f9 = centerY2;
+                        } else {
+                            multiWaveAreaTrackRenderer.path.lineTo(f10, centerY2);
+                        }
+                        if (i10 == progressionLastElement) {
+                            break;
+                        }
+                        i7 = i10 + i6;
+                        i5 = i;
+                        fDpToPx2 = f2;
+                        fDpToPx = f;
+                        i2 = 0;
+                    }
+                }
+                f3 = f9;
+            } else {
+                f = fDpToPx;
+                f2 = fDpToPx2;
+                c = c2;
+                f3 = 0.0f;
+            }
+            Path path = multiWaveAreaTrackRenderer.path;
+            path.lineTo(iRoundToInt, multiWaveAreaTrackRenderer.getCenterY() + f2);
+            path.lineTo(0 + f2, multiWaveAreaTrackRenderer.getCenterY() + f2);
+            path.addArc(multiWaveAreaTrackRenderer.leftCornerBounds, 90.0f, 180.0f);
+            RectF rectF2 = multiWaveAreaTrackRenderer.leftCornerBounds;
+            path.lineTo((rectF2.width() * 0.5f) + rectF2.left, f3);
+            path.close();
+            canvas.drawPath(multiWaveAreaTrackRenderer.path, multiWaveAreaTrackRenderer.pathPaint);
+            multiWaveAreaTrackRenderer.phase += multiWaveAreaTrackRenderer.phaseShift;
+            if (multiWaveAreaTrackRenderer.motionActivity != 0.0f) {
+                multiWaveAreaTrackRenderer.view.invalidate();
+            }
+            i3++;
+            c2 = c;
+            i2 = 0;
+            f6 = 0.0f;
+            fDpToPx2 = f2;
+            fDpToPx = f;
+        }
     }
 
     @Override // android.graphics.drawable.Drawable

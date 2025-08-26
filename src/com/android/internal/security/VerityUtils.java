@@ -26,7 +26,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public abstract class VerityUtils {
     private static final int HASH_SIZE_BYTES = 32;
     private static final String TAG = "VerityUtils";
@@ -44,27 +44,27 @@ public abstract class VerityUtils {
     }
 
     public static void setUpFsverity(String str) throws IOException {
-        int enableFsverityNative = enableFsverityNative(str);
-        if (enableFsverityNative == 0) {
+        int iEnableFsverityNative = enableFsverityNative(str);
+        if (iEnableFsverityNative == 0) {
             return;
         }
-        throw new IOException("Failed to enable fs-verity on " + str + ": " + Os.strerror(enableFsverityNative));
+        throw new IOException("Failed to enable fs-verity on " + str + ": " + Os.strerror(iEnableFsverityNative));
     }
 
     public static void setUpFsverity(int i) throws IOException {
-        int enableFsverityForFdNative = enableFsverityForFdNative(i);
-        if (enableFsverityForFdNative == 0) {
+        int iEnableFsverityForFdNative = enableFsverityForFdNative(i);
+        if (iEnableFsverityForFdNative == 0) {
             return;
         }
-        throw new IOException("Failed to enable fs-verity on FD(" + i + "): " + Os.strerror(enableFsverityForFdNative));
+        throw new IOException("Failed to enable fs-verity on FD(" + i + "): " + Os.strerror(iEnableFsverityForFdNative));
     }
 
     public static boolean hasFsverity(String str) {
-        int statxForFsverityNative = statxForFsverityNative(str);
-        if (statxForFsverityNative >= 0) {
-            return statxForFsverityNative == 1;
+        int iStatxForFsverityNative = statxForFsverityNative(str);
+        if (iStatxForFsverityNative >= 0) {
+            return iStatxForFsverityNative == 1;
         }
-        Slog.e(TAG, "Failed to check whether fs-verity is enabled, errno " + (-statxForFsverityNative) + ": " + str);
+        Slog.e(TAG, "Failed to check whether fs-verity is enabled, errno " + (-iStatxForFsverityNative) + ": " + str);
         return false;
     }
 
@@ -87,7 +87,7 @@ public abstract class VerityUtils {
                 Slog.w(TAG, "Expect no CRL in signature");
                 return false;
             }
-            SignerInformationVerifier build = new JcaSimpleSignerInfoVerifierBuilder().build((X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(inputStream));
+            SignerInformationVerifier signerInformationVerifierBuild = new JcaSimpleSignerInfoVerifierBuilder().build((X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(inputStream));
             for (SignerInformation signerInformation : cMSSignedData.getSignerInfos().getSigners()) {
                 if (signerInformation.getSignedAttributes() != null && signerInformation.getSignedAttributes().size() > 0) {
                     Slog.w(TAG, "Unexpected signed attributes");
@@ -105,7 +105,7 @@ public abstract class VerityUtils {
                     Slog.w(TAG, "Unsupported encryption algorithm OID: " + signerInformation.getEncryptionAlgOID());
                     return false;
                 }
-                if (signerInformation.verify(build)) {
+                if (signerInformation.verify(signerInformationVerifierBuild)) {
                     return true;
                 }
             }
@@ -118,43 +118,43 @@ public abstract class VerityUtils {
 
     public static byte[] getFsverityDigest(String str) {
         byte[] bArr = new byte[32];
-        int measureFsverityNative = measureFsverityNative(str, bArr);
-        if (measureFsverityNative >= 0) {
+        int iMeasureFsverityNative = measureFsverityNative(str, bArr);
+        if (iMeasureFsverityNative >= 0) {
             return bArr;
         }
-        if (measureFsverityNative == (-OsConstants.ENODATA)) {
+        if (iMeasureFsverityNative == (-OsConstants.ENODATA)) {
             return null;
         }
-        Slog.e(TAG, "Failed to measure fs-verity, errno " + (-measureFsverityNative) + ": " + str);
+        Slog.e(TAG, "Failed to measure fs-verity, errno " + (-iMeasureFsverityNative) + ": " + str);
         return null;
     }
 
-    public static byte[] generateFsVerityDigest(long j, V4Signature.HashingInfo hashingInfo) throws DigestException, NoSuchAlgorithmException {
+    public static byte[] generateFsVerityDigest(long j, V4Signature.HashingInfo hashingInfo) throws NoSuchAlgorithmException, DigestException {
         if (hashingInfo.rawRootHash == null || hashingInfo.rawRootHash.length != 32) {
             throw new IllegalArgumentException("Expect a 32-byte rootHash for SHA256");
         }
         if (hashingInfo.log2BlockSize != 12) {
             throw new IllegalArgumentException("Unsupported log2BlockSize: " + ((int) hashingInfo.log2BlockSize));
         }
-        ByteBuffer allocate = ByteBuffer.allocate(256);
-        allocate.order(ByteOrder.LITTLE_ENDIAN);
-        allocate.put((byte) 1);
-        allocate.put((byte) 1);
-        allocate.put(hashingInfo.log2BlockSize);
-        allocate.put((byte) 0);
-        allocate.putInt(0);
-        allocate.putLong(j);
-        allocate.put(hashingInfo.rawRootHash);
-        return MessageDigest.getInstance("SHA-256").digest(allocate.array());
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(256);
+        byteBufferAllocate.order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferAllocate.put((byte) 1);
+        byteBufferAllocate.put((byte) 1);
+        byteBufferAllocate.put(hashingInfo.log2BlockSize);
+        byteBufferAllocate.put((byte) 0);
+        byteBufferAllocate.putInt(0);
+        byteBufferAllocate.putLong(j);
+        byteBufferAllocate.put(hashingInfo.rawRootHash);
+        return MessageDigest.getInstance("SHA-256").digest(byteBufferAllocate.array());
     }
 
     public static byte[] toFormattedDigest(byte[] bArr) {
-        ByteBuffer allocate = ByteBuffer.allocate(bArr.length + 12);
-        allocate.order(ByteOrder.LITTLE_ENDIAN);
-        allocate.put("FSVerity".getBytes(StandardCharsets.US_ASCII));
-        allocate.putShort((short) 1);
-        allocate.putShort((short) bArr.length);
-        allocate.put(bArr);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(bArr.length + 12);
+        byteBufferAllocate.order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferAllocate.put("FSVerity".getBytes(StandardCharsets.US_ASCII));
+        byteBufferAllocate.putShort((short) 1);
+        byteBufferAllocate.putShort((short) bArr.length);
+        byteBufferAllocate.put(bArr);
+        return byteBufferAllocate.array();
     }
 }

@@ -6,21 +6,19 @@ import android.util.Base64;
 import android.util.Xml;
 import androidx.core.R$styleable;
 import androidx.core.provider.FontRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FontResourcesParserCompat {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FamilyResourceEntry {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FontFamilyFilesResourceEntry implements FamilyResourceEntry {
         public final FontFileResourceEntry[] mEntries;
 
@@ -29,7 +27,6 @@ public class FontResourcesParserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FontFileResourceEntry {
         public final boolean mItalic;
         public final int mResourceId;
@@ -49,7 +46,7 @@ public class FontResourcesParserCompat {
     private FontResourcesParserCompat() {
     }
 
-    public static FamilyResourceEntry parse(XmlPullParser xmlPullParser, Resources resources) {
+    public static FamilyResourceEntry parse(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, Resources.NotFoundException, IOException {
         int next;
         do {
             next = xmlPullParser.next();
@@ -65,37 +62,37 @@ public class FontResourcesParserCompat {
             skip(xmlPullParser);
             return null;
         }
-        TypedArray obtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R$styleable.FontFamily);
-        String string = obtainAttributes.getString(0);
-        String string2 = obtainAttributes.getString(5);
-        String string3 = obtainAttributes.getString(6);
-        String string4 = obtainAttributes.getString(2);
-        int resourceId = obtainAttributes.getResourceId(1, 0);
-        int integer = obtainAttributes.getInteger(3, 1);
-        int integer2 = obtainAttributes.getInteger(4, 500);
-        String string5 = obtainAttributes.getString(7);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R$styleable.FontFamily);
+        String string = typedArrayObtainAttributes.getString(0);
+        String string2 = typedArrayObtainAttributes.getString(5);
+        String string3 = typedArrayObtainAttributes.getString(6);
+        String string4 = typedArrayObtainAttributes.getString(2);
+        int resourceId = typedArrayObtainAttributes.getResourceId(1, 0);
+        int integer = typedArrayObtainAttributes.getInteger(3, 1);
+        int integer2 = typedArrayObtainAttributes.getInteger(4, 500);
+        String string5 = typedArrayObtainAttributes.getString(7);
+        typedArrayObtainAttributes.recycle();
         if (string != null && string2 != null && string3 != null) {
             while (xmlPullParser.next() != 3) {
                 skip(xmlPullParser);
             }
-            List readCerts = readCerts(resources, resourceId);
-            return new ProviderResourceEntry(new FontRequest(string, string2, string3, (List<List<byte[]>>) readCerts), string4 != null ? new FontRequest(string, string2, string4, (List<List<byte[]>>) readCerts) : null, integer, integer2, string5);
+            List certs = readCerts(resources, resourceId);
+            return new ProviderResourceEntry(new FontRequest(string, string2, string3, (List<List<byte[]>>) certs), string4 != null ? new FontRequest(string, string2, string4, (List<List<byte[]>>) certs) : null, integer, integer2, string5);
         }
         ArrayList arrayList = new ArrayList();
         while (xmlPullParser.next() != 3) {
             if (xmlPullParser.getEventType() == 2) {
                 if (xmlPullParser.getName().equals("font")) {
-                    TypedArray obtainAttributes2 = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R$styleable.FontFamilyFont);
-                    int i = obtainAttributes2.getInt(obtainAttributes2.hasValue(8) ? 8 : 1, 400);
-                    boolean z = 1 == obtainAttributes2.getInt(obtainAttributes2.hasValue(6) ? 6 : 2, 0);
-                    int i2 = obtainAttributes2.hasValue(9) ? 9 : 3;
-                    String string6 = obtainAttributes2.getString(obtainAttributes2.hasValue(7) ? 7 : 4);
-                    int i3 = obtainAttributes2.getInt(i2, 0);
-                    int i4 = obtainAttributes2.hasValue(5) ? 5 : 0;
-                    int resourceId2 = obtainAttributes2.getResourceId(i4, 0);
-                    String string7 = obtainAttributes2.getString(i4);
-                    obtainAttributes2.recycle();
+                    TypedArray typedArrayObtainAttributes2 = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R$styleable.FontFamilyFont);
+                    int i = typedArrayObtainAttributes2.getInt(typedArrayObtainAttributes2.hasValue(8) ? 8 : 1, 400);
+                    boolean z = 1 == typedArrayObtainAttributes2.getInt(typedArrayObtainAttributes2.hasValue(6) ? 6 : 2, 0);
+                    int i2 = typedArrayObtainAttributes2.hasValue(9) ? 9 : 3;
+                    String string6 = typedArrayObtainAttributes2.getString(typedArrayObtainAttributes2.hasValue(7) ? 7 : 4);
+                    int i3 = typedArrayObtainAttributes2.getInt(i2, 0);
+                    int i4 = typedArrayObtainAttributes2.hasValue(5) ? 5 : 0;
+                    int resourceId2 = typedArrayObtainAttributes2.getResourceId(i4, 0);
+                    String string7 = typedArrayObtainAttributes2.getString(i4);
+                    typedArrayObtainAttributes2.recycle();
                     while (xmlPullParser.next() != 3) {
                         skip(xmlPullParser);
                     }
@@ -111,19 +108,19 @@ public class FontResourcesParserCompat {
         return new FontFamilyFilesResourceEntry((FontFileResourceEntry[]) arrayList.toArray(new FontFileResourceEntry[0]));
     }
 
-    public static List readCerts(Resources resources, int i) {
+    public static List readCerts(Resources resources, int i) throws Resources.NotFoundException {
         if (i == 0) {
             return Collections.EMPTY_LIST;
         }
-        TypedArray obtainTypedArray = resources.obtainTypedArray(i);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(i);
         try {
-            if (obtainTypedArray.length() == 0) {
+            if (typedArrayObtainTypedArray.length() == 0) {
                 return Collections.EMPTY_LIST;
             }
             ArrayList arrayList = new ArrayList();
-            if (obtainTypedArray.getType(0) == 1) {
-                for (int i2 = 0; i2 < obtainTypedArray.length(); i2++) {
-                    int resourceId = obtainTypedArray.getResourceId(i2, 0);
+            if (typedArrayObtainTypedArray.getType(0) == 1) {
+                for (int i2 = 0; i2 < typedArrayObtainTypedArray.length(); i2++) {
+                    int resourceId = typedArrayObtainTypedArray.getResourceId(i2, 0);
                     if (resourceId != 0) {
                         String[] stringArray = resources.getStringArray(resourceId);
                         ArrayList arrayList2 = new ArrayList();
@@ -143,11 +140,11 @@ public class FontResourcesParserCompat {
             }
             return arrayList;
         } finally {
-            obtainTypedArray.recycle();
+            typedArrayObtainTypedArray.recycle();
         }
     }
 
-    public static void skip(XmlPullParser xmlPullParser) {
+    public static void skip(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int i = 1;
         while (i > 0) {
             int next = xmlPullParser.next();
@@ -159,7 +156,6 @@ public class FontResourcesParserCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ProviderResourceEntry implements FamilyResourceEntry {
         public final FontRequest mFallbackRequest;
         public final FontRequest mRequest;

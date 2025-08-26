@@ -31,7 +31,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DefaultClockProvider implements ClockProvider {
     public static final Companion Companion = new Companion(null);
@@ -43,7 +42,6 @@ public final class DefaultClockProvider implements ClockProvider {
     public final Resources resources;
     public final Vibrator vibrator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,7 +84,7 @@ public final class DefaultClockProvider implements ClockProvider {
     }
 
     @Override // com.android.systemui.plugins.clocks.ClockProvider
-    public final ClockPickerConfig getClockPickerConfig(ClockSettings clockSettings) {
+    public final ClockPickerConfig getClockPickerConfig(ClockSettings clockSettings) throws Resources.NotFoundException {
         List clocks = getClocks();
         if (!(clocks instanceof Collection) || !clocks.isEmpty()) {
             Iterator it = clocks.iterator();
@@ -98,14 +96,14 @@ public final class DefaultClockProvider implements ClockProvider {
                     }
                     ClockFontAxis.Companion companion = ClockFontAxis.Companion;
                     FlexClockController.Companion.getClass();
-                    List<ClockFontAxis> merge = companion.merge(FlexClockController.Companion.getDefaultAxes(clockSettings), clockSettings.getAxes());
+                    List<ClockFontAxis> listMerge = companion.merge(FlexClockController.Companion.getDefaultAxes(clockSettings), clockSettings.getAxes());
                     String clockId2 = clockSettings.getClockId();
                     String str = clockId2 == null ? "DEFAULT" : clockId2;
                     String string = this.resources.getString(R$string.clock_default_name);
                     String string2 = this.resources.getString(R$string.clock_default_description);
                     Drawable drawable = this.resources.getDrawable(R$drawable.clock_default_thumbnail, null);
                     AxisPresetConfig axisPresetConfig = new AxisPresetConfig(Arrays.asList(FlexClockController.Companion.buildPresetGroup(this.resources, true), FlexClockController.Companion.buildPresetGroup(this.resources, false)), null, 2, null);
-                    return new ClockPickerConfig(str, string, string2, drawable, true, merge, AxisPresetConfig.copy$default(axisPresetConfig, null, axisPresetConfig.findStyle(new ClockAxisStyle(merge)), 1, null));
+                    return new ClockPickerConfig(str, string, string2, drawable, true, listMerge, AxisPresetConfig.copy$default(axisPresetConfig, null, axisPresetConfig.findStyle(new ClockAxisStyle(listMerge)), 1, null));
                 }
             }
         }
@@ -114,8 +112,8 @@ public final class DefaultClockProvider implements ClockProvider {
 
     @Override // com.android.systemui.plugins.clocks.ClockProvider
     public final List getClocks() {
-        List singletonList = Collections.singletonList(new ClockMetadata("DEFAULT", false, null, 6, null));
-        return this.isClockReactiveVariantsEnabled ? CollectionsKt___CollectionsKt.plus(singletonList, new ClockMetadata("DIGITAL_CLOCK_FLEX", true, "DEFAULT")) : singletonList;
+        List listSingletonList = Collections.singletonList(new ClockMetadata("DEFAULT", false, null, 6, null));
+        return this.isClockReactiveVariantsEnabled ? CollectionsKt___CollectionsKt.plus(listSingletonList, new ClockMetadata("DIGITAL_CLOCK_FLEX", true, "DEFAULT")) : listSingletonList;
     }
 
     @Override // com.android.systemui.plugins.clocks.ClockProvider

@@ -54,29 +54,29 @@ public class SmartMXUICC {
         Log.d(mLogTag, "SmartMXUICC pcscInstance retrun : " + pcscInstance);
     }
 
-    private int openLogicalChannel() {
-        int connect = pcscInstance.connect();
-        if (connect > 1 && connect < 4) {
-            Log.d(mLogTag, "openLogicalChannel channel[" + connect);
-            return connect;
+    private int openLogicalChannel() throws IOException {
+        int iConnect = pcscInstance.connect();
+        if (iConnect > 1 && iConnect < 4) {
+            Log.d(mLogTag, "openLogicalChannel channel[" + iConnect);
+            return iConnect;
         }
-        Log.d(mLogTag, "openLogicalChannel Failed : " + connect);
-        return connect;
+        Log.d(mLogTag, "openLogicalChannel Failed : " + iConnect);
+        return iConnect;
     }
 
     public int openSecureElementConnection(String str) throws IOException {
-        int openLogicalChannel;
+        int iOpenLogicalChannel;
         if (str == null) {
             throw new NullPointerException("seType must not be null");
         }
         if (TelephonyManager.getDefault().getSimState() == 1) {
-            openLogicalChannel = -2;
+            iOpenLogicalChannel = -2;
         } else {
-            openLogicalChannel = str.equals(UICC_ID) ? openLogicalChannel() : -1;
+            iOpenLogicalChannel = str.equals(UICC_ID) ? openLogicalChannel() : -1;
         }
-        Log.d(mLogTag, "openSecureElementConnection, retVal:" + openLogicalChannel);
-        if (openLogicalChannel != -1) {
-            return openLogicalChannel;
+        Log.d(mLogTag, "openSecureElementConnection, retVal:" + iOpenLogicalChannel);
+        if (iOpenLogicalChannel != -1) {
+            return iOpenLogicalChannel;
         }
         throw new IOException("Fail to open channel");
     }
@@ -86,10 +86,10 @@ public class SmartMXUICC {
         byte[] bArr3 = new byte[262];
         Log.d(mLogTag, "exchangeAPDU channel : " + i);
         bArr[0] = (byte) (bArr[0] | i);
-        int transmit = pcscInstance.transmit(i, bArr, bArr3);
-        if (transmit > 0) {
-            bArr2 = new byte[transmit];
-            System.arraycopy(bArr3, 0, bArr2, 0, transmit);
+        int iTransmit = pcscInstance.transmit(i, bArr, bArr3);
+        if (iTransmit > 0) {
+            bArr2 = new byte[iTransmit];
+            System.arraycopy(bArr3, 0, bArr2, 0, iTransmit);
         } else {
             bArr2 = null;
         }

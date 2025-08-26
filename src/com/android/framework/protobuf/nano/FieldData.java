@@ -69,14 +69,14 @@ class FieldData implements Cloneable {
             return this.cachedExtension.computeSerializedSize(obj);
         }
         Iterator<UnknownFieldData> it = this.unknownFieldData.iterator();
-        int i = 0;
+        int iComputeSerializedSize = 0;
         while (it.hasNext()) {
-            i += it.next().computeSerializedSize();
+            iComputeSerializedSize += it.next().computeSerializedSize();
         }
-        return i;
+        return iComputeSerializedSize;
     }
 
-    void writeTo(CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException {
+    void writeTo(CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         Object obj = this.value;
         if (obj != null) {
             this.cachedExtension.writeTo(obj, codedOutputByteBufferNano);
@@ -145,14 +145,14 @@ class FieldData implements Cloneable {
         }
     }
 
-    private byte[] toByteArray() throws IOException {
+    private byte[] toByteArray() throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         byte[] bArr = new byte[computeSerializedSize()];
         writeTo(CodedOutputByteBufferNano.newInstance(bArr));
         return bArr;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final FieldData m7752clone() {
+    public final FieldData m7763clone() {
         FieldData fieldData = new FieldData();
         try {
             fieldData.cachedExtension = this.cachedExtension;
@@ -165,7 +165,7 @@ class FieldData implements Cloneable {
             Object obj = this.value;
             if (obj != null) {
                 if (obj instanceof MessageNano) {
-                    fieldData.value = ((MessageNano) obj).mo7750clone();
+                    fieldData.value = ((MessageNano) obj).mo7761clone();
                     return fieldData;
                 }
                 if (obj instanceof byte[]) {
@@ -207,7 +207,7 @@ class FieldData implements Cloneable {
                         MessageNano[] messageNanoArr2 = new MessageNano[messageNanoArr.length];
                         fieldData.value = messageNanoArr2;
                         while (i < messageNanoArr.length) {
-                            messageNanoArr2[i] = messageNanoArr[i].mo7750clone();
+                            messageNanoArr2[i] = messageNanoArr[i].mo7761clone();
                             i++;
                         }
                     }

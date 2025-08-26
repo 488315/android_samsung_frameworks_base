@@ -51,9 +51,9 @@ public interface IDualDarAuthProgressCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDualDarAuthProgressCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDualDarAuthProgressCallback)) {
-                return (IDualDarAuthProgressCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDualDarAuthProgressCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDualDarAuthProgressCallback)) {
+                return (IDualDarAuthProgressCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,23 +110,23 @@ public interface IDualDarAuthProgressCallback extends IInterface {
 
             @Override // com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback
             public void onInnerLayerUnlocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDualDarAuthProgressCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDualDarAuthProgressCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback
             public void onInnerLayerUnlockFailed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDualDarAuthProgressCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDualDarAuthProgressCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -34,12 +34,12 @@ public abstract class ContentSuggestionsService extends Service {
     private final IContentSuggestionsService mInterface = new IContentSuggestionsService.Stub() { // from class: android.service.contentsuggestions.ContentSuggestionsService.1
         @Override // android.service.contentsuggestions.IContentSuggestionsService
         public void provideContextImage(int i, TaskSnapshot taskSnapshot, Bundle bundle) {
-            Bitmap bitmap;
+            Bitmap bitmapWrapHardwareBuffer;
             if (bundle.containsKey(ContentSuggestionsManager.EXTRA_BITMAP) && taskSnapshot != null) {
                 throw new IllegalArgumentException("Two bitmaps provided; expected one.");
             }
             if (bundle.containsKey(ContentSuggestionsManager.EXTRA_BITMAP)) {
-                bitmap = (Bitmap) bundle.getParcelable(ContentSuggestionsManager.EXTRA_BITMAP, Bitmap.class);
+                bitmapWrapHardwareBuffer = (Bitmap) bundle.getParcelable(ContentSuggestionsManager.EXTRA_BITMAP, Bitmap.class);
             } else if (taskSnapshot != null) {
                 HardwareBuffer hardwareBuffer = taskSnapshot.getHardwareBuffer();
                 ColorSpace colorSpace = taskSnapshot.getColorSpace();
@@ -47,17 +47,17 @@ public abstract class ContentSuggestionsService extends Service {
                 if (id >= 0 && id < ColorSpace.Named.values().length) {
                     colorSpace = ColorSpace.get(ColorSpace.Named.values()[id]);
                 }
-                bitmap = Bitmap.wrapHardwareBuffer(hardwareBuffer, colorSpace);
+                bitmapWrapHardwareBuffer = Bitmap.wrapHardwareBuffer(hardwareBuffer, colorSpace);
                 hardwareBuffer.close();
             } else {
-                bitmap = null;
+                bitmapWrapHardwareBuffer = null;
             }
             ContentSuggestionsService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.service.contentsuggestions.ContentSuggestionsService$1$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.function.QuadConsumer
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((ContentSuggestionsService) obj).onProcessContextImage(((Integer) obj2).intValue(), (Bitmap) obj3, (Bundle) obj4);
                 }
-            }, ContentSuggestionsService.this, Integer.valueOf(i), bitmap, bundle));
+            }, ContentSuggestionsService.this, Integer.valueOf(i), bitmapWrapHardwareBuffer, bundle));
         }
 
         @Override // android.service.contentsuggestions.IContentSuggestionsService
@@ -125,7 +125,7 @@ public abstract class ContentSuggestionsService extends Service {
         return new ContentSuggestionsManager.SelectionsCallback() { // from class: android.service.contentsuggestions.ContentSuggestionsService$$ExternalSyntheticLambda0
             @Override // android.app.contentsuggestions.ContentSuggestionsManager.SelectionsCallback
             public final void onContentSelectionsAvailable(int i, List list) {
-                ContentSuggestionsService.lambda$wrapSelectionsCallback$0(ISelectionsCallback.this, i, list);
+                ContentSuggestionsService.lambda$wrapSelectionsCallback$0(iSelectionsCallback, i, list);
             }
         };
     }
@@ -143,7 +143,7 @@ public abstract class ContentSuggestionsService extends Service {
         return new ContentSuggestionsManager.ClassificationsCallback() { // from class: android.service.contentsuggestions.ContentSuggestionsService$$ExternalSyntheticLambda1
             @Override // android.app.contentsuggestions.ContentSuggestionsManager.ClassificationsCallback
             public final void onContentClassificationsAvailable(int i, List list) {
-                ContentSuggestionsService.lambda$wrapClassificationCallback$1(IClassificationsCallback.this, i, list);
+                ContentSuggestionsService.lambda$wrapClassificationCallback$1(iClassificationsCallback, i, list);
             }
         };
     }

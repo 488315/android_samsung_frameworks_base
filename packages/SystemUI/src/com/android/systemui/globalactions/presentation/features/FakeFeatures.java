@@ -10,7 +10,6 @@ import com.samsung.android.globalactions.presentation.features.Features;
 import com.samsung.android.globalactions.util.LogWrapper;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FakeFeatures implements Features {
     public static final HashMap sConditionMap = new HashMap();
@@ -25,19 +24,19 @@ public class FakeFeatures implements Features {
         this.mDefaultFeatures = features;
         this.mLogWrapper = logWrapper;
         if (this.mReceiver == null) {
-            IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_FEATURE", "com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_FEATURE");
+            IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_FEATURE", "com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_FEATURE");
             ?? r0 = new BroadcastReceiver() { // from class: com.android.systemui.globalactions.presentation.features.FakeFeatures.1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context2, Intent intent) {
                     String action = intent.getAction();
                     String stringExtra = intent.getStringExtra("key");
-                    Boolean valueOf = Boolean.valueOf(intent.getBooleanExtra("enabled", false));
+                    Boolean boolValueOf = Boolean.valueOf(intent.getBooleanExtra("enabled", false));
                     LogWrapper logWrapper2 = FakeFeatures.this.mLogWrapper;
-                    StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onReceive: ", action, ",", stringExtra, ",");
-                    m2.append(valueOf);
-                    logWrapper2.v("FakeFeatures", m2.toString());
+                    StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onReceive: ", action, ",", stringExtra, ",");
+                    sbM.append(boolValueOf);
+                    logWrapper2.v("FakeFeatures", sbM.toString());
                     if ("com.android.systemui.globalactions.ACTION_UPDATE_SYSTEM_FEATURE".equals(action)) {
-                        FakeFeatures.this.updateFeature(stringExtra, valueOf);
+                        FakeFeatures.this.updateFeature(stringExtra, boolValueOf);
                     } else if ("com.android.systemui.globalactions.ACTION_REMOVE_SYSTEM_FEATURE".equals(action)) {
                         FakeFeatures fakeFeatures = FakeFeatures.this;
                         fakeFeatures.getClass();
@@ -47,29 +46,29 @@ public class FakeFeatures implements Features {
                 }
             };
             this.mReceiver = r0;
-            context.registerReceiver(r0, m, 2);
+            context.registerReceiver(r0, intentFilterM, 2);
             logWrapper.v("FakeFeatures", "initialized");
         }
         sInstance = this;
     }
 
     public final boolean isEnabled(String str) {
-        HashMap hashMap = sConditionMap;
-        if (!hashMap.containsKey(str)) {
+        HashMap map = sConditionMap;
+        if (!map.containsKey(str)) {
             return this.mDefaultFeatures.isEnabled(str);
         }
-        boolean booleanValue = ((Boolean) hashMap.get(str)).booleanValue();
-        this.mLogWrapper.v("FakeFeatures", FakeFeatures$$ExternalSyntheticOutline0.m("[Fake : ", str, "] ", booleanValue));
-        return booleanValue;
+        boolean zBooleanValue = ((Boolean) map.get(str)).booleanValue();
+        this.mLogWrapper.v("FakeFeatures", FakeFeatures$$ExternalSyntheticOutline0.m("[Fake : ", str, "] ", zBooleanValue));
+        return zBooleanValue;
     }
 
     public final void updateFeature(String str, Boolean bool) {
-        HashMap hashMap = sConditionMap;
-        if (hashMap.containsKey(str)) {
-            hashMap.replace(str, bool);
+        HashMap map = sConditionMap;
+        if (map.containsKey(str)) {
+            map.replace(str, bool);
             this.mLogWrapper.v("FakeFeatures", "updated");
         } else {
-            hashMap.put(str, bool);
+            map.put(str, bool);
             this.mLogWrapper.v("FakeFeatures", "added");
         }
     }

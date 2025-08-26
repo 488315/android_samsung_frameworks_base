@@ -35,7 +35,7 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
         }
     }
 
-    public void report(Map<String, String> map) {
+    public void report(Map<String, String> map) throws IOException {
         if (map.isEmpty()) {
             Slog.wtf(TAG, "Bad call to DexLoadReporter: empty classLoaderContextMap");
         } else {
@@ -45,15 +45,15 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
     }
 
     private void notifyPackageManager(Map<String, String> map) {
-        String currentPackageName = ActivityThread.currentPackageName();
+        String strCurrentPackageName = ActivityThread.currentPackageName();
         try {
-            ActivityThread.getPackageManager().notifyDexLoad(currentPackageName, map, VMRuntime.getRuntime().vmInstructionSet());
+            ActivityThread.getPackageManager().notifyDexLoad(strCurrentPackageName, map, VMRuntime.getRuntime().vmInstructionSet());
         } catch (RemoteException e) {
-            Slog.e(TAG, "Failed to notify PM about dex load for package " + currentPackageName, e);
+            Slog.e(TAG, "Failed to notify PM about dex load for package " + strCurrentPackageName, e);
         }
     }
 
-    private void registerSecondaryDexForProfiling(Set<String> set) {
+    private void registerSecondaryDexForProfiling(Set<String> set) throws IOException {
         String[] strArr;
         if (SystemProperties.getBoolean("dalvik.vm.dexopt.secondary", false)) {
             synchronized (this.mDataDirs) {
@@ -66,7 +66,7 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
         }
     }
 
-    private void registerSecondaryDexForProfiling(String str, String[] strArr) {
+    private void registerSecondaryDexForProfiling(String str, String[] strArr) throws IOException {
         if (isSecondaryDexFile(str, strArr)) {
             File file = new File(str);
             File file2 = new File(file.getParent(), "oat");

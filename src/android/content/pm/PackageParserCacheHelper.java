@@ -22,14 +22,14 @@ public class PackageParserCacheHelper {
 
         public void startAndInstall() {
             this.mStrings.clear();
-            int readInt = this.mParcel.readInt();
-            if (readInt < 0) {
-                throw new IllegalStateException("Invalid string pool position: " + readInt);
+            int i = this.mParcel.readInt();
+            if (i < 0) {
+                throw new IllegalStateException("Invalid string pool position: " + i);
             }
-            int dataPosition = this.mParcel.dataPosition();
-            this.mParcel.setDataPosition(readInt);
+            int iDataPosition = this.mParcel.dataPosition();
+            this.mParcel.setDataPosition(i);
             this.mParcel.readStringList(this.mStrings);
-            this.mParcel.setDataPosition(dataPosition);
+            this.mParcel.setDataPosition(iDataPosition);
             this.mParcel.setReadWriteHelper(this);
         }
 
@@ -85,10 +85,10 @@ public class PackageParserCacheHelper {
 
         public void finishAndUninstall() {
             this.mParcel.setReadWriteHelper(null);
-            int dataPosition = this.mParcel.dataPosition();
+            int iDataPosition = this.mParcel.dataPosition();
             this.mParcel.writeStringList(this.mStrings);
             this.mParcel.setDataPosition(this.mStartPos);
-            this.mParcel.writeInt(dataPosition);
+            this.mParcel.writeInt(iDataPosition);
             Parcel parcel = this.mParcel;
             parcel.setDataPosition(parcel.dataSize());
         }

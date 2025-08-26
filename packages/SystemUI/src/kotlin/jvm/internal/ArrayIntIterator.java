@@ -3,7 +3,6 @@ package kotlin.jvm.internal;
 import java.util.NoSuchElementException;
 import kotlin.collections.IntIterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ArrayIntIterator extends IntIterator {
     public final int[] array;

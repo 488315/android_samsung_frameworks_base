@@ -13,14 +13,12 @@ import java.util.Collection;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationIconStyleProviderImpl implements NotificationIconStyleProvider, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final NotifCollectionCache cache;
     public final UserManager userManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,13 +40,13 @@ public final class NotificationIconStyleProviderImpl implements NotificationIcon
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("cache information:");
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        printWriterAsIndenting.println("cache information:");
+        printWriterAsIndenting.increaseIndent();
         try {
-            this.cache.dump(asIndenting, strArr);
+            this.cache.dump(printWriterAsIndenting, strArr);
         } finally {
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
         }
     }
 
@@ -62,7 +60,7 @@ public final class NotificationIconStyleProviderImpl implements NotificationIcon
         return ((Boolean) this.cache.getOrFetch(statusBarNotification.getPackageName(), new Function1() { // from class: com.android.systemui.statusbar.notification.row.icon.NotificationIconStyleProviderImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 StatusBarNotification statusBarNotification2 = statusBarNotification;
                 Context context2 = context;
                 int i = NotificationIconStyleProviderImpl.$r8$clinit;

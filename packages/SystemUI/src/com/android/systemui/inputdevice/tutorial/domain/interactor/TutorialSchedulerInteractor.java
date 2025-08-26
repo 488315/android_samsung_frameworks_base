@@ -1,35 +1,49 @@
 package com.android.systemui.inputdevice.tutorial.domain.interactor;
 
+import android.os.SystemProperties;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.datastore.preferences.core.Preferences;
 import com.android.systemui.biometrics.AuthRippleController$AuthRippleCommand$$ExternalSyntheticOutline0;
 import com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger;
+import com.android.systemui.inputdevice.tutorial.InputDeviceTutorialLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.inputdevice.tutorial.data.repository.DeviceType;
 import com.android.systemui.inputdevice.tutorial.data.repository.TutorialSchedulerRepository;
 import com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor;
 import com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.TutorialCommand;
 import com.android.systemui.keyboard.data.repository.KeyboardRepository;
 import com.android.systemui.keyboard.data.repository.KeyboardRepositoryImpl;
+import com.android.systemui.log.ConstantStringsLoggerImpl;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.commandline.Command;
 import com.android.systemui.statusbar.commandline.CommandRegistry;
 import com.android.systemui.touchpad.data.repository.TouchpadRepository;
 import com.android.systemui.touchpad.data.repository.TouchpadRepositoryImpl;
 import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.io.PrintWriter;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.time.Duration;
 import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
@@ -40,7 +54,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TutorialSchedulerInteractor {
     public static final Companion Companion = new Companion(null);
@@ -55,7 +68,6 @@ public final class TutorialSchedulerInteractor {
     public final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 tutorialTypeUpdates;
     public final TutorialSchedulerInteractor$special$$inlined$map$2 tutorials;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,7 +77,6 @@ public final class TutorialSchedulerInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TutorialCommand implements Command {
         public TutorialCommand() {
         }
@@ -77,11 +88,11 @@ public final class TutorialSchedulerInteractor {
                 return;
             }
             String str = (String) list.get(0);
-            int hashCode = str.hashCode();
+            int iHashCode = str.hashCode();
             TutorialSchedulerInteractor tutorialSchedulerInteractor = TutorialSchedulerInteractor.this;
-            if (hashCode != -1039689911) {
-                if (hashCode != 3237038) {
-                    if (hashCode == 94746189 && str.equals("clear")) {
+            if (iHashCode != -1039689911) {
+                if (iHashCode != 3237038) {
+                    if (iHashCode == 94746189 && str.equals("clear")) {
                         return;
                     }
                 } else if (str.equals("info")) {
@@ -92,10 +103,10 @@ public final class TutorialSchedulerInteractor {
                     help(printWriter);
                 }
                 String str2 = (String) list.get(1);
-                int hashCode2 = str2.hashCode();
-                if (hashCode2 != -819522316) {
-                    if (hashCode2 != 3029889) {
-                        if (hashCode2 == 503739367 && str2.equals("keyboard")) {
+                int iHashCode2 = str2.hashCode();
+                if (iHashCode2 != -819522316) {
+                    if (iHashCode2 != 3029889) {
+                        if (iHashCode2 == 503739367 && str2.equals("keyboard")) {
                             tutorialSchedulerInteractor.commandTutorials.setValue(TutorialType.KEYBOARD);
                             return;
                         }
@@ -121,7 +132,6 @@ public final class TutorialSchedulerInteractor {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TutorialType {
         public static final /* synthetic */ TutorialType[] $VALUES;
         public static final TutorialType BOTH;
@@ -155,9 +165,86 @@ public final class TutorialSchedulerInteractor {
         }
     }
 
+    /* renamed from: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$updateLaunchInfo$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ TutorialType $tutorialType;
+        int label;
+        final /* synthetic */ TutorialSchedulerInteractor this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(TutorialType tutorialType, TutorialSchedulerInteractor tutorialSchedulerInteractor, Continuation continuation) {
+            super(2, continuation);
+            this.$tutorialType = tutorialType;
+            this.this$0 = tutorialSchedulerInteractor;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass1(this.$tutorialType, this.this$0, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:28:0x0095, code lost:
+        
+            if (r7 == r0) goto L29;
+         */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                TutorialType tutorialType = this.$tutorialType;
+                if (tutorialType == TutorialType.KEYBOARD || tutorialType == TutorialType.BOTH) {
+                    TutorialSchedulerRepository tutorialSchedulerRepository = this.this$0.repo;
+                    DeviceType deviceType = DeviceType.KEYBOARD;
+                    Instant instantNow = Instant.now();
+                    this.label = 1;
+                    tutorialSchedulerRepository.getClass();
+                    Object objUpdateData = tutorialSchedulerRepository.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType.name(), "_LAUNCHED_TIME")), new Long(instantNow.getEpochSecond()), this);
+                    if (objUpdateData != coroutineSingletons) {
+                        objUpdateData = Unit.INSTANCE;
+                    }
+                    if (objUpdateData != coroutineSingletons) {
+                    }
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    if (i != 2) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    return Unit.INSTANCE;
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            TutorialType tutorialType2 = this.$tutorialType;
+            if (tutorialType2 == TutorialType.TOUCHPAD || tutorialType2 == TutorialType.BOTH) {
+                TutorialSchedulerRepository tutorialSchedulerRepository2 = this.this$0.repo;
+                DeviceType deviceType2 = DeviceType.TOUCHPAD;
+                Instant instantNow2 = Instant.now();
+                this.label = 2;
+                tutorialSchedulerRepository2.getClass();
+                Object objUpdateData2 = tutorialSchedulerRepository2.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType2.name(), "_LAUNCHED_TIME")), new Long(instantNow2.getEpochSecond()), this);
+                if (objUpdateData2 != coroutineSingletons) {
+                    objUpdateData2 = Unit.INSTANCE;
+                }
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         Duration.Companion companion = Duration.Companion;
-        DEFAULT_LAUNCH_DELAY_SEC = Duration.m3445toLongimpl(DurationKt.toDuration(72, DurationUnit.HOURS), DurationUnit.SECONDS);
+        DEFAULT_LAUNCH_DELAY_SEC = Duration.m3465toLongimpl(DurationKt.toDuration(72, DurationUnit.HOURS), DurationUnit.SECONDS);
     }
 
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$2] */
@@ -169,7 +256,7 @@ public final class TutorialSchedulerInteractor {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 TutorialSchedulerInteractor.Companion companion = TutorialSchedulerInteractor.Companion;
-                return TutorialSchedulerInteractor.this.new TutorialCommand();
+                return this.f$0.new TutorialCommand();
             }
         });
         KeyboardRepositoryImpl keyboardRepositoryImpl = (KeyboardRepositoryImpl) keyboardRepository;
@@ -182,7 +269,6 @@ public final class TutorialSchedulerInteractor {
         final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyboardRepositoryImpl.isAnyKeyboardConnected, touchpadRepositoryImpl.isAnyTouchpadConnected, TutorialSchedulerInteractor$tutorialTypeUpdates$3.INSTANCE);
         this.tutorialTypeUpdates = FlowKt.drop(new Flow() { // from class: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -209,92 +295,55 @@ public final class TutorialSchedulerInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L66
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r6 = r5.component1()
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        java.lang.Object r5 = r5.component2()
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        if (r6 == 0) goto L4f
-                        if (r5 == 0) goto L4f
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$TutorialType r5 = com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.TutorialType.BOTH
-                        goto L5b
-                    L4f:
-                        if (r6 == 0) goto L54
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$TutorialType r5 = com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.TutorialType.KEYBOARD
-                        goto L5b
-                    L54:
-                        if (r5 == 0) goto L59
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$TutorialType r5 = com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.TutorialType.TOUCHPAD
-                        goto L5b
-                    L59:
-                        com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$TutorialType r5 = com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.TutorialType.NONE
-                    L5b:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L66
-                        return r1
-                    L66:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Pair pair = (Pair) obj;
+                        boolean zBooleanValue = ((Boolean) pair.component1()).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) pair.component2()).booleanValue();
+                        TutorialSchedulerInteractor.TutorialType tutorialType = (zBooleanValue && zBooleanValue2) ? TutorialSchedulerInteractor.TutorialType.BOTH : zBooleanValue ? TutorialSchedulerInteractor.TutorialType.KEYBOARD : zBooleanValue2 ? TutorialSchedulerInteractor.TutorialType.TOUCHPAD : TutorialSchedulerInteractor.TutorialType.NONE;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(tutorialType, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.commandTutorials = StateFlowKt.MutableStateFlow(TutorialType.NONE);
-        final ChannelLimitedFlowMerge merge = FlowKt.merge(safeFlow, safeFlow2);
+        final ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(safeFlow, safeFlow2);
         this.tutorials = new Flow() { // from class: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -325,103 +374,563 @@ public final class TutorialSchedulerInteractor {
                     this.this$0 = tutorialSchedulerInteractor;
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:20:0x013a, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:34:0x00c8, code lost:
                 
-                    if (r12.emit(r11, r0) != r1) goto L49;
+                    if (r2 == r1) goto L48;
                  */
-                /* JADX WARN: Code restructure failed: missing block: B:30:0x0107, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:47:0x013a, code lost:
                 
-                    if (r13 != r1) goto L46;
+                    if (r12.emit(r11, r0) == r1) goto L48;
                  */
-                /* JADX WARN: Code restructure failed: missing block: B:40:0x00c8, code lost:
-                
-                    if (r2 != r1) goto L29;
-                 */
-                /* JADX WARN: Removed duplicated region for block: B:29:0x0105  */
-                /* JADX WARN: Removed duplicated region for block: B:39:0x00c6  */
-                /* JADX WARN: Removed duplicated region for block: B:41:0x006c  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
+                /* JADX WARN: Removed duplicated region for block: B:43:0x0105  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r12, kotlin.coroutines.Continuation r13) {
-                    /*
-                        Method dump skipped, instructions count: 320
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    FlowCollector flowCollector;
+                    AnonymousClass2 anonymousClass2;
+                    TutorialSchedulerInteractor.TutorialType tutorialType;
+                    Object objUpdateData;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        anonymousClass1.L$0 = this;
+                        FlowCollector flowCollector2 = this.$this_unsafeFlow;
+                        anonymousClass1.L$1 = flowCollector2;
+                        anonymousClass1.label = 1;
+                        Object objAccess$resolveTutorialType = TutorialSchedulerInteractor.access$resolveTutorialType(this.this$0, (DeviceType) obj, anonymousClass1);
+                        if (objAccess$resolveTutorialType != coroutineSingletons) {
+                            obj2 = objAccess$resolveTutorialType;
+                            flowCollector = flowCollector2;
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 == 1) {
+                        FlowCollector flowCollector3 = (FlowCollector) anonymousClass1.L$1;
+                        AnonymousClass2 anonymousClass22 = (AnonymousClass2) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj2);
+                        flowCollector = flowCollector3;
+                        this = anonymousClass22;
+                    } else if (i2 == 2) {
+                        tutorialType = (TutorialSchedulerInteractor.TutorialType) anonymousClass1.L$2;
+                        flowCollector = (FlowCollector) anonymousClass1.L$1;
+                        anonymousClass2 = (AnonymousClass2) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj2);
+                        if (tutorialType != TutorialSchedulerInteractor.TutorialType.TOUCHPAD || tutorialType == TutorialSchedulerInteractor.TutorialType.BOTH) {
+                            TutorialSchedulerRepository tutorialSchedulerRepository = anonymousClass2.this$0.repo;
+                            DeviceType deviceType = DeviceType.TOUCHPAD;
+                            Instant instantNow = Instant.now();
+                            anonymousClass1.L$0 = anonymousClass2;
+                            anonymousClass1.L$1 = flowCollector;
+                            anonymousClass1.L$2 = tutorialType;
+                            anonymousClass1.label = 3;
+                            tutorialSchedulerRepository.getClass();
+                            objUpdateData = tutorialSchedulerRepository.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType.name(), "_NOTIFIED_TIME")), new Long(instantNow.getEpochSecond()), anonymousClass1);
+                            if (objUpdateData != coroutineSingletons) {
+                                objUpdateData = Unit.INSTANCE;
+                            }
+                            if (objUpdateData != coroutineSingletons) {
+                            }
+                            return coroutineSingletons;
+                        }
+                        InputDeviceTutorialLogger inputDeviceTutorialLogger = anonymousClass2.this$0.logger;
+                        inputDeviceTutorialLogger.getClass();
+                        InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(5);
+                        LogLevel logLevel = LogLevel.INFO;
+                        LogBuffer logBuffer = inputDeviceTutorialLogger.buffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = tutorialType.toString();
+                        logBuffer.commit(logMessageObtain);
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.L$1 = null;
+                        anonymousClass1.L$2 = null;
+                        anonymousClass1.label = 4;
+                    } else {
+                        if (i2 != 3) {
+                            if (i2 != 4) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                            return Unit.INSTANCE;
+                        }
+                        tutorialType = (TutorialSchedulerInteractor.TutorialType) anonymousClass1.L$2;
+                        flowCollector = (FlowCollector) anonymousClass1.L$1;
+                        anonymousClass2 = (AnonymousClass2) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj2);
+                        InputDeviceTutorialLogger inputDeviceTutorialLogger2 = anonymousClass2.this$0.logger;
+                        inputDeviceTutorialLogger2.getClass();
+                        InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda02 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(5);
+                        LogLevel logLevel2 = LogLevel.INFO;
+                        LogBuffer logBuffer2 = inputDeviceTutorialLogger2.buffer;
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("InputDeviceTutorial", logLevel2, inputDeviceTutorialLogger$$ExternalSyntheticLambda02, null);
+                        ((LogMessageImpl) logMessageObtain2).str1 = tutorialType.toString();
+                        logBuffer2.commit(logMessageObtain2);
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.L$1 = null;
+                        anonymousClass1.L$2 = null;
+                        anonymousClass1.label = 4;
+                    }
+                    TutorialSchedulerInteractor.TutorialType tutorialType2 = (TutorialSchedulerInteractor.TutorialType) obj2;
+                    if (tutorialType2 == TutorialSchedulerInteractor.TutorialType.KEYBOARD || tutorialType2 == TutorialSchedulerInteractor.TutorialType.BOTH) {
+                        TutorialSchedulerRepository tutorialSchedulerRepository2 = this.this$0.repo;
+                        DeviceType deviceType2 = DeviceType.KEYBOARD;
+                        Instant instantNow2 = Instant.now();
+                        anonymousClass1.L$0 = this;
+                        anonymousClass1.L$1 = flowCollector;
+                        anonymousClass1.L$2 = tutorialType2;
+                        anonymousClass1.label = 2;
+                        tutorialSchedulerRepository2.getClass();
+                        Object objUpdateData2 = tutorialSchedulerRepository2.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType2.name(), "_NOTIFIED_TIME")), new Long(instantNow2.getEpochSecond()), anonymousClass1);
+                        if (objUpdateData2 != coroutineSingletons) {
+                            objUpdateData2 = Unit.INSTANCE;
+                        }
+                    }
+                    anonymousClass2 = this;
+                    tutorialType = tutorialType2;
+                    if (tutorialType != TutorialSchedulerInteractor.TutorialType.TOUCHPAD) {
+                    }
+                    TutorialSchedulerRepository tutorialSchedulerRepository3 = anonymousClass2.this$0.repo;
+                    DeviceType deviceType3 = DeviceType.TOUCHPAD;
+                    Instant instantNow3 = Instant.now();
+                    anonymousClass1.L$0 = anonymousClass2;
+                    anonymousClass1.L$1 = flowCollector;
+                    anonymousClass1.L$2 = tutorialType;
+                    anonymousClass1.label = 3;
+                    tutorialSchedulerRepository3.getClass();
+                    objUpdateData = tutorialSchedulerRepository3.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType3.name(), "_NOTIFIED_TIME")), new Long(instantNow3.getEpochSecond()), anonymousClass1);
+                    if (objUpdateData != coroutineSingletons) {
+                    }
+                    if (objUpdateData != coroutineSingletons) {
+                        InputDeviceTutorialLogger inputDeviceTutorialLogger22 = anonymousClass2.this$0.logger;
+                        inputDeviceTutorialLogger22.getClass();
+                        InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda022 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(5);
+                        LogLevel logLevel22 = LogLevel.INFO;
+                        LogBuffer logBuffer22 = inputDeviceTutorialLogger22.buffer;
+                        LogMessage logMessageObtain22 = logBuffer22.obtain("InputDeviceTutorial", logLevel22, inputDeviceTutorialLogger$$ExternalSyntheticLambda022, null);
+                        ((LogMessageImpl) logMessageObtain22).str1 = tutorialType.toString();
+                        logBuffer22.commit(logMessageObtain22);
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.L$1 = null;
+                        anonymousClass1.L$2 = null;
+                        anonymousClass1.label = 4;
+                    }
+                    return coroutineSingletons;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelLimitedFlowMergeMerge.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x006b, code lost:
-    
-        if (r9 == r1) goto L34;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00ce  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00b7  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00cb  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00ce  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$resolveTutorialType(com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor r7, com.android.systemui.inputdevice.tutorial.data.repository.DeviceType r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            Method dump skipped, instructions count: 209
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.access$resolveTutorialType(com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor, com.android.systemui.inputdevice.tutorial.data.repository.DeviceType, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$resolveTutorialType(TutorialSchedulerInteractor tutorialSchedulerInteractor, DeviceType deviceType, ContinuationImpl continuationImpl) {
+        TutorialSchedulerInteractor$resolveTutorialType$1 tutorialSchedulerInteractor$resolveTutorialType$1;
+        TutorialSchedulerInteractor tutorialSchedulerInteractor2;
+        DeviceType deviceType2;
+        Object objIsNotified;
+        boolean z;
+        tutorialSchedulerInteractor.getClass();
+        if (continuationImpl instanceof TutorialSchedulerInteractor$resolveTutorialType$1) {
+            tutorialSchedulerInteractor$resolveTutorialType$1 = (TutorialSchedulerInteractor$resolveTutorialType$1) continuationImpl;
+            int i = tutorialSchedulerInteractor$resolveTutorialType$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                tutorialSchedulerInteractor$resolveTutorialType$1.label = i - Integer.MIN_VALUE;
+            } else {
+                tutorialSchedulerInteractor$resolveTutorialType$1 = new TutorialSchedulerInteractor$resolveTutorialType$1(tutorialSchedulerInteractor, continuationImpl);
+            }
+        }
+        Object objIsNotified2 = tutorialSchedulerInteractor$resolveTutorialType$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = tutorialSchedulerInteractor$resolveTutorialType$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objIsNotified2);
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$0 = tutorialSchedulerInteractor;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$1 = deviceType;
+            tutorialSchedulerInteractor$resolveTutorialType$1.label = 1;
+            objIsNotified2 = tutorialSchedulerInteractor.repo.isNotified(deviceType, tutorialSchedulerInteractor$resolveTutorialType$1);
+            if (objIsNotified2 != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                if (i2 != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                z = tutorialSchedulerInteractor$resolveTutorialType$1.Z$0;
+                deviceType = (DeviceType) tutorialSchedulerInteractor$resolveTutorialType$1.L$0;
+                ResultKt.throwOnFailure(objIsNotified2);
+                return (((Boolean) objIsNotified2).booleanValue() && z) ? TutorialType.BOTH : deviceType != DeviceType.KEYBOARD ? TutorialType.KEYBOARD : TutorialType.TOUCHPAD;
+            }
+            deviceType2 = (DeviceType) tutorialSchedulerInteractor$resolveTutorialType$1.L$2;
+            deviceType = (DeviceType) tutorialSchedulerInteractor$resolveTutorialType$1.L$1;
+            tutorialSchedulerInteractor2 = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$resolveTutorialType$1.L$0;
+            ResultKt.throwOnFailure(objIsNotified2);
+            boolean zBooleanValue = ((Boolean) objIsNotified2).booleanValue();
+            TutorialSchedulerRepository tutorialSchedulerRepository = tutorialSchedulerInteractor2.repo;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$0 = deviceType;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$1 = null;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$2 = null;
+            tutorialSchedulerInteractor$resolveTutorialType$1.Z$0 = zBooleanValue;
+            tutorialSchedulerInteractor$resolveTutorialType$1.label = 3;
+            objIsNotified = tutorialSchedulerRepository.isNotified(deviceType2, tutorialSchedulerInteractor$resolveTutorialType$1);
+            if (objIsNotified != coroutineSingletons) {
+                objIsNotified2 = objIsNotified;
+                z = zBooleanValue;
+                if (((Boolean) objIsNotified2).booleanValue()) {
+                }
+            }
+            return coroutineSingletons;
+        }
+        deviceType = (DeviceType) tutorialSchedulerInteractor$resolveTutorialType$1.L$1;
+        tutorialSchedulerInteractor = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$resolveTutorialType$1.L$0;
+        ResultKt.throwOnFailure(objIsNotified2);
+        if (((Boolean) objIsNotified2).booleanValue()) {
+            return TutorialType.NONE;
+        }
+        DeviceType deviceType3 = DeviceType.KEYBOARD;
+        if (deviceType == deviceType3) {
+            deviceType3 = DeviceType.TOUCHPAD;
+        }
+        Object obj = tutorialSchedulerInteractor.isAnyDeviceConnected.get(deviceType3);
+        obj.getClass();
+        tutorialSchedulerInteractor$resolveTutorialType$1.L$0 = tutorialSchedulerInteractor;
+        tutorialSchedulerInteractor$resolveTutorialType$1.L$1 = deviceType;
+        tutorialSchedulerInteractor$resolveTutorialType$1.L$2 = deviceType3;
+        tutorialSchedulerInteractor$resolveTutorialType$1.label = 2;
+        Object objFirst = FlowKt.first((Flow) obj, tutorialSchedulerInteractor$resolveTutorialType$1);
+        if (objFirst != coroutineSingletons) {
+            tutorialSchedulerInteractor2 = tutorialSchedulerInteractor;
+            deviceType2 = deviceType3;
+            objIsNotified2 = objFirst;
+            boolean zBooleanValue2 = ((Boolean) objIsNotified2).booleanValue();
+            TutorialSchedulerRepository tutorialSchedulerRepository2 = tutorialSchedulerInteractor2.repo;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$0 = deviceType;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$1 = null;
+            tutorialSchedulerInteractor$resolveTutorialType$1.L$2 = null;
+            tutorialSchedulerInteractor$resolveTutorialType$1.Z$0 = zBooleanValue2;
+            tutorialSchedulerInteractor$resolveTutorialType$1.label = 3;
+            objIsNotified = tutorialSchedulerRepository2.isNotified(deviceType2, tutorialSchedulerInteractor$resolveTutorialType$1);
+            if (objIsNotified != coroutineSingletons) {
+            }
+        }
+        return coroutineSingletons;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x01d6, code lost:
-    
-        if (kotlinx.coroutines.flow.FlowKt.first(new com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$waitForDeviceConnection$$inlined$filter$1(r10), r0) != r1) goto L45;
-     */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x012a, code lost:
     
         if (r12 != r1) goto L33;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x0086, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:43:0x01d6, code lost:
     
-        if (r12 == r1) goto L44;
+        if (kotlinx.coroutines.flow.FlowKt.first(new com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$waitForDeviceConnection$$inlined$filter$1(r10), r0) != r1) goto L45;
      */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x002d  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x01b9  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0144  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0092  */
     /* JADX WARN: Removed duplicated region for block: B:30:0x0128  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0076  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0131 A[PHI: r10 r11
+      0x0131: PHI (r10v9 com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor) = 
+      (r10v1 com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor)
+      (r10v11 com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor)
+     binds: [B:22:0x0090, B:33:0x012e] A[DONT_GENERATE, DONT_INLINE]
+      0x0131: PHI (r11v8 com.android.systemui.inputdevice.tutorial.data.repository.DeviceType) = 
+      (r11v1 com.android.systemui.inputdevice.tutorial.data.repository.DeviceType)
+      (r11v10 com.android.systemui.inputdevice.tutorial.data.repository.DeviceType)
+     binds: [B:22:0x0090, B:33:0x012e] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0144  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x01b9  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$schedule(com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor r10, com.android.systemui.inputdevice.tutorial.data.repository.DeviceType r11, kotlin.coroutines.jvm.internal.ContinuationImpl r12) {
-        /*
-            Method dump skipped, instructions count: 494
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.access$schedule(com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor, com.android.systemui.inputdevice.tutorial.data.repository.DeviceType, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$schedule(TutorialSchedulerInteractor tutorialSchedulerInteractor, DeviceType deviceType, ContinuationImpl continuationImpl) {
+        TutorialSchedulerInteractor$schedule$1 tutorialSchedulerInteractor$schedule$1;
+        TutorialSchedulerInteractor tutorialSchedulerInteractor2;
+        DeviceType deviceType2;
+        Object objUpdateData;
+        TutorialSchedulerInteractor tutorialSchedulerInteractor3;
+        long jM3461plusLRDsOJo;
+        DeviceType deviceType3;
+        TutorialSchedulerInteractor tutorialSchedulerInteractor4;
+        tutorialSchedulerInteractor.getClass();
+        if (continuationImpl instanceof TutorialSchedulerInteractor$schedule$1) {
+            tutorialSchedulerInteractor$schedule$1 = (TutorialSchedulerInteractor$schedule$1) continuationImpl;
+            int i = tutorialSchedulerInteractor$schedule$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                tutorialSchedulerInteractor$schedule$1.label = i - Integer.MIN_VALUE;
+            } else {
+                tutorialSchedulerInteractor$schedule$1 = new TutorialSchedulerInteractor$schedule$1(tutorialSchedulerInteractor, continuationImpl);
+            }
+        }
+        Object objWasEverConnected = tutorialSchedulerInteractor$schedule$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        switch (tutorialSchedulerInteractor$schedule$1.label) {
+            case 0:
+                ResultKt.throwOnFailure(objWasEverConnected);
+                tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor;
+                tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                tutorialSchedulerInteractor$schedule$1.label = 1;
+                objWasEverConnected = tutorialSchedulerInteractor.repo.wasEverConnected(deviceType, tutorialSchedulerInteractor$schedule$1);
+                if (objWasEverConnected != coroutineSingletons) {
+                    if (!((Boolean) objWasEverConnected).booleanValue()) {
+                        TutorialSchedulerRepository tutorialSchedulerRepository = tutorialSchedulerInteractor.repo;
+                        tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor;
+                        tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                        tutorialSchedulerInteractor$schedule$1.L$2 = tutorialSchedulerInteractor;
+                        tutorialSchedulerInteractor$schedule$1.label = 4;
+                        objWasEverConnected = tutorialSchedulerRepository.getFirstConnectionTime(deviceType, tutorialSchedulerInteractor$schedule$1);
+                        if (objWasEverConnected != coroutineSingletons) {
+                            tutorialSchedulerInteractor3 = tutorialSchedulerInteractor;
+                            objWasEverConnected.getClass();
+                            tutorialSchedulerInteractor.getClass();
+                            java.time.Duration durationBetween = java.time.Duration.between((Instant) objWasEverConnected, Instant.now());
+                            Companion.getClass();
+                            java.time.Duration durationMinus = java.time.Duration.ofSeconds(SystemProperties.getLong("persist.peripheral_tutorial_delay_sec", DEFAULT_LAUNCH_DELAY_SEC)).minus(durationBetween);
+                            long seconds = durationMinus.getSeconds();
+                            DurationUnit durationUnit = DurationUnit.SECONDS;
+                            jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(DurationKt.toDuration(seconds, durationUnit), DurationKt.toDuration(durationMinus.getNano(), DurationUnit.NANOSECONDS));
+                            InputDeviceTutorialLogger inputDeviceTutorialLogger = tutorialSchedulerInteractor3.logger;
+                            String str = "Tutorial is scheduled in " + Duration.m3465toLongimpl(jM3461plusLRDsOJo, durationUnit) + " seconds";
+                            ConstantStringsLoggerImpl constantStringsLoggerImpl = inputDeviceTutorialLogger.$$delegate_0;
+                            constantStringsLoggerImpl.getClass();
+                            LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, str);
+                            tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor3;
+                            tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                            tutorialSchedulerInteractor$schedule$1.L$2 = null;
+                            tutorialSchedulerInteractor$schedule$1.label = 5;
+                            if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
+                                deviceType3 = deviceType;
+                                tutorialSchedulerInteractor4 = tutorialSchedulerInteractor3;
+                                tutorialSchedulerInteractor$schedule$1.L$0 = null;
+                                tutorialSchedulerInteractor$schedule$1.L$1 = null;
+                                tutorialSchedulerInteractor$schedule$1.label = 6;
+                                Object obj = tutorialSchedulerInteractor4.isAnyDeviceConnected.get(deviceType3);
+                                obj.getClass();
+                                final Flow flow = (Flow) obj;
+                                break;
+                            }
+                        }
+                    } else {
+                        ConstantStringsLoggerImpl constantStringsLoggerImpl2 = tutorialSchedulerInteractor.logger.$$delegate_0;
+                        constantStringsLoggerImpl2.getClass();
+                        LogBuffer.log$default(constantStringsLoggerImpl2.buffer, constantStringsLoggerImpl2.tag, LogLevel.DEBUG, "Waiting for " + deviceType + " to connect");
+                        tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor;
+                        tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                        tutorialSchedulerInteractor$schedule$1.label = 2;
+                        Object obj2 = tutorialSchedulerInteractor.isAnyDeviceConnected.get(deviceType);
+                        obj2.getClass();
+                        final Flow flow2 = (Flow) obj2;
+                        if (FlowKt.first(new Flow() { // from class: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$waitForDeviceConnection$$inlined$filter$1
+
+                            /* renamed from: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$waitForDeviceConnection$$inlined$filter$1$2, reason: invalid class name */
+                            public final class AnonymousClass2 implements FlowCollector {
+                                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                                /* renamed from: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$waitForDeviceConnection$$inlined$filter$1$2$1, reason: invalid class name */
+                                public final class AnonymousClass1 extends ContinuationImpl {
+                                    Object L$0;
+                                    Object L$1;
+                                    int label;
+                                    /* synthetic */ Object result;
+
+                                    public AnonymousClass1(Continuation continuation) {
+                                        super(continuation);
+                                    }
+
+                                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                    public final Object invokeSuspend(Object obj) {
+                                        this.result = obj;
+                                        this.label |= Integer.MIN_VALUE;
+                                        return AnonymousClass2.this.emit(null, this);
+                                    }
+                                }
+
+                                public AnonymousClass2(FlowCollector flowCollector) {
+                                    this.$this_unsafeFlow = flowCollector;
+                                }
+
+                                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                                @Override // kotlinx.coroutines.flow.FlowCollector
+                                /*
+                                    Code decompiled incorrectly, please refer to instructions dump.
+                                */
+                                public final Object emit(Object obj, Continuation continuation) {
+                                    AnonymousClass1 anonymousClass1;
+                                    if (continuation instanceof AnonymousClass1) {
+                                        anonymousClass1 = (AnonymousClass1) continuation;
+                                        int i = anonymousClass1.label;
+                                        if ((i & Integer.MIN_VALUE) != 0) {
+                                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                                        } else {
+                                            anonymousClass1 = new AnonymousClass1(continuation);
+                                        }
+                                    }
+                                    Object obj2 = anonymousClass1.result;
+                                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                    int i2 = anonymousClass1.label;
+                                    if (i2 == 0) {
+                                        ResultKt.throwOnFailure(obj2);
+                                        if (((Boolean) obj).booleanValue()) {
+                                            anonymousClass1.label = 1;
+                                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                                return coroutineSingletons;
+                                            }
+                                        }
+                                    } else {
+                                        if (i2 != 1) {
+                                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                        }
+                                        ResultKt.throwOnFailure(obj2);
+                                    }
+                                    return Unit.INSTANCE;
+                                }
+                            }
+
+                            @Override // kotlinx.coroutines.flow.Flow
+                            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                                Object objCollect = flow2.collect(new AnonymousClass2(flowCollector), continuation);
+                                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                            }
+                        }, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
+                            DeviceType deviceType4 = deviceType;
+                            tutorialSchedulerInteractor2 = tutorialSchedulerInteractor;
+                            deviceType2 = deviceType4;
+                            InputDeviceTutorialLogger inputDeviceTutorialLogger2 = tutorialSchedulerInteractor2.logger;
+                            inputDeviceTutorialLogger2.getClass();
+                            InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda0 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(9);
+                            LogLevel logLevel = LogLevel.INFO;
+                            LogBuffer logBuffer = inputDeviceTutorialLogger2.buffer;
+                            LogMessage logMessageObtain = logBuffer.obtain("InputDeviceTutorial", logLevel, inputDeviceTutorialLogger$$ExternalSyntheticLambda0, null);
+                            ((LogMessageImpl) logMessageObtain).str1 = deviceType2.toString();
+                            logBuffer.commit(logMessageObtain);
+                            Instant instantNow = Instant.now();
+                            tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor2;
+                            tutorialSchedulerInteractor$schedule$1.L$1 = deviceType2;
+                            tutorialSchedulerInteractor$schedule$1.label = 3;
+                            TutorialSchedulerRepository tutorialSchedulerRepository2 = tutorialSchedulerInteractor2.repo;
+                            tutorialSchedulerRepository2.getClass();
+                            objUpdateData = tutorialSchedulerRepository2.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType2.name(), "_CONNECTED_TIME")), new Long(instantNow.getEpochSecond()), tutorialSchedulerInteractor$schedule$1);
+                            if (objUpdateData != coroutineSingletons) {
+                                objUpdateData = Unit.INSTANCE;
+                                break;
+                            }
+                        }
+                    }
+                }
+                return coroutineSingletons;
+            case 1:
+                deviceType = (DeviceType) tutorialSchedulerInteractor$schedule$1.L$1;
+                tutorialSchedulerInteractor = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$0;
+                ResultKt.throwOnFailure(objWasEverConnected);
+                if (!((Boolean) objWasEverConnected).booleanValue()) {
+                }
+                return coroutineSingletons;
+            case 2:
+                deviceType2 = (DeviceType) tutorialSchedulerInteractor$schedule$1.L$1;
+                tutorialSchedulerInteractor2 = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$0;
+                ResultKt.throwOnFailure(objWasEverConnected);
+                InputDeviceTutorialLogger inputDeviceTutorialLogger22 = tutorialSchedulerInteractor2.logger;
+                inputDeviceTutorialLogger22.getClass();
+                InputDeviceTutorialLogger$$ExternalSyntheticLambda0 inputDeviceTutorialLogger$$ExternalSyntheticLambda02 = new InputDeviceTutorialLogger$$ExternalSyntheticLambda0(9);
+                LogLevel logLevel2 = LogLevel.INFO;
+                LogBuffer logBuffer2 = inputDeviceTutorialLogger22.buffer;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("InputDeviceTutorial", logLevel2, inputDeviceTutorialLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain2).str1 = deviceType2.toString();
+                logBuffer2.commit(logMessageObtain2);
+                Instant instantNow2 = Instant.now();
+                tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor2;
+                tutorialSchedulerInteractor$schedule$1.L$1 = deviceType2;
+                tutorialSchedulerInteractor$schedule$1.label = 3;
+                TutorialSchedulerRepository tutorialSchedulerRepository22 = tutorialSchedulerInteractor2.repo;
+                tutorialSchedulerRepository22.getClass();
+                objUpdateData = tutorialSchedulerRepository22.updateData(new Preferences.Key(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(deviceType2.name(), "_CONNECTED_TIME")), new Long(instantNow2.getEpochSecond()), tutorialSchedulerInteractor$schedule$1);
+                if (objUpdateData != coroutineSingletons) {
+                }
+                break;
+            case 3:
+                deviceType2 = (DeviceType) tutorialSchedulerInteractor$schedule$1.L$1;
+                tutorialSchedulerInteractor2 = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$0;
+                ResultKt.throwOnFailure(objWasEverConnected);
+                TutorialSchedulerInteractor tutorialSchedulerInteractor5 = tutorialSchedulerInteractor2;
+                deviceType = deviceType2;
+                tutorialSchedulerInteractor = tutorialSchedulerInteractor5;
+                TutorialSchedulerRepository tutorialSchedulerRepository3 = tutorialSchedulerInteractor.repo;
+                tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor;
+                tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                tutorialSchedulerInteractor$schedule$1.L$2 = tutorialSchedulerInteractor;
+                tutorialSchedulerInteractor$schedule$1.label = 4;
+                objWasEverConnected = tutorialSchedulerRepository3.getFirstConnectionTime(deviceType, tutorialSchedulerInteractor$schedule$1);
+                if (objWasEverConnected != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 4:
+                tutorialSchedulerInteractor = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$2;
+                deviceType = (DeviceType) tutorialSchedulerInteractor$schedule$1.L$1;
+                tutorialSchedulerInteractor3 = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$0;
+                ResultKt.throwOnFailure(objWasEverConnected);
+                objWasEverConnected.getClass();
+                tutorialSchedulerInteractor.getClass();
+                java.time.Duration durationBetween2 = java.time.Duration.between((Instant) objWasEverConnected, Instant.now());
+                Companion.getClass();
+                java.time.Duration durationMinus2 = java.time.Duration.ofSeconds(SystemProperties.getLong("persist.peripheral_tutorial_delay_sec", DEFAULT_LAUNCH_DELAY_SEC)).minus(durationBetween2);
+                long seconds2 = durationMinus2.getSeconds();
+                DurationUnit durationUnit2 = DurationUnit.SECONDS;
+                jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(DurationKt.toDuration(seconds2, durationUnit2), DurationKt.toDuration(durationMinus2.getNano(), DurationUnit.NANOSECONDS));
+                InputDeviceTutorialLogger inputDeviceTutorialLogger3 = tutorialSchedulerInteractor3.logger;
+                String str2 = "Tutorial is scheduled in " + Duration.m3465toLongimpl(jM3461plusLRDsOJo, durationUnit2) + " seconds";
+                ConstantStringsLoggerImpl constantStringsLoggerImpl3 = inputDeviceTutorialLogger3.$$delegate_0;
+                constantStringsLoggerImpl3.getClass();
+                LogBuffer.log$default(constantStringsLoggerImpl3.buffer, constantStringsLoggerImpl3.tag, LogLevel.DEBUG, str2);
+                tutorialSchedulerInteractor$schedule$1.L$0 = tutorialSchedulerInteractor3;
+                tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
+                tutorialSchedulerInteractor$schedule$1.L$2 = null;
+                tutorialSchedulerInteractor$schedule$1.label = 5;
+                if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 5:
+                deviceType3 = (DeviceType) tutorialSchedulerInteractor$schedule$1.L$1;
+                tutorialSchedulerInteractor4 = (TutorialSchedulerInteractor) tutorialSchedulerInteractor$schedule$1.L$0;
+                ResultKt.throwOnFailure(objWasEverConnected);
+                tutorialSchedulerInteractor$schedule$1.L$0 = null;
+                tutorialSchedulerInteractor$schedule$1.L$1 = null;
+                tutorialSchedulerInteractor$schedule$1.label = 6;
+                Object obj3 = tutorialSchedulerInteractor4.isAnyDeviceConnected.get(deviceType3);
+                obj3.getClass();
+                final Flow flow3 = (Flow) obj3;
+                break;
+            case 6:
+                ResultKt.throwOnFailure(objWasEverConnected);
+                return Unit.INSTANCE;
+            default:
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
     }
 
     public final void updateLaunchInfo(TutorialType tutorialType) {
-        BuildersKt.launch$default(this.backgroundScope, null, null, new TutorialSchedulerInteractor$updateLaunchInfo$1(tutorialType, this, null), 3);
+        BuildersKt.launch$default(this.backgroundScope, null, null, new AnonymousClass1(tutorialType, this, null), 3);
     }
 }

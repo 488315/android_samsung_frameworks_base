@@ -162,14 +162,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
     }
 
     public static synchronized NtpTrustedTime getInstance(Context context) {
-        NtpTrustedTime ntpTrustedTime;
-        synchronized (NtpTrustedTime.class) {
-            if (sSingleton == null) {
-                sSingleton = new NtpTrustedTimeImpl(context.getApplicationContext());
-            }
-            ntpTrustedTime = sSingleton;
+        if (sSingleton == null) {
+            sSingleton = new NtpTrustedTimeImpl(context.getApplicationContext());
         }
-        return ntpTrustedTime;
+        return sSingleton;
     }
 
     public void setServerConfigForTests(NtpConfig ntpConfig) {
@@ -191,12 +187,12 @@ public abstract class NtpTrustedTime implements TrustedTime {
     }
 
     public boolean forceRefresh(Network network) {
-        boolean forceRefreshLocked;
+        boolean zForceRefreshLocked;
         Objects.requireNonNull(network);
         synchronized (this.mRefreshLock) {
-            forceRefreshLocked = forceRefreshLocked(network);
+            zForceRefreshLocked = forceRefreshLocked(network);
         }
-        return forceRefreshLocked;
+        return zForceRefreshLocked;
     }
 
     private boolean forceRefreshLocked(Network network) {
@@ -232,10 +228,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
             return forceRefreshCN(network, ntpConfig, arrayList);
         }
         for (URI uri2 : arrayList) {
-            TimeResult queryNtpServer = queryNtpServer(network, uri2, ntpConfig.getTimeout());
-            if (queryNtpServer != null) {
+            TimeResult timeResultQueryNtpServer = queryNtpServer(network, uri2, ntpConfig.getTimeout());
+            if (timeResultQueryNtpServer != null) {
                 this.mLastSuccessfulNtpServerUri = uri2;
-                this.mTimeResult = queryNtpServer;
+                this.mTimeResult = timeResultQueryNtpServer;
                 return true;
             }
         }
@@ -322,12 +318,12 @@ public abstract class NtpTrustedTime implements TrustedTime {
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String[] split = str.split(NTP_SETTING_SERVER_NAME_DELIMITER_REGEXP);
-        if (split.length == 0) {
+        String[] strArrSplit = str.split(NTP_SETTING_SERVER_NAME_DELIMITER_REGEXP);
+        if (strArrSplit.length == 0) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        for (String str2 : split) {
+        for (String str2 : strArrSplit) {
             if (str2.startsWith("ntp:")) {
                 try {
                     arrayList.add(parseNtpUriStrict(str2));
@@ -394,12 +390,12 @@ public abstract class NtpTrustedTime implements TrustedTime {
         }
 
         @Override // android.util.NtpTrustedTime
-        public NtpConfig getNtpConfigInternal() {
+        public NtpConfig getNtpConfigInternal() throws Resources.NotFoundException {
             String[] stringArray;
             ContentResolver contentResolver = this.mContext.getContentResolver();
             Resources resources = this.mContext.getResources();
-            List<URI> parseNtpServerSetting = parseNtpServerSetting(Settings.Global.getString(contentResolver, Settings.Global.NTP_SERVER));
-            if (parseNtpServerSetting == null) {
+            List<URI> ntpServerSetting = parseNtpServerSetting(Settings.Global.getString(contentResolver, Settings.Global.NTP_SERVER));
+            if (ntpServerSetting == null) {
                 resources.getStringArray(R.array.config_ntpServers);
                 String str = SystemProperties.get("ro.csc.countryiso_code", "");
                 String str2 = SystemProperties.get("persist.sys.timezone");
@@ -423,16 +419,16 @@ public abstract class NtpTrustedTime implements TrustedTime {
                     for (String str3 : stringArray) {
                         arrayList.add(parseNtpUriStrict(str3));
                     }
-                    parseNtpServerSetting = arrayList;
+                    ntpServerSetting = arrayList;
                 } catch (URISyntaxException unused) {
-                    parseNtpServerSetting = null;
+                    ntpServerSetting = null;
                 }
             }
-            java.time.Duration ofMillis = java.time.Duration.ofMillis(Settings.Global.getInt(contentResolver, Settings.Global.NTP_TIMEOUT, resources.getInteger(R.integer.config_ntpTimeout)));
-            if (parseNtpServerSetting == null) {
+            java.time.Duration durationOfMillis = java.time.Duration.ofMillis(Settings.Global.getInt(contentResolver, Settings.Global.NTP_TIMEOUT, resources.getInteger(R.integer.config_ntpTimeout)));
+            if (ntpServerSetting == null) {
                 return null;
             }
-            return new NtpConfig(parseNtpServerSetting, ofMillis);
+            return new NtpConfig(ntpServerSetting, durationOfMillis);
         }
 
         @Override // android.util.NtpTrustedTime
@@ -478,7 +474,7 @@ public abstract class NtpTrustedTime implements TrustedTime {
         }
     }
 
-    private boolean forceRefreshCN(final Network network, final NtpConfig ntpConfig, final List<URI> list) {
+    private boolean forceRefreshCN(final Network network, final NtpConfig ntpConfig, final List<URI> list) throws InterruptedException {
         this.visitedUri.clear();
         this.mLastSuccessfulNtpServerUri = null;
         this.mOtherLastSuccessfulNtpServerUri = null;
@@ -489,7 +485,7 @@ public abstract class NtpTrustedTime implements TrustedTime {
             new Thread(new Runnable() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NtpTrustedTime.this.lambda$forceRefreshCN$0(i, list, network, ntpConfig, timeResultArr, uriArr, countDownLatch);
+                    this.f$0.lambda$forceRefreshCN$0(i, list, network, ntpConfig, timeResultArr, uriArr, countDownLatch);
                 }
             }).start();
         }
@@ -519,12 +515,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
         long elapsedRealtimeMillis2 = timeMillis2 - timeResultArr[1].getElapsedRealtimeMillis();
         if (Math.abs((timeMillis - elapsedRealtimeMillis) - elapsedRealtimeMillis2) > 60000) {
             Log.d(TAG, "[CN]forceRefreshLocked: need more ntp result to compare");
-            Stream<Integer> filter = IntStream.range(0, list.size()).boxed().filter(new Predicate() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda1
+            Stream<Integer> streamFilter = IntStream.range(0, list.size()).boxed().filter(new Predicate() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda1
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$forceRefreshCN$1;
-                    lambda$forceRefreshCN$1 = NtpTrustedTime.this.lambda$forceRefreshCN$1((Integer) obj);
-                    return lambda$forceRefreshCN$1;
+                    return this.f$0.lambda$forceRefreshCN$1((Integer) obj);
                 }
             });
             Objects.requireNonNull(list);
@@ -536,10 +530,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
             };
             final SparseIntArray sparseIntArray = this.visitedUri;
             Objects.requireNonNull(sparseIntArray);
-            List list2 = (List) ((LinkedHashMap) filter.collect(Collectors.toMap(function, new Function() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda3
+            List list2 = (List) ((LinkedHashMap) streamFilter.collect(Collectors.toMap(function, new Function() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda3
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return Integer.valueOf(SparseIntArray.this.get(((Integer) obj).intValue()));
+                    return Integer.valueOf(sparseIntArray.get(((Integer) obj).intValue()));
                 }
             }, new BinaryOperator() { // from class: android.util.NtpTrustedTime$$ExternalSyntheticLambda4
                 @Override // java.util.function.BiFunction
@@ -557,10 +551,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
                 if (i2 >= list2.size()) {
                     break;
                 }
-                TimeResult queryNtpServer = queryNtpServer(network, (URI) list2.get(i2), ntpConfig.getTimeout());
-                if (queryNtpServer != null) {
-                    Log.d(TAG, "[CN]forceRefreshLocked: get ntp result=" + queryNtpServer);
-                    if (Math.abs(elapsedRealtimeMillis2 - (queryNtpServer.getTimeMillis() - queryNtpServer.getElapsedRealtimeMillis())) <= 60000) {
+                TimeResult timeResultQueryNtpServer = queryNtpServer(network, (URI) list2.get(i2), ntpConfig.getTimeout());
+                if (timeResultQueryNtpServer != null) {
+                    Log.d(TAG, "[CN]forceRefreshLocked: get ntp result=" + timeResultQueryNtpServer);
+                    if (Math.abs(elapsedRealtimeMillis2 - (timeResultQueryNtpServer.getTimeMillis() - timeResultQueryNtpServer.getElapsedRealtimeMillis())) <= 60000) {
                         Log.d(TAG, "[CN]forceRefreshLocked: return the second success url");
                         this.mLastSuccessfulNtpServerUri = uriArr[1];
                         this.mOtherLastSuccessfulNtpServerUri = uriArr[0];
@@ -586,11 +580,11 @@ public abstract class NtpTrustedTime implements TrustedTime {
             if (i2 >= list.size()) {
                 break;
             }
-            TimeResult queryNtpServer = queryNtpServer(network, (URI) list.get(i2), ntpConfig.getTimeout());
-            if (queryNtpServer != null) {
-                Log.d(TAG, "[CN]forceRefreshLocked: [" + i + "] get ntp result=" + queryNtpServer);
+            TimeResult timeResultQueryNtpServer = queryNtpServer(network, (URI) list.get(i2), ntpConfig.getTimeout());
+            if (timeResultQueryNtpServer != null) {
+                Log.d(TAG, "[CN]forceRefreshLocked: [" + i + "] get ntp result=" + timeResultQueryNtpServer);
                 this.visitedUri.put(i2, 2);
-                timeResultArr[i] = queryNtpServer;
+                timeResultArr[i] = timeResultQueryNtpServer;
                 uriArr[i] = (URI) list.get(i2);
                 break;
             }

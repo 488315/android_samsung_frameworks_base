@@ -98,9 +98,9 @@ public class ProgressDialog extends AlertDialog {
 
     @Override // android.app.AlertDialog, android.app.Dialog
     protected void onCreate(Bundle bundle) {
-        View inflate;
-        LayoutInflater from = LayoutInflater.from(this.mContext);
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
+        View viewInflate;
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
         int i = this.mProgressStyle;
         if (i == 1) {
             this.mViewUpdateHandler = new Handler() { // from class: android.app.ProgressDialog.1
@@ -128,34 +128,34 @@ public class ProgressDialog extends AlertDialog {
                     ProgressDialog.this.mProgressPercent.lambda$setTextAsync$0("");
                 }
             };
-            View inflate2 = from.inflate(obtainStyledAttributes.getResourceId(13, R.layout.alert_dialog_progress), (ViewGroup) null);
-            this.mProgress = (ProgressBar) inflate2.findViewById(16908301);
-            this.mProgressNumber = (TextView) inflate2.findViewById(R.id.progress_number);
-            this.mProgressPercent = (TextView) inflate2.findViewById(R.id.progress_percent);
+            View viewInflate2 = layoutInflaterFrom.inflate(typedArrayObtainStyledAttributes.getResourceId(13, R.layout.alert_dialog_progress), (ViewGroup) null);
+            this.mProgress = (ProgressBar) viewInflate2.findViewById(16908301);
+            this.mProgressNumber = (TextView) viewInflate2.findViewById(R.id.progress_number);
+            this.mProgressPercent = (TextView) viewInflate2.findViewById(R.id.progress_percent);
             if (this.mThemeIsDeviceDefault) {
-                this.mMessageView = (TextView) inflate2.findViewById(16908299);
+                this.mMessageView = (TextView) viewInflate2.findViewById(16908299);
             }
-            setView(inflate2);
+            setView(viewInflate2);
         } else if (i == 1000 && this.mThemeIsDeviceDefault) {
             TypedValue typedValue = new TypedValue();
             this.mContext.getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, typedValue, true);
             setTitle((CharSequence) null);
             getWindow().setBackgroundDrawableResource(typedValue.data == 0 ? R.drawable.tw_dialog_circle_progress_background_material_shape : R.drawable.tw_dialog_circle_progress_background_material_shape_dark);
-            View inflate3 = from.inflate(R.layout.tw_progress_dialog_circle_material, (ViewGroup) null);
-            this.mProgress = (ProgressBar) inflate3.findViewById(16908301);
-            this.mMessageView = (TextView) inflate3.findViewById(16908299);
-            setView(inflate3);
+            View viewInflate3 = layoutInflaterFrom.inflate(R.layout.tw_progress_dialog_circle_material, (ViewGroup) null);
+            this.mProgress = (ProgressBar) viewInflate3.findViewById(16908301);
+            this.mMessageView = (TextView) viewInflate3.findViewById(16908299);
+            setView(viewInflate3);
         } else {
             if (this instanceof BootProgressDialog) {
-                inflate = from.inflate(R.layout.boot_progress_dialog, (ViewGroup) null);
+                viewInflate = layoutInflaterFrom.inflate(R.layout.boot_progress_dialog, (ViewGroup) null);
             } else {
-                inflate = from.inflate(obtainStyledAttributes.getResourceId(18, R.layout.progress_dialog), (ViewGroup) null);
+                viewInflate = layoutInflaterFrom.inflate(typedArrayObtainStyledAttributes.getResourceId(18, R.layout.progress_dialog), (ViewGroup) null);
             }
-            this.mProgress = (ProgressBar) inflate.findViewById(16908301);
-            this.mMessageView = (TextView) inflate.findViewById(16908299);
-            setView(inflate);
+            this.mProgress = (ProgressBar) viewInflate.findViewById(16908301);
+            this.mMessageView = (TextView) viewInflate.findViewById(16908299);
+            setView(viewInflate);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         int i2 = this.mMax;
         if (i2 > 0) {
             setMax(i2);

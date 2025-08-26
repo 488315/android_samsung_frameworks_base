@@ -52,9 +52,9 @@ public interface IImsMultiEndpoint extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsMultiEndpoint)) {
-                return (IImsMultiEndpoint) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsMultiEndpoint)) {
+                return (IImsMultiEndpoint) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface IImsMultiEndpoint extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IImsExternalCallStateListener asInterface = IImsExternalCallStateListener.Stub.asInterface(parcel.readStrongBinder());
+                IImsExternalCallStateListener iImsExternalCallStateListenerAsInterface = IImsExternalCallStateListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setListener(asInterface);
+                setListener(iImsExternalCallStateListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 requestImsExternalCallStateInfo();
@@ -115,30 +115,30 @@ public interface IImsMultiEndpoint extends IInterface {
 
             @Override // com.android.ims.internal.IImsMultiEndpoint
             public void setListener(IImsExternalCallStateListener iImsExternalCallStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsExternalCallStateListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsExternalCallStateListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsMultiEndpoint
             public void requestImsExternalCallStateInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

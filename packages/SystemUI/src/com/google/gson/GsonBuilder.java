@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class GsonBuilder {
     private boolean complexMapKeySerialization;
@@ -60,36 +59,37 @@ public final class GsonBuilder {
     }
 
     private void addTypeAdaptersForDate(String str, int i, int i2, List<TypeAdapterFactory> list) {
-        TypeAdapterFactory typeAdapterFactory;
-        TypeAdapterFactory typeAdapterFactory2;
+        TypeAdapterFactory typeAdapterFactoryCreateAdapterFactory;
+        TypeAdapterFactory typeAdapterFactoryCreateAdapterFactory2;
         boolean z = SqlTypesSupport.SUPPORTS_SQL_TYPES;
-        TypeAdapterFactory typeAdapterFactory3 = null;
+        TypeAdapterFactory typeAdapterFactoryCreateAdapterFactory3 = null;
         if (str != null && !str.trim().isEmpty()) {
-            typeAdapterFactory = DefaultDateTypeAdapter.DateType.DATE.createAdapterFactory(str);
+            typeAdapterFactoryCreateAdapterFactory = DefaultDateTypeAdapter.DateType.DATE.createAdapterFactory(str);
             if (z) {
-                typeAdapterFactory3 = SqlTypesSupport.TIMESTAMP_DATE_TYPE.createAdapterFactory(str);
-                typeAdapterFactory2 = SqlTypesSupport.DATE_DATE_TYPE.createAdapterFactory(str);
+                typeAdapterFactoryCreateAdapterFactory3 = SqlTypesSupport.TIMESTAMP_DATE_TYPE.createAdapterFactory(str);
+                typeAdapterFactoryCreateAdapterFactory2 = SqlTypesSupport.DATE_DATE_TYPE.createAdapterFactory(str);
+            } else {
+                typeAdapterFactoryCreateAdapterFactory2 = null;
             }
-            typeAdapterFactory2 = null;
         } else {
             if (i == 2 || i2 == 2) {
                 return;
             }
-            TypeAdapterFactory createAdapterFactory = DefaultDateTypeAdapter.DateType.DATE.createAdapterFactory(i, i2);
+            TypeAdapterFactory typeAdapterFactoryCreateAdapterFactory4 = DefaultDateTypeAdapter.DateType.DATE.createAdapterFactory(i, i2);
             if (z) {
-                typeAdapterFactory3 = SqlTypesSupport.TIMESTAMP_DATE_TYPE.createAdapterFactory(i, i2);
-                TypeAdapterFactory createAdapterFactory2 = SqlTypesSupport.DATE_DATE_TYPE.createAdapterFactory(i, i2);
-                typeAdapterFactory = createAdapterFactory;
-                typeAdapterFactory2 = createAdapterFactory2;
+                typeAdapterFactoryCreateAdapterFactory3 = SqlTypesSupport.TIMESTAMP_DATE_TYPE.createAdapterFactory(i, i2);
+                TypeAdapterFactory typeAdapterFactoryCreateAdapterFactory5 = SqlTypesSupport.DATE_DATE_TYPE.createAdapterFactory(i, i2);
+                typeAdapterFactoryCreateAdapterFactory = typeAdapterFactoryCreateAdapterFactory4;
+                typeAdapterFactoryCreateAdapterFactory2 = typeAdapterFactoryCreateAdapterFactory5;
             } else {
-                typeAdapterFactory = createAdapterFactory;
-                typeAdapterFactory2 = null;
+                typeAdapterFactoryCreateAdapterFactory = typeAdapterFactoryCreateAdapterFactory4;
+                typeAdapterFactoryCreateAdapterFactory2 = null;
             }
         }
-        list.add(typeAdapterFactory);
+        list.add(typeAdapterFactoryCreateAdapterFactory);
         if (z) {
-            list.add(typeAdapterFactory3);
-            list.add(typeAdapterFactory2);
+            list.add(typeAdapterFactoryCreateAdapterFactory3);
+            list.add(typeAdapterFactoryCreateAdapterFactory2);
         }
     }
 
@@ -260,8 +260,8 @@ public final class GsonBuilder {
         this.excluder = Excluder.DEFAULT;
         this.longSerializationPolicy = LongSerializationPolicy.DEFAULT;
         this.fieldNamingPolicy = FieldNamingPolicy.IDENTITY;
-        HashMap hashMap = new HashMap();
-        this.instanceCreators = hashMap;
+        HashMap map = new HashMap();
+        this.instanceCreators = map;
         ArrayList arrayList = new ArrayList();
         this.factories = arrayList;
         ArrayList arrayList2 = new ArrayList();
@@ -281,7 +281,7 @@ public final class GsonBuilder {
         this.numberToNumberStrategy = Gson.DEFAULT_NUMBER_TO_NUMBER_STRATEGY;
         this.excluder = gson.excluder;
         this.fieldNamingPolicy = gson.fieldNamingStrategy;
-        hashMap.putAll(gson.instanceCreators);
+        map.putAll(gson.instanceCreators);
         this.serializeNulls = gson.serializeNulls;
         this.complexMapKeySerialization = gson.complexMapKeySerialization;
         this.generateNonExecutableJson = gson.generateNonExecutableJson;

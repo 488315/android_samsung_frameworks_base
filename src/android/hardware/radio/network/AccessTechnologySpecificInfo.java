@@ -152,25 +152,25 @@ public final class AccessTechnologySpecificInfo implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (Cdma2000RegistrationInfo) parcel.readTypedObject(Cdma2000RegistrationInfo.CREATOR));
+        if (i == 1) {
+            _set(i, (Cdma2000RegistrationInfo) parcel.readTypedObject(Cdma2000RegistrationInfo.CREATOR));
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, (EutranRegistrationInfo) parcel.readTypedObject(EutranRegistrationInfo.CREATOR));
+        if (i == 2) {
+            _set(i, (EutranRegistrationInfo) parcel.readTypedObject(EutranRegistrationInfo.CREATOR));
             return;
         }
-        if (readInt == 3) {
-            _set(readInt, (NrVopsInfo) parcel.readTypedObject(NrVopsInfo.CREATOR));
-        } else if (readInt == 4) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        if (i == 3) {
+            _set(i, (NrVopsInfo) parcel.readTypedObject(NrVopsInfo.CREATOR));
+        } else if (i == 4) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

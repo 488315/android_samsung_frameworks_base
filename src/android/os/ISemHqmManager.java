@@ -94,9 +94,9 @@ public interface ISemHqmManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemHqmManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemHqmManager)) {
-                return (ISemHqmManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemHqmManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemHqmManager)) {
+                return (ISemHqmManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -144,73 +144,73 @@ public interface ISemHqmManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel3.readInt();
-                    String readString = parcel3.readString();
-                    String readString2 = parcel3.readString();
-                    String readString3 = parcel3.readString();
-                    String readString4 = parcel3.readString();
-                    String readString5 = parcel3.readString();
-                    String readString6 = parcel3.readString();
-                    String readString7 = parcel3.readString();
+                    int i3 = parcel3.readInt();
+                    String string = parcel3.readString();
+                    String string2 = parcel3.readString();
+                    String string3 = parcel3.readString();
+                    String string4 = parcel3.readString();
+                    String string5 = parcel3.readString();
+                    String string6 = parcel3.readString();
+                    String string7 = parcel3.readString();
                     parcel3.enforceNoDataAvail();
-                    boolean sendHWParamServer = sendHWParamServer(readInt, readString, readString2, readString3, readString4, readString5, readString6, readString7);
+                    boolean zSendHWParamServer = sendHWParamServer(i3, string, string2, string3, string4, string5, string6, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendHWParamServer);
+                    parcel2.writeBoolean(zSendHWParamServer);
                     return true;
                 case 2:
-                    int readInt2 = parcel3.readInt();
-                    String readString8 = parcel3.readString();
-                    String readString9 = parcel3.readString();
-                    String readString10 = parcel3.readString();
-                    String readString11 = parcel3.readString();
-                    String readString12 = parcel3.readString();
-                    String readString13 = parcel3.readString();
-                    String readString14 = parcel3.readString();
-                    String readString15 = parcel3.readString();
+                    int i4 = parcel3.readInt();
+                    String string8 = parcel3.readString();
+                    String string9 = parcel3.readString();
+                    String string10 = parcel3.readString();
+                    String string11 = parcel3.readString();
+                    String string12 = parcel3.readString();
+                    String string13 = parcel3.readString();
+                    String string14 = parcel3.readString();
+                    String string15 = parcel3.readString();
                     parcel3.enforceNoDataAvail();
-                    boolean sendHWParamToHQM = sendHWParamToHQM(readInt2, readString8, readString9, readString10, readString11, readString12, readString13, readString14, readString15);
+                    boolean zSendHWParamToHQM = sendHWParamToHQM(i4, string8, string9, string10, string11, string12, string13, string14, string15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendHWParamToHQM);
+                    parcel2.writeBoolean(zSendHWParamToHQM);
                     return true;
                 case 3:
-                    int readInt3 = parcel3.readInt();
-                    String readString16 = parcel3.readString();
-                    String readString17 = parcel3.readString();
-                    String readString18 = parcel3.readString();
-                    String readString19 = parcel3.readString();
-                    String readString20 = parcel3.readString();
-                    String readString21 = parcel3.readString();
-                    String readString22 = parcel3.readString();
-                    String readString23 = parcel3.readString();
-                    String readString24 = parcel3.readString();
+                    int i5 = parcel3.readInt();
+                    String string16 = parcel3.readString();
+                    String string17 = parcel3.readString();
+                    String string18 = parcel3.readString();
+                    String string19 = parcel3.readString();
+                    String string20 = parcel3.readString();
+                    String string21 = parcel3.readString();
+                    String string22 = parcel3.readString();
+                    String string23 = parcel3.readString();
+                    String string24 = parcel3.readString();
                     parcel3.enforceNoDataAvail();
-                    boolean sendHWParamToHQMwithAppId = sendHWParamToHQMwithAppId(readInt3, readString16, readString17, readString18, readString19, readString20, readString21, readString22, readString23, readString24);
+                    boolean zSendHWParamToHQMwithAppId = sendHWParamToHQMwithAppId(i5, string16, string17, string18, string19, string20, string21, string22, string23, string24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendHWParamToHQMwithAppId);
+                    parcel2.writeBoolean(zSendHWParamToHQMwithAppId);
                     return true;
                 case 4:
-                    int readInt4 = parcel3.readInt();
-                    String readString25 = parcel3.readString();
-                    String readString26 = parcel3.readString();
-                    String readString27 = parcel3.readString();
-                    String readString28 = parcel3.readString();
-                    String readString29 = parcel3.readString();
-                    String readString30 = parcel3.readString();
-                    String readString31 = parcel3.readString();
-                    String readString32 = parcel3.readString();
-                    String readString33 = parcel3.readString();
-                    String readString34 = parcel3.readString();
+                    int i6 = parcel3.readInt();
+                    String string25 = parcel3.readString();
+                    String string26 = parcel3.readString();
+                    String string27 = parcel3.readString();
+                    String string28 = parcel3.readString();
+                    String string29 = parcel3.readString();
+                    String string30 = parcel3.readString();
+                    String string31 = parcel3.readString();
+                    String string32 = parcel3.readString();
+                    String string33 = parcel3.readString();
+                    String string34 = parcel3.readString();
                     parcel3.enforceNoDataAvail();
-                    boolean sendHWParamToHQMwithFile = sendHWParamToHQMwithFile(readInt4, readString25, readString26, readString27, readString28, readString29, readString30, readString31, readString32, readString33, readString34);
+                    boolean zSendHWParamToHQMwithFile = sendHWParamToHQMwithFile(i6, string25, string26, string27, string28, string29, string30, string31, string32, string33, string34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendHWParamToHQMwithFile);
+                    parcel2.writeBoolean(zSendHWParamToHQMwithFile);
                     return true;
                 case 5:
-                    int readInt5 = parcel3.readInt();
-                    String readString35 = parcel3.readString();
-                    String readString36 = parcel3.readString();
+                    int i7 = parcel3.readInt();
+                    String string35 = parcel3.readString();
+                    String string36 = parcel3.readString();
                     parcel3.enforceNoDataAvail();
-                    sendSystemInfoToHQM(readInt5, readString35, readString36);
+                    sendSystemInfoToHQM(i7, string35, string36);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -251,161 +251,161 @@ public interface ISemHqmManager extends IInterface {
 
             @Override // android.os.ISemHqmManager
             public boolean sendHWParamServer(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean sendHWParamToHQM(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeString(str8);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeString(str8);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean sendHWParamToHQMwithAppId(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeString(str8);
-                    obtain.writeString(str9);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeString(str8);
+                    parcelObtain.writeString(str9);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean sendHWParamToHQMwithFile(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeString(str8);
-                    obtain.writeString(str9);
-                    obtain.writeString(str10);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeString(str8);
+                    parcelObtain.writeString(str9);
+                    parcelObtain.writeString(str10);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public void sendSystemInfoToHQM(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean getHqmEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean getDVServerEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISemHqmManager
             public boolean getCFServerEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHqmManager.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -11,7 +11,6 @@ import android.view.inputmethod.InputConnection;
 import android.widget.MultiAutoCompleteTextView;
 import androidx.appcompat.content.res.AppCompatResources;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatMultiAutoCompleteTextView extends MultiAutoCompleteTextView {
     public static final int[] TINT_ATTRS = {R.attr.popupBackground};
@@ -38,9 +37,9 @@ public class AppCompatMultiAutoCompleteTextView extends MultiAutoCompleteTextVie
 
     @Override // android.widget.TextView, android.view.View
     public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
-        AppCompatHintHelper.onCreateInputConnection(onCreateInputConnection, editorInfo, this);
-        return this.mAppCompatEmojiEditTextHelper.onCreateInputConnection(onCreateInputConnection, editorInfo);
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        AppCompatHintHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo, this);
+        return this.mAppCompatEmojiEditTextHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo);
     }
 
     @Override // android.view.View
@@ -107,11 +106,11 @@ public class AppCompatMultiAutoCompleteTextView extends MultiAutoCompleteTextVie
         super(context, attributeSet, i);
         TintContextWrapper.wrap(context);
         ThemeUtils.checkAppCompatTheme(getContext(), this);
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(getContext(), attributeSet, TINT_ATTRS, i, 0);
-        if (obtainStyledAttributes.mWrapped.hasValue(0)) {
-            setDropDownBackgroundDrawable(obtainStyledAttributes.getDrawable(0));
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(getContext(), attributeSet, TINT_ATTRS, i, 0);
+        if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(0)) {
+            setDropDownBackgroundDrawable(tintTypedArrayObtainStyledAttributes.getDrawable(0));
         }
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         AppCompatBackgroundHelper appCompatBackgroundHelper = new AppCompatBackgroundHelper(this);
         this.mBackgroundTintHelper = appCompatBackgroundHelper;
         appCompatBackgroundHelper.loadFromAttributes(attributeSet, i);
@@ -126,9 +125,9 @@ public class AppCompatMultiAutoCompleteTextView extends MultiAutoCompleteTextVie
         if (keyListener instanceof NumberKeyListener) {
             return;
         }
-        boolean isFocusable = super.isFocusable();
-        boolean isClickable = super.isClickable();
-        boolean isLongClickable = super.isLongClickable();
+        boolean zIsFocusable = super.isFocusable();
+        boolean zIsClickable = super.isClickable();
+        boolean zIsLongClickable = super.isLongClickable();
         int inputType = super.getInputType();
         KeyListener keyListener2 = appCompatEmojiEditTextHelper.getKeyListener(keyListener);
         if (keyListener2 == keyListener) {
@@ -136,8 +135,8 @@ public class AppCompatMultiAutoCompleteTextView extends MultiAutoCompleteTextVie
         }
         super.setKeyListener(keyListener2);
         super.setRawInputType(inputType);
-        super.setFocusable(isFocusable);
-        super.setClickable(isClickable);
-        super.setLongClickable(isLongClickable);
+        super.setFocusable(zIsFocusable);
+        super.setClickable(zIsClickable);
+        super.setLongClickable(zIsLongClickable);
     }
 }

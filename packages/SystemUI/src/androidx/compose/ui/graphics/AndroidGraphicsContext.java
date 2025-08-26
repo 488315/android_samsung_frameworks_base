@@ -6,13 +6,11 @@ import androidx.compose.ui.graphics.layer.GraphicsLayerV29;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AndroidGraphicsContext implements GraphicsContext {
     public final Object lock = new Object();
     public final ViewGroup ownerView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -22,7 +20,6 @@ final class AndroidGraphicsContext implements GraphicsContext {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UniqueDrawingIdApi29 {
         public static final /* synthetic */ int $r8$clinit = 0;
 

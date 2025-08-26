@@ -4,29 +4,27 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.view.DisplayCutout;
 import android.view.WindowInsets;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.collection.MutableVectorKt$$ExternalSyntheticOutline0;
-import androidx.reflect.SeslBaseReflector;
 import androidx.reflect.view.SeslWindowInsetsReflector;
 import com.android.internal.policy.SystemBarUtils;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dumpable;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.dump.DumpManager;
+import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.statusbar.policy.CallbackController;
 import com.android.systemui.util.DeviceType;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorGardenPresenter implements Dumpable, CallbackController {
     public IndicatorGardenModel cachedGardenModel;
     public int displayDeviceType;
+    public final DisplayLifecycle displayLifecycle;
     public IndicatorGardenAlgorithm gardenAlgorithm;
     public HeadsUpAppearanceController headsUpAppearanceController;
     public final IndicatorCutoutUtil indicatorCutoutUtil;
@@ -36,16 +34,16 @@ public final class IndicatorGardenPresenter implements Dumpable, CallbackControl
     public final Handler mainHandler;
     public final ArrayList statusIconContainerCallbacks;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface GardenListener {
         void onGardenChanged(IndicatorGardenModel indicatorGardenModel);
     }
 
-    public IndicatorGardenPresenter(DumpManager dumpManager, Context context, IndicatorGardenAlgorithmFactory indicatorGardenAlgorithmFactory, IndicatorGardenInputProperties indicatorGardenInputProperties, Handler handler, IndicatorCutoutUtil indicatorCutoutUtil) {
+    public IndicatorGardenPresenter(DumpManager dumpManager, Context context, IndicatorGardenAlgorithmFactory indicatorGardenAlgorithmFactory, IndicatorGardenInputProperties indicatorGardenInputProperties, Handler handler, IndicatorCutoutUtil indicatorCutoutUtil, DisplayLifecycle displayLifecycle) {
         this.indicatorGardenAlgorithmFactory = indicatorGardenAlgorithmFactory;
         this.inputProperties = indicatorGardenInputProperties;
         this.mainHandler = handler;
         this.indicatorCutoutUtil = indicatorCutoutUtil;
+        this.displayLifecycle = displayLifecycle;
         DeviceType.isEngOrUTBinary();
         this.gardenAlgorithm = indicatorGardenAlgorithmFactory.makeAlgorithm();
         this.statusIconContainerCallbacks = new ArrayList();
@@ -69,17 +67,17 @@ public final class IndicatorGardenPresenter implements Dumpable, CallbackControl
         int i = indicatorGardenInputProperties.statusBarWidth;
         int statusBarHeight = SystemBarUtils.getStatusBarHeight(indicatorGardenInputProperties.context);
         Rect bounds = indicatorGardenInputProperties.context.getResources().getConfiguration().windowConfiguration.getBounds();
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, statusBarHeight, "        statusBarWidth=", ", statusBarHeight=", " ");
-        m.append(bounds);
-        printWriter.println(m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, statusBarHeight, "        statusBarWidth=", ", statusBarHeight=", " ");
+        sbM.append(bounds);
+        printWriter.println(sbM.toString());
         printWriter.println(MutableVectorKt$$ExternalSyntheticOutline0.m(indicatorGardenInputProperties.cornerPaddingC, indicatorGardenInputProperties.defaultStartPadding, "        cornerPaddingC=", " (defaultStartPadding=", ")"));
         int i2 = indicatorGardenInputProperties.cutoutSidePaddingD;
         int i3 = indicatorGardenInputProperties.cutoutInnerPaddingD;
         int i4 = indicatorGardenInputProperties.defaultCenterPadding;
-        StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "        cutoutSidePaddingD=", ", cutoutInnerPaddingD=", " (defaultCenterPadding=");
-        m2.append(i4);
-        m2.append(")");
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "        cutoutSidePaddingD=", ", cutoutInnerPaddingD=", " (defaultCenterPadding=");
+        sbM2.append(i4);
+        sbM2.append(")");
+        printWriter.println(sbM2.toString());
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("        cutoutTopMarginB=", indicatorGardenInputProperties.cutoutTopMarginB, printWriter);
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("        cutoutBottomMarginGb=", indicatorGardenInputProperties.cutoutBottomMarginGb, printWriter);
         printWriter.println("        density=" + indicatorGardenInputProperties.density);
@@ -90,24 +88,16 @@ public final class IndicatorGardenPresenter implements Dumpable, CallbackControl
     public final void onGardenApplyWindowInsets(IndicatorGarden indicatorGarden) {
         WindowInsets gardenWindowInsets = indicatorGarden.getGardenWindowInsets();
         if (gardenWindowInsets != null) {
-            DisplayCutout displayCutout = gardenWindowInsets.getDisplayCutout();
+            boolean z = this.displayLifecycle.mIsFitToActiveDisplay;
             IndicatorGardenInputProperties indicatorGardenInputProperties = this.inputProperties;
-            if (displayCutout != null) {
+            if (z) {
+                indicatorGardenInputProperties.onGardenApplyWindowInsets(null);
+            } else if (gardenWindowInsets.getDisplayCutout() != null) {
                 indicatorGardenInputProperties.onGardenApplyWindowInsets(gardenWindowInsets.getDisplayCutout());
+            } else if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT) {
+                indicatorGardenInputProperties.onGardenApplyWindowInsets(SeslWindowInsetsReflector.getDisplayCutoutForUdc(gardenWindowInsets));
             } else {
-                DisplayCutout displayCutout2 = null;
-                if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT) {
-                    Method declaredMethod = SeslBaseReflector.getDeclaredMethod(SeslWindowInsetsReflector.mClass, "hidden_getDisplayCutoutForUdc", new Class[0]);
-                    if (declaredMethod != null) {
-                        Object invoke = SeslBaseReflector.invoke(gardenWindowInsets, declaredMethod, new Object[0]);
-                        if (invoke instanceof DisplayCutout) {
-                            displayCutout2 = (DisplayCutout) invoke;
-                        }
-                    }
-                    indicatorGardenInputProperties.onGardenApplyWindowInsets(displayCutout2);
-                } else {
-                    indicatorGardenInputProperties.onGardenApplyWindowInsets(null);
-                }
+                indicatorGardenInputProperties.onGardenApplyWindowInsets(null);
             }
         }
         updateGardenWithNewModel(indicatorGarden);
@@ -116,6 +106,7 @@ public final class IndicatorGardenPresenter implements Dumpable, CallbackControl
     public final void onGardenConfigurationChanged(IndicatorGarden indicatorGarden, Configuration configuration) {
         IndicatorGardenInputProperties indicatorGardenInputProperties = this.inputProperties;
         indicatorGardenInputProperties.updateWindowMetrics();
+        indicatorGardenInputProperties.updatePaddingValues();
         if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
             int i = this.displayDeviceType;
             int i2 = configuration.semDisplayDeviceType;

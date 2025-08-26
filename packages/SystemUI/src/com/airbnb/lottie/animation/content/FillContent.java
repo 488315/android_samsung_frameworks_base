@@ -25,7 +25,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FillContent implements DrawingContent, BaseKeyframeAnimation.AnimationListener, KeyPathElementContent {
     public BaseKeyframeAnimation blurAnimation;
@@ -53,9 +52,9 @@ public class FillContent implements DrawingContent, BaseKeyframeAnimation.Animat
         this.hidden = shapeFill.hidden;
         this.lottieDrawable = lottieDrawable;
         if (baseLayer.getBlurEffect() != null) {
-            BaseKeyframeAnimation createAnimation = baseLayer.getBlurEffect().blurriness.createAnimation();
-            this.blurAnimation = createAnimation;
-            createAnimation.addUpdateListener(this);
+            BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = baseLayer.getBlurEffect().blurriness.createAnimation();
+            this.blurAnimation = baseKeyframeAnimationCreateAnimation;
+            baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
             baseLayer.addAnimation(this.blurAnimation);
         }
         if (baseLayer.getDropShadowEffect() != null) {
@@ -68,14 +67,14 @@ public class FillContent implements DrawingContent, BaseKeyframeAnimation.Animat
             return;
         }
         path.setFillType(shapeFill.fillType);
-        BaseKeyframeAnimation createAnimation2 = animatableColorValue.createAnimation();
-        this.colorAnimation = (ColorKeyframeAnimation) createAnimation2;
-        createAnimation2.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation2);
-        BaseKeyframeAnimation createAnimation3 = animatableIntegerValue.createAnimation();
-        this.opacityAnimation = (IntegerKeyframeAnimation) createAnimation3;
-        createAnimation3.addUpdateListener(this);
-        baseLayer.addAnimation(createAnimation3);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = animatableColorValue.createAnimation();
+        this.colorAnimation = (ColorKeyframeAnimation) baseKeyframeAnimationCreateAnimation2;
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = animatableIntegerValue.createAnimation();
+        this.opacityAnimation = (IntegerKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
     }
 
     @Override // com.airbnb.lottie.model.KeyPathElement
@@ -158,22 +157,22 @@ public class FillContent implements DrawingContent, BaseKeyframeAnimation.Animat
         }
         BaseKeyframeAnimation baseKeyframeAnimation = this.blurAnimation;
         if (baseKeyframeAnimation != null) {
-            float floatValue = ((Float) baseKeyframeAnimation.getValue()).floatValue();
-            if (floatValue == 0.0f) {
+            float fFloatValue = ((Float) baseKeyframeAnimation.getValue()).floatValue();
+            if (fFloatValue == 0.0f) {
                 lPaint.setMaskFilter(null);
-            } else if (floatValue != this.blurMaskFilterRadius) {
+            } else if (fFloatValue != this.blurMaskFilterRadius) {
                 BaseLayer baseLayer = this.layer;
-                if (baseLayer.blurMaskFilterRadius == floatValue) {
+                if (baseLayer.blurMaskFilterRadius == fFloatValue) {
                     blurMaskFilter = baseLayer.blurMaskFilter;
                 } else {
-                    BlurMaskFilter blurMaskFilter2 = new BlurMaskFilter(floatValue / 2.0f, BlurMaskFilter.Blur.NORMAL);
+                    BlurMaskFilter blurMaskFilter2 = new BlurMaskFilter(fFloatValue / 2.0f, BlurMaskFilter.Blur.NORMAL);
                     baseLayer.blurMaskFilter = blurMaskFilter2;
-                    baseLayer.blurMaskFilterRadius = floatValue;
+                    baseLayer.blurMaskFilterRadius = fFloatValue;
                     blurMaskFilter = blurMaskFilter2;
                 }
                 lPaint.setMaskFilter(blurMaskFilter);
             }
-            this.blurMaskFilterRadius = floatValue;
+            this.blurMaskFilterRadius = fFloatValue;
         }
         DropShadowKeyframeAnimation dropShadowKeyframeAnimation = this.dropShadowAnimation;
         if (dropShadowKeyframeAnimation != null) {

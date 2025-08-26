@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RestartDialogLayout extends ConstraintLayout implements DialogContainerSupplier {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,15 +33,15 @@ public class RestartDialogLayout extends ConstraintLayout implements DialogConta
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
-        View findViewById = findViewById(R.id.letterbox_restart_dialog_checkbox_container);
+        View viewFindViewById = findViewById(R.id.letterbox_restart_dialog_checkbox_container);
         CheckBox checkBox = (CheckBox) findViewById(R.id.letterbox_restart_dialog_checkbox);
         this.mDialogContainer = findViewById(R.id.letterbox_restart_dialog_container);
         this.mDialogTitle = (TextView) findViewById(R.id.letterbox_restart_dialog_title);
-        Drawable mutate = getBackground().mutate();
-        this.mBackgroundDim = mutate;
-        mutate.setAlpha(0);
+        Drawable drawableMutate = getBackground().mutate();
+        this.mBackgroundDim = drawableMutate;
+        drawableMutate.setAlpha(0);
         this.mDialogContainer.setOnClickListener(new RestartDialogLayout$$ExternalSyntheticLambda0());
-        findViewById.setOnClickListener(new RestartDialogLayout$$ExternalSyntheticLambda1(checkBox, 0));
+        viewFindViewById.setOnClickListener(new RestartDialogLayout$$ExternalSyntheticLambda1(checkBox, 0));
     }
 
     public final void setDismissOnClickListener(Runnable runnable) {

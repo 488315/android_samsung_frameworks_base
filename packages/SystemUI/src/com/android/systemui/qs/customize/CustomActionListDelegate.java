@@ -7,7 +7,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomActionListDelegate extends View.AccessibilityDelegate {
     public final String TAG = "CustomActionDelegate";
@@ -28,19 +27,19 @@ public final class CustomActionListDelegate extends View.AccessibilityDelegate {
 
     @Override // android.view.View.AccessibilityDelegate
     public final boolean performAccessibilityAction(View view, int i, Bundle bundle) {
-        Object obj;
+        Object next;
         Iterator it = this.customActionList.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((CustomActionId) obj).getId() == i) {
+            next = it.next();
+            if (((CustomActionId) next).getId() == i) {
                 break;
             }
         }
-        CustomActionId customActionId = (CustomActionId) obj;
+        CustomActionId customActionId = (CustomActionId) next;
         if (customActionId != null) {
             Log.d(this.TAG, "performAccessibilityAction host=" + view + ", action=" + i);
             CustomActionManager customActionManager = this.customActionManager;

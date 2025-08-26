@@ -13,14 +13,13 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BiometricsModule_Companion_ProvidesOverlapDetectorFactory implements Provider {
     public static OverlapDetector providesOverlapDetector() {
         BiometricsModule.Companion.getClass();
-        List split$default = StringsKt__StringsKt.split$default(Resources.getSystem().getStringArray(17236356)[Resources.getSystem().getInteger(R.integer.device_idle_sensing_to_ms)], new String[]{","}, 0, 6);
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default, 10));
-        Iterator it = split$default.iterator();
+        List listSplit$default = StringsKt__StringsKt.split$default(Resources.getSystem().getStringArray(17236357)[Resources.getSystem().getInteger(R.integer.device_idle_sensing_to_ms)], new String[]{","}, 0, 6);
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listSplit$default, 10));
+        Iterator it = listSplit$default.iterator();
         while (it.hasNext()) {
             arrayList.add(Float.valueOf(Float.parseFloat((String) it.next())));
         }

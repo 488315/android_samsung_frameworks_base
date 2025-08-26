@@ -24,7 +24,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VolumeBarView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
     public final Lazy viewModel$delegate;
     public final VolumeBarView$volumeKeyHandler$1 volumeKeyHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,7 +67,7 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
             @Override // android.view.View.OnUnhandledKeyEventListener
             public final boolean onUnhandledKeyEvent(View view, KeyEvent keyEvent) {
                 int modeInternal;
-                VolumeBarView volumeBarView = VolumeBarView.this;
+                VolumeBarView volumeBarView = this.this$0;
                 int i = VolumeBarView.$r8$clinit;
                 VolumeBarViewModel volumeBarViewModel = (VolumeBarViewModel) volumeBarView.viewModel$delegate.getValue();
                 int action = keyEvent.getAction();
@@ -92,14 +90,14 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
                         }
                         Integer num2 = modeInternal == 0 ? num : null;
                         if (num2 != null) {
-                            int intValue = num2.intValue();
+                            int iIntValue = num2.intValue();
                             if (!Trace.isTagEnabled(4096L)) {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 return true;
                             }
                             Trace.traceBegin(4096L, "#soundCraft.VolumeManager_adjustVolume");
                             try {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 Unit unit = Unit.INSTANCE;
                                 return true;
                             } finally {
@@ -148,7 +146,7 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
             @Override // android.view.View.OnUnhandledKeyEventListener
             public final boolean onUnhandledKeyEvent(View view, KeyEvent keyEvent) {
                 int modeInternal;
-                VolumeBarView volumeBarView = VolumeBarView.this;
+                VolumeBarView volumeBarView = this.this$0;
                 int i = VolumeBarView.$r8$clinit;
                 VolumeBarViewModel volumeBarViewModel = (VolumeBarViewModel) volumeBarView.viewModel$delegate.getValue();
                 int action = keyEvent.getAction();
@@ -171,14 +169,14 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
                         }
                         Integer num2 = modeInternal == 0 ? num : null;
                         if (num2 != null) {
-                            int intValue = num2.intValue();
+                            int iIntValue = num2.intValue();
                             if (!Trace.isTagEnabled(4096L)) {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 return true;
                             }
                             Trace.traceBegin(4096L, "#soundCraft.VolumeManager_adjustVolume");
                             try {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 Unit unit = Unit.INSTANCE;
                                 return true;
                             } finally {
@@ -211,7 +209,7 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
             @Override // android.view.View.OnUnhandledKeyEventListener
             public final boolean onUnhandledKeyEvent(View view, KeyEvent keyEvent) {
                 int modeInternal;
-                VolumeBarView volumeBarView = VolumeBarView.this;
+                VolumeBarView volumeBarView = this.this$0;
                 int i2 = VolumeBarView.$r8$clinit;
                 VolumeBarViewModel volumeBarViewModel = (VolumeBarViewModel) volumeBarView.viewModel$delegate.getValue();
                 int action = keyEvent.getAction();
@@ -234,14 +232,14 @@ public final class VolumeBarView extends LinearLayout implements SoundCraftVMCom
                         }
                         Integer num2 = modeInternal == 0 ? num : null;
                         if (num2 != null) {
-                            int intValue = num2.intValue();
+                            int iIntValue = num2.intValue();
                             if (!Trace.isTagEnabled(4096L)) {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 return true;
                             }
                             Trace.traceBegin(4096L, "#soundCraft.VolumeManager_adjustVolume");
                             try {
-                                volumeManager.audioManager.adjustVolume(intValue, 0);
+                                volumeManager.audioManager.adjustVolume(iIntValue, 0);
                                 Unit unit = Unit.INSTANCE;
                                 return true;
                             } finally {

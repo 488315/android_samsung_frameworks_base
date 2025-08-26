@@ -141,7 +141,7 @@ public abstract class SmartspaceService extends Service {
             arrayList.add(new CallbackWrapper(iSmartspaceCallback, new Consumer() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$1(arrayList, (SmartspaceService.CallbackWrapper) obj);
+                    this.f$0.lambda$doRegisterSmartspaceUpdates$1(arrayList, (SmartspaceService.CallbackWrapper) obj);
                 }
             }));
         }
@@ -152,7 +152,7 @@ public abstract class SmartspaceService extends Service {
         this.mHandler.post(new Runnable() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$0(arrayList, callbackWrapper);
+                this.f$0.lambda$doRegisterSmartspaceUpdates$0(arrayList, callbackWrapper);
             }
         });
     }
@@ -198,9 +198,9 @@ public abstract class SmartspaceService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void doDestroy(SmartspaceSessionId smartspaceSessionId) {
         super.onDestroy();
-        ArrayList<CallbackWrapper> remove = this.mSessionCallbacks.remove(smartspaceSessionId);
-        if (remove != null) {
-            remove.forEach(new Consumer() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda2
+        ArrayList<CallbackWrapper> arrayListRemove = this.mSessionCallbacks.remove(smartspaceSessionId);
+        if (arrayListRemove != null) {
+            arrayListRemove.forEach(new Consumer() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((SmartspaceService.CallbackWrapper) obj).destroy();

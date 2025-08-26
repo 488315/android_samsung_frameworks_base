@@ -12,17 +12,22 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.window.TransitionInfo;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
+import com.android.wm.shell.transition.MultiTaskingTransitions;
 import com.android.wm.shell.transition.change.ChangeTransitionSpec;
 import com.samsung.android.rune.CoreRune;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StandardChangeTransitionSpec extends ChangeTransitionSpec {
+    /* JADX WARN: Removed duplicated region for block: B:10:0x00e6  */
     @Override // com.android.wm.shell.transition.change.ChangeTransitionSpec
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Animation createBoundsChangeAnimation() {
         float f;
-        int dipToPixel;
+        int iDipToPixel;
+        int displayId;
         Rect displayFrame = getDisplayFrame();
         ScaleAnimation scaleAnimation = new ScaleAnimation(this.mStartBounds.width() / this.mEndBounds.width(), 1.0f, this.mStartBounds.height() / this.mEndBounds.height(), 1.0f);
         float f2 = this.mStartBounds.left;
@@ -41,24 +46,18 @@ public class StandardChangeTransitionSpec extends ChangeTransitionSpec {
         animationSet.setInterpolator(this.mAnimationAttributePolicy.mDefaultInterpolator);
         animationSet.initialize(this.mStartBounds.width(), this.mStartBounds.height(), displayFrame.width(), displayFrame.height());
         animationSet.setHasRoundedCorners(true);
-        if (CoreRune.DW_SHELL_CHANGE_TRANSITION) {
-            TransitionInfo.Change change = this.mChange;
-            int endDisplayId = change.getTaskInfo() != null ? change.getTaskInfo().displayId : change.getEndDisplayId();
+        if (CoreRune.DW_SHELL_CHANGE_TRANSITION && (displayId = MultiTaskingTransitions.getDisplayId(this.mChange)) != 0) {
             DesktopStateImpl.Companion.getClass();
-            if (DesktopStateImpl.Companion.inDesktopWindowing(endDisplayId)) {
-                dipToPixel = ChangeTransitionSpec.dipToPixel(8, this.mContext);
-                f = dipToPixel;
-                animationSet.setRoundedCornerRadius(f);
-                return animationSet;
+            if (DesktopStateImpl.Companion.inDesktopWindowing(displayId)) {
+                iDipToPixel = ChangeTransitionSpec.dipToPixel(8, this.mContext);
             }
-        }
-        if (this.mChange.getConfiguration().windowConfiguration.getWindowingMode() != 5) {
+            f = iDipToPixel;
+        } else if (this.mChange.getConfiguration().windowConfiguration.getWindowingMode() == 5) {
+            iDipToPixel = ChangeTransitionSpec.dipToPixel(14, this.mContext);
+            f = iDipToPixel;
+        } else {
             f = 0.0f;
-            animationSet.setRoundedCornerRadius(f);
-            return animationSet;
         }
-        dipToPixel = ChangeTransitionSpec.dipToPixel(14, this.mContext);
-        f = dipToPixel;
         animationSet.setRoundedCornerRadius(f);
         return animationSet;
     }
@@ -79,9 +78,9 @@ public class StandardChangeTransitionSpec extends ChangeTransitionSpec {
         animationAttributePolicy.getClass();
         alphaAnimation.setStartOffset((long) (f4 * ChangeTransitionSpec.AnimationAttributePolicy.SNAPSHOT_ALPHA_ANIM_START_OFFSET));
         alphaAnimation.setInterpolator(new LinearInterpolator());
-        float width = 1.0f / (this.mStartBounds.width() / this.mEndBounds.width());
-        float height = 1.0f / (this.mStartBounds.height() / this.mEndBounds.height());
-        ScaleAnimation scaleAnimation = new ScaleAnimation(width, width, height, height);
+        float fWidth = 1.0f / (this.mStartBounds.width() / this.mEndBounds.width());
+        float fHeight = 1.0f / (this.mStartBounds.height() / this.mEndBounds.height());
+        ScaleAnimation scaleAnimation = new ScaleAnimation(fWidth, fWidth, fHeight, fHeight);
         scaleAnimation.setDuration(animationDuration);
         scaleAnimation.setInterpolator(animationAttributePolicy.mDefaultInterpolator);
         AnimationSet animationSet = new AnimationSet(false);
@@ -111,19 +110,19 @@ public class StandardChangeTransitionSpec extends ChangeTransitionSpec {
         transaction.setWindowCrop(changeLeash, -1, -1);
         transaction.setShadowRadius(changeLeash, 0.0f);
         if (CoreRune.MW_EMBED_ACTIVITY_ANIMATION) {
-            TransitionInfo.Change findChange = (this.mChange.getTaskInfo() == null || !this.mChange.getTaskInfo().isFreeform()) ? null : this.mTransitionInfo.findChange(new Predicate() { // from class: com.android.wm.shell.transition.change.StandardChangeTransitionSpec$$ExternalSyntheticLambda0
+            TransitionInfo.Change changeFindChange = (this.mChange.getTaskInfo() == null || !this.mChange.getTaskInfo().isFreeform()) ? null : this.mTransitionInfo.findChange(new Predicate() { // from class: com.android.wm.shell.transition.change.StandardChangeTransitionSpec$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    StandardChangeTransitionSpec standardChangeTransitionSpec = StandardChangeTransitionSpec.this;
+                    StandardChangeTransitionSpec standardChangeTransitionSpec = this.f$0;
                     TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
                     standardChangeTransitionSpec.getClass();
                     return change2.getParent() != null && standardChangeTransitionSpec.mTransitionInfo.getChange(change2.getParent()) == standardChangeTransitionSpec.mChange && change2.getTaskFragmentToken() != null && change2.hasFlags(512) && !change2.hasFlags(1024) && change2.getEndRelOffset().equals(0, 0);
                 }
             });
-            if (findChange != null && !findChange.getEndAbsBounds().isEmpty()) {
-                float width = (r4 + 1) / findChange.getEndAbsBounds().width();
-                transaction.setScale(findChange.getLeash(), width, 1.0f);
-                Log.d("ChangeTransitionProvider", "setupTaskFragmentLeashIfNeeded: " + findChange.getLeash() + ", scaleX=" + width);
+            if (changeFindChange != null && !changeFindChange.getEndAbsBounds().isEmpty()) {
+                float fWidth = (r4 + 1) / changeFindChange.getEndAbsBounds().width();
+                transaction.setScale(changeFindChange.getLeash(), fWidth, 1.0f);
+                Log.d("ChangeTransitionProvider", "setupTaskFragmentLeashIfNeeded: " + changeFindChange.getLeash() + ", scaleX=" + fWidth);
             }
         }
         Log.d("ChangeTransitionProvider", "setupChangeTransitionHierarchy: reparent " + snapshot + " to " + leash + ", change=" + changeLeash);

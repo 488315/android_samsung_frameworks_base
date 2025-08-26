@@ -40,9 +40,9 @@ public interface ICarrierMessagingClientService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICarrierMessagingClientService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICarrierMessagingClientService)) {
-                return (ICarrierMessagingClientService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICarrierMessagingClientService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICarrierMessagingClientService)) {
+                return (ICarrierMessagingClientService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

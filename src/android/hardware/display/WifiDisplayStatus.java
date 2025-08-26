@@ -2,6 +2,7 @@ package android.hardware.display;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.Arrays;
 
 /* loaded from: classes2.dex */
@@ -10,15 +11,15 @@ public final class WifiDisplayStatus implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public WifiDisplayStatus createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            WifiDisplay createFromParcel = parcel.readInt() != 0 ? WifiDisplay.CREATOR.createFromParcel(parcel) : null;
-            WifiDisplay[] newArray = WifiDisplay.CREATOR.newArray(parcel.readInt());
-            for (int i = 0; i < newArray.length; i++) {
-                newArray[i] = WifiDisplay.CREATOR.createFromParcel(parcel);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            WifiDisplay wifiDisplayCreateFromParcel = parcel.readInt() != 0 ? WifiDisplay.CREATOR.createFromParcel(parcel) : null;
+            WifiDisplay[] wifiDisplayArrNewArray = WifiDisplay.CREATOR.newArray(parcel.readInt());
+            for (int i4 = 0; i4 < wifiDisplayArrNewArray.length; i4++) {
+                wifiDisplayArrNewArray[i4] = WifiDisplay.CREATOR.createFromParcel(parcel);
             }
-            return new WifiDisplayStatus(readInt, readInt2, readInt3, createFromParcel, newArray, WifiDisplaySessionInfo.CREATOR.createFromParcel(parcel));
+            return new WifiDisplayStatus(i, i2, i3, wifiDisplayCreateFromParcel, wifiDisplayArrNewArray, WifiDisplaySessionInfo.CREATOR.createFromParcel(parcel));
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -98,7 +99,7 @@ public final class WifiDisplayStatus implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mFeatureState);
         parcel.writeInt(this.mScanState);
         parcel.writeInt(this.mActiveDisplayState);

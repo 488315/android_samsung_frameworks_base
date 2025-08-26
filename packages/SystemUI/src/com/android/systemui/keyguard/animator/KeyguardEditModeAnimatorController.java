@@ -42,7 +42,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardEditModeAnimatorController extends ViewAnimationController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +61,6 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
     public StandaloneCoroutine startActivityJob;
     public AnimatorSet touchDownAnimatorSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,7 +86,7 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
         this.animatorSet = new AnimatorSet();
         this.touchDownAnimatorSet = new AnimatorSet();
         this.alphaViews = Arrays.asList(7, 8, 9, 10, 6, 2, 12);
-        this.scaleViews = Arrays.asList(7, 1, 8, 9, 10, 6, 2, 4, 5, 12);
+        this.scaleViews = Arrays.asList(7, 1, 8, 9, 10, 6, 2, 4, 5, 12, 14);
         this.noScaleViews = Arrays.asList(0, 3, 11);
         IntConsumer intConsumer = new IntConsumer() { // from class: com.android.systemui.keyguard.animator.KeyguardEditModeAnimatorController.1
             @Override // java.util.function.IntConsumer
@@ -105,10 +103,10 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
             }
         };
         if (!secRotationWatcher.mListeners.contains(intConsumer)) {
-            boolean isEmpty = secRotationWatcher.mListeners.isEmpty();
+            boolean zIsEmpty = secRotationWatcher.mListeners.isEmpty();
             secRotationWatcher.mListeners.add(intConsumer);
             intConsumer.accept(secRotationWatcher.mCurrentRotation);
-            if (isEmpty) {
+            if (zIsEmpty) {
                 try {
                     SecurityLog.d("SecRotationWatcher", "enable watchRotation");
                     WindowManagerGlobal.getWindowManagerService().watchRotation(secRotationWatcher.mWatcher, secRotationWatcher.mContext.getDisplayId());
@@ -174,20 +172,20 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
             public final void onAnimationCancel(Animator animator) {
                 super.onAnimationCancel(animator);
                 Log.d("KeyguardEditModeAnimatorController", "onAnimationCancel ");
-                KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = KeyguardEditModeAnimatorController.this;
+                KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = this.this$0;
                 int i = KeyguardEditModeAnimatorController.$r8$clinit;
                 if (keyguardEditModeAnimatorController.isEditMode()) {
-                    ((KeyguardEditModeControllerImpl) KeyguardEditModeAnimatorController.this.keyguardEditModeController).isEditMode = false;
+                    ((KeyguardEditModeControllerImpl) this.this$0.keyguardEditModeController).isEditMode = false;
                 }
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 super.onAnimationEnd(animator);
-                KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = KeyguardEditModeAnimatorController.this;
+                KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = this.this$0;
                 int i = KeyguardEditModeAnimatorController.$r8$clinit;
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onAnimationEnd EM=", "KeyguardEditModeAnimatorController", keyguardEditModeAnimatorController.isEditMode());
-                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = KeyguardEditModeAnimatorController.this.keyguardViewMediatorHelperImpl;
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.this$0.keyguardViewMediatorHelperImpl;
                 if (keyguardViewMediatorHelperImpl.lockShownJob != null) {
                     com.android.systemui.keyguard.Log.d("KeyguardViewMediator", "setLockScreenShownFromEditMode: needKeyguardAppearAnimation=" + keyguardViewMediatorHelperImpl.needKeyguardAppearAnimation);
                     keyguardViewMediatorHelperImpl.needKeyguardAppearAnimation = false;
@@ -197,16 +195,16 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
                     }
                     keyguardViewMediatorHelperImpl.setLockScreenShownRunnable.run();
                 }
-                if (KeyguardEditModeAnimatorController.this.isEditMode()) {
-                    KeyguardEditModeAnimatorController keyguardEditModeAnimatorController2 = KeyguardEditModeAnimatorController.this;
+                if (this.this$0.isEditMode()) {
+                    KeyguardEditModeAnimatorController keyguardEditModeAnimatorController2 = this.this$0;
                     DefaultScheduler defaultScheduler = Dispatchers.Default;
-                    keyguardEditModeAnimatorController2.startActivityJob = BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEnd$1(KeyguardEditModeAnimatorController.this, null), 3);
+                    keyguardEditModeAnimatorController2.startActivityJob = BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEnd$1(this.this$0, null), 3);
                 } else {
-                    KeyguardEditModeAnimatorController.this.keyguardUpdateMonitor.updateBiometricListeningState(2, FaceAuthUiEvent.FACE_AUTH_STARTED_LOCK_EDIT_MODE_FINISHED);
-                    ((KeyguardEditModeControllerImpl) KeyguardEditModeAnimatorController.this.keyguardEditModeController).cancel();
-                    KeyguardEditModeAnimatorController.this.resetViews();
+                    this.this$0.keyguardUpdateMonitor.updateBiometricListeningState(2, FaceAuthUiEvent.FACE_AUTH_STARTED_LOCK_EDIT_MODE_FINISHED);
+                    ((KeyguardEditModeControllerImpl) this.this$0.keyguardEditModeController).cancel();
+                    this.this$0.resetViews();
                     Log.d("KeyguardTouchAnimator", "LOCKUI_EDIT_MODE is finished");
-                    KeyguardEditModeAnimatorController.this.keyguardTouchAnimator.lockscreenShadeTransitionController.isKeyguardAnimatorStarted = false;
+                    this.this$0.keyguardTouchAnimator.lockscreenShadeTransitionController.isKeyguardAnimatorStarted = false;
                 }
             }
         });
@@ -266,11 +264,11 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
         int i3 = 0;
         while (i3 < size2) {
             int i4 = i3 + 1;
-            int intValue = ((Number) arrayList2.get(i3)).intValue();
+            int iIntValue = ((Number) arrayList2.get(i3)).intValue();
             if (z) {
-                setViewAlphaAnimation(this.animatorSet, keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(intValue), 0.0f, 150L, 0L);
+                setViewAlphaAnimation(this.animatorSet, keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(iIntValue), 0.0f, 150L, 0L);
             } else {
-                View view$frameworks__base__packages__SystemUI__android_common__SystemUI_core2 = keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(intValue);
+                View view$frameworks__base__packages__SystemUI__android_common__SystemUI_core2 = keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(iIntValue);
                 view$frameworks__base__packages__SystemUI__android_common__SystemUI_core2.setAlpha(0.0f);
                 setViewAlphaAnimation(this.animatorSet, view$frameworks__base__packages__SystemUI__android_common__SystemUI_core2, 1.0f, 300L, 300L);
             }
@@ -433,10 +431,10 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
 
     public final void startCancelAnimation() {
         Log.d("KeyguardEditModeAnimatorController", "startCancelAnimation");
-        boolean isKeyguardState = isKeyguardState();
+        boolean zIsKeyguardState = isKeyguardState();
         int i = 0;
         KeyguardTouchAnimator keyguardTouchAnimator = this.keyguardTouchAnimator;
-        if (!isKeyguardState) {
+        if (!zIsKeyguardState) {
             Log.d("KeyguardEditModeAnimatorController", "startCancelAnimation : is not keyguard state");
             keyguardTouchAnimator.lockscreenShadeTransitionController.isKeyguardAnimatorStarted = false;
             resetViews();
@@ -470,10 +468,10 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
         while (i2 < size) {
             Object obj2 = arrayList.get(i2);
             i2++;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) obj2).intValue()), (Property<View, Float>) View.ALPHA, 1.0f);
-            ofFloat.setInterpolator(this.alphaPathInterpolator);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) obj2).intValue()), (Property<View, Float>) View.ALPHA, 1.0f);
+            objectAnimatorOfFloat.setInterpolator(this.alphaPathInterpolator);
             Unit unit = Unit.INSTANCE;
-            animatorSet.playTogether(ofFloat);
+            animatorSet.playTogether(objectAnimatorOfFloat);
         }
         List list2 = this.noScaleViews;
         ArrayList arrayList2 = new ArrayList();
@@ -492,8 +490,8 @@ public final class KeyguardEditModeAnimatorController extends ViewAnimationContr
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 super.onAnimationEnd(animator);
-                ((KeyguardEditModeControllerImpl) KeyguardEditModeAnimatorController.this.keyguardEditModeController).cancel();
-                ((KeyguardEditModeControllerImpl) KeyguardEditModeAnimatorController.this.keyguardEditModeController).isEditMode = false;
+                ((KeyguardEditModeControllerImpl) this.this$0.keyguardEditModeController).cancel();
+                ((KeyguardEditModeControllerImpl) this.this$0.keyguardEditModeController).isEditMode = false;
             }
         });
         animatorSet.setDuration(200L);

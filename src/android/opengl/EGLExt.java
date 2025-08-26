@@ -27,10 +27,10 @@ public class EGLExt {
     }
 
     public static SyncFence eglDupNativeFenceFDANDROID(EGLDisplay eGLDisplay, EGLSync eGLSync) {
-        int eglDupNativeFenceFDANDROIDImpl = eglDupNativeFenceFDANDROIDImpl(eGLDisplay, eGLSync);
-        Log.d("EGL", "eglDupNativeFence returned " + eglDupNativeFenceFDANDROIDImpl);
-        if (eglDupNativeFenceFDANDROIDImpl >= 0) {
-            return SyncFence.create(ParcelFileDescriptor.adoptFd(eglDupNativeFenceFDANDROIDImpl));
+        int iEglDupNativeFenceFDANDROIDImpl = eglDupNativeFenceFDANDROIDImpl(eGLDisplay, eGLSync);
+        Log.d("EGL", "eglDupNativeFence returned " + iEglDupNativeFenceFDANDROIDImpl);
+        if (iEglDupNativeFenceFDANDROIDImpl >= 0) {
+            return SyncFence.create(ParcelFileDescriptor.adoptFd(iEglDupNativeFenceFDANDROIDImpl));
         }
         return SyncFence.createEmpty();
     }

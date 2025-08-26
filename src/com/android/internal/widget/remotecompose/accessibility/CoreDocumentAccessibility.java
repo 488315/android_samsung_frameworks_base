@@ -89,30 +89,30 @@ public class CoreDocumentAccessibility implements RemoteComposeDocumentAccessibi
 
     @Override // com.android.internal.widget.remotecompose.accessibility.RemoteComposeDocumentAccessibility
     public boolean performAction(Component component, int i, Bundle bundle) {
-        boolean showOnScreen;
+        boolean zShowOnScreen;
         try {
             if (isClickAction(i)) {
-                showOnScreen = performClick(component);
+                zShowOnScreen = performClick(component);
             } else if (isScrollForwardAction(i)) {
-                showOnScreen = scrollDirection(this.mRemoteContext, component, ScrollableComponent.ScrollDirection.FORWARD);
+                zShowOnScreen = scrollDirection(this.mRemoteContext, component, ScrollableComponent.ScrollDirection.FORWARD);
             } else if (isScrollBackwardAction(i)) {
-                showOnScreen = scrollDirection(this.mRemoteContext, component, ScrollableComponent.ScrollDirection.BACKWARD);
+                zShowOnScreen = scrollDirection(this.mRemoteContext, component, ScrollableComponent.ScrollDirection.BACKWARD);
             } else {
                 if (!isShowOnScreenAction(i)) {
                     return false;
                 }
-                showOnScreen = showOnScreen(this.mRemoteContext, component);
+                zShowOnScreen = showOnScreen(this.mRemoteContext, component);
             }
-            return showOnScreen;
+            return zShowOnScreen;
         } finally {
             this.mDocument.needsRepaint();
         }
     }
 
     private boolean showOnScreen(RemoteContext remoteContext, Component component) {
-        ScrollableComponent findScrollable = findScrollable(component);
-        if (findScrollable != null) {
-            return findScrollable.showOnScreen(remoteContext, component);
+        ScrollableComponent scrollableComponentFindScrollable = findScrollable(component);
+        if (scrollableComponentFindScrollable != null) {
+            return scrollableComponentFindScrollable.showOnScreen(remoteContext, component);
         }
         return false;
     }
@@ -188,8 +188,8 @@ public class CoreDocumentAccessibility implements RemoteComposeDocumentAccessibi
         if (!component.isVisible()) {
             return Collections.EMPTY_LIST;
         }
-        AccessibleComponent.Mode mergeMode = mergeMode(component);
-        if (mergeMode == AccessibleComponent.Mode.CLEAR_AND_SET || (!z && mergeMode == AccessibleComponent.Mode.MERGE)) {
+        AccessibleComponent.Mode modeMergeMode = mergeMode(component);
+        if (modeMergeMode == AccessibleComponent.Mode.CLEAR_AND_SET || (!z && modeMergeMode == AccessibleComponent.Mode.MERGE)) {
             return Collections.EMPTY_LIST;
         }
         ArrayList arrayList = new ArrayList();
@@ -233,9 +233,7 @@ public class CoreDocumentAccessibility implements RemoteComposeDocumentAccessibi
         }).flatMap(new Function() { // from class: com.android.internal.widget.remotecompose.accessibility.CoreDocumentAccessibility$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Stream stream;
-                stream = ((ComponentModifiers) ((Operation) obj)).getList().stream();
-                return stream;
+                return ((ComponentModifiers) ((Operation) obj)).getList().stream();
             }
         });
     }

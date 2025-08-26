@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LogcatEchoTrackerDebug$setEchoLevel$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LogLevel $level;
@@ -22,7 +21,6 @@ final class LogcatEchoTrackerDebug$setEchoLevel$1 extends SuspendLambda implemen
     int label;
     final /* synthetic */ LogcatEchoTrackerDebug this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -86,11 +84,11 @@ final class LogcatEchoTrackerDebug$setEchoLevel$1 extends SuspendLambda implemen
         }
         this.this$0.bufferOverrides = linkedHashMap2;
         this.this$0.tagOverrides = linkedHashMap3;
-        List listEchoOverrides = this.this$0.listEchoOverrides();
+        List listListEchoOverrides = this.this$0.listEchoOverrides();
         LogcatEchoTrackerDebug logcatEchoTrackerDebug = this.this$0;
         GlobalSettings globalSettings = logcatEchoTrackerDebug.globalSettings;
         logcatEchoTrackerDebug.settingFormat.getClass();
-        globalSettings.putString("systemui/logbuffer_echo_overrides", LogcatEchoSettingFormat.stringifyOverrides(listEchoOverrides));
+        globalSettings.putString("systemui/logbuffer_echo_overrides", LogcatEchoSettingFormat.stringifyOverrides(listListEchoOverrides));
         return Unit.INSTANCE;
     }
 }

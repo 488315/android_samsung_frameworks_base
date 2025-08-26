@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+import android.system.ErrnoException;
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -28,7 +29,7 @@ public class HidlMemory implements Closeable {
     }
 
     @Override // java.io.Closeable, java.lang.AutoCloseable
-    public void close() throws IOException {
+    public void close() throws IOException, ErrnoException {
         NativeHandle nativeHandle = this.mHandle;
         if (nativeHandle != null) {
             nativeHandle.close();

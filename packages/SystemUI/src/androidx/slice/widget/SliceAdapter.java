@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceAdapter extends RecyclerView.Adapter {
     public boolean mAllowTwoLines;
@@ -40,14 +39,12 @@ public class SliceAdapter extends RecyclerView.Adapter {
     public List mSlices = new ArrayList();
     public Set mLoadingActions = new HashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IdGenerator {
         public long mNextLong = 0;
         public final ArrayMap mCurrentIds = new ArrayMap();
         public final ArrayMap mUsedIds = new ArrayMap();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener, View.OnClickListener {
         public final SliceChildView mSliceChildView;
 
@@ -88,7 +85,6 @@ public class SliceAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceWrapper {
         public final long mId;
         public final SliceContent mItem;
@@ -100,18 +96,18 @@ public class SliceAdapter extends RecyclerView.Adapter {
             this.mType = "message".equals(sliceItem.mSubType) ? SliceQuery.findSubtype(sliceItem, (String) null, "source") != null ? 4 : 5 : ArrayUtils.contains(sliceItem.mHints, "horizontal") ? 3 : !ArrayUtils.contains(sliceItem.mHints, "list_item") ? 2 : 1;
             SliceItem sliceItem2 = sliceContent.mSliceItem;
             idGenerator.getClass();
-            String valueOf = ("slice".equals(sliceItem2.mFormat) || "action".equals(sliceItem2.mFormat)) ? String.valueOf(Arrays.asList(sliceItem2.getSlice().mItems).size()) : sliceItem2.toString("");
+            String strValueOf = ("slice".equals(sliceItem2.mFormat) || "action".equals(sliceItem2.mFormat)) ? String.valueOf(Arrays.asList(sliceItem2.getSlice().mItems).size()) : sliceItem2.toString("");
             ArrayMap arrayMap = idGenerator.mCurrentIds;
-            if (!arrayMap.containsKey(valueOf)) {
+            if (!arrayMap.containsKey(strValueOf)) {
                 long j = idGenerator.mNextLong;
                 idGenerator.mNextLong = 1 + j;
-                arrayMap.put(valueOf, Long.valueOf(j));
+                arrayMap.put(strValueOf, Long.valueOf(j));
             }
-            long longValue = ((Long) arrayMap.get(valueOf)).longValue();
+            long jLongValue = ((Long) arrayMap.get(strValueOf)).longValue();
             ArrayMap arrayMap2 = idGenerator.mUsedIds;
-            Integer num = (Integer) arrayMap2.get(valueOf);
-            arrayMap2.put(valueOf, Integer.valueOf((num != null ? num.intValue() : 0) + 1));
-            this.mId = longValue + (r7 * 10000);
+            Integer num = (Integer) arrayMap2.get(strValueOf);
+            arrayMap2.put(strValueOf, Integer.valueOf((num != null ? num.intValue() : 0) + 1));
+            this.mId = jLongValue + (r7 * 10000);
         }
     }
 
@@ -181,8 +177,8 @@ public class SliceAdapter extends RecyclerView.Adapter {
         if (i != 3) {
             gridRowView = i != 4 ? i != 5 ? new RowView(this.mContext) : LayoutInflater.from(this.mContext).inflate(R.layout.abc_slice_message_local, (ViewGroup) null) : LayoutInflater.from(this.mContext).inflate(R.layout.abc_slice_message, (ViewGroup) null);
         } else {
-            View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.abc_slice_grid, (ViewGroup) null);
-            gridRowView = inflate instanceof GridRowView ? (GridRowView) inflate : new GridRowView(this.mContext, null);
+            View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.abc_slice_grid, (ViewGroup) null);
+            gridRowView = viewInflate instanceof GridRowView ? (GridRowView) viewInflate : new GridRowView(this.mContext, null);
         }
         gridRowView.setLayoutParams(new ViewGroup.LayoutParams(-1, -2));
         return new SliceViewHolder(gridRowView);

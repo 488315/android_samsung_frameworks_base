@@ -26,7 +26,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlViewHolder {
     public ControlsActionButton actionIcon;
@@ -45,7 +44,6 @@ public final class SecControlViewHolder {
     public final TextView subtitle;
     public final TextView title;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,7 +92,7 @@ public final class SecControlViewHolder {
         return new Pair((ClipDrawable) rippleDrawable.findDrawableByLayerId(R.id.clip_layer), (GradientDrawable) rippleDrawable.findDrawableByLayerId(R.id.background));
     }
 
-    public final void initialize(SecControlActionCoordinator secControlActionCoordinator, ControlsUtil controlsUtil, int i) {
+    public final void initialize(SecControlActionCoordinator secControlActionCoordinator, ControlsUtil controlsUtil, int i) throws Resources.NotFoundException {
         this.secControlActionCoordinator = secControlActionCoordinator;
         this.controlsUtil = controlsUtil;
         if (i == 1) {

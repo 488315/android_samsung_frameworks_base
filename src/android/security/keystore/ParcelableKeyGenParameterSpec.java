@@ -120,30 +120,30 @@ public final class ParcelableKeyGenParameterSpec implements Parcelable {
 
     private ParcelableKeyGenParameterSpec(Parcel parcel) {
         AlgorithmParameterSpec eCGenParameterSpec;
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        if (readInt4 == 1) {
+        String string = parcel.readString();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        if (i4 == 1) {
             eCGenParameterSpec = null;
-        } else if (readInt4 == 2) {
+        } else if (i4 == 2) {
             eCGenParameterSpec = new RSAKeyGenParameterSpec(parcel.readInt(), new BigInteger(parcel.createByteArray()));
-        } else if (readInt4 == 3) {
+        } else if (i4 == 3) {
             eCGenParameterSpec = new ECGenParameterSpec(parcel.readString());
         } else {
-            throw new IllegalArgumentException(String.format("Unknown algorithm parameter spec: %d", Integer.valueOf(readInt4)));
+            throw new IllegalArgumentException(String.format("Unknown algorithm parameter spec: %d", Integer.valueOf(i4)));
         }
         X500Principal x500Principal = new X500Principal(parcel.createByteArray());
         BigInteger bigInteger = new BigInteger(parcel.createByteArray());
         Date date = new Date(parcel.readLong());
         Date date2 = new Date(parcel.readLong());
-        Date readDateOrNull = readDateOrNull(parcel);
-        Date readDateOrNull2 = readDateOrNull(parcel);
-        Date readDateOrNull3 = readDateOrNull(parcel);
-        String[] createStringArray = parcel.createStringArray();
-        ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-        this.mSpec = new KeyGenParameterSpec(readString, readInt2, readInt3, eCGenParameterSpec, x500Principal, bigInteger, date, date2, readDateOrNull, readDateOrNull2, readDateOrNull3, readInt, createStringArray, createStringArrayList != null ? Set.copyOf(createStringArrayList) : Collections.EMPTY_SET, parcel.createStringArray(), parcel.createStringArray(), parcel.createStringArray(), parcel.readBoolean(), parcel.readBoolean(), parcel.readInt(), parcel.readInt(), parcel.readBoolean(), parcel.createByteArray(), parcel.readBoolean(), parcel.createIntArray(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readInt(), parcel.readString(), parcel.readLong());
+        Date dateOrNull = readDateOrNull(parcel);
+        Date dateOrNull2 = readDateOrNull(parcel);
+        Date dateOrNull3 = readDateOrNull(parcel);
+        String[] strArrCreateStringArray = parcel.createStringArray();
+        ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+        this.mSpec = new KeyGenParameterSpec(string, i2, i3, eCGenParameterSpec, x500Principal, bigInteger, date, date2, dateOrNull, dateOrNull2, dateOrNull3, i, strArrCreateStringArray, arrayListCreateStringArrayList != null ? Set.copyOf(arrayListCreateStringArrayList) : Collections.EMPTY_SET, parcel.createStringArray(), parcel.createStringArray(), parcel.createStringArray(), parcel.readBoolean(), parcel.readBoolean(), parcel.readInt(), parcel.readInt(), parcel.readBoolean(), parcel.createByteArray(), parcel.readBoolean(), parcel.createIntArray(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(), parcel.readInt(), parcel.readString(), parcel.readLong());
     }
 
     public KeyGenParameterSpec getSpec() {

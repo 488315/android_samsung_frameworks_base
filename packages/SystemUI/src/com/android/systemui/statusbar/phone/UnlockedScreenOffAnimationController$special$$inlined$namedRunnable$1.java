@@ -4,7 +4,6 @@ import android.os.TraceNameSupplier;
 import com.android.systemui.LsRune;
 import com.android.systemui.Rune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnlockedScreenOffAnimationController$special$$inlined$namedRunnable$1 implements Runnable, TraceNameSupplier {
     public final /* synthetic */ String $tag;
@@ -29,7 +28,7 @@ public final class UnlockedScreenOffAnimationController$special$$inlined$namedRu
         Rune.runIf(new Runnable() { // from class: com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController$startLightRevealCallback$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                SecUnlockedScreenOffAnimationHelper.this.getClass();
+                secUnlockedScreenOffAnimationHelper.getClass();
                 SecUnlockedScreenOffAnimationHelper.logD("onStartAnimation");
             }
         }, z);

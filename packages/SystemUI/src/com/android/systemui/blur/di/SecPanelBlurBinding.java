@@ -3,13 +3,11 @@ package com.android.systemui.blur.di;
 import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface SecPanelBlurBinding {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BlurType {
         public static final /* synthetic */ BlurType[] $VALUES;
         public static final BlurType ALT_VIEW;
@@ -50,5 +48,7 @@ public interface SecPanelBlurBinding {
 
     float getInterpolation(float f);
 
-    void setFraction(float f);
+    void setFraction(float f, BlurType blurType);
+
+    void updateConfigurationChanged();
 }

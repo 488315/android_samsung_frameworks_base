@@ -78,19 +78,19 @@ public final class Rlog {
     }
 
     public static String pii(String str, Object obj) {
-        String valueOf = String.valueOf(obj);
-        if (obj == null || TextUtils.isEmpty(valueOf) || (!SHIP_BUILD && isLoggable(str, 2))) {
-            return valueOf;
+        String strValueOf = String.valueOf(obj);
+        if (obj == null || TextUtils.isEmpty(strValueOf) || (!SHIP_BUILD && isLoggable(str, 2))) {
+            return strValueOf;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(valueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(strValueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String pii(boolean z, Object obj) {
-        String valueOf = String.valueOf(obj);
-        if (obj == null || TextUtils.isEmpty(valueOf) || (!SHIP_BUILD && z)) {
-            return valueOf;
+        String strValueOf = String.valueOf(obj);
+        if (obj == null || TextUtils.isEmpty(strValueOf) || (!SHIP_BUILD && z)) {
+            return strValueOf;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(valueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(strValueOf.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private static String secureHash(byte[] bArr) {

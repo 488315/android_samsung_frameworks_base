@@ -5,7 +5,6 @@ import android.net.NetworkKey;
 import android.net.wifi.WifiInfo;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WifiSignalController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -57,9 +56,9 @@ public final /* synthetic */ class WifiSignalController$$ExternalSyntheticLambda
                             wifiStatusTracker.isCarrierMerged = wifiStatusTracker.mWifiInfo.isCarrierMerged();
                             wifiStatusTracker.subId = wifiStatusTracker.mWifiInfo.getSubscriptionId();
                             wifiStatusTracker.updateRssi(wifiStatusTracker.mWifiInfo.getRssi());
-                            NetworkKey createFromWifiInfo = NetworkKey.createFromWifiInfo(wifiStatusTracker.mWifiInfo);
-                            if (wifiStatusTracker.mWifiNetworkScoreCache.getScoredNetwork(createFromWifiInfo) == null) {
-                                wifiStatusTracker.mNetworkScoreManager.requestScores(new NetworkKey[]{createFromWifiInfo});
+                            NetworkKey networkKeyCreateFromWifiInfo = NetworkKey.createFromWifiInfo(wifiStatusTracker.mWifiInfo);
+                            if (wifiStatusTracker.mWifiNetworkScoreCache.getScoredNetwork(networkKeyCreateFromWifiInfo) == null) {
+                                wifiStatusTracker.mNetworkScoreManager.requestScores(new NetworkKey[]{networkKeyCreateFromWifiInfo});
                             }
                         }
                     }

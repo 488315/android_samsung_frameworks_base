@@ -47,7 +47,7 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
         this.tag = i;
     }
 
-    public GeneralName(int i, String str) {
+    public GeneralName(int i, String str) throws NumberFormatException {
         this.tag = i;
         if (i == 1 || i == 2 || i == 6) {
             this.obj = new DERIA5String(str);
@@ -123,68 +123,70 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
         return this.obj;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0035  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(this.tag);
         stringBuffer.append(": ");
         int i = this.tag;
-        if (i != 1 && i != 2) {
-            if (i == 4) {
-                stringBuffer.append(X500Name.getInstance(this.obj).toString());
-            } else if (i != 6) {
-                stringBuffer.append(this.obj.toString());
-            }
-            return stringBuffer.toString();
+        if (i == 1 || i == 2) {
+            stringBuffer.append(ASN1IA5String.getInstance(this.obj).getString());
+        } else if (i == 4) {
+            stringBuffer.append(X500Name.getInstance(this.obj).toString());
+        } else if (i != 6) {
+            stringBuffer.append(this.obj.toString());
         }
-        stringBuffer.append(ASN1IA5String.getInstance(this.obj).getString());
         return stringBuffer.toString();
     }
 
-    private byte[] toGeneralNameEncoding(String str) {
-        int[] parseMask;
+    private byte[] toGeneralNameEncoding(String str) throws NumberFormatException {
+        int[] mask;
         if (IPAddress.isValidIPv6WithNetmask(str) || IPAddress.isValidIPv6(str)) {
-            int indexOf = str.indexOf(47);
-            if (indexOf < 0) {
+            int iIndexOf = str.indexOf(47);
+            if (iIndexOf < 0) {
                 byte[] bArr = new byte[16];
                 copyInts(parseIPv6(str), bArr, 0);
                 return bArr;
             }
             byte[] bArr2 = new byte[32];
-            copyInts(parseIPv6(str.substring(0, indexOf)), bArr2, 0);
-            String substring = str.substring(indexOf + 1);
-            if (substring.indexOf(58) > 0) {
-                parseMask = parseIPv6(substring);
+            copyInts(parseIPv6(str.substring(0, iIndexOf)), bArr2, 0);
+            String strSubstring = str.substring(iIndexOf + 1);
+            if (strSubstring.indexOf(58) > 0) {
+                mask = parseIPv6(strSubstring);
             } else {
-                parseMask = parseMask(substring);
+                mask = parseMask(strSubstring);
             }
-            copyInts(parseMask, bArr2, 16);
+            copyInts(mask, bArr2, 16);
             return bArr2;
         }
         if (!IPAddress.isValidIPv4WithNetmask(str) && !IPAddress.isValidIPv4(str)) {
             return null;
         }
-        int indexOf2 = str.indexOf(47);
-        if (indexOf2 < 0) {
+        int iIndexOf2 = str.indexOf(47);
+        if (iIndexOf2 < 0) {
             byte[] bArr3 = new byte[4];
             parseIPv4(str, bArr3, 0);
             return bArr3;
         }
         byte[] bArr4 = new byte[8];
-        parseIPv4(str.substring(0, indexOf2), bArr4, 0);
-        String substring2 = str.substring(indexOf2 + 1);
-        if (substring2.indexOf(46) > 0) {
-            parseIPv4(substring2, bArr4, 4);
+        parseIPv4(str.substring(0, iIndexOf2), bArr4, 0);
+        String strSubstring2 = str.substring(iIndexOf2 + 1);
+        if (strSubstring2.indexOf(46) > 0) {
+            parseIPv4(strSubstring2, bArr4, 4);
             return bArr4;
         }
-        parseIPv4Mask(substring2, bArr4, 4);
+        parseIPv4Mask(strSubstring2, bArr4, 4);
         return bArr4;
     }
 
-    private void parseIPv4Mask(String str, byte[] bArr, int i) {
-        int parseInt = Integer.parseInt(str);
-        for (int i2 = 0; i2 != parseInt; i2++) {
-            int i3 = (i2 / 8) + i;
-            bArr[i3] = (byte) (bArr[i3] | (1 << (7 - (i2 % 8))));
+    private void parseIPv4Mask(String str, byte[] bArr, int i) throws NumberFormatException {
+        int i2 = Integer.parseInt(str);
+        for (int i3 = 0; i3 != i2; i3++) {
+            int i4 = (i3 / 8) + i;
+            bArr[i4] = (byte) (bArr[i4] | (1 << (7 - (i3 % 8))));
         }
     }
 
@@ -197,12 +199,12 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
         }
     }
 
-    private int[] parseMask(String str) {
+    private int[] parseMask(String str) throws NumberFormatException {
         int[] iArr = new int[8];
-        int parseInt = Integer.parseInt(str);
-        for (int i = 0; i != parseInt; i++) {
-            int i2 = i / 16;
-            iArr[i2] = iArr[i2] | (1 << (15 - (i % 16)));
+        int i = Integer.parseInt(str);
+        for (int i2 = 0; i2 != i; i2++) {
+            int i3 = i2 / 16;
+            iArr[i3] = iArr[i3] | (1 << (15 - (i2 % 16)));
         }
         return iArr;
     }
@@ -225,21 +227,21 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
         int i = -1;
         int i2 = 0;
         while (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (nextToken.equals(":")) {
+            String strNextToken = stringTokenizer.nextToken();
+            if (strNextToken.equals(":")) {
                 iArr[i2] = 0;
                 int i3 = i2;
                 i2++;
                 i = i3;
-            } else if (nextToken.indexOf(46) < 0) {
+            } else if (strNextToken.indexOf(46) < 0) {
                 int i4 = i2 + 1;
-                iArr[i2] = Integer.parseInt(nextToken, 16);
+                iArr[i2] = Integer.parseInt(strNextToken, 16);
                 if (stringTokenizer.hasMoreTokens()) {
                     stringTokenizer.nextToken();
                 }
                 i2 = i4;
             } else {
-                StringTokenizer stringTokenizer2 = new StringTokenizer(nextToken, MediaMetrics.SEPARATOR);
+                StringTokenizer stringTokenizer2 = new StringTokenizer(strNextToken, MediaMetrics.SEPARATOR);
                 int i5 = i2 + 1;
                 iArr[i2] = (Integer.parseInt(stringTokenizer2.nextToken()) << 8) | Integer.parseInt(stringTokenizer2.nextToken());
                 i2 += 2;

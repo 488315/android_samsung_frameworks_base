@@ -1,7 +1,6 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiControlManager;
 import android.hardware.hdmi.IHdmiCecSettingChangeListener;
 import android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener;
 import android.hardware.hdmi.IHdmiControlStatusChangeListener;
@@ -602,13 +601,13 @@ public final class HdmiControlManager {
             Log.e(TAG, "removeHotplugEventListener: HdmiControlService is not available");
             return;
         }
-        IHdmiHotplugEventListener remove = this.mHotplugEventListeners.remove(hotplugEventListener);
-        if (remove == null) {
+        IHdmiHotplugEventListener iHdmiHotplugEventListenerRemove = this.mHotplugEventListeners.remove(hotplugEventListener);
+        if (iHdmiHotplugEventListenerRemove == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
         }
         try {
-            this.mService.removeHotplugEventListener(remove);
+            this.mService.removeHotplugEventListener(iHdmiHotplugEventListenerRemove);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -626,18 +625,18 @@ public final class HdmiControlManager {
 
         @Override // android.hardware.hdmi.IHdmiHotplugEventListener
         public void onReceived(final HdmiHotplugEvent hdmiHotplugEvent) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final HotplugEventListener hotplugEventListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HdmiControlManager.HotplugEventListener.this.onReceived(hdmiHotplugEvent);
+                        hotplugEventListener.onReceived(hdmiHotplugEvent);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -673,13 +672,13 @@ public final class HdmiControlManager {
             Log.e(TAG, "removeHdmiControlStatusChangeListener: HdmiControlService is not available");
             return;
         }
-        IHdmiControlStatusChangeListener remove = this.mHdmiControlStatusChangeListeners.remove(hdmiControlStatusChangeListener);
-        if (remove == null) {
+        IHdmiControlStatusChangeListener iHdmiControlStatusChangeListenerRemove = this.mHdmiControlStatusChangeListeners.remove(hdmiControlStatusChangeListener);
+        if (iHdmiControlStatusChangeListenerRemove == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
         }
         try {
-            this.mService.removeHdmiControlStatusChangeListener(remove);
+            this.mService.removeHdmiControlStatusChangeListener(iHdmiControlStatusChangeListenerRemove);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -697,18 +696,18 @@ public final class HdmiControlManager {
 
         @Override // android.hardware.hdmi.IHdmiControlStatusChangeListener
         public void onStatusChange(final int i, final boolean z) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final HdmiControlStatusChangeListener hdmiControlStatusChangeListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HdmiControlManager.HdmiControlStatusChangeListener.this.onStatusChange(i, z);
+                        hdmiControlStatusChangeListener.onStatusChange(i, z);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -726,10 +725,10 @@ public final class HdmiControlManager {
             Log.e(TAG, "listener is already registered");
             return;
         }
-        IHdmiCecVolumeControlFeatureListener createHdmiCecVolumeControlFeatureListenerWrapper = createHdmiCecVolumeControlFeatureListenerWrapper(executor, hdmiCecVolumeControlFeatureListener);
-        this.mHdmiCecVolumeControlFeatureListeners.put(hdmiCecVolumeControlFeatureListener, createHdmiCecVolumeControlFeatureListenerWrapper);
+        IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListenerCreateHdmiCecVolumeControlFeatureListenerWrapper = createHdmiCecVolumeControlFeatureListenerWrapper(executor, hdmiCecVolumeControlFeatureListener);
+        this.mHdmiCecVolumeControlFeatureListeners.put(hdmiCecVolumeControlFeatureListener, iHdmiCecVolumeControlFeatureListenerCreateHdmiCecVolumeControlFeatureListenerWrapper);
         try {
-            this.mService.addHdmiCecVolumeControlFeatureListener(createHdmiCecVolumeControlFeatureListenerWrapper);
+            this.mService.addHdmiCecVolumeControlFeatureListener(iHdmiCecVolumeControlFeatureListenerCreateHdmiCecVolumeControlFeatureListenerWrapper);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -740,13 +739,13 @@ public final class HdmiControlManager {
             Log.e(TAG, "removeHdmiCecVolumeControlFeatureListener: HdmiControlService is not available");
             return;
         }
-        IHdmiCecVolumeControlFeatureListener remove = this.mHdmiCecVolumeControlFeatureListeners.remove(hdmiCecVolumeControlFeatureListener);
-        if (remove == null) {
+        IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListenerRemove = this.mHdmiCecVolumeControlFeatureListeners.remove(hdmiCecVolumeControlFeatureListener);
+        if (iHdmiCecVolumeControlFeatureListenerRemove == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
         }
         try {
-            this.mService.removeHdmiCecVolumeControlFeatureListener(remove);
+            this.mService.removeHdmiCecVolumeControlFeatureListener(iHdmiCecVolumeControlFeatureListenerRemove);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -764,18 +763,18 @@ public final class HdmiControlManager {
 
         @Override // android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener
         public void onHdmiCecVolumeControlFeature(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final HdmiCecVolumeControlFeatureListener hdmiCecVolumeControlFeatureListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HdmiControlManager.HdmiCecVolumeControlFeatureListener.this.onHdmiCecVolumeControlFeature(i);
+                        hdmiCecVolumeControlFeatureListener.onHdmiCecVolumeControlFeature(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -810,13 +809,13 @@ public final class HdmiControlManager {
             Log.e(TAG, "removeCecSettingChangeListener: HdmiControlService is not available");
             return;
         }
-        IHdmiCecSettingChangeListener remove = !this.mCecSettingChangeListeners.containsKey(str) ? null : this.mCecSettingChangeListeners.get(str).remove(cecSettingChangeListener);
-        if (remove == null) {
+        IHdmiCecSettingChangeListener iHdmiCecSettingChangeListenerRemove = !this.mCecSettingChangeListeners.containsKey(str) ? null : this.mCecSettingChangeListeners.get(str).remove(cecSettingChangeListener);
+        if (iHdmiCecSettingChangeListenerRemove == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
         }
         try {
-            this.mService.removeCecSettingChangeListener(str, remove);
+            this.mService.removeCecSettingChangeListener(str, iHdmiCecSettingChangeListenerRemove);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -834,18 +833,18 @@ public final class HdmiControlManager {
 
         @Override // android.hardware.hdmi.IHdmiCecSettingChangeListener
         public void onChange(final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CecSettingChangeListener cecSettingChangeListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HdmiControlManager.CecSettingChangeListener.this.onChange(str);
+                        cecSettingChangeListener.onChange(str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

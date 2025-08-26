@@ -59,13 +59,13 @@ public class SemStatusBarManager {
         if (callers == null) {
             return null;
         }
-        String[] split = callers.split("[.]");
-        for (int i = 0; i < split.length; i++) {
+        String[] strArrSplit = callers.split("[.]");
+        for (int i = 0; i < strArrSplit.length; i++) {
         }
-        if (split.length <= 0) {
+        if (strArrSplit.length <= 0) {
             return null;
         }
-        return NavigationBarInflaterView.GRAVITY_SEPARATOR + split[split.length - 1];
+        return NavigationBarInflaterView.GRAVITY_SEPARATOR + strArrSplit[strArrSplit.length - 1];
     }
 
     public void disable(int i) {

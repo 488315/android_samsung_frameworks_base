@@ -24,7 +24,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SystemEventCoordinator {
     public final Context context;
@@ -48,7 +47,7 @@ public final class SystemEventCoordinator {
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
             public final void onBatteryLevelChanged(int i, boolean z, boolean z2) {
                 boolean z3 = this.stateKnown;
-                SystemEventCoordinator systemEventCoordinator = SystemEventCoordinator.this;
+                SystemEventCoordinator systemEventCoordinator = this.this$0;
                 if (!z3) {
                     this.stateKnown = true;
                     this.plugged = z;
@@ -77,7 +76,7 @@ public final class SystemEventCoordinator {
                 EmptyList emptyList = EmptyList.INSTANCE;
                 this.currentPrivacyItems = emptyList;
                 this.previousPrivacyItems = emptyList;
-                this.timeLastEmpty = SystemEventCoordinator.this.systemClock.elapsedRealtime();
+                this.timeLastEmpty = this.this$0.systemClock.elapsedRealtime();
             }
 
             public static boolean uniqueItemsMatch(List list, List list2) {
@@ -118,9 +117,9 @@ public final class SystemEventCoordinator {
                 if (uniqueItemsMatch(list, this.currentPrivacyItems)) {
                     return;
                 }
-                boolean isEmpty = list.isEmpty();
-                SystemEventCoordinator systemEventCoordinator = SystemEventCoordinator.this;
-                if (isEmpty) {
+                boolean zIsEmpty = list.isEmpty();
+                SystemEventCoordinator systemEventCoordinator = this.this$0;
+                if (zIsEmpty) {
                     this.previousPrivacyItems = this.currentPrivacyItems;
                     this.timeLastEmpty = systemEventCoordinator.systemClock.elapsedRealtime();
                 }

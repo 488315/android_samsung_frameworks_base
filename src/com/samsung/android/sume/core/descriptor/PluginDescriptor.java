@@ -26,13 +26,13 @@ public abstract class PluginDescriptor extends MFDescriptorBase {
         return (String) Optional.ofNullable(getAll().get(Integer.valueOf(PLUGIN_CLASS_NAME))).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return PluginDescriptor.this.m9532x62801927();
+                return this.f$0.m9545x62801927();
             }
         });
     }
 
     /* renamed from: lambda$getPluginClassName$0$com-samsung-android-sume-core-descriptor-PluginDescriptor, reason: not valid java name */
-    /* synthetic */ Object m9532x62801927() {
+    /* synthetic */ Object m9545x62801927() {
         return Optional.ofNullable(getPluginClass()).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {

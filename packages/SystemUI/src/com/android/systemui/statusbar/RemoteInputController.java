@@ -20,7 +20,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RemoteInputController {
     public final Delegate mDelegate;
@@ -31,7 +30,6 @@ public class RemoteInputController {
     public final ArrayList mCallbacks = new ArrayList(3);
     public Boolean mLastAppliedRemoteInputActive = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Delegate {
     }
 
@@ -42,21 +40,21 @@ public class RemoteInputController {
     }
 
     public final void apply(NotificationEntry notificationEntry) {
-        boolean pruneWeakThenRemoveAndContains = pruneWeakThenRemoveAndContains(notificationEntry, null, null);
-        NotificationStackScrollLayoutController.AnonymousClass18 anonymousClass18 = (NotificationStackScrollLayoutController.AnonymousClass18) this.mDelegate;
-        anonymousClass18.getClass();
+        boolean zPruneWeakThenRemoveAndContains = pruneWeakThenRemoveAndContains(notificationEntry, null, null);
+        NotificationStackScrollLayoutController.AnonymousClass19 anonymousClass19 = (NotificationStackScrollLayoutController.AnonymousClass19) this.mDelegate;
+        anonymousClass19.getClass();
         int i = SceneContainerFlag.$r8$clinit;
-        ((HeadsUpManagerImpl) NotificationStackScrollLayoutController.this.mHeadsUpManager).setRemoteInputActive(notificationEntry, pruneWeakThenRemoveAndContains);
+        ((HeadsUpManagerImpl) NotificationStackScrollLayoutController.this.mHeadsUpManager).setRemoteInputActive(notificationEntry, zPruneWeakThenRemoveAndContains);
         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
         if (expandableNotificationRow != null) {
             expandableNotificationRow.notifyHeightChanged(true);
         }
-        boolean isRemoteInputActive$1 = isRemoteInputActive$1();
+        boolean zIsRemoteInputActive$1 = isRemoteInputActive$1();
         int size = this.mCallbacks.size();
         for (int i2 = 0; i2 < size; i2++) {
-            ((Callback) this.mCallbacks.get(i2)).onRemoteInputActive(isRemoteInputActive$1);
+            ((Callback) this.mCallbacks.get(i2)).onRemoteInputActive(zIsRemoteInputActive$1);
         }
-        this.mLastAppliedRemoteInputActive = Boolean.valueOf(isRemoteInputActive$1);
+        this.mLastAppliedRemoteInputActive = Boolean.valueOf(zIsRemoteInputActive$1);
     }
 
     public final void closeRemoteInputs(boolean z) {
@@ -129,8 +127,8 @@ public class RemoteInputController {
 
     public final void removeRemoteInput(NotificationEntry notificationEntry, Object obj, String str) {
         Objects.requireNonNull(notificationEntry);
-        boolean pruneWeakThenRemoveAndContains = pruneWeakThenRemoveAndContains(notificationEntry, null, null);
-        boolean isRemoteInputActive$1 = isRemoteInputActive$1();
+        boolean zPruneWeakThenRemoveAndContains = pruneWeakThenRemoveAndContains(notificationEntry, null, null);
+        boolean zIsRemoteInputActive$1 = isRemoteInputActive$1();
         boolean z = notificationEntry.mRemoteEditImeVisible;
         boolean z2 = notificationEntry.mRemoteEditImeAnimatingAway;
         String notificationStyle = notificationEntry.getNotificationStyle();
@@ -139,36 +137,35 @@ public class RemoteInputController {
         LogLevel logLevel = LogLevel.DEBUG;
         RemoteInputControllerLogger$$ExternalSyntheticLambda0 remoteInputControllerLogger$$ExternalSyntheticLambda0 = new RemoteInputControllerLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = remoteInputControllerLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("RemoteInputControllerLog", logLevel, remoteInputControllerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("RemoteInputControllerLog", logLevel, remoteInputControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         String str2 = notificationEntry.mKey;
         logMessageImpl.str1 = str2;
         logMessageImpl.str2 = str;
         logMessageImpl.str3 = notificationStyle;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
-        logMessageImpl.bool3 = pruneWeakThenRemoveAndContains;
-        logMessageImpl.bool4 = isRemoteInputActive$1;
-        logBuffer.commit(obtain);
-        if (pruneWeakThenRemoveAndContains) {
+        logMessageImpl.bool3 = zPruneWeakThenRemoveAndContains;
+        logMessageImpl.bool4 = zIsRemoteInputActive$1;
+        logBuffer.commit(logMessageObtain);
+        if (zPruneWeakThenRemoveAndContains) {
             pruneWeakThenRemoveAndContains(null, notificationEntry, obj);
             apply(notificationEntry);
             return;
         }
         Boolean bool = this.mLastAppliedRemoteInputActive;
-        if (bool == null || !bool.booleanValue() || isRemoteInputActive$1) {
+        if (bool == null || !bool.booleanValue() || zIsRemoteInputActive$1) {
             return;
         }
         String notificationStyle2 = notificationEntry.getNotificationStyle();
-        LogMessage obtain2 = logBuffer.obtain("RemoteInputControllerLog", logLevel, new RemoteInputControllerLogger$$ExternalSyntheticLambda0(1), null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer.obtain("RemoteInputControllerLog", logLevel, new RemoteInputControllerLogger$$ExternalSyntheticLambda0(1), null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.str1 = str2;
         logMessageImpl2.str2 = str;
         logMessageImpl2.str3 = notificationStyle2;
-        logBuffer.commit(obtain2);
+        logBuffer.commit(logMessageObtain2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         default void onRemoteInputActive(boolean z) {
         }

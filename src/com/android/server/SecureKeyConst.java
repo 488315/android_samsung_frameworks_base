@@ -90,8 +90,8 @@ public final class SecureKeyConst {
 
     public static boolean checkblockDrkWriting() {
         boolean z = Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) > 34;
-        boolean contains = "a36xq SC-54F gtact5pro gtact5prowifi".contains(SystemProperties.get("ro.product.device"));
-        Log.i("DEVROOT#ATCmd", "Default : " + z + ", specificDevice : " + contains);
-        return z && !contains;
+        boolean zContains = "a36xq SC-54F gtact5pro gtact5prowifi".contains(SystemProperties.get("ro.product.device"));
+        Log.i("DEVROOT#ATCmd", "Default : " + z + ", specificDevice : " + zContains);
+        return z && !zContains;
     }
 }

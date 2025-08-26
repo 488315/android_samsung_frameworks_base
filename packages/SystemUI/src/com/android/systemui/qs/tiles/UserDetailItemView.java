@@ -3,6 +3,7 @@ package com.android.systemui.qs.tiles;
 import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
@@ -18,7 +19,6 @@ import com.android.systemui.LsRune;
 import com.android.systemui.res.R$styleable;
 import com.android.systemui.statusbar.phone.UserAvatarView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class UserDetailItemView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,10 +62,10 @@ public class UserDetailItemView extends LinearLayout {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void drawableStateChanged() {
+    public final void drawableStateChanged() throws Resources.NotFoundException {
         super.drawableStateChanged();
         this.mName.setTextAppearance(ArrayUtils.contains(getDrawableState(), R.attr.state_activated) ? this.mActivatedStyle : this.mRegularStyle);
-        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.1f);
+        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.15f);
     }
 
     @Override // android.view.View
@@ -74,13 +74,13 @@ public class UserDetailItemView extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
-        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.1f);
+        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.15f);
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         this.mAvatar = (UserAvatarView) findViewById(com.android.systemui.R.id.user_picture);
         TextView textView = (TextView) findViewById(com.android.systemui.R.id.user_name);
         this.mName = textView;
@@ -91,7 +91,7 @@ public class UserDetailItemView extends LinearLayout {
             this.mActivatedStyle = this.mName.getExplicitStyle();
         }
         this.mName.setTextAppearance(ArrayUtils.contains(getDrawableState(), R.attr.state_activated) ? this.mActivatedStyle : this.mRegularStyle);
-        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.1f);
+        FontSizeUtils.updateFontSize(this.mName, UserManager.supportsMultipleUsers() ? com.android.systemui.R.dimen.sec_qs_mum_name_font_size : com.android.systemui.R.dimen.qs_tile_text_size, 0.8f, 1.15f);
         this.mRestrictedPadlock = findViewById(com.android.systemui.R.id.restricted_padlock);
     }
 
@@ -112,16 +112,16 @@ public class UserDetailItemView extends LinearLayout {
 
     public UserDetailItemView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.UserDetailItemView, i, i2);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.UserDetailItemView, i, i2);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i3 = 0; i3 < indexCount; i3++) {
-            int index = obtainStyledAttributes.getIndex(i3);
+            int index = typedArrayObtainStyledAttributes.getIndex(i3);
             if (index == 1) {
-                this.mRegularStyle = obtainStyledAttributes.getResourceId(index, 0);
+                this.mRegularStyle = typedArrayObtainStyledAttributes.getResourceId(index, 0);
             } else if (index == 0) {
-                this.mActivatedStyle = obtainStyledAttributes.getResourceId(index, 0);
+                this.mActivatedStyle = typedArrayObtainStyledAttributes.getResourceId(index, 0);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

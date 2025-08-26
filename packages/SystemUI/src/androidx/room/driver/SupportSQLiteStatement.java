@@ -7,10 +7,10 @@ import androidx.sqlite.SQLiteStatement;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteProgram;
 import androidx.sqlite.db.SupportSQLiteQuery;
+import java.io.IOException;
 import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SupportSQLiteStatement implements SQLiteStatement {
     public static final Companion Companion = new Companion(null);
@@ -18,7 +18,6 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
     public boolean isClosed;
     public final String sql;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +27,6 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SupportAndroidSQLiteStatement extends SupportSQLiteStatement {
         public int[] bindingTypes;
         public byte[][] blobBindings;
@@ -37,7 +35,6 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
         public long[] longBindings;
         public String[] stringBindings;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -148,7 +145,7 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
                 this.cursor = this.db.query(new SupportSQLiteQuery() { // from class: androidx.room.driver.SupportSQLiteStatement$SupportAndroidSQLiteStatement$ensureCursor$1
                     @Override // androidx.sqlite.db.SupportSQLiteQuery
                     public final void bindTo(SupportSQLiteProgram supportSQLiteProgram) {
-                        SupportSQLiteStatement.SupportAndroidSQLiteStatement supportAndroidSQLiteStatement = SupportSQLiteStatement.SupportAndroidSQLiteStatement.this;
+                        SupportSQLiteStatement.SupportAndroidSQLiteStatement supportAndroidSQLiteStatement = this.this$0;
                         int length = supportAndroidSQLiteStatement.bindingTypes.length;
                         for (int i = 1; i < length; i++) {
                             int i2 = supportAndroidSQLiteStatement.bindingTypes[i];
@@ -172,7 +169,7 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
 
                     @Override // androidx.sqlite.db.SupportSQLiteQuery
                     public final String getSql() {
-                        return SupportSQLiteStatement.SupportAndroidSQLiteStatement.this.sql;
+                        return this.this$0.sql;
                     }
                 });
             }
@@ -275,7 +272,6 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
         this.sql = str;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SupportOtherAndroidSQLiteStatement extends SupportSQLiteStatement {
         public final androidx.sqlite.db.SupportSQLiteStatement delegate;
 
@@ -303,7 +299,7 @@ public abstract class SupportSQLiteStatement implements SQLiteStatement {
         }
 
         @Override // java.lang.AutoCloseable
-        public final void close() {
+        public final void close() throws IOException {
             this.delegate.close();
             this.isClosed = true;
         }

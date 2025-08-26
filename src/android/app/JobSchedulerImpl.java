@@ -37,14 +37,14 @@ public class JobSchedulerImpl extends JobScheduler {
 
     @Override // android.app.job.JobScheduler
     public JobScheduler forNamespace(String str) {
-        String sanitizeNamespace = sanitizeNamespace(str);
-        if (sanitizeNamespace == null) {
+        String strSanitizeNamespace = sanitizeNamespace(str);
+        if (strSanitizeNamespace == null) {
             throw new NullPointerException("namespace cannot be null");
         }
-        if (sanitizeNamespace.isEmpty()) {
+        if (strSanitizeNamespace.isEmpty()) {
             throw new IllegalArgumentException("namespace cannot be empty");
         }
-        return new JobSchedulerImpl(this, sanitizeNamespace);
+        return new JobSchedulerImpl(this, strSanitizeNamespace);
     }
 
     @Override // android.app.job.JobScheduler

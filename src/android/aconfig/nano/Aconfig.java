@@ -95,21 +95,21 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.name.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.name);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.name);
             }
             if (!this.namespace.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.namespace);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.namespace);
             }
             if (!this.description.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.description);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.description);
             }
             String[] strArr = this.bug;
             if (strArr != null && strArr.length > 0) {
                 int i = 0;
+                int iComputeStringSizeNoTag = 0;
                 int i2 = 0;
-                int i3 = 0;
                 while (true) {
                     String[] strArr2 = this.bug;
                     if (i >= strArr2.length) {
@@ -117,39 +117,39 @@ public interface Aconfig {
                     }
                     String str = strArr2[i];
                     if (str != null) {
-                        i3++;
-                        i2 += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
+                        i2++;
+                        iComputeStringSizeNoTag += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
                     }
                     i++;
                 }
-                computeSerializedSize = computeSerializedSize + i2 + i3;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag + i2;
             }
             boolean z = this.isFixedReadOnly;
             if (z) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(5, z);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(5, z);
             }
             boolean z2 = this.isExported;
             if (z2) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(6, z2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(6, z2);
             }
             flag_metadata flag_metadataVar = this.metadata;
-            return flag_metadataVar != null ? computeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(7, flag_metadataVar) : computeSerializedSize;
+            return flag_metadataVar != null ? iComputeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(7, flag_metadataVar) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public flag_declaration mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.name = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     this.namespace = codedInputByteBufferNano.readString();
-                } else if (readTag == 26) {
+                } else if (tag == 26) {
                     this.description = codedInputByteBufferNano.readString();
-                } else if (readTag == 34) {
+                } else if (tag == 34) {
                     int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 34);
                     String[] strArr = this.bug;
                     int length = strArr == null ? 0 : strArr.length;
@@ -165,12 +165,12 @@ public interface Aconfig {
                     }
                     strArr2[length] = codedInputByteBufferNano.readString();
                     this.bug = strArr2;
-                } else if (readTag == 40) {
+                } else if (tag == 40) {
                     this.isFixedReadOnly = codedInputByteBufferNano.readBool();
-                } else if (readTag == 48) {
+                } else if (tag == 48) {
                     this.isExported = codedInputByteBufferNano.readBool();
-                } else if (readTag != 58) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 58) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -231,26 +231,26 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.purpose;
-            return i != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(1, i) : computeSerializedSize;
+            return i != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(1, i) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public flag_metadata mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 8) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 8) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2) {
-                        this.purpose = readInt32;
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2) {
+                        this.purpose = int32;
                     }
                 }
             }
@@ -323,9 +323,9 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.package_.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
             }
             flag_declaration[] flag_declarationVarArr = this.flag;
             if (flag_declarationVarArr != null && flag_declarationVarArr.length > 0) {
@@ -337,24 +337,24 @@ public interface Aconfig {
                     }
                     flag_declaration flag_declarationVar = flag_declarationVarArr2[i];
                     if (flag_declarationVar != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(2, flag_declarationVar);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(2, flag_declarationVar);
                     }
                     i++;
                 }
             }
-            return !this.container.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(3, this.container) : computeSerializedSize;
+            return !this.container.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(3, this.container) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public flag_declarations mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.package_ = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 18);
                     flag_declaration[] flag_declarationVarArr = this.flag;
                     int length = flag_declarationVarArr == null ? 0 : flag_declarationVarArr.length;
@@ -374,8 +374,8 @@ public interface Aconfig {
                     flag_declarationVarArr2[length] = flag_declarationVar2;
                     codedInputByteBufferNano.readMessage(flag_declarationVar2);
                     this.flag = flag_declarationVarArr2;
-                } else if (readTag != 26) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 26) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -446,45 +446,45 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.package_.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
             }
             if (!this.name.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.name);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.name);
             }
             int i = this.state;
             if (i != 1) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
             }
             int i2 = this.permission;
-            return i2 != 1 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i2) : computeSerializedSize;
+            return i2 != 1 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i2) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public flag_value mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.package_ = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     this.name = codedInputByteBufferNano.readString();
-                } else if (readTag == 24) {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 1 || readInt32 == 2) {
-                        this.state = readInt32;
+                } else if (tag == 24) {
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 1 || int32 == 2) {
+                        this.state = int32;
                     }
-                } else if (readTag != 32) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 32) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt322 = codedInputByteBufferNano.readInt32();
-                    if (readInt322 == 1 || readInt322 == 2) {
-                        this.permission = readInt322;
+                    int int322 = codedInputByteBufferNano.readInt32();
+                    if (int322 == 1 || int322 == 2) {
+                        this.permission = int322;
                     }
                 }
             }
@@ -547,7 +547,7 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             flag_value[] flag_valueVarArr = this.flagValue;
             if (flag_valueVarArr != null && flag_valueVarArr.length > 0) {
                 int i = 0;
@@ -558,23 +558,23 @@ public interface Aconfig {
                     }
                     flag_value flag_valueVar = flag_valueVarArr2[i];
                     if (flag_valueVar != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, flag_valueVar);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, flag_valueVar);
                     }
                     i++;
                 }
             }
-            return computeSerializedSize;
+            return iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public flag_values mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 10) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 10) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -658,40 +658,40 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.source.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.source);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.source);
             }
             int i = this.state;
             if (i != 1) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
             }
             int i2 = this.permission;
-            return i2 != 1 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(3, i2) : computeSerializedSize;
+            return i2 != 1 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(3, i2) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public tracepoint mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.source = codedInputByteBufferNano.readString();
-                } else if (readTag == 16) {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 1 || readInt32 == 2) {
-                        this.state = readInt32;
+                } else if (tag == 16) {
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 1 || int32 == 2) {
+                        this.state = int32;
                     }
-                } else if (readTag != 24) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 24) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt322 = codedInputByteBufferNano.readInt32();
-                    if (readInt322 == 1 || readInt322 == 2) {
-                        this.permission = readInt322;
+                    int int322 = codedInputByteBufferNano.readInt32();
+                    if (int322 == 1 || int322 == 2) {
+                        this.permission = int322;
                     }
                 }
             }
@@ -826,25 +826,25 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.package_.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.package_);
             }
             if (!this.name.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.name);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.name);
             }
             if (!this.namespace.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.namespace);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.namespace);
             }
             if (!this.description.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(4, this.description);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(4, this.description);
             }
             String[] strArr = this.bug;
             int i = 0;
             if (strArr != null && strArr.length > 0) {
                 int i2 = 0;
+                int iComputeStringSizeNoTag = 0;
                 int i3 = 0;
-                int i4 = 0;
                 while (true) {
                     String[] strArr2 = this.bug;
                     if (i2 >= strArr2.length) {
@@ -852,20 +852,20 @@ public interface Aconfig {
                     }
                     String str = strArr2[i2];
                     if (str != null) {
-                        i4++;
-                        i3 += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
+                        i3++;
+                        iComputeStringSizeNoTag += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
                     }
                     i2++;
                 }
-                computeSerializedSize = computeSerializedSize + i3 + i4;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag + i3;
             }
-            int i5 = this.state;
+            int i4 = this.state;
+            if (i4 != 1) {
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(6, i4);
+            }
+            int i5 = this.permission;
             if (i5 != 1) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(6, i5);
-            }
-            int i6 = this.permission;
-            if (i6 != 1) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i6);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(7, i5);
             }
             tracepoint[] tracepointVarArr = this.trace;
             if (tracepointVarArr != null && tracepointVarArr.length > 0) {
@@ -876,31 +876,31 @@ public interface Aconfig {
                     }
                     tracepoint tracepointVar = tracepointVarArr2[i];
                     if (tracepointVar != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(8, tracepointVar);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(8, tracepointVar);
                     }
                     i++;
                 }
             }
             boolean z = this.isFixedReadOnly;
             if (z) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(9, z);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(9, z);
             }
             boolean z2 = this.isExported;
             if (z2) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(10, z2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(10, z2);
             }
             if (!this.container.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(11, this.container);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(11, this.container);
             }
             flag_metadata flag_metadataVar = this.metadata;
-            return flag_metadataVar != null ? computeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(12, flag_metadataVar) : computeSerializedSize;
+            return flag_metadataVar != null ? iComputeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(12, flag_metadataVar) : iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public parsed_flag mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                switch (readTag) {
+                int tag = codedInputByteBufferNano.readTag();
+                switch (tag) {
                     case 0:
                         break;
                     case 10:
@@ -933,21 +933,23 @@ public interface Aconfig {
                         this.bug = strArr2;
                         break;
                     case 48:
-                        int readInt32 = codedInputByteBufferNano.readInt32();
-                        if (readInt32 != 1 && readInt32 != 2) {
+                        int int32 = codedInputByteBufferNano.readInt32();
+                        if (int32 != 1 && int32 != 2) {
                             break;
                         } else {
-                            this.state = readInt32;
+                            this.state = int32;
                             break;
                         }
+                        break;
                     case 56:
-                        int readInt322 = codedInputByteBufferNano.readInt32();
-                        if (readInt322 != 1 && readInt322 != 2) {
+                        int int322 = codedInputByteBufferNano.readInt32();
+                        if (int322 != 1 && int322 != 2) {
                             break;
                         } else {
-                            this.permission = readInt322;
+                            this.permission = int322;
                             break;
                         }
+                        break;
                     case 66:
                         int repeatedFieldArrayLength2 = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 66);
                         tracepoint[] tracepointVarArr = this.trace;
@@ -985,7 +987,7 @@ public interface Aconfig {
                         codedInputByteBufferNano.readMessage(this.metadata);
                         break;
                     default:
-                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                             break;
                         } else {
                             break;
@@ -1051,7 +1053,7 @@ public interface Aconfig {
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             parsed_flag[] parsed_flagVarArr = this.parsedFlag;
             if (parsed_flagVarArr != null && parsed_flagVarArr.length > 0) {
                 int i = 0;
@@ -1062,23 +1064,23 @@ public interface Aconfig {
                     }
                     parsed_flag parsed_flagVar = parsed_flagVarArr2[i];
                     if (parsed_flagVar != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, parsed_flagVar);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, parsed_flagVar);
                     }
                     i++;
                 }
             }
-            return computeSerializedSize;
+            return iComputeSerializedSize;
         }
 
         @Override // android.internal.framework.protobuf.nano.MessageNano
         public parsed_flags mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 10) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 10) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {

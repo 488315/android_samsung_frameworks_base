@@ -1,25 +1,43 @@
 package androidx.room;
 
+import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomOpenDelegate;
+import androidx.room.concurrent.ExclusiveLock;
+import androidx.room.concurrent.FileLock;
 import androidx.room.driver.SupportSQLiteConnection;
+import androidx.room.migration.Migration;
+import androidx.room.util.MigrationUtil;
 import androidx.sqlite.SQLite;
 import androidx.sqlite.SQLiteConnection;
 import androidx.sqlite.SQLiteDriver;
 import androidx.sqlite.SQLiteStatement;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.TreeMap;
+import kotlin.NotImplementedError;
+import kotlin.Pair;
 import kotlin.Result;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsJVMKt;
+import kotlin.collections.EmptyList;
+import kotlin.collections.builders.ListBuilder;
 import kotlin.jdk7.AutoCloseableKt;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseRoomConnectionManager {
     public boolean isConfigured;
     public boolean isInitializing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,7 +47,6 @@ public abstract class BaseRoomConnectionManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DriverWrapper implements SQLiteDriver {
         public final SQLiteDriver actual;
 
@@ -37,136 +54,94 @@ public abstract class BaseRoomConnectionManager {
             this.actual = sQLiteDriver;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:45:0x00a5 A[Catch: all -> 0x00a6, TRY_ENTER, TryCatch #2 {all -> 0x00a6, blocks: (B:45:0x00a5, B:46:0x00a8, B:47:0x00ab), top: B:43:0x00a3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x00a8 A[Catch: all -> 0x00a6, TryCatch #2 {all -> 0x00a6, blocks: (B:45:0x00a5, B:46:0x00a8, B:47:0x00ab), top: B:43:0x00a3 }] */
+        /* JADX WARN: Removed duplicated region for block: B:18:0x003b A[Catch: all -> 0x008f, TRY_LEAVE, TryCatch #6 {all -> 0x008f, blocks: (B:16:0x0037, B:18:0x003b, B:21:0x004a, B:25:0x0051, B:27:0x005b, B:29:0x0066, B:28:0x0061, B:23:0x004e, B:24:0x0050, B:41:0x0087, B:42:0x008e, B:20:0x0045), top: B:63:0x0037, outer: #0, inners: #5 }] */
+        /* JADX WARN: Removed duplicated region for block: B:41:0x0087 A[Catch: all -> 0x008f, TRY_ENTER, TryCatch #6 {all -> 0x008f, blocks: (B:16:0x0037, B:18:0x003b, B:21:0x004a, B:25:0x0051, B:27:0x005b, B:29:0x0066, B:28:0x0061, B:23:0x004e, B:24:0x0050, B:41:0x0087, B:42:0x008e, B:20:0x0045), top: B:63:0x0037, outer: #0, inners: #5 }] */
         @Override // androidx.sqlite.SQLiteDriver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final androidx.sqlite.SQLiteConnection open(java.lang.String r9) {
-            /*
-                r8 = this;
-                androidx.room.BaseRoomConnectionManager r0 = androidx.room.BaseRoomConnectionManager.this
-                java.lang.String r9 = r0.resolveFileName$room_runtime_release(r9)
-                androidx.room.concurrent.ExclusiveLock r1 = new androidx.room.concurrent.ExclusiveLock
-                boolean r2 = r0.isConfigured
-                r3 = 1
-                r4 = 0
-                if (r2 != 0) goto L1c
-                boolean r2 = r0.isInitializing
-                if (r2 != 0) goto L1c
-                java.lang.String r2 = ":memory:"
-                boolean r2 = kotlin.jvm.internal.Intrinsics.areEqual(r9, r2)
-                if (r2 != 0) goto L1c
-                r2 = r3
-                goto L1d
-            L1c:
-                r2 = r4
-            L1d:
-                r1.<init>(r9, r2)
-                androidx.room.BaseRoomConnectionManager$DriverWrapper$openLocked$2 r2 = new androidx.room.BaseRoomConnectionManager$DriverWrapper$openLocked$2
-                r2.<init>()
-                java.util.concurrent.locks.ReentrantLock r5 = r1.threadLock
-                r5.lock()
-                r5 = 0
-                androidx.room.concurrent.FileLock r6 = r1.fileLock
-                if (r6 == 0) goto L37
-                r6.lock()     // Catch: java.lang.Throwable -> L33
-                goto L37
-            L33:
-                r8 = move-exception
-                r3 = r4
-                goto La3
-            L37:
-                boolean r7 = r0.isInitializing     // Catch: java.lang.Throwable -> L8f
-                if (r7 != 0) goto L87
-                androidx.sqlite.SQLiteDriver r8 = r8.actual     // Catch: java.lang.Throwable -> L8f
-                androidx.sqlite.SQLiteConnection r8 = r8.open(r9)     // Catch: java.lang.Throwable -> L8f
-                boolean r9 = r0.isConfigured     // Catch: java.lang.Throwable -> L8f
-                if (r9 != 0) goto L51
-                r0.isInitializing = r3     // Catch: java.lang.Throwable -> L4d
-                androidx.room.BaseRoomConnectionManager.access$configureDatabase(r0, r8)     // Catch: java.lang.Throwable -> L4d
-                r0.isInitializing = r4     // Catch: java.lang.Throwable -> L8f
-                goto L70
-            L4d:
-                r8 = move-exception
-                r0.isInitializing = r4     // Catch: java.lang.Throwable -> L8f
-                throw r8     // Catch: java.lang.Throwable -> L8f
-            L51:
-                androidx.room.DatabaseConfiguration r9 = r0.getConfiguration()     // Catch: java.lang.Throwable -> L8f
-                androidx.room.RoomDatabase$JournalMode r9 = r9.journalMode     // Catch: java.lang.Throwable -> L8f
-                androidx.room.RoomDatabase$JournalMode r4 = androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING     // Catch: java.lang.Throwable -> L8f
-                if (r9 != r4) goto L61
-                java.lang.String r9 = "PRAGMA synchronous = NORMAL"
-                androidx.sqlite.SQLite.execSQL(r8, r9)     // Catch: java.lang.Throwable -> L8f
-                goto L66
-            L61:
-                java.lang.String r9 = "PRAGMA synchronous = FULL"
-                androidx.sqlite.SQLite.execSQL(r8, r9)     // Catch: java.lang.Throwable -> L8f
-            L66:
-                androidx.room.BaseRoomConnectionManager.configureBusyTimeout(r8)     // Catch: java.lang.Throwable -> L8f
-                androidx.room.RoomOpenDelegate r9 = r0.getOpenDelegate()     // Catch: java.lang.Throwable -> L8f
-                r9.onOpen(r8)     // Catch: java.lang.Throwable -> L8f
-            L70:
-                if (r6 == 0) goto L81
-                java.nio.channels.FileChannel r9 = r6.lockChannel     // Catch: java.lang.Throwable -> La2
-                if (r9 != 0) goto L77
-                goto L81
-            L77:
-                r9.close()     // Catch: java.lang.Throwable -> L7d
-                r6.lockChannel = r5     // Catch: java.lang.Throwable -> La2
-                goto L81
-            L7d:
-                r8 = move-exception
-                r6.lockChannel = r5     // Catch: java.lang.Throwable -> La2
-                throw r8     // Catch: java.lang.Throwable -> La2
-            L81:
-                java.util.concurrent.locks.ReentrantLock r9 = r1.threadLock
-                r9.unlock()
-                return r8
-            L87:
-                java.lang.IllegalStateException r8 = new java.lang.IllegalStateException     // Catch: java.lang.Throwable -> L8f
-                java.lang.String r9 = "Recursive database initialization detected. Did you try to use the database instance during initialization? Maybe in one of the callbacks?"
-                r8.<init>(r9)     // Catch: java.lang.Throwable -> L8f
-                throw r8     // Catch: java.lang.Throwable -> L8f
-            L8f:
-                r8 = move-exception
-                if (r6 == 0) goto La1
-                java.nio.channels.FileChannel r9 = r6.lockChannel     // Catch: java.lang.Throwable -> La2
-                if (r9 != 0) goto L97
-                goto La1
-            L97:
-                r9.close()     // Catch: java.lang.Throwable -> L9d
-                r6.lockChannel = r5     // Catch: java.lang.Throwable -> La2
-                goto La1
-            L9d:
-                r8 = move-exception
-                r6.lockChannel = r5     // Catch: java.lang.Throwable -> La2
-                throw r8     // Catch: java.lang.Throwable -> La2
-            La1:
-                throw r8     // Catch: java.lang.Throwable -> La2
-            La2:
-                r8 = move-exception
-            La3:
-                if (r3 == 0) goto La8
-                throw r8     // Catch: java.lang.Throwable -> La6
-            La6:
-                r8 = move-exception
-                goto Lac
-            La8:
-                r2.mo779invoke(r8)     // Catch: java.lang.Throwable -> La6
-                throw r5     // Catch: java.lang.Throwable -> La6
-            Lac:
-                java.util.concurrent.locks.ReentrantLock r9 = r1.threadLock
-                r9.unlock()
-                throw r8
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.room.BaseRoomConnectionManager.DriverWrapper.open(java.lang.String):androidx.sqlite.SQLiteConnection");
+        public final SQLiteConnection open(String str) {
+            FileChannel fileChannel;
+            FileChannel fileChannel2;
+            BaseRoomConnectionManager baseRoomConnectionManager = BaseRoomConnectionManager.this;
+            final String strResolveFileName$room_runtime_release = baseRoomConnectionManager.resolveFileName$room_runtime_release(str);
+            boolean z = true;
+            ExclusiveLock exclusiveLock = new ExclusiveLock(strResolveFileName$room_runtime_release, (baseRoomConnectionManager.isConfigured || baseRoomConnectionManager.isInitializing || Intrinsics.areEqual(strResolveFileName$room_runtime_release, ":memory:")) ? false : true);
+            Function1 function1 = new Function1() { // from class: androidx.room.BaseRoomConnectionManager$DriverWrapper$openLocked$2
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj) {
+                    throw new IllegalStateException(TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("Unable to open database '"), strResolveFileName$room_runtime_release, "'. Was a proper path / name used in Room's database builder?"), (Throwable) obj);
+                }
+            };
+            exclusiveLock.threadLock.lock();
+            FileLock fileLock = exclusiveLock.fileLock;
+            if (fileLock != null) {
+                try {
+                    fileLock.lock();
+                    try {
+                        try {
+                            if (!baseRoomConnectionManager.isInitializing) {
+                                throw new IllegalStateException("Recursive database initialization detected. Did you try to use the database instance during initialization? Maybe in one of the callbacks?");
+                            }
+                            SQLiteConnection sQLiteConnectionOpen = this.actual.open(strResolveFileName$room_runtime_release);
+                            if (baseRoomConnectionManager.isConfigured) {
+                                if (baseRoomConnectionManager.getConfiguration().journalMode == RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING) {
+                                    SQLite.execSQL(sQLiteConnectionOpen, "PRAGMA synchronous = NORMAL");
+                                } else {
+                                    SQLite.execSQL(sQLiteConnectionOpen, "PRAGMA synchronous = FULL");
+                                }
+                                BaseRoomConnectionManager.configureBusyTimeout(sQLiteConnectionOpen);
+                                baseRoomConnectionManager.getOpenDelegate().onOpen(sQLiteConnectionOpen);
+                            } else {
+                                try {
+                                    baseRoomConnectionManager.isInitializing = true;
+                                    BaseRoomConnectionManager.access$configureDatabase(baseRoomConnectionManager, sQLiteConnectionOpen);
+                                    baseRoomConnectionManager.isInitializing = false;
+                                } catch (Throwable th) {
+                                    baseRoomConnectionManager.isInitializing = false;
+                                    throw th;
+                                }
+                            }
+                            if (fileLock != null && (fileChannel2 = fileLock.lockChannel) != null) {
+                                try {
+                                    fileChannel2.close();
+                                    fileLock.lockChannel = null;
+                                } finally {
+                                }
+                            }
+                            return sQLiteConnectionOpen;
+                        } catch (Throwable th2) {
+                            th = th2;
+                        }
+                    } catch (Throwable th3) {
+                        if (fileLock != null && (fileChannel = fileLock.lockChannel) != null) {
+                            try {
+                                fileChannel.close();
+                                fileLock.lockChannel = null;
+                            } finally {
+                            }
+                        }
+                        throw th3;
+                    }
+                } catch (Throwable th4) {
+                    th = th4;
+                    z = false;
+                }
+            } else if (!baseRoomConnectionManager.isInitializing) {
+            }
+            try {
+                if (z) {
+                    throw th;
+                }
+                function1.mo781invoke(th);
+                throw null;
+            } finally {
+                exclusiveLock.threadLock.unlock();
+            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -188,7 +163,7 @@ public abstract class BaseRoomConnectionManager {
         new Companion(null);
     }
 
-    public static final void access$configureDatabase(BaseRoomConnectionManager baseRoomConnectionManager, SQLiteConnection sQLiteConnection) {
+    public static final void access$configureDatabase(BaseRoomConnectionManager baseRoomConnectionManager, SQLiteConnection sQLiteConnection) throws Exception {
         Object failure;
         RoomDatabase.JournalMode journalMode = baseRoomConnectionManager.getConfiguration().journalMode;
         RoomDatabase.JournalMode journalMode2 = RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING;
@@ -203,11 +178,11 @@ public abstract class BaseRoomConnectionManager {
             SQLite.execSQL(sQLiteConnection, "PRAGMA synchronous = FULL");
         }
         configureBusyTimeout(sQLiteConnection);
-        SQLiteStatement prepare = sQLiteConnection.prepare("PRAGMA user_version");
+        SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("PRAGMA user_version");
         try {
-            prepare.step();
-            int i = (int) prepare.getLong(0);
-            prepare.close();
+            sQLiteStatementPrepare.step();
+            int i = (int) sQLiteStatementPrepare.getLong(0);
+            sQLiteStatementPrepare.close();
             if (i != baseRoomConnectionManager.getOpenDelegate().version) {
                 SQLite.execSQL(sQLiteConnection, "BEGIN EXCLUSIVE TRANSACTION");
                 try {
@@ -226,10 +201,10 @@ public abstract class BaseRoomConnectionManager {
                 if (!(failure instanceof Result.Failure)) {
                     SQLite.execSQL(sQLiteConnection, "END TRANSACTION");
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
                     SQLite.execSQL(sQLiteConnection, "ROLLBACK TRANSACTION");
-                    throw m3422exceptionOrNullimpl;
+                    throw thM3442exceptionOrNullimpl;
                 }
             }
             baseRoomConnectionManager.onOpen(sQLiteConnection);
@@ -237,12 +212,12 @@ public abstract class BaseRoomConnectionManager {
         }
     }
 
-    public static void configureBusyTimeout(SQLiteConnection sQLiteConnection) {
-        SQLiteStatement prepare = sQLiteConnection.prepare("PRAGMA busy_timeout");
+    public static void configureBusyTimeout(SQLiteConnection sQLiteConnection) throws Exception {
+        SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("PRAGMA busy_timeout");
         try {
-            prepare.step();
-            long j = prepare.getLong(0);
-            prepare.close();
+            sQLiteStatementPrepare.step();
+            long j = sQLiteStatementPrepare.getLong(0);
+            sQLiteStatementPrepare.close();
             if (j < 3000) {
                 SQLite.execSQL(sQLiteConnection, "PRAGMA busy_timeout = 3000");
             }
@@ -250,7 +225,7 @@ public abstract class BaseRoomConnectionManager {
             try {
                 throw th;
             } catch (Throwable th2) {
-                AutoCloseableKt.closeFinally(prepare, th);
+                AutoCloseableKt.closeFinally(sQLiteStatementPrepare, th);
                 throw th2;
             }
         }
@@ -263,20 +238,20 @@ public abstract class BaseRoomConnectionManager {
     public abstract RoomOpenDelegate getOpenDelegate();
 
     public final void onCreate(SQLiteConnection sQLiteConnection) {
-        SQLiteStatement prepare = sQLiteConnection.prepare("SELECT count(*) FROM sqlite_master WHERE name != 'android_metadata'");
+        SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("SELECT count(*) FROM sqlite_master WHERE name != 'android_metadata'");
         try {
             boolean z = false;
-            if (prepare.step()) {
-                if (prepare.getLong(0) == 0) {
+            if (sQLiteStatementPrepare.step()) {
+                if (sQLiteStatementPrepare.getLong(0) == 0) {
                     z = true;
                 }
             }
-            prepare.close();
+            sQLiteStatementPrepare.close();
             getOpenDelegate().createAllTables(sQLiteConnection);
             if (!z) {
-                RoomOpenDelegate.ValidationResult onValidateSchema = getOpenDelegate().onValidateSchema(sQLiteConnection);
-                if (!onValidateSchema.isValid) {
-                    throw new IllegalStateException(("Pre-packaged database has an invalid schema: " + onValidateSchema.expectedFoundMsg).toString());
+                RoomOpenDelegate.ValidationResult validationResultOnValidateSchema = getOpenDelegate().onValidateSchema(sQLiteConnection);
+                if (!validationResultOnValidateSchema.isValid) {
+                    throw new IllegalStateException(("Pre-packaged database has an invalid schema: " + validationResultOnValidateSchema.expectedFoundMsg).toString());
                 }
             }
             updateIdentity(sQLiteConnection);
@@ -291,38 +266,209 @@ public abstract class BaseRoomConnectionManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:125:0x009d A[EDGE_INSN: B:125:0x009d->B:109:0x009d BREAK  A[LOOP:4: B:87:0x0019->B:110:?], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0023  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:122:0x009d A[EDGE_INSN: B:122:0x009d->B:39:0x009d BREAK  A[LOOP:4: B:9:0x0019->B:126:?], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0033  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x003f  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMigrate(androidx.sqlite.SQLiteConnection r12, int r13, int r14) {
-        /*
-            Method dump skipped, instructions count: 515
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.BaseRoomConnectionManager.onMigrate(androidx.sqlite.SQLiteConnection, int, int):void");
+    public final void onMigrate(SQLiteConnection sQLiteConnection, int i, int i2) {
+        Iterable<Migration> iterable;
+        Pair pair;
+        boolean z;
+        RoomDatabase.MigrationContainer migrationContainer = getConfiguration().migrationContainer;
+        if (i == i2) {
+            iterable = EmptyList.INSTANCE;
+        } else {
+            boolean z2 = i2 > i;
+            ArrayList arrayList = new ArrayList();
+            int i3 = i;
+            do {
+                if (z2) {
+                    if (i3 >= i2) {
+                        iterable = arrayList;
+                        break;
+                    }
+                    if (z2) {
+                        TreeMap treeMap = (TreeMap) ((LinkedHashMap) migrationContainer.migrations).get(Integer.valueOf(i3));
+                        if (treeMap != null) {
+                            pair = new Pair(treeMap, treeMap.keySet());
+                        }
+                        if (pair != null) {
+                        }
+                    } else {
+                        TreeMap treeMap2 = (TreeMap) ((LinkedHashMap) migrationContainer.migrations).get(Integer.valueOf(i3));
+                        pair = treeMap2 == null ? null : new Pair(treeMap2, treeMap2.descendingKeySet());
+                        if (pair != null) {
+                            break;
+                        }
+                        Map map = (Map) pair.component1();
+                        Iterator it = ((Iterable) pair.component2()).iterator();
+                        while (it.hasNext()) {
+                            int iIntValue = ((Number) it.next()).intValue();
+                            if (z2) {
+                                if (i3 + 1 <= iIntValue && iIntValue <= i2) {
+                                    Object obj = map.get(Integer.valueOf(iIntValue));
+                                    obj.getClass();
+                                    arrayList.add(obj);
+                                    z = true;
+                                    i3 = iIntValue;
+                                    break;
+                                }
+                            } else {
+                                if (i2 <= iIntValue && iIntValue < i3) {
+                                    Object obj2 = map.get(Integer.valueOf(iIntValue));
+                                    obj2.getClass();
+                                    arrayList.add(obj2);
+                                    z = true;
+                                    i3 = iIntValue;
+                                    break;
+                                    break;
+                                }
+                            }
+                        }
+                        z = false;
+                    }
+                } else {
+                    if (i3 <= i2) {
+                        iterable = arrayList;
+                        break;
+                    }
+                    if (z2) {
+                    }
+                }
+            } while (z);
+            iterable = null;
+        }
+        if (iterable != null) {
+            getOpenDelegate().onPreMigrate(sQLiteConnection);
+            for (Migration migration : iterable) {
+                migration.getClass();
+                if (!(sQLiteConnection instanceof SupportSQLiteConnection)) {
+                    throw new NotImplementedError("Migration functionality with a provided SQLiteDriver requires overriding the migrate(SQLiteConnection) function.");
+                }
+                migration.migrate(((SupportSQLiteConnection) sQLiteConnection).db);
+            }
+            RoomOpenDelegate.ValidationResult validationResultOnValidateSchema = getOpenDelegate().onValidateSchema(sQLiteConnection);
+            if (!validationResultOnValidateSchema.isValid) {
+                throw new IllegalStateException(("Migration didn't properly handle: " + validationResultOnValidateSchema.expectedFoundMsg).toString());
+            }
+            getOpenDelegate().onPostMigrate();
+            updateIdentity(sQLiteConnection);
+            return;
+        }
+        if (MigrationUtil.isMigrationRequired(getConfiguration(), i, i2)) {
+            throw new IllegalStateException(("A migration from " + i + " to " + i2 + " was required but not found. Please provide the necessary Migration path via RoomDatabase.Builder.addMigration(...) or allow for destructive migrations via one of the RoomDatabase.Builder.fallbackToDestructiveMigration* functions.").toString());
+        }
+        if (getConfiguration().allowDestructiveMigrationForAllTables) {
+            SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("SELECT name, type FROM sqlite_master WHERE type = 'table' OR type = 'view'");
+            try {
+                ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                while (sQLiteStatementPrepare.step()) {
+                    String text = sQLiteStatementPrepare.getText(0);
+                    if (!text.startsWith("sqlite_") && !text.equals("android_metadata")) {
+                        listBuilderCreateListBuilder.add(new Pair(text, Boolean.valueOf(Intrinsics.areEqual(sQLiteStatementPrepare.getText(1), "view"))));
+                    }
+                }
+                ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
+                sQLiteStatementPrepare.close();
+                ListIterator listIterator = listBuilderBuild.listIterator(0);
+                while (true) {
+                    ListBuilder.Itr itr = (ListBuilder.Itr) listIterator;
+                    if (!itr.hasNext()) {
+                        break;
+                    }
+                    Pair pair2 = (Pair) itr.next();
+                    String str = (String) pair2.component1();
+                    if (((Boolean) pair2.component2()).booleanValue()) {
+                        SQLite.execSQL(sQLiteConnection, "DROP VIEW IF EXISTS " + str);
+                    } else {
+                        SQLite.execSQL(sQLiteConnection, "DROP TABLE IF EXISTS " + str);
+                    }
+                }
+            } finally {
+            }
+        } else {
+            getOpenDelegate().dropAllTables(sQLiteConnection);
+        }
+        Iterator it2 = getCallbacks().iterator();
+        while (it2.hasNext()) {
+            ((RoomDatabase.Callback) it2.next()).getClass();
+            if (sQLiteConnection instanceof SupportSQLiteConnection) {
+                SupportSQLiteDatabase supportSQLiteDatabase = ((SupportSQLiteConnection) sQLiteConnection).db;
+            }
+        }
+        getOpenDelegate().createAllTables(sQLiteConnection);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0025  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x001f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onOpen(androidx.sqlite.SQLiteConnection r10) {
-        /*
-            Method dump skipped, instructions count: 277
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.BaseRoomConnectionManager.onOpen(androidx.sqlite.SQLiteConnection):void");
+    public final void onOpen(SQLiteConnection sQLiteConnection) {
+        boolean z;
+        Object failure;
+        RoomOpenDelegate.ValidationResult validationResultOnValidateSchema;
+        SQLiteStatement sQLiteStatementPrepare = sQLiteConnection.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'room_master_table'");
+        try {
+            if (sQLiteStatementPrepare.step()) {
+                z = sQLiteStatementPrepare.getLong(0) != 0;
+            }
+            sQLiteStatementPrepare.close();
+            if (z) {
+                sQLiteStatementPrepare = sQLiteConnection.prepare("SELECT identity_hash FROM room_master_table WHERE id = 42 LIMIT 1");
+                try {
+                    String text = sQLiteStatementPrepare.step() ? sQLiteStatementPrepare.getText(0) : null;
+                    sQLiteStatementPrepare.close();
+                    if (!Intrinsics.areEqual(getOpenDelegate().identityHash, text) && !Intrinsics.areEqual(getOpenDelegate().legacyIdentityHash, text)) {
+                        throw new IllegalStateException(("Room cannot verify the data integrity. Looks like you've changed schema but forgot to update the version number. You can simply fix this by increasing the version number. Expected identity hash: " + getOpenDelegate().identityHash + ", found: " + text).toString());
+                    }
+                } finally {
+                }
+            } else {
+                SQLite.execSQL(sQLiteConnection, "BEGIN EXCLUSIVE TRANSACTION");
+                try {
+                    int i = Result.$r8$clinit;
+                    validationResultOnValidateSchema = getOpenDelegate().onValidateSchema(sQLiteConnection);
+                } catch (Throwable th) {
+                    int i2 = Result.$r8$clinit;
+                    failure = new Result.Failure(th);
+                }
+                if (!validationResultOnValidateSchema.isValid) {
+                    throw new IllegalStateException(("Pre-packaged database has an invalid schema: " + validationResultOnValidateSchema.expectedFoundMsg).toString());
+                }
+                getOpenDelegate().onPostMigrate();
+                updateIdentity(sQLiteConnection);
+                failure = Unit.INSTANCE;
+                if (!(failure instanceof Result.Failure)) {
+                    SQLite.execSQL(sQLiteConnection, "END TRANSACTION");
+                }
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    SQLite.execSQL(sQLiteConnection, "ROLLBACK TRANSACTION");
+                    throw thM3442exceptionOrNullimpl;
+                }
+                Result.m3441boximpl(failure);
+            }
+            getOpenDelegate().onOpen(sQLiteConnection);
+            for (RoomDatabase.Callback callback : getCallbacks()) {
+                callback.getClass();
+                if (sQLiteConnection instanceof SupportSQLiteConnection) {
+                    callback.onOpen(((SupportSQLiteConnection) sQLiteConnection).db);
+                }
+            }
+            this.isConfigured = true;
+        } finally {
+            try {
+                throw th;
+            } finally {
+            }
+        }
     }
 
-    public final void updateIdentity(SQLiteConnection sQLiteConnection) {
+    public final void updateIdentity(SQLiteConnection sQLiteConnection) throws Exception {
         SQLite.execSQL(sQLiteConnection, "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
         String str = getOpenDelegate().identityHash;
         int i = RoomMasterTable.$r8$clinit;

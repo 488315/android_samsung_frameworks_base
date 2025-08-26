@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ActivityType {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -27,26 +26,25 @@ public final class ActivityType {
     public static final ActivityType SharingContents = new ActivityType("SharingContents", 10, 10);
     public static final ActivityType StoringContents = new ActivityType("StoringContents", 11, 11);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static ActivityType fromInt(Integer num) {
-            Object obj;
+            Object next;
             Iterator<E> it = ActivityType.getEntries().iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (((ActivityType) obj).getValue() == num.intValue()) {
+                next = it.next();
+                if (((ActivityType) next).getValue() == num.intValue()) {
                     break;
                 }
             }
-            return (ActivityType) obj;
+            return (ActivityType) next;
         }
 
         private Companion() {
@@ -58,9 +56,9 @@ public final class ActivityType {
     }
 
     static {
-        ActivityType[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        ActivityType[] activityTypeArr$values = $values();
+        $VALUES = activityTypeArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(activityTypeArr$values);
         Companion = new Companion(null);
     }
 

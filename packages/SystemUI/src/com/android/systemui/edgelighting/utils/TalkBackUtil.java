@@ -10,7 +10,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.util.SemLog;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TalkBackUtil implements TextToSpeech.OnInitListener {
     public static TalkBackUtil mInstance;

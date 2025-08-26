@@ -44,9 +44,9 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPreferredMixerAttributesDispatcher)) {
-                return (IPreferredMixerAttributesDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPreferredMixerAttributesDispatcher)) {
+                return (IPreferredMixerAttributesDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
             }
             if (i == 1) {
                 AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 AudioMixerAttributes audioMixerAttributes = (AudioMixerAttributes) parcel.readTypedObject(AudioMixerAttributes.CREATOR);
                 parcel.enforceNoDataAvail();
-                dispatchPrefMixerAttributesChanged(audioAttributes, readInt, audioMixerAttributes);
+                dispatchPrefMixerAttributesChanged(audioAttributes, i3, audioMixerAttributes);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
 
             @Override // android.media.IPreferredMixerAttributesDispatcher
             public void dispatchPrefMixerAttributesChanged(AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioMixerAttributes, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioMixerAttributes, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

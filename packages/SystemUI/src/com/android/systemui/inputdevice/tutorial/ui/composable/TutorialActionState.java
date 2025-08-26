@@ -5,12 +5,10 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface TutorialActionState {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -18,7 +16,6 @@ public interface TutorialActionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Error implements TutorialActionState {
         public static final Error INSTANCE = new Error();
 
@@ -38,7 +35,6 @@ public interface TutorialActionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Finished implements TutorialActionState {
         public final int successAnimation;
 
@@ -62,7 +58,6 @@ public interface TutorialActionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InProgress implements TutorialActionState, Progress {
         public final String endMarker;
         public final float progress;
@@ -99,11 +94,11 @@ public interface TutorialActionState {
         }
 
         public final int hashCode() {
-            int hashCode = Float.hashCode(this.progress) * 31;
+            int iHashCode = Float.hashCode(this.progress) * 31;
             String str = this.startMarker;
-            int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
             String str2 = this.endMarker;
-            return hashCode2 + (str2 != null ? str2.hashCode() : 0);
+            return iHashCode2 + (str2 != null ? str2.hashCode() : 0);
         }
 
         public final String toString() {
@@ -126,7 +121,6 @@ public interface TutorialActionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InProgressAfterError implements TutorialActionState, Progress {
         public final InProgress inProgress;
 
@@ -165,7 +159,6 @@ public interface TutorialActionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotStarted implements TutorialActionState {
         public static final NotStarted INSTANCE = new NotStarted();
 

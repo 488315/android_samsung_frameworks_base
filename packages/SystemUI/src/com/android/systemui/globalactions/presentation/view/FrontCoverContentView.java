@@ -2,6 +2,7 @@ package com.android.systemui.globalactions.presentation.view;
 
 import android.app.Presentation;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
@@ -36,7 +37,6 @@ import com.samsung.android.view.SemWindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FrontCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
@@ -63,14 +63,12 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
     public boolean mLastFoldedState = true;
     public boolean mIsSecureConfirming = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.globalactions.presentation.view.FrontCoverContentView$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentAdapter extends BaseAdapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
@@ -101,22 +99,21 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
             ActionViewModel actionViewModel = (ActionViewModel) ((ArrayList) this.mViewModelList).get(i);
             FrontCoverContentView frontCoverContentView = FrontCoverContentView.this;
             FrontCoverContentItemView frontCoverContentItemView = new FrontCoverContentItemView(context, actionViewModel, viewGroup, frontCoverContentView.mIsIconOnly, frontCoverContentView.mIsCameraViewCover, frontCoverContentView.mResourceFactory);
-            View inflate = LayoutInflater.from(frontCoverContentItemView.mContext).inflate(frontCoverContentItemView.mResourceFactory.get(ResourceType.LAYOUT_FRONT_COVER_ITEM), frontCoverContentItemView.mParent, false);
-            frontCoverContentItemView.setViewAttrs(inflate, this.mIsConfirmView);
+            View viewInflate = LayoutInflater.from(frontCoverContentItemView.mContext).inflate(frontCoverContentItemView.mResourceFactory.get(ResourceType.LAYOUT_FRONT_COVER_ITEM), frontCoverContentItemView.mParent, false);
+            frontCoverContentItemView.setViewAttrs(viewInflate, this.mIsConfirmView);
             frontCoverContentItemView.mViewModel.getActionInfo().setViewIndex(i);
             ActionViewModel actionViewModel2 = FrontCoverContentView.this.mSelectedViewModel;
             if (actionViewModel2 != null && actionViewModel2.getActionInfo().getStateLabel().equals("confirm_dismiss") && ((ActionViewModel) ((ArrayList) this.mViewModelList).get(i)).getActionInfo().getName().equals(FrontCoverContentView.this.mSelectedViewModel.getActionInfo().getName())) {
-                this.mLastAnimatedView = inflate;
+                this.mLastAnimatedView = viewInflate;
                 View view2 = FrontCoverContentView.this.mAdapter.mLastAnimatedView;
                 if (view2 != null) {
                     view2.setVisibility(8);
                 }
             }
-            return inflate;
+            return viewInflate;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentGridView extends GridView {
         public ContentGridView(Context context) {
             super(context);
@@ -133,7 +130,6 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);
@@ -165,10 +161,10 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
         this.mLogWrapper = logWrapper;
         this.mHandler = handlerUtil;
         this.mPresenter = samsungGlobalActionsPresenter;
-        boolean isEnabled = conditionChecker.isEnabled(SystemUIConditions.IS_CLEAR_CAMERA_VIEW_COVER_CLOSED);
-        this.mIsCameraViewCover = isEnabled;
+        boolean zIsEnabled = conditionChecker.isEnabled(SystemUIConditions.IS_CLEAR_CAMERA_VIEW_COVER_CLOSED);
+        this.mIsCameraViewCover = zIsEnabled;
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
-        if (isEnabled) {
+        if (zIsEnabled) {
             Display[] displays = displayManager.getDisplays("com.samsung.android.hardware.display.category.VIEW_COVER_DISPLAY");
             Display display = displays.length > 0 ? displays[0] : null;
             if (display != null) {
@@ -238,7 +234,7 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
         this.mAnimatorFSM = new CoverViewAnimatorFSM(frontCoverViewAnimator, this.mLogWrapper, this);
     }
 
-    public final void initLayouts() {
+    public final void initLayouts() throws Resources.NotFoundException {
         RootView rootView = new RootView(this.mDialog.getContext());
         this.mRootView = rootView;
         ViewGroup viewGroup = (ViewGroup) rootView.findViewById(this.mResourceFactory.get(ResourceType.ID_FRONT_COVER_ITEM));
@@ -265,7 +261,7 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
             this.mBackButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.globalactions.presentation.view.FrontCoverContentView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    FrontCoverContentView.this.mPresenter.onCancelDialog();
+                    this.f$0.mPresenter.onCancelDialog();
                 }
             });
         }
@@ -274,7 +270,7 @@ public class FrontCoverContentView implements ContentView, ViewStateController {
         WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.semSetScreenTimeout(this.mIsCameraViewCover ? 6000L : 5000L);
         attributes.semSetScreenDimDuration(0L);
-        attributes.setTitle(this.mContext.getResources().getString(android.R.string.miniresolver_sms_information));
+        attributes.setTitle(this.mContext.getResources().getString(android.R.string.miniresolver_switch_to_work));
         window.setAttributes(attributes);
     }
 

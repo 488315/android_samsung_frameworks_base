@@ -1256,6 +1256,7 @@ Se li riattivi, potrebbero essere applicati costi per l'utilizzo dei dati."</str
     <string name="delete_blob_text">Elimina dati condivisi</string>
     <string name="demo_mode">"Modalità demo dell'interfaccia utente di sistema"</string>
     <string name="demote_explain_text">%1$s non mostrerà più gli aggiornamenti in tempo reale. Puoi modificare questa opzione in qualsiasi momento in Impostazioni.</string>
+    <string name="desktop_label">Desktop %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">Ingrandisci o ripristina le dimensioni della finestra</string>
     <string name="desktop_mode_a11y_action_snap_left">"Ridimensiona la finestra dell'app a sinistra"</string>
     <string name="desktop_mode_a11y_action_snap_right">"Ridimensiona la finestra dell'app a destra"</string>
@@ -1310,6 +1311,17 @@ Se li riattivi, potrebbero essere applicati costi per l'utilizzo dei dati."</str
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">Come aprire il touchpad sul tablet</string>
     <string name="dex_touchpad_dialog_pinch">Avvicinamento di 2 dita</string>
     <string name="dex_touchpad_dialog_pinch_desc">Effettuate lo zoom in avanti o indietro.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">Utilizzate la S Pen per scrivere o disegnare nelle vostre applicazioni preferite. Quando appoggiate la S Pen allo schermo dello smartphone, il cursore si posiziona in quel punto sul monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">Utilizzate la S Pen per scrivere o disegnare nelle vostre applicazioni preferite. Quando appoggiate la S Pen allo schermo del tablet, il cursore si posiziona in quel punto sul monitor.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">Selezionate oggetti, aprite applicazioni, attivate pulsanti e altro (clic con pulsante sinistro).</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">Scorrete lo schermo in una direzione qualsiasi.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">Tocca e trascina</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">Tocco</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">Cursore S Pen</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">Pressione prolungata</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">Selezionate gli oggetti sullo schermo.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">Spostate gli oggetti nella schermata o selezionate del testo.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">Pressione prolungata e trascinamento</string>
     <string name="dex_touchpad_dialog_swipe">Trascinamento con 2 dita</string>
     <string name="dex_touchpad_dialog_swipe_desc">Scorrete lo schermo in una direzione qualsiasi.</string>
     <string name="dex_touchpad_dialog_swipe_left_right">Trascinamento a sinistra o a destra con 3 dita</string>
@@ -1351,6 +1363,7 @@ Se li riattivi, potrebbero essere applicati costi per l'utilizzo dei dati."</str
     <string name="disconnect_smart_view">Disconnettere Smart View?</string>
     <string name="dismiss_dialog">Chiudi</string>
     <string name="dismissible_keyguard_swipe">"Scorri verso l'alto per continuare"</string>
+    <string name="display_disconnected_to_change_user">Schermo disconnesso per cambiare utente.</string>
     <string name="divider_panel_app_pair_to_edge">Aggiungi coppia di applicazioni al pannello Tag edge</string>
     <string name="divider_panel_change_layout">Modifica layout</string>
     <string name="divider_panel_rotate_clockwise">Ruota in senso orario</string>
@@ -1408,6 +1421,7 @@ Se li riattivi, potrebbero essere applicati costi per l'utilizzo dei dati."</str
     <string name="drop_now_to_open_in_fullscreen_view">Rilasciate ora per aprire in visualizzazione a schermo intero</string>
     <string name="dropdown_menu">Menu a discesa</string>
     <string name="durationMinutes">%d minuti</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Aree di lavoro desktop nascoste mentre Smart View è in uso.</string>
     <string name="edge_feeds_preview_not_selected_tts">%s non selezionata.</string>
     <string name="edge_feeds_preview_selected_tts">%s selezionata.</string>
     <string name="edge_lighting_action_description">Effetto illuminaz. Edge una volta</string>
@@ -2623,6 +2637,7 @@ Riprova tra %2$d secondi."</string>
     <string name="ksh_group_system_notifications">Notifiche</string>
     <string name="ksh_group_system_popup_view">Visualizzazione popup</string>
     <string name="ksh_group_system_recents">Applicazioni recenti</string>
+    <string name="ksh_group_system_running_apps">Applicazioni in esecuzione</string>
     <string name="ksh_group_system_screen_off">Schermo spento</string>
     <string name="ksh_group_system_show_emojis">Mostra emoji</string>
     <string name="ksh_group_system_show_hanja_input">Mostra inserimento hanja</string>
@@ -3174,9 +3189,13 @@ Per eventuali domande, contatta %2$s."</string>
     <string name="music_share_description_second_line">Se anche il vostro amico utilizza Galaxy Buds, potete ascoltare la musica insieme.</string>
     <string name="mw_caption_button_text_open_in_browser">Apri nel browser</string>
     <string name="mw_caption_button_text_remove_from_workspace">Rimuovi dall’area di lavoro</string>
+    <string name="mw_caption_button_text_restart_app">Riavvia l’app per ottimizzare il layout</string>
     <string name="mw_caption_button_text_send_to_other_display">Invia ad altro schermo</string>
     <string name="mw_caption_button_text_snap_to_left">Aggancia a sinistra</string>
     <string name="mw_caption_button_text_snap_to_right">Aggancia a destra</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">Aree di lavoro desktop nascoste perché lo smartphone si è surriscaldato. Saranno nuovamente disponibili quando si sarà raffreddato.</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">Impossibile passare dall’applicazione a un’area di lavoro desktop perché il livello di zoom dello schermo è troppo elevato. Modificate le impostazioni dello Zoom schermo e riprovate.</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Impossibile impostare un’applicazione sulla visualizzazione desktop mentre Smart View è in uso.</string>
     <string name="nav_bar">Barra di navigazione</string>
     <string name="nav_bar_layout">Layout</string>
     <string name="navigation_menu">Menu di navigazione</string>
@@ -3523,6 +3542,7 @@ Si spegnerà per consentire il raffreddamento."</string>
     <string name="qs_custom_action_move_to_bottom">Sposta alla fine</string>
     <string name="qs_custom_action_move_to_top">Sposta all’inizio</string>
     <string name="qs_custom_action_move_up">Sposta in alto</string>
+    <string name="qs_custom_action_radio_button">Pulsante di opzione</string>
     <string name="qs_custom_action_removed_done">Pulsante %s rimosso</string>
     <string name="qs_customizer_settings">Impostazioni pannello</string>
     <string name="qs_detail_flashlight_title">Torcia</string>
@@ -3617,6 +3637,7 @@ Riprovate più tardi."</string>
     <string name="qs_record_issue_label">Registra problema</string>
     <string name="qs_record_issue_start">Avvia</string>
     <string name="qs_record_issue_stop">Interrompi</string>
+    <string name="qs_reset_complete">Ripristino completato.</string>
     <string name="qs_sensor_privacy_dialog_cancel">Annulla</string>
     <string name="qs_sensor_privacy_dialog_turn_on">Attiva</string>
     <string name="qs_sensor_privacy_dialog_unblock">Sblocca</string>
@@ -3897,7 +3918,6 @@ Disattivate il profilo di lavoro per usare il tablet senza interruzioni di lavor
     <string name="retail_demo_reset_title">Password obbligatoria</string>
     <string name="retry_face">Riprova autenticazione volto</string>
     <string name="reverse_folding_alert_view_warning_text">Aprite lo smartphone e chiudetelo dal lato sinistro.</string>
-    <string name="reverse_folding_order_guide_text">Piegate prima il lato sinistro.</string>
     <string name="right_icon">Icona destra</string>
     <string name="right_keycode">Keycode destra</string>
     <string name="right_nav_bar_button_type">Tipo di pulsante extra destra</string>
@@ -4117,6 +4137,7 @@ Disattivate il profilo di lavoro per usare il tablet senza interruzioni di lavor
     <string name="sec_decor_button_text_caption_pin">Blocca menu opzioni in alto</string>
     <string name="sec_decor_button_text_caption_unpin">Sblocca menu opzioni</string>
     <string name="sec_decor_button_text_close">Chiudi</string>
+    <string name="sec_decor_button_text_enter_full_screen">Schermo intero</string>
     <string name="sec_decor_button_text_exit_full_screen">Esci da schermo intero</string>
     <string name="sec_decor_button_text_freeform">Apri in visualizzazione popup</string>
     <string name="sec_decor_button_text_maximize">Ingrandisci</string>
@@ -4132,6 +4153,7 @@ Disattivate il profilo di lavoro per usare il tablet senza interruzioni di lavor
     <string name="sec_decor_button_text_window_pin">Blocca finestre in alto</string>
     <string name="sec_decor_button_text_window_unpin">Rimuovi finestra</string>
     <string name="sec_decor_handle_text">Opzioni rapide</string>
+    <string name="sec_decor_window_handle">Cursore della finestra</string>
     <string name="sec_default_app">Impostata come predefinita</string>
     <string name="sec_devices_and_media_control">Pulsanti Controllo dispositivo e Output multimediale</string>
     <string name="sec_dlg_turn_on">Attiva</string>

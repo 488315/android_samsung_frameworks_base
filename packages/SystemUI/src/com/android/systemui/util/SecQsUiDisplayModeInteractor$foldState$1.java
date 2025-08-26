@@ -4,7 +4,6 @@ import android.hardware.devicestate.DeviceStateManager;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.kairos.BuildScopeKt;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
-import com.android.systemui.util.concurrency.DelayableExecutor;
 import kotlin.KotlinNothingValueException;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -17,7 +16,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -32,9 +30,7 @@ final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda imple
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final Unit invokeSuspend$lambda$0(SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor, SecQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1 secQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1) {
-        DeviceStateManager deviceStateManager;
-        deviceStateManager = secQsUiDisplayModeInteractor.deviceStateManager;
-        deviceStateManager.unregisterCallback(secQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1);
+        secQsUiDisplayModeInteractor.deviceStateManager.unregisterCallback(secQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1);
         return Unit.INSTANCE;
     }
 
@@ -48,8 +44,6 @@ final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda imple
     /* JADX WARN: Type inference failed for: r1v1, types: [android.hardware.devicestate.DeviceStateManager$DeviceStateCallback, com.android.systemui.util.SecQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        DeviceStateManager deviceStateManager;
-        DelayableExecutor delayableExecutor;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -58,8 +52,6 @@ final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda imple
             final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = this.this$0;
             final ?? r1 = new DeviceStateManager.DeviceStateCallback() { // from class: com.android.systemui.util.SecQsUiDisplayModeInteractor$foldState$1$deviceStateCallback$1
                 public void onDeviceStateChanged(android.hardware.devicestate.DeviceState deviceState) {
-                    Boolean bool;
-                    Boolean bool2;
                     int identifier = deviceState.getIdentifier();
                     boolean z = true;
                     if (identifier != 0) {
@@ -70,34 +62,29 @@ final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda imple
                             z = false;
                         }
                     }
-                    bool = SecQsUiDisplayModeInteractor.this.wasFolded;
-                    if (Intrinsics.areEqual(bool, Boolean.valueOf(z))) {
+                    if (Intrinsics.areEqual(secQsUiDisplayModeInteractor.wasFolded, Boolean.valueOf(z))) {
                         return;
                     }
-                    bool2 = SecQsUiDisplayModeInteractor.this.wasFolded;
+                    Boolean bool = secQsUiDisplayModeInteractor.wasFolded;
                     int identifier2 = deviceState.getIdentifier();
                     StringBuilder sb = new StringBuilder("onDeviceStateChanged from ");
-                    sb.append(bool2);
+                    sb.append(bool);
                     sb.append(" -> to ");
                     sb.append(z);
                     sb.append(", identifier = ");
                     RecyclerView$$ExternalSyntheticOutline0.m(identifier2, "SecQsUiDisplayModeInteractor", sb);
-                    SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor2 = SecQsUiDisplayModeInteractor.this;
-                    Boolean valueOf = Boolean.valueOf(z);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(z ? SecQsUiDisplayModeInteractor.FoldState.FOLD : SecQsUiDisplayModeInteractor.FoldState.UNFOLD);
-                    secQsUiDisplayModeInteractor2.wasFolded = valueOf;
+                    SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor2 = secQsUiDisplayModeInteractor;
+                    Boolean boolValueOf = Boolean.valueOf(z);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(z ? SecQsUiDisplayModeInteractor.FoldState.FOLD : SecQsUiDisplayModeInteractor.FoldState.UNFOLD);
+                    secQsUiDisplayModeInteractor2.wasFolded = boolValueOf;
                 }
             };
-            deviceStateManager = this.this$0.deviceStateManager;
-            delayableExecutor = this.this$0.mainExecutor;
-            deviceStateManager.registerCallback(delayableExecutor, (DeviceStateManager.DeviceStateCallback) r1);
+            this.this$0.deviceStateManager.registerCallback(this.this$0.mainExecutor, (DeviceStateManager.DeviceStateCallback) r1);
             final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.util.SecQsUiDisplayModeInteractor$foldState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Unit invokeSuspend$lambda$0;
-                    invokeSuspend$lambda$0 = SecQsUiDisplayModeInteractor$foldState$1.invokeSuspend$lambda$0(SecQsUiDisplayModeInteractor.this, r1);
-                    return invokeSuspend$lambda$0;
+                    return SecQsUiDisplayModeInteractor$foldState$1.invokeSuspend$lambda$0(secQsUiDisplayModeInteractor2, r1);
                 }
             };
             this.label = 1;

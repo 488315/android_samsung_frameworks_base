@@ -28,60 +28,60 @@ public class GlobalWhitelistState {
     public boolean isWhitelisted(int i, String str) {
         synchronized (this.mGlobalWhitelistStateLock) {
             SparseArray<WhitelistHelper> sparseArray = this.mWhitelisterHelpers;
-            boolean z = false;
+            boolean zIsWhitelisted = false;
             if (sparseArray == null) {
                 return false;
             }
             WhitelistHelper whitelistHelper = sparseArray.get(i);
             if (whitelistHelper != null) {
-                z = whitelistHelper.isWhitelisted(str);
+                zIsWhitelisted = whitelistHelper.isWhitelisted(str);
             }
-            return z;
+            return zIsWhitelisted;
         }
     }
 
     public boolean isWhitelisted(int i, ComponentName componentName) {
         synchronized (this.mGlobalWhitelistStateLock) {
             SparseArray<WhitelistHelper> sparseArray = this.mWhitelisterHelpers;
-            boolean z = false;
+            boolean zIsWhitelisted = false;
             if (sparseArray == null) {
                 return false;
             }
             WhitelistHelper whitelistHelper = sparseArray.get(i);
             if (whitelistHelper != null) {
-                z = whitelistHelper.isWhitelisted(componentName);
+                zIsWhitelisted = whitelistHelper.isWhitelisted(componentName);
             }
-            return z;
+            return zIsWhitelisted;
         }
     }
 
     public ArraySet<ComponentName> getWhitelistedComponents(int i, String str) {
         synchronized (this.mGlobalWhitelistStateLock) {
             SparseArray<WhitelistHelper> sparseArray = this.mWhitelisterHelpers;
-            ArraySet<ComponentName> arraySet = null;
+            ArraySet<ComponentName> whitelistedComponents = null;
             if (sparseArray == null) {
                 return null;
             }
             WhitelistHelper whitelistHelper = sparseArray.get(i);
             if (whitelistHelper != null) {
-                arraySet = whitelistHelper.getWhitelistedComponents(str);
+                whitelistedComponents = whitelistHelper.getWhitelistedComponents(str);
             }
-            return arraySet;
+            return whitelistedComponents;
         }
     }
 
     public ArraySet<String> getWhitelistedPackages(int i) {
         synchronized (this.mGlobalWhitelistStateLock) {
             SparseArray<WhitelistHelper> sparseArray = this.mWhitelisterHelpers;
-            ArraySet<String> arraySet = null;
+            ArraySet<String> whitelistedPackages = null;
             if (sparseArray == null) {
                 return null;
             }
             WhitelistHelper whitelistHelper = sparseArray.get(i);
             if (whitelistHelper != null) {
-                arraySet = whitelistHelper.getWhitelistedPackages();
+                whitelistedPackages = whitelistHelper.getWhitelistedPackages();
             }
-            return arraySet;
+            return whitelistedPackages;
         }
     }
 
@@ -111,8 +111,8 @@ public class GlobalWhitelistState {
             printWriter.println(" services");
             String str2 = str + "  ";
             for (int i = 0; i < this.mWhitelisterHelpers.size(); i++) {
-                int keyAt = this.mWhitelisterHelpers.keyAt(i);
-                this.mWhitelisterHelpers.valueAt(i).dump(str2, "Whitelist for userId " + keyAt, printWriter);
+                int iKeyAt = this.mWhitelisterHelpers.keyAt(i);
+                this.mWhitelisterHelpers.valueAt(i).dump(str2, "Whitelist for userId " + iKeyAt, printWriter);
             }
         }
     }

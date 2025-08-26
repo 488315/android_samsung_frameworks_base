@@ -2,6 +2,7 @@ package android.app;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
@@ -74,7 +75,7 @@ public class FragmentController {
         return this.mHost.mFragmentManager.retainNonConfig();
     }
 
-    public void dispatchCreate() {
+    public void dispatchCreate() throws Resources.NotFoundException {
         this.mHost.mFragmentManager.dispatchCreate();
     }
 
@@ -82,11 +83,11 @@ public class FragmentController {
         this.mHost.mFragmentManager.dispatchActivityCreated();
     }
 
-    public void dispatchStart() {
+    public void dispatchStart() throws Resources.NotFoundException {
         this.mHost.mFragmentManager.dispatchStart();
     }
 
-    public void dispatchResume() {
+    public void dispatchResume() throws Resources.NotFoundException {
         this.mHost.mFragmentManager.dispatchResume();
     }
 
@@ -94,11 +95,11 @@ public class FragmentController {
         this.mHost.mFragmentManager.dispatchPause();
     }
 
-    public void dispatchStop() {
+    public void dispatchStop() throws Resources.NotFoundException {
         this.mHost.mFragmentManager.dispatchStop();
     }
 
-    public void dispatchDestroyView() {
+    public void dispatchDestroyView() throws Resources.NotFoundException {
         this.mHost.mFragmentManager.dispatchDestroyView();
     }
 

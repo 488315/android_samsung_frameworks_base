@@ -13,6 +13,7 @@ import java.security.InvalidParameterException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.DSAParameterSpec;
+import java.security.spec.InvalidParameterSpecException;
 
 /* loaded from: classes5.dex */
 public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGeneratorSpi {
@@ -41,7 +42,7 @@ public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGenera
     }
 
     @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected AlgorithmParameters engineGenerateParameters() {
+    protected AlgorithmParameters engineGenerateParameters() throws InvalidParameterSpecException {
         DSAParametersGenerator dSAParametersGenerator;
         if (this.strength <= 1024) {
             dSAParametersGenerator = new DSAParametersGenerator();
@@ -64,11 +65,11 @@ public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGenera
         } else {
             dSAParametersGenerator.init(i, defaultCertainty, this.random);
         }
-        DSAParameters generateParameters = dSAParametersGenerator.generateParameters();
+        DSAParameters dSAParametersGenerateParameters = dSAParametersGenerator.generateParameters();
         try {
-            AlgorithmParameters createParametersInstance = createParametersInstance("DSA");
-            createParametersInstance.init(new DSAParameterSpec(generateParameters.getP(), generateParameters.getQ(), generateParameters.getG()));
-            return createParametersInstance;
+            AlgorithmParameters algorithmParametersCreateParametersInstance = createParametersInstance("DSA");
+            algorithmParametersCreateParametersInstance.init(new DSAParameterSpec(dSAParametersGenerateParameters.getP(), dSAParametersGenerateParameters.getQ(), dSAParametersGenerateParameters.getG()));
+            return algorithmParametersCreateParametersInstance;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

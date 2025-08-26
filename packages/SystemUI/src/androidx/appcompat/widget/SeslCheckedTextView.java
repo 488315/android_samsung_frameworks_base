@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -21,12 +22,12 @@ import androidx.appcompat.R$styleable;
 import androidx.core.view.ViewCompat;
 import androidx.reflect.SeslBaseReflector;
 import androidx.reflect.view.SeslViewReflector;
+import androidx.reflect.widget.SeslTextViewReflector;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslCheckedTextView extends TextView implements Checkable {
     public static final int[] CHECKED_STATE_SET = {R.attr.state_checked};
@@ -43,7 +44,6 @@ public class SeslCheckedTextView extends TextView implements Checkable {
     public final boolean mHasCheckMarkTintMode;
     public boolean mNeedRequestlayout;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.appcompat.widget.SeslCheckedTextView.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -89,10 +89,10 @@ public class SeslCheckedTextView extends TextView implements Checkable {
         Drawable drawable = this.mCheckMarkDrawable;
         if (drawable != null) {
             if (this.mHasCheckMarkTint || this.mHasCheckMarkTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mCheckMarkDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mCheckMarkDrawable = drawableMutate;
                 if (this.mHasCheckMarkTint) {
-                    mutate.setTintList(this.mCheckMarkTintList);
+                    drawableMutate.setTintList(this.mCheckMarkTintList);
                 }
                 if (this.mHasCheckMarkTintMode) {
                     this.mCheckMarkDrawable.setTintMode(this.mCheckMarkTintMode);
@@ -127,46 +127,27 @@ public class SeslCheckedTextView extends TextView implements Checkable {
         return CheckedTextView.class.getName();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0030  */
-    /* JADX WARN: Removed duplicated region for block: B:14:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002d  */
     @Override // android.widget.TextView, android.view.View, android.graphics.drawable.Drawable.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void invalidateDrawable(android.graphics.drawable.Drawable r4) {
-        /*
-            r3 = this;
-            super.invalidateDrawable(r4)
-            boolean r0 = r3.verifyDrawable(r4)
-            if (r0 == 0) goto L3b
-            android.graphics.Rect r4 = r4.getBounds()
-            int r0 = r3.getLayoutDirection()
-            r1 = 1
-            if (r0 != r1) goto L3b
-            java.lang.Class r0 = androidx.reflect.widget.SeslTextViewReflector.mClass
-            java.lang.String r1 = "mSingleLine"
-            java.lang.reflect.Field r0 = androidx.reflect.SeslBaseReflector.getDeclaredField(r0, r1)
-            if (r0 == 0) goto L2d
-            java.lang.Object r0 = androidx.reflect.SeslBaseReflector.get(r0, r3)
-            boolean r1 = r0 instanceof java.lang.Boolean
-            if (r1 == 0) goto L2d
-            java.lang.Boolean r0 = (java.lang.Boolean) r0
-            boolean r0 = r0.booleanValue()
-            goto L2e
-        L2d:
-            r0 = 0
-        L2e:
-            if (r0 == 0) goto L3b
-            int r0 = r4.left
-            int r1 = r4.top
-            int r2 = r4.right
-            int r4 = r4.bottom
-            r3.invalidate(r0, r1, r2, r4)
-        L3b:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.SeslCheckedTextView.invalidateDrawable(android.graphics.drawable.Drawable):void");
+    public final void invalidateDrawable(Drawable drawable) {
+        boolean zBooleanValue;
+        super.invalidateDrawable(drawable);
+        if (verifyDrawable(drawable)) {
+            Rect bounds = drawable.getBounds();
+            if (getLayoutDirection() == 1) {
+                Field declaredField = SeslBaseReflector.getDeclaredField(SeslTextViewReflector.mClass, "mSingleLine");
+                if (declaredField != null) {
+                    Object obj = SeslBaseReflector.get(declaredField, this);
+                    zBooleanValue = obj instanceof Boolean ? ((Boolean) obj).booleanValue() : false;
+                }
+                if (zBooleanValue) {
+                    invalidate(bounds.left, bounds.top, bounds.right, bounds.bottom);
+                }
+            }
+        }
     }
 
     public final boolean isCheckMarkAtStart() {
@@ -191,11 +172,11 @@ public class SeslCheckedTextView extends TextView implements Checkable {
 
     @Override // android.widget.TextView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (this.mChecked) {
-            TextView.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            TextView.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.TextView, android.view.View
@@ -208,10 +189,10 @@ public class SeslCheckedTextView extends TextView implements Checkable {
             int gravity = getGravity() & 112;
             int intrinsicHeight = drawable.getIntrinsicHeight();
             int height = gravity != 16 ? gravity != 80 ? 0 : getHeight() - intrinsicHeight : (getHeight() - intrinsicHeight) / 2;
-            boolean isCheckMarkAtStart = isCheckMarkAtStart();
+            boolean zIsCheckMarkAtStart = isCheckMarkAtStart();
             int width = getWidth();
             int i3 = intrinsicHeight + height;
-            if (isCheckMarkAtStart) {
+            if (zIsCheckMarkAtStart) {
                 i2 = this.mBasePadding;
                 i = this.mCheckMarkWidth + i2;
             } else {
@@ -361,29 +342,29 @@ public class SeslCheckedTextView extends TextView implements Checkable {
         this.mHasCheckMarkTintMode = false;
         this.mCheckMarkGravity = 8388611;
         int[] iArr = R$styleable.CheckedTextView;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
         try {
-            saveAttributeDataForStyleable(context, iArr, attributeSet, obtainStyledAttributes, i, i2);
+            saveAttributeDataForStyleable(context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, i2);
             this.mCheckMarkPadding = context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sesl_checked_spinner_padding_end);
-            Drawable drawable = obtainStyledAttributes.getDrawable(1);
+            Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
             if (drawable != null) {
                 setCheckMarkDrawable(drawable);
             }
-            if (obtainStyledAttributes.hasValue(3)) {
-                this.mCheckMarkTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(3, -1), null);
+            if (typedArrayObtainStyledAttributes.hasValue(3)) {
+                this.mCheckMarkTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(3, -1), null);
                 this.mHasCheckMarkTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(2)) {
-                this.mCheckMarkTintList = obtainStyledAttributes.getColorStateList(2);
+            if (typedArrayObtainStyledAttributes.hasValue(2)) {
+                this.mCheckMarkTintList = typedArrayObtainStyledAttributes.getColorStateList(2);
                 this.mHasCheckMarkTint = true;
             }
-            this.mCheckMarkGravity = obtainStyledAttributes.getInt(5, 8388611);
-            setChecked(obtainStyledAttributes.getBoolean(0, false));
-            obtainStyledAttributes.recycle();
+            this.mCheckMarkGravity = typedArrayObtainStyledAttributes.getInt(5, 8388611);
+            setChecked(typedArrayObtainStyledAttributes.getBoolean(0, false));
+            typedArrayObtainStyledAttributes.recycle();
             this.mDrawablePadding = context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sesl_checked_text_padding);
             applyCheckMarkTint();
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

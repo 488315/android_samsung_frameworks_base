@@ -16,52 +16,27 @@ public class DESParameters extends KeyParameter {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x001c, code lost:
     
         r2 = r2 + 1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean isWeakKey(byte[] r7, int r8) {
-        /*
-            int r0 = r7.length
-            int r0 = r0 - r8
-            r1 = 8
-            if (r0 < r1) goto L25
-            r0 = 0
-            r2 = r0
-        L8:
-            r3 = 16
-            if (r2 >= r3) goto L24
-            r3 = r0
-        Ld:
-            if (r3 >= r1) goto L22
-            int r4 = r3 + r8
-            r4 = r7[r4]
-            byte[] r5 = com.android.internal.org.bouncycastle.crypto.params.DESParameters.DES_weak_keys
-            int r6 = r2 * 8
-            int r6 = r6 + r3
-            r5 = r5[r6]
-            if (r4 == r5) goto L1f
-            int r2 = r2 + 1
-            goto L8
-        L1f:
-            int r3 = r3 + 1
-            goto Ld
-        L22:
-            r7 = 1
-            return r7
-        L24:
-            return r0
-        L25:
-            java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-            java.lang.String r8 = "key material too short."
-            r7.<init>(r8)
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.crypto.params.DESParameters.isWeakKey(byte[], int):boolean");
+    public static boolean isWeakKey(byte[] bArr, int i) {
+        if (bArr.length - i < 8) {
+            throw new IllegalArgumentException("key material too short.");
+        }
+        int i2 = 0;
+        while (i2 < 16) {
+            for (int i3 = 0; i3 < 8; i3++) {
+                if (bArr[i3 + i] != DES_weak_keys[(i2 * 8) + i3]) {
+                    break;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public static void setOddParity(byte[] bArr) {

@@ -6,7 +6,6 @@ import java.io.Closeable;
 import java.util.concurrent.locks.ReentrantLock;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class FileHandle implements Closeable {
     public boolean closed;
@@ -14,7 +13,6 @@ public abstract class FileHandle implements Closeable {
     public int openStreamCount;
     public final boolean readWrite;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FileHandleSink implements Sink {
         public boolean closed;
         public final FileHandle fileHandle;
@@ -68,11 +66,11 @@ public abstract class FileHandle implements Closeable {
             while (j2 < j3) {
                 Segment segment = buffer.head;
                 segment.getClass();
-                int min = (int) Math.min(j3 - j2, segment.limit - segment.pos);
-                fileHandle.protectedWrite(j2, segment.data, segment.pos, min);
-                int i = segment.pos + min;
+                int iMin = (int) Math.min(j3 - j2, segment.limit - segment.pos);
+                fileHandle.protectedWrite(j2, segment.data, segment.pos, iMin);
+                int i = segment.pos + iMin;
                 segment.pos = i;
-                long j4 = min;
+                long j4 = iMin;
                 j2 += j4;
                 buffer.size -= j4;
                 if (i == segment.limit) {
@@ -84,7 +82,6 @@ public abstract class FileHandle implements Closeable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FileHandleSource implements Source {
         public boolean closed;
         public final FileHandle fileHandle;
@@ -137,21 +134,21 @@ public abstract class FileHandle implements Closeable {
                     j2 = -1;
                     break;
                 }
-                Segment writableSegment$external__okio__android_common__okio_lib = buffer.writableSegment$external__okio__android_common__okio_lib(1);
+                Segment segmentWritableSegment$external__okio__android_common__okio_lib = buffer.writableSegment$external__okio__android_common__okio_lib(1);
                 j2 = -1;
                 long j7 = j5;
-                int protectedRead = fileHandle.protectedRead(j6, writableSegment$external__okio__android_common__okio_lib.data, writableSegment$external__okio__android_common__okio_lib.limit, (int) Math.min(j5 - j6, 8192 - r9));
-                if (protectedRead == -1) {
-                    if (writableSegment$external__okio__android_common__okio_lib.pos == writableSegment$external__okio__android_common__okio_lib.limit) {
-                        buffer.head = writableSegment$external__okio__android_common__okio_lib.pop();
-                        SegmentPool.recycle(writableSegment$external__okio__android_common__okio_lib);
+                int iProtectedRead = fileHandle.protectedRead(j6, segmentWritableSegment$external__okio__android_common__okio_lib.data, segmentWritableSegment$external__okio__android_common__okio_lib.limit, (int) Math.min(j5 - j6, 8192 - r9));
+                if (iProtectedRead == -1) {
+                    if (segmentWritableSegment$external__okio__android_common__okio_lib.pos == segmentWritableSegment$external__okio__android_common__okio_lib.limit) {
+                        buffer.head = segmentWritableSegment$external__okio__android_common__okio_lib.pop();
+                        SegmentPool.recycle(segmentWritableSegment$external__okio__android_common__okio_lib);
                     }
                     if (j4 == j6) {
                         j3 = -1;
                     }
                 } else {
-                    writableSegment$external__okio__android_common__okio_lib.limit += protectedRead;
-                    long j8 = protectedRead;
+                    segmentWritableSegment$external__okio__android_common__okio_lib.limit += iProtectedRead;
+                    long j8 = iProtectedRead;
                     j6 += j8;
                     buffer.size += j8;
                     j5 = j7;

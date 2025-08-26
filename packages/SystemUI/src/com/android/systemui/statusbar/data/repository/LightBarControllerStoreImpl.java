@@ -8,7 +8,6 @@ import com.android.systemui.statusbar.phone.LightBarControllerImpl;
 import kotlin.Unit;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LightBarControllerStoreImpl extends StatusBarPerDisplayStoreImpl implements LightBarControllerStore {
     public final DarkIconDispatcherStore darkIconDispatcherStore;
@@ -34,9 +33,9 @@ public final class LightBarControllerStoreImpl extends StatusBarPerDisplayStoreI
         if (darkIconDispatcher == null || (statusBarModePerDisplayRepository = (StatusBarModePerDisplayRepository) this.statusBarModeRepositoryStore.forDisplay(i)) == null || (coroutineScope = (CoroutineScope) this.displayScopeRepository.get(i)) == null) {
             return null;
         }
-        LightBarControllerImpl create = this.factory.create(i, coroutineScope, darkIconDispatcher, statusBarModePerDisplayRepository);
-        create.start();
-        return create;
+        LightBarControllerImpl lightBarControllerImplCreate = this.factory.create(i, coroutineScope, darkIconDispatcher, statusBarModePerDisplayRepository);
+        lightBarControllerImplCreate.start();
+        return lightBarControllerImplCreate;
     }
 
     @Override // com.android.systemui.display.data.repository.PerDisplayStoreImpl

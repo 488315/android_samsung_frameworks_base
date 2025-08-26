@@ -8,7 +8,6 @@ import com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerControll
 import com.android.systemui.qs.customize.viewcontroller.QSTileCustomizerController$$ExternalSyntheticLambda3;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ SecTileQueryHelper f$0;
@@ -57,7 +56,7 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda1 
                 }
                 ArrayList arrayList4 = new ArrayList();
                 String str2 = secQSCustomizerTileAdapter.mContext.getString(R.string.qs_edit_setting_available_area_tapped) + " ";
-                String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(secQSCustomizerTileAdapter.mContext, R.string.qs_edit_double_tab_and_hold_then_drag_to_reorder, new StringBuilder(", "));
+                String strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(secQSCustomizerTileAdapter.mContext, R.string.qs_edit_double_tab_and_hold_then_drag_to_reorder, new StringBuilder(", "));
                 for (int i5 = 0; i5 < arrayList3.size(); i5++) {
                     CustomTileInfo customTileInfo = new CustomTileInfo();
                     SecTileQueryHelper.TileInfo tileInfo = (SecTileQueryHelper.TileInfo) arrayList3.get(i5);
@@ -65,7 +64,7 @@ public final /* synthetic */ class SecTileQueryHelper$$ExternalSyntheticLambda1 
                     customTileInfo.isActive = tileInfo.isActive;
                     customTileInfo.state = tileInfo.state;
                     Log.d("SecQSCustomizerTileAdapter", "addTile state = " + customTileInfo.state);
-                    customTileInfo.customizeTileContentDes = str2 + ((Object) customTileInfo.state.label) + "" + m;
+                    customTileInfo.customizeTileContentDes = str2 + ((Object) customTileInfo.state.label) + "" + strM;
                     arrayList4.add(customTileInfo);
                 }
                 secQSCustomizerTileAdapter.mAvailableTiles = arrayList4;

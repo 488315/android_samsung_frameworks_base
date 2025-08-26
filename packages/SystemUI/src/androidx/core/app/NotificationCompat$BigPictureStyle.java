@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import androidx.core.graphics.drawable.IconCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationCompat$BigPictureStyle extends NotificationCompat$Style {
     public IconCompat mBigLargeIcon;
@@ -16,7 +15,6 @@ public class NotificationCompat$BigPictureStyle extends NotificationCompat$Style
     public IconCompat mPictureIcon;
     public boolean mShowBigPictureWhenCollapsed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api23Impl {
         private Api23Impl() {
         }
@@ -26,7 +24,6 @@ public class NotificationCompat$BigPictureStyle extends NotificationCompat$Style
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api31Impl {
         private Api31Impl() {
         }

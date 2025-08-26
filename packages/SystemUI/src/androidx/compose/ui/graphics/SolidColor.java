@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SolidColor extends Brush {
     public final long value;
@@ -15,14 +14,14 @@ public final class SolidColor extends Brush {
 
     @Override // androidx.compose.ui.graphics.Brush
     /* renamed from: applyTo-Pq9zytI */
-    public final void mo449applyToPq9zytI(float f, long j, Paint paint) {
+    public final void mo451applyToPq9zytI(float f, long j, Paint paint) {
         AndroidPaint androidPaint = (AndroidPaint) paint;
         androidPaint.setAlpha(1.0f);
-        long j2 = this.value;
+        long jColor = this.value;
         if (f != 1.0f) {
-            j2 = ColorKt.Color(Color.m461getRedimpl(j2), Color.m460getGreenimpl(j2), Color.m458getBlueimpl(j2), Color.m457getAlphaimpl(j2) * f, Color.m459getColorSpaceimpl(j2));
+            jColor = ColorKt.Color(Color.m463getRedimpl(jColor), Color.m462getGreenimpl(jColor), Color.m460getBlueimpl(jColor), Color.m459getAlphaimpl(jColor) * f, Color.m461getColorSpaceimpl(jColor));
         }
-        androidPaint.m438setColor8_81llA(j2);
+        androidPaint.m440setColor8_81llA(jColor);
         if (androidPaint.internalShader != null) {
             androidPaint.setShader(null);
         }
@@ -37,7 +36,7 @@ public final class SolidColor extends Brush {
         }
         long j = ((SolidColor) obj).value;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.value, j);
+        return ULong.m3447equalsimpl0(this.value, j);
     }
 
     public final int hashCode() {
@@ -47,7 +46,7 @@ public final class SolidColor extends Brush {
     }
 
     public final String toString() {
-        return "SolidColor(value=" + ((Object) Color.m462toStringimpl(this.value)) + ')';
+        return "SolidColor(value=" + ((Object) Color.m464toStringimpl(this.value)) + ')';
     }
 
     private SolidColor(long j) {

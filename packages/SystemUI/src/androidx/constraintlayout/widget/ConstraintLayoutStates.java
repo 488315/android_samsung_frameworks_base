@@ -1,6 +1,7 @@
 package androidx.constraintlayout.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ConstraintLayoutStates {
     private static final boolean DEBUG = false;
@@ -24,23 +24,22 @@ public class ConstraintLayoutStates {
     private SparseArray<ConstraintSet> mConstraintSetMap = new SparseArray<>();
     private ConstraintsChangedListener mConstraintsChangedListener = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class State {
         int mConstraintID;
         ConstraintSet mConstraintSet;
         int mId;
         ArrayList<Variant> mVariants = new ArrayList<>();
 
-        public State(Context context, XmlPullParser xmlPullParser) {
+        public State(Context context, XmlPullParser xmlPullParser) throws Resources.NotFoundException {
             this.mConstraintID = -1;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.State);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.State);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.State_android_id) {
-                    this.mId = obtainStyledAttributes.getResourceId(index, this.mId);
+                    this.mId = typedArrayObtainStyledAttributes.getResourceId(index, this.mId);
                 } else if (index == R.styleable.State_constraints) {
-                    this.mConstraintID = obtainStyledAttributes.getResourceId(index, this.mConstraintID);
+                    this.mConstraintID = typedArrayObtainStyledAttributes.getResourceId(index, this.mConstraintID);
                     String resourceTypeName = context.getResources().getResourceTypeName(this.mConstraintID);
                     context.getResources().getResourceName(this.mConstraintID);
                     if ("layout".equals(resourceTypeName)) {
@@ -50,7 +49,7 @@ public class ConstraintLayoutStates {
                     }
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public void add(Variant variant) {
@@ -67,7 +66,6 @@ public class ConstraintLayoutStates {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Variant {
         int mConstraintID;
         ConstraintSet mConstraintSet;
@@ -77,18 +75,18 @@ public class ConstraintLayoutStates {
         float mMinHeight;
         float mMinWidth;
 
-        public Variant(Context context, XmlPullParser xmlPullParser) {
+        public Variant(Context context, XmlPullParser xmlPullParser) throws Resources.NotFoundException {
             this.mMinWidth = Float.NaN;
             this.mMinHeight = Float.NaN;
             this.mMaxWidth = Float.NaN;
             this.mMaxHeight = Float.NaN;
             this.mConstraintID = -1;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.Variant);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.Variant);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.Variant_constraints) {
-                    this.mConstraintID = obtainStyledAttributes.getResourceId(index, this.mConstraintID);
+                    this.mConstraintID = typedArrayObtainStyledAttributes.getResourceId(index, this.mConstraintID);
                     String resourceTypeName = context.getResources().getResourceTypeName(this.mConstraintID);
                     context.getResources().getResourceName(this.mConstraintID);
                     if ("layout".equals(resourceTypeName)) {
@@ -97,16 +95,16 @@ public class ConstraintLayoutStates {
                         constraintSet.clone(context, this.mConstraintID);
                     }
                 } else if (index == R.styleable.Variant_region_heightLessThan) {
-                    this.mMaxHeight = obtainStyledAttributes.getDimension(index, this.mMaxHeight);
+                    this.mMaxHeight = typedArrayObtainStyledAttributes.getDimension(index, this.mMaxHeight);
                 } else if (index == R.styleable.Variant_region_heightMoreThan) {
-                    this.mMinHeight = obtainStyledAttributes.getDimension(index, this.mMinHeight);
+                    this.mMinHeight = typedArrayObtainStyledAttributes.getDimension(index, this.mMinHeight);
                 } else if (index == R.styleable.Variant_region_widthLessThan) {
-                    this.mMaxWidth = obtainStyledAttributes.getDimension(index, this.mMaxWidth);
+                    this.mMaxWidth = typedArrayObtainStyledAttributes.getDimension(index, this.mMaxWidth);
                 } else if (index == R.styleable.Variant_region_widthMoreThan) {
-                    this.mMinWidth = obtainStyledAttributes.getDimension(index, this.mMinWidth);
+                    this.mMinWidth = typedArrayObtainStyledAttributes.getDimension(index, this.mMinWidth);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public boolean match(float f, float f2) {
@@ -123,12 +121,16 @@ public class ConstraintLayoutStates {
         }
     }
 
-    public ConstraintLayoutStates(Context context, ConstraintLayout constraintLayout, int i) {
+    public ConstraintLayoutStates(Context context, ConstraintLayout constraintLayout, int i) throws XmlPullParserException, Resources.NotFoundException, IOException, NumberFormatException {
         this.mConstraintLayout = constraintLayout;
         load(context, i);
     }
 
-    private void load(Context context, int i) {
+    /* JADX WARN: Removed duplicated region for block: B:31:0x005d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private void load(Context context, int i) throws XmlPullParserException, Resources.NotFoundException, IOException, NumberFormatException {
         XmlResourceParser xml = context.getResources().getXml(i);
         try {
             int eventType = xml.getEventType();
@@ -142,38 +144,35 @@ public class ConstraintLayoutStates {
                     String name = xml.getName();
                     switch (name.hashCode()) {
                         case -1349929691:
-                            if (name.equals("ConstraintSet")) {
+                            if (!name.equals("ConstraintSet")) {
+                                c = 65535;
+                                break;
+                            } else {
                                 c = 4;
                                 break;
                             }
-                            c = 65535;
-                            break;
                         case 80204913:
                             if (name.equals("State")) {
                                 c = 2;
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 1382829617:
                             if (name.equals("StateSet")) {
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 1657696882:
                             if (name.equals("layoutDescription")) {
                                 c = 0;
                                 break;
                             }
-                            c = 65535;
                             break;
                         case 1901439077:
                             if (name.equals("Variant")) {
                                 c = 3;
                                 break;
                             }
-                            c = 65535;
                             break;
                         default:
                             c = 65535;
@@ -201,7 +200,7 @@ public class ConstraintLayoutStates {
         }
     }
 
-    private void parseConstraintSet(Context context, XmlPullParser xmlPullParser) {
+    private void parseConstraintSet(Context context, XmlPullParser xmlPullParser) throws XmlPullParserException, NumberFormatException, IOException {
         ConstraintSet constraintSet = new ConstraintSet();
         int attributeCount = xmlPullParser.getAttributeCount();
         for (int i = 0; i < attributeCount; i++) {
@@ -228,9 +227,9 @@ public class ConstraintLayoutStates {
         if (i2 != i) {
             return true;
         }
-        State valueAt = i == -1 ? this.mStateList.valueAt(0) : this.mStateList.get(i2);
+        State stateValueAt = i == -1 ? this.mStateList.valueAt(0) : this.mStateList.get(i2);
         int i3 = this.mCurrentConstraintNumber;
-        return (i3 == -1 || !valueAt.mVariants.get(i3).match(f, f2)) && this.mCurrentConstraintNumber != valueAt.findMatch(f, f2);
+        return (i3 == -1 || !stateValueAt.mVariants.get(i3).match(f, f2)) && this.mCurrentConstraintNumber != stateValueAt.findMatch(f, f2);
     }
 
     public void setOnConstraintsChanged(ConstraintsChangedListener constraintsChangedListener) {
@@ -238,18 +237,18 @@ public class ConstraintLayoutStates {
     }
 
     public void updateConstraints(int i, float f, float f2) {
-        int findMatch;
+        int iFindMatch;
         int i2 = this.mCurrentStateId;
         if (i2 != i) {
             this.mCurrentStateId = i;
             State state = this.mStateList.get(i);
-            int findMatch2 = state.findMatch(f, f2);
-            ConstraintSet constraintSet = findMatch2 == -1 ? state.mConstraintSet : state.mVariants.get(findMatch2).mConstraintSet;
-            int i3 = findMatch2 == -1 ? state.mConstraintID : state.mVariants.get(findMatch2).mConstraintID;
+            int iFindMatch2 = state.findMatch(f, f2);
+            ConstraintSet constraintSet = iFindMatch2 == -1 ? state.mConstraintSet : state.mVariants.get(iFindMatch2).mConstraintSet;
+            int i3 = iFindMatch2 == -1 ? state.mConstraintID : state.mVariants.get(iFindMatch2).mConstraintID;
             if (constraintSet == null) {
                 return;
             }
-            this.mCurrentConstraintNumber = findMatch2;
+            this.mCurrentConstraintNumber = iFindMatch2;
             ConstraintsChangedListener constraintsChangedListener = this.mConstraintsChangedListener;
             if (constraintsChangedListener != null) {
                 constraintsChangedListener.preLayoutChange(i, i3);
@@ -262,15 +261,15 @@ public class ConstraintLayoutStates {
             }
             return;
         }
-        State valueAt = i == -1 ? this.mStateList.valueAt(0) : this.mStateList.get(i2);
+        State stateValueAt = i == -1 ? this.mStateList.valueAt(0) : this.mStateList.get(i2);
         int i4 = this.mCurrentConstraintNumber;
-        if ((i4 == -1 || !valueAt.mVariants.get(i4).match(f, f2)) && this.mCurrentConstraintNumber != (findMatch = valueAt.findMatch(f, f2))) {
-            ConstraintSet constraintSet2 = findMatch == -1 ? this.mDefaultConstraintSet : valueAt.mVariants.get(findMatch).mConstraintSet;
-            int i5 = findMatch == -1 ? valueAt.mConstraintID : valueAt.mVariants.get(findMatch).mConstraintID;
+        if ((i4 == -1 || !stateValueAt.mVariants.get(i4).match(f, f2)) && this.mCurrentConstraintNumber != (iFindMatch = stateValueAt.findMatch(f, f2))) {
+            ConstraintSet constraintSet2 = iFindMatch == -1 ? this.mDefaultConstraintSet : stateValueAt.mVariants.get(iFindMatch).mConstraintSet;
+            int i5 = iFindMatch == -1 ? stateValueAt.mConstraintID : stateValueAt.mVariants.get(iFindMatch).mConstraintID;
             if (constraintSet2 == null) {
                 return;
             }
-            this.mCurrentConstraintNumber = findMatch;
+            this.mCurrentConstraintNumber = iFindMatch;
             ConstraintsChangedListener constraintsChangedListener3 = this.mConstraintsChangedListener;
             if (constraintsChangedListener3 != null) {
                 constraintsChangedListener3.preLayoutChange(-1, i5);

@@ -1,5 +1,6 @@
 package com.android.internal.util;
 
+import com.android.internal.midi.MidiConstants;
 import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,11 +36,11 @@ public class ProcFileReader implements Closeable {
         if (i2 == 0) {
             throw new IOException("attempting to fill already-full buffer");
         }
-        int read = this.mStream.read(bArr, i, i2);
-        if (read != -1) {
-            this.mTail += read;
+        int i3 = this.mStream.read(bArr, i, i2);
+        if (i3 != -1) {
+            this.mTail += i3;
         }
-        return read;
+        return i3;
     }
 
     private void consumeBuf(int i) throws IOException {
@@ -111,11 +112,11 @@ public class ProcFileReader implements Closeable {
     }
 
     public String nextString() throws IOException {
-        int nextTokenIndex = nextTokenIndex();
-        if (nextTokenIndex == -1) {
+        int iNextTokenIndex = nextTokenIndex();
+        if (iNextTokenIndex == -1) {
             throw new ProtocolException("Missing required string");
         }
-        return parseAndConsumeString(nextTokenIndex);
+        return parseAndConsumeString(iNextTokenIndex);
     }
 
     public long nextLong() throws IOException {
@@ -123,16 +124,16 @@ public class ProcFileReader implements Closeable {
     }
 
     public long nextLong(boolean z) throws IOException {
-        int nextTokenIndex = nextTokenIndex();
-        if (nextTokenIndex == -1) {
+        int iNextTokenIndex = nextTokenIndex();
+        if (iNextTokenIndex == -1) {
             throw new ProtocolException("Missing required long");
         }
-        return parseAndConsumeLong(nextTokenIndex, z);
+        return parseAndConsumeLong(iNextTokenIndex, z);
     }
 
     public long nextOptionalLong(long j) throws IOException {
-        int nextTokenIndex = nextTokenIndex();
-        return nextTokenIndex == -1 ? j : parseAndConsumeLong(nextTokenIndex, false);
+        int iNextTokenIndex = nextTokenIndex();
+        return iNextTokenIndex == -1 ? j : parseAndConsumeLong(iNextTokenIndex, false);
     }
 
     private String parseAndConsumeString(int i) throws IOException {
@@ -145,59 +146,30 @@ public class ProcFileReader implements Closeable {
     /* JADX WARN: Removed duplicated region for block: B:24:0x003e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private long parseAndConsumeLong(int r11, boolean r12) throws java.io.IOException {
-        /*
-            r10 = this;
-            byte[] r0 = r10.mBuffer
-            r1 = 0
-            r0 = r0[r1]
-            r2 = 45
-            r3 = 1
-            if (r0 != r2) goto Lb
-            r1 = r3
-        Lb:
-            r4 = 0
-            r0 = r1
-        Le:
-            if (r0 >= r11) goto L37
-            byte[] r2 = r10.mBuffer
-            r2 = r2[r0]
-            int r2 = r2 + (-48)
-            if (r2 < 0) goto L2f
-            r6 = 9
-            if (r2 <= r6) goto L1d
-            goto L2f
-        L1d:
-            r6 = 10
-            long r6 = r6 * r4
-            long r8 = (long) r2
-            long r6 = r6 - r8
-            int r2 = (r6 > r4 ? 1 : (r6 == r4 ? 0 : -1))
-            if (r2 > 0) goto L2a
-            int r0 = r0 + 1
-            r4 = r6
-            goto Le
-        L2a:
-            java.lang.NumberFormatException r10 = r10.invalidLong(r11)
-            throw r10
-        L2f:
-            if (r12 == 0) goto L32
-            goto L37
-        L32:
-            java.lang.NumberFormatException r10 = r10.invalidLong(r11)
-            throw r10
-        L37:
-            int r11 = r11 + r3
-            r10.consumeBuf(r11)
-            if (r1 == 0) goto L3e
-            return r4
-        L3e:
-            long r10 = -r4
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.util.ProcFileReader.parseAndConsumeLong(int, boolean):long");
+    private long parseAndConsumeLong(int i, boolean z) throws IOException {
+        int i2 = this.mBuffer[0] == 45 ? 1 : 0;
+        long j = 0;
+        int i3 = i2;
+        while (i3 < i) {
+            int i4 = this.mBuffer[i3] + MidiConstants.STATUS_CHANNEL_PRESSURE;
+            if (i4 < 0 || i4 > 9) {
+                if (!z) {
+                    throw invalidLong(i);
+                }
+                consumeBuf(i + 1);
+                return i2 == 0 ? j : -j;
+            }
+            long j2 = (10 * j) - i4;
+            if (j2 > j) {
+                throw invalidLong(i);
+            }
+            i3++;
+            j = j2;
+        }
+        consumeBuf(i + 1);
+        if (i2 == 0) {
+        }
     }
 
     private NumberFormatException invalidLong(int i) {
@@ -205,19 +177,19 @@ public class ProcFileReader implements Closeable {
     }
 
     public int nextInt() throws IOException {
-        long nextLong = nextLong();
-        if (nextLong > 2147483647L || nextLong < -2147483648L) {
+        long jNextLong = nextLong();
+        if (jNextLong > 2147483647L || jNextLong < -2147483648L) {
             throw new NumberFormatException("parsed value larger than integer");
         }
-        return (int) nextLong;
+        return (int) jNextLong;
     }
 
     public void nextIgnored() throws IOException {
-        int nextTokenIndex = nextTokenIndex();
-        if (nextTokenIndex == -1) {
+        int iNextTokenIndex = nextTokenIndex();
+        if (iNextTokenIndex == -1) {
             throw new ProtocolException("Missing required token");
         }
-        consumeBuf(nextTokenIndex + 1);
+        consumeBuf(iNextTokenIndex + 1);
     }
 
     public void rewind() throws IOException {

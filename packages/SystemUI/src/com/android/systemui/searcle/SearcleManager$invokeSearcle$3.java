@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SearcleManager$invokeSearcle$3 extends SuspendLambda implements Function2 {
     int label;
@@ -44,15 +43,15 @@ final class SearcleManager$invokeSearcle$3 extends SuspendLambda implements Func
         ResultKt.throwOnFailure(obj);
         SearcleManager searcleManager = this.this$0;
         Context context = searcleManager.context;
-        int access$getOmniEntryPoint = SearcleManager.access$getOmniEntryPoint(searcleManager);
+        int iAccess$getOmniEntryPoint = SearcleManager.access$getOmniEntryPoint(searcleManager);
         Context context2 = OmniAPI.mContext;
-        Log.d("OmniAPI", "invokeOmni omniEntryPoint = " + access$getOmniEntryPoint);
+        Log.d("OmniAPI", "invokeOmni omniEntryPoint = " + iAccess$getOmniEntryPoint);
         ContextualSearchManager contextualSearchManager = (ContextualSearchManager) context.getSystemService(ContextualSearchManager.class);
         if (contextualSearchManager == null) {
             Log.i("OmniAPI", "CSS system service is null");
             Boxing.boxInt(Log.d("SearcleManager", "invokeSearcle invokeOmni return false"));
         } else {
-            contextualSearchManager.startContextualSearch(access$getOmniEntryPoint);
+            contextualSearchManager.startContextualSearch(iAccess$getOmniEntryPoint);
             Log.i("OmniAPI", "invokeOmni");
             SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_INVOKE_SEARCLE, this.this$0.invokedPackageName);
         }

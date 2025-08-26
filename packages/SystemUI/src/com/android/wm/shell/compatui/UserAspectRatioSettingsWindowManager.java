@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UserAspectRatioSettingsWindowManager extends CompatUIWindowManagerAbstract {
     final CompatUIController.CompatUIHintsState mCompatUIHintsState;
@@ -48,7 +47,7 @@ public class UserAspectRatioSettingsWindowManager extends CompatUIWindowManagerA
     }
 
     /* renamed from: $r8$lambda$qcC5U0asMBEasgAnScT0e3j-tE0, reason: not valid java name */
-    public static void m3227$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager) {
+    public static void m3244$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager) {
         UserAspectRatioSettingsLayout userAspectRatioSettingsLayout = userAspectRatioSettingsWindowManager.mLayout;
         if (userAspectRatioSettingsLayout == null) {
             return;
@@ -77,9 +76,9 @@ public class UserAspectRatioSettingsWindowManager extends CompatUIWindowManagerA
 
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract
     public final View createLayout() {
-        UserAspectRatioSettingsLayout inflateLayout = inflateLayout();
-        this.mLayout = inflateLayout;
-        inflateLayout.mWindowManager = this;
+        UserAspectRatioSettingsLayout userAspectRatioSettingsLayoutInflateLayout = inflateLayout();
+        this.mLayout = userAspectRatioSettingsLayoutInflateLayout;
+        userAspectRatioSettingsLayoutInflateLayout.mWindowManager = this;
         updateVisibilityOfViews();
         return this.mLayout;
     }
@@ -171,9 +170,9 @@ public class UserAspectRatioSettingsWindowManager extends CompatUIWindowManagerA
             return;
         }
         ((HandlerExecutor) this.mShellExecutor).executeDelayed(new UserAspectRatioSettingsWindowManager$$ExternalSyntheticLambda0(this, 0), 500L);
-        long intValue = ((Integer) this.mDisappearTimeSupplier.apply(4)).intValue();
-        this.mNextButtonHideTimeMs = SystemClock.uptimeMillis() + intValue;
-        ((HandlerExecutor) this.mShellExecutor).executeDelayed(new UserAspectRatioSettingsWindowManager$$ExternalSyntheticLambda0(this, 1), intValue);
+        long jIntValue = ((Integer) this.mDisappearTimeSupplier.apply(4)).intValue();
+        this.mNextButtonHideTimeMs = SystemClock.uptimeMillis() + jIntValue;
+        ((HandlerExecutor) this.mShellExecutor).executeDelayed(new UserAspectRatioSettingsWindowManager$$ExternalSyntheticLambda0(this, 1), jIntValue);
     }
 
     public void updateSurfacePosition(SurfaceControl.Transaction transaction) {

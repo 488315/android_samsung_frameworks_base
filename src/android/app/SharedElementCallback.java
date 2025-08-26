@@ -45,18 +45,18 @@ public abstract class SharedElementCallback {
     }
 
     public Parcelable onCaptureSharedElementSnapshot(View view, Matrix matrix, RectF rectF) {
-        Bitmap createDrawableBitmap;
+        Bitmap bitmapCreateDrawableBitmap;
         if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
             Drawable drawable = imageView.getDrawable();
             Drawable background = imageView.getBackground();
-            if (drawable != null && ((background == null || background.getAlpha() == 0) && (createDrawableBitmap = TransitionUtils.createDrawableBitmap(drawable, imageView)) != null)) {
+            if (drawable != null && ((background == null || background.getAlpha() == 0) && (bitmapCreateDrawableBitmap = TransitionUtils.createDrawableBitmap(drawable, imageView)) != null)) {
                 Bundle bundle = new Bundle();
-                if (createDrawableBitmap.getConfig() != Bitmap.Config.HARDWARE) {
-                    bundle.putParcelable(BUNDLE_SNAPSHOT_BITMAP, createDrawableBitmap);
+                if (bitmapCreateDrawableBitmap.getConfig() != Bitmap.Config.HARDWARE) {
+                    bundle.putParcelable(BUNDLE_SNAPSHOT_BITMAP, bitmapCreateDrawableBitmap);
                 } else {
-                    bundle.putParcelable(BUNDLE_SNAPSHOT_HARDWARE_BUFFER, createDrawableBitmap.getHardwareBuffer());
-                    ColorSpace colorSpace = createDrawableBitmap.getColorSpace();
+                    bundle.putParcelable(BUNDLE_SNAPSHOT_HARDWARE_BUFFER, bitmapCreateDrawableBitmap.getHardwareBuffer());
+                    ColorSpace colorSpace = bitmapCreateDrawableBitmap.getColorSpace();
                     if (colorSpace != null) {
                         bundle.putInt(BUNDLE_SNAPSHOT_COLOR_SPACE, colorSpace.getId());
                     }
@@ -84,19 +84,19 @@ public abstract class SharedElementCallback {
         if (parcelable instanceof Bundle) {
             Bundle bundle = (Bundle) parcelable;
             HardwareBuffer hardwareBuffer = (HardwareBuffer) bundle.getParcelable(BUNDLE_SNAPSHOT_HARDWARE_BUFFER, HardwareBuffer.class);
-            Bitmap bitmap = (Bitmap) bundle.getParcelable(BUNDLE_SNAPSHOT_BITMAP, Bitmap.class);
-            if (hardwareBuffer == null && bitmap == null) {
+            Bitmap bitmapWrapHardwareBuffer = (Bitmap) bundle.getParcelable(BUNDLE_SNAPSHOT_BITMAP, Bitmap.class);
+            if (hardwareBuffer == null && bitmapWrapHardwareBuffer == null) {
                 return null;
             }
-            if (bitmap == null) {
+            if (bitmapWrapHardwareBuffer == null) {
                 int i = bundle.getInt(BUNDLE_SNAPSHOT_COLOR_SPACE, 0);
                 if (i >= 0 && i < ColorSpace.Named.values().length) {
                     colorSpace = ColorSpace.get(ColorSpace.Named.values()[i]);
                 }
-                bitmap = Bitmap.wrapHardwareBuffer(hardwareBuffer, colorSpace);
+                bitmapWrapHardwareBuffer = Bitmap.wrapHardwareBuffer(hardwareBuffer, colorSpace);
             }
             ImageView imageView = new ImageView(context);
-            imageView.setImageBitmap(bitmap);
+            imageView.setImageBitmap(bitmapWrapHardwareBuffer);
             imageView.setScaleType(ImageView.ScaleType.valueOf(bundle.getString(BUNDLE_SNAPSHOT_IMAGE_SCALETYPE)));
             if (imageView.getScaleType() == ImageView.ScaleType.MATRIX) {
                 float[] floatArray = bundle.getFloatArray(BUNDLE_SNAPSHOT_IMAGE_MATRIX);

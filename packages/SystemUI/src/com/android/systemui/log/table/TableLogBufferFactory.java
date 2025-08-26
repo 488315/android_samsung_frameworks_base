@@ -9,7 +9,6 @@ import com.android.systemui.util.time.SystemClock;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TableLogBufferFactory {
     public final DumpManager dumpManager;
@@ -43,12 +42,12 @@ public final class TableLogBufferFactory {
         TableLogBuffer tableLogBuffer;
         synchronized (this.existingBuffers) {
             try {
-                Object obj = this.existingBuffers.get(str);
-                if (obj == null) {
-                    obj = create(i, str);
-                    this.existingBuffers.put(str, obj);
+                Object objCreate = this.existingBuffers.get(str);
+                if (objCreate == null) {
+                    objCreate = create(i, str);
+                    this.existingBuffers.put(str, objCreate);
                 }
-                tableLogBuffer = (TableLogBuffer) obj;
+                tableLogBuffer = (TableLogBuffer) objCreate;
             } catch (Throwable th) {
                 throw th;
             }

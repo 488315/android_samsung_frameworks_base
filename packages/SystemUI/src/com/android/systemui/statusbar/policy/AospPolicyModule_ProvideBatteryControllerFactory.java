@@ -16,7 +16,6 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.power.EnhancedEstimates;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AospPolicyModule_ProvideBatteryControllerFactory implements Provider {
     public final Provider bgHandlerProvider;
@@ -42,7 +41,7 @@ public final class AospPolicyModule_ProvideBatteryControllerFactory implements P
     }
 
     public static BatteryControllerImpl provideBatteryController(Context context, EnhancedEstimates enhancedEstimates, PowerManager powerManager, BroadcastDispatcher broadcastDispatcher, DemoModeController demoModeController, DumpManager dumpManager, BatteryControllerLogger batteryControllerLogger, Handler handler, Handler handler2) {
-        Intent registerReceiver;
+        Intent intentRegisterReceiver;
         BatteryControllerImpl batteryControllerImpl = new BatteryControllerImpl(context, enhancedEstimates, powerManager, broadcastDispatcher, demoModeController, dumpManager, batteryControllerLogger, handler, handler2);
         BatteryControllerLogger batteryControllerLogger2 = batteryControllerImpl.mLogger;
         boolean z = batteryControllerImpl.mHasReceivedBattery;
@@ -50,14 +49,14 @@ public final class AospPolicyModule_ProvideBatteryControllerFactory implements P
         LogLevel logLevel = LogLevel.DEBUG;
         BatteryControllerLogger$$ExternalSyntheticLambda1 batteryControllerLogger$$ExternalSyntheticLambda1 = new BatteryControllerLogger$$ExternalSyntheticLambda1(3);
         LogBuffer logBuffer = batteryControllerLogger2.logBuffer;
-        LogMessage obtain = logBuffer.obtain("BatteryControllerLog", logLevel, batteryControllerLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BatteryControllerLog", logLevel, batteryControllerLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = System.identityHashCode(batteryControllerImpl);
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         batteryControllerImpl.registerReceiver$1();
-        if (!batteryControllerImpl.mHasReceivedBattery && (registerReceiver = batteryControllerImpl.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"))) != null && !batteryControllerImpl.mHasReceivedBattery) {
-            batteryControllerImpl.onReceive(batteryControllerImpl.mContext, registerReceiver);
+        if (!batteryControllerImpl.mHasReceivedBattery && (intentRegisterReceiver = batteryControllerImpl.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"))) != null && !batteryControllerImpl.mHasReceivedBattery) {
+            batteryControllerImpl.onReceive(batteryControllerImpl.mContext, intentRegisterReceiver);
         }
         batteryControllerImpl.mDemoModeController.addCallback((DemoMode) batteryControllerImpl);
         DumpManager dumpManager2 = batteryControllerImpl.mDumpManager;

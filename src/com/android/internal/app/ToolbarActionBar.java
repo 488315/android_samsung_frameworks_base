@@ -469,12 +469,12 @@ public class ToolbarActionBar extends ActionBar {
 
         @Override // android.view.WindowCallbackWrapper, android.view.Window.Callback
         public boolean onPreparePanel(int i, View view, Menu menu) {
-            boolean onPreparePanel = super.onPreparePanel(i, view, menu);
-            if (onPreparePanel && !ToolbarActionBar.this.mToolbarMenuPrepared) {
+            boolean zOnPreparePanel = super.onPreparePanel(i, view, menu);
+            if (zOnPreparePanel && !ToolbarActionBar.this.mToolbarMenuPrepared) {
                 ToolbarActionBar.this.mDecorToolbar.setMenuPrepared();
                 ToolbarActionBar.this.mToolbarMenuPrepared = true;
             }
-            return onPreparePanel;
+            return zOnPreparePanel;
         }
 
         @Override // android.view.WindowCallbackWrapper, android.view.Window.Callback

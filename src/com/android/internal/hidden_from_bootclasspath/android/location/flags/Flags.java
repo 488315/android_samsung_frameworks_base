@@ -29,6 +29,7 @@ public final class Flags {
     public static final String FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI = "android.location.flags.replace_future_elapsed_realtime_jni";
     public static final String FLAG_SERVICE_WATCHER_UNSTABLE_FALLBACK = "android.location.flags.service_watcher_unstable_fallback";
     public static final String FLAG_SUBSCRIPTIONS_CHANGED_LISTENER_THREAD = "android.location.flags.subscriptions_changed_listener_thread";
+    public static final String FLAG_UPDATE_IS_IN_EMERGENCY_BEFORE_ON_REGISTER = "android.location.flags.update_is_in_emergency_before_on_register";
     public static final String FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL = "android.location.flags.update_min_location_request_interval";
     public static final String FLAG_USE_LEGACY_NTP_TIME = "android.location.flags.use_legacy_ntp_time";
 
@@ -134,6 +135,10 @@ public final class Flags {
 
     public static boolean subscriptionsChangedListenerThread() {
         return FEATURE_FLAGS.subscriptionsChangedListenerThread();
+    }
+
+    public static boolean updateIsInEmergencyBeforeOnRegister() {
+        return FEATURE_FLAGS.updateIsInEmergencyBeforeOnRegister();
     }
 
     public static boolean updateMinLocationRequestInterval() {

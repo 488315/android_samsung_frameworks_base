@@ -10,7 +10,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NoOpInfoMediaManager extends InfoMediaManager {
     public static final RoutingSessionInfo PLACEHOLDER_SESSION = new RoutingSessionInfo.Builder("FAKE_ROUTING_SESSION", "").addSelectedRoute("FAKE_SELECTED_ROUTE_ID").setVolumeMax(-1).setVolume(-1).build();

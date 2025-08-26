@@ -1,83 +1,77 @@
 package com.android.systemui.lifecycle;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ExclusiveActivatable implements Activatable {
     public static final int $stable = 8;
     private final AtomicBoolean _isActive = new AtomicBoolean(false);
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* renamed from: com.android.systemui.lifecycle.ExclusiveActivatable$activate$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ExclusiveActivatable.this.activate(this);
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.Activatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object activate(kotlin.coroutines.Continuation r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.lifecycle.ExclusiveActivatable$activate$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.lifecycle.ExclusiveActivatable$activate$1 r0 = (com.android.systemui.lifecycle.ExclusiveActivatable$activate$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.lifecycle.ExclusiveActivatable$activate$1 r0 = new com.android.systemui.lifecycle.ExclusiveActivatable$activate$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L36
-            if (r2 == r4) goto L2c
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L2c:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.lifecycle.ExclusiveActivatable r5 = (com.android.systemui.lifecycle.ExclusiveActivatable) r5
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Throwable -> L34
-            goto L4c
-        L34:
-            r6 = move-exception
-            goto L52
-        L36:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.util.concurrent.atomic.AtomicBoolean r6 = r5._isActive
-            boolean r6 = r6.compareAndSet(r3, r4)
-            if (r6 == 0) goto L58
-            r0.L$0 = r5     // Catch: java.lang.Throwable -> L34
-            r0.label = r4     // Catch: java.lang.Throwable -> L34
-            java.lang.Object r6 = r5.onActivated(r0)     // Catch: java.lang.Throwable -> L34
-            if (r6 != r1) goto L4c
-            return r1
-        L4c:
-            kotlin.KotlinNothingValueException r6 = new kotlin.KotlinNothingValueException     // Catch: java.lang.Throwable -> L34
-            r6.<init>()     // Catch: java.lang.Throwable -> L34
-            throw r6     // Catch: java.lang.Throwable -> L34
-        L52:
-            java.util.concurrent.atomic.AtomicBoolean r5 = r5._isActive
-            r5.set(r3)
-            throw r6
-        L58:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "Cannot activate an already active ExclusiveActivatable!"
-            r5.<init>(r6)
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.lifecycle.ExclusiveActivatable.activate(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object activate(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                if (!this._isActive.compareAndSet(false, true)) {
+                    throw new IllegalStateException("Cannot activate an already active ExclusiveActivatable!");
+                }
+                anonymousClass1.L$0 = this;
+                anonymousClass1.label = 1;
+                if (onActivated(anonymousClass1) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                this = (ExclusiveActivatable) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        } catch (Throwable th) {
+            this._isActive.set(false);
+            throw th;
+        }
     }
 
     public final boolean isActive() {

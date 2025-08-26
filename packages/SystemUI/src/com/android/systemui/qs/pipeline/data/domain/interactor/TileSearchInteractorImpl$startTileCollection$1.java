@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.Log;
 import com.android.systemui.R;
 import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractorImpl;
@@ -31,14 +32,12 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TileSearchInteractorImpl$startTileCollection$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ TileSearchInteractorImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileSearchInteractorImpl$startTileCollection$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -72,7 +71,7 @@ final class TileSearchInteractorImpl$startTileCollection$1 extends SuspendLambda
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         UserInfo userInfo = (UserInfo) obj2;
-                        TileSearchInteractorImpl tileSearchInteractorImpl2 = TileSearchInteractorImpl.this;
+                        TileSearchInteractorImpl tileSearchInteractorImpl2 = tileSearchInteractorImpl;
                         int i2 = tileSearchInteractorImpl2.currentUser;
                         int i3 = userInfo.id;
                         if (i2 != i3) {
@@ -99,13 +98,11 @@ final class TileSearchInteractorImpl$startTileCollection$1 extends SuspendLambda
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileSearchInteractorImpl$startTileCollection$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
         final /* synthetic */ TileSearchInteractorImpl this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileSearchInteractorImpl$startTileCollection$1$2$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             /* synthetic */ Object L$0;
@@ -131,7 +128,7 @@ final class TileSearchInteractorImpl$startTileCollection$1 extends SuspendLambda
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-            public final Object invokeSuspend(Object obj) {
+            public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
                 CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
                 if (this.label != 0) {
                     throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -212,13 +209,11 @@ final class TileSearchInteractorImpl$startTileCollection$1 extends SuspendLambda
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileSearchInteractorImpl$startTileCollection$1$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         int label;
         final /* synthetic */ TileSearchInteractorImpl this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileSearchInteractorImpl$startTileCollection$1$3$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             /* synthetic */ Object L$0;

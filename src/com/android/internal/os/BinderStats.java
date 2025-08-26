@@ -99,23 +99,23 @@ public class BinderStats implements Parcelable {
 
     private void readFromParcel(Parcel parcel) {
         reset();
-        int readInt = parcel.readInt();
-        if (readInt != MAGIC) {
-            Slog.e(TAG, "MAGIC number mismatch expected=-2130369756 actual=" + readInt);
+        int i = parcel.readInt();
+        if (i != MAGIC) {
+            Slog.e(TAG, "MAGIC number mismatch expected=-2130369756 actual=" + i);
             return;
         }
-        int readInt2 = parcel.readInt();
-        for (int i = 0; i < readInt2; i++) {
+        int i2 = parcel.readInt();
+        for (int i3 = 0; i3 < i2; i3++) {
             BinderStatsEntry binderStatsEntry = new BinderStatsEntry();
             binderStatsEntry.mStartTime = parcel.readLong();
             binderStatsEntry.mEndTime = parcel.readLong();
-            int readInt3 = parcel.readInt();
-            if (readInt3 > 5) {
+            int i4 = parcel.readInt();
+            if (i4 > 5) {
                 reset();
                 Slog.e(TAG, "The binder_calls_stats file seems to be broken. We discard previous stats.");
                 return;
             }
-            for (int i2 = 0; i2 < readInt3; i2++) {
+            for (int i5 = 0; i5 < i4; i5++) {
                 BinderStatsUnit binderStatsUnit = new BinderStatsUnit();
                 binderStatsUnit.callingUid = parcel.readInt();
                 binderStatsUnit.packageName = parcel.readString();
@@ -134,13 +134,13 @@ public class BinderStats implements Parcelable {
         byte[] bArr = new byte[16384];
         int i = 0;
         while (true) {
-            int read = inputStream.read(bArr, i, bArr.length - i);
-            if (read < 0) {
+            int i2 = inputStream.read(bArr, i, bArr.length - i);
+            if (i2 < 0) {
                 Slog.d(TAG, "**** FINISHED READING: pos=" + i + " len=" + bArr.length);
                 iArr[0] = i;
                 return bArr;
             }
-            i += read;
+            i += i2;
             if (i >= bArr.length) {
                 byte[] bArr2 = new byte[i + 16384];
                 System.arraycopy(bArr, 0, bArr2, 0, i);
@@ -150,17 +150,17 @@ public class BinderStats implements Parcelable {
     }
 
     public void read(InputStream inputStream) {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
             int[] iArr = new int[1];
-            obtain.unmarshall(readFully(inputStream, iArr), 0, iArr[0]);
-            obtain.setDataPosition(0);
+            parcelObtain.unmarshall(readFully(inputStream, iArr), 0, iArr[0]);
+            parcelObtain.setDataPosition(0);
             inputStream.close();
-            readFromParcel(obtain);
+            readFromParcel(parcelObtain);
         } catch (IOException e) {
             Slog.e(TAG, "Failed to read stat files", e);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

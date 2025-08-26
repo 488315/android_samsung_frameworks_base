@@ -64,23 +64,23 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
     }
 
     public void makeImmutable() {
-        Map<K, V> unmodifiableMap;
-        Map<K, V> unmodifiableMap2;
+        Map<K, V> mapUnmodifiableMap;
+        Map<K, V> mapUnmodifiableMap2;
         if (this.isImmutable) {
             return;
         }
         if (this.overflowEntries.isEmpty()) {
-            unmodifiableMap = Collections.EMPTY_MAP;
+            mapUnmodifiableMap = Collections.EMPTY_MAP;
         } else {
-            unmodifiableMap = Collections.unmodifiableMap(this.overflowEntries);
+            mapUnmodifiableMap = Collections.unmodifiableMap(this.overflowEntries);
         }
-        this.overflowEntries = unmodifiableMap;
+        this.overflowEntries = mapUnmodifiableMap;
         if (this.overflowEntriesDescending.isEmpty()) {
-            unmodifiableMap2 = Collections.EMPTY_MAP;
+            mapUnmodifiableMap2 = Collections.EMPTY_MAP;
         } else {
-            unmodifiableMap2 = Collections.unmodifiableMap(this.overflowEntriesDescending);
+            mapUnmodifiableMap2 = Collections.unmodifiableMap(this.overflowEntriesDescending);
         }
-        this.overflowEntriesDescending = unmodifiableMap2;
+        this.overflowEntriesDescending = mapUnmodifiableMap2;
         this.isImmutable = true;
     }
 
@@ -119,40 +119,38 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return this.entryList.size() + this.overflowEntries.size();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public boolean containsKey(Object obj) {
         Comparable comparable = (Comparable) obj;
         return binarySearchInArray(comparable) >= 0 || this.overflowEntries.containsKey(comparable);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public V get(Object obj) {
         Comparable comparable = (Comparable) obj;
-        int binarySearchInArray = binarySearchInArray(comparable);
-        if (binarySearchInArray >= 0) {
-            return this.entryList.get(binarySearchInArray).getValue();
+        int iBinarySearchInArray = binarySearchInArray(comparable);
+        if (iBinarySearchInArray >= 0) {
+            return this.entryList.get(iBinarySearchInArray).getValue();
         }
         return this.overflowEntries.get(comparable);
     }
 
     public V put(K k, V v) {
         checkMutable();
-        int binarySearchInArray = binarySearchInArray(k);
-        if (binarySearchInArray >= 0) {
-            return this.entryList.get(binarySearchInArray).setValue(v);
+        int iBinarySearchInArray = binarySearchInArray(k);
+        if (iBinarySearchInArray >= 0) {
+            return this.entryList.get(iBinarySearchInArray).setValue(v);
         }
         ensureEntryArrayMutable();
-        int i = -(binarySearchInArray + 1);
+        int i = -(iBinarySearchInArray + 1);
         if (i >= this.maxArraySize) {
             return getOverflowEntriesMutable().put(k, v);
         }
         int size = this.entryList.size();
         int i2 = this.maxArraySize;
         if (size == i2) {
-            SmallSortedMap<K, V>.Entry remove = this.entryList.remove(i2 - 1);
-            getOverflowEntriesMutable().put(remove.getKey(), remove.getValue());
+            SmallSortedMap<K, V>.Entry entryRemove = this.entryList.remove(i2 - 1);
+            getOverflowEntriesMutable().put(entryRemove.getKey(), entryRemove.getValue());
         }
         this.entryList.add(i, new Entry(k, v));
         return null;
@@ -170,14 +168,13 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         this.overflowEntries.clear();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     @Override // java.util.AbstractMap, java.util.Map
     public V remove(Object obj) {
         checkMutable();
         Comparable comparable = (Comparable) obj;
-        int binarySearchInArray = binarySearchInArray(comparable);
-        if (binarySearchInArray >= 0) {
-            return (V) removeArrayEntryAt(binarySearchInArray);
+        int iBinarySearchInArray = binarySearchInArray(comparable);
+        if (iBinarySearchInArray >= 0) {
+            return removeArrayEntryAt(iBinarySearchInArray);
         }
         if (this.overflowEntries.isEmpty()) {
             return null;
@@ -197,35 +194,45 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return value;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0026  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int binarySearchInArray(K k) {
         int i;
+        int i2;
         int size = this.entryList.size();
-        int i2 = size - 1;
-        if (i2 >= 0) {
-            int compareTo = k.compareTo(this.entryList.get(i2).getKey());
-            if (compareTo > 0) {
-                i = size + 1;
-                return -i;
-            }
-            if (compareTo == 0) {
-                return i2;
-            }
-        }
-        int i3 = 0;
-        while (i3 <= i2) {
-            int i4 = (i3 + i2) / 2;
-            int compareTo2 = k.compareTo(this.entryList.get(i4).getKey());
-            if (compareTo2 < 0) {
-                i2 = i4 - 1;
-            } else {
-                if (compareTo2 <= 0) {
-                    return i4;
+        int i3 = size - 1;
+        if (i3 < 0) {
+            i = 0;
+            while (i <= i3) {
+                int i4 = (i + i3) / 2;
+                int iCompareTo = k.compareTo(this.entryList.get(i4).getKey());
+                if (iCompareTo < 0) {
+                    i3 = i4 - 1;
+                } else {
+                    if (iCompareTo <= 0) {
+                        return i4;
+                    }
+                    i = i4 + 1;
                 }
-                i3 = i4 + 1;
+            }
+            i2 = i + 1;
+        } else {
+            int iCompareTo2 = k.compareTo(this.entryList.get(i3).getKey());
+            if (iCompareTo2 > 0) {
+                i2 = size + 1;
+            } else {
+                if (iCompareTo2 == 0) {
+                    return i3;
+                }
+                i = 0;
+                while (i <= i3) {
+                }
+                i2 = i + 1;
             }
         }
-        i = i3 + 1;
-        return -i;
+        return -i2;
     }
 
     @Override // java.util.AbstractMap, java.util.Map
@@ -319,9 +326,9 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         @Override // java.util.Map.Entry
         public int hashCode() {
             K k = this.key;
-            int hashCode = k == null ? 0 : k.hashCode();
+            int iHashCode = k == null ? 0 : k.hashCode();
             V v = this.value;
-            return hashCode ^ (v != null ? v.hashCode() : 0);
+            return iHashCode ^ (v != null ? v.hashCode() : 0);
         }
 
         public String toString() {
@@ -548,10 +555,10 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
     @Override // java.util.AbstractMap, java.util.Map
     public int hashCode() {
         int numArrayEntries = getNumArrayEntries();
-        int i = 0;
-        for (int i2 = 0; i2 < numArrayEntries; i2++) {
-            i += this.entryList.get(i2).hashCode();
+        int iHashCode = 0;
+        for (int i = 0; i < numArrayEntries; i++) {
+            iHashCode += this.entryList.get(i).hashCode();
         }
-        return getNumOverflowEntries() > 0 ? i + this.overflowEntries.hashCode() : i;
+        return getNumOverflowEntries() > 0 ? iHashCode + this.overflowEntries.hashCode() : iHashCode;
     }
 }

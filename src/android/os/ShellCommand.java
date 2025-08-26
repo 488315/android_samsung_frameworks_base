@@ -11,12 +11,12 @@ public abstract class ShellCommand extends BasicShellCommandHandler {
     public int exec(Binder binder, FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
         this.mShellCallback = shellCallback;
         this.mResultReceiver = resultReceiver;
-        int exec = super.exec(binder, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr);
+        int iExec = super.exec(binder, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr);
         ResultReceiver resultReceiver2 = this.mResultReceiver;
         if (resultReceiver2 != null) {
-            resultReceiver2.send(exec, null);
+            resultReceiver2.send(iExec, null);
         }
-        return exec;
+        return iExec;
     }
 
     public ResultReceiver adoptResultReceiver() {
@@ -27,9 +27,9 @@ public abstract class ShellCommand extends BasicShellCommandHandler {
 
     public ParcelFileDescriptor openFileForSystem(String str, String str2) {
         try {
-            ParcelFileDescriptor openFile = getShellCallback().openFile(str, "u:r:system_server:s0", str2);
-            if (openFile != null) {
-                return openFile;
+            ParcelFileDescriptor parcelFileDescriptorOpenFile = getShellCallback().openFile(str, "u:r:system_server:s0", str2);
+            if (parcelFileDescriptorOpenFile != null) {
+                return parcelFileDescriptorOpenFile;
             }
         } catch (RuntimeException e) {
             getErrPrintWriter().println("Failure opening file: " + e.getMessage());

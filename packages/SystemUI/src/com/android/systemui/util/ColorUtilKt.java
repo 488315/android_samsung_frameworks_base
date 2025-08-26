@@ -6,7 +6,6 @@ import android.view.ContextThemeWrapper;
 import java.util.Arrays;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ColorUtilKt {
     public static final int getColorWithAlpha(int i, float f) {
@@ -17,9 +16,9 @@ public final class ColorUtilKt {
         if (typedArray.hasValue(i)) {
             return typedArray.getColor(i, i2);
         }
-        TypedArray obtainStyledAttributes = contextThemeWrapper.obtainStyledAttributes(new int[]{i3});
-        int color = obtainStyledAttributes.getColor(0, i2);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = contextThemeWrapper.obtainStyledAttributes(new int[]{i3});
+        int color = typedArrayObtainStyledAttributes.getColor(0, i2);
+        typedArrayObtainStyledAttributes.recycle();
         return color;
     }
 
@@ -27,8 +26,8 @@ public final class ColorUtilKt {
         if (num == null) {
             return "null";
         }
-        int intValue = num.intValue();
+        int iIntValue = num.intValue();
         int i = StringCompanionObject.$r8$clinit;
-        return String.format("#%08x", Arrays.copyOf(new Object[]{Integer.valueOf(intValue)}, 1));
+        return String.format("#%08x", Arrays.copyOf(new Object[]{Integer.valueOf(iIntValue)}, 1));
     }
 }

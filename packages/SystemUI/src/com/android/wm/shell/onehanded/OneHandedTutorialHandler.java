@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import com.android.wm.shell.onehanded.OneHandedAnimationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedTutorialHandler implements OneHandedTransitionCallback, OneHandedAnimationCallback {
     public final int mAlphaAnimationDurationMs;
@@ -155,18 +154,18 @@ public class OneHandedTutorialHandler implements OneHandedTransitionCallback, On
     public final void setupAlphaTransition(boolean z) {
         float f = z ? 0.0f : 1.0f;
         float f2 = z ? 1.0f : 0.0f;
-        int i = this.mAlphaAnimationDurationMs;
+        int iRound = this.mAlphaAnimationDurationMs;
         if (!z) {
-            i = Math.round((1.0f - this.mTutorialHeightRatio) * i);
+            iRound = Math.round((1.0f - this.mTutorialHeightRatio) * iRound);
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        this.mAlphaAnimator = ofFloat;
-        ofFloat.setInterpolator(new LinearInterpolator());
-        this.mAlphaAnimator.setDuration(i);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        this.mAlphaAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        this.mAlphaAnimator.setDuration(iRound);
         this.mAlphaAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.onehanded.OneHandedTutorialHandler$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                OneHandedTutorialHandler.this.mTargetViewContainer.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                this.f$0.mTargetViewContainer.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
     }
@@ -175,10 +174,10 @@ public class OneHandedTutorialHandler implements OneHandedTransitionCallback, On
         if (this.mTutorialView == null) {
             return;
         }
-        TypedArray obtainStyledAttributes = new ContextThemeWrapper(this.mTutorialView.getContext(), android.R.style.Theme.DeviceDefault.DayNight).obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, android.R.attr.textColorSecondary});
-        int color = obtainStyledAttributes.getColor(0, 0);
-        int color2 = obtainStyledAttributes.getColor(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = new ContextThemeWrapper(this.mTutorialView.getContext(), android.R.style.Theme.DeviceDefault.DayNight).obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, android.R.attr.textColorSecondary});
+        int color = typedArrayObtainStyledAttributes.getColor(0, 0);
+        int color2 = typedArrayObtainStyledAttributes.getColor(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         ((ImageView) this.mTutorialView.findViewById(R.id.one_handed_tutorial_image)).setImageTintList(ColorStateList.valueOf(color));
         TextView textView = (TextView) this.mTutorialView.findViewById(R.id.one_handed_tutorial_title);
         TextView textView2 = (TextView) this.mTutorialView.findViewById(R.id.one_handed_tutorial_description);

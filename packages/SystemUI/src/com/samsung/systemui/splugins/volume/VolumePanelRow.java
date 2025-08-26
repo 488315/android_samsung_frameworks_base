@@ -10,7 +10,6 @@ import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumePanelRow {
     public static final int BASE_PRIORITY = 2;
@@ -42,7 +41,6 @@ public final class VolumePanelRow {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BooleanStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ BooleanStateKey[] $VALUES;
@@ -62,9 +60,9 @@ public final class VolumePanelRow {
         }
 
         static {
-            BooleanStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            BooleanStateKey[] booleanStateKeyArr$values = $values();
+            $VALUES = booleanStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(booleanStateKeyArr$values);
         }
 
         private BooleanStateKey(String str, int i) {
@@ -83,7 +81,6 @@ public final class VolumePanelRow {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -93,7 +90,6 @@ public final class VolumePanelRow {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Target({ElementType.PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface IconTypes {
@@ -101,7 +97,6 @@ public final class VolumePanelRow {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntegerStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ IntegerStateKey[] $VALUES;
@@ -120,9 +115,9 @@ public final class VolumePanelRow {
         }
 
         static {
-            IntegerStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            IntegerStateKey[] integerStateKeyArr$values = $values();
+            $VALUES = integerStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(integerStateKeyArr$values);
         }
 
         private IntegerStateKey(String str, int i) {
@@ -143,7 +138,6 @@ public final class VolumePanelRow {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LongStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ LongStateKey[] $VALUES;
@@ -154,9 +148,9 @@ public final class VolumePanelRow {
         }
 
         static {
-            LongStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            LongStateKey[] longStateKeyArr$values = $values();
+            $VALUES = longStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(longStateKeyArr$values);
         }
 
         private LongStateKey(String str, int i) {
@@ -177,7 +171,6 @@ public final class VolumePanelRow {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StringStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ StringStateKey[] $VALUES;
@@ -192,9 +185,9 @@ public final class VolumePanelRow {
         }
 
         static {
-            StringStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            StringStateKey[] stringStateKeyArr$values = $values();
+            $VALUES = stringStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(stringStateKeyArr$values);
         }
 
         private StringStateKey(String str, int i) {
@@ -350,7 +343,6 @@ public final class VolumePanelRow {
         return ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m(getRealLevel(), "[", VolumePanelValues.INSTANCE.rowStreamTypeToString(this.streamType), "(vol=", ")] ");
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final int $stable = 8;
         private VolumePanelRow volumePanelRow;

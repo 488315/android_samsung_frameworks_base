@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableView;
 import com.android.systemui.statusbar.notification.stack.SectionHeaderView;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class StackScrollerDecorView extends ExpandableView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -93,7 +92,7 @@ public abstract class StackScrollerDecorView extends ExpandableView {
             setViewVisible(this.mContent, z, z2, new Consumer() { // from class: com.android.systemui.statusbar.notification.row.StackScrollerDecorView$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    StackScrollerDecorView stackScrollerDecorView = StackScrollerDecorView.this;
+                    StackScrollerDecorView stackScrollerDecorView = this.f$0;
                     Consumer consumer2 = consumer;
                     Boolean bool = (Boolean) obj;
                     int i = StackScrollerDecorView.$r8$clinit;

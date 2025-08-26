@@ -4,13 +4,11 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.controls.ui.ControlViewHolder;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ControlsMetricsLogger {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ControlsEvents implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ ControlsEvents[] $VALUES;
         public static final ControlsEvents CONTROL_DRAG;

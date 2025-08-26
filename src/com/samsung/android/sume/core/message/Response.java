@@ -80,13 +80,13 @@ public final class Response extends Message {
         return (MediaBuffer) Optional.ofNullable(this.bufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return Response.this.m9596xed6285dd((List) obj);
+                return this.f$0.m9609xed6285dd((List) obj);
             }
         }).orElse(null);
     }
 
     /* renamed from: lambda$getBuffer$1$com-samsung-android-sume-core-message-Response, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9596xed6285dd(List list) {
+    /* synthetic */ MediaBuffer m9609xed6285dd(List list) {
         if (list.isEmpty()) {
             return null;
         }
@@ -174,7 +174,7 @@ public final class Response extends Message {
         return contentToString(this, new Supplier() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return Response.this.m9597lambda$toString$3$comsamsungandroidsumecoremessageResponse();
+                return this.f$0.m9610lambda$toString$3$comsamsungandroidsumecoremessageResponse();
             }
         });
     }
@@ -184,7 +184,7 @@ public final class Response extends Message {
     }
 
     /* renamed from: lambda$toString$3$com-samsung-android-sume-core-message-Response, reason: not valid java name */
-    /* synthetic */ String m9597lambda$toString$3$comsamsungandroidsumecoremessageResponse() {
+    /* synthetic */ String m9610lambda$toString$3$comsamsungandroidsumecoremessageResponse() {
         return (String) Optional.ofNullable(this.bufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
@@ -236,9 +236,9 @@ public final class Response extends Message {
         }
 
         int register(Consumer<Message> consumer) {
-            int hashCode = consumer.hashCode();
-            this.consumerMap.put(Integer.valueOf(hashCode), consumer);
-            return hashCode;
+            int iHashCode = consumer.hashCode();
+            this.consumerMap.put(Integer.valueOf(iHashCode), consumer);
+            return iHashCode;
         }
 
         Consumer<Message> unRegister(int i) {

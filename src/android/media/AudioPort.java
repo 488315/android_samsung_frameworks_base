@@ -147,15 +147,15 @@ public class AudioPort {
     }
 
     public String toString() {
-        String num = Integer.toString(this.mRole);
+        String string = Integer.toString(this.mRole);
         int i = this.mRole;
         if (i == 0) {
-            num = KeyProperties.DIGEST_NONE;
+            string = KeyProperties.DIGEST_NONE;
         } else if (i == 1) {
-            num = BnRConstants.SOURCE_KEY;
+            string = BnRConstants.SOURCE_KEY;
         } else if (i == 2) {
-            num = "SINK";
+            string = "SINK";
         }
-        return "{mHandle: " + this.mHandle + ", mRole: " + num + "}";
+        return "{mHandle: " + this.mHandle + ", mRole: " + string + "}";
     }
 }

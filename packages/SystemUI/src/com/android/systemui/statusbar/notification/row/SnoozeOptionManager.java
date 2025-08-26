@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SnoozeOptionManager {
     public static final int[] sAccessibilityActions = {R.id.action_snooze_shorter, R.id.action_snooze_short, R.id.action_snooze_long, R.id.action_snooze_longer};
@@ -35,7 +34,6 @@ public class SnoozeOptionManager {
     public final MetricsLogger mMetricsLogger = new MetricsLogger();
     public final KeyValueListParser mParser = new KeyValueListParser(',');
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationSnoozeOption implements NotificationSwipeActionHelper.SnoozeOption {
         public final AccessibilityNodeInfo.AccessibilityAction mAction;
         public final CharSequence mConfirmation;
@@ -93,25 +91,25 @@ public class SnoozeOptionManager {
         }
         int i = this.mParser.getInt("default", resources.getInteger(R.integer.config_notification_snooze_time_default));
         int[] intArray = this.mParser.getIntArray("options_array", resources.getIntArray(R.array.config_notification_snooze_times));
-        int min = Math.min(intArray.length, 4);
+        int iMin = Math.min(intArray.length, 4);
         int i2 = 0;
-        while (i2 < min) {
+        while (i2 < iMin) {
             int i3 = intArray[i2];
             int i4 = sAccessibilityActions[i2];
             Resources resources2 = this.mContext.getResources();
             boolean z = i3 >= 60;
-            String icuMessageFormat = PluralMessageFormaterKt.icuMessageFormat(this.mContext.getResources(), z ? R.string.snoozeHourOptions : R.string.snoozeMinuteOptions, z ? i3 / 60 : i3);
-            String format = String.format(resources2.getString(R.string.snoozed_for_time), icuMessageFormat);
-            AccessibilityNodeInfo.AccessibilityAction accessibilityAction = new AccessibilityNodeInfo.AccessibilityAction(i4, icuMessageFormat);
-            int indexOf = format.indexOf(icuMessageFormat);
-            if (indexOf == -1) {
+            String strIcuMessageFormat = PluralMessageFormaterKt.icuMessageFormat(this.mContext.getResources(), z ? R.string.snoozeHourOptions : R.string.snoozeMinuteOptions, z ? i3 / 60 : i3);
+            String str = String.format(resources2.getString(R.string.snoozed_for_time), strIcuMessageFormat);
+            AccessibilityNodeInfo.AccessibilityAction accessibilityAction = new AccessibilityNodeInfo.AccessibilityAction(i4, strIcuMessageFormat);
+            int iIndexOf = str.indexOf(strIcuMessageFormat);
+            if (iIndexOf == -1) {
                 snoozeOptionManager = this;
-                notificationSnoozeOption = new NotificationSnoozeOption(snoozeOptionManager, null, i3, icuMessageFormat, format, accessibilityAction);
+                notificationSnoozeOption = new NotificationSnoozeOption(snoozeOptionManager, null, i3, strIcuMessageFormat, str, accessibilityAction);
             } else {
                 snoozeOptionManager = this;
-                SpannableString spannableString = new SpannableString(format);
-                spannableString.setSpan(new StyleSpan(1), indexOf, icuMessageFormat.length() + indexOf, 0);
-                notificationSnoozeOption = new NotificationSnoozeOption(snoozeOptionManager, null, i3, icuMessageFormat, spannableString, accessibilityAction);
+                SpannableString spannableString = new SpannableString(str);
+                spannableString.setSpan(new StyleSpan(1), iIndexOf, strIcuMessageFormat.length() + iIndexOf, 0);
+                notificationSnoozeOption = new NotificationSnoozeOption(snoozeOptionManager, null, i3, strIcuMessageFormat, spannableString, accessibilityAction);
             }
             if (i2 == 0 || i3 == i) {
                 snoozeOptionManager.mDefaultOption = notificationSnoozeOption;

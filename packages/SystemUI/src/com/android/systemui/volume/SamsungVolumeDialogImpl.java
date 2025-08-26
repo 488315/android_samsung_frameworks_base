@@ -44,7 +44,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SamsungVolumeDialogImpl implements VolumeDialog {
     public final BroadcastReceiverManager broadcastReceiverManager;
@@ -59,88 +58,88 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
     public final SamsungVolumeDialogImpl$callbacks$1 callbacks = new VolumeDialogController.Callbacks() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$callbacks$1
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onAccessibilityModeChanged(Boolean bool) {
-            boolean booleanValue = bool.booleanValue();
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            boolean zBooleanValue = bool.booleanValue();
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
-            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ACCESSIBILITY_MODE_CHANGED).isFromOutside(true).isShowA11yStream(booleanValue).build(), false);
+            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ACCESSIBILITY_MODE_CHANGED).isFromOutside(true).isShowA11yStream(zBooleanValue).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onCaptionComponentStateChanged(Boolean bool, Boolean bool2) {
-            boolean booleanValue = bool.booleanValue();
+            boolean zBooleanValue = bool.booleanValue();
             bool2.booleanValue();
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
-            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CAPTION_COMPONENT_CHANGED).isFromOutside(true).isCaptionComponentEnabled(booleanValue).build(), false);
+            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CAPTION_COMPONENT_CHANGED).isFromOutside(true).isCaptionComponentEnabled(zBooleanValue).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onConfigurationChanged() {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CONFIGURATION_CHANGED).isFromOutside(true).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onDismissRequested(int i) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_DISMISS_REQUESTED).isFromOutside(true).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onKeyEvent(boolean z, boolean z2) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_KEY_EVENT).isFromOutside(true).isKeyDown(z).isVibrating(z2).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onPlaySound(int i, boolean z) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON).isFromKey(z).activeStream(i).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onScreenOff() {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_SCREEN_OFF).isFromOutside(true).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onShowRequested(int i, boolean z, int i2) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_PANEL_SHOW).isFromOutside(true).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onShowSafetyWarning(int i) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder((536870912 & i) != 0 ? VolumePanelAction.ActionType.ACTION_SHOW_VOLUME_CSD_100_WARNING_DIALOG : VolumePanelAction.ActionType.ACTION_SHOW_VOLUME_SAFETY_WARNING_DIALOG).isFromOutside(true).flags(i).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onShowVolumeLimiterToast() {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_SHOW_VOLUME_LIMITER_DIALOG).isFromOutside(true).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onStateChanged(VolumeDialogController.State state) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
-            VolumeState convert = VolumeStateConverter.convert(state);
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
+            VolumeState volumeStateConvert = VolumeStateConverter.convert(state);
             volumePanelImpl.getClass();
-            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_STATE_CHANGED).activeStream(convert.getActiveStream()).setVolumeState(convert).isFromOutside(true).isVoiceCapable(volumePanelImpl.infraMediator.isVoiceCapable()).build(), false);
+            volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_STATE_CHANGED).activeStream(volumeStateConvert.getActiveStream()).setVolumeState(volumeStateConvert).isFromOutside(true).isVoiceCapable(volumePanelImpl.infraMediator.isVoiceCapable()).build(), false);
         }
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onPlaySound(int i, boolean z, int i2) {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON).isFromKey(z).activeStream(i).volumeDirection(i2).build(), false);
         }
@@ -172,7 +171,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
     public final SamsungVolumeDialogImpl$deviceProvisionedListener$1 deviceProvisionedListener = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$deviceProvisionedListener$1
         @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
         public final void onDeviceProvisionedChanged() {
-            VolumePanelImpl volumePanelImpl = SamsungVolumeDialogImpl.this.volumePanel;
+            VolumePanelImpl volumePanelImpl = this.this$0.volumePanel;
             volumePanelImpl.getClass();
             volumePanelImpl.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_SETUP_WIZARD_COMPLETE).isFromOutside(true).build(), false);
         }
@@ -262,7 +261,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             public final void onPluginConnected(SPlugin sPlugin, Context context) {
                 VolumeStar volumeStar = (VolumeStar) sPlugin;
                 Log.d("VolumeStarInteractor", "onPluginConnected");
-                VolumeStarInteractor volumeStarInteractor2 = VolumeStarInteractor.this;
+                VolumeStarInteractor volumeStarInteractor2 = volumeStarInteractor;
                 volumeStarInteractor2.volumeStar = volumeStar;
                 if (volumeStar == null) {
                     volumeStar = null;
@@ -275,7 +274,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             @Override // com.samsung.systemui.splugins.SPluginListener
             public final void onPluginDisconnected(SPlugin sPlugin, int i2) {
                 Log.d("VolumeStarInteractor", "onPluginDisconnected");
-                VolumeStar volumeStar = VolumeStarInteractor.this.volumeStar;
+                VolumeStar volumeStar = volumeStarInteractor.volumeStar;
                 if (volumeStar == null) {
                     volumeStar = null;
                 }
@@ -301,13 +300,13 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
         SoundPoolWrapper soundPoolWrapper = this.soundPoolWrapper;
         soundPoolWrapper.getClass();
         soundPoolWrapper.handlerWrapper.postInBgThread(new SoundPoolWrapper$makeSound$1(soundPoolWrapper));
-        final Consumer consumer = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$1
+        final Consumer consumer = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 volumePanelImpl2.getClass();
-                volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ALL_SOUND_OFF_CHANGED).isAllSoundOff(booleanValue).isFromOutside(true).build(), false);
+                volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ALL_SOUND_OFF_CHANGED).isAllSoundOff(zBooleanValue).isFromOutside(true).build(), false);
             }
         };
         BroadcastReceiverManager broadcastReceiverManager = this.broadcastReceiverManager;
@@ -326,7 +325,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             broadcastReceiverItem.receiver = broadcastReceiver;
             Unit unit = Unit.INSTANCE;
         }
-        final Runnable runnable = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$2
+        final Runnable runnable = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.2
             @Override // java.lang.Runnable
             public final void run() {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
@@ -349,7 +348,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             broadcastReceiverItem2.receiver = broadcastReceiver2;
             Unit unit2 = Unit.INSTANCE;
         }
-        final Runnable runnable2 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$3
+        final Runnable runnable2 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.3
             @Override // java.lang.Runnable
             public final void run() {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
@@ -372,7 +371,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             broadcastReceiverItem3.receiver = broadcastReceiver3;
             Unit unit3 = Unit.INSTANCE;
         }
-        final Runnable runnable3 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$4
+        final Runnable runnable3 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.4
             @Override // java.lang.Runnable
             public final void run() {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
@@ -395,13 +394,13 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             broadcastReceiverItem4.receiver = broadcastReceiver4;
             Unit unit4 = Unit.INSTANCE;
         }
-        final Consumer consumer2 = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$5
+        final Consumer consumer2 = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 volumePanelImpl2.getClass();
-                volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_HEADSET_CONNECTION).isHeadsetConnected(booleanValue).isFromOutside(true).build(), false);
+                volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_HEADSET_CONNECTION).isHeadsetConnected(zBooleanValue).isFromOutside(true).build(), false);
             }
         };
         BroadcastReceiverManager.BroadcastReceiverItem broadcastReceiverItem5 = (BroadcastReceiverManager.BroadcastReceiverItem) broadcastReceiverManager.broadcastReceiverItemMap.get(BroadcastReceiverType.HEADSET_CONNECTION);
@@ -446,34 +445,34 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
         }
         CoverUtilWrapper coverUtilWrapper = this.coverUtilWrapper;
         if (coverUtilWrapper != null) {
-            ((HashMap) coverUtilWrapper.mListeners).put(ModuleType.VOLUME, new BiConsumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$6
+            ((HashMap) coverUtilWrapper.mListeners).put(ModuleType.VOLUME, new BiConsumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.6
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    boolean booleanValue = ((Boolean) obj).booleanValue();
-                    int intValue = ((Number) obj2).intValue();
+                    boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                    int iIntValue = ((Number) obj2).intValue();
                     VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
                     volumePanelImpl2.getClass();
-                    volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_COVER_STATE_CHAGNED).isFromOutside(true).isCoverClosed(booleanValue).coverType(intValue).build(), false);
+                    volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_COVER_STATE_CHAGNED).isFromOutside(true).isCoverClosed(zBooleanValue).coverType(iIntValue).build(), false);
                 }
             });
         }
         if (BasicRune.VOLUME_SUB_DISPLAY_VOLUME_DIALOG && (deviceStateManagerWrapper = this.deviceStateManagerWrapper) != null) {
-            final Consumer consumer3 = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$7
+            final Consumer consumer3 = new Consumer() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.7
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    boolean booleanValue = ((Boolean) obj).booleanValue();
+                    boolean zBooleanValue = ((Boolean) obj).booleanValue();
                     VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;
                     volumePanelImpl2.getClass();
-                    volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_FOLDER_STATE_CHANGED).isFromOutside(true).isFolded(booleanValue).build(), true);
+                    volumePanelImpl2.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_FOLDER_STATE_CHANGED).isFromOutside(true).isFolded(zBooleanValue).build(), true);
                 }
             };
             DeviceStateManager.FoldStateListener foldStateListener = new DeviceStateManager.FoldStateListener(deviceStateManagerWrapper.context, new Consumer() { // from class: com.android.systemui.volume.util.DeviceStateManagerWrapper$registerFoldStateListener$1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     Boolean bool = (Boolean) obj;
-                    boolean booleanValue = bool.booleanValue();
+                    boolean zBooleanValue = bool.booleanValue();
                     consumer3.accept(bool);
-                    deviceStateManagerWrapper.isFolded = booleanValue;
+                    deviceStateManagerWrapper.isFolded = zBooleanValue;
                 }
             });
             SystemServiceExtension systemServiceExtension = SystemServiceExtension.INSTANCE;
@@ -485,7 +484,7 @@ public final class SamsungVolumeDialogImpl implements VolumeDialog {
             ((DeviceStateManager) systemService).registerCallback((HandlerExecutor) VolumeExecutor.sExecutor$delegate.getValue(), foldStateListener);
             deviceStateManagerWrapper.foldStateListener = foldStateListener;
         }
-        final Runnable runnable4 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl$init$8
+        final Runnable runnable4 = new Runnable() { // from class: com.android.systemui.volume.SamsungVolumeDialogImpl.init.8
             @Override // java.lang.Runnable
             public final void run() {
                 VolumePanelImpl volumePanelImpl2 = SamsungVolumeDialogImpl.this.volumePanel;

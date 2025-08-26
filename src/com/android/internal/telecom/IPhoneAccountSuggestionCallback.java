@@ -47,9 +47,9 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPhoneAccountSuggestionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPhoneAccountSuggestionCallback)) {
-                return (IPhoneAccountSuggestionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPhoneAccountSuggestionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPhoneAccountSuggestionCallback)) {
+                return (IPhoneAccountSuggestionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,10 +76,10 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(PhoneAccountSuggestion.CREATOR);
+                String string = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(PhoneAccountSuggestion.CREATOR);
                 parcel.enforceNoDataAvail();
-                suggestPhoneAccounts(readString, createTypedArrayList);
+                suggestPhoneAccounts(string, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,14 +103,14 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
 
             @Override // com.android.internal.telecom.IPhoneAccountSuggestionCallback
             public void suggestPhoneAccounts(String str, List<PhoneAccountSuggestion> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPhoneAccountSuggestionCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPhoneAccountSuggestionCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

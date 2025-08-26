@@ -4,6 +4,7 @@ import android.app.SemAppIconSolution;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
@@ -44,12 +45,12 @@ public class LauncherActivityInfo {
         if (!Flags.lightweightInvisibleLabelDetection()) {
             return getActivityInfo().loadLabel(this.mPm);
         }
-        String trim = getActivityInfo().loadLabel(this.mPm).toString().trim();
-        if (isVisible(trim)) {
-            return trim;
+        String strTrim = getActivityInfo().loadLabel(this.mPm).toString().trim();
+        if (isVisible(strTrim)) {
+            return strTrim;
         }
-        String trim2 = getApplicationInfo().loadLabel(this.mPm).toString().trim();
-        return isVisible(trim2) ? trim2 : getComponentName().getPackageName();
+        String strTrim2 = getApplicationInfo().loadLabel(this.mPm).toString().trim();
+        return isVisible(strTrim2) ? strTrim2 : getComponentName().getPackageName();
     }
 
     public float getLoadingProgress() {
@@ -60,67 +61,42 @@ public class LauncherActivityInfo {
         return getIcon(i, useThemeIcon());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private android.graphics.drawable.Drawable getIcon(int r3, boolean r4) {
-        /*
-            r2 = this;
-            if (r4 == 0) goto Lf
-            android.content.pm.LauncherActivityInfoInternal r3 = r2.mInternal
-            android.content.pm.ActivityInfo r3 = r3.getActivityInfo()
-            android.content.pm.PackageManager r2 = r2.mPm
-            android.graphics.drawable.Drawable r2 = r3.loadIcon(r2)
-            return r2
-        Lf:
-            android.content.pm.ActivityInfo r4 = r2.getActivityInfo()
-            int r4 = r4.getIconResource()
-            if (r3 == 0) goto L34
-            if (r4 == 0) goto L34
-            android.content.pm.ActivityInfo r0 = r2.getActivityInfo()
-            boolean r0 = r0.isArchived
-            if (r0 != 0) goto L34
-            android.content.pm.PackageManager r0 = r2.mPm     // Catch: java.lang.Throwable -> L34
-            android.content.pm.ActivityInfo r1 = r2.getActivityInfo()     // Catch: java.lang.Throwable -> L34
-            android.content.pm.ApplicationInfo r1 = r1.applicationInfo     // Catch: java.lang.Throwable -> L34
-            android.content.res.Resources r0 = r0.getResourcesForApplication(r1)     // Catch: java.lang.Throwable -> L34
-            android.graphics.drawable.Drawable r3 = r0.getDrawableForDensity(r4, r3)     // Catch: java.lang.Throwable -> L34
-            goto L35
-        L34:
-            r3 = 0
-        L35:
-            if (r3 != 0) goto L41
-            android.content.pm.ActivityInfo r3 = r2.getActivityInfo()
-            android.content.pm.PackageManager r2 = r2.mPm
-            android.graphics.drawable.Drawable r3 = r3.loadIcon(r2)
-        L41:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.LauncherActivityInfo.getIcon(int, boolean):android.graphics.drawable.Drawable");
+    private Drawable getIcon(int i, boolean z) {
+        Drawable drawableForDensity;
+        if (z) {
+            return this.mInternal.getActivityInfo().loadIcon(this.mPm);
+        }
+        int iconResource = getActivityInfo().getIconResource();
+        if (i == 0 || iconResource == 0 || getActivityInfo().isArchived) {
+            drawableForDensity = null;
+        } else {
+            try {
+                drawableForDensity = this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo).getDrawableForDensity(iconResource, i);
+            } catch (PackageManager.NameNotFoundException | Resources.NotFoundException unused) {
+            }
+        }
+        return drawableForDensity == null ? getActivityInfo().loadIcon(this.mPm) : drawableForDensity;
     }
 
-    public Drawable getUnthemedIcon(int i) {
+    public Drawable getUnthemedIcon(int i) throws Resources.NotFoundException {
         int iconResource = getActivityInfo().getIconResource();
-        Drawable drawable = null;
+        Drawable drawableSemGetDrawableForIconTray = null;
         if (iconResource != 0) {
             try {
-                drawable = this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo).getDrawable(iconResource, null);
+                drawableSemGetDrawableForIconTray = this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo).getDrawable(iconResource, null);
             } catch (Exception e) {
                 Log.i(TAG, "Failed to get original icon from resources: " + getActivityInfo().packageName, e);
             }
-            if (drawable != null) {
-                if (drawable instanceof AdaptiveIconDrawable) {
-                    return drawable;
+            if (drawableSemGetDrawableForIconTray != null) {
+                if (drawableSemGetDrawableForIconTray instanceof AdaptiveIconDrawable) {
+                    return drawableSemGetDrawableForIconTray;
                 }
                 Log.i(TAG, "Need to process non-adaptive icon: " + getActivityInfo().packageName);
-                drawable = this.mPm.semGetDrawableForIconTray(drawable, 2);
+                drawableSemGetDrawableForIconTray = this.mPm.semGetDrawableForIconTray(drawableSemGetDrawableForIconTray, 2);
             }
         }
-        if (drawable != null) {
-            return drawable;
+        if (drawableSemGetDrawableForIconTray != null) {
+            return drawableSemGetDrawableForIconTray;
         }
         Log.i(TAG, "Couldn't get the unthemed icon: " + getActivityInfo().packageName);
         return getIcon(i, false);
@@ -185,29 +161,29 @@ public class LauncherActivityInfo {
     }
 
     public Drawable semGetBadgedIconForIconTray(int i) {
-        Drawable drawable;
+        Drawable icon;
         ActivityInfo activityInfo = this.mInternal.getActivityInfo();
         String str = activityInfo.packageName;
-        boolean useThemeIcon = useThemeIcon();
+        boolean zUseThemeIcon = useThemeIcon();
         boolean z = true;
         if (PmUtils.supportLiveIcon(activityInfo.applicationInfo, this.mContext)) {
             Log.i(TAG, "Trying to load live icon for " + str);
-            drawable = this.mContext.getPackageManager().loadUnbadgedItemIcon(activityInfo, activityInfo.applicationInfo, true, 48);
+            icon = this.mContext.getPackageManager().loadUnbadgedItemIcon(activityInfo, activityInfo.applicationInfo, true, 48);
         } else {
-            drawable = null;
+            icon = null;
         }
-        if (drawable == null) {
-            drawable = getIcon(i, useThemeIcon);
+        if (icon == null) {
+            icon = getIcon(i, zUseThemeIcon);
             if (activityInfo.getIconResource() != 0 && !activityInfo.isArchived) {
                 z = false;
             }
-            if (!useThemeIcon && !z && (this.mPm.semCheckComponentMetadataForIconTray(str, activityInfo.name) || this.mPm.semShouldPackIntoIconTray(str))) {
-                drawable = this.mPm.semGetDrawableForIconTray(drawable, 48, str, i);
+            if (!zUseThemeIcon && !z && (this.mPm.semCheckComponentMetadataForIconTray(str, activityInfo.name) || this.mPm.semShouldPackIntoIconTray(str))) {
+                icon = this.mPm.semGetDrawableForIconTray(icon, 48, str, i);
             }
         }
-        Drawable badgedIconIfNeed = getBadgedIconIfNeed(drawable);
+        Drawable badgedIconIfNeed = getBadgedIconIfNeed(icon);
         if (badgedIconIfNeed != null) {
-            Log.i(TAG, "packageName: " + str + ", useThemeIcon: " + useThemeIcon + ", height: " + badgedIconIfNeed.getIntrinsicHeight() + ", width: " + badgedIconIfNeed.getIntrinsicWidth() + ", density: " + i);
+            Log.i(TAG, "packageName: " + str + ", useThemeIcon: " + zUseThemeIcon + ", height: " + badgedIconIfNeed.getIntrinsicHeight() + ", width: " + badgedIconIfNeed.getIntrinsicWidth() + ", density: " + i);
         }
         return badgedIconIfNeed;
     }

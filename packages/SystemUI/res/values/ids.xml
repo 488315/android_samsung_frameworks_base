@@ -552,6 +552,7 @@
     <item type="id" name="button_margin3" />
     <item type="id" name="button_margin4" />
     <item type="id" name="button_negative" />
+    <item type="id" name="button_notification" />
     <item type="id" name="button_ok" />
     <item type="id" name="button_on_navigation_bar_option_parent" />
     <item type="id" name="button_panel" />
@@ -701,6 +702,7 @@
     <item type="id" name="consume_window_insets_tag" />
     <item type="id" name="contact_us" />
     <item type="id" name="container" />
+    <item type="id" name="container_for_immersive_pop_over" />
     <item type="id" name="container_layout" />
     <item type="id" name="container_list" />
     <item type="id" name="contains_transformed_view" />
@@ -1435,6 +1437,8 @@
     <item type="id" name="ksh_title_description" />
     <item type="id" name="ksh_view" />
     <item type="id" name="label" />
+    <item type="id" name="labelContainer" />
+    <item type="id" name="labelView" />
     <item type="id" name="label_container" />
     <item type="id" name="label_frame" />
     <item type="id" name="label_group" />
@@ -1603,6 +1607,7 @@
     <item type="id" name="manage_education_view" />
     <item type="id" name="manage_text" />
     <item type="id" name="manage_windows_button" />
+    <item type="id" name="marginal_padding_view" />
     <item type="id" name="masked" />
     <item type="id" name="material_clock_display" />
     <item type="id" name="material_clock_display_and_toggle" />
@@ -1934,6 +1939,7 @@
     <item type="id" name="notificationIcons" />
     <item type="id" name="notificationShelf" />
     <item type="id" name="notification_background" />
+    <item type="id" name="notification_badge" />
     <item type="id" name="notification_children_container" />
     <item type="id" name="notification_container" />
     <item type="id" name="notification_container_parent" />
@@ -2080,6 +2086,7 @@
     <item type="id" name="open_in_app_or_browser_pill" />
     <item type="id" name="open_in_browser_button" />
     <item type="id" name="open_menu_button" />
+    <item type="id" name="open_menu_container" />
     <item type="id" name="open_quick_settings" />
     <item type="id" name="open_search_bar_text_view" />
     <item type="id" name="open_search_view_background" />
@@ -2283,6 +2290,7 @@
     <item type="id" name="qs_available_paged_indicator_container" />
     <item type="id" name="qs_blur_gradient" />
     <item type="id" name="qs_button" />
+    <item type="id" name="qs_buttons_container" />
     <item type="id" name="qs_container" />
     <item type="id" name="qs_customize" />
     <item type="id" name="qs_customize_main_button" />
@@ -2353,7 +2361,6 @@
     <item type="id" name="quick_access_shelf" />
     <item type="id" name="quick_control_container" />
     <item type="id" name="quick_qs_date_buttons" />
-    <item type="id" name="quick_qs_network_speed_container" />
     <item type="id" name="quick_qs_network_speed_viewstub" />
     <item type="id" name="quick_qs_panel" />
     <item type="id" name="quick_reply_container" />
@@ -2404,6 +2411,7 @@
     <item type="id" name="requires_remeasuring" />
     <item type="id" name="resize_handle" />
     <item type="id" name="resolved_banner_text" />
+    <item type="id" name="restart_app" />
     <item type="id" name="restricted_icon" />
     <item type="id" name="restricted_padlock" />
     <item type="id" name="result_layout_content" />
@@ -2413,9 +2421,6 @@
     <item type="id" name="reverse_folding_alert_root" />
     <item type="id" name="reverse_folding_alert_text_view" />
     <item type="id" name="reverse_folding_alert_view" />
-    <item type="id" name="reverse_folding_order_guide_animation" />
-    <item type="id" name="reverse_folding_order_guide_root" />
-    <item type="id" name="reverse_folding_order_guide_text_view" />
     <item type="id" name="reverse_wireless_charging_icon" />
     <item type="id" name="reverse_wireless_charging_percentage" />
     <item type="id" name="rightGuideline" />
@@ -2863,7 +2868,6 @@
     <item type="id" name="smart_reply_ai_disclaimer" />
     <item type="id" name="smart_reply_ai_disclaimer_layout" />
     <item type="id" name="smart_reply_ai_disclaimer_text" />
-    <item type="id" name="smart_reply_ai_logo" />
     <item type="id" name="smart_reply_error_message" />
     <item type="id" name="smart_reply_layout" />
     <item type="id" name="smart_reply_progress_layout" />
@@ -3160,6 +3164,7 @@
     <item type="id" name="suggest_app_bar_center_layout" />
     <item type="id" name="suggest_app_bar_close" />
     <item type="id" name="suggest_app_bar_title" />
+    <item type="id" name="suggested_replies_text_item_watermark" />
     <item type="id" name="suggestion_container" />
     <item type="id" name="summary_container" />
     <item type="id" name="support_action_bar" />
@@ -3287,6 +3292,7 @@
     <item type="id" name="together_button_textview" />
     <item type="id" name="together_stroke_background" />
     <item type="id" name="toggle_freeform_window" />
+    <item type="id" name="toggle_immersive_window" />
     <item type="id" name="toggle_stub" />
     <item type="id" name="tool_icon" />
     <item type="id" name="tool_name" />

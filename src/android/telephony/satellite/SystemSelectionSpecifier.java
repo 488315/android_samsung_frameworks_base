@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.IntArray;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -91,15 +92,15 @@ public final class SystemSelectionSpecifier implements Parcelable {
         }
     }
 
-    private SystemSelectionSpecifier(Parcel parcel) {
+    private SystemSelectionSpecifier(Parcel parcel) throws ClassNotFoundException, IOException {
         readFromParcel(parcel);
     }
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        String emptyIfNull = TextUtils.emptyIfNull(this.mMccMnc);
-        this.mMccMnc = emptyIfNull;
-        parcel.writeString8(emptyIfNull);
+        String strEmptyIfNull = TextUtils.emptyIfNull(this.mMccMnc);
+        this.mMccMnc = strEmptyIfNull;
+        parcel.writeString8(strEmptyIfNull);
         int[] iArr = this.mBands;
         int i2 = 0;
         if (iArr != null && iArr.length > 0) {
@@ -251,30 +252,30 @@ public final class SystemSelectionSpecifier implements Parcelable {
         return this.mTagIds;
     }
 
-    private void readFromParcel(Parcel parcel) {
+    private void readFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mMccMnc = parcel.readString();
-        int readInt = parcel.readInt();
-        this.mBands = new int[readInt];
-        if (readInt > 0) {
-            for (int i = 0; i < readInt; i++) {
-                this.mBands[i] = parcel.readInt();
+        int i = parcel.readInt();
+        this.mBands = new int[i];
+        if (i > 0) {
+            for (int i2 = 0; i2 < i; i2++) {
+                this.mBands[i2] = parcel.readInt();
             }
         }
-        int readInt2 = parcel.readInt();
-        this.mEarfcns = new int[readInt2];
-        if (readInt2 > 0) {
-            for (int i2 = 0; i2 < readInt2; i2++) {
-                this.mEarfcns[i2] = parcel.readInt();
+        int i3 = parcel.readInt();
+        this.mEarfcns = new int[i3];
+        if (i3 > 0) {
+            for (int i4 = 0; i4 < i3; i4++) {
+                this.mEarfcns[i4] = parcel.readInt();
             }
         }
         ArrayList arrayList = new ArrayList();
         this.mSatelliteInfos = arrayList;
         parcel.readList(arrayList, SatelliteInfo.class.getClassLoader(), SatelliteInfo.class);
-        int readInt3 = parcel.readInt();
-        this.mTagIds = new int[readInt3];
-        if (readInt3 > 0) {
-            for (int i3 = 0; i3 < readInt3; i3++) {
-                this.mTagIds[i3] = parcel.readInt();
+        int i5 = parcel.readInt();
+        this.mTagIds = new int[i5];
+        if (i5 > 0) {
+            for (int i6 = 0; i6 < i5; i6++) {
+                this.mTagIds[i6] = parcel.readInt();
             }
         }
     }

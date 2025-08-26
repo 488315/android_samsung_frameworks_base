@@ -3,6 +3,7 @@ package com.samsung.android.lock;
 import android.util.Log;
 import android.util.SparseArray;
 import com.android.internal.util.ArrayUtils;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,15 +22,15 @@ public final class LsLogger {
     }
 
     private static Logger getLogger(LsLogType lsLogType) {
-        int indexOf = ArrayUtils.indexOf(LsLogType.LIST, lsLogType);
+        int iIndexOf = ArrayUtils.indexOf(LsLogType.LIST, lsLogType);
         SparseArray<Logger> sparseArray = mLoggers;
-        Logger logger = sparseArray.get(indexOf);
+        Logger logger = sparseArray.get(iIndexOf);
         if (logger != null) {
             return logger;
         }
         Logger logger2 = new Logger(lsLogType);
         logger2.start();
-        sparseArray.put(indexOf, logger2);
+        sparseArray.put(iIndexOf, logger2);
         Log.d(TAG, "Loggers=" + sparseArray.size());
         return logger2;
     }
@@ -67,7 +68,7 @@ public final class LsLogger {
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public void run() {
+        public void run() throws InterruptedException, IOException {
             while (true) {
                 Log.d(LsLogger.TAG, "Accumulating...");
                 try {

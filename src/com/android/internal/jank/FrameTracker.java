@@ -15,7 +15,6 @@ import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.ViewRootImpl;
 import android.view.WindowCallbacks;
-import com.android.internal.jank.FrameTracker;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.util.FrameworkStatsLog;
 import com.samsung.android.rune.CoreRune;
@@ -140,8 +139,8 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
     }
 
     public FrameTracker(InteractionJankMonitor.Configuration configuration, ThreadedRendererWrapper threadedRendererWrapper, ViewRootWrapper viewRootWrapper, SurfaceControlWrapper surfaceControlWrapper, ChoreographerWrapper choreographerWrapper, FrameMetricsWrapper frameMetricsWrapper, StatsLogWrapper statsLogWrapper, int i, int i2, FrameTrackerListener frameTrackerListener) {
-        boolean isSurfaceOnly = configuration.isSurfaceOnly();
-        this.mSurfaceOnly = isSurfaceOnly;
+        boolean zIsSurfaceOnly = configuration.isSurfaceOnly();
+        this.mSurfaceOnly = zIsSurfaceOnly;
         this.mConfig = configuration;
         Handler handler = configuration.getHandler();
         this.mHandler = handler;
@@ -149,17 +148,17 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
         this.mSurfaceControlWrapper = surfaceControlWrapper;
         this.mStatsLog = statsLogWrapper;
         this.mDeferMonitoring = configuration.shouldDeferMonitor();
-        this.mRendererWrapper = isSurfaceOnly ? null : threadedRendererWrapper;
-        frameMetricsWrapper = isSurfaceOnly ? null : frameMetricsWrapper;
+        this.mRendererWrapper = zIsSurfaceOnly ? null : threadedRendererWrapper;
+        frameMetricsWrapper = zIsSurfaceOnly ? null : frameMetricsWrapper;
         this.mMetricsWrapper = frameMetricsWrapper;
-        viewRootWrapper = isSurfaceOnly ? null : viewRootWrapper;
+        viewRootWrapper = zIsSurfaceOnly ? null : viewRootWrapper;
         this.mViewRoot = viewRootWrapper;
-        this.mObserver = (isSurfaceOnly || (Flags.useSfFrameDuration() && Flags.ignoreHwuiIsFirstFrame())) ? null : new HardwareRendererObserver(this, frameMetricsWrapper.getTiming(), handler, false);
+        this.mObserver = (zIsSurfaceOnly || (Flags.useSfFrameDuration() && Flags.ignoreHwuiIsFirstFrame())) ? null : new HardwareRendererObserver(this, frameMetricsWrapper.getTiming(), handler, false);
         this.mTraceThresholdMissedFrames = i;
         this.mTraceThresholdFrameTimeMillis = i2;
         this.mListener = frameTrackerListener;
         this.mDisplayId = configuration.getDisplayId();
-        if (isSurfaceOnly) {
+        if (zIsSurfaceOnly) {
             this.mSurfaceControl = configuration.getSurfaceControl();
             this.mSurfaceChangedCallback = null;
             return;
@@ -187,7 +186,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
             FrameTracker.this.mHandler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FrameTracker.AnonymousClass1.this.lambda$surfaceCreated$0();
+                    this.f$0.lambda$surfaceCreated$0();
                 }
             }, 500L);
             Trace.endSection();
@@ -209,7 +208,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
             FrameTracker.this.mHandler.post(new Runnable() { // from class: com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FrameTracker.AnonymousClass1.this.lambda$surfaceDestroyed$1();
+                    this.f$0.lambda$surfaceDestroyed$1();
                 }
             });
         }
@@ -234,7 +233,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
                 postTraceStartMarker(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FrameTracker.this.beginInternal();
+                        this.f$0.beginInternal();
                     }
                 });
             } else {
@@ -324,7 +323,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
                 frameTracker.mWaitForFinishTimedOut = new Runnable() { // from class: com.android.internal.jank.FrameTracker$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FrameTracker.AnonymousClass2.this.lambda$run$0(str);
+                        this.f$0.lambda$run$0(str);
                     }
                 };
                 millis = TimeUnit.SECONDS.toMillis(10L);
@@ -356,11 +355,11 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
 
     private void markEvent(String str, long j) {
         if (Trace.isTagEnabled(4096L)) {
-            String formatSimple = TextUtils.formatSimple("%s#%s", str, Long.valueOf(j));
-            if (formatSimple.length() > 127) {
-                throw new IllegalArgumentException(TextUtils.formatSimple("The length of the trace event description <%s> exceeds %d", formatSimple, 127));
+            String simple = TextUtils.formatSimple("%s#%s", str, Long.valueOf(j));
+            if (simple.length() > 127) {
+                throw new IllegalArgumentException(TextUtils.formatSimple("The length of the trace event description <%s> exceeds %d", simple, 127));
             }
-            Trace.instantForTrack(4096L, this.mConfig.getSessionName(), formatSimple);
+            Trace.instantForTrack(4096L, this.mConfig.getSessionName(), simple);
         }
     }
 
@@ -383,7 +382,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
         postCallback(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FrameTracker.this.lambda$onJankDataAvailable$0(list);
+                this.f$0.lambda$onJankDataAvailable$0(list);
             }
         });
     }
@@ -397,9 +396,9 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
                 while (it.hasNext()) {
                     SurfaceControl.JankData jankData = (SurfaceControl.JankData) it.next();
                     if (isInRange(jankData.getVsyncId())) {
-                        JankInfo findJankInfo = findJankInfo(jankData.getVsyncId());
-                        if (findJankInfo != null) {
-                            findJankInfo.update(jankData);
+                        JankInfo jankInfoFindJankInfo = findJankInfo(jankData.getVsyncId());
+                        if (jankInfoFindJankInfo != null) {
+                            jankInfoFindJankInfo.update(jankData);
                         } else {
                             this.mJankInfos.put((int) jankData.getVsyncId(), JankInfo.createFromSurfaceControlCallback(jankData));
                         }
@@ -429,7 +428,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
         postCallback(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                FrameTracker.this.lambda$onFrameMetricsAvailable$1();
+                this.f$0.lambda$onFrameMetricsAvailable$1();
             }
         });
     }
@@ -443,9 +442,9 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
                 boolean z = this.mMetricsWrapper.getMetric(9) == 1;
                 long j = this.mMetricsWrapper.getTiming()[1];
                 if (isInRange(j)) {
-                    JankInfo findJankInfo = findJankInfo(j);
-                    if (findJankInfo != null) {
-                        findJankInfo.update(metric, z);
+                    JankInfo jankInfoFindJankInfo = findJankInfo(j);
+                    if (jankInfoFindJankInfo != null) {
+                        jankInfoFindJankInfo.update(metric, z);
                     } else {
                         this.mJankInfos.put((int) j, JankInfo.createFromHwuiCallback(j, metric, z));
                     }
@@ -458,22 +457,22 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
     }
 
     private boolean hasReceivedCallbacksAfterEnd() {
-        JankInfo valueAt;
+        JankInfo jankInfoValueAt;
         if (this.mEndVsyncId == -1) {
             return false;
         }
         if (this.mJankInfos.size() == 0) {
-            valueAt = null;
+            jankInfoValueAt = null;
         } else {
             SparseArray<JankInfo> sparseArray = this.mJankInfos;
-            valueAt = sparseArray.valueAt(sparseArray.size() - 1);
+            jankInfoValueAt = sparseArray.valueAt(sparseArray.size() - 1);
         }
-        if (valueAt == null || valueAt.frameVsyncId < this.mEndVsyncId) {
+        if (jankInfoValueAt == null || jankInfoValueAt.frameVsyncId < this.mEndVsyncId) {
             return false;
         }
         for (int size = this.mJankInfos.size() - 1; size >= 0; size--) {
-            JankInfo valueAt2 = this.mJankInfos.valueAt(size);
-            if (valueAt2.frameVsyncId >= this.mEndVsyncId && callbacksReceived(valueAt2)) {
+            JankInfo jankInfoValueAt2 = this.mJankInfos.valueAt(size);
+            if (jankInfoValueAt2.frameVsyncId >= this.mEndVsyncId && callbacksReceived(jankInfoValueAt2)) {
                 return true;
             }
         }
@@ -512,8 +511,8 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
         int i5;
         String str3;
         int i6;
+        long jMax;
         long j3;
-        long j4;
         int i7;
         int i8;
         String str4 = "/";
@@ -527,121 +526,121 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
         markEvent("FT#finish", this.mJankInfos.size());
         removeObservers();
         String sessionName = this.mConfig.getSessionName();
-        long j5 = 0;
+        long j4 = 0;
         int i10 = 0;
         int i11 = 0;
         int i12 = 0;
         int i13 = 0;
         int i14 = 0;
+        int iMax = 0;
         int i15 = 0;
         int i16 = 0;
-        int i17 = 0;
         while (true) {
             if (i10 >= this.mJankInfos.size()) {
                 str = str4;
-                j = j5;
+                j = j4;
                 str2 = sessionName;
                 break;
             }
-            JankInfo valueAt = this.mJankInfos.valueAt(i10);
-            int i18 = i9;
-            if (this.mSurfaceOnly || !valueAt.isFirstFrame || Flags.ignoreHwuiIsFirstFrame()) {
-                long j6 = j5;
+            JankInfo jankInfoValueAt = this.mJankInfos.valueAt(i10);
+            int i17 = i9;
+            if (this.mSurfaceOnly || !jankInfoValueAt.isFirstFrame || Flags.ignoreHwuiIsFirstFrame()) {
+                long j5 = j4;
                 str2 = sessionName;
-                if (valueAt.frameVsyncId > this.mEndVsyncId) {
+                if (jankInfoValueAt.frameVsyncId > this.mEndVsyncId) {
                     str = str4;
-                    j = j6;
+                    j = j5;
                     break;
                 }
-                if (valueAt.surfaceControlCallbackFired) {
-                    int i19 = i11 + 1;
-                    if ((valueAt.jankType & 2) != 0) {
-                        Log.w(TAG, "Missed App frame:" + valueAt + ", CUJ=" + str2);
+                if (jankInfoValueAt.surfaceControlCallbackFired) {
+                    int i18 = i11 + 1;
+                    if ((jankInfoValueAt.jankType & 2) != 0) {
+                        Log.w(TAG, "Missed App frame:" + jankInfoValueAt + ", CUJ=" + str2);
                         i13++;
-                        i7 = i18;
+                        i7 = i17;
                     } else {
                         i7 = 0;
                     }
-                    if ((valueAt.jankType & 1) != 0) {
-                        Log.w(TAG, "Missed SF frame:" + valueAt + ", CUJ=" + str2);
+                    if ((jankInfoValueAt.jankType & 1) != 0) {
+                        Log.w(TAG, "Missed SF frame:" + jankInfoValueAt + ", CUJ=" + str2);
                         i14++;
-                        i7 = i18;
+                        i7 = i17;
                     }
                     if (i7 != 0) {
                         i12++;
-                        i16++;
+                        i15++;
                     } else {
-                        i15 = Math.max(i15, i16);
-                        i16 = 0;
+                        iMax = Math.max(iMax, i15);
+                        i15 = 0;
                     }
-                    if (valueAt.refreshRate != 0 && valueAt.refreshRate != i17) {
-                        i17 = i17 == 0 ? valueAt.refreshRate : i18;
+                    if (jankInfoValueAt.refreshRate != 0 && jankInfoValueAt.refreshRate != i16) {
+                        i16 = i16 == 0 ? jankInfoValueAt.refreshRate : i17;
                     }
-                    if (this.mObserver == null || valueAt.hwuiCallbackFired) {
+                    if (this.mObserver == null || jankInfoValueAt.hwuiCallbackFired) {
                         i5 = i10;
-                        i8 = i19;
+                        i8 = i18;
                     } else {
                         i5 = i10;
-                        i8 = i19;
-                        markEvent("FT#MissedHWUICallback", valueAt.frameVsyncId);
-                        Log.w(TAG, "Missing HWUI jank callback for vsyncId: " + valueAt.frameVsyncId + ", CUJ=" + str2);
+                        i8 = i18;
+                        markEvent("FT#MissedHWUICallback", jankInfoValueAt.frameVsyncId);
+                        Log.w(TAG, "Missing HWUI jank callback for vsyncId: " + jankInfoValueAt.frameVsyncId + ", CUJ=" + str2);
                     }
                     i11 = i8;
                 } else {
                     i5 = i10;
                 }
-                if (!this.mSurfaceOnly && valueAt.hwuiCallbackFired) {
+                if (!this.mSurfaceOnly && jankInfoValueAt.hwuiCallbackFired) {
                     str3 = str4;
                     i6 = i11;
-                    long max = Math.max(valueAt.totalDurationNanos, j6);
-                    if (valueAt.surfaceControlCallbackFired) {
-                        j4 = max;
+                    long jMax2 = Math.max(jankInfoValueAt.totalDurationNanos, j5);
+                    if (jankInfoValueAt.surfaceControlCallbackFired) {
+                        j3 = jMax2;
                     } else {
-                        j4 = max;
-                        markEvent("FT#MissedSFCallback", valueAt.frameVsyncId);
-                        Log.w(TAG, "Missing SF jank callback for vsyncId: " + valueAt.frameVsyncId + ", CUJ=" + str2);
+                        j3 = jMax2;
+                        markEvent("FT#MissedSFCallback", jankInfoValueAt.frameVsyncId);
+                        Log.w(TAG, "Missing SF jank callback for vsyncId: " + jankInfoValueAt.frameVsyncId + ", CUJ=" + str2);
                     }
-                    j3 = j4;
+                    jMax = j3;
                 } else {
                     str3 = str4;
                     i6 = i11;
-                    j3 = j6;
-                    if (Flags.useSfFrameDuration() && valueAt.surfaceControlCallbackFired) {
-                        j3 = Math.max(valueAt.totalDurationNanos, j3);
+                    jMax = j5;
+                    if (Flags.useSfFrameDuration() && jankInfoValueAt.surfaceControlCallbackFired) {
+                        jMax = Math.max(jankInfoValueAt.totalDurationNanos, jMax);
                     }
                 }
                 i11 = i6;
             } else {
                 str3 = str4;
-                j3 = j5;
+                jMax = j4;
                 i5 = i10;
                 str2 = sessionName;
             }
             i10 = i5 + 1;
             sessionName = str2;
-            j5 = j3;
-            i9 = i18;
+            j4 = jMax;
+            i9 = i17;
             str4 = str3;
         }
-        int max2 = Math.max(i15, i16);
+        int iMax2 = Math.max(iMax, i15);
         Trace.traceCounter(4096L, str2 + "#missedFrames", i12);
         Trace.traceCounter(4096L, str2 + "#missedAppFrames", i13);
         Trace.traceCounter(4096L, str2 + "#missedSfFrames", i14);
         Trace.traceCounter(4096L, str2 + "#totalFrames", i11);
-        int i20 = i17;
+        int i19 = i16;
         Trace.traceCounter(4096L, str2 + "#maxFrameTimeMillis", (int) (j / 1000000));
-        Trace.traceCounter(4096L, str2 + "#maxSuccessiveMissedFrames", max2);
+        Trace.traceCounter(4096L, str2 + "#maxSuccessiveMissedFrames", iMax2);
         if (this.mListener != null && shouldTriggerPerfetto(i12, (int) j)) {
             this.mListener.triggerPerfetto(this.mConfig);
         }
         if (this.mConfig.logToStatsd()) {
-            long j7 = j;
+            long j6 = j;
             i = i11;
             i2 = i12;
             i3 = i13;
             i4 = i14;
-            this.mStatsLog.write(305, this.mDisplayId, i20, this.mConfig.getStatsdInteractionType(), i11, i12, j7, i14, i13, max2);
-            j2 = j7;
+            this.mStatsLog.write(305, this.mDisplayId, i19, this.mConfig.getStatsdInteractionType(), i11, i12, j6, i14, i13, iMax2);
+            j2 = j6;
         } else {
             j2 = j;
             i = i11;
@@ -665,7 +664,7 @@ public class FrameTracker implements HardwareRendererObserver.OnFrameMetricsAvai
             sb.append(str5);
             sb.append(j2 / 1000000);
             sb.append(str5);
-            sb.append(max2);
+            sb.append(iMax2);
             PerfLog.d(27, sb.toString());
         } catch (Exception e) {
             e.printStackTrace();

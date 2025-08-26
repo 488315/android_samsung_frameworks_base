@@ -13,7 +13,6 @@ import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NoiseControlEffectBoxViewModel extends BaseViewModel {
     public final BluetoothDeviceManager bluetoothDeviceManager;
@@ -25,7 +24,6 @@ public final class NoiseControlEffectBoxViewModel extends BaseViewModel {
     public final MutableLiveData showAmbientVolumeSeekBar;
     public final MutableLiveData showNoiseControlOff;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,18 +51,18 @@ public final class NoiseControlEffectBoxViewModel extends BaseViewModel {
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     public final void notifyChange() {
-        boolean z;
-        boolean z2;
+        boolean state;
+        boolean state2;
         ModelProvider modelProvider = this.modelProvider;
         BudsModel budsModel = modelProvider.budsModel;
         Log.d("SoundCraft.NoiseControlEffectBoxViewModel", "notifyChange : modelProvider.budsInfo.noiseControlsList=" + budsModel.getNoiseControlsList() + ", noiseCancelingLevel: " + budsModel.getNoiseCancelingLevel() + ", ambientSoundVolume: " + budsModel.getAmbientSoundVolume());
         Set<NoiseControl> noiseControlsList = budsModel.getNoiseControlsList();
         MutableLiveData mutableLiveData = this.showAmbientSound;
         MutableLiveData mutableLiveData2 = this.showActiveNoiseCanceling;
-        boolean z3 = false;
+        boolean z = false;
         if (noiseControlsList != null) {
-            z = false;
-            z2 = false;
+            state = false;
+            state2 = false;
             for (NoiseControl noiseControl : noiseControlsList) {
                 String name = noiseControl.getName();
                 BluetoothDeviceManager bluetoothDeviceManager = this.bluetoothDeviceManager;
@@ -72,27 +70,27 @@ public final class NoiseControlEffectBoxViewModel extends BaseViewModel {
                     this.showNoiseControlOff.setValue(Boolean.TRUE);
                 } else if (Intrinsics.areEqual(name, bluetoothDeviceManager.getActiveNoiseControlTitle())) {
                     mutableLiveData2.setValue(Boolean.TRUE);
-                    z = noiseControl.getState();
+                    state = noiseControl.getState();
                 } else if (Intrinsics.areEqual(name, bluetoothDeviceManager.getAmbientSoundTitle())) {
                     mutableLiveData.setValue(Boolean.TRUE);
-                    z2 = noiseControl.getState();
+                    state2 = noiseControl.getState();
                 } else if (Intrinsics.areEqual(name, bluetoothDeviceManager.getAdaptiveTitle())) {
                     this.showAdaptive.setValue(Boolean.TRUE);
                 }
             }
         } else {
-            z = false;
-            z2 = false;
+            state = false;
+            state2 = false;
         }
         MutableLiveData mutableLiveData3 = this.showActiveNoiseCancelingSeekBar;
         Boolean connectionState = modelProvider.budsModel.getConnectionState();
         Boolean bool = Boolean.TRUE;
-        mutableLiveData3.setValue(Boolean.valueOf(Intrinsics.areEqual(connectionState, bool) && budsModel.getNoiseCancelingLevel() != null && Intrinsics.areEqual(mutableLiveData2.getValue(), bool) && z));
+        mutableLiveData3.setValue(Boolean.valueOf(Intrinsics.areEqual(connectionState, bool) && budsModel.getNoiseCancelingLevel() != null && Intrinsics.areEqual(mutableLiveData2.getValue(), bool) && state));
         MutableLiveData mutableLiveData4 = this.showAmbientVolumeSeekBar;
-        if (Intrinsics.areEqual(modelProvider.budsModel.getConnectionState(), bool) && budsModel.getAmbientSoundVolume() != null && Intrinsics.areEqual(mutableLiveData.getValue(), bool) && z2 && Intrinsics.areEqual(modelProvider.budsModel.getHearingEnhancement(), Boolean.FALSE)) {
-            z3 = true;
+        if (Intrinsics.areEqual(modelProvider.budsModel.getConnectionState(), bool) && budsModel.getAmbientSoundVolume() != null && Intrinsics.areEqual(mutableLiveData.getValue(), bool) && state2 && Intrinsics.areEqual(modelProvider.budsModel.getHearingEnhancement(), Boolean.FALSE)) {
+            z = true;
         }
-        mutableLiveData4.setValue(Boolean.valueOf(z3));
+        mutableLiveData4.setValue(Boolean.valueOf(z));
     }
 
     public final String toString() {

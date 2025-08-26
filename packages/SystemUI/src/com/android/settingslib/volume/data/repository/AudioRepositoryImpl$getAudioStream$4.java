@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioRepositoryImpl$getAudioStream$4 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $audioStream;
@@ -43,9 +42,9 @@ final class AudioRepositoryImpl$getAudioStream$4 extends SuspendLambda implement
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            AudioStreamModel m977access$getCurrentAudioStreamtLTdkI8 = AudioRepositoryImpl.m977access$getCurrentAudioStreamtLTdkI8(this.this$0, this.$audioStream);
+            AudioStreamModel audioStreamModelM979access$getCurrentAudioStreamtLTdkI8 = AudioRepositoryImpl.m979access$getCurrentAudioStreamtLTdkI8(this.this$0, this.$audioStream);
             this.label = 1;
-            if (flowCollector.emit(m977access$getCurrentAudioStreamtLTdkI8, this) == coroutineSingletons) {
+            if (flowCollector.emit(audioStreamModelM979access$getCurrentAudioStreamtLTdkI8, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -5,7 +5,6 @@ import android.util.Slog;
 import android.view.InsetsSource;
 import com.android.wm.shell.common.DisplayImeController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DisplayImeController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -27,13 +26,13 @@ public final /* synthetic */ class DisplayImeController$$ExternalSyntheticLambda
                 break;
             default:
                 DisplayImeController.PerDisplay perDisplay = (DisplayImeController.PerDisplay) obj;
-                InsetsSource peekSource = perDisplay.mInsetsState.peekSource(InsetsSource.ID_IME);
+                InsetsSource insetsSourcePeekSource = perDisplay.mInsetsState.peekSource(InsetsSource.ID_IME);
                 ValueAnimator valueAnimator = perDisplay.mAnimation;
-                if (valueAnimator != null && perDisplay.mAnimationDirection == 1 && peekSource != null && perDisplay.mImeSourceControl != null) {
+                if (valueAnimator != null && perDisplay.mAnimationDirection == 1 && insetsSourcePeekSource != null && perDisplay.mImeSourceControl != null) {
                     valueAnimator.start();
                     break;
                 } else {
-                    Slog.e("DisplayImeController", "anim failed. mAnimation=" + perDisplay.mAnimation + " mAnimationDirection=" + perDisplay.mAnimationDirection + " source=" + peekSource + " mImeSourceControl=" + perDisplay.mImeSourceControl);
+                    Slog.e("DisplayImeController", "anim failed. mAnimation=" + perDisplay.mAnimation + " mAnimationDirection=" + perDisplay.mAnimationDirection + " source=" + insetsSourcePeekSource + " mImeSourceControl=" + perDisplay.mImeSourceControl);
                     break;
                 }
                 break;

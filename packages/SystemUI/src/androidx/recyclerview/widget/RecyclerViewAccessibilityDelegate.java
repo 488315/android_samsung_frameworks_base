@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RecyclerViewAccessibilityDelegate extends AccessibilityDelegateCompat {
     public final ItemDelegate mItemDelegate;
     public final RecyclerView mRecyclerView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ItemDelegate extends AccessibilityDelegateCompat {
         public final Map mOriginalItemDelegates = new WeakHashMap();
         public final RecyclerViewAccessibilityDelegate mRecyclerViewDelegate;

@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class BaseCommunalViewModel {
     public final StateFlowImpl _isNestedScrolling;
@@ -52,16 +51,16 @@ public abstract class BaseCommunalViewModel {
         this.isFocusable = StateFlowKt.MutableStateFlow(bool);
         this.reorderingWidgets = StateFlowKt.MutableStateFlow(bool);
         this.selectedKey = communalInteractor.selectedKey;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isTouchConsumed = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow);
-        this.isTouchConsumed = asStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._isNestedScrolling = MutableStateFlow2;
-        ReadonlyStateFlow asStateFlow2 = FlowKt.asStateFlow(MutableStateFlow2);
-        this.isNestedScrolling = asStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isTouchConsumed = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.isTouchConsumed = readonlyStateFlowAsStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._isNestedScrolling = stateFlowImplMutableStateFlow2;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow2 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        this.isNestedScrolling = readonlyStateFlowAsStateFlow2;
         BooleanFlowOperators booleanFlowOperators = BooleanFlowOperators.INSTANCE;
-        this.glanceableTouchAvailable = booleanFlowOperators.anyOf(booleanFlowOperators.not(asStateFlow), asStateFlow2);
+        this.glanceableTouchAvailable = booleanFlowOperators.anyOf(booleanFlowOperators.not(readonlyStateFlowAsStateFlow), readonlyStateFlowAsStateFlow2);
         new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool);
         new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
         this.isEmptyState = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool);

@@ -1,9 +1,13 @@
 package android.app;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.MessageQueue;
 import android.util.AttributeSet;
 import android.view.InputQueue;
@@ -12,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import dalvik.system.BaseDexClassLoader;
 import java.io.File;
 
 /* loaded from: classes.dex */
@@ -80,19 +85,53 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback2,
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0085  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00ed  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0077 A[PHI: r3
+      0x0077: PHI (r3v2 java.lang.String) = (r3v1 java.lang.String), (r3v9 java.lang.String) binds: [B:5:0x005e, B:10:0x0073] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onCreate(android.os.Bundle r13) {
-        /*
-            Method dump skipped, instructions count: 278
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.NativeActivity.onCreate(android.os.Bundle):void");
+    protected void onCreate(Bundle bundle) {
+        String str;
+        String str2;
+        this.mIMM = (InputMethodManager) getSystemService(InputMethodManager.class);
+        getWindow().takeSurface(this);
+        getWindow().takeInputQueue(this);
+        getWindow().setFormat(4);
+        getWindow().setSoftInputMode(16);
+        NativeContentView nativeContentView = new NativeContentView(this);
+        this.mNativeContentView = nativeContentView;
+        nativeContentView.mActivity = this;
+        setContentView(this.mNativeContentView);
+        this.mNativeContentView.requestFocus();
+        this.mNativeContentView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+        try {
+            ActivityInfo activityInfo = getPackageManager().getActivityInfo(getIntent().getComponent(), 128);
+            str = "main";
+            if (activityInfo.metaData == null) {
+                str2 = "ANativeActivity_onCreate";
+            } else {
+                String string = activityInfo.metaData.getString(META_DATA_LIB_NAME);
+                str = string != null ? string : "main";
+                String string2 = activityInfo.metaData.getString(META_DATA_FUNC_NAME);
+                if (string2 != null) {
+                    str2 = string2;
+                }
+            }
+            BaseDexClassLoader baseDexClassLoader = (BaseDexClassLoader) getClassLoader();
+            String strFindLibrary = baseDexClassLoader.findLibrary(str);
+            if (strFindLibrary == null) {
+                throw new IllegalArgumentException("Unable to find native library " + str + " using classloader: " + baseDexClassLoader.toString());
+            }
+            long jLoadNativeCode = loadNativeCode(strFindLibrary, str2, Looper.myQueue(), getAbsolutePath(getFilesDir()), getAbsolutePath(getObbDir()), getAbsolutePath(getExternalFilesDir(null)), Build.VERSION.SDK_INT, getAssets(), bundle != null ? bundle.getByteArray(KEY_NATIVE_SAVED_STATE) : null, baseDexClassLoader, baseDexClassLoader.getLdLibraryPath());
+            this.mNativeHandle = jLoadNativeCode;
+            if (jLoadNativeCode == 0) {
+                throw new UnsatisfiedLinkError("Unable to load native library \"" + strFindLibrary + "\": " + getDlError());
+            }
+            super.onCreate(bundle);
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException("Error getting activity info", e);
+        }
     }
 
     private static String getAbsolutePath(File file) {
@@ -133,9 +172,9 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback2,
     @Override // android.app.Activity
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-        byte[] onSaveInstanceStateNative = onSaveInstanceStateNative(this.mNativeHandle);
-        if (onSaveInstanceStateNative != null) {
-            bundle.putByteArray(KEY_NATIVE_SAVED_STATE, onSaveInstanceStateNative);
+        byte[] bArrOnSaveInstanceStateNative = onSaveInstanceStateNative(this.mNativeHandle);
+        if (bArrOnSaveInstanceStateNative != null) {
+            bundle.putByteArray(KEY_NATIVE_SAVED_STATE, bArrOnSaveInstanceStateNative);
         }
     }
 

@@ -5,7 +5,6 @@ import com.android.systemui.util.ListenerSet;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifPipelineChoreographerImpl implements NotifPipelineChoreographer {
     public final DelayableExecutor executor;
@@ -16,14 +15,14 @@ public final class NotifPipelineChoreographerImpl implements NotifPipelineChoreo
     public final NotifPipelineChoreographerImpl$frameCallback$1 frameCallback = new Choreographer.FrameCallback() { // from class: com.android.systemui.statusbar.notification.collection.NotifPipelineChoreographerImpl$frameCallback$1
         @Override // android.view.Choreographer.FrameCallback
         public final void doFrame(long j) {
-            NotifPipelineChoreographerImpl notifPipelineChoreographerImpl = NotifPipelineChoreographerImpl.this;
+            NotifPipelineChoreographerImpl notifPipelineChoreographerImpl = this.this$0;
             if (notifPipelineChoreographerImpl.isScheduled) {
                 notifPipelineChoreographerImpl.isScheduled = false;
                 Runnable runnable = notifPipelineChoreographerImpl.timeoutSubscription;
                 if (runnable != null) {
                     runnable.run();
                 }
-                Iterator<E> it = NotifPipelineChoreographerImpl.this.listeners.iterator();
+                Iterator<E> it = this.this$0.listeners.iterator();
                 while (it.hasNext()) {
                     ((Runnable) it.next()).run();
                 }
@@ -44,7 +43,7 @@ public final class NotifPipelineChoreographerImpl implements NotifPipelineChoreo
         this.isScheduled = true;
         this.viewChoreographer.postFrameCallback(this.frameCallback);
         if (this.isScheduled) {
-            this.timeoutSubscription = this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.NotifPipelineChoreographerImpl$schedule$1
+            this.timeoutSubscription = this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.NotifPipelineChoreographerImpl.schedule.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     NotifPipelineChoreographerImpl notifPipelineChoreographerImpl = NotifPipelineChoreographerImpl.this;

@@ -26,7 +26,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDataFilterImpl implements MediaDataManager.Listener {
     public final Set _listeners = new LinkedHashSet();
@@ -48,12 +47,12 @@ public final class MediaDataFilterImpl implements MediaDataManager.Listener {
         ?? r2 = new UserTracker.Callback() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataFilterImpl$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onProfilesChanged(List list) {
-                MediaDataFilterImpl.this.handleProfileChanged$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                this.this$0.handleProfileChanged$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             }
 
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context) {
-                MediaDataFilterImpl.this.handleUserSwitched$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                this.this$0.handleUserSwitched$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             }
         };
         this.userTrackerCallback = r2;
@@ -148,9 +147,9 @@ public final class MediaDataFilterImpl implements MediaDataManager.Listener {
         int i = mediaData.userId;
         NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = (NotificationLockscreenUserManagerImpl) this.lockscreenUserManager;
         if (notificationLockscreenUserManagerImpl.isCurrentProfile(i) && notificationLockscreenUserManagerImpl.isProfileAvailable(mediaData.userId)) {
-            boolean addSelectedUserMediaEntry = mediaFilterRepository.addSelectedUserMediaEntry(mediaData);
+            boolean zAddSelectedUserMediaEntry = mediaFilterRepository.addSelectedUserMediaEntry(mediaData);
             this.mediaLogger.logMediaLoaded(mediaData.instanceId, mediaData.active, "loading media");
-            mediaFilterRepository.addMediaDataLoadingState(new MediaDataLoadingModel.Loaded(mediaData.instanceId), addSelectedUserMediaEntry);
+            mediaFilterRepository.addMediaDataLoadingState(new MediaDataLoadingModel.Loaded(mediaData.instanceId), zAddSelectedUserMediaEntry);
             Iterator it = CollectionsKt___CollectionsKt.toSet(this._listeners).iterator();
             while (it.hasNext()) {
                 MediaDataManager.Listener.onMediaDataLoaded$default((MediaDataManager.Listener) it.next(), str, str2, mediaData, false, 56);

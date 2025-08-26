@@ -4,20 +4,23 @@ import com.android.systemui.user.data.repository.UserRepository;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.util.settings.SettingsProxyExt;
 import com.android.systemui.util.settings.UserSettingsProxy;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class UserAwareSettingsRepository {
     public static final int $stable = 8;
@@ -25,6 +28,183 @@ public abstract class UserAwareSettingsRepository {
     private final CoroutineContext bgContext;
     private final UserRepository userRepository;
     private final UserSettingsProxy userSettings;
+
+    /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$getInt$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $defaultValue;
+        final /* synthetic */ String $name;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(String str, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+            this.$defaultValue = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserAwareSettingsRepository.this.new AnonymousClass2(this.$name, this.$defaultValue, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return new Integer(UserAwareSettingsRepository.this.userSettings.getIntForUser(this.$name, this.$defaultValue, ((UserRepositoryImpl) UserAwareSettingsRepository.this.userRepository).getSelectedUserInfo().id));
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass2) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$getString$2, reason: invalid class name and case insensitive filesystem */
+    final class C11782 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $name;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11782(String str, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserAwareSettingsRepository.this.new C11782(this.$name, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return UserAwareSettingsRepository.this.userSettings.getStringForUser(this.$name, ((UserRepositoryImpl) UserAwareSettingsRepository.this.userRepository).getSelectedUserInfo().id);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11782) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$setBoolean$2, reason: invalid class name and case insensitive filesystem */
+    final class C11792 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $name;
+        final /* synthetic */ boolean $value;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11792(String str, boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+            this.$value = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserAwareSettingsRepository.this.new C11792(this.$name, this.$value, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Boolean.valueOf(UserAwareSettingsRepository.this.userSettings.putBoolForUser(this.$name, this.$value, ((UserRepositoryImpl) UserAwareSettingsRepository.this.userRepository).getSelectedUserInfo().id));
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11792) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$setInt$2, reason: invalid class name and case insensitive filesystem */
+    final class C11802 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $name;
+        final /* synthetic */ int $value;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C11802(String str, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$name = str;
+            this.$value = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UserAwareSettingsRepository.this.new C11802(this.$name, this.$value, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Boolean.valueOf(UserAwareSettingsRepository.this.userSettings.putIntForUser(this.$name, this.$value, ((UserRepositoryImpl) UserAwareSettingsRepository.this.userRepository).getSelectedUserInfo().id));
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((C11802) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = new AnonymousClass1(continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                Unit unit = Unit.INSTANCE;
+                this.label = 1;
+                if (flowCollector.emit(unit, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(FlowCollector flowCollector, Continuation continuation) {
+            return ((AnonymousClass1) create(flowCollector, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
 
     public UserAwareSettingsRepository(UserSettingsProxy userSettingsProxy, UserRepository userRepository, CoroutineDispatcher coroutineDispatcher, CoroutineContext coroutineContext) {
         this.userSettings = userSettingsProxy;
@@ -35,10 +215,9 @@ public abstract class UserAwareSettingsRepository {
 
     /* JADX INFO: Access modifiers changed from: private */
     public final <T> Flow settingObserver(String str, int i, final Function0 function0) {
-        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new UserAwareSettingsRepository$settingObserver$1(null), SettingsProxyExt.INSTANCE.observerFlow(this.userSettings, i, str));
+        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass1(null), SettingsProxyExt.INSTANCE.observerFlow(this.userSettings, i, str));
         return new Flow() { // from class: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2<T> implements FlowCollector {
                 final /* synthetic */ Function0 $settingsReader$inlined;
@@ -67,66 +246,47 @@ public abstract class UserAwareSettingsRepository {
                     this.$settingsReader$inlined = function0;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1$2$1 r0 = (com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1$2$1 r0 = new com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlinx.coroutines.flow.FlowCollector r6 = r4.$this_unsafeFlow
-                        kotlin.Unit r5 = (kotlin.Unit) r5
-                        kotlin.jvm.functions.Function0 r4 = r4.$settingsReader$inlined
-                        java.lang.Object r4 = r4.invoke()
-                        r0.label = r3
-                        java.lang.Object r4 = r6.emit(r4, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$settingObserver$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        FlowCollector flowCollector = this.$this_unsafeFlow;
+                        Object objInvoke = this.$settingsReader$inlined.invoke();
+                        anonymousClass1.label = 1;
+                        if (flowCollector.emit(objInvoke, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, function0), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, function0), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
     }
@@ -136,24 +296,24 @@ public abstract class UserAwareSettingsRepository {
     }
 
     public final Object getInt(String str, int i, Continuation continuation) {
-        return BuildersKt.withContext(this.bgContext, new UserAwareSettingsRepository$getInt$2(this, str, i, null), continuation);
+        return BuildersKt.withContext(this.bgContext, new AnonymousClass2(str, i, null), continuation);
     }
 
     public final Object getString(String str, Continuation continuation) {
-        return BuildersKt.withContext(this.bgContext, new UserAwareSettingsRepository$getString$2(this, str, null), continuation);
+        return BuildersKt.withContext(this.bgContext, new C11782(str, null), continuation);
     }
 
     public final Flow intSetting(String str, int i) {
         return FlowKt.flowOn(FlowKt.distinctUntilChanged(FlowKt.transformLatest(((UserRepositoryImpl) this.userRepository).selectedUserInfo, new UserAwareSettingsRepository$intSetting$$inlined$flatMapLatest$1(null, this, str, i))), this.backgroundDispatcher);
     }
 
-    public final Object setBoolean(String str, boolean z, Continuation continuation) {
-        Object withContext = BuildersKt.withContext(this.bgContext, new UserAwareSettingsRepository$setBoolean$2(this, str, z, null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+    public final Object setBoolean(String str, boolean z, Continuation continuation) throws Throwable {
+        Object objWithContext = BuildersKt.withContext(this.bgContext, new C11792(str, z, null), continuation);
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 
-    public final Object setInt(String str, int i, Continuation continuation) {
-        Object withContext = BuildersKt.withContext(this.bgContext, new UserAwareSettingsRepository$setInt$2(this, str, i, null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+    public final Object setInt(String str, int i, Continuation continuation) throws Throwable {
+        Object objWithContext = BuildersKt.withContext(this.bgContext, new C11802(str, i, null), continuation);
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 }

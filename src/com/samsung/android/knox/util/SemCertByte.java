@@ -35,14 +35,14 @@ public class SemCertByte implements Parcelable {
     }
 
     public SemCertByte(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.certsize = readInt;
-        byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        this.certsize = i;
+        byte[] bArr = new byte[i];
         this.certBytes = bArr;
         readByteArray(parcel, bArr);
-        int readInt2 = parcel.readInt();
-        this.caSize = readInt2;
-        byte[] bArr2 = new byte[readInt2];
+        int i2 = parcel.readInt();
+        this.caSize = i2;
+        byte[] bArr2 = new byte[i2];
         this.caCertBytes = bArr2;
         readByteArray(parcel, bArr2);
     }
@@ -57,9 +57,9 @@ public class SemCertByte implements Parcelable {
     }
 
     private final void readByteArray(Parcel parcel, byte[] bArr) {
-        byte[] createByteArray = parcel.createByteArray();
-        if (createByteArray.length == bArr.length) {
-            System.arraycopy(createByteArray, 0, bArr, 0, createByteArray.length);
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        if (bArrCreateByteArray.length == bArr.length) {
+            System.arraycopy(bArrCreateByteArray, 0, bArr, 0, bArrCreateByteArray.length);
             return;
         }
         throw new RuntimeException("bad array lengths");

@@ -10,10 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import com.android.systemui.R;
-import com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate$onCreate$1;
+import com.android.systemui.accessibility.fontscaling.FontScalingDialogDelegate;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeekBarWithIconButtonsView extends LinearLayout {
     public final ImageView mIconEnd;
@@ -26,13 +25,11 @@ public class SeekBarWithIconButtonsView extends LinearLayout {
     public boolean mSetProgressFromButtonFlag;
     public String[] mStateLabels;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSeekBarWithIconButtonsChangeListener extends SeekBar.OnSeekBarChangeListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
-        public FontScalingDialogDelegate$onCreate$1 mOnSeekBarChangeListener = null;
+        public FontScalingDialogDelegate.C07851 mOnSeekBarChangeListener = null;
         public boolean mSeekByTouch = false;
 
         public SeekBarChangeListener() {
@@ -47,15 +44,15 @@ public class SeekBarWithIconButtonsView extends LinearLayout {
                 String[] strArr = seekBarWithIconButtonsView.mStateLabels;
                 seekBar2.setStateDescription(progress < strArr.length ? strArr[seekBarWithIconButtonsView.mSeekbar.getProgress()] : "");
             }
-            FontScalingDialogDelegate$onCreate$1 fontScalingDialogDelegate$onCreate$1 = this.mOnSeekBarChangeListener;
-            if (fontScalingDialogDelegate$onCreate$1 != null) {
+            FontScalingDialogDelegate.C07851 c07851 = this.mOnSeekBarChangeListener;
+            if (c07851 != null) {
                 SeekBarWithIconButtonsView seekBarWithIconButtonsView2 = SeekBarWithIconButtonsView.this;
                 if (seekBarWithIconButtonsView2.mSetProgressFromButtonFlag) {
                     seekBarWithIconButtonsView2.mSetProgressFromButtonFlag = false;
-                    fontScalingDialogDelegate$onCreate$1.onProgressChanged(seekBar, i, true);
+                    c07851.onProgressChanged(seekBar, i, true);
                     this.mOnSeekBarChangeListener.onUserInteractionFinalized(seekBar, 1);
                 } else {
-                    fontScalingDialogDelegate$onCreate$1.onProgressChanged(seekBar, i, z);
+                    c07851.onProgressChanged(seekBar, i, z);
                     if (!this.mSeekByTouch && z) {
                         this.mOnSeekBarChangeListener.onUserInteractionFinalized(seekBar, 0);
                     }
@@ -72,9 +69,9 @@ public class SeekBarWithIconButtonsView extends LinearLayout {
         @Override // android.widget.SeekBar.OnSeekBarChangeListener
         public final void onStopTrackingTouch(SeekBar seekBar) {
             this.mSeekByTouch = false;
-            FontScalingDialogDelegate$onCreate$1 fontScalingDialogDelegate$onCreate$1 = this.mOnSeekBarChangeListener;
-            if (fontScalingDialogDelegate$onCreate$1 != null) {
-                fontScalingDialogDelegate$onCreate$1.onUserInteractionFinalized(seekBar, 0);
+            FontScalingDialogDelegate.C07851 c07851 = this.mOnSeekBarChangeListener;
+            if (c07851 != null) {
+                c07851.onUserInteractionFinalized(seekBar, 0);
             }
         }
     }
@@ -135,25 +132,25 @@ public class SeekBarWithIconButtonsView extends LinearLayout {
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekbar);
         this.mSeekbar = seekBar;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarWithIconButtonsView_Layout, i, i2);
-            int i3 = obtainStyledAttributes.getInt(2, 6);
-            int i4 = obtainStyledAttributes.getInt(3, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SeekBarWithIconButtonsView_Layout, i, i2);
+            int i3 = typedArrayObtainStyledAttributes.getInt(2, 6);
+            int i4 = typedArrayObtainStyledAttributes.getInt(3, 0);
             seekBar.setMax(i3);
             this.mSeekbar.setProgress(i4);
             updateIconViewIfNeeded(this.mSeekbar.getProgress());
-            int resourceId = obtainStyledAttributes.getResourceId(1, 0);
-            int resourceId2 = obtainStyledAttributes.getResourceId(0, 0);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+            int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(0, 0);
             if (resourceId != 0) {
                 viewGroup.setContentDescription(context.getString(resourceId));
             }
             if (resourceId2 != 0) {
                 viewGroup2.setContentDescription(context.getString(resourceId2));
             }
-            int resourceId3 = obtainStyledAttributes.getResourceId(5, 0);
+            int resourceId3 = typedArrayObtainStyledAttributes.getResourceId(5, 0);
             if (resourceId3 != 0) {
                 seekBar.setTickMark(getResources().getDrawable(resourceId3));
             }
-            this.mSeekBarChangeMagnitude = obtainStyledAttributes.getInt(4, 1);
+            this.mSeekBarChangeMagnitude = typedArrayObtainStyledAttributes.getInt(4, 1);
         } else {
             seekBar.setMax(6);
             this.mSeekbar.setProgress(0);

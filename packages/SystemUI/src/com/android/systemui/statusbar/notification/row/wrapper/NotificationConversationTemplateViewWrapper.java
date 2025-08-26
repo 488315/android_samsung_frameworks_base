@@ -27,7 +27,6 @@ import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationConversationTemplateViewWrapper extends NotificationTemplateViewWrapper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -116,7 +115,7 @@ public final class NotificationConversationTemplateViewWrapper extends Notificat
         TransformingSequence transformingSequence = new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(arrayList), new Function1() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationConversationTemplateViewWrapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i) {
                     case 0:
                         int i2 = NotificationConversationTemplateViewWrapper.$r8$clinit;
@@ -144,10 +143,10 @@ public final class NotificationConversationTemplateViewWrapper extends Notificat
         ViewGroup viewGroup = this.imageMessageContainer;
         viewGroup.getClass();
         final int i2 = 1;
-        FlatteningSequence flatMap = SequencesKt___SequencesKt.flatMap(SequencesKt__SequencesKt.flatten(ArraysKt___ArraysKt.asSequence(new Sequence[]{transformingSequence, ArraysKt___ArraysKt.asSequence(new ViewGroup[]{viewGroup})})), new Function1() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationConversationTemplateViewWrapper$$ExternalSyntheticLambda0
+        FlatteningSequence flatteningSequenceFlatMap = SequencesKt___SequencesKt.flatMap(SequencesKt__SequencesKt.flatten(ArraysKt___ArraysKt.asSequence(new Sequence[]{transformingSequence, ArraysKt___ArraysKt.asSequence(new ViewGroup[]{viewGroup})})), new Function1() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationConversationTemplateViewWrapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i2) {
                     case 0:
                         int i22 = NotificationConversationTemplateViewWrapper.$r8$clinit;
@@ -173,10 +172,10 @@ public final class NotificationConversationTemplateViewWrapper extends Notificat
             }
         });
         final int i3 = 2;
-        for (AnimatedImageDrawable animatedImageDrawable : SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.mapNotNull(flatMap, new Function1() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationConversationTemplateViewWrapper$$ExternalSyntheticLambda0
+        for (AnimatedImageDrawable animatedImageDrawable : SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.mapNotNull(flatteningSequenceFlatMap, new Function1() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationConversationTemplateViewWrapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i3) {
                     case 0:
                         int i22 = NotificationConversationTemplateViewWrapper.$r8$clinit;

@@ -16,21 +16,25 @@ import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import com.android.app.tracing.TraceUtilsKt;
 import com.android.systemui.graphics.ImageLoader;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ImageLoader {
     public static final Companion Companion = new Companion(null);
     public final CoroutineDispatcher backgroundDispatcher;
     public final Context defaultContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,10 +46,10 @@ public final class ImageLoader {
                 return;
             }
             if (size.getWidth() > i || size.getHeight() > i2) {
-                float min = Math.min(i <= 0 ? 1.0f : i / size.getWidth(), i2 <= 0 ? 1.0f : i2 / size.getHeight());
-                if (min < 1.0f) {
-                    int width = (int) (size.getWidth() * min);
-                    int height = (int) (size.getHeight() * min);
+                float fMin = Math.min(i <= 0 ? 1.0f : i / size.getWidth(), i2 <= 0 ? 1.0f : i2 / size.getHeight());
+                if (fMin < 1.0f) {
+                    int width = (int) (size.getWidth() * fMin);
+                    int height = (int) (size.getHeight() * fMin);
                     if (Log.isLoggable("ImageLoader", 3)) {
                         SuggestionsAdapter$$ExternalSyntheticOutline0.m(width, height, "Configured image size to ", " x ", "ImageLoader");
                     }
@@ -80,7 +84,7 @@ public final class ImageLoader {
         }
 
         public static final ImageDecoder.Source access$toImageDecoderSource(Companion companion, Source source, Context context) {
-            ImageDecoder.Source createSource;
+            ImageDecoder.Source sourceCreateSource;
             companion.getClass();
             if (source instanceof Res) {
                 Res res = (Res) source;
@@ -88,11 +92,11 @@ public final class ImageLoader {
                 if (context2 != null) {
                     context = context2;
                 }
-                createSource = ImageDecoder.createSource(context.getResources(), res.resId);
+                sourceCreateSource = ImageDecoder.createSource(context.getResources(), res.resId);
             } else if (source instanceof File) {
-                createSource = ImageDecoder.createSource(((File) source).file);
+                sourceCreateSource = ImageDecoder.createSource(((File) source).file);
             } else if (source instanceof Uri) {
-                createSource = ImageDecoder.createSource(context.getContentResolver(), ((Uri) source).uri);
+                sourceCreateSource = ImageDecoder.createSource(context.getContentResolver(), ((Uri) source).uri);
             } else {
                 if (!(source instanceof InputStream)) {
                     throw new NoWhenBranchMatchedException();
@@ -102,17 +106,16 @@ public final class ImageLoader {
                 if (context3 != null) {
                     context = context3;
                 }
-                createSource = ImageDecoder.createSource(context.getResources(), inputStream.inputStream);
+                sourceCreateSource = ImageDecoder.createSource(context.getResources(), inputStream.inputStream);
             }
-            createSource.getClass();
-            return createSource;
+            sourceCreateSource.getClass();
+            return sourceCreateSource;
         }
 
         private Companion() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class File implements Source {
         public final java.io.File file;
 
@@ -140,7 +143,6 @@ public final class ImageLoader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InputStream implements Source {
         public final Context context;
         public final java.io.InputStream inputStream;
@@ -162,9 +164,9 @@ public final class ImageLoader {
         }
 
         public final int hashCode() {
-            int hashCode = this.inputStream.hashCode() * 31;
+            int iHashCode = this.inputStream.hashCode() * 31;
             Context context = this.context;
-            return hashCode + (context == null ? 0 : context.hashCode());
+            return iHashCode + (context == null ? 0 : context.hashCode());
         }
 
         public final String toString() {
@@ -176,7 +178,6 @@ public final class ImageLoader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Res implements Source {
         public final Context context;
         public final int resId;
@@ -198,9 +199,9 @@ public final class ImageLoader {
         }
 
         public final int hashCode() {
-            int hashCode = Integer.hashCode(this.resId) * 31;
+            int iHashCode = Integer.hashCode(this.resId) * 31;
             Context context = this.context;
-            return hashCode + (context == null ? 0 : context.hashCode());
+            return iHashCode + (context == null ? 0 : context.hashCode());
         }
 
         public final String toString() {
@@ -212,11 +213,9 @@ public final class ImageLoader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Source {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Uri implements Source {
         public final android.net.Uri uri;
 
@@ -244,39 +243,88 @@ public final class ImageLoader {
         }
     }
 
+    /* renamed from: com.android.systemui.graphics.ImageLoader$loadBitmap$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $allocator;
+        final /* synthetic */ int $maxHeight;
+        final /* synthetic */ int $maxWidth;
+        final /* synthetic */ Source $source;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(Source source, int i, int i2, int i3, Continuation continuation) {
+            super(2, continuation);
+            this.$source = source;
+            this.$maxWidth = i;
+            this.$maxHeight = i2;
+            this.$allocator = i3;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ImageLoader.this.new AnonymousClass2(this.$source, this.$maxWidth, this.$maxHeight, this.$allocator, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ImageLoader imageLoader = ImageLoader.this;
+            Source source = this.$source;
+            int i = this.$maxWidth;
+            int i2 = this.$maxHeight;
+            int i3 = this.$allocator;
+            imageLoader.getClass();
+            try {
+                return ImageLoader.loadBitmapSync(Companion.access$toImageDecoderSource(ImageLoader.Companion, source, imageLoader.defaultContext), i, i2, i3);
+            } catch (Resources.NotFoundException e) {
+                Log.w("ImageLoader", "Couldn't load resource " + source, e);
+                return null;
+            }
+        }
+    }
+
     public ImageLoader(Context context, CoroutineDispatcher coroutineDispatcher) {
         this.defaultContext = context;
         this.backgroundDispatcher = coroutineDispatcher;
     }
 
     public static Bitmap loadBitmapSync(ImageDecoder.Source source, final int i, final int i2, final int i3) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ImageLoader#loadBitmap");
         }
         try {
             try {
-                Bitmap decodeBitmap = ImageDecoder.decodeBitmap(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.systemui.graphics.ImageLoader$loadBitmapSync$1$1
+                Bitmap bitmapDecodeBitmap = ImageDecoder.decodeBitmap(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.systemui.graphics.ImageLoader$loadBitmapSync$1$1
                     @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                     public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source2) {
                         ImageLoader.Companion.access$configureDecoderForMaximumSize(ImageLoader.Companion, imageDecoder, imageInfo.getSize(), i, i2);
                         imageDecoder.setAllocator(i3);
                     }
                 });
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
-                return decodeBitmap;
+                return bitmapDecodeBitmap;
             } catch (Exception e) {
                 Log.w("ImageLoader", "Failed to load source " + source, e);
-                if (!isEnabled) {
+                if (!zIsEnabled) {
                     return null;
                 }
                 TraceUtilsKt.endSlice();
                 return null;
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -290,33 +338,33 @@ public final class ImageLoader {
     }
 
     public static Drawable loadDrawableSync(ImageDecoder.Source source, final int i, final int i2, final int i3) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ImageLoader#loadDrawable");
         }
         try {
             try {
-                Drawable decodeDrawable = ImageDecoder.decodeDrawable(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.systemui.graphics.ImageLoader$loadDrawableSync$2$1
+                Drawable drawableDecodeDrawable = ImageDecoder.decodeDrawable(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.systemui.graphics.ImageLoader$loadDrawableSync$2$1
                     @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                     public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source2) {
                         ImageLoader.Companion.access$configureDecoderForMaximumSize(ImageLoader.Companion, imageDecoder, imageInfo.getSize(), i, i2);
                         imageDecoder.setAllocator(i3);
                     }
                 });
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
-                return decodeDrawable;
+                return drawableDecodeDrawable;
             } catch (Exception e) {
                 Log.w("ImageLoader", "Failed to load source " + source, e);
-                if (!isEnabled) {
+                if (!zIsEnabled) {
                     return null;
                 }
                 TraceUtilsKt.endSlice();
                 return null;
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -324,14 +372,14 @@ public final class ImageLoader {
     }
 
     public final Object loadBitmap(Uri uri, int i, int i2, ContinuationImpl continuationImpl) {
-        return BuildersKt.withContext(this.backgroundDispatcher, new ImageLoader$loadBitmap$2(this, uri, i, i2, 1, null), continuationImpl);
+        return BuildersKt.withContext(this.backgroundDispatcher, new AnonymousClass2(uri, i, i2, 1, null), continuationImpl);
     }
 
     public static Drawable loadDrawableSync(Icon icon, Context context, int i, int i2, int i3) {
         Drawable bitmapDrawable;
-        Drawable loadDrawable;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        Drawable drawableLoadDrawable;
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ImageLoader#loadDrawable");
         }
         try {
@@ -341,58 +389,60 @@ public final class ImageLoader {
             switch (type) {
                 case 1:
                     bitmapDrawable = new BitmapDrawable(context.getResources(), icon.getBitmap());
-                    loadDrawable = bitmapDrawable;
+                    drawableLoadDrawable = bitmapDrawable;
                     break;
                 case 2:
-                    Resources access$resolveResourcesForIcon = Companion.access$resolveResourcesForIcon(companion, context, icon);
-                    if (access$resolveResourcesForIcon == null || (bitmapDrawable = loadDrawableSync(ImageDecoder.createSource(access$resolveResourcesForIcon, icon.getResId()), i, i2, i3)) == null) {
-                        loadDrawable = icon.loadDrawable(context);
-                        if (loadDrawable == null) {
+                    Resources resourcesAccess$resolveResourcesForIcon = Companion.access$resolveResourcesForIcon(companion, context, icon);
+                    if (resourcesAccess$resolveResourcesForIcon != null && (bitmapDrawable = loadDrawableSync(ImageDecoder.createSource(resourcesAccess$resolveResourcesForIcon, icon.getResId()), i, i2, i3)) != null) {
+                        drawableLoadDrawable = bitmapDrawable;
+                        break;
+                    } else {
+                        drawableLoadDrawable = icon.loadDrawable(context);
+                        if (drawableLoadDrawable == null) {
                             Log.w("ImageLoader", "Failed to load drawable for " + icon);
-                            loadDrawable = null;
+                            drawableLoadDrawable = null;
                             break;
                         } else {
                             break;
                         }
                     }
-                    loadDrawable = bitmapDrawable;
                     break;
                 case 3:
-                    loadDrawable = loadDrawableSync(ImageDecoder.createSource(icon.getDataBytes(), icon.getDataOffset(), icon.getDataLength()), i, i2, i3);
+                    drawableLoadDrawable = loadDrawableSync(ImageDecoder.createSource(icon.getDataBytes(), icon.getDataOffset(), icon.getDataLength()), i, i2, i3);
                     break;
                 case 4:
                 case 6:
-                    loadDrawable = loadDrawableSync(ImageDecoder.createSource(context.getContentResolver(), icon.getUri()), i, i2, i3);
+                    drawableLoadDrawable = loadDrawableSync(ImageDecoder.createSource(context.getContentResolver(), icon.getUri()), i, i2, i3);
                     break;
                 case 5:
                     bitmapDrawable = new AdaptiveIconDrawable(null, new BitmapDrawable(context.getResources(), icon.getBitmap()));
-                    loadDrawable = bitmapDrawable;
+                    drawableLoadDrawable = bitmapDrawable;
                     break;
                 default:
-                    loadDrawable = icon.loadDrawable(context);
-                    if (loadDrawable == null) {
+                    drawableLoadDrawable = icon.loadDrawable(context);
+                    if (drawableLoadDrawable == null) {
                         Log.w("ImageLoader", "Failed to load drawable for " + icon);
-                        loadDrawable = null;
+                        drawableLoadDrawable = null;
                         break;
                     } else {
                         break;
                     }
             }
-            if (loadDrawable != null) {
+            if (drawableLoadDrawable != null) {
                 companion.getClass();
                 if (icon.hasTint()) {
-                    loadDrawable.mutate();
-                    loadDrawable.setTintList(icon.getTintList());
-                    loadDrawable.setTintBlendMode(icon.getTintBlendMode());
+                    drawableLoadDrawable.mutate();
+                    drawableLoadDrawable.setTintList(icon.getTintList());
+                    drawableLoadDrawable.setTintBlendMode(icon.getTintBlendMode());
                 }
-                drawable = loadDrawable;
+                drawable = drawableLoadDrawable;
             }
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             return drawable;
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

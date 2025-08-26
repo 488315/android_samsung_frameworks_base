@@ -13,7 +13,7 @@
                 </item>
             </ripple>
         </item>
-        <item android:gravity="fill_horizontal|bottom|center">
+        <item android:gravity="fill_horizontal|bottom">
             <shape android:shape="rectangle">
                 <size android:height="2.0dip" />
                 <solid android:color="@color/control_checkable_material" />

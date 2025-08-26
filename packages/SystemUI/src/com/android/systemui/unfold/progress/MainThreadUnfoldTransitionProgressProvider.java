@@ -2,19 +2,16 @@ package com.android.systemui.unfold.progress;
 
 import android.os.Handler;
 import com.android.systemui.unfold.UnfoldTransitionProgressProvider;
-import com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider {
     public final Map listenerMap = Collections.synchronizedMap(new LinkedHashMap());
     public final Handler mainHandler;
     public final UnfoldTransitionProgressProvider rootProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionProgressListerProxy implements UnfoldTransitionProgressProvider.TransitionProgressListener {
         public final UnfoldTransitionProgressProvider.TransitionProgressListener listener;
 
@@ -27,7 +24,7 @@ public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldT
             MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionFinished$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionFinished();
+                    this.this$0.listener.onTransitionFinished();
                 }
             });
         }
@@ -37,7 +34,7 @@ public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldT
             MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionFinishing$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionFinishing();
+                    this.this$0.listener.onTransitionFinishing();
                 }
             });
         }
@@ -47,7 +44,7 @@ public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldT
             MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionProgress$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionProgress(f);
+                    this.this$0.listener.onTransitionProgress(f);
                 }
             });
         }
@@ -57,7 +54,7 @@ public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldT
             MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionStarted$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionStarted();
+                    this.this$0.listener.onTransitionStarted();
                 }
             });
         }

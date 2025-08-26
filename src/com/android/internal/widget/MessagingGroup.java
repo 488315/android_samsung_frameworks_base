@@ -175,22 +175,22 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             rect = null;
         } else {
             int distanceFromParent = this.mSingleLine ? 0 : (getDistanceFromParent(this.mSenderView, this.mContentContainer) - getDistanceFromParent(this.mMessageContainer, this.mContentContainer)) + this.mSenderView.getHeight();
-            int max = Math.max(this.mDisplaySize.x, this.mDisplaySize.y);
-            rect = new Rect(-max, distanceFromParent, max, max);
+            int iMax = Math.max(this.mDisplaySize.x, this.mDisplaySize.y);
+            rect = new Rect(-iMax, distanceFromParent, iMax, iMax);
         }
         this.mMessageContainer.setClipBounds(rect);
     }
 
     private int getDistanceFromParent(View view, ViewGroup viewGroup) {
-        int i = 0;
+        int top = 0;
         while (view != viewGroup) {
-            i = (int) (i + view.getTop() + view.getTranslationY());
+            top = (int) (top + view.getTop() + view.getTranslationY());
             view = (View) view.getParent();
         }
-        return i;
+        return top;
     }
 
-    public void setSender(Person person, CharSequence charSequence) {
+    public void setSender(Person person, CharSequence charSequence) throws Resources.NotFoundException {
         this.mSender = person;
         if (charSequence == null) {
             charSequence = person.getName();
@@ -225,7 +225,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         }
     }
 
-    private int calculateSendingTextColor() {
+    private int calculateSendingTextColor() throws Resources.NotFoundException {
         TypedValue typedValue = new TypedValue();
         this.mContext.getResources().getValue(R.dimen.notification_secondary_text_disabled_alpha, typedValue, true);
         return Color.argb((int) (Color.alpha(this.mTextColor) * typedValue.getFloat()), Color.red(this.mTextColor), Color.green(this.mTextColor), Color.blue(this.mTextColor));
@@ -241,13 +241,13 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     static MessagingGroup createGroup(MessagingLinearLayout messagingLinearLayout) {
-        MessagingGroup acquire = sInstancePool.acquire();
-        if (acquire == null) {
-            acquire = (MessagingGroup) LayoutInflater.from(messagingLinearLayout.getContext()).inflate(getMessagingGroupLayoutResource(), (ViewGroup) messagingLinearLayout, false);
-            acquire.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
+        MessagingGroup messagingGroup = (MessagingGroup) sInstancePool.acquire();
+        if (messagingGroup == null) {
+            messagingGroup = (MessagingGroup) LayoutInflater.from(messagingLinearLayout.getContext()).inflate(getMessagingGroupLayoutResource(), (ViewGroup) messagingLinearLayout, false);
+            messagingGroup.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
         }
-        messagingLinearLayout.addView(acquire);
-        return acquire;
+        messagingLinearLayout.addView(messagingGroup);
+        return messagingGroup;
     }
 
     private static int getMessagingGroupLayoutResource() {
@@ -256,18 +256,18 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
 
     public void removeMessage(final MessagingMessage messagingMessage, ArrayList<MessagingLinearLayout.MessagingChild> arrayList) {
         final View view = messagingMessage.getView();
-        boolean isShown = view.isShown();
+        boolean zIsShown = view.isShown();
         final ViewGroup viewGroup = (ViewGroup) view.getParent();
         if (viewGroup == null) {
             return;
         }
         viewGroup.removeView(view);
-        if (isShown && !MessagingLinearLayout.isGone(view)) {
+        if (zIsShown && !MessagingLinearLayout.isGone(view)) {
             viewGroup.addTransientView(view, 0);
             performRemoveAnimation(view, new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MessagingGroup.lambda$removeMessage$0(ViewGroup.this, view, messagingMessage);
+                    MessagingGroup.lambda$removeMessage$0(viewGroup, view, messagingMessage);
                 }
             });
         } else {
@@ -315,7 +315,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         performRemoveAnimation(this, new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                MessagingGroup.this.lambda$removeGroupAnimated$1(runnable);
+                this.f$0.lambda$removeGroupAnimated$1(runnable);
             }
         });
     }
@@ -371,17 +371,17 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
 
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
     public int getConsumedLines() {
-        int i = 0;
-        for (int i2 = 0; i2 < this.mMessageContainer.getChildCount(); i2++) {
-            KeyEvent.Callback childAt = this.mMessageContainer.getChildAt(i2);
+        int iMax = 0;
+        for (int i = 0; i < this.mMessageContainer.getChildCount(); i++) {
+            KeyEvent.Callback childAt = this.mMessageContainer.getChildAt(i);
             if (childAt instanceof MessagingLinearLayout.MessagingChild) {
-                i += ((MessagingLinearLayout.MessagingChild) childAt).getConsumedLines();
+                iMax += ((MessagingLinearLayout.MessagingChild) childAt).getConsumedLines();
             }
         }
         if (this.mIsolatedMessage != null) {
-            i = Math.max(i, 1);
+            iMax = Math.max(iMax, 1);
         }
-        return i + 1;
+        return iMax + 1;
     }
 
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
@@ -400,7 +400,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         removeGroupAnimated(new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                MessagingGroup.this.lambda$hideAnimated$2();
+                this.f$0.lambda$hideAnimated$2();
             }
         });
     }
@@ -494,7 +494,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         }
     }
 
-    public void setMessages(List<MessagingMessage> list) {
+    public void setMessages(List<MessagingMessage> list) throws Resources.NotFoundException {
         MessagingImageMessage messagingImageMessage = null;
         int i = 0;
         for (int i2 = 0; i2 < list.size(); i2++) {
@@ -542,9 +542,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             this.mAddedMessages.removeIf(new Predicate() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda1
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$setMessages$3;
-                    lambda$setMessages$3 = MessagingGroup.this.lambda$setMessages$3((MessagingMessage) obj);
-                    return lambda$setMessages$3;
+                    return this.f$0.lambda$setMessages$3((MessagingMessage) obj);
                 }
             });
         }

@@ -37,7 +37,7 @@ public class LocalSocket implements Closeable {
         this.isBound = false;
     }
 
-    private void checkConnected() {
+    private void checkConnected() throws ErrnoException {
         try {
             Os.getpeername(this.impl.getFileDescriptor());
             this.isConnected = true;
@@ -49,12 +49,12 @@ public class LocalSocket implements Closeable {
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public LocalSocket(FileDescriptor fileDescriptor) {
+    public LocalSocket(FileDescriptor fileDescriptor) throws ErrnoException {
         this(new LocalSocketImpl(fileDescriptor), 0);
         checkConnected();
     }
 
-    static LocalSocket createLocalSocketForAccept(LocalSocketImpl localSocketImpl) {
+    static LocalSocket createLocalSocketForAccept(LocalSocketImpl localSocketImpl) throws ErrnoException {
         LocalSocket localSocket = new LocalSocket(localSocketImpl, 0);
         localSocket.checkConnected();
         return localSocket;
@@ -125,17 +125,17 @@ public class LocalSocket implements Closeable {
         this.impl.close();
     }
 
-    public void shutdownInput() throws IOException {
+    public void shutdownInput() throws IOException, ErrnoException {
         implCreateIfNeeded();
         this.impl.shutdownInput();
     }
 
-    public void shutdownOutput() throws IOException {
+    public void shutdownOutput() throws IOException, ErrnoException {
         implCreateIfNeeded();
         this.impl.shutdownOutput();
     }
 
-    public void setReceiveBufferSize(int i) throws IOException {
+    public void setReceiveBufferSize(int i) throws IOException, ErrnoException {
         this.impl.setOption(4098, Integer.valueOf(i));
     }
 
@@ -143,7 +143,7 @@ public class LocalSocket implements Closeable {
         return ((Integer) this.impl.getOption(4098)).intValue();
     }
 
-    public void setSoTimeout(int i) throws IOException {
+    public void setSoTimeout(int i) throws IOException, ErrnoException {
         this.impl.setOption(4102, Integer.valueOf(i));
     }
 
@@ -151,7 +151,7 @@ public class LocalSocket implements Closeable {
         return ((Integer) this.impl.getOption(4102)).intValue();
     }
 
-    public void setSendBufferSize(int i) throws IOException {
+    public void setSendBufferSize(int i) throws IOException, ErrnoException {
         this.impl.setOption(4097, Integer.valueOf(i));
     }
 

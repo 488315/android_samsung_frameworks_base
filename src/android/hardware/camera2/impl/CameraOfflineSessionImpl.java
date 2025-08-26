@@ -109,12 +109,12 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                             CameraOfflineSessionImpl.this.mOfflineCallback.onError(CameraOfflineSessionImpl.this, 0);
                         }
                     };
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         CameraOfflineSessionImpl.this.mOfflineExecutor.execute(runnable);
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     } catch (Throwable th) {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                         throw th;
                     }
                 }
@@ -148,11 +148,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         CameraOfflineSessionImpl.this.mOfflineCallback.onIdle(CameraOfflineSessionImpl.this);
                     }
                 };
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     CameraOfflineSessionImpl.this.mOfflineExecutor.execute(runnable);
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -172,7 +172,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                 }
                 Executor executor = captureCallbackHolder.getCallback().getExecutor();
                 if (!CameraOfflineSessionImpl.this.isClosed() && executor != null) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         executor.execute(new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.3
                             @Override // java.lang.Runnable
@@ -195,7 +195,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                             }
                         });
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             }
@@ -252,11 +252,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     executor = executor2;
                 } else {
                     final CameraMetadataNative cameraMetadataNative3 = cameraMetadataNative;
-                    final List<CaptureResult> popPartialResults = CameraOfflineSessionImpl.this.mFrameNumberTracker.popPartialResults(frameNumber);
-                    final long longValue = ((Long) metadata.get(CaptureResult.SENSOR_TIMESTAMP)).longValue();
+                    final List<CaptureResult> listPopPartialResults = CameraOfflineSessionImpl.this.mFrameNumberTracker.popPartialResults(frameNumber);
+                    final long jLongValue = ((Long) metadata.get(CaptureResult.SENSOR_TIMESTAMP)).longValue();
                     final Range range = (Range) request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
                     final int subsequenceId = captureResultExtras.getSubsequenceId();
-                    final TotalCaptureResult totalCaptureResult = new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, metadata, request, captureResultExtras, popPartialResults, captureCallbackHolder.getSessionId(), physicalCaptureResultInfoArr);
+                    final TotalCaptureResult totalCaptureResult = new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, metadata, request, captureResultExtras, listPopPartialResults, captureCallbackHolder.getSessionId(), physicalCaptureResultInfoArr);
                     cameraDeviceCallbacks = this;
                     j = frameNumber;
                     executor = executor2;
@@ -269,8 +269,8 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                             }
                             if (captureCallbackHolder.hasBatchedOutputs()) {
                                 for (int i = 0; i < captureCallbackHolder.getRequestCount(); i++) {
-                                    cameraMetadataNative3.set((CaptureResult.Key<CaptureResult.Key<Long>>) CaptureResult.SENSOR_TIMESTAMP, (CaptureResult.Key<Long>) Long.valueOf(longValue - (((subsequenceId - i) * 1000000000) / ((Integer) range.getUpper()).intValue())));
-                                    sessionCallback.onCaptureCompleted(CameraOfflineSessionImpl.this, captureCallbackHolder.getRequest(i), new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, new CameraMetadataNative(cameraMetadataNative3), captureCallbackHolder.getRequest(i), captureResultExtras, popPartialResults, captureCallbackHolder.getSessionId(), new PhysicalCaptureResultInfo[0]));
+                                    cameraMetadataNative3.set((CaptureResult.Key<CaptureResult.Key<Long>>) CaptureResult.SENSOR_TIMESTAMP, (CaptureResult.Key<Long>) Long.valueOf(jLongValue - (((subsequenceId - i) * 1000000000) / ((Integer) range.getUpper()).intValue())));
+                                    sessionCallback.onCaptureCompleted(CameraOfflineSessionImpl.this, captureCallbackHolder.getRequest(i), new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, new CameraMetadataNative(cameraMetadataNative3), captureCallbackHolder.getRequest(i), captureResultExtras, listPopPartialResults, captureCallbackHolder.getSessionId(), new PhysicalCaptureResultInfo[0]));
                                 }
                                 return;
                             }
@@ -280,12 +280,12 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     captureResult = totalCaptureResult;
                 }
                 if (executor != null) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         executor.execute(runnable);
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     } catch (Throwable th) {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                         throw th;
                     }
                 }
@@ -307,7 +307,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         }
 
         private void onCaptureErrorLocked(int i, CaptureResultExtras captureResultExtras) {
-            long clearCallingIdentity;
+            long jClearCallingIdentity;
             OutputConfiguration outputConfiguration;
             int requestId = captureResultExtras.getRequestId();
             int subsequenceId = captureResultExtras.getSubsequenceId();
@@ -346,7 +346,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         };
                         CaptureRequest captureRequest = request;
                         if (executor != null) {
-                            clearCallingIdentity = Binder.clearCallingIdentity();
+                            jClearCallingIdentity = Binder.clearCallingIdentity();
                             try {
                                 executor.execute(runnable);
                             } finally {
@@ -374,7 +374,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(frameNumber, true, request.getRequestType());
             CameraOfflineSessionImpl.this.checkAndFireSequenceComplete();
             if (executor2 != null) {
-                clearCallingIdentity = Binder.clearCallingIdentity();
+                jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor2.execute(runnable2);
                 } finally {
@@ -386,7 +386,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     /* JADX INFO: Access modifiers changed from: private */
     public void checkAndFireSequenceComplete() {
         final CameraCaptureSession.CaptureCallback captureCallback;
-        CaptureCallbackHolder valueAt;
+        CaptureCallbackHolder captureCallbackHolderValueAt;
         boolean z;
         Executor executor;
         long completedFrameNumber = this.mFrameNumberTracker.getCompletedFrameNumber();
@@ -397,18 +397,18 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             final RequestLastFrameNumbersHolder next = it.next();
             final int requestId = next.getRequestId();
             synchronized (this.mInterfaceLock) {
-                int indexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
+                int iIndexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
                 captureCallback = null;
-                valueAt = indexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(indexOfKey) : null;
+                captureCallbackHolderValueAt = iIndexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(iIndexOfKey) : null;
                 z = false;
-                if (valueAt != null) {
+                if (captureCallbackHolderValueAt != null) {
                     long lastRegularFrameNumber = next.getLastRegularFrameNumber();
                     long lastReprocessFrameNumber = next.getLastReprocessFrameNumber();
                     long lastZslStillFrameNumber = next.getLastZslStillFrameNumber();
-                    Executor executor2 = valueAt.getCallback().getExecutor();
-                    CameraCaptureSession.CaptureCallback sessionCallback = valueAt.getCallback().getSessionCallback();
+                    Executor executor2 = captureCallbackHolderValueAt.getCallback().getExecutor();
+                    CameraCaptureSession.CaptureCallback sessionCallback = captureCallbackHolderValueAt.getCallback().getSessionCallback();
                     if (lastRegularFrameNumber <= completedFrameNumber && lastReprocessFrameNumber <= completedReprocessFrameNumber && lastZslStillFrameNumber <= completedZslStillFrameNumber) {
-                        this.mCaptureCallbackMap.removeAt(indexOfKey);
+                        this.mCaptureCallbackMap.removeAt(iIndexOfKey);
                         z = true;
                     }
                     executor = executor2;
@@ -417,7 +417,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     executor = null;
                 }
             }
-            if (valueAt == null || z) {
+            if (captureCallbackHolderValueAt == null || z) {
                 it.remove();
             }
             if (z && captureCallback != null && executor != null) {
@@ -430,15 +430,15 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         captureCallback.onCaptureSequenceCompleted(CameraOfflineSessionImpl.this, requestId, next.getLastFrameNumber());
                     }
                 };
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor.execute(runnable);
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     if (this.mCaptureCallbackMap.size() == 0) {
                         getCallbacks().onDeviceIdle();
                     }
                 } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     throw th;
                 }
             }
@@ -451,14 +451,14 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         while (it.hasNext()) {
             RequestLastFrameNumbersHolder next = it.next();
             int requestId = next.getRequestId();
-            int indexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
-            if ((indexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(indexOfKey) : null) != null) {
+            int iIndexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
+            if ((iIndexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(iIndexOfKey) : null) != null) {
                 long lastRegularFrameNumber = next.getLastRegularFrameNumber();
                 long lastReprocessFrameNumber = next.getLastReprocessFrameNumber();
                 long lastZslStillFrameNumber = next.getLastZslStillFrameNumber();
                 if (lastRegularFrameNumber <= j && lastReprocessFrameNumber <= j2 && lastZslStillFrameNumber <= j3) {
                     if (next.isSequenceCompleted()) {
-                        this.mCaptureCallbackMap.removeAt(indexOfKey);
+                        this.mCaptureCallbackMap.removeAt(iIndexOfKey);
                         it.remove();
                     } else {
                         Log.e(TAG, "Sequence not yet completed for request id " + requestId);
@@ -476,11 +476,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     CameraOfflineSessionImpl.this.mOfflineCallback.onSwitchFailed(CameraOfflineSessionImpl.this);
                 }
             };
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mOfflineExecutor.execute(runnable);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -492,12 +492,12 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                 return;
             }
             this.mRemoteSession = iCameraOfflineSession;
-            IBinder asBinder = iCameraOfflineSession.asBinder();
-            if (asBinder == null) {
+            IBinder iBinderAsBinder = iCameraOfflineSession.asBinder();
+            if (iBinderAsBinder == null) {
                 throw new CameraAccessException(2, "The camera offline session has encountered a serious error");
             }
             try {
-                asBinder.linkToDeath(this, 0);
+                iBinderAsBinder.linkToDeath(this, 0);
                 Runnable runnable = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.3
                     @Override // java.lang.Runnable
                     public void run() {
@@ -507,11 +507,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         CameraOfflineSessionImpl.this.mOfflineCallback.onReady(CameraOfflineSessionImpl.this);
                     }
                 };
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mOfflineExecutor.execute(runnable);
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             } catch (RemoteException unused) {
                 throw new CameraAccessException(2, "The camera offline session has encountered a serious error");
@@ -544,12 +544,12 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         CameraOfflineSessionImpl.this.mOfflineCallback.onClosed(CameraOfflineSessionImpl.this);
                     }
                 };
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mOfflineExecutor.execute(runnable);
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             throw new IllegalStateException("Offline session is not yet ready");

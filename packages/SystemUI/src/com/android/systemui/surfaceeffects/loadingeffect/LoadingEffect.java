@@ -6,13 +6,11 @@ import android.animation.ValueAnimator;
 import android.graphics.Paint;
 import com.android.systemui.surfaceeffects.PaintDrawCallback;
 import com.android.systemui.surfaceeffects.RenderEffectDrawCallback;
-import com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect;
 import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseAnimationConfig;
 import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LoadingEffect {
     public final AnimationStateChangedCallback animationStateChangedCallback;
@@ -25,7 +23,6 @@ public final class LoadingEffect {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationState {
         public static final /* synthetic */ AnimationState[] $VALUES;
         public static final AnimationState EASE_IN;
@@ -59,12 +56,10 @@ public final class LoadingEffect {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimationStateChangedCallback {
         void onStateChanged(AnimationState animationState);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,24 +96,24 @@ public final class LoadingEffect {
             return;
         }
         setState(AnimationState.EASE_OUT);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration((long) this.config.easeOutDuration);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration((long) this.config.easeOutDuration);
         TurbulenceNoiseShader turbulenceNoiseShader = this.turbulenceNoiseShader;
         final float f = turbulenceNoiseShader.noiseOffsetX;
         final float f2 = turbulenceNoiseShader.noiseOffsetY;
         final float f3 = turbulenceNoiseShader.noiseOffsetZ;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseOut$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect.playEaseOut.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 LoadingEffect loadingEffect = LoadingEffect.this;
                 TurbulenceNoiseShader turbulenceNoiseShader2 = loadingEffect.turbulenceNoiseShader;
                 float f4 = f;
                 TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig = loadingEffect.config;
                 turbulenceNoiseShader2.setNoiseMove((turbulenceNoiseAnimationConfig.noiseMoveSpeedX * currentPlayTime) + f4, (turbulenceNoiseAnimationConfig.noiseMoveSpeedY * currentPlayTime) + f2, (currentPlayTime * turbulenceNoiseAnimationConfig.noiseMoveSpeedZ) + f3);
                 LoadingEffect loadingEffect2 = LoadingEffect.this;
-                loadingEffect2.turbulenceNoiseShader.setOpacity((1.0f - floatValue) * loadingEffect2.config.luminosityMultiplier);
+                loadingEffect2.turbulenceNoiseShader.setOpacity((1.0f - fFloatValue) * loadingEffect2.config.luminosityMultiplier);
                 LoadingEffect loadingEffect3 = LoadingEffect.this;
                 PaintDrawCallback paintDrawCallback = loadingEffect3.paintCallback;
                 if (paintDrawCallback != null) {
@@ -128,16 +123,16 @@ public final class LoadingEffect {
                 }
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseOut$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect.playEaseOut.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 LoadingEffect loadingEffect = LoadingEffect.this;
                 loadingEffect.currentAnimator = null;
-                loadingEffect.setState(LoadingEffect.AnimationState.NOT_PLAYING);
+                loadingEffect.setState(AnimationState.NOT_PLAYING);
             }
         });
-        ofFloat.start();
-        this.currentAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.currentAnimator = valueAnimatorOfFloat;
     }
 
     public final void setState(AnimationState animationState) {

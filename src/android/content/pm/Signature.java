@@ -78,9 +78,9 @@ public class Signature implements Parcelable {
         int i2 = 0;
         while (i < length) {
             int i3 = i + 1;
-            int parseHexDigit = parseHexDigit(bytes[i]);
+            int hexDigit = parseHexDigit(bytes[i]);
             i += 2;
-            bArr[i2] = (byte) (parseHexDigit(bytes[i3]) | (parseHexDigit << 4));
+            bArr[i2] = (byte) (parseHexDigit(bytes[i3]) | (hexDigit << 4));
             i2++;
         }
         this.mSignature = bArr;
@@ -186,10 +186,10 @@ public class Signature implements Parcelable {
         if (this.mHaveHashCode) {
             return this.mHashCode;
         }
-        int hashCode = Arrays.hashCode(this.mSignature);
-        this.mHashCode = hashCode;
+        int iHashCode = Arrays.hashCode(this.mSignature);
+        this.mHashCode = iHashCode;
         this.mHaveHashCode = true;
-        return hashCode;
+        return iHashCode;
     }
 
     @Override // android.os.Parcelable

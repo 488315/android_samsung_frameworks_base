@@ -8,6 +8,7 @@ import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.res.Resources;
 import android.graphics.Outline;
 import android.graphics.Rect;
 import android.view.View;
@@ -23,7 +24,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalAppWidgetHostView extends AppWidgetHostView implements LaunchableView {
     public final CommunalAppWidgetHostView$cornerRadiusEnforcementOutline$1 cornerRadiusEnforcementOutline;
@@ -35,20 +35,20 @@ public final class CommunalAppWidgetHostView extends AppWidgetHostView implement
     public boolean pendingUpdate;
 
     /* renamed from: $r8$lambda$wW_G4OKMSSO4Q22rQJ_KEB-XCZk, reason: not valid java name */
-    public static Unit m1090$r8$lambda$wW_G4OKMSSO4Q22rQJ_KEBXCZk(CommunalAppWidgetHostView communalAppWidgetHostView, int i) {
+    public static Unit m1092$r8$lambda$wW_G4OKMSSO4Q22rQJ_KEBXCZk(CommunalAppWidgetHostView communalAppWidgetHostView, int i) {
         super.setVisibility(i);
         return Unit.INSTANCE;
     }
 
     /* JADX WARN: Type inference failed for: r4v5, types: [com.android.systemui.communal.widgets.CommunalAppWidgetHostView$cornerRadiusEnforcementOutline$1] */
-    public CommunalAppWidgetHostView(Context context, RemoteViews.InteractionHandler interactionHandler) {
+    public CommunalAppWidgetHostView(Context context, RemoteViews.InteractionHandler interactionHandler) throws Resources.NotFoundException {
         super(context, interactionHandler);
         this.interactionHandler = interactionHandler;
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.communal.widgets.CommunalAppWidgetHostView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return CommunalAppWidgetHostView.m1090$r8$lambda$wW_G4OKMSSO4Q22rQJ_KEBXCZk(CommunalAppWidgetHostView.this, ((Integer) obj).intValue());
+            public final Object mo781invoke(Object obj) {
+                return CommunalAppWidgetHostView.m1092$r8$lambda$wW_G4OKMSSO4Q22rQJ_KEBXCZk(this.f$0, ((Integer) obj).intValue());
             }
         });
         RoundedCornerEnforcement.INSTANCE.getClass();
@@ -61,8 +61,8 @@ public final class CommunalAppWidgetHostView extends AppWidgetHostView implement
         this.cornerRadiusEnforcementOutline = new ViewOutlineProvider() { // from class: com.android.systemui.communal.widgets.CommunalAppWidgetHostView$cornerRadiusEnforcementOutline$1
             @Override // android.view.ViewOutlineProvider
             public final void getOutline(View view, Outline outline) {
-                if (!CommunalAppWidgetHostView.this.enforcedRectangle.isEmpty()) {
-                    CommunalAppWidgetHostView communalAppWidgetHostView = CommunalAppWidgetHostView.this;
+                if (!this.this$0.enforcedRectangle.isEmpty()) {
+                    CommunalAppWidgetHostView communalAppWidgetHostView = this.this$0;
                     float f = communalAppWidgetHostView.enforcedCornerRadius;
                     if (f > 0.0f) {
                         outline.setRoundRect(communalAppWidgetHostView.enforcedRectangle, f);
@@ -100,20 +100,20 @@ public final class CommunalAppWidgetHostView extends AppWidgetHostView implement
         RoundedCornerEnforcement.INSTANCE.getClass();
         ArrayList arrayList = new ArrayList();
         RoundedCornerEnforcement.accumulateViewsWithId(this, arrayList);
-        View findUndefinedBackground = arrayList.size() == 1 ? (View) arrayList.get(0) : getChildCount() > 0 ? RoundedCornerEnforcement.findUndefinedBackground(getChildAt(0)) : this;
-        if (findUndefinedBackground == null || (findUndefinedBackground.getId() == com.android.systemui.R.id.background && findUndefinedBackground.getClipToOutline())) {
+        View viewFindUndefinedBackground = arrayList.size() == 1 ? (View) arrayList.get(0) : getChildCount() > 0 ? RoundedCornerEnforcement.findUndefinedBackground(getChildAt(0)) : this;
+        if (viewFindUndefinedBackground == null || (viewFindUndefinedBackground.getId() == com.android.systemui.R.id.background && viewFindUndefinedBackground.getClipToOutline())) {
             setOutlineProvider(ViewOutlineProvider.BACKGROUND);
             setClipToOutline(false);
             return;
         }
         Rect rect = this.enforcedRectangle;
         rect.left = 0;
-        rect.right = findUndefinedBackground.getWidth();
+        rect.right = viewFindUndefinedBackground.getWidth();
         rect.top = 0;
-        rect.bottom = findUndefinedBackground.getHeight();
-        while (findUndefinedBackground != this) {
-            rect.offset(findUndefinedBackground.getLeft(), findUndefinedBackground.getTop());
-            findUndefinedBackground = (View) findUndefinedBackground.getParent();
+        rect.bottom = viewFindUndefinedBackground.getHeight();
+        while (viewFindUndefinedBackground != this) {
+            rect.offset(viewFindUndefinedBackground.getLeft(), viewFindUndefinedBackground.getTop());
+            viewFindUndefinedBackground = (View) viewFindUndefinedBackground.getParent();
         }
         setOutlineProvider(this.cornerRadiusEnforcementOutline);
         setClipToOutline(true);
@@ -148,9 +148,9 @@ public final class CommunalAppWidgetHostView extends AppWidgetHostView implement
                 @Override // android.view.View.OnLayoutChangeListener
                 public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                     view.removeOnLayoutChangeListener(this);
-                    CommunalAppWidgetHostView communalAppWidgetHostView = CommunalAppWidgetHostView.this;
+                    CommunalAppWidgetHostView communalAppWidgetHostView = this.this$0;
                     super/*android.appwidget.AppWidgetHostView*/.updateAppWidget(communalAppWidgetHostView.pendingRemoteViews);
-                    CommunalAppWidgetHostView communalAppWidgetHostView2 = CommunalAppWidgetHostView.this;
+                    CommunalAppWidgetHostView communalAppWidgetHostView2 = this.this$0;
                     communalAppWidgetHostView2.pendingRemoteViews = null;
                     communalAppWidgetHostView2.pendingUpdate = false;
                 }

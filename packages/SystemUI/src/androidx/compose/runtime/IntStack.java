@@ -2,7 +2,6 @@ package androidx.compose.runtime;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class IntStack {
     public int[] slots = new int[10];
@@ -21,13 +20,13 @@ public final class IntStack {
     }
 
     public final void push(int i) {
-        int[] iArr = this.slots;
-        if (this.tos >= iArr.length) {
-            iArr = Arrays.copyOf(iArr, iArr.length * 2);
-            this.slots = iArr;
+        int[] iArrCopyOf = this.slots;
+        if (this.tos >= iArrCopyOf.length) {
+            iArrCopyOf = Arrays.copyOf(iArrCopyOf, iArrCopyOf.length * 2);
+            this.slots = iArrCopyOf;
         }
         int i2 = this.tos;
         this.tos = i2 + 1;
-        iArr[i2] = i;
+        iArrCopyOf[i2] = i;
     }
 }

@@ -6,7 +6,6 @@ import android.view.Window;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenCapturePermissionDialogDelegate implements SystemUIDialog.Delegate {
     public final SystemUIDialog.Factory dialogFactory;
@@ -26,13 +25,13 @@ public final class ScreenCapturePermissionDialogDelegate implements SystemUIDial
         systemUIDialog.setNegativeButton(R.string.slice_permission_deny, new DialogInterface.OnClickListener() { // from class: com.android.systemui.recordissue.ScreenCapturePermissionDialogDelegate$beforeCreate$1$1
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                SystemUIDialog.this.cancel();
+                systemUIDialog.cancel();
             }
         });
         systemUIDialog.setPositiveButton(R.string.slice_permission_allow, new DialogInterface.OnClickListener() { // from class: com.android.systemui.recordissue.ScreenCapturePermissionDialogDelegate$beforeCreate$1$2
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                ScreenCapturePermissionDialogDelegate.this.state.getPrefs().edit().putBoolean("HasApprovedScreenRecord", true).apply();
+                this.this$0.state.getPrefs().edit().putBoolean("HasApprovedScreenRecord", true).apply();
                 systemUIDialog.dismiss();
             }
         });

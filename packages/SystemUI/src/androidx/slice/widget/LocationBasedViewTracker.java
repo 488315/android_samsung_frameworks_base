@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocationBasedViewTracker implements Runnable, View.OnLayoutChangeListener {
     public final Rect mFocusRect;
@@ -25,7 +24,6 @@ public class LocationBasedViewTracker implements Runnable, View.OnLayoutChangeLi
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SelectionLogic {
         void selectView(View view);
     }
@@ -67,9 +65,9 @@ public class LocationBasedViewTracker implements Runnable, View.OnLayoutChangeLi
     }
 
     public static void trackInputFocused(SliceView sliceView) {
-        View findFocus = sliceView.findFocus();
-        if (findFocus != null) {
-            new LocationBasedViewTracker(sliceView, findFocus, INPUT_FOCUS);
+        View viewFindFocus = sliceView.findFocus();
+        if (viewFindFocus != null) {
+            new LocationBasedViewTracker(sliceView, viewFindFocus, INPUT_FOCUS);
         }
     }
 
@@ -95,10 +93,10 @@ public class LocationBasedViewTracker implements Runnable, View.OnLayoutChangeLi
             view3.getDrawingRect(rect);
             this.mParent.offsetDescendantRectToMyCoords(view3, rect);
             if (this.mFocusRect.intersect(rect)) {
-                int abs = Math.abs(this.mFocusRect.bottom - rect.bottom) + Math.abs(this.mFocusRect.top - rect.top) + Math.abs(this.mFocusRect.right - rect.right) + Math.abs(this.mFocusRect.left - rect.left);
-                if (i2 > abs) {
+                int iAbs = Math.abs(this.mFocusRect.bottom - rect.bottom) + Math.abs(this.mFocusRect.top - rect.top) + Math.abs(this.mFocusRect.right - rect.right) + Math.abs(this.mFocusRect.left - rect.left);
+                if (i2 > iAbs) {
                     view = view3;
-                    i2 = abs;
+                    i2 = iAbs;
                 }
             }
         }

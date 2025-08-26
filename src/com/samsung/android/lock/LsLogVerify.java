@@ -107,12 +107,12 @@ public class LsLogVerify {
         if (bArr == null) {
             bArr = this.mReason;
         }
-        String byteToText = byteToText(bArr);
-        String byteToText2 = byteToText(this.mMessage);
+        String strByteToText = byteToText(bArr);
+        String strByteToText2 = byteToText(this.mMessage);
         if (this.mResponse == 0) {
-            return String.format("User %d(%d) %s [%s]%s(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), byteToText2, byteToText, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mElapsedTime));
+            return String.format("User %d(%d) %s [%s]%s(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), strByteToText2, strByteToText, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mElapsedTime));
         }
-        return String.format("User %d(%d) %s(%d) [%s]%s(%d/%d)(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), byteToText2, Integer.valueOf(this.mResponse), byteToText, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout), Integer.valueOf(this.mElapsedTime));
+        return String.format("User %d(%d) %s(%d) [%s]%s(%d/%d)(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), strByteToText2, Integer.valueOf(this.mResponse), strByteToText, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout), Integer.valueOf(this.mElapsedTime));
     }
 
     public String toSummary() {
@@ -120,11 +120,11 @@ public class LsLogVerify {
         if (bArr == null) {
             bArr = this.mReason;
         }
-        String byteToText = byteToText(bArr);
+        String strByteToText = byteToText(bArr);
         if (this.mResponse == 0) {
-            return String.format("%s Verify OK(U:%d,S:%d) [%s]", LsUtil.getTimeForLog(this.mReqTime), Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), byteToText);
+            return String.format("%s Verify OK(U:%d,S:%d) [%s]", LsUtil.getTimeForLog(this.mReqTime), Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), strByteToText);
         }
-        return String.format("%s Verify Fail(U:%d,S:%d,E:%d) [%s](%d/%d)]", LsUtil.getTimeForLog(this.mReqTime), Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), Integer.valueOf(this.mResponse), byteToText, Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout));
+        return String.format("%s Verify Fail(U:%d,S:%d,E:%d) [%s](%d/%d)]", LsUtil.getTimeForLog(this.mReqTime), Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), Integer.valueOf(this.mResponse), strByteToText, Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout));
     }
 
     public String toDetailsLog(boolean z) {
@@ -133,11 +133,11 @@ public class LsLogVerify {
         if (bArr == null) {
             bArr = this.mReason;
         }
-        String format = String.format("  = %s [%s:%d]\n", LsUtil.timestampToString(this.mReqTime), byteToText(bArr), Integer.valueOf(this.mProcessId));
+        String str2 = String.format("  = %s [%s:%d]\n", LsUtil.timestampToString(this.mReqTime), byteToText(bArr), Integer.valueOf(this.mProcessId));
         if (z) {
-            str = format + String.format("  = Slot(%d) / Hash : %s\n", Integer.valueOf(this.mSlot), LsUtil.gethashStr(this.mSalt));
+            str = str2 + String.format("  = Slot(%d) / Hash : %s\n", Integer.valueOf(this.mSlot), LsUtil.gethashStr(this.mSalt));
         } else {
-            str = format + String.format("  = %s / Slot(%d) / Salt : %s\n", LockPatternUtils.credentialTypeToString(this.mType), Integer.valueOf(this.mSlot), LsUtil.gethashStr(this.mSalt));
+            str = str2 + String.format("  = %s / Slot(%d) / Salt : %s\n", LockPatternUtils.credentialTypeToString(this.mType), Integer.valueOf(this.mSlot), LsUtil.gethashStr(this.mSalt));
         }
         if (!z && this.mResponse == 0) {
             return str;
@@ -150,11 +150,11 @@ public class LsLogVerify {
         if (bArr == null) {
             bArr = this.mReason;
         }
-        String byteToText = byteToText(bArr);
+        String strByteToText = byteToText(bArr);
         if (this.mResponse == 0) {
-            return String.format("User %d %s OK on [%s]", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), byteToText);
+            return String.format("User %d %s OK on [%s]", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), strByteToText);
         }
-        return String.format("User %d %s Fail on [%s](%d/%d)]", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), byteToText, Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout));
+        return String.format("User %d %s Fail on [%s](%d/%d)]", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), strByteToText, Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout));
     }
 
     public byte[] toBytes() {
@@ -163,97 +163,97 @@ public class LsLogVerify {
         if (bArr != null) {
             length += bArr.length;
         }
-        int i = length + 4;
+        int length2 = length + 4;
         byte[] bArr2 = this.mSalt;
         if (bArr2 != null) {
-            i += bArr2.length;
+            length2 += bArr2.length;
         }
-        int i2 = i + 4;
+        int length3 = length2 + 4;
         byte[] bArr3 = this.mMessage;
         if (bArr3 != null) {
-            i2 += bArr3.length;
+            length3 += bArr3.length;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(i2);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(length3);
         if (this.mResponse == 0) {
-            allocate.put((byte) 2);
+            byteBufferAllocate.put((byte) 2);
         } else {
-            allocate.put((byte) 3);
+            byteBufferAllocate.put((byte) 3);
         }
-        allocate.put((byte) 1);
-        allocate.putInt(this.mUserId);
-        allocate.putInt(this.mProcessId);
-        allocate.putInt(this.mType);
-        allocate.putInt(this.mSlot);
-        allocate.putInt(this.mResponse);
-        allocate.putInt(this.mElapsedTime);
-        allocate.putInt(this.mFailCount);
-        allocate.putLong(this.mReqTime);
-        allocate.putLong(this.mProtectorId);
-        allocate.putLong(this.mTimeout);
-        allocate.putInt(this.mReason.length);
-        allocate.put(this.mReason);
+        byteBufferAllocate.put((byte) 1);
+        byteBufferAllocate.putInt(this.mUserId);
+        byteBufferAllocate.putInt(this.mProcessId);
+        byteBufferAllocate.putInt(this.mType);
+        byteBufferAllocate.putInt(this.mSlot);
+        byteBufferAllocate.putInt(this.mResponse);
+        byteBufferAllocate.putInt(this.mElapsedTime);
+        byteBufferAllocate.putInt(this.mFailCount);
+        byteBufferAllocate.putLong(this.mReqTime);
+        byteBufferAllocate.putLong(this.mProtectorId);
+        byteBufferAllocate.putLong(this.mTimeout);
+        byteBufferAllocate.putInt(this.mReason.length);
+        byteBufferAllocate.put(this.mReason);
         byte[] bArr4 = this.mPackage;
         if (bArr4 != null) {
-            allocate.putInt(bArr4.length);
-            allocate.put(this.mPackage);
+            byteBufferAllocate.putInt(bArr4.length);
+            byteBufferAllocate.put(this.mPackage);
         } else {
-            allocate.putInt(0);
+            byteBufferAllocate.putInt(0);
         }
         byte[] bArr5 = this.mSalt;
         if (bArr5 != null) {
-            allocate.putInt(bArr5.length);
-            allocate.put(this.mSalt);
+            byteBufferAllocate.putInt(bArr5.length);
+            byteBufferAllocate.put(this.mSalt);
         } else {
-            allocate.putInt(0);
+            byteBufferAllocate.putInt(0);
         }
         byte[] bArr6 = this.mMessage;
         if (bArr6 != null) {
-            allocate.putInt(bArr6.length);
-            allocate.put(this.mMessage);
+            byteBufferAllocate.putInt(bArr6.length);
+            byteBufferAllocate.put(this.mMessage);
         } else {
-            allocate.putInt(0);
+            byteBufferAllocate.putInt(0);
         }
-        return allocate.array();
+        return byteBufferAllocate.array();
     }
 
     public static LsLogVerify fromBytes(byte[] bArr) {
-        ByteBuffer allocate = ByteBuffer.allocate(bArr.length - 2);
-        allocate.put(bArr, 2, bArr.length - 2);
-        allocate.flip();
-        LsLogVerify lsLogVerify = new LsLogVerify(allocate.getInt());
-        lsLogVerify.mProcessId = allocate.getInt();
-        lsLogVerify.mType = allocate.getInt();
-        lsLogVerify.mSlot = allocate.getInt();
-        lsLogVerify.mResponse = allocate.getInt();
-        lsLogVerify.mElapsedTime = allocate.getInt();
-        lsLogVerify.mFailCount = allocate.getInt();
-        lsLogVerify.mReqTime = allocate.getLong();
-        lsLogVerify.mProtectorId = allocate.getLong();
-        lsLogVerify.mTimeout = allocate.getLong();
-        byte[] bArr2 = new byte[allocate.getInt()];
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(bArr.length - 2);
+        byteBufferAllocate.put(bArr, 2, bArr.length - 2);
+        byteBufferAllocate.flip();
+        LsLogVerify lsLogVerify = new LsLogVerify(byteBufferAllocate.getInt());
+        lsLogVerify.mProcessId = byteBufferAllocate.getInt();
+        lsLogVerify.mType = byteBufferAllocate.getInt();
+        lsLogVerify.mSlot = byteBufferAllocate.getInt();
+        lsLogVerify.mResponse = byteBufferAllocate.getInt();
+        lsLogVerify.mElapsedTime = byteBufferAllocate.getInt();
+        lsLogVerify.mFailCount = byteBufferAllocate.getInt();
+        lsLogVerify.mReqTime = byteBufferAllocate.getLong();
+        lsLogVerify.mProtectorId = byteBufferAllocate.getLong();
+        lsLogVerify.mTimeout = byteBufferAllocate.getLong();
+        byte[] bArr2 = new byte[byteBufferAllocate.getInt()];
         lsLogVerify.mReason = bArr2;
-        allocate.get(bArr2);
-        int i = allocate.getInt();
+        byteBufferAllocate.get(bArr2);
+        int i = byteBufferAllocate.getInt();
         if (i > 0) {
             byte[] bArr3 = new byte[i];
             lsLogVerify.mPackage = bArr3;
-            allocate.get(bArr3);
+            byteBufferAllocate.get(bArr3);
         } else {
             lsLogVerify.mPackage = null;
         }
-        int i2 = allocate.getInt();
+        int i2 = byteBufferAllocate.getInt();
         if (i2 > 0) {
             byte[] bArr4 = new byte[i2];
             lsLogVerify.mSalt = bArr4;
-            allocate.get(bArr4);
+            byteBufferAllocate.get(bArr4);
         } else {
             lsLogVerify.mSalt = null;
         }
-        int i3 = allocate.getInt();
+        int i3 = byteBufferAllocate.getInt();
         if (i3 > 0) {
             byte[] bArr5 = new byte[i3];
             lsLogVerify.mMessage = bArr5;
-            allocate.get(bArr5);
+            byteBufferAllocate.get(bArr5);
         }
         return lsLogVerify;
     }
@@ -302,23 +302,23 @@ public class LsLogVerify {
         int i3;
         Log.w(TAG, "finish");
         try {
-            LsLogVerify openResult = openResult();
-            int failureCount = LsLog.getFailureCount(openResult.mUserId) + 1;
+            LsLogVerify lsLogVerifyOpenResult = openResult();
+            int failureCount = LsLog.getFailureCount(lsLogVerifyOpenResult.mUserId) + 1;
             if (i == 0) {
                 i2 = i;
-                openResult.setResponse(i2, 0, 0L, str);
-                LsLogSummary.addVerifySuccess(openResult, true);
+                lsLogVerifyOpenResult.setResponse(i2, 0, 0L, str);
+                LsLogSummary.addVerifySuccess(lsLogVerifyOpenResult, true);
                 i3 = failureCount;
             } else {
                 i2 = i;
                 i3 = failureCount;
-                openResult.setResponse(i2, i3, j, str);
-                LsLogSummary.addVerifyFailed(openResult, true);
+                lsLogVerifyOpenResult.setResponse(i2, i3, j, str);
+                LsLogSummary.addVerifyFailed(lsLogVerifyOpenResult, true);
             }
             if (i2 != 0 || i3 > 1) {
-                LsLog.verify(openResult.toString());
+                LsLog.verify(lsLogVerifyOpenResult.toString());
             }
-            LsLog.events(openResult.toEventLog());
+            LsLog.events(lsLogVerifyOpenResult.toEventLog());
             closeResult();
         } catch (Exception e) {
             Log.w(TAG, "finish failed" + e);
@@ -361,44 +361,44 @@ public class LsLogVerify {
             LsLogSummary.saveFile(REQUESTOR_NAME, new byte[]{0});
             return;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(lsLogVerify.mPackage.length + 20);
-        allocate.putInt(lsLogVerify.mUserId);
-        allocate.putInt(lsLogVerify.mProcessId);
-        allocate.putLong(lsLogVerify.mReqTime);
-        allocate.putInt(lsLogVerify.mPackage.length);
-        allocate.put(lsLogVerify.mPackage);
-        LsLogSummary.saveFile(REQUESTOR_NAME, allocate.array());
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(lsLogVerify.mPackage.length + 20);
+        byteBufferAllocate.putInt(lsLogVerify.mUserId);
+        byteBufferAllocate.putInt(lsLogVerify.mProcessId);
+        byteBufferAllocate.putLong(lsLogVerify.mReqTime);
+        byteBufferAllocate.putInt(lsLogVerify.mPackage.length);
+        byteBufferAllocate.put(lsLogVerify.mPackage);
+        LsLogSummary.saveFile(REQUESTOR_NAME, byteBufferAllocate.array());
     }
 
     private static LsLogVerify loadRequestor(int i) {
-        byte[] loadFile = LsLogSummary.loadFile(REQUESTOR_NAME, false);
-        if (loadFile == null || loadFile.length <= 4) {
+        byte[] bArrLoadFile = LsLogSummary.loadFile(REQUESTOR_NAME, false);
+        if (bArrLoadFile == null || bArrLoadFile.length <= 4) {
             Log.w(TAG, "no requestor data");
             return null;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(loadFile.length);
-        allocate.put(loadFile, 0, loadFile.length);
-        allocate.flip();
-        int i2 = allocate.getInt();
-        int i3 = allocate.getInt();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(bArrLoadFile.length);
+        byteBufferAllocate.put(bArrLoadFile, 0, bArrLoadFile.length);
+        byteBufferAllocate.flip();
+        int i2 = byteBufferAllocate.getInt();
+        int i3 = byteBufferAllocate.getInt();
         if (i2 != i) {
             Log.w(TAG, String.format("mismatch enroll data, Req User %d, Saved User %d, pid %d)", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)));
             saveRequestor(null);
             return null;
         }
-        long j = allocate.getLong();
-        long currentTimeMillis = System.currentTimeMillis();
-        if (1000 + j < currentTimeMillis) {
-            Log.w(TAG, String.format("request data is too old, req = %s, cur = %s", LsUtil.getTimeForLog(j), LsUtil.getTimeForLog(currentTimeMillis)));
+        long j = byteBufferAllocate.getLong();
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        if (1000 + j < jCurrentTimeMillis) {
+            Log.w(TAG, String.format("request data is too old, req = %s, cur = %s", LsUtil.getTimeForLog(j), LsUtil.getTimeForLog(jCurrentTimeMillis)));
             saveRequestor(null);
             return null;
         }
         LsLogVerify lsLogVerify = new LsLogVerify(i);
         lsLogVerify.mProcessId = i3;
         lsLogVerify.mReqTime = j;
-        byte[] bArr = new byte[allocate.getInt()];
+        byte[] bArr = new byte[byteBufferAllocate.getInt()];
         lsLogVerify.mPackage = bArr;
-        allocate.get(bArr);
+        byteBufferAllocate.get(bArr);
         return lsLogVerify;
     }
 }

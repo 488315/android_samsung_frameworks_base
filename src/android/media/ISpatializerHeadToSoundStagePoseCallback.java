@@ -44,9 +44,9 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpatializerHeadToSoundStagePoseCallback)) {
-                return (ISpatializerHeadToSoundStagePoseCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpatializerHeadToSoundStagePoseCallback)) {
+                return (ISpatializerHeadToSoundStagePoseCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                float[] createFloatArray = parcel.createFloatArray();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                dispatchPoseChanged(createFloatArray);
+                dispatchPoseChanged(fArrCreateFloatArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
 
             @Override // android.media.ISpatializerHeadToSoundStagePoseCallback
             public void dispatchPoseChanged(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

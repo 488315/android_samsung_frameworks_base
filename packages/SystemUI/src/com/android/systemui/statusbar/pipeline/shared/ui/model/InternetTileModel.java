@@ -6,11 +6,9 @@ import com.android.systemui.plugins.qs.QSTile;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface InternetTileModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Active implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final QSTile.Icon icon;
@@ -66,17 +64,17 @@ public interface InternetTileModel {
 
         public final int hashCode() {
             CharSequence charSequence = this.secondaryTitle;
-            int hashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
+            int iHashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
             Text text = this.secondaryLabel;
-            int hashCode2 = (hashCode + (text == null ? 0 : text.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (text == null ? 0 : text.hashCode())) * 31;
             Integer num = this.iconId;
-            int hashCode3 = (hashCode2 + (num == null ? 0 : num.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (num == null ? 0 : num.hashCode())) * 31;
             QSTile.Icon icon = this.icon;
-            int hashCode4 = (hashCode3 + (icon == null ? 0 : icon.hashCode())) * 31;
+            int iHashCode4 = (iHashCode3 + (icon == null ? 0 : icon.hashCode())) * 31;
             ContentDescription contentDescription = this.stateDescription;
-            int hashCode5 = (hashCode4 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
+            int iHashCode5 = (iHashCode4 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
             ContentDescription contentDescription2 = this.contentDescription;
-            return hashCode5 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
+            return iHashCode5 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
         }
 
         public final String toString() {
@@ -97,7 +95,6 @@ public interface InternetTileModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final QSTile.Icon icon;
@@ -153,17 +150,17 @@ public interface InternetTileModel {
 
         public final int hashCode() {
             CharSequence charSequence = this.secondaryTitle;
-            int hashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
+            int iHashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
             Text text = this.secondaryLabel;
-            int hashCode2 = (hashCode + (text == null ? 0 : text.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (text == null ? 0 : text.hashCode())) * 31;
             Integer num = this.iconId;
-            int hashCode3 = (hashCode2 + (num == null ? 0 : num.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (num == null ? 0 : num.hashCode())) * 31;
             QSTile.Icon icon = this.icon;
-            int hashCode4 = (hashCode3 + (icon == null ? 0 : icon.hashCode())) * 31;
+            int iHashCode4 = (iHashCode3 + (icon == null ? 0 : icon.hashCode())) * 31;
             ContentDescription contentDescription = this.stateDescription;
-            int hashCode5 = (hashCode4 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
+            int iHashCode5 = (iHashCode4 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
             ContentDescription contentDescription2 = this.contentDescription;
-            return hashCode5 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
+            return iHashCode5 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
         }
 
         public final String toString() {

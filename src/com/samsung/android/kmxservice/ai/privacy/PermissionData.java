@@ -29,9 +29,9 @@ public class PermissionData {
         this.mUid = i2;
         this.mPackageName = str;
         this.mState = i3;
-        long currentTimeMillis = System.currentTimeMillis();
-        this.mAccessTimeMilliSeconds = currentTimeMillis;
-        this.mAccessTimeMinute = currentTimeMillis / 60000;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        this.mAccessTimeMilliSeconds = jCurrentTimeMillis;
+        this.mAccessTimeMinute = jCurrentTimeMillis / 60000;
     }
 
     public int getOp() {

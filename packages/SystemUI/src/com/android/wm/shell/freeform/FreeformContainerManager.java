@@ -8,7 +8,9 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
@@ -16,6 +18,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
 import android.os.SemSystemProperties;
 import android.os.ServiceManager;
@@ -23,7 +26,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.IRotationWatcher;
 import android.view.IWindowManager;
+import android.view.MotionEvent;
 import android.view.Surface;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -34,10 +39,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticOutline0;
 import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.popup.util.PopupUIUtil;
+import com.android.systemui.util.DelayableMarqueeTextView;
 import com.android.systemui.util.SettingsHelper;
 import com.android.wm.shell.freeform.FreeformContainerFolderView;
 import com.samsung.android.rune.CoreRune;
@@ -45,8 +52,8 @@ import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformContainerManager {
     public static final String[] CHINA_SALES_CODES = {"CHN", "CHM", "CBK", "CTC", "CHU", "CHC"};
@@ -62,7 +69,6 @@ public class FreeformContainerManager {
     public final SettingsObserver mSettingsObserver;
     public final HandlerThread mThread;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public final IWindowManager mIWindowManager;
         public boolean mIsBindingMinimizeContainerService;
@@ -162,24 +168,307 @@ public class FreeformContainerManager {
             freeformContainerItemController.mItemList.clear();
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:196:0x0373, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:150:0x032c, code lost:
         
             r5 = null;
          */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void handleMessage(android.os.Message r9) {
-            /*
-                Method dump skipped, instructions count: 1092
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.freeform.FreeformContainerManager.H.handleMessage(android.os.Message):void");
+        public final void handleMessage(Message message) throws Resources.NotFoundException {
+            FreeformContainerItem freeformContainerItem;
+            int i = message.what;
+            boolean z = CoreRune.MW_FREEFORM_SMART_POPUP_VIEW;
+            if ((z && (i == 21 || this.mIsBindingSmartPopupViewService)) || i == 11 || this.mIsBindingMinimizeContainerService) {
+                Object obj = message.obj;
+                FreeformContainerItem freeformContainerItem2 = obj instanceof FreeformContainerItem ? (FreeformContainerItem) obj : null;
+                StringBuilder sb = new StringBuilder("[Manager] handleMessage: ");
+                sb.append(messageToString(message.what));
+                sb.append(freeformContainerItem2 == null ? "" : " item=" + freeformContainerItem2);
+                Log.i("FreeformContainer", sb.toString());
+                int i2 = message.what;
+                int i3 = 0;
+                if (i2 == 42) {
+                    FreeformContainerViewController freeformContainerViewController = this.mViewController;
+                    if (freeformContainerViewController.mState == 1) {
+                        freeformContainerViewController.updateContainerState(0, false, true);
+                        return;
+                    }
+                    return;
+                }
+                switch (i2) {
+                    case 11:
+                        if (noRunningService()) {
+                            init();
+                            registerReceivers();
+                            if (message.arg1 == 1) {
+                                Log.d("FreeformContainer", "restore all items on binding");
+                                this.mItemController.restoreMinimizeContainerItems(FreeformContainerManager.this.mContext);
+                            }
+                        }
+                        this.mIsBindingMinimizeContainerService = true;
+                        return;
+                    case 12:
+                        this.mIsBindingMinimizeContainerService = false;
+                        if (!noRunningService()) {
+                            this.mItemController.removeAllMinimizeContainerItem();
+                            return;
+                        }
+                        destroy();
+                        FreeformContainerManager freeformContainerManager = FreeformContainerManager.this;
+                        try {
+                            this.mIWindowManager.removeRotationWatcher(freeformContainerManager.mRotationWatcher);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        freeformContainerManager.mContext.unregisterReceiver(freeformContainerManager.mReceiver);
+                        return;
+                    case 13:
+                        if (freeformContainerItem2 == null) {
+                            return;
+                        }
+                        sendMessageDelayed(obtainMessage(16, freeformContainerItem2.getTaskId(), 0, freeformContainerItem2), freeformContainerItem2.mAnimationCompleted ? 0L : 3000L);
+                        if (!CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW) {
+                            this.mItemController.addItem(freeformContainerItem2);
+                            return;
+                        }
+                        FreeformContainerItemController freeformContainerItemController = this.mItemController;
+                        String str = freeformContainerItem2.mPackageName;
+                        final int taskId = freeformContainerItem2.getTaskId();
+                        freeformContainerItemController.getClass();
+                        ArrayList arrayList = new ArrayList(freeformContainerItemController.mItemList);
+                        int size = arrayList.size();
+                        while (true) {
+                            if (i3 >= size) {
+                                break;
+                            } else {
+                                Object obj2 = arrayList.get(i3);
+                                i3++;
+                                freeformContainerItem = (FreeformContainerItem) obj2;
+                                if (freeformContainerItem.mPackageName.equals(str)) {
+                                    if (freeformContainerItem instanceof MultiInstanceItem) {
+                                        if (freeformContainerItem.getItemList().stream().anyMatch(new Predicate() { // from class: com.android.wm.shell.freeform.FreeformContainerItemController$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj3) {
+                                                return ((MultiInstanceItem) obj3).mTaskId == taskId;
+                                            }
+                                        })) {
+                                            Log.w("FreeformContainer", "findCandidateItemForMultiInstance: already has child! " + freeformContainerItem);
+                                            break;
+                                        }
+                                    } else if (!(freeformContainerItem instanceof MinimizeContainerItem) || freeformContainerItem.getTaskId() == taskId) {
+                                    }
+                                }
+                            }
+                        }
+                        if (freeformContainerItem == null) {
+                            this.mItemController.addItem(freeformContainerItem2);
+                            return;
+                        }
+                        if (freeformContainerItem.asMultiInstanceItem() == null) {
+                            this.mItemController.removeItem(freeformContainerItem);
+                            MultiInstanceItem multiInstanceItem = new MultiInstanceItem(freeformContainerItem2, null);
+                            multiInstanceItem.addChildItem(new MultiInstanceItem(freeformContainerItem, multiInstanceItem));
+                            multiInstanceItem.addChildItem(new MultiInstanceItem(freeformContainerItem2, multiInstanceItem));
+                            this.mItemController.addItem(multiInstanceItem);
+                            return;
+                        }
+                        MultiInstanceItem multiInstanceItemAsMultiInstanceItem = freeformContainerItem.asMultiInstanceItem();
+                        MultiInstanceItem multiInstanceItem2 = new MultiInstanceItem(freeformContainerItem2, multiInstanceItemAsMultiInstanceItem);
+                        FreeformContainerItemController freeformContainerItemController2 = this.mItemController;
+                        freeformContainerItemController2.getClass();
+                        freeformContainerItemController2.mThreadPoolExecutor.execute(new FreeformContainerItemController$$ExternalSyntheticLambda0(freeformContainerItemController2, multiInstanceItem2));
+                        multiInstanceItemAsMultiInstanceItem.addChildItem(multiInstanceItem2);
+                        return;
+                    case 14:
+                        FreeformContainerItem itemById = this.mItemController.getItemById(message.arg1);
+                        if (itemById != null) {
+                            this.mItemController.removeItem(itemById);
+                            return;
+                        }
+                        Log.w("FreeformContainer", "[Manager] " + messageToString(message.what) + " failed, due to no taskId: " + message.arg1);
+                        return;
+                    case 15:
+                    case 16:
+                        FreeformContainerItem itemById2 = this.mItemController.getItemById(message.arg1);
+                        if (itemById2 != null) {
+                            this.mItemController.animationCompleted(itemById2);
+                            return;
+                        }
+                        Log.w("FreeformContainer", "[Manager] " + messageToString(message.what) + " failed, due to no taskId: " + message.arg1);
+                        return;
+                    case 17:
+                        this.mItemController.removeAllMinimizeContainerItem();
+                        return;
+                    default:
+                        switch (i2) {
+                            case 21:
+                                if (noRunningService()) {
+                                    init();
+                                    registerReceivers();
+                                }
+                                this.mIsBindingSmartPopupViewService = true;
+                                return;
+                            case 22:
+                                this.mIsBindingSmartPopupViewService = false;
+                                if (!noRunningService()) {
+                                    this.mItemController.removeAllSmartPopupViewItem();
+                                    return;
+                                }
+                                destroy();
+                                FreeformContainerManager freeformContainerManager2 = FreeformContainerManager.this;
+                                try {
+                                    this.mIWindowManager.removeRotationWatcher(freeformContainerManager2.mRotationWatcher);
+                                } catch (RemoteException e2) {
+                                    e2.printStackTrace();
+                                }
+                                freeformContainerManager2.mContext.unregisterReceiver(freeformContainerManager2.mReceiver);
+                                return;
+                            case 23:
+                                if (!this.mViewController.isPointerView()) {
+                                    this.mViewController.updateContainerState(0, true, true);
+                                }
+                                if (freeformContainerItem2 != null) {
+                                    this.mItemController.addItem(freeformContainerItem2);
+                                    return;
+                                }
+                                return;
+                            case 24:
+                                FreeformContainerItem itemByName = this.mItemController.getItemByName((String) message.obj);
+                                if (itemByName instanceof SmartPopupViewItem) {
+                                    this.mItemController.removeItem(itemByName);
+                                    return;
+                                }
+                                Log.w("FreeformContainer", "[Manager] " + messageToString(message.what) + " failed, due to no smart popup view item which has packageName: " + message.obj);
+                                return;
+                            case 25:
+                                if (z) {
+                                    this.mItemController.removeAllSmartPopupViewItem();
+                                    return;
+                                }
+                                return;
+                            default:
+                                switch (i2) {
+                                    case 30:
+                                        if (freeformContainerItem2 != null) {
+                                            this.mItemController.removeItem(freeformContainerItem2);
+                                            freeformContainerItem2.launch();
+                                            return;
+                                        }
+                                        return;
+                                    case 31:
+                                        if (freeformContainerItem2 != null) {
+                                            if (!CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW || !(freeformContainerItem2 instanceof MultiInstanceItem)) {
+                                                this.mItemController.iconLoadCompleted(freeformContainerItem2);
+                                                return;
+                                            }
+                                            FreeformContainerItem itemById3 = this.mItemController.getItemById(freeformContainerItem2.getTaskId());
+                                            if (itemById3 != null) {
+                                                this.mItemController.iconLoadCompleted(itemById3);
+                                                return;
+                                            }
+                                            return;
+                                        }
+                                        return;
+                                    case 32:
+                                        destroy();
+                                        init();
+                                        if (z) {
+                                            this.mItemController.removeAllSmartPopupViewItem();
+                                        }
+                                        this.mItemController.restoreMinimizeContainerItems(FreeformContainerManager.this.mContext);
+                                        return;
+                                    case 33:
+                                        FreeformContainerItemController freeformContainerItemController3 = this.mItemController;
+                                        freeformContainerItemController3.getClass();
+                                        ArrayList arrayList2 = new ArrayList(freeformContainerItemController3.mItemList);
+                                        arrayList2.forEach(new FreeformContainerItemController$$ExternalSyntheticLambda2());
+                                        destroy();
+                                        init();
+                                        FreeformContainerItemController freeformContainerItemController4 = this.mItemController;
+                                        synchronized (freeformContainerItemController4.mItemList) {
+                                            try {
+                                                for (int size2 = arrayList2.size() - 1; size2 >= 0; size2--) {
+                                                    freeformContainerItemController4.addItem((FreeformContainerItem) arrayList2.get(size2));
+                                                }
+                                            } catch (Throwable th) {
+                                                throw th;
+                                            }
+                                        }
+                                        return;
+                                    case 34:
+                                        int i4 = message.arg1;
+                                        if (FreeformContainerManager.this.mRotation != i4) {
+                                            this.mViewController.closeFullscreenMode("fullscreen_mode_request_screen_rotating");
+                                            removeMessages(35, "fullscreen_mode_request_screen_rotating");
+                                            if (this.mViewController.openFullscreenMode("fullscreen_mode_request_screen_rotating")) {
+                                                sendMessageDelayed(obtainMessage(35, "fullscreen_mode_request_screen_rotating"), DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY);
+                                            }
+                                            FreeformContainerItemController freeformContainerItemController5 = this.mItemController;
+                                            freeformContainerItemController5.getClass();
+                                            ArrayList arrayList3 = new ArrayList(freeformContainerItemController5.mItemList);
+                                            int size3 = arrayList3.size();
+                                            int i5 = 0;
+                                            while (i5 < size3) {
+                                                Object obj3 = arrayList3.get(i5);
+                                                i5++;
+                                                freeformContainerItemController5.animationCompleted((FreeformContainerItem) obj3);
+                                            }
+                                            this.mViewController.updateDisplayFrame(false);
+                                            this.mViewController.hideDismissButton();
+                                            FreeformContainerViewController freeformContainerViewController2 = this.mViewController;
+                                            int i6 = FreeformContainerManager.this.mRotation;
+                                            freeformContainerViewController2.createOrUpdateDismissButton();
+                                            ArrayList arrayList4 = (ArrayList) freeformContainerViewController2.mCallBacks;
+                                            int size4 = arrayList4.size();
+                                            while (i3 < size4) {
+                                                Object obj4 = arrayList4.get(i3);
+                                                i3++;
+                                                FreeformContainerCallback freeformContainerCallback = (FreeformContainerCallback) obj4;
+                                                Log.i("FreeformContainer", "[ViewController] onRotationChanged: " + freeformContainerCallback);
+                                                freeformContainerCallback.onRotationChanged(i6, i4, freeformContainerViewController2.mDisplayFrame);
+                                            }
+                                            FreeformContainerManager.this.mRotation = i4;
+                                            return;
+                                        }
+                                        return;
+                                    case 35:
+                                        Object obj5 = message.obj;
+                                        if (obj5 instanceof String) {
+                                            if (this.mViewController.closeFullscreenMode((String) obj5)) {
+                                                this.mViewController.mContainerView.requestLayout();
+                                                return;
+                                            }
+                                            return;
+                                        }
+                                        return;
+                                    case 36:
+                                        if (this.mViewController.isPointerView()) {
+                                            this.mViewController.updateDisplayFrame(true);
+                                            this.mViewController.mContainerView.updatePointerViewImmediately();
+                                            return;
+                                        } else {
+                                            this.mViewController.updateDisplayFrame(true);
+                                            this.mViewController.updateContainerState(0, false, true);
+                                            return;
+                                        }
+                                    case 37:
+                                        Point point = (Point) message.obj;
+                                        boolean z2 = message.arg1 == 1;
+                                        FreeformContainerViewController freeformContainerViewController3 = this.mViewController;
+                                        freeformContainerViewController3.mContainerView.setPointerPosition(point.x, point.y, z2);
+                                        freeformContainerViewController3.mContainerView.mNeedInitPosition = false;
+                                        return;
+                                    default:
+                                        return;
+                                }
+                        }
+                }
+            }
         }
 
-        public final void init() {
+        public final void init() throws Resources.NotFoundException {
             int i;
             FreeformContainerViewController freeformContainerViewController = this.mViewController;
             freeformContainerViewController.getClass();
@@ -229,29 +518,181 @@ public class FreeformContainerManager {
             imageButton.setColorFilter(0);
             freeformContainerView2.mPointerView.setHapticFeedbackEnabled(false);
             freeformContainerView2.mPointerView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda7
-                /* JADX WARN: Removed duplicated region for block: B:35:0x017f  */
-                /* JADX WARN: Removed duplicated region for block: B:37:0x018a  */
-                /* JADX WARN: Removed duplicated region for block: B:40:0x019b  */
-                /* JADX WARN: Removed duplicated region for block: B:54:0x0192  */
-                /* JADX WARN: Removed duplicated region for block: B:55:0x0187  */
+                /* JADX WARN: Removed duplicated region for block: B:33:0x00e7  */
+                /* JADX WARN: Removed duplicated region for block: B:61:0x017f  */
+                /* JADX WARN: Removed duplicated region for block: B:62:0x0187  */
+                /* JADX WARN: Removed duplicated region for block: B:64:0x018a  */
+                /* JADX WARN: Removed duplicated region for block: B:65:0x0192  */
+                /* JADX WARN: Removed duplicated region for block: B:68:0x019b  */
                 @Override // android.view.View.OnTouchListener
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final boolean onTouch(android.view.View r13, android.view.MotionEvent r14) {
-                    /*
-                        Method dump skipped, instructions count: 663
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda7.onTouch(android.view.View, android.view.MotionEvent):boolean");
+                public final boolean onTouch(View view, MotionEvent motionEvent) {
+                    boolean z;
+                    final boolean zIsEnterDismissButton;
+                    final FreeformContainerView freeformContainerView3 = freeformContainerView2;
+                    float[] fArr = FreeformContainerView.TAIL_ICON_ALPHA_ARRAY;
+                    freeformContainerView3.getClass();
+                    float rawX = motionEvent.getRawX();
+                    float rawY = motionEvent.getRawY();
+                    int action = motionEvent.getAction();
+                    if (action == 0) {
+                        VelocityTracker velocityTracker = freeformContainerView3.mVelocityTracker;
+                        if (velocityTracker == null) {
+                            freeformContainerView3.mVelocityTracker = VelocityTracker.obtain();
+                        } else {
+                            velocityTracker.clear();
+                        }
+                        freeformContainerView3.addMovementToVelocityTracker(motionEvent);
+                        freeformContainerView3.mIsAppIconMoving = false;
+                        freeformContainerView3.mFirstDownX = rawX;
+                        freeformContainerView3.mLastPositionX = rawX;
+                        freeformContainerView3.mFirstDownY = rawY;
+                        freeformContainerView3.mLastPositionY = rawY;
+                        freeformContainerView3.mFirstPointerX = freeformContainerView3.mPointerView.getX();
+                        freeformContainerView3.mFirstPointerY = freeformContainerView3.mPointerView.getY();
+                        Log.i("FreeformContainer", "[ContainerView] onTouch(" + MotionEvent.actionToString(action) + ")");
+                        return false;
+                    }
+                    if (action != 1) {
+                        if (action != 2) {
+                            if (action == 3) {
+                                freeformContainerView3.mViewController.hideDismissButton();
+                                VelocityTracker velocityTracker2 = freeformContainerView3.mVelocityTracker;
+                                if (velocityTracker2 != null) {
+                                    velocityTracker2.recycle();
+                                    freeformContainerView3.mVelocityTracker = null;
+                                    return false;
+                                }
+                            }
+                        } else if (freeformContainerView3.mIsAppIconMoving) {
+                            freeformContainerView3.addMovementToVelocityTracker(motionEvent);
+                            view.setX((rawX - freeformContainerView3.mLastPositionX) + view.getX());
+                            view.setY((rawY - freeformContainerView3.mLastPositionY) + view.getY());
+                            freeformContainerView3.mLastPositionX = rawX;
+                            freeformContainerView3.mLastPositionY = rawY;
+                            freeformContainerView3.updateSpringChainEndValue();
+                            freeformContainerView3.getPointerViewBounds(freeformContainerView3.mTmpBounds);
+                            FreeformContainerViewController freeformContainerViewController2 = freeformContainerView3.mViewController;
+                            Rect rect = freeformContainerView3.mTmpBounds;
+                            FreeformContainerDismissButtonView freeformContainerDismissButtonView = freeformContainerViewController2.mDismissButtonView;
+                            if (freeformContainerDismissButtonView != null) {
+                                freeformContainerDismissButtonView.mDismissViewManager.mView.updateView(rect);
+                                return false;
+                            }
+                        } else if (((float) Math.hypot(rawX - freeformContainerView3.mFirstDownX, rawY - freeformContainerView3.mFirstDownY)) >= freeformContainerView3.mThresholdToMove) {
+                            freeformContainerView3.mIsAppIconMoving = true;
+                            freeformContainerView3.getPointerViewBounds(freeformContainerView3.mTmpBounds);
+                            if (!freeformContainerView3.mViewController.isDismissButtonShowing()) {
+                                FreeformContainerViewController freeformContainerViewController3 = freeformContainerView3.mViewController;
+                                Rect rect2 = freeformContainerView3.mTmpBounds;
+                                freeformContainerViewController3.createOrUpdateDismissButton();
+                                freeformContainerViewController3.mDismissButtonView.show(rect2);
+                            }
+                            freeformContainerView3.mPointerSettleDownEffectRequested = true;
+                            freeformContainerView3.updateSpringConfig(10);
+                            Log.i("FreeformContainer", "[ContainerView] onTouch(" + MotionEvent.actionToString(action) + "): Ready to move");
+                            return false;
+                        }
+                        return false;
+                    }
+                    StringBuilder sb = new StringBuilder("[ContainerView] onTouch(");
+                    sb.append(MotionEvent.actionToString(action));
+                    sb.append(") mIsAppIconMoving=");
+                    KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb, freeformContainerView3.mIsAppIconMoving, "FreeformContainer");
+                    if (freeformContainerView3.mIsAppIconMoving) {
+                        freeformContainerView3.addMovementToVelocityTracker(motionEvent);
+                        VelocityTracker velocityTracker3 = freeformContainerView3.mVelocityTracker;
+                        if (velocityTracker3 == null) {
+                            z = false;
+                            int i2 = !z ? (int) ((freeformContainerView3.mVelocity.x / 700.0f) * 35.0f) : 0;
+                            int i3 = !z ? (int) ((freeformContainerView3.mVelocity.y / 700.0f) * 35.0f) : 0;
+                            zIsEnterDismissButton = freeformContainerView3.mViewController.isEnterDismissButton();
+                            if (!zIsEnterDismissButton) {
+                                float x = freeformContainerView3.mPointerView.getX() + i2;
+                                float y = freeformContainerView3.mPointerView.getY() + i3;
+                                if (z) {
+                                    Rect rect3 = freeformContainerView3.mViewController.mNonDecorDisplayFrame;
+                                    freeformContainerView3.updateSpringConfig((((float) rect3.left) > x || ((float) rect3.right) < x || ((float) rect3.top) > y || ((float) rect3.bottom) < y) ? 20 : 10);
+                                }
+                                freeformContainerView3.setPointerPosition(x, y, false);
+                            }
+                            freeformContainerView3.updateSpringChainEndValue();
+                            freeformContainerView3.getParent().requestTransparentRegion(freeformContainerView3);
+                            freeformContainerView3.mH.post(new Runnable() { // from class: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda8
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FreeformContainerView freeformContainerView4 = freeformContainerView3;
+                                    boolean z2 = zIsEnterDismissButton;
+                                    freeformContainerView4.mIsAppIconMoving = false;
+                                    freeformContainerView4.getPointerViewBounds(freeformContainerView4.mTmpBounds);
+                                    freeformContainerView4.mViewController.hideDismissButtonAndDismissIcon(null, freeformContainerView4.mPointerGroupView, freeformContainerView4.mTmpBounds);
+                                    if (z2) {
+                                        freeformContainerView4.setPointerPosition(freeformContainerView4.mFirstPointerX, freeformContainerView4.mFirstPointerY, false);
+                                    }
+                                }
+                            });
+                        } else {
+                            Rect rect4 = freeformContainerView3.mViewController.mNonDecorDisplayFrame;
+                            velocityTracker3.computeCurrentVelocity(1000, freeformContainerView3.mMaximumFlingVelocity);
+                            freeformContainerView3.mVelocity.set(freeformContainerView3.mVelocityTracker.getXVelocity(), freeformContainerView3.mVelocityTracker.getYVelocity());
+                            if (Math.abs(freeformContainerView3.mVelocity.x) > freeformContainerView3.mMinimumFlingVelocity || Math.abs(freeformContainerView3.mVelocity.y) > freeformContainerView3.mMinimumFlingVelocity) {
+                                float f = freeformContainerView3.mVelocity.x;
+                                boolean z2 = f < 0.0f;
+                                if ((!z2 || freeformContainerView3.mFirstPointerX >= rect4.left) && ((z2 || freeformContainerView3.mFirstPointerX + freeformContainerView3.mPointerViewSize <= rect4.right) && (Math.abs(f) >= 700.0f || ((!z2 || freeformContainerView3.mPointerView.getX() >= rect4.left - 30) && (z2 || freeformContainerView3.mPointerView.getX() + freeformContainerView3.mPointerViewSize <= rect4.right + 30))))) {
+                                    z = true;
+                                }
+                                if (!z) {
+                                }
+                                if (!z) {
+                                }
+                                zIsEnterDismissButton = freeformContainerView3.mViewController.isEnterDismissButton();
+                                if (!zIsEnterDismissButton) {
+                                }
+                                freeformContainerView3.updateSpringChainEndValue();
+                                freeformContainerView3.getParent().requestTransparentRegion(freeformContainerView3);
+                                freeformContainerView3.mH.post(new Runnable() { // from class: com.android.wm.shell.freeform.FreeformContainerView$$ExternalSyntheticLambda8
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        FreeformContainerView freeformContainerView4 = freeformContainerView3;
+                                        boolean z22 = zIsEnterDismissButton;
+                                        freeformContainerView4.mIsAppIconMoving = false;
+                                        freeformContainerView4.getPointerViewBounds(freeformContainerView4.mTmpBounds);
+                                        freeformContainerView4.mViewController.hideDismissButtonAndDismissIcon(null, freeformContainerView4.mPointerGroupView, freeformContainerView4.mTmpBounds);
+                                        if (z22) {
+                                            freeformContainerView4.setPointerPosition(freeformContainerView4.mFirstPointerX, freeformContainerView4.mFirstPointerY, false);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    if (!freeformContainerView3.mViewController.isDismissButtonShowing() && !freeformContainerView3.mIsAppIconMoving && !freeformContainerView3.mViewController.mFolderView.mIsCollapseAnimating) {
+                        if (freeformContainerView3.getIconViewListCount() == 1) {
+                            FreeformContainerItem freeformContainerItem = (FreeformContainerItem) freeformContainerView3.mViewController.mItemController.mItemList.get(0);
+                            if (freeformContainerItem != null) {
+                                if (!CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW || !(freeformContainerItem instanceof MultiInstanceItem)) {
+                                    freeformContainerView3.mH.sendMessage(30, freeformContainerItem);
+                                } else if (freeformContainerItem.getItemCount() == 1) {
+                                    freeformContainerView3.mH.sendMessage(30, freeformContainerItem.getItemList().get(0));
+                                } else {
+                                    freeformContainerView3.mViewController.updateContainerState(1, true, true);
+                                }
+                            }
+                        } else {
+                            freeformContainerView3.mViewController.updateContainerState(1, true, true);
+                        }
+                    }
+                    Log.i("FreeformContainer", "[ContainerView] onTouch(" + MotionEvent.actionToString(action) + ")");
+                    return false;
                 }
             });
             SharedPreferences sharedPreferences = freeformContainerView2.mContext.getSharedPreferences("freeform_container_pref", 0);
             if (sharedPreferences.contains("position_x") && sharedPreferences.contains("position_y")) {
-                float width = (freeformContainerView2.mViewController.mDisplayFrame.width() * 0.8f) - (freeformContainerView2.mPointerView.getWidth() / 2.0f);
+                float fWidth = (freeformContainerView2.mViewController.mDisplayFrame.width() * 0.8f) - (freeformContainerView2.mPointerView.getWidth() / 2.0f);
                 float f = freeformContainerView2.mViewController.mNonDecorDisplayFrame.top + freeformContainerView2.mDefaultGapTop;
-                float f2 = sharedPreferences.getFloat("position_x", width);
+                float f2 = sharedPreferences.getFloat("position_x", fWidth);
                 float f3 = sharedPreferences.getFloat("position_y", f);
                 Rect rect = freeformContainerView2.mTmpBounds;
                 int i2 = (int) f2;
@@ -263,12 +704,12 @@ public class FreeformContainerManager {
                 if (rotation != i5) {
                     FreeformContainerView.rotateBounds(i5, freeformContainerView2.mViewController.mDisplayFrame, freeformContainerView2.mTmpBounds, rotation);
                 }
-                StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("[ContainerView] loadPositionFromSharedPreferences, position=(", f2, ",", f3, ") default=(");
-                m.append(width);
-                m.append(",");
-                m.append(f);
-                m.append(")");
-                Log.i("FreeformContainer", m.toString());
+                StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("[ContainerView] loadPositionFromSharedPreferences, position=(", f2, ",", f3, ") default=(");
+                sbM.append(fWidth);
+                sbM.append(",");
+                sbM.append(f);
+                sbM.append(")");
+                Log.i("FreeformContainer", sbM.toString());
                 Rect rect2 = freeformContainerView2.mTmpBounds;
                 i = 0;
                 freeformContainerView2.setPointerPosition(rect2.left, rect2.top, false);
@@ -374,7 +815,6 @@ public class FreeformContainerManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mColorThemeAppIconUri;
         public final Uri mCurrentSecAppIconThemePackageUri;
@@ -411,14 +851,14 @@ public class FreeformContainerManager {
             }
             if (this.mColorThemeAppIconUri.equals(uri) || this.mWallpaperThemeStateUri.equals(uri) || this.mWallpaperThemeColorUri.equals(uri) || this.mCurrentSecAppIconThemePackageUri.equals(uri)) {
                 FreeformContainerManager.this.rebuildAll("colorPalette");
-            } else if (this.mLeboSettingUri.equals(uri) && FreeformContainerManager.m3251$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
+            } else if (this.mLeboSettingUri.equals(uri) && FreeformContainerManager.m3268$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
                 FreeformContainerManager.this.mH.sendMessage(25);
             }
         }
     }
 
     /* renamed from: -$$Nest$mshouldHideInformation, reason: not valid java name */
-    public static boolean m3251$$Nest$mshouldHideInformation(FreeformContainerManager freeformContainerManager) {
+    public static boolean m3268$$Nest$mshouldHideInformation(FreeformContainerManager freeformContainerManager) {
         String str;
         DisplayManager displayManager;
         int activeDisplayState;
@@ -469,7 +909,7 @@ public class FreeformContainerManager {
                         break;
                     case "com.samsung.intent.action.WIFI_DISPLAY_SOURCE_STATE":
                     case "com.samsung.intent.action.LELINK_CAST_CONNECTION_CHANGED":
-                        if (FreeformContainerManager.m3251$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
+                        if (FreeformContainerManager.m3268$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
                             FreeformContainerManager.this.mH.sendMessage(25);
                             break;
                         }

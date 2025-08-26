@@ -54,29 +54,29 @@ public final class Asn1Decoder {
             throw new InvalidAsn1DataException(0, "Invalid length at position: " + i2);
         }
         try {
-            int bytesToInt = IccUtils.bytesToInt(this.mSrc, i, i2 - i);
+            int iBytesToInt = IccUtils.bytesToInt(this.mSrc, i, i2 - i);
             byte[] bArr = this.mSrc;
             int i4 = i2 + 1;
-            int i5 = bArr[i2];
-            if ((i5 & 128) != 0) {
-                int i6 = i5 & 127;
-                int i7 = i4 + i6;
-                if (i7 > this.mEnd) {
-                    throw new InvalidAsn1DataException(bytesToInt, "Cannot parse length at position: " + i4);
+            int iBytesToInt2 = bArr[i2];
+            if ((iBytesToInt2 & 128) != 0) {
+                int i5 = iBytesToInt2 & 127;
+                int i6 = i4 + i5;
+                if (i6 > this.mEnd) {
+                    throw new InvalidAsn1DataException(iBytesToInt, "Cannot parse length at position: " + i4);
                 }
                 try {
-                    i5 = IccUtils.bytesToInt(bArr, i4, i6);
-                    i4 = i7;
+                    iBytesToInt2 = IccUtils.bytesToInt(bArr, i4, i5);
+                    i4 = i6;
                 } catch (IllegalArgumentException e) {
-                    throw new InvalidAsn1DataException(bytesToInt, "Cannot parse length at position: " + i4, e);
+                    throw new InvalidAsn1DataException(iBytesToInt, "Cannot parse length at position: " + i4, e);
                 }
             }
-            int i8 = i4 + i5;
-            if (i8 > this.mEnd) {
-                throw new InvalidAsn1DataException(bytesToInt, "Incomplete data at position: " + i4 + ", expected bytes: " + i5 + ", actual bytes: " + (this.mEnd - i4));
+            int i7 = i4 + iBytesToInt2;
+            if (i7 > this.mEnd) {
+                throw new InvalidAsn1DataException(iBytesToInt, "Incomplete data at position: " + i4 + ", expected bytes: " + iBytesToInt2 + ", actual bytes: " + (this.mEnd - i4));
             }
-            Asn1Node asn1Node = new Asn1Node(bytesToInt, this.mSrc, i4, i5);
-            this.mPosition = i8;
+            Asn1Node asn1Node = new Asn1Node(iBytesToInt, this.mSrc, i4, iBytesToInt2);
+            this.mPosition = i7;
             return asn1Node;
         } catch (IllegalArgumentException e2) {
             throw new InvalidAsn1DataException(0, "Cannot parse tag at position: " + i, e2);

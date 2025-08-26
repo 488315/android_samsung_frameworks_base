@@ -2,6 +2,7 @@ package android.opengl;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -229,7 +230,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override // android.view.SurfaceView, android.view.View
-    protected void onDetachedFromWindow() {
+    protected void onDetachedFromWindow() throws Throwable {
         GLThread gLThread = this.mGLThread;
         if (gLThread != null) {
             gLThread.requestExitAndWait();
@@ -308,9 +309,9 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             if (!egl10.eglChooseConfig(eGLDisplay, this.mConfigSpec, eGLConfigArr, i, iArr)) {
                 throw new IllegalArgumentException("eglChooseConfig#2 failed");
             }
-            javax.microedition.khronos.egl.EGLConfig chooseConfig = chooseConfig(egl10, eGLDisplay, eGLConfigArr);
-            if (chooseConfig != null) {
-                return chooseConfig;
+            javax.microedition.khronos.egl.EGLConfig eGLConfigChooseConfig = chooseConfig(egl10, eGLDisplay, eGLConfigArr);
+            if (eGLConfigChooseConfig != null) {
+                return eGLConfigChooseConfig;
             }
             throw new IllegalArgumentException("No config chosen");
         }
@@ -363,14 +364,14 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 ComponentSizeChooser componentSizeChooser = this;
                 EGL10 egl102 = egl10;
                 javax.microedition.khronos.egl.EGLDisplay eGLDisplay2 = eGLDisplay;
-                int findConfigAttrib = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12325, 0);
-                int findConfigAttrib2 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12326, 0);
-                if (findConfigAttrib >= componentSizeChooser.mDepthSize && findConfigAttrib2 >= componentSizeChooser.mStencilSize) {
-                    int findConfigAttrib3 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12324, 0);
-                    int findConfigAttrib4 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12323, 0);
-                    int findConfigAttrib5 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12322, 0);
-                    int findConfigAttrib6 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12321, 0);
-                    if (findConfigAttrib3 == componentSizeChooser.mRedSize && findConfigAttrib4 == componentSizeChooser.mGreenSize && findConfigAttrib5 == componentSizeChooser.mBlueSize && findConfigAttrib6 == componentSizeChooser.mAlphaSize) {
+                int iFindConfigAttrib = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12325, 0);
+                int iFindConfigAttrib2 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12326, 0);
+                if (iFindConfigAttrib >= componentSizeChooser.mDepthSize && iFindConfigAttrib2 >= componentSizeChooser.mStencilSize) {
+                    int iFindConfigAttrib3 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12324, 0);
+                    int iFindConfigAttrib4 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12323, 0);
+                    int iFindConfigAttrib5 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12322, 0);
+                    int iFindConfigAttrib6 = componentSizeChooser.findConfigAttrib(egl102, eGLDisplay2, eGLConfig, 12321, 0);
+                    if (iFindConfigAttrib3 == componentSizeChooser.mRedSize && iFindConfigAttrib4 == componentSizeChooser.mGreenSize && iFindConfigAttrib5 == componentSizeChooser.mBlueSize && iFindConfigAttrib6 == componentSizeChooser.mAlphaSize) {
                         return eGLConfig;
                     }
                 }
@@ -408,9 +409,9 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
         public void start() {
             EGL10 egl10 = (EGL10) javax.microedition.khronos.egl.EGLContext.getEGL();
             this.mEgl = egl10;
-            javax.microedition.khronos.egl.EGLDisplay eglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
-            this.mEglDisplay = eglGetDisplay;
-            if (eglGetDisplay == EGL10.EGL_NO_DISPLAY) {
+            javax.microedition.khronos.egl.EGLDisplay eGLDisplayEglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
+            this.mEglDisplay = eGLDisplayEglGetDisplay;
+            if (eGLDisplayEglGetDisplay == EGL10.EGL_NO_DISPLAY) {
                 throw new RuntimeException("eglGetDisplay failed");
             }
             if (!this.mEgl.eglInitialize(this.mEglDisplay, new int[2])) {
@@ -591,19 +592,269 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:157:0x0233  */
-        /* JADX WARN: Removed duplicated region for block: B:159:0x0142 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:200:0x0257 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:111:0x017c A[Catch: all -> 0x0251, TryCatch #1 {all -> 0x0251, blocks: (B:3:0x001f, B:4:0x0023, B:87:0x013e, B:90:0x0147, B:92:0x014f, B:93:0x0153, B:100:0x0163, B:101:0x0164, B:102:0x0168, B:109:0x0179, B:111:0x017c, B:114:0x018b, B:118:0x01a8, B:126:0x01b9, B:129:0x01d0, B:131:0x01d5, B:132:0x01d8, B:134:0x01da, B:141:0x01f9, B:143:0x01fe, B:144:0x0201, B:145:0x0202, B:149:0x0210, B:150:0x021b, B:157:0x022a, B:120:0x01ad, B:121:0x01b0, B:168:0x0250, B:95:0x0155, B:96:0x015e, B:128:0x01c3, B:104:0x016a, B:105:0x0175, B:152:0x021d, B:153:0x0226, B:117:0x0197, B:137:0x01e6, B:139:0x01f5, B:5:0x0024, B:7:0x0028, B:16:0x0039, B:18:0x0041, B:85:0x013b, B:19:0x004e, B:21:0x0054, B:23:0x005f, B:25:0x0063, B:27:0x006f, B:29:0x0078, B:31:0x007c, B:33:0x0081, B:35:0x0085, B:40:0x0097, B:38:0x0091, B:41:0x009a, B:43:0x009e, B:45:0x00a2, B:47:0x00a6, B:48:0x00a9, B:49:0x00b6, B:51:0x00ba, B:53:0x00be, B:55:0x00ca, B:56:0x00d8, B:58:0x00dc, B:60:0x00e2, B:62:0x00e8, B:66:0x00f0, B:68:0x00f6, B:70:0x0102, B:71:0x0109, B:72:0x010a, B:74:0x010e, B:76:0x0112, B:77:0x0118, B:79:0x011c, B:81:0x0120, B:82:0x012c, B:165:0x0244, B:164:0x0239), top: B:180:0x001f, inners: #0, #2, #5, #6, #7, #8, #9 }] */
+        /* JADX WARN: Removed duplicated region for block: B:114:0x018b A[Catch: all -> 0x0251, TRY_LEAVE, TryCatch #1 {all -> 0x0251, blocks: (B:3:0x001f, B:4:0x0023, B:87:0x013e, B:90:0x0147, B:92:0x014f, B:93:0x0153, B:100:0x0163, B:101:0x0164, B:102:0x0168, B:109:0x0179, B:111:0x017c, B:114:0x018b, B:118:0x01a8, B:126:0x01b9, B:129:0x01d0, B:131:0x01d5, B:132:0x01d8, B:134:0x01da, B:141:0x01f9, B:143:0x01fe, B:144:0x0201, B:145:0x0202, B:149:0x0210, B:150:0x021b, B:157:0x022a, B:120:0x01ad, B:121:0x01b0, B:168:0x0250, B:95:0x0155, B:96:0x015e, B:128:0x01c3, B:104:0x016a, B:105:0x0175, B:152:0x021d, B:153:0x0226, B:117:0x0197, B:137:0x01e6, B:139:0x01f5, B:5:0x0024, B:7:0x0028, B:16:0x0039, B:18:0x0041, B:85:0x013b, B:19:0x004e, B:21:0x0054, B:23:0x005f, B:25:0x0063, B:27:0x006f, B:29:0x0078, B:31:0x007c, B:33:0x0081, B:35:0x0085, B:40:0x0097, B:38:0x0091, B:41:0x009a, B:43:0x009e, B:45:0x00a2, B:47:0x00a6, B:48:0x00a9, B:49:0x00b6, B:51:0x00ba, B:53:0x00be, B:55:0x00ca, B:56:0x00d8, B:58:0x00dc, B:60:0x00e2, B:62:0x00e8, B:66:0x00f0, B:68:0x00f6, B:70:0x0102, B:71:0x0109, B:72:0x010a, B:74:0x010e, B:76:0x0112, B:77:0x0118, B:79:0x011c, B:81:0x0120, B:82:0x012c, B:165:0x0244, B:164:0x0239), top: B:180:0x001f, inners: #0, #2, #5, #6, #7, #8, #9 }] */
+        /* JADX WARN: Removed duplicated region for block: B:124:0x01b5  */
+        /* JADX WARN: Removed duplicated region for block: B:126:0x01b9 A[Catch: all -> 0x0251, TRY_LEAVE, TryCatch #1 {all -> 0x0251, blocks: (B:3:0x001f, B:4:0x0023, B:87:0x013e, B:90:0x0147, B:92:0x014f, B:93:0x0153, B:100:0x0163, B:101:0x0164, B:102:0x0168, B:109:0x0179, B:111:0x017c, B:114:0x018b, B:118:0x01a8, B:126:0x01b9, B:129:0x01d0, B:131:0x01d5, B:132:0x01d8, B:134:0x01da, B:141:0x01f9, B:143:0x01fe, B:144:0x0201, B:145:0x0202, B:149:0x0210, B:150:0x021b, B:157:0x022a, B:120:0x01ad, B:121:0x01b0, B:168:0x0250, B:95:0x0155, B:96:0x015e, B:128:0x01c3, B:104:0x016a, B:105:0x0175, B:152:0x021d, B:153:0x0226, B:117:0x0197, B:137:0x01e6, B:139:0x01f5, B:5:0x0024, B:7:0x0028, B:16:0x0039, B:18:0x0041, B:85:0x013b, B:19:0x004e, B:21:0x0054, B:23:0x005f, B:25:0x0063, B:27:0x006f, B:29:0x0078, B:31:0x007c, B:33:0x0081, B:35:0x0085, B:40:0x0097, B:38:0x0091, B:41:0x009a, B:43:0x009e, B:45:0x00a2, B:47:0x00a6, B:48:0x00a9, B:49:0x00b6, B:51:0x00ba, B:53:0x00be, B:55:0x00ca, B:56:0x00d8, B:58:0x00dc, B:60:0x00e2, B:62:0x00e8, B:66:0x00f0, B:68:0x00f6, B:70:0x0102, B:71:0x0109, B:72:0x010a, B:74:0x010e, B:76:0x0112, B:77:0x0118, B:79:0x011c, B:81:0x0120, B:82:0x012c, B:165:0x0244, B:164:0x0239), top: B:180:0x001f, inners: #0, #2, #5, #6, #7, #8, #9 }] */
+        /* JADX WARN: Removed duplicated region for block: B:136:0x01e4  */
+        /* JADX WARN: Removed duplicated region for block: B:147:0x020c  */
+        /* JADX WARN: Removed duplicated region for block: B:159:0x022e  */
+        /* JADX WARN: Removed duplicated region for block: B:162:0x0233  */
+        /* JADX WARN: Removed duplicated region for block: B:196:0x0257 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:201:0x0142 A[SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private void guardedRun() throws java.lang.InterruptedException {
-            /*
-                Method dump skipped, instructions count: 610
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.opengl.GLSurfaceView.GLThread.guardedRun():void");
+        private void guardedRun() throws InterruptedException {
+            Runnable runnable;
+            boolean z;
+            GLSurfaceView gLSurfaceView;
+            int iSwap;
+            boolean z2;
+            this.mEglHelper = new EglHelper(this.mGLSurfaceViewWeakRef);
+            this.mHaveEglContext = false;
+            this.mHaveEglSurface = false;
+            this.mWantRenderNotification = false;
+            boolean z3 = false;
+            boolean z4 = false;
+            boolean z5 = false;
+            boolean z6 = false;
+            boolean z7 = false;
+            boolean z8 = false;
+            boolean z9 = false;
+            boolean z10 = false;
+            int i = 0;
+            int i2 = 0;
+            Runnable runnable2 = null;
+            GL10 gl10 = null;
+            Runnable runnableRemove = null;
+            while (true) {
+                try {
+                    synchronized (GLSurfaceView.sGLThreadManager) {
+                        while (!this.mShouldExit) {
+                            if (!this.mEventQueue.isEmpty()) {
+                                runnableRemove = this.mEventQueue.remove(0);
+                                runnable = null;
+                            } else {
+                                boolean z11 = this.mPaused;
+                                boolean z12 = this.mRequestPaused;
+                                if (z11 != z12) {
+                                    this.mPaused = z12;
+                                    GLSurfaceView.sGLThreadManager.notifyAll();
+                                } else {
+                                    z12 = false;
+                                }
+                                if (this.mShouldReleaseEglContext) {
+                                    stopEglSurfaceLocked();
+                                    stopEglContextLocked();
+                                    this.mShouldReleaseEglContext = false;
+                                    z5 = true;
+                                }
+                                if (z3) {
+                                    stopEglSurfaceLocked();
+                                    stopEglContextLocked();
+                                    z3 = false;
+                                }
+                                if (z12 && this.mHaveEglSurface) {
+                                    stopEglSurfaceLocked();
+                                }
+                                if (z12 && this.mHaveEglContext) {
+                                    GLSurfaceView gLSurfaceView2 = this.mGLSurfaceViewWeakRef.get();
+                                    if (!(gLSurfaceView2 == null ? false : gLSurfaceView2.mPreserveEGLContextOnPause)) {
+                                        stopEglContextLocked();
+                                    }
+                                }
+                                if (!this.mHasSurface && !this.mWaitingForSurface) {
+                                    if (this.mHaveEglSurface) {
+                                        stopEglSurfaceLocked();
+                                    }
+                                    this.mWaitingForSurface = true;
+                                    this.mSurfaceIsBad = false;
+                                    GLSurfaceView.sGLThreadManager.notifyAll();
+                                }
+                                if (this.mHasSurface && this.mWaitingForSurface) {
+                                    this.mWaitingForSurface = false;
+                                    GLSurfaceView.sGLThreadManager.notifyAll();
+                                }
+                                if (z4) {
+                                    this.mWantRenderNotification = false;
+                                    this.mRenderComplete = true;
+                                    GLSurfaceView.sGLThreadManager.notifyAll();
+                                    z4 = false;
+                                }
+                                Runnable runnable3 = this.mFinishDrawingRunnable;
+                                if (runnable3 != null) {
+                                    runnable = null;
+                                    this.mFinishDrawingRunnable = null;
+                                    runnable2 = runnable3;
+                                } else {
+                                    runnable = null;
+                                }
+                                if (readyToDraw()) {
+                                    if (!this.mHaveEglContext) {
+                                        if (z5) {
+                                            z5 = false;
+                                        } else {
+                                            try {
+                                                this.mEglHelper.start();
+                                                this.mHaveEglContext = true;
+                                                GLSurfaceView.sGLThreadManager.notifyAll();
+                                                z6 = true;
+                                            } catch (RuntimeException e) {
+                                                GLSurfaceView.sGLThreadManager.releaseEglContextLocked(this);
+                                                throw e;
+                                            }
+                                        }
+                                    }
+                                    if (this.mHaveEglContext && !this.mHaveEglSurface) {
+                                        this.mHaveEglSurface = true;
+                                        z7 = true;
+                                        z8 = true;
+                                        z9 = true;
+                                    }
+                                    if (this.mHaveEglSurface) {
+                                        if (this.mSizeChanged) {
+                                            i = this.mWidth;
+                                            i2 = this.mHeight;
+                                            this.mWantRenderNotification = true;
+                                            this.mSizeChanged = false;
+                                            z7 = true;
+                                            z9 = true;
+                                        }
+                                        this.mRequestRender = false;
+                                        GLSurfaceView.sGLThreadManager.notifyAll();
+                                        if (this.mWantRenderNotification) {
+                                            z10 = true;
+                                        }
+                                    }
+                                } else if (runnable2 != null) {
+                                    Log.w(TAG, "Warning, !readyToDraw() but waiting for draw finished! Early reporting draw finished.");
+                                    runnable2.run();
+                                    runnable2 = null;
+                                }
+                                GLSurfaceView.sGLThreadManager.wait();
+                            }
+                        }
+                        synchronized (GLSurfaceView.sGLThreadManager) {
+                            stopEglSurfaceLocked();
+                            stopEglContextLocked();
+                        }
+                        return;
+                    }
+                } catch (Throwable th) {
+                    synchronized (GLSurfaceView.sGLThreadManager) {
+                    }
+                }
+                if (runnableRemove != null) {
+                    runnableRemove.run();
+                    runnableRemove = runnable;
+                } else {
+                    if (z7) {
+                        if (this.mEglHelper.createSurface()) {
+                            synchronized (GLSurfaceView.sGLThreadManager) {
+                                this.mFinishedCreatingEglSurface = true;
+                                GLSurfaceView.sGLThreadManager.notifyAll();
+                            }
+                            z7 = false;
+                            if (z8) {
+                            }
+                            boolean z13 = z3;
+                            if (z6) {
+                            }
+                            if (z9) {
+                            }
+                            gLSurfaceView = this.mGLSurfaceViewWeakRef.get();
+                            if (gLSurfaceView != null) {
+                            }
+                            iSwap = this.mEglHelper.swap();
+                            if (iSwap != 12288) {
+                            }
+                            z3 = z;
+                            if (z10) {
+                            }
+                        } else {
+                            synchronized (GLSurfaceView.sGLThreadManager) {
+                                this.mFinishedCreatingEglSurface = true;
+                                this.mSurfaceIsBad = true;
+                                GLSurfaceView.sGLThreadManager.notifyAll();
+                            }
+                        }
+                        synchronized (GLSurfaceView.sGLThreadManager) {
+                            stopEglSurfaceLocked();
+                            stopEglContextLocked();
+                            throw th;
+                        }
+                    }
+                    if (z8) {
+                        gl10 = (GL10) this.mEglHelper.createGL();
+                        z8 = false;
+                    }
+                    boolean z132 = z3;
+                    if (z6) {
+                        z = z132;
+                    } else {
+                        GLSurfaceView gLSurfaceView3 = this.mGLSurfaceViewWeakRef.get();
+                        if (gLSurfaceView3 != null) {
+                            z = z132;
+                            try {
+                                Trace.traceBegin(8L, "onSurfaceCreated");
+                                gLSurfaceView3.mRenderer.onSurfaceCreated(gl10, this.mEglHelper.mEglConfig);
+                                Trace.traceEnd(8L);
+                            } finally {
+                            }
+                        } else {
+                            z = z132;
+                        }
+                        z6 = false;
+                    }
+                    if (z9) {
+                        GLSurfaceView gLSurfaceView4 = this.mGLSurfaceViewWeakRef.get();
+                        if (gLSurfaceView4 != null) {
+                            try {
+                                Trace.traceBegin(8L, "onSurfaceChanged");
+                                gLSurfaceView4.mRenderer.onSurfaceChanged(gl10, i, i2);
+                                Trace.traceEnd(8L);
+                            } finally {
+                            }
+                        }
+                        z9 = false;
+                    }
+                    gLSurfaceView = this.mGLSurfaceViewWeakRef.get();
+                    if (gLSurfaceView != null) {
+                        try {
+                            Trace.traceBegin(8L, "onDrawFrame");
+                            gLSurfaceView.mRenderer.onDrawFrame(gl10);
+                            if (runnable2 != null) {
+                                runnable2.run();
+                                runnable2 = null;
+                            }
+                            Trace.traceEnd(8L);
+                        } finally {
+                        }
+                    }
+                    iSwap = this.mEglHelper.swap();
+                    if (iSwap != 12288) {
+                        z2 = true;
+                    } else if (iSwap != 12302) {
+                        EglHelper.logEglErrorAsWarning(TAG, "eglSwapBuffers", iSwap);
+                        synchronized (GLSurfaceView.sGLThreadManager) {
+                            z2 = true;
+                            this.mSurfaceIsBad = true;
+                            GLSurfaceView.sGLThreadManager.notifyAll();
+                        }
+                    } else {
+                        z2 = true;
+                        z3 = true;
+                        if (z10) {
+                            z4 = z2;
+                            z10 = false;
+                        }
+                    }
+                    z3 = z;
+                    if (z10) {
+                    }
+                }
+            }
         }
 
         public boolean ableToDraw() {

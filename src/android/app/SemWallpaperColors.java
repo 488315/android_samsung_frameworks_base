@@ -18,10 +18,12 @@ import com.samsung.android.wallpaper.colortheme.ColorThemeExtractor;
 import com.samsung.android.wallpaper.colortheme.StandardColorPaletteCreator;
 import com.samsung.android.wallpaper.legibilitycolors.ColorHSV;
 import com.samsung.android.wallpaper.legibilitycolors.LegibilityAutoDim;
+import com.samsung.android.wallpaper.legibilitycolors.LegibilityColorByHSV;
 import com.samsung.android.wallpaper.legibilitycolors.LegibilityDefinition;
 import com.samsung.android.wallpaper.legibilitycolors.LegibilityLogic;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
+import com.samsung.android.wallpaper.legibilitycolors.utils.image.BitmapHelper;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -176,7 +178,8 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         return new SemWallpaperColors(2, new Item(0, 1.0f, 0.1f), null);
     }
 
-    public void save(String str) {
+    public void save(String str) throws Throwable {
+        FileOutputStream fileOutputStream;
         Log.d(TAG, "save " + str);
         if (str == null) {
             Log.e(TAG, "save, path == null");
@@ -188,42 +191,43 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        FileOutputStream fileOutputStream = null;
+        FileOutputStream fileOutputStream2 = null;
         try {
             try {
                 try {
-                    FileOutputStream fileOutputStream2 = new FileOutputStream(file);
-                    try {
-                        fileOutputStream2.write(xmlGenerator().getBytes(StandardCharsets.UTF_8));
-                        Log.d(TAG, "save done");
-                        fileOutputStream2.close();
-                    } catch (Exception e2) {
-                        e = e2;
-                        fileOutputStream = fileOutputStream2;
-                        e.printStackTrace();
-                        if (fileOutputStream != null) {
-                            fileOutputStream.close();
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        fileOutputStream = fileOutputStream2;
-                        if (fileOutputStream != null) {
-                            try {
-                                fileOutputStream.close();
-                            } catch (IOException e3) {
-                                e3.printStackTrace();
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
+                    fileOutputStream = new FileOutputStream(file);
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                    return;
                 }
-            } catch (Exception e4) {
-                e = e4;
+            } catch (Exception e3) {
+                e = e3;
             }
-        } catch (IOException e5) {
-            e5.printStackTrace();
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            fileOutputStream.write(xmlGenerator().getBytes(StandardCharsets.UTF_8));
+            Log.d(TAG, "save done");
+            fileOutputStream.close();
+        } catch (Exception e4) {
+            e = e4;
+            fileOutputStream2 = fileOutputStream;
+            e.printStackTrace();
+            if (fileOutputStream2 != null) {
+                fileOutputStream2.close();
+            }
+        } catch (Throwable th2) {
+            th = th2;
+            fileOutputStream2 = fileOutputStream;
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (IOException e5) {
+                    e5.printStackTrace();
+                }
+            }
+            throw th;
         }
     }
 
@@ -301,10 +305,10 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         this.mDataList = new ArrayList<>();
         this.mColorTableList = new ArrayList();
         this.mColorTableListGoogle = new ArrayList();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        init(null, readInt, 0);
-        for (int i = 0; i < readInt2; i++) {
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        init(null, i, 0);
+        for (int i3 = 0; i3 < i2; i3++) {
             Rect rect = (Rect) parcel.readParcelable(Rect.class.getClassLoader());
             Item item = new Item();
             item.setFontColor(parcel.readInt());
@@ -312,7 +316,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             item.setShadowSize(parcel.readFloat());
             item.setShadowOpacity(parcel.readFloat());
             item.setHSV(parcel.createFloatArray());
-            WallpaperColorsData wallpaperColorsData = this.mDataList.get(i);
+            WallpaperColorsData wallpaperColorsData = this.mDataList.get(i3);
             if (wallpaperColorsData != null) {
                 wallpaperColorsData.setRect(rect);
                 wallpaperColorsData.setItem(item);
@@ -327,7 +331,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         this.mSeedColors = parcel.createIntArray();
     }
 
-    private SemWallpaperColors(String str) {
+    private SemWallpaperColors(String str) throws XmlPullParserException, IOException {
         this.mWhich = 0;
         this.mCurrentResolution = null;
         this.mAdaptiveDimOpacity = 0.0f;
@@ -484,32 +488,96 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         if (rect.left < 0 || rect.top < 0 || rect.right - rect.left <= 0 || rect.bottom - rect.top <= 0) {
             return;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
         boolean z2 = false;
         if (!isWatchFaceLargeDisplay(this.mWhich) && (isWatchFaceDisplay(this.mWhich) || isVirtualDisplay(this.mWhich))) {
-            wallpaperColorsData.setItem(fromBitmapInternal(createBitmap, item, false));
+            wallpaperColorsData.setItem(fromBitmapInternal(bitmapCreateBitmap, item, false));
             return;
         }
         if (z && this.mDataList.indexOf(wallpaperColorsData) == 0) {
             z2 = true;
         }
-        wallpaperColorsData.setItem(fromBitmapInternal(createBitmap, item, z2));
+        wallpaperColorsData.setItem(fromBitmapInternal(bitmapCreateBitmap, item, z2));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x014e, code lost:
-    
-        if (r0.equals("HD") != false) goto L40;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0151 A[PHI: r6
+      0x0151: PHI (r6v5 float) = (r6v2 float), (r6v6 float) binds: [B:42:0x0164, B:35:0x014e] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x015c A[PHI: r6
+      0x015c: PHI (r6v3 float) = (r6v2 float), (r6v6 float) binds: [B:39:0x015a, B:35:0x014e] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.app.SemWallpaperColors.Item fromBitmapInternal(android.graphics.Bitmap r17, android.app.SemWallpaperColors.Item r18, boolean r19) {
-        /*
-            Method dump skipped, instructions count: 491
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SemWallpaperColors.fromBitmapInternal(android.graphics.Bitmap, android.app.SemWallpaperColors$Item, boolean):android.app.SemWallpaperColors$Item");
+    private Item fromBitmapInternal(Bitmap bitmap, Item item, boolean z) {
+        float f;
+        Log.d(TAG, "fromBitmap " + bitmap.getWidth() + ", " + bitmap.getHeight() + ", major = " + item + ", indicator = " + z);
+        int i = 2;
+        float f2 = 1.0f;
+        LegibilityLogic.LegibilityResult legibilityResult = null;
+        if (z) {
+            Bitmap leftIndicator = getLeftIndicator(bitmap);
+            Bitmap rightIndicator = getRightIndicator(bitmap);
+            if (leftIndicator == null || rightIndicator == null) {
+                Log.e(TAG, "fromBitmap indicator left/right bitmap == null");
+                return new Item(0, 1.0f, 0.1f);
+            }
+            float fFineScaleValueBySquareRootSize = BitmapHelper.fineScaleValueBySquareRootSize(leftIndicator.getWidth(), leftIndicator.getHeight(), 100);
+            Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(leftIndicator, (int) (leftIndicator.getWidth() * fFineScaleValueBySquareRootSize), (int) (leftIndicator.getHeight() * fFineScaleValueBySquareRootSize), false);
+            float fFineScaleValueBySquareRootSize2 = BitmapHelper.fineScaleValueBySquareRootSize(rightIndicator.getWidth(), rightIndicator.getHeight(), 100);
+            Bitmap bitmapCreateScaledBitmap2 = Bitmap.createScaledBitmap(rightIndicator, (int) (rightIndicator.getWidth() * fFineScaleValueBySquareRootSize2), (int) (rightIndicator.getHeight() * fFineScaleValueBySquareRootSize2), false);
+            LegibilityColorByHSV.EdgeCaseResultForIndicator edgeCaseResultForIndicatorCalcurateIndicatorLegibility = LegibilityColorByHSV.calcurateIndicatorLegibility(getIndicatorPixels(bitmapCreateScaledBitmap, bitmapCreateScaledBitmap2));
+            if (edgeCaseResultForIndicatorCalcurateIndicatorLegibility.colorType == LegibilityDefinition.ColorType.DARK) {
+                i = 1;
+            } else if (edgeCaseResultForIndicatorCalcurateIndicatorLegibility.colorType != LegibilityDefinition.ColorType.GRAY) {
+                i = 0;
+            }
+            int i2 = edgeCaseResultForIndicatorCalcurateIndicatorLegibility.color;
+            LegibilityLogic.LegibilityResult legibilityResultCalculateTotalLegibilityResult = LegibilityLogic.calculateTotalLegibilityResult(bitmapCreateScaledBitmap, null, edgeCaseResultForIndicatorCalcurateIndicatorLegibility.colorType, 0);
+            LegibilityLogic.LegibilityResult legibilityResultCalculateTotalLegibilityResult2 = LegibilityLogic.calculateTotalLegibilityResult(bitmapCreateScaledBitmap2, null, edgeCaseResultForIndicatorCalcurateIndicatorLegibility.colorType, 0);
+            bitmapCreateScaledBitmap.recycle();
+            bitmapCreateScaledBitmap2.recycle();
+            Log.d(TAG, "edgeCase " + i + ", " + Integer.toHexString(i2));
+            return new Item(i, i2, legibilityResultCalculateTotalLegibilityResult, legibilityResultCalculateTotalLegibilityResult2);
+        }
+        float fFineScaleValueBySquareRootSize3 = BitmapHelper.fineScaleValueBySquareRootSize(bitmap.getWidth(), bitmap.getHeight(), 100);
+        Bitmap bitmapCreateScaledBitmap3 = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fFineScaleValueBySquareRootSize3), (int) (bitmap.getHeight() * fFineScaleValueBySquareRootSize3), false);
+        if (item != null) {
+            LegibilityDefinition.ColorType colorType = LegibilityDefinition.ColorType.LIGHT;
+            if (item.getFontColor() == 1) {
+                colorType = LegibilityDefinition.ColorType.DARK;
+            }
+            legibilityResult = new LegibilityLogic.LegibilityResult(colorType, item.getHSV());
+        }
+        LegibilityLogic.LegibilityResult legibilityResultCalculateTotalLegibilityResult3 = LegibilityLogic.calculateTotalLegibilityResult(bitmapCreateScaledBitmap3, legibilityResult, 0);
+        if (legibilityResultCalculateTotalLegibilityResult3.contentsColorType == LegibilityDefinition.ColorType.DARK) {
+            i = 1;
+        } else if (legibilityResultCalculateTotalLegibilityResult3.contentsColorType != LegibilityDefinition.ColorType.GRAY) {
+            i = 0;
+        }
+        int i3 = legibilityResultCalculateTotalLegibilityResult3.adjustedContentsColor;
+        String currentResolution = getCurrentResolution();
+        float f3 = 6.0f;
+        if (legibilityResultCalculateTotalLegibilityResult3.contentsColorType == LegibilityDefinition.ColorType.LIGHT) {
+            f = 0.4f;
+            if (currentResolution.equals("HD")) {
+                f3 = 3.0f;
+            } else {
+                f2 = 2.0f;
+            }
+        } else {
+            f = 0.3f;
+            if (!currentResolution.equals("HD")) {
+                if (!currentResolution.equals("FHD")) {
+                    f2 = 3.0f;
+                }
+            }
+        }
+        Log.d(TAG, "resolution = " + currentResolution + "size min = " + f2 + ", max = " + f3 + ", opacity min = " + f + ", max = 0.9");
+        float interpolatedShadowSize = LegibilityLogic.getInterpolatedShadowSize(legibilityResultCalculateTotalLegibilityResult3.adaptiveShadowData, f2, f3);
+        float interpolatedShadowOpacity = LegibilityLogic.getInterpolatedShadowOpacity(legibilityResultCalculateTotalLegibilityResult3.adaptiveShadowData, f, 0.9f);
+        Log.d(TAG, "colorType=" + i + ", rgb=" + i3 + ", shadowData=" + interpolatedShadowSize + "/" + interpolatedShadowOpacity + " avgHSV= " + Arrays.toString(legibilityResultCalculateTotalLegibilityResult3.avgHSV));
+        Item item2 = new Item(i, i3, interpolatedShadowSize, interpolatedShadowOpacity, legibilityResultCalculateTotalLegibilityResult3.avgHSV, legibilityResultCalculateTotalLegibilityResult3);
+        bitmapCreateScaledBitmap3.recycle();
+        return item2;
     }
 
     private int[] getIndicatorPixels(Bitmap bitmap, Bitmap bitmap2) {
@@ -540,8 +608,8 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         Rect rect = this.mArea.get(0);
-        int max = Math.max(1, Math.min(width, (int) (Resources.getSystem().getDisplayMetrics().density * 76.0f * (width / (rect.right - rect.left)))));
-        return Bitmap.createBitmap(bitmap, Math.max(0, width - max), 0, max, height);
+        int iMax = Math.max(1, Math.min(width, (int) (Resources.getSystem().getDisplayMetrics().density * 76.0f * (width / (rect.right - rect.left)))));
+        return Bitmap.createBitmap(bitmap, Math.max(0, width - iMax), 0, iMax, height);
     }
 
     private void calcAdaptiveDim() {
@@ -568,9 +636,9 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             }
         }
         if (arrayList.size() > 0) {
-            LegibilityAutoDim.AutoDimResult calculateAdaptiveDim = LegibilityAutoDim.calculateAdaptiveDim((LegibilityLogic.LegibilityResult[]) arrayList.toArray(new LegibilityLogic.LegibilityResult[arrayList.size()]));
-            this.mAdaptiveDimOpacity = calculateAdaptiveDim.opacity;
-            this.mAdaptiveDimColor = calculateAdaptiveDim.color;
+            LegibilityAutoDim.AutoDimResult autoDimResultCalculateAdaptiveDim = LegibilityAutoDim.calculateAdaptiveDim((LegibilityLogic.LegibilityResult[]) arrayList.toArray(new LegibilityLogic.LegibilityResult[arrayList.size()]));
+            this.mAdaptiveDimOpacity = autoDimResultCalculateAdaptiveDim.opacity;
+            this.mAdaptiveDimColor = autoDimResultCalculateAdaptiveDim.color;
             Log.d(TAG, "calcAdaptiveDim, " + this.mAdaptiveDimOpacity + ", " + Integer.toHexString(this.mAdaptiveDimColor));
         }
     }
@@ -635,47 +703,47 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         Log.d(TAG, "calcDarkModeDim, " + this.mDarkModeDimOpacity);
     }
 
-    private String xmlGenerator() {
-        XmlSerializer newSerializer = Xml.newSerializer();
+    private String xmlGenerator() throws IllegalStateException, IOException, IllegalArgumentException {
+        XmlSerializer xmlSerializerNewSerializer = Xml.newSerializer();
         StringWriter stringWriter = new StringWriter();
         try {
-            newSerializer.setOutput(stringWriter);
-            newSerializer.startDocument(null, true);
-            newSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-            newSerializer.startTag(null, "Version");
-            newSerializer.text("22");
-            newSerializer.endTag(null, "Version");
-            newSerializer.startTag(null, "Which");
-            newSerializer.text("" + this.mWhich);
-            newSerializer.endTag(null, "Which");
-            newSerializer.startTag(null, "AdaptiveDimOpacity");
-            newSerializer.text("" + this.mAdaptiveDimOpacity);
-            newSerializer.endTag(null, "AdaptiveDimOpacity");
-            newSerializer.startTag(null, "AdaptiveDimColor");
-            newSerializer.text("" + this.mAdaptiveDimColor);
-            newSerializer.endTag(null, "AdaptiveDimColor");
-            newSerializer.startTag(null, "DarkModeDimOpacity");
-            newSerializer.text("" + this.mDarkModeDimOpacity);
-            newSerializer.endTag(null, "DarkModeDimOpacity");
+            xmlSerializerNewSerializer.setOutput(stringWriter);
+            xmlSerializerNewSerializer.startDocument(null, true);
+            xmlSerializerNewSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            xmlSerializerNewSerializer.startTag(null, "Version");
+            xmlSerializerNewSerializer.text("22");
+            xmlSerializerNewSerializer.endTag(null, "Version");
+            xmlSerializerNewSerializer.startTag(null, "Which");
+            xmlSerializerNewSerializer.text("" + this.mWhich);
+            xmlSerializerNewSerializer.endTag(null, "Which");
+            xmlSerializerNewSerializer.startTag(null, "AdaptiveDimOpacity");
+            xmlSerializerNewSerializer.text("" + this.mAdaptiveDimOpacity);
+            xmlSerializerNewSerializer.endTag(null, "AdaptiveDimOpacity");
+            xmlSerializerNewSerializer.startTag(null, "AdaptiveDimColor");
+            xmlSerializerNewSerializer.text("" + this.mAdaptiveDimColor);
+            xmlSerializerNewSerializer.endTag(null, "AdaptiveDimColor");
+            xmlSerializerNewSerializer.startTag(null, "DarkModeDimOpacity");
+            xmlSerializerNewSerializer.text("" + this.mDarkModeDimOpacity);
+            xmlSerializerNewSerializer.endTag(null, "DarkModeDimOpacity");
             int[] iArr = this.mSeedColors;
             if (iArr != null && iArr.length > 0) {
-                newSerializer.startTag(null, "SeedColors");
-                newSerializer.text(Arrays.toString(this.mSeedColors));
-                newSerializer.endTag(null, "SeedColors");
+                xmlSerializerNewSerializer.startTag(null, "SeedColors");
+                xmlSerializerNewSerializer.text(Arrays.toString(this.mSeedColors));
+                xmlSerializerNewSerializer.endTag(null, "SeedColors");
             }
             Iterator<WallpaperColorsData> it = this.mDataList.iterator();
             while (it.hasNext()) {
                 WallpaperColorsData next = it.next();
-                xmlWrite(newSerializer, next.getRect(), next.getItem());
+                xmlWrite(xmlSerializerNewSerializer, next.getRect(), next.getItem());
             }
-            newSerializer.endDocument();
+            xmlSerializerNewSerializer.endDocument();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return stringWriter.toString();
     }
 
-    private void xmlWrite(XmlSerializer xmlSerializer, Rect rect, Item item) {
+    private void xmlWrite(XmlSerializer xmlSerializer, Rect rect, Item item) throws IllegalStateException, IOException, IllegalArgumentException {
         if (rect == null || item == null) {
             Log.e(TAG, "xmlWrite check null");
             return;
@@ -722,16 +790,16 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     }
 
     private static int[] stringToIntArray(String str) {
-        String[] split = str.replace(NavigationBarInflaterView.SIZE_MOD_START, "").replace(NavigationBarInflaterView.SIZE_MOD_END, "").split(", ");
-        int length = split.length;
+        String[] strArrSplit = str.replace(NavigationBarInflaterView.SIZE_MOD_START, "").replace(NavigationBarInflaterView.SIZE_MOD_END, "").split(", ");
+        int length = strArrSplit.length;
         int[] iArr = new int[length];
         for (int i = 0; i < length; i++) {
-            iArr[i] = Integer.parseInt(split[i]);
+            iArr[i] = Integer.parseInt(strArrSplit[i]);
         }
         return iArr;
     }
 
-    private void xmlParser(String str) {
+    private void xmlParser(String str) throws XmlPullParserException, IOException {
         ByteArrayInputStream byteArrayInputStream;
         Log.d(TAG, "xmlParser");
         try {
@@ -741,73 +809,73 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             byteArrayInputStream = null;
         }
         try {
-            XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-            newPullParser.setInput(new InputStreamReader(byteArrayInputStream, "UTF-8"));
+            XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+            xmlPullParserNewPullParser.setInput(new InputStreamReader(byteArrayInputStream, "UTF-8"));
             Rect rect = new Rect();
             Item item = new Item();
             int i = 0;
-            for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.next()) {
+            for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.next()) {
                 if (eventType == 2) {
-                    String name = newPullParser.getName();
+                    String name = xmlPullParserNewPullParser.getName();
                     if (name.equals("Which")) {
-                        init(null, Integer.parseInt(newPullParser.nextText()), 0);
+                        init(null, Integer.parseInt(xmlPullParserNewPullParser.nextText()), 0);
                     }
                     if (name.equals(SoundTheme.Default)) {
                         init(null, 2, 0);
                     }
                     if (name.equals("AdaptiveDimOpacity")) {
-                        this.mAdaptiveDimOpacity = Float.parseFloat(newPullParser.nextText());
+                        this.mAdaptiveDimOpacity = Float.parseFloat(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("AdaptieDimColor")) {
-                        this.mAdaptiveDimColor = Integer.parseInt(newPullParser.nextText());
+                        this.mAdaptiveDimColor = Integer.parseInt(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("DarkModeDimOpacity")) {
-                        this.mDarkModeDimOpacity = Float.parseFloat(newPullParser.nextText());
+                        this.mDarkModeDimOpacity = Float.parseFloat(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("Rect")) {
                         rect = new Rect();
                     }
                     if (name.equals("Left")) {
-                        rect.left = Integer.parseInt(newPullParser.nextText());
+                        rect.left = Integer.parseInt(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("Top")) {
-                        rect.top = Integer.parseInt(newPullParser.nextText());
+                        rect.top = Integer.parseInt(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("Right")) {
-                        rect.right = Integer.parseInt(newPullParser.nextText());
+                        rect.right = Integer.parseInt(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("Bottom")) {
-                        rect.bottom = Integer.parseInt(newPullParser.nextText());
+                        rect.bottom = Integer.parseInt(xmlPullParserNewPullParser.nextText());
                     }
                     if (name.equals("Legibility")) {
                         item = new Item();
                     }
                     if (name.equals("avgHSV")) {
                         float[] fArr = new float[3];
-                        ColorHSV.colorToHSV(Integer.parseInt(newPullParser.nextText()), fArr);
+                        ColorHSV.colorToHSV(Integer.parseInt(xmlPullParserNewPullParser.nextText()), fArr);
                         item.setHSV(fArr);
                     }
                     if (name.equals("FontColor")) {
-                        item.setFontColor(Integer.parseInt(newPullParser.nextText()));
+                        item.setFontColor(Integer.parseInt(xmlPullParserNewPullParser.nextText()));
                     }
                     if (name.equals("FontColorRgb")) {
-                        item.setFontColorRgb(Integer.parseInt(newPullParser.nextText()));
+                        item.setFontColorRgb(Integer.parseInt(xmlPullParserNewPullParser.nextText()));
                     }
                     if (name.equals("ShadowSize")) {
-                        item.setShadowSize(Float.parseFloat(newPullParser.nextText()));
+                        item.setShadowSize(Float.parseFloat(xmlPullParserNewPullParser.nextText()));
                     }
                     if (name.equals("ShadowOpacity")) {
-                        item.setShadowOpacity(Float.parseFloat(newPullParser.nextText()));
+                        item.setShadowOpacity(Float.parseFloat(xmlPullParserNewPullParser.nextText()));
                     }
                     if (name.equals("SeedColors")) {
-                        String nextText = newPullParser.nextText();
-                        if (!TextUtils.isEmpty(nextText)) {
-                            this.mSeedColors = stringToIntArray(nextText);
+                        String strNextText = xmlPullParserNewPullParser.nextText();
+                        if (!TextUtils.isEmpty(strNextText)) {
+                            this.mSeedColors = stringToIntArray(strNextText);
                         }
                     }
                 } else if (eventType != 3) {
                     continue;
-                } else if (newPullParser.getName().equals("Legibility") && i < this.mDataList.size()) {
+                } else if (xmlPullParserNewPullParser.getName().equals("Legibility") && i < this.mDataList.size()) {
                     int i2 = i + 1;
                     WallpaperColorsData wallpaperColorsData = this.mDataList.get(i);
                     if (wallpaperColorsData != null) {
@@ -835,43 +903,44 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
     }
 
-    private static void saveBitmaptoJpeg(Bitmap bitmap, String str) {
+    private static void saveBitmaptoJpeg(Bitmap bitmap, String str) throws Throwable {
+        FileOutputStream fileOutputStream;
         Log.d(TAG, "saveBitmaptoJpeg " + str);
         if (str == null) {
             return;
         }
-        FileOutputStream fileOutputStream = null;
+        FileOutputStream fileOutputStream2 = null;
         try {
             try {
                 try {
-                    FileOutputStream fileOutputStream2 = new FileOutputStream(str);
-                    try {
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream2);
-                        fileOutputStream2.close();
-                    } catch (Exception e) {
-                        e = e;
-                        fileOutputStream = fileOutputStream2;
-                        e.printStackTrace();
-                        if (fileOutputStream != null) {
-                            fileOutputStream.close();
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        fileOutputStream = fileOutputStream2;
-                        if (fileOutputStream != null) {
-                            try {
-                                fileOutputStream.close();
-                            } catch (IOException e2) {
-                                e2.printStackTrace();
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
+                    fileOutputStream = new FileOutputStream(str);
+                } catch (Exception e) {
+                    e = e;
                 }
-            } catch (Exception e3) {
-                e = e3;
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                fileOutputStream.close();
+            } catch (Exception e2) {
+                e = e2;
+                fileOutputStream2 = fileOutputStream;
+                e.printStackTrace();
+                if (fileOutputStream2 != null) {
+                    fileOutputStream2.close();
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                fileOutputStream2 = fileOutputStream;
+                if (fileOutputStream2 != null) {
+                    try {
+                        fileOutputStream2.close();
+                    } catch (IOException e3) {
+                        e3.printStackTrace();
+                    }
+                }
+                throw th;
             }
         } catch (IOException e4) {
             e4.printStackTrace();
@@ -963,9 +1032,9 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                     WallpaperColorsData next2 = it2.next();
                     next2.getRect();
                     Item item2 = next2.getItem();
-                    int indexOf = this.mDataList.indexOf(next2);
+                    int iIndexOf = this.mDataList.indexOf(next2);
                     if (item2 != null) {
-                        if (indexOf > 0 && indexOf < size) {
+                        if (iIndexOf > 0 && iIndexOf < size) {
                             sb.append(", ");
                         }
                         sb.append(SemWallpaperColorsArea.name(next2.getInternalKey()) + NavigationBarInflaterView.SIZE_MOD_START + item2.getFontColor() + NavigationBarInflaterView.SIZE_MOD_END);
@@ -1055,7 +1124,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
 
     public int getColorThemeColor(long j) {
         int i;
-        WallpaperColorsData wallpaperColorsData;
+        WallpaperColorsData next;
         int i2;
         int[] iArr = this.mSeedColors;
         if (iArr == null || iArr.length <= 0) {
@@ -1100,11 +1169,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             if (!it.hasNext()) {
                 break;
             }
-            wallpaperColorsData = it.next();
-            if (wallpaperColorsData == null) {
+            next = it.next();
+            if (next == null) {
                 Log.d(TAG, "getColorThemeColor: data is null. return FONT_COLOR_WHITE");
-            } else if (wallpaperColorsData.getExternalKey() == j) {
-                Item item2 = wallpaperColorsData.getItem();
+            } else if (next.getExternalKey() == j) {
+                Item item2 = next.getItem();
                 if (item2 == null) {
                     Log.d(TAG, "getColorThemeColor: item is null. return WHITE");
                     return -1;
@@ -1126,9 +1195,9 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                 i3 = i2;
             }
         }
-        wallpaperColorsData = null;
-        if (wallpaperColorsData != null && wallpaperColorsData.getItem() != null) {
-            Log.d(TAG, "getColorThemeColor :" + wallpaperColorsData.getExternalKey() + ", " + wallpaperColorsData.getItem().mFontColor + ", " + i3);
+        next = null;
+        if (next != null && next.getItem() != null) {
+            Log.d(TAG, "getColorThemeColor :" + next.getExternalKey() + ", " + next.getItem().mFontColor + ", " + i3);
             return i3;
         }
         Log.d(TAG, "getColorThemeColor retColor:" + i3);
@@ -1152,16 +1221,16 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemWallpaperColors m585clone() {
+    public SemWallpaperColors m589clone() {
         try {
             SemWallpaperColors semWallpaperColors = (SemWallpaperColors) super.clone();
-            semWallpaperColors.mArea = this.mArea.m598clone();
+            semWallpaperColors.mArea = this.mArea.m602clone();
             semWallpaperColors.mCurrentResolution = this.mCurrentResolution;
             if (this.mDataList != null) {
                 semWallpaperColors.mDataList = new ArrayList<>();
                 Iterator<WallpaperColorsData> it = this.mDataList.iterator();
                 while (it.hasNext()) {
-                    semWallpaperColors.mDataList.add(it.next().m597clone());
+                    semWallpaperColors.mDataList.add(it.next().m601clone());
                 }
             }
             int[] iArr = this.mSeedColors;
@@ -1357,7 +1426,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public Item m596clone() {
+        public Item m600clone() {
             try {
                 Item item = (Item) super.clone();
                 float[] fArr = this.mHSV;
@@ -1375,15 +1444,15 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                 }
                 LegibilityLogic.LegibilityResult legibilityResult = this.mLegibilityResult;
                 if (legibilityResult != null) {
-                    item.mLegibilityResult = legibilityResult.m9627clone();
+                    item.mLegibilityResult = legibilityResult.m9640clone();
                 }
                 LegibilityLogic.LegibilityResult legibilityResult2 = this.mLeftLegibilityResult;
                 if (legibilityResult2 != null) {
-                    item.mLeftLegibilityResult = legibilityResult2.m9627clone();
+                    item.mLeftLegibilityResult = legibilityResult2.m9640clone();
                 }
                 LegibilityLogic.LegibilityResult legibilityResult3 = this.mRightLegibilityResult;
                 if (legibilityResult3 != null) {
-                    item.mRightLegibilityResult = legibilityResult3.m9627clone();
+                    item.mRightLegibilityResult = legibilityResult3.m9640clone();
                 }
                 return item;
             } catch (CloneNotSupportedException e) {
@@ -1476,11 +1545,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public WallpaperColorsData m597clone() {
+        public WallpaperColorsData m601clone() {
             try {
                 WallpaperColorsData wallpaperColorsData = (WallpaperColorsData) super.clone();
                 wallpaperColorsData.mRect = new Rect(this.mRect);
-                wallpaperColorsData.mItem = this.mItem.m596clone();
+                wallpaperColorsData.mItem = this.mItem.m600clone();
                 return wallpaperColorsData;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();

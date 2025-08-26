@@ -45,9 +45,9 @@ public interface ITransportSelectorResultCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITransportSelectorResultCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITransportSelectorResultCallback)) {
-                return (ITransportSelectorResultCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITransportSelectorResultCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITransportSelectorResultCallback)) {
+                return (ITransportSelectorResultCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface ITransportSelectorResultCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IWwanSelectorCallback asInterface = IWwanSelectorCallback.Stub.asInterface(parcel.readStrongBinder());
+                IWwanSelectorCallback iWwanSelectorCallbackAsInterface = IWwanSelectorCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCompleted(asInterface);
+                onCompleted(iWwanSelectorCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,13 +100,13 @@ public interface ITransportSelectorResultCallback extends IInterface {
 
             @Override // com.android.internal.telephony.ITransportSelectorResultCallback
             public void onCompleted(IWwanSelectorCallback iWwanSelectorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITransportSelectorResultCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWwanSelectorCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITransportSelectorResultCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWwanSelectorCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

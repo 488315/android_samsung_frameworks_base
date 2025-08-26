@@ -146,16 +146,16 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
 
     protected ParsedApexSystemServiceImpl(Parcel parcel) {
         parcel.readByte();
-        String unparcel = sParcellingForName.unparcel(parcel);
-        String unparcel2 = sParcellingForJarPath.unparcel(parcel);
-        String unparcel3 = sParcellingForMinSdkVersion.unparcel(parcel);
-        String unparcel4 = sParcellingForMaxSdkVersion.unparcel(parcel);
-        int readInt = parcel.readInt();
-        this.name = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.jarPath = unparcel2;
-        this.minSdkVersion = unparcel3;
-        this.maxSdkVersion = unparcel4;
-        this.initOrder = readInt;
+        String strUnparcel = sParcellingForName.unparcel(parcel);
+        String strUnparcel2 = sParcellingForJarPath.unparcel(parcel);
+        String strUnparcel3 = sParcellingForMinSdkVersion.unparcel(parcel);
+        String strUnparcel4 = sParcellingForMaxSdkVersion.unparcel(parcel);
+        int i = parcel.readInt();
+        this.name = strUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) strUnparcel);
+        this.jarPath = strUnparcel2;
+        this.minSdkVersion = strUnparcel3;
+        this.maxSdkVersion = strUnparcel4;
+        this.initOrder = i;
     }
 }

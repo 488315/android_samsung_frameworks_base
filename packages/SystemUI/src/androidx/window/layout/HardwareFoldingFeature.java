@@ -5,7 +5,6 @@ import androidx.window.layout.FoldingFeature;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HardwareFoldingFeature implements FoldingFeature {
     public static final Companion Companion = new Companion(null);
@@ -13,7 +12,6 @@ public final class HardwareFoldingFeature implements FoldingFeature {
     public final FoldingFeature.State state;
     public final Type type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -23,14 +21,12 @@ public final class HardwareFoldingFeature implements FoldingFeature {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Type {
         public static final Companion Companion = new Companion(null);
         public static final Type FOLD = new Type("FOLD");
         public static final Type HINGE = new Type("HINGE");
         public final String description;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();

@@ -19,7 +19,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BringIntoViewModifierNodeKt {
     public static final Object bringIntoView(DelegatableNode delegatableNode, final Function0 function0, ContinuationImpl continuationImpl) {
@@ -34,59 +33,59 @@ public abstract class BringIntoViewModifierNodeKt {
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = node.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(delegatableNode);
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(delegatableNode);
         loop0: while (true) {
             obj = null;
-            if (requireLayoutNode == null) {
+            if (layoutNodeRequireLayoutNode == null) {
                 break;
             }
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
                 while (node2 != null) {
                     if ((node2.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
-                        Modifier.Node node3 = node2;
+                        Modifier.Node nodeAccess$pop = node2;
                         MutableVector mutableVector = null;
-                        while (node3 != null) {
-                            if (node3 instanceof BringIntoViewModifierNode) {
-                                obj = node3;
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof BringIntoViewModifierNode) {
+                                obj = nodeAccess$pop;
                                 break loop0;
                             }
-                            if ((node3.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0 && (node3 instanceof DelegatingNode)) {
+                            if ((nodeAccess$pop.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i = 0;
-                                for (Modifier.Node node4 = ((DelegatingNode) node3).delegate; node4 != null; node4 = node4.child) {
-                                    if ((node4.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
+                                for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                    if ((node3.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
                                         i++;
                                         if (i == 1) {
-                                            node3 = node4;
+                                            nodeAccess$pop = node3;
                                         } else {
                                             if (mutableVector == null) {
                                                 mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node3 != null) {
-                                                mutableVector.add(node3);
-                                                node3 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector.add(node4);
+                                            mutableVector.add(node3);
                                         }
                                     }
                                 }
                                 if (i == 1) {
                                 }
                             }
-                            node3 = DelegatableNodeKt.access$pop(mutableVector);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         BringIntoViewModifierNode bringIntoViewModifierNode = (BringIntoViewModifierNode) obj;
         if (bringIntoViewModifierNode == null) {
             return Unit.INSTANCE;
         }
-        final NodeCoordinator requireLayoutCoordinates = DelegatableNodeKt.requireLayoutCoordinates(delegatableNode);
-        Object bringIntoView = bringIntoViewModifierNode.bringIntoView(requireLayoutCoordinates, new Function0() { // from class: androidx.compose.ui.relocation.BringIntoViewModifierNodeKt$bringIntoView$2
+        final NodeCoordinator nodeCoordinatorRequireLayoutCoordinates = DelegatableNodeKt.requireLayoutCoordinates(delegatableNode);
+        Object objBringIntoView = bringIntoViewModifierNode.bringIntoView(nodeCoordinatorRequireLayoutCoordinates, new Function0() { // from class: androidx.compose.ui.relocation.BringIntoViewModifierNodeKt.bringIntoView.2
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(0);
@@ -95,20 +94,20 @@ public abstract class BringIntoViewModifierNodeKt {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 Rect rect;
-                Function0 function02 = Function0.this;
+                Function0 function02 = function0;
                 if (function02 != null && (rect = (Rect) function02.invoke()) != null) {
                     return rect;
                 }
-                LayoutCoordinates layoutCoordinates = requireLayoutCoordinates;
+                LayoutCoordinates layoutCoordinates = nodeCoordinatorRequireLayoutCoordinates;
                 if (!layoutCoordinates.isAttached()) {
                     layoutCoordinates = null;
                 }
                 if (layoutCoordinates != null) {
-                    return SizeKt.m421toRectuvyYCjk(IntSizeKt.m864toSizeozmzZPI(layoutCoordinates.mo610getSizeYbymL2g()));
+                    return SizeKt.m423toRectuvyYCjk(IntSizeKt.m866toSizeozmzZPI(layoutCoordinates.mo612getSizeYbymL2g()));
                 }
                 return null;
             }
         }, continuationImpl);
-        return bringIntoView == CoroutineSingletons.COROUTINE_SUSPENDED ? bringIntoView : Unit.INSTANCE;
+        return objBringIntoView == CoroutineSingletons.COROUTINE_SUSPENDED ? objBringIntoView : Unit.INSTANCE;
     }
 }

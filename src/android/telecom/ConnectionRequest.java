@@ -9,6 +9,7 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 import android.telecom.Connection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +141,7 @@ public final class ConnectionRequest implements Parcelable {
         this.mIsAdhocConference = z2;
     }
 
-    private ConnectionRequest(Parcel parcel) {
+    private ConnectionRequest(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mAccountHandle = (PhoneAccountHandle) parcel.readParcelable(getClass().getClassLoader(), PhoneAccountHandle.class);
         this.mAddress = (Uri) parcel.readParcelable(getClass().getClassLoader(), Uri.class);
         this.mExtras = (Bundle) parcel.readParcelable(getClass().getClassLoader(), Bundle.class);

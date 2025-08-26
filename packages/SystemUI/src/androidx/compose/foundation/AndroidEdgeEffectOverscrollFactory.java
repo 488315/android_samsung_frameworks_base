@@ -9,7 +9,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AndroidEdgeEffectOverscrollFactory implements OverscrollFactory {
     public final Context context;
@@ -39,14 +38,14 @@ final class AndroidEdgeEffectOverscrollFactory implements OverscrollFactory {
         }
         long j = androidEdgeEffectOverscrollFactory.glowColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.glowDrawPadding, androidEdgeEffectOverscrollFactory.glowDrawPadding);
+        return ULong.m3447equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.glowDrawPadding, androidEdgeEffectOverscrollFactory.glowDrawPadding);
     }
 
     public final int hashCode() {
-        int hashCode = (this.density.hashCode() + (this.context.hashCode() * 31)) * 31;
+        int iHashCode = (this.density.hashCode() + (this.context.hashCode() * 31)) * 31;
         Color.Companion companion = Color.Companion;
         int i = ULong.$r8$clinit;
-        return this.glowDrawPadding.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(hashCode, 31, this.glowColor);
+        return this.glowDrawPadding.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(iHashCode, 31, this.glowColor);
     }
 
     public /* synthetic */ AndroidEdgeEffectOverscrollFactory(Context context, Density density, long j, PaddingValues paddingValues, int i, DefaultConstructorMarker defaultConstructorMarker) {

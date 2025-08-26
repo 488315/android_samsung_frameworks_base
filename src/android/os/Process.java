@@ -6,6 +6,7 @@ import android.sysprop.MemoryProperties;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
+import android.system.StructPollfd;
 import android.util.Pair;
 import android.webkit.WebViewZygote;
 import dalvik.system.VMDebug;
@@ -14,6 +15,7 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
@@ -192,7 +194,7 @@ public class Process {
 
     public static final native int[] getPidsForCommands(String[] strArr);
 
-    public static final native int getProcessGroup(int i) throws IllegalArgumentException, SecurityException;
+    public static final native int getProcessGroup(int i) throws SecurityException, IllegalArgumentException;
 
     public static final native long getPss(int i);
 
@@ -232,11 +234,11 @@ public class Process {
 
     public static final native void sendSignalQuiet(int i, int i2);
 
-    private static native void sendSignalThrows(int i, int i2) throws IllegalArgumentException, SecurityException, NoSuchElementException;
+    private static native void sendSignalThrows(int i, int i2) throws SecurityException, IllegalArgumentException, NoSuchElementException;
 
     public static final native boolean sendSignalToProcessGroup(int i, int i2, int i3);
 
-    private static native void sendTgSignalThrows(int i, int i2, int i3) throws IllegalArgumentException, SecurityException, NoSuchElementException;
+    private static native void sendTgSignalThrows(int i, int i2, int i3) throws SecurityException, IllegalArgumentException, NoSuchElementException;
 
     private static native void setArgV0Native(String str);
 
@@ -246,19 +248,19 @@ public class Process {
 
     public static final native boolean setProcessFrozen(int i, int i2, boolean z);
 
-    public static final native void setProcessGroup(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setProcessGroup(int i, int i2) throws SecurityException, IllegalArgumentException;
 
     public static final native boolean setProcessMARsFrozen(int i, int i2, boolean z);
 
     public static final native boolean setProcessSlowdown(int i, int i2, boolean z);
 
-    public static final native void setThreadGroup(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadGroup(int i, int i2) throws SecurityException, IllegalArgumentException;
 
-    public static final native void setThreadGroupAndCpuset(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadGroupAndCpuset(int i, int i2) throws SecurityException, IllegalArgumentException;
 
-    public static final native void setThreadPriority(int i) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadPriority(int i) throws SecurityException, IllegalArgumentException;
 
-    public static final native void setThreadPriority(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadPriority(int i, int i2) throws SecurityException, IllegalArgumentException;
 
     public static final native void setThreadScheduler(int i, int i2, int i3) throws IllegalArgumentException;
 
@@ -413,11 +415,11 @@ public class Process {
         sendSignal(i, 9);
     }
 
-    public static final void checkTid(int i, int i2) throws IllegalArgumentException, SecurityException, NoSuchElementException {
+    public static final void checkTid(int i, int i2) throws SecurityException, IllegalArgumentException, NoSuchElementException {
         sendTgSignalThrows(i, i2, 0);
     }
 
-    public static final void checkPid(int i) throws IllegalArgumentException, SecurityException, NoSuchElementException {
+    public static final void checkPid(int i) throws SecurityException, IllegalArgumentException, NoSuchElementException {
         sendSignalThrows(i, 0);
     }
 
@@ -426,8 +428,8 @@ public class Process {
     }
 
     public static final long getAdvertisedMem() {
-        long parseSize = FileUtils.parseSize(MemoryProperties.memory_ddr_size().orElse("0KB"));
-        return parseSize <= 0 ? FileUtils.roundStorageSize(getTotalMemory()) : parseSize;
+        long size = FileUtils.parseSize(MemoryProperties.memory_ddr_size().orElse("0KB"));
+        return size <= 0 ? FileUtils.roundStorageSize(getTotalMemory()) : size;
     }
 
     public static final int[] semGetPids(String str, int[] iArr) {
@@ -435,163 +437,134 @@ public class Process {
     }
 
     public static final boolean isThreadInProcess(int i, int i2) {
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             if (!Os.access("/proc/" + i + "/task/" + i2, OsConstants.F_OK)) {
                 return false;
             }
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             return true;
         } catch (Exception unused) {
             return false;
         } finally {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0075  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void waitForProcessDeath(int r8, int r9) throws java.lang.InterruptedException, java.util.concurrent.TimeoutException {
-        /*
-            boolean r0 = supportsPidFd()
-            r1 = 1
-            r2 = 0
-            if (r0 != 0) goto L73
-            r3 = 0
-            int r4 = nativePidFdOpen(r8, r2)     // Catch: java.lang.Throwable -> L57 android.system.ErrnoException -> L59
-            if (r4 < 0) goto L18
-            java.io.FileDescriptor r5 = new java.io.FileDescriptor     // Catch: java.lang.Throwable -> L57 android.system.ErrnoException -> L59
-            r5.<init>()     // Catch: java.lang.Throwable -> L57 android.system.ErrnoException -> L59
-            r5.setInt$(r4)     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            goto L1a
-        L18:
-            r0 = r1
-            r5 = r3
-        L1a:
-            if (r5 == 0) goto L51
-            android.system.StructPollfd[] r4 = new android.system.StructPollfd[r1]     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            android.system.StructPollfd r6 = new android.system.StructPollfd     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6.<init>()     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r4[r2] = r6     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6.fd = r5     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6 = r4[r2]     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            int r7 = android.system.OsConstants.POLLIN     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            short r7 = (short) r7     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6.events = r7     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6 = r4[r2]     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6.revents = r2     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6 = r4[r2]     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r6.userData = r3     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            int r3 = android.system.Os.poll(r4, r9)     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            if (r3 <= 0) goto L42
-            if (r5 == 0) goto L90
-            libcore.io.IoUtils.closeQuietly(r5)
-            return
-        L42:
-            if (r3 == 0) goto L45
-            goto L51
-        L45:
-            java.util.concurrent.TimeoutException r0 = new java.util.concurrent.TimeoutException     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            r0.<init>()     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-            throw r0     // Catch: java.lang.Throwable -> L4b android.system.ErrnoException -> L4e
-        L4b:
-            r8 = move-exception
-            r3 = r5
-            goto L6d
-        L4e:
-            r0 = move-exception
-            r3 = r5
-            goto L5a
-        L51:
-            if (r5 == 0) goto L73
-            libcore.io.IoUtils.closeQuietly(r5)
-            goto L73
-        L57:
-            r8 = move-exception
-            goto L6d
-        L59:
-            r0 = move-exception
-        L5a:
-            int r0 = r0.errno     // Catch: java.lang.Throwable -> L57
-            int r4 = android.system.OsConstants.EINTR     // Catch: java.lang.Throwable -> L57
-            if (r0 == r4) goto L67
-            if (r3 == 0) goto L65
-            libcore.io.IoUtils.closeQuietly(r3)
-        L65:
-            r0 = r1
-            goto L73
-        L67:
-            java.lang.InterruptedException r8 = new java.lang.InterruptedException     // Catch: java.lang.Throwable -> L57
-            r8.<init>()     // Catch: java.lang.Throwable -> L57
-            throw r8     // Catch: java.lang.Throwable -> L57
-        L6d:
-            if (r3 == 0) goto L72
-            libcore.io.IoUtils.closeQuietly(r3)
-        L72:
-            throw r8
-        L73:
-            if (r0 == 0) goto L9b
-            if (r9 >= 0) goto L78
-            goto L79
-        L78:
-            r1 = r2
-        L79:
-            long r3 = java.lang.System.currentTimeMillis()
-            long r5 = (long) r9
-            long r5 = r5 + r3
-        L7f:
-            if (r1 != 0) goto L85
-            int r9 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r9 >= 0) goto L9b
-        L85:
-            android.system.Os.kill(r8, r2)     // Catch: android.system.ErrnoException -> L89
-            goto L91
-        L89:
-            r9 = move-exception
-            int r9 = r9.errno
-            int r0 = android.system.OsConstants.ESRCH
-            if (r9 != r0) goto L91
-        L90:
-            return
-        L91:
-            r3 = 1
-            java.lang.Thread.sleep(r3)
-            long r3 = java.lang.System.currentTimeMillis()
-            goto L7f
-        L9b:
-            java.util.concurrent.TimeoutException r8 = new java.util.concurrent.TimeoutException
-            r8.<init>()
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.Process.waitForProcessDeath(int, int):void");
+    public static void waitForProcessDeath(int i, int i2) throws Throwable {
+        FileDescriptor fileDescriptor;
+        boolean zSupportsPidFd = supportsPidFd();
+        if (!zSupportsPidFd) {
+            FileDescriptor fileDescriptor2 = null;
+            try {
+                try {
+                    int iNativePidFdOpen = nativePidFdOpen(i, 0);
+                    if (iNativePidFdOpen >= 0) {
+                        fileDescriptor = new FileDescriptor();
+                        try {
+                            fileDescriptor.setInt$(iNativePidFdOpen);
+                        } catch (ErrnoException e) {
+                            e = e;
+                            fileDescriptor2 = fileDescriptor;
+                            if (e.errno == OsConstants.EINTR) {
+                                throw new InterruptedException();
+                            }
+                            if (fileDescriptor2 != null) {
+                                IoUtils.closeQuietly(fileDescriptor2);
+                            }
+                            zSupportsPidFd = true;
+                            if (zSupportsPidFd) {
+                            }
+                            throw new TimeoutException();
+                        } catch (Throwable th) {
+                            th = th;
+                            fileDescriptor2 = fileDescriptor;
+                            if (fileDescriptor2 != null) {
+                                IoUtils.closeQuietly(fileDescriptor2);
+                            }
+                            throw th;
+                        }
+                    } else {
+                        zSupportsPidFd = true;
+                        fileDescriptor = null;
+                    }
+                    if (fileDescriptor != null) {
+                        StructPollfd structPollfd = new StructPollfd();
+                        StructPollfd[] structPollfdArr = {structPollfd};
+                        structPollfd.fd = fileDescriptor;
+                        structPollfdArr[0].events = (short) OsConstants.POLLIN;
+                        structPollfdArr[0].revents = (short) 0;
+                        structPollfdArr[0].userData = null;
+                        int iPoll = Os.poll(structPollfdArr, i2);
+                        if (iPoll > 0) {
+                            if (fileDescriptor != null) {
+                                IoUtils.closeQuietly(fileDescriptor);
+                                return;
+                            }
+                            return;
+                        } else if (iPoll == 0) {
+                            throw new TimeoutException();
+                        }
+                    }
+                    if (fileDescriptor != null) {
+                        IoUtils.closeQuietly(fileDescriptor);
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                }
+            } catch (ErrnoException e2) {
+                e = e2;
+            }
+        }
+        if (zSupportsPidFd) {
+            boolean z = i2 < 0;
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            long j = i2 + jCurrentTimeMillis;
+            while (true) {
+                if (!z && jCurrentTimeMillis >= j) {
+                    break;
+                }
+                try {
+                    Os.kill(i, 0);
+                } catch (ErrnoException e3) {
+                    if (e3.errno == OsConstants.ESRCH) {
+                        return;
+                    }
+                }
+                Thread.sleep(1L);
+                jCurrentTimeMillis = System.currentTimeMillis();
+            }
+        }
+        throw new TimeoutException();
     }
 
     public static boolean supportsPidFd() {
         FileDescriptor fileDescriptor;
         if (sPidFdSupported == 0) {
-            int i = -1;
+            int iNativePidFdOpen = -1;
             try {
                 try {
-                    i = nativePidFdOpen(myPid(), 0);
+                    iNativePidFdOpen = nativePidFdOpen(myPid(), 0);
                     sPidFdSupported = 1;
                 } catch (ErrnoException e) {
                     sPidFdSupported = e.errno != OsConstants.ENOSYS ? 1 : 2;
-                    if (i >= 0) {
+                    if (iNativePidFdOpen >= 0) {
                         fileDescriptor = new FileDescriptor();
                     }
                 }
-                if (i >= 0) {
+                if (iNativePidFdOpen >= 0) {
                     fileDescriptor = new FileDescriptor();
-                    fileDescriptor.setInt$(i);
+                    fileDescriptor.setInt$(iNativePidFdOpen);
                     IoUtils.closeQuietly(fileDescriptor);
                 }
             } catch (Throwable th) {
-                if (i >= 0) {
+                if (iNativePidFdOpen >= 0) {
                     FileDescriptor fileDescriptor2 = new FileDescriptor();
-                    fileDescriptor2.setInt$(i);
+                    fileDescriptor2.setInt$(iNativePidFdOpen);
                     IoUtils.closeQuietly(fileDescriptor2);
                 }
                 throw th;

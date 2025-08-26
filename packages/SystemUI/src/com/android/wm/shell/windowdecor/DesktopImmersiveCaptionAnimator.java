@@ -13,7 +13,6 @@ import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.samsung.android.util.InterpolatorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DesktopImmersiveCaptionAnimator {
     public final View mCaption;
@@ -24,7 +23,6 @@ public class DesktopImmersiveCaptionAnimator {
     public final Animator mHide;
     public final DesktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0 mHideRunnable;
     public final boolean mIsDefaultDisplay;
-    public DesktopModeWindowDecoration$$ExternalSyntheticLambda0 mOnCaptionHideCallBack;
     public int mPositionToShow;
     public final Animator mShow;
     public final DesktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0 mShowRunnable;
@@ -85,12 +83,12 @@ public class DesktopImmersiveCaptionAnimator {
         this.mCaptionHeight = i;
         Property property = View.TRANSLATION_Y;
         float f = -i;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, f, 0.0f);
-        this.mShow = ofFloat;
-        ofFloat.setDuration(300L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, f, 0.0f);
+        this.mShow = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.setDuration(300L);
         PathInterpolator pathInterpolator = InterpolatorUtils.SINE_IN_OUT_80;
-        ofFloat.setInterpolator(pathInterpolator);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.DesktopImmersiveCaptionAnimator.1
+        objectAnimatorOfFloat.setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.DesktopImmersiveCaptionAnimator.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 DesktopImmersiveCaptionAnimator.this.setShownState(true);
@@ -111,11 +109,11 @@ public class DesktopImmersiveCaptionAnimator {
                 }
             }
         });
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, 0.0f, f);
-        this.mHide = ofFloat2;
-        ofFloat2.setDuration(300L);
-        ofFloat2.setInterpolator(pathInterpolator);
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.DesktopImmersiveCaptionAnimator.2
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, 0.0f, f);
+        this.mHide = objectAnimatorOfFloat2;
+        objectAnimatorOfFloat2.setDuration(300L);
+        objectAnimatorOfFloat2.setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.DesktopImmersiveCaptionAnimator.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 DesktopImmersiveCaptionAnimator.this.setShownState(false);
@@ -131,15 +129,16 @@ public class DesktopImmersiveCaptionAnimator {
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
-                DesktopModeWindowDecoration$$ExternalSyntheticLambda0 desktopModeWindowDecoration$$ExternalSyntheticLambda0 = DesktopImmersiveCaptionAnimator.this.mOnCaptionHideCallBack;
-                if (desktopModeWindowDecoration$$ExternalSyntheticLambda0 != null) {
-                    desktopModeWindowDecoration$$ExternalSyntheticLambda0.run();
-                }
+                DesktopImmersiveCaptionAnimator.this.getClass();
             }
         });
     }
 
     public final void hide() {
+        if (this.mShow.isRunning()) {
+            this.mShow.cancel();
+            Log.d("DesktopImmersiveCaptionAnimator", "ImmersiveCaptionBehavior_hide: cancel show anim");
+        }
         if (this.mIsShowing) {
             KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(5, "DesktopImmersiveCaptionAnimator", new StringBuilder("ImmersiveCaptionBehavior_hide: callers="));
             if (this.mHide.isRunning()) {
@@ -147,18 +146,6 @@ public class DesktopImmersiveCaptionAnimator {
             }
             this.mHide.start();
         }
-    }
-
-    public final void setPaused() {
-        DesktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0 desktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0 = this.mHideRunnable;
-        Handler handler = this.mHandler;
-        if (handler.hasCallbacks(desktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0)) {
-            handler.removeCallbacks(desktopImmersiveCaptionAnimator$$ExternalSyntheticLambda0);
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(5, "DesktopImmersiveCaptionAnimator", new StringBuilder("ImmersiveCaptionBehavior_pause: Remove hide runnable, callers="));
-        }
-        this.mIsPaused = true;
-        this.mShownByTouch = false;
-        show();
     }
 
     public final void setShownState(boolean z) {

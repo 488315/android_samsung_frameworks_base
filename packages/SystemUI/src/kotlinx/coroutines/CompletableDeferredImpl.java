@@ -3,7 +3,6 @@ package kotlinx.coroutines;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CompletableDeferredImpl extends JobSupport implements CompletableDeferred {
     public CompletableDeferredImpl(Job job) {
@@ -13,9 +12,9 @@ public final class CompletableDeferredImpl extends JobSupport implements Complet
 
     @Override // kotlinx.coroutines.Deferred
     public final Object await(ContinuationImpl continuationImpl) {
-        Object awaitInternal = awaitInternal(continuationImpl);
+        Object objAwaitInternal = awaitInternal(continuationImpl);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        return awaitInternal;
+        return objAwaitInternal;
     }
 
     public final boolean completeExceptionally(Throwable th) {

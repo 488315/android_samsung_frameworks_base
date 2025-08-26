@@ -67,9 +67,9 @@ public interface IInterfaceEventCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInterfaceEventCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInterfaceEventCallback)) {
-                return (IInterfaceEventCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInterfaceEventCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInterfaceEventCallback)) {
+                return (IInterfaceEventCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,21 +105,21 @@ public interface IInterfaceEventCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IClientInterface asInterface = IClientInterface.Stub.asInterface(parcel.readStrongBinder());
+                IClientInterface iClientInterfaceAsInterface = IClientInterface.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                OnClientInterfaceReady(asInterface);
+                OnClientInterfaceReady(iClientInterfaceAsInterface);
             } else if (i == 2) {
-                IApInterface asInterface2 = IApInterface.Stub.asInterface(parcel.readStrongBinder());
+                IApInterface iApInterfaceAsInterface = IApInterface.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                OnApInterfaceReady(asInterface2);
+                OnApInterfaceReady(iApInterfaceAsInterface);
             } else if (i == 3) {
-                IClientInterface asInterface3 = IClientInterface.Stub.asInterface(parcel.readStrongBinder());
+                IClientInterface iClientInterfaceAsInterface2 = IClientInterface.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                OnClientTorndownEvent(asInterface3);
+                OnClientTorndownEvent(iClientInterfaceAsInterface2);
             } else if (i == 4) {
-                IApInterface asInterface4 = IApInterface.Stub.asInterface(parcel.readStrongBinder());
+                IApInterface iApInterfaceAsInterface2 = IApInterface.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                OnApTorndownEvent(asInterface4);
+                OnApTorndownEvent(iApInterfaceAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -144,49 +144,49 @@ public interface IInterfaceEventCallback extends IInterface {
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
             public void OnClientInterfaceReady(IClientInterface iClientInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iClientInterface);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iClientInterface);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
             public void OnApInterfaceReady(IApInterface iApInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iApInterface);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iApInterface);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
             public void OnClientTorndownEvent(IClientInterface iClientInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iClientInterface);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iClientInterface);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
             public void OnApTorndownEvent(IApInterface iApInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iApInterface);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iApInterface);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

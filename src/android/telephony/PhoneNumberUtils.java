@@ -3,11 +3,13 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
+import android.provider.Contacts;
 import android.sysprop.TelephonyProperties;
 import android.telecom.PhoneAccount;
 import android.text.Editable;
@@ -160,30 +162,23 @@ public class PhoneNumberUtils {
         return c >= '2' && c <= '9';
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:4:0x000c A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x000c A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int minPositive(int r0, int r1) {
-        /*
-            if (r0 < 0) goto L7
-            if (r1 < 0) goto L7
-            if (r0 >= r1) goto Lc
-            goto L9
-        L7:
-            if (r0 < 0) goto La
-        L9:
-            return r0
-        La:
-            if (r1 < 0) goto Ld
-        Lc:
-            return r1
-        Ld:
-            r0 = -1
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhoneNumberUtils.minPositive(int, int):int");
+    private static int minPositive(int i, int i2) {
+        if (i < 0 || i2 < 0) {
+            if (i < 0) {
+                if (i2 >= 0) {
+                    return i2;
+                }
+                return -1;
+            }
+            return i;
+        }
+        if (i < i2) {
+            return i;
+        }
     }
 
     private static int tryGetISODigit(char c) {
@@ -302,104 +297,78 @@ public class PhoneNumberUtils {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:40:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:52:? A[SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r6v0 */
     /* JADX WARN: Type inference failed for: r6v1, types: [android.database.Cursor] */
     /* JADX WARN: Type inference failed for: r6v2 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getNumberFromIntent(android.content.Intent r7, android.content.Context r8) {
-        /*
-            android.net.Uri r1 = r7.getData()
-            r6 = 0
-            if (r1 != 0) goto L8
-            return r6
-        L8:
-            java.lang.String r0 = r1.getScheme()
-            if (r0 != 0) goto Lf
-            return r6
-        Lf:
-            java.lang.String r2 = "tel"
-            boolean r2 = r0.equals(r2)
-            if (r2 != 0) goto L8a
-            java.lang.String r2 = "sip"
-            boolean r0 = r0.equals(r2)
-            if (r0 == 0) goto L23
-            goto L8a
-        L23:
-            if (r8 != 0) goto L26
-            return r6
-        L26:
-            r7.resolveType(r8)
-            java.lang.String r7 = r1.getAuthority()
-            java.lang.String r0 = "contacts"
-            boolean r0 = r0.equals(r7)
-            if (r0 == 0) goto L39
-            java.lang.String r7 = "number"
-            goto L45
-        L39:
-            java.lang.String r0 = "com.android.contacts"
-            boolean r7 = r0.equals(r7)
-            if (r7 == 0) goto L44
-            java.lang.String r7 = "data1"
-            goto L45
-        L44:
-            r7 = r6
-        L45:
-            android.content.ContentResolver r0 = r8.getContentResolver()     // Catch: java.lang.Throwable -> L6e java.lang.RuntimeException -> L71
-            java.lang.String[] r2 = new java.lang.String[]{r7}     // Catch: java.lang.Throwable -> L6e java.lang.RuntimeException -> L71
-            r4 = 0
-            r5 = 0
-            r3 = 0
-            android.database.Cursor r8 = r0.query(r1, r2, r3, r4, r5)     // Catch: java.lang.Throwable -> L6e java.lang.RuntimeException -> L71
-            if (r8 == 0) goto L68
-            boolean r0 = r8.moveToFirst()     // Catch: java.lang.RuntimeException -> L65 java.lang.Throwable -> L81
-            if (r0 == 0) goto L68
-            int r7 = r8.getColumnIndex(r7)     // Catch: java.lang.RuntimeException -> L65 java.lang.Throwable -> L81
-            java.lang.String r6 = r8.getString(r7)     // Catch: java.lang.RuntimeException -> L65 java.lang.Throwable -> L81
-            goto L68
-        L65:
-            r0 = move-exception
-            r7 = r0
-            goto L74
-        L68:
-            if (r8 == 0) goto L6d
-            r8.close()
-        L6d:
-            return r6
-        L6e:
-            r0 = move-exception
-            r7 = r0
-            goto L84
-        L71:
-            r0 = move-exception
-            r7 = r0
-            r8 = r6
-        L74:
-            java.lang.String r0 = "PhoneNumberUtils"
-            java.lang.String r1 = "Error getting phone number."
-            com.android.telephony.Rlog.e(r0, r1, r7)     // Catch: java.lang.Throwable -> L81
-            if (r8 == 0) goto L80
-            r8.close()
-        L80:
-            return r6
-        L81:
-            r0 = move-exception
-            r7 = r0
-            r6 = r8
-        L84:
-            if (r6 == 0) goto L89
-            r6.close()
-        L89:
-            throw r7
-        L8a:
-            java.lang.String r7 = r1.getSchemeSpecificPart()
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhoneNumberUtils.getNumberFromIntent(android.content.Intent, android.content.Context):java.lang.String");
+    public static String getNumberFromIntent(Intent intent, Context context) throws Throwable {
+        String scheme;
+        String str;
+        Throwable th;
+        RuntimeException runtimeException;
+        Cursor cursorQuery;
+        Uri data = intent.getData();
+        ?? r6 = 0;
+        string = null;
+        String string = null;
+        if (data == null || (scheme = data.getScheme()) == null) {
+            return null;
+        }
+        if (scheme.equals(PhoneAccount.SCHEME_TEL) || scheme.equals("sip")) {
+            return data.getSchemeSpecificPart();
+        }
+        if (context == null) {
+            return null;
+        }
+        intent.resolveType(context);
+        String authority = data.getAuthority();
+        if (Contacts.AUTHORITY.equals(authority)) {
+            str = "number";
+        } else {
+            str = "com.android.contacts".equals(authority) ? "data1" : null;
+        }
+        try {
+            try {
+                cursorQuery = context.getContentResolver().query(data, new String[]{str}, null, null, null);
+                if (cursorQuery != null) {
+                    try {
+                        if (cursorQuery.moveToFirst()) {
+                            string = cursorQuery.getString(cursorQuery.getColumnIndex(str));
+                        }
+                    } catch (RuntimeException e) {
+                        runtimeException = e;
+                        com.android.telephony.Rlog.e(LOG_TAG, "Error getting phone number.", runtimeException);
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
+                        }
+                        return null;
+                    }
+                }
+                if (cursorQuery != null) {
+                    cursorQuery.close();
+                }
+                return string;
+            } catch (Throwable th2) {
+                th = th2;
+                r6 = context;
+                if (r6 == 0) {
+                    r6.close();
+                    throw th;
+                }
+                throw th;
+            }
+        } catch (RuntimeException e2) {
+            runtimeException = e2;
+            cursorQuery = null;
+        } catch (Throwable th3) {
+            th = th3;
+            if (r6 == 0) {
+            }
+        }
     }
 
     public static String extractNetworkPortion(String str) {
@@ -409,21 +378,21 @@ public class PhoneNumberUtils {
         int length = str.length();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            int digit = Character.digit(charAt, 10);
-            if (digit == -1) {
-                if (charAt == '+') {
-                    String sb2 = sb.toString();
-                    if (sb2.length() == 0 || sb2.equals(CLIR_ON) || sb2.equals(CLIR_OFF)) {
-                        sb.append(charAt);
+            char cCharAt = str.charAt(i);
+            int iDigit = Character.digit(cCharAt, 10);
+            if (iDigit == -1) {
+                if (cCharAt == '+') {
+                    String string = sb.toString();
+                    if (string.length() == 0 || string.equals(CLIR_ON) || string.equals(CLIR_OFF)) {
+                        sb.append(cCharAt);
                     }
-                } else if (isDialable(charAt)) {
-                    sb.append(charAt);
-                } else if (isStartsPostDial(charAt)) {
+                } else if (isDialable(cCharAt)) {
+                    sb.append(cCharAt);
+                } else if (isStartsPostDial(cCharAt)) {
                     break;
                 }
             } else {
-                sb.append(digit);
+                sb.append(iDigit);
             }
         }
         return sb.toString();
@@ -437,17 +406,17 @@ public class PhoneNumberUtils {
         StringBuilder sb = new StringBuilder(length);
         boolean z = false;
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '+') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '+') {
                 if (z) {
                     continue;
                 } else {
                     z = true;
                 }
             }
-            if (isDialable(charAt)) {
-                sb.append(charAt);
-            } else if (isStartsPostDial(charAt)) {
+            if (isDialable(cCharAt)) {
+                sb.append(cCharAt);
+            } else if (isStartsPostDial(cCharAt)) {
                 break;
             }
         }
@@ -461,12 +430,12 @@ public class PhoneNumberUtils {
         int length = str.length();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            int digit = Character.digit(charAt, 10);
-            if (digit != -1) {
-                sb.append(digit);
-            } else if (isNonSeparator(charAt)) {
-                sb.append(charAt);
+            char cCharAt = str.charAt(i);
+            int iDigit = Character.digit(cCharAt, 10);
+            if (iDigit != -1) {
+                sb.append(iDigit);
+            } else if (isNonSeparator(cCharAt)) {
+                sb.append(cCharAt);
             }
         }
         return sb.toString();
@@ -483,13 +452,13 @@ public class PhoneNumberUtils {
         int length = str.length();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (isPause(charAt)) {
-                charAt = ',';
-            } else if (isToneWait(charAt)) {
-                charAt = ';';
+            char cCharAt = str.charAt(i);
+            if (isPause(cCharAt)) {
+                cCharAt = ',';
+            } else if (isToneWait(cCharAt)) {
+                cCharAt = ';';
             }
-            sb.append(charAt);
+            sb.append(cCharAt);
         }
         return sb.toString();
     }
@@ -500,8 +469,8 @@ public class PhoneNumberUtils {
 
     private static int indexOfLastNetworkChar(String str) {
         int length = str.length();
-        int minPositive = minPositive(str.indexOf(44), str.indexOf(59));
-        return minPositive < 0 ? length - 1 : minPositive - 1;
+        int iMinPositive = minPositive(str.indexOf(44), str.indexOf(59));
+        return iMinPositive < 0 ? length - 1 : iMinPositive - 1;
     }
 
     public static String extractPostDialPortion(String str) {
@@ -510,10 +479,10 @@ public class PhoneNumberUtils {
         }
         StringBuilder sb = new StringBuilder();
         int length = str.length();
-        for (int indexOfLastNetworkChar = indexOfLastNetworkChar(str) + 1; indexOfLastNetworkChar < length; indexOfLastNetworkChar++) {
-            char charAt = str.charAt(indexOfLastNetworkChar);
-            if (isNonSeparator(charAt)) {
-                sb.append(charAt);
+        for (int iIndexOfLastNetworkChar = indexOfLastNetworkChar(str) + 1; iIndexOfLastNetworkChar < length; iIndexOfLastNetworkChar++) {
+            char cCharAt = str.charAt(iIndexOfLastNetworkChar);
+            if (isNonSeparator(cCharAt)) {
+                sb.append(cCharAt);
             }
         }
         return sb.toString();
@@ -540,32 +509,32 @@ public class PhoneNumberUtils {
             return str == str2;
         }
         if (str.length() != 0 && str2.length() != 0) {
-            int indexOfLastNetworkChar = indexOfLastNetworkChar(str);
-            int indexOfLastNetworkChar2 = indexOfLastNetworkChar(str2);
+            int iIndexOfLastNetworkChar = indexOfLastNetworkChar(str);
+            int iIndexOfLastNetworkChar2 = indexOfLastNetworkChar(str2);
             int i = 0;
             int i2 = 0;
             int i3 = 0;
-            while (indexOfLastNetworkChar >= 0 && indexOfLastNetworkChar2 >= 0) {
-                char charAt = str.charAt(indexOfLastNetworkChar);
-                if (isDialable(charAt)) {
+            while (iIndexOfLastNetworkChar >= 0 && iIndexOfLastNetworkChar2 >= 0) {
+                char cCharAt = str.charAt(iIndexOfLastNetworkChar);
+                if (isDialable(cCharAt)) {
                     z = false;
                 } else {
-                    indexOfLastNetworkChar--;
+                    iIndexOfLastNetworkChar--;
                     i++;
                     z = true;
                 }
-                char charAt2 = str2.charAt(indexOfLastNetworkChar2);
-                if (!isDialable(charAt2)) {
-                    indexOfLastNetworkChar2--;
+                char cCharAt2 = str2.charAt(iIndexOfLastNetworkChar2);
+                if (!isDialable(cCharAt2)) {
+                    iIndexOfLastNetworkChar2--;
                     i2++;
                     z = true;
                 }
                 if (!z) {
-                    if (charAt2 != charAt && charAt != 'N' && charAt2 != 'N') {
+                    if (cCharAt2 != cCharAt && cCharAt != 'N' && cCharAt2 != 'N') {
                         break;
                     }
-                    indexOfLastNetworkChar--;
-                    indexOfLastNetworkChar2--;
+                    iIndexOfLastNetworkChar--;
+                    iIndexOfLastNetworkChar2--;
                     i3++;
                 }
             }
@@ -573,17 +542,17 @@ public class PhoneNumberUtils {
                 int length = str.length() - i;
                 return length == str2.length() - i2 && length == i3;
             }
-            if (i3 >= integer && (indexOfLastNetworkChar < 0 || indexOfLastNetworkChar2 < 0)) {
+            if (i3 >= integer && (iIndexOfLastNetworkChar < 0 || iIndexOfLastNetworkChar2 < 0)) {
                 return true;
             }
-            int i4 = indexOfLastNetworkChar + 1;
-            if (matchIntlPrefix(str, i4) && matchIntlPrefix(str2, indexOfLastNetworkChar2 + 1)) {
+            int i4 = iIndexOfLastNetworkChar + 1;
+            if (matchIntlPrefix(str, i4) && matchIntlPrefix(str2, iIndexOfLastNetworkChar2 + 1)) {
                 return true;
             }
-            if (matchTrunkPrefix(str, i4) && matchIntlPrefixAndCC(str2, indexOfLastNetworkChar2 + 1)) {
+            if (matchTrunkPrefix(str, i4) && matchIntlPrefixAndCC(str2, iIndexOfLastNetworkChar2 + 1)) {
                 return true;
             }
-            if (matchTrunkPrefix(str2, indexOfLastNetworkChar2 + 1) && matchIntlPrefixAndCC(str, i4)) {
+            if (matchTrunkPrefix(str2, iIndexOfLastNetworkChar2 + 1) && matchIntlPrefixAndCC(str, i4)) {
                 return true;
             }
         }
@@ -594,22 +563,32 @@ public class PhoneNumberUtils {
         return compareStrictly(str, str2, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0071 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0091 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x006f A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0085  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00bf  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
+    /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
+        jadx.core.utils.exceptions.JadxRuntimeException: Not found exit edge by exit block: B:36:0x006f
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.checkLoopExits(LoopRegionMaker.java:225)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeLoopRegion(LoopRegionMaker.java:195)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:62)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:89)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:95)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:101)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:106)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:66)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:48)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+        */
     public static boolean compareStrictly(java.lang.String r17, java.lang.String r18, boolean r19) {
         /*
             Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhoneNumberUtils.compareStrictly(java.lang.String, java.lang.String, boolean):boolean");
     }
@@ -623,19 +602,19 @@ public class PhoneNumberUtils {
     }
 
     public static String semToCallerIDMinMatch(String str, int i) {
-        String extractNetworkPortionAlt = extractNetworkPortionAlt(str);
+        String strExtractNetworkPortionAlt = extractNetworkPortionAlt(str);
         if (i <= 0) {
             i = getMinMatch();
         }
-        return internalGetStrippedReversed(extractNetworkPortionAlt, i);
+        return internalGetStrippedReversed(strExtractNetworkPortionAlt, i);
     }
 
     public static String getStrippedReversed(String str) {
-        String extractNetworkPortionAlt = extractNetworkPortionAlt(str);
-        if (extractNetworkPortionAlt == null) {
+        String strExtractNetworkPortionAlt = extractNetworkPortionAlt(str);
+        if (strExtractNetworkPortionAlt == null) {
             return null;
         }
-        return internalGetStrippedReversed(extractNetworkPortionAlt, extractNetworkPortionAlt.length());
+        return internalGetStrippedReversed(strExtractNetworkPortionAlt, strExtractNetworkPortionAlt.length());
     }
 
     private static String internalGetStrippedReversed(String str, int i) {
@@ -681,8 +660,8 @@ public class PhoneNumberUtils {
             return "";
         }
         if (z) {
-            String sb3 = sb2.toString();
-            Matcher matcher = Pattern.compile("(^[#*])(.*)([#*])(.*)(#)$").matcher(sb3);
+            String string = sb2.toString();
+            Matcher matcher = Pattern.compile("(^[#*])(.*)([#*])(.*)(#)$").matcher(string);
             if (matcher.matches()) {
                 if ("".equals(matcher.group(2))) {
                     sb = new StringBuilder();
@@ -701,7 +680,7 @@ public class PhoneNumberUtils {
                     sb.append(matcher.group(5));
                 }
             } else {
-                Matcher matcher2 = Pattern.compile("(^[#*])(.*)([#*])(.*)").matcher(sb3);
+                Matcher matcher2 = Pattern.compile("(^[#*])(.*)([#*])(.*)").matcher(string);
                 if (matcher2.matches()) {
                     sb = new StringBuilder();
                     sb.append(matcher2.group(1));
@@ -712,7 +691,7 @@ public class PhoneNumberUtils {
                 } else {
                     sb2 = new StringBuilder();
                     sb2.append(PLUS_SIGN_CHAR);
-                    sb2.append(sb3);
+                    sb2.append(string);
                 }
             }
             sb2 = sb;
@@ -721,20 +700,20 @@ public class PhoneNumberUtils {
     }
 
     private static void internalCalledPartyBCDFragmentToString(StringBuilder sb, byte[] bArr, int i, int i2, int i3) {
-        char bcdToChar;
-        char bcdToChar2;
+        char cBcdToChar;
+        char cBcdToChar2;
         int i4 = i;
         while (true) {
             int i5 = i2 + i;
-            if (i4 >= i5 || (bcdToChar = bcdToChar((byte) (bArr[i4] & 15), i3)) == 0) {
+            if (i4 >= i5 || (cBcdToChar = bcdToChar((byte) (bArr[i4] & 15), i3)) == 0) {
                 return;
             }
-            sb.append(bcdToChar);
+            sb.append(cBcdToChar);
             byte b = (byte) ((bArr[i4] >> 4) & 15);
-            if ((b == 15 && i4 + 1 == i5) || (bcdToChar2 = bcdToChar(b, i3)) == 0) {
+            if ((b == 15 && i4 + 1 == i5) || (cBcdToChar2 = bcdToChar(b, i3)) == 0) {
                 return;
             }
-            sb.append(bcdToChar2);
+            sb.append(cBcdToChar2);
             i4++;
         }
     }
@@ -784,8 +763,8 @@ public class PhoneNumberUtils {
     }
 
     public static boolean isWellFormedSmsAddress(String str) {
-        String extractNetworkPortion = extractNetworkPortion(str);
-        return (extractNetworkPortion.equals(PLUS_SIGN_STRING) || TextUtils.isEmpty(extractNetworkPortion) || !isDialable(extractNetworkPortion)) ? false : true;
+        String strExtractNetworkPortion = extractNetworkPortion(str);
+        return (strExtractNetworkPortion.equals(PLUS_SIGN_STRING) || TextUtils.isEmpty(strExtractNetworkPortion) || !isDialable(strExtractNetworkPortion)) ? false : true;
     }
 
     public static boolean isGlobalPhoneNumber(String str) {
@@ -833,6 +812,9 @@ public class PhoneNumberUtils {
     }
 
     private static byte[] numberToCalledPartyBCDHelper(String str, boolean z, int i) {
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
         int length = str.length();
         char c = 0;
         boolean z2 = str.indexOf(43) != -1;
@@ -846,10 +828,10 @@ public class PhoneNumberUtils {
         byte[] bArr = new byte[i5];
         int i6 = 0;
         for (int i7 = 0; i7 < length; i7++) {
-            char charAt = str.charAt(i7);
-            if (charAt != '+') {
+            char cCharAt = str.charAt(i7);
+            if (cCharAt != '+') {
                 int i8 = (i6 >> 1) + i4;
-                bArr[i8] = (byte) (((byte) ((charToBCD(charAt, i) & 15) << ((i6 & 1) == 1 ? 4 : 0))) | bArr[i8]);
+                bArr[i8] = (byte) (((byte) ((charToBCD(cCharAt, i) & 15) << ((i6 & 1) == 1 ? 4 : 0))) | bArr[i8]);
                 i6++;
             }
         }
@@ -915,7 +897,7 @@ public class PhoneNumberUtils {
         int i;
         int length = editable.length();
         if (length <= 15 && length > 5) {
-            CharSequence subSequence = editable.subSequence(0, length);
+            CharSequence charSequenceSubSequence = editable.subSequence(0, length);
             removeDashes(editable);
             int length2 = editable.length();
             int[] iArr = new int[3];
@@ -923,10 +905,10 @@ public class PhoneNumberUtils {
             int i3 = 0;
             char c = 1;
             for (int i4 = 0; i4 < length2; i4++) {
-                char charAt = editable.charAt(i4);
-                if (charAt != '+') {
-                    if (charAt != '-') {
-                        switch (charAt) {
+                char cCharAt = editable.charAt(i4);
+                if (cCharAt != '+') {
+                    if (cCharAt != '-') {
+                        switch (cCharAt) {
                             case '1':
                                 if (i2 == 0 || c == 2) {
                                     c = 3;
@@ -942,7 +924,7 @@ public class PhoneNumberUtils {
                             case '8':
                             case '9':
                                 if (c == 2) {
-                                    editable.replace(0, length2, subSequence);
+                                    editable.replace(0, length2, charSequenceSubSequence);
                                     return;
                                 }
                                 if (c == 3) {
@@ -962,13 +944,13 @@ public class PhoneNumberUtils {
                                 c = 1;
                                 continue;
                         }
-                        editable.replace(0, length2, subSequence);
+                        editable.replace(0, length2, charSequenceSubSequence);
                         return;
                     }
                     c = 4;
                 } else {
                     if (i4 != 0) {
-                        editable.replace(0, length2, subSequence);
+                        editable.replace(0, length2, charSequenceSubSequence);
                         return;
                     }
                     c = 2;
@@ -996,6 +978,10 @@ public class PhoneNumberUtils {
         JapanesePhoneNumberFormatter.format(editable);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:142:0x01b8  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void formatKRnpNumber(Editable editable) {
         char c;
         int length = editable.length();
@@ -1007,9 +993,9 @@ public class PhoneNumberUtils {
         if (length < 2) {
             return;
         }
-        String editable2 = editable.toString();
+        String string = editable.toString();
         int i2 = 0;
-        if (length < 6 && editable2.endsWith(NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
+        if (length < 6 && string.endsWith(NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
             while (i2 < editable.length()) {
                 if (editable.charAt(i2) == '-') {
                     editable.delete(i2, i2 + 1);
@@ -1042,18 +1028,18 @@ public class PhoneNumberUtils {
             } else if (length < 3) {
                 return;
             } else {
-                c = editable2.startsWith("050") ? (char) 14 : (char) 7;
+                c = string.startsWith("050") ? (char) 14 : (char) 7;
             }
         } else if (editable.charAt(0) == '*') {
             if (length < 4) {
                 return;
             }
-            if (editable2.startsWith("*23#") || editable2.startsWith("*22#") || editable2.startsWith(CLIR_ON)) {
+            if (string.startsWith("*23#") || string.startsWith("*22#") || string.startsWith(CLIR_ON)) {
                 if (length > 5) {
                     return;
                 }
                 c = '\n';
-            } else if (!editable2.startsWith("*230#") || length > 6) {
+            } else if (!string.startsWith("*230#") || length > 6) {
                 return;
             } else {
                 c = 11;
@@ -1063,7 +1049,7 @@ public class PhoneNumberUtils {
                 return;
             }
             if (editable.charAt(1) != '9') {
-                if (!editable2.startsWith(CLIR_OFF) || length > 5) {
+                if (!string.startsWith(CLIR_OFF) || length > 5) {
                     return;
                 }
                 c = '\n';
@@ -1083,7 +1069,7 @@ public class PhoneNumberUtils {
         } else {
             c = 5;
         }
-        CharSequence subSequence = editable.subSequence(0, length);
+        CharSequence charSequenceSubSequence = editable.subSequence(0, length);
         int i4 = 0;
         while (i4 < editable.length()) {
             if (editable.charAt(i4) == '-') {
@@ -1119,7 +1105,10 @@ public class PhoneNumberUtils {
                                 iArr[0] = 2;
                                 iArr[1] = length2 - 4;
                                 break;
-                            } else if (length2 > 9) {
+                            } else if (length2 <= 9) {
+                                i = 0;
+                                break;
+                            } else {
                                 iArr[0] = 2;
                                 iArr[1] = 6;
                                 break;
@@ -1130,8 +1119,6 @@ public class PhoneNumberUtils {
                             break;
                         }
                     }
-                    i = 0;
-                    break;
                 case 7:
                     if (length2 > 3) {
                         if (length2 > 7) {
@@ -1150,7 +1137,6 @@ public class PhoneNumberUtils {
                             break;
                         }
                     }
-                    i = 0;
                     break;
                 case '\b':
                     if (length2 > 2) {
@@ -1189,7 +1175,7 @@ public class PhoneNumberUtils {
                     i = 0;
                     break;
                 default:
-                    editable.replace(0, length2, subSequence);
+                    editable.replace(0, length2, charSequenceSubSequence);
                     break;
             }
             return;
@@ -1206,7 +1192,6 @@ public class PhoneNumberUtils {
                 iArr[1] = 8;
             }
         }
-        i = 0;
         if (i != 0) {
             while (i2 < i) {
                 int i5 = iArr[i2] + i2;
@@ -1246,9 +1231,9 @@ public class PhoneNumberUtils {
     private static String formatNumberInternal(String str, String str2, PhoneNumberUtil.PhoneNumberFormat phoneNumberFormat) {
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         try {
-            Phonenumber.PhoneNumber parse = phoneNumberUtil.parse(str, str2);
-            if (phoneNumberUtil.isValidNumber(parse)) {
-                return phoneNumberUtil.format(parse, phoneNumberFormat);
+            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.parse(str, str2);
+            if (phoneNumberUtil.isValidNumber(phoneNumber)) {
+                return phoneNumberUtil.format(phoneNumber, phoneNumberFormat);
             }
             return null;
         } catch (MissingMetadataException e) {
@@ -1299,11 +1284,11 @@ public class PhoneNumberUtils {
                     }
                 } else {
                     try {
-                        Phonenumber.PhoneNumber parseAndKeepRawInput = phoneNumberUtil.parseAndKeepRawInput(str, str2);
-                        if (KOREA_ISO_COUNTRY_CODE.equals(str2) && parseAndKeepRawInput.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && parseAndKeepRawInput.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
-                            return phoneNumberUtil.format(parseAndKeepRawInput, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+                        Phonenumber.PhoneNumber andKeepRawInput = phoneNumberUtil.parseAndKeepRawInput(str, str2);
+                        if (KOREA_ISO_COUNTRY_CODE.equals(str2) && andKeepRawInput.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && andKeepRawInput.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                            return phoneNumberUtil.format(andKeepRawInput, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
                         }
-                        return phoneNumberUtil.formatInOriginalFormat(parseAndKeepRawInput, str2);
+                        return phoneNumberUtil.formatInOriginalFormat(andKeepRawInput, str2);
                     } catch (MissingMetadataException e2) {
                         com.android.telephony.Rlog.e(LOG_TAG, "formatNumber: MissingMetadataException caught " + e2);
                     }
@@ -1313,27 +1298,27 @@ public class PhoneNumberUtils {
             return null;
         }
         try {
-            Phonenumber.PhoneNumber parseAndKeepRawInput2 = phoneNumberUtil.parseAndKeepRawInput(str, str2);
-            String formatInOriginalFormat = phoneNumberUtil.formatInOriginalFormat(parseAndKeepRawInput2, str2);
-            if (formatInOriginalFormat != null) {
-                return formatInOriginalFormat;
+            Phonenumber.PhoneNumber andKeepRawInput2 = phoneNumberUtil.parseAndKeepRawInput(str, str2);
+            String inOriginalFormat = phoneNumberUtil.formatInOriginalFormat(andKeepRawInput2, str2);
+            if (inOriginalFormat != null) {
+                return inOriginalFormat;
             }
             if (Flags.nationalCountryCodeFormattingForLocalCalls()) {
-                if (Arrays.asList(COUNTRY_CODES_TO_FORMAT_NATIONALLY).contains(str2) && parseAndKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(str2) && parseAndKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
-                    return phoneNumberUtil.format(parseAndKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+                if (Arrays.asList(COUNTRY_CODES_TO_FORMAT_NATIONALLY).contains(str2) && andKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(str2) && andKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                    return phoneNumberUtil.format(andKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
                 }
-                return phoneNumberUtil.formatInOriginalFormat(parseAndKeepRawInput2, str2);
+                return phoneNumberUtil.formatInOriginalFormat(andKeepRawInput2, str2);
             }
-            if (KOREA_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && parseAndKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && parseAndKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
-                return phoneNumberUtil.format(parseAndKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+            if (KOREA_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && andKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && andKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                return phoneNumberUtil.format(andKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
             }
-            if (JAPAN_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && parseAndKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(JAPAN_ISO_COUNTRY_CODE) && parseAndKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
-                return phoneNumberUtil.format(parseAndKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+            if (JAPAN_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && andKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(JAPAN_ISO_COUNTRY_CODE) && andKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                return phoneNumberUtil.format(andKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
             }
-            if (Flags.removeCountryCodeFromLocalSingaporeCalls() && SINGAPORE_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && parseAndKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(SINGAPORE_ISO_COUNTRY_CODE) && parseAndKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
-                return phoneNumberUtil.format(parseAndKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
+            if (Flags.removeCountryCodeFromLocalSingaporeCalls() && SINGAPORE_ISO_COUNTRY_CODE.equalsIgnoreCase(str2) && andKeepRawInput2.getCountryCode() == phoneNumberUtil.getCountryCodeForRegion(SINGAPORE_ISO_COUNTRY_CODE) && andKeepRawInput2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                return phoneNumberUtil.format(andKeepRawInput2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
             }
-            return phoneNumberUtil.formatInOriginalFormat(parseAndKeepRawInput2, str2);
+            return phoneNumberUtil.formatInOriginalFormat(andKeepRawInput2, str2);
         } catch (NumberParseException unused2) {
             return null;
         } catch (MissingMetadataException e3) {
@@ -1366,8 +1351,8 @@ public class PhoneNumberUtils {
             } catch (NumberParseException unused) {
             }
         }
-        String formatNumber = formatNumber(str, str3);
-        return formatNumber != null ? formatNumber : str;
+        String number = formatNumber(str, str3);
+        return number != null ? number : str;
     }
 
     public static String normalizeNumber(String str) {
@@ -1377,15 +1362,15 @@ public class PhoneNumberUtils {
         StringBuilder sb = new StringBuilder();
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            int digit = Character.digit(charAt, 10);
-            if (digit != -1) {
-                sb.append(digit);
-            } else if (sb.length() == 0 && charAt == '+') {
-                sb.append(charAt);
-            } else if (charAt == '*' || charAt == '#') {
-                sb.append(charAt);
-            } else if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z')) {
+            char cCharAt = str.charAt(i);
+            int iDigit = Character.digit(cCharAt, 10);
+            if (iDigit != -1) {
+                sb.append(iDigit);
+            } else if (sb.length() == 0 && cCharAt == '+') {
+                sb.append(cCharAt);
+            } else if (cCharAt == '*' || cCharAt == '#') {
+                sb.append(cCharAt);
+            } else if ((cCharAt >= 'a' && cCharAt <= 'z') || (cCharAt >= 'A' && cCharAt <= 'Z')) {
                 return normalizeNumber(convertKeypadLettersToDigits(str));
             }
         }
@@ -1395,9 +1380,9 @@ public class PhoneNumberUtils {
     public static String replaceUnicodeDigits(String str) {
         StringBuilder sb = new StringBuilder(str.length());
         for (char c : str.toCharArray()) {
-            int digit = Character.digit(c, 10);
-            if (digit != -1) {
-                sb.append(digit);
+            int iDigit = Character.digit(c, 10);
+            if (iDigit != -1) {
+                sb.append(iDigit);
             } else {
                 sb.append(c);
             }
@@ -1446,25 +1431,25 @@ public class PhoneNumberUtils {
 
     @SystemApi
     public static boolean isVoiceMailNumber(Context context, int i, String str) {
-        TelephonyManager from;
+        TelephonyManager telephonyManagerFrom;
         CarrierConfigManager carrierConfigManager;
         PersistableBundle configForSubId;
         try {
             if (context == null) {
-                from = TelephonyManager.getDefault();
+                telephonyManagerFrom = TelephonyManager.getDefault();
             } else {
-                from = TelephonyManager.from(context);
+                telephonyManagerFrom = TelephonyManager.from(context);
             }
-            String voiceMailNumber = from.getVoiceMailNumber(i);
-            String line1Number = from.getLine1Number(i);
-            String extractNetworkPortionAlt = extractNetworkPortionAlt(str);
-            if (TextUtils.isEmpty(extractNetworkPortionAlt)) {
+            String voiceMailNumber = telephonyManagerFrom.getVoiceMailNumber(i);
+            String line1Number = telephonyManagerFrom.getLine1Number(i);
+            String strExtractNetworkPortionAlt = extractNetworkPortionAlt(str);
+            if (TextUtils.isEmpty(strExtractNetworkPortionAlt)) {
                 return false;
             }
             if ((context == null || (carrierConfigManager = (CarrierConfigManager) context.getSystemService("carrier_config")) == null || (configForSubId = carrierConfigManager.getConfigForSubId(i)) == null) ? false : configForSubId.getBoolean(CarrierConfigManager.KEY_MDN_IS_ADDITIONAL_VOICEMAIL_NUMBER_BOOL)) {
-                return compare(extractNetworkPortionAlt, voiceMailNumber) || compare(extractNetworkPortionAlt, line1Number);
+                return compare(strExtractNetworkPortionAlt, voiceMailNumber) || compare(strExtractNetworkPortionAlt, line1Number);
             }
-            return compare(extractNetworkPortionAlt, voiceMailNumber);
+            return compare(strExtractNetworkPortionAlt, voiceMailNumber);
         } catch (SecurityException unused) {
             return false;
         }
@@ -1520,45 +1505,45 @@ public class PhoneNumberUtils {
     }
 
     public static String cdmaCheckAndProcessPlusCodeByNumberFormat(String str, int i, int i2, int i3, Context context) {
-        String extractNetworkPortionAlt;
-        String processPlusCode;
+        String strExtractNetworkPortionAlt;
+        String strProcessPlusCode;
         boolean z = i == i2 && i == 1;
         if (str != null && str.lastIndexOf(PLUS_SIGN_STRING) != -1) {
             String str2 = null;
-            String str3 = str;
+            String strSubstring = str;
             while (true) {
                 if (z) {
-                    extractNetworkPortionAlt = extractNetworkPortion(str3);
+                    strExtractNetworkPortionAlt = extractNetworkPortion(strSubstring);
                 } else {
-                    extractNetworkPortionAlt = extractNetworkPortionAlt(str3);
+                    strExtractNetworkPortionAlt = extractNetworkPortionAlt(strSubstring);
                 }
-                processPlusCode = processPlusCode(extractNetworkPortionAlt, z);
-                if (TextUtils.isEmpty(processPlusCode)) {
-                    com.android.telephony.Rlog.e("checkAndProcessPlusCode: null newDialStr", processPlusCode);
+                strProcessPlusCode = processPlusCode(strExtractNetworkPortionAlt, z);
+                if (TextUtils.isEmpty(strProcessPlusCode)) {
+                    com.android.telephony.Rlog.e("checkAndProcessPlusCode: null newDialStr", strProcessPlusCode);
                     break;
                 }
                 if (str2 != null) {
-                    processPlusCode = str2.concat(processPlusCode);
+                    strProcessPlusCode = str2.concat(strProcessPlusCode);
                 }
-                String extractPostDialPortion = extractPostDialPortion(str3);
-                if (!TextUtils.isEmpty(extractPostDialPortion)) {
-                    int findDialableIndexFromPostDialStr = findDialableIndexFromPostDialStr(extractPostDialPortion);
-                    if (findDialableIndexFromPostDialStr >= 1) {
-                        processPlusCode = appendPwCharBackToOrigDialStr(findDialableIndexFromPostDialStr, processPlusCode, extractPostDialPortion);
-                        str3 = extractPostDialPortion.substring(findDialableIndexFromPostDialStr);
+                String strExtractPostDialPortion = extractPostDialPortion(strSubstring);
+                if (!TextUtils.isEmpty(strExtractPostDialPortion)) {
+                    int iFindDialableIndexFromPostDialStr = findDialableIndexFromPostDialStr(strExtractPostDialPortion);
+                    if (iFindDialableIndexFromPostDialStr >= 1) {
+                        strProcessPlusCode = appendPwCharBackToOrigDialStr(iFindDialableIndexFromPostDialStr, strProcessPlusCode, strExtractPostDialPortion);
+                        strSubstring = strExtractPostDialPortion.substring(iFindDialableIndexFromPostDialStr);
                     } else {
-                        if (findDialableIndexFromPostDialStr < 0) {
-                            extractPostDialPortion = "";
+                        if (iFindDialableIndexFromPostDialStr < 0) {
+                            strExtractPostDialPortion = "";
                         }
-                        com.android.telephony.Rlog.e("wrong postDialStr=", extractPostDialPortion);
+                        com.android.telephony.Rlog.e("wrong postDialStr=", strExtractPostDialPortion);
                     }
                 }
-                if (TextUtils.isEmpty(extractPostDialPortion) || TextUtils.isEmpty(str3)) {
+                if (TextUtils.isEmpty(strExtractPostDialPortion) || TextUtils.isEmpty(strSubstring)) {
                     break;
                 }
-                str2 = processPlusCode;
+                str2 = strProcessPlusCode;
             }
-            return processPlusCode;
+            return strProcessPlusCode;
         }
         return str;
     }
@@ -1567,9 +1552,9 @@ public class PhoneNumberUtils {
         if (charSequence == null) {
             return null;
         }
-        Spannable newSpannable = Spannable.Factory.getInstance().newSpannable(charSequence);
-        addTtsSpan(newSpannable, 0, newSpannable.length());
-        return newSpannable;
+        Spannable spannableNewSpannable = Spannable.Factory.getInstance().newSpannable(charSequence);
+        addTtsSpan(spannableNewSpannable, 0, spannableNewSpannable.length());
+        return spannableNewSpannable;
     }
 
     public static void addTtsSpan(Spannable spannable, int i, int i2) {
@@ -1613,12 +1598,12 @@ public class PhoneNumberUtils {
         StringBuilder sb = new StringBuilder(charSequence.length());
         int i = 0;
         while (true) {
-            Object obj = " ";
+            Object objValueOf = " ";
             if (i < charSequence.length()) {
                 if (is12Key(charSequence.charAt(i))) {
-                    obj = Character.valueOf(charSequence.charAt(i));
+                    objValueOf = Character.valueOf(charSequence.charAt(i));
                 }
-                sb.append(obj);
+                sb.append(objValueOf);
                 i++;
             } else {
                 return sb.toString().replaceAll(" +", " ").trim();
@@ -1680,22 +1665,22 @@ public class PhoneNumberUtils {
 
     @SystemApi
     public static String getUsernameFromUriNumber(String str) {
-        int indexOf = str.indexOf(64);
-        if (indexOf < 0) {
-            indexOf = str.indexOf("%40");
+        int iIndexOf = str.indexOf(64);
+        if (iIndexOf < 0) {
+            iIndexOf = str.indexOf("%40");
         }
-        if (indexOf < 0) {
+        if (iIndexOf < 0) {
             com.android.telephony.Rlog.w(LOG_TAG, "getUsernameFromUriNumber: no delimiter found in SIP addr '" + SemTelephonyUtils.maskPii(str) + "'");
-            indexOf = str.length();
+            iIndexOf = str.length();
         }
-        return str.substring(0, indexOf);
+        return str.substring(0, iIndexOf);
     }
 
     public static Uri convertSipUriToTelUri(Uri uri) {
         if ("sip".equals(uri.getScheme())) {
-            String[] split = uri.getSchemeSpecificPart().split("[@;:]");
-            if (split.length != 0) {
-                return Uri.fromParts(PhoneAccount.SCHEME_TEL, split[0], null);
+            String[] strArrSplit = uri.getSchemeSpecificPart().split("[@;:]");
+            if (strArrSplit.length != 0) {
+                return Uri.fromParts(PhoneAccount.SCHEME_TEL, strArrSplit[0], null);
             }
         }
         return uri;
@@ -1705,14 +1690,14 @@ public class PhoneNumberUtils {
         if (str == null || str.charAt(0) != '+' || str.length() <= 1) {
             return str;
         }
-        String substring = str.substring(1);
-        if (z && isOneNanp(substring)) {
+        String strSubstring = str.substring(1);
+        if (z && isOneNanp(strSubstring)) {
             log("processPlusCode - Remove the leading plus sign");
-            return substring;
+            return strSubstring;
         }
-        String replaceFirst = str.replaceFirst("[+]", getCurrentIdp(z));
+        String strReplaceFirst = str.replaceFirst("[+]", getCurrentIdp(z));
         log("processPlusCode - Replaces the plus sign with the default IDP. useNanp: " + z + ", current IDP: " + getCurrentIdp(z));
-        return replaceFirst;
+        return strReplaceFirst;
     }
 
     private static int findDialableIndexFromPostDialStr(String str) {
@@ -1734,30 +1719,30 @@ public class PhoneNumberUtils {
     private static boolean matchIntlPrefix(String str, int i) {
         char c = 0;
         for (int i2 = 0; i2 < i; i2++) {
-            char charAt = str.charAt(i2);
+            char cCharAt = str.charAt(i2);
             if (c != 0) {
                 if (c != 2) {
                     if (c != 4) {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
-                    } else if (charAt == '1') {
+                    } else if (cCharAt == '1') {
                         c = 5;
-                    } else if (isNonSeparator(charAt)) {
+                    } else if (isNonSeparator(cCharAt)) {
                         return false;
                     }
-                } else if (charAt == '0') {
+                } else if (cCharAt == '0') {
                     c = 3;
-                } else if (charAt == '1') {
+                } else if (cCharAt == '1') {
                     c = 4;
-                } else if (isNonSeparator(charAt)) {
+                } else if (isNonSeparator(cCharAt)) {
                     return false;
                 }
-            } else if (charAt == '+') {
+            } else if (cCharAt == '+') {
                 c = 1;
-            } else if (charAt == '0') {
+            } else if (cCharAt == '0') {
                 c = 2;
-            } else if (isNonSeparator(charAt)) {
+            } else if (isNonSeparator(cCharAt)) {
                 return false;
             }
         }
@@ -1767,17 +1752,17 @@ public class PhoneNumberUtils {
     private static boolean matchIntlPrefixAndCC(String str, int i) {
         int i2 = 0;
         for (int i3 = 0; i3 < i; i3++) {
-            char charAt = str.charAt(i3);
+            char cCharAt = str.charAt(i3);
             switch (i2) {
                 case 0:
-                    if (charAt == '+') {
+                    if (cCharAt == '+') {
                         i2 = 1;
                         break;
-                    } else if (charAt == '0') {
+                    } else if (cCharAt == '0') {
                         i2 = 2;
                         break;
                     } else {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
                         break;
@@ -1785,51 +1770,51 @@ public class PhoneNumberUtils {
                 case 1:
                 case 3:
                 case 5:
-                    if (isISODigit(charAt)) {
+                    if (isISODigit(cCharAt)) {
                         i2 = 6;
                         break;
                     } else {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
                         break;
                     }
                 case 2:
-                    if (charAt == '0') {
+                    if (cCharAt == '0') {
                         i2 = 3;
                         break;
-                    } else if (charAt == '1') {
+                    } else if (cCharAt == '1') {
                         i2 = 4;
                         break;
                     } else {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
                         break;
                     }
                 case 4:
-                    if (charAt == '1') {
+                    if (cCharAt == '1') {
                         i2 = 5;
                         break;
                     } else {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
                         break;
                     }
                 case 6:
                 case 7:
-                    if (isISODigit(charAt)) {
+                    if (isISODigit(cCharAt)) {
                         i2++;
                         break;
                     } else {
-                        if (isNonSeparator(charAt)) {
+                        if (isNonSeparator(cCharAt)) {
                             return false;
                         }
                         break;
                     }
                 default:
-                    if (isNonSeparator(charAt)) {
+                    if (isNonSeparator(cCharAt)) {
                         return false;
                     }
                     break;
@@ -1841,10 +1826,10 @@ public class PhoneNumberUtils {
     private static boolean matchTrunkPrefix(String str, int i) {
         boolean z = false;
         for (int i2 = 0; i2 < i; i2++) {
-            char charAt = str.charAt(i2);
-            if (charAt == '0' && !z) {
+            char cCharAt = str.charAt(i2);
+            if (cCharAt == '0' && !z) {
                 z = true;
-            } else if (isNonSeparator(charAt)) {
+            } else if (isNonSeparator(cCharAt)) {
                 return false;
             }
         }
@@ -1870,23 +1855,23 @@ public class PhoneNumberUtils {
         int i = 0;
         int i2 = 0;
         for (int i3 = 0; i3 < length; i3++) {
-            char charAt = str.charAt(i3);
+            char cCharAt = str.charAt(i3);
             switch (i) {
                 case 0:
-                    if (charAt == '+') {
+                    if (cCharAt == '+') {
                         i = 1;
                         break;
-                    } else if (charAt == '0') {
+                    } else if (cCharAt == '0') {
                         i = 2;
                         break;
-                    } else if (charAt == '1') {
+                    } else if (cCharAt == '1') {
                         if (!z) {
                             return null;
                         }
                         i = 8;
                         break;
                     } else {
-                        if (isDialable(charAt)) {
+                        if (isDialable(cCharAt)) {
                             return null;
                         }
                         break;
@@ -1896,9 +1881,9 @@ public class PhoneNumberUtils {
                 case 5:
                 case 6:
                 case 7:
-                    int tryGetISODigit = tryGetISODigit(charAt);
-                    if (tryGetISODigit > 0) {
-                        i2 = (i2 * 10) + tryGetISODigit;
+                    int iTryGetISODigit = tryGetISODigit(cCharAt);
+                    if (iTryGetISODigit > 0) {
+                        i2 = (i2 * 10) + iTryGetISODigit;
                         if (i2 >= 100 || isCountryCallingCode(i2)) {
                             return new CountryCallingCodeAndNewIndex(i2, i3 + 1);
                         }
@@ -1910,46 +1895,47 @@ public class PhoneNumberUtils {
                             break;
                         }
                     } else {
-                        if (isDialable(charAt)) {
+                        if (isDialable(cCharAt)) {
                             return null;
                         }
                         break;
                     }
+                    break;
                 case 2:
-                    if (charAt == '0') {
+                    if (cCharAt == '0') {
                         i = 3;
                         break;
-                    } else if (charAt == '1') {
+                    } else if (cCharAt == '1') {
                         i = 4;
                         break;
                     } else {
-                        if (isDialable(charAt)) {
+                        if (isDialable(cCharAt)) {
                             return null;
                         }
                         break;
                     }
                 case 4:
-                    if (charAt == '1') {
+                    if (cCharAt == '1') {
                         i = 5;
                         break;
                     } else {
-                        if (isDialable(charAt)) {
+                        if (isDialable(cCharAt)) {
                             return null;
                         }
                         break;
                     }
                 case 8:
-                    if (charAt == '6') {
+                    if (cCharAt == '6') {
                         i = 9;
                         break;
                     } else {
-                        if (isDialable(charAt)) {
+                        if (isDialable(cCharAt)) {
                             return null;
                         }
                         break;
                     }
                 case 9:
-                    if (charAt == '6') {
+                    if (cCharAt == '6') {
                         return new CountryCallingCodeAndNewIndex(66, i3 + 1);
                     }
                     return null;
@@ -1963,11 +1949,11 @@ public class PhoneNumberUtils {
     private static int tryGetTrunkPrefixOmittedIndex(String str, int i) {
         int length = str.length();
         while (i < length) {
-            char charAt = str.charAt(i);
-            if (tryGetISODigit(charAt) >= 0) {
+            char cCharAt = str.charAt(i);
+            if (tryGetISODigit(cCharAt) >= 0) {
                 return i + 1;
             }
-            if (isDialable(charAt)) {
+            if (isDialable(cCharAt)) {
                 return -1;
             }
             i++;
@@ -1996,28 +1982,28 @@ public class PhoneNumberUtils {
     }
 
     public static String convertToEmergencyNumber(Context context, String str) {
-        String[] strArr;
+        String[] strArrSplit;
         if (context != null && !TextUtils.isEmpty(str)) {
-            String normalizeNumber = normalizeNumber(str);
-            if (!isEmergencyNumber(normalizeNumber)) {
+            String strNormalizeNumber = normalizeNumber(str);
+            if (!isEmergencyNumber(strNormalizeNumber)) {
                 if (sConvertToEmergencyMap == null) {
                     sConvertToEmergencyMap = context.getResources().getStringArray(R.array.config_convert_to_emergency_number_map);
                 }
-                String[] strArr2 = sConvertToEmergencyMap;
-                if (strArr2 != null && strArr2.length != 0) {
-                    for (String str2 : strArr2) {
+                String[] strArr = sConvertToEmergencyMap;
+                if (strArr != null && strArr.length != 0) {
+                    for (String str2 : strArr) {
                         String str3 = null;
-                        String[] split = !TextUtils.isEmpty(str2) ? str2.split(":") : null;
-                        if (split == null || split.length != 2) {
-                            strArr = null;
+                        String[] strArrSplit2 = !TextUtils.isEmpty(str2) ? str2.split(":") : null;
+                        if (strArrSplit2 == null || strArrSplit2.length != 2) {
+                            strArrSplit = null;
                         } else {
-                            String str4 = split[1];
-                            strArr = TextUtils.isEmpty(split[0]) ? null : split[0].split(",");
+                            String str4 = strArrSplit2[1];
+                            strArrSplit = TextUtils.isEmpty(strArrSplit2[0]) ? null : strArrSplit2[0].split(",");
                             str3 = str4;
                         }
-                        if (!TextUtils.isEmpty(str3) && strArr != null && strArr.length != 0) {
-                            for (String str5 : strArr) {
-                                if (!TextUtils.isEmpty(str5) && str5.equals(normalizeNumber)) {
+                        if (!TextUtils.isEmpty(str3) && strArrSplit != null && strArrSplit.length != 0) {
+                            for (String str5 : strArrSplit) {
+                                if (!TextUtils.isEmpty(str5) && str5.equals(strNormalizeNumber)) {
                                     return str3;
                                 }
                             }
@@ -2035,13 +2021,13 @@ public class PhoneNumberUtils {
             str3 = str3.toUpperCase(Locale.ROOT);
         }
         try {
-            Phonenumber.PhoneNumber parseAndKeepRawInput = phoneNumberUtil.parseAndKeepRawInput(str, str3);
-            Phonenumber.PhoneNumber parseAndKeepRawInput2 = phoneNumberUtil.parseAndKeepRawInput(str2, str3);
-            PhoneNumberUtil.MatchType isNumberMatch = phoneNumberUtil.isNumberMatch(parseAndKeepRawInput, parseAndKeepRawInput2);
-            if (isNumberMatch == PhoneNumberUtil.MatchType.EXACT_MATCH || isNumberMatch == PhoneNumberUtil.MatchType.NSN_MATCH) {
+            Phonenumber.PhoneNumber andKeepRawInput = phoneNumberUtil.parseAndKeepRawInput(str, str3);
+            Phonenumber.PhoneNumber andKeepRawInput2 = phoneNumberUtil.parseAndKeepRawInput(str2, str3);
+            PhoneNumberUtil.MatchType matchTypeIsNumberMatch = phoneNumberUtil.isNumberMatch(andKeepRawInput, andKeepRawInput2);
+            if (matchTypeIsNumberMatch == PhoneNumberUtil.MatchType.EXACT_MATCH || matchTypeIsNumberMatch == PhoneNumberUtil.MatchType.NSN_MATCH) {
                 return true;
             }
-            return isNumberMatch == PhoneNumberUtil.MatchType.SHORT_NSN_MATCH && parseAndKeepRawInput.getNationalNumber() == parseAndKeepRawInput2.getNationalNumber() && parseAndKeepRawInput.getCountryCode() == parseAndKeepRawInput2.getCountryCode();
+            return matchTypeIsNumberMatch == PhoneNumberUtil.MatchType.SHORT_NSN_MATCH && andKeepRawInput.getNationalNumber() == andKeepRawInput2.getNationalNumber() && andKeepRawInput.getCountryCode() == andKeepRawInput2.getCountryCode();
         } catch (MissingMetadataException e) {
             com.android.telephony.Rlog.e(LOG_TAG, "areSamePhoneNumber: MissingMetadataException caught " + e);
             return false;
@@ -2095,10 +2081,10 @@ public class PhoneNumberUtils {
         byte[] bArr = new byte[i4];
         int i5 = 0;
         for (int i6 = 0; i6 < length; i6++) {
-            char charAt = str.charAt(i6);
-            if (charAt != '+') {
+            char cCharAt = str.charAt(i6);
+            if (cCharAt != '+') {
                 int i7 = (i5 >> 1) + i3;
-                bArr[i7] = (byte) (bArr[i7] | ((byte) ((charToBCD(charAt) & 15) << ((i5 & 1) == 1 ? 4 : 0))));
+                bArr[i7] = (byte) (bArr[i7] | ((byte) ((charToBCD(cCharAt) & 15) << ((i5 & 1) == 1 ? 4 : 0))));
                 i5++;
             }
         }
@@ -2133,10 +2119,10 @@ public class PhoneNumberUtils {
                 log("US country code is detected with more than 11 digits");
                 return false;
             }
-            Cursor query = context.getContentResolver().query(MCC_OTA_URI, null, null, null, null);
-            mCursorCountry = query;
-            if (query != null) {
-                query.moveToFirst();
+            Cursor cursorQuery = context.getContentResolver().query(MCC_OTA_URI, null, null, null, null);
+            mCursorCountry = cursorQuery;
+            if (cursorQuery != null) {
+                cursorQuery.moveToFirst();
                 while (!mCursorCountry.isAfterLast()) {
                     if (str.startsWith(mCursorCountry.getString(6))) {
                         log("contry code is detected");
@@ -2152,33 +2138,33 @@ public class PhoneNumberUtils {
     }
 
     public static String convertSMSDestinationAddress(String str, Context context, int i) {
-        String extractNetworkPortion = extractNetworkPortion(str);
-        int length = extractNetworkPortion.length();
-        char charAt = extractNetworkPortion.charAt(0);
-        if (!isISODigit(charAt) && '+' != charAt) {
-            com.android.telephony.Rlog.d(LOG_TAG, "SMS Destination Number might be email address" + charAt);
-            return extractNetworkPortion;
+        String strExtractNetworkPortion = extractNetworkPortion(str);
+        int length = strExtractNetworkPortion.length();
+        char cCharAt = strExtractNetworkPortion.charAt(0);
+        if (!isISODigit(cCharAt) && '+' != cCharAt) {
+            com.android.telephony.Rlog.d(LOG_TAG, "SMS Destination Number might be email address" + cCharAt);
+            return strExtractNetworkPortion;
         }
-        com.android.telephony.Rlog.d(LOG_TAG, "SMS Destination Number is OK " + charAt);
+        com.android.telephony.Rlog.d(LOG_TAG, "SMS Destination Number is OK " + cCharAt);
         try {
             int defaultSubscriptionId = SubscriptionManager.getDefaultSubscriptionId();
-            if (!retrieveAssistedParams(defaultSubscriptionId, extractNetworkPortion, ((TelephonyManager) context.getSystemService("phone")).getLine1Number(defaultSubscriptionId), context)) {
-                return extractNetworkPortion;
+            if (!retrieveAssistedParams(defaultSubscriptionId, strExtractNetworkPortion, ((TelephonyManager) context.getSystemService("phone")).getLine1Number(defaultSubscriptionId), context)) {
+                return strExtractNetworkPortion;
             }
             StringBuilder sb = new StringBuilder(128);
-            boolean startsWith = extractNetworkPortion.startsWith(otaCountryIDDPrefix);
-            boolean startsWith2 = extractNetworkPortion.startsWith(NANP_IDP_STRING);
-            String substring = extractNetworkPortion.substring(0, 5);
+            boolean zStartsWith = strExtractNetworkPortion.startsWith(otaCountryIDDPrefix);
+            boolean zStartsWith2 = strExtractNetworkPortion.startsWith(NANP_IDP_STRING);
+            String strSubstring = strExtractNetworkPortion.substring(0, 5);
             StringBuilder sb2 = new StringBuilder("SMS Destination numberLength: ");
             sb2.append(length);
             sb2.append(" numberBeginsWithOTAIDDPrefix: ");
-            sb2.append(startsWith);
+            sb2.append(zStartsWith);
             sb2.append(" numberBeginsWithNonUSIDDPrefix: ");
-            sb2.append(!startsWith2);
+            sb2.append(!zStartsWith2);
             sb2.append(" otaCountryIDDPrefix: ");
             sb2.append(otaCountryIDDPrefix);
             sb2.append(" number : ");
-            sb2.append(substring);
+            sb2.append(strSubstring);
             sb2.append("**********");
             com.android.telephony.Rlog.d(LOG_TAG, sb2.toString());
             if (i == 1) {
@@ -2196,101 +2182,101 @@ public class PhoneNumberUtils {
             if (isCDMARegistered) {
                 if (!isNetRoaming) {
                     com.android.telephony.Rlog.d(LOG_TAG, "Address Rule in VZW Network");
-                    if (!isISODigit(charAt) || startsWith2 || length < 11 || ((length == 11 && '1' == charAt) || !startWithCountryCode(extractNetworkPortion, context))) {
-                        return cdmaCheckAndProcessPlusCodeByNumberFormat(extractNetworkPortion, 1, 1);
+                    if (!isISODigit(cCharAt) || zStartsWith2 || length < 11 || ((length == 11 && '1' == cCharAt) || !startWithCountryCode(strExtractNetworkPortion, context))) {
+                        return cdmaCheckAndProcessPlusCodeByNumberFormat(strExtractNetworkPortion, 1, 1);
                     }
                     sb.append(NANP_IDP_STRING);
-                    sb.append(extractNetworkPortion);
+                    sb.append(strExtractNetworkPortion);
                     return sb.toString();
                 }
                 com.android.telephony.Rlog.d(LOG_TAG, "Address Rule in CDMA Internatinal Roaming");
-                if ((isISODigit(charAt) || '+' == charAt) && length >= 11 && (length != 11 || '1' != charAt)) {
-                    String substring2 = extractNetworkPortion.substring(length - 11);
-                    String substring3 = startsWith ? extractNetworkPortion.substring(otaCountryIDDPrefix.length(), extractNetworkPortion.length()) : null;
-                    if (startsWith) {
+                if ((isISODigit(cCharAt) || '+' == cCharAt) && length >= 11 && (length != 11 || '1' != cCharAt)) {
+                    String strSubstring2 = strExtractNetworkPortion.substring(length - 11);
+                    String strSubstring3 = zStartsWith ? strExtractNetworkPortion.substring(otaCountryIDDPrefix.length(), strExtractNetworkPortion.length()) : null;
+                    if (zStartsWith) {
                         int length2 = otaCountryIDDPrefix.length();
-                        String substring4 = extractNetworkPortion.substring(length2);
-                        if (isOneNanp(substring2) && extractNetworkPortion.length() == length2 + 11) {
-                            sb.append(substring4);
-                        } else if (startWithCountryCode(substring3, context)) {
+                        String strSubstring4 = strExtractNetworkPortion.substring(length2);
+                        if (isOneNanp(strSubstring2) && strExtractNetworkPortion.length() == length2 + 11) {
+                            sb.append(strSubstring4);
+                        } else if (startWithCountryCode(strSubstring3, context)) {
                             com.android.telephony.Rlog.d(LOG_TAG, "Found Country Code after IDD");
-                            sb.append(extractNetworkPortion);
+                            sb.append(strExtractNetworkPortion);
                             sb.replace(0, length2, NANP_IDP_STRING);
                         } else {
                             com.android.telephony.Rlog.d(LOG_TAG, "No Condition");
-                            sb.append(extractNetworkPortion);
+                            sb.append(strExtractNetworkPortion);
                         }
                         return sb.toString();
                     }
-                    if ('+' == charAt) {
-                        String substring5 = extractNetworkPortion.substring(1);
-                        if (isOneNanp(substring5) && extractNetworkPortion.length() == 12) {
-                            sb.append(substring5);
-                        } else if (startWithCountryCode(substring5, context)) {
+                    if ('+' == cCharAt) {
+                        String strSubstring5 = strExtractNetworkPortion.substring(1);
+                        if (isOneNanp(strSubstring5) && strExtractNetworkPortion.length() == 12) {
+                            sb.append(strSubstring5);
+                        } else if (startWithCountryCode(strSubstring5, context)) {
                             sb.append(NANP_IDP_STRING);
-                            sb.append(substring5);
+                            sb.append(strSubstring5);
                         } else {
                             com.android.telephony.Rlog.d(LOG_TAG, "1NANP is not matched");
-                            sb.append(extractNetworkPortion);
+                            sb.append(strExtractNetworkPortion);
                         }
                         return sb.toString();
                     }
-                    if (startWithCountryCode(extractNetworkPortion, context)) {
+                    if (startWithCountryCode(strExtractNetworkPortion, context)) {
                         sb.append(NANP_IDP_STRING);
-                        sb.append(extractNetworkPortion);
+                        sb.append(strExtractNetworkPortion);
                         return sb.toString();
                     }
                 }
             }
             if (isGSMRegistered) {
                 com.android.telephony.Rlog.d(LOG_TAG, "Address Rule in GSM/UMTS");
-                if ((isISODigit(charAt) || '+' == charAt) && length >= 11 && (length != 11 || '1' != charAt)) {
-                    String substring6 = extractNetworkPortion.substring(length - 11);
-                    String substring7 = startsWith ? extractNetworkPortion.substring(otaCountryIDDPrefix.length(), extractNetworkPortion.length()) : null;
-                    if (startsWith) {
+                if ((isISODigit(cCharAt) || '+' == cCharAt) && length >= 11 && (length != 11 || '1' != cCharAt)) {
+                    String strSubstring6 = strExtractNetworkPortion.substring(length - 11);
+                    String strSubstring7 = zStartsWith ? strExtractNetworkPortion.substring(otaCountryIDDPrefix.length(), strExtractNetworkPortion.length()) : null;
+                    if (zStartsWith) {
                         int length3 = otaCountryIDDPrefix.length();
-                        if (isOneNanp(extractNetworkPortion.substring(length3)) && extractNetworkPortion.length() == length3 + 11) {
-                            sb.append(extractNetworkPortion);
+                        if (isOneNanp(strExtractNetworkPortion.substring(length3)) && strExtractNetworkPortion.length() == length3 + 11) {
+                            sb.append(strExtractNetworkPortion);
                             sb.replace(0, otaCountryIDDPrefix.length(), PLUS_SIGN_STRING);
                             return sb.toString();
                         }
-                        if (startWithCountryCode(substring7, context)) {
-                            sb.append(extractNetworkPortion);
+                        if (startWithCountryCode(strSubstring7, context)) {
+                            sb.append(strExtractNetworkPortion);
                             sb.replace(0, otaCountryIDDPrefix.length(), NANP_IDP_STRING);
                             return sb.toString();
                         }
                         com.android.telephony.Rlog.d(LOG_TAG, "No condition is matched in IDD");
-                        sb.append(extractNetworkPortion);
+                        sb.append(strExtractNetworkPortion);
                         return sb.toString();
                     }
-                    if ('+' == charAt) {
-                        String substring8 = extractNetworkPortion.substring(1);
-                        if (isOneNanp(substring6) && extractNetworkPortion.length() == 12) {
-                            sb.append(extractNetworkPortion);
-                        } else if (startWithCountryCode(substring8, context)) {
-                            String substring9 = extractNetworkPortion.substring(1);
+                    if ('+' == cCharAt) {
+                        String strSubstring8 = strExtractNetworkPortion.substring(1);
+                        if (isOneNanp(strSubstring6) && strExtractNetworkPortion.length() == 12) {
+                            sb.append(strExtractNetworkPortion);
+                        } else if (startWithCountryCode(strSubstring8, context)) {
+                            String strSubstring9 = strExtractNetworkPortion.substring(1);
                             sb.append(NANP_IDP_STRING);
-                            sb.append(substring9);
-                        } else if (substring8.startsWith(NANP_IDP_STRING)) {
-                            sb.append(substring8);
+                            sb.append(strSubstring9);
+                        } else if (strSubstring8.startsWith(NANP_IDP_STRING)) {
+                            sb.append(strSubstring8);
                         } else {
                             com.android.telephony.Rlog.d(LOG_TAG, "No condition is matched in '+'");
-                            sb.append(extractNetworkPortion);
+                            sb.append(strExtractNetworkPortion);
                         }
                         return sb.toString();
                     }
-                    if (startWithCountryCode(extractNetworkPortion, context)) {
+                    if (startWithCountryCode(strExtractNetworkPortion, context)) {
                         sb.append(NANP_IDP_STRING);
-                        sb.append(extractNetworkPortion);
+                        sb.append(strExtractNetworkPortion);
                         return sb.toString();
                     }
                 }
             }
             com.android.telephony.Rlog.d(LOG_TAG, "Can't find any match in this number");
-            return extractNetworkPortion;
+            return strExtractNetworkPortion;
         } catch (Exception e) {
             com.android.telephony.Rlog.d(LOG_TAG, "Cannot convert: " + e);
-            return extractNetworkPortion;
+            return strExtractNetworkPortion;
         }
     }
 
@@ -2308,13 +2294,13 @@ public class PhoneNumberUtils {
             return false;
         }
         try {
-            Cursor query = context.getContentResolver().query(REF_COUNTRY_SHARED_PREF, null, null, null, null);
-            mCursor = query;
-            if (query == null) {
+            Cursor cursorQuery = context.getContentResolver().query(REF_COUNTRY_SHARED_PREF, null, null, null, null);
+            mCursor = cursorQuery;
+            if (cursorQuery == null) {
                 adLog("Invalid Reference Country");
                 return false;
             }
-            query.moveToFirst();
+            cursorQuery.moveToFirst();
             refCountryName = mCursor.getString(1);
             String string = mCursor.getString(2);
             String str4 = "430";

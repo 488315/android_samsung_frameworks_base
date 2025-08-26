@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CombinedClickableElement extends ModifierNodeElement<CombinedClickableNode> {
     public final boolean enabled;
@@ -49,19 +48,19 @@ final class CombinedClickableElement extends ModifierNodeElement<CombinedClickab
 
     public final int hashCode() {
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode = (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0) * 31;
+        int iHashCode = (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0) * 31;
         IndicationNodeFactory indicationNodeFactory = this.indicationNodeFactory;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
         String str = this.onClickLabel;
-        int hashCode2 = (m + (str != null ? str.hashCode() : 0)) * 31;
+        int iHashCode2 = (iM + (str != null ? str.hashCode() : 0)) * 31;
         Role role = this.role;
-        int hashCode3 = (this.onClick.hashCode() + ((hashCode2 + (role != null ? Integer.hashCode(role.value) : 0)) * 31)) * 31;
+        int iHashCode3 = (this.onClick.hashCode() + ((iHashCode2 + (role != null ? Integer.hashCode(role.value) : 0)) * 31)) * 31;
         String str2 = this.onLongClickLabel;
-        int hashCode4 = (hashCode3 + (str2 != null ? str2.hashCode() : 0)) * 31;
+        int iHashCode4 = (iHashCode3 + (str2 != null ? str2.hashCode() : 0)) * 31;
         Function0 function0 = this.onLongClick;
-        int hashCode5 = (hashCode4 + (function0 != null ? function0.hashCode() : 0)) * 31;
+        int iHashCode5 = (iHashCode4 + (function0 != null ? function0.hashCode() : 0)) * 31;
         Function0 function02 = this.onDoubleClick;
-        return Boolean.hashCode(this.hapticFeedbackEnabled) + ((hashCode5 + (function02 != null ? function02.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.hapticFeedbackEnabled) + ((iHashCode5 + (function02 != null ? function02.hashCode() : 0)) * 31);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

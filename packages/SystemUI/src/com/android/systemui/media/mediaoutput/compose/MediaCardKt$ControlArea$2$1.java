@@ -20,7 +20,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaCardKt$ControlArea$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<List<MediaAction>> $actions$delegate;
@@ -56,7 +55,7 @@ final class MediaCardKt$ControlArea$2$1 extends SuspendLambda implements Functio
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
+        Object next;
         SessionController sessionController;
         MediaInteraction mediaInteraction;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -66,15 +65,15 @@ final class MediaCardKt$ControlArea$2$1 extends SuspendLambda implements Functio
             Iterator it = ((List) this.$actions$delegate.getValue()).iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj2 = null;
+                    next = null;
                     break;
                 }
-                obj2 = it.next();
-                if (((MediaAction) obj2).id == -4) {
+                next = it.next();
+                if (((MediaAction) next).id == -4) {
                     break;
                 }
             }
-            MediaAction mediaAction = (MediaAction) obj2;
+            MediaAction mediaAction = (MediaAction) next;
             if (mediaAction != null) {
                 Context context = this.$context;
                 SessionController sessionController2 = this.$sessionController;

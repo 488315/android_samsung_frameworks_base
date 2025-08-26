@@ -4,7 +4,7 @@ package android.view.inputmethod;
 public final class FeatureFlagsImpl implements FeatureFlags {
     @Override // android.view.inputmethod.FeatureFlags
     public boolean adaptiveHandwritingBounds() {
-        return true;
+        return false;
     }
 
     @Override // android.view.inputmethod.FeatureFlags

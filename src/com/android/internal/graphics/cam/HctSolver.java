@@ -35,8 +35,8 @@ public class HctSolver {
     }
 
     static double chromaticAdaptation(double d) {
-        double pow = Math.pow(Math.abs(d), 0.42d);
-        return ((CamUtils.signum(d) * 400.0d) * pow) / (pow + 27.13d);
+        double dPow = Math.pow(Math.abs(d), 0.42d);
+        return ((CamUtils.signum(d) * 400.0d) * dPow) / (dPow + 27.13d);
     }
 
     static double hueOf(double[] dArr) {
@@ -52,10 +52,10 @@ public class HctSolver {
         double d7 = (dArr4[0] * d) + (dArr4[1] * d3) + (dArr4[2] * d5);
         double[] dArr5 = dArr2[2];
         double d8 = (d * dArr5[0]) + (d3 * dArr5[1]) + (d5 * dArr5[2]);
-        double chromaticAdaptation = chromaticAdaptation(d6);
-        double chromaticAdaptation2 = chromaticAdaptation(d7);
-        double chromaticAdaptation3 = chromaticAdaptation(d8);
-        return Math.atan2(((chromaticAdaptation + chromaticAdaptation2) - (chromaticAdaptation3 * 2.0d)) / 9.0d, (((chromaticAdaptation * 11.0d) + ((-12.0d) * chromaticAdaptation2)) + chromaticAdaptation3) / 11.0d);
+        double dChromaticAdaptation = chromaticAdaptation(d6);
+        double dChromaticAdaptation2 = chromaticAdaptation(d7);
+        double dChromaticAdaptation3 = chromaticAdaptation(d8);
+        return Math.atan2(((dChromaticAdaptation + dChromaticAdaptation2) - (dChromaticAdaptation3 * 2.0d)) / 9.0d, (((dChromaticAdaptation * 11.0d) + ((-12.0d) * dChromaticAdaptation2)) + dChromaticAdaptation3) / 11.0d);
     }
 
     static boolean areInCyclicOrder(double d, double d2, double d3) {
@@ -107,84 +107,50 @@ public class HctSolver {
         return new double[]{-1.0d, -1.0d, -1.0d};
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x003e, code lost:
-    
-        if (r16 != false) goto L17;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    static double[][] bisectToSegment(double r19, double r21) {
-        /*
-            r0 = 3
-            double[] r0 = new double[r0]
-            r1 = 0
-            r2 = -4616189618054758400(0xbff0000000000000, double:-1.0)
-            r0[r1] = r2
-            r4 = 1
-            r0[r4] = r2
-            r5 = 2
-            r0[r5] = r2
-            r2 = 0
-            r5 = r0
-            r6 = r1
-            r7 = r6
-            r9 = r2
-            r13 = r9
-            r8 = r4
-        L16:
-            r11 = 12
-            if (r6 >= r11) goto L59
-            r11 = r19
-            double[] r15 = nthVertex(r11, r6)
-            r16 = r15[r1]
-            int r16 = (r16 > r2 ? 1 : (r16 == r2 ? 0 : -1))
-            if (r16 >= 0) goto L29
-            r17 = r13
-            goto L41
-        L29:
-            double r11 = hueOf(r15)
-            if (r7 != 0) goto L35
-            r7 = r4
-            r9 = r11
-            r13 = r9
-            r0 = r15
-            r5 = r0
-            goto L56
-        L35:
-            if (r8 != 0) goto L44
-            boolean r16 = areInCyclicOrder(r9, r11, r13)
-            r17 = r13
-            r13 = r11
-            if (r16 == 0) goto L41
-            goto L47
-        L41:
-            r13 = r17
-            goto L56
-        L44:
-            r17 = r13
-            r13 = r11
-        L47:
-            r11 = r21
-            boolean r8 = areInCyclicOrder(r9, r11, r13)
-            if (r8 == 0) goto L52
-            r8 = r1
-            r5 = r15
-            goto L56
-        L52:
-            r8 = r1
-            r9 = r13
-            r0 = r15
-            goto L41
-        L56:
-            int r6 = r6 + 1
-            goto L16
-        L59:
-            double[][] r0 = new double[][]{r0, r5}
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.graphics.cam.HctSolver.bisectToSegment(double, double):double[][]");
+    static double[][] bisectToSegment(double d, double d2) {
+        double d3;
+        double[] dArr = {-1.0d, -1.0d, -1.0d};
+        double[] dArr2 = dArr;
+        boolean z = false;
+        double d4 = 0.0d;
+        double d5 = 0.0d;
+        boolean z2 = true;
+        for (int i = 0; i < 12; i++) {
+            double[] dArrNthVertex = nthVertex(d, i);
+            if (dArrNthVertex[0] < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+                d3 = d5;
+            } else {
+                double dHueOf = hueOf(dArrNthVertex);
+                if (z) {
+                    if (z2) {
+                        d3 = d5;
+                        d5 = dHueOf;
+                    } else {
+                        boolean zAreInCyclicOrder = areInCyclicOrder(d4, dHueOf, d5);
+                        d3 = d5;
+                        d5 = dHueOf;
+                        if (zAreInCyclicOrder) {
+                        }
+                    }
+                    if (areInCyclicOrder(d4, d2, d5)) {
+                        z2 = false;
+                        dArr2 = dArrNthVertex;
+                    } else {
+                        z2 = false;
+                        d4 = d5;
+                        dArr = dArrNthVertex;
+                    }
+                } else {
+                    z = true;
+                    d4 = dHueOf;
+                    d5 = d4;
+                    dArr = dArrNthVertex;
+                    dArr2 = dArr;
+                }
+            }
+            d5 = d3;
+        }
+        return new double[][]{dArr, dArr2};
     }
 
     static int criticalPlaneBelow(double d) {
@@ -196,84 +162,84 @@ public class HctSolver {
     }
 
     static int bisectToLimit(double d, double d2) {
-        int criticalPlaneAbove;
-        int criticalPlaneBelow;
-        double[][] bisectToSegment = bisectToSegment(d, d2);
-        double[] dArr = bisectToSegment[0];
-        double hueOf = hueOf(dArr);
-        double[] dArr2 = bisectToSegment[1];
+        int iCriticalPlaneAbove;
+        int iCriticalPlaneBelow;
+        double[][] dArrBisectToSegment = bisectToSegment(d, d2);
+        double[] dArr = dArrBisectToSegment[0];
+        double dHueOf = hueOf(dArr);
+        double[] dArr2 = dArrBisectToSegment[1];
         for (int i = 0; i < 3; i++) {
             double d3 = dArr[i];
             double d4 = dArr2[i];
             if (d3 != d4) {
                 if (d3 < d4) {
-                    criticalPlaneAbove = criticalPlaneBelow(trueDelinearized(d3));
-                    criticalPlaneBelow = criticalPlaneAbove(trueDelinearized(dArr2[i]));
+                    iCriticalPlaneAbove = criticalPlaneBelow(trueDelinearized(d3));
+                    iCriticalPlaneBelow = criticalPlaneAbove(trueDelinearized(dArr2[i]));
                 } else {
-                    criticalPlaneAbove = criticalPlaneAbove(trueDelinearized(d3));
-                    criticalPlaneBelow = criticalPlaneBelow(trueDelinearized(dArr2[i]));
+                    iCriticalPlaneAbove = criticalPlaneAbove(trueDelinearized(d3));
+                    iCriticalPlaneBelow = criticalPlaneBelow(trueDelinearized(dArr2[i]));
                 }
-                double d5 = hueOf;
-                int i2 = criticalPlaneBelow;
+                double d5 = dHueOf;
+                int i2 = iCriticalPlaneBelow;
                 double d6 = d5;
-                for (int i3 = 0; i3 < 8 && Math.abs(i2 - criticalPlaneAbove) > 1; i3++) {
-                    int floor = (int) Math.floor((criticalPlaneAbove + i2) / 2.0d);
-                    double[] coordinate = setCoordinate(dArr, CRITICAL_PLANES[floor], dArr2, i);
-                    double hueOf2 = hueOf(coordinate);
-                    if (areInCyclicOrder(d6, d2, hueOf2)) {
+                for (int i3 = 0; i3 < 8 && Math.abs(i2 - iCriticalPlaneAbove) > 1; i3++) {
+                    int iFloor = (int) Math.floor((iCriticalPlaneAbove + i2) / 2.0d);
+                    double[] coordinate = setCoordinate(dArr, CRITICAL_PLANES[iFloor], dArr2, i);
+                    double dHueOf2 = hueOf(coordinate);
+                    if (areInCyclicOrder(d6, d2, dHueOf2)) {
                         dArr2 = coordinate;
-                        i2 = floor;
+                        i2 = iFloor;
                     } else {
-                        d6 = hueOf2;
+                        d6 = dHueOf2;
                         dArr = coordinate;
-                        criticalPlaneAbove = floor;
+                        iCriticalPlaneAbove = iFloor;
                     }
                 }
-                hueOf = d6;
+                dHueOf = d6;
             }
         }
         return CamUtils.argbFromLinrgbComponents((dArr[0] + dArr2[0]) / 2.0d, (dArr[1] + dArr2[1]) / 2.0d, (dArr[2] + dArr2[2]) / 2.0d);
     }
 
     static double inverseChromaticAdaptation(double d) {
-        double abs = Math.abs(d);
-        return CamUtils.signum(d) * Math.pow(Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (27.13d * abs) / (400.0d - abs)), 2.380952380952381d);
+        double dAbs = Math.abs(d);
+        return CamUtils.signum(d) * Math.pow(Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (27.13d * dAbs) / (400.0d - dAbs)), 2.380952380952381d);
     }
 
     static int findResultByJ(double d, double d2, double d3) {
-        double sqrt = Math.sqrt(d3) * 11.0d;
+        double dSqrt = Math.sqrt(d3) * 11.0d;
         Frame frame = Frame.DEFAULT;
         double d4 = 1.0d;
-        double pow = 1.0d / Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d);
+        double dPow = 1.0d / Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d);
         double d5 = 2.0d;
-        double cos = (Math.cos(d + 2.0d) + 3.8d) * 0.25d * 3846.153846153846d * frame.getNc() * frame.getNcb();
-        double sin = Math.sin(d);
-        double cos2 = Math.cos(d);
+        double dCos = (Math.cos(d + 2.0d) + 3.8d) * 0.25d * 3846.153846153846d * frame.getNc() * frame.getNcb();
+        double dSin = Math.sin(d);
+        double dCos2 = Math.cos(d);
         int i = 0;
         while (i < 5) {
             double d6 = d4;
-            double d7 = sqrt / 100.0d;
+            double d7 = dSqrt / 100.0d;
             double d8 = d5;
-            double d9 = sqrt;
-            double pow2 = Math.pow(((d2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || sqrt == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? 0.0d : d2 / Math.sqrt(d7)) * pow, 1.1111111111111112d);
+            double d9 = dSqrt;
+            double dPow2 = Math.pow(((d2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || dSqrt == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) ? 0.0d : d2 / Math.sqrt(d7)) * dPow, 1.1111111111111112d);
             double aw = (frame.getAw() * Math.pow(d7, (d6 / frame.getC()) / frame.getZ())) / frame.getNbb();
-            double d10 = (((0.305d + aw) * 23.0d) * pow2) / (((23.0d * cos) + ((pow2 * 11.0d) * cos2)) + ((pow2 * 108.0d) * sin));
-            double d11 = d10 * cos2;
-            double d12 = d10 * sin;
+            double d10 = (((0.305d + aw) * 23.0d) * dPow2) / (((23.0d * dCos) + ((dPow2 * 11.0d) * dCos2)) + ((dPow2 * 108.0d) * dSin));
+            double d11 = d10 * dCos2;
+            double d12 = d10 * dSin;
             double d13 = aw * 460.0d;
             double d14 = ((d13 + (451.0d * d11)) + (288.0d * d12)) / 1403.0d;
             double d15 = ((d13 - (891.0d * d11)) - (261.0d * d12)) / 1403.0d;
             double d16 = ((d13 - (d11 * 220.0d)) - (d12 * 6300.0d)) / 1403.0d;
-            double inverseChromaticAdaptation = inverseChromaticAdaptation(d14);
-            double inverseChromaticAdaptation2 = inverseChromaticAdaptation(d15);
-            double inverseChromaticAdaptation3 = inverseChromaticAdaptation(d16);
+            double dInverseChromaticAdaptation = inverseChromaticAdaptation(d14);
+            double dInverseChromaticAdaptation2 = inverseChromaticAdaptation(d15);
+            double dInverseChromaticAdaptation3 = inverseChromaticAdaptation(d16);
             double[][] dArr = LINRGB_FROM_SCALED_DISCOUNT;
             double[] dArr2 = dArr[0];
-            double d17 = (dArr2[0] * inverseChromaticAdaptation) + (dArr2[1] * inverseChromaticAdaptation2) + (dArr2[2] * inverseChromaticAdaptation3);
+            double d17 = (dArr2[0] * dInverseChromaticAdaptation) + (dArr2[1] * dInverseChromaticAdaptation2) + (dArr2[2] * dInverseChromaticAdaptation3);
             double[] dArr3 = dArr[1];
-            double d18 = (dArr3[0] * inverseChromaticAdaptation) + (dArr3[1] * inverseChromaticAdaptation2) + (dArr3[2] * inverseChromaticAdaptation3);
+            double d18 = (dArr3[0] * dInverseChromaticAdaptation) + (dArr3[1] * dInverseChromaticAdaptation2) + (dArr3[2] * dInverseChromaticAdaptation3);
             double[] dArr4 = dArr[2];
-            double d19 = (inverseChromaticAdaptation * dArr4[0]) + (inverseChromaticAdaptation2 * dArr4[1]) + (inverseChromaticAdaptation3 * dArr4[2]);
+            double d19 = (dInverseChromaticAdaptation * dArr4[0]) + (dInverseChromaticAdaptation2 * dArr4[1]) + (dInverseChromaticAdaptation3 * dArr4[2]);
             if (d17 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || d18 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || d19 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
                 break;
             }
@@ -285,7 +251,7 @@ public class HctSolver {
             if (i != 4) {
                 double d21 = d20 - d3;
                 if (Math.abs(d21) >= 0.002d) {
-                    sqrt = d9 - ((d21 * d9) / (d20 * d8));
+                    dSqrt = d9 - ((d21 * d9) / (d20 * d8));
                     i++;
                     d4 = d6;
                     d5 = d8;
@@ -303,9 +269,9 @@ public class HctSolver {
             return CamUtils.argbFromLstar(d3);
         }
         double radians = Math.toRadians(sanitizeDegreesDouble(d));
-        double yFromLstar = CamUtils.yFromLstar(d3);
-        int findResultByJ = findResultByJ(radians, d2, yFromLstar);
-        return findResultByJ != 0 ? findResultByJ : bisectToLimit(yFromLstar, radians);
+        double dYFromLstar = CamUtils.yFromLstar(d3);
+        int iFindResultByJ = findResultByJ(radians, d2, dYFromLstar);
+        return iFindResultByJ != 0 ? iFindResultByJ : bisectToLimit(dYFromLstar, radians);
     }
 
     public static Cam solveToCam(double d, double d2, double d3) {

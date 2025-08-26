@@ -29,6 +29,8 @@ import com.android.systemui.settings.UserFileManagerImpl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +42,11 @@ import kotlin.io.NoSuchFileException;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BackupHelper extends BackupAgentHelper {
     public static final Companion Companion = new Companion(null);
     public static final Object controlsDataLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,36 +56,18 @@ public class BackupHelper extends BackupAgentHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoOverwriteFileBackupHelper extends FileBackupHelper {
         public final Context context;
         public final Map fileNamesAndPostProcess;
         public final Object lock;
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public NoOverwriteFileBackupHelper(java.lang.Object r3, android.content.Context r4, java.util.Map<java.lang.String, ? extends kotlin.jvm.functions.Function0> r5) {
-            /*
-                r2 = this;
-                java.util.Set r0 = r5.keySet()
-                java.util.Collection r0 = (java.util.Collection) r0
-                r1 = 0
-                java.lang.String[] r1 = new java.lang.String[r1]
-                java.lang.Object[] r0 = r0.toArray(r1)
-                java.lang.String[] r0 = (java.lang.String[]) r0
-                int r1 = r0.length
-                java.lang.Object[] r0 = java.util.Arrays.copyOf(r0, r1)
-                java.lang.String[] r0 = (java.lang.String[]) r0
-                r2.<init>(r4, r0)
-                r2.lock = r3
-                r2.context = r4
-                r2.fileNamesAndPostProcess = r5
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.backup.BackupHelper.NoOverwriteFileBackupHelper.<init>(java.lang.Object, android.content.Context, java.util.Map):void");
+        public NoOverwriteFileBackupHelper(Object obj, Context context, Map<String, ? extends Function0> map) {
+            String[] strArr = (String[]) map.keySet().toArray(new String[0]);
+            super(context, (String[]) Arrays.copyOf(strArr, strArr.length));
+            this.lock = obj;
+            this.context = context;
+            this.fileNamesAndPostProcess = map;
         }
 
         @Override // android.app.backup.FileBackupHelper, android.app.backup.BackupHelper
@@ -105,24 +87,24 @@ public class BackupHelper extends BackupAgentHelper {
             }
             synchronized (this.lock) {
                 String str = "File restore: " + backupDataInputStream.getKey();
-                boolean isEnabled = Trace.isEnabled();
-                if (isEnabled) {
+                boolean zIsEnabled = Trace.isEnabled();
+                if (zIsEnabled) {
                     TraceUtilsKt.beginSlice(str);
                 }
                 try {
                     super.restoreEntity(backupDataInputStream);
                     Unit unit = Unit.INSTANCE;
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                     }
                     Log.d("BackupHelper", "Finishing restore for " + backupDataInputStream.getKey() + " for user " + this.context.getUserId() + ". Starting postProcess.");
                     String key = backupDataInputStream.getKey();
                     StringBuilder sb = new StringBuilder("Postprocess: ");
                     sb.append(key);
-                    String sb2 = sb.toString();
-                    isEnabled = Trace.isEnabled();
-                    if (isEnabled) {
-                        TraceUtilsKt.beginSlice(sb2);
+                    String string = sb.toString();
+                    zIsEnabled = Trace.isEnabled();
+                    if (zIsEnabled) {
+                        TraceUtilsKt.beginSlice(string);
                     }
                     try {
                         Function0 function0 = (Function0) this.fileNamesAndPostProcess.get(backupDataInputStream.getKey());
@@ -131,12 +113,12 @@ public class BackupHelper extends BackupAgentHelper {
                         }
                         Log.d("BackupHelper", "Finishing postprocess for " + backupDataInputStream.getKey() + " for user " + this.context.getUserId() + ".");
                     } finally {
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                     }
                 } finally {
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                     }
                 }
@@ -150,31 +132,31 @@ public class BackupHelper extends BackupAgentHelper {
         UserFileManagerImpl.Companion.getClass();
         Pair pair = new Pair(UserFileManagerImpl.Companion.createFile(identifier, "controls_favorites.xml").getPath(), new Function0() { // from class: com.android.systemui.backup.BackupHelperKt$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
-            public final Object invoke() {
+            public final Object invoke() throws IOException {
                 BackupHelper backupHelper = this;
                 UserFileManagerImpl.Companion.getClass();
                 int i = identifier;
-                File createFile = UserFileManagerImpl.Companion.createFile(i, "controls_favorites.xml");
-                if (createFile.exists()) {
-                    File createFile2 = UserFileManagerImpl.Companion.createFile(i, "aux_controls_favorites.xml");
-                    if (!createFile.exists()) {
-                        throw new NoSuchFileException(createFile, null, "The source file doesn't exist.", 2, null);
+                File fileCreateFile = UserFileManagerImpl.Companion.createFile(i, "controls_favorites.xml");
+                if (fileCreateFile.exists()) {
+                    File fileCreateFile2 = UserFileManagerImpl.Companion.createFile(i, "aux_controls_favorites.xml");
+                    if (!fileCreateFile.exists()) {
+                        throw new NoSuchFileException(fileCreateFile, null, "The source file doesn't exist.", 2, null);
                     }
-                    if (createFile2.exists()) {
-                        throw new FileAlreadyExistsException(createFile, createFile2, "The destination file already exists.");
+                    if (fileCreateFile2.exists()) {
+                        throw new FileAlreadyExistsException(fileCreateFile, fileCreateFile2, "The destination file already exists.");
                     }
-                    if (!createFile.isDirectory()) {
-                        File parentFile = createFile2.getParentFile();
+                    if (!fileCreateFile.isDirectory()) {
+                        File parentFile = fileCreateFile2.getParentFile();
                         if (parentFile != null) {
                             parentFile.mkdirs();
                         }
-                        FileInputStream fileInputStream = new FileInputStream(createFile);
+                        FileInputStream fileInputStream = new FileInputStream(fileCreateFile);
                         try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(createFile2);
+                            FileOutputStream fileOutputStream = new FileOutputStream(fileCreateFile2);
                             try {
                                 byte[] bArr = new byte[8192];
-                                for (int read = fileInputStream.read(bArr); read >= 0; read = fileInputStream.read(bArr)) {
-                                    fileOutputStream.write(bArr, 0, read);
+                                for (int i2 = fileInputStream.read(bArr); i2 >= 0; i2 = fileInputStream.read(bArr)) {
+                                    fileOutputStream.write(bArr, 0, i2);
                                 }
                                 fileOutputStream.close();
                                 fileInputStream.close();
@@ -182,8 +164,8 @@ public class BackupHelper extends BackupAgentHelper {
                             }
                         } finally {
                         }
-                    } else if (!createFile2.mkdirs()) {
-                        throw new FileSystemException(createFile, createFile2, "Failed to create target directory.");
+                    } else if (!fileCreateFile2.mkdirs()) {
+                        throw new FileSystemException(fileCreateFile, fileCreateFile2, "Failed to create target directory.");
                     }
                     JobScheduler jobScheduler = (JobScheduler) backupHelper.getSystemService(JobScheduler.class);
                     if (jobScheduler != null) {
@@ -200,9 +182,9 @@ public class BackupHelper extends BackupAgentHelper {
         });
         addHelper("systemui.files_no_overwrite", new NoOverwriteFileBackupHelper(controlsDataLock, this, Collections.singletonMap(pair.getFirst(), pair.getSecond())));
         int i = PeopleBackupHelper.$r8$clinit;
-        List singletonList = Collections.singletonList("shared_backup");
-        singletonList.getClass();
-        addHelper("systemui.people.shared_preferences", new PeopleBackupHelper(this, userHandle, (String[]) singletonList.toArray(new String[0])));
+        List listSingletonList = Collections.singletonList("shared_backup");
+        listSingletonList.getClass();
+        addHelper("systemui.people.shared_preferences", new PeopleBackupHelper(this, userHandle, (String[]) listSingletonList.toArray(new String[0])));
         addHelper("systemui.keyguard.quickaffordance.shared_preferences", new KeyguardQuickAffordanceBackupHelper(this, userHandle.getIdentifier()));
         addHelper("systemui.qs.shared_preferences", new QSPreferencesBackupHelper(this, userHandle.getIdentifier()));
         if (getResources().getBoolean(R.bool.config_communalServiceEnabled)) {

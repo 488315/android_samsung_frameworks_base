@@ -6,7 +6,6 @@ import com.google.protobuf.nano.InternalNano;
 import com.google.protobuf.nano.MessageNano;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class Notifications$Notification extends MessageNano {
     private static volatile Notifications$Notification[] _emptyArray;
@@ -49,23 +48,23 @@ public final class Notifications$Notification extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public int computeSerializedSize() {
         int i = this.uid;
-        int computeInt32Size = i != 0 ? CodedOutputByteBufferNano.computeInt32Size(1, i) : 0;
+        int iComputeInt32Size = i != 0 ? CodedOutputByteBufferNano.computeInt32Size(1, i) : 0;
         if (!this.packageName.equals("")) {
-            computeInt32Size += CodedOutputByteBufferNano.computeStringSize(2, this.packageName);
+            iComputeInt32Size += CodedOutputByteBufferNano.computeStringSize(2, this.packageName);
         }
         int i2 = this.instanceId;
         if (i2 != 0) {
-            computeInt32Size += CodedOutputByteBufferNano.computeInt32Size(3, i2);
+            iComputeInt32Size += CodedOutputByteBufferNano.computeInt32Size(3, i2);
         }
         int i3 = this.groupInstanceId;
         if (i3 != 0) {
-            computeInt32Size += CodedOutputByteBufferNano.computeInt32Size(4, i3);
+            iComputeInt32Size += CodedOutputByteBufferNano.computeInt32Size(4, i3);
         }
         if (this.isGroupSummary) {
-            computeInt32Size += CodedOutputByteBufferNano.computeTagSize(5) + 1;
+            iComputeInt32Size += CodedOutputByteBufferNano.computeTagSize(5) + 1;
         }
         int i4 = this.section;
-        return i4 != 0 ? CodedOutputByteBufferNano.computeInt32Size(6, i4) + computeInt32Size : computeInt32Size;
+        return i4 != 0 ? CodedOutputByteBufferNano.computeInt32Size(6, i4) + iComputeInt32Size : iComputeInt32Size;
     }
 
     @Override // com.google.protobuf.nano.MessageNano
@@ -99,21 +98,21 @@ public final class Notifications$Notification extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public Notifications$Notification mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag != 0) {
-                if (readTag == 8) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag != 0) {
+                if (tag == 8) {
                     this.uid = codedInputByteBufferNano.readRawVarint32();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     this.packageName = codedInputByteBufferNano.readString();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     this.instanceId = codedInputByteBufferNano.readRawVarint32();
-                } else if (readTag == 32) {
+                } else if (tag == 32) {
                     this.groupInstanceId = codedInputByteBufferNano.readRawVarint32();
-                } else if (readTag == 40) {
+                } else if (tag == 40) {
                     this.isGroupSummary = codedInputByteBufferNano.readRawVarint32() != 0;
-                } else if (readTag == 48) {
-                    int readRawVarint32 = codedInputByteBufferNano.readRawVarint32();
-                    switch (readRawVarint32) {
+                } else if (tag == 48) {
+                    int rawVarint32 = codedInputByteBufferNano.readRawVarint32();
+                    switch (rawVarint32) {
                         case 0:
                         case 1:
                         case 2:
@@ -128,10 +127,10 @@ public final class Notifications$Notification extends MessageNano {
                         case 11:
                         case 12:
                         case 13:
-                            this.section = readRawVarint32;
+                            this.section = rawVarint32;
                             break;
                     }
-                } else if (!codedInputByteBufferNano.skipField(readTag)) {
+                } else if (!codedInputByteBufferNano.skipField(tag)) {
                 }
             }
         }

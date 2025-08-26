@@ -1,6 +1,5 @@
 package com.google.protobuf;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class UnknownFieldSchema {
     public abstract void addFixed32(int i, int i2, Object obj);
@@ -25,7 +24,7 @@ public abstract class UnknownFieldSchema {
 
     public abstract UnknownFieldSetLite merge(Object obj, Object obj2);
 
-    public final boolean mergeOneFieldFrom(Object obj, CodedInputStreamReader codedInputStreamReader) {
+    public final boolean mergeOneFieldFrom(Object obj, CodedInputStreamReader codedInputStreamReader) throws InvalidProtocolBufferException {
         int i = codedInputStreamReader.tag;
         int i2 = i >>> 3;
         int i3 = i & 7;
@@ -55,14 +54,14 @@ public abstract class UnknownFieldSchema {
             addFixed32(i2, codedInputStream.readFixed32(), obj);
             return true;
         }
-        UnknownFieldSetLite newBuilder = newBuilder();
+        UnknownFieldSetLite unknownFieldSetLiteNewBuilder = newBuilder();
         int i4 = (i2 << 3) | 4;
-        while (codedInputStreamReader.getFieldNumber() != Integer.MAX_VALUE && mergeOneFieldFrom(newBuilder, codedInputStreamReader)) {
+        while (codedInputStreamReader.getFieldNumber() != Integer.MAX_VALUE && mergeOneFieldFrom(unknownFieldSetLiteNewBuilder, codedInputStreamReader)) {
         }
         if (i4 != codedInputStreamReader.tag) {
             throw new InvalidProtocolBufferException("Protocol message end-group tag did not match expected tag.");
         }
-        addGroup(i2, obj, toImmutable(newBuilder));
+        addGroup(i2, obj, toImmutable(unknownFieldSetLiteNewBuilder));
         return true;
     }
 

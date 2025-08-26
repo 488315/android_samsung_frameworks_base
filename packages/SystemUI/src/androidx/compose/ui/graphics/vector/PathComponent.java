@@ -16,7 +16,6 @@ import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PathComponent extends VNode {
     public Brush fill;
@@ -50,9 +49,9 @@ public final class PathComponent extends VNode {
         this.trimPathEnd = 1.0f;
         this.isPathDirty = true;
         this.isStrokeDirty = true;
-        AndroidPath Path = AndroidPath_androidKt.Path();
-        this.path = Path;
-        this.renderPath = Path;
+        AndroidPath androidPathPath = AndroidPath_androidKt.Path();
+        this.path = androidPathPath;
+        this.renderPath = androidPathPath;
         this.pathMeasure$delegate = LazyKt__LazyJVMKt.lazy(LazyThreadSafetyMode.NONE, new Function0() { // from class: androidx.compose.ui.graphics.vector.PathComponent$pathMeasure$2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
@@ -74,7 +73,7 @@ public final class PathComponent extends VNode {
         this.isTrimPathDirty = false;
         Brush brush = this.fill;
         if (brush != null) {
-            DrawScope.m536drawPathGBMwjPU$default(drawScope, this.renderPath, brush, this.fillAlpha, null, 56);
+            DrawScope.m538drawPathGBMwjPU$default(drawScope, this.renderPath, brush, this.fillAlpha, null, 56);
         }
         Brush brush2 = this.stroke;
         if (brush2 != null) {
@@ -87,7 +86,7 @@ public final class PathComponent extends VNode {
             } else {
                 stroke = stroke2;
             }
-            DrawScope.m536drawPathGBMwjPU$default(drawScope, this.renderPath, brush2, this.strokeAlpha, stroke, 48);
+            DrawScope.m538drawPathGBMwjPU$default(drawScope, this.renderPath, brush2, this.strokeAlpha, stroke, 48);
         }
     }
 
@@ -114,7 +113,7 @@ public final class PathComponent extends VNode {
                 i = 0;
             }
             this.renderPath.internalPath.rewind();
-            this.renderPath.m444setFillTypeoQ8Xj4U(i);
+            this.renderPath.m446setFillTypeoQ8Xj4U(i);
         }
         Lazy lazy = this.pathMeasure$delegate;
         ((AndroidPathMeasure) ((androidx.compose.ui.graphics.PathMeasure) lazy.getValue())).internalPathMeasure.setPath(androidPath != null ? androidPath.internalPath : null, false);

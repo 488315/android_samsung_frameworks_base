@@ -284,7 +284,7 @@ public class SemAbTestConfiguration implements Parcelable {
         return this.moduleName.hashCode();
     }
 
-    public boolean isAbTestInProgress() {
+    public boolean isAbTestInProgress() throws NumberFormatException {
         String str;
         try {
             str = new SimpleDateFormat("yyyyMMdd", Locale.US).format(new Date(System.currentTimeMillis()));
@@ -292,9 +292,9 @@ public class SemAbTestConfiguration implements Parcelable {
             str = "99999999";
         }
         try {
-            int parseInt = Integer.parseInt(str);
-            if (parseInt >= Integer.parseInt(this.startDate)) {
-                return parseInt <= Integer.parseInt(this.endDate);
+            int i = Integer.parseInt(str);
+            if (i >= Integer.parseInt(this.startDate)) {
+                return i <= Integer.parseInt(this.endDate);
             }
             return false;
         } catch (NumberFormatException unused2) {
@@ -303,20 +303,20 @@ public class SemAbTestConfiguration implements Parcelable {
     }
 
     public Map<String, String> getMyTestParamsMap() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (this.abTestGroupAllocation != -1 && isAbTestInProgress()) {
             for (TestParam testParam : this.mTestParamList) {
                 int i = this.abTestGroupAllocation;
                 if (i == 0) {
-                    hashMap.put(testParam.name, testParam.group.groupA);
+                    map.put(testParam.name, testParam.group.groupA);
                 } else if (i == 1) {
-                    hashMap.put(testParam.name, testParam.group.groupB);
+                    map.put(testParam.name, testParam.group.groupB);
                 } else if (i == 2) {
-                    hashMap.put(testParam.name, testParam.group.groupC);
+                    map.put(testParam.name, testParam.group.groupC);
                 }
             }
         }
-        return hashMap;
+        return map;
     }
 
     public List<String> getMyOutputList() {

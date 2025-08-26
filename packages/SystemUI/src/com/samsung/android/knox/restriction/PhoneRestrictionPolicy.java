@@ -11,7 +11,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.multiuser.MultiUserManager$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.restriction.IPhoneRestrictionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PhoneRestrictionPolicy {
     public static final String ACTION_ICCID_AVAILABLE_INTERNAL = "com.samsung.android.knox.intent.action.ICCID_AVAILABLE_INTERNAL";

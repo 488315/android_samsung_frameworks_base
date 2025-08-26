@@ -31,14 +31,12 @@ public class WorkProfilePausedEmptyStateProvider implements AbstractMultiProfile
             return new WorkProfileOffEmptyState(((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_WORK_PAUSED_TITLE, new Supplier() { // from class: com.android.internal.app.WorkProfilePausedEmptyStateProvider$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getEmptyState$0;
-                    lambda$getEmptyState$0 = WorkProfilePausedEmptyStateProvider.this.lambda$getEmptyState$0();
-                    return lambda$getEmptyState$0;
+                    return this.f$0.lambda$getEmptyState$0();
                 }
             }), new AbstractMultiProfilePagerAdapter.EmptyState.ClickListener() { // from class: com.android.internal.app.WorkProfilePausedEmptyStateProvider$$ExternalSyntheticLambda1
                 @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState.ClickListener
                 public final void onClick(AbstractMultiProfilePagerAdapter.EmptyState.TabControl tabControl) {
-                    WorkProfilePausedEmptyStateProvider.this.lambda$getEmptyState$1(tabControl);
+                    this.f$0.lambda$getEmptyState$1(tabControl);
                 }
             }, this.mMetricsCategory);
         }

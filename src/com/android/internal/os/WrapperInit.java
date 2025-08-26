@@ -22,14 +22,14 @@ public class WrapperInit {
     private WrapperInit() {
     }
 
-    public static void main(String[] strArr) {
-        int parseInt = Integer.parseInt(strArr[0], 10);
-        int parseInt2 = Integer.parseInt(strArr[1], 10);
-        if (parseInt != 0) {
+    public static void main(String[] strArr) throws Throwable {
+        int i = Integer.parseInt(strArr[0], 10);
+        int i2 = Integer.parseInt(strArr[1], 10);
+        if (i != 0) {
             FileDescriptor fileDescriptor = new FileDescriptor();
             try {
                 try {
-                    fileDescriptor.setInt$(parseInt);
+                    fileDescriptor.setInt$(i);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(fileDescriptor));
                     dataOutputStream.writeInt(Process.myPid());
                     dataOutputStream.close();
@@ -44,7 +44,7 @@ public class WrapperInit {
         int length = strArr.length - 2;
         String[] strArr2 = new String[length];
         System.arraycopy(strArr, 2, strArr2, 0, length);
-        wrapperInit(parseInt2, strArr2).run();
+        wrapperInit(i2, strArr2).run();
     }
 
     public static void execApplication(String str, String str2, int i, String str3, FileDescriptor fileDescriptor, String[] strArr) {
@@ -73,36 +73,36 @@ public class WrapperInit {
     }
 
     private static Runnable wrapperInit(int i, String[] strArr) {
-        ClassLoader classLoader;
+        ClassLoader classLoaderCreatePathClassLoader;
         if (strArr == null || strArr.length <= 2 || !strArr[0].equals("-cp")) {
-            classLoader = null;
+            classLoaderCreatePathClassLoader = null;
         } else {
-            classLoader = ZygoteInit.createPathClassLoader(strArr[1], i);
-            Thread.currentThread().setContextClassLoader(classLoader);
+            classLoaderCreatePathClassLoader = ZygoteInit.createPathClassLoader(strArr[1], i);
+            Thread.currentThread().setContextClassLoader(classLoaderCreatePathClassLoader);
             String[] strArr2 = new String[strArr.length - 2];
             System.arraycopy(strArr, 2, strArr2, 0, strArr.length - 2);
             strArr = strArr2;
         }
         Zygote.nativePreApplicationInit();
-        return RuntimeInit.applicationInit(i, null, strArr, classLoader);
+        return RuntimeInit.applicationInit(i, null, strArr, classLoaderCreatePathClassLoader);
     }
 
-    private static void preserveCapabilities() {
+    private static void preserveCapabilities() throws ErrnoException {
         StructCapUserHeader structCapUserHeader = new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
         try {
-            StructCapUserData[] capget = Os.capget(structCapUserHeader);
-            if (capget[0].permitted != capget[0].inheritable || capget[1].permitted != capget[1].inheritable) {
-                capget[0] = new StructCapUserData(capget[0].effective, capget[0].permitted, capget[0].permitted);
-                capget[1] = new StructCapUserData(capget[1].effective, capget[1].permitted, capget[1].permitted);
+            StructCapUserData[] structCapUserDataArrCapget = Os.capget(structCapUserHeader);
+            if (structCapUserDataArrCapget[0].permitted != structCapUserDataArrCapget[0].inheritable || structCapUserDataArrCapget[1].permitted != structCapUserDataArrCapget[1].inheritable) {
+                structCapUserDataArrCapget[0] = new StructCapUserData(structCapUserDataArrCapget[0].effective, structCapUserDataArrCapget[0].permitted, structCapUserDataArrCapget[0].permitted);
+                structCapUserDataArrCapget[1] = new StructCapUserData(structCapUserDataArrCapget[1].effective, structCapUserDataArrCapget[1].permitted, structCapUserDataArrCapget[1].permitted);
                 try {
-                    Os.capset(structCapUserHeader, capget);
+                    Os.capset(structCapUserHeader, structCapUserDataArrCapget);
                 } catch (ErrnoException e) {
                     Slog.e(TAG, "RuntimeInit: Failed capset", e);
                     return;
                 }
             }
             for (int i = 0; i < 64; i++) {
-                if ((capget[OsConstants.CAP_TO_INDEX(i)].inheritable & OsConstants.CAP_TO_MASK(i)) != 0) {
+                if ((structCapUserDataArrCapget[OsConstants.CAP_TO_INDEX(i)].inheritable & OsConstants.CAP_TO_MASK(i)) != 0) {
                     try {
                         Os.prctl(OsConstants.PR_CAP_AMBIENT, OsConstants.PR_CAP_AMBIENT_RAISE, i, 0L, 0L);
                     } catch (ErrnoException e2) {

@@ -47,9 +47,9 @@ public interface ISpellCheckerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpellCheckerService)) {
-                return (ISpellCheckerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpellCheckerService)) {
+                return (ISpellCheckerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,13 +76,13 @@ public interface ISpellCheckerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                ISpellCheckerSessionListener asInterface = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                ISpellCheckerSessionListener iSpellCheckerSessionListenerAsInterface = ISpellCheckerSessionListener.Stub.asInterface(parcel.readStrongBinder());
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                int readInt = parcel.readInt();
-                ISpellCheckerServiceCallback asInterface2 = ISpellCheckerServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                ISpellCheckerServiceCallback iSpellCheckerServiceCallbackAsInterface = ISpellCheckerServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getISpellCheckerSession(readString, asInterface, bundle, readInt, asInterface2);
+                getISpellCheckerSession(string, iSpellCheckerSessionListenerAsInterface, bundle, i3, iSpellCheckerServiceCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -106,17 +106,17 @@ public interface ISpellCheckerService extends IInterface {
 
             @Override // com.android.internal.textservice.ISpellCheckerService
             public void getISpellCheckerSession(String str, ISpellCheckerSessionListener iSpellCheckerSessionListener, Bundle bundle, int i, ISpellCheckerServiceCallback iSpellCheckerServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSpellCheckerSessionListener);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSpellCheckerServiceCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSpellCheckerSessionListener);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSpellCheckerServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

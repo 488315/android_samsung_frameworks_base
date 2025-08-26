@@ -10,6 +10,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.IOException;
 
 /* loaded from: classes6.dex */
 public class SemTextClipData extends SemClipData {
@@ -162,7 +163,7 @@ public class SemTextClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "text write to parcel");
         parcel.writeInt(1);
         super.writeToParcel(parcel, i);

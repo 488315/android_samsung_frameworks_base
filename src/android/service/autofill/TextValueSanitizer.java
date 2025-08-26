@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.util.Slog;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,7 +75,7 @@ public final class TextValueSanitizer extends InternalSanitizer implements Sanit
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeSerializable(this.mRegex);
         parcel.writeString(this.mSubst);
     }

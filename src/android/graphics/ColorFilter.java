@@ -26,9 +26,9 @@ public class ColorFilter {
 
     public final synchronized long getNativeInstance() {
         if (this.mNativeInstance == 0) {
-            long createNativeInstance = createNativeInstance();
-            this.mNativeInstance = createNativeInstance;
-            if (createNativeInstance != 0) {
+            long jCreateNativeInstance = createNativeInstance();
+            this.mNativeInstance = jCreateNativeInstance;
+            if (jCreateNativeInstance != 0) {
                 NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativeInstance);
             }
         }

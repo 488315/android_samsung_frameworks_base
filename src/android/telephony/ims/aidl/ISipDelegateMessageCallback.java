@@ -59,9 +59,9 @@ public interface ISipDelegateMessageCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipDelegateMessageCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISipDelegateMessageCallback)) {
-                return (ISipDelegateMessageCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipDelegateMessageCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISipDelegateMessageCallback)) {
+                return (ISipDelegateMessageCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -98,14 +98,14 @@ public interface ISipDelegateMessageCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onMessageReceived(sipMessage);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onMessageSent(readString);
+                onMessageSent(string);
             } else if (i == 3) {
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onMessageSendFailure(readString2, readInt);
+                onMessageSendFailure(string2, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -130,38 +130,38 @@ public interface ISipDelegateMessageCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
             public void onMessageReceived(SipMessage sipMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(sipMessage, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipMessage, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
             public void onMessageSent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
             public void onMessageSendFailure(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DragZoneFactory {
     public final int bubbleDragZoneFoldableSize;
@@ -35,16 +34,13 @@ public final class DragZoneFactory {
     public final int vSplitFromExpandedViewDragZoneHeightTablet;
     public final int vSplitFromExpandedViewDragZoneWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DesktopWindowModeChecker {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SplitScreenModeChecker {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SplitScreenMode {
             public static final /* synthetic */ SplitScreenMode[] $VALUES;
             public static final SplitScreenMode NONE;
@@ -82,7 +78,6 @@ public final class DragZoneFactory {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

@@ -54,9 +54,9 @@ public interface IEpicManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEpicManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEpicManager)) {
-                return (IEpicManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEpicManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEpicManager)) {
+                return (IEpicManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,17 +86,17 @@ public interface IEpicManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                IEpicObject Create = Create(readInt);
+                IEpicObject iEpicObjectCreate = Create(i3);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(Create);
+                parcel2.writeStrongInterface(iEpicObjectCreate);
             } else if (i == 2) {
-                int[] createIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                IEpicObject Creates = Creates(createIntArray);
+                IEpicObject iEpicObjectCreates = Creates(iArrCreateIntArray);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(Creates);
+                parcel2.writeStrongInterface(iEpicObjectCreates);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -121,33 +121,33 @@ public interface IEpicManager extends IInterface {
 
             @Override // android.os.epic.IEpicManager
             public IEpicObject Create(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEpicManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IEpicObject.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IEpicManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IEpicObject.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.epic.IEpicManager
             public IEpicObject Creates(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEpicManager.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IEpicObject.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IEpicManager.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IEpicObject.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

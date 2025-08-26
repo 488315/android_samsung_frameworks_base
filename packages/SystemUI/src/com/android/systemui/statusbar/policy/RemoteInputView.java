@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.policy;
 import android.app.RemoteInput;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.BlendMode;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
@@ -75,7 +76,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RemoteInputView extends LinearLayout implements View.OnClickListener {
     public static final Object VIEW_TAG = new Object();
@@ -108,7 +108,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     public RemoteInputViewController mViewController;
     public NotificationViewWrapper mWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EditorActionHandler implements TextView.OnEditorActionListener {
         public /* synthetic */ EditorActionHandler(RemoteInputView remoteInputView, int i) {
             this();
@@ -142,7 +141,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum NotificationRemoteInputEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_REMOTE_INPUT_OPEN(795),
         NOTIFICATION_REMOTE_INPUT_CLOSE(796),
@@ -161,7 +159,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RemoteEditText extends EditText {
         public static final /* synthetic */ int $r8$clinit = 0;
         public InputMethodManager mInputMethodManager;
@@ -180,12 +177,12 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             this.mOnReceiveContentListener = new OnReceiveContentListener() { // from class: com.android.systemui.statusbar.policy.RemoteInputView$RemoteEditText$$ExternalSyntheticLambda0
                 @Override // android.view.OnReceiveContentListener
                 public final ContentInfo onReceiveContent(View view, ContentInfo contentInfo) {
-                    RemoteInputView.RemoteEditText remoteEditText = RemoteInputView.RemoteEditText.this;
+                    RemoteInputView.RemoteEditText remoteEditText = this.f$0;
                     int i = RemoteInputView.RemoteEditText.$r8$clinit;
                     remoteEditText.getClass();
-                    Pair partition = contentInfo.partition(new RemoteInputView$RemoteEditText$$ExternalSyntheticLambda2());
-                    ContentInfo contentInfo2 = (ContentInfo) partition.first;
-                    ContentInfo contentInfo3 = (ContentInfo) partition.second;
+                    Pair pairPartition = contentInfo.partition(new RemoteInputView$RemoteEditText$$ExternalSyntheticLambda2());
+                    ContentInfo contentInfo2 = (ContentInfo) pairPartition.first;
+                    ContentInfo contentInfo3 = (ContentInfo) pairPartition.second;
                     if (contentInfo2 != null) {
                         remoteEditText.mRemoteInputView.setAttachment(contentInfo2);
                     }
@@ -196,7 +193,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             this.mOnBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.statusbar.policy.RemoteInputView$RemoteEditText$$ExternalSyntheticLambda1
                 @Override // android.window.OnBackInvokedCallback
                 public final void onBackInvoked() {
-                    RemoteInputView.RemoteEditText remoteEditText = RemoteInputView.RemoteEditText.this;
+                    RemoteInputView.RemoteEditText remoteEditText = this.f$0;
                     int i = RemoteInputView.RemoteEditText.$r8$clinit;
                     remoteEditText.defocusIfNeeded(true);
                 }
@@ -254,7 +251,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         @Override // android.widget.TextView, android.view.View
         public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
             Context context;
-            InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
+            InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
             try {
                 Context context2 = ((EditText) this).mContext;
                 context = context2.createPackageContextAsUser(context2.getPackageName(), 0, this.mUser);
@@ -262,7 +259,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                 Log.e("RemoteInput", "Unable to create user context:" + e.getMessage(), e);
                 context = null;
             }
-            if (this.mShowImeOnInputConnection && onCreateInputConnection != null) {
+            if (this.mShowImeOnInputConnection && inputConnectionOnCreateInputConnection != null) {
                 if (context == null) {
                     context = getContext();
                 }
@@ -280,7 +277,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                     });
                 }
             }
-            return onCreateInputConnection;
+            return inputConnectionOnCreateInputConnection;
         }
 
         @Override // android.widget.TextView, android.view.View
@@ -366,7 +363,6 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SendButtonTextWatcher implements TextWatcher {
         public /* synthetic */ SendButtonTextWatcher(RemoteInputView remoteInputView, int i) {
             this();
@@ -380,7 +376,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         }
 
         @Override // android.text.TextWatcher
-        public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) throws Resources.NotFoundException {
             String str = RemoteInputView.this.mEditText.getText().toString() + RemoteInputView.this.mSignature;
             int length = str.length();
             RemoteInputView remoteInputView = RemoteInputView.this;
@@ -394,7 +390,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                         RemoteInputView remoteInputView3 = RemoteInputView.this;
                         remoteInputView3.mEditText.setSelection(remoteInputView3.mPrevString.length());
                     }
-                    RemoteInputView.m3088$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
+                    RemoteInputView.m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
                     return;
                 }
             } else {
@@ -403,7 +399,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                     remoteInputView.mEditText.setText(remoteInputView.mPrevString);
                     RemoteInputView remoteInputView4 = RemoteInputView.this;
                     remoteInputView4.mEditText.setSelection(remoteInputView4.mPrevString.length());
-                    RemoteInputView.m3088$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
+                    RemoteInputView.m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
                     return;
                 }
             }
@@ -420,7 +416,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     }
 
     /* renamed from: -$$Nest$mshowExceedTextLimitToast, reason: not valid java name */
-    public static void m3088$$Nest$mshowExceedTextLimitToast(RemoteInputView remoteInputView) {
+    public static void m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView remoteInputView) throws Resources.NotFoundException {
         String string = remoteInputView.getContext().getResources().getString(R.string.noti_direct_reply_exceed_text_limit_toast);
         if (remoteInputView.mTextLimitToast == null) {
             remoteInputView.mTextLimitToast = Toast.makeText(remoteInputView.getContext(), string, 1);
@@ -459,9 +455,9 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     @Override // android.view.ViewGroup, android.view.View
     public final void dispatchStartTemporaryDetach() {
         super.dispatchStartTemporaryDetach();
-        int indexOfChild = indexOfChild(this.mEditText);
-        if (indexOfChild != -1) {
-            detachViewFromParent(indexOfChild);
+        int iIndexOfChild = indexOfChild(this.mEditText);
+        if (iIndexOfChild != -1) {
+            detachViewFromParent(iIndexOfChild);
         }
     }
 
@@ -489,26 +485,26 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         remoteInputController.getClass();
         Objects.requireNonNull(notificationEntry);
         Objects.requireNonNull(obj);
-        boolean pruneWeakThenRemoveAndContains = remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, null);
-        boolean pruneWeakThenRemoveAndContains2 = remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, obj);
+        boolean zPruneWeakThenRemoveAndContains = remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, null);
+        boolean zPruneWeakThenRemoveAndContains2 = remoteInputController.pruneWeakThenRemoveAndContains(notificationEntry, null, obj);
         String notificationStyle = notificationEntry.getNotificationStyle();
         RemoteInputControllerLogger remoteInputControllerLogger = remoteInputController.mLogger;
         remoteInputControllerLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         RemoteInputControllerLogger$$ExternalSyntheticLambda0 remoteInputControllerLogger$$ExternalSyntheticLambda0 = new RemoteInputControllerLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = remoteInputControllerLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("RemoteInputControllerLog", logLevel, remoteInputControllerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("RemoteInputControllerLog", logLevel, remoteInputControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = notificationEntry.mKey;
         logMessageImpl.str2 = "RemoteInputView#focus";
         logMessageImpl.str3 = notificationStyle;
-        logMessageImpl.bool1 = pruneWeakThenRemoveAndContains;
-        logMessageImpl.bool2 = pruneWeakThenRemoveAndContains2;
-        logBuffer.commit(obtain);
-        if (!pruneWeakThenRemoveAndContains2) {
+        logMessageImpl.bool1 = zPruneWeakThenRemoveAndContains;
+        logMessageImpl.bool2 = zPruneWeakThenRemoveAndContains2;
+        logBuffer.commit(logMessageObtain);
+        if (!zPruneWeakThenRemoveAndContains2) {
             remoteInputController.mOpen.add(new Pair(new WeakReference(notificationEntry), obj));
         }
-        if (!pruneWeakThenRemoveAndContains) {
+        if (!zPruneWeakThenRemoveAndContains) {
             remoteInputController.apply(notificationEntry);
         }
         setAttachment(this.mEntry.remoteInputAttachment);
@@ -559,7 +555,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         this.mEntry.remoteInputText = this.mEditText.getText();
         ViewGroup viewGroup = (ViewGroup) getParent();
         ViewGroup viewGroup2 = (ViewGroup) getParent();
-        View findViewById = viewGroup2 == null ? null : viewGroup2.findViewById(android.R.id.anyRtl);
+        View viewFindViewById = viewGroup2 == null ? null : viewGroup2.findViewById(android.R.id.anyRtl);
         if (!z || viewGroup == null) {
             setVisibility(8);
             if (runnable != null) {
@@ -571,7 +567,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             }
         } else {
             final ViewGroup viewGroup3 = (ViewGroup) viewGroup.getParent();
-            int height = (findViewById != null ? findViewById.getHeight() : 0) - getHeight();
+            int height = (viewFindViewById != null ? viewFindViewById.getHeight() : 0) - getHeight();
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             if (layoutParams instanceof FrameLayout.LayoutParams) {
                 FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) layoutParams;
@@ -583,31 +579,31 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             }
             AnimatorSet animatorSet = new AnimatorSet();
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, property, 1.0f, 0.0f);
-            ofFloat.setDuration(83L);
-            ofFloat.setStartDelay(120L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, property, 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(83L);
+            objectAnimatorOfFloat.setStartDelay(120L);
             LinearInterpolator linearInterpolator = InterpolatorsAndroidX.LINEAR;
-            ofFloat.setInterpolator(linearInterpolator);
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 0.5f);
-            ofFloat2.addUpdateListener(new RemoteInputView$$ExternalSyntheticLambda2(this, ofFloat2, 0));
-            ofFloat2.setDuration(360L);
-            ofFloat2.setInterpolator(InterpolatorsAndroidX.FAST_OUT_SLOW_IN);
-            ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.policy.RemoteInputView.5
+            objectAnimatorOfFloat.setInterpolator(linearInterpolator);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.5f);
+            valueAnimatorOfFloat.addUpdateListener(new RemoteInputView$$ExternalSyntheticLambda2(this, valueAnimatorOfFloat, 0));
+            valueAnimatorOfFloat.setDuration(360L);
+            valueAnimatorOfFloat.setInterpolator(InterpolatorsAndroidX.FAST_OUT_SLOW_IN);
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.policy.RemoteInputView.5
                 @Override // androidx.core.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator, boolean z3) {
                     Object obj = RemoteInputView.VIEW_TAG;
                     RemoteInputView.this.setFocusAnimationScaleY(1.0f);
                 }
             });
-            if (findViewById == null) {
-                animatorSet.playTogether(ofFloat, ofFloat2);
+            if (viewFindViewById == null) {
+                animatorSet.playTogether(objectAnimatorOfFloat, valueAnimatorOfFloat);
             } else {
-                findViewById.forceHasOverlappingRendering(false);
-                ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(findViewById, property, 0.0f, 1.0f);
-                ofFloat3.setDuration(83L);
-                ofFloat3.setInterpolator(linearInterpolator);
-                ofFloat3.setStartDelay(180L);
-                animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3);
+                viewFindViewById.forceHasOverlappingRendering(false);
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(viewFindViewById, property, 0.0f, 1.0f);
+                objectAnimatorOfFloat2.setDuration(83L);
+                objectAnimatorOfFloat2.setInterpolator(linearInterpolator);
+                objectAnimatorOfFloat2.setStartDelay(180L);
+                animatorSet.playTogether(objectAnimatorOfFloat, valueAnimatorOfFloat, objectAnimatorOfFloat2);
             }
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.policy.RemoteInputView.2
                 @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
@@ -636,8 +632,8 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                     }
                 }
             });
-            if (findViewById != null) {
-                findViewById.setAlpha(0.0f);
+            if (viewFindViewById != null) {
+                viewFindViewById.setAlpha(0.0f);
             }
             animatorSet.start();
         }
@@ -692,7 +688,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         this.mDelete.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.policy.RemoteInputView$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                RemoteInputView remoteInputView = RemoteInputView.this;
+                RemoteInputView remoteInputView = this.f$0;
                 Object obj = RemoteInputView.VIEW_TAG;
                 remoteInputView.setAttachment(null);
             }
@@ -776,7 +772,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             onDefocus(true, false, new Runnable() { // from class: com.android.systemui.statusbar.policy.RemoteInputView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteInputView remoteInputView = RemoteInputView.this;
+                    RemoteInputView remoteInputView = this.f$0;
                     remoteInputView.mEntry.remoteInputTextWhenReset = SpannedString.valueOf(remoteInputView.mEditText.getText());
                     remoteInputView.mEditText.getText().clear();
                     remoteInputView.mEditText.setEnabled(remoteInputView.isAggregatedVisible());
@@ -848,18 +844,18 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
             notificationEntry.remoteInputUri = contentInfo.getClip().getItemAt(0).getUri();
             this.mEntry.remoteInputMimeType = contentInfo.getClip().getDescription().getMimeType(0);
         }
-        View findViewById = findViewById(R.id.remote_input_content_container);
+        View viewFindViewById = findViewById(R.id.remote_input_content_container);
         ImageView imageView = (ImageView) findViewById(R.id.remote_input_attachment_image);
         imageView.setImageDrawable(null);
         if (contentInfo == null) {
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
             return;
         }
         imageView.setImageURI(contentInfo.getClip().getItemAt(0).getUri());
         if (imageView.getDrawable() == null) {
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
         } else {
-            findViewById.setVisibility(0);
+            viewFindViewById.setVisibility(0);
             this.mUiEventLogger.logWithInstanceId(NotificationRemoteInputEvent.NOTIFICATION_REMOTE_INPUT_ATTACH_IMAGE, this.mEntry.mSbn.getUid(), this.mEntry.mSbn.getPackageName(), this.mEntry.mSbn.getInstanceId());
         }
         updateSendButton();
@@ -893,22 +889,24 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
         setTranslationY(height);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0019  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setSupportedMimeTypes(Collection collection) {
         String[] strArr;
         RemoteInputView$RemoteEditText$$ExternalSyntheticLambda0 remoteInputView$RemoteEditText$$ExternalSyntheticLambda0;
         RemoteEditText remoteEditText = this.mEditText;
         if (collection != null) {
             remoteEditText.getClass();
-            if (!collection.isEmpty()) {
+            if (collection.isEmpty()) {
+                strArr = null;
+                remoteInputView$RemoteEditText$$ExternalSyntheticLambda0 = null;
+            } else {
                 strArr = (String[]) collection.toArray(new String[0]);
                 remoteInputView$RemoteEditText$$ExternalSyntheticLambda0 = remoteEditText.mOnReceiveContentListener;
-                remoteEditText.setOnReceiveContentListener(strArr, remoteInputView$RemoteEditText$$ExternalSyntheticLambda0);
-                remoteEditText.mSupportedMimes.clear();
-                remoteEditText.mSupportedMimes.addAll(collection);
             }
         }
-        strArr = null;
-        remoteInputView$RemoteEditText$$ExternalSyntheticLambda0 = null;
         remoteEditText.setOnReceiveContentListener(strArr, remoteInputView$RemoteEditText$$ExternalSyntheticLambda0);
         remoteEditText.mSupportedMimes.clear();
         remoteEditText.mSupportedMimes.addAll(collection);

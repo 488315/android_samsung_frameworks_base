@@ -78,20 +78,20 @@ public class DataMapIds extends Operation {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        if (readInt2 > 2000) {
-            throw new RuntimeException(readInt2 + " map entries more than max = 2000");
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        if (i2 > 2000) {
+            throw new RuntimeException(i2 + " map entries more than max = 2000");
         }
-        String[] strArr = new String[readInt2];
-        int[] iArr = new int[readInt2];
-        byte[] bArr = new byte[readInt2];
-        for (int i = 0; i < readInt2; i++) {
-            strArr[i] = wireBuffer.readUTF8();
-            bArr[i] = (byte) wireBuffer.readByte();
-            iArr[i] = wireBuffer.readInt();
+        String[] strArr = new String[i2];
+        int[] iArr = new int[i2];
+        byte[] bArr = new byte[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
+            strArr[i3] = wireBuffer.readUTF8();
+            bArr[i3] = (byte) wireBuffer.readByte();
+            iArr[i3] = wireBuffer.readInt();
         }
-        list.add(new DataMapIds(readInt, strArr, bArr, iArr));
+        list.add(new DataMapIds(i, strArr, bArr, iArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

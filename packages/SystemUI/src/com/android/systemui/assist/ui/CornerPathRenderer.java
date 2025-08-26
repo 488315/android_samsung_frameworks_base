@@ -4,11 +4,9 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class CornerPathRenderer {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Corner {
         BOTTOM_LEFT,
         BOTTOM_RIGHT,
@@ -23,10 +21,10 @@ public abstract class CornerPathRenderer {
         PointF pointF2;
         Path cornerPath = getCornerPath(corner);
         float f2 = -f;
-        float[] approximate = cornerPath.approximate(0.1f);
+        float[] fArrApproximate = cornerPath.approximate(0.1f);
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < approximate.length; i += 3) {
-            arrayList.add(new PointF(approximate[i + 1], approximate[i + 2]));
+        for (int i = 0; i < fArrApproximate.length; i += 3) {
+            arrayList.add(new PointF(fArrApproximate[i + 1], fArrApproximate[i + 2]));
         }
         ArrayList arrayList2 = new ArrayList();
         for (int i2 = 0; i2 < arrayList.size(); i2++) {
@@ -48,9 +46,9 @@ public abstract class CornerPathRenderer {
             PointF pointF8 = new PointF(pointF.x + pointF2.x, pointF.y + pointF2.y);
             float f3 = pointF8.x;
             float f4 = pointF8.y;
-            float sqrt = (float) Math.sqrt((f4 * f4) + (f3 * f3));
-            if (sqrt != 0.0f) {
-                float f5 = 1.0f / sqrt;
+            float fSqrt = (float) Math.sqrt((f4 * f4) + (f3 * f3));
+            if (fSqrt != 0.0f) {
+                float f5 = 1.0f / fSqrt;
                 pointF8 = new PointF(pointF8.x * f5, pointF8.y * f5);
             }
             PointF pointF9 = new PointF(-pointF8.y, pointF8.x);

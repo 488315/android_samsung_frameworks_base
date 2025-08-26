@@ -80,9 +80,9 @@ public interface IOnBackInvokedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnBackInvokedCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnBackInvokedCallback)) {
-                return (IOnBackInvokedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOnBackInvokedCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnBackInvokedCallback)) {
+                return (IOnBackInvokedCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -138,14 +138,14 @@ public interface IOnBackInvokedCallback extends IInterface {
                     onBackInvoked();
                     return true;
                 case 5:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTriggerBack(readBoolean);
+                    setTriggerBack(z);
                     return true;
                 case 6:
-                    IBackAnimationHandoffHandler asInterface = IBackAnimationHandoffHandler.Stub.asInterface(parcel.readStrongBinder());
+                    IBackAnimationHandoffHandler iBackAnimationHandoffHandlerAsInterface = IBackAnimationHandoffHandler.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setHandoffHandler(asInterface);
+                    setHandoffHandler(iBackAnimationHandoffHandlerAsInterface);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -170,71 +170,71 @@ public interface IOnBackInvokedCallback extends IInterface {
 
             @Override // android.window.IOnBackInvokedCallback
             public void onBackStarted(BackMotionEvent backMotionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(backMotionEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(backMotionEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IOnBackInvokedCallback
             public void onBackProgressed(BackMotionEvent backMotionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(backMotionEvent, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(backMotionEvent, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IOnBackInvokedCallback
             public void onBackCancelled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IOnBackInvokedCallback
             public void onBackInvoked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IOnBackInvokedCallback
             public void setTriggerBack(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IOnBackInvokedCallback
             public void setHandoffHandler(IBackAnimationHandoffHandler iBackAnimationHandoffHandler) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBackAnimationHandoffHandler);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnBackInvokedCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBackAnimationHandoffHandler);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

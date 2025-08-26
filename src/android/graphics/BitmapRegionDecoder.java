@@ -68,30 +68,31 @@ public final class BitmapRegionDecoder {
         return newInstance(str);
     }
 
-    public static BitmapRegionDecoder newInstance(String str) throws IOException {
-        FileInputStream fileInputStream = null;
+    public static BitmapRegionDecoder newInstance(String str) throws Throwable {
+        FileInputStream fileInputStream;
+        FileInputStream fileInputStream2 = null;
         try {
-            FileInputStream fileInputStream2 = new FileInputStream(str);
+            fileInputStream = new FileInputStream(str);
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            BitmapRegionDecoder bitmapRegionDecoderNewInstance = newInstance(fileInputStream);
             try {
-                BitmapRegionDecoder newInstance = newInstance(fileInputStream2);
-                try {
-                    fileInputStream2.close();
-                } catch (IOException unused) {
-                }
-                return newInstance;
-            } catch (Throwable th) {
-                th = th;
-                fileInputStream = fileInputStream2;
-                if (fileInputStream != null) {
-                    try {
-                        fileInputStream.close();
-                    } catch (IOException unused2) {
-                    }
-                }
-                throw th;
+                fileInputStream.close();
+            } catch (IOException unused) {
             }
+            return bitmapRegionDecoderNewInstance;
         } catch (Throwable th2) {
             th = th2;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException unused2) {
+                }
+            }
+            throw th;
         }
     }
 
@@ -100,34 +101,34 @@ public final class BitmapRegionDecoder {
     }
 
     public Bitmap decodeRegion(Rect rect, BitmapFactory.Options options) {
-        Bitmap nativeDecodeRegion;
+        Bitmap bitmapNativeDecodeRegion;
         BitmapFactory.Options.validate(options);
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
             if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
-            nativeDecodeRegion = nativeDecodeRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, options, BitmapFactory.Options.nativeInBitmap(options), BitmapFactory.Options.nativeColorSpace(options));
+            bitmapNativeDecodeRegion = nativeDecodeRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, options, BitmapFactory.Options.nativeInBitmap(options), BitmapFactory.Options.nativeColorSpace(options));
         }
-        return nativeDecodeRegion;
+        return bitmapNativeDecodeRegion;
     }
 
     public int getWidth() {
-        int nativeGetWidth;
+        int iNativeGetWidth;
         synchronized (this.mNativeLock) {
             checkRecycled("getWidth called on recycled region decoder");
-            nativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
+            iNativeGetWidth = nativeGetWidth(this.mNativeBitmapRegionDecoder);
         }
-        return nativeGetWidth;
+        return iNativeGetWidth;
     }
 
     public int getHeight() {
-        int nativeGetHeight;
+        int iNativeGetHeight;
         synchronized (this.mNativeLock) {
             checkRecycled("getHeight called on recycled region decoder");
-            nativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
+            iNativeGetHeight = nativeGetHeight(this.mNativeBitmapRegionDecoder);
         }
-        return nativeGetHeight;
+        return iNativeGetHeight;
     }
 
     public void recycle() {

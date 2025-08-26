@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AnimatedPlayingIconKt$AnimatedPlayingIcon$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableState<Integer> $currentIndex$delegate;
@@ -41,12 +40,11 @@ final class AnimatedPlayingIconKt$AnimatedPlayingIcon$1$1 extends SuspendLambda 
         	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022 A[RETURN] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:7:0x0020 -> B:5:0x0023). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0022 A[RETURN] */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:10:0x0020 -> B:12:0x0023). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final java.lang.Object invokeSuspend(java.lang.Object r6) {
         /*

@@ -52,7 +52,7 @@ public final class ShaderAssembler {
         Optional.ofNullable(ALL_PARAMS.get(Integer.valueOf(i))).ifPresent(new Consumer() { // from class: com.samsung.android.graphics.imagefilter.ShaderAssembler$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ShaderAssembler.this.lambda$setParam$0(i, f, (Integer) obj);
+                this.f$0.lambda$setParam$0(i, f, (Integer) obj);
             }
         });
     }
@@ -60,12 +60,12 @@ public final class ShaderAssembler {
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setParam$0(int i, float f, Integer num) {
         try {
-            FilterEffect filterEffect = this.filterEffects.get(num);
-            if (filterEffect == null) {
-                filterEffect = registerFilter(num.intValue());
+            FilterEffect filterEffectRegisterFilter = this.filterEffects.get(num);
+            if (filterEffectRegisterFilter == null) {
+                filterEffectRegisterFilter = registerFilter(num.intValue());
             }
-            if (filterEffect != null) {
-                filterEffect.setParam(i, f);
+            if (filterEffectRegisterFilter != null) {
+                filterEffectRegisterFilter.setParam(i, f);
             }
         } catch (NullPointerException e) {
             Log.w(TAG, "Error setting parameter for filter type: " + num, e);
@@ -114,65 +114,46 @@ public final class ShaderAssembler {
     public void printParams() {
         for (Map.Entry<Integer, FilterEffect> entry : this.filterEffects.entrySet()) {
             FilterEffect value = entry.getValue();
-            int intValue = entry.getKey().intValue();
-            if (intValue == 1) {
+            int iIntValue = entry.getKey().intValue();
+            if (iIntValue == 1) {
                 Log.d(TAG, "Blur Param : " + value.getParam(0));
-            } else if (intValue == 2) {
+            } else if (iIntValue == 2) {
                 Log.d(TAG, "Curve Level : " + value.getParam(2) + ", Curve MinX : " + value.getParam(4) + ", Curve MaxX : " + value.getParam(3) + ", Curve MinY : " + value.getParam(6) + ", Curve MaxY : " + value.getParam(5));
-            } else if (intValue == 4) {
+            } else if (iIntValue == 4) {
                 Log.d(TAG, "DITHER Param : " + value.getParam(7));
-            } else if (intValue == 8) {
+            } else if (iIntValue == 8) {
                 Log.d(TAG, "PROSATURATION Param : " + value.getParam(1));
             }
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0028, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0028, code lost:
     
         r3.filterEffects.put(java.lang.Integer.valueOf(r4), r0);
         assembleShaderCodes();
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private com.samsung.android.graphics.imagefilter.FilterEffect registerFilter(int r4) {
-        /*
-            r3 = this;
-            java.util.Map<java.lang.Integer, com.samsung.android.graphics.imagefilter.FilterEffect> r0 = r3.all_filters     // Catch: java.lang.NullPointerException -> L35
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r4)     // Catch: java.lang.NullPointerException -> L35
-            java.lang.Object r0 = r0.get(r1)     // Catch: java.lang.NullPointerException -> L35
-            com.samsung.android.graphics.imagefilter.FilterEffect r0 = (com.samsung.android.graphics.imagefilter.FilterEffect) r0     // Catch: java.lang.NullPointerException -> L35
-            if (r0 != 0) goto L10
-            r3 = 0
-            return r3
-        L10:
-            java.util.List<java.lang.Integer> r1 = com.samsung.android.graphics.imagefilter.ShaderAssembler.SHADER_ORDER     // Catch: java.lang.NullPointerException -> L35
-            java.util.Iterator r1 = r1.iterator()     // Catch: java.lang.NullPointerException -> L35
-        L16:
-            boolean r2 = r1.hasNext()     // Catch: java.lang.NullPointerException -> L35
-            if (r2 == 0) goto L34
-            java.lang.Object r2 = r1.next()     // Catch: java.lang.NullPointerException -> L35
-            java.lang.Integer r2 = (java.lang.Integer) r2     // Catch: java.lang.NullPointerException -> L35
-            int r2 = r2.intValue()     // Catch: java.lang.NullPointerException -> L35
-            if (r2 != r4) goto L16
-            java.util.Map<java.lang.Integer, com.samsung.android.graphics.imagefilter.FilterEffect> r1 = r3.filterEffects     // Catch: java.lang.NullPointerException -> L35
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r4)     // Catch: java.lang.NullPointerException -> L35
-            r1.put(r2, r0)     // Catch: java.lang.NullPointerException -> L35
-            r3.assembleShaderCodes()     // Catch: java.lang.NullPointerException -> L35
-        L34:
-            return r0
-        L35:
-            java.lang.NullPointerException r3 = new java.lang.NullPointerException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "Not found filter type in ORDRED_SHADER: "
-            r0.<init>(r1)
-            r0.append(r4)
-            java.lang.String r4 = r0.toString()
-            r3.<init>(r4)
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.graphics.imagefilter.ShaderAssembler.registerFilter(int):com.samsung.android.graphics.imagefilter.FilterEffect");
+    private FilterEffect registerFilter(int i) {
+        try {
+            FilterEffect filterEffect = this.all_filters.get(Integer.valueOf(i));
+            if (filterEffect == null) {
+                return null;
+            }
+            Iterator<Integer> it = SHADER_ORDER.iterator();
+            while (true) {
+                if (!it.hasNext()) {
+                    break;
+                }
+                if (it.next().intValue() == i) {
+                    break;
+                }
+            }
+            return filterEffect;
+        } catch (NullPointerException unused) {
+            throw new NullPointerException("Not found filter type in ORDRED_SHADER: " + i);
+        }
     }
 
     private LinkedHashMap<Integer, FilterEffect> getOrderedEffects() {
@@ -187,21 +168,21 @@ public final class ShaderAssembler {
     }
 
     private void assembleShaderCodes() {
-        ArrayList<List<FilterEffect>> splitFilters = splitFilters();
-        if (splitFilters == null) {
+        ArrayList<List<FilterEffect>> arrayListSplitFilters = splitFilters();
+        if (arrayListSplitFilters == null) {
             return;
         }
         this.assembledShaders.clear();
-        Iterator<List<FilterEffect>> it = splitFilters.iterator();
+        Iterator<List<FilterEffect>> it = arrayListSplitFilters.iterator();
         while (it.hasNext()) {
             List<FilterEffect> next = it.next();
-            int i = 0;
+            int filterType = 0;
             if (next.size() == 1) {
                 FilterEffect filterEffect = next.get(0);
                 if (filterEffect.useShaderCode()) {
-                    StringBuilder assembleShaderCode = assembleShaderCode(next);
-                    if (assembleShaderCode != null) {
-                        this.assembledShaders.add(new AssembledShader(filterEffect.getFilterType(), assembleShaderCode.toString()));
+                    StringBuilder sbAssembleShaderCode = assembleShaderCode(next);
+                    if (sbAssembleShaderCode != null) {
+                        this.assembledShaders.add(new AssembledShader(filterEffect.getFilterType(), sbAssembleShaderCode.toString()));
                     }
                 } else {
                     this.assembledShaders.add(new AssembledShader(filterEffect));
@@ -209,11 +190,11 @@ public final class ShaderAssembler {
             } else {
                 Iterator<FilterEffect> it2 = next.iterator();
                 while (it2.hasNext()) {
-                    i += it2.next().getFilterType();
+                    filterType += it2.next().getFilterType();
                 }
-                StringBuilder assembleShaderCode2 = assembleShaderCode(next);
-                if (assembleShaderCode2 != null) {
-                    this.assembledShaders.add(new AssembledShader(i, assembleShaderCode2.toString()));
+                StringBuilder sbAssembleShaderCode2 = assembleShaderCode(next);
+                if (sbAssembleShaderCode2 != null) {
+                    this.assembledShaders.add(new AssembledShader(filterType, sbAssembleShaderCode2.toString()));
                 }
             }
         }
@@ -274,7 +255,7 @@ public final class ShaderAssembler {
     }
 
     private RenderEffect createAssembledRenderEffect() {
-        RenderEffect renderEffect = null;
+        RenderEffect renderEffectCreateBlurEffect = null;
         for (AssembledShader assembledShader : this.assembledShaders) {
             int filterMask = assembledShader.getFilterMask();
             if (filterMask != 0) {
@@ -282,19 +263,19 @@ public final class ShaderAssembler {
                     FilterEffect filterEffect = this.filterEffects.get(1);
                     if (filterEffect != null) {
                         float param = filterEffect.getParam(0);
-                        if (renderEffect == null) {
-                            renderEffect = RenderEffect.createBlurEffect(param, param, Shader.TileMode.CLAMP);
+                        if (renderEffectCreateBlurEffect == null) {
+                            renderEffectCreateBlurEffect = RenderEffect.createBlurEffect(param, param, Shader.TileMode.CLAMP);
                         } else {
-                            renderEffect = RenderEffect.createBlurEffect(param, param, renderEffect, Shader.TileMode.CLAMP);
+                            renderEffectCreateBlurEffect = RenderEffect.createBlurEffect(param, param, renderEffectCreateBlurEffect, Shader.TileMode.CLAMP);
                         }
                     }
                 } else {
-                    RenderEffect createRuntimeShaderEffect = RenderEffect.createRuntimeShaderEffect(assembledShader.getRuntimeShader(), "viewImage");
-                    renderEffect = renderEffect == null ? createRuntimeShaderEffect : RenderEffect.createChainEffect(createRuntimeShaderEffect, renderEffect);
+                    RenderEffect renderEffectCreateRuntimeShaderEffect = RenderEffect.createRuntimeShaderEffect(assembledShader.getRuntimeShader(), "viewImage");
+                    renderEffectCreateBlurEffect = renderEffectCreateBlurEffect == null ? renderEffectCreateRuntimeShaderEffect : RenderEffect.createChainEffect(renderEffectCreateRuntimeShaderEffect, renderEffectCreateBlurEffect);
                 }
             }
         }
-        return renderEffect;
+        return renderEffectCreateBlurEffect;
     }
 
     private RenderEffect createChainRenderEffect() {

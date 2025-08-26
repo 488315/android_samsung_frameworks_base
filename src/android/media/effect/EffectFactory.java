@@ -37,7 +37,7 @@ public class EffectFactory {
         this.mEffectContext = effectContext;
     }
 
-    public Effect createEffect(String str) {
+    public Effect createEffect(String str) throws ClassNotFoundException {
         Class effectClassByName = getEffectClassByName(str);
         if (effectClassByName == null) {
             throw new IllegalArgumentException("Cannot instantiate unknown effect '" + str + "'!");
@@ -49,19 +49,19 @@ public class EffectFactory {
         return getEffectClassByName(str) != null;
     }
 
-    private static Class getEffectClassByName(String str) {
+    private static Class getEffectClassByName(String str) throws ClassNotFoundException {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        Class<?> cls = null;
+        Class<?> clsLoadClass = null;
         for (String str2 : EFFECT_PACKAGES) {
             try {
-                cls = contextClassLoader.loadClass(str2 + str);
+                clsLoadClass = contextClassLoader.loadClass(str2 + str);
             } catch (ClassNotFoundException unused) {
             }
-            if (cls != null) {
+            if (clsLoadClass != null) {
                 break;
             }
         }
-        return cls;
+        return clsLoadClass;
     }
 
     private Effect instantiateEffect(Class cls, String str) {

@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ ImageView $bgView;
@@ -30,7 +29,6 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ ImageView $bgView;
@@ -39,15 +37,14 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$2$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01401 extends SuspendLambda implements Function2 {
+        final class C02481 extends SuspendLambda implements Function2 {
             final /* synthetic */ ImageView $bgView;
             final /* synthetic */ DeviceEntryIconViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01401(DeviceEntryIconViewModel deviceEntryIconViewModel, ImageView imageView, Continuation continuation) {
+            public C02481(DeviceEntryIconViewModel deviceEntryIconViewModel, ImageView imageView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = deviceEntryIconViewModel;
                 this.$bgView = imageView;
@@ -55,12 +52,12 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01401(this.$viewModel, this.$bgView, continuation);
+                return new C02481(this.$viewModel, this.$bgView, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01401) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02481) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -96,7 +93,6 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$2$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ DeviceEntryIconView $view;
@@ -133,7 +129,7 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
                         public final Object emit(Object obj2, Continuation continuation) {
                             BurnInOffsets burnInOffsets = (BurnInOffsets) obj2;
                             float f = burnInOffsets.x;
-                            DeviceEntryIconView deviceEntryIconView2 = DeviceEntryIconView.this;
+                            DeviceEntryIconView deviceEntryIconView2 = deviceEntryIconView;
                             deviceEntryIconView2.setTranslationX(f);
                             deviceEntryIconView2.setTranslationY(burnInOffsets.y);
                             deviceEntryIconView2.aodFpDrawable.setProgress(burnInOffsets.progress);
@@ -154,7 +150,6 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder$bind$2$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ DeviceEntryIconView $view;
@@ -189,7 +184,7 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.DeviceEntryIconViewBinder.bind.2.1.3.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            DeviceEntryIconView.this.setAlpha(((Number) obj2).floatValue());
+                            deviceEntryIconView.setAlpha(((Number) obj2).floatValue());
                             return Unit.INSTANCE;
                         }
                     };
@@ -235,7 +230,7 @@ final class DeviceEntryIconViewBinder$bind$2 extends SuspendLambda implements Fu
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01401(this.$viewModel, this.$bgView, null), 6);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02481(this.$viewModel, this.$bgView, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$viewModel, this.$view, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$view, null), 6);
             return Unit.INSTANCE;

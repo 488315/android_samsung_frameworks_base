@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PerDisplayInstanceRepositoryImpl$start$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -42,16 +41,16 @@ final class PerDisplayInstanceRepositoryImpl$start$2 extends SuspendLambda imple
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        Set<Integer> minus = SetsKt___SetsKt.minus(this.this$0.perDisplayInstances.keySet(), (Iterable) this.L$0);
+        Set<Integer> setMinus = SetsKt___SetsKt.minus(this.this$0.perDisplayInstances.keySet(), (Iterable) this.L$0);
         PerDisplayInstanceRepositoryImpl perDisplayInstanceRepositoryImpl = this.this$0;
-        for (Integer num : minus) {
+        for (Integer num : setMinus) {
             Log.d("PerDisplayInstanceRepo", "<" + perDisplayInstanceRepositoryImpl.debugName + "> destroying instance for displayId=" + num + ".");
-            Object remove = perDisplayInstanceRepositoryImpl.perDisplayInstances.remove(num);
-            if (remove != null) {
+            Object objRemove = perDisplayInstanceRepositoryImpl.perDisplayInstances.remove(num);
+            if (objRemove != null) {
                 PerDisplayInstanceProvider perDisplayInstanceProvider = perDisplayInstanceRepositoryImpl.instanceProvider;
                 PerDisplayInstanceProviderWithTeardown perDisplayInstanceProviderWithTeardown = perDisplayInstanceProvider instanceof PerDisplayInstanceProviderWithTeardown ? (PerDisplayInstanceProviderWithTeardown) perDisplayInstanceProvider : null;
                 if (perDisplayInstanceProviderWithTeardown != null) {
-                    perDisplayInstanceProviderWithTeardown.destroyInstance(remove);
+                    perDisplayInstanceProviderWithTeardown.destroyInstance(objRemove);
                 }
             }
         }

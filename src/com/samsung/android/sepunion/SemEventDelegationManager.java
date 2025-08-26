@@ -51,9 +51,9 @@ public class SemEventDelegationManager {
             if (iDeviceInfoManager != null) {
                 return iDeviceInfoManager;
             }
-            IDeviceInfoManager asInterface = IDeviceInfoManager.Stub.asInterface(((SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE)).getSemSystemService("semeventdelegator"));
-            sService = asInterface;
-            return asInterface;
+            IDeviceInfoManager iDeviceInfoManagerAsInterface = IDeviceInfoManager.Stub.asInterface(((SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE)).getSemSystemService("semeventdelegator"));
+            sService = iDeviceInfoManagerAsInterface;
+            return iDeviceInfoManagerAsInterface;
         }
     }
 

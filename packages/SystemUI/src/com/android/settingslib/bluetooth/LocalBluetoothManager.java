@@ -14,7 +14,6 @@ import com.samsung.android.settingslib.bluetooth.bluetoothcast.LocalBluetoothCas
 import com.samsung.android.settingslib.bluetooth.detector.BluetoothRetryDetector;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LocalBluetoothManager {
     public static int mForegroundCount = 0;
@@ -87,22 +86,20 @@ public class LocalBluetoothManager {
     }
 
     public static synchronized LocalBluetoothManager getInstance(Context context, BluetoothUtils.AnonymousClass2 anonymousClass2) {
-        synchronized (LocalBluetoothManager.class) {
-            if (sInstance == null) {
-                Log.d("LocalBluetoothManager", "LocalBluetoothManager :: sInstance == null");
-                LocalBluetoothAdapter localBluetoothAdapter = LocalBluetoothAdapter.getInstance();
-                if (localBluetoothAdapter == null) {
-                    Log.d("LocalBluetoothManager", "LocalBluetoothManager :: adapter == null");
-                    return null;
-                }
-                sInstance = new LocalBluetoothManager(localBluetoothAdapter, context, null, null);
-                if (anonymousClass2 != null) {
-                    Log.d("LocalBluetoothManager", "LocalBluetoothManager :: onInitCallback != null");
-                    context.getApplicationContext();
-                }
+        if (sInstance == null) {
+            Log.d("LocalBluetoothManager", "LocalBluetoothManager :: sInstance == null");
+            LocalBluetoothAdapter localBluetoothAdapter = LocalBluetoothAdapter.getInstance();
+            if (localBluetoothAdapter == null) {
+                Log.d("LocalBluetoothManager", "LocalBluetoothManager :: adapter == null");
+                return null;
             }
-            return sInstance;
+            sInstance = new LocalBluetoothManager(localBluetoothAdapter, context, null, null);
+            if (anonymousClass2 != null) {
+                Log.d("LocalBluetoothManager", "LocalBluetoothManager :: onInitCallback != null");
+                context.getApplicationContext();
+            }
         }
+        return sInstance;
     }
 
     public final boolean isTetheredSettings() {

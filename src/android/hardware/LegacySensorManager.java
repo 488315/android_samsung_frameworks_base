@@ -20,11 +20,11 @@ final class LegacySensorManager {
         this.mSensorManager = sensorManager;
         synchronized (SensorManager.class) {
             if (!sInitialized) {
-                IWindowManager asInterface = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
-                sWindowManager = asInterface;
-                if (asInterface != null) {
+                IWindowManager iWindowManagerAsInterface = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+                sWindowManager = iWindowManagerAsInterface;
+                if (iWindowManagerAsInterface != null) {
                     try {
-                        sRotation = asInterface.watchRotation(new IRotationWatcher.Stub(this) { // from class: android.hardware.LegacySensorManager.1
+                        sRotation = iWindowManagerAsInterface.watchRotation(new IRotationWatcher.Stub(this) { // from class: android.hardware.LegacySensorManager.1
                             @Override // android.view.IRotationWatcher
                             public void onRotationChanged(int i) {
                                 LegacySensorManager.onRotationChanged(i);
@@ -62,7 +62,7 @@ final class LegacySensorManager {
 
     private boolean registerLegacyListener(int i, int i2, SensorListener sensorListener, int i3, int i4) {
         Sensor defaultSensor;
-        boolean registerListener;
+        boolean zRegisterListener;
         if ((i3 & i) == 0 || (defaultSensor = this.mSensorManager.getDefaultSensor(i2)) == null) {
             return false;
         }
@@ -72,9 +72,9 @@ final class LegacySensorManager {
                 legacyListener = new LegacyListener(sensorListener);
                 this.mLegacyListenersMap.put(sensorListener, legacyListener);
             }
-            registerListener = legacyListener.registerSensor(i) ? this.mSensorManager.registerListener(legacyListener, defaultSensor, i4) : true;
+            zRegisterListener = legacyListener.registerSensor(i) ? this.mSensorManager.registerListener(legacyListener, defaultSensor, i4) : true;
         }
-        return registerListener;
+        return zRegisterListener;
     }
 
     public void unregisterListener(SensorListener sensorListener, int i) {
@@ -150,9 +150,9 @@ final class LegacySensorManager {
             if ((i2 & i) != 0) {
                 return false;
             }
-            boolean hasOrientationSensor = hasOrientationSensor(i2);
+            boolean zHasOrientationSensor = hasOrientationSensor(i2);
             this.mSensors |= i;
-            return (hasOrientationSensor && hasOrientationSensor(i)) ? false : true;
+            return (zHasOrientationSensor && hasOrientationSensor(i)) ? false : true;
         }
 
         boolean unregisterSensor(int i) {
@@ -199,119 +199,63 @@ final class LegacySensorManager {
             this.mTarget.onSensorChanged(legacySensorType, fArr);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:11:0x0035, code lost:
-        
-            if (r9 != 128) goto L24;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:5:0x0013, code lost:
-        
-            if (r9 != 128) goto L11;
-         */
-        /* JADX WARN: Removed duplicated region for block: B:20:0x0056  */
-        /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x002f  */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x0040  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private void mapSensorDataToWindow(int r9, float[] r10, int r11) {
-            /*
-                r8 = this;
-                r8 = 0
-                r0 = r10[r8]
-                r1 = 1
-                r2 = r10[r1]
-                r3 = 2
-                r4 = r10[r3]
-                r5 = 128(0x80, float:1.8E-43)
-                r6 = 8
-                if (r9 == r1) goto L1b
-                if (r9 == r3) goto L19
-                if (r9 == r6) goto L16
-                if (r9 == r5) goto L1b
-                goto L1c
-            L16:
-                float r0 = -r0
-                float r2 = -r2
-                goto L1c
-            L19:
-                float r0 = -r0
-                float r2 = -r2
-            L1b:
-                float r4 = -r4
-            L1c:
-                r10[r8] = r0
-                r10[r1] = r2
-                r10[r3] = r4
-                r7 = 3
-                r10[r7] = r0
-                r7 = 4
-                r10[r7] = r2
-                r7 = 5
-                r10[r7] = r4
-                r7 = r11 & 1
-                if (r7 == 0) goto L53
-                if (r9 == r1) goto L40
-                if (r9 == r3) goto L38
-                if (r9 == r6) goto L38
-                if (r9 == r5) goto L40
-                goto L53
-            L38:
-                float r2 = -r2
-                r10[r8] = r2
-                r10[r1] = r0
-                r10[r3] = r4
-                goto L53
-            L40:
-                r7 = 1132920832(0x43870000, float:270.0)
-                int r7 = (r0 > r7 ? 1 : (r0 == r7 ? 0 : -1))
-                if (r7 >= 0) goto L49
-                r7 = 90
-                goto L4b
-            L49:
-                r7 = -270(0xfffffffffffffef2, float:NaN)
-            L4b:
-                float r7 = (float) r7
-                float r0 = r0 + r7
-                r10[r8] = r0
-                r10[r1] = r4
-                r10[r3] = r2
-            L53:
-                r11 = r11 & r3
-                if (r11 == 0) goto L7f
-                r11 = r10[r8]
-                r0 = r10[r1]
-                r2 = r10[r3]
-                if (r9 == r1) goto L6e
-                if (r9 == r3) goto L65
-                if (r9 == r6) goto L65
-                if (r9 == r5) goto L6e
-                goto L7f
-            L65:
-                float r9 = -r11
-                r10[r8] = r9
-                float r8 = -r0
-                r10[r1] = r8
-                r10[r3] = r2
-                return
-            L6e:
-                r9 = 1127481344(0x43340000, float:180.0)
-                int r4 = (r11 > r9 ? 1 : (r11 == r9 ? 0 : -1))
-                if (r4 < 0) goto L76
-                float r11 = r11 - r9
-                goto L77
-            L76:
-                float r11 = r11 + r9
-            L77:
-                r10[r8] = r11
-                float r8 = -r0
-                r10[r1] = r8
-                float r8 = -r2
-                r10[r3] = r8
-            L7f:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.hardware.LegacySensorManager.LegacyListener.mapSensorDataToWindow(int, float[], int):void");
+        private void mapSensorDataToWindow(int i, float[] fArr, int i2) {
+            float f = fArr[0];
+            float f2 = fArr[1];
+            float f3 = fArr[2];
+            if (i == 1) {
+                f3 = -f3;
+            } else {
+                if (i == 2) {
+                    f = -f;
+                    f2 = -f2;
+                } else if (i == 8) {
+                    f = -f;
+                    f2 = -f2;
+                } else if (i == 128) {
+                }
+                f3 = -f3;
+            }
+            fArr[0] = f;
+            fArr[1] = f2;
+            fArr[2] = f3;
+            fArr[3] = f;
+            fArr[4] = f2;
+            fArr[5] = f3;
+            if ((i2 & 1) != 0) {
+                if (i == 1) {
+                    fArr[0] = f + (f < 270.0f ? 90 : -270);
+                    fArr[1] = f3;
+                    fArr[2] = f2;
+                } else if (i == 2 || i == 8) {
+                    fArr[0] = -f2;
+                    fArr[1] = f;
+                    fArr[2] = f3;
+                } else if (i == 128) {
+                }
+            }
+            if ((i2 & 2) != 0) {
+                float f4 = fArr[0];
+                float f5 = fArr[1];
+                float f6 = fArr[2];
+                if (i != 1) {
+                    if (i == 2 || i == 8) {
+                        fArr[0] = -f4;
+                        fArr[1] = -f5;
+                        fArr[2] = f6;
+                        return;
+                    } else if (i != 128) {
+                        return;
+                    }
+                }
+                fArr[0] = f4 >= 180.0f ? f4 - 180.0f : f4 + 180.0f;
+                fArr[1] = -f5;
+                fArr[2] = -f6;
+            }
         }
     }
 
@@ -362,14 +306,14 @@ final class LegacySensorManager {
                 f8 += f12;
             }
             float f14 = ((f4 * f5) + (f7 * f6)) / ((f5 * f8) + (f6 * f6));
-            float f15 = (f14 + ((((f8 * f14) - f4) / f6) * PREDICTION_TIME)) * 0.0027777778f;
-            if ((f15 >= 0.0f ? f15 : -f15) >= 0.5f) {
-                f15 = (f15 - ((float) Math.ceil(0.5f + f15))) + 1.0f;
+            float fCeil = (f14 + ((((f8 * f14) - f4) / f6) * PREDICTION_TIME)) * 0.0027777778f;
+            if ((fCeil >= 0.0f ? fCeil : -fCeil) >= 0.5f) {
+                fCeil = (fCeil - ((float) Math.ceil(0.5f + fCeil))) + 1.0f;
             }
-            if (f15 < 0.0f) {
-                f15 += 1.0f;
+            if (fCeil < 0.0f) {
+                fCeil += 1.0f;
             }
-            return f15 * 360.0f;
+            return fCeil * 360.0f;
         }
     }
 }

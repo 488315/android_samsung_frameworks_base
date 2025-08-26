@@ -23,7 +23,6 @@ import com.android.systemui.power.SecPowerNotificationWarnings;
 import com.android.systemui.util.DeviceType;
 import com.samsung.android.graphics.spr.animation.interpolator.CubicEaseIn;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class UnintentionalLcdOnView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +48,7 @@ public class UnintentionalLcdOnView extends LinearLayout {
     public VelocityTracker mVelocityTracker;
 
     /* renamed from: -$$Nest$monLockerActionMove, reason: not valid java name */
-    public static void m2876$$Nest$monLockerActionMove(UnintentionalLcdOnView unintentionalLcdOnView, MotionEvent motionEvent) {
+    public static void m2893$$Nest$monLockerActionMove(UnintentionalLcdOnView unintentionalLcdOnView, MotionEvent motionEvent) {
         if (unintentionalLcdOnView.mIsLockerSelected) {
             unintentionalLcdOnView.mDragDistanceY = unintentionalLcdOnView.mStartY - motionEvent.getRawY();
             if (motionEvent.getRawX() < unintentionalLcdOnView.mCenterXOnScreen || motionEvent.getRawX() > unintentionalLcdOnView.mCenterXOnScreen + unintentionalLcdOnView.mLockerRing.getWidth()) {
@@ -133,7 +132,7 @@ public class UnintentionalLcdOnView extends LinearLayout {
                 if (action != 0) {
                     if (action != 1) {
                         if (action == 2) {
-                            UnintentionalLcdOnView.m2876$$Nest$monLockerActionMove(UnintentionalLcdOnView.this, motionEvent);
+                            UnintentionalLcdOnView.m2893$$Nest$monLockerActionMove(UnintentionalLcdOnView.this, motionEvent);
                             VelocityTracker velocityTracker = UnintentionalLcdOnView.this.mVelocityTracker;
                             if (velocityTracker != null) {
                                 velocityTracker.addMovement(motionEvent);
@@ -215,18 +214,18 @@ public class UnintentionalLcdOnView extends LinearLayout {
         if (!z) {
             this.mDCircleRadius = this.mDragDistanceY;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mDCircleRadius, 0.0f);
-        this.mDCircleAnimator = ofFloat;
-        ofFloat.setDuration(100L);
-        ofFloat.setInterpolator(z ? this.mSineInOut33 : this.mCubicEaseIn);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.UnintentionalLcdOnView.3
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mDCircleRadius, 0.0f);
+        this.mDCircleAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(100L);
+        valueAnimatorOfFloat.setInterpolator(z ? this.mSineInOut33 : this.mCubicEaseIn);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.UnintentionalLcdOnView.3
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 UnintentionalLcdOnView.this.mDCircleRadius = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 UnintentionalLcdOnView.this.invalidate();
             }
         });
-        ofFloat.addListener(this.mDCircleEndListener);
+        valueAnimatorOfFloat.addListener(this.mDCircleEndListener);
     }
 
     public final void setPreviewClipRect() {

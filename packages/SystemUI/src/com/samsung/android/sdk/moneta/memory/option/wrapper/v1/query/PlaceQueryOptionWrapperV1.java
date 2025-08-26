@@ -7,7 +7,6 @@ import com.samsung.android.sdk.moneta.memory.option.PlaceQueryType;
 import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PlaceQueryOptionWrapperV1 implements Parcelable {
     private final String engramId;
@@ -17,7 +16,6 @@ public final class PlaceQueryOptionWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<PlaceQueryOptionWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,7 +25,6 @@ public final class PlaceQueryOptionWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -66,7 +63,7 @@ public final class PlaceQueryOptionWrapperV1 implements Parcelable {
     }
 
     public final PlaceQueryOption toOption() {
-        Object obj;
+        Object next;
         String str = this.engramId;
         int i = this.limit;
         int i2 = this.offset;
@@ -76,15 +73,15 @@ public final class PlaceQueryOptionWrapperV1 implements Parcelable {
         Iterator<E> it = PlaceQueryType.getEntries().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((PlaceQueryType) obj).getValue() == i3) {
+            next = it.next();
+            if (((PlaceQueryType) next).getValue() == i3) {
                 break;
             }
         }
-        PlaceQueryType placeQueryType = (PlaceQueryType) obj;
+        PlaceQueryType placeQueryType = (PlaceQueryType) next;
         if (placeQueryType == null) {
             placeQueryType = PlaceQueryType.BY_ENGRAM_ID;
         }

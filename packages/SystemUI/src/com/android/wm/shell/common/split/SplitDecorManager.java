@@ -26,7 +26,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.splitscreen.SplitScreenTransitions$$ExternalSyntheticLambda9;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitDecorManager extends WindowlessWindowManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -94,13 +93,13 @@ public class SplitDecorManager extends WindowlessWindowManager {
             this.mFadeAnimator.cancel();
         }
         if (this.mBackgroundLeash == null) {
-            SurfaceControl build = new SurfaceControl.Builder().setParent(this.mHostLeash).setColorLayer().setName("ResizingBackground").setCallsite("SurfaceUtils.makeColorLayer").build();
-            this.mBackgroundLeash = build;
+            SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setParent(this.mHostLeash).setColorLayer().setName("ResizingBackground").setCallsite("SurfaceUtils.makeColorLayer").build();
+            this.mBackgroundLeash = surfaceControlBuild;
             int backgroundColor = runningTaskInfo.taskDescription.getBackgroundColor();
             if (backgroundColor == -1) {
                 backgroundColor = -1;
             }
-            transaction.setColor(build, Color.valueOf(backgroundColor).getComponents()).setLayer(this.mBackgroundLeash, 2147483646);
+            transaction.setColor(surfaceControlBuild, Color.valueOf(backgroundColor).getComponents()).setLayer(this.mBackgroundLeash, 2147483646);
         }
         if (this.mIcon == null && (activityInfo = runningTaskInfo.topActivityInfo) != null) {
             Drawable icon = this.mIconProvider.getIcon(activityInfo);
@@ -118,7 +117,7 @@ public class SplitDecorManager extends WindowlessWindowManager {
         if (this.mShown) {
             return;
         }
-        startFadeAnimation(true, false, null, false);
+        startFadeAnimation(null, true, false, false);
         this.mShown = true;
     }
 
@@ -131,7 +130,7 @@ public class SplitDecorManager extends WindowlessWindowManager {
         if (valueAnimator != null && valueAnimator.isRunning()) {
             this.mFadeAnimator.cancel();
         }
-        startFadeAnimation(false, true, runnable, z);
+        startFadeAnimation(runnable, false, true, z);
         this.mShown = false;
     }
 
@@ -148,18 +147,18 @@ public class SplitDecorManager extends WindowlessWindowManager {
     }
 
     public final SurfaceControl getParentSurface(IWindow iWindow, WindowManager.LayoutParams layoutParams) {
-        SurfaceControl build = new SurfaceControl.Builder().setContainerLayer().setName("SplitDecorManager").setHidden(true).setParent(this.mHostLeash).setCallsite("SplitDecorManager#attachToParentSurface").build();
-        this.mIconLeash = build;
-        return build;
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setContainerLayer().setName("SplitDecorManager").setHidden(true).setParent(this.mHostLeash).setCallsite("SplitDecorManager#attachToParentSurface").build();
+        this.mIconLeash = surfaceControlBuild;
+        return surfaceControlBuild;
     }
 
     public final void inflate(Context context, SurfaceControl surfaceControl) {
         if (this.mIconLeash == null || this.mViewHost == null) {
-            Context createWindowContext = context.createWindowContext(context.getDisplay(), 2038, null);
+            Context contextCreateWindowContext = context.createWindowContext(context.getDisplay(), 2038, null);
             this.mHostLeash = surfaceControl;
-            this.mViewHost = new SurfaceControlViewHost(createWindowContext, createWindowContext.getDisplay(), this, "SplitDecorManager");
-            this.mIconSize = createWindowContext.getResources().getDimensionPixelSize(R.dimen.split_icon_size);
-            FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(createWindowContext).inflate(R.layout.split_decor, (ViewGroup) null);
+            this.mViewHost = new SurfaceControlViewHost(contextCreateWindowContext, contextCreateWindowContext.getDisplay(), this, "SplitDecorManager");
+            this.mIconSize = contextCreateWindowContext.getResources().getDimensionPixelSize(R.dimen.split_icon_size);
+            FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(contextCreateWindowContext).inflate(R.layout.split_decor, (ViewGroup) null);
             this.mVeilIconView = (ImageView) frameLayout.findViewById(R.id.split_resizing_icon);
             WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(0, 0, 2038, 24, -3);
             int i = this.mIconSize;
@@ -182,13 +181,13 @@ public class SplitDecorManager extends WindowlessWindowManager {
         if (surfaceControl != null) {
             transaction.setPosition(surfaceControl, this.mOffsetX, this.mOffsetY);
             final SurfaceControl.Transaction transaction2 = new SurfaceControl.Transaction();
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            this.mScreenshotAnimator = ofFloat;
-            ofFloat.setDuration(133L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+            this.mScreenshotAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(133L);
             this.mScreenshotAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.SplitDecorManager$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    SplitDecorManager splitDecorManager = SplitDecorManager.this;
+                    SplitDecorManager splitDecorManager = this.f$0;
                     SurfaceControl.Transaction transaction3 = transaction2;
                     int i = SplitDecorManager.$r8$clinit;
                     splitDecorManager.getClass();
@@ -256,7 +255,7 @@ public class SplitDecorManager extends WindowlessWindowManager {
                 fadeOutDecor(new Runnable() { // from class: com.android.wm.shell.common.split.SplitDecorManager$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SplitDecorManager splitDecorManager = SplitDecorManager.this;
+                        SplitDecorManager splitDecorManager = this.f$0;
                         SplitScreenTransitions$$ExternalSyntheticLambda9 splitScreenTransitions$$ExternalSyntheticLambda92 = splitScreenTransitions$$ExternalSyntheticLambda9;
                         if (splitDecorManager.mRunningAnimationCount != 0 || splitScreenTransitions$$ExternalSyntheticLambda92 == null) {
                             return;
@@ -320,33 +319,33 @@ public class SplitDecorManager extends WindowlessWindowManager {
         }
     }
 
-    public final void startFadeAnimation(final boolean z, final boolean z2, final Runnable runnable, boolean z3) {
+    public final void startFadeAnimation(final Runnable runnable, final boolean z, final boolean z2, boolean z3) {
         final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mFadeAnimator = ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mFadeAnimator = valueAnimatorOfFloat;
         if (z3) {
-            ofFloat.setStartDelay(300L);
+            valueAnimatorOfFloat.setStartDelay(300L);
         }
         this.mFadeAnimator.setDuration(133L);
         this.mFadeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.SplitDecorManager$$ExternalSyntheticLambda2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SplitDecorManager splitDecorManager = SplitDecorManager.this;
+                SplitDecorManager splitDecorManager = this.f$0;
                 SurfaceControl.Transaction transaction2 = transaction;
                 boolean z4 = z;
                 int i = SplitDecorManager.$r8$clinit;
                 splitDecorManager.getClass();
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 SurfaceControl surfaceControl = splitDecorManager.mBackgroundLeash;
                 if (surfaceControl != null) {
-                    transaction2.setAlpha(surfaceControl, z4 ? floatValue : 1.0f - floatValue);
+                    transaction2.setAlpha(surfaceControl, z4 ? fFloatValue : 1.0f - fFloatValue);
                 }
                 SurfaceControl surfaceControl2 = splitDecorManager.mIconLeash;
                 if (surfaceControl2 != null) {
                     if (!z4) {
-                        floatValue = 1.0f - floatValue;
+                        fFloatValue = 1.0f - fFloatValue;
                     }
-                    transaction2.setAlpha(surfaceControl2, floatValue);
+                    transaction2.setAlpha(surfaceControl2, fFloatValue);
                 }
                 transaction2.apply();
             }

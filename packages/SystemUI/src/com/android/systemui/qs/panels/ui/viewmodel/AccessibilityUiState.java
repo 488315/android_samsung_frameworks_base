@@ -9,7 +9,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AccessibilityUiState {
     public final int accessibilityRole;
@@ -38,21 +37,21 @@ public final class AccessibilityUiState {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contentDescription.hashCode() * 31, 31, this.stateDescription);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.contentDescription.hashCode() * 31, 31, this.stateDescription);
         Role.Companion companion = Role.Companion;
-        int m2 = ReorderTile$$ExternalSyntheticOutline0.m(this.accessibilityRole, m, 31);
+        int iM2 = ReorderTile$$ExternalSyntheticOutline0.m(this.accessibilityRole, iM, 31);
         ToggleableState toggleableState = this.toggleableState;
-        int hashCode = (m2 + (toggleableState == null ? 0 : toggleableState.hashCode())) * 31;
+        int iHashCode = (iM2 + (toggleableState == null ? 0 : toggleableState.hashCode())) * 31;
         String str = this.clickLabel;
-        return hashCode + (str != null ? str.hashCode() : 0);
+        return iHashCode + (str != null ? str.hashCode() : 0);
     }
 
     public final String toString() {
-        String m714toStringimpl = Role.m714toStringimpl(this.accessibilityRole);
+        String strM716toStringimpl = Role.m716toStringimpl(this.accessibilityRole);
         StringBuilder sb = new StringBuilder("AccessibilityUiState(contentDescription=");
         sb.append(this.contentDescription);
         sb.append(", stateDescription=");
-        MoveResult$$ExternalSyntheticOutline0.m(sb, this.stateDescription, ", accessibilityRole=", m714toStringimpl, ", toggleableState=");
+        MoveResult$$ExternalSyntheticOutline0.m(sb, this.stateDescription, ", accessibilityRole=", strM716toStringimpl, ", toggleableState=");
         sb.append(this.toggleableState);
         sb.append(", clickLabel=");
         return TransitionKt$$ExternalSyntheticOutline0.m(sb, this.clickLabel, ")");

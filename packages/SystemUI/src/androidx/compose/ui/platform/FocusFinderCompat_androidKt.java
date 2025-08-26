@@ -4,96 +4,102 @@ import android.view.View;
 import android.view.ViewGroup;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FocusFinderCompat_androidKt {
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0030, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0030, code lost:
     
         return null;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x005a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x0059, code lost:
     
-        return r1;
+        return null;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final android.view.View access$findUserSetNextFocus(final android.view.View r4, final android.view.View r5, int r6) {
-        /*
-            r0 = 0
-            r1 = 1
-            r2 = -1
-            if (r6 == r1) goto L32
-            r1 = 2
-            if (r6 == r1) goto L9
-            goto L38
-        L9:
-            int r6 = r4.getNextFocusForwardId()
-            if (r6 != r2) goto L10
-            goto L38
-        L10:
-            androidx.compose.ui.platform.FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1 r1 = new androidx.compose.ui.platform.FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1
-            r1.<init>(r6)
-            r6 = r0
-        L16:
-            android.view.View r6 = findViewByPredicateTraversal(r4, r1, r6)
-            if (r6 != 0) goto L31
-            if (r4 != r5) goto L1f
-            goto L31
-        L1f:
-            android.view.ViewParent r6 = r4.getParent()
-            if (r6 == 0) goto L30
-            boolean r2 = r6 instanceof android.view.View
-            if (r2 != 0) goto L2a
-            goto L30
-        L2a:
-            android.view.View r6 = (android.view.View) r6
-            r3 = r6
-            r6 = r4
-            r4 = r3
-            goto L16
-        L30:
-            return r0
-        L31:
-            return r6
-        L32:
-            int r6 = r4.getId()
-            if (r6 != r2) goto L39
-        L38:
-            return r0
-        L39:
-            androidx.compose.ui.platform.FocusFinderCompat_androidKt$findUserSetNextFocus$1 r6 = new androidx.compose.ui.platform.FocusFinderCompat_androidKt$findUserSetNextFocus$1
-            r6.<init>()
-            r1 = r0
-        L3f:
-            android.view.View r1 = findViewByPredicateTraversal(r4, r6, r1)
-            if (r1 != 0) goto L5a
-            if (r4 != r5) goto L48
-            goto L5a
-        L48:
-            android.view.ViewParent r1 = r4.getParent()
-            if (r1 == 0) goto L59
-            boolean r2 = r1 instanceof android.view.View
-            if (r2 != 0) goto L53
-            goto L59
-        L53:
-            android.view.View r1 = (android.view.View) r1
-            r3 = r1
-            r1 = r4
-            r4 = r3
-            goto L3f
-        L59:
-            return r0
-        L5a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.FocusFinderCompat_androidKt.access$findUserSetNextFocus(android.view.View, android.view.View, int):android.view.View");
+    public static final View access$findUserSetNextFocus(final View view, final View view2, int i) {
+        View viewFindViewByPredicateTraversal;
+        int nextFocusForwardId;
+        View viewFindViewByPredicateTraversal2;
+        if (i != 1) {
+            if (i == 2 && (nextFocusForwardId = view.getNextFocusForwardId()) != -1) {
+                FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1 focusFinderCompat_androidKt$findViewInsideOutShouldExist$1 = new FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1(nextFocusForwardId);
+                View view3 = null;
+                while (true) {
+                    viewFindViewByPredicateTraversal2 = findViewByPredicateTraversal(view, focusFinderCompat_androidKt$findViewInsideOutShouldExist$1, view3);
+                    if (viewFindViewByPredicateTraversal2 != null || view == view2) {
+                        break;
+                    }
+                    Object parent = view.getParent();
+                    if (parent == null || !(parent instanceof View)) {
+                        break;
+                    }
+                    View view4 = (View) parent;
+                    view3 = view;
+                    view = view4;
+                }
+                return viewFindViewByPredicateTraversal2;
+            }
+        } else if (view.getId() != -1) {
+            Function1 function1 = new Function1() { // from class: androidx.compose.ui.platform.FocusFinderCompat_androidKt$findUserSetNextFocus$1
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                {
+                    super(1);
+                }
+
+                /* JADX WARN: Code restructure failed: missing block: B:13:0x0029, code lost:
+                
+                    r1 = r3;
+                 */
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object mo781invoke(Object obj) {
+                    View view5 = (View) obj;
+                    View view6 = view2;
+                    FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1 focusFinderCompat_androidKt$findViewInsideOutShouldExist$12 = new FocusFinderCompat_androidKt$findViewInsideOutShouldExist$1(view5.getNextFocusForwardId());
+                    View view7 = null;
+                    View view8 = null;
+                    while (true) {
+                        View viewFindViewByPredicateTraversal3 = FocusFinderCompat_androidKt.findViewByPredicateTraversal(view5, focusFinderCompat_androidKt$findViewInsideOutShouldExist$12, view8);
+                        if (viewFindViewByPredicateTraversal3 != null || view5 == view6) {
+                            break;
+                        }
+                        Object parent2 = view5.getParent();
+                        if (parent2 == null || !(parent2 instanceof View)) {
+                            break;
+                        }
+                        View view9 = (View) parent2;
+                        view8 = view5;
+                        view5 = view9;
+                    }
+                    return Boolean.valueOf(view7 == view);
+                }
+            };
+            View view5 = null;
+            while (true) {
+                viewFindViewByPredicateTraversal = findViewByPredicateTraversal(view, function1, view5);
+                if (viewFindViewByPredicateTraversal != null || view == view2) {
+                    break;
+                }
+                Object parent2 = view.getParent();
+                if (parent2 == null || !(parent2 instanceof View)) {
+                    break;
+                }
+                View view6 = (View) parent2;
+                view5 = view;
+                view = view6;
+            }
+            return viewFindViewByPredicateTraversal;
+        }
+        return null;
     }
 
     public static final View findViewByPredicateTraversal(View view, Function1 function1, View view2) {
-        View findViewByPredicateTraversal;
-        if (((Boolean) function1.mo779invoke(view)).booleanValue()) {
+        View viewFindViewByPredicateTraversal;
+        if (((Boolean) function1.mo781invoke(view)).booleanValue()) {
             return view;
         }
         if (!(view instanceof ViewGroup)) {
@@ -103,8 +109,8 @@ public abstract class FocusFinderCompat_androidKt {
         int childCount = viewGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View childAt = viewGroup.getChildAt(i);
-            if (childAt != view2 && (findViewByPredicateTraversal = findViewByPredicateTraversal(childAt, function1, view2)) != null) {
-                return findViewByPredicateTraversal;
+            if (childAt != view2 && (viewFindViewByPredicateTraversal = findViewByPredicateTraversal(childAt, function1, view2)) != null) {
+                return viewFindViewByPredicateTraversal;
             }
         }
         return null;

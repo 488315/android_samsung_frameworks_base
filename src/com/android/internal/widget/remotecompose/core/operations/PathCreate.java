@@ -125,9 +125,9 @@ public class PathCreate extends PaintOperation implements VariableSupport, Seria
                 sb.append(" ");
             }
             if (Float.isNaN(fArr[i])) {
-                int idFromNan = Utils.idFromNan(fArr[i]);
-                if (idFromNan <= 16) {
-                    switch (idFromNan) {
+                int iIdFromNan = Utils.idFromNan(fArr[i]);
+                if (iIdFromNan <= 16) {
+                    switch (iIdFromNan) {
                         case 10:
                             sb.append(GnssSignalType.CODE_TYPE_M);
                             break;
@@ -150,11 +150,11 @@ public class PathCreate extends PaintOperation implements VariableSupport, Seria
                             sb.append(MediaMetrics.SEPARATOR);
                             break;
                         default:
-                            sb.append(NavigationBarInflaterView.SIZE_MOD_START + idFromNan + NavigationBarInflaterView.SIZE_MOD_END);
+                            sb.append(NavigationBarInflaterView.SIZE_MOD_START + iIdFromNan + NavigationBarInflaterView.SIZE_MOD_END);
                             break;
                     }
                 } else {
-                    sb.append(NavigationBarInflaterView.KEY_CODE_START + idFromNan + NavigationBarInflaterView.KEY_CODE_END);
+                    sb.append(NavigationBarInflaterView.KEY_CODE_START + iIdFromNan + NavigationBarInflaterView.KEY_CODE_END);
                 }
             } else {
                 sb.append(fArr[i]);

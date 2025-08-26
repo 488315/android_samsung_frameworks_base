@@ -3,7 +3,6 @@ package androidx.compose.runtime;
 import androidx.compose.runtime.ComposerImpl;
 import androidx.compose.runtime.ComposerImpl.CompositionContextImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ComposablesKt {
     public static final int getCurrentCompositeKeyHash(Composer composer) {
@@ -48,8 +47,8 @@ public abstract class ComposablesKt {
         if (composerImpl.inserting) {
             SlotWriter.markGroup$default(composerImpl.writer);
         }
-        Object nextSlot = composerImpl.nextSlot();
-        ComposerImpl.CompositionContextHolder compositionContextHolder = nextSlot instanceof ComposerImpl.CompositionContextHolder ? (ComposerImpl.CompositionContextHolder) nextSlot : null;
+        Object objNextSlot = composerImpl.nextSlot();
+        ComposerImpl.CompositionContextHolder compositionContextHolder = objNextSlot instanceof ComposerImpl.CompositionContextHolder ? (ComposerImpl.CompositionContextHolder) objNextSlot : null;
         if (compositionContextHolder == null) {
             CompositionObserverHolder compositionObserverHolder = null;
             int i = composerImpl.compoundKeyHash;
@@ -63,9 +62,9 @@ public abstract class ComposablesKt {
             compositionContextHolder = new ComposerImpl.CompositionContextHolder(composerImpl.new CompositionContextImpl(i, z, z2, compositionObserverHolder));
             composerImpl.updateValue(compositionContextHolder);
         }
-        PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+        PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
         ComposerImpl.CompositionContextImpl compositionContextImpl = compositionContextHolder.ref;
-        ((SnapshotMutableStateImpl) compositionContextImpl.compositionLocalScope$delegate).setValue(currentCompositionLocalScope);
+        ((SnapshotMutableStateImpl) compositionContextImpl.compositionLocalScope$delegate).setValue(persistentCompositionLocalMapCurrentCompositionLocalScope);
         composerImpl.end(false);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();

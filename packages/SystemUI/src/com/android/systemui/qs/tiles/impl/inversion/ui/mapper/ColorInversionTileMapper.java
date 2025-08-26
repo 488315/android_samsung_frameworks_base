@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ColorInversionTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
@@ -33,10 +32,10 @@ public final class ColorInversionTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.inversion.ui.mapper.ColorInversionTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) throws Resources.NotFoundException {
                 int i;
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                ColorInversionTileMapper colorInversionTileMapper = ColorInversionTileMapper.this;
+                ColorInversionTileMapper colorInversionTileMapper = this.f$0;
                 String[] stringArray = colorInversionTileMapper.resources.getStringArray(R.array.tile_states_inversion);
                 if (z) {
                     builder.activationState = QSTileState.ActivationState.ACTIVE;

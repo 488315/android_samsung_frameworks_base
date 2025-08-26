@@ -3,7 +3,6 @@ package com.android.wm.shell.desktopmode;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.desktopmode.DesktopModeVisualIndicator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksController$dragToDesktopStateListener$1 {
     public final /* synthetic */ DesktopTasksController this$0;
@@ -19,7 +18,7 @@ public final class DesktopTasksController$dragToDesktopStateListener$1 {
             Runnable runnable = new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$dragToDesktopStateListener$1$removeVisualIndicator$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopTasksController.this.releaseVisualIndicator();
+                    desktopTasksController.releaseVisualIndicator();
                 }
             };
             DisplayLayout displayLayout = desktopModeVisualIndicator.mDisplayController.getDisplayLayout(desktopModeVisualIndicator.mTaskInfo.displayId);

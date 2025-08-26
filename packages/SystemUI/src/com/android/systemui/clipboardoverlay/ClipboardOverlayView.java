@@ -30,7 +30,6 @@ import com.android.systemui.screenshot.ui.viewmodel.ActionButtonViewModel;
 import java.util.ArrayList;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClipboardOverlayView extends DraggableConstraintLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -52,7 +51,6 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
     public View mShareChip;
     public TextView mTextPreview;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ClipboardOverlayCallbacks extends DraggableConstraintLayout.SwipeDismissCallbacks {
         void onDismissButtonTapped();
 
@@ -74,11 +72,11 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
         PathInterpolator pathInterpolator = new PathInterpolator(0.3f, 0.0f, 1.0f, 1.0f);
         AnimatorSet animatorSet = new AnimatorSet();
         final int i = 2;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setInterpolator(linearInterpolator);
-        ofFloat.setDuration(100L);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setInterpolator(linearInterpolator);
+        valueAnimatorOfFloat.setDuration(100L);
         final int i2 = 0;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
             public final /* synthetic */ ClipboardOverlayView f$0;
 
             {
@@ -98,24 +96,24 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                     case 1:
                         int i5 = ClipboardOverlayView.$r8$clinit;
                         clipboardOverlayView.getClass();
-                        float lerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mMinimizedPreview.setScaleX(lerp);
-                        clipboardOverlayView.mMinimizedPreview.setScaleY(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleX(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleY(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleX(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleY(lerp);
+                        float fLerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mMinimizedPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mMinimizedPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleX(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleY(fLerp);
                         float x = clipboardOverlayView.mClipboardPreview.getX() + (clipboardOverlayView.mClipboardPreview.getWidth() / 2.0f);
                         View view = clipboardOverlayView.mActionContainerBackground;
                         view.setPivotX(x - view.getX());
                         LinearLayout linearLayout = clipboardOverlayView.mActionContainer;
                         linearLayout.setPivotX(x - ((View) linearLayout.getParent()).getX());
-                        float lerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
-                        float lerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mActionContainer.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainer.setScaleY(lerp3);
-                        clipboardOverlayView.mActionContainerBackground.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainerBackground.setScaleY(lerp3);
+                        float fLerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
+                        float fLerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mActionContainer.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainer.setScaleY(fLerp3);
+                        clipboardOverlayView.mActionContainerBackground.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainerBackground.setScaleY(fLerp3);
                         break;
                     default:
                         int i6 = ClipboardOverlayView.$r8$clinit;
@@ -130,11 +128,11 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                 }
             }
         });
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat2.setInterpolator(pathInterpolator);
-        ofFloat2.setDuration(250L);
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat2.setInterpolator(pathInterpolator);
+        valueAnimatorOfFloat2.setDuration(250L);
         final int i3 = 1;
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
             public final /* synthetic */ ClipboardOverlayView f$0;
 
             {
@@ -154,24 +152,24 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                     case 1:
                         int i5 = ClipboardOverlayView.$r8$clinit;
                         clipboardOverlayView.getClass();
-                        float lerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mMinimizedPreview.setScaleX(lerp);
-                        clipboardOverlayView.mMinimizedPreview.setScaleY(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleX(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleY(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleX(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleY(lerp);
+                        float fLerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mMinimizedPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mMinimizedPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleX(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleY(fLerp);
                         float x = clipboardOverlayView.mClipboardPreview.getX() + (clipboardOverlayView.mClipboardPreview.getWidth() / 2.0f);
                         View view = clipboardOverlayView.mActionContainerBackground;
                         view.setPivotX(x - view.getX());
                         LinearLayout linearLayout = clipboardOverlayView.mActionContainer;
                         linearLayout.setPivotX(x - ((View) linearLayout.getParent()).getX());
-                        float lerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
-                        float lerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mActionContainer.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainer.setScaleY(lerp3);
-                        clipboardOverlayView.mActionContainerBackground.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainerBackground.setScaleY(lerp3);
+                        float fLerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
+                        float fLerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mActionContainer.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainer.setScaleY(fLerp3);
+                        clipboardOverlayView.mActionContainerBackground.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainerBackground.setScaleY(fLerp3);
                         break;
                     default:
                         int i6 = ClipboardOverlayView.$r8$clinit;
@@ -186,10 +184,10 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                 }
             }
         });
-        ValueAnimator ofFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat3.setInterpolator(linearInterpolator);
-        ofFloat3.setDuration(166L);
-        ofFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
+        ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat3.setInterpolator(linearInterpolator);
+        valueAnimatorOfFloat3.setDuration(166L);
+        valueAnimatorOfFloat3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda1
             public final /* synthetic */ ClipboardOverlayView f$0;
 
             {
@@ -209,24 +207,24 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                     case 1:
                         int i5 = ClipboardOverlayView.$r8$clinit;
                         clipboardOverlayView.getClass();
-                        float lerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mMinimizedPreview.setScaleX(lerp);
-                        clipboardOverlayView.mMinimizedPreview.setScaleY(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleX(lerp);
-                        clipboardOverlayView.mClipboardPreview.setScaleY(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleX(lerp);
-                        clipboardOverlayView.mPreviewBorder.setScaleY(lerp);
+                        float fLerp = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mMinimizedPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mMinimizedPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleX(fLerp);
+                        clipboardOverlayView.mClipboardPreview.setScaleY(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleX(fLerp);
+                        clipboardOverlayView.mPreviewBorder.setScaleY(fLerp);
                         float x = clipboardOverlayView.mClipboardPreview.getX() + (clipboardOverlayView.mClipboardPreview.getWidth() / 2.0f);
                         View view = clipboardOverlayView.mActionContainerBackground;
                         view.setPivotX(x - view.getX());
                         LinearLayout linearLayout = clipboardOverlayView.mActionContainer;
                         linearLayout.setPivotX(x - ((View) linearLayout.getParent()).getX());
-                        float lerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
-                        float lerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
-                        clipboardOverlayView.mActionContainer.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainer.setScaleY(lerp3);
-                        clipboardOverlayView.mActionContainerBackground.setScaleX(lerp2);
-                        clipboardOverlayView.mActionContainerBackground.setScaleY(lerp3);
+                        float fLerp2 = MathUtils.lerp(1.0f, 0.8f, valueAnimator.getAnimatedFraction());
+                        float fLerp3 = MathUtils.lerp(1.0f, 0.9f, valueAnimator.getAnimatedFraction());
+                        clipboardOverlayView.mActionContainer.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainer.setScaleY(fLerp3);
+                        clipboardOverlayView.mActionContainerBackground.setScaleX(fLerp2);
+                        clipboardOverlayView.mActionContainerBackground.setScaleY(fLerp3);
                         break;
                     default:
                         int i6 = ClipboardOverlayView.$r8$clinit;
@@ -241,8 +239,8 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
                 }
             }
         });
-        animatorSet.play(ofFloat3).with(ofFloat2);
-        animatorSet.play(ofFloat).after(150L).after(ofFloat3);
+        animatorSet.play(valueAnimatorOfFloat3).with(valueAnimatorOfFloat2);
+        animatorSet.play(valueAnimatorOfFloat).after(150L).after(valueAnimatorOfFloat3);
         return animatorSet;
     }
 
@@ -259,8 +257,8 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
         this.mShareChip = requireViewById(R.id.share_chip);
         this.mRemoteCopyChip = requireViewById(R.id.remote_copy_chip);
         this.mDismissButton = requireViewById(R.id.dismiss_button);
-        View requireViewById = requireViewById(R.id.indication_container);
-        this.mIndicationContainer = requireViewById;
+        View viewRequireViewById = requireViewById(R.id.indication_container);
+        this.mIndicationContainer = viewRequireViewById;
         ActionButtonViewBinder actionButtonViewBinder = this.mActionButtonViewBinder;
         View view = this.mRemoteCopyChip;
         ActionButtonViewModel.Companion companion = ActionButtonViewModel.Companion;
@@ -277,12 +275,12 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
             }
         };
         companion.getClass();
-        ActionButtonViewModel withNextId = ActionButtonViewModel.Companion.withNextId(actionButtonAppearance, function0);
+        ActionButtonViewModel actionButtonViewModelWithNextId = ActionButtonViewModel.Companion.withNextId(actionButtonAppearance, function0);
         actionButtonViewBinder.getClass();
-        ActionButtonViewBinder.bind(view, withNextId);
+        ActionButtonViewBinder.bind(view, actionButtonViewModelWithNextId);
         ActionButtonViewBinder actionButtonViewBinder2 = this.mActionButtonViewBinder;
         View view2 = this.mShareChip;
-        ActionButtonViewModel withNextId2 = ActionButtonViewModel.Companion.withNextId(new ActionButtonAppearance(Icon.createWithResource(((ViewGroup) this).mContext, R.drawable.ic_screenshot_share).loadDrawable(((ViewGroup) this).mContext), null, ((ViewGroup) this).mContext.getString(17043144), true), new Function0() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView.2
+        ActionButtonViewModel actionButtonViewModelWithNextId2 = ActionButtonViewModel.Companion.withNextId(new ActionButtonAppearance(Icon.createWithResource(((ViewGroup) this).mContext, R.drawable.ic_screenshot_share).loadDrawable(((ViewGroup) this).mContext), null, ((ViewGroup) this).mContext.getString(17043148), true), new Function0() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView.2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 ClipboardOverlayCallbacks clipboardOverlayCallbacks = ClipboardOverlayView.this.mClipboardCallbacks;
@@ -294,11 +292,11 @@ public class ClipboardOverlayView extends DraggableConstraintLayout {
             }
         });
         actionButtonViewBinder2.getClass();
-        ActionButtonViewBinder.bind(view2, withNextId2);
+        ActionButtonViewBinder.bind(view2, actionButtonViewModelWithNextId2);
         this.mTextPreview.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                ClipboardOverlayView clipboardOverlayView = ClipboardOverlayView.this;
+                ClipboardOverlayView clipboardOverlayView = this.f$0;
                 int height = clipboardOverlayView.mTextPreview.getHeight() - (clipboardOverlayView.mTextPreview.getPaddingBottom() + clipboardOverlayView.mTextPreview.getPaddingTop());
                 TextView textView = clipboardOverlayView.mTextPreview;
                 textView.setMaxLines(Math.max(height / textView.getLineHeight(), 1));

@@ -113,13 +113,13 @@ public final class OptionalSscMode {
 
     public static final ArrayList<OptionalSscMode> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<OptionalSscMode> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             OptionalSscMode optionalSscMode = new OptionalSscMode();
-            optionalSscMode.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 2);
+            optionalSscMode.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 2);
             arrayList.add(optionalSscMode);
         }
         return arrayList;

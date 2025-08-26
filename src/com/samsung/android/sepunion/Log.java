@@ -60,8 +60,8 @@ public class Log {
         StringBuffer stringBuffer = new StringBuffer(" ");
         if (mIsPrintCodeInfo) {
             StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-            int min = Math.min(stackTrace.length, 5);
-            for (int i = 4; i <= min; i++) {
+            int iMin = Math.min(stackTrace.length, 5);
+            for (int i = 4; i <= iMin; i++) {
                 stringBuffer.append(stackTrace[i].toString()).append(ShaderAssembler.NEWLINE);
             }
         }

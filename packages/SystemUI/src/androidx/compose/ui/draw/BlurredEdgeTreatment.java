@@ -6,14 +6,12 @@ import androidx.compose.ui.graphics.Shape;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BlurredEdgeTreatment {
     public static final Companion Companion = new Companion(null);
     public static final RectangleShapeKt$RectangleShape$1 Rectangle = RectangleShapeKt.RectangleShape;
     public final Shape shape;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,7 @@ public final class BlurredEdgeTreatment {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ BlurredEdgeTreatment m359boximpl(RectangleShapeKt$RectangleShape$1 rectangleShapeKt$RectangleShape$1) {
+    public static final /* synthetic */ BlurredEdgeTreatment m360boximpl(RectangleShapeKt$RectangleShape$1 rectangleShapeKt$RectangleShape$1) {
         return new BlurredEdgeTreatment(rectangleShapeKt$RectangleShape$1);
     }
 

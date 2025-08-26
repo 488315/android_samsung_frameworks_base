@@ -21,7 +21,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class DataStoreCoordinator implements CoreCoordinator {
@@ -55,28 +54,28 @@ public final class DataStoreCoordinator implements CoreCoordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void onAfterRenderList(List<? extends PipelineEntry> list) {
-        List<NotificationEntry> flattenedEntryList = flattenedEntryList(list);
+        List<NotificationEntry> listFlattenedEntryList = flattenedEntryList(list);
         NotifLiveDataStoreImpl notifLiveDataStoreImpl = this.notifLiveDataStoreImpl;
         notifLiveDataStoreImpl.getClass();
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NotifLiveDataStore.setActiveNotifList");
         }
         try {
             Assert.isMainThread();
-            List unmodifiableList = Collections.unmodifiableList(CollectionsKt___CollectionsKt.toList(flattenedEntryList));
+            List listUnmodifiableList = Collections.unmodifiableList(CollectionsKt___CollectionsKt.toList(listFlattenedEntryList));
             NotifLiveDataImpl notifLiveDataImpl = notifLiveDataStoreImpl.activeNotifListPrivate;
-            unmodifiableList.getClass();
-            Iterator it = Arrays.asList(notifLiveDataImpl.setValueAndProvideDispatcher(unmodifiableList), notifLiveDataStoreImpl.activeNotifCountPrivate.setValueAndProvideDispatcher(Integer.valueOf(unmodifiableList.size())), notifLiveDataStoreImpl.hasActiveNotifsPrivate.setValueAndProvideDispatcher(Boolean.valueOf(!unmodifiableList.isEmpty()))).iterator();
+            listUnmodifiableList.getClass();
+            Iterator it = Arrays.asList(notifLiveDataImpl.setValueAndProvideDispatcher(listUnmodifiableList), notifLiveDataStoreImpl.activeNotifCountPrivate.setValueAndProvideDispatcher(Integer.valueOf(listUnmodifiableList.size())), notifLiveDataStoreImpl.hasActiveNotifsPrivate.setValueAndProvideDispatcher(Boolean.valueOf(!listUnmodifiableList.isEmpty()))).iterator();
             while (it.hasNext()) {
                 ((Function0) it.next()).invoke();
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -85,7 +84,7 @@ public final class DataStoreCoordinator implements CoreCoordinator {
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DataStoreCoordinator$attach$1
+        notifPipeline.addOnAfterRenderListListener(new OnAfterRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.DataStoreCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderListListener
             public final void onAfterRenderList(List<PipelineEntry> list) {
                 DataStoreCoordinator.this.onAfterRenderList(list);

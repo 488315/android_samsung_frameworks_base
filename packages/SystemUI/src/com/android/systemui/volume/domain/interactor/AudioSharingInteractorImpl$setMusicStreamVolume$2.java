@@ -1,12 +1,18 @@
 package com.android.systemui.volume.domain.interactor;
 
+import com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor;
+import com.android.settingslib.volume.shared.model.AudioStream;
+import com.android.settingslib.volume.shared.model.AudioStreamModel;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioSharingInteractorImpl$setMusicStreamVolume$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $volume;
@@ -30,79 +36,40 @@ final class AudioSharingInteractorImpl$setMusicStreamVolume$2 extends SuspendLam
         return ((AudioSharingInteractorImpl$setMusicStreamVolume$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0055, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0055, code lost:
     
-        if (r1.m986setVolumeZdW0WiI(3, r6, r5) == r0) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0057, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0031, code lost:
-    
-        if (r6 == r0) goto L15;
+        if (r1.m988setVolumeZdW0WiI(3, r6, r5) == r0) goto L15;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 3
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L1d
-            if (r1 == r4) goto L19
-            if (r1 != r3) goto L11
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L58
-        L11:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L19:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L34
-        L1d:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.volume.domain.interactor.AudioSharingInteractorImpl r6 = r5.this$0
-            com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor r6 = r6.audioVolumeInteractor
-            com.android.settingslib.volume.shared.model.AudioStream.m989constructorimpl(r2)
-            kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 r6 = r6.m984getAudioStreamtLTdkI8(r2)
-            r5.label = r4
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r6, r5)
-            if (r6 != r0) goto L34
-            goto L57
-        L34:
-            com.android.settingslib.volume.shared.model.AudioStreamModel r6 = (com.android.settingslib.volume.shared.model.AudioStreamModel) r6
-            int r1 = r5.$volume
-            float r1 = (float) r1
-            int r4 = r6.maxVolume
-            int r6 = r6.minVolume
-            int r4 = r4 - r6
-            float r6 = (float) r4
-            float r1 = r1 * r6
-            r6 = 255(0xff, float:3.57E-43)
-            float r6 = (float) r6
-            float r1 = r1 / r6
-            int r6 = java.lang.Math.round(r1)
-            com.android.systemui.volume.domain.interactor.AudioSharingInteractorImpl r1 = r5.this$0
-            com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor r1 = r1.audioVolumeInteractor
-            com.android.settingslib.volume.shared.model.AudioStream.m989constructorimpl(r2)
-            r5.label = r3
-            java.lang.Object r5 = r1.m986setVolumeZdW0WiI(r2, r6, r5)
-            if (r5 != r0) goto L58
-        L57:
-            return r0
-        L58:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.domain.interactor.AudioSharingInteractorImpl$setMusicStreamVolume$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            AudioVolumeInteractor audioVolumeInteractor = this.this$0.audioVolumeInteractor;
+            AudioStream.m991constructorimpl(3);
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8 = audioVolumeInteractor.m986getAudioStreamtLTdkI8(3);
+            this.label = 1;
+            obj = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8, this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        ResultKt.throwOnFailure(obj);
+        AudioStreamModel audioStreamModel = (AudioStreamModel) obj;
+        int iRound = Math.round((this.$volume * (audioStreamModel.maxVolume - audioStreamModel.minVolume)) / 255);
+        AudioVolumeInteractor audioVolumeInteractor2 = this.this$0.audioVolumeInteractor;
+        AudioStream.m991constructorimpl(3);
+        this.label = 2;
     }
 }

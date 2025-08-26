@@ -11,7 +11,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnfoldMoveFromCenterAnimator implements UnfoldTransitionProgressProvider.TransitionProgressListener {
     public final AlphaProvider alphaProvider;
@@ -23,15 +22,12 @@ public final class UnfoldMoveFromCenterAnimator implements UnfoldTransitionProgr
     public final ViewCenterProvider viewCenterProvider;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AlphaProvider {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TranslationApplier {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ViewCenterProvider {
         default void getViewCenter(View view, Point point) {
             int[] iArr = new int[2];
@@ -97,7 +93,6 @@ public final class UnfoldMoveFromCenterAnimator implements UnfoldTransitionProgr
         this(windowManager, translationApplier, viewCenterProvider, null, 8, null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimatedView {
         public float startTranslationX;
         public float startTranslationY;

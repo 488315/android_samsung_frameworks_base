@@ -133,13 +133,13 @@ public final class TranslationRequest implements Parcelable {
     }
 
     TranslationRequest(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, TranslationRequestValue.class.getClassLoader(), TranslationRequestValue.class);
         ArrayList arrayList2 = new ArrayList();
         parcel.readParcelableList(arrayList2, ViewTranslationRequest.class.getClassLoader(), ViewTranslationRequest.class);
-        this.mFlags = readInt;
-        Preconditions.checkFlagsArgument(readInt, 15);
+        this.mFlags = i;
+        Preconditions.checkFlagsArgument(i, 15);
         this.mTranslationRequestValues = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
         this.mViewTranslationRequests = arrayList2;

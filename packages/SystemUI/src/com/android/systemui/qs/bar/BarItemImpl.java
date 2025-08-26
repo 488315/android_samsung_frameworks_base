@@ -19,7 +19,6 @@ import com.android.systemui.qs.tileimpl.CustomizerLargeTileView;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class BarItemImpl {
     public View mBarRootView;
@@ -132,7 +131,9 @@ public abstract class BarItemImpl {
                 anonymousClass3.val$animatorRunner.run();
             }
             barController.updateBarUnderneathQqs();
-            if (barController.mContext.getResources().getConfiguration().orientation != 2) {
+            boolean z2 = barController.mContext.getResources().getConfiguration().orientation == 2;
+            boolean zIsTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
+            if (!z2 || zIsTablet) {
                 barController.mBarOrderInteractor.updateLastShowingBar();
             }
         }

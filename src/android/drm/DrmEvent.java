@@ -14,7 +14,7 @@ public class DrmEvent {
     private final int mType;
     private final int mUniqueId;
 
-    protected DrmEvent(int i, int i2, String str, HashMap<String, Object> hashMap) {
+    protected DrmEvent(int i, int i2, String str, HashMap<String, Object> map) {
         this.mMessage = "";
         this.mAttributes = new HashMap<>();
         this.mUniqueId = i;
@@ -22,8 +22,8 @@ public class DrmEvent {
         if (str != null) {
             this.mMessage = str;
         }
-        if (hashMap != null) {
-            this.mAttributes = hashMap;
+        if (map != null) {
+            this.mAttributes = map;
         }
     }
 

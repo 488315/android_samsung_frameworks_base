@@ -3,6 +3,7 @@ package android.security;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.StrictMode;
+import android.system.ErrnoException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,11 +32,11 @@ public class SystemKeyStore {
         int length = bArr.length;
         StringBuilder sb = new StringBuilder(bArr.length * 2);
         for (byte b : bArr) {
-            String num = Integer.toString(b & 255, 16);
-            if (num.length() == 1) {
-                num = "0" + num;
+            String string = Integer.toString(b & 255, 16);
+            if (string.length() == 1) {
+                string = "0" + string;
             }
-            sb.append(num);
+            sb.append(string);
         }
         return sb.toString();
     }
@@ -44,7 +45,7 @@ public class SystemKeyStore {
         return toHexString(generateNewKey(i, str, str2));
     }
 
-    public byte[] generateNewKey(int i, String str, String str2) throws NoSuchAlgorithmException {
+    public byte[] generateNewKey(int i, String str, String str2) throws NoSuchAlgorithmException, IOException, ErrnoException {
         StrictMode.noteDiskWrite();
         File keyFile = getKeyFile(str2);
         if (keyFile.exists()) {

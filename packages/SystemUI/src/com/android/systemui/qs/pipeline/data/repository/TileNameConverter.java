@@ -18,7 +18,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileNameConverter {
     public static final TileNameConverter INSTANCE = new TileNameConverter();
@@ -28,33 +27,46 @@ public final class TileNameConverter {
     private TileNameConverter() {
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0059 A[LOOP:1: B:15:0x0057->B:16:0x0059, LOOP_END] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static String toTileLoggingName(Resources resources, String str) {
-        Collection collection;
-        HashMap hashMap = aliasNameTable;
-        if (hashMap.isEmpty()) {
-            List split = new Regex(",").split(resources.getString(R.string.quick_settings_custom_tile_component_names));
-            if (!split.isEmpty()) {
-                ListIterator listIterator = split.listIterator(split.size());
+        Collection collectionTake;
+        HashMap map = aliasNameTable;
+        if (map.isEmpty()) {
+            List listSplit = new Regex(",").split(resources.getString(R.string.quick_settings_custom_tile_component_names));
+            if (listSplit.isEmpty()) {
+                collectionTake = EmptyList.INSTANCE;
+                while (i < r1) {
+                }
+                map = aliasNameTable;
+            } else {
+                ListIterator listIterator = listSplit.listIterator(listSplit.size());
                 while (listIterator.hasPrevious()) {
                     if (((String) listIterator.previous()).length() != 0) {
-                        collection = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                        collectionTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                         break;
                     }
                 }
+                collectionTake = EmptyList.INSTANCE;
+                for (String str2 : (String[]) collectionTake.toArray(new String[0])) {
+                    str2.getClass();
+                    int iIndexOf$default = StringsKt__StringsKt.indexOf$default(str2, ":", 0, false, 6);
+                    aliasNameTable.put(str2.substring(iIndexOf$default + 1, str2.length()), str2.substring(0, iIndexOf$default));
+                }
+                map = aliasNameTable;
             }
-            collection = EmptyList.INSTANCE;
-            for (String str2 : (String[]) collection.toArray(new String[0])) {
-                str2.getClass();
-                int indexOf$default = StringsKt__StringsKt.indexOf$default(str2, ":", 0, false, 6);
-                aliasNameTable.put(str2.substring(indexOf$default + 1, str2.length()), str2.substring(0, indexOf$default));
-            }
-            hashMap = aliasNameTable;
         }
-        return (String) hashMap.get(CustomTile.getComponentFromSpec(str).flattenToShortString());
+        return (String) map.get(CustomTile.getComponentFromSpec(str).flattenToShortString());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:86:0x0189 A[LOOP:1: B:85:0x0187->B:86:0x0189, LOOP_END] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static String toTileSpec(Resources resources, String str) {
-        Collection collection;
+        Collection collectionTake;
         if (Intrinsics.areEqual(str, "BatteryMode")) {
             if ("com.samsung.android.sm_cn".equals(Operator.smartManagerPackageName)) {
                 str = "BatteryModeCHN";
@@ -98,30 +110,35 @@ public final class TileNameConverter {
         } else if (StringsKt__StringsKt.contains(str, "com.samsung.android.smartmirroring/.tile.ScreenSharingTile", false)) {
             str = "custom(com.samsung.android.secondscreen/.tile.ScreenSharingTile)";
         }
-        HashMap hashMap = componentNameTable;
-        if (hashMap.isEmpty()) {
-            List split = new Regex(",").split(resources.getString(R.string.quick_settings_custom_tile_component_names));
-            if (!split.isEmpty()) {
-                ListIterator listIterator = split.listIterator(split.size());
+        HashMap map = componentNameTable;
+        if (map.isEmpty()) {
+            List listSplit = new Regex(",").split(resources.getString(R.string.quick_settings_custom_tile_component_names));
+            if (listSplit.isEmpty()) {
+                collectionTake = EmptyList.INSTANCE;
+                while (i < r0) {
+                }
+                map = componentNameTable;
+            } else {
+                ListIterator listIterator = listSplit.listIterator(listSplit.size());
                 while (listIterator.hasPrevious()) {
                     if (((String) listIterator.previous()).length() != 0) {
-                        collection = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                        collectionTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                         break;
                     }
                 }
+                collectionTake = EmptyList.INSTANCE;
+                for (String str2 : (String[]) collectionTake.toArray(new String[0])) {
+                    str2.getClass();
+                    int iIndexOf$default = StringsKt__StringsKt.indexOf$default(str2, ":", 0, false, 6);
+                    String strSubstring = str2.substring(0, iIndexOf$default);
+                    String strSubstring2 = str2.substring(iIndexOf$default + 1, str2.length());
+                    componentNameTable.put(strSubstring, strSubstring2);
+                    Log.d("TileNameConverter", "make table : customTileName = " + strSubstring + ", componentName = " + strSubstring2);
+                }
+                map = componentNameTable;
             }
-            collection = EmptyList.INSTANCE;
-            for (String str2 : (String[]) collection.toArray(new String[0])) {
-                str2.getClass();
-                int indexOf$default = StringsKt__StringsKt.indexOf$default(str2, ":", 0, false, 6);
-                String substring = str2.substring(0, indexOf$default);
-                String substring2 = str2.substring(indexOf$default + 1, str2.length());
-                componentNameTable.put(substring, substring2);
-                Log.d("TileNameConverter", "make table : customTileName = " + substring + ", componentName = " + substring2);
-            }
-            hashMap = componentNameTable;
         }
-        String str3 = (String) hashMap.get(str);
+        String str3 = (String) map.get(str);
         return str3 != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("custom(", str3, ")") : str;
     }
 }

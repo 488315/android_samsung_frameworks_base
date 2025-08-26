@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsComponent implements CoreStartable, CommandQueue.Callbacks, GlobalActions.GlobalActionsManager {
     public IStatusBarService mBarService;
@@ -97,7 +96,7 @@ public class GlobalActionsComponent implements CoreStartable, CommandQueue.Callb
         Supplier supplier = new Supplier() { // from class: com.android.systemui.globalactions.GlobalActionsComponent$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return (GlobalActions) Provider.this.get();
+                return (GlobalActions) provider.get();
             }
         };
         ExtensionControllerImpl.ExtensionImpl extensionImpl = extensionBuilder.mExtension;
@@ -105,7 +104,7 @@ public class GlobalActionsComponent implements CoreStartable, CommandQueue.Callb
         extensionBuilder.mExtension.mCallbacks.add(new Consumer() { // from class: com.android.systemui.globalactions.GlobalActionsComponent$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlobalActionsComponent globalActionsComponent = GlobalActionsComponent.this;
+                GlobalActionsComponent globalActionsComponent = this.f$0;
                 GlobalActions globalActions = (GlobalActions) obj;
                 GlobalActions globalActions2 = globalActionsComponent.mPlugin;
                 if (globalActions2 != null) {
@@ -114,9 +113,9 @@ public class GlobalActionsComponent implements CoreStartable, CommandQueue.Callb
                 globalActionsComponent.mPlugin = globalActions;
             }
         });
-        ExtensionControllerImpl.ExtensionImpl build = extensionBuilder.build();
-        this.mExtension = build;
-        this.mPlugin = (GlobalActions) build.mItem;
+        ExtensionControllerImpl.ExtensionImpl extensionImplBuild = extensionBuilder.build();
+        this.mExtension = extensionImplBuild;
+        this.mPlugin = (GlobalActions) extensionImplBuild.mItem;
         this.mCommandQueue.addCallback((CommandQueue.Callbacks) this);
     }
 }

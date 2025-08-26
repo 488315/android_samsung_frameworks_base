@@ -5,7 +5,6 @@ import com.android.settingslib.AccessibilityContentDescriptions;
 import com.android.settingslib.SignalIcon$IconGroup;
 import com.android.systemui.statusbar.pipeline.wifi.ui.util.SamsungWifiIcons;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiIcons {
     public static final int[][] QS_WIFI_SIGNAL_STRENGTH;

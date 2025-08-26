@@ -35,6 +35,9 @@ public class MultiWindowManager {
     public static final int ASSISTANT_HOT_KEY_MODE_FREEFORM = 3;
     public static final int ASSISTANT_HOT_KEY_MODE_FULL = 1;
     public static final int ASSISTANT_HOT_KEY_MODE_SPLIT = 2;
+    public static final int CHANGE_CAPTION_SHOWING_INVISIBLE = 2;
+    public static final int CHANGE_CAPTION_SHOWING_UNDEFINED = 0;
+    public static final int CHANGE_CAPTION_SHOWING_VISIBLE = 1;
     public static final int CHANGE_FREEFORM_STASH_FOCUSABLE = 1;
     public static final int CHANGE_FREEFORM_STASH_NONE_FOCUSABLE = 2;
     public static final int CHANGE_FREEFORM_STASH_UNDEFINED = 0;
@@ -61,6 +64,7 @@ public class MultiWindowManager {
     public static final String EXTRA_AI_LAUNCH_MODE = "ai_launch_mode";
     public static final String EXTRA_AI_LAUNCH_SPLIT_RATIO = "ai_launch_split_ratio";
     public static final String EXTRA_IN_MULTI_WINDOW_MODE = "com.samsung.android.extra.IN_MULTI_WINDOW_MODE";
+    public static final String EXTRA_LOAD_ALL_ITEMS = "load_all_items";
     public static final String EXTRA_MULTI_WINDOW_ENABLED = "com.samsung.android.extra.MULTI_WINDOW_ENABLED";
     public static final String EXTRA_MULTI_WINDOW_ENABLED_USER_ID = "com.samsung.android.extra.MULTI_WINDOW_ENABLED_USER_ID";
     public static final String EXTRA_MULTI_WINDOW_ENABLE_REQUESTER = "com.samsung.android.extra.MULTI_WINDOW_ENABLE_REQUESTER";
@@ -74,6 +78,7 @@ public class MultiWindowManager {
     public static final int FREEFORM_CAPTION_TYPE_HANDLE = 0;
     public static final int FREEFORM_CAPTION_TYPE_UNDEFINED = -1;
     public static final int FREEFORM_CORNER_RADIUS_IN_DP = 14;
+    public static final int FREEFORM_STASH_VISIBLE_WIDTH_IN_DP = 32;
     public static final int FREEFORM_TRANSIT_MINIMIZE = 1;
     public static final int FREEFORM_TRANSIT_NONE = 0;
     public static final int FREEFORM_TRANSIT_RESTORE = 2;
@@ -128,6 +133,9 @@ public class MultiWindowManager {
     private static MultiWindowManager sInstance;
 
     public @interface AssistantHotKeyMode {
+    }
+
+    public @interface ChangeCaptionVisibility {
     }
 
     public @interface ChangeFreeformStashMode {
@@ -942,6 +950,15 @@ public class MultiWindowManager {
         }
     }
 
+    public int getModeForSameAssistantActivity(Intent intent) {
+        try {
+            return getDefault().getModeForSameAssistantActivity(intent);
+        } catch (RemoteException e) {
+            warningException(e);
+            return 1;
+        }
+    }
+
     public void setInDesktopWindowing(boolean z) {
         try {
             getDefault().setInDesktopWindowing(z);
@@ -970,6 +987,14 @@ public class MultiWindowManager {
             return "minimized";
         }
         return String.valueOf(i);
+    }
+
+    public void notifyDragTaskStarted() {
+        try {
+            getDefault().notifyDragTaskToMoveStarted();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Failed to notifyDragTaskStarted", e);
+        }
     }
 
     public void enableHighResolutionsForExternalDesktop(boolean z) {

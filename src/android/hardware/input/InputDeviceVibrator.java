@@ -1,7 +1,6 @@
 package android.hardware.input;
 
 import android.app.ActivityThread;
-import android.hardware.input.InputDeviceVibrator;
 import android.os.Binder;
 import android.os.IVibratorStateListener;
 import android.os.VibrationAttributes;
@@ -52,7 +51,7 @@ final class InputDeviceVibrator extends Vibrator {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.input.InputDeviceVibrator$OnVibratorStateChangedListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InputDeviceVibrator.OnVibratorStateChangedListenerDelegate.this.lambda$onVibrating$0(z);
+                    this.f$0.lambda$onVibrating$0(z);
                 }
             });
         }

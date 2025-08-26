@@ -57,7 +57,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.IntProgression;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioVisSeekbarDefaults {
     public static final AudioVisSeekbarDefaults INSTANCE = new AudioVisSeekbarDefaults();
@@ -66,13 +65,13 @@ public final class AudioVisSeekbarDefaults {
     }
 
     /* renamed from: drawTrack-Imwu3XQ, reason: not valid java name */
-    public static void m2615drawTrackImwu3XQ(DrawScope drawScope, int i, float f, float f2, float f3, float f4, double d, float f5, float f6, float f7, long j, boolean z) {
+    public static void m2632drawTrackImwu3XQ(DrawScope drawScope, int i, float f, float f2, float f3, float f4, double d, float f5, float f6, float f7, long j, boolean z) {
         IntProgression intRange;
         float f8 = (i + 1) * f3;
         float f9 = f5 / 2;
-        AndroidPath Path = AndroidPath_androidKt.Path();
+        AndroidPath androidPathPath = AndroidPath_androidKt.Path();
         float f10 = -f9;
-        Path.internalPath.moveTo(f, f10);
+        androidPathPath.internalPath.moveTo(f, f10);
         if (z) {
             IntProgression.Companion.getClass();
             intRange = new IntProgression((int) f, (int) f2, -1);
@@ -85,7 +84,7 @@ public final class AudioVisSeekbarDefaults {
         int progressionLastElement = ProgressionUtilKt.getProgressionLastElement(i2, i3, i4);
         if ((i4 > 0 && i2 <= progressionLastElement) || (i4 < 0 && progressionLastElement <= i2)) {
             while (true) {
-                Path.internalPath.lineTo(i2, (((((float) Math.sin((f4 * r9) + f8)) * f6) - f7) * ((float) Math.sin(Math.abs(i2 - intRange.first) * d))) - f9);
+                androidPathPath.internalPath.lineTo(i2, (((((float) Math.sin((f4 * r9) + f8)) * f6) - f7) * ((float) Math.sin(Math.abs(i2 - intRange.first) * d))) - f9);
                 if (i2 == progressionLastElement) {
                     break;
                 } else {
@@ -93,31 +92,31 @@ public final class AudioVisSeekbarDefaults {
                 }
             }
         }
-        Path.internalPath.lineTo(f2, f10);
-        Path.internalPath.close();
-        DrawScope.m537drawPathLG529CI$default(drawScope, Path, j, 60);
+        androidPathPath.internalPath.lineTo(f2, f10);
+        androidPathPath.internalPath.close();
+        DrawScope.m539drawPathLG529CI$default(drawScope, androidPathPath, j, 60);
         Offset.Companion companion = Offset.Companion;
         StrokeCap.Companion.getClass();
-        DrawScope.m535drawLineNGM6Ib0$default(drawScope, j, (Float.floatToRawIntBits(f) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f2) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f5, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+        DrawScope.m537drawLineNGM6Ib0$default(drawScope, j, (Float.floatToRawIntBits(f) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f2) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f5, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
     }
 
     /* renamed from: toPx-8Feqmps, reason: not valid java name */
-    public static float m2616toPx8Feqmps(float f, Composer composer) {
+    public static float m2633toPx8Feqmps(float f, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(194299629);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults.toPx (AudioVisSeekbar.kt:371)");
         }
-        float mo57toPx0680j_4 = ((Density) composerImpl.consume(CompositionLocalsKt.LocalDensity)).mo57toPx0680j_4(f);
+        float fMo58toPx0680j_4 = ((Density) composerImpl.consume(CompositionLocalsKt.LocalDensity)).mo58toPx0680j_4(f);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return mo57toPx0680j_4;
+        return fMo58toPx0680j_4;
     }
 
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
-    public final void m2617ThumbFJfuzF0(State state, Modifier modifier, final AudioVisSeekbarColors audioVisSeekbarColors, final boolean z, float f, Composer composer, final int i) {
+    public final void m2634ThumbFJfuzF0(State state, Modifier modifier, final AudioVisSeekbarColors audioVisSeekbarColors, final boolean z, float f, Composer composer, final int i) {
         Modifier modifier2;
         float f2;
         State state2;
@@ -146,23 +145,23 @@ public final class AudioVisSeekbarDefaults {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults.Thumb (AudioVisSeekbar.kt:175)");
             }
             composerImpl.startReplaceGroup(-351367963);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
+            if (objRememberedValue == Composer.Companion.Empty) {
                 state2 = state;
                 composerImpl.updateRememberedValue(state2);
-                rememberedValue = state2;
+                objRememberedValue = state2;
             } else {
                 state2 = state;
             }
-            State state3 = (State) rememberedValue;
+            State state3 = (State) objRememberedValue;
             composerImpl.end(false);
-            Modifier m139size3ABfNKs = SizeKt.m139size3ABfNKs(modifier2, f2);
+            Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(modifier2, f2);
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, m139size3ABfNKs);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierM140size3ABfNKs);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -175,13 +174,13 @@ public final class AudioVisSeekbarDefaults {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             AnimatedVisibilityKt.AnimatedVisibility(!((Boolean) state3.getValue()).booleanValue(), null, EnterExitTransitionKt.fadeIn$default(null, 3).plus(EnterExitTransitionKt.m5scaleInL8ZKhE$default(null, 0.0f, 7)), EnterExitTransitionKt.m6scaleOutL8ZKhE$default(null, 0.0f, 7).plus(EnterExitTransitionKt.fadeOut$default(null, 3)), null, ComposableLambdaKt.rememberComposableLambda(-558027101, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$Thumb$1$1
                 @Override // kotlin.jvm.functions.Function3
@@ -191,10 +190,10 @@ public final class AudioVisSeekbarDefaults {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults.Thumb.<anonymous>.<anonymous> (AudioVisSeekbar.kt:184)");
                     }
-                    Modifier clip = ClipKt.clip(SizeKt.fillMaxSize(Modifier.Companion, 1.0f), RoundedCornerShapeKt.CircleShape);
+                    Modifier modifierClip = ClipKt.clip(SizeKt.fillMaxSize(Modifier.Companion, 1.0f), RoundedCornerShapeKt.CircleShape);
                     boolean z2 = z;
-                    AudioVisSeekbarColors audioVisSeekbarColors2 = AudioVisSeekbarColors.this;
-                    SpacerKt.Spacer(composer2, BackgroundKt.m26backgroundbw27NRU(clip, z2 ? audioVisSeekbarColors2.thumbColor : audioVisSeekbarColors2.disabledThumbColor, RectangleShapeKt.RectangleShape));
+                    AudioVisSeekbarColors audioVisSeekbarColors2 = audioVisSeekbarColors;
+                    SpacerKt.Spacer(composer2, BackgroundKt.m26backgroundbw27NRU(modifierClip, z2 ? audioVisSeekbarColors2.thumbColor : audioVisSeekbarColors2.disabledThumbColor, RectangleShapeKt.RectangleShape));
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -208,10 +207,10 @@ public final class AudioVisSeekbarDefaults {
             modifier3 = modifier2;
             f3 = f2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final State state4 = state2;
-            endRestartGroup.block = new Function2(state4, modifier3, audioVisSeekbarColors, z, f3, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda5
+            recomposeScopeImplEndRestartGroup.block = new Function2(state4, modifier3, audioVisSeekbarColors, z, f3, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda5
                 public final /* synthetic */ State f$1;
                 public final /* synthetic */ Modifier f$2;
                 public final /* synthetic */ AudioVisSeekbarColors f$3;
@@ -223,8 +222,8 @@ public final class AudioVisSeekbarDefaults {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196615);
-                    AudioVisSeekbarDefaults.this.m2617ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196615);
+                    this.f$0.m2634ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -293,14 +292,14 @@ public final class AudioVisSeekbarDefaults {
             }
             boolean z3 = composerImpl3.consume(CompositionLocalsKt.LocalLayoutDirection) == LayoutDirection.Rtl;
             composerImpl3.startReplaceGroup(-83803782);
-            Object rememberedValue = composerImpl3.rememberedValue();
+            Object objRememberedValue = composerImpl3.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
+            if (objRememberedValue == composer$Companion$Empty$1) {
                 composerImpl3.updateRememberedValue(state);
-                rememberedValue = state;
+                objRememberedValue = state;
             }
-            State state2 = (State) rememberedValue;
+            State state2 = (State) objRememberedValue;
             composerImpl3.end(false);
             final float f2 = waveOptions.amplitude / 2;
             if (!waveAnimationOptions.flatLineOnDrag || (!((Boolean) state2.getValue()).booleanValue() && waveAnimationOptions.animateWave)) {
@@ -312,19 +311,19 @@ public final class AudioVisSeekbarDefaults {
             }
             final Modifier.Companion companion5 = companion3;
             final boolean z4 = z3;
-            final State animateFloatAsState = AnimateAsStateKt.animateFloatAsState(f, AnimationSpecKt.tween$default(200, 0, null, 6), "Wave amplitude", null, composerImpl3, 3120, 20);
+            final State stateAnimateFloatAsState = AnimateAsStateKt.animateFloatAsState(f, AnimationSpecKt.tween$default(200, 0, null, 6), "Wave amplitude", null, composerImpl3, 3120, 20);
             composerImpl3.startReplaceGroup(-83786502);
-            if (((Number) animateFloatAsState.getValue()).floatValue() <= 0.0f) {
-                Modifier fillMaxWidth = SizeKt.fillMaxWidth(companion5, 1.0f);
+            if (((Number) stateAnimateFloatAsState.getValue()).floatValue() <= 0.0f) {
+                Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(companion5, 1.0f);
                 composerImpl3.startReplaceGroup(-83783865);
-                boolean changed = composerImpl3.changed(z4) | ((i3 & 14) == 4 || ((i3 & 8) != 0 && composerImpl3.changedInstance(sliderState))) | ((((i3 & 57344) ^ 24576) > 16384 && composerImpl3.changed(audioVisSeekbarColors)) || (i3 & 24576) == 16384) | ((i3 & 7168) == 2048) | ((i3 & 3670016) == 1048576);
-                Object rememberedValue2 = composerImpl3.rememberedValue();
-                if (changed || rememberedValue2 == composer$Companion$Empty$1) {
+                boolean zChanged = composerImpl3.changed(z4) | ((i3 & 14) == 4 || ((i3 & 8) != 0 && composerImpl3.changedInstance(sliderState))) | ((((i3 & 57344) ^ 24576) > 16384 && composerImpl3.changed(audioVisSeekbarColors)) || (i3 & 24576) == 16384) | ((i3 & 7168) == 2048) | ((i3 & 3670016) == 1048576);
+                Object objRememberedValue2 = composerImpl3.rememberedValue();
+                if (zChanged || objRememberedValue2 == composer$Companion$Empty$1) {
                     r7 = 0;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             char c;
                             float f3;
                             DrawScope drawScope;
@@ -334,12 +333,12 @@ public final class AudioVisSeekbarDefaults {
                             WaveOptions waveOptions2;
                             DrawScope drawScope2 = (DrawScope) obj;
                             AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                            float intBitsToFloat = Float.intBitsToFloat((int) (drawScope2.mo545getSizeNHjbRc() >> 32));
+                            float fIntBitsToFloat = Float.intBitsToFloat((int) (drawScope2.mo547getSizeNHjbRc() >> 32));
                             boolean z6 = z4;
-                            float f5 = z6 ? intBitsToFloat : 0.0f;
-                            float value = sliderState.getValue() * intBitsToFloat;
+                            float f5 = z6 ? fIntBitsToFloat : 0.0f;
+                            float value = sliderState.getValue() * fIntBitsToFloat;
                             if (z6) {
-                                value = intBitsToFloat - value;
+                                value = fIntBitsToFloat - value;
                             }
                             float f6 = value;
                             AudioVisSeekbarColors audioVisSeekbarColors3 = audioVisSeekbarColors;
@@ -347,7 +346,7 @@ public final class AudioVisSeekbarDefaults {
                             WaveOptions waveOptions3 = waveOptions;
                             if (f5 == f6) {
                                 c = ' ';
-                                f3 = intBitsToFloat;
+                                f3 = fIntBitsToFloat;
                                 f4 = 0.0f;
                                 waveOptions2 = waveOptions3;
                                 drawScope = drawScope2;
@@ -356,7 +355,7 @@ public final class AudioVisSeekbarDefaults {
                             } else {
                                 Offset.Companion companion6 = Offset.Companion;
                                 c = ' ';
-                                f3 = intBitsToFloat;
+                                f3 = fIntBitsToFloat;
                                 float f7 = waveOptions3.trackWidth;
                                 StrokeCap.Companion.getClass();
                                 int i4 = StrokeCap.Round;
@@ -365,33 +364,33 @@ public final class AudioVisSeekbarDefaults {
                                 audioVisSeekbarColors2 = audioVisSeekbarColors3;
                                 f4 = 0.0f;
                                 waveOptions2 = waveOptions3;
-                                DrawScope.m535drawLineNGM6Ib0$default(drawScope, audioVisSeekbarColors3.m2614x119e4b41(z7, true), (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f7, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
-                                DrawScope.m535drawLineNGM6Ib0$default(drawScope, z5 ? audioVisSeekbarColors2.activeTrackSecondaryColor : audioVisSeekbarColors2.disabledActiveTrackSecondaryColor, (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), waveOptions2.trackWidth, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                                DrawScope.m537drawLineNGM6Ib0$default(drawScope, audioVisSeekbarColors3.m2631x119e4b41(z7, true), (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f7, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                                DrawScope.m537drawLineNGM6Ib0$default(drawScope, z5 ? audioVisSeekbarColors2.activeTrackSecondaryColor : audioVisSeekbarColors2.disabledActiveTrackSecondaryColor, (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), waveOptions2.trackWidth, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                             }
-                            long m2614x119e4b41 = audioVisSeekbarColors2.m2614x119e4b41(z5, false);
-                            long floatToRawIntBits = (Float.floatToRawIntBits(f6) << c) | (Float.floatToRawIntBits(f4) & 4294967295L);
+                            long jM2631x119e4b41 = audioVisSeekbarColors2.m2631x119e4b41(z5, false);
+                            long jFloatToRawIntBits = (Float.floatToRawIntBits(f6) << c) | (Float.floatToRawIntBits(f4) & 4294967295L);
                             Offset.Companion companion7 = Offset.Companion;
                             float f8 = waveOptions2.trackWidth;
                             StrokeCap.Companion.getClass();
-                            DrawScope.m535drawLineNGM6Ib0$default(drawScope, m2614x119e4b41, floatToRawIntBits, (Float.floatToRawIntBits(z6 ? f4 : f3) << c) | (Float.floatToRawIntBits(f4) & 4294967295L), f8, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                            DrawScope.m537drawLineNGM6Ib0$default(drawScope, jM2631x119e4b41, jFloatToRawIntBits, (Float.floatToRawIntBits(z6 ? f4 : f3) << c) | (Float.floatToRawIntBits(f4) & 4294967295L), f8, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                             return Unit.INSTANCE;
                         }
                     };
                     composerImpl3.updateRememberedValue(function1);
-                    rememberedValue2 = function1;
+                    objRememberedValue2 = function1;
                 } else {
                     r7 = 0;
                 }
                 composerImpl3.end(r7);
-                CanvasKt.Canvas(fillMaxWidth, (Function1) rememberedValue2, composerImpl3, r7);
+                CanvasKt.Canvas(modifierFillMaxWidth, (Function1) objRememberedValue2, composerImpl3, r7);
                 composerImpl3.end(r7);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
-                RecomposeScopeImpl endRestartGroup = composerImpl3.endRestartGroup();
-                if (endRestartGroup != null) {
+                RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl3.endRestartGroup();
+                if (recomposeScopeImplEndRestartGroup != null) {
                     final int i4 = 0;
-                    endRestartGroup.block = new Function2(this) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda1
+                    recomposeScopeImplEndRestartGroup.block = new Function2(this) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda1
                         public final /* synthetic */ AudioVisSeekbarDefaults f$0;
 
                         {
@@ -406,15 +405,15 @@ public final class AudioVisSeekbarDefaults {
                                     Composer composer2 = (Composer) obj;
                                     ((Integer) obj2).getClass();
                                     AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i5 | 1);
-                                    this.f$0.Track(sliderState, state, companion5, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer2, updateChangedFlags);
+                                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i5 | 1);
+                                    this.f$0.Track(sliderState, state, companion5, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer2, iUpdateChangedFlags);
                                     break;
                                 default:
                                     Composer composer3 = (Composer) obj;
                                     ((Integer) obj2).getClass();
                                     AudioVisSeekbarDefaults audioVisSeekbarDefaults2 = AudioVisSeekbarDefaults.INSTANCE;
-                                    int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i5 | 1);
-                                    this.f$0.Track(sliderState, state, companion5, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer3, updateChangedFlags2);
+                                    int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i5 | 1);
+                                    this.f$0.Track(sliderState, state, companion5, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer3, iUpdateChangedFlags2);
                                     break;
                             }
                             return Unit.INSTANCE;
@@ -425,40 +424,40 @@ public final class AudioVisSeekbarDefaults {
                 return;
             }
             composerImpl3.end(false);
-            InfiniteTransition rememberInfiniteTransition = InfiniteTransitionKt.rememberInfiniteTransition("Wave infinite transition", composerImpl3, 0);
+            InfiniteTransition infiniteTransitionRememberInfiniteTransition = InfiniteTransitionKt.rememberInfiniteTransition("Wave infinite transition", composerImpl3, 0);
             composerImpl3.startReplaceGroup(-83733990);
             int i5 = 458752 & i3;
             boolean z5 = i5 == 131072;
-            Object rememberedValue3 = composerImpl3.rememberedValue();
-            if (z5 || rememberedValue3 == composer$Companion$Empty$1) {
-                rememberedValue3 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda2
+            Object objRememberedValue3 = composerImpl3.rememberedValue();
+            if (z5 || objRememberedValue3 == composer$Companion$Empty$1) {
+                objRememberedValue3 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                        ((KeyframesSpec.KeyframesSpecConfig) obj).durationMillis = WaveAnimationOptions.this.animationSpeedMs;
+                        ((KeyframesSpec.KeyframesSpecConfig) obj).durationMillis = waveAnimationOptions.animationSpeedMs;
                         return Unit.INSTANCE;
                     }
                 };
-                composerImpl3.updateRememberedValue(rememberedValue3);
+                composerImpl3.updateRememberedValue(objRememberedValue3);
             }
             composerImpl3.end(false);
-            InfiniteRepeatableSpec m9infiniteRepeatable9IiC70o$default = AnimationSpecKt.m9infiniteRepeatable9IiC70o$default(4, AnimationSpecKt.keyframes((Function1) rememberedValue3), RepeatMode.Restart, 0L);
+            InfiniteRepeatableSpec infiniteRepeatableSpecM9infiniteRepeatable9IiC70o$default = AnimationSpecKt.m9infiniteRepeatable9IiC70o$default(4, AnimationSpecKt.keyframes((Function1) objRememberedValue3), RepeatMode.Restart, 0L);
             final float f3 = waveOptions.frequency;
             int i6 = i3;
-            final InfiniteTransition.TransitionAnimationState animateFloat = InfiniteTransitionKt.animateFloat(rememberInfiniteTransition, 0.0f, f3, m9infiniteRepeatable9IiC70o$default, "Wave phase shift", composerImpl3, 28728, 0);
-            Modifier fillMaxWidth2 = SizeKt.fillMaxWidth(companion5, 1.0f);
+            final InfiniteTransition.TransitionAnimationState transitionAnimationStateAnimateFloat = InfiniteTransitionKt.animateFloat(infiniteTransitionRememberInfiniteTransition, 0.0f, f3, infiniteRepeatableSpecM9infiniteRepeatable9IiC70o$default, "Wave phase shift", composerImpl3, 28728, 0);
+            Modifier modifierFillMaxWidth2 = SizeKt.fillMaxWidth(companion5, 1.0f);
             composerImpl3.startReplaceGroup(-83725374);
-            boolean changed2 = composerImpl3.changed(z4) | ((i6 & 14) == 4 || ((i6 & 8) != 0 && composerImpl3.changedInstance(sliderState))) | ((i6 & 7168) == 2048) | (i5 == 131072) | composerImpl3.changed(animateFloat) | composerImpl3.changed(animateFloatAsState) | composerImpl3.changed(f3) | ((i6 & 3670016) == 1048576);
+            boolean zChanged2 = composerImpl3.changed(z4) | ((i6 & 14) == 4 || ((i6 & 8) != 0 && composerImpl3.changedInstance(sliderState))) | ((i6 & 7168) == 2048) | (i5 == 131072) | composerImpl3.changed(transitionAnimationStateAnimateFloat) | composerImpl3.changed(stateAnimateFloatAsState) | composerImpl3.changed(f3) | ((i6 & 3670016) == 1048576);
             if ((((i6 & 57344) ^ 24576) <= 16384 || !composerImpl3.changed(audioVisSeekbarColors)) && (i6 & 24576) != 16384) {
-                r18 = false;
+                z = false;
             }
-            boolean changed3 = changed2 | r18 | composerImpl3.changed(f2);
-            Object rememberedValue4 = composerImpl3.rememberedValue();
-            if (changed3 || rememberedValue4 == composer$Companion$Empty$1) {
+            boolean zChanged3 = zChanged2 | z | composerImpl3.changed(f2);
+            Object objRememberedValue4 = composerImpl3.rememberedValue();
+            if (zChanged3 || objRememberedValue4 == composer$Companion$Empty$1) {
                 ComposerImpl composerImpl4 = composerImpl3;
-                modifier = fillMaxWidth2;
-                Function1 function12 = new Function1(z4, sliderState, z, waveAnimationOptions, f3, waveOptions, audioVisSeekbarColors, f2, animateFloat, animateFloatAsState) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda3
+                modifier = modifierFillMaxWidth2;
+                Function1 function12 = new Function1(z4, sliderState, z, waveAnimationOptions, f3, waveOptions, audioVisSeekbarColors, f2, transitionAnimationStateAnimateFloat, stateAnimateFloatAsState) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda3
                     public final /* synthetic */ boolean f$0;
                     public final /* synthetic */ SliderState f$1;
                     public final /* synthetic */ boolean f$2;
@@ -470,89 +469,89 @@ public final class AudioVisSeekbarDefaults {
                     public final /* synthetic */ State f$9;
 
                     {
-                        this.f$8 = animateFloat;
-                        this.f$9 = animateFloatAsState;
+                        this.f$8 = transitionAnimationStateAnimateFloat;
+                        this.f$9 = stateAnimateFloatAsState;
                     }
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        float f4;
-                        float f5;
+                    public final Object mo781invoke(Object obj) {
+                        float fFloatValue;
+                        float fFloatValue2;
                         DrawScope drawScope;
-                        float f6;
+                        float f4;
                         long j;
                         DrawScope drawScope2 = (DrawScope) obj;
                         AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                        float intBitsToFloat = Float.intBitsToFloat((int) (drawScope2.mo545getSizeNHjbRc() >> 32));
+                        float fIntBitsToFloat = Float.intBitsToFloat((int) (drawScope2.mo547getSizeNHjbRc() >> 32));
                         boolean z6 = this.f$0;
-                        float f7 = z6 ? intBitsToFloat : 0.0f;
-                        float value = this.f$1.getValue() * intBitsToFloat;
+                        float f5 = z6 ? fIntBitsToFloat : 0.0f;
+                        float value = this.f$1.getValue() * fIntBitsToFloat;
                         if (z6) {
-                            value = intBitsToFloat - value;
+                            value = fIntBitsToFloat - value;
                         }
                         State state3 = this.f$9;
                         boolean z7 = this.f$2;
                         if (z7) {
                             boolean z8 = this.f$3.reverse;
                             InfiniteTransition.TransitionAnimationState transitionAnimationState = this.f$8;
-                            f4 = z8 ? ((Number) transitionAnimationState.getValue()).floatValue() : -((Number) transitionAnimationState.getValue()).floatValue();
-                            f5 = ((Number) state3.getValue()).floatValue();
+                            fFloatValue = z8 ? ((Number) transitionAnimationState.getValue()).floatValue() : -((Number) transitionAnimationState.getValue()).floatValue();
+                            fFloatValue2 = ((Number) state3.getValue()).floatValue();
                         } else {
-                            f4 = 0.0f;
-                            f5 = 0.0f;
+                            fFloatValue = 0.0f;
+                            fFloatValue2 = 0.0f;
                         }
-                        float f8 = (this.f$4 / intBitsToFloat) * 3;
-                        double abs = 3.141592653589793d / Math.abs(value - f7);
+                        float f6 = (this.f$4 / fIntBitsToFloat) * 3;
+                        double dAbs = 3.141592653589793d / Math.abs(value - f5);
                         WaveOptions waveOptions2 = this.f$5;
-                        float f9 = waveOptions2.trackWidth;
+                        float f7 = waveOptions2.trackWidth;
                         AudioVisSeekbarColors audioVisSeekbarColors2 = this.f$6;
-                        long m2614x119e4b41 = audioVisSeekbarColors2.m2614x119e4b41(z7, true);
+                        long jM2631x119e4b41 = audioVisSeekbarColors2.m2631x119e4b41(z7, true);
                         if (z7) {
                             drawScope = drawScope2;
-                            f6 = f7;
+                            f4 = f5;
                             j = audioVisSeekbarColors2.activeTrackSecondaryColor;
                         } else {
                             drawScope = drawScope2;
-                            f6 = f7;
+                            f4 = f5;
                             j = audioVisSeekbarColors2.disabledActiveTrackSecondaryColor;
                         }
                         long j2 = j;
-                        float floatValue = ((Number) state3.getValue()).floatValue();
+                        float fFloatValue3 = ((Number) state3.getValue()).floatValue();
                         AudioVisSeekbarDefaults.INSTANCE.getClass();
-                        float f10 = f4;
+                        float f8 = fFloatValue;
                         DrawScope drawScope3 = drawScope;
-                        float f11 = f6;
-                        AudioVisSeekbarDefaults.m2615drawTrackImwu3XQ(drawScope3, 0, f11, value, f10, f8, abs, f9, floatValue, f5, m2614x119e4b41, z6);
-                        AudioVisSeekbarDefaults.m2615drawTrackImwu3XQ(drawScope3, 1, f11, value, f10, f8, abs, f9, ((Number) state3.getValue()).floatValue(), f5, j2, z6);
-                        long m2614x119e4b412 = audioVisSeekbarColors2.m2614x119e4b41(z7, false);
-                        long floatToRawIntBits = (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo544getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(value) << 32);
+                        float f9 = f4;
+                        AudioVisSeekbarDefaults.m2632drawTrackImwu3XQ(drawScope3, 0, f9, value, f8, f6, dAbs, f7, fFloatValue3, fFloatValue2, jM2631x119e4b41, z6);
+                        AudioVisSeekbarDefaults.m2632drawTrackImwu3XQ(drawScope3, 1, f9, value, f8, f6, dAbs, f7, ((Number) state3.getValue()).floatValue(), fFloatValue2, j2, z6);
+                        long jM2631x119e4b412 = audioVisSeekbarColors2.m2631x119e4b41(z7, false);
+                        long jFloatToRawIntBits = (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo546getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(value) << 32);
                         Offset.Companion companion6 = Offset.Companion;
-                        float f12 = z6 ? 0.0f : intBitsToFloat;
+                        float f10 = z6 ? 0.0f : fIntBitsToFloat;
                         StrokeCap.Companion.getClass();
-                        DrawScope.m535drawLineNGM6Ib0$default(drawScope3, m2614x119e4b412, floatToRawIntBits, (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo544getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(f12) << 32), waveOptions2.trackWidth, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                        DrawScope.m537drawLineNGM6Ib0$default(drawScope3, jM2631x119e4b412, jFloatToRawIntBits, (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo546getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(f10) << 32), waveOptions2.trackWidth, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                         return Unit.INSTANCE;
                     }
                 };
                 composerImpl4.updateRememberedValue(function12);
-                rememberedValue4 = function12;
+                objRememberedValue4 = function12;
                 composerImpl = composerImpl4;
             } else {
                 composerImpl = composerImpl3;
-                modifier = fillMaxWidth2;
+                modifier = modifierFillMaxWidth2;
             }
             composerImpl.end(false);
-            CanvasKt.Canvas(modifier, (Function1) rememberedValue4, composerImpl, 0);
+            CanvasKt.Canvas(modifier, (Function1) objRememberedValue4, composerImpl, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
             companion4 = companion5;
             composerImpl2 = composerImpl;
         }
-        RecomposeScopeImpl endRestartGroup2 = composerImpl2.endRestartGroup();
-        if (endRestartGroup2 != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup2 = composerImpl2.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup2 != null) {
             final int i7 = 1;
-            endRestartGroup2.block = new Function2(this) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda1
+            recomposeScopeImplEndRestartGroup2.block = new Function2(this) { // from class: com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults$$ExternalSyntheticLambda1
                 public final /* synthetic */ AudioVisSeekbarDefaults f$0;
 
                 {
@@ -567,15 +566,15 @@ public final class AudioVisSeekbarDefaults {
                             Composer composer2 = (Composer) obj;
                             ((Integer) obj2).getClass();
                             AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
-                            int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i52 | 1);
-                            this.f$0.Track(sliderState, state, companion4, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer2, updateChangedFlags);
+                            int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i52 | 1);
+                            this.f$0.Track(sliderState, state, companion4, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer2, iUpdateChangedFlags);
                             break;
                         default:
                             Composer composer3 = (Composer) obj;
                             ((Integer) obj2).getClass();
                             AudioVisSeekbarDefaults audioVisSeekbarDefaults2 = AudioVisSeekbarDefaults.INSTANCE;
-                            int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i52 | 1);
-                            this.f$0.Track(sliderState, state, companion4, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer3, updateChangedFlags2);
+                            int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i52 | 1);
+                            this.f$0.Track(sliderState, state, companion4, z, audioVisSeekbarColors, waveAnimationOptions, waveOptions, composer3, iUpdateChangedFlags2);
                             break;
                     }
                     return Unit.INSTANCE;

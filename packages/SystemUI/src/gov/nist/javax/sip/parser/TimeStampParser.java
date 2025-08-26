@@ -2,9 +2,9 @@ package gov.nist.javax.sip.parser;
 
 import gov.nist.javax.sip.header.SIPHeader;
 import gov.nist.javax.sip.header.TimeStamp;
+import java.text.ParseException;
 import javax.sip.InvalidArgumentException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TimeStampParser extends HeaderParser {
     public TimeStampParser(String str) {
@@ -12,31 +12,31 @@ public class TimeStampParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         TimeStamp timeStamp = new TimeStamp();
         headerName(2103);
         timeStamp.setHeaderName("Timestamp");
         this.lexer.SPorHT();
-        String number = this.lexer.number();
+        String strNumber = this.lexer.number();
         try {
             if (this.lexer.lookAhead(0) == '.') {
                 this.lexer.match(46);
-                timeStamp.setTimeStamp(Float.parseFloat(number + "." + this.lexer.number()));
+                timeStamp.setTimeStamp(Float.parseFloat(strNumber + "." + this.lexer.number()));
             } else {
-                timeStamp.setTime(Long.parseLong(number));
+                timeStamp.setTime(Long.parseLong(strNumber));
             }
             this.lexer.SPorHT();
             if (this.lexer.lookAhead(0) == '\n') {
                 return timeStamp;
             }
-            String number2 = this.lexer.number();
+            String strNumber2 = this.lexer.number();
             try {
                 if (this.lexer.lookAhead(0) != '.') {
-                    timeStamp.setDelay(Integer.parseInt(number2));
+                    timeStamp.setDelay(Integer.parseInt(strNumber2));
                     return timeStamp;
                 }
                 this.lexer.match(46);
-                timeStamp.setDelay(Float.parseFloat(number2 + "." + this.lexer.number()));
+                timeStamp.setDelay(Float.parseFloat(strNumber2 + "." + this.lexer.number()));
                 return timeStamp;
             } catch (NumberFormatException e) {
                 throw createParseException(e.getMessage());

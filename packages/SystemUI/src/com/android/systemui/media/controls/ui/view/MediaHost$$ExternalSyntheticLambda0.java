@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MediaHost$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ MediaHost f$0;
@@ -28,31 +27,31 @@ public final /* synthetic */ class MediaHost$$ExternalSyntheticLambda0 implement
         MediaHostStatesManager mediaHostStatesManager = mediaHost.mediaHostStatesManager;
         MediaHost.MediaHostStateHolder mediaHostStateHolder = mediaHost.state;
         mediaHostStatesManager.getClass();
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("MediaHostStatesManager#updateHostState");
         }
         try {
             if (!mediaHostStateHolder.equals((MediaHostState) ((LinkedHashMap) mediaHostStatesManager.mediaHostStates).get(Integer.valueOf(i)))) {
-                MediaHost.MediaHostStateHolder copy = mediaHostStateHolder.copy();
-                mediaHostStatesManager.mediaHostStates.put(Integer.valueOf(i), copy);
+                MediaHost.MediaHostStateHolder mediaHostStateHolderCopy = mediaHostStateHolder.copy();
+                mediaHostStatesManager.mediaHostStates.put(Integer.valueOf(i), mediaHostStateHolderCopy);
                 mediaHostStatesManager.updateCarouselDimensions(i, mediaHostStateHolder);
                 Iterator it = mediaHostStatesManager.controllers.iterator();
                 while (it.hasNext()) {
-                    ((MediaViewController) it.next()).stateCallback.onHostStateChanged(i, copy);
+                    ((MediaViewController) it.next()).stateCallback.onHostStateChanged(i, mediaHostStateHolderCopy);
                 }
                 Iterator it2 = mediaHostStatesManager.callbacks.iterator();
                 while (it2.hasNext()) {
-                    ((MediaHostStatesManager.Callback) it2.next()).onHostStateChanged(i, copy);
+                    ((MediaHostStatesManager.Callback) it2.next()).onHostStateChanged(i, mediaHostStateHolderCopy);
                 }
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             return Unit.INSTANCE;
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

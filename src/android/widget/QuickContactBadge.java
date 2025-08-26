@@ -3,12 +3,15 @@ package android.widget;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.telecom.PhoneAccount;
 import android.util.AttributeSet;
 import android.view.View;
 import com.android.internal.R;
@@ -55,9 +58,9 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         super(context, attributeSet, i, i2);
         this.mExtras = null;
         this.mExcludeMimes = null;
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(R.styleable.Theme);
-        this.mOverlay = obtainStyledAttributes.getDrawable(345);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(R.styleable.Theme);
+        this.mOverlay = typedArrayObtainStyledAttributes.getDrawable(345);
+        typedArrayObtainStyledAttributes.recycle();
         setOnClickListener(this);
     }
 
@@ -209,121 +212,91 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
             super(contentResolver);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:13:0x006e  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x007d  */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x00a1  */
-        /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x006e  */
+        /* JADX WARN: Removed duplicated region for block: B:36:0x007d  */
+        /* JADX WARN: Removed duplicated region for block: B:41:0x00a1  */
+        /* JADX WARN: Removed duplicated region for block: B:47:? A[RETURN, SYNTHETIC] */
         @Override // android.content.AsyncQueryHandler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        protected void onQueryComplete(int r7, java.lang.Object r8, android.database.Cursor r9) {
-            /*
-                r6 = this;
-                if (r8 == 0) goto L5
-                android.os.Bundle r8 = (android.os.Bundle) r8
-                goto La
-            L5:
-                android.os.Bundle r8 = new android.os.Bundle
-                r8.<init>()
-            La:
-                java.lang.String r0 = "uri_content"
-                r1 = 1
-                r2 = 0
-                r3 = 0
-                if (r7 == 0) goto L4e
-                if (r7 == r1) goto L37
-                r4 = 2
-                if (r7 == r4) goto L29
-                r4 = 3
-                if (r7 == r4) goto L1c
-                r7 = r2
-                goto L6c
-            L1c:
-                java.lang.String r7 = "tel"
-                java.lang.String r4 = r8.getString(r0)     // Catch: java.lang.Throwable -> L35
-                android.net.Uri r7 = android.net.Uri.fromParts(r7, r4, r2)     // Catch: java.lang.Throwable -> L35
-                r4 = r1
-                goto L39
-            L29:
-                java.lang.String r7 = "mailto"
-                java.lang.String r4 = r8.getString(r0)     // Catch: java.lang.Throwable -> L35
-                android.net.Uri r7 = android.net.Uri.fromParts(r7, r4, r2)     // Catch: java.lang.Throwable -> L35
-                r4 = r1
-                goto L50
-            L35:
-                r6 = move-exception
-                goto L65
-            L37:
-                r7 = r2
-                r4 = r3
-            L39:
-                if (r9 == 0) goto L6b
-                boolean r5 = r9.moveToFirst()     // Catch: java.lang.Throwable -> L35
-                if (r5 == 0) goto L6b
-                long r2 = r9.getLong(r3)     // Catch: java.lang.Throwable -> L35
-                java.lang.String r1 = r9.getString(r1)     // Catch: java.lang.Throwable -> L35
-                android.net.Uri r2 = android.provider.ContactsContract.Contacts.getLookupUri(r2, r1)     // Catch: java.lang.Throwable -> L35
-                goto L6b
-            L4e:
-                r7 = r2
-                r4 = r3
-            L50:
-                if (r9 == 0) goto L6b
-                boolean r5 = r9.moveToFirst()     // Catch: java.lang.Throwable -> L35
-                if (r5 == 0) goto L6b
-                long r2 = r9.getLong(r3)     // Catch: java.lang.Throwable -> L35
-                java.lang.String r1 = r9.getString(r1)     // Catch: java.lang.Throwable -> L35
-                android.net.Uri r2 = android.provider.ContactsContract.Contacts.getLookupUri(r2, r1)     // Catch: java.lang.Throwable -> L35
-                goto L6b
-            L65:
-                if (r9 == 0) goto L6a
-                r9.close()
-            L6a:
-                throw r6
-            L6b:
-                r3 = r4
-            L6c:
-                if (r9 == 0) goto L71
-                r9.close()
-            L71:
-                android.widget.QuickContactBadge r9 = android.widget.QuickContactBadge.this
-                android.widget.QuickContactBadge.m7094$$Nest$fputmContactUri(r9, r2)
-                android.widget.QuickContactBadge r9 = android.widget.QuickContactBadge.this
-                android.widget.QuickContactBadge.m7095$$Nest$monContactUriChanged(r9)
-                if (r3 == 0) goto L9f
-                android.widget.QuickContactBadge r9 = android.widget.QuickContactBadge.this
-                android.net.Uri r9 = android.widget.QuickContactBadge.m7092$$Nest$fgetmContactUri(r9)
-                if (r9 == 0) goto L9f
-                android.widget.QuickContactBadge r7 = android.widget.QuickContactBadge.this
-                android.content.Context r7 = r7.getContext()
-                android.widget.QuickContactBadge r8 = android.widget.QuickContactBadge.this
-                android.net.Uri r9 = android.widget.QuickContactBadge.m7092$$Nest$fgetmContactUri(r8)
-                android.widget.QuickContactBadge r0 = android.widget.QuickContactBadge.this
-                java.lang.String[] r0 = r0.mExcludeMimes
-                android.widget.QuickContactBadge r6 = android.widget.QuickContactBadge.this
-                java.lang.String r6 = android.widget.QuickContactBadge.m7093$$Nest$fgetmPrioritizedMimeType(r6)
-                android.provider.ContactsContract.QuickContact.showQuickContact(r7, r8, r9, r0, r6)
-                return
-            L9f:
-                if (r7 == 0) goto Lbe
-                android.content.Intent r9 = new android.content.Intent
-                java.lang.String r1 = "com.android.contacts.action.SHOW_OR_CREATE_CONTACT"
-                r9.<init>(r1, r7)
-                if (r8 == 0) goto Lb5
-                android.os.Bundle r7 = new android.os.Bundle
-                r7.<init>(r8)
-                r7.remove(r0)
-                r9.putExtras(r7)
-            Lb5:
-                android.widget.QuickContactBadge r6 = android.widget.QuickContactBadge.this
-                android.content.Context r6 = r6.getContext()
-                r6.startActivity(r9)
-            Lbe:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.QuickContactBadge.QueryHandler.onQueryComplete(int, java.lang.Object, android.database.Cursor):void");
+        protected void onQueryComplete(int i, Object obj, Cursor cursor) {
+            Uri uriFromParts;
+            boolean z;
+            Bundle bundle = obj != null ? (Bundle) obj : new Bundle();
+            Uri lookupUri = null;
+            boolean z2 = false;
+            try {
+                if (i != 0) {
+                    if (i == 1) {
+                        uriFromParts = null;
+                        z = false;
+                    } else if (i == 2) {
+                        uriFromParts = Uri.fromParts("mailto", bundle.getString(QuickContactBadge.EXTRA_URI_CONTENT), null);
+                        z = true;
+                    } else if (i == 3) {
+                        uriFromParts = Uri.fromParts(PhoneAccount.SCHEME_TEL, bundle.getString(QuickContactBadge.EXTRA_URI_CONTENT), null);
+                        z = true;
+                    } else {
+                        uriFromParts = null;
+                        if (cursor != null) {
+                            cursor.close();
+                        }
+                        QuickContactBadge.this.mContactUri = lookupUri;
+                        QuickContactBadge.this.onContactUriChanged();
+                        if (!z2 && QuickContactBadge.this.mContactUri != null) {
+                            Context context = QuickContactBadge.this.getContext();
+                            QuickContactBadge quickContactBadge = QuickContactBadge.this;
+                            ContactsContract.QuickContact.showQuickContact(context, quickContactBadge, quickContactBadge.mContactUri, QuickContactBadge.this.mExcludeMimes, QuickContactBadge.this.mPrioritizedMimeType);
+                            return;
+                        } else {
+                            if (uriFromParts != null) {
+                                Intent intent = new Intent("com.android.contacts.action.SHOW_OR_CREATE_CONTACT", uriFromParts);
+                                if (bundle != null) {
+                                    Bundle bundle2 = new Bundle(bundle);
+                                    bundle2.remove(QuickContactBadge.EXTRA_URI_CONTENT);
+                                    intent.putExtras(bundle2);
+                                }
+                                QuickContactBadge.this.getContext().startActivity(intent);
+                                return;
+                            }
+                            return;
+                        }
+                    }
+                    if (cursor != null && cursor.moveToFirst()) {
+                        lookupUri = ContactsContract.Contacts.getLookupUri(cursor.getLong(0), cursor.getString(1));
+                    }
+                    z2 = z;
+                    if (cursor != null) {
+                    }
+                    QuickContactBadge.this.mContactUri = lookupUri;
+                    QuickContactBadge.this.onContactUriChanged();
+                    if (!z2) {
+                    }
+                    if (uriFromParts != null) {
+                    }
+                } else {
+                    uriFromParts = null;
+                    z = false;
+                }
+                if (cursor != null && cursor.moveToFirst()) {
+                    lookupUri = ContactsContract.Contacts.getLookupUri(cursor.getLong(0), cursor.getString(1));
+                }
+                z2 = z;
+                if (cursor != null) {
+                }
+                QuickContactBadge.this.mContactUri = lookupUri;
+                QuickContactBadge.this.onContactUriChanged();
+                if (!z2) {
+                }
+                if (uriFromParts != null) {
+                }
+            } catch (Throwable th) {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                throw th;
+            }
         }
     }
 }

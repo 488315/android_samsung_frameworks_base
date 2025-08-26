@@ -5,7 +5,6 @@ import android.view.View;
 import com.android.app.viewcapture.ViewCapture;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ViewCapture$WindowListener$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ ViewCapture.WindowListener f$0;
@@ -93,7 +92,7 @@ public final /* synthetic */ class ViewCapture$WindowListener$$ExternalSynthetic
                 Runnable runnable = new Runnable() { // from class: com.android.app.viewcapture.ViewCapture$WindowListener$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewCapture.WindowListener windowListener2 = ViewCapture.WindowListener.this;
+                        ViewCapture.WindowListener windowListener2 = windowListener;
                         ViewCapture.ViewPropertyRef viewPropertyRef10 = viewPropertyRef4;
                         viewPropertyRef6.next = windowListener2.mPool;
                         windowListener2.mPool = viewPropertyRef10;

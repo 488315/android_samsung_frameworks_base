@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.recents.TriangleShape;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumeToolTipView extends LinearLayout {
     public VolumeToolTipView(Context context) {
@@ -22,15 +21,15 @@ public class VolumeToolTipView extends LinearLayout {
     @Override // android.view.View
     public final void onFinishInflate() {
         super.onFinishInflate();
-        View findViewById = findViewById(R.id.arrow);
-        ViewGroup.LayoutParams layoutParams = findViewById.getLayoutParams();
+        View viewFindViewById = findViewById(R.id.arrow);
+        ViewGroup.LayoutParams layoutParams = viewFindViewById.getLayoutParams();
         ShapeDrawable shapeDrawable = new ShapeDrawable(TriangleShape.createHorizontal(layoutParams.width, layoutParams.height, false));
         Paint paint = shapeDrawable.getPaint();
         TypedValue typedValue = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.colorAccent, typedValue, true);
         paint.setColor(getContext().getColor(typedValue.resourceId));
         paint.setPathEffect(new CornerPathEffect(getResources().getDimension(R.dimen.volume_tool_tip_arrow_corner_radius)));
-        findViewById.setBackground(shapeDrawable);
+        viewFindViewById.setBackground(shapeDrawable);
     }
 
     public VolumeToolTipView(Context context, AttributeSet attributeSet) {

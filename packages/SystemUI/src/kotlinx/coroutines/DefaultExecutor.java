@@ -7,7 +7,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.EventLoopImplBase;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DefaultExecutor extends EventLoopImplBase implements Runnable {
     public static final DefaultExecutor INSTANCE;
@@ -78,9 +77,9 @@ public final class DefaultExecutor extends EventLoopImplBase implements Runnable
         if (j2 >= 4611686018427387903L) {
             return NonDisposableHandle.INSTANCE;
         }
-        long nanoTime = System.nanoTime();
-        EventLoopImplBase.DelayedRunnableTask delayedRunnableTask = new EventLoopImplBase.DelayedRunnableTask(j2 + nanoTime, runnable);
-        schedule(nanoTime, delayedRunnableTask);
+        long jNanoTime = System.nanoTime();
+        EventLoopImplBase.DelayedRunnableTask delayedRunnableTask = new EventLoopImplBase.DelayedRunnableTask(j2 + jNanoTime, runnable);
+        schedule(jNanoTime, delayedRunnableTask);
         return delayedRunnableTask;
     }
 
@@ -91,14 +90,14 @@ public final class DefaultExecutor extends EventLoopImplBase implements Runnable
 
     @Override // java.lang.Runnable
     public final void run() {
-        boolean isEmpty;
+        boolean zIsEmpty;
         ThreadLocalEventLoop.INSTANCE.getClass();
         ThreadLocalEventLoop.ref.set(this);
         try {
             synchronized (this) {
                 int i = debugStatus;
                 if (i == 2 || i == 3) {
-                    if (isEmpty) {
+                    if (zIsEmpty) {
                         return;
                     } else {
                         return;
@@ -109,13 +108,13 @@ public final class DefaultExecutor extends EventLoopImplBase implements Runnable
                 long j = Long.MAX_VALUE;
                 while (true) {
                     Thread.interrupted();
-                    long processNextEvent = processNextEvent();
-                    if (processNextEvent == Long.MAX_VALUE) {
-                        long nanoTime = System.nanoTime();
+                    long jProcessNextEvent = processNextEvent();
+                    if (jProcessNextEvent == Long.MAX_VALUE) {
+                        long jNanoTime = System.nanoTime();
                         if (j == Long.MAX_VALUE) {
-                            j = KEEP_ALIVE_NANOS + nanoTime;
+                            j = KEEP_ALIVE_NANOS + jNanoTime;
                         }
-                        long j2 = j - nanoTime;
+                        long j2 = j - jNanoTime;
                         if (j2 <= 0) {
                             _thread = null;
                             acknowledgeShutdownIfNeeded();
@@ -125,13 +124,13 @@ public final class DefaultExecutor extends EventLoopImplBase implements Runnable
                             getThread();
                             return;
                         }
-                        if (processNextEvent > j2) {
-                            processNextEvent = j2;
+                        if (jProcessNextEvent > j2) {
+                            jProcessNextEvent = j2;
                         }
                     } else {
                         j = Long.MAX_VALUE;
                     }
-                    if (processNextEvent > 0) {
+                    if (jProcessNextEvent > 0) {
                         int i2 = debugStatus;
                         if (i2 == 2 || i2 == 3) {
                             _thread = null;
@@ -142,7 +141,7 @@ public final class DefaultExecutor extends EventLoopImplBase implements Runnable
                             getThread();
                             return;
                         }
-                        LockSupport.parkNanos(this, processNextEvent);
+                        LockSupport.parkNanos(this, jProcessNextEvent);
                     }
                 }
             }

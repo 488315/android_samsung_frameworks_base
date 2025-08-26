@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import androidx.leanback.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FadeAndShortSlide extends Visibility {
     public final float mDistance;
@@ -45,16 +44,16 @@ public class FadeAndShortSlide extends Visibility {
     public static final AnonymousClass3 sCalculateStartEnd = new CalculateSlide() { // from class: androidx.leanback.transition.FadeAndShortSlide.3
         @Override // androidx.leanback.transition.FadeAndShortSlide.CalculateSlide
         public final float getGoneX(FadeAndShortSlide fadeAndShortSlide, ViewGroup viewGroup, View view, int[] iArr) {
-            int centerX;
+            int iCenterX;
             int width = (view.getWidth() / 2) + iArr[0];
             viewGroup.getLocationOnScreen(iArr);
             Rect epicenter = fadeAndShortSlide.getEpicenter();
             if (epicenter == null) {
-                centerX = (viewGroup.getWidth() / 2) + iArr[0];
+                iCenterX = (viewGroup.getWidth() / 2) + iArr[0];
             } else {
-                centerX = epicenter.centerX();
+                iCenterX = epicenter.centerX();
             }
-            if (width < centerX) {
+            if (width < iCenterX) {
                 return view.getTranslationX() - fadeAndShortSlide.getHorizontalDistance(viewGroup);
             }
             return fadeAndShortSlide.getHorizontalDistance(viewGroup) + view.getTranslationX();
@@ -73,7 +72,6 @@ public class FadeAndShortSlide extends Visibility {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CalculateSlide {
         public float getGoneX(FadeAndShortSlide fadeAndShortSlide, ViewGroup viewGroup, View view, int[] iArr) {
             return view.getTranslationX();
@@ -131,16 +129,16 @@ public class FadeAndShortSlide extends Visibility {
         int i = iArr[0];
         int i2 = iArr[1];
         float translationX = view.getTranslationX();
-        Animator createAnimation = TranslationAnimationCreator.createAnimation(view, transitionValues2, i, i2, this.mSlideCalculator.getGoneX(this, viewGroup, view, iArr), this.mSlideCalculator.getGoneY(this, viewGroup, view, iArr), translationX, view.getTranslationY(), sDecelerate, this);
-        Animator onAppear = this.mFade.onAppear(viewGroup, view, transitionValues, transitionValues2);
-        if (createAnimation == null) {
-            return onAppear;
+        Animator animatorCreateAnimation = TranslationAnimationCreator.createAnimation(view, transitionValues2, i, i2, this.mSlideCalculator.getGoneX(this, viewGroup, view, iArr), this.mSlideCalculator.getGoneY(this, viewGroup, view, iArr), translationX, view.getTranslationY(), sDecelerate, this);
+        Animator animatorOnAppear = this.mFade.onAppear(viewGroup, view, transitionValues, transitionValues2);
+        if (animatorCreateAnimation == null) {
+            return animatorOnAppear;
         }
-        if (onAppear == null) {
-            return createAnimation;
+        if (animatorOnAppear == null) {
+            return animatorCreateAnimation;
         }
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(createAnimation).with(onAppear);
+        animatorSet.play(animatorCreateAnimation).with(animatorOnAppear);
         return animatorSet;
     }
 
@@ -150,16 +148,16 @@ public class FadeAndShortSlide extends Visibility {
             return null;
         }
         int[] iArr = (int[]) transitionValues.values.get("android:fadeAndShortSlideTransition:screenPosition");
-        Animator createAnimation = TranslationAnimationCreator.createAnimation(view, transitionValues, iArr[0], iArr[1], view.getTranslationX(), view.getTranslationY(), this.mSlideCalculator.getGoneX(this, viewGroup, view, iArr), this.mSlideCalculator.getGoneY(this, viewGroup, view, iArr), sDecelerate, this);
-        Animator onDisappear = this.mFade.onDisappear(viewGroup, view, transitionValues, transitionValues2);
-        if (createAnimation == null) {
-            return onDisappear;
+        Animator animatorCreateAnimation = TranslationAnimationCreator.createAnimation(view, transitionValues, iArr[0], iArr[1], view.getTranslationX(), view.getTranslationY(), this.mSlideCalculator.getGoneX(this, viewGroup, view, iArr), this.mSlideCalculator.getGoneY(this, viewGroup, view, iArr), sDecelerate, this);
+        Animator animatorOnDisappear = this.mFade.onDisappear(viewGroup, view, transitionValues, transitionValues2);
+        if (animatorCreateAnimation == null) {
+            return animatorOnDisappear;
         }
-        if (onDisappear == null) {
-            return createAnimation;
+        if (animatorOnDisappear == null) {
+            return animatorCreateAnimation;
         }
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(createAnimation).with(onDisappear);
+        animatorSet.play(animatorCreateAnimation).with(animatorOnDisappear);
         return animatorSet;
     }
 
@@ -207,16 +205,16 @@ public class FadeAndShortSlide extends Visibility {
         this.sCalculateTopBottom = new CalculateSlide() { // from class: androidx.leanback.transition.FadeAndShortSlide.6
             @Override // androidx.leanback.transition.FadeAndShortSlide.CalculateSlide
             public final float getGoneY(FadeAndShortSlide fadeAndShortSlide, ViewGroup viewGroup, View view, int[] iArr) {
-                int centerY;
+                int iCenterY;
                 int height = (view.getHeight() / 2) + iArr[1];
                 viewGroup.getLocationOnScreen(iArr);
                 Rect epicenter = FadeAndShortSlide.this.getEpicenter();
                 if (epicenter == null) {
-                    centerY = (viewGroup.getHeight() / 2) + iArr[1];
+                    iCenterY = (viewGroup.getHeight() / 2) + iArr[1];
                 } else {
-                    centerY = epicenter.centerY();
+                    iCenterY = epicenter.centerY();
                 }
-                if (height < centerY) {
+                if (height < iCenterY) {
                     return view.getTranslationY() - fadeAndShortSlide.getVerticalDistance(viewGroup);
                 }
                 return fadeAndShortSlide.getVerticalDistance(viewGroup) + view.getTranslationY();
@@ -240,23 +238,23 @@ public class FadeAndShortSlide extends Visibility {
         this.sCalculateTopBottom = new CalculateSlide() { // from class: androidx.leanback.transition.FadeAndShortSlide.6
             @Override // androidx.leanback.transition.FadeAndShortSlide.CalculateSlide
             public final float getGoneY(FadeAndShortSlide fadeAndShortSlide, ViewGroup viewGroup, View view, int[] iArr) {
-                int centerY;
+                int iCenterY;
                 int height = (view.getHeight() / 2) + iArr[1];
                 viewGroup.getLocationOnScreen(iArr);
                 Rect epicenter = FadeAndShortSlide.this.getEpicenter();
                 if (epicenter == null) {
-                    centerY = (viewGroup.getHeight() / 2) + iArr[1];
+                    iCenterY = (viewGroup.getHeight() / 2) + iArr[1];
                 } else {
-                    centerY = epicenter.centerY();
+                    iCenterY = epicenter.centerY();
                 }
-                if (height < centerY) {
+                if (height < iCenterY) {
                     return view.getTranslationY() - fadeAndShortSlide.getVerticalDistance(viewGroup);
                 }
                 return fadeAndShortSlide.getVerticalDistance(viewGroup) + view.getTranslationY();
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbSlide);
-        setSlideEdge(obtainStyledAttributes.getInt(3, 8388611));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbSlide);
+        setSlideEdge(typedArrayObtainStyledAttributes.getInt(3, 8388611));
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

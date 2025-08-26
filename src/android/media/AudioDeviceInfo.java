@@ -196,8 +196,8 @@ public final class AudioDeviceInfo {
     }
 
     public CharSequence getProductName() {
-        String name = this.mPort.name();
-        return (name == null || name.length() == 0) ? Build.MODEL : name;
+        String strName = this.mPort.name();
+        return (strName == null || strName.length() == 0) ? Build.MODEL : strName;
     }
 
     public String getAddress() {
@@ -225,16 +225,16 @@ public final class AudioDeviceInfo {
     }
 
     public int[] getChannelCounts() {
-        int channelCountFromInChannelMask;
+        int iChannelCountFromInChannelMask;
         TreeSet treeSet = new TreeSet();
         int i = 0;
         for (int i2 : getChannelMasks()) {
             if (isSink()) {
-                channelCountFromInChannelMask = AudioFormat.channelCountFromOutChannelMask(i2);
+                iChannelCountFromInChannelMask = AudioFormat.channelCountFromOutChannelMask(i2);
             } else {
-                channelCountFromInChannelMask = AudioFormat.channelCountFromInChannelMask(i2);
+                iChannelCountFromInChannelMask = AudioFormat.channelCountFromInChannelMask(i2);
             }
-            treeSet.add(Integer.valueOf(channelCountFromInChannelMask));
+            treeSet.add(Integer.valueOf(iChannelCountFromInChannelMask));
         }
         for (int i3 : getChannelIndexMasks()) {
             treeSet.add(Integer.valueOf(Integer.bitCount(i3)));

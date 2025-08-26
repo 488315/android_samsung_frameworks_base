@@ -3,7 +3,6 @@ package androidx.compose.ui.text;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlatformTextStyle {
     public final PlatformParagraphStyle paragraphStyle;
@@ -26,9 +25,9 @@ public final class PlatformTextStyle {
 
     public final int hashCode() {
         PlatformSpanStyle platformSpanStyle = this.spanStyle;
-        int hashCode = (platformSpanStyle != null ? platformSpanStyle.hashCode() : 0) * 31;
+        int iHashCode = (platformSpanStyle != null ? platformSpanStyle.hashCode() : 0) * 31;
         PlatformParagraphStyle platformParagraphStyle = this.paragraphStyle;
-        return hashCode + (platformParagraphStyle != null ? platformParagraphStyle.hashCode() : 0);
+        return iHashCode + (platformParagraphStyle != null ? platformParagraphStyle.hashCode() : 0);
     }
 
     public final String toString() {

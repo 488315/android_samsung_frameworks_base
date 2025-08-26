@@ -95,9 +95,9 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
             drawTrack(canvas, bounds, z3);
         }
         if (z2) {
-            int height = z3 ? bounds.height() : bounds.width();
-            int thumbLength = ScrollBarUtils.getThumbLength(height, z3 ? bounds.width() : bounds.height(), i, i2);
-            drawThumb(canvas, bounds, ScrollBarUtils.getThumbOffset(height, thumbLength, i, i2, this.mOffset), thumbLength, z3);
+            int iHeight = z3 ? bounds.height() : bounds.width();
+            int thumbLength = ScrollBarUtils.getThumbLength(iHeight, z3 ? bounds.width() : bounds.height(), i, i2);
+            drawThumb(canvas, bounds, ScrollBarUtils.getThumbOffset(iHeight, thumbLength, i, i2, this.mOffset), thumbLength, z3);
         }
     }
 
@@ -127,21 +127,21 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
 
     @Override // android.graphics.drawable.Drawable
     protected boolean onStateChange(int[] iArr) {
-        boolean onStateChange = super.onStateChange(iArr);
+        boolean zOnStateChange = super.onStateChange(iArr);
         Drawable drawable = this.mVerticalTrack;
         if (drawable != null) {
-            onStateChange |= drawable.setState(iArr);
+            zOnStateChange |= drawable.setState(iArr);
         }
         Drawable drawable2 = this.mVerticalThumb;
         if (drawable2 != null) {
-            onStateChange |= drawable2.setState(iArr);
+            zOnStateChange |= drawable2.setState(iArr);
         }
         Drawable drawable3 = this.mHorizontalTrack;
         if (drawable3 != null) {
-            onStateChange |= drawable3.setState(iArr);
+            zOnStateChange |= drawable3.setState(iArr);
         }
         Drawable drawable4 = this.mHorizontalThumb;
-        return drawable4 != null ? drawable4.setState(iArr) | onStateChange : onStateChange;
+        return drawable4 != null ? drawable4.setState(iArr) | zOnStateChange : zOnStateChange;
     }
 
     private void drawTrack(Canvas canvas, Rect rect, boolean z) {

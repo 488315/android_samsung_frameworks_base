@@ -37,14 +37,14 @@ public final class FileIntegrityManager {
             throw new IllegalArgumentException("Expect an absolute path");
         }
         try {
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 805306368);
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 805306368);
             try {
-                IInstalld.IFsveritySetupAuthToken createAuthToken = this.mService.createAuthToken(open);
-                if (open != null) {
-                    open.close();
+                IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthTokenCreateAuthToken = this.mService.createAuthToken(parcelFileDescriptorOpen);
+                if (parcelFileDescriptorOpen != null) {
+                    parcelFileDescriptorOpen.close();
                 }
                 try {
-                    int i = this.mService.setupFsverity(createAuthToken, file.getPath(), this.mContext.getPackageName());
+                    int i = this.mService.setupFsverity(iFsveritySetupAuthTokenCreateAuthToken, file.getPath(), this.mContext.getPackageName());
                     if (i != 0) {
                         new ErrnoException("setupFsVerity", i).rethrowAsIOException();
                     }

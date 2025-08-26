@@ -1,11 +1,11 @@
 package com.sec.ims.settings;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 import com.sec.ims.configuration.DATA;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RcsConfigurationReader {
     public static final String APPAUTH_PATH = "root/application/0/appauth/";
@@ -271,51 +271,24 @@ public class RcsConfigurationReader {
         this.mContext = context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x0037  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0034  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String getValue(java.lang.String r8) {
-        /*
-            r7 = this;
-            android.net.Uri r0 = com.sec.ims.settings.RcsConfigurationReader.AUTO_CONFIGURATION_URI
-            android.net.Uri r2 = android.net.Uri.withAppendedPath(r0, r8)
-            android.content.Context r7 = r7.mContext
-            android.content.ContentResolver r1 = r7.getContentResolver()
-            r5 = 0
-            r6 = 0
-            r3 = 0
-            r4 = 0
-            android.database.Cursor r7 = r1.query(r2, r3, r4, r5, r6)
-            if (r7 == 0) goto L34
-            boolean r0 = r7.moveToFirst()     // Catch: java.lang.Throwable -> L28
-            if (r0 == 0) goto L34
-            int r8 = r7.getColumnIndex(r8)     // Catch: java.lang.Throwable -> L28
-            r0 = -1
-            if (r8 == r0) goto L34
-            java.lang.String r8 = r7.getString(r8)     // Catch: java.lang.Throwable -> L28
-            goto L35
-        L28:
-            r0 = move-exception
-            r8 = r0
-            r7.close()     // Catch: java.lang.Throwable -> L2e
-            goto L33
-        L2e:
-            r0 = move-exception
-            r7 = r0
-            r8.addSuppressed(r7)
-        L33:
-            throw r8
-        L34:
-            r8 = 0
-        L35:
-            if (r7 == 0) goto L3a
-            r7.close()
-        L3a:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.sec.ims.settings.RcsConfigurationReader.getValue(java.lang.String):java.lang.String");
+    private String getValue(String str) {
+        int columnIndex;
+        String string;
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.withAppendedPath(AUTO_CONFIGURATION_URI, str), null, null, null, null);
+        if (cursorQuery != null) {
+            try {
+                string = (!cursorQuery.moveToFirst() || (columnIndex = cursorQuery.getColumnIndex(str)) == -1) ? null : cursorQuery.getString(columnIndex);
+            } finally {
+            }
+        }
+        if (cursorQuery != null) {
+            cursorQuery.close();
+        }
+        return string;
     }
 
     public Boolean getBoolean(String str) {

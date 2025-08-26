@@ -4,7 +4,6 @@ import com.google.dexmaker.dx.util.ToHuman;
 import com.sec.ims.settings.ImsProfile;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Type implements ToHuman, Comparable {
     public static final Type BOOLEAN;
@@ -77,8 +76,8 @@ public final class Type implements ToHuman, Comparable {
         intern("Ljava/lang/annotation/Annotation;");
         intern("Ljava/lang/Class;");
         intern("Ljava/lang/Cloneable;");
-        Type intern = intern("Ljava/lang/Object;");
-        OBJECT = intern;
+        Type typeIntern = intern("Ljava/lang/Object;");
+        OBJECT = typeIntern;
         intern("Ljava/io/Serializable;");
         STRING = intern("Ljava/lang/String;");
         THROWABLE = intern("Ljava/lang/Throwable;");
@@ -98,7 +97,7 @@ public final class Type implements ToHuman, Comparable {
         FLOAT_ARRAY = type5.getArrayType();
         INT_ARRAY = type6.getArrayType();
         LONG_ARRAY = type7.getArrayType();
-        OBJECT_ARRAY = intern.getArrayType();
+        OBJECT_ARRAY = typeIntern.getArrayType();
         SHORT_ARRAY = type8.getArrayType();
     }
 
@@ -120,30 +119,30 @@ public final class Type implements ToHuman, Comparable {
 
     public static Type intern(String str) {
         Type type;
-        HashMap hashMap = internTable;
-        synchronized (hashMap) {
-            type = (Type) hashMap.get(str);
+        HashMap map = internTable;
+        synchronized (map) {
+            type = (Type) map.get(str);
         }
         if (type != null) {
             return type;
         }
         try {
-            char charAt = str.charAt(0);
-            if (charAt == '[') {
+            char cCharAt = str.charAt(0);
+            if (cCharAt == '[') {
                 return intern(str.substring(1)).getArrayType();
             }
             int length = str.length();
-            if (charAt == 'L') {
+            if (cCharAt == 'L') {
                 int i = length - 1;
                 if (str.charAt(i) == ';') {
                     for (int i2 = 1; i2 < i; i2++) {
-                        char charAt2 = str.charAt(i2);
-                        if (charAt2 != '(' && charAt2 != ')' && charAt2 != '.') {
-                            if (charAt2 == '/') {
+                        char cCharAt2 = str.charAt(i2);
+                        if (cCharAt2 != '(' && cCharAt2 != ')' && cCharAt2 != '.') {
+                            if (cCharAt2 == '/') {
                                 if (i2 == 1 || i2 == i || str.charAt(i2 - 1) == '/') {
                                     throw new IllegalArgumentException("bad descriptor: ".concat(str));
                                 }
-                            } else if (charAt2 != ';' && charAt2 != '[') {
+                            } else if (cCharAt2 == ';' || cCharAt2 == '[') {
                             }
                         }
                         throw new IllegalArgumentException("bad descriptor: ".concat(str));
@@ -160,15 +159,15 @@ public final class Type implements ToHuman, Comparable {
     }
 
     public static Type putIntern(Type type) {
-        HashMap hashMap = internTable;
-        synchronized (hashMap) {
+        HashMap map = internTable;
+        synchronized (map) {
             try {
                 String str = type.descriptor;
-                Type type2 = (Type) hashMap.get(str);
+                Type type2 = (Type) map.get(str);
                 if (type2 != null) {
                     return type2;
                 }
-                hashMap.put(str, type);
+                map.put(str, type);
                 return type;
             } catch (Throwable th) {
                 throw th;

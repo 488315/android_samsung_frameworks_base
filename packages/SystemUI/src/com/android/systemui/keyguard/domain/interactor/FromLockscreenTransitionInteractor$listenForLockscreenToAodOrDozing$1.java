@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromLockscreenTransitionInteractor$listenForLockscreenToAodOrDozing$1 extends SuspendLambda implements Function2 {
     int label;
@@ -44,9 +43,9 @@ final class FromLockscreenTransitionInteractor$listenForLockscreenToAodOrDozing$
             Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.domain.interactor.FromLockscreenTransitionInteractor$listenForLockscreenToAodOrDozing$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     TransitionStep transitionStep = (TransitionStep) obj2;
-                    Object value = FromLockscreenTransitionInteractor.this.keyguardInteractor.asleepKeyguardState.$$delegate_0.getValue();
+                    Object value = fromLockscreenTransitionInteractor.keyguardInteractor.asleepKeyguardState.$$delegate_0.getValue();
                     KeyguardState keyguardState = KeyguardState.AOD;
                     return (value == keyguardState && transitionStep.from == keyguardState) ? TransitionModeOnCanceled.REVERSE : TransitionModeOnCanceled.LAST_VALUE;
                 }

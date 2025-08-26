@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SPluginPolicyInteractor {
     private static final String ALL_SPLUGIN_LOAD_FAILED = "all_splugin_load_failed";
@@ -29,13 +28,13 @@ public class SPluginPolicyInteractor {
     public SPluginPolicyInteractor(Context context) {
         this.mContext = context;
         this.mPackageManager = context.getPackageManager();
-        HashMap hashMap = new HashMap();
-        this.mTargetPackages = hashMap;
-        hashMap.put("com.samsung.android.keyscafe", 100300000L);
+        HashMap map = new HashMap();
+        this.mTargetPackages = map;
+        map.put("com.samsung.android.keyscafe", 100300000L);
         new Handler((Looper) Dependency.sDependency.getDependencyInner(Dependency.BG_LOOPER)).post(new Runnable() { // from class: com.samsung.systemui.splugins.SPluginPolicyInteractor$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SPluginPolicyInteractor.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
     }
@@ -52,7 +51,7 @@ public class SPluginPolicyInteractor {
         return getPackageVersionCode(str) < this.mTargetPackages.get(str).longValue();
     }
 
-    private boolean isPackageInstalled(String str) {
+    private boolean isPackageInstalled(String str) throws PackageManager.NameNotFoundException {
         try {
             this.mPackageManager.getPackageInfo(str, 0);
             return true;
@@ -82,15 +81,12 @@ public class SPluginPolicyInteractor {
     public synchronized void onPluginLoadFailed(String str) {
         try {
             String string = Settings.Secure.getString(this.mContext.getContentResolver(), ALL_SPLUGIN_LOAD_FAILED);
-            if (string != null) {
-                if (!string.contains(str)) {
+            if (string == null || !string.contains(str)) {
+                if (string == null) {
+                    string = "";
                 }
-                sendEvent();
+                Settings.Secure.putString(this.mContext.getContentResolver(), ALL_SPLUGIN_LOAD_FAILED, string + str + "|");
             }
-            if (string == null) {
-                string = "";
-            }
-            Settings.Secure.putString(this.mContext.getContentResolver(), ALL_SPLUGIN_LOAD_FAILED, string + str + "|");
             sendEvent();
         } catch (Throwable th) {
             throw th;

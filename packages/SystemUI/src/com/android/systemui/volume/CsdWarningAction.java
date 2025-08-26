@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CsdWarningAction {
     public final Intent intent;
@@ -29,9 +28,9 @@ public final class CsdWarningAction {
 
     public final int hashCode() {
         String str = this.label;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         Intent intent = this.intent;
-        return Boolean.hashCode(this.isActivity) + ((hashCode + (intent != null ? intent.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.isActivity) + ((iHashCode + (intent != null ? intent.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

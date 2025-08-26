@@ -343,9 +343,9 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         this.mRecordingInfoImpl = new AudioRecordingMonitorImpl(this);
         Objects.requireNonNull(context);
         Log.d(TAG, "Constructor MediaRecorder");
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -355,16 +355,16 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
             }
         }
         this.mChannelCount = 1;
-        AttributionSource.ScopedParcelState asScopedParcelState = context.getAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = context.getAttributionSource().asScopedParcelState();
         try {
-            native_setup(new WeakReference(this), ActivityThread.currentPackageName(), asScopedParcelState.getParcel());
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            native_setup(new WeakReference(this), ActivityThread.currentPackageName(), scopedParcelStateAsScopedParcelState.getParcel());
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
         } catch (Throwable th) {
-            if (asScopedParcelState != null) {
+            if (scopedParcelStateAsScopedParcelState != null) {
                 try {
-                    asScopedParcelState.close();
+                    scopedParcelStateAsScopedParcelState.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -561,7 +561,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
     }
 
-    public void setProfile(CamcorderProfile camcorderProfile) {
+    public void setProfile(CamcorderProfile camcorderProfile) throws IllegalStateException {
         setOutputFormat(camcorderProfile.fileFormat);
         setVideoFrameRate(camcorderProfile.videoFrameRate);
         setVideoSize(camcorderProfile.videoFrameWidth, camcorderProfile.videoFrameHeight);
@@ -575,14 +575,14 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
     }
 
-    public void setAudioProfile(EncoderProfiles.AudioProfile audioProfile) {
+    public void setAudioProfile(EncoderProfiles.AudioProfile audioProfile) throws IllegalStateException {
         setAudioEncodingBitRate(audioProfile.getBitrate());
         setAudioChannels(audioProfile.getChannels());
         setAudioSamplingRate(audioProfile.getSampleRate());
         setAudioEncoder(audioProfile.getCodec());
     }
 
-    public void setVideoProfile(EncoderProfiles.VideoProfile videoProfile) {
+    public void setVideoProfile(EncoderProfiles.VideoProfile videoProfile) throws IllegalStateException {
         setVideoFrameRate(videoProfile.getFrameRate());
         setVideoSize(videoProfile.getWidth(), videoProfile.getHeight());
         setVideoEncodingBitRate(videoProfile.getBitrate());
@@ -689,7 +689,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         this.mFile = file;
     }
 
-    public void setNextOutputFile(FileDescriptor fileDescriptor) throws IOException {
+    public void setNextOutputFile(FileDescriptor fileDescriptor) throws IllegalStateException, IOException {
         _setNextOutputFile(fileDescriptor);
     }
 
@@ -710,7 +710,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
 
     public void prepare() throws IllegalStateException, IOException {
         Log.i(TAG, "prepare");
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         if (this.mPath != null) {
             RandomAccessFile randomAccessFile = new RandomAccessFile(this.mPath, "rw");
             try {
@@ -734,7 +734,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
             }
         }
         _prepare();
-        Log.i(TAG, "prepare elapsed time : " + (SystemClock.uptimeMillis() - uptimeMillis) + " ms");
+        Log.i(TAG, "prepare elapsed time : " + (SystemClock.uptimeMillis() - jUptimeMillis) + " ms");
     }
 
     public void reset() {
@@ -812,14 +812,14 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
         int id = audioDeviceInfo != null ? audioDeviceInfo.getId() : 0;
         setParameter("param-meta-audio-devicetype=" + (audioDeviceInfo != null ? audioDeviceInfo.getType() : 0));
-        boolean native_setInputDevice = native_setInputDevice(id);
-        if (!native_setInputDevice) {
-            return native_setInputDevice;
+        boolean zNative_setInputDevice = native_setInputDevice(id);
+        if (!zNative_setInputDevice) {
+            return zNative_setInputDevice;
         }
         synchronized (this) {
             this.mPreferredDevice = audioDeviceInfo;
         }
-        return native_setInputDevice;
+        return zNative_setInputDevice;
     }
 
     @Override // android.media.AudioRouting
@@ -833,9 +833,9 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
 
     private List<AudioDeviceInfo> getRoutedDevicesInternal() {
         ArrayList arrayList = new ArrayList();
-        int[] native_getRoutedDeviceIds = native_getRoutedDeviceIds();
-        if (native_getRoutedDeviceIds != null && native_getRoutedDeviceIds.length != 0) {
-            for (int i : native_getRoutedDeviceIds) {
+        int[] iArrNative_getRoutedDeviceIds = native_getRoutedDeviceIds();
+        if (iArrNative_getRoutedDeviceIds != null && iArrNative_getRoutedDeviceIds.length != 0) {
+            for (int i : iArrNative_getRoutedDeviceIds) {
                 AudioDeviceInfo deviceForPortId = AudioManager.getDeviceForPortId(i, 1);
                 if (deviceForPortId != null) {
                     arrayList.add(deviceForPortId);
@@ -894,22 +894,22 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     public List<MicrophoneInfo> getActiveMicrophones() throws IOException {
         AudioDeviceInfo routedDevice;
         ArrayList<MicrophoneInfo> arrayList = new ArrayList<>();
-        int native_getActiveMicrophones = native_getActiveMicrophones(arrayList);
-        if (native_getActiveMicrophones != 0) {
-            if (native_getActiveMicrophones != -3) {
-                Log.e(TAG, "getActiveMicrophones failed:" + native_getActiveMicrophones);
+        int iNative_getActiveMicrophones = native_getActiveMicrophones(arrayList);
+        if (iNative_getActiveMicrophones != 0) {
+            if (iNative_getActiveMicrophones != -3) {
+                Log.e(TAG, "getActiveMicrophones failed:" + iNative_getActiveMicrophones);
             }
             Log.i(TAG, "getActiveMicrophones failed, fallback on routed device info");
         }
         AudioManager.setPortIdForMicrophones(arrayList);
         if (arrayList.size() == 0 && (routedDevice = getRoutedDevice()) != null) {
-            MicrophoneInfo microphoneInfoFromAudioDeviceInfo = AudioManager.microphoneInfoFromAudioDeviceInfo(routedDevice);
+            MicrophoneInfo microphoneInfoMicrophoneInfoFromAudioDeviceInfo = AudioManager.microphoneInfoFromAudioDeviceInfo(routedDevice);
             ArrayList arrayList2 = new ArrayList();
             for (int i = 0; i < this.mChannelCount; i++) {
                 arrayList2.add(new Pair(Integer.valueOf(i), 1));
             }
-            microphoneInfoFromAudioDeviceInfo.setChannelMapping(arrayList2);
-            arrayList.add(microphoneInfoFromAudioDeviceInfo);
+            microphoneInfoMicrophoneInfoFromAudioDeviceInfo.setChannelMapping(arrayList2);
+            arrayList.add(microphoneInfoMicrophoneInfoFromAudioDeviceInfo);
         }
         return arrayList;
     }
@@ -958,16 +958,16 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     }
 
     private void native_setup(Object obj, String str, String str2) throws IllegalStateException {
-        AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().withPackageName(str2).asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().withPackageName(str2).asScopedParcelState();
         try {
-            native_setup(obj, str, asScopedParcelState.getParcel());
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            native_setup(obj, str, scopedParcelStateAsScopedParcelState.getParcel());
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
         } catch (Throwable th) {
-            if (asScopedParcelState != null) {
+            if (scopedParcelStateAsScopedParcelState != null) {
                 try {
-                    asScopedParcelState.close();
+                    scopedParcelStateAsScopedParcelState.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -1084,7 +1084,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
     }
 
-    public void semCreatePersistentSurfaceTrack(String str, MediaFormat mediaFormat, Surface surface) throws IllegalArgumentException, IllegalStateException {
+    public void semCreatePersistentSurfaceTrack(String str, MediaFormat mediaFormat, Surface surface) throws IllegalStateException, IllegalArgumentException {
         String[] strArr;
         Object[] objArr;
         Log.d(TAG, "semCreatePersistentSurfaceTrack");
@@ -1105,7 +1105,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         native_semCreatePersistentSurfaceTrack(str, strArr, objArr, surface);
     }
 
-    public Surface semCreateSurfaceTrack(String str, MediaFormat mediaFormat) throws IllegalArgumentException, IllegalStateException {
+    public Surface semCreateSurfaceTrack(String str, MediaFormat mediaFormat) throws IllegalStateException, IllegalArgumentException {
         String[] strArr;
         Object[] objArr;
         Log.d(TAG, "semCreateSurfaceTrack");
@@ -1126,7 +1126,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         return native_semCreateSurfaceTrack(str, strArr, objArr);
     }
 
-    public SemTrack semCreateTrack(String str, MediaFormat mediaFormat) throws IllegalArgumentException, IllegalStateException {
+    public SemTrack semCreateTrack(String str, MediaFormat mediaFormat) throws IllegalStateException, IllegalArgumentException {
         Log.d(TAG, "semCreateTrack");
         return new SemTrack(this, str, mediaFormat);
     }

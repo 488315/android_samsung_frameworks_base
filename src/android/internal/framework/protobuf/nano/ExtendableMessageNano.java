@@ -12,15 +12,15 @@ public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>> 
         if (this.unknownFieldData == null) {
             return 0;
         }
-        int i = 0;
-        for (int i2 = 0; i2 < this.unknownFieldData.size(); i2++) {
-            i += this.unknownFieldData.dataAt(i2).computeSerializedSize();
+        int iComputeSerializedSize = 0;
+        for (int i = 0; i < this.unknownFieldData.size(); i++) {
+            iComputeSerializedSize += this.unknownFieldData.dataAt(i).computeSerializedSize();
         }
-        return i;
+        return iComputeSerializedSize;
     }
 
     @Override // android.internal.framework.protobuf.nano.MessageNano
-    public void writeTo(CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException {
+    public void writeTo(CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         if (this.unknownFieldData == null) {
             return;
         }
@@ -95,8 +95,8 @@ public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>> 
 
     @Override // android.internal.framework.protobuf.nano.MessageNano
     /* renamed from: clone */
-    public M mo2267clone() throws CloneNotSupportedException {
-        M m = (M) super.mo2267clone();
+    public M mo2273clone() throws CloneNotSupportedException {
+        M m = (M) super.mo2273clone();
         InternalNano.cloneUnknownFieldData(this, m);
         return m;
     }

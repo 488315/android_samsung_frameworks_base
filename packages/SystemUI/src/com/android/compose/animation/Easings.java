@@ -2,12 +2,10 @@ package com.android.compose.animation;
 
 import androidx.compose.animation.core.CubicBezierEasing;
 import androidx.compose.animation.core.Easing;
-import androidx.core.animation.Interpolator;
 import androidx.core.animation.LinearInterpolator;
 import androidx.core.animation.PathInterpolator;
 import com.android.app.animation.InterpolatorsAndroidX;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Easings {
     public static final Easings$fromInterpolator$1 Emphasized;
@@ -32,49 +30,49 @@ public final class Easings {
         Standard = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator2 = InterpolatorsAndroidX.STANDARD_ACCELERATE;
         StandardAccelerate = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator2.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator3 = InterpolatorsAndroidX.STANDARD_DECELERATE;
         StandardDecelerate = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator3.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator4 = InterpolatorsAndroidX.EMPHASIZED;
         Emphasized = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator4.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator5 = InterpolatorsAndroidX.EMPHASIZED_ACCELERATE;
         new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator5.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator6 = InterpolatorsAndroidX.EMPHASIZED_DECELERATE;
         new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator6.getInterpolation(f);
             }
         };
         final LinearInterpolator linearInterpolator = InterpolatorsAndroidX.LINEAR;
         Linear = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return linearInterpolator.getInterpolation(f);
             }
         };
         new CubicBezierEasing(0.1f, 0.1f, 0.0f, 1.0f);
@@ -82,21 +80,21 @@ public final class Easings {
         Legacy = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator7.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator8 = InterpolatorsAndroidX.LEGACY_ACCELERATE;
         new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator8.getInterpolation(f);
             }
         };
         final PathInterpolator pathInterpolator9 = InterpolatorsAndroidX.LEGACY_DECELERATE;
         LegacyDecelerate = new Easing() { // from class: com.android.compose.animation.Easings$fromInterpolator$1
             @Override // androidx.compose.animation.core.Easing
             public final float transform(float f) {
-                return Interpolator.this.getInterpolation(f);
+                return pathInterpolator9.getInterpolation(f);
             }
         };
     }

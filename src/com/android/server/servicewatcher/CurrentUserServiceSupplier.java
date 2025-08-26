@@ -54,8 +54,8 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
         if (boundServiceInfo2 == null) {
             return 1;
         }
-        int compare = Integer.compare(boundServiceInfo.getVersion(), boundServiceInfo2.getVersion());
-        if (compare == 0) {
+        int iCompare = Integer.compare(boundServiceInfo.getVersion(), boundServiceInfo2.getVersion());
+        if (iCompare == 0) {
             if (boundServiceInfo.getUserId() != 0 && boundServiceInfo2.getUserId() == 0) {
                 return -1;
             }
@@ -63,7 +63,7 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
                 return 1;
             }
         }
-        return compare;
+        return iCompare;
     }
 
     public static class BoundServiceInfo extends ServiceWatcher.BoundServiceInfo {
@@ -119,7 +119,7 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
         return new CurrentUserServiceSupplier(context, str, str2, str3, str4, false);
     }
 
-    private static String retrieveExplicitPackage(Context context, int i, int i2) {
+    private static String retrieveExplicitPackage(Context context, int i, int i2) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         if (resources.getBoolean(i)) {
             return null;
@@ -127,11 +127,11 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
         if (Flags.fixServiceWatcher()) {
             TypedValue typedValue = new TypedValue();
             resources.getValue(i2, typedValue, true);
-            CharSequence coerceToString = typedValue.coerceToString();
-            if (coerceToString == null) {
+            CharSequence charSequenceCoerceToString = typedValue.coerceToString();
+            if (charSequenceCoerceToString == null) {
                 return "";
             }
-            return coerceToString.toString();
+            return charSequenceCoerceToString.toString();
         }
         return resources.getString(i2);
     }
@@ -174,7 +174,6 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
         this.mContext.unregisterReceiver(this);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.android.server.servicewatcher.ServiceWatcher.ServiceSupplier
     public BoundServiceInfo getServiceInfo() {
         BoundServiceInfo boundServiceInfo = null;
@@ -192,8 +191,10 @@ public final class CurrentUserServiceSupplier extends BroadcastReceiver implemen
                     if (str3 != null && boundServiceInfo != null) {
                         if (str3.equals(boundServiceInfo2.toString())) {
                             Log.d(TAG, "Not choosing unstable service " + this.mUnstableService + " as we already have a service " + boundServiceInfo.toString());
-                        } else if (this.mUnstableService.equals(boundServiceInfo.toString())) {
-                            Log.d(TAG, "Choosing service " + boundServiceInfo2.toString() + " over the unstable service " + this.mUnstableService);
+                        } else {
+                            if (this.mUnstableService.equals(boundServiceInfo.toString())) {
+                                Log.d(TAG, "Choosing service " + boundServiceInfo2.toString() + " over the unstable service " + this.mUnstableService);
+                            }
                             boundServiceInfo = boundServiceInfo2;
                         }
                     }

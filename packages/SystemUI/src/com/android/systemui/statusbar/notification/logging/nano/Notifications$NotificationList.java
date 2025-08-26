@@ -6,7 +6,6 @@ import com.google.protobuf.nano.MessageNano;
 import com.google.protobuf.nano.WireFormatNano;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class Notifications$NotificationList extends MessageNano {
     public Notifications$Notification[] notifications;
@@ -28,15 +27,15 @@ public final class Notifications$NotificationList extends MessageNano {
         if (notifications$NotificationArr == null || notifications$NotificationArr.length <= 0) {
             return 0;
         }
-        int i2 = 0;
+        int iComputeMessageSize = 0;
         while (true) {
             Notifications$Notification[] notifications$NotificationArr2 = this.notifications;
             if (i >= notifications$NotificationArr2.length) {
-                return i2;
+                return iComputeMessageSize;
             }
             Notifications$Notification notifications$Notification = notifications$NotificationArr2[i];
             if (notifications$Notification != null) {
-                i2 = CodedOutputByteBufferNano.computeMessageSize(1, notifications$Notification) + i2;
+                iComputeMessageSize = CodedOutputByteBufferNano.computeMessageSize(1, notifications$Notification) + iComputeMessageSize;
             }
             i++;
         }
@@ -65,11 +64,11 @@ public final class Notifications$NotificationList extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public Notifications$NotificationList mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 10);
                 Notifications$Notification[] notifications$NotificationArr = this.notifications;
                 int length = notifications$NotificationArr == null ? 0 : notifications$NotificationArr.length;
@@ -89,7 +88,7 @@ public final class Notifications$NotificationList extends MessageNano {
                 notifications$NotificationArr2[length] = notifications$Notification2;
                 codedInputByteBufferNano.readMessage(notifications$Notification2);
                 this.notifications = notifications$NotificationArr2;
-            } else if (!codedInputByteBufferNano.skipField(readTag)) {
+            } else if (!codedInputByteBufferNano.skipField(tag)) {
                 break;
             }
         }

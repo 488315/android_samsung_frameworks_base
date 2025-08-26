@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import gov.nist.javax.sip.address.AddressImpl;
 import javax.sip.header.ToHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class To extends AddressParametersHeader implements ToHeader {
     private static final long serialVersionUID = -4057413800584586316L;

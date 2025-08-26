@@ -47,10 +47,10 @@ public final class WuQuantizer implements Quantizer {
         quantizerMap.quantize(iArr, i);
         Map<Integer, Integer> colorToCount = quantizerMap.getColorToCount();
         this.mInputPixelToCount = colorToCount;
-        Set<Integer> keySet = colorToCount.keySet();
-        if (keySet.size() <= i) {
+        Set<Integer> setKeySet = colorToCount.keySet();
+        if (setKeySet.size() <= i) {
             this.mColors = new int[this.mInputPixelToCount.keySet().size()];
-            Iterator<Integer> it = keySet.iterator();
+            Iterator<Integer> it = setKeySet.iterator();
             int i2 = 0;
             while (it.hasNext()) {
                 this.mColors[i2] = it.next().intValue();
@@ -83,22 +83,22 @@ public final class WuQuantizer implements Quantizer {
         this.mMomentsB = new int[TOTAL_SIZE];
         this.mMoments = new double[TOTAL_SIZE];
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            int intValue = entry.getKey().intValue();
-            int intValue2 = entry.getValue().intValue();
-            int red = Color.red(intValue);
-            int green = Color.green(intValue);
-            int blue = Color.blue(intValue);
-            int index = getIndex((red >> 3) + 1, (green >> 3) + 1, (blue >> 3) + 1);
+            int iIntValue = entry.getKey().intValue();
+            int iIntValue2 = entry.getValue().intValue();
+            int iRed = Color.red(iIntValue);
+            int iGreen = Color.green(iIntValue);
+            int iBlue = Color.blue(iIntValue);
+            int index = getIndex((iRed >> 3) + 1, (iGreen >> 3) + 1, (iBlue >> 3) + 1);
             int[] iArr = this.mWeights;
-            iArr[index] = iArr[index] + intValue2;
+            iArr[index] = iArr[index] + iIntValue2;
             int[] iArr2 = this.mMomentsR;
-            iArr2[index] = iArr2[index] + (red * intValue2);
+            iArr2[index] = iArr2[index] + (iRed * iIntValue2);
             int[] iArr3 = this.mMomentsG;
-            iArr3[index] = iArr3[index] + (green * intValue2);
+            iArr3[index] = iArr3[index] + (iGreen * iIntValue2);
             int[] iArr4 = this.mMomentsB;
-            iArr4[index] = iArr4[index] + (blue * intValue2);
+            iArr4[index] = iArr4[index] + (iBlue * iIntValue2);
             double[] dArr = this.mMoments;
-            dArr[index] = dArr[index] + (intValue2 * ((red * red) + (green * green) + (blue * blue)));
+            dArr[index] = dArr[index] + (iIntValue2 * ((iRed * iRed) + (iGreen * iGreen) + (iBlue * iBlue)));
         }
     }
 
@@ -206,9 +206,9 @@ public final class WuQuantizer implements Quantizer {
         int i2 = 0;
         for (int i3 = 0; i3 < i; i3++) {
             Box box = this.mCubes[i3];
-            int volume = volume(box, this.mWeights);
-            if (volume > 0) {
-                iArr[i2] = Color.rgb(volume(box, this.mMomentsR) / volume, volume(box, this.mMomentsG) / volume, volume(box, this.mMomentsB) / volume);
+            int iVolume = volume(box, this.mWeights);
+            if (iVolume > 0) {
+                iArr[i2] = Color.rgb(volume(box, this.mMomentsR) / iVolume, volume(box, this.mMomentsG) / iVolume, volume(box, this.mMomentsB) / iVolume);
                 i2++;
             }
         }
@@ -218,24 +218,24 @@ public final class WuQuantizer implements Quantizer {
     }
 
     private double variance(Box box) {
-        int volume = volume(box, this.mMomentsR);
-        int volume2 = volume(box, this.mMomentsG);
-        int volume3 = volume(box, this.mMomentsB);
-        return (((((((this.mMoments[getIndex(box.r1, box.g1, box.b1)] - this.mMoments[getIndex(box.r1, box.g1, box.b0)]) - this.mMoments[getIndex(box.r1, box.g0, box.b1)]) + this.mMoments[getIndex(box.r1, box.g0, box.b0)]) - this.mMoments[getIndex(box.r0, box.g1, box.b1)]) + this.mMoments[getIndex(box.r0, box.g1, box.b0)]) + this.mMoments[getIndex(box.r0, box.g0, box.b1)]) - this.mMoments[getIndex(box.r0, box.g0, box.b0)]) - ((((volume * volume) + (volume2 * volume2)) + (volume3 * volume3)) / volume(box, this.mWeights));
+        int iVolume = volume(box, this.mMomentsR);
+        int iVolume2 = volume(box, this.mMomentsG);
+        int iVolume3 = volume(box, this.mMomentsB);
+        return (((((((this.mMoments[getIndex(box.r1, box.g1, box.b1)] - this.mMoments[getIndex(box.r1, box.g1, box.b0)]) - this.mMoments[getIndex(box.r1, box.g0, box.b1)]) + this.mMoments[getIndex(box.r1, box.g0, box.b0)]) - this.mMoments[getIndex(box.r0, box.g1, box.b1)]) + this.mMoments[getIndex(box.r0, box.g1, box.b0)]) + this.mMoments[getIndex(box.r0, box.g0, box.b1)]) - this.mMoments[getIndex(box.r0, box.g0, box.b0)]) - ((((iVolume * iVolume) + (iVolume2 * iVolume2)) + (iVolume3 * iVolume3)) / volume(box, this.mWeights));
     }
 
     private boolean cut(Box box, Box box2) {
         Direction direction;
-        int volume = volume(box, this.mMomentsR);
-        int volume2 = volume(box, this.mMomentsG);
-        int volume3 = volume(box, this.mMomentsB);
-        int volume4 = volume(box, this.mWeights);
-        MaximizeResult maximize = maximize(box, Direction.RED, box.r0 + 1, box.r1, volume, volume2, volume3, volume4);
-        MaximizeResult maximize2 = maximize(box, Direction.GREEN, box.g0 + 1, box.g1, volume, volume2, volume3, volume4);
-        MaximizeResult maximize3 = maximize(box, Direction.BLUE, box.b0 + 1, box.b1, volume, volume2, volume3, volume4);
-        double d = maximize.mMaximum;
-        double d2 = maximize2.mMaximum;
-        double d3 = maximize3.mMaximum;
+        int iVolume = volume(box, this.mMomentsR);
+        int iVolume2 = volume(box, this.mMomentsG);
+        int iVolume3 = volume(box, this.mMomentsB);
+        int iVolume4 = volume(box, this.mWeights);
+        MaximizeResult maximizeResultMaximize = maximize(box, Direction.RED, box.r0 + 1, box.r1, iVolume, iVolume2, iVolume3, iVolume4);
+        MaximizeResult maximizeResultMaximize2 = maximize(box, Direction.GREEN, box.g0 + 1, box.g1, iVolume, iVolume2, iVolume3, iVolume4);
+        MaximizeResult maximizeResultMaximize3 = maximize(box, Direction.BLUE, box.b0 + 1, box.b1, iVolume, iVolume2, iVolume3, iVolume4);
+        double d = maximizeResultMaximize.mMaximum;
+        double d2 = maximizeResultMaximize2.mMaximum;
+        double d3 = maximizeResultMaximize3.mMaximum;
         if (d < d2 || d < d3) {
             if (d2 >= d && d2 >= d3) {
                 direction = Direction.GREEN;
@@ -243,7 +243,7 @@ public final class WuQuantizer implements Quantizer {
                 direction = Direction.BLUE;
             }
         } else {
-            if (maximize.mCutLocation < 0) {
+            if (maximizeResultMaximize.mCutLocation < 0) {
                 return false;
             }
             direction = Direction.RED;
@@ -251,19 +251,19 @@ public final class WuQuantizer implements Quantizer {
         box2.r1 = box.r1;
         box2.g1 = box.g1;
         box2.b1 = box.b1;
-        int ordinal = direction.ordinal();
-        if (ordinal == 0) {
-            box.r1 = maximize.mCutLocation;
+        int iOrdinal = direction.ordinal();
+        if (iOrdinal == 0) {
+            box.r1 = maximizeResultMaximize.mCutLocation;
             box2.r0 = box.r1;
             box2.g0 = box.g0;
             box2.b0 = box.b0;
-        } else if (ordinal == 1) {
-            box.g1 = maximize2.mCutLocation;
+        } else if (iOrdinal == 1) {
+            box.g1 = maximizeResultMaximize2.mCutLocation;
             box2.r0 = box.r0;
             box2.g0 = box.g1;
             box2.b0 = box.b0;
-        } else if (ordinal == 2) {
-            box.b1 = maximize3.mCutLocation;
+        } else if (iOrdinal == 2) {
+            box.b1 = maximizeResultMaximize3.mCutLocation;
             box2.r0 = box.r0;
             box2.g0 = box.g0;
             box2.b0 = box.b1;
@@ -278,18 +278,18 @@ public final class WuQuantizer implements Quantizer {
     private MaximizeResult maximize(Box box, Direction direction, int i, int i2, int i3, int i4, int i5, int i6) {
         WuQuantizer wuQuantizer = this;
         Box box2 = box;
-        int bottom = bottom(box2, direction, wuQuantizer.mMomentsR);
-        int bottom2 = bottom(box2, direction, wuQuantizer.mMomentsG);
-        int bottom3 = bottom(box2, direction, wuQuantizer.mMomentsB);
-        int bottom4 = bottom(box2, direction, wuQuantizer.mWeights);
+        int iBottom = bottom(box2, direction, wuQuantizer.mMomentsR);
+        int iBottom2 = bottom(box2, direction, wuQuantizer.mMomentsG);
+        int iBottom3 = bottom(box2, direction, wuQuantizer.mMomentsB);
+        int iBottom4 = bottom(box2, direction, wuQuantizer.mWeights);
         int i7 = -1;
         double d = 0.0d;
         int i8 = i;
         while (i8 < i2) {
-            int pVar = top(box2, direction, i8, wuQuantizer.mMomentsR) + bottom;
-            int pVar2 = top(box2, direction, i8, wuQuantizer.mMomentsG) + bottom2;
-            int pVar3 = top(box2, direction, i8, wuQuantizer.mMomentsB) + bottom3;
-            int pVar4 = top(box2, direction, i8, wuQuantizer.mWeights) + bottom4;
+            int pVar = top(box2, direction, i8, wuQuantizer.mMomentsR) + iBottom;
+            int pVar2 = top(box2, direction, i8, wuQuantizer.mMomentsG) + iBottom2;
+            int pVar3 = top(box2, direction, i8, wuQuantizer.mMomentsB) + iBottom3;
+            int pVar4 = top(box2, direction, i8, wuQuantizer.mWeights) + iBottom4;
             if (pVar4 != 0) {
                 double d2 = (((pVar * pVar) + (pVar2 * pVar2)) + (pVar3 * pVar3)) / pVar4;
                 int i9 = i3 - pVar;
@@ -318,14 +318,14 @@ public final class WuQuantizer implements Quantizer {
     private static int bottom(Box box, Direction direction, int[] iArr) {
         int i;
         int i2;
-        int ordinal = direction.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = direction.ordinal();
+        if (iOrdinal == 0) {
             i = (-iArr[getIndex(box.r0, box.g1, box.b1)]) + iArr[getIndex(box.r0, box.g1, box.b0)] + iArr[getIndex(box.r0, box.g0, box.b1)];
             i2 = iArr[getIndex(box.r0, box.g0, box.b0)];
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             i = (-iArr[getIndex(box.r1, box.g0, box.b1)]) + iArr[getIndex(box.r1, box.g0, box.b0)] + iArr[getIndex(box.r0, box.g0, box.b1)];
             i2 = iArr[getIndex(box.r0, box.g0, box.b0)];
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             i = (-iArr[getIndex(box.r1, box.g1, box.b0)]) + iArr[getIndex(box.r1, box.g0, box.b0)] + iArr[getIndex(box.r0, box.g1, box.b0)];
             i2 = iArr[getIndex(box.r0, box.g0, box.b0)];
         } else {
@@ -337,14 +337,14 @@ public final class WuQuantizer implements Quantizer {
     private static int top(Box box, Direction direction, int i, int[] iArr) {
         int i2;
         int i3;
-        int ordinal = direction.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = direction.ordinal();
+        if (iOrdinal == 0) {
             i2 = (iArr[getIndex(i, box.g1, box.b1)] - iArr[getIndex(i, box.g1, box.b0)]) - iArr[getIndex(i, box.g0, box.b1)];
             i3 = iArr[getIndex(i, box.g0, box.b0)];
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             i2 = (iArr[getIndex(box.r1, i, box.b1)] - iArr[getIndex(box.r1, i, box.b0)]) - iArr[getIndex(box.r0, i, box.b1)];
             i3 = iArr[getIndex(box.r0, i, box.b0)];
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             i2 = (iArr[getIndex(box.r1, box.g1, i)] - iArr[getIndex(box.r1, box.g0, i)]) - iArr[getIndex(box.r0, box.g1, i)];
             i3 = iArr[getIndex(box.r0, box.g0, i)];
         } else {

@@ -52,7 +52,6 @@ import java.io.PrintWriter;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeTriggers implements DozeMachine.Part {
     public static boolean sWakeDisplaySensorState = true;
@@ -84,7 +83,6 @@ public class DozeTriggers implements DozeMachine.Part {
     public boolean mWantSensors;
     public boolean mWantTouchScreenSensors;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.DozeTriggers$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -139,7 +137,6 @@ public class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DockEventListener {
         public /* synthetic */ DockEventListener(DozeTriggers dozeTriggers, int i) {
             this(dozeTriggers);
@@ -149,7 +146,6 @@ public class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DozingUpdateUiEvent implements UiEventLogger.UiEventEnum {
         DOZING_UPDATE_NOTIFICATION(433),
         DOZING_UPDATE_SIGMOTION(434),
@@ -204,7 +200,6 @@ public class DozeTriggers implements DozeMachine.Part {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TriggerReceiver extends BroadcastReceiver {
         public boolean mRegistered;
 
@@ -406,7 +401,7 @@ public class DozeTriggers implements DozeMachine.Part {
             proximityCheckThenCall(new Consumer() { // from class: com.android.systemui.doze.DozeTriggers$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DozeTriggers dozeTriggers = DozeTriggers.this;
+                    DozeTriggers dozeTriggers = this.f$0;
                     int i2 = i;
                     boolean z10 = z;
                     boolean z11 = z2;
@@ -458,13 +453,13 @@ public class DozeTriggers implements DozeMachine.Part {
                             float f5 = f3 - r3[0];
                             float f6 = f4 - r3[1];
                             if (0.0f <= f5 && f5 <= dozeServiceHost.mAmbientIndicationContainer.getWidth() && 0.0f <= f6 && f6 <= dozeServiceHost.mAmbientIndicationContainer.getHeight()) {
-                                long elapsedRealtime = SystemClock.elapsedRealtime();
-                                MotionEvent obtain = MotionEvent.obtain(elapsedRealtime, elapsedRealtime, 0, f3, f4, 0);
-                                dozeServiceHost.mAmbientIndicationContainer.dispatchTouchEvent(obtain);
-                                obtain.recycle();
-                                MotionEvent obtain2 = MotionEvent.obtain(elapsedRealtime, elapsedRealtime, 1, f3, f4, 0);
-                                dozeServiceHost.mAmbientIndicationContainer.dispatchTouchEvent(obtain2);
-                                obtain2.recycle();
+                                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                                MotionEvent motionEventObtain = MotionEvent.obtain(jElapsedRealtime, jElapsedRealtime, 0, f3, f4, 0);
+                                dozeServiceHost.mAmbientIndicationContainer.dispatchTouchEvent(motionEventObtain);
+                                motionEventObtain.recycle();
+                                MotionEvent motionEventObtain2 = MotionEvent.obtain(jElapsedRealtime, jElapsedRealtime, 1, f3, f4, 0);
+                                dozeServiceHost.mAmbientIndicationContainer.dispatchTouchEvent(motionEventObtain2);
+                                motionEventObtain2.recycle();
                             }
                         }
                         ((KeyguardRepositoryImpl) dozeServiceHost.mDozeInteractor.keyguardRepository)._lastDozeTapToWakePosition.updateState(null, new Point((int) f3, (int) f4));
@@ -485,9 +480,9 @@ public class DozeTriggers implements DozeMachine.Part {
         LogLevel logLevel = LogLevel.DEBUG;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(21);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z10;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z10;
+        logBuffer.commit(logMessageObtain);
         (z10 ? dozeLog.mPickupPulseNearVibrationStats : dozeLog.mPickupPulseNotNearVibrationStats).mCount++;
     }
 
@@ -497,17 +492,17 @@ public class DozeTriggers implements DozeMachine.Part {
         LogLevel logLevel = LogLevel.DEBUG;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(15);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         sWakeDisplaySensorState = z;
         if (z) {
             proximityCheckThenCall(new Consumer() { // from class: com.android.systemui.doze.DozeTriggers$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DozeTriggers dozeTriggers = DozeTriggers.this;
+                    DozeTriggers dozeTriggers = this.f$0;
                     DozeMachine.State state2 = state;
                     int i2 = i;
                     Boolean bool = (Boolean) obj;
@@ -530,42 +525,42 @@ public class DozeTriggers implements DozeMachine.Part {
     }
 
     public final void proximityCheckThenCall(final Consumer consumer, boolean z, final int i) {
-        Boolean isNear = this.mDozeSensors.mProximitySensor.isNear();
+        Boolean boolIsNear = this.mDozeSensors.mProximitySensor.isNear();
         if (z) {
             consumer.accept(null);
             return;
         }
-        if (isNear != null) {
-            consumer.accept(isNear);
+        if (boolIsNear != null) {
+            consumer.accept(boolIsNear);
             return;
         }
-        final long uptimeMillis = SystemClock.uptimeMillis();
+        final long jUptimeMillis = SystemClock.uptimeMillis();
         this.mProxCheck.check(500L, new Consumer() { // from class: com.android.systemui.doze.DozeTriggers$$ExternalSyntheticLambda8
             /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                DozeTriggers dozeTriggers = DozeTriggers.this;
-                long j = uptimeMillis;
+                DozeTriggers dozeTriggers = this.f$0;
+                long j = jUptimeMillis;
                 int i2 = i;
                 Consumer consumer2 = consumer;
                 Boolean bool = (Boolean) obj;
                 boolean z2 = DozeTriggers.sWakeDisplaySensorState;
                 dozeTriggers.getClass();
-                long uptimeMillis2 = SystemClock.uptimeMillis();
+                long jUptimeMillis2 = SystemClock.uptimeMillis();
                 boolean z3 = (bool == null || !bool.booleanValue()) ? 0 : 1;
-                long j2 = uptimeMillis2 - j;
+                long j2 = jUptimeMillis2 - j;
                 DozeLog dozeLog = dozeTriggers.mDozeLog;
                 DozeLogger dozeLogger = dozeLog.mLogger;
                 dozeLogger.getClass();
                 LogLevel logLevel = LogLevel.DEBUG;
                 DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(26);
                 LogBuffer logBuffer = dozeLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.bool1 = z3;
                 logMessageImpl.long1 = j2;
                 logMessageImpl.int1 = i2;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 dozeLog.mProxStats[i2][!z3].mCount++;
                 consumer2.accept(bool);
                 dozeTriggers.mWakeLock.release("DozeTriggers");
@@ -609,7 +604,7 @@ public class DozeTriggers implements DozeMachine.Part {
             Consumer consumer = new Consumer() { // from class: com.android.systemui.doze.DozeTriggers$$ExternalSyntheticLambda4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DozeTriggers dozeTriggers = DozeTriggers.this;
+                    DozeTriggers dozeTriggers = this.f$0;
                     DozeServiceHost$$ExternalSyntheticLambda3 dozeServiceHost$$ExternalSyntheticLambda32 = dozeServiceHost$$ExternalSyntheticLambda3;
                     DozeMachine.State state3 = state;
                     boolean z4 = z;

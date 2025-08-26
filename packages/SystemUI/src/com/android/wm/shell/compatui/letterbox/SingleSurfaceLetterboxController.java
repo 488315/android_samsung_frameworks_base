@@ -11,14 +11,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SingleSurfaceLetterboxController implements LetterboxController {
     public static final String TAG;
     public final LetterboxSurfaceBuilder letterboxBuilder;
     public final Map letterboxMap = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,7 @@ public final class SingleSurfaceLetterboxController implements LetterboxControll
             public final Object invoke(Object obj, Object obj2) {
                 SurfaceControl.Transaction transaction2 = transaction;
                 SurfaceControl surfaceControl2 = surfaceControl;
-                ((Map) obj2).put((LetterboxKey) obj, LetterboxSurfaceBuilder.createSurface$default(SingleSurfaceLetterboxController.this.letterboxBuilder, transaction2, surfaceControl2, "ShellLetterboxSurface-" + letterboxKey, "LetterboxController-createLetterboxSurface"));
+                ((Map) obj2).put((LetterboxKey) obj, LetterboxSurfaceBuilder.createSurface$default(this.f$0.letterboxBuilder, transaction2, surfaceControl2, "ShellLetterboxSurface-" + letterboxKey, "LetterboxController-createLetterboxSurface"));
                 return Unit.INSTANCE;
             }
         }, 2);
@@ -55,7 +53,7 @@ public final class SingleSurfaceLetterboxController implements LetterboxControll
         LetterboxUtils$Maps.runOnItem$default(LetterboxUtils$Maps.INSTANCE, this.letterboxMap, letterboxKey, new Function1() { // from class: com.android.wm.shell.compatui.letterbox.SingleSurfaceLetterboxController$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 String str = SingleSurfaceLetterboxController.TAG;
                 transaction.remove((SurfaceControl) obj);
                 return Unit.INSTANCE;
@@ -74,7 +72,7 @@ public final class SingleSurfaceLetterboxController implements LetterboxControll
         LetterboxUtils$Maps.runOnItem$default(LetterboxUtils$Maps.INSTANCE, this.letterboxMap, letterboxKey, new Function1() { // from class: com.android.wm.shell.compatui.letterbox.SingleSurfaceLetterboxController$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SurfaceControl.Transaction transaction2 = transaction;
                 String str = SingleSurfaceLetterboxController.TAG;
                 LetterboxUtils$Transactions.INSTANCE.getClass();
@@ -89,7 +87,7 @@ public final class SingleSurfaceLetterboxController implements LetterboxControll
         LetterboxUtils$Maps.runOnItem$default(LetterboxUtils$Maps.INSTANCE, this.letterboxMap, letterboxKey, new Function1() { // from class: com.android.wm.shell.compatui.letterbox.SingleSurfaceLetterboxController$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 String str = SingleSurfaceLetterboxController.TAG;
                 transaction.setVisibility((SurfaceControl) obj, z);
                 return Unit.INSTANCE;

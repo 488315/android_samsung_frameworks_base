@@ -87,21 +87,21 @@ public class SemListSortAnimator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void startFadeInTranslateAnim() {
-        int i;
+        int height;
         Animator.AnimatorListener animatorListener;
         int childCount = this.mListView.getChildCount();
         if (childCount > this.mListView.getHeaderViewsCount()) {
             ListView listView = this.mListView;
-            i = listView.getChildAt(listView.getHeaderViewsCount()).getHeight();
+            height = listView.getChildAt(listView.getHeaderViewsCount()).getHeight();
         } else {
-            i = 0;
+            height = 0;
         }
-        for (int i2 = 0; i2 < childCount; i2++) {
-            View childAt = this.mListView.getChildAt(i2);
-            childAt.setTranslationY((-i) / 2.0f);
+        for (int i = 0; i < childCount; i++) {
+            View childAt = this.mListView.getChildAt(i);
+            childAt.setTranslationY((-height) / 2.0f);
             childAt.setAlpha(0.0f);
-            childAt.animate().alpha(1.0f).translationY(0.0f).setListener(null).setDuration(FADE_IN_TRANSLATE_ANIMATION_DURATION).setStartDelay(DELAY_BETWEEN_ANIMATIONS * i2).setInterpolator(DECELERATE_INTERPOLATOR).withLayer();
-            if (i2 == childCount - 1) {
+            childAt.animate().alpha(1.0f).translationY(0.0f).setListener(null).setDuration(FADE_IN_TRANSLATE_ANIMATION_DURATION).setStartDelay(DELAY_BETWEEN_ANIMATIONS * i).setInterpolator(DECELERATE_INTERPOLATOR).withLayer();
+            if (i == childCount - 1) {
                 childAt.animate().setListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemListSortAnimator.3
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {

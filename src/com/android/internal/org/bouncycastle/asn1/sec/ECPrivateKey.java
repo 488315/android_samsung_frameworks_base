@@ -39,10 +39,10 @@ public class ECPrivateKey extends ASN1Object {
     }
 
     public ECPrivateKey(int i, BigInteger bigInteger) {
-        byte[] asUnsignedByteArray = BigIntegers.asUnsignedByteArray((i + 7) / 8, bigInteger);
+        byte[] bArrAsUnsignedByteArray = BigIntegers.asUnsignedByteArray((i + 7) / 8, bigInteger);
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(2);
         aSN1EncodableVector.add(new ASN1Integer(1L));
-        aSN1EncodableVector.add(new DEROctetString(asUnsignedByteArray));
+        aSN1EncodableVector.add(new DEROctetString(bArrAsUnsignedByteArray));
         this.seq = new DERSequence(aSN1EncodableVector);
     }
 
@@ -59,10 +59,10 @@ public class ECPrivateKey extends ASN1Object {
     }
 
     public ECPrivateKey(int i, BigInteger bigInteger, ASN1BitString aSN1BitString, ASN1Encodable aSN1Encodable) {
-        byte[] asUnsignedByteArray = BigIntegers.asUnsignedByteArray((i + 7) / 8, bigInteger);
+        byte[] bArrAsUnsignedByteArray = BigIntegers.asUnsignedByteArray((i + 7) / 8, bigInteger);
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(4);
         aSN1EncodableVector.add(new ASN1Integer(1L));
-        aSN1EncodableVector.add(new DEROctetString(asUnsignedByteArray));
+        aSN1EncodableVector.add(new DEROctetString(bArrAsUnsignedByteArray));
         if (aSN1Encodable != null) {
             aSN1EncodableVector.add(new DERTaggedObject(true, 0, aSN1Encodable));
         }

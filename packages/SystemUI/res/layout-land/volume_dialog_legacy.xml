@@ -19,5 +19,5 @@
             <com.android.systemui.volume.CaptionsToggleImageButton android:layout_gravity="center" android:id="@id/odi_captions_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_volume_odi_captions_disabled" android:tint="?android:colorAccent" android:soundEffectsEnabled="false" style="@style/VolumeButtons" />
         </FrameLayout>
     </LinearLayout>
-    <ViewStub android:layout_gravity="bottom|center|right" android:id="@id/odi_captions_tooltip_stub" android:layout="@layout/volume_tool_tip_view" android:inflatedId="@id/odi_captions_tooltip_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/volume_tool_tip_right_margin" />
+    <ViewStub android:layout_gravity="right|bottom" android:id="@id/odi_captions_tooltip_stub" android:layout="@layout/volume_tool_tip_view" android:inflatedId="@id/odi_captions_tooltip_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/volume_tool_tip_right_margin" />
 </FrameLayout>

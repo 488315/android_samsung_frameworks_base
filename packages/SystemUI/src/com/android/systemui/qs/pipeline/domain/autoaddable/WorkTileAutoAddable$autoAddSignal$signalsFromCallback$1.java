@@ -21,7 +21,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $userId;
@@ -56,12 +55,12 @@ final class WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1 extends Susp
                                 i2 = workTileRestoreProcessor.lastRestorePosition.get(i, -1);
                                 workTileRestoreProcessor.lastRestorePosition.delete(i);
                             }
-                            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new AutoAddSignal.Add(tileSpec, i2));
+                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new AutoAddSignal.Add(tileSpec, i2));
                             return;
                         }
                     }
                 }
-                ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(new AutoAddSignal.Remove(workTileAutoAddable.spec));
+                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new AutoAddSignal.Remove(workTileAutoAddable.spec));
                 return;
             }
         }
@@ -93,7 +92,7 @@ final class WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1 extends Susp
             final ?? r1 = new UserTracker.Callback() { // from class: com.android.systemui.qs.pipeline.domain.autoaddable.WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1$callback$1
                 @Override // com.android.systemui.settings.UserTracker.Callback
                 public final void onProfilesChanged(List list) {
-                    WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1.invokeSuspend$maybeSend(ProducerScope.this, workTileAutoAddable, i2, list);
+                    WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1.invokeSuspend$maybeSend(producerScope, workTileAutoAddable, i2, list);
                 }
             };
             ((UserTrackerImpl) this.this$0.userTracker).addCallback(r1, new Executor() { // from class: com.android.systemui.qs.pipeline.domain.autoaddable.WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1.1
@@ -108,7 +107,7 @@ final class WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1 extends Susp
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.pipeline.domain.autoaddable.WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((UserTrackerImpl) WorkTileAutoAddable.this.userTracker).removeCallback(r1);
+                    ((UserTrackerImpl) workTileAutoAddable3.userTracker).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

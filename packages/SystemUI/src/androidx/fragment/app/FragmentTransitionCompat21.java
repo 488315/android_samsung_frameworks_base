@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentTransitionCompat21 extends FragmentTransitionImpl {
     public static boolean hasSimpleTarget(Transition transition) {
@@ -79,22 +78,22 @@ public class FragmentTransitionCompat21 extends FragmentTransitionImpl {
 
     @Override // androidx.fragment.app.FragmentTransitionImpl
     public final Object mergeTransitionsInSequence(Object obj, Object obj2, Object obj3) {
-        Transition transition = (Transition) obj;
-        Transition transition2 = (Transition) obj2;
-        Transition transition3 = (Transition) obj3;
-        if (transition != null && transition2 != null) {
-            transition = new TransitionSet().addTransition(transition).addTransition(transition2).setOrdering(1);
-        } else if (transition == null) {
-            transition = transition2 != null ? transition2 : null;
+        Transition ordering = (Transition) obj;
+        Transition transition = (Transition) obj2;
+        Transition transition2 = (Transition) obj3;
+        if (ordering != null && transition != null) {
+            ordering = new TransitionSet().addTransition(ordering).addTransition(transition).setOrdering(1);
+        } else if (ordering == null) {
+            ordering = transition != null ? transition : null;
         }
-        if (transition3 == null) {
-            return transition;
+        if (transition2 == null) {
+            return ordering;
         }
         TransitionSet transitionSet = new TransitionSet();
-        if (transition != null) {
-            transitionSet.addTransition(transition);
+        if (ordering != null) {
+            transitionSet.addTransition(ordering);
         }
-        transitionSet.addTransition(transition3);
+        transitionSet.addTransition(transition2);
         return transitionSet;
     }
 

@@ -31,7 +31,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BoxKt {
     public static final MutableScatterMap Cache1 = cacheFor(true);
@@ -46,15 +45,13 @@ public abstract class BoxKt {
             @Override // androidx.compose.ui.layout.MeasurePolicy
             /* renamed from: measure-3p2s80s */
             public final MeasureResult mo3measure3p2s80s(MeasureScope measureScope, List list, long j) {
-                MeasureResult layout$1;
-                layout$1 = measureScope.layout$1(Constraints.m823getMinWidthimpl(j), Constraints.m822getMinHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.BoxKt$EmptyBoxMeasurePolicy$1.1
+                return measureScope.layout$1(Constraints.m825getMinWidthimpl(j), Constraints.m824getMinHeightimpl(j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.BoxKt$EmptyBoxMeasurePolicy$1.1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+                    public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                         return Unit.INSTANCE;
                     }
                 });
-                return layout$1;
             }
         };
     }
@@ -74,8 +71,8 @@ public abstract class BoxKt {
             }
             MeasurePolicy measurePolicy = EmptyBoxMeasurePolicy;
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -88,9 +85,9 @@ public abstract class BoxKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, measurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, measurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
@@ -102,9 +99,9 @@ public abstract class BoxKt {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.layout.BoxKt$Box$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.layout.BoxKt.Box.2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -113,7 +110,7 @@ public abstract class BoxKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    BoxKt.Box(Modifier.this, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    BoxKt.Box(modifier, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };
@@ -126,7 +123,7 @@ public abstract class BoxKt {
         BoxChildDataNode boxChildDataNode = parentData instanceof BoxChildDataNode ? (BoxChildDataNode) parentData : null;
         Alignment alignment3 = (boxChildDataNode == null || (alignment2 = boxChildDataNode.alignment) == null) ? alignment : alignment2;
         IntSize.Companion companion = IntSize.Companion;
-        Placeable.PlacementScope.m626place70tqf50$default(placementScope, placeable, alignment3.mo352alignKFBX0sM((placeable.width << 32) | (placeable.height & 4294967295L), (i << 32) | (i2 & 4294967295L), layoutDirection));
+        Placeable.PlacementScope.m628place70tqf50$default(placementScope, placeable, alignment3.mo353alignKFBX0sM((placeable.width << 32) | (placeable.height & 4294967295L), (i << 32) | (i2 & 4294967295L), layoutDirection));
     }
 
     public static final MutableScatterMap cacheFor(boolean z) {

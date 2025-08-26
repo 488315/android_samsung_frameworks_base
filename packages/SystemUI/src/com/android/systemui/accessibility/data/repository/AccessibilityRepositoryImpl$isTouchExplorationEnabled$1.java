@@ -8,13 +8,11 @@ import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,20 +49,20 @@ final class AccessibilityRepositoryImpl$isTouchExplorationEnabled$1 extends Susp
             AccessibilityManager.TouchExplorationStateChangeListener touchExplorationStateChangeListener = new AccessibilityManager.TouchExplorationStateChangeListener() { // from class: com.android.systemui.accessibility.data.repository.AccessibilityRepositoryKt$sam$android_view_accessibility_AccessibilityManager_TouchExplorationStateChangeListener$0
                 @Override // android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener
                 public final /* synthetic */ void onTouchExplorationStateChanged(boolean z) {
-                    Function1.this.mo779invoke(Boolean.valueOf(z));
+                    accessibilityRepositoryImpl$isTouchExplorationEnabled$1$listener$1.mo781invoke(Boolean.valueOf(z));
                 }
             };
             this.this$0.manager.addTouchExplorationStateChangeListener(touchExplorationStateChangeListener);
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(this.this$0.manager.isTouchExplorationEnabled()));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.this$0.manager.isTouchExplorationEnabled()));
             FlowTracing flowTracing = FlowTracing.INSTANCE;
             AccessibilityRepositoryImpl$isEnabled$1$$ExternalSyntheticLambda0 accessibilityRepositoryImpl$isEnabled$1$$ExternalSyntheticLambda0 = new AccessibilityRepositoryImpl$isEnabled$1$$ExternalSyntheticLambda0(this.this$0, touchExplorationStateChangeListener, 1);
             this.label = 1;
             flowTracing.getClass();
-            Object awaitClose = ProduceKt.awaitClose(producerScope, new FlowTracing$$ExternalSyntheticLambda1("AccessibilityRepository", accessibilityRepositoryImpl$isEnabled$1$$ExternalSyntheticLambda0), this);
-            if (awaitClose != obj2) {
-                awaitClose = Unit.INSTANCE;
+            Object objAwaitClose = ProduceKt.awaitClose(producerScope, new FlowTracing$$ExternalSyntheticLambda1("AccessibilityRepository", accessibilityRepositoryImpl$isEnabled$1$$ExternalSyntheticLambda0), this);
+            if (objAwaitClose != obj2) {
+                objAwaitClose = Unit.INSTANCE;
             }
-            if (awaitClose == obj2) {
+            if (objAwaitClose == obj2) {
                 return obj2;
             }
         } else {

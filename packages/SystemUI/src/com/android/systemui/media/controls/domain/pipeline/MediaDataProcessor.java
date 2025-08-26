@@ -6,6 +6,7 @@ import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.media.session.MediaSession;
 import android.net.Uri;
@@ -57,7 +58,6 @@ import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDataProcessor implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -82,7 +82,6 @@ public final class MediaDataProcessor implements CoreStartable {
     public final boolean useMediaResumption;
     public final boolean useQsMediaPlayer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -96,7 +95,7 @@ public final class MediaDataProcessor implements CoreStartable {
         new Companion(null);
     }
 
-    public MediaDataProcessor(Context context, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, Executor executor, Executor executor2, DelayableExecutor delayableExecutor, CoroutineDispatcher coroutineDispatcher2, MediaControllerFactory mediaControllerFactory, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, boolean z, boolean z2, SystemClock systemClock, MediaFlags mediaFlags, MediaUiEventLogger mediaUiEventLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, MediaDataRepository mediaDataRepository, Lazy lazy, MediaLogger mediaLogger) {
+    public MediaDataProcessor(Context context, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, Executor executor, Executor executor2, DelayableExecutor delayableExecutor, CoroutineDispatcher coroutineDispatcher2, MediaControllerFactory mediaControllerFactory, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, boolean z, boolean z2, SystemClock systemClock, MediaFlags mediaFlags, MediaUiEventLogger mediaUiEventLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, MediaDataRepository mediaDataRepository, Lazy lazy, MediaLogger mediaLogger) throws Resources.NotFoundException {
         this.context = context;
         this.applicationScope = coroutineScope;
         this.backgroundDispatcher = coroutineDispatcher;
@@ -126,10 +125,10 @@ public final class MediaDataProcessor implements CoreStartable {
                 String encodedSchemeSpecificPart;
                 String action = intent.getAction();
                 if (action != null) {
-                    int hashCode = action.hashCode();
-                    if (hashCode != -1001645458) {
-                        if (hashCode != -757780528) {
-                            if (hashCode != 525384130 || !action.equals("android.intent.action.PACKAGE_REMOVED")) {
+                    int iHashCode = action.hashCode();
+                    if (iHashCode != -1001645458) {
+                        if (iHashCode != -757780528) {
+                            if (iHashCode != 525384130 || !action.equals("android.intent.action.PACKAGE_REMOVED")) {
                                 return;
                             }
                         } else if (!action.equals("android.intent.action.PACKAGE_RESTARTED")) {
@@ -139,11 +138,11 @@ public final class MediaDataProcessor implements CoreStartable {
                         if (data == null || (encodedSchemeSpecificPart = data.getEncodedSchemeSpecificPart()) == null) {
                             return;
                         }
-                        MediaDataProcessor.access$removeAllForPackage(MediaDataProcessor.this, encodedSchemeSpecificPart);
+                        MediaDataProcessor.access$removeAllForPackage(this.this$0, encodedSchemeSpecificPart);
                         return;
                     }
                     if (action.equals("android.intent.action.PACKAGES_SUSPENDED") && (stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_package_list")) != null) {
-                        MediaDataProcessor mediaDataProcessor = MediaDataProcessor.this;
+                        MediaDataProcessor mediaDataProcessor = this.this$0;
                         for (String str : stringArrayExtra) {
                             str.getClass();
                             MediaDataProcessor.access$removeAllForPackage(mediaDataProcessor, str);
@@ -181,10 +180,10 @@ public final class MediaDataProcessor implements CoreStartable {
         if ((i & 4) != 0) {
             z = false;
         }
-        MediaData removeMediaEntry = mediaDataProcessor.mediaDataRepository.removeMediaEntry(str);
-        if (removeMediaEntry != null) {
-            InstanceId instanceId = removeMediaEntry.instanceId;
-            mediaDataProcessor.logger.logMediaRemoved(removeMediaEntry.appUid, removeMediaEntry.packageName, instanceId);
+        MediaData mediaDataRemoveMediaEntry = mediaDataProcessor.mediaDataRepository.removeMediaEntry(str);
+        if (mediaDataRemoveMediaEntry != null) {
+            InstanceId instanceId = mediaDataRemoveMediaEntry.instanceId;
+            mediaDataProcessor.logger.logMediaRemoved(mediaDataRemoveMediaEntry.appUid, mediaDataRemoveMediaEntry.packageName, instanceId);
         }
         Iterator it = mediaDataProcessor.internalListeners.iterator();
         while (it.hasNext()) {
@@ -223,7 +222,7 @@ public final class MediaDataProcessor implements CoreStartable {
         boolean z;
         if (this.useQsMediaPlayer) {
             MediaDataManager.Companion.getClass();
-            if (statusBarNotification.getNotification().isMediaNotification()) {
+            if (MediaDataManager.Companion.isMediaNotification(statusBarNotification)) {
                 Assert.isMainThread();
                 String packageName = statusBarNotification.getPackageName();
                 MediaDataRepository mediaDataRepository = this.mediaDataRepository;
@@ -237,9 +236,9 @@ public final class MediaDataProcessor implements CoreStartable {
                     if (str2.equals(str)) {
                         z2 = false;
                     } else {
-                        MediaData removeMediaEntry = mediaDataRepository.removeMediaEntry(str2);
-                        removeMediaEntry.getClass();
-                        mediaDataRepository.addMediaEntry(removeMediaEntry, str);
+                        MediaData mediaDataRemoveMediaEntry = mediaDataRepository.removeMediaEntry(str2);
+                        mediaDataRemoveMediaEntry.getClass();
+                        mediaDataRepository.addMediaEntry(mediaDataRemoveMediaEntry, str);
                     }
                     z = z2;
                 }
@@ -254,44 +253,44 @@ public final class MediaDataProcessor implements CoreStartable {
         MediaDataProcessor mediaDataProcessor;
         Assert.isMainThread();
         MediaDataRepository mediaDataRepository = this.mediaDataRepository;
-        MediaData removeMediaEntry = mediaDataRepository.removeMediaEntry(str);
-        if (removeMediaEntry == null) {
+        MediaData mediaDataRemoveMediaEntry = mediaDataRepository.removeMediaEntry(str);
+        if (mediaDataRemoveMediaEntry == null) {
             return;
         }
-        boolean isUserInLockdown = this.keyguardUpdateMonitor.isUserInLockdown(removeMediaEntry.userId);
+        boolean zIsUserInLockdown = this.keyguardUpdateMonitor.isUserInLockdown(mediaDataRemoveMediaEntry.userId);
         MediaUiEventLogger mediaUiEventLogger = this.logger;
-        int i = removeMediaEntry.appUid;
-        String str2 = removeMediaEntry.packageName;
-        if (isUserInLockdown) {
-            mediaUiEventLogger.logMediaRemoved(i, str2, removeMediaEntry.instanceId);
+        int i = mediaDataRemoveMediaEntry.appUid;
+        String str2 = mediaDataRemoveMediaEntry.packageName;
+        if (zIsUserInLockdown) {
+            mediaUiEventLogger.logMediaRemoved(i, str2, mediaDataRemoveMediaEntry.instanceId);
             return;
         }
-        boolean z = removeMediaEntry.playbackLocation == 0;
-        if (!this.useMediaResumption || removeMediaEntry.resumeAction == null || !z) {
+        boolean z = mediaDataRemoveMediaEntry.playbackLocation == 0;
+        if (!this.useMediaResumption || mediaDataRemoveMediaEntry.resumeAction == null || !z) {
             MediaFlags mediaFlags = this.mediaFlags;
             mediaFlags.getClass();
             Flags.INSTANCE.getClass();
             mediaFlags.featureFlags.getClass();
             notifyMediaDataRemoved$default(this, str);
-            mediaUiEventLogger.logMediaRemoved(i, str2, removeMediaEntry.instanceId);
+            mediaUiEventLogger.logMediaRemoved(i, str2, mediaDataRemoveMediaEntry.instanceId);
             return;
         }
         KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("Converting ", str, " to resume", "MediaDataProcessor");
-        CharSequence charSequence = removeMediaEntry.song;
+        CharSequence charSequence = mediaDataRemoveMediaEntry.song;
         if (charSequence == null || StringsKt__StringsKt.isBlank(charSequence)) {
             Log.e("MediaDataProcessor", "Description incomplete");
             notifyMediaDataRemoved$default(this, str);
-            mediaUiEventLogger.logMediaRemoved(i, str2, removeMediaEntry.instanceId);
+            mediaUiEventLogger.logMediaRemoved(i, str2, mediaDataRemoveMediaEntry.instanceId);
             return;
         }
-        Runnable runnable = removeMediaEntry.resumeAction;
+        Runnable runnable = mediaDataRemoveMediaEntry.resumeAction;
         MediaAction mediaAction = runnable != null ? new MediaAction(Icon.createWithResource(this.context, com.android.systemui.R.drawable.ic_media_play).setTint(this.themeText).loadDrawable(this.context), runnable, this.context.getString(com.android.systemui.R.string.controls_media_button_play), this.context.getDrawable(com.android.systemui.R.drawable.ic_media_play_container), null, 16, null) : null;
         if (mediaAction == null || Collections.singletonList(mediaAction) == null) {
             EmptyList emptyList = EmptyList.INSTANCE;
         }
         Intent launchIntentForPackage = this.context.getPackageManager().getLaunchIntentForPackage(str2);
-        MediaData copy$default = MediaData.copy$default(removeMediaEntry, EmptyList.INSTANCE, Collections.singletonList(0), new MediaButton(mediaAction, null, null, null, null, false, false, 126, null), null, launchIntentForPackage != null ? PendingIntent.getActivity(this.context, 0, launchIntentForPackage, 67108864) : null, null, false, null, false, Boolean.FALSE, removeMediaEntry.active ? this.systemClock.elapsedRealtime() : removeMediaEntry.lastActive, 0L, null, 0, 260940927);
-        boolean z2 = mediaDataRepository.addMediaEntry(copy$default, str2) == null;
+        MediaData mediaDataCopy$default = MediaData.copy$default(mediaDataRemoveMediaEntry, EmptyList.INSTANCE, Collections.singletonList(0), new MediaButton(mediaAction, null, null, null, null, false, false, 126, null), null, launchIntentForPackage != null ? PendingIntent.getActivity(this.context, 0, launchIntentForPackage, 67108864) : null, null, false, null, false, Boolean.FALSE, mediaDataRemoveMediaEntry.active ? this.systemClock.elapsedRealtime() : mediaDataRemoveMediaEntry.lastActive, 0L, null, 0, 260940927);
+        boolean z2 = mediaDataRepository.addMediaEntry(mediaDataCopy$default, str2) == null;
         StringBuilder sb = new StringBuilder("migrating? ");
         sb.append(z2);
         sb.append(" from ");
@@ -300,13 +299,13 @@ public final class MediaDataProcessor implements CoreStartable {
         ExifInterface$$ExternalSyntheticOutline0.m(sb, str2, "MediaDataProcessor");
         if (z2) {
             mediaDataProcessor = this;
-            mediaDataProcessor.notifyMediaDataLoaded(str2, str, copy$default);
+            mediaDataProcessor.notifyMediaDataLoaded(str2, str, mediaDataCopy$default);
         } else {
             mediaDataProcessor = this;
             notifyMediaDataRemoved$default(this, str);
-            mediaDataProcessor.notifyMediaDataLoaded(str2, str2, copy$default);
+            mediaDataProcessor.notifyMediaDataLoaded(str2, str2, mediaDataCopy$default);
         }
-        mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.ACTIVE_TO_RESUME, copy$default.appUid, str2, copy$default.instanceId);
+        mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.ACTIVE_TO_RESUME, mediaDataCopy$default.appUid, str2, mediaDataCopy$default.instanceId);
         Map map = (Map) mediaDataRepository.mediaEntries.$$delegate_0.getValue();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (Map.Entry entry : map.entrySet()) {
@@ -334,7 +333,7 @@ public final class MediaDataProcessor implements CoreStartable {
 
     public final boolean dismissMediaData(final String str, long j, final boolean z) {
         boolean z2 = ((Map) this.mediaDataRepository.mediaEntries.$$delegate_0.getValue()).get(str) != null;
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataProcessor$dismissMediaData$1
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataProcessor.dismissMediaData.1
             @Override // java.lang.Runnable
             public final void run() {
                 MediaSession.Token token;
@@ -348,7 +347,7 @@ public final class MediaDataProcessor implements CoreStartable {
                 }
             }
         });
-        this.foregroundExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataProcessor$dismissMediaData$2
+        this.foregroundExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaDataProcessor.dismissMediaData.2
             @Override // java.lang.Runnable
             public final void run() {
                 MediaDataProcessor.removeEntry$default(MediaDataProcessor.this, str, z, 2);

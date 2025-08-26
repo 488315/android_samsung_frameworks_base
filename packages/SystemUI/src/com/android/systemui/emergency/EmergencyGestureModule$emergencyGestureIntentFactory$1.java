@@ -13,7 +13,6 @@ import com.android.systemui.emergency.EmergencyGestureModule;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EmergencyGestureModule$emergencyGestureIntentFactory$1 implements EmergencyGestureModule.EmergencyGestureIntentFactory {
     public final /* synthetic */ PackageManager $packageManager;
@@ -24,21 +23,21 @@ public final class EmergencyGestureModule$emergencyGestureIntentFactory$1 implem
         this.$resources = resources;
     }
 
-    public final Intent invoke() {
+    public final Intent invoke() throws Resources.NotFoundException {
         ResolveInfo resolveInfo;
         EmergencyGestureModule emergencyGestureModule = EmergencyGestureModule.INSTANCE;
         PackageManager packageManager = this.$packageManager;
         Resources resources = this.$resources;
         emergencyGestureModule.getClass();
         Intent intent = new Intent("com.android.systemui.action.LAUNCH_EMERGENCY");
-        List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(intent, 1048576);
-        if (!queryIntentActivities.isEmpty()) {
+        List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(intent, 1048576);
+        if (!listQueryIntentActivities.isEmpty()) {
             String string = resources.getString(R.string.config_preferredEmergencySosPackage);
             if (!TextUtils.isEmpty(string)) {
-                Iterator<ResolveInfo> it = queryIntentActivities.iterator();
+                Iterator<ResolveInfo> it = listQueryIntentActivities.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        resolveInfo = queryIntentActivities.get(0);
+                        resolveInfo = listQueryIntentActivities.get(0);
                         break;
                     }
                     ResolveInfo next = it.next();
@@ -48,7 +47,7 @@ public final class EmergencyGestureModule$emergencyGestureIntentFactory$1 implem
                     }
                 }
             } else {
-                resolveInfo = queryIntentActivities.get(0);
+                resolveInfo = listQueryIntentActivities.get(0);
             }
         } else {
             resolveInfo = null;

@@ -56,22 +56,22 @@ public final class NanoAppBinary implements Parcelable {
     }
 
     private void parseBinaryHeader() {
-        ByteBuffer order = ByteBuffer.wrap(this.mNanoAppBinary).order(HEADER_ORDER);
+        ByteBuffer byteBufferOrder = ByteBuffer.wrap(this.mNanoAppBinary).order(HEADER_ORDER);
         this.mHasValidHeader = false;
         try {
-            int i = order.getInt();
+            int i = byteBufferOrder.getInt();
             this.mHeaderVersion = i;
             if (i != 1) {
                 Log.e(TAG, "Unexpected header version " + this.mHeaderVersion + " while parsing header (expected 1)");
                 return;
             }
-            this.mMagic = order.getInt();
-            this.mNanoAppId = order.getLong();
-            this.mNanoAppVersion = order.getInt();
-            this.mFlags = order.getInt();
-            this.mHwHubType = order.getLong();
-            this.mTargetChreApiMajorVersion = order.get();
-            this.mTargetChreApiMinorVersion = order.get();
+            this.mMagic = byteBufferOrder.getInt();
+            this.mNanoAppId = byteBufferOrder.getLong();
+            this.mNanoAppVersion = byteBufferOrder.getInt();
+            this.mFlags = byteBufferOrder.getInt();
+            this.mHwHubType = byteBufferOrder.getLong();
+            this.mTargetChreApiMajorVersion = byteBufferOrder.get();
+            this.mTargetChreApiMinorVersion = byteBufferOrder.get();
             if (this.mMagic == EXPECTED_MAGIC_VALUE) {
                 this.mHasValidHeader = true;
                 return;

@@ -60,25 +60,25 @@ public class Mesh extends BaseObj {
     }
 
     @Override // android.renderscript.BaseObj
-    void updateFromNative() {
+    void updateFromNative() throws Throwable {
         super.updateFromNative();
-        int nMeshGetVertexBufferCount = this.mRS.nMeshGetVertexBufferCount(getID(this.mRS));
-        int nMeshGetIndexCount = this.mRS.nMeshGetIndexCount(getID(this.mRS));
-        long[] jArr = new long[nMeshGetVertexBufferCount];
-        long[] jArr2 = new long[nMeshGetIndexCount];
-        int[] iArr = new int[nMeshGetIndexCount];
-        this.mRS.nMeshGetVertices(getID(this.mRS), jArr, nMeshGetVertexBufferCount);
-        this.mRS.nMeshGetIndices(getID(this.mRS), jArr2, iArr, nMeshGetIndexCount);
-        this.mVertexBuffers = new Allocation[nMeshGetVertexBufferCount];
-        this.mIndexBuffers = new Allocation[nMeshGetIndexCount];
-        this.mPrimitives = new Primitive[nMeshGetIndexCount];
-        for (int i = 0; i < nMeshGetVertexBufferCount; i++) {
+        int iNMeshGetVertexBufferCount = this.mRS.nMeshGetVertexBufferCount(getID(this.mRS));
+        int iNMeshGetIndexCount = this.mRS.nMeshGetIndexCount(getID(this.mRS));
+        long[] jArr = new long[iNMeshGetVertexBufferCount];
+        long[] jArr2 = new long[iNMeshGetIndexCount];
+        int[] iArr = new int[iNMeshGetIndexCount];
+        this.mRS.nMeshGetVertices(getID(this.mRS), jArr, iNMeshGetVertexBufferCount);
+        this.mRS.nMeshGetIndices(getID(this.mRS), jArr2, iArr, iNMeshGetIndexCount);
+        this.mVertexBuffers = new Allocation[iNMeshGetVertexBufferCount];
+        this.mIndexBuffers = new Allocation[iNMeshGetIndexCount];
+        this.mPrimitives = new Primitive[iNMeshGetIndexCount];
+        for (int i = 0; i < iNMeshGetVertexBufferCount; i++) {
             if (jArr[i] != 0) {
                 this.mVertexBuffers[i] = new Allocation(jArr[i], this.mRS, null, 1);
                 this.mVertexBuffers[i].updateFromNative();
             }
         }
-        for (int i2 = 0; i2 < nMeshGetIndexCount; i2++) {
+        for (int i2 = 0; i2 < iNMeshGetIndexCount; i2++) {
             if (jArr2[i2] != 0) {
                 this.mIndexBuffers[i2] = new Allocation(jArr2[i2], this.mRS, null, 1);
                 this.mIndexBuffers[i2].updateFromNative();
@@ -182,8 +182,8 @@ public class Mesh extends BaseObj {
         }
 
         public Mesh create() {
-            Allocation createSized;
-            Allocation createSized2;
+            Allocation allocationCreateSized;
+            Allocation allocationCreateSized2;
             this.mRS.validate();
             long[] jArr = new long[this.mVertexTypeCount];
             long[] jArr2 = new long[this.mIndexTypes.size()];
@@ -194,26 +194,26 @@ public class Mesh extends BaseObj {
             for (int i = 0; i < this.mVertexTypeCount; i++) {
                 Entry entry = this.mVertexTypes[i];
                 if (entry.t != null) {
-                    createSized2 = Allocation.createTyped(this.mRS, entry.t, this.mUsage);
+                    allocationCreateSized2 = Allocation.createTyped(this.mRS, entry.t, this.mUsage);
                 } else if (entry.e != null) {
-                    createSized2 = Allocation.createSized(this.mRS, entry.e, entry.size, this.mUsage);
+                    allocationCreateSized2 = Allocation.createSized(this.mRS, entry.e, entry.size, this.mUsage);
                 } else {
                     throw new IllegalStateException("Builder corrupt, no valid element in entry.");
                 }
-                allocationArr[i] = createSized2;
-                jArr[i] = createSized2.getID(this.mRS);
+                allocationArr[i] = allocationCreateSized2;
+                jArr[i] = allocationCreateSized2.getID(this.mRS);
             }
             for (int i2 = 0; i2 < this.mIndexTypes.size(); i2++) {
                 Entry entry2 = (Entry) this.mIndexTypes.elementAt(i2);
                 if (entry2.t != null) {
-                    createSized = Allocation.createTyped(this.mRS, entry2.t, this.mUsage);
+                    allocationCreateSized = Allocation.createTyped(this.mRS, entry2.t, this.mUsage);
                 } else if (entry2.e != null) {
-                    createSized = Allocation.createSized(this.mRS, entry2.e, entry2.size, this.mUsage);
+                    allocationCreateSized = Allocation.createSized(this.mRS, entry2.e, entry2.size, this.mUsage);
                 } else {
                     throw new IllegalStateException("Builder corrupt, no valid element in entry.");
                 }
-                long id = createSized == null ? 0L : createSized.getID(this.mRS);
-                allocationArr2[i2] = createSized;
+                long id = allocationCreateSized == null ? 0L : allocationCreateSized.getID(this.mRS);
+                allocationArr2[i2] = allocationCreateSized;
                 primitiveArr[i2] = entry2.prim;
                 jArr2[i2] = id;
                 iArr[i2] = entry2.prim.mID;
@@ -490,7 +490,7 @@ public class Mesh extends BaseObj {
             return this;
         }
 
-        public Mesh create(boolean z) {
+        public Mesh create(boolean z) throws IllegalStateException {
             Element.Builder builder = new Element.Builder(this.mRS);
             builder.add(Element.createVector(this.mRS, Element.DataType.FLOAT_32, this.mVtxSize), "position");
             if ((this.mFlags & 1) != 0) {
@@ -506,16 +506,16 @@ public class Mesh extends BaseObj {
             Builder builder2 = new Builder(this.mRS, z ? 5 : 1);
             builder2.addVertexType(this.mElement, this.mMaxIndex);
             builder2.addIndexSetType(Element.U16(this.mRS), this.mIndexCount, Primitive.TRIANGLE);
-            Mesh create = builder2.create();
-            create.getVertexAllocation(0).copy1DRangeFromUnchecked(0, this.mMaxIndex, this.mVtxData);
+            Mesh meshCreate = builder2.create();
+            meshCreate.getVertexAllocation(0).copy1DRangeFromUnchecked(0, this.mMaxIndex, this.mVtxData);
             if (z) {
-                create.getVertexAllocation(0).syncAll(1);
+                meshCreate.getVertexAllocation(0).syncAll(1);
             }
-            create.getIndexSetAllocation(0).copy1DRangeFromUnchecked(0, this.mIndexCount, this.mIndexData);
+            meshCreate.getIndexSetAllocation(0).copy1DRangeFromUnchecked(0, this.mIndexCount, this.mIndexData);
             if (z) {
-                create.getIndexSetAllocation(0).syncAll(1);
+                meshCreate.getIndexSetAllocation(0).syncAll(1);
             }
-            return create;
+            return meshCreate;
         }
     }
 }

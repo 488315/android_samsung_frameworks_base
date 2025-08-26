@@ -51,9 +51,9 @@ public interface ILogAccessDialogCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILogAccessDialogCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILogAccessDialogCallback)) {
-                return (ILogAccessDialogCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILogAccessDialogCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILogAccessDialogCallback)) {
+                return (ILogAccessDialogCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,15 +83,15 @@ public interface ILogAccessDialogCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                approveAccessForClient(readInt, readString);
+                approveAccessForClient(i3, string);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                String readString2 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                declineAccessForClient(readInt2, readString2);
+                declineAccessForClient(i4, string2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,27 +116,27 @@ public interface ILogAccessDialogCallback extends IInterface {
 
             @Override // com.android.internal.app.ILogAccessDialogCallback
             public void approveAccessForClient(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILogAccessDialogCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILogAccessDialogCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.ILogAccessDialogCallback
             public void declineAccessForClient(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILogAccessDialogCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILogAccessDialogCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

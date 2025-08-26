@@ -85,9 +85,9 @@ public interface ICamMonitoringService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamMonitoringService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamMonitoringService)) {
-                return (ICamMonitoringService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamMonitoringService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamMonitoringService)) {
+                return (ICamMonitoringService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,28 +127,28 @@ public interface ICamMonitoringService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ICamInfoListener asInterface = ICamInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    ICamInfoListener iCamInfoListenerAsInterface = ICamInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addCamInfoListener(asInterface);
+                    addCamInfoListener(iCamInfoListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    ICamInfoListener asInterface2 = ICamInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    ICamInfoListener iCamInfoListenerAsInterface2 = ICamInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeCamInfoListener(asInterface2);
+                    removeCamInfoListener(iCamInfoListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle camInfo = getCamInfo(readInt);
+                    Bundle camInfo = getCamInfo(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(camInfo, 1);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle slotInfo = getSlotInfo(readInt2);
+                    Bundle slotInfo = getSlotInfo(i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(slotInfo, 1);
                     return true;
@@ -158,9 +158,9 @@ public interface ICamMonitoringService extends IInterface {
                     parcel2.writeIntArray(slotIds);
                     return true;
                 case 6:
-                    boolean isCamSupported = isCamSupported();
+                    boolean zIsCamSupported = isCamSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCamSupported);
+                    parcel2.writeBoolean(zIsCamSupported);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -185,93 +185,93 @@ public interface ICamMonitoringService extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public void addCamInfoListener(ICamInfoListener iCamInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    obtain.writeStrongInterface(iCamInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    parcelObtain.writeStrongInterface(iCamInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public void removeCamInfoListener(ICamInfoListener iCamInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    obtain.writeStrongInterface(iCamInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    parcelObtain.writeStrongInterface(iCamInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public Bundle getCamInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public Bundle getSlotInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public int[] getSlotIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamMonitoringService
             public boolean isCamSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamMonitoringService");
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

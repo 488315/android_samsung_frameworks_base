@@ -11,9 +11,9 @@ public class DumpUtils {
     }
 
     public static void writeComponentName(DualDumpOutputStream dualDumpOutputStream, String str, long j, ComponentName componentName) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("package_name", 1138166333441L, componentName.getPackageName());
         dualDumpOutputStream.write("class_name", 1138166333442L, componentName.getClassName());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 }

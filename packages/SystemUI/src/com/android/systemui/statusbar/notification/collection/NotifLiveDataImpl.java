@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifLiveDataImpl implements PipelineDumpable {
     public final AtomicReference atomicValue;
@@ -39,12 +38,12 @@ public final class NotifLiveDataImpl implements PipelineDumpable {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 Object obj2 = obj;
-                final NotifLiveDataImpl notifLiveDataImpl = NotifLiveDataImpl.this;
+                final NotifLiveDataImpl notifLiveDataImpl = this.f$0;
                 if (!notifLiveDataImpl.syncObservers.isEmpty()) {
-                    String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("NotifLiveData("), notifLiveDataImpl.name, ").dispatchToSyncObservers");
-                    boolean isEnabled = Trace.isEnabled();
-                    if (isEnabled) {
-                        TraceUtilsKt.beginSlice(m);
+                    String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("NotifLiveData("), notifLiveDataImpl.name, ").dispatchToSyncObservers");
+                    boolean zIsEnabled = Trace.isEnabled();
+                    if (zIsEnabled) {
+                        TraceUtilsKt.beginSlice(strM);
                     }
                     try {
                         Iterator<E> it = notifLiveDataImpl.syncObservers.iterator();
@@ -52,11 +51,11 @@ public final class NotifLiveDataImpl implements PipelineDumpable {
                             ((Observer) it.next()).onChanged(obj2);
                         }
                         Unit unit = Unit.INSTANCE;
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                     } catch (Throwable th) {
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                         throw th;
@@ -66,16 +65,16 @@ public final class NotifLiveDataImpl implements PipelineDumpable {
                     notifLiveDataImpl.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.NotifLiveDataImpl$setValueAndProvideDispatcher$1$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotifLiveDataImpl notifLiveDataImpl2 = NotifLiveDataImpl.this;
+                            NotifLiveDataImpl notifLiveDataImpl2 = notifLiveDataImpl;
                             Object obj3 = notifLiveDataImpl2.atomicValue.get();
                             if (Intrinsics.areEqual(notifLiveDataImpl2.lastAsyncValue, obj3)) {
                                 return;
                             }
                             notifLiveDataImpl2.lastAsyncValue = obj3;
-                            String m2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("NotifLiveData("), notifLiveDataImpl2.name, ").dispatchToAsyncObservers");
-                            boolean isEnabled2 = Trace.isEnabled();
-                            if (isEnabled2) {
-                                TraceUtilsKt.beginSlice(m2);
+                            String strM2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("NotifLiveData("), notifLiveDataImpl2.name, ").dispatchToAsyncObservers");
+                            boolean zIsEnabled2 = Trace.isEnabled();
+                            if (zIsEnabled2) {
+                                TraceUtilsKt.beginSlice(strM2);
                             }
                             try {
                                 Iterator<E> it2 = notifLiveDataImpl2.asyncObservers.iterator();
@@ -83,11 +82,11 @@ public final class NotifLiveDataImpl implements PipelineDumpable {
                                     ((Observer) it2.next()).onChanged(obj3);
                                 }
                                 Unit unit2 = Unit.INSTANCE;
-                                if (isEnabled2) {
+                                if (zIsEnabled2) {
                                     TraceUtilsKt.endSlice();
                                 }
                             } catch (Throwable th2) {
-                                if (isEnabled2) {
+                                if (zIsEnabled2) {
                                     TraceUtilsKt.endSlice();
                                 }
                                 throw th2;

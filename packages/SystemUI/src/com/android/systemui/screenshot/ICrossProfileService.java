@@ -7,16 +7,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ICrossProfileService extends IInterface {
     void launchIntent(Intent intent, Bundle bundle);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICrossProfileService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements ICrossProfileService {
             public final IBinder mRemote;
 
@@ -31,17 +28,17 @@ public interface ICrossProfileService extends IInterface {
 
             @Override // com.android.systemui.screenshot.ICrossProfileService
             public final void launchIntent(Intent intent, Bundle bundle) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.screenshot.ICrossProfileService");
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.android.systemui.screenshot.ICrossProfileService");
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

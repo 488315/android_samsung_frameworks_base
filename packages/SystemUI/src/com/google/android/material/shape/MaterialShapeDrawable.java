@@ -28,7 +28,6 @@ import com.google.android.material.shape.ShapePath;
 import java.util.BitSet;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialShapeDrawable extends Drawable implements Shapeable {
     public static final Paint clearPaint;
@@ -56,7 +55,6 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
     public PorterDuffColorFilter tintFilter;
     public final Region transparentRegion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.shape.MaterialShapeDrawable$1, reason: invalid class name */
     public class AnonymousClass1 implements ShapeAppearancePathProvider.PathListener {
         public AnonymousClass1() {
@@ -125,14 +123,14 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
             builder.topRightCornerSize = r6.apply(shapeAppearanceModel.topRightCornerSize);
             builder.bottomLeftCornerSize = r6.apply(shapeAppearanceModel.bottomLeftCornerSize);
             builder.bottomRightCornerSize = r6.apply(shapeAppearanceModel.bottomRightCornerSize);
-            ShapeAppearanceModel build = builder.build();
-            this.strokeShapeAppearance = build;
+            ShapeAppearanceModel shapeAppearanceModelBuild = builder.build();
+            this.strokeShapeAppearance = shapeAppearanceModelBuild;
             ShapeAppearancePathProvider shapeAppearancePathProvider = this.pathProvider;
             float f2 = this.drawableState.interpolation;
             this.insetRectF.set(getBoundsAsRectF$1());
             float strokeWidth = hasStroke() ? this.strokePaint.getStrokeWidth() / 2.0f : 0.0f;
             this.insetRectF.inset(strokeWidth, strokeWidth);
-            shapeAppearancePathProvider.calculatePath(build, f2, this.insetRectF, null, this.pathInsetByStroke);
+            shapeAppearancePathProvider.calculatePath(shapeAppearanceModelBuild, f2, this.insetRectF, null, this.pathInsetByStroke);
             calculatePath(getBoundsAsRectF$1(), this.path);
             this.pathDirty = false;
         }
@@ -144,19 +142,19 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
                 MaterialShapeDrawableState materialShapeDrawableState2 = this.drawableState;
                 canvas.translate((int) (Math.sin(Math.toRadians(materialShapeDrawableState2.shadowCompatRotation)) * materialShapeDrawableState2.shadowCompatOffset), getShadowOffsetY());
                 if (this.shadowBitmapDrawingEnable) {
-                    int width = (int) (this.pathBounds.width() - getBounds().width());
-                    int height = (int) (this.pathBounds.height() - getBounds().height());
-                    if (width < 0 || height < 0) {
+                    int iWidth = (int) (this.pathBounds.width() - getBounds().width());
+                    int iHeight = (int) (this.pathBounds.height() - getBounds().height());
+                    if (iWidth < 0 || iHeight < 0) {
                         throw new IllegalStateException("Invalid shadow bounds. Check that the treatments result in a valid path.");
                     }
-                    Bitmap createBitmap = Bitmap.createBitmap((this.drawableState.shadowCompatRadius * 2) + ((int) this.pathBounds.width()) + width, (this.drawableState.shadowCompatRadius * 2) + ((int) this.pathBounds.height()) + height, Bitmap.Config.ARGB_8888);
-                    Canvas canvas3 = new Canvas(createBitmap);
-                    float f3 = (getBounds().left - this.drawableState.shadowCompatRadius) - width;
-                    float f4 = (getBounds().top - this.drawableState.shadowCompatRadius) - height;
+                    Bitmap bitmapCreateBitmap = Bitmap.createBitmap((this.drawableState.shadowCompatRadius * 2) + ((int) this.pathBounds.width()) + iWidth, (this.drawableState.shadowCompatRadius * 2) + ((int) this.pathBounds.height()) + iHeight, Bitmap.Config.ARGB_8888);
+                    Canvas canvas3 = new Canvas(bitmapCreateBitmap);
+                    float f3 = (getBounds().left - this.drawableState.shadowCompatRadius) - iWidth;
+                    float f4 = (getBounds().top - this.drawableState.shadowCompatRadius) - iHeight;
                     canvas3.translate(-f3, -f4);
                     drawCompatShadow(canvas3);
-                    canvas.drawBitmap(createBitmap, f3, f4, (Paint) null);
-                    createBitmap.recycle();
+                    canvas.drawBitmap(bitmapCreateBitmap, f3, f4, (Paint) null);
+                    bitmapCreateBitmap.recycle();
                     canvas.restore();
                 } else {
                     drawCompatShadow(canvas);
@@ -200,11 +198,11 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
         }
         if (this.shadowBitmapDrawingEnable) {
             MaterialShapeDrawableState materialShapeDrawableState = this.drawableState;
-            int sin = (int) (Math.sin(Math.toRadians(materialShapeDrawableState.shadowCompatRotation)) * materialShapeDrawableState.shadowCompatOffset);
+            int iSin = (int) (Math.sin(Math.toRadians(materialShapeDrawableState.shadowCompatRotation)) * materialShapeDrawableState.shadowCompatOffset);
             int shadowOffsetY = getShadowOffsetY();
-            canvas.translate(-sin, -shadowOffsetY);
+            canvas.translate(-iSin, -shadowOffsetY);
             canvas.drawPath(this.path, clearPaint);
-            canvas.translate(sin, shadowOffsetY);
+            canvas.translate(iSin, shadowOffsetY);
         }
     }
 
@@ -480,13 +478,13 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
         Paint paint = this.fillPaint;
         if (colorStateList == null || mode == null) {
             int color = paint.getColor();
-            int compositeElevationOverlayIfNeeded = compositeElevationOverlayIfNeeded(color);
-            this.resolvedTintColor = compositeElevationOverlayIfNeeded;
-            porterDuffColorFilter = compositeElevationOverlayIfNeeded != color ? new PorterDuffColorFilter(compositeElevationOverlayIfNeeded, PorterDuff.Mode.SRC_IN) : null;
+            int iCompositeElevationOverlayIfNeeded = compositeElevationOverlayIfNeeded(color);
+            this.resolvedTintColor = iCompositeElevationOverlayIfNeeded;
+            porterDuffColorFilter = iCompositeElevationOverlayIfNeeded != color ? new PorterDuffColorFilter(iCompositeElevationOverlayIfNeeded, PorterDuff.Mode.SRC_IN) : null;
         } else {
-            int compositeElevationOverlayIfNeeded2 = compositeElevationOverlayIfNeeded(colorStateList.getColorForState(getState(), 0));
-            this.resolvedTintColor = compositeElevationOverlayIfNeeded2;
-            porterDuffColorFilter = new PorterDuffColorFilter(compositeElevationOverlayIfNeeded2, mode);
+            int iCompositeElevationOverlayIfNeeded2 = compositeElevationOverlayIfNeeded(colorStateList.getColorForState(getState(), 0));
+            this.resolvedTintColor = iCompositeElevationOverlayIfNeeded2;
+            porterDuffColorFilter = new PorterDuffColorFilter(iCompositeElevationOverlayIfNeeded2, mode);
         }
         this.tintFilter = porterDuffColorFilter;
         this.drawableState.getClass();
@@ -550,7 +548,6 @@ public class MaterialShapeDrawable extends Drawable implements Shapeable {
         this.pathShadowListener = new AnonymousClass1();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MaterialShapeDrawableState extends Drawable.ConstantState {
         public int alpha;
         public float elevation;

@@ -18,7 +18,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.navigationbar.views.buttons.ButtonInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NavigationHandle extends FrameLayout implements ButtonInterface {
     public static final AnonymousClass1 PULSE_ANIMATION_PROGRESS = new FloatProperty("pulseAnimationProgress") { // from class: com.android.systemui.navigationbar.gestural.NavigationHandle.1
@@ -61,10 +60,10 @@ public class NavigationHandle extends FrameLayout implements ButtonInterface {
             objectAnimator.cancel();
         }
         this.mShrink = z2;
-        TimeInterpolator navigationHandle$$ExternalSyntheticLambda0 = z2 ? Interpolators.LEGACY_DECELERATE : z ? new NavigationHandle$$ExternalSyntheticLambda0() : Interpolators.LEGACY_DECELERATE;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, PULSE_ANIMATION_PROGRESS, z ? 1.0f : 0.0f);
-        this.mPulseAnimator = ofFloat;
-        ofFloat.setDuration(j).setInterpolator(navigationHandle$$ExternalSyntheticLambda0);
+        TimeInterpolator navigationHandle$$ExternalSyntheticLambda0 = (!z2 && z) ? new NavigationHandle$$ExternalSyntheticLambda0() : Interpolators.LEGACY_DECELERATE;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, PULSE_ANIMATION_PROGRESS, z ? 1.0f : 0.0f);
+        this.mPulseAnimator = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.setDuration(j).setInterpolator(navigationHandle$$ExternalSyntheticLambda0);
         this.mPulseAnimator.start();
     }
 
@@ -116,9 +115,9 @@ public class NavigationHandle extends FrameLayout implements ButtonInterface {
             invalidate();
             return;
         }
-        int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mLightColor), Integer.valueOf(this.mDarkColor))).intValue();
-        if (this.mPaint.getColor() != intValue) {
-            this.mPaint.setColor(intValue);
+        int iIntValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mLightColor), Integer.valueOf(this.mDarkColor))).intValue();
+        if (this.mPaint.getColor() != iIntValue) {
+            this.mPaint.setColor(iIntValue);
             if (getVisibility() != 0 || getAlpha() <= 0.0f) {
                 this.mRequiresInvalidate = true;
             } else {

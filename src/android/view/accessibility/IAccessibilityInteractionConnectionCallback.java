@@ -81,9 +81,9 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccessibilityInteractionConnectionCallback)) {
-                return (IAccessibilityInteractionConnectionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccessibilityInteractionConnectionCallback)) {
+                return (IAccessibilityInteractionConnectionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,39 +124,39 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             switch (i) {
                 case 1:
                     AccessibilityNodeInfo accessibilityNodeInfo = (AccessibilityNodeInfo) parcel.readTypedObject(AccessibilityNodeInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setFindAccessibilityNodeInfoResult(accessibilityNodeInfo, readInt);
+                    setFindAccessibilityNodeInfoResult(accessibilityNodeInfo, i3);
                     return true;
                 case 2:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setFindAccessibilityNodeInfosResult(createTypedArrayList, readInt2);
+                    setFindAccessibilityNodeInfosResult(arrayListCreateTypedArrayList, i4);
                     return true;
                 case 3:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrefetchAccessibilityNodeInfoResult(createTypedArrayList2, readInt3);
+                    setPrefetchAccessibilityNodeInfoResult(arrayListCreateTypedArrayList2, i5);
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPerformAccessibilityActionResult(readBoolean, readInt4);
+                    setPerformAccessibilityActionResult(z, i6);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendTakeScreenshotOfWindowError(readInt5, readInt6);
+                    sendTakeScreenshotOfWindowError(i7, i8);
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendAttachOverlayResult(readInt7, readInt8);
+                    sendAttachOverlayResult(i9, i10);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -181,79 +181,79 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo accessibilityNodeInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(accessibilityNodeInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(accessibilityNodeInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void setFindAccessibilityNodeInfosResult(List<AccessibilityNodeInfo> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void setPrefetchAccessibilityNodeInfoResult(List<AccessibilityNodeInfo> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void setPerformAccessibilityActionResult(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void sendTakeScreenshotOfWindowError(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
             public void sendAttachOverlayResult(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

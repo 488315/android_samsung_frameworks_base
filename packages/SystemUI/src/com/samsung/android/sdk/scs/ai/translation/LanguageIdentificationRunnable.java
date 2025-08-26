@@ -6,7 +6,6 @@ import com.samsung.android.sdk.scs.base.tasks.TaskRunnable;
 import com.samsung.android.sdk.scs.base.utils.Log;
 import com.samsung.android.sivs.ai.sdkcommon.translation.INeuralTranslationService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 class LanguageIdentificationRunnable extends TaskRunnable {
     public final String fallbackLanguage;
@@ -25,9 +24,9 @@ class LanguageIdentificationRunnable extends TaskRunnable {
             Bundle bundle = new Bundle();
             bundle.putString("text", this.text);
             bundle.putString("fallbackLanguage", this.fallbackLanguage);
-            String identifyLanguage = ((INeuralTranslationService.Stub.Proxy) this.neuralTranslationServiceExecutor.translationService).identifyLanguage(bundle);
-            Log.i("ScsApi@NeuralTranslator", "LanguageIdentificationRunnable -- identified language: " + identifyLanguage);
-            this.mSource.setResult(identifyLanguage);
+            String strIdentifyLanguage = ((INeuralTranslationService.Stub.Proxy) this.neuralTranslationServiceExecutor.translationService).identifyLanguage(bundle);
+            Log.i("ScsApi@NeuralTranslator", "LanguageIdentificationRunnable -- identified language: " + strIdentifyLanguage);
+            this.mSource.setResult(strIdentifyLanguage);
         } catch (RemoteException e) {
             Log.e("ScsApi@NeuralTranslator", "LanguageIdentificationRunnable -- Exception: " + e);
             e.printStackTrace();

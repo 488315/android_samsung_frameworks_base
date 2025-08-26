@@ -3,7 +3,6 @@ package android.net;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.net.IPacProxyInstalledListener;
-import android.net.PacProxyManager;
 import android.os.Binder;
 import android.os.RemoteException;
 import com.android.internal.util.FunctionalUtils;
@@ -45,11 +44,11 @@ public class PacProxyManager {
     public void removePacProxyInstalledListener(PacProxyInstalledListener pacProxyInstalledListener) {
         try {
             synchronized (this.mListenerMap) {
-                PacProxyInstalledListenerProxy remove = this.mListenerMap.remove(pacProxyInstalledListener);
-                if (remove == null) {
+                PacProxyInstalledListenerProxy pacProxyInstalledListenerProxyRemove = this.mListenerMap.remove(pacProxyInstalledListener);
+                if (pacProxyInstalledListenerProxyRemove == null) {
                     return;
                 }
-                this.mService.removeListener(remove);
+                this.mService.removeListener(pacProxyInstalledListenerProxyRemove);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -77,8 +76,8 @@ public class PacProxyManager {
         public void onPacProxyInstalled(final Network network, final ProxyInfo proxyInfo) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PacProxyManager.PacProxyInstalledListenerProxy.this.lambda$onPacProxyInstalled$1(network, proxyInfo);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onPacProxyInstalled$1(network, proxyInfo);
                 }
             });
         }
@@ -88,7 +87,7 @@ public class PacProxyManager {
             this.mExecutor.execute(new Runnable() { // from class: android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PacProxyManager.PacProxyInstalledListenerProxy.this.lambda$onPacProxyInstalled$0(network, proxyInfo);
+                    this.f$0.lambda$onPacProxyInstalled$0(network, proxyInfo);
                 }
             });
         }

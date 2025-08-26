@@ -262,9 +262,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISehRadioNetworkResponse)) {
-                return (ISehRadioNetworkResponse) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISehRadioNetworkResponse)) {
+                return (ISehRadioNetworkResponse) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -297,9 +297,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 2:
                     SehRadioResponseInfo sehRadioResponseInfo2 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    emergencySearchResponse(sehRadioResponseInfo2, readInt);
+                    emergencySearchResponse(sehRadioResponseInfo2, i3);
                     return true;
                 case 3:
                     SehRadioResponseInfo sehRadioResponseInfo3 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -309,9 +309,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 4:
                     SehRadioResponseInfo sehRadioResponseInfo4 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCnapResponse(sehRadioResponseInfo4, readInt2);
+                    getCnapResponse(sehRadioResponseInfo4, i4);
                     return true;
                 case 5:
                     SehRadioResponseInfo sehRadioResponseInfo5 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -321,21 +321,21 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 6:
                     SehRadioResponseInfo sehRadioResponseInfo6 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getDisable2gResponse(sehRadioResponseInfo6, readInt3);
+                    getDisable2gResponse(sehRadioResponseInfo6, i5);
                     return true;
                 case 7:
                     SehRadioResponseInfo sehRadioResponseInfo7 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getNrIconTypeResponse(sehRadioResponseInfo7, readInt4);
+                    getNrIconTypeResponse(sehRadioResponseInfo7, i6);
                     return true;
                 case 8:
                     SehRadioResponseInfo sehRadioResponseInfo8 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getNrModeResponse(sehRadioResponseInfo8, readInt5);
+                    getNrModeResponse(sehRadioResponseInfo8, i7);
                     return true;
                 case 9:
                     SehRadioResponseInfo sehRadioResponseInfo9 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -367,15 +367,15 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 14:
                     SehRadioResponseInfo sehRadioResponseInfo14 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    sendRequestRawResponse(sehRadioResponseInfo14, createByteArray);
+                    sendRequestRawResponse(sehRadioResponseInfo14, bArrCreateByteArray);
                     return true;
                 case 15:
                     SehRadioResponseInfo sehRadioResponseInfo15 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    sendRequestStringsResponse(sehRadioResponseInfo15, createStringArray);
+                    sendRequestStringsResponse(sehRadioResponseInfo15, strArrCreateStringArray);
                     return true;
                 case 16:
                     SehRadioResponseInfo sehRadioResponseInfo16 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -419,11 +419,11 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 24:
                     SehRadioResponseInfo sehRadioResponseInfo24 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    getCpaiModelVersionResponse(sehRadioResponseInfo24, readInt6, readInt7, createByteArray2);
+                    getCpaiModelVersionResponse(sehRadioResponseInfo24, i8, i9, bArrCreateByteArray2);
                     return true;
                 case 25:
                     SehRadioResponseInfo sehRadioResponseInfo25 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -432,11 +432,11 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     return true;
                 case 26:
                     SehRadioResponseInfo sehRadioResponseInfo26 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    getCpaiFeatureInfoResponse(sehRadioResponseInfo26, readInt8, readInt9, createByteArray3);
+                    getCpaiFeatureInfoResponse(sehRadioResponseInfo26, i10, i11, bArrCreateByteArray3);
                     return true;
                 case 27:
                     SehRadioResponseInfo sehRadioResponseInfo27 = (SehRadioResponseInfo) parcel.readTypedObject(SehRadioResponseInfo.CREATOR);
@@ -483,485 +483,485 @@ public interface ISehRadioNetworkResponse extends IInterface {
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void emergencyControlResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method emergencyControlResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void emergencySearchResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method emergencySearchResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getAvailableNetworksResponse(SehRadioResponseInfo sehRadioResponseInfo, SehOperatorInfo[] sehOperatorInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeTypedArray(sehOperatorInfoArr, 0);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeTypedArray(sehOperatorInfoArr, 0);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getAvailableNetworksResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getCnapResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCnapResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getCsgListResponse(SehRadioResponseInfo sehRadioResponseInfo, SehCsgInfo[] sehCsgInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeTypedArray(sehCsgInfoArr, 0);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeTypedArray(sehCsgInfoArr, 0);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCsgListResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getDisable2gResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getDisable2gResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getNrIconTypeResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getNrIconTypeResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getNrModeResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getNrModeResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getPreferredNetworkListResponse(SehRadioResponseInfo sehRadioResponseInfo, SehPreferredNetworkInfo[] sehPreferredNetworkInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeTypedArray(sehPreferredNetworkInfoArr, 0);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeTypedArray(sehPreferredNetworkInfoArr, 0);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getPreferredNetworkListResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo, SehRoamingNetworkInfo[] sehRoamingNetworkInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeTypedArray(sehRoamingNetworkInfoArr, 0);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeTypedArray(sehRoamingNetworkInfoArr, 0);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getRoamingNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getVendorSpecificConfigurationResponse(SehRadioResponseInfo sehRadioResponseInfo, SehVendorConfiguration[] sehVendorConfigurationArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeTypedArray(sehVendorConfigurationArr, 0);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeTypedArray(sehVendorConfigurationArr, 0);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getVendorSpecificConfigurationResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void selectCsgManualResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method selectCsgManualResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void sendEncodedUssdResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendEncodedUssdResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void sendRequestRawResponse(SehRadioResponseInfo sehRadioResponseInfo, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeByteArray(bArr);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendRequestRawResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void sendRequestStringsResponse(SehRadioResponseInfo sehRadioResponseInfo, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeStringArray(strArr);
-                    if (this.mRemote.transact(15, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    if (this.mRemote.transact(15, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendRequestStringsResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(16, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(16, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCurrentNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setDisable2gResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(17, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(17, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setDisable2gResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setImsCallListResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(18, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(18, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setImsCallListResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setNrModeResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(19, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(19, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setNrModeResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setPreferredNetworkListResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(20, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(20, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setPreferredNetworkListResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(21, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(21, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setRoamingNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setScanResultViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(22, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(22, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setScanResultViaBLEResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setVendorSpecificConfigurationResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(23, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(23, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setVendorSpecificConfigurationResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getCpaiModelVersionResponse(SehRadioResponseInfo sehRadioResponseInfo, int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    if (this.mRemote.transact(24, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    if (this.mRemote.transact(24, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCpaiModelVersionResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void execCpaiModelUpdateResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(25, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(25, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method execCpaiModelUpdateResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void getCpaiFeatureInfoResponse(SehRadioResponseInfo sehRadioResponseInfo, int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    if (this.mRemote.transact(26, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    if (this.mRemote.transact(26, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCpaiFeatureInfoResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void cfrmCpaiFeatureInfoResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(27, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(27, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method cfrmCpaiFeatureInfoResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setCpaiDataGatheringResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(28, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(28, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCpaiDataGatheringResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void evtCpaiDataGatheringResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(29, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(29, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method evtCpaiDataGatheringResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public void setCpaiDevAppMessageResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(sehRadioResponseInfo, 0);
-                    if (this.mRemote.transact(30, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sehRadioResponseInfo, 0);
+                    if (this.mRemote.transact(30, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCpaiDevAppMessageResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -970,18 +970,18 @@ public interface ISehRadioNetworkResponse extends IInterface {
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

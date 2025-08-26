@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalSceneTransitionInteractor$listenForSceneTransitionProgress$1 extends SuspendLambda implements Function2 {
     int label;
@@ -43,29 +42,29 @@ final class CommunalSceneTransitionInteractor$listenForSceneTransitionProgress$1
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            Flow pairwise = FlowKt.pairwise(this.this$0.sceneInteractor.transitionState, new ObservableTransitionState.Idle(CommunalScenes.Blank, null, 2, null));
+            Flow flowPairwise = FlowKt.pairwise(this.this$0.sceneInteractor.transitionState, new ObservableTransitionState.Idle(CommunalScenes.Blank, null, 2, null));
             final CommunalSceneTransitionInteractor communalSceneTransitionInteractor = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.communal.domain.interactor.CommunalSceneTransitionInteractor$listenForSceneTransitionProgress$1.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
-                public final Object emit(Object obj2, Continuation continuation) {
+                public final Object emit(Object obj2, Continuation continuation) throws Throwable {
                     WithPrev withPrev = (WithPrev) obj2;
                     ObservableTransitionState observableTransitionState = (ObservableTransitionState) withPrev.component1();
                     ObservableTransitionState observableTransitionState2 = (ObservableTransitionState) withPrev.component2();
                     boolean z = observableTransitionState2 instanceof ObservableTransitionState.Idle;
-                    CommunalSceneTransitionInteractor communalSceneTransitionInteractor2 = CommunalSceneTransitionInteractor.this;
+                    CommunalSceneTransitionInteractor communalSceneTransitionInteractor2 = communalSceneTransitionInteractor;
                     if (z) {
-                        Object access$handleIdle = CommunalSceneTransitionInteractor.access$handleIdle(communalSceneTransitionInteractor2, observableTransitionState, (ObservableTransitionState.Idle) observableTransitionState2, continuation);
-                        return access$handleIdle == CoroutineSingletons.COROUTINE_SUSPENDED ? access$handleIdle : Unit.INSTANCE;
+                        Object objAccess$handleIdle = CommunalSceneTransitionInteractor.access$handleIdle(communalSceneTransitionInteractor2, observableTransitionState, (ObservableTransitionState.Idle) observableTransitionState2, continuation);
+                        return objAccess$handleIdle == CoroutineSingletons.COROUTINE_SUSPENDED ? objAccess$handleIdle : Unit.INSTANCE;
                     }
                     if (!(observableTransitionState2 instanceof ObservableTransitionState.Transition)) {
                         throw new NoWhenBranchMatchedException();
                     }
-                    Object access$handleTransition = CommunalSceneTransitionInteractor.access$handleTransition(communalSceneTransitionInteractor2, observableTransitionState, (ObservableTransitionState.Transition) observableTransitionState2, continuation);
-                    return access$handleTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? access$handleTransition : Unit.INSTANCE;
+                    Object objAccess$handleTransition = CommunalSceneTransitionInteractor.access$handleTransition(communalSceneTransitionInteractor2, observableTransitionState, (ObservableTransitionState.Transition) observableTransitionState2, continuation);
+                    return objAccess$handleTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? objAccess$handleTransition : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (pairwise.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowPairwise.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

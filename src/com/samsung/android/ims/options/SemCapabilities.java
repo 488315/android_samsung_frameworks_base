@@ -72,9 +72,9 @@ public class SemCapabilities implements Parcelable, Cloneable {
     }
 
     static {
-        HashMap hashMap = new HashMap();
-        sFeatures = hashMap;
-        hashMap.put(Long.valueOf(FEATURE_CHAT_CPM), "im");
+        HashMap map = new HashMap();
+        sFeatures = map;
+        map.put(Long.valueOf(FEATURE_CHAT_CPM), "im");
         sFeatures.put(Long.valueOf(FEATURE_FT), SemImsProfile.ImsFeature.FT);
         sFeatures.put(Long.valueOf(FEATURE_FT_HTTP), "fthttp");
         sFeatures.put(Long.valueOf(FEATURE_STANDALONE_MSG), "standalone_msg");
@@ -241,7 +241,7 @@ public class SemCapabilities implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemCapabilities m9252clone() throws CloneNotSupportedException {
+    public SemCapabilities m9264clone() throws CloneNotSupportedException {
         return (SemCapabilities) super.clone();
     }
 

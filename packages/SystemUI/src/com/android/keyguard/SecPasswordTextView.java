@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.wallpaper.colors.KeyguardWallpaperColors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecPasswordTextView extends PasswordTextView {
     public KeyguardSecPinViewController$$ExternalSyntheticLambda1 mClickCallback;
@@ -35,7 +34,7 @@ public class SecPasswordTextView extends PasswordTextView {
         return this.mTextChars.size();
     }
 
-    @Override // com.android.keyguard.PasswordTextView
+    @Override // com.android.keyguard.PasswordTextView, com.android.keyguard.BaseSecPasswordTextView
     public final void onAppend(char c, int i) {
         if (this.mTextChars.size() >= this.mMaxLength) {
             if (this.mClickCallback != null) {
@@ -66,8 +65,8 @@ public class SecPasswordTextView extends PasswordTextView {
     public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) {
         Log.d("SecPasswordTextView", "updateStyle : " + KeyguardWallpaperColors.getChangeFlagsString(j) + " colors : " + semWallpaperColors);
         SettingsHelper settingsHelper = (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
-        boolean isUltraPowerSavingMode = settingsHelper.isUltraPowerSavingMode();
-        if (!settingsHelper.isColorThemeEnabled() || (1024 & j) == 0 || isUltraPowerSavingMode) {
+        boolean zIsUltraPowerSavingMode = settingsHelper.isUltraPowerSavingMode();
+        if (!settingsHelper.isColorThemeEnabled() || (1024 & j) == 0 || zIsUltraPowerSavingMode) {
             super.updateStyle(j, semWallpaperColors);
             return;
         }

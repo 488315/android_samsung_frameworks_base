@@ -30,11 +30,11 @@ public final class InputMethodInfoSafeList implements Parcelable {
     }
 
     public static List<InputMethodInfo> extractFrom(InputMethodInfoSafeList inputMethodInfoSafeList) {
-        InputMethodInfo[] unmarshall;
+        InputMethodInfo[] inputMethodInfoArrUnmarshall;
         byte[] bArr = inputMethodInfoSafeList.mBuffer;
         inputMethodInfoSafeList.mBuffer = null;
-        if (bArr != null && (unmarshall = unmarshall(bArr)) != null) {
-            return new ArrayList(Arrays.asList(unmarshall));
+        if (bArr != null && (inputMethodInfoArrUnmarshall = unmarshall(bArr)) != null) {
+            return new ArrayList(Arrays.asList(inputMethodInfoArrUnmarshall));
         }
         return new ArrayList();
     }
@@ -46,52 +46,52 @@ public final class InputMethodInfoSafeList implements Parcelable {
         return (InputMethodInfo[]) list.toArray(new InputMethodInfo[0]);
     }
 
-    private static byte[] marshall(InputMethodInfo[] inputMethodInfoArr) {
-        Parcel parcel;
+    private static byte[] marshall(InputMethodInfo[] inputMethodInfoArr) throws Throwable {
+        Parcel parcelObtain;
         try {
-            parcel = Parcel.obtain();
-        } catch (Throwable th) {
-            th = th;
-            parcel = null;
-        }
-        try {
-            parcel.writeTypedArray(inputMethodInfoArr, 0);
-            byte[] marshall = parcel.marshall();
-            if (parcel != null) {
-                parcel.recycle();
+            parcelObtain = Parcel.obtain();
+            try {
+                parcelObtain.writeTypedArray(inputMethodInfoArr, 0);
+                byte[] bArrMarshall = parcelObtain.marshall();
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                return bArrMarshall;
+            } catch (Throwable th) {
+                th = th;
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                throw th;
             }
-            return marshall;
         } catch (Throwable th2) {
             th = th2;
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            throw th;
+            parcelObtain = null;
         }
     }
 
-    private static InputMethodInfo[] unmarshall(byte[] bArr) {
-        Parcel parcel;
+    private static InputMethodInfo[] unmarshall(byte[] bArr) throws Throwable {
+        Parcel parcelObtain;
         try {
-            parcel = Parcel.obtain();
-        } catch (Throwable th) {
-            th = th;
-            parcel = null;
-        }
-        try {
-            parcel.unmarshall(bArr, 0, bArr.length);
-            parcel.setDataPosition(0);
-            InputMethodInfo[] inputMethodInfoArr = (InputMethodInfo[]) parcel.createTypedArray(InputMethodInfo.CREATOR);
-            if (parcel != null) {
-                parcel.recycle();
+            parcelObtain = Parcel.obtain();
+            try {
+                parcelObtain.unmarshall(bArr, 0, bArr.length);
+                parcelObtain.setDataPosition(0);
+                InputMethodInfo[] inputMethodInfoArr = (InputMethodInfo[]) parcelObtain.createTypedArray(InputMethodInfo.CREATOR);
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                return inputMethodInfoArr;
+            } catch (Throwable th) {
+                th = th;
+                if (parcelObtain != null) {
+                    parcelObtain.recycle();
+                }
+                throw th;
             }
-            return inputMethodInfoArr;
         } catch (Throwable th2) {
             th = th2;
-            if (parcel != null) {
-                parcel.recycle();
-            }
-            throw th;
+            parcelObtain = null;
         }
     }
 

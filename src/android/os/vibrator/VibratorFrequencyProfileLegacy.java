@@ -21,10 +21,10 @@ public final class VibratorFrequencyProfileLegacy {
     }
 
     public float getMinFrequency() {
-        return this.mFrequencyProfile.getFrequencyRangeHz().getLower().floatValue();
+        return ((Float) this.mFrequencyProfile.getFrequencyRangeHz().getLower()).floatValue();
     }
 
     public float getMaxFrequency() {
-        return this.mFrequencyProfile.getFrequencyRangeHz().getUpper().floatValue();
+        return ((Float) this.mFrequencyProfile.getFrequencyRangeHz().getUpper()).floatValue();
     }
 }

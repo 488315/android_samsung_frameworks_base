@@ -67,9 +67,9 @@ public interface IRadioService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioService)) {
-                return (IRadioService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRadioService)) {
+                return (IRadioService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -102,25 +102,25 @@ public interface IRadioService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                List<RadioManager.ModuleProperties> listModules = listModules();
+                List<RadioManager.ModuleProperties> listListModules = listModules();
                 parcel2.writeNoException();
-                parcel2.writeTypedList(listModules, 1);
+                parcel2.writeTypedList(listListModules, 1);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 RadioManager.BandConfig bandConfig = (RadioManager.BandConfig) parcel.readTypedObject(RadioManager.BandConfig.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                ITunerCallback asInterface = ITunerCallback.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
+                ITunerCallback iTunerCallbackAsInterface = ITunerCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ITuner openTuner = openTuner(readInt, bandConfig, readBoolean, asInterface);
+                ITuner iTunerOpenTuner = openTuner(i3, bandConfig, z, iTunerCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(openTuner);
+                parcel2.writeStrongInterface(iTunerOpenTuner);
             } else if (i == 3) {
-                int[] createIntArray = parcel.createIntArray();
-                IAnnouncementListener asInterface2 = IAnnouncementListener.Stub.asInterface(parcel.readStrongBinder());
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                IAnnouncementListener iAnnouncementListenerAsInterface = IAnnouncementListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ICloseHandle addAnnouncementListener = addAnnouncementListener(createIntArray, asInterface2);
+                ICloseHandle iCloseHandleAddAnnouncementListener = addAnnouncementListener(iArrCreateIntArray, iAnnouncementListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(addAnnouncementListener);
+                parcel2.writeStrongInterface(iCloseHandleAddAnnouncementListener);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -145,52 +145,52 @@ public interface IRadioService extends IInterface {
 
             @Override // android.hardware.radio.IRadioService
             public List<RadioManager.ModuleProperties> listModules() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(RadioManager.ModuleProperties.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(RadioManager.ModuleProperties.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.IRadioService
             public ITuner openTuner(int i, RadioManager.BandConfig bandConfig, boolean z, ITunerCallback iTunerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bandConfig, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iTunerCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITuner.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bandConfig, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iTunerCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITuner.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.IRadioService
             public ICloseHandle addAnnouncementListener(int[] iArr, IAnnouncementListener iAnnouncementListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStrongInterface(iAnnouncementListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICloseHandle.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStrongInterface(iAnnouncementListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICloseHandle.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

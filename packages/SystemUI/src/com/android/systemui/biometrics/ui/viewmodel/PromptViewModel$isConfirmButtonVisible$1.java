@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$isConfirmButtonVisible$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -20,10 +19,10 @@ final class PromptViewModel$isConfirmButtonVisible$1 extends SuspendLambda imple
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
         PromptViewModel$isConfirmButtonVisible$1 promptViewModel$isConfirmButtonVisible$1 = new PromptViewModel$isConfirmButtonVisible$1((Continuation) obj4);
         promptViewModel$isConfirmButtonVisible$1.L$0 = (PromptSize) obj;
-        promptViewModel$isConfirmButtonVisible$1.Z$0 = booleanValue;
+        promptViewModel$isConfirmButtonVisible$1.Z$0 = zBooleanValue;
         return promptViewModel$isConfirmButtonVisible$1.invokeSuspend(Unit.INSTANCE);
     }
 

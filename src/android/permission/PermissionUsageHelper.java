@@ -12,9 +12,11 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Process;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
+import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
@@ -130,17 +132,17 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             int size = this.mAttributionChains.size();
             ArrayList arrayList = new ArrayList();
             for (int i4 = 0; i4 < size; i4++) {
-                Integer keyAt = this.mAttributionChains.keyAt(i4);
-                keyAt.intValue();
-                ArrayList<AccessChainLink> valueAt = this.mAttributionChains.valueAt(i4);
-                int size2 = valueAt.size();
+                Integer numKeyAt = this.mAttributionChains.keyAt(i4);
+                numKeyAt.intValue();
+                ArrayList<AccessChainLink> arrayListValueAt = this.mAttributionChains.valueAt(i4);
+                int size2 = arrayListValueAt.size();
                 int i5 = 0;
                 while (true) {
                     if (i5 >= size2) {
                         break;
                     }
-                    if (valueAt.get(i5).packageAndOpEquals(str, str2, str3, i)) {
-                        arrayList.add(keyAt);
+                    if (arrayListValueAt.get(i5).packageAndOpEquals(str, str2, str3, i)) {
+                        arrayList.add(numKeyAt);
                         break;
                     }
                     i5++;
@@ -161,50 +163,133 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
     }
 
     private void addLinkToChainIfNotPresentLocked(String str, String str2, int i, String str3, int i2, int i3) {
-        ArrayList<AccessChainLink> computeIfAbsent = this.mAttributionChains.computeIfAbsent(Integer.valueOf(i3), new Function() { // from class: android.permission.PermissionUsageHelper$$ExternalSyntheticLambda0
+        ArrayList<AccessChainLink> arrayListComputeIfAbsent = this.mAttributionChains.computeIfAbsent(Integer.valueOf(i3), new Function() { // from class: android.permission.PermissionUsageHelper$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 return PermissionUsageHelper.lambda$addLinkToChainIfNotPresentLocked$0((Integer) obj);
             }
         });
         AccessChainLink accessChainLink = new AccessChainLink(str, str2, str3, i, i2);
-        if (computeIfAbsent.contains(accessChainLink)) {
+        if (arrayListComputeIfAbsent.contains(accessChainLink)) {
             return;
         }
-        int size = computeIfAbsent.size();
+        int size = arrayListComputeIfAbsent.size();
         if (size != 0 && !accessChainLink.isEnd()) {
             int i4 = size - 1;
-            if (computeIfAbsent.get(i4).isEnd()) {
+            if (arrayListComputeIfAbsent.get(i4).isEnd()) {
                 if (accessChainLink.isStart()) {
-                    computeIfAbsent.add(0, accessChainLink);
+                    arrayListComputeIfAbsent.add(0, accessChainLink);
                     return;
                 } else {
-                    if (computeIfAbsent.get(computeIfAbsent.size() - 1).isEnd()) {
-                        computeIfAbsent.add(i4, accessChainLink);
+                    if (arrayListComputeIfAbsent.get(arrayListComputeIfAbsent.size() - 1).isEnd()) {
+                        arrayListComputeIfAbsent.add(i4, accessChainLink);
                         return;
                     }
                     return;
                 }
             }
         }
-        computeIfAbsent.add(accessChainLink);
+        arrayListComputeIfAbsent.add(accessChainLink);
     }
 
     static /* synthetic */ ArrayList lambda$addLinkToChainIfNotPresentLocked$0(Integer num) {
         return new ArrayList();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00d4 A[LOOP:1: B:20:0x00ce->B:22:0x00d4, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x00d4 A[LOOP:1: B:37:0x00ce->B:39:0x00d4, LOOP_END] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.util.List<android.permission.PermissionGroupUsage> getOpUsageDataByDevice(boolean r25, java.lang.String r26) {
-        /*
-            Method dump skipped, instructions count: 342
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.permission.PermissionUsageHelper.getOpUsageDataByDevice(boolean, java.lang.String):java.util.List");
+    public List<PermissionGroupUsage> getOpUsageDataByDevice(boolean z, String str) {
+        boolean z2;
+        int i;
+        PermissionUsageHelper permissionUsageHelper = this;
+        ArrayList arrayList = new ArrayList();
+        if (shouldShowIndicators()) {
+            ArrayList arrayList2 = new ArrayList(CAMERA_OPS);
+            if (shouldShowLocationIndicator()) {
+                arrayList2.addAll(LOCATION_OPS);
+            }
+            if (z) {
+                arrayList2.addAll(MIC_OPS);
+            }
+            String str2 = str;
+            Map<String, List<OpUsage>> opUsagesByDevice = permissionUsageHelper.getOpUsagesByDevice(arrayList2, str2);
+            ArrayList arrayList3 = new ArrayList(opUsagesByDevice.keySet());
+            AudioManager audioManager = (AudioManager) permissionUsageHelper.mContext.getSystemService(AudioManager.class);
+            String str3 = AppOpsManager.OPSTR_PHONE_CALL_CAMERA;
+            boolean zContains = arrayList3.contains(AppOpsManager.OPSTR_PHONE_CALL_CAMERA);
+            String str4 = Manifest.permission_group.MICROPHONE;
+            String str5 = AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE;
+            boolean z3 = true;
+            if ((zContains || arrayList3.contains(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE)) && arrayList3.contains(Manifest.permission_group.MICROPHONE) && audioManager.getMode() == 3) {
+                TelephonyManager telephonyManager = (TelephonyManager) permissionUsageHelper.mContext.getSystemService(TelephonyManager.class);
+                List<OpUsage> list = opUsagesByDevice.get(Manifest.permission_group.MICROPHONE);
+                for (int i2 = 0; i2 < list.size(); i2++) {
+                    if (telephonyManager.checkCarrierPrivilegesForPackage(list.get(i2).packageName) == 1) {
+                        arrayList3.remove(AppOpsManager.OPSTR_PHONE_CALL_CAMERA);
+                        arrayList3.remove(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE);
+                    }
+                }
+            }
+            ArrayMap<String, Map<String, String>> arrayMap = new ArrayMap<>();
+            int i3 = 0;
+            while (i3 < arrayList3.size()) {
+                String str6 = (String) arrayList3.get(i3);
+                ArrayMap<OpUsage, CharSequence> uniqueUsagesWithLabels = permissionUsageHelper.getUniqueUsagesWithLabels(str6, opUsagesByDevice.get(str6));
+                permissionUsageHelper.updateSubattributionLabelsMap(opUsagesByDevice.get(str6), arrayMap);
+                if (str6.equals(str5)) {
+                    str6 = str4;
+                } else if (str6.equals(str3)) {
+                    str6 = Manifest.permission_group.CAMERA;
+                } else {
+                    z2 = false;
+                    i = 0;
+                    while (i < uniqueUsagesWithLabels.size()) {
+                        OpUsage opUsageKeyAt = uniqueUsagesWithLabels.keyAt(i);
+                        String orDefault = arrayMap.getOrDefault(opUsageKeyAt.packageName, new ArrayMap()).getOrDefault(opUsageKeyAt.attributionTag, null);
+                        String str7 = str3;
+                        String str8 = opUsageKeyAt.packageName;
+                        int i4 = i3;
+                        int i5 = opUsageKeyAt.uid;
+                        String str9 = str4;
+                        long j = opUsageKeyAt.lastAccessTime;
+                        String str10 = str6;
+                        boolean z4 = opUsageKeyAt.isRunning;
+                        String str11 = opUsageKeyAt.attributionTag;
+                        CharSequence charSequenceValueAt = uniqueUsagesWithLabels.valueAt(i);
+                        ArrayMap<OpUsage, CharSequence> arrayMap2 = uniqueUsagesWithLabels;
+                        boolean z5 = z2;
+                        arrayList.add(new PermissionGroupUsage(str8, i5, j, str10, z4, z5, str11, orDefault, charSequenceValueAt, str2));
+                        i++;
+                        str2 = str;
+                        arrayMap = arrayMap;
+                        str6 = str10;
+                        z2 = z5;
+                        opUsagesByDevice = opUsagesByDevice;
+                        i3 = i4;
+                        str4 = str9;
+                        str5 = str5;
+                        str3 = str7;
+                        z3 = true;
+                        uniqueUsagesWithLabels = arrayMap2;
+                    }
+                    i3++;
+                    permissionUsageHelper = this;
+                    str2 = str;
+                    opUsagesByDevice = opUsagesByDevice;
+                }
+                z2 = z3;
+                i = 0;
+                while (i < uniqueUsagesWithLabels.size()) {
+                }
+                i3++;
+                permissionUsageHelper = this;
+                str2 = str;
+                opUsagesByDevice = opUsagesByDevice;
+            }
+        }
+        return arrayList;
     }
 
     public List<PermissionGroupUsage> getOpUsageDataForAllDevices(boolean z) {
@@ -242,10 +327,10 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             if (isSubattributionSupported(str, i)) {
                 Context userContext = getUserContext(userHandleForUid);
                 PackageInfo packageInfo = userContext.getPackageManager().getPackageInfo(str, PackageManager.PackageInfoFlags.of(2147487744L));
-                Context createPackageContext = userContext.createPackageContext(packageInfo.packageName, 0);
+                Context contextCreatePackageContext = userContext.createPackageContext(packageInfo.packageName, 0);
                 for (Attribution attribution : packageInfo.attributions) {
                     try {
-                        arrayMap.put(attribution.getTag(), createPackageContext.getString(attribution.getLabel()));
+                        arrayMap.put(attribution.getTag(), contextCreatePackageContext.getString(attribution.getLabel()));
                     } catch (Resources.NotFoundException unused) {
                     }
                 }
@@ -284,9 +369,9 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 }
                 packagesForOps = this.mAppOpsManager.getPackagesForOps((String[]) list.toArray(new String[list.size()]));
             }
-            long currentTimeMillis = System.currentTimeMillis();
-            long recentThreshold = getRecentThreshold(Long.valueOf(currentTimeMillis));
-            long runningThreshold = getRunningThreshold(Long.valueOf(currentTimeMillis));
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            long recentThreshold = getRecentThreshold(Long.valueOf(jCurrentTimeMillis));
+            long runningThreshold = getRunningThreshold(Long.valueOf(jCurrentTimeMillis));
             ArrayMap arrayMap = new ArrayMap();
             int size = packagesForOps.size();
             for (int i3 = 0; i3 < size; i3++) {
@@ -302,7 +387,7 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                     List<AppOpsManager.PackageOps> list2 = packagesForOps;
                     ArrayList arrayList = new ArrayList(opEntry.getAttributedOpEntries().keySet());
                     int size3 = opEntry.getAttributedOpEntries().size();
-                    long j = currentTimeMillis;
+                    long j = jCurrentTimeMillis;
                     int i5 = 0;
                     while (i5 < size3) {
                         String str2 = (String) arrayList.get(i5);
@@ -321,22 +406,22 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                             int i8 = size2;
                             int i9 = i4;
                             OpUsage opUsage2 = new OpUsage(packageName, str2, opStr, uid, lastAccessTime, z, opUsage);
-                            Integer valueOf = Integer.valueOf(opUsage2.getPackageIdHash());
+                            Integer numValueOf = Integer.valueOf(opUsage2.getPackageIdHash());
                             if (!arrayMap.containsKey(groupForOp)) {
                                 i = i8;
                                 ArrayMap arrayMap2 = new ArrayMap();
-                                arrayMap2.put(valueOf, opUsage2);
+                                arrayMap2.put(numValueOf, opUsage2);
                                 arrayMap.put(groupForOp, arrayMap2);
                             } else {
                                 i = i8;
                                 Map map = (Map) arrayMap.get(groupForOp);
-                                if (map.containsKey(valueOf)) {
+                                if (map.containsKey(numValueOf)) {
                                     i2 = i9;
-                                    if (opUsage2.lastAccessTime > ((OpUsage) map.get(valueOf)).lastAccessTime) {
-                                        map.put(valueOf, opUsage2);
+                                    if (opUsage2.lastAccessTime > ((OpUsage) map.get(numValueOf)).lastAccessTime) {
+                                        map.put(numValueOf, opUsage2);
                                     }
                                 } else {
-                                    map.put(valueOf, opUsage2);
+                                    map.put(numValueOf, opUsage2);
                                 }
                             }
                             i2 = i9;
@@ -351,7 +436,7 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                     }
                     i4++;
                     packagesForOps = list2;
-                    currentTimeMillis = j;
+                    jCurrentTimeMillis = j;
                 }
             }
             ArrayMap arrayMap3 = new ArrayMap();
@@ -370,10 +455,14 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         return ListFormatter.getInstance().format(list);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:107:0x025f  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0069  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private ArrayMap<OpUsage, CharSequence> getUniqueUsagesWithLabels(String str, List<OpUsage> list) {
+        String string;
         int i;
-        String charSequence;
-        int i2;
         ArrayMap<OpUsage, CharSequence> arrayMap = new ArrayMap<>();
         if (list != null && !list.isEmpty()) {
             ArrayMap arrayMap2 = new ArrayMap();
@@ -381,15 +470,16 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             ArraySet arraySet = new ArraySet();
             ArrayMap arrayMap4 = new ArrayMap();
             ArrayMap arrayMap5 = new ArrayMap();
-            for (int i3 = 0; i3 < list.size(); i3++) {
-                OpUsage opUsage = list.get(i3);
+            for (int i2 = 0; i2 < list.size(); i2++) {
+                OpUsage opUsage = list.get(i2);
                 arrayMap2.put(Integer.valueOf(opUsage.getPackageIdHash()), opUsage);
                 if (opUsage.proxy != null) {
                     arrayMap5.put(Integer.valueOf(opUsage.proxy.getPackageIdHash()), opUsage);
                 }
             }
-            while (i < list.size()) {
-                OpUsage opUsage2 = list.get(i);
+            int i3 = 0;
+            while (i3 < list.size()) {
+                OpUsage opUsage2 = list.get(i3);
                 if (opUsage2 != null) {
                     if (!arrayMap5.containsKey(Integer.valueOf(opUsage2.getPackageIdHash())) && opUsage2.proxy != null && !Manifest.permission_group.MICROPHONE.equals(str)) {
                         arrayMap4.put(opUsage2, new ArrayList());
@@ -399,15 +489,18 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                     OpUsage opUsage3 = (OpUsage) arrayMap3.get(Integer.valueOf(packageIdHash));
                     if (shouldShowPackage(opUsage2.packageName)) {
                         if (opUsage3 != null) {
-                            i2 = i;
-                            i = opUsage2.lastAccessTime <= opUsage3.lastAccessTime ? i2 + 1 : 0;
+                            i = i3;
+                            if (opUsage2.lastAccessTime > opUsage3.lastAccessTime) {
+                            }
                         } else {
-                            i2 = i;
+                            i = i3;
                         }
                         arrayMap3.put(Integer.valueOf(packageIdHash), opUsage2);
+                    } else {
+                        i = i3;
                     }
                 }
-                i2 = i;
+                i3 = i + 1;
             }
             for (int i4 = 0; i4 < arrayMap4.size(); i4++) {
                 OpUsage opUsage4 = (OpUsage) arrayMap4.keyAt(i4);
@@ -434,9 +527,9 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                         if (!opUsage5.packageName.equals(opUsage4.packageName) && shouldShowPackage(opUsage5.packageName)) {
                             try {
                                 PackageManager packageManager = getUserContext(opUsage5.getUser()).getPackageManager();
-                                CharSequence loadLabel = packageManager.getApplicationInfo(opUsage5.packageName, 0).loadLabel(packageManager);
-                                if (!arrayList.contains(loadLabel)) {
-                                    arrayList.add(loadLabel);
+                                CharSequence charSequenceLoadLabel = packageManager.getApplicationInfo(opUsage5.packageName, 0).loadLabel(packageManager);
+                                if (!arrayList.contains(charSequenceLoadLabel)) {
+                                    arrayList.add(charSequenceLoadLabel);
                                 }
                             } catch (PackageManager.NameNotFoundException unused) {
                             }
@@ -450,34 +543,35 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             }
             synchronized (this.mAttributionChains) {
                 for (int i6 = 0; i6 < this.mAttributionChains.size(); i6++) {
-                    ArrayList<AccessChainLink> valueAt = this.mAttributionChains.valueAt(i6);
-                    int size2 = valueAt.size() - 1;
-                    if (!valueAt.isEmpty() && valueAt.get(size2).isEnd()) {
-                        if (valueAt.get(0).isStart()) {
-                            if (str.equals(getGroupForOp(valueAt.get(0).usage.op)) && Manifest.permission_group.MICROPHONE.equals(str)) {
-                                Iterator<AccessChainLink> it = valueAt.iterator();
+                    ArrayList<AccessChainLink> arrayListValueAt = this.mAttributionChains.valueAt(i6);
+                    int size2 = arrayListValueAt.size() - 1;
+                    if (!arrayListValueAt.isEmpty() && arrayListValueAt.get(size2).isEnd()) {
+                        if (arrayListValueAt.get(0).isStart()) {
+                            if (str.equals(getGroupForOp(arrayListValueAt.get(0).usage.op)) && Manifest.permission_group.MICROPHONE.equals(str)) {
+                                Iterator<AccessChainLink> it = arrayListValueAt.iterator();
                                 while (it.hasNext()) {
                                     arraySet.add(Integer.valueOf(it.next().usage.getPackageIdHash()));
                                 }
-                                AccessChainLink accessChainLink = valueAt.get(0);
-                                AccessChainLink accessChainLink2 = valueAt.get(size2);
+                                AccessChainLink accessChainLink = arrayListValueAt.get(0);
+                                AccessChainLink accessChainLink2 = arrayListValueAt.get(size2);
                                 while (size2 > 0 && !shouldShowPackage(accessChainLink2.usage.packageName)) {
                                     size2--;
-                                    accessChainLink2 = valueAt.get(size2);
+                                    accessChainLink2 = arrayListValueAt.get(size2);
                                 }
                                 if (!accessChainLink2.usage.packageName.equals(accessChainLink.usage.packageName)) {
                                     try {
                                         PackageManager packageManager2 = getUserContext(accessChainLink2.usage.getUser()).getPackageManager();
                                         try {
-                                            charSequence = packageManager2.getApplicationInfo(accessChainLink2.usage.packageName, 0).loadLabel(packageManager2).toString();
+                                            string = packageManager2.getApplicationInfo(accessChainLink2.usage.packageName, 0).loadLabel(packageManager2).toString();
                                         } catch (PackageManager.NameNotFoundException unused2) {
                                         }
                                     } catch (PackageManager.NameNotFoundException unused3) {
                                     }
-                                    arrayMap.put(accessChainLink.usage, charSequence);
+                                    arrayMap.put(accessChainLink.usage, string);
+                                } else {
+                                    string = null;
+                                    arrayMap.put(accessChainLink.usage, string);
                                 }
-                                charSequence = null;
-                                arrayMap.put(accessChainLink.usage, charSequence);
                             }
                         }
                     }

@@ -36,7 +36,7 @@ public class BinderLatencyObserver {
     private int mStatsdPushIntervalMinutes = 360;
     private Runnable mLatencyObserverRunnable = new Runnable() { // from class: com.android.internal.os.BinderLatencyObserver.1
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws NoSuchMethodException, SecurityException {
             ArrayMap arrayMap;
             BinderLatencyObserver.this.noteLatencyDelayed();
             synchronized (BinderLatencyObserver.this.mLock) {
@@ -95,18 +95,18 @@ public class BinderLatencyObserver {
             }
             i5--;
         }
-        long start = protoOutputStream.start(2246267895809L);
-        long start2 = protoOutputStream.start(1146756268033L);
+        long jStart = protoOutputStream.start(2246267895809L);
+        long jStart2 = protoOutputStream.start(1146756268033L);
         protoOutputStream.write(1159641169921L, this.mProcessSource);
         protoOutputStream.write(1138166333443L, latencyDims.getBinderClass().getName());
         protoOutputStream.write(1138166333445L, str);
-        protoOutputStream.end(start2);
+        protoOutputStream.end(jStart2);
         protoOutputStream.write(1120986464258L, i2);
         while (i2 <= i4) {
             protoOutputStream.write(2220498092035L, iArr[i2]);
             i2++;
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     protected void writeAtomToStatsd(ProtoOutputStream protoOutputStream) {
@@ -143,19 +143,19 @@ public class BinderLatencyObserver {
         if (callSession == null || callSession.exceptionThrown || !shouldKeepSample()) {
             return;
         }
-        LatencyDims create = LatencyDims.create(callSession.binderClass, callSession.transactionCode);
-        if (shouldCollect(create)) {
+        LatencyDims latencyDimsCreate = LatencyDims.create(callSession.binderClass, callSession.transactionCode);
+        if (shouldCollect(latencyDimsCreate)) {
             long elapsedRealtimeMicro = getElapsedRealtimeMicro() - callSession.timeStarted;
-            int sampleToBucket = this.mLatencyBuckets.sampleToBucket(elapsedRealtimeMicro > 2147483647L ? Integer.MAX_VALUE : (int) elapsedRealtimeMicro);
+            int iSampleToBucket = this.mLatencyBuckets.sampleToBucket(elapsedRealtimeMicro > 2147483647L ? Integer.MAX_VALUE : (int) elapsedRealtimeMicro);
             synchronized (this.mLock) {
-                int[] iArr = this.mLatencyHistograms.get(create);
+                int[] iArr = this.mLatencyHistograms.get(latencyDimsCreate);
                 if (iArr == null) {
                     iArr = new int[this.mBucketCount];
-                    this.mLatencyHistograms.put(create, iArr);
+                    this.mLatencyHistograms.put(latencyDimsCreate, iArr);
                 }
-                int i = iArr[sampleToBucket];
+                int i = iArr[iSampleToBucket];
                 if (i < Integer.MAX_VALUE) {
-                    iArr[sampleToBucket] = i + 1;
+                    iArr[iSampleToBucket] = i + 1;
                 }
             }
         }
@@ -269,9 +269,9 @@ public class BinderLatencyObserver {
             if (i != 0) {
                 return i;
             }
-            int hashCode = (this.mTransactionCode * 31) + this.mBinderClass.getName().hashCode();
-            this.mHashCode = hashCode;
-            return hashCode;
+            int iHashCode = (this.mTransactionCode * 31) + this.mBinderClass.getName().hashCode();
+            this.mHashCode = iHashCode;
+            return iHashCode;
         }
     }
 

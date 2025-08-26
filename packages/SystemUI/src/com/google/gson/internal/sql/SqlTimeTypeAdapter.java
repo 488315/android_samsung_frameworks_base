@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SqlTimeTypeAdapter extends TypeAdapter<Time> {
     static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() { // from class: com.google.gson.internal.sql.SqlTimeTypeAdapter.1
@@ -43,29 +42,29 @@ final class SqlTimeTypeAdapter extends TypeAdapter<Time> {
             jsonReader.nextNull();
             return null;
         }
-        String nextString = jsonReader.nextString();
+        String strNextString = jsonReader.nextString();
         try {
             synchronized (this) {
-                time = new Time(this.format.parse(nextString).getTime());
+                time = new Time(this.format.parse(strNextString).getTime());
             }
             return time;
         } catch (ParseException e) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as SQL Time; at path ");
-            m.append(jsonReader.getPreviousPath());
-            throw new JsonSyntaxException(m.toString(), e);
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as SQL Time; at path ");
+            sbM.append(jsonReader.getPreviousPath());
+            throw new JsonSyntaxException(sbM.toString(), e);
         }
     }
 
     @Override // com.google.gson.TypeAdapter
     public void write(JsonWriter jsonWriter, Time time) throws IOException {
-        String format;
+        String str;
         if (time == null) {
             jsonWriter.nullValue();
             return;
         }
         synchronized (this) {
-            format = this.format.format((Date) time);
+            str = this.format.format((Date) time);
         }
-        jsonWriter.value(format);
+        jsonWriter.value(str);
     }
 }

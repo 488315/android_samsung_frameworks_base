@@ -7,7 +7,6 @@ import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.volume.domain.model.VolumePanelRoute;
 import com.android.systemui.volume.ui.navigation.VolumeNavigator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class VolumeDialogImpl$$ExternalSyntheticLambda11 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -39,10 +38,10 @@ public final /* synthetic */ class VolumeDialogImpl$$ExternalSyntheticLambda11 i
                 Prefs.putBoolean(volumeDialogImpl.mContext, "TouchedRingerToggle", true);
                 VolumeDialogController.StreamState streamState = volumeDialogImpl.mState.states.get(2);
                 if (streamState != null) {
-                    boolean hasVibrator = volumeDialogImpl.mController.hasVibrator();
+                    boolean zHasVibrator = volumeDialogImpl.mController.hasVibrator();
                     int i4 = volumeDialogImpl.mState.ringerModeInternal;
                     if (i4 == 2) {
-                        if (hasVibrator) {
+                        if (zHasVibrator) {
                             i = 1;
                         }
                     } else if (i4 != 1) {

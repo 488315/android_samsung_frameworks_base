@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class JsonReader implements Closeable {
     static final int BUFFER_SIZE = 1024;
@@ -65,18 +64,18 @@ public class JsonReader implements Closeable {
                     ((JsonTreeReader) jsonReader).promoteNameToValue();
                     return;
                 }
-                int i = jsonReader.peeked;
-                if (i == 0) {
-                    i = jsonReader.doPeek();
+                int iDoPeek = jsonReader.peeked;
+                if (iDoPeek == 0) {
+                    iDoPeek = jsonReader.doPeek();
                 }
-                if (i == 13) {
+                if (iDoPeek == 13) {
                     jsonReader.peeked = 9;
                     return;
                 }
-                if (i == 12) {
+                if (iDoPeek == 12) {
                     jsonReader.peeked = 8;
                 } else {
-                    if (i == 14) {
+                    if (iDoPeek == 14) {
                         jsonReader.peeked = 10;
                         return;
                     }
@@ -136,11 +135,11 @@ public class JsonReader implements Closeable {
         do {
             Reader reader = this.in;
             int i8 = this.limit;
-            int read = reader.read(cArr, i8, cArr.length - i8);
-            if (read == -1) {
+            int i9 = reader.read(cArr, i8, cArr.length - i8);
+            if (i9 == -1) {
                 return false;
             }
-            i2 = this.limit + read;
+            i2 = this.limit + i9;
             this.limit = i2;
             if (this.lineNumber == 0 && (i3 = this.lineStart) == 0 && i2 > 0 && cArr[0] == 65279) {
                 this.pos++;
@@ -208,8 +207,14 @@ public class JsonReader implements Closeable {
         return false;
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x0073, code lost:
+    
+        return r5;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int nextNonWhitespace(boolean z) throws IOException {
-        char c;
         char[] cArr = this.buffer;
         int i = this.pos;
         int i2 = this.limit;
@@ -226,7 +231,7 @@ public class JsonReader implements Closeable {
                 i2 = this.limit;
             }
             int i3 = i + 1;
-            c = cArr[i];
+            char c = cArr[i];
             if (c == '\n') {
                 this.lineNumber++;
                 this.lineStart = i3;
@@ -235,11 +240,13 @@ public class JsonReader implements Closeable {
                     this.pos = i3;
                     if (i3 == i2) {
                         this.pos = i;
-                        boolean fillBuffer = fillBuffer(2);
+                        boolean zFillBuffer = fillBuffer(2);
                         this.pos++;
-                        if (!fillBuffer) {
+                        if (!zFillBuffer) {
                             break;
                         }
+                        break;
+                        break;
                     }
                     checkLenient();
                     int i4 = this.pos;
@@ -274,216 +281,134 @@ public class JsonReader implements Closeable {
             }
             i = i3;
         }
-        return c;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x005a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:25:0x005a, code lost:
     
         if (r1 != null) goto L27;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x005c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x005c, code lost:
     
         r1 = new java.lang.StringBuilder(java.lang.Math.max((r2 - r3) * 2, 16));
      */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x006a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x006a, code lost:
     
         r1.append(r0, r3, r2 - r3);
         r9.pos = r2;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String nextQuotedValue(char r10) throws java.io.IOException {
-        /*
-            r9 = this;
-            char[] r0 = r9.buffer
-            r1 = 0
-        L3:
-            int r2 = r9.pos
-            int r3 = r9.limit
-        L7:
-            r4 = r3
-            r3 = r2
-        L9:
-            r5 = 16
-            r6 = 1
-            if (r2 >= r4) goto L5a
-            int r7 = r2 + 1
-            char r2 = r0[r2]
-            if (r2 != r10) goto L28
-            r9.pos = r7
-            int r7 = r7 - r3
-            int r7 = r7 - r6
-            if (r1 != 0) goto L20
-            java.lang.String r9 = new java.lang.String
-            r9.<init>(r0, r3, r7)
-            return r9
-        L20:
-            r1.append(r0, r3, r7)
-            java.lang.String r9 = r1.toString()
-            return r9
-        L28:
-            r8 = 92
-            if (r2 != r8) goto L4d
-            r9.pos = r7
-            int r7 = r7 - r3
-            int r2 = r7 + (-1)
-            if (r1 != 0) goto L3e
-            int r7 = r7 * 2
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            int r4 = java.lang.Math.max(r7, r5)
-            r1.<init>(r4)
-        L3e:
-            r1.append(r0, r3, r2)
-            char r2 = r9.readEscapeCharacter()
-            r1.append(r2)
-            int r2 = r9.pos
-            int r3 = r9.limit
-            goto L7
-        L4d:
-            r5 = 10
-            if (r2 != r5) goto L58
-            int r2 = r9.lineNumber
-            int r2 = r2 + r6
-            r9.lineNumber = r2
-            r9.lineStart = r7
-        L58:
-            r2 = r7
-            goto L9
-        L5a:
-            if (r1 != 0) goto L6a
-            int r1 = r2 - r3
-            int r1 = r1 * 2
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            int r1 = java.lang.Math.max(r1, r5)
-            r4.<init>(r1)
-            r1 = r4
-        L6a:
-            int r4 = r2 - r3
-            r1.append(r0, r3, r4)
-            r9.pos = r2
-            boolean r2 = r9.fillBuffer(r6)
-            if (r2 == 0) goto L78
-            goto L3
-        L78:
-            java.lang.String r10 = "Unterminated string"
-            java.io.IOException r9 = r9.syntaxError(r10)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.gson.stream.JsonReader.nextQuotedValue(char):java.lang.String");
+    private String nextQuotedValue(char c) throws IOException {
+        char[] cArr = this.buffer;
+        StringBuilder sb = null;
+        do {
+            int i = this.pos;
+            int i2 = this.limit;
+            while (true) {
+                int i3 = i2;
+                int i4 = i;
+                while (i < i3) {
+                    int i5 = i + 1;
+                    char c2 = cArr[i];
+                    if (c2 == c) {
+                        this.pos = i5;
+                        int i6 = (i5 - i4) - 1;
+                        if (sb == null) {
+                            return new String(cArr, i4, i6);
+                        }
+                        sb.append(cArr, i4, i6);
+                        return sb.toString();
+                    }
+                    if (c2 == '\\') {
+                        this.pos = i5;
+                        int i7 = i5 - i4;
+                        int i8 = i7 - 1;
+                        if (sb == null) {
+                            sb = new StringBuilder(Math.max(i7 * 2, 16));
+                        }
+                        sb.append(cArr, i4, i8);
+                        sb.append(readEscapeCharacter());
+                        i = this.pos;
+                        i2 = this.limit;
+                    } else {
+                        if (c2 == '\n') {
+                            this.lineNumber++;
+                            this.lineStart = i5;
+                        }
+                        i = i5;
+                    }
+                }
+                break;
+            }
+        } while (fillBuffer(1));
+        throw syntaxError("Unterminated string");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x004a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:34:0x004a, code lost:
     
         checkLenient();
      */
-    /* JADX WARN: Failed to find 'out' block for switch in B:54:0x0044. Please report as an issue. */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x008a  */
+    /* JADX WARN: Failed to find 'out' block for switch in B:32:0x0044. Please report as an issue. */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x0080  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x008a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String nextUnquotedValue() throws java.io.IOException {
-        /*
-            r6 = this;
-            r0 = 0
-            r1 = 0
-        L2:
-            r2 = r1
-        L3:
-            int r3 = r6.pos
-            int r4 = r3 + r2
-            int r5 = r6.limit
-            if (r4 >= r5) goto L4e
-            char[] r4 = r6.buffer
-            int r3 = r3 + r2
-            char r3 = r4[r3]
-            r4 = 9
-            if (r3 == r4) goto L5c
-            r4 = 10
-            if (r3 == r4) goto L5c
-            r4 = 12
-            if (r3 == r4) goto L5c
-            r4 = 13
-            if (r3 == r4) goto L5c
-            r4 = 32
-            if (r3 == r4) goto L5c
-            r4 = 35
-            if (r3 == r4) goto L4a
-            r4 = 44
-            if (r3 == r4) goto L5c
-            r4 = 47
-            if (r3 == r4) goto L4a
-            r4 = 61
-            if (r3 == r4) goto L4a
-            r4 = 123(0x7b, float:1.72E-43)
-            if (r3 == r4) goto L5c
-            r4 = 125(0x7d, float:1.75E-43)
-            if (r3 == r4) goto L5c
-            r4 = 58
-            if (r3 == r4) goto L5c
-            r4 = 59
-            if (r3 == r4) goto L4a
-            switch(r3) {
-                case 91: goto L5c;
-                case 92: goto L4a;
-                case 93: goto L5c;
-                default: goto L47;
+    private String nextUnquotedValue() throws IOException {
+        String string;
+        StringBuilder sb = null;
+        int i = 0;
+        do {
+            int i2 = 0;
+            while (true) {
+                int i3 = this.pos;
+                if (i3 + i2 < this.limit) {
+                    char c = this.buffer[i3 + i2];
+                    if (c != '\t' && c != '\n' && c != '\f' && c != '\r' && c != ' ') {
+                        if (c != '#') {
+                            if (c != ',') {
+                                if (c != '/' && c != '=') {
+                                    if (c != '{' && c != '}' && c != ':') {
+                                        if (c != ';') {
+                                            switch (c) {
+                                                case '[':
+                                                case ']':
+                                                    break;
+                                                case '\\':
+                                                    break;
+                                                default:
+                                                    i2++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (i2 >= this.buffer.length) {
+                    if (sb == null) {
+                        sb = new StringBuilder(Math.max(i2, 16));
+                    }
+                    sb.append(this.buffer, this.pos, i2);
+                    this.pos += i2;
+                } else if (fillBuffer(i2 + 1)) {
+                }
             }
-        L47:
-            int r2 = r2 + 1
-            goto L3
-        L4a:
-            r6.checkLenient()
-            goto L5c
-        L4e:
-            char[] r3 = r6.buffer
-            int r3 = r3.length
-            if (r2 >= r3) goto L5e
-            int r3 = r2 + 1
-            boolean r3 = r6.fillBuffer(r3)
-            if (r3 == 0) goto L5c
-            goto L3
-        L5c:
-            r1 = r2
-            goto L7e
-        L5e:
-            if (r0 != 0) goto L6b
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r3 = 16
-            int r3 = java.lang.Math.max(r2, r3)
-            r0.<init>(r3)
-        L6b:
-            char[] r3 = r6.buffer
-            int r4 = r6.pos
-            r0.append(r3, r4, r2)
-            int r3 = r6.pos
-            int r3 = r3 + r2
-            r6.pos = r3
-            r2 = 1
-            boolean r2 = r6.fillBuffer(r2)
-            if (r2 != 0) goto L2
-        L7e:
-            if (r0 != 0) goto L8a
-            java.lang.String r0 = new java.lang.String
-            char[] r2 = r6.buffer
-            int r3 = r6.pos
-            r0.<init>(r2, r3, r1)
-            goto L95
-        L8a:
-            char[] r2 = r6.buffer
-            int r3 = r6.pos
-            r0.append(r2, r3, r1)
-            java.lang.String r0 = r0.toString()
-        L95:
-            int r2 = r6.pos
-            int r2 = r2 + r1
-            r6.pos = r2
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.gson.stream.JsonReader.nextUnquotedValue():java.lang.String");
+            i = i2;
+            if (sb != null) {
+                string = new String(this.buffer, this.pos, i);
+            } else {
+                sb.append(this.buffer, this.pos, i);
+                string = sb.toString();
+            }
+            this.pos += i;
+            return string;
+        } while (fillBuffer(1));
+        if (sb != null) {
+        }
+        this.pos += i;
+        return string;
     }
 
     private int peekKeyword() throws IOException {
@@ -525,91 +450,171 @@ public class JsonReader implements Closeable {
         return i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0095, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:52:0x0093, code lost:
+    
+        if (isLiteral(r14) != false) goto L75;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:53:0x0095, code lost:
     
         if (r9 != 2) goto L66;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0097, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:54:0x0097, code lost:
     
         if (r10 == 0) goto L66;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x009d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:56:0x009d, code lost:
     
         if (r11 != Long.MIN_VALUE) goto L58;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x009f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:57:0x009f, code lost:
     
         if (r13 == false) goto L66;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x00a3, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:59:0x00a3, code lost:
     
         if (r11 != 0) goto L61;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x00a5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x00a5, code lost:
     
         if (r13 != false) goto L66;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x00a7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:61:0x00a7, code lost:
     
         if (r13 == false) goto L63;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x00aa, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x00aa, code lost:
     
         r11 = -r11;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x00ab, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:64:0x00ab, code lost:
     
         r19.peekedLong = r11;
         r19.pos += r8;
         r19.peeked = 15;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x00b6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:65:0x00b6, code lost:
     
         return 15;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00b7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x00b7, code lost:
     
         if (r9 == 2) goto L73;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x00ba, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x00ba, code lost:
     
         if (r9 == 4) goto L73;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x00bd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:70:0x00bd, code lost:
     
         if (r9 != 7) goto L72;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x00c0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:72:0x00c0, code lost:
     
         return r18;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x00c1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:73:0x00c1, code lost:
     
         r19.peekedNumberLength = r8;
         r19.peeked = 16;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x00c7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:74:0x00c7, code lost:
     
         return 16;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:79:0x0093, code lost:
-    
-        if (isLiteral(r14) != false) goto L75;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:80:0x00c8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:75:0x00c8, code lost:
     
         return r18;
      */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x00e1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int peekNumber() throws java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 236
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.gson.stream.JsonReader.peekNumber():int");
+    private int peekNumber() throws IOException {
+        char c;
+        int i;
+        char[] cArr = this.buffer;
+        int i2 = this.pos;
+        int i3 = this.limit;
+        int i4 = 0;
+        int i5 = 0;
+        char c2 = 0;
+        boolean z = false;
+        int i6 = 1;
+        long j = 0;
+        while (true) {
+            char c3 = 2;
+            if (i2 + i5 != i3) {
+                c = cArr[i2 + i5];
+                i = i4;
+                if (c == '+') {
+                    if (c == 'E' || c == 'e') {
+                        if (c2 != 2 && c2 != 4) {
+                            return i;
+                        }
+                        c2 = 5;
+                    } else if (c == '-') {
+                        c3 = 6;
+                        if (c2 == 0) {
+                            c2 = 1;
+                            z = true;
+                        } else if (c2 != 5) {
+                            return i;
+                        }
+                    } else if (c != '.') {
+                        if (c < '0' || c > '9') {
+                            break;
+                        }
+                        if (c2 == 1 || c2 == 0) {
+                            j = -(c - '0');
+                        } else if (c2 == 2) {
+                            if (j == 0) {
+                                return i;
+                            }
+                            long j2 = (10 * j) - (c - '0');
+                            i6 &= (j > MIN_INCOMPLETE_INTEGER || (j == MIN_INCOMPLETE_INTEGER && j2 < j)) ? 1 : i;
+                            j = j2;
+                        } else if (c2 == 3) {
+                            c2 = 4;
+                        } else if (c2 == 5 || c2 == 6) {
+                            c2 = 7;
+                        }
+                    } else {
+                        if (c2 != 2) {
+                            return i;
+                        }
+                        c2 = 3;
+                    }
+                    i5++;
+                    i4 = i;
+                } else {
+                    c3 = 6;
+                    if (c2 != 5) {
+                        return i;
+                    }
+                }
+                c2 = c3;
+                i5++;
+                i4 = i;
+            } else {
+                if (i5 == cArr.length) {
+                    return i4;
+                }
+                if (!fillBuffer(i5 + 1)) {
+                    i = i4;
+                    break;
+                }
+                i2 = this.pos;
+                i3 = this.limit;
+                c = cArr[i2 + i5];
+                i = i4;
+                if (c == '+') {
+                }
+                c2 = c3;
+                i5++;
+                i4 = i;
+            }
+        }
     }
 
     private void push(int i) {
@@ -766,86 +771,57 @@ public class JsonReader implements Closeable {
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void skipUnquotedValue() throws java.io.IOException {
-        /*
-            r4 = this;
-        L0:
-            r0 = 0
-        L1:
-            int r1 = r4.pos
-            int r2 = r1 + r0
-            int r3 = r4.limit
-            if (r2 >= r3) goto L51
-            char[] r2 = r4.buffer
-            int r1 = r1 + r0
-            char r1 = r2[r1]
-            r2 = 9
-            if (r1 == r2) goto L4b
-            r2 = 10
-            if (r1 == r2) goto L4b
-            r2 = 12
-            if (r1 == r2) goto L4b
-            r2 = 13
-            if (r1 == r2) goto L4b
-            r2 = 32
-            if (r1 == r2) goto L4b
-            r2 = 35
-            if (r1 == r2) goto L48
-            r2 = 44
-            if (r1 == r2) goto L4b
-            r2 = 47
-            if (r1 == r2) goto L48
-            r2 = 61
-            if (r1 == r2) goto L48
-            r2 = 123(0x7b, float:1.72E-43)
-            if (r1 == r2) goto L4b
-            r2 = 125(0x7d, float:1.75E-43)
-            if (r1 == r2) goto L4b
-            r2 = 58
-            if (r1 == r2) goto L4b
-            r2 = 59
-            if (r1 == r2) goto L48
-            switch(r1) {
-                case 91: goto L4b;
-                case 92: goto L48;
-                case 93: goto L4b;
-                default: goto L45;
+    private void skipUnquotedValue() throws IOException {
+        do {
+            int i = 0;
+            while (true) {
+                int i2 = this.pos;
+                if (i2 + i < this.limit) {
+                    char c = this.buffer[i2 + i];
+                    if (c != '\t' && c != '\n' && c != '\f' && c != '\r' && c != ' ') {
+                        if (c != '#') {
+                            if (c != ',') {
+                                if (c != '/' && c != '=') {
+                                    if (c != '{' && c != '}' && c != ':') {
+                                        if (c != ';') {
+                                            switch (c) {
+                                                case '[':
+                                                case ']':
+                                                    break;
+                                                case '\\':
+                                                    break;
+                                                default:
+                                                    i++;
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    this.pos = i2 + i;
+                }
             }
-        L45:
-            int r0 = r0 + 1
-            goto L1
-        L48:
-            r4.checkLenient()
-        L4b:
-            int r1 = r4.pos
-            int r1 = r1 + r0
-            r4.pos = r1
-            return
-        L51:
-            int r1 = r1 + r0
-            r4.pos = r1
-            r0 = 1
-            boolean r0 = r4.fillBuffer(r0)
-            if (r0 != 0) goto L0
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.gson.stream.JsonReader.skipUnquotedValue():void");
+            this.pos += i;
+            return;
+        } while (fillBuffer(1));
     }
 
     private IOException syntaxError(String str) throws IOException {
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-        m.append(locationString());
-        throw new MalformedJsonException(m.toString());
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+        sbM.append(locationString());
+        throw new MalformedJsonException(sbM.toString());
     }
 
     public void beginArray() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 3) {
+        if (iDoPeek == 3) {
             push(1);
             this.pathIndices[this.stackSize - 1] = 0;
             this.peeked = 0;
@@ -855,11 +831,11 @@ public class JsonReader implements Closeable {
     }
 
     public void beginObject() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 1) {
+        if (iDoPeek == 1) {
             push(3);
             this.peeked = 0;
         } else {
@@ -876,17 +852,17 @@ public class JsonReader implements Closeable {
     }
 
     public int doPeek() throws IOException {
-        int nextNonWhitespace;
+        int iNextNonWhitespace;
         int[] iArr = this.stack;
         int i = this.stackSize;
         int i2 = iArr[i - 1];
         if (i2 == 1) {
             iArr[i - 1] = 2;
         } else if (i2 == 2) {
-            int nextNonWhitespace2 = nextNonWhitespace(true);
-            if (nextNonWhitespace2 != 44) {
-                if (nextNonWhitespace2 != 59) {
-                    if (nextNonWhitespace2 != 93) {
+            int iNextNonWhitespace2 = nextNonWhitespace(true);
+            if (iNextNonWhitespace2 != 44) {
+                if (iNextNonWhitespace2 != 59) {
+                    if (iNextNonWhitespace2 != 93) {
                         throw syntaxError("Unterminated array");
                     }
                     this.peeked = 4;
@@ -897,9 +873,9 @@ public class JsonReader implements Closeable {
         } else {
             if (i2 == 3 || i2 == 5) {
                 iArr[i - 1] = 4;
-                if (i2 == 5 && (nextNonWhitespace = nextNonWhitespace(true)) != 44) {
-                    if (nextNonWhitespace != 59) {
-                        if (nextNonWhitespace != 125) {
+                if (i2 == 5 && (iNextNonWhitespace = nextNonWhitespace(true)) != 44) {
+                    if (iNextNonWhitespace != 59) {
+                        if (iNextNonWhitespace != 125) {
                             throw syntaxError("Unterminated object");
                         }
                         this.peeked = 2;
@@ -907,17 +883,17 @@ public class JsonReader implements Closeable {
                     }
                     checkLenient();
                 }
-                int nextNonWhitespace3 = nextNonWhitespace(true);
-                if (nextNonWhitespace3 == 34) {
+                int iNextNonWhitespace3 = nextNonWhitespace(true);
+                if (iNextNonWhitespace3 == 34) {
                     this.peeked = 13;
                     return 13;
                 }
-                if (nextNonWhitespace3 == 39) {
+                if (iNextNonWhitespace3 == 39) {
                     checkLenient();
                     this.peeked = 12;
                     return 12;
                 }
-                if (nextNonWhitespace3 == 125) {
+                if (iNextNonWhitespace3 == 125) {
                     if (i2 == 5) {
                         throw syntaxError("Expected name");
                     }
@@ -926,7 +902,7 @@ public class JsonReader implements Closeable {
                 }
                 checkLenient();
                 this.pos--;
-                if (!isLiteral((char) nextNonWhitespace3)) {
+                if (!isLiteral((char) iNextNonWhitespace3)) {
                     throw syntaxError("Expected name");
                 }
                 this.peeked = 14;
@@ -934,9 +910,9 @@ public class JsonReader implements Closeable {
             }
             if (i2 == 4) {
                 iArr[i - 1] = 5;
-                int nextNonWhitespace4 = nextNonWhitespace(true);
-                if (nextNonWhitespace4 != 58) {
-                    if (nextNonWhitespace4 != 61) {
+                int iNextNonWhitespace4 = nextNonWhitespace(true);
+                if (iNextNonWhitespace4 != 58) {
+                    if (iNextNonWhitespace4 != 61) {
                         throw syntaxError("Expected ':'");
                     }
                     checkLenient();
@@ -964,34 +940,34 @@ public class JsonReader implements Closeable {
                 throw new IllegalStateException("JsonReader is closed");
             }
         }
-        int nextNonWhitespace5 = nextNonWhitespace(true);
-        if (nextNonWhitespace5 == 34) {
+        int iNextNonWhitespace5 = nextNonWhitespace(true);
+        if (iNextNonWhitespace5 == 34) {
             this.peeked = 9;
             return 9;
         }
-        if (nextNonWhitespace5 == 39) {
+        if (iNextNonWhitespace5 == 39) {
             checkLenient();
             this.peeked = 8;
             return 8;
         }
-        if (nextNonWhitespace5 != 44 && nextNonWhitespace5 != 59) {
-            if (nextNonWhitespace5 == 91) {
+        if (iNextNonWhitespace5 != 44 && iNextNonWhitespace5 != 59) {
+            if (iNextNonWhitespace5 == 91) {
                 this.peeked = 3;
                 return 3;
             }
-            if (nextNonWhitespace5 != 93) {
-                if (nextNonWhitespace5 == 123) {
+            if (iNextNonWhitespace5 != 93) {
+                if (iNextNonWhitespace5 == 123) {
                     this.peeked = 1;
                     return 1;
                 }
                 this.pos--;
-                int peekKeyword = peekKeyword();
-                if (peekKeyword != 0) {
-                    return peekKeyword;
+                int iPeekKeyword = peekKeyword();
+                if (iPeekKeyword != 0) {
+                    return iPeekKeyword;
                 }
-                int peekNumber = peekNumber();
-                if (peekNumber != 0) {
-                    return peekNumber;
+                int iPeekNumber = peekNumber();
+                if (iPeekNumber != 0) {
+                    return iPeekNumber;
                 }
                 if (!isLiteral(this.buffer[this.pos])) {
                     throw syntaxError("Expected value");
@@ -1015,36 +991,36 @@ public class JsonReader implements Closeable {
     }
 
     public void endArray() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i != 4) {
+        if (iDoPeek != 4) {
             throw new IllegalStateException("Expected END_ARRAY but was " + peek() + locationString());
         }
-        int i2 = this.stackSize;
-        this.stackSize = i2 - 1;
+        int i = this.stackSize;
+        this.stackSize = i - 1;
         int[] iArr = this.pathIndices;
-        int i3 = i2 - 2;
-        iArr[i3] = iArr[i3] + 1;
+        int i2 = i - 2;
+        iArr[i2] = iArr[i2] + 1;
         this.peeked = 0;
     }
 
     public void endObject() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i != 2) {
+        if (iDoPeek != 2) {
             throw new IllegalStateException("Expected END_OBJECT but was " + peek() + locationString());
         }
-        int i2 = this.stackSize;
-        int i3 = i2 - 1;
-        this.stackSize = i3;
-        this.pathNames[i3] = null;
+        int i = this.stackSize;
+        int i2 = i - 1;
+        this.stackSize = i2;
+        this.pathNames[i2] = null;
         int[] iArr = this.pathIndices;
-        int i4 = i2 - 2;
-        iArr[i4] = iArr[i4] + 1;
+        int i3 = i - 2;
+        iArr[i3] = iArr[i3] + 1;
         this.peeked = 0;
     }
 
@@ -1053,11 +1029,11 @@ public class JsonReader implements Closeable {
     }
 
     public boolean hasNext() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        return (i == 2 || i == 4 || i == 17) ? false : true;
+        return (iDoPeek == 2 || iDoPeek == 4 || iDoPeek == 17) ? false : true;
     }
 
     public final boolean isLenient() {
@@ -1065,111 +1041,111 @@ public class JsonReader implements Closeable {
     }
 
     public String locationString() {
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(this.lineNumber + 1, (this.pos - this.lineStart) + 1, " at line ", " column ", " path ");
-        m.append(getPath());
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(this.lineNumber + 1, (this.pos - this.lineStart) + 1, " at line ", " column ", " path ");
+        sbM.append(getPath());
+        return sbM.toString();
     }
 
     public boolean nextBoolean() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 5) {
+        if (iDoPeek == 5) {
             this.peeked = 0;
             int[] iArr = this.pathIndices;
-            int i2 = this.stackSize - 1;
-            iArr[i2] = iArr[i2] + 1;
+            int i = this.stackSize - 1;
+            iArr[i] = iArr[i] + 1;
             return true;
         }
-        if (i != 6) {
+        if (iDoPeek != 6) {
             throw new IllegalStateException("Expected a boolean but was " + peek() + locationString());
         }
         this.peeked = 0;
         int[] iArr2 = this.pathIndices;
-        int i3 = this.stackSize - 1;
-        iArr2[i3] = iArr2[i3] + 1;
+        int i2 = this.stackSize - 1;
+        iArr2[i2] = iArr2[i2] + 1;
         return false;
     }
 
-    public double nextDouble() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+    public double nextDouble() throws IOException, NumberFormatException {
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 15) {
+        if (iDoPeek == 15) {
             this.peeked = 0;
             int[] iArr = this.pathIndices;
-            int i2 = this.stackSize - 1;
-            iArr[i2] = iArr[i2] + 1;
+            int i = this.stackSize - 1;
+            iArr[i] = iArr[i] + 1;
             return this.peekedLong;
         }
-        if (i == 16) {
+        if (iDoPeek == 16) {
             this.peekedString = new String(this.buffer, this.pos, this.peekedNumberLength);
             this.pos += this.peekedNumberLength;
-        } else if (i == 8 || i == 9) {
-            this.peekedString = nextQuotedValue(i == 8 ? '\'' : '\"');
-        } else if (i == 10) {
+        } else if (iDoPeek == 8 || iDoPeek == 9) {
+            this.peekedString = nextQuotedValue(iDoPeek == 8 ? '\'' : '\"');
+        } else if (iDoPeek == 10) {
             this.peekedString = nextUnquotedValue();
-        } else if (i != 11) {
+        } else if (iDoPeek != 11) {
             throw new IllegalStateException("Expected a double but was " + peek() + locationString());
         }
         this.peeked = 11;
-        double parseDouble = Double.parseDouble(this.peekedString);
-        if (!this.lenient && (Double.isNaN(parseDouble) || Double.isInfinite(parseDouble))) {
-            throw new MalformedJsonException("JSON forbids NaN and infinities: " + parseDouble + locationString());
+        double d = Double.parseDouble(this.peekedString);
+        if (!this.lenient && (Double.isNaN(d) || Double.isInfinite(d))) {
+            throw new MalformedJsonException("JSON forbids NaN and infinities: " + d + locationString());
         }
         this.peekedString = null;
         this.peeked = 0;
         int[] iArr2 = this.pathIndices;
-        int i3 = this.stackSize - 1;
-        iArr2[i3] = iArr2[i3] + 1;
-        return parseDouble;
+        int i2 = this.stackSize - 1;
+        iArr2[i2] = iArr2[i2] + 1;
+        return d;
     }
 
-    public int nextInt() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+    public int nextInt() throws IOException, NumberFormatException {
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 15) {
+        if (iDoPeek == 15) {
             long j = this.peekedLong;
-            int i2 = (int) j;
-            if (j != i2) {
+            int i = (int) j;
+            if (j != i) {
                 throw new NumberFormatException("Expected an int but was " + this.peekedLong + locationString());
             }
             this.peeked = 0;
             int[] iArr = this.pathIndices;
-            int i3 = this.stackSize - 1;
-            iArr[i3] = iArr[i3] + 1;
-            return i2;
+            int i2 = this.stackSize - 1;
+            iArr[i2] = iArr[i2] + 1;
+            return i;
         }
-        if (i == 16) {
+        if (iDoPeek == 16) {
             this.peekedString = new String(this.buffer, this.pos, this.peekedNumberLength);
             this.pos += this.peekedNumberLength;
         } else {
-            if (i != 8 && i != 9 && i != 10) {
+            if (iDoPeek != 8 && iDoPeek != 9 && iDoPeek != 10) {
                 throw new IllegalStateException("Expected an int but was " + peek() + locationString());
             }
-            if (i == 10) {
+            if (iDoPeek == 10) {
                 this.peekedString = nextUnquotedValue();
             } else {
-                this.peekedString = nextQuotedValue(i == 8 ? '\'' : '\"');
+                this.peekedString = nextQuotedValue(iDoPeek == 8 ? '\'' : '\"');
             }
             try {
-                int parseInt = Integer.parseInt(this.peekedString);
+                int i3 = Integer.parseInt(this.peekedString);
                 this.peeked = 0;
                 int[] iArr2 = this.pathIndices;
                 int i4 = this.stackSize - 1;
                 iArr2[i4] = iArr2[i4] + 1;
-                return parseInt;
+                return i3;
             } catch (NumberFormatException unused) {
             }
         }
         this.peeked = 11;
-        double parseDouble = Double.parseDouble(this.peekedString);
-        int i5 = (int) parseDouble;
-        if (i5 != parseDouble) {
+        double d = Double.parseDouble(this.peekedString);
+        int i5 = (int) d;
+        if (i5 != d) {
             throw new NumberFormatException("Expected an int but was " + this.peekedString + locationString());
         }
         this.peekedString = null;
@@ -1180,108 +1156,108 @@ public class JsonReader implements Closeable {
         return i5;
     }
 
-    public long nextLong() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+    public long nextLong() throws IOException, NumberFormatException {
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 15) {
+        if (iDoPeek == 15) {
             this.peeked = 0;
             int[] iArr = this.pathIndices;
-            int i2 = this.stackSize - 1;
-            iArr[i2] = iArr[i2] + 1;
+            int i = this.stackSize - 1;
+            iArr[i] = iArr[i] + 1;
             return this.peekedLong;
         }
-        if (i == 16) {
+        if (iDoPeek == 16) {
             this.peekedString = new String(this.buffer, this.pos, this.peekedNumberLength);
             this.pos += this.peekedNumberLength;
         } else {
-            if (i != 8 && i != 9 && i != 10) {
+            if (iDoPeek != 8 && iDoPeek != 9 && iDoPeek != 10) {
                 throw new IllegalStateException("Expected a long but was " + peek() + locationString());
             }
-            if (i == 10) {
+            if (iDoPeek == 10) {
                 this.peekedString = nextUnquotedValue();
             } else {
-                this.peekedString = nextQuotedValue(i == 8 ? '\'' : '\"');
+                this.peekedString = nextQuotedValue(iDoPeek == 8 ? '\'' : '\"');
             }
             try {
-                long parseLong = Long.parseLong(this.peekedString);
+                long j = Long.parseLong(this.peekedString);
                 this.peeked = 0;
                 int[] iArr2 = this.pathIndices;
-                int i3 = this.stackSize - 1;
-                iArr2[i3] = iArr2[i3] + 1;
-                return parseLong;
+                int i2 = this.stackSize - 1;
+                iArr2[i2] = iArr2[i2] + 1;
+                return j;
             } catch (NumberFormatException unused) {
             }
         }
         this.peeked = 11;
-        double parseDouble = Double.parseDouble(this.peekedString);
-        long j = (long) parseDouble;
-        if (j != parseDouble) {
+        double d = Double.parseDouble(this.peekedString);
+        long j2 = (long) d;
+        if (j2 != d) {
             throw new NumberFormatException("Expected a long but was " + this.peekedString + locationString());
         }
         this.peekedString = null;
         this.peeked = 0;
         int[] iArr3 = this.pathIndices;
-        int i4 = this.stackSize - 1;
-        iArr3[i4] = iArr3[i4] + 1;
-        return j;
+        int i3 = this.stackSize - 1;
+        iArr3[i3] = iArr3[i3] + 1;
+        return j2;
     }
 
     public String nextName() throws IOException {
-        String nextQuotedValue;
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        String strNextQuotedValue;
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 14) {
-            nextQuotedValue = nextUnquotedValue();
-        } else if (i == 12) {
-            nextQuotedValue = nextQuotedValue('\'');
+        if (iDoPeek == 14) {
+            strNextQuotedValue = nextUnquotedValue();
+        } else if (iDoPeek == 12) {
+            strNextQuotedValue = nextQuotedValue('\'');
         } else {
-            if (i != 13) {
+            if (iDoPeek != 13) {
                 throw new IllegalStateException("Expected a name but was " + peek() + locationString());
             }
-            nextQuotedValue = nextQuotedValue('\"');
+            strNextQuotedValue = nextQuotedValue('\"');
         }
         this.peeked = 0;
-        this.pathNames[this.stackSize - 1] = nextQuotedValue;
-        return nextQuotedValue;
+        this.pathNames[this.stackSize - 1] = strNextQuotedValue;
+        return strNextQuotedValue;
     }
 
     public void nextNull() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i != 7) {
+        if (iDoPeek != 7) {
             throw new IllegalStateException("Expected null but was " + peek() + locationString());
         }
         this.peeked = 0;
         int[] iArr = this.pathIndices;
-        int i2 = this.stackSize - 1;
-        iArr[i2] = iArr[i2] + 1;
+        int i = this.stackSize - 1;
+        iArr[i] = iArr[i] + 1;
     }
 
     public String nextString() throws IOException {
         String str;
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        if (i == 10) {
+        if (iDoPeek == 10) {
             str = nextUnquotedValue();
-        } else if (i == 8) {
+        } else if (iDoPeek == 8) {
             str = nextQuotedValue('\'');
-        } else if (i == 9) {
+        } else if (iDoPeek == 9) {
             str = nextQuotedValue('\"');
-        } else if (i == 11) {
+        } else if (iDoPeek == 11) {
             str = this.peekedString;
             this.peekedString = null;
-        } else if (i == 15) {
+        } else if (iDoPeek == 15) {
             str = Long.toString(this.peekedLong);
         } else {
-            if (i != 16) {
+            if (iDoPeek != 16) {
                 throw new IllegalStateException("Expected a string but was " + peek() + locationString());
             }
             str = new String(this.buffer, this.pos, this.peekedNumberLength);
@@ -1289,17 +1265,17 @@ public class JsonReader implements Closeable {
         }
         this.peeked = 0;
         int[] iArr = this.pathIndices;
-        int i2 = this.stackSize - 1;
-        iArr[i2] = iArr[i2] + 1;
+        int i = this.stackSize - 1;
+        iArr[i] = iArr[i] + 1;
         return str;
     }
 
     public JsonToken peek() throws IOException {
-        int i = this.peeked;
-        if (i == 0) {
-            i = doPeek();
+        int iDoPeek = this.peeked;
+        if (iDoPeek == 0) {
+            iDoPeek = doPeek();
         }
-        switch (i) {
+        switch (iDoPeek) {
             case 1:
                 return JsonToken.BEGIN_OBJECT;
             case 2:
@@ -1339,42 +1315,38 @@ public class JsonReader implements Closeable {
     public void skipValue() throws IOException {
         int i = 0;
         do {
-            int i2 = this.peeked;
-            if (i2 == 0) {
-                i2 = doPeek();
+            int iDoPeek = this.peeked;
+            if (iDoPeek == 0) {
+                iDoPeek = doPeek();
             }
-            if (i2 == 3) {
+            if (iDoPeek == 3) {
                 push(1);
-            } else if (i2 == 1) {
+            } else if (iDoPeek == 1) {
                 push(3);
-            } else {
-                if (i2 == 4) {
-                    this.stackSize--;
-                } else if (i2 == 2) {
-                    this.stackSize--;
-                } else {
-                    if (i2 == 14 || i2 == 10) {
-                        skipUnquotedValue();
-                    } else if (i2 == 8 || i2 == 12) {
-                        skipQuotedValue('\'');
-                    } else if (i2 == 9 || i2 == 13) {
-                        skipQuotedValue('\"');
-                    } else if (i2 == 16) {
-                        this.pos += this.peekedNumberLength;
-                    }
-                    this.peeked = 0;
-                }
+            } else if (iDoPeek == 4 || iDoPeek == 2) {
+                this.stackSize--;
                 i--;
+                this.peeked = 0;
+            } else {
+                if (iDoPeek == 14 || iDoPeek == 10) {
+                    skipUnquotedValue();
+                } else if (iDoPeek == 8 || iDoPeek == 12) {
+                    skipQuotedValue('\'');
+                } else if (iDoPeek == 9 || iDoPeek == 13) {
+                    skipQuotedValue('\"');
+                } else if (iDoPeek == 16) {
+                    this.pos += this.peekedNumberLength;
+                }
                 this.peeked = 0;
             }
             i++;
             this.peeked = 0;
         } while (i != 0);
         int[] iArr = this.pathIndices;
-        int i3 = this.stackSize;
-        int i4 = i3 - 1;
-        iArr[i4] = iArr[i4] + 1;
-        this.pathNames[i3 - 1] = "null";
+        int i2 = this.stackSize;
+        int i3 = i2 - 1;
+        iArr[i3] = iArr[i3] + 1;
+        this.pathNames[i2 - 1] = "null";
     }
 
     public String toString() {

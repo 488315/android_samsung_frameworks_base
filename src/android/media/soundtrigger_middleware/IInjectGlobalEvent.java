@@ -54,9 +54,9 @@ public interface IInjectGlobalEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInjectGlobalEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInjectGlobalEvent)) {
-                return (IInjectGlobalEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInjectGlobalEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInjectGlobalEvent)) {
+                return (IInjectGlobalEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IInjectGlobalEvent extends IInterface {
             if (i == 1) {
                 triggerRestart();
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
-                IAcknowledgeEvent asInterface = IAcknowledgeEvent.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
+                IAcknowledgeEvent iAcknowledgeEventAsInterface = IAcknowledgeEvent.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setResourceContention(readBoolean, asInterface);
+                setResourceContention(z, iAcknowledgeEventAsInterface);
             } else if (i == 3) {
                 triggerOnResourcesAvailable();
             } else {
@@ -103,36 +103,36 @@ public interface IInjectGlobalEvent extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
             public void triggerRestart() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
             public void setResourceContention(boolean z, IAcknowledgeEvent iAcknowledgeEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iAcknowledgeEvent);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iAcknowledgeEvent);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
             public void triggerOnResourcesAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

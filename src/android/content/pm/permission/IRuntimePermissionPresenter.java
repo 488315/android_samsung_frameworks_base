@@ -46,9 +46,9 @@ public interface IRuntimePermissionPresenter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRuntimePermissionPresenter)) {
-                return (IRuntimePermissionPresenter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRuntimePermissionPresenter)) {
+                return (IRuntimePermissionPresenter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IRuntimePermissionPresenter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                getAppPermissions(readString, remoteCallback);
+                getAppPermissions(string, remoteCallback);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface IRuntimePermissionPresenter extends IInterface {
 
             @Override // android.content.pm.permission.IRuntimePermissionPresenter
             public void getAppPermissions(String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

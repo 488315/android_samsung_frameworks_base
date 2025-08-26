@@ -1,13 +1,20 @@
 package com.android.systemui.brightness.data.repository;
 
+import android.hardware.display.BrightnessInfo;
 import android.hardware.display.DisplayManager;
 import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.brightness.shared.model.LinearBrightness;
 import com.android.systemui.brightness.shared.model.LinearBrightnessKt;
 import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.log.table.TableLogBuffer;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
@@ -16,8 +23,10 @@ import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.BufferedChannel;
+import kotlinx.coroutines.channels.BufferedChannel.BufferedChannelIterator;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -27,7 +36,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafe
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScreenBrightnessDisplayManagerRepository implements ScreenBrightnessRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +50,6 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
     public final ReadonlyStateFlow maxLinearBrightness;
     public final ReadonlyStateFlow minLinearBrightness;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         Object L$0;
@@ -63,34 +70,104 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x0043, code lost:
-        
-            if (r10 != r0) goto L10;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:22:0x0061, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:18:0x0061, code lost:
         
             if (r10 == r0) goto L19;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:26:0x0063, code lost:
-        
-            return r0;
-         */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:22:0x0061 -> B:6:0x0064). Please report as a decompilation issue!!! */
+        /* JADX WARN: Removed duplicated region for block: B:10:0x0028 A[PHI: r1 r10
+          0x0028: PHI (r1v2 kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator) = 
+          (r1v5 kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator)
+          (r1v14 kotlinx.coroutines.channels.BufferedChannel$BufferedChannelIterator)
+         binds: [B:13:0x0043, B:9:0x0021] A[DONT_GENERATE, DONT_INLINE]
+          0x0028: PHI (r10v3 java.lang.Object) = (r10v9 java.lang.Object), (r10v0 java.lang.Object) binds: [B:13:0x0043, B:9:0x0021] A[DONT_GENERATE, DONT_INLINE]] */
+        /* JADX WARN: Removed duplicated region for block: B:17:0x004e  */
+        /* JADX WARN: Removed duplicated region for block: B:39:0x00d2  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x0061 -> B:20:0x0064). Please report as a decompilation issue!!! */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r10) {
-            /*
-                Method dump skipped, instructions count: 213
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
+            BufferedChannel.BufferedChannelIterator bufferedChannelIterator2;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                BufferedChannel bufferedChannel = ScreenBrightnessDisplayManagerRepository.this.apiQueue;
+                bufferedChannel.getClass();
+                bufferedChannelIterator = bufferedChannel.new BufferedChannelIterator();
+                this.L$0 = bufferedChannelIterator;
+                this.L$1 = null;
+                this.label = 1;
+                obj = bufferedChannelIterator.hasNext(this);
+                if (obj != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                SetBrightnessMethod setBrightnessMethod = (SetBrightnessMethod) this.L$1;
+                bufferedChannelIterator2 = (BufferedChannel.BufferedChannelIterator) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                Pair pair = (Pair) obj;
+                float fMo1060getValuefoLk1o = setBrightnessMethod.mo1060getValuefoLk1o();
+                float f = ((LinearBrightness) pair.getFirst()).floatValue;
+                float f2 = ((LinearBrightness) pair.getSecond()).floatValue;
+                if (fMo1060getValuefoLk1o < f) {
+                    fMo1060getValuefoLk1o = f;
+                } else if (fMo1060getValuefoLk1o > f2) {
+                    fMo1060getValuefoLk1o = f2;
+                }
+                if (setBrightnessMethod instanceof SetBrightnessMethod.Temporary) {
+                    ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository = ScreenBrightnessDisplayManagerRepository.this;
+                    screenBrightnessDisplayManagerRepository.displayManager.setTemporaryBrightness(screenBrightnessDisplayManagerRepository.displayId, fMo1060getValuefoLk1o);
+                } else {
+                    if (!(setBrightnessMethod instanceof SetBrightnessMethod.Permanent)) {
+                        throw new NoWhenBranchMatchedException();
+                    }
+                    ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository2 = ScreenBrightnessDisplayManagerRepository.this;
+                    screenBrightnessDisplayManagerRepository2.displayManager.setBrightness(screenBrightnessDisplayManagerRepository2.displayId, fMo1060getValuefoLk1o);
+                }
+                ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository3 = ScreenBrightnessDisplayManagerRepository.this;
+                boolean z = setBrightnessMethod instanceof SetBrightnessMethod.Permanent;
+                int i2 = ScreenBrightnessDisplayManagerRepository.$r8$clinit;
+                screenBrightnessDisplayManagerRepository3.getClass();
+                LogLevel logLevel = z ? LogLevel.DEBUG : LogLevel.VERBOSE;
+                ScreenBrightnessDisplayManagerRepository$$ExternalSyntheticLambda0 screenBrightnessDisplayManagerRepository$$ExternalSyntheticLambda0 = new ScreenBrightnessDisplayManagerRepository$$ExternalSyntheticLambda0();
+                LogBuffer logBuffer = screenBrightnessDisplayManagerRepository3.logBuffer;
+                LogMessage logMessageObtain = logBuffer.obtain("BrightnessChange", logLevel, screenBrightnessDisplayManagerRepository$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = LinearBrightnessKt.formatBrightness(fMo1060getValuefoLk1o);
+                logBuffer.commit(logMessageObtain);
+                bufferedChannelIterator = bufferedChannelIterator2;
+                this.L$0 = bufferedChannelIterator;
+                this.L$1 = null;
+                this.label = 1;
+                obj = bufferedChannelIterator.hasNext(this);
+                if (obj != coroutineSingletons) {
+                    bufferedChannelIterator2 = bufferedChannelIterator;
+                    if (((Boolean) obj).booleanValue()) {
+                        return Unit.INSTANCE;
+                    }
+                    setBrightnessMethod = (SetBrightnessMethod) bufferedChannelIterator2.next();
+                    ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository4 = ScreenBrightnessDisplayManagerRepository.this;
+                    this.L$0 = bufferedChannelIterator2;
+                    this.L$1 = setBrightnessMethod;
+                    this.label = 2;
+                    obj = screenBrightnessDisplayManagerRepository4.getMinMaxLinearBrightness(this);
+                }
+                return coroutineSingletons;
+            }
+            bufferedChannelIterator = (BufferedChannel.BufferedChannelIterator) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            bufferedChannelIterator2 = bufferedChannelIterator;
+            if (((Boolean) obj).booleanValue()) {
+            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -100,10 +177,8 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SetBrightnessMethod {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Permanent implements SetBrightnessMethod {
             public final float value;
 
@@ -112,7 +187,7 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             }
 
             /* renamed from: box-impl, reason: not valid java name */
-            public static final /* synthetic */ Permanent m1059boximpl(float f) {
+            public static final /* synthetic */ Permanent m1061boximpl(float f) {
                 return new Permanent(f);
             }
 
@@ -125,7 +200,7 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
 
             @Override // com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod
             /* renamed from: getValue--foLk1o */
-            public final float mo1058getValuefoLk1o() {
+            public final float mo1060getValuefoLk1o() {
                 return this.value;
             }
 
@@ -134,11 +209,10 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             }
 
             public final String toString() {
-                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Permanent(value=", LinearBrightness.m1068toStringimpl(this.value), ")");
+                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Permanent(value=", LinearBrightness.m1070toStringimpl(this.value), ")");
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Temporary implements SetBrightnessMethod {
             public final float value;
 
@@ -147,7 +221,7 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             }
 
             /* renamed from: box-impl, reason: not valid java name */
-            public static final /* synthetic */ Temporary m1060boximpl(float f) {
+            public static final /* synthetic */ Temporary m1062boximpl(float f) {
                 return new Temporary(f);
             }
 
@@ -160,7 +234,7 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
 
             @Override // com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod
             /* renamed from: getValue--foLk1o */
-            public final float mo1058getValuefoLk1o() {
+            public final float mo1060getValuefoLk1o() {
                 return this.value;
             }
 
@@ -169,12 +243,29 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
             }
 
             public final String toString() {
-                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Temporary(value=", LinearBrightness.m1068toStringimpl(this.value), ")");
+                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Temporary(value=", LinearBrightness.m1070toStringimpl(this.value), ")");
             }
         }
 
         /* renamed from: getValue--foLk1o, reason: not valid java name */
-        float mo1058getValuefoLk1o();
+        float mo1060getValuefoLk1o();
+    }
+
+    /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1, reason: invalid class name and case insensitive filesystem */
+    final class C08221 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C08221(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ScreenBrightnessDisplayManagerRepository.this.getMinMaxLinearBrightness(this);
+        }
     }
 
     static {
@@ -188,9 +279,8 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
         this.backgroundContext = coroutineContext;
         CoroutineTracingKt.launchTraced$default(coroutineScope, coroutineContext, null, new AnonymousClass1(null), 5);
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new ScreenBrightnessDisplayManagerRepository$brightnessInfo$2(null), FlowConflatedKt.conflatedCallbackFlow(new ScreenBrightnessDisplayManagerRepository$brightnessInfo$1(this, null)));
-        Flow flowOn = FlowKt.flowOn(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1
+        Flow flowFlowOn = FlowKt.flowOn(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -219,101 +309,70 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.this$0 = screenBrightnessDisplayManagerRepository;
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:18:0x0064, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:21:0x0064, code lost:
                 
-                    if (r6.emit(r8, r0) != r1) goto L23;
+                    if (r6.emit(r8, r0) == r1) goto L22;
                  */
-                /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r7, kotlin.coroutines.Continuation r8) {
-                    /*
-                        r6 = this;
-                        boolean r0 = r8 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r8
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1$2$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1$2$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1$2$1
-                        r0.<init>(r8)
-                    L18:
-                        java.lang.Object r8 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 0
-                        r4 = 2
-                        r5 = 1
-                        if (r2 == 0) goto L3b
-                        if (r2 == r5) goto L33
-                        if (r2 != r4) goto L2b
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L67
-                    L2b:
-                        java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                        java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                        r6.<init>(r7)
-                        throw r6
-                    L33:
-                        java.lang.Object r6 = r0.L$0
-                        kotlinx.coroutines.flow.FlowCollector r6 = (kotlinx.coroutines.flow.FlowCollector) r6
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L5c
-                    L3b:
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        kotlin.Unit r7 = (kotlin.Unit) r7
-                        kotlinx.coroutines.flow.FlowCollector r7 = r6.$this_unsafeFlow
-                        r0.L$0 = r7
-                        r0.label = r5
-                        int r8 = com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository.$r8$clinit
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository r6 = r6.this$0
-                        r6.getClass()
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2 r8 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2
-                        r8.<init>(r6, r3)
-                        kotlin.coroutines.CoroutineContext r6 = r6.backgroundContext
-                        java.lang.Object r8 = kotlinx.coroutines.BuildersKt.withContext(r6, r8, r0)
-                        if (r8 != r1) goto L5b
-                        goto L66
-                    L5b:
-                        r6 = r7
-                    L5c:
-                        r0.L$0 = r3
-                        r0.label = r4
-                        java.lang.Object r6 = r6.emit(r8, r0)
-                        if (r6 != r1) goto L67
-                    L66:
-                        return r1
-                    L67:
-                        kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                        return r6
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) throws Throwable {
+                    AnonymousClass1 anonymousClass1;
+                    FlowCollector flowCollector;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object objWithContext = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(objWithContext);
+                        FlowCollector flowCollector2 = this.$this_unsafeFlow;
+                        anonymousClass1.L$0 = flowCollector2;
+                        anonymousClass1.label = 1;
+                        int i3 = ScreenBrightnessDisplayManagerRepository.$r8$clinit;
+                        ScreenBrightnessDisplayManagerRepository screenBrightnessDisplayManagerRepository = this.this$0;
+                        screenBrightnessDisplayManagerRepository.getClass();
+                        objWithContext = BuildersKt.withContext(screenBrightnessDisplayManagerRepository.backgroundContext, new ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2(screenBrightnessDisplayManagerRepository, null), anonymousClass1);
+                        if (objWithContext != coroutineSingletons) {
+                            flowCollector = flowCollector2;
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 != 1) {
+                        if (i2 != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(objWithContext);
+                        return Unit.INSTANCE;
+                    }
+                    flowCollector = (FlowCollector) anonymousClass1.L$0;
+                    ResultKt.throwOnFailure(objWithContext);
+                    anonymousClass1.L$0 = null;
+                    anonymousClass1.label = 2;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineContext);
         SharingStarted.Companion companion = SharingStarted.Companion;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowOn, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 1), null);
-        this.brightnessInfo = stateIn;
-        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn);
-        this.minLinearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1069logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowFlowOn, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 1), null);
+        this.brightnessInfo = readonlyStateFlowStateIn;
+        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn);
+        this.minLinearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1071logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -340,72 +399,51 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2$2$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2$2$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-                        float r5 = r5.brightnessMinimum
-                        com.android.systemui.brightness.shared.model.LinearBrightness r5 = com.android.systemui.brightness.shared.model.LinearBrightness.m1067boximpl(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        LinearBrightness linearBrightnessM1069boximpl = LinearBrightness.m1069boximpl(((BrightnessInfo) obj).brightnessMinimum);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(linearBrightnessM1069boximpl, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, tableLogBuffer, "min"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1067boximpl(0.0f));
-        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$12 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn);
-        this.maxLinearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1069logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3
+        }, tableLogBuffer, "min"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1069boximpl(0.0f));
+        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$12 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn);
+        this.maxLinearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1071logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -432,72 +470,51 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3$2$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3$2$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-                        float r5 = r5.brightnessMaximum
-                        com.android.systemui.brightness.shared.model.LinearBrightness r5 = com.android.systemui.brightness.shared.model.LinearBrightness.m1067boximpl(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        LinearBrightness linearBrightnessM1069boximpl = LinearBrightness.m1069boximpl(((BrightnessInfo) obj).brightnessMaximum);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(linearBrightnessM1069boximpl, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$12.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, tableLogBuffer, "max"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1067boximpl(1.0f));
-        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$13 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn);
-        this.linearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1069logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4
+        }, tableLogBuffer, "max"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1069boximpl(1.0f));
+        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$13 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn);
+        this.linearBrightness = FlowKt.stateIn(LinearBrightnessKt.m1071logDiffForTableCVGC8U(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -524,72 +541,51 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4$2$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4$2$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-                        float r5 = r5.brightness
-                        com.android.systemui.brightness.shared.model.LinearBrightness r5 = com.android.systemui.brightness.shared.model.LinearBrightness.m1067boximpl(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        LinearBrightness linearBrightnessM1069boximpl = LinearBrightness.m1069boximpl(((BrightnessInfo) obj).brightness);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(linearBrightnessM1069boximpl, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$13.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, tableLogBuffer, "brightness"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1067boximpl(0.0f));
-        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$14 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateIn);
+        }, tableLogBuffer, "brightness"), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), LinearBrightness.m1069boximpl(0.0f));
+        final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$14 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(readonlyStateFlowStateIn);
         this.isBrightnessOverriddenByWindow = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -616,147 +612,90 @@ public final class ScreenBrightnessDisplayManagerRepository implements ScreenBri
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5$2$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5$2$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-                        boolean r5 = r5.isBrightnessOverrideByWindow
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$special$$inlined$map$5.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((BrightnessInfo) obj).isBrightnessOverrideByWindow);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$14.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.FALSE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getMinMaxLinearBrightness(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1 r0 = (com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1 r0 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$getMinMaxLinearBrightness$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L4f
-        L27:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            kotlinx.coroutines.flow.ReadonlyStateFlow r5 = r4.brightnessInfo
-            kotlinx.coroutines.flow.StateFlow r5 = r5.$$delegate_0
-            java.lang.Object r5 = r5.getValue()
-            android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-            if (r5 != 0) goto L51
-            r0.label = r3
-            com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2 r5 = new com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2
-            r2 = 0
-            r5.<init>(r4, r2)
-            kotlin.coroutines.CoroutineContext r4 = r4.backgroundContext
-            java.lang.Object r5 = kotlinx.coroutines.BuildersKt.withContext(r4, r5, r0)
-            if (r5 != r1) goto L4f
-            return r1
-        L4f:
-            android.hardware.display.BrightnessInfo r5 = (android.hardware.display.BrightnessInfo) r5
-        L51:
-            if (r5 == 0) goto L56
-            float r4 = r5.brightnessMinimum
-            goto L57
-        L56:
-            r4 = 0
-        L57:
-            if (r5 == 0) goto L5c
-            float r5 = r5.brightnessMaximum
-            goto L5e
-        L5c:
-            r5 = 1065353216(0x3f800000, float:1.0)
-        L5e:
-            com.android.systemui.brightness.shared.model.LinearBrightness r4 = com.android.systemui.brightness.shared.model.LinearBrightness.m1067boximpl(r4)
-            com.android.systemui.brightness.shared.model.LinearBrightness r5 = com.android.systemui.brightness.shared.model.LinearBrightness.m1067boximpl(r5)
-            kotlin.Pair r0 = new kotlin.Pair
-            r0.<init>(r4, r5)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository.getMinMaxLinearBrightness(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getMinMaxLinearBrightness(ContinuationImpl continuationImpl) throws Throwable {
+        C08221 c08221;
+        BrightnessInfo brightnessInfo;
+        if (continuationImpl instanceof C08221) {
+            c08221 = (C08221) continuationImpl;
+            int i = c08221.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08221.label = i - Integer.MIN_VALUE;
+            } else {
+                c08221 = new C08221(continuationImpl);
+            }
+        }
+        Object objWithContext = c08221.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08221.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            brightnessInfo = (BrightnessInfo) this.brightnessInfo.$$delegate_0.getValue();
+            if (brightnessInfo == null) {
+                c08221.label = 1;
+                objWithContext = BuildersKt.withContext(this.backgroundContext, new ScreenBrightnessDisplayManagerRepository$brightnessInfoValue$2(this, null), c08221);
+                if (objWithContext == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            }
+            return new Pair(LinearBrightness.m1069boximpl(brightnessInfo == null ? brightnessInfo.brightnessMinimum : 0.0f), LinearBrightness.m1069boximpl(brightnessInfo == null ? brightnessInfo.brightnessMaximum : 1.0f));
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(objWithContext);
+        brightnessInfo = (BrightnessInfo) objWithContext;
+        return new Pair(LinearBrightness.m1069boximpl(brightnessInfo == null ? brightnessInfo.brightnessMinimum : 0.0f), LinearBrightness.m1069boximpl(brightnessInfo == null ? brightnessInfo.brightnessMaximum : 1.0f));
     }
 }

@@ -6,9 +6,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.XmlResourceParser;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
+import android.system.ErrnoException;
+import android.system.Os;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -16,6 +19,8 @@ import android.util.Log;
 import android.util.Slog;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
@@ -95,14 +100,12 @@ public class FullBackup {
 
     static synchronized BackupScheme getBackupScheme(Context context, int i) {
         BackupScheme backupScheme;
-        synchronized (FullBackup.class) {
-            BackupSchemeId backupSchemeId = new BackupSchemeId(context.getPackageName(), i);
-            Map<BackupSchemeId, BackupScheme> map = kPackageBackupSchemeMap;
-            backupScheme = map.get(backupSchemeId);
-            if (backupScheme == null) {
-                backupScheme = new BackupScheme(context, i);
-                map.put(backupSchemeId, backupScheme);
-            }
+        BackupSchemeId backupSchemeId = new BackupSchemeId(context.getPackageName(), i);
+        Map<BackupSchemeId, BackupScheme> map = kPackageBackupSchemeMap;
+        backupScheme = map.get(backupSchemeId);
+        if (backupScheme == null) {
+            backupScheme = new BackupScheme(context, i);
+            map.put(backupSchemeId, backupScheme);
         }
         return backupScheme;
     }
@@ -114,123 +117,82 @@ public class FullBackup {
         return backupScheme;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00a3 A[EDGE_INSN: B:45:0x00a3->B:42:0x00a3 BREAK  A[LOOP:0: B:23:0x004e->B:35:0x00a0], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0052  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00a5  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00a3 A[EDGE_INSN: B:50:0x00a3->B:32:0x00a3 BREAK  A[LOOP:0: B:17:0x004e->B:31:0x00a0], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void restoreFile(android.os.ParcelFileDescriptor r14, long r15, int r17, long r18, long r20, java.io.File r22) throws java.io.IOException {
-        /*
-            r1 = r22
-            r0 = 2
-            r2 = 0
-            r4 = r17
-            if (r4 != r0) goto L10
-            if (r1 == 0) goto La8
-            r1.mkdirs()
-            goto La8
-        L10:
-            r4 = 0
-            java.lang.String r5 = "FullBackup"
-            if (r1 == 0) goto L3e
-            java.io.File r0 = r1.getParentFile()     // Catch: java.io.IOException -> L28
-            boolean r6 = r0.exists()     // Catch: java.io.IOException -> L28
-            if (r6 != 0) goto L22
-            r0.mkdirs()     // Catch: java.io.IOException -> L28
-        L22:
-            java.io.FileOutputStream r0 = new java.io.FileOutputStream     // Catch: java.io.IOException -> L28
-            r0.<init>(r1)     // Catch: java.io.IOException -> L28
-            goto L3f
-        L28:
-            r0 = move-exception
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r7 = "Unable to create/open file "
-            r6.<init>(r7)
-            java.lang.String r7 = r1.getPath()
-            r6.append(r7)
-            java.lang.String r6 = r6.toString()
-            android.util.Log.e(r5, r6, r0)
-        L3e:
-            r0 = r4
-        L3f:
-            r6 = 65536(0x10000, float:9.1835E-41)
-            byte[] r7 = new byte[r6]
-            java.io.FileInputStream r8 = new java.io.FileInputStream
-            java.io.FileDescriptor r14 = r14.getFileDescriptor()
-            r8.<init>(r14)
-            r9 = r15
-            r14 = r0
-        L4e:
-            int r0 = (r9 > r2 ? 1 : (r9 == r2 ? 0 : -1))
-            if (r0 <= 0) goto La3
-            long r11 = (long) r6
-            int r0 = (r9 > r11 ? 1 : (r9 == r11 ? 0 : -1))
-            if (r0 <= 0) goto L59
-            r0 = r6
-            goto L5a
-        L59:
-            int r0 = (int) r9
-        L5a:
-            r11 = 0
-            int r12 = r8.read(r7, r11, r0)
-            if (r12 > 0) goto L7d
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r4 = "Incomplete read: expected "
-            r0.<init>(r4)
-            r0.append(r9)
-            java.lang.String r4 = " but got "
-            r0.append(r4)
-            long r6 = r15 - r9
-            r0.append(r6)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.w(r5, r0)
-            goto La3
-        L7d:
-            if (r14 == 0) goto La0
-            r14.write(r7, r11, r12)     // Catch: java.io.IOException -> L83
-            goto La0
-        L83:
-            r0 = move-exception
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder
-            java.lang.String r13 = "Unable to write to file "
-            r11.<init>(r13)
-            java.lang.String r13 = r1.getPath()
-            r11.append(r13)
-            java.lang.String r11 = r11.toString()
-            android.util.Log.e(r5, r11, r0)
-            r14.close()
-            r1.delete()
-            r14 = r4
-        La0:
-            long r11 = (long) r12
-            long r9 = r9 - r11
-            goto L4e
-        La3:
-            if (r14 == 0) goto La8
-            r14.close()
-        La8:
-            int r14 = (r18 > r2 ? 1 : (r18 == r2 ? 0 : -1))
-            if (r14 < 0) goto Lc5
-            if (r1 == 0) goto Lc5
-            r2 = 448(0x1c0, double:2.213E-321)
-            long r2 = r18 & r2
-            java.lang.String r14 = r1.getPath()     // Catch: android.system.ErrnoException -> Lbb
-            int r0 = (int) r2     // Catch: android.system.ErrnoException -> Lbb
-            android.system.Os.chmod(r14, r0)     // Catch: android.system.ErrnoException -> Lbb
-            goto Lc0
-        Lbb:
-            r0 = move-exception
-            r14 = r0
-            r14.rethrowAsIOException()
-        Lc0:
-            r2 = r20
-            r1.setLastModified(r2)
-        Lc5:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.backup.FullBackup.restoreFile(android.os.ParcelFileDescriptor, long, int, long, long, java.io.File):void");
+    public static void restoreFile(ParcelFileDescriptor parcelFileDescriptor, long j, int i, long j2, long j3, File file) throws IOException, ErrnoException {
+        FileOutputStream fileOutputStream;
+        long j4;
+        FileOutputStream fileOutputStream2;
+        int i2;
+        if (i == 2) {
+            if (file != null) {
+                file.mkdirs();
+            }
+        } else if (file != null) {
+            try {
+                File parentFile = file.getParentFile();
+                if (!parentFile.exists()) {
+                    parentFile.mkdirs();
+                }
+                fileOutputStream = new FileOutputStream(file);
+            } catch (IOException e) {
+                Log.e(TAG, "Unable to create/open file " + file.getPath(), e);
+            }
+            byte[] bArr = new byte[65536];
+            FileInputStream fileInputStream = new FileInputStream(parcelFileDescriptor.getFileDescriptor());
+            j4 = j;
+            fileOutputStream2 = fileOutputStream;
+            while (true) {
+                if (j4 <= 0) {
+                    break;
+                }
+                i2 = fileInputStream.read(bArr, 0, j4 > ((long) 65536) ? 65536 : (int) j4);
+                if (i2 <= 0) {
+                    Log.w(TAG, "Incomplete read: expected " + j4 + " but got " + (j - j4));
+                    break;
+                }
+                if (fileOutputStream2 != null) {
+                    try {
+                        fileOutputStream2.write(bArr, 0, i2);
+                    } catch (IOException e2) {
+                        Log.e(TAG, "Unable to write to file " + file.getPath(), e2);
+                        fileOutputStream2.close();
+                        file.delete();
+                        fileOutputStream2 = null;
+                    }
+                }
+                j4 -= i2;
+            }
+            if (fileOutputStream2 != null) {
+                fileOutputStream2.close();
+            }
+        } else {
+            fileOutputStream = null;
+            byte[] bArr2 = new byte[65536];
+            FileInputStream fileInputStream2 = new FileInputStream(parcelFileDescriptor.getFileDescriptor());
+            j4 = j;
+            fileOutputStream2 = fileOutputStream;
+            while (true) {
+                if (j4 <= 0) {
+                }
+                j4 -= i2;
+            }
+            if (fileOutputStream2 != null) {
+            }
+        }
+        if (j2 < 0 || file == null) {
+            return;
+        }
+        try {
+            Os.chmod(file.getPath(), (int) (j2 & 448));
+        } catch (ErrnoException e3) {
+            e3.rethrowAsIOException();
+        }
+        file.setLastModified(j3);
     }
 
     public static class BackupScheme {
@@ -317,20 +279,20 @@ public class FullBackup {
                     Log.i(FullBackup.TAG, "Unrecognized domain " + str);
                     return null;
                 }
-                String substring = str.substring(4, str.length());
-                return (this.EXTERNAL_DIR.getParent() + "/") + substring;
+                String strSubstring = str.substring(4, str.length());
+                return (this.EXTERNAL_DIR.getParent() + "/") + strSubstring;
             } catch (Exception unused) {
                 Log.i(FullBackup.TAG, "Error reading directory for domain: " + str);
                 return null;
             }
         }
 
-        private String sharedDomainToPath(String str) throws IOException {
-            String substring = str.substring(7);
+        private String sharedDomainToPath(String str) throws NumberFormatException, IOException {
+            String strSubstring = str.substring(7);
             StorageVolume[] volumeList = getVolumeList();
-            int parseInt = Integer.parseInt(substring);
-            if (parseInt < this.mVolumes.length) {
-                return volumeList[parseInt].getPathFile().getCanonicalPath();
+            int i = Integer.parseInt(strSubstring);
+            if (i < this.mVolumes.length) {
+                return volumeList[i].getPathFile().getCanonicalPath();
             }
             return null;
         }
@@ -373,20 +335,20 @@ public class FullBackup {
             this.mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
             this.mPackageManager = context.getPackageManager();
             this.mPackageName = context.getPackageName();
-            Context createCredentialProtectedStorageContext = context.createCredentialProtectedStorageContext();
-            this.FILES_DIR = createCredentialProtectedStorageContext.getFilesDir();
-            this.DATABASE_DIR = createCredentialProtectedStorageContext.getDatabasePath("foo").getParentFile();
-            this.ROOT_DIR = createCredentialProtectedStorageContext.getDataDir();
-            this.SHAREDPREF_DIR = createCredentialProtectedStorageContext.getSharedPreferencesPath("foo").getParentFile();
-            this.CACHE_DIR = createCredentialProtectedStorageContext.getCacheDir();
-            this.NOBACKUP_DIR = createCredentialProtectedStorageContext.getNoBackupFilesDir();
-            Context createDeviceProtectedStorageContext = context.createDeviceProtectedStorageContext();
-            this.DEVICE_FILES_DIR = createDeviceProtectedStorageContext.getFilesDir();
-            this.DEVICE_DATABASE_DIR = createDeviceProtectedStorageContext.getDatabasePath("foo").getParentFile();
-            this.DEVICE_ROOT_DIR = createDeviceProtectedStorageContext.getDataDir();
-            this.DEVICE_SHAREDPREF_DIR = createDeviceProtectedStorageContext.getSharedPreferencesPath("foo").getParentFile();
-            this.DEVICE_CACHE_DIR = createDeviceProtectedStorageContext.getCacheDir();
-            this.DEVICE_NOBACKUP_DIR = createDeviceProtectedStorageContext.getNoBackupFilesDir();
+            Context contextCreateCredentialProtectedStorageContext = context.createCredentialProtectedStorageContext();
+            this.FILES_DIR = contextCreateCredentialProtectedStorageContext.getFilesDir();
+            this.DATABASE_DIR = contextCreateCredentialProtectedStorageContext.getDatabasePath("foo").getParentFile();
+            this.ROOT_DIR = contextCreateCredentialProtectedStorageContext.getDataDir();
+            this.SHAREDPREF_DIR = contextCreateCredentialProtectedStorageContext.getSharedPreferencesPath("foo").getParentFile();
+            this.CACHE_DIR = contextCreateCredentialProtectedStorageContext.getCacheDir();
+            this.NOBACKUP_DIR = contextCreateCredentialProtectedStorageContext.getNoBackupFilesDir();
+            Context contextCreateDeviceProtectedStorageContext = context.createDeviceProtectedStorageContext();
+            this.DEVICE_FILES_DIR = contextCreateDeviceProtectedStorageContext.getFilesDir();
+            this.DEVICE_DATABASE_DIR = contextCreateDeviceProtectedStorageContext.getDatabasePath("foo").getParentFile();
+            this.DEVICE_ROOT_DIR = contextCreateDeviceProtectedStorageContext.getDataDir();
+            this.DEVICE_SHAREDPREF_DIR = contextCreateDeviceProtectedStorageContext.getSharedPreferencesPath("foo").getParentFile();
+            this.DEVICE_CACHE_DIR = contextCreateDeviceProtectedStorageContext.getCacheDir();
+            this.DEVICE_NOBACKUP_DIR = contextCreateDeviceProtectedStorageContext.getNoBackupFilesDir();
             if (Process.myUid() != 1000) {
                 this.EXTERNAL_DIR = context.getExternalFilesDir(null);
             } else {
@@ -430,7 +392,7 @@ public class FullBackup {
             return false;
         }
 
-        public synchronized Map<String, Set<PathWithRequiredFlags>> maybeParseAndGetCanonicalIncludePaths() throws IOException, XmlPullParserException {
+        public synchronized Map<String, Set<PathWithRequiredFlags>> maybeParseAndGetCanonicalIncludePaths() throws XmlPullParserException, IOException {
             if (this.mIncludes == null) {
                 maybeParseBackupSchemeLocked();
             }
@@ -442,28 +404,28 @@ public class FullBackup {
             this.mDisableDataExtractionRules = z;
         }
 
-        public synchronized ArraySet<PathWithRequiredFlags> maybeParseAndGetCanonicalExcludePaths() throws IOException, XmlPullParserException {
+        public synchronized ArraySet<PathWithRequiredFlags> maybeParseAndGetCanonicalExcludePaths() throws XmlPullParserException, IOException {
             if (this.mExcludes == null) {
                 maybeParseBackupSchemeLocked();
             }
             return this.mExcludes;
         }
 
-        public synchronized int getRequiredTransportFlags() throws IOException, XmlPullParserException {
+        public synchronized int getRequiredTransportFlags() throws XmlPullParserException, IOException {
             if (this.mRequiredTransportFlags == null) {
                 maybeParseBackupSchemeLocked();
             }
             return this.mRequiredTransportFlags.intValue();
         }
 
-        private synchronized boolean isUsingNewScheme() throws IOException, XmlPullParserException {
+        private synchronized boolean isUsingNewScheme() throws XmlPullParserException, IOException {
             if (this.mIsUsingNewScheme == null) {
                 maybeParseBackupSchemeLocked();
             }
             return this.mIsUsingNewScheme.booleanValue();
         }
 
-        private void maybeParseBackupSchemeLocked() throws IOException, XmlPullParserException {
+        private void maybeParseBackupSchemeLocked() throws XmlPullParserException, IOException {
             this.mIncludes = new ArrayMap();
             this.mExcludes = new ArraySet<>();
             this.mRequiredTransportFlags = 0;
@@ -485,7 +447,7 @@ public class FullBackup {
             }
         }
 
-        private void parseSchemeForBackupDestination(int i) throws PackageManager.NameNotFoundException, IOException, XmlPullParserException {
+        private void parseSchemeForBackupDestination(int i) throws XmlPullParserException, PackageManager.NameNotFoundException, IOException {
             XmlResourceParser parserForResource;
             String configSectionForBackupDestination = getConfigSectionForBackupDestination(i);
             if (configSectionForBackupDestination == null) {
@@ -496,11 +458,11 @@ public class FullBackup {
             if (i2 != 0) {
                 parserForResource = getParserForResource(i2);
                 try {
-                    boolean parseNewBackupSchemeFromXmlLocked = parseNewBackupSchemeFromXmlLocked(parserForResource, configSectionForBackupDestination, this.mExcludes, this.mIncludes);
+                    boolean newBackupSchemeFromXmlLocked = parseNewBackupSchemeFromXmlLocked(parserForResource, configSectionForBackupDestination, this.mExcludes, this.mIncludes);
                     if (parserForResource != null) {
                         parserForResource.close();
                     }
-                    if (parseNewBackupSchemeFromXmlLocked) {
+                    if (newBackupSchemeFromXmlLocked) {
                         this.mIsUsingNewScheme = true;
                         return;
                     }
@@ -538,7 +500,7 @@ public class FullBackup {
             return this.mPackageManager.getResourcesForApplication(this.mPackageName).getXml(i);
         }
 
-        public boolean parseNewBackupSchemeFromXmlLocked(XmlPullParser xmlPullParser, String str, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map) throws IOException, XmlPullParserException {
+        public boolean parseNewBackupSchemeFromXmlLocked(XmlPullParser xmlPullParser, String str, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map) throws XmlPullParserException, IOException {
             verifyTopLevelTag(xmlPullParser, "data-extraction-rules");
             boolean z = false;
             while (true) {
@@ -568,7 +530,7 @@ public class FullBackup {
             }
         }
 
-        public void parseBackupSchemeFromXmlLocked(XmlPullParser xmlPullParser, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map) throws IOException, XmlPullParserException {
+        public void parseBackupSchemeFromXmlLocked(XmlPullParser xmlPullParser, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map) throws XmlPullParserException, IOException {
             verifyTopLevelTag(xmlPullParser, "full-backup-content");
             parseRules(xmlPullParser, set, map, Optional.empty(), "full-backup-content");
             logParsingResults(set, map);
@@ -591,7 +553,7 @@ public class FullBackup {
             }
         }
 
-        private void parseRules(XmlPullParser xmlPullParser, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map, Optional<Integer> optional, String str) throws IOException, XmlPullParserException {
+        private void parseRules(XmlPullParser xmlPullParser, Set<PathWithRequiredFlags> set, Map<String, Set<PathWithRequiredFlags>> map, Optional<Integer> optional, String str) throws XmlPullParserException, IOException {
             while (true) {
                 int next = xmlPullParser.next();
                 if (next == 1 || xmlPullParser.getName().equals(str)) {
@@ -606,29 +568,29 @@ public class FullBackup {
                             Log.v(FullBackup.TAG_XML_PARSER, "...parsing \"" + xmlPullParser.getName() + "\": domain=\"" + attributeValue + "\" invalid; skipping");
                         }
                     } else {
-                        File extractCanonicalFile = extractCanonicalFile(directoryForCriteriaDomain, xmlPullParser.getAttributeValue(null, "path"));
-                        if (extractCanonicalFile != null) {
+                        File fileExtractCanonicalFile = extractCanonicalFile(directoryForCriteriaDomain, xmlPullParser.getAttributeValue(null, "path"));
+                        if (fileExtractCanonicalFile != null) {
                             int requiredFlagsForRule = getRequiredFlagsForRule(xmlPullParser, optional);
-                            Set<PathWithRequiredFlags> parseCurrentTagForDomain = parseCurrentTagForDomain(xmlPullParser, set, map, attributeValue);
-                            parseCurrentTagForDomain.add(new PathWithRequiredFlags(extractCanonicalFile.getCanonicalPath(), requiredFlagsForRule));
+                            Set<PathWithRequiredFlags> currentTagForDomain = parseCurrentTagForDomain(xmlPullParser, set, map, attributeValue);
+                            currentTagForDomain.add(new PathWithRequiredFlags(fileExtractCanonicalFile.getCanonicalPath(), requiredFlagsForRule));
                             if (Log.isLoggable(FullBackup.TAG_XML_PARSER, 2)) {
-                                Log.v(FullBackup.TAG_XML_PARSER, "...parsed " + extractCanonicalFile.getCanonicalPath() + " for domain \"" + attributeValue + "\", requiredFlags + \"" + requiredFlagsForRule + "\"");
+                                Log.v(FullBackup.TAG_XML_PARSER, "...parsed " + fileExtractCanonicalFile.getCanonicalPath() + " for domain \"" + attributeValue + "\", requiredFlags + \"" + requiredFlagsForRule + "\"");
                             }
-                            if ("database".equals(attributeValue) && !extractCanonicalFile.isDirectory()) {
-                                String str2 = extractCanonicalFile.getCanonicalPath() + "-journal";
-                                parseCurrentTagForDomain.add(new PathWithRequiredFlags(str2, requiredFlagsForRule));
+                            if ("database".equals(attributeValue) && !fileExtractCanonicalFile.isDirectory()) {
+                                String str2 = fileExtractCanonicalFile.getCanonicalPath() + "-journal";
+                                currentTagForDomain.add(new PathWithRequiredFlags(str2, requiredFlagsForRule));
                                 if (Log.isLoggable(FullBackup.TAG_XML_PARSER, 2)) {
                                     Log.v(FullBackup.TAG_XML_PARSER, "...automatically generated " + str2 + ". Ignore if nonexistent.");
                                 }
-                                String str3 = extractCanonicalFile.getCanonicalPath() + "-wal";
-                                parseCurrentTagForDomain.add(new PathWithRequiredFlags(str3, requiredFlagsForRule));
+                                String str3 = fileExtractCanonicalFile.getCanonicalPath() + "-wal";
+                                currentTagForDomain.add(new PathWithRequiredFlags(str3, requiredFlagsForRule));
                                 if (Log.isLoggable(FullBackup.TAG_XML_PARSER, 2)) {
                                     Log.v(FullBackup.TAG_XML_PARSER, "...automatically generated " + str3 + ". Ignore if nonexistent.");
                                 }
                             }
-                            if ("sharedpref".equals(attributeValue) && !extractCanonicalFile.isDirectory() && !extractCanonicalFile.getCanonicalPath().endsWith(".xml")) {
-                                String str4 = extractCanonicalFile.getCanonicalPath() + ".xml";
-                                parseCurrentTagForDomain.add(new PathWithRequiredFlags(str4, requiredFlagsForRule));
+                            if ("sharedpref".equals(attributeValue) && !fileExtractCanonicalFile.isDirectory() && !fileExtractCanonicalFile.getCanonicalPath().endsWith(".xml")) {
+                                String str4 = fileExtractCanonicalFile.getCanonicalPath() + ".xml";
+                                currentTagForDomain.add(new PathWithRequiredFlags(str4, requiredFlagsForRule));
                                 if (Log.isLoggable(FullBackup.TAG_XML_PARSER, 2)) {
                                     Log.v(FullBackup.TAG_XML_PARSER, "...automatically generated " + str4 + ". Ignore if nonexistent.");
                                 }

@@ -7,7 +7,6 @@ import com.android.systemui.qs.animator.QsAnimatorState;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TopLargeTileBar extends LargeTileBar {
     public final ArrayList mOtherTileViews;
@@ -25,7 +24,7 @@ public class TopLargeTileBar extends LargeTileBar {
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 QSTileView qSTileView;
-                TopLargeTileBar topLargeTileBar = TopLargeTileBar.this;
+                TopLargeTileBar topLargeTileBar = this.f$0;
                 SecQSPanelControllerBase.TileRecord tileRecord2 = (SecQSPanelControllerBase.TileRecord) obj;
                 topLargeTileBar.getClass();
                 if (QsAnimatorState.isDetailPopupShowing && !QsAnimatorState.isDetailPopupClosing && tileRecord2 != null && (qSTileView = tileRecord2.tileView) != null) {

@@ -59,9 +59,9 @@ public interface ISystemUpdateManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISystemUpdateManager)) {
-                return (ISystemUpdateManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISystemUpdateManager)) {
+                return (ISystemUpdateManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -91,9 +91,9 @@ public interface ISystemUpdateManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                Bundle retrieveSystemUpdateInfo = retrieveSystemUpdateInfo();
+                Bundle bundleRetrieveSystemUpdateInfo = retrieveSystemUpdateInfo();
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(retrieveSystemUpdateInfo, 1);
+                parcel2.writeTypedObject(bundleRetrieveSystemUpdateInfo, 1);
             } else if (i == 2) {
                 PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -123,31 +123,31 @@ public interface ISystemUpdateManager extends IInterface {
 
             @Override // android.os.ISystemUpdateManager
             public Bundle retrieveSystemUpdateInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ISystemUpdateManager
             public void updateSystemUpdateInfo(PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

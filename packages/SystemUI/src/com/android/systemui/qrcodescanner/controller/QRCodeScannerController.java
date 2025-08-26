@@ -20,7 +20,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QRCodeScannerController implements CallbackController {
     public final boolean mConfigEnableLockScreenButton;
@@ -40,7 +39,6 @@ public class QRCodeScannerController implements CallbackController {
     public final AtomicInteger mDefaultQRCodeScannerChangeEvents = new AtomicInteger(0);
     public Boolean mIsCameraAvailable = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qrcodescanner.controller.QRCodeScannerController$1, reason: invalid class name */
     public class AnonymousClass1 extends ContentObserver {
         public AnonymousClass1(Handler handler) {
@@ -104,7 +102,7 @@ public class QRCodeScannerController implements CallbackController {
                         this.mExecutor.execute(new QRCodeScannerController$$ExternalSyntheticLambda0(this, 2));
                         ?? r2 = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.qrcodescanner.controller.QRCodeScannerController$$ExternalSyntheticLambda3
                             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                                QRCodeScannerController qRCodeScannerController = QRCodeScannerController.this;
+                                QRCodeScannerController qRCodeScannerController = this.f$0;
                                 qRCodeScannerController.getClass();
                                 if ("systemui".equals(properties.getNamespace()) && properties.getKeyset().contains("default_qr_code_scanner")) {
                                     qRCodeScannerController.updateQRCodeScannerActivityDetails();
@@ -150,7 +148,7 @@ public class QRCodeScannerController implements CallbackController {
                                 this.mQRCodeScannerPreferenceObserver.forEach(new BiConsumer() { // from class: com.android.systemui.qrcodescanner.controller.QRCodeScannerController$$ExternalSyntheticLambda4
                                     @Override // java.util.function.BiConsumer
                                     public final void accept(Object obj, Object obj2) {
-                                        QRCodeScannerController.this.mSecureSettings.unregisterContentObserverSync((ContentObserver) obj2);
+                                        this.f$0.mSecureSettings.unregisterContentObserverSync((ContentObserver) obj2);
                                     }
                                 });
                                 this.mQRCodeScannerPreferenceObserver = new HashMap();
@@ -173,7 +171,7 @@ public class QRCodeScannerController implements CallbackController {
         ArrayList arrayList;
         String string = this.mDeviceConfigProxy.getString("systemui", "default_qr_code_scanner", "");
         if (Objects.equals(string, "")) {
-            string = this.mContext.getResources().getString(R.string.dismiss_action);
+            string = this.mContext.getResources().getString(R.string.display_manager_hdmi_display_name);
         }
         String str = this.mQRCodeScannerActivity;
         Intent intent = new Intent();
@@ -233,7 +231,6 @@ public class QRCodeScannerController implements CallbackController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onQRCodeScannerActivityChanged();
 

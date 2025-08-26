@@ -12,13 +12,19 @@ import android.view.Display;
 import android.view.SurfaceControl;
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.LsRune;
 import com.android.systemui.Rune;
 import com.android.systemui.aod.AODAmbientWallpaperHelper;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.settings.DisplayTracker;
+import com.android.systemui.settings.DisplayTrackerImpl;
+import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda3;
+import com.android.systemui.statusbar.phone.CentralSurfaces;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda4;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.uithreadmonitor.BinderCallMonitor;
 import com.android.systemui.uithreadmonitor.BinderCallMonitorImpl;
 import com.android.systemui.uithreadmonitor.LooperSlowLogController;
@@ -42,7 +48,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler {
     public static final int BOOSTER_HINT;
@@ -78,7 +83,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
     public KeyguardViewMediatorHelperImpl$$ExternalSyntheticLambda25 reservedKeyguardGoingAway;
     public final ScreenLifecycle screenLifecycle;
     public final Lazy scrimControllerLazy;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda3 scrimUpdater;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda4 scrimUpdater;
     private final SettingsHelper settingsHelper;
     public long startKeyguardExitAnimationTime;
     public final SysuiStatusBarStateController statusBarStateController;
@@ -95,7 +100,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
     public final KeyguardFastBioUnlockController$resetRunnable$1 resetRunnable = new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$resetRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            KeyguardFastBioUnlockController keyguardFastBioUnlockController = KeyguardFastBioUnlockController.this;
+            KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.$tmp0;
             if (KeyguardFastBioUnlockController.DEBUG) {
                 KeyguardFastBioUnlockController.Companion companion = KeyguardFastBioUnlockController.Companion;
                 int mode = keyguardFastBioUnlockController.getMode();
@@ -117,7 +122,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
     public final KeyguardFastBioUnlockController$visibilityChangedListener$1 visibilityChangedListener = new IntConsumer() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$visibilityChangedListener$1
         @Override // java.util.function.IntConsumer
         public final void accept(int i) {
-            KeyguardFastBioUnlockController keyguardFastBioUnlockController = KeyguardFastBioUnlockController.this;
+            KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.$tmp0;
             if (i == 4 && keyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED)) {
                 keyguardFastBioUnlockController.reset();
             }
@@ -133,7 +138,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         @Override // com.android.systemui.settings.DisplayTracker.Callback
         public final void onDisplayChanged(int i) {
             BrightnessInfo brightnessInfo;
-            KeyguardFastBioUnlockController keyguardFastBioUnlockController = KeyguardFastBioUnlockController.this;
+            KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.this$0;
             if (i != 0) {
                 KeyguardFastBioUnlockController.Companion companion = KeyguardFastBioUnlockController.Companion;
                 keyguardFastBioUnlockController.getClass();
@@ -169,7 +174,6 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
     };
     public final KeyguardFastBioUnlockController$updateBrightnessRunnable$1 updateBrightnessRunnable = new KeyguardFastBioUnlockController$updateBrightnessRunnable$1(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -224,7 +228,6 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DelayedActionParams {
         public final Function0 action;
         public long atTime;
@@ -234,12 +237,12 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         public final KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 runnableWrapper = new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams = KeyguardFastBioUnlockController.DelayedActionParams.this;
+                KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams = this.this$0;
                 if (delayedActionParams.isDiscard) {
                     return;
                 }
                 delayedActionParams.action.invoke();
-                KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams2 = KeyguardFastBioUnlockController.DelayedActionParams.this;
+                KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams2 = this.this$0;
                 Handler handler = delayedActionParams2.handler;
                 KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 = delayedActionParams2.runnableWrapper;
                 if (handler.hasCallbacks(keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1)) {
@@ -267,14 +270,13 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
                 handler.post(keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1);
                 return;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             long j = this.maxDelayMills;
-            this.atTime = uptimeMillis + j;
+            this.atTime = jUptimeMillis + j;
             handler.postDelayed(keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1, j);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Task implements Runnable {
         public final Runnable runnable;
         public final long startTime = System.currentTimeMillis();
@@ -287,12 +289,12 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
 
         @Override // java.lang.Runnable
         public final void run() {
-            long currentTimeMillis = System.currentTimeMillis();
-            long j = currentTimeMillis - this.startTime;
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            long j = jCurrentTimeMillis - this.startTime;
             this.runnable.run();
-            long currentTimeMillis2 = System.currentTimeMillis() - currentTimeMillis;
-            if (j >= 3 || currentTimeMillis2 >= 3) {
-                Log.d("BioUnlock", "** " + this.tag + " run dur=" + currentTimeMillis2 + "ms, delivery=" + j + "ms");
+            long jCurrentTimeMillis2 = System.currentTimeMillis() - jCurrentTimeMillis;
+            if (j >= 3 || jCurrentTimeMillis2 >= 3) {
+                Log.d("BioUnlock", "** " + this.tag + " run dur=" + jCurrentTimeMillis2 + "ms, delivery=" + j + "ms");
             }
         }
     }
@@ -341,20 +343,65 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         Log.d("BioUnlock", str);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x005f, code lost:
-    
-        if (r8 != 6) goto L44;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x006e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void calculateMode(int r8) {
-        /*
-            Method dump skipped, instructions count: 312
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardFastBioUnlockController.calculateMode(int):void");
+    public final void calculateMode(int i) {
+        boolean z = ((KeyguardStateControllerImpl) ((CentralSurfacesImpl) ((CentralSurfaces) this.centralSurfacesLazy.get())).mKeyguardStateController).mShowing;
+        boolean z2 = ((KeyguardStateControllerImpl) ((CentralSurfacesImpl) ((CentralSurfaces) this.centralSurfacesLazy.get())).mKeyguardStateController).mOccluded;
+        boolean zIsEnabledBiometricUnlockVI = this.settingsHelper.isEnabledBiometricUnlockVI();
+        if (((StatusBarStateControllerImpl) this.statusBarStateController).mLeaveOpenOnKeyguardHide) {
+            logD("leaveOpenOnKeyguardHide true");
+        } else if (!((CentralSurfacesImpl) ((CentralSurfaces) this.centralSurfacesLazy.get())).mShadeSurface.canBeCollapsed()) {
+            Log.w("BioUnlock", "canBeCollapsed false");
+        } else if (z && !z2) {
+            if (i == 1 || i == 2) {
+                if (!LsRune.SECURITY_FINGERPRINT_HOME || this.settingsHelper.isEnabledWof()) {
+                    setWakeAndUnlock(true);
+                    if (zIsEnabledBiometricUnlockVI) {
+                        this.isInvisibleAfterGoingAwayTransStarted = true;
+                    }
+                    boolean z3 = this.settingsHelper.isEnabledBiometricUnlockVI() ? false : this.curIsAodBrighterThanNormal;
+                    if ((!z3 || (LsRune.AOD_FULLSCREEN && this.settingsHelper.isAODShown() && this.aodAmbientWallpaperHelper.isAODFullScreenMode())) && this.screenLifecycle.mScreenState != 0) {
+                        this.curVisibilityController = this.surfaceVisibilityController;
+                        this.isInvisibleAfterGoingAwayTransStarted = true;
+                    } else {
+                        this.curVisibilityController = this.windowVisibilityController;
+                        if (z3) {
+                            this.needsBlankScreen = true;
+                        }
+                    }
+                }
+            } else if (i != 5) {
+                if (i == 6) {
+                }
+            } else if (!zIsEnabledBiometricUnlockVI) {
+                setWakeAndUnlock(false);
+                this.curVisibilityController = this.surfaceVisibilityController;
+                this.isInvisibleAfterGoingAwayTransStarted = true;
+            }
+        }
+        VisibilityController visibilityController = this.curVisibilityController;
+        if (visibilityController != null) {
+            logD("current controller: ".concat(visibilityController.getClass().getSimpleName()));
+        }
+        boolean zIsFastWakeAndUnlockMode = isFastWakeAndUnlockMode();
+        if (zIsFastWakeAndUnlockMode || isFastUnlockMode()) {
+            logD("waitGoingAwayTrans=" + this.isInvisibleAfterGoingAwayTransStarted + " needsBlank=" + (zIsFastWakeAndUnlockMode && this.needsBlankScreen) + " ssd=false");
+        } else {
+            StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("not supported mode=", i, ", animation=", zIsEnabledBiometricUnlockVI, ", showing=");
+            sbM.append(z);
+            sbM.append(", occluded=");
+            sbM.append(z2);
+            logD(sbM.toString());
+            reset();
+        }
+        if (this.isBrightnessChangedCallbackRegistered) {
+            logD("unregisterBrightnessListener");
+            ((DisplayTrackerImpl) this.displayTracker).removeCallback(this.brightnessChangedCallback);
+            this.isBrightnessChangedCallbackRegistered = false;
+        }
     }
 
     public final int getMode() {
@@ -395,25 +442,25 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
 
     public final void reset() {
         SemDvfsManager semDvfsManager;
-        CentralSurfacesImpl$$ExternalSyntheticLambda3 centralSurfacesImpl$$ExternalSyntheticLambda3;
+        CentralSurfacesImpl$$ExternalSyntheticLambda4 centralSurfacesImpl$$ExternalSyntheticLambda4;
         KeyguardFastBioUnlockController$resetRunnable$1 keyguardFastBioUnlockController$resetRunnable$1 = this.resetRunnable;
         Handler handler = this.mainHandler;
         if (handler.hasCallbacks(keyguardFastBioUnlockController$resetRunnable$1)) {
             handler.removeCallbacks(keyguardFastBioUnlockController$resetRunnable$1);
         }
-        boolean isMode = isMode(MODE_FLAG_ENABLED);
-        if (isMode) {
+        boolean zIsMode = isMode(MODE_FLAG_ENABLED);
+        if (zIsMode) {
             ((ArrayList) ((KeyguardVisibilityMonitor) this.visibilityMonitorLazy.get()).visibilityChangedListeners).remove(this.visibilityChangedListener);
             runPendingRunnable();
             VisibilityController visibilityController = this.curVisibilityController;
             if (visibilityController != null) {
                 visibilityController.resetForceInvisible(false);
             }
-            LogUtil.endTime(10000, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$reset$1
+            LogUtil.endTime(10000, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController.reset.1
                 @Override // java.util.function.LongConsumer
                 public final void accept(long j) {
                     KeyguardFastBioUnlockController keyguardFastBioUnlockController = KeyguardFastBioUnlockController.this;
-                    KeyguardFastBioUnlockController.Companion companion = KeyguardFastBioUnlockController.Companion;
+                    Companion companion = KeyguardFastBioUnlockController.Companion;
                     keyguardFastBioUnlockController.getClass();
                     KeyguardFastBioUnlockController.logD("reset / elapsed time: " + j + "ms");
                 }
@@ -424,8 +471,8 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         }
         setMode(0);
         this.biometricSourceType = null;
-        if (isMode && (centralSurfacesImpl$$ExternalSyntheticLambda3 = this.scrimUpdater) != null && this.scrimVisibility != 0) {
-            centralSurfacesImpl$$ExternalSyntheticLambda3.run();
+        if (zIsMode && (centralSurfacesImpl$$ExternalSyntheticLambda4 = this.scrimUpdater) != null && this.scrimVisibility != 0) {
+            centralSurfacesImpl$$ExternalSyntheticLambda4.run();
         }
         if (this.bioUnlockBoosterEnabled && (semDvfsManager = this.dvfsManager) != null) {
             semDvfsManager.release();
@@ -459,7 +506,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
     }
 
     public final void setEnabled() {
-        SemDvfsManager createInstance;
+        SemDvfsManager semDvfsManagerCreateInstance;
         KeyguardFastBioUnlockController$resetRunnable$1 keyguardFastBioUnlockController$resetRunnable$1 = this.resetRunnable;
         Handler handler = this.mainHandler;
         if (handler.hasCallbacks(keyguardFastBioUnlockController$resetRunnable$1)) {
@@ -480,11 +527,11 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
         queue.removeIdleHandler(this);
         queue.addIdleHandler(this);
         if (this.bioUnlockBoosterEnabled) {
-            if (this.dvfsManager == null && (createInstance = SemDvfsManager.createInstance(this.context, "KEYGUARD_BIO_UNLOCK")) != null) {
+            if (this.dvfsManager == null && (semDvfsManagerCreateInstance = SemDvfsManager.createInstance(this.context, "KEYGUARD_BIO_UNLOCK")) != null) {
                 int i = BOOSTER_HINT;
-                if (createInstance.checkHintSupported(i)) {
-                    this.dvfsManager = createInstance;
-                    createInstance.setHint(i);
+                if (semDvfsManagerCreateInstance.checkHintSupported(i)) {
+                    this.dvfsManager = semDvfsManagerCreateInstance;
+                    semDvfsManagerCreateInstance.setHint(i);
                 }
             }
             SemDvfsManager semDvfsManager = this.dvfsManager;
@@ -501,7 +548,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
             final Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    final KeyguardFastBioUnlockController keyguardFastBioUnlockController = KeyguardFastBioUnlockController.this;
+                    final KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.f$0;
                     if (keyguardFastBioUnlockController.curVisibilityController != null) {
                         keyguardFastBioUnlockController.setMode(keyguardFastBioUnlockController.getMode() | KeyguardFastBioUnlockController.MODE_FLAG_FRAME_REQUEST);
                         keyguardFastBioUnlockController.waitStartTime = System.nanoTime();
@@ -512,7 +559,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
                         LogUtil.lapTime(10000, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$onFrameRequest$2
                             @Override // java.util.function.LongConsumer
                             public final void accept(long j) {
-                                KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = KeyguardFastBioUnlockController.this;
+                                KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = keyguardFastBioUnlockController;
                                 KeyguardFastBioUnlockController.Companion companion = KeyguardFastBioUnlockController.Companion;
                                 keyguardFastBioUnlockController2.getClass();
                                 KeyguardFastBioUnlockController.logD("waiting for frame drawn / lap time: " + j + "ms");
@@ -536,7 +583,7 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
                 this.mainHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$sam$java_lang_Runnable$0
                     @Override // java.lang.Runnable
                     public final /* synthetic */ void run() {
-                        Function0.this.invoke();
+                        function0.invoke();
                     }
                 });
             }
@@ -557,12 +604,12 @@ public class KeyguardFastBioUnlockController implements MessageQueue.IdleHandler
                 String modeString = Companion.getModeString(i2);
                 String hexString2 = Integer.toHexString(i);
                 String modeString2 = Companion.getModeString(i);
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("setMode 0x", hexString, "(", modeString, ") -> 0x");
-                m.append(hexString2);
-                m.append("(");
-                m.append(modeString2);
-                m.append(")");
-                logD(m.toString());
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("setMode 0x", hexString, "(", modeString, ") -> 0x");
+                sbM.append(hexString2);
+                sbM.append("(");
+                sbM.append(modeString2);
+                sbM.append(")");
+                logD(sbM.toString());
             } else {
                 logD("setMode 0x" + Integer.toHexString(i2) + " -> 0x" + Integer.toHexString(i));
             }

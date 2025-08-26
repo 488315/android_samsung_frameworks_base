@@ -28,10 +28,8 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -56,8 +54,8 @@ final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda impl
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r10v2, types: [kotlin.Result$Failure] */
-    /* JADX WARN: Type inference failed for: r9v3, types: [kotlin.Result$Failure] */
+    /* JADX WARN: Type inference failed for: r8v1, types: [kotlin.Result$Failure] */
+    /* JADX WARN: Type inference failed for: r9v2, types: [kotlin.Result$Failure] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         ApplicationInfo failure;
@@ -70,9 +68,9 @@ final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda impl
         ResultKt.throwOnFailure(obj);
         MutableState<List<Pair<Painter, String>>> mutableState = this.$seamlessTransferApps$delegate;
         PackageManager packageManager = this.$context.getPackageManager();
-        List<ResolveInfo> queryBroadcastReceivers = packageManager.queryBroadcastReceivers(new Intent("android.intent.action.MEDIA_BUTTON"), 128);
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(queryBroadcastReceivers, 10));
-        Iterator it = queryBroadcastReceivers.iterator();
+        List<ResolveInfo> listQueryBroadcastReceivers = packageManager.queryBroadcastReceivers(new Intent("android.intent.action.MEDIA_BUTTON"), 128);
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listQueryBroadcastReceivers, 10));
+        Iterator it = listQueryBroadcastReceivers.iterator();
         while (it.hasNext()) {
             arrayList.add(((ResolveInfo) it.next()).activityInfo.packageName);
         }
@@ -99,9 +97,9 @@ final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda impl
                     int i4 = Result.$r8$clinit;
                     failure2 = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure2);
-                if (m3422exceptionOrNullimpl != null) {
-                    m3422exceptionOrNullimpl.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure2);
+                if (thM3442exceptionOrNullimpl != null) {
+                    thM3442exceptionOrNullimpl.printStackTrace();
                 }
                 PackageInfo packageInfo = failure2 instanceof Result.Failure ? null : failure2;
                 if (packageInfo != null && (activityInfoArr = packageInfo.receivers) != null) {
@@ -144,26 +142,16 @@ final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda impl
         }
         ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList3, 10));
         int size3 = arrayList3.size();
-        int i9 = 0;
-        while (i9 < size3) {
-            Object obj4 = arrayList3.get(i9);
-            i9++;
+        while (i < size3) {
+            Object obj4 = arrayList3.get(i);
+            i++;
             ApplicationInfo applicationInfo2 = (ApplicationInfo) obj4;
             TintDrawablePainter.Companion companion = TintDrawablePainter.Companion;
             Drawable applicationIcon = packageManager.getApplicationIcon(applicationInfo2);
             companion.getClass();
             arrayList4.add(new Pair(TintDrawablePainter.Companion.toConverter(applicationIcon), packageManager.getApplicationLabel(applicationInfo2).toString()));
         }
-        ArrayList arrayList5 = new ArrayList();
-        int size4 = arrayList4.size();
-        while (i < size4) {
-            Object obj5 = arrayList4.get(i);
-            i++;
-            if (!StringsKt__StringsKt.contains((String) ((Pair) obj5).component2(), "spotify", true)) {
-                arrayList5.add(obj5);
-            }
-        }
-        List list = arrayList5.isEmpty() ? null : arrayList5;
+        List list = arrayList4.isEmpty() ? null : arrayList4;
         if (list != null) {
             MoSaLogging moSaLogging = MoSaLogging.INSTANCE;
             SaEvent.NumberOfApps numberOfApps = SaEvent.NumberOfApps.INSTANCE;

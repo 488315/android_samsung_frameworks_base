@@ -17,7 +17,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.taskview.TaskView;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleTaskViewListener implements TaskView.Listener {
     public Bubble mBubble;
@@ -31,7 +30,6 @@ public class BubbleTaskViewListener implements TaskView.Listener {
     public boolean mInitialized = false;
     public boolean mDestroyed = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onBackPressed();
 
@@ -78,15 +76,15 @@ public class BubbleTaskViewListener implements TaskView.Listener {
         if (this.mDestroyed || this.mInitialized) {
             return;
         }
-        final ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
+        final ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
         final Rect rect = new Rect();
         this.mTaskView.getBoundsOnScreen(rect);
         this.mParentView.post(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleTaskViewListener$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
                 boolean z3;
-                BubbleTaskViewListener bubbleTaskViewListener = BubbleTaskViewListener.this;
-                ActivityOptions activityOptions = makeCustomAnimation;
+                BubbleTaskViewListener bubbleTaskViewListener = this.f$0;
+                ActivityOptions activityOptions = activityOptionsMakeCustomAnimation;
                 Rect rect2 = rect;
                 bubbleTaskViewListener.getClass();
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
@@ -107,36 +105,35 @@ public class BubbleTaskViewListener implements TaskView.Listener {
                     if (bubbleTransition != null) {
                         bubbleTransition.surfaceCreated();
                     } else {
-                        if (!(bubble.mType == Bubble.BubbleType.TYPE_APP) && !bubble.isNote()) {
-                            if (z3) {
-                                if (bubbleTaskViewListener.mBubble.isChat()) {
-                                    activityOptions.setLaunchedFromBubble(true);
-                                    activityOptions.setApplyActivityFlagsForBubbles(true);
-                                } else {
-                                    activityOptions.setApplyMultipleTaskFlagForShortcut(true);
-                                }
-                                TaskView taskView = bubbleTaskViewListener.mTaskView;
-                                taskView.mTaskViewController.startShortcutActivity(taskView.mTaskViewTaskController, bubbleTaskViewListener.mBubble.mShortcutInfo, activityOptions, rect2);
-                            } else {
-                                activityOptions.setLaunchedFromBubble(true);
-                                Bubble bubble2 = bubbleTaskViewListener.mBubble;
-                                if (bubble2 != null) {
-                                    bubble2.mPendingIntentActive = true;
-                                }
-                                Intent intent = new Intent();
-                                intent.addFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
-                                intent.addFlags(134217728);
-                                bubbleTaskViewListener.mTaskView.startActivity(bubbleTaskViewListener.mPendingIntent, intent, activityOptions, rect2);
+                        if ((bubble.mType == Bubble.BubbleType.TYPE_APP) || bubble.isNote()) {
+                            Context contextCreateContextAsUser = bubbleTaskViewListener.mContext.createContextAsUser(bubbleTaskViewListener.mBubble.mUser, 4);
+                            Intent intent = new Intent();
+                            Bubble bubble2 = bubbleTaskViewListener.mBubble;
+                            PendingIntent activity = bubble2.mPendingIntent;
+                            if (activity == null) {
+                                activity = PendingIntent.getActivity(contextCreateContextAsUser, 0, bubble2.mIntent, 167772160, null);
                             }
+                            bubbleTaskViewListener.mTaskView.startActivity(activity, intent, activityOptions, rect2);
+                        } else if (z3) {
+                            if (bubbleTaskViewListener.mBubble.isChat()) {
+                                activityOptions.setLaunchedFromBubble(true);
+                                activityOptions.setApplyActivityFlagsForBubbles(true);
+                            } else {
+                                activityOptions.setApplyMultipleTaskFlagForShortcut(true);
+                            }
+                            TaskView taskView = bubbleTaskViewListener.mTaskView;
+                            taskView.mTaskViewController.startShortcutActivity(taskView.mTaskViewTaskController, bubbleTaskViewListener.mBubble.mShortcutInfo, activityOptions, rect2);
+                        } else {
+                            activityOptions.setLaunchedFromBubble(true);
+                            Bubble bubble3 = bubbleTaskViewListener.mBubble;
+                            if (bubble3 != null) {
+                                bubble3.mPendingIntentActive = true;
+                            }
+                            Intent intent2 = new Intent();
+                            intent2.addFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
+                            intent2.addFlags(134217728);
+                            bubbleTaskViewListener.mTaskView.startActivity(bubbleTaskViewListener.mPendingIntent, intent2, activityOptions, rect2);
                         }
-                        Context createContextAsUser = bubbleTaskViewListener.mContext.createContextAsUser(bubbleTaskViewListener.mBubble.mUser, 4);
-                        Intent intent2 = new Intent();
-                        Bubble bubble3 = bubbleTaskViewListener.mBubble;
-                        PendingIntent pendingIntent = bubble3.mPendingIntent;
-                        if (pendingIntent == null) {
-                            pendingIntent = PendingIntent.getActivity(createContextAsUser, 0, bubble3.mIntent, 167772160, null);
-                        }
-                        bubbleTaskViewListener.mTaskView.startActivity(pendingIntent, intent2, activityOptions, rect2);
                     }
                 } catch (RuntimeException e) {
                     Log.w("BubbleTaskViewListener", "Exception while displaying bubble: " + bubbleTaskViewListener.getBubbleKey() + ", " + e.getMessage() + "; removing bubble");

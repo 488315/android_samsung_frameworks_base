@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ISipDialogListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.openapi.ISipDialogListener";
@@ -15,12 +14,10 @@ public interface ISipDialogListener extends IInterface {
 
     void onSipReceived(String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISipDialogListener {
         static final int TRANSACTION_onSipParamsReceived = 2;
         static final int TRANSACTION_onSipReceived = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ISipDialogListener {
             private IBinder mRemote;
 
@@ -39,33 +36,33 @@ public interface ISipDialogListener extends IInterface {
 
             @Override // com.sec.ims.openapi.ISipDialogListener
             public void onSipParamsReceived(int i, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISipDialogListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISipDialogListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.openapi.ISipDialogListener
             public void onSipReceived(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISipDialogListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISipDialogListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -78,8 +75,8 @@ public interface ISipDialogListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipDialogListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ISipDialogListener)) ? new Proxy(iBinder) : (ISipDialogListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipDialogListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISipDialogListener)) ? new Proxy(iBinder) : (ISipDialogListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -92,19 +89,19 @@ public interface ISipDialogListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onSipReceived(readString);
+                onSipReceived(string);
                 parcel2.writeNoException();
             } else {
                 if (i != 2) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onSipParamsReceived(readInt, readString2, readBoolean);
+                onSipParamsReceived(i3, string2, z);
                 parcel2.writeNoException();
             }
             return true;
@@ -116,7 +113,6 @@ public interface ISipDialogListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ISipDialogListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

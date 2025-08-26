@@ -10,7 +10,6 @@ import com.sec.ims.util.ImsUri;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICapabilityService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.options.ICapabilityService";
@@ -49,7 +48,6 @@ public interface ICapabilityService extends IInterface {
 
     void unregisterListener(String str, int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICapabilityService {
         static final int TRANSACTION_addFakeCapabilityInfo = 13;
         static final int TRANSACTION_deRegisterService = 17;
@@ -69,7 +67,6 @@ public interface ICapabilityService extends IInterface {
         static final int TRANSACTION_setUserActivity = 14;
         static final int TRANSACTION_unregisterListener = 12;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICapabilityService {
             private IBinder mRemote;
 
@@ -79,18 +76,18 @@ public interface ICapabilityService extends IInterface {
 
             @Override // com.sec.ims.options.ICapabilityService
             public void addFakeCapabilityInfo(List<ImsUri> list, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -101,158 +98,158 @@ public interface ICapabilityService extends IInterface {
 
             @Override // com.sec.ims.options.ICapabilityService
             public void deRegisterService(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities[] getAllCapabilities(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities[]) obtain2.createTypedArray(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities[]) parcelObtain2.createTypedArray(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getCapabilities(ImsUri imsUri, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeTypedObject(imsUri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsUri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities[] getCapabilitiesByContactId(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities[]) obtain2.createTypedArray(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities[]) parcelObtain2.createTypedArray(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getCapabilitiesById(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getCapabilitiesByNumber(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getCapabilitiesWithDelay(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getCapabilitiesWithFeature(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities[] getCapabilitiesWithFeatureByUriList(List<ImsUri> list, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities[]) obtain2.createTypedArray(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities[]) parcelObtain2.createTypedArray(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -262,114 +259,114 @@ public interface ICapabilityService extends IInterface {
 
             @Override // com.sec.ims.options.ICapabilityService
             public Capabilities getOwnCapabilities(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Capabilities) obtain2.readTypedObject(Capabilities.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Capabilities) parcelObtain2.readTypedObject(Capabilities.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public boolean isOwnInfoPublished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public String registerListener(ICapabilityServiceEventListener iCapabilityServiceEventListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCapabilityServiceEventListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCapabilityServiceEventListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public void registerListenerWithToken(ICapabilityServiceEventListener iCapabilityServiceEventListener, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCapabilityServiceEventListener);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCapabilityServiceEventListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public void registerService(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public void setUserActivity(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityService
             public void unregisterListener(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -382,8 +379,8 @@ public interface ICapabilityService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICapabilityService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICapabilityService)) ? new Proxy(iBinder) : (ICapabilityService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICapabilityService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICapabilityService)) ? new Proxy(iBinder) : (ICapabilityService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -397,136 +394,136 @@ public interface ICapabilityService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities ownCapabilities = getOwnCapabilities(readInt);
+                    Capabilities ownCapabilities = getOwnCapabilities(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(ownCapabilities, 1);
                     return true;
                 case 2:
                     ImsUri imsUri = (ImsUri) parcel.readTypedObject(ImsUri.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities capabilities = getCapabilities(imsUri, readInt2, readInt3);
+                    Capabilities capabilities = getCapabilities(imsUri, i4, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(capabilities, 1);
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities capabilitiesById = getCapabilitiesById(readInt4, readInt5);
+                    Capabilities capabilitiesById = getCapabilitiesById(i6, i7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(capabilitiesById, 1);
                     return true;
                 case 4:
-                    String readString = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities capabilitiesByNumber = getCapabilitiesByNumber(readString, readInt6, readInt7);
+                    Capabilities capabilitiesByNumber = getCapabilitiesByNumber(string, i8, i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(capabilitiesByNumber, 1);
                     return true;
                 case 5:
-                    String readString2 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities capabilitiesWithDelay = getCapabilitiesWithDelay(readString2, readInt8, readInt9);
+                    Capabilities capabilitiesWithDelay = getCapabilitiesWithDelay(string2, i10, i11);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(capabilitiesWithDelay, 1);
                     return true;
                 case 6:
-                    String readString3 = parcel.readString();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities capabilitiesWithFeature = getCapabilitiesWithFeature(readString3, readInt10, readInt11);
+                    Capabilities capabilitiesWithFeature = getCapabilitiesWithFeature(string3, i12, i13);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(capabilitiesWithFeature, 1);
                     return true;
                 case 7:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(ImsUri.CREATOR);
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ImsUri.CREATOR);
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities[] capabilitiesWithFeatureByUriList = getCapabilitiesWithFeatureByUriList(createTypedArrayList, readInt12, readInt13, readInt14);
+                    Capabilities[] capabilitiesWithFeatureByUriList = getCapabilitiesWithFeatureByUriList(arrayListCreateTypedArrayList, i14, i15, i16);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(capabilitiesWithFeatureByUriList, 1);
                     return true;
                 case 8:
-                    String readString4 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities[] capabilitiesByContactId = getCapabilitiesByContactId(readString4, readInt15, readInt16);
+                    Capabilities[] capabilitiesByContactId = getCapabilitiesByContactId(string4, i17, i18);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(capabilitiesByContactId, 1);
                     return true;
                 case 9:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Capabilities[] allCapabilities = getAllCapabilities(readInt17);
+                    Capabilities[] allCapabilities = getAllCapabilities(i19);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(allCapabilities, 1);
                     return true;
                 case 10:
-                    ICapabilityServiceEventListener asInterface = ICapabilityServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt18 = parcel.readInt();
+                    ICapabilityServiceEventListener iCapabilityServiceEventListenerAsInterface = ICapabilityServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String registerListener = registerListener(asInterface, readInt18);
+                    String strRegisterListener = registerListener(iCapabilityServiceEventListenerAsInterface, i20);
                     parcel2.writeNoException();
-                    parcel2.writeString(registerListener);
+                    parcel2.writeString(strRegisterListener);
                     return true;
                 case 11:
-                    ICapabilityServiceEventListener asInterface2 = ICapabilityServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    ICapabilityServiceEventListener iCapabilityServiceEventListenerAsInterface2 = ICapabilityServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerListenerWithToken(asInterface2, readString5, readInt19);
+                    registerListenerWithToken(iCapabilityServiceEventListenerAsInterface2, string5, i21);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString6 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterListener(readString6, readInt20);
+                    unregisterListener(string6, i22);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(ImsUri.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt21 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(ImsUri.CREATOR);
+                    boolean z = parcel.readBoolean();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addFakeCapabilityInfo(createTypedArrayList2, readBoolean, readInt21);
+                    addFakeCapabilityInfo(arrayListCreateTypedArrayList2, z, i23);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt22 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setUserActivity(readBoolean2, readInt22);
+                    setUserActivity(z2, i24);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    boolean isOwnInfoPublished = isOwnInfoPublished();
+                    boolean zIsOwnInfoPublished = isOwnInfoPublished();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOwnInfoPublished);
+                    parcel2.writeBoolean(zIsOwnInfoPublished);
                     return true;
                 case 16:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerService(readString7, readString8);
+                    registerService(string7, string8);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    deRegisterService(createStringArrayList);
+                    deRegisterService(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -540,7 +537,6 @@ public interface ICapabilityService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICapabilityService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

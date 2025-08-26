@@ -21,7 +21,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Pair<Context, AudioManager> $this_activeDeviceChanges;
@@ -64,12 +63,12 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
             final ?? r1 = new AudioDeviceCallback() { // from class: com.android.systemui.media.mediaoutput.controller.device.WifiDisplayDeviceController$Companion$activeDeviceChanges$1$callback$1
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesAdded(AudioDeviceInfo[] audioDeviceInfoArr) {
-                    WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this);
+                    WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(producerScope);
                 }
 
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesRemoved(AudioDeviceInfo[] audioDeviceInfoArr) {
-                    WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this);
+                    WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(producerScope);
                 }
             };
             ((AudioManager) this.$this_activeDeviceChanges.getSecond()).registerAudioDeviceCallback(r1, null);
@@ -79,10 +78,10 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
                     Log.d("WifiDisplayDeviceController", "onReceive() - " + intent);
                     String action = intent.getAction();
                     if (action != null) {
-                        int hashCode = action.hashCode();
-                        if (hashCode != -1940635523) {
-                            if (hashCode != -1315844839) {
-                                if (hashCode != 1920758225 || !action.equals("android.media.STREAM_MUTE_CHANGED_ACTION")) {
+                        int iHashCode = action.hashCode();
+                        if (iHashCode != -1940635523) {
+                            if (iHashCode != -1315844839) {
+                                if (iHashCode != 1920758225 || !action.equals("android.media.STREAM_MUTE_CHANGED_ACTION")) {
                                     return;
                                 }
                             } else if (!action.equals("android.media.STREAM_DEVICES_CHANGED_ACTION")) {
@@ -92,7 +91,7 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
                             return;
                         }
                         if (intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1) == 3) {
-                            WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this);
+                            WifiDisplayDeviceController$Companion$activeDeviceChanges$1.invokeSuspend$updateDevices(producerScope);
                         }
                     }
                 }
@@ -110,7 +109,7 @@ final class WifiDisplayDeviceController$Companion$activeDeviceChanges$1 extends 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     Log.d("WifiDisplayDeviceController", "unregisterReceiver");
-                    Pair pair2 = Pair.this;
+                    Pair pair2 = pair;
                     ((Context) pair2.getFirst()).unregisterReceiver(r3);
                     ((AudioManager) pair2.getSecond()).unregisterAudioDeviceCallback(r1);
                     return Unit.INSTANCE;

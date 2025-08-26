@@ -157,15 +157,17 @@ public final class SemMultiControlManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemMultiControlManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
-            this.mListener = null;
+            synchronized (SemMultiControlManager.sLock) {
+                this.mListener = null;
+            }
         }
     }
 
@@ -199,15 +201,17 @@ public final class SemMultiControlManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemMultiControlManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
-            this.mListener = null;
+            synchronized (SemMultiControlManager.sLock) {
+                this.mListener = null;
+            }
         }
     }
 }

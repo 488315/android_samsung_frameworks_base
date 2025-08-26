@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.media.projection.IMediaProjection;
 import android.media.projection.IMediaProjectionManager;
 import android.media.projection.IMediaProjectionWatcherCallback;
-import android.media.projection.MediaProjectionManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -58,27 +57,27 @@ public final class MediaProjectionManager {
     }
 
     public Intent createScreenCaptureIntent(MediaProjectionConfig mediaProjectionConfig) {
-        Intent createScreenCaptureIntent = createScreenCaptureIntent();
-        createScreenCaptureIntent.putExtra(EXTRA_MEDIA_PROJECTION_CONFIG, mediaProjectionConfig);
-        return createScreenCaptureIntent;
+        Intent intentCreateScreenCaptureIntent = createScreenCaptureIntent();
+        intentCreateScreenCaptureIntent.putExtra(EXTRA_MEDIA_PROJECTION_CONFIG, mediaProjectionConfig);
+        return intentCreateScreenCaptureIntent;
     }
 
     public Intent createScreenCaptureIntent(ActivityOptions.LaunchCookie launchCookie) {
-        Intent createScreenCaptureIntent = createScreenCaptureIntent();
-        createScreenCaptureIntent.putExtra(EXTRA_LAUNCH_COOKIE, launchCookie);
-        return createScreenCaptureIntent;
+        Intent intentCreateScreenCaptureIntent = createScreenCaptureIntent();
+        intentCreateScreenCaptureIntent.putExtra(EXTRA_LAUNCH_COOKIE, launchCookie);
+        return intentCreateScreenCaptureIntent;
     }
 
     public MediaProjection semGetMediaProjection(int i) {
         String packageName = this.mContext.getPackageName();
         try {
             try {
-                IMediaProjection createProjection = this.mService.createProjection(this.mContext.getPackageManager().getPackageUid(packageName, 0), packageName, 0, false, i);
-                if (createProjection == null) {
+                IMediaProjection iMediaProjectionCreateProjection = this.mService.createProjection(this.mContext.getPackageManager().getPackageUid(packageName, 0), packageName, 0, false, i);
+                if (iMediaProjectionCreateProjection == null) {
                     Log.e(TAG, "Can't create projection");
                     return null;
                 }
-                return new MediaProjection(this.mContext, createProjection);
+                return new MediaProjection(this.mContext, iMediaProjectionCreateProjection);
             } catch (RemoteException e) {
                 Log.e(TAG, "unable to create projection", e);
                 return null;
@@ -138,10 +137,10 @@ public final class MediaProjectionManager {
             Log.w(TAG, "ContentRecording: cannot remove null callback");
             throw new IllegalArgumentException("callback must not be null");
         }
-        CallbackDelegate remove = this.mCallbacks.remove(callback);
-        if (remove != null) {
+        CallbackDelegate callbackDelegateRemove = this.mCallbacks.remove(callback);
+        if (callbackDelegateRemove != null) {
             try {
-                this.mService.removeCallback(remove);
+                this.mService.removeCallback(callbackDelegateRemove);
             } catch (RemoteException e) {
                 Log.e(TAG, "Unable to add callbacks to MediaProjection service", e);
             }
@@ -188,7 +187,7 @@ public final class MediaProjectionManager {
             this.mHandler.post(new Runnable() { // from class: android.media.projection.MediaProjectionManager$CallbackDelegate$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaProjectionManager.CallbackDelegate.this.lambda$onRecordingSessionSet$0(mediaProjectionInfo, contentRecordingSession);
+                    this.f$0.lambda$onRecordingSessionSet$0(mediaProjectionInfo, contentRecordingSession);
                 }
             });
         }
@@ -203,7 +202,7 @@ public final class MediaProjectionManager {
             this.mHandler.post(new Runnable() { // from class: android.media.projection.MediaProjectionManager$CallbackDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaProjectionManager.CallbackDelegate.this.lambda$onMediaProjectionEvent$1(mediaProjectionEvent, mediaProjectionInfo, contentRecordingSession);
+                    this.f$0.lambda$onMediaProjectionEvent$1(mediaProjectionEvent, mediaProjectionInfo, contentRecordingSession);
                 }
             });
         }

@@ -2,20 +2,18 @@ package androidx.compose.ui.hapticfeedback;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HapticFeedbackType {
     public static final Companion Companion = new Companion(null);
     public final int value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         /* renamed from: getTextHandleMove-5zf0vsI, reason: not valid java name */
-        public static int m571getTextHandleMove5zf0vsI() {
+        public static int m573getTextHandleMove5zf0vsI() {
             PlatformHapticFeedbackType.INSTANCE.getClass();
             return PlatformHapticFeedbackType.TextHandleMove;
         }
@@ -76,7 +74,7 @@ public final class HapticFeedbackType {
         if (i2 == PlatformHapticFeedbackType.SegmentTick) {
             return "SegmentTick";
         }
-        if (i2 == Companion.m571getTextHandleMove5zf0vsI()) {
+        if (i2 == Companion.m573getTextHandleMove5zf0vsI()) {
             return "TextHandleMove";
         }
         platformHapticFeedbackType.getClass();

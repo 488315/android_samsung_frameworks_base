@@ -10,7 +10,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceStyle {
     public final Context mContext;
@@ -51,36 +50,36 @@ public class SliceStyle {
     public final int mVerticalHeaderTextPadding;
     public final int mVerticalTextPadding;
 
-    public SliceStyle(Context context, AttributeSet attributeSet, int i, int i2) {
+    public SliceStyle(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         this.mTintColor = -1;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.SliceView, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.SliceView, i, i2);
         try {
-            int color = obtainStyledAttributes.getColor(20, -1);
+            int color = typedArrayObtainStyledAttributes.getColor(20, -1);
             this.mTintColor = color != -1 ? color : -1;
-            this.mTitleColor = obtainStyledAttributes.getColor(21, 0);
-            this.mSubtitleColor = obtainStyledAttributes.getColor(17, 0);
-            this.mHeaderTitleSize = (int) obtainStyledAttributes.getDimension(8, 0.0f);
-            this.mHeaderSubtitleSize = (int) obtainStyledAttributes.getDimension(6, 0.0f);
-            this.mVerticalHeaderTextPadding = (int) obtainStyledAttributes.getDimension(7, 0.0f);
-            this.mTitleSize = (int) obtainStyledAttributes.getDimension(22, 0.0f);
-            this.mSubtitleSize = (int) obtainStyledAttributes.getDimension(18, 0.0f);
-            this.mVerticalTextPadding = (int) obtainStyledAttributes.getDimension(19, 0.0f);
-            this.mGridTitleSize = (int) obtainStyledAttributes.getDimension(4, 0.0f);
-            this.mGridSubtitleSize = (int) obtainStyledAttributes.getDimension(2, 0.0f);
-            this.mVerticalGridTextPadding = (int) obtainStyledAttributes.getDimension(3, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_grid_text_inner_padding));
-            this.mGridTopPadding = (int) obtainStyledAttributes.getDimension(5, 0.0f);
-            this.mGridBottomPadding = (int) obtainStyledAttributes.getDimension(1, 0.0f);
-            this.mDefaultRowStyleRes = obtainStyledAttributes.getResourceId(16, 0);
-            this.mRowMinHeight = (int) obtainStyledAttributes.getDimension(13, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_min_height));
-            this.mRowMaxHeight = (int) obtainStyledAttributes.getDimension(12, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_max_height));
-            this.mRowRangeHeight = (int) obtainStyledAttributes.getDimension(14, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_height));
-            this.mRowSingleTextWithRangeHeight = (int) obtainStyledAttributes.getDimension(15, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_single_text_height));
-            this.mRowInlineRangeHeight = (int) obtainStyledAttributes.getDimension(11, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_inline_height));
-            this.mExpandToAvailableHeight = obtainStyledAttributes.getBoolean(0, false);
-            this.mHideHeaderRow = obtainStyledAttributes.getBoolean(9, false);
+            this.mTitleColor = typedArrayObtainStyledAttributes.getColor(21, 0);
+            this.mSubtitleColor = typedArrayObtainStyledAttributes.getColor(17, 0);
+            this.mHeaderTitleSize = (int) typedArrayObtainStyledAttributes.getDimension(8, 0.0f);
+            this.mHeaderSubtitleSize = (int) typedArrayObtainStyledAttributes.getDimension(6, 0.0f);
+            this.mVerticalHeaderTextPadding = (int) typedArrayObtainStyledAttributes.getDimension(7, 0.0f);
+            this.mTitleSize = (int) typedArrayObtainStyledAttributes.getDimension(22, 0.0f);
+            this.mSubtitleSize = (int) typedArrayObtainStyledAttributes.getDimension(18, 0.0f);
+            this.mVerticalTextPadding = (int) typedArrayObtainStyledAttributes.getDimension(19, 0.0f);
+            this.mGridTitleSize = (int) typedArrayObtainStyledAttributes.getDimension(4, 0.0f);
+            this.mGridSubtitleSize = (int) typedArrayObtainStyledAttributes.getDimension(2, 0.0f);
+            this.mVerticalGridTextPadding = (int) typedArrayObtainStyledAttributes.getDimension(3, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_grid_text_inner_padding));
+            this.mGridTopPadding = (int) typedArrayObtainStyledAttributes.getDimension(5, 0.0f);
+            this.mGridBottomPadding = (int) typedArrayObtainStyledAttributes.getDimension(1, 0.0f);
+            this.mDefaultRowStyleRes = typedArrayObtainStyledAttributes.getResourceId(16, 0);
+            this.mRowMinHeight = (int) typedArrayObtainStyledAttributes.getDimension(13, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_min_height));
+            this.mRowMaxHeight = (int) typedArrayObtainStyledAttributes.getDimension(12, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_max_height));
+            this.mRowRangeHeight = (int) typedArrayObtainStyledAttributes.getDimension(14, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_height));
+            this.mRowSingleTextWithRangeHeight = (int) typedArrayObtainStyledAttributes.getDimension(15, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_single_text_height));
+            this.mRowInlineRangeHeight = (int) typedArrayObtainStyledAttributes.getDimension(11, context.getResources().getDimensionPixelSize(R.dimen.abc_slice_row_range_inline_height));
+            this.mExpandToAvailableHeight = typedArrayObtainStyledAttributes.getBoolean(0, false);
+            this.mHideHeaderRow = typedArrayObtainStyledAttributes.getBoolean(9, false);
             this.mContext = context;
-            this.mImageCornerRadius = obtainStyledAttributes.getDimension(10, 0.0f);
-            obtainStyledAttributes.recycle();
+            this.mImageCornerRadius = typedArrayObtainStyledAttributes.getDimension(10, 0.0f);
+            typedArrayObtainStyledAttributes.recycle();
             Resources resources = context.getResources();
             this.mRowTextWithRangeHeight = resources.getDimensionPixelSize(R.dimen.abc_slice_row_range_multi_text_height);
             this.mRowSelectionHeight = resources.getDimensionPixelSize(R.dimen.abc_slice_row_selection_height);
@@ -96,7 +95,7 @@ public class SliceStyle {
             this.mListMinScrollHeight = resources.getDimensionPixelSize(R.dimen.abc_slice_row_min_height);
             this.mListLargeHeight = resources.getDimensionPixelSize(R.dimen.abc_slice_large_height);
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }
@@ -108,7 +107,7 @@ public class SliceStyle {
         if (arrayList2 == null || arrayList2.size() == 0) {
             return new DisplayedListItems(arrayList, 0);
         }
-        boolean shouldSkipFirstListItem = shouldSkipFirstListItem(listContent.mRowItems);
+        boolean zShouldSkipFirstListItem = shouldSkipFirstListItem(listContent.mRowItems);
         int size = listContent.mRowItems.size();
         int i3 = 0;
         int i4 = 0;
@@ -118,7 +117,7 @@ public class SliceStyle {
                 break;
             }
             SliceContent sliceContent = (SliceContent) listContent.mRowItems.get(i3);
-            if (i3 != 0 || !shouldSkipFirstListItem) {
+            if (i3 != 0 || !zShouldSkipFirstListItem) {
                 int height = sliceContent.getHeight(this, sliceViewPolicy);
                 if (i > 0 && i4 + height > i) {
                     i2 = size - i3;
@@ -129,7 +128,7 @@ public class SliceStyle {
             }
             i3++;
         }
-        int i5 = shouldSkipFirstListItem ? 1 : 2;
+        int i5 = zShouldSkipFirstListItem ? 1 : 2;
         if (listContent.mSeeMoreContent != null && arrayList.size() >= i5 && i2 > 0) {
             int height2 = listContent.mSeeMoreContent.getHeight(this, sliceViewPolicy) + i4;
             while (height2 > i && arrayList.size() >= i5) {
@@ -152,14 +151,14 @@ public class SliceStyle {
         if (list == null) {
             return 0;
         }
-        int i = 0;
-        for (int i2 = 0; i2 < list.size(); i2++) {
-            SliceContent sliceContent = (SliceContent) list.get(i2);
-            if (i2 != 0 || !shouldSkipFirstListItem(list)) {
-                i = sliceContent.getHeight(this, sliceViewPolicy) + i;
+        int height = 0;
+        for (int i = 0; i < list.size(); i++) {
+            SliceContent sliceContent = (SliceContent) list.get(i);
+            if (i != 0 || !shouldSkipFirstListItem(list)) {
+                height = sliceContent.getHeight(this, sliceViewPolicy) + height;
             }
         }
-        return i;
+        return height;
     }
 
     public final RowStyle getRowStyle() {

@@ -14,7 +14,6 @@ import kotlin.sequences.TransformingSequence;
 import kotlin.text.MatchResult;
 import kotlin.text.Regex;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public enum C2paError {
     NO_C2PA_MANIFEST("no JUMBF data found"),
@@ -73,7 +72,6 @@ public enum C2paError {
     public static final Companion Companion = new Companion(null);
     private final String errString;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -84,8 +82,8 @@ public enum C2paError {
             int i2;
             int i3;
             int i4;
-            List<C2paError> fromErrorString = fromErrorString(str);
-            List<C2paError> list = fromErrorString;
+            List<C2paError> listFromErrorString = fromErrorString(str);
+            List<C2paError> list = listFromErrorString;
             if (!(list instanceof Collection) || !list.isEmpty()) {
                 Iterator<T> it = list.iterator();
                 while (it.hasNext()) {
@@ -94,10 +92,10 @@ public enum C2paError {
                     }
                 }
             }
-            if (fromErrorString.contains(C2paError.CLAIM_SIGNATURE_MISMATCH) && !fromErrorString.contains(C2paError.SIGNING_CREDENTIAL_UNTRUSTED)) {
+            if (listFromErrorString.contains(C2paError.CLAIM_SIGNATURE_MISMATCH) && !listFromErrorString.contains(C2paError.SIGNING_CREDENTIAL_UNTRUSTED)) {
                 return true;
             }
-            List<C2paError> list2 = fromErrorString;
+            List<C2paError> list2 = listFromErrorString;
             boolean z = list2 instanceof Collection;
             if (z && list2.isEmpty()) {
                 i = 0;
@@ -168,8 +166,8 @@ public enum C2paError {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke, reason: merged with bridge method [inline-methods] */
-                    public final C2paError mo779invoke(MatchResult matchResult) {
-                        return C2paError.this;
+                    public final C2paError mo781invoke(MatchResult matchResult) {
+                        return c2paError;
                     }
                 })));
             }

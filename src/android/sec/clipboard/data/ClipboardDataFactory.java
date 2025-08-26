@@ -34,23 +34,23 @@ public class ClipboardDataFactory {
     }
 
     public static SemClipData createClipBoardData(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        if (i == 1) {
             return new SemTextClipData(parcel);
         }
-        if (readInt == 2) {
+        if (i == 2) {
             return new SemImageClipData(parcel);
         }
-        if (readInt == 4) {
+        if (i == 4) {
             return new SemHtmlClipData(parcel);
         }
-        if (readInt == 8) {
+        if (i == 8) {
             return new SemIntentClipData(parcel);
         }
-        if (readInt == 16) {
+        if (i == 16) {
             return new SemUriClipData(parcel);
         }
-        if (readInt != 32) {
+        if (i != 32) {
             return null;
         }
         return new SemUriListClipData(parcel);

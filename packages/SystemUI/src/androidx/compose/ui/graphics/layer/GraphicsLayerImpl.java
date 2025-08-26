@@ -9,12 +9,10 @@ import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface GraphicsLayerImpl {
     public static final Companion Companion = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final Function1 DefaultDrawBlock = null;
@@ -36,17 +34,17 @@ public interface GraphicsLayerImpl {
     float getAlpha();
 
     /* renamed from: getAmbientShadowColor-0d7_KjU, reason: not valid java name */
-    long mo549getAmbientShadowColor0d7_KjU();
+    long mo551getAmbientShadowColor0d7_KjU();
 
     /* renamed from: getBlendMode-0nO6VwU, reason: not valid java name */
-    int mo550getBlendMode0nO6VwU();
+    int mo552getBlendMode0nO6VwU();
 
     float getCameraDistance();
 
     ColorFilter getColorFilter();
 
     /* renamed from: getCompositingStrategy-ke2Ky5w, reason: not valid java name */
-    int mo551getCompositingStrategyke2Ky5w();
+    int mo553getCompositingStrategyke2Ky5w();
 
     boolean getHasDisplayList();
 
@@ -65,7 +63,7 @@ public interface GraphicsLayerImpl {
     float getShadowElevation();
 
     /* renamed from: getSpotShadowColor-0d7_KjU, reason: not valid java name */
-    long mo552getSpotShadowColor0d7_KjU();
+    long mo554getSpotShadowColor0d7_KjU();
 
     float getTranslationX();
 
@@ -76,10 +74,10 @@ public interface GraphicsLayerImpl {
     void setAlpha(float f);
 
     /* renamed from: setAmbientShadowColor-8_81llA, reason: not valid java name */
-    void mo553setAmbientShadowColor8_81llA(long j);
+    void mo555setAmbientShadowColor8_81llA(long j);
 
     /* renamed from: setBlendMode-s9anfk8, reason: not valid java name */
-    void mo554setBlendModes9anfk8(int i);
+    void mo556setBlendModes9anfk8(int i);
 
     void setCameraDistance(float f);
 
@@ -88,16 +86,16 @@ public interface GraphicsLayerImpl {
     void setColorFilter(ColorFilter colorFilter);
 
     /* renamed from: setCompositingStrategy-Wpw9cng, reason: not valid java name */
-    void mo555setCompositingStrategyWpw9cng(int i);
+    void mo557setCompositingStrategyWpw9cng(int i);
 
     /* renamed from: setOutline-O0kMr_c, reason: not valid java name */
-    void mo556setOutlineO0kMr_c(Outline outline, long j);
+    void mo558setOutlineO0kMr_c(Outline outline, long j);
 
     /* renamed from: setPivotOffset-k-4lQ0M, reason: not valid java name */
-    void mo557setPivotOffsetk4lQ0M(long j);
+    void mo559setPivotOffsetk4lQ0M(long j);
 
     /* renamed from: setPosition-H0pRuoY, reason: not valid java name */
-    void mo558setPositionH0pRuoY(int i, int i2, long j);
+    void mo560setPositionH0pRuoY(int i, int i2, long j);
 
     void setRenderEffect(RenderEffect renderEffect);
 
@@ -114,7 +112,7 @@ public interface GraphicsLayerImpl {
     void setShadowElevation(float f);
 
     /* renamed from: setSpotShadowColor-8_81llA, reason: not valid java name */
-    void mo559setSpotShadowColor8_81llA(long j);
+    void mo561setSpotShadowColor8_81llA(long j);
 
     void setTranslationX(float f);
 

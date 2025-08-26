@@ -77,9 +77,9 @@ public class MediaActionSound {
     }
 
     public MediaActionSound() {
-        SoundPool build = new SoundPool.Builder().setMaxStreams(1).setAudioAttributes(new AudioAttributes.Builder().setUsage(13).setFlags(1).setContentType(4).build()).build();
-        this.mSoundPool = build;
-        build.setOnLoadCompleteListener(this.mLoadCompleteListener);
+        SoundPool soundPoolBuild = new SoundPool.Builder().setMaxStreams(1).setAudioAttributes(new AudioAttributes.Builder().setUsage(13).setFlags(1).setContentType(4).build()).build();
+        this.mSoundPool = soundPoolBuild;
+        soundPoolBuild.setOnLoadCompleteListener(this.mLoadCompleteListener);
         this.mSounds = new SoundState[SOUND_FILES.length];
         int i = 0;
         while (true) {
@@ -95,11 +95,11 @@ public class MediaActionSound {
     private int loadSound(SoundState soundState) {
         String str = SOUND_FILES[soundState.name];
         for (String str2 : SOUND_DIRS) {
-            int load = this.mSoundPool.load(str2 + str, 1);
-            if (load > 0) {
+            int iLoad = this.mSoundPool.load(str2 + str, 1);
+            if (iLoad > 0) {
                 soundState.state = 1;
-                soundState.id = load;
-                return load;
+                soundState.id = iLoad;
+                return iLoad;
             }
         }
         return 0;
@@ -121,6 +121,10 @@ public class MediaActionSound {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0061 A[Catch: all -> 0x0066, TryCatch #0 {, blocks: (B:8:0x0010, B:14:0x001a, B:20:0x0064, B:15:0x0036, B:19:0x0061, B:16:0x0046, B:18:0x004f), top: B:28:0x0010 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void play(int i) {
         if (i < 0 || i >= SOUND_FILES.length) {
             throw new RuntimeException("Unknown sound requested: " + i);
@@ -133,16 +137,12 @@ public class MediaActionSound {
                 if (loadSound(soundState) <= 0) {
                     Log.e(TAG, "play() error loading sound: " + i);
                 }
+            } else if (i2 == 1) {
                 soundState.state = 2;
+            } else if (i2 == 3) {
+                this.mSoundPool.play(soundState.id, 1.0f, 1.0f, 0, 0, 1.0f);
             } else {
-                if (i2 != 1) {
-                    if (i2 == 3) {
-                        this.mSoundPool.play(soundState.id, 1.0f, 1.0f, 0, 0, 1.0f);
-                    } else {
-                        Log.e(TAG, "play() called in wrong state: " + soundState.state + " for sound: " + i);
-                    }
-                }
-                soundState.state = 2;
+                Log.e(TAG, "play() called in wrong state: " + soundState.state + " for sound: " + i);
             }
         }
     }

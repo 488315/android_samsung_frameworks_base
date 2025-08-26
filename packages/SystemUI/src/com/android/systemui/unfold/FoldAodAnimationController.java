@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.devicestate.DeviceStateManager;
 import android.view.ViewPropertyAnimator;
 import com.android.app.animation.Interpolators;
@@ -29,7 +30,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FoldAodAnimationController implements CallbackController, ScreenOffAnimation, WakefulnessLifecycle.Observer {
     public boolean alwaysOnEnabled;
@@ -53,34 +53,34 @@ public final class FoldAodAnimationController implements CallbackController, Scr
     public final FoldAodAnimationController$startAnimationRunnable$1 startAnimationRunnable = new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            ToAodFoldTransitionInteractor$foldAnimator$1 toAodFoldTransitionInteractor$foldAnimator$1 = ((ToAodFoldTransitionInteractor) FoldAodAnimationController.this.foldTransitionInteractor.get()).foldAnimator;
-            final FoldAodAnimationController foldAodAnimationController = FoldAodAnimationController.this;
+            ToAodFoldTransitionInteractor$foldAnimator$1 toAodFoldTransitionInteractor$foldAnimator$1 = ((ToAodFoldTransitionInteractor) this.this$0.foldTransitionInteractor.get()).foldAnimator;
+            final FoldAodAnimationController foldAodAnimationController = this.this$0;
             Runnable runnable = new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     FoldAodAnimationController.this.latencyTracker.onActionEnd(18);
                 }
             };
-            final FoldAodAnimationController foldAodAnimationController2 = FoldAodAnimationController.this;
+            final FoldAodAnimationController foldAodAnimationController2 = this.this$0;
             Runnable runnable2 = new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1.2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FoldAodAnimationController.this.setAnimationState(false);
+                    foldAodAnimationController2.setAnimationState(false);
                 }
             };
-            final FoldAodAnimationController foldAodAnimationController3 = FoldAodAnimationController.this;
+            final FoldAodAnimationController foldAodAnimationController3 = this.this$0;
             Runnable runnable3 = new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$startAnimationRunnable$1.3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FoldAodAnimationController.this.setAnimationState(false);
+                    foldAodAnimationController3.setAnimationState(false);
                 }
             };
             final ToAodFoldTransitionInteractor toAodFoldTransitionInteractor = toAodFoldTransitionInteractor$foldAnimator$1.this$0;
             NotificationPanelViewController.ShadeFoldAnimatorImpl shadeFoldAnimatorImpl = toAodFoldTransitionInteractor.parentAnimator;
             if (shadeFoldAnimatorImpl != null) {
-                ViewPropertyAnimator animate = NotificationPanelViewController.this.mView.animate();
-                animate.cancel();
-                animate.translationX(0.0f).alpha(1.0f).setDuration(600L).setInterpolator(Interpolators.EMPHASIZED_DECELERATE).setListener(new AnimatorListenerAdapter(shadeFoldAnimatorImpl, runnable, runnable3, runnable2, animate) { // from class: com.android.systemui.shade.NotificationPanelViewController.ShadeFoldAnimatorImpl.1
+                ViewPropertyAnimator viewPropertyAnimatorAnimate = NotificationPanelViewController.this.mView.animate();
+                viewPropertyAnimatorAnimate.cancel();
+                viewPropertyAnimatorAnimate.translationX(0.0f).alpha(1.0f).setDuration(600L).setInterpolator(Interpolators.EMPHASIZED_DECELERATE).setListener(new AnimatorListenerAdapter(shadeFoldAnimatorImpl, runnable, runnable3, runnable2, viewPropertyAnimatorAnimate) { // from class: com.android.systemui.shade.NotificationPanelViewController.ShadeFoldAnimatorImpl.1
                     public final /* synthetic */ Runnable val$cancelAction;
                     public final /* synthetic */ Runnable val$endAction;
                     public final /* synthetic */ Runnable val$startAction;
@@ -90,7 +90,7 @@ public final class FoldAodAnimationController implements CallbackController, Scr
                         this.val$startAction = runnable;
                         this.val$cancelAction = runnable3;
                         this.val$endAction = runnable2;
-                        this.val$viewAnimator = animate;
+                        this.val$viewAnimator = viewPropertyAnimatorAnimate;
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -112,7 +112,7 @@ public final class FoldAodAnimationController implements CallbackController, Scr
                 }).setUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.domain.interactor.ToAodFoldTransitionInteractor$foldAnimator$1$startFoldToAodAnimation$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        KeyguardClockInteractor keyguardClockInteractor = ToAodFoldTransitionInteractor.this.keyguardClockInteractor;
+                        KeyguardClockInteractor keyguardClockInteractor = toAodFoldTransitionInteractor.keyguardClockInteractor;
                         float animatedFraction = valueAnimator.getAnimatedFraction();
                         ClockController clockController = keyguardClockInteractor.clock$receiver.clock;
                         if (clockController != null) {
@@ -125,12 +125,10 @@ public final class FoldAodAnimationController implements CallbackController, Scr
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FoldAodAnimationStatus {
         void onFoldToAodAnimationChanged();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldListener extends DeviceStateManager.FoldStateListener {
         public FoldListener(final FoldAodAnimationController foldAodAnimationController) {
             super(foldAodAnimationController.context, new Consumer() { // from class: com.android.systemui.unfold.FoldAodAnimationController.FoldListener.1
@@ -138,9 +136,9 @@ public final class FoldAodAnimationController implements CallbackController, Scr
                 public final void accept(Object obj) {
                     Boolean bool = (Boolean) obj;
                     if (!bool.booleanValue()) {
-                        FoldAodAnimationController.this.isFoldHandled = false;
+                        foldAodAnimationController.isFoldHandled = false;
                     }
-                    FoldAodAnimationController.this.isFolded = bool.booleanValue();
+                    foldAodAnimationController.isFolded = bool.booleanValue();
                     if (bool.booleanValue()) {
                         FoldAodAnimationController foldAodAnimationController2 = FoldAodAnimationController.this;
                         if (foldAodAnimationController2.shouldStartAnimation()) {
@@ -152,7 +150,6 @@ public final class FoldAodAnimationController implements CallbackController, Scr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldToAodLatencyTracker {
         public FoldToAodLatencyTracker() {
         }
@@ -269,7 +266,7 @@ public final class FoldAodAnimationController implements CallbackController, Scr
     }
 
     @Override // com.android.systemui.statusbar.phone.ScreenOffAnimation
-    public final boolean startAnimation() {
+    public final boolean startAnimation() throws Resources.NotFoundException {
         if (!shouldStartAnimation()) {
             setAnimationState(false);
             return false;

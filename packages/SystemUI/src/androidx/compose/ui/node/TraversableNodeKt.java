@@ -6,7 +6,6 @@ import androidx.compose.ui.internal.InlineClassHelperKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TraversableNodeKt {
     /* JADX WARN: Multi-variable type inference failed */
@@ -40,56 +39,56 @@ public abstract class TraversableNodeKt {
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = node.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(traversableNode);
-        while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(traversableNode);
+        while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
                 while (node2 != null) {
                     if ((node2.kindSet & 262144) != 0) {
-                        DelegatingNode delegatingNode = node2;
-                        ?? r5 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof TraversableNode) {
-                                TraversableNode traversableNode2 = (TraversableNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node2;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof TraversableNode) {
+                                TraversableNode traversableNode2 = (TraversableNode) delegatingNodeAccess$pop;
                                 if (Intrinsics.areEqual(traversableNode.getTraverseKey(), traversableNode2.getTraverseKey()) && traversableNode.getClass() == traversableNode2.getClass()) {
                                     return traversableNode2;
                                 }
-                            } else if ((delegatingNode.kindSet & 262144) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node3 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 262144) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                 int i = 0;
-                                delegatingNode = delegatingNode;
-                                r5 = r5;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector = mutableVector;
                                 while (node3 != null) {
                                     if ((node3.kindSet & 262144) != 0) {
                                         i++;
-                                        r5 = r5;
+                                        mutableVector = mutableVector;
                                         if (i == 1) {
-                                            delegatingNode = node3;
+                                            delegatingNodeAccess$pop = node3;
                                         } else {
-                                            if (r5 == 0) {
-                                                r5 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector == 0) {
+                                                mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r5.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r5.add(node3);
+                                            mutableVector.add(node3);
                                         }
                                     }
                                     node3 = node3.child;
-                                    delegatingNode = delegatingNode;
-                                    r5 = r5;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                 }
                                 if (i == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r5);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         return null;
     }
@@ -125,58 +124,58 @@ public abstract class TraversableNodeKt {
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = node.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(delegatableNode);
-        while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(delegatableNode);
+        while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
                 while (node2 != null) {
                     if ((node2.kindSet & 262144) != 0) {
-                        DelegatingNode delegatingNode = node2;
-                        ?? r4 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof TraversableNode) {
-                                TraversableNode traversableNode = (TraversableNode) delegatingNode;
-                                if (!(Intrinsics.areEqual(obj, traversableNode.getTraverseKey()) ? ((Boolean) function1.mo779invoke(traversableNode)).booleanValue() : true)) {
+                        DelegatingNode delegatingNodeAccess$pop = node2;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof TraversableNode) {
+                                TraversableNode traversableNode = (TraversableNode) delegatingNodeAccess$pop;
+                                if (!(Intrinsics.areEqual(obj, traversableNode.getTraverseKey()) ? ((Boolean) function1.mo781invoke(traversableNode)).booleanValue() : true)) {
                                     return;
                                 }
                             } else {
-                                if (((delegatingNode.kindSet & 262144) != 0) && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node3 = delegatingNode.delegate;
+                                if (((delegatingNodeAccess$pop.kindSet & 262144) != 0) && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                     int i = 0;
-                                    delegatingNode = delegatingNode;
-                                    r4 = r4;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node3 != null) {
                                         if ((node3.kindSet & 262144) != 0) {
                                             i++;
-                                            r4 = r4;
+                                            mutableVector = mutableVector;
                                             if (i == 1) {
-                                                delegatingNode = node3;
+                                                delegatingNodeAccess$pop = node3;
                                             } else {
-                                                if (r4 == 0) {
-                                                    r4 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r4.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r4.add(node3);
+                                                mutableVector.add(node3);
                                             }
                                         }
                                         node3 = node3.child;
-                                        delegatingNode = delegatingNode;
-                                        r4 = r4;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i == 1) {
                                     }
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r4);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
     }
 
@@ -226,48 +225,48 @@ public abstract class TraversableNodeKt {
             if ((node4.aggregateChildKindSet & 262144) != 0) {
                 for (Modifier.Node node5 = node4; node5 != null; node5 = node5.child) {
                     if ((node5.kindSet & 262144) != 0) {
-                        DelegatingNode delegatingNode = node5;
-                        ?? r7 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof TraversableNode) {
-                                TraversableNode traversableNode = (TraversableNode) delegatingNode;
-                                TraversableNode$Companion$TraverseDescendantsAction traversableNode$Companion$TraverseDescendantsAction = Intrinsics.areEqual(obj, traversableNode.getTraverseKey()) ? (TraversableNode$Companion$TraverseDescendantsAction) function1.mo779invoke(traversableNode) : TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
+                        DelegatingNode delegatingNodeAccess$pop = node5;
+                        ?? mutableVector2 = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof TraversableNode) {
+                                TraversableNode traversableNode = (TraversableNode) delegatingNodeAccess$pop;
+                                TraversableNode$Companion$TraverseDescendantsAction traversableNode$Companion$TraverseDescendantsAction = Intrinsics.areEqual(obj, traversableNode.getTraverseKey()) ? (TraversableNode$Companion$TraverseDescendantsAction) function1.mo781invoke(traversableNode) : TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                                 if (traversableNode$Companion$TraverseDescendantsAction == TraversableNode$Companion$TraverseDescendantsAction.CancelTraversal) {
                                     return;
                                 }
                                 if (traversableNode$Companion$TraverseDescendantsAction == TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal) {
                                     break;
                                 }
-                            } else if ((delegatingNode.kindSet & 262144) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node6 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 262144) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node6 = delegatingNodeAccess$pop.delegate;
                                 int i2 = 0;
-                                delegatingNode = delegatingNode;
-                                r7 = r7;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector2 = mutableVector2;
                                 while (node6 != null) {
                                     if ((node6.kindSet & 262144) != 0) {
                                         i2++;
-                                        r7 = r7;
+                                        mutableVector2 = mutableVector2;
                                         if (i2 == 1) {
-                                            delegatingNode = node6;
+                                            delegatingNodeAccess$pop = node6;
                                         } else {
-                                            if (r7 == 0) {
-                                                r7 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector2 == 0) {
+                                                mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r7.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector2.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r7.add(node6);
+                                            mutableVector2.add(node6);
                                         }
                                     }
                                     node6 = node6.child;
-                                    delegatingNode = delegatingNode;
-                                    r7 = r7;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector2 = mutableVector2;
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r7);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                         }
                     }
                 }
@@ -308,62 +307,62 @@ public abstract class TraversableNodeKt {
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = node.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(traversableNode);
-        while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(traversableNode);
+        while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 262144) != 0) {
                 while (node2 != null) {
                     if ((node2.kindSet & 262144) != 0) {
-                        DelegatingNode delegatingNode = node2;
-                        ?? r5 = 0;
-                        while (delegatingNode != 0) {
-                            boolean z = true;
-                            if (delegatingNode instanceof TraversableNode) {
-                                TraversableNode traversableNode2 = (TraversableNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node2;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            boolean zBooleanValue = true;
+                            if (delegatingNodeAccess$pop instanceof TraversableNode) {
+                                TraversableNode traversableNode2 = (TraversableNode) delegatingNodeAccess$pop;
                                 if (Intrinsics.areEqual(traversableNode.getTraverseKey(), traversableNode2.getTraverseKey()) && traversableNode.getClass() == traversableNode2.getClass()) {
-                                    z = ((Boolean) function1.mo779invoke(traversableNode2)).booleanValue();
+                                    zBooleanValue = ((Boolean) function1.mo781invoke(traversableNode2)).booleanValue();
                                 }
-                                if (!z) {
+                                if (!zBooleanValue) {
                                     return;
                                 }
                             } else {
-                                if (((delegatingNode.kindSet & 262144) != 0) && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node3 = delegatingNode.delegate;
+                                if (((delegatingNodeAccess$pop.kindSet & 262144) != 0) && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                     int i = 0;
-                                    delegatingNode = delegatingNode;
-                                    r5 = r5;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node3 != null) {
                                         if ((node3.kindSet & 262144) != 0) {
                                             i++;
-                                            r5 = r5;
+                                            mutableVector = mutableVector;
                                             if (i == 1) {
-                                                delegatingNode = node3;
+                                                delegatingNodeAccess$pop = node3;
                                             } else {
-                                                if (r5 == 0) {
-                                                    r5 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r5.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r5.add(node3);
+                                                mutableVector.add(node3);
                                             }
                                         }
                                         node3 = node3.child;
-                                        delegatingNode = delegatingNode;
-                                        r5 = r5;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i == 1) {
                                     }
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r5);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
     }
 
@@ -415,13 +414,13 @@ public abstract class TraversableNodeKt {
             if ((node4.aggregateChildKindSet & 262144) != 0) {
                 for (Modifier.Node node5 = node4; node5 != null; node5 = node5.child) {
                     if ((node5.kindSet & 262144) != 0) {
-                        DelegatingNode delegatingNode = node5;
-                        ?? r8 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof TraversableNode) {
-                                TraversableNode traversableNode2 = (TraversableNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node5;
+                        ?? mutableVector2 = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof TraversableNode) {
+                                TraversableNode traversableNode2 = (TraversableNode) delegatingNodeAccess$pop;
                                 if (Intrinsics.areEqual(traversableNode.getTraverseKey(), traversableNode2.getTraverseKey()) && traversableNode.getClass() == traversableNode2.getClass()) {
-                                    traversableNode$Companion$TraverseDescendantsAction = (TraversableNode$Companion$TraverseDescendantsAction) function1.mo779invoke(traversableNode2);
+                                    traversableNode$Companion$TraverseDescendantsAction = (TraversableNode$Companion$TraverseDescendantsAction) function1.mo781invoke(traversableNode2);
                                 } else {
                                     traversableNode$Companion$TraverseDescendantsAction = TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                                 }
@@ -431,36 +430,36 @@ public abstract class TraversableNodeKt {
                                 if (traversableNode$Companion$TraverseDescendantsAction == TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal) {
                                     break;
                                 }
-                            } else if ((delegatingNode.kindSet & 262144) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node6 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 262144) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node6 = delegatingNodeAccess$pop.delegate;
                                 int i2 = 0;
-                                delegatingNode = delegatingNode;
-                                r8 = r8;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector2 = mutableVector2;
                                 while (node6 != null) {
                                     if ((node6.kindSet & 262144) != 0) {
                                         i2++;
-                                        r8 = r8;
+                                        mutableVector2 = mutableVector2;
                                         if (i2 == 1) {
-                                            delegatingNode = node6;
+                                            delegatingNodeAccess$pop = node6;
                                         } else {
-                                            if (r8 == 0) {
-                                                r8 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector2 == 0) {
+                                                mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r8.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector2.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r8.add(node6);
+                                            mutableVector2.add(node6);
                                         }
                                     }
                                     node6 = node6.child;
-                                    delegatingNode = delegatingNode;
-                                    r8 = r8;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector2 = mutableVector2;
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r8);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                         }
                     }
                 }

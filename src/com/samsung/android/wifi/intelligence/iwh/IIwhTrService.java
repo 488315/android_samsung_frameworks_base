@@ -44,9 +44,9 @@ public interface IIwhTrService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIwhTrService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIwhTrService)) {
-                return (IIwhTrService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIwhTrService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIwhTrService)) {
+                return (IIwhTrService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,13 +73,13 @@ public interface IIwhTrService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                initialize(readString, readInt, readInt2, readInt3, readBoolean);
+                initialize(string, i3, i4, i5, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,17 +103,17 @@ public interface IIwhTrService extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.iwh.IIwhTrService
             public void initialize(String str, int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIwhTrService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIwhTrService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

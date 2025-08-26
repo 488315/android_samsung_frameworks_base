@@ -32,23 +32,23 @@ public class SipHasher13 {
             long j = this.v0;
             long j2 = this.v1;
             this.v0 = j + j2;
-            long rotateLeft = Long.rotateLeft(j2, 13);
+            long jRotateLeft = Long.rotateLeft(j2, 13);
             long j3 = this.v0;
-            this.v1 = rotateLeft ^ j3;
+            this.v1 = jRotateLeft ^ j3;
             this.v0 = Long.rotateLeft(j3, 32);
             long j4 = this.v2;
             long j5 = this.v3;
             this.v2 = j4 + j5;
-            long rotateLeft2 = Long.rotateLeft(j5, 16) ^ this.v2;
-            this.v3 = rotateLeft2;
-            this.v0 += rotateLeft2;
-            this.v3 = Long.rotateLeft(rotateLeft2, 21) ^ this.v0;
+            long jRotateLeft2 = Long.rotateLeft(j5, 16) ^ this.v2;
+            this.v3 = jRotateLeft2;
+            this.v0 += jRotateLeft2;
+            this.v3 = Long.rotateLeft(jRotateLeft2, 21) ^ this.v0;
             long j6 = this.v2;
             long j7 = this.v1;
             this.v2 = j6 + j7;
-            long rotateLeft3 = Long.rotateLeft(j7, 17);
+            long jRotateLeft3 = Long.rotateLeft(j7, 17);
             long j8 = this.v2;
-            this.v1 = rotateLeft3 ^ j8;
+            this.v1 = jRotateLeft3 ^ j8;
             this.v2 = Long.rotateLeft(j8, 32);
         }
 
@@ -57,23 +57,23 @@ public class SipHasher13 {
                 long j = this.v0;
                 long j2 = this.v1;
                 this.v0 = j + j2;
-                long rotateLeft = Long.rotateLeft(j2, 13);
+                long jRotateLeft = Long.rotateLeft(j2, 13);
                 long j3 = this.v0;
-                this.v1 = rotateLeft ^ j3;
+                this.v1 = jRotateLeft ^ j3;
                 this.v0 = Long.rotateLeft(j3, 32);
                 long j4 = this.v2;
                 long j5 = this.v3;
                 this.v2 = j4 + j5;
-                long rotateLeft2 = Long.rotateLeft(j5, 16) ^ this.v2;
-                this.v3 = rotateLeft2;
-                this.v0 += rotateLeft2;
-                this.v3 = Long.rotateLeft(rotateLeft2, 21) ^ this.v0;
+                long jRotateLeft2 = Long.rotateLeft(j5, 16) ^ this.v2;
+                this.v3 = jRotateLeft2;
+                this.v0 += jRotateLeft2;
+                this.v3 = Long.rotateLeft(jRotateLeft2, 21) ^ this.v0;
                 long j6 = this.v2;
                 long j7 = this.v1;
                 this.v2 = j6 + j7;
-                long rotateLeft3 = Long.rotateLeft(j7, 17);
+                long jRotateLeft3 = Long.rotateLeft(j7, 17);
                 long j8 = this.v2;
-                this.v1 = rotateLeft3 ^ j8;
+                this.v1 = jRotateLeft3 ^ j8;
                 this.v2 = Long.rotateLeft(j8, 32);
             }
         }
@@ -86,15 +86,15 @@ public class SipHasher13 {
         int i = length & 7;
         int i2 = 0;
         while (i2 < length - i) {
-            long loadLe = loadLe(bArr, i2, 8);
+            long jLoadLe = loadLe(bArr, i2, 8);
             i2 += 8;
-            state.compress(loadLe);
+            state.compress(jLoadLe);
         }
-        long loadLe2 = loadLe(bArr, i2, i) | (255 << (i * 8));
+        long jLoadLe2 = loadLe(bArr, i2, i) | (255 << (i * 8));
         if (i == 7) {
-            state.compress(loadLe2);
+            state.compress(jLoadLe2);
         } else {
-            j = loadLe2;
+            j = jLoadLe2;
         }
         state.compress(j | (((length + 1) & 255) << 56));
         return state.finish();

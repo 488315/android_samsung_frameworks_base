@@ -2,11 +2,9 @@ package com.android.systemui.common.shared.model;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface Color {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Attribute implements Color {
         public final int attribute;
 
@@ -30,7 +28,6 @@ public interface Color {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Loaded implements Color {
         public final int color;
 
@@ -54,7 +51,6 @@ public interface Color {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resource implements Color {
         public final int colorRes;
 

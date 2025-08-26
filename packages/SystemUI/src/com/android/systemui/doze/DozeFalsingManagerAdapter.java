@@ -3,12 +3,10 @@ package com.android.systemui.doze;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.doze.DozeMachine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeFalsingManagerAdapter implements DozeMachine.Part {
     public final FalsingCollector mFalsingCollector;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.DozeFalsingManagerAdapter$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;

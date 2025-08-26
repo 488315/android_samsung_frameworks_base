@@ -281,8 +281,13 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
         return handleMotionEvent(motionEvent);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00c9  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private boolean handleMotionEvent(MotionEvent motionEvent) {
         int selectedIndex;
+        OnIndexBarEventListener onIndexBarEventListener;
         int selectedIndex2;
         String str;
         int selectedIndex3;
@@ -310,58 +315,64 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             if (selectedIndex != -1) {
                 notifyIndexChange(selectedIndex);
             }
-        } else {
-            if (action != 1) {
-                if (action == 2) {
-                    int i = (int) x;
-                    int i2 = (int) y;
-                    String indexByPosition = this.mIndexScroll.getIndexByPosition(i, i2);
-                    String str2 = this.mCurrentIndex;
-                    if (str2 != null && indexByPosition == null && !this.mIsSimpleIndexScroll) {
-                        String indexByPosition2 = this.mIndexScroll.getIndexByPosition(i, i2);
-                        this.mCurrentIndex = this.mIndexScroll.getIndexByPosition(i, i2);
-                        int listViewPosition = getListViewPosition(indexByPosition2);
-                        if (listViewPosition != -1) {
-                            notifyIndexChange(listViewPosition);
-                        }
-                    } else if (str2 != null && indexByPosition != null && indexByPosition.length() < this.mCurrentIndex.length()) {
-                        String indexByPosition3 = this.mIndexScroll.getIndexByPosition(i, i2);
-                        this.mCurrentIndex = indexByPosition3;
-                        if (!this.mIsSimpleIndexScroll) {
-                            selectedIndex3 = getListViewPosition(indexByPosition3);
-                        } else {
-                            selectedIndex3 = this.mIndexScroll.getSelectedIndex();
-                        }
-                        if (selectedIndex3 != -1) {
-                            notifyIndexChange(selectedIndex3);
-                        }
-                    } else {
-                        this.mCurrentIndex = this.mIndexScroll.getIndexByPosition(i, i2);
-                        if (this.mIndexScroll.isAlphabetInit() && (str = this.mCurrentIndex) != null && str.length() != 0) {
-                            this.mIndexScroll.setEffectText(this.mCurrentIndex);
-                            this.mIndexScroll.drawEffect(y);
-                            this.mTouchY = y;
-                        }
-                        if (!this.mIsSimpleIndexScroll) {
-                            selectedIndex2 = getListViewPosition(this.mCurrentIndex);
-                        } else {
-                            selectedIndex2 = this.mIndexScroll.getSelectedIndex();
-                        }
-                        if (selectedIndex2 != -1) {
-                            notifyIndexChange(selectedIndex2);
-                        }
-                    }
-                } else if (action != 3) {
-                    return false;
+        } else if (action == 1) {
+            this.mCurrentIndex = null;
+            this.mIndexScroll.resetSelectedIndex();
+            this.mIndexScrollPreview.close();
+            this.mTouchY = OUT_OF_BOUNDARY;
+            onIndexBarEventListener = this.mOnIndexBarEventListener;
+            if (onIndexBarEventListener != null) {
+                onIndexBarEventListener.onReleased(y);
+            }
+        } else if (action == 2) {
+            int i = (int) x;
+            int i2 = (int) y;
+            String indexByPosition = this.mIndexScroll.getIndexByPosition(i, i2);
+            String str2 = this.mCurrentIndex;
+            if (str2 != null && indexByPosition == null && !this.mIsSimpleIndexScroll) {
+                String indexByPosition2 = this.mIndexScroll.getIndexByPosition(i, i2);
+                this.mCurrentIndex = this.mIndexScroll.getIndexByPosition(i, i2);
+                int listViewPosition = getListViewPosition(indexByPosition2);
+                if (listViewPosition != -1) {
+                    notifyIndexChange(listViewPosition);
                 }
+            } else if (str2 != null && indexByPosition != null && indexByPosition.length() < this.mCurrentIndex.length()) {
+                String indexByPosition3 = this.mIndexScroll.getIndexByPosition(i, i2);
+                this.mCurrentIndex = indexByPosition3;
+                if (!this.mIsSimpleIndexScroll) {
+                    selectedIndex3 = getListViewPosition(indexByPosition3);
+                } else {
+                    selectedIndex3 = this.mIndexScroll.getSelectedIndex();
+                }
+                if (selectedIndex3 != -1) {
+                    notifyIndexChange(selectedIndex3);
+                }
+            } else {
+                this.mCurrentIndex = this.mIndexScroll.getIndexByPosition(i, i2);
+                if (this.mIndexScroll.isAlphabetInit() && (str = this.mCurrentIndex) != null && str.length() != 0) {
+                    this.mIndexScroll.setEffectText(this.mCurrentIndex);
+                    this.mIndexScroll.drawEffect(y);
+                    this.mTouchY = y;
+                }
+                if (!this.mIsSimpleIndexScroll) {
+                    selectedIndex2 = getListViewPosition(this.mCurrentIndex);
+                } else {
+                    selectedIndex2 = this.mIndexScroll.getSelectedIndex();
+                }
+                if (selectedIndex2 != -1) {
+                    notifyIndexChange(selectedIndex2);
+                }
+            }
+        } else {
+            if (action != 3) {
+                return false;
             }
             this.mCurrentIndex = null;
             this.mIndexScroll.resetSelectedIndex();
             this.mIndexScrollPreview.close();
             this.mTouchY = OUT_OF_BOUNDARY;
-            OnIndexBarEventListener onIndexBarEventListener = this.mOnIndexBarEventListener;
+            onIndexBarEventListener = this.mOnIndexBarEventListener;
             if (onIndexBarEventListener != null) {
-                onIndexBarEventListener.onReleased(y);
             }
         }
         invalidate();
@@ -524,7 +535,7 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             }
         }
 
-        public IndexScroll(Context context, int i, int i2) {
+        public IndexScroll(Context context, int i, int i2) throws Resources.NotFoundException {
             this.mAlphabetArray = null;
             this.mAlphabetArrayFirstLetterIndex = -1;
             this.mAlphabetArrayLastLetterIndex = -1;
@@ -544,7 +555,7 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             init();
         }
 
-        public IndexScroll(Context context, int i, int i2, int i3) {
+        public IndexScroll(Context context, int i, int i2, int i3) throws Resources.NotFoundException {
             this.mAlphabetArray = null;
             this.mAlphabetArrayFirstLetterIndex = -1;
             this.mAlphabetArrayLastLetterIndex = -1;
@@ -623,7 +634,7 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             }
         }
 
-        private void init() {
+        private void init() throws Resources.NotFoundException {
             Resources resources = this.mContext.getResources();
             Paint paint = new Paint();
             this.mPaint = paint;
@@ -775,6 +786,11 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
             }
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:91:0x017e A[PHI: r15
+          0x017e: PHI (r15v2 int) = (r15v1 int), (r15v7 int) binds: [B:82:0x015f, B:85:0x016d] A[DONT_GENERATE, DONT_INLINE]] */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private void calcDotPosition(LangAttributeValues langAttributeValues, int i, int i2, int i3) {
             int i4;
             boolean z;
@@ -881,26 +897,24 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
                             while (i26 < i25) {
                                 String[] strArr3 = this.mAlphabetArray;
                                 boolean z3 = z;
-                                if (i27 < strArr3.length - i12) {
-                                    if (!z3) {
-                                        strArr2[i26] = strArr3[i27 + i2];
-                                        i27++;
-                                        if (i29 < langAttributeValues.dotCount) {
-                                            z = true;
-                                        }
-                                    } else {
-                                        strArr2[i26] = MediaMetrics.SEPARATOR;
-                                        i29++;
-                                        i27 += i5;
-                                        if (i28 > 0) {
-                                            i28--;
-                                            i27++;
-                                        }
-                                        z = false;
+                                if (i27 >= strArr3.length - i12) {
+                                    z = z3;
+                                } else if (!z3) {
+                                    strArr2[i26] = strArr3[i27 + i2];
+                                    i27++;
+                                    if (i29 < langAttributeValues.dotCount) {
+                                        z = true;
                                     }
-                                    i26++;
+                                } else {
+                                    strArr2[i26] = MediaMetrics.SEPARATOR;
+                                    i29++;
+                                    i27 += i5;
+                                    if (i28 > 0) {
+                                        i28--;
+                                        i27++;
+                                    }
+                                    z = false;
                                 }
-                                z = z3;
                                 i26++;
                             }
                             if (i12 > 0) {
@@ -911,21 +925,16 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
                                 z2 = true;
                             }
                             langAttributeValues.alphabetArray = strArr2;
-                        } else if (i24 != 2) {
-                            if (i24 == 3) {
-                                langAttributeValues.indexCount--;
-                                langAttributeValues.totalCount--;
-                            } else if (((langAttributeValues.indexCount - langAttributeValues.dotCount) - i11) - i12 == 1) {
-                                langAttributeValues.dotCount--;
-                                langAttributeValues.totalCount--;
-                            } else {
-                                langAttributeValues.indexCount--;
-                                langAttributeValues.totalCount--;
-                            }
-                            i13++;
-                        } else {
+                        } else if (i24 == 2) {
                             langAttributeValues.dotCount--;
                             langAttributeValues.totalCount--;
+                        } else if (i24 != 3 && ((langAttributeValues.indexCount - langAttributeValues.dotCount) - i11) - i12 == 1) {
+                            langAttributeValues.dotCount--;
+                            langAttributeValues.totalCount--;
+                        } else {
+                            langAttributeValues.indexCount--;
+                            langAttributeValues.totalCount--;
+                            i13++;
                         }
                     } else if (i12 > 0) {
                         i12--;
@@ -1172,7 +1181,7 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
                     f = this.mSecondLang.separatorHeight;
                 }
                 this.mPaint.getTextBounds(str, 0, str.length(), this.mTextBounds);
-                float centerX = this.mBgRect.centerX() - (this.mPaint.measureText(str) * 0.5f);
+                float fCenterX = this.mBgRect.centerX() - (this.mPaint.measureText(str) * 0.5f);
                 if (MediaMetrics.SEPARATOR.equals(str)) {
                     f2 = ((this.mDotHeight * 0.5f) - (this.mTextBounds.top * 0.5f)) + f3;
                     f3 += this.mDotHeight;
@@ -1181,7 +1190,7 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
                     f3 += f;
                     f2 = f4;
                 }
-                canvas.drawText(str, centerX, f2, this.mPaint);
+                canvas.drawText(str, fCenterX, f2, this.mPaint);
             }
         }
     }
@@ -1265,9 +1274,9 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
         }
 
         public void close() {
-            long currentTimeMillis = System.currentTimeMillis() - SemIndexScrollView.this.mStartTouchDown;
+            long jCurrentTimeMillis = System.currentTimeMillis() - SemIndexScrollView.this.mStartTouchDown;
             removeCallbacks(SemIndexScrollView.this.mPreviewDelayRunnable);
-            if (currentTimeMillis <= 100) {
+            if (jCurrentTimeMillis <= 100) {
                 postDelayed(SemIndexScrollView.this.mPreviewDelayRunnable, 100L);
             } else {
                 fadeOutAnimation();
@@ -1283,15 +1292,15 @@ public class SemIndexScrollView extends FrameLayout implements AbsListView.OnScr
         }
 
         public void startAnimation() {
-            ObjectAnimator ofFloat;
+            ObjectAnimator objectAnimatorOfFloat;
             if (!this.mIsOpen) {
-                ofFloat = ObjectAnimator.ofFloat(SemIndexScrollView.this.mIndexScrollPreview, "alpha", 0.0f, 1.0f);
+                objectAnimatorOfFloat = ObjectAnimator.ofFloat(SemIndexScrollView.this.mIndexScrollPreview, "alpha", 0.0f, 1.0f);
             } else {
-                ofFloat = ObjectAnimator.ofFloat(SemIndexScrollView.this.mIndexScrollPreview, "alpha", 1.0f, 0.0f);
+                objectAnimatorOfFloat = ObjectAnimator.ofFloat(SemIndexScrollView.this.mIndexScrollPreview, "alpha", 1.0f, 0.0f);
             }
-            ofFloat.setDuration(167L);
+            objectAnimatorOfFloat.setDuration(167L);
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.play(ofFloat);
+            animatorSet.play(objectAnimatorOfFloat);
             animatorSet.start();
         }
 

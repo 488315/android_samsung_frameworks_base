@@ -84,9 +84,9 @@ public interface ISubscriber extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISubscriber.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISubscriber)) {
-                return (ISubscriber) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISubscriber.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISubscriber)) {
+                return (ISubscriber) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,34 +126,34 @@ public interface ISubscriber extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     CVMessage cVMessage = (CVMessage) parcel.readTypedObject(CVMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean requestCVAsync = requestCVAsync(readString, cVMessage);
+                    boolean zRequestCVAsync = requestCVAsync(string, cVMessage);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestCVAsync);
+                    parcel2.writeBoolean(zRequestCVAsync);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     CVMessage cVMessage2 = (CVMessage) parcel.readTypedObject(CVMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    CVMessage requestCVSync = requestCVSync(readString2, cVMessage2);
+                    CVMessage cVMessageRequestCVSync = requestCVSync(string2, cVMessage2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(requestCVSync, 1);
+                    parcel2.writeTypedObject(cVMessageRequestCVSync, 1);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     CVMessage cVMessage3 = (CVMessage) parcel.readTypedObject(CVMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean subscribeEvent = subscribeEvent(readString3, cVMessage3);
+                    boolean zSubscribeEvent = subscribeEvent(string3, cVMessage3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(subscribeEvent);
+                    parcel2.writeBoolean(zSubscribeEvent);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     CVMessage cVMessage4 = (CVMessage) parcel.readTypedObject(CVMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    unsubscribeEvent(readString4, cVMessage4);
+                    unsubscribeEvent(string4, cVMessage4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
@@ -162,9 +162,9 @@ public interface ISubscriber extends IInterface {
                     parcel2.writeString(serviceVersion);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String captionFilePathFromURI = getCaptionFilePathFromURI(readString5);
+                    String captionFilePathFromURI = getCaptionFilePathFromURI(string5);
                     parcel2.writeNoException();
                     parcel2.writeString(captionFilePathFromURI);
                     return true;
@@ -191,99 +191,99 @@ public interface ISubscriber extends IInterface {
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public boolean requestCVAsync(String str, CVMessage cVMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(cVMessage, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(cVMessage, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public CVMessage requestCVSync(String str, CVMessage cVMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(cVMessage, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CVMessage) obtain2.readTypedObject(CVMessage.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(cVMessage, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CVMessage) parcelObtain2.readTypedObject(CVMessage.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public boolean subscribeEvent(String str, CVMessage cVMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(cVMessage, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(cVMessage, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public void unsubscribeEvent(String str, CVMessage cVMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(cVMessage, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(cVMessage, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public String getServiceVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
             public String getCaptionFilePathFromURI(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISubscriber.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

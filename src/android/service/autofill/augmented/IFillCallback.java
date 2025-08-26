@@ -71,9 +71,9 @@ public interface IFillCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFillCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFillCallback)) {
-                return (IFillCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFillCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFillCallback)) {
+                return (IFillCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -109,21 +109,21 @@ public interface IFillCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICancellationSignal asInterface = ICancellationSignal.Stub.asInterface(parcel.readStrongBinder());
+                ICancellationSignal iCancellationSignalAsInterface = ICancellationSignal.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCancellable(asInterface);
+                onCancellable(iCancellationSignalAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(Dataset.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(Dataset.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onSuccess(createTypedArrayList, bundle, readBoolean);
+                onSuccess(arrayListCreateTypedArrayList, bundle, z);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                boolean isCompleted = isCompleted();
+                boolean zIsCompleted = isCompleted();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isCompleted);
+                parcel2.writeBoolean(zIsCompleted);
             } else if (i == 4) {
                 cancel();
                 parcel2.writeNoException();
@@ -151,62 +151,62 @@ public interface IFillCallback extends IInterface {
 
             @Override // android.service.autofill.augmented.IFillCallback
             public void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCancellationSignal);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCancellationSignal);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IFillCallback
             public void onSuccess(List<Dataset> list, Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IFillCallback
             public boolean isCompleted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IFillCallback
             public void cancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFillCallback.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

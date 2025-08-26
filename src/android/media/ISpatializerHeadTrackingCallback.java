@@ -46,9 +46,9 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpatializerHeadTrackingCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpatializerHeadTrackingCallback)) {
-                return (ISpatializerHeadTrackingCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpatializerHeadTrackingCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpatializerHeadTrackingCallback)) {
+                return (ISpatializerHeadTrackingCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -63,13 +63,13 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte readByte = parcel.readByte();
+                byte b = parcel.readByte();
                 parcel.enforceNoDataAvail();
-                onHeadTrackingModeChanged(readByte);
+                onHeadTrackingModeChanged(b);
             } else if (i == 2) {
-                float[] createFloatArray = parcel.createFloatArray();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                onHeadToSoundStagePoseUpdated(createFloatArray);
+                onHeadToSoundStagePoseUpdated(fArrCreateFloatArray);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -94,25 +94,25 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
 
             @Override // android.media.ISpatializerHeadTrackingCallback
             public void onHeadTrackingModeChanged(byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISpatializerHeadTrackingCallback.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISpatializerHeadTrackingCallback.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISpatializerHeadTrackingCallback
             public void onHeadToSoundStagePoseUpdated(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISpatializerHeadTrackingCallback.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISpatializerHeadTrackingCallback.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

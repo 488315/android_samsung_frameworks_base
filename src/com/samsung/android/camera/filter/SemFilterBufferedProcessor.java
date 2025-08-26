@@ -49,7 +49,7 @@ public final class SemFilterBufferedProcessor {
         native_init();
     }
 
-    public SemFilterBufferedProcessor() {
+    public SemFilterBufferedProcessor() throws IllegalStateException {
         native_setup(new WeakReference(this));
     }
 
@@ -93,13 +93,10 @@ public final class SemFilterBufferedProcessor {
         }
         SemFilterManager.SemFilterImpl semFilterImpl = (SemFilterManager.SemFilterImpl) semFilter;
         SemFilterManager.SemFilterImpl semFilterImpl2 = this.mSemFilterImpl;
-        if (semFilterImpl2 == null) {
-            this.mSemFilterImpl = semFilterImpl;
-        } else if (semFilterImpl2.getFilterIdentifier().equals(semFilterImpl.getFilterIdentifier())) {
+        if (semFilterImpl2 != null && semFilterImpl2.getFilterIdentifier().equals(semFilterImpl.getFilterIdentifier())) {
             return;
-        } else {
-            this.mSemFilterImpl = semFilterImpl;
         }
+        this.mSemFilterImpl = semFilterImpl;
         if (semFilterImpl.getFilterIdentifierIdx() != -1) {
             native_setEffect_internal(semFilterImpl.getFilterIdentifierIdx());
         } else {
@@ -127,16 +124,16 @@ public final class SemFilterBufferedProcessor {
             throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(bitmap.getWidth()), Integer.valueOf(bitmap.getHeight()), 8192, 8192));
         }
         if (bitmap.getConfig() != Bitmap.Config.ARGB_8888) {
-            Bitmap copy = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-            if (copy != null) {
-                native_process_bitmap_overwrite(copy, z);
-                copy.recycle();
+            Bitmap bitmapCopy = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            if (bitmapCopy != null) {
+                native_process_bitmap_overwrite(bitmapCopy, z);
+                bitmapCopy.recycle();
             }
             return null;
         }
-        Object native_process_bitmap_overwrite = native_process_bitmap_overwrite(bitmap, z);
-        if (native_process_bitmap_overwrite != null) {
-            return (Bitmap) native_process_bitmap_overwrite;
+        Object objNative_process_bitmap_overwrite = native_process_bitmap_overwrite(bitmap, z);
+        if (objNative_process_bitmap_overwrite != null) {
+            return (Bitmap) objNative_process_bitmap_overwrite;
         }
         return null;
     }
@@ -160,7 +157,7 @@ public final class SemFilterBufferedProcessor {
     }
 
     @Deprecated(forRemoval = true, since = "15.5")
-    public void processImage(String str, String str2) {
+    public void processImage(String str, String str2) throws Throwable {
         checkInitialized();
         if (str == null) {
             throw new IllegalArgumentException("inputFileName must not null");
@@ -290,14 +287,14 @@ public final class SemFilterBufferedProcessor {
     }
 
     private boolean checkOutputFilePermission(String str) {
-        int lastIndexOf;
-        if (str == null || str.length() < 1 || (lastIndexOf = str.lastIndexOf("/")) < 0) {
+        int iLastIndexOf;
+        if (str == null || str.length() < 1 || (iLastIndexOf = str.lastIndexOf("/")) < 0) {
             return false;
         }
         if (!str.toLowerCase().endsWith(".jpeg") && !str.toLowerCase().endsWith(".jpg")) {
             return false;
         }
-        File file = new File(str.substring(0, lastIndexOf));
+        File file = new File(str.substring(0, iLastIndexOf));
         return file.exists() && file.isDirectory() && file.canWrite();
     }
 }

@@ -100,9 +100,9 @@ public interface IRadioResponse extends android.hardware.radio.V1_3.IRadioRespon
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioResponse)) {
-            return (IRadioResponse) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IRadioResponse)) {
+            return (IRadioResponse) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -2535,13 +2535,13 @@ public interface IRadioResponse extends android.hardware.radio.V1_3.IRadioRespon
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -3484,10 +3484,10 @@ public interface IRadioResponse extends android.hardware.radio.V1_3.IRadioRespon
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadioResponse.kInterfaceName);
                     RadioResponseInfo radioResponseInfo125 = new RadioResponseInfo();
                     radioResponseInfo125.readFromParcel(hwParcel);
-                    boolean readBool = hwParcel.readBool();
+                    boolean bool = hwParcel.readBool();
                     CarrierRestrictions carrierRestrictions = new CarrierRestrictions();
                     carrierRestrictions.readFromParcel(hwParcel);
-                    getAllowedCarriersResponse(radioResponseInfo125, readBool, carrierRestrictions);
+                    getAllowedCarriersResponse(radioResponseInfo125, bool, carrierRestrictions);
                     return;
                 case 126:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadioResponse.kInterfaceName);
@@ -3709,9 +3709,9 @@ public interface IRadioResponse extends android.hardware.radio.V1_3.IRadioRespon
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -3722,9 +3722,9 @@ public interface IRadioResponse extends android.hardware.radio.V1_3.IRadioRespon
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

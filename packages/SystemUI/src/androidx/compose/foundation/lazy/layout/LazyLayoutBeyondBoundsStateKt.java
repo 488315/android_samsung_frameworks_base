@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 import kotlin.collections.EmptyList;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyLayoutBeyondBoundsStateKt {
     public static final List calculateLazyLayoutPinnedIndices(LazyLayoutItemProvider lazyLayoutItemProvider, LazyLayoutPinnedItemList lazyLayoutPinnedItemList, LazyLayoutBeyondBoundsInfo lazyLayoutBeyondBoundsInfo) {
@@ -56,10 +55,10 @@ public abstract class LazyLayoutBeyondBoundsStateKt {
         int size = lazyLayoutPinnedItemList.items.size();
         for (int i9 = 0; i9 < size; i9++) {
             LazyLayoutPinnableItem lazyLayoutPinnableItem = (LazyLayoutPinnableItem) ((LazyLayoutPinnedItemList.PinnedItem) lazyLayoutPinnedItemList.get(i9));
-            int findIndexByKey = LazyLayoutItemProviderKt.findIndexByKey(lazyLayoutItemProvider, lazyLayoutPinnableItem.index, lazyLayoutPinnableItem.key);
+            int iFindIndexByKey = LazyLayoutItemProviderKt.findIndexByKey(lazyLayoutItemProvider, lazyLayoutPinnableItem.index, lazyLayoutPinnableItem.key);
             int i10 = intRange.first;
-            if ((findIndexByKey > intRange.last || i10 > findIndexByKey) && findIndexByKey >= 0 && findIndexByKey < lazyLayoutItemProvider.getItemCount()) {
-                arrayList.add(Integer.valueOf(findIndexByKey));
+            if ((iFindIndexByKey > intRange.last || i10 > iFindIndexByKey) && iFindIndexByKey >= 0 && iFindIndexByKey < lazyLayoutItemProvider.getItemCount()) {
+                arrayList.add(Integer.valueOf(iFindIndexByKey));
             }
         }
         int i11 = intRange.first;

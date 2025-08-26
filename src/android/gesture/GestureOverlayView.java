@@ -154,22 +154,22 @@ public class GestureOverlayView extends FrameLayout {
         this.mFadingAlpha = 1.0f;
         this.mInterpolator = new AccelerateDecelerateInterpolator();
         this.mFadingOut = new FadeOutRunnable();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.GestureOverlayView, i, i2);
-        float f = obtainStyledAttributes.getFloat(1, this.mGestureStrokeWidth);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.GestureOverlayView, i, i2);
+        float f = typedArrayObtainStyledAttributes.getFloat(1, this.mGestureStrokeWidth);
         this.mGestureStrokeWidth = f;
         this.mInvalidateExtraBorder = Math.max(1, ((int) f) - 1);
-        this.mCertainGestureColor = obtainStyledAttributes.getColor(2, this.mCertainGestureColor);
-        this.mUncertainGestureColor = obtainStyledAttributes.getColor(3, this.mUncertainGestureColor);
-        this.mFadeDuration = obtainStyledAttributes.getInt(5, (int) this.mFadeDuration);
-        this.mFadeOffset = obtainStyledAttributes.getInt(4, (int) this.mFadeOffset);
-        this.mGestureStrokeType = obtainStyledAttributes.getInt(6, this.mGestureStrokeType);
-        this.mGestureStrokeLengthThreshold = obtainStyledAttributes.getFloat(7, this.mGestureStrokeLengthThreshold);
-        this.mGestureStrokeAngleThreshold = obtainStyledAttributes.getFloat(9, this.mGestureStrokeAngleThreshold);
-        this.mGestureStrokeSquarenessTreshold = obtainStyledAttributes.getFloat(8, this.mGestureStrokeSquarenessTreshold);
-        this.mInterceptEvents = obtainStyledAttributes.getBoolean(10, this.mInterceptEvents);
-        this.mFadeEnabled = obtainStyledAttributes.getBoolean(11, this.mFadeEnabled);
-        this.mOrientation = obtainStyledAttributes.getInt(0, this.mOrientation);
-        obtainStyledAttributes.recycle();
+        this.mCertainGestureColor = typedArrayObtainStyledAttributes.getColor(2, this.mCertainGestureColor);
+        this.mUncertainGestureColor = typedArrayObtainStyledAttributes.getColor(3, this.mUncertainGestureColor);
+        this.mFadeDuration = typedArrayObtainStyledAttributes.getInt(5, (int) this.mFadeDuration);
+        this.mFadeOffset = typedArrayObtainStyledAttributes.getInt(4, (int) this.mFadeOffset);
+        this.mGestureStrokeType = typedArrayObtainStyledAttributes.getInt(6, this.mGestureStrokeType);
+        this.mGestureStrokeLengthThreshold = typedArrayObtainStyledAttributes.getFloat(7, this.mGestureStrokeLengthThreshold);
+        this.mGestureStrokeAngleThreshold = typedArrayObtainStyledAttributes.getFloat(9, this.mGestureStrokeAngleThreshold);
+        this.mGestureStrokeSquarenessTreshold = typedArrayObtainStyledAttributes.getFloat(8, this.mGestureStrokeSquarenessTreshold);
+        this.mInterceptEvents = typedArrayObtainStyledAttributes.getBoolean(10, this.mInterceptEvents);
+        this.mFadeEnabled = typedArrayObtainStyledAttributes.getBoolean(11, this.mFadeEnabled);
+        this.mOrientation = typedArrayObtainStyledAttributes.getInt(0, this.mOrientation);
+        typedArrayObtainStyledAttributes.recycle();
         init();
     }
 
@@ -407,9 +407,9 @@ public class GestureOverlayView extends FrameLayout {
             this.mFadingAlpha = 1.0f;
             this.mIsFadingOut = true;
             this.mFadingHasStarted = false;
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
             long j = this.mFadeOffset;
-            this.mFadingStart = currentAnimationTimeMillis + j;
+            this.mFadingStart = jCurrentAnimationTimeMillis + j;
             postDelayed(this.mFadingOut, j);
             return;
         }
@@ -448,14 +448,14 @@ public class GestureOverlayView extends FrameLayout {
     public void cancelGesture() {
         this.mIsListeningForGestures = false;
         this.mCurrentGesture.addStroke(new GestureStroke(this.mStrokeBuffer));
-        long uptimeMillis = SystemClock.uptimeMillis();
-        MotionEvent obtain = MotionEvent.obtain(uptimeMillis, uptimeMillis, 3, 0.0f, 0.0f, 0);
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        MotionEvent motionEventObtain = MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 3, 0.0f, 0.0f, 0);
         ArrayList<OnGestureListener> arrayList = this.mOnGestureListeners;
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
-            arrayList.get(i).onGestureCancelled(this, obtain);
+            arrayList.get(i).onGestureCancelled(this, motionEventObtain);
         }
-        obtain.recycle();
+        motionEventObtain.recycle();
         clear(false);
         this.mIsGesturing = false;
         this.mPreviousWasGesturing = false;
@@ -569,9 +569,9 @@ public class GestureOverlayView extends FrameLayout {
         float y = motionEvent.getY();
         float f = this.mX;
         float f2 = this.mY;
-        float abs = Math.abs(x - f);
-        float abs2 = Math.abs(y - f2);
-        if (abs < 3.0f && abs2 < 3.0f) {
+        float fAbs = Math.abs(x - f);
+        float fAbs2 = Math.abs(y - f2);
+        if (fAbs < 3.0f && fAbs2 < 3.0f) {
             return null;
         }
         Rect rect = this.mInvalidRect;
@@ -594,15 +594,15 @@ public class GestureOverlayView extends FrameLayout {
         this.mY = y;
         this.mStrokeBuffer.add(new GesturePoint(x, y, motionEvent.getEventTime()));
         if (this.mHandleGestureActions && !this.mIsGesturing) {
-            float hypot = this.mTotalLength + ((float) Math.hypot(abs, abs2));
-            this.mTotalLength = hypot;
-            if (hypot > this.mGestureStrokeLengthThreshold) {
-                OrientedBoundingBox computeOrientedBoundingBox = GestureUtils.computeOrientedBoundingBox(this.mStrokeBuffer);
-                float abs3 = Math.abs(computeOrientedBoundingBox.orientation);
-                if (abs3 > 90.0f) {
-                    abs3 = 180.0f - abs3;
+            float fHypot = this.mTotalLength + ((float) Math.hypot(fAbs, fAbs2));
+            this.mTotalLength = fHypot;
+            if (fHypot > this.mGestureStrokeLengthThreshold) {
+                OrientedBoundingBox orientedBoundingBoxComputeOrientedBoundingBox = GestureUtils.computeOrientedBoundingBox(this.mStrokeBuffer);
+                float fAbs3 = Math.abs(orientedBoundingBoxComputeOrientedBoundingBox.orientation);
+                if (fAbs3 > 90.0f) {
+                    fAbs3 = 180.0f - fAbs3;
                 }
-                if (computeOrientedBoundingBox.squareness > this.mGestureStrokeSquarenessTreshold || (this.mOrientation != 1 ? abs3 > this.mGestureStrokeAngleThreshold : abs3 < this.mGestureStrokeAngleThreshold)) {
+                if (orientedBoundingBoxComputeOrientedBoundingBox.squareness > this.mGestureStrokeSquarenessTreshold || (this.mOrientation != 1 ? fAbs3 > this.mGestureStrokeAngleThreshold : fAbs3 < this.mGestureStrokeAngleThreshold)) {
                     this.mIsGesturing = true;
                     setCurrentColor(this.mCertainGestureColor);
                     ArrayList<OnGesturingListener> arrayList = this.mOnGesturingListeners;
@@ -678,8 +678,8 @@ public class GestureOverlayView extends FrameLayout {
         @Override // java.lang.Runnable
         public void run() {
             if (GestureOverlayView.this.mIsFadingOut) {
-                long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - GestureOverlayView.this.mFadingStart;
-                if (currentAnimationTimeMillis > GestureOverlayView.this.mFadeDuration) {
+                long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - GestureOverlayView.this.mFadingStart;
+                if (jCurrentAnimationTimeMillis > GestureOverlayView.this.mFadeDuration) {
                     if (this.fireActionPerformed) {
                         GestureOverlayView.this.fireOnGesturePerformed();
                     }
@@ -691,9 +691,9 @@ public class GestureOverlayView extends FrameLayout {
                     GestureOverlayView.this.setPaintAlpha(255);
                 } else {
                     GestureOverlayView.this.mFadingHasStarted = true;
-                    float max = Math.max(0.0f, Math.min(1.0f, currentAnimationTimeMillis / GestureOverlayView.this.mFadeDuration));
+                    float fMax = Math.max(0.0f, Math.min(1.0f, jCurrentAnimationTimeMillis / GestureOverlayView.this.mFadeDuration));
                     GestureOverlayView gestureOverlayView = GestureOverlayView.this;
-                    gestureOverlayView.mFadingAlpha = 1.0f - gestureOverlayView.mInterpolator.getInterpolation(max);
+                    gestureOverlayView.mFadingAlpha = 1.0f - gestureOverlayView.mInterpolator.getInterpolation(fMax);
                     GestureOverlayView gestureOverlayView2 = GestureOverlayView.this;
                     gestureOverlayView2.setPaintAlpha((int) (gestureOverlayView2.mFadingAlpha * 255.0f));
                     GestureOverlayView.this.postDelayed(this, 16L);

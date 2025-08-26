@@ -3,8 +3,8 @@
     <color name="GM2_red_500">#ffe25142</color>
     <color name="accessibility_floating_menu_background">#ff252525</color>
     <color name="accessibility_floating_menu_hide_icon">#fffcfcfc</color>
-    <color name="accessibility_floating_menu_message_background">@android:color/bright_foreground_holo_dark</color>
-    <color name="accessibility_floating_menu_message_text">@android:color/tooltip_background_light</color>
+    <color name="accessibility_floating_menu_message_background">@android:color/bright_foreground_disabled_holo_light</color>
+    <color name="accessibility_floating_menu_message_text">@android:color/sliding_tab_text_color_active</color>
     <color name="accessibility_floating_tooltip_text">#fffcfcfc</color>
     <color name="accessibility_magnifier_bg">#ff171717</color>
     <color name="accessibility_magnifier_bg_stroke">#ff2d2d2d</color>
@@ -136,7 +136,7 @@
     <color name="no_more_bubble_text_color">#ffccccce</color>
     <color name="noti_toast_bg_color">#ff3a3a3d</color>
     <color name="notif_pill_text">@android:color/system_on_surface_dark</color>
-    <color name="notification_divider_color">@android:color/background_holo_light</color>
+    <color name="notification_divider_color">@android:color/background_holo_dark</color>
     <color name="notification_gear_color">@color/GM2_grey_500</color>
     <color name="notification_guts_button_divider_color">#33e6e6e6</color>
     <color name="notification_guts_common_text_color">#fffafaff</color>
@@ -191,13 +191,14 @@
     <color name="panel_menu_icon_selected_color">#ff387aff</color>
     <color name="people_tile_background">@color/material_dynamic_secondary20</color>
     <color name="qs_detail_item_device_bt_icon_tint_color">#ffffffff</color>
-    <color name="qs_detail_item_summary_text_color">#ff999999</color>
+    <color name="qs_detail_item_summary_text_color">#affafaff</color>
     <color name="qs_detail_layout_popup_menu_background_color">#cc3a3a3a</color>
     <color name="qs_detail_layout_popup_menu_background_color_no_blur">#ff3a3a3a</color>
     <color name="qs_edit_transparent_button_ripple_color">#33ffffff</color>
     <color name="qs_flashlight_seekbar_tickmark_color">#80ffffff</color>
     <color name="qs_flashlight_thumb_color">#ff010102</color>
-    <color name="qs_gradient_drawable_end_color">#33ffffff</color>
+    <color name="qs_gradient_drawable_end_color">#1affffff</color>
+    <color name="qs_gradient_drawable_start_color">#00000000</color>
     <color name="qs_interval_seekbar_normal">#ff545454</color>
     <color name="qs_multisim_preffered_slot_background_fill_color">#14ffffff</color>
     <color name="qs_multisim_preffered_slot_divider_color">#ffd4d4d4</color>
@@ -205,9 +206,11 @@
     <color name="qs_onboarding_bg_color">#ff2d2d30</color>
     <color name="qs_onboarding_text_color">#ffeaeaeb</color>
     <color name="qs_tile_icon_on_dim_tint_color">#d9252525</color>
+    <color name="qs_tile_label">#bffffaff</color>
     <color name="qs_tile_no_round_icon_color">#ffd5d5d5</color>
     <color name="qs_tile_round_background_off">#26ffffff</color>
     <color name="qs_tile_round_background_on">#ffd5d5d5</color>
+    <color name="qs_tile_sub_label">#8cfafaff</color>
     <color name="qs_user_switcher_avatar_background">#ff3c4043</color>
     <color name="qs_user_switcher_avatar_icon_color">@android:color/background_light</color>
     <color name="qs_user_switcher_selected_avatar_icon_color">#ff202124</color>
@@ -240,6 +243,7 @@
     <color name="sec_control_enabled_thermo_cool_background">@color/control_enabled_thermo_cool_background</color>
     <color name="sec_control_enabled_thermo_heat_background">@color/control_enabled_thermo_heat_background</color>
     <color name="sec_control_primary_text">@color/sesl_action_bar_text_color_title_dark</color>
+    <color name="sec_dialog_background_color">#1affffff</color>
     <color name="sec_dialog_divider_color">@color/sesl_dialog_divider_color_material_dark</color>
     <color name="sec_fgs_content_button_background_color">#ff3a3a3c</color>
     <color name="sec_fgs_manager_app_item_app_item_duration_text_color">#ff999999</color>
@@ -460,7 +464,7 @@
     <color name="kg_user_switcher_selected_avatar_icon_color">#ff202124</color>
     <color name="menu_icon_color">#ffd9d9d9</color>
     <color name="notification_channel_dialog_separator">@color/GM2_grey_700</color>
-    <color name="notification_primary_text_color">@android:color/system_shade_inactive_dark</color>
+    <color name="notification_primary_text_color">@android:color/resolver_accent_ripple</color>
     <color name="notification_section_header_label_color">@color/GM2_grey_200</color>
     <color name="overlay_mode_change_background">#ff010101</color>
     <color name="overlay_mode_change_progress_text_color">#ffe5e5e5</color>

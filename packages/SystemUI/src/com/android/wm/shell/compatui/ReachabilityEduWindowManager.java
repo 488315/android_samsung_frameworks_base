@@ -4,20 +4,22 @@ import android.app.AppCompatTaskInfo;
 import android.app.TaskInfo;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.SurfaceControlViewHost;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import com.android.systemui.R;
 import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayLayout;
+import com.android.wm.shell.common.HandlerExecutor;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SyncTransactionQueue;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ReachabilityEduWindowManager extends CompatUIWindowManagerAbstract {
     public final CompatUIConfiguration mCompatUIConfiguration;
@@ -51,9 +53,9 @@ public class ReachabilityEduWindowManager extends CompatUIWindowManagerAbstract 
 
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract
     public final View createLayout() {
-        ReachabilityEduLayout inflateLayout = inflateLayout();
-        this.mLayout = inflateLayout;
-        inflateLayout.getClass();
+        ReachabilityEduLayout reachabilityEduLayoutInflateLayout = inflateLayout();
+        this.mLayout = reachabilityEduLayoutInflateLayout;
+        reachabilityEduLayoutInflateLayout.getClass();
         updateVisibilityOfViews$2();
         return this.mLayout;
     }
@@ -149,28 +151,375 @@ public class ReachabilityEduWindowManager extends CompatUIWindowManagerAbstract 
         this.mSyncQueue.runInSync(new CompatUIWindowManagerAbstract$$ExternalSyntheticLambda0(this, 0, 0));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x0289, code lost:
-    
-        if (r1.mCompatUISharedPreferences.getBoolean("has_seen_horizontal_reachability_education@" + r2.userId, false) != false) goto L90;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x02a9, code lost:
-    
-        r3 = 1;
-        ((com.android.wm.shell.common.HandlerExecutor) r17.mMainExecutor).executeDelayed(new com.android.wm.shell.compatui.ReachabilityEduWindowManager$$ExternalSyntheticLambda0(r17, r3), r6);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x02a7, code lost:
-    
-        if (r1.mCompatUISharedPreferences.getBoolean("has_seen_vertical_reachability_education@" + r2.userId, false) != false) goto L90;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x028c  */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x02a9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateVisibilityOfViews$2() {
-        /*
-            Method dump skipped, instructions count: 704
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.compatui.ReachabilityEduWindowManager.updateVisibilityOfViews$2():void");
+        int i;
+        int i2;
+        int i3;
+        int i4;
+        if (this.mLayout == null) {
+            return;
+        }
+        TaskInfo taskInfo = this.mTaskInfo;
+        boolean z = this.mCompatUIConfiguration.mCompatUISharedPreferences.getBoolean("has_seen_horizontal_reachability_education@" + taskInfo.userId, false);
+        boolean z2 = this.mCompatUIConfiguration.mCompatUISharedPreferences.getBoolean("has_seen_vertical_reachability_education@" + taskInfo.userId, false);
+        boolean z3 = !z || (this.mHasUserDoubleTapped && ((i4 = this.mLetterboxHorizontalPosition) == 0 || i4 == 2));
+        boolean z4 = !z2 || (this.mHasUserDoubleTapped && ((i3 = this.mLetterboxVerticalPosition) == 0 || i3 == 2));
+        if (!this.mIsLetterboxDoubleTapEnabled || (!z3 && !z4)) {
+            this.mLayout.hideAllImmediately();
+            return;
+        }
+        int iWidth = getTaskBounds().width() - this.mTopActivityLetterboxWidth;
+        int iHeight = getTaskBounds().height() - this.mTopActivityLetterboxHeight;
+        ReachabilityEduLayout reachabilityEduLayout = this.mLayout;
+        int i5 = this.mLetterboxVerticalPosition;
+        int i6 = this.mLetterboxHorizontalPosition;
+        CompatUIConfiguration compatUIConfiguration = this.mCompatUIConfiguration;
+        reachabilityEduLayout.hideAllImmediately();
+        if (z3 && i6 != -1) {
+            reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveUpButton);
+            reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveDownButton);
+            reachabilityEduLayout.mLastTopMargin = -1;
+            reachabilityEduLayout.mLastBottomMargin = -1;
+            int i7 = iWidth / 2;
+            int i8 = i6 * i7;
+            int i9 = iWidth - i8;
+            if (i8 >= reachabilityEduLayout.mMoveLeftButton.getMeasuredWidth()) {
+                int measuredWidth = (i7 - reachabilityEduLayout.mMoveLeftButton.getMeasuredWidth()) / 2;
+                if (reachabilityEduLayout.mLastLeftMargin == -1) {
+                    reachabilityEduLayout.mLastLeftMargin = measuredWidth;
+                }
+                int i10 = reachabilityEduLayout.mLastLeftMargin;
+                if (i10 != measuredWidth) {
+                    final int i11 = 2;
+                    final int i12 = 2;
+                    ReachabilityEduLayout.marginAnimator(reachabilityEduLayout.mMoveLeftButton, new Function() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) obj;
+                            switch (i11) {
+                                case 0:
+                                    int i13 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams.topMargin);
+                                case 1:
+                                    int i14 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams.bottomMargin);
+                                case 2:
+                                    int i15 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams.leftMargin);
+                                default:
+                                    int i16 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams.rightMargin);
+                            }
+                        }
+                    }, new BiConsumer() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda1
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) obj;
+                            Integer num = (Integer) obj2;
+                            switch (i12) {
+                                case 0:
+                                    int i13 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams.topMargin = num.intValue();
+                                    break;
+                                case 1:
+                                    int i14 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams.bottomMargin = num.intValue();
+                                    break;
+                                case 2:
+                                    int i15 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams.leftMargin = num.intValue();
+                                    break;
+                                default:
+                                    int i16 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams.rightMargin = num.intValue();
+                                    break;
+                            }
+                        }
+                    }, i10, measuredWidth).start();
+                } else {
+                    FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) reachabilityEduLayout.mMoveLeftButton.getLayoutParams();
+                    layoutParams.leftMargin = reachabilityEduLayout.mLastLeftMargin;
+                    reachabilityEduLayout.mMoveLeftButton.setLayoutParams(layoutParams);
+                }
+                reachabilityEduLayout.showItem(reachabilityEduLayout.mMoveLeftButton);
+                i2 = -1;
+            } else {
+                reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveLeftButton);
+                i2 = -1;
+                reachabilityEduLayout.mLastLeftMargin = -1;
+            }
+            if (i9 >= reachabilityEduLayout.mMoveRightButton.getMeasuredWidth()) {
+                int measuredWidth2 = (i7 - reachabilityEduLayout.mMoveRightButton.getMeasuredWidth()) / 2;
+                if (reachabilityEduLayout.mLastRightMargin == i2) {
+                    reachabilityEduLayout.mLastRightMargin = measuredWidth2;
+                }
+                int i13 = reachabilityEduLayout.mLastRightMargin;
+                if (i13 != measuredWidth2) {
+                    final int i14 = 3;
+                    final int i15 = 3;
+                    ReachabilityEduLayout.marginAnimator(reachabilityEduLayout.mMoveRightButton, new Function() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) obj;
+                            switch (i14) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams2.topMargin);
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams2.bottomMargin);
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams2.leftMargin);
+                                default:
+                                    int i16 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams2.rightMargin);
+                            }
+                        }
+                    }, new BiConsumer() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda1
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) obj;
+                            Integer num = (Integer) obj2;
+                            switch (i15) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams2.topMargin = num.intValue();
+                                    break;
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams2.bottomMargin = num.intValue();
+                                    break;
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams2.leftMargin = num.intValue();
+                                    break;
+                                default:
+                                    int i16 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams2.rightMargin = num.intValue();
+                                    break;
+                            }
+                        }
+                    }, i13, measuredWidth2).start();
+                } else {
+                    FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) reachabilityEduLayout.mMoveRightButton.getLayoutParams();
+                    layoutParams2.rightMargin = reachabilityEduLayout.mLastRightMargin;
+                    reachabilityEduLayout.mMoveRightButton.setLayoutParams(layoutParams2);
+                }
+                reachabilityEduLayout.showItem(reachabilityEduLayout.mMoveRightButton);
+            } else {
+                reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveRightButton);
+                reachabilityEduLayout.mLastRightMargin = -1;
+            }
+            compatUIConfiguration.mCompatUISharedPreferences.edit().putBoolean("has_seen_horizontal_reachability_education@" + taskInfo.userId, true).apply();
+        } else if (z4 && i5 != -1) {
+            reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveLeftButton);
+            reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveRightButton);
+            reachabilityEduLayout.mLastLeftMargin = -1;
+            reachabilityEduLayout.mLastRightMargin = -1;
+            int i16 = iHeight / 2;
+            int i17 = i5 * i16;
+            int i18 = iHeight - i17;
+            if (i17 >= reachabilityEduLayout.mMoveUpButton.getMeasuredHeight()) {
+                int measuredHeight = (i16 - reachabilityEduLayout.mMoveUpButton.getMeasuredHeight()) / 2;
+                if (reachabilityEduLayout.mLastTopMargin == -1) {
+                    reachabilityEduLayout.mLastTopMargin = measuredHeight;
+                }
+                int i19 = reachabilityEduLayout.mLastTopMargin;
+                if (i19 != measuredHeight) {
+                    final int i20 = 0;
+                    final int i21 = 0;
+                    ReachabilityEduLayout.marginAnimator(reachabilityEduLayout.mMoveUpButton, new Function() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            FrameLayout.LayoutParams layoutParams22 = (FrameLayout.LayoutParams) obj;
+                            switch (i20) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.topMargin);
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.bottomMargin);
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.leftMargin);
+                                default:
+                                    int i162 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.rightMargin);
+                            }
+                        }
+                    }, new BiConsumer() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda1
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            FrameLayout.LayoutParams layoutParams22 = (FrameLayout.LayoutParams) obj;
+                            Integer num = (Integer) obj2;
+                            switch (i21) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.topMargin = num.intValue();
+                                    break;
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.bottomMargin = num.intValue();
+                                    break;
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.leftMargin = num.intValue();
+                                    break;
+                                default:
+                                    int i162 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.rightMargin = num.intValue();
+                                    break;
+                            }
+                        }
+                    }, i19, measuredHeight).start();
+                } else {
+                    FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) reachabilityEduLayout.mMoveUpButton.getLayoutParams();
+                    layoutParams3.topMargin = reachabilityEduLayout.mLastTopMargin;
+                    reachabilityEduLayout.mMoveUpButton.setLayoutParams(layoutParams3);
+                }
+                reachabilityEduLayout.showItem(reachabilityEduLayout.mMoveUpButton);
+                i = -1;
+            } else {
+                reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveUpButton);
+                i = -1;
+                reachabilityEduLayout.mLastTopMargin = -1;
+            }
+            if (i18 >= reachabilityEduLayout.mMoveDownButton.getMeasuredHeight()) {
+                int measuredHeight2 = (i16 - reachabilityEduLayout.mMoveDownButton.getMeasuredHeight()) / 2;
+                if (reachabilityEduLayout.mLastBottomMargin == i) {
+                    reachabilityEduLayout.mLastBottomMargin = measuredHeight2;
+                }
+                int i22 = reachabilityEduLayout.mLastBottomMargin;
+                if (i22 != measuredHeight2) {
+                    final int i23 = 1;
+                    final int i24 = 1;
+                    ReachabilityEduLayout.marginAnimator(reachabilityEduLayout.mMoveDownButton, new Function() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            FrameLayout.LayoutParams layoutParams22 = (FrameLayout.LayoutParams) obj;
+                            switch (i23) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.topMargin);
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.bottomMargin);
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.leftMargin);
+                                default:
+                                    int i162 = ReachabilityEduLayout.$r8$clinit;
+                                    return Integer.valueOf(layoutParams22.rightMargin);
+                            }
+                        }
+                    }, new BiConsumer() { // from class: com.android.wm.shell.compatui.ReachabilityEduLayout$$ExternalSyntheticLambda1
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            FrameLayout.LayoutParams layoutParams22 = (FrameLayout.LayoutParams) obj;
+                            Integer num = (Integer) obj2;
+                            switch (i24) {
+                                case 0:
+                                    int i132 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.topMargin = num.intValue();
+                                    break;
+                                case 1:
+                                    int i142 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.bottomMargin = num.intValue();
+                                    break;
+                                case 2:
+                                    int i152 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.leftMargin = num.intValue();
+                                    break;
+                                default:
+                                    int i162 = ReachabilityEduLayout.$r8$clinit;
+                                    layoutParams22.rightMargin = num.intValue();
+                                    break;
+                            }
+                        }
+                    }, i22, measuredHeight2).start();
+                } else {
+                    FrameLayout.LayoutParams layoutParams4 = (FrameLayout.LayoutParams) reachabilityEduLayout.mMoveDownButton.getLayoutParams();
+                    layoutParams4.bottomMargin = reachabilityEduLayout.mLastBottomMargin;
+                    reachabilityEduLayout.mMoveDownButton.setLayoutParams(layoutParams4);
+                }
+                reachabilityEduLayout.showItem(reachabilityEduLayout.mMoveDownButton);
+            } else {
+                reachabilityEduLayout.hideItem(reachabilityEduLayout.mMoveDownButton);
+                reachabilityEduLayout.mLastBottomMargin = -1;
+            }
+            compatUIConfiguration.mCompatUISharedPreferences.edit().putBoolean("has_seen_vertical_reachability_education@" + taskInfo.userId, true).apply();
+        }
+        if (!this.mHasLetterboxSizeChanged) {
+            this.mNextHideTime = ((Integer) this.mDisappearTimeSupplier.apply(3)).intValue() + SystemClock.uptimeMillis();
+            long jIntValue = ((Integer) this.mDisappearTimeSupplier.apply(3)).intValue();
+            final int i25 = 0;
+            ((HandlerExecutor) this.mMainExecutor).executeDelayed(new Runnable(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduWindowManager$$ExternalSyntheticLambda0
+                public final /* synthetic */ ReachabilityEduWindowManager f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // java.lang.Runnable
+                public final void run() {
+                    int i26 = i25;
+                    ReachabilityEduWindowManager reachabilityEduWindowManager = this.f$0;
+                    switch (i26) {
+                        case 0:
+                            if (reachabilityEduWindowManager.mLayout != null && SystemClock.uptimeMillis() >= reachabilityEduWindowManager.mNextHideTime) {
+                                reachabilityEduWindowManager.mLayout.hideAllImmediately();
+                                break;
+                            }
+                            break;
+                        default:
+                            reachabilityEduWindowManager.mOnDismissCallback.accept(reachabilityEduWindowManager.mTaskInfo, reachabilityEduWindowManager.mTaskListener);
+                            break;
+                    }
+                }
+            }, jIntValue);
+            if (!z) {
+                CompatUIConfiguration compatUIConfiguration2 = this.mCompatUIConfiguration;
+                TaskInfo taskInfo2 = this.mTaskInfo;
+                if (compatUIConfiguration2.mCompatUISharedPreferences.getBoolean("has_seen_horizontal_reachability_education@" + taskInfo2.userId, false)) {
+                    final int i26 = 1;
+                    ((HandlerExecutor) this.mMainExecutor).executeDelayed(new Runnable(this) { // from class: com.android.wm.shell.compatui.ReachabilityEduWindowManager$$ExternalSyntheticLambda0
+                        public final /* synthetic */ ReachabilityEduWindowManager f$0;
+
+                        {
+                            this.f$0 = this;
+                        }
+
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i262 = i26;
+                            ReachabilityEduWindowManager reachabilityEduWindowManager = this.f$0;
+                            switch (i262) {
+                                case 0:
+                                    if (reachabilityEduWindowManager.mLayout != null && SystemClock.uptimeMillis() >= reachabilityEduWindowManager.mNextHideTime) {
+                                        reachabilityEduWindowManager.mLayout.hideAllImmediately();
+                                        break;
+                                    }
+                                    break;
+                                default:
+                                    reachabilityEduWindowManager.mOnDismissCallback.accept(reachabilityEduWindowManager.mTaskInfo, reachabilityEduWindowManager.mTaskListener);
+                                    break;
+                            }
+                        }
+                    }, jIntValue);
+                } else if (!z2) {
+                    CompatUIConfiguration compatUIConfiguration3 = this.mCompatUIConfiguration;
+                    TaskInfo taskInfo3 = this.mTaskInfo;
+                    if (compatUIConfiguration3.mCompatUISharedPreferences.getBoolean("has_seen_vertical_reachability_education@" + taskInfo3.userId, false)) {
+                    }
+                }
+            }
+        }
+        this.mHasUserDoubleTapped = false;
     }
 }

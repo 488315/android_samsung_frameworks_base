@@ -14,9 +14,9 @@ public final class TelephonyNetworkFinder {
     public TelephonyNetwork findNetworkByMccMnc(String str, String str2) {
         Objects.requireNonNull(str);
         Objects.requireNonNull(str2);
-        com.android.i18n.timezone.TelephonyNetwork findNetworkByMccMnc = this.mDelegate.findNetworkByMccMnc(str, str2);
-        if (findNetworkByMccMnc != null) {
-            return new TelephonyNetwork(findNetworkByMccMnc);
+        com.android.i18n.timezone.TelephonyNetwork telephonyNetworkFindNetworkByMccMnc = this.mDelegate.findNetworkByMccMnc(str, str2);
+        if (telephonyNetworkFindNetworkByMccMnc != null) {
+            return new TelephonyNetwork(telephonyNetworkFindNetworkByMccMnc);
         }
         return null;
     }
@@ -26,9 +26,9 @@ public final class TelephonyNetworkFinder {
             return null;
         }
         Objects.requireNonNull(str);
-        com.android.i18n.timezone.MobileCountries findCountriesByMcc = this.mDelegate.findCountriesByMcc(str);
-        if (findCountriesByMcc != null) {
-            return new MobileCountries(findCountriesByMcc);
+        com.android.i18n.timezone.MobileCountries mobileCountriesFindCountriesByMcc = this.mDelegate.findCountriesByMcc(str);
+        if (mobileCountriesFindCountriesByMcc != null) {
+            return new MobileCountries(mobileCountriesFindCountriesByMcc);
         }
         return null;
     }

@@ -29,9 +29,9 @@ public class ETC1Util {
         }
         int i6 = i5 != 5121 ? 2 : 3;
         int i7 = i6 * width;
-        ByteBuffer order = ByteBuffer.allocateDirect(i7 * height).order(ByteOrder.nativeOrder());
-        ETC1.decodeImage(data, order, width, height, i6, i7);
-        GLES10.glTexImage2D(i, i2, i4, width, height, i3, i4, i5, order);
+        ByteBuffer byteBufferOrder = ByteBuffer.allocateDirect(i7 * height).order(ByteOrder.nativeOrder());
+        ETC1.decodeImage(data, byteBufferOrder, width, height, i6, i7);
+        GLES10.glTexImage2D(i, i2, i4, width, height, i3, i4, i5, byteBufferOrder);
     }
 
     public static boolean isETC1Supported() {
@@ -79,55 +79,55 @@ public class ETC1Util {
         if (inputStream.read(bArr, 0, 16) != 16) {
             throw new IOException("Unable to read PKM file header.");
         }
-        ByteBuffer order = ByteBuffer.allocateDirect(16).order(ByteOrder.nativeOrder());
-        order.put(bArr, 0, 16).position(0);
-        if (!ETC1.isValid(order)) {
+        ByteBuffer byteBufferOrder = ByteBuffer.allocateDirect(16).order(ByteOrder.nativeOrder());
+        byteBufferOrder.put(bArr, 0, 16).position(0);
+        if (!ETC1.isValid(byteBufferOrder)) {
             throw new IOException("Not a PKM file.");
         }
-        int width = ETC1.getWidth(order);
-        int height = ETC1.getHeight(order);
+        int width = ETC1.getWidth(byteBufferOrder);
+        int height = ETC1.getHeight(byteBufferOrder);
         int encodedDataSize = ETC1.getEncodedDataSize(width, height);
-        ByteBuffer order2 = ByteBuffer.allocateDirect(encodedDataSize).order(ByteOrder.nativeOrder());
+        ByteBuffer byteBufferOrder2 = ByteBuffer.allocateDirect(encodedDataSize).order(ByteOrder.nativeOrder());
         int i = 0;
         while (i < encodedDataSize) {
-            int min = Math.min(4096, encodedDataSize - i);
-            if (inputStream.read(bArr, 0, min) != min) {
+            int iMin = Math.min(4096, encodedDataSize - i);
+            if (inputStream.read(bArr, 0, iMin) != iMin) {
                 throw new IOException("Unable to read PKM file data.");
             }
-            order2.put(bArr, 0, min);
-            i += min;
+            byteBufferOrder2.put(bArr, 0, iMin);
+            i += iMin;
         }
-        order2.position(0);
-        return new ETC1Texture(width, height, order2);
+        byteBufferOrder2.position(0);
+        return new ETC1Texture(width, height, byteBufferOrder2);
     }
 
     public static ETC1Texture compressTexture(Buffer buffer, int i, int i2, int i3, int i4) {
-        ByteBuffer order = ByteBuffer.allocateDirect(ETC1.getEncodedDataSize(i, i2)).order(ByteOrder.nativeOrder());
-        ETC1.encodeImage(buffer, i, i2, i3, i4, order);
-        return new ETC1Texture(i, i2, order);
+        ByteBuffer byteBufferOrder = ByteBuffer.allocateDirect(ETC1.getEncodedDataSize(i, i2)).order(ByteOrder.nativeOrder());
+        ETC1.encodeImage(buffer, i, i2, i3, i4, byteBufferOrder);
+        return new ETC1Texture(i, i2, byteBufferOrder);
     }
 
     public static void writeTexture(ETC1Texture eTC1Texture, OutputStream outputStream) throws IOException {
         ByteBuffer data = eTC1Texture.getData();
-        int position = data.position();
+        int iPosition = data.position();
         try {
             int width = eTC1Texture.getWidth();
             int height = eTC1Texture.getHeight();
-            ByteBuffer order = ByteBuffer.allocateDirect(16).order(ByteOrder.nativeOrder());
-            ETC1.formatHeader(order, width, height);
+            ByteBuffer byteBufferOrder = ByteBuffer.allocateDirect(16).order(ByteOrder.nativeOrder());
+            ETC1.formatHeader(byteBufferOrder, width, height);
             byte[] bArr = new byte[4096];
-            order.get(bArr, 0, 16);
+            byteBufferOrder.get(bArr, 0, 16);
             outputStream.write(bArr, 0, 16);
             int encodedDataSize = ETC1.getEncodedDataSize(width, height);
             int i = 0;
             while (i < encodedDataSize) {
-                int min = Math.min(4096, encodedDataSize - i);
-                data.get(bArr, 0, min);
-                outputStream.write(bArr, 0, min);
-                i += min;
+                int iMin = Math.min(4096, encodedDataSize - i);
+                data.get(bArr, 0, iMin);
+                outputStream.write(bArr, 0, iMin);
+                i += iMin;
             }
         } finally {
-            data.position(position);
+            data.position(iPosition);
         }
     }
 }

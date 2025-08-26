@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogViewerConfigReader {
     private final Map<String, Set<Long>> mGroupHashes = new TreeMap();
     private final LongSparseArray<String> mLogMessageMap = new LongSparseArray<>();
@@ -42,10 +42,10 @@ public class ProtoLogViewerConfigReader {
         for (String str : strArr) {
             if (!this.mGroupHashes.containsKey(str)) {
                 try {
-                    Map<Long, String> loadViewerConfigMappingForGroup = loadViewerConfigMappingForGroup(str);
-                    this.mGroupHashes.put(str, loadViewerConfigMappingForGroup.keySet());
-                    for (Long l : loadViewerConfigMappingForGroup.keySet()) {
-                        this.mLogMessageMap.put(l.longValue(), loadViewerConfigMappingForGroup.get(l));
+                    Map<Long, String> mapLoadViewerConfigMappingForGroup = loadViewerConfigMappingForGroup(str);
+                    this.mGroupHashes.put(str, mapLoadViewerConfigMappingForGroup.keySet());
+                    for (Long l : mapLoadViewerConfigMappingForGroup.keySet()) {
+                        this.mLogMessageMap.put(l.longValue(), mapLoadViewerConfigMappingForGroup.get(l));
                     }
                     iLogger.log("Loaded " + this.mLogMessageMap.size() + " log definitions");
                 } catch (IOException e) {
@@ -82,7 +82,7 @@ public class ProtoLogViewerConfigReader {
             ProtoInputStream protoInputStream = inputStream.get();
             while (protoInputStream.nextField() != -1) {
                 if (protoInputStream.getFieldNumber() == 1) {
-                    long start = protoInputStream.start(2246267895809L);
+                    long jStart = protoInputStream.start(2246267895809L);
                     while (protoInputStream.nextField() != -1) {
                         if (protoInputStream.getFieldNumber() == 1 && protoInputStream.readLong(1125281431553L) == j) {
                             if (inputStream != null) {
@@ -91,7 +91,7 @@ public class ProtoLogViewerConfigReader {
                             return true;
                         }
                     }
-                    protoInputStream.end(start);
+                    protoInputStream.end(jStart);
                 }
             }
             if (inputStream == null) {
@@ -112,7 +112,7 @@ public class ProtoLogViewerConfigReader {
     }
 
     private Map<Long, String> loadViewerConfigMappingForGroup(String str) throws IOException {
-        long loadGroupId = loadGroupId(str);
+        long jLoadGroupId = loadGroupId(str);
         TreeMap treeMap = new TreeMap();
         AutoClosableProtoInputStream inputStream = this.mViewerConfigInputStreamProvider.getInputStream();
         try {
@@ -125,8 +125,8 @@ public class ProtoLogViewerConfigReader {
                     return treeMap;
                 }
                 if (protoInputStream.getFieldNumber() == 1) {
-                    long start = protoInputStream.start(2246267895809L);
-                    String str2 = null;
+                    long jStart = protoInputStream.start(2246267895809L);
+                    String string = null;
                     int i = 0;
                     long j = 0;
                     for (int i2 = -1; protoInputStream.nextField() != i2; i2 = -1) {
@@ -134,7 +134,7 @@ public class ProtoLogViewerConfigReader {
                         if (fieldNumber == 1) {
                             j = protoInputStream.readLong(1125281431553L);
                         } else if (fieldNumber == 2) {
-                            str2 = protoInputStream.readString(1138166333442L);
+                            string = protoInputStream.readString(1138166333442L);
                         } else if (fieldNumber == 4) {
                             i = protoInputStream.readInt(1155346202628L);
                         }
@@ -145,13 +145,13 @@ public class ProtoLogViewerConfigReader {
                     if (j == 0) {
                         throw new IOException("Failed to get message id");
                     }
-                    if (str2 == null) {
+                    if (string == null) {
                         throw new IOException("Failed to get message string");
                     }
-                    if (i == loadGroupId) {
-                        treeMap.put(Long.valueOf(j), str2);
+                    if (i == jLoadGroupId) {
+                        treeMap.put(Long.valueOf(j), string);
                     }
-                    protoInputStream.end(start);
+                    protoInputStream.end(jStart);
                 }
             }
         } catch (Throwable th) {
@@ -174,24 +174,24 @@ public class ProtoLogViewerConfigReader {
             ProtoInputStream protoInputStream = inputStream.get();
             while (protoInputStream.nextField() != -1) {
                 if (protoInputStream.getFieldNumber() == 2) {
-                    long start = protoInputStream.start(2246267895810L);
+                    long jStart = protoInputStream.start(2246267895810L);
                     long j = 0;
-                    String str2 = null;
+                    String string = null;
                     while (protoInputStream.nextField() != -1) {
                         int fieldNumber = protoInputStream.getFieldNumber();
                         if (fieldNumber == 1) {
                             j = protoInputStream.readInt(1155346202625L);
                         } else if (fieldNumber == 2) {
-                            str2 = protoInputStream.readString(1138166333442L);
+                            string = protoInputStream.readString(1138166333442L);
                         }
                     }
-                    if (Objects.equals(str2, str)) {
+                    if (Objects.equals(string, str)) {
                         if (inputStream != null) {
                             inputStream.close();
                         }
                         return j;
                     }
-                    protoInputStream.end(start);
+                    protoInputStream.end(jStart);
                 }
             }
             if (inputStream != null) {

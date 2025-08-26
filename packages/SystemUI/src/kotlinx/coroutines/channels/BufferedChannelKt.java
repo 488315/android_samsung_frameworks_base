@@ -5,7 +5,6 @@ import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.internal.Symbol;
 import kotlinx.coroutines.internal.SystemPropsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BufferedChannelKt {
     public static final ChannelSegment NULL_SEGMENT = new ChannelSegment(-1, null, null, 0);
@@ -29,11 +28,11 @@ public abstract class BufferedChannelKt {
     public static final Symbol NO_CLOSE_CAUSE = new Symbol("NO_CLOSE_CAUSE");
 
     public static final boolean tryResume0(CancellableContinuation cancellableContinuation, Object obj, Function3 function3) {
-        Symbol tryResume = cancellableContinuation.tryResume(obj, function3);
-        if (tryResume == null) {
+        Symbol symbolTryResume = cancellableContinuation.tryResume(obj, function3);
+        if (symbolTryResume == null) {
             return false;
         }
-        cancellableContinuation.completeResume(tryResume);
+        cancellableContinuation.completeResume(symbolTryResume);
         return true;
     }
 }

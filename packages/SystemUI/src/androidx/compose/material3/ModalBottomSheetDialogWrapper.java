@@ -29,7 +29,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ModalBottomSheetDialogWrapper extends ComponentDialog {
     public final View composeView;
@@ -37,7 +36,6 @@ final class ModalBottomSheetDialogWrapper extends ComponentDialog {
     public Function0 onDismissRequest;
     public ModalBottomSheetProperties properties;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -72,7 +70,7 @@ final class ModalBottomSheetDialogWrapper extends ComponentDialog {
         ModalBottomSheetDialogLayout modalBottomSheetDialogLayout = new ModalBottomSheetDialogLayout(getContext(), window, this.properties.shouldDismissOnBackPress, this.onDismissRequest, animatable, coroutineScope);
         modalBottomSheetDialogLayout.setTag(R.id.compose_view_saveable_id_tag, "Dialog:" + uuid);
         modalBottomSheetDialogLayout.setClipChildren(false);
-        modalBottomSheetDialogLayout.setElevation(density.mo57toPx0680j_4(f));
+        modalBottomSheetDialogLayout.setElevation(density.mo58toPx0680j_4(f));
         modalBottomSheetDialogLayout.setOutlineProvider(new ViewOutlineProvider() { // from class: androidx.compose.material3.ModalBottomSheetDialogWrapper$1$2
             @Override // android.view.ViewOutlineProvider
             public final void getOutline(View view2, Outline outline) {
@@ -92,7 +90,7 @@ final class ModalBottomSheetDialogWrapper extends ComponentDialog {
         OnBackPressedDispatcherKt.addCallback$default(this.onBackPressedDispatcher, this, new Function1() { // from class: androidx.compose.material3.ModalBottomSheetDialogWrapper.3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper = ModalBottomSheetDialogWrapper.this;
                 if (modalBottomSheetDialogWrapper.properties.shouldDismissOnBackPress) {
                     modalBottomSheetDialogWrapper.onDismissRequest.invoke();
@@ -104,11 +102,11 @@ final class ModalBottomSheetDialogWrapper extends ComponentDialog {
 
     @Override // android.app.Dialog
     public final boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
-        if (onTouchEvent) {
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
+        if (zOnTouchEvent) {
             this.onDismissRequest.invoke();
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     public final void updateParameters(Function0 function0, ModalBottomSheetProperties modalBottomSheetProperties, LayoutDirection layoutDirection) {

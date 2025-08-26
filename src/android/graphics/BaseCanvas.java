@@ -133,51 +133,51 @@ public abstract class BaseCanvas {
     public void drawBitmap(Bitmap bitmap, Rect rect, Rect rect2, Paint paint) {
         int i;
         int i2;
-        int i3;
-        int i4;
+        int height;
+        int width;
         rect2.getClass();
         throwIfCannotDraw(bitmap);
         throwIfHasHwFeaturesInSwMode(paint);
         long nativeInstance = paint == null ? 0L : paint.getNativeInstance();
         if (rect == null) {
-            i4 = bitmap.getWidth();
-            i3 = bitmap.getHeight();
+            width = bitmap.getWidth();
+            height = bitmap.getHeight();
             i = 0;
             i2 = 0;
         } else {
             i = rect.left;
-            int i5 = rect.right;
+            int i3 = rect.right;
             i2 = rect.top;
-            i3 = rect.bottom;
-            i4 = i5;
+            height = rect.bottom;
+            width = i3;
         }
-        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), i, i2, i4, i3, rect2.left, rect2.top, rect2.right, rect2.bottom, nativeInstance, this.mScreenDensity, bitmap.mDensity);
+        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), i, i2, width, height, rect2.left, rect2.top, rect2.right, rect2.bottom, nativeInstance, this.mScreenDensity, bitmap.mDensity);
     }
 
     public void drawBitmap(Bitmap bitmap, Rect rect, RectF rectF, Paint paint) {
+        float height;
+        float width;
         float f;
         float f2;
-        float f3;
-        float f4;
         rectF.getClass();
         throwIfCannotDraw(bitmap);
         throwIfHasHwFeaturesInSwMode(paint);
         long nativeInstance = paint == null ? 0L : paint.getNativeInstance();
         if (rect == null) {
-            f2 = bitmap.getWidth();
-            f = bitmap.getHeight();
-            f3 = 0.0f;
-            f4 = 0.0f;
+            width = bitmap.getWidth();
+            height = bitmap.getHeight();
+            f = 0.0f;
+            f2 = 0.0f;
         } else {
-            float f5 = rect.left;
-            float f6 = rect.right;
-            float f7 = rect.top;
-            f = rect.bottom;
-            f2 = f6;
-            f3 = f5;
-            f4 = f7;
+            float f3 = rect.left;
+            float f4 = rect.right;
+            float f5 = rect.top;
+            height = rect.bottom;
+            width = f4;
+            f = f3;
+            f2 = f5;
         }
-        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), f3, f4, f2, f, rectF.left, rectF.top, rectF.right, rectF.bottom, nativeInstance, this.mScreenDensity, bitmap.mDensity);
+        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), f, f2, width, height, rectF.left, rectF.top, rectF.right, rectF.bottom, nativeInstance, this.mScreenDensity, bitmap.mDensity);
     }
 
     @Deprecated
@@ -416,10 +416,10 @@ public abstract class BaseCanvas {
             ((GraphicsOperations) charSequence).drawText(this, i, i2, f, f2, paint);
             return;
         }
-        char[] obtain = TemporaryBuffer.obtain(i3);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
-        nDrawText(this.mNativeCanvasWrapper, obtain, 0, i3, f, f2, paint.mBidiFlags, paint.getNativeInstance());
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i3);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
+        nDrawText(this.mNativeCanvasWrapper, cArrObtain, 0, i3, f, f2, paint.mBidiFlags, paint.getNativeInstance());
+        TemporaryBuffer.recycle(cArrObtain);
     }
 
     public void drawText(String str, float f, float f2, Paint paint) {
@@ -494,18 +494,18 @@ public abstract class BaseCanvas {
         }
         if (charSequence instanceof PrecomputedText) {
             PrecomputedText precomputedText = (PrecomputedText) charSequence;
-            int findParaIndex = precomputedText.findParaIndex(i);
-            if (i2 <= precomputedText.getParagraphEnd(findParaIndex)) {
-                int paragraphStart = precomputedText.getParagraphStart(findParaIndex);
-                drawTextRun(precomputedText.getMeasuredParagraph(findParaIndex).getMeasuredText(), i - paragraphStart, i2 - paragraphStart, i3 - paragraphStart, i4 - paragraphStart, f, f2, z, paint);
+            int iFindParaIndex = precomputedText.findParaIndex(i);
+            if (i2 <= precomputedText.getParagraphEnd(iFindParaIndex)) {
+                int paragraphStart = precomputedText.getParagraphStart(iFindParaIndex);
+                drawTextRun(precomputedText.getMeasuredParagraph(iFindParaIndex).getMeasuredText(), i - paragraphStart, i2 - paragraphStart, i3 - paragraphStart, i4 - paragraphStart, f, f2, z, paint);
                 return;
             }
         }
         int i7 = i4 - i3;
-        char[] obtain = TemporaryBuffer.obtain(i7);
-        TextUtils.getChars(charSequence, i3, i4, obtain, 0);
-        nDrawTextRun(this.mNativeCanvasWrapper, obtain, i5, i6, 0, i7, f, f2, z, paint.getNativeInstance(), 0L);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i7);
+        TextUtils.getChars(charSequence, i3, i4, cArrObtain, 0);
+        nDrawTextRun(this.mNativeCanvasWrapper, cArrObtain, i5, i6, 0, i7, f, f2, z, paint.getNativeInstance(), 0L);
+        TemporaryBuffer.recycle(cArrObtain);
     }
 
     public void drawTextRun(MeasuredText measuredText, int i, int i2, int i3, int i4, float f, float f2, boolean z, Paint paint) {

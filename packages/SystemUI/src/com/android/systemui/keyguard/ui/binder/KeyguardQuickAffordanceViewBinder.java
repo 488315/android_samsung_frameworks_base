@@ -18,11 +18,12 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.EmptyCoroutineContext;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.MutableStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardQuickAffordanceViewBinder {
     public final FalsingManager falsingManager;
@@ -30,7 +31,6 @@ public final class KeyguardQuickAffordanceViewBinder {
     public final MSDLPlayer msdlPlayer;
     public final VibratorHelper vibratorHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConfigurationBasedDimensions {
         public final Size buttonSizePx;
 
@@ -54,7 +54,6 @@ public final class KeyguardQuickAffordanceViewBinder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnClickListener implements View.OnClickListener {
         public final FalsingManager falsingManager;
         public final KeyguardQuickAffordanceViewModel viewModel;
@@ -73,11 +72,10 @@ public final class KeyguardQuickAffordanceViewBinder {
             }
             Function1 function1 = keyguardQuickAffordanceViewModel.onClicked;
             Expandable.Companion.getClass();
-            function1.mo779invoke(new KeyguardQuickAffordanceViewModel.OnClickedParameters(str, new Expandable$Companion$fromView$1(view), this.viewModel.slotId));
+            function1.mo781invoke(new KeyguardQuickAffordanceViewModel.OnClickedParameters(str, new Expandable$Companion$fromView$1(view), this.viewModel.slotId));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnLongClickListener implements View.OnLongClickListener {
         public final FalsingManager falsingManager;
         public final KeyguardQuickAffordanceOnTouchListener onTouchListener;
@@ -103,7 +101,7 @@ public final class KeyguardQuickAffordanceViewBinder {
             if (str != null) {
                 Function1 function1 = keyguardQuickAffordanceViewModel.onClicked;
                 Expandable.Companion.getClass();
-                function1.mo779invoke(new KeyguardQuickAffordanceViewModel.OnClickedParameters(str, new Expandable$Companion$fromView$1(view), this.viewModel.slotId));
+                function1.mo781invoke(new KeyguardQuickAffordanceViewModel.OnClickedParameters(str, new Expandable$Companion$fromView$1(view), this.viewModel.slotId));
                 VibratorHelper vibratorHelper = this.vibratorHelper;
                 if (vibratorHelper != null) {
                     if (this.viewModel.isActivated) {
@@ -126,6 +124,22 @@ public final class KeyguardQuickAffordanceViewBinder {
         }
     }
 
+    /* renamed from: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$bind$1, reason: invalid class name */
+    public final class AnonymousClass1 {
+        public final /* synthetic */ DisposableHandle $disposableHandle;
+        public final /* synthetic */ LaunchableImageView $view;
+
+        public AnonymousClass1(MutableStateFlow mutableStateFlow, KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder, LaunchableImageView launchableImageView, DisposableHandle disposableHandle) {
+            this.$view = launchableImageView;
+            this.$disposableHandle = disposableHandle;
+        }
+
+        public final void destroy() {
+            this.$view.setOnApplyWindowInsetsListener(null);
+            this.$disposableHandle.dispose();
+        }
+    }
+
     public KeyguardQuickAffordanceViewBinder(FalsingManager falsingManager, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, KeyguardQuickAffordancesLogger keyguardQuickAffordancesLogger, KeyguardQuickAffordanceHapticViewModel.Factory factory) {
         this.falsingManager = falsingManager;
         this.vibratorHelper = vibratorHelper;
@@ -133,10 +147,10 @@ public final class KeyguardQuickAffordanceViewBinder {
         this.logger = keyguardQuickAffordancesLogger;
     }
 
-    public final KeyguardQuickAffordanceViewBinder$bind$1 bind(LaunchableImageView launchableImageView, Flow flow, Flow flow2, Function1 function1) {
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new ConfigurationBasedDimensions(new Size(launchableImageView.getResources().getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_width), launchableImageView.getResources().getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_height))));
-        KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 keyguardQuickAffordanceViewBinder$bind$disposableHandle$1 = new KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1(flow, this, launchableImageView, function1, null, flow2, MutableStateFlow, null);
+    public final AnonymousClass1 bind(LaunchableImageView launchableImageView, Flow flow, Flow flow2, Function1 function1) {
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new ConfigurationBasedDimensions(new Size(launchableImageView.getResources().getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_width), launchableImageView.getResources().getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_height))));
+        KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 keyguardQuickAffordanceViewBinder$bind$disposableHandle$1 = new KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1(flow, this, launchableImageView, function1, null, flow2, stateFlowImplMutableStateFlow, null);
         CoroutineContext coroutineContext = RepeatWhenAttachedKt.MAIN_DISPATCHER_SINGLETON;
-        return new KeyguardQuickAffordanceViewBinder$bind$1(MutableStateFlow, this, launchableImageView, RepeatWhenAttachedKt.repeatWhenAttached(launchableImageView, EmptyCoroutineContext.INSTANCE, keyguardQuickAffordanceViewBinder$bind$disposableHandle$1));
+        return new AnonymousClass1(stateFlowImplMutableStateFlow, this, launchableImageView, RepeatWhenAttachedKt.repeatWhenAttached(launchableImageView, EmptyCoroutineContext.INSTANCE, keyguardQuickAffordanceViewBinder$bind$disposableHandle$1));
     }
 }

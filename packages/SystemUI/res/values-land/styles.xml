@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AuthNonBioCredentialHeaderStyle">
-        <item name="android:gravity">center|left|top</item>
+        <item name="android:gravity">left|top</item>
         <item name="android:paddingTop">48.0dip</item>
         <item name="android:paddingBottom">10.0dip</item>
         <item name="android:paddingStart">48.0dip</item>
@@ -21,34 +21,34 @@
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Description" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">6.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Subtitle" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">6.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Title" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">36.0dip</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:focusable">true</item>
         <item name="android:layout_marginTop">6.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="Widget.MaterialComponents.MaterialCalendar.HeaderSelection" parent="@style/Widget.AppCompat.TextView">
         <item name="android:textAppearance">?textAppearanceHeadline6</item>
         <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:layout_gravity">start|center|top</item>
+        <item name="android:layout_gravity">start|top</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">@integer/mtrl_calendar_selection_text_lines</item>
     </style>
     <style name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="@style/Base.Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
-        <item name="android:layout_gravity">start|bottom|center</item>
+        <item name="android:layout_gravity">start|bottom</item>
     </style>
     <style name="DockedDividerMinimizedShadow">
         <item name="android:layout_width">8.0dip</item>

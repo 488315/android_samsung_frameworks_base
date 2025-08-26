@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -37,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigChangedCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -54,12 +54,10 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
     public final List mOnCreateRunnables;
     public final SysUiState mSysUiState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Delegate extends DialogDelegate {
         SystemUIDialog createDialog();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DismissReceiver extends BroadcastReceiver {
         public final BroadcastDispatcher mBroadcastDispatcher;
         public final Dialog mDialog;
@@ -86,7 +84,6 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final BroadcastDispatcher mBroadcastDispatcher;
         public final Context mContext;
@@ -146,7 +143,7 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         return Math.round(TypedValue.applyDimension(1, i, dialog.getContext().getResources().getDisplayMetrics()) + getHorizontalInsets(dialog));
     }
 
-    public static int getDefaultDialogWidth(Dialog dialog) {
+    public static int getDefaultDialogWidth(Dialog dialog) throws Resources.NotFoundException {
         Context context = dialog.getContext();
         int i = SystemProperties.getInt("persist.systemui.flag_tablet_dialog_width", 0);
         if (i == -1) {
@@ -167,8 +164,8 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         if (decorView == null) {
             return 0;
         }
-        View findViewByPredicate = decorView.findViewByPredicate(new SystemUIDialog$$ExternalSyntheticLambda6());
-        Drawable background = findViewByPredicate != null ? findViewByPredicate.getBackground() : decorView.getBackground();
+        View viewFindViewByPredicate = decorView.findViewByPredicate(new SystemUIDialog$$ExternalSyntheticLambda6());
+        Drawable background = viewFindViewByPredicate != null ? viewFindViewByPredicate.getBackground() : decorView.getBackground();
         Insets opticalInsets = background != null ? background.getOpticalInsets() : Insets.NONE;
         return opticalInsets.left + opticalInsets.right;
     }
@@ -178,7 +175,7 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.statusbar.phone.SystemUIDialog$$ExternalSyntheticLambda5
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                SystemUIDialog.DismissReceiver dismissReceiver2 = SystemUIDialog.DismissReceiver.this;
+                SystemUIDialog.DismissReceiver dismissReceiver2 = dismissReceiver;
                 int i = SystemUIDialog.$r8$clinit;
                 if (dismissReceiver2.mRegistered) {
                     dismissReceiver2.mBroadcastDispatcher.unregisterReceiver(dismissReceiver2);
@@ -297,11 +294,11 @@ public class SystemUIDialog extends AlertDialog implements ViewRootImpl.ConfigCh
         if (accessibilityManager == null || !accessibilityManager.isEnabled()) {
             return;
         }
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
-        obtain.getText().clear();
-        obtain.getText().add(str);
-        obtain.setPackageName(this.mContext.getPackageName());
-        accessibilityManager.sendAccessibilityEvent(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
+        accessibilityEventObtain.getText().clear();
+        accessibilityEventObtain.getText().add(str);
+        accessibilityEventObtain.setPackageName(this.mContext.getPackageName());
+        accessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
     }
 
     public final void setButton(final int i, int i2, final DialogInterface.OnClickListener onClickListener, boolean z) {

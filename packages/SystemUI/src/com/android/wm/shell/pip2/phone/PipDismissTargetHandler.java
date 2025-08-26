@@ -23,7 +23,6 @@ import com.android.wm.shell.shared.bubbles.DismissView;
 import com.android.wm.shell.shared.magnetictarget.MagnetizedObject;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipDismissTargetHandler implements ViewTreeObserver.OnPreDrawListener {
     public final Context mContext;
@@ -44,7 +43,6 @@ public class PipDismissTargetHandler implements ViewTreeObserver.OnPreDrawListen
     public WindowManager mWindowManager;
     public int mWindowManagerDisplayId = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip2.phone.PipDismissTargetHandler$1, reason: invalid class name */
     public class AnonymousClass1 implements MagnetizedObject.MagnetListener {
         public AnonymousClass1() {
@@ -126,8 +124,8 @@ public class PipDismissTargetHandler implements ViewTreeObserver.OnPreDrawListen
     public final WindowManager.LayoutParams getDismissTargetLayoutParams() {
         Point point = new Point();
         this.mWindowManager.getDefaultDisplay().getRealSize(point);
-        int min = Math.min(point.y, this.mDismissAreaHeight);
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, min, 0, point.y - min, 2024, IKnoxCustomManager.Stub.TRANSACTION_getForceSingleView, -3);
+        int iMin = Math.min(point.y, this.mDismissAreaHeight);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, iMin, 0, point.y - iMin, 2024, IKnoxCustomManager.Stub.TRANSACTION_getForceSingleView, -3);
         layoutParams.setTitle("pip-dismiss-overlay");
         layoutParams.privateFlags |= 16;
         layoutParams.layoutInDisplayCutoutMode = 3;

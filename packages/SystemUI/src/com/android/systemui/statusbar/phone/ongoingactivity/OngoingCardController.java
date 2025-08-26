@@ -1,9 +1,11 @@
 package com.android.systemui.statusbar.phone.ongoingactivity;
 
+import android.animation.ValueAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Debug;
@@ -22,8 +24,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.window.OnBackInvokedCallback;
 import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
+import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.recyclerview.widget.RecyclerView;
-import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0;
@@ -32,7 +34,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.BroadcastDispatcher;
-import com.android.systemui.dextouchpad.util.Features;
 import com.android.systemui.facewidget.plugin.FaceWidgetNotificationControllerWrapper;
 import com.android.systemui.media.SecMediaHost;
 import com.android.systemui.media.controls.domain.pipeline.MediaDataManager;
@@ -47,10 +48,14 @@ import com.android.systemui.statusbar.phone.IndicatorGardenPresenter;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
+import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$$ExternalSyntheticLambda0;
+import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet;
+import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController;
+import com.android.systemui.statusbar.phone.ongoingactivity.animation.ViewPropertyCapture;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.window.StatusBarWindowStateController;
 import com.android.systemui.statusbar.window.StatusBarWindowStateListener;
-import com.android.systemui.util.DelayableMarqueeTextView;
+import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.NotificationSAUtil;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.view.SemWindowManager;
@@ -59,12 +64,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import kotlin.Pair;
+import kotlin.Unit;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingCardController implements View.OnTouchListener, IOngoingObserver, ConfigurationController.ConfigurationListener {
     public final ActivityStarter activityStarter;
@@ -102,7 +108,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     public final StatusBarWindowStateController statusBarWindowStateController;
     public final OngoingCardController$statusBarWindowStateListener$1 statusBarWindowStateListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$6, reason: invalid class name */
     public final class AnonymousClass6 {
         public AnonymousClass6() {
@@ -113,7 +118,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BackKeyConsumerViewGroup extends FrameLayout {
         public BackKeyConsumerViewGroup(Context context) {
             super(context);
@@ -142,7 +146,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OaCardState {
         public static final /* synthetic */ OaCardState[] $VALUES;
         public static final OaCardState COLLAPSE;
@@ -179,6 +182,12 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
     }
 
+    /* renamed from: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$collapseAnimation$2, reason: invalid class name */
+    public final class AnonymousClass2 implements ViewPropertyCapture.ViewPropertyObserver {
+        public AnonymousClass2() {
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$statusBarWindowStateListener$1, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r10v1, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$8] */
     /* JADX WARN: Type inference failed for: r1v26, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$7] */
@@ -198,16 +207,16 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         ?? r10 = new StatusBarWindowStateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$statusBarWindowStateListener$1
             @Override // com.android.systemui.statusbar.window.StatusBarWindowStateListener
             public final void onStatusBarWindowStateChanged(int i) {
-                OngoingCardController.this.statusBarVisibility = i;
+                this.this$0.statusBarVisibility = i;
             }
         };
         this.statusBarWindowStateListener = r10;
         this.onStateEventListeners = new ArrayList();
         this.oaCardState = OaCardState.INIT;
         this.isScreenTurnedOn = true;
-        Looper myLooper = Looper.myLooper();
-        myLooper.getClass();
-        this.selfValidationHandler = new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        looperMyLooper.getClass();
+        this.selfValidationHandler = new Handler(looperMyLooper);
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService("layout_inflater");
         WindowManager windowManager = (WindowManager) context.getSystemService("window");
         this.mWindowManager = windowManager;
@@ -227,9 +236,9 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         ViewGroup viewGroup = (ViewGroup) layoutInflater.inflate(R.layout.sec_ongoing_card_root_layout, backKeyConsumerViewGroup);
         this.mExpandedView = viewGroup;
         viewGroup.setOnTouchListener(this);
-        View findViewById = viewGroup.findViewById(R.id.card_stack_view);
-        findViewById.getClass();
-        CardStackView cardStackView = (CardStackView) findViewById;
+        View viewFindViewById = viewGroup.findViewById(R.id.card_stack_view);
+        viewFindViewById.getClass();
+        CardStackView cardStackView = (CardStackView) viewFindViewById;
         this.mCardStackView = cardStackView;
         OngoingCardAdapter ongoingCardAdapter = new OngoingCardAdapter(context, indicatorScaleGardener, notificationRemoteInputManager, secMediaHost, faceWidgetNotificationControllerWrapper);
         ongoingCardAdapter.getMediaCardView = new OngoingCardController$$ExternalSyntheticLambda0(this, 0);
@@ -269,18 +278,18 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
                     AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("BroadcastReceiver onReceive: discard by mProcDestroy:", "{OngoingExpandedPipController}", z);
                     return;
                 }
-                boolean equals = StringsKt__StringsJVMKt.equals(intent != null ? intent.getAction() : null, "com.android.systemui.edgelighting.start", false);
-                boolean equals2 = StringsKt__StringsJVMKt.equals(intent != null ? intent.getStringExtra("reason") : null, "homekey", false);
-                boolean isReadyCollapseAnimation = OngoingCardController.this.mCardStackView.isReadyCollapseAnimation();
+                boolean zEquals = StringsKt__StringsJVMKt.equals(intent != null ? intent.getAction() : null, "com.android.systemui.edgelighting.start", false);
+                boolean zEquals2 = StringsKt__StringsJVMKt.equals(intent != null ? intent.getStringExtra("reason") : null, "homekey", false);
+                boolean zIsReadyCollapseAnimation = OngoingCardController.this.mCardStackView.isReadyCollapseAnimation();
                 OngoingCardController ongoingCardController = OngoingCardController.this;
-                if ((equals2 | equals) && (isReadyCollapseAnimation & ongoingCardController.isScreenTurnedOn)) {
+                if ((zEquals2 | zEquals) && (zIsReadyCollapseAnimation & ongoingCardController.isScreenTurnedOn)) {
                     ongoingCardController.collapseAnimation();
                 }
             }
         };
         this.broadcastReceiver = r102;
         ?? r2 = new SemWindowManager.FoldStateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController.9
-            public final void onFoldStateChanged(boolean z) {
+            public final void onFoldStateChanged(boolean z) throws Exception {
                 Log.i("{OngoingExpandedPipController}", "onFoldStateChanged start foldState:" + OngoingCardController.this.foldState + ", p0:" + z);
                 Boolean bool = OngoingCardController.this.foldState;
                 if (bool == null || bool.equals(Boolean.valueOf(z))) {
@@ -303,15 +312,25 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         ((HashSet) statusBarWindowStateController.listeners).add(r10);
         this.selfDestroyRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$selfDestroyRunnable$1
             @Override // java.lang.Runnable
-            public final void run() {
-                OngoingCardController ongoingCardController = OngoingCardController.this;
+            public final void run() throws Exception {
+                OngoingCardController ongoingCardController = this.this$0;
                 if (!ongoingCardController.isWatchSelfValidationProc) {
                     Log.i("{OngoingExpandedPipController}", "selfDestroyRunnable: discard..");
                     return;
                 }
                 ongoingCardController.isWatchSelfValidationProc = false;
-                Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: remove window. mParentView.isAttachedToWindow:" + ongoingCardController.mParentView.isAttachedToWindow() + ", mParentView.parent != null:" + (OngoingCardController.this.mParentView.getParent() != null));
-                OngoingCardController ongoingCardController2 = OngoingCardController.this;
+                OngoingCardController.OaCardState oaCardState = ongoingCardController.oaCardState;
+                if (oaCardState == OngoingCardController.OaCardState.EXPAND) {
+                    Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: request fadeOut");
+                    this.this$0.fadeOutCard();
+                    return;
+                }
+                if (oaCardState != OngoingCardController.OaCardState.FADEOUT && oaCardState != OngoingCardController.OaCardState.COLLAPSE) {
+                    Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: discard.. oaCardState:" + oaCardState);
+                    return;
+                }
+                Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: remove window. mParentView.isAttachedToWindow:" + ongoingCardController.mParentView.isAttachedToWindow() + ", mParentView.parent != null:" + (this.this$0.mParentView.getParent() != null));
+                OngoingCardController ongoingCardController2 = this.this$0;
                 WindowManager windowManager2 = ongoingCardController2.mWindowManager;
                 if (windowManager2 != null) {
                     windowManager2.removeViewImmediate(ongoingCardController2.mParentView);
@@ -322,7 +341,7 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     }
 
     @Override // com.android.systemui.statusbar.phone.ongoingactivity.IOngoingObserver
-    public final void add$1() {
+    public final void add$1() throws Exception {
         View childAt;
         final CardStackView cardStackView = this.mCardStackView;
         cardStackView.getClass();
@@ -334,9 +353,9 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
             }
             OngoingCardAdapter ongoingCardAdapter2 = cardStackView.adapter;
             if (ongoingCardAdapter2 != null) {
-                int min = Math.min(ongoingCardAdapter2.getCount() - cardStackView.currentIndex, cardStackView.stackMaxSize);
+                int iMin = Math.min(ongoingCardAdapter2.getCount() - cardStackView.currentIndex, cardStackView.stackMaxSize);
                 cardStackView.getChildCount();
-                cardStackView.addItem(min - 1, cardStackView.getChildCount(), ongoingCardAdapter2.getView(0, null, cardStackView), true);
+                cardStackView.addItem(iMin - 1, cardStackView.getChildCount(), ongoingCardAdapter2.getView(0, null, cardStackView), true);
             }
             cardStackView.updateItem$1();
             cardStackView.requestLayout();
@@ -353,10 +372,13 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
         View childAt3 = cardStackView.getChildAt(cardStackView.getChildCount() - 1);
         if (childAt3 != null) {
-            childAt3.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$addItem$3
+            childAt3.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView.addItem.3
+                public AnonymousClass3() {
+                }
+
                 @Override // java.lang.Runnable
                 public final void run() {
-                    r0.showBottomCardShadowIfNeeded(CardStackView.this.getTopViewIndex());
+                    CardStackView.showBottomCardShadowIfNeeded$default(CardStackView.this);
                 }
             });
         }
@@ -375,20 +397,20 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         Log.d("{OngoingExpandedPipController}", "watchSelfValidation start");
         this.isWatchSelfValidationProc = true;
         this.selfValidationHandler.removeCallbacks(this.selfDestroyRunnable);
-        this.selfValidationHandler.postDelayed(this.selfDestroyRunnable, DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY);
+        this.selfValidationHandler.postDelayed(this.selfDestroyRunnable, 4000L);
         setCardState(oaCardState2);
         RecyclerView.Adapter adapter = ((RecyclerView) this.mCapsule).mAdapter;
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
-        onChangeCapsuleVisibility(4, new OngoingCardController$collapseAnimation$2(this));
+        onChangeCapsuleVisibility(4, new AnonymousClass2());
         OngoingActivityDataHelper.INSTANCE.getClass();
         if (OngoingActivityDataHelper.mOngoingActivityLists.size() != 0) {
             NotificationSAUtil.sendOALog(SystemUIAnalytics.OAID_ONGOING_CLOSD_EXPAND_VIEW, OngoingActivityDataHelper.getDataByIndex(0).mNotificationEntry);
         }
     }
 
-    public final void fadeOutCard() {
+    public final void fadeOutCard() throws Exception {
         OaCardState oaCardState;
         Log.i("{OngoingExpandedPipController}", "fadeOutCard - card state:" + this.oaCardState + ". " + Debug.getCallers(3));
         OaCardState oaCardState2 = this.oaCardState;
@@ -397,9 +419,9 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
         setCardState(oaCardState);
         if (this.mCardStackView.isReadyCollapseAnimation()) {
-            this.mCardStackView.animate().alpha(0.0f).setDuration(100L).withEndAction(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$fadeOutCard$1
+            this.mCardStackView.animate().alpha(0.0f).setDuration(100L).withEndAction(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController.fadeOutCard.1
                 @Override // java.lang.Runnable
-                public final void run() {
+                public final void run() throws Exception {
                     OngoingCardController.this.onDestroy(false);
                 }
             }).start();
@@ -408,21 +430,24 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
     }
 
-    public final PointF getCardStackLocationOnScreen() {
-        float width;
+    public final PointF getCardStackLocationOnScreen() throws Resources.NotFoundException {
+        float dimension;
         int marginStart;
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mCardStackView.getLayoutParams();
         if (this.mCardStackView.getChildCount() <= 0) {
             return new PointF(0.0f, 0.0f);
         }
-        if (Features.IS_SUPPORT_TABLET && this.mContext.getResources().getConfiguration().orientation == 2) {
-            width = this.mContext.getResources().getDimension(R.dimen.ongoing_activity_card_tablet_landscape_left_margin);
+        OngoingActivityLayoutUtil ongoingActivityLayoutUtil = OngoingActivityLayoutUtil.INSTANCE;
+        Context context = this.mContext;
+        ongoingActivityLayoutUtil.getClass();
+        if ((context.getResources().getConfiguration().smallestScreenWidthDp > 600 || DeviceState.isTablet()) && this.mContext.getResources().getConfiguration().orientation == 2) {
+            dimension = this.mContext.getResources().getDimension(R.dimen.ongoing_activity_card_tablet_landscape_left_margin);
             marginStart = marginLayoutParams.getMarginStart();
         } else {
-            width = (this.mExpandedView.getWidth() - this.mCardStackView.getWidth()) / 2.0f;
+            dimension = (this.mExpandedView.getWidth() - this.mCardStackView.getWidth()) / 2.0f;
             marginStart = marginLayoutParams.getMarginStart();
         }
-        return new PointF(width - marginStart, this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_top_margin));
+        return new PointF(dimension - marginStart, this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_view_top_margin));
     }
 
     public final void onAllowStateChanged(boolean z) {
@@ -467,9 +492,13 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
     }
 
-    public final void onChangeCapsuleVisibility(int i, OngoingCardController$collapseAnimation$2 ongoingCardController$collapseAnimation$2) {
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0051  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void onChangeCapsuleVisibility(int i, AnonymousClass2 anonymousClass2) {
         int i2;
-        OngoingCardController$collapseAnimation$2 ongoingCardController$collapseAnimation$22;
+        AnonymousClass2 anonymousClass22;
         CollapsedStatusBarFragment.OngoingActivityListenerImpl ongoingActivityListenerImpl;
         ArrayList arrayList = this.onStateEventListeners;
         int size = arrayList.size();
@@ -488,23 +517,22 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
                 ChipAnimationController chipAnimationController = CollapsedStatusBarFragment.this.mChipAnimationController;
                 chipAnimationController.getClass();
                 Log.d("{ChipAnimationController}", "animateNotificationIconArea visibility:" + i);
-                if (recyclerView.getVisibility() != i) {
-                    if (i == 0) {
-                        recyclerView.setVisibility(0);
-                    } else {
-                        boolean z = i != 8;
-                        i2 = i;
-                        ongoingCardController$collapseAnimation$22 = ongoingCardController$collapseAnimation$2;
-                        chipAnimationController.startChipTransitionAnimation(z, recyclerView, i2, z ? ChipAnimationController.CARD_TRANSITION_COLLAPSE_INTERPOLATOR : ChipAnimationController.CARD_TRANSITION_EXPAND_INTERPOLATOR, ongoingCardController$collapseAnimation$22);
-                        i = i2;
-                        ongoingCardController$collapseAnimation$2 = ongoingCardController$collapseAnimation$22;
-                    }
+                if (recyclerView.getVisibility() == i) {
+                    i2 = i;
+                    anonymousClass22 = anonymousClass2;
+                } else if (i == 0) {
+                    recyclerView.setVisibility(0);
+                    i2 = i;
+                    anonymousClass22 = anonymousClass2;
+                } else {
+                    boolean z = i != 8;
+                    i2 = i;
+                    anonymousClass22 = anonymousClass2;
+                    chipAnimationController.startChipTransitionAnimation(z, recyclerView, i2, z ? ChipAnimationController.CARD_TRANSITION_COLLAPSE_INTERPOLATOR : ChipAnimationController.CARD_TRANSITION_EXPAND_INTERPOLATOR, anonymousClass22);
                 }
             }
-            i2 = i;
-            ongoingCardController$collapseAnimation$22 = ongoingCardController$collapseAnimation$2;
             i = i2;
-            ongoingCardController$collapseAnimation$2 = ongoingCardController$collapseAnimation$22;
+            anonymousClass2 = anonymousClass22;
         }
     }
 
@@ -534,9 +562,9 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
             }
             this.mParentView.forceLayout();
         }
-        this.mExpandedView.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$onConfigChanged$1
+        this.mExpandedView.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController.onConfigChanged.1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 CardStackView cardStackView = OngoingCardController.this.mCardStackView;
                 cardStackView.getClass();
                 OngoingActivityDataHelper.INSTANCE.getClass();
@@ -559,20 +587,20 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
                 OngoingCardController.this.mCardStackView.updateBottomCardShadow();
                 OngoingCardController ongoingCardController = OngoingCardController.this;
                 PointF cardStackLocationOnScreen = ongoingCardController.getCardStackLocationOnScreen();
-                View findViewById = ongoingCardController.mExpandedView.findViewById(R.id.ongoing_card_background);
-                findViewById.getClass();
+                View viewFindViewById = ongoingCardController.mExpandedView.findViewById(R.id.ongoing_card_background);
+                viewFindViewById.getClass();
                 if (ongoingCardController.mCardStackView.getLayoutDirection() == 1) {
-                    findViewById.setX((ongoingCardController.mCapsule.getResources().getDisplayMetrics().widthPixels - ongoingCardController.mCardStackView.getWidth()) - cardStackLocationOnScreen.x);
+                    viewFindViewById.setX((ongoingCardController.mCapsule.getResources().getDisplayMetrics().widthPixels - ongoingCardController.mCardStackView.getWidth()) - cardStackLocationOnScreen.x);
                 } else {
-                    findViewById.setX(cardStackLocationOnScreen.x);
+                    viewFindViewById.setX(cardStackLocationOnScreen.x);
                 }
-                findViewById.setY(cardStackLocationOnScreen.y);
+                viewFindViewById.setY(cardStackLocationOnScreen.y);
                 ongoingCardController.mCardStackView.setVisibility(0);
             }
         }, 16L);
     }
 
-    public final void onDestroy(boolean z) {
+    public final void onDestroy(boolean z) throws Exception {
         RecyclerView.Adapter adapter;
         if (!z && (adapter = ((RecyclerView) this.mCapsule).mAdapter) != null) {
             adapter.notifyDataSetChanged();
@@ -716,46 +744,128 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     }
 
     @Override // com.android.systemui.statusbar.phone.ongoingactivity.IOngoingObserver
-    public final void remove(int i) {
+    public final void remove(int i) throws Exception {
         OngoingActivityDataHelper.INSTANCE.getClass();
         int size = OngoingActivityDataHelper.mOngoingActivityLists.size();
         SuggestionsAdapter$$ExternalSyntheticOutline0.m(size, i, "remove view datasize:", ", position:", "{OngoingExpandedPipController}");
         if (size == 0) {
             onDestroy(false);
-            return;
+        } else {
+            this.mCardStackView.removeItem(i);
         }
+    }
+
+    public final void runCardRemoveAnimation(Function0 function0) throws Exception {
+        View view;
+        onAllowStateChanged(true);
         final CardStackView cardStackView = this.mCardStackView;
-        int min = (Math.min(cardStackView.stackMaxSize, cardStackView.getChildCount()) - i) - 1;
-        if (min < 0 || min >= cardStackView.stackMaxSize) {
-            ClockEventController$$ExternalSyntheticOutline0.m(min, "removeItem() Invalid index:", "{OngoingActivityCardStackView}");
+        final OngoingCardController$$ExternalSyntheticLambda4 ongoingCardController$$ExternalSyntheticLambda4 = new OngoingCardController$$ExternalSyntheticLambda4(function0, this);
+        cardStackView.getClass();
+        Log.i("{OngoingActivityCardStackView}", "removeTopCardAnimation()");
+        OngoingActivityDataHelper.INSTANCE.getClass();
+        if (OngoingActivityDataHelper.mOngoingActivityLists.size() != 0) {
+            NotificationSAUtil.sendOALog(SystemUIAnalytics.OAID_ONGOING_SWIPE_TO_SEE_OTHER_ACTIVITY, OngoingActivityDataHelper.getDataByIndex(0).mNotificationEntry);
+        }
+        if (cardStackView.gutsDisplay) {
+            cardStackView.disableTopCardGuts(true);
+        }
+        cardStackView.isRunningRemoveTopCardAnimation = true;
+        cardStackView.isAnimating = true;
+        CustomAnimationSet customAnimationSet = new CustomAnimationSet(new CardStackView$$ExternalSyntheticLambda0(cardStackView, 3));
+        customAnimationSet.additionalEndListener = new Function0() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$$ExternalSyntheticLambda4
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                CardStackView.Companion companion = CardStackView.Companion;
+                ongoingCardController$$ExternalSyntheticLambda4.invoke();
+                CardStackView cardStackView2 = cardStackView;
+                int topViewIndex = cardStackView2.getTopViewIndex();
+                if (topViewIndex >= 0) {
+                    int i = 0;
+                    while (true) {
+                        CardStackView.ViewStatus viewStatus = (CardStackView.ViewStatus) cardStackView2.startViewStatusList.get(i);
+                        View childAt = cardStackView2.getChildAt(i);
+                        childAt.setScaleX(viewStatus.scaleX);
+                        childAt.setScaleY(viewStatus.scaleY);
+                        if (i == topViewIndex) {
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+        };
+        final View childAt = cardStackView.getChildAt(cardStackView.getTopViewIndex());
+        if (childAt == null) {
+            Log.e("{OngoingActivityCardStackView}", "removeAnimationSet get topView fail");
+            ongoingCardController$$ExternalSyntheticLambda4.invoke();
             return;
         }
+        Log.i("{OngoingActivityCardStackView}", "removeAnimationSet run()");
         OngoingCardAdapter ongoingCardAdapter = cardStackView.adapter;
-        if (ongoingCardAdapter != null) {
-            cardStackView.removeView(cardStackView.getChildAt(min));
-            cardStackView.connectCardItem();
-            cardStackView.updateItem$1();
-            cardStackView.requestLayout();
-            if (cardStackView.onChangeListener != null) {
-                AnonymousClass6.onChange(ongoingCardAdapter.getCount(), ongoingCardAdapter.getCount());
-            }
+        ongoingCardAdapter.getClass();
+        OngoingCardController$$ExternalSyntheticLambda0 ongoingCardController$$ExternalSyntheticLambda0 = ongoingCardAdapter.getMediaCardView;
+        if (ongoingCardController$$ExternalSyntheticLambda0 == null) {
+            Log.e("MediaOngoingActivity", "getMediaCard. lambda is not initialized");
+            view = null;
+        } else {
+            view = (View) ongoingCardController$$ExternalSyntheticLambda0.mo781invoke(Unit.INSTANCE);
         }
-        View childAt = cardStackView.getChildAt(cardStackView.getChildCount() - 1);
-        childAt.setScaleX(1.0f);
-        childAt.setScaleY(1.0f);
-        childAt.setX(0.0f);
-        childAt.setY(0.0f);
-        View childAt2 = cardStackView.getChildAt(cardStackView.getChildCount() - 1);
-        if (childAt2 != null) {
-            childAt2.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeItem$2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    r0.showBottomCardShadowIfNeeded(CardStackView.this.getTopViewIndex());
+        if (Intrinsics.areEqual(view, childAt)) {
+            CardStackView.getBaseColorView(childAt).setBackground(cardStackView.getContext().getResources().getDrawable(R.drawable.sec_ongoing_card_bg));
+        }
+        DynamicAnimation.AnonymousClass4 anonymousClass4 = DynamicAnimation.SCALE_X;
+        customAnimationSet.add(childAt, anonymousClass4, 0.7f, 0.875f, 400.0f, (96 & 32) != 0 ? 0L : 250L, null);
+        DynamicAnimation.AnonymousClass5 anonymousClass5 = DynamicAnimation.SCALE_Y;
+        customAnimationSet.add(childAt, anonymousClass5, 0.7f, 0.875f, 400.0f, (96 & 32) != 0 ? 0L : 250L, null);
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(250L);
+        PathInterpolator pathInterpolator = CardStackView.cardRemoveAlphaInterpolator;
+        valueAnimatorOfFloat.setInterpolator(pathInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeTopCardAnimation$3$1$1
+            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float fFloatValue = ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue();
+                CardStackView cardStackView2 = cardStackView;
+                View view2 = childAt;
+                CardStackView.Companion companion = CardStackView.Companion;
+                cardStackView2.getClass();
+                CardStackView.getBaseColorView(view2).setAlpha(fFloatValue);
+            }
+        });
+        customAnimationSet.add(50L, valueAnimatorOfFloat);
+        View childAt2 = cardStackView.getChildAt(cardStackView.getTopViewIndex());
+        ViewGroup viewGroup = childAt2 != null ? (ViewGroup) childAt2.findViewWithTag("BottomCardShadowView") : null;
+        if (viewGroup != null) {
+            viewGroup.setVisibility(4);
+        }
+        if (cardStackView.getTopViewIndex() > 0) {
+            final View childAt3 = cardStackView.getChildAt(cardStackView.getTopViewIndex() - 1);
+            CardStackView.ViewStatus viewStatus = (CardStackView.ViewStatus) cardStackView.startViewStatusList.get(cardStackView.getTopViewIndex());
+            childAt3.setScaleX(0.92f);
+            childAt3.setScaleY(0.92f);
+            customAnimationSet.add(childAt3, DynamicAnimation.X, viewStatus.point.x, 0.8131728f, 200.0f, (96 & 32) != 0 ? 0L : 250L, null);
+            customAnimationSet.add(childAt3, DynamicAnimation.Y, viewStatus.point.y, 0.8131728f, 200.0f, (96 & 32) != 0 ? 0L : 250L, null);
+            customAnimationSet.add(childAt3, anonymousClass4, viewStatus.scaleX, 0.8131728f, 200.0f, (96 & 32) != 0 ? 0L : 250L, null);
+            customAnimationSet.add(childAt3, anonymousClass5, viewStatus.scaleY, 0.8131728f, 200.0f, (96 & 32) != 0 ? 0L : 250L, null);
+            final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat2.setDuration(300L);
+            valueAnimatorOfFloat2.setInterpolator(pathInterpolator);
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$removeTopCardAnimation$3$2$1
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float fFloatValue = ((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue();
+                    CardStackView cardStackView2 = cardStackView;
+                    View view2 = childAt3;
+                    view2.getClass();
+                    CardStackView.Companion companion = CardStackView.Companion;
+                    cardStackView2.getClass();
+                    CardStackView.getBaseColorView(view2).setAlpha(fFloatValue);
                 }
             });
+            customAnimationSet.add(0L, valueAnimatorOfFloat2);
         }
-        cardStackView.startViewStatusList = cardStackView.getStartViewStatusList();
-        cardStackView.endViewStatusList = cardStackView.getEndViewStatusList();
+        customAnimationSet.start();
     }
 
     public final void setCardState(OaCardState oaCardState) {
@@ -765,20 +875,20 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     }
 
     public final void startAnimation(View view, float f, float f2, float f3, float f4, PathInterpolator pathInterpolator, long j, final Function0 function0) {
-        Log.d("{OngoingExpandedPipController}", "startAnimation for card expand view translation");
+        Log.d("{OngoingExpandedPipController}", "startAnimation for card expand/collapse view translation");
         view.setTranslationX(f);
         view.setTranslationY(f2);
         view.animate().x(f3).y(f4).setInterpolator(pathInterpolator).setDuration(j).withEndAction(new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardControllerKt$sam$java_lang_Runnable$0
             @Override // java.lang.Runnable
             public final /* synthetic */ void run() {
-                Function0.this.invoke();
+                function0.invoke();
             }
         }).start();
         onAllowStateChanged(true);
     }
 
     @Override // com.android.systemui.statusbar.phone.ongoingactivity.IOngoingObserver
-    public final void update(String str) {
+    public final void update(String str) throws Exception {
         String str2;
         CardStackView cardStackView = this.mCardStackView;
         cardStackView.getClass();
@@ -786,14 +896,14 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         OngoingCardAdapter ongoingCardAdapter = cardStackView.adapter;
         if (ongoingCardAdapter != null) {
             OngoingActivityDataHelper.INSTANCE.getClass();
-            int min = Math.min(OngoingActivityDataHelper.mOngoingActivityLists.size(), cardStackView.stackMaxSize);
+            int iMin = Math.min(OngoingActivityDataHelper.mOngoingActivityLists.size(), cardStackView.stackMaxSize);
             int childCount = cardStackView.getChildCount();
             int i = 0;
             while (true) {
                 if (i >= childCount) {
                     break;
                 }
-                int i2 = (min - i) - 1;
+                int i2 = (iMin - i) - 1;
                 if (i2 < 0) {
                     break;
                 }
@@ -816,34 +926,36 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         }
         OngoingActivityDataHelper.INSTANCE.getClass();
         OngoingActivityDataHelper.updateTopIndex();
+        cardStackView.setCardClickable();
     }
 
     @Override // com.android.systemui.statusbar.phone.ongoingactivity.IOngoingObserver
-    public final void update$8() {
+    public final void update$1$1() throws Exception {
         this.mCardStackView.updateItem$1();
+        this.mCardStackView.requestLayout();
     }
 
     public final void updateCardViewLayout() {
-        View findViewById = this.mExpandedView.findViewById(R.id.ongoing_card_background);
-        ViewGroup.LayoutParams layoutParams = findViewById != null ? findViewById.getLayoutParams() : null;
+        View viewFindViewById = this.mExpandedView.findViewById(R.id.ongoing_card_background);
+        ViewGroup.LayoutParams layoutParams = viewFindViewById != null ? viewFindViewById.getLayoutParams() : null;
         if (layoutParams != null) {
             OngoingActivityLayoutUtil ongoingActivityLayoutUtil = OngoingActivityLayoutUtil.INSTANCE;
             Context context = this.mContext;
             ongoingActivityLayoutUtil.getClass();
             layoutParams.width = OngoingActivityLayoutUtil.getOngoingCardWidth(context);
         }
-        if (findViewById != null) {
-            findViewById.setLayoutParams(layoutParams);
+        if (viewFindViewById != null) {
+            viewFindViewById.setLayoutParams(layoutParams);
         }
         OngoingActivityDataHelper.INSTANCE.getClass();
         if (OngoingActivityDataHelper.mOngoingActivityLists.size() != 0) {
             OngoingActivityLayoutUtil ongoingActivityLayoutUtil2 = OngoingActivityLayoutUtil.INSTANCE;
             Context context2 = this.mContext;
-            findViewById.getClass();
+            viewFindViewById.getClass();
             OngoingActivityData dataByIndex = OngoingActivityDataHelper.getDataByIndex(0);
             OngoingType ongoingType = OngoingType.OA;
             ongoingActivityLayoutUtil2.getClass();
-            OngoingActivityLayoutUtil.updateNowbarSports(context2, findViewById, dataByIndex, ongoingType);
+            OngoingActivityLayoutUtil.updateNowbarSports(context2, viewFindViewById, dataByIndex, ongoingType);
         }
     }
 }

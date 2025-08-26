@@ -4,7 +4,6 @@ import androidx.compose.animation.core.AnimationVector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TargetBasedAnimation<T, V extends AnimationVector> implements Animation<T, V> {
     public long _durationNanos;
@@ -23,9 +22,9 @@ public final class TargetBasedAnimation<T, V extends AnimationVector> implements
         this.mutableTargetValue = t2;
         this.mutableInitialValue = t;
         TwoWayConverterImpl twoWayConverterImpl = (TwoWayConverterImpl) twoWayConverter;
-        this.initialValueVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo779invoke(t);
-        this.targetValueVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo779invoke(t2);
-        this.initialVelocityVector = v != null ? AnimationVectorsKt.copy(v) : ((AnimationVector) twoWayConverterImpl.convertToVector.mo779invoke(t)).newVector$animation_core();
+        this.initialValueVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo781invoke(t);
+        this.targetValueVector = (AnimationVector) twoWayConverterImpl.convertToVector.mo781invoke(t2);
+        this.initialVelocityVector = v != null ? AnimationVectorsKt.copy(v) : ((AnimationVector) twoWayConverterImpl.convertToVector.mo781invoke(t)).newVector$animation_core();
         this._durationNanos = -1L;
     }
 
@@ -59,7 +58,7 @@ public final class TargetBasedAnimation<T, V extends AnimationVector> implements
                 PreconditionsKt.throwIllegalStateException("AnimationVector cannot contain a NaN. " + valueFromNanos + ". Animation: " + this + ", playTimeNanos: " + j);
             }
         }
-        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo779invoke(valueFromNanos);
+        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo781invoke(valueFromNanos);
     }
 
     @Override // androidx.compose.animation.core.Animation
@@ -86,7 +85,7 @@ public final class TargetBasedAnimation<T, V extends AnimationVector> implements
             return;
         }
         this.mutableInitialValue = obj;
-        this.initialValueVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo779invoke(obj);
+        this.initialValueVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo781invoke(obj);
         this._endVelocity = null;
         this._durationNanos = -1L;
     }
@@ -96,7 +95,7 @@ public final class TargetBasedAnimation<T, V extends AnimationVector> implements
             return;
         }
         this.mutableTargetValue = obj;
-        this.targetValueVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo779invoke(obj);
+        this.targetValueVector = (AnimationVector) ((TwoWayConverterImpl) this.typeConverter).convertToVector.mo781invoke(obj);
         this._endVelocity = null;
         this._durationNanos = -1L;
     }

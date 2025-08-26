@@ -3,7 +3,6 @@ package kotlin;
 import java.io.Serializable;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Triple<A, B, C> implements Serializable {
     private final A first;
@@ -53,11 +52,11 @@ public final class Triple<A, B, C> implements Serializable {
 
     public final int hashCode() {
         A a = this.first;
-        int hashCode = (a == null ? 0 : a.hashCode()) * 31;
+        int iHashCode = (a == null ? 0 : a.hashCode()) * 31;
         B b = this.second;
-        int hashCode2 = (hashCode + (b == null ? 0 : b.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (b == null ? 0 : b.hashCode())) * 31;
         C c = this.third;
-        return hashCode2 + (c != null ? c.hashCode() : 0);
+        return iHashCode2 + (c != null ? c.hashCode() : 0);
     }
 
     public final String toString() {

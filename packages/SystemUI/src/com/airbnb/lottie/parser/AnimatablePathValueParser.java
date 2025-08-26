@@ -12,7 +12,6 @@ import com.airbnb.lottie.utils.Utils;
 import com.airbnb.lottie.value.Keyframe;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AnimatablePathValueParser {
     public static final JsonReader.Options NAMES = JsonReader.Options.of("k", "x", "y");
@@ -46,11 +45,11 @@ public class AnimatablePathValueParser {
         boolean z = false;
         AnimatableFloatValue animatableFloatValue2 = null;
         while (jsonUtf8Reader.peek() != JsonReader.Token.END_OBJECT) {
-            int selectName = jsonUtf8Reader.selectName(NAMES);
-            if (selectName == 0) {
+            int iSelectName = jsonUtf8Reader.selectName(NAMES);
+            if (iSelectName == 0) {
                 animatablePathValue = parse(jsonUtf8Reader, lottieComposition);
-            } else if (selectName != 1) {
-                if (selectName != 2) {
+            } else if (iSelectName != 1) {
+                if (iSelectName != 2) {
                     jsonUtf8Reader.skipName();
                     jsonUtf8Reader.skipValue();
                 } else if (jsonUtf8Reader.peek() == JsonReader.Token.STRING) {

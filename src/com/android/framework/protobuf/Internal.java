@@ -152,12 +152,12 @@ public final class Internal {
     }
 
     public static ByteBuffer copyByteBuffer(ByteBuffer byteBuffer) {
-        ByteBuffer duplicate = byteBuffer.duplicate();
-        duplicate.clear();
-        ByteBuffer allocate = ByteBuffer.allocate(duplicate.capacity());
-        allocate.put(duplicate);
-        allocate.clear();
-        return allocate;
+        ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+        byteBufferDuplicate.clear();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(byteBufferDuplicate.capacity());
+        byteBufferAllocate.put(byteBufferDuplicate);
+        byteBufferAllocate.clear();
+        return byteBufferAllocate;
     }
 
     public static boolean isValidUtf8(ByteString byteString) {
@@ -182,11 +182,11 @@ public final class Internal {
 
     public static int hashEnumList(List<? extends EnumLite> list) {
         Iterator<? extends EnumLite> it = list.iterator();
-        int i = 1;
+        int iHashEnum = 1;
         while (it.hasNext()) {
-            i = (i * 31) + hashEnum(it.next());
+            iHashEnum = (iHashEnum * 31) + hashEnum(it.next());
         }
-        return i;
+        return iHashEnum;
     }
 
     public static boolean equals(List<byte[]> list, List<byte[]> list2) {
@@ -203,11 +203,11 @@ public final class Internal {
 
     public static int hashCode(List<byte[]> list) {
         Iterator<byte[]> it = list.iterator();
-        int i = 1;
+        int iHashCode = 1;
         while (it.hasNext()) {
-            i = (i * 31) + hashCode(it.next());
+            iHashCode = (iHashCode * 31) + hashCode(it.next());
         }
-        return i;
+        return iHashCode;
     }
 
     public static int hashCode(byte[] bArr) {
@@ -215,11 +215,11 @@ public final class Internal {
     }
 
     static int hashCode(byte[] bArr, int i, int i2) {
-        int partialHash = partialHash(i2, bArr, i, i2);
-        if (partialHash == 0) {
+        int iPartialHash = partialHash(i2, bArr, i, i2);
+        if (iPartialHash == 0) {
             return 1;
         }
-        return partialHash;
+        return iPartialHash;
     }
 
     static int partialHash(int i, byte[] bArr, int i2, int i3) {
@@ -250,38 +250,38 @@ public final class Internal {
 
     public static int hashCodeByteBuffer(List<ByteBuffer> list) {
         Iterator<ByteBuffer> it = list.iterator();
-        int i = 1;
+        int iHashCodeByteBuffer = 1;
         while (it.hasNext()) {
-            i = (i * 31) + hashCodeByteBuffer(it.next());
+            iHashCodeByteBuffer = (iHashCodeByteBuffer * 31) + hashCodeByteBuffer(it.next());
         }
-        return i;
+        return iHashCodeByteBuffer;
     }
 
     public static int hashCodeByteBuffer(ByteBuffer byteBuffer) {
         if (byteBuffer.hasArray()) {
-            int partialHash = partialHash(byteBuffer.capacity(), byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
-            if (partialHash == 0) {
+            int iPartialHash = partialHash(byteBuffer.capacity(), byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
+            if (iPartialHash == 0) {
                 return 1;
             }
-            return partialHash;
+            return iPartialHash;
         }
-        int capacity = byteBuffer.capacity() <= 4096 ? byteBuffer.capacity() : 4096;
-        byte[] bArr = new byte[capacity];
-        ByteBuffer duplicate = byteBuffer.duplicate();
-        duplicate.clear();
-        int capacity2 = byteBuffer.capacity();
-        while (duplicate.remaining() > 0) {
-            int remaining = duplicate.remaining() <= capacity ? duplicate.remaining() : capacity;
-            duplicate.get(bArr, 0, remaining);
-            capacity2 = partialHash(capacity2, bArr, 0, remaining);
+        int iCapacity = byteBuffer.capacity() <= 4096 ? byteBuffer.capacity() : 4096;
+        byte[] bArr = new byte[iCapacity];
+        ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+        byteBufferDuplicate.clear();
+        int iCapacity2 = byteBuffer.capacity();
+        while (byteBufferDuplicate.remaining() > 0) {
+            int iRemaining = byteBufferDuplicate.remaining() <= iCapacity ? byteBufferDuplicate.remaining() : iCapacity;
+            byteBufferDuplicate.get(bArr, 0, iRemaining);
+            iCapacity2 = partialHash(iCapacity2, bArr, 0, iRemaining);
         }
-        if (capacity2 == 0) {
+        if (iCapacity2 == 0) {
             return 1;
         }
-        return capacity2;
+        return iCapacity2;
     }
 
-    public static <T extends MessageLite> T getDefaultInstance(Class<T> cls) {
+    public static <T extends MessageLite> T getDefaultInstance(Class<T> cls) throws NoSuchMethodException, SecurityException {
         try {
             Class[] clsArr = new Class[0];
             Method method = cls.getMethod("getDefaultInstance", null);
@@ -334,8 +334,8 @@ public final class Internal {
                 /* JADX WARN: Incorrect return type in method signature: (Ljava/lang/Integer;)TT; */
                 @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
                 public EnumLite doForward(Integer num) {
-                    EnumLite findValueByNumber = EnumLiteMap.this.findValueByNumber(num.intValue());
-                    return findValueByNumber == null ? t : findValueByNumber;
+                    EnumLite enumLiteFindValueByNumber = enumLiteMap.findValueByNumber(num.intValue());
+                    return enumLiteFindValueByNumber == null ? t : enumLiteFindValueByNumber;
                 }
 
                 /* JADX WARN: Incorrect types in method signature: (TT;)Ljava/lang/Integer; */
@@ -362,11 +362,11 @@ public final class Internal {
 
         @Override // java.util.AbstractMap, java.util.Map
         public V put(K k, V v) {
-            Object put = this.realMap.put(k, this.valueConverter.doBackward(v));
-            if (put == null) {
+            Object objPut = this.realMap.put(k, this.valueConverter.doBackward(v));
+            if (objPut == null) {
                 return null;
             }
-            return (V) this.valueConverter.doForward(put);
+            return (V) this.valueConverter.doForward(objPut);
         }
 
         @Override // java.util.AbstractMap, java.util.Map

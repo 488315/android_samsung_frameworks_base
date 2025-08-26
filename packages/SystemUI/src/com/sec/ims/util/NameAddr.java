@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NameAddr implements Parcelable {
     public static final Parcelable.Creator<NameAddr> CREATOR = new Parcelable.Creator<NameAddr>() { // from class: com.sec.ims.util.NameAddr.1
@@ -62,9 +61,9 @@ public class NameAddr implements Parcelable {
 
     public int hashCode() {
         String str = this.mDisplayName;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         ImsUri imsUri = this.mUri;
-        return hashCode + (imsUri != null ? imsUri.hashCode() : 0);
+        return iHashCode + (imsUri != null ? imsUri.hashCode() : 0);
     }
 
     public void setDisplayName(String str) {

@@ -17,12 +17,12 @@ public final class BatchUpdates implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public BatchUpdates createFromParcel(Parcel parcel) {
             Builder builder = new Builder();
-            int[] createIntArray = parcel.createIntArray();
-            if (createIntArray != null) {
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            if (iArrCreateIntArray != null) {
                 InternalTransformation[] internalTransformationArr = (InternalTransformation[]) parcel.readParcelableArray(null, InternalTransformation.class);
-                int length = createIntArray.length;
+                int length = iArrCreateIntArray.length;
                 for (int i = 0; i < length; i++) {
-                    builder.transformChild(createIntArray[i], internalTransformationArr[i]);
+                    builder.transformChild(iArrCreateIntArray[i], internalTransformationArr[i]);
                 }
             }
             RemoteViews remoteViews = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);

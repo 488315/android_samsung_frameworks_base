@@ -5,7 +5,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DiffableKt$$ExternalSyntheticLambda5 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -26,9 +25,9 @@ public final /* synthetic */ class DiffableKt$$ExternalSyntheticLambda5 implemen
     public final Object invoke(Object obj, Object obj2) {
         switch (this.$r8$classId) {
             case 0:
-                boolean booleanValue = ((Boolean) obj2).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                 Ref$BooleanRef ref$BooleanRef = this.f$3;
-                this.f$0.logChange(this.f$1, this.f$2, booleanValue, ref$BooleanRef.element);
+                this.f$0.logChange(this.f$1, this.f$2, zBooleanValue, ref$BooleanRef.element);
                 ref$BooleanRef.element = false;
                 break;
             case 1:
@@ -38,9 +37,9 @@ public final /* synthetic */ class DiffableKt$$ExternalSyntheticLambda5 implemen
                 ref$BooleanRef2.element = false;
                 break;
             default:
-                String obj3 = ((List) obj2).toString();
+                String string = ((List) obj2).toString();
                 Ref$BooleanRef ref$BooleanRef3 = this.f$3;
-                this.f$0.logChange(this.f$1, this.f$2, obj3, ref$BooleanRef3.element);
+                this.f$0.logChange(this.f$1, this.f$2, string, ref$BooleanRef3.element);
                 ref$BooleanRef3.element = false;
                 break;
         }

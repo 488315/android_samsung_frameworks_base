@@ -71,27 +71,27 @@ public abstract class RemoteService extends ServiceStub implements ServiceContro
 
     @Override // com.samsung.android.sume.core.service.ServiceStub, com.samsung.android.sume.core.service.ServiceController
     public ResponseHolder request(int i, Request request) {
-        ResponseHolder request2 = super.request(i, request);
-        if (!request2.contains()) {
+        ResponseHolder responseHolderRequest = super.request(i, request);
+        if (!responseHolderRequest.contains()) {
             int code = request.getCode();
             if (code == 905) {
-                int createMediaFilterController = createMediaFilterController();
-                this.replyListeners.put(Integer.valueOf(createMediaFilterController), request.getResponseReceiver());
-                Response of = Response.of(request);
-                of.put("id", Integer.valueOf(createMediaFilterController));
-                request2.put(of);
+                int iCreateMediaFilterController = createMediaFilterController();
+                this.replyListeners.put(Integer.valueOf(iCreateMediaFilterController), request.getResponseReceiver());
+                Response responseOf = Response.of(request);
+                responseOf.put("id", Integer.valueOf(iCreateMediaFilterController));
+                responseHolderRequest.put(responseOf);
             } else if (code == 906) {
                 releaseMediaFilterController(i);
-                Response of2 = Response.of(request);
-                Messenger remove = this.replyListeners.remove(Integer.valueOf(i));
-                if (remove != null) {
-                    of2.setResponseReceiver(remove);
+                Response responseOf2 = Response.of(request);
+                Messenger messengerRemove = this.replyListeners.remove(Integer.valueOf(i));
+                if (messengerRemove != null) {
+                    responseOf2.setResponseReceiver(messengerRemove);
                 }
-                request2.put(of2);
-                return request2;
+                responseHolderRequest.put(responseOf2);
+                return responseHolderRequest;
             }
         }
-        return request2;
+        return responseHolderRequest;
     }
 
     private static class IncommingHandler extends Handler {
@@ -107,10 +107,10 @@ public abstract class RemoteService extends ServiceStub implements ServiceContro
             super.handleMessage(message);
             Log.d(RemoteService.TAG, "handleMessage: msg=" + message + " on " + Thread.currentThread().getId());
             message.getData().setClassLoader(MFDescriptorGraph.class.getClassLoader());
-            Request of = Request.of(message);
-            int intValue = ((Integer) of.get("id", 0)).intValue();
+            Request requestOf = Request.of(message);
+            int iIntValue = ((Integer) requestOf.get("id", 0)).intValue();
             if (this.weakRefService.get() != null) {
-                this.weakRefService.get().request(intValue, of);
+                this.weakRefService.get().request(iIntValue, requestOf);
             }
         }
     }

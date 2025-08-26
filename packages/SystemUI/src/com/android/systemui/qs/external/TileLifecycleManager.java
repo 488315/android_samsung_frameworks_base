@@ -36,7 +36,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileLifecycleManager extends BroadcastReceiver implements IQSTileService, ServiceConnection, IBinder.DeathRecipient {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -71,7 +70,6 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
     public final UserHandle mUser;
     public final AtomicBoolean mUserReceiverRegistered;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         TileLifecycleManager create(Intent intent, UserHandle userHandle);
     }
@@ -106,7 +104,7 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
         this.mDeviceIdleController = iDeviceIdleController;
         this.mDeviceConfigChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.qs.external.TileLifecycleManager$$ExternalSyntheticLambda8
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                TileLifecycleManager tileLifecycleManager = TileLifecycleManager.this;
+                TileLifecycleManager tileLifecycleManager = this.f$0;
                 int i = TileLifecycleManager.$r8$clinit;
                 tileLifecycleManager.getClass();
                 if ("systemui".equals(properties.getNamespace())) {
@@ -163,7 +161,7 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
                 this.mOptionalWrapper.ifPresent(new Consumer() { // from class: com.android.systemui.qs.external.TileLifecycleManager$$ExternalSyntheticLambda13
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        TileLifecycleManager tileLifecycleManager = TileLifecycleManager.this;
+                        TileLifecycleManager tileLifecycleManager = this.f$0;
                         int i = TileLifecycleManager.$r8$clinit;
                         tileLifecycleManager.getClass();
                         ((QSTileServiceWrapper) obj).mService.asBinder().unlinkToDeath(tileLifecycleManager, 0);
@@ -183,11 +181,11 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
     }
 
     public final boolean hasPendingClick() {
-        boolean contains;
+        boolean zContains;
         synchronized (this.mQueuedMessages) {
-            contains = ((ArraySet) this.mQueuedMessages).contains(2);
+            zContains = ((ArraySet) this.mQueuedMessages).contains(2);
         }
-        return contains;
+        return zContains;
     }
 
     public final boolean isActiveTile() {
@@ -219,7 +217,7 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
         if (isNullOrFailedAction(this.mOptionalWrapper, new Predicate() { // from class: com.android.systemui.qs.external.TileLifecycleManager$$ExternalSyntheticLambda14
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                TileLifecycleManager tileLifecycleManager = TileLifecycleManager.this;
+                TileLifecycleManager tileLifecycleManager = this.f$0;
                 IBinder iBinder2 = iBinder;
                 QSTileServiceWrapper qSTileServiceWrapper = (QSTileServiceWrapper) obj;
                 try {
@@ -273,7 +271,7 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
     }
 
     @Override // android.content.ServiceConnection
-    public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+    public final void onServiceConnected(ComponentName componentName, IBinder iBinder) throws RemoteException {
         ArraySet arraySet;
         Log.d("TileLifecycleManager", "onServiceConnected " + componentName);
         stopPackageListening();
@@ -564,32 +562,29 @@ public class TileLifecycleManager extends BroadcastReceiver implements IQSTileSe
         try {
             this.mPackageReceiverRegistered.set(true);
             tileLifecycleManager = this;
-        } catch (Exception e) {
-            e = e;
-            tileLifecycleManager = this;
-        }
-        try {
             try {
                 this.mContext.registerReceiverAsUser(tileLifecycleManager, this.mUser, intentFilter, null, this.mHandler, 2);
-            } catch (Exception e2) {
-                e = e2;
+            } catch (Exception e) {
+                e = e;
                 Exception exc = e;
                 tileLifecycleManager.mPackageReceiverRegistered.set(false);
                 Log.e("TileLifecycleManager", "Could not register package receiver " + tileLifecycleManager.mIntent.getComponent(), exc);
                 IntentFilter intentFilter2 = new IntentFilter("android.intent.action.USER_UNLOCKED");
                 tileLifecycleManager.mUserReceiverRegistered.set(true);
                 tileLifecycleManager.mBroadcastDispatcher.registerReceiverWithHandler(tileLifecycleManager, intentFilter2, tileLifecycleManager.mHandler, tileLifecycleManager.mUser);
-                return;
             }
+        } catch (Exception e2) {
+            e = e2;
+            tileLifecycleManager = this;
+        }
+        IntentFilter intentFilter22 = new IntentFilter("android.intent.action.USER_UNLOCKED");
+        try {
             tileLifecycleManager.mUserReceiverRegistered.set(true);
-            tileLifecycleManager.mBroadcastDispatcher.registerReceiverWithHandler(tileLifecycleManager, intentFilter2, tileLifecycleManager.mHandler, tileLifecycleManager.mUser);
-            return;
+            tileLifecycleManager.mBroadcastDispatcher.registerReceiverWithHandler(tileLifecycleManager, intentFilter22, tileLifecycleManager.mHandler, tileLifecycleManager.mUser);
         } catch (Exception e3) {
             tileLifecycleManager.mUserReceiverRegistered.set(false);
             Log.e("TileLifecycleManager", "Could not register unlock receiver " + tileLifecycleManager.mIntent.getComponent(), e3);
-            return;
         }
-        IntentFilter intentFilter22 = new IntentFilter("android.intent.action.USER_UNLOCKED");
     }
 
     public final void stopPackageListening() {

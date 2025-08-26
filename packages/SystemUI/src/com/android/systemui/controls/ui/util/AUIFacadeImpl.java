@@ -17,7 +17,6 @@ import kotlin.Unit;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AUIFacadeImpl implements AUIFacade {
     public final AudioManager audioManager;
@@ -26,7 +25,6 @@ public final class AUIFacadeImpl implements AUIFacade {
     public final List soundResources = Arrays.asList(new Pair(SoundId.GeneralOff, Integer.valueOf(R.raw.general_off)), new Pair(SoundId.GeneralOn, Integer.valueOf(R.raw.general_on)), new Pair(SoundId.LightOff, Integer.valueOf(R.raw.light_off)), new Pair(SoundId.LightOn, Integer.valueOf(R.raw.light_on)), new Pair(SoundId.AutomationError, Integer.valueOf(R.raw.automation_error)), new Pair(SoundId.AutomationSuccess, Integer.valueOf(R.raw.automation_success)), new Pair(SoundId.MediaPause, Integer.valueOf(R.raw.media_pause)), new Pair(SoundId.MediaPlayResume, Integer.valueOf(R.raw.media_play_resume)));
     public final Map soundIdMap = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,7 +36,6 @@ public final class AUIFacadeImpl implements AUIFacade {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SoundId {
         public static final /* synthetic */ SoundId[] $VALUES;
         public static final SoundId AutomationError;
@@ -103,7 +100,7 @@ public final class AUIFacadeImpl implements AUIFacade {
         this.soundPool = null;
     }
 
-    public final void initialize() {
+    public final void initialize() throws IllegalArgumentException {
         if (this.soundPool == null) {
             SoundPool.Builder builder = new SoundPool.Builder();
             builder.setMaxStreams(SoundId.values().length);
@@ -112,14 +109,14 @@ public final class AUIFacadeImpl implements AUIFacade {
             builder2.setUsage(13);
             builder2.setContentType(4);
             builder.setAudioAttributes(builder2.build());
-            SoundPool build = builder.build();
+            SoundPool soundPoolBuild = builder.build();
             for (Pair pair : this.soundResources) {
-                this.soundIdMap.put(pair.getFirst(), Integer.valueOf(build.load(this.context, ((Number) pair.getSecond()).intValue(), 1)));
+                this.soundIdMap.put(pair.getFirst(), Integer.valueOf(soundPoolBuild.load(this.context, ((Number) pair.getSecond()).intValue(), 1)));
             }
-            build.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() { // from class: com.android.systemui.controls.ui.util.AUIFacadeImpl$initialize$1$1
+            soundPoolBuild.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() { // from class: com.android.systemui.controls.ui.util.AUIFacadeImpl$initialize$1$1
                 @Override // android.media.SoundPool.OnLoadCompleteListener
                 public final void onLoadComplete(SoundPool soundPool, int i, int i2) {
-                    AUIFacadeImpl.this.soundPool = soundPool;
+                    this.$tmp0.soundPool = soundPool;
                 }
             });
         }
@@ -129,34 +126,34 @@ public final class AUIFacadeImpl implements AUIFacade {
         Integer num;
         SoundPool soundPool = this.soundPool;
         if (soundPool != null) {
-            Integer num2 = null;
+            Integer numValueOf = null;
             if (i != 0) {
                 if (i == 1) {
-                    num2 = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.AutomationError);
+                    numValueOf = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.AutomationError);
                 } else if (i == 2) {
-                    num2 = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.AutomationSuccess);
+                    numValueOf = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.AutomationSuccess);
                 } else if (i == 3) {
-                    num2 = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.MediaPause);
+                    numValueOf = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.MediaPause);
                 } else if (i == 4) {
-                    num2 = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.MediaPlayResume);
+                    numValueOf = (Integer) ((LinkedHashMap) this.soundIdMap).get(SoundId.MediaPlayResume);
                 }
-                if (num2 == null) {
-                    num2 = Integer.valueOf(Log.w("AUIFacadeImpl", "getSoundId(): can't find customSound:" + i));
+                if (numValueOf == null) {
+                    numValueOf = Integer.valueOf(Log.w("AUIFacadeImpl", "getSoundId(): can't find customSound:" + i));
                 }
             }
-            if (num2 == null) {
+            if (numValueOf == null) {
                 if (i2 == 13) {
                     num = (Integer) ((LinkedHashMap) this.soundIdMap).get(z ? SoundId.LightOn : SoundId.LightOff);
                 } else {
                     num = (Integer) ((LinkedHashMap) this.soundIdMap).get(z ? SoundId.GeneralOn : SoundId.GeneralOff);
                 }
-                num2 = num;
+                numValueOf = num;
                 Unit unit = Unit.INSTANCE;
             }
-            if (num2 != null) {
-                int intValue = num2.intValue();
-                float semGetSituationVolume = this.audioManager.semGetSituationVolume(1, 0);
-                soundPool.play(intValue, semGetSituationVolume, semGetSituationVolume, 0, 0, 1.0f);
+            if (numValueOf != null) {
+                int iIntValue = numValueOf.intValue();
+                float fSemGetSituationVolume = this.audioManager.semGetSituationVolume(1, 0);
+                soundPool.play(iIntValue, fSemGetSituationVolume, fSemGetSituationVolume, 0, 0, 1.0f);
             }
         }
         view.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));

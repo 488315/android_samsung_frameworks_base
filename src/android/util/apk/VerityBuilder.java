@@ -35,16 +35,16 @@ public abstract class VerityBuilder {
         }
     }
 
-    public static VerityResult generateApkVerityTree(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, ByteBufferFactory byteBufferFactory) throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
+    public static VerityResult generateApkVerityTree(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, ByteBufferFactory byteBufferFactory) throws NoSuchAlgorithmException, DigestException, IOException, SecurityException {
         return generateVerityTreeInternal(randomAccessFile, byteBufferFactory, signatureInfo);
     }
 
-    private static VerityResult generateVerityTreeInternal(RandomAccessFile randomAccessFile, ByteBufferFactory byteBufferFactory, SignatureInfo signatureInfo) throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
-        int[] calculateVerityLevelOffset = calculateVerityLevelOffset(randomAccessFile.getChannel().size() - (signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset));
-        int i = calculateVerityLevelOffset[calculateVerityLevelOffset.length - 1];
-        ByteBuffer create = byteBufferFactory.create(i + 4096);
-        create.order(ByteOrder.LITTLE_ENDIAN);
-        return new VerityResult(create, i, generateVerityTreeInternal(randomAccessFile, signatureInfo, DEFAULT_SALT, calculateVerityLevelOffset, slice(create, 0, i)));
+    private static VerityResult generateVerityTreeInternal(RandomAccessFile randomAccessFile, ByteBufferFactory byteBufferFactory, SignatureInfo signatureInfo) throws NoSuchAlgorithmException, DigestException, IOException, SecurityException {
+        int[] iArrCalculateVerityLevelOffset = calculateVerityLevelOffset(randomAccessFile.getChannel().size() - (signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset));
+        int i = iArrCalculateVerityLevelOffset[iArrCalculateVerityLevelOffset.length - 1];
+        ByteBuffer byteBufferCreate = byteBufferFactory.create(i + 4096);
+        byteBufferCreate.order(ByteOrder.LITTLE_ENDIAN);
+        return new VerityResult(byteBufferCreate, i, generateVerityTreeInternal(randomAccessFile, signatureInfo, DEFAULT_SALT, iArrCalculateVerityLevelOffset, slice(byteBufferCreate, 0, i)));
     }
 
     static void generateApkVerityFooter(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, ByteBuffer byteBuffer) throws IOException {
@@ -53,16 +53,16 @@ public abstract class VerityBuilder {
         generateApkVerityExtensions(byteBuffer, signatureInfo.apkSigningBlockOffset, signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset, signatureInfo.eocdOffset);
     }
 
-    public static byte[] generateFsVerityRootHash(String str, byte[] bArr, ByteBufferFactory byteBufferFactory) throws IOException, NoSuchAlgorithmException, DigestException {
+    public static byte[] generateFsVerityRootHash(String str, byte[] bArr, ByteBufferFactory byteBufferFactory) throws NoSuchAlgorithmException, DigestException, IOException {
         RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
         try {
-            int[] calculateVerityLevelOffset = calculateVerityLevelOffset(randomAccessFile.length());
-            int i = calculateVerityLevelOffset[calculateVerityLevelOffset.length - 1];
-            ByteBuffer create = byteBufferFactory.create(i + 4096);
-            create.order(ByteOrder.LITTLE_ENDIAN);
-            byte[] generateFsVerityTreeInternal = generateFsVerityTreeInternal(randomAccessFile, bArr, calculateVerityLevelOffset, slice(create, 0, i));
+            int[] iArrCalculateVerityLevelOffset = calculateVerityLevelOffset(randomAccessFile.length());
+            int i = iArrCalculateVerityLevelOffset[iArrCalculateVerityLevelOffset.length - 1];
+            ByteBuffer byteBufferCreate = byteBufferFactory.create(i + 4096);
+            byteBufferCreate.order(ByteOrder.LITTLE_ENDIAN);
+            byte[] bArrGenerateFsVerityTreeInternal = generateFsVerityTreeInternal(randomAccessFile, bArr, iArrCalculateVerityLevelOffset, slice(byteBufferCreate, 0, i));
             randomAccessFile.close();
-            return generateFsVerityTreeInternal;
+            return bArrGenerateFsVerityTreeInternal;
         } catch (Throwable th) {
             try {
                 randomAccessFile.close();
@@ -73,15 +73,15 @@ public abstract class VerityBuilder {
         }
     }
 
-    static byte[] generateApkVerity(String str, ByteBufferFactory byteBufferFactory, SignatureInfo signatureInfo) throws IOException, SignatureNotFoundException, SecurityException, DigestException, NoSuchAlgorithmException {
+    static byte[] generateApkVerity(String str, ByteBufferFactory byteBufferFactory, SignatureInfo signatureInfo) throws SignatureNotFoundException, NoSuchAlgorithmException, DigestException, IOException, SecurityException {
         RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
         try {
-            VerityResult generateVerityTreeInternal = generateVerityTreeInternal(randomAccessFile, byteBufferFactory, signatureInfo);
-            ByteBuffer slice = slice(generateVerityTreeInternal.verityData, generateVerityTreeInternal.merkleTreeSize, generateVerityTreeInternal.verityData.limit());
-            generateApkVerityFooter(randomAccessFile, signatureInfo, slice);
-            slice.putInt(slice.position() + 4);
-            generateVerityTreeInternal.verityData.limit(generateVerityTreeInternal.merkleTreeSize + slice.position());
-            byte[] bArr = generateVerityTreeInternal.rootHash;
+            VerityResult verityResultGenerateVerityTreeInternal = generateVerityTreeInternal(randomAccessFile, byteBufferFactory, signatureInfo);
+            ByteBuffer byteBufferSlice = slice(verityResultGenerateVerityTreeInternal.verityData, verityResultGenerateVerityTreeInternal.merkleTreeSize, verityResultGenerateVerityTreeInternal.verityData.limit());
+            generateApkVerityFooter(randomAccessFile, signatureInfo, byteBufferSlice);
+            byteBufferSlice.putInt(byteBufferSlice.position() + 4);
+            verityResultGenerateVerityTreeInternal.verityData.limit(verityResultGenerateVerityTreeInternal.merkleTreeSize + byteBufferSlice.position());
+            byte[] bArr = verityResultGenerateVerityTreeInternal.rootHash;
             randomAccessFile.close();
             return bArr;
         } catch (Throwable th) {
@@ -117,13 +117,13 @@ public abstract class VerityBuilder {
         @Override // android.util.apk.DataDigester
         public void consume(ByteBuffer byteBuffer) throws DigestException {
             byteBuffer.position();
-            int remaining = byteBuffer.remaining();
-            while (remaining > 0) {
-                int min = Math.min(remaining, 4096 - this.mBytesDigestedSinceReset);
-                byteBuffer.limit(byteBuffer.position() + min);
+            int iRemaining = byteBuffer.remaining();
+            while (iRemaining > 0) {
+                int iMin = Math.min(iRemaining, 4096 - this.mBytesDigestedSinceReset);
+                byteBuffer.limit(byteBuffer.position() + iMin);
                 this.mMd.update(byteBuffer);
-                remaining -= min;
-                int i = this.mBytesDigestedSinceReset + min;
+                iRemaining -= iMin;
+                int i = this.mBytesDigestedSinceReset + iMin;
                 this.mBytesDigestedSinceReset = i;
                 if (i == 4096) {
                     MessageDigest messageDigest = this.mMd;
@@ -148,27 +148,27 @@ public abstract class VerityBuilder {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void fillUpLastOutputChunk() {
-            int position = this.mOutput.position() % 4096;
-            if (position == 0) {
+            int iPosition = this.mOutput.position() % 4096;
+            if (iPosition == 0) {
                 return;
             }
-            this.mOutput.put(ByteBuffer.allocate(4096 - position));
+            this.mOutput.put(ByteBuffer.allocate(4096 - iPosition));
         }
     }
 
-    private static void consumeByChunk(DataDigester dataDigester, DataSource dataSource, int i) throws IOException, DigestException {
+    private static void consumeByChunk(DataDigester dataDigester, DataSource dataSource, int i) throws DigestException, IOException {
         long size = dataSource.size();
         long j = 0;
         while (size > 0) {
-            int min = (int) Math.min(size, i);
-            dataSource.feedIntoDataDigester(dataDigester, j, min);
-            long j2 = min;
+            int iMin = (int) Math.min(size, i);
+            dataSource.feedIntoDataDigester(dataDigester, j, iMin);
+            long j2 = iMin;
             j += j2;
             size -= j2;
         }
     }
 
-    private static void generateFsVerityDigestAtLeafLevel(RandomAccessFile randomAccessFile, byte[] bArr, ByteBuffer byteBuffer) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static void generateFsVerityDigestAtLeafLevel(RandomAccessFile randomAccessFile, byte[] bArr, ByteBuffer byteBuffer) throws NoSuchAlgorithmException, DigestException, IOException {
         BufferedDigester bufferedDigester = new BufferedDigester(bArr, byteBuffer);
         consumeByChunk(bufferedDigester, DataSource.create(randomAccessFile.getFD(), 0L, randomAccessFile.length()), 1048576);
         int length = (int) (randomAccessFile.length() % 4096);
@@ -179,15 +179,15 @@ public abstract class VerityBuilder {
         bufferedDigester.fillUpLastOutputChunk();
     }
 
-    private static void generateApkVerityDigestAtLeafLevel(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, byte[] bArr, ByteBuffer byteBuffer) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static void generateApkVerityDigestAtLeafLevel(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, byte[] bArr, ByteBuffer byteBuffer) throws NoSuchAlgorithmException, DigestException, IOException {
         BufferedDigester bufferedDigester = new BufferedDigester(bArr, byteBuffer);
         consumeByChunk(bufferedDigester, DataSource.create(randomAccessFile.getFD(), 0L, signatureInfo.apkSigningBlockOffset), 1048576);
         long j = signatureInfo.eocdOffset;
         consumeByChunk(bufferedDigester, DataSource.create(randomAccessFile.getFD(), signatureInfo.centralDirOffset, (16 + j) - signatureInfo.centralDirOffset), 1048576);
-        ByteBuffer order = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-        order.putInt(Math.toIntExact(signatureInfo.apkSigningBlockOffset));
-        order.flip();
-        bufferedDigester.consume(order);
+        ByteBuffer byteBufferOrder = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferOrder.putInt(Math.toIntExact(signatureInfo.apkSigningBlockOffset));
+        byteBufferOrder.flip();
+        bufferedDigester.consume(byteBufferOrder);
         long j2 = j + 20;
         consumeByChunk(bufferedDigester, DataSource.create(randomAccessFile.getFD(), j2, randomAccessFile.getChannel().size() - j2), 1048576);
         int size = (int) (randomAccessFile.getChannel().size() % 4096);
@@ -198,16 +198,16 @@ public abstract class VerityBuilder {
         bufferedDigester.fillUpLastOutputChunk();
     }
 
-    private static byte[] generateFsVerityTreeInternal(RandomAccessFile randomAccessFile, byte[] bArr, int[] iArr, ByteBuffer byteBuffer) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static byte[] generateFsVerityTreeInternal(RandomAccessFile randomAccessFile, byte[] bArr, int[] iArr, ByteBuffer byteBuffer) throws NoSuchAlgorithmException, DigestException, IOException {
         generateFsVerityDigestAtLeafLevel(randomAccessFile, bArr, slice(byteBuffer, iArr[iArr.length - 2], iArr[iArr.length - 1]));
         int length = iArr.length - 3;
         while (true) {
             if (length >= 0) {
                 int i = length + 1;
-                ByteBuffer slice = slice(byteBuffer, iArr[i], iArr[length + 2]);
-                ByteBuffer slice2 = slice(byteBuffer, iArr[length], iArr[i]);
-                ByteBufferDataSource byteBufferDataSource = new ByteBufferDataSource(slice);
-                BufferedDigester bufferedDigester = new BufferedDigester(bArr, slice2);
+                ByteBuffer byteBufferSlice = slice(byteBuffer, iArr[i], iArr[length + 2]);
+                ByteBuffer byteBufferSlice2 = slice(byteBuffer, iArr[length], iArr[i]);
+                ByteBufferDataSource byteBufferDataSource = new ByteBufferDataSource(byteBufferSlice);
+                BufferedDigester bufferedDigester = new BufferedDigester(bArr, byteBufferSlice2);
                 consumeByChunk(bufferedDigester, byteBufferDataSource, 4096);
                 bufferedDigester.assertEmptyBuffer();
                 bufferedDigester.fillUpLastOutputChunk();
@@ -222,17 +222,17 @@ public abstract class VerityBuilder {
         }
     }
 
-    private static byte[] generateVerityTreeInternal(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, byte[] bArr, int[] iArr, ByteBuffer byteBuffer) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static byte[] generateVerityTreeInternal(RandomAccessFile randomAccessFile, SignatureInfo signatureInfo, byte[] bArr, int[] iArr, ByteBuffer byteBuffer) throws NoSuchAlgorithmException, DigestException, IOException {
         assertSigningBlockAlignedAndHasFullPages(signatureInfo);
         generateApkVerityDigestAtLeafLevel(randomAccessFile, signatureInfo, bArr, slice(byteBuffer, iArr[iArr.length - 2], iArr[iArr.length - 1]));
         int length = iArr.length - 3;
         while (true) {
             if (length >= 0) {
                 int i = length + 1;
-                ByteBuffer slice = slice(byteBuffer, iArr[i], iArr[length + 2]);
-                ByteBuffer slice2 = slice(byteBuffer, iArr[length], iArr[i]);
-                ByteBufferDataSource byteBufferDataSource = new ByteBufferDataSource(slice);
-                BufferedDigester bufferedDigester = new BufferedDigester(bArr, slice2);
+                ByteBuffer byteBufferSlice = slice(byteBuffer, iArr[i], iArr[length + 2]);
+                ByteBuffer byteBufferSlice2 = slice(byteBuffer, iArr[length], iArr[i]);
+                ByteBufferDataSource byteBufferDataSource = new ByteBufferDataSource(byteBufferSlice);
+                BufferedDigester bufferedDigester = new BufferedDigester(bArr, byteBufferSlice2);
                 consumeByChunk(bufferedDigester, byteBufferDataSource, 4096);
                 bufferedDigester.assertEmptyBuffer();
                 bufferedDigester.fillUpLastOutputChunk();
@@ -311,11 +311,11 @@ public abstract class VerityBuilder {
     }
 
     private static ByteBuffer slice(ByteBuffer byteBuffer, int i, int i2) {
-        ByteBuffer duplicate = byteBuffer.duplicate();
-        duplicate.position(0);
-        duplicate.limit(i2);
-        duplicate.position(i);
-        return duplicate.slice();
+        ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+        byteBufferDuplicate.position(0);
+        byteBufferDuplicate.limit(i2);
+        byteBufferDuplicate.position(i);
+        return byteBufferDuplicate.slice();
     }
 
     private static void skip(ByteBuffer byteBuffer, int i) {

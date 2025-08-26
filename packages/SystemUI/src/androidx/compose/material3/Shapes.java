@@ -1,9 +1,9 @@
 package androidx.compose.material3;
 
 import androidx.compose.foundation.shape.CornerBasedShape;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Shapes {
     public final CornerBasedShape extraExtraLarge;
@@ -50,124 +50,72 @@ public final class Shapes {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Shapes(androidx.compose.foundation.shape.CornerBasedShape r1, androidx.compose.foundation.shape.CornerBasedShape r2, androidx.compose.foundation.shape.CornerBasedShape r3, androidx.compose.foundation.shape.CornerBasedShape r4, androidx.compose.foundation.shape.CornerBasedShape r5, androidx.compose.foundation.shape.CornerBasedShape r6, androidx.compose.foundation.shape.CornerBasedShape r7, androidx.compose.foundation.shape.CornerBasedShape r8, int r9, kotlin.jvm.internal.DefaultConstructorMarker r10) {
-        /*
-            r0 = this;
-            r10 = r9 & 1
-            if (r10 == 0) goto Lb
-            androidx.compose.material3.ShapeDefaults r1 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r1.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r1 = androidx.compose.material3.ShapeDefaults.ExtraSmall
-        Lb:
-            r10 = r9 & 2
-            if (r10 == 0) goto L16
-            androidx.compose.material3.ShapeDefaults r2 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r2.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r2 = androidx.compose.material3.ShapeDefaults.Small
-        L16:
-            r10 = r9 & 4
-            if (r10 == 0) goto L21
-            androidx.compose.material3.ShapeDefaults r3 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r3.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r3 = androidx.compose.material3.ShapeDefaults.Medium
-        L21:
-            r10 = r9 & 8
-            if (r10 == 0) goto L2c
-            androidx.compose.material3.ShapeDefaults r4 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r4.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r4 = androidx.compose.material3.ShapeDefaults.Large
-        L2c:
-            r10 = r9 & 16
-            if (r10 == 0) goto L37
-            androidx.compose.material3.ShapeDefaults r5 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r5.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r5 = androidx.compose.material3.ShapeDefaults.ExtraLarge
-        L37:
-            r10 = r9 & 32
-            if (r10 == 0) goto L42
-            androidx.compose.material3.ShapeDefaults r6 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r6.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r6 = androidx.compose.material3.ShapeDefaults.LargeIncreased
-        L42:
-            r10 = r9 & 64
-            if (r10 == 0) goto L4d
-            androidx.compose.material3.ShapeDefaults r7 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r7.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r7 = androidx.compose.material3.ShapeDefaults.ExtraLargeIncreased
-        L4d:
-            r9 = r9 & 128(0x80, float:1.8E-43)
-            if (r9 == 0) goto L58
-            androidx.compose.material3.ShapeDefaults r8 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r8.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r8 = androidx.compose.material3.ShapeDefaults.ExtraExtraLarge
-        L58:
-            r9 = r7
-            r10 = r8
-            r7 = r5
-            r8 = r6
-            r5 = r3
-            r6 = r4
-            r3 = r1
-            r4 = r2
-            r2 = r0
-            r2.<init>(r3, r4, r5, r6, r7, r8, r9, r10)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.Shapes.<init>(androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public Shapes(CornerBasedShape cornerBasedShape, CornerBasedShape cornerBasedShape2, CornerBasedShape cornerBasedShape3, CornerBasedShape cornerBasedShape4, CornerBasedShape cornerBasedShape5, CornerBasedShape cornerBasedShape6, CornerBasedShape cornerBasedShape7, CornerBasedShape cornerBasedShape8, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 1) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape = ShapeDefaults.ExtraSmall;
+        }
+        if ((i & 2) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape2 = ShapeDefaults.Small;
+        }
+        if ((i & 4) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape3 = ShapeDefaults.Medium;
+        }
+        if ((i & 8) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape4 = ShapeDefaults.Large;
+        }
+        if ((i & 16) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape5 = ShapeDefaults.ExtraLarge;
+        }
+        if ((i & 32) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape6 = ShapeDefaults.LargeIncreased;
+        }
+        if ((i & 64) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape7 = ShapeDefaults.ExtraLargeIncreased;
+        }
+        if ((i & 128) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape8 = ShapeDefaults.ExtraExtraLarge;
+        }
+        CornerBasedShape cornerBasedShape9 = cornerBasedShape7;
+        CornerBasedShape cornerBasedShape10 = cornerBasedShape8;
+        CornerBasedShape cornerBasedShape11 = cornerBasedShape5;
+        CornerBasedShape cornerBasedShape12 = cornerBasedShape6;
+        this(cornerBasedShape, cornerBasedShape2, cornerBasedShape3, cornerBasedShape4, cornerBasedShape11, cornerBasedShape12, cornerBasedShape9, cornerBasedShape10);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Shapes(androidx.compose.foundation.shape.CornerBasedShape r1, androidx.compose.foundation.shape.CornerBasedShape r2, androidx.compose.foundation.shape.CornerBasedShape r3, androidx.compose.foundation.shape.CornerBasedShape r4, androidx.compose.foundation.shape.CornerBasedShape r5, int r6, kotlin.jvm.internal.DefaultConstructorMarker r7) {
-        /*
-            r0 = this;
-            r7 = r6 & 1
-            if (r7 == 0) goto Lb
-            androidx.compose.material3.ShapeDefaults r1 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r1.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r1 = androidx.compose.material3.ShapeDefaults.ExtraSmall
-        Lb:
-            r7 = r6 & 2
-            if (r7 == 0) goto L16
-            androidx.compose.material3.ShapeDefaults r2 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r2.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r2 = androidx.compose.material3.ShapeDefaults.Small
-        L16:
-            r7 = r6 & 4
-            if (r7 == 0) goto L21
-            androidx.compose.material3.ShapeDefaults r3 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r3.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r3 = androidx.compose.material3.ShapeDefaults.Medium
-        L21:
-            r7 = r6 & 8
-            if (r7 == 0) goto L2c
-            androidx.compose.material3.ShapeDefaults r4 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r4.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r4 = androidx.compose.material3.ShapeDefaults.Large
-        L2c:
-            r6 = r6 & 16
-            if (r6 == 0) goto L37
-            androidx.compose.material3.ShapeDefaults r5 = androidx.compose.material3.ShapeDefaults.INSTANCE
-            r5.getClass()
-            androidx.compose.foundation.shape.RoundedCornerShape r5 = androidx.compose.material3.ShapeDefaults.ExtraLarge
-        L37:
-            r6 = r4
-            r7 = r5
-            r4 = r2
-            r5 = r3
-            r2 = r0
-            r3 = r1
-            r2.<init>(r3, r4, r5, r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.Shapes.<init>(androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, androidx.compose.foundation.shape.CornerBasedShape, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public Shapes(CornerBasedShape cornerBasedShape, CornerBasedShape cornerBasedShape2, CornerBasedShape cornerBasedShape3, CornerBasedShape cornerBasedShape4, CornerBasedShape cornerBasedShape5, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 1) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape = ShapeDefaults.ExtraSmall;
+        }
+        if ((i & 2) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape2 = ShapeDefaults.Small;
+        }
+        if ((i & 4) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape3 = ShapeDefaults.Medium;
+        }
+        if ((i & 8) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape4 = ShapeDefaults.Large;
+        }
+        if ((i & 16) != 0) {
+            ShapeDefaults.INSTANCE.getClass();
+            cornerBasedShape5 = ShapeDefaults.ExtraLarge;
+        }
+        CornerBasedShape cornerBasedShape6 = cornerBasedShape5;
+        CornerBasedShape cornerBasedShape7 = cornerBasedShape3;
+        CornerBasedShape cornerBasedShape8 = cornerBasedShape;
+        this(cornerBasedShape8, cornerBasedShape2, cornerBasedShape7, cornerBasedShape4, cornerBasedShape6);
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */

@@ -18,6 +18,7 @@ import androidx.window.embedding.EmbeddingInterfaceCompat;
 import androidx.window.embedding.ExtensionEmbeddingBackend;
 import androidx.window.extensions.WindowExtensionsProvider;
 import androidx.window.extensions.embedding.ActivityEmbeddingComponent;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ import kotlin.jvm.internal.ClassReference;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
     public static volatile ExtensionEmbeddingBackend globalInstance;
@@ -47,14 +47,13 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
     public static final Companion Companion = new Companion(null);
     public static final ReentrantLock globalLock = new ReentrantLock();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api31Impl {
         public static final Api31Impl INSTANCE = new Api31Impl();
 
         private Api31Impl() {
         }
 
-        public final SplitController$SplitSupportStatus isSplitPropertyEnabled(Context context) {
+        public final SplitController$SplitSupportStatus isSplitPropertyEnabled(Context context) throws PackageManager.NameNotFoundException {
             try {
                 PackageManager.Property property = context.getPackageManager().getProperty("android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED", context.getPackageName());
                 if (property.isBoolean()) {
@@ -81,7 +80,6 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -90,21 +88,14 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         public static EmbeddingCompat initAndVerifyEmbeddingExtension(Context context) {
             ClassLoader classLoader;
             ActivityEmbeddingComponent activityEmbeddingComponent;
+            ClassLoader classLoader2;
             EmbeddingCompat embeddingCompat = null;
             try {
                 ExtensionsUtil.INSTANCE.getClass();
                 if (ExtensionsUtil.getSafeVendorApiLevel() >= 1) {
                     EmbeddingCompat.Companion.getClass();
                     if (EmbeddingCompat.Companion.isEmbeddingAvailable() && (classLoader = EmbeddingBackend.class.getClassLoader()) != null) {
-                        if (EmbeddingCompat.Companion.isEmbeddingAvailable()) {
-                            ClassLoader classLoader2 = EmbeddingCompat.class.getClassLoader();
-                            if (classLoader2 != null) {
-                                activityEmbeddingComponent = new SafeActivityEmbeddingComponentProvider(classLoader2, new ConsumerAdapter(classLoader2), WindowExtensionsProvider.getWindowExtensions()).getActivityEmbeddingComponent();
-                                if (activityEmbeddingComponent == null) {
-                                }
-                            }
-                            activityEmbeddingComponent = (ActivityEmbeddingComponent) Proxy.newProxyInstance(EmbeddingCompat.class.getClassLoader(), new Class[]{ActivityEmbeddingComponent.class}, new EmbeddingCompat$Companion$$ExternalSyntheticLambda0());
-                        } else {
+                        if (!EmbeddingCompat.Companion.isEmbeddingAvailable() || (classLoader2 = EmbeddingCompat.class.getClassLoader()) == null || (activityEmbeddingComponent = new SafeActivityEmbeddingComponentProvider(classLoader2, new ConsumerAdapter(classLoader2), WindowExtensionsProvider.getWindowExtensions()).getActivityEmbeddingComponent()) == null) {
                             activityEmbeddingComponent = (ActivityEmbeddingComponent) Proxy.newProxyInstance(EmbeddingCompat.class.getClassLoader(), new Class[]{ActivityEmbeddingComponent.class}, new EmbeddingCompat$Companion$$ExternalSyntheticLambda0());
                         }
                         ActivityEmbeddingComponent activityEmbeddingComponent2 = activityEmbeddingComponent;
@@ -127,7 +118,6 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmbeddingCallbackImpl implements EmbeddingInterfaceCompat.EmbeddingCallbackInterface {
         public EmbeddingCallbackImpl() {
             EmptyList emptyList = EmptyList.INSTANCE;
@@ -152,7 +142,7 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
                     splitListenerWrapper.executor.execute(new Runnable() { // from class: androidx.window.embedding.ExtensionEmbeddingBackend$SplitListenerWrapper$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExtensionEmbeddingBackend.SplitListenerWrapper splitListenerWrapper2 = ExtensionEmbeddingBackend.SplitListenerWrapper.this;
+                            ExtensionEmbeddingBackend.SplitListenerWrapper splitListenerWrapper2 = splitListenerWrapper;
                             splitListenerWrapper2.callback.accept(arrayList);
                         }
                     });
@@ -161,7 +151,6 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RuleTracker {
         public RuleTracker() {
             new ArraySet();
@@ -169,7 +158,6 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SplitListenerWrapper {
         public final Activity activity;
         public final Consumer callback;
@@ -183,7 +171,7 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
         }
     }
 
-    public ExtensionEmbeddingBackend(Context context, EmbeddingInterfaceCompat embeddingInterfaceCompat) {
+    public ExtensionEmbeddingBackend(Context context, EmbeddingInterfaceCompat embeddingInterfaceCompat) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         this.applicationContext = context;
         this.embeddingExtension = embeddingInterfaceCompat;
         final EmbeddingCallbackImpl embeddingCallbackImpl = new EmbeddingCallbackImpl();
@@ -202,14 +190,14 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         ArrayList arrayList = new ArrayList();
                         for (Object obj2 : (List) obj) {
                             if (obj2 instanceof androidx.window.extensions.embedding.SplitInfo) {
                                 arrayList.add(obj2);
                             }
                         }
-                        ((ExtensionEmbeddingBackend.EmbeddingCallbackImpl) EmbeddingInterfaceCompat.EmbeddingCallbackInterface.this).onSplitInfoChanged(embeddingCompat.adapter.translate(arrayList));
+                        ((ExtensionEmbeddingBackend.EmbeddingCallbackImpl) embeddingCallbackImpl).onSplitInfoChanged(embeddingCompat.adapter.translate(arrayList));
                         return Unit.INSTANCE;
                     }
                 };
@@ -291,7 +279,7 @@ public final class ExtensionEmbeddingBackend implements EmbeddingBackend {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                ExtensionEmbeddingBackend extensionEmbeddingBackend = ExtensionEmbeddingBackend.this;
+                ExtensionEmbeddingBackend extensionEmbeddingBackend = this.this$0;
                 return extensionEmbeddingBackend.embeddingExtension != null ? ExtensionEmbeddingBackend.Api31Impl.INSTANCE.isSplitPropertyEnabled(extensionEmbeddingBackend.applicationContext) : SplitController$SplitSupportStatus.SPLIT_UNAVAILABLE;
             }
         });

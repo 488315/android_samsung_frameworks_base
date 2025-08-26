@@ -91,9 +91,7 @@ public class KnoxUcmKeyStoreProvider extends Provider {
         putSignatureImpl("SHA256withECGDSA", "com.samsung.ucm.keystore.UcmKeyStoreSignatureSpi$SHA256withECGDSA");
         putSignatureImpl("SHA384withECGDSA", "com.samsung.ucm.keystore.UcmKeyStoreSignatureSpi$SHA384withECGDSA");
         putSignatureImpl("SHA512withECGDSA", "com.samsung.ucm.keystore.UcmKeyStoreSignatureSpi$SHA512withECGDSA");
-        putMacImpl("HmacMD5", "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacMD5");
         putMacImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA1, "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacSHA1");
-        putMacImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA224, "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacSHA224");
         putMacImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA256, "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacSHA256");
         putMacImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA384, "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacSHA384");
         putMacImpl(KeyProperties.KEY_ALGORITHM_HMAC_SHA512, "com.samsung.ucm.keystore.UcmKeyStoreMacSpi$HmacSHA512");

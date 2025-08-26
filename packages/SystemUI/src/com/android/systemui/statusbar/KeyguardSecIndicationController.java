@@ -34,6 +34,7 @@ import android.text.SpannableStringBuilder;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +64,7 @@ import com.android.settingslib.Utils;
 import com.android.systemui.CscRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
+import com.android.systemui.PowerUiRune;
 import com.android.systemui.biometrics.AuthController;
 import com.android.systemui.biometrics.FaceHelpMessageDeferralFactory;
 import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
@@ -90,7 +92,7 @@ import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.settings.UserTracker;
-import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda36;
+import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda43;
 import com.android.systemui.statusbar.KeyguardIndicationController;
 import com.android.systemui.statusbar.phone.BounceInterpolator;
 import com.android.systemui.statusbar.phone.KeyguardBypassController;
@@ -122,10 +124,13 @@ import io.reactivex.internal.operators.observable.ObservableJust;
 import io.reactivex.internal.operators.observable.ObservableObserveOn;
 import io.reactivex.schedulers.Schedulers;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardSecIndicationController extends KeyguardIndicationController implements SystemUIWidgetCallback, PluginLockListener.State {
     public final AccessibilityManager mAccessibilityManager;
@@ -158,7 +163,6 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     public KeyguardIndicationTextView mUpperTextView;
     public final AnonymousClass5 mWakefulnessObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.KeyguardSecIndicationController$9, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass9 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -188,7 +192,6 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SecKeyguardCallback extends KeyguardIndicationController.BaseKeyguardCallback {
         public int mLastSuccessiveErrorMessage;
 
@@ -197,11 +200,11 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         }
 
         @Override // com.android.systemui.statusbar.KeyguardIndicationController.BaseKeyguardCallback, com.android.keyguard.KeyguardUpdateMonitorCallback
-        public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) {
+        public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) throws Resources.NotFoundException {
             BiometricSourceType biometricSourceType2 = BiometricSourceType.FACE;
             KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
             if (biometricSourceType == biometricSourceType2 && ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnabledFaceStayOnLock() && keyguardSecIndicationController.mVisible && !keyguardSecIndicationController.mDozing && keyguardSecIndicationController.mIsScreenOn) {
-                KeyguardSecIndicationController.m2944$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
+                KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
                 keyguardSecIndicationController.showBounceAnimation(keyguardSecIndicationController.mUpperTextView);
             } else {
                 KeyguardSecIndicationPolicy keyguardSecIndicationPolicy = keyguardSecIndicationController.mIndicationPolicy;
@@ -243,7 +246,11 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             this.mLastSuccessiveErrorMessage = i;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:23:0x0052  */
         @Override // com.android.systemui.statusbar.KeyguardIndicationController.BaseKeyguardCallback, com.android.keyguard.KeyguardUpdateMonitorCallback
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onBiometricHelp(int i, String str, BiometricSourceType biometricSourceType) {
             if (biometricSourceType != BiometricSourceType.FINGERPRINT) {
                 return;
@@ -252,9 +259,9 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             if (keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(true)) {
                 KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
                 StatusBarKeyguardViewManager statusBarKeyguardViewManager = keyguardSecIndicationController.mStatusBarKeyguardViewManager;
-                boolean isBouncerShowing = statusBarKeyguardViewManager != null ? statusBarKeyguardViewManager.isBouncerShowing() : false;
+                boolean zIsBouncerShowing = statusBarKeyguardViewManager != null ? statusBarKeyguardViewManager.isBouncerShowing() : false;
                 KeyguardUpdateMonitor keyguardUpdateMonitor2 = keyguardSecIndicationController.mKeyguardUpdateMonitor;
-                if (isBouncerShowing && keyguardUpdateMonitor2.getLockoutAttemptDeadline() <= 0) {
+                if (zIsBouncerShowing && keyguardUpdateMonitor2.getLockoutAttemptDeadline() <= 0) {
                     AnonymousClass7 anonymousClass7 = keyguardSecIndicationController.mCountDownTimer;
                     if (anonymousClass7 != null) {
                         anonymousClass7.cancel();
@@ -263,10 +270,8 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
                     }
                     if (!TextUtils.isEmpty(str)) {
                         keyguardSecIndicationController.mStatusBarKeyguardViewManager.setKeyguardMessage(str, keyguardSecIndicationController.mInitialTextColorState);
-                        this.mLastSuccessiveErrorMessage = -1;
                     }
-                }
-                if (keyguardSecIndicationController.mScreenLifecycle.mScreenState == 2 && !keyguardUpdateMonitor.mGoingToSleep) {
+                } else if (keyguardSecIndicationController.mScreenLifecycle.mScreenState == 2 && !keyguardUpdateMonitor.mGoingToSleep) {
                     if (i == 1) {
                         str = keyguardSecIndicationController.mContext.getString(com.android.systemui.R.string.kg_fingerprint_acquired_partial);
                     } else if (i == 2) {
@@ -304,11 +309,11 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         }
 
         @Override // com.android.systemui.statusbar.KeyguardIndicationController.BaseKeyguardCallback, com.android.keyguard.KeyguardUpdateMonitorCallback
-        public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) {
+        public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
             KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
             if (keyguardSecIndicationController.mVisible && !keyguardSecIndicationController.mDozing && keyguardSecIndicationController.mIsScreenOn) {
                 if (z) {
-                    KeyguardSecIndicationController.m2944$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
+                    KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
                     keyguardSecIndicationController.addIndicationTimeout(IndicationEventType.BIOMETRICS_STOP, "", keyguardSecIndicationController.mInitialTextColorState, false);
                     return;
                 }
@@ -339,9 +344,9 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             long lockoutAttemptDeadline = keyguardSecIndicationController.mKeyguardUpdateMonitor.getLockoutAttemptDeadline();
             KeyguardUpdateMonitor keyguardUpdateMonitor = keyguardSecIndicationController.mKeyguardUpdateMonitor;
             long lockoutBiometricAttemptDeadline = keyguardUpdateMonitor.getLockoutBiometricAttemptDeadline();
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("onLockModeChanged - ", lockoutAttemptDeadline, " | ");
-            m.append(lockoutBiometricAttemptDeadline);
-            Log.d("KeyguardSecIndicationController", m.toString());
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("onLockModeChanged - ", lockoutAttemptDeadline, " | ");
+            sbM.append(lockoutBiometricAttemptDeadline);
+            Log.d("KeyguardSecIndicationController", sbM.toString());
             if (lockoutAttemptDeadline > 0) {
                 Log.d("KeyguardSecIndicationController", "startCountdownTimer - " + lockoutAttemptDeadline);
                 if (keyguardUpdateMonitor.isPerformingWipeOut()) {
@@ -406,7 +411,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
                         public final int biometricType;
 
                         {
-                            super(r2, r4);
+                            super(j, j);
                             this.attemptRemainingBeforeWipe = KeyguardSecIndicationController.this.mKeyguardUpdateMonitor.getRemainingAttempt(1);
                             this.biometricType = KeyguardSecIndicationController.this.mKeyguardUpdateMonitor.getBiometricType();
                         }
@@ -422,46 +427,46 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
 
                         @Override // android.os.CountDownTimer
                         public final void onTick(long j2) {
-                            String str;
-                            int round = (int) Math.round(j2 / 1000.0d);
-                            int ceil = (int) Math.ceil(round / 60.0d);
+                            String string;
+                            int iRound = (int) Math.round(j2 / 1000.0d);
+                            int iCeil = (int) Math.ceil(iRound / 60.0d);
                             if (this.attemptRemainingBeforeWipe > 0) {
                                 StringBuilder sb = new StringBuilder();
                                 Resources resources = KeyguardSecIndicationController.this.mContext.getResources();
                                 int i = this.attemptRemainingBeforeWipe;
-                                str = TransitionKt$$ExternalSyntheticOutline0.m(sb, resources.getQuantityString(com.android.systemui.R.plurals.kg_attempt_left, i, Integer.valueOf(i)), "\n");
+                                string = TransitionKt$$ExternalSyntheticOutline0.m(sb, resources.getQuantityString(com.android.systemui.R.plurals.kg_attempt_left, i, Integer.valueOf(i)), "\n");
                             } else {
-                                str = "";
+                                string = "";
                             }
-                            if (round > 60) {
-                                StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-                                m2.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_min, ceil, Integer.valueOf(ceil)));
-                                str = m2.toString();
-                            } else if (round <= 60 && round > 0) {
+                            if (iRound > 60) {
+                                StringBuilder sbM2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+                                sbM2.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_min, iCeil, Integer.valueOf(iCeil)));
+                                string = sbM2.toString();
+                            } else if (iRound <= 60 && iRound > 0) {
                                 int i2 = this.biometricType;
                                 if (i2 == 1) {
-                                    StringBuilder m3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-                                    m3.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_fingerprint, round, Integer.valueOf(round)));
-                                    str = m3.toString();
+                                    StringBuilder sbM3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+                                    sbM3.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_fingerprint, iRound, Integer.valueOf(iRound)));
+                                    string = sbM3.toString();
                                 } else if (i2 != 256) {
-                                    StringBuilder m4 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-                                    m4.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_biometric, round, Integer.valueOf(round)));
-                                    str = m4.toString();
+                                    StringBuilder sbM4 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+                                    sbM4.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_biometric, iRound, Integer.valueOf(iRound)));
+                                    string = sbM4.toString();
                                 } else {
-                                    StringBuilder m5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-                                    m5.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_face, round, Integer.valueOf(round)));
-                                    str = m5.toString();
+                                    StringBuilder sbM5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+                                    sbM5.append(KeyguardSecIndicationController.this.mContext.getResources().getQuantityString(com.android.systemui.R.plurals.kg_too_many_failed_attempts_countdown_face, iRound, Integer.valueOf(iRound)));
+                                    string = sbM5.toString();
                                 }
                             }
-                            if (str.isEmpty()) {
+                            if (string.isEmpty()) {
                                 return;
                             }
                             KeyguardSecIndicationController keyguardSecIndicationController2 = KeyguardSecIndicationController.this;
                             if (keyguardSecIndicationController2.mKeyguardUpdateMonitor.getUserCanSkipBouncer(keyguardSecIndicationController2.mSelectedUserInteractor.getSelectedUserId())) {
                                 return;
                             }
-                            RecyclerView$$ExternalSyntheticOutline0.m(this.biometricType, "KeyguardSecIndicationController", ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("BiometricsCountdownTimer - ", str, " biometricType : "));
-                            KeyguardSecIndicationController.this.addIndication(IndicationEventType.BIOMETRICS_COOLDOWN, str);
+                            RecyclerView$$ExternalSyntheticOutline0.m(this.biometricType, "KeyguardSecIndicationController", ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("BiometricsCountdownTimer - ", string, " biometricType : "));
+                            KeyguardSecIndicationController.this.addIndication(IndicationEventType.BIOMETRICS_COOLDOWN, string);
                         }
                     }.start();
                 }
@@ -477,7 +482,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         }
 
         @Override // com.android.systemui.statusbar.KeyguardIndicationController.BaseKeyguardCallback, com.android.keyguard.KeyguardUpdateMonitorCallback
-        public final void onRefreshBatteryInfo(KeyguardBatteryStatus keyguardBatteryStatus) {
+        public final void onRefreshBatteryInfo(KeyguardBatteryStatus keyguardBatteryStatus) throws Resources.NotFoundException {
             super.onRefreshBatteryInfo(keyguardBatteryStatus);
             KeyguardSecIndicationController.this.addInitialIndication();
         }
@@ -531,7 +536,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     /* renamed from: -$$Nest$mupdateDefaultIndications, reason: not valid java name */
-    public static void m2944$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController keyguardSecIndicationController) {
+    public static void m2961$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController keyguardSecIndicationController) throws Resources.NotFoundException {
         keyguardSecIndicationController.addInitialIndication();
         keyguardSecIndicationController.addIndication(keyguardSecIndicationController.isAuthenticatedWithBiometric() ? IndicationEventType.BIOMETRICS_HELP : IndicationEventType.UNLOCK_GUIDE, keyguardSecIndicationController.getUnlockGuideText());
         if (keyguardSecIndicationController.mIsFpGuidePos) {
@@ -562,12 +567,12 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         this.mIsUsbRestricted = false;
         ?? r5 = new KeyguardEditModeController.Listener() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationController.1
             @Override // com.android.systemui.keyguard.KeyguardEditModeController.Listener
-            public final void onAnimationEnded() {
+            public final void onAnimationEnded() throws Resources.NotFoundException {
                 KeyguardSecIndicationController.this.setVisible(true);
             }
 
             @Override // com.android.systemui.keyguard.KeyguardEditModeController.Listener
-            public final void onAnimationStarted(boolean z) {
+            public final void onAnimationStarted(boolean z) throws Resources.NotFoundException {
                 KeyguardSecIndicationController.this.setVisible(false);
             }
         };
@@ -581,7 +586,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         this.mIsDefaultLockViewMode = true;
         ?? r4 = new KeyguardStateController.Callback() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationController.3
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
-            public final void onPrimaryBouncerShowingChanged() {
+            public final void onPrimaryBouncerShowingChanged() throws Resources.NotFoundException {
                 KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
                 if (((KeyguardStateControllerImpl) keyguardSecIndicationController.mKeyguardStateController).mPrimaryBouncerShowing) {
                     keyguardSecIndicationController.mIndicationPolicy.removeAllIndications();
@@ -606,7 +611,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             }
 
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
-            public final void onStartedWakingUp() {
+            public final void onStartedWakingUp() throws Resources.NotFoundException {
                 KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
                 keyguardSecIndicationController.mIsScreenOn = true;
                 keyguardSecIndicationController.addInitialIndication();
@@ -631,7 +636,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         this.mPluginLockStarManager = pluginLockStarManager;
         pluginLockStarManager.registerCallback(PluginLockStar.INDICATOR_TYPE, new PluginLockStarManager.LockStarCallback() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationController.4
             @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
-            public final void onChangedLockStarData(boolean z) {
+            public final void onChangedLockStarData(boolean z) throws Resources.NotFoundException {
                 if (z) {
                     return;
                 }
@@ -657,35 +662,35 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         }
     }
 
-    public final SpannableStringBuilder AddBatteryIcon(String str, boolean z) {
-        int i;
-        int i2 = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.mContext) == 1 ? 1 : 0;
-        String replaceFirst = i2 != 0 ? str.replaceFirst("\n", "  \n") : AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m(" ", str);
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(replaceFirst);
-        int indexOf = replaceFirst.indexOf(" ");
-        if (indexOf != -1) {
+    public final SpannableStringBuilder AddBatteryIcon(String str, boolean z) throws Resources.NotFoundException {
+        int dimensionPixelSize;
+        int i = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.mContext) == 1 ? 1 : 0;
+        String strReplaceFirst = i != 0 ? str.replaceFirst("\n", "  \n") : AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m(" ", str);
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(strReplaceFirst);
+        int iIndexOf = strReplaceFirst.indexOf(" ");
+        if (iIndexOf != -1) {
             Drawable drawable = z ? this.mBatteryProtectionDrawable : this.mBatteryLightingBoltDrawable;
             KeyguardIndicationTextView keyguardIndicationTextView = this.mTopIndicationView;
             if (keyguardIndicationTextView != null) {
                 drawable.setColorFilter(keyguardIndicationTextView.getCurrentTextColor(), PorterDuff.Mode.SRC_IN);
-                i = this.mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_battery_bolt_size);
+                dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.keyguard_battery_bolt_size);
             } else {
-                i = 0;
+                dimensionPixelSize = 0;
             }
-            int i3 = i;
-            if (i <= 0) {
-                i = 1;
+            int i2 = dimensionPixelSize;
+            if (dimensionPixelSize <= 0) {
+                dimensionPixelSize = 1;
             }
-            if (i3 <= 0) {
-                i3 = 1;
+            if (i2 <= 0) {
+                i2 = 1;
             }
-            Bitmap createBitmap = Bitmap.createBitmap(i, i3, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(dimensionPixelSize, i2, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), createBitmap);
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapCreateBitmap);
             bitmapDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            spannableStringBuilder.setSpan(new ImageSpan(bitmapDrawable, 0), indexOf + i2, indexOf + (i2 != 0 ? 2 : 1), 33);
+            spannableStringBuilder.setSpan(new ImageSpan(bitmapDrawable, 0), iIndexOf + i, iIndexOf + (i != 0 ? 2 : 1), 33);
         }
         return spannableStringBuilder;
     }
@@ -698,17 +703,211 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         addIndicationTimeout(IndicationPosition.DEFAULT, indicationEventType, charSequence, colorStateList, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:75:0x03ea  */
+    /* JADX WARN: Removed duplicated region for block: B:154:0x03d5  */
+    /* JADX WARN: Removed duplicated region for block: B:160:0x03ea  */
+    /* JADX WARN: Removed duplicated region for block: B:163:0x03f0  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00e5 A[PHI: r0
+      0x00e5: PHI (r0v33 java.lang.String) = (r0v12 java.lang.String), (r0v12 java.lang.String), (r0v34 java.lang.String) binds: [B:153:0x03d3, B:155:0x03d9, B:50:0x00e3] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x0247  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addInitialIndication() {
-        /*
-            Method dump skipped, instructions count: 1182
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardSecIndicationController.addInitialIndication():void");
+    public final void addInitialIndication() throws Resources.NotFoundException {
+        String string;
+        String strAddBatteryIcon;
+        boolean z;
+        int i;
+        int i2;
+        String string2;
+        String str;
+        String str2;
+        String string3;
+        CustomSdkMonitor customSdkMonitor;
+        Log.d("KeyguardSecIndicationController", "addTrustAgentHelp " + hasTrust());
+        if (hasTrust()) {
+            addIndication(IndicationEventType.TRUST_AGENT_HELP, this.mContext.getText(com.android.systemui.R.string.kg_extend_lock_content_description));
+            return;
+        }
+        removeIndication(IndicationEventType.TRUST_AGENT_HELP);
+        if (addUsbRestriction()) {
+            return;
+        }
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
+        KeyguardBatteryStatus keyguardBatteryStatus = keyguardUpdateMonitor.getKeyguardBatteryStatus();
+        if (keyguardBatteryStatus == null) {
+            Log.w("KeyguardSecIndicationController", "addBatteryAndOwnerInfoIndication() no status");
+        } else {
+            Log.d("KeyguardSecIndicationController", "addBatteryAndOwnerInfoIndication() battery status = " + keyguardBatteryStatus);
+            boolean z2 = this.mPowerPluggedIn;
+            boolean z3 = keyguardBatteryStatus.level < 20;
+            if (PowerUiRune.BATTERY_SWELLING_NOTICE) {
+                int i3 = keyguardBatteryStatus.swellingMode;
+                char c = (i3 & 16) != 0 ? (char) 16 : (i3 & 32) != 0 ? ' ' : (char) 0;
+                long j = keyguardBatteryStatus.remaining;
+                CustomSdkMonitor customSdkMonitor2 = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mCustomSdkMonitor;
+                boolean z4 = customSdkMonitor2 != null && (customSdkMonitor2.mKnoxCustomLockScreenHiddenItems & 2) == 0;
+                if (z4 && (this.mPowerPluggedIn || ((this.mPowerCharged && keyguardBatteryStatus.isPluggedIn()) || (this.mProtectedFullyCharged && keyguardBatteryStatus.isPluggedIn())))) {
+                    int i4 = this.mChangingType;
+                    int protectBatterySetValue = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getProtectBatterySetValue();
+                    String str3 = "";
+                    if (this.mPowerCharged) {
+                        Context context = this.mContext;
+                        if (context == null) {
+                            Log.e("KeyguardSecIndicationController", "Fail to getChargingText");
+                            string3 = str3;
+                        } else {
+                            int i5 = this.mBatteryLevel;
+                            if (i5 == 100) {
+                                string3 = this.mContext.getString(com.android.systemui.R.string.battery_meter_format, Integer.valueOf(this.mBatteryLevel)) + '\n' + ((Object) this.mContext.getText(com.android.systemui.R.string.kg_power_fully_charged));
+                            } else if (LsRune.LOCKUI_ECO_BATTERY && (protectBatterySetValue == 3 || protectBatterySetValue == 4)) {
+                                string3 = AddBatteryIcon(context.getString(com.android.systemui.R.string.battery_meter_format, Integer.valueOf(i5)) + '\n' + this.mContext.getString(com.android.systemui.R.string.kg_power_charging_paused_to_protect_your_battery), true);
+                            } else {
+                                string3 = context.getText(com.android.systemui.R.string.kg_power_fully_charged).toString();
+                            }
+                        }
+                    } else if (!this.mProtectedFullyCharged) {
+                        if (this.mIsNeededShowChargingType) {
+                            string = str3;
+                            if (i4 != 2) {
+                                switch (i4) {
+                                    case 10:
+                                        string = this.mContext.getString(com.android.systemui.R.string.kg_power_charging, Integer.valueOf(this.mBatteryLevel));
+                                        break;
+                                    case 11:
+                                        string2 = CscRune.LOCKUI_HELP_TEXT_FOR_CHN ? this.mContext.getString(com.android.systemui.R.string.kg_power_fast_charging_chn, Integer.valueOf(this.mBatteryLevel)) : this.mContext.getString(com.android.systemui.R.string.kg_power_fast_charging, Integer.valueOf(this.mBatteryLevel));
+                                        string = string2;
+                                        break;
+                                    case 12:
+                                        string = this.mContext.getString(com.android.systemui.R.string.kg_power_charging_wirelessly, Integer.valueOf(this.mBatteryLevel));
+                                        break;
+                                    case 13:
+                                        string2 = CscRune.LOCKUI_HELP_TEXT_FOR_CHN ? this.mContext.getString(com.android.systemui.R.string.kg_power_fast_charging_wirelessly_chn, Integer.valueOf(this.mBatteryLevel)) : this.mContext.getString(com.android.systemui.R.string.kg_power_fast_charging_wirelessly, Integer.valueOf(this.mBatteryLevel));
+                                        string = string2;
+                                        break;
+                                    case 14:
+                                        string = this.mContext.getString(com.android.systemui.R.string.kg_power_super_fast_charging, Integer.valueOf(this.mBatteryLevel));
+                                        break;
+                                    case 15:
+                                        string = this.mContext.getString(com.android.systemui.R.string.kg_power_super_fast_charging_20, Integer.valueOf(this.mBatteryLevel));
+                                        break;
+                                }
+                            } else {
+                                string = this.mContext.getString(com.android.systemui.R.string.common_battery_slow_charging, Integer.valueOf(this.mBatteryLevel));
+                            }
+                        } else {
+                            string = this.mContext.getString(com.android.systemui.R.string.battery_meter_format, Integer.valueOf(this.mBatteryLevel));
+                        }
+                        String str4 = string;
+                        if (!PowerUiRune.BATTERY_CHARGING_ESTIMATE_TIME || i4 == 2) {
+                            strAddBatteryIcon = str4;
+                            if (this.mIsNeededShowChargingType || TextUtils.isEmpty(strAddBatteryIcon)) {
+                                z = false;
+                            } else {
+                                z = false;
+                                strAddBatteryIcon = AddBatteryIcon(strAddBatteryIcon, false);
+                            }
+                            addIndicationTimeout(IndicationEventType.BATTERY, strAddBatteryIcon, this.mInitialTextColorState, (z2 || !this.mPowerPluggedInWired) ? z : true);
+                            addIndication(IndicationEventType.BATTERY_RESTING, strAddBatteryIcon);
+                        } else if (j <= 0 || c != 0) {
+                            if (c == 16) {
+                                string3 = this.mContext.getString(com.android.systemui.R.string.common_battery_slow_charging, Integer.valueOf(this.mBatteryLevel));
+                            }
+                            strAddBatteryIcon = str4;
+                            if (this.mIsNeededShowChargingType) {
+                                z = false;
+                                if (z2) {
+                                    addIndicationTimeout(IndicationEventType.BATTERY, strAddBatteryIcon, this.mInitialTextColorState, (z2 || !this.mPowerPluggedInWired) ? z : true);
+                                    addIndication(IndicationEventType.BATTERY_RESTING, strAddBatteryIcon);
+                                }
+                            }
+                        } else {
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(str4);
+                            sb.append('\n');
+                            long j2 = j / 1000;
+                            if (j2 >= 3600) {
+                                i = (int) (j2 / 3600);
+                                j2 -= i * 3600;
+                            } else {
+                                i = 0;
+                            }
+                            if (j2 >= 60) {
+                                i2 = (int) (j2 / 60);
+                                j2 -= i2 * 60;
+                            } else {
+                                i2 = 0;
+                            }
+                            int i6 = (int) j2;
+                            if (i == 0 && i2 >= 2 && i6 >= 30) {
+                                i2++;
+                                if (i2 == 60) {
+                                    i = 1;
+                                    i2 = 0;
+                                }
+                            }
+                            sb.append((i <= 0 || i2 <= 0) ? i > 0 ? this.mContext.getString(com.android.systemui.R.string.kg_power_time_format_hour, Integer.valueOf(i)) : this.mContext.getString(com.android.systemui.R.string.kg_power_time_format_minute, Integer.valueOf(i2)) : this.mContext.getString(com.android.systemui.R.string.kg_power_time_format_hour_minute, Integer.valueOf(i), Integer.valueOf(i2)));
+                            strAddBatteryIcon = sb.toString();
+                            if (this.mIsNeededShowChargingType) {
+                            }
+                        }
+                    } else if (this.mContext == null) {
+                        Log.e("KeyguardSecIndicationController", "Fail to getChargingText");
+                        string3 = str3;
+                    } else if (!LsRune.LOCKUI_ECO_BATTERY) {
+                        string3 = this.mContext.getText(com.android.systemui.R.string.kg_power_charging_paused).toString() + "\n" + this.mContext.getText(com.android.systemui.R.string.kg_power_charging_limit_85).toString();
+                    } else if (protectBatterySetValue == 1 || protectBatterySetValue == 2) {
+                        string3 = AddBatteryIcon(this.mContext.getString(com.android.systemui.R.string.battery_meter_format, Integer.valueOf(this.mBatteryLevel)) + '\n' + ((Object) this.mContext.getText(com.android.systemui.R.string.kg_power_charging_maximum_protection)), true);
+                    } else if (protectBatterySetValue == 4 && (str = this.mSleepChargingEvent) != null && !"off".equals(str) && this.mSleepChargingEventFinishTime != null) {
+                        String string4 = this.mContext.getString(com.android.systemui.R.string.battery_meter_format, Integer.valueOf(this.mBatteryLevel));
+                        if (this.mBatteryLevel != 100 && this.mSleepChargingEventFinishTime != null) {
+                            StringBuilder sb2 = new StringBuilder();
+                            sb2.append(string4);
+                            sb2.append('\n');
+                            Context context2 = this.mContext;
+                            try {
+                                Date date = new SimpleDateFormat("HH:mm", Locale.getDefault()).parse(this.mSleepChargingEventFinishTime);
+                                str2 = str3;
+                                if (date != null) {
+                                    str2 = DateFormat.getTimeFormat(context2).format(Long.valueOf(date.getTime()));
+                                }
+                            } catch (ParseException e) {
+                                Log.w("KeyguardSecIndicationController", "ParseException", e);
+                                str2 = str3;
+                            }
+                            sb2.append(context2.getString(com.android.systemui.R.string.kg_power_charging_adaptive_protection, str2));
+                            string4 = sb2.toString();
+                        }
+                        string3 = AddBatteryIcon(string4, true);
+                    }
+                    strAddBatteryIcon = string3;
+                    z = false;
+                } else if (z4 && z3) {
+                    CharSequence text = this.mContext.getText(com.android.systemui.R.string.kg_power_connect_charger);
+                    addIndicationTimeout(IndicationEventType.BATTERY, text, this.mInitialTextColorState, !z2 && this.mPowerPluggedInWired);
+                    addIndication(IndicationEventType.BATTERY_RESTING, text);
+                } else {
+                    removeIndication(IndicationEventType.BATTERY);
+                    removeIndication(IndicationEventType.BATTERY_RESTING);
+                }
+            }
+        }
+        KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
+        if ((knoxStateMonitor == null || ((customSdkMonitor = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor) != null && (customSdkMonitor.mKnoxCustomLockScreenHiddenItems & 32) == 0)) && this.mTopIndicationView != null) {
+            if (keyguardUpdateMonitor.isDeviceOwnerInfoEnabled() && keyguardUpdateMonitor.getDeviceOwnerInfo() != null) {
+                if (TextUtils.equals(this.mTopIndicationView.getText(), keyguardUpdateMonitor.getDeviceOwnerInfo())) {
+                    return;
+                }
+                addIndication(IndicationEventType.OWNER_INFO, keyguardUpdateMonitor.getDeviceOwnerInfo());
+            } else if (!keyguardUpdateMonitor.isOwnerInfoEnabled() || keyguardUpdateMonitor.getOwnerInfo() == null) {
+                removeIndication(IndicationEventType.OWNER_INFO);
+            } else {
+                if (TextUtils.equals(this.mTopIndicationView.getText(), keyguardUpdateMonitor.getOwnerInfo())) {
+                    return;
+                }
+                addIndication(IndicationEventType.OWNER_INFO, keyguardUpdateMonitor.getOwnerInfo());
+            }
+        }
     }
 
     public final boolean addUsbRestriction() {
@@ -732,8 +931,8 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         return true;
     }
 
-    public final void changeIndication(CharSequence charSequence, boolean z, boolean z2) {
-        NotificationPanelViewController$$ExternalSyntheticLambda36 notificationPanelViewController$$ExternalSyntheticLambda36;
+    public final void changeIndication(CharSequence charSequence, boolean z, boolean z2) throws Resources.NotFoundException {
+        NotificationPanelViewController$$ExternalSyntheticLambda43 notificationPanelViewController$$ExternalSyntheticLambda43;
         if (this.mTopIndicationView != null) {
             if (this.mLockHelpTextVisible || TextUtils.isEmpty(charSequence)) {
                 TextPaint paint = this.mTopIndicationView.getPaint();
@@ -752,7 +951,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
                 }
                 if (z) {
                     final KeyguardIndicationTextView keyguardIndicationTextView2 = this.mTopIndicationView;
-                    final String charSequence2 = charSequence.toString();
+                    final String string = charSequence.toString();
                     int integer = this.mContext.getResources().getInteger(com.android.systemui.R.integer.wired_charging_keyguard_text_animation_distance);
                     int integer2 = this.mContext.getResources().getInteger(com.android.systemui.R.integer.wired_charging_keyguard_text_animation_duration_up);
                     final int integer3 = this.mContext.getResources().getInteger(com.android.systemui.R.integer.wired_charging_keyguard_text_animation_duration_down);
@@ -785,7 +984,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
 
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationStart(Animator animator) {
-                            keyguardIndicationTextView2.switchIndication(charSequence2, null);
+                            keyguardIndicationTextView2.switchIndication(string, null);
                         }
                     });
                     return;
@@ -804,10 +1003,10 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
                         modifier2.accept(this.mTopIndicationView);
                     }
                 }
-                if (z3 == (this.mTopIndicationView.getEllipsize() == truncateAt || new StaticLayout(this.mTopIndicationView.getText(), paint, width, alignment, 1.0f, 0.0f, false).getLineCount() == 1) || (notificationPanelViewController$$ExternalSyntheticLambda36 = this.mUpdatePosition) == null) {
+                if (z3 == (this.mTopIndicationView.getEllipsize() == truncateAt || new StaticLayout(this.mTopIndicationView.getText(), paint, width, alignment, 1.0f, 0.0f, false).getLineCount() == 1) || (notificationPanelViewController$$ExternalSyntheticLambda43 = this.mUpdatePosition) == null) {
                     return;
                 }
-                notificationPanelViewController$$ExternalSyntheticLambda36.accept(Boolean.TRUE);
+                notificationPanelViewController$$ExternalSyntheticLambda43.accept(Boolean.TRUE);
             }
         }
     }
@@ -847,17 +1046,17 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         if (LsRune.SECURITY_CONTINUITY_LOCKSCREEN_VI && this.mForceIsDismissible) {
             return "";
         }
-        boolean hasTrust = hasTrust();
+        boolean zHasTrust = hasTrust();
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
-        boolean isUnlockingWithBiometricAllowed = keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(true);
-        boolean z3 = isUnlockingWithBiometricAllowed && keyguardUpdateMonitor.isFingerprintOptionEnabled() && !isAuthenticatedWithBiometric() && !hasTrust;
-        boolean z4 = isUnlockingWithBiometricAllowed && keyguardUpdateMonitor.isFaceOptionEnabled() && !keyguardUpdateMonitor.isCameraDisabledByPolicy() && !keyguardUpdateMonitor.isFaceDisabled(selectedUserId) && keyguardUpdateMonitor.isFaceDetectionRunning();
-        boolean isTouchExplorationEnabled = this.mAccessibilityManager.isTouchExplorationEnabled();
+        boolean zIsUnlockingWithBiometricAllowed = keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(true);
+        boolean z3 = zIsUnlockingWithBiometricAllowed && keyguardUpdateMonitor.isFingerprintOptionEnabled() && !isAuthenticatedWithBiometric() && !zHasTrust;
+        boolean z4 = zIsUnlockingWithBiometricAllowed && keyguardUpdateMonitor.isFaceOptionEnabled() && !keyguardUpdateMonitor.isCameraDisabledByPolicy() && !keyguardUpdateMonitor.isFaceDisabled(selectedUserId) && keyguardUpdateMonitor.isFaceDetectionRunning();
+        boolean zIsTouchExplorationEnabled = this.mAccessibilityManager.isTouchExplorationEnabled();
         this.mIsFpGuidePos = false;
         if (z3 || z4) {
             if (!(z3 && z4) && z3) {
-                i = isTouchExplorationEnabled ? com.android.systemui.R.string.kg_fingerprint_or_swipe_unlock_voice_assistant_instructions : 0;
-                this.mIsFpGuidePos = isTouchExplorationEnabled;
+                i = zIsTouchExplorationEnabled ? com.android.systemui.R.string.kg_fingerprint_or_swipe_unlock_voice_assistant_instructions : 0;
+                this.mIsFpGuidePos = zIsTouchExplorationEnabled;
             } else {
                 i = 0;
             }
@@ -867,9 +1066,9 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         } else {
             i = hasTrust() ? com.android.systemui.R.string.kg_extend_lock_content_description : (!keyguardUpdateMonitor.isSecure() || keyguardUpdateMonitor.isBiometricsAuthenticatedOnLock()) ? com.android.systemui.R.string.kg_swipe_active_instructions : com.android.systemui.R.string.kg_swipe_unlock_instructions;
         }
-        if (isTouchExplorationEnabled) {
+        if (zIsTouchExplorationEnabled) {
             if (keyguardUpdateMonitor.isUnlockCompleted() || !(z3 || z4)) {
-                if (!hasTrust && !z3 && !z4) {
+                if (!zHasTrust && !z3 && !z4) {
                     i2 = com.android.systemui.R.string.kg_voice_assistant_unlock_instructions;
                 }
                 i = (isAuthenticatedWithBiometric() || !keyguardUpdateMonitor.isSecure()) ? com.android.systemui.R.string.kg_voice_assistant_active_instructions : i2;
@@ -899,12 +1098,12 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         ObjectHelper.requireNonNull(timeUnit, "unit is null");
         ObjectHelper.requireNonNull(scheduler, "scheduler is null");
         ObservableDelay observableDelay = new ObservableDelay(observableJust, j, timeUnit, scheduler, false);
-        Scheduler mainThread = AndroidSchedulers.mainThread();
+        Scheduler schedulerMainThread = AndroidSchedulers.mainThread();
         int i = Flowable.BUFFER_SIZE;
         if (i <= 0) {
             throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "bufferSize > 0 required but it was "));
         }
-        ObservableObserveOn observableObserveOn = new ObservableObserveOn(observableDelay, mainThread, false, i);
+        ObservableObserveOn observableObserveOn = new ObservableObserveOn(observableDelay, schedulerMainThread, false, i);
         KeyguardSecIndicationController$$ExternalSyntheticLambda0 keyguardSecIndicationController$$ExternalSyntheticLambda0 = new KeyguardSecIndicationController$$ExternalSyntheticLambda0(this);
         Functions.OnErrorMissingConsumer onErrorMissingConsumer = Functions.ON_ERROR_MISSING;
         Functions.EmptyAction emptyAction = Functions.EMPTY_ACTION;
@@ -926,11 +1125,11 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             return;
         }
         if (!TextUtils.isEmpty(indicationItem.mText) && (!this.mVisible || this.mDozing)) {
-            String format = String.format("onIndicationChanged() return - keyguard is not visible, pos = %7s, item = %s", indicationPosition, indicationItem);
-            if (format.contains("OWNER_INFO")) {
-                format = "onIndicationChanged() return - keyguard is not visible, skip ownerInfo";
+            String str = String.format("onIndicationChanged() return - keyguard is not visible, pos = %7s, item = %s", indicationPosition, indicationItem);
+            if (str.contains("OWNER_INFO")) {
+                str = "onIndicationChanged() return - keyguard is not visible, skip ownerInfo";
             }
-            Log.d("KeyguardSecIndicationController", format);
+            Log.d("KeyguardSecIndicationController", str);
             return;
         }
         if (this.mKeyguardUpdateMonitor.isKeyguardUnlocking()) {
@@ -962,7 +1161,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
-    public final void onViewModeChanged(int i) {
+    public final void onViewModeChanged(int i) throws Resources.NotFoundException {
         ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onViewModeChanged mode: ", "KeyguardSecIndicationController");
         boolean z = i == 0;
         if (this.mIsDefaultLockViewMode != z) {
@@ -986,9 +1185,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
         IndicationPosition indicationPosition = IndicationPosition.DEFAULT;
         KeyguardSecIndicationPolicy keyguardSecIndicationPolicy = this.mIndicationPolicy;
         if (keyguardSecIndicationPolicy != null) {
-            keyguardSecIndicationPolicy.addLogs(String.format("%12s pos = %7s, type = %20s", "remove Item", indicationPosition, indicationEventType));
-            keyguardSecIndicationPolicy.getIndicationList(indicationPosition).removeIf(new KeyguardSecIndicationPolicy$$ExternalSyntheticLambda0(indicationEventType, 2));
-            keyguardSecIndicationPolicy.updateTopItem(indicationPosition);
+            keyguardSecIndicationPolicy.removeIndicationEvent(indicationPosition, indicationEventType);
         }
     }
 
@@ -1011,7 +1208,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             this.mLifeStyleContainer.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationController$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
+                    KeyguardSecIndicationController keyguardSecIndicationController = this.f$0;
                     KeyguardUpdateMonitor keyguardUpdateMonitor = keyguardSecIndicationController.mKeyguardUpdateMonitor;
                     boolean z = keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(keyguardSecIndicationController.mSelectedUserInteractor.getSelectedUserId());
                     Intent action = new Intent().setAction("com.samsung.android.app.routines.action.LAUNCH_MODE_LIST_DIALOG");
@@ -1032,7 +1229,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     @Override // com.android.systemui.statusbar.KeyguardIndicationController
-    public final void setNowBarExpandMode(boolean z) {
+    public final void setNowBarExpandMode(boolean z) throws Resources.NotFoundException {
         if (z) {
             if (this.mIndicationArea.getVisibility() == 0) {
                 setVisible(false);
@@ -1048,7 +1245,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     @Override // com.android.systemui.statusbar.KeyguardIndicationController
-    public final void setVisible(boolean z) {
+    public final void setVisible(boolean z) throws Resources.NotFoundException {
         boolean z2 = z & this.mLockHelpTextVisible & (!this.mKeyguardUpdateMonitor.isNowBarExpandMode());
         PluginLockData pluginLockData = this.mPluginLockData;
         if (pluginLockData != null && pluginLockData.isAvailable() && this.mIsDefaultLockViewMode) {
@@ -1091,7 +1288,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
-    public final void updateDynamicLockData(String str) {
+    public final void updateDynamicLockData(String str) throws Resources.NotFoundException {
         setVisible(true);
     }
 
@@ -1106,7 +1303,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     @Override // com.android.systemui.widget.SystemUIWidgetCallback
-    public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) {
+    public final void updateStyle(long j, SemWallpaperColors semWallpaperColors) throws Resources.NotFoundException {
         if (this.mLifeStyleContainer != null) {
             this.mLifeStyleContainer.setBackgroundResource(WallpaperUtils.isWhiteKeyguardWallpaper("bottom") ? com.android.systemui.R.drawable.rounded_bg_routine_mode_radius_whitebg : com.android.systemui.R.drawable.rounded_bg_routine_mode_radius);
             KeyguardIndicationTextView keyguardIndicationTextView = this.mLifeStyleIndicationView;

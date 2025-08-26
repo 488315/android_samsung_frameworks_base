@@ -2,7 +2,6 @@ package com.samsung.android.knox.lockscreen;
 
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LSOItemText extends LSOItemData {
     public static final float DEFAULT_TEXT_SIZE = LSOTextSize.NORMAL.nativeVal;
@@ -15,7 +14,6 @@ public class LSOItemText extends LSOItemData {
     public float text_size;
     public int text_style;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum LSOTextSize {
         TINY(0.85f),
         SMALL(0.93f),

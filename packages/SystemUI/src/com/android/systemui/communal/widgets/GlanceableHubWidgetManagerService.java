@@ -30,7 +30,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubWidgetManagerService extends LifecycleService {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +39,6 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
     public final WidgetListenerRegistry widgetListenersRegistry;
     public final CommunalWidgetRepository widgetRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,7 +48,6 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WidgetListenerRegistry extends RemoteCallbackList {
         public final Map jobs = new LinkedHashMap();
 
@@ -97,44 +94,43 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WidgetManagerServiceBinder extends IGlanceableHubWidgetManagerService.Stub {
         public WidgetManagerServiceBinder() {
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void addWidget(ComponentName componentName, UserHandle userHandle, int i, IGlanceableHubWidgetManagerService.IConfigureWidgetCallback iConfigureWidgetCallback) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService.access$addWidgetInternal(GlanceableHubWidgetManagerService.this, componentName, userHandle, i, iConfigureWidgetCallback);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void addWidgetsListener(IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService.access$addWidgetsListenerInternal(GlanceableHubWidgetManagerService.this, iGlanceableHubWidgetsListener);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void deleteWidget(int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService.this.widgetRepository.deleteWidget(i);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void removeWidgetsListener(IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener iGlanceableHubWidgetsListener) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService glanceableHubWidgetManagerService = GlanceableHubWidgetManagerService.this;
                 if (iGlanceableHubWidgetsListener != null) {
@@ -145,27 +141,27 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
                     throw new IllegalStateException("Listener cannot be null");
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void resizeWidget(int i, int i2, int[] iArr, int[] iArr2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService.access$resizeWidgetInternal(GlanceableHubWidgetManagerService.this, i, i2, iArr, iArr2);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.systemui.communal.widgets.IGlanceableHubWidgetManagerService
         public final void updateWidgetOrder(int[] iArr, int[] iArr2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 GlanceableHubWidgetManagerService.access$updateWidgetOrderInternal(GlanceableHubWidgetManagerService.this, iArr, iArr2);
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -202,14 +198,14 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
         if (!iGlanceableHubWidgetsListener.asBinder().isBinderAlive()) {
             throw new IllegalStateException("Listener binder is dead");
         }
-        StandaloneCoroutine launchIn = FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(glanceableHubWidgetManagerService.widgetRepository.getCommunalWidgets(), new GlanceableHubWidgetManagerService$addWidgetsListenerInternal$job$1(iGlanceableHubWidgetsListener, glanceableHubWidgetManagerService, null)), LifecycleKt.getCoroutineScope(glanceableHubWidgetManagerService.dispatcher.registry));
+        StandaloneCoroutine standaloneCoroutineLaunchIn = FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(glanceableHubWidgetManagerService.widgetRepository.getCommunalWidgets(), new GlanceableHubWidgetManagerService$addWidgetsListenerInternal$job$1(iGlanceableHubWidgetsListener, glanceableHubWidgetManagerService, null)), LifecycleKt.getCoroutineScope(glanceableHubWidgetManagerService.dispatcher.registry));
         WidgetListenerRegistry widgetListenerRegistry = glanceableHubWidgetManagerService.widgetListenersRegistry;
         if (!widgetListenerRegistry.register(iGlanceableHubWidgetsListener)) {
-            launchIn.cancel(null);
+            standaloneCoroutineLaunchIn.cancel(null);
             return;
         }
         synchronized (widgetListenerRegistry.jobs) {
-            widgetListenerRegistry.jobs.put(iGlanceableHubWidgetsListener, launchIn);
+            widgetListenerRegistry.jobs.put(iGlanceableHubWidgetsListener, standaloneCoroutineLaunchIn);
             Unit unit = Unit.INSTANCE;
         }
     }
@@ -221,9 +217,9 @@ public final class GlanceableHubWidgetManagerService extends LifecycleService {
         } catch (IntentSender.SendIntentException e) {
             Logger logger = glanceableHubWidgetManagerService.logger;
             GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(0);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(e.getLocalizedMessage());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(e.getLocalizedMessage());
+            logger.getBuffer().commit(logMessageObtain);
             return null;
         }
     }

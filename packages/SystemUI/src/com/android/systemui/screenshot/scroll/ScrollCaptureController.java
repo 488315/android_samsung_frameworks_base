@@ -15,7 +15,6 @@ import com.android.systemui.screenshot.scroll.ScrollCaptureClient;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScrollCaptureController {
     public final Executor mBgExecutor;
@@ -33,7 +32,6 @@ public class ScrollCaptureController {
     public CallbackToFutureAdapter.SafeFuture mTileFuture;
     public String mWindowOwner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LongScreenshot {
         public final ImageTileSet mImageTileSet;
         public final ScrollCaptureClient.Session mSession;
@@ -52,10 +50,10 @@ public class ScrollCaptureController {
             }
             RenderNode renderNode = new RenderNode("Bitmap Export");
             renderNode.setPosition(0, 0, rect.width(), rect.height());
-            RecordingCanvas beginRecording = renderNode.beginRecording();
+            RecordingCanvas recordingCanvasBeginRecording = renderNode.beginRecording();
             TiledImageDrawable tiledImageDrawable = new TiledImageDrawable(imageTileSet);
             tiledImageDrawable.setBounds(rect);
-            tiledImageDrawable.draw(beginRecording);
+            tiledImageDrawable.draw(recordingCanvasBeginRecording);
             renderNode.endRecording();
             return HardwareRenderer.createHardwareBitmap(renderNode, rect.width(), rect.height());
         }
@@ -149,25 +147,21 @@ public class ScrollCaptureController {
             return;
         }
         if (z) {
-            if (!this.mScrollingUp) {
-                i = captureResult.requested.bottom;
-                requestNextTile(i);
-            } else {
+            if (this.mScrollingUp) {
                 top = captureResult.requested.top;
                 i2 = sessionWrapper.mTileHeight;
                 i = top - i2;
-                requestNextTile(i);
+            } else {
+                i = captureResult.requested.bottom;
             }
-        }
-        if (!this.mScrollingUp) {
-            i = imageTileSet.mRegion.getBounds().bottom;
-            requestNextTile(i);
-        } else {
+        } else if (this.mScrollingUp) {
             top = imageTileSet.getTop();
             i2 = ((ScrollCaptureClient.SessionWrapper) this.mSession).mTileHeight;
             i = top - i2;
-            requestNextTile(i);
+        } else {
+            i = imageTileSet.mRegion.getBounds().bottom;
         }
+        requestNextTile(i);
     }
 
     public final void requestNextTile(int i) {

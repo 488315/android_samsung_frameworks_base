@@ -6,7 +6,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDataFormat {
     public final MediaData data;
@@ -37,9 +36,9 @@ public final class MediaDataFormat {
     }
 
     public final int hashCode() {
-        int hashCode = this.key.hashCode() * 31;
+        int iHashCode = this.key.hashCode() * 31;
         String str = this.oldKey;
-        return Boolean.hashCode(this.isSsReactivated) + ReorderTile$$ExternalSyntheticOutline0.m(this.receivedSmartspaceCardLatency, TransitionData$$ExternalSyntheticOutline0.m((this.data.hashCode() + ((hashCode + (str == null ? 0 : str.hashCode())) * 31)) * 31, 31, this.isImmediately), 31);
+        return Boolean.hashCode(this.isSsReactivated) + ReorderTile$$ExternalSyntheticOutline0.m(this.receivedSmartspaceCardLatency, TransitionData$$ExternalSyntheticOutline0.m((this.data.hashCode() + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31)) * 31, 31, this.isImmediately), 31);
     }
 
     public final String toString() {

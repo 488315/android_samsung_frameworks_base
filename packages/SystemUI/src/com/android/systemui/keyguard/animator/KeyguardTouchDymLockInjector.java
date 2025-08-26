@@ -1,10 +1,10 @@
 package com.android.systemui.keyguard.animator;
 
+import android.view.MotionEvent;
 import com.android.systemui.pluginlock.PluginLockMediator;
 import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardTouchDymLockInjector {
     public final PluginLockMediator mPluginLockMediator;
@@ -15,7 +15,6 @@ public class KeyguardTouchDymLockInjector {
     public boolean mIsDynamicLockEnabled = false;
     public boolean mLockStarEnabled = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Direction {
         LEFT,
         RIGHT,
@@ -64,109 +63,50 @@ public class KeyguardTouchDymLockInjector {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x004c, code lost:
-    
-        if (r3.equals(r4) != false) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x005f, code lost:
-    
-        if (r3.equals(r4) != false) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0072, code lost:
-    
-        if (r3.equals(r4) != false) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0085, code lost:
-    
-        if (r0.equals(r4) != false) goto L36;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x004f  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0075  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0088  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateDirection(int r14, float r15, float r16, android.view.MotionEvent r17) {
-        /*
-            r13 = this;
-            r0 = r15
-            r1 = r16
-            int r2 = r13.mNonSwipeMode
-            if (r2 != 0) goto L8
-            return
-        L8:
-            float r3 = r17.getRawX()
-            float r4 = r17.getRawY()
-            float r5 = r3 - r0
-            int r5 = (int) r5
-            float r6 = r4 - r1
-            int r6 = (int) r6
-            double r7 = (double) r5
-            r9 = 4611686018427387904(0x4000000000000000, double:2.0)
-            double r7 = java.lang.Math.pow(r7, r9)
-            double r11 = (double) r6
-            double r9 = java.lang.Math.pow(r11, r9)
-            double r9 = r9 + r7
-            double r7 = java.lang.Math.sqrt(r9)
-            double r9 = (double) r0
-            double r0 = (double) r1
-            double r11 = (double) r3
-            double r3 = (double) r4
-            double r11 = r11 - r9
-            double r3 = r3 - r0
-            double r0 = java.lang.Math.atan2(r3, r11)
-            r3 = 4633260481411531256(0x404ca5dc1a63c1f8, double:57.29577951308232)
-            double r0 = r0 * r3
-            double r3 = (double) r14
-            int r3 = (r7 > r3 ? 1 : (r7 == r3 ? 0 : -1))
-            if (r3 <= 0) goto L8b
-            r3 = r2 & 1
-            if (r3 == 0) goto L4f
-            if (r5 >= 0) goto L4f
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r3 = r13.getDirection(r0)
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.LEFT
-            boolean r3 = r3.equals(r4)
-            if (r3 == 0) goto L4f
-            goto L94
-        L4f:
-            r3 = r2 & 2
-            if (r3 == 0) goto L62
-            if (r5 <= 0) goto L62
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r3 = r13.getDirection(r0)
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.RIGHT
-            boolean r3 = r3.equals(r4)
-            if (r3 == 0) goto L62
-            goto L94
-        L62:
-            r3 = r2 & 4
-            if (r3 == 0) goto L75
-            if (r6 >= 0) goto L75
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r3 = r13.getDirection(r0)
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.UP
-            boolean r3 = r3.equals(r4)
-            if (r3 == 0) goto L75
-            goto L94
-        L75:
-            r2 = r2 & 8
-            if (r2 == 0) goto L88
-            if (r6 <= 0) goto L88
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r0 = r13.getDirection(r0)
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.DOWN
-            boolean r0 = r0.equals(r4)
-            if (r0 == 0) goto L88
-            goto L94
-        L88:
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.SWIPE
-            goto L94
-        L8b:
-            r0 = r2 & 16
-            if (r0 == 0) goto L92
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.TAP
-            goto L94
-        L92:
-            com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector$Direction r4 = com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.Direction.SWIPE
-        L94:
-            r13.mDirection = r4
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.animator.KeyguardTouchDymLockInjector.updateDirection(int, float, float, android.view.MotionEvent):void");
+    public final void updateDirection(int i, float f, float f2, MotionEvent motionEvent) {
+        Direction direction;
+        int i2 = this.mNonSwipeMode;
+        if (i2 == 0) {
+            return;
+        }
+        float rawX = motionEvent.getRawX();
+        float rawY = motionEvent.getRawY();
+        int i3 = (int) (rawX - f);
+        int i4 = (int) (rawY - f2);
+        double dSqrt = Math.sqrt(Math.pow(i4, 2.0d) + Math.pow(i3, 2.0d));
+        double dAtan2 = Math.atan2(rawY - f2, rawX - f) * 57.29577951308232d;
+        if (dSqrt <= i) {
+            direction = (i2 & 16) != 0 ? Direction.TAP : Direction.SWIPE;
+        } else if ((i2 & 1) != 0 && i3 < 0) {
+            Direction direction2 = getDirection(dAtan2);
+            direction = Direction.LEFT;
+            if (!direction2.equals(direction)) {
+            }
+        } else if ((i2 & 2) != 0 && i3 > 0) {
+            Direction direction3 = getDirection(dAtan2);
+            direction = Direction.RIGHT;
+            if (!direction3.equals(direction)) {
+            }
+        } else if ((i2 & 4) != 0 && i4 < 0) {
+            Direction direction4 = getDirection(dAtan2);
+            direction = Direction.UP;
+            if (!direction4.equals(direction)) {
+            }
+        } else if ((i2 & 8) == 0 || i4 <= 0) {
+            direction = Direction.SWIPE;
+        } else {
+            Direction direction5 = getDirection(dAtan2);
+            direction = Direction.DOWN;
+            if (!direction5.equals(direction)) {
+            }
+        }
+        this.mDirection = direction;
     }
 }

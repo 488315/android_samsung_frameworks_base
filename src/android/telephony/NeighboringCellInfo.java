@@ -174,15 +174,15 @@ public class NeighboringCellInfo implements Parcelable {
     public String toString() {
         StringBuilder sb = new StringBuilder(NavigationBarInflaterView.SIZE_MOD_START);
         int i = this.mPsc;
-        Object obj = NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
+        Object objValueOf = NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
         if (i != -1) {
             sb.append(Integer.toHexString(i));
             sb.append("@");
             int i2 = this.mRssi;
             if (i2 != 99) {
-                obj = Integer.valueOf(i2);
+                objValueOf = Integer.valueOf(i2);
             }
-            sb.append(obj);
+            sb.append(objValueOf);
         } else {
             int i3 = this.mLac;
             if (i3 != -1 && this.mCid != -1) {
@@ -191,9 +191,9 @@ public class NeighboringCellInfo implements Parcelable {
                 sb.append("@");
                 int i4 = this.mRssi;
                 if (i4 != 99) {
-                    obj = Integer.valueOf(i4);
+                    objValueOf = Integer.valueOf(i4);
                 }
-                sb.append(obj);
+                sb.append(objValueOf);
             }
         }
         sb.append(NavigationBarInflaterView.SIZE_MOD_END);

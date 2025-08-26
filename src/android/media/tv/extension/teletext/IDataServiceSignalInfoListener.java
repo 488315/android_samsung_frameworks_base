@@ -45,9 +45,9 @@ public interface IDataServiceSignalInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.IDataServiceSignalInfoListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDataServiceSignalInfoListener)) {
-                return (IDataServiceSignalInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.IDataServiceSignalInfoListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDataServiceSignalInfoListener)) {
+                return (IDataServiceSignalInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IDataServiceSignalInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onDataServiceSignalInfoChanged(readString, bundle);
+                onDataServiceSignalInfoChanged(string, bundle);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IDataServiceSignalInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.teletext.IDataServiceSignalInfoListener
             public void onDataServiceSignalInfoChanged(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfoListener");
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfoListener");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

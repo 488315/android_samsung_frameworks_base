@@ -10,7 +10,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.DrawableWrapper;
 import androidx.core.graphics.PathParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AdaptiveOutlineDrawable extends DrawableWrapper {
     public Bitmap mBitmap;
@@ -29,14 +28,14 @@ public class AdaptiveOutlineDrawable extends DrawableWrapper {
     public final void draw(Canvas canvas) {
         super.draw(canvas);
         Rect bounds = getBounds();
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.scale((bounds.right - bounds.left) / 100.0f, (bounds.bottom - bounds.top) / 100.0f);
         if (this.mType == 0) {
             canvas.drawPath(this.mPath, this.mOutlinePaint);
         } else {
             canvas.drawCircle(50.0f, 50.0f, 48.0f, this.mOutlinePaint);
         }
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
         Bitmap bitmap = this.mBitmap;
         int i = bounds.left;
         int i2 = this.mInsetPx;
@@ -56,7 +55,7 @@ public class AdaptiveOutlineDrawable extends DrawableWrapper {
     public final void init(Resources resources, Bitmap bitmap, int i) {
         this.mType = i;
         getDrawable().setTint(-1);
-        this.mPath = new Path(PathParser.createPathFromPathData(resources.getString(R.string.eventTypeAnniversary)));
+        this.mPath = new Path(PathParser.createPathFromPathData(resources.getString(R.string.eventTypeCustom)));
         this.mStrokeWidth = resources.getDimensionPixelSize(com.android.systemui.R.dimen.adaptive_outline_stroke);
         Paint paint = new Paint();
         this.mOutlinePaint = paint;

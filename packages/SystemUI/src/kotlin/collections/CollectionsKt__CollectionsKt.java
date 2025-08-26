@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CollectionsKt__CollectionsKt extends CollectionsKt__CollectionsJVMKt {
     public static ArrayList arrayListOf(Object... objArr) {
@@ -23,11 +22,11 @@ public class CollectionsKt__CollectionsKt extends CollectionsKt__CollectionsJVMK
         int i2 = 0;
         while (i2 <= i) {
             int i3 = (i2 + i) >>> 1;
-            int compareValues = ComparisonsKt__ComparisonsKt.compareValues((Comparable) arrayList.get(i3), comparable);
-            if (compareValues < 0) {
+            int iCompareValues = ComparisonsKt__ComparisonsKt.compareValues((Comparable) arrayList.get(i3), comparable);
+            if (iCompareValues < 0) {
                 i2 = i3 + 1;
             } else {
-                if (compareValues <= 0) {
+                if (iCompareValues <= 0) {
                     return i3;
                 }
                 i = i3 - 1;

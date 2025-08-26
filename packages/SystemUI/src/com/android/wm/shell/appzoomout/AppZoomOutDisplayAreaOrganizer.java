@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AppZoomOutDisplayAreaOrganizer extends DisplayAreaOrganizer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +39,7 @@ public class AppZoomOutDisplayAreaOrganizer extends DisplayAreaOrganizer {
         ((ArrayMap) this.mDisplayAreaTokenMap).forEach(new BiConsumer() { // from class: com.android.wm.shell.appzoomout.AppZoomOutDisplayAreaOrganizer$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                AppZoomOutDisplayAreaOrganizer appZoomOutDisplayAreaOrganizer = AppZoomOutDisplayAreaOrganizer.this;
+                AppZoomOutDisplayAreaOrganizer appZoomOutDisplayAreaOrganizer = this.f$0;
                 SurfaceControl.Transaction transaction2 = transaction;
                 float f2 = f;
                 SurfaceControl surfaceControl = (SurfaceControl) obj2;

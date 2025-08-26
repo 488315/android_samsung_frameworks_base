@@ -24,29 +24,29 @@ public final class Strings {
                     }
                 });
             } catch (Exception unused) {
-                LINE_SEPARATOR = ShaderAssembler.NEWLINE;
+                LINE_SEPARATOR = String.format("%n", new Object[0]);
             }
         } catch (Exception unused2) {
-            LINE_SEPARATOR = String.format("%n", new Object[0]);
+            LINE_SEPARATOR = ShaderAssembler.NEWLINE;
         }
     }
 
     public static String fromUTF8ByteArray(byte[] bArr) {
         char[] cArr = new char[bArr.length];
-        int transcodeToUTF16 = UTF8.transcodeToUTF16(bArr, cArr);
-        if (transcodeToUTF16 < 0) {
+        int iTranscodeToUTF16 = UTF8.transcodeToUTF16(bArr, cArr);
+        if (iTranscodeToUTF16 < 0) {
             throw new IllegalArgumentException("Invalid UTF-8 input");
         }
-        return new String(cArr, 0, transcodeToUTF16);
+        return new String(cArr, 0, iTranscodeToUTF16);
     }
 
     public static String fromUTF8ByteArray(byte[] bArr, int i, int i2) {
         char[] cArr = new char[i2];
-        int transcodeToUTF16 = UTF8.transcodeToUTF16(bArr, i, i2, cArr);
-        if (transcodeToUTF16 < 0) {
+        int iTranscodeToUTF16 = UTF8.transcodeToUTF16(bArr, i, i2, cArr);
+        if (iTranscodeToUTF16 < 0) {
             throw new IllegalArgumentException("Invalid UTF-8 input");
         }
-        return new String(cArr, 0, transcodeToUTF16);
+        return new String(cArr, 0, iTranscodeToUTF16);
     }
 
     public static byte[] toUTF8ByteArray(String str) {
@@ -183,10 +183,10 @@ public final class Strings {
             if (!z) {
                 break;
             }
-            int indexOf = str.indexOf(c);
-            if (indexOf > 0) {
-                vector.addElement(str.substring(0, indexOf));
-                str = str.substring(indexOf + 1);
+            int iIndexOf = str.indexOf(c);
+            if (iIndexOf > 0) {
+                vector.addElement(str.substring(0, iIndexOf));
+                str = str.substring(iIndexOf + 1);
             } else {
                 vector.addElement(str);
                 z = false;

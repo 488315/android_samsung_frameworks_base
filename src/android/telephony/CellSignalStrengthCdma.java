@@ -108,239 +108,86 @@ public final class CellSignalStrengthCdma extends CellSignalStrength implements 
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x004f, code lost:
-    
-        if (r11 >= (-150)) goto L32;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0053 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0054 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0037  */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x001a  */
     @Override // android.telephony.CellSignalStrength
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getAsuLevel() {
-        /*
-            r11 = this;
-            int r0 = r11.getCdmaDbm()
-            int r11 = r11.getCdmaEcio()
-            r1 = 1
-            r2 = 2
-            r3 = -100
-            r4 = 4
-            r5 = 8
-            r6 = -90
-            r7 = 16
-            r8 = 99
-            r9 = 2147483647(0x7fffffff, float:NaN)
-            if (r0 != r9) goto L1c
-        L1a:
-            r0 = r8
-            goto L35
-        L1c:
-            r10 = -75
-            if (r0 < r10) goto L22
-            r0 = r7
-            goto L35
-        L22:
-            r10 = -82
-            if (r0 < r10) goto L28
-            r0 = r5
-            goto L35
-        L28:
-            if (r0 < r6) goto L2c
-            r0 = r4
-            goto L35
-        L2c:
-            r10 = -95
-            if (r0 < r10) goto L32
-            r0 = r2
-            goto L35
-        L32:
-            if (r0 < r3) goto L1a
-            r0 = r1
-        L35:
-            if (r11 != r9) goto L39
-        L37:
-            r1 = r8
-            goto L51
-        L39:
-            if (r11 < r6) goto L3d
-            r1 = r7
-            goto L51
-        L3d:
-            if (r11 < r3) goto L41
-            r1 = r5
-            goto L51
-        L41:
-            r3 = -115(0xffffffffffffff8d, float:NaN)
-            if (r11 < r3) goto L47
-            r1 = r4
-            goto L51
-        L47:
-            r3 = -130(0xffffffffffffff7e, float:NaN)
-            if (r11 < r3) goto L4d
-            r1 = r2
-            goto L51
-        L4d:
-            r2 = -150(0xffffffffffffff6a, float:NaN)
-            if (r11 < r2) goto L37
-        L51:
-            if (r0 >= r1) goto L54
-            return r0
-        L54:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.CellSignalStrengthCdma.getAsuLevel():int");
+        int i;
+        int cdmaDbm = getCdmaDbm();
+        int cdmaEcio = getCdmaEcio();
+        int i2 = 1;
+        if (cdmaDbm != Integer.MAX_VALUE) {
+            i = cdmaDbm >= -75 ? 16 : cdmaDbm >= -82 ? 8 : cdmaDbm >= -90 ? 4 : cdmaDbm >= -95 ? 2 : cdmaDbm >= -100 ? 1 : 99;
+        }
+        if (cdmaEcio != Integer.MAX_VALUE) {
+            if (cdmaEcio >= -90) {
+                i2 = 16;
+            } else if (cdmaEcio >= -100) {
+                i2 = 8;
+            } else if (cdmaEcio >= -115) {
+                i2 = 4;
+            } else if (cdmaEcio >= -130) {
+                i2 = 2;
+            } else if (cdmaEcio < -150) {
+                i2 = 99;
+            }
+        }
+        return i < i2 ? i : i2;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0043, code lost:
-    
-        if (r8 >= (-150)) goto L30;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0047 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0048 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x002d  */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getCdmaLevel() {
-        /*
-            r8 = this;
-            int r0 = r8.getCdmaDbm()
-            int r8 = r8.getCdmaEcio()
-            r1 = 1
-            r2 = 2
-            r3 = 3
-            r4 = 4
-            r5 = 0
-            r6 = 2147483647(0x7fffffff, float:NaN)
-            if (r0 != r6) goto L14
-        L12:
-            r0 = r5
-            goto L2b
-        L14:
-            r7 = -75
-            if (r0 < r7) goto L1a
-            r0 = r4
-            goto L2b
-        L1a:
-            r7 = -85
-            if (r0 < r7) goto L20
-            r0 = r3
-            goto L2b
-        L20:
-            r7 = -95
-            if (r0 < r7) goto L26
-            r0 = r2
-            goto L2b
-        L26:
-            r7 = -100
-            if (r0 < r7) goto L12
-            r0 = r1
-        L2b:
-            if (r8 != r6) goto L2f
-        L2d:
-            r1 = r5
-            goto L45
-        L2f:
-            r6 = -90
-            if (r8 < r6) goto L35
-            r1 = r4
-            goto L45
-        L35:
-            r4 = -110(0xffffffffffffff92, float:NaN)
-            if (r8 < r4) goto L3b
-            r1 = r3
-            goto L45
-        L3b:
-            r3 = -130(0xffffffffffffff7e, float:NaN)
-            if (r8 < r3) goto L41
-            r1 = r2
-            goto L45
-        L41:
-            r2 = -150(0xffffffffffffff6a, float:NaN)
-            if (r8 < r2) goto L2d
-        L45:
-            if (r0 >= r1) goto L48
-            return r0
-        L48:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.CellSignalStrengthCdma.getCdmaLevel():int");
+        int i;
+        int cdmaDbm = getCdmaDbm();
+        int cdmaEcio = getCdmaEcio();
+        int i2 = 1;
+        if (cdmaDbm != Integer.MAX_VALUE) {
+            i = cdmaDbm >= -75 ? 4 : cdmaDbm >= -85 ? 3 : cdmaDbm >= -95 ? 2 : cdmaDbm >= -100 ? 1 : 0;
+        }
+        if (cdmaEcio != Integer.MAX_VALUE) {
+            if (cdmaEcio >= -90) {
+                i2 = 4;
+            } else if (cdmaEcio >= -110) {
+                i2 = 3;
+            } else if (cdmaEcio >= -130) {
+                i2 = 2;
+            } else if (cdmaEcio < -150) {
+                i2 = 0;
+            }
+        }
+        return i < i2 ? i : i2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0041 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0042 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x002d  */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getEvdoLevel() {
-        /*
-            r8 = this;
-            int r0 = r8.getEvdoDbm()
-            int r8 = r8.getEvdoSnr()
-            r1 = 2
-            r2 = 4
-            r3 = 1
-            r4 = 3
-            r5 = 0
-            r6 = 2147483647(0x7fffffff, float:NaN)
-            if (r0 != r6) goto L14
-        L12:
-            r0 = r5
-            goto L2b
-        L14:
-            r7 = -65
-            if (r0 < r7) goto L1a
-            r0 = r2
-            goto L2b
-        L1a:
-            r7 = -75
-            if (r0 < r7) goto L20
-            r0 = r4
-            goto L2b
-        L20:
-            r7 = -90
-            if (r0 < r7) goto L26
-            r0 = r1
-            goto L2b
-        L26:
-            r7 = -105(0xffffffffffffff97, float:NaN)
-            if (r0 < r7) goto L12
-            r0 = r3
-        L2b:
-            if (r8 != r6) goto L2f
-        L2d:
-            r1 = r5
-            goto L3f
-        L2f:
-            r6 = 7
-            if (r8 < r6) goto L34
-            r1 = r2
-            goto L3f
-        L34:
-            r2 = 5
-            if (r8 < r2) goto L39
-            r1 = r4
-            goto L3f
-        L39:
-            if (r8 < r4) goto L3c
-            goto L3f
-        L3c:
-            if (r8 < r3) goto L2d
-            r1 = r3
-        L3f:
-            if (r0 >= r1) goto L42
-            return r0
-        L42:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.CellSignalStrengthCdma.getEvdoLevel():int");
+        int i;
+        int evdoDbm = getEvdoDbm();
+        int evdoSnr = getEvdoSnr();
+        int i2 = 2;
+        if (evdoDbm != Integer.MAX_VALUE) {
+            i = evdoDbm >= -65 ? 4 : evdoDbm >= -75 ? 3 : evdoDbm >= -90 ? 2 : evdoDbm >= -105 ? 1 : 0;
+        }
+        if (evdoSnr != Integer.MAX_VALUE) {
+            if (evdoSnr >= 7) {
+                i2 = 4;
+            } else if (evdoSnr >= 5) {
+                i2 = 3;
+            } else if (evdoSnr < 3) {
+                i2 = evdoSnr >= 1 ? 1 : 0;
+            }
+        }
+        return i < i2 ? i : i2;
     }
 
     public int getEvdoAsuLevel() {

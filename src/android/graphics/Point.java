@@ -89,8 +89,8 @@ public class Point implements Parcelable {
     }
 
     public static Point unflattenFromString(String str) throws NumberFormatException {
-        int indexOf = str.indexOf("x");
-        return new Point(Integer.parseInt(str.substring(0, indexOf)), Integer.parseInt(str.substring(indexOf + 1)));
+        int iIndexOf = str.indexOf("x");
+        return new Point(Integer.parseInt(str.substring(0, iIndexOf)), Integer.parseInt(str.substring(iIndexOf + 1)));
     }
 
     @Override // android.os.Parcelable

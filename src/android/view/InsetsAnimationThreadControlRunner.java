@@ -9,7 +9,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
 import android.view.InsetsAnimationControlRunner;
-import android.view.InsetsAnimationThreadControlRunner;
 import android.view.SurfaceControl;
 import android.view.SyncRtSurfaceTransactionApplier;
 import android.view.WindowInsets;
@@ -50,7 +49,7 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
             InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InsetsAnimationThreadControlRunner.AnonymousClass1.this.lambda$notifyFinished$0(z);
+                    this.f$0.lambda$notifyFinished$0(z);
                 }
             });
         }
@@ -78,7 +77,7 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
             InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InsetsAnimationThreadControlRunner.AnonymousClass1.this.lambda$reportPerceptible$1(i, z);
+                    this.f$0.lambda$reportPerceptible$1(i, z);
                 }
             });
         }
@@ -108,7 +107,7 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
         InsetsAnimationThread.getHandler().post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                InsetsAnimationThreadControlRunner.this.lambda$new$0(i, windowInsetsAnimationControlListener);
+                this.f$0.lambda$new$0(i, windowInsetsAnimationControlListener);
             }
         });
     }
@@ -156,11 +155,11 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
 
     @Override // android.view.InsetsAnimationControlRunner
     public boolean willUpdateSurface() {
-        boolean willUpdateSurface;
+        boolean zWillUpdateSurface;
         synchronized (this.mControl) {
-            willUpdateSurface = this.mControl.willUpdateSurface();
+            zWillUpdateSurface = this.mControl.willUpdateSurface();
         }
-        return willUpdateSurface;
+        return zWillUpdateSurface;
     }
 
     @Override // android.view.InsetsAnimationControlRunner
@@ -175,7 +174,7 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
         handler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                InsetsAnimationControlImpl.this.cancel();
+                insetsAnimationControlImpl.cancel();
             }
         });
     }
@@ -200,7 +199,7 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
         InsetsAnimationThread.getHandler().post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                InsetsAnimationThreadControlRunner.this.lambda$updateLayoutInsetsDuringAnimation$1(i);
+                this.f$0.lambda$updateLayoutInsetsDuringAnimation$1(i);
             }
         });
     }

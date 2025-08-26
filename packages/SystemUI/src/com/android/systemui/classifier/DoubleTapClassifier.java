@@ -5,7 +5,6 @@ import androidx.preference.PreferenceGroupAdapter$$ExternalSyntheticOutline0;
 import com.android.systemui.classifier.FalsingClassifier;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DoubleTapClassifier extends FalsingClassifier {
     public final float mDoubleTapSlop;
@@ -29,15 +28,15 @@ public class DoubleTapClassifier extends FalsingClassifier {
             return falsed(0.0d, "Only one gesture recorded");
         }
         SingleTapClassifier singleTapClassifier = this.mSingleTapClassifier;
-        FalsingClassifier.Result isTap = singleTapClassifier.isTap(list, 0.5d);
-        if (isTap.mFalsed) {
+        FalsingClassifier.Result resultIsTap = singleTapClassifier.isTap(list, 0.5d);
+        if (resultIsTap.mFalsed) {
             sb.append("First gesture is not a tap. ");
-            sb.append(isTap.getReason());
+            sb.append(resultIsTap.getReason());
         } else {
-            FalsingClassifier.Result isTap2 = singleTapClassifier.isTap(recentMotionEvents, 0.5d);
-            if (isTap2.mFalsed) {
+            FalsingClassifier.Result resultIsTap2 = singleTapClassifier.isTap(recentMotionEvents, 0.5d);
+            if (resultIsTap2.mFalsed) {
                 sb.append("Second gesture is not a tap. ");
-                sb.append(isTap2.getReason());
+                sb.append(resultIsTap2.getReason());
             } else {
                 MotionEvent motionEvent = (MotionEvent) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, list);
                 MotionEvent motionEvent2 = (MotionEvent) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, recentMotionEvents);
@@ -47,9 +46,9 @@ public class DoubleTapClassifier extends FalsingClassifier {
                     sb.append(eventTime);
                     sb.append("ms");
                 } else {
-                    float abs = Math.abs(motionEvent.getX() - motionEvent2.getX());
+                    float fAbs = Math.abs(motionEvent.getX() - motionEvent2.getX());
                     float f = this.mDoubleTapSlop;
-                    if (abs >= f) {
+                    if (fAbs >= f) {
                         sb.append("Delta X between taps too large:");
                         sb.append(Math.abs(motionEvent.getX() - motionEvent2.getX()));
                         sb.append(" vs ");

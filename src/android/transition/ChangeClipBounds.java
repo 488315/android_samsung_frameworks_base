@@ -53,7 +53,7 @@ public class ChangeClipBounds extends Transition {
 
     @Override // android.transition.Transition
     public Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
-        ObjectAnimator objectAnimator = null;
+        ObjectAnimator objectAnimatorOfObject = null;
         if (transitionValues != null && transitionValues2 != null && transitionValues.values.containsKey(PROPNAME_CLIP) && transitionValues2.values.containsKey(PROPNAME_CLIP)) {
             Rect rect = (Rect) transitionValues.values.get(PROPNAME_CLIP);
             Rect rect2 = (Rect) transitionValues2.values.get(PROPNAME_CLIP);
@@ -70,10 +70,10 @@ public class ChangeClipBounds extends Transition {
                 return null;
             }
             transitionValues2.view.setClipBounds(rect);
-            objectAnimator = ObjectAnimator.ofObject(transitionValues2.view, "clipBounds", new RectEvaluator(new Rect()), rect, rect2);
+            objectAnimatorOfObject = ObjectAnimator.ofObject(transitionValues2.view, "clipBounds", new RectEvaluator(new Rect()), rect, rect2);
             if (z) {
                 final View view = transitionValues2.view;
-                objectAnimator.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeClipBounds.1
+                objectAnimatorOfObject.addListener(new AnimatorListenerAdapter(this) { // from class: android.transition.ChangeClipBounds.1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         view.setClipBounds(null);
@@ -81,6 +81,6 @@ public class ChangeClipBounds extends Transition {
                 });
             }
         }
-        return objectAnimator;
+        return objectAnimatorOfObject;
     }
 }

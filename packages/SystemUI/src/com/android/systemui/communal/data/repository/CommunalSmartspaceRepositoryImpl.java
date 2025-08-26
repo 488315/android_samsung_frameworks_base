@@ -25,7 +25,6 @@ import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalSmartspaceRepositoryImpl implements CommunalSmartspaceRepository, BcSmartspaceDataPlugin.SmartspaceTargetListener {
     public static final Companion Companion = new Companion(null);
@@ -37,7 +36,6 @@ public final class CommunalSmartspaceRepositoryImpl implements CommunalSmartspac
     public final StateFlowImpl timers;
     public final Executor uiExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,9 +54,9 @@ public final class CommunalSmartspaceRepositoryImpl implements CommunalSmartspac
         this.uiExecutor = executor;
         this.systemClock = systemClock;
         this.logger = new Logger(logBuffer, "CommunalSmartspaceRepository");
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._timers = MutableStateFlow;
-        this.timers = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._timers = stateFlowImplMutableStateFlow;
+        this.timers = stateFlowImplMutableStateFlow;
         this.targetCreationTimes = MapsKt__MapsKt.emptyMap();
     }
 
@@ -68,33 +66,33 @@ public final class CommunalSmartspaceRepositoryImpl implements CommunalSmartspac
     /* JADX WARN: Type inference failed for: r0v19, types: [java.util.ArrayList] */
     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceTargetListener
     public final void onSmartspaceTargetsUpdated(List list) {
-        ?? r0;
+        ?? arrayList;
         if (list != null) {
-            r0 = new ArrayList();
+            arrayList = new ArrayList();
             for (Object obj : list) {
                 if (obj instanceof SmartspaceTarget) {
-                    r0.add(obj);
+                    arrayList.add(obj);
                 }
             }
         } else {
-            r0 = EmptyList.INSTANCE;
+            arrayList = EmptyList.INSTANCE;
         }
-        ArrayList arrayList = new ArrayList();
-        for (Object obj2 : (Iterable) r0) {
+        ArrayList arrayList2 = new ArrayList();
+        for (Object obj2 : (Iterable) arrayList) {
             SmartspaceTarget smartspaceTarget = (SmartspaceTarget) obj2;
             if (smartspaceTarget.getFeatureType() == 21 && smartspaceTarget.getRemoteViews() != null) {
-                arrayList.add(obj2);
+                arrayList2.add(obj2);
             }
         }
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
-        if (mapCapacity < 16) {
-            mapCapacity = 16;
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
+        if (iMapCapacity < 16) {
+            iMapCapacity = 16;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-        int size = arrayList.size();
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+        int size = arrayList2.size();
         int i = 0;
         while (i < size) {
-            Object obj3 = arrayList.get(i);
+            Object obj3 = arrayList2.get(i);
             i++;
             linkedHashMap.put(Companion.stableId(((SmartspaceTarget) obj3).getSmartspaceTargetId()), obj3);
         }
@@ -105,24 +103,24 @@ public final class CommunalSmartspaceRepositoryImpl implements CommunalSmartspac
             linkedHashMap2.put(key, Long.valueOf(l != null ? l.longValue() : this.systemClock.currentTimeMillis()));
         }
         this.targetCreationTimes = linkedHashMap2;
-        ArrayList arrayList2 = new ArrayList(linkedHashMap.size());
+        ArrayList arrayList3 = new ArrayList(linkedHashMap.size());
         for (Map.Entry entry2 : linkedHashMap.entrySet()) {
             String str = (String) entry2.getKey();
             SmartspaceTarget smartspaceTarget2 = (SmartspaceTarget) entry2.getValue();
             Object obj4 = this.targetCreationTimes.get(str);
             obj4.getClass();
-            long longValue = ((Number) obj4).longValue();
+            long jLongValue = ((Number) obj4).longValue();
             RemoteViews remoteViews = smartspaceTarget2.getRemoteViews();
             remoteViews.getClass();
-            arrayList2.add(new CommunalSmartspaceTimer(str, longValue, remoteViews));
+            arrayList3.add(new CommunalSmartspaceTimer(str, jLongValue, remoteViews));
         }
         StateFlowImpl stateFlowImpl = this._timers;
-        if (!arrayList2.equals(stateFlowImpl.getValue())) {
+        if (!arrayList3.equals(stateFlowImpl.getValue())) {
             Logger logger = this.logger;
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new CommunalSmartspaceRepositoryImpl$$ExternalSyntheticLambda0(), null);
-            obtain.setStr1(arrayList2.toString());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new CommunalSmartspaceRepositoryImpl$$ExternalSyntheticLambda0(), null);
+            logMessageObtain.setStr1(arrayList3.toString());
+            logger.getBuffer().commit(logMessageObtain);
         }
-        stateFlowImpl.updateState(null, arrayList2);
+        stateFlowImpl.updateState(null, arrayList3);
     }
 }

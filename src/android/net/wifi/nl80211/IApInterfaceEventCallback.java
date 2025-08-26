@@ -59,9 +59,9 @@ public interface IApInterfaceEventCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApInterfaceEventCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IApInterfaceEventCallback)) {
-                return (IApInterfaceEventCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApInterfaceEventCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IApInterfaceEventCallback)) {
+                return (IApInterfaceEventCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -92,14 +92,14 @@ public interface IApInterfaceEventCallback extends IInterface {
             }
             if (i == 1) {
                 NativeWifiClient nativeWifiClient = (NativeWifiClient) parcel.readTypedObject(NativeWifiClient.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onConnectedClientsChanged(nativeWifiClient, readBoolean);
+                onConnectedClientsChanged(nativeWifiClient, z);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSoftApChannelSwitched(readInt, readInt2);
+                onSoftApChannelSwitched(i3, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -124,27 +124,27 @@ public interface IApInterfaceEventCallback extends IInterface {
 
             @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
             public void onConnectedClientsChanged(NativeWifiClient nativeWifiClient, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(nativeWifiClient, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(nativeWifiClient, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
             public void onSoftApChannelSwitched(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

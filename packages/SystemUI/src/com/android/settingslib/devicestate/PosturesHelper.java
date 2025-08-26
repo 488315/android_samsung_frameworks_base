@@ -16,14 +16,13 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.collections.MapsKt__MapsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PosturesHelper {
     public final Map postures;
 
     public PosturesHelper(Context context, DeviceStateManager deviceStateManager) {
         if (deviceStateManager == null) {
-            this.postures = MapsKt__MapsKt.mapOf(new Pair(0, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(R.array.special_locale_codes))), new Pair(1, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(R.array.vendor_disallowed_apps_managed_user))), new Pair(2, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(17236290))), new Pair(3, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(17236298))));
+            this.postures = MapsKt__MapsKt.mapOf(new Pair(0, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(R.array.special_locale_names))), new Pair(1, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(R.array.vendor_policy_exempt_apps))), new Pair(2, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(17236291))), new Pair(3, ArraysKt___ArraysKt.toList(context.getResources().getIntArray(17236299))));
             return;
         }
         List supportedDeviceStates = deviceStateManager.getSupportedDeviceStates();
@@ -46,13 +45,13 @@ public final class PosturesHelper {
             } else if (deviceState.hasProperty(12)) {
                 i = 2;
             }
-            Integer valueOf = Integer.valueOf(i);
-            Object obj = linkedHashMap.get(valueOf);
-            if (obj == null) {
-                obj = new ArrayList();
-                linkedHashMap.put(valueOf, obj);
+            Integer numValueOf = Integer.valueOf(i);
+            Object arrayList = linkedHashMap.get(numValueOf);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(numValueOf, arrayList);
             }
-            ((List) obj).add(next);
+            ((List) arrayList).add(next);
         }
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
         for (Map.Entry entry : linkedHashMap.entrySet()) {
@@ -64,12 +63,12 @@ public final class PosturesHelper {
         for (Map.Entry entry2 : linkedHashMap2.entrySet()) {
             Object key = entry2.getKey();
             Iterable iterable = (Iterable) entry2.getValue();
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
+            ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
             Iterator it2 = iterable.iterator();
             while (it2.hasNext()) {
-                arrayList.add(Integer.valueOf(((DeviceState) it2.next()).getIdentifier()));
+                arrayList2.add(Integer.valueOf(((DeviceState) it2.next()).getIdentifier()));
             }
-            linkedHashMap3.put(key, arrayList);
+            linkedHashMap3.put(key, arrayList2);
         }
         this.postures = linkedHashMap3;
     }

@@ -114,13 +114,13 @@ public final class VisualQueryDetectedResult implements Parcelable {
     }
 
     VisualQueryDetectedResult(Parcel parcel) {
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
-        byte[] createByteArray = parcel.createByteArray();
-        this.mPartialQuery = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mSpeakerId = readInt;
-        this.mAccessibilityDetectionData = createByteArray;
+        String string = parcel.readString();
+        int i = parcel.readInt();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        this.mPartialQuery = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mSpeakerId = i;
+        this.mAccessibilityDetectionData = bArrCreateByteArray;
         onConstructed();
     }
 

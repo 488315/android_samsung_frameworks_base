@@ -13,7 +13,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionMoveHandler extends ActionHandlerType {
     public ActionMoveHandler(KeyguardTouchAnimator keyguardTouchAnimator) {
@@ -33,7 +32,7 @@ public final class ActionMoveHandler extends ActionHandlerType {
             keyguardTouchAnimator2.userActivityForMove(new Runnable() { // from class: com.android.systemui.keyguard.animator.ActionMoveHandler$handleMotionEvent$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NotificationPanelViewController.AnonymousClass4 anonymousClass4 = KeyguardTouchAnimator.this.callback;
+                    NotificationPanelViewController.AnonymousClass4 anonymousClass4 = keyguardTouchAnimator2.callback;
                     if (anonymousClass4 == null) {
                         anonymousClass4 = null;
                     }
@@ -51,9 +50,9 @@ public final class ActionMoveHandler extends ActionHandlerType {
             KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = keyguardTouchAnimator2.editModeAnimatorController;
             Log.d("KeyguardEditModeAnimatorController", "actionMove " + keyguardEditModeAnimatorController.isEditMode());
             if (!keyguardEditModeAnimatorController.isEditMode()) {
-                boolean isNotSupportedAnimation = keyguardEditModeAnimatorController.isNotSupportedAnimation();
+                boolean zIsNotSupportedAnimation = keyguardEditModeAnimatorController.isNotSupportedAnimation();
                 KeyguardTouchAnimator keyguardTouchAnimator3 = keyguardEditModeAnimatorController.keyguardTouchAnimator;
-                if (isNotSupportedAnimation) {
+                if (zIsNotSupportedAnimation) {
                     int i2 = keyguardTouchAnimator3.lockEditorTouchSlop;
                     if (i2 < f) {
                         Log.d("KeyguardEditModeAnimatorController", "cancel edit mode touchSlop=" + i2 + ", distance=" + f);
@@ -89,15 +88,15 @@ public final class ActionMoveHandler extends ActionHandlerType {
                         return true;
                     }
                     float f2 = keyguardTouchAnimator2.swipeUnlockRadius * 0.8f * 0.8f;
-                    float max = Math.max(0.0f, Math.min(1.0f, (((f2 - keyguardTouchAnimator2.distance) / f2) * 1.0f) + 0.0f));
+                    float fMax = Math.max(0.0f, Math.min(1.0f, (((f2 - keyguardTouchAnimator2.distance) / f2) * 1.0f) + 0.0f));
                     DragViewController dragViewController = keyguardTouchAnimator2.dragViewController;
                     List list = dragViewController.dragViews;
                     ArrayList arrayList = new ArrayList();
                     Iterator it = list.iterator();
                     while (true) {
-                        boolean hasNext = it.hasNext();
+                        boolean zHasNext = it.hasNext();
                         keyguardTouchAnimator = dragViewController.keyguardTouchAnimator;
-                        if (!hasNext) {
+                        if (!zHasNext) {
                             break;
                         }
                         Object next = it.next();
@@ -130,11 +129,11 @@ public final class ActionMoveHandler extends ActionHandlerType {
                     while (i6 < size3) {
                         Object obj3 = arrayList3.get(i6);
                         i6++;
-                        ((View) obj3).setAlpha(max);
+                        ((View) obj3).setAlpha(fMax);
                     }
-                    dragViewController.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(max);
+                    dragViewController.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(fMax);
                     float f3 = keyguardTouchAnimator2.swipeUnlockRadius * 0.1f;
-                    float max2 = Math.max(0.0f, Math.min(1.0f, (((f3 - keyguardTouchAnimator2.distance) / f3) * 1.0f) + 0.0f));
+                    float fMax2 = Math.max(0.0f, Math.min(1.0f, (((f3 - keyguardTouchAnimator2.distance) / f3) * 1.0f) + 0.0f));
                     List list2 = dragViewController.onlyAlphaDragViews;
                     ArrayList arrayList4 = new ArrayList();
                     for (Object obj4 : list2) {
@@ -165,20 +164,20 @@ public final class ActionMoveHandler extends ActionHandlerType {
                     while (i9 < size6) {
                         Object obj7 = arrayList6.get(i9);
                         i9++;
-                        ((View) obj7).setAlpha(max2);
+                        ((View) obj7).setAlpha(fMax2);
                     }
                     View view$frameworks__base__packages__SystemUI__android_common__SystemUI_core = keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0) ? keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0) : null;
                     if (!dragViewController.unlockViewHideAnimatorSet.isRunning() && view$frameworks__base__packages__SystemUI__android_common__SystemUI_core != null && view$frameworks__base__packages__SystemUI__android_common__SystemUI_core.getAlpha() != 0.0f) {
-                        AnimatorSet createAnimatorSet$default = DragViewController.createAnimatorSet$default(dragViewController, 0);
-                        dragViewController.setViewAnimation(createAnimatorSet$default, view$frameworks__base__packages__SystemUI__android_common__SystemUI_core, -1.0f, 0.0f);
-                        createAnimatorSet$default.start();
+                        AnimatorSet animatorSetCreateAnimatorSet$default = DragViewController.createAnimatorSet$default(dragViewController, 0);
+                        dragViewController.setViewAnimation(animatorSetCreateAnimatorSet$default, view$frameworks__base__packages__SystemUI__android_common__SystemUI_core, -1.0f, 0.0f);
+                        animatorSetCreateAnimatorSet$default.start();
                     }
-                    float max3 = Math.max(1.0f, Math.min(1.07f, ((keyguardTouchAnimator2.distance / (keyguardTouchAnimator2.swipeUnlockRadius * 0.8f)) * 0.07000005f) + 1.0f));
-                    if (Float.isNaN(max3)) {
+                    float fMax3 = Math.max(1.0f, Math.min(1.07f, ((keyguardTouchAnimator2.distance / (keyguardTouchAnimator2.swipeUnlockRadius * 0.8f)) * 0.07000005f) + 1.0f));
+                    if (Float.isNaN(fMax3)) {
                         Log.d("KeyguardTouchAnimator", "scale is NaN, distance = " + keyguardTouchAnimator2.distance + ", swipeUnlockRadius " + keyguardTouchAnimator2.swipeUnlockRadius);
                         return z2;
                     }
-                    keyguardTouchAnimator2.notiScale = max3;
+                    keyguardTouchAnimator2.notiScale = fMax3;
                     List list3 = dragViewController.dragViews;
                     ArrayList arrayList7 = new ArrayList();
                     for (Object obj8 : list3) {
@@ -209,8 +208,8 @@ public final class ActionMoveHandler extends ActionHandlerType {
                         Object obj11 = arrayList9.get(i);
                         i++;
                         View view = (View) obj11;
-                        view.setScaleX(max3);
-                        view.setScaleY(max3);
+                        view.setScaleX(fMax3);
+                        view.setScaleY(fMax3);
                     }
                     return z2;
                 }

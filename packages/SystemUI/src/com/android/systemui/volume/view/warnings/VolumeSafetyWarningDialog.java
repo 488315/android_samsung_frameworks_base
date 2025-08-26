@@ -11,12 +11,10 @@ import com.samsung.systemui.splugins.volume.VolumeObserver;
 import com.samsung.systemui.splugins.volume.VolumePanelAction;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeSafetyWarningDialog extends VolumeWarningDialog implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener, VolumeObserver {
     public final StoreInteractor storeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

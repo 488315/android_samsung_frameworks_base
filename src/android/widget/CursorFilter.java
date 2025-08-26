@@ -28,11 +28,11 @@ class CursorFilter extends Filter {
 
     @Override // android.widget.Filter
     protected Filter.FilterResults performFiltering(CharSequence charSequence) {
-        Cursor runQueryOnBackgroundThread = this.mClient.runQueryOnBackgroundThread(charSequence);
+        Cursor cursorRunQueryOnBackgroundThread = this.mClient.runQueryOnBackgroundThread(charSequence);
         Filter.FilterResults filterResults = new Filter.FilterResults();
-        if (runQueryOnBackgroundThread != null) {
-            filterResults.count = runQueryOnBackgroundThread.getCount();
-            filterResults.values = runQueryOnBackgroundThread;
+        if (cursorRunQueryOnBackgroundThread != null) {
+            filterResults.count = cursorRunQueryOnBackgroundThread.getCount();
+            filterResults.values = cursorRunQueryOnBackgroundThread;
             return filterResults;
         }
         filterResults.count = 0;

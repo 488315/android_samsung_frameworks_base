@@ -10,6 +10,8 @@ import com.samsung.android.sume.core.descriptor.CodecDescriptor;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.MessageProducer;
+import com.samsung.android.sume.core.types.MediaType;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
@@ -98,18 +100,54 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
         return new int[]{1, 2, 5};
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00ec  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00ec  */
     @Override // com.samsung.android.sume.core.message.MessageConsumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onMessageReceived(com.samsung.android.sume.core.message.Message r9) throws java.lang.UnsupportedOperationException {
-        /*
-            Method dump skipped, instructions count: 272
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sume.core.filter.MediaCodecFilter.onMessageReceived(com.samsung.android.sume.core.message.Message):boolean");
+    public boolean onMessageReceived(Message message) throws UnsupportedOperationException {
+        String str = TAG;
+        Log.d(str, "onMessageReceived: " + message.getCode());
+        HashMap map = new HashMap();
+        int code = message.getCode();
+        boolean z = false;
+        if (code == 1) {
+            synchronized (message) {
+                if (message.contains(Message.KEY_CONTENTS_ID)) {
+                    this.contentId = ((Integer) message.get(Message.KEY_CONTENTS_ID)).intValue();
+                }
+                CodecDescriptor codecDescriptor = (CodecDescriptor) getDescriptor();
+                MediaType mediaType = (MediaType) message.get(Message.KEY_MEDIA_TYPE);
+                if ((mediaType.isAudio() && codecDescriptor.getMediaType().isAudio()) || (mediaType.isVideo() && codecDescriptor.getMediaType().isVideo())) {
+                    configCodec(message);
+                }
+                Log.d(str, "config-data of " + mediaType + " is not match this codec type " + codecDescriptor.getMediaType());
+                return false;
+            }
+        }
+        if (code == 2) {
+            this.numWholeFrames.set(((Integer) message.get(Message.KEY_WHOLE_FRAMES)).intValue());
+            if (message.contains(Message.KEY_START_TIME_US)) {
+                this.startTimeUs.set(((Long) message.get(Message.KEY_START_TIME_US)).longValue());
+            }
+            if (message.contains(Message.KEY_END_TIME_US)) {
+                this.endTimeUs.set(((Long) message.get(Message.KEY_END_TIME_US)).longValue());
+            }
+        } else {
+            if (code == 5) {
+                long jLongValue = ((Long) message.get("last-timestampUs")).longValue();
+                Log.d(str, "last timestampUs set as " + jLongValue);
+                this.lastTimestampUs.set(jLongValue);
+            }
+            if (message.isRequestToReply()) {
+                message.reply(map);
+            }
+            return z;
+        }
+        z = true;
+        if (message.isRequestToReply()) {
+        }
+        return z;
     }
 
     @Override // com.samsung.android.sume.core.filter.MediaFilter

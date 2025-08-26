@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaDataLoader$loadMediaDataForResumption$mediaData$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ PendingIntent $appIntent;
@@ -72,7 +71,7 @@ final class MediaDataLoader$loadMediaDataForResumption$mediaData$1 extends Suspe
         PendingIntent pendingIntent = this.$appIntent;
         String str2 = this.$packageName;
         this.label = 1;
-        Object access$loadMediaDataForResumptionInBackground = MediaDataLoader.access$loadMediaDataForResumptionInBackground(mediaDataLoader, i2, mediaDescription, runnable, mediaData, token, str, pendingIntent, str2, this);
-        return access$loadMediaDataForResumptionInBackground == coroutineSingletons ? coroutineSingletons : access$loadMediaDataForResumptionInBackground;
+        Object objAccess$loadMediaDataForResumptionInBackground = MediaDataLoader.access$loadMediaDataForResumptionInBackground(mediaDataLoader, i2, mediaDescription, runnable, mediaData, token, str, pendingIntent, str2, this);
+        return objAccess$loadMediaDataForResumptionInBackground == coroutineSingletons ? coroutineSingletons : objAccess$loadMediaDataForResumptionInBackground;
     }
 }

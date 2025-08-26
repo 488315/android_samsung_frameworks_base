@@ -16,7 +16,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SwitchToManagedProfileForCallActivity extends AlertActivity implements DialogInterface.OnClickListener {
     public int managedProfileUserId = -10000;
@@ -24,7 +23,6 @@ public final class SwitchToManagedProfileForCallActivity extends AlertActivity i
     public Intent positiveActionIntent;
     public final TelecomManager telecomManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -83,9 +81,9 @@ public final class SwitchToManagedProfileForCallActivity extends AlertActivity i
             pair = new Pair(new Intent("android.intent.action.VIEW", Uri.parse("market://search?q=dialer")), Integer.valueOf(R.string.install_dialer_on_work_profile_action));
         }
         Intent intent = (Intent) pair.component1();
-        int intValue = ((Number) pair.component2()).intValue();
+        int iIntValue = ((Number) pair.component2()).intValue();
         this.positiveActionIntent = intent;
-        ((AlertActivity) this).mAlertParams.mPositiveButtonText = getString(intValue);
+        ((AlertActivity) this).mAlertParams.mPositiveButtonText = getString(iIntValue);
         setupAlert();
     }
 }

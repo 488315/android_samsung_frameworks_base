@@ -1,11 +1,15 @@
 package com.android.systemui.shade;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwnerKt;
 import com.android.app.animation.Interpolators;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.R;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.fragments.FragmentService;
@@ -18,7 +22,9 @@ import com.android.systemui.recents.LauncherProxyService;
 import com.android.systemui.shade.SamsungShadeHeaderControllerExt;
 import com.android.systemui.shade.ShadeHeaderController.CustomizerAnimationListener;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
+import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import com.android.systemui.shared.system.QuickStepContract;
+import com.android.systemui.statusbar.notification.stack.AmbientState;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.policy.SplitShadeStateController;
 import com.android.systemui.statusbar.policy.SplitShadeStateControllerImpl;
@@ -29,12 +35,23 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.function.Consumer;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.EmptyCoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.MutablePropertyReference0Impl;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationsQSContainerController extends ViewController implements QSContainerController {
+    public final AmbientState ambientState;
     public final DelayableExecutor delayableExecutor;
     public final NotificationsQSContainerController$delayedInsetSetter$1 delayedInsetSetter;
     public int footerActionsOffset;
@@ -57,8 +74,98 @@ public final class NotificationsQSContainerController extends ViewController imp
     public final SplitShadeStateController splitShadeStateController;
     public final NotificationsQSContainerController$taskbarVisibilityListener$1 taskbarVisibilityListener;
 
+    /* renamed from: com.android.systemui.shade.NotificationsQSContainerController$onInit$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function3 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.shade.NotificationsQSContainerController$onInit$1$1, reason: invalid class name and collision with other inner class name */
+        final class C04611 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ NotificationsQSContainerController this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C04611(NotificationsQSContainerController notificationsQSContainerController, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = notificationsQSContainerController;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C04611(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C04611) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    StateFlow stateFlowIsQsExpanded = ((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.isQsExpanded();
+                    final NotificationsQSContainerController notificationsQSContainerController = this.this$0;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.shade.NotificationsQSContainerController.onInit.1.1.1
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            ((Boolean) obj2).getClass();
+                            ((NotificationsQuickSettingsContainer) ((ViewController) notificationsQSContainerController).mView).invalidate();
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    if (stateFlowIsQsExpanded.collect(flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        public AnonymousClass1(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            AnonymousClass1 anonymousClass1 = NotificationsQSContainerController.this.new AnonymousClass1((Continuation) obj3);
+            anonymousClass1.L$0 = (LifecycleOwner) obj;
+            return anonymousClass1.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            CoroutineTracingKt.launchTraced$default(LifecycleOwnerKt.getLifecycleScope((LifecycleOwner) this.L$0), null, null, new C04611(NotificationsQSContainerController.this, null), 7);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.shade.NotificationsQSContainerController$onViewAttached$2, reason: invalid class name and case insensitive filesystem */
+    public final class C10362 implements Consumer {
+        public C10362() {
+        }
+
+        @Override // java.util.function.Consumer
+        public final void accept(Object obj) throws Resources.NotFoundException {
+            NotificationsQSContainerController.this.updateResources$1();
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.shade.NotificationsQSContainerController$taskbarVisibilityListener$1] */
-    public NotificationsQSContainerController(NotificationsQuickSettingsContainer notificationsQuickSettingsContainer, NavigationModeController navigationModeController, LauncherProxyService launcherProxyService, ShadeHeaderController shadeHeaderController, ShadeInteractor shadeInteractor, FragmentService fragmentService, DelayableExecutor delayableExecutor, NotificationStackScrollLayoutController notificationStackScrollLayoutController, SplitShadeStateController splitShadeStateController, Lazy lazy, Lazy lazy2, PanelPopOverManager panelPopOverManager) {
+    public NotificationsQSContainerController(NotificationsQuickSettingsContainer notificationsQuickSettingsContainer, NavigationModeController navigationModeController, LauncherProxyService launcherProxyService, ShadeHeaderController shadeHeaderController, ShadeInteractor shadeInteractor, FragmentService fragmentService, DelayableExecutor delayableExecutor, NotificationStackScrollLayoutController notificationStackScrollLayoutController, SplitShadeStateController splitShadeStateController, Lazy lazy, Lazy lazy2, PanelPopOverManager panelPopOverManager, AmbientState ambientState) {
         super(notificationsQuickSettingsContainer);
         this.navigationModeController = navigationModeController;
         this.launcherProxyService = launcherProxyService;
@@ -71,10 +178,11 @@ public final class NotificationsQSContainerController extends ViewController imp
         this.largeScreenHeaderHelperLazy = lazy;
         this.resourcePickerLazy = lazy2;
         this.panelPopOverManager = panelPopOverManager;
+        this.ambientState = ambientState;
         this.taskbarVisibilityListener = new LauncherProxyService.LauncherProxyListener() { // from class: com.android.systemui.shade.NotificationsQSContainerController$taskbarVisibilityListener$1
             @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
             public final void onTaskbarStatusUpdated$1(boolean z, boolean z2) {
-                NotificationsQSContainerController.this.getClass();
+                this.this$0.getClass();
             }
         };
         this.delayedInsetSetter = new NotificationsQSContainerController$delayedInsetSetter$1(this);
@@ -82,17 +190,17 @@ public final class NotificationsQSContainerController extends ViewController imp
 
     @Override // com.android.systemui.util.ViewController
     public final void onInit() {
-        RepeatWhenAttachedKt.repeatWhenAttached(this.mView, EmptyCoroutineContext.INSTANCE, new NotificationsQSContainerController$onInit$1(this, null));
+        RepeatWhenAttachedKt.repeatWhenAttached(this.mView, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
         this.navigationModeController.addListener(new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.shade.NotificationsQSContainerController$onInit$currentMode$1
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
             public final void onNavigationModeChanged(int i) {
                 QuickStepContract.isGesturalMode(i);
-                NotificationsQSContainerController.this.getClass();
+                this.this$0.getClass();
             }
         });
         boolean z = QuickStepContract.SYSUI_FORCE_SET_BACK_GESTURE_BY_SPLUGIN;
         ((NotificationsQuickSettingsContainer) this.mView).mStackScroller = this.notificationStackScrollLayoutController.mView;
-        this.shadeHeaderController.header.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.shade.NotificationsQSContainerController$onInit$2
+        this.shadeHeaderController.header.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.shade.NotificationsQSContainerController.onInit.2
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                 NotificationsQSContainerController.this.updateConstraints$1();
@@ -101,12 +209,12 @@ public final class NotificationsQSContainerController extends ViewController imp
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         updateResources$1();
         this.launcherProxyService.addCallback((LauncherProxyService.LauncherProxyListener) this.taskbarVisibilityListener);
         NotificationsQuickSettingsContainer notificationsQuickSettingsContainer = (NotificationsQuickSettingsContainer) this.mView;
         notificationsQuickSettingsContainer.mInsetsChangedListener = this.delayedInsetSetter;
-        Consumer consumer = new Consumer() { // from class: com.android.systemui.shade.NotificationsQSContainerController$onViewAttached$1
+        Consumer consumer = new Consumer() { // from class: com.android.systemui.shade.NotificationsQSContainerController.onViewAttached.1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 ((QS) obj).setContainerController(NotificationsQSContainerController.this);
@@ -117,7 +225,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         if (qs != null) {
             consumer.accept(qs);
         }
-        ((NotificationsQuickSettingsContainer) this.mView).mConfigurationChangedListener = new NotificationsQSContainerController$onViewAttached$2(this);
+        ((NotificationsQuickSettingsContainer) this.mView).mConfigurationChangedListener = new C10362();
         this.fragmentService.getFragmentHostManager(this.mView).addTagListener(QS.TAG, (FragmentHostManager.FragmentListener) this.mView);
     }
 
@@ -179,13 +287,14 @@ public final class NotificationsQSContainerController extends ViewController imp
             Lazy lazy2 = this.largeScreenHeaderHelperLazy;
             int topMargin = ((LargeScreenHeaderHelper) lazy2.get()).getTopMargin(((NotificationsQuickSettingsContainer) this.mView).getRootWindowInsets());
             LargeScreenHeaderHelper largeScreenHeaderHelper = (LargeScreenHeaderHelper) lazy2.get();
-            largeScreenHeaderHelper.getClass();
-            int popOverBlankSpace = DeviceState.isShowingPopOverStatusBar() ? largeScreenHeaderHelper.qsPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverBlankSpace(largeScreenHeaderHelper.context) : 0;
+            int popOverBlankSpace = DeviceState.isShowingPopOverStatusBar(largeScreenHeaderHelper.context) ? largeScreenHeaderHelper.qsPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverBlankSpace(largeScreenHeaderHelper.context) : 0;
             constraintSet.constrainHeight(R.id.split_shade_status_bar, this.largeScreenShadeHeaderHeight + topMargin + popOverBlankSpace);
             SamsungShadeHeaderControllerExt samsungShadeHeaderControllerExt = (SamsungShadeHeaderControllerExt) shadeHeaderController.samsungExt.get();
             SamsungShadeHeaderControllerExt.SamsungShadeHeaderControllerExtModel samsungShadeHeaderControllerExtModel = samsungShadeHeaderControllerExt.model;
             samsungShadeHeaderControllerExt.updateHeaderViewPaddings(samsungShadeHeaderControllerExtModel.leftPadding, topMargin, samsungShadeHeaderControllerExtModel.rightPadding, popOverBlankSpace);
-            this.panelPopOverManager.blurViewTopMargin = this.largeScreenShadeHeaderHeight + topMargin + popOverBlankSpace;
+            int i2 = this.largeScreenShadeHeaderHeight + topMargin + popOverBlankSpace;
+            this.panelPopOverManager.blurViewTopMargin = i2;
+            this.ambientState.mLargeScreenShadeHeaderHeight = i2;
         } else {
             constraintSet.constrainHeight(R.id.split_shade_status_bar, this.shadeHeaderHeight);
         }
@@ -199,7 +308,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         constraintSet.applyTo(notificationsQuickSettingsContainer);
     }
 
-    public final void updateResources$1() {
+    public final void updateResources$1() throws Resources.NotFoundException {
         getResources();
         ((SplitShadeStateControllerImpl) this.splitShadeStateController).shouldUseSplitNotificationShade();
         this.largeScreenShadeHeaderActive = LargeScreenUtils.shouldUseLargeScreenShadeHeader(getResources());

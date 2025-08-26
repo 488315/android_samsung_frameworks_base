@@ -23,7 +23,6 @@ import com.samsung.android.wallpaper.live.sdk.data.DisplayState;
 import java.io.File;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GifEngine extends WallpaperEngine {
     public final String TAG;
@@ -48,22 +47,22 @@ public class GifEngine extends WallpaperEngine {
         this.mSource = gifSource;
         Runnable runnable = new Runnable() { // from class: com.android.systemui.wallpaper.engines.gif.GifEngine$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                Bitmap decodeBitmap;
-                GifEngine gifEngine = GifEngine.this;
+            public final void run() throws IOException {
+                Bitmap bitmapDecodeBitmap;
+                GifEngine gifEngine = this.f$0;
                 GifSource gifSource2 = gifEngine.mSource;
                 gifSource2.getClass();
                 File file = new File(gifSource2.mGifPath);
                 if (file.exists()) {
                     try {
-                        decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(file));
+                        bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(file));
                     } catch (IOException e) {
                         Log.e(gifSource2.TAG, "decodeFirstFrameBitmap:  e = " + e, e);
                     }
-                    gifEngine.mInitialBitmap = decodeBitmap;
+                } else {
+                    bitmapDecodeBitmap = null;
                 }
-                decodeBitmap = null;
-                gifEngine.mInitialBitmap = decodeBitmap;
+                gifEngine.mInitialBitmap = bitmapDecodeBitmap;
             }
         };
         Handler threadHandler = ImageWallpaper.this.mWorker.getThreadHandler();
@@ -88,70 +87,71 @@ public class GifEngine extends WallpaperEngine {
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
-    public final boolean draw(SurfaceHolder surfaceHolder) {
-        int width;
-        int height;
+    public final boolean draw(SurfaceHolder surfaceHolder) throws Throwable {
+        int iWidth;
+        int iHeight;
+        Canvas canvasLockHardwareCanvas;
         String str = this.TAG;
         if (this.mGif == null || this.mDestroyed) {
             return false;
         }
         Rect gifSize = getGifSize();
         if (gifSize == null || !gifSize.isValid()) {
-            width = getSurfaceHolder().getSurfaceFrame().width();
-            height = getSurfaceHolder().getSurfaceFrame().height();
+            iWidth = getSurfaceHolder().getSurfaceFrame().width();
+            iHeight = getSurfaceHolder().getSurfaceFrame().height();
         } else {
-            width = gifSize.width();
-            height = gifSize.height();
+            iWidth = gifSize.width();
+            iHeight = gifSize.height();
         }
-        Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        this.mGif.draw(new Canvas(createBitmap));
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iWidth, iHeight, Bitmap.Config.ARGB_8888);
+        this.mGif.draw(new Canvas(bitmapCreateBitmap));
         Canvas canvas = null;
         try {
             try {
-                Canvas lockHardwareCanvas = surfaceHolder.getSurface().lockHardwareCanvas();
-                try {
-                    lockHardwareCanvas.drawBitmap(createBitmap, getCenterCropMatrix(), null);
-                    try {
-                        createBitmap.recycle();
-                        surfaceHolder.getSurface().unlockCanvasAndPost(lockHardwareCanvas);
-                        return true;
-                    } catch (Exception e) {
-                        WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e, str, e);
-                        return true;
-                    }
-                } catch (Exception e2) {
-                    e = e2;
-                    canvas = lockHardwareCanvas;
-                    Log.e(str, "draw: e = " + e, e);
-                    try {
-                        createBitmap.recycle();
-                        if (canvas == null) {
-                            return false;
-                        }
-                        surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
-                        return false;
-                    } catch (Exception e3) {
-                        WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e3, str, e3);
-                        return false;
-                    }
-                } catch (Throwable th) {
-                    th = th;
-                    canvas = lockHardwareCanvas;
-                    try {
-                        createBitmap.recycle();
-                        if (canvas != null) {
-                            surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
-                        }
-                    } catch (Exception e4) {
-                        WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e4, str, e4);
-                    }
-                    throw th;
+                canvasLockHardwareCanvas = surfaceHolder.getSurface().lockHardwareCanvas();
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (Exception e) {
+            e = e;
+        }
+        try {
+            canvasLockHardwareCanvas.drawBitmap(bitmapCreateBitmap, getCenterCropMatrix(), null);
+            try {
+                bitmapCreateBitmap.recycle();
+                surfaceHolder.getSurface().unlockCanvasAndPost(canvasLockHardwareCanvas);
+                return true;
+            } catch (Exception e2) {
+                WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e2, str, e2);
+                return true;
+            }
+        } catch (Exception e3) {
+            e = e3;
+            canvas = canvasLockHardwareCanvas;
+            Log.e(str, "draw: e = " + e, e);
+            try {
+                bitmapCreateBitmap.recycle();
+                if (canvas == null) {
+                    return false;
                 }
-            } catch (Exception e5) {
-                e = e5;
+                surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
+                return false;
+            } catch (Exception e4) {
+                WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e4, str, e4);
+                return false;
             }
         } catch (Throwable th2) {
             th = th2;
+            canvas = canvasLockHardwareCanvas;
+            try {
+                bitmapCreateBitmap.recycle();
+                if (canvas != null) {
+                    surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
+                }
+            } catch (Exception e5) {
+                WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("draw: e = ", e5, str, e5);
+            }
+            throw th;
         }
     }
 
@@ -168,9 +168,9 @@ public class GifEngine extends WallpaperEngine {
             Log.w(str, "getCenterCropMatrix: frame is empty");
             return matrix;
         }
-        float max = Math.max(surfaceFrame.width() / gifSize.width(), surfaceFrame.height() / gifSize.height());
-        matrix.setScale(max, max);
-        matrix.postTranslate(SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(gifSize.width(), max, surfaceFrame.width(), 2.0f), SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(gifSize.height(), max, surfaceFrame.height(), 2.0f));
+        float fMax = Math.max(surfaceFrame.width() / gifSize.width(), surfaceFrame.height() / gifSize.height());
+        matrix.setScale(fMax, fMax);
+        matrix.postTranslate(SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(gifSize.width(), fMax, surfaceFrame.width(), 2.0f), SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(gifSize.height(), fMax, surfaceFrame.height(), 2.0f));
         return matrix;
     }
 
@@ -239,7 +239,8 @@ public class GifEngine extends WallpaperEngine {
         }
     }
 
-    public final void pauseAndSeekToFirstFrame() {
+    public final void pauseAndSeekToFirstFrame() throws Throwable {
+        Canvas canvasLockHardwareCanvas;
         String str = "pauseAndSeekToFirstFrame: curState=" + this.mState;
         String str2 = this.TAG;
         Log.i(str2, str);
@@ -256,65 +257,62 @@ public class GifEngine extends WallpaperEngine {
         try {
             try {
                 try {
-                    Canvas lockHardwareCanvas = surfaceHolder.getSurface().lockHardwareCanvas();
-                    try {
-                        lockHardwareCanvas.drawBitmap(this.mInitialBitmap, getCenterCropMatrix(), null);
-                        surfaceHolder.getSurface().unlockCanvasAndPost(lockHardwareCanvas);
-                    } catch (Exception e) {
-                        e = e;
-                        canvas = lockHardwareCanvas;
-                        Log.e(str2, "drawFirstFrame: " + e, e);
-                        if (canvas != null) {
-                            surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        canvas = lockHardwareCanvas;
-                        if (canvas != null) {
-                            try {
-                                surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
-                            } catch (Exception e2) {
-                                WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFirstFrame: ", e2, str2, e2);
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (Exception e3) {
-                    e = e3;
+                    canvasLockHardwareCanvas = surfaceHolder.getSurface().lockHardwareCanvas();
+                } catch (Throwable th) {
+                    th = th;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (Exception e) {
+                e = e;
             }
-        } catch (Exception e4) {
-            WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFirstFrame: ", e4, str2, e4);
+        } catch (Exception e2) {
+            WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFirstFrame: ", e2, str2, e2);
+        }
+        try {
+            canvasLockHardwareCanvas.drawBitmap(this.mInitialBitmap, getCenterCropMatrix(), null);
+            surfaceHolder.getSurface().unlockCanvasAndPost(canvasLockHardwareCanvas);
+        } catch (Exception e3) {
+            e = e3;
+            canvas = canvasLockHardwareCanvas;
+            Log.e(str2, "drawFirstFrame: " + e, e);
+            if (canvas != null) {
+                surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
+            }
+        } catch (Throwable th2) {
+            th = th2;
+            canvas = canvasLockHardwareCanvas;
+            if (canvas != null) {
+                try {
+                    surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
+                } catch (Exception e4) {
+                    WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFirstFrame: ", e4, str2, e4);
+                }
+            }
+            throw th;
         }
     }
 
     public final synchronized void updatePlayerState() {
+        DisplayState displayState;
         try {
             if (this.mGif != null && !this.mDestroyed) {
-                boolean isVisible = isVisible();
+                boolean zIsVisible = isVisible();
                 boolean z = this.mPlayerPausedForcefully;
-                Log.i(this.TAG, "updatePlayerState: isVisible = " + isVisible + ", mDisplayState = " + this.mDisplayState + ", isPausedForcefully = " + z);
-                if (!isVisible) {
+                Log.i(this.TAG, "updatePlayerState: isVisible = " + zIsVisible + ", mDisplayState = " + this.mDisplayState + ", isPausedForcefully = " + z);
+                if (!zIsVisible) {
                     pauseAndSeekToFirstFrame();
-                } else if (z) {
+                } else if (z || (displayState = this.mDisplayState) == DisplayState.AOD_WITH_WALLPAPER || displayState == DisplayState.AOD_WITHOUT_WALLPAPER) {
                     pause();
                 } else {
-                    DisplayState displayState = this.mDisplayState;
-                    if (displayState != DisplayState.AOD_WITH_WALLPAPER && displayState != DisplayState.AOD_WITHOUT_WALLPAPER) {
-                        Log.i(this.TAG, "play: curState=" + this.mState);
-                        if (this.mState != 2) {
-                            this.mState = 2;
-                            AnimatedImageDrawable animatedImageDrawable = this.mGif;
-                            if (animatedImageDrawable != null) {
-                                animatedImageDrawable.start();
-                            }
-                            ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass2 = (ImageWallpaper.IntegratedEngine.AnonymousClass2) this.mCallback;
-                            anonymousClass2.mChoreographerHandler.post(new ImageWallpaper$IntegratedEngine$2$$ExternalSyntheticLambda1(anonymousClass2, 1));
+                    Log.i(this.TAG, "play: curState=" + this.mState);
+                    if (this.mState != 2) {
+                        this.mState = 2;
+                        AnimatedImageDrawable animatedImageDrawable = this.mGif;
+                        if (animatedImageDrawable != null) {
+                            animatedImageDrawable.start();
                         }
+                        ImageWallpaper.IntegratedEngine.AnonymousClass2 anonymousClass2 = (ImageWallpaper.IntegratedEngine.AnonymousClass2) this.mCallback;
+                        anonymousClass2.mChoreographerHandler.post(new ImageWallpaper$IntegratedEngine$2$$ExternalSyntheticLambda1(anonymousClass2, 1));
                     }
-                    pause();
                 }
                 return;
             }

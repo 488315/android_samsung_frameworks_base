@@ -83,7 +83,7 @@ public class Profile {
         this.encapsulationType = audioEncapsulationType;
     }
 
-    static Profile read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Profile read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         Profile profile = new Profile();
         String attributeValue = xmlPullParser.getAttributeValue(null, "name");
         if (attributeValue != null) {

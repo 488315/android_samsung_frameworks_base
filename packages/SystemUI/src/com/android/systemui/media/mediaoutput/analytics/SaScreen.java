@@ -2,12 +2,10 @@ package com.android.systemui.media.mediaoutput.analytics;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SaScreen {
     public final String id;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChooseADevice extends SaScreen {
         public static final ChooseADevice INSTANCE = new ChooseADevice();
 
@@ -28,7 +26,6 @@ public abstract class SaScreen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaOutput extends SaScreen {
         public static final MediaOutput INSTANCE = new MediaOutput();
 
@@ -49,7 +46,6 @@ public abstract class SaScreen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaOutputSettings extends SaScreen {
         public static final MediaOutputSettings INSTANCE = new MediaOutputSettings();
 
@@ -70,7 +66,6 @@ public abstract class SaScreen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TvCard extends SaScreen {
         public static final TvCard INSTANCE = new TvCard();
 
@@ -91,7 +86,6 @@ public abstract class SaScreen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSpeakerPlaybackPrefs extends SaScreen {
         public static final WifiSpeakerPlaybackPrefs INSTANCE = new WifiSpeakerPlaybackPrefs();
 

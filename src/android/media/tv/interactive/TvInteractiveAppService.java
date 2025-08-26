@@ -15,7 +15,6 @@ import android.media.tv.TvContentRating;
 import android.media.tv.TvRecordingInfo;
 import android.media.tv.TvTrackInfo;
 import android.media.tv.interactive.ITvInteractiveAppService;
-import android.media.tv.interactive.TvInteractiveAppService;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.os.AsyncTask;
@@ -125,12 +124,12 @@ public abstract class TvInteractiveAppService extends Service {
                 if (iTvInteractiveAppSessionCallback == null) {
                     return;
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = inputChannel;
-                obtain.arg2 = iTvInteractiveAppSessionCallback;
-                obtain.arg3 = str;
-                obtain.arg4 = Integer.valueOf(i);
-                TvInteractiveAppService.this.mServiceHandler.obtainMessage(1, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = inputChannel;
+                someArgsObtain.arg2 = iTvInteractiveAppSessionCallback;
+                someArgsObtain.arg3 = str;
+                someArgsObtain.arg4 = Integer.valueOf(i);
+                TvInteractiveAppService.this.mServiceHandler.obtainMessage(1, someArgsObtain).sendToTarget();
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
@@ -151,11 +150,11 @@ public abstract class TvInteractiveAppService extends Service {
     }
 
     public final void notifyStateChanged(int i, int i2, int i3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = Integer.valueOf(i);
-        obtain.arg2 = Integer.valueOf(i2);
-        obtain.arg3 = Integer.valueOf(i3);
-        this.mServiceHandler.obtainMessage(3, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = Integer.valueOf(i);
+        someArgsObtain.arg2 = Integer.valueOf(i2);
+        someArgsObtain.arg3 = Integer.valueOf(i3);
+        this.mServiceHandler.obtainMessage(3, someArgsObtain).sendToTarget();
     }
 
     public static abstract class Session implements KeyEvent.Callback {
@@ -601,7 +600,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestSelectedTrackInfo$0();
+                    this.f$0.lambda$requestSelectedTrackInfo$0();
                 }
             });
         }
@@ -622,7 +621,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestStartRecording$1(str, uri);
+                    this.f$0.lambda$requestStartRecording$1(str, uri);
                 }
             });
         }
@@ -643,7 +642,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestStopRecording$2(str);
+                    this.f$0.lambda$requestStopRecording$2(str);
                 }
             });
         }
@@ -664,7 +663,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestScheduleRecording$3(str, str2, uri, uri2, bundle);
+                    this.f$0.lambda$requestScheduleRecording$3(str, str2, uri, uri2, bundle);
                 }
             });
         }
@@ -685,7 +684,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestScheduleRecording$4(str, str2, uri, j, j2, i, bundle);
+                    this.f$0.lambda$requestScheduleRecording$4(str, str2, uri, j, j2, i, bundle);
                 }
             });
         }
@@ -706,7 +705,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$setTvRecordingInfo$5(str, tvRecordingInfo);
+                    this.f$0.lambda$setTvRecordingInfo$5(str, tvRecordingInfo);
                 }
             });
         }
@@ -727,7 +726,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestTvRecordingInfo$6(str);
+                    this.f$0.lambda$requestTvRecordingInfo$6(str);
                 }
             });
         }
@@ -748,7 +747,7 @@ public abstract class TvInteractiveAppService extends Service {
             executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService$Session$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TvInteractiveAppService.Session.this.lambda$requestTvRecordingInfoList$7(i);
+                    this.f$0.lambda$requestTvRecordingInfoList$7(i);
                 }
             });
         }
@@ -1065,28 +1064,28 @@ public abstract class TvInteractiveAppService extends Service {
 
         public void notifyAdBufferReady(final AdBuffer adBuffer) {
             try {
-                final AdBuffer dupAdBuffer = AdBuffer.dupAdBuffer(adBuffer);
+                final AdBuffer adBufferDupAdBuffer = AdBuffer.dupAdBuffer(adBuffer);
                 executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppService.Session.23
                     @Override // java.lang.Runnable
                     public void run() {
                         try {
                             try {
                                 if (Session.this.mSessionCallback != null) {
-                                    Session.this.mSessionCallback.onAdBufferReady(dupAdBuffer);
+                                    Session.this.mSessionCallback.onAdBufferReady(adBufferDupAdBuffer);
                                 }
-                                AdBuffer adBuffer2 = dupAdBuffer;
+                                AdBuffer adBuffer2 = adBufferDupAdBuffer;
                                 if (adBuffer2 != null) {
                                     adBuffer2.getSharedMemory().close();
                                 }
                             } catch (RemoteException e) {
                                 Log.w(TvInteractiveAppService.TAG, "error in notifyAdBuffer", e);
-                                AdBuffer adBuffer3 = dupAdBuffer;
+                                AdBuffer adBuffer3 = adBufferDupAdBuffer;
                                 if (adBuffer3 != null) {
                                     adBuffer3.getSharedMemory().close();
                                 }
                             }
                         } catch (Throwable th) {
-                            AdBuffer adBuffer4 = dupAdBuffer;
+                            AdBuffer adBuffer4 = adBufferDupAdBuffer;
                             if (adBuffer4 != null) {
                                 adBuffer4.getSharedMemory().close();
                             }
@@ -1155,9 +1154,9 @@ public abstract class TvInteractiveAppService extends Service {
             this.mMediaFrame = rect;
             onMediaViewSizeChanged(rect.right - rect.left, rect.bottom - rect.top);
             if (this.mMediaViewEnabled) {
-                View onCreateMediaView = onCreateMediaView();
-                this.mMediaView = onCreateMediaView;
-                if (onCreateMediaView == null) {
+                View viewOnCreateMediaView = onCreateMediaView();
+                this.mMediaView = viewOnCreateMediaView;
+                if (viewOnCreateMediaView == null) {
                     return;
                 }
                 MediaViewCleanUpTask mediaViewCleanUpTask = this.mMediaViewCleanUpTask;
@@ -1224,7 +1223,7 @@ public abstract class TvInteractiveAppService extends Service {
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
-        public Void doInBackground(View... viewArr) {
+        public Void doInBackground(View... viewArr) throws InterruptedException {
             View view = viewArr[0];
             try {
                 Thread.sleep(5000L);
@@ -1247,8 +1246,8 @@ public abstract class TvInteractiveAppService extends Service {
         }
 
         private void broadcastRteStateChanged(int i, int i2, int i3) {
-            int beginBroadcast = TvInteractiveAppService.this.mCallbacks.beginBroadcast();
-            for (int i4 = 0; i4 < beginBroadcast; i4++) {
+            int iBeginBroadcast = TvInteractiveAppService.this.mCallbacks.beginBroadcast();
+            for (int i4 = 0; i4 < iBeginBroadcast; i4++) {
                 try {
                     ((ITvInteractiveAppServiceCallback) TvInteractiveAppService.this.mCallbacks.getBroadcastItem(i4)).onStateChanged(i, i2, i3);
                 } catch (RemoteException e) {
@@ -1291,10 +1290,10 @@ public abstract class TvInteractiveAppService extends Service {
             InputChannel inputChannel = (InputChannel) someArgs3.arg1;
             ITvInteractiveAppSessionCallback iTvInteractiveAppSessionCallback2 = (ITvInteractiveAppSessionCallback) someArgs3.arg2;
             String str = (String) someArgs3.arg3;
-            int intValue = ((Integer) someArgs3.arg4).intValue();
+            int iIntValue = ((Integer) someArgs3.arg4).intValue();
             someArgs3.recycle();
-            Session onCreateSession = TvInteractiveAppService.this.onCreateSession(str, intValue);
-            if (onCreateSession == null) {
+            Session sessionOnCreateSession = TvInteractiveAppService.this.onCreateSession(str, iIntValue);
+            if (sessionOnCreateSession == null) {
                 try {
                     iTvInteractiveAppSessionCallback2.onSessionCreated(null);
                     return;
@@ -1303,12 +1302,12 @@ public abstract class TvInteractiveAppService extends Service {
                     return;
                 }
             }
-            ITvInteractiveAppSessionWrapper iTvInteractiveAppSessionWrapper = new ITvInteractiveAppSessionWrapper(TvInteractiveAppService.this, onCreateSession, inputChannel);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = onCreateSession;
-            obtain.arg2 = iTvInteractiveAppSessionWrapper;
-            obtain.arg3 = iTvInteractiveAppSessionCallback2;
-            TvInteractiveAppService.this.mServiceHandler.obtainMessage(2, obtain).sendToTarget();
+            ITvInteractiveAppSessionWrapper iTvInteractiveAppSessionWrapper = new ITvInteractiveAppSessionWrapper(TvInteractiveAppService.this, sessionOnCreateSession, inputChannel);
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = sessionOnCreateSession;
+            someArgsObtain.arg2 = iTvInteractiveAppSessionWrapper;
+            someArgsObtain.arg3 = iTvInteractiveAppSessionCallback2;
+            TvInteractiveAppService.this.mServiceHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
     }
 }

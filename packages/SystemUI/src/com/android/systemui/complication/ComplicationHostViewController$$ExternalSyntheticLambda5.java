@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ComplicationHostViewController$$ExternalSyntheticLambda5 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -34,8 +33,8 @@ public final /* synthetic */ class ComplicationHostViewController$$ExternalSynth
                 complicationHostViewController.getClass();
                 ComplicationId complicationId = complicationViewModel.mId;
                 Complication complication = complicationViewModel.mComplication;
-                DreamClockTimeComplication.DreamClockTimeViewHolder createView = complication.createView();
-                TextClock textClock = createView.mView;
+                DreamClockTimeComplication.DreamClockTimeViewHolder dreamClockTimeViewHolderCreateView = complication.createView();
+                TextClock textClock = dreamClockTimeViewHolderCreateView.mView;
                 if (textClock == null) {
                     Log.e("ComplicationHostVwCtrl", "invalid complication view. null view supplied by ViewHolder");
                     break;
@@ -43,11 +42,11 @@ public final /* synthetic */ class ComplicationHostViewController$$ExternalSynth
                     if (!complicationHostViewController.mDreamOverlayStateController.containsState(4) && complicationHostViewController.mIsAnimationEnabled) {
                         textClock.setVisibility(4);
                     }
-                    complicationHostViewController.mComplications.put(complicationId, createView);
+                    complicationHostViewController.mComplications.put(complicationId, dreamClockTimeViewHolderCreateView);
                     if (textClock.getParent() != null) {
                         Log.e("ComplicationHostVwCtrl", "View for complication " + complication.getClass() + " already has a parent. Make sure not to reuse complication views!");
                     }
-                    ComplicationLayoutParams complicationLayoutParams = createView.mLayoutParams;
+                    ComplicationLayoutParams complicationLayoutParams = dreamClockTimeViewHolderCreateView.mLayoutParams;
                     StringBuilder sb = new StringBuilder("@");
                     ComplicationLayoutEngine complicationLayoutEngine = complicationHostViewController.mLayoutEngine;
                     sb.append(Integer.toHexString(complicationLayoutEngine.hashCode()));

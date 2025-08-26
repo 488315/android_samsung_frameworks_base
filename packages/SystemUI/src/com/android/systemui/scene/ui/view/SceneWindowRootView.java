@@ -9,12 +9,10 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneWindowRootView extends WindowRootView {
     public final StateFlowImpl windowInsets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,10 +33,10 @@ public final class SceneWindowRootView extends WindowRootView {
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "SceneWindowRootView", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "SceneWindowRootView", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // com.android.systemui.scene.ui.view.WindowRootView, android.view.View

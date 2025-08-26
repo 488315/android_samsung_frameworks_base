@@ -66,15 +66,15 @@ public final class SizeF implements Parcelable {
 
     public static SizeF parseSizeF(String str) throws NumberFormatException {
         Preconditions.checkNotNull(str, "string must not be null");
-        int indexOf = str.indexOf(42);
-        if (indexOf < 0) {
-            indexOf = str.indexOf(120);
+        int iIndexOf = str.indexOf(42);
+        if (iIndexOf < 0) {
+            iIndexOf = str.indexOf(120);
         }
-        if (indexOf < 0) {
+        if (iIndexOf < 0) {
             throw invalidSizeF(str);
         }
         try {
-            return new SizeF(Float.parseFloat(str.substring(0, indexOf)), Float.parseFloat(str.substring(indexOf + 1)));
+            return new SizeF(Float.parseFloat(str.substring(0, iIndexOf)), Float.parseFloat(str.substring(iIndexOf + 1)));
         } catch (NumberFormatException unused) {
             throw invalidSizeF(str);
         } catch (IllegalArgumentException unused2) {

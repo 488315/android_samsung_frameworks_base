@@ -52,9 +52,9 @@ public interface IScanBackgroundServiceUpdate extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScanBackgroundServiceUpdate)) {
-                return (IScanBackgroundServiceUpdate) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScanBackgroundServiceUpdate)) {
+                return (IScanBackgroundServiceUpdate) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,15 +84,15 @@ public interface IScanBackgroundServiceUpdate extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IScanBackgroundServiceUpdateListener asInterface = IScanBackgroundServiceUpdateListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IScanBackgroundServiceUpdateListener iScanBackgroundServiceUpdateListenerAsInterface = IScanBackgroundServiceUpdateListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addBackgroundServiceUpdateListener(readString, asInterface);
+                addBackgroundServiceUpdateListener(string, iScanBackgroundServiceUpdateListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IScanBackgroundServiceUpdateListener asInterface2 = IScanBackgroundServiceUpdateListener.Stub.asInterface(parcel.readStrongBinder());
+                IScanBackgroundServiceUpdateListener iScanBackgroundServiceUpdateListenerAsInterface2 = IScanBackgroundServiceUpdateListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeBackgroundServiceUpdateListener(asInterface2);
+                removeBackgroundServiceUpdateListener(iScanBackgroundServiceUpdateListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -118,32 +118,32 @@ public interface IScanBackgroundServiceUpdate extends IInterface {
 
             @Override // android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate
             public void addBackgroundServiceUpdateListener(String str, IScanBackgroundServiceUpdateListener iScanBackgroundServiceUpdateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iScanBackgroundServiceUpdateListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iScanBackgroundServiceUpdateListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate
             public void removeBackgroundServiceUpdateListener(IScanBackgroundServiceUpdateListener iScanBackgroundServiceUpdateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
-                    obtain.writeStrongInterface(iScanBackgroundServiceUpdateListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scanbsu.IScanBackgroundServiceUpdate");
+                    parcelObtain.writeStrongInterface(iScanBackgroundServiceUpdateListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

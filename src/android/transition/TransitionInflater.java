@@ -10,6 +10,7 @@ import android.util.Xml;
 import android.view.InflateException;
 import android.view.ViewGroup;
 import com.android.internal.R;
+import com.samsung.android.location.SemLocationManager;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -30,7 +31,7 @@ public class TransitionInflater {
         return new TransitionInflater(context);
     }
 
-    public Transition inflateTransition(int i) {
+    public Transition inflateTransition(int i) throws Resources.NotFoundException {
         XmlResourceParser xml = this.mContext.getResources().getXml(i);
         try {
             try {
@@ -49,7 +50,7 @@ public class TransitionInflater {
         }
     }
 
-    public TransitionManager inflateTransitionManager(int i, ViewGroup viewGroup) {
+    public TransitionManager inflateTransitionManager(int i, ViewGroup viewGroup) throws Resources.NotFoundException {
         XmlResourceParser xml = this.mContext.getResources().getXml(i);
         try {
             try {
@@ -68,25 +69,82 @@ public class TransitionInflater {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0173, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:76:0x0173, code lost:
     
         return r3;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.transition.Transition createTransitionFromXml(org.xmlpull.v1.XmlPullParser r8, android.util.AttributeSet r9, android.transition.Transition r10) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 372
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.transition.TransitionInflater.createTransitionFromXml(org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.transition.Transition):android.transition.Transition");
+    private Transition createTransitionFromXml(XmlPullParser xmlPullParser, AttributeSet attributeSet, Transition transition) throws XmlPullParserException, IOException {
+        int depth = xmlPullParser.getDepth();
+        TransitionSet transitionSet = transition instanceof TransitionSet ? (TransitionSet) transition : null;
+        loop0: while (true) {
+            Transition transitionSet2 = null;
+            while (true) {
+                int next = xmlPullParser.next();
+                if ((next == 3 && xmlPullParser.getDepth() <= depth) || next == 1) {
+                    break loop0;
+                }
+                if (next == 2) {
+                    String name = xmlPullParser.getName();
+                    if ("fade".equals(name)) {
+                        transitionSet2 = new Fade(this.mContext, attributeSet);
+                    } else if ("changeBounds".equals(name)) {
+                        transitionSet2 = new ChangeBounds(this.mContext, attributeSet);
+                    } else if ("slide".equals(name)) {
+                        transitionSet2 = new Slide(this.mContext, attributeSet);
+                    } else if ("explode".equals(name)) {
+                        transitionSet2 = new Explode(this.mContext, attributeSet);
+                    } else if ("changeImageTransform".equals(name)) {
+                        transitionSet2 = new ChangeImageTransform(this.mContext, attributeSet);
+                    } else if ("changeTransform".equals(name)) {
+                        transitionSet2 = new ChangeTransform(this.mContext, attributeSet);
+                    } else if ("changeClipBounds".equals(name)) {
+                        transitionSet2 = new ChangeClipBounds(this.mContext, attributeSet);
+                    } else if ("autoTransition".equals(name)) {
+                        transitionSet2 = new AutoTransition(this.mContext, attributeSet);
+                    } else if ("recolor".equals(name)) {
+                        transitionSet2 = new Recolor(this.mContext, attributeSet);
+                    } else if ("changeScroll".equals(name)) {
+                        transitionSet2 = new ChangeScroll(this.mContext, attributeSet);
+                    } else if ("transitionSet".equals(name)) {
+                        transitionSet2 = new TransitionSet(this.mContext, attributeSet);
+                    } else if (SemLocationManager.GEOFENCE_TRANSITION.equals(name)) {
+                        transitionSet2 = (Transition) createCustom(attributeSet, Transition.class, SemLocationManager.GEOFENCE_TRANSITION);
+                    } else if ("targets".equals(name)) {
+                        getTargetIds(xmlPullParser, attributeSet, transition);
+                    } else if ("arcMotion".equals(name)) {
+                        transition.setPathMotion(new ArcMotion(this.mContext, attributeSet));
+                    } else if ("pathMotion".equals(name)) {
+                        transition.setPathMotion((PathMotion) createCustom(attributeSet, PathMotion.class, "pathMotion"));
+                    } else if ("patternPathMotion".equals(name)) {
+                        transition.setPathMotion(new PatternPathMotion(this.mContext, attributeSet));
+                    } else {
+                        throw new RuntimeException("Unknown scene name: " + xmlPullParser.getName());
+                    }
+                    if (transitionSet2 == null) {
+                        continue;
+                    } else {
+                        if (!xmlPullParser.isEmptyElementTag()) {
+                            createTransitionFromXml(xmlPullParser, attributeSet, transitionSet2);
+                        }
+                        if (transitionSet != null) {
+                            break;
+                        }
+                        if (transition != null) {
+                            throw new InflateException("Could not add transition to another transition.");
+                        }
+                    }
+                }
+            }
+            transitionSet.addTransition(transitionSet2);
+        }
     }
 
     private Object createCustom(AttributeSet attributeSet, Class cls, String str) {
-        Object newInstance;
-        Class<? extends U> asSubclass;
+        Object objNewInstance;
+        Class<? extends U> clsAsSubclass;
         String attributeValue = attributeSet.getAttributeValue(null, "class");
         if (attributeValue == null) {
             throw new InflateException(str + " tag must have a 'class' attribute");
@@ -95,14 +153,14 @@ public class TransitionInflater {
             ArrayMap<String, Constructor> arrayMap = sConstructors;
             synchronized (arrayMap) {
                 Constructor constructor = arrayMap.get(attributeValue);
-                if (constructor == null && (asSubclass = this.mContext.getClassLoader().loadClass(attributeValue).asSubclass(cls)) != 0) {
-                    constructor = asSubclass.getConstructor(sConstructorSignature);
+                if (constructor == null && (clsAsSubclass = this.mContext.getClassLoader().loadClass(attributeValue).asSubclass(cls)) != 0) {
+                    constructor = clsAsSubclass.getConstructor(sConstructorSignature);
                     constructor.setAccessible(true);
                     arrayMap.put(attributeValue, constructor);
                 }
-                newInstance = constructor.newInstance(this.mContext, attributeSet);
+                objNewInstance = constructor.newInstance(this.mContext, attributeSet);
             }
-            return newInstance;
+            return objNewInstance;
         } catch (ClassNotFoundException e) {
             throw new InflateException("Could not instantiate " + cls + " class " + attributeValue, e);
         } catch (IllegalAccessException e2) {
@@ -125,33 +183,33 @@ public class TransitionInflater {
             }
             if (next == 2) {
                 if (xmlPullParser.getName().equals("target")) {
-                    TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TransitionTarget);
-                    int resourceId = obtainStyledAttributes.getResourceId(1, 0);
+                    TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TransitionTarget);
+                    int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
                     if (resourceId != 0) {
                         transition.addTarget(resourceId);
                     } else {
-                        int resourceId2 = obtainStyledAttributes.getResourceId(2, 0);
+                        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(2, 0);
                         if (resourceId2 != 0) {
                             transition.excludeTarget(resourceId2, true);
                         } else {
-                            String string = obtainStyledAttributes.getString(4);
+                            String string = typedArrayObtainStyledAttributes.getString(4);
                             if (string != null) {
                                 transition.addTarget(string);
                             } else {
-                                String string2 = obtainStyledAttributes.getString(5);
+                                String string2 = typedArrayObtainStyledAttributes.getString(5);
                                 if (string2 != null) {
                                     transition.excludeTarget(string2, true);
                                 } else {
-                                    String string3 = obtainStyledAttributes.getString(3);
+                                    String string3 = typedArrayObtainStyledAttributes.getString(3);
                                     if (string3 != null) {
                                         try {
                                             transition.excludeTarget((Class) Class.forName(string3), true);
                                         } catch (ClassNotFoundException e) {
-                                            obtainStyledAttributes.recycle();
+                                            typedArrayObtainStyledAttributes.recycle();
                                             throw new RuntimeException("Could not create " + string3, e);
                                         }
                                     } else {
-                                        String string4 = obtainStyledAttributes.getString(0);
+                                        String string4 = typedArrayObtainStyledAttributes.getString(0);
                                         if (string4 != null) {
                                             transition.addTarget(Class.forName(string4));
                                         }
@@ -160,7 +218,7 @@ public class TransitionInflater {
                             }
                         }
                     }
-                    obtainStyledAttributes.recycle();
+                    typedArrayObtainStyledAttributes.recycle();
                 } else {
                     throw new RuntimeException("Unknown scene name: " + xmlPullParser.getName());
                 }
@@ -168,80 +226,54 @@ public class TransitionInflater {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0053, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0053, code lost:
     
         return r1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.transition.TransitionManager createTransitionManagerFromXml(org.xmlpull.v1.XmlPullParser r5, android.util.AttributeSet r6, android.view.ViewGroup r7) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            r4 = this;
-            int r0 = r5.getDepth()
-            r1 = 0
-        L5:
-            int r2 = r5.next()
-            r3 = 3
-            if (r2 != r3) goto L12
-            int r3 = r5.getDepth()
-            if (r3 <= r0) goto L53
-        L12:
-            r3 = 1
-            if (r2 == r3) goto L53
-            r3 = 2
-            if (r2 == r3) goto L19
-            goto L5
-        L19:
-            java.lang.String r2 = r5.getName()
-            java.lang.String r3 = "transitionManager"
-            boolean r3 = r2.equals(r3)
-            if (r3 == 0) goto L2c
-            android.transition.TransitionManager r1 = new android.transition.TransitionManager
-            r1.<init>()
-            goto L5
-        L2c:
-            java.lang.String r3 = "transition"
-            boolean r2 = r2.equals(r3)
-            if (r2 == 0) goto L3b
-            if (r1 == 0) goto L3b
-            r4.loadTransition(r6, r7, r1)
-            goto L5
-        L3b:
-            java.lang.RuntimeException r4 = new java.lang.RuntimeException
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r7 = "Unknown scene name: "
-            r6.<init>(r7)
-            java.lang.String r5 = r5.getName()
-            r6.append(r5)
-            java.lang.String r5 = r6.toString()
-            r4.<init>(r5)
-            throw r4
-        L53:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.transition.TransitionInflater.createTransitionManagerFromXml(org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.view.ViewGroup):android.transition.TransitionManager");
+    private TransitionManager createTransitionManagerFromXml(XmlPullParser xmlPullParser, AttributeSet attributeSet, ViewGroup viewGroup) throws XmlPullParserException, Resources.NotFoundException, IOException {
+        int depth = xmlPullParser.getDepth();
+        TransitionManager transitionManager = null;
+        while (true) {
+            int next = xmlPullParser.next();
+            if ((next == 3 && xmlPullParser.getDepth() <= depth) || next == 1) {
+                break;
+            }
+            if (next == 2) {
+                String name = xmlPullParser.getName();
+                if (name.equals("transitionManager")) {
+                    transitionManager = new TransitionManager();
+                } else {
+                    if (!name.equals(SemLocationManager.GEOFENCE_TRANSITION) || transitionManager == null) {
+                        break;
+                    }
+                    loadTransition(attributeSet, viewGroup, transitionManager);
+                }
+            }
+        }
+        throw new RuntimeException("Unknown scene name: " + xmlPullParser.getName());
     }
 
     private void loadTransition(AttributeSet attributeSet, ViewGroup viewGroup, TransitionManager transitionManager) throws Resources.NotFoundException {
-        Transition inflateTransition;
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TransitionManager);
-        int resourceId = obtainStyledAttributes.getResourceId(2, -1);
-        int resourceId2 = obtainStyledAttributes.getResourceId(0, -1);
+        Transition transitionInflateTransition;
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TransitionManager);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(2, -1);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(0, -1);
         Scene sceneForLayout = resourceId2 < 0 ? null : Scene.getSceneForLayout(viewGroup, resourceId2, this.mContext);
-        int resourceId3 = obtainStyledAttributes.getResourceId(1, -1);
+        int resourceId3 = typedArrayObtainStyledAttributes.getResourceId(1, -1);
         Scene sceneForLayout2 = resourceId3 >= 0 ? Scene.getSceneForLayout(viewGroup, resourceId3, this.mContext) : null;
-        if (resourceId >= 0 && (inflateTransition = inflateTransition(resourceId)) != null) {
+        if (resourceId >= 0 && (transitionInflateTransition = inflateTransition(resourceId)) != null) {
             if (sceneForLayout2 == null) {
                 throw new RuntimeException("No toScene for transition ID " + resourceId);
             }
             if (sceneForLayout == null) {
-                transitionManager.setTransition(sceneForLayout2, inflateTransition);
+                transitionManager.setTransition(sceneForLayout2, transitionInflateTransition);
             } else {
-                transitionManager.setTransition(sceneForLayout, sceneForLayout2, inflateTransition);
+                transitionManager.setTransition(sceneForLayout, sceneForLayout2, transitionInflateTransition);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

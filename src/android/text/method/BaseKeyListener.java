@@ -3,6 +3,7 @@ package android.text.method;
 import android.graphics.Paint;
 import android.icu.lang.UCharacter;
 import android.text.Editable;
+import android.text.Emoji;
 import android.text.Layout;
 import android.text.NoCopySpan;
 import android.text.Selection;
@@ -52,22 +53,226 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
         return i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x0087, code lost:
-    
-        if (android.text.Emoji.isEmojiModifier(r6) != false) goto L85;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0150 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0152 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x0152 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00ac A[PHI: r4 r5
+      0x00ac: PHI (r4v7 int) = (r4v2 int), (r4v4 int), (r4v6 int), (r4v8 int) binds: [B:90:0x0144, B:42:0x00ab, B:31:0x0087, B:27:0x006d] A[DONT_GENERATE, DONT_INLINE]
+      0x00ac: PHI (r5v5 int) = (r5v1 int), (r5v1 int), (r5v1 int), (r5v8 int) binds: [B:90:0x0144, B:42:0x00ab, B:31:0x0087, B:27:0x006d] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x0118 A[PHI: r4
+      0x0118: PHI (r4v12 int) = 
+      (r4v2 int)
+      (r4v1 int)
+      (r4v3 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v1 int)
+      (r4v13 int)
+      (r4v15 int)
+     binds: [B:93:0x014a, B:71:0x0114, B:72:0x0116, B:69:0x010c, B:63:0x00f5, B:60:0x00e9, B:50:0x00c4, B:45:0x00b3, B:47:0x00b9, B:37:0x009b, B:34:0x008f, B:26:0x006b, B:23:0x005f, B:19:0x0054, B:16:0x004a, B:17:0x004d] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:85:0x0138 A[PHI: r4
+      0x0138: PHI (r4v5 int) = (r4v2 int), (r4v6 int) binds: [B:84:0x0136, B:31:0x0087] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0150 A[ADDED_TO_REGION] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int getOffsetForBackspaceKey(java.lang.CharSequence r12, int r13) {
-        /*
-            Method dump skipped, instructions count: 374
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.method.BaseKeyListener.getOffsetForBackspaceKey(java.lang.CharSequence, int):int");
+    private static int getOffsetForBackspaceKey(CharSequence charSequence, int i) {
+        int iCharCount;
+        int iCharCount2;
+        int iCharCount3;
+        if (i <= 1) {
+            return 0;
+        }
+        int iCharCount4 = i;
+        int i2 = 0;
+        int iCharCount5 = 0;
+        int iCharCount6 = 0;
+        do {
+            int iCodePointBefore = Character.codePointBefore(charSequence, iCharCount4);
+            iCharCount4 -= Character.charCount(iCodePointBefore);
+            switch (i2) {
+                case 0:
+                    iCharCount5 = Character.charCount(iCodePointBefore);
+                    if (iCodePointBefore == 10) {
+                        i2 = 1;
+                    } else if (isVariationSelector(iCodePointBefore)) {
+                        i2 = 6;
+                    } else if (Emoji.isRegionalIndicatorSymbol(iCodePointBefore)) {
+                        i2 = 10;
+                    } else if (Emoji.isEmojiModifier(iCodePointBefore)) {
+                        i2 = 4;
+                    } else if (iCodePointBefore == Emoji.COMBINING_ENCLOSING_KEYCAP) {
+                        i2 = 2;
+                    } else if (Emoji.isEmoji(iCodePointBefore)) {
+                        i2 = 7;
+                    } else {
+                        i2 = iCodePointBefore == Emoji.CANCEL_TAG ? 12 : 13;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 1:
+                    if (iCodePointBefore == 13) {
+                        iCharCount5++;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 2:
+                    if (isVariationSelector(iCodePointBefore)) {
+                        iCharCount6 = Character.charCount(iCodePointBefore);
+                        i2 = 3;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (Emoji.isKeycapBase(iCodePointBefore)) {
+                        iCharCount = Character.charCount(iCodePointBefore);
+                        iCharCount5 += iCharCount;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 3:
+                    if (Emoji.isKeycapBase(iCodePointBefore)) {
+                        iCharCount2 = Character.charCount(iCodePointBefore);
+                        iCharCount = iCharCount2 + iCharCount6;
+                        iCharCount5 += iCharCount;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 4:
+                    if (isVariationSelector(iCodePointBefore)) {
+                        iCharCount6 = Character.charCount(iCodePointBefore);
+                        i2 = 5;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (Emoji.isEmoji(iCodePointBefore)) {
+                        iCharCount3 = Character.charCount(iCodePointBefore);
+                        iCharCount5 += iCharCount3;
+                        i2 = 7;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (Emoji.isEmojiModifierBase(iCodePointBefore)) {
+                        iCharCount = Character.charCount(iCodePointBefore);
+                        iCharCount5 += iCharCount;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 5:
+                    if (Emoji.isEmojiModifierBase(iCodePointBefore)) {
+                        iCharCount2 = Character.charCount(iCodePointBefore);
+                        iCharCount = iCharCount2 + iCharCount6;
+                        iCharCount5 += iCharCount;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 6:
+                    if (Emoji.isEmoji(iCodePointBefore)) {
+                        iCharCount3 = Character.charCount(iCodePointBefore);
+                        iCharCount5 += iCharCount3;
+                        i2 = 7;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (!isVariationSelector(iCodePointBefore) && UCharacter.getCombiningClass(iCodePointBefore) == 0) {
+                        iCharCount = Character.charCount(iCodePointBefore);
+                        iCharCount5 += iCharCount;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 7:
+                    if (iCodePointBefore == Emoji.ZERO_WIDTH_JOINER) {
+                        i2 = 8;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 8:
+                    if (Emoji.isEmoji(iCodePointBefore)) {
+                        iCharCount5 += Character.charCount(iCodePointBefore) + 1;
+                        if (Emoji.isEmojiModifier(iCodePointBefore)) {
+                        }
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (isVariationSelector(iCodePointBefore)) {
+                        iCharCount6 = Character.charCount(iCodePointBefore);
+                        i2 = 9;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 9:
+                    if (Emoji.isEmoji(iCodePointBefore)) {
+                        iCharCount5 += iCharCount6 + 1 + Character.charCount(iCodePointBefore);
+                        iCharCount6 = 0;
+                        i2 = 7;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 10:
+                    if (Emoji.isRegionalIndicatorSymbol(iCodePointBefore)) {
+                        iCharCount5 += 2;
+                        i2 = 11;
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 11:
+                    if (Emoji.isRegionalIndicatorSymbol(iCodePointBefore)) {
+                        iCharCount5 -= 2;
+                        i2 = 10;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                case 12:
+                    if (!Emoji.isTagSpecChar(iCodePointBefore)) {
+                        if (Emoji.isEmoji(iCodePointBefore)) {
+                            iCharCount = Character.charCount(iCodePointBefore);
+                            iCharCount5 += iCharCount;
+                            if (iCharCount4 <= 0) {
+                            }
+                            return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                        }
+                        iCharCount5 = 2;
+                        if (iCharCount4 <= 0) {
+                        }
+                        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                    }
+                    iCharCount5 += 2;
+                    if (iCharCount4 <= 0) {
+                    }
+                    return adjustReplacementSpan(charSequence, i - iCharCount5, true);
+                default:
+                    throw new IllegalArgumentException("state " + i2 + " is unknown");
+            }
+        } while (i2 != 13);
+        return adjustReplacementSpan(charSequence, i - iCharCount5, true);
     }
 
     private static int getOffsetForForwardDeleteKey(CharSequence charSequence, int i, Paint paint) {
@@ -122,7 +327,7 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
     }
 
     private boolean deleteUntilWordBoundary(View view, Editable editable, boolean z) {
-        int i;
+        int iFollowing;
         int selectionStart = Selection.getSelectionStart(editable);
         if (selectionStart != Selection.getSelectionEnd(editable)) {
             return false;
@@ -136,22 +341,22 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
         }
         if (z) {
             wordIterator.setCharSequence(editable, selectionStart, editable.length());
-            i = wordIterator.following(selectionStart);
-            if (i == -1) {
-                i = editable.length();
+            iFollowing = wordIterator.following(selectionStart);
+            if (iFollowing == -1) {
+                iFollowing = editable.length();
             }
         } else {
             wordIterator.setCharSequence(editable, 0, selectionStart);
-            int preceding = wordIterator.preceding(selectionStart);
-            if (preceding == -1) {
-                i = selectionStart;
+            int iPreceding = wordIterator.preceding(selectionStart);
+            if (iPreceding == -1) {
+                iFollowing = selectionStart;
                 selectionStart = 0;
             } else {
-                i = selectionStart;
-                selectionStart = preceding;
+                iFollowing = selectionStart;
+                selectionStart = iPreceding;
             }
         }
-        editable.delete(selectionStart, i);
+        editable.delete(selectionStart, iFollowing);
         return true;
     }
 
@@ -232,13 +437,13 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
 
     @Override // android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
     public boolean onKeyDown(View view, Editable editable, int i, KeyEvent keyEvent) {
-        boolean backspace;
+        boolean zBackspace;
         if (i == 67) {
-            backspace = backspace(view, editable, i, keyEvent);
+            zBackspace = backspace(view, editable, i, keyEvent);
         } else {
-            backspace = i != 112 ? false : forwardDelete(view, editable, i, keyEvent);
+            zBackspace = i != 112 ? false : forwardDelete(view, editable, i, keyEvent);
         }
-        if (backspace) {
+        if (zBackspace) {
             adjustMetaAfterKeypress(editable);
             return true;
         }

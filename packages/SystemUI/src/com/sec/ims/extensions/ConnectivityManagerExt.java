@@ -4,7 +4,6 @@ import android.net.ConnectivityManager;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ConnectivityManagerExt {
     public static final String LOG_TAG = "ConnectivityManagerExt";
@@ -22,7 +21,6 @@ public class ConnectivityManagerExt {
     public static final int TYPE_MOBILE_FOTA = getIntField("TYPE_MOBILE_FOTA", 10);
     public static final int TYPE_WIFI_P2P = getIntField("TYPE_WIFI_P2P", 13);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ConnectivityTypeExt {
         TYPE_NONE(-1),
         TYPE_MOBILE(0),

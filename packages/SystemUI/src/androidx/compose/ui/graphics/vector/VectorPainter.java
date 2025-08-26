@@ -18,7 +18,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorPainter extends Painter {
     public final MutableState autoMirror$delegate;
@@ -30,6 +29,7 @@ public final class VectorPainter extends Painter {
     public final MutableState size$delegate;
     public final VectorComponent vector;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public VectorPainter() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -48,7 +48,7 @@ public final class VectorPainter extends Painter {
 
     @Override // androidx.compose.ui.graphics.painter.Painter
     /* renamed from: getIntrinsicSize-NH-jbRc */
-    public final long mo561getIntrinsicSizeNHjbRc() {
+    public final long mo563getIntrinsicSizeNHjbRc() {
         return ((Size) ((SnapshotMutableStateImpl) this.size$delegate).getValue()).packedValue;
     }
 
@@ -60,15 +60,15 @@ public final class VectorPainter extends Painter {
             colorFilter = (ColorFilter) ((SnapshotMutableStateImpl) vectorComponent.intrinsicColorFilter$delegate).getValue();
         }
         if (((Boolean) ((SnapshotMutableStateImpl) this.autoMirror$delegate).getValue()).booleanValue() && drawScope.getLayoutDirection() == LayoutDirection.Rtl) {
-            long mo544getCenterF1C5BW0 = drawScope.mo544getCenterF1C5BW0();
+            long jMo546getCenterF1C5BW0 = drawScope.mo546getCenterF1C5BW0();
             CanvasDrawScope$drawContext$1 drawContext = drawScope.getDrawContext();
-            long m526getSizeNHjbRc = drawContext.m526getSizeNHjbRc();
+            long jM528getSizeNHjbRc = drawContext.m528getSizeNHjbRc();
             drawContext.getCanvas().save();
             try {
-                drawContext.transform.m530scale0AR0LA0(-1.0f, 1.0f, mo544getCenterF1C5BW0);
+                drawContext.transform.m532scale0AR0LA0(-1.0f, 1.0f, jMo546getCenterF1C5BW0);
                 vectorComponent.draw(drawScope, this.currentAlpha, colorFilter);
             } finally {
-                BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+                BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
             }
         } else {
             vectorComponent.draw(drawScope, this.currentAlpha, colorFilter);
@@ -79,7 +79,7 @@ public final class VectorPainter extends Painter {
     /* JADX WARN: Type inference failed for: r3v1, types: [androidx.compose.ui.graphics.vector.VectorPainter$vector$1$1, kotlin.jvm.internal.Lambda] */
     public VectorPainter(GroupComponent groupComponent) {
         Size.Companion.getClass();
-        this.size$delegate = SnapshotStateKt.mutableStateOf$default(Size.m413boximpl(0L));
+        this.size$delegate = SnapshotStateKt.mutableStateOf$default(Size.m415boximpl(0L));
         this.autoMirror$delegate = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
         VectorComponent vectorComponent = new VectorComponent(groupComponent);
         vectorComponent.invalidateCallback = new Function0() { // from class: androidx.compose.ui.graphics.vector.VectorPainter$vector$1$1
@@ -89,9 +89,9 @@ public final class VectorPainter extends Painter {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                VectorPainter vectorPainter = VectorPainter.this;
+                VectorPainter vectorPainter = this.this$0;
                 if (vectorPainter.drawCount == ((SnapshotMutableIntStateImpl) vectorPainter.invalidateCount$delegate).getIntValue()) {
-                    VectorPainter vectorPainter2 = VectorPainter.this;
+                    VectorPainter vectorPainter2 = this.this$0;
                     ((SnapshotMutableIntStateImpl) vectorPainter2.invalidateCount$delegate).setIntValue(((SnapshotMutableIntStateImpl) vectorPainter2.invalidateCount$delegate).getIntValue() + 1);
                 }
                 return Unit.INSTANCE;

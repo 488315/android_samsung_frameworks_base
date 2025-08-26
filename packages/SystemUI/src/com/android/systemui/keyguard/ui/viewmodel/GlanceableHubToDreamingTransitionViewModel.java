@@ -13,6 +13,7 @@ import com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuil
 import com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition;
 import com.android.systemui.keyguard.ui.transitions.GlanceableHubTransition;
 import com.android.systemui.scene.shared.model.Scenes;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -28,7 +29,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubToDreamingTransitionViewModel implements DeviceEntryIconTransition, GlanceableHubTransition {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +40,6 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
     public final KeyguardTransitionAnimationFlow.FlowBuilder transitionAnimation;
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 windowBlurRadius;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,14 +65,14 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
         companion.getClass();
         Edge.ContentToState contentToState = new Edge.ContentToState(sceneKey, keyguardState);
         long j = FROM_GLANCEABLE_HUB_DURATION;
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, contentToState));
-        this.transitionAnimation = m;
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, contentToState));
+        this.transitionAnimation = flowBuilderM;
         Duration.Companion companion2 = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
-        this.dreamOverlayAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, DurationKt.toDuration(167, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        this.dreamOverlayAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, DurationKt.toDuration(167, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i2) {
                     case 0:
@@ -81,17 +80,17 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                         int i3 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
                         return f;
                     default:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         int i4 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
-                        return Float.valueOf(1 - floatValue);
+                        return Float.valueOf(1 - fFloatValue);
                 }
             }
         }, DurationKt.toDuration(167, durationUnit), null, null, null, null, "GLANCEABLE_HUB->DREAMING: dreamOverlayAlpha", 120);
         this.dreamOverlayTranslationX = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).directionalDimensionPixelSize(R.dimen.hub_to_dreaming_transition_dream_overlay_translation_x), new GlanceableHubToDreamingTransitionViewModel$special$$inlined$flatMapLatest$1(null, this));
-        final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 m2599sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i2) {
                     case 0:
@@ -99,9 +98,9 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                         int i3 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
                         return f;
                     default:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         int i4 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
-                        return Float.valueOf(1 - floatValue);
+                        return Float.valueOf(1 - fFloatValue);
                 }
             }
         }, 0L, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda1
@@ -131,7 +130,6 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
         }, null, null, 204);
         this.showUmo = new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -158,81 +156,52 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L51
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        float r5 = r5.floatValue()
-                        r6 = 1065353216(0x3f800000, float:1.0)
-                        int r5 = (r5 > r6 ? 1 : (r5 == r6 ? 0 : -1))
-                        if (r5 != 0) goto L40
-                        r5 = r3
-                        goto L41
-                    L40:
-                        r5 = 0
-                    L41:
-                        r5 = r5 ^ r3
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L51
-                        return r1
-                    L51:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(!(((Number) obj).floatValue() == 1.0f));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        this.deviceEntryParentViewAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, DurationKt.toDuration(167, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        this.deviceEntryParentViewAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, DurationKt.toDuration(167, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i) {
                     case 0:
@@ -240,9 +209,9 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                         int i3 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
                         return f;
                     default:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         int i4 = GlanceableHubToDreamingTransitionViewModel.$r8$clinit;
-                        return Float.valueOf(1 - floatValue);
+                        return Float.valueOf(1 - fFloatValue);
                 }
             }
         }, 0L, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.GlanceableHubToDreamingTransitionViewModel$$ExternalSyntheticLambda1
@@ -270,7 +239,7 @@ public final class GlanceableHubToDreamingTransitionViewModel implements DeviceE
                 }
             }
         }, null, null, 204);
-        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(m)).getBlurProvider().exitBlurRadius;
+        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(flowBuilderM)).getBlurProvider().exitBlurRadius;
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

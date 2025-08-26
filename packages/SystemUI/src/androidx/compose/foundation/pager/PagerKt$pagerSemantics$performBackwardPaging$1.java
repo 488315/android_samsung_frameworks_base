@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PagerKt$pagerSemantics$performBackwardPaging$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ PagerState $state;
@@ -33,24 +32,19 @@ final class PagerKt$pagerSemantics$performBackwardPaging$1 extends SuspendLambda
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
-        Object obj3 = CoroutineSingletons.COROUTINE_SUSPENDED;
+        Object objAnimateScrollToPage;
+        Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             PagerState pagerState = this.$state;
             this.label = 1;
             float f = PagerStateKt.DefaultPositionThreshold;
-            if (pagerState.getCurrentPage() - 1 >= 0) {
-                obj2 = pagerState.animateScrollToPage(pagerState.getCurrentPage() - 1, AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7), this);
-                if (obj2 != obj3) {
-                    obj2 = Unit.INSTANCE;
-                }
-            } else {
-                obj2 = Unit.INSTANCE;
+            if (pagerState.getCurrentPage() - 1 < 0 || (objAnimateScrollToPage = pagerState.animateScrollToPage(pagerState.getCurrentPage() - 1, AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7), this)) != obj2) {
+                objAnimateScrollToPage = Unit.INSTANCE;
             }
-            if (obj2 == obj3) {
-                return obj3;
+            if (objAnimateScrollToPage == obj2) {
+                return obj2;
             }
         } else {
             if (i != 1) {

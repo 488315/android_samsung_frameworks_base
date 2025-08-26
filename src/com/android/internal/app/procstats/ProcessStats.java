@@ -1,5 +1,6 @@
 package com.android.internal.app.procstats;
 
+import android.content.ComponentName;
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Debug;
@@ -10,6 +11,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -198,7 +200,7 @@ public final class ProcessStats implements Parcelable {
         return 0;
     }
 
-    public ProcessStats(boolean z) {
+    public ProcessStats(boolean z) throws Throwable {
         this.mPackages = new ProcessMap<>();
         this.mProcesses = new ProcessMap<>();
         this.mUidStates = new SparseArray<>();
@@ -223,7 +225,7 @@ public final class ProcessStats implements Parcelable {
         }
     }
 
-    public ProcessStats(Parcel parcel) {
+    public ProcessStats(Parcel parcel) throws Throwable {
         this.mPackages = new ProcessMap<>();
         this.mProcesses = new ProcessMap<>();
         this.mUidStates = new SparseArray<>();
@@ -260,53 +262,53 @@ public final class ProcessStats implements Parcelable {
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map = processStats.mPackages.getMap();
         int i7 = 0;
         while (i7 < map.size()) {
-            String keyAt = map.keyAt(i7);
-            SparseArray<LongSparseArray<PackageState>> valueAt = map.valueAt(i7);
+            String strKeyAt = map.keyAt(i7);
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(i7);
             int i8 = 0;
-            while (i8 < valueAt.size()) {
-                int keyAt2 = valueAt.keyAt(i8);
-                LongSparseArray<PackageState> valueAt2 = valueAt.valueAt(i8);
+            while (i8 < sparseArrayValueAt.size()) {
+                int iKeyAt = sparseArrayValueAt.keyAt(i8);
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(i8);
                 int i9 = 0;
-                while (i9 < valueAt2.size()) {
-                    long keyAt3 = valueAt2.keyAt(i9);
-                    PackageState valueAt3 = valueAt2.valueAt(i9);
-                    int size = valueAt3.mProcesses.size();
-                    int size2 = valueAt3.mServices.size();
-                    int size3 = valueAt3.mAssociations.size();
+                while (i9 < longSparseArrayValueAt.size()) {
+                    long jKeyAt = longSparseArrayValueAt.keyAt(i9);
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i9);
+                    int size = packageStateValueAt.mProcesses.size();
+                    int size2 = packageStateValueAt.mServices.size();
+                    int size3 = packageStateValueAt.mAssociations.size();
                     int i10 = 0;
                     while (i10 < size) {
                         int i11 = size2;
-                        ProcessState valueAt4 = valueAt3.mProcesses.valueAt(i10);
-                        String str = keyAt;
-                        if (valueAt4.getCommonProcess() != valueAt4) {
+                        ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(i10);
+                        String str = strKeyAt;
+                        if (processStateValueAt.getCommonProcess() != processStateValueAt) {
                             arrayMap = map;
                             i3 = i11;
                             i5 = i10;
                             i6 = size3;
-                            keyAt = str;
+                            strKeyAt = str;
                             i4 = size;
-                            ProcessState processStateLocked = getProcessStateLocked(keyAt, keyAt2, keyAt3, valueAt4.getName());
+                            ProcessState processStateLocked = getProcessStateLocked(strKeyAt, iKeyAt, jKeyAt, processStateValueAt.getName());
                             i = i7;
                             if (processStateLocked.getCommonProcess() == processStateLocked) {
                                 processStateLocked.setMultiPackage(true);
-                                sparseArray = valueAt;
-                                long uptimeMillis = SystemClock.uptimeMillis();
+                                sparseArray = sparseArrayValueAt;
+                                long jUptimeMillis = SystemClock.uptimeMillis();
                                 i2 = i8;
-                                PackageState packageStateLocked = getPackageStateLocked(keyAt, keyAt2, keyAt3);
-                                processStateLocked = processStateLocked.clone(uptimeMillis);
+                                PackageState packageStateLocked = getPackageStateLocked(strKeyAt, iKeyAt, jKeyAt);
+                                processStateLocked = processStateLocked.clone(jUptimeMillis);
                                 packageStateLocked.mProcesses.put(processStateLocked.getName(), processStateLocked);
                             } else {
-                                sparseArray = valueAt;
+                                sparseArray = sparseArrayValueAt;
                                 i2 = i8;
                             }
-                            processStateLocked.add(valueAt4);
+                            processStateLocked.add(processStateValueAt);
                         } else {
                             arrayMap = map;
                             i = i7;
-                            sparseArray = valueAt;
+                            sparseArray = sparseArrayValueAt;
                             i2 = i8;
                             i3 = i11;
-                            keyAt = str;
+                            strKeyAt = str;
                             i4 = size;
                             i5 = i10;
                             i6 = size3;
@@ -318,27 +320,27 @@ public final class ProcessStats implements Parcelable {
                         size = i4;
                         map = arrayMap;
                         i7 = i;
-                        valueAt = sparseArray;
+                        sparseArrayValueAt = sparseArray;
                         i8 = i2;
                     }
                     int i13 = size3;
                     ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> arrayMap2 = map;
                     int i14 = i7;
-                    SparseArray<LongSparseArray<PackageState>> sparseArray2 = valueAt;
+                    SparseArray<LongSparseArray<PackageState>> sparseArray2 = sparseArrayValueAt;
                     int i15 = i8;
                     int i16 = size2;
                     for (int i17 = 0; i17 < i16; i17++) {
-                        ServiceState valueAt5 = valueAt3.mServices.valueAt(i17);
-                        getServiceStateLocked(keyAt, keyAt2, keyAt3, valueAt5.getProcessName(), valueAt5.getName()).add(valueAt5);
+                        ServiceState serviceStateValueAt = packageStateValueAt.mServices.valueAt(i17);
+                        getServiceStateLocked(strKeyAt, iKeyAt, jKeyAt, serviceStateValueAt.getProcessName(), serviceStateValueAt.getName()).add(serviceStateValueAt);
                     }
                     for (int i18 = 0; i18 < i13; i18++) {
-                        AssociationState valueAt6 = valueAt3.mAssociations.valueAt(i18);
-                        getAssociationStateLocked(keyAt, keyAt2, keyAt3, valueAt6.getProcessName(), valueAt6.getName()).add(valueAt6);
+                        AssociationState associationStateValueAt = packageStateValueAt.mAssociations.valueAt(i18);
+                        getAssociationStateLocked(strKeyAt, iKeyAt, jKeyAt, associationStateValueAt.getProcessName(), associationStateValueAt.getName()).add(associationStateValueAt);
                     }
                     i9++;
                     map = arrayMap2;
                     i7 = i14;
-                    valueAt = sparseArray2;
+                    sparseArrayValueAt = sparseArray2;
                     i8 = i15;
                 }
                 i8++;
@@ -349,30 +351,30 @@ public final class ProcessStats implements Parcelable {
         SparseArray<UidState> sparseArray3 = processStats.mUidStates;
         int size4 = sparseArray3.size();
         for (int i19 = 0; i19 < size4; i19++) {
-            int keyAt4 = sparseArray3.keyAt(i19);
-            UidState uidState = processStats3.mUidStates.get(keyAt4);
+            int iKeyAt2 = sparseArray3.keyAt(i19);
+            UidState uidState = processStats3.mUidStates.get(iKeyAt2);
             if (uidState == null) {
-                processStats3.mUidStates.put(keyAt4, sparseArray3.valueAt(i19).m7967clone());
+                processStats3.mUidStates.put(iKeyAt2, sparseArray3.valueAt(i19).m7978clone());
             } else {
                 uidState.add(sparseArray3.valueAt(i19));
             }
         }
         ArrayMap<String, SparseArray<ProcessState>> map2 = processStats.mProcesses.getMap();
         for (int i20 = 0; i20 < map2.size(); i20++) {
-            SparseArray<ProcessState> valueAt7 = map2.valueAt(i20);
+            SparseArray<ProcessState> sparseArrayValueAt2 = map2.valueAt(i20);
             int i21 = 0;
-            while (i21 < valueAt7.size()) {
-                int keyAt5 = valueAt7.keyAt(i21);
-                ProcessState valueAt8 = valueAt7.valueAt(i21);
-                String name = valueAt8.getName();
-                String str2 = valueAt8.getPackage();
-                long version = valueAt8.getVersion();
-                ProcessState processState = processStats3.mProcesses.get(name, keyAt5);
+            while (i21 < sparseArrayValueAt2.size()) {
+                int iKeyAt3 = sparseArrayValueAt2.keyAt(i21);
+                ProcessState processStateValueAt2 = sparseArrayValueAt2.valueAt(i21);
+                String name = processStateValueAt2.getName();
+                String str2 = processStateValueAt2.getPackage();
+                long version = processStateValueAt2.getVersion();
+                ProcessState processState = processStats3.mProcesses.get(name, iKeyAt3);
                 if (processState == null) {
-                    ProcessState processState2 = new ProcessState(this, str2, keyAt5, version, name);
+                    ProcessState processState2 = new ProcessState(this, str2, iKeyAt3, version, name);
                     processStats2 = this;
-                    processStats2.mProcesses.put(name, keyAt5, processState2);
-                    PackageState packageStateLocked2 = processStats2.getPackageStateLocked(str2, keyAt5, version);
+                    processStats2.mProcesses.put(name, iKeyAt3, processState2);
+                    PackageState packageStateLocked2 = processStats2.getPackageStateLocked(str2, iKeyAt3, version);
                     if (!packageStateLocked2.mProcesses.containsKey(name)) {
                         packageStateLocked2.mProcesses.put(name, processState2);
                     }
@@ -380,11 +382,11 @@ public final class ProcessStats implements Parcelable {
                 } else {
                     processStats2 = processStats3;
                 }
-                processState.add(valueAt8);
-                UidState uidState2 = processStats2.mUidStates.get(keyAt5);
+                processState.add(processStateValueAt2);
+                UidState uidState2 = processStats2.mUidStates.get(iKeyAt3);
                 if (uidState2 == null) {
-                    uidState2 = new UidState(processStats2, keyAt5);
-                    processStats2.mUidStates.put(keyAt5, uidState2);
+                    uidState2 = new UidState(processStats2, iKeyAt3);
+                    processStats2.mUidStates.put(iKeyAt3, uidState2);
                 }
                 uidState2.addProcess(processState);
                 i21++;
@@ -442,18 +444,22 @@ public final class ProcessStats implements Parcelable {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0086  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void computeTotalMemoryUse(TotalMemoryUseCollection totalMemoryUseCollection, long j) {
-        long[] jArr;
-        int i;
+        long[] arrayForKey;
+        int indexFromKey;
         totalMemoryUseCollection.totalTime = 0L;
-        for (int i2 = 0; i2 < 16; i2++) {
-            totalMemoryUseCollection.processStateWeight[i2] = 0.0d;
-            totalMemoryUseCollection.processStatePss[i2] = 0;
-            totalMemoryUseCollection.processStateTime[i2] = 0;
-            totalMemoryUseCollection.processStateSamples[i2] = 0;
+        for (int i = 0; i < 16; i++) {
+            totalMemoryUseCollection.processStateWeight[i] = 0.0d;
+            totalMemoryUseCollection.processStatePss[i] = 0;
+            totalMemoryUseCollection.processStateTime[i] = 0;
+            totalMemoryUseCollection.processStateSamples[i] = 0;
         }
-        for (int i3 = 0; i3 < 16; i3++) {
-            totalMemoryUseCollection.sysMemUsage[i3] = 0;
+        for (int i2 = 0; i2 < 16; i2++) {
+            totalMemoryUseCollection.sysMemUsage[i2] = 0;
         }
         totalMemoryUseCollection.sysMemCachedWeight = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         totalMemoryUseCollection.sysMemFreeWeight = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
@@ -462,52 +468,46 @@ public final class ProcessStats implements Parcelable {
         totalMemoryUseCollection.sysMemNativeWeight = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         totalMemoryUseCollection.sysMemSamples = 0;
         long[] totalMemUsage = this.mSysMemUsage.getTotalMemUsage();
-        for (int i4 = 0; i4 < totalMemoryUseCollection.screenStates.length; i4++) {
-            for (int i5 = 0; i5 < totalMemoryUseCollection.memStates.length; i5++) {
-                int i6 = totalMemoryUseCollection.screenStates[i4] + totalMemoryUseCollection.memStates[i5];
-                int i7 = i6 * 16;
-                long j2 = this.mMemFactorDurations[i6];
-                if (this.mMemFactor == i6) {
+        for (int i3 = 0; i3 < totalMemoryUseCollection.screenStates.length; i3++) {
+            for (int i4 = 0; i4 < totalMemoryUseCollection.memStates.length; i4++) {
+                int i5 = totalMemoryUseCollection.screenStates[i3] + totalMemoryUseCollection.memStates[i4];
+                int i6 = i5 * 16;
+                long j2 = this.mMemFactorDurations[i5];
+                if (this.mMemFactor == i5) {
                     j2 += j - this.mStartTime;
                 }
                 totalMemoryUseCollection.totalTime += j2;
-                int key = this.mSysMemUsage.getKey((byte) i7);
+                int key = this.mSysMemUsage.getKey((byte) i6);
                 if (key != -1) {
-                    jArr = this.mSysMemUsage.getArrayForKey(key);
-                    i = SparseMappingTable.getIndexFromKey(key);
-                    if (jArr[i] >= 3) {
+                    arrayForKey = this.mSysMemUsage.getArrayForKey(key);
+                    indexFromKey = SparseMappingTable.getIndexFromKey(key);
+                    if (arrayForKey[indexFromKey] >= 3) {
                         SysMemUsageTable.mergeSysMemUsage(totalMemoryUseCollection.sysMemUsage, 0, totalMemUsage, 0);
-                        double d = j2;
-                        totalMemoryUseCollection.sysMemCachedWeight += jArr[i + 2] * d;
-                        totalMemoryUseCollection.sysMemFreeWeight += jArr[i + 5] * d;
-                        totalMemoryUseCollection.sysMemZRamWeight += jArr[i + 8] * d;
-                        totalMemoryUseCollection.sysMemKernelWeight += jArr[i + 11] * d;
-                        totalMemoryUseCollection.sysMemNativeWeight += jArr[i + 14] * d;
-                        totalMemoryUseCollection.sysMemSamples = (int) (totalMemoryUseCollection.sysMemSamples + jArr[i]);
+                    } else {
+                        arrayForKey = totalMemUsage;
+                        indexFromKey = 0;
                     }
                 }
-                jArr = totalMemUsage;
-                i = 0;
-                double d2 = j2;
-                totalMemoryUseCollection.sysMemCachedWeight += jArr[i + 2] * d2;
-                totalMemoryUseCollection.sysMemFreeWeight += jArr[i + 5] * d2;
-                totalMemoryUseCollection.sysMemZRamWeight += jArr[i + 8] * d2;
-                totalMemoryUseCollection.sysMemKernelWeight += jArr[i + 11] * d2;
-                totalMemoryUseCollection.sysMemNativeWeight += jArr[i + 14] * d2;
-                totalMemoryUseCollection.sysMemSamples = (int) (totalMemoryUseCollection.sysMemSamples + jArr[i]);
+                double d = j2;
+                totalMemoryUseCollection.sysMemCachedWeight += arrayForKey[indexFromKey + 2] * d;
+                totalMemoryUseCollection.sysMemFreeWeight += arrayForKey[indexFromKey + 5] * d;
+                totalMemoryUseCollection.sysMemZRamWeight += arrayForKey[indexFromKey + 8] * d;
+                totalMemoryUseCollection.sysMemKernelWeight += arrayForKey[indexFromKey + 11] * d;
+                totalMemoryUseCollection.sysMemNativeWeight += arrayForKey[indexFromKey + 14] * d;
+                totalMemoryUseCollection.sysMemSamples = (int) (totalMemoryUseCollection.sysMemSamples + arrayForKey[indexFromKey]);
             }
         }
         totalMemoryUseCollection.hasSwappedOutPss = this.mHasSwappedOutPss;
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
-        for (int i8 = 0; i8 < map.size(); i8++) {
-            SparseArray<ProcessState> valueAt = map.valueAt(i8);
-            for (int i9 = 0; i9 < valueAt.size(); i9++) {
-                valueAt.valueAt(i9).aggregatePss(totalMemoryUseCollection, j);
+        for (int i7 = 0; i7 < map.size(); i7++) {
+            SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(i7);
+            for (int i8 = 0; i8 < sparseArrayValueAt.size(); i8++) {
+                sparseArrayValueAt.valueAt(i8).aggregatePss(totalMemoryUseCollection, j);
             }
         }
     }
 
-    public void reset() {
+    public void reset() throws Throwable {
         resetCommon();
         this.mPackages.getMap().clear();
         this.mProcesses.getMap().clear();
@@ -516,103 +516,103 @@ public final class ProcessStats implements Parcelable {
         this.mStartTime = 0L;
     }
 
-    public void resetSafely() {
+    public void resetSafely() throws Throwable {
         resetCommon();
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
         for (int size = map.size() - 1; size >= 0; size--) {
-            SparseArray<ProcessState> valueAt = map.valueAt(size);
-            for (int size2 = valueAt.size() - 1; size2 >= 0; size2--) {
-                valueAt.valueAt(size2).tmpNumInUse = 0;
+            SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(size);
+            for (int size2 = sparseArrayValueAt.size() - 1; size2 >= 0; size2--) {
+                sparseArrayValueAt.valueAt(size2).tmpNumInUse = 0;
             }
         }
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map2 = this.mPackages.getMap();
         for (int size3 = map2.size() - 1; size3 >= 0; size3--) {
-            SparseArray<LongSparseArray<PackageState>> valueAt2 = map2.valueAt(size3);
-            for (int size4 = valueAt2.size() - 1; size4 >= 0; size4--) {
-                LongSparseArray<PackageState> valueAt3 = valueAt2.valueAt(size4);
-                for (int size5 = valueAt3.size() - 1; size5 >= 0; size5--) {
-                    PackageState valueAt4 = valueAt3.valueAt(size5);
-                    for (int size6 = valueAt4.mProcesses.size() - 1; size6 >= 0; size6--) {
-                        ProcessState valueAt5 = valueAt4.mProcesses.valueAt(size6);
-                        if (valueAt5.isInUse()) {
-                            valueAt5.resetSafely(uptimeMillis);
-                            valueAt5.getCommonProcess().tmpNumInUse++;
-                            valueAt5.getCommonProcess().tmpFoundSubProc = valueAt5;
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt2 = map2.valueAt(size3);
+            for (int size4 = sparseArrayValueAt2.size() - 1; size4 >= 0; size4--) {
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt2.valueAt(size4);
+                for (int size5 = longSparseArrayValueAt.size() - 1; size5 >= 0; size5--) {
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(size5);
+                    for (int size6 = packageStateValueAt.mProcesses.size() - 1; size6 >= 0; size6--) {
+                        ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(size6);
+                        if (processStateValueAt.isInUse()) {
+                            processStateValueAt.resetSafely(jUptimeMillis);
+                            processStateValueAt.getCommonProcess().tmpNumInUse++;
+                            processStateValueAt.getCommonProcess().tmpFoundSubProc = processStateValueAt;
                         } else {
-                            valueAt4.mProcesses.valueAt(size6).makeDead();
-                            valueAt4.mProcesses.removeAt(size6);
+                            packageStateValueAt.mProcesses.valueAt(size6).makeDead();
+                            packageStateValueAt.mProcesses.removeAt(size6);
                         }
                     }
-                    for (int size7 = valueAt4.mServices.size() - 1; size7 >= 0; size7--) {
-                        ServiceState valueAt6 = valueAt4.mServices.valueAt(size7);
-                        if (valueAt6.isInUse()) {
-                            valueAt6.resetSafely(uptimeMillis);
+                    for (int size7 = packageStateValueAt.mServices.size() - 1; size7 >= 0; size7--) {
+                        ServiceState serviceStateValueAt = packageStateValueAt.mServices.valueAt(size7);
+                        if (serviceStateValueAt.isInUse()) {
+                            serviceStateValueAt.resetSafely(jUptimeMillis);
                         } else {
-                            valueAt4.mServices.removeAt(size7);
+                            packageStateValueAt.mServices.removeAt(size7);
                         }
                     }
-                    for (int size8 = valueAt4.mAssociations.size() - 1; size8 >= 0; size8--) {
-                        AssociationState valueAt7 = valueAt4.mAssociations.valueAt(size8);
-                        if (valueAt7.isInUse()) {
-                            valueAt7.resetSafely(uptimeMillis);
+                    for (int size8 = packageStateValueAt.mAssociations.size() - 1; size8 >= 0; size8--) {
+                        AssociationState associationStateValueAt = packageStateValueAt.mAssociations.valueAt(size8);
+                        if (associationStateValueAt.isInUse()) {
+                            associationStateValueAt.resetSafely(jUptimeMillis);
                         } else {
-                            valueAt4.mAssociations.removeAt(size8);
+                            packageStateValueAt.mAssociations.removeAt(size8);
                         }
                     }
-                    if (valueAt4.mProcesses.size() <= 0 && valueAt4.mServices.size() <= 0 && valueAt4.mAssociations.size() <= 0) {
-                        valueAt3.removeAt(size5);
+                    if (packageStateValueAt.mProcesses.size() <= 0 && packageStateValueAt.mServices.size() <= 0 && packageStateValueAt.mAssociations.size() <= 0) {
+                        longSparseArrayValueAt.removeAt(size5);
                     }
                 }
-                if (valueAt3.size() <= 0) {
-                    valueAt2.removeAt(size4);
+                if (longSparseArrayValueAt.size() <= 0) {
+                    sparseArrayValueAt2.removeAt(size4);
                 }
             }
-            if (valueAt2.size() <= 0) {
+            if (sparseArrayValueAt2.size() <= 0) {
                 map2.removeAt(size3);
             }
         }
         for (int size9 = map.size() - 1; size9 >= 0; size9--) {
-            SparseArray<ProcessState> valueAt8 = map.valueAt(size9);
-            for (int size10 = valueAt8.size() - 1; size10 >= 0; size10--) {
-                ProcessState valueAt9 = valueAt8.valueAt(size10);
-                if (valueAt9.isInUse() || valueAt9.tmpNumInUse > 0) {
-                    if (!valueAt9.isActive() && valueAt9.isMultiPackage() && valueAt9.tmpNumInUse == 1) {
-                        ProcessState processState = valueAt9.tmpFoundSubProc;
+            SparseArray<ProcessState> sparseArrayValueAt3 = map.valueAt(size9);
+            for (int size10 = sparseArrayValueAt3.size() - 1; size10 >= 0; size10--) {
+                ProcessState processStateValueAt2 = sparseArrayValueAt3.valueAt(size10);
+                if (processStateValueAt2.isInUse() || processStateValueAt2.tmpNumInUse > 0) {
+                    if (!processStateValueAt2.isActive() && processStateValueAt2.isMultiPackage() && processStateValueAt2.tmpNumInUse == 1) {
+                        ProcessState processState = processStateValueAt2.tmpFoundSubProc;
                         processState.makeStandalone();
-                        valueAt8.setValueAt(size10, processState);
+                        sparseArrayValueAt3.setValueAt(size10, processState);
                     } else {
-                        valueAt9.resetSafely(uptimeMillis);
+                        processStateValueAt2.resetSafely(jUptimeMillis);
                     }
                 } else {
-                    valueAt9.makeDead();
-                    valueAt8.removeAt(size10);
+                    processStateValueAt2.makeDead();
+                    sparseArrayValueAt3.removeAt(size10);
                 }
             }
-            if (valueAt8.size() <= 0) {
+            if (sparseArrayValueAt3.size() <= 0) {
                 map.removeAt(size9);
             }
         }
         for (int size11 = this.mUidStates.size() - 1; size11 >= 0; size11--) {
             if (this.mUidStates.valueAt(size11).isInUse()) {
-                this.mUidStates.valueAt(size11).resetSafely(uptimeMillis);
+                this.mUidStates.valueAt(size11).resetSafely(jUptimeMillis);
             } else {
                 this.mUidStates.removeAt(size11);
             }
         }
-        this.mStartTime = uptimeMillis;
+        this.mStartTime = jUptimeMillis;
     }
 
-    private void resetCommon() {
+    private void resetCommon() throws Throwable {
         this.mNumAggregated = 1;
         this.mTimePeriodStartClock = System.currentTimeMillis();
         buildTimePeriodStartClockStr();
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        this.mTimePeriodEndRealtime = elapsedRealtime;
-        this.mTimePeriodStartRealtime = elapsedRealtime;
-        long uptimeMillis = SystemClock.uptimeMillis();
-        this.mTimePeriodEndUptime = uptimeMillis;
-        this.mTimePeriodStartUptime = uptimeMillis;
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        this.mTimePeriodEndRealtime = jElapsedRealtime;
+        this.mTimePeriodStartRealtime = jElapsedRealtime;
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        this.mTimePeriodEndUptime = jUptimeMillis;
+        this.mTimePeriodStartUptime = jUptimeMillis;
         this.mInternalSinglePssCount = 0L;
         this.mInternalSinglePssTime = 0L;
         this.mInternalAllMemPssCount = 0L;
@@ -648,58 +648,59 @@ public final class ProcessStats implements Parcelable {
         this.mTimePeriodStartClockStr = DateFormat.format("yyyy-MM-dd-HH-mm-ss", this.mTimePeriodStartClock).toString();
     }
 
-    public void updateFragmentation() {
-        Integer valueOf;
-        BufferedReader bufferedReader = null;
+    public void updateFragmentation() throws Throwable {
+        BufferedReader bufferedReader;
+        Integer numValueOf;
+        BufferedReader bufferedReader2 = null;
         try {
             try {
                 try {
-                    BufferedReader bufferedReader2 = new BufferedReader(new FileReader("/proc/pagetypeinfo"));
-                    try {
-                        Matcher matcher = sPageTypeRegex.matcher("");
-                        this.mPageTypeNodes.clear();
-                        this.mPageTypeZones.clear();
-                        this.mPageTypeLabels.clear();
-                        this.mPageTypeSizes.clear();
-                        while (true) {
-                            String readLine = bufferedReader2.readLine();
-                            if (readLine != null) {
-                                matcher.reset(readLine);
-                                if (matcher.matches() && (valueOf = Integer.valueOf(matcher.group(1), 10)) != null) {
-                                    this.mPageTypeNodes.add(valueOf);
-                                    this.mPageTypeZones.add(matcher.group(2));
-                                    this.mPageTypeLabels.add(matcher.group(3));
-                                    this.mPageTypeSizes.add(splitAndParseNumbers(matcher.group(4)));
-                                }
-                            } else {
-                                bufferedReader2.close();
-                                return;
-                            }
-                        }
-                    } catch (IOException unused) {
-                        bufferedReader = bufferedReader2;
-                        this.mPageTypeNodes.clear();
-                        this.mPageTypeZones.clear();
-                        this.mPageTypeLabels.clear();
-                        this.mPageTypeSizes.clear();
-                        if (bufferedReader != null) {
-                            bufferedReader.close();
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        bufferedReader = bufferedReader2;
-                        if (bufferedReader != null) {
-                            try {
-                                bufferedReader.close();
-                            } catch (IOException unused2) {
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
+                    bufferedReader = new BufferedReader(new FileReader("/proc/pagetypeinfo"));
+                } catch (IOException unused) {
                 }
-            } catch (IOException unused3) {
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                Matcher matcher = sPageTypeRegex.matcher("");
+                this.mPageTypeNodes.clear();
+                this.mPageTypeZones.clear();
+                this.mPageTypeLabels.clear();
+                this.mPageTypeSizes.clear();
+                while (true) {
+                    String line = bufferedReader.readLine();
+                    if (line != null) {
+                        matcher.reset(line);
+                        if (matcher.matches() && (numValueOf = Integer.valueOf(matcher.group(1), 10)) != null) {
+                            this.mPageTypeNodes.add(numValueOf);
+                            this.mPageTypeZones.add(matcher.group(2));
+                            this.mPageTypeLabels.add(matcher.group(3));
+                            this.mPageTypeSizes.add(splitAndParseNumbers(matcher.group(4)));
+                        }
+                    } else {
+                        bufferedReader.close();
+                        return;
+                    }
+                }
+            } catch (IOException unused2) {
+                bufferedReader2 = bufferedReader;
+                this.mPageTypeNodes.clear();
+                this.mPageTypeZones.clear();
+                this.mPageTypeLabels.clear();
+                this.mPageTypeSizes.clear();
+                if (bufferedReader2 != null) {
+                    bufferedReader2.close();
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                bufferedReader2 = bufferedReader;
+                if (bufferedReader2 != null) {
+                    try {
+                        bufferedReader2.close();
+                    } catch (IOException unused3) {
+                    }
+                }
+                throw th;
             }
         } catch (IOException unused4) {
         }
@@ -710,8 +711,8 @@ public final class ProcessStats implements Parcelable {
         int i = 0;
         boolean z = false;
         for (int i2 = 0; i2 < length; i2++) {
-            char charAt = str.charAt(i2);
-            if (charAt < '0' || charAt > '9') {
+            char cCharAt = str.charAt(i2);
+            if (cCharAt < '0' || cCharAt > '9') {
                 z = false;
             } else if (!z) {
                 i++;
@@ -722,17 +723,17 @@ public final class ProcessStats implements Parcelable {
         int i3 = 0;
         int i4 = 0;
         for (int i5 = 0; i5 < length; i5++) {
-            char charAt2 = str.charAt(i5);
-            if (charAt2 < '0' || charAt2 > '9') {
+            char cCharAt2 = str.charAt(i5);
+            if (cCharAt2 < '0' || cCharAt2 > '9') {
                 if (z) {
                     iArr[i4] = i3;
                     i4++;
                     z = false;
                 }
             } else if (z) {
-                i3 = (i3 * 10) + (charAt2 - '0');
+                i3 = (i3 * 10) + (cCharAt2 - '0');
             } else {
-                i3 = charAt2 - '0';
+                i3 = cCharAt2 - '0';
                 z = true;
             }
         }
@@ -769,11 +770,11 @@ public final class ProcessStats implements Parcelable {
         }
         int i3 = 0;
         while (i3 < i2) {
-            int readInt = parcel.readInt();
-            if (readInt >= 0) {
-                jArr[i3] = readInt;
+            int i4 = parcel.readInt();
+            if (i4 >= 0) {
+                jArr[i3] = i4;
             } else {
-                jArr[i3] = parcel.readInt() | ((~readInt) << 32);
+                jArr[i3] = parcel.readInt() | ((~i4) << 32);
             }
             i3++;
         }
@@ -790,9 +791,9 @@ public final class ProcessStats implements Parcelable {
             return;
         }
         int size = this.mCommonStringToIndex.size();
-        Integer valueOf = Integer.valueOf(size);
-        this.mCommonStringToIndex.put(str, valueOf);
-        valueOf.getClass();
+        Integer numValueOf = Integer.valueOf(size);
+        this.mCommonStringToIndex.put(str, numValueOf);
+        numValueOf.getClass();
         parcel.writeInt(~size);
         parcel.writeString(str);
     }
@@ -801,17 +802,17 @@ public final class ProcessStats implements Parcelable {
         if (i <= 9) {
             return parcel.readString();
         }
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            return this.mIndexToCommonString.get(readInt);
+        int i2 = parcel.readInt();
+        if (i2 >= 0) {
+            return this.mIndexToCommonString.get(i2);
         }
-        int i2 = ~readInt;
-        String readString = parcel.readString();
-        while (this.mIndexToCommonString.size() <= i2) {
+        int i3 = ~i2;
+        String string = parcel.readString();
+        while (this.mIndexToCommonString.size() <= i3) {
             this.mIndexToCommonString.add(null);
         }
-        this.mIndexToCommonString.set(i2, readString);
-        return readString;
+        this.mIndexToCommonString.set(i3, string);
+        return string;
     }
 
     @Override // android.os.Parcelable
@@ -831,51 +832,51 @@ public final class ProcessStats implements Parcelable {
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
         int size = map.size();
         for (int i2 = 0; i2 < size; i2++) {
-            SparseArray<ProcessState> valueAt = map.valueAt(i2);
-            int size2 = valueAt.size();
+            SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(i2);
+            int size2 = sparseArrayValueAt.size();
             for (int i3 = 0; i3 < size2; i3++) {
-                valueAt.valueAt(i3).commitStateTime(j);
+                sparseArrayValueAt.valueAt(i3).commitStateTime(j);
             }
         }
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map2 = this.mPackages.getMap();
         int size3 = map2.size();
         int i4 = 0;
         while (i4 < size3) {
-            SparseArray<LongSparseArray<PackageState>> valueAt2 = map2.valueAt(i4);
-            int size4 = valueAt2.size();
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt2 = map2.valueAt(i4);
+            int size4 = sparseArrayValueAt2.size();
             for (int i5 = 0; i5 < size4; i5++) {
-                LongSparseArray<PackageState> valueAt3 = valueAt2.valueAt(i5);
-                int size5 = valueAt3.size();
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt2.valueAt(i5);
+                int size5 = longSparseArrayValueAt.size();
                 int i6 = 0;
                 while (i6 < size5) {
-                    PackageState valueAt4 = valueAt3.valueAt(i6);
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i6);
                     int i7 = i4;
-                    int size6 = valueAt4.mProcesses.size();
-                    SparseArray<LongSparseArray<PackageState>> sparseArray = valueAt2;
+                    int size6 = packageStateValueAt.mProcesses.size();
+                    SparseArray<LongSparseArray<PackageState>> sparseArray = sparseArrayValueAt2;
                     int i8 = 0;
                     while (i8 < size6) {
                         int i9 = size6;
-                        ProcessState valueAt5 = valueAt4.mProcesses.valueAt(i8);
+                        ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(i8);
                         int i10 = i8;
-                        if (valueAt5.getCommonProcess() != valueAt5) {
-                            valueAt5.commitStateTime(j);
+                        if (processStateValueAt.getCommonProcess() != processStateValueAt) {
+                            processStateValueAt.commitStateTime(j);
                         }
                         i8 = i10 + 1;
                         size6 = i9;
                     }
                     int i11 = 0;
-                    for (int size7 = valueAt4.mServices.size(); i11 < size7; size7 = size7) {
-                        valueAt4.mServices.valueAt(i11).commitStateTime(j);
+                    for (int size7 = packageStateValueAt.mServices.size(); i11 < size7; size7 = size7) {
+                        packageStateValueAt.mServices.valueAt(i11).commitStateTime(j);
                         i11++;
                     }
                     int i12 = 0;
-                    for (int size8 = valueAt4.mAssociations.size(); i12 < size8; size8 = size8) {
-                        valueAt4.mAssociations.valueAt(i12).commitStateTime(j);
+                    for (int size8 = packageStateValueAt.mAssociations.size(); i12 < size8; size8 = size8) {
+                        packageStateValueAt.mAssociations.valueAt(i12).commitStateTime(j);
                         i12++;
                     }
                     i6++;
                     i4 = i7;
-                    valueAt2 = sparseArray;
+                    sparseArrayValueAt2 = sparseArray;
                 }
             }
             i4++;
@@ -918,72 +919,72 @@ public final class ProcessStats implements Parcelable {
         parcel.writeInt(size);
         for (int i15 = 0; i15 < size; i15++) {
             writeCommonString(parcel, map.keyAt(i15));
-            SparseArray<ProcessState> valueAt6 = map.valueAt(i15);
-            int size10 = valueAt6.size();
+            SparseArray<ProcessState> sparseArrayValueAt3 = map.valueAt(i15);
+            int size10 = sparseArrayValueAt3.size();
             parcel.writeInt(size10);
             for (int i16 = 0; i16 < size10; i16++) {
-                parcel.writeInt(valueAt6.keyAt(i16));
-                ProcessState valueAt7 = valueAt6.valueAt(i16);
-                writeCommonString(parcel, valueAt7.getPackage());
-                parcel.writeLong(valueAt7.getVersion());
-                valueAt7.writeToParcel(parcel, j);
+                parcel.writeInt(sparseArrayValueAt3.keyAt(i16));
+                ProcessState processStateValueAt2 = sparseArrayValueAt3.valueAt(i16);
+                writeCommonString(parcel, processStateValueAt2.getPackage());
+                parcel.writeLong(processStateValueAt2.getVersion());
+                processStateValueAt2.writeToParcel(parcel, j);
             }
         }
         parcel.writeInt(size3);
         int i17 = 0;
         while (i17 < size3) {
             writeCommonString(parcel, map2.keyAt(i17));
-            SparseArray<LongSparseArray<PackageState>> valueAt8 = map2.valueAt(i17);
-            int size11 = valueAt8.size();
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt4 = map2.valueAt(i17);
+            int size11 = sparseArrayValueAt4.size();
             parcel.writeInt(size11);
             for (int i18 = 0; i18 < size11; i18++) {
-                parcel.writeInt(valueAt8.keyAt(i18));
-                LongSparseArray<PackageState> valueAt9 = valueAt8.valueAt(i18);
-                int size12 = valueAt9.size();
+                parcel.writeInt(sparseArrayValueAt4.keyAt(i18));
+                LongSparseArray<PackageState> longSparseArrayValueAt2 = sparseArrayValueAt4.valueAt(i18);
+                int size12 = longSparseArrayValueAt2.size();
                 parcel.writeInt(size12);
                 int i19 = 0;
                 while (i19 < size12) {
-                    parcel.writeLong(valueAt9.keyAt(i19));
-                    PackageState valueAt10 = valueAt9.valueAt(i19);
-                    int size13 = valueAt10.mProcesses.size();
+                    parcel.writeLong(longSparseArrayValueAt2.keyAt(i19));
+                    PackageState packageStateValueAt2 = longSparseArrayValueAt2.valueAt(i19);
+                    int size13 = packageStateValueAt2.mProcesses.size();
                     parcel.writeInt(size13);
                     int i20 = 0;
                     while (i20 < size13) {
                         int i21 = i17;
-                        writeCommonString(parcel, valueAt10.mProcesses.keyAt(i20));
-                        ProcessState valueAt11 = valueAt10.mProcesses.valueAt(i20);
-                        SparseArray<LongSparseArray<PackageState>> sparseArray2 = valueAt8;
-                        if (valueAt11.getCommonProcess() == valueAt11) {
+                        writeCommonString(parcel, packageStateValueAt2.mProcesses.keyAt(i20));
+                        ProcessState processStateValueAt3 = packageStateValueAt2.mProcesses.valueAt(i20);
+                        SparseArray<LongSparseArray<PackageState>> sparseArray2 = sparseArrayValueAt4;
+                        if (processStateValueAt3.getCommonProcess() == processStateValueAt3) {
                             parcel.writeInt(0);
                         } else {
                             parcel.writeInt(1);
-                            valueAt11.writeToParcel(parcel, j);
+                            processStateValueAt3.writeToParcel(parcel, j);
                         }
                         i20++;
                         i17 = i21;
-                        valueAt8 = sparseArray2;
+                        sparseArrayValueAt4 = sparseArray2;
                     }
                     int i22 = i17;
-                    SparseArray<LongSparseArray<PackageState>> sparseArray3 = valueAt8;
-                    int size14 = valueAt10.mServices.size();
+                    SparseArray<LongSparseArray<PackageState>> sparseArray3 = sparseArrayValueAt4;
+                    int size14 = packageStateValueAt2.mServices.size();
                     parcel.writeInt(size14);
                     for (int i23 = 0; i23 < size14; i23++) {
-                        parcel.writeString(valueAt10.mServices.keyAt(i23));
-                        ServiceState valueAt12 = valueAt10.mServices.valueAt(i23);
-                        writeCommonString(parcel, valueAt12.getProcessName());
-                        valueAt12.writeToParcel(parcel, j);
+                        parcel.writeString(packageStateValueAt2.mServices.keyAt(i23));
+                        ServiceState serviceStateValueAt = packageStateValueAt2.mServices.valueAt(i23);
+                        writeCommonString(parcel, serviceStateValueAt.getProcessName());
+                        serviceStateValueAt.writeToParcel(parcel, j);
                     }
-                    int size15 = valueAt10.mAssociations.size();
+                    int size15 = packageStateValueAt2.mAssociations.size();
                     parcel.writeInt(size15);
                     for (int i24 = 0; i24 < size15; i24++) {
-                        writeCommonString(parcel, valueAt10.mAssociations.keyAt(i24));
-                        AssociationState valueAt13 = valueAt10.mAssociations.valueAt(i24);
-                        writeCommonString(parcel, valueAt13.getProcessName());
-                        valueAt13.writeToParcel(this, parcel, j);
+                        writeCommonString(parcel, packageStateValueAt2.mAssociations.keyAt(i24));
+                        AssociationState associationStateValueAt = packageStateValueAt2.mAssociations.valueAt(i24);
+                        writeCommonString(parcel, associationStateValueAt.getProcessName());
+                        associationStateValueAt.writeToParcel(this, parcel, j);
                     }
                     i19++;
                     i17 = i22;
-                    valueAt8 = sparseArray3;
+                    sparseArrayValueAt4 = sparseArray3;
                 }
             }
             i17++;
@@ -1000,25 +1001,25 @@ public final class ProcessStats implements Parcelable {
     }
 
     private boolean readCheckedInt(Parcel parcel, int i, String str) {
-        int readInt = parcel.readInt();
-        if (readInt == i) {
+        int i2 = parcel.readInt();
+        if (i2 == i) {
             return true;
         }
-        this.mReadError = "bad " + str + ": " + readInt;
+        this.mReadError = "bad " + str + ": " + i2;
         return false;
     }
 
     static byte[] readFully(InputStream inputStream, int[] iArr) throws IOException {
-        int available = inputStream.available();
-        byte[] bArr = new byte[available > 0 ? available + 1 : 16384];
+        int iAvailable = inputStream.available();
+        byte[] bArr = new byte[iAvailable > 0 ? iAvailable + 1 : 16384];
         int i = 0;
         while (true) {
-            int read = inputStream.read(bArr, i, bArr.length - i);
-            if (read < 0) {
+            int i2 = inputStream.read(bArr, i, bArr.length - i);
+            if (i2 < 0) {
                 iArr[0] = i;
                 return bArr;
             }
-            i += read;
+            i += i2;
             if (i >= bArr.length) {
                 byte[] bArr2 = new byte[i + 16384];
                 System.arraycopy(bArr, 0, bArr2, 0, i);
@@ -1027,21 +1028,21 @@ public final class ProcessStats implements Parcelable {
         }
     }
 
-    public void read(InputStream inputStream) {
+    public void read(InputStream inputStream) throws Throwable {
         try {
             int[] iArr = new int[1];
-            byte[] readFully = readFully(inputStream, iArr);
-            Parcel obtain = Parcel.obtain();
-            obtain.unmarshall(readFully, 0, iArr[0]);
-            obtain.setDataPosition(0);
+            byte[] fully = readFully(inputStream, iArr);
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.unmarshall(fully, 0, iArr[0]);
+            parcelObtain.setDataPosition(0);
             inputStream.close();
-            readFromParcel(obtain);
+            readFromParcel(parcelObtain);
         } catch (IOException e) {
             this.mReadError = "caught exception: " + e;
         }
     }
 
-    public void readFromParcel(Parcel parcel) {
+    public void readFromParcel(Parcel parcel) throws Throwable {
         int i;
         int i2;
         long j;
@@ -1058,9 +1059,9 @@ public final class ProcessStats implements Parcelable {
             resetSafely();
         }
         if (readCheckedInt(parcel, MAGIC, "magic number")) {
-            int readInt = parcel.readInt();
-            if (readInt != 41) {
-                this.mReadError = "bad version: " + readInt;
+            int i5 = parcel.readInt();
+            if (i5 != 41) {
+                this.mReadError = "bad version: " + i5;
                 return;
             }
             if (readCheckedInt(parcel, 16, "state count") && readCheckedInt(parcel, 8, "adj count") && readCheckedInt(parcel, 10, "pss count") && readCheckedInt(parcel, 16, "sys mem usage count") && readCheckedInt(parcel, 4096, "longs size")) {
@@ -1087,253 +1088,253 @@ public final class ProcessStats implements Parcelable {
                 this.mFlags = parcel.readInt();
                 this.mTableData.readFromParcel(parcel);
                 long[] jArr = this.mMemFactorDurations;
-                readCompactedLongArray(parcel, readInt, jArr, jArr.length);
+                readCompactedLongArray(parcel, i5, jArr, jArr.length);
                 if (this.mSysMemUsage.readFromParcel(parcel)) {
-                    int readInt2 = parcel.readInt();
-                    for (int i5 = 0; i5 < readInt2; i5++) {
-                        int readInt3 = parcel.readInt();
-                        UidState uidState = new UidState(this, readInt3);
+                    int i6 = parcel.readInt();
+                    for (int i7 = 0; i7 < i6; i7++) {
+                        int i8 = parcel.readInt();
+                        UidState uidState = new UidState(this, i8);
                         if (!uidState.readFromParcel(parcel)) {
                             return;
                         }
-                        this.mUidStates.put(readInt3, uidState);
+                        this.mUidStates.put(i8, uidState);
                     }
-                    int readInt4 = parcel.readInt();
-                    if (readInt4 < 0) {
-                        this.mReadError = "bad process count: " + readInt4;
+                    int i9 = parcel.readInt();
+                    if (i9 < 0) {
+                        this.mReadError = "bad process count: " + i9;
                         return;
                     }
-                    while (readInt4 > 0) {
-                        int i6 = readInt4 - 1;
-                        String readCommonString = readCommonString(parcel, readInt);
-                        if (readCommonString == null) {
+                    while (i9 > 0) {
+                        int i10 = i9 - 1;
+                        String commonString = readCommonString(parcel, i5);
+                        if (commonString == null) {
                             this.mReadError = "bad process name";
                             return;
                         }
-                        int readInt5 = parcel.readInt();
-                        if (readInt5 < 0) {
-                            this.mReadError = "bad uid count: " + readInt5;
+                        int i11 = parcel.readInt();
+                        if (i11 < 0) {
+                            this.mReadError = "bad uid count: " + i11;
                             return;
                         }
-                        while (readInt5 > 0) {
-                            int i7 = readInt5 - 1;
-                            int readInt6 = parcel.readInt();
-                            if (readInt6 < 0) {
-                                this.mReadError = "bad uid: " + readInt6;
+                        while (i11 > 0) {
+                            int i12 = i11 - 1;
+                            int i13 = parcel.readInt();
+                            if (i13 < 0) {
+                                this.mReadError = "bad uid: " + i13;
                                 return;
                             }
-                            String readCommonString2 = readCommonString(parcel, readInt);
-                            if (readCommonString2 == null) {
+                            String commonString2 = readCommonString(parcel, i5);
+                            if (commonString2 == null) {
                                 this.mReadError = "bad process package name";
                                 return;
                             }
-                            long readLong = parcel.readLong();
-                            ProcessState processState3 = z3 ? this.mProcesses.get(readCommonString, readInt6) : null;
+                            long j2 = parcel.readLong();
+                            ProcessState processState3 = z3 ? this.mProcesses.get(commonString, i13) : null;
                             if (processState3 != null) {
-                                if (!processState3.readFromParcel(parcel, readInt, false)) {
+                                if (!processState3.readFromParcel(parcel, i5, false)) {
                                     return;
                                 }
                                 ProcessState processState4 = processState3;
-                                str2 = readCommonString;
+                                str2 = commonString;
                                 processState2 = processState4;
                             } else {
-                                str2 = readCommonString;
-                                processState2 = new ProcessState(this, readCommonString2, readInt6, readLong, str2);
-                                if (!processState2.readFromParcel(parcel, readInt, true)) {
+                                str2 = commonString;
+                                processState2 = new ProcessState(this, commonString2, i13, j2, str2);
+                                if (!processState2.readFromParcel(parcel, i5, true)) {
                                     return;
                                 }
                             }
-                            this.mProcesses.put(str2, readInt6, processState2);
-                            UidState uidState2 = this.mUidStates.get(readInt6);
+                            this.mProcesses.put(str2, i13, processState2);
+                            UidState uidState2 = this.mUidStates.get(i13);
                             if (uidState2 == null) {
-                                uidState2 = new UidState(this, readInt6);
-                                this.mUidStates.put(readInt6, uidState2);
+                                uidState2 = new UidState(this, i13);
+                                this.mUidStates.put(i13, uidState2);
                             }
                             uidState2.addProcess(processState2);
-                            readCommonString = str2;
-                            readInt5 = i7;
+                            commonString = str2;
+                            i11 = i12;
                         }
-                        readInt4 = i6;
+                        i9 = i10;
                     }
-                    for (int i8 = 0; i8 < readInt2; i8++) {
-                        this.mUidStates.valueAt(i8).updateCombinedState(-1L);
+                    for (int i14 = 0; i14 < i6; i14++) {
+                        this.mUidStates.valueAt(i14).updateCombinedState(-1L);
                     }
-                    int readInt7 = parcel.readInt();
-                    if (readInt7 < 0) {
-                        this.mReadError = "bad package count: " + readInt7;
+                    int i15 = parcel.readInt();
+                    if (i15 < 0) {
+                        this.mReadError = "bad package count: " + i15;
                         return;
                     }
-                    while (readInt7 > 0) {
-                        int i9 = readInt7 - 1;
-                        String readCommonString3 = readCommonString(parcel, readInt);
-                        if (readCommonString3 == null) {
+                    while (i15 > 0) {
+                        int i16 = i15 - 1;
+                        String commonString3 = readCommonString(parcel, i5);
+                        if (commonString3 == null) {
                             this.mReadError = "bad package name";
                             return;
                         }
-                        int readInt8 = parcel.readInt();
-                        if (readInt8 < 0) {
-                            this.mReadError = "bad uid count: " + readInt8;
+                        int i17 = parcel.readInt();
+                        if (i17 < 0) {
+                            this.mReadError = "bad uid count: " + i17;
                             return;
                         }
-                        while (readInt8 > 0) {
-                            int i10 = readInt8 - 1;
-                            int readInt9 = parcel.readInt();
-                            if (readInt9 < 0) {
-                                this.mReadError = "bad uid: " + readInt9;
+                        while (i17 > 0) {
+                            int i18 = i17 - 1;
+                            int i19 = parcel.readInt();
+                            if (i19 < 0) {
+                                this.mReadError = "bad uid: " + i19;
                                 return;
                             }
-                            int readInt10 = parcel.readInt();
-                            if (readInt10 < 0) {
-                                this.mReadError = "bad versions count: " + readInt10;
+                            int i20 = parcel.readInt();
+                            if (i20 < 0) {
+                                this.mReadError = "bad versions count: " + i20;
                                 return;
                             }
-                            while (readInt10 > 0) {
-                                int i11 = readInt10 - 1;
-                                long readLong2 = parcel.readLong();
-                                PackageState packageState = new PackageState(this, readCommonString3, readInt9, readLong2);
-                                LongSparseArray<PackageState> longSparseArray = this.mPackages.get(readCommonString3, readInt9);
+                            while (i20 > 0) {
+                                int i21 = i20 - 1;
+                                long j3 = parcel.readLong();
+                                PackageState packageState = new PackageState(this, commonString3, i19, j3);
+                                LongSparseArray<PackageState> longSparseArray = this.mPackages.get(commonString3, i19);
                                 if (longSparseArray == null) {
                                     longSparseArray = new LongSparseArray<>();
-                                    this.mPackages.put(readCommonString3, readInt9, longSparseArray);
+                                    this.mPackages.put(commonString3, i19, longSparseArray);
                                 }
-                                longSparseArray.put(readLong2, packageState);
-                                int readInt11 = parcel.readInt();
-                                if (readInt11 < 0) {
-                                    this.mReadError = "bad package process count: " + readInt11;
+                                longSparseArray.put(j3, packageState);
+                                int i22 = parcel.readInt();
+                                if (i22 < 0) {
+                                    this.mReadError = "bad package process count: " + i22;
                                     return;
                                 }
-                                while (readInt11 > 0) {
-                                    readInt11--;
-                                    String readCommonString4 = readCommonString(parcel, readInt);
-                                    if (readCommonString4 == null) {
+                                while (i22 > 0) {
+                                    i22--;
+                                    String commonString4 = readCommonString(parcel, i5);
+                                    if (commonString4 == null) {
                                         this.mReadError = "bad package process name";
                                         return;
                                     }
-                                    int readInt12 = parcel.readInt();
-                                    ProcessState processState5 = this.mProcesses.get(readCommonString4, readInt9);
+                                    int i23 = parcel.readInt();
+                                    ProcessState processState5 = this.mProcesses.get(commonString4, i19);
                                     if (processState5 == null) {
-                                        this.mReadError = "no common proc: " + readCommonString4;
+                                        this.mReadError = "no common proc: " + commonString4;
                                         return;
                                     }
-                                    if (readInt12 != 0) {
-                                        ProcessState processState6 = z3 ? packageState.mProcesses.get(readCommonString4) : null;
+                                    if (i23 != 0) {
+                                        ProcessState processState6 = z3 ? packageState.mProcesses.get(commonString4) : null;
                                         if (processState6 != null) {
-                                            j = readLong2;
+                                            j = j3;
                                             i3 = 0;
-                                            if (!processState6.readFromParcel(parcel, readInt, false)) {
+                                            if (!processState6.readFromParcel(parcel, i5, false)) {
                                                 return;
                                             }
-                                            i2 = readInt9;
-                                            str = readCommonString4;
+                                            i2 = i19;
+                                            str = commonString4;
                                             processState = processState6;
                                             z = true;
                                         } else {
-                                            j = readLong2;
+                                            j = j3;
                                             i3 = 0;
-                                            i2 = readInt9;
-                                            processState = new ProcessState(processState5, readCommonString3, i2, j, readCommonString4, 0L);
-                                            str = readCommonString4;
+                                            i2 = i19;
+                                            processState = new ProcessState(processState5, commonString3, i2, j, commonString4, 0L);
+                                            str = commonString4;
                                             z = true;
-                                            if (!processState.readFromParcel(parcel, readInt, true)) {
+                                            if (!processState.readFromParcel(parcel, i5, true)) {
                                                 return;
                                             }
                                         }
                                         packageState.mProcesses.put(str, processState);
                                     } else {
-                                        i2 = readInt9;
-                                        j = readLong2;
+                                        i2 = i19;
+                                        j = j3;
                                         i3 = i4;
                                         z = true;
-                                        packageState.mProcesses.put(readCommonString4, processState5);
+                                        packageState.mProcesses.put(commonString4, processState5);
                                     }
                                     z2 = z;
-                                    readInt9 = i2;
+                                    i19 = i2;
                                     i4 = i3;
-                                    readLong2 = j;
+                                    j3 = j;
                                 }
-                                int i12 = readInt9;
-                                int i13 = i4;
+                                int i24 = i19;
+                                int i25 = i4;
                                 boolean z4 = z2;
-                                int readInt13 = parcel.readInt();
-                                if (readInt13 < 0) {
-                                    this.mReadError = "bad package service count: " + readInt13;
+                                int i26 = parcel.readInt();
+                                if (i26 < 0) {
+                                    this.mReadError = "bad package service count: " + i26;
                                     return;
                                 }
-                                while (readInt13 > 0) {
-                                    int i14 = readInt13 - 1;
-                                    String readString = parcel.readString();
-                                    if (readString == null) {
+                                while (i26 > 0) {
+                                    int i27 = i26 - 1;
+                                    String string = parcel.readString();
+                                    if (string == null) {
                                         this.mReadError = "bad package service name";
                                         return;
                                     }
-                                    String readCommonString5 = readInt > 9 ? readCommonString(parcel, readInt) : null;
-                                    ServiceState serviceState = z3 ? packageState.mServices.get(readString) : null;
+                                    String commonString5 = i5 > 9 ? readCommonString(parcel, i5) : null;
+                                    ServiceState serviceState = z3 ? packageState.mServices.get(string) : null;
                                     PackageState packageState2 = packageState;
                                     if (serviceState == null) {
-                                        i = i13;
-                                        serviceState = new ServiceState(this, readCommonString3, readString, readCommonString5, null);
+                                        i = i25;
+                                        serviceState = new ServiceState(this, commonString3, string, commonString5, null);
                                     } else {
-                                        i = i13;
+                                        i = i25;
                                     }
-                                    String str3 = readCommonString3;
+                                    String str3 = commonString3;
                                     if (!serviceState.readFromParcel(parcel)) {
                                         return;
                                     }
-                                    packageState2.mServices.put(readString, serviceState);
-                                    readInt13 = i14;
+                                    packageState2.mServices.put(string, serviceState);
+                                    i26 = i27;
                                     packageState = packageState2;
-                                    readCommonString3 = str3;
-                                    i13 = i;
+                                    commonString3 = str3;
+                                    i25 = i;
                                 }
                                 PackageState packageState3 = packageState;
-                                String str4 = readCommonString3;
-                                int i15 = i13;
-                                int readInt14 = parcel.readInt();
-                                if (readInt14 < 0) {
-                                    this.mReadError = "bad package association count: " + readInt14;
+                                String str4 = commonString3;
+                                int i28 = i25;
+                                int i29 = parcel.readInt();
+                                if (i29 < 0) {
+                                    this.mReadError = "bad package association count: " + i29;
                                     return;
                                 }
-                                while (readInt14 > 0) {
-                                    int i16 = readInt14 - 1;
-                                    String readCommonString6 = readCommonString(parcel, readInt);
-                                    if (readCommonString6 == null) {
+                                while (i29 > 0) {
+                                    int i30 = i29 - 1;
+                                    String commonString6 = readCommonString(parcel, i5);
+                                    if (commonString6 == null) {
                                         this.mReadError = "bad package association name";
                                         return;
                                     }
-                                    String readCommonString7 = readCommonString(parcel, readInt);
-                                    AssociationState associationState = z3 ? packageState3.mAssociations.get(readCommonString6) : null;
+                                    String commonString7 = readCommonString(parcel, i5);
+                                    AssociationState associationState = z3 ? packageState3.mAssociations.get(commonString6) : null;
                                     if (associationState == null) {
-                                        associationState = new AssociationState(this, packageState3, readCommonString6, readCommonString7, null);
+                                        associationState = new AssociationState(this, packageState3, commonString6, commonString7, null);
                                     }
-                                    String readFromParcel = associationState.readFromParcel(this, parcel, readInt);
-                                    if (readFromParcel != null) {
-                                        this.mReadError = readFromParcel;
+                                    String fromParcel = associationState.readFromParcel(this, parcel, i5);
+                                    if (fromParcel != null) {
+                                        this.mReadError = fromParcel;
                                         return;
                                     } else {
-                                        packageState3.mAssociations.put(readCommonString6, associationState);
-                                        readInt14 = i16;
+                                        packageState3.mAssociations.put(commonString6, associationState);
+                                        i29 = i30;
                                     }
                                 }
                                 z2 = z4;
-                                readCommonString3 = str4;
-                                readInt9 = i12;
-                                readInt10 = i11;
-                                i4 = i15;
+                                commonString3 = str4;
+                                i19 = i24;
+                                i20 = i21;
+                                i4 = i28;
                             }
-                            readInt8 = i10;
+                            i17 = i18;
                         }
-                        readInt7 = i9;
+                        i15 = i16;
                     }
-                    int readInt15 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     this.mPageTypeNodes.clear();
-                    this.mPageTypeNodes.ensureCapacity(readInt15);
+                    this.mPageTypeNodes.ensureCapacity(i31);
                     this.mPageTypeZones.clear();
-                    this.mPageTypeZones.ensureCapacity(readInt15);
+                    this.mPageTypeZones.ensureCapacity(i31);
                     this.mPageTypeLabels.clear();
-                    this.mPageTypeLabels.ensureCapacity(readInt15);
+                    this.mPageTypeLabels.ensureCapacity(i31);
                     this.mPageTypeSizes.clear();
-                    this.mPageTypeSizes.ensureCapacity(readInt15);
-                    while (i4 < readInt15) {
+                    this.mPageTypeSizes.ensureCapacity(i31);
+                    while (i4 < i31) {
                         this.mPageTypeNodes.add(Integer.valueOf(parcel.readInt()));
                         this.mPageTypeZones.add(parcel.readString());
                         this.mPageTypeLabels.add(parcel.readString());
@@ -1395,27 +1396,27 @@ public final class ProcessStats implements Parcelable {
         if (!processState.isMultiPackage()) {
             if (!packageState.mPackageName.equals(processState.getPackage()) || packageState.mVersionCode != processState.getVersion()) {
                 processState.setMultiPackage(true);
-                long uptimeMillis = SystemClock.uptimeMillis();
+                long jUptimeMillis = SystemClock.uptimeMillis();
                 PackageState packageStateLocked = processStats.getPackageStateLocked(processState.getPackage(), packageState.mUid, processState.getVersion());
                 if (packageStateLocked != null) {
-                    ProcessState clone = processState.clone(uptimeMillis);
-                    packageStateLocked.mProcesses.put(processState.getName(), clone);
+                    ProcessState processStateClone = processState.clone(jUptimeMillis);
+                    packageStateLocked.mProcesses.put(processState.getName(), processStateClone);
                     for (int size = packageStateLocked.mServices.size() - 1; size >= 0; size--) {
-                        ServiceState valueAt = packageStateLocked.mServices.valueAt(size);
-                        if (valueAt.getProcess() == processState) {
-                            valueAt.setProcess(clone);
+                        ServiceState serviceStateValueAt = packageStateLocked.mServices.valueAt(size);
+                        if (serviceStateValueAt.getProcess() == processState) {
+                            serviceStateValueAt.setProcess(processStateClone);
                         }
                     }
                     for (int size2 = packageStateLocked.mAssociations.size() - 1; size2 >= 0; size2--) {
-                        AssociationState valueAt2 = packageStateLocked.mAssociations.valueAt(size2);
-                        if (valueAt2.getProcess() == processState) {
-                            valueAt2.setProcess(clone);
+                        AssociationState associationStateValueAt = packageStateLocked.mAssociations.valueAt(size2);
+                        if (associationStateValueAt.getProcess() == processState) {
+                            associationStateValueAt.setProcess(processStateClone);
                         }
                     }
                 } else {
                     Slog.w(TAG, "Cloning proc state: no package state " + processState.getPackage() + "/" + packageState.mUid + " for proc " + processState.getName());
                 }
-                processState2 = new ProcessState(processState, packageState.mPackageName, packageState.mUid, packageState.mVersionCode, str2, uptimeMillis);
+                processState2 = new ProcessState(processState, packageState.mPackageName, packageState.mUid, packageState.mVersionCode, str2, jUptimeMillis);
             }
             packageState.mProcesses.put(str2, processState);
             return processState;
@@ -1428,20 +1429,20 @@ public final class ProcessStats implements Parcelable {
 
     public ServiceState getServiceStateLocked(String str, int i, long j, String str2, String str3) {
         String str4;
-        ProcessState processState;
+        ProcessState processStateLocked;
         PackageState packageStateLocked = getPackageStateLocked(str, i, j);
         ServiceState serviceState = packageStateLocked.mServices.get(str3);
         if (serviceState != null) {
             return serviceState;
         }
         if (str2 != null) {
-            processState = getProcessStateLocked(str, i, j, str2);
+            processStateLocked = getProcessStateLocked(str, i, j, str2);
             str4 = str2;
         } else {
             str4 = str2;
-            processState = null;
+            processStateLocked = null;
         }
-        ServiceState serviceState2 = new ServiceState(this, str, str3, str4, processState);
+        ServiceState serviceState2 = new ServiceState(this, str, str3, str4, processStateLocked);
         packageStateLocked.mServices.put(str3, serviceState2);
         return serviceState2;
     }
@@ -1449,22 +1450,22 @@ public final class ProcessStats implements Parcelable {
     public AssociationState getAssociationStateLocked(String str, int i, long j, String str2, String str3) {
         ProcessStats processStats;
         String str4;
-        ProcessState processState;
+        ProcessState processStateLocked;
         PackageState packageStateLocked = getPackageStateLocked(str, i, j);
         AssociationState associationState = packageStateLocked.mAssociations.get(str3);
         if (associationState != null) {
             return associationState;
         }
         if (str2 != null) {
-            processState = getProcessStateLocked(str, i, j, str2);
+            processStateLocked = getProcessStateLocked(str, i, j, str2);
             processStats = this;
             str4 = str2;
         } else {
             processStats = this;
             str4 = str2;
-            processState = null;
+            processStateLocked = null;
         }
-        AssociationState associationState2 = new AssociationState(processStats, packageStateLocked, str3, str4, processState);
+        AssociationState associationState2 = new AssociationState(processStats, packageStateLocked, str3, str4, processStateLocked);
         packageStateLocked.mAssociations.put(str3, associationState2);
         return associationState2;
     }
@@ -1489,13 +1490,13 @@ public final class ProcessStats implements Parcelable {
                         } else {
                             sourceState.stopActive(j);
                             if (sourceState.mProcState < combinedState) {
-                                long uptimeMillis = SystemClock.uptimeMillis();
-                                if (this.mNextInverseProcStateWarningUptime > uptimeMillis) {
+                                long jUptimeMillis = SystemClock.uptimeMillis();
+                                if (this.mNextInverseProcStateWarningUptime > jUptimeMillis) {
                                     this.mSkippedInverseProcStateWarningCount++;
                                 } else {
                                     Slog.w(TAG, "Tracking association " + sourceState + " whose proc state " + sourceState.mProcState + " is better than process " + process + " proc state " + combinedState + " (" + this.mSkippedInverseProcStateWarningCount + " skipped)");
                                     this.mSkippedInverseProcStateWarningCount = 0;
-                                    this.mNextInverseProcStateWarningUptime = uptimeMillis + 10000;
+                                    this.mNextInverseProcStateWarningUptime = jUptimeMillis + 10000;
                                 }
                             }
                         }
@@ -1517,9 +1518,9 @@ public final class ProcessStats implements Parcelable {
     }
 
     static /* synthetic */ int lambda$static$0(AssociationDumpContainer associationDumpContainer, AssociationDumpContainer associationDumpContainer2) {
-        int compareTo = associationDumpContainer.mState.getProcessName().compareTo(associationDumpContainer2.mState.getProcessName());
-        if (compareTo != 0) {
-            return compareTo;
+        int iCompareTo = associationDumpContainer.mState.getProcessName().compareTo(associationDumpContainer2.mState.getProcessName());
+        if (iCompareTo != 0) {
+            return iCompareTo;
         }
         if (associationDumpContainer.mActiveTime != associationDumpContainer2.mActiveTime) {
             return associationDumpContainer.mActiveTime > associationDumpContainer2.mActiveTime ? -1 : 1;
@@ -1527,27 +1528,792 @@ public final class ProcessStats implements Parcelable {
         if (associationDumpContainer.mTotalTime != associationDumpContainer2.mTotalTime) {
             return associationDumpContainer.mTotalTime > associationDumpContainer2.mTotalTime ? -1 : 1;
         }
-        int compareTo2 = associationDumpContainer.mState.getName().compareTo(associationDumpContainer2.mState.getName());
-        if (compareTo2 != 0) {
-            return compareTo2;
+        int iCompareTo2 = associationDumpContainer.mState.getName().compareTo(associationDumpContainer2.mState.getName());
+        if (iCompareTo2 != 0) {
+            return iCompareTo2;
         }
         return 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:211:0x058d, code lost:
-    
-        if (r15.equals(r5.getPackage()) == false) goto L193;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void dumpLocked(java.io.PrintWriter r41, java.lang.String r42, long r43, boolean r45, boolean r46, boolean r47, boolean r48, int r49) {
-        /*
-            Method dump skipped, instructions count: 2181
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.procstats.ProcessStats.dumpLocked(java.io.PrintWriter, java.lang.String, long, boolean, boolean, boolean, boolean, int):void");
+    public void dumpLocked(PrintWriter printWriter, String str, long j, boolean z, boolean z2, boolean z3, boolean z4, int i) {
+        boolean z5;
+        long j2;
+        String str2;
+        String str3;
+        String str4;
+        String str5;
+        String str6;
+        String str7;
+        boolean z6;
+        int i2;
+        String str8;
+        int i3;
+        ArrayMap<String, SparseArray<ProcessState>> arrayMap;
+        boolean z7;
+        int i4;
+        int i5;
+        String str9;
+        SparseArray<ProcessState> sparseArray;
+        String str10;
+        String str11;
+        String str12;
+        ArrayMap<String, SparseArray<ProcessState>> arrayMap2;
+        String str13;
+        String str14;
+        int i6;
+        String str15;
+        int i7;
+        boolean z8;
+        boolean z9;
+        String str16;
+        long j3;
+        int i8;
+        String str17;
+        String str18;
+        int i9;
+        String str19;
+        String str20;
+        int i10;
+        String str21;
+        String str22;
+        String str23;
+        String str24;
+        String str25;
+        String str26;
+        String str27;
+        PackageState packageState;
+        String str28;
+        String str29;
+        int i11;
+        String str30;
+        String str31;
+        int i12;
+        ArrayList arrayList;
+        String str32;
+        ProcessStats processStats;
+        int i13;
+        int i14;
+        int i15;
+        String str33;
+        String str34;
+        String str35;
+        String str36;
+        int i16;
+        boolean z10;
+        boolean z11;
+        ProcessStats processStats2 = this;
+        PrintWriter printWriter2 = printWriter;
+        String str37 = str;
+        long jDumpSingleTime = DumpUtils.dumpSingleTime(null, null, processStats2.mMemFactorDurations, processStats2.mMemFactor, processStats2.mStartTime, j);
+        printWriter2.print("          Start time: ");
+        printWriter2.print(DateFormat.format("yyyy-MM-dd HH:mm:ss", processStats2.mTimePeriodStartClock));
+        printWriter2.println();
+        printWriter2.print("        Total uptime: ");
+        TimeUtils.formatDuration((processStats2.mRunning ? SystemClock.uptimeMillis() : processStats2.mTimePeriodEndUptime) - processStats2.mTimePeriodStartUptime, printWriter2);
+        printWriter2.println();
+        printWriter2.print("  Total elapsed time: ");
+        TimeUtils.formatDuration((processStats2.mRunning ? SystemClock.elapsedRealtime() : processStats2.mTimePeriodEndRealtime) - processStats2.mTimePeriodStartRealtime, printWriter2);
+        if ((processStats2.mFlags & 2) != 0) {
+            printWriter2.print(" (shutdown)");
+            z5 = false;
+        } else {
+            z5 = true;
+        }
+        if ((processStats2.mFlags & 4) != 0) {
+            printWriter2.print(" (sysprops)");
+            z5 = false;
+        }
+        if ((processStats2.mFlags & 1) != 0) {
+            printWriter2.print(" (complete)");
+            z5 = false;
+        }
+        if (z5) {
+            printWriter2.print(" (partial)");
+        }
+        if (processStats2.mHasSwappedOutPss) {
+            printWriter2.print(" (swapped-out-pss)");
+        }
+        printWriter2.print(' ');
+        printWriter2.print(processStats2.mRuntime);
+        printWriter2.println();
+        printWriter2.print("     Aggregated over: ");
+        printWriter2.println(processStats2.mNumAggregated);
+        if (processStats2.mSysMemUsage.getKeyCount() > 0) {
+            printWriter2.println();
+            printWriter2.println("System memory usage:");
+            processStats2.mSysMemUsage.dump(printWriter2, "  ", ALL_SCREEN_ADJ, ALL_MEM_ADJ);
+        }
+        int i17 = i & 14;
+        String str38 = " / ";
+        String str39 = "      (Not active: ";
+        String str40 = " entries)";
+        String str41 = "  * ";
+        String str42 = NavigationBarInflaterView.KEY_CODE_END;
+        String str43 = ":";
+        if (i17 != 0) {
+            ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map = processStats2.mPackages.getMap();
+            int i18 = 0;
+            boolean z12 = false;
+            while (i18 < map.size()) {
+                String strKeyAt = map.keyAt(i18);
+                SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(i18);
+                ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> arrayMap3 = map;
+                int i19 = 0;
+                while (i19 < sparseArrayValueAt.size()) {
+                    int iKeyAt = sparseArrayValueAt.keyAt(i19);
+                    int i20 = i19;
+                    LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(i19);
+                    String str44 = str39;
+                    SparseArray<LongSparseArray<PackageState>> sparseArray2 = sparseArrayValueAt;
+                    int i21 = 0;
+                    while (i21 < longSparseArrayValueAt.size()) {
+                        String str45 = str40;
+                        long jKeyAt = longSparseArrayValueAt.keyAt(i21);
+                        LongSparseArray<PackageState> longSparseArray = longSparseArrayValueAt;
+                        PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i21);
+                        long j4 = jDumpSingleTime;
+                        int size = packageStateValueAt.mProcesses.size();
+                        int size2 = packageStateValueAt.mServices.size();
+                        int size3 = packageStateValueAt.mAssociations.size();
+                        boolean z13 = str37 == null || str37.equals(strKeyAt);
+                        if (z13) {
+                            i6 = size3;
+                            str15 = str42;
+                            i7 = i18;
+                            z8 = false;
+                            z9 = false;
+                        } else {
+                            str15 = str42;
+                            int i22 = 0;
+                            while (true) {
+                                i7 = i18;
+                                if (i22 >= size) {
+                                    z10 = false;
+                                    break;
+                                } else if (str37.equals(packageStateValueAt.mProcesses.valueAt(i22).getName())) {
+                                    z10 = true;
+                                    break;
+                                } else {
+                                    i22++;
+                                    i18 = i7;
+                                }
+                            }
+                            if (z10) {
+                                i6 = size3;
+                                z9 = z10;
+                                z8 = false;
+                            } else {
+                                int i23 = 0;
+                                while (true) {
+                                    i6 = size3;
+                                    if (i23 >= size3) {
+                                        z11 = false;
+                                        break;
+                                    } else if (packageStateValueAt.mAssociations.valueAt(i23).hasProcessOrPackage(str37)) {
+                                        z11 = true;
+                                        break;
+                                    } else {
+                                        i23++;
+                                        size3 = i6;
+                                    }
+                                }
+                                if (z11) {
+                                    z8 = z11;
+                                    z9 = z10;
+                                } else {
+                                    str18 = str41;
+                                    str25 = str43;
+                                    str26 = str38;
+                                    str17 = strKeyAt;
+                                    str23 = str44;
+                                    str20 = str45;
+                                    j3 = j4;
+                                    str27 = str15;
+                                    i10 = iKeyAt;
+                                    i9 = i21;
+                                    str24 = str37;
+                                    jDumpSingleTime = j3;
+                                    str42 = str27;
+                                    str37 = str24;
+                                    strKeyAt = str17;
+                                    longSparseArrayValueAt = longSparseArray;
+                                    i18 = i7;
+                                    str41 = str18;
+                                    str40 = str20;
+                                    str43 = str25;
+                                    str38 = str26;
+                                    i21 = i9 + 1;
+                                    iKeyAt = i10;
+                                    str44 = str23;
+                                }
+                            }
+                        }
+                        if (size > 0 || size2 > 0 || i6 > 0) {
+                            if (!z12) {
+                                printWriter2.println();
+                                printWriter2.println("Per-Package Stats:");
+                                z12 = true;
+                            }
+                            printWriter2.print(str41);
+                            printWriter2.print(strKeyAt);
+                            printWriter2.print(str38);
+                            UserHandle.formatUid(printWriter2, iKeyAt);
+                            printWriter2.print(" / v");
+                            printWriter2.print(jKeyAt);
+                            printWriter2.println(str43);
+                        }
+                        boolean z14 = z12;
+                        if ((i & 2) == 0 || z8) {
+                            String str46 = strKeyAt;
+                            str16 = str43;
+                            j3 = j4;
+                            i8 = size2;
+                            str17 = str46;
+                            str18 = str41;
+                            i9 = i21;
+                            str19 = str44;
+                            str20 = str45;
+                            i10 = iKeyAt;
+                            str21 = str38;
+                            str22 = str15;
+                        } else if (!z || z3) {
+                            str18 = str41;
+                            String str47 = str43;
+                            j3 = j4;
+                            i9 = i21;
+                            str19 = str44;
+                            i8 = size2;
+                            i10 = iKeyAt;
+                            str17 = strKeyAt;
+                            String str48 = str45;
+                            str21 = str38;
+                            str22 = str15;
+                            int i24 = 0;
+                            while (i24 < size) {
+                                ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(i24);
+                                if (!z13 && !str37.equals(processStateValueAt.getName())) {
+                                    String str49 = str47;
+                                    str35 = str48;
+                                    str36 = str49;
+                                    i16 = size;
+                                } else if (z4 && !processStateValueAt.isInUse()) {
+                                    printWriter2.print(str19);
+                                    printWriter2.print(packageStateValueAt.mProcesses.keyAt(i24));
+                                    printWriter2.println(str22);
+                                    String str492 = str47;
+                                    str35 = str48;
+                                    str36 = str492;
+                                    i16 = size;
+                                } else {
+                                    printWriter2.print("      Process ");
+                                    printWriter2.print(packageStateValueAt.mProcesses.keyAt(i24));
+                                    if (processStateValueAt.getCommonProcess().isMultiPackage()) {
+                                        printWriter2.print(" (multi, ");
+                                    } else {
+                                        printWriter2.print(" (unique, ");
+                                    }
+                                    printWriter2.print(processStateValueAt.getDurationsBucketCount());
+                                    printWriter2.print(str48);
+                                    printWriter2.println(str47);
+                                    int[] iArr = ALL_SCREEN_ADJ;
+                                    int i25 = size;
+                                    int[] iArr2 = ALL_MEM_ADJ;
+                                    int[] iArr3 = ALL_PROC_STATES;
+                                    String str50 = str47;
+                                    str35 = str48;
+                                    str36 = str50;
+                                    i16 = i25;
+                                    processStateValueAt.dumpProcessState(printWriter2, "        ", iArr, iArr2, iArr3, j);
+                                    printWriter2 = printWriter;
+                                    processStateValueAt.dumpPss(printWriter2, "        ", iArr, iArr2, iArr3, j);
+                                    long j5 = j3;
+                                    processStateValueAt.dumpInternalLocked(printWriter2, "        ", str37, j5, j, z3);
+                                    j3 = j5;
+                                }
+                                i24++;
+                                String str51 = str35;
+                                str47 = str36;
+                                str48 = str51;
+                                size = i16;
+                            }
+                            String str52 = str47;
+                            str20 = str48;
+                            str16 = str52;
+                        } else {
+                            ArrayList arrayList2 = new ArrayList();
+                            for (int i26 = 0; i26 < size; i26++) {
+                                ProcessState processStateValueAt2 = packageStateValueAt.mProcesses.valueAt(i26);
+                                if ((z13 || str37.equals(processStateValueAt2.getName())) && (!z4 || processStateValueAt2.isInUse())) {
+                                    arrayList2.add(processStateValueAt2);
+                                }
+                            }
+                            str18 = str41;
+                            String str53 = str43;
+                            i9 = i21;
+                            str19 = str44;
+                            i8 = size2;
+                            i10 = iKeyAt;
+                            str17 = strKeyAt;
+                            str21 = str38;
+                            str22 = str15;
+                            DumpUtils.dumpProcessSummaryLocked(printWriter, "      ", "Prc ", arrayList2, ALL_SCREEN_ADJ, ALL_MEM_ADJ, NON_CACHED_PROC_STATES, j, j4);
+                            j3 = j4;
+                            str20 = str45;
+                            str16 = str53;
+                            printWriter2 = printWriter;
+                        }
+                        String str54 = "        Process: ";
+                        if ((i & 4) != 0 && !z8) {
+                            int i27 = 0;
+                            while (true) {
+                                int i28 = i8;
+                                if (i27 >= i28) {
+                                    break;
+                                }
+                                ServiceState serviceStateValueAt = packageStateValueAt.mServices.valueAt(i27);
+                                if (!z13 && !str37.equals(serviceStateValueAt.getProcessName())) {
+                                    i8 = i28;
+                                    i15 = i27;
+                                    str33 = str19;
+                                    str34 = str54;
+                                } else if (z4 && !serviceStateValueAt.isInUse()) {
+                                    printWriter2.print("      (Not active service: ");
+                                    printWriter2.print(packageStateValueAt.mServices.keyAt(i27));
+                                    printWriter2.println(str22);
+                                    i8 = i28;
+                                    i15 = i27;
+                                    str33 = str19;
+                                    str34 = str54;
+                                } else {
+                                    if (z3) {
+                                        printWriter2.print("      Service ");
+                                    } else {
+                                        printWriter2.print("      * Svc ");
+                                    }
+                                    printWriter2.print(packageStateValueAt.mServices.keyAt(i27));
+                                    printWriter2.println(str16);
+                                    printWriter2.print(str54);
+                                    printWriter2.println(serviceStateValueAt.getProcessName());
+                                    i8 = i28;
+                                    i15 = i27;
+                                    long j6 = j3;
+                                    str33 = str19;
+                                    str34 = str54;
+                                    serviceStateValueAt.dumpStats(printWriter2, "        ", "          ", "    ", j, j6, z, z3);
+                                    j3 = j6;
+                                }
+                                i27 = i15 + 1;
+                                str54 = str34;
+                                str19 = str33;
+                            }
+                        }
+                        long j7 = j;
+                        str23 = str19;
+                        String str55 = str54;
+                        if ((i & 8) != 0) {
+                            int i29 = i6;
+                            ArrayList arrayList3 = new ArrayList(i29);
+                            int i30 = 0;
+                            while (i30 < i29) {
+                                AssociationState associationStateValueAt = packageStateValueAt.mAssociations.valueAt(i30);
+                                if (z13 || str37.equals(associationStateValueAt.getProcessName()) || (z8 && associationStateValueAt.hasProcessOrPackage(str37))) {
+                                    AssociationDumpContainer associationDumpContainer = new AssociationDumpContainer(this, associationStateValueAt);
+                                    i13 = i29;
+                                    associationDumpContainer.mSources = AssociationState.createSortedAssociations(j7, j3, associationStateValueAt.mSources);
+                                    i14 = i30;
+                                    associationDumpContainer.mTotalTime = associationStateValueAt.getTotalDuration(j7);
+                                    associationDumpContainer.mActiveTime = associationStateValueAt.getActiveDuration(j7);
+                                    arrayList3.add(associationDumpContainer);
+                                } else {
+                                    i13 = i29;
+                                    i14 = i30;
+                                }
+                                i30 = i14 + 1;
+                                i29 = i13;
+                            }
+                            ProcessStats processStats3 = this;
+                            Collections.sort(arrayList3, ASSOCIATION_COMPARATOR);
+                            int size4 = arrayList3.size();
+                            int i31 = 0;
+                            while (i31 < size4) {
+                                AssociationDumpContainer associationDumpContainer2 = (AssociationDumpContainer) arrayList3.get(i31);
+                                ArrayList arrayList4 = arrayList3;
+                                AssociationState associationState = associationDumpContainer2.mState;
+                                if (z4 && !associationState.isInUse()) {
+                                    printWriter2.print("      (Not active association: ");
+                                    printWriter2.print(packageStateValueAt.mAssociations.keyAt(i31));
+                                    printWriter2.println(str22);
+                                    packageState = packageStateValueAt;
+                                    i12 = size4;
+                                    i11 = i31;
+                                    arrayList = arrayList4;
+                                    processStats = processStats3;
+                                    str28 = str16;
+                                    str29 = str21;
+                                    str30 = str22;
+                                    str31 = str55;
+                                    str32 = str37;
+                                } else {
+                                    if (z3) {
+                                        packageState = packageStateValueAt;
+                                        printWriter2.print("      Association ");
+                                    } else {
+                                        packageState = packageStateValueAt;
+                                        printWriter2.print("      * Asc ");
+                                    }
+                                    printWriter2.print(associationDumpContainer2.mState.getName());
+                                    printWriter2.println(str16);
+                                    printWriter2.print(str55);
+                                    printWriter2.println(associationState.getProcessName());
+                                    str28 = str16;
+                                    str29 = str21;
+                                    i11 = i31;
+                                    str30 = str22;
+                                    str31 = str55;
+                                    i12 = size4;
+                                    arrayList = arrayList4;
+                                    str32 = str37;
+                                    processStats = this;
+                                    associationState.dumpStats(printWriter2, "        ", "          ", "    ", associationDumpContainer2.mSources, j7, j3, (!z8 || z13 || z9 || associationState.getProcessName().equals(str37)) ? null : str37, z2, z3);
+                                }
+                                i31 = i11 + 1;
+                                j7 = j;
+                                processStats3 = processStats;
+                                str22 = str30;
+                                str37 = str32;
+                                str55 = str31;
+                                packageStateValueAt = packageState;
+                                arrayList3 = arrayList;
+                                size4 = i12;
+                                str16 = str28;
+                                str21 = str29;
+                            }
+                        }
+                        str24 = str37;
+                        str25 = str16;
+                        str26 = str21;
+                        str27 = str22;
+                        z12 = z14;
+                        jDumpSingleTime = j3;
+                        str42 = str27;
+                        str37 = str24;
+                        strKeyAt = str17;
+                        longSparseArrayValueAt = longSparseArray;
+                        i18 = i7;
+                        str41 = str18;
+                        str40 = str20;
+                        str43 = str25;
+                        str38 = str26;
+                        i21 = i9 + 1;
+                        iKeyAt = i10;
+                        str44 = str23;
+                    }
+                    i19 = i20 + 1;
+                    sparseArrayValueAt = sparseArray2;
+                    strKeyAt = strKeyAt;
+                    i18 = i18;
+                    str39 = str44;
+                    str43 = str43;
+                }
+                processStats2 = this;
+                str43 = str43;
+                i18++;
+                map = arrayMap3;
+            }
+        }
+        String str56 = str39;
+        String str57 = str40;
+        String str58 = str41;
+        String str59 = str42;
+        String str60 = str43;
+        String str61 = str37;
+        String str62 = str38;
+        long j8 = jDumpSingleTime;
+        if ((i & 1) != 0) {
+            ArrayMap<String, SparseArray<ProcessState>> map2 = processStats2.mProcesses.getMap();
+            int i32 = 0;
+            int i33 = 0;
+            int i34 = 0;
+            boolean z15 = false;
+            while (i32 < map2.size()) {
+                String strKeyAt2 = map2.keyAt(i32);
+                SparseArray<ProcessState> sparseArrayValueAt2 = map2.valueAt(i32);
+                long j9 = j8;
+                int i35 = 0;
+                while (i35 < sparseArrayValueAt2.size()) {
+                    int iKeyAt2 = sparseArrayValueAt2.keyAt(i35);
+                    int i36 = i34 + 1;
+                    ProcessState processStateValueAt3 = sparseArrayValueAt2.valueAt(i35);
+                    if (processStateValueAt3.hasAnyData() && processStateValueAt3.isMultiPackage()) {
+                        if (str61 == null || str61.equals(strKeyAt2)) {
+                            arrayMap = map2;
+                        } else {
+                            arrayMap = map2;
+                            if (!str61.equals(processStateValueAt3.getPackage())) {
+                            }
+                            str58 = str11;
+                            str56 = str12;
+                            i34 = i36;
+                            i32 = i5;
+                            strKeyAt2 = str9;
+                            sparseArrayValueAt2 = sparseArray;
+                            str60 = str10;
+                            str57 = str13;
+                            i35 = i4 + 1;
+                            str61 = str14;
+                            map2 = arrayMap2;
+                        }
+                        int i37 = i33 + 1;
+                        printWriter2.println();
+                        if (z15) {
+                            z7 = z15;
+                        } else {
+                            printWriter2.println("Multi-Package Common Processes:");
+                            z7 = true;
+                        }
+                        if (z4 && !processStateValueAt3.isInUse()) {
+                            String str63 = str56;
+                            printWriter2.print(str63);
+                            printWriter2.print(strKeyAt2);
+                            printWriter2.println(str59);
+                            arrayMap2 = arrayMap;
+                            i5 = i32;
+                            str9 = strKeyAt2;
+                            sparseArray = sparseArrayValueAt2;
+                            i4 = i35;
+                            str14 = str61;
+                            str11 = str58;
+                            str13 = str57;
+                            str10 = str60;
+                            str12 = str63;
+                        } else {
+                            String str64 = str58;
+                            printWriter2.print(str64);
+                            printWriter2.print(strKeyAt2);
+                            String str65 = str62;
+                            printWriter2.print(str65);
+                            UserHandle.formatUid(printWriter2, iKeyAt2);
+                            printWriter2.print(" (");
+                            printWriter2.print(processStateValueAt3.getDurationsBucketCount());
+                            String str66 = str57;
+                            printWriter2.print(str66);
+                            i4 = i35;
+                            String str67 = str60;
+                            printWriter2.println(str67);
+                            int[] iArr4 = ALL_SCREEN_ADJ;
+                            int[] iArr5 = ALL_MEM_ADJ;
+                            int[] iArr6 = ALL_PROC_STATES;
+                            i5 = i32;
+                            str9 = strKeyAt2;
+                            sparseArray = sparseArrayValueAt2;
+                            str10 = str67;
+                            str62 = str65;
+                            str11 = str64;
+                            str12 = str56;
+                            arrayMap2 = arrayMap;
+                            processStateValueAt3.dumpProcessState(printWriter2, "        ", iArr4, iArr5, iArr6, j);
+                            printWriter2 = printWriter;
+                            processStateValueAt3.dumpPss(printWriter2, "        ", iArr4, iArr5, iArr6, j);
+                            str13 = str66;
+                            processStateValueAt3.dumpInternalLocked(printWriter2, "        ", str, j9, j, z3);
+                            str14 = str;
+                        }
+                        i33 = i37;
+                        z15 = z7;
+                        str58 = str11;
+                        str56 = str12;
+                        i34 = i36;
+                        i32 = i5;
+                        strKeyAt2 = str9;
+                        sparseArrayValueAt2 = sparseArray;
+                        str60 = str10;
+                        str57 = str13;
+                        i35 = i4 + 1;
+                        str61 = str14;
+                        map2 = arrayMap2;
+                    } else {
+                        arrayMap = map2;
+                    }
+                    arrayMap2 = arrayMap;
+                    i5 = i32;
+                    str9 = strKeyAt2;
+                    sparseArray = sparseArrayValueAt2;
+                    i4 = i35;
+                    str14 = str61;
+                    str11 = str58;
+                    str13 = str57;
+                    str12 = str56;
+                    str10 = str60;
+                    str58 = str11;
+                    str56 = str12;
+                    i34 = i36;
+                    i32 = i5;
+                    strKeyAt2 = str9;
+                    sparseArrayValueAt2 = sparseArray;
+                    str60 = str10;
+                    str57 = str13;
+                    i35 = i4 + 1;
+                    str61 = str14;
+                    map2 = arrayMap2;
+                }
+                i32++;
+                str57 = str57;
+                str61 = str61;
+                j8 = j9;
+            }
+            j2 = j8;
+            str2 = str61;
+            str3 = str58;
+            str4 = str57;
+            str5 = str56;
+            str6 = str60;
+            printWriter2.print("  Total procs: ");
+            printWriter2.print(i33);
+            printWriter2.print(" shown of ");
+            printWriter2.print(i34);
+            printWriter2.println(" total");
+        } else {
+            j2 = j8;
+            str2 = str61;
+            str3 = str58;
+            str4 = str57;
+            str5 = str56;
+            str6 = str60;
+        }
+        if ((i & 16) != 0) {
+            SparseArray<UidState> sparseArray3 = processStats2.mUidStates;
+            int size5 = sparseArray3.size();
+            int i38 = 0;
+            int i39 = 0;
+            int i40 = 0;
+            boolean z16 = false;
+            while (i38 < size5) {
+                int iKeyAt3 = sparseArray3.keyAt(i38);
+                SparseArray<UidState> sparseArray4 = sparseArray3;
+                UidState uidStateValueAt = sparseArray3.valueAt(i38);
+                int i41 = i40 + 1;
+                if (str2 == null || uidStateValueAt.hasPackage(str2)) {
+                    int i42 = i39 + 1;
+                    printWriter2.println();
+                    if (z16) {
+                        z6 = z16;
+                    } else {
+                        printWriter2.println("Per-UID Stats:");
+                        z6 = true;
+                    }
+                    if (z4 && !uidStateValueAt.isInUse()) {
+                        printWriter2.print(str5);
+                        printWriter2.print(UserHandle.formatUid(iKeyAt3));
+                        printWriter2.println(str59);
+                        i3 = size5;
+                        i2 = i38;
+                        str8 = str6;
+                    } else {
+                        printWriter2.print(str3);
+                        UserHandle.formatUid(printWriter2, iKeyAt3);
+                        printWriter2.print(" (");
+                        printWriter2.print(uidStateValueAt.getDurationsBucketCount());
+                        String str68 = str4;
+                        printWriter2.print(str68);
+                        printWriter2.println(str6);
+                        i2 = i38;
+                        str4 = str68;
+                        str8 = str6;
+                        i3 = size5;
+                        uidStateValueAt.dumpState(printWriter2, "        ", ALL_SCREEN_ADJ, ALL_MEM_ADJ, ALL_PROC_STATES, j);
+                    }
+                    i39 = i42;
+                    z16 = z6;
+                } else {
+                    i3 = size5;
+                    i2 = i38;
+                    str8 = str6;
+                }
+                i38 = i2 + 1;
+                str6 = str8;
+                i40 = i41;
+                sparseArray3 = sparseArray4;
+                size5 = i3;
+                str2 = str;
+            }
+            str7 = str6;
+            printWriter2.print("  Total UIDs: ");
+            printWriter2.print(i39);
+            printWriter2.print(" shown of ");
+            printWriter2.print(i40);
+            printWriter2.println(" total");
+        } else {
+            str7 = str6;
+        }
+        if (z3) {
+            printWriter2.println();
+            if (processStats2.mTrackingAssociations.size() > 0) {
+                printWriter2.println();
+                printWriter2.println("Tracking associations:");
+                for (int i43 = 0; i43 < processStats2.mTrackingAssociations.size(); i43++) {
+                    AssociationState.SourceState sourceState = processStats2.mTrackingAssociations.get(i43);
+                    AssociationState associationState2 = sourceState.getAssociationState();
+                    if (associationState2 == null) {
+                        Slog.wtf(TAG, sourceState.toString() + " shouldn't be in the tracking list.");
+                    } else {
+                        printWriter2.print("  #");
+                        printWriter2.print(i43);
+                        printWriter2.print(": ");
+                        printWriter2.print(associationState2.getProcessName());
+                        printWriter2.print("/");
+                        UserHandle.formatUid(printWriter2, associationState2.getUid());
+                        printWriter2.print(" <- ");
+                        printWriter2.print(sourceState.getProcessName());
+                        printWriter2.print("/");
+                        UserHandle.formatUid(printWriter2, sourceState.getUid());
+                        printWriter2.println(str7);
+                        printWriter2.print("    Tracking for: ");
+                        TimeUtils.formatDuration(j - sourceState.mTrackingUptime, printWriter2);
+                        printWriter2.println();
+                        printWriter2.print("    Component: ");
+                        printWriter2.print(new ComponentName(associationState2.getPackage(), associationState2.getName()).flattenToShortString());
+                        printWriter2.println();
+                        printWriter2.print("    Proc state: ");
+                        if (sourceState.mProcState != -1) {
+                            printWriter2.print(DumpUtils.STATE_NAMES[sourceState.mProcState]);
+                        } else {
+                            printWriter2.print("--");
+                        }
+                        printWriter2.print(" #");
+                        printWriter2.println(sourceState.mProcStateSeq);
+                        printWriter2.print("    Process: ");
+                        printWriter2.println(associationState2.getProcess());
+                        if (sourceState.mActiveCount > 0) {
+                            printWriter2.print("    Active count ");
+                            printWriter2.print(sourceState.mActiveCount);
+                            printWriter2.print(": ");
+                            PrintWriter printWriter3 = printWriter2;
+                            AssociationState.dumpActiveDurationSummary(printWriter3, sourceState, j2, j, z3);
+                            printWriter2 = printWriter3;
+                            printWriter2.println();
+                        }
+                    }
+                }
+            }
+        }
+        printWriter2.println();
+        if (z) {
+            printWriter2.println("Process summary:");
+            PrintWriter printWriter4 = printWriter2;
+            processStats2.dumpSummaryLocked(printWriter4, str, j, z4);
+            printWriter2 = printWriter4;
+        } else {
+            processStats2.dumpTotalsLocked(printWriter2, j);
+        }
+        if (z3) {
+            printWriter2.println();
+            printWriter2.println("Internal state:");
+            printWriter2.print("  mRunning=");
+            printWriter2.println(processStats2.mRunning);
+        }
+        if (str == null) {
+            dumpFragmentationLocked(printWriter);
+        }
     }
 
     public void dumpSummaryLocked(PrintWriter printWriter, String str, long j, boolean z) {
@@ -1594,17 +2360,17 @@ public final class ProcessStats implements Parcelable {
         printWriter.println("Memory usage:");
         TotalMemoryUseCollection totalMemoryUseCollection = new TotalMemoryUseCollection(ALL_SCREEN_ADJ, ALL_MEM_ADJ);
         computeTotalMemoryUse(totalMemoryUseCollection, j);
-        long printMemoryCategory = printMemoryCategory(printWriter, "  ", "Native ", totalMemoryUseCollection.sysMemNativeWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Kernel ", totalMemoryUseCollection.sysMemKernelWeight, totalMemoryUseCollection.totalTime, 0L, totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples);
+        long jPrintMemoryCategory = printMemoryCategory(printWriter, "  ", "Native ", totalMemoryUseCollection.sysMemNativeWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Kernel ", totalMemoryUseCollection.sysMemKernelWeight, totalMemoryUseCollection.totalTime, 0L, totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples);
         for (int i = 0; i < 16; i++) {
             if (i != 9) {
-                printMemoryCategory = printMemoryCategory(printWriter, "  ", DumpUtils.STATE_NAMES[i], totalMemoryUseCollection.processStateWeight[i], totalMemoryUseCollection.totalTime, printMemoryCategory, totalMemoryUseCollection.processStateSamples[i]);
+                jPrintMemoryCategory = printMemoryCategory(printWriter, "  ", DumpUtils.STATE_NAMES[i], totalMemoryUseCollection.processStateWeight[i], totalMemoryUseCollection.totalTime, jPrintMemoryCategory, totalMemoryUseCollection.processStateSamples[i]);
             }
         }
-        long printMemoryCategory2 = printMemoryCategory(printWriter, "  ", "Z-Ram  ", totalMemoryUseCollection.sysMemZRamWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Free   ", totalMemoryUseCollection.sysMemFreeWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Cached ", totalMemoryUseCollection.sysMemCachedWeight, totalMemoryUseCollection.totalTime, printMemoryCategory, totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples);
+        long jPrintMemoryCategory2 = printMemoryCategory(printWriter, "  ", "Z-Ram  ", totalMemoryUseCollection.sysMemZRamWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Free   ", totalMemoryUseCollection.sysMemFreeWeight, totalMemoryUseCollection.totalTime, printMemoryCategory(printWriter, "  ", "Cached ", totalMemoryUseCollection.sysMemCachedWeight, totalMemoryUseCollection.totalTime, jPrintMemoryCategory, totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples), totalMemoryUseCollection.sysMemSamples);
         printWriter.print("  TOTAL  : ");
-        DebugUtils.printSizeValue(printWriter, printMemoryCategory2);
+        DebugUtils.printSizeValue(printWriter, jPrintMemoryCategory2);
         printWriter.println();
-        printMemoryCategory(printWriter, "  ", DumpUtils.STATE_NAMES[9], totalMemoryUseCollection.processStateWeight[9], totalMemoryUseCollection.totalTime, printMemoryCategory2, totalMemoryUseCollection.processStateSamples[9]);
+        printMemoryCategory(printWriter, "  ", DumpUtils.STATE_NAMES[9], totalMemoryUseCollection.processStateWeight[9], totalMemoryUseCollection.totalTime, jPrintMemoryCategory2, totalMemoryUseCollection.processStateSamples[9]);
         printWriter.println();
         printWriter.println("PSS collection stats:");
         printWriter.print("  Internal Single: ");
@@ -1635,13 +2401,13 @@ public final class ProcessStats implements Parcelable {
     }
 
     void dumpFilteredSummaryLocked(PrintWriter printWriter, String str, String str2, String str3, int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4, long j, long j2, String str4, boolean z) {
-        ArrayList<ProcessState> collectProcessesLocked = collectProcessesLocked(iArr, iArr2, iArr3, iArr4, j, str4, z);
-        if (collectProcessesLocked.size() > 0) {
+        ArrayList<ProcessState> arrayListCollectProcessesLocked = collectProcessesLocked(iArr, iArr2, iArr3, iArr4, j, str4, z);
+        if (arrayListCollectProcessesLocked.size() > 0) {
             if (str != null) {
                 printWriter.println();
                 printWriter.println(str);
             }
-            DumpUtils.dumpProcessSummaryLocked(printWriter, str2, str3, collectProcessesLocked, iArr, iArr2, iArr4, j, j2);
+            DumpUtils.dumpProcessSummaryLocked(printWriter, str2, str3, arrayListCollectProcessesLocked, iArr, iArr2, iArr4, j, j2);
         }
     }
 
@@ -1649,19 +2415,19 @@ public final class ProcessStats implements Parcelable {
         ArraySet arraySet = new ArraySet();
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map = this.mPackages.getMap();
         for (int i = 0; i < map.size(); i++) {
-            String keyAt = map.keyAt(i);
-            SparseArray<LongSparseArray<PackageState>> valueAt = map.valueAt(i);
-            for (int i2 = 0; i2 < valueAt.size(); i2++) {
-                LongSparseArray<PackageState> valueAt2 = valueAt.valueAt(i2);
-                int size = valueAt2.size();
+            String strKeyAt = map.keyAt(i);
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(i);
+            for (int i2 = 0; i2 < sparseArrayValueAt.size(); i2++) {
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(i2);
+                int size = longSparseArrayValueAt.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    PackageState valueAt3 = valueAt2.valueAt(i3);
-                    int size2 = valueAt3.mProcesses.size();
-                    boolean z2 = str == null || str.equals(keyAt);
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i3);
+                    int size2 = packageStateValueAt.mProcesses.size();
+                    boolean z2 = str == null || str.equals(strKeyAt);
                     for (int i4 = 0; i4 < size2; i4++) {
-                        ProcessState valueAt4 = valueAt3.mProcesses.valueAt(i4);
-                        if ((z2 || str.equals(valueAt4.getName())) && (!z || valueAt4.isInUse())) {
-                            arraySet.add(valueAt4.getCommonProcess());
+                        ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(i4);
+                        if ((z2 || str.equals(processStateValueAt.getName())) && (!z || processStateValueAt.isInUse())) {
+                            arraySet.add(processStateValueAt.getCommonProcess());
                         }
                     }
                 }
@@ -1685,7 +2451,7 @@ public final class ProcessStats implements Parcelable {
         boolean z;
         PrintWriter printWriter2 = printWriter;
         String str2 = str;
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map = this.mPackages.getMap();
         printWriter2.println("vers,5");
         printWriter2.print("period,");
@@ -1721,66 +2487,66 @@ public final class ProcessStats implements Parcelable {
         if ((i & 14) != 0) {
             int i3 = 0;
             while (i3 < map.size()) {
-                String keyAt = map.keyAt(i3);
-                if (str2 == null || str2.equals(keyAt)) {
-                    SparseArray<LongSparseArray<PackageState>> valueAt = map.valueAt(i3);
+                String strKeyAt = map.keyAt(i3);
+                if (str2 == null || str2.equals(strKeyAt)) {
+                    SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(i3);
                     int i4 = 0;
-                    while (i4 < valueAt.size()) {
-                        int keyAt2 = valueAt.keyAt(i4);
-                        LongSparseArray<PackageState> valueAt2 = valueAt.valueAt(i4);
+                    while (i4 < sparseArrayValueAt.size()) {
+                        int iKeyAt = sparseArrayValueAt.keyAt(i4);
+                        LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(i4);
                         int i5 = 0;
-                        while (i5 < valueAt2.size()) {
-                            long keyAt3 = valueAt2.keyAt(i5);
-                            PackageState valueAt3 = valueAt2.valueAt(i5);
+                        while (i5 < longSparseArrayValueAt.size()) {
+                            long jKeyAt = longSparseArrayValueAt.keyAt(i5);
+                            PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i5);
                             int i6 = i2;
-                            int size = valueAt3.mProcesses.size();
-                            SparseArray<LongSparseArray<PackageState>> sparseArray = valueAt;
-                            int size2 = valueAt3.mServices.size();
-                            int size3 = valueAt3.mAssociations.size();
+                            int size = packageStateValueAt.mProcesses.size();
+                            SparseArray<LongSparseArray<PackageState>> sparseArray = sparseArrayValueAt;
+                            int size2 = packageStateValueAt.mServices.size();
+                            int size3 = packageStateValueAt.mAssociations.size();
                             if ((i & 2) != 0) {
                                 int i7 = 0;
                                 while (i7 < size) {
-                                    long j = keyAt3;
+                                    long j = jKeyAt;
                                     int i8 = i4;
-                                    int i9 = keyAt2;
-                                    valueAt3.mProcesses.valueAt(i7).dumpPackageProcCheckin(printWriter2, keyAt, i9, j, valueAt3.mProcesses.keyAt(i7), uptimeMillis);
+                                    int i9 = iKeyAt;
+                                    packageStateValueAt.mProcesses.valueAt(i7).dumpPackageProcCheckin(printWriter2, strKeyAt, i9, j, packageStateValueAt.mProcesses.keyAt(i7), jUptimeMillis);
                                     printWriter2 = printWriter;
                                     i5 = i5;
                                     size2 = size2;
                                     i7++;
                                     size3 = size3;
                                     map = map;
-                                    keyAt2 = i9;
+                                    iKeyAt = i9;
                                     i4 = i8;
-                                    valueAt2 = valueAt2;
-                                    keyAt3 = j;
+                                    longSparseArrayValueAt = longSparseArrayValueAt;
+                                    jKeyAt = j;
                                 }
                             }
                             ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> arrayMap = map;
                             int i10 = size2;
                             int i11 = size3;
                             int i12 = i5;
-                            long j2 = keyAt3;
+                            long j2 = jKeyAt;
                             int i13 = i4;
-                            int i14 = keyAt2;
-                            LongSparseArray<PackageState> longSparseArray = valueAt2;
+                            int i14 = iKeyAt;
+                            LongSparseArray<PackageState> longSparseArray = longSparseArrayValueAt;
                             if ((i & 4) != 0) {
                                 for (int i15 = 0; i15 < i10; i15++) {
-                                    valueAt3.mServices.valueAt(i15).dumpTimesCheckin(printWriter, keyAt, i14, j2, DumpUtils.collapseString(keyAt, valueAt3.mServices.keyAt(i15)), uptimeMillis);
+                                    packageStateValueAt.mServices.valueAt(i15).dumpTimesCheckin(printWriter, strKeyAt, i14, j2, DumpUtils.collapseString(strKeyAt, packageStateValueAt.mServices.keyAt(i15)), jUptimeMillis);
                                 }
                             }
                             if ((i & 8) != 0) {
                                 for (int i16 = 0; i16 < i11; i16++) {
-                                    valueAt3.mAssociations.valueAt(i16).dumpTimesCheckin(printWriter, keyAt, i14, j2, DumpUtils.collapseString(keyAt, valueAt3.mAssociations.keyAt(i16)), uptimeMillis);
+                                    packageStateValueAt.mAssociations.valueAt(i16).dumpTimesCheckin(printWriter, strKeyAt, i14, j2, DumpUtils.collapseString(strKeyAt, packageStateValueAt.mAssociations.keyAt(i16)), jUptimeMillis);
                                 }
                             }
                             i5 = i12 + 1;
                             printWriter2 = printWriter;
-                            keyAt2 = i14;
+                            iKeyAt = i14;
                             i4 = i13;
-                            valueAt2 = longSparseArray;
+                            longSparseArrayValueAt = longSparseArray;
                             i2 = i6;
-                            valueAt = sparseArray;
+                            sparseArrayValueAt = sparseArray;
                             map = arrayMap;
                         }
                         i4++;
@@ -1798,22 +2564,22 @@ public final class ProcessStats implements Parcelable {
         if ((i & 1) != 0) {
             ArrayMap<String, SparseArray<ProcessState>> map2 = this.mProcesses.getMap();
             for (int i18 = 0; i18 < map2.size(); i18++) {
-                String keyAt4 = map2.keyAt(i18);
-                SparseArray<ProcessState> valueAt4 = map2.valueAt(i18);
-                for (int i19 = 0; i19 < valueAt4.size(); i19++) {
-                    valueAt4.valueAt(i19).dumpProcCheckin(printWriter, keyAt4, valueAt4.keyAt(i19), uptimeMillis);
+                String strKeyAt2 = map2.keyAt(i18);
+                SparseArray<ProcessState> sparseArrayValueAt2 = map2.valueAt(i18);
+                for (int i19 = 0; i19 < sparseArrayValueAt2.size(); i19++) {
+                    sparseArrayValueAt2.valueAt(i19).dumpProcCheckin(printWriter, strKeyAt2, sparseArrayValueAt2.keyAt(i19), jUptimeMillis);
                 }
             }
         }
         printWriter.print("total");
-        DumpUtils.dumpAdjTimesCheckin(printWriter, ",", this.mMemFactorDurations, this.mMemFactor, this.mStartTime, uptimeMillis);
+        DumpUtils.dumpAdjTimesCheckin(printWriter, ",", this.mMemFactorDurations, this.mMemFactor, this.mStartTime, jUptimeMillis);
         printWriter.println();
         int keyCount = this.mSysMemUsage.getKeyCount();
         if (keyCount > 0) {
             printWriter.print("sysmemusage");
             for (int i20 = 0; i20 < keyCount; i20++) {
-                int keyAt5 = this.mSysMemUsage.getKeyAt(i20);
-                byte idFromKey = SparseMappingTable.getIdFromKey(keyAt5);
+                int keyAt = this.mSysMemUsage.getKeyAt(i20);
+                byte idFromKey = SparseMappingTable.getIdFromKey(keyAt);
                 printWriter.print(",");
                 DumpUtils.printProcStateTag(printWriter, idFromKey);
                 int i21 = 0;
@@ -1822,7 +2588,7 @@ public final class ProcessStats implements Parcelable {
                     if (i21 > i22) {
                         printWriter.print(":");
                     }
-                    printWriter.print(this.mSysMemUsage.getValue(keyAt5, i21));
+                    printWriter.print(this.mSysMemUsage.getValue(keyAt, i21));
                     i21++;
                     i17 = i22;
                 }
@@ -1830,7 +2596,7 @@ public final class ProcessStats implements Parcelable {
         }
         printWriter.println();
         TotalMemoryUseCollection totalMemoryUseCollection = new TotalMemoryUseCollection(ALL_SCREEN_ADJ, ALL_MEM_ADJ);
-        computeTotalMemoryUse(totalMemoryUseCollection, uptimeMillis);
+        computeTotalMemoryUse(totalMemoryUseCollection, jUptimeMillis);
         printWriter.print("weights,");
         printWriter.print(totalMemoryUseCollection.totalTime);
         printWriter.print(",");
@@ -1883,7 +2649,7 @@ public final class ProcessStats implements Parcelable {
         dumpProtoPreamble(protoOutputStream);
         int size = this.mPageTypeLabels.size();
         for (int i2 = 0; i2 < size; i2++) {
-            long start = protoOutputStream.start(2246267895818L);
+            long jStart = protoOutputStream.start(2246267895818L);
             protoOutputStream.write(1120986464257L, this.mPageTypeNodes.get(i2).intValue());
             protoOutputStream.write(1138166333442L, this.mPageTypeZones.get(i2));
             protoOutputStream.write(1138166333443L, this.mPageTypeLabels.get(i2));
@@ -1892,33 +2658,33 @@ public final class ProcessStats implements Parcelable {
             for (int i3 = 0; i3 < length; i3++) {
                 protoOutputStream.write(2220498092036L, iArr[i3]);
             }
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
         if ((i & 1) != 0) {
             for (int i4 = 0; i4 < map.size(); i4++) {
-                String keyAt = map.keyAt(i4);
-                SparseArray<ProcessState> valueAt = map.valueAt(i4);
-                for (int i5 = 0; i5 < valueAt.size(); i5++) {
-                    valueAt.valueAt(i5).dumpDebug(protoOutputStream, 2246267895816L, keyAt, valueAt.keyAt(i5), j);
+                String strKeyAt = map.keyAt(i4);
+                SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(i4);
+                for (int i5 = 0; i5 < sparseArrayValueAt.size(); i5++) {
+                    sparseArrayValueAt.valueAt(i5).dumpDebug(protoOutputStream, 2246267895816L, strKeyAt, sparseArrayValueAt.keyAt(i5), j);
                 }
             }
         }
         if ((i & 14) != 0) {
             ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map2 = this.mPackages.getMap();
             for (int i6 = 0; i6 < map2.size(); i6++) {
-                SparseArray<LongSparseArray<PackageState>> valueAt2 = map2.valueAt(i6);
-                for (int i7 = 0; i7 < valueAt2.size(); i7++) {
-                    LongSparseArray<PackageState> valueAt3 = valueAt2.valueAt(i7);
-                    for (int i8 = 0; i8 < valueAt3.size(); i8++) {
-                        valueAt3.valueAt(i8).dumpDebug(protoOutputStream, 2246267895817L, j, i);
+                SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt2 = map2.valueAt(i6);
+                for (int i7 = 0; i7 < sparseArrayValueAt2.size(); i7++) {
+                    LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt2.valueAt(i7);
+                    for (int i8 = 0; i8 < longSparseArrayValueAt.size(); i8++) {
+                        longSparseArrayValueAt.valueAt(i8).dumpDebug(protoOutputStream, 2246267895817L, j, i);
                     }
                 }
             }
         }
     }
 
-    public void dumpAggregatedProtoForStatsd(ProtoOutputStream[] protoOutputStreamArr, long j) {
+    public void dumpAggregatedProtoForStatsd(ProtoOutputStream[] protoOutputStreamArr, long j) throws IOException {
         dumpProtoPreamble(protoOutputStreamArr[0]);
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
         ProcessMap<ArraySet<PackageState>> processMap = new ProcessMap<>();
@@ -1930,7 +2696,7 @@ public final class ProcessStats implements Parcelable {
             if (i2 >= map.size()) {
                 break;
             }
-            String keyAt = map.keyAt(i2);
+            String strKeyAt = map.keyAt(i2);
             if (protoOutputStreamArr[i].getRawSize() > j) {
                 i++;
                 if (i >= protoOutputStreamArr.length) {
@@ -1941,8 +2707,8 @@ public final class ProcessStats implements Parcelable {
             }
             int i3 = i;
             int i4 = 0;
-            for (SparseArray<ProcessState> valueAt = map.valueAt(i2); i4 < valueAt.size(); valueAt = valueAt) {
-                valueAt.valueAt(i4).dumpAggregatedProtoForStatsd(protoOutputStreamArr[i3], 2246267895816L, keyAt, valueAt.keyAt(i4), this.mTimePeriodEndRealtime, processMap, sparseArray);
+            for (SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(i2); i4 < sparseArrayValueAt.size(); sparseArrayValueAt = sparseArrayValueAt) {
+                sparseArrayValueAt.valueAt(i4).dumpAggregatedProtoForStatsd(protoOutputStreamArr[i3], 2246267895816L, strKeyAt, sparseArrayValueAt.keyAt(i4), this.mTimePeriodEndRealtime, processMap, sparseArray);
                 i4++;
             }
             i2++;
@@ -1957,10 +2723,10 @@ public final class ProcessStats implements Parcelable {
         ArrayMap<String, SparseArray<ProcessState>> map = this.mProcesses.getMap();
         int size = map.size();
         for (int i = 0; i < size; i++) {
-            SparseArray<ProcessState> valueAt = map.valueAt(i);
-            int size2 = valueAt.size();
+            SparseArray<ProcessState> sparseArrayValueAt = map.valueAt(i);
+            int size2 = sparseArrayValueAt.size();
             for (int i2 = 0; i2 < size2; i2++) {
-                consumer.accept(valueAt.valueAt(i2));
+                consumer.accept(sparseArrayValueAt.valueAt(i2));
             }
         }
     }
@@ -1969,23 +2735,23 @@ public final class ProcessStats implements Parcelable {
         ArrayMap<String, SparseArray<LongSparseArray<PackageState>>> map = this.mPackages.getMap();
         int size = map.size();
         for (int i = 0; i < size; i++) {
-            SparseArray<LongSparseArray<PackageState>> valueAt = map.valueAt(i);
-            int size2 = valueAt.size();
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(i);
+            int size2 = sparseArrayValueAt.size();
             for (int i2 = 0; i2 < size2; i2++) {
-                int keyAt = valueAt.keyAt(i2);
-                LongSparseArray<PackageState> valueAt2 = valueAt.valueAt(i2);
-                int size3 = valueAt2.size();
+                int iKeyAt = sparseArrayValueAt.keyAt(i2);
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(i2);
+                int size3 = longSparseArrayValueAt.size();
                 for (int i3 = 0; i3 < size3; i3++) {
-                    PackageState valueAt3 = valueAt2.valueAt(i3);
-                    int size4 = valueAt3.mAssociations.size();
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(i3);
+                    int size4 = packageStateValueAt.mAssociations.size();
                     for (int i4 = 0; i4 < size4; i4++) {
-                        String keyAt2 = valueAt3.mAssociations.keyAt(i4);
-                        AssociationState valueAt4 = valueAt3.mAssociations.valueAt(i4);
-                        int size5 = valueAt4.mSources.size();
+                        String strKeyAt = packageStateValueAt.mAssociations.keyAt(i4);
+                        AssociationState associationStateValueAt = packageStateValueAt.mAssociations.valueAt(i4);
+                        int size5 = associationStateValueAt.mSources.size();
                         int i5 = 0;
                         while (i5 < size5) {
-                            AssociationState.SourceState valueAt5 = valueAt4.mSources.valueAt(i5);
-                            quintConsumer.accept(valueAt4, Integer.valueOf(keyAt), keyAt2, valueAt4.mSources.keyAt(i5), valueAt5);
+                            AssociationState.SourceState sourceStateValueAt = associationStateValueAt.mSources.valueAt(i5);
+                            quintConsumer.accept(associationStateValueAt, Integer.valueOf(iKeyAt), strKeyAt, associationStateValueAt.mSources.keyAt(i5), sourceStateValueAt);
                             i5++;
                             size5 = size5;
                             map = map;
@@ -2000,7 +2766,7 @@ public final class ProcessStats implements Parcelable {
         forEachProcess(new Consumer() { // from class: com.android.internal.app.procstats.ProcessStats$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ProcessStats.this.lambda$dumpProcessState$1(i, statsEventOutput, (ProcessState) obj);
+                this.f$0.lambda$dumpProcessState$1(i, statsEventOutput, (ProcessState) obj);
             }
         });
     }
@@ -2016,7 +2782,7 @@ public final class ProcessStats implements Parcelable {
         forEachAssociation(new QuintConsumer() { // from class: com.android.internal.app.procstats.ProcessStats$$ExternalSyntheticLambda0
             @Override // com.android.internal.util.function.QuintConsumer
             public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-                ProcessStats.this.lambda$dumpProcessAssociation$2(statsEventOutput, i, (AssociationState) obj, (Integer) obj2, (String) obj3, (AssociationState.SourceKey) obj4, (AssociationState.SourceState) obj5);
+                this.f$0.lambda$dumpProcessAssociation$2(statsEventOutput, i, (AssociationState) obj, (Integer) obj2, (String) obj3, (AssociationState.SourceKey) obj4, (AssociationState.SourceState) obj5);
             }
         });
     }
@@ -2061,20 +2827,20 @@ public final class ProcessStats implements Parcelable {
         int i = 1;
         int size = map.size() - 1;
         while (size >= 0) {
-            String keyAt = map.keyAt(size);
-            SparseArray<LongSparseArray<PackageState>> valueAt = map.valueAt(size);
-            int size2 = valueAt.size() - i;
+            String strKeyAt = map.keyAt(size);
+            SparseArray<LongSparseArray<PackageState>> sparseArrayValueAt = map.valueAt(size);
+            int size2 = sparseArrayValueAt.size() - i;
             while (size2 >= 0) {
-                LongSparseArray<PackageState> valueAt2 = valueAt.valueAt(size2);
-                int size3 = valueAt2.size() - i;
+                LongSparseArray<PackageState> longSparseArrayValueAt = sparseArrayValueAt.valueAt(size2);
+                int size3 = longSparseArrayValueAt.size() - i;
                 while (size3 >= 0) {
-                    PackageState valueAt3 = valueAt2.valueAt(size3);
-                    int i2 = (str == null || str.equals(keyAt)) ? i : 0;
-                    for (int size4 = valueAt3.mProcesses.size() - i; size4 >= 0; size4--) {
-                        ProcessState valueAt4 = valueAt3.mProcesses.valueAt(size4);
-                        if ((i2 != 0 || str.equals(valueAt4.getName())) && (!z || valueAt4.isInUse())) {
-                            String name = valueAt4.getName();
-                            int uid = valueAt4.getUid();
+                    PackageState packageStateValueAt = longSparseArrayValueAt.valueAt(size3);
+                    int i2 = (str == null || str.equals(strKeyAt)) ? i : 0;
+                    for (int size4 = packageStateValueAt.mProcesses.size() - i; size4 >= 0; size4--) {
+                        ProcessState processStateValueAt = packageStateValueAt.mProcesses.valueAt(size4);
+                        if ((i2 != 0 || str.equals(processStateValueAt.getName())) && (!z || processStateValueAt.isInUse())) {
+                            String name = processStateValueAt.getName();
+                            int uid = processStateValueAt.getUid();
                             ArraySet<PackageState> arraySet2 = processMap.get(name, uid);
                             if (arraySet2 == null) {
                                 arraySet = new ArraySet<>();
@@ -2082,13 +2848,13 @@ public final class ProcessStats implements Parcelable {
                             } else {
                                 arraySet = arraySet2;
                             }
-                            arraySet.add(valueAt3);
+                            arraySet.add(packageStateValueAt);
                             ArraySet<String> arraySet3 = sparseArray.get(uid);
                             if (arraySet3 == null) {
                                 arraySet3 = new ArraySet<>();
                                 sparseArray.put(uid, arraySet3);
                             }
-                            arraySet3.add(valueAt3.mPackageName);
+                            arraySet3.add(packageStateValueAt.mPackageName);
                         }
                     }
                     size3--;
@@ -2108,34 +2874,34 @@ public final class ProcessStats implements Parcelable {
     /* JADX WARN: Type inference failed for: r10v3 */
     public void dumpFilteredAssociationStatesProtoForProc(ProtoOutputStream protoOutputStream, long j, long j2, ProcessState processState, SparseArray<ArraySet<String>> sparseArray) {
         ArrayMap<AssociationState.SourceKey, AssociationState.SourceState> arrayMap;
-        IProcessStats asInterface;
+        IProcessStats iProcessStatsAsInterface;
         int i;
-        if ((processState.isMultiPackage() && processState.getCommonProcess() != processState) || (arrayMap = processState.mCommonSources) == null || arrayMap.isEmpty() || (asInterface = IProcessStats.Stub.asInterface(ServiceManager.getService(SERVICE_NAME))) == null) {
+        if ((processState.isMultiPackage() && processState.getCommonProcess() != processState) || (arrayMap = processState.mCommonSources) == null || arrayMap.isEmpty() || (iProcessStatsAsInterface = IProcessStats.Stub.asInterface(ServiceManager.getService(SERVICE_NAME))) == null) {
             return;
         }
         try {
-            long minAssociationDumpDuration = asInterface.getMinAssociationDumpDuration();
+            long minAssociationDumpDuration = iProcessStatsAsInterface.getMinAssociationDumpDuration();
             ?? r10 = 1;
             int size = arrayMap.size() - 1;
             while (size >= 0) {
-                AssociationState.SourceState valueAt = arrayMap.valueAt(size);
-                long j3 = valueAt.mDuration;
-                if (valueAt.mNesting > 0) {
-                    j3 += j2 - valueAt.mStartUptime;
+                AssociationState.SourceState sourceStateValueAt = arrayMap.valueAt(size);
+                long j3 = sourceStateValueAt.mDuration;
+                if (sourceStateValueAt.mNesting > 0) {
+                    j3 += j2 - sourceStateValueAt.mStartUptime;
                 }
                 long j4 = j3;
                 if (j4 < minAssociationDumpDuration) {
                     i = size;
                 } else {
-                    AssociationState.SourceKey keyAt = arrayMap.keyAt(size);
-                    long start = protoOutputStream.start(j);
-                    int indexOfKey = sparseArray.indexOfKey(keyAt.mUid);
+                    AssociationState.SourceKey sourceKeyKeyAt = arrayMap.keyAt(size);
+                    long jStart = protoOutputStream.start(j);
+                    int iIndexOfKey = sparseArray.indexOfKey(sourceKeyKeyAt.mUid);
                     i = size;
-                    ProcessState.writeCompressedProcessName(protoOutputStream, 1138166333441L, keyAt.mProcess, keyAt.mPackage, (indexOfKey < 0 || sparseArray.valueAt(indexOfKey).size() <= r10) ? false : r10);
-                    protoOutputStream.write(1120986464261L, keyAt.mUid);
-                    protoOutputStream.write(1120986464259L, valueAt.mCount);
+                    ProcessState.writeCompressedProcessName(protoOutputStream, 1138166333441L, sourceKeyKeyAt.mProcess, sourceKeyKeyAt.mPackage, (iIndexOfKey < 0 || sparseArray.valueAt(iIndexOfKey).size() <= r10) ? false : r10);
+                    protoOutputStream.write(1120986464261L, sourceKeyKeyAt.mUid);
+                    protoOutputStream.write(1120986464259L, sourceStateValueAt.mCount);
                     protoOutputStream.write(1120986464260L, (int) (j4 / 1000));
-                    protoOutputStream.end(start);
+                    protoOutputStream.end(jStart);
                 }
                 size = i - 1;
                 r10 = 1;
@@ -2184,7 +2950,7 @@ public final class ProcessStats implements Parcelable {
         }
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j, long j2, int i) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             protoOutputStream.write(1138166333441L, this.mPackageName);
             protoOutputStream.write(1120986464258L, this.mUid);
             protoOutputStream.write(1112396529667L, this.mVersionCode);
@@ -2203,7 +2969,7 @@ public final class ProcessStats implements Parcelable {
                     this.mAssociations.valueAt(i4).dumpDebug(protoOutputStream, 2246267895814L, j2);
                 }
             }
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
     }
 

@@ -13,12 +13,12 @@ public final class ScriptIntrinsic3DLUT extends ScriptIntrinsic {
         this.mElement = element;
     }
 
-    public static ScriptIntrinsic3DLUT create(RenderScript renderScript, Element element) {
-        long nScriptIntrinsicCreate = renderScript.nScriptIntrinsicCreate(8, element.getID(renderScript));
+    public static ScriptIntrinsic3DLUT create(RenderScript renderScript, Element element) throws Throwable {
+        long jNScriptIntrinsicCreate = renderScript.nScriptIntrinsicCreate(8, element.getID(renderScript));
         if (!element.isCompatible(Element.U8_4(renderScript))) {
             throw new RSIllegalArgumentException("Element must be compatible with uchar4.");
         }
-        return new ScriptIntrinsic3DLUT(nScriptIntrinsicCreate, renderScript, element);
+        return new ScriptIntrinsic3DLUT(jNScriptIntrinsicCreate, renderScript, element);
     }
 
     public void setLUT(Allocation allocation) {

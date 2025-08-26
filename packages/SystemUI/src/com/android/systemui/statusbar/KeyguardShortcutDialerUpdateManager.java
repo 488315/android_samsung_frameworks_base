@@ -26,13 +26,11 @@ import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardShortcutDialerUpdateManager {
     public final Context context;
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,10 +59,14 @@ public final class KeyguardShortcutDialerUpdateManager {
         return "com.andorid.contacts".equals(string) ? !"".equals(string2) ? string2 : "com.andorid.contacts" : string;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0107 A[LOOP:1: B:34:0x0105->B:35:0x0107, LOOP_END] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateLockShortcutDialerApp(Intent intent) {
         boolean z;
         String str;
-        Collection collection;
+        Collection collectionTake;
         String shortcutAppList = this.settingsHelper.getShortcutAppList();
         String action = intent.getAction();
         boolean z2 = true;
@@ -73,15 +75,15 @@ public final class KeyguardShortcutDialerUpdateManager {
             MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("default dialer : ", extras != null ? extras.getString("android.telecom.extra.CHANGE_DEFAULT_DIALER_PACKAGE_NAME") : null, "KeyguardShortcutDialerUpdateManager");
             if (shortcutAppList == null) {
                 Context context = this.context;
-                boolean equals = "com.skt.prod.dialer".equals(((TelecomManager) context.getSystemService("telecom")).getDefaultDialerPackage());
-                boolean equals2 = "com.lguplus.aicallagent".equals(((TelecomManager) this.context.getSystemService("telecom")).getDefaultDialerPackage());
-                String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(getContactsPackageName(true), "/com.samsung.android.dialer.DialtactsActivity");
-                boolean isVoiceCapable = ((TelephonyManager) context.getSystemService("phone")).isVoiceCapable();
-                if (equals2) {
-                    m = "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity";
-                } else if (equals) {
-                    m = "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity";
-                } else if (!isVoiceCapable) {
+                boolean zEquals = "com.skt.prod.dialer".equals(((TelecomManager) context.getSystemService("telecom")).getDefaultDialerPackage());
+                boolean zEquals2 = "com.lguplus.aicallagent".equals(((TelecomManager) this.context.getSystemService("telecom")).getDefaultDialerPackage());
+                String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(getContactsPackageName(true), "/com.samsung.android.dialer.DialtactsActivity");
+                boolean zIsVoiceCapable = ((TelephonyManager) context.getSystemService("phone")).isVoiceCapable();
+                if (zEquals2) {
+                    strM = "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity";
+                } else if (zEquals) {
+                    strM = "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity";
+                } else if (!zIsVoiceCapable) {
                     try {
                         context.getPackageManager().getApplicationInfo("com.sec.android.app.sbrowser", 128).getClass();
                         str = "com.sec.android.app.sbrowser/com.sec.android.app.sbrowser.SBrowserMainActivity";
@@ -89,44 +91,54 @@ public final class KeyguardShortcutDialerUpdateManager {
                         Log.d("Utils", "Package not found : com.sec.android.app.sbrowser");
                         str = "com.android.chrome/com.google.android.apps.chrome.Main";
                     }
-                    m = str;
+                    strM = str;
                 }
-                shortcutAppList = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("1;", m, ";1;com.sec.android.app.camera/com.sec.android.app.camera.Camera");
+                shortcutAppList = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("1;", strM, ";1;com.sec.android.app.camera/com.sec.android.app.camera.Camera");
                 if (SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportDualApps")) {
-                    List split = new Regex(";").split(shortcutAppList);
-                    if (!split.isEmpty()) {
-                        ListIterator listIterator = split.listIterator(split.size());
+                    List listSplit = new Regex(";").split(shortcutAppList);
+                    if (listSplit.isEmpty()) {
+                        collectionTake = EmptyList.INSTANCE;
+                        String[] strArr = (String[]) collectionTake.toArray(new String[0]);
+                        strArr[1] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr[1], "/0");
+                        strArr[3] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr[3], "/0");
+                        String str2 = "";
+                        while (i < r11) {
+                        }
+                        Log.d("KeyguardShortcutDialerUpdateManager", str2);
+                        shortcutAppList = str2;
+                    } else {
+                        ListIterator listIterator = listSplit.listIterator(listSplit.size());
                         while (listIterator.hasPrevious()) {
                             if (((String) listIterator.previous()).length() != 0) {
-                                collection = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                                collectionTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                                 break;
                             }
                         }
+                        collectionTake = EmptyList.INSTANCE;
+                        String[] strArr2 = (String[]) collectionTake.toArray(new String[0]);
+                        strArr2[1] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr2[1], "/0");
+                        strArr2[3] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr2[3], "/0");
+                        String str22 = "";
+                        for (String str3 : strArr2) {
+                            str3.getClass();
+                            str22 = str22 + str3 + ";";
+                        }
+                        Log.d("KeyguardShortcutDialerUpdateManager", str22);
+                        shortcutAppList = str22;
                     }
-                    collection = EmptyList.INSTANCE;
-                    String[] strArr = (String[]) collection.toArray(new String[0]);
-                    strArr[1] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr[1], "/0");
-                    strArr[3] = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strArr[3], "/0");
-                    String str2 = "";
-                    for (String str3 : strArr) {
-                        str3.getClass();
-                        str2 = str2 + str3 + ";";
-                    }
-                    Log.d("KeyguardShortcutDialerUpdateManager", str2);
-                    shortcutAppList = str2;
                 } else {
                     Log.d("KeyguardShortcutDialerUpdateManager", shortcutAppList);
                 }
             }
             String contactsPackageName = getContactsPackageName(true);
-            String m2 = StringsKt__StringsKt.contains(shortcutAppList, "com.skt.prod.dialer", false) ? "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity" : StringsKt__StringsKt.contains(shortcutAppList, "com.lguplus.aicallagent", false) ? "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity" : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(getContactsPackageName(true), "/com.samsung.android.dialer.DialtactsActivity");
-            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("current dialer pkg:  ", m2, "KeyguardShortcutDialerUpdateManager");
+            String strM2 = StringsKt__StringsKt.contains(shortcutAppList, "com.skt.prod.dialer", false) ? "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity" : StringsKt__StringsKt.contains(shortcutAppList, "com.lguplus.aicallagent", false) ? "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity" : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(getContactsPackageName(true), "/com.samsung.android.dialer.DialtactsActivity");
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("current dialer pkg:  ", strM2, "KeyguardShortcutDialerUpdateManager");
             if ("com.skt.prod.dialer".equals(((TelecomManager) this.context.getSystemService("telecom")).getDefaultDialerPackage())) {
-                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, m2, "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity");
+                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, strM2, "com.skt.prod.dialer/com.skt.prod.dialer.activities.main.MainActivity");
             } else if ("com.lguplus.aicallagent".equals(((TelecomManager) this.context.getSystemService("telecom")).getDefaultDialerPackage())) {
-                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, m2, "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity");
+                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, strM2, "com.lguplus.aicallagent/com.lguplus.aicallagent.MainActivity");
             } else {
-                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, m2, contactsPackageName + "/com.samsung.android.dialer.DialtactsActivity");
+                shortcutAppList = StringsKt__StringsJVMKt.replace$default(shortcutAppList, strM2, contactsPackageName + "/com.samsung.android.dialer.DialtactsActivity");
             }
         } else if (!PopupUIUtil.ACTION_BOOT_COMPLETED.equals(action) || shortcutAppList == null) {
             z2 = false;

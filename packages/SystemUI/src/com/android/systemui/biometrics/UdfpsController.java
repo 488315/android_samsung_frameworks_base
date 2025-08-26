@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.hardware.biometrics.BiometricFingerprintConstants;
 import android.hardware.display.DisplayManager;
@@ -14,6 +15,7 @@ import android.hardware.fingerprint.IUdfpsOverlayController;
 import android.hardware.fingerprint.IUdfpsOverlayControllerCallback;
 import android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback;
 import android.hardware.input.InputManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.RemoteException;
@@ -21,6 +23,8 @@ import android.os.Trace;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Log;
+import android.util.StatsEvent;
+import android.util.StatsLog;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -31,7 +35,9 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.snapshots.SnapshotStateObserver$$ExternalSyntheticOutline0;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import com.android.internal.logging.InstanceId;
 import com.android.internal.util.LatencyTracker;
 import com.android.internal.util.Preconditions;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -45,7 +51,11 @@ import com.android.systemui.biometrics.UdfpsController;
 import com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 import com.android.systemui.biometrics.udfps.InteractionEvent;
+import com.android.systemui.biometrics.udfps.NormalizedTouchData;
+import com.android.systemui.biometrics.udfps.PreprocessedTouch;
 import com.android.systemui.biometrics.udfps.SinglePointerTouchProcessor;
+import com.android.systemui.biometrics.udfps.SinglePointerTouchProcessorKt;
+import com.android.systemui.biometrics.udfps.TouchProcessorResult;
 import com.android.systemui.biometrics.ui.binder.UdfpsTouchOverlayBinder;
 import com.android.systemui.biometrics.ui.view.UdfpsTouchOverlay;
 import com.android.systemui.biometrics.ui.viewmodel.UdfpsTouchOverlayViewModel;
@@ -70,6 +80,7 @@ import com.android.systemui.statusbar.phone.SystemUIDialogManager;
 import com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.Execution;
@@ -82,30 +93,26 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlin.text.StringsKt__IndentKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class UdfpsController implements DozeReceiver, Dumpable {
     public final AccessibilityManager mAccessibilityManager;
-    public final ActivityTransitionAnimator mActivityTransitionAnimator;
-    public final AlternateBouncerInteractor mAlternateBouncerInteractor;
     public UdfpsController$$ExternalSyntheticLambda1 mAodInterruptRunnable;
     public boolean mAttemptedToDismissKeyguard;
     public AuthController$$ExternalSyntheticLambda3 mAuthControllerUpdateUdfpsLocation;
     public final Executor mBiometricExecutor;
     public final AnonymousClass2 mBroadcastReceiver;
     public Runnable mCancelAodFingerUpAction;
-    public final ConfigurationController mConfigurationController;
     public final Context mContext;
     public final Lazy mDefaultUdfpsTouchOverlayViewModel;
     public final DeviceEntryFaceAuthInteractor mDeviceEntryFaceAuthInteractor;
     public final Lazy mDeviceEntryUdfpsTouchOverlayViewModel;
-    public final SystemUIDialogManager mDialogManager;
-    public final DumpManager mDumpManager;
     public final Execution mExecution;
     public final FalsingManager mFalsingManager;
     public final DelayableExecutor mFgExecutor;
@@ -125,20 +132,17 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     public UdfpsControllerOverlay mOverlay;
     public final PowerInteractor mPowerInteractor;
     public final PowerManager mPowerManager;
-    public final PrimaryBouncerInteractor mPrimaryBouncerInteractor;
+    public final Lazy mPromptUdfpsTouchOverlayViewModel;
     public final CoroutineScope mScope;
     public final AnonymousClass1 mScreenObserver;
     public boolean mScreenOn;
-    public final SelectedUserInteractor mSelectedUserInteractor;
     FingerprintSensorPropertiesInternal mSensorProps;
     public final SessionTracker mSessionTracker;
-    public final ShadeInteractor mShadeInteractor;
     public final StatusBarStateController mStatusBarStateController;
     public final SystemClock mSystemClock;
     public final SinglePointerTouchProcessor mTouchProcessor;
     public UdfpsDisplayMode mUdfpsDisplayMode;
     public final UdfpsOverlayInteractor mUdfpsOverlayInteractor;
-    public final UnlockedScreenOffAnimationController mUnlockedScreenOffAnimationController;
     public final VibratorHelper mVibrator;
     public final WindowManager mWindowManager;
     public static final VibrationAttributes UDFPS_VIBRATION_ATTRIBUTES = new VibrationAttributes.Builder().setUsage(65).build();
@@ -148,7 +152,6 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     public boolean mPointerPilfered = false;
     public final Set mCallbacks = new HashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.UdfpsController$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$biometrics$udfps$InteractionEvent;
@@ -171,7 +174,6 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onFingerDown();
 
@@ -179,9 +181,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x039e  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0403  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x03a3  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x0384  */
     /* JADX WARN: Type inference failed for: r1v16 */
     /* JADX WARN: Type inference failed for: r1v17, types: [int] */
     /* JADX WARN: Type inference failed for: r1v29 */
@@ -201,14 +201,328 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     /* renamed from: -$$Nest$monTouch, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean m1019$$Nest$monTouch(com.android.systemui.biometrics.UdfpsController r32, long r33, android.view.MotionEvent r35) {
-        /*
-            Method dump skipped, instructions count: 1250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.UdfpsController.m1019$$Nest$monTouch(com.android.systemui.biometrics.UdfpsController, long, android.view.MotionEvent):boolean");
+    public static boolean m1021$$Nest$monTouch(UdfpsController udfpsController, long j, MotionEvent motionEvent) throws Resources.NotFoundException {
+        TouchProcessorResult processedTouch;
+        Object next;
+        InteractionEvent interactionEvent;
+        StatusBarStateController statusBarStateController;
+        boolean z;
+        boolean z2;
+        NormalizedTouchData normalizedTouchData;
+        boolean z3;
+        boolean z4;
+        int i;
+        int i2;
+        ?? r1;
+        char c;
+        boolean z5;
+        NormalizedTouchData normalizedTouchData2;
+        UdfpsControllerOverlay udfpsControllerOverlay = udfpsController.mOverlay;
+        if (udfpsControllerOverlay == null) {
+            Log.w("UdfpsController", "ignoring onTouch with null overlay");
+            return false;
+        }
+        long j2 = udfpsControllerOverlay.requestId;
+        if (j2 != -1 && j2 != j) {
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("ignoring stale touch event: ", j, " current: ");
+            sbM.append(udfpsController.mOverlay.requestId);
+            Log.w("UdfpsController", sbM.toString());
+            return false;
+        }
+        if (motionEvent.getAction() == 0 || motionEvent.getAction() == 9) {
+            udfpsController.mPointerPilfered = false;
+            if (udfpsController.mActivePointerId != -1) {
+                Log.w("UdfpsController", "onTouch down received without a preceding up");
+            }
+            udfpsController.mActivePointerId = -1;
+            if (!udfpsController.mIsAodInterruptActive) {
+                udfpsController.mOnFingerDown = false;
+            }
+        }
+        int i3 = udfpsController.mActivePointerId;
+        UdfpsOverlayParams udfpsOverlayParams = udfpsController.mOverlayParams;
+        SinglePointerTouchProcessor singlePointerTouchProcessor = udfpsController.mTouchProcessor;
+        singlePointerTouchProcessor.getClass();
+        NormalizedTouchData normalizedTouchData3 = null;
+        switch (motionEvent.getActionMasked()) {
+            case 0:
+            case 2:
+            case 5:
+            case 7:
+            case 9:
+                PreprocessedTouch preprocessedTouchProcessTouch$preprocess = SinglePointerTouchProcessor.processTouch$preprocess(motionEvent, i3, udfpsOverlayParams, singlePointerTouchProcessor);
+                Set set = SinglePointerTouchProcessorKt.SUPPORTED_ROTATIONS;
+                int i4 = preprocessedTouchProcessTouch$preprocess.previousPointerOnSensorId;
+                boolean z6 = i4 != -1;
+                boolean zIsEmpty = preprocessedTouchProcessTouch$preprocess.pointersOnSensor.isEmpty();
+                Integer num = (Integer) CollectionsKt___CollectionsKt.firstOrNull(preprocessedTouchProcessTouch$preprocess.pointersOnSensor);
+                int iIntValue = num != null ? num.intValue() : -1;
+                if (!z6 && !zIsEmpty) {
+                    Iterator it = preprocessedTouchProcessTouch$preprocess.data.iterator();
+                    while (true) {
+                        if (it.hasNext()) {
+                            ?? next2 = it.next();
+                            if (((NormalizedTouchData) next2).pointerId == iIntValue) {
+                                normalizedTouchData3 = next2;
+                            }
+                        }
+                    }
+                    NormalizedTouchData normalizedTouchData4 = normalizedTouchData3;
+                    if (normalizedTouchData4 == null) {
+                        normalizedTouchData4 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                    }
+                    processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.DOWN, normalizedTouchData4.pointerId, normalizedTouchData4);
+                    break;
+                } else if (!z6 || !zIsEmpty) {
+                    Iterator it2 = preprocessedTouchProcessTouch$preprocess.data.iterator();
+                    while (true) {
+                        if (it2.hasNext()) {
+                            ?? next3 = it2.next();
+                            if (((NormalizedTouchData) next3).pointerId == iIntValue) {
+                                normalizedTouchData3 = next3;
+                            }
+                        }
+                    }
+                    NormalizedTouchData normalizedTouchData5 = normalizedTouchData3;
+                    if (normalizedTouchData5 == null && (normalizedTouchData5 = (NormalizedTouchData) CollectionsKt___CollectionsKt.firstOrNull(preprocessedTouchProcessTouch$preprocess.data)) == null) {
+                        normalizedTouchData5 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                    }
+                    processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.UNCHANGED, iIntValue, normalizedTouchData5);
+                    break;
+                } else {
+                    Iterator it3 = preprocessedTouchProcessTouch$preprocess.data.iterator();
+                    while (true) {
+                        if (it3.hasNext()) {
+                            ?? next4 = it3.next();
+                            if (((NormalizedTouchData) next4).pointerId == i4) {
+                                normalizedTouchData3 = next4;
+                            }
+                        }
+                    }
+                    NormalizedTouchData normalizedTouchData6 = normalizedTouchData3;
+                    if (normalizedTouchData6 == null) {
+                        normalizedTouchData6 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                    }
+                    processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.UP, -1, normalizedTouchData6);
+                    break;
+                }
+                break;
+            case 1:
+            case 6:
+            case 10:
+                PreprocessedTouch preprocessedTouchProcessTouch$preprocess2 = SinglePointerTouchProcessor.processTouch$preprocess(motionEvent, i3, udfpsOverlayParams, singlePointerTouchProcessor);
+                int pointerId = motionEvent.getPointerId(motionEvent.getActionIndex());
+                Set set2 = SinglePointerTouchProcessorKt.SUPPORTED_ROTATIONS;
+                if (preprocessedTouchProcessTouch$preprocess2.pointersOnSensor.size() != 1 || !preprocessedTouchProcessTouch$preprocess2.pointersOnSensor.contains(Integer.valueOf(pointerId))) {
+                    Iterator it4 = preprocessedTouchProcessTouch$preprocess2.pointersOnSensor.iterator();
+                    while (true) {
+                        if (it4.hasNext()) {
+                            next = it4.next();
+                            if (((Number) next).intValue() != pointerId) {
+                            }
+                        } else {
+                            next = null;
+                        }
+                    }
+                    Integer num2 = (Integer) next;
+                    int iIntValue2 = num2 != null ? num2.intValue() : -1;
+                    Iterator it5 = preprocessedTouchProcessTouch$preprocess2.data.iterator();
+                    while (true) {
+                        if (it5.hasNext()) {
+                            ?? next5 = it5.next();
+                            if (((NormalizedTouchData) next5).pointerId == iIntValue2) {
+                                normalizedTouchData3 = next5;
+                            }
+                        }
+                    }
+                    NormalizedTouchData normalizedTouchData7 = normalizedTouchData3;
+                    if (normalizedTouchData7 == null && (normalizedTouchData7 = (NormalizedTouchData) CollectionsKt___CollectionsKt.firstOrNull(preprocessedTouchProcessTouch$preprocess2.data)) == null) {
+                        normalizedTouchData7 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                    }
+                    processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.UNCHANGED, iIntValue2, normalizedTouchData7);
+                    break;
+                } else {
+                    Iterator it6 = preprocessedTouchProcessTouch$preprocess2.data.iterator();
+                    while (true) {
+                        if (it6.hasNext()) {
+                            ?? next6 = it6.next();
+                            if (((NormalizedTouchData) next6).pointerId == pointerId) {
+                                normalizedTouchData3 = next6;
+                            }
+                        }
+                    }
+                    NormalizedTouchData normalizedTouchData8 = normalizedTouchData3;
+                    if (normalizedTouchData8 == null) {
+                        normalizedTouchData8 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                    }
+                    processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.UP, -1, normalizedTouchData8);
+                    break;
+                }
+                break;
+            case 3:
+                NormalizedTouchData normalizedTouchData9 = new NormalizedTouchData(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0L, 0L, 255, null);
+                Set set3 = SinglePointerTouchProcessorKt.SUPPORTED_ROTATIONS;
+                processedTouch = new TouchProcessorResult.ProcessedTouch(InteractionEvent.CANCEL, -1, normalizedTouchData9);
+                break;
+            case 4:
+            case 8:
+            default:
+                processedTouch = new TouchProcessorResult.Failure(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Unsupported MotionEvent.", MotionEvent.actionToString(motionEvent.getActionMasked())));
+                break;
+        }
+        if (processedTouch instanceof TouchProcessorResult.Failure) {
+            Log.w("UdfpsController", ((TouchProcessorResult.Failure) processedTouch).reason);
+            return false;
+        }
+        TouchProcessorResult.ProcessedTouch processedTouch2 = (TouchProcessorResult.ProcessedTouch) processedTouch;
+        udfpsController.mActivePointerId = processedTouch2.pointerOnSensorId;
+        int[] iArr = AnonymousClass3.$SwitchMap$com$android$systemui$biometrics$udfps$InteractionEvent;
+        InteractionEvent interactionEvent2 = processedTouch2.event;
+        int i5 = iArr[interactionEvent2.ordinal()];
+        StatusBarStateController statusBarStateController2 = udfpsController.mStatusBarStateController;
+        NormalizedTouchData normalizedTouchData10 = processedTouch2.touchData;
+        if (i5 != 1) {
+            if (i5 == 2 || i5 == 3) {
+                if (InteractionEvent.CANCEL.equals(interactionEvent2)) {
+                    Log.w("UdfpsController", "This is a CANCEL event that's reported as an UP event!");
+                }
+                udfpsController.mAttemptedToDismissKeyguard = false;
+                UdfpsTouchOverlay udfpsTouchOverlay = udfpsController.mOverlay.overlayTouchView;
+                statusBarStateController = statusBarStateController2;
+                normalizedTouchData2 = normalizedTouchData10;
+                interactionEvent = interactionEvent2;
+                udfpsController.onFingerUp(j, normalizedTouchData10.pointerId, normalizedTouchData10.x, normalizedTouchData10.y, normalizedTouchData10.minor, normalizedTouchData10.major, normalizedTouchData10.orientation, normalizedTouchData10.time, normalizedTouchData10.gestureStart, statusBarStateController2.isDozing());
+            } else {
+                interactionEvent = interactionEvent2;
+                normalizedTouchData2 = normalizedTouchData10;
+                statusBarStateController = statusBarStateController2;
+            }
+            z4 = false;
+            z2 = false;
+            normalizedTouchData = normalizedTouchData2;
+            z3 = true;
+        } else {
+            interactionEvent = interactionEvent2;
+            statusBarStateController = statusBarStateController2;
+            KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) udfpsController.mKeyguardStateController;
+            if (keyguardStateControllerImpl.mShowing && keyguardStateControllerImpl.mCanDismissLockScreen && !udfpsController.mAttemptedToDismissKeyguard) {
+                if (!udfpsController.mOnFingerDown) {
+                    udfpsController.playStartHaptic();
+                }
+                udfpsController.mKeyguardViewManager.notifyKeyguardAuthenticated(false);
+                z = true;
+                udfpsController.mAttemptedToDismissKeyguard = true;
+            } else {
+                z = true;
+            }
+            if (udfpsController.mOnFingerDown) {
+                z2 = false;
+                normalizedTouchData = normalizedTouchData10;
+                z3 = z;
+            } else {
+                normalizedTouchData = normalizedTouchData10;
+                z2 = false;
+                z3 = z;
+                udfpsController.onFingerDown(j, normalizedTouchData10.pointerId, normalizedTouchData10.x, normalizedTouchData10.y, normalizedTouchData10.minor, normalizedTouchData10.major, normalizedTouchData10.orientation, normalizedTouchData10.time, normalizedTouchData10.gestureStart, statusBarStateController.isDozing());
+            }
+            udfpsController.mFalsingManager.isFalseTouch(13);
+            z4 = z3;
+        }
+        InteractionEvent interactionEvent3 = InteractionEvent.UNCHANGED;
+        SystemClock systemClock = udfpsController.mSystemClock;
+        InteractionEvent interactionEvent4 = interactionEvent;
+        if (interactionEvent4 != interactionEvent3 || systemClock.elapsedRealtime() - udfpsController.mLastTouchInteractionTime >= 50) {
+            udfpsController.mLastTouchInteractionTime = systemClock.elapsedRealtime();
+            int i6 = iArr[interactionEvent4.ordinal()];
+            if (i6 != z3) {
+                i = 2;
+                if (i6 != 2) {
+                    i2 = 3;
+                    r1 = i6 != 3 ? z2 : 3;
+                } else {
+                    i2 = 3;
+                    r1 = 2;
+                }
+            } else {
+                i = 2;
+                i2 = 3;
+                r1 = z3;
+            }
+            UdfpsControllerOverlay udfpsControllerOverlay2 = udfpsController.mOverlay;
+            if (udfpsControllerOverlay2 != null) {
+                int i7 = udfpsControllerOverlay2.requestReason;
+                ?? r2 = (i7 == z3 || i7 == i) ? 4 : i7 != i2 ? i7 != 4 ? -1 : z3 : i;
+                InstanceId sessionId = udfpsController.mSessionTracker.getSessionId(r2);
+                int id = sessionId != null ? sessionId.getId() : -1;
+                int integer = udfpsController.mContext.getResources().getInteger(R.integer.device_idle_sensing_to_ms);
+                NormalizedTouchData normalizedTouchData11 = normalizedTouchData;
+                float f = normalizedTouchData11.x;
+                boolean zIsDozing = statusBarStateController.isDozing();
+                StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+                builderNewBuilder.setAtomId(577);
+                builderNewBuilder.writeInt((int) r1);
+                builderNewBuilder.writeInt(integer);
+                builderNewBuilder.writeInt(id);
+                builderNewBuilder.writeFloat(f);
+                float f2 = normalizedTouchData11.y;
+                builderNewBuilder.writeFloat(f2);
+                float f3 = normalizedTouchData11.minor;
+                builderNewBuilder.writeFloat(f3);
+                float f4 = normalizedTouchData11.major;
+                builderNewBuilder.writeFloat(f4);
+                float f5 = normalizedTouchData11.orientation;
+                builderNewBuilder.writeFloat(f5);
+                long j3 = normalizedTouchData11.time;
+                builderNewBuilder.writeLong(j3);
+                int i8 = id;
+                long j4 = normalizedTouchData11.gestureStart;
+                builderNewBuilder.writeLong(j4);
+                builderNewBuilder.writeBoolean(zIsDozing);
+                builderNewBuilder.usePooledBuffer();
+                StatsLog.write(builderNewBuilder.build());
+                if (Build.isDebuggable()) {
+                    StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("\n        |NormalizedTouchData [", interactionEvent4.toString(), "] {\n        |     pointerId: ");
+                    sbM2.append(normalizedTouchData11.pointerId);
+                    sbM2.append("\n        |             x: ");
+                    sbM2.append(normalizedTouchData11.x);
+                    sbM2.append("\n        |             y: ");
+                    sbM2.append(f2);
+                    sbM2.append("\n        |         minor: ");
+                    sbM2.append(f3);
+                    sbM2.append("\n        |         major: ");
+                    sbM2.append(f4);
+                    sbM2.append("\n        |   orientation: ");
+                    sbM2.append(f5);
+                    sbM2.append("\n        |          time: ");
+                    sbM2.append(j3);
+                    sbM2.append("\n        |  gestureStart: ");
+                    sbM2.append(j4);
+                    sbM2.append("\n        |}\n        ");
+                    Log.d("UdfpsController", StringsKt__IndentKt.trimMargin$default(sbM2.toString()));
+                    Log.d("UdfpsController", "sessionId: " + i8 + ", isAod: " + statusBarStateController.isDozing() + ", touchConfigId: " + integer);
+                }
+            }
+        }
+        if (udfpsController.mActivePointerId != -1) {
+            z4 = z3;
+        }
+        if (z4 && !udfpsController.mPointerPilfered) {
+            UdfpsControllerOverlay udfpsControllerOverlay3 = udfpsController.mOverlay;
+            if (udfpsControllerOverlay3 == null) {
+                z5 = -1;
+                c = 2;
+            } else {
+                int i9 = udfpsControllerOverlay3.requestReason;
+                c = 2;
+                z5 = (i9 == z3 || i9 == 2) ? 4 : i9 != 3 ? i9 != 4 ? -1 : z3 : 2;
+            }
+            if (z5 != c) {
+                udfpsController.mInputManager.pilferPointers(udfpsControllerOverlay3.overlayTouchView.getViewRootImpl().getInputToken());
+                udfpsController.mPointerPilfered = z3;
+            }
+        }
+        return udfpsController.mActivePointerId != -1 ? z3 : z2;
     }
 
     static {
@@ -216,10 +530,10 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.biometrics.UdfpsController$1, java.lang.Object] */
-    /* JADX WARN: Type inference failed for: r4v0, types: [android.content.BroadcastReceiver, com.android.systemui.biometrics.UdfpsController$2] */
-    public UdfpsController(Context context, Execution execution, LayoutInflater layoutInflater, FingerprintManager fingerprintManager, WindowManager windowManager, StatusBarStateController statusBarStateController, DelayableExecutor delayableExecutor, StatusBarKeyguardViewManager statusBarKeyguardViewManager, DumpManager dumpManager, KeyguardUpdateMonitor keyguardUpdateMonitor, FalsingManager falsingManager, PowerManager powerManager, AccessibilityManager accessibilityManager, ScreenLifecycle screenLifecycle, VibratorHelper vibratorHelper, UdfpsHapticsSimulator udfpsHapticsSimulator, UdfpsShell udfpsShell, KeyguardStateController keyguardStateController, DisplayManager displayManager, Handler handler, ConfigurationController configurationController, SystemClock systemClock, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SystemUIDialogManager systemUIDialogManager, LatencyTracker latencyTracker, ActivityTransitionAnimator activityTransitionAnimator, Executor executor, PrimaryBouncerInteractor primaryBouncerInteractor, ShadeInteractor shadeInteractor, SinglePointerTouchProcessor singlePointerTouchProcessor, SessionTracker sessionTracker, AlternateBouncerInteractor alternateBouncerInteractor, InputManager inputManager, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SelectedUserInteractor selectedUserInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, Lazy lazy, Lazy lazy2, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope, UserActivityNotifier userActivityNotifier) {
-        ?? r3 = new ScreenLifecycle.Observer() { // from class: com.android.systemui.biometrics.UdfpsController.1
+    /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.biometrics.UdfpsController$1, java.lang.Object] */
+    /* JADX WARN: Type inference failed for: r3v0, types: [android.content.BroadcastReceiver, com.android.systemui.biometrics.UdfpsController$2] */
+    public UdfpsController(Context context, Execution execution, LayoutInflater layoutInflater, FingerprintManager fingerprintManager, WindowManager windowManager, StatusBarStateController statusBarStateController, DelayableExecutor delayableExecutor, StatusBarKeyguardViewManager statusBarKeyguardViewManager, DumpManager dumpManager, KeyguardUpdateMonitor keyguardUpdateMonitor, FalsingManager falsingManager, PowerManager powerManager, AccessibilityManager accessibilityManager, ScreenLifecycle screenLifecycle, VibratorHelper vibratorHelper, UdfpsHapticsSimulator udfpsHapticsSimulator, UdfpsShell udfpsShell, KeyguardStateController keyguardStateController, DisplayManager displayManager, Handler handler, ConfigurationController configurationController, SystemClock systemClock, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SystemUIDialogManager systemUIDialogManager, LatencyTracker latencyTracker, ActivityTransitionAnimator activityTransitionAnimator, Executor executor, PrimaryBouncerInteractor primaryBouncerInteractor, ShadeInteractor shadeInteractor, SinglePointerTouchProcessor singlePointerTouchProcessor, SessionTracker sessionTracker, AlternateBouncerInteractor alternateBouncerInteractor, InputManager inputManager, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SelectedUserInteractor selectedUserInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, Lazy lazy, Lazy lazy2, Lazy lazy3, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope, UserActivityNotifier userActivityNotifier) {
+        ?? r2 = new ScreenLifecycle.Observer() { // from class: com.android.systemui.biometrics.UdfpsController.1
             @Override // com.android.systemui.keyguard.ScreenLifecycle.Observer
             public final void onScreenTurnedOff() {
                 UdfpsController.this.mScreenOn = false;
@@ -236,8 +550,8 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                 }
             }
         };
-        this.mScreenObserver = r3;
-        ?? r4 = new BroadcastReceiver() { // from class: com.android.systemui.biometrics.UdfpsController.2
+        this.mScreenObserver = r2;
+        ?? r3 = new BroadcastReceiver() { // from class: com.android.systemui.biometrics.UdfpsController.2
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 UdfpsControllerOverlay udfpsControllerOverlay = UdfpsController.this.mOverlay;
@@ -259,7 +573,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                 UdfpsController.this.hideUdfpsOverlay();
             }
         };
-        this.mBroadcastReceiver = r4;
+        this.mBroadcastReceiver = r3;
         this.mContext = context;
         this.mExecution = execution;
         this.mVibrator = vibratorHelper;
@@ -272,40 +586,32 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         this.mStatusBarStateController = statusBarStateController;
         this.mKeyguardStateController = keyguardStateController;
         this.mKeyguardViewManager = statusBarKeyguardViewManager;
-        this.mDumpManager = dumpManager;
-        this.mDialogManager = systemUIDialogManager;
         this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;
         this.mFalsingManager = falsingManager;
         this.mPowerManager = powerManager;
         this.mAccessibilityManager = accessibilityManager;
-        screenLifecycle.addObserver(r3);
+        screenLifecycle.addObserver(r2);
         this.mScreenOn = screenLifecycle.mScreenState == 2;
-        this.mConfigurationController = configurationController;
         this.mSystemClock = systemClock;
-        this.mUnlockedScreenOffAnimationController = unlockedScreenOffAnimationController;
         this.mLatencyTracker = latencyTracker;
-        this.mActivityTransitionAnimator = activityTransitionAnimator;
         this.mSensorProps = new FingerprintSensorPropertiesInternal(-1, 0, 0, new ArrayList(), 0, false);
         this.mBiometricExecutor = executor;
-        this.mPrimaryBouncerInteractor = primaryBouncerInteractor;
-        this.mShadeInteractor = shadeInteractor;
-        this.mAlternateBouncerInteractor = alternateBouncerInteractor;
         this.mUdfpsOverlayInteractor = udfpsOverlayInteractor;
         this.mPowerInteractor = powerInteractor;
         this.mScope = coroutineScope;
         this.mInputManager = inputManager;
-        this.mSelectedUserInteractor = selectedUserInteractor;
         this.mKeyguardTransitionInteractor = keyguardTransitionInteractor;
         this.mTouchProcessor = singlePointerTouchProcessor;
         this.mSessionTracker = sessionTracker;
         this.mDeviceEntryUdfpsTouchOverlayViewModel = lazy;
         this.mDefaultUdfpsTouchOverlayViewModel = lazy2;
+        this.mPromptUdfpsTouchOverlayViewModel = lazy3;
         dumpManager.getClass();
         DumpManager.registerDumpable$default(dumpManager, "UdfpsController", this);
         this.mOrientationListener = new BiometricDisplayListener(context, displayManager, handler, BiometricDisplayListener.SensorType.UnderDisplayFingerprint.INSTANCE, new Function0() { // from class: com.android.systemui.biometrics.UdfpsController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                AuthController$$ExternalSyntheticLambda3 authController$$ExternalSyntheticLambda3 = UdfpsController.this.mAuthControllerUpdateUdfpsLocation;
+                AuthController$$ExternalSyntheticLambda3 authController$$ExternalSyntheticLambda3 = this.f$0.mAuthControllerUpdateUdfpsLocation;
                 if (authController$$ExternalSyntheticLambda3 != null) {
                     authController$$ExternalSyntheticLambda3.run();
                 }
@@ -317,7 +623,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         fingerprintManager2.setUdfpsOverlayController(udfpsOverlayController);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS);
-        context.registerReceiver(r4, intentFilter, 2);
+        context.registerReceiver(r3, intentFilter, 2);
         udfpsHapticsSimulator.udfpsController = this;
         udfpsShell.udfpsOverlayController = udfpsOverlayController;
     }
@@ -337,7 +643,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     }
 
     @Override // com.android.systemui.Dumpable
-    public final void dump(PrintWriter printWriter, String[] strArr) {
+    public final void dump(PrintWriter printWriter, String[] strArr) throws Resources.NotFoundException {
         int integer = this.mContext.getResources().getInteger(R.integer.device_idle_sensing_to_ms);
         printWriter.println("mSensorProps=(" + this.mSensorProps + ")");
         MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("touchConfigId: "), integer, printWriter);
@@ -392,9 +698,9 @@ public class UdfpsController implements DozeReceiver, Dumpable {
         }
         long j4 = udfpsControllerOverlay.requestId;
         if (j4 != -1 && j4 != j) {
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Mismatched fingerDown: ", j, " current: ");
-            m.append(this.mOverlay.requestId);
-            Log.w("UdfpsController", m.toString());
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Mismatched fingerDown: ", j, " current: ");
+            sbM.append(this.mOverlay.requestId);
+            Log.w("UdfpsController", sbM.toString());
             return;
         }
         if (isOptical()) {
@@ -514,10 +820,12 @@ public class UdfpsController implements DozeReceiver, Dumpable {
             }
             udfpsControllerOverlay.addViewNowOrLater(udfpsTouchOverlay);
             UdfpsOverlayInteractor udfpsOverlayInteractor = udfpsControllerOverlay.udfpsOverlayInteractor;
-            if (i2 == 4) {
-                UdfpsTouchOverlayBinder.bind(udfpsTouchOverlay, (UdfpsTouchOverlayViewModel) udfpsControllerOverlay.deviceEntryUdfpsTouchOverlayViewModel.get(), udfpsOverlayInteractor);
-            } else {
+            if (i2 == 3) {
+                UdfpsTouchOverlayBinder.bind(udfpsTouchOverlay, (UdfpsTouchOverlayViewModel) udfpsControllerOverlay.promptUdfpsTouchOverlayViewModel.get(), udfpsOverlayInteractor);
+            } else if (i2 != 4) {
                 UdfpsTouchOverlayBinder.bind(udfpsTouchOverlay, (UdfpsTouchOverlayViewModel) udfpsControllerOverlay.defaultUdfpsTouchOverlayViewModel.get(), udfpsOverlayInteractor);
+            } else {
+                UdfpsTouchOverlayBinder.bind(udfpsTouchOverlay, (UdfpsTouchOverlayViewModel) udfpsControllerOverlay.deviceEntryUdfpsTouchOverlayViewModel.get(), udfpsOverlayInteractor);
             }
             udfpsControllerOverlay.overlayTouchView = udfpsTouchOverlay;
             if (udfpsTouchOverlay != null) {
@@ -525,35 +833,35 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                 ?? r3 = new AccessibilityManager.TouchExplorationStateChangeListener() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay$show$2$1
                     @Override // android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener
                     public final void onTouchExplorationStateChanged(boolean z) {
-                        if (UdfpsControllerOverlay.this.accessibilityManager.isTouchExplorationEnabled()) {
+                        if (udfpsControllerOverlay.accessibilityManager.isTouchExplorationEnabled()) {
                             View view = udfpsTouchOverlay;
-                            final UdfpsControllerOverlay udfpsControllerOverlay2 = UdfpsControllerOverlay.this;
+                            final UdfpsControllerOverlay udfpsControllerOverlay2 = udfpsControllerOverlay;
                             view.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay$show$2$1.1
                                 @Override // android.view.View.OnHoverListener
                                 public final boolean onHover(View view2, MotionEvent motionEvent) {
-                                    Function2 function2 = UdfpsControllerOverlay.this.onTouch;
+                                    Function2 function2 = udfpsControllerOverlay2.onTouch;
                                     view2.getClass();
                                     motionEvent.getClass();
                                     return ((Boolean) function2.invoke(view2, motionEvent)).booleanValue();
                                 }
                             });
                             udfpsTouchOverlay.setOnTouchListener(null);
-                            UdfpsControllerOverlay.this.getClass();
+                            udfpsControllerOverlay.getClass();
                             return;
                         }
                         udfpsTouchOverlay.setOnHoverListener(null);
                         View view2 = udfpsTouchOverlay;
-                        final UdfpsControllerOverlay udfpsControllerOverlay3 = UdfpsControllerOverlay.this;
+                        final UdfpsControllerOverlay udfpsControllerOverlay3 = udfpsControllerOverlay;
                         view2.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay$show$2$1.2
                             @Override // android.view.View.OnTouchListener
                             public final boolean onTouch(View view3, MotionEvent motionEvent) {
-                                Function2 function2 = UdfpsControllerOverlay.this.onTouch;
+                                Function2 function2 = udfpsControllerOverlay3.onTouch;
                                 view3.getClass();
                                 motionEvent.getClass();
                                 return ((Boolean) function2.invoke(view3, motionEvent)).booleanValue();
                             }
                         });
-                        UdfpsControllerOverlay.this.getClass();
+                        udfpsControllerOverlay.getClass();
                     }
                 };
                 udfpsControllerOverlay.overlayTouchListener = r3;
@@ -596,7 +904,6 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     public final void dozeTimeTick() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UdfpsOverlayController extends IUdfpsOverlayController.Stub {
         public UdfpsOverlayController() {
         }
@@ -620,7 +927,7 @@ public class UdfpsController implements DozeReceiver, Dumpable {
                     @Override // java.lang.Runnable
                     public final void run() {
                         UdfpsDisplayMode udfpsDisplayMode;
-                        UdfpsController.UdfpsOverlayController udfpsOverlayController = UdfpsController.UdfpsOverlayController.this;
+                        UdfpsController.UdfpsOverlayController udfpsOverlayController = this.f$0;
                         int i3 = i;
                         int i4 = i2;
                         UdfpsController udfpsController2 = UdfpsController.this;
@@ -646,17 +953,17 @@ public class UdfpsController implements DozeReceiver, Dumpable {
             UdfpsController.this.mFgExecutor.execute(new Runnable() { // from class: com.android.systemui.biometrics.UdfpsController$UdfpsOverlayController$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final UdfpsController.UdfpsOverlayController udfpsOverlayController = UdfpsController.UdfpsOverlayController.this;
+                    final UdfpsController.UdfpsOverlayController udfpsOverlayController = this.f$0;
                     final long j2 = j;
                     int i3 = i2;
                     IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback2 = iUdfpsOverlayControllerCallback;
                     UdfpsController udfpsController = UdfpsController.this;
-                    udfpsController.showUdfpsOverlay(new UdfpsControllerOverlay(udfpsController.mContext, udfpsController.mInflater, udfpsController.mWindowManager, udfpsController.mAccessibilityManager, udfpsController.mStatusBarStateController, udfpsController.mKeyguardViewManager, udfpsController.mKeyguardUpdateMonitor, udfpsController.mDialogManager, udfpsController.mDumpManager, udfpsController.mConfigurationController, udfpsController.mKeyguardStateController, udfpsController.mUnlockedScreenOffAnimationController, udfpsController.mUdfpsDisplayMode, j2, i3, iUdfpsOverlayControllerCallback2, new Function2() { // from class: com.android.systemui.biometrics.UdfpsController$UdfpsOverlayController$$ExternalSyntheticLambda6
+                    udfpsController.showUdfpsOverlay(new UdfpsControllerOverlay(udfpsController.mInflater, udfpsController.mWindowManager, udfpsController.mAccessibilityManager, udfpsController.mKeyguardUpdateMonitor, udfpsController.mKeyguardStateController, udfpsController.mUdfpsDisplayMode, j2, i3, iUdfpsOverlayControllerCallback2, new Function2() { // from class: com.android.systemui.biometrics.UdfpsController$UdfpsOverlayController$$ExternalSyntheticLambda6
                         @Override // kotlin.jvm.functions.Function2
                         public final Object invoke(Object obj, Object obj2) {
-                            return Boolean.valueOf(UdfpsController.m1019$$Nest$monTouch(UdfpsController.this, j2, (MotionEvent) obj2));
+                            return Boolean.valueOf(UdfpsController.m1021$$Nest$monTouch(UdfpsController.this, j2, (MotionEvent) obj2));
                         }
-                    }, udfpsController.mActivityTransitionAnimator, udfpsController.mPrimaryBouncerInteractor, udfpsController.mAlternateBouncerInteractor, udfpsController.mKeyguardTransitionInteractor, udfpsController.mSelectedUserInteractor, udfpsController.mDeviceEntryUdfpsTouchOverlayViewModel, udfpsController.mDefaultUdfpsTouchOverlayViewModel, udfpsController.mShadeInteractor, udfpsController.mUdfpsOverlayInteractor, udfpsController.mPowerInteractor, udfpsController.mScope));
+                    }, udfpsController.mKeyguardTransitionInteractor, udfpsController.mDeviceEntryUdfpsTouchOverlayViewModel, udfpsController.mDefaultUdfpsTouchOverlayViewModel, udfpsController.mPromptUdfpsTouchOverlayViewModel, udfpsController.mUdfpsOverlayInteractor, udfpsController.mPowerInteractor, udfpsController.mScope));
                 }
             });
         }

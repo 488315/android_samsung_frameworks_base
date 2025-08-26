@@ -169,28 +169,28 @@ public abstract class AugmentedAutofillService extends Service {
         if (this.mAutofillProxies == null) {
             this.mAutofillProxies = new SparseArray<>();
         }
-        ICancellationSignal createTransport = CancellationSignal.createTransport();
-        CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
+        ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+        CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
         AutofillProxy autofillProxy = this.mAutofillProxies.get(i);
         if (autofillProxy == null) {
             iFillCallback2 = iFillCallback;
-            autofillProxy = new AutofillProxy(i, iBinder, i2, this.mServiceComponentName, componentName, autofillId, autofillValue, j, iFillCallback2, fromTransport);
+            autofillProxy = new AutofillProxy(i, iBinder, i2, this.mServiceComponentName, componentName, autofillId, autofillValue, j, iFillCallback2, cancellationSignalFromTransport);
             this.mAutofillProxies.put(i, autofillProxy);
         } else {
             iFillCallback2 = iFillCallback;
             if (sDebug) {
                 Log.d(TAG, "Reusing proxy for session " + i);
             }
-            autofillProxy.update(autofillId, autofillValue, iFillCallback2, fromTransport);
+            autofillProxy.update(autofillId, autofillValue, iFillCallback2, cancellationSignalFromTransport);
         }
         AutofillProxy autofillProxy2 = autofillProxy;
         try {
-            iFillCallback2.onCancellable(createTransport);
+            iFillCallback2.onCancellable(iCancellationSignalCreateTransport);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
         this.mAutofillProxyForLastRequest = autofillProxy2;
-        onFillRequest(new FillRequest(autofillProxy2, inlineSuggestionsRequest), fromTransport, new FillController(autofillProxy2), new FillCallback(autofillProxy2));
+        onFillRequest(new FillRequest(autofillProxy2, inlineSuggestionsRequest), cancellationSignalFromTransport, new FillController(autofillProxy2), new FillCallback(autofillProxy2));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -199,22 +199,22 @@ public abstract class AugmentedAutofillService extends Service {
         if (sparseArray != null) {
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                int keyAt = this.mAutofillProxies.keyAt(i);
-                AutofillProxy valueAt = this.mAutofillProxies.valueAt(i);
-                if (valueAt == null) {
-                    Log.w(TAG, "No proxy for session " + keyAt);
+                int iKeyAt = this.mAutofillProxies.keyAt(i);
+                AutofillProxy autofillProxyValueAt = this.mAutofillProxies.valueAt(i);
+                if (autofillProxyValueAt == null) {
+                    Log.w(TAG, "No proxy for session " + iKeyAt);
                     return;
                 }
-                if (valueAt.mCallback != null) {
+                if (autofillProxyValueAt.mCallback != null) {
                     try {
-                        if (!valueAt.mCallback.isCompleted()) {
-                            valueAt.mCallback.cancel();
+                        if (!autofillProxyValueAt.mCallback.isCompleted()) {
+                            autofillProxyValueAt.mCallback.cancel();
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "failed to check current pending request status", e);
                     }
                 }
-                valueAt.destroy();
+                autofillProxyValueAt.destroy();
             }
             this.mAutofillProxies.clear();
             this.mAutofillProxyForLastRequest = null;
@@ -236,11 +236,11 @@ public abstract class AugmentedAutofillService extends Service {
             Log.d(TAG, "onUnbind(): destroying " + size + " proxies");
         }
         for (int i = 0; i < size; i++) {
-            AutofillProxy valueAt = this.mAutofillProxies.valueAt(i);
+            AutofillProxy autofillProxyValueAt = this.mAutofillProxies.valueAt(i);
             try {
-                valueAt.destroy();
+                autofillProxyValueAt.destroy();
             } catch (Exception unused) {
-                Log.w(TAG, "error destroying " + valueAt);
+                Log.w(TAG, "error destroying " + autofillProxyValueAt);
             }
         }
         this.mAutofillProxies = null;
@@ -257,13 +257,13 @@ public abstract class AugmentedAutofillService extends Service {
             printWriter.print("Number proxies: ");
             printWriter.println(size);
             for (int i = 0; i < size; i++) {
-                int keyAt = this.mAutofillProxies.keyAt(i);
-                AutofillProxy valueAt = this.mAutofillProxies.valueAt(i);
+                int iKeyAt = this.mAutofillProxies.keyAt(i);
+                AutofillProxy autofillProxyValueAt = this.mAutofillProxies.valueAt(i);
                 printWriter.print(i);
                 printWriter.print(") SessionId=");
-                printWriter.print(keyAt);
+                printWriter.print(iKeyAt);
                 printWriter.println(":");
-                valueAt.dump("  ", printWriter);
+                autofillProxyValueAt.dump("  ", printWriter);
             }
         }
         dump(printWriter, strArr);
@@ -414,9 +414,12 @@ public abstract class AugmentedAutofillService extends Service {
                         Log.e(AugmentedAutofillService.TAG, "failed to check current pending request status", e);
                     }
                     Log.d(AugmentedAutofillService.TAG, "mCallback is updated.");
+                    this.mCallback = iFillCallback;
+                    this.mCancellationSignal = cancellationSignal;
+                } else {
+                    this.mCallback = iFillCallback;
+                    this.mCancellationSignal = cancellationSignal;
                 }
-                this.mCallback = iFillCallback;
-                this.mCancellationSignal = cancellationSignal;
             }
         }
 
@@ -478,17 +481,17 @@ public abstract class AugmentedAutofillService extends Service {
                         if (i != 4) {
                             Log.w(AugmentedAutofillService.TAG, "invalid event reported: " + i);
                         } else if (this.mFirstOnSuccessTime == 0) {
-                            long elapsedRealtime = SystemClock.elapsedRealtime();
-                            this.mFirstOnSuccessTime = elapsedRealtime;
-                            j = elapsedRealtime - this.mFirstRequestTime;
+                            long jElapsedRealtime = SystemClock.elapsedRealtime();
+                            this.mFirstOnSuccessTime = jElapsedRealtime;
+                            j = jElapsedRealtime - this.mFirstRequestTime;
                             if (AugmentedAutofillService.sDebug) {
                                 Log.d(AugmentedAutofillService.TAG, "Inline response in " + TimeUtils.formatDuration(j));
                             }
                         }
                     } else if (this.mUiFirstDestroyedTime == 0) {
-                        long elapsedRealtime2 = SystemClock.elapsedRealtime();
-                        this.mUiFirstDestroyedTime = elapsedRealtime2;
-                        j = elapsedRealtime2 - this.mFirstRequestTime;
+                        long jElapsedRealtime2 = SystemClock.elapsedRealtime();
+                        this.mUiFirstDestroyedTime = jElapsedRealtime2;
+                        j = jElapsedRealtime2 - this.mFirstRequestTime;
                         if (AugmentedAutofillService.sDebug) {
                             Log.d(AugmentedAutofillService.TAG, "UI destroyed in " + TimeUtils.formatDuration(j));
                         }
@@ -496,9 +499,9 @@ public abstract class AugmentedAutofillService extends Service {
                     Helper.logResponse(i2, this.mServicePackageName, this.mComponentName, this.mSessionId, j);
                 }
                 if (this.mUiFirstShownTime == 0) {
-                    long elapsedRealtime3 = SystemClock.elapsedRealtime();
-                    this.mUiFirstShownTime = elapsedRealtime3;
-                    j = elapsedRealtime3 - this.mFirstRequestTime;
+                    long jElapsedRealtime3 = SystemClock.elapsedRealtime();
+                    this.mUiFirstShownTime = jElapsedRealtime3;
+                    j = jElapsedRealtime3 - this.mFirstRequestTime;
                     if (AugmentedAutofillService.sDebug) {
                         Log.d(AugmentedAutofillService.TAG, "UI shown in " + TimeUtils.formatDuration(j));
                     }
@@ -506,9 +509,9 @@ public abstract class AugmentedAutofillService extends Service {
             } else {
                 i3 = 10;
                 if (this.mFirstOnSuccessTime == 0) {
-                    long elapsedRealtime4 = SystemClock.elapsedRealtime();
-                    this.mFirstOnSuccessTime = elapsedRealtime4;
-                    j = elapsedRealtime4 - this.mFirstRequestTime;
+                    long jElapsedRealtime4 = SystemClock.elapsedRealtime();
+                    this.mFirstOnSuccessTime = jElapsedRealtime4;
+                    j = jElapsedRealtime4 - this.mFirstRequestTime;
                     if (AugmentedAutofillService.sDebug) {
                         Log.d(AugmentedAutofillService.TAG, "Service responded nothing in " + TimeUtils.formatDuration(j));
                     }

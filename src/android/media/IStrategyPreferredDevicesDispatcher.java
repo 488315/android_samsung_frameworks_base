@@ -46,9 +46,9 @@ public interface IStrategyPreferredDevicesDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStrategyPreferredDevicesDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStrategyPreferredDevicesDispatcher)) {
-                return (IStrategyPreferredDevicesDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStrategyPreferredDevicesDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStrategyPreferredDevicesDispatcher)) {
+                return (IStrategyPreferredDevicesDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface IStrategyPreferredDevicesDispatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                int i3 = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 parcel.enforceNoDataAvail();
-                dispatchPrefDevicesChanged(readInt, createTypedArrayList);
+                dispatchPrefDevicesChanged(i3, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface IStrategyPreferredDevicesDispatcher extends IInterface {
 
             @Override // android.media.IStrategyPreferredDevicesDispatcher
             public void dispatchPrefDevicesChanged(int i, List<AudioDeviceAttributes> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStrategyPreferredDevicesDispatcher.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStrategyPreferredDevicesDispatcher.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

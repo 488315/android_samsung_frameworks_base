@@ -71,10 +71,10 @@ public class EncodedStringValue implements Cloneable {
             try {
                 return new String(this.mData, CharacterSets.getMimeName(i));
             } catch (UnsupportedEncodingException unused) {
-                return new String(this.mData, CharacterSets.MIMENAME_ISO_8859_1);
+                return new String(this.mData);
             }
         } catch (UnsupportedEncodingException unused2) {
-            return new String(this.mData);
+            return new String(this.mData, CharacterSets.MIMENAME_ISO_8859_1);
         }
     }
 
@@ -114,12 +114,12 @@ public class EncodedStringValue implements Cloneable {
     }
 
     public EncodedStringValue[] split(String str) {
-        String[] split = getString().split(str);
-        int length = split.length;
+        String[] strArrSplit = getString().split(str);
+        int length = strArrSplit.length;
         EncodedStringValue[] encodedStringValueArr = new EncodedStringValue[length];
         for (int i = 0; i < length; i++) {
             try {
-                encodedStringValueArr[i] = new EncodedStringValue(this.mCharacterSet, split[i].getBytes());
+                encodedStringValueArr[i] = new EncodedStringValue(this.mCharacterSet, strArrSplit[i].getBytes());
             } catch (NullPointerException unused) {
                 return null;
             }
@@ -128,11 +128,11 @@ public class EncodedStringValue implements Cloneable {
     }
 
     public static EncodedStringValue[] extract(String str) {
-        String[] split = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+        String[] strArrSplit = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < split.length; i++) {
-            if (split[i].length() > 0) {
-                arrayList.add(new EncodedStringValue(split[i]));
+        for (int i = 0; i < strArrSplit.length; i++) {
+            if (strArrSplit[i].length() > 0) {
+                arrayList.add(new EncodedStringValue(strArrSplit[i]));
             }
         }
         int size = arrayList.size();

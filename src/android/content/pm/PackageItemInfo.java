@@ -196,7 +196,7 @@ public class PackageItemInfo {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, int i) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         String str = this.name;
         if (str != null) {
             protoOutputStream.write(1138166333441L, str);
@@ -210,7 +210,7 @@ public class PackageItemInfo {
         protoOutputStream.write(1120986464261L, this.icon);
         protoOutputStream.write(1120986464262L, this.banner);
         protoOutputStream.write(1133871366151L, this.isArchived);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     protected PackageItemInfo(Parcel parcel) {
@@ -236,15 +236,15 @@ public class PackageItemInfo {
 
         @Override // java.util.Comparator
         public final int compare(PackageItemInfo packageItemInfo, PackageItemInfo packageItemInfo2) {
-            CharSequence loadLabel = packageItemInfo.loadLabel(this.mPM);
-            if (loadLabel == null) {
-                loadLabel = packageItemInfo.name;
+            CharSequence charSequenceLoadLabel = packageItemInfo.loadLabel(this.mPM);
+            if (charSequenceLoadLabel == null) {
+                charSequenceLoadLabel = packageItemInfo.name;
             }
-            CharSequence loadLabel2 = packageItemInfo2.loadLabel(this.mPM);
-            if (loadLabel2 == null) {
-                loadLabel2 = packageItemInfo2.name;
+            CharSequence charSequenceLoadLabel2 = packageItemInfo2.loadLabel(this.mPM);
+            if (charSequenceLoadLabel2 == null) {
+                charSequenceLoadLabel2 = packageItemInfo2.name;
             }
-            return this.sCollator.compare(loadLabel.toString(), loadLabel2.toString());
+            return this.sCollator.compare(charSequenceLoadLabel.toString(), charSequenceLoadLabel2.toString());
         }
     }
 }

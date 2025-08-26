@@ -33,17 +33,17 @@ public final class ParcelableException extends RuntimeException implements Parce
         }
     }
 
-    public static Throwable readFromParcel(Parcel parcel) {
-        String readString = parcel.readString();
-        String readString2 = parcel.readString();
+    public static Throwable readFromParcel(Parcel parcel) throws ClassNotFoundException {
+        String string = parcel.readString();
+        String string2 = parcel.readString();
         try {
-            Class<?> cls = Class.forName(readString, true, Parcelable.class.getClassLoader());
+            Class<?> cls = Class.forName(string, true, Parcelable.class.getClassLoader());
             if (Throwable.class.isAssignableFrom(cls)) {
-                return (Throwable) cls.getConstructor(String.class).newInstance(readString2);
+                return (Throwable) cls.getConstructor(String.class).newInstance(string2);
             }
         } catch (ReflectiveOperationException unused) {
         }
-        return new RuntimeException(readString + ": " + readString2);
+        return new RuntimeException(string + ": " + string2);
     }
 
     public static void writeToParcel(Parcel parcel, Throwable th) {

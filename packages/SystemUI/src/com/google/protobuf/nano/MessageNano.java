@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class MessageNano {
     protected volatile int cachedSize = -1;
@@ -47,9 +46,9 @@ public abstract class MessageNano {
     }
 
     public int getSerializedSize() {
-        int computeSerializedSize = computeSerializedSize();
-        this.cachedSize = computeSerializedSize;
-        return computeSerializedSize;
+        int iComputeSerializedSize = computeSerializedSize();
+        this.cachedSize = iComputeSerializedSize;
+        return iComputeSerializedSize;
     }
 
     public abstract MessageNano mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano);
@@ -68,9 +67,9 @@ public abstract class MessageNano {
 
     public static final <T extends MessageNano> T mergeFrom(T t, byte[] bArr, int i, int i2) throws InvalidProtocolBufferNanoException {
         try {
-            CodedInputByteBufferNano newInstance = CodedInputByteBufferNano.newInstance(i, i2, bArr);
-            t.mergeFrom(newInstance);
-            if (newInstance.lastTag == 0) {
+            CodedInputByteBufferNano codedInputByteBufferNanoNewInstance = CodedInputByteBufferNano.newInstance(i, i2, bArr);
+            t.mergeFrom(codedInputByteBufferNanoNewInstance);
+            if (codedInputByteBufferNanoNewInstance.lastTag == 0) {
                 return t;
             }
             throw new InvalidProtocolBufferNanoException("Protocol message end-group tag did not match expected tag.");
@@ -82,15 +81,15 @@ public abstract class MessageNano {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public MessageNano m3271clone() throws CloneNotSupportedException {
+    public MessageNano m3289clone() throws CloneNotSupportedException {
         return (MessageNano) super.clone();
     }
 
     public static final void toByteArray(MessageNano messageNano, byte[] bArr, int i, int i2) {
         try {
-            CodedOutputByteBufferNano newInstance = CodedOutputByteBufferNano.newInstance(i, i2, bArr);
-            messageNano.writeTo(newInstance);
-            if (newInstance.buffer.remaining() == 0) {
+            CodedOutputByteBufferNano codedOutputByteBufferNanoNewInstance = CodedOutputByteBufferNano.newInstance(i, i2, bArr);
+            messageNano.writeTo(codedOutputByteBufferNanoNewInstance);
+            if (codedOutputByteBufferNanoNewInstance.buffer.remaining() == 0) {
             } else {
                 throw new IllegalStateException("Did not write as much data as expected.");
             }

@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CardElevation {
     public final float defaultElevation;
@@ -25,7 +24,7 @@ public final class CardElevation {
             return false;
         }
         CardElevation cardElevation = (CardElevation) obj;
-        return Dp.m836equalsimpl0(this.defaultElevation, cardElevation.defaultElevation) && Dp.m836equalsimpl0(this.pressedElevation, cardElevation.pressedElevation) && Dp.m836equalsimpl0(this.focusedElevation, cardElevation.focusedElevation) && Dp.m836equalsimpl0(this.hoveredElevation, cardElevation.hoveredElevation) && Dp.m836equalsimpl0(this.disabledElevation, cardElevation.disabledElevation);
+        return Dp.m838equalsimpl0(this.defaultElevation, cardElevation.defaultElevation) && Dp.m838equalsimpl0(this.pressedElevation, cardElevation.pressedElevation) && Dp.m838equalsimpl0(this.focusedElevation, cardElevation.focusedElevation) && Dp.m838equalsimpl0(this.hoveredElevation, cardElevation.hoveredElevation) && Dp.m838equalsimpl0(this.disabledElevation, cardElevation.disabledElevation);
     }
 
     public final int hashCode() {

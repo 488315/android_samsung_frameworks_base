@@ -67,7 +67,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiPickerTracker extends BaseWifiTracker {
     public List mActiveWifiEntries;
@@ -104,11 +103,9 @@ public class WifiPickerTracker extends BaseWifiTracker {
     public final List mSuggestedWifiEntryCache;
     public List mWifiEntries;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SemWifiPickerTrackerCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WifiPickerTrackerCallback extends BaseWifiTracker.BaseWifiTrackerCallback {
         void onWifiEntriesChanged();
 
@@ -223,6 +220,7 @@ public class WifiPickerTracker extends BaseWifiTracker {
     }
 
     public final void conditionallyUpdateScanResults(boolean z) {
+        int i;
         if (this.mWifiManager.getWifiState() == 1) {
             List list = Collections.EMPTY_LIST;
             updateStandardWifiEntryScans(list);
@@ -230,7 +228,7 @@ public class WifiPickerTracker extends BaseWifiTracker {
             updatePasspointWifiEntryScans(list);
             updateOsuWifiEntryScans(list);
             if (this.mInjector.isSharedConnectivityFeatureEnabled()) {
-                int i = BuildCompat.$r8$clinit;
+                int i2 = BuildCompat.$r8$clinit;
                 ((ArrayList) this.mKnownNetworkEntryCache).clear();
                 ((ArrayList) this.mHotspotNetworkEntryCache).clear();
             }
@@ -241,50 +239,43 @@ public class WifiPickerTracker extends BaseWifiTracker {
             }
             return;
         }
-        this.mLastWifiInfo = this.mWifiManager.getConnectionInfo();
-        ScanResultUpdater scanResultUpdater2 = this.mScanResultUpdater;
-        List<ScanResult> scanResults = this.mWifiManager.getScanResults();
-        WifiInfo wifiInfo = this.mLastWifiInfo;
-        synchronized (scanResultUpdater2.mLock) {
-            try {
-                scanResultUpdater2.mSemFilter.updateRssiFilter();
-                for (ScanResult scanResult : scanResults) {
-                    if (!TextUtils.isEmpty(scanResult.SSID)) {
-                        Pair pair = new Pair(scanResult.SSID, scanResult.BSSID);
-                        ScanResult scanResult2 = (ScanResult) ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).get(pair);
-                        if (scanResult2 != null && scanResult2.timestamp >= scanResult.timestamp) {
-                        }
-                        SemWifiEntryFilter semWifiEntryFilter = scanResultUpdater2.mSemFilter;
-                        semWifiEntryFilter.getClass();
-                        int i2 = scanResult.level;
-                        if (i2 >= semWifiEntryFilter.mWeakSignalRssi) {
-                            int i3 = scanResult.frequency;
-                            if (i3 > 5000) {
-                                if (i3 < 6000) {
-                                    if (i2 >= semWifiEntryFilter.mWeakSignalRssi5Ghz) {
+        if (z) {
+            this.mLastWifiInfo = this.mWifiManager.getConnectionInfo();
+            ScanResultUpdater scanResultUpdater2 = this.mScanResultUpdater;
+            List<ScanResult> scanResults = this.mWifiManager.getScanResults();
+            WifiInfo wifiInfo = this.mLastWifiInfo;
+            synchronized (scanResultUpdater2.mLock) {
+                try {
+                    scanResultUpdater2.mSemFilter.updateRssiFilter();
+                    for (ScanResult scanResult : scanResults) {
+                        if (!TextUtils.isEmpty(scanResult.SSID)) {
+                            Pair pair = new Pair(scanResult.SSID, scanResult.BSSID);
+                            ScanResult scanResult2 = (ScanResult) ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).get(pair);
+                            if (scanResult2 == null || scanResult2.timestamp < scanResult.timestamp) {
+                                SemWifiEntryFilter semWifiEntryFilter = scanResultUpdater2.mSemFilter;
+                                semWifiEntryFilter.getClass();
+                                int i3 = scanResult.level;
+                                if (i3 < semWifiEntryFilter.mWeakSignalRssi || ((i = scanResult.frequency) > 5000 && i < 6000 && i3 < semWifiEntryFilter.mWeakSignalRssi5Ghz)) {
+                                    if (wifiInfo == null || !TextUtils.equals(wifiInfo.getBSSID(), scanResult.BSSID)) {
+                                        List list2 = Utils.defaultSsidList;
+                                        if (!SystemProperties.getBoolean("ro.product_ship", true)) {
+                                            LogUtils logUtils = scanResultUpdater2.mLog;
+                                            String str = "filtered scan item: " + scanResult.toString();
+                                            if (logUtils.isProductDev) {
+                                                Log.d("WifiTracker.ScanResultUpdater", logUtils.getPrintableLog(str));
+                                            }
+                                        }
+                                    } else {
+                                        Log.d("WifiTracker.ScanResultUpdater", "it's weak signal network " + wifiInfo.getSSID());
                                     }
                                 }
+                                ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).put(pair, scanResult);
                             }
-                            ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).put(pair, scanResult);
-                        }
-                        if (wifiInfo == null || !TextUtils.equals(wifiInfo.getBSSID(), scanResult.BSSID)) {
-                            List list2 = Utils.defaultSsidList;
-                            if (!SystemProperties.getBoolean("ro.product_ship", true)) {
-                                LogUtils logUtils = scanResultUpdater2.mLog;
-                                String str = "filtered scan item: " + scanResult.toString();
-                                if (logUtils.isProductDev) {
-                                    Log.d("WifiTracker.ScanResultUpdater", logUtils.getPrintableLog(str));
-                                }
-                            }
-                        } else {
-                            Log.d("WifiTracker.ScanResultUpdater", "it's weak signal network " + wifiInfo.getSSID());
-                            ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).put(pair, scanResult);
                         }
                     }
+                    ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).entrySet().removeIf(new ScanResultUpdater$$ExternalSyntheticLambda0(scanResultUpdater2, z ? scanResultUpdater2.mMaxScanAgeMillis : 300000L, 0));
+                } finally {
                 }
-                ((ArrayMap) scanResultUpdater2.mScanResultsBySsidAndBssid).entrySet().removeIf(new ScanResultUpdater$$ExternalSyntheticLambda0(scanResultUpdater2, z ? scanResultUpdater2.mMaxScanAgeMillis : 300000L, 0));
-            } catch (Throwable th) {
-                throw th;
             }
         }
         List scanResults2 = this.mScanResultUpdater.getScanResults();
@@ -331,12 +322,12 @@ public class WifiPickerTracker extends BaseWifiTracker {
 
     @Override // com.android.wifitrackerlib.BaseWifiTracker
     public final void handleConfiguredNetworksChangedAction(Intent intent) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (SemWifiConfiguration semWifiConfiguration : this.mSemWifiManager.getConfiguredNetworks()) {
-            hashMap.put(semWifiConfiguration.configKey, semWifiConfiguration);
+            map.put(semWifiConfiguration.configKey, semWifiConfiguration);
         }
-        updateWifiConfigurationsInternal(hashMap);
-        updatePasspointConfigurations(hashMap, this.mWifiManager.getPasspointConfigurations());
+        updateWifiConfigurationsInternal(map);
+        updatePasspointConfigurations(map, this.mWifiManager.getPasspointConfigurations());
         if (this.mConnectedNetworkEverUpdated) {
             conditionallyUpdateScanResults(false);
             Handler handler = this.mMainHandler;
@@ -491,11 +482,11 @@ public class WifiPickerTracker extends BaseWifiTracker {
     @Override // com.android.wifitrackerlib.BaseWifiTracker
     public final void handleNetworkCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
         if (this.mNetworkRequestConfigCache.size() + this.mPasspointWifiConfigCache.size() + ((ArrayMap) this.mSuggestedConfigCache).size() + ((ArrayMap) this.mStandardWifiConfigCache).size() == 0) {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             for (SemWifiConfiguration semWifiConfiguration : this.mSemWifiManager.getConfiguredNetworks()) {
-                hashMap.put(semWifiConfiguration.configKey, semWifiConfiguration);
+                map.put(semWifiConfiguration.configKey, semWifiConfiguration);
             }
-            updateWifiConfigurationsInternal(hashMap);
+            updateWifiConfigurationsInternal(map);
         }
         List list = Utils.defaultSsidList;
         TransportInfo transportInfo = networkCapabilities.getTransportInfo();
@@ -552,17 +543,17 @@ public class WifiPickerTracker extends BaseWifiTracker {
     @Override // com.android.wifitrackerlib.BaseWifiTracker
     public final void handleOnStart() {
         List list;
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (SemWifiConfiguration semWifiConfiguration : this.mSemWifiManager.getConfiguredNetworks()) {
-            hashMap.put(semWifiConfiguration.configKey, semWifiConfiguration);
+            map.put(semWifiConfiguration.configKey, semWifiConfiguration);
         }
         boolean z = this.mIsSettingsTracker;
         if (z) {
-            updateWifiConfigurationsInternal(hashMap);
+            updateWifiConfigurationsInternal(map);
         } else {
-            updateWifiConfigurations(hashMap, this.mWifiManager.getConfiguredNetworks());
+            updateWifiConfigurations(map, this.mWifiManager.getConfiguredNetworks());
         }
-        updatePasspointConfigurations(hashMap, this.mWifiManager.getPasspointConfigurations());
+        updatePasspointConfigurations(map, this.mWifiManager.getPasspointConfigurations());
         boolean z2 = z && this.mIsSettingSupportEasySetup && Settings.Global.getInt(this.mContext.getContentResolver(), "safe_wifi", 0) == 0;
         this.mIsSupportEasySetup = z2;
         if (z2) {
@@ -718,7 +709,7 @@ public class WifiPickerTracker extends BaseWifiTracker {
             this.mMainHandler.post(new Runnable() { // from class: com.android.wifitrackerlib.WifiPickerTracker$$ExternalSyntheticLambda44
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WifiPickerTracker wifiPickerTracker = WifiPickerTracker.this;
+                    WifiPickerTracker wifiPickerTracker = this.f$0;
                     wifiPickerTracker.mListener.onWifiEntriesChanged(i);
                 }
             });
@@ -917,18 +908,18 @@ public class WifiPickerTracker extends BaseWifiTracker {
             if ("Vendor Hotspot2.0 Profile".equals(wifiConfiguration.providerFriendlyName)) {
                 Log.d("WifiPickerTracker", "updatePasspointAccessPoints, Do not add if it is not matched with ANQP");
             } else {
-                String uniqueIdToPasspointWifiEntryKey = PasspointWifiEntry.uniqueIdToPasspointWifiEntryKey(wifiConfiguration.getKey());
-                treeSet.add(uniqueIdToPasspointWifiEntryKey);
-                if (!((ArrayMap) this.mPasspointWifiEntryCache).containsKey(uniqueIdToPasspointWifiEntryKey)) {
+                String strUniqueIdToPasspointWifiEntryKey = PasspointWifiEntry.uniqueIdToPasspointWifiEntryKey(wifiConfiguration.getKey());
+                treeSet.add(strUniqueIdToPasspointWifiEntryKey);
+                if (!((ArrayMap) this.mPasspointWifiEntryCache).containsKey(strUniqueIdToPasspointWifiEntryKey)) {
                     if (wifiConfiguration.fromWifiNetworkSuggestion) {
-                        ((ArrayMap) this.mPasspointWifiEntryCache).put(uniqueIdToPasspointWifiEntryKey, new PasspointWifiEntry(this.mInjector, this.mContext, this.mMainHandler, wifiConfiguration, this.mWifiManager, false));
-                    } else if (((ArrayMap) this.mPasspointConfigCache).containsKey(uniqueIdToPasspointWifiEntryKey)) {
-                        ((ArrayMap) this.mPasspointWifiEntryCache).put(uniqueIdToPasspointWifiEntryKey, new PasspointWifiEntry(this.mInjector, this.mMainHandler, (PasspointConfiguration) ((ArrayMap) this.mPasspointConfigCache).get(uniqueIdToPasspointWifiEntryKey), this.mWifiManager, false));
+                        ((ArrayMap) this.mPasspointWifiEntryCache).put(strUniqueIdToPasspointWifiEntryKey, new PasspointWifiEntry(this.mInjector, this.mContext, this.mMainHandler, wifiConfiguration, this.mWifiManager, false));
+                    } else if (((ArrayMap) this.mPasspointConfigCache).containsKey(strUniqueIdToPasspointWifiEntryKey)) {
+                        ((ArrayMap) this.mPasspointWifiEntryCache).put(strUniqueIdToPasspointWifiEntryKey, new PasspointWifiEntry(this.mInjector, this.mMainHandler, (PasspointConfiguration) ((ArrayMap) this.mPasspointConfigCache).get(strUniqueIdToPasspointWifiEntryKey), this.mWifiManager, false));
                     } else {
                         continue;
                     }
                 }
-                PasspointWifiEntry passpointWifiEntry = (PasspointWifiEntry) ((ArrayMap) this.mPasspointWifiEntryCache).get(uniqueIdToPasspointWifiEntryKey);
+                PasspointWifiEntry passpointWifiEntry = (PasspointWifiEntry) ((ArrayMap) this.mPasspointWifiEntryCache).get(strUniqueIdToPasspointWifiEntryKey);
                 synchronized (passpointWifiEntry) {
                     try {
                         passpointWifiEntry.mWifiConfig = wifiConfiguration;
@@ -977,9 +968,9 @@ public class WifiPickerTracker extends BaseWifiTracker {
                                 passpointWifiEntry.mBssid = bestScanResultByLevel.BSSID;
                             }
                             if (passpointWifiEntry.getConnectedState() == 0) {
-                                int calculateSignalLevel = bestScanResultByLevel != null ? SemWifiUtils.calculateSignalLevel(passpointWifiEntry.mRssi) : -1;
-                                passpointWifiEntry.mScanResultLevel = calculateSignalLevel;
-                                if (calculateSignalLevel == -1) {
+                                int iCalculateSignalLevel = bestScanResultByLevel != null ? SemWifiUtils.calculateSignalLevel(passpointWifiEntry.mRssi) : -1;
+                                passpointWifiEntry.mScanResultLevel = iCalculateSignalLevel;
+                                if (iCalculateSignalLevel == -1) {
                                     passpointWifiEntry.mRssi = -127;
                                 }
                             }
@@ -1027,9 +1018,9 @@ public class WifiPickerTracker extends BaseWifiTracker {
                 StandardWifiEntry.StandardWifiEntryKey standardWifiEntryKey = standardWifiEntry.mKey;
                 ((ArraySet) set2).add(standardWifiEntryKey);
                 standardWifiEntry.updateScanResultInfo((List) map2.get(standardWifiEntryKey.mScanResultKey));
-                boolean contains = set3.contains(standardWifiEntryKey);
+                boolean zContains = set3.contains(standardWifiEntryKey);
                 synchronized (standardWifiEntry) {
-                    standardWifiEntry.mIsUserShareable = contains;
+                    standardWifiEntry.mIsUserShareable = zContains;
                 }
             }
         });
@@ -1037,9 +1028,9 @@ public class WifiPickerTracker extends BaseWifiTracker {
             StandardWifiEntry.ScanResultKey scanResultKey = standardWifiEntryKey.mScanResultKey;
             if (!arraySet.contains(standardWifiEntryKey) && map.containsKey(scanResultKey)) {
                 StandardWifiEntry standardWifiEntry = new StandardWifiEntry(this.mInjector, this.mMainHandler, standardWifiEntryKey, (List) ((ArrayMap) this.mSuggestedConfigCache).get(standardWifiEntryKey), (List) map.get(scanResultKey), this.mWifiManager, false);
-                boolean contains = set.contains(standardWifiEntryKey);
+                boolean zContains = set.contains(standardWifiEntryKey);
                 synchronized (standardWifiEntry) {
-                    standardWifiEntry.mIsUserShareable = contains;
+                    standardWifiEntry.mIsUserShareable = zContains;
                 }
                 ((ArrayList) this.mSuggestedWifiEntryCache).add(standardWifiEntry);
             }
@@ -1243,11 +1234,7 @@ public class WifiPickerTracker extends BaseWifiTracker {
             if (!arrayList.contains(standardWifiEntry2)) {
                 if (standardWifiEntry2.isSaved()) {
                     arraySet6.add(standardWifiEntry2.mKey.mScanResultKey);
-                } else if (!set.contains(standardWifiEntry2.mKey.mScanResultKey)) {
-                    if (!arraySet3.contains(standardWifiEntry2.getSsid())) {
-                        if (this.mInjector.isSharedConnectivityFeatureEnabled() && arraySet4.contains(standardWifiEntry2.mKey.mScanResultKey)) {
-                        }
-                    }
+                } else if (!set.contains(standardWifiEntry2.mKey.mScanResultKey) && !arraySet3.contains(standardWifiEntry2.getSsid()) && (!this.mInjector.isSharedConnectivityFeatureEnabled() || !arraySet4.contains(standardWifiEntry2.mKey.mScanResultKey))) {
                 }
                 if (!this.mInjector.isSharedConnectivityFeatureEnabled() || !arraySet5.contains(standardWifiEntry2.mKey.mScanResultKey)) {
                     if (!((ArrayList) this.mEasySetupCandidateEntries).contains(standardWifiEntry2)) {

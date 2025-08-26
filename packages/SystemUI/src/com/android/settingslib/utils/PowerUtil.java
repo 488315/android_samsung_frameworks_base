@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PowerUtil {
     public static final long FIFTEEN_MINUTES_MILLIS;
@@ -39,30 +38,30 @@ public class PowerUtil {
             return null;
         }
         if (j <= ONE_DAY_MILLIS) {
-            long abs = Math.abs(System.currentTimeMillis() + j);
-            long abs2 = Math.abs(FIFTEEN_MINUTES_MILLIS);
-            long j2 = abs % abs2;
-            return context.getString(R.string.power_discharge_by_only_short, DateFormat.getInstanceForSkeleton(android.text.format.DateFormat.getTimeFormatString(context)).format(Date.from(Instant.ofEpochMilli(j2 < abs2 / 2 ? abs - j2 : (abs - j2) + abs2))));
+            long jAbs = Math.abs(System.currentTimeMillis() + j);
+            long jAbs2 = Math.abs(FIFTEEN_MINUTES_MILLIS);
+            long j2 = jAbs % jAbs2;
+            return context.getString(R.string.power_discharge_by_only_short, DateFormat.getInstanceForSkeleton(android.text.format.DateFormat.getTimeFormatString(context)).format(Date.from(Instant.ofEpochMilli(j2 < jAbs2 / 2 ? jAbs - j2 : (jAbs - j2) + jAbs2))));
         }
-        long abs3 = Math.abs(j);
-        long abs4 = Math.abs(ONE_HOUR_MILLIS);
-        long j3 = abs3 % abs4;
-        long j4 = j3 < abs4 / 2 ? abs3 - j3 : (abs3 - j3) + abs4;
+        long jAbs3 = Math.abs(j);
+        long jAbs4 = Math.abs(ONE_HOUR_MILLIS);
+        long j3 = jAbs3 % jAbs4;
+        long j4 = j3 < jAbs4 / 2 ? jAbs3 - j3 : (jAbs3 - j3) + jAbs4;
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
-        int floor = ((int) Math.floor(j4 / 1000.0d)) + 30;
-        if (floor >= 86400) {
-            i = floor / 86400;
-            floor -= 86400 * i;
+        int iFloor = ((int) Math.floor(j4 / 1000.0d)) + 30;
+        if (iFloor >= 86400) {
+            i = iFloor / 86400;
+            iFloor -= 86400 * i;
         } else {
             i = 0;
         }
-        if (floor >= 3600) {
-            i2 = floor / PluginLock.VERSION;
-            floor -= i2 * PluginLock.VERSION;
+        if (iFloor >= 3600) {
+            i2 = iFloor / PluginLock.VERSION;
+            iFloor -= i2 * PluginLock.VERSION;
         } else {
             i2 = 0;
         }
-        int i3 = floor >= 60 ? floor / 60 : 0;
+        int i3 = iFloor >= 60 ? iFloor / 60 : 0;
         ArrayList arrayList = new ArrayList(4);
         if (i > 0) {
             arrayList.add(new Measure(Integer.valueOf(i), MeasureUnit.DAY));

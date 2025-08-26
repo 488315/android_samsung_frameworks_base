@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleSpaceWidgetProvider extends AppWidgetProvider {
     public PeopleSpaceWidgetManager mPeopleSpaceWidgetManager;
@@ -97,69 +96,69 @@ public class PeopleSpaceWidgetProvider extends AppWidgetProvider {
         ensurePeopleSpaceWidgetManagerInitialized();
         PeopleSpaceWidgetManager peopleSpaceWidgetManager = this.mPeopleSpaceWidgetManager;
         peopleSpaceWidgetManager.getClass();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (int i = 0; i < iArr.length; i++) {
-            hashMap.put(String.valueOf(iArr[i]), String.valueOf(iArr2[i]));
+            map.put(String.valueOf(iArr[i]), String.valueOf(iArr2[i]));
         }
-        HashMap hashMap2 = new HashMap();
-        for (Map.Entry entry : hashMap.entrySet()) {
-            String valueOf = String.valueOf(entry.getKey());
-            String valueOf2 = String.valueOf(entry.getValue());
-            if (!valueOf.equals(valueOf2)) {
-                SharedPreferences sharedPreferences = peopleSpaceWidgetManager.mContext.getSharedPreferences(valueOf, 0);
+        HashMap map2 = new HashMap();
+        for (Map.Entry entry : map.entrySet()) {
+            String strValueOf = String.valueOf(entry.getKey());
+            String strValueOf2 = String.valueOf(entry.getValue());
+            if (!strValueOf.equals(strValueOf2)) {
+                SharedPreferences sharedPreferences = peopleSpaceWidgetManager.mContext.getSharedPreferences(strValueOf, 0);
                 PeopleTileKey peopleTileKey = new PeopleTileKey(sharedPreferences.getString("shortcut_id", null), sharedPreferences.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, -1), sharedPreferences.getString("package_name", null));
                 if (PeopleTileKey.isValid(peopleTileKey)) {
-                    hashMap2.put(valueOf2, peopleTileKey);
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.clear();
-                    edit.apply();
+                    map2.put(strValueOf2, peopleTileKey);
+                    SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                    editorEdit.clear();
+                    editorEdit.apply();
                 }
             }
         }
-        for (Map.Entry entry2 : hashMap2.entrySet()) {
+        for (Map.Entry entry2 : map2.entrySet()) {
             SharedPreferencesHelper.setPeopleTileKey(peopleSpaceWidgetManager.mContext.getSharedPreferences((String) entry2.getKey(), 0), (PeopleTileKey) entry2.getValue());
         }
         SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(peopleSpaceWidgetManager.mContext);
-        SharedPreferences.Editor edit2 = defaultSharedPreferences.edit();
+        SharedPreferences.Editor editorEdit2 = defaultSharedPreferences.edit();
         for (Map.Entry<String, ?> entry3 : defaultSharedPreferences.getAll().entrySet()) {
             String key = entry3.getKey();
             int i2 = PeopleSpaceWidgetManager.AnonymousClass4.$SwitchMap$com$android$systemui$people$widget$PeopleBackupHelper$SharedFileEntryType[PeopleBackupHelper.getEntryType(entry3).ordinal()];
             if (i2 == 1) {
-                String str = (String) hashMap.get(key);
+                String str = (String) map.get(key);
                 if (TextUtils.isEmpty(str)) {
                     MotionLayout$$ExternalSyntheticOutline0.m("Key is widget id without matching new id, skipping: ", key, "PeopleSpaceWidgetMgr");
                 } else {
                     try {
-                        edit2.putString(str, (String) entry3.getValue());
+                        editorEdit2.putString(str, (String) entry3.getValue());
                     } catch (Exception e) {
                         Log.e("PeopleSpaceWidgetMgr", "malformed entry value: " + entry3.getValue(), e);
                     }
-                    edit2.remove(key);
+                    editorEdit2.remove(key);
                 }
             } else if (i2 == 2 || i2 == 3) {
                 try {
-                    edit2.putStringSet(key, PeopleSpaceWidgetManager.getNewWidgets((Set) entry3.getValue(), hashMap));
+                    editorEdit2.putStringSet(key, PeopleSpaceWidgetManager.getNewWidgets((Set) entry3.getValue(), map));
                 } catch (Exception e2) {
                     Log.e("PeopleSpaceWidgetMgr", "malformed entry value: " + entry3.getValue(), e2);
-                    edit2.remove(key);
+                    editorEdit2.remove(key);
                 }
             } else if (i2 == 4) {
                 Log.e("PeopleSpaceWidgetMgr", "Key not identified:" + key);
             }
         }
-        edit2.apply();
+        editorEdit2.apply();
         SharedPreferences sharedPreferences2 = peopleSpaceWidgetManager.mContext.getSharedPreferences("shared_follow_up", 0);
-        SharedPreferences.Editor edit3 = sharedPreferences2.edit();
+        SharedPreferences.Editor editorEdit3 = sharedPreferences2.edit();
         for (Map.Entry<String, ?> entry4 : sharedPreferences2.getAll().entrySet()) {
             String key2 = entry4.getKey();
             try {
-                edit3.putStringSet(key2, PeopleSpaceWidgetManager.getNewWidgets((Set) entry4.getValue(), hashMap));
+                editorEdit3.putStringSet(key2, PeopleSpaceWidgetManager.getNewWidgets((Set) entry4.getValue(), map));
             } catch (Exception e3) {
                 Log.e("PeopleSpaceWidgetMgr", "malformed entry value: " + entry4.getValue(), e3);
-                edit3.remove(key2);
+                editorEdit3.remove(key2);
             }
         }
-        edit3.apply();
+        editorEdit3.apply();
         if (peopleSpaceWidgetManager.mAppWidgetManagerOptional.isEmpty()) {
             return;
         }

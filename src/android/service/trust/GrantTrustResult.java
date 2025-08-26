@@ -67,9 +67,9 @@ public final class GrantTrustResult implements Parcelable {
     }
 
     GrantTrustResult(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mStatus = readInt;
-        if (readInt == 0 || readInt == 1) {
+        int i = parcel.readInt();
+        this.mStatus = i;
+        if (i == 0 || i == 1) {
             return;
         }
         throw new IllegalArgumentException("status was " + this.mStatus + " but must be one of: STATUS_UNKNOWN(0), STATUS_UNLOCKED_BY_GRANT(1)");

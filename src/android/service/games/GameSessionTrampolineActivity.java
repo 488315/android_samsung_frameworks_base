@@ -39,18 +39,18 @@ public final class GameSessionTrampolineActivity extends Activity {
         this.mHasLaunchedIntent = true;
         try {
             gameSessionTrampolineActivity = this;
-            try {
-                gameSessionTrampolineActivity.startActivityAsCaller((Intent) getIntent().getParcelableExtra(INTENT_KEY, Intent.class), getIntent().getBundleExtra(OPTIONS_KEY), false, getUserId(), 1);
-            } catch (Exception e) {
-                e = e;
-                Slog.w(TAG, "Unable to launch activity from game session");
-                ((AndroidFuture) gameSessionTrampolineActivity.getIntent().getParcelableExtra(FUTURE_KEY, AndroidFuture.class)).completeExceptionally(e);
-                gameSessionTrampolineActivity.finish();
-                gameSessionTrampolineActivity.overridePendingTransition(0, 0);
-            }
+        } catch (Exception e) {
+            e = e;
+            gameSessionTrampolineActivity = this;
+        }
+        try {
+            gameSessionTrampolineActivity.startActivityAsCaller((Intent) getIntent().getParcelableExtra(INTENT_KEY, Intent.class), getIntent().getBundleExtra(OPTIONS_KEY), false, getUserId(), 1);
         } catch (Exception e2) {
             e = e2;
-            gameSessionTrampolineActivity = this;
+            Slog.w(TAG, "Unable to launch activity from game session");
+            ((AndroidFuture) gameSessionTrampolineActivity.getIntent().getParcelableExtra(FUTURE_KEY, AndroidFuture.class)).completeExceptionally(e);
+            gameSessionTrampolineActivity.finish();
+            gameSessionTrampolineActivity.overridePendingTransition(0, 0);
         }
     }
 

@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragResizeInputListener implements AutoCloseable {
     public final ShellExecutor mBgExecutor;
@@ -72,11 +71,9 @@ public class DragResizeInputListener implements AutoCloseable {
     public boolean mTouchable;
     public final IWindowSession mWindowSession;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultTaskResizeInputEventReceiverFactory implements TaskResizeInputEventReceiverFactory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InputSetUpResult {
         public final InputChannel mInputChannel;
         public final SurfaceControl mInputSinkSurface;
@@ -89,7 +86,6 @@ public class DragResizeInputListener implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TaskResizeInputEventReceiver extends InputEventReceiver implements DragDetector.MotionEventHandler {
         public final DragPositioningCallback mCallback;
         public final Choreographer mChoreographer;
@@ -111,7 +107,6 @@ public class DragResizeInputListener implements AutoCloseable {
         public int mLastCursorType;
         public MotionEvent mLastMotionEventOnDown;
         public DesktopModeEventLogger.Companion.ResizeTrigger mResizeTrigger;
-        public final AnonymousClass1 mSetDefaultPointerRunnable;
         public boolean mShouldHandleEvents;
         public final ActivityManager.RunningTaskInfo mTaskInfo;
         public final Rect mTmpRect;
@@ -120,9 +115,10 @@ public class DragResizeInputListener implements AutoCloseable {
 
         @Override // com.android.wm.shell.windowdecor.DragDetector.MotionEventHandler
         public final boolean handleMotionEvent(View view, MotionEvent motionEvent) {
-            boolean isFromSource = motionEvent.isFromSource(16386);
-            this.mIsStylusInput = isFromSource;
-            this.mIsPointerInput = isFromSource || motionEvent.isFromSource(8194);
+            MotionEvent motionEvent2;
+            boolean zIsFromSource = motionEvent.isFromSource(16386);
+            this.mIsStylusInput = zIsFromSource;
+            this.mIsPointerInput = zIsFromSource || motionEvent.isFromSource(8194);
             boolean z = this.mIsStylusInput && ((motionEvent.getFlags() & 67108864) != 0);
             this.mIsStylusFromTouchPad = z;
             this.mInputManager.setIsStylusFromTouchpad(z);
@@ -137,15 +133,24 @@ public class DragResizeInputListener implements AutoCloseable {
                                 return true;
                             }
                             if (actionMasked == 10) {
-                                this.mHandler.postDelayed(this.mSetDefaultPointerRunnable, 100L);
+                                final int displayId = motionEvent.getDisplayId();
+                                final int deviceId = motionEvent.getDeviceId();
+                                final int pointerId = motionEvent.getPointerId(0);
+                                this.mHandler.postDelayed(new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$TaskResizeInputEventReceiver$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        DragResizeInputListener.TaskResizeInputEventReceiver taskResizeInputEventReceiver = this.f$0;
+                                        taskResizeInputEventReceiver.mInputManager.setPointerIcon(PointerIcon.getSystemIcon(taskResizeInputEventReceiver.mContext, 1), displayId, deviceId, pointerId, taskResizeInputEventReceiver.mInputChannel.getToken());
+                                    }
+                                }, 100L);
                                 return true;
                             }
                         }
                     } else if (this.mShouldHandleEvents) {
                         this.mInputManager.pilferPointers(this.mInputChannel.getToken());
-                        int findPointerIndex = motionEvent.findPointerIndex(this.mDragPointerId);
-                        if (findPointerIndex >= 0) {
-                            updateInputSinkRegionForDrag(this.mCallback.onDragPositioningMove(motionEvent.getRawX(findPointerIndex), motionEvent.getRawY(findPointerIndex), motionEvent.getDisplayId()));
+                        int iFindPointerIndex = motionEvent.findPointerIndex(this.mDragPointerId);
+                        if (iFindPointerIndex >= 0) {
+                            updateInputSinkRegionForDrag(this.mCallback.onDragPositioningMove(motionEvent.getRawX(iFindPointerIndex), motionEvent.getRawY(iFindPointerIndex), motionEvent.getDisplayId()));
                             return true;
                         }
                         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DESKTOP_MODE_enabled[0]) {
@@ -155,8 +160,8 @@ public class DragResizeInputListener implements AutoCloseable {
                     }
                 }
                 if (this.mShouldHandleEvents) {
-                    int findPointerIndex2 = motionEvent.findPointerIndex(this.mDragPointerId);
-                    if (findPointerIndex2 < 0) {
+                    int iFindPointerIndex2 = motionEvent.findPointerIndex(this.mDragPointerId);
+                    if (iFindPointerIndex2 < 0) {
                         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DESKTOP_MODE_enabled[0]) {
                             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, 6603006212180425160L, 4, "DragResizeInputListener", Long.valueOf(motionEvent.getActionMasked()));
                         }
@@ -164,35 +169,43 @@ public class DragResizeInputListener implements AutoCloseable {
                         this.mShouldHandleEvents = false;
                         return false;
                     }
-                    Rect onDragPositioningEnd = this.mCallback.onDragPositioningEnd(motionEvent.getRawX(findPointerIndex2), motionEvent.getRawY(findPointerIndex2), motionEvent.getDisplayId());
-                    if (onDragPositioningEnd.equals(this.mDragStartTaskBounds)) {
+                    Rect rectOnDragPositioningEnd = this.mCallback.onDragPositioningEnd(motionEvent.getRawX(iFindPointerIndex2), motionEvent.getRawY(iFindPointerIndex2), motionEvent.getDisplayId());
+                    if (rectOnDragPositioningEnd.equals(this.mDragStartTaskBounds)) {
                         this.mTouchRegionConsumer.accept(this.mTouchRegion);
                     }
                     DesktopModeEventLogger desktopModeEventLogger = this.mDesktopModeEventLogger;
                     DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger = this.mResizeTrigger;
-                    MotionEvent motionEvent2 = this.mLastMotionEventOnDown;
+                    MotionEvent motionEvent3 = this.mLastMotionEventOnDown;
                     DesktopModeEventLogger.Companion.getClass();
-                    desktopModeEventLogger.logTaskResizingEnded(resizeTrigger, DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent2), this.mTaskInfo, Integer.valueOf(onDragPositioningEnd.width()), Integer.valueOf(onDragPositioningEnd.height()), null, (Size) this.mDisplayLayoutSizeSupplier.get());
+                    desktopModeEventLogger.logTaskResizingEnded(resizeTrigger, DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent3), this.mTaskInfo, Integer.valueOf(rectOnDragPositioningEnd.width()), Integer.valueOf(rectOnDragPositioningEnd.height()), null, (Size) this.mDisplayLayoutSizeSupplier.get());
+                }
+                if (CoreRune.MW_CAPTION_BUG_FIX && (motionEvent2 = this.mLastMotionEventOnDown) != null) {
+                    motionEvent2.recycle();
+                    this.mLastMotionEventOnDown = null;
                 }
                 this.mShouldHandleEvents = false;
                 this.mDragPointerId = -1;
                 return true;
             }
-            boolean shouldHandleEvent = this.mDragResizeWindowGeometry.shouldHandleEvent(motionEvent, new Point());
-            this.mShouldHandleEvents = shouldHandleEvent;
-            if (shouldHandleEvent) {
+            boolean zShouldHandleEvent = this.mDragResizeWindowGeometry.shouldHandleEvent(motionEvent, new Point());
+            this.mShouldHandleEvents = zShouldHandleEvent;
+            if (zShouldHandleEvent) {
                 this.mDragPointerId = motionEvent.getPointerId(0);
                 float x = motionEvent.getX(0);
                 float y = motionEvent.getY(0);
                 float rawX = motionEvent.getRawX(0);
                 float rawY = motionEvent.getRawY(0);
-                int calculateCtrlType = this.mDragResizeWindowGeometry.calculateCtrlType(x, y, (motionEvent.getSource() & PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL) == 4098, DragResizeWindowGeometry.isEdgeResizePermitted(motionEvent));
+                int iCalculateCtrlType = this.mDragResizeWindowGeometry.calculateCtrlType(x, y, (motionEvent.getSource() & PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL) == 4098, DragResizeWindowGeometry.isEdgeResizePermitted(motionEvent));
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DESKTOP_MODE_enabled[0]) {
-                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, 2008231537477103770L, 4, "DragResizeInputListener", Long.valueOf(calculateCtrlType));
+                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, 2008231537477103770L, 4, "DragResizeInputListener", Long.valueOf(iCalculateCtrlType));
                 }
-                this.mDragStartTaskBounds = this.mCallback.onDragPositioningStart(calculateCtrlType, rawX, rawY, motionEvent.getDisplayId());
-                this.mLastMotionEventOnDown = motionEvent;
-                DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger2 = (calculateCtrlType == 8 || calculateCtrlType == 4 || calculateCtrlType == 2 || calculateCtrlType == 1) ? DesktopModeEventLogger.Companion.ResizeTrigger.EDGE : DesktopModeEventLogger.Companion.ResizeTrigger.CORNER;
+                this.mDragStartTaskBounds = this.mCallback.onDragPositioningStart(iCalculateCtrlType, rawX, rawY, motionEvent.getDisplayId());
+                if (CoreRune.MW_CAPTION_BUG_FIX) {
+                    this.mLastMotionEventOnDown = MotionEvent.obtain(motionEvent);
+                } else {
+                    this.mLastMotionEventOnDown = motionEvent;
+                }
+                DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger2 = (iCalculateCtrlType == 8 || iCalculateCtrlType == 4 || iCalculateCtrlType == 2 || iCalculateCtrlType == 1) ? DesktopModeEventLogger.Companion.ResizeTrigger.EDGE : DesktopModeEventLogger.Companion.ResizeTrigger.CORNER;
                 this.mResizeTrigger = resizeTrigger2;
                 DesktopModeEventLogger desktopModeEventLogger2 = this.mDesktopModeEventLogger;
                 DesktopModeEventLogger.Companion.getClass();
@@ -220,16 +233,11 @@ public class DragResizeInputListener implements AutoCloseable {
         }
 
         public final void updateCursorType(int i, int i2, int i3, float f, float f2) {
-            int i4;
+            int i4 = 1;
             switch (this.mDragResizeWindowGeometry.calculateCtrlType(f, f2, false, true)) {
                 case 1:
                 case 2:
                     i4 = EnterpriseContainerCallback.CONTAINER_VERIFY_PWD_SUCCESSFUL;
-                    break;
-                case 3:
-                case 7:
-                default:
-                    i4 = 1000;
                     break;
                 case 4:
                 case 8:
@@ -285,19 +293,13 @@ public class DragResizeInputListener implements AutoCloseable {
             this.mTouchRegionConsumer.accept(region);
         }
 
-        /* JADX WARN: Type inference failed for: r0v4, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$TaskResizeInputEventReceiver$1] */
         private TaskResizeInputEventReceiver(Context context, ActivityManager.RunningTaskInfo runningTaskInfo, InputChannel inputChannel, DragPositioningCallback dragPositioningCallback, Handler handler, Choreographer choreographer, Supplier<Size> supplier, Consumer<Region> consumer, DesktopModeEventLogger desktopModeEventLogger) {
             super(inputChannel, handler.getLooper());
             this.mTmpRect = new Rect();
             this.mLastCursorType = 1000;
             this.mDragPointerId = -1;
-            this.mSetDefaultPointerRunnable = new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener.TaskResizeInputEventReceiver.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskResizeInputEventReceiver.this.mInputManager.setPointerIconType(1000);
-                }
-            };
             this.mResizeTrigger = DesktopModeEventLogger.Companion.ResizeTrigger.UNKNOWN_RESIZE_TRIGGER;
+            this.mLastMotionEventOnDown = null;
             this.mContext = context;
             this.mTaskInfo = runningTaskInfo;
             this.mInputManager = (InputManager) context.getSystemService(InputManager.class);
@@ -313,7 +315,6 @@ public class DragResizeInputListener implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TaskResizeInputEventReceiverFactory {
     }
 
@@ -333,9 +334,9 @@ public class DragResizeInputListener implements AutoCloseable {
         this.mHandler = handler;
         this.mChoreographer = choreographer;
         this.mDisplayId = i;
-        SurfaceControl build = supplier.get().setName("").build();
-        this.mDecorationSurface = build;
-        build.copyFrom(surfaceControl, "DragResizeInputListener");
+        SurfaceControl surfaceControlBuild = supplier.get().setName("").build();
+        this.mDecorationSurface = surfaceControlBuild;
+        surfaceControlBuild.copyFrom(surfaceControl, "DragResizeInputListener");
         this.mDragPositioningCallback = dragPositioningCallback;
         this.mSurfaceControlBuilderSupplier = supplier;
         this.mSurfaceControlTransactionSupplier = supplier2;
@@ -344,22 +345,45 @@ public class DragResizeInputListener implements AutoCloseable {
         this.mClientToken = new Binder();
         this.mSinkClientToken = new Binder();
         ?? r2 = new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda1
+            /* JADX WARN: Can't wrap try/catch for region: R(14:0|2|(3:28|3|4)|(2:30|5)|12|24|13|14|26|15|16|22|23|(1:(0))) */
+            /* JADX WARN: Code restructure failed: missing block: B:17:0x00bd, code lost:
+            
+                r0 = e;
+             */
+            /* JADX WARN: Code restructure failed: missing block: B:18:0x00be, code lost:
+            
+                r3 = r5;
+                r2 = r15;
+             */
+            /* JADX WARN: Code restructure failed: missing block: B:19:0x00c3, code lost:
+            
+                r0 = e;
+             */
+            /* JADX WARN: Code restructure failed: missing block: B:20:0x00c4, code lost:
+            
+                r3 = r5;
+                r2 = r15;
+             */
+            /* JADX WARN: Code restructure failed: missing block: B:21:0x00c6, code lost:
+            
+                r0.rethrowFromSystemServer();
+             */
             @Override // java.lang.Runnable
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final void run() {
                 ShellExecutor shellExecutor3;
                 IBinder iBinder;
                 Supplier supplier3;
                 Supplier supplier4;
-                SurfaceControl build2;
-                SurfaceControl surfaceControl2;
-                InputChannel inputChannel3;
-                final DragResizeInputListener dragResizeInputListener = DragResizeInputListener.this;
-                InputChannel inputChannel4 = inputChannel;
-                InputChannel inputChannel5 = inputChannel2;
+                final DragResizeInputListener dragResizeInputListener = this.f$0;
+                InputChannel inputChannel3 = inputChannel;
+                InputChannel inputChannel4 = inputChannel2;
                 ShellExecutor shellExecutor4 = shellExecutor;
                 int i2 = dragResizeInputListener.mDisplayId;
                 IWindowSession iWindowSession2 = dragResizeInputListener.mWindowSession;
-                SurfaceControl surfaceControl3 = dragResizeInputListener.mDecorationSurface;
+                SurfaceControl surfaceControl2 = dragResizeInputListener.mDecorationSurface;
                 IBinder iBinder2 = dragResizeInputListener.mClientToken;
                 IBinder iBinder3 = dragResizeInputListener.mSinkClientToken;
                 Supplier supplier5 = dragResizeInputListener.mSurfaceControlBuilderSupplier;
@@ -371,175 +395,105 @@ public class DragResizeInputListener implements AutoCloseable {
                     supplier3 = supplier5;
                     supplier4 = supplier6;
                     shellExecutor3 = shellExecutor4;
-                    try {
-                        iWindowSession2.grantInputChannel(i2, surfaceControl3, iBinder2, (InputTransferToken) null, 8, VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS, 4, 2, (IBinder) null, inputTransferToken, "DragResizeInputListener of " + surfaceControl3, inputChannel4);
-                    } catch (RemoteException e) {
-                        e = e;
-                        inputTransferToken = inputTransferToken;
-                        e.rethrowFromSystemServer();
-                        build2 = ((SurfaceControl.Builder) supplier3.get()).setName("TaskInputSink of " + surfaceControl3).setContainerLayer().setParent(surfaceControl3).setCallsite("DragResizeInputListener.setUpInputChannels").build();
-                        ((SurfaceControl.Transaction) supplier4.get()).setLayer(build2, -2).show(build2).apply();
-                        try {
-                            iWindowSession2.grantInputChannel(i2, build2, iBinder, (InputTransferToken) null, 8, 0, 1, 2022, (IBinder) null, inputTransferToken, "TaskInputSink of " + surfaceControl3, inputChannel5);
-                            surfaceControl2 = build2;
-                            inputChannel3 = inputChannel5;
-                        } catch (RemoteException e2) {
-                            e = e2;
-                            surfaceControl2 = build2;
-                            inputChannel3 = inputChannel5;
-                            e.rethrowFromSystemServer();
-                            Trace.endSection();
-                            final DragResizeInputListener.InputSetUpResult inputSetUpResult = new DragResizeInputListener.InputSetUpResult(surfaceControl2, inputChannel4, inputChannel3);
-                            shellExecutor3.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda2
-                                /* JADX WARN: Type inference failed for: r8v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3] */
-                                /* JADX WARN: Type inference failed for: r9v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4] */
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    final DragResizeInputListener dragResizeInputListener2 = DragResizeInputListener.this;
-                                    DragResizeInputListener.InputSetUpResult inputSetUpResult2 = inputSetUpResult;
-                                    if (dragResizeInputListener2.mClosed) {
-                                        inputSetUpResult2.mInputChannel.dispose();
-                                        inputSetUpResult2.mSinkInputChannel.dispose();
-                                        ((SurfaceControl.Transaction) dragResizeInputListener2.mSurfaceControlTransactionSupplier.get()).remove(inputSetUpResult2.mInputSinkSurface).apply();
-                                        return;
-                                    }
-                                    dragResizeInputListener2.mInputSinkSurface = inputSetUpResult2.mInputSinkSurface;
-                                    dragResizeInputListener2.mInputChannel = inputSetUpResult2.mInputChannel;
-                                    dragResizeInputListener2.mSinkInputChannel = inputSetUpResult2.mSinkInputChannel;
-                                    Trace.beginSection("DragResizeInputListener#ctor-initReceiver");
-                                    DragResizeInputListener.TaskResizeInputEventReceiverFactory taskResizeInputEventReceiverFactory2 = dragResizeInputListener2.mEventReceiverFactory;
-                                    Context context2 = dragResizeInputListener2.mContext;
-                                    ActivityManager.RunningTaskInfo runningTaskInfo2 = dragResizeInputListener2.mTaskInfo;
-                                    InputChannel inputChannel6 = dragResizeInputListener2.mInputChannel;
-                                    DragPositioningCallback dragPositioningCallback2 = dragResizeInputListener2.mDragPositioningCallback;
-                                    Handler handler2 = dragResizeInputListener2.mHandler;
-                                    Choreographer choreographer2 = dragResizeInputListener2.mChoreographer;
-                                    ?? r8 = new Supplier() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3
-                                        @Override // java.util.function.Supplier
-                                        public final Object get() {
-                                            DragResizeInputListener dragResizeInputListener3 = DragResizeInputListener.this;
-                                            DisplayLayout displayLayout = dragResizeInputListener3.mDisplayController.getDisplayLayout(dragResizeInputListener3.mDisplayId);
-                                            return new Size(displayLayout.mWidth, displayLayout.mHeight);
-                                        }
-                                    };
-                                    ?? r9 = new Consumer() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4
-                                        @Override // java.util.function.Consumer
-                                        public final void accept(Object obj) {
-                                            DragResizeInputListener.this.updateSinkInputChannel();
-                                        }
-                                    };
-                                    DesktopModeEventLogger desktopModeEventLogger2 = dragResizeInputListener2.mDesktopModeEventLogger;
-                                    ((DragResizeInputListener.DefaultTaskResizeInputEventReceiverFactory) taskResizeInputEventReceiverFactory2).getClass();
-                                    DragResizeInputListener.TaskResizeInputEventReceiver taskResizeInputEventReceiver = new DragResizeInputListener.TaskResizeInputEventReceiver(context2, runningTaskInfo2, inputChannel6, dragPositioningCallback2, handler2, choreographer2, (DragResizeInputListener$$ExternalSyntheticLambda3) r8, (DragResizeInputListener$$ExternalSyntheticLambda4) r9, desktopModeEventLogger2);
-                                    dragResizeInputListener2.mInputEventReceiver = taskResizeInputEventReceiver;
-                                    taskResizeInputEventReceiver.mDragDetector.mTouchSlop = ViewConfiguration.get(dragResizeInputListener2.mContext).getScaledTouchSlop();
-                                    ArrayList arrayList = (ArrayList) dragResizeInputListener2.mOnInitializedCallbacks;
-                                    int size = arrayList.size();
-                                    int i3 = 0;
-                                    while (i3 < size) {
-                                        Object obj = arrayList.get(i3);
-                                        i3++;
-                                        ((Runnable) obj).run();
-                                    }
-                                    ((ArrayList) dragResizeInputListener2.mOnInitializedCallbacks).clear();
-                                    Trace.endSection();
-                                }
-                            });
-                        }
-                        Trace.endSection();
-                        final DragResizeInputListener.InputSetUpResult inputSetUpResult2 = new DragResizeInputListener.InputSetUpResult(surfaceControl2, inputChannel4, inputChannel3);
-                        shellExecutor3.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda2
-                            /* JADX WARN: Type inference failed for: r8v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3] */
-                            /* JADX WARN: Type inference failed for: r9v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4] */
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                final DragResizeInputListener dragResizeInputListener2 = DragResizeInputListener.this;
-                                DragResizeInputListener.InputSetUpResult inputSetUpResult22 = inputSetUpResult2;
-                                if (dragResizeInputListener2.mClosed) {
-                                    inputSetUpResult22.mInputChannel.dispose();
-                                    inputSetUpResult22.mSinkInputChannel.dispose();
-                                    ((SurfaceControl.Transaction) dragResizeInputListener2.mSurfaceControlTransactionSupplier.get()).remove(inputSetUpResult22.mInputSinkSurface).apply();
-                                    return;
-                                }
-                                dragResizeInputListener2.mInputSinkSurface = inputSetUpResult22.mInputSinkSurface;
-                                dragResizeInputListener2.mInputChannel = inputSetUpResult22.mInputChannel;
-                                dragResizeInputListener2.mSinkInputChannel = inputSetUpResult22.mSinkInputChannel;
-                                Trace.beginSection("DragResizeInputListener#ctor-initReceiver");
-                                DragResizeInputListener.TaskResizeInputEventReceiverFactory taskResizeInputEventReceiverFactory2 = dragResizeInputListener2.mEventReceiverFactory;
-                                Context context2 = dragResizeInputListener2.mContext;
-                                ActivityManager.RunningTaskInfo runningTaskInfo2 = dragResizeInputListener2.mTaskInfo;
-                                InputChannel inputChannel6 = dragResizeInputListener2.mInputChannel;
-                                DragPositioningCallback dragPositioningCallback2 = dragResizeInputListener2.mDragPositioningCallback;
-                                Handler handler2 = dragResizeInputListener2.mHandler;
-                                Choreographer choreographer2 = dragResizeInputListener2.mChoreographer;
-                                ?? r8 = new Supplier() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3
-                                    @Override // java.util.function.Supplier
-                                    public final Object get() {
-                                        DragResizeInputListener dragResizeInputListener3 = DragResizeInputListener.this;
-                                        DisplayLayout displayLayout = dragResizeInputListener3.mDisplayController.getDisplayLayout(dragResizeInputListener3.mDisplayId);
-                                        return new Size(displayLayout.mWidth, displayLayout.mHeight);
-                                    }
-                                };
-                                ?? r9 = new Consumer() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4
-                                    @Override // java.util.function.Consumer
-                                    public final void accept(Object obj) {
-                                        DragResizeInputListener.this.updateSinkInputChannel();
-                                    }
-                                };
-                                DesktopModeEventLogger desktopModeEventLogger2 = dragResizeInputListener2.mDesktopModeEventLogger;
-                                ((DragResizeInputListener.DefaultTaskResizeInputEventReceiverFactory) taskResizeInputEventReceiverFactory2).getClass();
-                                DragResizeInputListener.TaskResizeInputEventReceiver taskResizeInputEventReceiver = new DragResizeInputListener.TaskResizeInputEventReceiver(context2, runningTaskInfo2, inputChannel6, dragPositioningCallback2, handler2, choreographer2, (DragResizeInputListener$$ExternalSyntheticLambda3) r8, (DragResizeInputListener$$ExternalSyntheticLambda4) r9, desktopModeEventLogger2);
-                                dragResizeInputListener2.mInputEventReceiver = taskResizeInputEventReceiver;
-                                taskResizeInputEventReceiver.mDragDetector.mTouchSlop = ViewConfiguration.get(dragResizeInputListener2.mContext).getScaledTouchSlop();
-                                ArrayList arrayList = (ArrayList) dragResizeInputListener2.mOnInitializedCallbacks;
-                                int size = arrayList.size();
-                                int i3 = 0;
-                                while (i3 < size) {
-                                    Object obj = arrayList.get(i3);
-                                    i3++;
-                                    ((Runnable) obj).run();
-                                }
-                                ((ArrayList) dragResizeInputListener2.mOnInitializedCallbacks).clear();
-                                Trace.endSection();
-                            }
-                        });
-                    }
-                } catch (RemoteException e3) {
-                    e = e3;
+                } catch (RemoteException e) {
+                    e = e;
                     shellExecutor3 = shellExecutor4;
                     iBinder = iBinder3;
                     supplier3 = supplier5;
                     supplier4 = supplier6;
                 }
-                build2 = ((SurfaceControl.Builder) supplier3.get()).setName("TaskInputSink of " + surfaceControl3).setContainerLayer().setParent(surfaceControl3).setCallsite("DragResizeInputListener.setUpInputChannels").build();
-                ((SurfaceControl.Transaction) supplier4.get()).setLayer(build2, -2).show(build2).apply();
                 try {
-                    iWindowSession2.grantInputChannel(i2, build2, iBinder, (InputTransferToken) null, 8, 0, 1, 2022, (IBinder) null, inputTransferToken, "TaskInputSink of " + surfaceControl3, inputChannel5);
-                    surfaceControl2 = build2;
-                    inputChannel3 = inputChannel5;
-                } catch (RemoteException e4) {
-                    e = e4;
-                    surfaceControl2 = build2;
-                    inputChannel3 = inputChannel5;
+                    iWindowSession2.grantInputChannel(i2, surfaceControl2, iBinder2, (InputTransferToken) null, 8, VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS, 4, 2, (IBinder) null, inputTransferToken, "DragResizeInputListener of " + surfaceControl2, inputChannel3);
+                } catch (RemoteException e2) {
+                    e = e2;
+                    inputTransferToken = inputTransferToken;
+                    e.rethrowFromSystemServer();
+                    SurfaceControl surfaceControlBuild2 = ((SurfaceControl.Builder) supplier3.get()).setName("TaskInputSink of " + surfaceControl2).setContainerLayer().setParent(surfaceControl2).setCallsite("DragResizeInputListener.setUpInputChannels").build();
+                    ((SurfaceControl.Transaction) supplier4.get()).setLayer(surfaceControlBuild2, -2).show(surfaceControlBuild2).apply();
+                    iWindowSession2.grantInputChannel(i2, surfaceControlBuild2, iBinder, (InputTransferToken) null, 8, 0, 1, 2022, (IBinder) null, inputTransferToken, "TaskInputSink of " + surfaceControl2, inputChannel4);
+                    SurfaceControl surfaceControl3 = surfaceControlBuild2;
+                    InputChannel inputChannel5 = inputChannel4;
+                    Trace.endSection();
+                    final DragResizeInputListener.InputSetUpResult inputSetUpResult = new DragResizeInputListener.InputSetUpResult(surfaceControl3, inputChannel3, inputChannel5);
+                    shellExecutor3.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda2
+                        /* JADX WARN: Type inference failed for: r8v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3] */
+                        /* JADX WARN: Type inference failed for: r9v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4] */
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            final DragResizeInputListener dragResizeInputListener2 = dragResizeInputListener;
+                            DragResizeInputListener.InputSetUpResult inputSetUpResult2 = inputSetUpResult;
+                            if (dragResizeInputListener2.mClosed) {
+                                inputSetUpResult2.mInputChannel.dispose();
+                                inputSetUpResult2.mSinkInputChannel.dispose();
+                                ((SurfaceControl.Transaction) dragResizeInputListener2.mSurfaceControlTransactionSupplier.get()).remove(inputSetUpResult2.mInputSinkSurface).apply();
+                                return;
+                            }
+                            dragResizeInputListener2.mInputSinkSurface = inputSetUpResult2.mInputSinkSurface;
+                            dragResizeInputListener2.mInputChannel = inputSetUpResult2.mInputChannel;
+                            dragResizeInputListener2.mSinkInputChannel = inputSetUpResult2.mSinkInputChannel;
+                            Trace.beginSection("DragResizeInputListener#ctor-initReceiver");
+                            DragResizeInputListener.TaskResizeInputEventReceiverFactory taskResizeInputEventReceiverFactory2 = dragResizeInputListener2.mEventReceiverFactory;
+                            Context context2 = dragResizeInputListener2.mContext;
+                            ActivityManager.RunningTaskInfo runningTaskInfo2 = dragResizeInputListener2.mTaskInfo;
+                            InputChannel inputChannel6 = dragResizeInputListener2.mInputChannel;
+                            DragPositioningCallback dragPositioningCallback2 = dragResizeInputListener2.mDragPositioningCallback;
+                            Handler handler2 = dragResizeInputListener2.mHandler;
+                            Choreographer choreographer2 = dragResizeInputListener2.mChoreographer;
+                            ?? r8 = new Supplier() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    DragResizeInputListener dragResizeInputListener3 = dragResizeInputListener2;
+                                    DisplayLayout displayLayout = dragResizeInputListener3.mDisplayController.getDisplayLayout(dragResizeInputListener3.mDisplayId);
+                                    return new Size(displayLayout.mWidth, displayLayout.mHeight);
+                                }
+                            };
+                            ?? r9 = new Consumer() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    dragResizeInputListener2.updateSinkInputChannel();
+                                }
+                            };
+                            DesktopModeEventLogger desktopModeEventLogger2 = dragResizeInputListener2.mDesktopModeEventLogger;
+                            ((DragResizeInputListener.DefaultTaskResizeInputEventReceiverFactory) taskResizeInputEventReceiverFactory2).getClass();
+                            DragResizeInputListener.TaskResizeInputEventReceiver taskResizeInputEventReceiver = new DragResizeInputListener.TaskResizeInputEventReceiver(context2, runningTaskInfo2, inputChannel6, dragPositioningCallback2, handler2, choreographer2, (DragResizeInputListener$$ExternalSyntheticLambda3) r8, (DragResizeInputListener$$ExternalSyntheticLambda4) r9, desktopModeEventLogger2);
+                            dragResizeInputListener2.mInputEventReceiver = taskResizeInputEventReceiver;
+                            taskResizeInputEventReceiver.mDragDetector.mTouchSlop = ViewConfiguration.get(dragResizeInputListener2.mContext).getScaledTouchSlop();
+                            ArrayList arrayList = (ArrayList) dragResizeInputListener2.mOnInitializedCallbacks;
+                            int size = arrayList.size();
+                            int i3 = 0;
+                            while (i3 < size) {
+                                Object obj = arrayList.get(i3);
+                                i3++;
+                                ((Runnable) obj).run();
+                            }
+                            ((ArrayList) dragResizeInputListener2.mOnInitializedCallbacks).clear();
+                            Trace.endSection();
+                        }
+                    });
                 }
+                SurfaceControl surfaceControlBuild22 = ((SurfaceControl.Builder) supplier3.get()).setName("TaskInputSink of " + surfaceControl2).setContainerLayer().setParent(surfaceControl2).setCallsite("DragResizeInputListener.setUpInputChannels").build();
+                ((SurfaceControl.Transaction) supplier4.get()).setLayer(surfaceControlBuild22, -2).show(surfaceControlBuild22).apply();
+                iWindowSession2.grantInputChannel(i2, surfaceControlBuild22, iBinder, (InputTransferToken) null, 8, 0, 1, 2022, (IBinder) null, inputTransferToken, "TaskInputSink of " + surfaceControl2, inputChannel4);
+                SurfaceControl surfaceControl32 = surfaceControlBuild22;
+                InputChannel inputChannel52 = inputChannel4;
                 Trace.endSection();
-                final DragResizeInputListener.InputSetUpResult inputSetUpResult22 = new DragResizeInputListener.InputSetUpResult(surfaceControl2, inputChannel4, inputChannel3);
+                final DragResizeInputListener.InputSetUpResult inputSetUpResult2 = new DragResizeInputListener.InputSetUpResult(surfaceControl32, inputChannel3, inputChannel52);
                 shellExecutor3.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda2
                     /* JADX WARN: Type inference failed for: r8v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3] */
                     /* JADX WARN: Type inference failed for: r9v0, types: [com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4] */
                     @Override // java.lang.Runnable
                     public final void run() {
-                        final DragResizeInputListener dragResizeInputListener2 = DragResizeInputListener.this;
-                        DragResizeInputListener.InputSetUpResult inputSetUpResult222 = inputSetUpResult22;
+                        final DragResizeInputListener dragResizeInputListener2 = dragResizeInputListener;
+                        DragResizeInputListener.InputSetUpResult inputSetUpResult22 = inputSetUpResult2;
                         if (dragResizeInputListener2.mClosed) {
-                            inputSetUpResult222.mInputChannel.dispose();
-                            inputSetUpResult222.mSinkInputChannel.dispose();
-                            ((SurfaceControl.Transaction) dragResizeInputListener2.mSurfaceControlTransactionSupplier.get()).remove(inputSetUpResult222.mInputSinkSurface).apply();
+                            inputSetUpResult22.mInputChannel.dispose();
+                            inputSetUpResult22.mSinkInputChannel.dispose();
+                            ((SurfaceControl.Transaction) dragResizeInputListener2.mSurfaceControlTransactionSupplier.get()).remove(inputSetUpResult22.mInputSinkSurface).apply();
                             return;
                         }
-                        dragResizeInputListener2.mInputSinkSurface = inputSetUpResult222.mInputSinkSurface;
-                        dragResizeInputListener2.mInputChannel = inputSetUpResult222.mInputChannel;
-                        dragResizeInputListener2.mSinkInputChannel = inputSetUpResult222.mSinkInputChannel;
+                        dragResizeInputListener2.mInputSinkSurface = inputSetUpResult22.mInputSinkSurface;
+                        dragResizeInputListener2.mInputChannel = inputSetUpResult22.mInputChannel;
+                        dragResizeInputListener2.mSinkInputChannel = inputSetUpResult22.mSinkInputChannel;
                         Trace.beginSection("DragResizeInputListener#ctor-initReceiver");
                         DragResizeInputListener.TaskResizeInputEventReceiverFactory taskResizeInputEventReceiverFactory2 = dragResizeInputListener2.mEventReceiverFactory;
                         Context context2 = dragResizeInputListener2.mContext;
@@ -551,7 +505,7 @@ public class DragResizeInputListener implements AutoCloseable {
                         ?? r8 = new Supplier() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda3
                             @Override // java.util.function.Supplier
                             public final Object get() {
-                                DragResizeInputListener dragResizeInputListener3 = DragResizeInputListener.this;
+                                DragResizeInputListener dragResizeInputListener3 = dragResizeInputListener2;
                                 DisplayLayout displayLayout = dragResizeInputListener3.mDisplayController.getDisplayLayout(dragResizeInputListener3.mDisplayId);
                                 return new Size(displayLayout.mWidth, displayLayout.mHeight);
                             }
@@ -559,7 +513,7 @@ public class DragResizeInputListener implements AutoCloseable {
                         ?? r9 = new Consumer() { // from class: com.android.wm.shell.windowdecor.DragResizeInputListener$$ExternalSyntheticLambda4
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
-                                DragResizeInputListener.this.updateSinkInputChannel();
+                                dragResizeInputListener2.updateSinkInputChannel();
                             }
                         };
                         DesktopModeEventLogger desktopModeEventLogger2 = dragResizeInputListener2.mDesktopModeEventLogger;

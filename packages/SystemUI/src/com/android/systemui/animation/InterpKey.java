@@ -4,7 +4,6 @@ import android.graphics.fonts.Font;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class InterpKey {
     public final Font end;
@@ -30,9 +29,9 @@ public final class InterpKey {
 
     public final int hashCode() {
         Font font = this.start;
-        int hashCode = (font == null ? 0 : font.hashCode()) * 31;
+        int iHashCode = (font == null ? 0 : font.hashCode()) * 31;
         Font font2 = this.end;
-        return Integer.hashCode(this.frame) + ((hashCode + (font2 != null ? font2.hashCode() : 0)) * 31);
+        return Integer.hashCode(this.frame) + ((iHashCode + (font2 != null ? font2.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

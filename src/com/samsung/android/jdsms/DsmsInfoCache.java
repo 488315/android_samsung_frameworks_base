@@ -21,14 +21,10 @@ public final class DsmsInfoCache {
     private boolean mIsCommercializedDeviceCached;
 
     public static synchronized DsmsInfoCache getInstance() {
-        DsmsInfoCache dsmsInfoCache;
-        synchronized (DsmsInfoCache.class) {
-            if (sInstance == null) {
-                sInstance = new DsmsInfoCache();
-            }
-            dsmsInfoCache = sInstance;
+        if (sInstance == null) {
+            sInstance = new DsmsInfoCache();
         }
-        return dsmsInfoCache;
+        return sInstance;
     }
 
     private DsmsInfoCache() {
@@ -136,9 +132,9 @@ public final class DsmsInfoCache {
                 Intent intent = new Intent();
                 intent.setPackage(DSMS_PACKAGE);
                 intent.setAction(ACTION_INFO);
-                boolean bindServiceAsUser = DsmsInfoCache.this.mContext.bindServiceAsUser(intent, this.mConnection, 1, UserHandle.SYSTEM);
-                this.mIsBound = bindServiceAsUser;
-                if (bindServiceAsUser) {
+                boolean zBindServiceAsUser = DsmsInfoCache.this.mContext.bindServiceAsUser(intent, this.mConnection, 1, UserHandle.SYSTEM);
+                this.mIsBound = zBindServiceAsUser;
+                if (zBindServiceAsUser) {
                     DsmsLog.d(SUBTAG, "Service is bound");
                 } else {
                     DsmsLog.e(SUBTAG, "Could not bind to service");
@@ -152,10 +148,10 @@ public final class DsmsInfoCache {
             if (j < 0) {
                 throw new IllegalArgumentException("Timeout is invalid");
             }
-            long currentTimeMillis = System.currentTimeMillis() + j;
+            long jCurrentTimeMillis = System.currentTimeMillis() + j;
             while (true) {
-                long currentTimeMillis2 = currentTimeMillis - System.currentTimeMillis();
-                if (currentTimeMillis2 <= 0) {
+                long jCurrentTimeMillis2 = jCurrentTimeMillis - System.currentTimeMillis();
+                if (jCurrentTimeMillis2 <= 0) {
                     throw new TimeoutException("Time waiting connection is over");
                 }
                 synchronized (this.mLock) {
@@ -164,7 +160,7 @@ public final class DsmsInfoCache {
                         return;
                     } else {
                         try {
-                            this.mLock.wait(currentTimeMillis2);
+                            this.mLock.wait(jCurrentTimeMillis2);
                         } catch (InterruptedException unused) {
                             DsmsLog.d(SUBTAG, "Interrupted while waiting remaining time");
                         }
@@ -182,15 +178,15 @@ public final class DsmsInfoCache {
         }
 
         public boolean isCommercializedDevice() throws RemoteException {
-            boolean isCommercializedDevice;
+            boolean zIsCommercializedDevice;
             synchronized (this.mLock) {
                 IDsmsInfoService iDsmsInfoService = this.mIDsmsInfoService;
                 if (iDsmsInfoService == null) {
                     throw new IllegalStateException("Service is not connected");
                 }
-                isCommercializedDevice = iDsmsInfoService.isCommercializedDevice();
+                zIsCommercializedDevice = iDsmsInfoService.isCommercializedDevice();
             }
-            return isCommercializedDevice;
+            return zIsCommercializedDevice;
         }
     }
 }

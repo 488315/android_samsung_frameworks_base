@@ -7,13 +7,21 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import com.android.systemui.qs.SecQuickStatusBarHeader;
 import com.sec.ims.settings.ImsProfile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ViewUtil {
     public static final int $stable = 0;
     public static final ViewUtil INSTANCE = new ViewUtil();
 
     private ViewUtil() {
+    }
+
+    public static final <T> T findParentOfType(ViewGroup viewGroup, Class<T> cls) {
+        for (T t = (T) viewGroup.getParent(); t instanceof ViewGroup; t = (T) ((ViewGroup) t).getParent()) {
+            if (cls.isInstance(t)) {
+                return t;
+            }
+        }
+        return null;
     }
 
     public static final SecQuickStatusBarHeader getSecQuickStatusBarHeader(ViewGroup viewGroup) {
@@ -26,7 +34,7 @@ public final class ViewUtil {
         return null;
     }
 
-    private final String toResIdString(View view) {
+    private final String toResIdString(View view) throws Resources.NotFoundException {
         try {
             if (view.getId() == -1) {
                 return "";
@@ -44,7 +52,7 @@ public final class ViewUtil {
         return visibility != 0 ? visibility != 4 ? visibility != 8 ? "U" : ImsProfile.TIMER_NAME_G : ImsProfile.TIMER_NAME_I : "V";
     }
 
-    public final String toIdSting(View view) {
+    public final String toIdSting(View view) throws Resources.NotFoundException {
         return toShortIdSting(view) + toResIdString(view) + " " + toVisibilityString(view);
     }
 

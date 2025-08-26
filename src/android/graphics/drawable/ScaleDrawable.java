@@ -32,11 +32,11 @@ public class ScaleDrawable extends DrawableWrapper {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ScaleDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ScaleDrawable);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         updateLocalState();
     }
 
@@ -48,16 +48,16 @@ public class ScaleDrawable extends DrawableWrapper {
             return;
         }
         if (scaleState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(scaleState.mThemeAttrs, R.styleable.ScaleDrawable);
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(scaleState.mThemeAttrs, R.styleable.ScaleDrawable);
             try {
                 try {
-                    updateStateFromTypedArray(resolveAttributes);
-                    verifyRequiredAttributes(resolveAttributes);
+                    updateStateFromTypedArray(typedArrayResolveAttributes);
+                    verifyRequiredAttributes(typedArrayResolveAttributes);
                 } catch (XmlPullParserException e) {
                     rethrowAsRuntimeException(e);
                 }
             } finally {
-                resolveAttributes.recycle();
+                typedArrayResolveAttributes.recycle();
             }
         }
         updateLocalState();
@@ -130,16 +130,16 @@ public class ScaleDrawable extends DrawableWrapper {
         Rect rect2 = this.mTmpRect;
         boolean z = this.mState.mUseIntrinsicSizeAsMin;
         int level = getLevel();
-        int width = rect.width();
+        int iWidth = rect.width();
         if (this.mState.mScaleWidth > 0.0f) {
-            width -= (int) ((((width - (z ? drawable.getIntrinsicWidth() : 0)) * (10000 - level)) * this.mState.mScaleWidth) / 10000.0f);
+            iWidth -= (int) ((((iWidth - (z ? drawable.getIntrinsicWidth() : 0)) * (10000 - level)) * this.mState.mScaleWidth) / 10000.0f);
         }
-        int height = rect.height();
+        int iHeight = rect.height();
         if (this.mState.mScaleHeight > 0.0f) {
-            height -= (int) ((((height - (z ? drawable.getIntrinsicHeight() : 0)) * (10000 - level)) * this.mState.mScaleHeight) / 10000.0f);
+            iHeight -= (int) ((((iHeight - (z ? drawable.getIntrinsicHeight() : 0)) * (10000 - level)) * this.mState.mScaleHeight) / 10000.0f);
         }
-        int i = width;
-        int i2 = height;
+        int i = iWidth;
+        int i2 = iHeight;
         Gravity.apply(this.mState.mGravity, i, i2, rect, rect2, getLayoutDirection());
         if (i <= 0 || i2 <= 0) {
             return;

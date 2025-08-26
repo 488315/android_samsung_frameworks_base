@@ -12,7 +12,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.widget.spinner.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SettingsSpinnerPreference extends Preference implements Preference.OnPreferenceClickListener {
     public final AnonymousClass2 mOnSelectedListener;
@@ -46,9 +45,9 @@ public class SettingsSpinnerPreference extends Preference implements Preference.
 
     public final void initAttributes$1(Context context, AttributeSet attributeSet, int i) {
         int i2;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SettingsSpinnerPreference, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SettingsSpinnerPreference, i, 0);
         try {
-            int integer = obtainStyledAttributes.getInteger(0, 0);
+            int integer = typedArrayObtainStyledAttributes.getInteger(0, 0);
             if (integer != 2) {
                 i2 = R.layout.settings_expressive_spinner_preference_outlined;
                 if (integer != 3 && integer != 4) {
@@ -57,12 +56,12 @@ public class SettingsSpinnerPreference extends Preference implements Preference.
             } else {
                 i2 = R.layout.settings_expressive_spinner_preference_full;
             }
-            obtainStyledAttributes.close();
+            typedArrayObtainStyledAttributes.close();
             this.mLayoutResId = i2;
         } catch (Throwable th) {
-            if (obtainStyledAttributes != null) {
+            if (typedArrayObtainStyledAttributes != null) {
                 try {
-                    obtainStyledAttributes.close();
+                    typedArrayObtainStyledAttributes.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }

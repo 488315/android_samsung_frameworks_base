@@ -30,7 +30,7 @@ public class SystemDumpWriter implements AutoCloseable {
     private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
     private final LinkedList<String> mDumpRequests = new LinkedList<>();
 
-    public SystemDumpWriter(String str, boolean z) {
+    public SystemDumpWriter(String str, boolean z) throws Throwable {
         this.mTag += str;
         StringBuilder sb = new StringBuilder(FILE_DUMPSYS);
         sb.append(str);
@@ -60,14 +60,14 @@ public class SystemDumpWriter implements AutoCloseable {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r6v7 */
     /* JADX WARN: Type inference failed for: r6v8 */
-    private void addDateFormat(String str) {
-        boolean exists = this.mOutputFile.exists();
+    private void addDateFormat(String str) throws Throwable {
+        boolean zExists = this.mOutputFile.exists();
         OutputStreamWriter outputStreamWriter = null;
         try {
             try {
                 try {
-                    OutputStreamWriter outputStreamWriter2 = new OutputStreamWriter(new FileOutputStream(this.mOutputFile, exists), StandardCharsets.UTF_8);
-                    if (exists) {
+                    OutputStreamWriter outputStreamWriter2 = new OutputStreamWriter(new FileOutputStream(this.mOutputFile, zExists), StandardCharsets.UTF_8);
+                    if (zExists) {
                         try {
                             outputStreamWriter2.write(10);
                             outputStreamWriter2.write(10);
@@ -96,12 +96,12 @@ public class SystemDumpWriter implements AutoCloseable {
                     outputStreamWriter2.write(str + " #" + sTagCountMap.get(str) + " " + this.mFormat.format(new Date()));
                     outputStreamWriter2.close();
                 } catch (IOException e3) {
-                    e = e3;
+                    String str2 = this.mTag;
+                    Slog.e(str2, "close exception, ", e3);
+                    this = str2;
                 }
             } catch (IOException e4) {
-                String str2 = this.mTag;
-                Slog.e(str2, "close exception, ", e4);
-                this = str2;
+                e = e4;
             }
         } catch (Throwable th2) {
             th = th2;
@@ -110,7 +110,7 @@ public class SystemDumpWriter implements AutoCloseable {
 
     @Override // java.lang.AutoCloseable
     public void close() throws Exception {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         try {
             File file = this.mOutputFile;
             FileOutputStream fileOutputStream = new FileOutputStream(file, file.exists());
@@ -126,7 +126,7 @@ public class SystemDumpWriter implements AutoCloseable {
         } catch (IOException e) {
             Slog.e(this.mTag, "close exception, " + e);
         }
-        Slog.d(this.mTag, "save dumpsys, duration=" + (SystemClock.uptimeMillis() - uptimeMillis));
+        Slog.d(this.mTag, "save dumpsys, duration=" + (SystemClock.uptimeMillis() - jUptimeMillis));
     }
 
     public static void saveDumpsysFiles(String str, boolean z) {
@@ -150,7 +150,7 @@ public class SystemDumpWriter implements AutoCloseable {
         if (sTagCountMap.size() == 0) {
             sTagCountMap.put(str, 0);
         }
-        int intValue = sTagCountMap.get(str).intValue() + 1;
-        sTagCountMap.put(str, Integer.valueOf(intValue <= 3 ? intValue : 1));
+        int iIntValue = sTagCountMap.get(str).intValue() + 1;
+        sTagCountMap.put(str, Integer.valueOf(iIntValue <= 3 ? iIntValue : 1));
     }
 }

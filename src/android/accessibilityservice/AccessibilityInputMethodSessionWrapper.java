@@ -29,7 +29,7 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
             this.mHandler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityInputMethodSessionWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInputMethodSessionWrapper.this.lambda$updateSelection$0(i, i2, i3, i4, i5, i6);
+                    this.f$0.lambda$updateSelection$0(i, i2, i3, i4, i5, i6);
                 }
             });
         }
@@ -52,7 +52,7 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
             this.mHandler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityInputMethodSessionWrapper$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInputMethodSessionWrapper.this.doFinishInput();
+                    this.f$0.doFinishInput();
                 }
             });
         }
@@ -74,7 +74,7 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
             this.mHandler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityInputMethodSessionWrapper$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInputMethodSessionWrapper.this.doFinishSession();
+                    this.f$0.doFinishSession();
                 }
             });
         }
@@ -93,7 +93,7 @@ final class AccessibilityInputMethodSessionWrapper extends IAccessibilityInputMe
             this.mHandler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityInputMethodSessionWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityInputMethodSessionWrapper.this.lambda$invalidateInput$1(editorInfo, iRemoteAccessibilityInputConnection, i);
+                    this.f$0.lambda$invalidateInput$1(editorInfo, iRemoteAccessibilityInputConnection, i);
                 }
             });
         }

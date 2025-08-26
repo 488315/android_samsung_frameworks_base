@@ -44,9 +44,9 @@ public interface IMusicRecognitionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMusicRecognitionManager)) {
-                return (IMusicRecognitionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMusicRecognitionManager)) {
+                return (IMusicRecognitionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IMusicRecognitionManager extends IInterface {
             }
             if (i == 1) {
                 RecognitionRequest recognitionRequest = (RecognitionRequest) parcel.readTypedObject(RecognitionRequest.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                beginRecognition(recognitionRequest, readStrongBinder);
+                beginRecognition(recognitionRequest, strongBinder);
                 parcel2.writeNoException();
                 return true;
             }
@@ -101,17 +101,17 @@ public interface IMusicRecognitionManager extends IInterface {
 
             @Override // android.media.musicrecognition.IMusicRecognitionManager
             public void beginRecognition(RecognitionRequest recognitionRequest, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(recognitionRequest, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(recognitionRequest, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

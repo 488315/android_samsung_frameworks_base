@@ -17,7 +17,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsumer {
     public final Executor bgExecutor;
@@ -36,7 +35,6 @@ public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsum
     public final Function0 updateForegroundColor;
     public final WallpaperManager wallpaperManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,9 +104,9 @@ public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsum
         printWriter.println("sampledView width: " + this.sampledView.getWidth() + ", sampledView height: " + this.sampledView.getHeight());
         Point point = this.displaySize;
         printWriter.println("screen width: " + point.x + ", screen height: " + point.y);
-        RectF convertBounds = convertBounds(calculateScreenLocation(this.sampledView));
+        RectF rectFConvertBounds = convertBounds(calculateScreenLocation(this.sampledView));
         StringBuilder sb = new StringBuilder("sampledRegionWithOffset: ");
-        sb.append(convertBounds);
+        sb.append(rectFConvertBounds);
         printWriter.println(sb.toString());
         String str = this.isLockscreen ? BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD : "homescreen";
         printWriter.println("initialSampling for " + str + ": " + this.initialSampling);
@@ -148,27 +146,27 @@ public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsum
         this.layoutChangedListener = new View.OnLayoutChangeListener() { // from class: com.android.systemui.shared.regionsampling.RegionSampler$layoutChangedListener$1
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                if (RegionSampler.this.sampledView.getLocationOnScreen()[0] >= 0) {
-                    if (RegionSampler.this.sampledView.getLocationOnScreen()[1] >= 0 && !new Rect(i, i2, i3, i4).equals(new Rect(i5, i6, i7, i8))) {
-                        RegionSampler regionSampler = RegionSampler.this;
+                if (this.this$0.sampledView.getLocationOnScreen()[0] >= 0) {
+                    if (this.this$0.sampledView.getLocationOnScreen()[1] >= 0 && !new Rect(i, i2, i3, i4).equals(new Rect(i5, i6, i7, i8))) {
+                        RegionSampler regionSampler = this.this$0;
                         WallpaperManager wallpaperManager2 = regionSampler.wallpaperManager;
                         if (wallpaperManager2 != null) {
                             wallpaperManager2.removeOnColorsChangedListener(regionSampler);
                         }
                         regionSampler.sampledView.removeOnLayoutChangeListener(regionSampler.layoutChangedListener);
-                        final RegionSampler regionSampler2 = RegionSampler.this;
+                        final RegionSampler regionSampler2 = this.this$0;
                         if (regionSampler2.regionSamplingEnabled) {
                             regionSampler2.sampledView.addOnLayoutChangeListener(regionSampler2.layoutChangedListener);
-                            RectF calculateScreenLocation = regionSampler2.calculateScreenLocation(regionSampler2.sampledView);
-                            if (calculateScreenLocation.isEmpty()) {
+                            RectF rectFCalculateScreenLocation = regionSampler2.calculateScreenLocation(regionSampler2.sampledView);
+                            if (rectFCalculateScreenLocation.isEmpty()) {
                                 return;
                             }
-                            final RectF convertBounds = regionSampler2.convertBounds(calculateScreenLocation);
-                            if (convertBounds.left < 0.0d || convertBounds.right > 1.0d || convertBounds.top < 0.0d || convertBounds.bottom > 1.0d) {
+                            final RectF rectFConvertBounds = regionSampler2.convertBounds(rectFCalculateScreenLocation);
+                            if (rectFConvertBounds.left < 0.0d || rectFConvertBounds.right > 1.0d || rectFConvertBounds.top < 0.0d || rectFConvertBounds.bottom > 1.0d) {
                                 return;
                             }
                             ArrayList arrayList = new ArrayList();
-                            arrayList.add(convertBounds);
+                            arrayList.add(rectFConvertBounds);
                             WallpaperManager wallpaperManager3 = regionSampler2.wallpaperManager;
                             if (wallpaperManager3 != null) {
                                 wallpaperManager3.addOnColorsChangedListener(regionSampler2, arrayList, regionSampler2.isLockscreen ? 2 : 1);
@@ -179,7 +177,7 @@ public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsum
                                     @Override // java.lang.Runnable
                                     public final void run() {
                                         WallpaperColors wallpaperColors;
-                                        RegionSampler regionSampler3 = RegionSampler.this;
+                                        RegionSampler regionSampler3 = regionSampler2;
                                         WallpaperManager wallpaperManager4 = regionSampler3.wallpaperManager;
                                         if (wallpaperManager4 != null) {
                                             wallpaperColors = wallpaperManager4.getWallpaperColors(regionSampler3.isLockscreen ? 2 : 1);
@@ -187,14 +185,14 @@ public class RegionSampler implements WallpaperManager.LocalWallpaperColorConsum
                                             wallpaperColors = null;
                                         }
                                         regionSampler3.initialSampling = wallpaperColors;
-                                        final RegionSampler regionSampler4 = RegionSampler.this;
+                                        final RegionSampler regionSampler4 = regionSampler2;
                                         Executor executor4 = regionSampler4.mainExecutor;
                                         if (executor4 != null) {
-                                            final RectF rectF = convertBounds;
+                                            final RectF rectF = rectFConvertBounds;
                                             executor4.execute(new Runnable() { // from class: com.android.systemui.shared.regionsampling.RegionSampler$startRegionSampler$1.1
                                                 @Override // java.lang.Runnable
                                                 public final void run() {
-                                                    RegionSampler regionSampler5 = RegionSampler.this;
+                                                    RegionSampler regionSampler5 = regionSampler4;
                                                     regionSampler5.onColorsChanged(rectF, regionSampler5.initialSampling);
                                                 }
                                             });

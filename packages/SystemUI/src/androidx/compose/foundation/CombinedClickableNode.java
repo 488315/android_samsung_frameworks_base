@@ -3,6 +3,7 @@ package androidx.compose.foundation;
 import android.view.KeyEvent;
 import androidx.collection.LongObjectMapKt;
 import androidx.collection.MutableLongObjectMap;
+import androidx.compose.foundation.gestures.PressGestureScope;
 import androidx.compose.foundation.gestures.TapGestureDetectorKt;
 import androidx.compose.foundation.interaction.MutableInteractionSource;
 import androidx.compose.ui.geometry.Offset;
@@ -17,16 +18,19 @@ import androidx.compose.ui.platform.CompositionLocalsKt;
 import androidx.compose.ui.semantics.Role;
 import androidx.compose.ui.semantics.SemanticsPropertiesKt;
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CombinedClickableNode extends AbstractClickableNode implements CompositionLocalConsumerModifierNode {
     public final MutableLongObjectMap doubleKeyClickStates;
@@ -36,13 +40,61 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
     public Function0 onLongClick;
     public String onLongClickLabel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DoubleKeyClickState {
         public boolean doubleTapMinTimeMillisElapsed;
         public final Job job;
 
         public DoubleKeyClickState(Job job) {
             this.job = job;
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.CombinedClickableNode$clickPointerInput$4, reason: invalid class name */
+    final class AnonymousClass4 extends SuspendLambda implements Function3 {
+        /* synthetic */ long J$0;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass4(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            long j = ((Offset) obj2).packedValue;
+            AnonymousClass4 anonymousClass4 = CombinedClickableNode.this.new AnonymousClass4((Continuation) obj3);
+            anonymousClass4.L$0 = (PressGestureScope) obj;
+            anonymousClass4.J$0 = j;
+            return anonymousClass4.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            Object objCoroutineScope;
+            Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                PressGestureScope pressGestureScope = (PressGestureScope) this.L$0;
+                long j = this.J$0;
+                CombinedClickableNode combinedClickableNode = CombinedClickableNode.this;
+                if (combinedClickableNode.enabled) {
+                    this.label = 1;
+                    MutableInteractionSource mutableInteractionSource = combinedClickableNode.interactionSource;
+                    if (mutableInteractionSource == null || (objCoroutineScope = CoroutineScopeKt.coroutineScope(new AbstractClickableNode$handlePressInteraction$2$1(pressGestureScope, j, mutableInteractionSource, combinedClickableNode, null), this)) != obj2) {
+                        objCoroutineScope = Unit.INSTANCE;
+                    }
+                    if (objCoroutineScope == obj2) {
+                        return obj2;
+                    }
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -53,11 +105,7 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
     @Override // androidx.compose.foundation.AbstractClickableNode
     public final void applyAdditionalSemantics(SemanticsPropertyReceiver semanticsPropertyReceiver) {
         if (this.onLongClick != null) {
-            SemanticsPropertiesKt.onLongClick(semanticsPropertyReceiver, this.onLongClickLabel, new Function0() { // from class: androidx.compose.foundation.CombinedClickableNode$applyAdditionalSemantics$1
-                {
-                    super(0);
-                }
-
+            SemanticsPropertiesKt.onLongClick(semanticsPropertyReceiver, this.onLongClickLabel, new Function0() { // from class: androidx.compose.foundation.CombinedClickableNode.applyAdditionalSemantics.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     Function0 function0 = CombinedClickableNode.this.onLongClick;
@@ -72,14 +120,10 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
 
     @Override // androidx.compose.foundation.AbstractClickableNode
     public final Object clickPointerInput(PointerInputScope pointerInputScope, Continuation continuation) {
-        Object detectTapGestures = TapGestureDetectorKt.detectTapGestures(pointerInputScope, new CombinedClickableNode$clickPointerInput$4(this, null), (!this.enabled || this.onDoubleClick == null) ? null : new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode$clickPointerInput$2
-            {
-                super(1);
-            }
-
+        Object objDetectTapGestures = TapGestureDetectorKt.detectTapGestures(pointerInputScope, new AnonymousClass4(null), (!this.enabled || this.onDoubleClick == null) ? null : new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode.clickPointerInput.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j = ((Offset) obj).packedValue;
                 Function0 function0 = CombinedClickableNode.this.onDoubleClick;
                 if (function0 != null) {
@@ -87,14 +131,10 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
                 }
                 return Unit.INSTANCE;
             }
-        }, (!this.enabled || this.onLongClick == null) ? null : new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode$clickPointerInput$3
-            {
-                super(1);
-            }
-
+        }, (!this.enabled || this.onLongClick == null) ? null : new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode.clickPointerInput.3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j = ((Offset) obj).packedValue;
                 Function0 function0 = CombinedClickableNode.this.onLongClick;
                 if (function0 != null) {
@@ -105,18 +145,14 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
                     HapticFeedback hapticFeedback = (HapticFeedback) CompositionLocalConsumerModifierNodeKt.currentValueOf(combinedClickableNode, CompositionLocalsKt.LocalHapticFeedback);
                     HapticFeedbackType.Companion.getClass();
                     PlatformHapticFeedbackType.INSTANCE.getClass();
-                    hapticFeedback.mo570performHapticFeedbackCdsT49E(0);
+                    hapticFeedback.mo572performHapticFeedbackCdsT49E(0);
                 }
                 return Unit.INSTANCE;
             }
-        }, new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode$clickPointerInput$5
-            {
-                super(1);
-            }
-
+        }, new Function1() { // from class: androidx.compose.foundation.CombinedClickableNode.clickPointerInput.5
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 long j = ((Offset) obj).packedValue;
                 CombinedClickableNode combinedClickableNode = CombinedClickableNode.this;
                 if (combinedClickableNode.enabled) {
@@ -125,7 +161,7 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
                 return Unit.INSTANCE;
             }
         }, continuation);
-        return detectTapGestures == CoroutineSingletons.COROUTINE_SUSPENDED ? detectTapGestures : Unit.INSTANCE;
+        return objDetectTapGestures == CoroutineSingletons.COROUTINE_SUSPENDED ? objDetectTapGestures : Unit.INSTANCE;
     }
 
     @Override // androidx.compose.foundation.AbstractClickableNode
@@ -133,65 +169,51 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
         resetKeyPressState();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002f  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0024  */
     @Override // androidx.compose.foundation.AbstractClickableNode
     /* renamed from: onClickKeyDownEvent-ZmokQxo */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean mo13onClickKeyDownEventZmokQxo(android.view.KeyEvent r8) {
-        /*
-            r7 = this;
-            long r0 = androidx.compose.ui.input.key.KeyEvent_androidKt.m578getKeyZmokQxo(r8)
-            kotlin.jvm.functions.Function0 r8 = r7.onLongClick
-            r2 = 0
-            if (r8 == 0) goto L24
-            androidx.collection.MutableLongObjectMap r8 = r7.longKeyPressJobs
-            java.lang.Object r3 = r8.get(r0)
-            if (r3 != 0) goto L24
-            kotlinx.coroutines.CoroutineScope r3 = r7.getCoroutineScope()
-            androidx.compose.foundation.CombinedClickableNode$onClickKeyDownEvent$1 r4 = new androidx.compose.foundation.CombinedClickableNode$onClickKeyDownEvent$1
-            r4.<init>(r7, r2)
-            r5 = 3
-            kotlinx.coroutines.StandaloneCoroutine r3 = kotlinx.coroutines.BuildersKt.launch$default(r3, r2, r2, r4, r5)
-            r8.set(r0, r3)
-            r8 = 1
-            goto L25
-        L24:
-            r8 = 0
-        L25:
-            androidx.collection.MutableLongObjectMap r3 = r7.doubleKeyClickStates
-            java.lang.Object r4 = r3.get(r0)
-            androidx.compose.foundation.CombinedClickableNode$DoubleKeyClickState r4 = (androidx.compose.foundation.CombinedClickableNode.DoubleKeyClickState) r4
-            if (r4 == 0) goto L4a
-            kotlinx.coroutines.Job r5 = r4.job
-            boolean r6 = r5.isActive()
-            if (r6 == 0) goto L47
-            r5.cancel(r2)
-            boolean r2 = r4.doubleTapMinTimeMillisElapsed
-            if (r2 != 0) goto L4a
-            kotlin.jvm.functions.Function0 r7 = r7.onClick
-            r7.invoke()
-            r3.remove(r0)
-            return r8
-        L47:
-            r3.remove(r0)
-        L4a:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.CombinedClickableNode.mo13onClickKeyDownEventZmokQxo(android.view.KeyEvent):boolean");
+    public final boolean mo13onClickKeyDownEventZmokQxo(KeyEvent keyEvent) {
+        boolean z;
+        long jM580getKeyZmokQxo = KeyEvent_androidKt.m580getKeyZmokQxo(keyEvent);
+        if (this.onLongClick != null) {
+            MutableLongObjectMap mutableLongObjectMap = this.longKeyPressJobs;
+            if (mutableLongObjectMap.get(jM580getKeyZmokQxo) == null) {
+                mutableLongObjectMap.set(jM580getKeyZmokQxo, BuildersKt.launch$default(getCoroutineScope(), null, null, new CombinedClickableNode$onClickKeyDownEvent$1(this, null), 3));
+                z = true;
+            } else {
+                z = false;
+            }
+        }
+        MutableLongObjectMap mutableLongObjectMap2 = this.doubleKeyClickStates;
+        DoubleKeyClickState doubleKeyClickState = (DoubleKeyClickState) mutableLongObjectMap2.get(jM580getKeyZmokQxo);
+        if (doubleKeyClickState != null) {
+            Job job = doubleKeyClickState.job;
+            if (job.isActive()) {
+                job.cancel(null);
+                if (!doubleKeyClickState.doubleTapMinTimeMillisElapsed) {
+                    this.onClick.invoke();
+                    mutableLongObjectMap2.remove(jM580getKeyZmokQxo);
+                    return z;
+                }
+            } else {
+                mutableLongObjectMap2.remove(jM580getKeyZmokQxo);
+            }
+        }
+        return z;
     }
 
     @Override // androidx.compose.foundation.AbstractClickableNode
     /* renamed from: onClickKeyUpEvent-ZmokQxo */
     public final void mo14onClickKeyUpEventZmokQxo(KeyEvent keyEvent) {
         Function0 function0;
-        long m578getKeyZmokQxo = KeyEvent_androidKt.m578getKeyZmokQxo(keyEvent);
+        long jM580getKeyZmokQxo = KeyEvent_androidKt.m580getKeyZmokQxo(keyEvent);
         MutableLongObjectMap mutableLongObjectMap = this.longKeyPressJobs;
         boolean z = false;
-        if (mutableLongObjectMap.get(m578getKeyZmokQxo) != null) {
-            Job job = (Job) mutableLongObjectMap.get(m578getKeyZmokQxo);
+        if (mutableLongObjectMap.get(jM580getKeyZmokQxo) != null) {
+            Job job = (Job) mutableLongObjectMap.get(jM580getKeyZmokQxo);
             if (job != null) {
                 if (job.isActive()) {
                     job.cancel(null);
@@ -199,7 +221,7 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
                     z = true;
                 }
             }
-            mutableLongObjectMap.remove(m578getKeyZmokQxo);
+            mutableLongObjectMap.remove(jM580getKeyZmokQxo);
         }
         if (this.onDoubleClick == null) {
             if (z) {
@@ -209,16 +231,16 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
             return;
         }
         MutableLongObjectMap mutableLongObjectMap2 = this.doubleKeyClickStates;
-        if (mutableLongObjectMap2.get(m578getKeyZmokQxo) == null) {
+        if (mutableLongObjectMap2.get(jM580getKeyZmokQxo) == null) {
             if (z) {
                 return;
             }
-            mutableLongObjectMap2.set(m578getKeyZmokQxo, new DoubleKeyClickState(BuildersKt.launch$default(getCoroutineScope(), null, null, new CombinedClickableNode$onClickKeyUpEvent$2(this, m578getKeyZmokQxo, null), 3)));
+            mutableLongObjectMap2.set(jM580getKeyZmokQxo, new DoubleKeyClickState(BuildersKt.launch$default(getCoroutineScope(), null, null, new CombinedClickableNode$onClickKeyUpEvent$2(this, jM580getKeyZmokQxo, null), 3)));
         } else {
             if (!z && (function0 = this.onDoubleClick) != null) {
                 function0.invoke();
             }
-            mutableLongObjectMap2.remove(m578getKeyZmokQxo);
+            mutableLongObjectMap2.remove(jM580getKeyZmokQxo);
         }
     }
 
@@ -227,6 +249,10 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
         resetKeyPressState();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:33:0x009e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void resetKeyPressState() {
         char c;
         long j;
@@ -294,12 +320,11 @@ final class CombinedClickableNode extends AbstractClickableNode implements Compo
                     }
                     if (i5 != 8) {
                         break;
+                    } else if (i4 == length2) {
+                        break;
+                    } else {
+                        i4++;
                     }
-                }
-                if (i4 == length2) {
-                    break;
-                } else {
-                    i4++;
                 }
             }
         }

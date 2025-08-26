@@ -4,7 +4,6 @@ import android.graphics.PointF;
 import android.view.View;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NoiseControlLineView$setDataList$1 implements View.OnLayoutChangeListener {
     public final /* synthetic */ ArrayList $dataList;
@@ -29,13 +28,13 @@ public final class NoiseControlLineView$setDataList$1 implements View.OnLayoutCh
         while (i10 < size) {
             Object obj = arrayList.get(i10);
             i10++;
-            float floatValue = ((Number) obj).floatValue();
+            float fFloatValue = ((Number) obj).floatValue();
             if (noiseControlLineView.linePath.isEmpty() || i9 % 2 == 0) {
-                noiseControlLineView.linePath.moveTo(floatValue, height);
+                noiseControlLineView.linePath.moveTo(fFloatValue, height);
             } else {
-                noiseControlLineView.linePath.lineTo(floatValue, height);
+                noiseControlLineView.linePath.lineTo(fFloatValue, height);
             }
-            noiseControlLineView.dotList.add(new PointF(floatValue, height));
+            noiseControlLineView.dotList.add(new PointF(fFloatValue, height));
             i9++;
         }
         this.this$0.invalidate();

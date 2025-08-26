@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.Utils;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Environment;
@@ -104,24 +103,24 @@ public class Utils {
     }
 
     static Range<Integer> factorRange(Range<Integer> range, int i) {
-        return i == 1 ? range : Range.create(Integer.valueOf(divUp(range.getLower().intValue(), i)), Integer.valueOf(range.getUpper().intValue() / i));
+        return i == 1 ? range : Range.create(Integer.valueOf(divUp(((Integer) range.getLower()).intValue(), i)), Integer.valueOf(((Integer) range.getUpper()).intValue() / i));
     }
 
     static Range<Long> factorRange(Range<Long> range, long j) {
-        return j == 1 ? range : Range.create(Long.valueOf(divUp(range.getLower().longValue(), j)), Long.valueOf(range.getUpper().longValue() / j));
+        return j == 1 ? range : Range.create(Long.valueOf(divUp(((Long) range.getLower()).longValue(), j)), Long.valueOf(((Long) range.getUpper()).longValue() / j));
     }
 
     private static Rational scaleRatio(Rational rational, int i, int i2) {
-        int gcd = gcd(i, i2);
-        return new Rational((int) (rational.getNumerator() * (i / gcd)), (int) (rational.getDenominator() * (i2 / gcd)));
+        int iGcd = gcd(i, i2);
+        return new Rational((int) (rational.getNumerator() * (i / iGcd)), (int) (rational.getDenominator() * (i2 / iGcd)));
     }
 
     static Range<Rational> scaleRange(Range<Rational> range, int i, int i2) {
-        return i == i2 ? range : Range.create(scaleRatio(range.getLower(), i, i2), scaleRatio(range.getUpper(), i, i2));
+        return i == i2 ? range : Range.create(scaleRatio((Rational) range.getLower(), i, i2), scaleRatio((Rational) range.getUpper(), i, i2));
     }
 
     static Range<Integer> alignRange(Range<Integer> range, int i) {
-        return range.intersect(Integer.valueOf(divUp(range.getLower().intValue(), i) * i), Integer.valueOf((range.getUpper().intValue() / i) * i));
+        return range.intersect(Integer.valueOf(divUp(((Integer) range.getLower()).intValue(), i) * i), Integer.valueOf((((Integer) range.getUpper()).intValue() / i) * i));
     }
 
     static int divUp(int i, int i2) {
@@ -171,36 +170,36 @@ public class Utils {
         }
     }
 
-    static Range<Integer> parseIntRange(Object obj, Range<Integer> range) {
+    static Range<Integer> parseIntRange(Object obj, Range<Integer> range) throws NumberFormatException {
         if (obj == null) {
             return range;
         }
         try {
             String str = (String) obj;
-            int indexOf = str.indexOf(45);
-            if (indexOf >= 0) {
-                return Range.create(Integer.valueOf(Integer.parseInt(str.substring(0, indexOf), 10)), Integer.valueOf(Integer.parseInt(str.substring(indexOf + 1), 10)));
+            int iIndexOf = str.indexOf(45);
+            if (iIndexOf >= 0) {
+                return Range.create(Integer.valueOf(Integer.parseInt(str.substring(0, iIndexOf), 10)), Integer.valueOf(Integer.parseInt(str.substring(iIndexOf + 1), 10)));
             }
-            int parseInt = Integer.parseInt(str);
-            return Range.create(Integer.valueOf(parseInt), Integer.valueOf(parseInt));
+            int i = Integer.parseInt(str);
+            return Range.create(Integer.valueOf(i), Integer.valueOf(i));
         } catch (ClassCastException | NumberFormatException | IllegalArgumentException unused) {
             Log.w(TAG, "could not parse integer range '" + obj + "'");
             return range;
         }
     }
 
-    static Range<Long> parseLongRange(Object obj, Range<Long> range) {
+    static Range<Long> parseLongRange(Object obj, Range<Long> range) throws NumberFormatException {
         if (obj == null) {
             return range;
         }
         try {
             String str = (String) obj;
-            int indexOf = str.indexOf(45);
-            if (indexOf >= 0) {
-                return Range.create(Long.valueOf(Long.parseLong(str.substring(0, indexOf), 10)), Long.valueOf(Long.parseLong(str.substring(indexOf + 1), 10)));
+            int iIndexOf = str.indexOf(45);
+            if (iIndexOf >= 0) {
+                return Range.create(Long.valueOf(Long.parseLong(str.substring(0, iIndexOf), 10)), Long.valueOf(Long.parseLong(str.substring(iIndexOf + 1), 10)));
             }
-            long parseLong = Long.parseLong(str);
-            return Range.create(Long.valueOf(parseLong), Long.valueOf(parseLong));
+            long j = Long.parseLong(str);
+            return Range.create(Long.valueOf(j), Long.valueOf(j));
         } catch (ClassCastException | NumberFormatException | IllegalArgumentException unused) {
             Log.w(TAG, "could not parse long range '" + obj + "'");
             return range;
@@ -213,12 +212,12 @@ public class Utils {
         }
         try {
             String str = (String) obj;
-            int indexOf = str.indexOf(45);
-            if (indexOf >= 0) {
-                return Range.create(Rational.parseRational(str.substring(0, indexOf)), Rational.parseRational(str.substring(indexOf + 1)));
+            int iIndexOf = str.indexOf(45);
+            if (iIndexOf >= 0) {
+                return Range.create(Rational.parseRational(str.substring(0, iIndexOf)), Rational.parseRational(str.substring(iIndexOf + 1)));
             }
-            Rational parseRational = Rational.parseRational(str);
-            return Range.create(parseRational, parseRational);
+            Rational rational = Rational.parseRational(str);
+            return Range.create(rational, rational);
         } catch (ClassCastException | NumberFormatException | IllegalArgumentException unused) {
             Log.w(TAG, "could not parse rational range '" + obj + "'");
             return range;
@@ -231,12 +230,12 @@ public class Utils {
         }
         try {
             String str = (String) obj;
-            int indexOf = str.indexOf(45);
-            if (indexOf >= 0) {
-                return Pair.create(Size.parseSize(str.substring(0, indexOf)), Size.parseSize(str.substring(indexOf + 1)));
+            int iIndexOf = str.indexOf(45);
+            if (iIndexOf >= 0) {
+                return Pair.create(Size.parseSize(str.substring(0, iIndexOf)), Size.parseSize(str.substring(iIndexOf + 1)));
             }
-            Size parseSize = Size.parseSize(str);
-            return Pair.create(parseSize, parseSize);
+            Size size = Size.parseSize(str);
+            return Pair.create(size, size);
         } catch (ClassCastException | NumberFormatException | IllegalArgumentException unused) {
             Log.w(TAG, "could not parse size range '" + obj + "'");
             return null;
@@ -262,22 +261,22 @@ public class Utils {
         }
         if ("content".equals(scheme)) {
             uri2 = uri;
-            Cursor query = context.getContentResolver().query(uri2, new String[]{"_display_name"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(uri2, new String[]{"_display_name"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        query.moveToFirst();
-                        String string = query.getString(query.getColumnIndex("_display_name"));
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.getCount() != 0) {
+                        cursorQuery.moveToFirst();
+                        String string = cursorQuery.getString(cursorQuery.getColumnIndex("_display_name"));
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return string;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
         } else {
             uri2 = uri;
@@ -339,7 +338,7 @@ public class Utils {
                 executor.execute(new Runnable() { // from class: android.media.Utils$ListenerList$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Utils.ListenerList.AnonymousClass1.this.lambda$onEvent$0(listener, i, v);
+                        this.f$0.lambda$onEvent$0(listener, i, v);
                     }
                 });
             }
@@ -391,14 +390,14 @@ public class Utils {
                     return;
                 }
                 Object[] array = this.mListeners.values().toArray();
-                Long valueOf = this.mClearCallingIdentity ? Long.valueOf(Binder.clearCallingIdentity()) : null;
+                Long lValueOf = this.mClearCallingIdentity ? Long.valueOf(Binder.clearCallingIdentity()) : null;
                 try {
                     for (Object obj : array) {
                         ((ListenerWithCancellation) obj).onEvent(i, v);
                     }
                 } finally {
-                    if (valueOf != null) {
-                        Binder.restoreCallingIdentity(valueOf.longValue());
+                    if (lValueOf != null) {
+                        Binder.restoreCallingIdentity(lValueOf.longValue());
                     }
                 }
             }

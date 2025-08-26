@@ -82,28 +82,28 @@ public class RippleModifierOperation extends DecoratorModifierOperation implemen
             return;
         }
         paintContext.needsRepaint();
-        float currentTimeMillis = (System.currentTimeMillis() - this.mAnimateRippleStart) / this.mAnimateRippleDuration;
-        if (currentTimeMillis > 1.0f) {
+        float fCurrentTimeMillis = (System.currentTimeMillis() - this.mAnimateRippleStart) / this.mAnimateRippleDuration;
+        if (fCurrentTimeMillis > 1.0f) {
             this.mAnimateRippleStart = 0L;
         }
-        float min = Math.min(1.0f, currentTimeMillis);
+        float fMin = Math.min(1.0f, fCurrentTimeMillis);
         paintContext.save();
         paintContext.savePaint();
         this.mPaint.reset();
         FloatAnimation floatAnimation = new FloatAnimation(1, 1.0f, null, Float.NaN, Float.NaN);
         floatAnimation.setInitialValue(0.0f);
         floatAnimation.setTargetValue(1.0f);
-        float f = floatAnimation.get(min);
+        float f = floatAnimation.get(fMin);
         FloatAnimation floatAnimation2 = new FloatAnimation(1, 0.5f, null, Float.NaN, Float.NaN);
         floatAnimation2.setInitialValue(0.0f);
         floatAnimation2.setTargetValue(1.0f);
-        float f2 = floatAnimation2.get(min);
-        int interpolateColor = Utils.interpolateColor(ColorUtils.createColor(250, 250, 250, 180), ColorUtils.createColor(200, 200, 200, 0), f);
-        float max = Math.max(this.mWidth, this.mHeight) * f2;
-        this.mPaint.setColor(interpolateColor);
+        float f2 = floatAnimation2.get(fMin);
+        int iInterpolateColor = Utils.interpolateColor(ColorUtils.createColor(250, 250, 250, 180), ColorUtils.createColor(200, 200, 200, 0), f);
+        float fMax = Math.max(this.mWidth, this.mHeight) * f2;
+        this.mPaint.setColor(iInterpolateColor);
         paintContext.replacePaint(this.mPaint);
         paintContext.clipRect(0.0f, 0.0f, this.mWidth, this.mHeight);
-        paintContext.drawCircle(this.mAnimateRippleX, this.mAnimateRippleY, max);
+        paintContext.drawCircle(this.mAnimateRippleX, this.mAnimateRippleY, fMax);
         paintContext.restorePaint();
         paintContext.restore();
     }

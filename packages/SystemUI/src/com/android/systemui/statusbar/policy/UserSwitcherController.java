@@ -4,7 +4,6 @@ import android.content.Context;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.settings.UserTracker;
-import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.user.data.model.UserSwitcherSettingsModel;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.user.domain.interactor.GuestUserInteractor;
@@ -16,7 +15,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitcherController {
     public static final Companion Companion = new Companion(null);
@@ -31,7 +29,6 @@ public final class UserSwitcherController {
     public final dagger.Lazy userSwitcherInteractorLazy;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +38,6 @@ public final class UserSwitcherController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface UserSwitchCallback {
         void onUserSwitched();
     }
@@ -119,7 +115,7 @@ public final class UserSwitcherController {
         UserSwitcherInteractor.UserCallback userCallback = new UserSwitcherInteractor.UserCallback() { // from class: com.android.systemui.statusbar.policy.UserSwitcherController$addUserSwitchCallback$interactorCallback$1
             @Override // com.android.systemui.user.domain.interactor.UserSwitcherInteractor.UserCallback
             public final void onUserStateChanged() {
-                UserSwitcherController.UserSwitchCallback.this.onUserSwitched();
+                userSwitchCallback.onUserSwitched();
             }
         };
         this.callbackCompatMap.put(userSwitchCallback, userCallback);

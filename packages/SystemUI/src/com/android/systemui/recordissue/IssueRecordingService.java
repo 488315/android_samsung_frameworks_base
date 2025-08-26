@@ -4,9 +4,14 @@ import android.app.IActivityManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.UserHandle;
+import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.animation.DialogTransitionAnimator;
 import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractor;
@@ -17,11 +22,13 @@ import com.android.systemui.screenrecord.RecordingService;
 import com.android.systemui.screenrecord.RecordingServiceStrings;
 import com.android.systemui.screenrecord.ScreenMediaRecorder;
 import com.android.systemui.settings.UserContextProvider;
+import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.phone.KeyguardDismissUtil;
+import com.android.traceur.PresetTraceConfigs;
+import com.android.traceur.TraceConfig;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class IssueRecordingService extends RecordingService {
     public static final Companion Companion = new Companion(null);
@@ -29,7 +36,6 @@ public final class IssueRecordingService extends RecordingService {
     public final IssueRecordingServiceSession session;
     public final TraceurConnection traceurConnection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,131 +87,85 @@ public final class IssueRecordingService extends RecordingService {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0027, code lost:
-    
-        if (r0.equals("com.android.systemui.screenrecord.STOP_FROM_NOTIF") == false) goto L35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0035, code lost:
-    
-        r0 = r5.session;
-        r0.bgExecutor.execute(new com.android.systemui.recordissue.IssueRecordingServiceSession$stop$1(r0));
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0031, code lost:
-    
-        if (r0.equals("com.android.systemui.screenrecord.STOP") == false) goto L35;
-     */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0035  */
     @Override // com.android.systemui.screenrecord.RecordingService, android.app.Service
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int onStartCommand(android.content.Intent r6, int r7, int r8) {
-        /*
-            r5 = this;
-            r0 = 0
-            if (r6 == 0) goto L8
-            java.lang.String r1 = r6.getAction()
-            goto L9
-        L8:
-            r1 = r0
-        L9:
-            java.lang.String r2 = "handling action: "
-            java.lang.String r3 = "IssueRecordingService"
-            android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(r2, r1, r3)
-            if (r6 == 0) goto L16
-            java.lang.String r0 = r6.getAction()
-        L16:
-            if (r0 == 0) goto Lbe
-            int r1 = r0.hashCode()
-            switch(r1) {
-                case -1688140755: goto L89;
-                case -1687783248: goto L43;
-                case -470086188: goto L2b;
-                case -288359034: goto L21;
-                default: goto L1f;
+    public final int onStartCommand(Intent intent, int i, int i2) {
+        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("handling action: ", intent != null ? intent.getAction() : null, "IssueRecordingService");
+        String action = intent != null ? intent.getAction() : null;
+        if (action != null) {
+            switch (action.hashCode()) {
+                case -1688140755:
+                    if (action.equals("com.android.systemui.screenrecord.SHARE")) {
+                        IssueRecordingServiceSession issueRecordingServiceSession = this.session;
+                        issueRecordingServiceSession.bgExecutor.execute(new IssueRecordingServiceSession$share$1(issueRecordingServiceSession, intent.getIntExtra("notification_id", this.mNotificationId), (Uri) intent.getParcelableExtra("extra_path", Uri.class)));
+                        issueRecordingServiceSession.dialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
+                        ((PanelInteractorImpl) issueRecordingServiceSession.panelInteractor).collapsePanels();
+                        return 1;
+                    }
+                    break;
+                case -1687783248:
+                    if (action.equals("com.android.systemui.screenrecord.START")) {
+                        boolean booleanExtra = intent.getBooleanExtra("extra_screenRecord", false);
+                        final IssueRecordingServiceSession issueRecordingServiceSession2 = this.session;
+                        TraceConfig defaultConfig = (TraceConfig) intent.getParcelableExtra("com.android.traceur.trace_type", TraceConfig.class);
+                        if (defaultConfig == null) {
+                            defaultConfig = PresetTraceConfigs.getDefaultConfig();
+                        }
+                        issueRecordingServiceSession2.traceConfig = defaultConfig;
+                        issueRecordingServiceSession2.takeBugReport = intent.getBooleanExtra("extra_bugReport", false);
+                        issueRecordingServiceSession2.screenRecord = booleanExtra;
+                        issueRecordingServiceSession2.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.recordissue.IssueRecordingServiceSession$start$1
+                            @Override // java.lang.Runnable
+                            public final void run() throws RemoteException {
+                                IssueRecordingServiceSession issueRecordingServiceSession3 = issueRecordingServiceSession2;
+                                TraceurConnection traceurConnection = issueRecordingServiceSession3.traceurConnection;
+                                TraceConfig traceConfig = issueRecordingServiceSession3.traceConfig;
+                                traceurConnection.getClass();
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("com.android.traceur.trace_type", traceConfig);
+                                TraceurConnection.sendMessage$default(traceurConnection, 0, bundle, null, 4);
+                                IssueRecordingState issueRecordingState = issueRecordingServiceSession2.issueRecordingState;
+                                issueRecordingState.globalSettings.putInt("issueRecordingOngoing", 1);
+                                issueRecordingState.isRecording = true;
+                            }
+                        });
+                        if (!booleanExtra) {
+                            return super.onStartCommand(new Intent("com.android.systemui.screenrecord.START_NOTIF"), i, i2);
+                        }
+                    }
+                    break;
+                case -470086188:
+                    if (action.equals("com.android.systemui.screenrecord.STOP")) {
+                        final IssueRecordingServiceSession issueRecordingServiceSession3 = this.session;
+                        issueRecordingServiceSession3.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.recordissue.IssueRecordingServiceSession$stop$1
+                            @Override // java.lang.Runnable
+                            public final void run() throws RemoteException {
+                                IssueRecordingServiceSession issueRecordingServiceSession4 = issueRecordingServiceSession3;
+                                if (issueRecordingServiceSession4.traceConfig.longTrace) {
+                                    Settings.Global.putInt(((UserTrackerImpl) issueRecordingServiceSession4.userContextProvider).getUserContext().getContentResolver(), "should_notify_trace_session_ended", 0);
+                                }
+                                TraceurConnection traceurConnection = issueRecordingServiceSession3.traceurConnection;
+                                traceurConnection.getClass();
+                                TraceurConnection.sendMessage$default(traceurConnection, 1, null, null, 6);
+                                IssueRecordingState issueRecordingState = issueRecordingServiceSession3.issueRecordingState;
+                                issueRecordingState.globalSettings.putInt("issueRecordingOngoing", 0);
+                                issueRecordingState.isRecording = false;
+                            }
+                        });
+                        break;
+                    }
+                    break;
+                case -288359034:
+                    if (action.equals("com.android.systemui.screenrecord.STOP_FROM_NOTIF")) {
+                    }
+                    break;
             }
-        L1f:
-            goto Lbe
-        L21:
-            java.lang.String r1 = "com.android.systemui.screenrecord.STOP_FROM_NOTIF"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L35
-            goto Lbe
-        L2b:
-            java.lang.String r1 = "com.android.systemui.screenrecord.STOP"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L35
-            goto Lbe
-        L35:
-            com.android.systemui.recordissue.IssueRecordingServiceSession r0 = r5.session
-            java.util.concurrent.Executor r1 = r0.bgExecutor
-            com.android.systemui.recordissue.IssueRecordingServiceSession$stop$1 r2 = new com.android.systemui.recordissue.IssueRecordingServiceSession$stop$1
-            r2.<init>()
-            r1.execute(r2)
-            goto Lbe
-        L43:
-            java.lang.String r1 = "com.android.systemui.screenrecord.START"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L4c
-            goto Lbe
-        L4c:
-            java.lang.String r0 = "extra_screenRecord"
-            r1 = 0
-            boolean r0 = r6.getBooleanExtra(r0, r1)
-            com.android.systemui.recordissue.IssueRecordingServiceSession r2 = r5.session
-            java.lang.String r3 = "com.android.traceur.trace_type"
-            java.lang.Class<com.android.traceur.TraceConfig> r4 = com.android.traceur.TraceConfig.class
-            java.lang.Object r3 = r6.getParcelableExtra(r3, r4)
-            com.android.traceur.TraceConfig r3 = (com.android.traceur.TraceConfig) r3
-            if (r3 != 0) goto L65
-            com.android.traceur.TraceConfig r3 = com.android.traceur.PresetTraceConfigs.getDefaultConfig()
-        L65:
-            r2.traceConfig = r3
-            java.lang.String r3 = "extra_bugReport"
-            boolean r1 = r6.getBooleanExtra(r3, r1)
-            r2.takeBugReport = r1
-            r2.screenRecord = r0
-            java.util.concurrent.Executor r1 = r2.bgExecutor
-            com.android.systemui.recordissue.IssueRecordingServiceSession$start$1 r3 = new com.android.systemui.recordissue.IssueRecordingServiceSession$start$1
-            r3.<init>()
-            r1.execute(r3)
-            if (r0 != 0) goto Lbe
-            android.content.Intent r6 = new android.content.Intent
-            java.lang.String r0 = "com.android.systemui.screenrecord.START_NOTIF"
-            r6.<init>(r0)
-            int r5 = super.onStartCommand(r6, r7, r8)
-            return r5
-        L89:
-            java.lang.String r1 = "com.android.systemui.screenrecord.SHARE"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L92
-            goto Lbe
-        L92:
-            com.android.systemui.recordissue.IssueRecordingServiceSession r7 = r5.session
-            java.lang.String r8 = "notification_id"
-            int r5 = r5.mNotificationId
-            int r5 = r6.getIntExtra(r8, r5)
-            java.lang.String r8 = "extra_path"
-            java.lang.Class<android.net.Uri> r0 = android.net.Uri.class
-            java.lang.Object r6 = r6.getParcelableExtra(r8, r0)
-            android.net.Uri r6 = (android.net.Uri) r6
-            java.util.concurrent.Executor r8 = r7.bgExecutor
-            com.android.systemui.recordissue.IssueRecordingServiceSession$share$1 r0 = new com.android.systemui.recordissue.IssueRecordingServiceSession$share$1
-            r0.<init>(r7, r5, r6)
-            r8.execute(r0)
-            com.android.systemui.animation.DialogTransitionAnimator r5 = r7.dialogTransitionAnimator
-            r5.disableAllCurrentDialogsExitAnimations()
-            com.android.systemui.qs.pipeline.domain.interactor.PanelInteractor r5 = r7.panelInteractor
-            com.android.systemui.qs.pipeline.domain.interactor.PanelInteractorImpl r5 = (com.android.systemui.qs.pipeline.domain.interactor.PanelInteractorImpl) r5
-            r5.collapsePanels()
-            r5 = 1
-            return r5
-        Lbe:
-            int r5 = super.onStartCommand(r6, r7, r8)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.recordissue.IssueRecordingService.onStartCommand(android.content.Intent, int, int):int");
+        }
+        return super.onStartCommand(intent, i, i2);
     }
 
     @Override // android.app.Service

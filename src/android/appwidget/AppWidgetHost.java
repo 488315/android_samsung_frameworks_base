@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 import com.android.internal.appwidget.IAppWidgetHost;
 import com.android.internal.appwidget.IAppWidgetService;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -60,7 +62,7 @@ public class AppWidgetHost {
         @Override // com.android.internal.appwidget.IAppWidgetHost
         public void updateAppWidget(int i, RemoteViews remoteViews) {
             if (isLocalBinder() && remoteViews != null) {
-                remoteViews = remoteViews.mo465clone();
+                remoteViews = remoteViews.mo469clone();
             }
             Handler handler = this.mWeakHandler.get();
             if (handler == null) {
@@ -73,7 +75,7 @@ public class AppWidgetHost {
         @Override // com.android.internal.appwidget.IAppWidgetHost
         public void providerChanged(int i, AppWidgetProviderInfo appWidgetProviderInfo) {
             if (isLocalBinder() && appWidgetProviderInfo != null) {
-                appWidgetProviderInfo = appWidgetProviderInfo.m865clone();
+                appWidgetProviderInfo = appWidgetProviderInfo.m869clone();
             }
             Handler handler = this.mWeakHandler.get();
             if (handler == null) {
@@ -253,9 +255,9 @@ public class AppWidgetHost {
             return null;
         }
         try {
-            IntentSender createAppWidgetConfigIntentSender = iAppWidgetService.createAppWidgetConfigIntentSender(this.mContextOpPackageName, i, i2);
-            if (createAppWidgetConfigIntentSender != null) {
-                return createAppWidgetConfigIntentSender;
+            IntentSender intentSenderCreateAppWidgetConfigIntentSender = iAppWidgetService.createAppWidgetConfigIntentSender(this.mContextOpPackageName, i, i2);
+            if (intentSenderCreateAppWidgetConfigIntentSender != null) {
+                return intentSenderCreateAppWidgetConfigIntentSender;
             }
             throw new ActivityNotFoundException();
         } catch (RemoteException e) {
@@ -263,7 +265,7 @@ public class AppWidgetHost {
         }
     }
 
-    public final void startAppWidgetConfigureActivityForResult(Activity activity, int i, int i2, int i3, Bundle bundle) {
+    public final void startAppWidgetConfigureActivityForResult(Activity activity, int i, int i2, int i3, Bundle bundle) throws IOException {
         if (sService == null) {
             return;
         }
@@ -286,15 +288,15 @@ public class AppWidgetHost {
         }
     }
 
-    public final void semStartAppWidgetConfigureActivityForResult(Activity activity, int i, int i2, int i3, Bundle bundle) {
+    public final void semStartAppWidgetConfigureActivityForResult(Activity activity, int i, int i2, int i3, Bundle bundle) throws IOException {
         IAppWidgetService iAppWidgetService = sService;
         if (iAppWidgetService == null) {
             return;
         }
         try {
-            IntentSender semCreateAppWidgetConfigIntentSender = iAppWidgetService.semCreateAppWidgetConfigIntentSender(this.mContextOpPackageName, i, i2);
-            if (semCreateAppWidgetConfigIntentSender != null) {
-                activity.startIntentSenderForResult(semCreateAppWidgetConfigIntentSender, i3, (Intent) null, 0, 0, 0, bundle);
+            IntentSender intentSenderSemCreateAppWidgetConfigIntentSender = iAppWidgetService.semCreateAppWidgetConfigIntentSender(this.mContextOpPackageName, i, i2);
+            if (intentSenderSemCreateAppWidgetConfigIntentSender != null) {
+                activity.startIntentSenderForResult(intentSenderSemCreateAppWidgetConfigIntentSender, i3, (Intent) null, 0, 0, 0, bundle);
                 return;
             }
             throw new ActivityNotFoundException();
@@ -394,15 +396,15 @@ public class AppWidgetHost {
         }
     }
 
-    public final AppWidgetHostView createView(Context context, int i, AppWidgetProviderInfo appWidgetProviderInfo) {
+    public final AppWidgetHostView createView(Context context, int i, AppWidgetProviderInfo appWidgetProviderInfo) throws Resources.NotFoundException {
         if (sService == null) {
             return null;
         }
-        AppWidgetHostView onCreateView = onCreateView(context, i, appWidgetProviderInfo);
-        onCreateView.setInteractionHandler(this.mInteractionHandler);
-        onCreateView.setAppWidget(i, appWidgetProviderInfo);
-        setListener(i, onCreateView);
-        return onCreateView;
+        AppWidgetHostView appWidgetHostViewOnCreateView = onCreateView(context, i, appWidgetProviderInfo);
+        appWidgetHostViewOnCreateView.setInteractionHandler(this.mInteractionHandler);
+        appWidgetHostViewOnCreateView.setAppWidget(i, appWidgetProviderInfo);
+        setListener(i, appWidgetHostViewOnCreateView);
+        return appWidgetHostViewOnCreateView;
     }
 
     protected AppWidgetHostView onCreateView(Context context, int i, AppWidgetProviderInfo appWidgetProviderInfo) {
@@ -425,14 +427,14 @@ public class AppWidgetHost {
         void updateAppWidget(RemoteViews remoteViews);
 
         default void updateAppWidgetDeferred(String str, int i) {
-            RemoteViews remoteViews;
+            RemoteViews appWidgetViews;
             try {
-                remoteViews = AppWidgetHost.sService.getAppWidgetViews(str, i);
+                appWidgetViews = AppWidgetHost.sService.getAppWidgetViews(str, i);
             } catch (Exception e) {
                 Log.e(AppWidgetHost.TAG, "updateAppWidgetDeferred: ", e);
-                remoteViews = null;
+                appWidgetViews = null;
             }
-            updateAppWidget(remoteViews);
+            updateAppWidget(appWidgetViews);
         }
     }
 

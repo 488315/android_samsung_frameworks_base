@@ -22,12 +22,12 @@ public class AppGlobals {
     }
 
     public static int getIntCoreSetting(String str, int i) {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        return currentActivityThread != null ? currentActivityThread.getIntCoreSetting(str, i) : i;
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        return activityThreadCurrentActivityThread != null ? activityThreadCurrentActivityThread.getIntCoreSetting(str, i) : i;
     }
 
     public static float getFloatCoreSetting(String str, float f) {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        return currentActivityThread != null ? currentActivityThread.getFloatCoreSetting(str, f) : f;
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        return activityThreadCurrentActivityThread != null ? activityThreadCurrentActivityThread.getFloatCoreSetting(str, f) : f;
     }
 }

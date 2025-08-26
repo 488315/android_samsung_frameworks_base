@@ -96,10 +96,10 @@ public class HandlerCaller {
     }
 
     public Message obtainMessageBOO(int i, boolean z, Object obj, Object obj2) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        return this.mH.obtainMessage(i, z ? 1 : 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        return this.mH.obtainMessage(i, z ? 1 : 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageO(int i, Object obj) {
@@ -123,116 +123,116 @@ public class HandlerCaller {
     }
 
     public Message obtainMessageIIOO(int i, int i2, int i3, Object obj, Object obj2) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        return this.mH.obtainMessage(i, i2, i3, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        return this.mH.obtainMessage(i, i2, i3, someArgsObtain);
     }
 
     public Message obtainMessageIOO(int i, int i2, Object obj, Object obj2) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        return this.mH.obtainMessage(i, i2, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        return this.mH.obtainMessage(i, i2, 0, someArgsObtain);
     }
 
     public Message obtainMessageIOOO(int i, int i2, Object obj, Object obj2, Object obj3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        return this.mH.obtainMessage(i, i2, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        return this.mH.obtainMessage(i, i2, 0, someArgsObtain);
     }
 
     public Message obtainMessageIIOOO(int i, int i2, int i3, Object obj, Object obj2, Object obj3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        return this.mH.obtainMessage(i, i2, i3, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        return this.mH.obtainMessage(i, i2, i3, someArgsObtain);
     }
 
     public Message obtainMessageIIOOOO(int i, int i2, int i3, Object obj, Object obj2, Object obj3, Object obj4) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        obtain.arg4 = obj4;
-        return this.mH.obtainMessage(i, i2, i3, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        someArgsObtain.arg4 = obj4;
+        return this.mH.obtainMessage(i, i2, i3, someArgsObtain);
     }
 
     public Message obtainMessageOO(int i, Object obj, Object obj2) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageOOO(int i, Object obj, Object obj2, Object obj3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageOOOO(int i, Object obj, Object obj2, Object obj3, Object obj4) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        obtain.arg4 = obj4;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        someArgsObtain.arg4 = obj4;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageOOOOO(int i, Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        obtain.arg4 = obj4;
-        obtain.arg5 = obj5;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        someArgsObtain.arg4 = obj4;
+        someArgsObtain.arg5 = obj5;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageOOOOII(int i, Object obj, Object obj2, Object obj3, Object obj4, int i2, int i3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.arg2 = obj2;
-        obtain.arg3 = obj3;
-        obtain.arg4 = obj4;
-        obtain.argi5 = i2;
-        obtain.argi6 = i3;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.arg2 = obj2;
+        someArgsObtain.arg3 = obj3;
+        someArgsObtain.arg4 = obj4;
+        someArgsObtain.argi5 = i2;
+        someArgsObtain.argi6 = i3;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageIIII(int i, int i2, int i3, int i4, int i5) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.argi1 = i2;
-        obtain.argi2 = i3;
-        obtain.argi3 = i4;
-        obtain.argi4 = i5;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.argi1 = i2;
+        someArgsObtain.argi2 = i3;
+        someArgsObtain.argi3 = i4;
+        someArgsObtain.argi4 = i5;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageIIIIII(int i, int i2, int i3, int i4, int i5, int i6, int i7) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.argi1 = i2;
-        obtain.argi2 = i3;
-        obtain.argi3 = i4;
-        obtain.argi4 = i5;
-        obtain.argi5 = i6;
-        obtain.argi6 = i7;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.argi1 = i2;
+        someArgsObtain.argi2 = i3;
+        someArgsObtain.argi3 = i4;
+        someArgsObtain.argi4 = i5;
+        someArgsObtain.argi5 = i6;
+        someArgsObtain.argi6 = i7;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 
     public Message obtainMessageIIIIO(int i, int i2, int i3, int i4, int i5, Object obj) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = obj;
-        obtain.argi1 = i2;
-        obtain.argi2 = i3;
-        obtain.argi3 = i4;
-        obtain.argi4 = i5;
-        return this.mH.obtainMessage(i, 0, 0, obtain);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = obj;
+        someArgsObtain.argi1 = i2;
+        someArgsObtain.argi2 = i3;
+        someArgsObtain.argi3 = i4;
+        someArgsObtain.argi4 = i5;
+        return this.mH.obtainMessage(i, 0, 0, someArgsObtain);
     }
 }

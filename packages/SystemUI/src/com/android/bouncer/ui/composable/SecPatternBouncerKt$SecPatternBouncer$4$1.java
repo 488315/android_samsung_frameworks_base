@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecPatternBouncerKt$SecPatternBouncer$4$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Boolean> $animateFailure$delegate;
@@ -58,19 +57,19 @@ final class SecPatternBouncerKt$SecPatternBouncer$4$1 extends SuspendLambda impl
                 List<PatternDotViewModel> list = (List) this.$dots$delegate.getValue();
                 Map<PatternDotViewModel, Animatable<Float, AnimationVector1D>> map = this.$dotScalingAnimatables;
                 this.label = 1;
-                ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
                 for (PatternDotViewModel patternDotViewModel : list) {
                     int i2 = patternDotViewModel.y;
-                    while (createListBuilder.getSize() <= i2) {
-                        createListBuilder.add(new ArrayList());
+                    while (listBuilderCreateListBuilder.getSize() <= i2) {
+                        listBuilderCreateListBuilder.add(new ArrayList());
                     }
-                    ((List) createListBuilder.get(i2)).add(patternDotViewModel);
+                    ((List) listBuilderCreateListBuilder.get(i2)).add(patternDotViewModel);
                 }
-                Object coroutineScope = CoroutineScopeKt.coroutineScope(new SecPatternBouncerKt$showFailureAnimation$2(createListBuilder.build(), map, null), this);
-                if (coroutineScope != CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    coroutineScope = Unit.INSTANCE;
+                Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new SecPatternBouncerKt$showFailureAnimation$2(listBuilderCreateListBuilder.build(), map, null), this);
+                if (objCoroutineScope != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    objCoroutineScope = Unit.INSTANCE;
                 }
-                if (coroutineScope == obj2) {
+                if (objCoroutineScope == obj2) {
                     return obj2;
                 }
             }

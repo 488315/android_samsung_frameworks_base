@@ -18,13 +18,13 @@ public class PinnerServiceClient {
             Slog.w(TAG, "Failed to retrieve PinnerService. A common failure reason is due to a lack of selinux permissions.");
             return new ArrayList();
         }
-        IPinnerService asInterface = IPinnerService.Stub.asInterface(service);
-        if (asInterface == null) {
+        IPinnerService iPinnerServiceAsInterface = IPinnerService.Stub.asInterface(service);
+        if (iPinnerServiceAsInterface == null) {
             Slog.w(TAG, "Failed to cast PinnerService.");
             return new ArrayList();
         }
         try {
-            return asInterface.getPinnerStats();
+            return iPinnerServiceAsInterface.getPinnerStats();
         } catch (RemoteException unused) {
             throw new RuntimeException("Failed to retrieve stats from PinnerService");
         }

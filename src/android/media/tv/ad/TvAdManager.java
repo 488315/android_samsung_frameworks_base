@@ -472,9 +472,9 @@ public final class TvAdManager {
             this.mHandler.removeMessages(3);
             int size = this.mPendingEvents.size();
             for (int i = 0; i < size; i++) {
-                Message obtainMessage = this.mHandler.obtainMessage(3, this.mPendingEvents.keyAt(i), 0);
-                obtainMessage.setAsynchronous(true);
-                obtainMessage.sendToTarget();
+                Message messageObtainMessage = this.mHandler.obtainMessage(3, this.mPendingEvents.keyAt(i), 0);
+                messageObtainMessage.setAsynchronous(true);
+                messageObtainMessage.sendToTarget();
             }
         }
 
@@ -648,27 +648,27 @@ public final class TvAdManager {
                 if (this.mInputChannel == null) {
                     return 0;
                 }
-                PendingEvent obtainPendingEventLocked = obtainPendingEventLocked(inputEvent, obj, finishedInputEventCallback, handler);
+                PendingEvent pendingEventObtainPendingEventLocked = obtainPendingEventLocked(inputEvent, obj, finishedInputEventCallback, handler);
                 if (Looper.myLooper() == Looper.getMainLooper()) {
-                    return sendInputEventOnMainLooperLocked(obtainPendingEventLocked);
+                    return sendInputEventOnMainLooperLocked(pendingEventObtainPendingEventLocked);
                 }
-                Message obtainMessage = this.mHandler.obtainMessage(1, obtainPendingEventLocked);
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessage(obtainMessage);
+                Message messageObtainMessage = this.mHandler.obtainMessage(1, pendingEventObtainPendingEventLocked);
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessage(messageObtainMessage);
                 return -1;
             }
         }
 
         private PendingEvent obtainPendingEventLocked(InputEvent inputEvent, Object obj, FinishedInputEventCallback finishedInputEventCallback, Handler handler) {
-            PendingEvent acquire = this.mPendingEventPool.acquire();
-            if (acquire == null) {
-                acquire = new PendingEvent();
+            PendingEvent pendingEventAcquire = this.mPendingEventPool.acquire();
+            if (pendingEventAcquire == null) {
+                pendingEventAcquire = new PendingEvent();
             }
-            acquire.mEvent = inputEvent;
-            acquire.mEventToken = obj;
-            acquire.mCallback = finishedInputEventCallback;
-            acquire.mEventHandler = handler;
-            return acquire;
+            pendingEventAcquire.mEvent = inputEvent;
+            pendingEventAcquire.mEventToken = obj;
+            pendingEventAcquire.mCallback = finishedInputEventCallback;
+            pendingEventAcquire.mEventHandler = handler;
+            return pendingEventAcquire;
         }
 
         private final class InputEventHandler extends Handler {
@@ -702,9 +702,9 @@ public final class TvAdManager {
                 pendingEvent.run();
                 return;
             }
-            Message obtain = Message.obtain(pendingEvent.mEventHandler, pendingEvent);
-            obtain.setAsynchronous(true);
-            obtain.sendToTarget();
+            Message messageObtain = Message.obtain(pendingEvent.mEventHandler, pendingEvent);
+            messageObtain.setAsynchronous(true);
+            messageObtain.sendToTarget();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -728,9 +728,9 @@ public final class TvAdManager {
             int sequenceNumber = inputEvent.getSequenceNumber();
             if (this.mSender.sendInputEvent(sequenceNumber, inputEvent)) {
                 this.mPendingEvents.put(sequenceNumber, pendingEvent);
-                Message obtainMessage = this.mHandler.obtainMessage(2, pendingEvent);
-                obtainMessage.setAsynchronous(true);
-                this.mHandler.sendMessageDelayed(obtainMessage, INPUT_SESSION_NOT_RESPONDING_TIMEOUT);
+                Message messageObtainMessage = this.mHandler.obtainMessage(2, pendingEvent);
+                messageObtainMessage.setAsynchronous(true);
+                this.mHandler.sendMessageDelayed(messageObtainMessage, INPUT_SESSION_NOT_RESPONDING_TIMEOUT);
                 return -1;
             }
             Log.w(TvAdManager.TAG, "Unable to send input event to session: " + this.mToken + " dropping:" + inputEvent);
@@ -739,18 +739,18 @@ public final class TvAdManager {
 
         void finishedInputEvent(int i, boolean z, boolean z2) {
             synchronized (this.mHandler) {
-                int indexOfKey = this.mPendingEvents.indexOfKey(i);
-                if (indexOfKey < 0) {
+                int iIndexOfKey = this.mPendingEvents.indexOfKey(i);
+                if (iIndexOfKey < 0) {
                     return;
                 }
-                PendingEvent valueAt = this.mPendingEvents.valueAt(indexOfKey);
-                this.mPendingEvents.removeAt(indexOfKey);
+                PendingEvent pendingEventValueAt = this.mPendingEvents.valueAt(iIndexOfKey);
+                this.mPendingEvents.removeAt(iIndexOfKey);
                 if (z2) {
                     Log.w(TvAdManager.TAG, "Timeout waiting for session to handle input event after 2500 ms: " + this.mToken);
                 } else {
-                    this.mHandler.removeMessages(2, valueAt);
+                    this.mHandler.removeMessages(2, pendingEventValueAt);
                 }
-                invokeFinishedInputEventCallback(valueAt, z);
+                invokeFinishedInputEventCallback(pendingEventValueAt, z);
             }
         }
 

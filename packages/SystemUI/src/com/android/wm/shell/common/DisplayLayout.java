@@ -1,11 +1,15 @@
 package com.android.wm.shell.common;
 
 import android.R;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.SystemProperties;
+import android.provider.Settings;
+import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.DisplayInfo;
 import android.view.InsetsState;
@@ -15,9 +19,9 @@ import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.rune.CoreRune;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayLayout {
+    public int mCaptionInsets;
     public DisplayCutout mCutout;
     public int mDensityDpi;
     public RectF mGlobalBoundsDp;
@@ -74,6 +78,13 @@ public class DisplayLayout {
         rect.inset(stableInsets(z));
     }
 
+    public final void getStableBoundsByInsetsVisibility(Rect rect) {
+        InsetsState insetsState = this.mInsetsState;
+        Insets insetsCalculateInsets = insetsState.calculateInsets(insetsState.getDisplayFrame(), WindowInsets.Type.navigationBars() | WindowInsets.Type.statusBars(), true);
+        rect.set(0, 0, this.mWidth, this.mHeight);
+        rect.inset(insetsCalculateInsets);
+    }
+
     public final PointF globalDpToLocalPx(Number number, Number number2) {
         return new PointF(((number.floatValue() - this.mGlobalBoundsDp.left) * this.mDensityDpi) / 160.0f, ((number2.floatValue() - this.mGlobalBoundsDp.top) * this.mDensityDpi) / 160.0f);
     }
@@ -82,7 +93,7 @@ public class DisplayLayout {
         return Objects.hash(Integer.valueOf(this.mUiMode), Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), this.mGlobalBoundsDp, this.mCutout, Integer.valueOf(this.mRotation), Integer.valueOf(this.mDensityDpi), this.mNonDecorInsets, this.mStableInsets, Boolean.valueOf(this.mHasNavigationBar), Boolean.valueOf(this.mHasStatusBar), Integer.valueOf(this.mNavBarFrameHeight), Integer.valueOf(this.mTaskbarFrameHeight), Boolean.valueOf(this.mAllowSeamlessRotationDespiteNavBarMoving), Boolean.valueOf(this.mNavigationBarCanMove), Boolean.valueOf(this.mReverseDefaultRotation), this.mInsetsState);
     }
 
-    public final void init(DisplayInfo displayInfo, Resources resources, boolean z, boolean z2) {
+    public final void init(DisplayInfo displayInfo, Resources resources, boolean z, boolean z2) throws Resources.NotFoundException {
         this.mUiMode = resources.getConfiguration().uiMode;
         this.mWidth = displayInfo.logicalWidth;
         this.mHeight = displayInfo.logicalHeight;
@@ -110,7 +121,7 @@ public class DisplayLayout {
         return (number.floatValue() * 160.0f) / this.mDensityDpi;
     }
 
-    public void recalcInsets(Resources resources) {
+    public void recalcInsets(Resources resources) throws Resources.NotFoundException {
         int statusBarHeight;
         int dimensionPixelSize;
         int i = this.mRotation;
@@ -123,26 +134,26 @@ public class DisplayLayout {
         boolean z = this.mHasNavigationBar;
         rect.setEmpty();
         if (z) {
-            Insets calculateInsets = insetsState.calculateInsets(insetsState.getDisplayFrame(), WindowInsets.Type.navigationBars(), false);
-            int navigationBarPosition = navigationBarPosition(resources, i2, i3, i);
+            Insets insetsCalculateInsets = insetsState.calculateInsets(insetsState.getDisplayFrame(), WindowInsets.Type.navigationBars(), false);
+            int iNavigationBarPosition = navigationBarPosition(resources, i2, i3, i);
             boolean z2 = i2 > i3;
             if ((i4 & 15) == 3) {
-                if (navigationBarPosition == 4) {
-                    dimensionPixelSize = resources.getDimensionPixelSize(z2 ? R.dimen.slice_icon_size : R.dimen.select_dialog_drawable_padding_start_material);
+                if (iNavigationBarPosition == 4) {
+                    dimensionPixelSize = resources.getDimensionPixelSize(z2 ? R.dimen.slice_padding : R.dimen.select_dialog_padding_start_material);
                 } else {
-                    dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.snooze_and_bubble_gone_padding_end);
+                    dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.spot_shadow_alpha);
                 }
-            } else if (navigationBarPosition == 4) {
-                dimensionPixelSize = resources.getDimensionPixelSize(z2 ? R.dimen.select_dialog_padding_start_material : R.dimen.seekbar_track_progress_height_material);
+            } else if (iNavigationBarPosition == 4) {
+                dimensionPixelSize = resources.getDimensionPixelSize(z2 ? R.dimen.slice_icon_size : R.dimen.select_dialog_drawable_padding_start_material);
             } else {
-                dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.slice_shortcut_size);
+                dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.snooze_and_bubble_gone_padding_end);
             }
-            if (navigationBarPosition == 4) {
-                rect.bottom = Math.max(calculateInsets.bottom, dimensionPixelSize);
-            } else if (navigationBarPosition == 2) {
-                rect.right = Math.max(calculateInsets.right, dimensionPixelSize);
-            } else if (navigationBarPosition == 1) {
-                rect.left = Math.max(calculateInsets.left, dimensionPixelSize);
+            if (iNavigationBarPosition == 4) {
+                rect.bottom = Math.max(insetsCalculateInsets.bottom, dimensionPixelSize);
+            } else if (iNavigationBarPosition == 2) {
+                rect.right = Math.max(insetsCalculateInsets.right, dimensionPixelSize);
+            } else if (iNavigationBarPosition == 1) {
+                rect.left = Math.max(insetsCalculateInsets.left, dimensionPixelSize);
             }
         } else {
             rect.set(insetsState.calculateInsets(insetsState.getDisplayFrame(), WindowInsets.Type.navigationBars(), false).toRect());
@@ -162,35 +173,35 @@ public class DisplayLayout {
                 if (!CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY) {
                     statusBarHeight = SystemBarUtils.getStatusBarHeight(resources, displayCutout2);
                 } else if (isLandscape()) {
-                    statusBarHeight = resources.getDimensionPixelSize(17106380);
+                    statusBarHeight = resources.getDimensionPixelSize(17106381);
                 } else {
-                    statusBarHeight = Math.max(displayCutout2 == null ? 0 : displayCutout2.getSafeInsetTop(), resources.getDimensionPixelSize(17106381));
+                    statusBarHeight = Math.max(displayCutout2 == null ? 0 : displayCutout2.getSafeInsetTop(), resources.getDimensionPixelSize(17106382));
                 }
                 rect2.top = Math.max(rect2.top, statusBarHeight);
             }
         }
-        this.mNavBarFrameHeight = resources.getDimensionPixelSize(this.mWidth > this.mHeight ? R.dimen.secondary_waterfall_display_right_edge_size : R.dimen.secondary_waterfall_display_left_edge_size);
+        this.mNavBarFrameHeight = resources.getDimensionPixelSize(this.mWidth > this.mHeight ? R.dimen.secondary_waterfall_display_top_edge_size : R.dimen.secondary_waterfall_display_right_edge_size);
         this.mTaskbarFrameHeight = SystemBarUtils.getTaskbarHeight(resources);
         this.mImmersiveStableInsets.setEmpty();
         Rect rect3 = this.mNaviStarStableInsets;
         Rect rect4 = this.mStableInsets;
         rect3.set(rect4.left, rect4.top, rect4.right, 0);
-        if (!CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY_IGNORING_CUTOUT || this.mCutout == null) {
-            return;
+        if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY_IGNORING_CUTOUT && this.mCutout != null) {
+            this.mStableInsetsIgnoringCutout.set(this.mStableInsets);
+            if (this.mCutout.getSafeInsetLeft() > 0) {
+                this.mStableInsetsIgnoringCutout.left -= this.mCutout.getSafeInsetLeft();
+            }
+            if (this.mCutout.getSafeInsetRight() > 0) {
+                this.mStableInsetsIgnoringCutout.right -= this.mCutout.getSafeInsetRight();
+            }
+            if (this.mHasNavigationBar && navigationBarPosition(resources, this.mWidth, this.mHeight, this.mRotation) == 4 && this.mCutout.getSafeInsetBottom() > 0) {
+                this.mStableInsetsIgnoringCutout.bottom -= this.mCutout.getSafeInsetBottom();
+            }
         }
-        this.mStableInsetsIgnoringCutout.set(this.mStableInsets);
-        if (this.mCutout.getSafeInsetLeft() > 0) {
-            this.mStableInsetsIgnoringCutout.left -= this.mCutout.getSafeInsetLeft();
-        }
-        if (this.mCutout.getSafeInsetRight() > 0) {
-            this.mStableInsetsIgnoringCutout.right -= this.mCutout.getSafeInsetRight();
-        }
-        if (this.mHasNavigationBar && navigationBarPosition(resources, this.mWidth, this.mHeight, this.mRotation) == 4 && this.mCutout.getSafeInsetBottom() > 0) {
-            this.mStableInsetsIgnoringCutout.bottom -= this.mCutout.getSafeInsetBottom();
-        }
+        this.mCaptionInsets = resources.getDimensionPixelSize(SystemBarUtils.getDesktopViewAppHeaderHeightId());
     }
 
-    public final void rotateTo(Resources resources, int i) {
+    public final void rotateTo(Resources resources, int i) throws Resources.NotFoundException {
         int i2 = this.mWidth;
         int i3 = this.mHeight;
         int i4 = this.mRotation;
@@ -271,113 +282,37 @@ public class DisplayLayout {
         return sb.toString();
     }
 
-    public DisplayLayout(DisplayInfo displayInfo, Resources resources, boolean z, boolean z2) {
+    public DisplayLayout(DisplayInfo displayInfo, Resources resources, boolean z, boolean z2) throws Resources.NotFoundException {
         new Rect();
         init(displayInfo, resources, z, z2);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x00a0, code lost:
-    
-        if (r4 != false) goto L6;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x006d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public DisplayLayout(android.content.Context r7, android.view.Display r8) {
-        /*
-            r6 = this;
-            r6.<init>()
-            android.graphics.Rect r0 = new android.graphics.Rect
-            r0.<init>()
-            r6.mNonDecorInsets = r0
-            android.graphics.Rect r0 = new android.graphics.Rect
-            r0.<init>()
-            r6.mStableInsets = r0
-            r0 = 0
-            r6.mHasNavigationBar = r0
-            r6.mHasStatusBar = r0
-            r6.mNavBarFrameHeight = r0
-            r6.mTaskbarFrameHeight = r0
-            r6.mAllowSeamlessRotationDespiteNavBarMoving = r0
-            r6.mNavigationBarCanMove = r0
-            r6.mReverseDefaultRotation = r0
-            android.view.InsetsState r1 = new android.view.InsetsState
-            r1.<init>()
-            r6.mInsetsState = r1
-            android.graphics.Rect r1 = new android.graphics.Rect
-            r1.<init>()
-            r6.mStableInsetsIgnoringCutout = r1
-            android.graphics.Rect r1 = new android.graphics.Rect
-            r1.<init>()
-            r6.mImmersiveStableInsets = r1
-            android.graphics.Rect r1 = new android.graphics.Rect
-            r1.<init>()
-            r6.mNaviStarStableInsets = r1
-            android.graphics.Rect r1 = new android.graphics.Rect
-            r1.<init>()
-            int r1 = r8.getDisplayId()
-            android.view.DisplayInfo r2 = new android.view.DisplayInfo
-            r2.<init>()
-            r8.getDisplayInfo(r2)
-            android.content.res.Resources r8 = r7.getResources()
-            r3 = 1
-            if (r1 != 0) goto L7b
-            java.lang.String r4 = "qemu.hw.mainkeys"
-            java.lang.String r4 = android.os.SystemProperties.get(r4)
-            java.lang.String r5 = "1"
-            boolean r5 = r5.equals(r4)
-            if (r5 == 0) goto L65
-        L63:
-            r7 = r0
-            goto La3
-        L65:
-            java.lang.String r5 = "0"
-            boolean r4 = r5.equals(r4)
-            if (r4 == 0) goto L6f
-        L6d:
-            r7 = r3
-            goto La3
-        L6f:
-            android.content.res.Resources r7 = r7.getResources()
-            r4 = 17891914(0x111024a, float:2.6633936E-38)
-            boolean r7 = r7.getBoolean(r4)
-            goto La3
-        L7b:
-            int r4 = r2.type
-            r5 = 5
-            if (r4 != r5) goto L88
-            int r4 = r2.ownerUid
-            r5 = 1000(0x3e8, float:1.401E-42)
-            if (r4 == r5) goto L88
-            r4 = r3
-            goto L89
-        L88:
-            r4 = r0
-        L89:
-            android.content.ContentResolver r7 = r7.getContentResolver()
-            java.lang.String r5 = "force_desktop_mode_on_external_displays"
-            int r7 = android.provider.Settings.Global.getInt(r7, r5, r0)
-            if (r7 == 0) goto L97
-            r7 = r3
-            goto L98
-        L97:
-            r7 = r0
-        L98:
-            int r5 = r2.flags
-            r5 = r5 & 64
-            if (r5 != 0) goto L6d
-            if (r7 == 0) goto L63
-            if (r4 != 0) goto L63
-            goto L6d
-        La3:
-            if (r1 != 0) goto La6
-            r0 = r3
-        La6:
-            r6.init(r2, r8, r7, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.DisplayLayout.<init>(android.content.Context, android.view.Display):void");
+    public DisplayLayout(Context context, Display display) throws Resources.NotFoundException {
+        boolean z;
+        new Rect();
+        int displayId = display.getDisplayId();
+        DisplayInfo displayInfo = new DisplayInfo();
+        display.getDisplayInfo(displayInfo);
+        Resources resources = context.getResources();
+        if (displayId == 0) {
+            String str = SystemProperties.get("qemu.hw.mainkeys");
+            if ("1".equals(str)) {
+                z = false;
+            } else {
+                z = "0".equals(str) ? true : context.getResources().getBoolean(R.bool.config_swipeDisambiguation);
+            }
+        } else {
+            boolean z2 = displayInfo.type == 5 && displayInfo.ownerUid != 1000;
+            boolean z3 = Settings.Global.getInt(context.getContentResolver(), "force_desktop_mode_on_external_displays", 0) != 0;
+            if ((displayInfo.flags & 64) != 0 || (z3 && !z2)) {
+            }
+        }
+        init(displayInfo, resources, z, displayId == 0);
     }
 
     public DisplayLayout(DisplayLayout displayLayout) {

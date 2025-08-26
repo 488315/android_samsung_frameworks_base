@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ReturnToDragStartAnimator {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -21,7 +20,6 @@ public final class ReturnToDragStartAnimator {
     public DesktopModeWindowDecorViewModel.DesktopModeOnTaskRepositionAnimationListener taskRepositionAnimationListener;
     public final Supplier transactionSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,11 +63,11 @@ public final class ReturnToDragStartAnimator {
 
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
-                SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) ReturnToDragStartAnimator.this.transactionSupplier.get();
+                SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) this.this$0.transactionSupplier.get();
                 SurfaceControl surfaceControl2 = this.$taskSurface$inlined;
                 Rect rect3 = this.$endBounds$inlined;
                 transaction2.setPosition(surfaceControl2, rect3.left, rect3.top).show(this.$taskSurface$inlined).apply();
-                DesktopModeWindowDecorViewModel.DesktopModeOnTaskRepositionAnimationListener desktopModeOnTaskRepositionAnimationListener = ReturnToDragStartAnimator.this.taskRepositionAnimationListener;
+                DesktopModeWindowDecorViewModel.DesktopModeOnTaskRepositionAnimationListener desktopModeOnTaskRepositionAnimationListener = this.this$0.taskRepositionAnimationListener;
                 if (desktopModeOnTaskRepositionAnimationListener == null) {
                     desktopModeOnTaskRepositionAnimationListener = null;
                 }
@@ -77,21 +75,21 @@ public final class ReturnToDragStartAnimator {
                 if (desktopModeWindowDecoration != null) {
                     desktopModeWindowDecoration.setAnimatingTaskResizeOrReposition(false);
                 }
-                ReturnToDragStartAnimator.this.boundsAnimator = null;
+                this.this$0.boundsAnimator = null;
                 Function0 function02 = this.$doOnEnd$inlined;
                 if (function02 != null) {
                     function02.invoke();
                 }
-                ReturnToDragStartAnimator.this.interactionJankMonitor.end(118);
+                this.this$0.interactionJankMonitor.end(118);
             }
 
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
-                SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) ReturnToDragStartAnimator.this.transactionSupplier.get();
+                SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) this.this$0.transactionSupplier.get();
                 SurfaceControl surfaceControl2 = this.$taskSurface$inlined$1;
                 Rect rect3 = this.$startBounds$inlined;
                 transaction2.setPosition(surfaceControl2, rect3.left, rect3.top).show(this.$taskSurface$inlined$1).apply();
-                DesktopModeWindowDecorViewModel.DesktopModeOnTaskRepositionAnimationListener desktopModeOnTaskRepositionAnimationListener = ReturnToDragStartAnimator.this.taskRepositionAnimationListener;
+                DesktopModeWindowDecorViewModel.DesktopModeOnTaskRepositionAnimationListener desktopModeOnTaskRepositionAnimationListener = this.this$0.taskRepositionAnimationListener;
                 if (desktopModeOnTaskRepositionAnimationListener == null) {
                     desktopModeOnTaskRepositionAnimationListener = null;
                 }

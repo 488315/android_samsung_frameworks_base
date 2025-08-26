@@ -5,13 +5,11 @@ import androidx.compose.ui.Alignment;
 import androidx.compose.ui.unit.IntOffset;
 import androidx.compose.ui.unit.LayoutDirection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BiasAlignment implements Alignment {
     public final float horizontalBias;
     public final float verticalBias;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Horizontal implements Alignment.Horizontal {
         public final float bias;
 
@@ -46,7 +44,6 @@ public final class BiasAlignment implements Alignment {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Vertical implements Alignment.Vertical {
         public final float bias;
 
@@ -81,7 +78,7 @@ public final class BiasAlignment implements Alignment {
 
     @Override // androidx.compose.ui.Alignment
     /* renamed from: align-KFBX0sM */
-    public final long mo352alignKFBX0sM(long j, long j2, LayoutDirection layoutDirection) {
+    public final long mo353alignKFBX0sM(long j, long j2, LayoutDirection layoutDirection) {
         float f = (((int) (j2 >> 32)) - ((int) (j >> 32))) / 2.0f;
         float f2 = (((int) (j2 & 4294967295L)) - ((int) (j & 4294967295L))) / 2.0f;
         LayoutDirection layoutDirection2 = LayoutDirection.Ltr;
@@ -92,10 +89,10 @@ public final class BiasAlignment implements Alignment {
         float f4 = 1;
         float f5 = (f3 + f4) * f;
         float f6 = (f4 + this.verticalBias) * f2;
-        int round = Math.round(f5);
-        long round2 = (Math.round(f6) & 4294967295L) | (round << 32);
+        int iRound = Math.round(f5);
+        long jRound = (Math.round(f6) & 4294967295L) | (iRound << 32);
         IntOffset.Companion companion = IntOffset.Companion;
-        return round2;
+        return jRound;
     }
 
     public final boolean equals(Object obj) {

@@ -44,10 +44,10 @@ public abstract class JobServiceEngine {
         public void getTransferredDownloadBytes(JobParameters jobParameters, JobWorkItem jobWorkItem) throws RemoteException {
             JobServiceEngine jobServiceEngine = this.mService.get();
             if (jobServiceEngine != null) {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = jobParameters;
-                obtain.arg2 = jobWorkItem;
-                jobServiceEngine.mHandler.obtainMessage(3, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = jobParameters;
+                someArgsObtain.arg2 = jobWorkItem;
+                jobServiceEngine.mHandler.obtainMessage(3, someArgsObtain).sendToTarget();
             }
         }
 
@@ -55,10 +55,10 @@ public abstract class JobServiceEngine {
         public void getTransferredUploadBytes(JobParameters jobParameters, JobWorkItem jobWorkItem) throws RemoteException {
             JobServiceEngine jobServiceEngine = this.mService.get();
             if (jobServiceEngine != null) {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = jobParameters;
-                obtain.arg2 = jobWorkItem;
-                jobServiceEngine.mHandler.obtainMessage(4, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = jobParameters;
+                someArgsObtain.arg2 = jobWorkItem;
+                jobServiceEngine.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
             }
         }
 
@@ -100,11 +100,11 @@ public abstract class JobServiceEngine {
                     JobParameters jobParameters = (JobParameters) message.obj;
                     try {
                         jobParameters.enableCleaner();
-                        boolean onStartJob = JobServiceEngine.this.onStartJob(jobParameters);
-                        if (!onStartJob) {
+                        boolean zOnStartJob = JobServiceEngine.this.onStartJob(jobParameters);
+                        if (!zOnStartJob) {
                             jobParameters.disableCleaner();
                         }
-                        ackStartMessage(jobParameters, onStartJob);
+                        ackStartMessage(jobParameters, zOnStartJob);
                         return;
                     } catch (Exception e) {
                         Log.e(JobServiceEngine.TAG, "Error while executing job: " + jobParameters.getJobId());
@@ -291,9 +291,9 @@ public abstract class JobServiceEngine {
         if (jobParameters == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }
-        Message obtain = Message.obtain(this.mHandler, 2, jobParameters);
-        obtain.arg2 = z ? 1 : 0;
-        obtain.sendToTarget();
+        Message messageObtain = Message.obtain(this.mHandler, 2, jobParameters);
+        messageObtain.arg2 = z ? 1 : 0;
+        messageObtain.sendToTarget();
     }
 
     public void onNetworkChanged(JobParameters jobParameters) {
@@ -318,24 +318,24 @@ public abstract class JobServiceEngine {
         if (jobParameters == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = jobParameters;
-        obtain.arg2 = jobWorkItem;
-        obtain.argl1 = j;
-        obtain.argl2 = j2;
-        this.mHandler.obtainMessage(5, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = jobParameters;
+        someArgsObtain.arg2 = jobWorkItem;
+        someArgsObtain.argl1 = j;
+        someArgsObtain.argl2 = j2;
+        this.mHandler.obtainMessage(5, someArgsObtain).sendToTarget();
     }
 
     public void updateEstimatedNetworkBytes(JobParameters jobParameters, JobWorkItem jobWorkItem, long j, long j2) {
         if (jobParameters == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = jobParameters;
-        obtain.arg2 = jobWorkItem;
-        obtain.argl1 = j;
-        obtain.argl2 = j2;
-        this.mHandler.obtainMessage(6, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = jobParameters;
+        someArgsObtain.arg2 = jobWorkItem;
+        someArgsObtain.argl1 = j;
+        someArgsObtain.argl2 = j2;
+        this.mHandler.obtainMessage(6, someArgsObtain).sendToTarget();
     }
 
     public void setNotification(JobParameters jobParameters, int i, Notification notification, int i2) {
@@ -345,11 +345,11 @@ public abstract class JobServiceEngine {
         if (notification == null) {
             throw new NullPointerException("notification");
         }
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = jobParameters;
-        obtain.arg2 = notification;
-        obtain.argi1 = i;
-        obtain.argi2 = i2;
-        this.mHandler.obtainMessage(7, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = jobParameters;
+        someArgsObtain.arg2 = notification;
+        someArgsObtain.argi1 = i;
+        someArgsObtain.argi2 = i2;
+        this.mHandler.obtainMessage(7, someArgsObtain).sendToTarget();
     }
 }

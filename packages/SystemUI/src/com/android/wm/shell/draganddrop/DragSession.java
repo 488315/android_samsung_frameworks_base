@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragSession {
     public ActivityInfo activityInfo;
@@ -44,7 +43,7 @@ public class DragSession {
         ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) this.mActivityTaskManager.getTasks(10, false, false, 0).stream().filter(new Predicate() { // from class: com.android.wm.shell.draganddrop.DragSession$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                DragSession dragSession = DragSession.this;
+                DragSession dragSession = this.f$0;
                 ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) obj;
                 dragSession.getClass();
                 return (WindowConfiguration.isFloating(runningTaskInfo2.getWindowingMode()) || runningTaskInfo2.taskId == dragSession.hideDragSourceTaskId) ? false : true;
@@ -63,9 +62,9 @@ public class DragSession {
                 this.dragItemSupportsSplitscreen = appResult != null && appResult.hasResizableResolveInfo();
             } else {
                 if (activityInfo != null && !ActivityInfo.isResizeableMode(activityInfo.resizeMode)) {
-                    r2 = false;
+                    z = false;
                 }
-                this.dragItemSupportsSplitscreen = r2;
+                this.dragItemSupportsSplitscreen = z;
             }
         } else {
             this.dragItemSupportsSplitscreen = false;
@@ -80,9 +79,9 @@ public class DragSession {
         Intent intent;
         int i2 = this.hideDragSourceTaskId;
         boolean z = i2 != -1;
-        boolean isDragFromRecent = this.mInitialDragData.getDescription().isDragFromRecent();
-        this.isDragFromRecent = isDragFromRecent;
-        int intExtra = (!isDragFromRecent || (intent = this.mInitialDragData.getItemAt(0).getIntent()) == null) ? -1 : intent.getIntExtra("android.intent.extra.DND_RECENT_TOP_TASK_ID", -1);
+        boolean zIsDragFromRecent = this.mInitialDragData.getDescription().isDragFromRecent();
+        this.isDragFromRecent = zIsDragFromRecent;
+        int intExtra = (!zIsDragFromRecent || (intent = this.mInitialDragData.getItemAt(0).getIntent()) == null) ? -1 : intent.getIntExtra("android.intent.extra.DND_RECENT_TOP_TASK_ID", -1);
         if (this.isDragFromRecent && intExtra != -1) {
             Iterator it = this.mActivityTaskManager.getTasks(Integer.MAX_VALUE, false).iterator();
             while (true) {
@@ -104,25 +103,25 @@ public class DragSession {
         }
         for (int i3 = 0; i3 < nonFloatingTopTask.size(); i3++) {
             ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) nonFloatingTopTask.get(i3);
-            if (z && i2 == (i = runningTaskInfo2.taskId)) {
-                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
-                    long j = i;
-                    Intent intent2 = runningTaskInfo2.baseIntent;
-                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -8010626571342564658L, 1, Long.valueOf(j), String.valueOf(intent2 != null ? intent2.getComponent() : "null"));
-                }
-            } else if ((this.isDragFromRecent || runningTaskInfo2.isVisible) && !runningTaskInfo2.configuration.windowConfiguration.isAlwaysOnTop()) {
-                this.runningTaskInfo = runningTaskInfo2;
-                runningTaskInfo2.getWindowingMode();
-                runningTaskInfo2.getActivityType();
-                this.runningTaskActType = runningTaskInfo2.topActivityType;
-                this.runningTaskSupportsSplitScreen = runningTaskInfo2.supportsMultiWindow;
-                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
-                    long j2 = runningTaskInfo2.taskId;
-                    Intent intent3 = runningTaskInfo2.baseIntent;
-                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -2392824589187272349L, 1, Long.valueOf(j2), String.valueOf(intent3 != null ? intent3.getComponent() : "null"));
+            if (!z || i2 != (i = runningTaskInfo2.taskId)) {
+                if ((this.isDragFromRecent || runningTaskInfo2.isVisible) && !runningTaskInfo2.configuration.windowConfiguration.isAlwaysOnTop()) {
+                    this.runningTaskInfo = runningTaskInfo2;
+                    runningTaskInfo2.getWindowingMode();
+                    runningTaskInfo2.getActivityType();
+                    this.runningTaskActType = runningTaskInfo2.topActivityType;
+                    this.runningTaskSupportsSplitScreen = runningTaskInfo2.supportsMultiWindow;
+                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                        long j = runningTaskInfo2.taskId;
+                        Intent intent2 = runningTaskInfo2.baseIntent;
+                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -2392824589187272349L, 1, Long.valueOf(j), String.valueOf(intent2 != null ? intent2.getComponent() : "null"));
+                        return;
+                    }
                     return;
                 }
-                return;
+            } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                long j2 = i;
+                Intent intent3 = runningTaskInfo2.baseIntent;
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -8010626571342564658L, 1, Long.valueOf(j2), String.valueOf(intent3 != null ? intent3.getComponent() : "null"));
             }
         }
     }

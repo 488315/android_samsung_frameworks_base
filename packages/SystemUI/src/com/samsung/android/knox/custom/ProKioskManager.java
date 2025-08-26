@@ -9,7 +9,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ProKioskManager {
     public static final String TAG = "ProKioskManager";
@@ -21,21 +20,17 @@ public class ProKioskManager {
     }
 
     public static synchronized ProKioskManager getInstance() {
-        ProKioskManager proKioskManager;
-        synchronized (ProKioskManager.class) {
-            try {
-                if (sProKioskManager == null) {
-                    sProKioskManager = new ProKioskManager();
-                }
-                if (sContextInfo == null) {
-                    sContextInfo = new ContextInfo();
-                }
-                proKioskManager = sProKioskManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sProKioskManager == null) {
+                sProKioskManager = new ProKioskManager();
             }
+            if (sContextInfo == null) {
+                sContextInfo = new ContextInfo();
+            }
+        } catch (Throwable th) {
+            throw th;
         }
-        return proKioskManager;
+        return sProKioskManager;
     }
 
     public String getExitUI(int i) {

@@ -37,8 +37,8 @@ public abstract class DSABase extends SignatureSpi implements PKCSObjectIdentifi
         byte[] bArr = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr, 0);
         try {
-            BigInteger[] generateSignature = this.signer.generateSignature(bArr);
-            return this.encoding.encode(this.signer.getOrder(), generateSignature[0], generateSignature[1]);
+            BigInteger[] bigIntegerArrGenerateSignature = this.signer.generateSignature(bArr);
+            return this.encoding.encode(this.signer.getOrder(), bigIntegerArrGenerateSignature[0], bigIntegerArrGenerateSignature[1]);
         } catch (Exception e) {
             throw new SignatureException(e.toString());
         }
@@ -49,8 +49,8 @@ public abstract class DSABase extends SignatureSpi implements PKCSObjectIdentifi
         byte[] bArr2 = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr2, 0);
         try {
-            BigInteger[] decode = this.encoding.decode(this.signer.getOrder(), bArr);
-            return this.signer.verifySignature(bArr2, decode[0], decode[1]);
+            BigInteger[] bigIntegerArrDecode = this.encoding.decode(this.signer.getOrder(), bArr);
+            return this.signer.verifySignature(bArr2, bigIntegerArrDecode[0], bigIntegerArrDecode[1]);
         } catch (Exception unused) {
             throw new SignatureException("error decoding signature bytes.");
         }

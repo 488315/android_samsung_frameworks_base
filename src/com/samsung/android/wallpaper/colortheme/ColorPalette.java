@@ -67,10 +67,10 @@ public class ColorPalette {
     public static int[] getnerateSingleTable(float f, float f2) {
         int[] iArr = new int[13];
         float[] fArr = {f, f2, 0.0f};
-        float f3 = 1.0f;
+        float fSearchL = 1.0f;
         for (int i = 0; i < 13; i++) {
-            f3 = searchL(f, f2, f3, guideIntensity[i]);
-            fArr[2] = f3;
+            fSearchL = searchL(f, f2, fSearchL, guideIntensity[i]);
+            fArr[2] = fSearchL;
             iArr[i] = ColorUtils.HSLToColor(fArr);
         }
         return iArr;
@@ -78,10 +78,10 @@ public class ColorPalette {
 
     private void generateTable(float f, float f2, int i) {
         float[] fArr = {f, f2, 0.0f};
-        float f3 = 1.0f;
+        float fSearchL = 1.0f;
         for (int i2 = 0; i2 < 13; i2++) {
-            f3 = searchL(f, f2, f3, guideIntensity[i2]);
-            fArr[2] = f3;
+            fSearchL = searchL(f, f2, fSearchL, guideIntensity[i2]);
+            fArr[2] = fSearchL;
             this.table[i][i2] = ColorUtils.HSLToColor(fArr);
         }
     }
@@ -94,10 +94,10 @@ public class ColorPalette {
             if (f5 < -0.001d) {
                 return 0.0f;
             }
-            float max = Math.max(f5, 0.0f);
-            ColorUtils.colorToLAB(ColorUtils.HSLToColor(new float[]{f, f2, max}), dArr);
+            float fMax = Math.max(f5, 0.0f);
+            ColorUtils.colorToLAB(ColorUtils.HSLToColor(new float[]{f, f2, fMax}), dArr);
             if (dArr[0] <= f4) {
-                return max;
+                return fMax;
             }
             i++;
         }

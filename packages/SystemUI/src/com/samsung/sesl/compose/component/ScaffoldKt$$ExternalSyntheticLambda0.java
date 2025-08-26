@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class ScaffoldKt$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -47,19 +46,19 @@ public final /* synthetic */ class ScaffoldKt$$ExternalSyntheticLambda0 implemen
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$11 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$11 | 1);
                 WindowInsets windowInsets = this.f$8;
                 ComposableLambdaImpl composableLambdaImpl = this.f$10;
                 int i = this.f$13;
-                ScaffoldKt.m3323SeslScaffold5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets, composableLambdaImpl, (Composer) obj, updateChangedFlags, i);
+                ScaffoldKt.m3341SeslScaffold5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags, i);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$11 | 1);
-                int updateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$13);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$11 | 1);
+                int iUpdateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$13);
                 WindowInsets windowInsets2 = this.f$8;
                 ComposableLambdaImpl composableLambdaImpl2 = this.f$10;
-                ScaffoldKt.m3324SeslScaffoldImpl5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets2, composableLambdaImpl2, (Composer) obj, updateChangedFlags2, updateChangedFlags3);
+                ScaffoldKt.m3342SeslScaffoldImpl5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets2, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags2, iUpdateChangedFlags3);
                 break;
         }
         return Unit.INSTANCE;

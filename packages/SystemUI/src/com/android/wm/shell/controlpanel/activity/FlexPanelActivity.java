@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.display.BrightnessInfo;
@@ -68,6 +69,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import androidx.core.content.res.ResourcesCompat;
@@ -108,7 +110,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlexPanelActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, View.OnDragListener {
     public static final int mEditPanelItemSize;
@@ -163,72 +164,35 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     public boolean mIsResumeCalled = false;
     public final AnonymousClass1 mReceiver = new BroadcastReceiver() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.1
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+        /* JADX WARN: Removed duplicated region for block: B:4:0x0010  */
         @Override // android.content.BroadcastReceiver
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onReceive(Context context, Intent intent) {
-            char c;
             String action = intent.getAction();
             action.getClass();
-            switch (action.hashCode()) {
-                case -1940635523:
-                    if (action.equals("android.media.VOLUME_CHANGED_ACTION")) {
-                        c = 0;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case -806437194:
-                    if (action.equals("com.samsung.android.app.screenrecorder.on")) {
-                        c = 1;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case -494116597:
-                    if (action.equals("android.intent.action.COLLAPSE_FLEX_PANEL")) {
-                        c = 2;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case -403228793:
-                    if (action.equals(PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS)) {
-                        c = 3;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 770250616:
-                    if (action.equals("com.samsung.android.app.screenrecorder.off")) {
-                        c = 4;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                default:
-                    c = 65535;
-                    break;
-            }
-            switch (c) {
-                case 0:
+            switch (action) {
+                case "android.media.VOLUME_CHANGED_ACTION":
                     if (!ControlPanelUtils.isClockActivity(context)) {
                         BrightnessVolumeView brightnessVolumeView = FlexPanelActivity.this.mBrightnessVolumeView;
                         int intExtra = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1);
                         int intExtra2 = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_VALUE", 0);
                         int intExtra3 = intent.getIntExtra("android.media.EXTRA_PREV_VOLUME_STREAM_VALUE", 0);
                         if (!brightnessVolumeView.mVolumeSeekBarTracking) {
-                            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(intExtra, intExtra2, "setVolumeProgress streamType : ", ", newVolume : ", ", oldVolume : ");
-                            m.append(intExtra3);
-                            Log.i("BrightnessVolumeView", m.toString());
+                            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(intExtra, intExtra2, "setVolumeProgress streamType : ", ", newVolume : ", ", oldVolume : ");
+                            sbM.append(intExtra3);
+                            Log.i("BrightnessVolumeView", sbM.toString());
                             brightnessVolumeView.setVolumeSeekBar(intExtra);
                             brightnessVolumeView.setVolumeIcon(intExtra);
                             break;
                         }
                     }
                     break;
-                case 1:
+                case "com.samsung.android.app.screenrecorder.on":
                     FlexPanelActivity.this.getClass();
                     break;
-                case 2:
+                case "android.intent.action.COLLAPSE_FLEX_PANEL":
                     if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE_SA_LOGGING) {
                         String str = ControlPanelUtils.TALKBACK_SERVICE;
                         ControlPanelUtils.eventLogging("F004", "a", new HashMap());
@@ -237,13 +201,13 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     int i = FlexPanelActivity.mEditPanelItemSize;
                     flexPanelActivity.closeOperation();
                     break;
-                case 3:
+                case "android.intent.action.CLOSE_SYSTEM_DIALOGS":
                     if ("recentapps".equalsIgnoreCase(intent.getStringExtra("reason"))) {
                         FlexPanelActivity.this.mGridAdapter.notifyDataSetChanged();
                         break;
                     }
                     break;
-                case 4:
+                case "com.samsung.android.app.screenrecorder.off":
                     FlexPanelActivity.this.getClass();
                     break;
             }
@@ -266,7 +230,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         public final void onChange(boolean z) {
             String string = Settings.Secure.getString(FlexPanelActivity.this.getContentResolver(), SettingsHelper.INDEX_ENABLED_ACCESSIBILITY_SERVICES);
             if (string != null) {
-                string.contains(ControlPanelUtils.TALKBACK_SERVICE);
+                string.contains("com.samsung.android.marvin.talkback.TalkBackService");
             }
             int i = FlexPanelActivity.mEditPanelItemSize;
             int i2 = Settings.Global.getInt(FlexPanelActivity.this.mOwnActivity.getContentResolver(), "flex_mode_scroll_wheel_pos", 2);
@@ -310,8 +274,8 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     public final H mDimHandler = new H();
     public final FlexPanelActivity$$ExternalSyntheticLambda3 mActiveSessionsChangedListener = new MediaSessionManager.OnActiveSessionsChangedListener() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$$ExternalSyntheticLambda3
         @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
-        public final void onActiveSessionsChanged(List list) {
-            FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
+        public final void onActiveSessionsChanged(List list) throws SecurityException {
+            FlexPanelActivity flexPanelActivity = this.f$0;
             int i = FlexPanelActivity.mEditPanelItemSize;
             Log.i("FlexPanelActivity", "onActiveSessionsChanged closeState : " + flexPanelActivity.mCloseState + " controllers : " + list);
             if (flexPanelActivity.mCloseState) {
@@ -322,7 +286,6 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     };
     public final AnonymousClass20 mCallback = new AnonymousClass20();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$16, reason: invalid class name */
     public class AnonymousClass16 implements ViewTreeObserver.OnGlobalLayoutListener {
         public final /* synthetic */ LinearLayout val$editPanelView;
@@ -387,7 +350,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             handler.postDelayed(new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$16$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FlexPanelActivity.AnonymousClass16 anonymousClass16 = FlexPanelActivity.AnonymousClass16.this;
+                    FlexPanelActivity.AnonymousClass16 anonymousClass16 = this.f$0;
                     LinearLayout linearLayout3 = linearLayout2;
                     if (FlexPanelActivity.this.findViewById(R.id.edit_panel_view) != null) {
                         linearLayout3.setVisibility(0);
@@ -398,7 +361,6 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$20, reason: invalid class name */
     public class AnonymousClass20 extends AudioCallback {
         public AnonymousClass20() {
@@ -423,7 +385,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
 
         @Override // android.media.session.MediaController.Callback
-        public final void onMetadataChanged(MediaMetadata mediaMetadata) {
+        public final void onMetadataChanged(MediaMetadata mediaMetadata) throws SecurityException {
             Log.i("FlexPanelActivity", "FlexPanelActivity mCallback onMetadataChanged");
             FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
             int i = FlexPanelActivity.mEditPanelItemSize;
@@ -444,10 +406,10 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         @Override // android.media.session.MediaController.Callback
         public final void onPlaybackStateChanged(PlaybackState playbackState) {
             try {
-                boolean isSupportButton = CheckControlWindowState.isSupportButton(FlexPanelActivity.this.mMediaController);
+                boolean zIsSupportButton = CheckControlWindowState.isSupportButton(FlexPanelActivity.this.mMediaController);
                 boolean z = FlexPanelActivity.this.mMediaView.getVisibility() == 0;
-                Log.i("FlexPanelActivity", "FlexPanelActivity mCallback onPlaybackStateChanged isSupportButton : " + isSupportButton + ", isVisible : " + z);
-                if (isSupportButton && !z) {
+                Log.i("FlexPanelActivity", "FlexPanelActivity mCallback onPlaybackStateChanged isSupportButton : " + zIsSupportButton + ", isVisible : " + z);
+                if (zIsSupportButton && !z) {
                     FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                     if (flexPanelActivity.mTouchPad == null && !flexPanelActivity.mIsDisplayTouchPad && flexPanelActivity.semIsResumed()) {
                         FlexPanelActivity.this.mMediaView.setVisibility(0);
@@ -490,7 +452,6 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$3, reason: invalid class name */
     public class AnonymousClass3 extends ContentObserver {
         public AnonymousClass3(Handler handler) {
@@ -505,7 +466,6 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EventReceiver extends InputEventReceiver {
         public EventReceiver(InputChannel inputChannel, Looper looper) {
             super(inputChannel, looper);
@@ -530,7 +490,6 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H() {
         }
@@ -553,12 +512,11 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl extends TaskStackListener {
         public Impl() {
         }
 
-        public final void onTaskFocusChanged(int i, boolean z) {
+        public final void onTaskFocusChanged(int i, boolean z) throws SecurityException {
             List<ActivityManager.RunningTaskInfo> runningTasks = FlexPanelActivity.this.mActivityManager.getRunningTasks(2);
             if (runningTasks.get(0).semIsFreeform() || 2 == runningTasks.get(0).getWindowingMode()) {
                 return;
@@ -577,7 +535,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     }
 
                     @Override // java.lang.Runnable
-                    public final void run() {
+                    public final void run() throws SecurityException {
                         int i4 = i3;
                         FlexPanelActivity.Impl impl = this.f$0;
                         switch (i4) {
@@ -620,7 +578,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     }
 
                     @Override // java.lang.Runnable
-                    public final void run() {
+                    public final void run() throws SecurityException {
                         int i42 = i4;
                         FlexPanelActivity.Impl impl = this.f$0;
                         switch (i42) {
@@ -663,7 +621,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     }
 
                     @Override // java.lang.Runnable
-                    public final void run() {
+                    public final void run() throws SecurityException {
                         int i42 = i5;
                         FlexPanelActivity.Impl impl = this.f$0;
                         switch (i42) {
@@ -714,7 +672,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         animatorSet.playTogether(ObjectAnimator.ofFloat(view2, "y", view2.getTop(), view.getTop()));
     }
 
-    public final void addEditPanelNone() {
+    public final void addEditPanelNone() throws JSONException {
         int size = this.mEditActions.size();
         int i = mEditPanelItemSize;
         int i2 = 0;
@@ -736,7 +694,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         ControlPanelUtils.eventLogging("F005", getString(i), map);
     }
 
-    public final void checkActiveSession() {
+    public final void checkActiveSession() throws SecurityException {
         List<ActivityManager.RunningTaskInfo> runningTasks = this.mActivityManager.getRunningTasks(1);
         if (runningTasks.get(0).semIsFreeform() || 2 == runningTasks.get(0).getWindowingMode()) {
             return;
@@ -745,7 +703,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.13
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws JSONException {
                 if (FlexPanelActivity.sFlexPanelActivity == null) {
                     FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                     MediaController mediaController = flexPanelActivity.mMediaController;
@@ -773,11 +731,11 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     }
                 }
                 FlexPanelActivity flexPanelActivity5 = FlexPanelActivity.this;
-                boolean isMediaPanelRequestedState = CheckControlWindowState.isMediaPanelRequestedState(flexPanelActivity5.mOwnActivity, flexPanelActivity5.mMediaController);
-                Log.i("FlexPanelActivity", "FlexPanelActivity checkActiveSession isMediaPanel : " + FlexPanelActivity.this.mIsMediaPanel + ", isMediaPanelRequestedState : " + isMediaPanelRequestedState);
+                boolean zIsMediaPanelRequestedState = CheckControlWindowState.isMediaPanelRequestedState(flexPanelActivity5.mOwnActivity, flexPanelActivity5.mMediaController);
+                Log.i("FlexPanelActivity", "FlexPanelActivity checkActiveSession isMediaPanel : " + FlexPanelActivity.this.mIsMediaPanel + ", isMediaPanelRequestedState : " + zIsMediaPanelRequestedState);
                 FlexPanelActivity flexPanelActivity6 = FlexPanelActivity.this;
                 if (!flexPanelActivity6.mIsMediaPanel) {
-                    if (!isMediaPanelRequestedState || flexPanelActivity6.mIsEditPanel) {
+                    if (!zIsMediaPanelRequestedState || flexPanelActivity6.mIsEditPanel) {
                         return;
                     }
                     Log.i("FlexPanelActivity", "FlexPanelActivity checkActiveSession GridFloating hasActiveSessions");
@@ -797,7 +755,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                     FlexPanelActivity.this.setupMediaPanel();
                     return;
                 }
-                if (!isMediaPanelRequestedState) {
+                if (!zIsMediaPanelRequestedState) {
                     Log.i("FlexPanelActivity", "FlexPanelActivity checkActiveSession MediaFloating no hasActiveSessions");
                     FlexPanelActivity flexPanelActivity8 = FlexPanelActivity.this;
                     if (flexPanelActivity8.mTouchPadMediaPanel != null) {
@@ -855,10 +813,10 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     public final void closeOperation() {
         removeTouchPad(true);
         this.mGridAdapter.notifyDataSetChanged();
-        Animation loadAnimation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
-        this.mPanelView.startAnimation(loadAnimation);
+        Animation animationLoadAnimation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        this.mPanelView.startAnimation(animationLoadAnimation);
         if (this.mIsMediaPanel) {
-            this.mMediaView.startAnimation(loadAnimation);
+            this.mMediaView.startAnimation(animationLoadAnimation);
         }
         this.mCloseState = true;
         finish();
@@ -930,9 +888,9 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public final void executeAct(int i) {
+    public final void executeAct(int i) throws JSONException, PackageManager.NameNotFoundException {
         ControlPanelAction.Action action;
-        MenuActionType createAction;
+        MenuActionType menuActionTypeCreateAction;
         char c;
         int i2 = 4;
         ComponentName topActivity = ControlPanelUtils.getTopActivity(this);
@@ -958,44 +916,44 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         if (ControlPanelAction.Action.BrightnessControl.getValue() == i) {
             BrightnessInfo brightnessInfo = getDisplay().getBrightnessInfo();
             if (brightnessInfo != null) {
-                String str = brightnessInfo.screenBrightnessOverridePackageByWindow;
+                String string = brightnessInfo.screenBrightnessOverridePackageByWindow;
                 PackageManager packageManager = getPackageManager();
                 try {
-                    applicationInfo = packageManager.getApplicationInfo(str, 0);
+                    applicationInfo = packageManager.getApplicationInfo(string, 0);
                 } catch (PackageManager.NameNotFoundException unused) {
                 }
                 if (applicationInfo != null) {
-                    str = packageManager.getApplicationLabel(applicationInfo).toString();
+                    string = packageManager.getApplicationLabel(applicationInfo).toString();
                 }
-                if (TextUtils.isEmpty(str)) {
-                    Cursor query = getContentResolver().query(Uri.parse("content://com.sec.knox.provider/RestrictionPolicy3"), null, "isSettingsChangesAllowed", new String[]{"false"}, null);
-                    if (query != null) {
-                        try {
-                            query.moveToFirst();
-                            if ("true".equals(query.getString(query.getColumnIndex("isSettingsChangesAllowed")))) {
-                                query.close();
-                                c = 1;
-                            } else {
-                                query.close();
-                                c = 0;
-                            }
-                        } catch (Exception unused2) {
-                            query.close();
-                        } catch (Throwable th) {
-                            query.close();
-                            throw th;
+                if (TextUtils.isEmpty(string)) {
+                    Cursor cursorQuery = getContentResolver().query(Uri.parse("content://com.sec.knox.provider/RestrictionPolicy3"), null, "isSettingsChangesAllowed", new String[]{"false"}, null);
+                    if (cursorQuery == null) {
+                        c = 65535;
+                        if (c != 65535) {
                         }
-                        if (c != 65535 || c != 0) {
-                            setupBrightnessVolumeView(R.id.media_brightness_layout, 1);
-                            return;
+                        setupBrightnessVolumeView(R.id.media_brightness_layout, 1);
+                        return;
+                    }
+                    try {
+                        cursorQuery.moveToFirst();
+                        if ("true".equals(cursorQuery.getString(cursorQuery.getColumnIndex("isSettingsChangesAllowed")))) {
+                            cursorQuery.close();
+                            c = 1;
+                        } else {
+                            cursorQuery.close();
+                            c = 0;
                         }
-                        Log.d("ControlPanelUtils", "getSettingsChangeAllowed:false");
+                    } catch (Exception unused2) {
+                        cursorQuery.close();
+                    } catch (Throwable th) {
+                        cursorQuery.close();
+                        throw th;
                     }
-                    c = 65535;
-                    if (c != 65535) {
+                    if (c != 65535 || c != 0) {
+                        setupBrightnessVolumeView(R.id.media_brightness_layout, 1);
+                        return;
                     }
-                    setupBrightnessVolumeView(R.id.media_brightness_layout, 1);
-                    return;
+                    Log.d("ControlPanelUtils", "getSettingsChangeAllowed:false");
                 }
             }
             Toast.makeText(this, R.string.toast_can_not_change_brightness, 0).show();
@@ -1006,14 +964,14 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                 return;
             }
             ArrayList arrayList = ControlPanelAction.mActionType;
-            ControlPanelAction.Action[] values = ControlPanelAction.Action.values();
-            int length = values.length;
+            ControlPanelAction.Action[] actionArrValues = ControlPanelAction.Action.values();
+            int length = actionArrValues.length;
             while (true) {
                 if (i3 >= length) {
                     action = ControlPanelAction.Action.None;
                     break;
                 }
-                action = values[i3];
+                action = actionArrValues[i3];
                 if (action.getValue() == i) {
                     break;
                 } else {
@@ -1022,30 +980,30 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             }
             switch (MenuActionType.AnonymousClass1.$SwitchMap$com$android$wm$shell$controlpanel$action$ControlPanelAction$Action[action.ordinal()]) {
                 case 1:
-                    createAction = ScreenCaptureAction.createAction(this);
+                    menuActionTypeCreateAction = ScreenCaptureAction.createAction(this);
                     break;
                 case 2:
-                    createAction = QuickPanelAction.createAction(this);
+                    menuActionTypeCreateAction = QuickPanelAction.createAction(this);
                     break;
                 case 3:
-                    createAction = SplitScreenAction.createAction(this);
+                    menuActionTypeCreateAction = SplitScreenAction.createAction(this);
                     break;
                 case 4:
-                    createAction = FlexPanelSettingsAction.createAction(this);
+                    menuActionTypeCreateAction = FlexPanelSettingsAction.createAction(this);
                     break;
                 case 5:
-                    createAction = TouchPadAction.createAction();
+                    menuActionTypeCreateAction = TouchPadAction.createAction();
                     break;
                 case 6:
-                    createAction = QuickSettingsAction.createAction(this);
+                    menuActionTypeCreateAction = QuickSettingsAction.createAction(this);
                     break;
                 case 7:
-                    createAction = ScreenRecordAction.createAction(this);
+                    menuActionTypeCreateAction = ScreenRecordAction.createAction(this);
                     break;
                 default:
                     throw new IllegalArgumentException("Wrong action");
             }
-            createAction.doControlAction(topActivity.getClassName(), this);
+            menuActionTypeCreateAction.doControlAction(topActivity.getClassName(), this);
             return;
         }
         if (this.mIsEditPanel) {
@@ -1144,7 +1102,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public final ArrayList getActionArray(String str, boolean z) {
+    public final ArrayList getActionArray(String str, boolean z) throws JSONException {
         String string = this.mSharedPreferences.getString(str, null);
         ArrayList arrayList = new ArrayList();
         if (string != null) {
@@ -1163,7 +1121,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         return arrayList;
     }
 
-    public final void getActionArrayForStatusLogging(String str, ArrayList arrayList) {
+    public final void getActionArrayForStatusLogging(String str, ArrayList arrayList) throws JSONException {
         String string = this.mSharedPreferences.getString(str, null);
         if (string == null) {
             return;
@@ -1207,10 +1165,10 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         return this.mSharedPreferences.getBoolean(str, false);
     }
 
-    public final void onActionArrayAdd(String str, int i, ControlPanelAction.Action action) {
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "onActionArrayAdd list :", str, " addAt : ", " addAction : ");
-        m888m.append(action);
-        Log.d("FlexPanelActivity", m888m.toString());
+    public final void onActionArrayAdd(String str, int i, ControlPanelAction.Action action) throws JSONException {
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "onActionArrayAdd list :", str, " addAt : ", " addAction : ");
+        sbM890m.append(action);
+        Log.d("FlexPanelActivity", sbM890m.toString());
         if ("basic_panel_action_list".equals(str)) {
             this.mActions.add(i, action);
             this.mGridAdapter.items.add(i, action);
@@ -1233,7 +1191,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         setActionArray(str, actionArray);
     }
 
-    public final void onActionArrayRemove(int i, String str) {
+    public final void onActionArrayRemove(int i, String str) throws JSONException {
         SecNotificationBlockManager$$ExternalSyntheticOutline0.m(i, "onActionArrayRemove list :", str, " removeAt : ", "FlexPanelActivity");
         if ("basic_panel_action_list".equals(str)) {
             this.mActions.remove(i);
@@ -1257,12 +1215,12 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         setActionArray(str, actionArray);
     }
 
-    public final void onActionArrayRemoveAdd(String str, int i, int i2, ControlPanelAction.Action action) {
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "onActionArrayRemoveAdd list :", str, " removeAt : ", " addAt : ");
-        m888m.append(i2);
-        m888m.append(" addAction : ");
-        m888m.append(action);
-        Log.d("FlexPanelActivity", m888m.toString());
+    public final void onActionArrayRemoveAdd(String str, int i, int i2, ControlPanelAction.Action action) throws JSONException {
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "onActionArrayRemoveAdd list :", str, " removeAt : ", " addAt : ");
+        sbM890m.append(i2);
+        sbM890m.append(" addAction : ");
+        sbM890m.append(action);
+        Log.d("FlexPanelActivity", sbM890m.toString());
         if ("basic_panel_action_list".equals(str)) {
             this.mActions.remove(i);
             this.mActions.add(i2, action);
@@ -1298,7 +1256,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // android.view.View.OnClickListener
-    public final void onClick(View view) {
+    public final void onClick(View view) throws JSONException, PackageManager.NameNotFoundException {
         if (view.getTag(R.id.grid_button) != null) {
             executeAct(((Integer) view.getTag(R.id.grid_button)).intValue());
             new Handler(Looper.getMainLooper()).postDelayed(new FlexPanelActivity$$ExternalSyntheticLambda1(this, 3), 100L);
@@ -1308,7 +1266,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.activity.ComponentActivity, android.app.Activity, android.content.ComponentCallbacks
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws JSONException {
         boolean z;
         int i = configuration.orientation;
         if (i != this.mPrevOrientation) {
@@ -1335,14 +1293,14 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws JSONException {
         super.onCreate(bundle);
         getWindow().addFlags(8);
         this.mOwnActivity = this;
         sFlexPanelActivity = this;
         String string = Settings.Secure.getString(getContentResolver(), SettingsHelper.INDEX_ENABLED_ACCESSIBILITY_SERVICES);
         if (string != null) {
-            string.contains(ControlPanelUtils.TALKBACK_SERVICE);
+            string.contains("com.samsung.android.marvin.talkback.TalkBackService");
         }
         this.mActivityManager = (ActivityManager) getSystemService(ActivityManager.class);
         this.mCustomDimen = new HashMap();
@@ -1385,14 +1343,14 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                                     i = 1;
                                 }
                             }
-                        } catch (ClassCastException e) {
-                            Log.e("FlexPanelActivity", "ClassCastException : " + e.toString());
+                        } catch (NullPointerException e) {
+                            Log.e("FlexPanelActivity", "NullPointerException : " + e.toString());
                         }
                     } catch (IllegalArgumentException e2) {
                         Log.e("FlexPanelActivity", "IllegalArgumentException : " + e2.toString());
                     }
-                } catch (NullPointerException e3) {
-                    Log.e("FlexPanelActivity", "NullPointerException : " + e3.toString());
+                } catch (ClassCastException e3) {
+                    Log.e("FlexPanelActivity", "ClassCastException : " + e3.toString());
                 }
             } catch (Throwable unused) {
             }
@@ -1472,7 +1430,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // android.view.View.OnDragListener
-    public final boolean onDrag(final View view, final DragEvent dragEvent) {
+    public final boolean onDrag(final View view, final DragEvent dragEvent) throws JSONException {
         int action = dragEvent.getAction();
         try {
             int positionByAction = view.getTag(R.id.gridLayout) != null ? getPositionByAction(((Integer) view.getTag(R.id.gridLayout)).intValue()) : view.getTag(R.id.grid_button) != null ? getPositionByAction(((Integer) view.getTag(R.id.grid_button)).intValue()) : -1;
@@ -1480,25 +1438,25 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                 return false;
             }
             if (action == 2) {
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                if (elapsedRealtime - this.mDragEnteredTime >= 450) {
-                    this.mDragEnteredTime = elapsedRealtime;
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                if (jElapsedRealtime - this.mDragEnteredTime >= 450) {
+                    this.mDragEnteredTime = jElapsedRealtime;
                     int positionByAction2 = getPositionByAction(ControlPanelAction.Action.DragCircle.getValue());
-                    int checkToValueNone = checkToValueNone(positionByAction, true);
-                    if (positionByAction2 != -1 && positionByAction2 != checkToValueNone && (getActionByPosition(checkToValueNone) != ControlPanelAction.Action.EditPanel || (positionByAction2 >= 10 && this.mActions.size() != 5))) {
+                    int iCheckToValueNone = checkToValueNone(positionByAction, true);
+                    if (positionByAction2 != -1 && positionByAction2 != iCheckToValueNone && (getActionByPosition(iCheckToValueNone) != ControlPanelAction.Action.EditPanel || (positionByAction2 >= 10 && this.mActions.size() != 5))) {
                         if (!this.mOnDragAnimation) {
                             if (this.mPanelInit) {
                                 setPreferences("panel_init", false);
                                 this.mPanelInit = false;
                             }
-                            Log.d("FlexPanelActivity", "onDragAnimation start, from : " + positionByAction2 + " to : " + checkToValueNone);
-                            onDragAnimation(positionByAction2, checkToValueNone);
+                            Log.d("FlexPanelActivity", "onDragAnimation start, from : " + positionByAction2 + " to : " + iCheckToValueNone);
+                            onDragAnimation(positionByAction2, iCheckToValueNone);
                             return true;
                         }
                         new Handler().postDelayed(new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
+                            public final void run() throws JSONException {
+                                FlexPanelActivity flexPanelActivity = this.f$0;
                                 View view2 = view;
                                 DragEvent dragEvent2 = dragEvent;
                                 int i = FlexPanelActivity.mEditPanelItemSize;
@@ -1521,7 +1479,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public final void onDragAnimation(final int i, final int i2) {
+    public final void onDragAnimation(final int i, final int i2) throws JSONException {
         this.mOnDragAnimation = true;
         final AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(this.i_22_25_0_1);
@@ -1547,12 +1505,12 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             }
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.6
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationCancel(Animator animator) {
+                public final void onAnimationCancel(Animator animator) throws JSONException {
                     onAnimationEnd(animator);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationEnd(Animator animator) {
+                public final void onAnimationEnd(Animator animator) throws JSONException {
                     FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                     int i5 = i;
                     int i6 = i2;
@@ -1574,31 +1532,31 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                 this.mOnDragAnimation = false;
                 return;
             }
-            final int checkFromValueNone = checkFromValueNone(i);
-            final int checkToValueNone = checkToValueNone(i2, true);
-            if (checkFromValueNone < checkToValueNone) {
-                int i5 = checkFromValueNone - 10;
-                while (i5 < checkToValueNone - 10) {
+            final int iCheckFromValueNone = checkFromValueNone(i);
+            final int iCheckToValueNone = checkToValueNone(i2, true);
+            if (iCheckFromValueNone < iCheckToValueNone) {
+                int i5 = iCheckFromValueNone - 10;
+                while (i5 < iCheckToValueNone - 10) {
                     View childAt2 = this.mGridLayout.getChildAt(i5);
                     i5++;
                     setDragAnimation(animatorSet, childAt2, this.mGridLayout.getChildAt(i5));
                 }
             } else {
-                for (int i6 = checkFromValueNone - 10; i6 > checkToValueNone - 10; i6--) {
+                for (int i6 = iCheckFromValueNone - 10; i6 > iCheckToValueNone - 10; i6--) {
                     setDragAnimation(animatorSet, this.mGridLayout.getChildAt(i6), this.mGridLayout.getChildAt(i6 - 1));
                 }
             }
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.7
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationCancel(Animator animator) {
+                public final void onAnimationCancel(Animator animator) throws JSONException {
                     onAnimationEnd(animator);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationEnd(Animator animator) {
+                public final void onAnimationEnd(Animator animator) throws JSONException {
                     FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
-                    int i7 = checkFromValueNone - 10;
-                    int i8 = checkToValueNone - 10;
+                    int i7 = iCheckFromValueNone - 10;
+                    int i8 = iCheckToValueNone - 10;
                     ControlPanelAction.Action action = ControlPanelAction.Action.DragCircle;
                     int i9 = FlexPanelActivity.mEditPanelItemSize;
                     flexPanelActivity.onActionArrayRemoveAdd("edit_panel_action_list", i7, i8, action);
@@ -1616,7 +1574,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             if (i >= 10 || i2 < 10 || this.mGridLayout == null) {
                 return;
             }
-            final int checkToValueNone2 = checkToValueNone(i2, false);
+            final int iCheckToValueNone2 = checkToValueNone(i2, false);
             removeEditPanelNone();
             this.mGridView.getChildAt(i).setVisibility(4);
             for (int size = this.mActions.size() - 2; size >= i; size--) {
@@ -1632,7 +1590,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                 public final void onGlobalLayout() {
                     gridLayout3.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     gridLayout3.getLeft();
-                    for (int i7 = checkToValueNone2 - 9; i7 < gridLayout3.getChildCount(); i7++) {
+                    for (int i7 = iCheckToValueNone2 - 9; i7 < gridLayout3.getChildCount(); i7++) {
                         FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                         AnimatorSet animatorSet2 = animatorSet;
                         View childAt3 = gridLayout3.getChildAt(i7);
@@ -1647,17 +1605,17 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             });
             animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.11
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationCancel(Animator animator) {
+                public final void onAnimationCancel(Animator animator) throws JSONException {
                     onAnimationEnd(animator);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationEnd(Animator animator) {
+                public final void onAnimationEnd(Animator animator) throws JSONException {
                     FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                     int i7 = i;
                     int i8 = FlexPanelActivity.mEditPanelItemSize;
                     flexPanelActivity.onActionArrayRemove(i7, "basic_panel_action_list");
-                    FlexPanelActivity.this.onActionArrayAdd("edit_panel_action_list", checkToValueNone2 - 10, ControlPanelAction.Action.DragCircle);
+                    FlexPanelActivity.this.onActionArrayAdd("edit_panel_action_list", iCheckToValueNone2 - 10, ControlPanelAction.Action.DragCircle);
                     FlexPanelActivity.this.addEditPanelNone();
                     FlexPanelActivity flexPanelActivity2 = FlexPanelActivity.this;
                     flexPanelActivity2.mOnDragAnimation = false;
@@ -1668,17 +1626,17 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             });
             return;
         }
-        final int checkFromValueNone2 = checkFromValueNone(i);
+        final int iCheckFromValueNone2 = checkFromValueNone(i);
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.8
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationCancel(Animator animator) {
+            public final void onAnimationCancel(Animator animator) throws JSONException {
                 onAnimationEnd(animator);
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationEnd(Animator animator) {
+            public final void onAnimationEnd(Animator animator) throws JSONException {
                 if (FlexPanelActivity.this.mActions.size() > 4) {
-                    FlexPanelActivity.this.onActionArrayRemoveAdd("edit_panel_action_list", checkFromValueNone2 - 10, 0, (ControlPanelAction.Action) FlexPanelActivity.this.mActions.get(3));
+                    FlexPanelActivity.this.onActionArrayRemoveAdd("edit_panel_action_list", iCheckFromValueNone2 - 10, 0, (ControlPanelAction.Action) FlexPanelActivity.this.mActions.get(3));
                     FlexPanelActivity.this.onActionArrayRemoveAdd("basic_panel_action_list", 3, i2, ControlPanelAction.Action.DragCircle);
                 } else {
                     if (FlexPanelActivity.mIsFold) {
@@ -1686,7 +1644,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                         actionArray.remove(actionArray.size() - 1);
                         FlexPanelActivity.this.setActionArray("basic_panel_action_list", actionArray);
                     }
-                    FlexPanelActivity.this.onActionArrayRemove(checkFromValueNone2 - 10, "edit_panel_action_list");
+                    FlexPanelActivity.this.onActionArrayRemove(iCheckFromValueNone2 - 10, "edit_panel_action_list");
                     FlexPanelActivity.this.onActionArrayAdd("basic_panel_action_list", i2, ControlPanelAction.Action.DragCircle);
                 }
                 FlexPanelActivity.this.removeEditPanelNone();
@@ -1704,14 +1662,14 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             for (int size2 = this.mActions.size() - 2; size2 > i2; size2--) {
                 setDragAnimation(animatorSet, this.mGridView.getChildAt(size2), this.mGridView.getChildAt(size2 - 1));
             }
-            for (int i7 = checkFromValueNone2 - 10; i7 > 0; i7--) {
+            for (int i7 = iCheckFromValueNone2 - 10; i7 > 0; i7--) {
                 setDragAnimation(animatorSet, this.mGridLayout.getChildAt(i7), this.mGridLayout.getChildAt(i7 - 1));
             }
             animatorSet.start();
             return;
         }
         this.mGridLayout.getChildAt(i - 10).setVisibility(4);
-        int i8 = checkFromValueNone2 - 10;
+        int i8 = iCheckFromValueNone2 - 10;
         while (i8 < this.mEditActions.size() - 1) {
             View childAt3 = this.mGridLayout.getChildAt(i8);
             i8++;
@@ -1745,7 +1703,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public final void onDragEnded() {
+    public final void onDragEnded() throws JSONException {
         if (this.mOnDragAnimation) {
             return;
         }
@@ -1802,7 +1760,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // android.view.View.OnLongClickListener
-    public final boolean onLongClick(View view) {
+    public final boolean onLongClick(View view) throws JSONException, PackageManager.NameNotFoundException {
         ControlPanelAction.Action action;
         if (!this.mOnDragEnded) {
             if (view.getTag(R.id.grid_button) != null && ((Integer) view.getTag(R.id.grid_button)).intValue() == ControlPanelAction.Action.EditPanel.getValue()) {
@@ -1832,24 +1790,24 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             int positionByAction = getPositionByAction(this.mDraggedAction.getValue());
             ControlPanelAction.Action action3 = this.mDraggedAction;
             if (action3 != ControlPanelAction.Action.None && action3 != (action = ControlPanelAction.Action.DragCircle) && positionByAction != -1 && this.mBrightnessVolumeView.getVisibility() == 8) {
-                final View findViewById = view.findViewById(R.id.grid_button);
-                ImageButton imageButton = (ImageButton) findViewById.findViewById(R.id.menubutton);
+                final View viewFindViewById = view.findViewById(R.id.grid_button);
+                ImageButton imageButton = (ImageButton) viewFindViewById.findViewById(R.id.menubutton);
                 imageButton.setBackgroundResource(R.drawable.drag_selected_background);
                 imageButton.setBackgroundTintList(null);
                 SemGfxImageFilter semGfxImageFilter = new SemGfxImageFilter();
                 semGfxImageFilter.setBlurRadius(45.0f);
                 imageButton.semSetGfxImageFilter(semGfxImageFilter);
                 imageButton.setVisibility(0);
-                findViewById.findViewById(R.id.drag_selected_border).setBackgroundResource(R.drawable.drag_selected_border);
-                findViewById.findViewById(R.id.drag_selected_border).setVisibility(0);
+                viewFindViewById.findViewById(R.id.drag_selected_border).setBackgroundResource(R.drawable.drag_selected_border);
+                viewFindViewById.findViewById(R.id.drag_selected_border).setVisibility(0);
                 final int pixelSize = getPixelSize(R.dimen.grid_menu_layout_size);
-                if (findViewById.startDragAndDrop(null, new View.DragShadowBuilder(findViewById) { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.12
+                if (viewFindViewById.startDragAndDrop(null, new View.DragShadowBuilder(viewFindViewById) { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.12
                     @Override // android.view.View.DragShadowBuilder
                     public final void onProvideShadowMetrics(Point point, Point point2) {
                         int i3 = pixelSize;
                         point.set(i3 * 2, i3);
-                        int width = findViewById.getWidth() / 2;
-                        int height = findViewById.getHeight() / 2;
+                        int width = viewFindViewById.getWidth() / 2;
+                        int height = viewFindViewById.getHeight() / 2;
                         FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
                         int i4 = FlexPanelActivity.mEditPanelItemSize;
                         point2.set(width, flexPanelActivity.getPixelSize(R.dimen.drag_selected_top_margin) + height);
@@ -1896,7 +1854,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override // androidx.fragment.app.FragmentActivity, android.app.Activity
-    public final void onPause() {
+    public final void onPause() throws JSONException, SecurityException {
         getContentResolver().unregisterContentObserver(this.mBrightnessObserver);
         getContentResolver().unregisterContentObserver(this.mModeEnableObserver);
         getContentResolver().unregisterContentObserver(this.mTalkbackObserver);
@@ -1954,7 +1912,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         super.onStop();
     }
 
-    public final void removeEditPanelNone() {
+    public final void removeEditPanelNone() throws JSONException {
         for (int size = this.mEditActions.size() - 1; size >= 0; size--) {
             if (this.mEditActions.get(size) == ControlPanelAction.Action.None) {
                 onActionArrayRemove(size, "edit_panel_action_list");
@@ -1981,17 +1939,61 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         this.mTouchPad = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00d4  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00d4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.graphics.drawable.Drawable resizeDrawable(android.graphics.drawable.Drawable r15) {
-        /*
-            Method dump skipped, instructions count: 247
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.controlpanel.activity.FlexPanelActivity.resizeDrawable(android.graphics.drawable.Drawable):android.graphics.drawable.Drawable");
+    public final Drawable resizeDrawable(Drawable drawable) {
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        if (!mIsFold) {
+            Point point = new Point();
+            getWindowManager().getDefaultDisplay().getRealSize(point);
+            int i = point.x;
+            int i2 = point.y;
+            if (bitmap == null || bitmap.isRecycled()) {
+                bitmap = null;
+                if (bitmap == null) {
+                    bitmap = bitmapDrawable.getBitmap();
+                }
+            } else {
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+                float f = width;
+                float f2 = f / 2.0f;
+                float f3 = height;
+                float f4 = f3 / 2.0f;
+                float f5 = width * i2 > i * height ? i2 / f3 : i / f;
+                SuggestionsAdapter$$ExternalSyntheticOutline0.m(i2, i, "metricsHeight=", " metricsWidth=", "FlexPanelActivity");
+                float f6 = i / f5;
+                float f7 = i2 / f5;
+                float f8 = f2 - (f6 / 2.0f);
+                if (f8 < 0.0f) {
+                    f8 = 0.0f;
+                }
+                float f9 = f4 - (f7 / 2.0f);
+                float f10 = f9 >= 0.0f ? f9 : 0.0f;
+                if (Math.round(f8) == 0 && Math.round(f10) == 0 && width == Math.round(f6) && height == Math.round(f7)) {
+                    Log.d("FlexPanelActivity", "It doesn't need to crop bitmap");
+                } else {
+                    if (Math.round(f6) < 1 || Math.round(f7) < 1 || i < 1 || i2 < 1) {
+                        Log.d("FlexPanelActivity", "Math.round(width) < 1 || Math.round(height) < 1 || mMetricsWidth < 1 || mMetricsHeight < 1");
+                    } else {
+                        if (Math.round(f8) + Math.round(f6) <= width) {
+                            if (Math.round(f10) + Math.round(f7) <= height) {
+                                Log.d("FlexPanelActivity", "Cropping...");
+                                bitmap = Bitmap.createBitmap(bitmap, Math.round(f8), Math.round(f10), Math.round(f6), Math.round(f7));
+                            }
+                        }
+                        Log.d("FlexPanelActivity", "Calculated crop size error");
+                    }
+                    bitmap = null;
+                }
+                if (bitmap == null) {
+                }
+            }
+        }
+        return new BitmapDrawable(getResources(), Bitmap.createBitmap(bitmap, 0, bitmap.getHeight() / 2, bitmap.getWidth(), bitmap.getHeight() / 2));
     }
 
     public final void returnToMenu() {
@@ -2002,7 +2004,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
     }
 
     public final void setActionArray(String str, ArrayList arrayList) {
-        SharedPreferences.Editor edit = this.mSharedPreferences.edit();
+        SharedPreferences.Editor editorEdit = this.mSharedPreferences.edit();
         JSONArray jSONArray = new JSONArray();
         int size = arrayList.size();
         int i = 0;
@@ -2012,18 +2014,18 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             jSONArray.put((String) obj);
         }
         if (arrayList.isEmpty()) {
-            edit.putString(str, null);
+            editorEdit.putString(str, null);
         } else {
-            edit.putString(str, jSONArray.toString());
+            editorEdit.putString(str, jSONArray.toString());
         }
-        edit.apply();
+        editorEdit.apply();
     }
 
     public final void setPreferences(String str, boolean z) {
         this.mSharedPreferences.edit().putBoolean(str, z).apply();
     }
 
-    public final void setupBasicPanel() {
+    public final void setupBasicPanel() throws JSONException {
         this.mIsMediaPanel = false;
         this.mIsEditPanel = false;
         setContentView(R.layout.basic_panel_layout);
@@ -2039,7 +2041,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
             new Handler().postDelayed(new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$$ExternalSyntheticLambda12
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
+                    FlexPanelActivity flexPanelActivity = this.f$0;
                     int i3 = i;
                     flexPanelActivity.mUpperArea.setVisibility(8);
                     flexPanelActivity.mBrightnessVolumeView.setVisibility(0);
@@ -2068,12 +2070,12 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         this.mBrightnessVolumeType = i2;
     }
 
-    public final void setupCommonPart() {
+    public final void setupCommonPart() throws JSONException {
         this.mGridLayout = this.mIsEditPanel ? (GridLayout) findViewById(R.id.gridLayout) : null;
         findViewById(R.id.wallpaper_area).setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.controlpanel.activity.FlexPanelActivity$$ExternalSyntheticLambda2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                FlexPanelActivity flexPanelActivity = FlexPanelActivity.this;
+                FlexPanelActivity flexPanelActivity = this.f$0;
                 if (flexPanelActivity.mBrightnessVolumeView.getVisibility() != 8) {
                     BrightnessVolumeView brightnessVolumeView = flexPanelActivity.mBrightnessVolumeView;
                     if (brightnessVolumeView.mBrightnessSeekBar.getVisibility() == 0) {
@@ -2085,15 +2087,15 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
-        View findViewById = findViewById(R.id.wallpaper_area);
+        View viewFindViewById = findViewById(R.id.wallpaper_area);
         ContentResolver contentResolver = getContentResolver();
         int i = 0;
         if (Settings.Global.getInt(contentResolver, SettingsHelper.INDEX_LOW_POWER_MODE, 0) != 1 || Settings.Global.getInt(contentResolver, "sem_power_mode_limited_apps_and_home_screen", 0) != 1) {
             try {
-                findViewById.setBackground(resizeDrawable(WallpaperManager.getInstance(this).semGetDrawable(5)));
+                viewFindViewById.setBackground(resizeDrawable(WallpaperManager.getInstance(this).semGetDrawable(5)));
                 SemGfxImageFilter semGfxImageFilter = new SemGfxImageFilter();
                 semGfxImageFilter.setBlurRadius(200.0f);
-                findViewById.semSetGfxImageFilter(semGfxImageFilter);
+                viewFindViewById.semSetGfxImageFilter(semGfxImageFilter);
             } catch (ClassCastException e) {
                 Log.e("FlexPanelActivity", "ClassCastException : " + e.toString());
             } catch (IllegalArgumentException e2) {
@@ -2213,7 +2215,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public final void setupMediaPanel() {
+    public final void setupMediaPanel() throws JSONException {
         if (!CheckControlWindowState.isSupportButton(this.mMediaController)) {
             setupBasicPanel();
             return;
@@ -2240,7 +2242,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         setPreferences("MEDIA_TOUCH_PAD_ENABLED", false);
     }
 
-    public final void setupTouchPadMediaPanel() {
+    public final void setupTouchPadMediaPanel() throws JSONException {
         this.mIsMediaPanel = true;
         this.mIsEditPanel = false;
         setContentView(R.layout.touchpad_media_panel_layout);
@@ -2262,7 +2264,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         displayTouchPadIfNeed();
     }
 
-    public final void updateStatusPreferences(boolean z) {
+    public final void updateStatusPreferences(boolean z) throws JSONException {
         int i;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
@@ -2283,7 +2285,7 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
         }
         this.mSharedPreferences.edit().putString(SystemUIAnalytics.FLEX_TOOLBAR_FUNCTION_STATUS, arrayList2.toString()).apply();
         if (z) {
-            SharedPreferences.Editor edit = this.mSharedPreferences.edit();
+            SharedPreferences.Editor editorEdit = this.mSharedPreferences.edit();
             String string = this.mSharedPreferences.getString("basic_panel_action_list", null);
             if (string == null) {
                 i = 4;
@@ -2303,14 +2305,14 @@ public class FlexPanelActivity extends AppCompatActivity implements View.OnClick
                             i2 = i;
                             e.printStackTrace();
                             i = i2;
-                            edit.putInt(SystemUIAnalytics.FLEX_NUMBER_OF_TOOLS_STATUS, i).apply();
+                            editorEdit.putInt(SystemUIAnalytics.FLEX_NUMBER_OF_TOOLS_STATUS, i).apply();
                         }
                     }
                 } catch (JSONException e2) {
                     e = e2;
                 }
             }
-            edit.putInt(SystemUIAnalytics.FLEX_NUMBER_OF_TOOLS_STATUS, i).apply();
+            editorEdit.putInt(SystemUIAnalytics.FLEX_NUMBER_OF_TOOLS_STATUS, i).apply();
         }
     }
 }

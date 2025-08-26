@@ -8,34 +8,34 @@ public class ClipboardProcText {
 
     public static String getImgFileNameFromHtml(String str) {
         String lowerCase = str.toLowerCase();
-        int indexOf = lowerCase.indexOf(IMG_BEGIN);
-        String str2 = "";
-        if (indexOf == -1) {
+        int iIndexOf = lowerCase.indexOf(IMG_BEGIN);
+        String strSubstring = "";
+        if (iIndexOf == -1) {
             if (lowerCase.contains("<iframe")) {
                 Log.secD(TAG, "This is using a iframe tag.");
             }
             return "";
         }
-        while (indexOf > -1) {
-            String substring = lowerCase.substring(indexOf);
-            String substring2 = str.substring(indexOf);
-            int indexOf2 = substring.indexOf(IMG_SRC);
-            if (indexOf2 <= 0) {
+        while (iIndexOf > -1) {
+            String strSubstring2 = lowerCase.substring(iIndexOf);
+            String strSubstring3 = str.substring(iIndexOf);
+            int iIndexOf2 = strSubstring2.indexOf(IMG_SRC);
+            if (iIndexOf2 <= 0) {
                 break;
             }
-            int i = indexOf2 + 5;
-            String substring3 = substring.substring(i);
-            String substring4 = substring2.substring(i);
-            int indexOf3 = substring3.indexOf("\"");
-            str2 = substring4.substring(0, indexOf3);
-            lowerCase = substring3.substring(indexOf3);
-            str = substring4.substring(indexOf3);
-            int length = str2.length();
+            int i = iIndexOf2 + 5;
+            String strSubstring4 = strSubstring2.substring(i);
+            String strSubstring5 = strSubstring3.substring(i);
+            int iIndexOf3 = strSubstring4.indexOf("\"");
+            strSubstring = strSubstring5.substring(0, iIndexOf3);
+            lowerCase = strSubstring4.substring(iIndexOf3);
+            str = strSubstring5.substring(iIndexOf3);
+            int length = strSubstring.length();
             if (length > 0 && length < 255) {
-                return str2;
+                return strSubstring;
             }
-            indexOf = lowerCase.indexOf(IMG_BEGIN);
+            iIndexOf = lowerCase.indexOf(IMG_BEGIN);
         }
-        return str2;
+        return strSubstring;
     }
 }

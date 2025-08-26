@@ -6,7 +6,6 @@ import kotlinx.coroutines.internal.LimitedDispatcherKt;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class MainCoroutineDispatcher extends CoroutineDispatcher {
     public abstract MainCoroutineDispatcher getImmediate();

@@ -10,13 +10,11 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ShadeDisplaysInteractor$waitForNotificationsRebinding$2$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ ShadeDisplaysInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.ShadeDisplaysInteractor$waitForNotificationsRebinding$2$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ int I$0;
@@ -80,7 +78,7 @@ final class ShadeDisplaysInteractor$waitForNotificationsRebinding$2$1 extends Su
         ReadonlyStateFlow readonlyStateFlow = this.this$0.notificationRebindingTracker.rebindingInProgressCount;
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(null);
         this.label = 1;
-        Object first = FlowKt.first(readonlyStateFlow, anonymousClass1, this);
-        return first == coroutineSingletons ? coroutineSingletons : first;
+        Object objFirst = FlowKt.first(readonlyStateFlow, anonymousClass1, this);
+        return objFirst == coroutineSingletons ? coroutineSingletons : objFirst;
     }
 }

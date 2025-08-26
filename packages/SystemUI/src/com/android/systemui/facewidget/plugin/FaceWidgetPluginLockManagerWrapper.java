@@ -12,14 +12,12 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetPluginLockManagerWrapper implements PluginFaceWidgetLockManager {
     public final HashMap mCallbackMap = new HashMap();
     public final PluginLockMediator mPluginLockMediator;
     public final PluginLockStarManager mPluginLockStarManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FaceWidgetLockStarStateCallbackWrapper implements PluginLockListener.State {
         public PluginLockStarStateCallback mCallback;
 

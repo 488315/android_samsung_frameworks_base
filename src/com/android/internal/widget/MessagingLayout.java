@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.Person;
 import android.app.RemoteInputHistoryItem;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -145,8 +146,8 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
         this.mImageMessageContainer = (MessagingLinearLayout) findViewById(R.id.conversation_image_message_container);
         this.mRightIconView = (ImageView) findViewById(R.id.right_icon);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int max = Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        this.mMessagingClipRect = new Rect(0, 0, max, max);
+        int iMax = Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        this.mMessagingClipRect = new Rect(0, 0, iMax, iMax);
         setMessagingClippingDisabled(false);
     }
 
@@ -215,54 +216,54 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
 
     @RemotableViewMethod(asyncImpl = "setDataAsync")
     /* renamed from: setData, reason: merged with bridge method [inline-methods] */
-    public void lambda$setDataAsync$4(Bundle bundle) {
+    public void lambda$setDataAsync$4(Bundle bundle) throws Resources.NotFoundException {
         bind(parseMessagingData(bundle, false));
     }
 
     private MessagingData parseMessagingData(Bundle bundle, boolean z) {
-        List<MessagingMessage> createMessages;
+        List<MessagingMessage> listCreateMessages;
         List<Notification.MessagingStyle.Message> messagesFromBundleArray = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_MESSAGES));
         List<Notification.MessagingStyle.Message> messagesFromBundleArray2 = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_HISTORIC_MESSAGES));
         setUser((Person) bundle.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class));
         addRemoteInputHistoryToMessages(messagesFromBundleArray, (RemoteInputHistoryItem[]) bundle.getParcelableArray(Notification.EXTRA_REMOTE_INPUT_HISTORY_ITEMS, RemoteInputHistoryItem.class));
         Person person = (Person) bundle.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class);
         boolean z2 = bundle.getBoolean(Notification.EXTRA_SHOW_REMOTE_INPUT_SPINNER, false);
-        List<MessagingMessage> createMessages2 = createMessages(messagesFromBundleArray2, true, z);
+        List<MessagingMessage> listCreateMessages2 = createMessages(messagesFromBundleArray2, true, z);
         CharSequence charSequence = bundle.getCharSequence(Notification.EXTRA_SUMMARIZED_CONTENT);
         this.mSummarizedContent = charSequence;
         if (!TextUtils.isEmpty(charSequence) && this.mIsCollapsed) {
             this.mMessagingLinearLayout.setMaxDisplayedLines(3);
-            createMessages = createMessages(List.of(new Notification.MessagingStyle.Message(this.mSummarizedContent, 0L, "")), false, z);
+            listCreateMessages = createMessages(List.of(new Notification.MessagingStyle.Message(this.mSummarizedContent, 0L, "")), false, z);
         } else {
-            createMessages = createMessages(messagesFromBundleArray, false, z);
+            listCreateMessages = createMessages(messagesFromBundleArray, false, z);
         }
-        List<MessagingMessage> list = createMessages;
+        List<MessagingMessage> list = listCreateMessages;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
-        findGroups(createMessages2, list, arrayList, arrayList2);
-        return new MessagingData(person, z2, createMessages2, list, arrayList, arrayList2, this.mSummarizedContent);
+        findGroups(listCreateMessages2, list, arrayList, arrayList2);
+        return new MessagingData(person, z2, listCreateMessages2, list, arrayList, arrayList2, this.mSummarizedContent);
     }
 
     public Runnable setDataAsync(final Bundle bundle) {
         if (!this.mPrecomputedTextEnabled) {
             return new Runnable() { // from class: com.android.internal.widget.MessagingLayout$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    MessagingLayout.this.lambda$setDataAsync$4(bundle);
+                public final void run() throws Resources.NotFoundException {
+                    this.f$0.lambda$setDataAsync$4(bundle);
                 }
             };
         }
-        final MessagingData parseMessagingData = parseMessagingData(bundle, true);
+        final MessagingData messagingData = parseMessagingData(bundle, true);
         return new Runnable() { // from class: com.android.internal.widget.MessagingLayout$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
-            public final void run() {
-                MessagingLayout.this.lambda$setDataAsync$5(parseMessagingData);
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.lambda$setDataAsync$5(messagingData);
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$setDataAsync$5(MessagingData messagingData) {
+    public /* synthetic */ void lambda$setDataAsync$5(MessagingData messagingData) throws Resources.NotFoundException {
         finalizeInflate(messagingData.getHistoricMessagingMessages());
         finalizeInflate(messagingData.getNewMessagingMessages());
         bind(messagingData);
@@ -298,7 +299,7 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
         }
     }
 
-    private void bind(MessagingData messagingData) {
+    private void bind(MessagingData messagingData) throws Resources.NotFoundException {
         setUser(messagingData.getUser());
         ArrayList<MessagingGroup> arrayList = new ArrayList<>(this.mGroups);
         createGroupViews(messagingData.getGroups(), messagingData.getSenders(), messagingData.getShowSpinner());
@@ -359,14 +360,14 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
             final MessagingGroup messagingGroup = arrayList.get(i);
             if (!this.mGroups.contains(messagingGroup)) {
                 List<MessagingMessage> messages = messagingGroup.getMessages();
-                boolean isShown = messagingGroup.isShown();
+                boolean zIsShown = messagingGroup.isShown();
                 this.mMessagingLinearLayout.removeView(messagingGroup);
-                if (isShown && !MessagingLinearLayout.isGone(messagingGroup)) {
+                if (zIsShown && !MessagingLinearLayout.isGone(messagingGroup)) {
                     this.mMessagingLinearLayout.addTransientView(messagingGroup, 0);
                     messagingGroup.removeGroupAnimated(new Runnable() { // from class: com.android.internal.widget.MessagingLayout$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MessagingLayout.this.lambda$removeGroups$6(messagingGroup);
+                            this.f$0.lambda$removeGroups$6(messagingGroup);
                         }
                     });
                 } else {
@@ -386,13 +387,13 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
 
     private void updateTitleAndNamesDisplay() {
         Icon avatarSymbolIfMatching;
-        Map<CharSequence, String> mapUniqueNamesToPrefix = this.mPeopleHelper.mapUniqueNamesToPrefix(this.mGroups);
+        Map<CharSequence, String> mapMapUniqueNamesToPrefix = this.mPeopleHelper.mapUniqueNamesToPrefix(this.mGroups);
         ArrayMap arrayMap = new ArrayMap();
         for (int i = 0; i < this.mGroups.size(); i++) {
             MessagingGroup messagingGroup = this.mGroups.get(i);
             boolean z = messagingGroup.getSender() == this.mUser;
             CharSequence senderName = messagingGroup.getSenderName();
-            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && ((!this.mIsOneToOne || this.mAvatarReplacement == null || z) && (avatarSymbolIfMatching = messagingGroup.getAvatarSymbolIfMatching(senderName, mapUniqueNamesToPrefix.get(senderName), this.mLayoutColor)) != null)) {
+            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && ((!this.mIsOneToOne || this.mAvatarReplacement == null || z) && (avatarSymbolIfMatching = messagingGroup.getAvatarSymbolIfMatching(senderName, mapMapUniqueNamesToPrefix.get(senderName), this.mLayoutColor)) != null)) {
                 arrayMap.put(senderName, avatarSymbolIfMatching);
             }
         }
@@ -403,12 +404,12 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
                 if (this.mIsOneToOne && this.mAvatarReplacement != null && messagingGroup2.getSender() != this.mUser) {
                     messagingGroup2.setAvatar(this.mAvatarReplacement);
                 } else {
-                    Icon icon = (Icon) arrayMap.get(senderName2);
-                    if (icon == null) {
-                        icon = createAvatarSymbol(senderName2, mapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
-                        arrayMap.put(senderName2, icon);
+                    Icon iconCreateAvatarSymbol = (Icon) arrayMap.get(senderName2);
+                    if (iconCreateAvatarSymbol == null) {
+                        iconCreateAvatarSymbol = createAvatarSymbol(senderName2, mapMapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
+                        arrayMap.put(senderName2, iconCreateAvatarSymbol);
                     }
-                    messagingGroup2.setCreatedAvatar(icon, senderName2, mapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
+                    messagingGroup2.setCreatedAvatar(iconCreateAvatarSymbol, senderName2, mapMapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
                 }
             }
         }
@@ -481,60 +482,58 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
     public void setUser(Person person) {
         this.mUser = person;
         if (person.getIcon() == null) {
-            Icon createWithResource = Icon.createWithResource(getContext(), R.drawable.messaging_user);
-            createWithResource.setTint(this.mLayoutColor);
-            this.mUser = this.mUser.toBuilder().setIcon(createWithResource).build();
+            Icon iconCreateWithResource = Icon.createWithResource(getContext(), R.drawable.messaging_user);
+            iconCreateWithResource.setTint(this.mLayoutColor);
+            this.mUser = this.mUser.toBuilder().setIcon(iconCreateWithResource).build();
         }
     }
 
-    private void createGroupViews(List<List<MessagingMessage>> list, List<Person> list2, boolean z) {
+    private void createGroupViews(List<List<MessagingMessage>> list, List<Person> list2, boolean z) throws Resources.NotFoundException {
         CharSequence charSequence;
         this.mGroups.clear();
         int i = 0;
         while (i < list.size()) {
             List<MessagingMessage> list3 = list.get(i);
             CharSequence charSequence2 = null;
-            MessagingGroup messagingGroup = null;
+            MessagingGroup messagingGroupCreateGroup = null;
             for (int size = list3.size() - 1; size >= 0; size--) {
-                messagingGroup = list3.get(size).getGroup();
-                if (messagingGroup != null) {
+                messagingGroupCreateGroup = list3.get(size).getGroup();
+                if (messagingGroupCreateGroup != null) {
                     break;
                 }
             }
-            if (messagingGroup == null) {
-                messagingGroup = MessagingGroup.createGroup(this.mMessagingLinearLayout);
-                this.mAddedGroups.add(messagingGroup);
-            } else if (messagingGroup.getParent() != this.mMessagingLinearLayout) {
-                throw new IllegalStateException("group parent was " + messagingGroup.getParent() + " but expected " + this.mMessagingLinearLayout);
+            if (messagingGroupCreateGroup == null) {
+                messagingGroupCreateGroup = MessagingGroup.createGroup(this.mMessagingLinearLayout);
+                this.mAddedGroups.add(messagingGroupCreateGroup);
+            } else if (messagingGroupCreateGroup.getParent() != this.mMessagingLinearLayout) {
+                throw new IllegalStateException("group parent was " + messagingGroupCreateGroup.getParent() + " but expected " + this.mMessagingLinearLayout);
             }
-            messagingGroup.setImageDisplayLocation(this.mIsCollapsed ? 2 : 0);
-            messagingGroup.setIsInConversation(false);
-            messagingGroup.setLayoutColor(this.mLayoutColor);
-            messagingGroup.setTextColors(this.mSenderTextColor, this.mMessageTextColor);
+            messagingGroupCreateGroup.setImageDisplayLocation(this.mIsCollapsed ? 2 : 0);
+            messagingGroupCreateGroup.setIsInConversation(false);
+            messagingGroupCreateGroup.setLayoutColor(this.mLayoutColor);
+            messagingGroupCreateGroup.setTextColors(this.mSenderTextColor, this.mMessageTextColor);
             Person person = list2.get(i);
             if (person != this.mUser && (charSequence = this.mNameReplacement) != null) {
                 charSequence2 = charSequence;
             }
-            messagingGroup.setSingleLine(this.mIsCollapsed && !Flags.nmCollapsedLines() && TextUtils.isEmpty(this.mSummarizedContent));
-            messagingGroup.setShowingAvatar(!this.mIsCollapsed);
-            messagingGroup.setIsCollapsed(this.mIsCollapsed);
-            messagingGroup.setSender(person, charSequence2);
-            messagingGroup.setSending(i == list.size() - 1 && z);
-            this.mGroups.add(messagingGroup);
-            if (this.mMessagingLinearLayout.indexOfChild(messagingGroup) != i) {
-                this.mMessagingLinearLayout.removeView(messagingGroup);
-                this.mMessagingLinearLayout.addView(messagingGroup, i);
+            messagingGroupCreateGroup.setSingleLine(this.mIsCollapsed && !Flags.nmCollapsedLines() && TextUtils.isEmpty(this.mSummarizedContent));
+            messagingGroupCreateGroup.setShowingAvatar(!this.mIsCollapsed);
+            messagingGroupCreateGroup.setIsCollapsed(this.mIsCollapsed);
+            messagingGroupCreateGroup.setSender(person, charSequence2);
+            messagingGroupCreateGroup.setSending(i == list.size() - 1 && z);
+            this.mGroups.add(messagingGroupCreateGroup);
+            if (this.mMessagingLinearLayout.indexOfChild(messagingGroupCreateGroup) != i) {
+                this.mMessagingLinearLayout.removeView(messagingGroupCreateGroup);
+                this.mMessagingLinearLayout.addView(messagingGroupCreateGroup, i);
             }
-            messagingGroup.setMessages(list3);
+            messagingGroupCreateGroup.setMessages(list3);
             i++;
         }
         if (android.widget.flags.Flags.dropNonExistingMessages()) {
             this.mAddedGroups.removeIf(new Predicate() { // from class: com.android.internal.widget.MessagingLayout$$ExternalSyntheticLambda5
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$createGroupViews$11;
-                    lambda$createGroupViews$11 = MessagingLayout.this.lambda$createGroupViews$11((MessagingGroup) obj);
-                    return lambda$createGroupViews$11;
+                    return this.f$0.lambda$createGroupViews$11((MessagingGroup) obj);
                 }
             });
         }
@@ -581,12 +580,12 @@ public class MessagingLayout extends FrameLayout implements ImageMessageConsumer
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
             Notification.MessagingStyle.Message message = list.get(i);
-            MessagingMessage findAndRemoveMatchingMessage = findAndRemoveMatchingMessage(message);
-            if (findAndRemoveMatchingMessage == null) {
-                findAndRemoveMatchingMessage = MessagingMessage.createMessage(this, message, this.mImageResolver, z2);
+            MessagingMessage messagingMessageFindAndRemoveMatchingMessage = findAndRemoveMatchingMessage(message);
+            if (messagingMessageFindAndRemoveMatchingMessage == null) {
+                messagingMessageFindAndRemoveMatchingMessage = MessagingMessage.createMessage(this, message, this.mImageResolver, z2);
             }
-            findAndRemoveMatchingMessage.setIsHistoric(z);
-            arrayList.add(findAndRemoveMatchingMessage);
+            messagingMessageFindAndRemoveMatchingMessage.setIsHistoric(z);
+            arrayList.add(messagingMessageFindAndRemoveMatchingMessage);
         }
         return arrayList;
     }

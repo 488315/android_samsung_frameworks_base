@@ -2,7 +2,6 @@ package androidx.compose.ui.input.key;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyEvent {
     public final android.view.KeyEvent nativeKeyEvent;
@@ -12,7 +11,7 @@ public final class KeyEvent {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ KeyEvent m577boximpl(android.view.KeyEvent keyEvent) {
+    public static final /* synthetic */ KeyEvent m579boximpl(android.view.KeyEvent keyEvent) {
         return new KeyEvent(keyEvent);
     }
 

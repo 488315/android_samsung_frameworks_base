@@ -2,6 +2,7 @@ package android.content.pm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.security.PublicKey;
 
 /* loaded from: classes.dex */
@@ -44,7 +45,7 @@ public class VerifierInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.packageName);
         parcel.writeSerializable(this.publicKey);
     }

@@ -19,7 +19,6 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconBinder {
     static {
@@ -32,7 +31,7 @@ public final class MobileIconBinder {
     /* JADX WARN: Type inference failed for: r21v1, types: [com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$3] */
     public static MobileIconBinder$bind$3 bind$default(ViewGroup viewGroup, final LocationBasedMobileViewModel locationBasedMobileViewModel, MobileViewLogger mobileViewLogger, ConfigurationController configurationController) {
         ViewGroup viewGroup2 = (ViewGroup) viewGroup.requireViewById(R.id.mobile_group);
-        View requireViewById = viewGroup.requireViewById(R.id.inout_container);
+        View viewRequireViewById = viewGroup.requireViewById(R.id.inout_container);
         ImageView imageView = (ImageView) viewGroup.requireViewById(R.id.mobile_in);
         ImageView imageView2 = (ImageView) viewGroup.requireViewById(R.id.mobile_out);
         ImageView imageView3 = (ImageView) viewGroup.requireViewById(R.id.mobile_type);
@@ -46,18 +45,18 @@ public final class MobileIconBinder {
         ImageView imageView7 = (ImageView) viewGroup.requireViewById(R.id.voice_no_service);
         viewGroup.setVisibility(((Boolean) locationBasedMobileViewModel.isVisible().getValue()).booleanValue() ? 0 : 8);
         imageView4.setVisibility(0);
-        final StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(2);
-        final StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(new MobileIconColors(-301989889, -16777216));
-        final StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(-1);
+        final StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(2);
+        final StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(new MobileIconColors(-301989889, -16777216));
+        final StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(-1);
         final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
-        RepeatWhenAttachedKt.repeatWhenAttached(viewGroup, EmptyCoroutineContext.INSTANCE, new MobileIconBinder$bind$1(locationBasedMobileViewModel, viewGroup, mobileViewLogger, ref$BooleanRef, MutableStateFlow, viewGroup2, statusBarIconView, imageView4, configurationController, signalDrawable, frameLayout, imageView3, MutableStateFlow2, imageView5, space, imageView, imageView2, requireViewById, imageView7, imageView6, MutableStateFlow3, null));
+        RepeatWhenAttachedKt.repeatWhenAttached(viewGroup, EmptyCoroutineContext.INSTANCE, new MobileIconBinder$bind$1(locationBasedMobileViewModel, viewGroup, mobileViewLogger, ref$BooleanRef, stateFlowImplMutableStateFlow, viewGroup2, statusBarIconView, imageView4, configurationController, signalDrawable, frameLayout, imageView3, stateFlowImplMutableStateFlow2, imageView5, space, imageView, imageView2, viewRequireViewById, imageView7, imageView6, stateFlowImplMutableStateFlow3, null));
         if (locationBasedMobileViewModel.location == StatusBarLocation.HOME) {
             RepeatWhenAttachedKt.repeatWhenAttached(viewGroup, EmptyCoroutineContext.INSTANCE, new MobileIconBinder$bind$2(mobileViewLogger, viewGroup, locationBasedMobileViewModel, ref$BooleanRef, null));
         }
         return new ModernStatusBarViewBinding() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$3
             @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
             public final boolean getShouldIconBeVisible() {
-                return ((Boolean) LocationBasedMobileViewModel.this.isVisible().getValue()).booleanValue();
+                return ((Boolean) locationBasedMobileViewModel.isVisible().getValue()).booleanValue();
             }
 
             @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
@@ -67,17 +66,17 @@ public final class MobileIconBinder {
 
             @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
             public final void onDecorTintChanged(int i) {
-                MutableStateFlow3.setValue(Integer.valueOf(i));
+                stateFlowImplMutableStateFlow3.setValue(Integer.valueOf(i));
             }
 
             @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
             public final void onIconTintChanged(int i, int i2) {
-                MutableStateFlow2.setValue(new MobileIconColors(i, i2));
+                stateFlowImplMutableStateFlow2.setValue(new MobileIconColors(i, i2));
             }
 
             @Override // com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarViewBinding
             public final void onVisibilityStateChanged(int i) {
-                MutableStateFlow.setValue(Integer.valueOf(i));
+                stateFlowImplMutableStateFlow.setValue(Integer.valueOf(i));
             }
         };
     }

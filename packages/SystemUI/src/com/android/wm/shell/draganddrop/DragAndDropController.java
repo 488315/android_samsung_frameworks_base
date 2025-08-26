@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.ComponentCallbacks2;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,11 +31,14 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.window.WindowContainerToken;
+import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.launcher3.icons.IconProvider;
 import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.wmshell.WMShell$$ExternalSyntheticLambda4;
 import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.common.DisplayLayout;
@@ -41,9 +46,12 @@ import com.android.wm.shell.common.DnDSnackBarController;
 import com.android.wm.shell.common.DnDSnackBarWindow;
 import com.android.wm.shell.common.ExternalInterfaceBinder;
 import com.android.wm.shell.common.MultiInstanceHelper;
+import com.android.wm.shell.common.MultiWindowOverheatUI;
 import com.android.wm.shell.common.RemoteCallable;
 import com.android.wm.shell.common.ShellExecutor;
+import com.android.wm.shell.draganddrop.AppResultFactory;
 import com.android.wm.shell.draganddrop.DragAndDropController;
+import com.android.wm.shell.draganddrop.DragAndDropEventLogger;
 import com.android.wm.shell.draganddrop.GlobalDragListener;
 import com.android.wm.shell.draganddrop.SplitDragPolicy;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
@@ -54,14 +62,17 @@ import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.android.wm.shell.sysui.ShellController;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.android.multiwindow.IDragAndDropControllerProxy;
+import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.rune.CoreRune;
 import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.StringJoiner;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragAndDropController implements RemoteCallable, GlobalDragListener.GlobalDragListenerCallback, DisplayController.OnDisplaysChangedListener, ShellTaskOrganizer.TaskVanishedListener, View.OnDragListener, ComponentCallbacks2 {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -102,7 +113,6 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
     public final Rect mTmpRect = new Rect();
     public final AnonymousClass2 mProxy = new AnonymousClass2();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.draganddrop.DragAndDropController$2, reason: invalid class name */
     public class AnonymousClass2 extends IDragAndDropControllerProxy.Stub {
         public AnonymousClass2() {
@@ -120,7 +130,7 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
                 handler.post(new Runnable() { // from class: com.android.wm.shell.draganddrop.DragAndDropController$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DragAndDropController.AnonymousClass2 anonymousClass2 = DragAndDropController.AnonymousClass2.this;
+                        DragAndDropController.AnonymousClass2 anonymousClass2 = this.f$0;
                         int i3 = i;
                         DragAndDropController.PerDisplay perDisplay2 = (DragAndDropController.PerDisplay) DragAndDropController.this.mDisplayDropTargets.get(i3);
                         if (perDisplay2 == null) {
@@ -148,7 +158,6 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IDragAndDropImpl extends IDragAndDrop$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public DragAndDropController mController;
@@ -163,7 +172,6 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PerDisplay implements HardwareRenderer.FrameDrawingCallback {
         public int activeDragCount;
         public final Context context;
@@ -308,6 +316,10 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         return this.mMainExecutor;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:40:0x010a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean handleDrop(DragEvent dragEvent, PerDisplay perDisplay) {
         boolean z;
         boolean z2;
@@ -337,7 +349,7 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
                 dnDSnackBarWindow2.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.wm.shell.common.DnDSnackBarWindow$$ExternalSyntheticLambda0
                     @Override // android.view.View.OnTouchListener
                     public final boolean onTouch(View view, MotionEvent motionEvent) {
-                        DnDSnackBarWindow dnDSnackBarWindow3 = DnDSnackBarWindow.this;
+                        DnDSnackBarWindow dnDSnackBarWindow3 = dnDSnackBarWindow2;
                         int i3 = DnDSnackBarWindow.$r8$clinit;
                         dnDSnackBarWindow3.getClass();
                         int action = motionEvent.getAction();
@@ -351,7 +363,7 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
                 dnDSnackBarWindow2.findViewById(R.id.snack_bar_button).setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.common.DnDSnackBarWindow$$ExternalSyntheticLambda1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        DnDSnackBarWindow dnDSnackBarWindow3 = DnDSnackBarWindow.this;
+                        DnDSnackBarWindow dnDSnackBarWindow3 = dnDSnackBarWindow2;
                         DnDSnackBarController dnDSnackBarController2 = dnDSnackBarWindow3.mCallbacks;
                         dnDSnackBarController2.getClass();
                         Bundle bundle = new Bundle();
@@ -386,28 +398,27 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         if (dropTargetLayout.mIsHideDragSourceTask && ((target = dropTargetLayout.mCurrentTarget) == null || target.type == 0)) {
             z = false;
             z2 = false;
-        } else {
-            if (dropTargetLayout.mCurrentTarget == null) {
-                if (!(dropTargetLayout.mIsIntentSenderDropTarget ? false : dropTargetLayout.mDismissView.mIsEnterDismissButton)) {
-                    z = false;
-                    z2 = true;
-                }
-            }
+        } else if (dropTargetLayout.mCurrentTarget != null) {
             z = true;
+            z2 = true;
+        } else {
+            if (!(dropTargetLayout.mIsIntentSenderDropTarget ? false : dropTargetLayout.mDismissView.mIsEnterDismissButton)) {
+                z = false;
+            }
             z2 = true;
         }
         if (z2) {
             int displayId = dropTargetLayout.getDisplay() == null ? 0 : dropTargetLayout.getDisplay().getDisplayId();
             SplitDragPolicy splitDragPolicy = dropTargetLayout.mPolicy;
             SplitDragPolicy.Target target3 = dropTargetLayout.mCurrentTarget;
-            DragAndDropPermissions obtain = DragAndDropPermissions.obtain(dragEvent);
+            DragAndDropPermissions dragAndDropPermissionsObtain = DragAndDropPermissions.obtain(dragEvent);
             if (target3 == null) {
                 splitDragPolicy.getClass();
             } else if (splitDragPolicy.mTargets.contains(target3)) {
                 DesktopStateImpl.Companion.getClass();
-                boolean inDesktopWindowing = DesktopStateImpl.Companion.inDesktopWindowing(displayId);
+                boolean zInDesktopWindowing = DesktopStateImpl.Companion.inDesktopWindowing(displayId);
                 int i3 = target3.type;
-                if (inDesktopWindowing) {
+                if (zInDesktopWindowing) {
                     launchOptions2 = new SplitDragPolicy.LaunchOptions(-1, 0, -1, false, (int) dragEvent.getX(), (int) dragEvent.getY());
                 } else {
                     boolean z3 = CoreRune.MW_DND_MULTI_SPLIT_DROP_TARGET;
@@ -464,9 +475,9 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
                 SplitDragPolicy.Starter starter2 = starter;
                 DragSession dragSession = splitDragPolicy.mSession;
                 if (dragSession.appData != null) {
-                    splitDragPolicy.launchApp(dragSession, starter2, launchOptions2.splitPosition, windowContainerToken, -1, obtain, launchOptions2, displayId);
+                    splitDragPolicy.launchApp(dragSession, starter2, launchOptions2.splitPosition, windowContainerToken, -1, dragAndDropPermissionsObtain, launchOptions2, displayId);
                 } else {
-                    splitDragPolicy.launchIntent(dragSession, starter2, launchOptions2.splitPosition, -1, obtain, launchOptions2, displayId);
+                    splitDragPolicy.launchIntent(dragSession, starter2, launchOptions2.splitPosition, -1, dragAndDropPermissionsObtain, launchOptions2, displayId);
                 }
                 if (target3.alreadyRun) {
                     Toast.makeText(splitDragPolicy.mContext, splitDragPolicy.mContext.getResources().getString(R.string.multiwindow_app_already_in_this_window), 0).show();
@@ -506,8 +517,8 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         if (i != 0) {
             return;
         }
-        Context createWindowContext = this.mDisplayController.getDisplayContext(i).createWindowContext(2016, null);
-        WindowManager windowManager = (WindowManager) createWindowContext.getSystemService(WindowManager.class);
+        Context contextCreateWindowContext = this.mDisplayController.getDisplayContext(i).createWindowContext(2016, null);
+        WindowManager windowManager = (WindowManager) contextCreateWindowContext.getSystemService(WindowManager.class);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, -1, 2016, 16777224, -3);
         layoutParams.privateFlags |= -2147483568;
         layoutParams.layoutInDisplayCutoutMode = 3;
@@ -515,17 +526,17 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         layoutParams.setTitle("ShellDropTarget");
         layoutParams.flags |= 512;
         layoutParams.multiWindowFlags |= 16;
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(createWindowContext).inflate(R.layout.global_drop_target, (ViewGroup) null);
+        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(contextCreateWindowContext).inflate(R.layout.global_drop_target, (ViewGroup) null);
         frameLayout.setOnDragListener(this);
         frameLayout.setVisibility(4);
-        DropTargetLayout dropTargetLayout = new DropTargetLayout(createWindowContext, this.mSplitScreen, this.mTransaction, this.mTransitions);
+        DropTargetLayout dropTargetLayout = new DropTargetLayout(contextCreateWindowContext, this.mSplitScreen, this.mTransaction, this.mTransitions, this.mMultiInstanceHelper);
         frameLayout.addView(dropTargetLayout, new ViewGroup.LayoutParams(-1, -1));
         try {
             windowManager.addView(frameLayout, layoutParams);
             i2 = i;
             try {
-                addDisplayDropTarget(i2, createWindowContext, windowManager, frameLayout, dropTargetLayout);
-                createWindowContext.registerComponentCallbacks(this);
+                addDisplayDropTarget(i2, contextCreateWindowContext, windowManager, frameLayout, dropTargetLayout);
+                contextCreateWindowContext.registerComponentCallbacks(this);
             } catch (WindowManager.InvalidDisplayException unused) {
                 Slog.w("DragAndDropController", "Unable to add view for display id: " + i2);
             }
@@ -585,25 +596,347 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:114:0x031f  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x0258  */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x028a  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0308  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x014c  */
+    /* JADX WARN: Removed duplicated region for block: B:121:0x0254  */
+    /* JADX WARN: Removed duplicated region for block: B:123:0x0258  */
+    /* JADX WARN: Removed duplicated region for block: B:124:0x028a  */
+    /* JADX WARN: Removed duplicated region for block: B:127:0x02a0  */
+    /* JADX WARN: Removed duplicated region for block: B:149:0x0308  */
+    /* JADX WARN: Removed duplicated region for block: B:152:0x031f  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x0143  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x014c  */
     /* JADX WARN: Type inference failed for: r7v2 */
     /* JADX WARN: Type inference failed for: r7v3, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r7v4 */
     @Override // android.view.View.OnDragListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onDrag(android.view.View r27, android.view.DragEvent r28) {
-        /*
-            Method dump skipped, instructions count: 1194
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.draganddrop.DragAndDropController.onDrag(android.view.View, android.view.DragEvent):boolean");
+    public final boolean onDrag(View view, DragEvent dragEvent) {
+        DragSession dragSession;
+        int i;
+        ?? r7;
+        boolean z;
+        boolean z2;
+        AppResult nonResizeableAppsResult;
+        boolean z3;
+        DragAndDropClientRecord dragAndDropClientRecordFrom;
+        boolean initialDropTargetVisible;
+        Rect rect;
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, 6161155429892961383L, 680, String.valueOf(DragEvent.actionToString(dragEvent.getAction())), Double.valueOf(dragEvent.getX()), Double.valueOf(dragEvent.getY()), Double.valueOf(dragEvent.getOffsetX()), Double.valueOf(dragEvent.getOffsetY()));
+        }
+        int displayId = view.getDisplay().getDisplayId();
+        PerDisplay perDisplay = (PerDisplay) this.mDisplayDropTargets.get(displayId);
+        ClipDescription clipDescription = dragEvent.getClipDescription();
+        if (perDisplay == null || perDisplay.context.getResources().getConfiguration().isDexMode()) {
+            return false;
+        }
+        WMShell$$ExternalSyntheticLambda4 wMShell$$ExternalSyntheticLambda4 = this.mSplitScreen.mIsKeyguardOccludedAndShowingSupplier;
+        if (wMShell$$ExternalSyntheticLambda4 != null ? wMShell$$ExternalSyntheticLambda4.getAsBoolean() : false) {
+            Slog.w("DragAndDropController", "isKeyguardOccludedAndShowing=true");
+            return false;
+        }
+        if (dragEvent.getAction() == 1) {
+            Slog.d("DragAndDropController", "ACTION_DRAG_STARTED");
+            if (dragEvent.getClipData() == null) {
+                Slog.w("DragAndDropController", "clipdata is null");
+                return false;
+            }
+            if (!this.mIsUserSetup) {
+                boolean zIsUserSetup = isUserSetup();
+                this.mIsUserSetup = zIsUserSetup;
+                if (!zIsUserSetup) {
+                    Slog.w("DragAndDropController", "User setup is not yet completed.");
+                    return false;
+                }
+            } else if (!deviceSupportsSplitScreenMultiWindow()) {
+                Slog.w("DragAndDropController", "This device does not support multi-windows.");
+                return false;
+            }
+            dragSession = new DragSession(ActivityTaskManager.getInstance(), this.mDisplayController.getDisplayLayout(displayId), dragEvent.getClipData(), dragEvent.getDragFlags(), perDisplay.executableAppHolder, perDisplay.visibleTasks);
+            perDisplay.dragSession = dragSession;
+            dragSession.updateRunningTask();
+            ActivityManager.RunningTaskInfo runningTaskInfo = dragSession.runningTaskInfo;
+            boolean z4 = runningTaskInfo != null && runningTaskInfo.isFreeform() && ((DesktopStateImpl) this.mDesktopState).canEnterDesktopMode;
+            if (dragEvent.getClipData() == null || dragEvent.getClipData().getItemCount() <= 0) {
+                z = false;
+                perDisplay.isHandlingDrag = z;
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                    long itemCount = dragEvent.getClipData() != null ? dragEvent.getClipData().getItemCount() : -1L;
+                    String string = "";
+                    if (clipDescription != null) {
+                        for (int i2 = 0; i2 < clipDescription.getMimeTypeCount(); i2++) {
+                            if (i2 > 0) {
+                                string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", ");
+                            }
+                            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+                            sbM.append(clipDescription.getMimeType(i2));
+                            string = sbM.toString();
+                        }
+                    }
+                    String strValueOf = String.valueOf(string);
+                    int dragFlags = dragEvent.getDragFlags();
+                    StringJoiner stringJoiner = new StringJoiner("|");
+                    if ((dragFlags & 256) != 0) {
+                        stringJoiner.add("GLOBAL");
+                    }
+                    if ((dragFlags & 1) != 0) {
+                        stringJoiner.add("GLOBAL_URI_READ");
+                    }
+                    if ((dragFlags & 2) != 0) {
+                        stringJoiner.add("GLOBAL_URI_WRITE");
+                    }
+                    if ((dragFlags & 64) != 0) {
+                        stringJoiner.add("GLOBAL_PERSISTABLE_URI_PERMISSION");
+                    }
+                    if ((dragFlags & 128) != 0) {
+                        stringJoiner.add("GLOBAL_PREFIX_URI_PERMISSION");
+                    }
+                    if ((dragFlags & 512) != 0) {
+                        stringJoiner.add("OPAQUE");
+                    }
+                    if ((dragFlags & 1024) != 0) {
+                        stringJoiner.add("ACCESSIBILITY_ACTION");
+                    }
+                    if ((dragFlags & 2048) != 0) {
+                        stringJoiner.add("REQUEST_SURFACE_FOR_RETURN_ANIMATION");
+                    }
+                    if ((dragFlags & 4096) != 0) {
+                        stringJoiner.add("GLOBAL_SAME_APPLICATION");
+                    }
+                    if ((dragFlags & 8192) != 0) {
+                        stringJoiner.add("START_INTENT_SENDER_ON_UNHANDLED_DRAG");
+                    }
+                    if ((dragFlags & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+                        stringJoiner.add("HIDE_CALLING_TASK_ON_DRAG_START");
+                    }
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, 7890563632905928192L, 7, Boolean.valueOf(z), Long.valueOf(itemCount), strValueOf, String.valueOf(stringJoiner.toString()));
+                }
+                if (perDisplay.isHandlingDrag || MultiWindowCoreState.MW_ENABLED || !MultiWindowOverheatUI.showIfNeeded(this.mContext)) {
+                    if (perDisplay.isHandlingDrag || (dragEvent.getDragFlags() & 8192) == 0) {
+                        z2 = perDisplay.isHandlingDrag;
+                        if (!z2) {
+                            perDisplay.visibleTasks.update();
+                            ExecutableAppHolder executableAppHolder = perDisplay.executableAppHolder;
+                            executableAppHolder.mResult = new MimeTypeAppResult(executableAppHolder.mMultiInstanceBlockList, executableAppHolder.mMultiInstanceAllowList, dragEvent.getClipData().getItemAt(0).getActivityInfo(), null);
+                            executableAppHolder.mIsMimeType = true;
+                            perDisplay.dropTargetUiController = new MimeTypeDropTargetController(this, this.mDisplayController, this.mShellTaskOrganizer, this.mLogger);
+                        } else if (!z2) {
+                            perDisplay.visibleTasks.update();
+                            ExecutableAppHolder executableAppHolder2 = perDisplay.executableAppHolder;
+                            ClipData clipData = dragEvent.getClipData();
+                            DragAndDropPermissions dragAndDropPermissionsObtain = DragAndDropPermissions.obtain(dragEvent);
+                            executableAppHolder2.getClass();
+                            if (clipData == null) {
+                                z3 = false;
+                                perDisplay.isHandlingDrag |= z3;
+                                if (z3) {
+                                    perDisplay.dropTargetUiController = new LaunchableDataDropTargetController(this.mContext, this, this.mDisplayController);
+                                }
+                            } else {
+                                String callingPackageName = clipData.getCallingPackageName();
+                                executableAppHolder2.mCallingPackageName = callingPackageName;
+                                if (!executableAppHolder2.mCallingPackageBlockList.mBlockList.contains(callingPackageName)) {
+                                    int flags = dragAndDropPermissionsObtain != null ? dragAndDropPermissionsObtain.getFlags() : 0;
+                                    executableAppHolder2.mCallingUserId = clipData.getCallingUserId();
+                                    AppResultFactory appResultFactory = executableAppHolder2.mAppResultFactory;
+                                    appResultFactory.getClass();
+                                    AppResultFactory.ResultExtra resultExtra = new AppResultFactory.ResultExtra();
+                                    ArrayList arrayList = appResultFactory.mResolvers;
+                                    int size = arrayList.size();
+                                    int i3 = 0;
+                                    while (true) {
+                                        if (i3 < size) {
+                                            Object obj = arrayList.get(i3);
+                                            i3++;
+                                            Optional optionalMakeFrom = ((BaseResolver) obj).makeFrom(clipData, flags, resultExtra);
+                                            if (optionalMakeFrom.isPresent()) {
+                                                nonResizeableAppsResult = (AppResult) optionalMakeFrom.get();
+                                                break;
+                                            }
+                                        } else {
+                                            nonResizeableAppsResult = resultExtra.mNonResizeableAppOnly ? new NonResizeableAppsResult() : null;
+                                        }
+                                    }
+                                    executableAppHolder2.mResult = nonResizeableAppsResult;
+                                    if (nonResizeableAppsResult != null) {
+                                        z3 = true;
+                                    }
+                                    perDisplay.isHandlingDrag |= z3;
+                                    if (z3) {
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        perDisplay.visibleTasks.update();
+                        ExecutableAppHolder executableAppHolder3 = perDisplay.executableAppHolder;
+                        executableAppHolder3.mResult = new DefaultAppResult(executableAppHolder3.mMultiInstanceBlockList, executableAppHolder3.mMultiInstanceAllowList, null);
+                        perDisplay.dropTargetUiController = new IntentSenderDropTargetController(this.mContext, this, this.mDisplayController);
+                    }
+                    dragAndDropClientRecordFrom = DragAndDropClientRecord.from(dragEvent.getClipData(), displayId);
+                    perDisplay.dragAndDropClientRecord = dragAndDropClientRecordFrom;
+                    if (dragAndDropClientRecordFrom != null) {
+                        try {
+                            dragAndDropClientRecordFrom.mClient.onConnected(this.mProxy.asBinder(), dragAndDropClientRecordFrom.mDisplayId);
+                        } catch (RemoteException unused) {
+                            Slog.d("DragAndDropClient", "Failed to connect.");
+                        }
+                        DragAndDropClientRecord dragAndDropClientRecord = perDisplay.dragAndDropClientRecord;
+                        dragAndDropClientRecord.getClass();
+                        try {
+                            initialDropTargetVisible = dragAndDropClientRecord.mClient.getInitialDropTargetVisible();
+                        } catch (RemoteException unused2) {
+                            Slog.d("DragAndDropClient", "Failed to disconnect.");
+                            initialDropTargetVisible = true;
+                        }
+                        perDisplay.hideRequested = !initialDropTargetVisible;
+                        Rect rect2 = perDisplay.mHiddenDropTargetArea;
+                        DragAndDropClientRecord dragAndDropClientRecord2 = perDisplay.dragAndDropClientRecord;
+                        dragAndDropClientRecord2.getClass();
+                        try {
+                            rect = dragAndDropClientRecord2.mClient.getHiddenDropTargetArea();
+                        } catch (RemoteException unused3) {
+                            Slog.d("DragAndDropClient", "Failed to disconnect.");
+                            rect = new Rect();
+                        }
+                        rect2.set(rect);
+                    }
+                }
+            } else {
+                ClipDescription clipDescription2 = dragEvent.getClipDescription();
+                if ((clipDescription2.hasMimeType("application/vnd.android.activity") || clipDescription2.hasMimeType("application/vnd.android.shortcut") || clipDescription2.hasMimeType("application/vnd.android.task") || DragUtils.getLaunchIntent(dragEvent.getClipData(), dragEvent.getDragFlags()) != null) && !z4) {
+                    z = true;
+                }
+                perDisplay.isHandlingDrag = z;
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                }
+                if (perDisplay.isHandlingDrag) {
+                }
+                if (perDisplay.isHandlingDrag) {
+                    z2 = perDisplay.isHandlingDrag;
+                    if (!z2) {
+                    }
+                    dragAndDropClientRecordFrom = DragAndDropClientRecord.from(dragEvent.getClipData(), displayId);
+                    perDisplay.dragAndDropClientRecord = dragAndDropClientRecordFrom;
+                    if (dragAndDropClientRecordFrom != null) {
+                    }
+                }
+            }
+            return false;
+        }
+        dragSession = null;
+        this.mSplitScreen.dismissAddToAppPairDialog();
+        IDropTargetUiController iDropTargetUiController = perDisplay.dropTargetUiController;
+        if (iDropTargetUiController != null) {
+            boolean zOnDrag = iDropTargetUiController.onDrag(dragEvent, displayId, perDisplay);
+            if (dragEvent.getAction() == 4) {
+                clearState(perDisplay);
+            } else if (!zOnDrag && dragEvent.getAction() == 1) {
+                setDropTargetWindowVisibility(perDisplay, 4);
+                clearState(perDisplay);
+            }
+            return zOnDrag;
+        }
+        if (perDisplay.isHandlingDrag) {
+            switch (dragEvent.getAction()) {
+                case 1:
+                    if (perDisplay.activeDragCount != 0) {
+                        Slog.w("DragAndDropController", "Unexpected drag start during an active drag");
+                        break;
+                    } else {
+                        dragSession.initialize();
+                        perDisplay.dragSession = dragSession;
+                        perDisplay.activeDragCount++;
+                        ((DropTargetLayout) perDisplay.dragLayout).prepare(dragSession, this.mLogger.logStart(dragSession), null, null, false);
+                        int i4 = perDisplay.dragSession.hideDragSourceTaskId;
+                        if (i4 != -1) {
+                            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -2922974451172233144L, 1, Long.valueOf(i4));
+                            }
+                            i = 0;
+                            this.mShellTaskOrganizer.setTaskSurfaceVisibility(perDisplay.dragSession.hideDragSourceTaskId, false);
+                        } else {
+                            i = 0;
+                        }
+                        setDropTargetWindowVisibility(perDisplay, i);
+                        final int i5 = 0;
+                        notifyListeners(new Function() { // from class: com.android.wm.shell.draganddrop.DragAndDropController$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj2) {
+                                DragAndDropController.DragAndDropListener dragAndDropListener = (DragAndDropController.DragAndDropListener) obj2;
+                                switch (i5) {
+                                    case 0:
+                                        int i6 = DragAndDropController.$r8$clinit;
+                                        dragAndDropListener.onDragStarted();
+                                        break;
+                                    default:
+                                        int i7 = DragAndDropController.$r8$clinit;
+                                        dragAndDropListener.getClass();
+                                        break;
+                                }
+                                return Boolean.FALSE;
+                            }
+                        });
+                        break;
+                    }
+                case 2:
+                    ((DropTargetLayout) perDisplay.dragLayout).update(dragEvent);
+                    break;
+                case 3:
+                    ((DropTargetLayout) perDisplay.dragLayout).update(dragEvent);
+                    break;
+                case 4:
+                    if (((DropTargetLayout) perDisplay.dragLayout).mHasDropped) {
+                        DragAndDropEventLogger dragAndDropEventLogger = this.mLogger;
+                        dragAndDropEventLogger.getClass();
+                        dragAndDropEventLogger.log(DragAndDropEventLogger.DragAndDropUiEventEnum.GLOBAL_APP_DRAG_DROPPED, dragAndDropEventLogger.mActivityInfo);
+                    } else {
+                        int i6 = perDisplay.dragSession.hideDragSourceTaskId;
+                        if (i6 != -1) {
+                            r7 = 1;
+                            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -1075144303163786144L, 1, Long.valueOf(i6));
+                            }
+                            this.mShellTaskOrganizer.setTaskSurfaceVisibility(perDisplay.dragSession.hideDragSourceTaskId, true);
+                        } else {
+                            r7 = 1;
+                        }
+                        perDisplay.activeDragCount -= r7;
+                        ((DropTargetLayout) perDisplay.dragLayout).hide(new DragAndDropController$$ExternalSyntheticLambda3(this, perDisplay, 0), r7);
+                    }
+                    DragAndDropEventLogger dragAndDropEventLogger2 = this.mLogger;
+                    dragAndDropEventLogger2.getClass();
+                    dragAndDropEventLogger2.log(DragAndDropEventLogger.DragAndDropUiEventEnum.GLOBAL_APP_DRAG_END, dragAndDropEventLogger2.mActivityInfo);
+                    final int i7 = 1;
+                    notifyListeners(new Function() { // from class: com.android.wm.shell.draganddrop.DragAndDropController$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj2) {
+                            DragAndDropController.DragAndDropListener dragAndDropListener = (DragAndDropController.DragAndDropListener) obj2;
+                            switch (i7) {
+                                case 0:
+                                    int i62 = DragAndDropController.$r8$clinit;
+                                    dragAndDropListener.onDragStarted();
+                                    break;
+                                default:
+                                    int i72 = DragAndDropController.$r8$clinit;
+                                    dragAndDropListener.getClass();
+                                    break;
+                            }
+                            return Boolean.FALSE;
+                        }
+                    });
+                    break;
+                case 5:
+                    ((DropTargetLayout) perDisplay.dragLayout).show();
+                    break;
+                case 6:
+                    ((DropTargetLayout) perDisplay.dragLayout).hide(null, true);
+                    break;
+            }
+            return false;
+        }
+        return false;
     }
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskVanishedListener
@@ -639,9 +972,8 @@ public class DragAndDropController implements RemoteCallable, GlobalDragListener
         return ActivityTaskManager.supportsMultiWindow(this.mContext);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DragAndDropListener {
-        default boolean onUnhandledDrag(PendingIntent pendingIntent, int i, DragEvent dragEvent, GlobalDragListener$onUnhandledDrop$1 globalDragListener$onUnhandledDrop$1) {
+        default boolean onUnhandledDrag(PendingIntent pendingIntent, int i, DragEvent dragEvent, GlobalDragListener.AnonymousClass1 anonymousClass1) {
             return false;
         }
 

@@ -1,6 +1,7 @@
 package com.android.systemui.qs;
 
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SecQSPanelControllerBase extends ViewController implements Dumpable {
     public Runnable mCollapseExpandAction;
@@ -58,12 +58,10 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
     public SecQSPanel.QSTileLayout mTileLayout;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Record {
         public DetailAdapter mDetailAdapter;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TileRecord extends Record {
         public SQSTile.SCallback callback;
         public final QSTile tile;
@@ -109,13 +107,13 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
     }
 
     /* renamed from: $r8$lambda$DEp4l-o7MDBmfDD2MwoTLB3AMIw, reason: not valid java name */
-    public static void m2882$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(SecQSPanelControllerBase secQSPanelControllerBase, final BarItemImpl barItemImpl) {
+    public static void m2899$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(SecQSPanelControllerBase secQSPanelControllerBase, final BarItemImpl barItemImpl) {
         secQSPanelControllerBase.getClass();
         if (barItemImpl instanceof TileChunkLayoutBar) {
             ((SecQSPanel) secQSPanelControllerBase.mView).getHandler().postDelayed(new Runnable() { // from class: com.android.systemui.qs.SecQSPanelControllerBase$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TileChunkLayoutBar tileChunkLayoutBar = (TileChunkLayoutBar) BarItemImpl.this;
+                    TileChunkLayoutBar tileChunkLayoutBar = (TileChunkLayoutBar) barItemImpl;
                     tileChunkLayoutBar.setContainerHeight(tileChunkLayoutBar.mContainerExpandedHeight);
                 }
             }, 100L);
@@ -128,7 +126,7 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
         this.mOnConfigurationChangedListener = new SecQSPanel.OnConfigurationChangedListener() { // from class: com.android.systemui.qs.SecQSPanelControllerBase$$ExternalSyntheticLambda0
             @Override // com.android.systemui.qs.SecQSPanel.OnConfigurationChangedListener
             public final void onConfigurationChange(Configuration configuration) {
-                SecQSPanelControllerBase secQSPanelControllerBase = SecQSPanelControllerBase.this;
+                SecQSPanelControllerBase secQSPanelControllerBase = this.f$0;
                 Log.d("SecQSPanelControllerBase", "OnConfigurationChangedListener ,onConfigurationChange event");
                 secQSPanelControllerBase.onConfigurationChanged(configuration);
             }
@@ -266,17 +264,17 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
     public void onConfigurationChanged(Configuration configuration) {
         int i = ((SecQSPanel) this.mView).getContext().getResources().getConfiguration().orientation;
         ConfigurationState configurationState = this.mLastConfigurationState;
-        boolean needToUpdate = configurationState.needToUpdate(configuration);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
-        m.append(configuration.orientation);
-        m.append(", mOrientation = ");
-        m.append(this.mOrientation);
-        m.append(", needToUpdate = ");
-        m.append(needToUpdate);
-        Log.d("SecQSPanelControllerBase", m.toString());
+        boolean zNeedToUpdate = configurationState.needToUpdate(configuration);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
+        sbM.append(configuration.orientation);
+        sbM.append(", mOrientation = ");
+        sbM.append(this.mOrientation);
+        sbM.append(", needToUpdate = ");
+        sbM.append(zNeedToUpdate);
+        Log.d("SecQSPanelControllerBase", sbM.toString());
         Log.d("SecQSPanelControllerBase", "onConfigurationChanged diff = " + configurationState.toCompareString(configuration));
         Log.d("SecQSPanelControllerBase", "onConfigurationChanged view.config = " + ((SecQSPanel) this.mView).getContext().getResources().getConfiguration() + ", appContext.config = " + ((SecQSPanel) this.mView).getContext().getApplicationContext().getResources().getConfiguration());
-        if (needToUpdate || this.mOrientation != i) {
+        if (zNeedToUpdate || this.mOrientation != i) {
             this.mOrientation = i;
             SecQSPanel.QSTileLayout qSTileLayout = this.mTileLayout;
             if (qSTileLayout != null) {
@@ -345,7 +343,7 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
         ((SecQSPanel) this.mView).mCollapseExpandAction = runnable;
     }
 
-    public void setExpanded(boolean z) {
+    public void setExpanded(boolean z) throws Resources.NotFoundException {
         if (this.mExpanded == z) {
             return;
         }
@@ -356,11 +354,11 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
         LogLevel logLevel = LogLevel.DEBUG;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = dumpableTag;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.mMetricsLogger.visibility(111, z);
         if (!z) {
             this.mUiEventLogger.log(((SecQSPanel) this.mView).closePanelEvent());

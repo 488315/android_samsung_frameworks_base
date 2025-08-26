@@ -23,7 +23,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DataSaverDialogDelegate implements SystemUIDialog.Delegate {
     public final CoroutineContext backgroundContext;
@@ -43,11 +42,10 @@ public final class DataSaverDialogDelegate implements SystemUIDialog.Delegate {
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
     public final void beforeCreate(Dialog dialog) {
         SystemUIDialog systemUIDialog = (SystemUIDialog) dialog;
-        systemUIDialog.setTitle(R.string.font_family_display_3_material);
-        systemUIDialog.setMessage(R.string.font_family_button_material);
-        systemUIDialog.setPositiveButton(R.string.font_family_display_2_material, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.impl.saver.domain.DataSaverDialogDelegate$beforeCreate$1$1
+        systemUIDialog.setTitle(R.string.font_family_headline_material);
+        systemUIDialog.setMessage(R.string.font_family_display_1_material);
+        systemUIDialog.setPositiveButton(R.string.font_family_display_4_material, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.impl.saver.domain.DataSaverDialogDelegate$beforeCreate$1$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.tiles.impl.saver.domain.DataSaverDialogDelegate$beforeCreate$1$1$1, reason: invalid class name */
             final class AnonymousClass1 extends SuspendLambda implements Function2 {
                 int label;
@@ -83,10 +81,10 @@ public final class DataSaverDialogDelegate implements SystemUIDialog.Delegate {
 
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                CoroutineContext coroutineContext = DataSaverDialogDelegate.this.backgroundContext;
+                CoroutineContext coroutineContext = this.this$0.backgroundContext;
                 TraceDataThreadLocal traceDataThreadLocal = TraceContextElementKt.traceThreadLocal;
-                CoroutineTracingKt.launchTraced$default(CoroutineScopeKt.CoroutineScope(coroutineContext.plus(EmptyCoroutineContext.INSTANCE)), null, null, new AnonymousClass1(DataSaverDialogDelegate.this, null), 7);
-                DataSaverDialogDelegate.this.sharedPreferences.edit().putBoolean("data_saver_dialog_shown", true).apply();
+                CoroutineTracingKt.launchTraced$default(CoroutineScopeKt.CoroutineScope(coroutineContext.plus(EmptyCoroutineContext.INSTANCE)), null, null, new AnonymousClass1(this.this$0, null), 7);
+                this.this$0.sharedPreferences.edit().putBoolean("data_saver_dialog_shown", true).apply();
             }
         });
         systemUIDialog.setButton(-3, R.string.cancel, null, true);

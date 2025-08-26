@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import com.android.internal.logging.MetricsLogger;
+import com.android.keyguard.CarrierTextManager$$ExternalSyntheticOutline0;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
@@ -30,6 +33,7 @@ import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qp.SubscreenQsPanelController;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.logging.QSLogger;
@@ -42,19 +46,21 @@ import com.android.systemui.statusbar.connectivity.AccessPointController;
 import com.android.systemui.statusbar.connectivity.AccessPointControllerImpl;
 import com.android.systemui.statusbar.connectivity.IconState;
 import com.android.systemui.statusbar.connectivity.NetworkController;
+import com.android.systemui.statusbar.connectivity.NetworkControllerImpl;
+import com.android.systemui.statusbar.connectivity.NetworkControllerImpl.AnonymousClass7;
 import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.connectivity.WifiIndicators;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
+import com.android.systemui.statusbar.policy.SatelliteEnabledListener;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.Utils;
 import com.samsung.android.wifi.SemWifiManager;
 import com.sec.ims.settings.ImsProfile;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WifiTile extends SQSTileImpl {
     public static final Intent WIFI_SETTINGS = new Intent("android.settings.WIFI_SETTINGS");
@@ -86,7 +92,6 @@ public class WifiTile extends SQSTileImpl {
     public final WifiTileReceiver mSubscreenWifiTileReceiver;
     public final WifiManager mWifiManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CallbackInfo {
         public boolean connected;
         public boolean enabled;
@@ -129,7 +134,6 @@ public class WifiTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSignalCallback implements SignalCallback {
         public final CallbackInfo mInfo = new CallbackInfo();
 
@@ -172,7 +176,6 @@ public class WifiTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WifiTileReceiver extends BroadcastReceiver {
         public WifiTileReceiver() {
         }
@@ -213,9 +216,9 @@ public class WifiTile extends SQSTileImpl {
         this.mSubscreenWifiTileReceiver = wifiTileReceiver;
         this.mIsTransientEnabled = false;
         this.mIsSatelliteModeOn = false;
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.WifiTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mSatelliteModeCallback = new SatelliteEnabledListener() { // from class: com.android.systemui.qs.tiles.WifiTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteEnabledListener
+            public final void onSatelliteEnabledChanged(boolean z) {
                 WifiTile wifiTile = WifiTile.this;
                 wifiTile.mIsSatelliteModeOn = z;
                 wifiTile.mDetailAdapter.mIsSatelliteModeOn = z;
@@ -305,14 +308,84 @@ public class WifiTile extends SQSTileImpl {
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleClick(final com.android.systemui.animation.Expandable r8) {
-        /*
-            Method dump skipped, instructions count: 341
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.WifiTile.handleClick(com.android.systemui.animation.Expandable):void");
+    public final void handleClick(final Expandable expandable) {
+        if (!((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isWifiTileBlocked()) {
+            try {
+                IDevicePolicyManager iDevicePolicyManager = this.mDevicePolicyManager;
+                if (iDevicePolicyManager != null) {
+                }
+            } catch (RemoteException unused) {
+            }
+            KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
+            boolean z = keyguardStateControllerImpl.mShowing;
+            DisplayLifecycle displayLifecycle = this.mDisplayLifecycle;
+            ActivityStarter activityStarter = this.mActivityStarter;
+            KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
+            if (z && keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) && this.mSettingsHelper.isLockFunctionsEnabled() && ((QSTile.BooleanState) this.mState).value) {
+                if (!QpRune.QUICK_SUBSCREEN_PANEL || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
+                    activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.WifiTile$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WifiTile wifiTile = this.f$0;
+                            Expandable expandable2 = expandable;
+                            Intent intent = WifiTile.WIFI_SETTINGS;
+                            wifiTile.handleClick(expandable2);
+                        }
+                    });
+                    return;
+                } else {
+                    ((SubscreenUtil) Dependency.sDependency.getDependencyInner(SubscreenUtil.class)).showLockscreenOnCoverScreen(this.mContext, "WIFI_STATE_CHANGE");
+                    return;
+                }
+            }
+            StringBuilder sb = new StringBuilder("isShowing() = ");
+            sb.append(keyguardStateControllerImpl.mShowing);
+            sb.append(", isSecure() = ");
+            sb.append(keyguardUpdateMonitor.isSecure());
+            sb.append(", canSkipBouncer() = ");
+            sb.append(!keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()));
+            sb.append(", isLockFunctionsEnabled() = ");
+            sb.append(this.mSettingsHelper.isLockFunctionsEnabled());
+            String string = sb.toString();
+            String str = this.TAG;
+            Log.d(str, string);
+            if (!((AccessPointControllerImpl) this.mAccessPointController).canConfigWifi()) {
+                activityStarter.postStartActivityDismissingKeyguard(new Intent("android.settings.WIFI_SETTINGS"), 0);
+                return;
+            }
+            QSTile.BooleanState booleanState = (QSTile.BooleanState) this.mState;
+            if (booleanState.state == 0) {
+                Log.d(str, "handleClick pass enabling or disabling ");
+                return;
+            }
+            booleanState.copyTo(this.mStateBeforeClick);
+            QSTile.BooleanState booleanState2 = (QSTile.BooleanState) this.mState;
+            if (!booleanState2.value && booleanState2.state == 2) {
+                booleanState2.value = this.mSignalCallback.mInfo.enabled;
+                Log.d(str, "handleClick refresh value ");
+            }
+            boolean z2 = ((QSTile.BooleanState) this.mState).value;
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("handleClick ", str, z2);
+            refreshState(z2 ? null : SQSTileImpl.ARG_SHOW_TRANSIENT_ENABLING);
+            NetworkControllerImpl networkControllerImpl = (NetworkControllerImpl) this.mController;
+            networkControllerImpl.getClass();
+            networkControllerImpl.new AnonymousClass7(!z2).execute(new Void[0]);
+            this.mExpectDisabled = z2;
+            if (z2) {
+                this.mHandler.postDelayed(new WifiTile$$ExternalSyntheticLambda1(this, 0), 350L);
+            }
+            if (!QpRune.QUICK_SUBSCREEN_PANEL || displayLifecycle == null || displayLifecycle.mIsFolderOpened) {
+                return;
+            }
+            SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_WIFI_COVER);
+            return;
+        }
+        if (QpRune.QUICK_SUBSCREEN_PANEL) {
+            showItPolicyToastOnSubScreen(getSubScreenContext());
+        } else {
+            super.showItPolicyToast();
+        }
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
@@ -385,21 +458,86 @@ public class WifiTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x0105, code lost:
-    
-        if (r11.length() <= 0) goto L56;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00de  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleUpdateState(com.android.systemui.plugins.qs.QSTile.State r12, java.lang.Object r13) {
-        /*
-            Method dump skipped, instructions count: 286
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.WifiTile.handleUpdateState(com.android.systemui.plugins.qs.QSTile$State, java.lang.Object):void");
+    public final void handleUpdateState(QSTile.State state, Object obj) {
+        QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
+        if (this.DEBUG) {
+            Log.d(this.TAG, "handleUpdateState arg=" + obj);
+        }
+        CallbackInfo callbackInfo = new CallbackInfo();
+        synchronized (this.mSignalCallback.mInfo) {
+            this.mSignalCallback.mInfo.copyTo(callbackInfo);
+        }
+        boolean z = callbackInfo.enabled;
+        if (this.mExpectDisabled) {
+            if (z) {
+                return;
+            } else {
+                this.mExpectDisabled = false;
+            }
+        }
+        boolean z2 = obj == SQSTileImpl.ARG_SHOW_TRANSIENT_ENABLING;
+        boolean z3 = z && callbackInfo.wifiSignalIconId > 0 && callbackInfo.ssid != null;
+        if (callbackInfo.wifiSignalIconId > 0) {
+            String str = callbackInfo.ssid;
+        }
+        String str2 = "";
+        if (booleanState.value != z) {
+            this.mDetailAdapter.setItemsVisible(z);
+            fireToggleStateChanged(z);
+        }
+        boolean z4 = z2 || callbackInfo.isTransient || this.mIsSatelliteModeOn;
+        String str3 = this.TAG;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("handleUpdateState isTransient=", " transientEnabling =", " cb.isTransient=", z4, z2);
+        sbM.append(callbackInfo.isTransient);
+        sbM.append(" state.state = ");
+        sbM.append(booleanState.state);
+        sbM.append(" mStateBeforeClick.value =");
+        CarrierTextManager$$ExternalSyntheticOutline0.m(sbM, this.mStateBeforeClick.value, " enabled =", z, str3);
+        booleanState.dualTarget = true;
+        booleanState.value = z;
+        if (z4 && (!this.mIsTransientEnabled || this.mIsSatelliteModeOn)) {
+            booleanState.icon = this.mDisable;
+            booleanState.state = 0;
+            booleanState.label = getTileLabel();
+            this.mIsTransientEnabled = true;
+        } else if (z) {
+            booleanState.state = 2;
+            if (z3) {
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_wifi_on_026);
+                String strReplaceAll = callbackInfo.ssid;
+                if (strReplaceAll != null) {
+                    int length = strReplaceAll.length();
+                    if (length > 1 && strReplaceAll.charAt(0) == '\"') {
+                        int i = length - 1;
+                        if (strReplaceAll.charAt(i) == '\"') {
+                            try {
+                                strReplaceAll = strReplaceAll.substring(1, i).replaceAll("\\s+$", "");
+                            } catch (NullPointerException unused) {
+                            }
+                            if (strReplaceAll.length() <= 0) {
+                                str2 = null;
+                            }
+                        }
+                    }
+                    str2 = strReplaceAll;
+                }
+            } else {
+                booleanState.icon = this.mEnable;
+                booleanState.label = getTileLabel();
+            }
+        } else {
+            booleanState.state = 1;
+            booleanState.icon = this.mDisable;
+            booleanState.label = getTileLabel();
+            this.mIsTransientEnabled = false;
+        }
+        booleanState.contentDescription = booleanState.label;
+        booleanState.secondaryLabel = str2;
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl, com.android.systemui.plugins.qs.QSTile, com.android.systemui.plugins.qs.LockQSTile

@@ -28,7 +28,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsFavoritePersistenceWrapper {
     public BackupManager backupManager;
@@ -36,7 +35,6 @@ public final class ControlsFavoritePersistenceWrapper {
     public File file;
     public final SecureSettings secureSettings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -57,10 +55,10 @@ public final class ControlsFavoritePersistenceWrapper {
         this.secureSettings = secureSettings;
     }
 
-    public static List parseXml(XmlPullParser xmlPullParser) {
+    public static List parseXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
-        ComponentName componentName = null;
+        ComponentName componentNameUnflattenFromString = null;
         String str = null;
         while (true) {
             boolean z = true;
@@ -74,7 +72,7 @@ public final class ControlsFavoritePersistenceWrapper {
                     name = "";
                 }
                 if (next == 2 && name.equals("structure")) {
-                    componentName = ComponentName.unflattenFromString(xmlPullParser.getAttributeValue(null, "component"));
+                    componentNameUnflattenFromString = ComponentName.unflattenFromString(xmlPullParser.getAttributeValue(null, "component"));
                     String attributeValue = xmlPullParser.getAttributeValue(null, "structure");
                     str = attributeValue != null ? attributeValue : "";
                     String attributeValue2 = xmlPullParser.getAttributeValue(null, "sem_active");
@@ -87,9 +85,9 @@ public final class ControlsFavoritePersistenceWrapper {
                     String attributeValue5 = xmlPullParser.getAttributeValue(null, "subtitle");
                     String str2 = attributeValue5 == null ? "" : attributeValue5;
                     String attributeValue6 = xmlPullParser.getAttributeValue(null, "type");
-                    Integer valueOf = attributeValue6 != null ? Integer.valueOf(Integer.parseInt(attributeValue6)) : null;
-                    if (attributeValue3 != null && attributeValue4 != null && valueOf != null) {
-                        ControlInfo controlInfo = new ControlInfo(attributeValue3, attributeValue4, str2, valueOf.intValue(), 0, 16, null);
+                    Integer numValueOf = attributeValue6 != null ? Integer.valueOf(Integer.parseInt(attributeValue6)) : null;
+                    if (attributeValue3 != null && attributeValue4 != null && numValueOf != null) {
+                        ControlInfo controlInfo = new ControlInfo(attributeValue3, attributeValue4, str2, numValueOf.intValue(), 0, 16, null);
                         String attributeValue7 = xmlPullParser.getAttributeValue(null, "sem_layoutType");
                         if (attributeValue7 != null) {
                             controlInfo.layoutType = Integer.parseInt(attributeValue7);
@@ -97,9 +95,9 @@ public final class ControlsFavoritePersistenceWrapper {
                         arrayList2.add(controlInfo);
                     }
                 } else if (next == 3 && name.equals("structure")) {
-                    componentName.getClass();
+                    componentNameUnflattenFromString.getClass();
                     str.getClass();
-                    StructureInfo structureInfo = new StructureInfo(componentName, str, CollectionsKt___CollectionsKt.toList(arrayList2), false, 8, null);
+                    StructureInfo structureInfo = new StructureInfo(componentNameUnflattenFromString, str, CollectionsKt___CollectionsKt.toList(arrayList2), false, 8, null);
                     structureInfo.active = z;
                     arrayList.add(structureInfo);
                     arrayList2.clear();
@@ -109,7 +107,7 @@ public final class ControlsFavoritePersistenceWrapper {
     }
 
     public final List readFavorites() {
-        List parseXml;
+        List xml;
         if (!this.file.exists()) {
             Log.d("ControlsFavoritePersistenceWrapper", "No favorites, returning empty list");
             return EmptyList.INSTANCE;
@@ -122,19 +120,19 @@ public final class ControlsFavoritePersistenceWrapper {
                         Log.d("ControlsFavoritePersistenceWrapper", "Reading data from file: " + this.file);
                         BackupHelper.Companion.getClass();
                         synchronized (BackupHelper.controlsDataLock) {
-                            XmlPullParser newPullParser = Xml.newPullParser();
-                            newPullParser.setInput(bufferedInputStream, null);
-                            parseXml = parseXml(newPullParser);
+                            XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+                            xmlPullParserNewPullParser.setInput(bufferedInputStream, null);
+                            xml = parseXml(xmlPullParserNewPullParser);
                         }
-                        return parseXml;
-                    } catch (XmlPullParserException e) {
-                        throw new IllegalStateException("Failed parsing favorites file: " + this.file, e);
+                        return xml;
+                    } finally {
+                        IoUtils.closeQuietly(bufferedInputStream);
                     }
-                } catch (IOException e2) {
-                    throw new IllegalStateException("Failed parsing favorites file: " + this.file, e2);
+                } catch (IOException e) {
+                    throw new IllegalStateException("Failed parsing favorites file: " + this.file, e);
                 }
-            } finally {
-                IoUtils.closeQuietly(bufferedInputStream);
+            } catch (XmlPullParserException e2) {
+                throw new IllegalStateException("Failed parsing favorites file: " + this.file, e2);
             }
         } catch (FileNotFoundException unused) {
             Log.i("ControlsFavoritePersistenceWrapper", "No file found");
@@ -147,17 +145,17 @@ public final class ControlsFavoritePersistenceWrapper {
             LinkedHashMap linkedHashMap = new LinkedHashMap();
             for (Object obj : list) {
                 String packageName = ((StructureInfo) obj).componentName.getPackageName();
-                Object obj2 = linkedHashMap.get(packageName);
-                if (obj2 == null) {
-                    obj2 = new ArrayList();
-                    linkedHashMap.put(packageName, obj2);
+                Object arrayList = linkedHashMap.get(packageName);
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    linkedHashMap.put(packageName, arrayList);
                 }
-                ((List) obj2).add(obj);
+                ((List) arrayList).add(obj);
             }
-            String join = TextUtils.join(",", linkedHashMap.keySet());
-            this.secureSettings.putStringForUser("device_controls_use_components", join, -2);
-            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("save DEVICE_CONTROLS_USE_COMPONENTS="), join, "ControlsFavoritePersistenceWrapper");
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsFavoritePersistenceWrapper$storeFavorites$1
+            String strJoin = TextUtils.join(",", linkedHashMap.keySet());
+            this.secureSettings.putStringForUser("device_controls_use_components", strJoin, -2);
+            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("save DEVICE_CONTROLS_USE_COMPONENTS="), strJoin, "ControlsFavoritePersistenceWrapper");
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsFavoritePersistenceWrapper.storeFavorites.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     boolean z;
@@ -165,49 +163,49 @@ public final class ControlsFavoritePersistenceWrapper {
                     Log.d("ControlsFavoritePersistenceWrapper", "Saving data to file: " + ControlsFavoritePersistenceWrapper.this.file);
                     AtomicFile atomicFile = new AtomicFile(ControlsFavoritePersistenceWrapper.this.file);
                     BackupHelper.Companion.getClass();
-                    Object obj3 = BackupHelper.controlsDataLock;
+                    Object obj2 = BackupHelper.controlsDataLock;
                     List<StructureInfo> list2 = list;
-                    synchronized (obj3) {
+                    synchronized (obj2) {
                         try {
-                            FileOutputStream startWrite = atomicFile.startWrite();
+                            FileOutputStream fileOutputStreamStartWrite = atomicFile.startWrite();
                             try {
                                 try {
-                                    XmlSerializer newSerializer = Xml.newSerializer();
-                                    newSerializer.setOutput(startWrite, "utf-8");
+                                    XmlSerializer xmlSerializerNewSerializer = Xml.newSerializer();
+                                    xmlSerializerNewSerializer.setOutput(fileOutputStreamStartWrite, "utf-8");
                                     z = true;
-                                    newSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                                    newSerializer.startDocument(null, Boolean.TRUE);
-                                    newSerializer.startTag(null, "version");
-                                    newSerializer.text("1");
-                                    newSerializer.endTag(null, "version");
-                                    newSerializer.startTag(null, "structures");
+                                    xmlSerializerNewSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                                    xmlSerializerNewSerializer.startDocument(null, Boolean.TRUE);
+                                    xmlSerializerNewSerializer.startTag(null, "version");
+                                    xmlSerializerNewSerializer.text("1");
+                                    xmlSerializerNewSerializer.endTag(null, "version");
+                                    xmlSerializerNewSerializer.startTag(null, "structures");
                                     for (StructureInfo structureInfo : list2) {
-                                        newSerializer.startTag(null, "structure");
-                                        newSerializer.attribute(null, "component", structureInfo.componentName.flattenToString());
-                                        newSerializer.attribute(null, "structure", structureInfo.structure.toString());
-                                        newSerializer.attribute(null, "sem_active", String.valueOf(structureInfo.active));
-                                        newSerializer.startTag(null, "controls");
+                                        xmlSerializerNewSerializer.startTag(null, "structure");
+                                        xmlSerializerNewSerializer.attribute(null, "component", structureInfo.componentName.flattenToString());
+                                        xmlSerializerNewSerializer.attribute(null, "structure", structureInfo.structure.toString());
+                                        xmlSerializerNewSerializer.attribute(null, "sem_active", String.valueOf(structureInfo.active));
+                                        xmlSerializerNewSerializer.startTag(null, "controls");
                                         for (ControlInfo controlInfo : structureInfo.controls) {
-                                            newSerializer.startTag(null, "control");
-                                            newSerializer.attribute(null, "id", controlInfo.controlId);
-                                            newSerializer.attribute(null, UniversalCredentialUtil.AGENT_TITLE, controlInfo.controlTitle.toString());
-                                            newSerializer.attribute(null, "subtitle", controlInfo.controlSubtitle.toString());
-                                            newSerializer.attribute(null, "type", String.valueOf(controlInfo.deviceType));
-                                            newSerializer.endTag(null, "control");
+                                            xmlSerializerNewSerializer.startTag(null, "control");
+                                            xmlSerializerNewSerializer.attribute(null, "id", controlInfo.controlId);
+                                            xmlSerializerNewSerializer.attribute(null, UniversalCredentialUtil.AGENT_TITLE, controlInfo.controlTitle.toString());
+                                            xmlSerializerNewSerializer.attribute(null, "subtitle", controlInfo.controlSubtitle.toString());
+                                            xmlSerializerNewSerializer.attribute(null, "type", String.valueOf(controlInfo.deviceType));
+                                            xmlSerializerNewSerializer.endTag(null, "control");
                                         }
-                                        newSerializer.endTag(null, "controls");
-                                        newSerializer.endTag(null, "structure");
+                                        xmlSerializerNewSerializer.endTag(null, "controls");
+                                        xmlSerializerNewSerializer.endTag(null, "structure");
                                     }
-                                    newSerializer.endTag(null, "structures");
-                                    newSerializer.endDocument();
-                                    atomicFile.finishWrite(startWrite);
-                                } finally {
-                                    IoUtils.closeQuietly(startWrite);
+                                    xmlSerializerNewSerializer.endTag(null, "structures");
+                                    xmlSerializerNewSerializer.endDocument();
+                                    atomicFile.finishWrite(fileOutputStreamStartWrite);
+                                } catch (Throwable unused) {
+                                    Log.e("ControlsFavoritePersistenceWrapper", "Failed to write file, reverting to previous version");
+                                    atomicFile.failWrite(fileOutputStreamStartWrite);
+                                    z = false;
                                 }
-                            } catch (Throwable unused) {
-                                Log.e("ControlsFavoritePersistenceWrapper", "Failed to write file, reverting to previous version");
-                                atomicFile.failWrite(startWrite);
-                                z = false;
+                            } finally {
+                                IoUtils.closeQuietly(fileOutputStreamStartWrite);
                             }
                         } catch (IOException e) {
                             Log.e("ControlsFavoritePersistenceWrapper", "Failed to start write file", e);

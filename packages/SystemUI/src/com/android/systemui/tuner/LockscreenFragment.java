@@ -16,7 +16,6 @@ import com.android.systemui.tuner.TunerService;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LockscreenFragment extends PreferenceFragment {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,18 +27,18 @@ public class LockscreenFragment extends PreferenceFragment {
         this.mTunerService = (TunerService) Dependency.sDependency.getDependencyInner(TunerService.class);
         new Handler();
         addPreferencesFromResource(R.xml.lockscreen_settings);
-        final Preference findPreference = findPreference("sysui_keyguard_left");
+        final Preference preferenceFindPreference = findPreference("sysui_keyguard_left");
         final SwitchPreference switchPreference = (SwitchPreference) findPreference("sysui_keyguard_left_unlock");
         TunerService.Tunable tunable = new TunerService.Tunable() { // from class: com.android.systemui.tuner.LockscreenFragment$$ExternalSyntheticLambda0
             @Override // com.android.systemui.tuner.TunerService.Tunable
-            public final void onTuningChanged(String str2, String str3) {
+            public final void onTuningChanged(String str2, String str3) throws PackageManager.NameNotFoundException {
                 ActivityInfo activityInfo;
                 ShortcutParser.Shortcut shortcut;
                 int i = LockscreenFragment.$r8$clinit;
-                LockscreenFragment lockscreenFragment = LockscreenFragment.this;
+                LockscreenFragment lockscreenFragment = this.f$0;
                 lockscreenFragment.getClass();
                 switchPreference.setVisible(!TextUtils.isEmpty(str3));
-                Preference preference = findPreference;
+                Preference preference = preferenceFindPreference;
                 if (str3 == null) {
                     preference.setSummary(R.string.lockscreen_none);
                     return;
@@ -59,15 +58,15 @@ public class LockscreenFragment extends PreferenceFragment {
                     return;
                 }
                 Context context = lockscreenFragment.getContext();
-                String[] split = str3.split("::");
+                String[] strArrSplit = str3.split("::");
                 try {
-                    ArrayList arrayList = (ArrayList) new ShortcutParser(context, new ComponentName(split[0], split[1])).getShortcuts();
+                    ArrayList arrayList = (ArrayList) new ShortcutParser(context, new ComponentName(strArrSplit[0], strArrSplit[1])).getShortcuts();
                     int size = arrayList.size();
                     while (i2 < size) {
                         Object obj = arrayList.get(i2);
                         i2++;
                         shortcut = (ShortcutParser.Shortcut) obj;
-                        if (shortcut.id.equals(split[2])) {
+                        if (shortcut.id.equals(strArrSplit[2])) {
                             break;
                         }
                     }
@@ -79,18 +78,18 @@ public class LockscreenFragment extends PreferenceFragment {
         };
         this.mTunables.add(tunable);
         this.mTunerService.addTunable(tunable, "sysui_keyguard_left");
-        final Preference findPreference2 = findPreference("sysui_keyguard_right");
+        final Preference preferenceFindPreference2 = findPreference("sysui_keyguard_right");
         final SwitchPreference switchPreference2 = (SwitchPreference) findPreference("sysui_keyguard_right_unlock");
         TunerService.Tunable tunable2 = new TunerService.Tunable() { // from class: com.android.systemui.tuner.LockscreenFragment$$ExternalSyntheticLambda0
             @Override // com.android.systemui.tuner.TunerService.Tunable
-            public final void onTuningChanged(String str2, String str3) {
+            public final void onTuningChanged(String str2, String str3) throws PackageManager.NameNotFoundException {
                 ActivityInfo activityInfo;
                 ShortcutParser.Shortcut shortcut;
                 int i = LockscreenFragment.$r8$clinit;
-                LockscreenFragment lockscreenFragment = LockscreenFragment.this;
+                LockscreenFragment lockscreenFragment = this.f$0;
                 lockscreenFragment.getClass();
                 switchPreference2.setVisible(!TextUtils.isEmpty(str3));
-                Preference preference = findPreference2;
+                Preference preference = preferenceFindPreference2;
                 if (str3 == null) {
                     preference.setSummary(R.string.lockscreen_none);
                     return;
@@ -110,15 +109,15 @@ public class LockscreenFragment extends PreferenceFragment {
                     return;
                 }
                 Context context = lockscreenFragment.getContext();
-                String[] split = str3.split("::");
+                String[] strArrSplit = str3.split("::");
                 try {
-                    ArrayList arrayList = (ArrayList) new ShortcutParser(context, new ComponentName(split[0], split[1])).getShortcuts();
+                    ArrayList arrayList = (ArrayList) new ShortcutParser(context, new ComponentName(strArrSplit[0], strArrSplit[1])).getShortcuts();
                     int size = arrayList.size();
                     while (i2 < size) {
                         Object obj = arrayList.get(i2);
                         i2++;
                         shortcut = (ShortcutParser.Shortcut) obj;
-                        if (shortcut.id.equals(split[2])) {
+                        if (shortcut.id.equals(strArrSplit[2])) {
                             break;
                         }
                     }
@@ -138,7 +137,7 @@ public class LockscreenFragment extends PreferenceFragment {
         this.mTunables.forEach(new Consumer() { // from class: com.android.systemui.tuner.LockscreenFragment$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                LockscreenFragment.this.mTunerService.removeTunable((TunerService.Tunable) obj);
+                this.f$0.mTunerService.removeTunable((TunerService.Tunable) obj);
             }
         });
     }

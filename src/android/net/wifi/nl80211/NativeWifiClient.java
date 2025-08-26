@@ -13,13 +13,13 @@ public final class NativeWifiClient implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public NativeWifiClient createFromParcel(Parcel parcel) {
-            MacAddress macAddress;
+            MacAddress macAddressFromBytes;
             try {
-                macAddress = MacAddress.fromBytes(parcel.createByteArray());
+                macAddressFromBytes = MacAddress.fromBytes(parcel.createByteArray());
             } catch (IllegalArgumentException unused) {
-                macAddress = null;
+                macAddressFromBytes = null;
             }
-            return new NativeWifiClient(macAddress);
+            return new NativeWifiClient(macAddressFromBytes);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

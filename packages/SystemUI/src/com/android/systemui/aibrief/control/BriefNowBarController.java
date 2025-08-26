@@ -42,7 +42,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BriefNowBarController {
     public static final String NOWBAR_KEY = "AI_BRIEF_KEY";
@@ -77,13 +76,13 @@ public final class BriefNowBarController {
     private final PowerInteractor powerInteractor;
     private boolean prevFullScreenShowing;
     private boolean remoteNowBarShowing;
+    private boolean screenOn;
     private final BriefViewController viewController;
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
     private NowBarItem nowBarItem = new NowBarItem();
     private NowBarItem nowBarRemoteItem = new NowBarItem();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.aibrief.control.BriefNowBarController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -112,9 +111,10 @@ public final class BriefNowBarController {
                     }
 
                     public final Object emit(boolean z, Continuation continuation) {
-                        BriefNowBarController.this.updateNowBar(z);
-                        BriefNowBarController.this.updateRemoteNowBar(z);
-                        BriefNowBarController.this.viewController.updateViewAlpha(z);
+                        briefNowBarController.screenOn = z;
+                        briefNowBarController.updateNowBar(z);
+                        briefNowBarController.updateRemoteNowBar(z);
+                        briefNowBarController.viewController.updateViewAlpha(z);
                         return Unit.INSTANCE;
                     }
                 };
@@ -137,7 +137,6 @@ public final class BriefNowBarController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -161,27 +160,22 @@ public final class BriefNowBarController {
         this.mainHandler = handler;
         ?? r1 = new BriefNowBarCallBack() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$nowBarCallback$1
             private final void onFullScreenShown() {
-                Handler handler2;
-                handler2 = BriefNowBarController.this.mainHandler;
-                final BriefNowBarController briefNowBarController = BriefNowBarController.this;
+                Handler handler2 = this.this$0.mainHandler;
+                final BriefNowBarController briefNowBarController = this.this$0;
                 handler2.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$nowBarCallback$1$onFullScreenShown$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BriefNowBarController.this.startFullViewActivity();
+                        briefNowBarController.startFullViewActivity();
                     }
                 });
             }
 
             @Override // com.android.systemui.aibrief.control.BriefNowBarCallBack
             public void onFullScreenShowingChanged(boolean z) {
-                boolean z2;
-                BriefLogger briefLogger2;
-                z2 = BriefNowBarController.this.prevFullScreenShowing;
-                if (z2 != z) {
-                    BriefNowBarController.this.prevFullScreenShowing = z;
-                    briefLogger2 = BriefNowBarController.this.logger;
-                    briefLogger2.d(BriefNowBarController.TAG, "onFullScreenShowingChanged, showing: " + z);
-                    BriefNowBarController.this.viewController.hideContainer();
+                if (this.this$0.prevFullScreenShowing != z) {
+                    this.this$0.prevFullScreenShowing = z;
+                    this.this$0.logger.d(BriefNowBarController.TAG, "onFullScreenShowingChanged, showing: " + z);
+                    this.this$0.viewController.hideContainer();
                     if (z) {
                         onFullScreenShown();
                     }
@@ -192,9 +186,10 @@ public final class BriefNowBarController {
         ?? r2 = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public void onConfigChanged(Configuration configuration) {
-                BriefNowBarController.updateNowBar$default(BriefNowBarController.this, false, 1, null);
-                BriefNowBarController.updateRemoteNowBar$default(BriefNowBarController.this, false, 1, null);
-                BriefNowBarController.this.viewController.onConfigurationChanged(configuration);
+                BriefNowBarController briefNowBarController = this.this$0;
+                briefNowBarController.updateNowBar(briefNowBarController.screenOn);
+                BriefNowBarController.updateRemoteNowBar$default(this.this$0, false, 1, null);
+                this.this$0.viewController.onConfigurationChanged(configuration);
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
@@ -272,11 +267,11 @@ public final class BriefNowBarController {
         if (activityIcon == null) {
             return null;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(activityIcon.getIntrinsicWidth(), activityIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(activityIcon.getIntrinsicWidth(), activityIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         activityIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         activityIcon.draw(canvas);
-        return Icon.createWithBitmap(createBitmap);
+        return Icon.createWithBitmap(bitmapCreateBitmap);
     }
 
     private final PendingIntent createBroadcastPendingIntent() {
@@ -297,12 +292,10 @@ public final class BriefNowBarController {
     private final void hideNowBarItem(final NowBarItem nowBarItem, String str) {
         nowBarItem.setNowBarKey(str);
         nowBarItem.setNowBarPackage(NOWBAR_PACKAGE);
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$hideNowBarItem$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController.hideNowBarItem.1
             @Override // java.lang.Runnable
             public final void run() {
-                FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper;
-                faceWidgetNotificationControllerWrapper = BriefNowBarController.this.faceWidgetNotificationControllerWrapper;
-                faceWidgetNotificationControllerWrapper.removeItem(nowBarItem);
+                BriefNowBarController.this.faceWidgetNotificationControllerWrapper.removeItem(nowBarItem);
             }
         });
     }
@@ -311,8 +304,8 @@ public final class BriefNowBarController {
     public final void startFullViewActivity() {
         Object failure;
         KeyguardManager keyguardManager = (KeyguardManager) this.context.getSystemService("keyguard");
-        Intent briefIntent = briefIntent(null, SUGGESTION_SPLASH_ACTIVITY);
-        PendingIntent activity = PendingIntent.getActivity(this.context, 0, briefIntent, 67108864);
+        Intent intentBriefIntent = briefIntent(null, SUGGESTION_SPLASH_ACTIVITY);
+        PendingIntent activity = PendingIntent.getActivity(this.context, 0, intentBriefIntent, 67108864);
         try {
             int i = Result.$r8$clinit;
             if (this.needToUnlock) {
@@ -320,16 +313,16 @@ public final class BriefNowBarController {
                 intent.putExtra("ignoreKeyguardState", true);
                 keyguardManager.semSetPendingIntentAfterUnlock(activity, intent);
             } else {
-                this.context.startActivity(briefIntent);
+                this.context.startActivity(intentBriefIntent);
             }
             failure = Unit.INSTANCE;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            Log.e(TAG, "ERROR startFullViewActivity() " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            Log.e(TAG, "ERROR startFullViewActivity() " + thM3442exceptionOrNullimpl);
         }
     }
 
@@ -340,23 +333,12 @@ public final class BriefNowBarController {
             return;
         }
         updateNowBarItem(this.nowBarItem, createExtraData(z, false), this.nowBarNormalView, this.nowBarCoverView);
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$updateNowBar$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController.updateNowBar.1
             @Override // java.lang.Runnable
             public final void run() {
-                FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper;
-                NowBarItem nowBarItem;
-                faceWidgetNotificationControllerWrapper = BriefNowBarController.this.faceWidgetNotificationControllerWrapper;
-                nowBarItem = BriefNowBarController.this.nowBarItem;
-                faceWidgetNotificationControllerWrapper.updateItem(nowBarItem);
+                BriefNowBarController.this.faceWidgetNotificationControllerWrapper.updateItem(BriefNowBarController.this.nowBarItem);
             }
         });
-    }
-
-    public static /* synthetic */ void updateNowBar$default(BriefNowBarController briefNowBarController, boolean z, int i, Object obj) {
-        if ((i & 1) != 0) {
-            z = true;
-        }
-        briefNowBarController.updateNowBar(z);
     }
 
     private final void updateNowBarItem(NowBarItem nowBarItem, Bundle bundle, View view, View view2) {
@@ -386,14 +368,10 @@ public final class BriefNowBarController {
             this.logger.d(TAG, "do not updateRemoteNowBar: showing false");
         } else {
             updateRemoteNowbarItem(this.nowBarRemoteItem, z);
-            this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$updateRemoteNowBar$1
+            this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController.updateRemoteNowBar.1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper;
-                    NowBarItem nowBarItem;
-                    faceWidgetNotificationControllerWrapper = BriefNowBarController.this.faceWidgetNotificationControllerWrapper;
-                    nowBarItem = BriefNowBarController.this.nowBarRemoteItem;
-                    faceWidgetNotificationControllerWrapper.updateItem(nowBarItem);
+                    BriefNowBarController.this.faceWidgetNotificationControllerWrapper.updateItem(BriefNowBarController.this.nowBarRemoteItem);
                 }
             });
         }
@@ -407,7 +385,7 @@ public final class BriefNowBarController {
     }
 
     private final void updateRemoteNowbarItem(NowBarItem nowBarItem, boolean z) {
-        Bundle createExtraData = createExtraData(z, true);
+        Bundle bundleCreateExtraData = createExtraData(z, true);
         nowBarItem.setContentViewForExpandCard(null);
         nowBarItem.setContentViewForNormalCard(null);
         nowBarItem.setOngoingNowbarView(this.nowBarRemoteNormalView);
@@ -422,7 +400,7 @@ public final class BriefNowBarController {
         nowBarItem.setNowBarKey(NOWBAR_REMOTE_VIEW_KEY);
         nowBarItem.setNowBarPackage(NOWBAR_PACKAGE);
         nowBarItem.setNowBarViewStyle(7);
-        nowBarItem.setExtraData(createExtraData);
+        nowBarItem.setExtraData(bundleCreateExtraData);
     }
 
     public final void hideNowBar() {
@@ -448,7 +426,7 @@ public final class BriefNowBarController {
         this.nowBarNormalView = view;
         this.nowBarFullView = view2;
         this.nowBarCoverView = view3;
-        updateNowBar$default(this, false, 1, null);
+        updateNowBar(this.screenOn);
     }
 
     public final void showNowBarRemoteView(RemoteViews remoteViews, RemoteViews remoteViews2, RemoteViews remoteViews3, PendingIntent pendingIntent) {
@@ -463,7 +441,7 @@ public final class BriefNowBarController {
 
     public final boolean startCircleAnimation(final Runnable runnable) {
         Log.d(TAG, "startCircleAnimation");
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController$startCircleAnimation$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.aibrief.control.BriefNowBarController.startCircleAnimation.1
             @Override // java.lang.Runnable
             public final void run() {
                 BriefNowBarController.this.viewController.showCircleAnimation(runnable);

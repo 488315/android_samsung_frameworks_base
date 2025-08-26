@@ -30,9 +30,9 @@ public class IntentSender implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public IntentSender createFromParcel(Parcel parcel) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder != null) {
-                return new IntentSender(readStrongBinder);
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder != null) {
+                return new IntentSender(strongBinder);
             }
             return null;
         }
@@ -176,7 +176,7 @@ public class IntentSender implements Parcelable {
                 throw new SendIntentException();
             }
         }
-        String resolveTypeIfNeeded = intent != null ? intent.resolveTypeIfNeeded(context.getContentResolver()) : null;
+        String strResolveTypeIfNeeded = intent != null ? intent.resolveTypeIfNeeded(context.getContentResolver()) : null;
         ActivityThread.ApplicationThread applicationThread = ActivityThread.currentActivityThread().getApplicationThread();
         IActivityManager service = ActivityManager.getService();
         FinishedDispatcher finishedDispatcher = null;
@@ -185,7 +185,7 @@ public class IntentSender implements Parcelable {
         if (onFinished != null) {
             finishedDispatcher = new FinishedDispatcher(this, onFinished, executor);
         }
-        if (service.sendIntentSender(applicationThread, iIntentSender, iBinder, i, intent, resolveTypeIfNeeded, finishedDispatcher, str, bundle) >= 0) {
+        if (service.sendIntentSender(applicationThread, iIntentSender, iBinder, i, intent, strResolveTypeIfNeeded, finishedDispatcher, str, bundle) >= 0) {
         } else {
             throw new SendIntentException();
         }
@@ -244,9 +244,9 @@ public class IntentSender implements Parcelable {
     }
 
     public static IntentSender readIntentSenderOrNullFromParcel(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        if (readStrongBinder != null) {
-            return new IntentSender(readStrongBinder);
+        IBinder strongBinder = parcel.readStrongBinder();
+        if (strongBinder != null) {
+            return new IntentSender(strongBinder);
         }
         return null;
     }

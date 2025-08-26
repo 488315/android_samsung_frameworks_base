@@ -4,7 +4,6 @@ import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSynthet
 import com.google.android.material.shape.EdgeTreatment;
 import com.google.android.material.shape.ShapePath;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BottomAppBarTopEdgeTreatment extends EdgeTreatment implements Cloneable {
     public float cradleVerticalOffset;
@@ -36,8 +35,8 @@ public class BottomAppBarTopEdgeTreatment extends EdgeTreatment implements Clone
         float f7 = ((this.fabMargin * 2.0f) + f6) / 2.0f;
         float f8 = f3 * this.roundedCornerRadius;
         float f9 = f2 + this.horizontalOffset;
-        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f3, f7, this.cradleVerticalOffset * f3);
-        if (m$1 / f7 >= 1.0f) {
+        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f3, f7, this.cradleVerticalOffset * f3);
+        if (fM$1 / f7 >= 1.0f) {
             shapePath.lineTo(f, 0.0f);
             return;
         }
@@ -45,7 +44,7 @@ public class BottomAppBarTopEdgeTreatment extends EdgeTreatment implements Clone
         float f11 = f10 * f3;
         boolean z = f10 == -1.0f || Math.abs((f10 * 2.0f) - f6) < 0.1f;
         if (z) {
-            f4 = m$1;
+            f4 = fM$1;
             f5 = 0.0f;
         } else {
             f5 = 1.75f;
@@ -53,10 +52,10 @@ public class BottomAppBarTopEdgeTreatment extends EdgeTreatment implements Clone
         }
         float f12 = f7 + f8;
         float f13 = f4 + f8;
-        float sqrt = (float) Math.sqrt((f12 * f12) - (f13 * f13));
-        float f14 = f9 - sqrt;
-        float f15 = f9 + sqrt;
-        float degrees = (float) Math.toDegrees(Math.atan(sqrt / f13));
+        float fSqrt = (float) Math.sqrt((f12 * f12) - (f13 * f13));
+        float f14 = f9 - fSqrt;
+        float f15 = f9 + fSqrt;
+        float degrees = (float) Math.toDegrees(Math.atan(fSqrt / f13));
         float f16 = (90.0f - degrees) + f5;
         shapePath.lineTo(f14, 0.0f);
         float f17 = f14 - f8;

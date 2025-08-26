@@ -18,6 +18,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricSourceType;
@@ -60,8 +61,11 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+import android.view.ContextThemeWrapper;
 import android.view.IWindowManager;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
 import androidx.appcompat.app.AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0;
@@ -70,7 +74,10 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
+import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import androidx.core.app.NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
@@ -83,12 +90,14 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.RemoteLockInfo;
 import com.android.keyguard.ActiveUnlockConfig;
 import com.android.keyguard.KeyguardSecurityModel;
+import com.android.keyguard.KeyguardTextBuilder;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.SecurityUtils;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3;
 import com.android.keyguard.logging.SimLogger;
+import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.systemui.CscRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
@@ -120,6 +129,7 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.noticenter.NotiCenterPlugin;
 import com.android.systemui.pluginlock.PluginLockInstancePolicy;
+import com.android.systemui.plugins.aod.PluginAOD;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.settings.UserTracker;
@@ -127,6 +137,7 @@ import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shared.system.TaskStackChangeListeners;
 import com.android.systemui.statusbar.KeyguardBatteryStatus;
 import com.android.systemui.statusbar.phone.BiometricUnlockController;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.DevicePostureController;
 import com.android.systemui.telephony.TelephonyListenerManager;
 import com.android.systemui.uithreadmonitor.BinderCallMonitor;
@@ -141,11 +152,12 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.settings.SecureSettings;
 import com.android.systemui.wallpaper.WallpaperUtils;
+import com.samsung.android.aod.AODManager;
+import com.samsung.android.aod.AODToast;
 import com.samsung.android.bio.face.SemBioFaceManager;
 import com.samsung.android.cocktailbar.SemCocktailBarManager;
 import com.samsung.android.cocktailbar.SemCocktailBarStateInfo;
 import com.samsung.android.cover.CoverState;
-import com.samsung.android.knox.container.EnterpriseContainerConstants;
 import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import com.samsung.android.security.mdf.MdfUtils;
@@ -171,7 +183,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequ
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     public static SemBioFaceManager sFaceManager;
@@ -289,7 +300,6 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     public final KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda11 mWaitingFocusRunnable;
     public final IWindowManager mWindowManagerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecUpdateMonitorImpl$8, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass8 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -494,15 +504,15 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         default:
                             return;
                     }
-                    Message obtainMessage = KeyguardSecUpdateMonitorImpl.this.mHandler.obtainMessage(i3, intent.getData().getSchemeSpecificPart());
+                    Message messageObtainMessage = KeyguardSecUpdateMonitorImpl.this.mHandler.obtainMessage(i3, intent.getData().getSchemeSpecificPart());
                     if (i3 == 1303) {
                         if (intent.getExtras() != null) {
-                            obtainMessage.arg1 = intent.getExtras().getBoolean("android.intent.extra.REPLACING") ? 1 : 0;
+                            messageObtainMessage.arg1 = intent.getExtras().getBoolean("android.intent.extra.REPLACING") ? 1 : 0;
                         } else {
-                            obtainMessage.arg1 = 0;
+                            messageObtainMessage.arg1 = 0;
                         }
                     }
-                    KeyguardSecUpdateMonitorImpl.this.mHandler.sendMessage(obtainMessage);
+                    KeyguardSecUpdateMonitorImpl.this.mHandler.sendMessage(messageObtainMessage);
                     return;
                 }
                 if ("com.samsung.intent.action.EMERGENCY_STATE_CHANGED".equals(action)) {
@@ -520,15 +530,15 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 }
                 if ("com.sec.android.intent.action.BLACK_MEMO".equals(action)) {
                     String stringExtra2 = intent.getStringExtra("state");
-                    boolean equals = TextUtils.equals(stringExtra2, "show");
+                    boolean zEquals = TextUtils.equals(stringExtra2, "show");
                     KeyguardSecUpdateMonitorImpl.this.mHandler.removeMessages(1001);
                     StringBuilder sb = new StringBuilder("screen off memo state changed, state = ");
                     sb.append(stringExtra2);
                     sb.append(", running ");
-                    CarrierTextManager$$ExternalSyntheticOutline0.m(sb, KeyguardSecUpdateMonitorImpl.this.mIsRunningBlackMemo, " -> ", equals, "KeyguardUpdateMonitor");
+                    CarrierTextManager$$ExternalSyntheticOutline0.m(sb, KeyguardSecUpdateMonitorImpl.this.mIsRunningBlackMemo, " -> ", zEquals, "KeyguardUpdateMonitor");
                     KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
-                    if (!keyguardSecUpdateMonitorImpl.mGoingToSleep || !keyguardSecUpdateMonitorImpl.mIsRunningBlackMemo || equals) {
-                        keyguardSecUpdateMonitorImpl.setIsRunningBlackMemo(equals);
+                    if (!keyguardSecUpdateMonitorImpl.mGoingToSleep || !keyguardSecUpdateMonitorImpl.mIsRunningBlackMemo || zEquals) {
+                        keyguardSecUpdateMonitorImpl.setIsRunningBlackMemo(zEquals);
                         return;
                     } else {
                         KeyguardUpdateMonitor.AnonymousClass16 anonymousClass163 = keyguardSecUpdateMonitorImpl.mHandler;
@@ -573,12 +583,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                     return;
                 }
                 if (CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE && "android.intent.action.SERVICE_STATE".equals(action)) {
-                    ServiceState newFromBundle = ServiceState.newFromBundle(intent.getExtras());
+                    ServiceState serviceStateNewFromBundle = ServiceState.newFromBundle(intent.getExtras());
                     int intExtra2 = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1);
                     int intExtra3 = intent.getIntExtra("android.telephony.extra.SLOT_INDEX", -1);
-                    Objects.toString(newFromBundle);
+                    Objects.toString(serviceStateNewFromBundle);
                     KeyguardUpdateMonitor.AnonymousClass16 anonymousClass165 = KeyguardSecUpdateMonitorImpl.this.mHandler;
-                    anonymousClass165.sendMessage(anonymousClass165.obtainMessage(VolteConstants.ErrorCode.CALL_END_REASON_TELEPHONY_NOT_RESPONDING, intExtra2, intExtra3, newFromBundle));
+                    anonymousClass165.sendMessage(anonymousClass165.obtainMessage(VolteConstants.ErrorCode.CALL_END_REASON_TELEPHONY_NOT_RESPONDING, intExtra2, intExtra3, serviceStateNewFromBundle));
                     return;
                 }
                 if (!"com.samsung.intent.action.BCS_REQUEST".equals(action) || !"AT+SVCIFPGM=1,7".equalsIgnoreCase(intent.getStringExtra("command"))) {
@@ -593,13 +603,13 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
                 int userId = ((UserTrackerImpl) keyguardSecUpdateMonitorImpl7.mUserTracker).getUserId();
                 boolean z = (keyguardSecUpdateMonitorImpl7.isSecure(userId) && keyguardSecUpdateMonitorImpl7.mKeyguardShowing && !keyguardSecUpdateMonitorImpl7.getUserCanSkipBouncer(userId)) ? false : true;
-                StringBuilder m = RowView$$ExternalSyntheticOutline0.m("isUnlocked = ", ", isSecure() = ", z);
-                m.append(keyguardSecUpdateMonitorImpl7.isSecure(userId));
-                m.append(", mKeyguardShowing = ");
-                m.append(keyguardSecUpdateMonitorImpl7.mKeyguardShowing);
-                m.append(", getUserCanSkipBouncer() = ");
-                m.append(keyguardSecUpdateMonitorImpl7.getUserCanSkipBouncer(userId));
-                Log.i("KeyguardUpdateMonitor", m.toString());
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("isUnlocked = ", ", isSecure() = ", z);
+                sbM.append(keyguardSecUpdateMonitorImpl7.isSecure(userId));
+                sbM.append(", mKeyguardShowing = ");
+                sbM.append(keyguardSecUpdateMonitorImpl7.mKeyguardShowing);
+                sbM.append(", getUserCanSkipBouncer() = ");
+                sbM.append(keyguardSecUpdateMonitorImpl7.getUserCanSkipBouncer(userId));
+                Log.i("KeyguardUpdateMonitor", sbM.toString());
                 StringBuilder sb2 = new StringBuilder("AT+SVCIFPGM=1,7\r\n+SVCIFPGM:1,");
                 StringBuilder sb3 = new StringBuilder();
                 int credentialTypeForUser = keyguardSecUpdateMonitorImpl7.getCredentialTypeForUser(userId);
@@ -627,10 +637,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                     sb3.append("/ADMIN");
                 }
                 sb2.append(sb3.toString());
-                String m2 = TransitionKt$$ExternalSyntheticOutline0.m(sb2, z ? ",UNLOCK" : ",LOCK", "\r\n");
+                String strM = TransitionKt$$ExternalSyntheticOutline0.m(sb2, z ? ",UNLOCK" : ",LOCK", "\r\n");
                 Intent intent2 = new Intent("com.samsung.intent.action.BCS_RESPONSE");
-                intent2.putExtra("response", m2);
-                KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("response: ", m2, "KeyguardUpdateMonitor");
+                intent2.putExtra("response", strM);
+                KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("response: ", strM, "KeyguardUpdateMonitor");
                 keyguardSecUpdateMonitorImpl7.mContext.sendBroadcastAsUser(intent2, UserHandle.SYSTEM);
             }
         };
@@ -697,7 +707,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (semCocktailBarManager != null) {
             semCocktailBarManager.registerStateListener(new SemCocktailBarManager.CocktailBarStateChangedListener() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda14
                 public final void onCocktailBarStateChanged(SemCocktailBarStateInfo semCocktailBarStateInfo) {
-                    KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
+                    KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
                     SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
                     keyguardSecUpdateMonitorImpl.getClass();
                     int i3 = semCocktailBarStateInfo.windowType;
@@ -815,7 +825,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         ((UiOffloadThread) Dependency.sDependency.getDependencyInner(UiOffloadThread.class)).execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda21
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
+                KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
                 boolean z2 = z;
                 int i = userId;
                 if (z2) {
@@ -849,9 +859,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         synchronized (this) {
             this.mCoverState = coverState;
         }
-        Message obtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.SERVER_UNREACHABLE);
-        obtainMessage.obj = coverState;
-        obtainMessage.sendToTarget();
+        Message messageObtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.SERVER_UNREACHABLE);
+        messageObtainMessage.obj = coverState;
+        messageObtainMessage.sendToTarget();
     }
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
@@ -1061,18 +1071,18 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 StringBuilder sb = new StringBuilder("    isFingerprintClass3=");
                 sb.append(isFingerprintClass3());
                 printWriter.println(sb.toString());
-                StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    areAllFpAuthenticatorsRegistered="), this.mAuthController.mAllFingerprintAuthenticatorsRegistered, printWriter, "    allowed="), biometricAuthenticated != null && isUnlockingWithBiometricAllowed(biometricAuthenticated.mIsStrongBiometric), printWriter, "    auth'd="), biometricAuthenticated != null && biometricAuthenticated.mAuthenticated, printWriter, "    authSinceBoot=");
-                m.append(this.mStrongAuthTracker.hasUserAuthenticatedSinceBoot());
-                printWriter.println(m.toString());
+                StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    areAllFpAuthenticatorsRegistered="), this.mAuthController.mAllFingerprintAuthenticatorsRegistered, printWriter, "    allowed="), biometricAuthenticated != null && isUnlockingWithBiometricAllowed(biometricAuthenticated.mIsStrongBiometric), printWriter, "    auth'd="), biometricAuthenticated != null && biometricAuthenticated.mAuthenticated, printWriter, "    authSinceBoot=");
+                sbM.append(this.mStrongAuthTracker.hasUserAuthenticatedSinceBoot());
+                printWriter.println(sbM.toString());
                 printWriter.println("    disabled(DPM)=" + isFingerprintDisabled(identifier));
                 printWriter.println("    possible=" + isUnlockWithFingerprintPossible(identifier));
-                StringBuilder m2 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    listening: actual=" + this.mFingerprintRunningState + " expected=" + (shouldListenForFingerprint(false) ? 1 : 0), "    strongAuthFlags=");
-                m2.append(Integer.toHexString(strongAuthForUser));
-                printWriter.println(m2.toString());
+                StringBuilder sbM2 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    listening: actual=" + this.mFingerprintRunningState + " expected=" + (shouldListenForFingerprint(false) ? 1 : 0), "    strongAuthFlags=");
+                sbM2.append(Integer.toHexString(strongAuthForUser));
+                printWriter.println(sbM2.toString());
                 printWriter.println("    trustManaged=" + getUserTrustIsManaged(identifier));
-                StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mFingerprintLockedOut="), this.mFingerprintLockedOut, printWriter, "    mFingerprintLockedOutPermanent="), this.mFingerprintLockedOutPermanent, printWriter, "    enabledByUser=");
-                m3.append(this.mBiometricEnabledForUser.get(identifier));
-                printWriter.println(m3.toString());
+                StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mFingerprintLockedOut="), this.mFingerprintLockedOut, printWriter, "    mFingerprintLockedOutPermanent="), this.mFingerprintLockedOutPermanent, printWriter, "    enabledByUser=");
+                sbM3.append(this.mBiometricEnabledForUser.get(identifier));
+                printWriter.println(sbM3.toString());
                 KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mKeyguardOccluded="), this.mKeyguardOccluded, printWriter, "    mIsDreaming="), this.mIsDreaming, printWriter);
                 List list = this.mAuthController.mSidefpsProps;
                 if (list == null || list.isEmpty()) {
@@ -1081,9 +1091,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                     StringBuilder sb2 = new StringBuilder("        sfpsEnrolled=");
                     AuthController authController = this.mAuthController;
                     str = "    enabledByUser=";
-                    StringBuilder m4 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, authController.mSidefpsProps == null ? false : authController.mSfpsEnrolledForUser.get(this.mSelectedUserInteractor.getSelectedUserId()), printWriter, "        shouldListenForSfps=");
-                    m4.append(shouldListenForFingerprint(false));
-                    printWriter.println(m4.toString());
+                    StringBuilder sbM4 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, authController.mSidefpsProps == null ? false : authController.mSfpsEnrolledForUser.get(this.mSelectedUserInteractor.getSelectedUserId()), printWriter, "        shouldListenForSfps=");
+                    sbM4.append(shouldListenForFingerprint(false));
+                    printWriter.println(sbM4.toString());
                 }
                 new DumpsysTableLogger("KeyguardFingerprintListen", KeyguardFingerprintListenModel.TABLE_HEADERS, this.mFingerprintListenBuffer.toList()).printTableData(printWriter);
             } else {
@@ -1104,9 +1114,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 StringBuilder sb4 = new StringBuilder("    isFaceClass3=");
                 sb4.append(isFaceClass3());
                 printWriter.println(sb4.toString());
-                StringBuilder m5 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    allowed="), biometricAuthenticated2 != null && isUnlockingWithBiometricAllowed(biometricAuthenticated2.mIsStrongBiometric), printWriter, "    auth'd="), biometricAuthenticated2 != null && biometricAuthenticated2.mAuthenticated, printWriter, "    authSinceBoot=");
-                m5.append(this.mStrongAuthTracker.hasUserAuthenticatedSinceBoot());
-                printWriter.println(m5.toString());
+                StringBuilder sbM5 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    allowed="), biometricAuthenticated2 != null && isUnlockingWithBiometricAllowed(biometricAuthenticated2.mIsStrongBiometric), printWriter, "    auth'd="), biometricAuthenticated2 != null && biometricAuthenticated2.mAuthenticated, printWriter, "    authSinceBoot=");
+                sbM5.append(this.mStrongAuthTracker.hasUserAuthenticatedSinceBoot());
+                printWriter.println(sbM5.toString());
                 printWriter.println("    disabled(DPM)=" + isFaceDisabled(identifier));
                 printWriter.println("    possible=" + isUnlockWithFacePossible(identifier));
                 printWriter.println("    listening: actual=" + this.mFaceRunningState + " expected=(" + (shouldListenForFace() ? 1 : 0));
@@ -1115,9 +1125,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 printWriter.println(sb5.toString());
                 printWriter.println("    isNonStrongBiometricAllowedAfterIdleTimeout=" + this.mStrongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(identifier));
                 printWriter.println("    trustManaged=" + getUserTrustIsManaged(identifier));
-                StringBuilder m6 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mFaceLockedOutPermanent="), this.mFaceLockedOutPermanent, printWriter, str);
-                m6.append(this.mBiometricEnabledForUser.get(identifier));
-                printWriter.println(m6.toString());
+                StringBuilder sbM6 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mFaceLockedOutPermanent="), this.mFaceLockedOutPermanent, printWriter, str);
+                sbM6.append(this.mBiometricEnabledForUser.get(identifier));
+                printWriter.println(sbM6.toString());
                 KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mSecureCameraLaunched="), this.mSecureCameraLaunched, printWriter, "    mPrimaryBouncerFullyShown="), this.mPrimaryBouncerFullyShown, printWriter, "    mNeedsSlowUnlockTransition="), this.mNeedsSlowUnlockTransition, printWriter);
             } else if (this.mFaceManager != null && this.mFaceSensorProperties.isEmpty()) {
                 printWriter.println("  Face state (user=" + identifier + ")");
@@ -1145,18 +1155,18 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             StringBuilder sb9 = new StringBuilder("    mCredentialType=");
             sb9.append(this.mLockPatternUtils.getCredentialTypeForUser(identifier));
             sb9.append(" - ");
-            StringBuilder m7 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb9, this.mCredentialType, printWriter, "    mPrevCredentialType=");
-            m7.append(this.mLockPatternUtils.getCredentialTypeForUser(-9899));
-            printWriter.println(m7.toString());
-            StringBuilder m8 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    isSecure=" + this.mLockPatternUtils.isSecure(identifier) + " - " + isSecure(), "    isAutoPinConfirmEnabled=");
-            m8.append(this.mLockPatternUtils.isAutoPinConfirmEnabled(identifier));
-            printWriter.println(m8.toString());
+            StringBuilder sbM7 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb9, this.mCredentialType, printWriter, "    mPrevCredentialType=");
+            sbM7.append(this.mLockPatternUtils.getCredentialTypeForUser(-9899));
+            printWriter.println(sbM7.toString());
+            StringBuilder sbM8 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    isSecure=" + this.mLockPatternUtils.isSecure(identifier) + " - " + isSecure(), "    isAutoPinConfirmEnabled=");
+            sbM8.append(this.mLockPatternUtils.isAutoPinConfirmEnabled(identifier));
+            printWriter.println(sbM8.toString());
             StringBuilder sb10 = new StringBuilder("    mDisableCamera=");
             sb10.append(this.mDevicePolicyManager.getCameraDisabled(null));
             sb10.append(" - ");
-            StringBuilder m9 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb10, this.mDisableCamera, printWriter, "    mMaximumFailedPasswordsForWipe="), this.mMaximumFailedPasswordsForWipe, printWriter, "    getUserCanSkipBouncer=");
-            m9.append(getUserCanSkipBouncer(identifier));
-            printWriter.println(m9.toString());
+            StringBuilder sbM9 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb10, this.mDisableCamera, printWriter, "    mMaximumFailedPasswordsForWipe="), this.mMaximumFailedPasswordsForWipe, printWriter, "    getUserCanSkipBouncer=");
+            sbM9.append(getUserCanSkipBouncer(identifier));
+            printWriter.println(sbM9.toString());
             printWriter.println("    getUserHasTrust=" + getUserHasTrust(identifier));
             printWriter.println("    isUserUnlocked=" + this.mUserManager.isUserUnlocked(identifier));
             if (identifier != 0) {
@@ -1280,12 +1290,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final long getLockoutAttemptDeadline() {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         if (this.mLockoutAttemptDeadline < getDualDarInnerLockScreenTimeOut(((UserTrackerImpl) this.mUserTracker).getUserId())) {
             return getDualDarInnerLockScreenTimeOut(((UserTrackerImpl) this.mUserTracker).getUserId());
         }
         long j = this.mLockoutAttemptDeadline;
-        return (j >= elapsedRealtime || this.mLockoutAttemptTimeout == 0) ? j > elapsedRealtime + this.mLockoutAttemptTimeout ? this.mLockPatternUtils.getLockoutAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId()) : j : this.mLockPatternUtils.getLockoutAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId());
+        return (j >= jElapsedRealtime || this.mLockoutAttemptTimeout == 0) ? j > jElapsedRealtime + this.mLockoutAttemptTimeout ? this.mLockPatternUtils.getLockoutAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId()) : j : this.mLockPatternUtils.getLockoutAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId());
     }
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
@@ -1293,26 +1303,26 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (!this.mStrongAuthTracker.hasUserAuthenticatedSinceBoot()) {
             return 0L;
         }
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        long j = this.mLockoutBiometricAttemptDeadline;
-        if ((j < elapsedRealtime && this.mLockoutBiometricAttemptTimeout != 0) || j > elapsedRealtime + this.mLockoutBiometricAttemptTimeout) {
-            j = this.mLockPatternUtils.getBiometricAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId());
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        long biometricAttemptDeadline = this.mLockoutBiometricAttemptDeadline;
+        if ((biometricAttemptDeadline < jElapsedRealtime && this.mLockoutBiometricAttemptTimeout != 0) || biometricAttemptDeadline > jElapsedRealtime + this.mLockoutBiometricAttemptTimeout) {
+            biometricAttemptDeadline = this.mLockPatternUtils.getBiometricAttemptDeadline(((UserTrackerImpl) this.mUserTracker).getUserId());
         }
-        if (j <= 0 || this.mHasLoggedOnceAuditlog) {
-            if (j <= 0 && this.mHasLoggedOnceAuditlog) {
+        if (biometricAttemptDeadline <= 0 || this.mHasLoggedOnceAuditlog) {
+            if (biometricAttemptDeadline <= 0 && this.mHasLoggedOnceAuditlog) {
                 this.mHasLoggedOnceAuditlog = false;
             }
-            return j;
+            return biometricAttemptDeadline;
         }
         int userId = ((UserTrackerImpl) this.mUserTracker).getUserId();
         int failedBiometricUnlockAttempts = getFailedBiometricUnlockAttempts(userId);
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             AuditLog.logEventAsUser(userId, 375, new Object[]{Integer.valueOf(failedBiometricUnlockAttempts)});
             this.mHasLoggedOnceAuditlog = true;
-            return j;
+            return biometricAttemptDeadline;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -1339,10 +1349,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (isAutoWipe()) {
             int currentFailedPasswordAttempts = this.mLockPatternUtils.getCurrentFailedPasswordAttempts(((UserTrackerImpl) this.mUserTracker).getUserId());
             int currentFailedPasswordAttempts2 = this.mLockPatternUtils.getCurrentFailedPasswordAttempts(((UserTrackerImpl) this.mUserTracker).getUserId());
-            boolean isAutoWipe = isAutoWipe();
+            boolean zIsAutoWipe = isAutoWipe();
             int i2 = this.mMaximumFailedPasswordsForWipe;
             if (i2 <= 0) {
-                i2 = isAutoWipe ? 20 : 0;
+                i2 = zIsAutoWipe ? 20 : 0;
             }
             int i3 = i2 > 0 ? i2 - currentFailedPasswordAttempts2 : -1;
             RecyclerView$$ExternalSyntheticOutline0.m(i3, "KeyguardUpdateMonitor", MutableObjectList$$ExternalSyntheticOutline0.m(i, currentFailedPasswordAttempts, "getRemainingAttempt type : ", ", failedAttempts : ", ", remainingAttempts : "));
@@ -1389,144 +1399,45 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         return getUserUnlockedWithBiometric(i) && this.mKeyguardBypassController.canBypass();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x0083, code lost:
-    
-        if (r1.remaining != r6) goto L24;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x008c, code lost:
-    
-        if (r1.mSuperFastCharger != r0.mSuperFastCharger) goto L24;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x0095, code lost:
-    
-        if (r1.mSlowCharger != r0.mSlowCharger) goto L24;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x009e, code lost:
-    
-        if (r0.maxChargingWattage != r1.maxChargingWattage) goto L24;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:56:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x0086  */
     @Override // com.android.keyguard.KeyguardUpdateMonitor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleBatteryUpdate(com.android.settingslib.fuelgauge.BatteryStatus r11) {
-        /*
-            r10 = this;
-            boolean r0 = r11 instanceof com.android.systemui.statusbar.KeyguardBatteryStatus
-            if (r0 == 0) goto Lb0
-            com.android.systemui.util.Assert.isMainThread()
-            java.lang.String r0 = "KeyguardUpdateMonitor"
-            java.lang.String r1 = "handleBatteryUpdate"
-            android.util.Log.d(r0, r1)
-            r0 = r11
-            com.android.systemui.statusbar.KeyguardBatteryStatus r0 = (com.android.systemui.statusbar.KeyguardBatteryStatus) r0
-            com.android.internal.app.IBatteryStats r1 = r10.mBatteryInfo     // Catch: android.os.RemoteException -> L29
-            if (r1 == 0) goto L29
-            boolean r1 = r0.isPluggedIn()     // Catch: android.os.RemoteException -> L29
-            if (r1 != 0) goto L21
-            boolean r1 = r0.isPluggedInWired()     // Catch: android.os.RemoteException -> L29
-            if (r1 == 0) goto L29
-        L21:
-            com.android.internal.app.IBatteryStats r1 = r10.mBatteryInfo     // Catch: android.os.RemoteException -> L29
-            long r1 = r1.computeChargeTimeRemaining()     // Catch: android.os.RemoteException -> L29
-            r0.remaining = r1     // Catch: android.os.RemoteException -> L29
-        L29:
-            com.android.systemui.statusbar.KeyguardBatteryStatus r1 = r10.mKeyguardBatteryStatus
-            boolean r2 = r0.isPluggedIn()
-            boolean r3 = r1.isPluggedIn()
-            r4 = 0
-            r5 = 1
-            if (r3 == 0) goto L41
-            if (r2 == 0) goto L41
-            int r6 = r1.status
-            int r7 = r0.status
-            if (r6 == r7) goto L41
-            r6 = r5
-            goto L42
-        L41:
-            r6 = r4
-        L42:
-            if (r3 != r2) goto L4d
-            if (r6 == 0) goto L47
-            goto L4d
-        L47:
-            int r3 = r1.level
-            int r6 = r0.level
-            if (r3 == r6) goto L4f
-        L4d:
-            r4 = r5
-            goto La1
-        L4f:
-            if (r2 == 0) goto L58
-            boolean r3 = r1.highVoltage
-            boolean r6 = r0.highVoltage
-            if (r3 == r6) goto L58
-            goto L4d
-        L58:
-            if (r2 == 0) goto L61
-            int r3 = r1.online
-            int r6 = r0.online
-            if (r3 == r6) goto L61
-            goto L4d
-        L61:
-            if (r2 == 0) goto L6c
-            int r3 = r0.swellingMode
-            if (r3 <= 0) goto L6c
-            int r6 = r1.swellingMode
-            if (r6 == r3) goto L6c
-            goto L4d
-        L6c:
-            if (r2 == 0) goto L75
-            int r3 = r1.chargingStatus
-            int r6 = r0.chargingStatus
-            if (r3 == r6) goto L75
-            goto L4d
-        L75:
-            if (r2 == 0) goto L86
-            long r6 = r0.remaining
-            r8 = 0
-            int r3 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r3 <= 0) goto L86
-            long r8 = r1.remaining
-            int r3 = (r8 > r6 ? 1 : (r8 == r6 ? 0 : -1))
-            if (r3 == 0) goto L86
-            goto L4d
-        L86:
-            if (r2 == 0) goto L8f
-            int r3 = r1.mSuperFastCharger
-            int r6 = r0.mSuperFastCharger
-            if (r3 == r6) goto L8f
-            goto L4d
-        L8f:
-            if (r2 == 0) goto L98
-            int r3 = r1.mSlowCharger
-            int r6 = r0.mSlowCharger
-            if (r3 == r6) goto L98
-            goto L4d
-        L98:
-            if (r2 == 0) goto La1
-            int r2 = r0.maxChargingWattage
-            int r1 = r1.maxChargingWattage
-            if (r2 == r1) goto La1
-            goto L4d
-        La1:
-            r10.mKeyguardBatteryStatus = r0
-            if (r4 == 0) goto Laf
-            com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda53 r0 = new com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda53
-            r1 = 2
-            r0.<init>(r11, r1)
-            r11 = 0
-            r10.dispatchCallback(r0, r11)
-        Laf:
-            return
-        Lb0:
-            super.handleBatteryUpdate(r11)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecUpdateMonitorImpl.handleBatteryUpdate(com.android.settingslib.fuelgauge.BatteryStatus):void");
+    public final void handleBatteryUpdate(BatteryStatus batteryStatus) {
+        int i;
+        if (!(batteryStatus instanceof KeyguardBatteryStatus)) {
+            super.handleBatteryUpdate(batteryStatus);
+            return;
+        }
+        Assert.isMainThread();
+        Log.d("KeyguardUpdateMonitor", "handleBatteryUpdate");
+        KeyguardBatteryStatus keyguardBatteryStatus = (KeyguardBatteryStatus) batteryStatus;
+        try {
+            if (this.mBatteryInfo != null && (keyguardBatteryStatus.isPluggedIn() || keyguardBatteryStatus.isPluggedInWired())) {
+                keyguardBatteryStatus.remaining = this.mBatteryInfo.computeChargeTimeRemaining();
+            }
+        } catch (RemoteException unused) {
+        }
+        KeyguardBatteryStatus keyguardBatteryStatus2 = this.mKeyguardBatteryStatus;
+        boolean zIsPluggedIn = keyguardBatteryStatus.isPluggedIn();
+        boolean zIsPluggedIn2 = keyguardBatteryStatus2.isPluggedIn();
+        boolean z = false;
+        boolean z2 = zIsPluggedIn2 && zIsPluggedIn && keyguardBatteryStatus2.status != keyguardBatteryStatus.status;
+        if (zIsPluggedIn2 != zIsPluggedIn || z2 || keyguardBatteryStatus2.level != keyguardBatteryStatus.level || ((zIsPluggedIn && keyguardBatteryStatus2.highVoltage != keyguardBatteryStatus.highVoltage) || ((zIsPluggedIn && keyguardBatteryStatus2.online != keyguardBatteryStatus.online) || ((zIsPluggedIn && (i = keyguardBatteryStatus.swellingMode) > 0 && keyguardBatteryStatus2.swellingMode != i) || (zIsPluggedIn && keyguardBatteryStatus2.chargingStatus != keyguardBatteryStatus.chargingStatus))))) {
+            z = true;
+        } else if (zIsPluggedIn) {
+            long j = keyguardBatteryStatus.remaining;
+            if (j <= 0 || keyguardBatteryStatus2.remaining == j) {
+                if ((zIsPluggedIn && keyguardBatteryStatus2.mSuperFastCharger != keyguardBatteryStatus.mSuperFastCharger) || ((zIsPluggedIn && keyguardBatteryStatus2.mSlowCharger != keyguardBatteryStatus.mSlowCharger) || (zIsPluggedIn && keyguardBatteryStatus.maxChargingWattage != keyguardBatteryStatus2.maxChargingWattage))) {
+                }
+            }
+        }
+        this.mKeyguardBatteryStatus = keyguardBatteryStatus;
+        if (z) {
+            dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda53(batteryStatus, 2), null);
+        }
     }
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
@@ -1606,9 +1517,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         }
         stopListeningForFace(FaceAuthUiEvent.FACE_AUTH_STOPPED_FACE_ERROR);
         if (i == 100001 && !this.mPrimaryBouncerFullyShown) {
-            Toast makeText = Toast.makeText(this.mContext, str, 0);
-            makeText.setGravity(49, 0, this.mContext.getResources().getDimensionPixelOffset(R.dimen.status_bar_height));
-            makeText.show();
+            Toast toastMakeText = Toast.makeText(this.mContext, str, 0);
+            toastMakeText.setGravity(49, 0, this.mContext.getResources().getDimensionPixelOffset(R.dimen.status_bar_height));
+            toastMakeText.show();
         }
         dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda29(i, str, 1), null);
     }
@@ -1686,19 +1597,121 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         super.handleFingerprintError(i, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x01fa  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x01fa  */
+    /* JADX WARN: Removed duplicated region for block: B:67:? A[RETURN, SYNTHETIC] */
     @Override // com.android.keyguard.KeyguardUpdateMonitor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleFingerprintHelp(int r17, java.lang.String r18) {
-        /*
-            Method dump skipped, instructions count: 516
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecUpdateMonitorImpl.handleFingerprintHelp(int, java.lang.String):void");
+    public final void handleFingerprintHelp(int i, String str) {
+        AODToast.Builder builder;
+        long j;
+        String strM;
+        PluginAOD pluginAOD;
+        Assert.isMainThread();
+        int userId = ((UserTrackerImpl) this.mUserTracker).getUserId();
+        if (i != -1 && !isUnlockingWithBiometricAllowed(true)) {
+            Log.d("KeyguardFingerprint", "handleFingerprintHelp( unlock is not allowed. )");
+            stopListeningForFingerprint();
+            return;
+        }
+        if (!this.mDeviceInteractive || this.mIsDreamingForBiometrics) {
+            if (i == 1004 || i == 1005) {
+                Log.d("KeyguardFingerprint", "handleFingerprintHelp( skip TSP block/unblock )");
+                return;
+            }
+            if (i != -1) {
+                int i2 = this.mFingerPrintBadQualityCounts.get(((UserTrackerImpl) this.mUserTracker).getUserId(), 0) + 1;
+                this.mFingerPrintBadQualityCounts.put(((UserTrackerImpl) this.mUserTracker).getUserId(), i2);
+                StringBuilder sb = new StringBuilder("handleFingerprintHelp( Update Bad Quality Count = ");
+                sb.append(i2);
+                ExifInterface$$ExternalSyntheticOutline0.m(sb, " )", "KeyguardFingerprint");
+                if (i2 >= 50) {
+                    if (this.mSettingsHelper.isFingerprintSensorPopupShowAgain()) {
+                        Resources resources = this.mContext.getResources();
+                        SystemUIDialog systemUIDialog = new SystemUIDialog(this.mContext, R.style.Theme_SystemUI_POPUPUI);
+                        systemUIDialog.setTitle(resources.getString(R.string.kg_fingerprint_bad_quality_popup_title));
+                        systemUIDialog.setMessage(resources.getString(R.string.kg_fingerprint_bad_quality_popup_message));
+                        systemUIDialog.setPositiveButton(R.string.kg_keycode_ok, new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda61());
+                        CheckBox checkBox = new CheckBox(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_Dialog));
+                        checkBox.setText(resources.getString(R.string.kg_fingerprint_bad_quality_popup_checkbox));
+                        checkBox.setPadding(resources.getDimensionPixelSize(R.dimen.kg_checkbox_text_side_padding), 0, 0, 0);
+                        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda62
+                            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+                            public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                                KeyguardSecUpdateMonitorImpl.$r8$lambda$5lhNrxzXYmtVuTwfeiQe_uCItoQ(this.f$0, z);
+                            }
+                        });
+                        systemUIDialog.setView(checkBox, resources.getDimensionPixelSize(R.dimen.checkbox_popup_text_margin), 0, resources.getDimensionPixelSize(R.dimen.checkbox_popup_text_margin), 0);
+                        systemUIDialog.setCancelable(false);
+                        systemUIDialog.show();
+                    } else {
+                        Log.d("KeyguardFingerprint", "Skip to show fingerprint sensor block popup");
+                    }
+                    updateFingerprintListeningState(2);
+                    setFodStrictMode(false);
+                } else if (i2 == 10) {
+                    setFodStrictMode(true);
+                }
+                PluginAOD pluginAOD2 = ((PluginAODManager) this.mPluginAODManagerLazy.get()).mAODPlugin;
+                if (pluginAOD2 != null) {
+                    pluginAOD2.hideChargingInfoByFinger(0L);
+                    return;
+                }
+                return;
+            }
+            int failedBiometricUnlockAttempts = getFailedBiometricUnlockAttempts(userId);
+            boolean userHasTrust = getUserHasTrust(userId);
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(failedBiometricUnlockAttempts, "handleFingerprintHelp( Failed count when screen off = ", " ) - ");
+            sbM.append(this.mCurrentSecurityMode);
+            sbM.append(", t = ");
+            sbM.append(userHasTrust);
+            Log.d("KeyguardFingerprint", sbM.toString());
+            if (getFailedBiometricUnlockAttempts(userId) == 3) {
+                this.mKeyguardBatteryStatus.getClass();
+                String str2 = LsRune.VALUE_SUB_DISPLAY_POLICY;
+            }
+            int failedBiometricUnlockAttempts2 = getFailedBiometricUnlockAttempts(userId);
+            if (failedBiometricUnlockAttempts2 != 0 && failedBiometricUnlockAttempts2 % 5 == 0) {
+                KeyguardTextBuilder keyguardTextBuilder = KeyguardTextBuilder.getInstance(this.mContext);
+                KeyguardSecurityModel.SecurityMode securityMode = this.mCurrentSecurityMode;
+                String strM2 = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), keyguardTextBuilder.mContext.getResources().getQuantityString(R.plurals.kg_secure_attempts_to_unlock_with_fingerprints, failedBiometricUnlockAttempts, Integer.valueOf(failedBiometricUnlockAttempts)), " ");
+                if (userHasTrust) {
+                    String str3 = LsRune.VALUE_SUB_DISPLAY_POLICY;
+                    strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(keyguardTextBuilder.mContext, R.string.kg_secure_press_power_key, PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM2));
+                } else {
+                    int i3 = KeyguardTextBuilder.AnonymousClass2.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[securityMode.ordinal()];
+                    strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, i3 != 1 ? i3 != 2 ? keyguardTextBuilder.mContext.getString(R.string.kg_secure_enter_password_instead) : keyguardTextBuilder.mContext.getString(R.string.kg_secure_draw_pattern_instead) : keyguardTextBuilder.mContext.getString(R.string.kg_secure_enter_pin_instead));
+                }
+                builder = new AODToast.Builder(strM);
+            } else {
+                builder = null;
+            }
+            if (builder != null) {
+                j = 10000;
+                builder.setDurationInMillis(10000L);
+                AODManager.getInstance(this.mContext).requestAODToast(builder.build());
+            }
+            dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda29(i, str, 0), null);
+            pluginAOD = ((PluginAODManager) this.mPluginAODManagerLazy.get()).mAODPlugin;
+            if (pluginAOD == null) {
+                pluginAOD.hideChargingInfoByFinger(j);
+                return;
+            }
+            return;
+        }
+        if (i != 1004) {
+            this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 2, 0);
+        } else if (this.mIsTspFpGuideShown) {
+            return;
+        } else {
+            updateTspFpGuideShown(true);
+        }
+        j = 0;
+        dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda29(i, str, 0), null);
+        pluginAOD = ((PluginAODManager) this.mPluginAODManagerLazy.get()).mAODPlugin;
+        if (pluginAOD == null) {
+        }
     }
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
@@ -1782,6 +1795,8 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x02d4  */
+    /* JADX WARN: Removed duplicated region for block: B:388:0x0974 A[Catch: all -> 0x08f8, DONT_GENERATE, TryCatch #0 {all -> 0x08f8, blocks: (B:349:0x08cb, B:354:0x08f4, B:357:0x08fb, B:360:0x090b, B:362:0x0910, B:364:0x0916, B:366:0x091e, B:367:0x0923, B:377:0x0945, B:370:0x0928, B:373:0x0936, B:375:0x093b, B:376:0x0940, B:380:0x094b, B:382:0x0951, B:383:0x095b, B:385:0x096d, B:386:0x0972, B:388:0x0974), top: B:477:0x08cb }] */
     /* JADX WARN: Type inference failed for: r8v34 */
     /* JADX WARN: Type inference failed for: r8v35 */
     /* JADX WARN: Type inference failed for: r8v36 */
@@ -1793,14 +1808,17 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     /* JADX WARN: Type inference failed for: r9v5 */
     /* JADX WARN: Type inference failed for: r9v6 */
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
-    public final void handleSecMessage(Message message) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void handleSecMessage(Message message) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         String str;
         int i;
-        int match;
-        ?? r8;
+        int iMatch;
+        KnoxStateMonitor knoxStateMonitor;
         int i2 = 9;
         final int i3 = 2;
-        r13 = false;
+        z = false;
         boolean z = false;
         final int i4 = 1;
         int i5 = message.what;
@@ -1830,10 +1848,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             return;
         }
         if (i5 == 1028) {
-            boolean booleanValue = ((Boolean) message.obj).booleanValue();
-            if (this.mIsNotiStarShown != booleanValue) {
-                Log.d("KeyguardUpdateMonitor", "handleNotiStarState( prev:" + this.mIsNotiStarShown + "-> next:" + booleanValue + " )");
-                this.mIsNotiStarShown = booleanValue;
+            boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
+            if (this.mIsNotiStarShown != zBooleanValue) {
+                Log.d("KeyguardUpdateMonitor", "handleNotiStarState( prev:" + this.mIsNotiStarShown + "-> next:" + zBooleanValue + " )");
+                this.mIsNotiStarShown = zBooleanValue;
                 if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
                     updateFingerprintListeningState(2);
                 }
@@ -1874,34 +1892,34 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 }
                 return;
             case VolteConstants.ErrorCode.CALL_SESSION_TERMINATED /* 1102 */:
-                int intValue = ((Integer) message.obj).intValue();
+                int iIntValue = ((Integer) message.obj).intValue();
                 int userId = ((UserTrackerImpl) this.mUserTracker).getUserId();
-                boolean updateLockscreenDisabled = containsFlag(intValue, 512) ? updateLockscreenDisabled(userId) : false;
-                boolean updateCredentialType = containsFlag(intValue, 2) ? updateCredentialType(userId) : false;
-                if (containsFlag(intValue, 4)) {
-                    updateCredentialType |= updateFMMLock(userId, false);
+                boolean zUpdateLockscreenDisabled = containsFlag(iIntValue, 512) ? updateLockscreenDisabled(userId) : false;
+                boolean zUpdateCredentialType = containsFlag(iIntValue, 2) ? updateCredentialType(userId) : false;
+                if (containsFlag(iIntValue, 4)) {
+                    zUpdateCredentialType |= updateFMMLock(userId, false);
                 }
-                if (containsFlag(intValue, 8)) {
-                    updateCredentialType |= updateCarrierLock(userId);
+                if (containsFlag(iIntValue, 8)) {
+                    zUpdateCredentialType |= updateCarrierLock(userId);
                 }
-                if (containsFlag(intValue, 16)) {
-                    updateCredentialType |= updateBiometricsOptionState(userId);
+                if (containsFlag(iIntValue, 16)) {
+                    zUpdateCredentialType |= updateBiometricsOptionState(userId);
                 }
-                if (containsFlag(intValue, 32)) {
-                    updateCredentialType |= updateSecureLockTimeout(userId);
+                if (containsFlag(iIntValue, 32)) {
+                    zUpdateCredentialType |= updateSecureLockTimeout(userId);
                 }
-                if (containsFlag(intValue, 64)) {
-                    updateCredentialType |= updateBiometricLockTimeout(userId);
+                if (containsFlag(iIntValue, 64)) {
+                    zUpdateCredentialType |= updateBiometricLockTimeout(userId);
                 }
-                if (containsFlag(intValue, 1)) {
-                    updateCredentialType = updateCredentialType | updateCredentialType(userId) | updateFMMLock(userId, false) | updateCarrierLock(userId) | updatePermanentLock(userId) | updateBiometricsOptionState(userId);
+                if (containsFlag(iIntValue, 1)) {
+                    zUpdateCredentialType = zUpdateCredentialType | updateCredentialType(userId) | updateFMMLock(userId, false) | updateCarrierLock(userId) | updatePermanentLock(userId) | updateBiometricsOptionState(userId);
                     Intent intent = new Intent();
                     intent.setAction("com.samsung.keyguard.CLEAR_LOCK");
                     LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this.mContext);
                     synchronized (localBroadcastManager.mReceivers) {
                         try {
                             String action = intent.getAction();
-                            String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(localBroadcastManager.mAppContext.getContentResolver());
+                            String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(localBroadcastManager.mAppContext.getContentResolver());
                             Uri data = intent.getData();
                             String scheme = intent.getScheme();
                             Set<String> categories = intent.getCategories();
@@ -1920,9 +1938,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                     if (r9 != false) {
                                         Objects.toString(receiverRecord.filter);
                                     }
-                                    if (!receiverRecord.broadcasting && (match = receiverRecord.filter.match(action, resolveTypeIfNeeded, scheme, data, categories, "LocalBroadcastManager")) >= 0) {
+                                    if (!receiverRecord.broadcasting && (iMatch = receiverRecord.filter.match(action, strResolveTypeIfNeeded, scheme, data, categories, "LocalBroadcastManager")) >= 0) {
                                         if (r9 != false) {
-                                            Integer.toHexString(match);
+                                            Integer.toHexString(iMatch);
                                         }
                                         if (arrayList2 == null) {
                                             arrayList2 = new ArrayList();
@@ -1945,12 +1963,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         }
                     }
                 }
-                boolean updateOwnerInfo = containsFlag(intValue, 128) ? updateOwnerInfo(userId) : false;
-                if (containsFlag(intValue, 256)) {
-                    updateOwnerInfo |= updateDeviceOwnerInfo();
+                boolean zUpdateOwnerInfo = containsFlag(iIntValue, 128) ? updateOwnerInfo(userId) : false;
+                if (containsFlag(iIntValue, 256)) {
+                    zUpdateOwnerInfo |= updateDeviceOwnerInfo();
                 }
-                ActionBarContextView$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("handleSecureStateChanged secureState : ", intValue, " isSecureStateUpdated : ", updateCredentialType, ", isOwnerInfoStateUpdated : "), updateOwnerInfo, "KeyguardUpdateMonitor");
-                if (updateCredentialType) {
+                ActionBarContextView$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("handleSecureStateChanged secureState : ", iIntValue, " isSecureStateUpdated : ", zUpdateCredentialType, ", isOwnerInfoStateUpdated : "), zUpdateOwnerInfo, "KeyguardUpdateMonitor");
+                if (zUpdateCredentialType) {
                     str = null;
                     dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda15(1), null);
                     i = 2;
@@ -1959,10 +1977,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                     str = null;
                     i = 2;
                 }
-                if (updateLockscreenDisabled) {
+                if (zUpdateLockscreenDisabled) {
                     dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda12(this, i), str);
                 }
-                if (updateOwnerInfo) {
+                if (zUpdateOwnerInfo) {
                     dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda15(0), str);
                     return;
                 }
@@ -1993,10 +2011,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda15(7), null);
                         return;
                     case VolteConstants.ErrorCode.CALL_SWITCH_FAILURE /* 1109 */:
-                        boolean booleanValue2 = ((Boolean) message.obj).booleanValue();
-                        if (this.mIsQsFullyExpanded != booleanValue2) {
-                            Log.d("KeyguardUpdateMonitor", "handleStatusBarState( prev:" + this.mIsQsFullyExpanded + "-> next:" + booleanValue2 + " )");
-                            this.mIsQsFullyExpanded = booleanValue2;
+                        boolean zBooleanValue2 = ((Boolean) message.obj).booleanValue();
+                        if (this.mIsQsFullyExpanded != zBooleanValue2) {
+                            Log.d("KeyguardUpdateMonitor", "handleStatusBarState( prev:" + this.mIsQsFullyExpanded + "-> next:" + zBooleanValue2 + " )");
+                            this.mIsQsFullyExpanded = zBooleanValue2;
                             if (isUnlockCompleted()) {
                                 if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
                                     updateFingerprintListeningState(2);
@@ -2009,7 +2027,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         return;
                     case VolteConstants.ErrorCode.CALL_SWITCH_REJECTED /* 1110 */:
                         SecFpMsg secFpMsg = (SecFpMsg) message.obj;
-                        int startTime = LogUtil.startTime(-1);
+                        int iStartTime = LogUtil.startTime(-1);
                         int i9 = 0;
                         while (true) {
                             SecFpMsg secFpMsg2 = (SecFpMsg) this.mFpMessages.poll();
@@ -2018,7 +2036,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                     Log.d("KeyguardFingerprint", "remained message size : " + this.mFpMessages.size());
                                     this.mHandler.sendEmptyMessage(VolteConstants.ErrorCode.CALL_SWITCH_REJECTED);
                                 }
-                                LogUtil.endTime(startTime, "KeyguardFingerprint", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i9, "handleFingerprintAuth dispatchCount = "), new Object[0]);
+                                LogUtil.endTime(iStartTime, "KeyguardFingerprint", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i9, "handleFingerprintAuth dispatchCount = "), new Object[0]);
                                 return;
                             }
                             if (secFpMsg2 == secFpMsg) {
@@ -2063,10 +2081,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                     } else if (this.mKeyguardGoingAway) {
                                         com.android.systemui.keyguard.Log.d("KeyguardFingerprint", "onAuthenticationSucceeded() - return, goingAway is true");
                                     } else {
-                                        boolean isUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(authenticationResult.isStrongBiometric());
+                                        boolean zIsUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(authenticationResult.isStrongBiometric());
                                         KeyguardFastBioUnlockController keyguardFastBioUnlockController = this.mFastUnlockController;
                                         Objects.requireNonNull(keyguardFastBioUnlockController);
-                                        Rune.runIf(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda11(keyguardFastBioUnlockController, i2), isUnlockingWithBiometricAllowed);
+                                        Rune.runIf(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda11(keyguardFastBioUnlockController, i2), zIsUnlockingWithBiometricAllowed);
                                         Trace.beginSection("KeyguardUpdateMonitor#onAuthenticationSucceeded");
                                         com.android.systemui.keyguard.Log.d("KeyguardFingerprint", "onAuthenticationSucceeded()");
                                         int biometricId = authenticationResult.getFingerprint().getBiometricId();
@@ -2129,12 +2147,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         break;
                     case VolteConstants.ErrorCode.CALL_HOLD_FAILED /* 1111 */:
                         SecFaceMsg secFaceMsg = (SecFaceMsg) message.obj;
-                        int startTime2 = LogUtil.startTime(-1);
+                        int iStartTime2 = LogUtil.startTime(-1);
                         int i20 = 0;
                         while (true) {
                             SecFaceMsg secFaceMsg2 = (SecFaceMsg) this.mFaceMessages.poll();
                             if (secFaceMsg2 == null) {
-                                LogUtil.endTime(startTime2, "KeyguardFace", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i20, "handleFaceAuth dispatchCount = "), new Object[0]);
+                                LogUtil.endTime(iStartTime2, "KeyguardFace", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i20, "handleFaceAuth dispatchCount = "), new Object[0]);
                                 return;
                             }
                             if (secFaceMsg2 == secFaceMsg) {
@@ -2210,50 +2228,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         switch (i5) {
                             case VolteConstants.ErrorCode.CALL_BARRED_DUE_TO_SSAC /* 1116 */:
                                 String str2 = (String) message.obj;
-                                KnoxStateMonitor knoxStateMonitor = (KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class);
+                                knoxStateMonitor = (KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class);
                                 str2.getClass();
-                                switch (str2.hashCode()) {
-                                    case 113042:
-                                        if (str2.equals("rmm")) {
-                                            r8 = false;
-                                            break;
-                                        }
-                                        r8 = -1;
-                                        break;
-                                    case 92668751:
-                                        if (str2.equals(EnterpriseContainerConstants.ADMIN_UID)) {
-                                            r8 = true;
-                                            break;
-                                        }
-                                        r8 = -1;
-                                        break;
-                                    case 94746189:
-                                        if (str2.equals("clear")) {
-                                            r8 = 2;
-                                            break;
-                                        }
-                                        r8 = -1;
-                                        break;
-                                    case 166757441:
-                                        if (str2.equals("license")) {
-                                            r8 = 3;
-                                            break;
-                                        }
-                                        r8 = -1;
-                                        break;
-                                    case 1574373273:
-                                        if (str2.equals("knoxguard")) {
-                                            r8 = 4;
-                                            break;
-                                        }
-                                        r8 = -1;
-                                        break;
-                                    default:
-                                        r8 = -1;
-                                        break;
-                                }
-                                switch (r8) {
-                                    case 0:
+                                switch (str2) {
+                                    case "rmm":
                                         this.mRemoteLockSimulationInfo = new RemoteLockInfo.Builder(2, true).setClientName("Samsung Lockscreen").setPhoneNumber("000-000-0000").setMessage("This is RMM Lock Test Message.").build();
                                         try {
                                             this.mLockSettingsService.setRemoteLock(((UserTrackerImpl) this.mUserTracker).getUserId(), this.mRemoteLockSimulationInfo);
@@ -2262,14 +2240,14 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                             Log.d("KeyguardUpdateMonitor", "Failed setRemoteLock(RMM)" + e2);
                                             return;
                                         }
-                                    case 1:
+                                    case "admin":
                                         EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) knoxStateMonitor).mEdmMonitor;
                                         if (edmMonitor != null) {
                                             edmMonitor.setAdminLock(true, false);
                                             return;
                                         }
                                         return;
-                                    case 2:
+                                    case "clear":
                                         EdmMonitor edmMonitor2 = ((KnoxStateMonitorImpl) knoxStateMonitor).mEdmMonitor;
                                         if (edmMonitor2 != null) {
                                             edmMonitor2.setAdminLock(false, false);
@@ -2287,14 +2265,14 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                             Log.d("KeyguardUpdateMonitor", "Failed setRemoteLock" + e3);
                                             return;
                                         }
-                                    case 3:
+                                    case "license":
                                         EdmMonitor edmMonitor3 = ((KnoxStateMonitorImpl) knoxStateMonitor).mEdmMonitor;
                                         if (edmMonitor3 != null) {
                                             edmMonitor3.setAdminLock(false, true);
                                             return;
                                         }
                                         return;
-                                    case 4:
+                                    case "knoxguard":
                                         Bundle bundle = new Bundle();
                                         bundle.putCharSequence("customer_package_name", "com.samsung.android.calendar");
                                         bundle.putCharSequence("customer_app_name", "Samsung Calendar");
@@ -2359,12 +2337,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                 return;
                             case VolteConstants.ErrorCode.CALL_CANCEL_MODIFY_REQUESTED /* 1122 */:
                                 final int i25 = message.arg1;
-                                r13 = message.arg2 == 1;
+                                z = message.arg2 == 1;
                                 dispatchCallback(new Consumer() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda48
                                     @Override // java.util.function.Consumer
                                     public final void accept(Object obj) {
                                         int i26 = i25;
-                                        boolean z4 = r2;
+                                        boolean z4 = z;
                                         SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
                                         ((KeyguardUpdateMonitorCallback) obj).onDualDarInnerLockScreenStateChanged(i26, z4);
                                     }
@@ -2374,9 +2352,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                 int i26 = message.arg1;
                                 int i27 = message.arg2;
                                 ServiceState serviceState = (ServiceState) message.obj;
-                                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i26, i27, "handleServiceStateChange(subId=", ", slotId=", ", serviceState=");
-                                m.append(serviceState);
-                                Log.d("KeyguardUpdateMonitor", m.toString());
+                                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i26, i27, "handleServiceStateChange(subId=", ", slotId=", ", serviceState=");
+                                sbM.append(serviceState);
+                                Log.d("KeyguardUpdateMonitor", sbM.toString());
                                 if (CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE) {
                                     this.mServiceStatesBySlotId.put(Integer.valueOf(i27), serviceState);
                                     Iterator it = this.mServiceStatesBySlotId.entrySet().iterator();
@@ -2467,7 +2445,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                                 if (KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG.equals(str7)) {
                                                     this.mSettingsHelper.readSettingsDB();
                                                 }
-                                                final int i28 = r13 ? 1 : 0;
+                                                final int i28 = z ? 1 : 0;
                                                 dispatchCallback(new Consumer() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda46
                                                     @Override // java.util.function.Consumer
                                                     public final void accept(Object obj) {
@@ -2518,10 +2496,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                                         this.mHandler.sendEmptyMessage(VolteConstants.ErrorCode.CALL_STATUS_CONF_ADD_USER_TO_SESSION_FAILURE);
                                                         return;
                                                     case 1402:
-                                                        boolean booleanValue3 = ((Boolean) message.obj).booleanValue();
-                                                        EmergencyButtonController$$ExternalSyntheticOutline0.m("handleDlsBiometricMode(), enabled=", "KeyguardUpdateMonitor", booleanValue3);
-                                                        if (this.mIsDynamicLockViewMode != booleanValue3) {
-                                                            this.mIsDynamicLockViewMode = booleanValue3;
+                                                        boolean zBooleanValue3 = ((Boolean) message.obj).booleanValue();
+                                                        EmergencyButtonController$$ExternalSyntheticOutline0.m("handleDlsBiometricMode(), enabled=", "KeyguardUpdateMonitor", zBooleanValue3);
+                                                        if (this.mIsDynamicLockViewMode != zBooleanValue3) {
+                                                            this.mIsDynamicLockViewMode = zBooleanValue3;
                                                             if (isFingerprintOptionEnabled()) {
                                                                 updateFingerprintListeningState(2);
                                                             }
@@ -2533,9 +2511,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                                                         }
                                                         return;
                                                     case 1403:
-                                                        int intValue2 = ((Integer) message.obj).intValue();
-                                                        Log.d("KeyguardUpdateMonitor", "handleDlsViewMode(), mode=" + intValue2);
-                                                        dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda16(intValue2, 4), null);
+                                                        int iIntValue2 = ((Integer) message.obj).intValue();
+                                                        Log.d("KeyguardUpdateMonitor", "handleDlsViewMode(), mode=" + iIntValue2);
+                                                        dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda16(iIntValue2, 4), null);
                                                         return;
                                                     default:
                                                         return;
@@ -2581,7 +2559,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     }
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
-    public final void handleUserSwitchComplete(int i) {
+    public final void handleUserSwitchComplete(int i) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         this.mSettingsHelper.onUserSwitched();
         if (updateCredentialType(i) | updateFMMLock(i, false) | updateCarrierLock(i) | updatePermanentLock(i) | updateSecureLockTimeout(i) | updateBiometricLockTimeout(i) | updateBiometricsOptionState(i)) {
             dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda15(1), null);
@@ -2602,7 +2580,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     }
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
-    public final void handleUserUnlocked(int i) {
+    public final void handleUserUnlocked(int i) throws Resources.NotFoundException {
         Assert.isMainThread();
         Log.i("KeyguardUpdateMonitor", "handleUserUnlocked(" + i + ")");
         this.mUserIsUnlocked.put(i, true);
@@ -2919,8 +2897,8 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         int nextSubIdForState = getNextSubIdForState(7);
         SubscriptionInfo subscriptionInfoForSubId = getSubscriptionInfoForSubId(nextSubIdForState);
         boolean z = false;
-        boolean isEmbedded = subscriptionInfoForSubId != null ? subscriptionInfoForSubId.isEmbedded() : false;
-        if (SubscriptionManager.isValidSubscriptionId(nextSubIdForState) && !isEmbedded) {
+        boolean zIsEmbedded = subscriptionInfoForSubId != null ? subscriptionInfoForSubId.isEmbedded() : false;
+        if (SubscriptionManager.isValidSubscriptionId(nextSubIdForState) && !zIsEmbedded) {
             z = true;
         }
         this.mSimDisabledPermanently = z;
@@ -2994,10 +2972,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final boolean isPerformingWipeOut() {
         int currentFailedPasswordAttempts = this.mLockPatternUtils.getCurrentFailedPasswordAttempts(((UserTrackerImpl) this.mUserTracker).getUserId());
-        boolean isAutoWipe = isAutoWipe();
+        boolean zIsAutoWipe = isAutoWipe();
         int i = this.mMaximumFailedPasswordsForWipe;
         if (i <= 0) {
-            i = isAutoWipe ? 20 : 0;
+            i = zIsAutoWipe ? 20 : 0;
         }
         return (currentFailedPasswordAttempts == 0 || i == 0 || currentFailedPasswordAttempts != i) ? false : true;
     }
@@ -3163,9 +3141,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final boolean isUserUnlocked$1() {
         int userId = ((UserTrackerImpl) this.mUserTracker).getUserId();
-        boolean isUserUnlocked = this.mUserManager.isUserUnlocked(userId);
-        LogUtil.d("KeyguardUpdateMonitor", "isUserUnlocked userId:%s, unlocked:%s", Integer.valueOf(userId), Boolean.valueOf(isUserUnlocked));
-        return isUserUnlocked;
+        boolean zIsUserUnlocked = this.mUserManager.isUserUnlocked(userId);
+        LogUtil.d("KeyguardUpdateMonitor", "isUserUnlocked userId:%s, unlocked:%s", Integer.valueOf(userId), Boolean.valueOf(zIsUserUnlocked));
+        return zIsUserUnlocked;
     }
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
@@ -3275,7 +3253,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             this.mLockPatternUtils.requireStrongAuth(2, i);
         } else if (failedBiometricUnlockAttempts != 0 && failedBiometricUnlockAttempts % 5 == 0) {
             this.mLockPatternUtils.setBiometricAttemptDeadline(i, PluginLockInstancePolicy.DISABLED_BY_SUB_USER);
-            long elapsedRealtime = SystemClock.elapsedRealtime() + 30000;
+            long jElapsedRealtime = SystemClock.elapsedRealtime() + 30000;
             if (updateSecureLockTimeout(i) || updateBiometricLockTimeout(i)) {
                 dispatchLockModeChanged();
             }
@@ -3284,7 +3262,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             intent.addFlags(268435456);
             PendingIntent broadcast = PendingIntent.getBroadcast(this.mContext, 0, intent, 335544320);
             Log.d("KeyguardFingerprint", "setting Biometric lockout alarm !!");
-            this.mAlarmManager.setExact(2, elapsedRealtime, broadcast);
+            this.mAlarmManager.setExact(2, jElapsedRealtime, broadcast);
             dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda15(13), null);
         }
         if (!MdfUtils.isMdfEnforced() || failedBiometricUnlockAttempts < 10) {
@@ -3331,7 +3309,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
     public final void semSetScreenStatus() {
-        sendScreenStatus(false);
+        sendScreenStatus(true);
     }
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
@@ -3347,7 +3325,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda17
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
+                    KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
                     BiometricSourceType biometricSourceType2 = biometricSourceType;
                     Intent intent2 = intent;
                     SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
@@ -3361,19 +3339,19 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final void sendKeyguardStateUpdated(final boolean z, final boolean z2, final boolean z3, final boolean z4) {
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("sendKeyguardStateUpdated(", ", ", ", ", z, z2);
-        m.append(z3);
-        m.append(", ");
-        m.append(z4);
-        m.append(")");
-        Log.d("KeyguardUpdateMonitor", m.toString());
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("sendKeyguardStateUpdated(", ", ", ", ", z, z2);
+        sbM.append(z3);
+        sbM.append(", ");
+        sbM.append(z4);
+        sbM.append(")");
+        Log.d("KeyguardUpdateMonitor", sbM.toString());
         if (!this.mKeyguardShowing && z) {
             this.mHandler.postDelayed(this.mWaitingFocusRunnable, 500L);
         }
         this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda33
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
+                KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
                 boolean z5 = z;
                 boolean z6 = z2;
                 boolean z7 = z3;
@@ -3394,9 +3372,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final void sendPrimaryBouncerVisibilityChanged(boolean z) {
-        Message obtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_18X_RETRANSMISSION_TIMEOUT);
-        obtainMessage.arg1 = z ? 1 : 0;
-        obtainMessage.sendToTarget();
+        Message messageObtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_18X_RETRANSMISSION_TIMEOUT);
+        messageObtainMessage.arg1 = z ? 1 : 0;
+        messageObtainMessage.sendToTarget();
     }
 
     public final void sendScreenStatus(boolean z) {
@@ -3462,7 +3440,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 this.mHandler.post(new Runnable() { // from class: com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda28
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = KeyguardSecUpdateMonitorImpl.this;
+                        KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
                         boolean z2 = z;
                         SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
                         keyguardSecUpdateMonitorImpl.getClass();
@@ -3493,7 +3471,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         sb.append(this.mFocusWindow);
         sb.append(" -> ");
         sb.append(i);
-        String sb2 = sb.toString();
+        String string = sb.toString();
         if (z) {
             if (!this.mHasFocus) {
                 this.mHasFocus = true;
@@ -3513,7 +3491,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 this.mFocusWindow = 0;
             }
         }
-        Log.d("KeyguardUpdateMonitor", sb2);
+        Log.d("KeyguardUpdateMonitor", string);
         if (!LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY || this.mDisplayLifecycle.mIsFolderOpened) {
             if (isKeyguardVisible() || this.mPrimaryBouncerFullyShown) {
                 if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && isFingerprintOptionEnabled()) {
@@ -3534,9 +3512,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (z && this.mFingerPrintBadQualityCounts.get(((UserTrackerImpl) this.mUserTracker).getUserId(), 0) < 10 && strongAuthForUser == 0) {
             return;
         }
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("setFodStrictMode : ", strongAuthForUser, " strongAuth : ", z, " callStack : ");
-        m.append(Debug.getCallers(15));
-        KeyguardDumpLog.log("KeyguardFingerprint", LogLevel.DEBUG, m.toString(), null);
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("setFodStrictMode : ", strongAuthForUser, " strongAuth : ", z, " callStack : ");
+        sbM.append(Debug.getCallers(15));
+        KeyguardDumpLog.log("KeyguardFingerprint", LogLevel.DEBUG, sbM.toString(), null);
         this.mIsFODStrictMode = z;
         FingerprintManager fingerprintManager = this.mFpm;
         if (fingerprintManager != null) {
@@ -3584,22 +3562,22 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             if (!z4 && z) {
                 this.mHandler.postDelayed(this.mWaitingFocusRunnable, 500L);
             }
-            boolean isKeyguardVisible = isKeyguardVisible();
+            boolean zIsKeyguardVisible = isKeyguardVisible();
             this.mKeyguardShowing = z;
             this.mKeyguardOccluded = z2;
             setScreenSaverRunningState();
-            boolean isKeyguardVisible2 = isKeyguardVisible();
-            this.mLogger.logKeyguardShowingChanged(z, z2, isKeyguardVisible2);
+            boolean zIsKeyguardVisible2 = isKeyguardVisible();
+            this.mLogger.logKeyguardShowingChanged(z, z2, zIsKeyguardVisible2);
             if (LsRune.SECURITY_BACKGROUND_AUTHENTICATION && !z2) {
                 this.mIsFPCanceledByForegroundApp = false;
             }
-            if (isKeyguardVisible2 != isKeyguardVisible) {
-                if (isKeyguardVisible2) {
+            if (zIsKeyguardVisible2 != zIsKeyguardVisible) {
+                if (zIsKeyguardVisible2) {
                     this.mSecureCameraLaunched = false;
                 }
-                dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda24(isKeyguardVisible2, 1), null);
+                dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda24(zIsKeyguardVisible2, 1), null);
             }
-            if (!isKeyguardVisible2 && !this.mPrimaryBouncerFullyShown) {
+            if (!zIsKeyguardVisible2 && !this.mPrimaryBouncerFullyShown) {
                 setUnlockingKeyguard(false);
             }
             updateFingerprintListeningState(2);
@@ -3615,18 +3593,18 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         long lockoutAttemptDeadline = this.mLockPatternUtils.setLockoutAttemptDeadline(i, i2);
         long j = i2;
         if (lockoutAttemptDeadline != this.mLockoutAttemptDeadline || j != this.mLockoutAttemptTimeout) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setLockoutAttemptDeadline() userId ", ", AD:");
-            m.append(this.mLockoutAttemptDeadline);
-            m.append("->");
-            m.append(lockoutAttemptDeadline);
-            m.append(", AT:");
-            m.append(this.mLockoutAttemptTimeout);
-            m.append("->");
-            m.append(j);
-            String sb = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setLockoutAttemptDeadline() userId ", ", AD:");
+            sbM.append(this.mLockoutAttemptDeadline);
+            sbM.append("->");
+            sbM.append(lockoutAttemptDeadline);
+            sbM.append(", AT:");
+            sbM.append(this.mLockoutAttemptTimeout);
+            sbM.append("->");
+            sbM.append(j);
+            String string = sbM.toString();
             this.mLockoutAttemptDeadline = lockoutAttemptDeadline;
             this.mLockoutAttemptTimeout = j;
-            addAdditionalLog(sb);
+            addAdditionalLog(string);
             dispatchLockModeChanged();
         }
         return this.mLockoutAttemptDeadline;
@@ -3715,7 +3693,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         int currentUser = ActivityManager.getCurrentUser();
         Log.d("KeyguardUpdateMonitor", "ActivityManager.getCurrentUser() = " + currentUser);
         updateCredentialType(currentUser);
-        boolean z = false;
+        boolean zEquals = false;
         updateFMMLock(currentUser, false);
         updateCarrierLock(currentUser);
         updatePermanentLock(currentUser);
@@ -3739,12 +3717,12 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         PackageManager packageManager = this.mContext.getPackageManager();
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.HOME");
-        ResolveInfo resolveActivity = packageManager.resolveActivity(intent, 65536);
-        if (resolveActivity != null) {
-            ActivityInfo activityInfo = resolveActivity.activityInfo;
-            z = new ComponentName(activityInfo.packageName, activityInfo.name).equals(componentName);
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(intent, 65536);
+        if (resolveInfoResolveActivity != null) {
+            ActivityInfo activityInfo = resolveInfoResolveActivity.activityInfo;
+            zEquals = new ComponentName(activityInfo.packageName, activityInfo.name).equals(componentName);
         }
-        this.mIsKidsModeRunning = z;
+        this.mIsKidsModeRunning = zEquals;
     }
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
@@ -3759,29 +3737,29 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         boolean z4 = this.mKeyguardGoingAway;
         boolean z5 = this.mDeviceInteractive;
         boolean z6 = LsRune.SECURITY_SUB_DISPLAY_COVER;
-        boolean isKeyguardVisible = (!z6 || this.mDisplayLifecycle.mIsFolderOpened) ? isKeyguardVisible() : this.mKeyguardShowing;
-        boolean z7 = ((!isKeyguardVisible && !this.mPrimaryBouncerFullyShown) || z4 || getUserUnlockedWithBiometric(userId) || z3 || ((!z5 || this.mIsDreamingForBiometrics || this.mGoingToSleep || this.mIsScreenSaverRunning) && !z) || this.mKeyguardUnlocking || !this.mSystemReady) ? false : true;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldListenForFace ( isFaceDefaultCondition = ", " , isKeyguardVisible = ", " , isDeviceInteractive = ", z7, isKeyguardVisible);
-        m.append(z5);
-        m.append(" , mPrimaryBouncerFullyShown = ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mPrimaryBouncerFullyShown, " , isSwitchingUser = ", z3, " , mIsDreamingForBiometrics = ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mIsDreamingForBiometrics, " , isGoingToSleep = ", z2, " , isKeyguardGoingAway = ");
-        m.append(z4);
-        m.append(" , mKeyguardUnlocking = ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mKeyguardUnlocking, " , isEarlyWakeUp = ", z, " , mIsScreenSaverRunning = ");
-        m.append(this.mIsScreenSaverRunning);
-        m.append(" , mSystemReady = ");
-        m.append(this.mSystemReady);
-        m.append(" , getUserUnlockedWithBiometric = ");
-        m.append(getUserUnlockedWithBiometric(userId));
-        m.append(" , isKeyguardShowing = ");
-        m.append(this.mKeyguardShowing);
-        m.append(" , isKeyguardOccluded = ");
-        m.append(this.mKeyguardOccluded);
-        m.append(" , mHasFocus = ");
-        m.append(this.mHasFocus);
-        m.append(")");
-        Log.d("KeyguardFace", m.toString());
+        boolean zIsKeyguardVisible = (!z6 || this.mDisplayLifecycle.mIsFolderOpened) ? isKeyguardVisible() : this.mKeyguardShowing;
+        boolean z7 = ((!zIsKeyguardVisible && !this.mPrimaryBouncerFullyShown) || z4 || getUserUnlockedWithBiometric(userId) || z3 || ((!z5 || this.mIsDreamingForBiometrics || this.mGoingToSleep || this.mIsScreenSaverRunning) && !z) || this.mKeyguardUnlocking || !this.mSystemReady) ? false : true;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldListenForFace ( isFaceDefaultCondition = ", " , isKeyguardVisible = ", " , isDeviceInteractive = ", z7, zIsKeyguardVisible);
+        sbM.append(z5);
+        sbM.append(" , mPrimaryBouncerFullyShown = ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mPrimaryBouncerFullyShown, " , isSwitchingUser = ", z3, " , mIsDreamingForBiometrics = ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mIsDreamingForBiometrics, " , isGoingToSleep = ", z2, " , isKeyguardGoingAway = ");
+        sbM.append(z4);
+        sbM.append(" , mKeyguardUnlocking = ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mKeyguardUnlocking, " , isEarlyWakeUp = ", z, " , mIsScreenSaverRunning = ");
+        sbM.append(this.mIsScreenSaverRunning);
+        sbM.append(" , mSystemReady = ");
+        sbM.append(this.mSystemReady);
+        sbM.append(" , getUserUnlockedWithBiometric = ");
+        sbM.append(getUserUnlockedWithBiometric(userId));
+        sbM.append(" , isKeyguardShowing = ");
+        sbM.append(this.mKeyguardShowing);
+        sbM.append(" , isKeyguardOccluded = ");
+        sbM.append(this.mKeyguardOccluded);
+        sbM.append(" , mHasFocus = ");
+        sbM.append(this.mHasFocus);
+        sbM.append(")");
+        Log.d("KeyguardFace", sbM.toString());
         if (!z7) {
             Log.d("KeyguardFace", "shouldListenForFace ( return false, Face is not default condition)");
             return false;
@@ -3835,7 +3813,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             Log.d("TAG_FACE", "shouldListenForFace ( return false, NotiStar is shown )");
             return false;
         }
-        if (this.mSettingsHelper.isEnabledFaceStayOnLock() && isKeyguardVisible && getUserHasTrust(userId)) {
+        if (this.mSettingsHelper.isEnabledFaceStayOnLock() && zIsKeyguardVisible && getUserHasTrust(userId)) {
             Log.d("KeyguardFace", "shouldListenForFace ( return false, getUserHasTrust() is true)");
             return false;
         }
@@ -3875,26 +3853,26 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
             boolean z6 = this.mSwitchingUser;
             boolean z7 = this.mKeyguardGoingAway;
             boolean z8 = this.mGoingToSleep;
-            boolean isKeyguardVisible = isKeyguardVisible();
-            boolean z9 = !isEnabledWof() ? (!isKeyguardVisible && !(z2 = this.mPrimaryBouncerFullyShown) && ((!LsRune.SECURITY_BACKGROUND_AUTHENTICATION || !this.mKeyguardShowing || !this.mKeyguardOccluded || z2 || this.mIsFPCanceledByForegroundApp) && !z4)) || z6 || !z5 || z8 || this.mIsDreamingForBiometrics || this.mKeyguardUnlocking || z7 || !this.mSystemReady : (!isKeyguardVisible && z5 && !(z3 = this.mPrimaryBouncerFullyShown) && !z8 && !z4 && (!LsRune.SECURITY_BACKGROUND_AUTHENTICATION || !this.mKeyguardShowing || !this.mKeyguardOccluded || z3 || this.mIsFPCanceledByForegroundApp)) || z6 || this.mKeyguardUnlocking || z7 || (((biometricAuthenticated = this.mUserFingerprintAuthenticated.get(userId)) != null && biometricAuthenticated.mAuthenticated) || !this.mSystemReady);
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldListenForFingerprint ( isFingerprintEnabled = ", " , mKeyguardIsVisible = ", " , mDeviceInteractive = ", z9, isKeyguardVisible);
-            m.append(z5);
-            m.append(" , mPrimaryBouncerIsOrWillBeShowing = ");
-            m.append(this.mPrimaryBouncerIsOrWillBeShowing);
-            m.append(" , mPrimaryBouncerFullyShown = ");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mPrimaryBouncerFullyShown, " , mGoingToSleep = ", z8, " , mSwitchingUser = ");
-            m.append(z6);
-            m.append(" , mIsDreamingForBiometrics = ");
-            m.append(this.mIsDreamingForBiometrics);
-            m.append(" , mKeyguardUnlocking = ");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mKeyguardUnlocking, " , mKeyguardGoingAway = ", z7, " , mKeyguardShowing = ");
-            m.append(this.mKeyguardShowing);
-            m.append(" , mKeyguardOccluded = ");
-            m.append(this.mKeyguardOccluded);
-            m.append(" , mSystemReady = ");
-            m.append(this.mSystemReady);
-            m.append(" , mHasFocus = ");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, this.mHasFocus, "KeyguardFingerprint");
+            boolean zIsKeyguardVisible = isKeyguardVisible();
+            boolean z9 = !isEnabledWof() ? (!zIsKeyguardVisible && !(z2 = this.mPrimaryBouncerFullyShown) && ((!LsRune.SECURITY_BACKGROUND_AUTHENTICATION || !this.mKeyguardShowing || !this.mKeyguardOccluded || z2 || this.mIsFPCanceledByForegroundApp) && !z4)) || z6 || !z5 || z8 || this.mIsDreamingForBiometrics || this.mKeyguardUnlocking || z7 || !this.mSystemReady : (!zIsKeyguardVisible && z5 && !(z3 = this.mPrimaryBouncerFullyShown) && !z8 && !z4 && (!LsRune.SECURITY_BACKGROUND_AUTHENTICATION || !this.mKeyguardShowing || !this.mKeyguardOccluded || z3 || this.mIsFPCanceledByForegroundApp)) || z6 || this.mKeyguardUnlocking || z7 || (((biometricAuthenticated = this.mUserFingerprintAuthenticated.get(userId)) != null && biometricAuthenticated.mAuthenticated) || !this.mSystemReady);
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldListenForFingerprint ( isFingerprintEnabled = ", " , mKeyguardIsVisible = ", " , mDeviceInteractive = ", z9, zIsKeyguardVisible);
+            sbM.append(z5);
+            sbM.append(" , mPrimaryBouncerIsOrWillBeShowing = ");
+            sbM.append(this.mPrimaryBouncerIsOrWillBeShowing);
+            sbM.append(" , mPrimaryBouncerFullyShown = ");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mPrimaryBouncerFullyShown, " , mGoingToSleep = ", z8, " , mSwitchingUser = ");
+            sbM.append(z6);
+            sbM.append(" , mIsDreamingForBiometrics = ");
+            sbM.append(this.mIsDreamingForBiometrics);
+            sbM.append(" , mKeyguardUnlocking = ");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mKeyguardUnlocking, " , mKeyguardGoingAway = ", z7, " , mKeyguardShowing = ");
+            sbM.append(this.mKeyguardShowing);
+            sbM.append(" , mKeyguardOccluded = ");
+            sbM.append(this.mKeyguardOccluded);
+            sbM.append(" , mSystemReady = ");
+            sbM.append(this.mSystemReady);
+            sbM.append(" , mHasFocus = ");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mHasFocus, "KeyguardFingerprint");
             if (z9) {
                 if (getLockoutBiometricAttemptDeadline() > 0) {
                     Log.d("KeyguardFingerprint", "shouldListenForFingerprint ( return false, because of Biometric lockoutAttemptDeadline )");
@@ -3983,7 +3961,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                         Log.d("KeyguardFingerprint", "shouldListenForFingerprint ( return false, the cocktail bar is expanded)");
                         return false;
                     }
-                    if (z5 && !this.mIsDreamingForBiometrics && isKeyguardVisible && getUserHasTrust(userId)) {
+                    if (z5 && !this.mIsDreamingForBiometrics && zIsKeyguardVisible && getUserHasTrust(userId)) {
                         Log.d("KeyguardFingerprint", "shouldListenForFingerprint ( return false, getUserHasTrust() is true)");
                         return false;
                     }
@@ -4082,11 +4060,11 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         LogLevel logLevel = LogLevel.VERBOSE;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(3);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = reason;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         CancellationSignal cancellationSignal = this.mSemFaceCancelSignal;
         if (cancellationSignal != null) {
             cancellationSignal.cancel();
@@ -4133,18 +4111,18 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mLockoutBiometricAttemptDeadline == biometricAttemptDeadline && this.mLockoutBiometricAttemptTimeout == biometricAttemptTimeout) {
             return false;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateBiometricLockTimeout() userId ", ", BD:");
-        m.append(this.mLockoutBiometricAttemptDeadline);
-        m.append("->");
-        m.append(biometricAttemptDeadline);
-        m.append(", BT:");
-        m.append(this.mLockoutBiometricAttemptTimeout);
-        m.append("->");
-        m.append(biometricAttemptTimeout);
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateBiometricLockTimeout() userId ", ", BD:");
+        sbM.append(this.mLockoutBiometricAttemptDeadline);
+        sbM.append("->");
+        sbM.append(biometricAttemptDeadline);
+        sbM.append(", BT:");
+        sbM.append(this.mLockoutBiometricAttemptTimeout);
+        sbM.append("->");
+        sbM.append(biometricAttemptTimeout);
+        String string = sbM.toString();
         this.mLockoutBiometricAttemptDeadline = biometricAttemptDeadline;
         this.mLockoutBiometricAttemptTimeout = biometricAttemptTimeout;
-        addAdditionalLog(sb);
+        addAdditionalLog(string);
         return true;
     }
 
@@ -4156,23 +4134,23 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mBiometricType.get(i) == biometricType && this.mBiometricsFingerprint.get(i) == z && this.mBiometricsFace.get(i) == z2) {
             return false;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateBiometricsOptionState() userId ", ", BT:");
-        m.append(this.mBiometricType.get(i));
-        m.append("->");
-        m.append(biometricType);
-        m.append(", FP:");
-        m.append(this.mBiometricsFingerprint.get(i));
-        m.append("->");
-        m.append(z);
-        m.append(", FC:");
-        m.append(this.mBiometricsFace.get(i));
-        m.append("->");
-        m.append(z2);
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateBiometricsOptionState() userId ", ", BT:");
+        sbM.append(this.mBiometricType.get(i));
+        sbM.append("->");
+        sbM.append(biometricType);
+        sbM.append(", FP:");
+        sbM.append(this.mBiometricsFingerprint.get(i));
+        sbM.append("->");
+        sbM.append(z);
+        sbM.append(", FC:");
+        sbM.append(this.mBiometricsFace.get(i));
+        sbM.append("->");
+        sbM.append(z2);
+        String string = sbM.toString();
         this.mBiometricType.put(i, biometricType);
         this.mBiometricsFingerprint.put(i, z);
         this.mBiometricsFace.put(i, z2);
-        addAdditionalLog(sb);
+        addAdditionalLog(string);
         if (z3) {
             dispatchCallback(new KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda24(z2, 0), null);
         }
@@ -4181,13 +4159,13 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final boolean updateCarrierLock(int i) {
-        boolean updateCarrierLock = this.mLockPatternUtils.updateCarrierLock(i);
-        if (updateCarrierLock == this.mCarrierLock) {
+        boolean zUpdateCarrierLock = this.mLockPatternUtils.updateCarrierLock(i);
+        if (zUpdateCarrierLock == this.mCarrierLock) {
             return false;
         }
-        String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateCarrierLock() userId ", ", CR:"), this.mCarrierLock, "->", updateCarrierLock);
-        this.mCarrierLock = updateCarrierLock;
-        addAdditionalLog(m);
+        String strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateCarrierLock() userId ", ", CR:"), this.mCarrierLock, "->", zUpdateCarrierLock);
+        this.mCarrierLock = zUpdateCarrierLock;
+        addAdditionalLog(strM);
         return true;
     }
 
@@ -4196,15 +4174,15 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mCredentialType == credentialTypeForUser) {
             return false;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateCredentialType() userId ", ", credentialType:");
-        m.append(this.mCredentialType);
-        m.append("->");
-        m.append(credentialTypeForUser);
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateCredentialType() userId ", ", credentialType:");
+        sbM.append(this.mCredentialType);
+        sbM.append("->");
+        sbM.append(credentialTypeForUser);
+        String string = sbM.toString();
         this.mCredentialType = credentialTypeForUser;
-        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, ", isSecure=");
-        m2.append(isSecure());
-        addAdditionalLog(m2.toString());
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", isSecure=");
+        sbM2.append(isSecure());
+        addAdditionalLog(sbM2.toString());
         return true;
     }
 
@@ -4224,9 +4202,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         boolean z = this.mIsDualDarInnerAuthRequired;
         boolean z2 = Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class) != null && ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isDualDarDeviceOwner(i) && ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isDualDarInnerAuthRequired(i);
         if (z2) {
-            boolean isSecure = isSecure(((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).getInnerAuthUserId(i));
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("DualDAR Inner isSecure? ", "KeyguardUpdateMonitor", isSecure);
-            if (!isSecure) {
+            boolean zIsSecure = isSecure(((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).getInnerAuthUserId(i));
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("DualDAR Inner isSecure? ", "KeyguardUpdateMonitor", zIsSecure);
+            if (!zIsSecure) {
                 z2 = false;
             }
         }
@@ -4267,14 +4245,14 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
     public final boolean updateFMMLock(int i, boolean z) {
-        boolean isFMMLockEnabled = this.mLockPatternUtils.isFMMLockEnabled(i);
-        updateRemoteLockInfo(new RemoteLockInfo.Builder(0, isFMMLockEnabled).setMessage(this.mSettingsHelper.getFMMMessage()).setPhoneNumber(this.mSettingsHelper.getFMMPhone()).build());
-        if (this.mFMMLock == isFMMLockEnabled) {
+        boolean zIsFMMLockEnabled = this.mLockPatternUtils.isFMMLockEnabled(i);
+        updateRemoteLockInfo(new RemoteLockInfo.Builder(0, zIsFMMLockEnabled).setMessage(this.mSettingsHelper.getFMMMessage()).setPhoneNumber(this.mSettingsHelper.getFMMPhone()).build());
+        if (this.mFMMLock == zIsFMMLockEnabled) {
             return false;
         }
-        String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateFMMLock() userId ", ", FM:"), this.mFMMLock, "->", isFMMLockEnabled);
-        this.mFMMLock = isFMMLockEnabled;
-        addAdditionalLog(m);
+        String strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateFMMLock() userId ", ", FM:"), this.mFMMLock, "->", zIsFMMLockEnabled);
+        this.mFMMLock = zIsFMMLockEnabled;
+        addAdditionalLog(strM);
         if (!z) {
             return true;
         }
@@ -4296,7 +4274,7 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (i == 1) {
             return;
         }
-        boolean isUnlockWithFacePossible = isUnlockWithFacePossible(((UserTrackerImpl) this.mUserTracker).getUserId());
+        boolean zIsUnlockWithFacePossible = isUnlockWithFacePossible(((UserTrackerImpl) this.mUserTracker).getUserId());
         if (this.mFaceRunningState != 1) {
             Context context = this.mContext;
             synchronized (KeyguardSecUpdateMonitorImpl.class) {
@@ -4319,11 +4297,11 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                     LogLevel logLevel = LogLevel.ERROR;
                     KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(11);
                     LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                    LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.int1 = i2;
-                    logMessageImpl.bool1 = isUnlockWithFacePossible;
-                    logBuffer.commit(obtain);
+                    logMessageImpl.bool1 = zIsUnlockWithFacePossible;
+                    logBuffer.commit(logMessageObtain);
                     cancellationSignal.cancel();
                     this.mSemFaceCancelSignal = null;
                 }
@@ -4335,20 +4313,20 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 LogLevel logLevel2 = LogLevel.VERBOSE;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(0);
                 LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.int1 = i3;
                 logMessageImpl2.str1 = faceAuthUiEvent.getReason();
                 logMessageImpl2.str2 = faceAuthUiEvent.extraInfoToString();
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
                 KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger3 = this.mLogger;
                 keyguardUpdateMonitorLogger3.getClass();
                 LogLevel logLevel3 = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(6);
                 LogBuffer logBuffer3 = keyguardUpdateMonitorLogger3.logBuffer;
-                LogMessage obtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
-                ((LogMessageImpl) obtain3).bool1 = isUnlockWithFacePossible;
-                logBuffer3.commit(obtain3);
+                LogMessage logMessageObtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
+                ((LogMessageImpl) logMessageObtain3).bool1 = zIsUnlockWithFacePossible;
+                logBuffer3.commit(logMessageObtain3);
                 Context context2 = this.mContext;
                 synchronized (KeyguardSecUpdateMonitorImpl.class) {
                     try {
@@ -4368,13 +4346,13 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
 
     @Override // com.android.keyguard.KeyguardUpdateMonitor
     public final void updateFingerprintListeningState(int i) {
-        boolean shouldListenForFingerprint = shouldListenForFingerprint(false);
+        boolean zShouldListenForFingerprint = shouldListenForFingerprint(false);
         int i2 = this.mFingerprintRunningState;
         boolean z = i2 == 1 || i2 == 3;
-        Log.d("KeyguardFingerprint", "updateFingerprintListeningState#mFingerprintRunningState=" + this.mFingerprintRunningState + " shouldListenForFingerprint=" + shouldListenForFingerprint + " isUdfpsEnrolled=false bioType : " + this.mBiometricType.get(this.mSelectedUserInteractor.getSelectedUserId()));
-        if (!z || shouldListenForFingerprint) {
-            if (z || !shouldListenForFingerprint) {
-                if (!z && !shouldListenForFingerprint) {
+        Log.d("KeyguardFingerprint", "updateFingerprintListeningState#mFingerprintRunningState=" + this.mFingerprintRunningState + " shouldListenForFingerprint=" + zShouldListenForFingerprint + " isUdfpsEnrolled=false bioType : " + this.mBiometricType.get(this.mSelectedUserInteractor.getSelectedUserId()));
+        if (!z || zShouldListenForFingerprint) {
+            if (z || !zShouldListenForFingerprint) {
+                if (!z && !zShouldListenForFingerprint) {
                     String str = LsRune.VALUE_SUB_DISPLAY_POLICY;
                 }
             } else {
@@ -4393,38 +4371,38 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 stopListeningForFingerprint();
             }
         }
-        if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && shouldListenForFingerprint) {
+        if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && zShouldListenForFingerprint) {
             sendScreenStatus(false);
         }
     }
 
     public final boolean updateLockscreenDisabled(int i) {
-        boolean isLockScreenDisabled = this.mLockPatternUtils.isLockScreenDisabled(i);
-        if (this.mLockscreenDisabled == isLockScreenDisabled) {
+        boolean zIsLockScreenDisabled = this.mLockPatternUtils.isLockScreenDisabled(i);
+        if (this.mLockscreenDisabled == zIsLockScreenDisabled) {
             return false;
         }
-        String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateLockscreenDisabled() userId ", ", lockScreenDisabled:"), this.mLockscreenDisabled, "->", isLockScreenDisabled);
-        this.mLockscreenDisabled = isLockScreenDisabled;
-        addAdditionalLog(m);
+        String strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateLockscreenDisabled() userId ", ", lockScreenDisabled:"), this.mLockscreenDisabled, "->", zIsLockScreenDisabled);
+        this.mLockscreenDisabled = zIsLockScreenDisabled;
+        addAdditionalLog(strM);
         return true;
     }
 
     public final boolean updateOwnerInfo(int i) {
         String str;
-        boolean isOwnerInfoEnabled = this.mLockPatternUtils.isOwnerInfoEnabled(i);
+        boolean zIsOwnerInfoEnabled = this.mLockPatternUtils.isOwnerInfoEnabled(i);
         String ownerInfo = this.mLockPatternUtils.getOwnerInfo(i);
-        if (this.mIsOwnerInfoEnabled == isOwnerInfoEnabled && (str = this.mOwnerInfoText) != null && str.equals(ownerInfo)) {
+        if (this.mIsOwnerInfoEnabled == zIsOwnerInfoEnabled && (str = this.mOwnerInfoText) != null && str.equals(ownerInfo)) {
             return false;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateOwnerInfoEnabled() userId ", ", OE:");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mIsOwnerInfoEnabled, "->", isOwnerInfoEnabled, ", OI(isEmpty):");
-        m.append(TextUtils.isEmpty(this.mOwnerInfoText));
-        m.append("->");
-        m.append(TextUtils.isEmpty(ownerInfo));
-        String sb = m.toString();
-        this.mIsOwnerInfoEnabled = isOwnerInfoEnabled;
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateOwnerInfoEnabled() userId ", ", OE:");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mIsOwnerInfoEnabled, "->", zIsOwnerInfoEnabled, ", OI(isEmpty):");
+        sbM.append(TextUtils.isEmpty(this.mOwnerInfoText));
+        sbM.append("->");
+        sbM.append(TextUtils.isEmpty(ownerInfo));
+        String string = sbM.toString();
+        this.mIsOwnerInfoEnabled = zIsOwnerInfoEnabled;
         this.mOwnerInfoText = ownerInfo;
-        addAdditionalLog(sb);
+        addAdditionalLog(string);
         return true;
     }
 
@@ -4434,9 +4412,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mPermanentLock == z) {
             return false;
         }
-        String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updatePermanentLock() userId ", ", PML:"), this.mPermanentLock, "->", z);
+        String strM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updatePermanentLock() userId ", ", PML:"), this.mPermanentLock, "->", z);
         this.mPermanentLock = z;
-        addAdditionalLog(m);
+        addAdditionalLog(strM);
         return true;
     }
 
@@ -4459,9 +4437,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
                 i2 = ((RemoteLockInfo) this.mRemoteLockInfo.get(i3)).lockType;
             }
         }
-        int diff = remoteLockInfo.diff(remoteLockInfo2);
-        Log.d("KeyguardUpdateMonitor", "updateRemoteLockInfo() diff=" + Integer.toHexString(diff));
-        if (diff != 0) {
+        int iDiff = remoteLockInfo.diff(remoteLockInfo2);
+        Log.d("KeyguardUpdateMonitor", "updateRemoteLockInfo() diff=" + Integer.toHexString(iDiff));
+        if (iDiff != 0) {
             this.mHandler.sendEmptyMessage(VolteConstants.ErrorCode.CALL_STATUS_CONF_REMOVE_USER_FROM_SESSION_FAILURE);
         }
     }
@@ -4484,18 +4462,18 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mLockoutAttemptDeadline == lockoutAttemptDeadline && this.mLockoutAttemptTimeout == lockoutAttemptTimeout) {
             return false;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateSecureLockTimeout() userId ", ", AD:");
-        m.append(this.mLockoutAttemptDeadline);
-        m.append("->");
-        m.append(lockoutAttemptDeadline);
-        m.append(", AT:");
-        m.append(this.mLockoutAttemptTimeout);
-        m.append("->");
-        m.append(lockoutAttemptTimeout);
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateSecureLockTimeout() userId ", ", AD:");
+        sbM.append(this.mLockoutAttemptDeadline);
+        sbM.append("->");
+        sbM.append(lockoutAttemptDeadline);
+        sbM.append(", AT:");
+        sbM.append(this.mLockoutAttemptTimeout);
+        sbM.append("->");
+        sbM.append(lockoutAttemptTimeout);
+        String string = sbM.toString();
         this.mLockoutAttemptDeadline = lockoutAttemptDeadline;
         this.mLockoutAttemptTimeout = lockoutAttemptTimeout;
-        addAdditionalLog(sb);
+        addAdditionalLog(string);
         long j = this.mLockoutAttemptTimeout;
         if (j <= 0) {
             return true;
@@ -4511,10 +4489,10 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
     }
 
     @Override // com.android.keyguard.KeyguardSecUpdateMonitor
-    public final void updateUserUnlockNotification(int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateUserUnlockNotification(), isUserUnlocked(", ") : ");
-        m.append(this.mUserManager.isUserUnlocked(i));
-        Log.d("KeyguardUpdateMonitor", m.toString());
+    public final void updateUserUnlockNotification(int i) throws Resources.NotFoundException {
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "updateUserUnlockNotification(), isUserUnlocked(", ") : ");
+        sbM.append(this.mUserManager.isUserUnlocked(i));
+        Log.d("KeyguardUpdateMonitor", sbM.toString());
         if (this.mUserManager.isUserUnlocked(i)) {
             this.mNotificationManager.cancelAsUser(null, 1001, UserHandle.ALL);
             return;

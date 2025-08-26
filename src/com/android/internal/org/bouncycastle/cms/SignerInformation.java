@@ -192,7 +192,7 @@ public class SignerInformation {
         return null;
     }
 
-    private boolean doVerify(SignerInformationVerifier signerInformationVerifier) throws CMSException {
+    private boolean doVerify(SignerInformationVerifier signerInformationVerifier) throws IOException, CMSException {
         String encryptionAlgName = CMSSignedHelper.INSTANCE.getEncryptionAlgName(getEncryptionAlgOID());
         AlgorithmIdentifier digestAlgorithm = this.signedAttributeSet != null ? this.info.getDigestAlgorithm() : translateBrokenRSAPkcs7(this.encryptionAlgorithm, this.info.getDigestAlgorithm());
         try {

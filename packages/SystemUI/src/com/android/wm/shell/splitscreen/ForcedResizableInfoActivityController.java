@@ -10,7 +10,6 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.splitscreen.ForcedResizableInfoActivityController;
 import com.android.wm.shell.splitscreen.SplitScreen;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ForcedResizableInfoActivityController implements SplitScreen.SplitScreenListener {
     public final Context mContext;
@@ -20,27 +19,26 @@ public final class ForcedResizableInfoActivityController implements SplitScreen.
     public final ForcedResizableInfoActivityController$$ExternalSyntheticLambda0 mTimeoutRunnable = new Runnable() { // from class: com.android.wm.shell.splitscreen.ForcedResizableInfoActivityController$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            ForcedResizableInfoActivityController forcedResizableInfoActivityController = ForcedResizableInfoActivityController.this;
+            ForcedResizableInfoActivityController forcedResizableInfoActivityController = this.f$0;
             ((HandlerExecutor) forcedResizableInfoActivityController.mMainExecutor).removeCallbacks(forcedResizableInfoActivityController.mTimeoutRunnable);
             for (int size = forcedResizableInfoActivityController.mPendingTasks.size() - 1; size >= 0; size--) {
                 ForcedResizableInfoActivityController.PendingTaskRecord pendingTaskRecord = (ForcedResizableInfoActivityController.PendingTaskRecord) forcedResizableInfoActivityController.mPendingTasks.valueAt(size);
                 Intent intent = new Intent(forcedResizableInfoActivityController.mContext, (Class<?>) ForcedResizableInfoActivity.class);
-                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                makeBasic.setLaunchTaskId(pendingTaskRecord.mTaskId);
-                makeBasic.setTaskOverlay(true, true);
+                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                activityOptionsMakeBasic.setLaunchTaskId(pendingTaskRecord.mTaskId);
+                activityOptionsMakeBasic.setTaskOverlay(true, true);
                 int i = pendingTaskRecord.mReason;
                 intent.putExtra("extra_forced_resizeable_reason", i);
                 if (i == 3) {
                     intent.addFlags(262144);
                 }
-                forcedResizableInfoActivityController.mContext.startActivityAsUser(intent, makeBasic.toBundle(), UserHandle.CURRENT);
+                forcedResizableInfoActivityController.mContext.startActivityAsUser(intent, activityOptionsMakeBasic.toBundle(), UserHandle.CURRENT);
             }
             forcedResizableInfoActivityController.mPendingTasks.clear();
         }
     };
     public long mLastShowingTime = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PendingTaskRecord {
         public final int mReason;
         public final int mTaskId;

@@ -44,35 +44,34 @@ public final class TunnelModeChildSessionParamsUtils {
         public final int type;
 
         ConfigRequest(TunnelModeChildSessionParams.TunnelModeChildConfigRequest tunnelModeChildConfigRequest) {
-            int prefixLength;
             if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4Address) {
                 this.type = 1;
                 this.address = ((TunnelModeChildSessionParams.ConfigRequestIpv4Address) tunnelModeChildConfigRequest).getAddress();
-            } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv6Address) {
-                this.type = 2;
-                TunnelModeChildSessionParams.ConfigRequestIpv6Address configRequestIpv6Address = (TunnelModeChildSessionParams.ConfigRequestIpv6Address) tunnelModeChildConfigRequest;
-                Inet6Address address = configRequestIpv6Address.getAddress();
-                this.address = address;
-                if (address != null) {
-                    prefixLength = configRequestIpv6Address.getPrefixLength();
+            } else {
+                if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv6Address) {
+                    this.type = 2;
+                    TunnelModeChildSessionParams.ConfigRequestIpv6Address configRequestIpv6Address = (TunnelModeChildSessionParams.ConfigRequestIpv6Address) tunnelModeChildConfigRequest;
+                    Inet6Address address = configRequestIpv6Address.getAddress();
+                    this.address = address;
+                    int prefixLength = address != null ? configRequestIpv6Address.getPrefixLength() : -1;
                     this.ip6PrefixLen = prefixLength;
                 }
-            } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4DnsServer) {
-                this.type = 3;
-                this.address = null;
-            } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv6DnsServer) {
-                this.type = 4;
-                this.address = null;
-            } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4DhcpServer) {
-                this.type = 5;
-                this.address = null;
-            } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4Netmask) {
-                this.type = 6;
-                this.address = null;
-            } else {
-                throw new IllegalStateException("Unknown TunnelModeChildConfigRequest");
+                if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4DnsServer) {
+                    this.type = 3;
+                    this.address = null;
+                } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv6DnsServer) {
+                    this.type = 4;
+                    this.address = null;
+                } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4DhcpServer) {
+                    this.type = 5;
+                    this.address = null;
+                } else if (tunnelModeChildConfigRequest instanceof TunnelModeChildSessionParams.ConfigRequestIpv4Netmask) {
+                    this.type = 6;
+                    this.address = null;
+                } else {
+                    throw new IllegalStateException("Unknown TunnelModeChildConfigRequest");
+                }
             }
-            prefixLength = -1;
             this.ip6PrefixLen = prefixLength;
         }
 

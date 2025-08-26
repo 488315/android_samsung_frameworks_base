@@ -68,9 +68,9 @@ public interface SemCapabilityServiceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(SemCapabilityServiceEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof SemCapabilityServiceEventListener)) {
-                return (SemCapabilityServiceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(SemCapabilityServiceEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof SemCapabilityServiceEventListener)) {
+                return (SemCapabilityServiceEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,15 +115,15 @@ public interface SemCapabilityServiceEventListener extends IInterface {
                 onCapabilitiesChanged(semImsUri, semCapabilities);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SemImsUri.CREATOR);
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(SemCapabilities.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemImsUri.CREATOR);
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(SemCapabilities.CREATOR);
                 parcel.enforceNoDataAvail();
-                onMultipleCapabilitiesChanged(createTypedArrayList, createTypedArrayList2);
+                onMultipleCapabilitiesChanged(arrayListCreateTypedArrayList, arrayListCreateTypedArrayList2);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCapabilityAndAvailabilityPublished(readInt);
+                onCapabilityAndAvailabilityPublished(i3);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -149,62 +149,62 @@ public interface SemCapabilityServiceEventListener extends IInterface {
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
             public void onOwnCapabilitiesChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
             public void onCapabilitiesChanged(SemImsUri semImsUri, SemCapabilities semCapabilities) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(semImsUri, 0);
-                    obtain.writeTypedObject(semCapabilities, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semImsUri, 0);
+                    parcelObtain.writeTypedObject(semCapabilities, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
             public void onMultipleCapabilitiesChanged(List<SemImsUri> list, List<SemCapabilities> list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedList(list2, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedList(list2, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
             public void onCapabilityAndAvailabilityPublished(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemCapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

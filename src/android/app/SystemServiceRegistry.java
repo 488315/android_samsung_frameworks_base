@@ -466,11 +466,11 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public CustomFrequencyManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                ICustomFrequencyManager asInterface = ICustomFrequencyManager.Stub.asInterface(ServiceManager.getService(Context.CFMS_SERVICE));
-                if (asInterface == null) {
+                ICustomFrequencyManager iCustomFrequencyManagerAsInterface = ICustomFrequencyManager.Stub.asInterface(ServiceManager.getService(Context.CFMS_SERVICE));
+                if (iCustomFrequencyManagerAsInterface == null) {
                     Log.wtf(SystemServiceRegistry.TAG, "Failed to get custom frequency manager service.");
                 }
-                return new CustomFrequencyManager(asInterface, contextImpl.mMainThread.getHandler());
+                return new CustomFrequencyManager(iCustomFrequencyManagerAsInterface, contextImpl.mMainThread.getHandler());
             }
         });
         registerService(Context.ICCC_SERVICE, IntegrityControlCheckCenter.class, new CachedServiceFetcher<IntegrityControlCheckCenter>() { // from class: android.app.SystemServiceRegistry.12
@@ -542,11 +542,11 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public VpnManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                IVpnManager asInterface = IVpnManager.Stub.asInterface(ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
-                if (asInterface == null && contextImpl.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH) && android.server.Flags.allowRemovingVpnService()) {
+                IVpnManager iVpnManagerAsInterface = IVpnManager.Stub.asInterface(ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
+                if (iVpnManagerAsInterface == null && contextImpl.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH) && android.server.Flags.allowRemovingVpnService()) {
                     return null;
                 }
-                return new VpnManager(contextImpl, asInterface);
+                return new VpnManager(contextImpl, iVpnManagerAsInterface);
             }
         });
         registerService(Context.COUNTRY_DETECTOR, CountryDetector.class, new StaticServiceFetcher<CountryDetector>() { // from class: android.app.SystemServiceRegistry.24
@@ -574,12 +574,12 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public SemHqmManager createService(ContextImpl contextImpl) {
-                ISemHqmManager asInterface = ISemHqmManager.Stub.asInterface(ServiceManager.getService(Context.HQM_SERVICE));
-                if (asInterface == null) {
+                ISemHqmManager iSemHqmManagerAsInterface = ISemHqmManager.Stub.asInterface(ServiceManager.getService(Context.HQM_SERVICE));
+                if (iSemHqmManagerAsInterface == null) {
                     Log.e(SystemServiceRegistry.TAG, "Failed to get Hqm manager service.");
                     return null;
                 }
-                return new SemHqmManager(asInterface, contextImpl.mMainThread.getHandler());
+                return new SemHqmManager(iSemHqmManagerAsInterface, contextImpl.mMainThread.getHandler());
             }
         });
         if (!"0".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SYSTEM_CONFIG_HCM_AI_POWER_SAVING_LEVEL"))) {
@@ -587,12 +587,12 @@ public final class SystemServiceRegistry {
                 /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                 public SemHcmManager createService(ContextImpl contextImpl) {
-                    ISemHcmManager asInterface = ISemHcmManager.Stub.asInterface(ServiceManager.getService(Context.HCM_SERVICE));
-                    if (asInterface == null) {
+                    ISemHcmManager iSemHcmManagerAsInterface = ISemHcmManager.Stub.asInterface(ServiceManager.getService(Context.HCM_SERVICE));
+                    if (iSemHcmManagerAsInterface == null) {
                         Log.e(SystemServiceRegistry.TAG, "Failed to get Hcm manager service.");
                         return null;
                     }
-                    return new SemHcmManager(asInterface, contextImpl.mMainThread.getHandler());
+                    return new SemHcmManager(iSemHcmManagerAsInterface, contextImpl.mMainThread.getHandler());
                 }
             });
         }
@@ -1103,9 +1103,9 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
             public PersistentDataBlockManager createService() throws ServiceManager.ServiceNotFoundException {
-                IPersistentDataBlockService asInterface = IPersistentDataBlockService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.PERSISTENT_DATA_BLOCK_SERVICE));
-                if (asInterface != null) {
-                    return new PersistentDataBlockManager(asInterface);
+                IPersistentDataBlockService iPersistentDataBlockServiceAsInterface = IPersistentDataBlockService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.PERSISTENT_DATA_BLOCK_SERVICE));
+                if (iPersistentDataBlockServiceAsInterface != null) {
+                    return new PersistentDataBlockManager(iPersistentDataBlockServiceAsInterface);
                 }
                 return null;
             }
@@ -1114,9 +1114,9 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
             public OemLockManager createService() throws ServiceManager.ServiceNotFoundException {
-                IOemLockService asInterface = IOemLockService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.OEM_LOCK_SERVICE));
-                if (asInterface != null) {
-                    return new OemLockManager(asInterface);
+                IOemLockService iOemLockServiceAsInterface = IOemLockService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.OEM_LOCK_SERVICE));
+                if (iOemLockServiceAsInterface != null) {
+                    return new OemLockManager(iOemLockServiceAsInterface);
                 }
                 return null;
             }
@@ -1237,9 +1237,9 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public CredentialManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                ICredentialManager asInterface = ICredentialManager.Stub.asInterface(ServiceManager.getService("credential"));
-                if (asInterface != null) {
-                    return new CredentialManager(contextImpl.getOuterContext(), asInterface);
+                ICredentialManager iCredentialManagerAsInterface = ICredentialManager.Stub.asInterface(ServiceManager.getService("credential"));
+                if (iCredentialManagerAsInterface != null) {
+                    return new CredentialManager(contextImpl.getOuterContext(), iCredentialManagerAsInterface);
                 }
                 return null;
             }
@@ -1255,14 +1255,14 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public ContentCaptureManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                IContentCaptureManager asInterface;
+                IContentCaptureManager iContentCaptureManagerAsInterface;
                 Context outerContext = contextImpl.getOuterContext();
                 ContentCaptureOptions contentCaptureOptions = outerContext.getContentCaptureOptions();
                 if (contentCaptureOptions == null) {
                     return null;
                 }
-                if ((contentCaptureOptions.lite || contentCaptureOptions.isWhitelisted(outerContext)) && (asInterface = IContentCaptureManager.Stub.asInterface(ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE))) != null) {
-                    return new ContentCaptureManager(outerContext, asInterface, contentCaptureOptions);
+                if ((contentCaptureOptions.lite || contentCaptureOptions.isWhitelisted(outerContext)) && (iContentCaptureManagerAsInterface = IContentCaptureManager.Stub.asInterface(ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE))) != null) {
+                    return new ContentCaptureManager(outerContext, iContentCaptureManagerAsInterface, contentCaptureOptions);
                 }
                 return null;
             }
@@ -1271,9 +1271,9 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public TranslationManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                ITranslationManager asInterface = ITranslationManager.Stub.asInterface(ServiceManager.getService(Context.TRANSLATION_MANAGER_SERVICE));
-                if (asInterface != null) {
-                    return new TranslationManager(contextImpl.getOuterContext(), asInterface);
+                ITranslationManager iTranslationManagerAsInterface = ITranslationManager.Stub.asInterface(ServiceManager.getService(Context.TRANSLATION_MANAGER_SERVICE));
+                if (iTranslationManagerAsInterface != null) {
+                    return new TranslationManager(contextImpl.getOuterContext(), iTranslationManagerAsInterface);
                 }
                 return null;
             }
@@ -1282,9 +1282,9 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public UiTranslationManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                ITranslationManager asInterface = ITranslationManager.Stub.asInterface(ServiceManager.getService(Context.TRANSLATION_MANAGER_SERVICE));
-                if (asInterface != null) {
-                    return new UiTranslationManager(contextImpl.getOuterContext(), asInterface);
+                ITranslationManager iTranslationManagerAsInterface = ITranslationManager.Stub.asInterface(ServiceManager.getService(Context.TRANSLATION_MANAGER_SERVICE));
+                if (iTranslationManagerAsInterface != null) {
+                    return new UiTranslationManager(contextImpl.getOuterContext(), iTranslationManagerAsInterface);
                 }
                 return null;
             }
@@ -1423,24 +1423,24 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public SemMultiControlManager createService(ContextImpl contextImpl) {
-                IMultiControlManager asInterface = IMultiControlManager.Stub.asInterface(ServiceManager.getService(Context.SEM_MULTI_CONTROL_SERVICE));
-                if (asInterface == null) {
+                IMultiControlManager iMultiControlManagerAsInterface = IMultiControlManager.Stub.asInterface(ServiceManager.getService(Context.SEM_MULTI_CONTROL_SERVICE));
+                if (iMultiControlManagerAsInterface == null) {
                     Log.e(SystemServiceRegistry.TAG, "SemMultiControlManager is not supported");
                     return null;
                 }
-                return new SemMultiControlManager(contextImpl.getOuterContext(), asInterface);
+                return new SemMultiControlManager(contextImpl.getOuterContext(), iMultiControlManagerAsInterface);
             }
         });
         registerService(Context.SEM_REMOTE_APP_MODE_SERVICE, SemRemoteAppModeManager.class, new CachedServiceFetcher<SemRemoteAppModeManager>() { // from class: android.app.SystemServiceRegistry.133
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public SemRemoteAppModeManager createService(ContextImpl contextImpl) {
-                IRemoteAppMode asInterface = IRemoteAppMode.Stub.asInterface(ServiceManager.getService(Context.SEM_REMOTE_APP_MODE_SERVICE));
-                if (asInterface == null) {
+                IRemoteAppMode iRemoteAppModeAsInterface = IRemoteAppMode.Stub.asInterface(ServiceManager.getService(Context.SEM_REMOTE_APP_MODE_SERVICE));
+                if (iRemoteAppModeAsInterface == null) {
                     Log.e(SystemServiceRegistry.TAG, "SemRemoteAppModeManager is not supported");
                     return null;
                 }
-                return new SemRemoteAppModeManager(contextImpl.getOuterContext(), asInterface);
+                return new SemRemoteAppModeManager(contextImpl.getOuterContext(), iRemoteAppModeAsInterface);
             }
         });
         if (SemDynamicFeature.isSuitable()) {
@@ -1448,12 +1448,12 @@ public final class SystemServiceRegistry {
                 /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                 public DynamicFeatureManager createService(ContextImpl contextImpl) {
-                    IDynamicFeatureManager asInterface = IDynamicFeatureManager.Stub.asInterface(ServiceManager.getService(SemDynamicFeature.SERVICE_NAME));
-                    if (asInterface == null) {
+                    IDynamicFeatureManager iDynamicFeatureManagerAsInterface = IDynamicFeatureManager.Stub.asInterface(ServiceManager.getService(SemDynamicFeature.SERVICE_NAME));
+                    if (iDynamicFeatureManagerAsInterface == null) {
                         Log.e(SystemServiceRegistry.TAG, "IDynamicFeatureManager is not supported");
                         return null;
                     }
-                    return new DynamicFeatureManager(asInterface);
+                    return new DynamicFeatureManager(iDynamicFeatureManagerAsInterface);
                 }
             });
         }
@@ -1616,8 +1616,8 @@ public final class SystemServiceRegistry {
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public GameManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
                 IBinder serviceOrThrow;
-                boolean hasSystemFeature = contextImpl.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
-                if (android.server.Flags.removeGameManagerServiceFromWear() && hasSystemFeature) {
+                boolean zHasSystemFeature = contextImpl.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
+                if (android.server.Flags.removeGameManagerServiceFromWear() && zHasSystemFeature) {
                     serviceOrThrow = ServiceManager.getService("game");
                 } else {
                     serviceOrThrow = ServiceManager.getServiceOrThrow("game");
@@ -1653,12 +1653,12 @@ public final class SystemServiceRegistry {
                 /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                 public ExynosDisplaySolutionManager createService(ContextImpl contextImpl) {
-                    IExynosDisplaySolutionManager asInterface = IExynosDisplaySolutionManager.Stub.asInterface(ServiceManager.getService(Context.EXYNOS_DISPLAY_SOLUTION_SERVICE));
-                    if (asInterface == null) {
+                    IExynosDisplaySolutionManager iExynosDisplaySolutionManagerAsInterface = IExynosDisplaySolutionManager.Stub.asInterface(ServiceManager.getService(Context.EXYNOS_DISPLAY_SOLUTION_SERVICE));
+                    if (iExynosDisplaySolutionManagerAsInterface == null) {
                         Log.e(SystemServiceRegistry.TAG, "Failed to get ExynosDisplaySolution Manager Service.");
                         return null;
                     }
-                    return new ExynosDisplaySolutionManager(asInterface);
+                    return new ExynosDisplaySolutionManager(iExynosDisplaySolutionManagerAsInterface);
                 }
             });
         }
@@ -1736,12 +1736,12 @@ public final class SystemServiceRegistry {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public KMTDManager createService(ContextImpl contextImpl) {
-                IMTDService asInterface = IMTDService.Stub.asInterface(ServiceManager.getService(KMTDManager.SERVICE_LABEL));
-                if (asInterface == null) {
+                IMTDService iMTDServiceAsInterface = IMTDService.Stub.asInterface(ServiceManager.getService(KMTDManager.SERVICE_LABEL));
+                if (iMTDServiceAsInterface == null) {
                     Log.e(SystemServiceRegistry.TAG, "Failed to get MTDService");
                     return null;
                 }
-                return new KMTDManager(asInterface, contextImpl.getOuterContext());
+                return new KMTDManager(iMTDServiceAsInterface, contextImpl.getOuterContext());
             }
         });
         registerService(Context.KEYSTORE_SERVICE, KeyStoreManager.class, new StaticServiceFetcher<KeyStoreManager>() { // from class: android.app.SystemServiceRegistry.170
@@ -1779,11 +1779,11 @@ public final class SystemServiceRegistry {
                 /* JADX WARN: Can't rename method to resolve collision */
                 @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
                 public AdvancedProtectionManager createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                    IAdvancedProtectionService asInterface = IAdvancedProtectionService.Stub.asInterface(ServiceManager.getService(Context.ADVANCED_PROTECTION_SERVICE));
-                    if (asInterface == null) {
+                    IAdvancedProtectionService iAdvancedProtectionServiceAsInterface = IAdvancedProtectionService.Stub.asInterface(ServiceManager.getService(Context.ADVANCED_PROTECTION_SERVICE));
+                    if (iAdvancedProtectionServiceAsInterface == null) {
                         return null;
                     }
-                    return new AdvancedProtectionManager(asInterface);
+                    return new AdvancedProtectionManager(iAdvancedProtectionServiceAsInterface);
                 }
             });
         }
@@ -1979,9 +1979,7 @@ public final class SystemServiceRegistry {
             return new TetheringManager(contextImpl, new Supplier() { // from class: android.app.SystemServiceRegistry$22$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    IBinder service;
-                    service = ServiceManager.getService(Context.TETHERING_SERVICE);
-                    return service;
+                    return ServiceManager.getService(Context.TETHERING_SERVICE);
                 }
             });
         }
@@ -2018,20 +2016,54 @@ public final class SystemServiceRegistry {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00c5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:67:0x00c5, code lost:
     
         if (hasSystemFeatureOpportunistic(r3, android.content.pm.PackageManager.FEATURE_WATCH) != false) goto L68;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.Object getSystemService(android.app.ContextImpl r3, java.lang.String r4) {
-        /*
-            Method dump skipped, instructions count: 302
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SystemServiceRegistry.getSystemService(android.app.ContextImpl, java.lang.String):java.lang.Object");
+    public static Object getSystemService(ContextImpl contextImpl, String str) {
+        ServiceFetcher<?> systemServiceFetcher = getSystemServiceFetcher(str);
+        if (systemServiceFetcher == null) {
+            return null;
+        }
+        Object service = systemServiceFetcher.getService(contextImpl);
+        if (!sEnableServiceNotFoundWtf || service != null) {
+            return service;
+        }
+        str.hashCode();
+        switch (str) {
+            case "appwidget":
+                if (!hasSystemFeatureOpportunistic(contextImpl, PackageManager.FEATURE_APP_WIDGETS)) {
+                }
+                Slog.wtf(TAG, "Manager wrapper not available: " + str);
+                break;
+            case "ethernet":
+            case "app_prediction":
+            case "virtualization":
+            case "contexthub":
+            case "virtualdevice":
+            case "content_capture":
+            case "incremental":
+                break;
+            case "search":
+                break;
+            case "textservices":
+                if (android.server.Flags.removeTextService() && hasSystemFeatureOpportunistic(contextImpl, PackageManager.FEATURE_WATCH)) {
+                }
+                Slog.wtf(TAG, "Manager wrapper not available: " + str);
+                break;
+            case "vcn_management":
+                if (!hasSystemFeatureOpportunistic(contextImpl, PackageManager.FEATURE_TELEPHONY_SUBSCRIPTION)) {
+                }
+                Slog.wtf(TAG, "Manager wrapper not available: " + str);
+                break;
+            default:
+                Slog.wtf(TAG, "Manager wrapper not available: " + str);
+                break;
+        }
+        return null;
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
@@ -2076,7 +2108,7 @@ public final class SystemServiceRegistry {
         registerService(str, cls, new StaticServiceFetcher<TServiceClass>() { // from class: android.app.SystemServiceRegistry.191
             @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
             public TServiceClass createService() throws ServiceManager.ServiceNotFoundException {
-                return (TServiceClass) StaticServiceProducerWithBinder.this.createService(ServiceManager.getServiceOrThrow(str));
+                return (TServiceClass) staticServiceProducerWithBinder.createService(ServiceManager.getServiceOrThrow(str));
             }
         });
     }
@@ -2095,7 +2127,7 @@ public final class SystemServiceRegistry {
 
             @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
             public TServiceClass createService() throws ServiceManager.ServiceNotFoundException {
-                return (TServiceClass) StaticServiceProducerWithBinder.this.createService(ServiceManager.getServiceOrThrow(str));
+                return (TServiceClass) staticServiceProducerWithBinder.createService(ServiceManager.getServiceOrThrow(str));
             }
         });
     }
@@ -2109,7 +2141,7 @@ public final class SystemServiceRegistry {
         registerService(str, cls, new StaticServiceFetcher<TServiceClass>() { // from class: android.app.SystemServiceRegistry.193
             @Override // android.app.SystemServiceRegistry.StaticServiceFetcher
             public TServiceClass createService() {
-                return (TServiceClass) StaticServiceProducerWithoutBinder.this.createService();
+                return (TServiceClass) staticServiceProducerWithoutBinder.createService();
             }
         });
     }
@@ -2123,7 +2155,7 @@ public final class SystemServiceRegistry {
         registerService(str, cls, new CachedServiceFetcher<TServiceClass>() { // from class: android.app.SystemServiceRegistry.194
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public TServiceClass createService(ContextImpl contextImpl) throws ServiceManager.ServiceNotFoundException {
-                return (TServiceClass) ContextAwareServiceProducerWithBinder.this.createService(contextImpl.getOuterContext(), ServiceManager.getServiceOrThrow(str));
+                return (TServiceClass) contextAwareServiceProducerWithBinder.createService(contextImpl.getOuterContext(), ServiceManager.getServiceOrThrow(str));
             }
         });
     }
@@ -2137,7 +2169,7 @@ public final class SystemServiceRegistry {
         registerService(str, cls, new CachedServiceFetcher<TServiceClass>() { // from class: android.app.SystemServiceRegistry.195
             @Override // android.app.SystemServiceRegistry.CachedServiceFetcher
             public TServiceClass createService(ContextImpl contextImpl) {
-                return (TServiceClass) ContextAwareServiceProducerWithoutBinder.this.createService(contextImpl.getOuterContext());
+                return (TServiceClass) contextAwareServiceProducerWithoutBinder.createService(contextImpl.getOuterContext());
             }
         });
     }
@@ -2164,7 +2196,7 @@ public final class SystemServiceRegistry {
             boolean z;
             Object[] objArr = contextImpl.mServiceCache;
             int[] iArr = contextImpl.mServiceInitializationStateArray;
-            boolean z2 = false;
+            boolean zInterrupted = false;
             while (true) {
                 synchronized (objArr) {
                     int i = this.mCacheIndex;
@@ -2185,49 +2217,49 @@ public final class SystemServiceRegistry {
                     if (z) {
                         try {
                             try {
-                                T createService = createService(contextImpl);
+                                T tCreateService = createService(contextImpl);
                                 synchronized (objArr) {
                                     int i3 = this.mCacheIndex;
-                                    objArr[i3] = createService;
+                                    objArr[i3] = tCreateService;
                                     iArr[i3] = 2;
                                     objArr.notifyAll();
                                 }
-                                t = createService;
+                                t = tCreateService;
                                 break;
-                            } catch (Throwable th) {
+                            } catch (ServiceManager.ServiceNotFoundException e) {
+                                SystemServiceRegistry.onServiceNotFound(e);
                                 synchronized (objArr) {
-                                    int i4 = this.mCacheIndex;
-                                    objArr[i4] = null;
-                                    iArr[i4] = 3;
+                                    objArr[this.mCacheIndex] = null;
+                                    iArr[this.mCacheIndex] = 3;
                                     objArr.notifyAll();
-                                    throw th;
+                                    t = null;
                                 }
                             }
-                        } catch (ServiceManager.ServiceNotFoundException e) {
-                            SystemServiceRegistry.onServiceNotFound(e);
+                        } catch (Throwable th) {
                             synchronized (objArr) {
-                                objArr[this.mCacheIndex] = null;
-                                iArr[this.mCacheIndex] = 3;
+                                int i4 = this.mCacheIndex;
+                                objArr[i4] = null;
+                                iArr[i4] = 3;
                                 objArr.notifyAll();
-                                t = null;
+                                throw th;
                             }
                         }
                     } else {
                         synchronized (objArr) {
                             while (iArr[this.mCacheIndex] < 2) {
                                 try {
-                                    z2 |= Thread.interrupted();
+                                    zInterrupted |= Thread.interrupted();
                                     objArr.wait();
                                 } catch (InterruptedException unused) {
                                     Slog.w(SystemServiceRegistry.TAG, "getService() interrupted");
-                                    z2 = true;
+                                    zInterrupted = true;
                                 }
                             }
                         }
                     }
                 }
             }
-            if (z2) {
+            if (zInterrupted) {
                 Thread.currentThread().interrupt();
             }
             return t;
@@ -2257,8 +2289,10 @@ public final class SystemServiceRegistry {
                     } catch (ServiceManager.ServiceNotFoundException e) {
                         SystemServiceRegistry.onServiceNotFound(e);
                     }
+                    t = this.mCachedInstance;
+                } else {
+                    t = this.mCachedInstance;
                 }
-                t = this.mCachedInstance;
             }
             return t;
         }

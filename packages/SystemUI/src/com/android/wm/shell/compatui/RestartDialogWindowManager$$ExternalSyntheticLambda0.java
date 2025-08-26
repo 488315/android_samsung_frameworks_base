@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class RestartDialogWindowManager$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -40,7 +39,7 @@ public final /* synthetic */ class RestartDialogWindowManager$$ExternalSynthetic
                     restartDialogLayout3.findViewById(R.id.letterbox_restart_dialog_restart_button).setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.compatui.RestartDialogLayout$$ExternalSyntheticLambda2
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view) {
-                            RestartDialogWindowManager$$ExternalSyntheticLambda3 restartDialogWindowManager$$ExternalSyntheticLambda32 = RestartDialogWindowManager$$ExternalSyntheticLambda3.this;
+                            RestartDialogWindowManager$$ExternalSyntheticLambda3 restartDialogWindowManager$$ExternalSyntheticLambda32 = restartDialogWindowManager$$ExternalSyntheticLambda3;
                             CheckBox checkBox2 = checkBox;
                             int i2 = RestartDialogLayout.$r8$clinit;
                             restartDialogWindowManager$$ExternalSyntheticLambda32.accept(Boolean.valueOf(checkBox2.isChecked()));

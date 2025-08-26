@@ -57,7 +57,7 @@ public abstract class AsyncQueryHandler extends Handler {
 
         @Override // android.os.Handler
         public void handleMessage(Message message) {
-            Cursor cursor;
+            Cursor cursorQuery;
             ContentResolver contentResolver = AsyncQueryHandler.this.mResolver.get();
             if (contentResolver == null) {
                 return;
@@ -67,15 +67,15 @@ public abstract class AsyncQueryHandler extends Handler {
             int i2 = message.arg1;
             if (i2 == 1) {
                 try {
-                    cursor = contentResolver.query(workerArgs.uri, workerArgs.projection, workerArgs.selection, workerArgs.selectionArgs, workerArgs.orderBy);
-                    if (cursor != null) {
-                        cursor.getCount();
+                    cursorQuery = contentResolver.query(workerArgs.uri, workerArgs.projection, workerArgs.selection, workerArgs.selectionArgs, workerArgs.orderBy);
+                    if (cursorQuery != null) {
+                        cursorQuery.getCount();
                     }
                 } catch (Exception e) {
                     Log.w(AsyncQueryHandler.TAG, "Exception thrown during handling EVENT_ARG_QUERY", e);
-                    cursor = null;
+                    cursorQuery = null;
                 }
-                workerArgs.result = cursor;
+                workerArgs.result = cursorQuery;
             } else if (i2 == 2) {
                 workerArgs.result = contentResolver.insert(workerArgs.uri, workerArgs.values);
             } else if (i2 == 3) {
@@ -83,10 +83,10 @@ public abstract class AsyncQueryHandler extends Handler {
             } else if (i2 == 4) {
                 workerArgs.result = Integer.valueOf(contentResolver.delete(workerArgs.uri, workerArgs.selection, workerArgs.selectionArgs));
             }
-            Message obtainMessage = workerArgs.handler.obtainMessage(i);
-            obtainMessage.obj = workerArgs;
-            obtainMessage.arg1 = message.arg1;
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = workerArgs.handler.obtainMessage(i);
+            messageObtainMessage.obj = workerArgs;
+            messageObtainMessage.arg1 = message.arg1;
+            messageObtainMessage.sendToTarget();
         }
     }
 
@@ -107,8 +107,8 @@ public abstract class AsyncQueryHandler extends Handler {
     }
 
     public void startQuery(int i, Object obj, Uri uri, String[] strArr, String str, String[] strArr2, String str2) {
-        Message obtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
-        obtainMessage.arg1 = 1;
+        Message messageObtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
+        messageObtainMessage.arg1 = 1;
         WorkerArgs workerArgs = new WorkerArgs();
         workerArgs.handler = this;
         workerArgs.uri = uri;
@@ -117,8 +117,8 @@ public abstract class AsyncQueryHandler extends Handler {
         workerArgs.selectionArgs = strArr2;
         workerArgs.orderBy = str2;
         workerArgs.cookie = obj;
-        obtainMessage.obj = workerArgs;
-        this.mWorkerThreadHandler.sendMessage(obtainMessage);
+        messageObtainMessage.obj = workerArgs;
+        this.mWorkerThreadHandler.sendMessage(messageObtainMessage);
     }
 
     public final void cancelOperation(int i) {
@@ -126,20 +126,20 @@ public abstract class AsyncQueryHandler extends Handler {
     }
 
     public final void startInsert(int i, Object obj, Uri uri, ContentValues contentValues) {
-        Message obtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
-        obtainMessage.arg1 = 2;
+        Message messageObtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
+        messageObtainMessage.arg1 = 2;
         WorkerArgs workerArgs = new WorkerArgs();
         workerArgs.handler = this;
         workerArgs.uri = uri;
         workerArgs.cookie = obj;
         workerArgs.values = contentValues;
-        obtainMessage.obj = workerArgs;
-        this.mWorkerThreadHandler.sendMessage(obtainMessage);
+        messageObtainMessage.obj = workerArgs;
+        this.mWorkerThreadHandler.sendMessage(messageObtainMessage);
     }
 
     public final void startUpdate(int i, Object obj, Uri uri, ContentValues contentValues, String str, String[] strArr) {
-        Message obtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
-        obtainMessage.arg1 = 3;
+        Message messageObtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
+        messageObtainMessage.arg1 = 3;
         WorkerArgs workerArgs = new WorkerArgs();
         workerArgs.handler = this;
         workerArgs.uri = uri;
@@ -147,21 +147,21 @@ public abstract class AsyncQueryHandler extends Handler {
         workerArgs.values = contentValues;
         workerArgs.selection = str;
         workerArgs.selectionArgs = strArr;
-        obtainMessage.obj = workerArgs;
-        this.mWorkerThreadHandler.sendMessage(obtainMessage);
+        messageObtainMessage.obj = workerArgs;
+        this.mWorkerThreadHandler.sendMessage(messageObtainMessage);
     }
 
     public final void startDelete(int i, Object obj, Uri uri, String str, String[] strArr) {
-        Message obtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
-        obtainMessage.arg1 = 4;
+        Message messageObtainMessage = this.mWorkerThreadHandler.obtainMessage(i);
+        messageObtainMessage.arg1 = 4;
         WorkerArgs workerArgs = new WorkerArgs();
         workerArgs.handler = this;
         workerArgs.uri = uri;
         workerArgs.cookie = obj;
         workerArgs.selection = str;
         workerArgs.selectionArgs = strArr;
-        obtainMessage.obj = workerArgs;
-        this.mWorkerThreadHandler.sendMessage(obtainMessage);
+        messageObtainMessage.obj = workerArgs;
+        this.mWorkerThreadHandler.sendMessage(messageObtainMessage);
     }
 
     @Override // android.os.Handler

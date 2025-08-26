@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Ref$FloatRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AnchoredDraggableNode$fling$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Ref$FloatRef $leftoverVelocity;
@@ -46,9 +45,9 @@ final class AnchoredDraggableNode$fling$2 extends SuspendLambda implements Funct
                 @Override // androidx.compose.foundation.gestures.ScrollScope
                 public final float scrollBy(float f) {
                     AnchoredDraggableNode anchoredDraggableNode2 = anchoredDraggableNode;
-                    float newOffsetForDelta$foundation_release = anchoredDraggableNode2.state.newOffsetForDelta$foundation_release(f);
-                    float floatValue = newOffsetForDelta$foundation_release - ((SnapshotMutableFloatStateImpl) anchoredDraggableNode2.state.offset$delegate).getFloatValue();
-                    ((AnchoredDraggableState$anchoredDragScope$1) anchoredDragScope).dragTo(newOffsetForDelta$foundation_release, 0.0f);
+                    float fNewOffsetForDelta$foundation_release = anchoredDraggableNode2.state.newOffsetForDelta$foundation_release(f);
+                    float floatValue = fNewOffsetForDelta$foundation_release - ((SnapshotMutableFloatStateImpl) anchoredDraggableNode2.state.offset$delegate).getFloatValue();
+                    ((AnchoredDraggableState$anchoredDragScope$1) anchoredDragScope).dragTo(fNewOffsetForDelta$foundation_release, 0.0f);
                     return floatValue;
                 }
             };

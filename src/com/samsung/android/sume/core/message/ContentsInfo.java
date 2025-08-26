@@ -8,6 +8,7 @@ import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLa
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda4;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +49,7 @@ public class ContentsInfo implements Parcelable {
         setStatusCode(0);
     }
 
-    protected ContentsInfo(Parcel parcel) {
+    protected ContentsInfo(Parcel parcel) throws ClassNotFoundException, IOException {
         this();
         parcel.readMap(this.data, null);
     }
@@ -335,13 +336,13 @@ public class ContentsInfo implements Parcelable {
         return (String) this.data.keySet().stream().map(new Function() { // from class: com.samsung.android.sume.core.message.ContentsInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return ContentsInfo.this.m9587x3d006615((String) obj);
+                return this.f$0.m9600x3d006615((String) obj);
             }
         }).collect(Collectors.joining(", ", "{", "}"));
     }
 
     /* renamed from: lambda$toString$0$com-samsung-android-sume-core-message-ContentsInfo, reason: not valid java name */
-    /* synthetic */ String m9587x3d006615(String str) {
+    /* synthetic */ String m9600x3d006615(String str) {
         return str + "=" + this.data.get(str);
     }
 }

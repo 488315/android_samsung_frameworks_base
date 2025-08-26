@@ -75,7 +75,7 @@ public final class SystemFonts {
         }
     }
 
-    private static ByteBuffer mmap(String str) {
+    private static ByteBuffer mmap(String str) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(str);
             try {
@@ -90,82 +90,55 @@ public final class SystemFonts {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0031 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int resolveVarFamilyType(android.text.FontConfig.FontFamily r10, java.lang.String r11) {
-        /*
-            java.util.List r10 = r10.getFontList()
-            r0 = 0
-            r1 = r0
-            r2 = r1
-            r3 = r2
-            r4 = r3
-            r5 = r4
-        La:
-            int r6 = r10.size()
-            r7 = 1
-            if (r1 >= r6) goto L4e
-            java.lang.Object r6 = r10.get(r1)
-            android.text.FontConfig$Font r6 = (android.text.FontConfig.Font) r6
-            if (r11 != 0) goto L20
-            java.lang.String r8 = r6.getFontFamilyName()
-            if (r8 == 0) goto L2b
-            goto L4b
-        L20:
-            java.lang.String r8 = r6.getFontFamilyName()
-            boolean r8 = r11.equals(r8)
-            if (r8 != 0) goto L2b
-            goto L4b
-        L2b:
-            int r8 = r6.getVarTypeAxes()
-            if (r8 != 0) goto L32
-            return r0
-        L32:
-            r9 = r8 & 1
-            if (r9 == 0) goto L38
-            int r4 = r4 + 1
-        L38:
-            r8 = r8 & 2
-            if (r8 == 0) goto L3e
-            int r2 = r2 + 1
-        L3e:
-            android.graphics.fonts.FontStyle r6 = r6.getStyle()
-            int r6 = r6.getSlant()
-            if (r6 != r7) goto L49
-            r5 = r7
-        L49:
-            int r3 = r3 + 1
-        L4b:
-            int r1 = r1 + 1
-            goto La
-        L4e:
-            r10 = 2
-            if (r2 != 0) goto L5e
-            if (r3 != r7) goto L56
-            if (r4 != r7) goto L56
-            return r7
-        L56:
-            if (r3 != r10) goto L65
-            if (r4 != r10) goto L65
-            if (r5 == 0) goto L65
-            r10 = 3
-            return r10
-        L5e:
-            if (r2 != r7) goto L65
-            if (r4 != r7) goto L65
-            if (r3 != r7) goto L65
-            return r10
-        L65:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.fonts.SystemFonts.resolveVarFamilyType(android.text.FontConfig$FontFamily, java.lang.String):int");
+    public static int resolveVarFamilyType(FontConfig.FontFamily fontFamily, String str) {
+        List<FontConfig.Font> fontList = fontFamily.getFontList();
+        int i = 0;
+        int i2 = 0;
+        int i3 = 0;
+        boolean z = false;
+        for (int i4 = 0; i4 < fontList.size(); i4++) {
+            FontConfig.Font font = fontList.get(i4);
+            if (str == null) {
+                if (font.getFontFamilyName() != null) {
+                    continue;
+                } else {
+                    int varTypeAxes = font.getVarTypeAxes();
+                    if (varTypeAxes == 0) {
+                        return 0;
+                    }
+                    if ((varTypeAxes & 1) != 0) {
+                        i3++;
+                    }
+                    if ((varTypeAxes & 2) != 0) {
+                        i++;
+                    }
+                    if (font.getStyle().getSlant() == 1) {
+                        z = true;
+                    }
+                    i2++;
+                }
+            } else if (!str.equals(font.getFontFamilyName())) {
+                continue;
+            }
+        }
+        if (i == 0) {
+            if (i2 == 1 && i3 == 1) {
+                return 1;
+            }
+            if (i2 == 2 && i3 == 2 && z) {
+                return 3;
+            }
+        } else if (i == 1 && i3 == 1 && i2 == 1) {
+            return 2;
+        }
+        return 0;
     }
 
-    private static void pushFamilyToFallback(FontConfig.FontFamily fontFamily, ArrayMap<String, NativeFamilyListSet> arrayMap, Map<String, ByteBuffer> map) {
+    private static void pushFamilyToFallback(FontConfig.FontFamily fontFamily, ArrayMap<String, NativeFamilyListSet> arrayMap, Map<String, ByteBuffer> map) throws IOException {
         Map<String, ByteBuffer> map2;
         String languageTags = fontFamily.getLocaleList().toLanguageTags();
         int variant = fontFamily.getVariant();
@@ -184,36 +157,41 @@ public final class SystemFonts {
                 arrayList2.add(font);
             }
         }
-        FontFamily fontFamily2 = null;
+        FontFamily fontFamilyCreateFontFamily = null;
         if (arrayList.isEmpty()) {
             map2 = map;
         } else {
             map2 = map;
-            fontFamily2 = createFontFamily(arrayList, languageTags, variant, resolveVarFamilyType(fontFamily, null), false, map2);
+            fontFamilyCreateFontFamily = createFontFamily(arrayList, languageTags, variant, resolveVarFamilyType(fontFamily, null), false, map2);
         }
-        FontFamily fontFamily3 = fontFamily2;
+        FontFamily fontFamily2 = fontFamilyCreateFontFamily;
         for (int i = 0; i < arrayMap.size(); i++) {
-            String keyAt = arrayMap.keyAt(i);
-            NativeFamilyListSet valueAt = arrayMap.valueAt(i);
-            int identityHashCode = System.identityHashCode(fontFamily);
-            if (valueAt.seenXmlFamilies.get(identityHashCode, -1) == -1) {
-                valueAt.seenXmlFamilies.append(identityHashCode, 1);
-                ArrayList arrayList3 = (ArrayList) arrayMap2.get(keyAt);
+            String strKeyAt = arrayMap.keyAt(i);
+            NativeFamilyListSet nativeFamilyListSetValueAt = arrayMap.valueAt(i);
+            int iIdentityHashCode = System.identityHashCode(fontFamily);
+            if (nativeFamilyListSetValueAt.seenXmlFamilies.get(iIdentityHashCode, -1) == -1) {
+                nativeFamilyListSetValueAt.seenXmlFamilies.append(iIdentityHashCode, 1);
+                ArrayList arrayList3 = (ArrayList) arrayMap2.get(strKeyAt);
                 if (arrayList3 != null) {
-                    FontFamily createFontFamily = createFontFamily(arrayList3, languageTags, variant, resolveVarFamilyType(fontFamily, keyAt), false, map2);
-                    if (createFontFamily != null) {
-                        valueAt.familyList.add(createFontFamily);
-                    } else if (fontFamily3 != null) {
-                        valueAt.familyList.add(fontFamily3);
+                    FontFamily fontFamilyCreateFontFamily2 = createFontFamily(arrayList3, languageTags, variant, resolveVarFamilyType(fontFamily, strKeyAt), false, map2);
+                    if (fontFamilyCreateFontFamily2 != null) {
+                        nativeFamilyListSetValueAt.familyList.add(fontFamilyCreateFontFamily2);
+                    } else if (fontFamily2 != null) {
+                        nativeFamilyListSetValueAt.familyList.add(fontFamily2);
                     }
-                } else if (fontFamily3 != null) {
-                    valueAt.familyList.add(fontFamily3);
+                } else if (fontFamily2 != null) {
+                    nativeFamilyListSetValueAt.familyList.add(fontFamily2);
                 }
             }
         }
     }
 
-    private static FontFamily createFontFamily(List<FontConfig.Font> list, String str, int i, int i2, boolean z, Map<String, ByteBuffer> map) {
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0038 A[EXC_TOP_SPLITTER, PHI: r5
+      0x0038: PHI (r5v2 java.nio.ByteBuffer) = (r5v1 java.nio.ByteBuffer), (r5v7 java.nio.ByteBuffer) binds: [B:9:0x0025, B:14:0x0035] A[DONT_GENERATE, DONT_INLINE], SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private static FontFamily createFontFamily(List<FontConfig.Font> list, String str, int i, int i2, boolean z, Map<String, ByteBuffer> map) throws IOException {
         if (list.size() == 0) {
             return null;
         }
@@ -221,27 +199,28 @@ public final class SystemFonts {
         for (int i3 = 0; i3 < list.size(); i3++) {
             FontConfig.Font font = list.get(i3);
             String absolutePath = font.getFile().getAbsolutePath();
-            ByteBuffer byteBuffer = map.get(absolutePath);
-            try {
-                if (byteBuffer == null) {
-                    if (map.containsKey(absolutePath)) {
+            ByteBuffer byteBufferMmap = map.get(absolutePath);
+            if (byteBufferMmap == null) {
+                if (map.containsKey(absolutePath)) {
+                    continue;
+                } else {
+                    byteBufferMmap = mmap(absolutePath);
+                    map.put(absolutePath, byteBufferMmap);
+                    if (byteBufferMmap == null) {
                         continue;
-                    } else {
-                        byteBuffer = mmap(absolutePath);
-                        map.put(absolutePath, byteBuffer);
-                        if (byteBuffer == null) {
-                            continue;
-                        }
                     }
                 }
-                Font build = new Font.Builder(byteBuffer, new File(absolutePath), str).setWeight(font.getStyle().getWeight()).setSlant(font.getStyle().getSlant()).setTtcIndex(font.getTtcIndex()).setFontVariationSettings(font.getFontVariationSettings()).build();
-                if (builder == null) {
-                    builder = new FontFamily.Builder(build);
-                } else {
-                    builder.addFont(build);
+            } else {
+                try {
+                    Font fontBuild = new Font.Builder(byteBufferMmap, new File(absolutePath), str).setWeight(font.getStyle().getWeight()).setSlant(font.getStyle().getSlant()).setTtcIndex(font.getTtcIndex()).setFontVariationSettings(font.getFontVariationSettings()).build();
+                    if (builder == null) {
+                        builder = new FontFamily.Builder(fontBuild);
+                    } else {
+                        builder.addFont(fontBuild);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
         if (builder == null) {
@@ -250,7 +229,7 @@ public final class SystemFonts {
         return builder.build(str, i, false, z, i2);
     }
 
-    private static void appendNamedFamilyList(FontConfig.NamedFamilyList namedFamilyList, ArrayMap<String, ByteBuffer> arrayMap, ArrayMap<String, NativeFamilyListSet> arrayMap2) {
+    private static void appendNamedFamilyList(FontConfig.NamedFamilyList namedFamilyList, ArrayMap<String, ByteBuffer> arrayMap, ArrayMap<String, NativeFamilyListSet> arrayMap2) throws IOException {
         String name = namedFamilyList.getName();
         NativeFamilyListSet nativeFamilyListSet = new NativeFamilyListSet();
         List<FontConfig.FontFamily> families = namedFamilyList.getFamilies();
@@ -258,11 +237,11 @@ public final class SystemFonts {
         while (i < families.size()) {
             FontConfig.FontFamily fontFamily = families.get(i);
             ArrayMap<String, ByteBuffer> arrayMap3 = arrayMap;
-            FontFamily createFontFamily = createFontFamily(fontFamily.getFontList(), fontFamily.getLocaleList().toLanguageTags(), fontFamily.getVariant(), resolveVarFamilyType(fontFamily, null), true, arrayMap3);
-            if (createFontFamily == null) {
+            FontFamily fontFamilyCreateFontFamily = createFontFamily(fontFamily.getFontList(), fontFamily.getLocaleList().toLanguageTags(), fontFamily.getVariant(), resolveVarFamilyType(fontFamily, null), true, arrayMap3);
+            if (fontFamilyCreateFontFamily == null) {
                 return;
             }
-            nativeFamilyListSet.familyList.add(createFontFamily);
+            nativeFamilyListSet.familyList.add(fontFamilyCreateFontFamily);
             nativeFamilyListSet.seenXmlFamilies.append(System.identityHashCode(fontFamily), 1);
             i++;
             arrayMap = arrayMap3;
@@ -319,7 +298,7 @@ public final class SystemFonts {
         }
     }
 
-    public static Map<String, FontFamily[]> buildSystemFallback(FontConfig fontConfig, ArrayMap<String, ByteBuffer> arrayMap) {
+    public static Map<String, FontFamily[]> buildSystemFallback(FontConfig fontConfig, ArrayMap<String, ByteBuffer> arrayMap) throws IOException {
         ArrayMap arrayMap2 = new ArrayMap();
         List<FontConfig.Customization.LocaleFallback> localeFallbackCustomizations = fontConfig.getLocaleFallbackCustomizations();
         List<FontConfig.NamedFamilyList> namedFamilyLists = fontConfig.getNamedFamilyLists();
@@ -387,18 +366,18 @@ public final class SystemFonts {
             for (int i = 0; i < localeList.size(); i++) {
                 Locale locale = localeList.get(i);
                 if (locale != null) {
-                    String resolveScript = FontConfig.resolveScript(locale);
-                    if (resolveScript.equals(str)) {
+                    String strResolveScript = FontConfig.resolveScript(locale);
+                    if (strResolveScript.equals(str)) {
                         return true;
                     }
-                    if (str.equals("Bopo") && resolveScript.equals("Hanb")) {
+                    if (str.equals("Bopo") && strResolveScript.equals("Hanb")) {
                         return true;
                     }
                     if (str.equals("Hani")) {
-                        if (resolveScript.equals("Hanb") || resolveScript.equals("Hans") || resolveScript.equals("Hant") || resolveScript.equals("Kore") || resolveScript.equals("Jpan")) {
+                        if (strResolveScript.equals("Hanb") || strResolveScript.equals("Hans") || strResolveScript.equals("Hant") || strResolveScript.equals("Kore") || strResolveScript.equals("Jpan")) {
                             return true;
                         }
-                    } else if ((str.equals("Hira") || str.equals("Hrkt") || str.equals("Kana")) && (resolveScript.equals("Jpan") || resolveScript.equals("Hrkt"))) {
+                    } else if ((str.equals("Hira") || str.equals("Hrkt") || str.equals("Kana")) && (strResolveScript.equals("Jpan") || strResolveScript.equals("Hrkt"))) {
                         return true;
                     }
                 }

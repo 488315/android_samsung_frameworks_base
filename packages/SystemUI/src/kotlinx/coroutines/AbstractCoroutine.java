@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.internal.ThreadContextKt;
 import kotlinx.coroutines.intrinsics.CancellableKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractCoroutine extends JobSupport implements Continuation, CoroutineScope {
     public final CoroutineContext context;
@@ -59,19 +58,19 @@ public abstract class AbstractCoroutine extends JobSupport implements Continuati
 
     @Override // kotlin.coroutines.Continuation
     public final void resumeWith(Object obj) {
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(obj);
-        if (m3422exceptionOrNullimpl != null) {
-            obj = new CompletedExceptionally(m3422exceptionOrNullimpl, false, 2, null);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
+        if (thM3442exceptionOrNullimpl != null) {
+            obj = new CompletedExceptionally(thM3442exceptionOrNullimpl, false, 2, null);
         }
-        Object makeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = makeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(obj);
-        if (makeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == JobSupportKt.COMPLETING_WAITING_CHILDREN) {
+        Object objMakeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = makeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(obj);
+        if (objMakeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == JobSupportKt.COMPLETING_WAITING_CHILDREN) {
             return;
         }
-        afterResume(makeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host);
+        afterResume(objMakeCompletingOnce$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host);
     }
 
     public final void start(CoroutineStart coroutineStart, AbstractCoroutine abstractCoroutine, Function2 function2) {
-        Object invoke;
+        Object objInvoke;
         coroutineStart.getClass();
         int i = CoroutineStart.WhenMappings.$EnumSwitchMapping$0[coroutineStart.ordinal()];
         if (i == 1) {
@@ -79,9 +78,9 @@ public abstract class AbstractCoroutine extends JobSupport implements Continuati
             return;
         }
         if (i == 2) {
-            Continuation intercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(IntrinsicsKt__IntrinsicsJvmKt.createCoroutineUnintercepted(function2, abstractCoroutine, this));
+            Continuation continuationIntercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(IntrinsicsKt__IntrinsicsJvmKt.createCoroutineUnintercepted(function2, abstractCoroutine, this));
             int i2 = Result.$r8$clinit;
-            intercepted.resumeWith(Unit.INSTANCE);
+            continuationIntercepted.resumeWith(Unit.INSTANCE);
             return;
         }
         if (i != 3) {
@@ -92,21 +91,21 @@ public abstract class AbstractCoroutine extends JobSupport implements Continuati
         }
         try {
             CoroutineContext coroutineContext = this.context;
-            Object updateThreadContext = ThreadContextKt.updateThreadContext(coroutineContext, null);
+            Object objUpdateThreadContext = ThreadContextKt.updateThreadContext(coroutineContext, null);
             try {
                 if (function2 instanceof BaseContinuationImpl) {
                     TypeIntrinsics.beforeCheckcastToFunctionOfArity(2, function2);
-                    invoke = function2.invoke(abstractCoroutine, this);
+                    objInvoke = function2.invoke(abstractCoroutine, this);
                 } else {
-                    invoke = IntrinsicsKt__IntrinsicsJvmKt.wrapWithContinuationImpl(function2, abstractCoroutine, this);
+                    objInvoke = IntrinsicsKt__IntrinsicsJvmKt.wrapWithContinuationImpl(function2, abstractCoroutine, this);
                 }
-                ThreadContextKt.restoreThreadContext(coroutineContext, updateThreadContext);
-                if (invoke != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                ThreadContextKt.restoreThreadContext(coroutineContext, objUpdateThreadContext);
+                if (objInvoke != CoroutineSingletons.COROUTINE_SUSPENDED) {
                     int i3 = Result.$r8$clinit;
-                    resumeWith(invoke);
+                    resumeWith(objInvoke);
                 }
             } catch (Throwable th) {
-                ThreadContextKt.restoreThreadContext(coroutineContext, updateThreadContext);
+                ThreadContextKt.restoreThreadContext(coroutineContext, objUpdateThreadContext);
                 throw th;
             }
         } catch (Throwable th2) {

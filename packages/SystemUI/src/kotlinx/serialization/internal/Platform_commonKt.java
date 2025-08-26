@@ -10,7 +10,6 @@ import kotlin.reflect.KType;
 import kotlinx.serialization.SerializationException;
 import kotlinx.serialization.descriptors.SerialDescriptor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class Platform_commonKt {
     public static final SerialDescriptor[] EMPTY_DESCRIPTOR_ARRAY = new SerialDescriptor[0];

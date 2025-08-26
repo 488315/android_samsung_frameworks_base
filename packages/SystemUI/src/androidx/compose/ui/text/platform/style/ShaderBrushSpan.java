@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.ShaderBrush;
 import androidx.compose.ui.text.platform.AndroidTextPaint_androidKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ShaderBrushSpan extends CharacterStyle implements UpdateAppearance {
     public final float alpha;
@@ -25,7 +24,7 @@ public final class ShaderBrushSpan extends CharacterStyle implements UpdateAppea
         this.shaderBrush = shaderBrush;
         this.alpha = f;
         Size.Companion.getClass();
-        this.size$delegate = SnapshotStateKt.mutableStateOf$default(Size.m413boximpl(Size.Unspecified));
+        this.size$delegate = SnapshotStateKt.mutableStateOf$default(Size.m415boximpl(Size.Unspecified));
         this.shaderState = SnapshotStateKt.derivedStateOf(new Function0() { // from class: androidx.compose.ui.text.platform.style.ShaderBrushSpan$shaderState$1
             {
                 super(0);
@@ -33,11 +32,11 @@ public final class ShaderBrushSpan extends CharacterStyle implements UpdateAppea
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                if (((Size) ((SnapshotMutableStateImpl) ShaderBrushSpan.this.size$delegate).getValue()).packedValue == 9205357640488583168L || Size.m418isEmptyimpl(((Size) ((SnapshotMutableStateImpl) ShaderBrushSpan.this.size$delegate).getValue()).packedValue)) {
+                if (((Size) ((SnapshotMutableStateImpl) this.this$0.size$delegate).getValue()).packedValue == 9205357640488583168L || Size.m420isEmptyimpl(((Size) ((SnapshotMutableStateImpl) this.this$0.size$delegate).getValue()).packedValue)) {
                     return null;
                 }
-                ShaderBrushSpan shaderBrushSpan = ShaderBrushSpan.this;
-                return shaderBrushSpan.shaderBrush.mo451createShaderuvyYCjk(((Size) ((SnapshotMutableStateImpl) shaderBrushSpan.size$delegate).getValue()).packedValue);
+                ShaderBrushSpan shaderBrushSpan = this.this$0;
+                return shaderBrushSpan.shaderBrush.mo453createShaderuvyYCjk(((Size) ((SnapshotMutableStateImpl) shaderBrushSpan.size$delegate).getValue()).packedValue);
             }
         });
     }

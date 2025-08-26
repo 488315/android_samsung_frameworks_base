@@ -10,7 +10,6 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -25,8 +24,6 @@ public final /* synthetic */ class MobileConnectionRepositoryImpl$imsRegState$1$
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
-        SettingsHelper settingsHelper;
-        SettingsHelper settingsHelper2;
         switch (this.$r8$classId) {
             case 0:
                 MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl = (MobileConnectionRepositoryImpl) this.f$0;
@@ -47,7 +44,7 @@ public final /* synthetic */ class MobileConnectionRepositoryImpl$imsRegState$1$
                 ((ConnectivityManager) this.f$0).unregisterNetworkCallback((MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1$callback$1) this.f$1);
                 break;
             case 3:
-                settingsHelper = ((MobileConnectionRepositoryImpl) this.f$0).settingsHelper;
+                SettingsHelper settingsHelper = ((MobileConnectionRepositoryImpl) this.f$0).settingsHelper;
                 final MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1$callback$1 mobileConnectionRepositoryImpl$mobileDataEnabledChanged$1$callback$1 = (MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1$callback$1) this.f$1;
                 settingsHelper.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1$1$1
                     @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
@@ -59,7 +56,7 @@ public final /* synthetic */ class MobileConnectionRepositoryImpl$imsRegState$1$
                 ((MobileConnectionRepositoryImpl) this.f$0).context.unregisterReceiver((MobileConnectionRepositoryImpl$networkName$1$receiver$1) this.f$1);
                 break;
             default:
-                settingsHelper2 = ((MobileConnectionRepositoryImpl) this.f$0).settingsHelper;
+                SettingsHelper settingsHelper2 = ((MobileConnectionRepositoryImpl) this.f$0).settingsHelper;
                 final MobileConnectionRepositoryImpl$semSatelliteEnabled$1$callback$1 mobileConnectionRepositoryImpl$semSatelliteEnabled$1$callback$1 = (MobileConnectionRepositoryImpl$semSatelliteEnabled$1$callback$1) this.f$1;
                 settingsHelper2.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$semSatelliteEnabled$1$1$1
                     @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback

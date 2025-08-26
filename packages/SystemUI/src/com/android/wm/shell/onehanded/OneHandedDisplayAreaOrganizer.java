@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
     public final OneHandedAnimationController mAnimationController;
@@ -100,11 +99,11 @@ public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
     }
 
     public final void beginCUJTracing(int i, String str) {
-        InteractionJankMonitor.Configuration.Builder withSurface = InteractionJankMonitor.Configuration.Builder.withSurface(i, this.mContext, getDisplayAreaTokenMap().entrySet().iterator().next().getValue(), this.mHandler);
+        InteractionJankMonitor.Configuration.Builder builderWithSurface = InteractionJankMonitor.Configuration.Builder.withSurface(i, this.mContext, getDisplayAreaTokenMap().entrySet().iterator().next().getValue(), this.mHandler);
         if (!TextUtils.isEmpty(str)) {
-            withSurface.setTag(str);
+            builderWithSurface.setTag(str);
         }
-        this.mJankMonitor.begin(withSurface);
+        this.mJankMonitor.begin(builderWithSurface);
     }
 
     public void finishOffset(int i, int i2) {
@@ -146,14 +145,14 @@ public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
     }
 
     public final List registerOrganizer(int i) {
-        List registerOrganizer = super.registerOrganizer(i);
-        for (int i2 = 0; i2 < registerOrganizer.size(); i2++) {
-            DisplayAreaAppearedInfo displayAreaAppearedInfo = (DisplayAreaAppearedInfo) registerOrganizer.get(i2);
+        List listRegisterOrganizer = super.registerOrganizer(i);
+        for (int i2 = 0; i2 < listRegisterOrganizer.size(); i2++) {
+            DisplayAreaAppearedInfo displayAreaAppearedInfo = (DisplayAreaAppearedInfo) listRegisterOrganizer.get(i2);
             onDisplayAreaAppeared(displayAreaAppearedInfo.getDisplayAreaInfo(), displayAreaAppearedInfo.getLeash());
         }
         this.mIsReady = true;
         updateDisplayBounds();
-        return registerOrganizer;
+        return listRegisterOrganizer;
     }
 
     public void resetWindowsOffset() {
@@ -162,7 +161,7 @@ public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
         this.mDisplayAreaTokenMap.forEach(new BiConsumer() { // from class: com.android.wm.shell.onehanded.OneHandedDisplayAreaOrganizer$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                OneHandedDisplayAreaOrganizer oneHandedDisplayAreaOrganizer = OneHandedDisplayAreaOrganizer.this;
+                OneHandedDisplayAreaOrganizer oneHandedDisplayAreaOrganizer = this.f$0;
                 SurfaceControl.Transaction transaction2 = transaction;
                 SurfaceControl surfaceControl = (SurfaceControl) obj2;
                 OneHandedAnimationController.OneHandedTransitionAnimator oneHandedTransitionAnimator = (OneHandedAnimationController.OneHandedTransitionAnimator) oneHandedDisplayAreaOrganizer.mAnimationController.mAnimatorMap.remove((WindowContainerToken) obj);
@@ -188,7 +187,7 @@ public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
         this.mDisplayAreaTokenMap.forEach(new BiConsumer() { // from class: com.android.wm.shell.onehanded.OneHandedDisplayAreaOrganizer$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                OneHandedDisplayAreaOrganizer oneHandedDisplayAreaOrganizer = OneHandedDisplayAreaOrganizer.this;
+                OneHandedDisplayAreaOrganizer oneHandedDisplayAreaOrganizer = this.f$0;
                 float f2 = f;
                 int i3 = i;
                 int i4 = i2;
@@ -202,22 +201,22 @@ public class OneHandedDisplayAreaOrganizer extends DisplayAreaOrganizer {
                 OneHandedAnimationController.OneHandedInterpolator oneHandedInterpolator = oneHandedAnimationController.mInterpolator;
                 OneHandedSurfaceTransactionHelper oneHandedSurfaceTransactionHelper = oneHandedAnimationController.mSurfaceTransactionHelper;
                 if (oneHandedTransitionAnimator == null) {
-                    HashMap hashMap = oneHandedAnimationController.mAnimatorMap;
-                    OneHandedAnimationController.OneHandedTransitionAnimator ofYOffset = OneHandedAnimationController.OneHandedTransitionAnimator.ofYOffset(windowContainerToken, surfaceControl, f2, f3, rect);
-                    ofYOffset.mSurfaceTransactionHelper = oneHandedSurfaceTransactionHelper;
-                    ofYOffset.setInterpolator(oneHandedInterpolator);
-                    ofYOffset.setFloatValues(0.0f, 1.0f);
-                    hashMap.put(windowContainerToken, ofYOffset);
+                    HashMap map = oneHandedAnimationController.mAnimatorMap;
+                    OneHandedAnimationController.OneHandedTransitionAnimator oneHandedTransitionAnimatorOfYOffset = OneHandedAnimationController.OneHandedTransitionAnimator.ofYOffset(windowContainerToken, surfaceControl, f2, f3, rect);
+                    oneHandedTransitionAnimatorOfYOffset.mSurfaceTransactionHelper = oneHandedSurfaceTransactionHelper;
+                    oneHandedTransitionAnimatorOfYOffset.setInterpolator(oneHandedInterpolator);
+                    oneHandedTransitionAnimatorOfYOffset.setFloatValues(0.0f, 1.0f);
+                    map.put(windowContainerToken, oneHandedTransitionAnimatorOfYOffset);
                 } else if (oneHandedTransitionAnimator.isRunning()) {
                     oneHandedTransitionAnimator.mEndValue = f3;
                 } else {
                     oneHandedTransitionAnimator.cancel();
-                    HashMap hashMap2 = oneHandedAnimationController.mAnimatorMap;
-                    OneHandedAnimationController.OneHandedTransitionAnimator ofYOffset2 = OneHandedAnimationController.OneHandedTransitionAnimator.ofYOffset(windowContainerToken, surfaceControl, f2, f3, rect);
-                    ofYOffset2.mSurfaceTransactionHelper = oneHandedSurfaceTransactionHelper;
-                    ofYOffset2.setInterpolator(oneHandedInterpolator);
-                    ofYOffset2.setFloatValues(0.0f, 1.0f);
-                    hashMap2.put(windowContainerToken, ofYOffset2);
+                    HashMap map2 = oneHandedAnimationController.mAnimatorMap;
+                    OneHandedAnimationController.OneHandedTransitionAnimator oneHandedTransitionAnimatorOfYOffset2 = OneHandedAnimationController.OneHandedTransitionAnimator.ofYOffset(windowContainerToken, surfaceControl, f2, f3, rect);
+                    oneHandedTransitionAnimatorOfYOffset2.mSurfaceTransactionHelper = oneHandedSurfaceTransactionHelper;
+                    oneHandedTransitionAnimatorOfYOffset2.setInterpolator(oneHandedInterpolator);
+                    oneHandedTransitionAnimatorOfYOffset2.setFloatValues(0.0f, 1.0f);
+                    map2.put(windowContainerToken, oneHandedTransitionAnimatorOfYOffset2);
                 }
                 OneHandedAnimationController.OneHandedTransitionAnimator oneHandedTransitionAnimator2 = (OneHandedAnimationController.OneHandedTransitionAnimator) oneHandedAnimationController.mAnimatorMap.get(windowContainerToken);
                 if (oneHandedTransitionAnimator2 != null) {

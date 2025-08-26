@@ -91,9 +91,9 @@ public interface IUriGrantsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUriGrantsManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUriGrantsManager)) {
-                return (IUriGrantsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUriGrantsManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUriGrantsManager)) {
+                return (IUriGrantsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -136,68 +136,68 @@ public interface IUriGrantsManager extends IInterface {
             switch (i) {
                 case 1:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    takePersistableUriPermission(uri, readInt, readString, readInt2);
+                    takePersistableUriPermission(uri, i3, string, i4);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    releasePersistableUriPermission(uri2, readInt3, readString2, readInt4);
+                    releasePersistableUriPermission(uri2, i5, string2, i6);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt5 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i7 = parcel.readInt();
+                    String string3 = parcel.readString();
                     Uri uri3 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    grantUriPermissionFromOwner(readStrongBinder, readInt5, readString3, uri3, readInt6, readInt7, readInt8);
+                    grantUriPermissionFromOwner(strongBinder, i7, string3, uri3, i8, i9, i10);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice grantedUriPermissions = getGrantedUriPermissions(readString4, readInt9);
+                    ParceledListSlice grantedUriPermissions = getGrantedUriPermissions(string4, i11);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(grantedUriPermissions, 1);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearGrantedUriPermissions(readString5, readInt10);
+                    clearGrantedUriPermissions(string5, i12);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string6 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice uriPermissions = getUriPermissions(readString6, readBoolean, readBoolean2);
+                    ParceledListSlice uriPermissions = getUriPermissions(string6, z, z2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(uriPermissions, 1);
                     return true;
                 case 7:
-                    int readInt11 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string7 = parcel.readString();
                     Uri uri4 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkGrantUriPermission_ignoreNonSystem = checkGrantUriPermission_ignoreNonSystem(readInt11, readString7, uri4, readInt12, readInt13);
+                    int iCheckGrantUriPermission_ignoreNonSystem = checkGrantUriPermission_ignoreNonSystem(i13, string7, uri4, i14, i15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkGrantUriPermission_ignoreNonSystem);
+                    parcel2.writeInt(iCheckGrantUriPermission_ignoreNonSystem);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -222,129 +222,129 @@ public interface IUriGrantsManager extends IInterface {
 
             @Override // android.app.IUriGrantsManager
             public void takePersistableUriPermission(Uri uri, int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public void releasePersistableUriPermission(Uri uri, int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public void grantUriPermissionFromOwner(IBinder iBinder, int i, String str, Uri uri, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public ParceledListSlice getGrantedUriPermissions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public void clearGrantedUriPermissions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public ParceledListSlice getUriPermissions(String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUriGrantsManager
             public int checkGrantUriPermission_ignoreNonSystem(int i, String str, Uri uri, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IUriGrantsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

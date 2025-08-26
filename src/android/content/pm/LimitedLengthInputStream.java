@@ -55,9 +55,9 @@ public class LimitedLengthInputStream extends FilterInputStream {
         if (j3 > j4) {
             i2 = (int) (j4 - j);
         }
-        int read = super.read(bArr, i, i2);
-        this.mOffset += read;
-        return read;
+        int i3 = super.read(bArr, i, i2);
+        this.mOffset += i3;
+        return i3;
     }
 
     @Override // java.io.FilterInputStream, java.io.InputStream

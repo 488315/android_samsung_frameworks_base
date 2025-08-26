@@ -140,13 +140,13 @@ public abstract class InputEventReceiver {
                 if (this.mReceiverPtr == 0) {
                     Log.w(TAG, "Attempted to finish an input event but the input event receiver has already been disposed.");
                 } else {
-                    int indexOfKey = this.mSeqMap.indexOfKey(inputEvent.getSequenceNumber());
-                    if (indexOfKey < 0) {
+                    int iIndexOfKey = this.mSeqMap.indexOfKey(inputEvent.getSequenceNumber());
+                    if (iIndexOfKey < 0) {
                         Log.w(TAG, "Attempted to finish an input event that is not in progress.");
                     } else {
-                        int valueAt = this.mSeqMap.valueAt(indexOfKey);
-                        this.mSeqMap.removeAt(indexOfKey);
-                        nativeFinishInputEvent(this.mReceiverPtr, valueAt, z);
+                        int iValueAt = this.mSeqMap.valueAt(iIndexOfKey);
+                        this.mSeqMap.removeAt(iIndexOfKey);
+                        nativeFinishInputEvent(this.mReceiverPtr, iValueAt, z);
                     }
                 }
                 inputEvent.recycleIfNeededAfterDispatch();

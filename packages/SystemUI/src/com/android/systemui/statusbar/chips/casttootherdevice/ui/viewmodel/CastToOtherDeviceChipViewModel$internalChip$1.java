@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CastToOtherDeviceChipViewModel$internalChip$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -44,11 +43,11 @@ final class CastToOtherDeviceChipViewModel$internalChip$1 extends SuspendLambda 
         OngoingActivityChipModel ongoingActivityChipModel = (OngoingActivityChipModel) this.L$0;
         OngoingActivityChipModel ongoingActivityChipModel2 = (OngoingActivityChipModel) this.L$1;
         LogBuffer logBuffer = this.this$0.logger;
-        LogMessage obtain = logBuffer.obtain(CastToOtherDeviceChipViewModel.TAG, LogLevel.INFO, new CastToOtherDeviceChipViewModel$$ExternalSyntheticLambda0(2), null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(CastToOtherDeviceChipViewModel.TAG, LogLevel.INFO, new CastToOtherDeviceChipViewModel$$ExternalSyntheticLambda0(2), null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = ongoingActivityChipModel.getLogName();
         logMessageImpl.str2 = ongoingActivityChipModel2.getLogName();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return ongoingActivityChipModel instanceof OngoingActivityChipModel.Active ? ongoingActivityChipModel : ongoingActivityChipModel2;
     }
 }

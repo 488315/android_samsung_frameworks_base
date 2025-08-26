@@ -3,7 +3,6 @@ package io.reactivex.internal.util;
 import io.reactivex.Observer;
 import io.reactivex.internal.util.NotificationLite;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AppendOnlyLinkedArrayList {
     public final int capacity;
@@ -29,22 +28,23 @@ public class AppendOnlyLinkedArrayList {
             }
             while (true) {
                 i = this.capacity;
-                if (i2 < i && (obj = objArr[i2]) != null) {
-                    if (obj == NotificationLite.COMPLETE) {
-                        observer.onComplete();
-                        return true;
-                    }
-                    if (obj instanceof NotificationLite.ErrorNotification) {
-                        observer.onError(((NotificationLite.ErrorNotification) obj).e);
-                        return true;
-                    }
-                    if (obj instanceof NotificationLite.DisposableNotification) {
-                        observer.onSubscribe(((NotificationLite.DisposableNotification) obj).upstream);
-                    } else {
-                        observer.onNext(obj);
-                    }
-                    i2++;
+                if (i2 >= i || (obj = objArr[i2]) == null) {
+                    break;
                 }
+                if (obj == NotificationLite.COMPLETE) {
+                    observer.onComplete();
+                    return true;
+                }
+                if (obj instanceof NotificationLite.ErrorNotification) {
+                    observer.onError(((NotificationLite.ErrorNotification) obj).e);
+                    return true;
+                }
+                if (obj instanceof NotificationLite.DisposableNotification) {
+                    observer.onSubscribe(((NotificationLite.DisposableNotification) obj).upstream);
+                } else {
+                    observer.onNext(obj);
+                }
+                i2++;
             }
             objArr = objArr[i];
         }

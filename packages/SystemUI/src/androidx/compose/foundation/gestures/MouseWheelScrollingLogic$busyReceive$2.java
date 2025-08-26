@@ -13,7 +13,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.channels.Channel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MouseWheelScrollingLogic$busyReceive$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Channel $this_busyReceive;
@@ -39,27 +38,27 @@ final class MouseWheelScrollingLogic$busyReceive$2 extends SuspendLambda impleme
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         Throwable th;
         Job job;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            StandaloneCoroutine launch$default = BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new MouseWheelScrollingLogic$busyReceive$2$job$1(null), 3);
+            StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new MouseWheelScrollingLogic$busyReceive$2$job$1(null), 3);
             try {
                 Channel channel = this.$this_busyReceive;
-                this.L$0 = launch$default;
+                this.L$0 = standaloneCoroutineLaunch$default;
                 this.label = 1;
-                Object receive = channel.receive(this);
-                if (receive == coroutineSingletons) {
+                Object objReceive = channel.receive(this);
+                if (objReceive == coroutineSingletons) {
                     return coroutineSingletons;
                 }
-                obj = receive;
-                job = launch$default;
+                obj = objReceive;
+                job = standaloneCoroutineLaunch$default;
             } catch (Throwable th2) {
                 th = th2;
-                job = launch$default;
+                job = standaloneCoroutineLaunch$default;
                 job.cancel(null);
                 throw th;
             }

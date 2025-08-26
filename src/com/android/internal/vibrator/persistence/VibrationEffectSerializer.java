@@ -32,8 +32,8 @@ public class VibrationEffectSerializer {
         List<VibrationEffectSegment> segments = composed.getSegments();
         int repeatIndex = composed.getRepeatIndex();
         if (repeatIndex >= 0) {
-            SerializedComposedEffect trySerializeRepeatingAmplitudeWaveformEffect = trySerializeRepeatingAmplitudeWaveformEffect(segments, repeatIndex);
-            return trySerializeRepeatingAmplitudeWaveformEffect == null ? serializeRepeatingEffect(segments, repeatIndex, i) : trySerializeRepeatingAmplitudeWaveformEffect;
+            SerializedComposedEffect serializedComposedEffectTrySerializeRepeatingAmplitudeWaveformEffect = trySerializeRepeatingAmplitudeWaveformEffect(segments, repeatIndex);
+            return serializedComposedEffectTrySerializeRepeatingAmplitudeWaveformEffect == null ? serializeRepeatingEffect(segments, repeatIndex, i) : serializedComposedEffectTrySerializeRepeatingAmplitudeWaveformEffect;
         }
         return serializeNonRepeatingEffect(segments, i);
     }
@@ -49,13 +49,13 @@ public class VibrationEffectSerializer {
     }
 
     private static SerializedComposedEffect serializeNonRepeatingEffect(List<VibrationEffectSegment> list, int i) throws XmlSerializerException {
-        SerializedComposedEffect trySerializeNonWaveformEffect = trySerializeNonWaveformEffect(list, i);
-        return trySerializeNonWaveformEffect == null ? serializeWaveformEffect(list) : trySerializeNonWaveformEffect;
+        SerializedComposedEffect serializedComposedEffectTrySerializeNonWaveformEffect = trySerializeNonWaveformEffect(list, i);
+        return serializedComposedEffectTrySerializeNonWaveformEffect == null ? serializeWaveformEffect(list) : serializedComposedEffectTrySerializeNonWaveformEffect;
     }
 
     private static SerializedComposedEffect serializeEffectEntries(List<VibrationEffectSegment> list, int i) throws XmlSerializerException {
-        SerializedComposedEffect trySerializeNonWaveformEffect = trySerializeNonWaveformEffect(list, i);
-        return trySerializeNonWaveformEffect == null ? serializeWaveformEffectEntries(list) : trySerializeNonWaveformEffect;
+        SerializedComposedEffect serializedComposedEffectTrySerializeNonWaveformEffect = trySerializeNonWaveformEffect(list, i);
+        return serializedComposedEffectTrySerializeNonWaveformEffect == null ? serializeWaveformEffectEntries(list) : serializedComposedEffectTrySerializeNonWaveformEffect;
     }
 
     private static SerializedComposedEffect trySerializeNonWaveformEffect(List<VibrationEffectSegment> list, int i) throws XmlSerializerException {
@@ -147,7 +147,7 @@ public class VibrationEffectSerializer {
             serializeStepSegment(list.get(i), new BiConsumer() { // from class: com.android.internal.vibrator.persistence.VibrationEffectSerializer$$ExternalSyntheticLambda1
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    SerializedWaveformEffectEntries.Builder.this.addDurationAndAmplitude(((Long) obj).longValue(), ((Integer) obj2).intValue());
+                    builder.addDurationAndAmplitude(((Long) obj).longValue(), ((Integer) obj2).intValue());
                 }
             });
         }
@@ -164,28 +164,28 @@ public class VibrationEffectSerializer {
     private static SerializedPredefinedEffect serializePrebakedSegment(VibrationEffectSegment vibrationEffectSegment, int i) throws XmlSerializerException {
         XmlValidator.checkSerializerCondition(vibrationEffectSegment instanceof PrebakedSegment, "Unsupported segment for predefined effect %s", vibrationEffectSegment);
         PrebakedSegment prebakedSegment = (PrebakedSegment) vibrationEffectSegment;
-        XmlConstants.PredefinedEffectName findById = XmlConstants.PredefinedEffectName.findById(prebakedSegment.getEffectId(), i);
-        XmlValidator.checkSerializerCondition(findById != null, "Unsupported predefined effect id %s", Integer.valueOf(prebakedSegment.getEffectId()));
+        XmlConstants.PredefinedEffectName predefinedEffectNameFindById = XmlConstants.PredefinedEffectName.findById(prebakedSegment.getEffectId(), i);
+        XmlValidator.checkSerializerCondition(predefinedEffectNameFindById != null, "Unsupported predefined effect id %s", Integer.valueOf(prebakedSegment.getEffectId()));
         if ((i & 1) == 0) {
             XmlValidator.checkSerializerCondition(prebakedSegment.shouldFallback(), "Unsupported predefined effect with should fallback %s", Boolean.valueOf(prebakedSegment.shouldFallback()));
         }
-        return new SerializedPredefinedEffect(findById, prebakedSegment.shouldFallback());
+        return new SerializedPredefinedEffect(predefinedEffectNameFindById, prebakedSegment.shouldFallback());
     }
 
     private static SerializedCompositionPrimitive serializePrimitiveSegment(VibrationEffectSegment vibrationEffectSegment) throws XmlSerializerException {
-        XmlConstants.PrimitiveDelayType primitiveDelayType;
+        XmlConstants.PrimitiveDelayType primitiveDelayTypeFindByType;
         XmlValidator.checkSerializerCondition(vibrationEffectSegment instanceof PrimitiveSegment, "Unsupported segment for primitive composition %s", vibrationEffectSegment);
         PrimitiveSegment primitiveSegment = (PrimitiveSegment) vibrationEffectSegment;
-        XmlConstants.PrimitiveEffectName findById = XmlConstants.PrimitiveEffectName.findById(primitiveSegment.getPrimitiveId());
-        XmlValidator.checkSerializerCondition(findById != null, "Unsupported primitive effect id %s", Integer.valueOf(primitiveSegment.getPrimitiveId()));
+        XmlConstants.PrimitiveEffectName primitiveEffectNameFindById = XmlConstants.PrimitiveEffectName.findById(primitiveSegment.getPrimitiveId());
+        XmlValidator.checkSerializerCondition(primitiveEffectNameFindById != null, "Unsupported primitive effect id %s", Integer.valueOf(primitiveSegment.getPrimitiveId()));
         if (Flags.primitiveCompositionAbsoluteDelay()) {
-            primitiveDelayType = XmlConstants.PrimitiveDelayType.findByType(primitiveSegment.getDelayType());
-            XmlValidator.checkSerializerCondition(primitiveDelayType != null, "Unsupported primitive delay type %s", Integer.valueOf(primitiveSegment.getDelayType()));
+            primitiveDelayTypeFindByType = XmlConstants.PrimitiveDelayType.findByType(primitiveSegment.getDelayType());
+            XmlValidator.checkSerializerCondition(primitiveDelayTypeFindByType != null, "Unsupported primitive delay type %s", Integer.valueOf(primitiveSegment.getDelayType()));
         } else {
             XmlValidator.checkSerializerCondition(primitiveSegment.getDelayType() == 0, "Unsupported primitive delay type %s", Integer.valueOf(primitiveSegment.getDelayType()));
-            primitiveDelayType = null;
+            primitiveDelayTypeFindByType = null;
         }
-        return new SerializedCompositionPrimitive(findById, primitiveSegment.getScale(), primitiveSegment.getDelay(), primitiveDelayType);
+        return new SerializedCompositionPrimitive(primitiveEffectNameFindById, primitiveSegment.getScale(), primitiveSegment.getDelay(), primitiveDelayTypeFindByType);
     }
 
     private static int toAmplitudeInt(float f) {

@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.android.wifitrackerlib.WifiEntry;
 import java.util.StringJoiner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MergedCarrierEntry extends WifiEntry {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +43,7 @@ public class MergedCarrierEntry extends WifiEntry {
             this.mCallbackHandler.post(new Runnable() { // from class: com.android.wifitrackerlib.MergedCarrierEntry$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MergedCarrierEntry mergedCarrierEntry = MergedCarrierEntry.this;
+                    MergedCarrierEntry mergedCarrierEntry = this.f$0;
                     int i = MergedCarrierEntry.$r8$clinit;
                     WifiEntry.ConnectCallback connectCallback2 = mergedCarrierEntry.mConnectCallback;
                     if (connectCallback2 != null) {

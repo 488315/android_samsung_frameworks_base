@@ -44,9 +44,9 @@ public interface IScreenCaptureObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IScreenCaptureObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScreenCaptureObserver)) {
-                return (IScreenCaptureObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IScreenCaptureObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScreenCaptureObserver)) {
+                return (IScreenCaptureObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IScreenCaptureObserver extends IInterface {
 
             @Override // android.app.IScreenCaptureObserver
             public void onScreenCaptured() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScreenCaptureObserver.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScreenCaptureObserver.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

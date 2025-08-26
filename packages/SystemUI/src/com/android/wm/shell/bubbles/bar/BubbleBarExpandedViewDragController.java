@@ -50,7 +50,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function5;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleBarExpandedViewDragController {
     public final BubbleBarAnimationHelper animationHelper;
@@ -67,11 +66,9 @@ public final class BubbleBarExpandedViewDragController {
     public final MagnetizedObject$Companion$magnetizeView$1 magnetizedExpandedView;
     public final BubbleExpandedViewPinController pinController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DragListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HandleDragListener extends RelativeTouchListener {
         public boolean isMoving;
 
@@ -115,19 +112,19 @@ public final class BubbleBarExpandedViewDragController {
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         public AnonymousClass8(final BubbleBarExpandedView expandedView2, final BubbleBarExpandedView expandedView22) {
                             super(expandedView22);
-                            r3 = expandedView22;
+                            bubbleBarExpandedView = expandedView22;
                         }
 
                         @Override // com.android.wm.shell.bubbles.bar.BubbleBarAnimationHelper.DragAnimatorListenerAdapter, android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
                             super.onAnimationEnd(animator);
-                            r3.resetPivot();
-                            BubbleBarExpandedView bubbleBarExpandedView = r3;
+                            bubbleBarExpandedView.resetPivot();
+                            BubbleBarExpandedView bubbleBarExpandedView = bubbleBarExpandedView;
                             if (bubbleBarExpandedView.mIsDragging) {
                                 bubbleBarExpandedView.mIsDragging = false;
                                 bubbleBarExpandedView.updateSamplingState();
                             }
-                            BubbleBarAnimationHelper.this.updateExpandedView(r3);
+                            BubbleBarAnimationHelper.this.updateExpandedView(bubbleBarExpandedView);
                         }
                     });
                     bubbleBarAnimationHelper.startNewAnimator(animatorSet2);
@@ -147,8 +144,8 @@ public final class BubbleBarExpandedViewDragController {
 
         @Override // com.android.wm.shell.shared.bubbles.RelativeTouchListener
         public final boolean onDown(View view, MotionEvent motionEvent) {
-            List asList;
-            List createHorizontalSplitDragZonesForExpandedView;
+            List listAsList;
+            List listCreateHorizontalSplitDragZonesForExpandedView;
             BubbleBarExpandedViewDragController bubbleBarExpandedViewDragController = BubbleBarExpandedViewDragController.this;
             BubbleBarExpandedView bubbleBarExpandedView = bubbleBarExpandedViewDragController.expandedView;
             if (bubbleBarExpandedView.mIsAnimating) {
@@ -159,17 +156,17 @@ public final class BubbleBarExpandedViewDragController {
             DropTargetManager dropTargetManager = bubbleBarExpandedViewDragController2.dropTargetManager;
             BubblePositioner bubblePositioner = bubbleBarExpandedViewDragController2.bubblePositioner;
             if (dropTargetManager == null || bubbleBarExpandedViewDragController2.dragZoneFactory == null) {
-                boolean isBubbleBarOnLeft = bubblePositioner.isBubbleBarOnLeft();
+                boolean zIsBubbleBarOnLeft = bubblePositioner.isBubbleBarOnLeft();
                 BubbleExpandedViewPinController bubbleExpandedViewPinController = bubbleBarExpandedViewDragController2.pinController;
-                bubbleExpandedViewPinController.initialLocationOnLeft = isBubbleBarOnLeft;
-                bubbleExpandedViewPinController.onLeft = isBubbleBarOnLeft;
+                bubbleExpandedViewPinController.initialLocationOnLeft = zIsBubbleBarOnLeft;
+                bubbleExpandedViewPinController.onLeft = zIsBubbleBarOnLeft;
                 bubbleExpandedViewPinController.screenCenterX = ((Point) bubbleExpandedViewPinController.screenSizeProvider.invoke()).x / 2;
                 RectF rectF = new RectF(0.0f, 0.0f, ((Number) bubbleExpandedViewPinController.exclRectWidth$delegate.getValue()).floatValue(), ((Number) bubbleExpandedViewPinController.exclRectHeight$delegate.getValue()).floatValue());
                 rectF.offsetTo(bubbleExpandedViewPinController.screenCenterX - (rectF.width() / 2), ((Point) r1.invoke()).y - rectF.height());
                 bubbleExpandedViewPinController.dismissZone = rectF;
                 BubbleBarLayerView.LocationChangeListener locationChangeListener = bubbleExpandedViewPinController.listener;
                 if (locationChangeListener != null) {
-                    locationChangeListener.mInitialLocation = isBubbleBarOnLeft ? BubbleBarLocation.LEFT : BubbleBarLocation.RIGHT;
+                    locationChangeListener.mInitialLocation = zIsBubbleBarOnLeft ? BubbleBarLocation.LEFT : BubbleBarLocation.RIGHT;
                 }
             } else {
                 DraggedObject.ExpandedView expandedView = new DraggedObject.ExpandedView(bubblePositioner.isBubbleBarOnLeft() ? BubbleBarLocation.LEFT : BubbleBarLocation.RIGHT);
@@ -194,33 +191,33 @@ public final class BubbleBarExpandedViewDragController {
                         ((BubbleBarLayerView.AnonymousClass2) splitScreenModeChecker).getClass();
                         int i2 = DragZoneFactory.WhenMappings.$EnumSwitchMapping$0[DragZoneFactory.SplitScreenModeChecker.SplitScreenMode.UNSUPPORTED.ordinal()];
                         if (i2 == 1) {
-                            createHorizontalSplitDragZonesForExpandedView = EmptyList.INSTANCE;
+                            listCreateHorizontalSplitDragZonesForExpandedView = EmptyList.INSTANCE;
                         } else if (i2 == 2 || i2 == 3) {
                             int i3 = dragZoneFactory.fullScreenDragZoneHeight;
                             DragZone.Split.Top top = new DragZone.Split.Top(new Rect(i, i3, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i3));
                             int i4 = deviceConfig.windowBounds.bottom / 2;
-                            createHorizontalSplitDragZonesForExpandedView = Arrays.asList(top, new DragZone.Split.Bottom(new Rect(i, i4, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i4)));
+                            listCreateHorizontalSplitDragZonesForExpandedView = Arrays.asList(top, new DragZone.Split.Bottom(new Rect(i, i4, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i4)));
                         } else if (i2 == 4) {
                             int i5 = dragZoneFactory.fullScreenDragZoneHeight;
                             DragZone.Split.Top top2 = new DragZone.Split.Top(new Rect(i, i5, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i5));
                             Rect rect = deviceConfig.windowBounds;
                             int i6 = rect.bottom;
-                            createHorizontalSplitDragZonesForExpandedView = Arrays.asList(top2, new DragZone.Split.Bottom(new Rect(0, i6 - dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldShort, rect.right, i6)));
+                            listCreateHorizontalSplitDragZonesForExpandedView = Arrays.asList(top2, new DragZone.Split.Bottom(new Rect(0, i6 - dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldShort, rect.right, i6)));
                         } else {
                             if (i2 != 5) {
                                 throw new NoWhenBranchMatchedException();
                             }
                             DragZone.Split.Top top3 = new DragZone.Split.Top(new Rect(0, 0, deviceConfig.windowBounds.right, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldShort));
                             int i7 = dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldShort;
-                            createHorizontalSplitDragZonesForExpandedView = Arrays.asList(top3, new DragZone.Split.Bottom(new Rect(i, i7, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i7)));
+                            listCreateHorizontalSplitDragZonesForExpandedView = Arrays.asList(top3, new DragZone.Split.Bottom(new Rect(i, i7, dragZoneFactory.fullScreenDragZoneWidth + i, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightFoldTall + i7)));
                         }
                     } else {
-                        createHorizontalSplitDragZonesForExpandedView = dragZoneFactory.createHorizontalSplitDragZonesForExpandedView();
+                        listCreateHorizontalSplitDragZonesForExpandedView = dragZoneFactory.createHorizontalSplitDragZonesForExpandedView();
                     }
-                    arrayList.addAll(createHorizontalSplitDragZonesForExpandedView);
+                    arrayList.addAll(listCreateHorizontalSplitDragZonesForExpandedView);
                 } else {
                     if (z2) {
-                        asList = dragZoneFactory.createHorizontalSplitDragZonesForExpandedView();
+                        listAsList = dragZoneFactory.createHorizontalSplitDragZonesForExpandedView();
                     } else {
                         Rect rect2 = deviceConfig.windowBounds;
                         int i8 = rect2.right / 2;
@@ -229,9 +226,9 @@ public final class BubbleBarExpandedViewDragController {
                         int i11 = i9 + i10;
                         int i12 = rect2.bottom - dragZoneFactory.dismissDragZoneSize;
                         int i13 = dragZoneFactory.fullScreenDragZoneHeight;
-                        asList = Arrays.asList(new DragZone.Split.Top(new Rect(i10, i13, i11, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightTablet + i13)), new DragZone.Split.Bottom(new Rect(i10, i12 - dragZoneFactory.vSplitFromExpandedViewDragZoneHeightTablet, i11, i12)));
+                        listAsList = Arrays.asList(new DragZone.Split.Top(new Rect(i10, i13, i11, dragZoneFactory.vSplitFromExpandedViewDragZoneHeightTablet + i13)), new DragZone.Split.Bottom(new Rect(i10, i12 - dragZoneFactory.vSplitFromExpandedViewDragZoneHeightTablet, i11, i12)));
                     }
-                    arrayList.addAll(asList);
+                    arrayList.addAll(listAsList);
                 }
                 arrayList.addAll(dragZoneFactory.createBubbleHalfScreenDragZones());
                 dropTargetManager2.getClass();
@@ -262,7 +259,7 @@ public final class BubbleBarExpandedViewDragController {
         @Override // com.android.wm.shell.shared.bubbles.RelativeTouchListener
         public final void onMove(View view, MotionEvent motionEvent, float f, float f2, float f3, float f4) {
             View view2;
-            Object obj;
+            Object next;
             DragZone dragZone;
             if (!this.isMoving) {
                 this.isMoving = true;
@@ -319,8 +316,8 @@ public final class BubbleBarExpandedViewDragController {
                             bubbleExpandedViewPinController.animateOut(dropTargetView, new Runnable() { // from class: com.android.wm.shell.shared.bubbles.BaseBubblePinController$showDropTarget$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    BaseBubblePinController.this.updateLocation(bubbleBarLocation);
-                                    BaseBubblePinController.this.animateIn(dropTargetView);
+                                    bubbleExpandedViewPinController.updateLocation(bubbleBarLocation);
+                                    bubbleExpandedViewPinController.animateIn(dropTargetView);
                                 }
                             });
                         } else {
@@ -349,16 +346,16 @@ public final class BubbleBarExpandedViewDragController {
             Iterator it = dragState.dragZones.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 } else {
-                    obj = it.next();
-                    if (((DragZone) obj).getBounds().contains(rawX2, rawY2)) {
+                    next = it.next();
+                    if (((DragZone) next).getBounds().contains(rawX2, rawY2)) {
                         break;
                     }
                 }
             }
-            DragZone dragZone3 = (DragZone) obj;
+            DragZone dragZone3 = (DragZone) next;
             if (dragZone3 == null) {
                 dragZone3 = dragState.currentDragZone;
             }
@@ -401,34 +398,34 @@ public final class BubbleBarExpandedViewDragController {
             }
             final float alpha = dropTargetView2.getAlpha();
             final RectF rectF2 = new RectF(dropTargetView2.rect);
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.setDuration(250L);
-            ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$startMorphAnimation$1
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.setDuration(250L);
+            valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$startMorphAnimation$1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(androidx.core.animation.Animator animator) {
-                    float floatValue = ((Float) ValueAnimator.this.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue();
                     DropTargetManager dropTargetManager2 = dropTargetManager;
                     DropTargetView dropTargetView3 = dropTargetManager2.dropTargetView;
                     float f6 = alpha;
-                    dropTargetView3.setAlpha(((1 - f6) * floatValue) + f6);
+                    dropTargetView3.setAlpha(((1 - f6) * fFloatValue) + f6);
                     RectF rectF3 = dropTargetManager2.morphRect;
                     RectF rectF4 = rectF2;
                     float f7 = rectF4.left;
                     Rect rect = dropTarget;
-                    rectF3.left = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.left, f7, floatValue, f7);
+                    rectF3.left = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.left, f7, fFloatValue, f7);
                     float f8 = rectF4.top;
-                    rectF3.top = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.top, f8, floatValue, f8);
+                    rectF3.top = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.top, f8, fFloatValue, f8);
                     float f9 = rectF4.right;
-                    rectF3.right = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.right, f9, floatValue, f9);
+                    rectF3.right = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.right, f9, fFloatValue, f9);
                     float f10 = rectF4.bottom;
-                    rectF3.bottom = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.bottom, f10, floatValue, f10);
+                    rectF3.bottom = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(rect.bottom, f10, fFloatValue, f10);
                     DropTargetView dropTargetView4 = dropTargetManager2.dropTargetView;
                     dropTargetView4.rect.set(rectF3);
                     dropTargetView4.invalidate();
                 }
             });
-            dropTargetManager.animator = ofFloat;
-            ofFloat.start(false);
+            dropTargetManager.animator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.start(false);
         }
 
         @Override // com.android.wm.shell.shared.bubbles.RelativeTouchListener
@@ -438,7 +435,6 @@ public final class BubbleBarExpandedViewDragController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MagnetListener implements MagnetizedObject.MagnetListener {
         public MagnetListener() {
         }
@@ -564,11 +560,11 @@ public final class BubbleBarExpandedViewDragController {
                 ((Float) obj3).getClass();
                 ((Boolean) obj4).getClass();
                 final Function0 function0 = (Function0) obj5;
-                BubbleBarExpandedViewDragController bubbleBarExpandedViewDragController = BubbleBarExpandedViewDragController.this;
+                BubbleBarExpandedViewDragController bubbleBarExpandedViewDragController = this.f$0;
                 Runnable runnable = function0 != null ? new Runnable() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarExpandedViewDragController$sam$java_lang_Runnable$0
                     @Override // java.lang.Runnable
                     public final /* synthetic */ void run() {
-                        Function0.this.invoke();
+                        function0.invoke();
                     }
                 } : null;
                 BubbleBarAnimationHelper bubbleBarAnimationHelper2 = bubbleBarExpandedViewDragController.animationHelper;
@@ -633,13 +629,13 @@ public final class BubbleBarExpandedViewDragController {
                     BubbleBarExpandedViewDragController bubbleBarExpandedViewDragController2 = BubbleBarExpandedViewDragController.this;
                     bubbleBarExpandedViewDragController2.expandedViewInitialTranslationY = bubbleBarExpandedViewDragController2.expandedView.getTranslationY();
                 }
-                boolean maybeConsumeMotionEvent = maybeConsumeMotionEvent(motionEvent);
-                if (motionEvent.getActionMasked() == 2 && maybeConsumeMotionEvent) {
+                boolean zMaybeConsumeMotionEvent = maybeConsumeMotionEvent(motionEvent);
+                if (motionEvent.getActionMasked() == 2 && zMaybeConsumeMotionEvent) {
                     return true;
                 }
                 HandleDragListener handleDragListener2 = handleDragListener;
                 view.getClass();
-                return handleDragListener2.onTouch(view, motionEvent) || maybeConsumeMotionEvent;
+                return handleDragListener2.onTouch(view, motionEvent) || zMaybeConsumeMotionEvent;
             }
         });
     }

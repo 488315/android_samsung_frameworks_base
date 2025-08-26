@@ -9,6 +9,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
@@ -18,6 +19,9 @@ import com.android.systemui.R;
 import com.android.systemui.animation.Expandable;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.keyguard.DisplayLifecycle;
+import com.android.systemui.knox.EdmMonitor;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.QSTile;
@@ -32,15 +36,17 @@ import com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper;
 import com.android.systemui.statusbar.policy.ZenModeController;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SoundModeTile extends SQSTileImpl {
     public static final Intent SOUNDMODE_SETTINGS;
     public static final String[] SOUND_MODE_LOGGING_VALUE = null;
     public static final int[] SOUND_MODE_MUTE_ALL_SOUNDS_TEXT;
     public static final int[] SOUND_MODE_TEXT;
+    public static final int[] SOUND_MUTE_TEXT;
+    public static final int[] SOUND_VIBRATE_MUTE_TEXT;
     public final QSTileImpl.AnimationIcon[] SOUND_MODE_ICON;
     public final QSTile.Icon[] SOUND_MODE_MUTE_ALL_ICON;
     public final DisplayLifecycle mDisplayLifecycle;
@@ -49,7 +55,6 @@ public class SoundModeTile extends SQSTileImpl {
     public final QSTile.Icon mMuteAllSound;
     public final AnonymousClass1 mReceiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.SoundModeTile$1, reason: invalid class name */
     public class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {
@@ -115,6 +120,8 @@ public class SoundModeTile extends SQSTileImpl {
         SOUNDMODE_SETTINGS = new Intent("android.settings.SOUND_SETTINGS");
         SOUND_MODE_TEXT = new int[]{R.string.quick_settings_sound_mode_mute_label, R.string.quick_settings_sound_mode_vibrate_label, R.string.quick_settings_sound_mode_sound_label};
         SOUND_MODE_MUTE_ALL_SOUNDS_TEXT = new int[]{R.string.quick_settings_sound_mode_mute_label, R.string.quick_settings_sound_mode_vibrate_label, R.string.quick_settings_sound_mode_mute_all_sound_label};
+        SOUND_VIBRATE_MUTE_TEXT = new int[]{R.string.subscreen_sound_mode_talkback_sound_label, R.string.subscreen_sound_mode_talkback_mute_label, R.string.subscreen_sound_mode_talkback_vibrate_label};
+        SOUND_MUTE_TEXT = new int[]{R.string.subscreen_sound_mode_talkback_sound_label, R.string.subscreen_sound_mode_talkback_vibrate_label, R.string.subscreen_sound_mode_talkback_mute_label};
     }
 
     public SoundModeTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, SettingsHelper settingsHelper, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, ZenModeController zenModeController, DisplayLifecycle displayLifecycle) {
@@ -176,121 +183,59 @@ public class SoundModeTile extends SQSTileImpl {
         return SecStatusBarAudioManagerHelper.getInstance(this.mContext).getRingerMode(false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x009b, code lost:
-    
-        if (r6.mSettingsChangesAllowed == false) goto L37;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x001f  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001c  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleClick(com.android.systemui.animation.Expandable r6) {
-        /*
-            r5 = this;
-            com.android.systemui.Dependency r6 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.knox.KnoxStateMonitor> r0 = com.android.systemui.knox.KnoxStateMonitor.class
-            java.lang.Object r6 = r6.getDependencyInner(r0)
-            com.android.systemui.knox.KnoxStateMonitor r6 = (com.android.systemui.knox.KnoxStateMonitor) r6
-            com.android.systemui.knox.KnoxStateMonitorImpl r6 = (com.android.systemui.knox.KnoxStateMonitorImpl) r6
-            com.android.systemui.knox.EdmMonitor r6 = r6.mEdmMonitor
-            r1 = 0
-            r2 = 1
-            if (r6 == 0) goto L1c
-            com.android.systemui.knox.KnoxStateMonitorImpl r3 = r6.knoxStateMonitor
-            android.content.Context r3 = r3.mContext
-            boolean r6 = r6.mSettingsChangesAllowed
-            if (r6 != 0) goto L1c
-            r6 = r2
-            goto L1d
-        L1c:
-            r6 = r1
-        L1d:
-            if (r6 == 0) goto L2f
-            boolean r6 = com.android.systemui.QpRune.QUICK_SUBSCREEN_PANEL
-            if (r6 == 0) goto L2b
-            android.content.Context r6 = r5.getSubScreenContext()
-            r5.showItPolicyToastOnSubScreen(r6)
-            return
-        L2b:
-            r5.showItPolicyToast()
-            return
-        L2f:
-            boolean r6 = r5.isVolumeRestricted$1()
-            if (r6 == 0) goto L46
-            android.content.Context r5 = r5.mContext
-            r6 = 17040641(0x1040501, float:2.424816E-38)
-            java.lang.String r6 = r5.getString(r6)
-            android.widget.Toast r5 = android.widget.Toast.makeText(r5, r6, r2)
-            r5.show()
-            return
-        L46:
-            com.android.internal.logging.MetricsLogger r6 = r5.mMetricsLogger
-            if (r6 == 0) goto L56
-            com.android.systemui.plugins.qs.QSTile$State r3 = r5.mState
-            com.android.systemui.plugins.qs.QSTile$BooleanState r3 = (com.android.systemui.plugins.qs.QSTile.BooleanState) r3
-            boolean r3 = r3.value
-            r3 = r3 ^ r2
-            r4 = 5002(0x138a, float:7.009E-42)
-            r6.action(r4, r3)
-        L56:
-            android.content.Context r6 = r5.mContext
-            com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper r6 = com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper.getInstance(r6)
-            int r6 = r6.getRingerMode(r1)
-            if (r6 != r2) goto L63
-            goto L79
-        L63:
-            r1 = 2
-            if (r6 != r1) goto L6d
-            android.content.Context r6 = r5.mContext
-            boolean r1 = com.android.systemui.util.DeviceType.isVibratorSupported(r6)
-            goto L79
-        L6d:
-            boolean r6 = r5.isSystemSettingAllSoundOff()
-            if (r6 == 0) goto L79
-            android.content.Context r6 = r5.mContext
-            boolean r1 = com.android.systemui.util.DeviceType.isVibratorSupported(r6)
-        L79:
-            java.lang.String r6 = "setSoundProfile(soundProfile:"
-            java.lang.String r2 = ", detailSet:false)"
-            java.lang.String r6 = androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(r1, r6, r2)
-            java.lang.String r2 = r5.TAG
-            android.util.Log.d(r2, r6)
-            com.android.systemui.Dependency r6 = com.android.systemui.Dependency.sDependency
-            java.lang.Object r6 = r6.getDependencyInner(r0)
-            com.android.systemui.knox.KnoxStateMonitor r6 = (com.android.systemui.knox.KnoxStateMonitor) r6
-            com.android.systemui.knox.KnoxStateMonitorImpl r6 = (com.android.systemui.knox.KnoxStateMonitorImpl) r6
-            com.android.systemui.knox.EdmMonitor r6 = r6.mEdmMonitor
-            if (r6 == 0) goto L9e
-            com.android.systemui.knox.KnoxStateMonitorImpl r0 = r6.knoxStateMonitor
-            android.content.Context r0 = r0.mContext
-            boolean r6 = r6.mSettingsChangesAllowed
-            if (r6 != 0) goto L9e
-            goto La7
-        L9e:
-            android.content.Context r6 = r5.mContext
-            com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper r6 = com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper.getInstance(r6)
-            r6.setRingerModeInternal(r1)
-        La7:
-            boolean r6 = com.android.systemui.QpRune.QUICK_SUBSCREEN_PANEL
-            if (r6 != 0) goto Laf
-            boolean r6 = com.android.systemui.QpRune.QUICK_SUBSCREEN_FULLSCREEN_PANEL
-            if (r6 == 0) goto Lc0
-        Laf:
-            com.android.systemui.keyguard.DisplayLifecycle r5 = r5.mDisplayLifecycle
-            if (r5 == 0) goto Lc0
-            boolean r5 = r5.mIsFolderOpened
-            if (r5 != 0) goto Lc0
-            java.lang.String r5 = com.android.systemui.util.SystemUIAnalytics.getCurrentScreenID()
-            java.lang.String r6 = "QPBE2016"
-            com.android.systemui.util.SystemUIAnalytics.sendEventLog(r5, r6)
-        Lc0:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.SoundModeTile.handleClick(com.android.systemui.animation.Expandable):void");
+    public final void handleClick(Expandable expandable) {
+        boolean z;
+        DisplayLifecycle displayLifecycle;
+        EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
+        int iIsVibratorSupported = 0;
+        if (edmMonitor != null) {
+            Context context = edmMonitor.knoxStateMonitor.mContext;
+            z = !edmMonitor.mSettingsChangesAllowed;
+        }
+        if (z) {
+            if (QpRune.QUICK_SUBSCREEN_PANEL) {
+                showItPolicyToastOnSubScreen(getSubScreenContext());
+                return;
+            } else {
+                showItPolicyToast();
+                return;
+            }
+        }
+        if (isVolumeRestricted$1()) {
+            Context context2 = this.mContext;
+            Toast.makeText(context2, context2.getString(android.R.string.keyguard_accessibility_unlock_area_collapsed), 1).show();
+            return;
+        }
+        MetricsLogger metricsLogger = this.mMetricsLogger;
+        if (metricsLogger != null) {
+            metricsLogger.action(5002, !((QSTile.BooleanState) this.mState).value);
+        }
+        int ringerMode = SecStatusBarAudioManagerHelper.getInstance(this.mContext).getRingerMode(false);
+        if (ringerMode != 1) {
+            iIsVibratorSupported = 2;
+            if (ringerMode == 2 || isSystemSettingAllSoundOff()) {
+                iIsVibratorSupported = DeviceType.isVibratorSupported(this.mContext);
+            }
+        }
+        Log.d(this.TAG, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iIsVibratorSupported, "setSoundProfile(soundProfile:", ", detailSet:false)"));
+        EdmMonitor edmMonitor2 = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
+        if (edmMonitor2 != null) {
+            Context context3 = edmMonitor2.knoxStateMonitor.mContext;
+            if (edmMonitor2.mSettingsChangesAllowed) {
+                SecStatusBarAudioManagerHelper.getInstance(this.mContext).setRingerModeInternal(iIsVibratorSupported);
+            }
+        }
+        if ((!QpRune.QUICK_SUBSCREEN_PANEL && !QpRune.QUICK_SUBSCREEN_FULLSCREEN_PANEL) || (displayLifecycle = this.mDisplayLifecycle) == null || displayLifecycle.mIsFolderOpened) {
+            return;
+        }
+        SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QP_SOUND_MODE_COVER);
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
@@ -305,7 +250,7 @@ public class SoundModeTile extends SQSTileImpl {
             super.handleSecondaryClick(expandable);
         } else {
             Context context = this.mContext;
-            Toast.makeText(context, context.getString(android.R.string.keyguard_accessibility_slide_unlock), 1).show();
+            Toast.makeText(context, context.getString(android.R.string.keyguard_accessibility_unlock_area_collapsed), 1).show();
         }
     }
 
@@ -329,6 +274,7 @@ public class SoundModeTile extends SQSTileImpl {
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         int ringerMode = SecStatusBarAudioManagerHelper.getInstance(this.mContext).getRingerMode(true);
+        int i = 0;
         boolean z = ringerMode == 2 && isSystemSettingAllSoundOff();
         Log.d(this.TAG, "handleUpdateState: profile " + ringerMode + ", muteAllSound " + z);
         booleanState.value = (ringerMode == 0 || z) ? false : true;
@@ -336,21 +282,16 @@ public class SoundModeTile extends SQSTileImpl {
         QSTile.Icon[] iconArr = this.SOUND_MODE_ICON;
         booleanState.icon = z ? this.mMuteAllSound : isSystemSettingAllSoundOff() ? this.SOUND_MODE_MUTE_ALL_ICON[ringerMode] : iconArr[ringerMode];
         if (ringerMode == 0) {
-            ringerMode = 2;
-        } else if (ringerMode == 1) {
-            ringerMode = 0;
-        } else if (ringerMode == 2) {
-            ringerMode = 1;
+            i = 2;
+        } else if (ringerMode != 1) {
+            i = ringerMode == 2 ? 1 : ringerMode;
         }
-        booleanState.nextIcon = z ? null : iconArr[ringerMode];
+        booleanState.nextIcon = z ? null : iconArr[i];
         booleanState.dualTarget = true;
-        StringBuilder sb = new StringBuilder();
-        sb.append((Object) booleanState.label);
-        sb.append(" ");
-        String m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.switch_bar_on, sb);
-        booleanState.contentDescription = m;
+        String string = this.mContext.getString(DeviceType.isVibratorSupported(this.mContext) ? SOUND_VIBRATE_MUTE_TEXT[ringerMode] : SOUND_MUTE_TEXT[ringerMode]);
+        booleanState.contentDescription = string;
         booleanState.state = booleanState.value ? 2 : 1;
-        booleanState.stateDescription = m;
+        booleanState.stateDescription = string;
     }
 
     public final boolean isSystemSettingAllSoundOff() {
@@ -358,9 +299,9 @@ public class SoundModeTile extends SQSTileImpl {
     }
 
     public final boolean isVolumeRestricted$1() {
-        boolean hasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
-        Log.i(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", hasUserRestriction));
-        return hasUserRestriction;
+        boolean zHasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
+        Log.i(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", zHasUserRestriction));
+        return zHasUserRestriction;
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl

@@ -29,9 +29,9 @@ public class BinderfsStatsReader {
                     if (!procFileReader.nextString().equals("proc")) {
                         procFileReader.finishLine();
                     } else {
-                        int nextInt = procFileReader.nextInt();
+                        int iNextInt = procFileReader.nextInt();
                         procFileReader.finishLine();
-                        if (predicate.test(Integer.valueOf(nextInt))) {
+                        if (predicate.test(Integer.valueOf(iNextInt))) {
                             procFileReader.finishLine();
                             procFileReader.finishLine();
                             procFileReader.finishLine();
@@ -43,9 +43,9 @@ public class BinderfsStatsReader {
                             } else if (!procFileReader.nextString().equals(NavigationBarInflaterView.NAVSPACE)) {
                                 procFileReader.finishLine();
                             } else {
-                                int nextInt2 = procFileReader.nextInt();
+                                int iNextInt2 = procFileReader.nextInt();
                                 procFileReader.finishLine();
-                                biConsumer.accept(Integer.valueOf(nextInt), Integer.valueOf(nextInt2));
+                                biConsumer.accept(Integer.valueOf(iNextInt), Integer.valueOf(iNextInt2));
                             }
                         }
                     }

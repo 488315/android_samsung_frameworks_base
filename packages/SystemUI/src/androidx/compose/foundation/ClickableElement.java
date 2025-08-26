@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ClickableElement extends ModifierNodeElement<ClickableNode> {
     public final boolean enabled;
@@ -41,13 +40,13 @@ final class ClickableElement extends ModifierNodeElement<ClickableNode> {
 
     public final int hashCode() {
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode = (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0) * 31;
+        int iHashCode = (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0) * 31;
         IndicationNodeFactory indicationNodeFactory = this.indicationNodeFactory;
-        int m = TransitionData$$ExternalSyntheticOutline0.m((hashCode + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (indicationNodeFactory != null ? indicationNodeFactory.hashCode() : 0)) * 31, 31, this.enabled);
         String str = this.onClickLabel;
-        int hashCode2 = (m + (str != null ? str.hashCode() : 0)) * 31;
+        int iHashCode2 = (iM + (str != null ? str.hashCode() : 0)) * 31;
         Role role = this.role;
-        return this.onClick.hashCode() + ((hashCode2 + (role != null ? Integer.hashCode(role.value) : 0)) * 31);
+        return this.onClick.hashCode() + ((iHashCode2 + (role != null ? Integer.hashCode(role.value) : 0)) * 31);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

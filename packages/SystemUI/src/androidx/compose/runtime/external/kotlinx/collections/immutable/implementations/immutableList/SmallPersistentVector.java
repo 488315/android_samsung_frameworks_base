@@ -2,6 +2,7 @@ package androidx.compose.runtime.external.kotlinx.collections.immutable.implemen
 
 import androidx.compose.runtime.external.kotlinx.collections.immutable.ImmutableList;
 import androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList;
+import androidx.compose.runtime.external.kotlinx.collections.immutable.implementations.immutableList.AbstractPersistentList;
 import androidx.compose.runtime.external.kotlinx.collections.immutable.internal.ListImplementation;
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,14 +14,12 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SmallPersistentVector<E> extends AbstractPersistentList<E> implements ImmutableList<E> {
     public static final Companion Companion = new Companion(null);
     public static final SmallPersistentVector EMPTY = new SmallPersistentVector(new Object[0]);
     public final Object[] buffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,31 +49,31 @@ public final class SmallPersistentVector<E> extends AbstractPersistentList<E> im
             objArr2[i] = obj;
             return new SmallPersistentVector(objArr2);
         }
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-        ArraysKt___ArraysJvmKt.copyInto(this.buffer, copyOf, i + 1, i, r1.length - 1);
-        copyOf[i] = obj;
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+        ArraysKt___ArraysJvmKt.copyInto(this.buffer, objArrCopyOf, i + 1, i, r1.length - 1);
+        objArrCopyOf[i] = obj;
         Object[] objArr4 = this.buffer;
         Object[] objArr5 = new Object[32];
         objArr5[0] = objArr4[31];
-        return new PersistentVector(copyOf, objArr5, objArr4.length + 1, 0);
+        return new PersistentVector(objArrCopyOf, objArr5, objArr4.length + 1, 0);
     }
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.implementations.immutableList.AbstractPersistentList, java.util.Collection, java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList addAll(Collection collection) {
         if (collection.size() + this.buffer.length > 32) {
-            PersistentVectorBuilder builder = builder();
-            builder.addAll(collection);
-            return builder.build();
+            PersistentVectorBuilder persistentVectorBuilderBuilder = builder();
+            persistentVectorBuilderBuilder.addAll(collection);
+            return persistentVectorBuilderBuilder.build();
         }
         Object[] objArr = this.buffer;
-        Object[] copyOf = Arrays.copyOf(objArr, collection.size() + objArr.length);
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, collection.size() + objArr.length);
         int length = this.buffer.length;
         Iterator<E> it = collection.iterator();
         while (it.hasNext()) {
-            copyOf[length] = it.next();
+            objArrCopyOf[length] = it.next();
             length++;
         }
-        return new SmallPersistentVector(copyOf);
+        return new SmallPersistentVector(objArrCopyOf);
     }
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
@@ -142,21 +141,21 @@ public final class SmallPersistentVector<E> extends AbstractPersistentList<E> im
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList removeAll(Function1 function1) {
-        Object[] objArr = this.buffer;
-        int length = objArr.length;
-        int length2 = objArr.length;
+        Object[] objArrCopyOf = this.buffer;
+        int length = objArrCopyOf.length;
+        int length2 = objArrCopyOf.length;
         boolean z = false;
         for (int i = 0; i < length2; i++) {
             Object obj = this.buffer[i];
-            if (((Boolean) ((AbstractPersistentList$removeAll$1) function1).mo779invoke(obj)).booleanValue()) {
+            if (((Boolean) ((AbstractPersistentList.AnonymousClass1) function1).mo781invoke(obj)).booleanValue()) {
                 if (!z) {
-                    Object[] objArr2 = this.buffer;
-                    objArr = Arrays.copyOf(objArr2, objArr2.length);
+                    Object[] objArr = this.buffer;
+                    objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
                     z = true;
                     length = i;
                 }
             } else if (z) {
-                objArr[length] = obj;
+                objArrCopyOf[length] = obj;
                 length++;
             }
         }
@@ -166,8 +165,8 @@ public final class SmallPersistentVector<E> extends AbstractPersistentList<E> im
         if (length == 0) {
             return EMPTY;
         }
-        ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(length, objArr.length);
-        return new SmallPersistentVector(Arrays.copyOfRange(objArr, 0, length));
+        ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(length, objArrCopyOf.length);
+        return new SmallPersistentVector(Arrays.copyOfRange(objArrCopyOf, 0, length));
     }
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
@@ -177,28 +176,28 @@ public final class SmallPersistentVector<E> extends AbstractPersistentList<E> im
         if (objArr.length == 1) {
             return EMPTY;
         }
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length - 1);
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length - 1);
         Object[] objArr2 = this.buffer;
-        ArraysKt___ArraysJvmKt.copyInto(objArr2, copyOf, i, i + 1, objArr2.length);
-        return new SmallPersistentVector(copyOf);
+        ArraysKt___ArraysJvmKt.copyInto(objArr2, objArrCopyOf, i, i + 1, objArr2.length);
+        return new SmallPersistentVector(objArrCopyOf);
     }
 
     @Override // kotlin.collections.AbstractList, java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList set(int i, Object obj) {
         ListImplementation.checkElementIndex$runtime_release(i, getSize());
         Object[] objArr = this.buffer;
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-        copyOf[i] = obj;
-        return new SmallPersistentVector(copyOf);
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+        objArrCopyOf[i] = obj;
+        return new SmallPersistentVector(objArrCopyOf);
     }
 
     @Override // java.util.Collection, java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList add(Object obj) {
         Object[] objArr = this.buffer;
         if (objArr.length < 32) {
-            Object[] copyOf = Arrays.copyOf(objArr, objArr.length + 1);
-            copyOf[this.buffer.length] = obj;
-            return new SmallPersistentVector(copyOf);
+            Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length + 1);
+            objArrCopyOf[this.buffer.length] = obj;
+            return new SmallPersistentVector(objArrCopyOf);
         }
         Object[] objArr2 = new Object[32];
         objArr2[0] = obj;

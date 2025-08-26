@@ -8,7 +8,6 @@ import com.android.systemui.utils.windowmanager.WindowManagerProvider;
 import com.android.systemui.utils.windowmanager.WindowManagerProviderImpl;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayHelper {
     private final Context mContext;
@@ -24,8 +23,8 @@ public class DisplayHelper {
     public Rect getMaxBounds(int i, int i2) {
         Display display = this.mDisplayManager.getDisplay(i);
         WindowManagerProvider windowManagerProvider = this.mWindowManagerProvider;
-        Context createWindowContext = this.mContext.createDisplayContext(display).createWindowContext(i2, null);
+        Context contextCreateWindowContext = this.mContext.createDisplayContext(display).createWindowContext(i2, null);
         ((WindowManagerProviderImpl) windowManagerProvider).getClass();
-        return WindowManagerUtils.getWindowManager(createWindowContext).getMaximumWindowMetrics().getBounds();
+        return WindowManagerUtils.getWindowManager(contextCreateWindowContext).getMaximumWindowMetrics().getBounds();
     }
 }

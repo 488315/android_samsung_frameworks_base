@@ -18,7 +18,7 @@ public class FontWriter {
     private static final String TAG = "FontWriter";
     private static final int TTF_FILE_COPY_BUF_SIZE = 8192;
 
-    public void writeLoc(String str) {
+    public void writeLoc(String str) throws Exception {
         String str2 = NEW_FONT_DIRECTORY + UserHandle.myUserId();
         File file = new File(str2, SANS_LOC_NAME);
         try {
@@ -47,21 +47,20 @@ public class FontWriter {
     }
 
     public File createFontDirectory(String str) {
-        File file;
-        File file2 = null;
+        File file = null;
         try {
-            File file3 = new File(NEW_FONT_DIRECTORY + UserHandle.myUserId());
-            setFileProperties(file3, true);
-            file = new File(file3, str.replaceAll("\\.\\./", "").replaceAll("/", ""));
-        } catch (IOException unused) {
-        }
-        try {
-            setFileProperties(file, true);
-            return file;
+            File file2 = new File(NEW_FONT_DIRECTORY + UserHandle.myUserId());
+            setFileProperties(file2, true);
+            File file3 = new File(file2, str.replaceAll("\\.\\./", "").replaceAll("/", ""));
+            try {
+                setFileProperties(file3, true);
+                return file3;
+            } catch (IOException unused) {
+                file = file3;
+                Log.e(TAG, "IOException while CreatFontDirectory");
+                return file;
+            }
         } catch (IOException unused2) {
-            file2 = file;
-            Log.e(TAG, "IOException while CreatFontDirectory");
-            return file2;
         }
     }
 
@@ -113,7 +112,7 @@ public class FontWriter {
         }
     }
 
-    public boolean copyFontFile(File file, InputStream inputStream, String str) {
+    public boolean copyFontFile(File file, InputStream inputStream, String str) throws Exception {
         File file2 = new File(file, str);
         try {
             if (!file2.getCanonicalPath().startsWith(file.getCanonicalPath())) {
@@ -127,11 +126,11 @@ public class FontWriter {
                     try {
                         byte[] bArr = new byte[8192];
                         while (true) {
-                            int read = inputStream.read(bArr);
-                            if (read <= 0) {
+                            int i = inputStream.read(bArr);
+                            if (i <= 0) {
                                 break;
                             }
-                            bufferedOutputStream.write(bArr, 0, read);
+                            bufferedOutputStream.write(bArr, 0, i);
                         }
                         bufferedOutputStream.close();
                         fileOutputStream.close();

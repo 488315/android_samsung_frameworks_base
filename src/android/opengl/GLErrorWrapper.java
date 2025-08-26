@@ -20,20 +20,20 @@ class GLErrorWrapper extends GLWrapperBase {
 
     private void checkThread() {
         if (this.mCheckThread) {
-            Thread currentThread = Thread.currentThread();
+            Thread threadCurrentThread = Thread.currentThread();
             Thread thread = this.mOurThread;
             if (thread == null) {
-                this.mOurThread = currentThread;
-            } else if (!thread.equals(currentThread)) {
+                this.mOurThread = threadCurrentThread;
+            } else if (!thread.equals(threadCurrentThread)) {
                 throw new GLException(28672, "OpenGL method called from wrong thread.");
             }
         }
     }
 
     private void checkError() {
-        int glGetError;
-        if (this.mCheckError && (glGetError = this.mgl.glGetError()) != 0) {
-            throw new GLException(glGetError);
+        int iGlGetError;
+        if (this.mCheckError && (iGlGetError = this.mgl.glGetError()) != 0) {
+            throw new GLException(iGlGetError);
         }
     }
 
@@ -382,9 +382,9 @@ class GLErrorWrapper extends GLWrapperBase {
     @Override // javax.microedition.khronos.opengles.GL10
     public String glGetString(int i) {
         checkThread();
-        String glGetString = this.mgl.glGetString(i);
+        String strGlGetString = this.mgl.glGetString(i);
         checkError();
-        return glGetString;
+        return strGlGetString;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
@@ -1027,17 +1027,17 @@ class GLErrorWrapper extends GLWrapperBase {
     @Override // javax.microedition.khronos.opengles.GL10Ext
     public int glQueryMatrixxOES(int[] iArr, int i, int[] iArr2, int i2) {
         checkThread();
-        int glQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(iArr, i, iArr2, i2);
+        int iGlQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(iArr, i, iArr2, i2);
         checkError();
-        return glQueryMatrixxOES;
+        return iGlQueryMatrixxOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10Ext
     public int glQueryMatrixxOES(IntBuffer intBuffer, IntBuffer intBuffer2) {
         checkThread();
-        int glQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(intBuffer, intBuffer2);
+        int iGlQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(intBuffer, intBuffer2);
         checkError();
-        return glQueryMatrixxOES;
+        return iGlQueryMatrixxOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
@@ -1330,25 +1330,25 @@ class GLErrorWrapper extends GLWrapperBase {
     @Override // javax.microedition.khronos.opengles.GL11
     public boolean glIsBuffer(int i) {
         checkThread();
-        boolean glIsBuffer = this.mgl11.glIsBuffer(i);
+        boolean zGlIsBuffer = this.mgl11.glIsBuffer(i);
         checkError();
-        return glIsBuffer;
+        return zGlIsBuffer;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
     public boolean glIsEnabled(int i) {
         checkThread();
-        boolean glIsEnabled = this.mgl11.glIsEnabled(i);
+        boolean zGlIsEnabled = this.mgl11.glIsEnabled(i);
         checkError();
-        return glIsEnabled;
+        return zGlIsEnabled;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
     public boolean glIsTexture(int i) {
         checkThread();
-        boolean glIsTexture = this.mgl11.glIsTexture(i);
+        boolean zGlIsTexture = this.mgl11.glIsTexture(i);
         checkError();
-        return glIsTexture;
+        return zGlIsTexture;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
@@ -1557,9 +1557,9 @@ class GLErrorWrapper extends GLWrapperBase {
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
     public int glCheckFramebufferStatusOES(int i) {
         checkThread();
-        int glCheckFramebufferStatusOES = this.mgl11ExtensionPack.glCheckFramebufferStatusOES(i);
+        int iGlCheckFramebufferStatusOES = this.mgl11ExtensionPack.glCheckFramebufferStatusOES(i);
         checkError();
-        return glCheckFramebufferStatusOES;
+        return iGlCheckFramebufferStatusOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
@@ -1712,9 +1712,9 @@ class GLErrorWrapper extends GLWrapperBase {
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
     public boolean glIsFramebufferOES(int i) {
         checkThread();
-        boolean glIsFramebufferOES = this.mgl11ExtensionPack.glIsFramebufferOES(i);
+        boolean zGlIsFramebufferOES = this.mgl11ExtensionPack.glIsFramebufferOES(i);
         checkError();
-        return glIsFramebufferOES;
+        return zGlIsFramebufferOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack

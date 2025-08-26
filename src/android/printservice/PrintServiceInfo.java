@@ -2,9 +2,18 @@ package android.printservice;
 
 import android.annotation.SystemApi;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+import android.util.Xml;
+import com.android.internal.R;
+import java.io.IOException;
+import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -57,22 +66,120 @@ public final class PrintServiceInfo implements Parcelable {
         return new ComponentName(this.mResolveInfo.serviceInfo.packageName, this.mResolveInfo.serviceInfo.name);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00cc, code lost:
-    
-        if (r0 != null) goto L46;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00b4  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00b4  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00ce A[PHI: r1 r2 r3
+      0x00ce: PHI (r1v16 java.lang.String) = (r1v14 java.lang.String), (r1v17 java.lang.String) binds: [B:41:0x00b4, B:45:0x00cc] A[DONT_GENERATE, DONT_INLINE]
+      0x00ce: PHI (r2v9 java.lang.String) = (r2v7 java.lang.String), (r2v10 java.lang.String) binds: [B:41:0x00b4, B:45:0x00cc] A[DONT_GENERATE, DONT_INLINE]
+      0x00ce: PHI (r3v18 java.lang.String) = (r3v16 java.lang.String), (r3v19 java.lang.String) binds: [B:41:0x00b4, B:45:0x00cc] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.printservice.PrintServiceInfo create(android.content.Context r8, android.content.pm.ResolveInfo r9) {
-        /*
-            Method dump skipped, instructions count: 225
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.printservice.PrintServiceInfo.create(android.content.Context, android.content.pm.ResolveInfo):android.printservice.PrintServiceInfo");
+    public static PrintServiceInfo create(Context context, ResolveInfo resolveInfo) {
+        String str;
+        String string;
+        String str2;
+        PackageManager packageManager = context.getPackageManager();
+        XmlResourceParser xmlResourceParserLoadXmlMetaData = resolveInfo.serviceInfo.loadXmlMetaData(packageManager, PrintService.SERVICE_META_DATA);
+        String string2 = null;
+        if (xmlResourceParserLoadXmlMetaData != null) {
+            for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
+                try {
+                    try {
+                    } finally {
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                    }
+                } catch (PackageManager.NameNotFoundException unused) {
+                    str = null;
+                    string = null;
+                    Log.e(LOG_TAG, "Unable to load resources for: " + resolveInfo.serviceInfo.packageName);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                    }
+                    return new PrintServiceInfo(resolveInfo, string2, string, str);
+                } catch (IOException e) {
+                    e = e;
+                    str2 = null;
+                    string = null;
+                    Log.w(LOG_TAG, "Error reading meta-data:" + e);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                    }
+                    str = str2;
+                    return new PrintServiceInfo(resolveInfo, string2, string, str);
+                } catch (XmlPullParserException e2) {
+                    e = e2;
+                    str2 = null;
+                    string = null;
+                    Log.w(LOG_TAG, "Error reading meta-data:" + e);
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                    }
+                    str = str2;
+                    return new PrintServiceInfo(resolveInfo, string2, string, str);
+                }
+            }
+            if (!TAG_PRINT_SERVICE.equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                Log.e(LOG_TAG, "Ignoring meta-data that does not start with print-service tag");
+                str = null;
+                string = null;
+            } else {
+                TypedArray typedArrayObtainAttributes = packageManager.getResourcesForApplication(resolveInfo.serviceInfo.applicationInfo).obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.PrintService);
+                String string3 = typedArrayObtainAttributes.getString(0);
+                try {
+                    string = typedArrayObtainAttributes.getString(1);
+                    try {
+                        string2 = typedArrayObtainAttributes.getString(3);
+                        typedArrayObtainAttributes.recycle();
+                        str = string2;
+                        string2 = string3;
+                    } catch (PackageManager.NameNotFoundException unused2) {
+                        str = string2;
+                        string2 = string3;
+                        Log.e(LOG_TAG, "Unable to load resources for: " + resolveInfo.serviceInfo.packageName);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                        }
+                        return new PrintServiceInfo(resolveInfo, string2, string, str);
+                    } catch (IOException e3) {
+                        e = e3;
+                        str2 = string2;
+                        string2 = string3;
+                        Log.w(LOG_TAG, "Error reading meta-data:" + e);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        str = str2;
+                        return new PrintServiceInfo(resolveInfo, string2, string, str);
+                    } catch (XmlPullParserException e4) {
+                        e = e4;
+                        str2 = string2;
+                        string2 = string3;
+                        Log.w(LOG_TAG, "Error reading meta-data:" + e);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        str = str2;
+                        return new PrintServiceInfo(resolveInfo, string2, string, str);
+                    }
+                } catch (PackageManager.NameNotFoundException unused3) {
+                    str = null;
+                    string = null;
+                } catch (IOException e5) {
+                    e = e5;
+                    string = null;
+                    string2 = string3;
+                    str2 = null;
+                } catch (XmlPullParserException e6) {
+                    e = e6;
+                    string = null;
+                    string2 = string3;
+                    str2 = null;
+                }
+            }
+        } else {
+            str = null;
+            string = null;
+        }
+        return new PrintServiceInfo(resolveInfo, string2, string, str);
     }
 
     public String getId() {

@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.GraphicsContext;
 import androidx.compose.ui.internal.InlineClassHelperKt;
 import androidx.compose.ui.platform.AndroidComposeView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DelegatableNodeKt {
     public static final void access$addLayoutNodeChildren(MutableVector mutableVector, Modifier.Node node) {
@@ -50,10 +49,10 @@ public abstract class DelegatableNodeKt {
     }
 
     /* renamed from: requireCoordinator-64DMado, reason: not valid java name */
-    public static final NodeCoordinator m632requireCoordinator64DMado(DelegatableNode delegatableNode, int i) {
+    public static final NodeCoordinator m634requireCoordinator64DMado(DelegatableNode delegatableNode, int i) {
         NodeCoordinator nodeCoordinator = ((Modifier.Node) delegatableNode).node.coordinator;
         nodeCoordinator.getClass();
-        if (nodeCoordinator.getTail() != delegatableNode || !NodeKindKt.m681getIncludeSelfInTraversalH91voCI(i)) {
+        if (nodeCoordinator.getTail() != delegatableNode || !NodeKindKt.m683getIncludeSelfInTraversalH91voCI(i)) {
             return nodeCoordinator;
         }
         NodeCoordinator nodeCoordinator2 = nodeCoordinator.wrapped;
@@ -69,11 +68,11 @@ public abstract class DelegatableNodeKt {
         if (!((Modifier.Node) delegatableNode).node.isAttached) {
             InlineClassHelperKt.throwIllegalStateException("Cannot get LayoutCoordinates, Modifier.Node is not attached.");
         }
-        NodeCoordinator m632requireCoordinator64DMado = m632requireCoordinator64DMado(delegatableNode, 2);
-        if (!m632requireCoordinator64DMado.getTail().isAttached) {
+        NodeCoordinator nodeCoordinatorM634requireCoordinator64DMado = m634requireCoordinator64DMado(delegatableNode, 2);
+        if (!nodeCoordinatorM634requireCoordinator64DMado.getTail().isAttached) {
             InlineClassHelperKt.throwIllegalStateException("LayoutCoordinates is not attached.");
         }
-        return m632requireCoordinator64DMado;
+        return nodeCoordinatorM634requireCoordinator64DMado;
     }
 
     public static final LayoutNode requireLayoutNode(DelegatableNode delegatableNode) {

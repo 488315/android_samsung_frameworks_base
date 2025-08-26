@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -42,7 +43,7 @@ public final class DelegateRequest implements Parcelable {
         return new ArraySet(this.mFeatureTags);
     }
 
-    private DelegateRequest(Parcel parcel) {
+    private DelegateRequest(Parcel parcel) throws ClassNotFoundException, IOException {
         ArrayList<String> arrayList = new ArrayList<>();
         this.mFeatureTags = arrayList;
         parcel.readList(arrayList, null, String.class);

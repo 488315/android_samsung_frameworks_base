@@ -35,7 +35,7 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
             this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GetWalletCardsCallbackImpl.this.lambda$onSuccess$0(getWalletCardsResponse);
+                    this.f$0.lambda$onSuccess$0(getWalletCardsResponse);
                 }
             });
         } else {
@@ -43,7 +43,7 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
             this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GetWalletCardsCallbackImpl.this.lambda$onSuccess$1();
+                    this.f$0.lambda$onSuccess$1();
                 }
             });
         }
@@ -59,7 +59,7 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                GetWalletCardsCallbackImpl.this.lambda$onFailure$2(getWalletCardsError);
+                this.f$0.lambda$onFailure$2(getWalletCardsError);
             }
         });
     }

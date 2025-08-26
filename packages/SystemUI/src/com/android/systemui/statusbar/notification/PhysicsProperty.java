@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhysicsProperty {
     public final boolean avoidDoubleOvershoot;
@@ -53,18 +52,18 @@ public final class PhysicsProperty {
         this.offsetProperty = new FloatProperty(name) { // from class: com.android.systemui.statusbar.notification.PhysicsProperty$offsetProperty$1
             @Override // android.util.Property
             public final Float get(Object obj) {
-                return (Float) PhysicsProperty.this.property.get((View) obj);
+                return (Float) this.this$0.property.get((View) obj);
             }
 
             @Override // android.util.FloatProperty
             public final void setValue(Object obj, float f) {
                 View view = (View) obj;
-                PropertyData propertyData = (PropertyData) view.getTag(PhysicsProperty.this.tag);
+                PropertyData propertyData = (PropertyData) view.getTag(this.this$0.tag);
                 if (propertyData == null) {
                     return;
                 }
                 propertyData.offset = f;
-                PhysicsProperty.this.property.set(view, Float.valueOf(propertyData.finalValue + f));
+                this.this$0.property.set(view, Float.valueOf(propertyData.finalValue + f));
             }
         };
     }

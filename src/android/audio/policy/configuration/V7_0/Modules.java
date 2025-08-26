@@ -104,7 +104,7 @@ public class Modules {
             this.halVersion = halVersion;
         }
 
-        static Module read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Module read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             int next;
             Module module = new Module();
             String attributeValue = xmlPullParser.getAttributeValue(null, "name");
@@ -152,7 +152,7 @@ public class Modules {
         return this.module;
     }
 
-    static Modules read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Modules read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         Modules modules = new Modules();
         xmlPullParser.getDepth();

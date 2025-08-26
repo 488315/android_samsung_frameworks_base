@@ -60,9 +60,9 @@ public interface IInlineSuggestionRenderService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionRenderService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineSuggestionRenderService)) {
-                return (IInlineSuggestionRenderService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionRenderService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineSuggestionRenderService)) {
+                return (IInlineSuggestionRenderService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,25 +95,25 @@ public interface IInlineSuggestionRenderService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IInlineSuggestionUiCallback asInterface = IInlineSuggestionUiCallback.Stub.asInterface(parcel.readStrongBinder());
+                IInlineSuggestionUiCallback iInlineSuggestionUiCallbackAsInterface = IInlineSuggestionUiCallback.Stub.asInterface(parcel.readStrongBinder());
                 InlinePresentation inlinePresentation = (InlinePresentation) parcel.readTypedObject(InlinePresentation.CREATOR);
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                IBinder strongBinder = parcel.readStrongBinder();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                renderSuggestion(asInterface, inlinePresentation, readInt, readInt2, readStrongBinder, readInt3, readInt4, readInt5);
+                renderSuggestion(iInlineSuggestionUiCallbackAsInterface, inlinePresentation, i3, i4, strongBinder, i5, i6, i7);
             } else if (i == 2) {
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
                 getInlineSuggestionsRendererInfo(remoteCallback);
             } else if (i == 3) {
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                destroySuggestionViews(readInt6, readInt7);
+                destroySuggestionViews(i8, i9);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -138,45 +138,45 @@ public interface IInlineSuggestionRenderService extends IInterface {
 
             @Override // android.service.autofill.IInlineSuggestionRenderService
             public void renderSuggestion(IInlineSuggestionUiCallback iInlineSuggestionUiCallback, InlinePresentation inlinePresentation, int i, int i2, IBinder iBinder, int i3, int i4, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInlineSuggestionUiCallback);
-                    obtain.writeTypedObject(inlinePresentation, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInlineSuggestionUiCallback);
+                    parcelObtain.writeTypedObject(inlinePresentation, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionRenderService
             public void getInlineSuggestionsRendererInfo(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionRenderService
             public void destroySuggestionViews(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -7,11 +7,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.media.session.MediaSessionCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface IMediaControllerCallback extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static Object access$000(Parcel parcel, Parcelable.Creator creator) {
             if (parcel.readInt() != 0) {
@@ -33,10 +31,8 @@ public interface IMediaControllerCallback extends IInterface {
 
     void onVolumeInfoChanged(ParcelableVolumeInfo parcelableVolumeInfo);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMediaControllerCallback {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMediaControllerCallback {
             public final IBinder mRemote;
 

@@ -19,19 +19,19 @@ public class ColorHSV {
         int i3 = i2 >> 16;
         int i4 = (i2 >> 8) & 255;
         int i5 = i & 255;
-        float min = Math.min(Math.min(i3, i4), i5);
-        float max = Math.max(Math.max(i3, i4), i5);
-        float f6 = max - min;
+        float fMin = Math.min(Math.min(i3, i4), i5);
+        float fMax = Math.max(Math.max(i3, i4), i5);
+        float f6 = fMax - fMin;
         float f7 = 0.0f;
-        if (max != 0.0f) {
+        if (fMax != 0.0f) {
             if (f6 == 0.0f) {
                 f2 = 0.0f;
             } else {
-                f2 = f6 / max;
-                if (i3 == max) {
+                f2 = f6 / fMax;
+                if (i3 == fMax) {
                     f5 = (i4 - i5) / f6;
                 } else {
-                    if (i4 == max) {
+                    if (i4 == fMax) {
                         f3 = (i5 - i3) / f6;
                         f4 = 2.0f;
                     } else {
@@ -46,7 +46,7 @@ public class ColorHSV {
                 }
                 f7 = f8;
             }
-            f = max / 255.0f;
+            f = fMax / 255.0f;
         } else {
             f = 0.0f;
             f2 = 0.0f;

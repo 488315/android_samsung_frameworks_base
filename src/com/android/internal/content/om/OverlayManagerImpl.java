@@ -53,34 +53,34 @@ public class OverlayManagerImpl {
         }
     }
 
-    private static void cleanExpiredOverlays(Path path, Path path2) {
+    private static void cleanExpiredOverlays(Path path, Path path2) throws IOException {
         try {
-            final String path3 = path2.toString();
-            final String path4 = path.getFileName().toString();
+            final String string = path2.toString();
+            final String string2 = path.getFileName().toString();
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() { // from class: com.android.internal.content.om.OverlayManagerImpl.1
                 @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-                public FileVisitResult preVisitDirectory(Path path5, BasicFileAttributes basicFileAttributes) throws IOException {
-                    if (path5.getFileName().toString().equals(path3)) {
+                public FileVisitResult preVisitDirectory(Path path3, BasicFileAttributes basicFileAttributes) throws IOException {
+                    if (path3.getFileName().toString().equals(string)) {
                         return FileVisitResult.SKIP_SUBTREE;
                     }
-                    return super.preVisitDirectory((AnonymousClass1) path5, basicFileAttributes);
+                    return super.preVisitDirectory((AnonymousClass1) path3, basicFileAttributes);
                 }
 
                 @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-                public FileVisitResult visitFile(Path path5, BasicFileAttributes basicFileAttributes) throws IOException {
-                    if (!path5.toFile().delete()) {
-                        Log.w(OverlayManagerImpl.TAG, "Failed to delete file " + path5);
+                public FileVisitResult visitFile(Path path3, BasicFileAttributes basicFileAttributes) throws IOException {
+                    if (!path3.toFile().delete()) {
+                        Log.w(OverlayManagerImpl.TAG, "Failed to delete file " + path3);
                     }
-                    return super.visitFile((AnonymousClass1) path5, basicFileAttributes);
+                    return super.visitFile((AnonymousClass1) path3, basicFileAttributes);
                 }
 
                 @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-                public FileVisitResult postVisitDirectory(Path path5, IOException iOException) throws IOException {
-                    String path6 = path5.getFileName().toString();
-                    if (!path6.equals(path3) && !path6.equals(path4) && !path5.toFile().delete()) {
-                        Log.w(OverlayManagerImpl.TAG, "Failed to delete dir " + path5);
+                public FileVisitResult postVisitDirectory(Path path3, IOException iOException) throws IOException {
+                    String string3 = path3.getFileName().toString();
+                    if (!string3.equals(string) && !string3.equals(string2) && !path3.toFile().delete()) {
+                        Log.w(OverlayManagerImpl.TAG, "Failed to delete dir " + path3);
                     }
-                    return super.postVisitDirectory((AnonymousClass1) path5, iOException);
+                    return super.postVisitDirectory((AnonymousClass1) path3, iOException);
                 }
             });
         } catch (IOException e) {
@@ -88,7 +88,7 @@ public class OverlayManagerImpl {
         }
     }
 
-    public void ensureBaseDir() {
+    public void ensureBaseDir() throws IOException {
         boolean z = false;
         Path fileName = Path.of(this.mContext.getApplicationInfo().getBaseCodePath(), new String[0]).getParent().getFileName();
         File dir = this.mContext.getDir(SELF_TARGET, 0);
@@ -116,8 +116,8 @@ public class OverlayManagerImpl {
 
     public static String checkOverlayNameValid(String str) {
         String str2 = (String) Preconditions.checkStringNotEmpty(str, "overlayName should be neither empty nor null string");
-        String validateName = FrameworkParsingPackageUtils.validateName(str2, false, true);
-        Preconditions.checkArgument(validateName == null, TextUtils.formatSimple("Invalid overlayName \"%s\". The check result is %s.", str2, validateName));
+        String strValidateName = FrameworkParsingPackageUtils.validateName(str2, false, true);
+        Preconditions.checkArgument(strValidateName == null, TextUtils.formatSimple("Invalid overlayName \"%s\". The check result is %s.", str2, strValidateName));
         return str2;
     }
 
@@ -126,13 +126,13 @@ public class OverlayManagerImpl {
         Preconditions.checkArgument(TextUtils.equals(this.mContext.getPackageName(), str), TextUtils.formatSimple("UID %d doesn't own the package %s", Integer.valueOf(Process.myUid()), str));
     }
 
-    public void registerFabricatedOverlay(FabricatedOverlayInternal fabricatedOverlayInternal) throws IOException, PackageManager.NameNotFoundException {
+    public void registerFabricatedOverlay(FabricatedOverlayInternal fabricatedOverlayInternal) throws PackageManager.NameNotFoundException, IOException {
         String str;
         ensureBaseDir();
         Objects.requireNonNull(fabricatedOverlayInternal);
         boolean z = true;
         Preconditions.checkArgument(!((List) Objects.requireNonNull(fabricatedOverlayInternal.entries)).isEmpty(), "overlay entries shouldn't be empty");
-        String checkOverlayNameValid = checkOverlayNameValid(fabricatedOverlayInternal.overlayName);
+        String strCheckOverlayNameValid = checkOverlayNameValid(fabricatedOverlayInternal.overlayName);
         checkPackageName(fabricatedOverlayInternal.packageName);
         if (Flags.selfTargetingAndroidResourceFrro()) {
             Preconditions.checkStringNotEmpty(fabricatedOverlayInternal.targetPackageName);
@@ -146,37 +146,37 @@ public class OverlayManagerImpl {
         } else {
             str = (String) Preconditions.checkStringNotEmpty(applicationInfo.getBaseCodePath());
         }
-        Path resolve = this.mBasePath.resolve(checkOverlayNameValid + FRRO_EXTENSION);
-        Path resolve2 = this.mBasePath.resolve(checkOverlayNameValid + IDMAP_EXTENSION);
-        createFrroFile(resolve.toString(), fabricatedOverlayInternal);
+        Path pathResolve = this.mBasePath.resolve(strCheckOverlayNameValid + FRRO_EXTENSION);
+        Path pathResolve2 = this.mBasePath.resolve(strCheckOverlayNameValid + IDMAP_EXTENSION);
+        createFrroFile(pathResolve.toString(), fabricatedOverlayInternal);
         try {
-            String path = resolve.toString();
-            String path2 = resolve2.toString();
+            String string = pathResolve.toString();
+            String string2 = pathResolve2.toString();
             if (!applicationInfo.isSystemApp() && !applicationInfo.isSystemExt()) {
                 z = false;
             }
-            createIdmapFile(str, path, path2, checkOverlayNameValid, z, applicationInfo.isVendor(), applicationInfo.isProduct(), isSameWithTargetSignature(fabricatedOverlayInternal.targetPackageName), applicationInfo.isOdm(), applicationInfo.isOem());
+            createIdmapFile(str, string, string2, strCheckOverlayNameValid, z, applicationInfo.isVendor(), applicationInfo.isProduct(), isSameWithTargetSignature(fabricatedOverlayInternal.targetPackageName), applicationInfo.isOdm(), applicationInfo.isOem());
         } catch (IOException e) {
-            if (!resolve.toFile().delete()) {
-                Log.w(TAG, "Failed to delete file " + resolve);
+            if (!pathResolve.toFile().delete()) {
+                Log.w(TAG, "Failed to delete file " + pathResolve);
                 throw e;
             }
             throw e;
         }
     }
 
-    public void unregisterFabricatedOverlay(String str) {
+    public void unregisterFabricatedOverlay(String str) throws IOException {
         ensureBaseDir();
         checkOverlayNameValid(str);
-        Path resolve = this.mBasePath.resolve(str + FRRO_EXTENSION);
-        Path resolve2 = this.mBasePath.resolve(str + IDMAP_EXTENSION);
-        if (!resolve.toFile().delete()) {
-            Log.w(TAG, "Failed to delete file " + resolve);
+        Path pathResolve = this.mBasePath.resolve(str + FRRO_EXTENSION);
+        Path pathResolve2 = this.mBasePath.resolve(str + IDMAP_EXTENSION);
+        if (!pathResolve.toFile().delete()) {
+            Log.w(TAG, "Failed to delete file " + pathResolve);
         }
-        if (resolve2.toFile().delete()) {
+        if (pathResolve2.toFile().delete()) {
             return;
         }
-        Log.w(TAG, "Failed to delete file " + resolve2);
+        Log.w(TAG, "Failed to delete file " + pathResolve2);
     }
 
     public void commit(OverlayManagerTransaction overlayManagerTransaction) throws PackageManager.NameNotFoundException, IOException {
@@ -200,16 +200,16 @@ public class OverlayManagerImpl {
         }
     }
 
-    public List<OverlayInfo> getOverlayInfosForTarget(String str) {
+    public List<OverlayInfo> getOverlayInfosForTarget(String str) throws IOException {
         ensureBaseDir();
-        File[] listFiles = this.mBasePath.toFile().listFiles(new FilenameFilter() { // from class: com.android.internal.content.om.OverlayManagerImpl$$ExternalSyntheticLambda0
+        File[] fileArrListFiles = this.mBasePath.toFile().listFiles(new FilenameFilter() { // from class: com.android.internal.content.om.OverlayManagerImpl$$ExternalSyntheticLambda0
             @Override // java.io.FilenameFilter
             public final boolean accept(File file, String str2) {
                 return OverlayManagerImpl.lambda$getOverlayInfosForTarget$0(file, str2);
             }
         });
         ArrayList arrayList = new ArrayList();
-        for (File file : listFiles) {
+        for (File file : fileArrListFiles) {
             try {
                 FabricatedOverlayInfo fabricatedOverlayInfo = getFabricatedOverlayInfo(file.getAbsolutePath());
                 if (TextUtils.equals(str, fabricatedOverlayInfo.targetPackageName)) {

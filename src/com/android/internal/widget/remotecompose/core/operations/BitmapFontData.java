@@ -92,22 +92,22 @@ public class BitmapFontData extends Operation implements Serializable {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        Glyph[] glyphArr = new Glyph[readInt2];
-        for (int i = 0; i < readInt2; i++) {
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        Glyph[] glyphArr = new Glyph[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
             Glyph glyph = new Glyph();
-            glyphArr[i] = glyph;
+            glyphArr[i3] = glyph;
             glyph.mChars = wireBuffer.readUTF8();
-            glyphArr[i].mBitmapId = wireBuffer.readInt();
-            glyphArr[i].mMarginLeft = (short) wireBuffer.readShort();
-            glyphArr[i].mMarginTop = (short) wireBuffer.readShort();
-            glyphArr[i].mMarginRight = (short) wireBuffer.readShort();
-            glyphArr[i].mMarginBottom = (short) wireBuffer.readShort();
-            glyphArr[i].mBitmapWidth = (short) wireBuffer.readShort();
-            glyphArr[i].mBitmapHeight = (short) wireBuffer.readShort();
+            glyphArr[i3].mBitmapId = wireBuffer.readInt();
+            glyphArr[i3].mMarginLeft = (short) wireBuffer.readShort();
+            glyphArr[i3].mMarginTop = (short) wireBuffer.readShort();
+            glyphArr[i3].mMarginRight = (short) wireBuffer.readShort();
+            glyphArr[i3].mMarginBottom = (short) wireBuffer.readShort();
+            glyphArr[i3].mBitmapWidth = (short) wireBuffer.readShort();
+            glyphArr[i3].mBitmapHeight = (short) wireBuffer.readShort();
         }
-        list.add(new BitmapFontData(readInt, glyphArr));
+        list.add(new BitmapFontData(i, glyphArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

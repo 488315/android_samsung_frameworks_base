@@ -13,7 +13,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WidgetGroup {
     public static int sCount;
@@ -23,7 +22,6 @@ public class WidgetGroup {
     public ArrayList mResults = null;
     public int mMoveTo = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MeasureResult {
         public MeasureResult(ConstraintWidget constraintWidget, LinearSystem linearSystem, int i) {
             new WeakReference(constraintWidget);
@@ -125,17 +123,17 @@ public class WidgetGroup {
         int i = this.mOrientation;
         sb.append(i == 0 ? "Horizontal" : i == 1 ? "Vertical" : i == 2 ? "Both" : C2paManifestList.UNKNOWN_VALUE);
         sb.append(" [");
-        String m = ReorderTile$$ExternalSyntheticOutline0.m(this.mId, "] <", sb);
+        String strM = ReorderTile$$ExternalSyntheticOutline0.m(this.mId, "] <", sb);
         ArrayList arrayList = this.mWidgets;
         int size = arrayList.size();
         int i2 = 0;
         while (i2 < size) {
             Object obj = arrayList.get(i2);
             i2++;
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, " ");
-            m2.append(((ConstraintWidget) obj).mDebugName);
-            m = m2.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, " ");
+            sbM.append(((ConstraintWidget) obj).mDebugName);
+            strM = sbM.toString();
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, " >");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, " >");
     }
 }

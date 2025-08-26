@@ -45,9 +45,9 @@ public interface IFavoriteNetworkListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IFavoriteNetworkListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFavoriteNetworkListener)) {
-                return (IFavoriteNetworkListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IFavoriteNetworkListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFavoriteNetworkListener)) {
+                return (IFavoriteNetworkListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IFavoriteNetworkListener extends IInterface {
 
             @Override // android.media.tv.extension.scan.IFavoriteNetworkListener
             public void onDetectFavoriteNetwork(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetworkListener");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetworkListener");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

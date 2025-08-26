@@ -2,47 +2,52 @@ package com.samsung.sesl.compose.foundation.theme;
 
 import com.samsung.sesl.compose.component.tokens.SeslAlertDialogTokens;
 import com.samsung.sesl.compose.component.tokens.SeslAppBarTokens;
+import com.samsung.sesl.compose.component.tokens.SeslButtonTokens;
 import com.samsung.sesl.compose.component.tokens.SeslCheckboxTokens;
 import com.samsung.sesl.compose.component.tokens.SeslCommonTokens;
 import com.samsung.sesl.compose.component.tokens.SeslDialogTokens;
 import com.samsung.sesl.compose.component.tokens.SeslDividerTokens;
 import com.samsung.sesl.compose.component.tokens.SeslListTokens;
 import com.samsung.sesl.compose.component.tokens.SeslPopupTokens;
+import com.samsung.sesl.compose.component.tokens.SeslRadioButtonTokens;
 import com.samsung.sesl.compose.component.tokens.SeslSliderTokens;
 import com.samsung.sesl.compose.component.tokens.SeslSpinnerTokens;
 import com.samsung.sesl.compose.component.tokens.SeslSwitchTokens;
 import com.samsung.sesl.compose.component.tokens.SeslTabTokens;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslTokenSchemeImpl implements SeslTokenScheme {
     public final SeslAlertDialogTokens alertDialogTokens;
     public final SeslAppBarTokens appBarTokens;
+    public final SeslButtonTokens buttonTokens;
     public final SeslCheckboxTokens checkboxTokens;
     public final SeslCommonTokens commonTokens;
     public final SeslDialogTokens dialogTokens;
     public final SeslDividerTokens dividerTokens;
     public final SeslListTokens listTokens;
     public final SeslPopupTokens popupTokens;
+    public final SeslRadioButtonTokens radioButtonTokens;
     public final SeslSliderTokens sliderTokens;
     public final SeslSpinnerTokens spinnerTokens;
     public final SeslSwitchTokens switchTokens;
     public final SeslTabTokens tabTokens;
 
-    public SeslTokenSchemeImpl(SeslCommonTokens seslCommonTokens, SeslSwitchTokens seslSwitchTokens, SeslCheckboxTokens seslCheckboxTokens, SeslSpinnerTokens seslSpinnerTokens, SeslPopupTokens seslPopupTokens, SeslDialogTokens seslDialogTokens, SeslAlertDialogTokens seslAlertDialogTokens, SeslSliderTokens seslSliderTokens, SeslTabTokens seslTabTokens, SeslListTokens seslListTokens, SeslAppBarTokens seslAppBarTokens, SeslDividerTokens seslDividerTokens) {
-        this.commonTokens = seslCommonTokens;
-        this.switchTokens = seslSwitchTokens;
-        this.checkboxTokens = seslCheckboxTokens;
-        this.spinnerTokens = seslSpinnerTokens;
-        this.popupTokens = seslPopupTokens;
-        this.dialogTokens = seslDialogTokens;
-        this.alertDialogTokens = seslAlertDialogTokens;
-        this.sliderTokens = seslSliderTokens;
-        this.tabTokens = seslTabTokens;
-        this.listTokens = seslListTokens;
+    public SeslTokenSchemeImpl(SeslAppBarTokens seslAppBarTokens, SeslAlertDialogTokens seslAlertDialogTokens, SeslButtonTokens seslButtonTokens, SeslCheckboxTokens seslCheckboxTokens, SeslCommonTokens seslCommonTokens, SeslDialogTokens seslDialogTokens, SeslDividerTokens seslDividerTokens, SeslListTokens seslListTokens, SeslPopupTokens seslPopupTokens, SeslRadioButtonTokens seslRadioButtonTokens, SeslSliderTokens seslSliderTokens, SeslSpinnerTokens seslSpinnerTokens, SeslSwitchTokens seslSwitchTokens, SeslTabTokens seslTabTokens) {
         this.appBarTokens = seslAppBarTokens;
+        this.alertDialogTokens = seslAlertDialogTokens;
+        this.buttonTokens = seslButtonTokens;
+        this.checkboxTokens = seslCheckboxTokens;
+        this.commonTokens = seslCommonTokens;
+        this.dialogTokens = seslDialogTokens;
         this.dividerTokens = seslDividerTokens;
+        this.listTokens = seslListTokens;
+        this.popupTokens = seslPopupTokens;
+        this.radioButtonTokens = seslRadioButtonTokens;
+        this.sliderTokens = seslSliderTokens;
+        this.spinnerTokens = seslSpinnerTokens;
+        this.switchTokens = seslSwitchTokens;
+        this.tabTokens = seslTabTokens;
     }
 
     public final boolean equals(Object obj) {
@@ -53,7 +58,7 @@ public final class SeslTokenSchemeImpl implements SeslTokenScheme {
             return false;
         }
         SeslTokenSchemeImpl seslTokenSchemeImpl = (SeslTokenSchemeImpl) obj;
-        return Intrinsics.areEqual(this.commonTokens, seslTokenSchemeImpl.commonTokens) && Intrinsics.areEqual(this.switchTokens, seslTokenSchemeImpl.switchTokens) && Intrinsics.areEqual(this.checkboxTokens, seslTokenSchemeImpl.checkboxTokens) && Intrinsics.areEqual(this.spinnerTokens, seslTokenSchemeImpl.spinnerTokens) && Intrinsics.areEqual(this.popupTokens, seslTokenSchemeImpl.popupTokens) && Intrinsics.areEqual(this.dialogTokens, seslTokenSchemeImpl.dialogTokens) && Intrinsics.areEqual(this.alertDialogTokens, seslTokenSchemeImpl.alertDialogTokens) && Intrinsics.areEqual(this.sliderTokens, seslTokenSchemeImpl.sliderTokens) && Intrinsics.areEqual(this.tabTokens, seslTokenSchemeImpl.tabTokens) && Intrinsics.areEqual(this.listTokens, seslTokenSchemeImpl.listTokens) && Intrinsics.areEqual(this.appBarTokens, seslTokenSchemeImpl.appBarTokens) && Intrinsics.areEqual(this.dividerTokens, seslTokenSchemeImpl.dividerTokens);
+        return Intrinsics.areEqual(this.appBarTokens, seslTokenSchemeImpl.appBarTokens) && Intrinsics.areEqual(this.alertDialogTokens, seslTokenSchemeImpl.alertDialogTokens) && Intrinsics.areEqual(this.buttonTokens, seslTokenSchemeImpl.buttonTokens) && Intrinsics.areEqual(this.checkboxTokens, seslTokenSchemeImpl.checkboxTokens) && Intrinsics.areEqual(this.commonTokens, seslTokenSchemeImpl.commonTokens) && Intrinsics.areEqual(this.dialogTokens, seslTokenSchemeImpl.dialogTokens) && Intrinsics.areEqual(this.dividerTokens, seslTokenSchemeImpl.dividerTokens) && Intrinsics.areEqual(this.listTokens, seslTokenSchemeImpl.listTokens) && Intrinsics.areEqual(this.popupTokens, seslTokenSchemeImpl.popupTokens) && Intrinsics.areEqual(this.radioButtonTokens, seslTokenSchemeImpl.radioButtonTokens) && Intrinsics.areEqual(this.sliderTokens, seslTokenSchemeImpl.sliderTokens) && Intrinsics.areEqual(this.spinnerTokens, seslTokenSchemeImpl.spinnerTokens) && Intrinsics.areEqual(this.switchTokens, seslTokenSchemeImpl.switchTokens) && Intrinsics.areEqual(this.tabTokens, seslTokenSchemeImpl.tabTokens);
     }
 
     @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
@@ -64,6 +69,11 @@ public final class SeslTokenSchemeImpl implements SeslTokenScheme {
     @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
     public final SeslAppBarTokens getAppBarTokens() {
         return this.appBarTokens;
+    }
+
+    @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
+    public final SeslButtonTokens getButtonTokens() {
+        return this.buttonTokens;
     }
 
     @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
@@ -97,6 +107,11 @@ public final class SeslTokenSchemeImpl implements SeslTokenScheme {
     }
 
     @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
+    public final SeslRadioButtonTokens getRadioButtonTokens() {
+        return this.radioButtonTokens;
+    }
+
+    @Override // com.samsung.sesl.compose.foundation.theme.SeslTokenScheme
     public final SeslSliderTokens getSliderTokens() {
         return this.sliderTokens;
     }
@@ -117,10 +132,10 @@ public final class SeslTokenSchemeImpl implements SeslTokenScheme {
     }
 
     public final int hashCode() {
-        return this.dividerTokens.hashCode() + ((this.appBarTokens.hashCode() + ((this.listTokens.hashCode() + ((this.tabTokens.hashCode() + ((this.sliderTokens.hashCode() + ((this.alertDialogTokens.hashCode() + ((this.dialogTokens.background.hashCode() + ((this.popupTokens.hashCode() + ((this.spinnerTokens.hashCode() + ((this.checkboxTokens.hashCode() + ((this.switchTokens.hashCode() + (this.commonTokens.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
+        return this.tabTokens.hashCode() + ((this.switchTokens.hashCode() + ((this.spinnerTokens.hashCode() + ((this.sliderTokens.hashCode() + ((this.radioButtonTokens.hashCode() + ((this.popupTokens.hashCode() + ((this.listTokens.hashCode() + ((this.dividerTokens.hashCode() + ((this.dialogTokens.background.hashCode() + ((this.commonTokens.hashCode() + ((this.checkboxTokens.hashCode() + ((this.buttonTokens.hashCode() + ((this.alertDialogTokens.hashCode() + (this.appBarTokens.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
     }
 
     public final String toString() {
-        return "SeslTokenSchemeImpl(commonTokens=" + this.commonTokens + ", switchTokens=" + this.switchTokens + ", checkboxTokens=" + this.checkboxTokens + ", spinnerTokens=" + this.spinnerTokens + ", popupTokens=" + this.popupTokens + ", dialogTokens=" + this.dialogTokens + ", alertDialogTokens=" + this.alertDialogTokens + ", sliderTokens=" + this.sliderTokens + ", tabTokens=" + this.tabTokens + ", listTokens=" + this.listTokens + ", appBarTokens=" + this.appBarTokens + ", dividerTokens=" + this.dividerTokens + ")";
+        return "SeslTokenSchemeImpl(appBarTokens=" + this.appBarTokens + ", alertDialogTokens=" + this.alertDialogTokens + ", buttonTokens=" + this.buttonTokens + ", checkboxTokens=" + this.checkboxTokens + ", commonTokens=" + this.commonTokens + ", dialogTokens=" + this.dialogTokens + ", dividerTokens=" + this.dividerTokens + ", listTokens=" + this.listTokens + ", popupTokens=" + this.popupTokens + ", radioButtonTokens=" + this.radioButtonTokens + ", sliderTokens=" + this.sliderTokens + ", spinnerTokens=" + this.spinnerTokens + ", switchTokens=" + this.switchTokens + ", tabTokens=" + this.tabTokens + ")";
     }
 }

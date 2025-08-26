@@ -39,9 +39,9 @@ public interface ISpqrService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpqrService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpqrService)) {
-                return (ISpqrService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpqrService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpqrService)) {
+                return (ISpqrService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -68,18 +68,18 @@ public interface ISpqrService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
-                String readString6 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean createInvariantProfile = createInvariantProfile(readString, readString2, readInt, readInt2, readString3, readString4, readString5, readString6);
+                boolean zCreateInvariantProfile = createInvariantProfile(string, string2, i3, i4, string3, string4, string5, string6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(createInvariantProfile);
+                parcel2.writeBoolean(zCreateInvariantProfile);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,24 +103,24 @@ public interface ISpqrService extends IInterface {
 
             @Override // android.os.ISpqrService
             public boolean createInvariantProfile(String str, String str2, int i, int i2, String str3, String str4, String str5, String str6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpqrService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISpqrService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

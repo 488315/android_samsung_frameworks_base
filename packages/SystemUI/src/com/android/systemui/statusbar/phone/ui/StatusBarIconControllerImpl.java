@@ -46,7 +46,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarIconControllerImpl implements TunerService.Tunable, ConfigurationController.ConfigurationListener, Dumpable, StatusBarIconController, DemoMode {
     protected static final String EXTERNAL_SLOT_SUFFIX = "__external";
@@ -100,11 +99,11 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
             public final void onReceive(Context context2, Intent intent) {
                 StatusBarIconControllerImpl statusBarIconControllerImpl = StatusBarIconControllerImpl.this;
                 String str = StatusBarIconControllerImpl.EXTERNAL_SLOT_SUFFIX;
-                boolean updateSystemIconsAllowList = statusBarIconControllerImpl.updateSystemIconsAllowList();
-                StringBuilder m = RowView$$ExternalSyntheticOutline0.m("ACTION_CARRIER_CHANGED received. updateSystemIconsAllowList()?", " mSystemIconsAllowList:", updateSystemIconsAllowList);
-                m.append(StatusBarIconControllerImpl.this.mSystemIconsAllowList);
-                Log.d("StatusBarIconController", m.toString());
-                if (updateSystemIconsAllowList) {
+                boolean zUpdateSystemIconsAllowList = statusBarIconControllerImpl.updateSystemIconsAllowList();
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("ACTION_CARRIER_CHANGED received. updateSystemIconsAllowList()?", " mSystemIconsAllowList:", zUpdateSystemIconsAllowList);
+                sbM.append(StatusBarIconControllerImpl.this.mSystemIconsAllowList);
+                Log.d("StatusBarIconController", sbM.toString());
+                if (zUpdateSystemIconsAllowList) {
                     StatusBarIconControllerImpl.this.refreshIconGroups();
                 }
             }
@@ -152,9 +151,9 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
             List holderListInViewOrder = slot.getHolderListInViewOrder();
             ArraySet arraySet = this.mIconHideList;
             String str = slot.mName;
-            boolean contains = arraySet.contains(str);
-            if (!contains) {
-                contains = hideBySimplification(iconManager, str);
+            boolean zContains = arraySet.contains(str);
+            if (!zContains) {
+                zContains = hideBySimplification(iconManager, str);
             }
             ArrayList arrayList2 = (ArrayList) holderListInViewOrder;
             int size2 = arrayList2.size();
@@ -163,7 +162,7 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
                 Object obj2 = arrayList2.get(i3);
                 i3++;
                 StatusBarIconHolder statusBarIconHolder = (StatusBarIconHolder) obj2;
-                iconManager.onIconAdded(statusBarIconList.getViewIndex(statusBarIconHolder.tag, str), str, contains, statusBarIconHolder);
+                iconManager.onIconAdded(statusBarIconList.getViewIndex(statusBarIconHolder.tag, str), str, zContains, statusBarIconHolder);
             }
         }
     }
@@ -366,7 +365,7 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
                 int viewIndex = statusBarIconList.getViewIndex(i2, str);
                 if (!list.isEmpty() && list.contains(Integer.valueOf(i2))) {
                     if (list.contains(Integer.valueOf(i2))) {
-                        if (!str.equals(this.mSubscriptionsOrder.getSimOrderByIds(i2, list) == 0 ? this.mContext.getString(17043283) : this.mContext.getString(17043284))) {
+                        if (!str.equals(this.mSubscriptionsOrder.getSimOrderByIds(i2, list) == 0 ? this.mContext.getString(17043287) : this.mContext.getString(17043288))) {
                         }
                     }
                 }
@@ -397,24 +396,25 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
             return;
         }
         final int viewIndex = statusBarIconList.getViewIndex(statusBarIconHolder.tag, str);
-        final boolean contains = this.mIconHideList.contains(str);
+        final boolean zContains = this.mIconHideList.contains(str);
         this.mIconGroups.forEach(new Consumer() { // from class: com.android.systemui.statusbar.phone.ui.StatusBarIconControllerImpl$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 boolean z2;
-                StatusBarIconControllerImpl statusBarIconControllerImpl = StatusBarIconControllerImpl.this;
+                StatusBarIconControllerImpl statusBarIconControllerImpl = this.f$0;
                 int i3 = viewIndex;
                 String str2 = str;
-                boolean z3 = contains;
+                boolean z3 = zContains;
                 StatusBarIconHolder statusBarIconHolder2 = statusBarIconHolder;
                 IconManager iconManager = (IconManager) obj;
                 String str3 = StatusBarIconControllerImpl.EXTERNAL_SLOT_SUFFIX;
-                if (z3) {
-                    statusBarIconControllerImpl.getClass();
-                } else if (!statusBarIconControllerImpl.hideBySimplification(iconManager, str2)) {
-                    z2 = false;
+                if (!z3) {
+                    if (!statusBarIconControllerImpl.hideBySimplification(iconManager, str2)) {
+                        z2 = false;
+                    }
                     iconManager.onIconAdded(i3, str2, z2, statusBarIconHolder2);
                 }
+                statusBarIconControllerImpl.getClass();
                 z2 = true;
                 iconManager.onIconAdded(i3, str2, z2, statusBarIconHolder2);
             }
@@ -439,11 +439,11 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
     }
 
     public final void setNewMobileIconSubIds(List list) {
-        String string = this.mContext.getString(17043283);
+        String string = this.mContext.getString(17043287);
         StatusBarIconList statusBarIconList = this.mStatusBarIconList;
         StatusBarIconList.Slot slot = (StatusBarIconList.Slot) statusBarIconList.mSlots.get(statusBarIconList.findOrInsertSlot(string));
         removeUnusedIconsInSlot(string, list);
-        String string2 = this.mContext.getString(17043284);
+        String string2 = this.mContext.getString(17043288);
         StatusBarIconList.Slot slot2 = (StatusBarIconList.Slot) statusBarIconList.mSlots.get(statusBarIconList.findOrInsertSlot(string2));
         if (BasicRune.STATUS_NETWORK_MULTI_SIM) {
             removeUnusedIconsInSlot(string2, list);
@@ -460,19 +460,19 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
                 Log.d("StatusBarIconController", "setNewMobileIconSubIds - subId: " + num + ", mobileslotId: " + simOrderByIds);
                 if ((simOrderByIds == 0 ? slot.getHolderForTag(num.intValue()) : slot2.getHolderForTag(num.intValue())) == null) {
                     Log.d("StatusBarIconController", "add NewMobileIconSubIds - subId: " + num + ", mobileslotId: " + simOrderByIds);
-                    int intValue = num.intValue();
+                    int iIntValue = num.intValue();
                     StatusBarIconHolder.Companion.getClass();
                     StatusBarIconHolder statusBarIconHolder = new StatusBarIconHolder(null);
                     statusBarIconHolder.type = 3;
-                    statusBarIconHolder.tag = intValue;
+                    statusBarIconHolder.tag = iIntValue;
                     setIcon(simOrderByIds == 0 ? string : string2, statusBarIconHolder);
                 }
             } else if (slot.getHolderForTag(num.intValue()) == null) {
-                int intValue2 = num.intValue();
+                int iIntValue2 = num.intValue();
                 StatusBarIconHolder.Companion.getClass();
                 StatusBarIconHolder statusBarIconHolder2 = new StatusBarIconHolder(null);
                 statusBarIconHolder2.type = 3;
-                statusBarIconHolder2.tag = intValue2;
+                statusBarIconHolder2.tag = iIntValue2;
                 setIcon(string, statusBarIconHolder2);
             }
         }
@@ -481,38 +481,38 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
     public final boolean updateSystemIconsAllowList() {
         ArrayList arrayList = new ArrayList();
         arrayList.addAll(this.mSystemIconsAllowList);
-        List asList = Arrays.asList("SKT", "KTT", "LGT");
+        List listAsList = Arrays.asList("SKT", "KTT", "LGT");
         CarrierInfraMediator.Values values = CarrierInfraMediator.Values.ICON_BRANDING;
         CarrierInfraMediator carrierInfraMediator = this.mCarrierInfraMediator;
-        if (asList.contains(carrierInfraMediator.get(values, 0, new Object[0])) || "ORANGE".equals(carrierInfraMediator.get(values, 0, new Object[0])) || "ORANGE".equals(carrierInfraMediator.get(values, 1, new Object[0]))) {
-            if (!this.mSystemIconsAllowList.contains(this.mContext.getString(17043278))) {
-                this.mSystemIconsAllowList.add(this.mContext.getString(17043278));
+        if (listAsList.contains(carrierInfraMediator.get(values, 0, new Object[0])) || "ORANGE".equals(carrierInfraMediator.get(values, 0, new Object[0])) || "ORANGE".equals(carrierInfraMediator.get(values, 1, new Object[0]))) {
+            if (!this.mSystemIconsAllowList.contains(this.mContext.getString(17043282))) {
+                this.mSystemIconsAllowList.add(this.mContext.getString(17043282));
             }
-            if (!this.mSystemIconsAllowList.contains(this.mContext.getString(17043279))) {
-                this.mSystemIconsAllowList.add(this.mContext.getString(17043279));
+            if (!this.mSystemIconsAllowList.contains(this.mContext.getString(17043283))) {
+                this.mSystemIconsAllowList.add(this.mContext.getString(17043283));
             }
         } else {
-            this.mSystemIconsAllowList.remove(this.mContext.getString(17043278));
-            this.mSystemIconsAllowList.remove(this.mContext.getString(17043279));
+            this.mSystemIconsAllowList.remove(this.mContext.getString(17043282));
+            this.mSystemIconsAllowList.remove(this.mContext.getString(17043283));
         }
         return arrayList.size() != this.mSystemIconsAllowList.size();
     }
 
     public final void setIcon(CharSequence charSequence, String str, int i) {
-        Icon createWithResource = Icon.createWithResource(this.mContext, i);
+        Icon iconCreateWithResource = Icon.createWithResource(this.mContext, i);
         StatusBarIcon.Type type = StatusBarIcon.Type.SystemIcon;
         StatusBarIcon.Shape shape = StatusBarIcon.Shape.WRAP_CONTENT;
-        boolean z = createWithResource.getType() == 2;
-        String str2 = "Expected Icon of TYPE_RESOURCE, but got " + createWithResource.getType();
+        boolean z = iconCreateWithResource.getType() == 2;
+        String str2 = "Expected Icon of TYPE_RESOURCE, but got " + iconCreateWithResource.getType();
         if (z) {
-            String resPackage = createWithResource.getResPackage();
+            String resPackage = iconCreateWithResource.getResPackage();
             if (TextUtils.isEmpty(resPackage)) {
                 resPackage = this.mContext.getPackageName();
             }
             String str3 = resPackage;
             StatusBarIconHolder iconHolder = this.mStatusBarIconList.getIconHolder(0, str);
             if (iconHolder == null) {
-                StatusBarIcon statusBarIcon = new StatusBarIcon(UserHandle.SYSTEM, str3, createWithResource, 0, 0, charSequence, type, shape);
+                StatusBarIcon statusBarIcon = new StatusBarIcon(UserHandle.SYSTEM, str3, iconCreateWithResource, 0, 0, charSequence, type, shape);
                 statusBarIcon.preloadedIcon = null;
                 StatusBarIconHolder.Companion.getClass();
                 StatusBarIconHolder statusBarIconHolder = new StatusBarIconHolder(null);
@@ -522,7 +522,7 @@ public class StatusBarIconControllerImpl implements TunerService.Tunable, Config
             }
             StatusBarIcon statusBarIcon2 = iconHolder.icon;
             statusBarIcon2.pkg = str3;
-            statusBarIcon2.icon = createWithResource;
+            statusBarIcon2.icon = iconCreateWithResource;
             statusBarIcon2.contentDescription = charSequence;
             statusBarIcon2.type = type;
             statusBarIcon2.shape = shape;

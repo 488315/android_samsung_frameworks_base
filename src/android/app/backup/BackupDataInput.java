@@ -31,9 +31,9 @@ public class BackupDataInput {
     @SystemApi
     public BackupDataInput(FileDescriptor fileDescriptor) {
         fileDescriptor.getClass();
-        long ctor = ctor(fileDescriptor);
-        this.mBackupReader = ctor;
-        if (ctor != 0) {
+        long jCtor = ctor(fileDescriptor);
+        this.mBackupReader = jCtor;
+        if (jCtor != 0) {
             return;
         }
         throw new RuntimeException("Native initialization failed with fd=" + fileDescriptor);
@@ -48,17 +48,17 @@ public class BackupDataInput {
     }
 
     public boolean readNextHeader() throws IOException {
-        int readNextHeader_native = readNextHeader_native(this.mBackupReader, this.mHeader);
-        if (readNextHeader_native == 0) {
+        int nextHeader_native = readNextHeader_native(this.mBackupReader, this.mHeader);
+        if (nextHeader_native == 0) {
             this.mHeaderReady = true;
             return true;
         }
-        if (readNextHeader_native > 0) {
+        if (nextHeader_native > 0) {
             this.mHeaderReady = false;
             return false;
         }
         this.mHeaderReady = false;
-        throw new IOException("failed: 0x" + Integer.toHexString(readNextHeader_native));
+        throw new IOException("failed: 0x" + Integer.toHexString(nextHeader_native));
     }
 
     public String getKey() {
@@ -77,11 +77,11 @@ public class BackupDataInput {
 
     public int readEntityData(byte[] bArr, int i, int i2) throws IOException {
         if (this.mHeaderReady) {
-            int readEntityData_native = readEntityData_native(this.mBackupReader, bArr, i, i2);
-            if (readEntityData_native >= 0) {
-                return readEntityData_native;
+            int entityData_native = readEntityData_native(this.mBackupReader, bArr, i, i2);
+            if (entityData_native >= 0) {
+                return entityData_native;
             }
-            throw new IOException("result=0x" + Integer.toHexString(readEntityData_native));
+            throw new IOException("result=0x" + Integer.toHexString(entityData_native));
         }
         throw new IllegalStateException("Entity header not read");
     }

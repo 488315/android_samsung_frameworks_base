@@ -15,7 +15,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CacheDrawModifierNodeImpl extends Modifier.Node implements CacheDrawModifierNode, ObserverModifierNode, BuildDrawCacheParams {
     public Function1 block;
@@ -37,9 +36,9 @@ final class CacheDrawModifierNodeImpl extends Modifier.Node implements CacheDraw
                     cacheDrawModifierNodeImpl.cachedGraphicsContext = scopedGraphicsContext;
                 }
                 if (scopedGraphicsContext.graphicsContext == null) {
-                    GraphicsContext requireGraphicsContext = DelegatableNodeKt.requireGraphicsContext(cacheDrawModifierNodeImpl);
+                    GraphicsContext graphicsContextRequireGraphicsContext = DelegatableNodeKt.requireGraphicsContext(cacheDrawModifierNodeImpl);
                     scopedGraphicsContext.releaseGraphicsLayers();
-                    scopedGraphicsContext.graphicsContext = requireGraphicsContext;
+                    scopedGraphicsContext.graphicsContext = graphicsContextRequireGraphicsContext;
                 }
                 return scopedGraphicsContext;
             }
@@ -61,7 +60,7 @@ final class CacheDrawModifierNodeImpl extends Modifier.Node implements CacheDraw
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    CacheDrawModifierNodeImpl.this.block.mo779invoke(cacheDrawScope);
+                    this.this$0.block.mo781invoke(cacheDrawScope);
                     return Unit.INSTANCE;
                 }
             });
@@ -72,7 +71,7 @@ final class CacheDrawModifierNodeImpl extends Modifier.Node implements CacheDraw
         }
         DrawResult drawResult = cacheDrawScope.drawResult;
         drawResult.getClass();
-        drawResult.block.mo779invoke(layoutNodeDrawScope);
+        drawResult.block.mo781invoke(layoutNodeDrawScope);
     }
 
     @Override // androidx.compose.ui.draw.BuildDrawCacheParams
@@ -87,8 +86,8 @@ final class CacheDrawModifierNodeImpl extends Modifier.Node implements CacheDraw
 
     @Override // androidx.compose.ui.draw.BuildDrawCacheParams
     /* renamed from: getSize-NH-jbRc */
-    public final long mo360getSizeNHjbRc() {
-        return IntSizeKt.m864toSizeozmzZPI(DelegatableNodeKt.m632requireCoordinator64DMado(this, 128).measuredSize);
+    public final long mo361getSizeNHjbRc() {
+        return IntSizeKt.m866toSizeozmzZPI(DelegatableNodeKt.m634requireCoordinator64DMado(this, 128).measuredSize);
     }
 
     @Override // androidx.compose.ui.draw.CacheDrawModifierNode

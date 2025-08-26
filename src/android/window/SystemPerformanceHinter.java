@@ -146,44 +146,44 @@ public class SystemPerformanceHinter {
     }
 
     public HighPerfSession startSession(int i, int i2, String str) {
-        HighPerfSession createSession = createSession(i, i2, str);
-        if (createSession.hintFlags != 0) {
-            startSession(createSession);
+        HighPerfSession highPerfSessionCreateSession = createSession(i, i2, str);
+        if (highPerfSessionCreateSession.hintFlags != 0) {
+            startSession(highPerfSessionCreateSession);
         }
-        return createSession;
+        return highPerfSessionCreateSession;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void startSession(HighPerfSession highPerfSession) {
         boolean z;
-        boolean asyncTraceBegin = highPerfSession.asyncTraceBegin();
-        int calculateActiveHintFlags = calculateActiveHintFlags(5);
-        int calculateActiveHintFlagsForDisplay = calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId);
+        boolean zAsyncTraceBegin = highPerfSession.asyncTraceBegin();
+        int iCalculateActiveHintFlags = calculateActiveHintFlags(5);
+        int iCalculateActiveHintFlagsForDisplay = calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId);
         this.mActiveSessions.add(highPerfSession);
-        int calculateActiveHintFlags2 = calculateActiveHintFlags(5);
+        int iCalculateActiveHintFlags2 = calculateActiveHintFlags(5);
         boolean z2 = true;
-        if (nowEnabled(calculateActiveHintFlagsForDisplay, calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId), 2)) {
+        if (nowEnabled(iCalculateActiveHintFlagsForDisplay, calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId), 2)) {
             SurfaceControl rootForDisplay = this.mDisplayRootProvider.getRootForDisplay(highPerfSession.displayId);
             this.mTransaction.setFrameRateSelectionStrategy(rootForDisplay, 1);
             this.mTransaction.setFrameRateCategory(rootForDisplay, 6, false);
-            if (asyncTraceBegin) {
+            if (zAsyncTraceBegin) {
                 asyncTraceBegin(2, highPerfSession.displayId);
             }
             z = true;
         } else {
             z = false;
         }
-        if (nowEnabled(calculateActiveHintFlags, calculateActiveHintFlags2, 1)) {
+        if (nowEnabled(iCalculateActiveHintFlags, iCalculateActiveHintFlags2, 1)) {
             this.mTransaction.setEarlyWakeupStart();
-            if (asyncTraceBegin) {
+            if (zAsyncTraceBegin) {
                 asyncTraceBegin(1, -1);
             }
         } else {
             z2 = z;
         }
-        if (this.mAdpfSession != null && nowEnabled(calculateActiveHintFlags, calculateActiveHintFlags2, 4)) {
+        if (this.mAdpfSession != null && nowEnabled(iCalculateActiveHintFlags, iCalculateActiveHintFlags2, 4)) {
             this.mAdpfSession.sendHint(0);
-            if (asyncTraceBegin) {
+            if (zAsyncTraceBegin) {
                 asyncTraceBegin(4, -1);
             }
         }
@@ -194,33 +194,33 @@ public class SystemPerformanceHinter {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void endSession(HighPerfSession highPerfSession) {
-        boolean asyncTraceEnd = highPerfSession.asyncTraceEnd();
-        int calculateActiveHintFlags = calculateActiveHintFlags(5);
-        int calculateActiveHintFlagsForDisplay = calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId);
+        boolean zAsyncTraceEnd = highPerfSession.asyncTraceEnd();
+        int iCalculateActiveHintFlags = calculateActiveHintFlags(5);
+        int iCalculateActiveHintFlagsForDisplay = calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId);
         this.mActiveSessions.remove(highPerfSession);
-        int calculateActiveHintFlags2 = calculateActiveHintFlags(5);
+        int iCalculateActiveHintFlags2 = calculateActiveHintFlags(5);
         boolean z = true;
         boolean z2 = false;
-        if (nowDisabled(calculateActiveHintFlagsForDisplay, calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId), 2)) {
+        if (nowDisabled(iCalculateActiveHintFlagsForDisplay, calculateActiveHintFlagsForDisplay(2, highPerfSession.displayId), 2)) {
             SurfaceControl rootForDisplay = this.mDisplayRootProvider.getRootForDisplay(highPerfSession.displayId);
             this.mTransaction.setFrameRateSelectionStrategy(rootForDisplay, 0);
             this.mTransaction.setFrameRateCategory(rootForDisplay, 0, false);
-            if (asyncTraceEnd) {
+            if (zAsyncTraceEnd) {
                 asyncTraceEnd(2);
             }
             z2 = true;
         }
-        if (nowDisabled(calculateActiveHintFlags, calculateActiveHintFlags2, 1)) {
+        if (nowDisabled(iCalculateActiveHintFlags, iCalculateActiveHintFlags2, 1)) {
             this.mTransaction.setEarlyWakeupEnd();
-            if (asyncTraceEnd) {
+            if (zAsyncTraceEnd) {
                 asyncTraceEnd(1);
             }
         } else {
             z = z2;
         }
-        if (this.mAdpfSession != null && nowDisabled(calculateActiveHintFlags, calculateActiveHintFlags2, 4)) {
+        if (this.mAdpfSession != null && nowDisabled(iCalculateActiveHintFlags, iCalculateActiveHintFlags2, 4)) {
             this.mAdpfSession.sendHint(2);
-            if (asyncTraceEnd) {
+            if (zAsyncTraceEnd) {
                 asyncTraceEnd(4);
             }
         }

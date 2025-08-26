@@ -148,23 +148,23 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         this.mBatteryConsumersCursorWindow = builder.mBatteryConsumersCursorWindow;
         int size = builder.mUidBatteryConsumerBuilders.size();
         this.mUidBatteryConsumers = new ArrayList(size);
-        double d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+        double consumedPower = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         for (int i = 0; i < size; i++) {
             UidBatteryConsumer.Builder builder2 = (UidBatteryConsumer.Builder) builder.mUidBatteryConsumerBuilders.valueAt(i);
             if (!builder2.isExcludedFromBatteryUsageStats()) {
-                UidBatteryConsumer build = builder2.build();
-                d += build.getConsumedPower();
-                this.mUidBatteryConsumers.add(build);
+                UidBatteryConsumer uidBatteryConsumerBuild = builder2.build();
+                consumedPower += uidBatteryConsumerBuild.getConsumedPower();
+                this.mUidBatteryConsumers.add(uidBatteryConsumerBuild);
             }
         }
         int size2 = builder.mUserBatteryConsumerBuilders.size();
         this.mUserBatteryConsumers = new ArrayList(size2);
         for (int i2 = 0; i2 < size2; i2++) {
-            UserBatteryConsumer build2 = ((UserBatteryConsumer.Builder) builder.mUserBatteryConsumerBuilders.valueAt(i2)).build();
-            d += build2.getConsumedPower();
-            this.mUserBatteryConsumers.add(build2);
+            UserBatteryConsumer userBatteryConsumerBuild = ((UserBatteryConsumer.Builder) builder.mUserBatteryConsumerBuilders.valueAt(i2)).build();
+            consumedPower += userBatteryConsumerBuild.getConsumedPower();
+            this.mUserBatteryConsumers.add(userBatteryConsumerBuild);
         }
-        builder.getAggregateBatteryConsumerBuilder(1).addConsumedPower(d);
+        builder.getAggregateBatteryConsumerBuilder(1).addConsumedPower(consumedPower);
         this.mAggregateBatteryConsumers = new AggregateBatteryConsumer[2];
         for (int i3 = 0; i3 < 2; i3++) {
             this.mAggregateBatteryConsumers[i3] = builder.mAggregateBatteryConsumersBuilders[i3].build();
@@ -257,16 +257,16 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         this.mDischargeDurationMs = parcel.readLong();
         this.mBatteryTimeRemainingMs = parcel.readLong();
         this.mChargeTimeRemainingMs = parcel.readLong();
-        String[] readStringArray = parcel.readStringArray();
-        this.mCustomPowerComponentNames = readStringArray;
-        boolean readBoolean = parcel.readBoolean();
-        this.mIncludesProcessStateData = readBoolean;
-        boolean readBoolean2 = parcel.readBoolean();
-        this.mIncludesScreenStateData = readBoolean2;
-        boolean readBoolean3 = parcel.readBoolean();
-        this.mIncludesPowerStateData = readBoolean3;
+        String[] stringArray = parcel.readStringArray();
+        this.mCustomPowerComponentNames = stringArray;
+        boolean z = parcel.readBoolean();
+        this.mIncludesProcessStateData = z;
+        boolean z2 = parcel.readBoolean();
+        this.mIncludesScreenStateData = z2;
+        boolean z3 = parcel.readBoolean();
+        this.mIncludesPowerStateData = z3;
         this.mBatteryConsumersCursorWindow = CursorWindow.newFromParcel(parcel);
-        this.mBatteryConsumerDataLayout = BatteryConsumer.createBatteryConsumerDataLayout(readStringArray, readBoolean, readBoolean2, readBoolean3);
+        this.mBatteryConsumerDataLayout = BatteryConsumer.createBatteryConsumerDataLayout(stringArray, z, z2, z3);
         int numRows = this.mBatteryConsumersCursorWindow.getNumRows();
         this.mAggregateBatteryConsumers = new AggregateBatteryConsumer[2];
         this.mUidBatteryConsumers = new ArrayList(numRows);
@@ -318,23 +318,23 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
     }
 
     public byte[] getStatsProto() {
-        int i = 78750;
-        for (int i2 = 0; i2 < 3; i2++) {
+        int length = 78750;
+        for (int i = 0; i < 3; i++) {
             ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-            writeStatsProto(protoOutputStream, i);
+            writeStatsProto(protoOutputStream, length);
             int rawSize = protoOutputStream.getRawSize();
             byte[] bytes = protoOutputStream.getBytes();
             if (bytes.length <= STATSD_PULL_ATOM_MAX_BYTES) {
                 return bytes;
             }
-            i = (int) (((rawSize * 45000) / bytes.length) - 1024);
+            length = (int) (((rawSize * 45000) / bytes.length) - 1024);
         }
         ProtoOutputStream protoOutputStream2 = new ProtoOutputStream();
         writeStatsProto(protoOutputStream2, STATSD_PULL_ATOM_MAX_BYTES);
         return protoOutputStream2.getBytes();
     }
 
-    public void dumpToProto(FileDescriptor fileDescriptor) {
+    public void dumpToProto(FileDescriptor fileDescriptor) throws IOException {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream(fileDescriptor);
         writeStatsProto(protoOutputStream, Integer.MAX_VALUE);
         protoOutputStream.flush();
@@ -361,9 +361,7 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         uidBatteryConsumers.sort(Comparator.comparingDouble(new ToDoubleFunction() { // from class: android.os.BatteryUsageStats$$ExternalSyntheticLambda0
             @Override // java.util.function.ToDoubleFunction
             public final double applyAsDouble(Object obj) {
-                double uidBatteryConsumerWeight;
-                uidBatteryConsumerWeight = BatteryUsageStats.this.getUidBatteryConsumerWeight((UidBatteryConsumer) obj);
-                return uidBatteryConsumerWeight;
+                return this.f$0.getUidBatteryConsumerWeight((UidBatteryConsumer) obj);
             }
         }).reversed());
         int size = uidBatteryConsumers.size();
@@ -373,16 +371,16 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
             UidBatteryConsumer uidBatteryConsumer = uidBatteryConsumers.get(i6);
             long timeInStateMs = uidBatteryConsumer.getTimeInStateMs(i5);
             long timeInStateMs2 = uidBatteryConsumer.getTimeInStateMs(1);
-            boolean hasStatsProtoData = uidBatteryConsumer.hasStatsProtoData();
-            if (timeInStateMs == 0 && timeInStateMs2 == 0 && !hasStatsProtoData) {
+            boolean zHasStatsProtoData = uidBatteryConsumer.hasStatsProtoData();
+            if (timeInStateMs == 0 && timeInStateMs2 == 0 && !zHasStatsProtoData) {
                 list = uidBatteryConsumers;
                 i3 = size;
                 i2 = i6;
             } else {
                 i2 = i6;
-                long start = protoOutputStream.start(2246267895813L);
+                long jStart = protoOutputStream.start(2246267895813L);
                 protoOutputStream.write(1120986464257L, uidBatteryConsumer.getUid());
-                if (hasStatsProtoData) {
+                if (zHasStatsProtoData) {
                     uidBatteryConsumer.writeStatsProto(protoOutputStream, 1146756268034L);
                 }
                 protoOutputStream.write(1112396529667L, timeInStateMs);
@@ -399,10 +397,10 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
                     } else {
                         list2 = uidBatteryConsumers;
                         i4 = size;
-                        long start2 = protoOutputStream.start(2246267895813L);
+                        long jStart2 = protoOutputStream.start(2246267895813L);
                         protoOutputStream.write(1159641169921L, i8);
                         protoOutputStream.write(1112396529666L, timeInProcessStateMs);
-                        protoOutputStream.end(start2);
+                        protoOutputStream.end(jStart2);
                     }
                     i7++;
                     uidBatteryConsumers = list2;
@@ -410,7 +408,7 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
                 }
                 list = uidBatteryConsumers;
                 i3 = size;
-                protoOutputStream.end(start);
+                protoOutputStream.end(jStart);
                 if (protoOutputStream.getRawSize() >= i) {
                     return;
                 }
@@ -441,10 +439,10 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         printWriter.print(BatteryStats.formatCharge(getConsumedPower()));
         Range<Double> dischargedPowerRange = getDischargedPowerRange();
         printWriter.print(", actual drain: ");
-        printWriter.print(BatteryStats.formatCharge(dischargedPowerRange.getLower().doubleValue()));
-        if (!dischargedPowerRange.getLower().equals(dischargedPowerRange.getUpper())) {
+        printWriter.print(BatteryStats.formatCharge(((Double) dischargedPowerRange.getLower()).doubleValue()));
+        if (!((Double) dischargedPowerRange.getLower()).equals(dischargedPowerRange.getUpper())) {
             printWriter.print(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-            printWriter.print(BatteryStats.formatCharge(dischargedPowerRange.getUpper().doubleValue()));
+            printWriter.print(BatteryStats.formatCharge(((Double) dischargedPowerRange.getUpper()).doubleValue()));
         }
         printWriter.println();
         printWriter.println("    Global");
@@ -487,6 +485,10 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
         printWriter.println();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0078  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void dumpPowerComponents(PrintWriter printWriter, int i, int i2, String str) {
         PrintWriter printWriter2;
         boolean z;
@@ -510,44 +512,37 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
                 iArr = iArr2;
                 i4 = length;
                 i3 = i5;
-            } else {
-                if (!z3) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("      (");
-                    if (i2 != 0) {
-                        sb.append(BatteryConsumer.powerStateToString(i2));
-                        z2 = false;
-                    } else {
-                        z2 = true;
-                    }
-                    if (i != 0) {
-                        if (!z2) {
-                            sb.append(", ");
-                        }
-                        sb.append("screen ");
-                        sb.append(BatteryConsumer.screenStateToString(i));
-                        z2 = false;
-                    }
-                    if (!z2) {
-                        sb.append(NavigationBarInflaterView.KEY_CODE_END);
-                        printWriter2 = printWriter;
-                        printWriter2.println(sb);
-                        z = true;
-                        i3 = i5;
-                        PrintWriter printWriter3 = printWriter2;
-                        iArr = iArr2;
-                        i4 = length;
-                        batteryUsageStats.printPowerComponent(printWriter3, str, batteryUsageStats.mBatteryConsumerDataLayout.getPowerComponentName(i6), consumedPower, consumedPower2, aggregateBatteryConsumer.getUsageDurationMillis(dimensions));
-                        z3 = z;
-                    }
+            } else if (!z3) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("      (");
+                if (i2 != 0) {
+                    sb.append(BatteryConsumer.powerStateToString(i2));
+                    z2 = false;
+                } else {
+                    z2 = true;
                 }
-                printWriter2 = printWriter;
-                z = z3;
+                if (i != 0) {
+                    if (!z2) {
+                        sb.append(", ");
+                    }
+                    sb.append("screen ");
+                    sb.append(BatteryConsumer.screenStateToString(i));
+                    z2 = false;
+                }
+                if (z2) {
+                    printWriter2 = printWriter;
+                    z = z3;
+                } else {
+                    sb.append(NavigationBarInflaterView.KEY_CODE_END);
+                    printWriter2 = printWriter;
+                    printWriter2.println(sb);
+                    z = true;
+                }
                 i3 = i5;
-                PrintWriter printWriter32 = printWriter2;
+                PrintWriter printWriter3 = printWriter2;
                 iArr = iArr2;
                 i4 = length;
-                batteryUsageStats.printPowerComponent(printWriter32, str, batteryUsageStats.mBatteryConsumerDataLayout.getPowerComponentName(i6), consumedPower, consumedPower2, aggregateBatteryConsumer.getUsageDurationMillis(dimensions));
+                batteryUsageStats.printPowerComponent(printWriter3, str, batteryUsageStats.mBatteryConsumerDataLayout.getPowerComponentName(i6), consumedPower, consumedPower2, aggregateBatteryConsumer.getUsageDurationMillis(dimensions));
                 z3 = z;
             }
             i5 = i3 + 1;
@@ -626,9 +621,12 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x00d8  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static Builder createBuilderFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         Builder builder;
-        boolean z;
         int eventType = typedXmlPullParser.getEventType();
         while (true) {
             builder = null;
@@ -669,40 +667,14 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
             if (eventType == 2) {
                 String name = typedXmlPullParser.getName();
                 name.hashCode();
-                switch (name.hashCode()) {
-                    case 115792:
-                        if (name.equals("uid")) {
-                            z = false;
-                            break;
-                        }
-                        z = -1;
-                        break;
-                    case 3599307:
-                        if (name.equals("user")) {
-                            z = true;
-                            break;
-                        }
-                        z = -1;
-                        break;
-                    case 175177151:
-                        if (name.equals(XML_TAG_AGGREGATE)) {
-                            z = 2;
-                            break;
-                        }
-                        z = -1;
-                        break;
-                    default:
-                        z = -1;
-                        break;
-                }
-                switch (z) {
-                    case false:
+                switch (name) {
+                    case "uid":
                         UidBatteryConsumer.createFromXml(typedXmlPullParser, builder);
                         break;
-                    case true:
+                    case "user":
                         UserBatteryConsumer.createFromXml(typedXmlPullParser, builder);
                         break;
-                    case true:
+                    case "aggregate":
                         AggregateBatteryConsumer.parseXml(typedXmlPullParser, builder);
                         break;
                 }
@@ -775,9 +747,9 @@ public final class BatteryUsageStats implements Parcelable, Closeable {
             CursorWindow cursorWindow = new CursorWindow((String) null, BatteryUsageStats.BATTERY_CONSUMER_CURSOR_WINDOW_SIZE);
             this.mBatteryConsumersCursorWindow = cursorWindow;
             BatteryUsageStats.onCursorWindowAllocated(cursorWindow);
-            BatteryConsumer.BatteryConsumerDataLayout createBatteryConsumerDataLayout = BatteryConsumer.createBatteryConsumerDataLayout(strArr, z, z2, z3);
-            this.mBatteryConsumerDataLayout = createBatteryConsumerDataLayout;
-            cursorWindow.setNumColumns(createBatteryConsumerDataLayout.columnCount);
+            BatteryConsumer.BatteryConsumerDataLayout batteryConsumerDataLayoutCreateBatteryConsumerDataLayout = BatteryConsumer.createBatteryConsumerDataLayout(strArr, z, z2, z3);
+            this.mBatteryConsumerDataLayout = batteryConsumerDataLayoutCreateBatteryConsumerDataLayout;
+            cursorWindow.setNumColumns(batteryConsumerDataLayoutCreateBatteryConsumerDataLayout.columnCount);
             this.mCustomPowerComponentNames = strArr;
             this.mIncludesProcessStateData = z;
             this.mIncludesScreenStateData = z2;

@@ -13,7 +13,6 @@ import com.google.protobuf.UninitializedMessageException;
 import com.google.protobuf.WireFormat$FieldType;
 import java.io.InputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowingEducationProto extends GeneratedMessageLite implements MessageLiteOrBuilder {
     public static final int APP_HANDLE_EDUCATION_FIELD_NUMBER = 3;
@@ -36,7 +35,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
     private long exitDesktopModeHintViewedTimestampMillis_;
     private long featureUsedTimestampMillis_;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.education.data.WindowingEducationProto$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -75,7 +73,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppHandleEducation extends GeneratedMessageLite implements MessageLiteOrBuilder {
         public static final int APP_USAGE_STATS_FIELD_NUMBER = 1;
         public static final int APP_USAGE_STATS_LAST_UPDATE_TIMESTAMP_MILLIS_FIELD_NUMBER = 2;
@@ -85,7 +82,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         private MapFieldLite<String, Integer> appUsageStats_ = MapFieldLite.EMPTY_MAP_FIELD;
         private int bitField0_;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class AppUsageStatsDefaultEntryHolder {
             public static final MapEntryLite defaultEntry = MapEntryLite.newDefaultInstance(WireFormat$FieldType.STRING, "", WireFormat$FieldType.INT32, 0);
 
@@ -93,7 +89,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Builder extends GeneratedMessageLite.Builder {
             public /* synthetic */ Builder(int i) {
                 this();
@@ -115,7 +110,7 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
 
         @Override // com.google.protobuf.GeneratedMessageLite
         public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-            Parser parser;
+            Parser defaultInstanceBasedParser;
             switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
                 case 1:
                     return new AppHandleEducation();
@@ -126,22 +121,22 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
                 case 4:
                     return DEFAULT_INSTANCE;
                 case 5:
-                    Parser parser2 = PARSER;
-                    if (parser2 != null) {
-                        return parser2;
+                    Parser parser = PARSER;
+                    if (parser != null) {
+                        return parser;
                     }
                     synchronized (AppHandleEducation.class) {
                         try {
-                            parser = PARSER;
-                            if (parser == null) {
-                                parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                                PARSER = parser;
+                            defaultInstanceBasedParser = PARSER;
+                            if (defaultInstanceBasedParser == null) {
+                                defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                                PARSER = defaultInstanceBasedParser;
                             }
                         } catch (Throwable th) {
                             throw th;
                         }
                     }
-                    return parser;
+                    return defaultInstanceBasedParser;
                 case 6:
                     return (byte) 1;
                 case 7:
@@ -152,7 +147,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppToWebEducation extends GeneratedMessageLite implements MessageLiteOrBuilder {
         private static final AppToWebEducation DEFAULT_INSTANCE;
         public static final int EDUCATION_SHOWN_COUNT_FIELD_NUMBER = 1;
@@ -160,7 +154,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         private int bitField0_;
         private long educationShownCount_;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Builder extends GeneratedMessageLite.Builder {
             public /* synthetic */ Builder(int i) {
                 this();
@@ -182,7 +175,7 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
 
         @Override // com.google.protobuf.GeneratedMessageLite
         public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-            Parser parser;
+            Parser defaultInstanceBasedParser;
             switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
                 case 1:
                     return new AppToWebEducation();
@@ -193,22 +186,22 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
                 case 4:
                     return DEFAULT_INSTANCE;
                 case 5:
-                    Parser parser2 = PARSER;
-                    if (parser2 != null) {
-                        return parser2;
+                    Parser parser = PARSER;
+                    if (parser != null) {
+                        return parser;
                     }
                     synchronized (AppToWebEducation.class) {
                         try {
-                            parser = PARSER;
-                            if (parser == null) {
-                                parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                                PARSER = parser;
+                            defaultInstanceBasedParser = PARSER;
+                            if (defaultInstanceBasedParser == null) {
+                                defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                                PARSER = defaultInstanceBasedParser;
                             }
                         } catch (Throwable th) {
                             throw th;
                         }
                     }
-                    return parser;
+                    return defaultInstanceBasedParser;
                 case 6:
                     return (byte) 1;
                 case 7:
@@ -219,7 +212,6 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(int i) {
             this();
@@ -243,19 +235,19 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
         return DEFAULT_INSTANCE;
     }
 
-    public static WindowingEducationProto parseFrom(InputStream inputStream) {
-        GeneratedMessageLite parsePartialFrom = GeneratedMessageLite.parsePartialFrom(DEFAULT_INSTANCE, new CodedInputStream.StreamDecoder(inputStream, 4096), ExtensionRegistryLite.getEmptyRegistry());
-        if (GeneratedMessageLite.isInitialized(parsePartialFrom, true)) {
-            return (WindowingEducationProto) parsePartialFrom;
+    public static WindowingEducationProto parseFrom(InputStream inputStream) throws InvalidProtocolBufferException {
+        GeneratedMessageLite partialFrom = GeneratedMessageLite.parsePartialFrom(DEFAULT_INSTANCE, new CodedInputStream.StreamDecoder(inputStream, 4096), ExtensionRegistryLite.getEmptyRegistry());
+        if (GeneratedMessageLite.isInitialized(partialFrom, true)) {
+            return (WindowingEducationProto) partialFrom;
         }
-        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(parsePartialFrom).getMessage());
-        invalidProtocolBufferException.setUnfinishedMessage(parsePartialFrom);
+        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(partialFrom).getMessage());
+        invalidProtocolBufferException.setUnfinishedMessage(partialFrom);
         throw invalidProtocolBufferException;
     }
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
             case 1:
                 return new WindowingEducationProto();
@@ -266,22 +258,22 @@ public final class WindowingEducationProto extends GeneratedMessageLite implemen
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (WindowingEducationProto.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

@@ -44,9 +44,9 @@ public interface ISurfaceSyncGroupCompletedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISurfaceSyncGroupCompletedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfaceSyncGroupCompletedListener)) {
-                return (ISurfaceSyncGroupCompletedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISurfaceSyncGroupCompletedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISurfaceSyncGroupCompletedListener)) {
+                return (ISurfaceSyncGroupCompletedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface ISurfaceSyncGroupCompletedListener extends IInterface {
 
             @Override // android.window.ISurfaceSyncGroupCompletedListener
             public void onSurfaceSyncGroupComplete() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceSyncGroupCompletedListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceSyncGroupCompletedListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

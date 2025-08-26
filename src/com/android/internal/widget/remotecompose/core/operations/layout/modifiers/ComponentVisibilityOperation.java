@@ -84,9 +84,7 @@ public class ComponentVisibilityOperation extends Operation implements ModifierO
         int integer = remoteContext.getInteger(this.mVisibilityId);
         if (Component.Visibility.isVisible(integer)) {
             this.mVisibility = 1;
-        } else if (Component.Visibility.isGone(integer)) {
-            this.mVisibility = 0;
-        } else if (Component.Visibility.isInvisible(integer)) {
+        } else if (!Component.Visibility.isGone(integer) && Component.Visibility.isInvisible(integer)) {
             this.mVisibility = 2;
         } else {
             this.mVisibility = 0;

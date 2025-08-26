@@ -12,7 +12,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenAirplaneController implements SubscreenQSControllerContract$Presenter {
     public static Context mContext;
@@ -22,7 +21,6 @@ public class SubscreenAirplaneController implements SubscreenQSControllerContrac
     public TileReceiver mAirplaneViewReceiver;
     public final ConnectivityManager mConnectivityManager = (ConnectivityManager) mContext.getSystemService("connectivity");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileReceiver extends BroadcastReceiver {
         public TileReceiver() {
         }
@@ -52,14 +50,14 @@ public class SubscreenAirplaneController implements SubscreenQSControllerContrac
 
     @Override // com.android.systemui.qp.SubscreenQSControllerContract$Presenter
     public final void registerReceiver(boolean z) {
-        IntentFilter m = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("AIRPLANE_MODE_CHANGE");
+        IntentFilter intentFilterM = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("AIRPLANE_MODE_CHANGE");
         if (z) {
             this.mAirplaneViewReceiver = new TileReceiver();
         } else {
             this.mAirplaneReceiver = new TileReceiver();
         }
         Log.d("SubscreenAirplaneController", "SAC registerAirplaneReceiver mAirplaneViewReceiver: " + this.mAirplaneViewReceiver + "mAirplaneReceiver: " + this.mAirplaneReceiver);
-        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mAirplaneViewReceiver : this.mAirplaneReceiver, m, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.AIRPLANE_STATE_CHANGE");
+        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mAirplaneViewReceiver : this.mAirplaneReceiver, intentFilterM, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.AIRPLANE_STATE_CHANGE");
     }
 
     @Override // com.android.systemui.qp.SubscreenQSControllerContract$Presenter

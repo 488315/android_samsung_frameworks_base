@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UcmKeystoreProvider extends Provider {
     public static final String KEYSTORE = "KeyStore";
@@ -21,7 +20,6 @@ public class UcmKeystoreProvider extends Provider {
     public static final double PROVIDER_VERSION = 1.0d;
     private String mSource;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UcmProviderService extends Provider.Service {
         public String mSrc;
 

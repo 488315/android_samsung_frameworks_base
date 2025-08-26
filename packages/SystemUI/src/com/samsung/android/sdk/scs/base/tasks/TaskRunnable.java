@@ -5,7 +5,6 @@ import com.samsung.android.sdk.scs.base.ResultException;
 import com.samsung.android.sdk.scs.base.feature.FeatureStatusCache;
 import com.samsung.android.sdk.scs.base.utils.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class TaskRunnable implements Runnable {
     private static final String TAG = "ScsApi@TaskRunnable<>";
@@ -21,15 +20,15 @@ public abstract class TaskRunnable implements Runnable {
         if (str == null || str.isEmpty()) {
             return "";
         }
-        String str2 = str.split(TASK_DELIMITER)[0];
-        if (!str2.startsWith(THREAD_NAME_PREFIX)) {
-            str2 = "scs-".concat(str2);
+        String strConcat = str.split(TASK_DELIMITER)[0];
+        if (!strConcat.startsWith(THREAD_NAME_PREFIX)) {
+            strConcat = "scs-".concat(strConcat);
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, TASK_DELIMITER);
-        m.append(getClass().getSimpleName());
-        m.append("@");
-        m.append(Integer.toHexString(hashCode()));
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strConcat, TASK_DELIMITER);
+        sbM.append(getClass().getSimpleName());
+        sbM.append("@");
+        sbM.append(Integer.toHexString(hashCode()));
+        return sbM.toString();
     }
 
     public abstract void execute();
@@ -47,16 +46,16 @@ public abstract class TaskRunnable implements Runnable {
     @Override // java.lang.Runnable
     public void run() {
         try {
-            boolean interrupted = Thread.interrupted();
+            boolean zInterrupted = Thread.interrupted();
             Thread.currentThread().setName(createThreadName(Thread.currentThread().getName()));
-            Log.i(TAG, "run() - " + Thread.currentThread() + ", interrupt : " + interrupted);
+            Log.i(TAG, "run() - " + Thread.currentThread() + ", interrupt : " + zInterrupted);
             Integer num = (Integer) FeatureStatusCache.statusMap.get(getFeatureName());
-            int intValue = num == null ? -1000 : num.intValue();
-            if (intValue == 0 && !interrupted) {
+            int iIntValue = num == null ? -1000 : num.intValue();
+            if (iIntValue == 0 && !zInterrupted) {
                 execute();
                 return;
             }
-            ResultException resultException = new ResultException(intValue, getFeatureName() + " is not available. statusCode: " + intValue + ", isInterrupted: " + interrupted);
+            ResultException resultException = new ResultException(iIntValue, getFeatureName() + " is not available. statusCode: " + iIntValue + ", isInterrupted: " + zInterrupted);
             Log.i(TAG, resultException.getMessage());
             this.mSource.setException(resultException);
         } catch (Exception e) {

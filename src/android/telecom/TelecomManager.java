@@ -950,19 +950,19 @@ public class TelecomManager {
 
     public Intent createManageBlockedNumbersIntent() {
         ITelecomService telecomService = getTelecomService();
-        Intent intent = null;
+        Intent intentCreateManageBlockedNumbersIntent = null;
         if (telecomService != null) {
             try {
-                intent = telecomService.createManageBlockedNumbersIntent(this.mContext.getPackageName());
-                if (intent != null) {
-                    intent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+                intentCreateManageBlockedNumbersIntent = telecomService.createManageBlockedNumbersIntent(this.mContext.getPackageName());
+                if (intentCreateManageBlockedNumbersIntent != null) {
+                    intentCreateManageBlockedNumbersIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
                 }
-                return intent;
+                return intentCreateManageBlockedNumbersIntent;
             } catch (RemoteException e) {
                 android.util.Log.e(TAG, "Error calling ITelecomService#createManageBlockedNumbersIntent", e);
             }
         }
-        return intent;
+        return intentCreateManageBlockedNumbersIntent;
     }
 
     @SystemApi
@@ -972,11 +972,11 @@ public class TelecomManager {
             android.util.Log.w(TAG, "createLaunchEmergencyDialerIntent - Telecom service not available.");
         } else {
             try {
-                Intent createLaunchEmergencyDialerIntent = telecomService.createLaunchEmergencyDialerIntent(str);
-                if (createLaunchEmergencyDialerIntent != null) {
-                    createLaunchEmergencyDialerIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
+                Intent intentCreateLaunchEmergencyDialerIntent = telecomService.createLaunchEmergencyDialerIntent(str);
+                if (intentCreateLaunchEmergencyDialerIntent != null) {
+                    intentCreateLaunchEmergencyDialerIntent.prepareToEnterProcess(32, this.mContext.getAttributionSource());
                 }
-                return createLaunchEmergencyDialerIntent;
+                return intentCreateLaunchEmergencyDialerIntent;
             } catch (RemoteException e) {
                 android.util.Log.e(TAG, "Error createLaunchEmergencyDialerIntent", e);
             }
@@ -1061,8 +1061,8 @@ public class TelecomManager {
         ITelecomService telecomService = getTelecomService();
         if (telecomService != null) {
             try {
-                ClientTransactionalServiceWrapper addNewCallForTransactionalServiceWrapper = this.mTransactionalServiceRepository.addNewCallForTransactionalServiceWrapper(callAttributes.getPhoneAccountHandle());
-                telecomService.addCall(callAttributes, addNewCallForTransactionalServiceWrapper.getCallEventCallback(), addNewCallForTransactionalServiceWrapper.trackCall(callAttributes, executor, outcomeReceiver, callControlCallback, callEventCallback), this.mContext.getOpPackageName());
+                ClientTransactionalServiceWrapper clientTransactionalServiceWrapperAddNewCallForTransactionalServiceWrapper = this.mTransactionalServiceRepository.addNewCallForTransactionalServiceWrapper(callAttributes.getPhoneAccountHandle());
+                telecomService.addCall(callAttributes, clientTransactionalServiceWrapperAddNewCallForTransactionalServiceWrapper.getCallEventCallback(), clientTransactionalServiceWrapperAddNewCallForTransactionalServiceWrapper.trackCall(callAttributes, executor, outcomeReceiver, callControlCallback, callEventCallback), this.mContext.getOpPackageName());
                 return;
             } catch (RemoteException e) {
                 android.util.Log.e(TAG, "RemoteException addCall: " + e);
@@ -1094,12 +1094,12 @@ public class TelecomManager {
             return iTelecomService;
         }
         if (sTelecomService == null) {
-            ITelecomService asInterface = ITelecomService.Stub.asInterface(ServiceManager.getService(Context.TELECOM_SERVICE));
+            ITelecomService iTelecomServiceAsInterface = ITelecomService.Stub.asInterface(ServiceManager.getService(Context.TELECOM_SERVICE));
             synchronized (CACHE_LOCK) {
-                if (sTelecomService == null && asInterface != null) {
+                if (sTelecomService == null && iTelecomServiceAsInterface != null) {
                     try {
-                        sTelecomService = asInterface;
-                        asInterface.asBinder().linkToDeath(SERVICE_DEATH, 0);
+                        sTelecomService = iTelecomServiceAsInterface;
+                        iTelecomServiceAsInterface.asBinder().linkToDeath(SERVICE_DEATH, 0);
                     } catch (Exception unused) {
                         sTelecomService = null;
                     }

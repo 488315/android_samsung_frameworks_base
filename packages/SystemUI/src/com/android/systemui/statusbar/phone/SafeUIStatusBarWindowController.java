@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SafeUIStatusBarWindowController implements CoreStartable {
     public final Context mContext;
@@ -34,7 +33,7 @@ public class SafeUIStatusBarWindowController implements CoreStartable {
         Log.d("SafeUIStatusBarWindowController", NetworkAnalyticsConstants.DataPoints.OPEN_TIME);
         this.mWindowManager = (WindowManager) this.mContext.getSystemService(WindowManager.class);
         this.mSafeUIWindowView = (FrameLayout) LayoutInflater.from(this.mContext).inflate(R.layout.safe_ui_status_bar_view, (ViewGroup) null);
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, this.mContext.getResources().getDimensionPixelSize(17106378), 2000, -2138832824, -3);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, this.mContext.getResources().getDimensionPixelSize(17106379), 2000, -2138832824, -3);
         this.mLp = layoutParams;
         layoutParams.token = new Binder();
         WindowManager.LayoutParams layoutParams2 = this.mLp;

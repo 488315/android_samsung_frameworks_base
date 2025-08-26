@@ -24,7 +24,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryIconView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public final class DeviceEntryIconView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AccessibilityHintType {
         public static final /* synthetic */ AccessibilityHintType[] $VALUES;
         public static final AccessibilityHintType BOUNCER;
@@ -69,7 +67,6 @@ public final class DeviceEntryIconView extends FrameLayout {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
         public static final IconType FINGERPRINT;
@@ -109,7 +106,6 @@ public final class DeviceEntryIconView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -211,7 +207,7 @@ public final class DeviceEntryIconView extends FrameLayout {
         LottieCompositionFactory.fromRawRes(R.raw.udfps_aod_fp, ((FrameLayout) this).mContext).addListener(new LottieListener() { // from class: com.android.systemui.keyguard.ui.view.DeviceEntryIconView$setupIconStates$1
             @Override // com.airbnb.lottie.LottieListener
             public final void onResult(Object obj) {
-                DeviceEntryIconView.this.aodFpDrawable.setComposition((LottieComposition) obj);
+                this.this$0.aodFpDrawable.setComposition((LottieComposition) obj);
             }
         });
         animatedStateListDrawable.addState(getIconState(iconType3, true), lottieDrawable, R.id.udfps_aod_fp);
@@ -233,7 +229,6 @@ public final class DeviceEntryIconView extends FrameLayout {
             public final AccessibilityNodeInfo.AccessibilityAction accessibilityBouncerHint;
             public final AccessibilityNodeInfo.AccessibilityAction accessibilityEnterHint;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -256,14 +251,14 @@ public final class DeviceEntryIconView extends FrameLayout {
             }
 
             {
-                this.accessibilityBouncerHint = new AccessibilityNodeInfo.AccessibilityAction(16, DeviceEntryIconView.this.getResources().getString(R.string.accessibility_bouncer));
-                this.accessibilityEnterHint = new AccessibilityNodeInfo.AccessibilityAction(16, DeviceEntryIconView.this.getResources().getString(R.string.accessibility_enter_hint));
+                this.accessibilityBouncerHint = new AccessibilityNodeInfo.AccessibilityAction(16, this.this$0.getResources().getString(R.string.accessibility_bouncer));
+                this.accessibilityEnterHint = new AccessibilityNodeInfo.AccessibilityAction(16, this.this$0.getResources().getString(R.string.accessibility_enter_hint));
             }
 
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                int i2 = WhenMappings.$EnumSwitchMapping$0[DeviceEntryIconView.this.accessibilityHintType.ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[this.this$0.accessibilityHintType.ordinal()];
                 if (i2 == 1) {
                     accessibilityNodeInfo.addAction(this.accessibilityBouncerHint);
                 } else if (i2 == 2) {

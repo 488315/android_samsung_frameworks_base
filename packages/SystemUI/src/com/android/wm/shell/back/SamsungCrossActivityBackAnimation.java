@@ -3,6 +3,7 @@ package com.android.wm.shell.back;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.WindowConfiguration;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.Rect;
@@ -33,8 +34,8 @@ import com.android.wm.shell.back.SamsungCrossActivityBackAnimation;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.animation.Interpolators;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
+import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
     public static final boolean DEBUG_PROGRESS = SystemProperties.getBoolean("persist.debug.samsung.predictive_back.anim.progress", false);
@@ -63,7 +64,6 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
     public final SurfaceControl.Transaction mTransaction = new SurfaceControl.Transaction();
     public final BackProgressAnimator mProgressAnimator = new BackProgressAnimator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback extends IOnBackInvokedCallback.Default {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -76,7 +76,7 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
             samsungCrossActivityBackAnimation.mProgressAnimator.onBackCancelled(new Runnable() { // from class: com.android.wm.shell.back.SamsungCrossActivityBackAnimation$Callback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SamsungCrossActivityBackAnimation samsungCrossActivityBackAnimation2 = SamsungCrossActivityBackAnimation.this;
+                    SamsungCrossActivityBackAnimation samsungCrossActivityBackAnimation2 = samsungCrossActivityBackAnimation;
                     int i = SamsungCrossActivityBackAnimation.Callback.$r8$clinit;
                     boolean z = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                     samsungCrossActivityBackAnimation2.finishAnimation$2();
@@ -106,20 +106,20 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                             boolean z = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                             samsungCrossActivityBackAnimation2.getClass();
                             float animatedFraction = valueAnimator.getAnimatedFraction();
-                            float min = Float.min(samsungCrossActivityBackAnimation2.mEnteringStartRect.left + (Math.abs(samsungCrossActivityBackAnimation2.mStartTaskRect.left - samsungCrossActivityBackAnimation2.mEnteringStartRect.left) * animatedFraction) + 0.5f, 0.0f);
+                            float fMin = Float.min(samsungCrossActivityBackAnimation2.mEnteringStartRect.left + (Math.abs(samsungCrossActivityBackAnimation2.mStartTaskRect.left - samsungCrossActivityBackAnimation2.mEnteringStartRect.left) * animatedFraction) + 0.5f, 0.0f);
                             RectF rectF = samsungCrossActivityBackAnimation2.mEnteringCurrentRect;
                             Rect rect = samsungCrossActivityBackAnimation2.mStartTaskRect;
-                            rectF.set(min, rect.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + min, rect.bottom);
+                            rectF.set(fMin, rect.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + fMin, rect.bottom);
                             samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mEnteringTarget.leash, samsungCrossActivityBackAnimation2.mEnteringCurrentRect, true);
                             boolean z2 = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                             if (z2) {
                                 Log.i("SamsungCrossActivityBack", "updatePostCommitEnteringAnimation, progress=" + animatedFraction + ", mEnteringStartRect=" + samsungCrossActivityBackAnimation2.mEnteringStartRect + ", mEnteringCurrentRect=" + samsungCrossActivityBackAnimation2.mEnteringCurrentRect + ", leash=" + samsungCrossActivityBackAnimation2.mEnteringTarget.leash);
                             }
                             int i3 = samsungCrossActivityBackAnimation2.mStartTaskRect.right;
-                            float min2 = Float.min(samsungCrossActivityBackAnimation2.mClosingStartRect.left + ((i3 - r6) * animatedFraction) + 0.5f, r4.width());
+                            float fMin2 = Float.min(samsungCrossActivityBackAnimation2.mClosingStartRect.left + ((i3 - r6) * animatedFraction) + 0.5f, r4.width());
                             RectF rectF2 = samsungCrossActivityBackAnimation2.mClosingCurrentRect;
                             Rect rect2 = samsungCrossActivityBackAnimation2.mStartTaskRect;
-                            rectF2.set(min2, rect2.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + min2, rect2.bottom);
+                            rectF2.set(fMin2, rect2.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + fMin2, rect2.bottom);
                             samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mClosingTarget.leash, samsungCrossActivityBackAnimation2.mClosingCurrentRect, false);
                             if (z2) {
                                 Log.i("SamsungCrossActivityBack", "updatePostCommitClosingAnimation, progress=" + animatedFraction + ", mClosingStartRect=" + samsungCrossActivityBackAnimation2.mClosingStartRect + ", mClosingCurrentRect=" + samsungCrossActivityBackAnimation2.mClosingCurrentRect + ", leash=" + samsungCrossActivityBackAnimation2.mClosingTarget.leash);
@@ -166,20 +166,20 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                             boolean z = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                             samsungCrossActivityBackAnimation2.getClass();
                             float animatedFraction = valueAnimator.getAnimatedFraction();
-                            float min = Float.min(samsungCrossActivityBackAnimation2.mEnteringStartRect.left + (Math.abs(samsungCrossActivityBackAnimation2.mStartTaskRect.left - samsungCrossActivityBackAnimation2.mEnteringStartRect.left) * animatedFraction) + 0.5f, 0.0f);
+                            float fMin = Float.min(samsungCrossActivityBackAnimation2.mEnteringStartRect.left + (Math.abs(samsungCrossActivityBackAnimation2.mStartTaskRect.left - samsungCrossActivityBackAnimation2.mEnteringStartRect.left) * animatedFraction) + 0.5f, 0.0f);
                             RectF rectF = samsungCrossActivityBackAnimation2.mEnteringCurrentRect;
                             Rect rect = samsungCrossActivityBackAnimation2.mStartTaskRect;
-                            rectF.set(min, rect.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + min, rect.bottom);
+                            rectF.set(fMin, rect.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + fMin, rect.bottom);
                             samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mEnteringTarget.leash, samsungCrossActivityBackAnimation2.mEnteringCurrentRect, true);
                             boolean z2 = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                             if (z2) {
                                 Log.i("SamsungCrossActivityBack", "updatePostCommitEnteringAnimation, progress=" + animatedFraction + ", mEnteringStartRect=" + samsungCrossActivityBackAnimation2.mEnteringStartRect + ", mEnteringCurrentRect=" + samsungCrossActivityBackAnimation2.mEnteringCurrentRect + ", leash=" + samsungCrossActivityBackAnimation2.mEnteringTarget.leash);
                             }
                             int i3 = samsungCrossActivityBackAnimation2.mStartTaskRect.right;
-                            float min2 = Float.min(samsungCrossActivityBackAnimation2.mClosingStartRect.left + ((i3 - r6) * animatedFraction) + 0.5f, r4.width());
+                            float fMin2 = Float.min(samsungCrossActivityBackAnimation2.mClosingStartRect.left + ((i3 - r6) * animatedFraction) + 0.5f, r4.width());
                             RectF rectF2 = samsungCrossActivityBackAnimation2.mClosingCurrentRect;
                             Rect rect2 = samsungCrossActivityBackAnimation2.mStartTaskRect;
-                            rectF2.set(min2, rect2.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + min2, rect2.bottom);
+                            rectF2.set(fMin2, rect2.top, samsungCrossActivityBackAnimation2.mStartTaskRect.width() + fMin2, rect2.bottom);
                             samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mClosingTarget.leash, samsungCrossActivityBackAnimation2.mClosingCurrentRect, false);
                             if (z2) {
                                 Log.i("SamsungCrossActivityBack", "updatePostCommitClosingAnimation, progress=" + animatedFraction + ", mClosingStartRect=" + samsungCrossActivityBackAnimation2.mClosingStartRect + ", mClosingCurrentRect=" + samsungCrossActivityBackAnimation2.mClosingCurrentRect + ", leash=" + samsungCrossActivityBackAnimation2.mClosingTarget.leash);
@@ -234,7 +234,7 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                 public final void onProgressUpdate(BackEvent backEvent) {
                     float f;
                     float f2;
-                    SamsungCrossActivityBackAnimation samsungCrossActivityBackAnimation2 = SamsungCrossActivityBackAnimation.this;
+                    SamsungCrossActivityBackAnimation samsungCrossActivityBackAnimation2 = samsungCrossActivityBackAnimation;
                     int i = SamsungCrossActivityBackAnimation.Callback.$r8$clinit;
                     if (!samsungCrossActivityBackAnimation2.mBackInProgress) {
                         samsungCrossActivityBackAnimation2.mBackInProgress = true;
@@ -243,10 +243,10 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                     RemoteAnimationTarget remoteAnimationTarget = samsungCrossActivityBackAnimation2.mEnteringTarget;
                     boolean z = SamsungCrossActivityBackAnimation.DEBUG_PROGRESS;
                     if (remoteAnimationTarget != null && samsungCrossActivityBackAnimation2.mClosingTarget != null) {
-                        int width = samsungCrossActivityBackAnimation2.mStartTaskRect.width();
-                        float m$1 = progress <= 0.5f ? 1.0f * progress : DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(progress, 0.5f, 0.19999999f, 0.5f);
-                        float f3 = width;
-                        float f4 = f3 * m$1;
+                        int iWidth = samsungCrossActivityBackAnimation2.mStartTaskRect.width();
+                        float fM$1 = progress <= 0.5f ? 1.0f * progress : DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(progress, 0.5f, 0.19999999f, 0.5f);
+                        float f3 = iWidth;
+                        float f4 = f3 * fM$1;
                         Rect rect = samsungCrossActivityBackAnimation2.mStartTaskRect;
                         samsungCrossActivityBackAnimation2.mClosingCurrentRect.set(f4, rect.top, f4 + f3, rect.bottom);
                         if (progress <= 0.5f) {
@@ -261,9 +261,9 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                         Rect rect2 = samsungCrossActivityBackAnimation2.mStartTaskRect;
                         samsungCrossActivityBackAnimation2.mEnteringCurrentRect.set(f6, rect2.top, f3 + f6, rect2.bottom);
                         if (z) {
-                            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("updateGestureBackProgress, progress=", progress, ", enteringProgress=", f5, ", closingProgress=");
-                            m.append(m$1);
-                            Log.i("SamsungCrossActivityBack", m.toString());
+                            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("updateGestureBackProgress, progress=", progress, ", enteringProgress=", f5, ", closingProgress=");
+                            sbM.append(fM$1);
+                            Log.i("SamsungCrossActivityBack", sbM.toString());
                         }
                         samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mClosingTarget.leash, samsungCrossActivityBackAnimation2.mClosingCurrentRect, false);
                         samsungCrossActivityBackAnimation2.applyTransform(samsungCrossActivityBackAnimation2.mEnteringTarget.leash, samsungCrossActivityBackAnimation2.mEnteringCurrentRect, true);
@@ -280,7 +280,6 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Runner extends IRemoteAnimationRunner.Default {
         public /* synthetic */ Runner(SamsungCrossActivityBackAnimation samsungCrossActivityBackAnimation, int i) {
             this();
@@ -288,6 +287,8 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
 
         public final void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
             RemoteAnimationTarget remoteAnimationTarget;
+            WindowConfiguration embedActivityConfiguration;
+            WindowConfiguration embedActivityConfiguration2;
             ProtoLog.d(ShellProtoLogGroup.WM_SHELL_BACK_PREVIEW, "Start samsung custom back animation", new Object[0]);
             for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArr) {
                 int i2 = remoteAnimationTarget2.mode;
@@ -303,6 +304,10 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                 ProtoLog.d(ShellProtoLogGroup.WM_SHELL_BACK_PREVIEW, "Entering target or closing target is null.", new Object[0]);
             } else {
                 samsungCrossActivityBackAnimation.mStartTaskRect.set(remoteAnimationTarget.windowConfiguration.getBounds());
+                boolean z = CoreRune.MW_EMBED_ACTIVITY_ANIMATION;
+                if (z && (embedActivityConfiguration2 = samsungCrossActivityBackAnimation.mClosingTarget.getEmbedActivityConfiguration()) != null && embedActivityConfiguration2.isEmbedded() && embedActivityConfiguration2.getEmbedActivityMode() != 1) {
+                    samsungCrossActivityBackAnimation.mStartTaskRect.set(samsungCrossActivityBackAnimation.mClosingTarget.localBounds);
+                }
                 samsungCrossActivityBackAnimation.mStartTaskRect.offsetTo(0, 0);
                 samsungCrossActivityBackAnimation.mDisplayId = samsungCrossActivityBackAnimation.mClosingTarget.getDisplayId();
                 AlphaAnimation alphaAnimation = new AlphaAnimation(0.18f, 0.0f);
@@ -312,9 +317,12 @@ public class SamsungCrossActivityBackAnimation extends ShellBackAnimation {
                 if (samsungCrossActivityBackAnimation.mScrimDimLayer == null) {
                     SurfaceControl.Builder callsite = new SurfaceControl.Builder().setColorLayer().setName("ScrimDimLayer for predictive_back animation").setOpaque(false).setCallsite("SamsungCrossActivityBackAnimation#ensureScrimDimLayer");
                     samsungCrossActivityBackAnimation.mRootTaskDisplayAreaOrganizer.attachToDisplayArea(samsungCrossActivityBackAnimation.mDisplayId, callsite);
-                    SurfaceControl build = callsite.build();
-                    samsungCrossActivityBackAnimation.mScrimDimLayer = build;
-                    samsungCrossActivityBackAnimation.mScrimDimTransaction.show(build).setAlpha(samsungCrossActivityBackAnimation.mScrimDimLayer, 0.18f).setRelativeLayer(samsungCrossActivityBackAnimation.mScrimDimLayer, samsungCrossActivityBackAnimation.mClosingTarget.leash, -1);
+                    SurfaceControl surfaceControlBuild = callsite.build();
+                    samsungCrossActivityBackAnimation.mScrimDimLayer = surfaceControlBuild;
+                    samsungCrossActivityBackAnimation.mScrimDimTransaction.show(surfaceControlBuild).setAlpha(samsungCrossActivityBackAnimation.mScrimDimLayer, 0.18f).setRelativeLayer(samsungCrossActivityBackAnimation.mScrimDimLayer, samsungCrossActivityBackAnimation.mClosingTarget.leash, -1);
+                    if (z && (embedActivityConfiguration = samsungCrossActivityBackAnimation.mClosingTarget.getEmbedActivityConfiguration()) != null && embedActivityConfiguration.isEmbedded() && embedActivityConfiguration.getEmbedActivityMode() != 1) {
+                        samsungCrossActivityBackAnimation.mScrimDimTransaction.setWindowCrop(samsungCrossActivityBackAnimation.mScrimDimLayer, samsungCrossActivityBackAnimation.mClosingTarget.localBounds);
+                    }
                     SamsungCrossActivityBackAnimation.applyTransaction(samsungCrossActivityBackAnimation.mScrimDimTransaction);
                 }
             }

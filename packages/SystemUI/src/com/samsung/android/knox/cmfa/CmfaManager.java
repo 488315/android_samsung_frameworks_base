@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmfaManager {
     public static ArrayList<String> CMFA_PERM = new ArrayList<>(Collections.singletonList(EnterpriseDeviceAdminInfo.USES_POLICY_MDM_SECURITY_TAG));
@@ -40,11 +39,11 @@ public class CmfaManager {
             Log.e(str, "Leave check() with 3");
             return 3;
         }
-        int i = 1;
+        int iCheck = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.check(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.1
+                iCheck = service.check(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.1
                     @Override // com.samsung.android.knox.cmfa.IResultListener
                     public void onFail(String str2) {
                         iAuthResultListener.onFail(str2);
@@ -61,14 +60,14 @@ public class CmfaManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave check() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iCheck, "Leave check() with ", TAG);
+        return iCheck;
     }
 
     public final boolean checkPermission(ContextInfo contextInfo) {
         try {
-            ContextInfo enforceActiveAdminPermissionByContext = AccessController.enforceActiveAdminPermissionByContext(contextInfo, CMFA_PERM);
-            Log.i(TAG, "checkPermission cxtInfo" + enforceActiveAdminPermissionByContext + " has permission: " + CMFA_PERM);
+            ContextInfo contextInfoEnforceActiveAdminPermissionByContext = AccessController.enforceActiveAdminPermissionByContext(contextInfo, CMFA_PERM);
+            Log.i(TAG, "checkPermission cxtInfo" + contextInfoEnforceActiveAdminPermissionByContext + " has permission: " + CMFA_PERM);
             return true;
         } catch (SecurityException e) {
             Log.e(TAG, "SecurityException: " + e.getMessage());
@@ -88,19 +87,19 @@ public class CmfaManager {
             Log.e(str, "Leave disable() with 3");
             return 3;
         }
-        int i = 1;
+        int iDisable = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.disable();
+                iDisable = service.disable();
             } else {
                 Log.e(str, "disable getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave disable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisable, "Leave disable() with ", TAG);
+        return iDisable;
     }
 
     public int enable(String str) {
@@ -158,7 +157,7 @@ public class CmfaManager {
     public boolean isEnabled() {
         String str = TAG;
         Log.i(str, "Enter isEnabled()");
-        boolean z = false;
+        boolean zIsEnabled = false;
         if (!checkPermission(new ContextInfo())) {
             Log.e(str, "Leave isEnabled() with permission error!");
             return false;
@@ -166,21 +165,21 @@ public class CmfaManager {
         try {
             ICmfaService service = getService();
             if (service != null) {
-                z = service.isEnabled();
+                zIsEnabled = service.isEnabled();
             } else {
                 Log.e(str, "isEnabled getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, zIsEnabled);
+        return zIsEnabled;
     }
 
     public boolean isStarted() {
         String str = TAG;
         Log.i(str, "Enter isStarted()");
-        boolean z = false;
+        boolean zIsStarted = false;
         if (!checkPermission(new ContextInfo())) {
             Log.e(str, "Leave isStarted() with permission error!");
             return false;
@@ -188,15 +187,15 @@ public class CmfaManager {
         try {
             ICmfaService service = getService();
             if (service != null) {
-                z = service.isStarted();
+                zIsStarted = service.isStarted();
             } else {
                 Log.e(str, "isStarted getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, zIsStarted);
+        return zIsStarted;
     }
 
     public int notifyTestFactorScoreChange(String str, long j, boolean z) {
@@ -206,19 +205,19 @@ public class CmfaManager {
             Log.e(str2, "Leave notifyTestFactorScoreChange() with 3");
             return 3;
         }
-        int i = 1;
+        int iNotifyTestFactorScoreChange = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.notifyTestFactorScoreChange(str, j, z);
+                iNotifyTestFactorScoreChange = service.notifyTestFactorScoreChange(str, j, z);
             } else {
                 Log.e(str2, "notifyTestFactorScoreChange getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave notifyTestFactorScoreChange() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iNotifyTestFactorScoreChange, "Leave notifyTestFactorScoreChange() with ", TAG);
+        return iNotifyTestFactorScoreChange;
     }
 
     public int registerListener(final IAuthEventListener iAuthEventListener) {
@@ -228,7 +227,7 @@ public class CmfaManager {
             Log.e(str, "Leave registerListener() with 3");
             return 3;
         }
-        int i = 1;
+        int iRegisterListener = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
@@ -248,15 +247,15 @@ public class CmfaManager {
                         iAuthEventListener.onSuccess();
                     }
                 });
-                i = service.registerListener(this.mListeners.get(iAuthEventListener));
+                iRegisterListener = service.registerListener(this.mListeners.get(iAuthEventListener));
             } else {
                 Log.e(str, "registerListener getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave registerListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iRegisterListener, "Leave registerListener() with ", TAG);
+        return iRegisterListener;
     }
 
     public int start(final IAuthResultListener iAuthResultListener) {
@@ -266,11 +265,11 @@ public class CmfaManager {
             Log.e(str, "Leave start() with 3");
             return 3;
         }
-        int i = 1;
+        int iStart = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.start(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.2
+                iStart = service.start(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.2
                     @Override // com.samsung.android.knox.cmfa.IResultListener
                     public void onFail(String str2) {
                         iAuthResultListener.onFail(str2);
@@ -287,8 +286,8 @@ public class CmfaManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave start() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStart, "Leave start() with ", TAG);
+        return iStart;
     }
 
     public int stop(final IAuthResultListener iAuthResultListener) {
@@ -298,11 +297,11 @@ public class CmfaManager {
             Log.e(str, "Leave stop() with 3");
             return 3;
         }
-        int i = 1;
+        int iStop = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.stop(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.3
+                iStop = service.stop(new IResultListener.Stub(this) { // from class: com.samsung.android.knox.cmfa.CmfaManager.3
                     @Override // com.samsung.android.knox.cmfa.IResultListener
                     public void onFail(String str2) {
                         iAuthResultListener.onFail(str2);
@@ -319,8 +318,8 @@ public class CmfaManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stop() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStop, "Leave stop() with ", TAG);
+        return iStop;
     }
 
     public int unregisterListener(IAuthEventListener iAuthEventListener) {
@@ -330,11 +329,11 @@ public class CmfaManager {
             Log.e(str, "Leave unregisterListener() with 3");
             return 3;
         }
-        int i = 1;
+        int iUnregisterListener = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.unregisterListener(this.mListeners.get(iAuthEventListener));
+                iUnregisterListener = service.unregisterListener(this.mListeners.get(iAuthEventListener));
                 this.mListeners.remove(iAuthEventListener);
             } else {
                 Log.e(str, "unregisterListener getService failed!");
@@ -342,8 +341,8 @@ public class CmfaManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave unregisterListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUnregisterListener, "Leave unregisterListener() with ", TAG);
+        return iUnregisterListener;
     }
 
     public int enable(String str, boolean z) {
@@ -353,18 +352,18 @@ public class CmfaManager {
             Log.e(str2, "Leave enable() with 3");
             return 3;
         }
-        int i = 1;
+        int iEnable = 1;
         try {
             ICmfaService service = getService();
             if (service != null) {
-                i = service.enable(str, z);
+                iEnable = service.enable(str, z);
             } else {
                 Log.e(str2, "enable getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave enable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iEnable, "Leave enable() with ", TAG);
+        return iEnable;
     }
 }

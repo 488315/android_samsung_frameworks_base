@@ -4,16 +4,18 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslPopupColorSchemeKeyTokens implements SeslColorSchemeKeyTokens {
     public static final /* synthetic */ SeslPopupColorSchemeKeyTokens[] $VALUES;
     public static final SeslPopupColorSchemeKeyTokens BackgroundColor;
+    public static final SeslPopupColorSchemeKeyTokens BorderColor;
 
     static {
         SeslPopupColorSchemeKeyTokens seslPopupColorSchemeKeyTokens = new SeslPopupColorSchemeKeyTokens("BackgroundColor", 0);
         BackgroundColor = seslPopupColorSchemeKeyTokens;
-        SeslPopupColorSchemeKeyTokens[] seslPopupColorSchemeKeyTokensArr = {seslPopupColorSchemeKeyTokens};
+        SeslPopupColorSchemeKeyTokens seslPopupColorSchemeKeyTokens2 = new SeslPopupColorSchemeKeyTokens("BorderColor", 1);
+        BorderColor = seslPopupColorSchemeKeyTokens2;
+        SeslPopupColorSchemeKeyTokens[] seslPopupColorSchemeKeyTokensArr = {seslPopupColorSchemeKeyTokens, seslPopupColorSchemeKeyTokens2};
         $VALUES = seslPopupColorSchemeKeyTokensArr;
         EnumEntriesKt.enumEntries(seslPopupColorSchemeKeyTokensArr);
     }

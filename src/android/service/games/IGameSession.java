@@ -58,9 +58,9 @@ public interface IGameSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameSession)) {
-                return (IGameSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGameSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGameSession)) {
+                return (IGameSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,13 +95,13 @@ public interface IGameSession extends IInterface {
             if (i == 1) {
                 onDestroyed();
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onTransientSystemBarVisibilityFromRevealGestureChanged(readBoolean);
+                onTransientSystemBarVisibilityFromRevealGestureChanged(z);
             } else if (i == 3) {
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onTaskFocusChanged(readBoolean2);
+                onTaskFocusChanged(z2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -126,36 +126,36 @@ public interface IGameSession extends IInterface {
 
             @Override // android.service.games.IGameSession
             public void onDestroyed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.games.IGameSession
             public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.games.IGameSession
             public void onTaskFocusChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -53,7 +52,6 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
             final UserSwitcherRepositoryImpl userSwitcherRepositoryImpl = this.this$0;
             UserInfoController.OnUserInfoChangedListener onUserInfoChangedListener = new UserInfoController.OnUserInfoChangedListener() { // from class: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$listener$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$listener$1$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ ProducerScope $$this$conflatedCallbackFlow;
@@ -83,7 +81,7 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
                     }
 
                     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-                    public final Object invokeSuspend(Object obj) {
+                    public final Object invokeSuspend(Object obj) throws Throwable {
                         SendChannel sendChannel;
                         ChannelExt channelExt;
                         Drawable drawable;
@@ -101,11 +99,11 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
                             this.label = 1;
                             int i2 = UserSwitcherRepositoryImpl.$r8$clinit;
                             userSwitcherRepositoryImpl.getClass();
-                            Object withContext = BuildersKt.withContext(userSwitcherRepositoryImpl.bgDispatcher, new UserSwitcherRepositoryImpl$isGuestUser$2(userSwitcherRepositoryImpl, null), this);
-                            if (withContext == coroutineSingletons) {
+                            Object objWithContext = BuildersKt.withContext(userSwitcherRepositoryImpl.bgDispatcher, new UserSwitcherRepositoryImpl$isGuestUser$2(userSwitcherRepositoryImpl, null), this);
+                            if (objWithContext == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
-                            obj = withContext;
+                            obj = objWithContext;
                             channelExt = channelExt2;
                             drawable = drawable2;
                         } else {
@@ -124,7 +122,7 @@ final class UserSwitcherRepositoryImpl$currentUserInfo$1 extends SuspendLambda i
 
                 @Override // com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener
                 public final void onUserInfoChanged(String str, Drawable drawable, String str2) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     CoroutineTracingKt.launchTraced$default(producerScope2, null, null, new AnonymousClass1(producerScope2, drawable, userSwitcherRepositoryImpl, null), 7);
                 }
             };

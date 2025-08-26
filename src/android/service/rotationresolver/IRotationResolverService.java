@@ -45,9 +45,9 @@ public interface IRotationResolverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRotationResolverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRotationResolverService)) {
-                return (IRotationResolverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRotationResolverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRotationResolverService)) {
+                return (IRotationResolverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IRotationResolverService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRotationResolverCallback asInterface = IRotationResolverCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRotationResolverCallback iRotationResolverCallbackAsInterface = IRotationResolverCallback.Stub.asInterface(parcel.readStrongBinder());
                 RotationResolutionRequest rotationResolutionRequest = (RotationResolutionRequest) parcel.readTypedObject(RotationResolutionRequest.CREATOR);
                 parcel.enforceNoDataAvail();
-                resolveRotation(asInterface, rotationResolutionRequest);
+                resolveRotation(iRotationResolverCallbackAsInterface, rotationResolutionRequest);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IRotationResolverService extends IInterface {
 
             @Override // android.service.rotationresolver.IRotationResolverService
             public void resolveRotation(IRotationResolverCallback iRotationResolverCallback, RotationResolutionRequest rotationResolutionRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRotationResolverService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRotationResolverCallback);
-                    obtain.writeTypedObject(rotationResolutionRequest, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRotationResolverService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRotationResolverCallback);
+                    parcelObtain.writeTypedObject(rotationResolutionRequest, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

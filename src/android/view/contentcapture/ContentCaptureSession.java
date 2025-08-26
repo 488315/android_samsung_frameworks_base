@@ -137,17 +137,17 @@ public abstract class ContentCaptureSession implements AutoCloseable {
     }
 
     public final ContentCaptureSession createContentCaptureSession(ContentCaptureContext contentCaptureContext) {
-        ContentCaptureSession newChild = newChild(contentCaptureContext);
+        ContentCaptureSession contentCaptureSessionNewChild = newChild(contentCaptureContext);
         if (ContentCaptureHelper.sDebug) {
-            Log.d(TAG, "createContentCaptureSession(" + contentCaptureContext + ": parent=" + this.mId + ", child=" + newChild.mId);
+            Log.d(TAG, "createContentCaptureSession(" + contentCaptureContext + ": parent=" + this.mId + ", child=" + contentCaptureSessionNewChild.mId);
         }
         synchronized (this.mLock) {
             if (this.mChildren == null) {
                 this.mChildren = new ArrayList<>(5);
             }
-            this.mChildren.add(newChild);
+            this.mChildren.add(contentCaptureSessionNewChild);
         }
-        return newChild;
+        return contentCaptureSessionNewChild;
     }
 
     public final void setContentCaptureContext(ContentCaptureContext contentCaptureContext) {
@@ -374,10 +374,10 @@ public abstract class ContentCaptureSession implements AutoCloseable {
     }
 
     private static int getRandomSessionId() {
-        int nextInt;
+        int iNextInt;
         do {
-            nextInt = ID_GENERATOR.nextInt();
-        } while (nextInt == 0);
-        return nextInt;
+            iNextInt = ID_GENERATOR.nextInt();
+        } while (iNextInt == 0);
+        return iNextInt;
     }
 }

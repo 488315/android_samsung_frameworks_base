@@ -16,13 +16,11 @@ import com.samsung.android.view.SemWindowManager;
 import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BlurEffect {
     public final Context context;
     public final SemWindowManagerWrapper semWindowManagerWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,16 +52,16 @@ public final class BlurEffect {
             view.setVisibility(4);
             view.semSetBlurInfo(null);
         } else {
-            SemBlurInfo build = new SemBlurInfo.Builder(0).setRadius(256).setBackgroundColor(i).setColorCurvePreset(i2).setBackgroundCornerRadius(f).build();
+            SemBlurInfo semBlurInfoBuild = new SemBlurInfo.Builder(0).setRadius(256).setBackgroundColor(i).setColorCurvePreset(i2).setBackgroundCornerRadius(f).build();
             ViewVisibilityUtil.INSTANCE.getClass();
             view.setVisibility(0);
             view.getForeground().setAlpha(30);
-            view.semSetBlurInfo(build);
+            view.semSetBlurInfo(semBlurInfoBuild);
         }
     }
 
     public final void setCapturedBlur(ImageView imageView, int i, Supplier supplier) {
-        Bitmap bitmap;
+        Bitmap bitmapScreenshot;
         if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled()) {
             ViewVisibilityUtil.INSTANCE.getClass();
             imageView.setVisibility(4);
@@ -81,20 +79,20 @@ public final class BlurEffect {
         int width2 = ContextUtils.isLandscape(this.context) ? imageView.getWidth() : imageView.getHeight();
         this.semWindowManagerWrapper.getClass();
         Display display = context.getDisplay();
-        if (display == null || (bitmap = SemWindowManager.getInstance().screenshot(display.getDisplayId(), 2036, true, rect, height2, width2, true, 0, true)) == null) {
-            bitmap = null;
+        if (display == null || (bitmapScreenshot = SemWindowManager.getInstance().screenshot(display.getDisplayId(), 2036, true, rect, height2, width2, true, 0, true)) == null) {
+            bitmapScreenshot = null;
         }
-        if (bitmap == null) {
+        if (bitmapScreenshot == null) {
             ViewVisibilityUtil.INSTANCE.getClass();
             imageView.setVisibility(4);
             imageView.semSetBlurInfo(null);
         } else {
             imageView.setClipToOutline(true);
-            SemBlurInfo build = new SemBlurInfo.Builder(1).setRadius(256).setColorCurvePreset(i).setBitmap(bitmap).build();
+            SemBlurInfo semBlurInfoBuild = new SemBlurInfo.Builder(1).setRadius(256).setColorCurvePreset(i).setBitmap(bitmapScreenshot).build();
             ViewVisibilityUtil.INSTANCE.getClass();
             imageView.setVisibility(0);
             imageView.getForeground().setAlpha(30);
-            imageView.semSetBlurInfo(build);
+            imageView.semSetBlurInfo(semBlurInfoBuild);
         }
     }
 }

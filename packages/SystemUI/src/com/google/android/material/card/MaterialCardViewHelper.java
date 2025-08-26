@@ -24,7 +24,6 @@ import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.shape.RoundedCornerTreatment;
 import com.google.android.material.shape.ShapeAppearanceModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialCardViewHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,16 +62,16 @@ public class MaterialCardViewHelper {
         ShapeAppearanceModel shapeAppearanceModel = materialShapeDrawable.drawableState.shapeAppearanceModel;
         shapeAppearanceModel.getClass();
         ShapeAppearanceModel.Builder builder = new ShapeAppearanceModel.Builder(shapeAppearanceModel);
-        TypedArray obtainStyledAttributes = materialCardView.getContext().obtainStyledAttributes(attributeSet, R$styleable.CardView, i, R.style.CardView);
-        if (obtainStyledAttributes.hasValue(3)) {
-            builder.setAllCornerSizes(obtainStyledAttributes.getDimension(3, 0.0f));
+        TypedArray typedArrayObtainStyledAttributes = materialCardView.getContext().obtainStyledAttributes(attributeSet, R$styleable.CardView, i, R.style.CardView);
+        if (typedArrayObtainStyledAttributes.hasValue(3)) {
+            builder.setAllCornerSizes(typedArrayObtainStyledAttributes.getDimension(3, 0.0f));
         }
         this.foregroundContentDrawable = new MaterialShapeDrawable();
         setShapeAppearanceModel(builder.build());
         this.iconFadeAnimInterpolator = MotionUtils.resolveThemeInterpolator(materialCardView.getContext(), R.attr.motionEasingLinearInterpolator, AnimationUtils.LINEAR_INTERPOLATOR);
         this.iconFadeInAnimDuration = MotionUtils.resolveThemeDuration(materialCardView.getContext(), R.attr.motionDurationShort2, 300);
         this.iconFadeOutAnimDuration = MotionUtils.resolveThemeDuration(materialCardView.getContext(), R.attr.motionDurationShort1, 300);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public static float calculateCornerPaddingForCornerTreatment(CornerTreatment cornerTreatment, float f) {
@@ -106,23 +105,23 @@ public class MaterialCardViewHelper {
 
     /* JADX WARN: Type inference failed for: r3v0, types: [com.google.android.material.card.MaterialCardViewHelper$1] */
     public final AnonymousClass1 insetDrawable(Drawable drawable) {
+        int iCeil;
         int i;
-        int i2;
         MaterialCardView materialCardView = this.materialCardView;
         if (materialCardView.mCompatPadding) {
             CardViewApi21Impl cardViewApi21Impl = CardView.IMPL;
             CardView.AnonymousClass1 anonymousClass1 = materialCardView.mCardViewDelegate;
             cardViewApi21Impl.getClass();
-            int ceil = (int) Math.ceil((((RoundRectDrawable) anonymousClass1.mCardBackground).mPadding * 1.5f) + (shouldAddCornerPaddingOutsideCardBackground() ? calculateActualCornerPadding() : 0.0f));
+            int iCeil2 = (int) Math.ceil((((RoundRectDrawable) anonymousClass1.mCardBackground).mPadding * 1.5f) + (shouldAddCornerPaddingOutsideCardBackground() ? calculateActualCornerPadding() : 0.0f));
             CardView.AnonymousClass1 anonymousClass12 = materialCardView.mCardViewDelegate;
             cardViewApi21Impl.getClass();
-            i = (int) Math.ceil(((RoundRectDrawable) anonymousClass12.mCardBackground).mPadding + (shouldAddCornerPaddingOutsideCardBackground() ? calculateActualCornerPadding() : 0.0f));
-            i2 = ceil;
+            iCeil = (int) Math.ceil(((RoundRectDrawable) anonymousClass12.mCardBackground).mPadding + (shouldAddCornerPaddingOutsideCardBackground() ? calculateActualCornerPadding() : 0.0f));
+            i = iCeil2;
         } else {
+            iCeil = 0;
             i = 0;
-            i2 = 0;
         }
-        return new InsetDrawable(this, drawable, i, i2, i, i2) { // from class: com.google.android.material.card.MaterialCardViewHelper.1
+        return new InsetDrawable(this, drawable, iCeil, i, iCeil, i) { // from class: com.google.android.material.card.MaterialCardViewHelper.1
             @Override // android.graphics.drawable.Drawable
             public final int getMinimumHeight() {
                 return -1;
@@ -155,17 +154,17 @@ public class MaterialCardViewHelper {
                 valueAnimator.cancel();
                 this.iconAnimator = null;
             }
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.checkedAnimationProgress, f);
-            this.iconAnimator = ofFloat;
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.card.MaterialCardViewHelper$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.checkedAnimationProgress, f);
+            this.iconAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.card.MaterialCardViewHelper$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    MaterialCardViewHelper materialCardViewHelper = MaterialCardViewHelper.this;
+                    MaterialCardViewHelper materialCardViewHelper = this.f$0;
                     int i = MaterialCardViewHelper.$r8$clinit;
                     materialCardViewHelper.getClass();
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                    materialCardViewHelper.checkedIcon.setAlpha((int) (255.0f * floatValue));
-                    materialCardViewHelper.checkedAnimationProgress = floatValue;
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    materialCardViewHelper.checkedIcon.setAlpha((int) (255.0f * fFloatValue));
+                    materialCardViewHelper.checkedAnimationProgress = fFloatValue;
                 }
             });
             this.iconAnimator.setInterpolator(this.iconFadeAnimInterpolator);
@@ -202,9 +201,9 @@ public class MaterialCardViewHelper {
     /* JADX WARN: Type inference failed for: r1v5, types: [android.view.View] */
     public final boolean shouldUseClickableForeground() {
         MaterialCardView materialCardView = this.materialCardView;
-        boolean isClickable = materialCardView.isClickable();
+        boolean zIsClickable = materialCardView.isClickable();
         MaterialCardView materialCardView2 = materialCardView;
-        if (isClickable) {
+        if (zIsClickable) {
             return true;
         }
         while (materialCardView2.isDuplicateParentStateEnabled() && (materialCardView2.getParent() instanceof View)) {
@@ -227,43 +226,29 @@ public class MaterialCardViewHelper {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0018  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateContentPadding() {
         boolean z;
-        float f;
         MaterialCardView materialCardView = this.materialCardView;
         if (materialCardView.mPreventCornerOverlap) {
             MaterialShapeDrawable materialShapeDrawable = this.bgDrawable;
-            if (!materialShapeDrawable.drawableState.shapeAppearanceModel.isRoundRect(materialShapeDrawable.getBoundsAsRectF$1())) {
-                z = true;
-                f = 0.0f;
-                float calculateActualCornerPadding = (!z || shouldAddCornerPaddingOutsideCardBackground()) ? calculateActualCornerPadding() : 0.0f;
-                if (materialCardView.mPreventCornerOverlap && materialCardView.mCompatPadding) {
-                    double d = 1.0d - COS_45;
-                    CardViewApi21Impl cardViewApi21Impl = CardView.IMPL;
-                    CardView.AnonymousClass1 anonymousClass1 = materialCardView.mCardViewDelegate;
-                    cardViewApi21Impl.getClass();
-                    f = (float) (d * ((RoundRectDrawable) anonymousClass1.mCardBackground).mRadius);
-                }
-                int i = (int) (calculateActualCornerPadding - f);
-                Rect rect = this.userContentPadding;
-                materialCardView.mContentPadding.set(rect.left + i, rect.top + i, rect.right + i, rect.bottom + i);
-                CardView.IMPL.updatePadding(materialCardView.mCardViewDelegate);
-            }
+            z = !materialShapeDrawable.drawableState.shapeAppearanceModel.isRoundRect(materialShapeDrawable.getBoundsAsRectF$1());
         }
-        z = false;
-        f = 0.0f;
-        if (z) {
+        float f = 0.0f;
+        float fCalculateActualCornerPadding = (z || shouldAddCornerPaddingOutsideCardBackground()) ? calculateActualCornerPadding() : 0.0f;
+        if (materialCardView.mPreventCornerOverlap && materialCardView.mCompatPadding) {
+            double d = 1.0d - COS_45;
+            CardViewApi21Impl cardViewApi21Impl = CardView.IMPL;
+            CardView.AnonymousClass1 anonymousClass1 = materialCardView.mCardViewDelegate;
+            cardViewApi21Impl.getClass();
+            f = (float) (d * ((RoundRectDrawable) anonymousClass1.mCardBackground).mRadius);
         }
-        if (materialCardView.mPreventCornerOverlap) {
-            double d2 = 1.0d - COS_45;
-            CardViewApi21Impl cardViewApi21Impl2 = CardView.IMPL;
-            CardView.AnonymousClass1 anonymousClass12 = materialCardView.mCardViewDelegate;
-            cardViewApi21Impl2.getClass();
-            f = (float) (d2 * ((RoundRectDrawable) anonymousClass12.mCardBackground).mRadius);
-        }
-        int i2 = (int) (calculateActualCornerPadding - f);
-        Rect rect2 = this.userContentPadding;
-        materialCardView.mContentPadding.set(rect2.left + i2, rect2.top + i2, rect2.right + i2, rect2.bottom + i2);
+        int i = (int) (fCalculateActualCornerPadding - f);
+        Rect rect = this.userContentPadding;
+        materialCardView.mContentPadding.set(rect.left + i, rect.top + i, rect.right + i, rect.bottom + i);
         CardView.IMPL.updatePadding(materialCardView.mCardViewDelegate);
     }
 }

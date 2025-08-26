@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,6 +37,7 @@ import com.android.systemui.volume.util.SystemServiceExtension;
 import com.samsung.android.settingslib.bluetooth.scsp.ScspUtils;
 import com.sec.ims.IMSParameter;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumeUI implements CoreStartable, ConfigurationController.ConfigurationListener {
     public static final boolean LOGD = Log.isLoggable("VolumeUI", 3);
@@ -86,7 +87,7 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
     }
 
     @Override // com.android.systemui.CoreStartable
-    public final void start() {
+    public final void start() throws Resources.NotFoundException {
         final int i = 0;
         final int i2 = 1;
         AudioRepositoryImpl audioRepositoryImpl = (AudioRepositoryImpl) this.mAudioRepository;
@@ -137,10 +138,10 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
                     public final void onReceive(Context context2, Intent intent2) {
                         String action = intent2.getAction();
                         if (action != null) {
-                            int hashCode = action.hashCode();
-                            if (hashCode != -1061859923) {
-                                if (hashCode != 1735215423) {
-                                    if (hashCode == 1886075268 && action.equals("com.samsung.intent.action.DLNA_STATUS_CHANGED")) {
+                            int iHashCode = action.hashCode();
+                            if (iHashCode != -1061859923) {
+                                if (iHashCode != 1735215423) {
+                                    if (iHashCode == 1886075268 && action.equals("com.samsung.intent.action.DLNA_STATUS_CHANGED")) {
                                         boolean z4 = intent2.getIntExtra(IMSParameter.CALL.STATUS, 0) == 1;
                                         volumeDialogControllerImpl$$ExternalSyntheticLambda92.accept(Boolean.valueOf(z4));
                                         broadcastReceiverManager.logWrapper.d("vol.BroadcastManager", FakeFeatures$$ExternalSyntheticOutline0.m("onReceive : SmartView action=", intent2.getAction(), ", dlnaEnabled=", z4));
@@ -157,7 +158,7 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
                             int intExtra = intent2.getIntExtra("state", 0);
                             boolean booleanExtra = intent2.getBooleanExtra("isSupportDisplayVolumeControl", false);
                             volumeDialogControllerImpl$$ExternalSyntheticLambda9.accept(Boolean.valueOf(intExtra == 1 && booleanExtra));
-                            broadcastReceiverManager.logWrapper.d("vol.BroadcastManager", KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(intExtra, "onReceive : SmartView action=", intent2.getAction(), ", state=", ", isSupportDisplayVolumeControl="), booleanExtra, ", ret=", intExtra == 1 && booleanExtra));
+                            broadcastReceiverManager.logWrapper.d("vol.BroadcastManager", KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(intExtra, "onReceive : SmartView action=", intent2.getAction(), ", state=", ", isSupportDisplayVolumeControl="), booleanExtra, ", ret=", intExtra == 1 && booleanExtra));
                         }
                     }
                 };
@@ -271,23 +272,23 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
                     bluetoothIconServerUtils2.getClass();
                     Executors.newSingleThreadExecutor().execute(new Runnable() { // from class: com.android.systemui.volume.util.BluetoothIconServerUtils$executeServerSyncInit$1
                         @Override // java.lang.Runnable
-                        public final void run() {
+                        public final void run() throws IOException {
                             ScspUtils.removeOldDir(context4);
                             BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
                             if (defaultAdapter != null) {
                                 Context context5 = context4;
                                 Runnable runnable2 = runnable;
-                                String semGetEtag = defaultAdapter.semGetEtag(context5.getPackageName(), null);
-                                if (TextUtils.isEmpty(semGetEtag)) {
+                                String strSemGetEtag = defaultAdapter.semGetEtag(context5.getPackageName(), null);
+                                if (TextUtils.isEmpty(strSemGetEtag)) {
                                     Log.d("vol.BluetoothIconServerUtils", "init: etag is empty");
                                     return;
                                 }
-                                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("init: etag = ", semGetEtag, "vol.BluetoothIconServerUtils");
-                                boolean z4 = false;
+                                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("init: etag = ", strSemGetEtag, "vol.BluetoothIconServerUtils");
+                                boolean zMakeAllResourceData = false;
                                 SharedPreferences sharedPreferences = context5.getSharedPreferences("bluetooth_scsp_manager", 0);
                                 String string = sharedPreferences.getString("etag", "");
                                 Log.d("vol.BluetoothIconServerUtils", "init: sharedEtag = " + string);
-                                if (Intrinsics.areEqual(semGetEtag, string)) {
+                                if (Intrinsics.areEqual(strSemGetEtag, string)) {
                                     File file = new File(ScspUtils.getFileRootPath(context5));
                                     if (file.exists()) {
                                         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("init: etag is not updated rootDir: ", file.getPath(), "vol.BluetoothIconServerUtils");
@@ -295,21 +296,21 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
                                     }
                                     Log.d("vol.BluetoothIconServerUtils", "init: dir is not exist. need update");
                                 } else {
-                                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                                    edit.putString("etag", semGetEtag);
-                                    edit.apply();
+                                    SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+                                    editorEdit.putString("etag", strSemGetEtag);
+                                    editorEdit.apply();
                                 }
-                                List<Uri> semGetAllIconResourceUri = defaultAdapter.semGetAllIconResourceUri(context5.getPackageName());
-                                List list = semGetAllIconResourceUri;
+                                List<Uri> listSemGetAllIconResourceUri = defaultAdapter.semGetAllIconResourceUri(context5.getPackageName());
+                                List list = listSemGetAllIconResourceUri;
                                 if (list == null || list.isEmpty()) {
                                     Log.d("vol.BluetoothIconServerUtils", "init: uriList is empty");
                                     return;
                                 }
-                                for (Uri uri : semGetAllIconResourceUri) {
+                                for (Uri uri : listSemGetAllIconResourceUri) {
                                     Log.d("vol.BluetoothIconServerUtils", "saveAllResources: uri = " + uri);
-                                    z4 = ScspUtils.makeAllResourceData(context5, uri);
+                                    zMakeAllResourceData = ScspUtils.makeAllResourceData(context5, uri);
                                 }
-                                if (z4) {
+                                if (zMakeAllResourceData) {
                                     runnable2.run();
                                 }
                             }
@@ -327,7 +328,7 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     VolumeUI volumeUI = this.f$0;
                     switch (i) {
                         case 0:
@@ -358,7 +359,7 @@ public class VolumeUI implements CoreStartable, ConfigurationController.Configur
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     VolumeUI volumeUI = this.f$0;
                     switch (i2) {
                         case 0:

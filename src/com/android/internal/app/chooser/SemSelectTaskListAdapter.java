@@ -36,9 +36,9 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public ResolveInfo resolveInfoForPosition(int i, boolean z) {
-        TargetInfo targetInfoForPosition = targetInfoForPosition(i, z);
-        if (targetInfoForPosition != null) {
-            return targetInfoForPosition.getResolveInfo();
+        TargetInfo targetInfoTargetInfoForPosition = targetInfoForPosition(i, z);
+        if (targetInfoTargetInfoForPosition != null) {
+            return targetInfoTargetInfoForPosition.getResolveInfo();
         }
         return null;
     }
@@ -51,7 +51,6 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
         return this.secondDepthList.get(i);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.android.internal.widget.RecyclerView.Adapter
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         ViewHolder viewHolder = new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sem_resolver_second_depth_list_item, viewGroup, false));
@@ -61,14 +60,14 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override // com.android.internal.widget.RecyclerView.Adapter
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        int max = Math.max(this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenActivityIndex(), 0);
+        int iMax = Math.max(this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenActivityIndex(), 0);
         String lastChosenPackage = this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenPackage();
-        boolean equals = !TextUtils.isEmpty(lastChosenPackage) ? lastChosenPackage.equals(this.secondDepthList.get(i).getResolvedComponentName().getPackageName()) : false;
+        boolean zEquals = !TextUtils.isEmpty(lastChosenPackage) ? lastChosenPackage.equals(this.secondDepthList.get(i).getResolvedComponentName().getPackageName()) : false;
         if (this.mSelectedItem < 0) {
-            if (!equals) {
-                max = 0;
+            if (!zEquals) {
+                iMax = 0;
             }
-            this.mSelectedItem = max;
+            this.mSelectedItem = iMax;
         }
         viewHolder.radioButton.setChecked(this.mSelectedItem == i);
         CharSequence extendedInfo = this.secondDepthList.get(i).getExtendedInfo();

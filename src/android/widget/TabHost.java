@@ -3,6 +3,7 @@ package android.widget;
 import android.app.LocalActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -84,10 +85,10 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         this.mCurrentTab = -1;
         this.mCurrentView = null;
         this.mLocalActivityManager = null;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TabWidget, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TabWidget, attributeSet, obtainStyledAttributes, i, i2);
-        this.mTabLayoutId = obtainStyledAttributes.getResourceId(4, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TabWidget, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TabWidget, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mTabLayoutId = typedArrayObtainStyledAttributes.getResourceId(4, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (this.mTabLayoutId == 0) {
             this.mTabLayoutId = R.layout.tab_indicator_holo;
         }
@@ -161,12 +162,12 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         if (tabSpec.mContentStrategy == null) {
             throw new IllegalArgumentException("you must specify a way to create the tab content");
         }
-        View createIndicatorView = tabSpec.mIndicatorStrategy.createIndicatorView();
-        createIndicatorView.setOnKeyListener(this.mTabKeyListener);
+        View viewCreateIndicatorView = tabSpec.mIndicatorStrategy.createIndicatorView();
+        viewCreateIndicatorView.setOnKeyListener(this.mTabKeyListener);
         if (tabSpec.mIndicatorStrategy instanceof ViewIndicatorStrategy) {
             this.mTabWidget.setStripEnabled(false);
         }
-        this.mTabWidget.addView(createIndicatorView);
+        this.mTabWidget.addView(viewCreateIndicatorView);
         this.mTabSpecs.add(tabSpec);
         if (this.mCurrentTab == -1) {
             setCurrentTab(0);
@@ -229,13 +230,13 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public boolean dispatchKeyEvent(KeyEvent keyEvent) {
+    public boolean dispatchKeyEvent(KeyEvent keyEvent) throws Resources.NotFoundException {
         View view;
         int i;
         int i2;
         int i3;
-        boolean dispatchKeyEvent = super.dispatchKeyEvent(keyEvent);
-        if (!dispatchKeyEvent && keyEvent.getAction() == 0 && (view = this.mCurrentView) != null && view.isRootNamespace() && this.mCurrentView.hasFocus()) {
+        boolean zDispatchKeyEvent = super.dispatchKeyEvent(keyEvent);
+        if (!zDispatchKeyEvent && keyEvent.getAction() == 0 && (view = this.mCurrentView) != null && view.isRootNamespace() && this.mCurrentView.hasFocus()) {
             int tabWidgetLocation = getTabWidgetLocation();
             if (tabWidgetLocation != 0) {
                 i3 = 2;
@@ -262,7 +263,7 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
                 return true;
             }
         }
-        return dispatchKeyEvent;
+        return zDispatchKeyEvent;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -363,16 +364,16 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         }
 
         @Override // android.widget.TabHost.IndicatorStrategy
-        public View createIndicatorView() {
+        public View createIndicatorView() throws Resources.NotFoundException {
             Context context = TabHost.this.getContext();
-            View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(TabHost.this.mTabLayoutId, (ViewGroup) TabHost.this.mTabWidget, false);
-            TextView textView = (TextView) inflate.findViewById(16908310);
+            View viewInflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(TabHost.this.mTabLayoutId, (ViewGroup) TabHost.this.mTabWidget, false);
+            TextView textView = (TextView) viewInflate.findViewById(16908310);
             textView.lambda$setTextAsync$0(this.mLabel);
             if (context.getApplicationInfo().targetSdkVersion <= 4) {
-                inflate.setBackgroundResource(R.drawable.tab_indicator_v4);
+                viewInflate.setBackgroundResource(R.drawable.tab_indicator_v4);
                 textView.setTextColor(context.getColorStateList(R.color.tab_indicator_text_v4));
             }
-            return inflate;
+            return viewInflate;
         }
     }
 
@@ -386,23 +387,23 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         }
 
         @Override // android.widget.TabHost.IndicatorStrategy
-        public View createIndicatorView() {
+        public View createIndicatorView() throws Resources.NotFoundException {
             Drawable drawable;
             Context context = TabHost.this.getContext();
-            View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(TabHost.this.mTabLayoutId, (ViewGroup) TabHost.this.mTabWidget, false);
-            TextView textView = (TextView) inflate.findViewById(16908310);
-            ImageView imageView = (ImageView) inflate.findViewById(16908294);
+            View viewInflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(TabHost.this.mTabLayoutId, (ViewGroup) TabHost.this.mTabWidget, false);
+            TextView textView = (TextView) viewInflate.findViewById(16908310);
+            ImageView imageView = (ImageView) viewInflate.findViewById(16908294);
             boolean z = imageView.getVisibility() != 8 || TextUtils.isEmpty(this.mLabel);
             textView.lambda$setTextAsync$0(this.mLabel);
             if (z && (drawable = this.mIcon) != null) {
-                imageView.lambda$setImageURIAsync$0(drawable);
+                imageView.lambda$setImageURIAsync$2(drawable);
                 imageView.setVisibility(0);
             }
             if (context.getApplicationInfo().targetSdkVersion <= 4) {
-                inflate.setBackgroundResource(R.drawable.tab_indicator_v4);
+                viewInflate.setBackgroundResource(R.drawable.tab_indicator_v4);
                 textView.setTextColor(context.getColorStateList(R.color.tab_indicator_text_v4));
             }
-            return inflate;
+            return viewInflate;
         }
     }
 
@@ -423,10 +424,10 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         private final View mView;
 
         private ViewIdContentStrategy(TabHost tabHost, int i) {
-            View findViewById = tabHost.mTabContent.findViewById(i);
-            this.mView = findViewById;
-            if (findViewById != null) {
-                findViewById.setVisibility(8);
+            View viewFindViewById = tabHost.mTabContent.findViewById(i);
+            this.mView = viewFindViewById;
+            if (viewFindViewById != null) {
+                viewFindViewById.setVisibility(8);
             } else {
                 throw new RuntimeException("Could not create tab content because could not find view with id " + i);
             }
@@ -480,12 +481,12 @@ public class TabHost extends FrameLayout implements ViewTreeObserver.OnTouchMode
         }
 
         @Override // android.widget.TabHost.ContentStrategy
-        public View getContentView() {
+        public View getContentView() throws Resources.NotFoundException {
             if (TabHost.this.mLocalActivityManager == null) {
                 throw new IllegalStateException("Did you forget to call 'public void setup(LocalActivityManager activityGroup)'?");
             }
-            Window startActivity = TabHost.this.mLocalActivityManager.startActivity(this.mTag, this.mIntent);
-            View decorView = startActivity != null ? startActivity.getDecorView() : null;
+            Window windowStartActivity = TabHost.this.mLocalActivityManager.startActivity(this.mTag, this.mIntent);
+            View decorView = windowStartActivity != null ? windowStartActivity.getDecorView() : null;
             View view = this.mLaunchedView;
             if (view != decorView && view != null && view.getParent() != null) {
                 TabHost.this.mTabContent.removeView(this.mLaunchedView);

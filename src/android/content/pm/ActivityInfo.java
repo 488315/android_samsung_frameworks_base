@@ -836,9 +836,9 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
         this.mMaxAspectRatio = parcel.readFloat();
         this.mMinAspectRatio = parcel.readFloat();
         this.supportsSizeChanges = parcel.readBoolean();
-        Set<String> unparcel = sForStringSet.unparcel(parcel);
-        this.mKnownActivityEmbeddingCerts = unparcel;
-        if (unparcel.isEmpty()) {
+        Set<String> setUnparcel = sForStringSet.unparcel(parcel);
+        this.mKnownActivityEmbeddingCerts = setUnparcel;
+        if (setUnparcel.isEmpty()) {
             this.mKnownActivityEmbeddingCerts = null;
         }
         this.requiredDisplayCategory = parcel.readString8();

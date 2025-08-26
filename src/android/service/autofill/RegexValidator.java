@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -40,16 +41,16 @@ public final class RegexValidator extends InternalValidator implements Validator
 
     @Override // android.service.autofill.InternalValidator
     public boolean isValid(ValueFinder valueFinder) {
-        String findByAutofillId = valueFinder.findByAutofillId(this.mId);
-        if (findByAutofillId == null) {
+        String strFindByAutofillId = valueFinder.findByAutofillId(this.mId);
+        if (strFindByAutofillId == null) {
             Log.w(TAG, "No view for id " + this.mId);
             return false;
         }
-        boolean matches = this.mRegex.matcher(findByAutofillId).matches();
+        boolean zMatches = this.mRegex.matcher(strFindByAutofillId).matches();
         if (Helper.sDebug) {
-            Log.d(TAG, "isValid(): " + matches);
+            Log.d(TAG, "isValid(): " + zMatches);
         }
-        return matches;
+        return zMatches;
     }
 
     public String toString() {
@@ -60,7 +61,7 @@ public final class RegexValidator extends InternalValidator implements Validator
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeParcelable(this.mId, i);
         parcel.writeSerializable(this.mRegex);
     }

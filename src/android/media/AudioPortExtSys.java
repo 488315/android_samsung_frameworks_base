@@ -123,21 +123,21 @@ public final class AudioPortExtSys implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (AudioPortDeviceExtSys) parcel.readTypedObject(AudioPortDeviceExtSys.CREATOR));
+        if (i == 1) {
+            _set(i, (AudioPortDeviceExtSys) parcel.readTypedObject(AudioPortDeviceExtSys.CREATOR));
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, (AudioPortMixExtSys) parcel.readTypedObject(AudioPortMixExtSys.CREATOR));
-        } else if (readInt == 3) {
-            _set(readInt, Integer.valueOf(parcel.readInt()));
+        if (i == 2) {
+            _set(i, (AudioPortMixExtSys) parcel.readTypedObject(AudioPortMixExtSys.CREATOR));
+        } else if (i == 3) {
+            _set(i, Integer.valueOf(parcel.readInt()));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

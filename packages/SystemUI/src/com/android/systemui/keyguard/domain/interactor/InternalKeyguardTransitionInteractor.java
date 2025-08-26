@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternalKeyguardTransitionInteractor {
     public final KeyguardTransitionRepository repository;
@@ -23,7 +22,7 @@ public final class InternalKeyguardTransitionInteractor {
     }
 
     public final Object updateTransition(UUID uuid, float f, TransitionState transitionState, Continuation continuation) {
-        Object updateTransition = ((KeyguardTransitionRepositoryImpl) this.repository).updateTransition(uuid, f, transitionState, continuation);
-        return updateTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? updateTransition : Unit.INSTANCE;
+        Object objUpdateTransition = ((KeyguardTransitionRepositoryImpl) this.repository).updateTransition(uuid, f, transitionState, continuation);
+        return objUpdateTransition == CoroutineSingletons.COROUTINE_SUSPENDED ? objUpdateTransition : Unit.INSTANCE;
     }
 }

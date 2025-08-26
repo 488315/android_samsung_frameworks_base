@@ -134,12 +134,12 @@ final class KeyButtonRipple extends Drawable {
         if (this.mGlowAlpha > 0.0f) {
             Paint ripplePaint = getRipplePaint();
             ripplePaint.setAlpha((int) (this.mGlowAlpha * 255.0f));
-            float width = getBounds().width();
-            float height = getBounds().height();
-            boolean z = width > height;
+            float fWidth = getBounds().width();
+            float fHeight = getBounds().height();
+            boolean z = fWidth > fHeight;
             float rippleSize = getRippleSize() * this.mGlowScale * 0.5f;
-            float f = width * 0.5f;
-            float f2 = height * 0.5f;
+            float f = fWidth * 0.5f;
+            float f2 = fHeight * 0.5f;
             float f3 = z ? rippleSize : f;
             if (z) {
                 rippleSize = f2;
@@ -152,18 +152,18 @@ final class KeyButtonRipple extends Drawable {
             }
             canvas.save();
             canvas.translate(f, f2);
-            float min = Math.min(f3, rippleSize);
-            float f6 = -min;
-            canvas.drawOval(f6, f6, min, min, ripplePaint);
+            float fMin = Math.min(f3, rippleSize);
+            float f6 = -fMin;
+            canvas.drawOval(f6, f6, fMin, fMin, ripplePaint);
             canvas.restore();
         }
     }
 
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
-        boolean isHardwareAccelerated = canvas.isHardwareAccelerated();
-        this.mSupportHardware = isHardwareAccelerated;
-        if (isHardwareAccelerated) {
+        boolean zIsHardwareAccelerated = canvas.isHardwareAccelerated();
+        this.mSupportHardware = zIsHardwareAccelerated;
+        if (zIsHardwareAccelerated) {
             drawHardware((RecordingCanvas) canvas);
         } else {
             drawSoftware(canvas);
@@ -287,7 +287,7 @@ final class KeyButtonRipple extends Drawable {
                     this.mHandler.postDelayed(new Runnable() { // from class: android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            KeyButtonRipple.this.enterSoftware();
+                            this.f$0.enterSoftware();
                         }
                     }, ViewConfiguration.getTapTimeout());
                     return;
@@ -310,12 +310,12 @@ final class KeyButtonRipple extends Drawable {
         endAnimations("enterSoftware", true);
         this.mVisible = true;
         this.mGlowAlpha = getMaxGlowAlpha();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "glowScale", 0.0f, GLOW_MAX_SCALE_FACTOR);
-        ofFloat.setInterpolator(this.mInterpolator);
-        ofFloat.setDuration(350L);
-        ofFloat.addListener(this.mAnimatorListener);
-        ofFloat.start();
-        this.mRunningAnimations.add(ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "glowScale", 0.0f, GLOW_MAX_SCALE_FACTOR);
+        objectAnimatorOfFloat.setInterpolator(this.mInterpolator);
+        objectAnimatorOfFloat.setDuration(350L);
+        objectAnimatorOfFloat.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
         if (!this.mDelayTouchFeedback || this.mPressed) {
             return;
         }
@@ -323,12 +323,12 @@ final class KeyButtonRipple extends Drawable {
     }
 
     private void exitSoftware() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
-        ofFloat.setInterpolator(ALPHA_OUT_INTERPOLATOR);
-        ofFloat.setDuration(450L);
-        ofFloat.addListener(this.mAnimatorListener);
-        ofFloat.start();
-        this.mRunningAnimations.add(ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
+        objectAnimatorOfFloat.setInterpolator(ALPHA_OUT_INTERPOLATOR);
+        objectAnimatorOfFloat.setDuration(450L);
+        objectAnimatorOfFloat.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
     }
 
     private void setPressedHardware(boolean z) {
@@ -339,7 +339,7 @@ final class KeyButtonRipple extends Drawable {
                     this.mHandler.postDelayed(new Runnable() { // from class: android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            KeyButtonRipple.this.enterHardware();
+                            this.f$0.enterHardware();
                         }
                     }, ViewConfiguration.getTapTimeout());
                     return;
@@ -382,9 +382,9 @@ final class KeyButtonRipple extends Drawable {
     }
 
     private int getExtendSize() {
-        boolean isHorizontal = isHorizontal();
+        boolean zIsHorizontal = isHorizontal();
         Rect bounds = getBounds();
-        return isHorizontal ? bounds.width() : bounds.height();
+        return zIsHorizontal ? bounds.width() : bounds.height();
     }
 
     private int getRippleSize() {

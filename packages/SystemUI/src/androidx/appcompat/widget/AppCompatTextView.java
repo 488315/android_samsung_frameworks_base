@@ -23,7 +23,6 @@ import androidx.core.util.Pair;
 import androidx.core.widget.TextViewCompat;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatTextView extends TextView {
     public boolean isNeedToSkipRefreshDrawable;
@@ -36,20 +35,17 @@ public class AppCompatTextView extends TextView {
     public SuperCallerApi34 mSuperCaller;
     public final AppCompatTextHelper mTextHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SuperCallerApi26 {
         public SuperCallerApi26() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SuperCallerApi28 extends SuperCallerApi26 {
         public SuperCallerApi28() {
             super();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SuperCallerApi34 extends SuperCallerApi28 {
         public SuperCallerApi34() {
             super();
@@ -145,10 +141,10 @@ public class AppCompatTextView extends TextView {
 
     @Override // android.widget.TextView, android.view.View
     public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
         this.mTextHelper.getClass();
-        AppCompatHintHelper.onCreateInputConnection(onCreateInputConnection, editorInfo, this);
-        return onCreateInputConnection;
+        AppCompatHintHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo, this);
+        return inputConnectionOnCreateInputConnection;
     }
 
     @Override // android.view.View

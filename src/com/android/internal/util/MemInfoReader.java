@@ -14,23 +14,23 @@ public final class MemInfoReader {
     }
 
     public void readMemInfo() {
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             Debug.getMemInfo(this.mInfos);
         } finally {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
         }
     }
 
     public void readLightMemInfo() {
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             Debug.getMemInfo(this.mLightInfos);
             for (int i = 0; i < 14; i++) {
                 this.mInfos[i] = this.mLightInfos[i];
             }
         } finally {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
         }
     }
 

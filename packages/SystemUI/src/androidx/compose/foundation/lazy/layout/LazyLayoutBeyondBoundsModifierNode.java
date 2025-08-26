@@ -25,7 +25,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node implements ModifierLocalModifierNode, BeyondBoundsLayout, LayoutModifierNode {
     public static final LazyLayoutBeyondBoundsModifierNode$Companion$emptyBeyondBoundsScope$1 emptyBeyondBoundsScope;
@@ -34,7 +33,6 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
     public boolean reverseLayout;
     public LazyLayoutBeyondBoundsState state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,6 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -94,7 +91,7 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
     }
 
     /* renamed from: hasMoreContent-FR3nfPY, reason: not valid java name */
-    public final boolean m164hasMoreContentFR3nfPY(LazyLayoutBeyondBoundsInfo.Interval interval, int i) {
+    public final boolean m165hasMoreContentFR3nfPY(LazyLayoutBeyondBoundsInfo.Interval interval, int i) {
         BeyondBoundsLayout.LayoutDirection.Companion.getClass();
         if (i == BeyondBoundsLayout.LayoutDirection.Above || i == BeyondBoundsLayout.LayoutDirection.Below) {
             if (this.orientation == Orientation.Horizontal) {
@@ -107,7 +104,7 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
         } else if (i != BeyondBoundsLayout.LayoutDirection.Before && i != BeyondBoundsLayout.LayoutDirection.After) {
             throw new IllegalStateException("Lazy list does not support beyond bounds layout for the specified direction");
         }
-        if (m165isForward4vf7U8o(i)) {
+        if (m166isForward4vf7U8o(i)) {
             if (interval.end >= this.state.getItemCount() - 1) {
                 return false;
             }
@@ -118,7 +115,7 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
     }
 
     /* renamed from: isForward-4vf7U8o, reason: not valid java name */
-    public final boolean m165isForward4vf7U8o(int i) {
+    public final boolean m166isForward4vf7U8o(int i) {
         BeyondBoundsLayout.LayoutDirection.Companion.getClass();
         if (i == BeyondBoundsLayout.LayoutDirection.Before) {
             return false;
@@ -164,20 +161,18 @@ public final class LazyLayoutBeyondBoundsModifierNode extends Modifier.Node impl
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
-        MeasureResult layout$1;
-        final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(j);
-        layout$1 = measureScope.layout$1(mo608measureBRTryo0.width, mo608measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutBeyondBoundsModifierNode$measure$1
+        final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(j);
+        return measureScope.layout$1(placeableMo610measureBRTryo0.width, placeableMo610measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutBeyondBoundsModifierNode$measure$1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((Placeable.PlacementScope) obj).place(Placeable.this, 0, 0, 0.0f);
+            public final Object mo781invoke(Object obj) {
+                ((Placeable.PlacementScope) obj).place(placeableMo610measureBRTryo0, 0, 0, 0.0f);
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 }

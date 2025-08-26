@@ -2,7 +2,6 @@ package android.hardware.display;
 
 import android.annotation.SystemApi;
 import android.hardware.display.IBrightnessListener;
-import android.hardware.display.VirtualDisplayConfig;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -10,6 +9,7 @@ import android.util.ArraySet;
 import android.view.DisplayCutout;
 import android.view.Surface;
 import com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -150,7 +150,7 @@ public final class VirtualDisplayConfig implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString8(this.mName);
         parcel.writeInt(this.mWidth);
         parcel.writeInt(this.mHeight);
@@ -230,7 +230,7 @@ public final class VirtualDisplayConfig implements Parcelable {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.display.VirtualDisplayConfig$BrightnessListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VirtualDisplayConfig.BrightnessListenerDelegate.this.lambda$onBrightnessChanged$0(f);
+                    this.f$0.lambda$onBrightnessChanged$0(f);
                 }
             });
         }

@@ -120,16 +120,16 @@ public final class UriRelativeFilterGroup {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1159641169921L, this.mAction);
         Iterator<UriRelativeFilter> it = this.mUriRelativeFilters.iterator();
         while (it.hasNext()) {
             it.next().dumpDebug(protoOutputStream, 2246267895810L);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, URI_RELATIVE_FILTER_GROUP_STR);
         xmlSerializer.attribute(null, ALLOW_STR, Integer.toString(this.mAction));
         Iterator<UriRelativeFilter> it = this.mUriRelativeFilters.iterator();
@@ -194,8 +194,8 @@ public final class UriRelativeFilterGroup {
 
     UriRelativeFilterGroup(Parcel parcel) {
         this.mAction = parcel.readInt();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mUriRelativeFilters.add(new UriRelativeFilter(parcel));
         }
     }

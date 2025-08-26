@@ -86,7 +86,7 @@ public class Program extends BaseObj {
         return this.mTextureNames[i];
     }
 
-    public void bindConstants(Allocation allocation, int i) {
+    public void bindConstants(Allocation allocation, int i) throws Throwable {
         if (i < 0 || i >= this.mConstants.length) {
             throw new IllegalArgumentException("Slot ID out of range.");
         }
@@ -96,7 +96,7 @@ public class Program extends BaseObj {
         this.mRS.nProgramBindConstants(getID(this.mRS), i, allocation != null ? allocation.getID(this.mRS) : 0L);
     }
 
-    public void bindTexture(Allocation allocation, int i) throws IllegalArgumentException {
+    public void bindTexture(Allocation allocation, int i) throws Throwable {
         this.mRS.validate();
         if (i < 0 || i >= this.mTextureCount) {
             throw new IllegalArgumentException("Slot ID out of range.");
@@ -107,7 +107,7 @@ public class Program extends BaseObj {
         this.mRS.nProgramBindTexture(getID(this.mRS), i, allocation != null ? allocation.getID(this.mRS) : 0L);
     }
 
-    public void bindSampler(Sampler sampler, int i) throws IllegalArgumentException {
+    public void bindSampler(Sampler sampler, int i) throws Throwable {
         this.mRS.validate();
         if (i < 0 || i >= this.mTextureCount) {
             throw new IllegalArgumentException("Slot ID out of range.");
@@ -138,8 +138,8 @@ public class Program extends BaseObj {
             return this;
         }
 
-        public BaseProgramBuilder setShader(Resources resources, int i) {
-            InputStream openRawResource = resources.openRawResource(i);
+        public BaseProgramBuilder setShader(Resources resources, int i) throws Resources.NotFoundException, IOException {
+            InputStream inputStreamOpenRawResource = resources.openRawResource(i);
             try {
                 try {
                     byte[] bArr = new byte[1024];
@@ -153,8 +153,8 @@ public class Program extends BaseObj {
                             length = length2 - i2;
                             bArr = bArr2;
                         }
-                        int read = openRawResource.read(bArr, i2, length);
-                        if (read <= 0) {
+                        int i3 = inputStreamOpenRawResource.read(bArr, i2, length);
+                        if (i3 <= 0) {
                             try {
                                 this.mShader = new String(bArr, 0, i2, "UTF-8");
                                 return this;
@@ -163,13 +163,13 @@ public class Program extends BaseObj {
                                 return this;
                             }
                         }
-                        i2 += read;
+                        i2 += i3;
                     }
-                } catch (IOException unused2) {
-                    throw new Resources.NotFoundException();
+                } finally {
+                    inputStreamOpenRawResource.close();
                 }
-            } finally {
-                openRawResource.close();
+            } catch (IOException unused2) {
+                throw new Resources.NotFoundException();
             }
         }
 

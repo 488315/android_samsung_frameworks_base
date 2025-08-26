@@ -106,9 +106,9 @@ public interface IImsUtListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsUtListener)) {
-                return (IImsUtListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsUtListener)) {
+                return (IImsUtListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -154,58 +154,58 @@ public interface IImsUtListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IImsUt asInterface = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    IImsUt iImsUtAsInterface = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    utConfigurationUpdated(asInterface, readInt);
+                    utConfigurationUpdated(iImsUtAsInterface, i3);
                     return true;
                 case 2:
-                    IImsUt asInterface2 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt2 = parcel.readInt();
+                    IImsUt iImsUtAsInterface2 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationUpdateFailed(asInterface2, readInt2, imsReasonInfo);
+                    utConfigurationUpdateFailed(iImsUtAsInterface2, i4, imsReasonInfo);
                     return true;
                 case 3:
-                    IImsUt asInterface3 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt3 = parcel.readInt();
+                    IImsUt iImsUtAsInterface3 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationQueried(asInterface3, readInt3, bundle);
+                    utConfigurationQueried(iImsUtAsInterface3, i5, bundle);
                     return true;
                 case 4:
-                    IImsUt asInterface4 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt4 = parcel.readInt();
+                    IImsUt iImsUtAsInterface4 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo2 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationQueryFailed(asInterface4, readInt4, imsReasonInfo2);
+                    utConfigurationQueryFailed(iImsUtAsInterface4, i6, imsReasonInfo2);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     ImsSsInfo imsSsInfo = (ImsSsInfo) parcel.readTypedObject(ImsSsInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    lineIdentificationSupplementaryServiceResponse(readInt5, imsSsInfo);
+                    lineIdentificationSupplementaryServiceResponse(i7, imsSsInfo);
                     return true;
                 case 6:
-                    IImsUt asInterface5 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt6 = parcel.readInt();
+                    IImsUt iImsUtAsInterface5 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
                     ImsSsInfo[] imsSsInfoArr = (ImsSsInfo[]) parcel.createTypedArray(ImsSsInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationCallBarringQueried(asInterface5, readInt6, imsSsInfoArr);
+                    utConfigurationCallBarringQueried(iImsUtAsInterface5, i8, imsSsInfoArr);
                     return true;
                 case 7:
-                    IImsUt asInterface6 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt7 = parcel.readInt();
+                    IImsUt iImsUtAsInterface6 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
                     ImsCallForwardInfo[] imsCallForwardInfoArr = (ImsCallForwardInfo[]) parcel.createTypedArray(ImsCallForwardInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationCallForwardQueried(asInterface6, readInt7, imsCallForwardInfoArr);
+                    utConfigurationCallForwardQueried(iImsUtAsInterface6, i9, imsCallForwardInfoArr);
                     return true;
                 case 8:
-                    IImsUt asInterface7 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt8 = parcel.readInt();
+                    IImsUt iImsUtAsInterface7 = IImsUt.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
                     ImsSsInfo[] imsSsInfoArr2 = (ImsSsInfo[]) parcel.createTypedArray(ImsSsInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    utConfigurationCallWaitingQueried(asInterface7, readInt8, imsSsInfoArr2);
+                    utConfigurationCallWaitingQueried(iImsUtAsInterface7, i10, imsSsInfoArr2);
                     return true;
                 case 9:
                     ImsSsData imsSsData = (ImsSsData) parcel.readTypedObject(ImsSsData.CREATOR);
@@ -235,123 +235,123 @@ public interface IImsUtListener extends IInterface {
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationUpdated(IImsUt iImsUt, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationUpdateFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationQueried(IImsUt iImsUt, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationQueryFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void lineIdentificationSupplementaryServiceResponse(int i, ImsSsInfo imsSsInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsSsInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsSsInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationCallBarringQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(imsSsInfoArr, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(imsSsInfoArr, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationCallForwardQueried(IImsUt iImsUt, int i, ImsCallForwardInfo[] imsCallForwardInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(imsCallForwardInfoArr, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(imsCallForwardInfoArr, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void utConfigurationCallWaitingQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsUt);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(imsSsInfoArr, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsUt);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(imsSsInfoArr, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsUtListener
             public void onSupplementaryServiceIndication(ImsSsData imsSsData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(imsSsData, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsSsData, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

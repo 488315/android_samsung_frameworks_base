@@ -47,21 +47,21 @@ public class MidiEventMultiScheduler {
                 if (this.mNumClosedSchedulers >= this.mNumEventSchedulers) {
                     return false;
                 }
-                long nanoTime = System.nanoTime();
-                long j = Long.MAX_VALUE;
+                long jNanoTime = System.nanoTime();
+                long jMin = Long.MAX_VALUE;
                 for (MultiLockMidiEventScheduler multiLockMidiEventScheduler : this.mMidiEventSchedulers) {
                     if (!multiLockMidiEventScheduler.isEventBufferEmptyLocked()) {
-                        j = Math.min(j, multiLockMidiEventScheduler.getLowestTimeLocked());
+                        jMin = Math.min(jMin, multiLockMidiEventScheduler.getLowestTimeLocked());
                     }
                 }
-                if (j <= nanoTime) {
+                if (jMin <= jNanoTime) {
                     return true;
                 }
-                long j2 = ((j - nanoTime) / 1000000) + 1;
-                if (j2 > 2147483647L) {
-                    j2 = 2147483647L;
+                long j = ((jMin - jNanoTime) / 1000000) + 1;
+                if (j > 2147483647L) {
+                    j = 2147483647L;
                 }
-                this.mMultiLock.wait(j2);
+                this.mMultiLock.wait(j);
             }
         }
     }

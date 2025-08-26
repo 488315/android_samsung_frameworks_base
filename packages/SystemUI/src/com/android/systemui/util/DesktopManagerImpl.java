@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DesktopManagerImpl implements DesktopManager {
     private static final int DESKTOP_DUALVIEW = 712;
@@ -92,7 +91,7 @@ public class DesktopManagerImpl implements DesktopManager {
     };
 
     /* renamed from: -$$Nest$mgetDesktopSettingsValue, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ String m3120$$Nest$mgetDesktopSettingsValue(DesktopManagerImpl desktopManagerImpl, String str) {
+    public static /* bridge */ /* synthetic */ String m3137$$Nest$mgetDesktopSettingsValue(DesktopManagerImpl desktopManagerImpl, String str) {
         return desktopManagerImpl.getDesktopSettingsValue(str, "false");
     }
 
@@ -214,7 +213,7 @@ public class DesktopManagerImpl implements DesktopManager {
                     return;
                 }
                 DesktopManagerImpl desktopManagerImpl = DesktopManagerImpl.this;
-                desktopManagerImpl.mIsTouchpadEnabled = "true".equals(DesktopManagerImpl.m3120$$Nest$mgetDesktopSettingsValue(desktopManagerImpl, lastPathSegment));
+                desktopManagerImpl.mIsTouchpadEnabled = "true".equals(DesktopManagerImpl.m3137$$Nest$mgetDesktopSettingsValue(desktopManagerImpl, lastPathSegment));
             }
         };
         Log.i(TAG, "DesktopManagerImpl started");
@@ -247,9 +246,9 @@ public class DesktopManagerImpl implements DesktopManager {
         bundle.putString("key", str);
         bundle.putString("def", str2);
         try {
-            Bundle call = this.mContext.getContentResolver().call(DESKTOP_SETTINGS_URI, DESKTOP_SETTINGS_METHOD_GET, (String) null, bundle);
-            if (call != null) {
-                return call.getString(str);
+            Bundle bundleCall = this.mContext.getContentResolver().call(DESKTOP_SETTINGS_URI, DESKTOP_SETTINGS_METHOD_GET, (String) null, bundle);
+            if (bundleCall != null) {
+                return bundleCall.getString(str);
             }
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Failed to get settings", e);
@@ -276,9 +275,9 @@ public class DesktopManagerImpl implements DesktopManager {
         Bundle bundle = new Bundle(2);
         bundle.putString("key", ENABLE_NEW_DEX_HOME);
         bundle.putString("def", "false");
-        Bundle call = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, DESKTOP_SETTINGS_METHOD_GET, (String) null, bundle);
-        if (call != null) {
-            return Boolean.valueOf(call.getString(ENABLE_NEW_DEX_HOME)).booleanValue();
+        Bundle bundleCall = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, DESKTOP_SETTINGS_METHOD_GET, (String) null, bundle);
+        if (bundleCall != null) {
+            return Boolean.valueOf(bundleCall.getString(ENABLE_NEW_DEX_HOME)).booleanValue();
         }
         return false;
     }
@@ -405,9 +404,9 @@ public class DesktopManagerImpl implements DesktopManager {
 
     @Override // com.android.systemui.util.DesktopManager
     public void notifyPrivacyItemsChanged(boolean z) {
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("notifyPrivacyItemsChanged() visible = ", " mDesktopMode = ", z);
-        m.append(this.mDesktopMode);
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("notifyPrivacyItemsChanged() visible = ", " mDesktopMode = ", z);
+        sbM.append(this.mDesktopMode);
+        Log.i(TAG, sbM.toString());
         if (isDesktopMode()) {
             ((DesktopSystemUiBinder) this.mDesktopSystemUiBinderLazy.get()).notifyPrivacyItemsChanged(z);
         }

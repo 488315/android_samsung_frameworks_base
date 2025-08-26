@@ -19,7 +19,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class TileGridKt {
     public static final void TileGrid(ContentScope contentScope, final TileGridViewModel tileGridViewModel, final Modifier modifier, Function0 function0, Composer composer, final int i, final int i2) {
@@ -47,13 +46,13 @@ public abstract class TileGridKt {
         } else {
             if (i4 != 0) {
                 composerImpl.startReplaceGroup(-1940010048);
-                Object rememberedValue = composerImpl.rememberedValue();
+                Object objRememberedValue = composerImpl.rememberedValue();
                 Composer.Companion.getClass();
-                if (rememberedValue == Composer.Companion.Empty) {
-                    rememberedValue = new DrawInContainerNode$$ExternalSyntheticLambda1();
-                    composerImpl.updateRememberedValue(rememberedValue);
+                if (objRememberedValue == Composer.Companion.Empty) {
+                    objRememberedValue = new DrawInContainerNode$$ExternalSyntheticLambda1();
+                    composerImpl.updateRememberedValue(objRememberedValue);
                 }
-                function0 = (Function0) rememberedValue;
+                function0 = (Function0) objRememberedValue;
                 composerImpl.end(false);
             }
             Function0 function03 = function0;
@@ -73,16 +72,16 @@ public abstract class TileGridKt {
             }
             function02 = function03;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final ContentScope contentScope3 = contentScope2;
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.qs.panels.ui.compose.TileGridKt$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.qs.panels.ui.compose.TileGridKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     Function0 function04 = function02;
-                    TileGridKt.TileGrid(ContentScope.this, tileGridViewModel, modifier, function04, (Composer) obj, updateChangedFlags, i2);
+                    TileGridKt.TileGrid(contentScope3, tileGridViewModel, modifier, function04, (Composer) obj, iUpdateChangedFlags, i2);
                     return Unit.INSTANCE;
                 }
             };

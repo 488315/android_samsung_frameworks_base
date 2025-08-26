@@ -69,9 +69,9 @@ public interface IVirtualDeviceManagerNative extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceManagerNative.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDeviceManagerNative)) {
-                return (IVirtualDeviceManagerNative) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceManagerNative.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDeviceManagerNative)) {
+                return (IVirtualDeviceManagerNative) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,22 +104,22 @@ public interface IVirtualDeviceManagerNative extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int[] deviceIdsForUid = getDeviceIdsForUid(readInt);
+                int[] deviceIdsForUid = getDeviceIdsForUid(i3);
                 parcel2.writeNoException();
                 parcel2.writeIntArray(deviceIdsForUid);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int devicePolicy = getDevicePolicy(readInt2, readInt3);
+                int devicePolicy = getDevicePolicy(i4, i5);
                 parcel2.writeNoException();
                 parcel2.writeInt(devicePolicy);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int deviceIdForDisplayId = getDeviceIdForDisplayId(readInt4);
+                int deviceIdForDisplayId = getDeviceIdForDisplayId(i6);
                 parcel2.writeNoException();
                 parcel2.writeInt(deviceIdForDisplayId);
             } else {
@@ -146,50 +146,50 @@ public interface IVirtualDeviceManagerNative extends IInterface {
 
             @Override // android.companion.virtualnative.IVirtualDeviceManagerNative
             public int[] getDeviceIdsForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtualnative.IVirtualDeviceManagerNative
             public int getDevicePolicy(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtualnative.IVirtualDeviceManagerNative
             public int getDeviceIdForDisplayId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManagerNative.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

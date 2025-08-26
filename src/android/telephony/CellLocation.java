@@ -19,14 +19,14 @@ public abstract class CellLocation {
 
     @Deprecated
     public static void requestLocationUpdate() {
-        Application currentApplication = ActivityThread.currentApplication();
-        if (currentApplication == null) {
+        Application applicationCurrentApplication = ActivityThread.currentApplication();
+        if (applicationCurrentApplication == null) {
             return;
         }
         try {
-            ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
-            if (asInterface != null) {
-                asInterface.updateServiceLocationWithPackageName(currentApplication.getOpPackageName());
+            ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+            if (iTelephonyAsInterface != null) {
+                iTelephonyAsInterface.updateServiceLocationWithPackageName(applicationCurrentApplication.getOpPackageName());
             }
         } catch (RemoteException unused) {
         }

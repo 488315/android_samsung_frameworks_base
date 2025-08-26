@@ -238,9 +238,9 @@ public class XmlUtils {
         if (TextUtils.isEmpty(charSequence)) {
             return i;
         }
-        String charSequence2 = charSequence.toString();
-        int length = charSequence2.length();
-        if ('-' == charSequence2.charAt(0)) {
+        String string = charSequence.toString();
+        int length = string.length();
+        if ('-' == string.charAt(0)) {
             i3 = -1;
             i2 = 1;
         } else {
@@ -248,24 +248,24 @@ public class XmlUtils {
             i3 = 1;
         }
         int i4 = 16;
-        if ('0' == charSequence2.charAt(i2)) {
+        if ('0' == string.charAt(i2)) {
             if (i2 == length - 1) {
                 return 0;
             }
             int i5 = i2 + 1;
-            char charAt = charSequence2.charAt(i5);
-            if ('x' == charAt || 'X' == charAt) {
+            char cCharAt = string.charAt(i5);
+            if ('x' == cCharAt || 'X' == cCharAt) {
                 i2 += 2;
             } else {
                 i2 = i5;
                 i4 = 8;
             }
-        } else if ('#' == charSequence2.charAt(i2)) {
+        } else if ('#' == string.charAt(i2)) {
             i2++;
         } else {
             i4 = 10;
         }
-        return Integer.parseInt(charSequence2.substring(i2), i4) * i3;
+        return Integer.parseInt(string.substring(i2), i4) * i3;
     }
 
     public static int convertValueToUnsignedInt(String str, int i) {
@@ -273,47 +273,45 @@ public class XmlUtils {
     }
 
     public static int parseUnsignedIntAttribute(CharSequence charSequence) {
-        String charSequence2 = charSequence.toString();
-        int length = charSequence2.length();
+        String string = charSequence.toString();
+        int length = string.length();
         int i = 0;
         int i2 = 16;
-        if ('0' != charSequence2.charAt(0)) {
-            if ('#' != charSequence2.charAt(0)) {
-                i2 = 10;
-                return (int) Long.parseLong(charSequence2.substring(i), i2);
+        if ('0' == string.charAt(0)) {
+            if (length - 1 == 0) {
+                return 0;
             }
+            char cCharAt = string.charAt(1);
+            if ('x' == cCharAt || 'X' == cCharAt) {
+                i = 2;
+            } else {
+                i2 = 8;
+                i = 1;
+            }
+        } else if ('#' == string.charAt(0)) {
             i = 1;
-            return (int) Long.parseLong(charSequence2.substring(i), i2);
+        } else {
+            i2 = 10;
         }
-        if (length - 1 == 0) {
-            return 0;
-        }
-        char charAt = charSequence2.charAt(1);
-        if ('x' == charAt || 'X' == charAt) {
-            i = 2;
-            return (int) Long.parseLong(charSequence2.substring(i), i2);
-        }
-        i2 = 8;
-        i = 1;
-        return (int) Long.parseLong(charSequence2.substring(i), i2);
+        return (int) Long.parseLong(string.substring(i), i2);
     }
 
     public static final void writeMapXml(Map map, OutputStream outputStream) throws XmlPullParserException, IOException {
-        TypedXmlSerializer newFastSerializer = Xml.newFastSerializer();
-        newFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
-        newFastSerializer.startDocument(null, true);
-        newFastSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        writeMapXml(map, (String) null, newFastSerializer);
-        newFastSerializer.endDocument();
+        TypedXmlSerializer typedXmlSerializerNewFastSerializer = Xml.newFastSerializer();
+        typedXmlSerializerNewFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
+        typedXmlSerializerNewFastSerializer.startDocument(null, true);
+        typedXmlSerializerNewFastSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        writeMapXml(map, (String) null, typedXmlSerializerNewFastSerializer);
+        typedXmlSerializerNewFastSerializer.endDocument();
     }
 
     public static final void writeListXml(List list, OutputStream outputStream) throws XmlPullParserException, IOException {
-        TypedXmlSerializer newFastSerializer = Xml.newFastSerializer();
-        newFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
-        newFastSerializer.startDocument(null, true);
-        newFastSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        writeListXml(list, null, newFastSerializer);
-        newFastSerializer.endDocument();
+        TypedXmlSerializer typedXmlSerializerNewFastSerializer = Xml.newFastSerializer();
+        typedXmlSerializerNewFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
+        typedXmlSerializerNewFastSerializer.startDocument(null, true);
+        typedXmlSerializerNewFastSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        writeListXml(list, null, typedXmlSerializerNewFastSerializer);
+        typedXmlSerializerNewFastSerializer.endDocument();
     }
 
     public static final void writeMapXml(Map map, String str, TypedXmlSerializer typedXmlSerializer) throws XmlPullParserException, IOException {
@@ -612,21 +610,21 @@ public class XmlUtils {
     }
 
     public static final HashMap<String, ?> readMapXml(InputStream inputStream) throws XmlPullParserException, IOException {
-        TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-        newFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-        return (HashMap) readValueXml(newFastPullParser, new String[1]);
+        TypedXmlPullParser typedXmlPullParserNewFastPullParser = Xml.newFastPullParser();
+        typedXmlPullParserNewFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+        return (HashMap) readValueXml(typedXmlPullParserNewFastPullParser, new String[1]);
     }
 
     public static final ArrayList readListXml(InputStream inputStream) throws XmlPullParserException, IOException {
-        TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-        newFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-        return (ArrayList) readValueXml(newFastPullParser, new String[1]);
+        TypedXmlPullParser typedXmlPullParserNewFastPullParser = Xml.newFastPullParser();
+        typedXmlPullParserNewFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+        return (ArrayList) readValueXml(typedXmlPullParserNewFastPullParser, new String[1]);
     }
 
     public static final HashSet readSetXml(InputStream inputStream) throws XmlPullParserException, IOException {
-        TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-        newFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-        return (HashSet) readValueXml(newFastPullParser, new String[1]);
+        TypedXmlPullParser typedXmlPullParserNewFastPullParser = Xml.newFastPullParser();
+        typedXmlPullParserNewFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+        return (HashSet) readValueXml(typedXmlPullParserNewFastPullParser, new String[1]);
     }
 
     public static final HashMap<String, ?> readThisMapXml(TypedXmlPullParser typedXmlPullParser, String str, String[] strArr) throws XmlPullParserException, IOException {
@@ -634,14 +632,14 @@ public class XmlUtils {
     }
 
     public static final HashMap<String, ?> readThisMapXml(TypedXmlPullParser typedXmlPullParser, String str, String[] strArr, ReadMapCallback readMapCallback) throws XmlPullParserException, IOException {
-        HashMap<String, ?> hashMap = new HashMap<>();
+        HashMap<String, ?> map = new HashMap<>();
         int eventType = typedXmlPullParser.getEventType();
         do {
             if (eventType == 2) {
-                hashMap.put(strArr[0], readThisValueXml(typedXmlPullParser, strArr, readMapCallback, false));
+                map.put(strArr[0], readThisValueXml(typedXmlPullParser, strArr, readMapCallback, false));
             } else if (eventType == 3) {
                 if (typedXmlPullParser.getName().equals(str)) {
-                    return hashMap;
+                    return map;
                 }
                 throw new XmlPullParserException("Expected " + str + " end tag at: " + typedXmlPullParser.getName());
             }
@@ -711,7 +709,7 @@ public class XmlUtils {
 
     public static final byte[] readThisByteArrayXml(TypedXmlPullParser typedXmlPullParser, String str, String[] strArr) throws XmlPullParserException, IOException {
         int attributeInt = typedXmlPullParser.getAttributeInt(null, "num");
-        byte[] bArr = new byte[0];
+        byte[] bArrDecode = new byte[0];
         int eventType = typedXmlPullParser.getEventType();
         do {
             if (eventType == 4) {
@@ -720,11 +718,11 @@ public class XmlUtils {
                     if (text == null || text.length() != attributeInt * 2) {
                         throw new XmlPullParserException("Invalid value found in byte-array: " + text);
                     }
-                    bArr = HexEncoding.decode(text);
+                    bArrDecode = HexEncoding.decode(text);
                 }
             } else if (eventType == 3) {
                 if (typedXmlPullParser.getName().equals(str)) {
-                    return bArr;
+                    return bArrDecode;
                 }
                 throw new XmlPullParserException("Expected " + str + " end tag at: " + typedXmlPullParser.getName());
             }
@@ -887,8 +885,8 @@ public class XmlUtils {
 
     private static final Object readThisValueXml(TypedXmlPullParser typedXmlPullParser, String[] strArr, ReadMapCallback readMapCallback, boolean z) throws XmlPullParserException, IOException {
         int next;
-        Object readThisMapXml;
-        Object obj = null;
+        Object thisMapXml;
+        Object thisPrimitiveValueXml = null;
         String attributeValue = typedXmlPullParser.getAttributeValue(null, "name");
         String name = typedXmlPullParser.getName();
         if (!name.equals(PerfettoProtoLogImpl.NULL_STRING)) {
@@ -913,64 +911,64 @@ public class XmlUtils {
                     }
                 }
             } else {
-                obj = readThisPrimitiveValueXml(typedXmlPullParser, name);
-                if (obj == null) {
+                thisPrimitiveValueXml = readThisPrimitiveValueXml(typedXmlPullParser, name);
+                if (thisPrimitiveValueXml == null) {
                     if (name.equals("byte-array")) {
-                        byte[] readThisByteArrayXml = readThisByteArrayXml(typedXmlPullParser, "byte-array", strArr);
+                        byte[] thisByteArrayXml = readThisByteArrayXml(typedXmlPullParser, "byte-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisByteArrayXml;
+                        return thisByteArrayXml;
                     }
                     if (name.equals("int-array")) {
-                        int[] readThisIntArrayXml = readThisIntArrayXml(typedXmlPullParser, "int-array", strArr);
+                        int[] thisIntArrayXml = readThisIntArrayXml(typedXmlPullParser, "int-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisIntArrayXml;
+                        return thisIntArrayXml;
                     }
                     if (name.equals("long-array")) {
-                        long[] readThisLongArrayXml = readThisLongArrayXml(typedXmlPullParser, "long-array", strArr);
+                        long[] thisLongArrayXml = readThisLongArrayXml(typedXmlPullParser, "long-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisLongArrayXml;
+                        return thisLongArrayXml;
                     }
                     if (name.equals("double-array")) {
-                        double[] readThisDoubleArrayXml = readThisDoubleArrayXml(typedXmlPullParser, "double-array", strArr);
+                        double[] thisDoubleArrayXml = readThisDoubleArrayXml(typedXmlPullParser, "double-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisDoubleArrayXml;
+                        return thisDoubleArrayXml;
                     }
                     if (name.equals("string-array")) {
-                        String[] readThisStringArrayXml = readThisStringArrayXml(typedXmlPullParser, "string-array", strArr);
+                        String[] thisStringArrayXml = readThisStringArrayXml(typedXmlPullParser, "string-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisStringArrayXml;
+                        return thisStringArrayXml;
                     }
                     if (name.equals("boolean-array")) {
-                        boolean[] readThisBooleanArrayXml = readThisBooleanArrayXml(typedXmlPullParser, "boolean-array", strArr);
+                        boolean[] thisBooleanArrayXml = readThisBooleanArrayXml(typedXmlPullParser, "boolean-array", strArr);
                         strArr[0] = attributeValue;
-                        return readThisBooleanArrayXml;
+                        return thisBooleanArrayXml;
                     }
                     if (name.equals("map")) {
                         typedXmlPullParser.next();
                         if (z) {
-                            readThisMapXml = readThisArrayMapXml(typedXmlPullParser, "map", strArr, readMapCallback);
+                            thisMapXml = readThisArrayMapXml(typedXmlPullParser, "map", strArr, readMapCallback);
                         } else {
-                            readThisMapXml = readThisMapXml(typedXmlPullParser, "map", strArr, readMapCallback);
+                            thisMapXml = readThisMapXml(typedXmlPullParser, "map", strArr, readMapCallback);
                         }
                         strArr[0] = attributeValue;
-                        return readThisMapXml;
+                        return thisMapXml;
                     }
                     if (name.equals(Slice.HINT_LIST)) {
                         typedXmlPullParser.next();
-                        ArrayList readThisListXml = readThisListXml(typedXmlPullParser, Slice.HINT_LIST, strArr, readMapCallback, z);
+                        ArrayList thisListXml = readThisListXml(typedXmlPullParser, Slice.HINT_LIST, strArr, readMapCallback, z);
                         strArr[0] = attributeValue;
-                        return readThisListXml;
+                        return thisListXml;
                     }
                     if (name.equals("set")) {
                         typedXmlPullParser.next();
-                        HashSet readThisSetXml = readThisSetXml(typedXmlPullParser, "set", strArr, readMapCallback, z);
+                        HashSet thisSetXml = readThisSetXml(typedXmlPullParser, "set", strArr, readMapCallback, z);
                         strArr[0] = attributeValue;
-                        return readThisSetXml;
+                        return thisSetXml;
                     }
                     if (readMapCallback != null) {
-                        Object readThisUnknownObjectXml = readMapCallback.readThisUnknownObjectXml(typedXmlPullParser, name);
+                        Object thisUnknownObjectXml = readMapCallback.readThisUnknownObjectXml(typedXmlPullParser, name);
                         strArr[0] = attributeValue;
-                        return readThisUnknownObjectXml;
+                        return thisUnknownObjectXml;
                     }
                     throw new XmlPullParserException("Unknown tag: " + name);
                 }
@@ -986,7 +984,7 @@ public class XmlUtils {
                     throw new XmlPullParserException("Unexpected end tag in <" + name + ">: " + typedXmlPullParser.getName());
                 }
                 strArr[0] = attributeValue;
-                return obj;
+                return thisPrimitiveValueXml;
             }
             if (next == 4) {
                 throw new XmlPullParserException("Unexpected text in <" + name + ">: " + typedXmlPullParser.getName());
@@ -1041,7 +1039,7 @@ public class XmlUtils {
         } while (next != 1);
     }
 
-    public static boolean nextElementWithin(XmlPullParser xmlPullParser, int i) throws IOException, XmlPullParserException {
+    public static boolean nextElementWithin(XmlPullParser xmlPullParser, int i) throws XmlPullParserException, IOException {
         while (true) {
             int next = xmlPullParser.next();
             if (next == 1) {
@@ -1086,7 +1084,7 @@ public class XmlUtils {
         }
     }
 
-    public static void writeIntAttribute(XmlSerializer xmlSerializer, String str, int i) throws IOException {
+    public static void writeIntAttribute(XmlSerializer xmlSerializer, String str, int i) throws IllegalStateException, IOException, IllegalArgumentException {
         if (xmlSerializer instanceof TypedXmlSerializer) {
             ((TypedXmlSerializer) xmlSerializer).attributeInt(null, str, i);
         } else {
@@ -1124,7 +1122,7 @@ public class XmlUtils {
         }
     }
 
-    public static void writeLongAttribute(XmlSerializer xmlSerializer, String str, long j) throws IOException {
+    public static void writeLongAttribute(XmlSerializer xmlSerializer, String str, long j) throws IllegalStateException, IOException, IllegalArgumentException {
         if (xmlSerializer instanceof TypedXmlSerializer) {
             ((TypedXmlSerializer) xmlSerializer).attributeLong(null, str, j);
         } else {
@@ -1148,7 +1146,7 @@ public class XmlUtils {
         }
     }
 
-    public static void writeFloatAttribute(XmlSerializer xmlSerializer, String str, float f) throws IOException {
+    public static void writeFloatAttribute(XmlSerializer xmlSerializer, String str, float f) throws IllegalStateException, IOException, IllegalArgumentException {
         if (xmlSerializer instanceof TypedXmlSerializer) {
             ((TypedXmlSerializer) xmlSerializer).attributeFloat(null, str, f);
         } else {
@@ -1168,7 +1166,7 @@ public class XmlUtils {
         return TextUtils.isEmpty(attributeValue) ? z : Boolean.parseBoolean(attributeValue);
     }
 
-    public static void writeBooleanAttribute(XmlSerializer xmlSerializer, String str, boolean z) throws IOException {
+    public static void writeBooleanAttribute(XmlSerializer xmlSerializer, String str, boolean z) throws IllegalStateException, IOException, IllegalArgumentException {
         if (xmlSerializer instanceof TypedXmlSerializer) {
             ((TypedXmlSerializer) xmlSerializer).attributeBoolean(null, str, z);
         } else {
@@ -1184,7 +1182,7 @@ public class XmlUtils {
         return null;
     }
 
-    public static void writeUriAttribute(XmlSerializer xmlSerializer, String str, Uri uri) throws IOException {
+    public static void writeUriAttribute(XmlSerializer xmlSerializer, String str, Uri uri) throws IllegalStateException, IOException, IllegalArgumentException {
         if (uri != null) {
             xmlSerializer.attribute(null, str, uri.toString());
         }
@@ -1194,7 +1192,7 @@ public class XmlUtils {
         return xmlPullParser.getAttributeValue(null, str);
     }
 
-    public static void writeStringAttribute(XmlSerializer xmlSerializer, String str, CharSequence charSequence) throws IOException {
+    public static void writeStringAttribute(XmlSerializer xmlSerializer, String str, CharSequence charSequence) throws IllegalStateException, IOException, IllegalArgumentException {
         if (charSequence != null) {
             xmlSerializer.attribute(null, str, charSequence.toString());
         }
@@ -1215,7 +1213,7 @@ public class XmlUtils {
         return Base64.decode(attributeValue, 0);
     }
 
-    public static void writeByteArrayAttribute(XmlSerializer xmlSerializer, String str, byte[] bArr) throws IOException {
+    public static void writeByteArrayAttribute(XmlSerializer xmlSerializer, String str, byte[] bArr) throws IllegalStateException, IOException, IllegalArgumentException {
         if (bArr != null) {
             if (xmlSerializer instanceof TypedXmlSerializer) {
                 ((TypedXmlSerializer) xmlSerializer).attributeBytesBase64(null, str, bArr);
@@ -1226,15 +1224,15 @@ public class XmlUtils {
     }
 
     public static Bitmap readBitmapAttribute(XmlPullParser xmlPullParser, String str) {
-        byte[] readByteArrayAttribute = readByteArrayAttribute(xmlPullParser, str);
-        if (readByteArrayAttribute != null) {
-            return BitmapFactory.decodeByteArray(readByteArrayAttribute, 0, readByteArrayAttribute.length);
+        byte[] byteArrayAttribute = readByteArrayAttribute(xmlPullParser, str);
+        if (byteArrayAttribute != null) {
+            return BitmapFactory.decodeByteArray(byteArrayAttribute, 0, byteArrayAttribute.length);
         }
         return null;
     }
 
     @Deprecated
-    public static void writeBitmapAttribute(XmlSerializer xmlSerializer, String str, Bitmap bitmap) throws IOException {
+    public static void writeBitmapAttribute(XmlSerializer xmlSerializer, String str, Bitmap bitmap) throws IllegalStateException, IOException, IllegalArgumentException {
         if (bitmap != null) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);

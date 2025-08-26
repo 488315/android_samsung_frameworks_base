@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer;
 import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.volume.VolumeDialogControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class VolumeDialogControllerImpl$RingerModeObservers$1$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -25,24 +24,24 @@ public final /* synthetic */ class VolumeDialogControllerImpl$RingerModeObserver
                 VolumeDialogControllerImpl.RingerModeObservers.AnonymousClass1 anonymousClass1 = (VolumeDialogControllerImpl.RingerModeObservers.AnonymousClass1) this.f$0;
                 Integer num = this.f$1;
                 anonymousClass1.getClass();
-                int intValue = num.intValue();
+                int iIntValue = num.intValue();
                 VolumeDialogControllerImpl.RingerModeObservers ringerModeObservers = VolumeDialogControllerImpl.RingerModeObservers.this;
                 boolean initialSticky = ringerModeObservers.mRingerMode.getInitialSticky();
                 VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
                 if (initialSticky) {
-                    volumeDialogControllerImpl.mState.ringerModeExternal = intValue;
+                    volumeDialogControllerImpl.mState.ringerModeExternal = iIntValue;
                 }
                 if (D.BUG) {
-                    Log.d(VolumeDialogControllerImpl.TAG, "onChange ringer_mode rm=" + Util.ringerModeToString(intValue));
+                    Log.d(VolumeDialogControllerImpl.TAG, "onChange ringer_mode rm=" + Util.ringerModeToString(iIntValue));
                 }
                 String str = VolumeDialogControllerImpl.TAG;
                 VolumeDialogController.State state = volumeDialogControllerImpl.mState;
-                if (intValue != state.ringerModeExternal) {
-                    if (intValue == 1 && !volumeDialogControllerImpl.mIsVibrating) {
+                if (iIntValue != state.ringerModeExternal) {
+                    if (iIntValue == 1 && !volumeDialogControllerImpl.mIsVibrating) {
                         volumeDialogControllerImpl.mIsVibrating = true;
                         volumeDialogControllerImpl.mWorker.postDelayed(new VolumeDialogControllerImpl$$ExternalSyntheticLambda6(volumeDialogControllerImpl, 0), 800L);
                     }
-                    state.ringerModeExternal = intValue;
+                    state.ringerModeExternal = iIntValue;
                     Events.writeEvent(12, num);
                     volumeDialogControllerImpl.updateStreamLevelW(2, volumeDialogControllerImpl.getLastAudibleStreamVolume(2));
                     volumeDialogControllerImpl.updateStreamLevelW(5, volumeDialogControllerImpl.getLastAudibleStreamVolume(5));
@@ -55,21 +54,21 @@ public final /* synthetic */ class VolumeDialogControllerImpl$RingerModeObserver
                 VolumeDialogControllerImpl.RingerModeObservers.AnonymousClass2 anonymousClass2 = (VolumeDialogControllerImpl.RingerModeObservers.AnonymousClass2) this.f$0;
                 Integer num2 = this.f$1;
                 anonymousClass2.getClass();
-                int intValue2 = num2.intValue();
+                int iIntValue2 = num2.intValue();
                 VolumeDialogControllerImpl.RingerModeObservers ringerModeObservers2 = VolumeDialogControllerImpl.RingerModeObservers.this;
                 boolean initialSticky2 = ringerModeObservers2.mRingerModeInternal.getInitialSticky();
                 VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
                 if (initialSticky2) {
-                    volumeDialogControllerImpl2.mState.ringerModeInternal = intValue2;
+                    volumeDialogControllerImpl2.mState.ringerModeInternal = iIntValue2;
                 }
                 if (D.BUG) {
-                    Log.d(VolumeDialogControllerImpl.TAG, "onChange internal_ringer_mode rm=" + Util.ringerModeToString(intValue2));
+                    Log.d(VolumeDialogControllerImpl.TAG, "onChange internal_ringer_mode rm=" + Util.ringerModeToString(iIntValue2));
                 }
                 String str2 = VolumeDialogControllerImpl.TAG;
-                if (volumeDialogControllerImpl2.updateRingerModeInternalW(intValue2)) {
-                    VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 2);
-                    VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 5);
-                    VolumeDialogControllerImpl.m3197$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 1);
+                if (volumeDialogControllerImpl2.updateRingerModeInternalW(iIntValue2)) {
+                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 2);
+                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 5);
+                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 1);
                     volumeDialogControllerImpl2.mCallbacks.onStateChanged(volumeDialogControllerImpl2.mState);
                     break;
                 }

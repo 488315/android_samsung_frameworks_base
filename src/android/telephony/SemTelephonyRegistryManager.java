@@ -60,36 +60,36 @@ public class SemTelephonyRegistryManager {
         @Override // com.android.internal.telephony.ITiantongSatelliteChangeListener
         public void onSemSatelliteServiceStateChanged(final int i, final int i2, final SemSatelliteServiceState semSatelliteServiceState) {
             Log.d(SemTelephonyRegistryManager.TAG, "onSemSatelliteServiceStateChanged call in ITiantongSatelliteChangeListener callback");
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final SemTelephonyManager.SemSatelliteStateListener semSatelliteStateListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.telephony.SemTelephonyRegistryManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemTelephonyManager.SemSatelliteStateListener.this.onSemSatelliteServiceStateChanged(i, i2, semSatelliteServiceState);
+                        semSatelliteStateListener.onSemSatelliteServiceStateChanged(i, i2, semSatelliteServiceState);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.internal.telephony.ITiantongSatelliteChangeListener
         public void onSemSatelliteSignalStrengthChanged(final int i, final int i2, final SemSatelliteSignalStrength semSatelliteSignalStrength) {
             Log.d(SemTelephonyRegistryManager.TAG, "onSemSatelliteSignalStrengthChanged call in ITiantongSatelliteChangeListener callback");
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final SemTelephonyManager.SemSatelliteStateListener semSatelliteStateListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.telephony.SemTelephonyRegistryManager$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemTelephonyManager.SemSatelliteStateListener.this.onSemSatelliteSignalStrengthChanged(i, i2, semSatelliteSignalStrength);
+                        semSatelliteStateListener.onSemSatelliteSignalStrengthChanged(i, i2, semSatelliteSignalStrength);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

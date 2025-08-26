@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Brush;
 import androidx.compose.ui.graphics.Shape;
 import androidx.compose.ui.graphics.SolidColor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BorderKt {
     /* renamed from: border-xT4_qwU, reason: not valid java name */
@@ -21,10 +20,10 @@ public abstract class BorderKt {
 
     /* renamed from: shrink-Kibmq7A, reason: not valid java name */
     public static final long m30shrinkKibmq7A(float f, long j) {
-        float max = Math.max(0.0f, Float.intBitsToFloat((int) (j >> 32)) - f);
-        float max2 = Math.max(0.0f, Float.intBitsToFloat((int) (j & 4294967295L)) - f);
-        long floatToRawIntBits = (Float.floatToRawIntBits(max) << 32) | (Float.floatToRawIntBits(max2) & 4294967295L);
+        float fMax = Math.max(0.0f, Float.intBitsToFloat((int) (j >> 32)) - f);
+        float fMax2 = Math.max(0.0f, Float.intBitsToFloat((int) (j & 4294967295L)) - f);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fMax) << 32) | (Float.floatToRawIntBits(fMax2) & 4294967295L);
         CornerRadius.Companion companion = CornerRadius.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 }

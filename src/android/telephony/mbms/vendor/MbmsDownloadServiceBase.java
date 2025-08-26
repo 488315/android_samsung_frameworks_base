@@ -132,7 +132,7 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
             throw new NullPointerException("Callback must not be null");
         }
         final int callingUid = Binder.getCallingUid();
-        int initialize = initialize(i, new MbmsDownloadSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsDownloadServiceBase.1
+        int iInitialize = initialize(i, new MbmsDownloadSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsDownloadServiceBase.1
             @Override // android.telephony.mbms.MbmsDownloadSessionCallback
             public void onError(int i2, String str) {
                 try {
@@ -163,7 +163,7 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
                 }
             }
         });
-        if (initialize == 0) {
+        if (iInitialize == 0) {
             iMbmsDownloadSessionCallback.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsDownloadServiceBase.2
                 @Override // android.os.IBinder.DeathRecipient
                 public void binderDied() {
@@ -171,7 +171,7 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
                 }
             }, 0);
         }
-        return initialize;
+        return iInitialize;
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsDownloadService
@@ -194,8 +194,8 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
                 MbmsDownloadServiceBase.this.onAppCallbackDied(callingUid, downloadRequest.getSubscriptionId());
             }
         };
-        int addStatusListener = addStatusListener(downloadRequest, vendorDownloadStatusListener);
-        if (addStatusListener == 0) {
+        int iAddStatusListener = addStatusListener(downloadRequest, vendorDownloadStatusListener);
+        if (iAddStatusListener == 0) {
             IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsDownloadServiceBase.4
                 @Override // android.os.IBinder.DeathRecipient
                 public void binderDied() {
@@ -208,7 +208,7 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
             iDownloadStatusListener.asBinder().linkToDeath(deathRecipient, 0);
             this.mDownloadStatusListenerBinderMap.put(iDownloadStatusListener.asBinder(), vendorDownloadStatusListener);
         }
-        return addStatusListener;
+        return iAddStatusListener;
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsDownloadService
@@ -219,16 +219,16 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
         if (iDownloadStatusListener == null) {
             throw new NullPointerException("Callback must not be null");
         }
-        IBinder.DeathRecipient remove = this.mDownloadCallbackDeathRecipients.remove(iDownloadStatusListener.asBinder());
-        if (remove == null) {
+        IBinder.DeathRecipient deathRecipientRemove = this.mDownloadCallbackDeathRecipients.remove(iDownloadStatusListener.asBinder());
+        if (deathRecipientRemove == null) {
             throw new IllegalArgumentException("Unknown listener");
         }
-        iDownloadStatusListener.asBinder().unlinkToDeath(remove, 0);
-        DownloadStatusListener remove2 = this.mDownloadStatusListenerBinderMap.remove(iDownloadStatusListener.asBinder());
-        if (remove2 == null) {
+        iDownloadStatusListener.asBinder().unlinkToDeath(deathRecipientRemove, 0);
+        DownloadStatusListener downloadStatusListenerRemove = this.mDownloadStatusListenerBinderMap.remove(iDownloadStatusListener.asBinder());
+        if (downloadStatusListenerRemove == null) {
             throw new IllegalArgumentException("Unknown listener");
         }
-        return removeStatusListener(downloadRequest, remove2);
+        return removeStatusListener(downloadRequest, downloadStatusListenerRemove);
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsDownloadService
@@ -246,8 +246,8 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
                 MbmsDownloadServiceBase.this.onAppCallbackDied(callingUid, downloadRequest.getSubscriptionId());
             }
         };
-        int addProgressListener = addProgressListener(downloadRequest, vendorDownloadProgressListener);
-        if (addProgressListener == 0) {
+        int iAddProgressListener = addProgressListener(downloadRequest, vendorDownloadProgressListener);
+        if (iAddProgressListener == 0) {
             IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsDownloadServiceBase.6
                 @Override // android.os.IBinder.DeathRecipient
                 public void binderDied() {
@@ -260,7 +260,7 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
             iDownloadProgressListener.asBinder().linkToDeath(deathRecipient, 0);
             this.mDownloadProgressListenerBinderMap.put(iDownloadProgressListener.asBinder(), vendorDownloadProgressListener);
         }
-        return addProgressListener;
+        return iAddProgressListener;
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsDownloadService
@@ -271,16 +271,16 @@ public class MbmsDownloadServiceBase extends IMbmsDownloadService.Stub {
         if (iDownloadProgressListener == null) {
             throw new NullPointerException("Callback must not be null");
         }
-        IBinder.DeathRecipient remove = this.mDownloadCallbackDeathRecipients.remove(iDownloadProgressListener.asBinder());
-        if (remove == null) {
+        IBinder.DeathRecipient deathRecipientRemove = this.mDownloadCallbackDeathRecipients.remove(iDownloadProgressListener.asBinder());
+        if (deathRecipientRemove == null) {
             throw new IllegalArgumentException("Unknown listener");
         }
-        iDownloadProgressListener.asBinder().unlinkToDeath(remove, 0);
-        DownloadProgressListener remove2 = this.mDownloadProgressListenerBinderMap.remove(iDownloadProgressListener.asBinder());
-        if (remove2 == null) {
+        iDownloadProgressListener.asBinder().unlinkToDeath(deathRecipientRemove, 0);
+        DownloadProgressListener downloadProgressListenerRemove = this.mDownloadProgressListenerBinderMap.remove(iDownloadProgressListener.asBinder());
+        if (downloadProgressListenerRemove == null) {
             throw new IllegalArgumentException("Unknown listener");
         }
-        return removeProgressListener(downloadRequest, remove2);
+        return removeProgressListener(downloadRequest, downloadProgressListenerRemove);
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsDownloadService.Stub, android.os.IInterface

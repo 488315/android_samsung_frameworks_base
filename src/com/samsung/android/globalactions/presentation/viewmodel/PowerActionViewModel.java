@@ -66,7 +66,7 @@ public class PowerActionViewModel implements ActionViewModel {
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onPress() {
-        boolean isNeedSecureConfirm;
+        boolean zIsNeedSecureConfirm;
         Iterator<ActionInteractionStrategy> it = this.mFeatureFactory.createActionInteractionStrategies(this.mInfo.getName()).iterator();
         while (it.hasNext()) {
             if (it.next().onPressPowerAction()) {
@@ -80,7 +80,7 @@ public class PowerActionViewModel implements ActionViewModel {
             this.mGlobalActions.confirmAction(this);
             return;
         }
-        boolean z = true;
+        boolean zDoActionBeforeSecureConfirm = true;
         if (this.mConditionChecker.isEnabled(SystemConditions.IS_FMM_LOCKED)) {
             this.mToastController.showToast(this.mResourcesWrapper.getString(this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE) ? R.string.globalactions_unable_power_off_msg_fmm_tablet : R.string.globalactions_unable_power_off_msg_fmm), 1);
             return;
@@ -89,27 +89,27 @@ public class PowerActionViewModel implements ActionViewModel {
             this.mToastController.showToast(this.mResourcesWrapper.getString(this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE) ? R.string.globalactions_unable_power_off_msg_sim_card_locked_tablet : R.string.globalactions_unable_power_off_msg_sim_card_locked), 1);
             return;
         }
-        List<SecureConfirmStrategy> createSecureConfirmStrategy = this.mFeatureFactory.createSecureConfirmStrategy(this.mGlobalActions, this.mInfo.getName());
-        Iterator<SecureConfirmStrategy> it2 = createSecureConfirmStrategy.iterator();
-        boolean z2 = false;
+        List<SecureConfirmStrategy> listCreateSecureConfirmStrategy = this.mFeatureFactory.createSecureConfirmStrategy(this.mGlobalActions, this.mInfo.getName());
+        Iterator<SecureConfirmStrategy> it2 = listCreateSecureConfirmStrategy.iterator();
+        boolean zHasSecureConfirmCondition = false;
         while (it2.hasNext()) {
-            z2 |= it2.next().hasSecureConfirmCondition();
+            zHasSecureConfirmCondition |= it2.next().hasSecureConfirmCondition();
         }
-        if (z2) {
-            Iterator<SecureConfirmStrategy> it3 = createSecureConfirmStrategy.iterator();
-            isNeedSecureConfirm = true;
+        if (zHasSecureConfirmCondition) {
+            Iterator<SecureConfirmStrategy> it3 = listCreateSecureConfirmStrategy.iterator();
+            zIsNeedSecureConfirm = true;
             while (it3.hasNext()) {
-                isNeedSecureConfirm &= it3.next().isNeedSecureConfirm();
+                zIsNeedSecureConfirm &= it3.next().isNeedSecureConfirm();
             }
         } else {
-            isNeedSecureConfirm = isNeedSecureConfirm();
+            zIsNeedSecureConfirm = isNeedSecureConfirm();
         }
-        if (isNeedSecureConfirm) {
-            Iterator<SecureConfirmStrategy> it4 = createSecureConfirmStrategy.iterator();
+        if (zIsNeedSecureConfirm) {
+            Iterator<SecureConfirmStrategy> it4 = listCreateSecureConfirmStrategy.iterator();
             while (it4.hasNext()) {
-                z &= it4.next().doActionBeforeSecureConfirm(this, this.mGlobalActions);
+                zDoActionBeforeSecureConfirm &= it4.next().doActionBeforeSecureConfirm(this, this.mGlobalActions);
             }
-            if (z) {
+            if (zDoActionBeforeSecureConfirm) {
                 this.mGlobalActions.registerSecureConfirmAction(this);
                 this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(UsbManager.USB_FUNCTION_SHUTDOWN);
                 this.mGlobalActions.hideDialogOnSecureConfirm();
@@ -176,8 +176,8 @@ public class PowerActionViewModel implements ActionViewModel {
         this.mIsKnoxKeyGuardLocked = this.mConditionChecker.isEnabled(SystemConditions.IS_KNOXGUARD_LOCKED);
         this.mIsSIMLocked = this.mConditionChecker.isEnabled(SystemConditions.IS_SIM_LOCK);
         this.mIsSecureKeyguard = this.mConditionChecker.isEnabled(SystemConditions.IS_SECURE_KEYGUARD);
-        boolean isEnabled = this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY);
-        this.mIsLockNetworkAndSecurity = isEnabled;
-        return !this.mIsKnoxKeyGuardLocked && !this.mIsSIMLocked && this.mIsSecureKeyguard && isEnabled;
+        boolean zIsEnabled = this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY);
+        this.mIsLockNetworkAndSecurity = zIsEnabled;
+        return !this.mIsKnoxKeyGuardLocked && !this.mIsSIMLocked && this.mIsSecureKeyguard && zIsEnabled;
     }
 }

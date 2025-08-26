@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Trace;
 import android.util.AttributeSet;
@@ -32,7 +33,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarViewControl {
     public final CommandQueue mCommandQueue;
@@ -73,7 +73,7 @@ public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarView
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         getResources().getDimensionPixelSize(R.dimen.display_cutout_margin_consumption);
         if (updateDisplayParameters()) {
@@ -89,7 +89,7 @@ public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarView
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mCutoutSpace = findViewById(R.id.cutout_space_view);
         findViewById(R.id.battery).setTag("PhoneStatusBarView");
@@ -118,10 +118,10 @@ public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarView
         if (!super.onRequestSendAccessibilityEventInternal(view, accessibilityEvent)) {
             return false;
         }
-        AccessibilityEvent obtain = AccessibilityEvent.obtain();
-        onInitializeAccessibilityEvent(obtain);
-        dispatchPopulateAccessibilityEvent(obtain);
-        accessibilityEvent.appendRecord(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+        onInitializeAccessibilityEvent(accessibilityEventObtain);
+        dispatchPopulateAccessibilityEvent(accessibilityEventObtain);
+        accessibilityEvent.appendRecord(accessibilityEventObtain);
         return true;
     }
 

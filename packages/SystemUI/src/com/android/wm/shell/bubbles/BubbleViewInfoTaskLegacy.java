@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -32,7 +33,6 @@ import com.android.wm.shell.shared.handles.RegionSamplingHelper;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleViewInfoTaskLegacy extends AsyncTask {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +49,6 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
     public final WeakReference mStackView;
     public final WeakReference mTaskViewFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BubbleViewInfo {
         public String appName;
         public Bitmap badgeBitmap;
@@ -66,16 +65,16 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
         public static BubbleViewInfo populate(Context context, BubbleExpandedViewManager bubbleExpandedViewManager, BubbleTaskViewFactory bubbleTaskViewFactory, BubblePositioner bubblePositioner, BubbleStackView bubbleStackView, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory, Bubble bubble, boolean z) {
             BubbleViewInfo bubbleViewInfo = new BubbleViewInfo();
             if (!z && !bubble.isInflated()) {
-                LayoutInflater from = LayoutInflater.from(context);
-                BadgedImageView badgedImageView = (BadgedImageView) from.inflate(R.layout.bubble_view, (ViewGroup) bubbleStackView, false);
+                LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+                BadgedImageView badgedImageView = (BadgedImageView) layoutInflaterFrom.inflate(R.layout.bubble_view, (ViewGroup) bubbleStackView, false);
                 bubbleViewInfo.imageView = badgedImageView;
                 badgedImageView.initialize(bubblePositioner);
                 BubbleTaskView orCreateBubbleTaskView = bubble.getOrCreateBubbleTaskView(bubbleTaskViewFactory);
-                BubbleExpandedView bubbleExpandedView = (BubbleExpandedView) from.inflate(R.layout.bubble_expanded_view, (ViewGroup) bubbleStackView, false);
+                BubbleExpandedView bubbleExpandedView = (BubbleExpandedView) layoutInflaterFrom.inflate(R.layout.bubble_expanded_view, (ViewGroup) bubbleStackView, false);
                 bubbleViewInfo.expandedView = bubbleExpandedView;
                 bubbleExpandedView.initialize(bubbleExpandedViewManager, bubbleStackView, bubblePositioner, false, orCreateBubbleTaskView);
             }
-            if (!BubbleViewInfoTaskLegacy.m3218$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+            if (!BubbleViewInfoTaskLegacy.m3235$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
                 return null;
             }
             Bubble.FlyoutMessage flyoutMessage = bubble.mFlyoutMessage;
@@ -87,14 +86,13 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
     /* renamed from: -$$Nest$smpopulateCommonInfo, reason: not valid java name */
-    public static boolean m3218$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) {
-        Drawable drawable;
-        Bitmap createIconBitmap;
+    public static boolean m3235$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        Drawable bubbleDrawable;
+        Bitmap bitmapCreateIconBitmap;
         ShortcutInfo shortcutInfo = bubble.mShortcutInfo;
         if (shortcutInfo != null) {
             bubbleViewInfo.shortcutInfo = shortcutInfo;
@@ -111,13 +109,13 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
                 ShortcutInfo shortcutInfo2 = bubbleViewInfo.shortcutInfo;
                 Icon icon = bubble.mIcon;
                 bubbleIconFactory.getClass();
-                drawable = BubbleIconFactory.getBubbleDrawable(context, shortcutInfo2, icon);
+                bubbleDrawable = BubbleIconFactory.getBubbleDrawable(context, shortcutInfo2, icon);
             } catch (Exception unused) {
                 Log.w("Bubbles", "Exception creating icon for the bubble: " + bubble.mKey);
-                drawable = null;
+                bubbleDrawable = null;
             }
-            if (drawable != null) {
-                applicationIcon = drawable;
+            if (bubbleDrawable != null) {
+                applicationIcon = bubbleDrawable;
             }
             BitmapInfo badgeBitmap = bubbleBadgeIconFactory.getBadgeBitmap(userBadgedIcon);
             Bitmap bitmap = badgeBitmap.icon;
@@ -128,8 +126,8 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
             bubbleViewInfo.rawBadgeBitmap = bitmap;
             float[] fArr = new float[1];
             if (applicationIcon instanceof AdaptiveIconDrawable) {
-                createIconBitmap = Bitmap.createBitmap(applicationIcon.getIntrinsicWidth(), applicationIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createIconBitmap);
+                bitmapCreateIconBitmap = Bitmap.createBitmap(applicationIcon.getIntrinsicWidth(), applicationIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateIconBitmap);
                 applicationIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 AdaptiveIconDrawable adaptiveIconDrawable = (AdaptiveIconDrawable) applicationIcon;
                 if (adaptiveIconDrawable.getBackground() != null) {
@@ -139,12 +137,12 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
                     adaptiveIconDrawable.getForeground().draw(canvas);
                 }
             } else {
-                createIconBitmap = bubbleBadgeIconFactory.createIconBitmap(applicationIcon, 1.0f, bubbleBadgeIconFactory.mContext.getResources().getDimensionPixelSize(R.dimen.bubble_size));
+                bitmapCreateIconBitmap = bubbleBadgeIconFactory.createIconBitmap(applicationIcon, 1.0f, bubbleBadgeIconFactory.mContext.getResources().getDimensionPixelSize(R.dimen.bubble_size));
             }
             int dimensionPixelSize = bubbleBadgeIconFactory.mContext.getResources().getDimensionPixelSize(R.dimen.bubble_size);
             float dimensionPixelSize2 = bubbleBadgeIconFactory.mContext.getResources().getDimensionPixelSize(R.dimen.sec_noti_bubble_icon_outline_border);
-            Bitmap createBitmap = Bitmap.createBitmap(dimensionPixelSize, dimensionPixelSize, Bitmap.Config.ARGB_8888);
-            Canvas canvas2 = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(dimensionPixelSize, dimensionPixelSize, Bitmap.Config.ARGB_8888);
+            Canvas canvas2 = new Canvas(bitmapCreateBitmap);
             Paint paint = new Paint();
             paint.setColor(-12303292);
             Rect rect = new Rect(0, 0, canvas2.getWidth(), canvas2.getHeight());
@@ -152,17 +150,17 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
             canvas2.drawARGB(0, 0, 0, 0);
             canvas2.drawCircle(canvas2.getWidth() / 2, canvas2.getHeight() / 2, (canvas2.getWidth() / 2) - dimensionPixelSize2, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-            canvas2.drawBitmap(createIconBitmap, (Rect) null, rect, paint);
+            canvas2.drawBitmap(bitmapCreateIconBitmap, (Rect) null, rect, paint);
             paint.setColor(bubbleBadgeIconFactory.mContext.getResources().getColor(R.color.sec_bubble_noti_icon_outline_border_color));
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
             canvas2.drawCircle(canvas2.getWidth() / 2, canvas2.getHeight() / 2, canvas2.getWidth() / 2, paint);
-            bubbleViewInfo.bubbleBitmap = bubbleBadgeIconFactory.createIconBitmap(createBitmap).icon;
-            Path createPathFromPathData = PathParser.createPathFromPathData(context.getResources().getString(android.R.string.eventTypeAnniversary));
+            bubbleViewInfo.bubbleBitmap = bubbleBadgeIconFactory.createIconBitmap(bitmapCreateBitmap).icon;
+            Path pathCreatePathFromPathData = PathParser.createPathFromPathData(context.getResources().getString(android.R.string.eventTypeCustom));
             Matrix matrix = new Matrix();
             float f = fArr[0];
             matrix.setScale(f, f, 50.0f, 50.0f);
-            createPathFromPathData.transform(matrix);
-            bubbleViewInfo.dotPath = createPathFromPathData;
+            pathCreatePathFromPathData.transform(matrix);
+            bubbleViewInfo.dotPath = pathCreatePathFromPathData;
             bubbleViewInfo.dotColor = ColorUtils.blendARGB(badgeBitmap.color, -1, 0.54f);
             return true;
         } catch (PackageManager.NameNotFoundException unused2) {
@@ -218,7 +216,7 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
                 }
             });
         }
-        if (!m3218$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+        if (!m3235$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
             return null;
         }
         bubbleViewInfo.flyoutMessage = bubble.mFlyoutMessage;
@@ -233,8 +231,8 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
         }
         this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleViewInfoTaskLegacy$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                BubbleViewInfoTaskLegacy bubbleViewInfoTaskLegacy = BubbleViewInfoTaskLegacy.this;
+            public final void run() throws Resources.NotFoundException {
+                BubbleViewInfoTaskLegacy bubbleViewInfoTaskLegacy = this.f$0;
                 BubbleViewInfoTaskLegacy.BubbleViewInfo bubbleViewInfo2 = bubbleViewInfo;
                 int i = BubbleViewInfoTaskLegacy.$r8$clinit;
                 ((BubbleExpandedViewManager$Companion$fromBubbleController$1) ((BubbleExpandedViewManager) bubbleViewInfoTaskLegacy.mExpandedViewManager.get())).$controller.getClass();

@@ -86,11 +86,11 @@ public class CachedDeviceState {
         }
 
         public long getMillis() {
-            long elapsedTime;
+            long jElapsedTime;
             synchronized (this.mLock) {
-                elapsedTime = this.mTotalTimeMillis + elapsedTime();
+                jElapsedTime = this.mTotalTimeMillis + elapsedTime();
             }
-            return elapsedTime;
+            return jElapsedTime;
         }
 
         public void reset() {

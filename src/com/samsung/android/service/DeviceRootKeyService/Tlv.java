@@ -54,17 +54,17 @@ public final class Tlv {
     public byte[] encodeTlv() {
         byte[] bArr = new byte[this.mTotalLength + 3];
         bArr[0] = -2;
-        byte[] array = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) this.mTotalLength).array();
-        System.arraycopy(array, 0, bArr, 1, array.length);
-        int i = 3;
+        byte[] bArrArray = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) this.mTotalLength).array();
+        System.arraycopy(bArrArray, 0, bArr, 1, bArrArray.length);
+        int length = 3;
         for (Integer num : this.mTlvList.keySet()) {
             byte[] bArr2 = this.mTlvList.get(num);
-            byte[] array2 = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) bArr2.length).array();
-            bArr[i] = num.byteValue();
-            System.arraycopy(array2, 0, bArr, i + 1, array2.length);
-            int i2 = i + 3;
-            System.arraycopy(bArr2, 0, bArr, i2, bArr2.length);
-            i = i2 + bArr2.length;
+            byte[] bArrArray2 = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) bArr2.length).array();
+            bArr[length] = num.byteValue();
+            System.arraycopy(bArrArray2, 0, bArr, length + 1, bArrArray2.length);
+            int i = length + 3;
+            System.arraycopy(bArr2, 0, bArr, i, bArr2.length);
+            length = i + bArr2.length;
         }
         return bArr;
     }

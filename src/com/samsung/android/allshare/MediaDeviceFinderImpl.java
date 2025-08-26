@@ -31,17 +31,17 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     private HashMap<String, DeviceImpl> mUnknownDeviceMap = new HashMap<>();
 
     static {
-        HashMap<Device.DeviceType, String> hashMap = new HashMap<>();
-        mDeviceTypeToEventMap = hashMap;
-        hashMap.put(Device.DeviceType.DEVICE_PROVIDER, AllShareEvent.EVENT_PROVIDER_DISCOVERY);
+        HashMap<Device.DeviceType, String> map = new HashMap<>();
+        mDeviceTypeToEventMap = map;
+        map.put(Device.DeviceType.DEVICE_PROVIDER, AllShareEvent.EVENT_PROVIDER_DISCOVERY);
         mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_AVPLAYER, AllShareEvent.EVENT_AV_PLAYER_DISCOVERY);
         mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_IMAGEVIEWER, AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY);
         mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_SCREENSHARING, AllShareEvent.EVENT_SCREENSHARING_DISCOVERY);
         mDeviceTypeToEventMap.put(Device.DeviceType.UNKNOWN, AllShareEvent.EVENT_DMR_DISCOVERY);
         mDeviceEventToDeviceTypeMap = null;
-        HashMap<String, Device.DeviceType> hashMap2 = new HashMap<>();
-        mDeviceEventToDeviceTypeMap = hashMap2;
-        hashMap2.put(AllShareEvent.EVENT_PROVIDER_DISCOVERY, Device.DeviceType.DEVICE_PROVIDER);
+        HashMap<String, Device.DeviceType> map2 = new HashMap<>();
+        mDeviceEventToDeviceTypeMap = map2;
+        map2.put(AllShareEvent.EVENT_PROVIDER_DISCOVERY, Device.DeviceType.DEVICE_PROVIDER);
         mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_AV_PLAYER_DISCOVERY, Device.DeviceType.DEVICE_AVPLAYER);
         mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY, Device.DeviceType.DEVICE_IMAGEVIEWER);
         mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_SCREENSHARING_DISCOVERY, Device.DeviceType.DEVICE_SCREENSHARING);
@@ -116,9 +116,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             }
             try {
                 mediaDeviceFinderImpl.removeDeviceFromMap(bundle2, deviceType);
-                ERROR stringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+                ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
                 if (iDeviceFinderEventListener != null) {
-                    iDeviceFinderEventListener.onDeviceRemoved(deviceType, deviceFromMap, stringToEnum);
+                    iDeviceFinderEventListener.onDeviceRemoved(deviceType, deviceFromMap, errorStringToEnum);
                     DLog.i_api(MediaDeviceFinderImpl.TAG_CLASS, "[REMOVED] " + deviceFromMap);
                 }
             } catch (Error e4) {
@@ -221,11 +221,11 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         SyncActionInvoker syncActionInvoker = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICE_BY_ID_SYNC);
         syncActionInvoker.putString("BUNDLE_STRING_ID", str);
         syncActionInvoker.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, deviceType.enumToString());
-        Bundle invoke = syncActionInvoker.invoke();
-        if (invoke == null) {
+        Bundle bundleInvoke = syncActionInvoker.invoke();
+        if (bundleInvoke == null) {
             return null;
         }
-        return getDeviceFromMap((Bundle) invoke.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE), deviceType);
+        return getDeviceFromMap((Bundle) bundleInvoke.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE), deviceType);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -363,8 +363,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         if (!this.mUnknownDeviceMap.containsKey(string)) {
             if (!deviceImpl.isSupportedByType(1) && !deviceImpl.isSupportedByType(3) && !deviceImpl.isSupportedByType(2)) {
                 DLog.w_api(TAG_CLASS, "all types are not supported");
+            } else {
+                this.mUnknownDeviceMap.put(string, deviceImpl);
             }
-            this.mUnknownDeviceMap.put(string, deviceImpl);
         }
         return this.mUnknownDeviceMap.get(string);
     }
@@ -382,9 +383,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             } else if (str.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_SYNC)) {
                 syncActionInvoker.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, deviceType.enumToString());
             }
-            Bundle invoke = syncActionInvoker.invoke();
-            if (invoke != null) {
-                ArrayList parcelableArrayList = invoke.getParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_DEVICE);
+            Bundle bundleInvoke = syncActionInvoker.invoke();
+            if (bundleInvoke != null) {
+                ArrayList parcelableArrayList = bundleInvoke.getParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_DEVICE);
                 if (parcelableArrayList == null || parcelableArrayList.size() == 0) {
                     DLog.d_api(TAG_CLASS, "device list is empty or null!");
                 } else {
@@ -427,9 +428,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         }
 
         Bundle invoke() {
-            CVMessage requestCVMSync;
-            if (ServiceConnectionChecker.isAllShareServiceConnected(MediaDeviceFinderImpl.this.mAllShareConnector) && (requestCVMSync = MediaDeviceFinderImpl.this.mAllShareConnector.requestCVMSync(this.mMessage)) != null) {
-                return requestCVMSync.getBundle();
+            CVMessage cVMessageRequestCVMSync;
+            if (ServiceConnectionChecker.isAllShareServiceConnected(MediaDeviceFinderImpl.this.mAllShareConnector) && (cVMessageRequestCVMSync = MediaDeviceFinderImpl.this.mAllShareConnector.requestCVMSync(this.mMessage)) != null) {
+                return cVMessageRequestCVMSync.getBundle();
             }
             return null;
         }

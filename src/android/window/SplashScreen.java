@@ -138,9 +138,9 @@ public interface SplashScreen {
 
         public void tokenDestroyed(IBinder iBinder) {
             synchronized (this.mGlobalLock) {
-                SplashScreenImpl findImpl = findImpl(iBinder);
-                if (findImpl != null) {
-                    removeImpl(findImpl);
+                SplashScreenImpl splashScreenImplFindImpl = findImpl(iBinder);
+                if (splashScreenImplFindImpl != null) {
+                    removeImpl(splashScreenImplFindImpl);
                 }
             }
         }
@@ -151,23 +151,23 @@ public interface SplashScreen {
 
         private void dispatchOnExitAnimation(IBinder iBinder, SplashScreenView splashScreenView) {
             synchronized (this.mGlobalLock) {
-                SplashScreenImpl findImpl = findImpl(iBinder);
-                if (findImpl == null) {
+                SplashScreenImpl splashScreenImplFindImpl = findImpl(iBinder);
+                if (splashScreenImplFindImpl == null) {
                     return;
                 }
-                if (findImpl.mExitAnimationListener == null) {
+                if (splashScreenImplFindImpl.mExitAnimationListener == null) {
                     Slog.e(TAG, "cannot dispatch onExitAnimation to listener " + iBinder);
                     return;
                 }
-                findImpl.mExitAnimationListener.onSplashScreenExit(splashScreenView);
+                splashScreenImplFindImpl.mExitAnimationListener.onSplashScreenExit(splashScreenView);
             }
         }
 
         public boolean containsExitListener(IBinder iBinder) {
             boolean z;
             synchronized (this.mGlobalLock) {
-                SplashScreenImpl findImpl = findImpl(iBinder);
-                z = (findImpl == null || findImpl.mExitAnimationListener == null) ? false : true;
+                SplashScreenImpl splashScreenImplFindImpl = findImpl(iBinder);
+                z = (splashScreenImplFindImpl == null || splashScreenImplFindImpl.mExitAnimationListener == null) ? false : true;
             }
             return z;
         }

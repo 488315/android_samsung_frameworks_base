@@ -56,33 +56,33 @@ public final class ArchivedActivityInfo {
     }
 
     public static Bitmap drawableToBitmap(Drawable drawable, int i) {
-        Bitmap createBitmap;
+        Bitmap bitmapCreateBitmap;
         Bitmap bitmap;
         int i2;
         if (drawable instanceof BitmapDrawable) {
             bitmap = ((BitmapDrawable) drawable).getBitmap();
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-                createBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                bitmapCreateBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
             } else {
-                createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             }
-            Canvas canvas = new Canvas(createBitmap);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
-            bitmap = createBitmap;
+            bitmap = bitmapCreateBitmap;
         }
         if (i <= 0 || (bitmap.getWidth() >= i && bitmap.getHeight() >= i && bitmap.getWidth() <= (i2 = i * 2) && bitmap.getHeight() <= i2)) {
             return bitmap;
         }
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, i, i, true);
-        if (createScaledBitmap != bitmap) {
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, i, i, true);
+        if (bitmapCreateScaledBitmap != bitmap) {
             bitmap.recycle();
         }
-        return createScaledBitmap;
+        return bitmapCreateScaledBitmap;
     }
 
-    public static byte[] bytesFromBitmap(Bitmap bitmap) {
+    public static byte[] bytesFromBitmap(Bitmap bitmap) throws IOException {
         if (bitmap == null) {
             return null;
         }

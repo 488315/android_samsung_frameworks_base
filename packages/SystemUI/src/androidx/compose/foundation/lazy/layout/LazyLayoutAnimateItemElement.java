@@ -6,7 +6,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import androidx.compose.ui.unit.IntOffset;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyLayoutAnimateItemElement extends ModifierNodeElement<LazyLayoutAnimationSpecsNode> {
     public final FiniteAnimationSpec fadeInSpec;
@@ -37,11 +36,11 @@ public final class LazyLayoutAnimateItemElement extends ModifierNodeElement<Lazy
 
     public final int hashCode() {
         FiniteAnimationSpec finiteAnimationSpec = this.fadeInSpec;
-        int hashCode = (finiteAnimationSpec == null ? 0 : finiteAnimationSpec.hashCode()) * 31;
+        int iHashCode = (finiteAnimationSpec == null ? 0 : finiteAnimationSpec.hashCode()) * 31;
         FiniteAnimationSpec finiteAnimationSpec2 = this.placementSpec;
-        int hashCode2 = (hashCode + (finiteAnimationSpec2 == null ? 0 : finiteAnimationSpec2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (finiteAnimationSpec2 == null ? 0 : finiteAnimationSpec2.hashCode())) * 31;
         FiniteAnimationSpec finiteAnimationSpec3 = this.fadeOutSpec;
-        return hashCode2 + (finiteAnimationSpec3 != null ? finiteAnimationSpec3.hashCode() : 0);
+        return iHashCode2 + (finiteAnimationSpec3 != null ? finiteAnimationSpec3.hashCode() : 0);
     }
 
     public final String toString() {

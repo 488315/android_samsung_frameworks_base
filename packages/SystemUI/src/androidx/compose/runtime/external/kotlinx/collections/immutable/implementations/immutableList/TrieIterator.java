@@ -2,7 +2,6 @@ package androidx.compose.runtime.external.kotlinx.collections.immutable.implemen
 
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TrieIterator<E> extends AbstractListIterator<E> {
     public int height;
@@ -52,15 +51,15 @@ public final class TrieIterator<E> extends AbstractListIterator<E> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        Object elementAtCurrentIndex = elementAtCurrentIndex();
+        Object objElementAtCurrentIndex = elementAtCurrentIndex();
         int i = this.index + 1;
         this.index = i;
         if (i == this.size) {
             this.isInRightEdge = true;
-            return elementAtCurrentIndex;
+            return objElementAtCurrentIndex;
         }
         fillPathIfNeeded(0);
-        return elementAtCurrentIndex;
+        return objElementAtCurrentIndex;
     }
 
     @Override // java.util.ListIterator

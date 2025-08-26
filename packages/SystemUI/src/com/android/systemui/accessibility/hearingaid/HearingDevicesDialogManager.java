@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesDialogManager {
     public final Executor mBackgroundExecutor;
@@ -37,11 +36,11 @@ public class HearingDevicesDialogManager {
         final CallbackToFutureAdapter.SafeFuture future = CallbackToFutureAdapter.getFuture(new CallbackToFutureAdapter.Resolver() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogManager$$ExternalSyntheticLambda0
             @Override // androidx.concurrent.futures.CallbackToFutureAdapter.Resolver
             public final Object attachCompleter(final CallbackToFutureAdapter.Completer completer) {
-                final HearingDevicesDialogManager hearingDevicesDialogManager = HearingDevicesDialogManager.this;
+                final HearingDevicesDialogManager hearingDevicesDialogManager = this.f$0;
                 hearingDevicesDialogManager.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogManager$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        completer.set(Boolean.valueOf(HearingDevicesDialogManager.this.mDevicesChecker.isAnyPairedHearingDevice()));
+                        completer.set(Boolean.valueOf(hearingDevicesDialogManager.mDevicesChecker.isAnyPairedHearingDevice()));
                     }
                 });
                 return "isAnyPairedHearingDevice check";
@@ -50,18 +49,18 @@ public class HearingDevicesDialogManager {
         future.delegate.addListener(new Runnable() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogManager$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                DialogTransitionAnimator.Controller dialogTransitionController;
-                HearingDevicesDialogManager hearingDevicesDialogManager = HearingDevicesDialogManager.this;
+                DialogTransitionAnimator.Controller controllerDialogTransitionController;
+                HearingDevicesDialogManager hearingDevicesDialogManager = this.f$0;
                 CallbackToFutureAdapter.SafeFuture safeFuture = future;
                 int i2 = i;
                 Expandable expandable2 = expandable;
                 hearingDevicesDialogManager.getClass();
                 try {
                     hearingDevicesDialogManager.mDialog = hearingDevicesDialogManager.mDialogFactory.create(!((Boolean) safeFuture.delegate.get()).booleanValue(), i2).createDialog();
-                    if (expandable2 == null || (dialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "hearing_devices_tile"))) == null) {
+                    if (expandable2 == null || (controllerDialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "hearing_devices_tile"))) == null) {
                         hearingDevicesDialogManager.mDialog.show();
                     } else {
-                        hearingDevicesDialogManager.mDialogTransitionAnimator.show(hearingDevicesDialogManager.mDialog, dialogTransitionController, true);
+                        hearingDevicesDialogManager.mDialogTransitionAnimator.show(hearingDevicesDialogManager.mDialog, controllerDialogTransitionController, true);
                     }
                 } catch (InterruptedException | ExecutionException e) {
                     Log.e("HearingDevicesDialogManager", "Exception occurs while running pairedHearingDeviceCheckTask", e);

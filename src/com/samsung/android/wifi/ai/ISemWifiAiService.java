@@ -65,9 +65,9 @@ public interface ISemWifiAiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiAiService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiAiService)) {
-                return (ISemWifiAiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiAiService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiAiService)) {
+                return (ISemWifiAiService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -106,15 +106,15 @@ public interface ISemWifiAiService extends IInterface {
                 nsdTerminate();
             } else if (i == 2) {
                 float[][] fArr = (float[][]) parcel.createFixedArray(float[][].class, 7, 60);
-                String[] createStringArray = parcel.createStringArray();
-                int[] createIntArray = parcel.createIntArray();
-                int readInt = parcel.readInt();
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                serviceTypeQuery(fArr, createStringArray, createIntArray, readInt);
+                serviceTypeQuery(fArr, strArrCreateStringArray, iArrCreateIntArray, i3);
             } else if (i == 3) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                toggleDebugMode(readBoolean);
+                toggleDebugMode(z);
             } else if (i == 4) {
                 reInitialize();
             } else {
@@ -141,50 +141,50 @@ public interface ISemWifiAiService extends IInterface {
 
             @Override // com.samsung.android.wifi.ai.ISemWifiAiService
             public void nsdTerminate() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ai.ISemWifiAiService
             public void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
-                    obtain.writeFixedArray(fArr, 0, 7, 60);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
+                    parcelObtain.writeFixedArray(fArr, 0, 7, 60);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ai.ISemWifiAiService
             public void toggleDebugMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ai.ISemWifiAiService
             public void reInitialize() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

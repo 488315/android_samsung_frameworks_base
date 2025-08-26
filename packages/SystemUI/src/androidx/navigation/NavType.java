@@ -18,7 +18,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.CharsKt__CharJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NavType {
     public static final NavType$Companion$BoolArrayType$1 BoolArrayType;
@@ -39,7 +38,6 @@ public abstract class NavType {
     public static final Companion Companion = new Companion(null);
     public static final NavType$Companion$IntType$1 IntType = new NavType$Companion$IntType$1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,16 +71,16 @@ public abstract class NavType {
             }
 
             @Override // androidx.navigation.NavType
-            public final Object parseValue(String str) {
-                int parseInt;
+            public final Object parseValue(String str) throws NumberFormatException {
+                int i;
                 if (str.startsWith("0x")) {
-                    String substring = str.substring(2);
+                    String strSubstring = str.substring(2);
                     CharsKt__CharJVMKt.checkRadix(16);
-                    parseInt = Integer.parseInt(substring, 16);
+                    i = Integer.parseInt(strSubstring, 16);
                 } else {
-                    parseInt = Integer.parseInt(str);
+                    i = Integer.parseInt(str);
                 }
-                return Integer.valueOf(parseInt);
+                return Integer.valueOf(i);
             }
 
             @Override // androidx.navigation.NavType
@@ -235,10 +233,10 @@ public abstract class NavType {
                 }
                 long[] jArr2 = {((Number) navType$Companion$LongType$1.parseValue(str)).longValue()};
                 int length = jArr.length;
-                long[] copyOf = Arrays.copyOf(jArr, length + 1);
-                System.arraycopy(jArr2, 0, copyOf, length, 1);
-                copyOf.getClass();
-                return copyOf;
+                long[] jArrCopyOf = Arrays.copyOf(jArr, length + 1);
+                System.arraycopy(jArr2, 0, jArrCopyOf, length, 1);
+                jArrCopyOf.getClass();
+                return jArrCopyOf;
             }
 
             @Override // androidx.navigation.NavType
@@ -394,10 +392,10 @@ public abstract class NavType {
                 }
                 float[] fArr2 = {((Number) navType$Companion$FloatType$1.parseValue(str)).floatValue()};
                 int length = fArr.length;
-                float[] copyOf = Arrays.copyOf(fArr, length + 1);
-                System.arraycopy(fArr2, 0, copyOf, length, 1);
-                copyOf.getClass();
-                return copyOf;
+                float[] fArrCopyOf = Arrays.copyOf(fArr, length + 1);
+                System.arraycopy(fArr2, 0, fArrCopyOf, length, 1);
+                fArrCopyOf.getClass();
+                return fArrCopyOf;
             }
 
             @Override // androidx.navigation.NavType
@@ -540,10 +538,10 @@ public abstract class NavType {
                 }
                 boolean[] zArr2 = {((Boolean) navType$Companion$BoolType$1.parseValue(str)).booleanValue()};
                 int length = zArr.length;
-                boolean[] copyOf = Arrays.copyOf(zArr, length + 1);
-                System.arraycopy(zArr2, 0, copyOf, length, 1);
-                copyOf.getClass();
-                return copyOf;
+                boolean[] zArrCopyOf = Arrays.copyOf(zArr, length + 1);
+                System.arraycopy(zArr2, 0, zArrCopyOf, length, 1);
+                zArrCopyOf.getClass();
+                return zArrCopyOf;
             }
 
             @Override // androidx.navigation.NavType
@@ -687,8 +685,8 @@ public abstract class NavType {
             @Override // androidx.navigation.NavType
             public final String serializeAsValue(Object obj) {
                 String str = (String) obj;
-                String encode = str != null ? Uri.encode(str) : null;
-                return encode == null ? "null" : encode;
+                String strEncode = str != null ? Uri.encode(str) : null;
+                return strEncode == null ? "null" : strEncode;
             }
         };
         StringArrayType = new CollectionNavType() { // from class: androidx.navigation.NavType$Companion$StringArrayType$1
@@ -715,10 +713,10 @@ public abstract class NavType {
                 }
                 String[] strArr2 = {str};
                 int length = strArr.length;
-                Object[] copyOf = Arrays.copyOf(strArr, length + 1);
-                System.arraycopy(strArr2, 0, copyOf, length, 1);
-                copyOf.getClass();
-                return (String[]) copyOf;
+                Object[] objArrCopyOf = Arrays.copyOf(strArr, length + 1);
+                System.arraycopy(strArr2, 0, objArrCopyOf, length, 1);
+                objArrCopyOf.getClass();
+                return (String[]) objArrCopyOf;
             }
 
             @Override // androidx.navigation.NavType

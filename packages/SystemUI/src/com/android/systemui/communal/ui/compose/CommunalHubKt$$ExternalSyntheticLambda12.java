@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda12 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -34,17 +33,17 @@ public final /* synthetic */ class CommunalHubKt$$ExternalSyntheticLambda12 impl
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$4 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$4 | 1);
                 Modifier modifier = this.f$2;
                 ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) this.f$3;
-                CommunalHubKt.ToolbarButton(this.f$0, (Function0) this.f$1, modifier, composableLambdaImpl, (Composer) obj, updateChangedFlags);
+                CommunalHubKt.ToolbarButton(this.f$0, (Function0) this.f$1, modifier, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$4 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$4 | 1);
                 Modifier modifier2 = this.f$2;
                 WidgetConfigurator widgetConfigurator = (WidgetConfigurator) this.f$3;
-                CommunalHubKt.WidgetConfigureButton(this.f$0, (CommunalContentModel.WidgetContent.Widget) this.f$1, modifier2, widgetConfigurator, (Composer) obj, updateChangedFlags2);
+                CommunalHubKt.WidgetConfigureButton(this.f$0, (CommunalContentModel.WidgetContent.Widget) this.f$1, modifier2, widgetConfigurator, (Composer) obj, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

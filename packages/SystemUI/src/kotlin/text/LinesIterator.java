@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LinesIterator implements Iterator, KMappedMarker {
     public int delimiterLength;
@@ -14,7 +13,6 @@ public final class LinesIterator implements Iterator, KMappedMarker {
     public final CharSequence string;
     public int tokenStartIndex;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State {
         public /* synthetic */ State(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,9 +45,9 @@ public final class LinesIterator implements Iterator, KMappedMarker {
         int length = this.string.length();
         int length2 = this.string.length();
         for (int i4 = this.tokenStartIndex; i4 < length2; i4++) {
-            char charAt = this.string.charAt(i4);
-            if (charAt == '\n' || charAt == '\r') {
-                i = (charAt == '\r' && (i2 = i4 + 1) < this.string.length() && this.string.charAt(i2) == '\n') ? 2 : 1;
+            char cCharAt = this.string.charAt(i4);
+            if (cCharAt == '\n' || cCharAt == '\r') {
+                i = (cCharAt == '\r' && (i2 = i4 + 1) < this.string.length() && this.string.charAt(i2) == '\n') ? 2 : 1;
                 length = i4;
                 this.state = 1;
                 this.delimiterLength = i;

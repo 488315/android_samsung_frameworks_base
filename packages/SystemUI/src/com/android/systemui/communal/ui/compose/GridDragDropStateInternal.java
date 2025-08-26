@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.IntOffset;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GridDragDropStateInternal {
     public final MutableState draggingItemDraggedDelta$delegate;
@@ -24,12 +23,12 @@ public class GridDragDropStateInternal {
     public GridDragDropStateInternal(LazyGridState lazyGridState) {
         this.state = lazyGridState;
         Offset.Companion.getClass();
-        this.draggingItemDraggedDelta$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m393boximpl(0L));
-        this.draggingItemInitialOffset$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m393boximpl(0L));
+        this.draggingItemDraggedDelta$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m395boximpl(0L));
+        this.draggingItemInitialOffset$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m395boximpl(0L));
     }
 
     /* renamed from: getDraggingItemDraggedDelta-F1C5BW0, reason: not valid java name */
-    public final long m1083getDraggingItemDraggedDeltaF1C5BW0() {
+    public final long m1085getDraggingItemDraggedDeltaF1C5BW0() {
         return ((Offset) ((SnapshotMutableStateImpl) this.draggingItemDraggedDelta$delegate).getValue()).packedValue;
     }
 
@@ -38,32 +37,32 @@ public class GridDragDropStateInternal {
     }
 
     public final LazyGridItemInfo getDraggingItemLayoutInfo() {
-        Object obj;
+        Object next;
         Iterator it = ((LazyGridMeasureResult) this.state.getLayoutInfo()).visibleItemsInfo.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (Intrinsics.areEqual(((LazyGridMeasuredItem) ((LazyGridItemInfo) obj)).key, getDraggingItemKey())) {
+            next = it.next();
+            if (Intrinsics.areEqual(((LazyGridMeasuredItem) ((LazyGridItemInfo) next)).key, getDraggingItemKey())) {
                 break;
             }
         }
-        return (LazyGridItemInfo) obj;
+        return (LazyGridItemInfo) next;
     }
 
     /* renamed from: getDraggingItemOffset-F1C5BW0, reason: not valid java name */
-    public final long m1084getDraggingItemOffsetF1C5BW0() {
+    public final long m1086getDraggingItemOffsetF1C5BW0() {
         LazyGridItemInfo draggingItemLayoutInfo = getDraggingItemLayoutInfo();
         if (draggingItemLayoutInfo == null) {
             Offset.Companion.getClass();
             return 0L;
         }
-        long m401plusMKHz9U = Offset.m401plusMKHz9U(((Offset) ((SnapshotMutableStateImpl) this.draggingItemInitialOffset$delegate).getValue()).packedValue, m1083getDraggingItemDraggedDeltaF1C5BW0());
+        long jM403plusMKHz9U = Offset.m403plusMKHz9U(((Offset) ((SnapshotMutableStateImpl) this.draggingItemInitialOffset$delegate).getValue()).packedValue, m1085getDraggingItemDraggedDeltaF1C5BW0());
         long j = ((LazyGridMeasuredItem) draggingItemLayoutInfo).offset;
         IntOffset.Companion companion = IntOffset.Companion;
-        return Offset.m400minusMKHz9U(m401plusMKHz9U, (Float.floatToRawIntBits((int) (j & 4294967295L)) & 4294967295L) | (Float.floatToRawIntBits((int) (j >> 32)) << 32));
+        return Offset.m402minusMKHz9U(jM403plusMKHz9U, (Float.floatToRawIntBits((int) (j & 4294967295L)) & 4294967295L) | (Float.floatToRawIntBits((int) (j >> 32)) << 32));
     }
 
     public final boolean isDraggingToRemove() {

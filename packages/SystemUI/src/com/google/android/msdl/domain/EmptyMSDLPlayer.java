@@ -4,7 +4,6 @@ import com.google.android.msdl.data.model.MSDLToken;
 import java.util.List;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EmptyMSDLPlayer implements MSDLPlayer {
     @Override // com.google.android.msdl.domain.MSDLPlayer

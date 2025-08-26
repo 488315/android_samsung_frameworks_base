@@ -18,10 +18,7 @@ import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.emm.EngineeringModeManagerWrapper;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
-import com.android.settingslib.SecNotificationBlockManager$$ExternalSyntheticOutline0;
 import com.android.systemui.LsRune;
-import com.android.systemui.R;
-import com.android.systemui.aibrief.ui.BriefViewController;
 import com.android.systemui.aod.AODAmbientWallpaperHelper;
 import com.android.systemui.blur.BouncerColorCurve;
 import com.android.systemui.doze.PluginAODManager;
@@ -34,7 +31,6 @@ import com.android.systemui.keyguard.KeyguardViewMediatorHelper;
 import com.android.systemui.keyguard.KeyguardVisibilityMonitor;
 import com.android.systemui.keyguard.Log;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
-import com.android.systemui.keyguard.shared.model.KeyguardState;
 import com.android.systemui.lockstar.PluginLockStarManager;
 import com.android.systemui.pluginlock.PluginLockMediator;
 import com.android.systemui.pluginlock.listener.PluginLockListener;
@@ -46,12 +42,9 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
-import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.wallpaper.KeyguardWallpaper;
-import com.android.systemui.wallpaper.WallpaperUtils;
 import com.samsung.android.feature.SemFloatingFeature;
-import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.systemui.splugins.lockstar.LockStarValues;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import dagger.Lazy;
@@ -63,7 +56,6 @@ import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecNotificationShadeWindowControllerHelperImpl implements SecNotificationShadeWindowControllerHelper {
     public static final int AWAKE_INTERVAL_DEFAULT_MS_LIVE_DEMO;
@@ -111,7 +103,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             if (message.what == SecNotificationShadeWindowControllerHelperImpl.MSG_USER_ACTIVITY_TIMEOUT_CHANGED) {
-                SecNotificationShadeWindowControllerHelperImpl.this.updateUserActivityTimeout(message.arg1 > 0);
+                this.this$0.updateUserActivityTimeout(message.arg1 > 0);
             }
         }
     };
@@ -119,14 +111,14 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
     public final SecNotificationShadeWindowControllerHelperImpl$pluginLockListener$1 pluginLockListener = new PluginLockListener.Window() { // from class: com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$pluginLockListener$1
         @Override // com.android.systemui.pluginlock.listener.PluginLockListener.Window
         public final void onScreenOrientationChangeRequired(boolean z) {
-            SecNotificationShadeWindowControllerHelperImpl.access$setScreenOrientation(SecNotificationShadeWindowControllerHelperImpl.this, z);
+            SecNotificationShadeWindowControllerHelperImpl.access$setScreenOrientation(this.this$0, z);
         }
 
         @Override // com.android.systemui.pluginlock.listener.PluginLockListener.Window
         public final void onScreenTimeoutChanged(long j) {
             Log.d("NotificationShadeWindowController", "onScreenTimeoutChanged timeOut : " + j);
             String str = SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG;
-            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
             secNotificationShadeWindowControllerHelperImpl.getCurrentState().lockTimeOutValue = j;
             secNotificationShadeWindowControllerHelperImpl.updateUserActivityTimeout(false);
         }
@@ -136,7 +128,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
             Log.d("NotificationShadeWindowController", "onViewModeChanged mode : " + i);
             boolean z = i == 1;
             if (LsRune.LOCKUI_BLUR) {
-                SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+                SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
                 if (z) {
                     Log.d("NotificationShadeWindowController", "prepareToApplyBlurDimEffect");
                     String str = SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG;
@@ -161,7 +153,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         public final void onViewModePageChanged(SemWallpaperColors semWallpaperColors) {
             if (semWallpaperColors != null) {
                 boolean z = semWallpaperColors.get(256L).getFontColor() == 1;
-                WindowRootView windowRootView = SecNotificationShadeWindowControllerHelperImpl.this.notificationShadeView;
+                WindowRootView windowRootView = this.this$0.notificationShadeView;
                 if (windowRootView != null) {
                     int systemUiVisibility = windowRootView.getSystemUiVisibility();
                     windowRootView.setSystemUiVisibility(z ? systemUiVisibility | 16 : systemUiVisibility & (-17));
@@ -171,7 +163,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
 
         @Override // com.android.systemui.pluginlock.listener.PluginLockListener.Window
         public final void updateBiometricRecognition(boolean z) {
-            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
             secNotificationShadeWindowControllerHelperImpl.powerManager.userActivity(SystemClock.uptimeMillis(), true);
             secNotificationShadeWindowControllerHelperImpl.keyguardUpdateMonitor.dispatchDlsBiometricMode(z);
         }
@@ -179,7 +171,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         @Override // com.android.systemui.pluginlock.listener.PluginLockListener.Window
         public final void updateOverlayUserTimeout(boolean z) {
             String str = SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG;
-            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
             NotificationShadeWindowState currentState = secNotificationShadeWindowControllerHelperImpl.getCurrentState();
             currentState.userScreenTimeOut = z;
             secNotificationShadeWindowControllerHelperImpl.apply(currentState);
@@ -188,7 +180,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         @Override // com.android.systemui.pluginlock.listener.PluginLockListener.Window
         public final void updateWindowSecureState(boolean z) {
             String str = SecNotificationShadeWindowControllerHelperImpl.DEBUG_TAG;
-            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
             NotificationShadeWindowState currentState = secNotificationShadeWindowControllerHelperImpl.getCurrentState();
             currentState.securedWindow = z;
             secNotificationShadeWindowControllerHelperImpl.apply(currentState);
@@ -198,7 +190,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
         public final void onChangedLockStarData(boolean z) {
             EmergencyButtonController$$ExternalSyntheticOutline0.m("LockStarCallback: onChangedLockStarEnabled: ", "NotificationShadeWindowController", z);
-            SecNotificationShadeWindowControllerHelperImpl.access$updateLockStarUserActivityTimeout(SecNotificationShadeWindowControllerHelperImpl.this, z);
+            SecNotificationShadeWindowControllerHelperImpl.access$updateLockStarUserActivityTimeout(this.this$0, z);
         }
 
         @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
@@ -207,14 +199,13 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
             if (!TextUtils.equals(bundle.getString("type", ""), PluginLockStar.STATUS_BAR_TYPE)) {
                 return new Bundle();
             }
-            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
+            SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = this.this$0;
             PluginLockStarManager pluginLockStarManager = (PluginLockStarManager) secNotificationShadeWindowControllerHelperImpl.pluginLockStarManagerLazy.get();
             SecNotificationShadeWindowControllerHelperImpl.access$updateLockStarUserActivityTimeout(secNotificationShadeWindowControllerHelperImpl, pluginLockStarManager != null ? pluginLockStarManager.isLockStarEnabled() : false);
             return new Bundle();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -224,7 +215,6 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Provider {
         public final Consumer applyConsumer;
         public final Supplier currentWindowStateSupplier;
@@ -295,12 +285,12 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         PluginLockStarManager pluginLockStarManager;
         LockStarValues lockStarValues;
         NotificationShadeWindowState currentState = secNotificationShadeWindowControllerHelperImpl.getCurrentState();
-        long j = -1;
+        long lockScreenOffTimeoutSeconds = -1;
         if (z && (pluginLockStarManager = (PluginLockStarManager) secNotificationShadeWindowControllerHelperImpl.pluginLockStarManagerLazy.get()) != null && (lockStarValues = pluginLockStarManager.getLockStarValues()) != null) {
-            j = lockStarValues.getLockScreenOffTimeoutSeconds() * 1000;
+            lockScreenOffTimeoutSeconds = lockStarValues.getLockScreenOffTimeoutSeconds() * 1000;
         }
-        currentState.lockStarTimeOutValue = j;
-        currentState.userScreenTimeOut = j > 0;
+        currentState.lockStarTimeOutValue = lockScreenOffTimeoutSeconds;
+        currentState.userScreenTimeOut = lockScreenOffTimeoutSeconds > 0;
         secNotificationShadeWindowControllerHelperImpl.updateUserActivityTimeout(false);
     }
 
@@ -439,108 +429,6 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         }
     }
 
-    public final void applyHelperPost(NotificationShadeWindowState notificationShadeWindowState) {
-        boolean isWhiteKeyguardWallpaper;
-        int copyFrom;
-        ViewGroup viewGroup;
-        if ((LsRune.SECURITY_BOUNCER_WINDOW || SafeUIState.isSysUiSafeModeEnabled()) && this.bouncerContainer != null) {
-            if (LsRune.SECURITY_SUB_DISPLAY_LOCK) {
-                isWhiteKeyguardWallpaper = true;
-                SemWallpaperColors cachedSemWallpaperColors = WallpaperUtils.getCachedSemWallpaperColors(!((KeyguardFoldControllerImpl) this.keyguardFoldController).isFoldOpened());
-                if (cachedSemWallpaperColors == null || cachedSemWallpaperColors.get(512L).getFontColor() != 1) {
-                    isWhiteKeyguardWallpaper = false;
-                }
-            } else {
-                isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
-            }
-            boolean z = notificationShadeWindowState.bouncerShowing;
-            if (!z || !notificationShadeWindowState.keyguardShowing || notificationShadeWindowState.coverAppShowing || notificationShadeWindowState.isCoverClosed) {
-                WindowManager.LayoutParams layoutParams = this.bouncerLpChanged;
-                if (layoutParams != null) {
-                    layoutParams.flags = (layoutParams.flags | 8) & (-131075);
-                    layoutParams.dimAmount = 0.0f;
-                    applyBouncerWindowBlur(0.0f, isWhiteKeyguardWallpaper);
-                    if (!this.isKeyguardScreenRotation) {
-                        layoutParams.screenOrientation = -1;
-                    }
-                }
-            } else if (z) {
-                if (LsRune.SECURITY_CAPTURED_BLUR && (viewGroup = this.bouncerContainer) != null) {
-                    if (notificationShadeWindowState.keyguardOccluded) {
-                        if (isWhiteKeyguardWallpaper) {
-                            viewGroup.setBackgroundColor(viewGroup.getContext().getResources().getColor(R.color.bouncer_background_color_occluded_no_blur_white_bg, null));
-                        } else {
-                            viewGroup.setBackgroundColor(viewGroup.getContext().getResources().getColor(R.color.bouncer_background_color_occluded, null));
-                        }
-                    } else if (isWhiteKeyguardWallpaper) {
-                        viewGroup.setBackgroundColor(viewGroup.getContext().getResources().getColor(R.color.bouncer_background_color_no_blur_white_bg, null));
-                    } else {
-                        viewGroup.setBackgroundColor(0);
-                    }
-                }
-                WindowManager.LayoutParams layoutParams2 = this.bouncerLpChanged;
-                if (layoutParams2 != null) {
-                    int i = layoutParams2.flags;
-                    int i2 = i & (-25);
-                    layoutParams2.flags = i2;
-                    if (notificationShadeWindowState.keyguardNeedsInput) {
-                        layoutParams2.flags = i & (-131097);
-                    } else {
-                        layoutParams2.flags = 131072 | i2;
-                    }
-                    if (LsRune.SECURITY_BLUR) {
-                        if (this.settingsHelper.isReduceTransparencyEnabled()) {
-                            layoutParams2.flags &= -3;
-                        } else {
-                            layoutParams2.flags |= 2;
-                        }
-                        applyBouncerWindowBlur(1.0f, isWhiteKeyguardWallpaper);
-                    }
-                    if (SafeUIState.isSysUiSafeModeEnabled()) {
-                        layoutParams2.userActivityTimeout = -1L;
-                        layoutParams2.screenDimDuration = -1L;
-                    } else {
-                        Provider provider = this.provider;
-                        WindowManager.LayoutParams layoutParams3 = (WindowManager.LayoutParams) (provider != null ? provider : null).lpSupplier.get();
-                        if (layoutParams3 != null) {
-                            long j = layoutParams3.userActivityTimeout;
-                            if (j < 10000) {
-                                j = 10000;
-                            }
-                            layoutParams2.userActivityTimeout = j;
-                            layoutParams2.screenDimDuration = layoutParams3.screenDimDuration;
-                        }
-                    }
-                    if (!this.isKeyguardScreenRotation && notificationShadeWindowState.keyguardOccluded) {
-                        layoutParams2.screenOrientation = 5;
-                    }
-                }
-            }
-            WindowManager.LayoutParams layoutParams4 = this.bouncerLpChanged;
-            if (layoutParams4 != null) {
-                layoutParams4.height = (notificationShadeWindowState.keyguardShowing || this.keyguardTransitionInteractor.getCurrentState() == KeyguardState.PRIMARY_BOUNCER) ? -1 : 0;
-                if ((layoutParams4.flags & 67108864) != 0) {
-                    layoutParams4.subtreeSystemUiVisibility |= PeripheralConstants.ErrorCode.ERROR_PLUGIN_CUSTOM_BASE;
-                }
-            }
-            ViewGroup viewGroup2 = this.bouncerContainer;
-            if (viewGroup2 != null && notificationShadeWindowState.bouncerShowing) {
-                int systemUiVisibility = viewGroup2.getSystemUiVisibility();
-                viewGroup2.setSystemUiVisibility(isWhiteKeyguardWallpaper ? systemUiVisibility | 16 : systemUiVisibility & (-17));
-            }
-            WindowManager.LayoutParams layoutParams5 = this.bouncerLpChanged;
-            if (layoutParams5 != null) {
-                layoutParams5.flags = (!notificationShadeWindowState.bouncerShowing || (LsRune.KEYGUARD_EM_TOKEN_CAPTURE_WINDOW && this.engineerModeManager.isCaptureEnabled)) ? layoutParams5.flags & (-8193) : layoutParams5.flags | 8192;
-            }
-            WindowManager.LayoutParams layoutParams6 = this.bouncerLp;
-            if (layoutParams6 == null || (copyFrom = layoutParams6.copyFrom(layoutParams5)) == 0) {
-                return;
-            }
-            SecNotificationBlockManager$$ExternalSyntheticOutline0.m(layoutParams6.height, "Bouncer LP changed!!! = 0x", Integer.toHexString(copyFrom), ", h = ", "NotificationShadeWindowController");
-            this.windowManager.updateViewLayout(this.bouncerContainer, layoutParams6);
-        }
-    }
-
     public final NotificationShadeWindowState getCurrentState() {
         Provider provider = this.provider;
         if (provider == null) {
@@ -558,34 +446,34 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
     }
 
     public final long getUserActivityTimeout() {
-        long j = DEFAULT_DISPLAY_TIMEOUT;
+        long jMin = DEFAULT_DISPLAY_TIMEOUT;
         NotificationShadeWindowState currentState = getCurrentState();
         PluginLockMediator pluginLockMediator = this.pluginLockMediator;
         if (pluginLockMediator != null ? pluginLockMediator.isDynamicLockEnabled() : false) {
-            long j2 = currentState.lockTimeOutValue;
-            if (j2 > 0) {
-                j = j2;
+            long j = currentState.lockTimeOutValue;
+            if (j > 0) {
+                jMin = j;
             }
         }
         PluginLockStarManager pluginLockStarManager = (PluginLockStarManager) this.pluginLockStarManagerLazy.get();
         if (pluginLockStarManager != null && pluginLockStarManager.isLockStarEnabled()) {
-            long j3 = currentState.lockStarTimeOutValue;
-            if (j3 > 0) {
-                j = j3;
+            long j2 = currentState.lockStarTimeOutValue;
+            if (j2 > 0) {
+                jMin = j2;
             }
         }
         long accessibilityInteractiveUiTimeout = this.settingsHelper.getAccessibilityInteractiveUiTimeout();
         if (accessibilityInteractiveUiTimeout > 0) {
-            j = accessibilityInteractiveUiTimeout;
+            jMin = accessibilityInteractiveUiTimeout;
         }
         if (this.settingsHelper.isEmergencyMode() || this.settingsHelper.isPowerSavingMode()) {
-            j = Math.min(AWAKE_INTERVAL_DEFAULT_MS_WITH_POWER_SAVING, j);
+            jMin = Math.min(AWAKE_INTERVAL_DEFAULT_MS_WITH_POWER_SAVING, jMin);
         }
         if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_UNPACK", false)) {
-            j = AWAKE_INTERVAL_DEFAULT_MS_LIVE_DEMO;
+            jMin = AWAKE_INTERVAL_DEFAULT_MS_LIVE_DEMO;
         }
-        android.util.Log.d("NotificationShadeWindowController", "getUserActivityTimeout " + j);
-        return j;
+        android.util.Log.d("NotificationShadeWindowController", "getUserActivityTimeout " + jMin);
+        return jMin;
     }
 
     public final void initPost() {
@@ -602,7 +490,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
         arrayList.add(Settings.Global.getUriFor(SettingsHelper.INDEX_LOW_POWER_MODE));
         arrayList.add(Settings.Secure.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS));
         if (!arrayList.isEmpty()) {
-            SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$initPost$2
+            SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl.initPost.2
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
                     SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;
@@ -629,7 +517,7 @@ public final class SecNotificationShadeWindowControllerHelperImpl implements Sec
             pluginLockMediator.registerWindowListener(this.pluginLockListener);
         }
         if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK && !LsRune.KEYGUARD_SUB_DISPLAY_ROTATIONAL) {
-            this.displayLifecycle.addObserver(new DisplayLifecycle.Observer() { // from class: com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$initPost$3
+            this.displayLifecycle.addObserver(new DisplayLifecycle.Observer() { // from class: com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl.initPost.3
                 @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
                 public final void onFolderStateChanged(boolean z) {
                     SecNotificationShadeWindowControllerHelperImpl secNotificationShadeWindowControllerHelperImpl = SecNotificationShadeWindowControllerHelperImpl.this;

@@ -57,9 +57,9 @@ public class Button extends TextView {
     }
 
     private static int getButtonDefaultStyleAttr(Context context) {
-        Boolean valueOf = Boolean.valueOf(useWearMaterial3Style(context));
-        sUseWearMaterial3Style = valueOf;
-        return valueOf.booleanValue() ? 0 : 16842824;
+        Boolean boolValueOf = Boolean.valueOf(useWearMaterial3Style(context));
+        sUseWearMaterial3Style = boolValueOf;
+        return boolValueOf.booleanValue() ? 0 : 16842824;
     }
 
     private static int getButtonDefaultStyleRes() {

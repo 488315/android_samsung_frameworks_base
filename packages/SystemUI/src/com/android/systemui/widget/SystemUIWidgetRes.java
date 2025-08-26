@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemUIWidgetRes {
     public static final SystemUIWidgetRes sInstance = new SystemUIWidgetRes();
@@ -25,8 +24,8 @@ public class SystemUIWidgetRes {
     }
 
     public final int getResIdByName(String str, String str2) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "#", str);
-        Integer num = (Integer) ((ArrayMap) this.mResIds).get(m);
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str2, "#", str);
+        Integer num = (Integer) ((ArrayMap) this.mResIds).get(strM);
         if (num != null) {
             return num.intValue();
         }
@@ -35,7 +34,7 @@ public class SystemUIWidgetRes {
             Log.e("SystemUIWidgetRes", "Invalid " + str);
             return identifier;
         }
-        ((ArrayMap) this.mResIds).put(m, Integer.valueOf(identifier));
+        ((ArrayMap) this.mResIds).put(strM, Integer.valueOf(identifier));
         return identifier;
     }
 }

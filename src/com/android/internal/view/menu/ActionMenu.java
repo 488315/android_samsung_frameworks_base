@@ -75,13 +75,13 @@ public class ActionMenu implements Menu {
     @Override // android.view.Menu
     public int addIntentOptions(int i, int i2, int i3, ComponentName componentName, Intent[] intentArr, Intent intent, int i4, MenuItem[] menuItemArr) {
         PackageManager packageManager = this.mContext.getPackageManager();
-        List<ResolveInfo> queryIntentActivityOptions = packageManager.queryIntentActivityOptions(componentName, intentArr, intent, 0);
-        int size = queryIntentActivityOptions != null ? queryIntentActivityOptions.size() : 0;
+        List<ResolveInfo> listQueryIntentActivityOptions = packageManager.queryIntentActivityOptions(componentName, intentArr, intent, 0);
+        int size = listQueryIntentActivityOptions != null ? listQueryIntentActivityOptions.size() : 0;
         if ((i4 & 1) == 0) {
             removeGroup(i);
         }
         for (int i5 = 0; i5 < size; i5++) {
-            ResolveInfo resolveInfo = queryIntentActivityOptions.get(i5);
+            ResolveInfo resolveInfo = listQueryIntentActivityOptions.get(i5);
             Intent intent2 = new Intent(resolveInfo.specificIndex < 0 ? intent : intentArr[resolveInfo.specificIndex]);
             intent2.setComponent(new ComponentName(resolveInfo.activityInfo.applicationInfo.packageName, resolveInfo.activityInfo.name));
             MenuItem intent3 = add(i, i2, i3, resolveInfo.loadLabel(packageManager)).setIcon(resolveInfo.loadIcon(packageManager)).setIntent(intent2);
@@ -158,20 +158,20 @@ public class ActionMenu implements Menu {
 
     @Override // android.view.Menu
     public boolean performIdentifierAction(int i, int i2) {
-        int findItemIndex = findItemIndex(i);
-        if (findItemIndex < 0) {
+        int iFindItemIndex = findItemIndex(i);
+        if (iFindItemIndex < 0) {
             return false;
         }
-        return this.mItems.get(findItemIndex).invoke();
+        return this.mItems.get(iFindItemIndex).invoke();
     }
 
     @Override // android.view.Menu
     public boolean performShortcut(int i, KeyEvent keyEvent, int i2) {
-        ActionMenuItem findItemWithShortcut = findItemWithShortcut(i, keyEvent);
-        if (findItemWithShortcut == null) {
+        ActionMenuItem actionMenuItemFindItemWithShortcut = findItemWithShortcut(i, keyEvent);
+        if (actionMenuItemFindItemWithShortcut == null) {
             return false;
         }
-        return findItemWithShortcut.invoke();
+        return actionMenuItemFindItemWithShortcut.invoke();
     }
 
     @Override // android.view.Menu

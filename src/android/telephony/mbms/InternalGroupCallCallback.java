@@ -20,7 +20,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallCallback.1
                 @Override // java.lang.Runnable
@@ -29,7 +29,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -38,7 +38,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallCallback.2
                 @Override // java.lang.Runnable
@@ -47,7 +47,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -56,7 +56,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallCallback.3
                 @Override // java.lang.Runnable
@@ -65,7 +65,7 @@ public class InternalGroupCallCallback extends IGroupCallCallback.Stub {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

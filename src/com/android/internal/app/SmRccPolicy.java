@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Slog;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -69,7 +70,7 @@ public final class SmRccPolicy {
         myHandler.post(new Runnable() { // from class: com.android.internal.app.SmRccPolicy$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SmRccPolicy.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
     }
@@ -91,7 +92,7 @@ public final class SmRccPolicy {
         }
 
         @Override // android.database.ContentObserver
-        public void onChange(boolean z, Uri uri) {
+        public void onChange(boolean z, Uri uri) throws UnsupportedEncodingException {
             if (uri == null) {
                 return;
             }
@@ -101,47 +102,47 @@ public final class SmRccPolicy {
             String queryParameter4 = uri.getQueryParameter("open");
             String queryParameter5 = uri.getQueryParameter(SmRccPolicy.RESTRICT);
             if (SmRccPolicy.ACTION_INSERT.equals(queryParameter2)) {
-                Message obtain = Message.obtain();
-                obtain.what = 20;
-                obtain.obj = new RccApp(queryParameter, queryParameter3, queryParameter4, queryParameter5);
-                SmRccPolicy.this.mHandler.sendMessage(obtain);
+                Message messageObtain = Message.obtain();
+                messageObtain.what = 20;
+                messageObtain.obj = new RccApp(queryParameter, queryParameter3, queryParameter4, queryParameter5);
+                SmRccPolicy.this.mHandler.sendMessage(messageObtain);
                 return;
             }
             if (SmRccPolicy.ACTION_DELETE.equals(queryParameter2)) {
-                Message obtain2 = Message.obtain();
-                obtain2.what = 30;
-                obtain2.obj = queryParameter;
-                SmRccPolicy.this.mHandler.sendMessage(obtain2);
+                Message messageObtain2 = Message.obtain();
+                messageObtain2.what = 30;
+                messageObtain2.obj = queryParameter;
+                SmRccPolicy.this.mHandler.sendMessage(messageObtain2);
                 return;
             }
             if (SmRccPolicy.ACTION_UPDATE_SHOW.equals(queryParameter2)) {
-                Message obtain3 = Message.obtain();
-                obtain3.what = 40;
-                obtain3.obj = queryParameter;
+                Message messageObtain3 = Message.obtain();
+                messageObtain3.what = 40;
+                messageObtain3.obj = queryParameter;
                 if (!TextUtils.isEmpty(queryParameter3)) {
-                    obtain3.arg1 = Integer.parseInt(queryParameter3);
+                    messageObtain3.arg1 = Integer.parseInt(queryParameter3);
                 }
-                SmRccPolicy.this.mHandler.sendMessage(obtain3);
+                SmRccPolicy.this.mHandler.sendMessage(messageObtain3);
                 return;
             }
             if (SmRccPolicy.ACTION_UPDATE_OPEN.equals(queryParameter2)) {
-                Message obtain4 = Message.obtain();
-                obtain4.what = 50;
-                obtain4.obj = queryParameter;
+                Message messageObtain4 = Message.obtain();
+                messageObtain4.what = 50;
+                messageObtain4.obj = queryParameter;
                 if (!TextUtils.isEmpty(queryParameter4)) {
-                    obtain4.arg1 = Integer.parseInt(queryParameter4);
+                    messageObtain4.arg1 = Integer.parseInt(queryParameter4);
                 }
-                SmRccPolicy.this.mHandler.sendMessage(obtain4);
+                SmRccPolicy.this.mHandler.sendMessage(messageObtain4);
                 return;
             }
             if (SmRccPolicy.ACTION_UPDATE_RESTRICT.equals(queryParameter2)) {
-                Message obtain5 = Message.obtain();
-                obtain5.what = 60;
-                obtain5.obj = queryParameter;
+                Message messageObtain5 = Message.obtain();
+                messageObtain5.what = 60;
+                messageObtain5.obj = queryParameter;
                 if (!TextUtils.isEmpty(queryParameter5)) {
-                    obtain5.arg1 = Integer.parseInt(queryParameter5);
+                    messageObtain5.arg1 = Integer.parseInt(queryParameter5);
                 }
-                SmRccPolicy.this.mHandler.sendMessage(obtain5);
+                SmRccPolicy.this.mHandler.sendMessage(messageObtain5);
             }
         }
     }
@@ -188,21 +189,21 @@ public final class SmRccPolicy {
         Slog.i(TAG, "loadRccAppFromSm: ");
         mRccPkgMap.clear();
         try {
-            Cursor query = this.mContext.getContentResolver().query(RCC_APP_CONTENT_URI, null, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = this.mContext.getContentResolver().query(RCC_APP_CONTENT_URI, null, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (!query.isClosed()) {
-                        while (query.moveToNext()) {
-                            String string = query.getString(query.getColumnIndex("package_name"));
-                            mRccPkgMap.put(string, new RccApp(string, query.getString(query.getColumnIndex("show")), query.getString(query.getColumnIndex("open")), query.getString(query.getColumnIndex(RESTRICT))));
+                    if (!cursorQuery.isClosed()) {
+                        while (cursorQuery.moveToNext()) {
+                            String string = cursorQuery.getString(cursorQuery.getColumnIndex("package_name"));
+                            mRccPkgMap.put(string, new RccApp(string, cursorQuery.getString(cursorQuery.getColumnIndex("show")), cursorQuery.getString(cursorQuery.getColumnIndex("open")), cursorQuery.getString(cursorQuery.getColumnIndex(RESTRICT))));
                             Slog.i(TAG, "put=" + string);
                         }
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
         } catch (Exception e) {
             Slog.e(TAG, "loadRccAppFromSm error", e);
@@ -271,10 +272,10 @@ public final class SmRccPolicy {
     }
 
     public void resetSmRccOpen(String str) {
-        Message obtain = Message.obtain();
-        obtain.what = 70;
-        obtain.obj = str;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 70;
+        messageObtain.obj = str;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     /* JADX INFO: Access modifiers changed from: private */

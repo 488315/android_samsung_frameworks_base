@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CameraQuickAffordanceConfig$isLaunchable$2 extends SuspendLambda implements Function2 {
     int label;
@@ -31,7 +30,11 @@ final class CameraQuickAffordanceConfig$isLaunchable$2 extends SuspendLambda imp
         return ((CameraQuickAffordanceConfig$isLaunchable$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0032  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         boolean z;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -42,12 +45,8 @@ final class CameraQuickAffordanceConfig$isLaunchable$2 extends SuspendLambda imp
         CameraQuickAffordanceConfig cameraQuickAffordanceConfig = this.this$0;
         if (!cameraQuickAffordanceConfig.devicePolicyManager.getCameraDisabled(null, ((UserTrackerImpl) cameraQuickAffordanceConfig.userTracker).getUserId())) {
             CameraQuickAffordanceConfig cameraQuickAffordanceConfig2 = this.this$0;
-            if ((cameraQuickAffordanceConfig2.devicePolicyManager.getKeyguardDisabledFeatures(null, ((UserTrackerImpl) cameraQuickAffordanceConfig2.userTracker).getUserId()) & 2) == 0) {
-                z = true;
-                return Boolean.valueOf(z);
-            }
+            z = (cameraQuickAffordanceConfig2.devicePolicyManager.getKeyguardDisabledFeatures(null, ((UserTrackerImpl) cameraQuickAffordanceConfig2.userTracker).getUserId()) & 2) == 0;
         }
-        z = false;
         return Boolean.valueOf(z);
     }
 }

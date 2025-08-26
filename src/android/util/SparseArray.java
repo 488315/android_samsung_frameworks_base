@@ -22,15 +22,15 @@ public class SparseArray<E> implements Cloneable {
             this.mKeys = EmptyArray.INT;
             this.mValues = EmptyArray.OBJECT;
         } else {
-            Object[] newUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(i);
-            this.mValues = newUnpaddedObjectArray;
-            this.mKeys = new int[newUnpaddedObjectArray.length];
+            Object[] objArrNewUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(i);
+            this.mValues = objArrNewUnpaddedObjectArray;
+            this.mKeys = new int[objArrNewUnpaddedObjectArray.length];
         }
         this.mSize = 0;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SparseArray<E> m5529clone() {
+    public SparseArray<E> m5536clone() {
         try {
             SparseArray<E> sparseArray = (SparseArray) super.clone();
             try {
@@ -55,35 +55,35 @@ public class SparseArray<E> implements Cloneable {
 
     public E get(int i, E e) {
         E e2;
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        return (binarySearch < 0 || (e2 = (E) this.mValues[binarySearch]) == DELETED) ? e : e2;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        return (iBinarySearch < 0 || (e2 = (E) this.mValues[iBinarySearch]) == DELETED) ? e : e2;
     }
 
     public void delete(int i) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
             Object[] objArr = this.mValues;
-            Object obj = objArr[binarySearch];
+            Object obj = objArr[iBinarySearch];
             Object obj2 = DELETED;
             if (obj != obj2) {
-                objArr[binarySearch] = obj2;
+                objArr[iBinarySearch] = obj2;
                 this.mGarbage = true;
             }
         }
     }
 
     public E removeReturnOld(int i) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch < 0) {
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch < 0) {
             return null;
         }
         Object[] objArr = this.mValues;
-        E e = (E) objArr[binarySearch];
+        E e = (E) objArr[iBinarySearch];
         Object obj = DELETED;
         if (e == obj) {
             return null;
         }
-        objArr[binarySearch] = obj;
+        objArr[iBinarySearch] = obj;
         this.mGarbage = true;
         return e;
     }
@@ -106,8 +106,8 @@ public class SparseArray<E> implements Cloneable {
     }
 
     public void removeAtRange(int i, int i2) {
-        int min = Math.min(this.mSize, i2 + i);
-        while (i < min) {
+        int iMin = Math.min(this.mSize, i2 + i);
+        while (i < iMin) {
             removeAt(i);
             i++;
         }
@@ -138,12 +138,12 @@ public class SparseArray<E> implements Cloneable {
     }
 
     public void put(int i, E e) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = e;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = e;
             return;
         }
-        int i2 = ~binarySearch;
+        int i2 = ~iBinarySearch;
         int i3 = this.mSize;
         if (i2 < i3) {
             Object[] objArr = this.mValues;
@@ -272,9 +272,9 @@ public class SparseArray<E> implements Cloneable {
             }
             sb.append(keyAt(i));
             sb.append('=');
-            E valueAt = valueAt(i);
-            if (valueAt != this) {
-                sb.append(valueAt);
+            E eValueAt = valueAt(i);
+            if (eValueAt != this) {
+                sb.append(eValueAt);
             } else {
                 sb.append("(this Map)");
             }
@@ -298,10 +298,10 @@ public class SparseArray<E> implements Cloneable {
 
     public int contentHashCode() {
         int size = size();
-        int i = 0;
-        for (int i2 = 0; i2 < size; i2++) {
-            i = (((i * 31) + this.mKeys[i2]) * 31) + Objects.hashCode(this.mValues[i2]);
+        int iHashCode = 0;
+        for (int i = 0; i < size; i++) {
+            iHashCode = (((iHashCode * 31) + this.mKeys[i]) * 31) + Objects.hashCode(this.mValues[i]);
         }
-        return i;
+        return iHashCode;
     }
 }

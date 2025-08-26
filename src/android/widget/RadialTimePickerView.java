@@ -202,17 +202,17 @@ public class RadialTimePickerView extends View {
         this.mOuterHours24Texts = new String[12];
         this.mInnerHours24Texts = new String[12];
         this.mMinutesTexts = new String[12];
-        Paint[] paintArr = {r13, r13};
+        Paint[] paintArr = {paint, paint};
         this.mPaint = paintArr;
         Paint paint = new Paint();
         this.mPaintCenter = paint;
-        Paint[] paintArr2 = {r13, r13, r13};
+        Paint[] paintArr2 = {paint, paint, paint};
         this.mPaintSelector = paintArr2;
         Paint paint2 = new Paint();
         this.mPaintBackground = paint2;
         this.mTextColor = new ColorStateList[3];
-        this.mTextSize = new int[]{r13.getDimensionPixelSize(R.dimen.timepicker_text_size_normal), r13.getDimensionPixelSize(R.dimen.timepicker_text_size_normal), r13.getDimensionPixelSize(R.dimen.timepicker_text_size_inner)};
-        this.mTextInset = new int[]{r13.getDimensionPixelSize(R.dimen.timepicker_text_inset_normal), r13.getDimensionPixelSize(R.dimen.timepicker_text_inset_normal), r13.getDimensionPixelSize(R.dimen.timepicker_text_inset_inner)};
+        this.mTextSize = new int[]{resources.getDimensionPixelSize(R.dimen.timepicker_text_size_normal), resources.getDimensionPixelSize(R.dimen.timepicker_text_size_normal), resources.getDimensionPixelSize(R.dimen.timepicker_text_size_inner)};
+        this.mTextInset = new int[]{resources.getDimensionPixelSize(R.dimen.timepicker_text_inset_normal), resources.getDimensionPixelSize(R.dimen.timepicker_text_inset_normal), resources.getDimensionPixelSize(R.dimen.timepicker_text_inset_inner)};
         this.mOuterTextX = (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 12);
         this.mOuterTextY = (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 12);
         this.mInnerTextX = new float[12];
@@ -268,10 +268,10 @@ public class RadialTimePickerView extends View {
 
     void applyAttributes(AttributeSet attributeSet, int i, int i2) {
         Context context = getContext();
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TimePicker, attributeSet, obtainStyledAttributes, i, i2);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(3);
-        ColorStateList colorStateList2 = obtainStyledAttributes.getColorStateList(9);
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TimePicker, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(3);
+        ColorStateList colorStateList2 = typedArrayObtainStyledAttributes.getColorStateList(9);
         ColorStateList[] colorStateListArr = this.mTextColor;
         if (colorStateList == null) {
             colorStateList = ColorStateList.valueOf(-65281);
@@ -284,14 +284,14 @@ public class RadialTimePickerView extends View {
         colorStateListArr2[2] = colorStateList2;
         ColorStateList[] colorStateListArr3 = this.mTextColor;
         colorStateListArr3[1] = colorStateListArr3[0];
-        ColorStateList colorStateList3 = obtainStyledAttributes.getColorStateList(5);
+        ColorStateList colorStateList3 = typedArrayObtainStyledAttributes.getColorStateList(5);
         int colorForState = colorStateList3 != null ? colorStateList3.getColorForState(StateSet.get(40), 0) : -65281;
         this.mPaintCenter.setColor(colorForState);
         int[] iArr = StateSet.get(40);
         this.mSelectorColor = colorForState;
         this.mSelectorDotColor = this.mTextColor[0].getColorForState(iArr, 0);
-        this.mPaintBackground.setColor(obtainStyledAttributes.getColor(4, context.getColor(R.color.timepicker_default_numbers_background_color_material)));
-        obtainStyledAttributes.recycle();
+        this.mPaintBackground.setColor(typedArrayObtainStyledAttributes.getColor(4, context.getColor(R.color.timepicker_default_numbers_background_color_material)));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void initialize(int i, int i2, boolean z) {
@@ -455,15 +455,15 @@ public class RadialTimePickerView extends View {
             this.mXCenter = getWidth() / 2;
             int height = getHeight() / 2;
             this.mYCenter = height;
-            int min = Math.min(this.mXCenter, height);
-            this.mCircleRadius = min;
+            int iMin = Math.min(this.mXCenter, height);
+            this.mCircleRadius = iMin;
             int[] iArr = this.mTextInset;
             int i5 = iArr[2];
             int i6 = this.mSelectorRadius;
-            this.mMinDistForInnerNumber = (min - i5) - i6;
+            this.mMinDistForInnerNumber = (iMin - i5) - i6;
             int i7 = iArr[0];
-            this.mMaxDistForOuterNumber = (min - i7) + i6;
-            this.mHalfwayDist = min - ((i7 + i5) / 2);
+            this.mMaxDistForOuterNumber = (iMin - i7) + i6;
+            this.mHalfwayDist = iMin - ((i7 + i5) / 2);
             calculatePositionsHours();
             calculatePositionsMinutes();
             this.mTouchHelper.invalidateRoot();
@@ -512,9 +512,9 @@ public class RadialTimePickerView extends View {
             this.mHoursToMinutesAnimator = null;
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, this.HOURS_TO_MINUTES, f);
-        this.mHoursToMinutesAnimator = ofFloat;
-        ofFloat.setAutoCancel(true);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, this.HOURS_TO_MINUTES, f);
+        this.mHoursToMinutesAnimator = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.setAutoCancel(true);
         this.mHoursToMinutesAnimator.setDuration(j);
         this.mHoursToMinutesAnimator.start();
     }
@@ -582,32 +582,32 @@ public class RadialTimePickerView extends View {
         int i3 = iArr[1];
         float f2 = iArr2[1] % 30 == 0 ? 0.0f : 1.0f;
         int i4 = this.mSelectorRadius;
-        float lerp = this.mCircleRadius - MathUtils.lerp(i2, i3, this.mHoursToMinutes);
+        float fLerp = this.mCircleRadius - MathUtils.lerp(i2, i3, this.mHoursToMinutes);
         double radians = Math.toRadians(MathUtils.lerpDeg(r3, r8, this.mHoursToMinutes));
-        float sin = this.mXCenter + (((float) Math.sin(radians)) * lerp);
-        float cos = this.mYCenter - (((float) Math.cos(radians)) * lerp);
+        float fSin = this.mXCenter + (((float) Math.sin(radians)) * fLerp);
+        float fCos = this.mYCenter - (((float) Math.cos(radians)) * fLerp);
         Paint paint = this.mPaintSelector[0];
         paint.setColor(this.mSelectorColor);
         float f3 = i4;
-        canvas.drawCircle(sin, cos, f3, paint);
+        canvas.drawCircle(fSin, fCos, f3, paint);
         if (path != null) {
             path.reset();
-            path.addCircle(sin, cos, f3, Path.Direction.CCW);
+            path.addCircle(fSin, fCos, f3, Path.Direction.CCW);
         }
-        float lerp2 = MathUtils.lerp(f, f2, this.mHoursToMinutes);
-        if (lerp2 > 0.0f) {
+        float fLerp2 = MathUtils.lerp(f, f2, this.mHoursToMinutes);
+        if (fLerp2 > 0.0f) {
             Paint paint2 = this.mPaintSelector[1];
             paint2.setColor(this.mSelectorDotColor);
-            canvas.drawCircle(sin, cos, this.mSelectorDotRadius * lerp2, paint2);
+            canvas.drawCircle(fSin, fCos, this.mSelectorDotRadius * fLerp2, paint2);
         }
-        double sin2 = Math.sin(radians);
-        double cos2 = Math.cos(radians);
+        double dSin = Math.sin(radians);
+        double dCos = Math.cos(radians);
         int i5 = this.mXCenter;
-        float f4 = (this.mYCenter - ((int) (this.mCenterDotRadius * cos2))) - ((int) ((lerp - f3) * cos2));
+        float f4 = (this.mYCenter - ((int) (this.mCenterDotRadius * dCos))) - ((int) ((fLerp - f3) * dCos));
         Paint paint3 = this.mPaintSelector[2];
         paint3.setColor(this.mSelectorColor);
         paint3.setStrokeWidth(this.mSelectorStroke);
-        canvas.drawLine(this.mXCenter, this.mYCenter, i5 + ((int) (r7 * sin2)) + ((int) (sin2 * r9)), f4, paint3);
+        canvas.drawLine(this.mXCenter, this.mYCenter, i5 + ((int) (r7 * dSin)) + ((int) (dSin * r9)), f4, paint3);
     }
 
     private void calculatePositionsHours() {
@@ -623,10 +623,10 @@ public class RadialTimePickerView extends View {
 
     private static void calculatePositions(Paint paint, float f, float f2, float f3, float f4, float[] fArr, float[] fArr2) {
         paint.setTextSize(f4);
-        float descent = f3 - ((paint.descent() + paint.ascent()) / 2.0f);
+        float fDescent = f3 - ((paint.descent() + paint.ascent()) / 2.0f);
         for (int i = 0; i < 12; i++) {
             fArr[i] = f2 - (COS_30[i] * f);
-            fArr2[i] = descent - (SIN_30[i] * f);
+            fArr2[i] = fDescent - (SIN_30[i] * f);
         }
     }
 
@@ -635,10 +635,10 @@ public class RadialTimePickerView extends View {
         paint.setTypeface(typeface);
         float f2 = i2 / 30.0f;
         int i3 = (int) f2;
-        int ceil = ((int) Math.ceil(f2)) % 12;
+        int iCeil = ((int) Math.ceil(f2)) % 12;
         int i4 = 0;
         while (i4 < 12) {
-            boolean z3 = i3 == i4 || ceil == i4;
+            boolean z3 = i3 == i4 || iCeil == i4;
             if (!z2 || z3) {
                 int colorForState = colorStateList.getColorForState(StateSet.get(((z && z3) ? 32 : 0) | 8), 0);
                 paint.setColor(colorForState);
@@ -665,11 +665,11 @@ public class RadialTimePickerView extends View {
         }
         double d = f - this.mXCenter;
         double d2 = f2 - this.mYCenter;
-        double sqrt = Math.sqrt((d * d) + (d2 * d2));
-        if (sqrt < i2) {
+        double dSqrt = Math.sqrt((d * d) + (d2 * d2));
+        if (dSqrt < i2) {
             return -1;
         }
-        if (z && sqrt > i) {
+        if (z && dSqrt > i) {
             return -1;
         }
         int degrees = (int) (Math.toDegrees(Math.atan2(d2, d) + 1.5707963267948966d) + 0.5d);
@@ -699,12 +699,14 @@ public class RadialTimePickerView extends View {
             boolean z2 = false;
             if (actionMasked == 0) {
                 this.mChangedDuringTouch = false;
-            } else if (actionMasked == 1) {
-                if (this.mChangedDuringTouch) {
-                    z = true;
-                } else {
-                    z = true;
-                    z2 = true;
+            } else {
+                if (actionMasked == 1) {
+                    if (this.mChangedDuringTouch) {
+                        z = true;
+                    } else {
+                        z = true;
+                        z2 = true;
+                    }
                 }
                 this.mChangedDuringTouch = handleTouchInput(motionEvent.getX(), motionEvent.getY(), z2, z) | this.mChangedDuringTouch;
             }
@@ -725,17 +727,17 @@ public class RadialTimePickerView extends View {
         }
         animatePicker(this.mShowHours, 60L);
         if (this.mShowHours) {
-            int snapOnly30s = snapOnly30s(degreesFromXY, 0) % 360;
-            z3 = (this.mIsOnInnerCircle == innerCircleFromXY && this.mSelectionDegrees[0] == snapOnly30s) ? false : true;
+            int iSnapOnly30s = snapOnly30s(degreesFromXY, 0) % 360;
+            z3 = (this.mIsOnInnerCircle == innerCircleFromXY && this.mSelectionDegrees[0] == iSnapOnly30s) ? false : true;
             this.mIsOnInnerCircle = innerCircleFromXY;
-            this.mSelectionDegrees[0] = snapOnly30s;
+            this.mSelectionDegrees[0] = iSnapOnly30s;
             currentMinute = getCurrentHour();
             i = 0;
         } else {
-            int snapPrefer30s = snapPrefer30s(degreesFromXY) % 360;
+            int iSnapPrefer30s = snapPrefer30s(degreesFromXY) % 360;
             int[] iArr = this.mSelectionDegrees;
-            boolean z4 = iArr[1] != snapPrefer30s;
-            iArr[1] = snapPrefer30s;
+            boolean z4 = iArr[1] != iSnapPrefer30s;
+            iArr[1] = iSnapPrefer30s;
             currentMinute = getCurrentMinute();
             z3 = z4;
             i = 1;
@@ -872,11 +874,11 @@ public class RadialTimePickerView extends View {
                 currentMinute = RadialTimePickerView.this.getCurrentMinute() / 5;
                 i3 = 55;
             }
-            int constrain = MathUtils.constrain((currentMinute + i) * i2, i4, i3);
+            int iConstrain = MathUtils.constrain((currentMinute + i) * i2, i4, i3);
             if (RadialTimePickerView.this.mShowHours) {
-                RadialTimePickerView.this.setCurrentHour(constrain);
+                RadialTimePickerView.this.setCurrentHour(iConstrain);
             } else {
-                RadialTimePickerView.this.setCurrentMinute(constrain);
+                RadialTimePickerView.this.setCurrentMinute(iConstrain);
             }
         }
 
@@ -886,9 +888,9 @@ public class RadialTimePickerView extends View {
             if (degreesFromXY == -1) {
                 return Integer.MIN_VALUE;
             }
-            int snapOnly30s = RadialTimePickerView.snapOnly30s(degreesFromXY, 0) % 360;
+            int iSnapOnly30s = RadialTimePickerView.snapOnly30s(degreesFromXY, 0) % 360;
             if (RadialTimePickerView.this.mShowHours) {
-                int hourForDegrees = RadialTimePickerView.this.getHourForDegrees(snapOnly30s, RadialTimePickerView.this.getInnerCircleFromXY(f, f2));
+                int hourForDegrees = RadialTimePickerView.this.getHourForDegrees(iSnapOnly30s, RadialTimePickerView.this.getInnerCircleFromXY(f, f2));
                 if (!RadialTimePickerView.this.mIs24HourMode) {
                     hourForDegrees = hour24To12(hourForDegrees);
                 }
@@ -896,7 +898,7 @@ public class RadialTimePickerView extends View {
             }
             int currentMinute = RadialTimePickerView.this.getCurrentMinute();
             int minuteForDegrees = RadialTimePickerView.this.getMinuteForDegrees(degreesFromXY);
-            int minuteForDegrees2 = RadialTimePickerView.this.getMinuteForDegrees(snapOnly30s);
+            int minuteForDegrees2 = RadialTimePickerView.this.getMinuteForDegrees(iSnapOnly30s);
             if (getCircularDiff(currentMinute, minuteForDegrees, 60) >= getCircularDiff(minuteForDegrees2, minuteForDegrees, 60)) {
                 currentMinute = minuteForDegrees2;
             }
@@ -904,8 +906,8 @@ public class RadialTimePickerView extends View {
         }
 
         private int getCircularDiff(int i, int i2, int i3) {
-            int abs = Math.abs(i - i2);
-            return abs > i3 / 2 ? i3 - abs : abs;
+            int iAbs = Math.abs(i - i2);
+            return iAbs > i3 / 2 ? i3 - iAbs : iAbs;
         }
 
         @Override // com.android.internal.widget.ExploreByTouchHelper
@@ -993,8 +995,8 @@ public class RadialTimePickerView extends View {
 
         private void getBoundsForVirtualView(int i, Rect rect) {
             float f;
+            float degreesForMinute;
             float f2;
-            float f3;
             int i2;
             int typeFromId = getTypeFromId(i);
             int valueFromId = getValueFromId(i);
@@ -1006,21 +1008,21 @@ public class RadialTimePickerView extends View {
                     f = RadialTimePickerView.this.mCircleRadius - RadialTimePickerView.this.mTextInset[0];
                     i2 = RadialTimePickerView.this.mSelectorRadius;
                 }
-                f3 = i2;
-                f2 = RadialTimePickerView.this.getDegreesForHour(valueFromId);
+                f2 = i2;
+                degreesForMinute = RadialTimePickerView.this.getDegreesForHour(valueFromId);
             } else if (typeFromId == 2) {
                 f = RadialTimePickerView.this.mCircleRadius - RadialTimePickerView.this.mTextInset[1];
-                f2 = RadialTimePickerView.this.getDegreesForMinute(valueFromId);
-                f3 = RadialTimePickerView.this.mSelectorRadius;
+                degreesForMinute = RadialTimePickerView.this.getDegreesForMinute(valueFromId);
+                f2 = RadialTimePickerView.this.mSelectorRadius;
             } else {
                 f = 0.0f;
+                degreesForMinute = 0.0f;
                 f2 = 0.0f;
-                f3 = 0.0f;
             }
-            double radians = Math.toRadians(f2);
-            float sin = RadialTimePickerView.this.mXCenter + (((float) Math.sin(radians)) * f);
-            float cos = RadialTimePickerView.this.mYCenter - (f * ((float) Math.cos(radians)));
-            rect.set((int) (sin - f3), (int) (cos - f3), (int) (sin + f3), (int) (cos + f3));
+            double radians = Math.toRadians(degreesForMinute);
+            float fSin = RadialTimePickerView.this.mXCenter + (((float) Math.sin(radians)) * f);
+            float fCos = RadialTimePickerView.this.mYCenter - (f * ((float) Math.cos(radians)));
+            rect.set((int) (fSin - f2), (int) (fCos - f2), (int) (fSin + f2), (int) (fCos + f2));
         }
 
         private CharSequence getVirtualViewDescription(int i, int i2) {

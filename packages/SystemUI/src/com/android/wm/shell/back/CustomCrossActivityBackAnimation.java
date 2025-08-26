@@ -19,7 +19,6 @@ import com.android.wm.shell.back.CrossActivityBackAnimation;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CustomCrossActivityBackAnimation extends CrossActivityBackAnimation {
     public Animation closeAnimation;
@@ -27,14 +26,12 @@ public final class CustomCrossActivityBackAnimation extends CrossActivityBackAni
     public Animation enterAnimation;
     public final Transformation transformation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationLoadResult {
         public int backgroundColor;
         public Animation closeAnimation;
         public Animation enterAnimation;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -123,7 +120,7 @@ public final class CustomCrossActivityBackAnimation extends CrossActivityBackAni
         float f2 = this.gestureProgress * 0.2f;
         Animation animation3 = this.enterAnimation;
         animation3.getClass();
-        float lerp = MathUtils.lerp(f2, 1.0f, getPostCommitProgress(animation3, f));
+        float fLerp = MathUtils.lerp(f2, 1.0f, getPostCommitProgress(animation3, f));
         RemoteAnimationTarget remoteAnimationTarget2 = this.enteringTarget;
         remoteAnimationTarget2.getClass();
         SurfaceControl surfaceControl2 = remoteAnimationTarget2.leash;
@@ -132,14 +129,14 @@ public final class CustomCrossActivityBackAnimation extends CrossActivityBackAni
         animation4.getClass();
         CrossActivityBackAnimation.FlingMode flingMode2 = CrossActivityBackAnimation.FlingMode.NO_FLING;
         this.transformation.clear();
-        animation4.getTransformationAt(lerp, this.transformation);
+        animation4.getTransformationAt(fLerp, this.transformation);
         applyTransform(surfaceControl2, rectF2, this.transformation.getAlpha(), this.transformation, flingMode2);
         applyTransaction();
     }
 
     @Override // com.android.wm.shell.back.CrossActivityBackAnimation, com.android.wm.shell.back.ShellBackAnimation
     public final boolean prepareNextAnimation(BackNavigationInfo.CustomAnimationInfo customAnimationInfo, int i) {
-        Animation loadAnimation;
+        Animation animationLoadAnimation;
         this.letterboxColor = i;
         if (customAnimationInfo == null) {
             return false;
@@ -147,11 +144,11 @@ public final class CustomCrossActivityBackAnimation extends CrossActivityBackAni
         CustomAnimationLoader customAnimationLoader = this.customAnimationLoader;
         customAnimationLoader.getClass();
         AnimationLoadResult animationLoadResult = null;
-        if (customAnimationInfo.getPackageName().length() != 0 && (loadAnimation = customAnimationLoader.loadAnimation(customAnimationInfo, false)) != null) {
-            Animation loadAnimation2 = customAnimationLoader.loadAnimation(customAnimationInfo, true);
+        if (customAnimationInfo.getPackageName().length() != 0 && (animationLoadAnimation = customAnimationLoader.loadAnimation(customAnimationInfo, false)) != null) {
+            Animation animationLoadAnimation2 = customAnimationLoader.loadAnimation(customAnimationInfo, true);
             animationLoadResult = new AnimationLoadResult();
-            animationLoadResult.closeAnimation = loadAnimation;
-            animationLoadResult.enterAnimation = loadAnimation2;
+            animationLoadResult.closeAnimation = animationLoadAnimation;
+            animationLoadResult.enterAnimation = animationLoadAnimation2;
             animationLoadResult.backgroundColor = customAnimationInfo.getCustomBackground();
         }
         if (animationLoadResult == null) {
@@ -189,17 +186,17 @@ public final class CustomCrossActivityBackAnimation extends CrossActivityBackAni
         }
         remoteAnimationTarget.getClass();
         Rect rect = remoteAnimationTarget.localBounds;
-        int width = rect.width();
-        int height = rect.height();
-        animation.initialize(width, height, width, height);
+        int iWidth = rect.width();
+        int iHeight = rect.height();
+        animation.initialize(iWidth, iHeight, iWidth, iHeight);
         Animation animation2 = this.enterAnimation;
         animation2.getClass();
         RemoteAnimationTarget remoteAnimationTarget2 = this.enteringTarget;
         remoteAnimationTarget2.getClass();
         Rect rect2 = remoteAnimationTarget2.localBounds;
-        int width2 = rect2.width();
-        int height2 = rect2.height();
-        animation2.initialize(width2, height2, width2, height2);
+        int iWidth2 = rect2.width();
+        int iHeight2 = rect2.height();
+        animation2.initialize(iWidth2, iHeight2, iWidth2, iHeight2);
     }
 
     public CustomCrossActivityBackAnimation(Context context, BackAnimationBackground backAnimationBackground, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, Handler handler) {

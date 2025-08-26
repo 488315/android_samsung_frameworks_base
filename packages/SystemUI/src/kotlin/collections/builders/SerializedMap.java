@@ -2,6 +2,7 @@ package kotlin.collections.builders;
 
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import java.io.Externalizable;
+import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -9,13 +10,11 @@ import java.util.Map;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SerializedMap implements Externalizable {
     private static final long serialVersionUID = 0;
     private Map<?, ?> map;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,24 +37,24 @@ final class SerializedMap implements Externalizable {
     }
 
     @Override // java.io.Externalizable
-    public final void readExternal(ObjectInput objectInput) {
-        byte readByte = objectInput.readByte();
-        if (readByte != 0) {
-            throw new InvalidObjectException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(readByte, "Unsupported flags value: "));
+    public final void readExternal(ObjectInput objectInput) throws InvalidObjectException {
+        byte b = objectInput.readByte();
+        if (b != 0) {
+            throw new InvalidObjectException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(b, "Unsupported flags value: "));
         }
-        int readInt = objectInput.readInt();
-        if (readInt < 0) {
-            throw new InvalidObjectException("Illegal size value: " + readInt + '.');
+        int i = objectInput.readInt();
+        if (i < 0) {
+            throw new InvalidObjectException("Illegal size value: " + i + '.');
         }
-        MapBuilder mapBuilder = new MapBuilder(readInt);
-        for (int i = 0; i < readInt; i++) {
+        MapBuilder mapBuilder = new MapBuilder(i);
+        for (int i2 = 0; i2 < i; i2++) {
             mapBuilder.put(objectInput.readObject(), objectInput.readObject());
         }
         this.map = mapBuilder.build();
     }
 
     @Override // java.io.Externalizable
-    public final void writeExternal(ObjectOutput objectOutput) {
+    public final void writeExternal(ObjectOutput objectOutput) throws IOException {
         objectOutput.writeByte(0);
         objectOutput.writeInt(this.map.size());
         for (Map.Entry<?, ?> entry : this.map.entrySet()) {

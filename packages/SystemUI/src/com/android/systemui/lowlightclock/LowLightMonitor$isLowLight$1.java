@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LowLightMonitor$isLowLight$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,20 +49,20 @@ final class LowLightMonitor$isLowLight$1 extends SuspendLambda implements Functi
             Monitor.Subscription.Builder builder = new Monitor.Subscription.Builder(new Monitor.Callback() { // from class: com.android.systemui.lowlightclock.LowLightMonitor$isLowLight$1$token$1
                 @Override // com.android.systemui.shared.condition.Monitor.Callback
                 public final void onConditionsChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             });
             Set set = (Set) this.this$0.lowLightConditions.get();
             if (set != null) {
                 builder.mConditions.addAll(set);
             }
-            final Monitor.Subscription.Token addSubscription = monitor.addSubscription(builder.build(), monitor.mPreconditions);
+            final Monitor.Subscription.Token tokenAddSubscription = monitor.addSubscription(builder.build(), monitor.mPreconditions);
             final LowLightMonitor lowLightMonitor = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.lowlightclock.LowLightMonitor$isLowLight$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    Monitor monitor2 = LowLightMonitor.this.conditionsMonitor;
-                    monitor2.mExecutor.execute(new Monitor$$ExternalSyntheticLambda0(0, monitor2, addSubscription));
+                    Monitor monitor2 = lowLightMonitor.conditionsMonitor;
+                    monitor2.mExecutor.execute(new Monitor$$ExternalSyntheticLambda0(0, monitor2, tokenAddSubscription));
                     return Unit.INSTANCE;
                 }
             };

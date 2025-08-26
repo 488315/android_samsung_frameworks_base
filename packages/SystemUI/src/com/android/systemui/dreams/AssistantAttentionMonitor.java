@@ -6,7 +6,6 @@ import com.android.systemui.dreams.callbacks.AssistantAttentionCallback;
 import com.android.systemui.dreams.conditions.AssistantAttentionCondition;
 import com.android.systemui.shared.condition.Monitor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AssistantAttentionMonitor implements CoreStartable {
     public final AssistantAttentionCondition mAssistantAttentionCondition;
@@ -26,8 +25,8 @@ public class AssistantAttentionMonitor implements CoreStartable {
         }
         Monitor.Subscription.Builder builder = new Monitor.Subscription.Builder(this.mCallback);
         builder.mConditions.add(this.mAssistantAttentionCondition);
-        Monitor.Subscription build = builder.build();
+        Monitor.Subscription subscriptionBuild = builder.build();
         Monitor monitor = this.mConditionMonitor;
-        monitor.addSubscription(build, monitor.mPreconditions);
+        monitor.addSubscription(subscriptionBuild, monitor.mPreconditions);
     }
 }

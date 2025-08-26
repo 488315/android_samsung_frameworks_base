@@ -44,9 +44,9 @@ public interface IEnterMenuErrorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IEnterMenuErrorCallback");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEnterMenuErrorCallback)) {
-                return (IEnterMenuErrorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IEnterMenuErrorCallback");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEnterMenuErrorCallback)) {
+                return (IEnterMenuErrorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IEnterMenuErrorCallback extends IInterface {
 
             @Override // android.media.tv.extension.cam.IEnterMenuErrorCallback
             public void onAppInfoEnterMenuError() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IEnterMenuErrorCallback");
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IEnterMenuErrorCallback");
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

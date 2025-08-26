@@ -67,18 +67,18 @@ public final class InputChannel implements Parcelable {
             throw new IllegalArgumentException("name must not be null");
         }
         InputChannel[] inputChannelArr = new InputChannel[2];
-        long[] nativeOpenInputChannelPair = nativeOpenInputChannelPair(str);
+        long[] jArrNativeOpenInputChannelPair = nativeOpenInputChannelPair(str);
         for (int i = 0; i < 2; i++) {
             InputChannel inputChannel = new InputChannel();
             inputChannelArr[i] = inputChannel;
-            inputChannel.setNativeInputChannel(nativeOpenInputChannelPair[i]);
+            inputChannel.setNativeInputChannel(jArrNativeOpenInputChannelPair[i]);
         }
         return inputChannelArr;
     }
 
     public String getName() {
-        String nativeGetName = nativeGetName(this.mPtr);
-        return nativeGetName != null ? nativeGetName : "uninitialized";
+        String strNativeGetName = nativeGetName(this.mPtr);
+        return strNativeGetName != null ? strNativeGetName : "uninitialized";
     }
 
     public void dispose() {
@@ -105,9 +105,9 @@ public final class InputChannel implements Parcelable {
         if (parcel == null) {
             throw new IllegalArgumentException("in must not be null");
         }
-        long nativeReadFromParcel = nativeReadFromParcel(parcel);
-        if (nativeReadFromParcel != 0) {
-            setNativeInputChannel(nativeReadFromParcel);
+        long jNativeReadFromParcel = nativeReadFromParcel(parcel);
+        if (jNativeReadFromParcel != 0) {
+            setNativeInputChannel(jNativeReadFromParcel);
         }
     }
 

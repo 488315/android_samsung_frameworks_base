@@ -3,6 +3,7 @@ package android.view;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.CompatibilityInfo;
+import android.content.res.Resources;
 import android.graphics.BLASTBufferQueue;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
@@ -16,6 +17,7 @@ import android.graphics.Region;
 import android.graphics.RenderNode;
 import android.hardware.input.InputManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+import android.media.TtmlUtils;
 import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
@@ -163,7 +165,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$new$0() {
+    public /* synthetic */ boolean lambda$new$0() throws Throwable {
         this.mHaveFrame = getWidth() > 0 && getHeight() > 0;
         this.mUpdateSurfaceCalledBy = 8;
         updateSurface();
@@ -218,7 +220,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                 surfaceView.runOnUiThread(new Runnable() { // from class: android.view.SurfaceView$SurfaceControlViewHostParent$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceView.SurfaceControlViewHostParent.lambda$updateParams$0(SurfaceView.this);
+                        SurfaceView.SurfaceControlViewHostParent.lambda$updateParams$0(surfaceView);
                     }
                 });
             }
@@ -242,7 +244,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             surfaceView.runOnUiThread(new Runnable() { // from class: android.view.SurfaceView$SurfaceControlViewHostParent$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceView.SurfaceControlViewHostParent.lambda$forwardBackKeyToParent$1(SurfaceView.this, keyEvent);
+                    SurfaceView.SurfaceControlViewHostParent.lambda$forwardBackKeyToParent$1(surfaceView, keyEvent);
                 }
             });
         }
@@ -253,9 +255,9 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             if (!surfaceView.isAttachedToWindow() || keyEvent.getKeyCode() != 4 || (viewRootImpl = surfaceView.getViewRootImpl()) == null || (inputManager = (InputManager) surfaceView.mContext.getSystemService(InputManager.class)) == null) {
                 return;
             }
-            long uptimeMillis = SystemClock.uptimeMillis() - keyEvent.getEventTime();
-            if (uptimeMillis > SurfaceView.FORWARD_BACK_KEY_TOLERANCE_MS) {
-                Log.e(SurfaceView.TAG, "Ignore the input event that exceed the tolerance time, exceed " + uptimeMillis + "ms");
+            long jUptimeMillis = SystemClock.uptimeMillis() - keyEvent.getEventTime();
+            if (jUptimeMillis > SurfaceView.FORWARD_BACK_KEY_TOLERANCE_MS) {
+                Log.e(SurfaceView.TAG, "Ignore the input event that exceed the tolerance time, exceed " + jUptimeMillis + "ms");
                 return;
             }
             if (inputManager.verifyInputEvent(keyEvent) == null) {
@@ -306,16 +308,14 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         this.mSurfaceCreatedCount = 0;
         this.mScrollChangedListener = new ViewTreeObserver.OnScrollChangedListener() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnScrollChangedListener
-            public final void onScrollChanged() {
-                SurfaceView.this.updateSurface();
+            public final void onScrollChanged() throws Throwable {
+                this.f$0.updateSurface();
             }
         };
         this.mDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                boolean lambda$new$0;
-                lambda$new$0 = SurfaceView.this.lambda$new$0();
-                return lambda$new$0;
+                return this.f$0.lambda$new$0();
             }
         };
         this.mRequestedVisible = false;
@@ -369,7 +369,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         this.mRequestedVisible = this.mViewVisibility && this.mWindowVisibility && !this.mWindowStopped;
     }
 
-    private void setWindowStopped(boolean z) {
+    private void setWindowStopped(boolean z) throws Throwable {
         this.mWindowStopped = z;
         updateRequestedVisibility();
         this.mUpdateSurfaceCalledBy = 1;
@@ -380,17 +380,21 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         updateSurface();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x002d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void setTag() {
         String str;
         ViewRootImpl viewRootImpl = getViewRootImpl();
         if (viewRootImpl != null) {
-            String[] split = viewRootImpl.mWindowAttributes.getTitle().toString().split("\\.");
-            if (split.length > 0) {
-                str = " " + split[split.length - 1];
-                this.mTag = "SV[" + System.identityHashCode(this) + str + NavigationBarInflaterView.SIZE_MOD_END;
+            String[] strArrSplit = viewRootImpl.mWindowAttributes.getTitle().toString().split("\\.");
+            if (strArrSplit.length > 0) {
+                str = " " + strArrSplit[strArrSplit.length - 1];
+            } else {
+                str = "";
             }
         }
-        str = "";
         this.mTag = "SV[" + System.identityHashCode(this) + str + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
@@ -414,7 +418,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    protected void onWindowVisibilityChanged(int i) {
+    protected void onWindowVisibilityChanged(int i) throws Throwable {
         super.onWindowVisibilityChanged(i);
         this.mWindowVisibility = i == 0;
         updateRequestedVisibility();
@@ -427,7 +431,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    public void setVisibility(int i) {
+    public void setVisibility(int i) throws Throwable {
         super.setVisibility(i);
         boolean z = i == 0;
         this.mViewVisibility = z;
@@ -449,7 +453,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    protected boolean onSetAlpha(int i) {
+    protected boolean onSetAlpha(int i) throws Throwable {
         if (Math.round(this.mAlpha * 255.0f) == i) {
             return true;
         }
@@ -467,7 +471,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    protected void onDetachedFromWindow() {
+    protected void onDetachedFromWindow() throws Throwable {
         ViewRootImpl viewRootImpl = getViewRootImpl();
         if (viewRootImpl != null) {
             viewRootImpl.removeSurfaceChangedCallback(this);
@@ -511,7 +515,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    protected boolean setFrame(int i, int i2, int i3, int i4) {
+    protected boolean setFrame(int i, int i2, int i3, int i4) throws Throwable {
         boolean frame = super.setFrame(i, i2, i3, i4);
         this.mUpdateSurfaceCalledBy = 5;
         updateSurface();
@@ -520,12 +524,12 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
 
     @Override // android.view.View
     public boolean gatherTransparentRegion(Region region) {
-        boolean z;
+        boolean zGatherTransparentRegion;
         if (isAboveParent() || !this.mDrawFinished) {
             return super.gatherTransparentRegion(region);
         }
         if ((this.mPrivateFlags & 128) == 0) {
-            z = super.gatherTransparentRegion(region);
+            zGatherTransparentRegion = super.gatherTransparentRegion(region);
         } else {
             if (region != null) {
                 int width = getWidth();
@@ -538,12 +542,12 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                     region.op(i, i2, i + width, i2 + height, Region.Op.UNION);
                 }
             }
-            z = true;
+            zGatherTransparentRegion = true;
         }
         if (PixelFormat.formatHasAlpha(this.mRequestedFormat)) {
             return false;
         }
-        return z;
+        return zGatherTransparentRegion;
     }
 
     protected boolean gatherTransparentRegionWhenStartTaskView(Region region) {
@@ -624,7 +628,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return this.mCornerRadius;
     }
 
-    public void setCompositionOrder(int i) {
+    public void setCompositionOrder(int i) throws Throwable {
         this.mRequestedSubLayer = i;
         if (this.mSubLayer != i) {
             updateSurface();
@@ -641,7 +645,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Deprecated
-    public void setZOrderOnTop(boolean z) {
+    public void setZOrderOnTop(boolean z) throws Throwable {
         setZOrderedOnTop(z, getContext().getApplicationInfo().targetSdkVersion > 29);
     }
 
@@ -650,7 +654,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Deprecated
-    public boolean setZOrderedOnTop(boolean z, boolean z2) {
+    public boolean setZOrderedOnTop(boolean z, boolean z2) throws Throwable {
         int i = z ? 1 : -2;
         if (this.mRequestedSubLayer == i) {
             return false;
@@ -675,12 +679,12 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         }
     }
 
-    public void setSurfaceLifecycle(int i) {
+    public void setSurfaceLifecycle(int i) throws Throwable {
         this.mRequestedSurfaceLifecycleStrategy = i;
         updateSurface();
     }
 
-    public void setDesiredHdrHeadroom(float f) {
+    public void setDesiredHdrHeadroom(float f) throws Throwable {
         if (!Float.isFinite(f)) {
             throw new IllegalArgumentException("desiredHeadroom must be finite: " + f);
         }
@@ -865,22 +869,9 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         return this.mVisible || (!(this.mSurfaceLifecycleStrategy != 2) && this.mAttachedToWindow);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(33:86|(5:88|(1:90)(1:265)|91|(1:93)(1:264)|94)(1:266)|(3:259|(1:261)(1:263)|262)|104|105|(1:107)|108|(1:110)(2:254|(2:256|257))|(21:121|(1:252)(1:127)|128|(4:130|131|132|133)(1:251)|134|135|136|137|138|(1:140)(1:241)|(1:142)(1:240)|(1:239)(1:145)|146|(1:157)|158|(1:238)(13:162|163|(1:237)(7:168|169|(1:171)|172|(1:174)|175|176)|(2:185|(6:187|(1:189)|190|(1:192)|193|(1:195)(1:196)))|208|(7:210|211|212|213|214|215|216)(1:236)|217|(1:219)|220|(1:222)|223|224|(0))|197|198|(2:200|(1:202))|203|(2:205|206)(1:207))|253|(1:123)|252|128|(0)(0)|134|135|136|137|138|(0)(0)|(0)(0)|(0)|239|146|(1:157)|158|(1:160)|238|197|198|(0)|203|(0)(0)) */
-    /* JADX WARN: Code restructure failed: missing block: B:245:0x05a0, code lost:
-    
-        r0 = e;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0312  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x035d  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x0362  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x053a A[Catch: all -> 0x0577, TryCatch #2 {all -> 0x0577, blocks: (B:187:0x053a, B:189:0x053e, B:190:0x0556, B:192:0x0567, B:195:0x056f, B:196:0x0573, B:216:0x04a0, B:217:0x04b7, B:219:0x04e5, B:220:0x04e9, B:222:0x052a), top: B:215:0x04a0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x0584 A[Catch: Exception -> 0x05a0, TryCatch #0 {Exception -> 0x05a0, blocks: (B:198:0x057e, B:200:0x0584, B:202:0x0588, B:226:0x0591, B:228:0x0598, B:230:0x059c, B:231:0x059f), top: B:135:0x0354 }] */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x05b0  */
-    /* JADX WARN: Removed duplicated region for block: B:207:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:240:0x0364  */
-    /* JADX WARN: Removed duplicated region for block: B:241:0x035f  */
-    /* JADX WARN: Removed duplicated region for block: B:251:0x0340  */
+    /* JADX WARN: Removed duplicated region for block: B:269:0x05b0  */
+    /* JADX WARN: Removed duplicated region for block: B:288:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r1v0, types: [android.view.SurfaceView, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r1v1 */
     /* JADX WARN: Type inference failed for: r1v2 */
@@ -902,14 +893,347 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     /* JADX WARN: Type inference failed for: r6v16, types: [java.lang.StringBuilder] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void updateSurface() {
-        /*
-            Method dump skipped, instructions count: 1540
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.SurfaceView.updateSurface():void");
+    protected void updateSurface() throws Throwable {
+        boolean z;
+        boolean z2;
+        ?? r4;
+        ?? r2;
+        String str;
+        String str2;
+        SurfaceView surfaceView;
+        boolean z3;
+        boolean z4;
+        int i;
+        boolean z5;
+        boolean z6;
+        boolean z7;
+        boolean z8;
+        boolean z9;
+        int i2;
+        boolean z10;
+        SyncBufferTransactionCallback syncBufferTransactionCallback;
+        String str3;
+        String str4;
+        boolean z11;
+        boolean z12;
+        SurfaceHolder.Callback[] surfaceCallbacks;
+        String str5;
+        String str6;
+        ?? r1 = this;
+        if (!r1.mHaveFrame) {
+            if (DEBUG) {
+                Log.d(TAG, System.identityHashCode(r1) + " updateSurface: has no frame");
+                return;
+            }
+            return;
+        }
+        ViewRootImpl viewRootImpl = r1.getViewRootImpl();
+        if (viewRootImpl == null) {
+            return;
+        }
+        if (viewRootImpl.mSurface == null || !viewRootImpl.mSurface.isValid()) {
+            Log.d(r1.mTag, "updateSurface: surface is not valid");
+            r1.notifySurfaceDestroyed();
+            r1.releaseSurfaces(false);
+            return;
+        }
+        CompatibilityInfo.Translator translator = viewRootImpl.mTranslator;
+        if (translator != null) {
+            r1.mSurface.setCompatibilityTranslator(translator);
+        }
+        int width = r1.mRequestedWidth;
+        if (width <= 0) {
+            width = r1.getWidth();
+        }
+        int height = r1.mRequestedHeight;
+        if (height <= 0) {
+            height = r1.getHeight();
+        }
+        float alpha = r1.getAlpha();
+        boolean z13 = r1.mFormat != r1.mRequestedFormat;
+        boolean z14 = r1.mVisible != r1.mRequestedVisible;
+        boolean z15 = r1.mAlpha != alpha;
+        boolean zRequiresSurfaceControlCreation = r1.requiresSurfaceControlCreation(z13, z14);
+        boolean z16 = (r1.mSurfaceWidth == width && r1.mSurfaceHeight == height) ? false : true;
+        boolean z17 = r1.mWindowVisibility != r1.mLastWindowVisibility;
+        r1.getLocationInWindow(r1.mLocation);
+        int i3 = r1.mWindowSpaceLeft;
+        boolean z18 = z17;
+        int[] iArr = r1.mLocation;
+        boolean z19 = (i3 == iArr[0] && r1.mWindowSpaceTop == iArr[1]) ? false : true;
+        boolean z20 = (r1.getWidth() == r1.mScreenRect.width() && r1.getHeight() == r1.mScreenRect.height()) ? false : true;
+        boolean z21 = viewRootImpl.getBufferTransformHint() != r1.mTransformHint && r1.mRequestedVisible;
+        boolean z22 = r1.mSubLayer != r1.mRequestedSubLayer;
+        boolean z23 = r1.mSurfaceLifecycleStrategy != r1.mRequestedSurfaceLifecycleStrategy;
+        boolean z24 = r1.mHdrHeadroom != r1.mRequestedHdrHeadroom;
+        boolean zIsWindowOpaque = viewRootImpl.isWindowOpaque();
+        boolean z25 = r1.mIsWindowOpaque != zIsWindowOpaque;
+        if (z25) {
+            r1.mIsWindowOpaque = zIsWindowOpaque;
+        }
+        if (zRequiresSurfaceControlCreation || z13 || z16 || z14 || z15 || z18 || z19 || z20 || z21 || z22 || !r1.mAttachedToWindow || z23 || z24 || z25) {
+            boolean z26 = DEBUG;
+            if (z26) {
+                StringBuilder sb = new StringBuilder();
+                z2 = z26;
+                sb.append(System.identityHashCode(r1));
+                sb.append(" Changes: creating=");
+                sb.append(zRequiresSurfaceControlCreation);
+                sb.append(" format=");
+                sb.append(z13);
+                sb.append(" size=");
+                sb.append(z16);
+                sb.append(" visible=");
+                sb.append(z14);
+                sb.append(" alpha=");
+                sb.append(z15);
+                sb.append(" hint=");
+                sb.append(z21);
+                sb.append(" left=");
+                z = z21;
+                sb.append(r1.mWindowSpaceLeft != r1.mLocation[0]);
+                sb.append(" top=");
+                sb.append(r1.mWindowSpaceTop != r1.mLocation[1]);
+                sb.append(" z=");
+                sb.append(z22);
+                sb.append(" attached=");
+                sb.append(r1.mAttachedToWindow);
+                sb.append(" lifecycleStrategy=");
+                sb.append(z23);
+                Log.i(TAG, sb.toString());
+            } else {
+                z = z21;
+                z2 = z26;
+            }
+            if (zRequiresSurfaceControlCreation || z13 || z16 || z14 || z20 || z22 || !r1.mAttachedToWindow || z23) {
+                EventLog.writeEvent(60005, r1.mTag, Integer.valueOf(r1.mRequestedFormat), Integer.valueOf(width), Integer.valueOf(height), Integer.valueOf(r1.mRequestedSubLayer), r1.mRequestedWidth > 0 ? "setFixedSize" : TtmlUtils.TAG_LAYOUT, Integer.valueOf(r1.mAttachedToWindow ? 1 : 0), Integer.valueOf(r1.mRequestedSurfaceLifecycleStrategy), Integer.valueOf(r1.mRequestedVisible ? 1 : 0));
+            }
+            try {
+                r1.mVisible = r1.mRequestedVisible;
+                int[] iArr2 = r1.mLocation;
+                r1.mWindowSpaceLeft = iArr2[0];
+                r1.mWindowSpaceTop = iArr2[1];
+                r1.mSurfaceWidth = width;
+                r1.mSurfaceHeight = height;
+                r1.mFormat = r1.mRequestedFormat;
+                r1.mAlpha = alpha;
+                r1.mLastWindowVisibility = r1.mWindowVisibility;
+                r1.mTransformHint = viewRootImpl.getBufferTransformHint();
+                r1.mSubLayer = r1.mRequestedSubLayer;
+                int i4 = r1.mSurfaceLifecycleStrategy;
+                r1.mSurfaceLifecycleStrategy = r1.mRequestedSurfaceLifecycleStrategy;
+                r1.mHdrHeadroom = r1.mRequestedHdrHeadroom;
+                r1.mScreenRect.left = r1.mWindowSpaceLeft;
+                r1.mScreenRect.top = r1.mWindowSpaceTop;
+                r1.mScreenRect.right = r1.mWindowSpaceLeft + r1.getWidth();
+                r1.mScreenRect.bottom = r1.mWindowSpaceTop + r1.getHeight();
+                if (translator != null) {
+                    translator.translateRectInAppWindowToScreen(r1.mScreenRect);
+                }
+                ViewRootImpl viewRootImpl2 = viewRootImpl;
+                Rect rect = viewRootImpl2.mWindowAttributes.surfaceInsets;
+                r1.mScreenRect.offset(rect.left, rect.top);
+                boolean z27 = z15;
+                SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                if (zRequiresSurfaceControlCreation) {
+                    r1.updateOpaqueFlag();
+                    r1.createBlastSurfaceControls(viewRootImpl2, Integer.toHexString(System.identityHashCode(r1)) + " SurfaceView[" + viewRootImpl2.getTitle().toString() + "]@" + r1.mSurfaceCreatedCount, transaction);
+                } else if (r1.mSurfaceControl == null) {
+                    return;
+                }
+                boolean z28 = z16 || zRequiresSurfaceControlCreation || z || (r1.mVisible && !r1.mDrawFinished) || z27 || z22;
+                boolean z29 = z28 && viewRootImpl2.wasRelayoutRequested() && viewRootImpl2.isInWMSRequestedSync();
+                if (z29) {
+                    try {
+                        final SyncBufferTransactionCallback syncBufferTransactionCallback2 = new SyncBufferTransactionCallback();
+                        r1.mBlastBufferQueue.syncNextTransaction(false, new Consumer() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda4
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                syncBufferTransactionCallback2.onTransactionReady((SurfaceControl.Transaction) obj);
+                            }
+                        });
+                        z3 = z;
+                        r2 = viewRootImpl2;
+                        z4 = z28;
+                        i = width;
+                        r4 = zRequiresSurfaceControlCreation;
+                        z5 = z13;
+                        z6 = z22;
+                        z7 = z14;
+                        z8 = z24;
+                        z9 = z29;
+                        i2 = height;
+                        z10 = z16;
+                        syncBufferTransactionCallback = syncBufferTransactionCallback2;
+                    } catch (Exception e) {
+                        e = e;
+                        r1 = this;
+                        r4 = " h=";
+                        r2 = " w=";
+                        Log.e(TAG, "Exception configuring surface", e);
+                        surfaceView = r1;
+                        str2 = r2;
+                        str = r4;
+                        if (DEBUG) {
+                        }
+                    }
+                } else {
+                    z3 = z;
+                    z4 = z28;
+                    i = width;
+                    r4 = zRequiresSurfaceControlCreation;
+                    z5 = z13;
+                    z6 = z22;
+                    z7 = z14;
+                    z8 = z24;
+                    z9 = z29;
+                    i2 = height;
+                    z10 = z16;
+                    syncBufferTransactionCallback = null;
+                    r2 = viewRootImpl2;
+                }
+                r1 = this;
+                try {
+                    boolean zPerformSurfaceTransaction = r1.performSurfaceTransaction(r2, translator, r4, z10, z3, z6, z8, transaction);
+                    try {
+                        boolean z30 = r1.mSurfaceLifecycleStrategy != 2;
+                        boolean z31 = z30 && (i4 == 2);
+                        if (r1.mSurfaceCreated && (r4 != 0 || ((!z30 && !r1.mAttachedToWindow) || (z30 && !r1.mVisible && (z7 || z31))))) {
+                            r1.mSurfaceCreated = false;
+                            r1.notifySurfaceDestroyed();
+                        }
+                        r1.copySurface(r4, z10);
+                        Log.i(r1.mTag, "updateSurface: mVisible = " + r1.mVisible + " mSurface.isValid() = " + r1.mSurface.isValid());
+                        if (r1.surfaceShouldExist() && r1.mSurface.isValid()) {
+                            Log.i(r1.mTag, "updateSurface: mSurfaceCreated = " + r1.mSurfaceCreated + " surfaceChanged = " + r4 + " visibleChanged = " + z7);
+                            if (r1.mSurfaceCreated || (r4 == 0 && !(z30 && z7))) {
+                                z11 = zPerformSurfaceTransaction;
+                                z12 = r4;
+                                surfaceCallbacks = null;
+                            } else {
+                                r1.mSurfaceCreated = true;
+                                r1.mIsCreating = true;
+                                if (z2) {
+                                    Log.i(TAG, System.identityHashCode(r1) + " visibleChanged -- surfaceCreated");
+                                }
+                                EventLog.writeEvent(60006, r1.mTag, "surfaceCreated");
+                                SurfaceHolder.Callback[] surfaceCallbacks2 = r1.getSurfaceCallbacks();
+                                z11 = zPerformSurfaceTransaction;
+                                z12 = r4;
+                                Log.i(r1.mTag, "surfaceCreated " + r1.mCallbacks.size() + " #" + r1.mUpdateSurfaceCalledBy + " " + r1);
+                                int length = surfaceCallbacks2.length;
+                                int i5 = 0;
+                                while (i5 < length) {
+                                    surfaceCallbacks2[i5].surfaceCreated(r1.mSurfaceHolder);
+                                    i5++;
+                                    surfaceCallbacks2 = surfaceCallbacks2;
+                                }
+                                surfaceCallbacks = surfaceCallbacks2;
+                            }
+                            if (z12 || z5 || z10 || z3 || ((z30 && z7) || z11)) {
+                                if (DEBUG) {
+                                    StringBuilder sb2 = new StringBuilder();
+                                    sb2.append(System.identityHashCode(r1));
+                                    sb2.append(" surfaceChanged -- format=");
+                                    sb2.append(r1.mFormat);
+                                    String str7 = " w=";
+                                    try {
+                                        sb2.append(str7);
+                                        sb2.append(i);
+                                        String str8 = " h=";
+                                        try {
+                                            sb2.append(str8);
+                                            sb2.append(i2);
+                                            Log.i(TAG, sb2.toString());
+                                            str6 = str7;
+                                            str5 = str8;
+                                        } catch (Throwable th) {
+                                            th = th;
+                                            r1.mIsCreating = false;
+                                            if (r1.mSurfaceControl != null && !r1.mSurfaceCreated) {
+                                                r1.releaseSurfaces(false);
+                                            }
+                                            throw th;
+                                        }
+                                    } catch (Throwable th2) {
+                                        th = th2;
+                                    }
+                                } else {
+                                    str5 = " h=";
+                                    str6 = " w=";
+                                }
+                                EventLog.writeEvent(60006, r1.mTag, "surfaceChanged -- format=" + r1.mFormat + str6 + i + str5 + i2);
+                                if (surfaceCallbacks == null) {
+                                    surfaceCallbacks = r1.getSurfaceCallbacks();
+                                }
+                                SurfaceHolder.Callback[] callbackArr = surfaceCallbacks;
+                                Log.i(r1.mTag, "surfaceChanged (" + i + "," + i2 + ") " + r1.mCallbacks.size() + " #" + r1.mUpdateSurfaceCalledBy + " " + r1);
+                                for (SurfaceHolder.Callback callback : callbackArr) {
+                                    callback.surfaceChanged(r1.mSurfaceHolder, r1.mFormat, i, i2);
+                                }
+                                surfaceCallbacks = callbackArr;
+                                str4 = str6;
+                                str3 = str5;
+                            } else {
+                                str3 = " h=";
+                                str4 = " w=";
+                            }
+                            if (z4) {
+                                if (DEBUG) {
+                                    Log.i(TAG, System.identityHashCode(r1) + " surfaceRedrawNeeded");
+                                }
+                                EventLog.writeEvent(60006, r1.mTag, "surfaceRedrawNeeded");
+                                if (surfaceCallbacks == null) {
+                                    surfaceCallbacks = r1.getSurfaceCallbacks();
+                                }
+                                SurfaceHolder.Callback[] callbackArr2 = surfaceCallbacks;
+                                if (z9) {
+                                    r1.handleSyncBufferCallback(callbackArr2, syncBufferTransactionCallback);
+                                } else {
+                                    r1.handleSyncNoBuffer(callbackArr2);
+                                }
+                            }
+                        } else {
+                            str3 = " h=";
+                            str4 = " w=";
+                        }
+                        r1.mIsCreating = false;
+                        SurfaceControl surfaceControl = r1.mSurfaceControl;
+                        surfaceView = r1;
+                        str2 = str4;
+                        str = str3;
+                        if (surfaceControl != null) {
+                            boolean z32 = r1.mSurfaceCreated;
+                            surfaceView = r1;
+                            str2 = str4;
+                            str = str3;
+                            if (!z32) {
+                                r1.releaseSurfaces(false);
+                                surfaceView = r1;
+                                str2 = str4;
+                                str = str3;
+                            }
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                    }
+                } catch (Exception e2) {
+                    e = e2;
+                    Log.e(TAG, "Exception configuring surface", e);
+                    surfaceView = r1;
+                    str2 = r2;
+                    str = r4;
+                    if (DEBUG) {
+                    }
+                }
+            } catch (Exception e3) {
+                e = e3;
+            }
+            if (DEBUG) {
+                Log.v(TAG, "Layout: x=" + surfaceView.mScreenRect.left + " y=" + surfaceView.mScreenRect.top + str2 + surfaceView.mScreenRect.width() + str + surfaceView.mScreenRect.height() + ", frame=" + surfaceView.mSurfaceFrame);
+            }
+        }
     }
 
     public String getName() {
@@ -922,23 +1246,23 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         getViewRootImpl().addToSync(surfaceSyncGroup);
         redrawNeededAsync(callbackArr, new Runnable() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
-            public final void run() {
-                SurfaceView.this.lambda$handleSyncBufferCallback$1(syncBufferTransactionCallback, surfaceSyncGroup);
+            public final void run() throws InterruptedException {
+                this.f$0.lambda$handleSyncBufferCallback$1(syncBufferTransactionCallback, surfaceSyncGroup);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$handleSyncBufferCallback$1(SyncBufferTransactionCallback syncBufferTransactionCallback, SurfaceSyncGroup surfaceSyncGroup) {
-        SurfaceControl.Transaction transaction;
+    public /* synthetic */ void lambda$handleSyncBufferCallback$1(SyncBufferTransactionCallback syncBufferTransactionCallback, SurfaceSyncGroup surfaceSyncGroup) throws InterruptedException {
+        SurfaceControl.Transaction transactionWaitForTransaction;
         BLASTBufferQueue bLASTBufferQueue = this.mBlastBufferQueue;
         if (bLASTBufferQueue != null) {
             bLASTBufferQueue.stopContinuousSyncTransaction();
-            transaction = syncBufferTransactionCallback.waitForTransaction();
+            transactionWaitForTransaction = syncBufferTransactionCallback.waitForTransaction();
         } else {
-            transaction = null;
+            transactionWaitForTransaction = null;
         }
-        surfaceSyncGroup.addTransaction(transaction);
+        surfaceSyncGroup.addTransaction(transactionWaitForTransaction);
         surfaceSyncGroup.markSyncReady();
         onDrawFinished();
     }
@@ -951,7 +1275,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         redrawNeededAsync(callbackArr, new Runnable() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                SurfaceView.this.lambda$handleSyncNoBuffer$2(surfaceSyncGroup);
+                this.f$0.lambda$handleSyncNoBuffer$2(surfaceSyncGroup);
             }
         });
     }
@@ -978,8 +1302,10 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
                 while (it.hasNext()) {
                     viewRootImpl.addToSync(it.next());
                 }
+                this.mSyncGroups.clear();
+            } else {
+                this.mSyncGroups.clear();
             }
-            this.mSyncGroups.clear();
         }
     }
 
@@ -992,7 +1318,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             this.mCountDownLatch = new CountDownLatch(1);
         }
 
-        SurfaceControl.Transaction waitForTransaction() {
+        SurfaceControl.Transaction waitForTransaction() throws InterruptedException {
             try {
                 this.mCountDownLatch.await();
             } catch (InterruptedException unused) {
@@ -1058,7 +1384,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         runOnUiThread(new Runnable() { // from class: android.view.SurfaceView$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                SurfaceView.this.performDrawFinished();
+                this.f$0.performDrawFinished();
             }
         });
     }
@@ -1287,7 +1613,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         }
 
         @Override // android.view.SurfaceHolder
-        public void setFormat(int i) {
+        public void setFormat(int i) throws Throwable {
             if (i == -1) {
                 i = 4;
             }
@@ -1308,7 +1634,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             SurfaceView.this.runOnUiThread(new Runnable() { // from class: android.view.SurfaceView$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SurfaceView.AnonymousClass1.this.lambda$setKeepScreenOn$0(z);
+                    this.f$0.lambda$setKeepScreenOn$0(z);
                 }
             });
         }
@@ -1328,102 +1654,44 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
             return internalLockCanvas(null, true);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:14:0x006a  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0087  */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0090  */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        private android.graphics.Canvas internalLockCanvas(android.graphics.Rect r6, boolean r7) {
-            /*
-                r5 = this;
-                android.view.SurfaceView r0 = android.view.SurfaceView.this
-                java.util.concurrent.locks.ReentrantLock r0 = r0.mSurfaceLock
-                r0.lock()
-                boolean r0 = android.view.SurfaceView.m5915$$Nest$sfgetDEBUG()
-                java.lang.String r1 = "SurfaceView"
-                if (r0 == 0) goto L3a
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                r0.<init>()
-                int r2 = java.lang.System.identityHashCode(r5)
-                r0.append(r2)
-                java.lang.String r2 = " Locking canvas... stopped="
-                r0.append(r2)
-                android.view.SurfaceView r2 = android.view.SurfaceView.this
-                boolean r2 = r2.mDrawingStopped
-                r0.append(r2)
-                java.lang.String r2 = ", surfaceControl="
-                r0.append(r2)
-                android.view.SurfaceView r2 = android.view.SurfaceView.this
-                android.view.SurfaceControl r2 = r2.mSurfaceControl
-                r0.append(r2)
-                java.lang.String r0 = r0.toString()
-                android.util.Log.i(r1, r0)
-            L3a:
-                android.view.SurfaceView r0 = android.view.SurfaceView.this
-                boolean r0 = r0.mDrawingStopped
-                r2 = 0
-                if (r0 != 0) goto L63
-                android.view.SurfaceView r0 = android.view.SurfaceView.this
-                android.view.SurfaceControl r0 = r0.mSurfaceControl
-                if (r0 == 0) goto L63
-                if (r7 == 0) goto L52
-                android.view.SurfaceView r6 = android.view.SurfaceView.this     // Catch: java.lang.Exception -> L5b
-                android.view.Surface r6 = r6.mSurface     // Catch: java.lang.Exception -> L5b
-                android.graphics.Canvas r6 = r6.lockHardwareCanvas()     // Catch: java.lang.Exception -> L5b
-                goto L64
-            L52:
-                android.view.SurfaceView r7 = android.view.SurfaceView.this     // Catch: java.lang.Exception -> L5b
-                android.view.Surface r7 = r7.mSurface     // Catch: java.lang.Exception -> L5b
-                android.graphics.Canvas r6 = r7.lockCanvas(r6)     // Catch: java.lang.Exception -> L5b
-                goto L64
-            L5b:
-                r6 = move-exception
-                java.lang.String r7 = "SurfaceHolder"
-                java.lang.String r0 = "Exception locking surface"
-                android.util.Log.e(r7, r0, r6)
-            L63:
-                r6 = r2
-            L64:
-                boolean r7 = android.view.SurfaceView.m5915$$Nest$sfgetDEBUG()
-                if (r7 == 0) goto L85
-                java.lang.StringBuilder r7 = new java.lang.StringBuilder
-                r7.<init>()
-                int r0 = java.lang.System.identityHashCode(r5)
-                r7.append(r0)
-                java.lang.String r0 = " Returned canvas: "
-                r7.append(r0)
-                r7.append(r6)
-                java.lang.String r7 = r7.toString()
-                android.util.Log.i(r1, r7)
-            L85:
-                if (r6 == 0) goto L90
-                android.view.SurfaceView r5 = android.view.SurfaceView.this
-                long r0 = android.os.SystemClock.uptimeMillis()
-                r5.mLastLockTime = r0
-                return r6
-            L90:
-                long r6 = android.os.SystemClock.uptimeMillis()
-                android.view.SurfaceView r0 = android.view.SurfaceView.this
-                long r0 = r0.mLastLockTime
-                r3 = 100
-                long r0 = r0 + r3
-                int r3 = (r0 > r6 ? 1 : (r0 == r6 ? 0 : -1))
-                if (r3 <= 0) goto La7
-                long r0 = r0 - r6
-                java.lang.Thread.sleep(r0)     // Catch: java.lang.InterruptedException -> La3
-            La3:
-                long r6 = android.os.SystemClock.uptimeMillis()
-            La7:
-                android.view.SurfaceView r0 = android.view.SurfaceView.this
-                r0.mLastLockTime = r6
-                android.view.SurfaceView r5 = android.view.SurfaceView.this
-                java.util.concurrent.locks.ReentrantLock r5 = r5.mSurfaceLock
-                r5.unlock()
-                return r2
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.SurfaceView.AnonymousClass1.internalLockCanvas(android.graphics.Rect, boolean):android.graphics.Canvas");
+        private Canvas internalLockCanvas(Rect rect, boolean z) throws InterruptedException {
+            Canvas canvasLockCanvas;
+            SurfaceView.this.mSurfaceLock.lock();
+            if (SurfaceView.DEBUG) {
+                Log.i(SurfaceView.TAG, System.identityHashCode(this) + " Locking canvas... stopped=" + SurfaceView.this.mDrawingStopped + ", surfaceControl=" + SurfaceView.this.mSurfaceControl);
+            }
+            if (SurfaceView.this.mDrawingStopped || SurfaceView.this.mSurfaceControl == null) {
+                canvasLockCanvas = null;
+            } else {
+                try {
+                    if (z) {
+                        canvasLockCanvas = SurfaceView.this.mSurface.lockHardwareCanvas();
+                    } else {
+                        canvasLockCanvas = SurfaceView.this.mSurface.lockCanvas(rect);
+                    }
+                } catch (Exception e) {
+                    Log.e(LOG_TAG, "Exception locking surface", e);
+                }
+            }
+            if (SurfaceView.DEBUG) {
+                Log.i(SurfaceView.TAG, System.identityHashCode(this) + " Returned canvas: " + canvasLockCanvas);
+            }
+            if (canvasLockCanvas != null) {
+                SurfaceView.this.mLastLockTime = SystemClock.uptimeMillis();
+                return canvasLockCanvas;
+            }
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            long j = SurfaceView.this.mLastLockTime + SurfaceView.FORWARD_BACK_KEY_TOLERANCE_MS;
+            if (j > jUptimeMillis) {
+                try {
+                    Thread.sleep(j - jUptimeMillis);
+                } catch (InterruptedException unused) {
+                }
+                jUptimeMillis = SystemClock.uptimeMillis();
+            }
+            SurfaceView.this.mLastLockTime = jUptimeMillis;
+            SurfaceView.this.mSurfaceLock.unlock();
+            return null;
         }
 
         @Override // android.view.SurfaceHolder
@@ -1460,12 +1728,12 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.ViewRootImpl.SurfaceChangedCallback
-    public void surfaceCreated(SurfaceControl.Transaction transaction) {
+    public void surfaceCreated(SurfaceControl.Transaction transaction) throws Throwable {
         setWindowStopped(false);
     }
 
     @Override // android.view.ViewRootImpl.SurfaceChangedCallback
-    public void surfaceDestroyed() {
+    public void surfaceDestroyed() throws Throwable {
         setWindowStopped(true);
         this.mRemoteAccessibilityController.disassosciateHierarchy();
     }
@@ -1600,7 +1868,7 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
     }
 
     @Override // android.view.View
-    protected void onFocusChanged(boolean z, int i, Rect rect) {
+    protected void onFocusChanged(boolean z, int i, Rect rect) throws Resources.NotFoundException {
         super.onFocusChanged(z, i, rect);
         requestEmbeddedFocus(z);
     }

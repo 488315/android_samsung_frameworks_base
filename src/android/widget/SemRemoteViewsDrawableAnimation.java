@@ -90,9 +90,9 @@ public class SemRemoteViewsDrawableAnimation extends SemRemoteViewsAnimation {
         if (this.mIsExpired) {
             return;
         }
-        View findViewById = view.findViewById(this.mViewId);
-        if (findViewById instanceof ImageView) {
-            ImageView imageView = (ImageView) findViewById;
+        View viewFindViewById = view.findViewById(this.mViewId);
+        if (viewFindViewById instanceof ImageView) {
+            ImageView imageView = (ImageView) viewFindViewById;
             int i = this.mResId;
             if (i > 0) {
                 imageView.setImageResource(i);

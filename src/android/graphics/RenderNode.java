@@ -305,9 +305,9 @@ public final class RenderNode {
     }
 
     private RenderNode(String str, AnimationHost animationHost) {
-        long nCreate = nCreate(str);
-        this.mNativeRenderNode = nCreate;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nCreate);
+        long jNCreate = nCreate(str);
+        this.mNativeRenderNode = jNCreate;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNCreate);
         this.mAnimationHost = animationHost;
     }
 
@@ -420,23 +420,23 @@ public final class RenderNode {
     }
 
     public void addPositionUpdateListener(PositionUpdateListener positionUpdateListener) {
-        CompositePositionUpdateListener with;
+        CompositePositionUpdateListener compositePositionUpdateListenerWith;
         CompositePositionUpdateListener compositePositionUpdateListener = this.mCompositePositionUpdateListener;
         if (compositePositionUpdateListener == null) {
-            with = new CompositePositionUpdateListener(positionUpdateListener);
+            compositePositionUpdateListenerWith = new CompositePositionUpdateListener(positionUpdateListener);
         } else {
-            with = compositePositionUpdateListener.with(positionUpdateListener);
+            compositePositionUpdateListenerWith = compositePositionUpdateListener.with(positionUpdateListener);
         }
-        this.mCompositePositionUpdateListener = with;
-        nRequestPositionUpdates(this.mNativeRenderNode, new WeakReference(with));
+        this.mCompositePositionUpdateListener = compositePositionUpdateListenerWith;
+        nRequestPositionUpdates(this.mNativeRenderNode, new WeakReference(compositePositionUpdateListenerWith));
     }
 
     public void removePositionUpdateListener(PositionUpdateListener positionUpdateListener) {
         CompositePositionUpdateListener compositePositionUpdateListener = this.mCompositePositionUpdateListener;
         if (compositePositionUpdateListener != null) {
-            CompositePositionUpdateListener without = compositePositionUpdateListener.without(positionUpdateListener);
-            this.mCompositePositionUpdateListener = without;
-            nRequestPositionUpdates(this.mNativeRenderNode, new WeakReference(without));
+            CompositePositionUpdateListener compositePositionUpdateListenerWithout = compositePositionUpdateListener.without(positionUpdateListener);
+            this.mCompositePositionUpdateListener = compositePositionUpdateListenerWithout;
+            nRequestPositionUpdates(this.mNativeRenderNode, new WeakReference(compositePositionUpdateListenerWithout));
         }
     }
 
@@ -444,9 +444,9 @@ public final class RenderNode {
         if (this.mCurrentRecordingCanvas != null) {
             throw new IllegalStateException("Recording currently in progress - missing #endRecording() call?");
         }
-        RecordingCanvas obtain = RecordingCanvas.obtain(this, i, i2);
-        this.mCurrentRecordingCanvas = obtain;
-        return obtain;
+        RecordingCanvas recordingCanvasObtain = RecordingCanvas.obtain(this, i, i2);
+        this.mCurrentRecordingCanvas = recordingCanvasObtain;
+        return recordingCanvasObtain;
     }
 
     public RecordingCanvas beginRecording() {

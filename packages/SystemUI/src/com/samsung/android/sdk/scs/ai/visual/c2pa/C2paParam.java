@@ -5,11 +5,9 @@ import android.os.ParcelFileDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C2paParam {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class C2paExistParamBuilder extends Builder {
         public C2paExistParamBuilder() {
         }
@@ -29,7 +27,6 @@ public class C2paParam {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmbedParamBuilder extends Builder {
         public EmbedParamBuilder() {
         }
@@ -101,7 +98,6 @@ public class C2paParam {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtractParamBuilder extends Builder {
         public ExtractParamBuilder() {
         }
@@ -126,7 +122,6 @@ public class C2paParam {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SaveToCacheParamBuilder extends Builder {
         public SaveToCacheParamBuilder() {
         }
@@ -151,7 +146,6 @@ public class C2paParam {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         protected Bundle params;
 

@@ -55,7 +55,11 @@ public class IAFDService extends Service {
         this.mIAFDServiceImpl = new IAFDServiceImpl(this.mContext, null);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x002d  */
     @Override // android.app.Service
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public int onStartCommand(Intent intent, int i, int i2) {
         if (intent == null) {
             return 1;
@@ -66,13 +70,21 @@ public class IAFDService extends Service {
             extras.getInt("pkgUserId", -1);
             extras.getString("checkSum", "");
             int i3 = extras.getInt("commandType", 0);
-            if (i3 != 1 && i3 != 2) {
+            if (i3 == 1 || i3 == 2) {
+                message.what = i3;
+                message.setData(extras);
+                this.mIAFDServiceImpl.IAFDServiceHandlerMessage(message);
+            } else {
                 switch (i3) {
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                        break;
+                    default:
+                        return 1;
                 }
             }
-            message.what = i3;
-            message.setData(extras);
-            this.mIAFDServiceImpl.IAFDServiceHandlerMessage(message);
         }
         return 1;
     }

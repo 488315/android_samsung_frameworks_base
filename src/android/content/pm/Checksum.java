@@ -70,10 +70,10 @@ public final class Checksum implements Parcelable {
     }
 
     public static Checksum readFromStream(DataInputStream dataInputStream) throws IOException {
-        int readInt = dataInputStream.readInt();
+        int i = dataInputStream.readInt();
         byte[] bArr = new byte[dataInputStream.readInt()];
         dataInputStream.read(bArr);
-        return new Checksum(readInt, bArr);
+        return new Checksum(i, bArr);
     }
 
     public Checksum(int i, byte[] bArr) {
@@ -98,11 +98,11 @@ public final class Checksum implements Parcelable {
     }
 
     Checksum(Parcel parcel) {
-        int readInt = parcel.readInt();
-        byte[] createByteArray = parcel.createByteArray();
-        this.mType = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) Type.class, (Annotation) null, readInt);
-        this.mValue = createByteArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray);
+        int i = parcel.readInt();
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        this.mType = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) Type.class, (Annotation) null, i);
+        this.mValue = bArrCreateByteArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray);
     }
 }

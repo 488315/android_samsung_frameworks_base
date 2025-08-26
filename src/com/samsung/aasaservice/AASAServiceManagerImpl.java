@@ -40,7 +40,7 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
         mainThreadHandler.post(new Runnable() { // from class: com.samsung.aasaservice.AASAServiceManagerImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AASAServiceManagerImpl.this.lambda$initialize$0();
+                this.f$0.lambda$initialize$0();
             }
         });
     }
@@ -60,9 +60,9 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
     }
 
     private boolean isBootCompleted() {
-        boolean equals = SystemProperties.get("sys.boot_completed").equals("1");
-        Slog.i(TAG, "isBootCompleted: " + equals);
-        return equals;
+        boolean zEquals = SystemProperties.get("sys.boot_completed").equals("1");
+        Slog.i(TAG, "isBootCompleted: " + zEquals);
+        return zEquals;
     }
 
     private void bindAfterBootComplete(Context context) {
@@ -88,16 +88,16 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
                 return;
             }
             unbindService();
-            ServiceConnection createServiceConnection = createServiceConnection();
-            if (this.context.bindServiceAsUser(getAasaServiceIntent(), createServiceConnection, 1, UserHandle.SYSTEM)) {
+            ServiceConnection serviceConnectionCreateServiceConnection = createServiceConnection();
+            if (this.context.bindServiceAsUser(getAasaServiceIntent(), serviceConnectionCreateServiceConnection, 1, UserHandle.SYSTEM)) {
                 Slog.i(TAG, "succeeded to request bind");
                 synchronized (obj) {
-                    aasaServiceConn = createServiceConnection;
+                    aasaServiceConn = serviceConnectionCreateServiceConnection;
                     retryCnt = 0;
                 }
             } else {
                 Slog.w(TAG, "failed to request bind");
-                this.context.unbindService(createServiceConnection);
+                this.context.unbindService(serviceConnectionCreateServiceConnection);
                 retryBindService();
             }
             Slog.i(TAG, "[END] bind to AASAService");
@@ -112,7 +112,7 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
         return new AASAServiceConnection(new AASAServiceManager.Callback() { // from class: com.samsung.aasaservice.AASAServiceManagerImpl$$ExternalSyntheticLambda1
             @Override // com.samsung.aasaservice.AASAServiceManager.Callback
             public final void onReady() {
-                AASAServiceManagerImpl.this.lambda$createServiceConnection$1();
+                this.f$0.lambda$createServiceConnection$1();
             }
         }, new IBinder.DeathRecipient() { // from class: com.samsung.aasaservice.AASAServiceManagerImpl$$ExternalSyntheticLambda2
             @Override // android.os.IBinder.DeathRecipient
@@ -154,7 +154,7 @@ public class AASAServiceManagerImpl implements AASAServiceManager {
             mainThreadHandler.postDelayed(new Runnable() { // from class: com.samsung.aasaservice.AASAServiceManagerImpl$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AASAServiceManagerImpl.this.bindService();
+                    this.f$0.bindService();
                 }
             }, 500L);
         }

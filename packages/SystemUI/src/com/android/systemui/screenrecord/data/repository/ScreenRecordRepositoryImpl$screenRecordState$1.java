@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,7 +49,7 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
             final ?? r1 = new RecordingController.RecordingStateChangeCallback() { // from class: com.android.systemui.screenrecord.data.repository.ScreenRecordRepositoryImpl$screenRecordState$1$callback$1
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onCountdown(long j) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new ScreenRecordModel.Starting(j));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new ScreenRecordModel.Starting(j));
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
@@ -59,17 +58,17 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
                     if (screenRecordRepositoryImpl2.recordingController.isRecording() || screenRecordRepositoryImpl2.recordingController.mIsStarting) {
                         return;
                     }
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onRecordingEnd() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onRecordingStart() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(ScreenRecordModel.Recording.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.Recording.INSTANCE);
                 }
             };
             this.this$0.recordingController.mListeners.add(r1);
@@ -77,7 +76,7 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
             Function0 function0 = new Function0() { // from class: com.android.systemui.screenrecord.data.repository.ScreenRecordRepositoryImpl$screenRecordState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    RecordingController recordingController = ScreenRecordRepositoryImpl.this.recordingController;
+                    RecordingController recordingController = screenRecordRepositoryImpl2.recordingController;
                     recordingController.mListeners.remove(r1);
                     return Unit.INSTANCE;
                 }

@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1 extends SuspendLambda implements Function4 {
     final /* synthetic */ SharedNotificationContainerInteractor.ConfigurationBasedDimensions $configurationBasedDimensions;
@@ -26,12 +25,12 @@ final class SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        float floatValue = ((Number) obj2).floatValue();
-        float floatValue2 = ((Number) obj3).floatValue();
+        float fFloatValue = ((Number) obj2).floatValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
         SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1 sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1 = new SharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1(this.$configurationBasedDimensions, (Continuation) obj4);
         sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.L$0 = (FlowCollector) obj;
-        sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.F$0 = floatValue;
-        sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.F$1 = floatValue2;
+        sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.F$0 = fFloatValue;
+        sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.F$1 = fFloatValue2;
         return sharedNotificationContainerViewModel$alphaForShadeAndQsExpansion$2$1.invokeSuspend(Unit.INSTANCE);
     }
 

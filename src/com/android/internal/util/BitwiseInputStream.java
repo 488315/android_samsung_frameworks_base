@@ -44,8 +44,8 @@ public class BitwiseInputStream {
         int i2 = (i >>> 3) + ((i & 7) > 0 ? 1 : 0);
         byte[] bArr = new byte[i2];
         for (int i3 = 0; i3 < i2; i3++) {
-            int min = Math.min(8, i - (i3 << 3));
-            bArr[i3] = (byte) (read(min) << (8 - min));
+            int iMin = Math.min(8, i - (i3 << 3));
+            bArr[i3] = (byte) (read(iMin) << (8 - iMin));
         }
         return bArr;
     }

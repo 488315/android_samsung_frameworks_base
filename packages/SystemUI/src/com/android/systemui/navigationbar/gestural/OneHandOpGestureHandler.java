@@ -17,7 +17,6 @@ import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSynthe
 import com.android.systemui.navigationbar.gestural.OneHandOpGestureHandler.IncomingHandler;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OneHandOpGestureHandler {
     public static final Companion Companion = new Companion(null);
@@ -31,19 +30,19 @@ public final class OneHandOpGestureHandler {
     public final Region oneHandOpGestureRegion = new Region();
     public final OneHandOpGestureHandler$mConnection$1 mConnection = new ServiceConnection() { // from class: com.android.systemui.navigationbar.gestural.OneHandOpGestureHandler$mConnection$1
         @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) throws RemoteException {
             Log.i("OneHandOpGestureHandler", "onServiceConnected() className=" + componentName);
-            OneHandOpGestureHandler.this.sendMessenger = new Messenger(iBinder);
-            OneHandOpGestureHandler.this.incomingHandler = OneHandOpGestureHandler.this.new IncomingHandler();
-            OneHandOpGestureHandler.this.replyMessenger = new Messenger(OneHandOpGestureHandler.this.incomingHandler);
-            OneHandOpGestureHandler.this.isOneHandOpServiceConnected = true;
-            Message obtain = Message.obtain(null, 1, null);
-            OneHandOpGestureHandler oneHandOpGestureHandler = OneHandOpGestureHandler.this;
-            obtain.replyTo = oneHandOpGestureHandler.replyMessenger;
+            this.this$0.sendMessenger = new Messenger(iBinder);
+            this.this$0.incomingHandler = this.this$0.new IncomingHandler();
+            this.this$0.replyMessenger = new Messenger(this.this$0.incomingHandler);
+            this.this$0.isOneHandOpServiceConnected = true;
+            Message messageObtain = Message.obtain(null, 1, null);
+            OneHandOpGestureHandler oneHandOpGestureHandler = this.this$0;
+            messageObtain.replyTo = oneHandOpGestureHandler.replyMessenger;
             try {
                 Messenger messenger = oneHandOpGestureHandler.sendMessenger;
                 messenger.getClass();
-                messenger.send(obtain);
+                messenger.send(messageObtain);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -52,7 +51,7 @@ public final class OneHandOpGestureHandler {
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
             Log.i("OneHandOpGestureHandler", "onServiceDisconnected() className=" + componentName);
-            OneHandOpGestureHandler oneHandOpGestureHandler = OneHandOpGestureHandler.this;
+            OneHandOpGestureHandler oneHandOpGestureHandler = this.this$0;
             oneHandOpGestureHandler.sendMessenger = null;
             oneHandOpGestureHandler.replyMessenger = null;
             oneHandOpGestureHandler.incomingHandler = null;
@@ -61,7 +60,6 @@ public final class OneHandOpGestureHandler {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,7 +69,6 @@ public final class OneHandOpGestureHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IncomingHandler extends Handler {
         public IncomingHandler() {
         }
@@ -131,9 +128,9 @@ public final class OneHandOpGestureHandler {
             }
             if (SAFE_DEBUG) {
                 Region region = this.oneHandOpGestureRegion;
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(rawX, rawY, "isGestureBlockedByPolicy() true. pos=(", ",", ") region=");
-                m.append(region);
-                Log.d("OneHandOpGestureHandler", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(rawX, rawY, "isGestureBlockedByPolicy() true. pos=(", ",", ") region=");
+                sbM.append(region);
+                Log.d("OneHandOpGestureHandler", sbM.toString());
             }
         }
         return true;

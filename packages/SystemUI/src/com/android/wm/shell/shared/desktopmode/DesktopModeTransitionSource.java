@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeTransitionSource implements Parcelable {
     public static final /* synthetic */ DesktopModeTransitionSource[] $VALUES;
@@ -18,7 +17,6 @@ public final class DesktopModeTransitionSource implements Parcelable {
     public static final DesktopModeTransitionSource TASK_DRAG;
     public static final DesktopModeTransitionSource UNKNOWN;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,9 +44,9 @@ public final class DesktopModeTransitionSource implements Parcelable {
         CREATOR = new Parcelable.Creator() { // from class: com.android.wm.shell.shared.desktopmode.DesktopModeTransitionSource$Companion$CREATOR$1
             @Override // android.os.Parcelable.Creator
             public final Object createFromParcel(Parcel parcel) {
-                DesktopModeTransitionSource valueOf;
-                String readString = parcel.readString();
-                return (readString == null || (valueOf = DesktopModeTransitionSource.valueOf(readString)) == null) ? DesktopModeTransitionSource.UNKNOWN : valueOf;
+                DesktopModeTransitionSource desktopModeTransitionSourceValueOf;
+                String string = parcel.readString();
+                return (string == null || (desktopModeTransitionSourceValueOf = DesktopModeTransitionSource.valueOf(string)) == null) ? DesktopModeTransitionSource.UNKNOWN : desktopModeTransitionSourceValueOf;
             }
 
             @Override // android.os.Parcelable.Creator

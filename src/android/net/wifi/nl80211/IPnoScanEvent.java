@@ -51,9 +51,9 @@ public interface IPnoScanEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPnoScanEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPnoScanEvent)) {
-                return (IPnoScanEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPnoScanEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPnoScanEvent)) {
+                return (IPnoScanEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,23 +110,23 @@ public interface IPnoScanEvent extends IInterface {
 
             @Override // android.net.wifi.nl80211.IPnoScanEvent
             public void OnPnoNetworkFound() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPnoScanEvent.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPnoScanEvent.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IPnoScanEvent
             public void OnPnoScanFailed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPnoScanEvent.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPnoScanEvent.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

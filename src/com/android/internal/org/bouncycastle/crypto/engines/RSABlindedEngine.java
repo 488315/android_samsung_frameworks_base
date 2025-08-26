@@ -66,8 +66,8 @@ public class RSABlindedEngine implements AsymmetricBlockCipher {
         if ((rSAKeyParameters instanceof RSAPrivateCrtKeyParameters) && (publicExponent = (rSAPrivateCrtKeyParameters = (RSAPrivateCrtKeyParameters) rSAKeyParameters).getPublicExponent()) != null) {
             BigInteger modulus = rSAPrivateCrtKeyParameters.getModulus();
             BigInteger bigInteger2 = ONE;
-            BigInteger createRandomInRange = BigIntegers.createRandomInRange(bigInteger2, modulus.subtract(bigInteger2), this.random);
-            return BigIntegers.modOddInverse(modulus, createRandomInRange).multiply(this.core.processBlock(createRandomInRange.modPow(publicExponent, modulus).multiply(bigInteger).mod(modulus))).mod(modulus);
+            BigInteger bigIntegerCreateRandomInRange = BigIntegers.createRandomInRange(bigInteger2, modulus.subtract(bigInteger2), this.random);
+            return BigIntegers.modOddInverse(modulus, bigIntegerCreateRandomInRange).multiply(this.core.processBlock(bigIntegerCreateRandomInRange.modPow(publicExponent, modulus).multiply(bigInteger).mod(modulus))).mod(modulus);
         }
         return this.core.processBlock(bigInteger);
     }

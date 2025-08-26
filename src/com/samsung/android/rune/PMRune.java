@@ -30,6 +30,7 @@ public class PMRune {
     public static final boolean PERM_CALLBACK_STABILITY = true;
     public static final boolean PERM_CHINA_COMPAT_LOW_SDK;
     public static final ArraySet<String> PERM_CHINA_COMPAT_LOW_SDK_EXCEPTION;
+    public static final boolean PERM_DEADLOCK = true;
     public static final boolean PERM_ENFORCE_PRIV_PERM_CONTROL = true;
     public static final boolean PERM_LABEL = true;
     public static final boolean PERM_LOG = true;
@@ -121,6 +122,7 @@ public class PMRune {
     public static final boolean PM_WA_DO_NOT_PERFORM_PRE_REBOOT_DEXOPT_WHEN_APEX_UPDATE = true;
     public static final boolean PM_WA_PARCELED_LIST;
     public static boolean PM_WA_WORK_COMP_CHANGED = false;
+    public static final boolean PM_ZYGOTE64_32_WATCHDOG_TIMEOUT;
     public static final boolean RBM_FIX_RECEIVER_LEAK = true;
     public static final boolean RESOURCES_BUG_FIX = true;
     public static final boolean RES_FIX_ASSET_NAVIBAR = true;
@@ -168,8 +170,9 @@ public class PMRune {
         PM_32BIT_APP_RUNNING_IN_ABI64 = !is64bitOnlyDevice();
         PM_WA_PARCELED_LIST = isChinaDevice();
         PM_WA_WORK_COMP_CHANGED = Build.VERSION.DEVICE_INITIAL_SDK_INT >= 34;
-        PM_ENABLE_GMS = isChinaDevice() && Build.VERSION.DEVICE_INITIAL_SDK_INT >= 32;
+        PM_ENABLE_GMS = isChinaDevice();
         PM_GRANT_ALL_RUNTIME_PERMISSION_UNPACK = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_UNPACK");
+        PM_ZYGOTE64_32_WATCHDOG_TIMEOUT = "zygote64_32".equalsIgnoreCase(SystemProperties.get("ro.zygote", "none"));
         PERM_CHINA_COMPAT_LOW_SDK = isChinaDevice();
         PERM_CHINA_COMPAT_LOW_SDK_EXCEPTION = new ArraySet<>(Arrays.asList("android.permission.cts.appthatrequestpermission", "android.backup.permission22"));
         UM_BMODE = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService", false);

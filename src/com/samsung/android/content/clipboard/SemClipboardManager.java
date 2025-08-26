@@ -170,9 +170,9 @@ public class SemClipboardManager {
         if (iClipboardService != null) {
             return iClipboardService;
         }
-        IClipboardService asInterface = IClipboardService.Stub.asInterface(ServiceManager.getService(Context.SEM_CLIPBOARD_SERVICE));
-        mSemService = asInterface;
-        if (asInterface == null) {
+        IClipboardService iClipboardServiceAsInterface = IClipboardService.Stub.asInterface(ServiceManager.getService(Context.SEM_CLIPBOARD_SERVICE));
+        mSemService = iClipboardServiceAsInterface;
+        if (iClipboardServiceAsInterface == null) {
             Log.e(TAG, "Failed to get semclipboard service.");
         }
         return mSemService;

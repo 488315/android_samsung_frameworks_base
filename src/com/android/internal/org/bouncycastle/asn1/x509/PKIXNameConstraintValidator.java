@@ -99,31 +99,31 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     @Override // com.android.internal.org.bouncycastle.asn1.x509.NameConstraintValidator
     public void intersectPermittedSubtree(GeneralSubtree[] generalSubtreeArr) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (int i = 0; i != generalSubtreeArr.length; i++) {
             GeneralSubtree generalSubtree = generalSubtreeArr[i];
-            Integer valueOf = Integers.valueOf(generalSubtree.getBase().getTagNo());
-            if (hashMap.get(valueOf) == null) {
-                hashMap.put(valueOf, new HashSet());
+            Integer numValueOf = Integers.valueOf(generalSubtree.getBase().getTagNo());
+            if (map.get(numValueOf) == null) {
+                map.put(numValueOf, new HashSet());
             }
-            ((Set) hashMap.get(valueOf)).add(generalSubtree);
+            ((Set) map.get(numValueOf)).add(generalSubtree);
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
-            int intValue = ((Integer) entry.getKey()).intValue();
-            if (intValue == 0) {
+        for (Map.Entry entry : map.entrySet()) {
+            int iIntValue = ((Integer) entry.getKey()).intValue();
+            if (iIntValue == 0) {
                 this.permittedSubtreesOtherName = intersectOtherName(this.permittedSubtreesOtherName, (Set) entry.getValue());
-            } else if (intValue == 1) {
+            } else if (iIntValue == 1) {
                 this.permittedSubtreesEmail = intersectEmail(this.permittedSubtreesEmail, (Set) entry.getValue());
-            } else if (intValue == 2) {
+            } else if (iIntValue == 2) {
                 this.permittedSubtreesDNS = intersectDNS(this.permittedSubtreesDNS, (Set) entry.getValue());
-            } else if (intValue == 4) {
+            } else if (iIntValue == 4) {
                 this.permittedSubtreesDN = intersectDN(this.permittedSubtreesDN, (Set) entry.getValue());
-            } else if (intValue == 6) {
+            } else if (iIntValue == 6) {
                 this.permittedSubtreesURI = intersectURI(this.permittedSubtreesURI, (Set) entry.getValue());
-            } else if (intValue == 7) {
+            } else if (iIntValue == 7) {
                 this.permittedSubtreesIP = intersectIP(this.permittedSubtreesIP, (Set) entry.getValue());
             } else {
-                throw new IllegalStateException("Unknown tag encountered: " + intValue);
+                throw new IllegalStateException("Unknown tag encountered: " + iIntValue);
             }
         }
     }
@@ -349,14 +349,14 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         HashSet hashSet = new HashSet();
         Iterator it = set2.iterator();
         while (it.hasNext()) {
-            String extractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
+            String strExtractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
             if (set != null) {
                 Iterator it2 = set.iterator();
                 while (it2.hasNext()) {
-                    intersectEmail(extractNameAsString, (String) it2.next(), hashSet);
+                    intersectEmail(strExtractNameAsString, (String) it2.next(), hashSet);
                 }
-            } else if (extractNameAsString != null) {
-                hashSet.add(extractNameAsString);
+            } else if (strExtractNameAsString != null) {
+                hashSet.add(strExtractNameAsString);
             }
         }
         return hashSet;
@@ -426,16 +426,16 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         if (bArr.length != bArr2.length) {
             return Collections.EMPTY_SET;
         }
-        byte[][] extractIPsAndSubnetMasks = extractIPsAndSubnetMasks(bArr, bArr2);
-        byte[] bArr3 = extractIPsAndSubnetMasks[0];
-        byte[] bArr4 = extractIPsAndSubnetMasks[1];
-        byte[] bArr5 = extractIPsAndSubnetMasks[2];
-        byte[] bArr6 = extractIPsAndSubnetMasks[3];
-        byte[][] minMaxIPs = minMaxIPs(bArr3, bArr4, bArr5, bArr6);
-        if (compareTo(max(minMaxIPs[0], minMaxIPs[2]), min(minMaxIPs[1], minMaxIPs[3])) == 1) {
+        byte[][] bArrExtractIPsAndSubnetMasks = extractIPsAndSubnetMasks(bArr, bArr2);
+        byte[] bArr3 = bArrExtractIPsAndSubnetMasks[0];
+        byte[] bArr4 = bArrExtractIPsAndSubnetMasks[1];
+        byte[] bArr5 = bArrExtractIPsAndSubnetMasks[2];
+        byte[] bArr6 = bArrExtractIPsAndSubnetMasks[3];
+        byte[][] bArrMinMaxIPs = minMaxIPs(bArr3, bArr4, bArr5, bArr6);
+        if (compareTo(max(bArrMinMaxIPs[0], bArrMinMaxIPs[2]), min(bArrMinMaxIPs[1], bArrMinMaxIPs[3])) == 1) {
             return Collections.EMPTY_SET;
         }
-        return Collections.singleton(ipWithSubnetMask(or(minMaxIPs[0], minMaxIPs[2]), or(bArr4, bArr6)));
+        return Collections.singleton(ipWithSubnetMask(or(bArrMinMaxIPs[0], bArrMinMaxIPs[2]), or(bArr4, bArr6)));
     }
 
     private byte[] ipWithSubnetMask(byte[] bArr, byte[] bArr2) {
@@ -578,16 +578,16 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     }
 
     private boolean emailIsConstrained(String str, String str2) {
-        String substring = str.substring(str.indexOf(64) + 1);
+        String strSubstring = str.substring(str.indexOf(64) + 1);
         if (str2.indexOf(64) != -1) {
-            if (str.equalsIgnoreCase(str2) || substring.equalsIgnoreCase(str2.substring(1))) {
+            if (str.equalsIgnoreCase(str2) || strSubstring.equalsIgnoreCase(str2.substring(1))) {
                 return true;
             }
         } else if (str2.charAt(0) != '.') {
-            if (substring.equalsIgnoreCase(str2)) {
+            if (strSubstring.equalsIgnoreCase(str2)) {
                 return true;
             }
-        } else if (withinDomain(substring, str2)) {
+        } else if (withinDomain(strSubstring, str2)) {
             return true;
         }
         return false;
@@ -597,18 +597,18 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         if (str2.startsWith(MediaMetrics.SEPARATOR)) {
             str2 = str2.substring(1);
         }
-        String[] split = Strings.split(str2, '.');
-        String[] split2 = Strings.split(str, '.');
-        if (split2.length <= split.length) {
+        String[] strArrSplit = Strings.split(str2, '.');
+        String[] strArrSplit2 = Strings.split(str, '.');
+        if (strArrSplit2.length <= strArrSplit.length) {
             return false;
         }
-        int length = split2.length - split.length;
-        for (int i = -1; i < split.length; i++) {
+        int length = strArrSplit2.length - strArrSplit.length;
+        for (int i = -1; i < strArrSplit.length; i++) {
             if (i == -1) {
-                if (split2[i + length].equals("")) {
+                if (strArrSplit2[i + length].equals("")) {
                     return false;
                 }
-            } else if (!split[i].equalsIgnoreCase(split2[i + length])) {
+            } else if (!strArrSplit[i].equalsIgnoreCase(strArrSplit2[i + length])) {
                 return false;
             }
         }
@@ -646,7 +646,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     private void unionEmail(String str, String str2, Set set) {
         if (str.indexOf(64) != -1) {
-            String substring = str.substring(str.indexOf(64) + 1);
+            String strSubstring = str.substring(str.indexOf(64) + 1);
             if (str2.indexOf(64) != -1) {
                 if (str.equalsIgnoreCase(str2)) {
                     set.add(str);
@@ -658,7 +658,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 }
             }
             if (str2.startsWith(MediaMetrics.SEPARATOR)) {
-                if (withinDomain(substring, str2)) {
+                if (withinDomain(strSubstring, str2)) {
                     set.add(str2);
                     return;
                 } else {
@@ -667,7 +667,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                     return;
                 }
             }
-            if (substring.equalsIgnoreCase(str2)) {
+            if (strSubstring.equalsIgnoreCase(str2)) {
                 set.add(str2);
                 return;
             } else {
@@ -739,7 +739,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     private void unionURI(String str, String str2, Set set) {
         if (str.indexOf(64) != -1) {
-            String substring = str.substring(str.indexOf(64) + 1);
+            String strSubstring = str.substring(str.indexOf(64) + 1);
             if (str2.indexOf(64) != -1) {
                 if (str.equalsIgnoreCase(str2)) {
                     set.add(str);
@@ -751,7 +751,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 }
             }
             if (str2.startsWith(MediaMetrics.SEPARATOR)) {
-                if (withinDomain(substring, str2)) {
+                if (withinDomain(strSubstring, str2)) {
                     set.add(str2);
                     return;
                 } else {
@@ -760,7 +760,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                     return;
                 }
             }
-            if (substring.equalsIgnoreCase(str2)) {
+            if (strSubstring.equalsIgnoreCase(str2)) {
                 set.add(str2);
                 return;
             } else {
@@ -834,19 +834,19 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         HashSet hashSet = new HashSet();
         Iterator it = set2.iterator();
         while (it.hasNext()) {
-            String extractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
+            String strExtractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
             if (set != null) {
                 Iterator it2 = set.iterator();
                 while (it2.hasNext()) {
                     String str = (String) it2.next();
-                    if (withinDomain(str, extractNameAsString)) {
+                    if (withinDomain(str, strExtractNameAsString)) {
                         hashSet.add(str);
-                    } else if (withinDomain(extractNameAsString, str)) {
-                        hashSet.add(extractNameAsString);
+                    } else if (withinDomain(strExtractNameAsString, str)) {
+                        hashSet.add(strExtractNameAsString);
                     }
                 }
-            } else if (extractNameAsString != null) {
-                hashSet.add(extractNameAsString);
+            } else if (strExtractNameAsString != null) {
+                hashSet.add(strExtractNameAsString);
             }
         }
         return hashSet;
@@ -878,7 +878,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     private void intersectEmail(String str, String str2, Set set) {
         if (str.indexOf(64) != -1) {
-            String substring = str.substring(str.indexOf(64) + 1);
+            String strSubstring = str.substring(str.indexOf(64) + 1);
             if (str2.indexOf(64) != -1) {
                 if (str.equalsIgnoreCase(str2)) {
                     set.add(str);
@@ -886,13 +886,13 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 }
                 return;
             } else if (str2.startsWith(MediaMetrics.SEPARATOR)) {
-                if (withinDomain(substring, str2)) {
+                if (withinDomain(strSubstring, str2)) {
                     set.add(str);
                     return;
                 }
                 return;
             } else {
-                if (substring.equalsIgnoreCase(str2)) {
+                if (strSubstring.equalsIgnoreCase(str2)) {
                     set.add(str);
                     return;
                 }
@@ -955,14 +955,14 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         HashSet hashSet = new HashSet();
         Iterator it = set2.iterator();
         while (it.hasNext()) {
-            String extractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
+            String strExtractNameAsString = extractNameAsString(((GeneralSubtree) it.next()).getBase());
             if (set != null) {
                 Iterator it2 = set.iterator();
                 while (it2.hasNext()) {
-                    intersectURI((String) it2.next(), extractNameAsString, hashSet);
+                    intersectURI((String) it2.next(), strExtractNameAsString, hashSet);
                 }
-            } else if (extractNameAsString != null) {
-                hashSet.add(extractNameAsString);
+            } else if (strExtractNameAsString != null) {
+                hashSet.add(strExtractNameAsString);
             }
         }
         return hashSet;
@@ -986,7 +986,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     private void intersectURI(String str, String str2, Set set) {
         if (str.indexOf(64) != -1) {
-            String substring = str.substring(str.indexOf(64) + 1);
+            String strSubstring = str.substring(str.indexOf(64) + 1);
             if (str2.indexOf(64) != -1) {
                 if (str.equalsIgnoreCase(str2)) {
                     set.add(str);
@@ -994,13 +994,13 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 }
                 return;
             } else if (str2.startsWith(MediaMetrics.SEPARATOR)) {
-                if (withinDomain(substring, str2)) {
+                if (withinDomain(strSubstring, str2)) {
                     set.add(str);
                     return;
                 }
                 return;
             } else {
-                if (substring.equalsIgnoreCase(str2)) {
+                if (strSubstring.equalsIgnoreCase(str2)) {
                     set.add(str);
                     return;
                 }
@@ -1063,21 +1063,21 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     }
 
     private boolean isUriConstrained(String str, String str2) {
-        String extractHostFromURL = extractHostFromURL(str);
-        return !str2.startsWith(MediaMetrics.SEPARATOR) ? extractHostFromURL.equalsIgnoreCase(str2) : withinDomain(extractHostFromURL, str2);
+        String strExtractHostFromURL = extractHostFromURL(str);
+        return !str2.startsWith(MediaMetrics.SEPARATOR) ? strExtractHostFromURL.equalsIgnoreCase(str2) : withinDomain(strExtractHostFromURL, str2);
     }
 
     private static String extractHostFromURL(String str) {
-        String substring = str.substring(str.indexOf(58) + 1);
-        if (substring.indexOf("//") != -1) {
-            substring = substring.substring(substring.indexOf("//") + 2);
+        String strSubstring = str.substring(str.indexOf(58) + 1);
+        if (strSubstring.indexOf("//") != -1) {
+            strSubstring = strSubstring.substring(strSubstring.indexOf("//") + 2);
         }
-        if (substring.lastIndexOf(58) != -1) {
-            substring = substring.substring(0, substring.lastIndexOf(58));
+        if (strSubstring.lastIndexOf(58) != -1) {
+            strSubstring = strSubstring.substring(0, strSubstring.lastIndexOf(58));
         }
-        String substring2 = substring.substring(substring.indexOf(58) + 1);
-        String substring3 = substring2.substring(substring2.indexOf(64) + 1);
-        return substring3.indexOf(47) != -1 ? substring3.substring(0, substring3.indexOf(47)) : substring3;
+        String strSubstring2 = strSubstring.substring(strSubstring.indexOf(58) + 1);
+        String strSubstring3 = strSubstring2.substring(strSubstring2.indexOf(64) + 1);
+        return strSubstring3.indexOf(47) != -1 ? strSubstring3.substring(0, strSubstring3.indexOf(47)) : strSubstring3;
     }
 
     private String extractNameAsString(GeneralName generalName) {
@@ -1118,18 +1118,18 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     }
 
     private int hashCollection(Collection collection) {
-        int hashCode;
+        int iHashCode;
         int i = 0;
         if (collection == null) {
             return 0;
         }
         for (Object obj : collection) {
             if (obj instanceof byte[]) {
-                hashCode = Arrays.hashCode((byte[]) obj);
+                iHashCode = Arrays.hashCode((byte[]) obj);
             } else {
-                hashCode = obj.hashCode();
+                iHashCode = obj.hashCode();
             }
-            i += hashCode;
+            i += iHashCode;
         }
         return i;
     }

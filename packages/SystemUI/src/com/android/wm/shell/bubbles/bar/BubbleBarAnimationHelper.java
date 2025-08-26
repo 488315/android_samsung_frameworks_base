@@ -3,6 +3,7 @@ package com.android.wm.shell.bubbles.bar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.Log;
 import android.util.Size;
@@ -14,7 +15,6 @@ import com.android.wm.shell.bubbles.animation.AnimatableScaleMatrix;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
 import com.android.wm.shell.taskview.TaskView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleBarAnimationHelper {
     public BubbleViewProvider mExpandedBubble;
@@ -25,7 +25,6 @@ public class BubbleBarAnimationHelper {
     public final AnimatableScaleMatrix mExpandedViewContainerMatrix = new AnimatableScaleMatrix();
     public final int[] mTmpLocation = new int[2];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DragAnimatorListenerAdapter extends AnimatorListenerAdapter {
         public final BubbleBarExpandedView mBubbleBarExpandedView;
 
@@ -44,7 +43,7 @@ public class BubbleBarAnimationHelper {
         }
     }
 
-    public BubbleBarAnimationHelper(Context context, BubblePositioner bubblePositioner) {
+    public BubbleBarAnimationHelper(Context context, BubblePositioner bubblePositioner) throws Resources.NotFoundException {
         this.mPositioner = bubblePositioner;
         context.getResources().getDimensionPixelSize(R.dimen.bubble_bar_expanded_view_switch_offset);
     }
@@ -92,9 +91,9 @@ public class BubbleBarAnimationHelper {
     }
 
     public final Size getExpandedViewSize() {
-        boolean equals = this.mExpandedBubble.getKey().equals("Overflow");
+        boolean zEquals = this.mExpandedBubble.getKey().equals("Overflow");
         BubblePositioner bubblePositioner = this.mPositioner;
-        return new Size(equals ? bubblePositioner.mOverflowWidth : bubblePositioner.mExpandedViewBubbleBarWidth, bubblePositioner.getExpandedViewHeightForBubbleBar(equals));
+        return new Size(zEquals ? bubblePositioner.mOverflowWidth : bubblePositioner.mExpandedViewBubbleBarWidth, bubblePositioner.getExpandedViewHeightForBubbleBar(zEquals));
     }
 
     public final void startNewAnimator(Animator animator) {
@@ -126,8 +125,8 @@ public class BubbleBarAnimationHelper {
         if (bubbleBarExpandedView.mOverflowView != null) {
             bubbleBarExpandedView.post(new Runnable() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarExpandedView$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
-                public final void run() {
-                    BubbleBarExpandedView.this.mOverflowView.show();
+                public final void run() throws Resources.NotFoundException {
+                    bubbleBarExpandedView.mOverflowView.show();
                 }
             });
         }

@@ -7,7 +7,6 @@ import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.google.protobuf.nano.MessageNano;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ComponentNameProto extends MessageNano {
     private static volatile ComponentNameProto[] _emptyArray;
@@ -45,8 +44,8 @@ public final class ComponentNameProto extends MessageNano {
 
     @Override // com.google.protobuf.nano.MessageNano
     public int computeSerializedSize() {
-        int computeStringSize = !this.packageName.equals("") ? CodedOutputByteBufferNano.computeStringSize(1, this.packageName) : 0;
-        return !this.className.equals("") ? CodedOutputByteBufferNano.computeStringSize(2, this.className) + computeStringSize : computeStringSize;
+        int iComputeStringSize = !this.packageName.equals("") ? CodedOutputByteBufferNano.computeStringSize(1, this.packageName) : 0;
+        return !this.className.equals("") ? CodedOutputByteBufferNano.computeStringSize(2, this.className) + iComputeStringSize : iComputeStringSize;
     }
 
     @Override // com.google.protobuf.nano.MessageNano
@@ -67,15 +66,15 @@ public final class ComponentNameProto extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public ComponentNameProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 this.packageName = codedInputByteBufferNano.readString();
-            } else if (readTag == 18) {
+            } else if (tag == 18) {
                 this.className = codedInputByteBufferNano.readString();
-            } else if (!codedInputByteBufferNano.skipField(readTag)) {
+            } else if (!codedInputByteBufferNano.skipField(tag)) {
                 break;
             }
         }

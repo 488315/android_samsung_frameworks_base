@@ -295,9 +295,9 @@ public final class SatelliteSessionStats implements Parcelable {
         this.mLatencyOfSuccessfulUserMessages = parcel.readLong();
         this.mMaxLatency = parcel.readLong();
         this.mLastMessageLatency = parcel.readLong();
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.datagramStats = new HashMap();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.datagramStats.put(Integer.valueOf(parcel.readInt()), (SatelliteSessionStats) parcel.readParcelable(SatelliteSessionStats.class.getClassLoader()));
         }
     }

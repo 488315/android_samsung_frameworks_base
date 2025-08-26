@@ -11,7 +11,6 @@ import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.systemui.R;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PrimarySwitchPreference extends RestrictedPreference {
     public boolean mChecked;
@@ -43,9 +42,9 @@ public class PrimarySwitchPreference extends RestrictedPreference {
     @Override // com.android.settingslib.RestrictedPreference, com.android.settingslib.widget.TwoTargetPreference, androidx.preference.Preference
     public void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
         super.onBindViewHolder(preferenceViewHolder);
-        View findViewById = preferenceViewHolder.findViewById(android.R.id.widget_frame);
-        if (findViewById instanceof LinearLayout) {
-            ((LinearLayout) findViewById).setGravity(8388629);
+        View viewFindViewById = preferenceViewHolder.findViewById(android.R.id.widget_frame);
+        if (viewFindViewById instanceof LinearLayout) {
+            ((LinearLayout) viewFindViewById).setGravity(8388629);
         }
         CompoundButton compoundButton = (CompoundButton) preferenceViewHolder.findViewById(R.id.switchWidget);
         this.mSwitch = compoundButton;
@@ -53,7 +52,7 @@ public class PrimarySwitchPreference extends RestrictedPreference {
             compoundButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.PrimarySwitchPreference$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    PrimarySwitchPreference primarySwitchPreference = PrimarySwitchPreference.this;
+                    PrimarySwitchPreference primarySwitchPreference = this.f$0;
                     CompoundButton compoundButton2 = primarySwitchPreference.mSwitch;
                     if (compoundButton2 == null || compoundButton2.isEnabled()) {
                         boolean z = !primarySwitchPreference.mChecked;
@@ -61,11 +60,11 @@ public class PrimarySwitchPreference extends RestrictedPreference {
                             String str = primarySwitchPreference.mKey;
                             CompoundButton compoundButton3 = primarySwitchPreference.mSwitch;
                             InteractionJankMonitor interactionJankMonitor = SettingsJankMonitor.jankMonitor;
-                            InteractionJankMonitor.Configuration.Builder withView = InteractionJankMonitor.Configuration.Builder.withView(57, compoundButton3);
+                            InteractionJankMonitor.Configuration.Builder builderWithView = InteractionJankMonitor.Configuration.Builder.withView(57, compoundButton3);
                             if (str != null) {
-                                withView.setTag(str);
+                                builderWithView.setTag(str);
                             }
-                            if (SettingsJankMonitor.jankMonitor.begin(withView)) {
+                            if (SettingsJankMonitor.jankMonitor.begin(builderWithView)) {
                                 SettingsJankMonitor.scheduledExecutorService.schedule(new Runnable() { // from class: com.android.settingslib.core.instrumentation.SettingsJankMonitor$detectToggleJank$1
                                     @Override // java.lang.Runnable
                                     public final void run() {

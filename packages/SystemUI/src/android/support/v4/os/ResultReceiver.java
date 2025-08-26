@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.os.IResultReceiver;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ResultReceiver implements Parcelable {
     public static final Parcelable.Creator<ResultReceiver> CREATOR = new Parcelable.Creator() { // from class: android.support.v4.os.ResultReceiver.1
@@ -25,13 +24,11 @@ public class ResultReceiver implements Parcelable {
     public final Handler mHandler;
     public IResultReceiver mReceiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyResultReceiver extends IResultReceiver.Stub {
         public MyResultReceiver() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyRunnable implements Runnable {
         public final int mResultCode;
         public final Bundle mResultData;
@@ -71,19 +68,19 @@ public class ResultReceiver implements Parcelable {
     }
 
     public ResultReceiver(Parcel parcel) {
-        IResultReceiver iResultReceiver = null;
+        IResultReceiver proxy = null;
         this.mHandler = null;
-        IBinder readStrongBinder = parcel.readStrongBinder();
+        IBinder strongBinder = parcel.readStrongBinder();
         int i = IResultReceiver.Stub.$r8$clinit;
-        if (readStrongBinder != null) {
-            IInterface queryLocalInterface = readStrongBinder.queryLocalInterface(IResultReceiver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResultReceiver)) {
-                iResultReceiver = (IResultReceiver) queryLocalInterface;
+        if (strongBinder != null) {
+            IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface(IResultReceiver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResultReceiver)) {
+                proxy = (IResultReceiver) iInterfaceQueryLocalInterface;
             } else {
-                iResultReceiver = new IResultReceiver.Stub.Proxy(readStrongBinder);
+                proxy = new IResultReceiver.Stub.Proxy(strongBinder);
             }
         }
-        this.mReceiver = iResultReceiver;
+        this.mReceiver = proxy;
     }
 
     public void onReceiveResult(int i, Bundle bundle) {

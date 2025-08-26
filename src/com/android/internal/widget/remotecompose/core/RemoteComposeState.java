@@ -54,17 +54,17 @@ public class RemoteComposeState implements CollectionsAccess {
     }
 
     public int cacheData(Object obj) {
-        int nextId = nextId();
-        this.mDataIntMap.put(obj, Integer.valueOf(nextId));
-        this.mIntDataMap.put(nextId, obj);
-        return nextId;
+        int iNextId = nextId();
+        this.mDataIntMap.put(obj, Integer.valueOf(iNextId));
+        this.mIntDataMap.put(iNextId, obj);
+        return iNextId;
     }
 
     public int cacheData(Object obj, int i) {
-        int nextId = nextId(i);
-        this.mDataIntMap.put(obj, Integer.valueOf(nextId));
-        this.mIntDataMap.put(nextId, obj);
-        return nextId;
+        int iNextId = nextId(i);
+        this.mDataIntMap.put(obj, Integer.valueOf(iNextId));
+        this.mIntDataMap.put(iNextId, obj);
+        return iNextId;
     }
 
     public void cacheData(int i, Object obj) {
@@ -112,10 +112,10 @@ public class RemoteComposeState implements CollectionsAccess {
     }
 
     public int cacheFloat(float f) {
-        int nextId = nextId();
-        this.mFloatMap.put(nextId, f);
-        this.mIntegerMap.put(nextId, (int) f);
-        return nextId;
+        int iNextId = nextId();
+        this.mFloatMap.put(iNextId, f);
+        this.mIntegerMap.put(iNextId, (int) f);
+        return iNextId;
     }
 
     public void cacheFloat(int i, float f) {
@@ -141,10 +141,10 @@ public class RemoteComposeState implements CollectionsAccess {
     }
 
     public int cacheInteger(int i) {
-        int nextId = nextId();
-        this.mIntegerMap.put(nextId, i);
-        this.mFloatMap.put(nextId, i);
-        return nextId;
+        int iNextId = nextId();
+        this.mIntegerMap.put(iNextId, i);
+        this.mFloatMap.put(iNextId, i);
+        return iNextId;
     }
 
     public void updateInteger(int i, int i2) {

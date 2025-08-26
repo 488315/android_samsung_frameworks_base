@@ -3,7 +3,6 @@ package androidx.compose.ui.text.input;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import java.text.BreakIterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MoveCursorCommand implements EditCommand {
     public final int amount;
@@ -19,31 +18,31 @@ public final class MoveCursorCommand implements EditCommand {
             editingBuffer.setSelection$ui_text_release(i, i);
         }
         int i2 = editingBuffer.selectionStart;
-        String partialGapBuffer = editingBuffer.gapBuffer.toString();
+        String string = editingBuffer.gapBuffer.toString();
         int i3 = 0;
         int i4 = this.amount;
         if (i4 <= 0) {
             int i5 = -i4;
             while (i3 < i5) {
                 BreakIterator characterInstance = BreakIterator.getCharacterInstance();
-                characterInstance.setText(partialGapBuffer);
-                int preceding = characterInstance.preceding(i2);
-                if (preceding == -1) {
+                characterInstance.setText(string);
+                int iPreceding = characterInstance.preceding(i2);
+                if (iPreceding == -1) {
                     break;
                 }
                 i3++;
-                i2 = preceding;
+                i2 = iPreceding;
             }
         } else {
             while (i3 < i4) {
                 BreakIterator characterInstance2 = BreakIterator.getCharacterInstance();
-                characterInstance2.setText(partialGapBuffer);
-                int following = characterInstance2.following(i2);
-                if (following == -1) {
+                characterInstance2.setText(string);
+                int iFollowing = characterInstance2.following(i2);
+                if (iFollowing == -1) {
                     break;
                 }
                 i3++;
-                i2 = following;
+                i2 = iFollowing;
             }
         }
         editingBuffer.setSelection$ui_text_release(i2, i2);

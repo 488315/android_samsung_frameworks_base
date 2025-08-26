@@ -19,7 +19,6 @@ import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.common.SyncTransactionQueue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class CompatUIWindowManagerAbstract extends WindowlessWindowManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -66,9 +65,9 @@ public abstract class CompatUIWindowManagerAbstract extends WindowlessWindowMana
         if (this.mViewHost != null) {
             throw new IllegalStateException("A UI has already been created with this window manager.");
         }
-        SurfaceControlViewHost createSurfaceViewHost = createSurfaceViewHost();
-        this.mViewHost = createSurfaceViewHost;
-        createSurfaceViewHost.setView(createLayout(), getWindowLayoutParams());
+        SurfaceControlViewHost surfaceControlViewHostCreateSurfaceViewHost = createSurfaceViewHost();
+        this.mViewHost = surfaceControlViewHostCreateSurfaceViewHost;
+        surfaceControlViewHostCreateSurfaceViewHost.setView(createLayout(), getWindowLayoutParams());
         updateSurfacePosition();
         return true;
     }
@@ -86,15 +85,15 @@ public abstract class CompatUIWindowManagerAbstract extends WindowlessWindowMana
         String simpleName = getClass().getSimpleName();
         SurfaceControl.Builder callsite = new SurfaceControl.Builder().setContainerLayer().setName(simpleName.concat("Leash")).setHidden(false).setCallsite(simpleName.concat("#attachToParentSurface"));
         attachToParentSurface(callsite);
-        final SurfaceControl build = callsite.build();
-        this.mLeash = build;
+        final SurfaceControl surfaceControlBuild = callsite.build();
+        this.mLeash = surfaceControlBuild;
         final int zOrder = getZOrder();
         this.mSyncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.compatui.CompatUIWindowManagerAbstract$$ExternalSyntheticLambda1
             @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
             public final void runWithTransaction(SurfaceControl.Transaction transaction) {
-                SurfaceControl surfaceControl = build;
+                SurfaceControl surfaceControl = surfaceControlBuild;
                 int i = CompatUIWindowManagerAbstract.$r8$clinit;
-                CompatUIWindowManagerAbstract compatUIWindowManagerAbstract = CompatUIWindowManagerAbstract.this;
+                CompatUIWindowManagerAbstract compatUIWindowManagerAbstract = this.f$0;
                 if (surfaceControl == null || !surfaceControl.isValid()) {
                     Log.w(compatUIWindowManagerAbstract.getClass().getSimpleName(), "The leash has been released.");
                 } else {
@@ -195,9 +194,9 @@ public abstract class CompatUIWindowManagerAbstract extends WindowlessWindowMana
         if (layout != null && taskListener2 == taskListener) {
             Configuration configuration3 = this.mTaskConfig;
             if (configuration3.uiMode == configuration.uiMode) {
-                boolean equals = configuration3.windowConfiguration.getBounds().equals(configuration.windowConfiguration.getBounds());
+                boolean zEquals = configuration3.windowConfiguration.getBounds().equals(configuration.windowConfiguration.getBounds());
                 boolean z2 = this.mTaskConfig.getLayoutDirection() != configuration.getLayoutDirection();
-                if (!equals || z2) {
+                if (!zEquals || z2) {
                     onParentBoundsChanged();
                 }
                 if (z2) {

@@ -18,6 +18,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -42,7 +43,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SeslAbsSeekBar extends SeslProgressBar {
     public int mCurrentProgressLevel;
@@ -92,7 +92,6 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
     public List mUserGestureExclusionRects;
     public final ValueAnimator mValueAnimator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.widget.SeslAbsSeekBar$1, reason: invalid class name */
     public class AnonymousClass1 implements ValueAnimator.AnimatorUpdateListener {
         public AnonymousClass1() {
@@ -104,7 +103,6 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliderDrawable extends Drawable {
         public int mAlpha;
         public int mColor;
@@ -119,7 +117,6 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         public final float mSliderMinWidth;
         public final SliderState mState;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class SliderState extends Drawable.ConstantState {
             private SliderState() {
             }
@@ -212,7 +209,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
 
         @Override // android.graphics.drawable.Drawable
         public final boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
@@ -247,7 +244,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                 }
                 this.mIsStateChanged = z3;
             }
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable
@@ -291,40 +288,39 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             this.mSliderMaxWidth = f2;
             this.mRadius = f / 2.0f;
             this.mIsVertical = z;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-            this.mPressedAnimator = ofFloat;
-            ofFloat.setDuration(250L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+            this.mPressedAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(250L);
             ValueAnimator valueAnimator = this.mPressedAnimator;
             Interpolator interpolator = SeslAnimationUtils.SINE_IN_OUT_80;
             valueAnimator.setInterpolator(interpolator);
             this.mPressedAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.SliderDrawable.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
                     SliderDrawable sliderDrawable = SliderDrawable.this;
-                    sliderDrawable.mPaint.setStrokeWidth(floatValue);
-                    sliderDrawable.mRadius = floatValue / 2.0f;
+                    sliderDrawable.mPaint.setStrokeWidth(fFloatValue);
+                    sliderDrawable.mRadius = fFloatValue / 2.0f;
                     sliderDrawable.invalidateSelf();
                 }
             });
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(f2, f);
-            this.mReleasedAnimator = ofFloat2;
-            ofFloat2.setDuration(250L);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(f2, f);
+            this.mReleasedAnimator = valueAnimatorOfFloat2;
+            valueAnimatorOfFloat2.setDuration(250L);
             this.mReleasedAnimator.setInterpolator(interpolator);
             this.mReleasedAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.SliderDrawable.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
                     SliderDrawable sliderDrawable = SliderDrawable.this;
-                    sliderDrawable.mPaint.setStrokeWidth(floatValue);
-                    sliderDrawable.mRadius = floatValue / 2.0f;
+                    sliderDrawable.mPaint.setStrokeWidth(fFloatValue);
+                    sliderDrawable.mRadius = fFloatValue / 2.0f;
                     sliderDrawable.invalidateSelf();
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ThumbDrawable extends Drawable {
         public int mAlpha;
         public int mColor;
@@ -358,29 +354,29 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             paint.setColor(this.mColor);
             paint2.setColor(SeslAbsSeekBar.this.getContext().getResources().getColor(R.color.sesl_thumb_control_fill_color_activated));
             this.mIsVertical = z;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(i, 0.0f);
-            this.mThumbPressed = ofFloat;
-            ofFloat.setDuration(100L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(i, 0.0f);
+            this.mThumbPressed = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(100L);
             this.mThumbPressed.setInterpolator(new LinearInterpolator());
             this.mThumbPressed.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.ThumbDrawable.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                     ThumbDrawable thumbDrawable = ThumbDrawable.this;
-                    thumbDrawable.mRadiusForAni = (int) floatValue;
+                    thumbDrawable.mRadiusForAni = (int) fFloatValue;
                     thumbDrawable.invalidateSelf();
                 }
             });
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, i);
-            this.mThumbReleased = ofFloat2;
-            ofFloat2.setDuration(300L);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, i);
+            this.mThumbReleased = valueAnimatorOfFloat2;
+            valueAnimatorOfFloat2.setDuration(300L);
             this.mThumbReleased.setInterpolator(SeslAnimationUtils.SINE_IN_OUT_90);
             this.mThumbReleased.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.ThumbDrawable.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                     ThumbDrawable thumbDrawable = ThumbDrawable.this;
-                    thumbDrawable.mRadiusForAni = (int) floatValue;
+                    thumbDrawable.mRadiusForAni = (int) fFloatValue;
                     thumbDrawable.invalidateSelf();
                 }
             });
@@ -448,7 +444,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
 
         @Override // android.graphics.drawable.Drawable
         public final boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
@@ -484,7 +480,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                 }
                 this.mIsStateChanged = z;
             }
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable
@@ -538,20 +534,20 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         return new ColorStateList(new int[][]{new int[0]}, new int[]{i});
     }
 
-    public static boolean isHoverPopupTypeUserCustom(int i) {
+    public static boolean isHoverPopupTypeUserCustom(int i) throws NoSuchMethodException, SecurityException {
         Method declaredMethod = SeslBaseReflector.getDeclaredMethod("com.samsung.android.widget.SemHoverPopupWindow", "hidden_TYPE_USER_CUSTOM", new Class[0]);
-        Object invoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
-        return i == (invoke instanceof Integer ? ((Integer) invoke).intValue() : 3);
+        Object objInvoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
+        return i == (objInvoke instanceof Integer ? ((Integer) objInvoke).intValue() : 3);
     }
 
     public final void applyThumbTint() {
         Drawable drawable = this.mThumb;
         if (drawable != null) {
             if (this.mHasThumbTint || this.mHasThumbTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mThumb = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mThumb = drawableMutate;
                 if (this.mHasThumbTint) {
-                    mutate.setTintList(this.mThumbTintList);
+                    drawableMutate.setTintList(this.mThumbTintList);
                 }
                 if (this.mHasThumbTintMode) {
                     this.mThumb.setTintMode(this.mThumbTintMode);
@@ -567,10 +563,10 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         Drawable drawable = this.mTickMark;
         if (drawable != null) {
             if (this.mHasTickMarkTint || this.mHasTickMarkTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mTickMark = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mTickMark = drawableMutate;
                 if (this.mHasTickMarkTint) {
-                    mutate.setTintList(this.mTickMarkTintList);
+                    drawableMutate.setTintList(this.mTickMarkTintList);
                 }
                 if (this.mHasTickMarkTintMode) {
                     this.mTickMark.setTintMode(this.mTickMarkTintMode);
@@ -592,13 +588,13 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                 int i2 = intrinsicHeight >= 0 ? intrinsicHeight / 2 : 1;
                 this.mTickMark.setBounds(-i, -i2, i, i2);
                 float width = (((getWidth() - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this)) - (this.mLevelDrawPadding * 2.0f)) / max;
-                int save = canvas.save();
+                int iSave = canvas.save();
                 canvas.translate(this.mLevelDrawPadding + SeslViewReflector.getField_mPaddingLeft(this), getHeight() / 2.0f);
                 for (int i3 = 0; i3 <= max; i3++) {
                     this.mTickMark.draw(canvas);
                     canvas.translate(width, 0.0f);
                 }
-                canvas.restoreToCount(save);
+                canvas.restoreToCount(iSave);
             }
         }
     }
@@ -617,11 +613,11 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         rect.offset(SeslViewReflector.getField_mPaddingLeft(this) - this.mThumbOffset, getPaddingTop());
         rect.left += opticalBounds.left;
         rect.right -= opticalBounds.right;
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.clipRect(rect, Region.Op.DIFFERENCE);
         super.drawTrack(canvas);
         drawTickMarks(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     @Override // androidx.appcompat.widget.SeslProgressBar, android.view.View
@@ -692,10 +688,10 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         int i = 400;
         for (int i2 = 0; i2 < 8; i2++) {
             boolean z = i2 % 2 == 0;
-            ValueAnimator ofInt = z ? ValueAnimator.ofInt(0, i) : ValueAnimator.ofInt(i, 0);
-            ofInt.setDuration(62);
-            ofInt.setInterpolator(new LinearInterpolator());
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.2
+            ValueAnimator valueAnimatorOfInt = z ? ValueAnimator.ofInt(0, i) : ValueAnimator.ofInt(i, 0);
+            valueAnimatorOfInt.setDuration(62);
+            valueAnimatorOfInt.setInterpolator(new LinearInterpolator());
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.widget.SeslAbsSeekBar.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     SeslAbsSeekBar.this.mCurrentProgressLevel = ((Integer) valueAnimator.getAnimatedValue()).intValue();
@@ -703,9 +699,9 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                     int i3 = seslAbsSeekBar.mCurrentProgressLevel;
                     Drawable drawable = seslAbsSeekBar.mCurrentDrawable;
                     if (drawable != null) {
-                        Drawable findDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(android.R.id.progress) : null;
-                        if (findDrawableByLayerId != null) {
-                            findDrawableByLayerId.setLevel(i3);
+                        Drawable drawableFindDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(android.R.id.progress) : null;
+                        if (drawableFindDrawableByLayerId != null) {
+                            drawableFindDrawableByLayerId.setLevel(i3);
                         }
                     }
                     float f = i3 / 10000.0f;
@@ -716,7 +712,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                     }
                 }
             });
-            arrayList.add(ofInt);
+            arrayList.add(valueAnimatorOfInt);
             if (z) {
                 i = (int) (i * 0.6d);
             }
@@ -758,114 +754,114 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0062 A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0089 A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00aa A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00bf A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00cd A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0025 A[Catch: all -> 0x00b8, TryCatch #0 {all -> 0x00b8, blocks: (B:3:0x0001, B:5:0x0011, B:7:0x001b, B:9:0x0025, B:11:0x002f, B:13:0x0039, B:14:0x0041, B:16:0x0047, B:18:0x004b, B:20:0x0062, B:21:0x006f, B:23:0x0089, B:24:0x0098, B:26:0x00aa, B:28:0x00ba, B:30:0x00bf, B:31:0x00c9, B:33:0x00cd, B:38:0x00da, B:39:0x00fb, B:41:0x00eb), top: B:2:0x0001 }] */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0040  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
     @Override // androidx.appcompat.widget.SeslProgressBar, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized void onDraw(android.graphics.Canvas r9) {
-        /*
-            Method dump skipped, instructions count: 263
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.SeslAbsSeekBar.onDraw(android.graphics.Canvas):void");
+    public final synchronized void onDraw(Canvas canvas) {
+        boolean zBooleanValue;
+        try {
+            super.onDraw(canvas);
+            Class cls = SeslViewReflector.mClass;
+            Method declaredMethod = SeslBaseReflector.getDeclaredMethod(cls, "isHoveringUIEnabled", new Class[0]);
+            if (declaredMethod != null) {
+                Object objInvoke = SeslBaseReflector.invoke(this, declaredMethod, new Object[0]);
+                zBooleanValue = objInvoke instanceof Boolean ? ((Boolean) objInvoke).booleanValue() : false;
+            }
+            if (zBooleanValue) {
+                Method method = SeslBaseReflector.getMethod(cls, "semGetHoverPopupType", new Class[0]);
+                if (method != null) {
+                    Object objInvoke2 = SeslBaseReflector.invoke(this, method, new Object[0]);
+                    int iIntValue = objInvoke2 instanceof Integer ? ((Integer) objInvoke2).intValue() : 0;
+                    if (isHoverPopupTypeUserCustom(iIntValue) && this.mPreviousHoverPopupType != iIntValue) {
+                        this.mPreviousHoverPopupType = iIntValue;
+                        Object objSemGetHoverPopup = SeslViewReflector.semGetHoverPopup(this);
+                        Class cls2 = Integer.TYPE;
+                        Method declaredMethod2 = SeslBaseReflector.getDeclaredMethod("com.samsung.android.widget.SemHoverPopupWindow", "hidden_setGravity", cls2);
+                        if (declaredMethod2 != null) {
+                            SeslBaseReflector.invoke(objSemGetHoverPopup, declaredMethod2, 12849);
+                        }
+                        int measuredHeight = getMeasuredHeight() / 2;
+                        Object objSemGetHoverPopup2 = SeslViewReflector.semGetHoverPopup(this);
+                        Method declaredMethod3 = SeslBaseReflector.getDeclaredMethod("com.samsung.android.widget.SemHoverPopupWindow", "hidden_setOffset", cls2, cls2);
+                        if (declaredMethod3 != null) {
+                            SeslBaseReflector.invoke(objSemGetHoverPopup2, declaredMethod3, 0, Integer.valueOf(measuredHeight));
+                        }
+                        Object objSemGetHoverPopup3 = SeslViewReflector.semGetHoverPopup(this);
+                        Method declaredMethod4 = SeslBaseReflector.getDeclaredMethod("com.samsung.android.widget.SemHoverPopupWindow", "hidden_setHoverDetectTime", cls2);
+                        if (declaredMethod4 != null) {
+                            SeslBaseReflector.invoke(objSemGetHoverPopup3, declaredMethod4, 200);
+                        }
+                    }
+                }
+            }
+            if (this.mCurrentMode == 4) {
+                this.mSplitProgress.draw(canvas);
+                this.mDivider.draw(canvas);
+            }
+            if (this.mThumb != null) {
+                int iSave = canvas.save();
+                int i = this.mCurrentMode;
+                if (i == 3 || i == 6) {
+                    canvas.translate(SeslViewReflector.getField_mPaddingLeft(this), getPaddingTop() - this.mThumbOffset);
+                } else {
+                    canvas.translate(SeslViewReflector.getField_mPaddingLeft(this) - this.mThumbOffset, getPaddingTop());
+                }
+                this.mThumb.draw(canvas);
+                canvas.restoreToCount(iSave);
+            }
+        } catch (Throwable th) {
+            throw th;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0057  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001e  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onHoverEvent(android.view.MotionEvent r8) {
-        /*
-            r7 = this;
-            java.lang.Class r0 = androidx.reflect.view.SeslViewReflector.mClass
-            r1 = 0
-            java.lang.Class[] r2 = new java.lang.Class[r1]
-            java.lang.String r3 = "isHoveringUIEnabled"
-            java.lang.reflect.Method r2 = androidx.reflect.SeslBaseReflector.getDeclaredMethod(r0, r3, r2)
-            if (r2 == 0) goto L1e
-            java.lang.Object[] r3 = new java.lang.Object[r1]
-            java.lang.Object r2 = androidx.reflect.SeslBaseReflector.invoke(r7, r2, r3)
-            boolean r3 = r2 instanceof java.lang.Boolean
-            if (r3 == 0) goto L1e
-            java.lang.Boolean r2 = (java.lang.Boolean) r2
-            boolean r2 = r2.booleanValue()
-            goto L1f
-        L1e:
-            r2 = r1
-        L1f:
-            if (r2 == 0) goto La2
-            int r2 = r8.getAction()
-            float r3 = r8.getX()
-            int r3 = (int) r3
-            r8.getY()
-            r4 = 7
-            if (r2 == r4) goto L39
-            r0 = 9
-            if (r2 == r0) goto L35
-            goto La2
-        L35:
-            r7.trackHoverEvent(r3)
-            goto La2
-        L39:
-            r7.trackHoverEvent(r3)
-            java.lang.Class[] r2 = new java.lang.Class[r1]
-            java.lang.String r3 = "semGetHoverPopupType"
-            java.lang.reflect.Method r0 = androidx.reflect.SeslBaseReflector.getMethod(r0, r3, r2)
-            if (r0 == 0) goto L57
-            java.lang.Object[] r2 = new java.lang.Object[r1]
-            java.lang.Object r0 = androidx.reflect.SeslBaseReflector.invoke(r7, r0, r2)
-            boolean r2 = r0 instanceof java.lang.Integer
-            if (r2 == 0) goto L57
-            java.lang.Integer r0 = (java.lang.Integer) r0
-            int r0 = r0.intValue()
-            goto L58
-        L57:
-            r0 = r1
-        L58:
-            boolean r0 = isHoverPopupTypeUserCustom(r0)
-            if (r0 == 0) goto La2
-            float r0 = r8.getRawX()
-            int r0 = (int) r0
-            float r2 = r8.getRawY()
-            int r2 = (int) r2
-            java.lang.Object r3 = androidx.reflect.view.SeslViewReflector.semGetHoverPopup(r7)
-            r4 = 2
-            java.lang.Class[] r4 = new java.lang.Class[r4]
-            java.lang.Class r5 = java.lang.Integer.TYPE
-            r4[r1] = r5
-            r6 = 1
-            r4[r6] = r5
-            java.lang.String r5 = "com.samsung.android.widget.SemHoverPopupWindow"
-            java.lang.String r6 = "setHoveringPoint"
-            java.lang.reflect.Method r4 = androidx.reflect.SeslBaseReflector.getMethod(r5, r6, r4)
-            if (r4 == 0) goto L8f
-            java.lang.Integer r0 = java.lang.Integer.valueOf(r0)
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r2)
-            java.lang.Object[] r0 = new java.lang.Object[]{r0, r2}
-            androidx.reflect.SeslBaseReflector.invoke(r3, r4, r0)
-        L8f:
-            java.lang.Object r0 = androidx.reflect.view.SeslViewReflector.semGetHoverPopup(r7)
-            java.lang.Class[] r2 = new java.lang.Class[r1]
-            java.lang.String r3 = "hidden_update"
-            java.lang.reflect.Method r2 = androidx.reflect.SeslBaseReflector.getDeclaredMethod(r5, r3, r2)
-            if (r2 == 0) goto La2
-            java.lang.Object[] r1 = new java.lang.Object[r1]
-            androidx.reflect.SeslBaseReflector.invoke(r0, r2, r1)
-        La2:
-            boolean r7 = super.onHoverEvent(r8)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.SeslAbsSeekBar.onHoverEvent(android.view.MotionEvent):boolean");
+    public final boolean onHoverEvent(MotionEvent motionEvent) throws NoSuchMethodException, SecurityException {
+        boolean zBooleanValue;
+        Class cls = SeslViewReflector.mClass;
+        Method declaredMethod = SeslBaseReflector.getDeclaredMethod(cls, "isHoveringUIEnabled", new Class[0]);
+        if (declaredMethod != null) {
+            Object objInvoke = SeslBaseReflector.invoke(this, declaredMethod, new Object[0]);
+            zBooleanValue = objInvoke instanceof Boolean ? ((Boolean) objInvoke).booleanValue() : false;
+        }
+        if (zBooleanValue) {
+            int action = motionEvent.getAction();
+            int x = (int) motionEvent.getX();
+            motionEvent.getY();
+            if (action == 7) {
+                trackHoverEvent(x);
+                Method method = SeslBaseReflector.getMethod(cls, "semGetHoverPopupType", new Class[0]);
+                if (method != null) {
+                    Object objInvoke2 = SeslBaseReflector.invoke(this, method, new Object[0]);
+                    int iIntValue = objInvoke2 instanceof Integer ? ((Integer) objInvoke2).intValue() : 0;
+                    if (isHoverPopupTypeUserCustom(iIntValue)) {
+                        int rawX = (int) motionEvent.getRawX();
+                        int rawY = (int) motionEvent.getRawY();
+                        Object objSemGetHoverPopup = SeslViewReflector.semGetHoverPopup(this);
+                        Class cls2 = Integer.TYPE;
+                        Method method2 = SeslBaseReflector.getMethod("com.samsung.android.widget.SemHoverPopupWindow", "setHoveringPoint", cls2, cls2);
+                        if (method2 != null) {
+                            SeslBaseReflector.invoke(objSemGetHoverPopup, method2, Integer.valueOf(rawX), Integer.valueOf(rawY));
+                        }
+                        Object objSemGetHoverPopup2 = SeslViewReflector.semGetHoverPopup(this);
+                        Method declaredMethod2 = SeslBaseReflector.getDeclaredMethod("com.samsung.android.widget.SemHoverPopupWindow", "hidden_update", new Class[0]);
+                        if (declaredMethod2 != null) {
+                            SeslBaseReflector.invoke(objSemGetHoverPopup2, declaredMethod2, new Object[0]);
+                        }
+                    }
+                }
+            } else if (action == 9) {
+                trackHoverEvent(x);
+            }
+        }
+        return super.onHoverEvent(motionEvent);
     }
 
     @Override // androidx.appcompat.widget.SeslProgressBar, android.view.View
@@ -882,122 +878,82 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0024, code lost:
-    
-        if (r8 != 81) goto L39;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0038, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0038, code lost:
     
         if (setProgressInternal(getProgress() + r0, true, true) == false) goto L39;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x005d, code lost:
-    
-        return true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0047, code lost:
-    
-        if (r8 != 81) goto L39;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x005b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x005b, code lost:
     
         if (setProgressInternal(getProgress() + r0, true, true) != false) goto L38;
      */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x002e  */
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x005d, code lost:
+    
+        return true;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x002e  */
     @Override // android.view.View, android.view.KeyEvent.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onKeyDown(int r8, android.view.KeyEvent r9) {
-        /*
-            r7 = this;
-            boolean r0 = r7.isEnabled()
-            if (r0 == 0) goto L5e
-            int r0 = r7.mKeyProgressIncrement
-            int r1 = r7.mCurrentMode
-            r2 = 3
-            r3 = 81
-            r4 = 70
-            r5 = 69
-            r6 = 1
-            if (r1 == r2) goto L3b
-            r2 = 6
-            if (r1 != r2) goto L18
-            goto L3b
-        L18:
-            r1 = 21
-            if (r8 == r1) goto L27
-            r1 = 22
-            if (r8 == r1) goto L28
-            if (r8 == r5) goto L27
-            if (r8 == r4) goto L28
-            if (r8 == r3) goto L28
-            goto L5e
-        L27:
-            int r0 = -r0
-        L28:
-            int r1 = r7.getLayoutDirection()
-            if (r1 != r6) goto L2f
-            int r0 = -r0
-        L2f:
-            int r1 = r7.getProgress()
-            int r1 = r1 + r0
-            boolean r0 = r7.setProgressInternal(r1, r6, r6)
-            if (r0 == 0) goto L5e
-            goto L5d
-        L3b:
-            r1 = 19
-            if (r8 == r1) goto L4b
-            r1 = 20
-            if (r8 == r1) goto L4a
-            if (r8 == r5) goto L4a
-            if (r8 == r4) goto L4b
-            if (r8 == r3) goto L4b
-            goto L5e
-        L4a:
-            int r0 = -r0
-        L4b:
-            int r1 = r7.getLayoutDirection()
-            if (r1 != r6) goto L52
-            int r0 = -r0
-        L52:
-            int r1 = r7.getProgress()
-            int r1 = r1 + r0
-            boolean r0 = r7.setProgressInternal(r1, r6, r6)
-            if (r0 == 0) goto L5e
-        L5d:
-            return r6
-        L5e:
-            boolean r7 = super.onKeyDown(r8, r9)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.SeslAbsSeekBar.onKeyDown(int, android.view.KeyEvent):boolean");
+    public final boolean onKeyDown(int i, KeyEvent keyEvent) {
+        if (isEnabled()) {
+            int i2 = this.mKeyProgressIncrement;
+            int i3 = this.mCurrentMode;
+            if (i3 == 3 || i3 == 6) {
+                if (i != 19) {
+                    if (i == 20 || i == 69) {
+                        i2 = -i2;
+                    } else if (i == 70 || i == 81) {
+                    }
+                }
+                if (getLayoutDirection() == 1) {
+                    i2 = -i2;
+                }
+            } else {
+                if (i != 21) {
+                    if (i != 22) {
+                        if (i != 69) {
+                            if (i == 70 || i == 81) {
+                            }
+                        }
+                    }
+                    if (getLayoutDirection() == 1) {
+                        i2 = -i2;
+                    }
+                }
+                i2 = -i2;
+                if (getLayoutDirection() == 1) {
+                }
+            }
+        }
+        return super.onKeyDown(i, keyEvent);
     }
 
     @Override // androidx.appcompat.widget.SeslProgressBar, android.view.View
     public final synchronized void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
+        int iMax;
+        int iMax2;
         try {
             Drawable drawable = this.mCurrentDrawable;
             if (drawable != null) {
-                int i5 = this.mCurrentMode;
-                if (i5 != 3 && i5 != 6) {
+                int i3 = this.mCurrentMode;
+                if (i3 == 3 || i3 == 6) {
                     Drawable drawable2 = this.mThumb;
                     int intrinsicHeight = drawable2 == null ? 0 : drawable2.getIntrinsicHeight();
-                    i4 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
-                    i3 = Math.max(intrinsicHeight, Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight())));
+                    int iMax3 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicHeight()));
+                    iMax = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicWidth()));
+                    iMax2 = Math.max(intrinsicHeight, iMax3);
+                } else {
+                    Drawable drawable3 = this.mThumb;
+                    int intrinsicHeight2 = drawable3 == null ? 0 : drawable3.getIntrinsicHeight();
+                    iMax2 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
+                    iMax = Math.max(intrinsicHeight2, Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight())));
                 }
-                Drawable drawable3 = this.mThumb;
-                int intrinsicHeight2 = drawable3 == null ? 0 : drawable3.getIntrinsicHeight();
-                int max = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicHeight()));
-                i3 = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicWidth()));
-                i4 = Math.max(intrinsicHeight2, max);
             } else {
-                i3 = 0;
-                i4 = 0;
+                iMax = 0;
+                iMax2 = 0;
             }
-            setMeasuredDimension(View.resolveSizeAndState(SeslViewReflector.getField_mPaddingLeft(this) + SeslViewReflector.getField_mPaddingRight(this) + i4, i, 0), View.resolveSizeAndState(getPaddingTop() + getPaddingBottom() + i3, i2, 0));
+            setMeasuredDimension(View.resolveSizeAndState(SeslViewReflector.getField_mPaddingLeft(this) + SeslViewReflector.getField_mPaddingRight(this) + iMax2, i, 0), View.resolveSizeAndState(getPaddingTop() + getPaddingBottom() + iMax, i2, 0));
         } catch (Throwable th) {
             throw th;
         }
@@ -1071,7 +1027,7 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
     @Override // android.view.View
     public boolean onTouchEvent(MotionEvent motionEvent) {
         int i;
-        boolean z = false;
+        boolean zBooleanValue = false;
         if (!this.mIsUserSeekable || !isEnabled()) {
             return false;
         }
@@ -1082,12 +1038,12 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             if (i2 != 5 && i2 != 6 && i2 != 0) {
                 Method method = SeslBaseReflector.getMethod(SeslViewReflector.mClass, "hidden_isInScrollingContainer", new Class[0]);
                 if (method != null) {
-                    Object invoke = SeslBaseReflector.invoke(this, method, new Object[0]);
-                    if (invoke instanceof Boolean) {
-                        z = ((Boolean) invoke).booleanValue();
+                    Object objInvoke = SeslBaseReflector.invoke(this, method, new Object[0]);
+                    if (objInvoke instanceof Boolean) {
+                        zBooleanValue = ((Boolean) objInvoke).booleanValue();
                     }
                 }
-                if (!z) {
+                if (!zBooleanValue) {
                     startDrag(motionEvent);
                     return true;
                 }
@@ -1157,11 +1113,11 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                         z = this.mIndeterminate;
                     }
                     if (!z && isEnabled()) {
-                        int max = Math.max(1, Math.round((getMax() - getMin()) / 20.0f));
+                        int iMax = Math.max(1, Math.round((getMax() - getMin()) / 20.0f));
                         if (i == 8192) {
-                            max = -max;
+                            iMax = -iMax;
                         }
-                        if (setProgressInternal(getProgress() + max, true, true)) {
+                        if (setProgressInternal(getProgress() + iMax, true, true)) {
                         }
                     }
                 } else if (i == 16908349) {
@@ -1184,15 +1140,13 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             super.setMax(i);
             int max = getMax() - getMin();
             int i2 = this.mKeyProgressIncrement;
-            if (i2 != 0) {
-                if (max / i2 > 20) {
+            if (i2 == 0 || max / i2 > 20) {
+                int iMax = Math.max(1, Math.round(max / 20.0f));
+                if (iMax < 0) {
+                    iMax = -iMax;
                 }
+                this.mKeyProgressIncrement = iMax;
             }
-            int max2 = Math.max(1, Math.round(max / 20.0f));
-            if (max2 < 0) {
-                max2 = -max2;
-            }
-            this.mKeyProgressIncrement = max2;
         } catch (Throwable th) {
             throw th;
         }
@@ -1204,15 +1158,13 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             super.setMin(i);
             int max = getMax() - getMin();
             int i2 = this.mKeyProgressIncrement;
-            if (i2 != 0) {
-                if (max / i2 > 20) {
+            if (i2 == 0 || max / i2 > 20) {
+                int iMax = Math.max(1, Math.round(max / 20.0f));
+                if (iMax < 0) {
+                    iMax = -iMax;
                 }
+                this.mKeyProgressIncrement = iMax;
             }
-            int max2 = Math.max(1, Math.round(max / 20.0f));
-            if (max2 < 0) {
-                max2 = -max2;
-            }
-            this.mKeyProgressIncrement = max2;
         } catch (Throwable th) {
             throw th;
         }
@@ -1492,9 +1444,9 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         if (i == 3 || i == 6) {
             int height = getHeight();
             int paddingTop = (height - getPaddingTop()) - getPaddingBottom();
-            int round = Math.round(motionEvent.getX());
-            int round2 = height - Math.round(motionEvent.getY());
-            float paddingBottom = round2 < getPaddingBottom() ? 0.0f : round2 > height - getPaddingTop() ? 1.0f : (round2 - getPaddingBottom()) / paddingTop;
+            int iRound = Math.round(motionEvent.getX());
+            int iRound2 = height - Math.round(motionEvent.getY());
+            float paddingBottom = iRound2 < getPaddingBottom() ? 0.0f : iRound2 > height - getPaddingTop() ? 1.0f : (iRound2 - getPaddingBottom()) / paddingTop;
             float max = getMax() - getMin();
             float f2 = 1.0f / max;
             if (paddingBottom > 0.0f && paddingBottom < 1.0f) {
@@ -1504,8 +1456,8 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
                 }
             }
             float min = (paddingBottom * max) + getMin() + 0.0f;
-            float f4 = round;
-            float f5 = round2;
+            float f4 = iRound;
+            float f5 = iRound2;
             Drawable background = getBackground();
             if (background != null) {
                 background.setHotspot(f4, f5);
@@ -1513,23 +1465,23 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             setProgressInternal(Math.round(min), true, false);
             return;
         }
-        int round3 = Math.round(motionEvent.getX());
-        int round4 = Math.round(motionEvent.getY());
+        int iRound3 = Math.round(motionEvent.getX());
+        int iRound4 = Math.round(motionEvent.getY());
         int width = getWidth();
         int field_mPaddingLeft2 = (width - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this);
         if (getLayoutDirection() == 1 && this.mMirrorForRtl) {
-            if (round3 <= width - SeslViewReflector.getField_mPaddingRight(this)) {
-                if (round3 >= SeslViewReflector.getField_mPaddingLeft(this)) {
-                    field_mPaddingLeft = SeslViewReflector.getField_mPaddingLeft(this) + (field_mPaddingLeft2 - round3);
+            if (iRound3 <= width - SeslViewReflector.getField_mPaddingRight(this)) {
+                if (iRound3 >= SeslViewReflector.getField_mPaddingLeft(this)) {
+                    field_mPaddingLeft = SeslViewReflector.getField_mPaddingLeft(this) + (field_mPaddingLeft2 - iRound3);
                     f = field_mPaddingLeft / field_mPaddingLeft2;
                 }
                 f = 1.0f;
             }
             f = 0.0f;
         } else {
-            if (round3 >= SeslViewReflector.getField_mPaddingLeft(this)) {
-                if (round3 <= width - SeslViewReflector.getField_mPaddingRight(this)) {
-                    field_mPaddingLeft = round3 - SeslViewReflector.getField_mPaddingLeft(this);
+            if (iRound3 >= SeslViewReflector.getField_mPaddingLeft(this)) {
+                if (iRound3 <= width - SeslViewReflector.getField_mPaddingRight(this)) {
+                    field_mPaddingLeft = iRound3 - SeslViewReflector.getField_mPaddingLeft(this);
                     f = field_mPaddingLeft / field_mPaddingLeft2;
                 }
                 f = 1.0f;
@@ -1545,8 +1497,8 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             }
         }
         float min2 = (f * max2) + getMin() + 0.0f;
-        float f8 = round3;
-        float f9 = round4;
+        float f8 = iRound3;
+        float f9 = iRound4;
         Drawable background2 = getBackground();
         if (background2 != null) {
             background2.setHotspot(f8, f9);
@@ -1598,30 +1550,30 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
     }
 
     public final void updateThumbAndTrackPos(int i, int i2) {
-        int m;
-        int i3;
-        int i4;
-        int m2;
-        int i5 = this.mCurrentMode;
-        if (i5 == 3 || i5 == 6) {
+        int iM;
+        int iM2;
+        int iM3;
+        int iM4;
+        int i3 = this.mCurrentMode;
+        if (i3 == 3 || i3 == 6) {
             int field_mPaddingLeft = (i - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this);
             Drawable drawable = this.mCurrentDrawable;
             Drawable drawable2 = this.mThumb;
-            int min = Math.min(this.mMaxWidth, field_mPaddingLeft);
+            int iMin = Math.min(this.mMaxWidth, field_mPaddingLeft);
             int intrinsicWidth = drawable2 == null ? 0 : drawable2.getIntrinsicWidth();
-            if (intrinsicWidth > min) {
-                m = (field_mPaddingLeft - intrinsicWidth) / 2;
-                i3 = AbsActionBarView$$ExternalSyntheticOutline0.m(intrinsicWidth, min, 2, m);
+            if (intrinsicWidth > iMin) {
+                iM = (field_mPaddingLeft - intrinsicWidth) / 2;
+                iM2 = AbsActionBarView$$ExternalSyntheticOutline0.m(intrinsicWidth, iMin, 2, iM);
             } else {
-                int i6 = (field_mPaddingLeft - min) / 2;
-                m = AbsActionBarView$$ExternalSyntheticOutline0.m(min, intrinsicWidth, 2, i6);
-                i3 = i6;
+                int i4 = (field_mPaddingLeft - iMin) / 2;
+                iM = AbsActionBarView$$ExternalSyntheticOutline0.m(iMin, intrinsicWidth, 2, i4);
+                iM2 = i4;
             }
             if (drawable != null) {
-                drawable.setBounds(i3, 0, field_mPaddingLeft - i3, (i2 - getPaddingBottom()) - getPaddingTop());
+                drawable.setBounds(iM2, 0, field_mPaddingLeft - iM2, (i2 - getPaddingBottom()) - getPaddingTop());
             }
             if (drawable2 != null) {
-                setThumbPosInVertical(i2, drawable2, getScale(), m);
+                setThumbPosInVertical(i2, drawable2, getScale(), iM);
                 return;
             }
             return;
@@ -1629,21 +1581,21 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         int paddingTop = (i2 - getPaddingTop()) - getPaddingBottom();
         Drawable drawable3 = this.mCurrentDrawable;
         Drawable drawable4 = this.mThumb;
-        int min2 = Math.min(this.mMaxHeight, paddingTop);
+        int iMin2 = Math.min(this.mMaxHeight, paddingTop);
         int intrinsicHeight = drawable4 == null ? 0 : drawable4.getIntrinsicHeight();
-        if (intrinsicHeight > min2) {
-            m2 = (paddingTop - intrinsicHeight) / 2;
-            i4 = AbsActionBarView$$ExternalSyntheticOutline0.m(intrinsicHeight, min2, 2, m2);
+        if (intrinsicHeight > iMin2) {
+            iM4 = (paddingTop - intrinsicHeight) / 2;
+            iM3 = AbsActionBarView$$ExternalSyntheticOutline0.m(intrinsicHeight, iMin2, 2, iM4);
         } else {
-            int i7 = (paddingTop - min2) / 2;
-            i4 = i7;
-            m2 = AbsActionBarView$$ExternalSyntheticOutline0.m(min2, intrinsicHeight, 2, i7);
+            int i5 = (paddingTop - iMin2) / 2;
+            iM3 = i5;
+            iM4 = AbsActionBarView$$ExternalSyntheticOutline0.m(iMin2, intrinsicHeight, 2, i5);
         }
         if (drawable3 != null) {
-            drawable3.setBounds(0, i4, (i - SeslViewReflector.getField_mPaddingRight(this)) - SeslViewReflector.getField_mPaddingLeft(this), min2 + i4);
+            drawable3.setBounds(0, iM3, (i - SeslViewReflector.getField_mPaddingRight(this)) - SeslViewReflector.getField_mPaddingLeft(this), iMin2 + iM3);
         }
         if (drawable4 != null) {
-            setThumbPos(i, drawable4, getScale(), m2);
+            setThumbPos(i, drawable4, getScale(), iM4);
         }
         updateSplitProgress();
     }
@@ -1714,48 +1666,48 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
         this.mIsSetModeCalled = false;
         this.mLevelDrawPadding = 0.0f;
         int[] iArr = R$styleable.AppCompatSeekBar;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
         try {
-            saveAttributeDataForStyleable(context, iArr, attributeSet, obtainStyledAttributes, i, i2);
+            saveAttributeDataForStyleable(context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, i2);
             Resources resources = context.getResources();
-            setThumb(obtainStyledAttributes.getDrawable(0));
-            if (obtainStyledAttributes.hasValue(4)) {
-                this.mThumbTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(4, -1), null);
+            setThumb(typedArrayObtainStyledAttributes.getDrawable(0));
+            if (typedArrayObtainStyledAttributes.hasValue(4)) {
+                this.mThumbTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(4, -1), null);
                 this.mHasThumbTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(3)) {
-                this.mThumbTintList = obtainStyledAttributes.getColorStateList(3);
+            if (typedArrayObtainStyledAttributes.hasValue(3)) {
+                this.mThumbTintList = typedArrayObtainStyledAttributes.getColorStateList(3);
                 this.mHasThumbTint = true;
             }
-            setTickMark(obtainStyledAttributes.getDrawable(10));
-            if (obtainStyledAttributes.hasValue(12)) {
-                this.mTickMarkTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(12, -1), null);
+            setTickMark(typedArrayObtainStyledAttributes.getDrawable(10));
+            if (typedArrayObtainStyledAttributes.hasValue(12)) {
+                this.mTickMarkTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(12, -1), null);
                 this.mHasTickMarkTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(11)) {
-                this.mTickMarkTintList = obtainStyledAttributes.getColorStateList(11);
+            if (typedArrayObtainStyledAttributes.hasValue(11)) {
+                this.mTickMarkTintList = typedArrayObtainStyledAttributes.getColorStateList(11);
                 this.mHasTickMarkTint = true;
             }
-            this.mSplitTrack = obtainStyledAttributes.getBoolean(2, false);
-            this.mIsHapticEnabled = obtainStyledAttributes.getBoolean(5, true);
-            this.mTrackMinWidth = obtainStyledAttributes.getDimensionPixelSize(9, Math.round(resources.getDimension(R.dimen.sesl_seekbar_track_height)));
-            this.mTrackMaxWidth = obtainStyledAttributes.getDimensionPixelSize(8, Math.round(resources.getDimension(R.dimen.sesl_seekbar_track_height_expand)));
-            this.mModeExpandTrackMinWidth = obtainStyledAttributes.getDimensionPixelSize(9, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_track_height)));
-            this.mModeExpandTrackMaxWidth = obtainStyledAttributes.getDimensionPixelSize(8, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_track_height_expand)));
-            this.mThumbRadius = obtainStyledAttributes.getDimensionPixelSize(7, Math.round(resources.getDimension(R.dimen.sesl_seekbar_thumb_radius)));
-            this.mModeExpandThumbRadius = obtainStyledAttributes.getDimensionPixelSize(7, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_thumb_radius)));
-            this.mThumbOffset = obtainStyledAttributes.getDimensionPixelOffset(1, this.mThumbOffset);
+            this.mSplitTrack = typedArrayObtainStyledAttributes.getBoolean(2, false);
+            this.mIsHapticEnabled = typedArrayObtainStyledAttributes.getBoolean(5, true);
+            this.mTrackMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, Math.round(resources.getDimension(R.dimen.sesl_seekbar_track_height)));
+            this.mTrackMaxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, Math.round(resources.getDimension(R.dimen.sesl_seekbar_track_height_expand)));
+            this.mModeExpandTrackMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_track_height)));
+            this.mModeExpandTrackMaxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_track_height_expand)));
+            this.mThumbRadius = typedArrayObtainStyledAttributes.getDimensionPixelSize(7, Math.round(resources.getDimension(R.dimen.sesl_seekbar_thumb_radius)));
+            this.mModeExpandThumbRadius = typedArrayObtainStyledAttributes.getDimensionPixelSize(7, Math.round(resources.getDimension(R.dimen.sesl_seekbar_mode_expand_thumb_radius)));
+            this.mThumbOffset = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, this.mThumbOffset);
             invalidate();
-            if (obtainStyledAttributes.hasValue(6)) {
-                this.mCurrentMode = obtainStyledAttributes.getInt(6, 0);
+            if (typedArrayObtainStyledAttributes.hasValue(6)) {
+                this.mCurrentMode = typedArrayObtainStyledAttributes.getInt(6, 0);
             }
-            if (obtainStyledAttributes.getBoolean(13, true)) {
-                obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AppCompatTheme, 0, 0);
+            if (typedArrayObtainStyledAttributes.getBoolean(13, true)) {
+                typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AppCompatTheme, 0, 0);
                 try {
-                    this.mDisabledAlpha = obtainStyledAttributes.getFloat(0, 0.5f);
-                    obtainStyledAttributes.recycle();
+                    this.mDisabledAlpha = typedArrayObtainStyledAttributes.getFloat(0, 0.5f);
+                    typedArrayObtainStyledAttributes.recycle();
                 } finally {
-                    obtainStyledAttributes.recycle();
+                    typedArrayObtainStyledAttributes.recycle();
                 }
             } else {
                 this.mDisabledAlpha = 1.0f;
@@ -1763,17 +1715,17 @@ public abstract class SeslAbsSeekBar extends SeslProgressBar {
             applyThumbTint();
             applyTickMarkTint();
             this.mScaledTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-            boolean isLightTheme = SeslMisc.isLightTheme(context);
-            this.mIsLightTheme = isLightTheme;
-            this.mDefaultNormalProgressColor = colorToColorStateList$1(resources.getColor(isLightTheme ? R.color.sesl_seekbar_control_color_default : R.color.sesl_seekbar_control_color_default_dark));
+            boolean zIsLightTheme = SeslMisc.isLightTheme(context);
+            this.mIsLightTheme = zIsLightTheme;
+            this.mDefaultNormalProgressColor = colorToColorStateList$1(resources.getColor(zIsLightTheme ? R.color.sesl_seekbar_control_color_default : R.color.sesl_seekbar_control_color_default_dark));
             this.mDefaultSecondaryProgressColor = colorToColorStateList$1(resources.getColor(R.color.sesl_seekbar_control_color_secondary));
             this.mDefaultActivatedProgressColor = colorToColorStateList$1(resources.getColor(R.color.sesl_seekbar_control_color_activated));
-            colorToColorStateList$1(resources.getColor(isLightTheme ? R.color.sesl_seekbar_overlap_color_default_light : R.color.sesl_seekbar_overlap_color_default_dark));
-            this.mOverlapActivatedProgressColor = colorToColorStateList$1(resources.getColor(isLightTheme ? R.color.sesl_seekbar_overlap_color_activated_light : R.color.sesl_seekbar_overlap_color_activated_dark));
+            colorToColorStateList$1(resources.getColor(zIsLightTheme ? R.color.sesl_seekbar_overlap_color_default_light : R.color.sesl_seekbar_overlap_color_default_dark));
+            this.mOverlapActivatedProgressColor = colorToColorStateList$1(resources.getColor(zIsLightTheme ? R.color.sesl_seekbar_overlap_color_activated_light : R.color.sesl_seekbar_overlap_color_activated_dark));
             ColorStateList colorStateList = this.mThumbTintList;
             this.mDefaultActivatedThumbColor = colorStateList;
             if (colorStateList == null) {
-                this.mDefaultActivatedThumbColor = new ColorStateList(new int[][]{new int[]{android.R.attr.state_enabled}, new int[]{-16842910}}, new int[]{resources.getColor(R.color.sesl_thumb_control_color_activated), resources.getColor(isLightTheme ? R.color.sesl_seekbar_disable_color_activated_light : R.color.sesl_seekbar_disable_color_activated_dark)});
+                this.mDefaultActivatedThumbColor = new ColorStateList(new int[][]{new int[]{android.R.attr.state_enabled}, new int[]{-16842910}}, new int[]{resources.getColor(R.color.sesl_thumb_control_color_activated), resources.getColor(zIsLightTheme ? R.color.sesl_seekbar_disable_color_activated_light : R.color.sesl_seekbar_disable_color_activated_dark)});
             }
             if (resources.getBoolean(R.bool.sesl_seekbar_sliding_animation)) {
                 initMuteAnimation();

@@ -12,7 +12,6 @@ import com.android.wm.shell.shared.TransactionPool;
 import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
 import com.android.wm.shell.startingsurface.WindowlessSnapshotWindowCreator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WindowlessSnapshotWindowCreator {
     public final Context mContext;
@@ -21,7 +20,6 @@ public class WindowlessSnapshotWindowCreator {
     public final StartingSurfaceDrawer.StartingWindowRecordManager mStartingWindowRecordManager;
     public final TransactionPool mTransactionPool;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnapshotWindowRecord extends StartingSurfaceDrawer.SnapshotRecord {
         public SurfaceControl mChildSurface;
         public final boolean mHasImeSurface;
@@ -45,15 +43,15 @@ public class WindowlessSnapshotWindowCreator {
         @Override // com.android.wm.shell.startingsurface.StartingSurfaceDrawer.SnapshotRecord
         public final void removeImmediately() {
             super.removeImmediately();
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat.setDuration(233L);
-            final SurfaceControl.Transaction acquire = WindowlessSnapshotWindowCreator.this.mTransactionPool.acquire();
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.startingsurface.WindowlessSnapshotWindowCreator$SnapshotWindowRecord$$ExternalSyntheticLambda0
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat.setDuration(233L);
+            final SurfaceControl.Transaction transactionAcquire = WindowlessSnapshotWindowCreator.this.mTransactionPool.acquire();
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.startingsurface.WindowlessSnapshotWindowCreator$SnapshotWindowRecord$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    WindowlessSnapshotWindowCreator.SnapshotWindowRecord snapshotWindowRecord = WindowlessSnapshotWindowCreator.SnapshotWindowRecord.this;
-                    ValueAnimator valueAnimator2 = ofFloat;
-                    SurfaceControl.Transaction transaction = acquire;
+                    WindowlessSnapshotWindowCreator.SnapshotWindowRecord snapshotWindowRecord = this.f$0;
+                    ValueAnimator valueAnimator2 = valueAnimatorOfFloat;
+                    SurfaceControl.Transaction transaction = transactionAcquire;
                     SurfaceControl surfaceControl = snapshotWindowRecord.mChildSurface;
                     if (surfaceControl == null || !surfaceControl.isValid()) {
                         valueAnimator2.cancel();
@@ -63,15 +61,15 @@ public class WindowlessSnapshotWindowCreator {
                     }
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.startingsurface.WindowlessSnapshotWindowCreator.SnapshotWindowRecord.1
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.startingsurface.WindowlessSnapshotWindowCreator.SnapshotWindowRecord.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    WindowlessSnapshotWindowCreator.this.mTransactionPool.release(acquire);
+                    WindowlessSnapshotWindowCreator.this.mTransactionPool.release(transactionAcquire);
                     SnapshotWindowRecord snapshotWindowRecord = SnapshotWindowRecord.this;
                     if (snapshotWindowRecord.mChildSurface != null) {
-                        SurfaceControl.Transaction acquire2 = WindowlessSnapshotWindowCreator.this.mTransactionPool.acquire();
-                        acquire2.remove(SnapshotWindowRecord.this.mChildSurface).apply();
-                        WindowlessSnapshotWindowCreator.this.mTransactionPool.release(acquire2);
+                        SurfaceControl.Transaction transactionAcquire2 = WindowlessSnapshotWindowCreator.this.mTransactionPool.acquire();
+                        transactionAcquire2.remove(SnapshotWindowRecord.this.mChildSurface).apply();
+                        WindowlessSnapshotWindowCreator.this.mTransactionPool.release(transactionAcquire2);
                         SnapshotWindowRecord.this.mChildSurface = null;
                     }
                     SurfaceControl surfaceControl = SnapshotWindowRecord.this.mRootSurface;
@@ -91,11 +89,11 @@ public class WindowlessSnapshotWindowCreator {
                 public final void onAnimationStart(Animator animator) {
                     SurfaceControl surfaceControl = SnapshotWindowRecord.this.mChildSurface;
                     if (surfaceControl == null || !surfaceControl.isValid()) {
-                        ofFloat.cancel();
+                        valueAnimatorOfFloat.cancel();
                     }
                 }
             });
-            ofFloat.start();
+            valueAnimatorOfFloat.start();
         }
     }
 

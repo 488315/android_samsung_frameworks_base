@@ -57,7 +57,7 @@ public class RFC3394WrapEngine implements Wrapper {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Wrapper
-    public byte[] wrap(byte[] bArr, int i, int i2) {
+    public byte[] wrap(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException {
         if (!this.forWrapping) {
             throw new IllegalStateException("not set for wrapping");
         }
@@ -100,7 +100,7 @@ public class RFC3394WrapEngine implements Wrapper {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Wrapper
-    public byte[] unwrap(byte[] bArr, int i, int i2) throws InvalidCipherTextException {
+    public byte[] unwrap(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException, IllegalArgumentException, InvalidCipherTextException {
         if (this.forWrapping) {
             throw new IllegalStateException("not set for unwrapping");
         }

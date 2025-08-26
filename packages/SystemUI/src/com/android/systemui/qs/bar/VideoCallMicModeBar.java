@@ -20,13 +20,13 @@ import java.util.List;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$$ExternalSyntheticLambda1;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VideoCallMicModeBar extends BarItemImpl {
     public float fontScale;
@@ -36,7 +36,6 @@ public final class VideoCallMicModeBar extends BarItemImpl {
     public LinearLayout slotButtonGroup;
     public final VideoCallMicModeUtil util;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VideoCallMicModeBarBase {
         void fini();
 
@@ -64,29 +63,29 @@ public final class VideoCallMicModeBar extends BarItemImpl {
         VideoCallMicModeUtil videoCallMicModeUtil = new VideoCallMicModeUtil(context, secQSPanelResourcePicker, new Function0() { // from class: com.android.systemui.qs.bar.VideoCallMicModeBar$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return VideoCallMicModeBar.this.mBGColorHelper;
+                return this.f$0.mBGColorHelper;
             }
         });
         this.util = videoCallMicModeUtil;
         this.items = ArraysKt___ArraysKt.asSequence(new VideoCallMicModeBarBase[]{new VideoCallEffect(videoCallMicModeUtil, context, panelInteractor, new Runnable() { // from class: com.android.systemui.qs.bar.VideoCallMicModeBar$items$1
             @Override // java.lang.Runnable
             public final void run() {
-                VideoCallMicModeBar.this.updateBarVisibilities$1();
+                this.$tmp0.updateBarVisibilities$1();
             }
         }), new VoIPTranslator(videoCallMicModeUtil, context, settingsHelper, panelInteractor, new Runnable() { // from class: com.android.systemui.qs.bar.VideoCallMicModeBar$items$2
             @Override // java.lang.Runnable
             public final void run() {
-                VideoCallMicModeBar.this.updateBarVisibilities$1();
+                this.$tmp0.updateBarVisibilities$1();
             }
         }), new MicMode(videoCallMicModeUtil, context, settingsHelper, new Runnable() { // from class: com.android.systemui.qs.bar.VideoCallMicModeBar$items$3
             @Override // java.lang.Runnable
             public final void run() {
-                VideoCallMicModeBar.this.updateBarVisibilities$1();
+                this.$tmp0.updateBarVisibilities$1();
             }
         }, new Runnable() { // from class: com.android.systemui.qs.bar.VideoCallMicModeBar$items$4
             @Override // java.lang.Runnable
             public final void run() {
-                Iterator it = VideoCallMicModeBar.this.items.iterator();
+                Iterator it = this.$tmp0.items.iterator();
                 while (it.hasNext()) {
                     ((VideoCallMicModeBar.VideoCallMicModeBarBase) it.next()).updateContents();
                 }
@@ -111,27 +110,27 @@ public final class VideoCallMicModeBar extends BarItemImpl {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = this.util.inflate(R.layout.sec_video_call_mic_mode_bar, viewGroup, false);
+        View viewInflate = this.util.inflate(R.layout.sec_video_call_mic_mode_bar, viewGroup, false);
         LinearLayout linearLayout = null;
         Sequence sequence = this.items;
-        if (inflate != null) {
+        if (viewInflate != null) {
             Iterator it = sequence.iterator();
             while (it.hasNext()) {
-                ((VideoCallMicModeBarBase) it.next()).inflate(inflate);
+                ((VideoCallMicModeBarBase) it.next()).inflate(viewInflate);
             }
-            LinearLayout linearLayout2 = (LinearLayout) inflate.findViewById(R.id.slot_button_group);
+            LinearLayout linearLayout2 = (LinearLayout) viewInflate.findViewById(R.id.slot_button_group);
             if (linearLayout2 != null) {
-                FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filterNot(new TransformingSequence(sequence, new VideoCallMicModeBar$$ExternalSyntheticLambda0(2)), new SequencesKt___SequencesKt$$ExternalSyntheticLambda1()));
-                while (filteringSequence$iterator$1.hasNext()) {
-                    linearLayout2.addView((View) filteringSequence$iterator$1.next());
+                FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filterNot(new TransformingSequence(sequence, new VideoCallMicModeBar$$ExternalSyntheticLambda0(2)), new SequencesKt___SequencesKt$$ExternalSyntheticLambda1()).new AnonymousClass1();
+                while (anonymousClass1.hasNext()) {
+                    linearLayout2.addView((View) anonymousClass1.next());
                 }
                 linearLayout = linearLayout2;
             }
             this.slotButtonGroup = linearLayout;
         } else {
-            inflate = null;
+            viewInflate = null;
         }
-        this.mBarRootView = inflate;
+        this.mBarRootView = viewInflate;
         Iterator it2 = sequence.iterator();
         while (it2.hasNext()) {
             ((VideoCallMicModeBarBase) it2.next()).init();
@@ -176,18 +175,18 @@ public final class VideoCallMicModeBar extends BarItemImpl {
         VideoCallMicModeBar$$ExternalSyntheticLambda0 videoCallMicModeBar$$ExternalSyntheticLambda0 = new VideoCallMicModeBar$$ExternalSyntheticLambda0(1);
         Sequence sequence = this.items;
         List list = SequencesKt___SequencesKt.toList(new TransformingSequence(sequence, videoCallMicModeBar$$ExternalSyntheticLambda0));
-        boolean booleanValue = ((Boolean) list.get(0)).booleanValue();
-        boolean booleanValue2 = ((Boolean) list.get(1)).booleanValue();
-        boolean booleanValue3 = ((Boolean) list.get(2)).booleanValue();
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateBarVisibilities: videoCall: ", " micMode: ", " voIPTranslator: ", booleanValue, booleanValue3);
-        m.append(booleanValue2);
-        Log.d(this.TAG, m.toString());
-        VideoCallMicModeStates videoCallMicModeStates = new VideoCallMicModeStates(booleanValue, booleanValue2, booleanValue3);
+        boolean zBooleanValue = ((Boolean) list.get(0)).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) list.get(1)).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) list.get(2)).booleanValue();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateBarVisibilities: videoCall: ", " micMode: ", " voIPTranslator: ", zBooleanValue, zBooleanValue3);
+        sbM.append(zBooleanValue2);
+        Log.d(this.TAG, sbM.toString());
+        VideoCallMicModeStates videoCallMicModeStates = new VideoCallMicModeStates(zBooleanValue, zBooleanValue2, zBooleanValue3);
         Iterator it = sequence.iterator();
         while (it.hasNext()) {
             ((VideoCallMicModeBarBase) it.next()).updateVisibilities(videoCallMicModeStates);
         }
-        showBar(booleanValue || booleanValue3 || booleanValue2);
+        showBar(zBooleanValue || zBooleanValue3 || zBooleanValue2);
         updateHeightMargins();
     }
 

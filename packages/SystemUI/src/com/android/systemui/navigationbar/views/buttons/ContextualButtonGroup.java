@@ -12,14 +12,12 @@ import com.samsung.systemui.splugins.navigationbar.IconType;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ContextualButtonGroup extends ButtonDispatcher {
     public final List mButtonData;
     public NavBarIconResourceMapper mKeyButtonMapper;
     public final NavBarStore mNavBarStore;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ButtonData {
         public final ContextualButton button;
         public boolean markedVisible = false;
@@ -52,6 +50,10 @@ public class ContextualButtonGroup extends ButtonDispatcher {
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0099  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setButtonVisibility(int i, boolean z) {
         int i2 = 0;
         while (true) {
@@ -76,18 +78,17 @@ public class ContextualButtonGroup extends ButtonDispatcher {
         boolean z2 = false;
         for (int size = ((ArrayList) this.mButtonData).size() - 1; size >= 0; size--) {
             ButtonData buttonData = (ButtonData) ((ArrayList) this.mButtonData).get(size);
-            if (z2 || !buttonData.markedVisible) {
-                if (BasicRune.NAVBAR_ENABLED) {
-                    ContextualButton contextualButton = buttonData.button;
-                    if (contextualButton.mIconType == IconType.TYPE_IME) {
-                        contextualButton.setVisibility(buttonData.markedVisible ? 0 : 4);
-                    }
-                }
-                buttonData.button.setVisibility(4);
-            } else {
+            if (!z2 && buttonData.markedVisible) {
                 buttonData.button.setVisibility(0);
                 setVisibility(0);
                 z2 = true;
+            } else if (BasicRune.NAVBAR_ENABLED) {
+                ContextualButton contextualButton = buttonData.button;
+                if (contextualButton.mIconType == IconType.TYPE_IME) {
+                    contextualButton.setVisibility(buttonData.markedVisible ? 0 : 4);
+                } else {
+                    buttonData.button.setVisibility(4);
+                }
             }
         }
         if (BasicRune.NAVBAR_REMOTEVIEW) {

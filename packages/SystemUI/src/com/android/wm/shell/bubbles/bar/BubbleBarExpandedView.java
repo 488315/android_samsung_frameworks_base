@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Insets;
 import android.graphics.Outline;
@@ -13,6 +14,7 @@ import android.graphics.Region;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.FloatProperty;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.android.systemui.R;
 import com.android.systemui.SystemUIApplication;
 import com.android.wm.shell.bubbles.Bubble;
 import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.BubbleEducationController;
 import com.android.wm.shell.bubbles.BubbleExpandedViewManager;
 import com.android.wm.shell.bubbles.BubbleExpandedViewManager$Companion$fromBubbleController$1;
 import com.android.wm.shell.bubbles.BubbleLogger;
@@ -32,19 +35,23 @@ import com.android.wm.shell.bubbles.BubbleOverflowContainerView;
 import com.android.wm.shell.bubbles.BubblePositioner;
 import com.android.wm.shell.bubbles.BubbleTaskView;
 import com.android.wm.shell.bubbles.BubbleTaskViewListener;
+import com.android.wm.shell.bubbles.BubbleViewProvider;
 import com.android.wm.shell.bubbles.RegionSamplingProvider;
 import com.android.wm.shell.bubbles.bar.BubbleBarExpandedView;
 import com.android.wm.shell.bubbles.bar.BubbleBarLayerView;
 import com.android.wm.shell.bubbles.bar.BubbleBarMenuView;
 import com.android.wm.shell.dagger.HasWMComponent;
+import com.android.wm.shell.shared.TypefaceUtils;
+import com.android.wm.shell.shared.animation.PhysicsAnimator;
 import com.android.wm.shell.shared.bubbles.BubbleBarLocation;
+import com.android.wm.shell.shared.bubbles.BubblePopupDrawable;
+import com.android.wm.shell.shared.bubbles.BubblePopupView;
 import com.android.wm.shell.shared.handles.RegionSamplingHelper;
 import com.android.wm.shell.taskview.TaskView;
 import com.android.wm.shell.taskview.TaskViewTaskController;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskViewListener.Callback {
     public static final AnonymousClass1 CORNER_RADIUS = new FloatProperty("cornerRadius") { // from class: com.android.wm.shell.bubbles.bar.BubbleBarExpandedView.1
@@ -96,7 +103,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
     public final Rect mTempBounds;
     public TaskViewVisibilityState mVisibilityState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.bar.BubbleBarExpandedView$4, reason: invalid class name */
     public class AnonymousClass4 {
         public AnonymousClass4() {
@@ -121,7 +127,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HandleViewAccessibilityDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ HandleViewAccessibilityDelegate(BubbleBarExpandedView bubbleBarExpandedView, int i) {
             this();
@@ -177,7 +182,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum TaskViewVisibilityState {
         PENDING_INVISIBLE,
         INVISIBLE,
@@ -221,9 +225,9 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         if (taskView != null) {
             taskView.setCornerRadius(f);
             TaskView taskView2 = this.mTaskView;
-            Insets of = Insets.of(0, this.mCaptionHeight, 0, 0);
-            taskView2.mCaptionInsets = of;
-            if (of == null) {
+            Insets insetsOf = Insets.of(0, this.mCaptionHeight, 0, 0);
+            taskView2.mCaptionInsets = insetsOf;
+            if (insetsOf == null) {
                 TaskViewTaskController taskViewTaskController = taskView2.mTaskViewTaskController;
                 Rect rect = taskViewTaskController.mCaptionInsets;
                 if (rect == null || !rect.equals(null)) {
@@ -289,7 +293,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         bubbleBarExpandedView.mHandleView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarExpandedView$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                final BubbleBarMenuViewController bubbleBarMenuViewController2 = BubbleBarExpandedView.this.mMenuViewController;
+                final BubbleBarMenuViewController bubbleBarMenuViewController2 = this.f$0.mMenuViewController;
                 if (bubbleBarMenuViewController2.mMenuView == null || bubbleBarMenuViewController2.mScrimView == null) {
                     BubbleBarMenuView bubbleBarMenuView = (BubbleBarMenuView) LayoutInflater.from(bubbleBarMenuViewController2.mContext).inflate(R.layout.bubble_bar_menu_view, bubbleBarMenuViewController2.mRootView, false);
                     bubbleBarMenuViewController2.mMenuView = bubbleBarMenuView;
@@ -297,7 +301,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                     bubbleBarMenuView.mBubbleSectionView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarMenuView$$ExternalSyntheticLambda0
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view2) {
-                            BubbleBarMenuViewController$$ExternalSyntheticLambda1 bubbleBarMenuViewController$$ExternalSyntheticLambda12 = BubbleBarMenuViewController$$ExternalSyntheticLambda1.this;
+                            BubbleBarMenuViewController$$ExternalSyntheticLambda1 bubbleBarMenuViewController$$ExternalSyntheticLambda12 = bubbleBarMenuViewController$$ExternalSyntheticLambda1;
                             int i = BubbleBarMenuView.$r8$clinit;
                             bubbleBarMenuViewController$$ExternalSyntheticLambda12.run();
                         }
@@ -323,8 +327,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                             arrayList.add(new BubbleBarMenuView.MenuAction(Icon.createWithResource(bubbleBarMenuViewController2.mContext, R.drawable.bubble_ic_stop_bubble), resources.getString(R.string.bubbles_dont_bubble_conversation), color, new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarMenuViewController$$ExternalSyntheticLambda8
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view2) {
-                                    Context context;
-                                    Context context2;
                                     switch (i) {
                                         case 0:
                                             BubbleBarMenuViewController bubbleBarMenuViewController3 = bubbleBarMenuViewController2;
@@ -364,9 +366,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                                             if (anonymousClass44 != null) {
                                                 BubbleBarExpandedView bubbleBarExpandedView4 = BubbleBarExpandedView.this;
                                                 ((BubbleExpandedViewManager$Companion$fromBubbleController$1) bubbleBarExpandedView4.mManager).$controller.collapseStack();
-                                                context = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                                context2 = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                                context.startActivityAsUser(bubble5.getSettingsIntent(context2), bubble5.mUser);
+                                                ((FrameLayout) bubbleBarExpandedView4).mContext.startActivityAsUser(bubble5.getSettingsIntent(((FrameLayout) bubbleBarExpandedView4).mContext), bubble5.mUser);
                                                 bubbleBarExpandedView4.bubbleLogger.log(bubble5, BubbleLogger.Event.BUBBLE_BAR_APP_MENU_GO_TO_SETTINGS);
                                                 break;
                                             }
@@ -379,8 +379,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                             arrayList.add(new BubbleBarMenuView.MenuAction(bitmap != null ? Icon.createWithBitmap(bitmap) : null, resources.getString(R.string.bubbles_app_settings, bubble2.mAppName), new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarMenuViewController$$ExternalSyntheticLambda8
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view2) {
-                                    Context context;
-                                    Context context2;
                                     switch (i2) {
                                         case 0:
                                             BubbleBarMenuViewController bubbleBarMenuViewController3 = bubbleBarMenuViewController2;
@@ -420,9 +418,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                                             if (anonymousClass44 != null) {
                                                 BubbleBarExpandedView bubbleBarExpandedView4 = BubbleBarExpandedView.this;
                                                 ((BubbleExpandedViewManager$Companion$fromBubbleController$1) bubbleBarExpandedView4.mManager).$controller.collapseStack();
-                                                context = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                                context2 = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                                context.startActivityAsUser(bubble5.getSettingsIntent(context2), bubble5.mUser);
+                                                ((FrameLayout) bubbleBarExpandedView4).mContext.startActivityAsUser(bubble5.getSettingsIntent(((FrameLayout) bubbleBarExpandedView4).mContext), bubble5.mUser);
                                                 bubbleBarExpandedView4.bubbleLogger.log(bubble5, BubbleLogger.Event.BUBBLE_BAR_APP_MENU_GO_TO_SETTINGS);
                                                 break;
                                             }
@@ -435,8 +431,6 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                         arrayList.add(new BubbleBarMenuView.MenuAction(Icon.createWithResource(resources, R.drawable.ic_remove_no_shadow), resources.getString(R.string.bubble_dismiss_text), color, new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarMenuViewController$$ExternalSyntheticLambda8
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view2) {
-                                Context context;
-                                Context context2;
                                 switch (i3) {
                                     case 0:
                                         BubbleBarMenuViewController bubbleBarMenuViewController3 = bubbleBarMenuViewController2;
@@ -476,9 +470,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                                         if (anonymousClass44 != null) {
                                             BubbleBarExpandedView bubbleBarExpandedView4 = BubbleBarExpandedView.this;
                                             ((BubbleExpandedViewManager$Companion$fromBubbleController$1) bubbleBarExpandedView4.mManager).$controller.collapseStack();
-                                            context = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                            context2 = ((FrameLayout) bubbleBarExpandedView4).mContext;
-                                            context.startActivityAsUser(bubble5.getSettingsIntent(context2), bubble5.mUser);
+                                            ((FrameLayout) bubbleBarExpandedView4).mContext.startActivityAsUser(bubble5.getSettingsIntent(((FrameLayout) bubbleBarExpandedView4).mContext), bubble5.mUser);
                                             bubbleBarExpandedView4.bubbleLogger.log(bubble5, BubbleLogger.Event.BUBBLE_BAR_APP_MENU_GO_TO_SETTINGS);
                                             break;
                                         }
@@ -494,7 +486,7 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                     bubbleBarMenuViewController2.mScrimView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarMenuViewController$$ExternalSyntheticLambda7
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view3) {
-                            BubbleBarMenuViewController.this.hideMenu(true);
+                            bubbleBarMenuViewController2.hideMenu(true);
                         }
                     });
                     bubbleBarMenuViewController2.mRootView.addView(bubbleBarMenuViewController2.mScrimView);
@@ -550,9 +542,9 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
                     if (objectAnimator != null) {
                         objectAnimator.cancel();
                     }
-                    ObjectAnimator ofArgb = ObjectAnimator.ofArgb(bubbleBarHandleView, BubbleBarHandleView.HANDLE_COLOR, i);
-                    bubbleBarHandleView.mColorChangeAnim = ofArgb;
-                    ofArgb.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarHandleView.2
+                    ObjectAnimator objectAnimatorOfArgb = ObjectAnimator.ofArgb(bubbleBarHandleView, BubbleBarHandleView.HANDLE_COLOR, i);
+                    bubbleBarHandleView.mColorChangeAnim = objectAnimatorOfArgb;
+                    objectAnimatorOfArgb.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarHandleView.2
                         public AnonymousClass2() {
                         }
 
@@ -646,21 +638,84 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x005d, code lost:
-    
-        if ((android.provider.Settings.Secure.getInt(r5.context.getContentResolver(), "force_show_bubbles_user_education", 0) != 0) != false) goto L28;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x005f  */
     @Override // com.android.wm.shell.bubbles.BubbleTaskViewListener.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void onTaskCreated() {
-        /*
-            Method dump skipped, instructions count: 351
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.bar.BubbleBarExpandedView.onTaskCreated():void");
+        BubbleBarLayerView bubbleBarLayerView;
+        final BubbleEducationViewController bubbleEducationViewController;
+        BubbleBarExpandedView bubbleBarExpandedView;
+        BubbleViewProvider bubbleViewProvider;
+        TaskView taskView = this.mTaskView;
+        if (taskView != null) {
+            taskView.setAlpha(0.0f);
+        }
+        BubbleBarLayerView.AnonymousClass4 anonymousClass4 = this.mListener;
+        if (anonymousClass4 != null && (bubbleEducationViewController = (bubbleBarLayerView = BubbleBarLayerView.this).mEducationViewController) != null && (bubbleBarExpandedView = bubbleBarLayerView.mExpandedView) != null) {
+            BubbleEducationController bubbleEducationController = (BubbleEducationController) bubbleEducationViewController.controller$delegate.getValue();
+            if (Settings.Secure.getInt(bubbleEducationController.context.getContentResolver(), "force_hide_bubbles_user_education", 0) == 0 && (bubbleViewProvider = anonymousClass4.val$b) != null) {
+                if (bubbleViewProvider instanceof Bubble ? ((Bubble) bubbleViewProvider).isChat() : false) {
+                    if (bubbleEducationController.prefs.getBoolean("HasSeenBubblesManageOnboarding", false)) {
+                        if (Settings.Secure.getInt(bubbleEducationController.context.getContentResolver(), "force_show_bubbles_user_education", 0) != 0) {
+                        }
+                    } else {
+                        BubbleEducationViewController.hideEducation$default(bubbleEducationViewController, false);
+                        BubblePopupView bubblePopupView = (BubblePopupView) LayoutInflater.from(bubbleEducationViewController.context).inflate(R.layout.bubble_bar_manage_education, (ViewGroup) bubbleBarExpandedView, false);
+                        TypedArray typedArrayObtainStyledAttributes = bubblePopupView.getContext().obtainStyledAttributes(new int[]{android.R.attr.dialogCornerRadius});
+                        Resources resources = bubblePopupView.getContext().getResources();
+                        BubblePopupDrawable.Config config = new BubblePopupDrawable.Config(bubblePopupView.getContext().getColor(android.R.color.sliding_tab_text_color_active), typedArrayObtainStyledAttributes.getDimension(0, 0.0f), resources.getDimensionPixelSize(R.dimen.bubble_popup_padding), resources.getDimension(R.dimen.bubble_popup_arrow_width), resources.getDimension(R.dimen.bubble_popup_arrow_height), resources.getDimension(R.dimen.bubble_popup_arrow_corner_radius));
+                        typedArrayObtainStyledAttributes.recycle();
+                        BubblePopupDrawable bubblePopupDrawable = new BubblePopupDrawable(config);
+                        bubblePopupView.getClass();
+                        bubblePopupView.setBackground(bubblePopupDrawable);
+                        bubblePopupView.forceLayout();
+                        bubblePopupView.setAlpha(0.0f);
+                        bubblePopupView.setScaleX(0.5f);
+                        bubblePopupView.setScaleY(0.5f);
+                        TypefaceUtils.Companion companion = TypefaceUtils.Companion;
+                        TypefaceUtils.FontFamily fontFamily = TypefaceUtils.FontFamily.GSF_TITLE_MEDIUM;
+                        companion.getClass();
+                        bubblePopupView.setPivotY(0.0f);
+                        if (!bubblePopupView.isLaidOut() || bubblePopupView.isLayoutRequested()) {
+                            bubblePopupView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleEducationViewController$showManageEducation$lambda$14$$inlined$doOnLayout$1
+                                @Override // android.view.View.OnLayoutChangeListener
+                                public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+                                    view.removeOnLayoutChangeListener(this);
+                                    view.setPivotX(view.getWidth() / 2.0f);
+                                }
+                            });
+                        } else {
+                            bubblePopupView.setPivotX(bubblePopupView.getWidth() / 2.0f);
+                        }
+                        bubblePopupView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleEducationViewController$showManageEducation$2$2
+                            @Override // android.view.View.OnClickListener
+                            public final void onClick(View view) {
+                                BubbleEducationViewController.hideEducation$default(bubbleEducationViewController, true);
+                            }
+                        });
+                        bubbleEducationViewController.educationView = bubblePopupView;
+                        bubbleEducationViewController.rootView = bubbleBarExpandedView;
+                        PhysicsAnimator.Companion.getClass();
+                        PhysicsAnimator companion2 = PhysicsAnimator.Companion.getInstance(bubblePopupView);
+                        companion2.defaultSpring = (PhysicsAnimator.SpringConfig) bubbleEducationViewController.springConfig$delegate.getValue();
+                        bubbleEducationViewController.animator = companion2;
+                        bubbleBarExpandedView.addView((View) bubbleEducationViewController.scrimView$delegate.getValue());
+                        bubbleBarExpandedView.addView(bubbleEducationViewController.educationView);
+                        bubbleEducationViewController.animateTransition(true, new BubbleEducationViewController$$ExternalSyntheticLambda2(bubbleEducationViewController, 2));
+                    }
+                }
+            }
+        }
+        if (this.mVisibilityState == TaskViewVisibilityState.PENDING_VISIBLE) {
+            this.mVisibilityState = TaskViewVisibilityState.VISIBLE;
+            Runnable runnable = this.mAnimateExpansion;
+            if (runnable != null) {
+                runnable.run();
+                this.mAnimateExpansion = null;
+            }
+        }
     }
 
     @Override // com.android.wm.shell.bubbles.BubbleTaskViewListener.Callback
@@ -711,9 +766,9 @@ public class BubbleBarExpandedView extends FrameLayout implements BubbleTaskView
         this.mTaskView.setCornerRadius(this.mCurrentCornerRadius);
         this.mTaskView.setVisibility(0);
         TaskView taskView = this.mTaskView;
-        Insets of = Insets.of(0, this.mCaptionHeight, 0, 0);
-        taskView.mCaptionInsets = of;
-        if (of == null) {
+        Insets insetsOf = Insets.of(0, this.mCaptionHeight, 0, 0);
+        taskView.mCaptionInsets = insetsOf;
+        if (insetsOf == null) {
             TaskViewTaskController taskViewTaskController = taskView.mTaskViewTaskController;
             Rect rect = taskViewTaskController.mCaptionInsets;
             if (rect == null || !rect.equals(null)) {

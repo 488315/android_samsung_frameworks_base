@@ -4,11 +4,9 @@ import com.android.systemui.common.shared.model.Icon;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface InternetTileIconModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Cellular implements InternetTileIconModel {
         public final int level;
 
@@ -32,7 +30,6 @@ public interface InternetTileIconModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResourceId implements InternetTileIconModel {
         public final int resId;
 
@@ -56,7 +53,6 @@ public interface InternetTileIconModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Satellite implements InternetTileIconModel {
         public final Icon.Resource resourceIcon;
 

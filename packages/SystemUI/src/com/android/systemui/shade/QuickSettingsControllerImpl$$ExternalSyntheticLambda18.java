@@ -4,7 +4,6 @@ import android.view.MotionEvent;
 import com.android.systemui.plugins.qs.QS;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class QuickSettingsControllerImpl$$ExternalSyntheticLambda18 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -36,17 +35,17 @@ public final /* synthetic */ class QuickSettingsControllerImpl$$ExternalSyntheti
                 }
                 break;
             case 3:
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 QS qs2 = quickSettingsControllerImpl.mQs;
                 if (qs2 != null) {
-                    qs2.setShouldUpdateSquishinessOnMedia(booleanValue);
+                    qs2.setShouldUpdateSquishinessOnMedia(zBooleanValue);
                     break;
                 }
                 break;
             case 4:
-                boolean booleanValue2 = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) obj).booleanValue();
                 if (quickSettingsControllerImpl.isQsFragmentCreated()) {
-                    if (booleanValue2) {
+                    if (zBooleanValue2) {
                         quickSettingsControllerImpl.mAnimateNextNotificationBounds = true;
                         quickSettingsControllerImpl.mNotificationBoundsAnimationDuration = 360L;
                     }

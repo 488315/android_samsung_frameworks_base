@@ -44,12 +44,12 @@ public class SimpleFrameManager extends FrameManager {
 
     @Override // android.filterfw.core.FrameManager
     public Frame releaseFrame(Frame frame) {
-        int decRefCount = frame.decRefCount();
-        if (decRefCount == 0 && frame.hasNativeAllocation()) {
+        int iDecRefCount = frame.decRefCount();
+        if (iDecRefCount == 0 && frame.hasNativeAllocation()) {
             frame.releaseNativeAllocation();
             return null;
         }
-        if (decRefCount >= 0) {
+        if (iDecRefCount >= 0) {
             return frame;
         }
         throw new RuntimeException("Frame reference count dropped below 0!");

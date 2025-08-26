@@ -41,9 +41,9 @@ public class VerifierDeviceIdentity implements Parcelable {
     }
 
     private VerifierDeviceIdentity(Parcel parcel) {
-        long readLong = parcel.readLong();
-        this.mIdentity = readLong;
-        this.mIdentityString = encodeBase32(readLong);
+        long j = parcel.readLong();
+        this.mIdentity = j;
+        this.mIdentityString = encodeBase32(j);
     }
 
     public static VerifierDeviceIdentity generate() {

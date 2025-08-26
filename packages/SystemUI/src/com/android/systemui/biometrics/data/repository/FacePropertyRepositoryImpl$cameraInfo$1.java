@@ -15,7 +15,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FacePropertyRepositoryImpl$cameraInfo$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Executor $mainExecutor;
@@ -56,7 +55,7 @@ final class FacePropertyRepositoryImpl$cameraInfo$1 extends SuspendLambda implem
                 @Override // android.hardware.camera2.CameraManager.AvailabilityCallback
                 public final void onPhysicalCameraAvailable(String str, String str2) {
                     Object obj2;
-                    FacePropertyRepositoryImpl facePropertyRepositoryImpl2 = FacePropertyRepositoryImpl.this;
+                    FacePropertyRepositoryImpl facePropertyRepositoryImpl2 = facePropertyRepositoryImpl;
                     facePropertyRepositoryImpl2.currentPhysicalCameraId = str2;
                     ArrayList arrayList = (ArrayList) facePropertyRepositoryImpl2.cameraInfoList;
                     int size = arrayList.size();
@@ -81,7 +80,7 @@ final class FacePropertyRepositoryImpl$cameraInfo$1 extends SuspendLambda implem
                 @Override // android.hardware.camera2.CameraManager.AvailabilityCallback
                 public final void onPhysicalCameraUnavailable(String str, String str2) {
                     Object obj2;
-                    FacePropertyRepositoryImpl facePropertyRepositoryImpl2 = FacePropertyRepositoryImpl.this;
+                    FacePropertyRepositoryImpl facePropertyRepositoryImpl2 = facePropertyRepositoryImpl;
                     if (facePropertyRepositoryImpl2.currentPhysicalCameraId == null) {
                         ArrayList arrayList = (ArrayList) facePropertyRepositoryImpl2.cameraInfoList;
                         int size = arrayList.size();
@@ -98,7 +97,7 @@ final class FacePropertyRepositoryImpl$cameraInfo$1 extends SuspendLambda implem
                             }
                         }
                         CameraInfo cameraInfo = (CameraInfo) obj2;
-                        FacePropertyRepositoryImpl.this.currentPhysicalCameraId = cameraInfo != null ? cameraInfo.cameraPhysicalId : null;
+                        facePropertyRepositoryImpl.currentPhysicalCameraId = cameraInfo != null ? cameraInfo.cameraPhysicalId : null;
                         ChannelExt channelExt = ChannelExt.INSTANCE;
                         channelExt.getClass();
                         ChannelExt.trySendWithFailureLogging(producerScope, cameraInfo, "FaceSensorPropertyRepositoryImpl", "Update face sensor location to " + cameraInfo + ".");
@@ -110,7 +109,7 @@ final class FacePropertyRepositoryImpl$cameraInfo$1 extends SuspendLambda implem
             Function0 function0 = new Function0() { // from class: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$cameraInfo$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    FacePropertyRepositoryImpl.this.cameraManager.unregisterAvailabilityCallback(r1);
+                    facePropertyRepositoryImpl2.cameraManager.unregisterAvailabilityCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

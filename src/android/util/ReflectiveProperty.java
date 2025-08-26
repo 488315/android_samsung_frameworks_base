@@ -14,7 +14,7 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
     private Method mGetter;
     private Method mSetter;
 
-    public ReflectiveProperty(Class<T> cls, Class<V> cls2, String str) {
+    public ReflectiveProperty(Class<T> cls, Class<V> cls2, String str) throws NoSuchFieldException {
         super(cls2, str);
         String str2 = Character.toUpperCase(str.charAt(0)) + str.substring(1);
         try {
@@ -23,17 +23,17 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
             try {
                 try {
                     this.mGetter = cls.getMethod("is" + str2, null);
-                } catch (NoSuchFieldException unused2) {
-                    throw new NoSuchPropertyException("No accessor method or field found for property with name " + str);
+                } catch (NoSuchMethodException unused2) {
+                    Field field = cls.getField(str);
+                    this.mField = field;
+                    Class<?> type = field.getType();
+                    if (typesMatch(cls2, type)) {
+                        return;
+                    }
+                    throw new NoSuchPropertyException("Underlying type (" + type + ") does not match Property type (" + cls2 + NavigationBarInflaterView.KEY_CODE_END);
                 }
-            } catch (NoSuchMethodException unused3) {
-                Field field = cls.getField(str);
-                this.mField = field;
-                Class<?> type = field.getType();
-                if (typesMatch(cls2, type)) {
-                    return;
-                }
-                throw new NoSuchPropertyException("Underlying type (" + type + ") does not match Property type (" + cls2 + NavigationBarInflaterView.KEY_CODE_END);
+            } catch (NoSuchFieldException unused3) {
+                throw new NoSuchPropertyException("No accessor method or field found for property with name " + str);
             }
         }
         Class<?> returnType = this.mGetter.getReturnType();
@@ -56,7 +56,7 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
     }
 
     @Override // android.util.Property
-    public void set(T t, V v) {
+    public void set(T t, V v) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method method = this.mSetter;
         if (method != null) {
             try {

@@ -23,7 +23,6 @@ import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSCPopupButtonController {
     public boolean barChanged;
@@ -36,7 +35,6 @@ public final class QSCPopupButtonController {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class POPUPTYPE {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ POPUPTYPE[] $VALUES;
@@ -46,7 +44,6 @@ public final class QSCPopupButtonController {
         private final int second;
         private final int title;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class BRIGHTNESS extends POPUPTYPE {
             public BRIGHTNESS(String str, int i) {
                 super(str, i, R.string.sec_brightness_control, R.string.qs_panel_detail_popup_menu_always_text, R.string.qs_panel_detail_popup_menu_when_expanded_text, null);
@@ -69,7 +66,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class DEVICEMEDIA extends POPUPTYPE {
             public DEVICEMEDIA(String str, int i) {
                 super(str, i, R.string.sec_devices_and_media_control, R.string.qs_panel_detail_popup_menu_when_collapsed_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -92,7 +88,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class HIDE_SMART_VIEW_LARGE_TILE extends POPUPTYPE {
             public HIDE_SMART_VIEW_LARGE_TILE(String str, int i) {
                 super(str, i, R.string.sec_smart_view_large_tile_info, R.string.qs_panel_detail_popup_menu_when_expanded_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -114,7 +109,6 @@ public final class QSCPopupButtonController {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class MULTISIM extends POPUPTYPE {
             public MULTISIM(String str, int i) {
                 super(str, i, R.string.sec_multi_sim_info_control, R.string.qs_panel_detail_popup_menu_when_expanded_text, R.string.qs_panel_detail_popup_menu_dont_show_text, null);
@@ -186,7 +180,6 @@ public final class QSCPopupButtonController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -224,23 +217,23 @@ public final class QSCPopupButtonController {
         TunerService tunerService = this.tunerService;
         if (textView2 != null) {
             Context context = view.getContext();
-            int ordinal = popuptype.ordinal();
+            int iOrdinal = popuptype.ordinal();
             EnumEntries enumEntries = POPUPTYPE.$ENTRIES;
-            textView2.setText(context.getString(((POPUPTYPE) enumEntries.get(ordinal)).getSelectedIdx(tunerService) == 0 ? ((POPUPTYPE) enumEntries.get(popuptype.ordinal())).getFirst() : ((POPUPTYPE) enumEntries.get(popuptype.ordinal())).getSecond()));
+            textView2.setText(context.getString(((POPUPTYPE) enumEntries.get(iOrdinal)).getSelectedIdx(tunerService) == 0 ? ((POPUPTYPE) enumEntries.get(popuptype.ordinal())).getFirst() : ((POPUPTYPE) enumEntries.get(popuptype.ordinal())).getSecond()));
         }
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         EnumEntries enumEntries2 = POPUPTYPE.$ENTRIES;
         POPUPTYPE popuptype2 = (POPUPTYPE) enumEntries2.get(popuptype.ordinal());
         boolean z = ((POPUPTYPE) enumEntries2.get(popuptype.ordinal())).getSelectedIdx(tunerService) == 0;
-        createListBuilder.add(new QSBlurPopUpMenu.PopUpContent(this.context.getString(popuptype2.getFirst()), z));
-        createListBuilder.add(new QSBlurPopUpMenu.PopUpContent(this.context.getString(popuptype2.getSecond()), !z));
-        final QSBlurPopUpMenu.PopupListAdapter popupListAdapter = new QSBlurPopUpMenu.PopupListAdapter(this.context, createListBuilder.build());
+        listBuilderCreateListBuilder.add(new QSBlurPopUpMenu.PopUpContent(this.context.getString(popuptype2.getFirst()), z));
+        listBuilderCreateListBuilder.add(new QSBlurPopUpMenu.PopUpContent(this.context.getString(popuptype2.getSecond()), !z));
+        final QSBlurPopUpMenu.PopupListAdapter popupListAdapter = new QSBlurPopUpMenu.PopupListAdapter(this.context, listBuilderCreateListBuilder.build());
         view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.QSCPopupButtonController$makePopUpMenu$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                final QSBlurPopUpMenu qSBlurPopUpMenu = new QSBlurPopUpMenu(QSCPopupButtonController.this.context);
+                final QSBlurPopUpMenu qSBlurPopUpMenu = new QSBlurPopUpMenu(this.this$0.context);
                 final View view3 = view;
-                final QSCPopupButtonController qSCPopupButtonController = QSCPopupButtonController.this;
+                final QSCPopupButtonController qSCPopupButtonController = this.this$0;
                 final QSBlurPopUpMenu.PopupListAdapter popupListAdapter2 = popupListAdapter;
                 final QSCPopupButtonController.POPUPTYPE popuptype3 = popuptype;
                 qSBlurPopUpMenu.setWidth(-2);
@@ -251,13 +244,13 @@ public final class QSCPopupButtonController {
                 qSBlurPopUpMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.qs.customize.QSCPopupButtonController$makePopUpMenu$1$1$1
                     @Override // android.widget.AdapterView.OnItemClickListener
                     public final void onItemClick(AdapterView adapterView, View view4, int i, long j) {
-                        int count = QSBlurPopUpMenu.PopupListAdapter.this.getCount();
+                        int count = popupListAdapter2.getCount();
                         for (int i2 = 0; i2 < count; i2++) {
-                            Object item = QSBlurPopUpMenu.PopupListAdapter.this.getItem(i2);
+                            Object item = popupListAdapter2.getItem(i2);
                             item.getClass();
                             ((QSBlurPopUpMenu.PopUpContent) item).checked = false;
                         }
-                        Object item2 = QSBlurPopUpMenu.PopupListAdapter.this.getItem(i);
+                        Object item2 = popupListAdapter2.getItem(i);
                         item2.getClass();
                         ((QSBlurPopUpMenu.PopUpContent) item2).checked = true;
                         View view5 = view3;
@@ -267,10 +260,10 @@ public final class QSCPopupButtonController {
                             textView3.setText(view5.getContext().getString(i == 0 ? QSCPopupButtonController.POPUPTYPE.values()[popuptype4.ordinal()].getFirst() : QSCPopupButtonController.POPUPTYPE.values()[popuptype4.ordinal()].getSecond()));
                         }
                         QSCPopupButtonController qSCPopupButtonController2 = qSCPopupButtonController;
-                        int ordinal2 = popuptype3.ordinal();
+                        int iOrdinal2 = popuptype3.ordinal();
                         boolean z2 = i == 0;
                         qSCPopupButtonController2.getClass();
-                        QSCPopupButtonController.POPUPTYPE popuptype5 = (QSCPopupButtonController.POPUPTYPE) QSCPopupButtonController.POPUPTYPE.$ENTRIES.get(ordinal2);
+                        QSCPopupButtonController.POPUPTYPE popuptype5 = (QSCPopupButtonController.POPUPTYPE) QSCPopupButtonController.POPUPTYPE.$ENTRIES.get(iOrdinal2);
                         if (popuptype5 == QSCPopupButtonController.POPUPTYPE.MULTISIM || popuptype5 == QSCPopupButtonController.POPUPTYPE.HIDE_SMART_VIEW_LARGE_TILE) {
                             qSCPopupButtonController2.barChanged = true;
                         }

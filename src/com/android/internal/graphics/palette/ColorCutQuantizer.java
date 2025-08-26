@@ -57,9 +57,9 @@ final class ColorCutQuantizer implements Quantizer {
         int[] iArr2 = new int[32768];
         this.mHistogram = iArr2;
         for (int i2 = 0; i2 < iArr.length; i2++) {
-            int quantizeFromRgb888 = quantizeFromRgb888(iArr[i2]);
-            iArr[i2] = quantizeFromRgb888;
-            iArr2[quantizeFromRgb888] = iArr2[quantizeFromRgb888] + 1;
+            int iQuantizeFromRgb888 = quantizeFromRgb888(iArr[i2]);
+            iArr[i2] = iQuantizeFromRgb888;
+            iArr2[iQuantizeFromRgb888] = iArr2[iQuantizeFromRgb888] + 1;
         }
         int i3 = 0;
         for (int i4 = 0; i4 < 32768; i4++) {
@@ -100,10 +100,10 @@ final class ColorCutQuantizer implements Quantizer {
     }
 
     private void splitBoxes(PriorityQueue<Vbox> priorityQueue, int i) {
-        Vbox poll;
-        while (priorityQueue.size() < i && (poll = priorityQueue.poll()) != null && poll.canSplit()) {
-            priorityQueue.offer(poll.splitBox());
-            priorityQueue.offer(poll);
+        Vbox vboxPoll;
+        while (priorityQueue.size() < i && (vboxPoll = priorityQueue.poll()) != null && vboxPoll.canSplit()) {
+            priorityQueue.offer(vboxPoll.splitBox());
+            priorityQueue.offer(vboxPoll);
         }
     }
 
@@ -158,26 +158,26 @@ final class ColorCutQuantizer implements Quantizer {
             for (int i8 = this.mLowerIndex; i8 <= this.mUpperIndex; i8++) {
                 int i9 = iArr[i8];
                 i5 += iArr2[i9];
-                int quantizedRed = ColorCutQuantizer.quantizedRed(i9);
-                int quantizedGreen = ColorCutQuantizer.quantizedGreen(i9);
-                int quantizedBlue = ColorCutQuantizer.quantizedBlue(i9);
-                if (quantizedRed > i2) {
-                    i2 = quantizedRed;
+                int iQuantizedRed = ColorCutQuantizer.quantizedRed(i9);
+                int iQuantizedGreen = ColorCutQuantizer.quantizedGreen(i9);
+                int iQuantizedBlue = ColorCutQuantizer.quantizedBlue(i9);
+                if (iQuantizedRed > i2) {
+                    i2 = iQuantizedRed;
                 }
-                if (quantizedRed < i) {
-                    i = quantizedRed;
+                if (iQuantizedRed < i) {
+                    i = iQuantizedRed;
                 }
-                if (quantizedGreen > i3) {
-                    i3 = quantizedGreen;
+                if (iQuantizedGreen > i3) {
+                    i3 = iQuantizedGreen;
                 }
-                if (quantizedGreen < i6) {
-                    i6 = quantizedGreen;
+                if (iQuantizedGreen < i6) {
+                    i6 = iQuantizedGreen;
                 }
-                if (quantizedBlue > i4) {
-                    i4 = quantizedBlue;
+                if (iQuantizedBlue > i4) {
+                    i4 = iQuantizedBlue;
                 }
-                if (quantizedBlue < i7) {
-                    i7 = quantizedBlue;
+                if (iQuantizedBlue < i7) {
+                    i7 = iQuantizedBlue;
                 }
             }
             this.mMinRed = i;
@@ -193,9 +193,9 @@ final class ColorCutQuantizer implements Quantizer {
             if (!canSplit()) {
                 throw new IllegalStateException("Can not split a box with only 1 color");
             }
-            int findSplitPoint = findSplitPoint();
-            Vbox vbox = ColorCutQuantizer.this.new Vbox(findSplitPoint + 1, this.mUpperIndex);
-            this.mUpperIndex = findSplitPoint;
+            int iFindSplitPoint = findSplitPoint();
+            Vbox vbox = ColorCutQuantizer.this.new Vbox(iFindSplitPoint + 1, this.mUpperIndex);
+            this.mUpperIndex = iFindSplitPoint;
             fitBox();
             return vbox;
         }
@@ -237,20 +237,20 @@ final class ColorCutQuantizer implements Quantizer {
         final Palette.Swatch getAverageColor() {
             int[] iArr = ColorCutQuantizer.this.mColors;
             int[] iArr2 = ColorCutQuantizer.this.mHistogram;
+            int iQuantizedRed = 0;
             int i = 0;
-            int i2 = 0;
-            int i3 = 0;
-            int i4 = 0;
-            for (int i5 = this.mLowerIndex; i5 <= this.mUpperIndex; i5++) {
-                int i6 = iArr[i5];
-                int i7 = iArr2[i6];
-                i2 += i7;
-                i += ColorCutQuantizer.quantizedRed(i6) * i7;
-                i3 += ColorCutQuantizer.quantizedGreen(i6) * i7;
-                i4 += i7 * ColorCutQuantizer.quantizedBlue(i6);
+            int iQuantizedGreen = 0;
+            int iQuantizedBlue = 0;
+            for (int i2 = this.mLowerIndex; i2 <= this.mUpperIndex; i2++) {
+                int i3 = iArr[i2];
+                int i4 = iArr2[i3];
+                i += i4;
+                iQuantizedRed += ColorCutQuantizer.quantizedRed(i3) * i4;
+                iQuantizedGreen += ColorCutQuantizer.quantizedGreen(i3) * i4;
+                iQuantizedBlue += i4 * ColorCutQuantizer.quantizedBlue(i3);
             }
-            float f = i2;
-            return new Palette.Swatch(ColorCutQuantizer.approximateToRgb888(Math.round(i / f), Math.round(i3 / f), Math.round(i4 / f)), i2);
+            float f = i;
+            return new Palette.Swatch(ColorCutQuantizer.approximateToRgb888(Math.round(iQuantizedRed / f), Math.round(iQuantizedGreen / f), Math.round(iQuantizedBlue / f)), i);
         }
     }
 

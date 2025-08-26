@@ -55,9 +55,9 @@ public interface INativePermissionController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INativePermissionController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INativePermissionController)) {
-                return (INativePermissionController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INativePermissionController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INativePermissionController)) {
+                return (INativePermissionController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -72,9 +72,9 @@ public interface INativePermissionController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(UidPackageState.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(UidPackageState.CREATOR);
                 parcel.enforceNoDataAvail();
-                populatePackagesForUids(createTypedArrayList);
+                populatePackagesForUids(arrayListCreateTypedArrayList);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 UidPackageState uidPackageState = (UidPackageState) parcel.readTypedObject(UidPackageState.CREATOR);
@@ -82,10 +82,10 @@ public interface INativePermissionController extends IInterface {
                 updatePackagesForUid(uidPackageState);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                byte readByte = parcel.readByte();
-                int[] createIntArray = parcel.createIntArray();
+                byte b = parcel.readByte();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                populatePermissionState(readByte, createIntArray);
+                populatePermissionState(b, iArrCreateIntArray);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -111,47 +111,47 @@ public interface INativePermissionController extends IInterface {
 
             @Override // com.android.media.permission.INativePermissionController
             public void populatePackagesForUids(List<UidPackageState> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.media.permission.INativePermissionController
             public void updatePackagesForUid(UidPackageState uidPackageState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(uidPackageState, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uidPackageState, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.media.permission.INativePermissionController
             public void populatePermissionState(byte b, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(INativePermissionController.DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

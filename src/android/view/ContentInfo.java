@@ -22,12 +22,12 @@ public final class ContentInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ContentInfo createFromParcel(Parcel parcel) {
-            ClipData createFromParcel = ClipData.CREATOR.createFromParcel(parcel);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            Uri createFromParcel2 = Uri.CREATOR.createFromParcel(parcel);
-            Bundle readBundle = parcel.readBundle();
-            return new Builder(createFromParcel, readInt).setFlags(readInt2).setLinkUri(createFromParcel2).setExtras(readBundle).setInputContentInfo(parcel.readInt() != 0 ? InputContentInfo.CREATOR.createFromParcel(parcel) : null).setDragAndDropPermissions(parcel.readInt() != 0 ? DragAndDropPermissions.CREATOR.createFromParcel(parcel) : null).build();
+            ClipData clipDataCreateFromParcel = ClipData.CREATOR.createFromParcel(parcel);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            Uri uriCreateFromParcel = Uri.CREATOR.createFromParcel(parcel);
+            Bundle bundle = parcel.readBundle();
+            return new Builder(clipDataCreateFromParcel, i).setFlags(i2).setLinkUri(uriCreateFromParcel).setExtras(bundle).setInputContentInfo(parcel.readInt() != 0 ? InputContentInfo.CREATOR.createFromParcel(parcel) : null).setDragAndDropPermissions(parcel.readInt() != 0 ? DragAndDropPermissions.CREATOR.createFromParcel(parcel) : null).build();
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -140,9 +140,9 @@ public final class ContentInfo implements Parcelable {
 
     public Pair<ContentInfo, ContentInfo> partition(Predicate<ClipData.Item> predicate) {
         if (this.mClip.getItemCount() == 1) {
-            boolean test = predicate.test(this.mClip.getItemAt(0));
-            ContentInfo contentInfo = test ? this : null;
-            if (test) {
+            boolean zTest = predicate.test(this.mClip.getItemAt(0));
+            ContentInfo contentInfo = zTest ? this : null;
+            if (zTest) {
                 this = null;
             }
             return Pair.create(contentInfo, this);

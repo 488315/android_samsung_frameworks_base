@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MediaControlChipInteractor {
     public final StateFlowImpl _mediaControlChipModel;
@@ -23,13 +22,13 @@ public final class MediaControlChipInteractor {
     public final StateFlowImpl mediaControlChipModelLegacy;
 
     public MediaControlChipInteractor(CoroutineScope coroutineScope, MediaFilterRepository mediaFilterRepository) {
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
-        this.isEnabled = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this.isEnabled = stateFlowImplMutableStateFlow;
         this.mediaControlChipModelForScene = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(mediaFilterRepository.currentMedia, mediaFilterRepository.selectedUserEntries, new MediaControlChipInteractor$mediaControlChipModelForScene$1(null));
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
-        this.mediaControlChipModelLegacy = MutableStateFlow2;
-        this._mediaControlChipModel = MutableStateFlow2;
-        this.mediaControlChipModel = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow2, MutableStateFlow, new MediaControlChipInteractor$mediaControlChipModel$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), null);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
+        this.mediaControlChipModelLegacy = stateFlowImplMutableStateFlow2;
+        this._mediaControlChipModel = stateFlowImplMutableStateFlow2;
+        this.mediaControlChipModel = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow2, stateFlowImplMutableStateFlow, new MediaControlChipInteractor$mediaControlChipModel$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), null);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -39,8 +38,8 @@ public final class MediaControlChipInteractor {
             Icon icon = mediaData.appIcon;
             CharSequence charSequence = mediaData.song;
             MediaButton mediaButton = mediaData.semanticActions;
-            r0 = new MediaControlChipModel(icon, mediaData.app, charSequence, mediaButton != null ? mediaButton.playOrPause : null);
+            mediaControlChipModel = new MediaControlChipModel(icon, mediaData.app, charSequence, mediaButton != null ? mediaButton.playOrPause : null);
         }
-        this.mediaControlChipModelLegacy.setValue(r0);
+        this.mediaControlChipModelLegacy.setValue(mediaControlChipModel);
     }
 }

@@ -6,7 +6,6 @@ import android.telephony.TelephonyManager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TelephonyManagerExt {
     public static final String ACTION_PRECISE_DATA_CONNECTION_STATE_CHANGED = (String) ReflectionUtils.getValueOf("ACTION_PRECISE_DATA_CONNECTION_STATE_CHANGED", (Class<?>) TelephonyManager.class);
@@ -21,7 +20,6 @@ public class TelephonyManagerExt {
     public static final int NETWORK_TYPE_LTE_CA = 19;
     public static final int NETWORK_TYPE_TD_SCDMA = 17;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NetworkTypeExt {
         NETWORK_TYPE_UNKNOWN(0),
         NETWORK_TYPE_GPRS(1),
@@ -66,15 +64,15 @@ public class TelephonyManagerExt {
         }
     }
 
-    public static byte[] getCurrentUATI(Context context) {
+    public static byte[] getCurrentUATI(Context context) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             Class[] clsArr = new Class[0];
             Method declaredMethod = Class.forName(TelephonyManager.class.getName()).getDeclaredMethod("getITelephony", null);
             declaredMethod.setAccessible(true);
-            Object invoke = declaredMethod.invoke(context.getSystemService("phone"), null);
-            if (invoke != null) {
+            Object objInvoke = declaredMethod.invoke(context.getSystemService("phone"), null);
+            if (objInvoke != null) {
                 Class[] clsArr2 = new Class[0];
-                return (byte[]) invoke.getClass().getMethod("getCurrentUATI", null).invoke(invoke, null);
+                return (byte[]) objInvoke.getClass().getMethod("getCurrentUATI", null).invoke(objInvoke, null);
             }
         } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
             e.printStackTrace();

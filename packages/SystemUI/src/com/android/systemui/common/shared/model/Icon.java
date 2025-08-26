@@ -4,11 +4,9 @@ import android.graphics.drawable.Drawable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Icon {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Loaded extends Icon {
         public final ContentDescription contentDescription;
         public final Drawable drawable;
@@ -37,18 +35,18 @@ public abstract class Icon {
 
         public final int hashCode() {
             int i;
-            int hashCode;
+            int iHashCode;
             ContentDescription contentDescription = this.contentDescription;
-            int hashCode2 = contentDescription != null ? contentDescription.hashCode() : 0;
+            int iHashCode2 = contentDescription != null ? contentDescription.hashCode() : 0;
             Integer num = this.res;
             if (num != null) {
-                i = hashCode2 * 31;
-                hashCode = num.hashCode();
+                i = iHashCode2 * 31;
+                iHashCode = num.hashCode();
             } else {
-                i = hashCode2 * 31;
-                hashCode = this.drawable.hashCode();
+                i = iHashCode2 * 31;
+                iHashCode = this.drawable.hashCode();
             }
-            return hashCode + i;
+            return iHashCode + i;
         }
 
         public final String toString() {
@@ -67,7 +65,6 @@ public abstract class Icon {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resource extends Icon {
         public final ContentDescription contentDescription;
         public final int res;
@@ -95,9 +92,9 @@ public abstract class Icon {
         }
 
         public final int hashCode() {
-            int hashCode = Integer.hashCode(this.res) * 31;
+            int iHashCode = Integer.hashCode(this.res) * 31;
             ContentDescription contentDescription = this.contentDescription;
-            return hashCode + (contentDescription == null ? 0 : contentDescription.hashCode());
+            return iHashCode + (contentDescription == null ? 0 : contentDescription.hashCode());
         }
 
         public final String toString() {

@@ -5,12 +5,14 @@ import android.util.Log;
 import com.android.systemui.plugins.log.TableLogBufferBase;
 import com.android.systemui.shared.condition.Condition;
 import com.android.systemui.shared.condition.Monitor;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executor;
+import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Monitor {
     public final AnonymousClass1 mConditionCallback;
@@ -21,7 +23,6 @@ public class Monitor {
     public final HashMap mSubscriptions;
     public final String mTag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shared.condition.Monitor$1, reason: invalid class name */
     public class AnonymousClass1 implements Condition.Callback {
         public AnonymousClass1() {
@@ -33,18 +34,15 @@ public class Monitor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onConditionsChanged(boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Subscription {
         public final Callback mCallback;
         public final Set mConditions;
         public final Subscription mNestedSubscription;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Builder {
             public final Callback mCallback;
             public final ArraySet mConditions;
@@ -69,7 +67,6 @@ public class Monitor {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Token {
         }
 
@@ -84,7 +81,6 @@ public class Monitor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscriptionState {
         public boolean mActive;
         public Boolean mAllConditionsMet;
@@ -96,124 +92,61 @@ public class Monitor {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:15:0x009b  */
-        /* JADX WARN: Removed duplicated region for block: B:30:0x00c3  */
+        /* JADX WARN: Removed duplicated region for block: B:4:0x0011  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void update(com.android.systemui.shared.condition.Monitor r10) {
-            /*
-                r9 = this;
-                com.android.systemui.shared.condition.Evaluator r0 = com.android.systemui.shared.condition.Evaluator.INSTANCE
-                com.android.systemui.shared.condition.Monitor$Subscription r1 = r9.mSubscription
-                java.util.Set r2 = r1.mConditions
-                r0.getClass()
-                boolean r0 = r2.isEmpty()
-                r3 = 0
-                r4 = 0
-                if (r0 == 0) goto L14
-            L11:
-                r0 = r4
-                goto L7d
-            L14:
-                r0 = r2
-                java.lang.Iterable r0 = (java.lang.Iterable) r0
-                java.util.ArrayList r5 = new java.util.ArrayList
-                r5.<init>()
-                java.util.Iterator r0 = r0.iterator()
-            L20:
-                boolean r6 = r0.hasNext()
-                if (r6 == 0) goto L39
-                java.lang.Object r6 = r0.next()
-                r7 = r6
-                com.android.systemui.shared.condition.Condition r7 = (com.android.systemui.shared.condition.Condition) r7
-                java.lang.Boolean r8 = r7._isConditionMet
-                if (r8 == 0) goto L20
-                boolean r7 = r7.isOverridingCondition
-                if (r7 == 0) goto L20
-                r5.add(r6)
-                goto L20
-            L39:
-                boolean r0 = r5.isEmpty()
-                if (r0 == 0) goto L40
-                goto L41
-            L40:
-                r2 = r5
-            L41:
-                java.lang.Iterable r2 = (java.lang.Iterable) r2
-                java.util.ArrayList r0 = new java.util.ArrayList
-                r5 = 10
-                int r5 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r2, r5)
-                r0.<init>(r5)
-                java.util.Iterator r2 = r2.iterator()
-            L52:
-                boolean r5 = r2.hasNext()
-                if (r5 == 0) goto L72
-                java.lang.Object r5 = r2.next()
-                com.android.systemui.shared.condition.Condition r5 = (com.android.systemui.shared.condition.Condition) r5
-                java.lang.Boolean r5 = r5._isConditionMet
-                if (r5 == 0) goto L6d
-                java.lang.Boolean r6 = java.lang.Boolean.TRUE
-                boolean r5 = r6.equals(r5)
-                java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                goto L6e
-            L6d:
-                r5 = r4
-            L6e:
-                r0.add(r5)
-                goto L52
-            L72:
-                boolean r2 = r0.isEmpty()
-                if (r2 == 0) goto L79
-                goto L11
-            L79:
-                java.lang.Boolean r0 = com.android.systemui.shared.condition.Evaluator.threeValuedAndOrOr(r0, r3)
-            L7d:
-                if (r0 == 0) goto L85
-                boolean r0 = r0.booleanValue()
-                if (r0 == 0) goto L86
-            L85:
-                r3 = 1
-            L86:
-                java.lang.Boolean r0 = r9.mAllConditionsMet
-                if (r0 == 0) goto L91
-                boolean r0 = r0.booleanValue()
-                if (r3 != r0) goto L91
-                goto Lc2
-            L91:
-                java.lang.Boolean r0 = java.lang.Boolean.valueOf(r3)
-                r9.mAllConditionsMet = r0
-                com.android.systemui.shared.condition.Monitor$Subscription r2 = r1.mNestedSubscription
-                if (r2 == 0) goto Lc3
-                if (r3 == 0) goto La8
-                com.android.systemui.shared.condition.Monitor$Subscription$Token r1 = r9.mNestedSubscriptionToken
-                if (r1 != 0) goto La8
-                com.android.systemui.shared.condition.Monitor$Subscription$Token r10 = r10.addSubscription(r2, r4)
-                r9.mNestedSubscriptionToken = r10
-                return
-            La8:
-                boolean r0 = r0.booleanValue()
-                if (r0 != 0) goto Lc2
-                com.android.systemui.shared.condition.Monitor$Subscription$Token r0 = r9.mNestedSubscriptionToken
-                if (r0 == 0) goto Lc2
-                if (r0 != 0) goto Lb5
-                goto Lc2
-            Lb5:
-                java.util.concurrent.Executor r1 = r10.mExecutor
-                com.android.systemui.shared.condition.Monitor$$ExternalSyntheticLambda0 r2 = new com.android.systemui.shared.condition.Monitor$$ExternalSyntheticLambda0
-                r3 = 0
-                r2.<init>(r3, r10, r0)
-                r1.execute(r2)
-                r9.mNestedSubscriptionToken = r4
-            Lc2:
-                return
-            Lc3:
-                com.android.systemui.shared.condition.Monitor$Callback r9 = r1.mCallback
-                r9.onConditionsChanged(r3)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shared.condition.Monitor.SubscriptionState.update(com.android.systemui.shared.condition.Monitor):void");
+        public final void update(Monitor monitor) {
+            Boolean boolThreeValuedAndOrOr;
+            Subscription.Token token;
+            Evaluator evaluator = Evaluator.INSTANCE;
+            Subscription subscription = this.mSubscription;
+            Set set = subscription.mConditions;
+            evaluator.getClass();
+            if (set.isEmpty()) {
+                boolThreeValuedAndOrOr = null;
+            } else {
+                ArrayList arrayList = new ArrayList();
+                for (Object obj : set) {
+                    Condition condition = (Condition) obj;
+                    if (condition._isConditionMet != null && condition.isOverridingCondition) {
+                        arrayList.add(obj);
+                    }
+                }
+                if (!arrayList.isEmpty()) {
+                    set = arrayList;
+                }
+                Set set2 = set;
+                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(set2, 10));
+                Iterator it = set2.iterator();
+                while (it.hasNext()) {
+                    Boolean bool = ((Condition) it.next())._isConditionMet;
+                    arrayList2.add(bool != null ? Boolean.valueOf(Boolean.TRUE.equals(bool)) : null);
+                }
+                if (!arrayList2.isEmpty()) {
+                    boolThreeValuedAndOrOr = Evaluator.threeValuedAndOrOr(arrayList2, false);
+                }
+            }
+            boolean z = boolThreeValuedAndOrOr == null || boolThreeValuedAndOrOr.booleanValue();
+            Boolean bool2 = this.mAllConditionsMet;
+            if (bool2 == null || z != bool2.booleanValue()) {
+                Boolean boolValueOf = Boolean.valueOf(z);
+                this.mAllConditionsMet = boolValueOf;
+                Subscription subscription2 = subscription.mNestedSubscription;
+                if (subscription2 == null) {
+                    subscription.mCallback.onConditionsChanged(z);
+                    return;
+                }
+                if (z && this.mNestedSubscriptionToken == null) {
+                    this.mNestedSubscriptionToken = monitor.addSubscription(subscription2, null);
+                } else {
+                    if (boolValueOf.booleanValue() || (token = this.mNestedSubscriptionToken) == null || token == null) {
+                        return;
+                    }
+                    monitor.mExecutor.execute(new Monitor$$ExternalSyntheticLambda0(0, monitor, token));
+                    this.mNestedSubscriptionToken = null;
+                }
+            }
         }
     }
 
@@ -232,7 +165,7 @@ public class Monitor {
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.condition.Monitor$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                Monitor monitor = Monitor.this;
+                Monitor monitor = this.f$0;
                 Monitor.Subscription.Token token2 = token;
                 Monitor.SubscriptionState subscriptionState2 = subscriptionState;
                 Monitor.Subscription subscription2 = subscription;

@@ -17,7 +17,6 @@ import com.samsung.android.util.InterpolatorUtils;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskMotionAnimator {
     public final TaskMotionAnimation mAnimation;
@@ -28,12 +27,10 @@ public class TaskMotionAnimator {
     public final SurfaceControl.Transaction mTransaction = new SurfaceControl.Transaction();
     public final Object mLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnAnimationFinishedCallback {
         void onAnimationFinished(Rect rect);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StashRestoreAnimation extends SimpleSpringListener implements TaskMotionAnimation {
         public final RectF mAnimatedBounds;
         public final Rect mEndBounds;
@@ -44,7 +41,7 @@ public class TaskMotionAnimator {
         public final Rect mStartBounds;
 
         public StashRestoreAnimation(TaskMotionAnimValue taskMotionAnimValue) {
-            SpringSystem create = SpringSystem.create();
+            SpringSystem springSystemCreate = SpringSystem.create();
             Rect rect = new Rect();
             this.mStartBounds = rect;
             Rect rect2 = new Rect();
@@ -56,12 +53,12 @@ public class TaskMotionAnimator {
                 rect.set(taskMotionAnimValue.mStartBounds);
                 rectF.set(taskMotionAnimValue.mStartBounds);
                 rect2.set(taskMotionAnimValue.mEndBounds);
-                Spring createSpring = create.createSpring();
-                this.mSpringTranslateX = createSpring;
-                createSpring.mSpringConfig = new SpringConfig(OrigamiValueConverter.tensionFromOrigamiValue(200.0d), OrigamiValueConverter.frictionFromOrigamiValue(20.0d));
-                Spring createSpring2 = create.createSpring();
-                this.mSpringTranslateY = createSpring2;
-                createSpring2.mSpringConfig = new SpringConfig(OrigamiValueConverter.tensionFromOrigamiValue(200.0d), OrigamiValueConverter.frictionFromOrigamiValue(20.0d));
+                Spring springCreateSpring = springSystemCreate.createSpring();
+                this.mSpringTranslateX = springCreateSpring;
+                springCreateSpring.mSpringConfig = new SpringConfig(OrigamiValueConverter.tensionFromOrigamiValue(200.0d), OrigamiValueConverter.frictionFromOrigamiValue(20.0d));
+                Spring springCreateSpring2 = springSystemCreate.createSpring();
+                this.mSpringTranslateY = springCreateSpring2;
+                springCreateSpring2.mSpringConfig = new SpringConfig(OrigamiValueConverter.tensionFromOrigamiValue(200.0d), OrigamiValueConverter.frictionFromOrigamiValue(20.0d));
                 this.mSpringTranslateX.setCurrentValue(rect.left);
                 this.mSpringTranslateY.setCurrentValue(rect.top);
                 this.mSpringTranslateX.setVelocity(60.0d);
@@ -162,7 +159,7 @@ public class TaskMotionAnimator {
 
         @Override // com.facebook.rebound.SimpleSpringListener, com.facebook.rebound.SpringListener
         public final void onSpringUpdate(Spring spring) {
-            float min;
+            float fMin;
             synchronized (TaskMotionAnimator.this.mLock) {
                 try {
                     SurfaceControl surfaceControl = TaskMotionAnimator.this.mTaskSurface;
@@ -170,30 +167,30 @@ public class TaskMotionAnimator {
                         float f = this.mSpringTranslateX != null ? (int) r3.mCurrentState.position : this.mAnimatedBounds.left;
                         float f2 = this.mSpringTranslateY != null ? (int) r4.mCurrentState.position : this.mAnimatedBounds.top;
                         double d = f;
-                        float ceil = (float) Math.ceil(d);
+                        float fCeil = (float) Math.ceil(d);
                         double d2 = f2;
-                        float ceil2 = (float) Math.ceil(d2);
+                        float fCeil2 = (float) Math.ceil(d2);
                         RectF rectF = this.mAnimatedBounds;
-                        if (ceil == rectF.left && ceil2 == rectF.top) {
+                        if (fCeil == rectF.left && fCeil2 == rectF.top) {
                             return;
                         }
                         rectF.offsetTo(f, f2);
-                        float abs = Math.abs(this.mStartBounds.left - this.mEndBounds.left);
-                        float abs2 = Math.abs(this.mStartBounds.left - ((int) f));
-                        if (abs == 0.0f) {
-                            min = 1.0f;
+                        float fAbs = Math.abs(this.mStartBounds.left - this.mEndBounds.left);
+                        float fAbs2 = Math.abs(this.mStartBounds.left - ((int) f));
+                        if (fAbs == 0.0f) {
+                            fMin = 1.0f;
                         } else {
                             float f3 = this.mScale;
-                            min = Math.min(((1.0f - f3) * (abs2 / abs)) + f3, 1.0f);
+                            fMin = Math.min(((1.0f - f3) * (fAbs2 / fAbs)) + f3, 1.0f);
                         }
                         TaskMotionAnimator taskMotionAnimator = TaskMotionAnimator.this;
-                        taskMotionAnimator.mTransaction.setMatrix(taskMotionAnimator.mTaskSurface, min, 0.0f, 0.0f, min);
+                        taskMotionAnimator.mTransaction.setMatrix(taskMotionAnimator.mTaskSurface, fMin, 0.0f, 0.0f, fMin);
                         TaskMotionAnimator taskMotionAnimator2 = TaskMotionAnimator.this;
                         taskMotionAnimator2.mTransaction.setPosition(taskMotionAnimator2.mTaskSurface, (float) Math.ceil(d), (float) Math.ceil(d2)).apply();
                         FreeformStashState freeformStashState = TaskMotionAnimator.this.mFreeformStashState;
-                        freeformStashState.mScale = min;
+                        freeformStashState.mScale = fMin;
                         if (this.mNeedAlphaAnimation) {
-                            TaskMotionAnimator.this.mFreeformStashState.setDimOverlayAlpha((1.0f - (abs2 / abs)) * (MultiWindowUtils.isNightMode(freeformStashState.mTaskInfo) ? 0.4f : 0.2f));
+                            TaskMotionAnimator.this.mFreeformStashState.setDimOverlayAlpha((1.0f - (fAbs2 / fAbs)) * (MultiWindowUtils.isNightMode(freeformStashState.mTaskInfo) ? 0.4f : 0.2f));
                         }
                         if (Math.abs(spring.mEndValue - spring.mCurrentState.position) < 1.0d) {
                             spring.setAtRest();
@@ -224,7 +221,6 @@ public class TaskMotionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TaskMotionAnimation {
         void cancel();
 
@@ -247,7 +243,6 @@ public class TaskMotionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScaleAnimation implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener, TaskMotionAnimation {
         public final int mAnimType;
         public final boolean mStartFromLeftStash;
@@ -255,9 +250,9 @@ public class TaskMotionAnimator {
         public ValueAnimator mValueAnimator;
 
         public ScaleAnimation(TaskMotionAnimValue taskMotionAnimValue) {
-            ValueAnimator ofPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofFloat("scale", taskMotionAnimValue.mFreeformStashState.mScale, taskMotionAnimValue.mTargetScale));
-            this.mValueAnimator = ofPropertyValuesHolder;
-            ofPropertyValuesHolder.setDuration(300L);
+            ValueAnimator valueAnimatorOfPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofFloat("scale", taskMotionAnimValue.mFreeformStashState.mScale, taskMotionAnimValue.mTargetScale));
+            this.mValueAnimator = valueAnimatorOfPropertyValuesHolder;
+            valueAnimatorOfPropertyValuesHolder.setDuration(300L);
             this.mValueAnimator.setInterpolator(InterpolatorUtils.SINE_OUT_60);
             this.mValueAnimator.addListener(this);
             this.mValueAnimator.addUpdateListener(this);
@@ -330,23 +325,23 @@ public class TaskMotionAnimator {
                 try {
                     SurfaceControl surfaceControl = TaskMotionAnimator.this.mTaskSurface;
                     if (surfaceControl != null && surfaceControl.isValid() && !TaskMotionAnimator.this.mCanceled) {
-                        float floatValue = ((Float) valueAnimator.getAnimatedValue("scale")).floatValue();
+                        float fFloatValue = ((Float) valueAnimator.getAnimatedValue("scale")).floatValue();
                         TaskMotionAnimator taskMotionAnimator = TaskMotionAnimator.this;
-                        taskMotionAnimator.mTransaction.setMatrix(taskMotionAnimator.mTaskSurface, floatValue, 0.0f, 0.0f, floatValue);
+                        taskMotionAnimator.mTransaction.setMatrix(taskMotionAnimator.mTaskSurface, fFloatValue, 0.0f, 0.0f, fFloatValue);
                         FreeformStashState freeformStashState = TaskMotionAnimator.this.mFreeformStashState;
-                        freeformStashState.mScale = floatValue;
+                        freeformStashState.mScale = fFloatValue;
                         float f = MultiWindowUtils.isNightMode(freeformStashState.mTaskInfo) ? 0.4f : 0.2f;
                         if (this.mAnimType == 0) {
                             TaskMotionAnimator.this.mFreeformStashState.setDimOverlayAlpha(valueAnimator.getAnimatedFraction() * f);
                         } else {
                             TaskMotionAnimator.this.mFreeformStashState.setDimOverlayAlpha(f - (valueAnimator.getAnimatedFraction() * f));
                         }
-                        float width = this.mStartFromLeftStash ? this.mTaskSurfaceBounds.width() - (this.mTaskSurfaceBounds.width() * TaskMotionAnimator.this.mFreeformStashState.mScale) : 0.0f;
+                        float fWidth = this.mStartFromLeftStash ? this.mTaskSurfaceBounds.width() - (this.mTaskSurfaceBounds.width() * TaskMotionAnimator.this.mFreeformStashState.mScale) : 0.0f;
                         TaskMotionAnimator taskMotionAnimator2 = TaskMotionAnimator.this;
                         SurfaceControl.Transaction transaction = taskMotionAnimator2.mTransaction;
                         SurfaceControl surfaceControl2 = taskMotionAnimator2.mTaskSurface;
                         Rect rect = this.mTaskSurfaceBounds;
-                        transaction.setPosition(surfaceControl2, rect.left + width, rect.top);
+                        transaction.setPosition(surfaceControl2, rect.left + fWidth, rect.top);
                         TaskMotionAnimator.this.mTransaction.apply();
                     }
                 } finally {

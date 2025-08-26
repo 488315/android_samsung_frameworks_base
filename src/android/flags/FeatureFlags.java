@@ -165,20 +165,20 @@ public class FeatureFlags {
     }
 
     protected void syncInternal(Set<Flag<?>> set) {
-        IFeatureFlags bind = bind();
+        IFeatureFlags iFeatureFlagsBind = bind();
         ArrayList arrayList = new ArrayList();
         Iterator<Flag<?>> it = set.iterator();
         while (it.hasNext()) {
             arrayList.add(flagToSyncableFlag(it.next()));
         }
-        List<SyncableFlag> list = Collections.EMPTY_LIST;
+        List<SyncableFlag> listSyncFlags = Collections.EMPTY_LIST;
         try {
-            list = bind.syncFlags(arrayList);
+            listSyncFlags = iFeatureFlagsBind.syncFlags(arrayList);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
         for (Flag<?> flag : set) {
-            Iterator<SyncableFlag> it2 = list.iterator();
+            Iterator<SyncableFlag> it2 = listSyncFlags.iterator();
             while (true) {
                 if (it2.hasNext()) {
                     SyncableFlag next = it2.next();
@@ -210,10 +210,10 @@ public class FeatureFlags {
 
     private IFeatureFlags bind() {
         if (this.mIFeatureFlags == null) {
-            IFeatureFlags asInterface = IFeatureFlags.Stub.asInterface(ServiceManager.getService(Context.FEATURE_FLAGS_SERVICE));
-            this.mIFeatureFlags = asInterface;
+            IFeatureFlags iFeatureFlagsAsInterface = IFeatureFlags.Stub.asInterface(ServiceManager.getService(Context.FEATURE_FLAGS_SERVICE));
+            this.mIFeatureFlags = iFeatureFlagsAsInterface;
             try {
-                asInterface.registerCallback(this.mIFeatureFlagsCallback);
+                iFeatureFlagsAsInterface.registerCallback(this.mIFeatureFlagsCallback);
             } catch (RemoteException unused) {
                 Log.e(TAG, "Failed to listen for flag changes!");
             }

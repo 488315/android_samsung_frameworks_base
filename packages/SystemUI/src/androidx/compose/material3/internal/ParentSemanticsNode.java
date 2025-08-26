@@ -6,10 +6,9 @@ import androidx.compose.ui.node.TraversableNode;
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ParentSemanticsNode extends Modifier.Node implements TraversableNode, SemanticsModifierNode {
-    public final Function1 properties;
+    public Function1 properties;
     public boolean semanticsConsumed;
     public final ParentSemanticsNodeKey traverseKey = ParentSemanticsNodeKey.INSTANCE;
 
@@ -22,7 +21,7 @@ public final class ParentSemanticsNode extends Modifier.Node implements Traversa
         if (this.semanticsConsumed) {
             return;
         }
-        this.properties.mo779invoke(semanticsPropertyReceiver);
+        this.properties.mo781invoke(semanticsPropertyReceiver);
     }
 
     @Override // androidx.compose.ui.node.SemanticsModifierNode

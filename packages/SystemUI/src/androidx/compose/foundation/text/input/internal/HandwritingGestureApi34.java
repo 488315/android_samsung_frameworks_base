@@ -1,6 +1,7 @@
 package androidx.compose.foundation.text.input.internal;
 
 import android.view.inputmethod.HandwritingGesture;
+import androidx.compose.foundation.text.input.internal.RecordingInputConnection;
 import androidx.compose.ui.text.AnnotatedString;
 import androidx.compose.ui.text.TextGranularity;
 import androidx.compose.ui.text.TextRange;
@@ -11,7 +12,6 @@ import androidx.compose.ui.text.input.EditCommand;
 import androidx.compose.ui.text.input.SetSelectionCommand;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HandwritingGestureApi34 {
     public static final HandwritingGestureApi34 INSTANCE = new HandwritingGestureApi34();
@@ -24,47 +24,47 @@ public final class HandwritingGestureApi34 {
         if (fallbackText == null) {
             return 3;
         }
-        ((RecordingInputConnection$performHandwritingGesture$1) function1).mo779invoke(new CommitTextCommand(fallbackText, 1));
+        ((RecordingInputConnection.AnonymousClass1) function1).mo781invoke(new CommitTextCommand(fallbackText, 1));
         return 5;
     }
 
     /* renamed from: performDeletionOnLegacyTextField-vJH6DeI, reason: not valid java name */
-    public static void m213performDeletionOnLegacyTextFieldvJH6DeI(long j, AnnotatedString annotatedString, boolean z, Function1 function1) {
+    public static void m214performDeletionOnLegacyTextFieldvJH6DeI(long j, AnnotatedString annotatedString, boolean z, Function1 function1) {
         if (z) {
             TextRange.Companion companion = TextRange.Companion;
-            int i = (int) (j >> 32);
-            int i2 = (int) (j & 4294967295L);
-            int codePointBefore = i > 0 ? Character.codePointBefore(annotatedString, i) : 10;
-            int codePointAt = i2 < annotatedString.text.length() ? Character.codePointAt(annotatedString, i2) : 10;
-            if (HandwritingGesture_androidKt.isWhitespaceExceptNewline(codePointBefore) && (HandwritingGesture_androidKt.isWhitespace(codePointAt) || HandwritingGesture_androidKt.isPunctuation(codePointAt))) {
+            int iCharCount = (int) (j >> 32);
+            int iCharCount2 = (int) (j & 4294967295L);
+            int iCodePointBefore = iCharCount > 0 ? Character.codePointBefore(annotatedString, iCharCount) : 10;
+            int iCodePointAt = iCharCount2 < annotatedString.text.length() ? Character.codePointAt(annotatedString, iCharCount2) : 10;
+            if (HandwritingGesture_androidKt.isWhitespaceExceptNewline(iCodePointBefore) && (HandwritingGesture_androidKt.isWhitespace(iCodePointAt) || HandwritingGesture_androidKt.isPunctuation(iCodePointAt))) {
                 do {
-                    i -= Character.charCount(codePointBefore);
-                    if (i == 0) {
+                    iCharCount -= Character.charCount(iCodePointBefore);
+                    if (iCharCount == 0) {
                         break;
                     } else {
-                        codePointBefore = Character.codePointBefore(annotatedString, i);
+                        iCodePointBefore = Character.codePointBefore(annotatedString, iCharCount);
                     }
-                } while (HandwritingGesture_androidKt.isWhitespaceExceptNewline(codePointBefore));
-                j = TextRangeKt.TextRange(i, i2);
-            } else if (HandwritingGesture_androidKt.isWhitespaceExceptNewline(codePointAt) && (HandwritingGesture_androidKt.isWhitespace(codePointBefore) || HandwritingGesture_androidKt.isPunctuation(codePointBefore))) {
+                } while (HandwritingGesture_androidKt.isWhitespaceExceptNewline(iCodePointBefore));
+                j = TextRangeKt.TextRange(iCharCount, iCharCount2);
+            } else if (HandwritingGesture_androidKt.isWhitespaceExceptNewline(iCodePointAt) && (HandwritingGesture_androidKt.isWhitespace(iCodePointBefore) || HandwritingGesture_androidKt.isPunctuation(iCodePointBefore))) {
                 do {
-                    i2 += Character.charCount(codePointAt);
-                    if (i2 == annotatedString.text.length()) {
+                    iCharCount2 += Character.charCount(iCodePointAt);
+                    if (iCharCount2 == annotatedString.text.length()) {
                         break;
                     } else {
-                        codePointAt = Character.codePointAt(annotatedString, i2);
+                        iCodePointAt = Character.codePointAt(annotatedString, iCharCount2);
                     }
-                } while (HandwritingGesture_androidKt.isWhitespaceExceptNewline(codePointAt));
-                j = TextRangeKt.TextRange(i, i2);
+                } while (HandwritingGesture_androidKt.isWhitespaceExceptNewline(iCodePointAt));
+                j = TextRangeKt.TextRange(iCharCount, iCharCount2);
             }
         }
         TextRange.Companion companion2 = TextRange.Companion;
-        int i3 = (int) (4294967295L & j);
-        ((RecordingInputConnection$performHandwritingGesture$1) function1).mo779invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i3, i3), new DeleteSurroundingTextCommand(TextRange.m748getLengthimpl(j), 0)}));
+        int i = (int) (4294967295L & j);
+        ((RecordingInputConnection.AnonymousClass1) function1).mo781invoke(new HandwritingGesture_androidKt$compoundEditCommand$1(new EditCommand[]{new SetSelectionCommand(i, i), new DeleteSurroundingTextCommand(TextRange.m750getLengthimpl(j), 0)}));
     }
 
     /* renamed from: toTextGranularity-NUwxegE, reason: not valid java name */
-    public static int m214toTextGranularityNUwxegE(int i) {
+    public static int m215toTextGranularityNUwxegE(int i) {
         if (i == 1) {
             TextGranularity.Companion.getClass();
             return TextGranularity.Word;

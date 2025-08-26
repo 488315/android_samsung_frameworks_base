@@ -6,8 +6,8 @@ import gov.nist.javax.sip.header.ims.Path;
 import gov.nist.javax.sip.header.ims.PathList;
 import gov.nist.javax.sip.parser.AddressParametersParser;
 import gov.nist.javax.sip.parser.Lexer;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PathParser extends AddressParametersParser {
     public PathParser(String str) {
@@ -15,8 +15,8 @@ public class PathParser extends AddressParametersParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
-        char lookAhead;
+    public final SIPHeader parse() throws ParseException {
+        char cLookAhead;
         PathList pathList = new PathList();
         this.lexer.match(2119);
         this.lexer.SPorHT();
@@ -27,14 +27,14 @@ public class PathParser extends AddressParametersParser {
             parse((AddressParametersHeader) path);
             pathList.add((SIPHeader) path);
             this.lexer.SPorHT();
-            lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead != ',') {
+            cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead != ',') {
                 break;
             }
             this.lexer.match(44);
             this.lexer.SPorHT();
         }
-        if (lookAhead == '\n') {
+        if (cLookAhead == '\n') {
             return pathList;
         }
         throw createParseException("unexpected char");

@@ -66,9 +66,9 @@ public interface IUpdateVerifierInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUpdateVerifierInterface.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUpdateVerifierInterface)) {
-                return (IUpdateVerifierInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUpdateVerifierInterface.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUpdateVerifierInterface)) {
+                return (IUpdateVerifierInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,27 +104,27 @@ public interface IUpdateVerifierInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IUpdateVerifierCallback asInterface = IUpdateVerifierCallback.Stub.asInterface(parcel.readStrongBinder());
+                IUpdateVerifierCallback iUpdateVerifierCallbackAsInterface = IUpdateVerifierCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                requestSaGuid(asInterface);
+                requestSaGuid(iUpdateVerifierCallbackAsInterface);
             } else if (i == 2) {
-                byte[] createByteArray = parcel.createByteArray();
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                updateVerifier(createByteArray, createByteArray2);
+                updateVerifier(bArrCreateByteArray, bArrCreateByteArray2);
             } else if (i == 3) {
-                byte[] createByteArray3 = parcel.createByteArray();
-                byte[] createByteArray4 = parcel.createByteArray();
-                int readInt = parcel.readInt();
+                byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                updateVerifierWithType(createByteArray3, createByteArray4, readInt);
+                updateVerifierWithType(bArrCreateByteArray3, bArrCreateByteArray4, i3);
             } else if (i == 4) {
-                byte[] createByteArray5 = parcel.createByteArray();
-                byte[] createByteArray6 = parcel.createByteArray();
-                byte[] createByteArray7 = parcel.createByteArray();
-                int readInt2 = parcel.readInt();
+                byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                byte[] bArrCreateByteArray7 = parcel.createByteArray();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                updateVerifierWithWk(createByteArray5, createByteArray6, createByteArray7, readInt2);
+                updateVerifierWithWk(bArrCreateByteArray5, bArrCreateByteArray6, bArrCreateByteArray7, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -149,55 +149,55 @@ public interface IUpdateVerifierInterface extends IInterface {
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
             public void requestSaGuid(IUpdateVerifierCallback iUpdateVerifierCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUpdateVerifierCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUpdateVerifierCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
             public void updateVerifier(byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
             public void updateVerifierWithType(byte[] bArr, byte[] bArr2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
             public void updateVerifierWithWk(byte[] bArr, byte[] bArr2, byte[] bArr3, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

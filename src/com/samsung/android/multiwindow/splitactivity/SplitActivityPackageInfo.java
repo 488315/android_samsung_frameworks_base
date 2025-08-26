@@ -49,9 +49,9 @@ public class SplitActivityPackageInfo implements Parcelable {
         this.mFullscreenActivities = arraySet;
         this.mPackageName = parcel.readString();
         parcel.readTypedList(arrayList, SplitActivityInfo.CREATOR);
-        String[] readStringArray = parcel.readStringArray();
-        if (readStringArray != null) {
-            Collections.addAll(arraySet, readStringArray);
+        String[] stringArray = parcel.readStringArray();
+        if (stringArray != null) {
+            Collections.addAll(arraySet, stringArray);
         }
     }
 
@@ -63,9 +63,7 @@ public class SplitActivityPackageInfo implements Parcelable {
         this.mInfos.removeIf(new Predicate() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean match;
-                match = ((SplitActivityInfo) obj).match(str, str2);
-                return match;
+                return ((SplitActivityInfo) obj).match(str, str2);
             }
         });
     }
@@ -78,9 +76,7 @@ public class SplitActivityPackageInfo implements Parcelable {
         return this.mInfos.stream().filter(new Predicate() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean matchWithWildcard;
-                matchWithWildcard = ((SplitActivityInfo) obj).matchWithWildcard(str, str2);
-                return matchWithWildcard;
+                return ((SplitActivityInfo) obj).matchWithWildcard(str, str2);
             }
         }).findFirst().orElse(null);
     }

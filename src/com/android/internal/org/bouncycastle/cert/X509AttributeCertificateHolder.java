@@ -157,7 +157,7 @@ public class X509AttributeCertificateHolder implements Encodable, Serializable {
         return (date.before(CertUtils.recoverDate(attrCertValidityPeriod.getNotBeforeTime())) || date.after(CertUtils.recoverDate(attrCertValidityPeriod.getNotAfterTime()))) ? false : true;
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException, IOException {
         AttributeCertificateInfo acinfo = this.attrCert.getAcinfo();
         if (!CertUtils.isAlgIdEqual(acinfo.getSignature(), this.attrCert.getSignatureAlgorithm())) {
             throw new CertException("signature invalid - algorithm identifier mismatch");
@@ -187,7 +187,7 @@ public class X509AttributeCertificateHolder implements Encodable, Serializable {
         return this.attrCert.hashCode();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         init(AttributeCertificate.getInstance(objectInputStream.readObject()));
     }

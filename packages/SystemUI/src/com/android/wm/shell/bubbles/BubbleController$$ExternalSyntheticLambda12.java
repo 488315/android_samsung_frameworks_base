@@ -2,7 +2,6 @@ package com.android.wm.shell.bubbles;
 
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda12 implements Consumer {
     public final /* synthetic */ BubbleController f$0;
@@ -25,7 +24,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda12 i
         bubbleController.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda17
             @Override // java.lang.Runnable
             public final void run() {
-                BubbleController bubbleController2 = BubbleController.this;
+                BubbleController bubbleController2 = bubbleController;
                 BubbleEntry bubbleEntry2 = bubbleEntry;
                 boolean z2 = z;
                 Bubble bubble2 = bubble;

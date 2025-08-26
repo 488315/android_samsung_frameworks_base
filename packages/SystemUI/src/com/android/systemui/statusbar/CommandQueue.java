@@ -20,6 +20,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
+import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.view.KeyEvent;
@@ -34,7 +35,11 @@ import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.util.GcUtils;
 import com.android.internal.view.AppearanceRegion;
 import com.android.systemui.BasicRune;
+import com.android.systemui.Dependency;
 import com.android.systemui.dump.DumpHandler;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
+import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.power.data.repository.PowerRepository;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.settings.DisplayTracker;
@@ -42,18 +47,19 @@ import com.android.systemui.settings.DisplayTrackerImpl;
 import com.android.systemui.shade.SecPanelTouchBlockHelper;
 import com.android.systemui.statusbar.commandline.CommandRegistry;
 import com.android.systemui.statusbar.policy.CallbackController;
+import com.android.systemui.util.SafeUIState;
 import com.android.wm.shell.shortcut.ShortcutController;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import dagger.Lazy;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CommandQueue extends IStatusBar.Stub implements CallbackController {
     public final ArrayList mCallbacks;
@@ -68,7 +74,6 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     public final Lazy mPowerInteractor;
     public final CommandRegistry mRegistry;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public /* synthetic */ H(CommandQueue commandQueue, Looper looper, int i) {
             this(looper);
@@ -135,7 +140,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                     break;
                 case NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME /* 524288 */:
                     SomeArgs someArgs3 = (SomeArgs) message.obj;
-                    CommandQueue.m2942$$Nest$mhandleShowImeButton(commandQueue, someArgs3.argi1, someArgs3.argi2, someArgs3.argi3, someArgs3.argi4 != 0);
+                    CommandQueue.m2959$$Nest$mhandleShowImeButton(commandQueue, someArgs3.argi1, someArgs3.argi2, someArgs3.argi3, someArgs3.argi4 != 0);
                     break;
                 case 589824:
                     for (int i14 = 0; i14 < commandQueue.mCallbacks.size(); i14++) {
@@ -435,9 +440,9 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                     CharSequence charSequence3 = (CharSequence) someArgs15.arg3;
                     Icon icon = (Icon) someArgs15.arg4;
                     IAddTileResultCallback iAddTileResultCallback = (IAddTileResultCallback) someArgs15.arg5;
-                    int intValue = ((Integer) someArgs15.arg6).intValue();
+                    int iIntValue = ((Integer) someArgs15.arg6).intValue();
                     for (int i66 = 0; i66 < commandQueue.mCallbacks.size(); i66++) {
-                        ((Callbacks) commandQueue.mCallbacks.get(i66)).requestAddTile(intValue, componentName, charSequence2, charSequence3, icon, iAddTileResultCallback);
+                        ((Callbacks) commandQueue.mCallbacks.get(i66)).requestAddTile(iIntValue, componentName, charSequence2, charSequence3, icon, iAddTileResultCallback);
                     }
                     someArgs15.recycle();
                     break;
@@ -454,22 +459,22 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                     break;
                 case 4194304:
                     SomeArgs someArgs16 = (SomeArgs) message.obj;
-                    int intValue2 = ((Integer) someArgs16.arg1).intValue();
+                    int iIntValue2 = ((Integer) someArgs16.arg1).intValue();
                     MediaRoute2Info mediaRoute2Info = (MediaRoute2Info) someArgs16.arg2;
                     IUndoMediaTransferCallback iUndoMediaTransferCallback = (IUndoMediaTransferCallback) someArgs16.arg3;
                     for (int i69 = 0; i69 < commandQueue.mCallbacks.size(); i69++) {
-                        ((Callbacks) commandQueue.mCallbacks.get(i69)).updateMediaTapToTransferSenderDisplay(intValue2, mediaRoute2Info, iUndoMediaTransferCallback);
+                        ((Callbacks) commandQueue.mCallbacks.get(i69)).updateMediaTapToTransferSenderDisplay(iIntValue2, mediaRoute2Info, iUndoMediaTransferCallback);
                     }
                     someArgs16.recycle();
                     break;
                 case 4259840:
                     SomeArgs someArgs17 = (SomeArgs) message.obj;
-                    int intValue3 = ((Integer) someArgs17.arg1).intValue();
+                    int iIntValue3 = ((Integer) someArgs17.arg1).intValue();
                     MediaRoute2Info mediaRoute2Info2 = (MediaRoute2Info) someArgs17.arg2;
                     Icon icon2 = (Icon) someArgs17.arg3;
                     CharSequence charSequence4 = (CharSequence) someArgs17.arg4;
                     for (int i70 = 0; i70 < commandQueue.mCallbacks.size(); i70++) {
-                        ((Callbacks) commandQueue.mCallbacks.get(i70)).updateMediaTapToTransferReceiverDisplay(intValue3, mediaRoute2Info2, icon2, charSequence4);
+                        ((Callbacks) commandQueue.mCallbacks.get(i70)).updateMediaTapToTransferReceiverDisplay(iIntValue3, mediaRoute2Info2, icon2, charSequence4);
                     }
                     someArgs17.recycle();
                     break;
@@ -568,10 +573,10 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                     DisableStates disableStates = (DisableStates) message.obj;
                     boolean z2 = disableStates.animate;
                     for (Map.Entry entry : disableStates.displaysWithStates.entrySet()) {
-                        int intValue4 = ((Integer) entry.getKey()).intValue();
+                        int iIntValue4 = ((Integer) entry.getKey()).intValue();
                         Pair pair2 = (Pair) entry.getValue();
                         for (int i90 = 0; i90 < commandQueue.mCallbacks.size(); i90++) {
-                            ((Callbacks) commandQueue.mCallbacks.get(i90)).disable(intValue4, ((Integer) pair2.first).intValue(), ((Integer) pair2.second).intValue(), z2);
+                            ((Callbacks) commandQueue.mCallbacks.get(i90)).disable(iIntValue4, ((Integer) pair2.first).intValue(), ((Integer) pair2.second).intValue(), z2);
                         }
                     }
                     break;
@@ -645,7 +650,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     }
 
     /* renamed from: -$$Nest$mhandleShowImeButton, reason: not valid java name */
-    public static void m2942$$Nest$mhandleShowImeButton(CommandQueue commandQueue, int i, int i2, int i3, boolean z) {
+    public static void m2959$$Nest$mhandleShowImeButton(CommandQueue commandQueue, int i, int i2, int i3, boolean z) {
         if (i == -1) {
             commandQueue.getClass();
             return;
@@ -668,10 +673,10 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void abortTransient(int i, int i2) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            this.mHandler.obtainMessage(3211264, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            this.mHandler.obtainMessage(3211264, someArgsObtain).sendToTarget();
         }
     }
 
@@ -681,10 +686,10 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void addQsTileToFrontOrEnd(ComponentName componentName, boolean z) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = componentName;
-            obtain.arg2 = Boolean.valueOf(z);
-            this.mHandler.obtainMessage(1769472, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = componentName;
+            someArgsObtain.arg2 = Boolean.valueOf(z);
+            this.mHandler.obtainMessage(1769472, someArgsObtain).sendToTarget();
         }
     }
 
@@ -760,17 +765,17 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                 this.mDisplayDisabled.put(i, new Pair(Integer.valueOf(i2), Integer.valueOf(i3)));
                 int i4 = (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN && i == 1) ? 8257536 : 131072;
                 this.mHandler.removeMessages(i4);
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.argi1 = i;
-                obtain.argi2 = i2;
-                obtain.argi3 = i3;
-                obtain.argi4 = z ? 1 : 0;
-                Message obtainMessage = this.mHandler.obtainMessage(i4, obtain);
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.argi1 = i;
+                someArgsObtain.argi2 = i2;
+                someArgsObtain.argi3 = i3;
+                someArgsObtain.argi4 = z ? 1 : 0;
+                Message messageObtainMessage = this.mHandler.obtainMessage(i4, someArgsObtain);
                 if (Looper.myLooper() == this.mHandler.getLooper()) {
-                    this.mHandler.handleMessage(obtainMessage);
-                    obtainMessage.recycle();
+                    this.mHandler.handleMessage(messageObtainMessage);
+                    messageObtainMessage.recycle();
                 } else {
-                    obtainMessage.sendToTarget();
+                    messageObtainMessage.sendToTarget();
                 }
             } catch (Throwable th) {
                 throw th;
@@ -782,21 +787,21 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
         synchronized (this.mLock) {
             try {
                 for (Map.Entry entry : disableStates.displaysWithStates.entrySet()) {
-                    int intValue = ((Integer) entry.getKey()).intValue();
+                    int iIntValue = ((Integer) entry.getKey()).intValue();
                     Pair pair = (Pair) entry.getValue();
                     Integer num = (Integer) pair.first;
                     num.getClass();
                     Integer num2 = (Integer) pair.second;
                     num2.getClass();
-                    this.mDisplayDisabled.put(intValue, new Pair(num, num2));
+                    this.mDisplayDisabled.put(iIntValue, new Pair(num, num2));
                 }
                 this.mHandler.removeMessages(5636096);
-                Message obtainMessage = this.mHandler.obtainMessage(5636096, disableStates);
+                Message messageObtainMessage = this.mHandler.obtainMessage(5636096, disableStates);
                 if (Looper.myLooper() == this.mHandler.getLooper()) {
-                    this.mHandler.handleMessage(obtainMessage);
-                    obtainMessage.recycle();
+                    this.mHandler.handleMessage(messageObtainMessage);
+                    messageObtainMessage.recycle();
                 } else {
-                    obtainMessage.sendToTarget();
+                    messageObtainMessage.sendToTarget();
                 }
             } catch (Throwable th) {
                 throw th;
@@ -821,7 +826,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
         final FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         new Thread("Sysui.dumpProto") { // from class: com.android.systemui.statusbar.CommandQueue.3
             @Override // java.lang.Thread, java.lang.Runnable
-            public final void run() {
+            public final void run() throws IOException {
                 try {
                     if (CommandQueue.this.mDumpHandler != null) {
                         CommandQueue.this.mDumpHandler.dump(fileDescriptor, new PrintWriter(new OutputStream(this) { // from class: com.android.systemui.statusbar.CommandQueue.3.1
@@ -848,9 +853,9 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void hideAuthenticationDialog(long j) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argl1 = j;
-            this.mHandler.obtainMessage(2818048, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argl1 = j;
+            this.mHandler.obtainMessage(2818048, someArgsObtain).sendToTarget();
         }
     }
 
@@ -863,41 +868,41 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void hideToast(String str, IBinder iBinder) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = iBinder;
-            this.mHandler.obtainMessage(3473408, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = iBinder;
+            this.mHandler.obtainMessage(3473408, someArgsObtain).sendToTarget();
         }
     }
 
     public final void immersiveModeChanged(int i, boolean z, int i2) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = z ? 1 : 0;
-            obtain.argi3 = i2;
-            this.mHandler.obtainMessage(5111808, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = z ? 1 : 0;
+            someArgsObtain.argi3 = i2;
+            this.mHandler.obtainMessage(5111808, someArgsObtain).sendToTarget();
         }
     }
 
     public final void moveFocusedTaskToDesktop(int i) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.argi1 = i;
-        this.mHandler.obtainMessage(5242880, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.argi1 = i;
+        this.mHandler.obtainMessage(5242880, someArgsObtain).sendToTarget();
     }
 
     public final void moveFocusedTaskToFullscreen(int i) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.argi1 = i;
-        this.mHandler.obtainMessage(4587520, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.argi1 = i;
+        this.mHandler.obtainMessage(4587520, someArgsObtain).sendToTarget();
     }
 
     public final void moveFocusedTaskToStageSplit(int i, boolean z) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = z ? 1 : 0;
-            this.mHandler.obtainMessage(4653056, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = z ? 1 : 0;
+            this.mHandler.obtainMessage(4653056, someArgsObtain).sendToTarget();
         }
     }
 
@@ -922,38 +927,38 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void notifySamsungPayInfo(int i, boolean z, Rect rect) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.arg1 = Boolean.valueOf(z);
-            obtain.arg2 = rect;
-            this.mHandler.obtainMessage(8192000, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg1 = Boolean.valueOf(z);
+            someArgsObtain.arg2 = rect;
+            this.mHandler.obtainMessage(8192000, someArgsObtain).sendToTarget();
         }
     }
 
     public final void onBiometricAuthenticated(int i) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            this.mHandler.obtainMessage(2621440, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            this.mHandler.obtainMessage(2621440, someArgsObtain).sendToTarget();
         }
     }
 
     public final void onBiometricError(int i, int i2, int i3) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = i3;
-            this.mHandler.obtainMessage(2752512, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = i3;
+            this.mHandler.obtainMessage(2752512, someArgsObtain).sendToTarget();
         }
     }
 
     public final void onBiometricHelp(int i, String str) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.arg1 = str;
-            this.mHandler.obtainMessage(2686976, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg1 = str;
+            this.mHandler.obtainMessage(2686976, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1010,16 +1015,16 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void onSystemBarAttributesChanged(int i, int i2, AppearanceRegion[] appearanceRegionArr, boolean z, int i3, int i4, String str, LetterboxDetails[] letterboxDetailsArr) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = z ? 1 : 0;
-            obtain.arg1 = appearanceRegionArr;
-            obtain.argi4 = i3;
-            obtain.argi5 = i4;
-            obtain.arg3 = str;
-            obtain.arg4 = letterboxDetailsArr;
-            this.mHandler.obtainMessage(393216, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = z ? 1 : 0;
+            someArgsObtain.arg1 = appearanceRegionArr;
+            someArgsObtain.argi4 = i3;
+            someArgsObtain.argi5 = i4;
+            someArgsObtain.arg3 = str;
+            someArgsObtain.arg4 = letterboxDetailsArr;
+            this.mHandler.obtainMessage(393216, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1038,138 +1043,86 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x006c, code lost:
-    
-        if (r0 != false) goto L34;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0079, code lost:
-    
-        if (r0 == false) goto L39;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x006f  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x007c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean panelsEnabled() {
-        /*
-            r6 = this;
-            com.android.systemui.shade.SecPanelTouchBlockHelper r0 = r6.mPanelTouchBlockHelper
-            if (r0 != 0) goto L10
-            com.android.systemui.Dependency r0 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.shade.SecPanelTouchBlockHelper> r1 = com.android.systemui.shade.SecPanelTouchBlockHelper.class
-            java.lang.Object r0 = r0.getDependencyInner(r1)
-            com.android.systemui.shade.SecPanelTouchBlockHelper r0 = (com.android.systemui.shade.SecPanelTouchBlockHelper) r0
-            r6.mPanelTouchBlockHelper = r0
-        L10:
-            com.android.systemui.shade.SecPanelTouchBlockHelper r0 = r6.mPanelTouchBlockHelper
-            r1 = 1
-            r2 = 0
-            if (r0 == 0) goto L7c
-            kotlin.Lazy r3 = r0.statusBarStateController$delegate
-            java.lang.Object r3 = r3.getValue()
-            com.android.systemui.plugins.statusbar.StatusBarStateController r3 = (com.android.systemui.plugins.statusbar.StatusBarStateController) r3
-            java.lang.String r4 = "SecPanelTouchBlockHelper"
-            if (r3 == 0) goto L6f
-            int r3 = r3.getState()
-            if (r3 != 0) goto L6f
-            boolean r3 = r0.isBlockedByKeyguardAnimating()
-            if (r3 != 0) goto L71
-            boolean r3 = r0.isBlockedByKnoxPanelExpandDisabled()
-            if (r3 != 0) goto L71
-            kotlin.Lazy r3 = r0.knoxStateMonitor$delegate
-            java.lang.Object r3 = r3.getValue()
-            com.android.systemui.knox.KnoxStateMonitor r3 = (com.android.systemui.knox.KnoxStateMonitor) r3
-            if (r3 == 0) goto L48
-            com.android.systemui.knox.KnoxStateMonitorImpl r3 = (com.android.systemui.knox.KnoxStateMonitorImpl) r3
-            boolean r3 = r3.isStatusBarHidden()
-            if (r3 != r1) goto L48
-            r3 = r1
-            goto L49
-        L48:
-            r3 = r2
-        L49:
-            if (r3 == 0) goto L50
-            java.lang.String r5 = "isBlockedByKnoxStatusBarHidden"
-            android.util.Log.d(r4, r5)
-        L50:
-            if (r3 != 0) goto L71
-            java.util.concurrent.atomic.AtomicBoolean r0 = r0.userChangeInProgress
-            boolean r0 = r0.get()
-            if (r0 == 0) goto L5f
-            java.lang.String r3 = "isBlockedByUserChangeInProgress"
-            android.util.Log.d(r4, r3)
-        L5f:
-            if (r0 != 0) goto L71
-            boolean r0 = com.android.systemui.util.SafeUIState.isSysUiSafeModeEnabled()
-            if (r0 == 0) goto L6c
-            java.lang.String r3 = "isBlockedBySafeMode"
-            android.util.Log.d(r4, r3)
-        L6c:
-            if (r0 == 0) goto L6f
-            goto L71
-        L6f:
-            r0 = r2
-            goto L72
-        L71:
-            r0 = r1
-        L72:
-            if (r0 == 0) goto L79
-            java.lang.String r3 = "isShadePanelDisabled"
-            android.util.Log.d(r4, r3)
-        L79:
-            if (r0 == 0) goto L7c
-            goto Ld8
-        L7c:
-            com.android.systemui.settings.DisplayTracker r0 = r6.mDisplayTracker
-            r0.getClass()
-            android.util.SparseArray r0 = r6.mDisplayDisabled
-            java.lang.Object r0 = r0.get(r2)
-            android.util.Pair r0 = (android.util.Pair) r0
-            if (r0 != 0) goto L9d
-            android.util.Pair r0 = new android.util.Pair
-            java.lang.Integer r3 = java.lang.Integer.valueOf(r2)
-            java.lang.Integer r4 = java.lang.Integer.valueOf(r2)
-            r0.<init>(r3, r4)
-            android.util.SparseArray r3 = r6.mDisplayDisabled
-            r3.put(r2, r0)
-        L9d:
-            java.lang.Object r0 = r0.first
-            java.lang.Integer r0 = (java.lang.Integer) r0
-            int r0 = r0.intValue()
-            com.android.systemui.settings.DisplayTracker r3 = r6.mDisplayTracker
-            r3.getClass()
-            android.util.SparseArray r3 = r6.mDisplayDisabled
-            java.lang.Object r3 = r3.get(r2)
-            android.util.Pair r3 = (android.util.Pair) r3
-            if (r3 != 0) goto Lc6
-            android.util.Pair r3 = new android.util.Pair
-            java.lang.Integer r4 = java.lang.Integer.valueOf(r2)
-            java.lang.Integer r5 = java.lang.Integer.valueOf(r2)
-            r3.<init>(r4, r5)
-            android.util.SparseArray r6 = r6.mDisplayDisabled
-            r6.put(r2, r3)
-        Lc6:
-            java.lang.Object r6 = r3.second
-            java.lang.Integer r6 = (java.lang.Integer) r6
-            int r6 = r6.intValue()
-            r3 = 65536(0x10000, float:9.1835E-41)
-            r0 = r0 & r3
-            if (r0 != 0) goto Ld8
-            r6 = r6 & 4
-            if (r6 != 0) goto Ld8
-            return r1
-        Ld8:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.CommandQueue.panelsEnabled():boolean");
+        boolean z;
+        if (this.mPanelTouchBlockHelper == null) {
+            this.mPanelTouchBlockHelper = (SecPanelTouchBlockHelper) Dependency.sDependency.getDependencyInner(SecPanelTouchBlockHelper.class);
+        }
+        SecPanelTouchBlockHelper secPanelTouchBlockHelper = this.mPanelTouchBlockHelper;
+        if (secPanelTouchBlockHelper == null) {
+            this.mDisplayTracker.getClass();
+            Pair pair = (Pair) this.mDisplayDisabled.get(0);
+            if (pair == null) {
+                pair = new Pair(0, 0);
+                this.mDisplayDisabled.put(0, pair);
+            }
+            int iIntValue = ((Integer) pair.first).intValue();
+            this.mDisplayTracker.getClass();
+            Pair pair2 = (Pair) this.mDisplayDisabled.get(0);
+            if (pair2 == null) {
+                pair2 = new Pair(0, 0);
+                this.mDisplayDisabled.put(0, pair2);
+            }
+            int iIntValue2 = ((Integer) pair2.second).intValue();
+            if ((iIntValue & 65536) == 0 && (iIntValue2 & 4) == 0) {
+                return true;
+            }
+        } else {
+            StatusBarStateController statusBarStateController = (StatusBarStateController) secPanelTouchBlockHelper.statusBarStateController$delegate.getValue();
+            if (statusBarStateController == null || statusBarStateController.getState() != 0) {
+                z = false;
+                if (z) {
+                    Log.d("SecPanelTouchBlockHelper", "isShadePanelDisabled");
+                }
+                if (!z) {
+                }
+            } else {
+                if (!secPanelTouchBlockHelper.isBlockedByKeyguardAnimating() && !secPanelTouchBlockHelper.isBlockedByKnoxPanelExpandDisabled()) {
+                    KnoxStateMonitor knoxStateMonitor = (KnoxStateMonitor) secPanelTouchBlockHelper.knoxStateMonitor$delegate.getValue();
+                    boolean z2 = knoxStateMonitor != null && ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden();
+                    if (z2) {
+                        Log.d("SecPanelTouchBlockHelper", "isBlockedByKnoxStatusBarHidden");
+                    }
+                    if (!z2) {
+                        boolean z3 = secPanelTouchBlockHelper.userChangeInProgress.get();
+                        if (z3) {
+                            Log.d("SecPanelTouchBlockHelper", "isBlockedByUserChangeInProgress");
+                        }
+                        if (!z3) {
+                            boolean zIsSysUiSafeModeEnabled = SafeUIState.isSysUiSafeModeEnabled();
+                            if (zIsSysUiSafeModeEnabled) {
+                                Log.d("SecPanelTouchBlockHelper", "isBlockedBySafeMode");
+                            }
+                            if (zIsSysUiSafeModeEnabled) {
+                            }
+                            if (z) {
+                            }
+                            if (!z) {
+                            }
+                        }
+                    }
+                }
+                z = true;
+                if (z) {
+                }
+                if (!z) {
+                }
+            }
+        }
+        return false;
     }
 
     public final void passThroughShellCommand(final String[] strArr, final ParcelFileDescriptor parcelFileDescriptor) {
         final PrintWriter printWriter = new PrintWriter(new FileOutputStream(parcelFileDescriptor.getFileDescriptor()));
         new Thread("Sysui.passThroughShellCommand") { // from class: com.android.systemui.statusbar.CommandQueue.2
             @Override // java.lang.Thread, java.lang.Runnable
-            public final void run() {
+            public final void run() throws IOException {
                 try {
                     CommandRegistry commandRegistry = CommandQueue.this.mRegistry;
                     if (commandRegistry != null) {
@@ -1204,13 +1157,13 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                 pair = new Pair(0, 0);
                 this.mDisplayDisabled.put(i, pair);
             }
-            int intValue = ((Integer) pair.first).intValue();
+            int iIntValue = ((Integer) pair.first).intValue();
             Pair pair2 = (Pair) this.mDisplayDisabled.get(i);
             if (pair2 == null) {
                 pair2 = new Pair(0, 0);
                 this.mDisplayDisabled.put(i, pair2);
             }
-            disable(i, intValue, ((Integer) pair2.second).intValue(), z);
+            disable(i, iIntValue, ((Integer) pair2.second).intValue(), z);
         }
     }
 
@@ -1231,14 +1184,14 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     }
 
     public final void requestAddTile(int i, ComponentName componentName, CharSequence charSequence, CharSequence charSequence2, Icon icon, IAddTileResultCallback iAddTileResultCallback) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = componentName;
-        obtain.arg2 = charSequence;
-        obtain.arg3 = charSequence2;
-        obtain.arg4 = icon;
-        obtain.arg5 = iAddTileResultCallback;
-        obtain.arg6 = Integer.valueOf(i);
-        this.mHandler.obtainMessage(3997696, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = componentName;
+        someArgsObtain.arg2 = charSequence;
+        someArgsObtain.arg3 = charSequence2;
+        someArgsObtain.arg4 = icon;
+        someArgsObtain.arg5 = iAddTileResultCallback;
+        someArgsObtain.arg6 = Integer.valueOf(i);
+        this.mHandler.obtainMessage(3997696, someArgsObtain).sendToTarget();
     }
 
     public final void requestMagnificationConnection(boolean z) {
@@ -1295,12 +1248,12 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     public final void setImeWindowStatus(int i, int i2, int i3, boolean z) {
         synchronized (this.mLock) {
             this.mHandler.removeMessages(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = i3;
-            obtain.argi4 = z ? 1 : 0;
-            this.mHandler.obtainMessage(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = i3;
+            someArgsObtain.argi4 = z ? 1 : 0;
+            this.mHandler.obtainMessage(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1312,12 +1265,12 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void setNavigationBarShortcut(String str, RemoteViews remoteViews, int i, int i2) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = remoteViews;
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            this.mHandler.obtainMessage(7929856, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = remoteViews;
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            this.mHandler.obtainMessage(7929856, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1359,17 +1312,17 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void showAuthenticationDialog(PromptInfo promptInfo, IBiometricSysuiReceiver iBiometricSysuiReceiver, int[] iArr, boolean z, boolean z2, int i, long j, String str, long j2) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = promptInfo;
-            obtain.arg2 = iBiometricSysuiReceiver;
-            obtain.arg3 = iArr;
-            obtain.arg4 = Boolean.valueOf(z);
-            obtain.arg5 = Boolean.valueOf(z2);
-            obtain.argi1 = i;
-            obtain.arg6 = str;
-            obtain.argl1 = j;
-            obtain.argl2 = j2;
-            this.mHandler.obtainMessage(2555904, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = promptInfo;
+            someArgsObtain.arg2 = iBiometricSysuiReceiver;
+            someArgsObtain.arg3 = iArr;
+            someArgsObtain.arg4 = Boolean.valueOf(z);
+            someArgsObtain.arg5 = Boolean.valueOf(z2);
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg6 = str;
+            someArgsObtain.argl1 = j;
+            someArgsObtain.argl2 = j2;
+            this.mHandler.obtainMessage(2555904, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1392,10 +1345,10 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
             throw new SecurityException("Call only allowed from system server.");
         }
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = userHandle;
-            this.mHandler.obtainMessage(4718592, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = userHandle;
+            this.mHandler.obtainMessage(4718592, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1446,26 +1399,26 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
 
     public final void showToast(int i, String str, IBinder iBinder, CharSequence charSequence, IBinder iBinder2, int i2, ITransientNotificationCallback iTransientNotificationCallback, int i3) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = iBinder;
-            obtain.arg3 = charSequence;
-            obtain.arg4 = iBinder2;
-            obtain.arg5 = iTransientNotificationCallback;
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = i3;
-            this.mHandler.obtainMessage(3407872, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = iBinder;
+            someArgsObtain.arg3 = charSequence;
+            someArgsObtain.arg4 = iBinder2;
+            someArgsObtain.arg5 = iTransientNotificationCallback;
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = i3;
+            this.mHandler.obtainMessage(3407872, someArgsObtain).sendToTarget();
         }
     }
 
     public final void showTransient(int i, int i2, boolean z) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.argi3 = z ? 1 : 0;
-            this.mHandler.obtainMessage(3145728, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.argi3 = z ? 1 : 0;
+            this.mHandler.obtainMessage(3145728, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1485,10 +1438,10 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
         if (BasicRune.SEARCLE) {
             synchronized (this.mLock) {
                 this.mHandler.removeMessages(9175040);
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.argi1 = z ? 1 : 0;
-                obtain.argi2 = z2 ? 1 : 0;
-                this.mHandler.obtainMessage(9175040, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.argi1 = z ? 1 : 0;
+                someArgsObtain.argi2 = z2 ? 1 : 0;
+                this.mHandler.obtainMessage(9175040, someArgsObtain).sendToTarget();
             }
         }
     }
@@ -1528,9 +1481,9 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     public final void toggleRecentApps() {
         synchronized (this.mLock) {
             this.mHandler.removeMessages(589824);
-            Message obtainMessage = this.mHandler.obtainMessage(589824, 0, 0, null);
-            obtainMessage.setAsynchronous(true);
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = this.mHandler.obtainMessage(589824, 0, 0, null);
+            messageObtainMessage.setAsynchronous(true);
+            messageObtainMessage.sendToTarget();
         }
     }
 
@@ -1553,20 +1506,20 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     }
 
     public final void updateMediaTapToTransferReceiverDisplay(int i, MediaRoute2Info mediaRoute2Info, Icon icon, CharSequence charSequence) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = Integer.valueOf(i);
-        obtain.arg2 = mediaRoute2Info;
-        obtain.arg3 = icon;
-        obtain.arg4 = charSequence;
-        this.mHandler.obtainMessage(4259840, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = Integer.valueOf(i);
+        someArgsObtain.arg2 = mediaRoute2Info;
+        someArgsObtain.arg3 = icon;
+        someArgsObtain.arg4 = charSequence;
+        this.mHandler.obtainMessage(4259840, someArgsObtain).sendToTarget();
     }
 
     public final void updateMediaTapToTransferSenderDisplay(int i, MediaRoute2Info mediaRoute2Info, IUndoMediaTransferCallback iUndoMediaTransferCallback) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = Integer.valueOf(i);
-        obtain.arg2 = mediaRoute2Info;
-        obtain.arg3 = iUndoMediaTransferCallback;
-        this.mHandler.obtainMessage(4194304, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = Integer.valueOf(i);
+        someArgsObtain.arg2 = mediaRoute2Info;
+        someArgsObtain.arg3 = iUndoMediaTransferCallback;
+        this.mHandler.obtainMessage(4194304, someArgsObtain).sendToTarget();
     }
 
     public CommandQueue(Context context, DisplayTracker displayTracker, CommandRegistry commandRegistry, DumpHandler dumpHandler, Lazy lazy) {
@@ -1602,30 +1555,30 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     public final void addCallback(Callbacks callbacks) {
         this.mCallbacks.add(callbacks);
         for (int i = 0; i < this.mDisplayDisabled.size(); i++) {
-            int keyAt = this.mDisplayDisabled.keyAt(i);
-            Pair pair = (Pair) this.mDisplayDisabled.get(keyAt);
+            int iKeyAt = this.mDisplayDisabled.keyAt(i);
+            Pair pair = (Pair) this.mDisplayDisabled.get(iKeyAt);
             if (pair == null) {
                 pair = new Pair(0, 0);
-                this.mDisplayDisabled.put(keyAt, pair);
+                this.mDisplayDisabled.put(iKeyAt, pair);
             }
-            int intValue = ((Integer) pair.first).intValue();
-            Pair pair2 = (Pair) this.mDisplayDisabled.get(keyAt);
+            int iIntValue = ((Integer) pair.first).intValue();
+            Pair pair2 = (Pair) this.mDisplayDisabled.get(iKeyAt);
             if (pair2 == null) {
                 pair2 = new Pair(0, 0);
-                this.mDisplayDisabled.put(keyAt, pair2);
+                this.mDisplayDisabled.put(iKeyAt, pair2);
             }
-            callbacks.disable(keyAt, intValue, ((Integer) pair2.second).intValue(), false);
+            callbacks.disable(iKeyAt, iIntValue, ((Integer) pair2.second).intValue(), false);
         }
     }
 
     public final void appTransitionStarting(int i, long j, long j2, boolean z) {
         synchronized (this.mLock) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = z ? 1 : 0;
-            obtain.arg1 = Long.valueOf(j);
-            obtain.arg2 = Long.valueOf(j2);
-            this.mHandler.obtainMessage(1376256, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = z ? 1 : 0;
+            someArgsObtain.arg1 = Long.valueOf(j);
+            someArgsObtain.arg2 = Long.valueOf(j2);
+            this.mHandler.obtainMessage(1376256, someArgsObtain).sendToTarget();
         }
     }
 
@@ -1645,7 +1598,6 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
         disable(i, i2, i3, true);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callbacks {
         default void animateExpandSettingsPanel(String str) {
         }

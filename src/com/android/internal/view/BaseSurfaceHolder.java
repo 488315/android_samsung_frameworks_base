@@ -2,6 +2,8 @@ package com.android.internal.view;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import java.util.ArrayList;
@@ -141,78 +143,48 @@ public abstract class BaseSurfaceHolder implements SurfaceHolder {
         return internalLockCanvas(null, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0049  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private final android.graphics.Canvas internalLockCanvas(android.graphics.Rect r7, boolean r8) {
-        /*
-            r6 = this;
-            int r0 = r6.mType
-            r1 = 3
-            if (r0 == r1) goto L66
-            java.util.concurrent.locks.ReentrantLock r0 = r6.mSurfaceLock
-            r0.lock()
-            boolean r0 = r6.onAllowLockCanvas()
-            r1 = 0
-            if (r0 == 0) goto L3f
-            if (r7 != 0) goto L27
-            android.graphics.Rect r7 = r6.mTmpDirty
-            if (r7 != 0) goto L1e
-            android.graphics.Rect r7 = new android.graphics.Rect
-            r7.<init>()
-            r6.mTmpDirty = r7
-        L1e:
-            android.graphics.Rect r7 = r6.mTmpDirty
-            android.graphics.Rect r0 = r6.mSurfaceFrame
-            r7.set(r0)
-            android.graphics.Rect r7 = r6.mTmpDirty
-        L27:
-            if (r8 == 0) goto L30
-            android.view.Surface r7 = r6.mSurface     // Catch: java.lang.Exception -> L37
-            android.graphics.Canvas r7 = r7.lockHardwareCanvas()     // Catch: java.lang.Exception -> L37
-            goto L40
-        L30:
-            android.view.Surface r8 = r6.mSurface     // Catch: java.lang.Exception -> L37
-            android.graphics.Canvas r7 = r8.lockCanvas(r7)     // Catch: java.lang.Exception -> L37
-            goto L40
-        L37:
-            r7 = move-exception
-            java.lang.String r8 = "BaseSurfaceHolder"
-            java.lang.String r0 = "Exception locking surface"
-            android.util.Log.e(r8, r0, r7)
-        L3f:
-            r7 = r1
-        L40:
-            if (r7 == 0) goto L49
-            long r0 = android.os.SystemClock.uptimeMillis()
-            r6.mLastLockTime = r0
-            return r7
-        L49:
-            long r7 = android.os.SystemClock.uptimeMillis()
-            long r2 = r6.mLastLockTime
-            r4 = 100
-            long r2 = r2 + r4
-            int r0 = (r2 > r7 ? 1 : (r2 == r7 ? 0 : -1))
-            if (r0 <= 0) goto L5e
-            long r2 = r2 - r7
-            java.lang.Thread.sleep(r2)     // Catch: java.lang.InterruptedException -> L5a
-        L5a:
-            long r7 = android.os.SystemClock.uptimeMillis()
-        L5e:
-            r6.mLastLockTime = r7
-            java.util.concurrent.locks.ReentrantLock r6 = r6.mSurfaceLock
-            r6.unlock()
-            return r1
-        L66:
-            android.view.SurfaceHolder$BadSurfaceTypeException r6 = new android.view.SurfaceHolder$BadSurfaceTypeException
-            java.lang.String r7 = "Surface type is SURFACE_TYPE_PUSH_BUFFERS"
-            r6.<init>(r7)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.view.BaseSurfaceHolder.internalLockCanvas(android.graphics.Rect, boolean):android.graphics.Canvas");
+    private final Canvas internalLockCanvas(Rect rect, boolean z) throws InterruptedException {
+        Canvas canvasLockCanvas;
+        if (this.mType == 3) {
+            throw new SurfaceHolder.BadSurfaceTypeException("Surface type is SURFACE_TYPE_PUSH_BUFFERS");
+        }
+        this.mSurfaceLock.lock();
+        if (onAllowLockCanvas()) {
+            if (rect == null) {
+                if (this.mTmpDirty == null) {
+                    this.mTmpDirty = new Rect();
+                }
+                this.mTmpDirty.set(this.mSurfaceFrame);
+                rect = this.mTmpDirty;
+            }
+            try {
+                if (z) {
+                    canvasLockCanvas = this.mSurface.lockHardwareCanvas();
+                } else {
+                    canvasLockCanvas = this.mSurface.lockCanvas(rect);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Exception locking surface", e);
+            }
+        } else {
+            canvasLockCanvas = null;
+        }
+        if (canvasLockCanvas != null) {
+            this.mLastLockTime = SystemClock.uptimeMillis();
+            return canvasLockCanvas;
+        }
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        long j = this.mLastLockTime + 100;
+        if (j > jUptimeMillis) {
+            try {
+                Thread.sleep(j - jUptimeMillis);
+            } catch (InterruptedException unused) {
+            }
+            jUptimeMillis = SystemClock.uptimeMillis();
+        }
+        this.mLastLockTime = jUptimeMillis;
+        this.mSurfaceLock.unlock();
+        return null;
     }
 
     @Override // android.view.SurfaceHolder

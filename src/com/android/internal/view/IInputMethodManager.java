@@ -460,9 +460,9 @@ public interface IInputMethodManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMethodManager)) {
-                return (IInputMethodManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMethodManager)) {
+                return (IInputMethodManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -594,224 +594,224 @@ public interface IInputMethodManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IInputMethodClient asInterface = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    IRemoteInputConnection asInterface2 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteInputConnection iRemoteInputConnectionAsInterface = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addClient(asInterface, asInterface2, readInt);
+                    addClient(iInputMethodClientAsInterface, iRemoteInputConnectionAsInterface, i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMethodInfo currentInputMethodInfoAsUser = getCurrentInputMethodInfoAsUser(readInt2);
+                    InputMethodInfo currentInputMethodInfoAsUser = getCurrentInputMethodInfoAsUser(i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentInputMethodInfoAsUser, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMethodInfoSafeList inputMethodList = getInputMethodList(readInt3, readInt4);
+                    InputMethodInfoSafeList inputMethodList = getInputMethodList(i5, i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(inputMethodList, 1);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMethodInfoSafeList enabledInputMethodList = getEnabledInputMethodList(readInt5);
+                    InputMethodInfoSafeList enabledInputMethodList = getEnabledInputMethodList(i7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(enabledInputMethodList, 1);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<InputMethodInfo> inputMethodListLegacy = getInputMethodListLegacy(readInt6, readInt7);
+                    List<InputMethodInfo> inputMethodListLegacy = getInputMethodListLegacy(i8, i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(inputMethodListLegacy, 1);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<InputMethodInfo> enabledInputMethodListLegacy = getEnabledInputMethodListLegacy(readInt8);
+                    List<InputMethodInfo> enabledInputMethodListLegacy = getEnabledInputMethodListLegacy(i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(enabledInputMethodListLegacy, 1);
                     return true;
                 case 7:
-                    String readString = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt9 = parcel.readInt();
+                    String string = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<InputMethodSubtype> enabledInputMethodSubtypeList = getEnabledInputMethodSubtypeList(readString, readBoolean, readInt9);
+                    List<InputMethodSubtype> enabledInputMethodSubtypeList = getEnabledInputMethodSubtypeList(string, z, i11);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(enabledInputMethodSubtypeList, 1);
                     return true;
                 case 8:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMethodSubtype lastInputMethodSubtype = getLastInputMethodSubtype(readInt10);
+                    InputMethodSubtype lastInputMethodSubtype = getLastInputMethodSubtype(i12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(lastInputMethodSubtype, 1);
                     return true;
                 case 9:
-                    IInputMethodClient asInterface3 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IInputMethodClient iInputMethodClientAsInterface2 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean showSoftInput = showSoftInput(asInterface3, readStrongBinder, token, readInt11, readInt12, resultReceiver, readInt13, readBoolean2);
+                    boolean zShowSoftInput = showSoftInput(iInputMethodClientAsInterface2, strongBinder, token, i13, i14, resultReceiver, i15, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(showSoftInput);
+                    parcel2.writeBoolean(zShowSoftInput);
                     return true;
                 case 10:
-                    IInputMethodClient asInterface4 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IInputMethodClient iInputMethodClientAsInterface3 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     ResultReceiver resultReceiver2 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
-                    int readInt15 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i17 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean hideSoftInput = hideSoftInput(asInterface4, readStrongBinder2, token2, readInt14, resultReceiver2, readInt15, readBoolean3);
+                    boolean zHideSoftInput = hideSoftInput(iInputMethodClientAsInterface3, strongBinder2, token2, i16, resultReceiver2, i17, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hideSoftInput);
+                    parcel2.writeBoolean(zHideSoftInput);
                     return true;
                 case 11:
                     hideSoftInputFromServerForTest();
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt16 = parcel.readInt();
-                    IInputMethodClient asInterface5 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface4 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     EditorInfo editorInfo = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteInputConnection asInterface6 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                    IRemoteAccessibilityInputConnection asInterface7 = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    IRemoteInputConnection iRemoteInputConnectionAsInterface2 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnectionAsInterface = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher = (ImeOnBackInvokedDispatcher) parcel.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    InputBindResult startInputOrWindowGainedFocus = startInputOrWindowGainedFocus(readInt16, asInterface5, readStrongBinder3, readInt17, readInt18, readInt19, editorInfo, asInterface6, asInterface7, readInt20, readInt21, imeOnBackInvokedDispatcher, readBoolean4);
+                    InputBindResult inputBindResultStartInputOrWindowGainedFocus = startInputOrWindowGainedFocus(i18, iInputMethodClientAsInterface4, strongBinder3, i19, i20, i21, editorInfo, iRemoteInputConnectionAsInterface2, iRemoteAccessibilityInputConnectionAsInterface, i22, i23, imeOnBackInvokedDispatcher, z4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startInputOrWindowGainedFocus, 1);
+                    parcel2.writeTypedObject(inputBindResultStartInputOrWindowGainedFocus, 1);
                     return true;
                 case 13:
-                    int readInt22 = parcel.readInt();
-                    IInputMethodClient asInterface8 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface5 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     EditorInfo editorInfo2 = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteInputConnection asInterface9 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                    IRemoteAccessibilityInputConnection asInterface10 = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
+                    IRemoteInputConnection iRemoteInputConnectionAsInterface3 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnectionAsInterface2 = IRemoteAccessibilityInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher2 = (ImeOnBackInvokedDispatcher) parcel.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int readInt28 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
+                    int i30 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    startInputOrWindowGainedFocusAsync(readInt22, asInterface8, readStrongBinder4, readInt23, readInt24, readInt25, editorInfo2, asInterface9, asInterface10, readInt26, readInt27, imeOnBackInvokedDispatcher2, readBoolean5, readInt28, readBoolean6);
+                    startInputOrWindowGainedFocusAsync(i24, iInputMethodClientAsInterface5, strongBinder4, i25, i26, i27, editorInfo2, iRemoteInputConnectionAsInterface3, iRemoteAccessibilityInputConnectionAsInterface2, i28, i29, imeOnBackInvokedDispatcher2, z5, i30, z6);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    IInputMethodClient asInterface11 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt29 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface6 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showInputMethodPickerFromClient(asInterface11, readInt29);
+                    showInputMethodPickerFromClient(iInputMethodClientAsInterface6, i31);
                     parcel2.writeNoException();
                     break;
                 case 15:
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showInputMethodPickerFromSystem(readInt30, readInt31);
+                    showInputMethodPickerFromSystem(i32, i33);
                     parcel2.writeNoException();
                     break;
                 case 16:
-                    boolean isInputMethodPickerShownForTest = isInputMethodPickerShownForTest();
+                    boolean zIsInputMethodPickerShownForTest = isInputMethodPickerShownForTest();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInputMethodPickerShownForTest);
+                    parcel2.writeBoolean(zIsInputMethodPickerShownForTest);
                     break;
                 case 17:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onImeSwitchButtonClickFromSystem(readInt32);
+                    onImeSwitchButtonClickFromSystem(i34);
                     break;
                 case 18:
-                    boolean shouldShowImeSwitcherButtonForTest = shouldShowImeSwitcherButtonForTest();
+                    boolean zShouldShowImeSwitcherButtonForTest = shouldShowImeSwitcherButtonForTest();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldShowImeSwitcherButtonForTest);
+                    parcel2.writeBoolean(zShouldShowImeSwitcherButtonForTest);
                     break;
                 case 19:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    InputMethodSubtype currentInputMethodSubtype = getCurrentInputMethodSubtype(readInt33);
+                    InputMethodSubtype currentInputMethodSubtype = getCurrentInputMethodSubtype(i35);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentInputMethodSubtype, 1);
                     break;
                 case 20:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     InputMethodSubtype[] inputMethodSubtypeArr = (InputMethodSubtype[]) parcel.createTypedArray(InputMethodSubtype.CREATOR);
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAdditionalInputMethodSubtypes(readString2, inputMethodSubtypeArr, readInt34);
+                    setAdditionalInputMethodSubtypes(string2, inputMethodSubtypeArr, i36);
                     parcel2.writeNoException();
                     break;
                 case 21:
-                    String readString3 = parcel.readString();
-                    int[] createIntArray = parcel.createIntArray();
-                    int readInt35 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setExplicitlyEnabledInputMethodSubtypes(readString3, createIntArray, readInt35);
+                    setExplicitlyEnabledInputMethodSubtypes(string3, iArrCreateIntArray, i37);
                     parcel2.writeNoException();
                     break;
                 case 22:
-                    IInputMethodClient asInterface12 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodClient iInputMethodClientAsInterface7 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int inputMethodWindowVisibleHeight = getInputMethodWindowVisibleHeight(asInterface12);
+                    int inputMethodWindowVisibleHeight = getInputMethodWindowVisibleHeight(iInputMethodClientAsInterface7);
                     parcel2.writeNoException();
                     parcel2.writeInt(inputMethodWindowVisibleHeight);
                     break;
                 case 23:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reportPerceptibleAsync(readStrongBinder5, readBoolean7);
+                    reportPerceptibleAsync(strongBinder5, z7);
                     break;
                 case 24:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeImeSurface(readInt36);
+                    removeImeSurface(i38);
                     parcel2.writeNoException();
                     break;
                 case 25:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    removeImeSurfaceFromWindowAsync(readStrongBinder6);
+                    removeImeSurfaceFromWindowAsync(strongBinder6);
                     break;
                 case 26:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt37 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i39 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    startProtoDump(createByteArray, readInt37, readString4);
+                    startProtoDump(bArrCreateByteArray, i39, string4);
                     parcel2.writeNoException();
                     break;
                 case 27:
-                    boolean isImeTraceEnabled = isImeTraceEnabled();
+                    boolean zIsImeTraceEnabled = isImeTraceEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isImeTraceEnabled);
+                    parcel2.writeBoolean(zIsImeTraceEnabled);
                     break;
                 case 28:
                     startImeTrace();
@@ -822,70 +822,70 @@ public interface IInputMethodManager extends IInterface {
                     parcel2.writeNoException();
                     break;
                 case 30:
-                    IInputMethodClient asInterface13 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodClient iInputMethodClientAsInterface8 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startStylusHandwriting(asInterface13);
+                    startStylusHandwriting(iInputMethodClientAsInterface8);
                     parcel2.writeNoException();
                     break;
                 case 31:
-                    IInputMethodClient asInterface14 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt38 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface9 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i40 = parcel.readInt();
                     CursorAnchorInfo cursorAnchorInfo = (CursorAnchorInfo) parcel.readTypedObject(CursorAnchorInfo.CREATOR);
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    IConnectionlessHandwritingCallback asInterface15 = IConnectionlessHandwritingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    IConnectionlessHandwritingCallback iConnectionlessHandwritingCallbackAsInterface = IConnectionlessHandwritingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startConnectionlessStylusHandwriting(asInterface14, readInt38, cursorAnchorInfo, readString5, readString6, asInterface15);
+                    startConnectionlessStylusHandwriting(iInputMethodClientAsInterface9, i40, cursorAnchorInfo, string5, string6, iConnectionlessHandwritingCallbackAsInterface);
                     break;
                 case 32:
-                    IInputMethodClient asInterface16 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt39 = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    IInputMethodClient iInputMethodClientAsInterface10 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i41 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    prepareStylusHandwritingDelegation(asInterface16, readInt39, readString7, readString8);
+                    prepareStylusHandwritingDelegation(iInputMethodClientAsInterface10, i41, string7, string8);
                     parcel2.writeNoException();
                     break;
                 case 33:
-                    IInputMethodClient asInterface17 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt40 = parcel.readInt();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    int readInt41 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface11 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i42 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean acceptStylusHandwritingDelegation = acceptStylusHandwritingDelegation(asInterface17, readInt40, readString9, readString10, readInt41);
+                    boolean zAcceptStylusHandwritingDelegation = acceptStylusHandwritingDelegation(iInputMethodClientAsInterface11, i42, string9, string10, i43);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(acceptStylusHandwritingDelegation);
+                    parcel2.writeBoolean(zAcceptStylusHandwritingDelegation);
                     break;
                 case 34:
-                    IInputMethodClient asInterface18 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt42 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    int readInt43 = parcel.readInt();
-                    IBooleanListener asInterface19 = IBooleanListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodClient iInputMethodClientAsInterface12 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i44 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    int i45 = parcel.readInt();
+                    IBooleanListener iBooleanListenerAsInterface = IBooleanListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    acceptStylusHandwritingDelegationAsync(asInterface18, readInt42, readString11, readString12, readInt43, asInterface19);
+                    acceptStylusHandwritingDelegationAsync(iInputMethodClientAsInterface12, i44, string11, string12, i45, iBooleanListenerAsInterface);
                     break;
                 case 35:
-                    int readInt44 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    int i46 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isStylusHandwritingAvailableAsUser = isStylusHandwritingAvailableAsUser(readInt44, readBoolean8);
+                    boolean zIsStylusHandwritingAvailableAsUser = isStylusHandwritingAvailableAsUser(i46, z8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStylusHandwritingAvailableAsUser);
+                    parcel2.writeBoolean(zIsStylusHandwritingAvailableAsUser);
                     break;
                 case 36:
-                    IInputMethodClient asInterface20 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodClient iInputMethodClientAsInterface13 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addVirtualStylusIdForTestSession(asInterface20);
+                    addVirtualStylusIdForTestSession(iInputMethodClientAsInterface13);
                     parcel2.writeNoException();
                     break;
                 case 37:
-                    IInputMethodClient asInterface21 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong = parcel.readLong();
+                    IInputMethodClient iInputMethodClientAsInterface14 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setStylusWindowIdleTimeoutForTest(asInterface21, readLong);
+                    setStylusWindowIdleTimeoutForTest(iInputMethodClientAsInterface14, j);
                     parcel2.writeNoException();
                     break;
                 case 38:
@@ -894,12 +894,12 @@ public interface IInputMethodManager extends IInterface {
                     parcel2.writeStrongInterface(imeTrackerService);
                     break;
                 case 39:
-                    IInputMethodClient asInterface22 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt45 = parcel.readInt();
+                    IInputMethodClient iInputMethodClientAsInterface15 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean minimizeSoftInput = minimizeSoftInput(asInterface22, readInt45);
+                    boolean zMinimizeSoftInput = minimizeSoftInput(iInputMethodClientAsInterface15, i47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(minimizeSoftInput);
+                    parcel2.writeBoolean(zMinimizeSoftInput);
                     break;
                 case 40:
                     undoMinimizeSoftInput();
@@ -910,9 +910,9 @@ public interface IInputMethodManager extends IInterface {
                     parcel2.writeNoException();
                     break;
                 case 42:
-                    int isAccessoryKeyboard = isAccessoryKeyboard();
+                    int iIsAccessoryKeyboard = isAccessoryKeyboard();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isAccessoryKeyboard);
+                    parcel2.writeInt(iIsAccessoryKeyboard);
                     break;
                 case 43:
                     boolean wACOMPen = getWACOMPen();
@@ -920,28 +920,28 @@ public interface IInputMethodManager extends IInterface {
                     parcel2.writeBoolean(wACOMPen);
                     break;
                 case 44:
-                    boolean isInputMethodShown = isInputMethodShown();
+                    boolean zIsInputMethodShown = isInputMethodShown();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInputMethodShown);
+                    parcel2.writeBoolean(zIsInputMethodShown);
                     break;
                 case 45:
-                    boolean isCurrentInputMethodAsSamsungKeyboard = isCurrentInputMethodAsSamsungKeyboard();
+                    boolean zIsCurrentInputMethodAsSamsungKeyboard = isCurrentInputMethodAsSamsungKeyboard();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCurrentInputMethodAsSamsungKeyboard);
+                    parcel2.writeBoolean(zIsCurrentInputMethodAsSamsungKeyboard);
                     break;
                 case 46:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean dexSettingsValue = getDexSettingsValue(readString13, readString14);
+                    boolean dexSettingsValue = getDexSettingsValue(string13, string14);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dexSettingsValue);
                     break;
                 case 47:
-                    IInputMethodClient asInterface23 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean9 = parcel.readBoolean();
+                    IInputMethodClient iInputMethodClientAsInterface16 = IInputMethodClient.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setInputMethodSwitchDisable(asInterface23, readBoolean9);
+                    setInputMethodSwitchDisable(iInputMethodClientAsInterface16, z9);
                     parcel2.writeNoException();
                     break;
                 case 48:
@@ -963,11 +963,11 @@ public interface IInputMethodManager extends IInterface {
                     parcel2.writeNoException();
                     break;
                 case 52:
-                    int readInt46 = parcel.readInt();
-                    int readInt47 = parcel.readInt();
-                    int readInt48 = parcel.readInt();
+                    int i48 = parcel.readInt();
+                    int i49 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showInputMethodPickerFromSystemWithUserId(readInt46, readInt47, readInt48);
+                    showInputMethodPickerFromSystemWithUserId(i48, i49, i50);
                     parcel2.writeNoException();
                     break;
                 default:
@@ -994,853 +994,853 @@ public interface IInputMethodManager extends IInterface {
 
             @Override // com.android.internal.view.IInputMethodManager
             public void addClient(IInputMethodClient iInputMethodClient, IRemoteInputConnection iRemoteInputConnection, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeStrongInterface(iRemoteInputConnection);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeStrongInterface(iRemoteInputConnection);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputMethodInfo getCurrentInputMethodInfoAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMethodInfo) obtain2.readTypedObject(InputMethodInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMethodInfo) parcelObtain2.readTypedObject(InputMethodInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputMethodInfoSafeList getInputMethodList(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMethodInfoSafeList) obtain2.readTypedObject(InputMethodInfoSafeList.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMethodInfoSafeList) parcelObtain2.readTypedObject(InputMethodInfoSafeList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputMethodInfoSafeList getEnabledInputMethodList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMethodInfoSafeList) obtain2.readTypedObject(InputMethodInfoSafeList.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMethodInfoSafeList) parcelObtain2.readTypedObject(InputMethodInfoSafeList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public List<InputMethodInfo> getInputMethodListLegacy(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(InputMethodInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(InputMethodInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public List<InputMethodInfo> getEnabledInputMethodListLegacy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(InputMethodInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(InputMethodInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(InputMethodSubtype.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(InputMethodSubtype.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputMethodSubtype getLastInputMethodSubtype(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMethodSubtype) obtain2.readTypedObject(InputMethodSubtype.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMethodSubtype) parcelObtain2.readTypedObject(InputMethodSubtype.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean showSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, int i2, ResultReceiver resultReceiver, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean hideSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void hideSoftInputFromServerForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputBindResult startInputOrWindowGainedFocus(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeTypedObject(editorInfo, 0);
-                    obtain.writeStrongInterface(iRemoteInputConnection);
-                    obtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    obtain.writeTypedObject(imeOnBackInvokedDispatcher, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputBindResult) obtain2.readTypedObject(InputBindResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeTypedObject(editorInfo, 0);
+                    parcelObtain.writeStrongInterface(iRemoteInputConnection);
+                    parcelObtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeTypedObject(imeOnBackInvokedDispatcher, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputBindResult) parcelObtain2.readTypedObject(InputBindResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void startInputOrWindowGainedFocusAsync(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher, boolean z, int i7, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeTypedObject(editorInfo, 0);
-                    obtain.writeStrongInterface(iRemoteInputConnection);
-                    obtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    obtain.writeTypedObject(imeOnBackInvokedDispatcher, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i7);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeTypedObject(editorInfo, 0);
+                    parcelObtain.writeStrongInterface(iRemoteInputConnection);
+                    parcelObtain.writeStrongInterface(iRemoteAccessibilityInputConnection);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeTypedObject(imeOnBackInvokedDispatcher, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i7);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void showInputMethodPickerFromClient(IInputMethodClient iInputMethodClient, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void showInputMethodPickerFromSystem(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean isInputMethodPickerShownForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void onImeSwitchButtonClickFromSystem(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean shouldShowImeSwitcherButtonForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public InputMethodSubtype getCurrentInputMethodSubtype(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (InputMethodSubtype) obtain2.readTypedObject(InputMethodSubtype.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (InputMethodSubtype) parcelObtain2.readTypedObject(InputMethodSubtype.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void setAdditionalInputMethodSubtypes(String str, InputMethodSubtype[] inputMethodSubtypeArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedArray(inputMethodSubtypeArr, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedArray(inputMethodSubtypeArr, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void setExplicitlyEnabledInputMethodSubtypes(String str, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public int getInputMethodWindowVisibleHeight(IInputMethodClient iInputMethodClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void reportPerceptibleAsync(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void removeImeSurface(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void removeImeSurfaceFromWindowAsync(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void startProtoDump(byte[] bArr, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean isImeTraceEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void startImeTrace() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void stopImeTrace() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void startStylusHandwriting(IInputMethodClient iInputMethodClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void startConnectionlessStylusHandwriting(IInputMethodClient iInputMethodClient, int i, CursorAnchorInfo cursorAnchorInfo, String str, String str2, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cursorAnchorInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iConnectionlessHandwritingCallback);
-                    this.mRemote.transact(31, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cursorAnchorInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iConnectionlessHandwritingCallback);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void prepareStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean acceptStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void acceptStylusHandwritingDelegationAsync(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2, IBooleanListener iBooleanListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iBooleanListener);
-                    this.mRemote.transact(34, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iBooleanListener);
+                    this.mRemote.transact(34, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean isStylusHandwritingAvailableAsUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void addVirtualStylusIdForTestSession(IInputMethodClient iInputMethodClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void setStylusWindowIdleTimeoutForTest(IInputMethodClient iInputMethodClient, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public IImeTracker getImeTrackerService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImeTracker.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImeTracker.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean minimizeSoftInput(IInputMethodClient iInputMethodClient, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void undoMinimizeSoftInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void forceHideSoftInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public int isAccessoryKeyboard() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean getWACOMPen() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean isInputMethodShown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean isCurrentInputMethodAsSamsungKeyboard() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public boolean getDexSettingsValue(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void setInputMethodSwitchDisable(IInputMethodClient iInputMethodClient, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodClient);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodClient);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void dismissAndShowAgainInputMethodPicker() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public int getCurrentFocusDisplayID() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public int getCurTokenDisplayId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void handleVoiceHWKey() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.IInputMethodManager
             public void showInputMethodPickerFromSystemWithUserId(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -52,9 +52,9 @@ public interface IDomainSelector extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDomainSelector.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDomainSelector)) {
-                return (IDomainSelector) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDomainSelector.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDomainSelector)) {
+                return (IDomainSelector) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,24 +113,24 @@ public interface IDomainSelector extends IInterface {
 
             @Override // com.android.internal.telephony.IDomainSelector
             public void reselectDomain(DomainSelectionService.SelectionAttributes selectionAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDomainSelector.DESCRIPTOR);
-                    obtain.writeTypedObject(selectionAttributes, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDomainSelector.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(selectionAttributes, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IDomainSelector
             public void finishSelection() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDomainSelector.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDomainSelector.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

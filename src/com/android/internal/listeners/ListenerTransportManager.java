@@ -45,8 +45,8 @@ public abstract class ListenerTransportManager<TTransport extends ListenerTransp
         TTransport ttransport;
         try {
             synchronized (this.mRegistrations) {
-                WeakReference<TTransport> remove = this.mRegistrations.remove(obj);
-                if (remove != null && (ttransport = remove.get()) != null) {
+                WeakReference<TTransport> weakReferenceRemove = this.mRegistrations.remove(obj);
+                if (weakReferenceRemove != null && (ttransport = weakReferenceRemove.get()) != null) {
                     ttransport.unregister();
                     unregisterTransport(ttransport);
                 }

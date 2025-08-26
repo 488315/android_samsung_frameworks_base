@@ -5,7 +5,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Supported extends SIPHeader implements Header {
     private static final long serialVersionUID = -7679667592702854542L;
@@ -18,13 +17,13 @@ public class Supported extends SIPHeader implements Header {
 
     @Override // gov.nist.javax.sip.header.SIPHeader, gov.nist.core.GenericObject
     public final String encode() {
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.headerName, ":");
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.headerName, ":");
         if (this.optionTag != null) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, " ");
-            m2.append(this.optionTag);
-            m = m2.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, " ");
+            sbM.append(this.optionTag);
+            strM = sbM.toString();
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "\r\n");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "\r\n");
     }
 
     @Override // gov.nist.javax.sip.header.SIPHeader

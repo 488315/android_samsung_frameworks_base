@@ -1,7 +1,10 @@
 package notification.src.com.android.systemui;
 
 import android.content.Context;
+import android.content.pm.Signature;
+import android.content.pm.SigningInfo;
 import android.util.Log;
+import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceListUpdate$$ExternalSyntheticOutline0;
 import com.android.systemui.NotiRune;
 import com.android.systemui.R;
@@ -20,6 +23,10 @@ import com.samsung.android.sdk.scs.ai.language.SmartReplyer$$ExternalSyntheticLa
 import com.samsung.android.sdk.scs.ai.language.service.LlmServiceRunnable;
 import com.samsung.android.sdk.scs.base.tasks.OnCompleteListener;
 import com.samsung.android.sdk.scs.base.tasks.Task;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import kotlin.Result;
@@ -30,7 +37,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MultiPromptProcessor implements BasePromptProcessor {
     public final String apkSigningKey;
@@ -41,7 +47,6 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
     private final SettingsHelper settingsHelper;
     public SmartReplyer smartreplyer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -51,7 +56,6 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Output {
 
         @SerializedName("response")
@@ -89,98 +93,39 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
         new Companion(null);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(14:0|1|2|3|(9:9|10|11|12|(2:15|13)|16|17|18|19)|26|10|11|12|(1:13)|16|17|18|19) */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0054, code lost:
-    
-        r6 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x005f, code lost:
-    
-        com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0.m("Exception getLongHash: ", r6, "MultiPromptProcessor");
-     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x004d A[Catch: Exception -> 0x0054, LOOP:0: B:13:0x004a->B:15:0x004d, LOOP_END, TryCatch #0 {Exception -> 0x0054, blocks: (B:12:0x003b, B:15:0x004d, B:17:0x0056), top: B:11:0x003b }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MultiPromptProcessor(android.content.Context r6, com.android.systemui.util.SettingsHelper r7) {
-        /*
-            r5 = this;
-            java.lang.String r0 = "MultiPromptProcessor"
-            r5.<init>()
-            r5.context = r6
-            r5.settingsHelper = r7
-            r7 = 0
-            r1 = 0
-            android.content.pm.PackageManager r2 = r6.getPackageManager()     // Catch: java.lang.Exception -> L32
-            java.lang.String r6 = r6.getPackageName()     // Catch: java.lang.Exception -> L32
-            r3 = 134217728(0x8000000, float:3.85186E-34)
-            android.content.pm.PackageInfo r6 = r2.getPackageInfo(r6, r3)     // Catch: java.lang.Exception -> L32
-            android.content.pm.SigningInfo r6 = r6.signingInfo     // Catch: java.lang.Exception -> L32
-            if (r6 == 0) goto L38
-            android.content.pm.Signature[] r6 = r6.getApkContentsSigners()     // Catch: java.lang.Exception -> L32
-            if (r6 == 0) goto L38
-            int r2 = r6.length     // Catch: java.lang.Exception -> L32
-            if (r2 <= 0) goto L38
-            r6 = r6[r7]     // Catch: java.lang.Exception -> L32
-            char[] r6 = r6.toChars()     // Catch: java.lang.Exception -> L32
-            java.lang.String r2 = new java.lang.String     // Catch: java.lang.Exception -> L32
-            r2.<init>(r6)     // Catch: java.lang.Exception -> L32
-            goto L39
-        L32:
-            r6 = move-exception
-            java.lang.String r2 = "getApkSigningKey: "
-            com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0.m(r2, r6, r0)
-        L38:
-            r2 = r1
-        L39:
-            r5.apkSigningKey = r2
-            java.lang.String r6 = "SHA-256"
-            java.security.MessageDigest r6 = java.security.MessageDigest.getInstance(r6)     // Catch: java.lang.Exception -> L54
-            java.lang.String r2 = "74NEkgeVa8SprJ7p"
-            java.nio.charset.Charset r3 = java.nio.charset.StandardCharsets.UTF_8     // Catch: java.lang.Exception -> L54
-            byte[] r2 = r2.getBytes(r3)     // Catch: java.lang.Exception -> L54
-            r3 = r7
-        L4a:
-            r4 = 7
-            if (r3 >= r4) goto L56
-            byte[] r2 = r6.digest(r2)     // Catch: java.lang.Exception -> L54
-            int r3 = r3 + 1
-            goto L4a
-        L54:
-            r6 = move-exception
-            goto L5f
-        L56:
-            java.util.HexFormat r6 = java.util.HexFormat.of()     // Catch: java.lang.Exception -> L54
-            java.lang.String r1 = r6.formatHex(r2)     // Catch: java.lang.Exception -> L54
-            goto L64
-        L5f:
-            java.lang.String r2 = "Exception getLongHash: "
-            com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0.m(r2, r6, r0)
-        L64:
-            com.samsung.android.sdk.scs.ai.language.AppInfo$Builder r6 = new com.samsung.android.sdk.scs.ai.language.AppInfo$Builder
-            r6.<init>()
-            com.samsung.android.sdk.scs.ai.language.AppInfo$RequestType r0 = com.samsung.android.sdk.scs.ai.language.AppInfo.RequestType.ONDEVICE
-            r6.requestType = r0
-            r6.apiKey = r1
-            java.lang.String r0 = r5.apkSigningKey
-            r6.signingKey = r0
-            com.samsung.android.sdk.scs.ai.language.AppInfo r0 = new com.samsung.android.sdk.scs.ai.language.AppInfo
-            r0.<init>(r6, r7)
-            r5.appInfoDevice = r0
-            com.samsung.android.sdk.scs.ai.language.AppInfo$Builder r6 = new com.samsung.android.sdk.scs.ai.language.AppInfo$Builder
-            r6.<init>()
-            com.samsung.android.sdk.scs.ai.language.AppInfo$RequestType r0 = com.samsung.android.sdk.scs.ai.language.AppInfo.RequestType.CLOUD
-            r6.requestType = r0
-            r6.apiKey = r1
-            java.lang.String r0 = r5.apkSigningKey
-            r6.signingKey = r0
-            com.samsung.android.sdk.scs.ai.language.AppInfo r0 = new com.samsung.android.sdk.scs.ai.language.AppInfo
-            r0.<init>(r6, r7)
-            r5.appInfoCloud = r0
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: notification.src.com.android.systemui.MultiPromptProcessor.<init>(android.content.Context, com.android.systemui.util.SettingsHelper):void");
+    public MultiPromptProcessor(Context context, SettingsHelper settingsHelper) throws NoSuchAlgorithmException {
+        SigningInfo signingInfo;
+        Signature[] apkContentsSigners;
+        this.context = context;
+        this.settingsHelper = settingsHelper;
+        String hex = null;
+        try {
+            signingInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 134217728).signingInfo;
+        } catch (Exception e) {
+            EmergencyButton$$ExternalSyntheticOutline0.m("getApkSigningKey: ", e, "MultiPromptProcessor");
+        }
+        String str = (signingInfo == null || (apkContentsSigners = signingInfo.getApkContentsSigners()) == null || apkContentsSigners.length <= 0) ? null : new String(apkContentsSigners[0].toChars());
+        this.apkSigningKey = str;
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = "74NEkgeVa8SprJ7p".getBytes(StandardCharsets.UTF_8);
+            for (int i = 0; i < 7; i++) {
+                bytes = messageDigest.digest(bytes);
+            }
+            hex = HexFormat.of().formatHex(bytes);
+        } catch (Exception e2) {
+            EmergencyButton$$ExternalSyntheticOutline0.m("Exception getLongHash: ", e2, "MultiPromptProcessor");
+        }
+        AppInfo.Builder builder = new AppInfo.Builder();
+        builder.requestType = AppInfo.RequestType.ONDEVICE;
+        builder.apiKey = hex;
+        builder.signingKey = this.apkSigningKey;
+        this.appInfoDevice = new AppInfo(builder, 0);
+        AppInfo.Builder builder2 = new AppInfo.Builder();
+        builder2.requestType = AppInfo.RequestType.CLOUD;
+        builder2.apiKey = hex;
+        builder2.signingKey = this.apkSigningKey;
+        this.appInfoCloud = new AppInfo(builder2, 0);
     }
 
     public static final String access$getErrorMessage(MultiPromptProcessor multiPromptProcessor, int i) {
@@ -190,7 +135,7 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
     public static final List access$parseOutput(MultiPromptProcessor multiPromptProcessor, String str) {
         Object failure;
         List response;
-        List distinct;
+        List listDistinct;
         multiPromptProcessor.getClass();
         try {
             int i = Result.$r8$clinit;
@@ -203,7 +148,7 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
             failure = null;
         }
         Output output = (Output) failure;
-        return (output == null || (response = output.getResponse()) == null || (distinct = CollectionsKt___CollectionsKt.distinct(response)) == null) ? EmptyList.INSTANCE : distinct;
+        return (output == null || (response = output.getResponse()) == null || (listDistinct = CollectionsKt___CollectionsKt.distinct(response)) == null) ? EmptyList.INSTANCE : listDistinct;
     }
 
     @Override // notification.src.com.android.systemui.BasePromptProcessor
@@ -226,7 +171,12 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
         this.notificationKey = str;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0077 A[PHI: r11
+      0x0077: PHI (r11v4 com.samsung.android.sdk.scs.base.tasks.Task) = (r11v2 com.samsung.android.sdk.scs.base.tasks.Task), (r11v5 com.samsung.android.sdk.scs.base.tasks.Task) binds: [B:23:0x007d, B:19:0x0055] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // notification.src.com.android.systemui.BasePromptProcessor
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void textPrompting(String str, String str2, final SubscreenDeviceModelB5$mSrResponseCallback$1 subscreenDeviceModelB5$mSrResponseCallback$1) {
         AppInfo appInfo;
         Task task;
@@ -255,7 +205,6 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
                 smartReplyer.mServiceExecutor.execute(llmServiceRunnable);
                 task2 = llmServiceRunnable.getTask();
             }
-            task2 = task;
         } else {
             task = null;
             SmartReplyer smartReplyer2 = this.smartreplyer;
@@ -264,32 +213,33 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
                 LlmServiceRunnable llmServiceRunnable2 = new LlmServiceRunnable("FEATURE_AI_GEN_SMART_REPLY", false, new SmartReplyer$$ExternalSyntheticLambda5(smartReplyer2, appInfo2, str, linkedHashMap), new SmartReplyer$$ExternalSyntheticLambda1(1));
                 smartReplyer2.mServiceExecutor.execute(llmServiceRunnable2);
                 task2 = llmServiceRunnable2.getTask();
+            } else {
+                task2 = task;
             }
-            task2 = task;
         }
         if (task2 != null) {
-            task2.addOnCompleteListener(new OnCompleteListener() { // from class: notification.src.com.android.systemui.MultiPromptProcessor$textPrompting$1
+            task2.addOnCompleteListener(new OnCompleteListener() { // from class: notification.src.com.android.systemui.MultiPromptProcessor.textPrompting.1
                 @Override // com.samsung.android.sdk.scs.base.tasks.OnCompleteListener
                 public final void onComplete(Task task3) {
                     String str3;
                     com.samsung.android.sdk.scs.ai.language.Result result;
                     Log.d("MultiPromptProcessor", "smartReply onComplete isSuccessful : " + task3.isSuccessful());
-                    boolean isSuccessful = task3.isSuccessful();
+                    boolean zIsSuccessful = task3.isSuccessful();
                     PromptCallback promptCallback = subscreenDeviceModelB5$mSrResponseCallback$1;
                     MultiPromptProcessor multiPromptProcessor = MultiPromptProcessor.this;
-                    if (!isSuccessful) {
+                    if (!zIsSuccessful) {
                         Log.e("MultiPromptProcessor", "SCS failed: " + task3.getException());
-                        String access$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 3);
+                        String strAccess$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 3);
                         Exception exception = task3.getException();
                         if (exception != null && (exception instanceof ResultErrorException)) {
                             ResultErrorException resultErrorException = (ResultErrorException) exception;
                             if (resultErrorException.getErrorCodeClassified() == ErrorClassifier$ErrorCode.DEVICE_NETWORK_ERROR) {
-                                access$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 1);
+                                strAccess$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 1);
                             } else if (resultErrorException.getErrorCodeClassified() == ErrorClassifier$ErrorCode.SAFETY_FILTER_ERROR) {
-                                access$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 2);
+                                strAccess$getErrorMessage = MultiPromptProcessor.access$getErrorMessage(multiPromptProcessor, 2);
                             }
                         }
-                        ((SubscreenDeviceModelB5$mSrResponseCallback$1) promptCallback).onFailure(access$getErrorMessage);
+                        ((SubscreenDeviceModelB5$mSrResponseCallback$1) promptCallback).onFailure(strAccess$getErrorMessage);
                         return;
                     }
                     Log.d("MultiPromptProcessor", "SCS success: " + task3.getResult());
@@ -313,16 +263,16 @@ public final class MultiPromptProcessor implements BasePromptProcessor {
                             ((SubscreenDeviceModelB5$mSrResponseCallback$1) promptCallback).onComplete(new StringBuilder(str3));
                             return;
                         }
-                        List access$parseOutput = MultiPromptProcessor.access$parseOutput(multiPromptProcessor, str3);
+                        List listAccess$parseOutput = MultiPromptProcessor.access$parseOutput(multiPromptProcessor, str3);
                         StringBuilder sb = new StringBuilder("");
-                        for (Object obj : access$parseOutput) {
+                        for (Object obj : listAccess$parseOutput) {
                             int i2 = i + 1;
                             if (i < 0) {
                                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                                 throw null;
                             }
                             sb.append((String) obj);
-                            if (i != access$parseOutput.size() - 1) {
+                            if (i != listAccess$parseOutput.size() - 1) {
                                 sb.append("\n");
                             }
                             i = i2;

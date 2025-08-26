@@ -72,9 +72,7 @@ public class ImgpDecorateFilter extends DecorateFilter {
         MediaBuffer mediaBuffer2 = (MediaBuffer) Optional.ofNullable(this.preFilter).map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MutableMediaBuffer run;
-                run = ((MediaFilter) obj).run(MediaBuffer.this);
-                return run;
+                return ((MediaFilter) obj).run(mediaBuffer);
             }
         }).orElse(MediaBuffer.mutableOf(mediaBuffer));
         mediaBuffer2.addExtra(mediaBuffer.getExtra());
@@ -103,22 +101,22 @@ public class ImgpDecorateFilter extends DecorateFilter {
             if (mutableMediaBuffer.containsExtra("force-rotate") && Arrays.stream(new int[]{90, 270}).anyMatch(new IntPredicate() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda3
                 @Override // java.util.function.IntPredicate
                 public final boolean test(int i) {
-                    return ImgpDecorateFilter.lambda$run$1(MutableMediaBuffer.this, i);
+                    return ImgpDecorateFilter.lambda$run$1(mutableMediaBuffer, i);
                 }
             })) {
                 int cols2 = mutableShape.getCols();
                 mutableShape.setCols(mutableShape.getRows());
                 mutableShape.setRows(cols2);
             }
-            MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(MediaFormat.mutableImageOf(Optional.ofNullable(this.postImgpDescriptor.getFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda4
+            MutableMediaBuffer mutableMediaBufferMutableOf = MediaBuffer.mutableOf(MediaFormat.mutableImageOf(Optional.ofNullable(this.postImgpDescriptor.getFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda4
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return ImgpDecorateFilter.lambda$run$2(MutableMediaBuffer.this, (MutableMediaFormat) obj);
+                    return ImgpDecorateFilter.lambda$run$2(mutableMediaBuffer, (MutableMediaFormat) obj);
                 }
             }).orElse(mutableMediaBuffer.getFormat().getDataType()), mutableShape.toShape(), Optional.ofNullable(this.postImgpDescriptor.getFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda5
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return ImgpDecorateFilter.lambda$run$3(MutableMediaBuffer.this, (MutableMediaFormat) obj);
+                    return ImgpDecorateFilter.lambda$run$3(mutableMediaBuffer, (MutableMediaFormat) obj);
                 }
             }).orElse(mutableMediaBuffer.getFormat().getColorFormat())));
             if (cols * rows != 1.0f) {
@@ -129,17 +127,17 @@ public class ImgpDecorateFilter extends DecorateFilter {
                     }
                 });
             }
-            MediaBuffer groupOf = MediaBuffer.groupOf(mutableOf, mutableMediaBuffer.asList());
-            groupOf.addExtra(mutableMediaBuffer.getExtra());
+            MediaBuffer mediaBufferGroupOf = MediaBuffer.groupOf(mutableMediaBufferMutableOf, mutableMediaBuffer.asList());
+            mediaBufferGroupOf.addExtra(mutableMediaBuffer.getExtra());
             if (this.postFilter != null) {
                 mutableMediaBuffer.reset();
-                this.postFilter.run(groupOf, mutableMediaBuffer);
+                this.postFilter.run(mediaBufferGroupOf, mutableMediaBuffer);
             }
-            groupOf.release();
+            mediaBufferGroupOf.release();
         } else if (getDescriptor().getOption().isInputWithEvaluationValue()) {
-            MediaBuffer groupOf2 = MediaBuffer.groupOf(mediaBuffer2.asRef().copy(), mutableMediaBuffer.asList());
-            groupOf2.setFlags(2);
-            mutableMediaBuffer.put(groupOf2);
+            MediaBuffer mediaBufferGroupOf2 = MediaBuffer.groupOf(mediaBuffer2.asRef().copy(), mutableMediaBuffer.asList());
+            mediaBufferGroupOf2.setFlags(2);
+            mutableMediaBuffer.put(mediaBufferGroupOf2);
         } else {
             MediaFilter mediaFilter = this.postFilter;
             if (mediaFilter != null) {
@@ -149,9 +147,7 @@ public class ImgpDecorateFilter extends DecorateFilter {
         if (!Stream.of((Object[]) new MFDescriptor[]{getDescriptor(), this.postImgpDescriptor}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.filter.ImgpDecorateFilter$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isKeepFilterDatatype;
-                isKeepFilterDatatype = ((MFDescriptor) obj).getOption().isKeepFilterDatatype();
-                return isKeepFilterDatatype;
+                return ((MFDescriptor) obj).getOption().isKeepFilterDatatype();
             }
         })) {
             Log.d(str, "convert output data-type to one of input");

@@ -13,7 +13,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class LegacyMediaDataManagerImpl$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -30,9 +29,9 @@ public final /* synthetic */ class LegacyMediaDataManagerImpl$$ExternalSynthetic
         final String str = (String) obj;
         switch (this.$r8$classId) {
             case 0:
-                boolean booleanValue = ((Boolean) obj2).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                 int i = LegacyMediaDataManagerImpl.MAX_COMPACT_ACTIONS;
-                legacyMediaDataManagerImpl.setInactive(str, booleanValue, false);
+                legacyMediaDataManagerImpl.setInactive(str, zBooleanValue, false);
                 break;
             default:
                 final PlaybackState playbackState = (PlaybackState) obj2;
@@ -41,19 +40,19 @@ public final /* synthetic */ class LegacyMediaDataManagerImpl$$ExternalSynthetic
                     legacyMediaDataManagerImpl.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$updateState$1$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaData mediaData2 = MediaData.this;
+                            MediaData mediaData2 = mediaData;
                             MediaSession.Token token = mediaData2.token;
                             if (token == null) {
                                 Log.d("MediaDataManager", "State updated, but token was null");
                                 return;
                             }
                             LegacyMediaDataManagerImpl legacyMediaDataManagerImpl2 = legacyMediaDataManagerImpl;
-                            MediaController create = legacyMediaDataManagerImpl2.mediaControllerFactory.create(token);
-                            UserHandle userHandle = new UserHandle(MediaData.this.userId);
+                            MediaController mediaControllerCreate = legacyMediaDataManagerImpl2.mediaControllerFactory.create(token);
+                            UserHandle userHandle = new UserHandle(mediaData.userId);
                             legacyMediaDataManagerImpl2.mediaFlags.getClass();
                             String str2 = mediaData2.packageName;
-                            MediaButton createActionsFromState = !StatusBarManager.useMediaSessionActionsForApp(str2, userHandle) ? null : MediaActionsKt.createActionsFromState(legacyMediaDataManagerImpl2.context, str2, create);
-                            final MediaData copy$default = createActionsFromState != null ? MediaData.copy$default(MediaData.this, null, null, createActionsFromState, null, null, null, false, null, false, Boolean.valueOf(NotificationMediaManager.isPlayingState(playbackState.getState())), 0L, 0L, null, 0, 267386367) : MediaData.copy$default(MediaData.this, null, null, null, null, null, null, false, null, false, Boolean.valueOf(NotificationMediaManager.isPlayingState(playbackState.getState())), 0L, 0L, null, 0, 267386879);
+                            MediaButton mediaButtonCreateActionsFromState = !StatusBarManager.useMediaSessionActionsForApp(str2, userHandle) ? null : MediaActionsKt.createActionsFromState(legacyMediaDataManagerImpl2.context, str2, mediaControllerCreate);
+                            final MediaData mediaDataCopy$default = mediaButtonCreateActionsFromState != null ? MediaData.copy$default(mediaData, null, null, mediaButtonCreateActionsFromState, null, null, null, false, null, false, Boolean.valueOf(NotificationMediaManager.isPlayingState(playbackState.getState())), 0L, 0L, null, 0, 267386367) : MediaData.copy$default(mediaData, null, null, null, null, null, null, false, null, false, Boolean.valueOf(NotificationMediaManager.isPlayingState(playbackState.getState())), 0L, 0L, null, 0, 267386879);
                             Log.d("MediaDataManager", "State updated outside of notification");
                             final LegacyMediaDataManagerImpl legacyMediaDataManagerImpl3 = legacyMediaDataManagerImpl;
                             DelayableExecutor delayableExecutor = legacyMediaDataManagerImpl3.foregroundExecutor;
@@ -61,9 +60,9 @@ public final /* synthetic */ class LegacyMediaDataManagerImpl$$ExternalSynthetic
                             delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$updateState$1$1.1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LegacyMediaDataManagerImpl legacyMediaDataManagerImpl4 = LegacyMediaDataManagerImpl.this;
+                                    LegacyMediaDataManagerImpl legacyMediaDataManagerImpl4 = legacyMediaDataManagerImpl3;
                                     String str4 = str3;
-                                    legacyMediaDataManagerImpl4.onMediaDataLoaded(str4, str4, copy$default);
+                                    legacyMediaDataManagerImpl4.onMediaDataLoaded(str4, str4, mediaDataCopy$default);
                                 }
                             });
                         }

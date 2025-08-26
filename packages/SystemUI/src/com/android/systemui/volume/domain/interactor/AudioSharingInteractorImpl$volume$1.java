@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioSharingInteractorImpl$volume$1 extends SuspendLambda implements Function3 {
     /* synthetic */ int I$0;
@@ -21,9 +20,9 @@ final class AudioSharingInteractorImpl$volume$1 extends SuspendLambda implements
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         AudioSharingInteractorImpl$volume$1 audioSharingInteractorImpl$volume$1 = new AudioSharingInteractorImpl$volume$1((Continuation) obj3);
-        audioSharingInteractorImpl$volume$1.I$0 = intValue;
+        audioSharingInteractorImpl$volume$1.I$0 = iIntValue;
         audioSharingInteractorImpl$volume$1.L$0 = (Map) obj2;
         return audioSharingInteractorImpl$volume$1.invokeSuspend(Unit.INSTANCE);
     }

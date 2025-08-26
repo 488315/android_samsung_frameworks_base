@@ -6,7 +6,6 @@ import com.android.systemui.plugins.annotations.ProvidesInterface;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = "com.android.systemui.action.PLUGIN_AUTH_CONTEXT", version = 1)
 /* loaded from: classes2.dex */
 public interface AuthContextPlugin extends Plugin {
@@ -14,7 +13,6 @@ public interface AuthContextPlugin extends Plugin {
     public static final Companion Companion = Companion.$$INSTANCE;
     public static final int VERSION = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final String ACTION = "com.android.systemui.action.PLUGIN_AUTH_CONTEXT";
@@ -24,20 +22,18 @@ public interface AuthContextPlugin extends Plugin {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Saucier {
         IBinder getSauce(String str);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SensitiveSurface {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class BiometricPrompt implements SensitiveSurface {
             public static final int $stable = 8;
             private final boolean isCredential;
             private final View view;
 
+            /* JADX WARN: Multi-variable type inference failed */
             public BiometricPrompt() {
                 this(null, false, 3, 0 == true ? 1 : 0);
             }
@@ -102,11 +98,11 @@ public interface AuthContextPlugin extends Plugin {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LockscreenBouncer implements SensitiveSurface {
             public static final int $stable = 8;
             private final View view;
 
+            /* JADX WARN: Multi-variable type inference failed */
             public LockscreenBouncer() {
                 this(null, 1, 0 == true ? 1 : 0);
             }

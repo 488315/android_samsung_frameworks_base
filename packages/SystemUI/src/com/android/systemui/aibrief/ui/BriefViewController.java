@@ -38,15 +38,16 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.view.animation.SineOut90;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BriefViewController {
     private static final float BRIGHTNESS_FOR_AOD = 0.2f;
@@ -59,6 +60,7 @@ public final class BriefViewController {
     public static final String SUGGESTION_PENDING_INTENT = "pendingIntent";
     public static final String TAG = "BriefViewController";
     private ArrayList<Integer> background;
+    private Pair<? extends Drawable, ? extends Drawable> backgroundDrawable;
     private ArrayList<Integer> backgroundForDark;
     private final Context context;
     private boolean isDarkModeApplied;
@@ -73,7 +75,6 @@ public final class BriefViewController {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -117,17 +118,24 @@ public final class BriefViewController {
         return Color.HSVToColor(fArr);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0016  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private final Drawable getDrawableFromUri(String str) {
-        try {
-            str.getClass();
-            Uri uriFromString = getUriFromString(str);
-            return Drawable.createFromStream(uriFromString != null ? this.context.getContentResolver().openInputStream(uriFromString) : null, str);
-        } catch (Exception e) {
-            BriefLogger briefLogger = this.logger;
-            e.printStackTrace();
-            briefLogger.e(TAG, "Exception :  " + Unit.INSTANCE);
-            return null;
+        InputStream inputStreamOpenInputStream;
+        if (str != null) {
+            try {
+                Uri uri = Uri.parse(str);
+                inputStreamOpenInputStream = uri != null ? this.context.getContentResolver().openInputStream(uri) : null;
+            } catch (Exception e) {
+                BriefLogger briefLogger = this.logger;
+                e.printStackTrace();
+                briefLogger.e(TAG, "Exception :  " + Unit.INSTANCE);
+                return null;
+            }
         }
+        return Drawable.createFromStream(inputStreamOpenInputStream, str);
     }
 
     public static /* synthetic */ GradientDrawable getNowBarBackground$default(BriefViewController briefViewController, boolean z, int i, Object obj) {
@@ -139,14 +147,6 @@ public final class BriefViewController {
 
     private final Context getSubDisplayContext() {
         return this.context.createDisplayContext(((DisplayManager) this.context.getSystemService("display")).getDisplays("com.samsung.android.hardware.display.category.BUILTIN")[1]);
-    }
-
-    private final Uri getUriFromString(String str) {
-        try {
-            return Uri.parse(str);
-        } catch (Exception unused) {
-            return null;
-        }
     }
 
     private final void initBackgroundDataForRemoteView(Bundle bundle) {
@@ -167,8 +167,8 @@ public final class BriefViewController {
             this.logger.w(TAG, "R.layout.suggestion_container_widget is not attached or View.GONE");
             return true;
         }
-        View findViewById = frameLayout.findViewById(R.id.suggestion_container);
-        if (findViewById == null || !findViewById.isAttachedToWindow()) {
+        View viewFindViewById = frameLayout.findViewById(R.id.suggestion_container);
+        if (viewFindViewById == null || !viewFindViewById.isAttachedToWindow()) {
             this.logger.w(TAG, "R.id.suggestion_container is not attached");
             return true;
         }
@@ -182,20 +182,20 @@ public final class BriefViewController {
     private final void setFullViewBackground() {
         FrameLayout frameLayout = this.suggestionContainerWidget;
         if (frameLayout != null) {
-            String str = null;
+            Drawable drawable = null;
             if (isDarkMode()) {
-                NowBarData nowBarData = this.nowBarData;
-                if (nowBarData != null) {
-                    str = nowBarData.getFullBackgroundForDark();
+                Pair<? extends Drawable, ? extends Drawable> pair = this.backgroundDrawable;
+                if (pair != null) {
+                    drawable = (Drawable) pair.getFirst();
                 }
             } else {
-                NowBarData nowBarData2 = this.nowBarData;
-                if (nowBarData2 != null) {
-                    str = nowBarData2.getFullBackground();
+                Pair<? extends Drawable, ? extends Drawable> pair2 = this.backgroundDrawable;
+                if (pair2 != null) {
+                    drawable = (Drawable) pair2.getSecond();
                 }
             }
-            if (str != null) {
-                frameLayout.setBackground(getDrawableFromUri(str));
+            if (drawable != null) {
+                frameLayout.setBackground(drawable);
                 return;
             }
             GradientDrawable gradientDrawable = this.nowBarBg;
@@ -204,19 +204,6 @@ public final class BriefViewController {
             } else {
                 frameLayout.setBackgroundResource(R.drawable.brief_morning_bg);
             }
-        }
-    }
-
-    private final void setIconBackground(FrameLayout frameLayout, String str) {
-        this.logger.d(TAG, "icon bg uri :" + str);
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        Drawable drawableFromUri = getDrawableFromUri(str);
-        if (drawableFromUri != null) {
-            frameLayout.setBackground(drawableFromUri);
-        } else {
-            this.logger.d(TAG, "icon bg is null");
         }
     }
 
@@ -238,6 +225,7 @@ public final class BriefViewController {
         this.nowBarData = nowBarData;
         this.isDarkModeApplied = isDarkMode();
         if (nowBarData != null) {
+            this.backgroundDrawable = new Pair<>(getDrawableFromUri(nowBarData.getFullBackgroundForDark()), getDrawableFromUri(nowBarData.getFullBackground()));
             this.nowBarBg = getNowBarBackground$default(this, false, 1, null);
             this.logger.d(TAG, "bg should be empty by LOCKUI_NOW_BAR_SUPPORT_GUIDING_EFFECT");
             briefNowBarBaseView.updateNowBarData(nowBarData, null);
@@ -285,15 +273,20 @@ public final class BriefViewController {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent();
         intent.setComponent(new ComponentName(BriefNowBarController.SUGGESTION_PACKAGE, BriefNowBarController.SUGGESTION_ACTIVITY));
-        ResolveInfo resolveActivity = packageManager.resolveActivity(intent, 0);
-        if (resolveActivity != null) {
-            return resolveActivity.loadIcon(packageManager);
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(intent, 0);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.loadIcon(packageManager);
         }
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0035  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final List<Integer> getBackground(boolean z, boolean z2) {
         ArrayList<Integer> background;
+        this.logger.d(TAG, "isScreenOn " + z);
         if (this.nowBarData == null && !isRemoteAndHasBackground(z2)) {
             return null;
         }
@@ -302,10 +295,7 @@ public final class BriefViewController {
                 background = this.backgroundForDark;
             } else {
                 NowBarData nowBarData = this.nowBarData;
-                if (nowBarData != null) {
-                    background = nowBarData.getBackgroundForDark();
-                }
-                background = null;
+                background = nowBarData != null ? nowBarData.getBackgroundForDark() : null;
             }
         } else if (z2) {
             background = this.background;
@@ -314,7 +304,6 @@ public final class BriefViewController {
             if (nowBarData2 != null) {
                 background = nowBarData2.getBackground();
             }
-            background = null;
         }
         if (z) {
             return background;
@@ -357,7 +346,7 @@ public final class BriefViewController {
 
     public final void onConfigurationChanged(Configuration configuration) {
         BriefNowBarBaseView briefNowBarBaseView;
-        if ((this.lastConfiguration.diff(configuration) & 1073746944) != 0) {
+        if ((this.lastConfiguration.diff(configuration) & 1073747456) != 0) {
             BriefNowBarBaseView briefNowBarBaseView2 = this.nowBarView;
             if (briefNowBarBaseView2 != null) {
                 briefNowBarBaseView2.updateNowBarResources();
@@ -398,25 +387,23 @@ public final class BriefViewController {
         Display defaultDisplay = ((WindowManager) systemService).getDefaultDisplay();
         Point point = new Point();
         defaultDisplay.getRealSize(point);
-        View findViewById = frameLayout.findViewById(R.id.suggestion_container);
+        View viewFindViewById = frameLayout.findViewById(R.id.suggestion_container);
         int i = point.x;
         int i2 = i / 2;
         int i3 = point.y;
-        float hypot = (float) Math.hypot(i, i3);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(findViewById, "alpha", 0.0f, 1.0f);
-        ofFloat.setDuration(400L);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        Animator createCircularReveal = ViewAnimationUtils.createCircularReveal(findViewById, i2, i3, 0.0f, hypot);
-        createCircularReveal.setDuration(500L);
-        createCircularReveal.setInterpolator(new SineOut90());
+        float fHypot = (float) Math.hypot(i, i3);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewFindViewById, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        Animator animatorCreateCircularReveal = ViewAnimationUtils.createCircularReveal(viewFindViewById, i2, i3, 0.0f, fHypot);
+        animatorCreateCircularReveal.setDuration(500L);
+        animatorCreateCircularReveal.setInterpolator(new SineOut90());
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(createCircularReveal, ofFloat);
+        animatorSet.playTogether(animatorCreateCircularReveal, objectAnimatorOfFloat);
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.aibrief.ui.BriefViewController$showCircleAnimation$1$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {
-                BriefLogger briefLogger;
-                briefLogger = BriefViewController.this.logger;
-                briefLogger.d(BriefViewController.TAG, "showCircleAnimation onAnimationEnd");
+                this.this$0.logger.d(BriefViewController.TAG, "showCircleAnimation onAnimationEnd");
                 runnable.run();
                 frameLayout.setVisibility(8);
             }

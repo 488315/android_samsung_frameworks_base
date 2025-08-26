@@ -92,9 +92,9 @@ final class KeyButtonDrawable extends Drawable {
 
     public void setDarkIntensity(float f) {
         this.mState.mDarkIntensity = f;
-        int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mState.mLightColor), Integer.valueOf(this.mState.mDarkColor))).intValue();
+        int iIntValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mState.mLightColor), Integer.valueOf(this.mState.mDarkColor))).intValue();
         updateShadowAlpha();
-        setColorFilter(new PorterDuffColorFilter(intValue, PorterDuff.Mode.SRC_ATOP));
+        setColorFilter(new PorterDuffColorFilter(iIntValue, PorterDuff.Mode.SRC_ATOP));
     }
 
     public void setRotation(float f) {
@@ -281,20 +281,20 @@ final class KeyButtonDrawable extends Drawable {
     private void regenerateBitmapIconCache() {
         int intrinsicWidth = getIntrinsicWidth();
         int intrinsicHeight = getIntrinsicHeight();
-        Bitmap createBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
-        Drawable mutate = this.mState.mChildState.newDrawable().mutate();
-        setDrawableBounds(mutate);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        Drawable drawableMutate = this.mState.mChildState.newDrawable().mutate();
+        setDrawableBounds(drawableMutate);
         canvas.save();
         if (this.mState.mHorizontalFlip) {
             canvas.scale(-1.0f, 1.0f, intrinsicWidth * 0.5f, intrinsicHeight * 0.5f);
         }
-        mutate.draw(canvas);
+        drawableMutate.draw(canvas);
         canvas.restore();
         if (this.mState.mIsHardwareBitmap) {
-            createBitmap = createBitmap.copy(Bitmap.Config.HARDWARE, false);
+            bitmapCreateBitmap = bitmapCreateBitmap.copy(Bitmap.Config.HARDWARE, false);
         }
-        this.mState.mLastDrawnIcon = createBitmap;
+        this.mState.mLastDrawnIcon = bitmapCreateBitmap;
     }
 
     private void regenerateBitmapShadowCache() {
@@ -304,26 +304,26 @@ final class KeyButtonDrawable extends Drawable {
         }
         int intrinsicWidth = getIntrinsicWidth();
         int intrinsicHeight = getIntrinsicHeight();
-        Bitmap createBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
-        Drawable mutate = this.mState.mChildState.newDrawable().mutate();
-        setDrawableBounds(mutate);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        Drawable drawableMutate = this.mState.mChildState.newDrawable().mutate();
+        setDrawableBounds(drawableMutate);
         canvas.save();
         if (this.mState.mHorizontalFlip) {
             canvas.scale(-1.0f, 1.0f, intrinsicWidth * 0.5f, intrinsicHeight * 0.5f);
         }
-        mutate.draw(canvas);
+        drawableMutate.draw(canvas);
         canvas.restore();
         Paint paint = new Paint(3);
         paint.setMaskFilter(new BlurMaskFilter(this.mState.mShadowSize, BlurMaskFilter.Blur.NORMAL));
-        Bitmap extractAlpha = createBitmap.extractAlpha(paint, new int[2]);
+        Bitmap bitmapExtractAlpha = bitmapCreateBitmap.extractAlpha(paint, new int[2]);
         paint.setMaskFilter(null);
-        createBitmap.eraseColor(0);
-        canvas.drawBitmap(extractAlpha, r2[0], r2[1], paint);
+        bitmapCreateBitmap.eraseColor(0);
+        canvas.drawBitmap(bitmapExtractAlpha, r2[0], r2[1], paint);
         if (this.mState.mIsHardwareBitmap) {
-            createBitmap = createBitmap.copy(Bitmap.Config.HARDWARE, false);
+            bitmapCreateBitmap = bitmapCreateBitmap.copy(Bitmap.Config.HARDWARE, false);
         }
-        this.mState.mLastDrawnShadow = createBitmap;
+        this.mState.mLastDrawnShadow = bitmapCreateBitmap;
     }
 
     private void updateShadowAlpha() {
@@ -331,9 +331,9 @@ final class KeyButtonDrawable extends Drawable {
     }
 
     private void setDrawableBounds(Drawable drawable) {
-        int abs = this.mState.mShadowSize + Math.abs(this.mState.mShadowOffsetX);
-        int abs2 = this.mState.mShadowSize + Math.abs(this.mState.mShadowOffsetY);
-        drawable.setBounds(abs, abs2, getIntrinsicWidth() - abs, getIntrinsicHeight() - abs2);
+        int iAbs = this.mState.mShadowSize + Math.abs(this.mState.mShadowOffsetX);
+        int iAbs2 = this.mState.mShadowSize + Math.abs(this.mState.mShadowOffsetY);
+        drawable.setBounds(iAbs, iAbs2, getIntrinsicWidth() - iAbs, getIntrinsicHeight() - iAbs2);
     }
 
     private static class ShadowDrawableState extends Drawable.ConstantState {
@@ -372,6 +372,7 @@ final class KeyButtonDrawable extends Drawable {
             this.mOvalBackgroundColor = color;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new KeyButtonDrawable(null, this);

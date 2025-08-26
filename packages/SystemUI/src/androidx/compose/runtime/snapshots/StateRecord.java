@@ -1,6 +1,5 @@
 package androidx.compose.runtime.snapshots;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class StateRecord {
     public StateRecord next;
@@ -15,9 +14,9 @@ public abstract class StateRecord {
     public abstract StateRecord create();
 
     public StateRecord create(long j) {
-        StateRecord create = create();
-        create.snapshotId = j;
-        return create;
+        StateRecord stateRecordCreate = create();
+        stateRecordCreate.snapshotId = j;
+        return stateRecordCreate;
     }
 
     public StateRecord() {

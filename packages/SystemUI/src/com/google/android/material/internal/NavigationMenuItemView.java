@@ -22,7 +22,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NavigationMenuItemView extends ForegroundLinearLayout implements MenuView.ItemView {
     public static final int[] CHECKED_STATE_SET = {R.attr.state_checked};
@@ -64,17 +63,17 @@ public class NavigationMenuItemView extends ForegroundLinearLayout implements Me
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             setBackground(stateListDrawable);
         }
-        boolean isCheckable = menuItemImpl.isCheckable();
+        boolean zIsCheckable = menuItemImpl.isCheckable();
         refreshDrawableState();
-        if (this.checkable != isCheckable) {
-            this.checkable = isCheckable;
+        if (this.checkable != zIsCheckable) {
+            this.checkable = zIsCheckable;
             sendAccessibilityEvent(this.textView, 2048);
         }
-        boolean isChecked = menuItemImpl.isChecked();
+        boolean zIsChecked = menuItemImpl.isChecked();
         refreshDrawableState();
-        this.textView.setChecked(isChecked);
+        this.textView.setChecked(zIsChecked);
         CheckedTextView checkedTextView = this.textView;
-        checkedTextView.setTypeface(checkedTextView.getTypeface(), (isChecked && this.isBold) ? 1 : 0);
+        checkedTextView.setTypeface(checkedTextView.getTypeface(), (zIsChecked && this.isBold) ? 1 : 0);
         setEnabled(menuItemImpl.isEnabled());
         this.textView.setText(menuItemImpl.mTitle);
         Drawable icon = menuItemImpl.getIcon();
@@ -119,12 +118,12 @@ public class NavigationMenuItemView extends ForegroundLinearLayout implements Me
 
     @Override // android.view.ViewGroup, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         MenuItemImpl menuItemImpl = this.itemData;
         if (menuItemImpl != null && menuItemImpl.isCheckable() && this.itemData.isChecked()) {
-            ViewGroup.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            ViewGroup.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     public NavigationMenuItemView(Context context, AttributeSet attributeSet) {

@@ -42,18 +42,18 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         if (i2 == 0) {
             return -1;
         }
-        int binarySearchHashes = binarySearchHashes(this.mHashes, i2, i);
-        if (binarySearchHashes < 0 || obj.equals(this.mArray[binarySearchHashes << 1])) {
-            return binarySearchHashes;
+        int iBinarySearchHashes = binarySearchHashes(this.mHashes, i2, i);
+        if (iBinarySearchHashes < 0 || obj.equals(this.mArray[iBinarySearchHashes << 1])) {
+            return iBinarySearchHashes;
         }
-        int i3 = binarySearchHashes + 1;
+        int i3 = iBinarySearchHashes + 1;
         while (i3 < i2 && this.mHashes[i3] == i) {
             if (obj.equals(this.mArray[i3 << 1])) {
                 return i3;
             }
             i3++;
         }
-        for (int i4 = binarySearchHashes - 1; i4 >= 0 && this.mHashes[i4] == i; i4--) {
+        for (int i4 = iBinarySearchHashes - 1; i4 >= 0 && this.mHashes[i4] == i; i4--) {
             if (obj.equals(this.mArray[i4 << 1])) {
                 return i4;
             }
@@ -66,18 +66,18 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         if (i == 0) {
             return -1;
         }
-        int binarySearchHashes = binarySearchHashes(this.mHashes, i, 0);
-        if (binarySearchHashes < 0 || this.mArray[binarySearchHashes << 1] == null) {
-            return binarySearchHashes;
+        int iBinarySearchHashes = binarySearchHashes(this.mHashes, i, 0);
+        if (iBinarySearchHashes < 0 || this.mArray[iBinarySearchHashes << 1] == null) {
+            return iBinarySearchHashes;
         }
-        int i2 = binarySearchHashes + 1;
+        int i2 = iBinarySearchHashes + 1;
         while (i2 < i && this.mHashes[i2] == 0) {
             if (this.mArray[i2 << 1] == null) {
                 return i2;
             }
             i2++;
         }
-        for (int i3 = binarySearchHashes - 1; i3 >= 0 && this.mHashes[i3] == 0; i3--) {
+        for (int i3 = iBinarySearchHashes - 1; i3 >= 0 && this.mHashes[i3] == 0; i3--) {
             if (this.mArray[i3 << 1] == null) {
                 return i3;
             }
@@ -281,9 +281,9 @@ public final class ArrayMap<K, V> implements Map<K, V> {
 
     @Override // java.util.Map
     public V get(Object obj) {
-        int indexOfKey = indexOfKey(obj);
-        if (indexOfKey >= 0) {
-            return (V) this.mArray[(indexOfKey << 1) + 1];
+        int iIndexOfKey = indexOfKey(obj);
+        if (iIndexOfKey >= 0) {
+            return (V) this.mArray[(iIndexOfKey << 1) + 1];
         }
         return null;
     }
@@ -321,24 +321,24 @@ public final class ArrayMap<K, V> implements Map<K, V> {
     @Override // java.util.Map
     public V put(K k, V v) {
         int i;
-        int indexOf;
+        int iIndexOf;
         int i2 = this.mSize;
         if (k == null) {
-            indexOf = indexOfNull();
+            iIndexOf = indexOfNull();
             i = 0;
         } else {
-            int identityHashCode = this.mIdentityHashCode ? System.identityHashCode(k) : k.hashCode();
-            i = identityHashCode;
-            indexOf = indexOf(k, identityHashCode);
+            int iIdentityHashCode = this.mIdentityHashCode ? System.identityHashCode(k) : k.hashCode();
+            i = iIdentityHashCode;
+            iIndexOf = indexOf(k, iIdentityHashCode);
         }
-        if (indexOf >= 0) {
-            int i3 = (indexOf << 1) + 1;
+        if (iIndexOf >= 0) {
+            int i3 = (iIndexOf << 1) + 1;
             Object[] objArr = this.mArray;
             V v2 = (V) objArr[i3];
             objArr[i3] = v;
             return v2;
         }
-        int i4 = ~indexOf;
+        int i4 = ~iIndexOf;
         int[] iArr = this.mHashes;
         if (i2 >= iArr.length) {
             int i5 = 8;
@@ -383,12 +383,12 @@ public final class ArrayMap<K, V> implements Map<K, V> {
     }
 
     public void append(K k, V v) {
-        int identityHashCode;
+        int iIdentityHashCode;
         int i = this.mSize;
         if (k == null) {
-            identityHashCode = 0;
+            iIdentityHashCode = 0;
         } else {
-            identityHashCode = this.mIdentityHashCode ? System.identityHashCode(k) : k.hashCode();
+            iIdentityHashCode = this.mIdentityHashCode ? System.identityHashCode(k) : k.hashCode();
         }
         int[] iArr = this.mHashes;
         if (i >= iArr.length) {
@@ -396,14 +396,14 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         }
         if (i > 0) {
             int i2 = i - 1;
-            if (iArr[i2] > identityHashCode) {
-                Log.w(TAG, "New hash " + identityHashCode + " is before end of array hash " + this.mHashes[i2] + " at index " + i + "", new RuntimeException("here"));
+            if (iArr[i2] > iIdentityHashCode) {
+                Log.w(TAG, "New hash " + iIdentityHashCode + " is before end of array hash " + this.mHashes[i2] + " at index " + i + "", new RuntimeException("here"));
                 put(k, v);
                 return;
             }
         }
         this.mSize = i + 1;
-        iArr[i] = identityHashCode;
+        iArr[i] = iIdentityHashCode;
         int i3 = i << 1;
         Object[] objArr = this.mArray;
         objArr[i3] = k;
@@ -453,9 +453,9 @@ public final class ArrayMap<K, V> implements Map<K, V> {
 
     @Override // java.util.Map
     public V remove(Object obj) {
-        int indexOfKey = indexOfKey(obj);
-        if (indexOfKey >= 0) {
-            return removeAt(indexOfKey);
+        int iIndexOfKey = indexOfKey(obj);
+        if (iIndexOfKey >= 0) {
+            return removeAt(iIndexOfKey);
         }
         return null;
     }
@@ -531,14 +531,14 @@ public final class ArrayMap<K, V> implements Map<K, V> {
             }
             for (int i = 0; i < this.mSize; i++) {
                 try {
-                    K keyAt = keyAt(i);
-                    V valueAt = valueAt(i);
-                    Object obj2 = map.get(keyAt);
-                    if (valueAt == null) {
-                        if (obj2 != null || !map.containsKey(keyAt)) {
+                    K kKeyAt = keyAt(i);
+                    V vValueAt = valueAt(i);
+                    Object obj2 = map.get(kKeyAt);
+                    if (vValueAt == null) {
+                        if (obj2 != null || !map.containsKey(kKeyAt)) {
                             return false;
                         }
-                    } else if (!valueAt.equals(obj2)) {
+                    } else if (!vValueAt.equals(obj2)) {
                         return false;
                     }
                 } catch (ClassCastException | NullPointerException unused) {
@@ -556,14 +556,14 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         int i = this.mSize;
         int i2 = 1;
         int i3 = 0;
-        int i4 = 0;
+        int iHashCode = 0;
         while (i3 < i) {
             Object obj = objArr[i2];
-            i4 += (obj == null ? 0 : obj.hashCode()) ^ iArr[i3];
+            iHashCode += (obj == null ? 0 : obj.hashCode()) ^ iArr[i3];
             i3++;
             i2 += 2;
         }
-        return i4;
+        return iHashCode;
     }
 
     public String toString() {
@@ -576,16 +576,16 @@ public final class ArrayMap<K, V> implements Map<K, V> {
             if (i > 0) {
                 sb.append(", ");
             }
-            K keyAt = keyAt(i);
-            if (keyAt != this) {
-                sb.append(keyAt);
+            K kKeyAt = keyAt(i);
+            if (kKeyAt != this) {
+                sb.append(kKeyAt);
             } else {
                 sb.append("(this Map)");
             }
             sb.append('=');
-            V valueAt = valueAt(i);
-            if (valueAt != this) {
-                sb.append(ArrayUtils.deepToString(valueAt));
+            V vValueAt = valueAt(i);
+            if (vValueAt != this) {
+                sb.append(ArrayUtils.deepToString(vValueAt));
             } else {
                 sb.append("(this Map)");
             }

@@ -41,11 +41,11 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
     }
 
     public static ParseTypeImpl forDefaultParsing() {
-        final IPlatformCompat asInterface = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+        final IPlatformCompat iPlatformCompatAsInterface = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
         return new ParseTypeImpl(new ParseInput.Callback() { // from class: android.content.pm.parsing.result.ParseTypeImpl$$ExternalSyntheticLambda0
             @Override // android.content.pm.parsing.result.ParseInput.Callback
             public final boolean isChangeEnabled(long j, String str, int i) {
-                return ParseTypeImpl.lambda$forDefaultParsing$1(IPlatformCompat.this, j, str, i);
+                return ParseTypeImpl.lambda$forDefaultParsing$1(iPlatformCompatAsInterface, j, str, i);
             }
         });
     }
@@ -120,10 +120,10 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
         while (true) {
             size--;
             if (size >= 0) {
-                long longValue = this.mDeferredErrors.keyAt(size).longValue();
-                String valueAt = this.mDeferredErrors.valueAt(size);
-                if (this.mCallback.isChangeEnabled(longValue, this.mPackageName, this.mTargetSdkVersion)) {
-                    return error(valueAt);
+                long jLongValue = this.mDeferredErrors.keyAt(size).longValue();
+                String strValueAt = this.mDeferredErrors.valueAt(size);
+                if (this.mCallback.isChangeEnabled(jLongValue, this.mPackageName, this.mTargetSdkVersion)) {
+                    return error(strValueAt);
                 }
                 this.mDeferredErrors.setValueAt(size, null);
             } else {

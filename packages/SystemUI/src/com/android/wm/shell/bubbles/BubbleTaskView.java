@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import com.android.wm.shell.taskview.TaskView;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleTaskView {
     public ComponentName componentName;
@@ -22,7 +21,7 @@ public final class BubbleTaskView {
         ?? r0 = new TaskView.Listener() { // from class: com.android.wm.shell.bubbles.BubbleTaskView$listener$1
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onBackPressedOnTaskRoot(int i) {
-                TaskView.Listener listener = BubbleTaskView.this.delegateListener;
+                TaskView.Listener listener = this.this$0.delegateListener;
                 if (listener != null) {
                     listener.onBackPressedOnTaskRoot(i);
                 }
@@ -30,7 +29,7 @@ public final class BubbleTaskView {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onInitialized() {
-                TaskView.Listener listener = BubbleTaskView.this.delegateListener;
+                TaskView.Listener listener = this.this$0.delegateListener;
                 if (listener != null) {
                     listener.onInitialized();
                 }
@@ -38,7 +37,7 @@ public final class BubbleTaskView {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onReleased() {
-                TaskView.Listener listener = BubbleTaskView.this.delegateListener;
+                TaskView.Listener listener = this.this$0.delegateListener;
                 if (listener != null) {
                     listener.onReleased();
                 }
@@ -46,7 +45,7 @@ public final class BubbleTaskView {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskCreated(int i, ComponentName componentName) {
-                BubbleTaskView bubbleTaskView = BubbleTaskView.this;
+                BubbleTaskView bubbleTaskView = this.this$0;
                 TaskView.Listener listener = bubbleTaskView.delegateListener;
                 if (listener != null) {
                     listener.onTaskCreated(i, componentName);
@@ -59,7 +58,7 @@ public final class BubbleTaskView {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskRemovalStarted(int i) {
-                TaskView.Listener listener = BubbleTaskView.this.delegateListener;
+                TaskView.Listener listener = this.this$0.delegateListener;
                 if (listener != null) {
                     listener.onTaskRemovalStarted(i);
                 }
@@ -67,7 +66,7 @@ public final class BubbleTaskView {
 
             @Override // com.android.wm.shell.taskview.TaskView.Listener
             public final void onTaskVisibilityChanged(int i, boolean z) {
-                BubbleTaskView bubbleTaskView = BubbleTaskView.this;
+                BubbleTaskView bubbleTaskView = this.this$0;
                 bubbleTaskView.isVisible = z;
                 TaskView.Listener listener = bubbleTaskView.delegateListener;
                 if (listener != null) {

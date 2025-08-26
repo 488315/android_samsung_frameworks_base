@@ -20,7 +20,6 @@ import com.sec.android.diagmonagent.common.util.executor.SingleThreadExecutor;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SamsungAnalytics {
     public static SamsungAnalytics instance;
@@ -70,100 +69,64 @@ public class SamsungAnalytics {
         return instance;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x005f, code lost:
-    
-        r1 = new com.samsung.context.sdk.samsunganalytics.SamsungAnalytics(r5, r6);
-        com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance = r1;
-        com.samsung.context.sdk.samsunganalytics.SamsungAnalyticsHolder.diagnosticInstance = r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0024, code lost:
-    
-        if (r1 != null) goto L40;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x004c A[Catch: all -> 0x0051, TryCatch #0 {all -> 0x0051, blocks: (B:16:0x0029, B:18:0x002f, B:21:0x0034, B:27:0x004c, B:28:0x0053, B:30:0x0057, B:35:0x005f, B:36:0x0068), top: B:15:0x0029 }] */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0026  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x004c A[Catch: all -> 0x0051, TryCatch #0 {all -> 0x0051, blocks: (B:16:0x0029, B:18:0x002f, B:21:0x0034, B:28:0x004c, B:31:0x0053, B:33:0x0057, B:38:0x005f, B:39:0x0068), top: B:44:0x0029 }] */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x005f A[Catch: all -> 0x0051, TryCatch #0 {all -> 0x0051, blocks: (B:16:0x0029, B:18:0x002f, B:21:0x0034, B:28:0x004c, B:31:0x0053, B:33:0x0057, B:38:0x005f, B:39:0x0068), top: B:44:0x0029 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void setConfiguration(android.app.Application r5, com.samsung.context.sdk.samsunganalytics.Configuration r6) {
-        /*
-            java.lang.String r0 = "SamsungAnalytics setConfiguration"
-            android.os.Trace.beginSection(r0)
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r0 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance
-            if (r0 == 0) goto L26
-            com.samsung.context.sdk.samsunganalytics.internal.Tracker r1 = r0.tracker
-            if (r1 != 0) goto Le
-            goto L26
-        Le:
-            if (r0 == 0) goto L69
-            if (r1 != 0) goto L13
-            goto L69
-        L13:
-            android.content.Context r0 = r5.getApplicationContext()
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r1 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance
-            com.samsung.context.sdk.samsunganalytics.internal.Tracker r1 = r1.tracker
-            com.samsung.context.sdk.samsunganalytics.Configuration r1 = r1.configuration
-            boolean r0 = com.samsung.context.sdk.samsunganalytics.internal.util.Utils.isSendingAppCommonSupported(r0)
-            if (r0 == 0) goto L24
-            goto L69
-        L24:
-            if (r1 != 0) goto L69
-        L26:
-            java.lang.Class<com.samsung.context.sdk.samsunganalytics.SamsungAnalytics> r0 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.class
-            monitor-enter(r0)
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r1 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance     // Catch: java.lang.Throwable -> L51
-            r2 = 1
-            r3 = 0
-            if (r1 == 0) goto L49
-            com.samsung.context.sdk.samsunganalytics.internal.Tracker r1 = r1.tracker     // Catch: java.lang.Throwable -> L51
-            if (r1 != 0) goto L34
-            goto L49
-        L34:
-            android.content.Context r1 = r5.getApplicationContext()     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r4 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.internal.Tracker r4 = r4.tracker     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.Configuration r4 = r4.configuration     // Catch: java.lang.Throwable -> L51
-            boolean r1 = com.samsung.context.sdk.samsunganalytics.internal.util.Utils.isSendingAppCommonSupported(r1)     // Catch: java.lang.Throwable -> L51
-            if (r1 == 0) goto L45
-            goto L49
-        L45:
-            if (r4 != 0) goto L49
-            r1 = r2
-            goto L4a
-        L49:
-            r1 = r3
-        L4a:
-            if (r1 == 0) goto L53
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r1 = com.samsung.context.sdk.samsunganalytics.SamsungAnalyticsHolder.diagnosticInstance     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance = r1     // Catch: java.lang.Throwable -> L51
-            goto L53
-        L51:
-            r5 = move-exception
-            goto L6d
-        L53:
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r1 = com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance     // Catch: java.lang.Throwable -> L51
-            if (r1 == 0) goto L5d
-            com.samsung.context.sdk.samsunganalytics.internal.Tracker r1 = r1.tracker     // Catch: java.lang.Throwable -> L51
-            if (r1 != 0) goto L5c
-            goto L5d
-        L5c:
-            r2 = r3
-        L5d:
-            if (r2 == 0) goto L68
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics r1 = new com.samsung.context.sdk.samsunganalytics.SamsungAnalytics     // Catch: java.lang.Throwable -> L51
-            r1.<init>(r5, r6)     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.instance = r1     // Catch: java.lang.Throwable -> L51
-            com.samsung.context.sdk.samsunganalytics.SamsungAnalyticsHolder.diagnosticInstance = r1     // Catch: java.lang.Throwable -> L51
-        L68:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L51
-        L69:
-            android.os.Trace.endSection()
-            return
-        L6d:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L51
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.context.sdk.samsunganalytics.SamsungAnalytics.setConfiguration(android.app.Application, com.samsung.context.sdk.samsunganalytics.Configuration):void");
+    public static void setConfiguration(Application application, Configuration configuration) {
+        boolean z;
+        SamsungAnalytics samsungAnalytics;
+        Tracker tracker;
+        Trace.beginSection("SamsungAnalytics setConfiguration");
+        SamsungAnalytics samsungAnalytics2 = instance;
+        if (samsungAnalytics2 == null || (tracker = samsungAnalytics2.tracker) == null) {
+            synchronized (SamsungAnalytics.class) {
+                try {
+                    SamsungAnalytics samsungAnalytics3 = instance;
+                    boolean z2 = true;
+                    if (samsungAnalytics3 == null || samsungAnalytics3.tracker == null) {
+                        z = false;
+                        if (z) {
+                            instance = SamsungAnalyticsHolder.diagnosticInstance;
+                        }
+                        samsungAnalytics = instance;
+                        if (samsungAnalytics != null && samsungAnalytics.tracker != null) {
+                            z2 = false;
+                        }
+                        if (z2) {
+                            SamsungAnalytics samsungAnalytics4 = new SamsungAnalytics(application, configuration);
+                            instance = samsungAnalytics4;
+                            SamsungAnalyticsHolder.diagnosticInstance = samsungAnalytics4;
+                        }
+                    } else {
+                        Context applicationContext = application.getApplicationContext();
+                        Configuration configuration2 = instance.tracker.configuration;
+                        if (!Utils.isSendingAppCommonSupported(applicationContext) && configuration2 == null) {
+                            z = true;
+                        }
+                        if (z) {
+                        }
+                        samsungAnalytics = instance;
+                        if (samsungAnalytics != null) {
+                            z2 = false;
+                        }
+                        if (z2) {
+                        }
+                    }
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+        } else if (samsungAnalytics2 != null && tracker != null) {
+            Context applicationContext2 = application.getApplicationContext();
+            Configuration configuration3 = instance.tracker.configuration;
+            if (!Utils.isSendingAppCommonSupported(applicationContext2) && configuration3 == null) {
+            }
+        }
+        Trace.endSection();
     }
 
     public final void sendLog(final Map map) {
@@ -181,7 +144,7 @@ public class SamsungAnalytics {
                 @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient
                 public final void run() {
                     String str;
-                    HashMap hashMap;
+                    HashMap map2;
                     Tracker tracker2 = Tracker.this;
                     if (Tracker.access$100(tracker2)) {
                         int dMAVersion = CommonUtils.getDMAVersion(tracker2.mContext);
@@ -195,8 +158,8 @@ public class SamsungAnalytics {
                                 map.remove("ps");
                             }
                         }
-                        Map map2 = map;
-                        if (map2 == null || map2.isEmpty()) {
+                        Map map3 = map;
+                        if (map3 == null || map3.isEmpty()) {
                             Debug.LogD("Failure to send Logs : No data");
                             return;
                         }
@@ -209,11 +172,11 @@ public class SamsungAnalytics {
                         }
                         if ("pp".equals(map.get("t"))) {
                             Context context = tracker2.mContext;
-                            Map map3 = map;
+                            Map map4 = map;
                             PropertyLogRegister propertyLogRegister = new PropertyLogRegister(context);
-                            map3.remove("t");
+                            map4.remove("t");
                             SharedPreferences sharedPreferences = propertyLogRegister.context.getSharedPreferences("SAProperties", 0);
-                            for (Map.Entry entry : map3.entrySet()) {
+                            for (Map.Entry entry : map4.entrySet()) {
                                 if (TextUtils.isEmpty((CharSequence) entry.getValue())) {
                                     sharedPreferences.edit().remove((String) entry.getKey()).apply();
                                 } else {
@@ -228,20 +191,20 @@ public class SamsungAnalytics {
                             if (!TextUtils.isEmpty(string)) {
                                 String str2 = (String) map.get("cd");
                                 if (TextUtils.isEmpty(str2)) {
-                                    hashMap = new HashMap();
+                                    map2 = new HashMap();
                                 } else {
                                     Utils.Depth depth = Utils.Depth.TWO_DEPTH;
-                                    HashMap hashMap2 = new HashMap();
+                                    HashMap map5 = new HashMap();
                                     for (String str3 : str2.split(depth.getCollectionDLM())) {
-                                        String[] split = str3.split(depth.getKeyValueDLM());
-                                        if (split.length > 1) {
-                                            hashMap2.put(split[0], split[1]);
+                                        String[] strArrSplit = str3.split(depth.getKeyValueDLM());
+                                        if (strArrSplit.length > 1) {
+                                            map5.put(strArrSplit[0], strArrSplit[1]);
                                         }
                                     }
-                                    hashMap = hashMap2;
+                                    map2 = map5;
                                 }
-                                hashMap.put("guid", string);
-                                map.put("cd", Utils.makeDelimiterString(Validation.checkSizeLimit(hashMap), Utils.Depth.TWO_DEPTH));
+                                map2.put("guid", string);
+                                map.put("cd", Utils.makeDelimiterString(Validation.checkSizeLimit(map2), Utils.Depth.TWO_DEPTH));
                             }
                         }
                         Sender.get(tracker2.application, PolicyUtils.senderType, configuration).send(map);

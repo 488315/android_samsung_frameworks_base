@@ -13,9 +13,11 @@ import com.google.gson.Gson;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import kotlin.text.ScreenFloatValueRegEx;
+import kotlin.text.StringsKt__StringNumberConversionsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarReflectUtil {
     public static final NavBarReflectUtil INSTANCE = new NavBarReflectUtil();
@@ -24,94 +26,62 @@ public final class NavBarReflectUtil {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x006a, code lost:
-    
-        if (r0.equals("string") == false) goto L26;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void assign(java.lang.reflect.Field r4, java.lang.Object r5, java.lang.String r6) {
-        /*
-            r0 = 1
-            r4.setAccessible(r0)
-            java.lang.Class r0 = r4.getType()
-            java.lang.String r0 = r0.getName()
-            java.util.Locale r1 = java.util.Locale.ROOT
-            java.lang.String r0 = r0.toLowerCase(r1)
-            int r2 = r0.hashCode()
-            r3 = 0
-            switch(r2) {
-                case -1325958191: goto L6d;
-                case -891985903: goto L63;
-                case 104431: goto L51;
-                case 3327612: goto L3f;
-                case 64711720: goto L29;
-                case 97526364: goto L1b;
-                default: goto L1a;
-            }
-        L1a:
-            goto L75
-        L1b:
-            java.lang.String r1 = "float"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L24
-            goto L75
-        L24:
-            java.lang.Float r6 = kotlin.text.StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(r6)
-            goto L87
-        L29:
-            java.lang.String r2 = "boolean"
-            boolean r0 = r0.equals(r2)
-            if (r0 != 0) goto L32
-            goto L75
-        L32:
-            java.lang.String r6 = r6.toLowerCase(r1)
-            boolean r6 = java.lang.Boolean.parseBoolean(r6)
-            java.lang.Boolean r6 = java.lang.Boolean.valueOf(r6)
-            goto L87
-        L3f:
-            java.lang.String r1 = "long"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L48
-            goto L75
-        L48:
-            long r0 = java.lang.Long.parseLong(r6)
-            java.lang.Long r6 = java.lang.Long.valueOf(r0)
-            goto L87
-        L51:
-            java.lang.String r1 = "int"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L5a
-            goto L75
-        L5a:
-            int r6 = java.lang.Integer.parseInt(r6)
-            java.lang.Integer r6 = java.lang.Integer.valueOf(r6)
-            goto L87
-        L63:
-            java.lang.String r1 = "string"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L87
-            goto L75
-        L6d:
-            java.lang.String r1 = "double"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L77
-        L75:
-            r6 = r3
-            goto L87
-        L77:
-            kotlin.text.Regex r0 = kotlin.text.ScreenFloatValueRegEx.value     // Catch: java.lang.NumberFormatException -> L75
-            boolean r0 = r0.matches(r6)     // Catch: java.lang.NumberFormatException -> L75
-            if (r0 == 0) goto L75
-            double r0 = java.lang.Double.parseDouble(r6)     // Catch: java.lang.NumberFormatException -> L75
-            java.lang.Double r6 = java.lang.Double.valueOf(r0)     // Catch: java.lang.NumberFormatException -> L75
-        L87:
-            r4.set(r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.util.NavBarReflectUtil.assign(java.lang.reflect.Field, java.lang.Object, java.lang.String):void");
+    public static void assign(Field field, Object obj, String str) throws IllegalAccessException, IllegalArgumentException {
+        Object objValueOf;
+        field.setAccessible(true);
+        String name = field.getType().getName();
+        Locale locale = Locale.ROOT;
+        String lowerCase = name.toLowerCase(locale);
+        switch (lowerCase.hashCode()) {
+            case -1325958191:
+                if (!lowerCase.equals("double")) {
+                    objValueOf = null;
+                    break;
+                } else {
+                    try {
+                        if (ScreenFloatValueRegEx.value.matches(str)) {
+                            objValueOf = Double.valueOf(Double.parseDouble(str));
+                            break;
+                        }
+                    } catch (NumberFormatException unused) {
+                    }
+                }
+            case -891985903:
+                objValueOf = str;
+                if (!lowerCase.equals("string")) {
+                }
+                break;
+            case 104431:
+                if (lowerCase.equals("int")) {
+                    objValueOf = Integer.valueOf(Integer.parseInt(str));
+                    break;
+                }
+                break;
+            case 3327612:
+                if (lowerCase.equals("long")) {
+                    objValueOf = Long.valueOf(Long.parseLong(str));
+                    break;
+                }
+                break;
+            case 64711720:
+                if (lowerCase.equals("boolean")) {
+                    objValueOf = Boolean.valueOf(Boolean.parseBoolean(str.toLowerCase(locale)));
+                    break;
+                }
+                break;
+            case 97526364:
+                if (lowerCase.equals("float")) {
+                    objValueOf = StringsKt__StringNumberConversionsJVMKt.toFloatOrNull(str);
+                    break;
+                }
+                break;
+        }
+        field.set(obj, objValueOf);
     }
 
     public static final EventTypeFactory.EventType createFakeHandleEvent(String str, String str2) {
@@ -129,12 +99,12 @@ public final class NavBarReflectUtil {
             NavBarStoreAction.Action action = new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
             Iterator it = StringsKt__StringsKt.split$default(str2, new String[]{","}, 0, 6).iterator();
             while (it.hasNext()) {
-                List split$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"="}, 0, 6);
-                if (split$default.size() == 2) {
-                    Field declaredField = NavBarStoreAction.Action.class.getDeclaredField((String) split$default.get(0));
+                List listSplit$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"="}, 0, 6);
+                if (listSplit$default.size() == 2) {
+                    Field declaredField = NavBarStoreAction.Action.class.getDeclaredField((String) listSplit$default.get(0));
                     declaredField.setAccessible(true);
                     NavBarReflectUtil navBarReflectUtil = INSTANCE;
-                    String str3 = (String) split$default.get(1);
+                    String str3 = (String) listSplit$default.get(1);
                     navBarReflectUtil.getClass();
                     assign(declaredField, action, str3);
                 }
@@ -153,11 +123,11 @@ public final class NavBarReflectUtil {
         NavBarStates navBarStates = ((NavBarStateManagerImpl) ((NavBarStoreImpl) navBarStore).getNavStateManager(i)).states;
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            List split$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"="}, 0, 6);
-            if (split$default.size() == 2) {
-                Field declaredField = NavBarStates.class.getDeclaredField((String) split$default.get(0));
+            List listSplit$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"="}, 0, 6);
+            if (listSplit$default.size() == 2) {
+                Field declaredField = NavBarStates.class.getDeclaredField((String) listSplit$default.get(0));
                 declaredField.setAccessible(true);
-                String str = (String) split$default.get(1);
+                String str = (String) listSplit$default.get(1);
                 INSTANCE.getClass();
                 assign(declaredField, navBarStates, str);
             }

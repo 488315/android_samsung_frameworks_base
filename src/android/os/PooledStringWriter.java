@@ -32,9 +32,9 @@ public class PooledStringWriter {
     }
 
     public void finish() {
-        int dataPosition = this.mOut.dataPosition();
+        int iDataPosition = this.mOut.dataPosition();
         this.mOut.setDataPosition(this.mStart);
         this.mOut.writeInt(this.mNext);
-        this.mOut.setDataPosition(dataPosition);
+        this.mOut.setDataPosition(iDataPosition);
     }
 }

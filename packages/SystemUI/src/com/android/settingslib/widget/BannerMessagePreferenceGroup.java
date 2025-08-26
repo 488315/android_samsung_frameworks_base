@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BannerMessagePreferenceGroup extends PreferenceGroup {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,7 +27,6 @@ public final class BannerMessagePreferenceGroup extends PreferenceGroup {
     public final String expandTitle;
     public boolean isExpanded;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,7 +77,7 @@ public final class BannerMessagePreferenceGroup extends PreferenceGroup {
                 numberButtonPreference.clickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.BannerMessagePreferenceGroup$onBindViewHolder$1$1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        BannerMessagePreferenceGroup bannerMessagePreferenceGroup = BannerMessagePreferenceGroup.this;
+                        BannerMessagePreferenceGroup bannerMessagePreferenceGroup = this.this$0;
                         int i = BannerMessagePreferenceGroup.$r8$clinit;
                         bannerMessagePreferenceGroup.isExpanded = !bannerMessagePreferenceGroup.isExpanded;
                         bannerMessagePreferenceGroup.updateExpandCollapsePreference();
@@ -149,12 +147,12 @@ public final class BannerMessagePreferenceGroup extends PreferenceGroup {
         this.childPreferences = new ArrayList();
         this.mPersistent = false;
         this.mLayoutResId = R.layout.settingslib_banner_message_preference_group;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BannerMessagePreferenceGroup, i, 0);
-        this.expandKey = obtainStyledAttributes.getString(3);
-        this.expandTitle = obtainStyledAttributes.getString(4);
-        this.collapseKey = obtainStyledAttributes.getString(1);
-        this.collapseTitle = obtainStyledAttributes.getString(2);
-        this.collapseIcon = obtainStyledAttributes.getDrawable(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.BannerMessagePreferenceGroup, i, 0);
+        this.expandKey = typedArrayObtainStyledAttributes.getString(3);
+        this.expandTitle = typedArrayObtainStyledAttributes.getString(4);
+        this.collapseKey = typedArrayObtainStyledAttributes.getString(1);
+        this.collapseTitle = typedArrayObtainStyledAttributes.getString(2);
+        this.collapseIcon = typedArrayObtainStyledAttributes.getDrawable(0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

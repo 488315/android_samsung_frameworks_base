@@ -52,9 +52,9 @@ public interface ISurfaceControlViewHostParent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISurfaceControlViewHostParent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfaceControlViewHostParent)) {
-                return (ISurfaceControlViewHostParent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISurfaceControlViewHostParent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISurfaceControlViewHostParent)) {
+                return (ISurfaceControlViewHostParent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,25 +115,25 @@ public interface ISurfaceControlViewHostParent extends IInterface {
 
             @Override // android.view.ISurfaceControlViewHostParent
             public void updateParams(WindowManager.LayoutParams[] layoutParamsArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHostParent.DESCRIPTOR);
-                    obtain.writeTypedArray(layoutParamsArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHostParent.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(layoutParamsArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.ISurfaceControlViewHostParent
             public void forwardBackKeyToParent(KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISurfaceControlViewHostParent.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISurfaceControlViewHostParent.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

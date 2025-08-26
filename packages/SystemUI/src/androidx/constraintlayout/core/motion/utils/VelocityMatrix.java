@@ -1,6 +1,5 @@
 package androidx.constraintlayout.core.motion.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class VelocityMatrix {
     public float mDRotate;
@@ -22,9 +21,9 @@ public class VelocityMatrix {
         float radians2 = (float) Math.toRadians(this.mDRotate);
         double d = radians;
         double d2 = i2 * f5;
-        float sin = (((float) ((Math.sin(d) * ((-i) * r6)) - (Math.cos(d) * d2))) * radians2) + f8;
-        float cos = (radians2 * ((float) ((Math.cos(d) * (i * r6)) - (Math.sin(d) * d2)))) + f9;
-        fArr[0] = sin;
-        fArr[1] = cos;
+        float fSin = (((float) ((Math.sin(d) * ((-i) * r6)) - (Math.cos(d) * d2))) * radians2) + f8;
+        float fCos = (radians2 * ((float) ((Math.cos(d) * (i * r6)) - (Math.sin(d) * d2)))) + f9;
+        fArr[0] = fSin;
+        fArr[1] = fCos;
     }
 }

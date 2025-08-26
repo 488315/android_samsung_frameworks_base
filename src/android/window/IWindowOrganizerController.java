@@ -141,9 +141,9 @@ public interface IWindowOrganizerController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWindowOrganizerController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWindowOrganizerController)) {
-                return (IWindowOrganizerController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWindowOrganizerController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWindowOrganizerController)) {
+                return (IWindowOrganizerController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -204,40 +204,40 @@ public interface IWindowOrganizerController extends IInterface {
                     return true;
                 case 2:
                     WindowContainerTransaction windowContainerTransaction2 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
-                    IWindowContainerTransactionCallback asInterface = IWindowContainerTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWindowContainerTransactionCallback iWindowContainerTransactionCallbackAsInterface = IWindowContainerTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int applySyncTransaction = applySyncTransaction(windowContainerTransaction2, asInterface);
+                    int iApplySyncTransaction = applySyncTransaction(windowContainerTransaction2, iWindowContainerTransactionCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(applySyncTransaction);
+                    parcel2.writeInt(iApplySyncTransaction);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     WindowContainerTransaction windowContainerTransaction3 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IBinder startNewTransition = startNewTransition(readInt, windowContainerTransaction3);
+                    IBinder iBinderStartNewTransition = startNewTransition(i3, windowContainerTransaction3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongBinder(startNewTransition);
+                    parcel2.writeStrongBinder(iBinderStartNewTransition);
                     return true;
                 case 4:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     WindowContainerTransaction windowContainerTransaction4 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startTransition(readStrongBinder, windowContainerTransaction4);
+                    startTransition(strongBinder, windowContainerTransaction4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     WindowContainerTransaction windowContainerTransaction5 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
                     parcel.enforceNoDataAvail();
-                    finishTransition(readStrongBinder2, windowContainerTransaction5);
+                    finishTransition(strongBinder2, windowContainerTransaction5);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     WindowContainerTransaction windowContainerTransaction6 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
                     WindowContainerTransaction windowContainerTransaction7 = (WindowContainerTransaction) parcel.readTypedObject(WindowContainerTransaction.CREATOR);
                     parcel.enforceNoDataAvail();
-                    finishAllTransitions(readStrongBinder3, windowContainerTransaction6, windowContainerTransaction7);
+                    finishAllTransitions(strongBinder3, windowContainerTransaction6, windowContainerTransaction7);
                     parcel2.writeNoException();
                     return true;
                 case 7:
@@ -256,15 +256,15 @@ public interface IWindowOrganizerController extends IInterface {
                     parcel2.writeStrongInterface(taskFragmentOrganizerController);
                     return true;
                 case 10:
-                    ITransitionPlayer asInterface2 = ITransitionPlayer.Stub.asInterface(parcel.readStrongBinder());
+                    ITransitionPlayer iTransitionPlayerAsInterface = ITransitionPlayer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerTransitionPlayer(asInterface2);
+                    registerTransitionPlayer(iTransitionPlayerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    ITransitionPlayer asInterface3 = ITransitionPlayer.Stub.asInterface(parcel.readStrongBinder());
+                    ITransitionPlayer iTransitionPlayerAsInterface2 = ITransitionPlayer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterTransitionPlayer(asInterface3);
+                    unregisterTransitionPlayer(iTransitionPlayerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
@@ -300,204 +300,204 @@ public interface IWindowOrganizerController extends IInterface {
 
             @Override // android.window.IWindowOrganizerController
             public void applyTransaction(WindowContainerTransaction windowContainerTransaction) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public int applySyncTransaction(WindowContainerTransaction windowContainerTransaction, IWindowContainerTransactionCallback iWindowContainerTransactionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    obtain.writeStrongInterface(iWindowContainerTransactionCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    parcelObtain.writeStrongInterface(iWindowContainerTransactionCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public IBinder startNewTransition(int i, WindowContainerTransaction windowContainerTransaction) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public void startTransition(IBinder iBinder, WindowContainerTransaction windowContainerTransaction) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public void finishTransition(IBinder iBinder, WindowContainerTransaction windowContainerTransaction) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public void finishAllTransitions(IBinder iBinder, WindowContainerTransaction windowContainerTransaction, WindowContainerTransaction windowContainerTransaction2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(windowContainerTransaction, 0);
-                    obtain.writeTypedObject(windowContainerTransaction2, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(windowContainerTransaction, 0);
+                    parcelObtain.writeTypedObject(windowContainerTransaction2, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public ITaskOrganizerController getTaskOrganizerController() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITaskOrganizerController.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITaskOrganizerController.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public IDisplayAreaOrganizerController getDisplayAreaOrganizerController() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IDisplayAreaOrganizerController.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IDisplayAreaOrganizerController.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public ITaskFragmentOrganizerController getTaskFragmentOrganizerController() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITaskFragmentOrganizerController.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITaskFragmentOrganizerController.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public void registerTransitionPlayer(ITransitionPlayer iTransitionPlayer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransitionPlayer);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransitionPlayer);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public void unregisterTransitionPlayer(ITransitionPlayer iTransitionPlayer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTransitionPlayer);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTransitionPlayer);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public ITransitionMetricsReporter getTransitionMetricsReporter() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITransitionMetricsReporter.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITransitionMetricsReporter.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IWindowOrganizerController
             public IBinder getApplyToken() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(IWindowOrganizerController.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

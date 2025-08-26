@@ -167,29 +167,29 @@ public final class DemuxMmtpFilterSettingsFilterSettings implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, Boolean.valueOf(parcel.readBoolean()));
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, (DemuxFilterSectionSettings) parcel.readTypedObject(DemuxFilterSectionSettings.CREATOR));
+        if (i == 1) {
+            _set(i, (DemuxFilterSectionSettings) parcel.readTypedObject(DemuxFilterSectionSettings.CREATOR));
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, (DemuxFilterAvSettings) parcel.readTypedObject(DemuxFilterAvSettings.CREATOR));
+        if (i == 2) {
+            _set(i, (DemuxFilterAvSettings) parcel.readTypedObject(DemuxFilterAvSettings.CREATOR));
             return;
         }
-        if (readInt == 3) {
-            _set(readInt, (DemuxFilterPesDataSettings) parcel.readTypedObject(DemuxFilterPesDataSettings.CREATOR));
+        if (i == 3) {
+            _set(i, (DemuxFilterPesDataSettings) parcel.readTypedObject(DemuxFilterPesDataSettings.CREATOR));
             return;
         }
-        if (readInt == 4) {
-            _set(readInt, (DemuxFilterRecordSettings) parcel.readTypedObject(DemuxFilterRecordSettings.CREATOR));
-        } else if (readInt == 5) {
-            _set(readInt, (DemuxFilterDownloadSettings) parcel.readTypedObject(DemuxFilterDownloadSettings.CREATOR));
+        if (i == 4) {
+            _set(i, (DemuxFilterRecordSettings) parcel.readTypedObject(DemuxFilterRecordSettings.CREATOR));
+        } else if (i == 5) {
+            _set(i, (DemuxFilterDownloadSettings) parcel.readTypedObject(DemuxFilterDownloadSettings.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

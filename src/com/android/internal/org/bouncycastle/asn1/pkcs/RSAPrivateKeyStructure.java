@@ -53,11 +53,11 @@ public class RSAPrivateKeyStructure extends ASN1Object {
     public RSAPrivateKeyStructure(ASN1Sequence aSN1Sequence) {
         this.otherPrimeInfos = null;
         Enumeration objects = aSN1Sequence.getObjects();
-        int intValueExact = ((ASN1Integer) objects.nextElement()).intValueExact();
-        if (intValueExact < 0 || intValueExact > 1) {
+        int iIntValueExact = ((ASN1Integer) objects.nextElement()).intValueExact();
+        if (iIntValueExact < 0 || iIntValueExact > 1) {
             throw new IllegalArgumentException("wrong version for RSA private key");
         }
-        this.version = intValueExact;
+        this.version = iIntValueExact;
         this.modulus = ((ASN1Integer) objects.nextElement()).getValue();
         this.publicExponent = ((ASN1Integer) objects.nextElement()).getValue();
         this.privateExponent = ((ASN1Integer) objects.nextElement()).getValue();

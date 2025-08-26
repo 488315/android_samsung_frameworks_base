@@ -16,7 +16,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TextFieldSelectionManager$copy$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $cancelSelection;
@@ -47,7 +46,7 @@ final class TextFieldSelectionManager$copy$1 extends SuspendLambda implements Fu
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            if (TextRange.m747getCollapsedimpl(this.this$0.getValue$foundation_release().selection)) {
+            if (TextRange.m749getCollapsedimpl(this.this$0.getValue$foundation_release().selection)) {
                 return Unit.INSTANCE;
             }
             TextFieldSelectionManager textFieldSelectionManager = this.this$0;
@@ -68,8 +67,8 @@ final class TextFieldSelectionManager$copy$1 extends SuspendLambda implements Fu
         if (!this.$cancelSelection) {
             return Unit.INSTANCE;
         }
-        int m749getMaximpl = TextRange.m749getMaximpl(this.this$0.getValue$foundation_release().selection);
-        this.this$0.onValueChange.mo779invoke(TextFieldSelectionManager.m237createTextFieldValueFDrldGo(this.this$0.getValue$foundation_release().annotatedString, TextRangeKt.TextRange(m749getMaximpl, m749getMaximpl)));
+        int iM751getMaximpl = TextRange.m751getMaximpl(this.this$0.getValue$foundation_release().selection);
+        this.this$0.onValueChange.mo781invoke(TextFieldSelectionManager.m238createTextFieldValueFDrldGo(this.this$0.getValue$foundation_release().annotatedString, TextRangeKt.TextRange(iM751getMaximpl, iM751getMaximpl)));
         this.this$0.setHandleState(HandleState.None);
         return Unit.INSTANCE;
     }

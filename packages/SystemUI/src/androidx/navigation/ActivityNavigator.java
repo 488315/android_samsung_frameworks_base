@@ -10,13 +10,11 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.sequences.SequencesKt__SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Navigator.Name("activity")
 /* loaded from: classes.dex */
 public class ActivityNavigator extends Navigator {
     public final Activity hostActivity;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,7 +24,6 @@ public class ActivityNavigator extends Navigator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Destination extends NavDestination {
         public Destination(Navigator navigator) {
             super(navigator);
@@ -63,12 +60,12 @@ public class ActivityNavigator extends Navigator {
     }
 
     public ActivityNavigator(Context context) {
-        Object obj;
+        Object next;
         Iterator it = SequencesKt__SequencesKt.generateSequence(context, new Function1() { // from class: androidx.navigation.ActivityNavigator$hostActivity$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                Context context2 = (Context) obj2;
+            public final Object mo781invoke(Object obj) {
+                Context context2 = (Context) obj;
                 if (context2 instanceof ContextWrapper) {
                     return ((ContextWrapper) context2).getBaseContext();
                 }
@@ -77,16 +74,16 @@ public class ActivityNavigator extends Navigator {
         }).iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (((Context) obj) instanceof Activity) {
+                next = it.next();
+                if (((Context) next) instanceof Activity) {
                     break;
                 }
             }
         }
-        this.hostActivity = (Activity) obj;
+        this.hostActivity = (Activity) next;
     }
 
     @Override // androidx.navigation.Navigator

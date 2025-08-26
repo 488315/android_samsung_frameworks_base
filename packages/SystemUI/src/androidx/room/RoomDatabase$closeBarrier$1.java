@@ -6,7 +6,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class RoomDatabase$closeBarrier$1 extends FunctionReferenceImpl implements Function0 {
     public RoomDatabase$closeBarrier$1(Object obj) {
@@ -14,7 +13,7 @@ final /* synthetic */ class RoomDatabase$closeBarrier$1 extends FunctionReferenc
     }
 
     @Override // kotlin.jvm.functions.Function0
-    public final Object invoke() {
+    public final Object invoke() throws Exception {
         RoomDatabase roomDatabase = (RoomDatabase) this.receiver;
         ContextScope contextScope = roomDatabase.coroutineScope;
         if (contextScope == null) {

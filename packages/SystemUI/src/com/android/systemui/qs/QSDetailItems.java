@@ -24,7 +24,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.RecoilEffectUtil;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSDetailItems extends FrameLayout {
     public static final boolean DEBUG = Log.isLoggable("QSDetailItems", 3);
@@ -41,7 +40,6 @@ public class QSDetailItems extends FrameLayout {
     public final int mQsDetailIconOverlaySize;
     public String mTag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Adapter extends BaseAdapter {
         public /* synthetic */ Adapter(QSDetailItems qSDetailItems, int i) {
             this();
@@ -67,7 +65,7 @@ public class QSDetailItems extends FrameLayout {
         }
 
         @Override // android.widget.Adapter
-        public final View getView(int i, View view, ViewGroup viewGroup) {
+        public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             QSDetailItems qSDetailItems = QSDetailItems.this;
             final Item item = qSDetailItems.mItems[i];
             if (view == null) {
@@ -129,10 +127,10 @@ public class QSDetailItems extends FrameLayout {
                 textView3.setAlpha(1.0f);
             }
             TextView textView4 = (TextView) view.findViewById(android.R.id.summary);
-            boolean isEmpty = TextUtils.isEmpty(item.line2);
-            textView3.setMaxLines(!isEmpty ? 1 : 2);
-            textView4.setVisibility(!isEmpty ? 0 : 8);
-            textView4.setText(!isEmpty ? item.line2 : null);
+            boolean zIsEmpty = TextUtils.isEmpty(item.line2);
+            textView3.setMaxLines(!zIsEmpty ? 1 : 2);
+            textView4.setVisibility(!zIsEmpty ? 0 : 8);
+            textView4.setText(!zIsEmpty ? item.line2 : null);
             textView4.setTextColor(QSDetailItems.this.mContext.getResources().getColor(item.isActive ? R.color.qs_detail_item_summary_active_text_color : R.color.qs_detail_item_summary_text_color));
             if (!item.isClickable) {
                 view.setBackground(null);
@@ -168,12 +166,10 @@ public class QSDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onDetailItemClick(Item item);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -181,42 +177,41 @@ public class QSDetailItems extends FrameLayout {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            int i;
-            int i2 = message.what;
+            int length;
+            int i = message.what;
             QSDetailItems qSDetailItems = QSDetailItems.this;
-            if (i2 == 1) {
+            if (i == 1) {
                 Item[] itemArr = (Item[]) message.obj;
                 if (itemArr != null) {
                     boolean z = QSDetailItems.DEBUG;
                     qSDetailItems.getClass();
-                    i = itemArr.length;
+                    length = itemArr.length;
                 } else {
-                    i = 0;
+                    length = 0;
                 }
-                qSDetailItems.mEmpty.setVisibility(i == 0 ? 0 : 8);
-                qSDetailItems.mItemList.setVisibility(i == 0 ? 8 : 0);
+                qSDetailItems.mEmpty.setVisibility(length == 0 ? 0 : 8);
+                qSDetailItems.mItemList.setVisibility(length == 0 ? 8 : 0);
                 qSDetailItems.mItems = itemArr;
                 qSDetailItems.mAdapter.notifyDataSetChanged();
                 return;
             }
-            if (i2 == 2) {
+            if (i == 2) {
                 qSDetailItems.mCallback = (Callback) message.obj;
                 return;
             }
-            if (i2 == 3) {
+            if (i == 3) {
                 boolean z2 = message.arg1 != 0;
                 if (qSDetailItems.mItemsVisible == z2) {
                     return;
                 }
                 qSDetailItems.mItemsVisible = z2;
-                for (int i3 = 0; i3 < qSDetailItems.mItemList.getChildCount(); i3++) {
-                    qSDetailItems.mItemList.getChildAt(i3).setVisibility(qSDetailItems.mItemsVisible ? 0 : 4);
+                for (int i2 = 0; i2 < qSDetailItems.mItemList.getChildCount(); i2++) {
+                    qSDetailItems.mItemList.getChildAt(i2).setVisibility(qSDetailItems.mItemsVisible ? 0 : 4);
                 }
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Item {
         public int iconResId;
         public boolean isActive;
@@ -284,9 +279,9 @@ public class QSDetailItems extends FrameLayout {
         this.mItemList = autoSizingList;
         autoSizingList.setVisibility(8);
         this.mItemList.setAdapter(this.mAdapter);
-        View findViewById = findViewById(android.R.id.empty);
-        this.mEmpty = findViewById;
-        findViewById.setVisibility(8);
+        View viewFindViewById = findViewById(android.R.id.empty);
+        this.mEmpty = viewFindViewById;
+        viewFindViewById.setVisibility(8);
         this.mEmptyText = (TextView) this.mEmpty.findViewById(android.R.id.title);
         this.mEmptyIcon = (ImageView) this.mEmpty.findViewById(android.R.id.icon);
     }
@@ -300,7 +295,7 @@ public class QSDetailItems extends FrameLayout {
         this.mEmptyIcon.post(new Runnable() { // from class: com.android.systemui.qs.QSDetailItems$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                QSDetailItems qSDetailItems = QSDetailItems.this;
+                QSDetailItems qSDetailItems = this.f$0;
                 qSDetailItems.mEmptyText.setText(i);
             }
         });

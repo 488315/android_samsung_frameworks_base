@@ -191,11 +191,11 @@ public abstract class KeyProperties {
 
         public static int allFromKeymaster(Collection<Integer> collection) {
             Iterator<Integer> it = collection.iterator();
-            int i = 0;
+            int iFromKeymaster = 0;
             while (it.hasNext()) {
-                i |= fromKeymaster(it.next().intValue());
+                iFromKeymaster |= fromKeymaster(it.next().intValue());
             }
-            return i;
+            return iFromKeymaster;
         }
     }
 
@@ -265,14 +265,14 @@ public abstract class KeyProperties {
         }
 
         public static int toKeymasterDigest(String str) {
-            String substring;
+            String strSubstring;
             String upperCase = str.toUpperCase(Locale.US);
             if (!upperCase.startsWith("HMAC")) {
                 return -1;
             }
-            substring = upperCase.substring(4);
-            substring.hashCode();
-            switch (substring) {
+            strSubstring = upperCase.substring(4);
+            strSubstring.hashCode();
+            switch (strSubstring) {
                 case "SHA224":
                     return 3;
                 case "SHA256":
@@ -284,7 +284,7 @@ public abstract class KeyProperties {
                 case "SHA1":
                     return 2;
                 default:
-                    throw new IllegalArgumentException("Unsupported HMAC digest: " + substring);
+                    throw new IllegalArgumentException("Unsupported HMAC digest: " + strSubstring);
             }
         }
     }

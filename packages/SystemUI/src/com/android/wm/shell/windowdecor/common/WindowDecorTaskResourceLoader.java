@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.LocaleList;
 import android.os.Trace;
 import android.os.UserHandle;
+import android.util.Slog;
 import com.android.launcher3.icons.BaseIconFactory;
 import com.android.launcher3.icons.IconProvider;
 import com.android.systemui.R;
@@ -29,11 +30,11 @@ import java.util.function.BiConsumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowDecorTaskResourceLoader {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Context context;
+    public final ConcurrentHashMap densityListOnCache;
     public final DisplayController displayController;
     public final Set existingTasks;
     public final BaseIconFactory headerIconFactory;
@@ -45,7 +46,6 @@ public final class WindowDecorTaskResourceLoader {
     public final UserProfileContexts userProfilesContexts;
     public final BaseIconFactory veilIconFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppResources {
         public final Bitmap appIcon;
         public final CharSequence appName;
@@ -78,7 +78,6 @@ public final class WindowDecorTaskResourceLoader {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -115,7 +114,7 @@ public final class WindowDecorTaskResourceLoader {
                     public final void accept(Object obj, Object obj2) {
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
-                        WindowDecorTaskResourceLoader windowDecorTaskResourceLoader2 = WindowDecorTaskResourceLoader.this;
+                        WindowDecorTaskResourceLoader windowDecorTaskResourceLoader2 = windowDecorTaskResourceLoader;
                         int i2 = WindowDecorTaskResourceLoader.$r8$clinit;
                         windowDecorTaskResourceLoader2.getClass();
                         String str2 = str + "  ";
@@ -127,11 +126,20 @@ public final class WindowDecorTaskResourceLoader {
                 windowDecorTaskResourceLoader.shellController.addUserChangeListener(new UserChangeListener() { // from class: com.android.wm.shell.windowdecor.common.WindowDecorTaskResourceLoader$onInit$2
                     @Override // com.android.wm.shell.sysui.UserChangeListener
                     public final void onUserChanged(int i2, Context context2) {
-                        WindowDecorTaskResourceLoader.this.taskToResourceCache.clear();
+                        WindowDecorTaskResourceLoader windowDecorTaskResourceLoader2 = windowDecorTaskResourceLoader;
+                        windowDecorTaskResourceLoader2.taskToResourceCache.clear();
+                        if (CoreRune.MW_CAPTION_BUG_FIX) {
+                            windowDecorTaskResourceLoader2.densityListOnCache.clear();
+                        }
                     }
                 });
             }
         }, this);
+        this.densityListOnCache = new ConcurrentHashMap();
+    }
+
+    public static Bitmap createDisplayContextAppIcon(ActivityManager.RunningTaskInfo runningTaskInfo, Context context, ActivityInfo activityInfo, PackageManager packageManager) {
+        return WindowDecorTaskResourceLoaderKt.createIconFactory(R.dimen.mw_desktop_open_menu_app_icon_size, context).createIconBitmap(packageManager.getUserBadgedIcon(new IconProvider(context).getIcon(activityInfo, context.getResources().getDisplayMetrics().densityDpi), UserHandle.of(runningTaskInfo.userId)), 1.0f, 0);
     }
 
     public final void checkWindowDecorExists(ActivityManager.RunningTaskInfo runningTaskInfo) {
@@ -141,57 +149,79 @@ public final class WindowDecorTaskResourceLoader {
     }
 
     public final Bitmap getHeaderIcon(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        checkWindowDecorExists(runningTaskInfo);
+        boolean z = CoreRune.MW_CAPTION_BUG_FIX;
+        if (!z) {
+            checkWindowDecorExists(runningTaskInfo);
+        } else if (!this.existingTasks.contains(Integer.valueOf(runningTaskInfo.taskId))) {
+            return this.headerIconFactory.createIconBitmap(this.userProfilesContexts.getOrCreate(runningTaskInfo.userId).getPackageManager().getDefaultActivityIcon(), 1.0f, 0);
+        }
         AppResources appResources = (AppResources) this.taskToResourceCache.get(Integer.valueOf(runningTaskInfo.taskId));
         if (appResources != null) {
+            if (z) {
+                int i = runningTaskInfo.getConfiguration().densityDpi;
+                Integer num = (Integer) this.densityListOnCache.get(Integer.valueOf(runningTaskInfo.taskId));
+                if (num == null || i != num.intValue()) {
+                }
+            }
             return appResources.appIcon;
         }
-        AppResources loadAppResources = loadAppResources(runningTaskInfo);
-        this.taskToResourceCache.put(Integer.valueOf(runningTaskInfo.taskId), loadAppResources);
+        AppResources appResourcesLoadAppResources = loadAppResources(runningTaskInfo);
         this.localeListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), runningTaskInfo.getConfiguration().getLocales());
-        return loadAppResources.appIcon;
+        if (z) {
+            this.densityListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(runningTaskInfo.getConfiguration().densityDpi));
+        }
+        return appResourcesLoadAppResources.appIcon;
     }
 
     public final CharSequence getName(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        checkWindowDecorExists(runningTaskInfo);
+        boolean z = CoreRune.MW_CAPTION_BUG_FIX;
+        if (!z) {
+            checkWindowDecorExists(runningTaskInfo);
+        } else if (!this.existingTasks.contains(Integer.valueOf(runningTaskInfo.taskId))) {
+            return "";
+        }
         AppResources appResources = (AppResources) this.taskToResourceCache.get(Integer.valueOf(runningTaskInfo.taskId));
         LocaleList localeList = (LocaleList) this.localeListOnCache.get(Integer.valueOf(runningTaskInfo.taskId));
         if (appResources != null && runningTaskInfo.getConfiguration().getLocales().equals(localeList)) {
             return appResources.appName;
         }
-        AppResources loadAppResources = loadAppResources(runningTaskInfo);
-        this.taskToResourceCache.put(Integer.valueOf(runningTaskInfo.taskId), loadAppResources);
+        AppResources appResourcesLoadAppResources = loadAppResources(runningTaskInfo);
         this.localeListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), runningTaskInfo.getConfiguration().getLocales());
-        return loadAppResources.appName;
+        if (z) {
+            this.densityListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(runningTaskInfo.getConfiguration().densityDpi));
+        }
+        return appResourcesLoadAppResources.appName;
     }
 
     public final AppResources loadAppResources(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        Context displayContext;
+        Bitmap bitmapCreateIconBitmap;
+        BaseIconFactory baseIconFactory = this.veilIconFactory;
+        BaseIconFactory baseIconFactory2 = this.headerIconFactory;
+        UserProfileContexts userProfileContexts = this.userProfilesContexts;
         Trace.beginSection("AppResourceProvider#loadAppResources");
         try {
-            UserProfileContexts userProfileContexts = this.userProfilesContexts;
-            int i = runningTaskInfo.userId;
-            Context context = (Context) userProfileContexts.currentProfilesContext.get(i);
-            if (context == null) {
-                context = userProfileContexts.baseContext.createContextAsUser(UserHandle.of(i), 0);
-                userProfileContexts.currentProfilesContext.set(i, context);
-            }
-            PackageManager packageManager = context.getPackageManager();
+            PackageManager packageManager = userProfileContexts.getOrCreate(runningTaskInfo.userId).getPackageManager();
             packageManager.getClass();
             ComponentName component = runningTaskInfo.baseIntent.getComponent();
             component.getClass();
             ActivityInfo activityInfo = packageManager.getActivityInfo(component, 0);
             CharSequence applicationLabel = packageManager.getApplicationLabel(activityInfo.applicationInfo);
-            Drawable icon = this.iconProvider.getIcon(activityInfo);
-            Bitmap createIconBitmap = this.headerIconFactory.createIconBitmap(packageManager.getUserBadgedIcon(icon, UserHandle.of(runningTaskInfo.userId)), 1.0f, 0);
-            if (CoreRune.MW_CAPTION_DESKTOP) {
-                int displayId = this.context.getDisplayId();
-                int i2 = runningTaskInfo.displayId;
-                if (displayId != i2 && (displayContext = this.displayController.getDisplayContext(i2)) != null) {
-                    createIconBitmap = WindowDecorTaskResourceLoaderKt.createIconFactory(R.dimen.mw_desktop_open_menu_app_icon_size, displayContext).createIconBitmap(packageManager.getUserBadgedIcon(new IconProvider(displayContext).getIcon(activityInfo, displayContext.getResources().getDisplayMetrics().densityDpi), UserHandle.of(runningTaskInfo.userId)), 1.0f, 0);
-                }
+            Drawable drawableSemGetDrawableForIconTray = packageManager.semGetDrawableForIconTray(this.iconProvider.getIcon(activityInfo), 1);
+            Drawable userBadgedIcon = packageManager.getUserBadgedIcon(drawableSemGetDrawableForIconTray, UserHandle.of(runningTaskInfo.userId));
+            Context displayContext = this.displayController.getDisplayContext(runningTaskInfo.displayId);
+            if (!CoreRune.MW_CAPTION_DESKTOP || displayContext == null || this.context.getDisplayId() == runningTaskInfo.displayId) {
+                bitmapCreateIconBitmap = baseIconFactory2.createIconBitmap(userBadgedIcon, 1.0f, 0);
+                bitmapCreateIconBitmap.getClass();
+            } else {
+                bitmapCreateIconBitmap = createDisplayContextAppIcon(runningTaskInfo, displayContext, activityInfo, packageManager);
             }
-            return new AppResources(applicationLabel, createIconBitmap, this.veilIconFactory.createScaledBitmap(icon, 0));
+            AppResources appResources = new AppResources(applicationLabel, bitmapCreateIconBitmap, baseIconFactory.createScaledBitmap(drawableSemGetDrawableForIconTray, 0));
+            this.taskToResourceCache.put(Integer.valueOf(runningTaskInfo.taskId), appResources);
+            return appResources;
+        } catch (PackageManager.NameNotFoundException unused) {
+            Slog.e("AppResourceProvider", "Failed to get app resources");
+            Drawable defaultActivityIcon = userProfileContexts.getOrCreate(runningTaskInfo.userId).getPackageManager().getDefaultActivityIcon();
+            return new AppResources("", baseIconFactory2.createIconBitmap(defaultActivityIcon, 1.0f, 0), baseIconFactory.createScaledBitmap(defaultActivityIcon, 0));
         } finally {
             Trace.endSection();
         }

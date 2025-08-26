@@ -6,12 +6,10 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
     private static final long serialVersionUID = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Factory<C, V> implements Supplier, Serializable {
         private static final long serialVersionUID = 0;
         final int expectedSize;

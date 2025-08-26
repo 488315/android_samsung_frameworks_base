@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesSpinnerAdapter extends ArrayAdapter {
     public final Context mContext;
@@ -24,9 +23,9 @@ public class HearingDevicesSpinnerAdapter extends ArrayAdapter {
         View dropDownView = super.getDropDownView(i, view, viewGroup);
         boolean z = i == this.mSelectedPosition;
         dropDownView.setBackgroundResource(z ? R.drawable.hearing_devices_spinner_selected_background : R.drawable.bluetooth_tile_dialog_bg_off);
-        View findViewById = dropDownView.findViewById(R.id.hearing_devices_spinner_check_icon);
-        if (findViewById != null) {
-            findViewById.setVisibility(z ? 0 : 8);
+        View viewFindViewById = dropDownView.findViewById(R.id.hearing_devices_spinner_check_icon);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(z ? 0 : 8);
         }
         TextView textView = (TextView) dropDownView.findViewById(R.id.hearing_devices_spinner_text);
         if (textView != null) {

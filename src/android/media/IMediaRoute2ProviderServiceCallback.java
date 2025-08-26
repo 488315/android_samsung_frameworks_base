@@ -74,9 +74,9 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaRoute2ProviderServiceCallback)) {
-                return (IMediaRoute2ProviderServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaRoute2ProviderServiceCallback)) {
+                return (IMediaRoute2ProviderServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,23 +119,23 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 notifyProviderUpdated(mediaRoute2ProviderInfo);
             } else if (i == 2) {
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 RoutingSessionInfo routingSessionInfo = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifySessionCreated(readLong, routingSessionInfo);
+                notifySessionCreated(j, routingSessionInfo);
             } else if (i == 3) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(RoutingSessionInfo.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(RoutingSessionInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifySessionsUpdated(createTypedArrayList);
+                notifySessionsUpdated(arrayListCreateTypedArrayList);
             } else if (i == 4) {
                 RoutingSessionInfo routingSessionInfo2 = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
                 parcel.enforceNoDataAvail();
                 notifySessionReleased(routingSessionInfo2);
             } else if (i == 5) {
-                long readLong2 = parcel.readLong();
-                int readInt = parcel.readInt();
+                long j2 = parcel.readLong();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                notifyRequestFailed(readLong2, readInt);
+                notifyRequestFailed(j2, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -160,63 +160,63 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
             public void notifyProviderUpdated(MediaRoute2ProviderInfo mediaRoute2ProviderInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(mediaRoute2ProviderInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(mediaRoute2ProviderInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
             public void notifySessionCreated(long j, RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
             public void notifySessionsUpdated(List<RoutingSessionInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
             public void notifySessionReleased(RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
             public void notifyRequestFailed(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

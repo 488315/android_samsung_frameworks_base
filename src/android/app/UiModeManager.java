@@ -221,16 +221,16 @@ public class UiModeManager {
         }
 
         static /* synthetic */ void lambda$notifyForceInvertStateChanged$1(final int i, final ForceInvertStateChangeListener forceInvertStateChangeListener, Executor executor) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.app.UiModeManager$Globals$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        UiModeManager.ForceInvertStateChangeListener.this.onForceInvertStateChanged(i);
+                        forceInvertStateChangeListener.onForceInvertStateChanged(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -271,7 +271,7 @@ public class UiModeManager {
                         executor.execute(new Runnable() { // from class: android.app.UiModeManager$Globals$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                UiModeManager.ContrastChangeListener.this.onContrastChanged(r2);
+                                contrastChangeListener.onContrastChanged(f);
                             }
                         });
                     }
@@ -312,8 +312,8 @@ public class UiModeManager {
                     	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
                     	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
                     	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:468)
+                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:97)
                     */
                 @Override // java.util.function.ToDoubleFunction
                 public final double applyAsDouble(java.lang.Object r1) {
@@ -371,14 +371,14 @@ public class UiModeManager {
         };
         this.mNightModeQuery = queryHandler2;
         this.mNightModeCache = new IpcDataCache<>(1, "system_server", NIGHT_MODE_API, "NightModeCache", queryHandler2);
-        IUiModeManager asInterface = IUiModeManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.UI_MODE_SERVICE));
+        IUiModeManager iUiModeManagerAsInterface = IUiModeManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.UI_MODE_SERVICE));
         this.mContext = context;
-        if (asInterface == null) {
+        if (iUiModeManagerAsInterface == null) {
             return;
         }
         synchronized (obj) {
             if (sGlobals == null) {
-                sGlobals = new Globals(asInterface);
+                sGlobals = new Globals(iUiModeManagerAsInterface);
             }
         }
     }

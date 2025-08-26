@@ -20,13 +20,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MapTypeAdapterFactory implements TypeAdapterFactory {
     final boolean complexMapKeySerialization;
     private final ConstructorConstructor constructorConstructor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Adapter<K, V> extends TypeAdapter<Map<K, V>> {
         private final ObjectConstructor<? extends Map<K, V>> constructor;
         private final TypeAdapter<K> keyTypeAdapter;
@@ -61,35 +59,35 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
         @Override // com.google.gson.TypeAdapter
         /* renamed from: read */
         public Map<K, V> read2(JsonReader jsonReader) throws IOException {
-            JsonToken peek = jsonReader.peek();
-            if (peek == JsonToken.NULL) {
+            JsonToken jsonTokenPeek = jsonReader.peek();
+            if (jsonTokenPeek == JsonToken.NULL) {
                 jsonReader.nextNull();
                 return null;
             }
-            Map<K, V> construct = this.constructor.construct();
-            if (peek != JsonToken.BEGIN_ARRAY) {
+            Map<K, V> mapConstruct = this.constructor.construct();
+            if (jsonTokenPeek != JsonToken.BEGIN_ARRAY) {
                 jsonReader.beginObject();
                 while (jsonReader.hasNext()) {
                     JsonReaderInternalAccess.INSTANCE.promoteNameToValue(jsonReader);
-                    K read2 = this.keyTypeAdapter.read2(jsonReader);
-                    if (construct.put(read2, this.valueTypeAdapter.read2(jsonReader)) != null) {
-                        throw new JsonSyntaxException("duplicate key: " + read2);
+                    K k = this.keyTypeAdapter.read2(jsonReader);
+                    if (mapConstruct.put(k, this.valueTypeAdapter.read2(jsonReader)) != null) {
+                        throw new JsonSyntaxException("duplicate key: " + k);
                     }
                 }
                 jsonReader.endObject();
-                return construct;
+                return mapConstruct;
             }
             jsonReader.beginArray();
             while (jsonReader.hasNext()) {
                 jsonReader.beginArray();
-                K read22 = this.keyTypeAdapter.read2(jsonReader);
-                if (construct.put(read22, this.valueTypeAdapter.read2(jsonReader)) != null) {
-                    throw new JsonSyntaxException("duplicate key: " + read22);
+                K k2 = this.keyTypeAdapter.read2(jsonReader);
+                if (mapConstruct.put(k2, this.valueTypeAdapter.read2(jsonReader)) != null) {
+                    throw new JsonSyntaxException("duplicate key: " + k2);
                 }
                 jsonReader.endArray();
             }
             jsonReader.endArray();
-            return construct;
+            return mapConstruct;
         }
 
         @Override // com.google.gson.TypeAdapter
@@ -151,7 +149,7 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
     }
 
     @Override // com.google.gson.TypeAdapterFactory
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) throws NoSuchMethodException, SecurityException {
         Type type = typeToken.getType();
         if (!Map.class.isAssignableFrom(typeToken.getRawType())) {
             return null;

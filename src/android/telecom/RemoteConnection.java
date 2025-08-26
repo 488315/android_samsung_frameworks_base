@@ -9,7 +9,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.telecom.Connection;
 import android.telecom.Logging.Session;
-import android.telecom.RemoteConnection;
 import android.telecom.VideoProfile;
 import android.view.Surface;
 import com.android.internal.telecom.IConnectionService;
@@ -955,7 +954,7 @@ public final class RemoteConnection {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConnection$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteConnection.Callback.this.onRttInitiationSuccess(this);
+                    callback.onRttInitiationSuccess(this);
                 }
             });
         }
@@ -967,7 +966,7 @@ public final class RemoteConnection {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConnection$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteConnection.Callback.this.onRttInitiationFailure(this, i);
+                    callback.onRttInitiationFailure(this, i);
                 }
             });
         }
@@ -979,7 +978,7 @@ public final class RemoteConnection {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConnection$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteConnection.Callback.this.onRttSessionRemotelyTerminated(this);
+                    callback.onRttSessionRemotelyTerminated(this);
                 }
             });
         }
@@ -991,7 +990,7 @@ public final class RemoteConnection {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConnection$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RemoteConnection.Callback.this.onRemoteRttRequest(this);
+                    callback.onRemoteRttRequest(this);
                 }
             });
         }

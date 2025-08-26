@@ -135,12 +135,12 @@ public class ColorExpression extends Operation implements VariableSupport, Seria
         this.mMode = i5;
         this.mAlpha = (i2 >> 16) & 255;
         if (i5 == 4) {
-            float intBitsToFloat = Float.intBitsToFloat(i3);
-            this.mHue = intBitsToFloat;
-            this.mOutHue = intBitsToFloat;
-            float intBitsToFloat2 = Float.intBitsToFloat(i4);
-            this.mSat = intBitsToFloat2;
-            this.mOutSat = intBitsToFloat2;
+            float fIntBitsToFloat = Float.intBitsToFloat(i3);
+            this.mHue = fIntBitsToFloat;
+            this.mOutHue = fIntBitsToFloat;
+            float fIntBitsToFloat2 = Float.intBitsToFloat(i4);
+            this.mSat = fIntBitsToFloat2;
+            this.mOutSat = fIntBitsToFloat2;
             this.mValue = f;
             this.mOutValue = f;
         }
@@ -309,14 +309,14 @@ public class ColorExpression extends Operation implements VariableSupport, Seria
         }
         this.mOutValue = this.mValue;
         this.mColor1 = Float.floatToRawIntBits(this.mHue);
-        int floatToRawIntBits = Float.floatToRawIntBits(this.mSat);
-        this.mColor2 = floatToRawIntBits;
-        apply(wireBuffer, this.mId, this.mMode | (this.mAlpha << 16), this.mColor1, floatToRawIntBits, this.mTween);
+        int iFloatToRawIntBits = Float.floatToRawIntBits(this.mSat);
+        this.mColor2 = iFloatToRawIntBits;
+        apply(wireBuffer, this.mId, this.mMode | (this.mAlpha << 16), this.mColor1, iFloatToRawIntBits, this.mTween);
     }
 
     public String toString() {
-        String colorInt;
-        String colorInt2;
+        String strColorInt;
+        String strColorInt2;
         if (this.mMode == 4) {
             return "ColorExpression[" + this.mId + "] = hsv (" + Utils.floatToString(this.mHue) + ", " + Utils.floatToString(this.mSat) + ", " + Utils.floatToString(this.mValue) + NavigationBarInflaterView.KEY_CODE_END;
         }
@@ -326,16 +326,16 @@ public class ColorExpression extends Operation implements VariableSupport, Seria
             return "ColorExpression[" + this.mId + "] = rgb (" + Utils.floatToString(this.mArgbAlpha) + ", " + Utils.floatToString(this.mArgbRed) + ", " + Utils.floatToString(this.mArgbGreen) + ", " + Utils.floatToString(this.mArgbRed) + NavigationBarInflaterView.KEY_CODE_END;
         }
         if ((i & 1) == 1) {
-            colorInt = NavigationBarInflaterView.SIZE_MOD_START + this.mColor1 + NavigationBarInflaterView.SIZE_MOD_END;
+            strColorInt = NavigationBarInflaterView.SIZE_MOD_START + this.mColor1 + NavigationBarInflaterView.SIZE_MOD_END;
         } else {
-            colorInt = Utils.colorInt(this.mColor1);
+            strColorInt = Utils.colorInt(this.mColor1);
         }
         if ((this.mMode & 2) == 2) {
-            colorInt2 = NavigationBarInflaterView.SIZE_MOD_START + this.mColor2 + NavigationBarInflaterView.SIZE_MOD_END;
+            strColorInt2 = NavigationBarInflaterView.SIZE_MOD_START + this.mColor2 + NavigationBarInflaterView.SIZE_MOD_END;
         } else {
-            colorInt2 = Utils.colorInt(this.mColor2);
+            strColorInt2 = Utils.colorInt(this.mColor2);
         }
-        return "ColorExpression[" + this.mId + "] = tween(" + colorInt + ", " + colorInt2 + ", " + Utils.floatToString(this.mTween) + NavigationBarInflaterView.KEY_CODE_END;
+        return "ColorExpression[" + this.mId + "] = tween(" + strColorInt + ", " + strColorInt2 + ", " + Utils.floatToString(this.mTween) + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String name() {
@@ -360,30 +360,30 @@ public class ColorExpression extends Operation implements VariableSupport, Seria
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        int readInt4 = wireBuffer.readInt();
-        int readInt5 = wireBuffer.readInt();
-        int i = readInt2 & 255;
-        switch (i) {
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        int i4 = wireBuffer.readInt();
+        int i5 = wireBuffer.readInt();
+        int i6 = i2 & 255;
+        switch (i6) {
             case 0:
             case 1:
             case 2:
             case 3:
-                list.add(new ColorExpression(readInt, i, readInt3, readInt4, Float.intBitsToFloat(readInt5)));
+                list.add(new ColorExpression(i, i6, i3, i4, Float.intBitsToFloat(i5)));
                 return;
             case 4:
-                list.add(new ColorExpression(readInt, (byte) 4, readInt2 >> 16, Float.intBitsToFloat(readInt3), Float.intBitsToFloat(readInt4), Float.intBitsToFloat(readInt5)));
+                list.add(new ColorExpression(i, (byte) 4, i2 >> 16, Float.intBitsToFloat(i3), Float.intBitsToFloat(i4), Float.intBitsToFloat(i5)));
                 return;
             case 5:
-                list.add(new ColorExpression(readInt, (byte) 5, (readInt2 >> 16) / 1024.0f, Float.intBitsToFloat(readInt3), Float.intBitsToFloat(readInt4), Float.intBitsToFloat(readInt5)));
+                list.add(new ColorExpression(i, (byte) 5, (i2 >> 16) / 1024.0f, Float.intBitsToFloat(i3), Float.intBitsToFloat(i4), Float.intBitsToFloat(i5)));
                 return;
             case 6:
-                list.add(new ColorExpression(readInt, (byte) 5, Utils.asNan(readInt2 >> 16), Float.intBitsToFloat(readInt3), Float.intBitsToFloat(readInt4), Float.intBitsToFloat(readInt5)));
+                list.add(new ColorExpression(i, (byte) 5, Utils.asNan(i2 >> 16), Float.intBitsToFloat(i3), Float.intBitsToFloat(i4), Float.intBitsToFloat(i5)));
                 return;
             default:
-                throw new RuntimeException("Invalid mode " + i);
+                throw new RuntimeException("Invalid mode " + i6);
         }
     }
 

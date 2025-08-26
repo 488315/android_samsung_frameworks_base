@@ -143,7 +143,7 @@ public final class TextClassification implements Parcelable {
         return new View.OnClickListener() { // from class: android.view.textclassifier.TextClassification$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                TextClassification.lambda$createIntentOnClickListener$0(PendingIntent.this, view);
+                TextClassification.lambda$createIntentOnClickListener$0(pendingIntent, view);
             }
         };
     }
@@ -394,15 +394,15 @@ public final class TextClassification implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static Request readFromParcel(Parcel parcel) {
-            CharSequence readCharSequence = parcel.readCharSequence();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            CharSequence charSequence = parcel.readCharSequence();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             LocaleList localeList = (LocaleList) parcel.readParcelable(null, LocaleList.class);
-            String readString = parcel.readString();
-            ZonedDateTime parse = readString == null ? null : ZonedDateTime.parse(readString);
-            Bundle readBundle = parcel.readBundle();
+            String string = parcel.readString();
+            ZonedDateTime zonedDateTime = string == null ? null : ZonedDateTime.parse(string);
+            Bundle bundle = parcel.readBundle();
             SystemTextClassifierMetadata systemTextClassifierMetadata = (SystemTextClassifierMetadata) parcel.readParcelable(null, SystemTextClassifierMetadata.class);
-            Request request = new Request(readCharSequence, readInt, readInt2, localeList, parse, readBundle);
+            Request request = new Request(charSequence, i, i2, localeList, zonedDateTime, bundle);
             request.setSystemTextClassifierMetadata(systemTextClassifierMetadata);
             return request;
         }
@@ -419,13 +419,13 @@ public final class TextClassification implements Parcelable {
 
     private TextClassification(Parcel parcel) {
         this.mText = parcel.readString();
-        ArrayList createTypedArrayList = parcel.createTypedArrayList(RemoteAction.CREATOR);
-        this.mActions = createTypedArrayList;
-        if (!createTypedArrayList.isEmpty()) {
-            RemoteAction remoteAction = (RemoteAction) createTypedArrayList.get(0);
+        ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(RemoteAction.CREATOR);
+        this.mActions = arrayListCreateTypedArrayList;
+        if (!arrayListCreateTypedArrayList.isEmpty()) {
+            RemoteAction remoteAction = (RemoteAction) arrayListCreateTypedArrayList.get(0);
             this.mLegacyIcon = maybeLoadDrawable(remoteAction.getIcon());
             this.mLegacyLabel = remoteAction.getTitle().toString();
-            this.mLegacyOnClickListener = createIntentOnClickListener(((RemoteAction) createTypedArrayList.get(0)).getActionIntent());
+            this.mLegacyOnClickListener = createIntentOnClickListener(((RemoteAction) arrayListCreateTypedArrayList.get(0)).getActionIntent());
         } else {
             this.mLegacyIcon = null;
             this.mLegacyLabel = null;

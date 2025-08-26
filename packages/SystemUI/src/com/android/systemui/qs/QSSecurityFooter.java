@@ -42,7 +42,6 @@ import com.android.systemui.util.ViewController;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSSecurityFooter extends ViewController implements View.OnClickListener, DialogInterface.OnClickListener {
     public final ActivityStarter mActivityStarter;
@@ -82,7 +81,6 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
     public final QSSecurityFooter$$ExternalSyntheticLambda0 mWorkProfileMonitoringStringSupplier;
     public final QSSecurityFooter$$ExternalSyntheticLambda0 mWorkProfileNetworkStringSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Callback implements SecurityController.SecurityControllerCallback {
         public /* synthetic */ Callback(QSSecurityFooter qSSecurityFooter, int i) {
             this();
@@ -97,7 +95,6 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public /* synthetic */ H(QSSecurityFooter qSSecurityFooter, Looper looper, int i) {
             this(looper);
@@ -109,7 +106,7 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
                 int i = message.what;
                 QSSecurityFooter qSSecurityFooter = QSSecurityFooter.this;
                 if (i == 1) {
-                    QSSecurityFooter.m2881$$Nest$mhandleRefreshState(qSSecurityFooter);
+                    QSSecurityFooter.m2898$$Nest$mhandleRefreshState(qSSecurityFooter);
                 } else if (i == 0) {
                     qSSecurityFooter.mShouldUseSettingsButton.set(false);
                     qSSecurityFooter.mHandler.post(new QSSecurityFooter$$ExternalSyntheticLambda28(qSSecurityFooter));
@@ -125,7 +122,6 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VpnSpan extends ClickableSpan {
         public VpnSpan() {
         }
@@ -146,35 +142,39 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:87:0x0214  */
     /* renamed from: -$$Nest$mhandleRefreshState, reason: not valid java name */
-    public static void m2881$$Nest$mhandleRefreshState(QSSecurityFooter qSSecurityFooter) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static void m2898$$Nest$mhandleRefreshState(QSSecurityFooter qSSecurityFooter) {
         boolean z;
         boolean z2;
         boolean z3;
         boolean z4;
         boolean z5;
         String string;
-        Drawable loadIcon;
-        boolean isDeviceManaged = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isDeviceManaged();
+        Drawable drawableLoadIcon;
+        boolean zIsDeviceManaged = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isDeviceManaged();
         boolean z6 = UserManager.isDeviceInDemoMode(qSSecurityFooter.mContext) && ((UserTrackerImpl) qSSecurityFooter.mUserTracker).getUserInfo().isDemo();
-        boolean hasWorkProfile$1 = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasWorkProfile$1();
-        boolean hasCACertInCurrentUser = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasCACertInCurrentUser();
-        boolean hasCACertInWorkProfile = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasCACertInWorkProfile();
-        boolean isNetworkLoggingEnabled = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isNetworkLoggingEnabled(null);
+        boolean zHasWorkProfile$1 = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasWorkProfile$1();
+        boolean zHasCACertInCurrentUser = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasCACertInCurrentUser();
+        boolean zHasCACertInWorkProfile = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).hasCACertInWorkProfile();
+        boolean zIsNetworkLoggingEnabled = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isNetworkLoggingEnabled(null);
         String primaryVpnName = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).getPrimaryVpnName();
         String workProfileVpnName = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).getWorkProfileVpnName();
         CharSequence deviceOwnerOrganizationName = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.getDeviceOwnerOrganizationName();
         SecurityControllerImpl securityControllerImpl = (SecurityControllerImpl) qSSecurityFooter.mSecurityController;
         int workProfileUserId$1 = securityControllerImpl.getWorkProfileUserId$1(securityControllerImpl.mCurrentUserId);
         CharSequence organizationNameForUser = workProfileUserId$1 == -10000 ? null : securityControllerImpl.mDevicePolicyManager.getOrganizationNameForUser(workProfileUserId$1);
-        boolean isOrganizationOwnedDeviceWithManagedProfile = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile();
-        boolean isParentalControlsEnabled = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).isParentalControlsEnabled();
+        boolean zIsOrganizationOwnedDeviceWithManagedProfile = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile();
+        boolean zIsParentalControlsEnabled = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).isParentalControlsEnabled();
         SecurityControllerImpl securityControllerImpl2 = (SecurityControllerImpl) qSSecurityFooter.mSecurityController;
-        UserHandle of = UserHandle.of(securityControllerImpl2.getWorkProfileUserId$1(securityControllerImpl2.mCurrentUserId));
-        boolean z7 = (of == null || securityControllerImpl2.mUserManager.isQuietModeEnabled(of)) ? false : true;
-        boolean z8 = hasCACertInWorkProfile || workProfileVpnName != null || (hasWorkProfile$1 && isNetworkLoggingEnabled);
+        UserHandle userHandleOf = UserHandle.of(securityControllerImpl2.getWorkProfileUserId$1(securityControllerImpl2.mCurrentUserId));
+        boolean z7 = (userHandleOf == null || securityControllerImpl2.mUserManager.isQuietModeEnabled(userHandleOf)) ? false : true;
+        boolean z8 = zHasCACertInWorkProfile || workProfileVpnName != null || (zHasWorkProfile$1 && zIsNetworkLoggingEnabled);
         boolean z9 = qSSecurityFooter.mIsVisible;
-        if ((isDeviceManaged && !z6) || hasCACertInCurrentUser || primaryVpnName != null || isOrganizationOwnedDeviceWithManagedProfile || isParentalControlsEnabled || (z8 && z7)) {
+        if ((zIsDeviceManaged && !z6) || zHasCACertInCurrentUser || primaryVpnName != null || zIsOrganizationOwnedDeviceWithManagedProfile || zIsParentalControlsEnabled || (z8 && z7)) {
             z = z6;
             z2 = true;
         } else {
@@ -182,35 +182,35 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
             z2 = false;
         }
         if (z9 != z2) {
-            z3 = hasWorkProfile$1;
-            z4 = hasCACertInWorkProfile;
-            z5 = isNetworkLoggingEnabled;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateVisibility: isVisible: ", " -> ", " [(isDeviceManaged(", z9, z2);
-            m.append(isDeviceManaged);
-            m.append(") && !isDemoDevice(");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, !z, ")) || hasCACerts(", hasCACertInCurrentUser, ") || vpnName!=null(");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, primaryVpnName != null, ") || isProfileOwnerOfOrganizationOwnedDevice(", isOrganizationOwnedDeviceWithManagedProfile, ") || isParentalControlsEnabled(");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isParentalControlsEnabled, ") || (hasDisclosableWorkProfilePolicy(", z8, ") && isWorkProfileOn(");
-            m.append(z7);
-            m.append("))]");
-            Log.d("QSSecurityFooter", m.toString());
+            z3 = zHasWorkProfile$1;
+            z4 = zHasCACertInWorkProfile;
+            z5 = zIsNetworkLoggingEnabled;
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateVisibility: isVisible: ", " -> ", " [(isDeviceManaged(", z9, z2);
+            sbM.append(zIsDeviceManaged);
+            sbM.append(") && !isDemoDevice(");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, !z, ")) || hasCACerts(", zHasCACertInCurrentUser, ") || vpnName!=null(");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, primaryVpnName != null, ") || isProfileOwnerOfOrganizationOwnedDevice(", zIsOrganizationOwnedDeviceWithManagedProfile, ") || isParentalControlsEnabled(");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsParentalControlsEnabled, ") || (hasDisclosableWorkProfilePolicy(", z8, ") && isWorkProfileOn(");
+            sbM.append(z7);
+            sbM.append("))]");
+            Log.d("QSSecurityFooter", sbM.toString());
         } else {
-            z3 = hasWorkProfile$1;
-            z4 = hasCACertInWorkProfile;
-            z5 = isNetworkLoggingEnabled;
+            z3 = zHasWorkProfile$1;
+            z4 = zHasCACertInWorkProfile;
+            z5 = zIsNetworkLoggingEnabled;
         }
         qSSecurityFooter.mIsVisible = z2;
-        if (z2 && isOrganizationOwnedDeviceWithManagedProfile && (!z8 || !z7)) {
+        if (z2 && zIsOrganizationOwnedDeviceWithManagedProfile && (!z8 || !z7)) {
             qSSecurityFooter.mPrimaryFooterIcon.setClickable(false);
             qSSecurityFooter.mPrimaryFooterIcon.setVisibility(8);
         } else {
             qSSecurityFooter.mPrimaryFooterIcon.setClickable(true);
             qSSecurityFooter.mPrimaryFooterIcon.setVisibility(0);
         }
-        if (isParentalControlsEnabled) {
+        if (zIsParentalControlsEnabled) {
             string = qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_parental_controls);
-        } else if (isDeviceManaged) {
-            if (hasCACertInCurrentUser || z4 || z5) {
+        } else if (zIsDeviceManaged) {
+            if (zHasCACertInCurrentUser || z4 || z5) {
                 string = deviceOwnerOrganizationName == null ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_MANAGEMENT_MONITORING", qSSecurityFooter.mManagementMonitoringStringSupplier) : qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_MANAGEMENT_MONITORING", new QSSecurityFooter$$ExternalSyntheticLambda15(qSSecurityFooter, deviceOwnerOrganizationName, 2), deviceOwnerOrganizationName);
             } else if (primaryVpnName == null && workProfileVpnName == null) {
                 string = qSSecurityFooter.getMangedDeviceGeneralText(deviceOwnerOrganizationName);
@@ -220,33 +220,20 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
             } else {
                 string = deviceOwnerOrganizationName == null ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_MANAGEMENT_MULTIPLE_VPNS", qSSecurityFooter.mManagementMultipleVpnStringSupplier) : qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_MANAGEMENT_MULTIPLE_VPNS", new QSSecurityFooter$$ExternalSyntheticLambda15(qSSecurityFooter, deviceOwnerOrganizationName, 1), deviceOwnerOrganizationName);
             }
-        } else if (hasCACertInCurrentUser || (z4 && z7)) {
-            if (z4 && z7) {
-                string = organizationNameForUser == null ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_MONITORING", qSSecurityFooter.mWorkProfileMonitoringStringSupplier) : qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_WORK_PROFILE_MONITORING", new QSSecurityFooter$$ExternalSyntheticLambda15(qSSecurityFooter, organizationNameForUser, 3), organizationNameForUser);
-            } else {
-                if (hasCACertInCurrentUser) {
-                    string = qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_monitoring);
-                }
-                string = null;
-            }
+        } else if (zHasCACertInCurrentUser || (z4 && z7)) {
+            string = (z4 && z7) ? organizationNameForUser == null ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_MONITORING", qSSecurityFooter.mWorkProfileMonitoringStringSupplier) : qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_WORK_PROFILE_MONITORING", new QSSecurityFooter$$ExternalSyntheticLambda15(qSSecurityFooter, organizationNameForUser, 3), organizationNameForUser) : zHasCACertInCurrentUser ? qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_monitoring) : null;
         } else if (primaryVpnName != null || (workProfileVpnName != null && z7)) {
             if (primaryVpnName != null && workProfileVpnName != null) {
                 string = qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_vpns);
-            } else if (workProfileVpnName == null || !z7) {
-                if (primaryVpnName != null) {
-                    string = z3 ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_PERSONAL_PROFILE_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda17(qSSecurityFooter, primaryVpnName, 5), primaryVpnName) : qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_named_vpn, primaryVpnName);
-                }
-                string = null;
-            } else {
+            } else if (workProfileVpnName != null && z7) {
                 string = qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda17(qSSecurityFooter, workProfileVpnName, 4), workProfileVpnName);
+            } else if (primaryVpnName != null) {
+                string = z3 ? qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_PERSONAL_PROFILE_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda17(qSSecurityFooter, primaryVpnName, 5), primaryVpnName) : qSSecurityFooter.mContext.getString(R.string.quick_settings_disclosure_named_vpn, primaryVpnName);
             }
         } else if (z3 && z5 && z7) {
             string = qSSecurityFooter.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_NETWORK", qSSecurityFooter.mWorkProfileNetworkStringSupplier);
-        } else {
-            if (isOrganizationOwnedDeviceWithManagedProfile) {
-                string = qSSecurityFooter.getMangedDeviceGeneralText(organizationNameForUser);
-            }
-            string = null;
+        } else if (zIsOrganizationOwnedDeviceWithManagedProfile) {
+            string = qSSecurityFooter.getMangedDeviceGeneralText(organizationNameForUser);
         }
         qSSecurityFooter.mFooterTextContent = string;
         int i = (primaryVpnName == null && workProfileVpnName == null) ? R.drawable.quickpanel_icon_managed_device : ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).isVpnBranded() ? R.drawable.stat_sys_branded_vpn : R.drawable.stat_sys_vpn_ic;
@@ -256,18 +243,18 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
         if (qSSecurityFooter.mPrimaryFooterIconId != i) {
             qSSecurityFooter.mPrimaryFooterIconId = i;
         }
-        if (!isParentalControlsEnabled) {
+        if (!zIsParentalControlsEnabled) {
             qSSecurityFooter.mPrimaryFooterIconDrawable = null;
         } else if (qSSecurityFooter.mPrimaryFooterIconDrawable == null) {
             DeviceAdminInfo deviceAdminInfo = ((SecurityControllerImpl) qSSecurityFooter.mSecurityController).getDeviceAdminInfo();
             SecurityControllerImpl securityControllerImpl3 = (SecurityControllerImpl) qSSecurityFooter.mSecurityController;
             if (deviceAdminInfo == null) {
                 securityControllerImpl3.getClass();
-                loadIcon = null;
+                drawableLoadIcon = null;
             } else {
-                loadIcon = deviceAdminInfo.loadIcon(securityControllerImpl3.mPackageManager);
+                drawableLoadIcon = deviceAdminInfo.loadIcon(securityControllerImpl3.mPackageManager);
             }
-            qSSecurityFooter.mPrimaryFooterIconDrawable = loadIcon;
+            qSSecurityFooter.mPrimaryFooterIconDrawable = drawableLoadIcon;
         }
         qSSecurityFooter.mMainHandler.post(qSSecurityFooter.mUpdatePrimaryIcon);
         qSSecurityFooter.mMainHandler.post(qSSecurityFooter.mUpdateDisplayState);
@@ -1950,72 +1937,72 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
 
     public View createDialogView() {
         SpannableStringBuilder spannableStringBuilder;
-        Drawable loadIcon;
-        CharSequence charSequence = null;
+        Drawable drawableLoadIcon;
+        CharSequence charSequenceLoadLabel = null;
         if (((SecurityControllerImpl) this.mSecurityController).isParentalControlsEnabled()) {
-            View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_quick_settings_footer_dialog_parental_controls, (ViewGroup) null, false);
+            View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_quick_settings_footer_dialog_parental_controls, (ViewGroup) null, false);
             DeviceAdminInfo deviceAdminInfo = ((SecurityControllerImpl) this.mSecurityController).getDeviceAdminInfo();
             SecurityControllerImpl securityControllerImpl = (SecurityControllerImpl) this.mSecurityController;
             if (deviceAdminInfo == null) {
                 securityControllerImpl.getClass();
-                loadIcon = null;
+                drawableLoadIcon = null;
             } else {
-                loadIcon = deviceAdminInfo.loadIcon(securityControllerImpl.mPackageManager);
+                drawableLoadIcon = deviceAdminInfo.loadIcon(securityControllerImpl.mPackageManager);
             }
-            if (loadIcon != null) {
-                ((ImageView) inflate.findViewById(R.id.parental_controls_icon)).setImageDrawable(loadIcon);
+            if (drawableLoadIcon != null) {
+                ((ImageView) viewInflate.findViewById(R.id.parental_controls_icon)).setImageDrawable(drawableLoadIcon);
             }
-            TextView textView = (TextView) inflate.findViewById(R.id.parental_controls_title);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.parental_controls_title);
             SecurityControllerImpl securityControllerImpl2 = (SecurityControllerImpl) this.mSecurityController;
             if (deviceAdminInfo == null) {
                 securityControllerImpl2.getClass();
             } else {
-                charSequence = deviceAdminInfo.loadLabel(securityControllerImpl2.mPackageManager);
+                charSequenceLoadLabel = deviceAdminInfo.loadLabel(securityControllerImpl2.mPackageManager);
             }
-            textView.setText(charSequence);
-            return inflate;
+            textView.setText(charSequenceLoadLabel);
+            return viewInflate;
         }
-        boolean isDeviceManaged = ((SecurityControllerImpl) this.mSecurityController).mDevicePolicyManager.isDeviceManaged();
-        boolean hasWorkProfile$1 = ((SecurityControllerImpl) this.mSecurityController).hasWorkProfile$1();
+        boolean zIsDeviceManaged = ((SecurityControllerImpl) this.mSecurityController).mDevicePolicyManager.isDeviceManaged();
+        boolean zHasWorkProfile$1 = ((SecurityControllerImpl) this.mSecurityController).hasWorkProfile$1();
         CharSequence deviceOwnerOrganizationName = ((SecurityControllerImpl) this.mSecurityController).mDevicePolicyManager.getDeviceOwnerOrganizationName();
-        boolean hasCACertInCurrentUser = ((SecurityControllerImpl) this.mSecurityController).hasCACertInCurrentUser();
-        boolean hasCACertInWorkProfile = ((SecurityControllerImpl) this.mSecurityController).hasCACertInWorkProfile();
-        boolean isNetworkLoggingEnabled = ((SecurityControllerImpl) this.mSecurityController).mDevicePolicyManager.isNetworkLoggingEnabled(null);
+        boolean zHasCACertInCurrentUser = ((SecurityControllerImpl) this.mSecurityController).hasCACertInCurrentUser();
+        boolean zHasCACertInWorkProfile = ((SecurityControllerImpl) this.mSecurityController).hasCACertInWorkProfile();
+        boolean zIsNetworkLoggingEnabled = ((SecurityControllerImpl) this.mSecurityController).mDevicePolicyManager.isNetworkLoggingEnabled(null);
         String primaryVpnName = ((SecurityControllerImpl) this.mSecurityController).getPrimaryVpnName();
         String workProfileVpnName = ((SecurityControllerImpl) this.mSecurityController).getWorkProfileVpnName();
-        View inflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.sec_quick_settings_footer_dialog, (ViewGroup) null, false);
-        ((TextView) inflate2.findViewById(R.id.device_management_subtitle)).setText(getManagementTitle(deviceOwnerOrganizationName));
-        String string = !isDeviceManaged ? null : deviceOwnerOrganizationName != null ? isFinancedDevice() ? this.mContext.getString(R.string.monitoring_financed_description_named_management, deviceOwnerOrganizationName, deviceOwnerOrganizationName) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_NAMED_MANAGEMENT", new QSSecurityFooter$$ExternalSyntheticLambda15(this, deviceOwnerOrganizationName, 0), deviceOwnerOrganizationName) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT", this.mManagementDialogStringSupplier);
+        View viewInflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.sec_quick_settings_footer_dialog, (ViewGroup) null, false);
+        ((TextView) viewInflate2.findViewById(R.id.device_management_subtitle)).setText(getManagementTitle(deviceOwnerOrganizationName));
+        String string = !zIsDeviceManaged ? null : deviceOwnerOrganizationName != null ? isFinancedDevice() ? this.mContext.getString(R.string.monitoring_financed_description_named_management, deviceOwnerOrganizationName, deviceOwnerOrganizationName) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_NAMED_MANAGEMENT", new QSSecurityFooter$$ExternalSyntheticLambda15(this, deviceOwnerOrganizationName, 0), deviceOwnerOrganizationName) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT", this.mManagementDialogStringSupplier);
         if (string == null) {
-            inflate2.findViewById(R.id.device_management_disclosures).setVisibility(8);
+            viewInflate2.findViewById(R.id.device_management_disclosures).setVisibility(8);
         } else {
-            inflate2.findViewById(R.id.device_management_disclosures).setVisibility(0);
-            ((TextView) inflate2.findViewById(R.id.device_management_warning)).setText(string);
+            viewInflate2.findViewById(R.id.device_management_disclosures).setVisibility(0);
+            ((TextView) viewInflate2.findViewById(R.id.device_management_warning)).setText(string);
             this.mShouldUseSettingsButton.set(true);
         }
-        String string2 = (hasCACertInCurrentUser || hasCACertInWorkProfile) ? isDeviceManaged ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT_CA_CERT", this.mManagementDialogCaCertStringSupplier) : hasCACertInWorkProfile ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_WORK_PROFILE_CA_CERT", this.mWorkProfileDialogCaCertStringSupplier) : this.mContext.getString(R.string.monitoring_description_ca_certificate) : null;
+        String string2 = (zHasCACertInCurrentUser || zHasCACertInWorkProfile) ? zIsDeviceManaged ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT_CA_CERT", this.mManagementDialogCaCertStringSupplier) : zHasCACertInWorkProfile ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_WORK_PROFILE_CA_CERT", this.mWorkProfileDialogCaCertStringSupplier) : this.mContext.getString(R.string.monitoring_description_ca_certificate) : null;
         if (string2 == null) {
-            inflate2.findViewById(R.id.ca_certs_disclosures).setVisibility(8);
+            viewInflate2.findViewById(R.id.ca_certs_disclosures).setVisibility(8);
         } else {
-            inflate2.findViewById(R.id.ca_certs_disclosures).setVisibility(0);
-            TextView textView2 = (TextView) inflate2.findViewById(R.id.ca_certs_warning);
+            viewInflate2.findViewById(R.id.ca_certs_disclosures).setVisibility(0);
+            TextView textView2 = (TextView) viewInflate2.findViewById(R.id.ca_certs_warning);
             textView2.setText(string2);
             textView2.setMovementMethod(new LinkMovementMethod());
-            ((TextView) inflate2.findViewById(R.id.ca_certs_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_CA_CERT_SUBTITLE", this.mMonitoringSubtitleCaCertStringSupplier));
+            ((TextView) viewInflate2.findViewById(R.id.ca_certs_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_CA_CERT_SUBTITLE", this.mMonitoringSubtitleCaCertStringSupplier));
         }
-        String string3 = !isNetworkLoggingEnabled ? null : isDeviceManaged ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT_NETWORK", this.mManagementDialogNetworkStringSupplier) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_WORK_PROFILE_NETWORK", this.mWorkProfileDialogNetworkStringSupplier);
+        String string3 = !zIsNetworkLoggingEnabled ? null : zIsDeviceManaged ? this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT_NETWORK", this.mManagementDialogNetworkStringSupplier) : this.mDpm.getResources().getString("SystemUi.QS_DIALOG_WORK_PROFILE_NETWORK", this.mWorkProfileDialogNetworkStringSupplier);
         if (string3 == null) {
-            inflate2.findViewById(R.id.network_logging_disclosures).setVisibility(8);
+            viewInflate2.findViewById(R.id.network_logging_disclosures).setVisibility(8);
         } else {
-            inflate2.findViewById(R.id.network_logging_disclosures).setVisibility(0);
-            ((TextView) inflate2.findViewById(R.id.network_logging_warning)).setText(string3);
-            ((TextView) inflate2.findViewById(R.id.network_logging_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_NETWORK_SUBTITLE", this.mMonitoringSubtitleNetworkStringSupplier));
+            viewInflate2.findViewById(R.id.network_logging_disclosures).setVisibility(0);
+            ((TextView) viewInflate2.findViewById(R.id.network_logging_warning)).setText(string3);
+            ((TextView) viewInflate2.findViewById(R.id.network_logging_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_NETWORK_SUBTITLE", this.mMonitoringSubtitleNetworkStringSupplier));
         }
         if (primaryVpnName == null && workProfileVpnName == null) {
             spannableStringBuilder = null;
         } else {
             spannableStringBuilder = new SpannableStringBuilder();
-            if (isDeviceManaged) {
+            if (zIsDeviceManaged) {
                 if (primaryVpnName == null || workProfileVpnName == null) {
                     if (primaryVpnName == null) {
                         primaryVpnName = workProfileVpnName;
@@ -2028,7 +2015,7 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
                 spannableStringBuilder.append((CharSequence) this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MANAGEMENT_TWO_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda16(this, primaryVpnName, workProfileVpnName, 1), primaryVpnName, workProfileVpnName));
             } else if (workProfileVpnName != null) {
                 spannableStringBuilder.append((CharSequence) this.mDpm.getResources().getString("SystemUi.QS_DIALOG_WORK_PROFILE_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda17(this, workProfileVpnName, 1), workProfileVpnName));
-            } else if (hasWorkProfile$1) {
+            } else if (zHasWorkProfile$1) {
                 spannableStringBuilder.append((CharSequence) this.mDpm.getResources().getString("SystemUi.QS_DIALOG_PERSONAL_PROFILE_NAMED_VPN", new QSSecurityFooter$$ExternalSyntheticLambda17(this, primaryVpnName, 2), primaryVpnName));
             } else {
                 spannableStringBuilder.append((CharSequence) this.mContext.getString(R.string.monitoring_description_named_vpn, primaryVpnName));
@@ -2037,13 +2024,13 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
             spannableStringBuilder.append(this.mContext.getString(R.string.monitoring_description_vpn_settings), new VpnSpan(), 0);
         }
         if (spannableStringBuilder == null) {
-            inflate2.findViewById(R.id.vpn_disclosures).setVisibility(8);
+            viewInflate2.findViewById(R.id.vpn_disclosures).setVisibility(8);
         } else {
-            inflate2.findViewById(R.id.vpn_disclosures).setVisibility(0);
-            TextView textView3 = (TextView) inflate2.findViewById(R.id.vpn_warning);
+            viewInflate2.findViewById(R.id.vpn_disclosures).setVisibility(0);
+            TextView textView3 = (TextView) viewInflate2.findViewById(R.id.vpn_warning);
             textView3.setText(spannableStringBuilder);
             textView3.setMovementMethod(new LinkMovementMethod());
-            ((TextView) inflate2.findViewById(R.id.vpn_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_VPN_SUBTITLE", this.mMonitoringSubtitleVpnStringSupplier));
+            ((TextView) viewInflate2.findViewById(R.id.vpn_subtitle)).setText(this.mDpm.getResources().getString("SystemUi.QS_DIALOG_MONITORING_VPN_SUBTITLE", this.mMonitoringSubtitleVpnStringSupplier));
         }
         boolean z = string != null;
         int i = string2 != null ? 1 : 0;
@@ -2056,17 +2043,17 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
             }
             if (i2 == 1) {
                 if (i != 0) {
-                    inflate2.findViewById(R.id.ca_certs_subtitle).setVisibility(8);
+                    viewInflate2.findViewById(R.id.ca_certs_subtitle).setVisibility(8);
                 }
                 if (z2) {
-                    inflate2.findViewById(R.id.network_logging_subtitle).setVisibility(8);
+                    viewInflate2.findViewById(R.id.network_logging_subtitle).setVisibility(8);
                 }
                 if (z3) {
-                    inflate2.findViewById(R.id.vpn_subtitle).setVisibility(8);
+                    viewInflate2.findViewById(R.id.vpn_subtitle).setVisibility(8);
                 }
             }
         }
-        return inflate2;
+        return viewInflate2;
     }
 
     public Dialog getDialog() {
@@ -2116,7 +2103,7 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
     }
 
     public final void updateTextMaxWidth() {
-        this.mFooterText.setMaxWidth(((((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(this.mContext) - (((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelSidePadding(this.mContext) * 2)) - this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_footer_icon_size)) - this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_footer_icon_margin_start));
+        this.mFooterText.setMaxWidth((((((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(this.mContext) - (((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelSidePadding(this.mContext) * 2)) - (((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPopOverMargin(this.mContext) * 2)) - this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_footer_icon_size)) - this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_footer_icon_margin_start));
     }
 
     @Override // android.content.DialogInterface.OnClickListener

@@ -43,7 +43,7 @@ public class SurroundFormats {
             this.subformats = list;
         }
 
-        static Format read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Format read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             Format format = new Format();
             String attributeValue = xmlPullParser.getAttributeValue(null, "name");
             if (attributeValue != null) {
@@ -69,7 +69,7 @@ public class SurroundFormats {
         return this.format;
     }
 
-    static SurroundFormats read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static SurroundFormats read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         SurroundFormats surroundFormats = new SurroundFormats();
         xmlPullParser.getDepth();

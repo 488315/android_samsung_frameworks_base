@@ -3,7 +3,6 @@ package kotlin.text;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringsKt___StringsKt extends StringsKt___StringsJvmKt {
     public static char last(CharSequence charSequence) {

@@ -18,15 +18,15 @@ class ByteBufferDataSource implements DataSource {
     }
 
     @Override // android.util.apk.DataSource
-    public void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws IOException, DigestException {
-        ByteBuffer slice;
+    public void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws DigestException, IOException {
+        ByteBuffer byteBufferSlice;
         synchronized (this.mBuf) {
             this.mBuf.position(0);
             int i2 = (int) j;
             this.mBuf.limit(i + i2);
             this.mBuf.position(i2);
-            slice = this.mBuf.slice();
+            byteBufferSlice = this.mBuf.slice();
         }
-        dataDigester.consume(slice);
+        dataDigester.consume(byteBufferSlice);
     }
 }

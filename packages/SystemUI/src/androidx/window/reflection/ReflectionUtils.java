@@ -3,7 +3,6 @@ package androidx.window.reflection;
 import android.util.Log;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ReflectionUtils {
     public static final ReflectionUtils INSTANCE = new ReflectionUtils();
@@ -13,11 +12,11 @@ public final class ReflectionUtils {
 
     public static final boolean validateReflection$window_release(String str, Function0 function0) {
         try {
-            boolean booleanValue = ((Boolean) function0.invoke()).booleanValue();
-            if (!booleanValue) {
+            boolean zBooleanValue = ((Boolean) function0.invoke()).booleanValue();
+            if (!zBooleanValue) {
                 Log.e("ReflectionGuard", str);
             }
-            return booleanValue;
+            return zBooleanValue;
         } catch (ClassNotFoundException unused) {
             Log.e("ReflectionGuard", "ClassNotFound: " + str);
             return false;

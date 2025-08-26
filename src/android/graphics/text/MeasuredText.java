@@ -94,9 +94,9 @@ public class MeasuredText {
     public void getFontMetricsInt(int i, int i2, Paint.FontMetricsInt fontMetricsInt) {
         rangeCheck(i, i2);
         Objects.requireNonNull(fontMetricsInt);
-        long nGetExtent = nGetExtent(this.mNativePtr, this.mChars, i, i2);
-        fontMetricsInt.ascent = (int) (nGetExtent >> 32);
-        fontMetricsInt.descent = (int) nGetExtent;
+        long jNGetExtent = nGetExtent(this.mNativePtr, this.mChars, i, i2);
+        fontMetricsInt.ascent = (int) (jNGetExtent >> 32);
+        fontMetricsInt.descent = (int) jNGetExtent;
         fontMetricsInt.top = Math.min(fontMetricsInt.ascent, this.mTop);
         fontMetricsInt.bottom = Math.max(fontMetricsInt.descent, this.mBottom);
     }
@@ -252,9 +252,9 @@ public class MeasuredText {
             }
             try {
                 MeasuredText measuredText2 = this.mHintMt;
-                long nBuildMeasuredText = nBuildMeasuredText(this.mNativePtr, measuredText2 == null ? 0L : measuredText2.getNativePtr(), this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mFastHyphenation);
-                MeasuredText measuredText3 = new MeasuredText(nBuildMeasuredText, this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mTop, this.mBottom);
-                sRegistry.registerNativeAllocation(measuredText3, nBuildMeasuredText);
+                long jNBuildMeasuredText = nBuildMeasuredText(this.mNativePtr, measuredText2 == null ? 0L : measuredText2.getNativePtr(), this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mFastHyphenation);
+                MeasuredText measuredText3 = new MeasuredText(jNBuildMeasuredText, this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mTop, this.mBottom);
+                sRegistry.registerNativeAllocation(measuredText3, jNBuildMeasuredText);
                 return measuredText3;
             } finally {
                 nFreeBuilder(this.mNativePtr);

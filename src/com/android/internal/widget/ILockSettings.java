@@ -836,9 +836,9 @@ public interface ILockSettings extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILockSettings)) {
-                return (ILockSettings) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILockSettings)) {
+                return (ILockSettings) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -1072,187 +1072,187 @@ public interface ILockSettings extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBoolean(readString, readBoolean, readInt);
+                    setBoolean(string, z, i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    long j = parcel.readLong();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLong(readString2, readLong, readInt2);
+                    setLong(string2, j, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setString(readString3, readString4, readInt3);
+                    setString(string3, string4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString5 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean z = getBoolean(readString5, readBoolean2, readInt4);
+                    boolean z3 = getBoolean(string5, z2, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(z);
+                    parcel2.writeBoolean(z3);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
-                    long readLong2 = parcel.readLong();
-                    int readInt5 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    long j2 = parcel.readLong();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long j = getLong(readString6, readLong2, readInt5);
+                    long j3 = getLong(string6, j2, i7);
                     parcel2.writeNoException();
-                    parcel2.writeLong(j);
+                    parcel2.writeLong(j3);
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String string = getString(readString7, readString8, readInt6);
+                    String string9 = getString(string7, string8, i8);
                     parcel2.writeNoException();
-                    parcel2.writeString(string);
+                    parcel2.writeString(string9);
                     return true;
                 case 7:
                     LockscreenCredential lockscreenCredential = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
                     LockscreenCredential lockscreenCredential2 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean lockCredential = setLockCredential(lockscreenCredential, lockscreenCredential2, readInt7);
+                    boolean lockCredential = setLockCredential(lockscreenCredential, lockscreenCredential2, i9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(lockCredential);
                     return true;
                 case 8:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetKeyStore(readInt8);
+                    resetKeyStore(i10);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     LockscreenCredential lockscreenCredential3 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt9 = parcel.readInt();
-                    ICheckCredentialProgressCallback asInterface = ICheckCredentialProgressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i11 = parcel.readInt();
+                    ICheckCredentialProgressCallback iCheckCredentialProgressCallbackAsInterface = ICheckCredentialProgressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse checkCredential = checkCredential(lockscreenCredential3, readInt9, asInterface);
+                    VerifyCredentialResponse verifyCredentialResponseCheckCredential = checkCredential(lockscreenCredential3, i11, iCheckCredentialProgressCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(checkCredential, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseCheckCredential, 1);
                     return true;
                 case 10:
                     LockscreenCredential lockscreenCredential4 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse verifyCredential = verifyCredential(lockscreenCredential4, readInt10, readInt11);
+                    VerifyCredentialResponse verifyCredentialResponseVerifyCredential = verifyCredential(lockscreenCredential4, i12, i13);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyCredential, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseVerifyCredential, 1);
                     return true;
                 case 11:
                     LockscreenCredential lockscreenCredential5 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse verifyTiedProfileChallenge = verifyTiedProfileChallenge(lockscreenCredential5, readInt12, readInt13);
+                    VerifyCredentialResponse verifyCredentialResponseVerifyTiedProfileChallenge = verifyTiedProfileChallenge(lockscreenCredential5, i14, i15);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyTiedProfileChallenge, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseVerifyTiedProfileChallenge, 1);
                     return true;
                 case 12:
-                    long readLong3 = parcel.readLong();
-                    long readLong4 = parcel.readLong();
-                    int readInt14 = parcel.readInt();
+                    long j4 = parcel.readLong();
+                    long j5 = parcel.readLong();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse verifyGatekeeperPasswordHandle = verifyGatekeeperPasswordHandle(readLong3, readLong4, readInt14);
+                    VerifyCredentialResponse verifyCredentialResponseVerifyGatekeeperPasswordHandle = verifyGatekeeperPasswordHandle(j4, j5, i16);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyGatekeeperPasswordHandle, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseVerifyGatekeeperPasswordHandle, 1);
                     return true;
                 case 13:
-                    long readLong5 = parcel.readLong();
+                    long j6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    removeGatekeeperPasswordHandle(readLong5);
+                    removeGatekeeperPasswordHandle(j6);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int credentialType = getCredentialType(readInt15);
+                    int credentialType = getCredentialType(i17);
                     parcel2.writeNoException();
                     parcel2.writeInt(credentialType);
                     return true;
                 case 15:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int pinLength = getPinLength(readInt16);
+                    int pinLength = getPinLength(i18);
                     parcel2.writeNoException();
                     parcel2.writeInt(pinLength);
                     return true;
                 case 16:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean refreshStoredPinLength = refreshStoredPinLength(readInt17);
+                    boolean zRefreshStoredPinLength = refreshStoredPinLength(i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(refreshStoredPinLength);
+                    parcel2.writeBoolean(zRefreshStoredPinLength);
                     return true;
                 case 17:
                     LockscreenCredential lockscreenCredential6 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] hashFactor = getHashFactor(lockscreenCredential6, readInt18);
+                    byte[] hashFactor = getHashFactor(lockscreenCredential6, i20);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(hashFactor);
                     return true;
                 case 18:
-                    int readInt19 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i21 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     LockscreenCredential lockscreenCredential7 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setSeparateProfileChallengeEnabled(readInt19, readBoolean3, lockscreenCredential7);
+                    setSeparateProfileChallengeEnabled(i21, z4, lockscreenCredential7);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean separateProfileChallengeEnabled = getSeparateProfileChallengeEnabled(readInt20);
+                    boolean separateProfileChallengeEnabled = getSeparateProfileChallengeEnabled(i22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(separateProfileChallengeEnabled);
                     return true;
                 case 20:
-                    IStrongAuthTracker asInterface2 = IStrongAuthTracker.Stub.asInterface(parcel.readStrongBinder());
+                    IStrongAuthTracker iStrongAuthTrackerAsInterface = IStrongAuthTracker.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerStrongAuthTracker(asInterface2);
+                    registerStrongAuthTracker(iStrongAuthTrackerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    IStrongAuthTracker asInterface3 = IStrongAuthTracker.Stub.asInterface(parcel.readStrongBinder());
+                    IStrongAuthTracker iStrongAuthTrackerAsInterface2 = IStrongAuthTracker.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterStrongAuthTracker(asInterface3);
+                    unregisterStrongAuthTracker(iStrongAuthTrackerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requireStrongAuth(readInt21, readInt22);
+                    requireStrongAuth(i23, i24);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int readInt23 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportSuccessfulBiometricUnlock(readBoolean4, readInt23);
+                    reportSuccessfulBiometricUnlock(z5, i25);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    scheduleNonStrongBiometricIdleTimeout(readInt24);
+                    scheduleNonStrongBiometricIdleTimeout(i26);
                     parcel2.writeNoException();
                     return true;
                 case 25:
@@ -1260,31 +1260,31 @@ public interface ILockSettings extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    userPresent(readInt25);
+                    userPresent(i27);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int strongAuthForUser = getStrongAuthForUser(readInt26);
+                    int strongAuthForUser = getStrongAuthForUser(i28);
                     parcel2.writeNoException();
                     parcel2.writeInt(strongAuthForUser);
                     return true;
                 case 28:
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasPendingEscrowToken = hasPendingEscrowToken(readInt27);
+                    boolean zHasPendingEscrowToken = hasPendingEscrowToken(i29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasPendingEscrowToken);
+                    parcel2.writeBoolean(zHasPendingEscrowToken);
                     return true;
                 case 29:
-                    String readString9 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    String string10 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    initRecoveryServiceWithSigFile(readString9, createByteArray, createByteArray2);
+                    initRecoveryServiceWithSigFile(string10, bArrCreateByteArray, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     return true;
                 case 30:
@@ -1293,48 +1293,48 @@ public interface ILockSettings extends IInterface {
                     parcel2.writeTypedObject(keyChainSnapshot, 1);
                     return true;
                 case 31:
-                    String readString10 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String generateKey = generateKey(readString10);
+                    String strGenerateKey = generateKey(string11);
                     parcel2.writeNoException();
-                    parcel2.writeString(generateKey);
+                    parcel2.writeString(strGenerateKey);
                     return true;
                 case 32:
-                    String readString11 = parcel.readString();
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    String string12 = parcel.readString();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    String generateKeyWithMetadata = generateKeyWithMetadata(readString11, createByteArray3);
+                    String strGenerateKeyWithMetadata = generateKeyWithMetadata(string12, bArrCreateByteArray3);
                     parcel2.writeNoException();
-                    parcel2.writeString(generateKeyWithMetadata);
+                    parcel2.writeString(strGenerateKeyWithMetadata);
                     return true;
                 case 33:
-                    String readString12 = parcel.readString();
-                    byte[] createByteArray4 = parcel.createByteArray();
+                    String string13 = parcel.readString();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    String importKey = importKey(readString12, createByteArray4);
+                    String strImportKey = importKey(string13, bArrCreateByteArray4);
                     parcel2.writeNoException();
-                    parcel2.writeString(importKey);
+                    parcel2.writeString(strImportKey);
                     return true;
                 case 34:
-                    String readString13 = parcel.readString();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    byte[] createByteArray6 = parcel.createByteArray();
+                    String string14 = parcel.readString();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    String importKeyWithMetadata = importKeyWithMetadata(readString13, createByteArray5, createByteArray6);
+                    String strImportKeyWithMetadata = importKeyWithMetadata(string14, bArrCreateByteArray5, bArrCreateByteArray6);
                     parcel2.writeNoException();
-                    parcel2.writeString(importKeyWithMetadata);
+                    parcel2.writeString(strImportKeyWithMetadata);
                     return true;
                 case 35:
-                    String readString14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String key = getKey(readString14);
+                    String key = getKey(string15);
                     parcel2.writeNoException();
                     parcel2.writeString(key);
                     return true;
                 case 36:
-                    String readString15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeKey(readString15);
+                    removeKey(string16);
                     parcel2.writeNoException();
                     return true;
                 case 37:
@@ -1344,16 +1344,16 @@ public interface ILockSettings extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setServerParams(createByteArray7);
+                    setServerParams(bArrCreateByteArray7);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    String readString16 = parcel.readString();
-                    int readInt28 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRecoveryStatus(readString16, readInt28);
+                    setRecoveryStatus(string17, i30);
                     parcel2.writeNoException();
                     return true;
                 case 40:
@@ -1362,9 +1362,9 @@ public interface ILockSettings extends IInterface {
                     parcel2.writeMap(recoveryStatus);
                     return true;
                 case 41:
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    setRecoverySecretTypes(createIntArray);
+                    setRecoverySecretTypes(iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 42:
@@ -1373,252 +1373,252 @@ public interface ILockSettings extends IInterface {
                     parcel2.writeIntArray(recoverySecretTypes);
                     return true;
                 case 43:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
                     RecoveryCertPath recoveryCertPath = (RecoveryCertPath) parcel.readTypedObject(RecoveryCertPath.CREATOR);
-                    byte[] createByteArray8 = parcel.createByteArray();
-                    byte[] createByteArray9 = parcel.createByteArray();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(KeyChainProtectionParams.CREATOR);
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(KeyChainProtectionParams.CREATOR);
                     parcel.enforceNoDataAvail();
-                    byte[] startRecoverySessionWithCertPath = startRecoverySessionWithCertPath(readString17, readString18, recoveryCertPath, createByteArray8, createByteArray9, createTypedArrayList);
+                    byte[] bArrStartRecoverySessionWithCertPath = startRecoverySessionWithCertPath(string18, string19, recoveryCertPath, bArrCreateByteArray8, bArrCreateByteArray9, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(startRecoverySessionWithCertPath);
+                    parcel2.writeByteArray(bArrStartRecoverySessionWithCertPath);
                     return true;
                 case 44:
-                    String readString19 = parcel.readString();
-                    byte[] createByteArray10 = parcel.createByteArray();
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(WrappedApplicationKey.CREATOR);
+                    String string20 = parcel.readString();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(WrappedApplicationKey.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Map recoverKeyChainSnapshot = recoverKeyChainSnapshot(readString19, createByteArray10, createTypedArrayList2);
+                    Map mapRecoverKeyChainSnapshot = recoverKeyChainSnapshot(string20, bArrCreateByteArray10, arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeMap(recoverKeyChainSnapshot);
+                    parcel2.writeMap(mapRecoverKeyChainSnapshot);
                     return true;
                 case 45:
-                    String readString20 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    closeSession(readString20);
+                    closeSession(string21);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    RemoteLockscreenValidationSession startRemoteLockscreenValidation = startRemoteLockscreenValidation();
+                    RemoteLockscreenValidationSession remoteLockscreenValidationSessionStartRemoteLockscreenValidation = startRemoteLockscreenValidation();
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startRemoteLockscreenValidation, 1);
+                    parcel2.writeTypedObject(remoteLockscreenValidationSessionStartRemoteLockscreenValidation, 1);
                     return true;
                 case 47:
-                    byte[] createByteArray11 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    RemoteLockscreenValidationResult validateRemoteLockscreen = validateRemoteLockscreen(createByteArray11);
+                    RemoteLockscreenValidationResult remoteLockscreenValidationResultValidateRemoteLockscreen = validateRemoteLockscreen(bArrCreateByteArray11);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(validateRemoteLockscreen, 1);
+                    parcel2.writeTypedObject(remoteLockscreenValidationResultValidateRemoteLockscreen, 1);
                     return true;
                 case 48:
-                    boolean hasSecureLockScreen = hasSecureLockScreen();
+                    boolean zHasSecureLockScreen = hasSecureLockScreen();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasSecureLockScreen);
+                    parcel2.writeBoolean(zHasSecureLockScreen);
                     return true;
                 case 49:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean tryUnlockWithCachedUnifiedChallenge = tryUnlockWithCachedUnifiedChallenge(readInt29);
+                    boolean zTryUnlockWithCachedUnifiedChallenge = tryUnlockWithCachedUnifiedChallenge(i31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(tryUnlockWithCachedUnifiedChallenge);
+                    parcel2.writeBoolean(zTryUnlockWithCachedUnifiedChallenge);
                     return true;
                 case 50:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeCachedUnifiedChallenge(readInt30);
+                    removeCachedUnifiedChallenge(i32);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    IWeakEscrowTokenRemovedListener asInterface4 = IWeakEscrowTokenRemovedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListenerAsInterface = IWeakEscrowTokenRemovedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerWeakEscrowTokenRemovedListener = registerWeakEscrowTokenRemovedListener(asInterface4);
+                    boolean zRegisterWeakEscrowTokenRemovedListener = registerWeakEscrowTokenRemovedListener(iWeakEscrowTokenRemovedListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerWeakEscrowTokenRemovedListener);
+                    parcel2.writeBoolean(zRegisterWeakEscrowTokenRemovedListener);
                     return true;
                 case 52:
-                    IWeakEscrowTokenRemovedListener asInterface5 = IWeakEscrowTokenRemovedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListenerAsInterface2 = IWeakEscrowTokenRemovedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterWeakEscrowTokenRemovedListener = unregisterWeakEscrowTokenRemovedListener(asInterface5);
+                    boolean zUnregisterWeakEscrowTokenRemovedListener = unregisterWeakEscrowTokenRemovedListener(iWeakEscrowTokenRemovedListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterWeakEscrowTokenRemovedListener);
+                    parcel2.writeBoolean(zUnregisterWeakEscrowTokenRemovedListener);
                     return true;
                 case 53:
-                    byte[] createByteArray12 = parcel.createByteArray();
-                    int readInt31 = parcel.readInt();
-                    IWeakEscrowTokenActivatedListener asInterface6 = IWeakEscrowTokenActivatedListener.Stub.asInterface(parcel.readStrongBinder());
+                    byte[] bArrCreateByteArray12 = parcel.createByteArray();
+                    int i33 = parcel.readInt();
+                    IWeakEscrowTokenActivatedListener iWeakEscrowTokenActivatedListenerAsInterface = IWeakEscrowTokenActivatedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    long addWeakEscrowToken = addWeakEscrowToken(createByteArray12, readInt31, asInterface6);
+                    long jAddWeakEscrowToken = addWeakEscrowToken(bArrCreateByteArray12, i33, iWeakEscrowTokenActivatedListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeLong(addWeakEscrowToken);
+                    parcel2.writeLong(jAddWeakEscrowToken);
                     return true;
                 case 54:
-                    long readLong6 = parcel.readLong();
-                    int readInt32 = parcel.readInt();
+                    long j7 = parcel.readLong();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeWeakEscrowToken = removeWeakEscrowToken(readLong6, readInt32);
+                    boolean zRemoveWeakEscrowToken = removeWeakEscrowToken(j7, i34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeWeakEscrowToken);
+                    parcel2.writeBoolean(zRemoveWeakEscrowToken);
                     return true;
                 case 55:
-                    long readLong7 = parcel.readLong();
-                    int readInt33 = parcel.readInt();
+                    long j8 = parcel.readLong();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isWeakEscrowTokenActive = isWeakEscrowTokenActive(readLong7, readInt33);
+                    boolean zIsWeakEscrowTokenActive = isWeakEscrowTokenActive(j8, i35);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWeakEscrowTokenActive);
+                    parcel2.writeBoolean(zIsWeakEscrowTokenActive);
                     return true;
                 case 56:
-                    long readLong8 = parcel.readLong();
-                    byte[] createByteArray13 = parcel.createByteArray();
-                    int readInt34 = parcel.readInt();
+                    long j9 = parcel.readLong();
+                    byte[] bArrCreateByteArray13 = parcel.createByteArray();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isWeakEscrowTokenValid = isWeakEscrowTokenValid(readLong8, createByteArray13, readInt34);
+                    boolean zIsWeakEscrowTokenValid = isWeakEscrowTokenValid(j9, bArrCreateByteArray13, i36);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWeakEscrowTokenValid);
+                    parcel2.writeBoolean(zIsWeakEscrowTokenValid);
                     return true;
                 case 57:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unlockUserKeyIfUnsecured(readInt35);
+                    unlockUserKeyIfUnsecured(i37);
                     parcel2.writeNoException();
                     return true;
                 case 58:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean writeRepairModeCredential = writeRepairModeCredential(readInt36);
+                    boolean zWriteRepairModeCredential = writeRepairModeCredential(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(writeRepairModeCredential);
+                    parcel2.writeBoolean(zWriteRepairModeCredential);
                     return true;
                 case 59:
-                    int readInt37 = parcel.readInt();
-                    IRemoteLockMonitorCallback asInterface7 = IRemoteLockMonitorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i39 = parcel.readInt();
+                    IRemoteLockMonitorCallback iRemoteLockMonitorCallbackAsInterface = IRemoteLockMonitorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRemoteLockCallback(readInt37, asInterface7);
+                    registerRemoteLockCallback(i39, iRemoteLockMonitorCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 60:
-                    int readInt38 = parcel.readInt();
-                    IRemoteLockMonitorCallback asInterface8 = IRemoteLockMonitorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i40 = parcel.readInt();
+                    IRemoteLockMonitorCallback iRemoteLockMonitorCallbackAsInterface2 = IRemoteLockMonitorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRemoteLockCallback(readInt38, asInterface8);
+                    unregisterRemoteLockCallback(i40, iRemoteLockMonitorCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 61:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     RemoteLockInfo remoteLockInfo = (RemoteLockInfo) parcel.readTypedObject(RemoteLockInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean knoxGuard = setKnoxGuard(readInt39, remoteLockInfo);
+                    boolean knoxGuard = setKnoxGuard(i41, remoteLockInfo);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(knoxGuard);
                     return true;
                 case 62:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     RemoteLockInfo remoteLockInfo2 = (RemoteLockInfo) parcel.readTypedObject(RemoteLockInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setRemoteLock(readInt40, remoteLockInfo2);
+                    setRemoteLock(i42, remoteLockInfo2);
                     parcel2.writeNoException();
                     return true;
                 case 63:
-                    int readInt41 = parcel.readInt();
-                    byte[] createByteArray14 = parcel.createByteArray();
-                    int readInt42 = parcel.readInt();
-                    IRemoteCallback asInterface9 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i43 = parcel.readInt();
+                    byte[] bArrCreateByteArray14 = parcel.createByteArray();
+                    int i44 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    checkRemoteLockPassword(readInt41, createByteArray14, readInt42, asInterface9);
+                    checkRemoteLockPassword(i43, bArrCreateByteArray14, i44, iRemoteCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 64:
-                    int readInt43 = parcel.readInt();
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestRemoteLockInfo(readInt43);
+                    requestRemoteLockInfo(i45);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    byte[] createByteArray15 = parcel.createByteArray();
-                    int readInt44 = parcel.readInt();
+                    byte[] bArrCreateByteArray15 = parcel.createByteArray();
+                    int i46 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLockFMMPassword(createByteArray15, readInt44);
+                    setLockFMMPassword(bArrCreateByteArray15, i46);
                     parcel2.writeNoException();
                     return true;
                 case 66:
-                    int readInt45 = parcel.readInt();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveFMMPassword = haveFMMPassword(readInt45);
+                    boolean zHaveFMMPassword = haveFMMPassword(i47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveFMMPassword);
+                    parcel2.writeBoolean(zHaveFMMPassword);
                     return true;
                 case 67:
-                    byte[] createByteArray16 = parcel.createByteArray();
-                    int readInt46 = parcel.readInt();
+                    byte[] bArrCreateByteArray16 = parcel.createByteArray();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkFMMPassword = checkFMMPassword(createByteArray16, readInt46);
+                    boolean zCheckFMMPassword = checkFMMPassword(bArrCreateByteArray16, i48);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkFMMPassword);
+                    parcel2.writeBoolean(zCheckFMMPassword);
                     return true;
                 case 68:
-                    int readInt47 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean carrierLock = getCarrierLock(readInt47);
+                    boolean carrierLock = getCarrierLock(i49);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(carrierLock);
                     return true;
                 case 69:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean updateCarrierLock = updateCarrierLock(readInt48);
+                    boolean zUpdateCarrierLock = updateCarrierLock(i50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateCarrierLock);
+                    parcel2.writeBoolean(zUpdateCarrierLock);
                     return true;
                 case 70:
-                    int readInt49 = parcel.readInt();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCarrierLockEnabled(readInt49);
+                    setCarrierLockEnabled(i51);
                     parcel2.writeNoException();
                     return true;
                 case 71:
-                    byte[] createByteArray17 = parcel.createByteArray();
-                    int readInt50 = parcel.readInt();
+                    byte[] bArrCreateByteArray17 = parcel.createByteArray();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLockCarrierPassword(createByteArray17, readInt50);
+                    setLockCarrierPassword(bArrCreateByteArray17, i52);
                     parcel2.writeNoException();
                     return true;
                 case 72:
-                    int readInt51 = parcel.readInt();
+                    int i53 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveCarrierPassword = haveCarrierPassword(readInt51);
+                    boolean zHaveCarrierPassword = haveCarrierPassword(i53);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveCarrierPassword);
+                    parcel2.writeBoolean(zHaveCarrierPassword);
                     return true;
                 case 73:
-                    byte[] createByteArray18 = parcel.createByteArray();
-                    int readInt52 = parcel.readInt();
+                    byte[] bArrCreateByteArray18 = parcel.createByteArray();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkCarrierPassword = checkCarrierPassword(createByteArray18, readInt52);
+                    boolean zCheckCarrierPassword = checkCarrierPassword(bArrCreateByteArray18, i54);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkCarrierPassword);
+                    parcel2.writeBoolean(zCheckCarrierPassword);
                     return true;
                 case 74:
-                    int readInt53 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isRemoteLock = isRemoteLock(readInt53);
+                    boolean zIsRemoteLock = isRemoteLock(i55);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRemoteLock);
+                    parcel2.writeBoolean(zIsRemoteLock);
                     return true;
                 case 75:
-                    IRemoteCallback asInterface10 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteCallback iRemoteCallbackAsInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setLockModeChangedCallback(asInterface10);
+                    setLockModeChangedCallback(iRemoteCallbackAsInterface2);
                     return true;
                 case 76:
-                    int readInt54 = parcel.readInt();
+                    int i56 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendLockTypeChangedInfo(readInt54);
+                    sendLockTypeChangedInfo(i56);
                     return true;
                 case 77:
-                    int readInt55 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int failureCount = getFailureCount(readInt55);
+                    int failureCount = getFailureCount(i57);
                     parcel2.writeNoException();
                     parcel2.writeInt(failureCount);
                     return true;
@@ -1631,184 +1631,184 @@ public interface ILockSettings extends IInterface {
                     expirePreviousData();
                     return true;
                 case 80:
-                    boolean isSupportWeaver = isSupportWeaver();
+                    boolean zIsSupportWeaver = isSupportWeaver();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportWeaver);
+                    parcel2.writeBoolean(zIsSupportWeaver);
                     return true;
                 case 81:
-                    int readInt56 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSecurityDebugLevel(readInt56);
+                    setSecurityDebugLevel(i58);
                     return true;
                 case 82:
-                    IRemoteCallback asInterface11 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteCallback iRemoteCallbackAsInterface3 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setShellCommandCallback(asInterface11);
+                    setShellCommandCallback(iRemoteCallbackAsInterface3);
                     return true;
                 case 83:
-                    String readString21 = parcel.readString();
-                    int readInt57 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    int i59 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppLockPin(readString21, readInt57);
+                    setAppLockPin(string22, i59);
                     parcel2.writeNoException();
                     return true;
                 case 84:
-                    String readString22 = parcel.readString();
-                    int readInt58 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppLockPassword(readString22, readInt58);
+                    setAppLockPassword(string23, i60);
                     parcel2.writeNoException();
                     return true;
                 case 85:
-                    String readString23 = parcel.readString();
-                    int readInt59 = parcel.readInt();
+                    String string24 = parcel.readString();
+                    int i61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppLockPattern(readString23, readInt59);
+                    setAppLockPattern(string24, i61);
                     parcel2.writeNoException();
                     return true;
                 case 86:
-                    String readString24 = parcel.readString();
-                    int readInt60 = parcel.readInt();
+                    String string25 = parcel.readString();
+                    int i62 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppLockBackupPin(readString24, readInt60);
+                    setAppLockBackupPin(string25, i62);
                     parcel2.writeNoException();
                     return true;
                 case 87:
-                    String readString25 = parcel.readString();
-                    int readInt61 = parcel.readInt();
+                    String string26 = parcel.readString();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppLockFingerprintPassword(readString25, readInt61);
+                    setAppLockFingerprintPassword(string26, i63);
                     parcel2.writeNoException();
                     return true;
                 case 88:
-                    String readString26 = parcel.readString();
-                    int readInt62 = parcel.readInt();
+                    String string27 = parcel.readString();
+                    int i64 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkAppLockPin = checkAppLockPin(readString26, readInt62);
+                    boolean zCheckAppLockPin = checkAppLockPin(string27, i64);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAppLockPin);
+                    parcel2.writeBoolean(zCheckAppLockPin);
                     return true;
                 case 89:
-                    String readString27 = parcel.readString();
-                    int readInt63 = parcel.readInt();
+                    String string28 = parcel.readString();
+                    int i65 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkAppLockPassword = checkAppLockPassword(readString27, readInt63);
+                    boolean zCheckAppLockPassword = checkAppLockPassword(string28, i65);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAppLockPassword);
+                    parcel2.writeBoolean(zCheckAppLockPassword);
                     return true;
                 case 90:
-                    String readString28 = parcel.readString();
-                    int readInt64 = parcel.readInt();
-                    byte[] createByteArray19 = parcel.createByteArray();
+                    String string29 = parcel.readString();
+                    int i66 = parcel.readInt();
+                    byte[] bArrCreateByteArray19 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean checkAppLockPatternWithHash = checkAppLockPatternWithHash(readString28, readInt64, createByteArray19);
+                    boolean zCheckAppLockPatternWithHash = checkAppLockPatternWithHash(string29, i66, bArrCreateByteArray19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAppLockPatternWithHash);
+                    parcel2.writeBoolean(zCheckAppLockPatternWithHash);
                     return true;
                 case 91:
-                    String readString29 = parcel.readString();
-                    int readInt65 = parcel.readInt();
+                    String string30 = parcel.readString();
+                    int i67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkAppLockBackupPin = checkAppLockBackupPin(readString29, readInt65);
+                    boolean zCheckAppLockBackupPin = checkAppLockBackupPin(string30, i67);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAppLockBackupPin);
+                    parcel2.writeBoolean(zCheckAppLockBackupPin);
                     return true;
                 case 92:
-                    String readString30 = parcel.readString();
-                    int readInt66 = parcel.readInt();
+                    String string31 = parcel.readString();
+                    int i68 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkAppLockFingerprintPassword = checkAppLockFingerprintPassword(readString30, readInt66);
+                    boolean zCheckAppLockFingerprintPassword = checkAppLockFingerprintPassword(string31, i68);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkAppLockFingerprintPassword);
+                    parcel2.writeBoolean(zCheckAppLockFingerprintPassword);
                     return true;
                 case 93:
-                    int readInt67 = parcel.readInt();
+                    int i69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveAppLockPin = haveAppLockPin(readInt67);
+                    boolean zHaveAppLockPin = haveAppLockPin(i69);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveAppLockPin);
+                    parcel2.writeBoolean(zHaveAppLockPin);
                     return true;
                 case 94:
-                    int readInt68 = parcel.readInt();
+                    int i70 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveAppLockPassword = haveAppLockPassword(readInt68);
+                    boolean zHaveAppLockPassword = haveAppLockPassword(i70);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveAppLockPassword);
+                    parcel2.writeBoolean(zHaveAppLockPassword);
                     return true;
                 case 95:
-                    int readInt69 = parcel.readInt();
+                    int i71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveAppLockPattern = haveAppLockPattern(readInt69);
+                    boolean zHaveAppLockPattern = haveAppLockPattern(i71);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveAppLockPattern);
+                    parcel2.writeBoolean(zHaveAppLockPattern);
                     return true;
                 case 96:
-                    int readInt70 = parcel.readInt();
+                    int i72 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveAppLockBackupPin = haveAppLockBackupPin(readInt70);
+                    boolean zHaveAppLockBackupPin = haveAppLockBackupPin(i72);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveAppLockBackupPin);
+                    parcel2.writeBoolean(zHaveAppLockBackupPin);
                     return true;
                 case 97:
-                    int readInt71 = parcel.readInt();
+                    int i73 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean haveAppLockFingerprintPassword = haveAppLockFingerprintPassword(readInt71);
+                    boolean zHaveAppLockFingerprintPassword = haveAppLockFingerprintPassword(i73);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(haveAppLockFingerprintPassword);
+                    parcel2.writeBoolean(zHaveAppLockFingerprintPassword);
                     return true;
                 case 98:
                     LockscreenCredential lockscreenCredential8 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
                     LockscreenCredential lockscreenCredential9 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt72 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i74 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean lockCredentialWithIgnoreNotifyIfNeeded = setLockCredentialWithIgnoreNotifyIfNeeded(lockscreenCredential8, lockscreenCredential9, readInt72, readBoolean5);
+                    boolean lockCredentialWithIgnoreNotifyIfNeeded = setLockCredentialWithIgnoreNotifyIfNeeded(lockscreenCredential8, lockscreenCredential9, i74, z6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(lockCredentialWithIgnoreNotifyIfNeeded);
                     return true;
                 case 99:
                     LockscreenCredential lockscreenCredential10 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt73 = parcel.readInt();
+                    int i75 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyPasswordChangedForEnterpriseUser(lockscreenCredential10, readInt73);
+                    notifyPasswordChangedForEnterpriseUser(lockscreenCredential10, i75);
                     parcel2.writeNoException();
                     return true;
                 case 100:
-                    byte[] createByteArray20 = parcel.createByteArray();
-                    long readLong9 = parcel.readLong();
-                    int readInt74 = parcel.readInt();
+                    byte[] bArrCreateByteArray20 = parcel.createByteArray();
+                    long j10 = parcel.readLong();
+                    int i76 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse verifyToken = verifyToken(createByteArray20, readLong9, readInt74);
+                    VerifyCredentialResponse verifyCredentialResponseVerifyToken = verifyToken(bArrCreateByteArray20, j10, i76);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyToken, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseVerifyToken, 1);
                     return true;
                 case 101:
-                    byte[] createByteArray21 = parcel.createByteArray();
-                    long readLong10 = parcel.readLong();
-                    byte[] createByteArray22 = parcel.createByteArray();
-                    long readLong11 = parcel.readLong();
-                    int readInt75 = parcel.readInt();
+                    byte[] bArrCreateByteArray21 = parcel.createByteArray();
+                    long j11 = parcel.readLong();
+                    byte[] bArrCreateByteArray22 = parcel.createByteArray();
+                    long j12 = parcel.readLong();
+                    int i77 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean changeToken = changeToken(createByteArray21, readLong10, createByteArray22, readLong11, readInt75);
+                    boolean zChangeToken = changeToken(bArrCreateByteArray21, j11, bArrCreateByteArray22, j12, i77);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeToken);
+                    parcel2.writeBoolean(zChangeToken);
                     return true;
                 case 102:
-                    int readInt76 = parcel.readInt();
-                    long readLong12 = parcel.readLong();
+                    int i78 = parcel.readInt();
+                    long j13 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    updateSdpMdfppForSystem(readInt76, readLong12);
+                    updateSdpMdfppForSystem(i78, j13);
                     parcel2.writeNoException();
                     return true;
                 case 103:
                     LockscreenCredential lockscreenCredential11 = (LockscreenCredential) parcel.readTypedObject(LockscreenCredential.CREATOR);
-                    int readInt77 = parcel.readInt();
-                    int readInt78 = parcel.readInt();
-                    IDualDarAuthProgressCallback asInterface12 = IDualDarAuthProgressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i79 = parcel.readInt();
+                    int i80 = parcel.readInt();
+                    IDualDarAuthProgressCallback iDualDarAuthProgressCallbackAsInterface = IDualDarAuthProgressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    VerifyCredentialResponse checkCredentialForDualDarDo = checkCredentialForDualDarDo(lockscreenCredential11, readInt77, readInt78, asInterface12);
+                    VerifyCredentialResponse verifyCredentialResponseCheckCredentialForDualDarDo = checkCredentialForDualDarDo(lockscreenCredential11, i79, i80, iDualDarAuthProgressCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(checkCredentialForDualDarDo, 1);
+                    parcel2.writeTypedObject(verifyCredentialResponseCheckCredentialForDualDarDo, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -1833,1666 +1833,1666 @@ public interface ILockSettings extends IInterface {
 
             @Override // com.android.internal.widget.ILockSettings
             public void setBoolean(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setLong(String str, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setString(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean getBoolean(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public long getLong(String str, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String getString(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean setLockCredential(LockscreenCredential lockscreenCredential, LockscreenCredential lockscreenCredential2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeTypedObject(lockscreenCredential2, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeTypedObject(lockscreenCredential2, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void resetKeyStore(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse checkCredential(LockscreenCredential lockscreenCredential, int i, ICheckCredentialProgressCallback iCheckCredentialProgressCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iCheckCredentialProgressCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iCheckCredentialProgressCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse verifyCredential(LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse verifyTiedProfileChallenge(LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse verifyGatekeeperPasswordHandle(long j, long j2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void removeGatekeeperPasswordHandle(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public int getCredentialType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public int getPinLength(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean refreshStoredPinLength(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public byte[] getHashFactor(LockscreenCredential lockscreenCredential, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setSeparateProfileChallengeEnabled(int i, boolean z, LockscreenCredential lockscreenCredential) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean getSeparateProfileChallengeEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void registerStrongAuthTracker(IStrongAuthTracker iStrongAuthTracker) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrongAuthTracker);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrongAuthTracker);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void unregisterStrongAuthTracker(IStrongAuthTracker iStrongAuthTracker) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrongAuthTracker);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrongAuthTracker);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void requireStrongAuth(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void reportSuccessfulBiometricUnlock(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void scheduleNonStrongBiometricIdleTimeout(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void systemReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void userPresent(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public int getStrongAuthForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean hasPendingEscrowToken(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void initRecoveryServiceWithSigFile(String str, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public KeyChainSnapshot getKeyChainSnapshot() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyChainSnapshot) obtain2.readTypedObject(KeyChainSnapshot.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyChainSnapshot) parcelObtain2.readTypedObject(KeyChainSnapshot.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String generateKey(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String generateKeyWithMetadata(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String importKey(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String importKeyWithMetadata(String str, byte[] bArr, byte[] bArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public String getKey(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void removeKey(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setSnapshotCreatedPendingIntent(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setServerParams(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setRecoveryStatus(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public Map getRecoveryStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setRecoverySecretTypes(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public int[] getRecoverySecretTypes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public byte[] startRecoverySessionWithCertPath(String str, String str2, RecoveryCertPath recoveryCertPath, byte[] bArr, byte[] bArr2, List<KeyChainProtectionParams> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(recoveryCertPath, 0);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(recoveryCertPath, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public Map recoverKeyChainSnapshot(String str, byte[] bArr, List<WrappedApplicationKey> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void closeSession(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public RemoteLockscreenValidationSession startRemoteLockscreenValidation() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RemoteLockscreenValidationSession) obtain2.readTypedObject(RemoteLockscreenValidationSession.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RemoteLockscreenValidationSession) parcelObtain2.readTypedObject(RemoteLockscreenValidationSession.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public RemoteLockscreenValidationResult validateRemoteLockscreen(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RemoteLockscreenValidationResult) obtain2.readTypedObject(RemoteLockscreenValidationResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RemoteLockscreenValidationResult) parcelObtain2.readTypedObject(RemoteLockscreenValidationResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean hasSecureLockScreen() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean tryUnlockWithCachedUnifiedChallenge(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void removeCachedUnifiedChallenge(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean registerWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWeakEscrowTokenRemovedListener);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWeakEscrowTokenRemovedListener);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean unregisterWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWeakEscrowTokenRemovedListener);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWeakEscrowTokenRemovedListener);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public long addWeakEscrowToken(byte[] bArr, int i, IWeakEscrowTokenActivatedListener iWeakEscrowTokenActivatedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iWeakEscrowTokenActivatedListener);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iWeakEscrowTokenActivatedListener);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean removeWeakEscrowToken(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean isWeakEscrowTokenActive(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean isWeakEscrowTokenValid(long j, byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void unlockUserKeyIfUnsecured(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean writeRepairModeCredential(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void registerRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteLockMonitorCallback);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteLockMonitorCallback);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void unregisterRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteLockMonitorCallback);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteLockMonitorCallback);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean setKnoxGuard(int i, RemoteLockInfo remoteLockInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteLockInfo, 0);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteLockInfo, 0);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setRemoteLock(int i, RemoteLockInfo remoteLockInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteLockInfo, 0);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteLockInfo, 0);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void checkRemoteLockPassword(int i, byte[] bArr, int i2, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void requestRemoteLockInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setLockFMMPassword(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveFMMPassword(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkFMMPassword(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean getCarrierLock(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean updateCarrierLock(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setCarrierLockEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setLockCarrierPassword(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveCarrierPassword(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkCarrierPassword(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean isRemoteLock(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setLockModeChangedCallback(IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(75, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(75, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void sendLockTypeChangedInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(76, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(76, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public int getFailureCount(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public long getExpireTimeForPrev() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void expirePreviousData() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(79, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(79, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean isSupportWeaver() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setSecurityDebugLevel(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(81, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(81, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setShellCommandCallback(IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(82, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(82, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setAppLockPin(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setAppLockPassword(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setAppLockPattern(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setAppLockBackupPin(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void setAppLockFingerprintPassword(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkAppLockPin(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkAppLockPassword(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkAppLockPatternWithHash(String str, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkAppLockBackupPin(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean checkAppLockFingerprintPassword(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveAppLockPin(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveAppLockPassword(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveAppLockPattern(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveAppLockBackupPin(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean haveAppLockFingerprintPassword(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean setLockCredentialWithIgnoreNotifyIfNeeded(LockscreenCredential lockscreenCredential, LockscreenCredential lockscreenCredential2, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeTypedObject(lockscreenCredential2, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeTypedObject(lockscreenCredential2, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void notifyPasswordChangedForEnterpriseUser(LockscreenCredential lockscreenCredential, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse verifyToken(byte[] bArr, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public boolean changeToken(byte[] bArr, long j, byte[] bArr2, long j2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public void updateSdpMdfppForSystem(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.ILockSettings
             public VerifyCredentialResponse checkCredentialForDualDarDo(LockscreenCredential lockscreenCredential, int i, int i2, IDualDarAuthProgressCallback iDualDarAuthProgressCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(lockscreenCredential, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iDualDarAuthProgressCallback);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VerifyCredentialResponse) obtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(lockscreenCredential, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iDualDarAuthProgressCallback);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VerifyCredentialResponse) parcelObtain2.readTypedObject(VerifyCredentialResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

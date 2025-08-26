@@ -517,15 +517,15 @@ public class ApnSetting implements Parcelable {
 
     public static ApnSetting makeApnSetting(Cursor cursor) {
         int apnTypesBitmaskFromString = getApnTypesBitmaskFromString(cursor.getString(cursor.getColumnIndexOrThrow("type")));
-        int i = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.NETWORK_TYPE_BITMASK));
+        int iConvertBearerBitmaskToNetworkTypeBitmask = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.NETWORK_TYPE_BITMASK));
+        if (iConvertBearerBitmaskToNetworkTypeBitmask == 0) {
+            iConvertBearerBitmaskToNetworkTypeBitmask = ServiceState.convertBearerBitmaskToNetworkTypeBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.BEARER_BITMASK)));
+        }
+        int i = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MTU_V4));
         if (i == 0) {
-            i = ServiceState.convertBearerBitmaskToNetworkTypeBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.BEARER_BITMASK)));
+            i = cursor.getInt(cursor.getColumnIndexOrThrow("mtu"));
         }
-        int i2 = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MTU_V4));
-        if (i2 == 0) {
-            i2 = cursor.getInt(cursor.getColumnIndexOrThrow("mtu"));
-        }
-        return new Builder().setId(cursor.getInt(cursor.getColumnIndexOrThrow("_id"))).setOperatorNumeric(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.NUMERIC))).setEntryName(cursor.getString(cursor.getColumnIndexOrThrow("name"))).setApnName(cursor.getString(cursor.getColumnIndexOrThrow("apn"))).setProxyAddress(cursor.getString(cursor.getColumnIndexOrThrow("proxy"))).setProxyPort(portFromString(cursor.getString(cursor.getColumnIndexOrThrow("port")))).setMmsc(UriFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSC)))).setMmsProxyAddress(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSPROXY))).setMmsProxyPort(portFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSPORT)))).setUser(cursor.getString(cursor.getColumnIndexOrThrow("user"))).setPassword(cursor.getString(cursor.getColumnIndexOrThrow("password"))).setAuthType(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.AUTH_TYPE))).setApnTypeBitmask(apnTypesBitmaskFromString).setProtocol(getProtocolIntFromString(cursor.getString(cursor.getColumnIndexOrThrow("protocol")))).setRoamingProtocol(getProtocolIntFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.ROAMING_PROTOCOL)))).setCarrierEnabled(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.CARRIER_ENABLED)) == 1).setNetworkTypeBitmask(i).setLingeringNetworkTypeBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.LINGERING_NETWORK_TYPE_BITMASK))).setProfileId(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.PROFILE_ID))).setModemCognitive(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MODEM_PERSIST)) == 1).setMaxConns(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MAX_CONNECTIONS))).setWaitTime(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.WAIT_TIME_RETRY))).setMaxConnsTime(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.TIME_LIMIT_FOR_MAX_CONNECTIONS))).setMtuV4(i2).setMtuV6(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MTU_V6))).setMvnoType(getMvnoTypeIntFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MVNO_TYPE)))).setMvnoMatchData(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MVNO_MATCH_DATA))).setApnSetId(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.APN_SET_ID))).setCarrierId(cursor.getInt(cursor.getColumnIndexOrThrow("carrier_id"))).setSkip464Xlat(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.SKIP_464XLAT))).setAlwaysOn(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.ALWAYS_ON)) == 1).setInfrastructureBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.INFRASTRUCTURE_BITMASK))).setEsimBootstrapProvisioning(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.ESIM_BOOTSTRAP_PROVISIONING)) == 1).setEditedStatus(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.EDITED_STATUS))).buildWithoutCheck();
+        return new Builder().setId(cursor.getInt(cursor.getColumnIndexOrThrow("_id"))).setOperatorNumeric(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.NUMERIC))).setEntryName(cursor.getString(cursor.getColumnIndexOrThrow("name"))).setApnName(cursor.getString(cursor.getColumnIndexOrThrow("apn"))).setProxyAddress(cursor.getString(cursor.getColumnIndexOrThrow("proxy"))).setProxyPort(portFromString(cursor.getString(cursor.getColumnIndexOrThrow("port")))).setMmsc(UriFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSC)))).setMmsProxyAddress(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSPROXY))).setMmsProxyPort(portFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MMSPORT)))).setUser(cursor.getString(cursor.getColumnIndexOrThrow("user"))).setPassword(cursor.getString(cursor.getColumnIndexOrThrow("password"))).setAuthType(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.AUTH_TYPE))).setApnTypeBitmask(apnTypesBitmaskFromString).setProtocol(getProtocolIntFromString(cursor.getString(cursor.getColumnIndexOrThrow("protocol")))).setRoamingProtocol(getProtocolIntFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.ROAMING_PROTOCOL)))).setCarrierEnabled(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.CARRIER_ENABLED)) == 1).setNetworkTypeBitmask(iConvertBearerBitmaskToNetworkTypeBitmask).setLingeringNetworkTypeBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.LINGERING_NETWORK_TYPE_BITMASK))).setProfileId(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.PROFILE_ID))).setModemCognitive(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MODEM_PERSIST)) == 1).setMaxConns(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MAX_CONNECTIONS))).setWaitTime(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.WAIT_TIME_RETRY))).setMaxConnsTime(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.TIME_LIMIT_FOR_MAX_CONNECTIONS))).setMtuV4(i).setMtuV6(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.MTU_V6))).setMvnoType(getMvnoTypeIntFromString(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MVNO_TYPE)))).setMvnoMatchData(cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Carriers.MVNO_MATCH_DATA))).setApnSetId(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.APN_SET_ID))).setCarrierId(cursor.getInt(cursor.getColumnIndexOrThrow("carrier_id"))).setSkip464Xlat(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.SKIP_464XLAT))).setAlwaysOn(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.ALWAYS_ON)) == 1).setInfrastructureBitmask(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.INFRASTRUCTURE_BITMASK))).setEsimBootstrapProvisioning(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.ESIM_BOOTSTRAP_PROVISIONING)) == 1).setEditedStatus(cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Carriers.EDITED_STATUS))).buildWithoutCheck();
     }
 
     public static ApnSetting makeApnSetting(ApnSetting apnSetting) {
@@ -837,14 +837,14 @@ public class ApnSetting implements Parcelable {
         if (TextUtils.isEmpty(str)) {
             return 255;
         }
-        int i = 0;
+        int iIntValue = 0;
         for (String str2 : str.split(",")) {
             Integer num = APN_TYPE_STRING_MAP.get(str2.toLowerCase(Locale.ROOT));
             if (num != null) {
-                i |= num.intValue();
+                iIntValue |= num.intValue();
             }
         }
-        return i;
+        return iIntValue;
     }
 
     public static int getMvnoTypeIntFromString(String str) {
@@ -906,16 +906,16 @@ public class ApnSetting implements Parcelable {
         if (inetAddress == null) {
             return null;
         }
-        String inetAddress2 = inetAddress.toString();
-        if (TextUtils.isEmpty(inetAddress2)) {
+        String string = inetAddress.toString();
+        if (TextUtils.isEmpty(string)) {
             return null;
         }
-        String substring = inetAddress2.substring(0, inetAddress2.indexOf("/"));
-        String substring2 = inetAddress2.substring(inetAddress2.indexOf("/") + 1);
-        if (TextUtils.isEmpty(substring) && TextUtils.isEmpty(substring2)) {
+        String strSubstring = string.substring(0, string.indexOf("/"));
+        String strSubstring2 = string.substring(string.indexOf("/") + 1);
+        if (TextUtils.isEmpty(strSubstring) && TextUtils.isEmpty(strSubstring2)) {
             return null;
         }
-        return TextUtils.isEmpty(substring) ? substring2 : substring;
+        return TextUtils.isEmpty(strSubstring) ? strSubstring2 : strSubstring;
     }
 
     private static int portFromString(String str) {

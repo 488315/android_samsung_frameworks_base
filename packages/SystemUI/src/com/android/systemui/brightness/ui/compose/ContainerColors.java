@@ -5,14 +5,12 @@ import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOu
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContainerColors {
     public static final Companion Companion = new Companion(null);
     public final long idleColor;
     public final long mirrorColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,7 +34,7 @@ public final class ContainerColors {
         ContainerColors containerColors = (ContainerColors) obj;
         long j = containerColors.idleColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.idleColor, j) && ULong.m3427equalsimpl0(this.mirrorColor, containerColors.mirrorColor);
+        return ULong.m3447equalsimpl0(this.idleColor, j) && ULong.m3447equalsimpl0(this.mirrorColor, containerColors.mirrorColor);
     }
 
     public final int hashCode() {
@@ -46,7 +44,7 @@ public final class ContainerColors {
     }
 
     public final String toString() {
-        return MotionLayout$$ExternalSyntheticOutline0.m("ContainerColors(idleColor=", Color.m462toStringimpl(this.idleColor), ", mirrorColor=", Color.m462toStringimpl(this.mirrorColor), ")");
+        return MotionLayout$$ExternalSyntheticOutline0.m("ContainerColors(idleColor=", Color.m464toStringimpl(this.idleColor), ", mirrorColor=", Color.m464toStringimpl(this.mirrorColor), ")");
     }
 
     private ContainerColors(long j, long j2) {

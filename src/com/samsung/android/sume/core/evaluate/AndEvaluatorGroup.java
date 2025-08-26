@@ -13,9 +13,7 @@ class AndEvaluatorGroup extends EvaluatorGroup {
         return stream().allMatch(new Predicate() { // from class: com.samsung.android.sume.core.evaluate.AndEvaluatorGroup$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean evaluate;
-                evaluate = ((Evaluator) obj).evaluate(v);
-                return evaluate;
+                return ((Evaluator) obj).evaluate(v);
             }
         });
     }

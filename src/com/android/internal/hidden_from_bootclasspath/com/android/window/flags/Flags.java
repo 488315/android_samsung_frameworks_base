@@ -194,7 +194,6 @@ public final class Flags {
     public static final String FLAG_INHERIT_TASK_BOUNDS_FOR_TRAMPOLINE_TASK_LAUNCHES = "com.android.window.flags.inherit_task_bounds_for_trampoline_task_launches";
     public static final String FLAG_INSETS_DECOUPLED_CONFIGURATION = "com.android.window.flags.insets_decoupled_configuration";
     public static final String FLAG_JANK_API = "com.android.window.flags.jank_api";
-    public static final String FLAG_KEEP_APP_WINDOW_HIDE_WHILE_LOCKED = "com.android.window.flags.keep_app_window_hide_while_locked";
     public static final String FLAG_KEYBOARD_SHORTCUTS_TO_SWITCH_DESKS = "com.android.window.flags.keyboard_shortcuts_to_switch_desks";
     public static final String FLAG_KEYGUARD_GOING_AWAY_TIMEOUT = "com.android.window.flags.keyguard_going_away_timeout";
     public static final String FLAG_LETTERBOX_BACKGROUND_WALLPAPER = "com.android.window.flags.letterbox_background_wallpaper";
@@ -1033,10 +1032,6 @@ public final class Flags {
 
     public static boolean jankApi() {
         return FEATURE_FLAGS.jankApi();
-    }
-
-    public static boolean keepAppWindowHideWhileLocked() {
-        return FEATURE_FLAGS.keepAppWindowHideWhileLocked();
     }
 
     public static boolean keyboardShortcutsToSwitchDesks() {

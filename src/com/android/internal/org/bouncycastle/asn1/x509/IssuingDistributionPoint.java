@@ -123,36 +123,36 @@ public class IssuingDistributionPoint extends ASN1Object {
     }
 
     public String toString() {
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("IssuingDistributionPoint: [");
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         DistributionPointName distributionPointName = this.distributionPoint;
         if (distributionPointName != null) {
-            appendObject(stringBuffer, lineSeparator, "distributionPoint", distributionPointName.toString());
+            appendObject(stringBuffer, strLineSeparator, "distributionPoint", distributionPointName.toString());
         }
         boolean z = this.onlyContainsUserCerts;
         if (z) {
-            appendObject(stringBuffer, lineSeparator, "onlyContainsUserCerts", booleanToString(z));
+            appendObject(stringBuffer, strLineSeparator, "onlyContainsUserCerts", booleanToString(z));
         }
         boolean z2 = this.onlyContainsCACerts;
         if (z2) {
-            appendObject(stringBuffer, lineSeparator, "onlyContainsCACerts", booleanToString(z2));
+            appendObject(stringBuffer, strLineSeparator, "onlyContainsCACerts", booleanToString(z2));
         }
         ReasonFlags reasonFlags = this.onlySomeReasons;
         if (reasonFlags != null) {
-            appendObject(stringBuffer, lineSeparator, "onlySomeReasons", reasonFlags.toString());
+            appendObject(stringBuffer, strLineSeparator, "onlySomeReasons", reasonFlags.toString());
         }
         boolean z3 = this.onlyContainsAttributeCerts;
         if (z3) {
-            appendObject(stringBuffer, lineSeparator, "onlyContainsAttributeCerts", booleanToString(z3));
+            appendObject(stringBuffer, strLineSeparator, "onlyContainsAttributeCerts", booleanToString(z3));
         }
         boolean z4 = this.indirectCRL;
         if (z4) {
-            appendObject(stringBuffer, lineSeparator, "indirectCRL", booleanToString(z4));
+            appendObject(stringBuffer, strLineSeparator, "indirectCRL", booleanToString(z4));
         }
         stringBuffer.append(NavigationBarInflaterView.SIZE_MOD_END);
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         return stringBuffer.toString();
     }
 

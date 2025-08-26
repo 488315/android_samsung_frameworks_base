@@ -43,51 +43,52 @@ public class BitmapHelper {
         return saveBitmapAsFile(bitmap, str + File.separator + str2);
     }
 
-    public static boolean saveBitmapAsFile(Bitmap bitmap, String str) {
+    public static boolean saveBitmapAsFile(Bitmap bitmap, String str) throws Throwable {
+        FileOutputStream fileOutputStream;
         Bitmap.CompressFormat compressFormat = mCompressFormat;
         int i = mCompressQuality;
-        FileOutputStream fileOutputStream = null;
+        FileOutputStream fileOutputStream2 = null;
         try {
             try {
-                FileOutputStream fileOutputStream2 = new FileOutputStream(str + MediaMetrics.SEPARATOR + compressFormat.toString());
-                try {
-                    bitmap.compress(compressFormat, i, fileOutputStream2);
-                    fileOutputStream2.close();
-                    try {
-                        fileOutputStream2.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                } catch (Exception e2) {
-                    e = e2;
-                    fileOutputStream = fileOutputStream2;
-                    e.printStackTrace();
-                    if (fileOutputStream != null) {
-                        try {
-                            fileOutputStream.close();
-                        } catch (IOException e3) {
-                            e3.printStackTrace();
-                        }
-                    }
-                    return false;
-                } catch (Throwable th) {
-                    th = th;
-                    fileOutputStream = fileOutputStream2;
-                    if (fileOutputStream != null) {
-                        try {
-                            fileOutputStream.close();
-                        } catch (IOException e4) {
-                            e4.printStackTrace();
-                        }
-                    }
-                    throw th;
-                }
-            } catch (Throwable th2) {
-                th = th2;
+                fileOutputStream = new FileOutputStream(str + MediaMetrics.SEPARATOR + compressFormat.toString());
+            } catch (Exception e) {
+                e = e;
             }
-        } catch (Exception e5) {
-            e = e5;
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            bitmap.compress(compressFormat, i, fileOutputStream);
+            fileOutputStream.close();
+            try {
+                fileOutputStream.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+            return true;
+        } catch (Exception e3) {
+            e = e3;
+            fileOutputStream2 = fileOutputStream;
+            e.printStackTrace();
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (IOException e4) {
+                    e4.printStackTrace();
+                }
+            }
+            return false;
+        } catch (Throwable th2) {
+            th = th2;
+            fileOutputStream2 = fileOutputStream;
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (IOException e5) {
+                    e5.printStackTrace();
+                }
+            }
+            throw th;
         }
     }
 
@@ -131,19 +132,19 @@ public class BitmapHelper {
     public static Bitmap getBitmapFromView(View view) {
         view.setPressed(false);
         view.invalidate();
-        Bitmap createBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        view.draw(new Canvas(createBitmap));
-        return createBitmap;
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmapCreateBitmap));
+        return bitmapCreateBitmap;
     }
 
-    public static int[] getImageSizeFromFile(String str) {
+    public static int[] getImageSizeFromFile(String str) throws Throwable {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(str, options);
         return new int[]{options.outWidth, options.outHeight};
     }
 
-    public static int[] getImageSizeFromResource(Resources resources, int i) {
+    public static int[] getImageSizeFromResource(Resources resources, int i) throws Throwable {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, i, options);
@@ -231,8 +232,8 @@ public class BitmapHelper {
         if (intBuffer == null || intBuffer.capacity() <= 0) {
             return null;
         }
-        int capacity = intBuffer.capacity();
-        int i3 = capacity / i;
+        int iCapacity = intBuffer.capacity();
+        int i3 = iCapacity / i;
         if (i < i2) {
             i2 = i;
         }
@@ -240,7 +241,7 @@ public class BitmapHelper {
             i2 = i3;
         }
         int i4 = i2 + i2;
-        int[] iArr = new int[capacity - ((i - i4) * (i3 - i4))];
+        int[] iArr = new int[iCapacity - ((i - i4) * (i3 - i4))];
         int i5 = 0;
         for (int i6 = 0; i6 < i2; i6++) {
             int i7 = 0;

@@ -9,14 +9,12 @@ import android.os.Parcelable;
 import com.samsung.android.visual.ai.sdkcommon.IC2paEmbedCallback;
 import com.samsung.android.visual.ai.sdkcommon.IC2paManifestsCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDpsC2pa extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* renamed from: -$$Nest$smwriteTypedObject, reason: not valid java name */
-        public static void m3314$$Nest$smwriteTypedObject(Parcel parcel, Parcelable parcelable) {
+        public static void m3332$$Nest$smwriteTypedObject(Parcel parcel, Parcelable parcelable) {
             if (parcelable == null) {
                 parcel.writeInt(0);
             } else {
@@ -46,11 +44,9 @@ public interface IDpsC2pa extends IInterface {
 
     String saveManifestsToCacheWithPfd(Bundle bundle);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDpsC2pa {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IDpsC2pa {
             public final IBinder mRemote;
 
@@ -65,95 +61,95 @@ public interface IDpsC2pa extends IInterface {
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final void clearAllManifestsFromCache() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final boolean clearManifestsFromCache(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final void embedManifestToPfd(Bundle bundle, IC2paEmbedCallback iC2paEmbedCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3314$$Nest$smwriteTypedObject(obtain, bundle);
-                    obtain.writeStrongInterface(iC2paEmbedCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    parcelObtain.writeStrongInterface(iC2paEmbedCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final void getManifestsAsStringWithPfd(Bundle bundle, IC2paManifestsCallback iC2paManifestsCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3314$$Nest$smwriteTypedObject(obtain, bundle);
-                    obtain.writeStrongInterface(iC2paManifestsCallback);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    parcelObtain.writeStrongInterface(iC2paManifestsCallback);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final boolean isC2paInfoExistWithPfd(Bundle bundle) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3314$$Nest$smwriteTypedObject(obtain, bundle);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.visual.ai.sdkcommon.IDpsC2pa
             public final String saveManifestsToCacheWithPfd(Bundle bundle) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3314$$Nest$smwriteTypedObject(obtain, bundle);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -189,14 +185,14 @@ public interface IDpsC2pa extends IInterface {
                     return true;
                 case 3:
                     parcel.readString();
-                    String saveManifestsToCache = saveManifestsToCache();
+                    String strSaveManifestsToCache = saveManifestsToCache();
                     parcel2.writeNoException();
-                    parcel2.writeString(saveManifestsToCache);
+                    parcel2.writeString(strSaveManifestsToCache);
                     return true;
                 case 4:
-                    boolean clearManifestsFromCache = clearManifestsFromCache(parcel.readString());
+                    boolean zClearManifestsFromCache = clearManifestsFromCache(parcel.readString());
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearManifestsFromCache ? 1 : 0);
+                    parcel2.writeInt(zClearManifestsFromCache ? 1 : 0);
                     return true;
                 case 5:
                     clearAllManifestsFromCache();
@@ -204,9 +200,9 @@ public interface IDpsC2pa extends IInterface {
                     return true;
                 case 6:
                     parcel.readString();
-                    boolean isC2paInfoExist = isC2paInfoExist();
+                    boolean zIsC2paInfoExist = isC2paInfoExist();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isC2paInfoExist ? 1 : 0);
+                    parcel2.writeInt(zIsC2paInfoExist ? 1 : 0);
                     return true;
                 case 7:
                     getManifestsAsStringWithPfd((Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null), IC2paManifestsCallback.Stub.asInterface(parcel.readStrongBinder()));
@@ -217,14 +213,14 @@ public interface IDpsC2pa extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String saveManifestsToCacheWithPfd = saveManifestsToCacheWithPfd((Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
+                    String strSaveManifestsToCacheWithPfd = saveManifestsToCacheWithPfd((Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
                     parcel2.writeNoException();
-                    parcel2.writeString(saveManifestsToCacheWithPfd);
+                    parcel2.writeString(strSaveManifestsToCacheWithPfd);
                     return true;
                 case 10:
-                    boolean isC2paInfoExistWithPfd = isC2paInfoExistWithPfd((Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
+                    boolean zIsC2paInfoExistWithPfd = isC2paInfoExistWithPfd((Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
                     parcel2.writeNoException();
-                    parcel2.writeInt(isC2paInfoExistWithPfd ? 1 : 0);
+                    parcel2.writeInt(zIsC2paInfoExistWithPfd ? 1 : 0);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

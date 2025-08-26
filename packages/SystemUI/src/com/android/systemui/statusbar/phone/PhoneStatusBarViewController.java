@@ -1,5 +1,6 @@
 package com.android.systemui.statusbar.phone;
 
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
@@ -57,7 +58,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhoneStatusBarViewController extends ViewController implements IndicatorGarden {
     public BatteryMeterView battery;
@@ -85,7 +85,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
     public View statusContainer;
     public final ViewUtil viewUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public final CentralSurfaces centralSurfaces;
         public final ConfigurationController configurationController;
@@ -128,7 +127,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PhoneStatusBarViewTouchHandler implements Gefingerpoken {
         public PhoneStatusBarViewTouchHandler() {
         }
@@ -149,7 +147,6 @@ public final class PhoneStatusBarViewController extends ViewController implement
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatusBarViewsCenterProvider implements UnfoldMoveFromCenterAnimator.ViewCenterProvider {
         public static void getViewEdgeCenter(View view, Point point, boolean z) {
             boolean z2 = z ^ (view.getResources().getConfiguration().getLayoutDirection() == 1);
@@ -196,71 +193,27 @@ public final class PhoneStatusBarViewController extends ViewController implement
         return ((PhoneStatusBarViewControllerExt) this.samsungExtLazy.get()).phoneStatusBarClockManager.getClockWidth();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x004c  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x002e  */
     @Override // com.android.systemui.statusbar.phone.IndicatorGarden
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getEssentialRightWidth() {
-        /*
-            r5 = this;
-            T extends android.view.View r0 = r5.mView
-            com.android.systemui.statusbar.phone.PhoneStatusBarView r0 = (com.android.systemui.statusbar.phone.PhoneStatusBarView) r0
-            r1 = 2131362194(0x7f0a0192, float:1.8344162E38)
-            android.view.View r0 = r0.requireViewById(r1)
-            com.android.systemui.battery.BatteryMeterView r0 = (com.android.systemui.battery.BatteryMeterView) r0
-            boolean r1 = com.android.systemui.BasicRune.STATUS_REAL_TIME_NETWORK_SPEED
-            r2 = 0
-            if (r1 == 0) goto L2e
-            T extends android.view.View r1 = r5.mView
-            com.android.systemui.statusbar.phone.PhoneStatusBarView r1 = (com.android.systemui.statusbar.phone.PhoneStatusBarView) r1
-            if (r1 == 0) goto L20
-            r3 = 2131363913(0x7f0a0849, float:1.8347648E38)
-            android.view.View r1 = r1.findViewById(r3)
-            goto L21
-        L20:
-            r1 = 0
-        L21:
-            if (r1 == 0) goto L2e
-            int r3 = r1.getVisibility()
-            if (r3 != 0) goto L2e
-            int r1 = r1.getMeasuredWidth()
-            goto L2f
-        L2e:
-            r1 = r2
-        L2f:
-            dagger.Lazy r5 = r5.samsungExtLazy
-            java.lang.Object r3 = r5.get()
-            com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt r3 = (com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt) r3
-            com.android.systemui.statusbar.phone.PhoneStatusBarClockManager r3 = r3.phoneStatusBarClockManager
-            com.android.systemui.statusbar.phone.PhoneStatusBarClockManager$POSITION r3 = r3.mClockPosition
-            com.android.systemui.statusbar.phone.PhoneStatusBarClockManager$POSITION r4 = com.android.systemui.statusbar.phone.PhoneStatusBarClockManager.POSITION.RIGHT
-            if (r3 != r4) goto L4c
-            java.lang.Object r3 = r5.get()
-            com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt r3 = (com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt) r3
-            com.android.systemui.statusbar.phone.PhoneStatusBarClockManager r3 = r3.phoneStatusBarClockManager
-            int r3 = r3.getClockWidth()
-            goto L4d
-        L4c:
-            r3 = r2
-        L4d:
-            java.lang.Object r5 = r5.get()
-            com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt r5 = (com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt) r5
-            com.android.systemui.statusbar.phone.TwoPhoneModeIconController r5 = r5.twoPhoneModeIconController
-            boolean r4 = r5.featureEnabled()
-            if (r4 == 0) goto L5f
-            int r2 = r5.getViewWidth()
-        L5f:
-            int r5 = r0.getMeasuredWidth()
-            int r5 = r5 + r1
-            int r5 = r5 + r3
-            int r5 = r5 + r2
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.PhoneStatusBarViewController.getEssentialRightWidth():int");
+        int measuredWidth;
+        BatteryMeterView batteryMeterView = (BatteryMeterView) ((PhoneStatusBarView) this.mView).requireViewById(R.id.battery);
+        if (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED) {
+            PhoneStatusBarView phoneStatusBarView = (PhoneStatusBarView) this.mView;
+            View viewFindViewById = phoneStatusBarView != null ? phoneStatusBarView.findViewById(R.id.networkSpeed) : null;
+            if (viewFindViewById != null && viewFindViewById.getVisibility() == 0) {
+                measuredWidth = viewFindViewById.getMeasuredWidth();
+            }
+        } else {
+            measuredWidth = 0;
+        }
+        dagger.Lazy lazy = this.samsungExtLazy;
+        int clockWidth = ((PhoneStatusBarViewControllerExt) lazy.get()).phoneStatusBarClockManager.mClockPosition == PhoneStatusBarClockManager.POSITION.RIGHT ? ((PhoneStatusBarViewControllerExt) lazy.get()).phoneStatusBarClockManager.getClockWidth() : 0;
+        TwoPhoneModeIconController twoPhoneModeIconController = ((PhoneStatusBarViewControllerExt) lazy.get()).twoPhoneModeIconController;
+        return batteryMeterView.getMeasuredWidth() + measuredWidth + clockWidth + (twoPhoneModeIconController.featureEnabled() ? twoPhoneModeIconController.getViewWidth() : 0);
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGarden
@@ -337,12 +290,12 @@ public final class PhoneStatusBarViewController extends ViewController implement
             phoneStatusBarView5.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt$onViewAttached$1$1
                 @Override // android.view.View.OnApplyWindowInsetsListener
                 public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt2 = PhoneStatusBarViewControllerExt.this;
+                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt2 = phoneStatusBarViewControllerExt;
                     if (((KeyguardStateControllerImpl) phoneStatusBarViewControllerExt2.keyguardStateController).mShowing) {
                         return windowInsets;
                     }
                     phoneStatusBarViewControllerExt2.indicatorGardenPresenter.onGardenApplyWindowInsets(this);
-                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt3 = PhoneStatusBarViewControllerExt.this;
+                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt3 = phoneStatusBarViewControllerExt;
                     IndicatorGardenPresenter indicatorGardenPresenter2 = phoneStatusBarViewControllerExt3.indicatorGardenPresenter;
                     ((PrivacyDotViewControllerImpl) phoneStatusBarViewControllerExt3.privacyDotViewController).updateGarden(indicatorGardenPresenter2.gardenAlgorithm.calculateLeftPadding(), indicatorGardenPresenter2.gardenAlgorithm.calculateRightPadding(), windowInsets);
                     return view.onApplyWindowInsets(windowInsets);
@@ -351,7 +304,7 @@ public final class PhoneStatusBarViewController extends ViewController implement
             phoneStatusBarView5.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt$onViewAttached$1$2
                 @Override // android.view.View.OnLayoutChangeListener
                 public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                    IndicatorGardenPresenter indicatorGardenPresenter2 = PhoneStatusBarViewControllerExt.this.indicatorGardenPresenter;
+                    IndicatorGardenPresenter indicatorGardenPresenter2 = phoneStatusBarViewControllerExt.indicatorGardenPresenter;
                     PhoneStatusBarViewController phoneStatusBarViewController = this;
                     indicatorGardenPresenter2.getClass();
                     indicatorGardenPresenter2.mainHandler.post(new IndicatorGardenPresenter$onGardenOnLayout$1(indicatorGardenPresenter2, phoneStatusBarViewController));
@@ -412,16 +365,16 @@ public final class PhoneStatusBarViewController extends ViewController implement
         if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT) {
             phoneStatusBarViewControllerExt.statusIconContainerController.view.mSidelingCutoutContainerInfo = new SidelingCutoutContainerInfo() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewControllerExt$onViewAttached$3
                 @Override // com.android.systemui.statusbar.phone.SidelingCutoutContainerInfo
-                public final int getRightSideAvailableWidth(Rect rect) {
-                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt2 = PhoneStatusBarViewControllerExt.this;
+                public final int getRightSideAvailableWidth(Rect rect) throws Resources.NotFoundException {
+                    PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt2 = phoneStatusBarViewControllerExt;
                     PhoneStatusBarView phoneStatusBarView8 = phoneStatusBarViewControllerExt2.phoneStatusBarView;
                     if (phoneStatusBarView8 == null) {
                         return 0;
                     }
                     BatteryMeterView batteryMeterView3 = (BatteryMeterView) phoneStatusBarView8.requireViewById(R.id.battery);
                     int paddingEnd = ((ViewGroup) phoneStatusBarView8.requireViewById(R.id.statusIcons)).getPaddingEnd();
-                    int dimensionPixelSize = phoneStatusBarView8.getResources().getDimensionPixelSize(17106384);
-                    int width = phoneStatusBarView8.getResources().getConfiguration().windowConfiguration.getBounds().width();
+                    int dimensionPixelSize = phoneStatusBarView8.getResources().getDimensionPixelSize(17106385);
+                    int iWidth = phoneStatusBarView8.getResources().getConfiguration().windowConfiguration.getBounds().width();
                     int dimensionPixelSize2 = phoneStatusBarView8.getResources().getDimensionPixelSize(R.dimen.indicator_marquee_max_shift) + rect.right;
                     TwoPhoneModeIconController twoPhoneModeIconController2 = phoneStatusBarViewControllerExt2.twoPhoneModeIconController;
                     int measuredWidth = batteryMeterView3.getMeasuredWidth() + dimensionPixelSize + paddingEnd + (twoPhoneModeIconController2.featureEnabled() ? twoPhoneModeIconController2.getViewWidth() : 0);
@@ -429,7 +382,7 @@ public final class PhoneStatusBarViewController extends ViewController implement
                     if (phoneStatusBarClockManager2.mClockPosition == PhoneStatusBarClockManager.POSITION.RIGHT) {
                         measuredWidth += phoneStatusBarClockManager2.getClockWidth();
                     }
-                    return (width - measuredWidth) - dimensionPixelSize2;
+                    return (iWidth - measuredWidth) - dimensionPixelSize2;
                 }
             };
             PhoneStatusBarView phoneStatusBarView8 = phoneStatusBarViewControllerExt.phoneStatusBarView;
@@ -438,7 +391,7 @@ public final class PhoneStatusBarViewController extends ViewController implement
                     @Override // android.view.View.OnLayoutChangeListener
                     public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                         StatusIconContainer statusIconContainer;
-                        if (PhoneStatusBarViewControllerExt.this.indicatorCutoutUtil.getDisplayCutoutAreaToExclude() == null || (statusIconContainer = (StatusIconContainer) viewGroup.findViewById(R.id.statusIcons)) == null) {
+                        if (phoneStatusBarViewControllerExt.indicatorCutoutUtil.getDisplayCutoutAreaToExclude() == null || (statusIconContainer = (StatusIconContainer) viewGroup.findViewById(R.id.statusIcons)) == null) {
                             return;
                         }
                         if (statusIconContainer.getWidth() != statusIconContainer.getMeasuredWidth() || statusIconContainer.getX() < 0.0f) {
@@ -459,12 +412,12 @@ public final class PhoneStatusBarViewController extends ViewController implement
             }
             phoneStatusBarView.setBackgroundColor(570425599);
         }
-        View requireViewById = ((PhoneStatusBarView) this.mView).requireViewById(R.id.system_icons);
-        this.statusContainer = requireViewById;
-        if (requireViewById == null) {
-            requireViewById = null;
+        View viewRequireViewById = ((PhoneStatusBarView) this.mView).requireViewById(R.id.system_icons);
+        this.statusContainer = viewRequireViewById;
+        if (viewRequireViewById == null) {
+            viewRequireViewById = null;
         }
-        requireViewById.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController$onViewAttached$1
+        viewRequireViewById.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController.onViewAttached.1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getSource() != 8194) {
@@ -497,32 +450,30 @@ public final class PhoneStatusBarViewController extends ViewController implement
             scopedUnfoldTransitionProgressProvider.setReadyToHandleTransition(true);
         }
         ((ConfigurationControllerImpl) this.configurationController).addCallback(this.configurationListener);
-        View requireViewById2 = ((PhoneStatusBarView) this.mView).requireViewById(R.id.status_bar_start_side_except_heads_up);
+        View viewRequireViewById2 = ((PhoneStatusBarView) this.mView).requireViewById(R.id.status_bar_start_side_except_heads_up);
         ViewGroup viewGroup6 = (ViewGroup) ((PhoneStatusBarView) this.mView).requireViewById(R.id.status_bar_end_side_content);
         if (this.moveFromCenterAnimationController == null) {
             return;
         }
-        final View[] viewArr = {requireViewById2, viewGroup6};
-        ((PhoneStatusBarView) this.mView).getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController$onViewAttached$2
+        final View[] viewArr = {viewRequireViewById2, viewGroup6};
+        ((PhoneStatusBarView) this.mView).getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController.onViewAttached.2
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                View view;
                 StatusBarMoveFromCenterAnimationController statusBarMoveFromCenterAnimationController = PhoneStatusBarViewController.this.moveFromCenterAnimationController;
                 View[] viewArr2 = viewArr;
                 UnfoldMoveFromCenterAnimator unfoldMoveFromCenterAnimator = statusBarMoveFromCenterAnimationController.moveFromCenterAnimator;
                 UnfoldMoveFromCenterAnimator.updateDisplayProperties$default(unfoldMoveFromCenterAnimator);
-                for (View view2 : viewArr2) {
-                    UnfoldMoveFromCenterAnimator.AnimatedView animatedView = new UnfoldMoveFromCenterAnimator.AnimatedView(new WeakReference(view2), 0.0f, 0.0f, 6, null);
-                    unfoldMoveFromCenterAnimator.updateAnimatedView(animatedView, view2);
+                for (View view : viewArr2) {
+                    UnfoldMoveFromCenterAnimator.AnimatedView animatedView = new UnfoldMoveFromCenterAnimator.AnimatedView(new WeakReference(view), 0.0f, 0.0f, 6, null);
+                    unfoldMoveFromCenterAnimator.updateAnimatedView(animatedView, view);
                     ((ArrayList) unfoldMoveFromCenterAnimator.animatedViews).add(animatedView);
                 }
                 statusBarMoveFromCenterAnimationController.progressProvider.listeners.add(statusBarMoveFromCenterAnimationController.transitionListener);
-                view = ((ViewController) PhoneStatusBarViewController.this).mView;
-                ((PhoneStatusBarView) view).getViewTreeObserver().removeOnPreDrawListener(this);
+                ((PhoneStatusBarView) ((ViewController) PhoneStatusBarViewController.this).mView).getViewTreeObserver().removeOnPreDrawListener(this);
                 return true;
             }
         });
-        ((PhoneStatusBarView) this.mView).addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController$onViewAttached$3
+        ((PhoneStatusBarView) this.mView).addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController.onViewAttached.3
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                 if (i3 - i != i7 - i5) {
@@ -652,9 +603,9 @@ public final class PhoneStatusBarViewController extends ViewController implement
                     return false;
                 }
                 if (motionEvent.getAction() == 1) {
-                    PhoneStatusBarViewController.access$dispatchEventToShadeDisplayPolicy(PhoneStatusBarViewController.this, motionEvent);
+                    PhoneStatusBarViewController.access$dispatchEventToShadeDisplayPolicy(this.this$0, motionEvent);
                     view.performClick();
-                    ((BaseShadeControllerImpl) PhoneStatusBarViewController.this.shadeController).animateExpandShade();
+                    ((BaseShadeControllerImpl) this.this$0.shadeController).animateExpandShade();
                 }
                 return true;
             }
@@ -679,15 +630,13 @@ public final class PhoneStatusBarViewController extends ViewController implement
         StatusBarUserChipViewBinder.bind((StatusBarUserSwitcherContainer) ((PhoneStatusBarView) this.mView).findViewById(R.id.user_switcher_container), statusBarUserChipViewModel, null);
         this.gardener = new IndicatorBasicGardener() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarViewController$gardener$1
             {
-                super(PhoneStatusBarViewController.this, "PhoneStatusBarViewController");
+                super(this.this$0, "PhoneStatusBarViewController");
             }
 
             @Override // com.android.systemui.statusbar.phone.IndicatorBasicGardener
             public final ViewGroup.MarginLayoutParams getCameraTopMarginContainerMarginLayoutParams() {
-                View view;
-                view = ((ViewController) PhoneStatusBarViewController.this).mView;
-                View findViewById = ((PhoneStatusBarView) view).findViewById(R.id.status_bar_contents);
-                return (ViewGroup.MarginLayoutParams) (findViewById != null ? findViewById.getLayoutParams() : null);
+                View viewFindViewById = ((PhoneStatusBarView) ((ViewController) this.this$0).mView).findViewById(R.id.status_bar_contents);
+                return (ViewGroup.MarginLayoutParams) (viewFindViewById != null ? viewFindViewById.getLayoutParams() : null);
             }
 
             @Override // com.android.systemui.statusbar.phone.IndicatorBasicGardener
@@ -695,7 +644,7 @@ public final class PhoneStatusBarViewController extends ViewController implement
                 if (super.needToUpdatePaddings(indicatorGardenModel)) {
                     return true;
                 }
-                IndicatorMarqueeGardener indicatorMarqueeGardener = ((PhoneStatusBarViewControllerExt) PhoneStatusBarViewController.this.samsungExtLazy.get()).indicatorMarqueeGardener;
+                IndicatorMarqueeGardener indicatorMarqueeGardener = ((PhoneStatusBarViewControllerExt) this.this$0.samsungExtLazy.get()).indicatorMarqueeGardener;
                 if (!indicatorMarqueeGardener.hasSomethingChanged) {
                     return false;
                 }
@@ -706,16 +655,14 @@ public final class PhoneStatusBarViewController extends ViewController implement
 
             @Override // com.android.systemui.statusbar.phone.IndicatorBasicGardener
             public final void updateSidePadding(int i3, int i4) {
-                PhoneStatusBarViewController phoneStatusBarViewController = PhoneStatusBarViewController.this;
+                PhoneStatusBarViewController phoneStatusBarViewController = this.this$0;
                 PhoneStatusBarViewControllerExt phoneStatusBarViewControllerExt = (PhoneStatusBarViewControllerExt) phoneStatusBarViewController.samsungExtLazy.get();
                 ViewGroup viewGroup = phoneStatusBarViewController.sidePaddingContainer;
                 IndicatorMarqueeGardener.MarqueeModel marqueeModel = phoneStatusBarViewControllerExt.indicatorMarqueeGardener.marqueeModel;
                 int i5 = i3 + marqueeModel.shiftLeft;
-                int i6 = marqueeModel.shiftTop;
-                int i7 = i4 + marqueeModel.shiftRight;
-                int i8 = marqueeModel.shiftBottom;
+                int i6 = i4 + marqueeModel.shiftRight;
                 if (viewGroup != null) {
-                    viewGroup.setPadding(i5, i6, i7, i8);
+                    viewGroup.setPadding(i5, 0, i6, 0);
                 }
             }
         };

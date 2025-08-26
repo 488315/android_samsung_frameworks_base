@@ -42,11 +42,11 @@ public final class AnomalyReporter {
         TelephonyStatsLog.write(461, i, uuid.getLeastSignificantBits(), uuid.getMostSignificantBits());
         try {
             if (DeviceConfig.getBoolean(PropertyInvalidatedCache.MODULE_TELEPHONY, KEY_IS_TELEPHONY_ANOMALY_REPORT_ENABLED, false)) {
-                int intValue = sEvents.containsKey(uuid) ? sEvents.get(uuid).intValue() + 1 : 1;
-                Integer valueOf = Integer.valueOf(intValue);
-                sEvents.put(uuid, valueOf);
-                valueOf.getClass();
-                if (intValue <= 1 && sDebugPackageName != null) {
+                int iIntValue = sEvents.containsKey(uuid) ? sEvents.get(uuid).intValue() + 1 : 1;
+                Integer numValueOf = Integer.valueOf(iIntValue);
+                sEvents.put(uuid, numValueOf);
+                numValueOf.getClass();
+                if (iIntValue <= 1 && sDebugPackageName != null) {
                     Intent intent = new Intent(TelephonyManager.ACTION_ANOMALY_REPORTED);
                     intent.putExtra(TelephonyManager.EXTRA_ANOMALY_ID, new ParcelUuid(uuid));
                     if (str != null) {
@@ -62,20 +62,20 @@ public final class AnomalyReporter {
     }
 
     public static void initialize(Context context) {
-        List<ResolveInfo> queryBroadcastReceivers;
+        List<ResolveInfo> listQueryBroadcastReceivers;
         if (context == null) {
             throw new IllegalArgumentException("AnomalyReporter needs a non-null context.");
         }
         context.enforceCallingOrSelfPermission(Manifest.permission.MODIFY_PHONE_STATE, "This app does not have privileges to send debug events");
         sContext = context;
         PackageManager packageManager = context.getPackageManager();
-        if (packageManager == null || (queryBroadcastReceivers = packageManager.queryBroadcastReceivers(new Intent(TelephonyManager.ACTION_ANOMALY_REPORTED), BatteryStats.HistoryItem.MOST_INTERESTING_STATES)) == null || queryBroadcastReceivers.isEmpty()) {
+        if (packageManager == null || (listQueryBroadcastReceivers = packageManager.queryBroadcastReceivers(new Intent(TelephonyManager.ACTION_ANOMALY_REPORTED), BatteryStats.HistoryItem.MOST_INTERESTING_STATES)) == null || listQueryBroadcastReceivers.isEmpty()) {
             return;
         }
-        if (queryBroadcastReceivers.size() > 1) {
+        if (listQueryBroadcastReceivers.size() > 1) {
             com.android.telephony.Rlog.e(TAG, "Multiple Anomaly Receivers installed.");
         }
-        for (ResolveInfo resolveInfo : queryBroadcastReceivers) {
+        for (ResolveInfo resolveInfo : listQueryBroadcastReceivers) {
             if (resolveInfo.activityInfo == null) {
                 com.android.telephony.Rlog.w(TAG, "Found package without activity");
             } else {

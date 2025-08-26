@@ -15,16 +15,16 @@ interface Hue {
         if (f >= 0.0f && f < 360.0f) {
             f2 = f;
         }
-        float floatValue = Float.valueOf(f2).floatValue();
+        float fFloatValue = Float.valueOf(f2).floatValue();
         int size = list.size() - 2;
         if (size >= 0) {
             int i = 0;
             while (true) {
-                float intValue = ((Number) list.get(i).first).intValue();
+                float fIntValue = ((Number) list.get(i).first).intValue();
                 int i2 = i + 1;
-                float intValue2 = ((Number) list.get(i2).first).intValue();
-                if (intValue <= floatValue && floatValue < intValue2) {
-                    return ColorScheme.wrapDegreesDouble(floatValue + ((Number) list.get(i).second).doubleValue());
+                float fIntValue2 = ((Number) list.get(i2).first).intValue();
+                if (fIntValue <= fFloatValue && fFloatValue < fIntValue2) {
+                    return ColorScheme.wrapDegreesDouble(fFloatValue + ((Number) list.get(i).second).doubleValue());
                 }
                 if (i == size) {
                     break;

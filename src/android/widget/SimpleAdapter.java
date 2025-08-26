@@ -58,7 +58,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
         return createViewFromResource(this.mInflater, i, view, viewGroup, this.mResource);
     }
 
-    private View createViewFromResource(LayoutInflater layoutInflater, int i, View view, ViewGroup viewGroup, int i2) {
+    private View createViewFromResource(LayoutInflater layoutInflater, int i, View view, ViewGroup viewGroup, int i2) throws Resources.NotFoundException {
         if (view == null) {
             view = layoutInflater.inflate(i2, viewGroup, false);
         }
@@ -110,35 +110,35 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
         int[] iArr = this.mTo;
         int length = iArr.length;
         for (int i2 = 0; i2 < length; i2++) {
-            View findViewById = view.findViewById(iArr[i2]);
-            if (findViewById != 0) {
+            View viewFindViewById = view.findViewById(iArr[i2]);
+            if (viewFindViewById != 0) {
                 Object obj = map.get(strArr[i2]);
-                String obj2 = obj == null ? "" : obj.toString();
-                String str = obj2 != null ? obj2 : "";
-                if (viewBinder != null ? viewBinder.setViewValue(findViewById, obj, str) : false) {
+                String string = obj == null ? "" : obj.toString();
+                String str = string != null ? string : "";
+                if (viewBinder != null ? viewBinder.setViewValue(viewFindViewById, obj, str) : false) {
                     continue;
-                } else if (findViewById instanceof Checkable) {
+                } else if (viewFindViewById instanceof Checkable) {
                     if (obj instanceof Boolean) {
-                        ((Checkable) findViewById).setChecked(((Boolean) obj).booleanValue());
-                    } else if (findViewById instanceof TextView) {
-                        setViewText((TextView) findViewById, str);
+                        ((Checkable) viewFindViewById).setChecked(((Boolean) obj).booleanValue());
+                    } else if (viewFindViewById instanceof TextView) {
+                        setViewText((TextView) viewFindViewById, str);
                     } else {
                         StringBuilder sb = new StringBuilder();
-                        sb.append(findViewById.getClass().getName());
+                        sb.append(viewFindViewById.getClass().getName());
                         sb.append(" should be bound to a Boolean, not a ");
                         sb.append(obj == null ? "<unknown type>" : obj.getClass());
                         throw new IllegalStateException(sb.toString());
                     }
-                } else if (findViewById instanceof TextView) {
-                    setViewText((TextView) findViewById, str);
-                } else if (findViewById instanceof ImageView) {
+                } else if (viewFindViewById instanceof TextView) {
+                    setViewText((TextView) viewFindViewById, str);
+                } else if (viewFindViewById instanceof ImageView) {
                     if (obj instanceof Integer) {
-                        setViewImage((ImageView) findViewById, ((Integer) obj).intValue());
+                        setViewImage((ImageView) viewFindViewById, ((Integer) obj).intValue());
                     } else {
-                        setViewImage((ImageView) findViewById, str);
+                        setViewImage((ImageView) viewFindViewById, str);
                     }
                 } else {
-                    throw new IllegalStateException(findViewById.getClass().getName() + " is not a  view that can be bounds by this SimpleAdapter");
+                    throw new IllegalStateException(viewFindViewById.getClass().getName() + " is not a  view that can be bounds by this SimpleAdapter");
                 }
             }
         }
@@ -201,14 +201,14 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
                 if (map != null) {
                     int length = SimpleAdapter.this.mTo.length;
                     for (int i2 = 0; i2 < length; i2++) {
-                        String[] split = ((String) map.get(SimpleAdapter.this.mFrom[i2])).split(" ");
-                        int length2 = split.length;
+                        String[] strArrSplit = ((String) map.get(SimpleAdapter.this.mFrom[i2])).split(" ");
+                        int length2 = strArrSplit.length;
                         int i3 = 0;
                         while (true) {
                             if (i3 >= length2) {
                                 break;
                             }
-                            if (split[i3].toLowerCase().startsWith(lowerCase)) {
+                            if (strArrSplit[i3].toLowerCase().startsWith(lowerCase)) {
                                 arrayList3.add(map);
                                 break;
                             }

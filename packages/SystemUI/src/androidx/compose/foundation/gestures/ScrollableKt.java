@@ -1,22 +1,27 @@
 package androidx.compose.foundation.gestures;
 
+import androidx.compose.foundation.MutatePriority;
 import androidx.compose.foundation.interaction.MutableInteractionSource;
 import androidx.compose.ui.Modifier;
 import androidx.compose.ui.MotionDurationScale;
+import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.pointer.PointerInputChange;
 import androidx.compose.ui.input.pointer.PointerType;
 import androidx.compose.ui.unit.Density;
+import kotlin.ResultKt;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Ref$FloatRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ScrollableKt {
     public static final Function1 CanDragCalculation = new Function1() { // from class: androidx.compose.foundation.gestures.ScrollableKt$CanDragCalculation$1
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             int i = ((PointerInputChange) obj).type;
             PointerType.Companion.getClass();
             return Boolean.valueOf(!(i == PointerType.Mouse));
@@ -66,74 +71,50 @@ public abstract class ScrollableKt {
         }
     };
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* renamed from: access$semanticsScrollBy-d-4ec7I, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object m76access$semanticsScrollByd4ec7I(androidx.compose.foundation.gestures.ScrollingLogic r10, long r11, kotlin.coroutines.jvm.internal.ContinuationImpl r13) {
-        /*
-            boolean r0 = r13 instanceof androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$1
-            if (r0 == 0) goto L13
-            r0 = r13
-            androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$1 r0 = (androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$1 r0 = new androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$1
-            r0.<init>(r13)
-        L18:
-            java.lang.Object r13 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L39
-            if (r2 != r3) goto L31
-            java.lang.Object r10 = r0.L$1
-            kotlin.jvm.internal.Ref$FloatRef r10 = (kotlin.jvm.internal.Ref$FloatRef) r10
-            java.lang.Object r11 = r0.L$0
-            androidx.compose.foundation.gestures.ScrollingLogic r11 = (androidx.compose.foundation.gestures.ScrollingLogic) r11
-            kotlin.ResultKt.throwOnFailure(r13)
-            r8 = r10
-            r10 = r11
-            goto L59
-        L31:
-            java.lang.IllegalStateException r10 = new java.lang.IllegalStateException
-            java.lang.String r11 = "call to 'resume' before 'invoke' with coroutine"
-            r10.<init>(r11)
-            throw r10
-        L39:
-            kotlin.ResultKt.throwOnFailure(r13)
-            kotlin.jvm.internal.Ref$FloatRef r8 = new kotlin.jvm.internal.Ref$FloatRef
-            r8.<init>()
-            androidx.compose.foundation.MutatePriority r13 = androidx.compose.foundation.MutatePriority.Default
-            androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$2 r4 = new androidx.compose.foundation.gestures.ScrollableKt$semanticsScrollBy$2
-            r9 = 0
-            r5 = r10
-            r6 = r11
-            r4.<init>(r5, r6, r8, r9)
-            r0.L$0 = r5
-            r0.L$1 = r8
-            r0.label = r3
-            java.lang.Object r10 = r5.scroll(r13, r4, r0)
-            if (r10 != r1) goto L58
-            return r1
-        L58:
-            r10 = r5
-        L59:
-            float r11 = r8.element
-            long r10 = r10.m85toOffsettuRUvjQ(r11)
-            androidx.compose.ui.geometry.Offset r10 = androidx.compose.ui.geometry.Offset.m393boximpl(r10)
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.ScrollableKt.m76access$semanticsScrollByd4ec7I(androidx.compose.foundation.gestures.ScrollingLogic, long, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object m77access$semanticsScrollByd4ec7I(ScrollingLogic scrollingLogic, long j, ContinuationImpl continuationImpl) {
+        ScrollableKt$semanticsScrollBy$1 scrollableKt$semanticsScrollBy$1;
+        Ref$FloatRef ref$FloatRef;
+        ScrollingLogic scrollingLogic2;
+        if (continuationImpl instanceof ScrollableKt$semanticsScrollBy$1) {
+            scrollableKt$semanticsScrollBy$1 = (ScrollableKt$semanticsScrollBy$1) continuationImpl;
+            int i = scrollableKt$semanticsScrollBy$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                scrollableKt$semanticsScrollBy$1.label = i - Integer.MIN_VALUE;
+            } else {
+                scrollableKt$semanticsScrollBy$1 = new ScrollableKt$semanticsScrollBy$1(continuationImpl);
+            }
+        }
+        Object obj = scrollableKt$semanticsScrollBy$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = scrollableKt$semanticsScrollBy$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ref$FloatRef = new Ref$FloatRef();
+            MutatePriority mutatePriority = MutatePriority.Default;
+            ScrollableKt$semanticsScrollBy$2 scrollableKt$semanticsScrollBy$2 = new ScrollableKt$semanticsScrollBy$2(scrollingLogic, j, ref$FloatRef, null);
+            scrollableKt$semanticsScrollBy$1.L$0 = scrollingLogic;
+            scrollableKt$semanticsScrollBy$1.L$1 = ref$FloatRef;
+            scrollableKt$semanticsScrollBy$1.label = 1;
+            if (scrollingLogic.scroll(mutatePriority, scrollableKt$semanticsScrollBy$2, scrollableKt$semanticsScrollBy$1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            scrollingLogic2 = scrollingLogic;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            Ref$FloatRef ref$FloatRef2 = (Ref$FloatRef) scrollableKt$semanticsScrollBy$1.L$1;
+            ScrollingLogic scrollingLogic3 = (ScrollingLogic) scrollableKt$semanticsScrollBy$1.L$0;
+            ResultKt.throwOnFailure(obj);
+            ref$FloatRef = ref$FloatRef2;
+            scrollingLogic2 = scrollingLogic3;
+        }
+        return Offset.m395boximpl(scrollingLogic2.m86toOffsettuRUvjQ(ref$FloatRef.element));
     }
 
     public static Modifier scrollable$default(Modifier modifier, ScrollableState scrollableState, Orientation orientation, boolean z, boolean z2, MutableInteractionSource mutableInteractionSource, int i) {

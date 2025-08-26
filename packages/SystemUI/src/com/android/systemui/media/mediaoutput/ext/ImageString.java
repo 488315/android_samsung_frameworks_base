@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.vector.ImageVector;
 import com.android.keyguard.KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ImageString implements CharSequence {
     public final ImageVector image;
@@ -53,9 +52,9 @@ public final class ImageString implements CharSequence {
         int i = this.resId;
         String str = this.selection;
         ImageVector imageVector = this.image;
-        StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "ImageString(resId=", ", selection=", str, ", image=");
-        m.append(imageVector);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "ImageString(resId=", ", selection=", str, ", image=");
+        sbM.append(imageVector);
+        sbM.append(")");
+        return sbM.toString();
     }
 }

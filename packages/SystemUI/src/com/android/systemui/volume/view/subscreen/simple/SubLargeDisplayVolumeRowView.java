@@ -26,7 +26,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelState;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -52,7 +51,6 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
     public VibratorWrapper mVibratorWrapper;
     public VolumePanelMotion mVolumePanelMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType;
@@ -218,8 +216,8 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
         return super.dispatchTouchEvent(motionEvent);
     }
 
-    public final String getStreamLabel$3(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) {
-        String str;
+    public final String getStreamLabel$3(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) throws Resources.NotFoundException {
+        String string;
         String smartViewLabel = volumePanelRow.getSmartViewLabel();
         if (smartViewLabel != null && !smartViewLabel.isEmpty()) {
             return smartViewLabel;
@@ -231,25 +229,25 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
         try {
             String nameRes = volumePanelRow.getNameRes();
             Resources resources = this.mResources;
-            str = resources.getString(resources.getIdentifier(nameRes, null, null));
+            string = resources.getString(resources.getIdentifier(nameRes, null, null));
         } catch (Exception unused) {
-            str = "";
+            string = "";
         }
         if (volumePanelState.isRemoteMic()) {
             if (volumePanelRow.getStreamType() == 6) {
-                str = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
+                string = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
             } else if (volumePanelRow.getStreamType() == 3 && !volumePanelState.isBtScoOn()) {
-                str = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
+                string = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
             }
         }
         if (remoteLabel == null || remoteLabel.isEmpty()) {
-            return str;
+            return string;
         }
         int streamType = volumePanelRow.getStreamType();
         if (streamType != 3 && streamType != 22 && streamType != 6 && streamType != 21) {
-            return str;
+            return string;
         }
-        return str + " (" + remoteLabel + ")";
+        return string + " (" + remoteLabel + ")";
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
@@ -303,7 +301,7 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                     }
 
                     @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
+                    public final void accept(Object obj) throws Resources.NotFoundException {
                         switch (i) {
                             case 0:
                                 SubLargeDisplayVolumeRowView subLargeDisplayVolumeRowView = this.f$0;
@@ -372,7 +370,7 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                     }
 
                     @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
+                    public final void accept(Object obj) throws Resources.NotFoundException {
                         switch (i2) {
                             case 0:
                                 SubLargeDisplayVolumeRowView subLargeDisplayVolumeRowView = this.f$0;
@@ -440,16 +438,16 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                     }).forEach(new Consumer() { // from class: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda5
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            final SubLargeDisplayVolumeRowView subLargeDisplayVolumeRowView = SubLargeDisplayVolumeRowView.this;
+                            final SubLargeDisplayVolumeRowView subLargeDisplayVolumeRowView = this.f$0;
                             VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
                             int i4 = SubLargeDisplayVolumeRowView.$r8$clinit;
-                            int viewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
+                            int iViewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
                             if (!volumePanelRow.isVisible()) {
                                 SpringAnimation springAnimation = subLargeDisplayVolumeRowView.mProgressBarSpring;
                                 if (springAnimation != null) {
                                     springAnimation.cancel();
                                 }
-                                subLargeDisplayVolumeRowView.mSeekBar.setProgress(viewRealLevel);
+                                subLargeDisplayVolumeRowView.mSeekBar.setProgress(iViewRealLevel);
                                 return;
                             }
                             SpringAnimation springAnimation2 = subLargeDisplayVolumeRowView.mProgressBarSpring;
@@ -466,13 +464,13 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                                 subLargeDisplayVolumeRowView.mProgressBarSpring.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda10
                                     @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
                                     public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                                        SubLargeDisplayVolumeRowView.this.mSeekBar.setProgress((int) f);
+                                        subLargeDisplayVolumeRowView.mSeekBar.setProgress((int) f);
                                     }
                                 });
                             } else {
                                 springAnimation2.setStartValue(subLargeDisplayVolumeRowView.mSeekBar.getProgress());
                             }
-                            subLargeDisplayVolumeRowView.mProgressBarSpring.animateToFinalPosition(viewRealLevel);
+                            subLargeDisplayVolumeRowView.mProgressBarSpring.animateToFinalPosition(iViewRealLevel);
                         }
                     });
                     break;
@@ -538,7 +536,7 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                 break;
             case 11:
                 final int activeStream = volumePanelState2.getActiveStream();
-                boolean booleanValue = ((Boolean) volumePanelState2.getVolumeRowList().stream().filter(new Predicate() { // from class: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda6
+                boolean zBooleanValue = ((Boolean) volumePanelState2.getVolumeRowList().stream().filter(new Predicate() { // from class: com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda6
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
                         int i4 = activeStream;
@@ -546,7 +544,7 @@ public class SubLargeDisplayVolumeRowView extends FrameLayout implements VolumeO
                         return ((VolumePanelRow) obj).getStreamType() == i4;
                     }
                 }).map(new SubLargeDisplayVolumeRowView$$ExternalSyntheticLambda7()).findFirst().orElse(Boolean.FALSE)).booleanValue();
-                if (!this.mIsDualViewEnabled && !volumePanelState2.isExpanded() && booleanValue) {
+                if (!this.mIsDualViewEnabled && !volumePanelState2.isExpanded() && zBooleanValue) {
                     if (!volumePanelState2.isKeyDown()) {
                         if (this.mIsKeyDownAnimating) {
                             this.mHandlerWrapper.remove(this.mKeyUpRunnable);

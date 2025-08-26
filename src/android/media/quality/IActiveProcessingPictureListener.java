@@ -41,9 +41,9 @@ public interface IActiveProcessingPictureListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IActiveProcessingPictureListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActiveProcessingPictureListener)) {
-                return (IActiveProcessingPictureListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IActiveProcessingPictureListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActiveProcessingPictureListener)) {
+                return (IActiveProcessingPictureListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -58,9 +58,9 @@ public interface IActiveProcessingPictureListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ActiveProcessingPicture.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ActiveProcessingPicture.CREATOR);
                 parcel.enforceNoDataAvail();
-                onActiveProcessingPicturesChanged(createTypedArrayList);
+                onActiveProcessingPicturesChanged(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -84,13 +84,13 @@ public interface IActiveProcessingPictureListener extends IInterface {
 
             @Override // android.media.quality.IActiveProcessingPictureListener
             public void onActiveProcessingPicturesChanged(List<ActiveProcessingPicture> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActiveProcessingPictureListener.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActiveProcessingPictureListener.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

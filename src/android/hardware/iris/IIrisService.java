@@ -60,9 +60,9 @@ public interface IIrisService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIrisService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIrisService)) {
-                return (IIrisService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIrisService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIrisService)) {
+                return (IIrisService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -89,9 +89,9 @@ public interface IIrisService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SensorPropertiesInternal.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SensorPropertiesInternal.CREATOR);
                 parcel.enforceNoDataAvail();
-                registerAuthenticators(createTypedArrayList);
+                registerAuthenticators(arrayListCreateTypedArrayList);
                 parcel2.writeNoException();
                 return true;
             }
@@ -116,16 +116,16 @@ public interface IIrisService extends IInterface {
 
             @Override // android.hardware.iris.IIrisService
             public void registerAuthenticators(List<SensorPropertiesInternal> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

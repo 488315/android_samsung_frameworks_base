@@ -48,12 +48,12 @@ class DelegatingX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity() throws CertificateNotYetValidException, CertificateExpiredException {
         this.mDelegate.checkValidity();
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date) throws CertificateNotYetValidException, CertificateExpiredException {
         this.mDelegate.checkValidity(date);
     }
 
@@ -148,12 +148,12 @@ class DelegatingX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey publicKey) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey publicKey) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateException, NoSuchProviderException {
         this.mDelegate.verify(publicKey);
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey publicKey, String str) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey publicKey, String str) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateException, NoSuchProviderException {
         this.mDelegate.verify(publicKey, str);
     }
 

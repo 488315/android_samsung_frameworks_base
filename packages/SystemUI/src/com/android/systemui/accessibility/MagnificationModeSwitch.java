@@ -34,7 +34,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MagnificationModeSwitch implements MagnificationGestureDetector.OnGestureListener, ComponentCallbacks {
     static final int DEFAULT_FADE_OUT_ANIMATION_DELAY_MS = 5000;
@@ -62,12 +61,11 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
     public final MagnificationModeSwitch$$ExternalSyntheticLambda3 mWindowInsetChangeRunnable;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ClickListener {
         void onClick(int i);
     }
 
-    public MagnificationModeSwitch(Context context, WindowManager windowManager, ImageView imageView, SfVsyncFrameCallbackProvider sfVsyncFrameCallbackProvider, ClickListener clickListener) {
+    public MagnificationModeSwitch(Context context, WindowManager windowManager, ImageView imageView, SfVsyncFrameCallbackProvider sfVsyncFrameCallbackProvider, ClickListener clickListener) throws Resources.NotFoundException {
         this.mIsFadeOutAnimating = false;
         this.mMagnificationMode = 0;
         this.mDraggableWindowBounds = new Rect();
@@ -96,7 +94,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
         imageView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.accessibility.MagnificationModeSwitch$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                MagnificationModeSwitch magnificationModeSwitch = MagnificationModeSwitch.this;
+                MagnificationModeSwitch magnificationModeSwitch = this.f$0;
                 if (magnificationModeSwitch.mIsVisible) {
                     return magnificationModeSwitch.mGestureDetector.onTouch(view, motionEvent);
                 }
@@ -147,7 +145,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
         imageView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.accessibility.MagnificationModeSwitch$$ExternalSyntheticLambda4
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                MagnificationModeSwitch magnificationModeSwitch = MagnificationModeSwitch.this;
+                MagnificationModeSwitch magnificationModeSwitch = this.f$0;
                 if (!magnificationModeSwitch.mImageView.getHandler().hasCallbacks(magnificationModeSwitch.mWindowInsetChangeRunnable)) {
                     magnificationModeSwitch.mImageView.getHandler().post(magnificationModeSwitch.mWindowInsetChangeRunnable);
                 }
@@ -164,7 +162,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
         return R.drawable.ic_magnification_button_window;
     }
 
-    public final void applyResourcesValues(int i) {
+    public final void applyResourcesValues(int i) throws Resources.NotFoundException {
         PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(this.mContext.getColor(R.color.accessibility_full_magnifier_button_icon_color), PorterDuff.Mode.SRC_ATOP);
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.magnification_mode_switch_padding);
         this.mMagnificationMode = i;
@@ -205,7 +203,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
         this.mSfVsyncFrameProvider.postFrameCallback(new Choreographer.FrameCallback() { // from class: com.android.systemui.accessibility.MagnificationModeSwitch$$ExternalSyntheticLambda7
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
-                MagnificationModeSwitch magnificationModeSwitch = MagnificationModeSwitch.this;
+                MagnificationModeSwitch magnificationModeSwitch = this.f$0;
                 float f3 = f;
                 float f4 = f2;
                 WindowManager.LayoutParams layoutParams = magnificationModeSwitch.mParams;
@@ -217,21 +215,21 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
     }
 
     @Override // android.content.ComponentCallbacks
-    public final void onConfigurationChanged(Configuration configuration) {
-        int diff = configuration.diff(this.mConfiguration);
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
+        int iDiff = configuration.diff(this.mConfiguration);
         this.mConfiguration.setTo(configuration);
-        if (diff == 0) {
+        if (iDiff == 0) {
             return;
         }
-        if ((diff & 512) != 0) {
+        if ((iDiff & 512) != 0) {
             applyResourcesValues(this.mMagnificationMode);
         }
-        if ((diff & 1152) != 0) {
+        if ((iDiff & 1152) != 0) {
             removeButton();
             return;
         }
-        if ((diff & 4096) == 0) {
-            if ((diff & 4) != 0) {
+        if ((iDiff & 4096) == 0) {
+            if ((iDiff & 4) != 0) {
                 this.mParams.accessibilityTitle = this.mContext.getString(android.R.string.chooseUsbActivity);
                 if (this.mIsVisible) {
                     this.mWindowManager.updateViewLayout(this.mImageView, this.mParams);
@@ -333,7 +331,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
             try {
                 String[] stringArray = this.mContext.getResources().getStringArray(R.array.services_always_show_magnification_settings);
                 if (stringArray.length != 0) {
-                    Set of = Set.of((Object[]) stringArray);
+                    Set setOf = Set.of((Object[]) stringArray);
                     Iterator<AccessibilityServiceInfo> it = this.mAccessibilityManager.getEnabledAccessibilityServiceList(-1).iterator();
                     while (true) {
                         if (!it.hasNext()) {
@@ -381,7 +379,7 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
                                 }
                             }
                         }).orElse(null);
-                        if (str != null && of.contains(str)) {
+                        if (str != null && setOf.contains(str)) {
                             this.mUiTimeout = -1;
                             break;
                         }
@@ -429,32 +427,12 @@ public class MagnificationModeSwitch implements MagnificationGestureDetector.OnG
     public final void onLowMemory() {
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MagnificationModeSwitch(android.content.Context r7, android.view.WindowManager r8, com.android.systemui.accessibility.MagnificationModeSwitch.ClickListener r9) {
-        /*
-            r6 = this;
-            android.widget.ImageView r3 = new android.widget.ImageView
-            r3.<init>(r7)
-            android.widget.ImageView$ScaleType r0 = android.widget.ImageView.ScaleType.CENTER
-            r3.setScaleType(r0)
-            r0 = 1
-            r3.setClickable(r0)
-            r3.setFocusable(r0)
-            r0 = 0
-            r3.setAlpha(r0)
-            com.android.internal.graphics.SfVsyncFrameCallbackProvider r4 = new com.android.internal.graphics.SfVsyncFrameCallbackProvider
-            r4.<init>()
-            r0 = r6
-            r1 = r7
-            r2 = r8
-            r5 = r9
-            r0.<init>(r1, r2, r3, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.MagnificationModeSwitch.<init>(android.content.Context, android.view.WindowManager, com.android.systemui.accessibility.MagnificationModeSwitch$ClickListener):void");
+    public MagnificationModeSwitch(Context context, WindowManager windowManager, ClickListener clickListener) {
+        ImageView imageView = new ImageView(context);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        imageView.setClickable(true);
+        imageView.setFocusable(true);
+        imageView.setAlpha(0.0f);
+        this(context, windowManager, imageView, new SfVsyncFrameCallbackProvider(), clickListener);
     }
 }

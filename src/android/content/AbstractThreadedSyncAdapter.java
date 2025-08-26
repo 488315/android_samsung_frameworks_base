@@ -145,14 +145,14 @@ public abstract class AbstractThreadedSyncAdapter {
                         }
                     }
                     Log.d(AbstractThreadedSyncAdapter.TAG, "startSync() finishing");
-                } finally {
-                }
-            } catch (Error | RuntimeException e) {
-                if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
-                    Log.d(AbstractThreadedSyncAdapter.TAG, "startSync() caught exception", e);
+                } catch (Error | RuntimeException e) {
+                    if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
+                        Log.d(AbstractThreadedSyncAdapter.TAG, "startSync() caught exception", e);
+                        throw e;
+                    }
                     throw e;
                 }
-                throw e;
+            } finally {
             }
         }
 
@@ -220,7 +220,7 @@ public abstract class AbstractThreadedSyncAdapter {
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public void run() {
+        public void run() throws Throwable {
             Process.setThreadPriority(10);
             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                 Log.d(AbstractThreadedSyncAdapter.TAG, "Thread started");
@@ -249,10 +249,10 @@ public abstract class AbstractThreadedSyncAdapter {
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "Calling onPerformSync...");
                             }
-                            ContentProviderClient acquireContentProviderClient = AbstractThreadedSyncAdapter.this.mContext.getContentResolver().acquireContentProviderClient(this.mAuthority);
+                            ContentProviderClient contentProviderClientAcquireContentProviderClient = AbstractThreadedSyncAdapter.this.mContext.getContentResolver().acquireContentProviderClient(this.mAuthority);
                             try {
-                                if (acquireContentProviderClient != null) {
-                                    AbstractThreadedSyncAdapter.this.onPerformSync(this.mAccount, this.mExtras, this.mAuthority, acquireContentProviderClient, syncResult);
+                                if (contentProviderClientAcquireContentProviderClient != null) {
+                                    AbstractThreadedSyncAdapter.this.onPerformSync(this.mAccount, this.mExtras, this.mAuthority, contentProviderClientAcquireContentProviderClient, syncResult);
                                 } else {
                                     syncResult.databaseError = true;
                                 }
@@ -260,8 +260,8 @@ public abstract class AbstractThreadedSyncAdapter {
                                     Log.d(AbstractThreadedSyncAdapter.TAG, "onPerformSync done");
                                 }
                                 Trace.traceEnd(128L);
-                                if (acquireContentProviderClient != null) {
-                                    acquireContentProviderClient.release();
+                                if (contentProviderClientAcquireContentProviderClient != null) {
+                                    contentProviderClientAcquireContentProviderClient.release();
                                 }
                                 if (!isCanceled()) {
                                     this.mSyncContext.onFinished(syncResult);
@@ -280,7 +280,7 @@ public abstract class AbstractThreadedSyncAdapter {
                                 throw e;
                             } catch (SecurityException e2) {
                                 e = e2;
-                                contentProviderClient = acquireContentProviderClient;
+                                contentProviderClient = contentProviderClientAcquireContentProviderClient;
                                 if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                     Log.d(AbstractThreadedSyncAdapter.TAG, "SecurityException", e);
                                 }
@@ -303,7 +303,7 @@ public abstract class AbstractThreadedSyncAdapter {
                                 return;
                             } catch (Throwable th) {
                                 th = th;
-                                contentProviderClient = acquireContentProviderClient;
+                                contentProviderClient = contentProviderClientAcquireContentProviderClient;
                                 Trace.traceEnd(128L);
                                 if (contentProviderClient != null) {
                                     contentProviderClient.release();
@@ -321,10 +321,10 @@ public abstract class AbstractThreadedSyncAdapter {
                             }
                         }
                         Log.d(AbstractThreadedSyncAdapter.TAG, "Thread finished");
-                    } catch (SecurityException e3) {
+                    } catch (Error | RuntimeException e3) {
                         e = e3;
                     }
-                } catch (Error | RuntimeException e4) {
+                } catch (SecurityException e4) {
                     e = e4;
                 }
             } catch (Throwable th2) {
@@ -343,15 +343,15 @@ public abstract class AbstractThreadedSyncAdapter {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleOnUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback iSyncAdapterUnsyncableAccountCallback) {
-        boolean z;
+        boolean zOnUnsyncableAccount;
         try {
-            z = onUnsyncableAccount();
+            zOnUnsyncableAccount = onUnsyncableAccount();
         } catch (RuntimeException e) {
             Log.e(TAG, "Exception while calling onUnsyncableAccount, assuming 'true'", e);
-            z = true;
+            zOnUnsyncableAccount = true;
         }
         try {
-            iSyncAdapterUnsyncableAccountCallback.onUnsyncableAccountDone(z);
+            iSyncAdapterUnsyncableAccountCallback.onUnsyncableAccountDone(zOnUnsyncableAccount);
         } catch (RemoteException e2) {
             Log.e(TAG, "Could not report result of onUnsyncableAccount", e2);
         }

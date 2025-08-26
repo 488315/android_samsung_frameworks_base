@@ -5,13 +5,18 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.app.WallpaperManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.AsyncTask;
@@ -23,18 +28,22 @@ import android.telecom.TelecomManager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SemBlurInfo;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.appcompat.widget.AbsActionBarView$$ExternalSyntheticOutline0;
+import androidx.core.graphics.drawable.DrawableKt;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.FloatValueHolder;
 import androidx.dynamicanimation.animation.SpringAnimation;
+import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -45,6 +54,7 @@ import com.android.systemui.R;
 import com.android.systemui.SystemUIAppComponentFactoryBase;
 import com.android.systemui.animation.LaunchableView;
 import com.android.systemui.animation.LaunchableViewDelegate;
+import com.android.systemui.facewidget.plugin.FaceWidgetContainerWrapper;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardUnlockInfo;
 import com.android.systemui.keyguard.KeyguardVisibilityMonitor;
@@ -56,6 +66,7 @@ import com.android.systemui.keyguardimage.WallpaperImageInjectCreator;
 import com.android.systemui.shade.CameraLauncher;
 import com.android.systemui.shade.NotificationPanelView;
 import com.android.systemui.shade.NotificationPanelViewController;
+import com.android.systemui.statusbar.KeyguardShortcutManager;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
@@ -69,15 +80,14 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
-import com.samsung.android.view.animation.SineOut60;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements KeyguardStateController.Callback, LaunchableView {
     public final LaunchableViewDelegate delegate;
@@ -171,8 +181,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     public final AnonymousClass5 mRectangleShrinkAnimatorEndListener;
     public boolean mRight;
     public int mScreenHeight;
-    public Animator mScreenOnAnimator;
-    public final AnonymousClass3 mScreenOnAnimatorListener;
     public int mScreenWidth;
     private final SettingsHelper mSettingsHelper;
     public boolean mShortcutForCamera;
@@ -200,7 +208,6 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     public static boolean mWaitForReset = false;
     public static boolean mIsLaunchPanelRunning = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GeneralTouchHandler implements TouchHandlePolicy {
         public /* synthetic */ GeneralTouchHandler(KeyguardSecAffordanceView keyguardSecAffordanceView, int i) {
             this();
@@ -210,17 +217,16 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TouchHandlePolicy {
     }
 
-    public static /* synthetic */ Unit $r8$lambda$XHszcn7tbz374W8KEh3HYw03GJQ(KeyguardSecAffordanceView keyguardSecAffordanceView, Integer num) {
+    public static /* synthetic */ Unit $r8$lambda$usC3LFwY5dbTHi859Ko25i8wvTY(KeyguardSecAffordanceView keyguardSecAffordanceView, Integer num) {
         super.setVisibility(num.intValue());
         return Unit.INSTANCE;
     }
 
     /* renamed from: -$$Nest$mresetOnTimeout, reason: not valid java name */
-    public static void m2943$$Nest$mresetOnTimeout(KeyguardSecAffordanceView keyguardSecAffordanceView) {
+    public static void m2960$$Nest$mresetOnTimeout(KeyguardSecAffordanceView keyguardSecAffordanceView) {
         keyguardSecAffordanceView.getClass();
         Log.d("KeyguardSecAffordanceView", "resetOnTimeout");
         keyguardSecAffordanceView.mIsShortcutLaunching = false;
@@ -292,20 +298,20 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     }
 
     public final void launchShortcut(float f, float f2) {
-        float hypot;
+        float fHypot;
         int i = 0;
         VelocityTracker velocityTracker = this.mVelocityTracker;
         if (velocityTracker == null) {
-            hypot = 0.0f;
+            fHypot = 0.0f;
         } else {
             velocityTracker.computeCurrentVelocity(1000);
             float xVelocity = this.mVelocityTracker.getXVelocity();
             float yVelocity = this.mVelocityTracker.getYVelocity();
             float f3 = f - this.mInitialTouchX;
             float f4 = f2 - this.mInitialTouchY;
-            hypot = ((yVelocity * f4) + (xVelocity * f3)) / ((float) Math.hypot(f3, f4));
+            fHypot = ((yVelocity * f4) + (xVelocity * f3)) / ((float) Math.hypot(f3, f4));
         }
-        if (hypot <= -4000.0f) {
+        if (fHypot <= -4000.0f) {
             this.mFling = false;
             this.mIsShortcutLaunching = false;
             cancelAllAnimators();
@@ -315,20 +321,20 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         }
         this.mFling = true;
         this.mIsShortcutLaunching = true;
-        boolean isSecure$1 = isSecure$1();
-        mIsShowBouncerAnimation = isSecure$1 && !this.mIsNoUnlockNeeded && (!this.mIsTaskTypeShortcut || this.mShortcutManager.isUnlockWaitNeeded(this.mRight ? 1 : 0));
-        mWaitForReset = (this.mIsNoUnlockNeeded || !isSecure$1) && this.mIsShortcutLaunching && (!this.mIsTaskTypeShortcut || this.mShortcutManager.isUnlockWaitNeeded(this.mRight ? 1 : 0));
+        boolean zIsSecure$1 = isSecure$1();
+        mIsShowBouncerAnimation = zIsSecure$1 && !this.mIsNoUnlockNeeded && (!this.mIsTaskTypeShortcut || this.mShortcutManager.isUnlockWaitNeeded(this.mRight ? 1 : 0));
+        mWaitForReset = (this.mIsNoUnlockNeeded || !zIsSecure$1) && this.mIsShortcutLaunching && (!this.mIsTaskTypeShortcut || this.mShortcutManager.isUnlockWaitNeeded(this.mRight ? 1 : 0));
         if (mIsShowBouncerAnimation && this.mIsShortcutForPhone) {
             mIsShowBouncerAnimation = !this.mTelecomManager.isInManagedCall();
         }
         setImageAlpha(0.0f, true);
         Log.i("KeyguardSecAffordanceView", "startShortcutLaunchAnimation");
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mRectangleDistanceCovered, this.mScreenWidth);
-        this.mShortcutLaunchAnimator = ofFloat;
-        ofFloat.setDuration(450L);
-        ofFloat.setInterpolator(SCALE_INTERPOLATOR);
-        ofFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 0));
-        ofFloat.addListener(this.mShortcutLaunchAnimatorEndListener);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mRectangleDistanceCovered, this.mScreenWidth);
+        this.mShortcutLaunchAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(450L);
+        valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 0));
+        valueAnimatorOfFloat.addListener(this.mShortcutLaunchAnimatorEndListener);
         this.mShortcutLaunchAnimator.start();
         Log.i("KeyguardSecAffordanceView", "startShortcutLaunchAlphaAnimation");
         cancelAnimator(this.mShortcutLaunchAlphaAnimator);
@@ -337,12 +343,12 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         if (!mIsShowBouncerAnimation && (!this.mIsTaskTypeShortcut || this.mShortcutManager.isUnlockWaitNeeded(this.mRight ? 1 : 0))) {
             i = 255;
         }
-        ValueAnimator ofInt = ValueAnimator.ofInt(alpha, i);
-        this.mShortcutLaunchAlphaAnimator = ofInt;
-        ofInt.setDuration(450L);
-        ofInt.setInterpolator(ALPHA_INTERPOLATOR);
-        ofInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 9));
-        ofInt.addListener(this.mShortcutLaunchAlphaAnimatorEndListener);
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(alpha, i);
+        this.mShortcutLaunchAlphaAnimator = valueAnimatorOfInt;
+        valueAnimatorOfInt.setDuration(450L);
+        valueAnimatorOfInt.setInterpolator(ALPHA_INTERPOLATOR);
+        valueAnimatorOfInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 8));
+        valueAnimatorOfInt.addListener(this.mShortcutLaunchAlphaAnimatorEndListener);
         this.mShortcutLaunchAlphaAnimator.start();
         startRectangleScaleAnimation(0.0f);
     }
@@ -358,7 +364,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         reset(true);
         this.mIsLandScape = configuration.orientation == 2;
@@ -390,11 +396,11 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             imageView.setLeftTopRightBottom(rect2.left, rect2.top, rect2.right, rect2.bottom);
             this.mBlurPanelView.semSetBlurRadius(this.mBlurPanelRadius);
         }
-        boolean isSupportBlur = this.mShortcutManager.isSupportBlur();
-        if ((!isSupportBlur && this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0)) || this.mIsDrawBackgroundCircle) {
+        boolean zIsSupportBlur = this.mShortcutManager.isSupportBlur();
+        if ((!zIsSupportBlur && this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0)) || this.mIsDrawBackgroundCircle) {
             canvas.drawCircle(this.mCenterX, this.mCenterY, getWidth() / 2.0f, this.mBackgroundCirclePaint);
         }
-        if (this.mIsTaskTypeShortcutEnabled && !isSupportBlur) {
+        if (this.mIsTaskTypeShortcutEnabled && !zIsSupportBlur) {
             canvas.drawCircle(this.mCenterX, this.mCenterY, getWidth() / 2.0f, this.mTaskOnCirclePaint);
         }
         canvas.drawCircle(this.mCenterX, this.mCenterY, getWidth() / 2.0f, this.mForegroundCirclePaint);
@@ -426,46 +432,324 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     public final void onPostFinishedWakingUp() {
         this.mDeviceInteractive = true;
         this.mIsTargetView = false;
-        boolean isVisible = ((KeyguardVisibilityMonitor) Dependency.sDependency.getDependencyInner(KeyguardVisibilityMonitor.class)).isVisible();
-        if (this.mShortcutManager.isSupportBlur() && !this.mIsNowBarExpanded && this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0) && isVisible) {
-            Log.i("KeyguardSecAffordanceView", "startScreenOnAnimator");
-            cancelAnimator(this.mScreenOnAnimator);
-            setIsDrawBackgroundCircle(true);
-            int parseColor = Color.parseColor("#2D2D30");
-            this.mDrawBackgroundColor = parseColor;
-            if (parseColor != -1) {
-                this.mBackgroundCirclePaint.setColor(parseColor);
-            }
-            setDrawBackgroundAlpha(255);
-            ValueAnimator ofInt = ValueAnimator.ofInt(255, 0);
-            this.mScreenOnAnimator = ofInt;
-            ofInt.setDuration(400L);
-            ofInt.setStartDelay(150L);
-            ofInt.setInterpolator(new SineOut60());
-            ofInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 3));
-            ofInt.addListener(this.mScreenOnAnimatorListener);
-            this.mScreenOnAnimator.start();
+        boolean zIsVisible = ((KeyguardVisibilityMonitor) Dependency.sDependency.getDependencyInner(KeyguardVisibilityMonitor.class)).isVisible();
+        if (this.mShortcutManager.isSupportBlur() && !this.mIsNowBarExpanded && this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0) && zIsVisible) {
             updateBgBlur(true);
         }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x026c  */
-    /* JADX WARN: Removed duplicated region for block: B:123:0x0272  */
-    /* JADX WARN: Removed duplicated region for block: B:125:0x026f  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0166  */
-    /* JADX WARN: Type inference failed for: r7v2, types: [boolean] */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x01df  */
+    /* JADX WARN: Removed duplicated region for block: B:131:0x026b  */
+    /* JADX WARN: Removed duplicated region for block: B:132:0x026e  */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x0271  */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x0166  */
+    /* JADX WARN: Type inference failed for: r6v2, types: [boolean] */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onTouchEvent(android.view.MotionEvent r13) {
-        /*
-            Method dump skipped, instructions count: 948
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardSecAffordanceView.onTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onTouchEvent(MotionEvent motionEvent) {
+        TouchHandlePolicy touchHandlePolicy;
+        boolean z;
+        Object[] objArr;
+        VelocityTracker velocityTracker;
+        if (getAlpha() == 0.0f || getImageAlpha() == 0.0f || !isEnabled() || (touchHandlePolicy = this.mTouchHandler) == null) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
+        if (actionMasked != 2) {
+            motionEvent.toString();
+            keyguardSecAffordanceView.getClass();
+        }
+        int actionMasked2 = motionEvent.getActionMasked();
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+        View view = null;
+        if (actionMasked2 == 0) {
+            keyguardSecAffordanceView.cancelAllAnimators();
+            Resources resources = ((ImageView) keyguardSecAffordanceView).mContext.getResources();
+            if (keyguardSecAffordanceView.mShortcutManager.isMonotoneIcon(keyguardSecAffordanceView.mRight ? 1 : 0)) {
+                keyguardSecAffordanceView.mRectangleIconSize = resources.getDimensionPixelSize(R.dimen.keyguard_affordance_app_icon_size_monotonic);
+            } else {
+                keyguardSecAffordanceView.mRectangleIconSize = resources.getDimensionPixelSize(R.dimen.keyguard_affordance_app_icon_size_non_monotonic);
+            }
+            keyguardSecAffordanceView.mInitialTouchX = x;
+            keyguardSecAffordanceView.mInitialTouchY = y;
+            keyguardSecAffordanceView.mTouchCancelled = false;
+            keyguardSecAffordanceView.mJustClicked = true;
+            keyguardSecAffordanceView.mIsDown = true;
+            keyguardSecAffordanceView.mLaunchThresholdAchieved = false;
+            mIsShowBouncerAnimation = false;
+            mWaitForReset = false;
+            keyguardSecAffordanceView.mIsNoUnlockNeeded = keyguardSecAffordanceView.mShortcutManager.isNoUnlockNeeded(keyguardSecAffordanceView.mRight ? 1 : 0);
+            keyguardSecAffordanceView.mVerticalScale = 0.2f;
+            keyguardSecAffordanceView.mRectangleIconAlpha = 102;
+            if (keyguardSecAffordanceView.mIsTaskTypeShortcut) {
+                KeyguardShortcutManager keyguardShortcutManager = keyguardSecAffordanceView.mShortcutManager;
+                ?? r6 = keyguardSecAffordanceView.mRight;
+                keyguardShortcutManager.getClass();
+                if (r6 < 0 || r6 >= 2 || Intrinsics.areEqual(keyguardShortcutManager.keyguardBottomAreaShortcutTask[r6 == true ? 1 : 0], KeyguardShortcutManager.EMPTY_CONFIG)) {
+                    ClockEventController$$ExternalSyntheticOutline0.m(r6 == true ? 1 : 0, "IllegalArgument : ", "KeyguardShortcutManager");
+                } else {
+                    if (keyguardShortcutManager.shortcutsData[r6 == true ? 1 : 0].panelTransitDrawable != null) {
+                        z = true;
+                    }
+                    keyguardSecAffordanceView.mIsTransitIconNeeded = z;
+                    boolean z2 = keyguardSecAffordanceView.mIsTaskTypeShortcutEnabled;
+                    int i = !z2 ? 204 : 102;
+                    keyguardSecAffordanceView.mRectangleIconAlpha = z2 ? 255 : 102;
+                    i = i;
+                }
+                z = false;
+                keyguardSecAffordanceView.mIsTransitIconNeeded = z;
+                boolean z22 = keyguardSecAffordanceView.mIsTaskTypeShortcutEnabled;
+                if (!z22) {
+                }
+                keyguardSecAffordanceView.mRectangleIconAlpha = z22 ? 255 : 102;
+                i = i;
+            }
+            keyguardSecAffordanceView.mRectanglePaint.setAlpha(i);
+            keyguardSecAffordanceView.mRectangleIconScale = 1.0f;
+            keyguardSecAffordanceView.mInitialPeekShowing = true;
+            PaintDrawable paintDrawable = keyguardSecAffordanceView.mPanelBackgroundDrawable;
+            if (paintDrawable != null) {
+                paintDrawable.setCornerRadius(keyguardSecAffordanceView.getResources().getDisplayMetrics().density * 26.0f);
+            }
+            View view2 = keyguardSecAffordanceView.mBlurPanelView;
+            if (view2 != null) {
+                mIsLaunchPanelRunning = true;
+                view2.semSetBlurEnabled(true);
+                keyguardSecAffordanceView.mPanelBackground.setBackground(keyguardSecAffordanceView.mPanelBackgroundDrawable);
+                keyguardSecAffordanceView.mBlurPanelRoot.setVisibility(0);
+            }
+            keyguardSecAffordanceView.updateRectangleIconDrawable(false);
+            if (keyguardSecAffordanceView.mClockView == null) {
+                FaceWidgetContainerWrapper faceWidgetContainerWrapper = NotificationPanelViewController.this.mKeyguardStatusBase;
+                View view3 = faceWidgetContainerWrapper.mClockContainer;
+                if (view3 == null) {
+                    view3 = faceWidgetContainerWrapper.mFaceWidgetContainer;
+                }
+                keyguardSecAffordanceView.mClockView = view3;
+            }
+            if (keyguardSecAffordanceView.mNotificationStackScrollerView == null) {
+                keyguardSecAffordanceView.mNotificationStackScrollerView = NotificationPanelViewController.this.mNotificationStackScrollLayoutController.mView;
+            }
+            if (keyguardSecAffordanceView.mNotificationPanelIconOnlyContainer == null) {
+                keyguardSecAffordanceView.mNotificationPanelIconOnlyContainer = NotificationPanelViewController.this.mLockscreenNotificationIconsOnlyController.getIconContainer();
+            }
+            if (keyguardSecAffordanceView.mLockIconContainerView == null) {
+                keyguardSecAffordanceView.mLockIconContainerView = NotificationPanelViewController.this.mStatusBarKeyguardViewManager.getLockIconContainer();
+            }
+            if (keyguardSecAffordanceView.mMusicContainer == null) {
+                List list = NotificationPanelViewController.this.mKeyguardStatusBase.mContentsContainerList;
+                if (list != null && !list.isEmpty()) {
+                    view = (View) list.get(1);
+                }
+                keyguardSecAffordanceView.mMusicContainer = view;
+            }
+            if (keyguardSecAffordanceView.mLockStarContainer == null) {
+                keyguardSecAffordanceView.mLockStarContainer = NotificationPanelViewController.this.mPluginLockStarContainer;
+            }
+            NotificationPanelViewController.this.mKeyguardWallpaperController.getClass();
+            if (keyguardSecAffordanceView.mNotificationPanelView == null) {
+                keyguardSecAffordanceView.mNotificationPanelView = NotificationPanelViewController.this.mView;
+            }
+            if (keyguardSecAffordanceView.mWallpaperImageCreator == null) {
+                keyguardSecAffordanceView.mWallpaperImageCreator = NotificationPanelViewController.this.mWallpaperImageCreator;
+            }
+            NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+            notificationPanelViewController.mView.getLayoutDirection();
+            notificationPanelViewController.mView.requestDisallowInterceptTouchEvent(true);
+            notificationPanelViewController.mOnlyAffordanceInThisMotion = true;
+            KeyguardSecAffordanceHelper keyguardSecAffordanceHelper = notificationPanelViewController.mSecAffordanceHelper;
+            if (keyguardSecAffordanceHelper != null) {
+                keyguardSecAffordanceHelper.isShortcutPreviewSwipingInProgress = true;
+            }
+            Log.i("KeyguardSecAffordanceView", "startInitialPeekAnimation");
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, keyguardSecAffordanceView.mInitialPeekDistance);
+            keyguardSecAffordanceView.mInitialPeekAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(300L);
+            valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+            valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(keyguardSecAffordanceView, 4));
+            valueAnimatorOfFloat.addListener(keyguardSecAffordanceView.mInitialPeekAnimatorEndListener);
+            keyguardSecAffordanceView.mInitialPeekAnimator.start();
+            keyguardSecAffordanceView.setImageAlpha(0.0f, true);
+            keyguardSecAffordanceView.setImageScale(0.9f, true);
+            VelocityTracker velocityTracker2 = keyguardSecAffordanceView.mVelocityTracker;
+            if (velocityTracker2 != null) {
+                velocityTracker2.recycle();
+            }
+            VelocityTracker velocityTrackerObtain = VelocityTracker.obtain();
+            keyguardSecAffordanceView.mVelocityTracker = velocityTrackerObtain;
+            if (velocityTrackerObtain != null) {
+                velocityTrackerObtain.addMovement(motionEvent);
+            }
+        } else if (actionMasked2 == 1) {
+            mIsLaunchPanelRunning = false;
+            if (!keyguardSecAffordanceView.mTouchCancelled) {
+                if (keyguardSecAffordanceView.mRectangleDistanceCovered < keyguardSecAffordanceView.mShortcutLaunchDistance || !keyguardSecAffordanceView.mDeviceInteractive) {
+                    KeyguardSecAffordanceHelper keyguardSecAffordanceHelper2 = NotificationPanelViewController.this.mSecAffordanceHelper;
+                    if (keyguardSecAffordanceHelper2 != null) {
+                        keyguardSecAffordanceHelper2.isShortcutPreviewSwipingInProgress = false;
+                    }
+                    keyguardSecAffordanceView.cancelAllAnimators();
+                } else {
+                    keyguardSecAffordanceView.launchShortcut(x, y);
+                }
+                VelocityTracker velocityTracker3 = keyguardSecAffordanceView.mVelocityTracker;
+                if (velocityTracker3 != null) {
+                    velocityTracker3.recycle();
+                    keyguardSecAffordanceView.mVelocityTracker = null;
+                }
+                if (keyguardSecAffordanceView.mJustClicked) {
+                    if (motionEvent.getEventTime() - motionEvent.getDownTime() > ViewConfiguration.getTapTimeout() * 2) {
+                        keyguardSecAffordanceView.mJustClicked = false;
+                    } else {
+                        keyguardSecAffordanceView.mJustClicked = false;
+                        keyguardSecAffordanceView.mRectangleIconBounds.set(0, 0, 0, 0);
+                        keyguardSecAffordanceView.mRectangleBounds.set(0, 0, 0, 0);
+                        keyguardSecAffordanceView.invalidate();
+                        keyguardSecAffordanceView.resetBlurRectangleView();
+                        NotificationPanelViewController notificationPanelViewController2 = NotificationPanelViewController.this;
+                        if (!notificationPanelViewController2.mHintAnimationRunning) {
+                            notificationPanelViewController2.mHintAnimationRunning = true;
+                            if (notificationPanelViewController2.mSecAffordanceHelper != null) {
+                                notificationPanelViewController2.mView.getLayoutDirection();
+                            }
+                        }
+                    }
+                }
+                objArr = true;
+                keyguardSecAffordanceView.mTouchCancelled = true;
+                mIsLaunchPanelRunning = false;
+                velocityTracker = keyguardSecAffordanceView.mVelocityTracker;
+                if (velocityTracker != null) {
+                }
+                if (keyguardSecAffordanceView.mIsShortcutLaunching) {
+                    keyguardSecAffordanceView.mHandler.sendEmptyMessageDelayed(1001, 1500L);
+                }
+                if (keyguardSecAffordanceView.mJustClicked) {
+                    keyguardSecAffordanceView.cancelAllAnimators();
+                    keyguardSecAffordanceView.startRectangleShrinkAnimation();
+                    cancelAnimator(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator);
+                    cancelAnimator(keyguardSecAffordanceView.mRectangleAlphaAnimator);
+                    ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(keyguardSecAffordanceView.mRectanglePaint.getAlpha(), 0);
+                    keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator = valueAnimatorOfInt;
+                    valueAnimatorOfInt.setDuration(200L);
+                    valueAnimatorOfInt.setInterpolator(ALPHA_INTERPOLATOR);
+                    valueAnimatorOfInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(keyguardSecAffordanceView, 3));
+                    valueAnimatorOfInt.addListener(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimatorEndListener);
+                    keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator.start();
+                    ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).setShortcutLaunchInProgress(false);
+                    if (keyguardSecAffordanceView.mIsShortcutLaunching) {
+                    }
+                    NotificationPanelViewController.this.mKeyguardWallpaperController.getClass();
+                    return true;
+                }
+                keyguardSecAffordanceView.cancelAllAnimators();
+                keyguardSecAffordanceView.startRectangleShrinkAnimation();
+                cancelAnimator(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator);
+                cancelAnimator(keyguardSecAffordanceView.mRectangleAlphaAnimator);
+                ValueAnimator valueAnimatorOfInt2 = ValueAnimator.ofInt(keyguardSecAffordanceView.mRectanglePaint.getAlpha(), 0);
+                keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator = valueAnimatorOfInt2;
+                valueAnimatorOfInt2.setDuration(200L);
+                valueAnimatorOfInt2.setInterpolator(ALPHA_INTERPOLATOR);
+                valueAnimatorOfInt2.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(keyguardSecAffordanceView, 3));
+                valueAnimatorOfInt2.addListener(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimatorEndListener);
+                keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator.start();
+                ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).setShortcutLaunchInProgress(false);
+                if (keyguardSecAffordanceView.mIsShortcutLaunching) {
+                }
+                NotificationPanelViewController.this.mKeyguardWallpaperController.getClass();
+                return true;
+            }
+        } else if (actionMasked2 != 2) {
+            if (actionMasked2 == 3) {
+                objArr = false;
+                keyguardSecAffordanceView.mTouchCancelled = true;
+                mIsLaunchPanelRunning = false;
+                velocityTracker = keyguardSecAffordanceView.mVelocityTracker;
+                if (velocityTracker != null) {
+                    velocityTracker.addMovement(motionEvent);
+                }
+                if (keyguardSecAffordanceView.mIsShortcutLaunching && (!keyguardSecAffordanceView.mIsTaskTypeShortcut || keyguardSecAffordanceView.mShortcutManager.isUnlockWaitNeeded(keyguardSecAffordanceView.mRight ? 1 : 0))) {
+                    keyguardSecAffordanceView.mHandler.sendEmptyMessageDelayed(1001, 1500L);
+                }
+                if ((keyguardSecAffordanceView.mJustClicked || objArr == false) && !keyguardSecAffordanceView.mIsShortcutLaunching && !keyguardSecAffordanceView.mFling) {
+                    keyguardSecAffordanceView.cancelAllAnimators();
+                    keyguardSecAffordanceView.startRectangleShrinkAnimation();
+                    cancelAnimator(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator);
+                    cancelAnimator(keyguardSecAffordanceView.mRectangleAlphaAnimator);
+                    ValueAnimator valueAnimatorOfInt22 = ValueAnimator.ofInt(keyguardSecAffordanceView.mRectanglePaint.getAlpha(), 0);
+                    keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator = valueAnimatorOfInt22;
+                    valueAnimatorOfInt22.setDuration(200L);
+                    valueAnimatorOfInt22.setInterpolator(ALPHA_INTERPOLATOR);
+                    valueAnimatorOfInt22.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(keyguardSecAffordanceView, 3));
+                    valueAnimatorOfInt22.addListener(keyguardSecAffordanceView.mRectangleShrinkAlphaAnimatorEndListener);
+                    keyguardSecAffordanceView.mRectangleShrinkAlphaAnimator.start();
+                    ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).setShortcutLaunchInProgress(false);
+                }
+                if (keyguardSecAffordanceView.mIsShortcutLaunching || keyguardSecAffordanceView.mIsTaskTypeShortcut) {
+                    NotificationPanelViewController.this.mKeyguardWallpaperController.getClass();
+                    return true;
+                }
+            } else if (actionMasked2 == 5) {
+                keyguardSecAffordanceView.mJustClicked = false;
+                MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                motionEventObtain.setAction(3);
+                keyguardSecAffordanceView.dispatchTouchEvent(motionEventObtain);
+                motionEventObtain.recycle();
+                KeyguardSecAffordanceHelper keyguardSecAffordanceHelper3 = NotificationPanelViewController.this.mSecAffordanceHelper;
+                if (keyguardSecAffordanceHelper3 != null) {
+                    keyguardSecAffordanceHelper3.isShortcutPreviewSwipingInProgress = false;
+                    return true;
+                }
+            }
+        } else if (!keyguardSecAffordanceView.mTouchCancelled) {
+            NotificationPanelViewController.this.mCentralSurfaces.userActivity();
+            VelocityTracker velocityTracker4 = keyguardSecAffordanceView.mVelocityTracker;
+            if (velocityTracker4 != null) {
+                velocityTracker4.addMovement(motionEvent);
+            }
+            float f = keyguardSecAffordanceView.mRight ? keyguardSecAffordanceView.mInitialTouchX - x : x - keyguardSecAffordanceView.mInitialTouchX;
+            if (f < 0.0f) {
+                f = 0.0f;
+            }
+            float fHypot = (float) Math.hypot(f, keyguardSecAffordanceView.mInitialTouchY - y >= 0.0f ? r0 : 0.0f);
+            float f2 = 5;
+            if (fHypot >= f2) {
+                Animator animator = keyguardSecAffordanceView.mInitialPeekAnimator;
+                if (animator != null) {
+                    animator.cancel();
+                    List list2 = keyguardSecAffordanceView.mAnimatorSet;
+                    if (list2 != null) {
+                        ArrayList arrayList = (ArrayList) list2;
+                        int size = arrayList.size();
+                        int i2 = 0;
+                        while (i2 < size) {
+                            Object obj = arrayList.get(i2);
+                            i2++;
+                            ((AnimatorSet) obj).cancel();
+                        }
+                        keyguardSecAffordanceView.mAnimatorSet = null;
+                    }
+                }
+                float f3 = fHypot + keyguardSecAffordanceView.mInitialPeekDistance;
+                float f4 = keyguardSecAffordanceView.mShortcutLaunchDistance;
+                if (f3 >= f4) {
+                    f3 = ((f3 - f4) * 0.2f) + f4;
+                }
+                keyguardSecAffordanceView.mInitialPeekShowing = false;
+                keyguardSecAffordanceView.mJustClicked = false;
+                keyguardSecAffordanceView.mIsDown = false;
+                keyguardSecAffordanceView.updatePanelViews(f3 - f2);
+                keyguardSecAffordanceView.invalidate();
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
@@ -600,36 +884,30 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         invalidate();
     }
 
-    public final void setDrawBackgroundAlpha(int i) {
-        this.mBackgroundCirclePaint.setAlpha(i);
-        this.mMaxBackgroundAlpha = i;
-        invalidate();
-    }
-
     public final void setForegroundCircleColor() {
-        int i = 0;
+        int color = 0;
         this.mMaxForegroundAlpha = 0;
         if (this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0)) {
             KeyguardShortcutManager keyguardShortcutManager = this.mShortcutManager;
-            int i2 = keyguardShortcutManager.wallpaperBrightness;
+            int i = keyguardShortcutManager.wallpaperBrightness;
             if (keyguardShortcutManager.isReduceTransparencyEnabled) {
-                i = this.mIsWhiteWallpaper ? Color.parseColor("#FFFFFF") : Color.parseColor("#979797");
+                color = this.mIsWhiteWallpaper ? Color.parseColor("#FFFFFF") : Color.parseColor("#979797");
                 this.mMaxForegroundAlpha = (int) (this.mIsWhiteWallpaper ? 102.0d : 127.5d);
-            } else if (!LsRune.LOCKUI_SHORTCUT_BLUR_BG || i2 == -1) {
-                i = Color.parseColor(this.mIsWhiteWallpaper ? "#2D2D30" : "#E4E4E4");
+            } else if (!LsRune.LOCKUI_SHORTCUT_BLUR_BG || i == -1) {
+                color = Color.parseColor(this.mIsWhiteWallpaper ? "#2D2D30" : "#E4E4E4");
                 this.mMaxForegroundAlpha = (int) (this.mIsWhiteWallpaper ? 25.5d : 51.0d);
-            } else if (i2 >= 0 && i2 <= 28) {
-                i = Color.parseColor("#FFFFFF");
+            } else if (i >= 0 && i <= 28) {
+                color = Color.parseColor("#FFFFFF");
                 this.mMaxForegroundAlpha = 51;
-            } else if (29 > i2 || i2 > 84) {
-                i = Color.parseColor("#000000");
+            } else if (29 > i || i <= 84) {
+                color = Color.parseColor("#000000");
                 this.mMaxForegroundAlpha = 25;
             } else {
-                i = Color.parseColor("#000000");
+                color = Color.parseColor("#000000");
                 this.mMaxForegroundAlpha = 25;
             }
         }
-        this.mForegroundCirclePaint.setColor(i);
+        this.mForegroundCirclePaint.setColor(color);
         this.mForegroundCirclePaint.setAlpha(this.mMaxForegroundAlpha);
         invalidate();
     }
@@ -662,13 +940,13 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             invalidate();
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f2, f);
-        this.mBottomIconScaleAnimator = ofFloat;
-        ofFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 1));
-        ofFloat.addListener(this.mBottomIconScaleEndListener);
-        ofFloat.setInterpolator(SCALE_INTERPOLATOR);
-        ofFloat.setDuration(300L);
-        ofFloat.start();
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f2, f);
+        this.mBottomIconScaleAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 1));
+        valueAnimatorOfFloat.addListener(this.mBottomIconScaleEndListener);
+        valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.setDuration(300L);
+        valueAnimatorOfFloat.start();
     }
 
     public final void setIsDrawBackgroundCircle(boolean z) {
@@ -680,38 +958,36 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
 
     public final void setNowBarExpandMode(boolean z) {
         this.mIsNowBarExpanded = z;
-        if (!this.mDeviceInteractive || !this.mIsNowBarVisible) {
-            Log.d("KeyguardSecAffordanceView", "setNowBarExpandMode interactive: " + this.mDeviceInteractive + ", mIsNowBarVisible: " + this.mIsNowBarVisible + ", " + getShortcutType());
+        if (this.mDeviceInteractive && this.mIsNowBarVisible) {
+            if (!z) {
+                updateBgBlur(this.mKeyguardStateController.isVisible());
+            }
+            this.mIsAnimFromNowBarRunning = true;
+            boolean z2 = this.mIsNowBarExpanded;
+            setImageAlpha(z2 ? 0.0f : 1.0f, true, z2 ? 200L : 300L, z2 ? 50L : 0L, NOW_BAR_INTERPOLATOR, true);
             return;
         }
-        if (!z) {
-            updateBgBlur(this.mKeyguardStateController.isVisible());
-        }
-        Animator animator = this.mScreenOnAnimator;
-        if (animator != null && animator.isRunning()) {
-            cancelAnimator(this.mScreenOnAnimator);
-        }
-        this.mIsAnimFromNowBarRunning = true;
-        boolean z2 = this.mIsNowBarExpanded;
-        setImageAlpha(z2 ? 0.0f : 1.0f, true, z2 ? 200L : 300L, z2 ? 50L : 0L, NOW_BAR_INTERPOLATOR, true);
+        Log.d("KeyguardSecAffordanceView", "setNowBarExpandMode interactive: " + this.mDeviceInteractive + ", mIsNowBarVisible: " + this.mIsNowBarVisible + ", " + getShortcutType());
     }
 
     public final void setNowBarVisibility(final boolean z, final Consumer consumer, Consumer consumer2, boolean z2) {
         int i;
-        final boolean isVisible = ((KeyguardVisibilityMonitor) Dependency.sDependency.getDependencyInner(KeyguardVisibilityMonitor.class)).isVisible();
+        final boolean zIsVisible = ((KeyguardVisibilityMonitor) Dependency.sDependency.getDependencyInner(KeyguardVisibilityMonitor.class)).isVisible();
         StringBuilder sb = new StringBuilder("setNowBarVisibility old: ");
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, this.mIsNowBarVisible, ", new: ", z, ", ");
         sb.append(getShortcutType());
         Log.d("KeyguardSecAffordanceView", sb.toString());
-        boolean z3 = this.mIsNowBarVisible;
-        if (z3 == z) {
+        if (this.mIsNowBarVisible == z) {
             consumer2.accept(Boolean.FALSE);
-            Log.d("KeyguardSecAffordanceView", "setNowBarVisibility same visibility skipped ".concat(getShortcutType()));
-            return;
+            if (getWidth() == this.mShortcutManager.getShortcutIconSizeValue(z)) {
+                Log.d("KeyguardSecAffordanceView", "setNowBarVisibility same visibility skipped ".concat(getShortcutType()));
+                return;
+            }
+            Log.d("KeyguardSecAffordanceView", "setNowBarVisibility same visibility but different size ".concat(getShortcutType()));
         }
-        if (!z2 || !this.mDeviceInteractive || !isVisible) {
+        if (!z2 || !this.mDeviceInteractive || !zIsVisible) {
             this.mIsNowBarVisible = z;
-            if (isVisible) {
+            if (zIsVisible) {
                 updateBgBlur(true);
             }
             consumer.accept(Boolean.valueOf(z));
@@ -719,12 +995,12 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             StringBuilder sb2 = new StringBuilder("setNowBarVisibility animate: ");
             sb2.append(z2);
             sb2.append(", mDeviceInteractive: ");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, this.mDeviceInteractive, ", isKeyguardVisible: ", isVisible, ", ");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, this.mDeviceInteractive, ", isKeyguardVisible: ", zIsVisible, ", ");
             sb2.append(getShortcutType());
             Log.d("KeyguardSecAffordanceView", sb2.toString());
             return;
         }
-        int shortcutIconSizeValue = this.mShortcutManager.getShortcutIconSizeValue(z3);
+        int shortcutIconSizeValue = this.mShortcutManager.getShortcutIconSizeValue(this.mIsNowBarVisible);
         int shortcutIconSizeValue2 = this.mShortcutManager.getShortcutIconSizeValue(z);
         if (shortcutIconSizeValue == shortcutIconSizeValue2) {
             consumer2.accept(Boolean.FALSE);
@@ -742,13 +1018,13 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         this.mNowBarVisibilitySizeAnimation = springAnimation;
         springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda12
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
-            public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z4, float f, float f2) {
+            public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z3, float f, float f2) {
                 Consumer consumer3 = consumer;
                 Interpolator interpolator = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 consumer3.accept(Boolean.valueOf(z));
             }
         });
-        final boolean isMonotoneIcon = this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0);
+        final boolean zIsMonotoneIcon = this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0);
         final int i2 = 0;
         this.mNowBarVisibilitySizeAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener(this) { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda13
             public final /* synthetic */ KeyguardSecAffordanceView f$0;
@@ -759,8 +1035,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
 
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                boolean z4 = isVisible;
-                boolean z5 = isMonotoneIcon;
+                boolean z3 = zIsVisible;
+                boolean z4 = zIsMonotoneIcon;
                 KeyguardSecAffordanceView keyguardSecAffordanceView = this.f$0;
                 switch (i2) {
                     case 0:
@@ -769,8 +1045,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getLeft() + i3, keyguardSecAffordanceView.getTop() + i3);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -780,8 +1056,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(i4, keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getWidth() + i4, keyguardSecAffordanceView.getHeight() + keyguardSecAffordanceView.getTop());
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -791,8 +1067,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), i5, keyguardSecAffordanceView.getWidth() + keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getHeight() + i5);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -818,8 +1094,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
 
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                boolean z4 = isVisible;
-                boolean z5 = isMonotoneIcon;
+                boolean z3 = zIsVisible;
+                boolean z4 = zIsMonotoneIcon;
                 KeyguardSecAffordanceView keyguardSecAffordanceView = this.f$0;
                 switch (i4) {
                     case 0:
@@ -828,8 +1104,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getLeft() + i32, keyguardSecAffordanceView.getTop() + i32);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -839,8 +1115,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(i42, keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getWidth() + i42, keyguardSecAffordanceView.getHeight() + keyguardSecAffordanceView.getTop());
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -850,8 +1126,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), i5, keyguardSecAffordanceView.getWidth() + keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getHeight() + i5);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -878,8 +1154,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
 
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                boolean z4 = isVisible;
-                boolean z5 = isMonotoneIcon;
+                boolean z3 = zIsVisible;
+                boolean z4 = zIsMonotoneIcon;
                 KeyguardSecAffordanceView keyguardSecAffordanceView = this.f$0;
                 switch (i5) {
                     case 0:
@@ -888,8 +1164,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getLeft() + i32, keyguardSecAffordanceView.getTop() + i32);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -899,8 +1175,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(i42, keyguardSecAffordanceView.getTop(), keyguardSecAffordanceView.getWidth() + i42, keyguardSecAffordanceView.getHeight() + keyguardSecAffordanceView.getTop());
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -910,8 +1186,8 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecAffordanceView.setLeftTopRightBottom(keyguardSecAffordanceView.getLeft(), i52, keyguardSecAffordanceView.getWidth() + keyguardSecAffordanceView.getLeft(), keyguardSecAffordanceView.getHeight() + i52);
                         keyguardSecAffordanceView.mCenterX = keyguardSecAffordanceView.getWidth() / 2;
                         keyguardSecAffordanceView.mCenterY = keyguardSecAffordanceView.getHeight() / 2;
-                        if (z5) {
-                            keyguardSecAffordanceView.updateBgBlur(z4);
+                        if (z4) {
+                            keyguardSecAffordanceView.updateBgBlur(z3);
                             break;
                         }
                         break;
@@ -936,43 +1212,43 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         int i3 = this.mRectangleIconSize;
         int i4 = (int) (i3 * f10);
         int i5 = this.mRectangleIconMargin;
-        int i6 = i5 - ((i4 - i3) / 2);
-        int i7 = (i5 * 2) + i4;
+        int iM = i5 - ((i4 - i3) / 2);
+        int i6 = (i5 * 2) + i4;
         float f11 = this.mRectangleDistanceCovered;
-        if (f11 > i7) {
-            i6 = AbsActionBarView$$ExternalSyntheticOutline0.m((int) f11, i7, 2, i6);
+        if (f11 > i6) {
+            iM = AbsActionBarView$$ExternalSyntheticOutline0.m((int) f11, i6, 2, iM);
         }
-        int i8 = i4 / 2;
-        int i9 = (int) ((((f9 - f8) / 2.0f) + f8) - i8);
-        int i10 = i9 + i4;
+        int i7 = i4 / 2;
+        int i8 = (int) ((((f9 - f8) / 2.0f) + f8) - i7);
+        int i9 = i8 + i4;
         boolean z = this.mRight;
         if (z) {
-            int i11 = this.mScreenWidth;
-            float f12 = i11;
+            int i10 = this.mScreenWidth;
+            float f12 = i10;
             float f13 = f12 - f;
             f5 = f13 >= 0.0f ? f13 : 0.0f;
             float f14 = f5 + f12;
             if (f14 > f12) {
-                f14 = i11 + 78;
+                f14 = i10 + 78;
             }
-            i2 = ((int) f5) + i6;
-            int i12 = (i11 / 2) - i8;
-            if (i2 < i12) {
-                i2 = i12;
+            i2 = ((int) f5) + iM;
+            int i11 = (i10 / 2) - i7;
+            if (i2 < i11) {
+                i2 = i11;
             }
             i = i2 + i4;
-            if (i > i11 + i4) {
+            if (i > i10 + i4) {
                 f4 = f14;
                 i = 0;
-                i9 = 0;
+                i8 = 0;
                 i2 = 0;
-                i10 = 0;
+                i9 = 0;
             } else {
                 f4 = f14;
             }
         } else {
-            int i13 = this.mScreenWidth;
-            float f15 = i13;
+            int i12 = this.mScreenWidth;
+            float f15 = i12;
             if (f > f15) {
                 f2 = 0.0f;
                 f3 = f15;
@@ -984,21 +1260,21 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             if (f16 < f2) {
                 f16 = -78.0f;
             }
-            int i14 = ((int) f3) - i6;
-            int i15 = (i3 / 2) + (i13 / 2);
-            i = i14 > i15 ? i15 : i14;
-            int i16 = i - i4;
-            if (i16 < i3 * (-1)) {
+            int i13 = ((int) f3) - iM;
+            int i14 = (i3 / 2) + (i12 / 2);
+            i = i13 > i14 ? i14 : i13;
+            int i15 = i - i4;
+            if (i15 < i3 * (-1)) {
                 f4 = f3;
                 i = 0;
+                i8 = 0;
                 i9 = 0;
-                i10 = 0;
                 f5 = f16;
                 i2 = 0;
             } else {
                 f4 = f3;
                 f5 = f16;
-                i2 = i16;
+                i2 = i15;
             }
         }
         float f17 = z ? this.mScreenWidth - f5 : f4;
@@ -1009,7 +1285,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         this.mRectangleScaleStart = f7;
         this.mRectangleIconScaleStart = f10;
         float f18 = this.mShortcutLaunchDistance;
-        int i17 = 102;
+        int i16 = 102;
         if (f17 >= f18 && !this.mLaunchThresholdAchieved) {
             Log.d("KeyguardSecAffordanceView", "updateOnThreshold launch achieved ".concat(getShortcutType()));
             this.mLaunchThresholdAchieved = true;
@@ -1019,10 +1295,10 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             if (this.mIsTaskTypeShortcut) {
                 boolean z2 = this.mIsTaskTypeShortcutEnabled;
                 this.mRectangleIconAlpha = z2 ? 102 : 255;
-                r10 = z2 ? 102 : 204;
+                i = z2 ? 102 : 204;
                 updateRectangleIconDrawable(this.mIsTransitIconNeeded);
             }
-            startRectangleAlphaAnimation(r10);
+            startRectangleAlphaAnimation(i);
             this.mVibrationUtil.playVibration(108);
         } else if (f17 < f18 && this.mLaunchThresholdAchieved) {
             Log.d("KeyguardSecAffordanceView", "updateOnThreshold launch not achieved ".concat(getShortcutType()));
@@ -1033,15 +1309,15 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             if (this.mIsTaskTypeShortcut) {
                 boolean z3 = this.mIsTaskTypeShortcutEnabled;
                 this.mRectangleIconAlpha = z3 ? 255 : 102;
-                r10 = z3 ? 204 : 102;
+                i = z3 ? 204 : 102;
                 updateRectangleIconDrawable(false);
-                i17 = r10;
+                i16 = i;
             }
-            startRectangleAlphaAnimation(i17);
+            startRectangleAlphaAnimation(i16);
             this.mVibrationUtil.playVibration(109);
         }
         this.mRectangleBounds.set((int) f5, (int) f8, (int) f4, (int) f6);
-        this.mRectangleIconBounds.set(i2, i9, i, i10);
+        this.mRectangleIconBounds.set(i2, i8, i, i9);
     }
 
     public final void setRectangleColor() {
@@ -1102,34 +1378,34 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     public final void startRectangleAlphaAnimation(int i) {
         cancelAnimator(this.mRectangleShrinkAlphaAnimator);
         cancelAnimator(this.mRectangleAlphaAnimator);
-        ValueAnimator ofInt = ValueAnimator.ofInt(this.mRectanglePaint.getAlpha(), i);
-        this.mRectangleAlphaAnimator = ofInt;
-        ofInt.setDuration(50L);
-        ofInt.setInterpolator(ALPHA_INTERPOLATOR);
-        ofInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 7));
-        ofInt.addListener(this.mRectangleAlphaAnimatorEndListener);
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(this.mRectanglePaint.getAlpha(), i);
+        this.mRectangleAlphaAnimator = valueAnimatorOfInt;
+        valueAnimatorOfInt.setDuration(50L);
+        valueAnimatorOfInt.setInterpolator(ALPHA_INTERPOLATOR);
+        valueAnimatorOfInt.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 6));
+        valueAnimatorOfInt.addListener(this.mRectangleAlphaAnimatorEndListener);
         this.mRectangleAlphaAnimator.start();
     }
 
     public final void startRectangleIconScaleAnimation() {
         cancelAnimator(this.mRectangleIconScaleAnimator);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mRectangleIconScaleStart, 1.0f);
-        this.mRectangleIconScaleAnimator = ofFloat;
-        ofFloat.setDuration(450L);
-        ofFloat.setInterpolator(SCALE_INTERPOLATOR);
-        ofFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 2));
-        ofFloat.addListener(this.mRectangleIconScaleAnimatorEndListener);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mRectangleIconScaleStart, 1.0f);
+        this.mRectangleIconScaleAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(450L);
+        valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 2));
+        valueAnimatorOfFloat.addListener(this.mRectangleIconScaleAnimatorEndListener);
         this.mRectangleIconScaleAnimator.start();
     }
 
     public final void startRectangleScaleAnimation(float f) {
         cancelAnimator(this.mRectangleScaleAnimator);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mRectangleScaleStart, f);
-        this.mRectangleScaleAnimator = ofFloat;
-        ofFloat.setDuration(450L);
-        ofFloat.setInterpolator(SCALE_INTERPOLATOR);
-        ofFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 6));
-        ofFloat.addListener(this.mRectangleScaleAnimatorEndListener);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mRectangleScaleStart, f);
+        this.mRectangleScaleAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(450L);
+        valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 5));
+        valueAnimatorOfFloat.addListener(this.mRectangleScaleAnimatorEndListener);
         this.mRectangleScaleAnimator.start();
     }
 
@@ -1137,12 +1413,12 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         Log.i("KeyguardSecAffordanceView", "startRectangleShrinkAnimation");
         setImageAlpha(1.0f, true);
         setImageScale(1.0f, true);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mRectangleDistanceCovered, 0.0f);
-        this.mRectangleShrinkAnimator = ofFloat;
-        ofFloat.setDuration(this.mInitialPeekShowing ? 200L : 450L);
-        ofFloat.setInterpolator(SCALE_INTERPOLATOR);
-        ofFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 8));
-        ofFloat.addListener(this.mRectangleShrinkAnimatorEndListener);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mRectangleDistanceCovered, 0.0f);
+        this.mRectangleShrinkAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(this.mInitialPeekShowing ? 200L : 450L);
+        valueAnimatorOfFloat.setInterpolator(SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.addUpdateListener(new KeyguardSecAffordanceView$$ExternalSyntheticLambda2(this, 7));
+        valueAnimatorOfFloat.addListener(this.mRectangleShrinkAnimatorEndListener);
         this.mRectangleShrinkAnimator.start();
     }
 
@@ -1152,10 +1428,10 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         }
     }
 
-    public final void updateDisplayParameters() {
+    public final void updateDisplayParameters() throws Resources.NotFoundException {
         Resources resources = ((ImageView) this).mContext.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        int dimensionPixelSize = resources.getDimensionPixelSize(android.R.dimen.seekbar_track_progress_height_material);
+        int dimensionPixelSize = resources.getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material);
         int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.status_bar_height);
         if (this.mIsLandScape) {
             this.mScreenHeight = displayMetrics.heightPixels;
@@ -1181,13 +1457,13 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
 
     public final void updatePanelViews(float f) {
         float f2;
-        float max = Math.max(0.0f, f - this.mInitialPeekDistance);
+        float fMax = Math.max(0.0f, f - this.mInitialPeekDistance);
         View view = this.mPanelDimView;
         if (view != null) {
             if (this.mIsDown) {
                 f2 = 0.0f;
             } else {
-                float f3 = max / this.mShortcutLaunchDistance;
+                float f3 = fMax / this.mShortcutLaunchDistance;
                 f2 = this.mMaxDimBackground;
                 float f4 = f3 * f2;
                 if (f4 <= f2) {
@@ -1199,7 +1475,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         if (this.mBlurPanelView != null) {
             this.mBlurPanelRadius = 0;
             if (!this.mIsDown) {
-                int i = (int) ((max / this.mShortcutLaunchDistance) * 400.0f);
+                int i = (int) ((fMax / this.mShortcutLaunchDistance) * 400.0f);
                 this.mBlurPanelRadius = i;
                 if (i > 400) {
                     this.mBlurPanelRadius = 400;
@@ -1210,158 +1486,122 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             setUScaleAnimator(this.mNotificationPanelView, 1.0f, 1.0f);
         } else {
             float f5 = this.mShortcutLaunchDistance;
-            float f6 = 1.0f - (max / f5);
+            float f6 = 1.0f - (fMax / f5);
             if (f6 < 0.0f) {
                 f6 = 0.0f;
             }
-            float f7 = 1.0f - ((max / f5) * 0.050000012f);
+            float f7 = 1.0f - ((fMax / f5) * 0.050000012f);
             if (f7 < 0.95f) {
                 f7 = 0.95f;
             }
-            setUScaleAnimator(this.mNotificationPanelView, max != 0.0f ? f7 : 1.0f, f6);
+            setUScaleAnimator(this.mNotificationPanelView, fMax != 0.0f ? f7 : 1.0f, f6);
         }
         setRectangleBounds(f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0094 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x007a  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0094 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00a4  */
     /* JADX WARN: Type inference failed for: r0v0, types: [boolean] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateRectangleIconDrawable(boolean r13) {
-        /*
-            r12 = this;
-            boolean r0 = r12.mRight
-            com.android.systemui.statusbar.KeyguardShortcutManager r1 = r12.mShortcutManager
-            r1.getClass()
-            java.lang.String r2 = "KeyguardShortcutManager"
-            java.lang.String r3 = "IllegalArgument : "
-            r4 = 2
-            r5 = 0
-            if (r0 < 0) goto L20
-            if (r0 < r4) goto L12
-            goto L20
-        L12:
-            com.android.systemui.statusbar.KeyguardShortcutManager$ShortcutData[] r1 = r1.shortcutsData
-            if (r13 == 0) goto L1b
-            r1 = r1[r0]
-            android.graphics.drawable.Drawable r1 = r1.panelTransitDrawable
-            goto L24
-        L1b:
-            r1 = r1[r0]
-            android.graphics.drawable.Drawable r1 = r1.panelDrawable
-            goto L24
-        L20:
-            com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0.m(r0, r3, r2)
-            r1 = r5
-        L24:
-            r12.mRectangleIconDrawable = r1
-            com.android.systemui.statusbar.KeyguardShortcutManager r1 = r12.mShortcutManager
-            boolean r6 = r12.mRight
-            boolean r1 = r1.isMonotoneIcon(r6)
-            if (r1 == 0) goto Lc3
-            android.graphics.drawable.Drawable r7 = r12.mRectangleIconDrawable
-            if (r7 == 0) goto Lc3
-            boolean r1 = r12.mIsTaskTypeShortcut
-            r6 = 1
-            if (r1 == 0) goto L4d
-            r1 = r6
-            com.android.systemui.statusbar.KeyguardShortcutManager r6 = r12.mShortcutManager
-            boolean r13 = r6.isDarkPanel(r0)
-            r8 = r13 ^ 1
-            r11 = 0
-            r9 = 0
-            r10 = 1
-            android.graphics.drawable.Drawable r13 = r6.convertTaskDrawable(r7, r8, r9, r10, r11)
-            r12.mRectangleIconDrawable = r13
-            goto Lc3
-        L4d:
-            r1 = r6
-            com.android.systemui.statusbar.KeyguardShortcutManager r6 = r12.mShortcutManager
-            r6.getClass()
-            if (r0 < 0) goto L74
-            if (r0 < r4) goto L58
-            goto L74
-        L58:
-            com.android.systemui.statusbar.KeyguardShortcutManager$ShortcutData[] r6 = r6.shortcutsData
-            if (r13 == 0) goto L69
-            r13 = r6[r0]
-            android.graphics.drawable.Drawable r13 = r13.panelTransitDrawable
-            if (r13 == 0) goto L67
-            android.graphics.Bitmap r13 = androidx.core.graphics.drawable.DrawableKt.toBitmap$default(r13)
-            goto L78
-        L67:
-            r13 = r5
-            goto L78
-        L69:
-            r13 = r6[r0]
-            android.graphics.drawable.Drawable r13 = r13.panelDrawable
-            if (r13 == 0) goto L67
-            android.graphics.Bitmap r13 = androidx.core.graphics.drawable.DrawableKt.toBitmap$default(r13)
-            goto L78
-        L74:
-            com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0.m(r0, r3, r2)
-            goto L67
-        L78:
-            if (r13 == 0) goto L86
-            android.graphics.drawable.BitmapDrawable r6 = new android.graphics.drawable.BitmapDrawable
-            android.content.Context r7 = r12.mContext
-            android.content.res.Resources r7 = r7.getResources()
-            r6.<init>(r7, r13)
-            goto L87
-        L86:
-            r6 = r5
-        L87:
-            com.android.systemui.statusbar.KeyguardShortcutManager r13 = r12.mShortcutManager
-            boolean r7 = r13.isDarkPanel(r0)
-            com.android.systemui.statusbar.KeyguardShortcutManager r8 = r12.mShortcutManager
-            r8.getClass()
-            if (r0 < 0) goto La4
-            if (r0 < r4) goto L97
-            goto La4
-        L97:
-            com.android.systemui.statusbar.KeyguardShortcutManager$ShortcutData[] r2 = r8.shortcutsData
-            r0 = r2[r0]
-            android.content.ComponentName r0 = r0.componentName
-            if (r0 == 0) goto La7
-            java.lang.String r5 = r0.getPackageName()
-            goto La7
-        La4:
-            com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0.m(r0, r3, r2)
-        La7:
-            if (r6 == 0) goto Lc1
-            boolean r0 = com.android.systemui.statusbar.KeyguardShortcutManager.isARShortcutIcon(r5)
-            if (r0 != 0) goto Lc1
-            int r13 = r13.getInvertColor(r7, r1)
-            android.graphics.drawable.Drawable r0 = r6.mutate()
-            android.graphics.BlendModeColorFilter r1 = new android.graphics.BlendModeColorFilter
-            android.graphics.BlendMode r2 = android.graphics.BlendMode.SRC_ATOP
-            r1.<init>(r13, r2)
-            r0.setColorFilter(r1)
-        Lc1:
-            r12.mRectangleIconDrawable = r6
-        Lc3:
-            android.widget.ImageView r13 = r12.mPanelIcon
-            if (r13 == 0) goto Lcc
-            android.graphics.drawable.Drawable r12 = r12.mRectangleIconDrawable
-            r13.setImageDrawable(r12)
-        Lcc:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.KeyguardSecAffordanceView.updateRectangleIconDrawable(boolean):void");
+    public final void updateRectangleIconDrawable(boolean z) {
+        Drawable drawable;
+        Drawable drawable2;
+        Bitmap bitmap;
+        BitmapDrawable bitmapDrawable;
+        KeyguardShortcutManager keyguardShortcutManager;
+        boolean zIsDarkPanel;
+        ?? r0 = this.mRight;
+        KeyguardShortcutManager keyguardShortcutManager2 = this.mShortcutManager;
+        keyguardShortcutManager2.getClass();
+        String packageName = null;
+        if (r0 < 0 || r0 >= 2) {
+            ClockEventController$$ExternalSyntheticOutline0.m(r0 == true ? 1 : 0, "IllegalArgument : ", "KeyguardShortcutManager");
+            drawable = null;
+        } else {
+            KeyguardShortcutManager.ShortcutData[] shortcutDataArr = keyguardShortcutManager2.shortcutsData;
+            drawable = z ? shortcutDataArr[r0 == true ? 1 : 0].panelTransitDrawable : shortcutDataArr[r0 == true ? 1 : 0].panelDrawable;
+        }
+        this.mRectangleIconDrawable = drawable;
+        if (this.mShortcutManager.isMonotoneIcon(this.mRight ? 1 : 0) && (drawable2 = this.mRectangleIconDrawable) != null) {
+            if (this.mIsTaskTypeShortcut) {
+                this.mRectangleIconDrawable = this.mShortcutManager.convertTaskDrawable(drawable2, !r6.isDarkPanel(r0 == true ? 1 : 0), false, true, false);
+            } else {
+                KeyguardShortcutManager keyguardShortcutManager3 = this.mShortcutManager;
+                keyguardShortcutManager3.getClass();
+                if (r0 < 0 || r0 >= 2) {
+                    ClockEventController$$ExternalSyntheticOutline0.m(r0 == true ? 1 : 0, "IllegalArgument : ", "KeyguardShortcutManager");
+                } else {
+                    KeyguardShortcutManager.ShortcutData[] shortcutDataArr2 = keyguardShortcutManager3.shortcutsData;
+                    if (z) {
+                        Drawable drawable3 = shortcutDataArr2[r0 == true ? 1 : 0].panelTransitDrawable;
+                        if (drawable3 != null) {
+                            bitmap = DrawableKt.toBitmap(drawable3, drawable3.getIntrinsicWidth(), drawable3.getIntrinsicHeight(), null);
+                        }
+                        bitmapDrawable = bitmap != null ? new BitmapDrawable(((ImageView) this).mContext.getResources(), bitmap) : null;
+                        keyguardShortcutManager = this.mShortcutManager;
+                        zIsDarkPanel = keyguardShortcutManager.isDarkPanel(r0 == true ? 1 : 0);
+                        KeyguardShortcutManager keyguardShortcutManager4 = this.mShortcutManager;
+                        keyguardShortcutManager4.getClass();
+                        if (r0 < 0 || r0 >= 2) {
+                            ClockEventController$$ExternalSyntheticOutline0.m(r0 == true ? 1 : 0, "IllegalArgument : ", "KeyguardShortcutManager");
+                        } else {
+                            ComponentName componentName = keyguardShortcutManager4.shortcutsData[r0 == true ? 1 : 0].componentName;
+                            if (componentName != null) {
+                                packageName = componentName.getPackageName();
+                            }
+                        }
+                        if (bitmapDrawable != null && !KeyguardShortcutManager.isARShortcutIcon(packageName)) {
+                            bitmapDrawable.mutate().setColorFilter(new BlendModeColorFilter(keyguardShortcutManager.getInvertColor(zIsDarkPanel, true), BlendMode.SRC_ATOP));
+                        }
+                        this.mRectangleIconDrawable = bitmapDrawable;
+                    } else {
+                        Drawable drawable4 = shortcutDataArr2[r0 == true ? 1 : 0].panelDrawable;
+                        if (drawable4 != null) {
+                            bitmap = DrawableKt.toBitmap(drawable4, drawable4.getIntrinsicWidth(), drawable4.getIntrinsicHeight(), null);
+                        }
+                        if (bitmap != null) {
+                        }
+                        keyguardShortcutManager = this.mShortcutManager;
+                        zIsDarkPanel = keyguardShortcutManager.isDarkPanel(r0 == true ? 1 : 0);
+                        KeyguardShortcutManager keyguardShortcutManager42 = this.mShortcutManager;
+                        keyguardShortcutManager42.getClass();
+                        if (r0 < 0) {
+                            ClockEventController$$ExternalSyntheticOutline0.m(r0 == true ? 1 : 0, "IllegalArgument : ", "KeyguardShortcutManager");
+                            if (bitmapDrawable != null) {
+                                bitmapDrawable.mutate().setColorFilter(new BlendModeColorFilter(keyguardShortcutManager.getInvertColor(zIsDarkPanel, true), BlendMode.SRC_ATOP));
+                            }
+                            this.mRectangleIconDrawable = bitmapDrawable;
+                        }
+                    }
+                }
+                bitmap = null;
+                if (bitmap != null) {
+                }
+                keyguardShortcutManager = this.mShortcutManager;
+                zIsDarkPanel = keyguardShortcutManager.isDarkPanel(r0 == true ? 1 : 0);
+                KeyguardShortcutManager keyguardShortcutManager422 = this.mShortcutManager;
+                keyguardShortcutManager422.getClass();
+                if (r0 < 0) {
+                }
+            }
+        }
+        ImageView imageView = this.mPanelIcon;
+        if (imageView != null) {
+            imageView.setImageDrawable(this.mRectangleIconDrawable);
+        }
     }
 
     public final void updateStyle() {
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
-        if (this.mIsWhiteWallpaper != isWhiteKeyguardWallpaper) {
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
+        if (this.mIsWhiteWallpaper != zIsWhiteKeyguardWallpaper) {
             updateBgBlur(((KeyguardVisibilityMonitor) Dependency.sDependency.getDependencyInner(KeyguardVisibilityMonitor.class)).isVisible());
         }
-        this.mIsWhiteWallpaper = isWhiteKeyguardWallpaper;
-        this.mMaxDimBackground = isWhiteKeyguardWallpaper ? 0.08f : 0.25f;
+        this.mIsWhiteWallpaper = zIsWhiteKeyguardWallpaper;
+        this.mMaxDimBackground = zIsWhiteKeyguardWallpaper ? 0.08f : 0.25f;
         setBackgroundCircleColor();
         setForegroundCircleColor();
         this.mShortcutManager.updateShortcuts();
@@ -1388,27 +1628,27 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             final Drawable background = getBackground();
             final Drawable foreground = getForeground();
             if (z) {
-                ValueAnimator ofInt = ValueAnimator.ofInt(getImageAlpha(), i);
-                this.mBottomIconAlphaAnimator = ofInt;
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda4
+                ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(getImageAlpha(), i);
+                this.mBottomIconAlphaAnimator = valueAnimatorOfInt;
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda4
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
+                        KeyguardSecAffordanceView keyguardSecAffordanceView = this.f$0;
                         Drawable drawable = background;
                         Drawable drawable2 = foreground;
                         Interpolator interpolator2 = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                         keyguardSecAffordanceView.getClass();
-                        int intValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        int iIntValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                         if (keyguardSecAffordanceView.mDrawBackgroundColor == -1) {
                             if (drawable != null) {
-                                drawable.mutate().setAlpha(intValue);
+                                drawable.mutate().setAlpha(iIntValue);
                             }
                             if (drawable2 != null) {
-                                drawable2.mutate().setAlpha(keyguardSecAffordanceView.getForegroundAlpha(intValue));
+                                drawable2.mutate().setAlpha(keyguardSecAffordanceView.getForegroundAlpha(iIntValue));
                             }
                             if (!keyguardSecAffordanceView.mShortcutManager.isSupportBlur() || keyguardSecAffordanceView.mIsDrawBackgroundCircle) {
                                 Paint paint = keyguardSecAffordanceView.mTaskOnCirclePaint;
-                                float f2 = intValue / 255.0f;
+                                float f2 = iIntValue / 255.0f;
                                 int i2 = keyguardSecAffordanceView.mMaxTaskOnBackgroundAlpha;
                                 int i3 = (int) (i2 * f2);
                                 if (i3 <= i2) {
@@ -1423,25 +1663,25 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                                 }
                                 paint2.setAlpha(i4);
                             }
-                            keyguardSecAffordanceView.mForegroundCirclePaint.setAlpha(keyguardSecAffordanceView.getForegroundAlpha(intValue));
+                            keyguardSecAffordanceView.mForegroundCirclePaint.setAlpha(keyguardSecAffordanceView.getForegroundAlpha(iIntValue));
                         }
-                        if (intValue <= 0) {
-                            intValue = 1;
+                        if (iIntValue <= 0) {
+                            iIntValue = 1;
                         }
-                        keyguardSecAffordanceView.setImageAlpha(intValue);
+                        keyguardSecAffordanceView.setImageAlpha(iIntValue);
                     }
                 });
-                ofInt.addListener(this.mBottomIconAlphaEndListener);
+                valueAnimatorOfInt.addListener(this.mBottomIconAlphaEndListener);
                 if (interpolator == null) {
                     interpolator = ALPHA_INTERPOLATOR;
                 }
-                ofInt.setInterpolator(interpolator);
+                valueAnimatorOfInt.setInterpolator(interpolator);
                 if (j == -1) {
                     j = 300;
                 }
-                ofInt.setDuration(j);
-                ofInt.setStartDelay(j2);
-                ofInt.start();
+                valueAnimatorOfInt.setDuration(j);
+                valueAnimatorOfInt.setStartDelay(j2);
+                valueAnimatorOfInt.start();
                 return;
             }
             int i2 = this.mDrawBackgroundColor;
@@ -1493,11 +1733,10 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     /* JADX WARN: Type inference failed for: r0v17, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$14] */
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$3] */
     /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$4] */
     /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$5] */
     /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.statusbar.KeyguardSecAffordanceView$6] */
-    public KeyguardSecAffordanceView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public KeyguardSecAffordanceView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mRectangleIconBounds = new Rect();
         this.mRectangleBounds = new Rect();
@@ -1533,16 +1772,16 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         this.mVisibilityListener = new IntConsumer() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda0
             @Override // java.util.function.IntConsumer
             public final void accept(final int i3) {
-                final KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
+                final KeyguardSecAffordanceView keyguardSecAffordanceView = this.f$0;
                 Interpolator interpolator = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 if (i3 != 0 && KeyguardSecAffordanceView.mWaitForReset) {
                     KeyguardSecAffordanceView.mWaitForReset = false;
                     keyguardSecAffordanceView.reset(true);
                 }
-                keyguardSecAffordanceView.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda17
+                keyguardSecAffordanceView.post(new Runnable() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda16
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSecAffordanceView keyguardSecAffordanceView2 = KeyguardSecAffordanceView.this;
+                        KeyguardSecAffordanceView keyguardSecAffordanceView2 = keyguardSecAffordanceView;
                         int i4 = i3;
                         if (keyguardSecAffordanceView2.mIsNowBarExpanded) {
                             return;
@@ -1554,7 +1793,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         };
         this.mDisplayObserver = new DisplayLifecycle.Observer() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView.1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-            public final void onDisplayChanged(int i3) {
+            public final void onDisplayChanged(int i3) throws Resources.NotFoundException {
                 Interpolator interpolator = KeyguardSecAffordanceView.SCALE_INTERPOLATOR;
                 KeyguardSecAffordanceView.this.updateDisplayParameters();
             }
@@ -1567,7 +1806,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                     if (keyguardSecAffordanceView.mBlurPanelView != null) {
                         KeyguardSecAffordanceView.mIsShowBouncerAnimation = false;
                         if (keyguardSecAffordanceView.mShortcutManager.isUnlockWaitNeeded(keyguardSecAffordanceView.mRight ? 1 : 0)) {
-                            KeyguardSecAffordanceView.m2943$$Nest$mresetOnTimeout(keyguardSecAffordanceView);
+                            KeyguardSecAffordanceView.m2960$$Nest$mresetOnTimeout(keyguardSecAffordanceView);
                         } else {
                             keyguardSecAffordanceView.mHandler.sendEmptyMessageDelayed(1001, 150L);
                         }
@@ -1580,20 +1819,18 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                 KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
                 keyguardSecAffordanceView.updateBgBlur(false);
                 keyguardSecAffordanceView.mDeviceInteractive = false;
-                if (keyguardSecAffordanceView.mShortcutManager.isSupportBlur()) {
-                    KeyguardSecAffordanceView.cancelAnimator(keyguardSecAffordanceView.mScreenOnAnimator);
-                    if (keyguardSecAffordanceView.mDrawBackgroundColor != -1) {
-                        keyguardSecAffordanceView.mDrawBackgroundColor = -1;
-                        keyguardSecAffordanceView.setIsDrawBackgroundCircle(false);
-                    }
+                if (!keyguardSecAffordanceView.mShortcutManager.isSupportBlur() || keyguardSecAffordanceView.mDrawBackgroundColor == -1) {
+                    return;
                 }
+                keyguardSecAffordanceView.mDrawBackgroundColor = -1;
+                keyguardSecAffordanceView.setIsDrawBackgroundCircle(false);
             }
         };
-        this.mScreenOnAnimatorListener = new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView.3
+        new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView.3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
                 KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
-                keyguardSecAffordanceView.mScreenOnAnimator = null;
+                keyguardSecAffordanceView.getClass();
                 if (keyguardSecAffordanceView.mDrawBackgroundColor != -1) {
                     keyguardSecAffordanceView.mDrawBackgroundColor = -1;
                     keyguardSecAffordanceView.setIsDrawBackgroundCircle(false);
@@ -1603,7 +1840,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 KeyguardSecAffordanceView keyguardSecAffordanceView = KeyguardSecAffordanceView.this;
-                keyguardSecAffordanceView.mScreenOnAnimator = null;
+                keyguardSecAffordanceView.getClass();
                 if (keyguardSecAffordanceView.mDrawBackgroundColor != -1) {
                     keyguardSecAffordanceView.mDrawBackgroundColor = -1;
                     keyguardSecAffordanceView.setIsDrawBackgroundCircle(false);
@@ -1642,18 +1879,18 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                 keyguardSecAffordanceView.mFling = false;
                 KeyguardSecAffordanceHelper.Callback callback = keyguardSecAffordanceView.mHelperCallback;
                 boolean z = keyguardSecAffordanceView.mRight;
-                boolean isSecure$1 = keyguardSecAffordanceView.isSecure$1();
+                boolean zIsSecure$1 = keyguardSecAffordanceView.isSecure$1();
                 NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
                 notificationPanelViewController.mIsLaunchTransitionRunning = true;
                 KeyguardUnlockInfo.setUnlockTrigger(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_SHORTCUT);
                 int i3 = (int) (0.0f / notificationPanelViewController.mCentralSurfaces.mDisplayMetrics.density);
-                int abs = Math.abs(i3);
-                int abs2 = Math.abs(i3);
+                int iAbs = Math.abs(i3);
+                int iAbs2 = Math.abs(i3);
                 LockscreenGestureLogger lockscreenGestureLogger = notificationPanelViewController.mLockscreenGestureLogger;
                 if (!z) {
-                    lockscreenGestureLogger.write(190, abs, abs2);
+                    lockscreenGestureLogger.write(190, iAbs, iAbs2);
                 } else if (3 == notificationPanelViewController.mLastCameraLaunchSource) {
-                    lockscreenGestureLogger.write(189, abs, abs2);
+                    lockscreenGestureLogger.write(189, iAbs, iAbs2);
                 }
                 KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = notificationPanelViewController.mKeyguardSecBottomAreaViewController;
                 if (keyguardSecBottomAreaViewController != null) {
@@ -1668,12 +1905,12 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecBottomAreaViewController.keyguardInteractor.getClass();
                         cameraLauncher.launchCamera(KeyguardInteractor.cameraLaunchSourceModelToInt(cameraLaunchType), true);
                     } else if (keyguardShortcutManager.isShortcutForPhone(z ? 1 : 0)) {
-                        final TelecomManager from = TelecomManager.from(keyguardSecBottomAreaViewController.getContext());
-                        if (from.isInManagedCall()) {
+                        final TelecomManager telecomManagerFrom = TelecomManager.from(keyguardSecBottomAreaViewController.getContext());
+                        if (telecomManagerFrom.isInManagedCall()) {
                             AsyncTask.execute(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$launchPhone$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    from.showInCallScreen(false);
+                                    telecomManagerFrom.showInCallScreen(false);
                                 }
                             });
                         } else {
@@ -1684,7 +1921,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                         keyguardSecBottomAreaViewController.quickAffordanceInteractor.onQuickAffordanceTriggered(((KeyguardQuickAffordanceConfig) ((ArrayList) keyguardShortcutManager.getQuickAffordanceConfigList()).get((z ? KeyguardQuickAffordancePosition.BOTTOM_END : KeyguardQuickAffordancePosition.BOTTOM_START).ordinal())).getKey(), null, z ? "bottom_end" : "bottom_start");
                     }
                 }
-                if (!isSecure$1) {
+                if (!zIsSecure$1) {
                     notificationPanelViewController.mCentralSurfaces.mMessageRouter.sendMessageDelayed(1003, 5000L);
                 }
                 notificationPanelViewController.mShortcut = z ? 1 : 0;
@@ -1755,14 +1992,14 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                     return;
                 }
                 Log.d("KeyguardSecAffordanceView", "reset timeout");
-                KeyguardSecAffordanceView.m2943$$Nest$mresetOnTimeout(KeyguardSecAffordanceView.this);
+                KeyguardSecAffordanceView.m2960$$Nest$mresetOnTimeout(KeyguardSecAffordanceView.this);
             }
         };
         this.delegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return KeyguardSecAffordanceView.$r8$lambda$XHszcn7tbz374W8KEh3HYw03GJQ(KeyguardSecAffordanceView.this, (Integer) obj);
+            public final Object mo781invoke(Object obj) {
+                return KeyguardSecAffordanceView.$r8$lambda$usC3LFwY5dbTHi859Ko25i8wvTY(this.f$0, (Integer) obj);
             }
         });
         SystemUIAppComponentFactoryBase.Companion.getClass();
@@ -1787,9 +2024,9 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
         this.mIsLandScape = ((ImageView) this).mContext.getResources().getConfiguration().orientation == 2;
         updateDisplayParameters();
         this.mTelecomManager = TelecomManager.from(((ImageView) this).mContext);
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
-        this.mIsWhiteWallpaper = isWhiteKeyguardWallpaper;
-        this.mMaxDimBackground = isWhiteKeyguardWallpaper ? 0.08f : 0.25f;
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
+        this.mIsWhiteWallpaper = zIsWhiteKeyguardWallpaper;
+        this.mMaxDimBackground = zIsWhiteKeyguardWallpaper ? 0.08f : 0.25f;
         setBackgroundCircleColor();
         setForegroundCircleColor();
     }

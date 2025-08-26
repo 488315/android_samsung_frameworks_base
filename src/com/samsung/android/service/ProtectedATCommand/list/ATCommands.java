@@ -155,9 +155,9 @@ public class ATCommands {
         ATCommands aTCommands = (ATCommands) obj;
         String str = new String(aTCommands.getCmdBytes(), StandardCharsets.UTF_8);
         String str2 = new String(this.mCmds, StandardCharsets.UTF_8);
-        String[] split = str.split("=");
-        String[] split2 = str2.split("=");
-        if (split.length < 2 || split2.length < 2) {
+        String[] strArrSplit = str.split("=");
+        String[] strArrSplit2 = str2.split("=");
+        if (strArrSplit.length < 2 || strArrSplit2.length < 2) {
             if (str.contains("=") && !str2.contains("=")) {
                 str2 = str2.concat("=*");
             } else if (str2.contains("=") && !str.contains("=")) {
@@ -165,35 +165,35 @@ public class ATCommands {
             }
             return str.equals(str2);
         }
-        String[] split3 = split[1].split(",");
-        String[] split4 = split2[1].split(",");
-        int min = Math.min(split4.length, split3.length);
+        String[] strArrSplit3 = strArrSplit[1].split(",");
+        String[] strArrSplit4 = strArrSplit2[1].split(",");
+        int iMin = Math.min(strArrSplit4.length, strArrSplit3.length);
         int i = 0;
-        ?? r9 = this;
+        ?? IntValue = this;
         ?? r10 = aTCommands;
-        while (i < min) {
+        while (i < iMin) {
             try {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (split3[i].equals("*")) {
-                if ((r9.mFlags || r10.getFlags()) && Integer.valueOf(split4[i]).intValue() >= 0) {
-                    r9 = Integer.valueOf(split4[i]).intValue();
+            if (strArrSplit3[i].equals("*")) {
+                if ((IntValue.mFlags || r10.getFlags()) && Integer.valueOf(strArrSplit4[i]).intValue() >= 0) {
+                    IntValue = Integer.valueOf(strArrSplit4[i]).intValue();
                     r10 = 9;
-                    if (r9 <= 9) {
+                    if (IntValue <= 9) {
                         return false;
                     }
                 }
                 return true;
             }
-            if (!split3[i].equals(split4[i])) {
+            if (!strArrSplit3[i].equals(strArrSplit4[i])) {
                 return false;
             }
             i++;
-            r9 = r9;
+            IntValue = IntValue;
             r10 = r10;
         }
-        return split3.length == split4.length;
+        return strArrSplit3.length == strArrSplit4.length;
     }
 
     public int hashCode() {

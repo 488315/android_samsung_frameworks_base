@@ -106,9 +106,9 @@ public interface IOemLockService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOemLockService)) {
-                return (IOemLockService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOemLockService)) {
+                return (IOemLockService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -155,37 +155,37 @@ public interface IOemLockService extends IInterface {
                     parcel2.writeString(lockName);
                     return true;
                 case 2:
-                    boolean readBoolean = parcel.readBoolean();
-                    byte[] createByteArray = parcel.createByteArray();
+                    boolean z = parcel.readBoolean();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setOemUnlockAllowedByCarrier(readBoolean, createByteArray);
+                    setOemUnlockAllowedByCarrier(z, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    boolean isOemUnlockAllowedByCarrier = isOemUnlockAllowedByCarrier();
+                    boolean zIsOemUnlockAllowedByCarrier = isOemUnlockAllowedByCarrier();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOemUnlockAllowedByCarrier);
+                    parcel2.writeBoolean(zIsOemUnlockAllowedByCarrier);
                     return true;
                 case 4:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setOemUnlockAllowedByUser(readBoolean2);
+                    setOemUnlockAllowedByUser(z2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    boolean isOemUnlockAllowedByUser = isOemUnlockAllowedByUser();
+                    boolean zIsOemUnlockAllowedByUser = isOemUnlockAllowedByUser();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOemUnlockAllowedByUser);
+                    parcel2.writeBoolean(zIsOemUnlockAllowedByUser);
                     return true;
                 case 6:
-                    boolean isOemUnlockAllowed = isOemUnlockAllowed();
+                    boolean zIsOemUnlockAllowed = isOemUnlockAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOemUnlockAllowed);
+                    parcel2.writeBoolean(zIsOemUnlockAllowed);
                     return true;
                 case 7:
-                    boolean isDeviceOemUnlocked = isDeviceOemUnlocked();
+                    boolean zIsDeviceOemUnlocked = isDeviceOemUnlocked();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceOemUnlocked);
+                    parcel2.writeBoolean(zIsDeviceOemUnlocked);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -210,107 +210,107 @@ public interface IOemLockService extends IInterface {
 
             @Override // android.service.oemlock.IOemLockService
             public String getLockName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public void setOemUnlockAllowedByCarrier(boolean z, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public boolean isOemUnlockAllowedByCarrier() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public void setOemUnlockAllowedByUser(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public boolean isOemUnlockAllowedByUser() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public boolean isOemUnlockAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.oemlock.IOemLockService
             public boolean isDeviceOemUnlocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public abstract class EnrollmentProfile implements Parcelable {
@@ -12,14 +11,14 @@ public abstract class EnrollmentProfile implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public EnrollmentProfile createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            if (readString.equals(SCEPProfile.class.getName())) {
+            String string = parcel.readString();
+            if (string.equals(SCEPProfile.class.getName())) {
                 return new SCEPProfile(parcel);
             }
-            if (readString.equals(CMCProfile.class.getName())) {
+            if (string.equals(CMCProfile.class.getName())) {
                 return new CMCProfile(parcel);
             }
-            if (readString.equals(CMPProfile.class.getName())) {
+            if (string.equals(CMPProfile.class.getName())) {
                 return new CMPProfile(parcel);
             }
             return null;

@@ -18,7 +18,6 @@ import com.android.systemui.R;
 import com.android.systemui.volume.util.ContextUtils;
 import com.android.systemui.volume.util.ViewVisibilityUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class QPVolumeIconMotion {
     public final Context context;
@@ -84,20 +83,20 @@ public final class QPVolumeIconMotion {
         int dimenInt = ContextUtils.getDimenInt(R.dimen.volume_qp_media_icon_note_mid_x, this.context);
         int dimenInt2 = ContextUtils.getDimenInt(R.dimen.volume_qp_media_icon_wave_s_mid_x, this.context);
         int dimenInt3 = ContextUtils.getDimenInt(R.dimen.volume_qp_media_icon_wave_l_mid_x, this.context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
-        animatorSet2.playTogether(ofFloat4);
-        animatorSet2.playTogether(ofFloat5);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat5);
         animatorSet2.setDuration(z ? 0L : 200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet3 = new AnimatorSet();
@@ -121,7 +120,7 @@ public final class QPVolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.icon.QPVolumeIconMotion$startMidAnimation$2$3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
-                QPVolumeIconMotion qPVolumeIconMotion = QPVolumeIconMotion.this;
+                QPVolumeIconMotion qPVolumeIconMotion = this.this$0;
                 Runnable runnable2 = qPVolumeIconMotion.iconRunnable;
                 if (runnable2 != null) {
                     qPVolumeIconMotion.handler.postDelayed(runnable2, 200L);
@@ -148,23 +147,23 @@ public final class QPVolumeIconMotion {
             view3.setVisibility(0);
         }
         int dimenInt = ContextUtils.getDimenInt(R.dimen.volume_qp_media_icon_note_min_x, this.context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.setDuration(z ? 0L : 200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         Runnable runnable = this.iconRunnable;
         if (runnable != null) {
             this.handler.removeCallbacks(runnable);
         }
-        this.iconRunnable = new Runnable() { // from class: com.android.systemui.volume.view.icon.QPVolumeIconMotion$startMinAnimation$3
+        this.iconRunnable = new Runnable() { // from class: com.android.systemui.volume.view.icon.QPVolumeIconMotion.startMinAnimation.3
             @Override // java.lang.Runnable
             public final void run() {
                 int i3 = i2;
@@ -181,7 +180,7 @@ public final class QPVolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.icon.QPVolumeIconMotion$startMinAnimation$4$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
-                QPVolumeIconMotion qPVolumeIconMotion = QPVolumeIconMotion.this;
+                QPVolumeIconMotion qPVolumeIconMotion = this.this$0;
                 Runnable runnable2 = qPVolumeIconMotion.iconRunnable;
                 if (runnable2 != null) {
                     qPVolumeIconMotion.handler.postDelayed(runnable2, 200L);
@@ -203,23 +202,23 @@ public final class QPVolumeIconMotion {
             view3.setVisibility(0);
         }
         int dimenInt = ContextUtils.getDimenInt(R.dimen.volume_qp_media_icon_note_min_x, this.context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
-        ofFloat3.setDuration(z ? 0L : 200L);
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, ofFloat3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        objectAnimatorOfFloat3.setDuration(z ? 0L : 200L);
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, objectAnimatorOfFloat3);
         Runnable runnable = this.iconRunnable;
         if (runnable != null) {
             this.handler.removeCallbacks(runnable);
         }
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.start();
         this.lastAnimator = animatorSet2;
         if (z) {

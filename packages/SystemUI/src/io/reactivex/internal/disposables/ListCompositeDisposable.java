@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ListCompositeDisposable implements Disposable, DisposableContainer {
     public volatile boolean disposed;
@@ -27,12 +26,12 @@ public final class ListCompositeDisposable implements Disposable, DisposableCont
             synchronized (this) {
                 try {
                     if (!this.disposed) {
-                        List list = this.resources;
-                        if (list == null) {
-                            list = new LinkedList();
-                            this.resources = list;
+                        List linkedList = this.resources;
+                        if (linkedList == null) {
+                            linkedList = new LinkedList();
+                            this.resources = linkedList;
                         }
-                        list.add(disposable);
+                        linkedList.add(disposable);
                         return true;
                     }
                 } finally {

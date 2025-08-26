@@ -5,7 +5,6 @@ import com.android.systemui.decor.ScreenDecorCommand;
 import java.util.function.Consumer;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ScreenDecorationsController$$ExternalSyntheticLambda1 implements Consumer {
     @Override // java.util.function.Consumer
@@ -25,7 +24,7 @@ public final /* synthetic */ class ScreenDecorationsController$$ExternalSyntheti
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 boolean z = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
-                ScreenDecorations screenDecorations2 = ScreenDecorations.this;
+                ScreenDecorations screenDecorations2 = screenDecorations;
                 screenDecorations2.getClass();
                 return new ScreenDecorCommand(screenDecorations2.mScreenDecorCommandCallback);
             }

@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class SwitchKt$$ExternalSyntheticLambda1 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -33,17 +32,17 @@ public final /* synthetic */ class SwitchKt$$ExternalSyntheticLambda1 implements
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
                 Modifier modifier = this.f$3;
                 boolean z = this.f$4;
-                SwitchKt.SeslOpenThemeSwitchThumb(this.f$0, this.f$1, this.f$2, modifier, z, (Composer) obj, updateChangedFlags);
+                SwitchKt.SeslOpenThemeSwitchThumb(this.f$0, this.f$1, this.f$2, modifier, z, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
                 Modifier modifier2 = this.f$3;
                 boolean z2 = this.f$4;
-                SwitchKt.SeslDefaultSwitchThumb(this.f$0, this.f$1, this.f$2, modifier2, z2, (Composer) obj, updateChangedFlags2);
+                SwitchKt.SeslDefaultSwitchThumb(this.f$0, this.f$1, this.f$2, modifier2, z2, (Composer) obj, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

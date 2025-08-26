@@ -165,7 +165,7 @@ public class RippleDrawable extends LayerDrawable {
 
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
     protected boolean onStateChange(int[] iArr) {
-        boolean onStateChange = super.onStateChange(iArr);
+        boolean zOnStateChange = super.onStateChange(iArr);
         boolean z = false;
         boolean z2 = false;
         boolean z3 = false;
@@ -183,7 +183,7 @@ public class RippleDrawable extends LayerDrawable {
                 z5 = true;
             } else if (i == 16842909) {
                 z6 = true;
-            } else if (i == 17957249) {
+            } else if (i == 17957251) {
                 this.mSpenHovered = true;
             }
         }
@@ -192,7 +192,7 @@ public class RippleDrawable extends LayerDrawable {
         }
         setRippleActive(z);
         setBackgroundActive(z5, z4, z3, z6);
-        return onStateChange;
+        return zOnStateChange;
     }
 
     private void setRippleActive(boolean z) {
@@ -340,12 +340,12 @@ public class RippleDrawable extends LayerDrawable {
 
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.RippleDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.RippleDrawable);
         setPaddingMode(1);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         updateLocalState();
     }
 
@@ -399,16 +399,16 @@ public class RippleDrawable extends LayerDrawable {
             return;
         }
         if (rippleState.mTouchThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(rippleState.mTouchThemeAttrs, R.styleable.RippleDrawable);
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(rippleState.mTouchThemeAttrs, R.styleable.RippleDrawable);
             try {
                 try {
-                    updateStateFromTypedArray(resolveAttributes);
-                    verifyRequiredAttributes(resolveAttributes);
+                    updateStateFromTypedArray(typedArrayResolveAttributes);
+                    verifyRequiredAttributes(typedArrayResolveAttributes);
                 } catch (XmlPullParserException e) {
                     rethrowAsRuntimeException(e);
                 }
             } finally {
-                resolveAttributes.recycle();
+                typedArrayResolveAttributes.recycle();
             }
         }
         if (rippleState.mColor != null && rippleState.mColor.canApplyTheme()) {
@@ -438,22 +438,22 @@ public class RippleDrawable extends LayerDrawable {
 
     private void tryRippleEnter() {
         RippleDrawable rippleDrawable;
-        float exactCenterX;
-        float exactCenterY;
+        float fExactCenterX;
+        float fExactCenterY;
         if (this.mExitingRipplesCount >= 10) {
             return;
         }
         if (this.mRipple == null) {
             if (this.mHasPending) {
                 this.mHasPending = false;
-                exactCenterX = this.mPendingX;
-                exactCenterY = this.mPendingY;
+                fExactCenterX = this.mPendingX;
+                fExactCenterY = this.mPendingY;
             } else {
-                exactCenterX = this.mHotspotBounds.exactCenterX();
-                exactCenterY = this.mHotspotBounds.exactCenterY();
+                fExactCenterX = this.mHotspotBounds.exactCenterX();
+                fExactCenterY = this.mHotspotBounds.exactCenterY();
             }
             rippleDrawable = this;
-            rippleDrawable.mRipple = new RippleForeground(rippleDrawable, this.mHotspotBounds, exactCenterX, exactCenterY, this.mForceSoftware);
+            rippleDrawable.mRipple = new RippleForeground(rippleDrawable, this.mHotspotBounds, fExactCenterX, fExactCenterY, this.mForceSoftware);
         } else {
             rippleDrawable = this;
         }
@@ -522,12 +522,12 @@ public class RippleDrawable extends LayerDrawable {
             RippleAnimationSession rippleAnimationSession = this.mRunningAnimations.get(i3);
             rippleAnimationSession.setRadius(computedRadius);
             rippleAnimationSession.getProperties().getShader().setResolution(this.mHotspotBounds.width(), this.mHotspotBounds.height());
-            float centerX = this.mHotspotBounds.centerX();
-            float centerY = this.mHotspotBounds.centerY();
-            rippleAnimationSession.getProperties().getShader().setOrigin(centerX, centerY);
-            rippleAnimationSession.getProperties().setOrigin(Float.valueOf(centerX), Float.valueOf(centerY));
+            float fCenterX = this.mHotspotBounds.centerX();
+            float fCenterY = this.mHotspotBounds.centerY();
+            rippleAnimationSession.getProperties().getShader().setOrigin(fCenterX, fCenterY);
+            rippleAnimationSession.getProperties().setOrigin(Float.valueOf(fCenterX), Float.valueOf(fCenterY));
             if (!rippleAnimationSession.isForceSoftware()) {
-                rippleAnimationSession.getCanvasProperties().setOrigin(CanvasProperty.createFloat(centerX), CanvasProperty.createFloat(centerY));
+                rippleAnimationSession.getCanvasProperties().setOrigin(CanvasProperty.createFloat(fCenterX), CanvasProperty.createFloat(fCenterY));
             }
         }
     }
@@ -559,13 +559,13 @@ public class RippleDrawable extends LayerDrawable {
     private void drawSolid(Canvas canvas) {
         pruneRipples();
         Rect dirtyBounds = getDirtyBounds();
-        int save = canvas.save(2);
+        int iSave = canvas.save(2);
         if (isBounded()) {
             canvas.clipRect(dirtyBounds);
         }
         drawContent(canvas);
         drawBackgroundAndRipples(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     private void exitPatternedBackgroundAnimation() {
@@ -613,14 +613,14 @@ public class RippleDrawable extends LayerDrawable {
             Log.w(TAG, "Thread doesn't have a looper. Skipping animation.");
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mBackgroundOpacity, this.mTargetBackgroundOpacity);
-        this.mBackgroundAnimation = ofFloat;
-        ofFloat.setInterpolator(LINEAR_INTERPOLATOR);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mBackgroundOpacity, this.mTargetBackgroundOpacity);
+        this.mBackgroundAnimation = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setInterpolator(LINEAR_INTERPOLATOR);
         this.mBackgroundAnimation.setDuration(80L);
         this.mBackgroundAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.RippleDrawable$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleDrawable.this.lambda$startBackgroundAnimation$0(valueAnimator);
+                this.f$0.lambda$startBackgroundAnimation$0(valueAnimator);
             }
         });
         this.mBackgroundAnimation.start();
@@ -633,17 +633,17 @@ public class RippleDrawable extends LayerDrawable {
     }
 
     private void drawPatterned(Canvas canvas) {
-        float exactCenterX;
-        float exactCenterY;
+        float fExactCenterX;
+        float fExactCenterY;
         Rect rect = this.mHotspotBounds;
-        int save = canvas.save(2);
+        int iSave = canvas.save(2);
         boolean z = this.mForceSoftware;
         if (isBounded()) {
             canvas.clipRect(getDirtyBounds());
         }
         boolean z2 = this.mAddRipple;
-        float centerX = rect.centerX();
-        float centerY = rect.centerY();
+        float fCenterX = rect.centerX();
+        float fCenterY = rect.centerY();
         boolean z3 = this.mExitingAnimation;
         int i = 0;
         this.mExitingAnimation = false;
@@ -652,26 +652,26 @@ public class RippleDrawable extends LayerDrawable {
             updateRipplePaint();
         }
         drawContent(canvas);
-        drawPatternedBackground(canvas, centerX, centerY);
+        drawPatternedBackground(canvas, fCenterX, fCenterY);
         if (z2 && this.mRunningAnimations.size() <= 10) {
             if (this.mHasPending) {
-                exactCenterX = this.mPendingX;
-                exactCenterY = this.mPendingY;
+                fExactCenterX = this.mPendingX;
+                fExactCenterY = this.mPendingY;
                 this.mHasPending = false;
             } else {
-                exactCenterX = rect.exactCenterX();
-                exactCenterY = rect.exactCenterY();
+                fExactCenterX = rect.exactCenterX();
+                fExactCenterY = rect.exactCenterY();
             }
-            float height = rect.height();
-            this.mRunningAnimations.add(new RippleAnimationSession(createAnimationProperties(exactCenterX, exactCenterY, centerX, centerY, rect.width(), height), z).setOnAnimationUpdated(new Runnable() { // from class: android.graphics.drawable.RippleDrawable$$ExternalSyntheticLambda1
+            float fHeight = rect.height();
+            this.mRunningAnimations.add(new RippleAnimationSession(createAnimationProperties(fExactCenterX, fExactCenterY, fCenterX, fCenterY, rect.width(), fHeight), z).setOnAnimationUpdated(new Runnable() { // from class: android.graphics.drawable.RippleDrawable$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RippleDrawable.this.lambda$drawPatterned$1();
+                    this.f$0.lambda$drawPatterned$1();
                 }
             }).setOnSessionEnd(new Consumer() { // from class: android.graphics.drawable.RippleDrawable$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    RippleDrawable.this.lambda$drawPatterned$2((RippleAnimationSession) obj);
+                    this.f$0.lambda$drawPatterned$2((RippleAnimationSession) obj);
                 }
             }).setForceSoftwareAnimation(z).enter(canvas));
         }
@@ -698,7 +698,7 @@ public class RippleDrawable extends LayerDrawable {
             }
             i++;
         }
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -718,24 +718,24 @@ public class RippleDrawable extends LayerDrawable {
         if (this.mBackgroundOpacity == 0.0f) {
             return;
         }
-        Paint updateRipplePaint = updateRipplePaint();
+        Paint paintUpdateRipplePaint = updateRipplePaint();
         float f3 = this.mBackgroundOpacity;
-        int alpha = updateRipplePaint.getAlpha();
-        int min = Math.min((int) ((alpha * f3) + 0.5f), 255);
-        if (min > 0) {
-            ColorFilter colorFilter = updateRipplePaint.getColorFilter();
-            updateRipplePaint.setColorFilter(this.mFocusColorFilter);
-            updateRipplePaint.setAlpha(min);
-            canvas.drawCircle(f, f2, getComputedRadius(), updateRipplePaint);
-            updateRipplePaint.setAlpha(alpha);
-            updateRipplePaint.setColorFilter(colorFilter);
+        int alpha = paintUpdateRipplePaint.getAlpha();
+        int iMin = Math.min((int) ((alpha * f3) + 0.5f), 255);
+        if (iMin > 0) {
+            ColorFilter colorFilter = paintUpdateRipplePaint.getColorFilter();
+            paintUpdateRipplePaint.setColorFilter(this.mFocusColorFilter);
+            paintUpdateRipplePaint.setAlpha(iMin);
+            canvas.drawCircle(f, f2, getComputedRadius(), paintUpdateRipplePaint);
+            paintUpdateRipplePaint.setAlpha(alpha);
+            paintUpdateRipplePaint.setColorFilter(colorFilter);
         }
     }
 
     private float computeRadius() {
-        float width = this.mHotspotBounds.width() / 2.0f;
-        float height = this.mHotspotBounds.height() / 2.0f;
-        return (float) Math.sqrt((width * width) + (height * height));
+        float fWidth = this.mHotspotBounds.width() / 2.0f;
+        float fHeight = this.mHotspotBounds.height() / 2.0f;
+        return (float) Math.sqrt((fWidth * fWidth) + (fHeight * fHeight));
     }
 
     private int getComputedRadius() {
@@ -747,17 +747,17 @@ public class RippleDrawable extends LayerDrawable {
         float computedRadius = getComputedRadius();
         RippleShader rippleShader = new RippleShader();
         PorterDuffColorFilter porterDuffColorFilter = this.mMaskColorFilter;
-        int clampAlpha = clampAlpha(porterDuffColorFilter == null ? this.mState.mColor.getColorForState(getState(), -16777216) : porterDuffColorFilter.getColor());
+        int iClampAlpha = clampAlpha(porterDuffColorFilter == null ? this.mState.mColor.getColorForState(getState(), -16777216) : porterDuffColorFilter.getColor());
         int colorForState = this.mState.mEffectColor.getColorForState(getState(), Color.MAGENTA);
-        float currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-        rippleShader.setColor(clampAlpha, colorForState);
+        float fCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        rippleShader.setColor(iClampAlpha, colorForState);
         rippleShader.setOrigin(f3, f4);
         rippleShader.setTouch(f, f2);
         rippleShader.setResolution(f5, f6);
-        rippleShader.setNoisePhase(currentAnimationTimeMillis);
+        rippleShader.setNoisePhase(fCurrentAnimationTimeMillis);
         rippleShader.setRadius(computedRadius);
         rippleShader.setProgress(0.0f);
-        RippleAnimationSession.AnimationProperties<Float, Paint> animationProperties = new RippleAnimationSession.AnimationProperties<>(Float.valueOf(f3), Float.valueOf(f4), Float.valueOf(computedRadius), Float.valueOf(currentAnimationTimeMillis), paint, Float.valueOf(0.0f), clampAlpha, rippleShader);
+        RippleAnimationSession.AnimationProperties<Float, Paint> animationProperties = new RippleAnimationSession.AnimationProperties<>(Float.valueOf(f3), Float.valueOf(f4), Float.valueOf(computedRadius), Float.valueOf(fCurrentAnimationTimeMillis), paint, Float.valueOf(0.0f), iClampAlpha, rippleShader);
         BitmapShader bitmapShader = this.mMaskShader;
         if (bitmapShader == null) {
             rippleShader.setShader(null);
@@ -843,14 +843,14 @@ public class RippleDrawable extends LayerDrawable {
             this.mMaskColorFilter = new PorterDuffColorFilter(0, PorterDuff.Mode.SRC_IN);
             this.mFocusColorFilter = new PorterDuffColorFilter(0, PorterDuff.Mode.SRC_IN);
         }
-        int save = this.mMaskCanvas.save();
+        int iSave = this.mMaskCanvas.save();
         this.mMaskCanvas.translate(-bounds.left, -bounds.top);
         if (maskType == 2) {
             drawMask(this.mMaskCanvas);
         } else if (maskType == 1) {
             drawContent(this.mMaskCanvas);
         }
-        this.mMaskCanvas.restoreToCount(save);
+        this.mMaskCanvas.restoreToCount(iSave);
     }
 
     private int getMaskType() {
@@ -887,23 +887,23 @@ public class RippleDrawable extends LayerDrawable {
         RippleBackground rippleBackground = this.mBackground;
         int i = this.mExitingRipplesCount;
         if (rippleForeground != null || i > 0 || (rippleBackground != null && rippleBackground.isVisible())) {
-            float exactCenterX = this.mHotspotBounds.exactCenterX();
-            float exactCenterY = this.mHotspotBounds.exactCenterY();
-            canvas.translate(exactCenterX, exactCenterY);
-            Paint updateRipplePaint = updateRipplePaint();
+            float fExactCenterX = this.mHotspotBounds.exactCenterX();
+            float fExactCenterY = this.mHotspotBounds.exactCenterY();
+            canvas.translate(fExactCenterX, fExactCenterY);
+            Paint paintUpdateRipplePaint = updateRipplePaint();
             if (rippleBackground != null && rippleBackground.isVisible()) {
-                rippleBackground.draw(canvas, updateRipplePaint);
+                rippleBackground.draw(canvas, paintUpdateRipplePaint);
             }
             if (i > 0) {
                 RippleForeground[] rippleForegroundArr = this.mExitingRipples;
                 for (int i2 = 0; i2 < i; i2++) {
-                    rippleForegroundArr[i2].draw(canvas, updateRipplePaint);
+                    rippleForegroundArr[i2].draw(canvas, paintUpdateRipplePaint);
                 }
             }
             if (rippleForeground != null) {
-                rippleForeground.draw(canvas, updateRipplePaint);
+                rippleForeground.draw(canvas, paintUpdateRipplePaint);
             }
-            canvas.translate(-exactCenterX, -exactCenterY);
+            canvas.translate(-fExactCenterX, -fExactCenterY);
         }
     }
 
@@ -918,15 +918,15 @@ public class RippleDrawable extends LayerDrawable {
             paint.setAntiAlias(true);
             this.mRipplePaint.setStyle(Paint.Style.FILL);
         }
-        float exactCenterX = this.mHotspotBounds.exactCenterX();
-        float exactCenterY = this.mHotspotBounds.exactCenterY();
+        float fExactCenterX = this.mHotspotBounds.exactCenterX();
+        float fExactCenterY = this.mHotspotBounds.exactCenterY();
         updateMaskShaderIfNeeded();
         if (this.mMaskShader != null) {
             Rect bounds = getBounds();
             if (this.mState.mRippleStyle == 1) {
                 this.mMaskMatrix.setTranslate(bounds.left, bounds.top);
             } else {
-                this.mMaskMatrix.setTranslate(bounds.left - exactCenterX, bounds.top - exactCenterY);
+                this.mMaskMatrix.setTranslate(bounds.left - fExactCenterX, bounds.top - fExactCenterY);
             }
             this.mMaskShader.setLocalMatrix(this.mMaskMatrix);
             if (this.mState.mRippleStyle == 1) {
@@ -935,20 +935,20 @@ public class RippleDrawable extends LayerDrawable {
                 }
             }
         }
-        int clampAlpha = clampAlpha(this.mState.mColor.getColorForState(getState(), -16777216));
+        int iClampAlpha = clampAlpha(this.mState.mColor.getColorForState(getState(), -16777216));
         Paint paint2 = this.mRipplePaint;
         if (this.mMaskColorFilter != null) {
-            int i2 = this.mState.mRippleStyle == 1 ? clampAlpha : clampAlpha | (-16777216);
+            int i2 = this.mState.mRippleStyle == 1 ? iClampAlpha : iClampAlpha | (-16777216);
             if (this.mMaskColorFilter.getColor() != i2) {
                 this.mMaskColorFilter = new PorterDuffColorFilter(i2, this.mMaskColorFilter.getMode());
-                this.mFocusColorFilter = new PorterDuffColorFilter(clampAlpha | (-16777216), this.mFocusColorFilter.getMode());
+                this.mFocusColorFilter = new PorterDuffColorFilter(iClampAlpha | (-16777216), this.mFocusColorFilter.getMode());
             }
-            paint2.setColor(clampAlpha & (-16777216));
+            paint2.setColor(iClampAlpha & (-16777216));
             paint2.setColorFilter(this.mMaskColorFilter);
             paint2.setShader(this.mMaskShader);
             return paint2;
         }
-        paint2.setColor(clampAlpha);
+        paint2.setColor(iClampAlpha);
         paint2.setColorFilter(null);
         paint2.setShader(null);
         return paint2;
@@ -961,20 +961,20 @@ public class RippleDrawable extends LayerDrawable {
             Rect rect2 = this.mDirtyBounds;
             rect2.set(rect);
             rect.setEmpty();
-            int exactCenterX = (int) this.mHotspotBounds.exactCenterX();
-            int exactCenterY = (int) this.mHotspotBounds.exactCenterY();
+            int iExactCenterX = (int) this.mHotspotBounds.exactCenterX();
+            int iExactCenterY = (int) this.mHotspotBounds.exactCenterY();
             Rect rect3 = this.mTempRect;
             RippleForeground[] rippleForegroundArr = this.mExitingRipples;
             int i = this.mExitingRipplesCount;
             for (int i2 = 0; i2 < i; i2++) {
                 rippleForegroundArr[i2].getBounds(rect3);
-                rect3.offset(exactCenterX, exactCenterY);
+                rect3.offset(iExactCenterX, iExactCenterY);
                 rect.union(rect3);
             }
             RippleBackground rippleBackground = this.mBackground;
             if (rippleBackground != null) {
                 rippleBackground.getBounds(rect3);
-                rect3.offset(exactCenterX, exactCenterY);
+                rect3.offset(iExactCenterX, iExactCenterY);
                 rect.union(rect3);
             }
             rect2.union(rect);
@@ -1056,6 +1056,7 @@ public class RippleDrawable extends LayerDrawable {
             return (colorStateList != null && colorStateList.canApplyTheme()) || super.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.LayerDrawable.LayerState, android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new RippleDrawable(this, (Resources) null);

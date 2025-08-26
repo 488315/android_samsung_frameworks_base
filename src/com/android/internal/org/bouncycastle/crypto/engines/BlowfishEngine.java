@@ -86,17 +86,17 @@ public final class BlowfishEngine implements BlockCipher {
         int length = iArr.length;
         int i3 = 0;
         while (i3 < length) {
-            int i4 = i ^ this.P[0];
-            for (int i5 = 1; i5 < 16; i5 += 2) {
-                i2 ^= F(i4) ^ this.P[i5];
-                i4 ^= F(i2) ^ this.P[i5 + 1];
+            int iF = i ^ this.P[0];
+            for (int i4 = 1; i4 < 16; i4 += 2) {
+                i2 ^= F(iF) ^ this.P[i4];
+                iF ^= F(i2) ^ this.P[i4 + 1];
             }
             iArr[i3] = i2 ^ this.P[17];
-            iArr[i3 + 1] = i4;
-            int i6 = iArr[i3];
+            iArr[i3 + 1] = iF;
+            int i5 = iArr[i3];
             i3 += 2;
-            i2 = i4;
-            i = i6;
+            i2 = iF;
+            i = i5;
         }
     }
 
@@ -133,27 +133,27 @@ public final class BlowfishEngine implements BlockCipher {
     }
 
     private void encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
-        int BytesTo32bits = BytesTo32bits(bArr, i);
-        int BytesTo32bits2 = BytesTo32bits(bArr, i + 4);
-        int i3 = this.P[0] ^ BytesTo32bits;
-        for (int i4 = 1; i4 < 16; i4 += 2) {
-            BytesTo32bits2 ^= F(i3) ^ this.P[i4];
-            i3 ^= F(BytesTo32bits2) ^ this.P[i4 + 1];
+        int iBytesTo32bits = BytesTo32bits(bArr, i);
+        int iBytesTo32bits2 = BytesTo32bits(bArr, i + 4);
+        int iF = this.P[0] ^ iBytesTo32bits;
+        for (int i3 = 1; i3 < 16; i3 += 2) {
+            iBytesTo32bits2 ^= F(iF) ^ this.P[i3];
+            iF ^= F(iBytesTo32bits2) ^ this.P[i3 + 1];
         }
-        Bits32ToBytes(BytesTo32bits2 ^ this.P[17], bArr2, i2);
-        Bits32ToBytes(i3, bArr2, i2 + 4);
+        Bits32ToBytes(iBytesTo32bits2 ^ this.P[17], bArr2, i2);
+        Bits32ToBytes(iF, bArr2, i2 + 4);
     }
 
     private void decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) {
-        int BytesTo32bits = BytesTo32bits(bArr, i);
-        int BytesTo32bits2 = BytesTo32bits(bArr, i + 4);
-        int i3 = this.P[17] ^ BytesTo32bits;
-        for (int i4 = 16; i4 > 0; i4 -= 2) {
-            BytesTo32bits2 ^= F(i3) ^ this.P[i4];
-            i3 ^= F(BytesTo32bits2) ^ this.P[i4 - 1];
+        int iBytesTo32bits = BytesTo32bits(bArr, i);
+        int iBytesTo32bits2 = BytesTo32bits(bArr, i + 4);
+        int iF = this.P[17] ^ iBytesTo32bits;
+        for (int i3 = 16; i3 > 0; i3 -= 2) {
+            iBytesTo32bits2 ^= F(iF) ^ this.P[i3];
+            iF ^= F(iBytesTo32bits2) ^ this.P[i3 - 1];
         }
-        Bits32ToBytes(BytesTo32bits2 ^ this.P[0], bArr2, i2);
-        Bits32ToBytes(i3, bArr2, i2 + 4);
+        Bits32ToBytes(iBytesTo32bits2 ^ this.P[0], bArr2, i2);
+        Bits32ToBytes(iF, bArr2, i2 + 4);
     }
 
     private int BytesTo32bits(byte[] bArr, int i) {

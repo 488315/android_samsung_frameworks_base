@@ -2,6 +2,7 @@ package com.android.systemui.controls.controller.util;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import androidx.appcompat.view.menu.MenuItemImpl;
@@ -17,7 +18,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BadgeProviderImpl implements BadgeProvider, BadgeSubject {
     public static final Companion Companion = new Companion(null);
@@ -28,7 +28,6 @@ public final class BadgeProviderImpl implements BadgeProvider, BadgeSubject {
     public final Context context;
     public final DelayableExecutor uiExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -60,7 +59,7 @@ public final class BadgeProviderImpl implements BadgeProvider, BadgeSubject {
         badgeProviderImpl.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.util.BadgeProviderImpl$dismiss$flush$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                BadgeProviderImpl badgeProviderImpl2 = BadgeProviderImpl.this;
+                BadgeProviderImpl badgeProviderImpl2 = this.this$0;
                 String str3 = str;
                 Set<String> set2 = set;
                 BadgeProviderImpl.Companion companion = BadgeProviderImpl.Companion;
@@ -108,7 +107,7 @@ public final class BadgeProviderImpl implements BadgeProvider, BadgeSubject {
         }
     }
 
-    public final void setDescription(ComponentName componentName, View view, CharSequence charSequence) {
+    public final void setDescription(ComponentName componentName, View view, CharSequence charSequence) throws Resources.NotFoundException {
         if (!this.badgeRequiredSet.contains(componentName.getPackageName())) {
             view.setContentDescription(charSequence);
             return;

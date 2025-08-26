@@ -18,7 +18,6 @@ import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiTaskingTransitionState {
     public Animation mAnimation;
@@ -55,17 +54,17 @@ public class MultiTaskingTransitionState {
         int i;
         float f5;
         ScaleAnimation scaleAnimation2;
-        float width = rect.width() / 2.0f;
-        float height = rect.height() / 2.0f;
+        float fWidth = rect.width() / 2.0f;
+        float fHeight = rect.height() / 2.0f;
         float f6 = z ? 0.2f : f;
         float f7 = z ? f : 0.2f;
-        int centerX = rect.centerX();
-        int centerY = (int) (rect.centerY() * f);
+        int iCenterX = rect.centerX();
+        int iCenterY = (int) (rect.centerY() * f);
         boolean z3 = CoreRune.MW_CAPTION_FREEFORM_STASH;
-        float width2 = pointF.x - (centerX + ((z3 && z2) ? rect.width() - (rect.width() * f) : 0.0f));
-        float f8 = pointF.y - centerY;
-        float f9 = z ? width2 : 0.0f;
-        float f10 = z ? 0.0f : width2;
+        float fWidth2 = pointF.x - (iCenterX + ((z3 && z2) ? rect.width() - (rect.width() * f) : 0.0f));
+        float f8 = pointF.y - iCenterY;
+        float f9 = z ? fWidth2 : 0.0f;
+        float f10 = z ? 0.0f : fWidth2;
         float f11 = z ? f8 : 0.0f;
         if (z) {
             f8 = 0.0f;
@@ -82,7 +81,7 @@ public class MultiTaskingTransitionState {
             float f19 = f6;
             f3 = f16;
             f4 = f11;
-            scaleAnimation = new ScaleAnimation(f19, f18, f15, f17, width, height);
+            scaleAnimation = new ScaleAnimation(f19, f18, f15, f17, fWidth, fHeight);
         } else {
             if (z2) {
                 f5 = f13;

@@ -39,13 +39,13 @@ public final class HardwareConfig {
 
     public static final ArrayList<HardwareConfig> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<HardwareConfig> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             HardwareConfig hardwareConfig = new HardwareConfig();
-            hardwareConfig.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 64);
+            hardwareConfig.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 64);
             arrayList.add(hardwareConfig);
         }
         return arrayList;
@@ -58,19 +58,19 @@ public final class HardwareConfig {
         hwParcel.readEmbeddedBuffer(r0.getBytes().length + 1, hwBlob.handle(), j2, false);
         this.state = hwBlob.getInt32(24 + j);
         int int32 = hwBlob.getInt32(40 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, hwBlob.handle(), j + 32, true);
         this.modem.clear();
         for (int i = 0; i < int32; i++) {
             HardwareConfigModem hardwareConfigModem = new HardwareConfigModem();
-            hardwareConfigModem.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 20);
+            hardwareConfigModem.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 20);
             this.modem.add(hardwareConfigModem);
         }
         int int322 = hwBlob.getInt32(56 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 48, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 48, true);
         this.sim.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             HardwareConfigSim hardwareConfigSim = new HardwareConfigSim();
-            hardwareConfigSim.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 16);
+            hardwareConfigSim.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 16);
             this.sim.add(hardwareConfigSim);
         }
     }

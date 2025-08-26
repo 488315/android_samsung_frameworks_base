@@ -1,6 +1,6 @@
 package com.android.internal.protolog;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public final class ProtoLogFileProto {
     public static final int INVALID = 0;
     public static final long LOG = 2246267895812L;

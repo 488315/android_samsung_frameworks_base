@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Place implements Parcelable {
     public static final Parcelable.Creator<Place> CREATOR = new Creator();
@@ -16,7 +15,6 @@ public final class Place implements Parcelable {
     private final Double radius;
     private final PlaceType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -145,17 +143,17 @@ public final class Place implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = this.id.hashCode() * 31;
+        int iHashCode = this.id.hashCode() * 31;
         String str = this.name;
-        int hashCode2 = (this.type.hashCode() + ((hashCode + (str == null ? 0 : str.hashCode())) * 31)) * 31;
+        int iHashCode2 = (this.type.hashCode() + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31)) * 31;
         Address address = this.address;
-        int hashCode3 = (hashCode2 + (address == null ? 0 : address.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (address == null ? 0 : address.hashCode())) * 31;
         Double d = this.latitude;
-        int hashCode4 = (hashCode3 + (d == null ? 0 : d.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (d == null ? 0 : d.hashCode())) * 31;
         Double d2 = this.longitude;
-        int hashCode5 = (hashCode4 + (d2 == null ? 0 : d2.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (d2 == null ? 0 : d2.hashCode())) * 31;
         Double d3 = this.radius;
-        return hashCode5 + (d3 != null ? d3.hashCode() : 0);
+        return iHashCode5 + (d3 != null ? d3.hashCode() : 0);
     }
 
     public String toString() {

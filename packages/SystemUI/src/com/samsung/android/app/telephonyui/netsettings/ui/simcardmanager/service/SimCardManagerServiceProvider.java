@@ -13,21 +13,21 @@ import android.os.IInterface;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0;
-import com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$registerSimCardManagerCallback$1;
+import com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$simCardCallback$1;
 import com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService;
 import com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerServiceCallback;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SimCardManagerServiceProvider {
     public static Context mContext;
     public static volatile SimCardManagerServiceProvider sInstance;
     public static volatile ServiceBindHelper sServiceBindHelper;
     public static final Uri INTERNAL_URI = Uri.parse("content://com.samsung.android.app.telephonyui.internal");
-    public static SimInfoRepositoryImpl$registerSimCardManagerCallback$1 sSimCardManagerServiceCallback = null;
+    public static SimInfoRepositoryImpl$simCardCallback$1 sSimCardManagerServiceCallback = null;
     public static boolean mIsServiceClose = false;
     public static boolean mIsRemainCallbackCall = false;
     public static final int INVALID_VARIABLE = -1;
@@ -64,7 +64,6 @@ public class SimCardManagerServiceProvider {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ServiceBindHelper {
         public static boolean mIsBound = false;
         public final AnonymousClass1 mServiceConnection;
@@ -89,8 +88,8 @@ public class SimCardManagerServiceProvider {
                     if (iBinder == null) {
                         proxy = null;
                     } else {
-                        IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService");
-                        proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ISimCardManagerService)) ? new ISimCardManagerService.Stub.Proxy(iBinder) : (ISimCardManagerService) queryLocalInterface;
+                        IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService");
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISimCardManagerService)) ? new ISimCardManagerService.Stub.Proxy(iBinder) : (ISimCardManagerService) iInterfaceQueryLocalInterface;
                     }
                     serviceBindHelper.mSimCardManagerService = proxy;
                     try {
@@ -196,66 +195,21 @@ public class SimCardManagerServiceProvider {
         return sInstance;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x001f A[Catch: all -> 0x0029, TryCatch #0 {all -> 0x0029, blocks: (B:14:0x000f, B:16:0x0013, B:21:0x001f, B:22:0x002b), top: B:13:0x000f }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService getServiceApi() {
-        /*
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r0 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper
-            r1 = 1
-            r2 = 0
-            if (r0 == 0) goto Lc
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r0 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper
-            int r0 = r0.mServiceStatus
-            if (r0 != 0) goto L2c
-        Lc:
-            java.lang.Class<com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider> r0 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.class
-            monitor-enter(r0)
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r3 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper     // Catch: java.lang.Throwable -> L29
-            if (r3 == 0) goto L1c
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r3 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper     // Catch: java.lang.Throwable -> L29
-            int r3 = r3.mServiceStatus     // Catch: java.lang.Throwable -> L29
-            if (r3 != 0) goto L1a
-            goto L1c
-        L1a:
-            r3 = r2
-            goto L1d
-        L1c:
-            r3 = r1
-        L1d:
-            if (r3 == 0) goto L2b
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r3 = new com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper     // Catch: java.lang.Throwable -> L29
-            android.content.Context r4 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.mContext     // Catch: java.lang.Throwable -> L29
-            r3.<init>(r4)     // Catch: java.lang.Throwable -> L29
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper = r3     // Catch: java.lang.Throwable -> L29
-            goto L2b
-        L29:
-            r1 = move-exception
-            goto L43
-        L2b:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L29
-        L2c:
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider$ServiceBindHelper r0 = com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.sServiceBindHelper
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r4 = "getServiceApi : "
-            r3.<init>(r4)
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService r4 = r0.mSimCardManagerService
-            if (r4 == 0) goto L3a
-            goto L3b
-        L3a:
-            r1 = r2
-        L3b:
-            java.lang.String r2 = "SimCardManagerServiceProvider$ServiceBindHelper"
-            androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0.m(r3, r1, r2)
-            com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService r0 = r0.mSimCardManagerService
-            return r0
-        L43:
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L29
-            throw r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider.getServiceApi():com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.ISimCardManagerService");
+    public static ISimCardManagerService getServiceApi() {
+        if (sServiceBindHelper == null || sServiceBindHelper.mServiceStatus == 0) {
+            synchronized (SimCardManagerServiceProvider.class) {
+                try {
+                    if (sServiceBindHelper == null || sServiceBindHelper.mServiceStatus == 0) {
+                        sServiceBindHelper = new ServiceBindHelper(mContext);
+                    }
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+        }
+        ServiceBindHelper serviceBindHelper = sServiceBindHelper;
+        ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("getServiceApi : "), serviceBindHelper.mSimCardManagerService != null, "SimCardManagerServiceProvider$ServiceBindHelper");
+        return serviceBindHelper.mSimCardManagerService;
     }
 
     public static boolean isServiceRunningCheck(Context context) {
@@ -272,20 +226,20 @@ public class SimCardManagerServiceProvider {
     public final int GetCurrentVoiceCall() {
         int i = INVALID_VARIABLE;
         try {
-            int GetCurrentVoiceCall = ((ISimCardManagerService.Stub.Proxy) getServiceApi()).GetCurrentVoiceCall();
-            Log.d("SimCardManagerServiceProvider", "GetCurrentVoiceCall: = " + GetCurrentVoiceCall);
-            return GetCurrentVoiceCall;
+            int iGetCurrentVoiceCall = ((ISimCardManagerService.Stub.Proxy) getServiceApi()).GetCurrentVoiceCall();
+            Log.d("SimCardManagerServiceProvider", "GetCurrentVoiceCall: = " + iGetCurrentVoiceCall);
+            return iGetCurrentVoiceCall;
         } catch (RemoteException unused) {
             Log.e("SimCardManagerServiceProvider", "GetCurrentVoiceCall: exception occurred.");
             return i;
         } catch (NullPointerException unused2) {
             Log.e("SimCardManagerServiceProvider", "GetCurrentVoiceCall: service is not running.");
             try {
-                Bundle call = mContext.getContentResolver().call(INTERNAL_URI, "getCurrentVoiceCall", (String) null, new Bundle());
-                if (call == null) {
+                Bundle bundleCall = mContext.getContentResolver().call(INTERNAL_URI, "getCurrentVoiceCall", (String) null, new Bundle());
+                if (bundleCall == null) {
                     Log.d("SimCardManagerServiceProvider", "bundle is null : getCurrentVoiceCall");
                 } else {
-                    i = call.getInt("result");
+                    i = bundleCall.getInt("result");
                 }
             } catch (Throwable th) {
                 th.printStackTrace();
@@ -298,9 +252,9 @@ public class SimCardManagerServiceProvider {
     public final boolean isDefaultDataSlotAllowed(int i) {
         boolean z = false;
         try {
-            boolean isDefaultDataSlotAllowed = ((ISimCardManagerService.Stub.Proxy) getServiceApi()).isDefaultDataSlotAllowed(i);
-            Log.d("SimCardManagerServiceProvider", "isDefaultDataSlotAllowed: = " + isDefaultDataSlotAllowed);
-            return isDefaultDataSlotAllowed;
+            boolean zIsDefaultDataSlotAllowed = ((ISimCardManagerService.Stub.Proxy) getServiceApi()).isDefaultDataSlotAllowed(i);
+            Log.d("SimCardManagerServiceProvider", "isDefaultDataSlotAllowed: = " + zIsDefaultDataSlotAllowed);
+            return zIsDefaultDataSlotAllowed;
         } catch (RemoteException unused) {
             Log.e("SimCardManagerServiceProvider", "isDefaultDataSlotAllowed: exception occurred.");
             return false;
@@ -312,11 +266,11 @@ public class SimCardManagerServiceProvider {
                 if (i != INVALID_VARIABLE) {
                     bundle.putInt("selectItem", i);
                 }
-                Bundle call = context.getContentResolver().call(INTERNAL_URI, "isDefaultDataSlotAllowed", (String) null, bundle);
-                if (call == null) {
+                Bundle bundleCall = context.getContentResolver().call(INTERNAL_URI, "isDefaultDataSlotAllowed", (String) null, bundle);
+                if (bundleCall == null) {
                     Log.d("SimCardManagerServiceProvider", "bundle is null : isDefaultDataSlotAllowed");
                 } else {
-                    z = call.getBoolean("result");
+                    z = bundleCall.getBoolean("result");
                 }
             } catch (Throwable th) {
                 th.printStackTrace();

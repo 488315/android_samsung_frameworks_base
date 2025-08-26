@@ -58,11 +58,11 @@ public final class TrafficDescriptor implements Parcelable {
 
         public OsAppId(byte[] bArr) {
             try {
-                ByteBuffer wrap = ByteBuffer.wrap(bArr);
-                this.mOsId = new UUID(wrap.getLong(), wrap.getLong());
-                int i = wrap.get();
+                ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+                this.mOsId = new UUID(byteBufferWrap.getLong(), byteBufferWrap.getLong());
+                int i = byteBufferWrap.get();
                 byte[] bArr2 = new byte[i];
-                wrap.get(bArr2, 0, i);
+                byteBufferWrap.get(bArr2, 0, i);
                 String str = new String(bArr2);
                 Matcher matcher = Pattern.compile("[^0-9]+([0-9]+)$").matcher(new String(bArr2));
                 if (matcher.find()) {
@@ -97,12 +97,12 @@ public final class TrafficDescriptor implements Parcelable {
             int i = this.mDifferentiator;
             sb.append(i > 1 ? Integer.valueOf(i) : "");
             byte[] bytes = sb.toString().getBytes();
-            ByteBuffer allocate = ByteBuffer.allocate(bytes.length + 17);
-            allocate.putLong(this.mOsId.getMostSignificantBits());
-            allocate.putLong(this.mOsId.getLeastSignificantBits());
-            allocate.put((byte) bytes.length);
-            allocate.put(bytes);
-            return allocate.array();
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(bytes.length + 17);
+            byteBufferAllocate.putLong(this.mOsId.getMostSignificantBits());
+            byteBufferAllocate.putLong(this.mOsId.getLeastSignificantBits());
+            byteBufferAllocate.put((byte) bytes.length);
+            byteBufferAllocate.put(bytes);
+            return byteBufferAllocate.array();
         }
 
         public String toString() {
@@ -129,8 +129,8 @@ public final class TrafficDescriptor implements Parcelable {
 
     private TrafficDescriptor(Parcel parcel) {
         this.mDnn = parcel.readString();
-        byte[] createByteArray = parcel.createByteArray();
-        this.mOsAppId = createByteArray != null ? new OsAppId(createByteArray) : null;
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        this.mOsAppId = bArrCreateByteArray != null ? new OsAppId(bArrCreateByteArray) : null;
         enforceAllowedIds();
     }
 

@@ -44,9 +44,9 @@ public interface ILongConsumer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILongConsumer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILongConsumer)) {
-                return (ILongConsumer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILongConsumer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILongConsumer)) {
+                return (ILongConsumer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ILongConsumer extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                accept(readLong);
+                accept(j);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ILongConsumer extends IInterface {
 
             @Override // com.android.internal.telephony.ILongConsumer
             public void accept(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILongConsumer.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILongConsumer.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

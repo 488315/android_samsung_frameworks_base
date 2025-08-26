@@ -91,10 +91,10 @@ public final class SQLiteSession {
                     throw e;
                 }
             }
-            Transaction obtainTransaction = obtainTransaction(i, sQLiteTransactionListener);
-            obtainTransaction.mParent = this.mTransactionStack;
-            this.mTransactionStack = obtainTransaction;
-            if (obtainTransaction == null) {
+            Transaction transactionObtainTransaction = obtainTransaction(i, sQLiteTransactionListener);
+            transactionObtainTransaction.mParent = this.mTransactionStack;
+            this.mTransactionStack = transactionObtainTransaction;
+            if (transactionObtainTransaction == null) {
                 releaseConnection();
             }
         } catch (Throwable th) {
@@ -105,19 +105,19 @@ public final class SQLiteSession {
         }
     }
 
-    public void setTransactionSuccessful() {
+    public void setTransactionSuccessful() throws IOException {
         throwIfNoTransaction();
         throwIfTransactionMarkedSuccessful();
         this.mTransactionStack.mMarkedSuccessful = true;
         closeOpenDependents();
     }
 
-    public void endTransaction(CancellationSignal cancellationSignal) {
+    public void endTransaction(CancellationSignal cancellationSignal) throws IOException {
         throwIfNoTransaction();
         endTransactionUnchecked(cancellationSignal, false);
     }
 
-    private void endTransactionUnchecked(CancellationSignal cancellationSignal, boolean z) {
+    private void endTransactionUnchecked(CancellationSignal cancellationSignal, boolean z) throws IOException {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -132,12 +132,15 @@ public final class SQLiteSession {
                 } else {
                     sQLiteTransactionListener.onRollback();
                 }
+                z2 = z3;
+                e = null;
             } catch (RuntimeException e) {
                 e = e;
             }
+        } else {
+            z2 = z3;
+            e = null;
         }
-        z2 = z3;
-        e = null;
         this.mTransactionStack = transaction.mParent;
         recycleTransaction(transaction);
         Transaction transaction2 = this.mTransactionStack;
@@ -178,7 +181,7 @@ public final class SQLiteSession {
         return yieldTransactionUnchecked(j, cancellationSignal);
     }
 
-    private boolean yieldTransactionUnchecked(long j, CancellationSignal cancellationSignal) {
+    private boolean yieldTransactionUnchecked(long j, CancellationSignal cancellationSignal) throws InterruptedException, IOException {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -341,7 +344,7 @@ public final class SQLiteSession {
         }
     }
 
-    private boolean executeSpecial(String str, Object[] objArr, int i, CancellationSignal cancellationSignal) {
+    private boolean executeSpecial(String str, Object[] objArr, int i, CancellationSignal cancellationSignal) throws IOException {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -399,12 +402,12 @@ public final class SQLiteSession {
         this.mOpenDependents.remove(closeable);
     }
 
-    void closeOpenDependents() {
+    void closeOpenDependents() throws IOException {
         while (this.mOpenDependents.size() > 0) {
-            Closeable pollFirst = this.mOpenDependents.pollFirst();
-            if (pollFirst != null) {
+            Closeable closeablePollFirst = this.mOpenDependents.pollFirst();
+            if (closeablePollFirst != null) {
                 try {
-                    pollFirst.close();
+                    closeablePollFirst.close();
                 } catch (IOException unused) {
                 }
             }

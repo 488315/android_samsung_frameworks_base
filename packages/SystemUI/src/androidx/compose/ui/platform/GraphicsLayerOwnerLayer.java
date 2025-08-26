@@ -43,7 +43,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GraphicsLayerOwnerLayer implements OwnedLayer {
     public final GraphicsContext context;
@@ -77,7 +76,7 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
         long j = Integer.MAX_VALUE;
         IntSize.Companion companion = IntSize.Companion;
         this.size = (j & 4294967295L) | (j << 32);
-        this.matrixCache = Matrix.m481constructorimpl$default();
+        this.matrixCache = Matrix.m483constructorimpl$default();
         this.density = DensityKt.Density$default(1.0f);
         this.layoutDirection = LayoutDirection.Ltr;
         this.scope = new CanvasDrawScope();
@@ -91,9 +90,9 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DrawScope drawScope = (DrawScope) obj;
-                GraphicsLayerOwnerLayer graphicsLayerOwnerLayer = GraphicsLayerOwnerLayer.this;
+                GraphicsLayerOwnerLayer graphicsLayerOwnerLayer = this.this$0;
                 Canvas canvas = drawScope.getDrawContext().getCanvas();
                 Function2 function22 = graphicsLayerOwnerLayer.drawBlock;
                 if (function22 != null) {
@@ -134,40 +133,40 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
     }
 
     /* renamed from: getInverseMatrix-3i98HWw, reason: not valid java name */
-    public final float[] m702getInverseMatrix3i98HWw() {
-        float[] fArr = this.inverseMatrixCache;
-        if (fArr == null) {
-            fArr = Matrix.m481constructorimpl$default();
-            this.inverseMatrixCache = fArr;
+    public final float[] m704getInverseMatrix3i98HWw() {
+        float[] fArrM483constructorimpl$default = this.inverseMatrixCache;
+        if (fArrM483constructorimpl$default == null) {
+            fArrM483constructorimpl$default = Matrix.m483constructorimpl$default();
+            this.inverseMatrixCache = fArrM483constructorimpl$default;
         }
         if (this.isInverseMatrixDirty) {
             this.isInverseMatrixDirty = false;
-            float[] m703getMatrixsQKQjiQ = m703getMatrixsQKQjiQ();
+            float[] fArrM705getMatrixsQKQjiQ = m705getMatrixsQKQjiQ();
             if (this.isIdentity) {
-                return m703getMatrixsQKQjiQ;
+                return fArrM705getMatrixsQKQjiQ;
             }
-            if (!InvertMatrixKt.m704invertToJiSxe2E(m703getMatrixsQKQjiQ, fArr)) {
-                fArr[0] = Float.NaN;
+            if (!InvertMatrixKt.m706invertToJiSxe2E(fArrM705getMatrixsQKQjiQ, fArrM483constructorimpl$default)) {
+                fArrM483constructorimpl$default[0] = Float.NaN;
                 return null;
             }
-        } else if (Float.isNaN(fArr[0])) {
+        } else if (Float.isNaN(fArrM483constructorimpl$default[0])) {
             return null;
         }
-        return fArr;
+        return fArrM483constructorimpl$default;
     }
 
     /* renamed from: getMatrix-sQKQjiQ, reason: not valid java name */
-    public final float[] m703getMatrixsQKQjiQ() {
+    public final float[] m705getMatrixsQKQjiQ() {
         boolean z = this.isMatrixDirty;
         float[] fArr = this.matrixCache;
         if (z) {
             GraphicsLayer graphicsLayer = this.graphicsLayer;
-            long j = graphicsLayer.pivotOffset;
-            if ((9223372034707292159L & j) == 9205357640488583168L) {
-                j = SizeKt.m420getCenteruvyYCjk(IntSizeKt.m864toSizeozmzZPI(this.size));
+            long jM422getCenteruvyYCjk = graphicsLayer.pivotOffset;
+            if ((9223372034707292159L & jM422getCenteruvyYCjk) == 9205357640488583168L) {
+                jM422getCenteruvyYCjk = SizeKt.m422getCenteruvyYCjk(IntSizeKt.m866toSizeozmzZPI(this.size));
             }
-            float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-            float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
+            float fIntBitsToFloat = Float.intBitsToFloat((int) (jM422getCenteruvyYCjk >> 32));
+            float fIntBitsToFloat2 = Float.intBitsToFloat((int) (jM422getCenteruvyYCjk & 4294967295L));
             GraphicsLayerImpl graphicsLayerImpl = graphicsLayer.impl;
             float translationX = graphicsLayerImpl.getTranslationX();
             float translationY = graphicsLayerImpl.getTranslationY();
@@ -178,32 +177,32 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
             float scaleY = graphicsLayerImpl.getScaleY();
             int i = Matrix.$r8$clinit;
             double d = rotationX * 0.017453292519943295d;
-            float sin = (float) Math.sin(d);
-            float cos = (float) Math.cos(d);
-            float f = -sin;
-            float f2 = (translationY * cos) - (1.0f * sin);
-            float f3 = (1.0f * cos) + (translationY * sin);
+            float fSin = (float) Math.sin(d);
+            float fCos = (float) Math.cos(d);
+            float f = -fSin;
+            float f2 = (translationY * fCos) - (1.0f * fSin);
+            float f3 = (1.0f * fCos) + (translationY * fSin);
             double d2 = rotationY * 0.017453292519943295d;
-            float sin2 = (float) Math.sin(d2);
-            float cos2 = (float) Math.cos(d2);
-            float f4 = -sin2;
-            float f5 = sin * sin2;
-            float f6 = sin * cos2;
-            float f7 = cos * sin2;
-            float f8 = cos * cos2;
-            float f9 = (f3 * sin2) + (translationX * cos2);
-            float f10 = (f3 * cos2) + ((-translationX) * sin2);
+            float fSin2 = (float) Math.sin(d2);
+            float fCos2 = (float) Math.cos(d2);
+            float f4 = -fSin2;
+            float f5 = fSin * fSin2;
+            float f6 = fSin * fCos2;
+            float f7 = fCos * fSin2;
+            float f8 = fCos * fCos2;
+            float f9 = (f3 * fSin2) + (translationX * fCos2);
+            float f10 = (f3 * fCos2) + ((-translationX) * fSin2);
             double d3 = rotationZ * 0.017453292519943295d;
-            float sin3 = (float) Math.sin(d3);
-            float cos3 = (float) Math.cos(d3);
-            float f11 = -sin3;
-            float f12 = (cos3 * f5) + (f11 * cos2);
-            float f13 = ((f5 * sin3) + (cos2 * cos3)) * scaleX;
-            float f14 = sin3 * cos * scaleX;
-            float f15 = ((sin3 * f6) + (cos3 * f4)) * scaleX;
+            float fSin3 = (float) Math.sin(d3);
+            float fCos3 = (float) Math.cos(d3);
+            float f11 = -fSin3;
+            float f12 = (fCos3 * f5) + (f11 * fCos2);
+            float f13 = ((f5 * fSin3) + (fCos2 * fCos3)) * scaleX;
+            float f14 = fSin3 * fCos * scaleX;
+            float f15 = ((fSin3 * f6) + (fCos3 * f4)) * scaleX;
             float f16 = f12 * scaleY;
-            float f17 = cos * cos3 * scaleY;
-            float f18 = ((cos3 * f6) + (f11 * f4)) * scaleY;
+            float f17 = fCos * fCos3 * scaleY;
+            float f18 = ((fCos3 * f6) + (f11 * f4)) * scaleY;
             float f19 = f7 * 1.0f;
             float f20 = f * 1.0f;
             float f21 = f8 * 1.0f;
@@ -220,22 +219,22 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
                 fArr[9] = f20;
                 fArr[10] = f21;
                 fArr[11] = 0.0f;
-                float f22 = -intBitsToFloat;
-                fArr[12] = ((f13 * f22) - (intBitsToFloat2 * f16)) + f9 + intBitsToFloat;
-                fArr[13] = ((f14 * f22) - (intBitsToFloat2 * f17)) + f2 + intBitsToFloat2;
-                fArr[14] = ((f22 * f15) - (intBitsToFloat2 * f18)) + f10;
+                float f22 = -fIntBitsToFloat;
+                fArr[12] = ((f13 * f22) - (fIntBitsToFloat2 * f16)) + f9 + fIntBitsToFloat;
+                fArr[13] = ((f14 * f22) - (fIntBitsToFloat2 * f17)) + f2 + fIntBitsToFloat2;
+                fArr[14] = ((f22 * f15) - (fIntBitsToFloat2 * f18)) + f10;
                 fArr[15] = 1.0f;
             }
             this.isMatrixDirty = false;
-            this.isIdentity = MatrixKt.m489isIdentity58bKbWc(fArr);
+            this.isIdentity = MatrixKt.m491isIdentity58bKbWc(fArr);
         }
         return fArr;
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: getUnderlyingMatrix-sQKQjiQ */
-    public final float[] mo682getUnderlyingMatrixsQKQjiQ() {
-        return m703getMatrixsQKQjiQ();
+    public final float[] mo684getUnderlyingMatrixsQKQjiQ() {
+        return m705getMatrixsQKQjiQ();
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
@@ -253,33 +252,33 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: inverseTransform-58bKbWc */
-    public final void mo683inverseTransform58bKbWc(float[] fArr) {
-        float[] m702getInverseMatrix3i98HWw = m702getInverseMatrix3i98HWw();
-        if (m702getInverseMatrix3i98HWw != null) {
-            Matrix.m487timesAssign58bKbWc(fArr, m702getInverseMatrix3i98HWw);
+    public final void mo685inverseTransform58bKbWc(float[] fArr) {
+        float[] fArrM704getInverseMatrix3i98HWw = m704getInverseMatrix3i98HWw();
+        if (fArrM704getInverseMatrix3i98HWw != null) {
+            Matrix.m489timesAssign58bKbWc(fArr, fArrM704getInverseMatrix3i98HWw);
         }
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: isInLayer-k-4lQ0M */
-    public final boolean mo684isInLayerk4lQ0M(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
+    public final boolean mo686isInLayerk4lQ0M(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
         GraphicsLayer graphicsLayer = this.graphicsLayer;
         if (graphicsLayer.clip) {
-            return ShapeContainingUtilKt.isInOutline(graphicsLayer.getOutline(), intBitsToFloat, intBitsToFloat2);
+            return ShapeContainingUtilKt.isInOutline(graphicsLayer.getOutline(), fIntBitsToFloat, fIntBitsToFloat2);
         }
         return true;
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     public final void mapBounds(MutableRect mutableRect, boolean z) {
-        float[] m702getInverseMatrix3i98HWw = z ? m702getInverseMatrix3i98HWw() : m703getMatrixsQKQjiQ();
+        float[] fArrM704getInverseMatrix3i98HWw = z ? m704getInverseMatrix3i98HWw() : m705getMatrixsQKQjiQ();
         if (this.isIdentity) {
             return;
         }
-        if (m702getInverseMatrix3i98HWw != null) {
-            Matrix.m483mapimpl(m702getInverseMatrix3i98HWw, mutableRect);
+        if (fArrM704getInverseMatrix3i98HWw != null) {
+            Matrix.m485mapimpl(fArrM704getInverseMatrix3i98HWw, mutableRect);
             return;
         }
         mutableRect.left = 0.0f;
@@ -290,28 +289,28 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: mapOffset-8S9VItk */
-    public final long mo685mapOffset8S9VItk(long j, boolean z) {
-        float[] m703getMatrixsQKQjiQ;
+    public final long mo687mapOffset8S9VItk(long j, boolean z) {
+        float[] fArrM705getMatrixsQKQjiQ;
         if (z) {
-            m703getMatrixsQKQjiQ = m702getInverseMatrix3i98HWw();
-            if (m703getMatrixsQKQjiQ == null) {
+            fArrM705getMatrixsQKQjiQ = m704getInverseMatrix3i98HWw();
+            if (fArrM705getMatrixsQKQjiQ == null) {
                 Offset.Companion.getClass();
                 return Offset.Infinite;
             }
         } else {
-            m703getMatrixsQKQjiQ = m703getMatrixsQKQjiQ();
+            fArrM705getMatrixsQKQjiQ = m705getMatrixsQKQjiQ();
         }
-        return this.isIdentity ? j : Matrix.m482mapMKHz9U(j, m703getMatrixsQKQjiQ);
+        return this.isIdentity ? j : Matrix.m484mapMKHz9U(j, fArrM705getMatrixsQKQjiQ);
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: move--gyyYBs */
-    public final void mo686movegyyYBs(long j) {
+    public final void mo688movegyyYBs(long j) {
         GraphicsLayer graphicsLayer = this.graphicsLayer;
-        if (!IntOffset.m849equalsimpl0(graphicsLayer.topLeft, j)) {
+        if (!IntOffset.m851equalsimpl0(graphicsLayer.topLeft, j)) {
             graphicsLayer.topLeft = j;
             long j2 = graphicsLayer.size;
-            graphicsLayer.impl.mo558setPositionH0pRuoY((int) (j >> 32), (int) (j & 4294967295L), j2);
+            graphicsLayer.impl.mo560setPositionH0pRuoY((int) (j >> 32), (int) (j & 4294967295L), j2);
         }
         WrapperRenderNodeLayerHelperMethods.INSTANCE.getClass();
         AndroidComposeView androidComposeView = this.ownerView;
@@ -323,8 +322,8 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: resize-ozmzZPI */
-    public final void mo687resizeozmzZPI(long j) {
-        if (IntSize.m861equalsimpl0(j, this.size)) {
+    public final void mo689resizeozmzZPI(long j) {
+        if (IntSize.m863equalsimpl0(j, this.size)) {
             return;
         }
         this.size = j;
@@ -355,10 +354,10 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
         this.isMatrixDirty = false;
         this.isInverseMatrixDirty = false;
         this.isIdentity = true;
-        Matrix.m484resetimpl(this.matrixCache);
+        Matrix.m486resetimpl(this.matrixCache);
         float[] fArr = this.inverseMatrixCache;
         if (fArr != null) {
-            Matrix.m484resetimpl(fArr);
+            Matrix.m486resetimpl(fArr);
         }
         TransformOrigin.Companion.getClass();
         this.transformOrigin = TransformOrigin.Center;
@@ -372,8 +371,8 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: transform-58bKbWc */
-    public final void mo688transform58bKbWc(float[] fArr) {
-        Matrix.m487timesAssign58bKbWc(fArr, m703getMatrixsQKQjiQ());
+    public final void mo690transform58bKbWc(float[] fArr) {
+        Matrix.m489timesAssign58bKbWc(fArr, m705getMatrixsQKQjiQ());
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
@@ -381,18 +380,18 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
         if (this.isDirty) {
             long j = this.transformOrigin;
             TransformOrigin.Companion.getClass();
-            if (!TransformOrigin.m502equalsimpl0(j, TransformOrigin.Center) && !IntSize.m861equalsimpl0(this.graphicsLayer.size, this.size)) {
+            if (!TransformOrigin.m504equalsimpl0(j, TransformOrigin.Center) && !IntSize.m863equalsimpl0(this.graphicsLayer.size, this.size)) {
                 GraphicsLayer graphicsLayer = this.graphicsLayer;
-                float m503getPivotFractionXimpl = TransformOrigin.m503getPivotFractionXimpl(this.transformOrigin) * ((int) (this.size >> 32));
-                float m504getPivotFractionYimpl = TransformOrigin.m504getPivotFractionYimpl(this.transformOrigin) * ((int) (this.size & 4294967295L));
-                long floatToRawIntBits = (Float.floatToRawIntBits(m504getPivotFractionYimpl) & 4294967295L) | (Float.floatToRawIntBits(m503getPivotFractionXimpl) << 32);
+                float fM505getPivotFractionXimpl = TransformOrigin.m505getPivotFractionXimpl(this.transformOrigin) * ((int) (this.size >> 32));
+                float fM506getPivotFractionYimpl = TransformOrigin.m506getPivotFractionYimpl(this.transformOrigin) * ((int) (this.size & 4294967295L));
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(fM506getPivotFractionYimpl) & 4294967295L) | (Float.floatToRawIntBits(fM505getPivotFractionXimpl) << 32);
                 Offset.Companion companion = Offset.Companion;
-                if (!Offset.m396equalsimpl0(graphicsLayer.pivotOffset, floatToRawIntBits)) {
-                    graphicsLayer.pivotOffset = floatToRawIntBits;
-                    graphicsLayer.impl.mo557setPivotOffsetk4lQ0M(floatToRawIntBits);
+                if (!Offset.m398equalsimpl0(graphicsLayer.pivotOffset, jFloatToRawIntBits)) {
+                    graphicsLayer.pivotOffset = jFloatToRawIntBits;
+                    graphicsLayer.impl.mo559setPivotOffsetk4lQ0M(jFloatToRawIntBits);
                 }
             }
-            this.graphicsLayer.m547recordmLhObY(this.density, this.layoutDirection, this.size, this.recordLambda);
+            this.graphicsLayer.m549recordmLhObY(this.density, this.layoutDirection, this.size, this.recordLambda);
             if (this.isDirty) {
                 this.isDirty = false;
                 this.ownerView.notifyLayerIsDirty$ui_release(this, false);
@@ -464,20 +463,20 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
             GraphicsLayer graphicsLayer6 = this.graphicsLayer;
             long j = reusableGraphicsLayerScope.ambientShadowColor;
             GraphicsLayerImpl graphicsLayerImpl6 = graphicsLayer6.impl;
-            long mo549getAmbientShadowColor0d7_KjU = graphicsLayerImpl6.mo549getAmbientShadowColor0d7_KjU();
+            long jMo551getAmbientShadowColor0d7_KjU = graphicsLayerImpl6.mo551getAmbientShadowColor0d7_KjU();
             Color.Companion companion = Color.Companion;
-            if (!ULong.m3427equalsimpl0(j, mo549getAmbientShadowColor0d7_KjU)) {
-                graphicsLayerImpl6.mo553setAmbientShadowColor8_81llA(j);
+            if (!ULong.m3447equalsimpl0(j, jMo551getAmbientShadowColor0d7_KjU)) {
+                graphicsLayerImpl6.mo555setAmbientShadowColor8_81llA(j);
             }
         }
         if ((i2 & 128) != 0) {
             GraphicsLayer graphicsLayer7 = this.graphicsLayer;
             long j2 = reusableGraphicsLayerScope.spotShadowColor;
             GraphicsLayerImpl graphicsLayerImpl7 = graphicsLayer7.impl;
-            long mo552getSpotShadowColor0d7_KjU = graphicsLayerImpl7.mo552getSpotShadowColor0d7_KjU();
+            long jMo554getSpotShadowColor0d7_KjU = graphicsLayerImpl7.mo554getSpotShadowColor0d7_KjU();
             Color.Companion companion2 = Color.Companion;
-            if (!ULong.m3427equalsimpl0(j2, mo552getSpotShadowColor0d7_KjU)) {
-                graphicsLayerImpl7.mo559setSpotShadowColor8_81llA(j2);
+            if (!ULong.m3447equalsimpl0(j2, jMo554getSpotShadowColor0d7_KjU)) {
+                graphicsLayerImpl7.mo561setSpotShadowColor8_81llA(j2);
             }
         }
         if ((i2 & 1024) != 0) {
@@ -515,22 +514,22 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
         if (i3 != 0) {
             long j3 = this.transformOrigin;
             TransformOrigin.Companion.getClass();
-            if (TransformOrigin.m502equalsimpl0(j3, TransformOrigin.Center)) {
+            if (TransformOrigin.m504equalsimpl0(j3, TransformOrigin.Center)) {
                 GraphicsLayer graphicsLayer12 = this.graphicsLayer;
                 Offset.Companion.getClass();
                 long j4 = Offset.Unspecified;
-                if (!Offset.m396equalsimpl0(graphicsLayer12.pivotOffset, j4)) {
+                if (!Offset.m398equalsimpl0(graphicsLayer12.pivotOffset, j4)) {
                     graphicsLayer12.pivotOffset = j4;
-                    graphicsLayer12.impl.mo557setPivotOffsetk4lQ0M(j4);
+                    graphicsLayer12.impl.mo559setPivotOffsetk4lQ0M(j4);
                 }
             } else {
                 GraphicsLayer graphicsLayer13 = this.graphicsLayer;
-                float m503getPivotFractionXimpl = TransformOrigin.m503getPivotFractionXimpl(this.transformOrigin) * ((int) (this.size >> 32));
-                long floatToRawIntBits = (Float.floatToRawIntBits(TransformOrigin.m504getPivotFractionYimpl(this.transformOrigin) * ((int) (this.size & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(m503getPivotFractionXimpl) << 32);
+                float fM505getPivotFractionXimpl = TransformOrigin.m505getPivotFractionXimpl(this.transformOrigin) * ((int) (this.size >> 32));
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(TransformOrigin.m506getPivotFractionYimpl(this.transformOrigin) * ((int) (this.size & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(fM505getPivotFractionXimpl) << 32);
                 Offset.Companion companion3 = Offset.Companion;
-                if (!Offset.m396equalsimpl0(graphicsLayer13.pivotOffset, floatToRawIntBits)) {
-                    graphicsLayer13.pivotOffset = floatToRawIntBits;
-                    graphicsLayer13.impl.mo557setPivotOffsetk4lQ0M(floatToRawIntBits);
+                if (!Offset.m398equalsimpl0(graphicsLayer13.pivotOffset, jFloatToRawIntBits)) {
+                    graphicsLayer13.pivotOffset = jFloatToRawIntBits;
+                    graphicsLayer13.impl.mo559setPivotOffsetk4lQ0M(jFloatToRawIntBits);
                 }
             }
         }
@@ -563,10 +562,10 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
             GraphicsLayer graphicsLayer17 = this.graphicsLayer;
             int i4 = reusableGraphicsLayerScope.blendMode;
             GraphicsLayerImpl graphicsLayerImpl14 = graphicsLayer17.impl;
-            int mo550getBlendMode0nO6VwU = graphicsLayerImpl14.mo550getBlendMode0nO6VwU();
+            int iMo552getBlendMode0nO6VwU = graphicsLayerImpl14.mo552getBlendMode0nO6VwU();
             BlendMode.Companion companion4 = BlendMode.Companion;
-            if (mo550getBlendMode0nO6VwU != i4) {
-                graphicsLayerImpl14.mo554setBlendModes9anfk8(i4);
+            if (iMo552getBlendMode0nO6VwU != i4) {
+                graphicsLayerImpl14.mo556setBlendModes9anfk8(i4);
             }
         }
         if ((32768 & i2) != 0) {
@@ -587,8 +586,8 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
                 i = androidx.compose.ui.graphics.layer.CompositingStrategy.ModulateAlpha;
             }
             GraphicsLayerImpl graphicsLayerImpl15 = graphicsLayer18.impl;
-            if (graphicsLayerImpl15.mo551getCompositingStrategyke2Ky5w() != i) {
-                graphicsLayerImpl15.mo555setCompositingStrategyWpw9cng(i);
+            if (graphicsLayerImpl15.mo553getCompositingStrategyke2Ky5w() != i) {
+                graphicsLayerImpl15.mo557setCompositingStrategyWpw9cng(i);
             }
         }
         if ((i2 & 7963) != 0) {
@@ -604,15 +603,15 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
                 GraphicsLayer graphicsLayer19 = this.graphicsLayer;
                 if (outline instanceof Outline.Rectangle) {
                     Rect rect = ((Outline.Rectangle) outline).rect;
-                    long floatToRawIntBits2 = Float.floatToRawIntBits(rect.left);
+                    long jFloatToRawIntBits2 = Float.floatToRawIntBits(rect.left);
                     float f10 = rect.top;
-                    long floatToRawIntBits3 = (floatToRawIntBits2 << 32) | (Float.floatToRawIntBits(f10) & 4294967295L);
+                    long jFloatToRawIntBits3 = (jFloatToRawIntBits2 << 32) | (Float.floatToRawIntBits(f10) & 4294967295L);
                     Offset.Companion companion5 = Offset.Companion;
                     float f11 = rect.right - rect.left;
                     float f12 = rect.bottom - f10;
-                    long floatToRawIntBits4 = Float.floatToRawIntBits(f11);
+                    long jFloatToRawIntBits4 = Float.floatToRawIntBits(f11);
                     Size.Companion companion6 = Size.Companion;
-                    graphicsLayer19.m548setRoundRectOutlineTNW_H78(floatToRawIntBits3, (4294967295L & Float.floatToRawIntBits(f12)) | (floatToRawIntBits4 << 32), 0.0f);
+                    graphicsLayer19.m550setRoundRectOutlineTNW_H78(jFloatToRawIntBits3, (4294967295L & Float.floatToRawIntBits(f12)) | (jFloatToRawIntBits4 << 32), 0.0f);
                 } else if (outline instanceof Outline.Generic) {
                     graphicsLayer19.resetOutlineParams();
                     graphicsLayer19.outlinePath = ((Outline.Generic) outline).path;
@@ -629,9 +628,9 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
                         Offset.Companion companion7 = Offset.Companion;
                         float width = roundRect.getWidth();
                         float height = roundRect.getHeight();
-                        long floatToRawIntBits5 = Float.floatToRawIntBits(width);
+                        long jFloatToRawIntBits5 = Float.floatToRawIntBits(width);
                         Size.Companion companion8 = Size.Companion;
-                        graphicsLayer19.m548setRoundRectOutlineTNW_H78((Float.floatToRawIntBits(roundRect.left) << 32) | (Float.floatToRawIntBits(roundRect.top) & 4294967295L), (4294967295L & Float.floatToRawIntBits(height)) | (floatToRawIntBits5 << 32), Float.intBitsToFloat((int) (roundRect.bottomLeftCornerRadius >> 32)));
+                        graphicsLayer19.m550setRoundRectOutlineTNW_H78((Float.floatToRawIntBits(roundRect.left) << 32) | (Float.floatToRawIntBits(roundRect.top) & 4294967295L), (4294967295L & Float.floatToRawIntBits(height)) | (jFloatToRawIntBits5 << 32), Float.intBitsToFloat((int) (roundRect.bottomLeftCornerRadius >> 32)));
                     }
                 }
                 boolean z3 = outline instanceof Outline.Generic;

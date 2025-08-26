@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.Log;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -135,7 +136,7 @@ public class SemUriListClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "Multiple Uri write to parcel");
         parcel.writeInt(32);
         super.writeToParcel(parcel, i);

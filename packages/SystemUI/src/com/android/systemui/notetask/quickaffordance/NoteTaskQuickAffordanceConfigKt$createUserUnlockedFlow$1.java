@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelsKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ KeyguardUpdateMonitor $monitor;
@@ -52,7 +51,7 @@ final class NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1 extends Sus
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.notetask.quickaffordance.NoteTaskQuickAffordanceConfigKt$createUserUnlockedFlow$1$callback$1
                 @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
                 public final void onUserUnlocked() {
-                    ChannelsKt.trySendBlocking(ProducerScope.this, Boolean.valueOf(userManager.isUserUnlocked()));
+                    ChannelsKt.trySendBlocking(producerScope, Boolean.valueOf(userManager.isUserUnlocked()));
                 }
             };
             this.$monitor.registerCallback(keyguardUpdateMonitorCallback);

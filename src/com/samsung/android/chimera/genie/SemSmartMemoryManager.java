@@ -11,14 +11,10 @@ public class SemSmartMemoryManager {
     }
 
     public static synchronized SemSmartMemoryManager getInstance(Context context) {
-        SemSmartMemoryManager semSmartMemoryManager;
-        synchronized (SemSmartMemoryManager.class) {
-            if (sSmartMemMgr == null) {
-                sSmartMemMgr = new SemSmartMemoryManager(context);
-            }
-            semSmartMemoryManager = sSmartMemMgr;
+        if (sSmartMemMgr == null) {
+            sSmartMemMgr = new SemSmartMemoryManager(context);
         }
-        return semSmartMemoryManager;
+        return sSmartMemMgr;
     }
 
     public void prepare() {

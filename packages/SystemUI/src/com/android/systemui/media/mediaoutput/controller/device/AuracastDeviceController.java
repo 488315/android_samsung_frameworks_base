@@ -29,13 +29,11 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AuracastDeviceController extends DeviceController {
     public final AudioManager audioManager;
     public final LocalBluetoothManager localBluetoothManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -108,14 +106,14 @@ public final class AuracastDeviceController extends DeviceController {
                     Object obj3 = arrayList3.get(i3);
                     i3++;
                     BuiltInDevice builtInDevice = (BuiltInDevice) obj3;
-                    Integer valueOf = Integer.valueOf(list.indexOf(builtInDevice));
+                    Integer numValueOf = Integer.valueOf(list.indexOf(builtInDevice));
                     ImageVectorConverterPainter.Companion companion = ImageVectorConverterPainter.Companion;
                     Icons.Badge badge = Icons.Badge.INSTANCE;
                     ImageVector imageVector = (ImageVector) AuracastKt.Auracast$delegate.getValue();
                     companion.getClass();
-                    BuiltInDevice copy$default = BuiltInDevice.copy$default(builtInDevice, null, ImageVectorConverterPainter.Companion.toConverter(imageVector), 0, State.CONNECTED, 367);
-                    copy$default.deepCopy(builtInDevice);
-                    arrayList4.add(new Pair(valueOf, copy$default));
+                    BuiltInDevice builtInDeviceCopy$default = BuiltInDevice.copy$default(builtInDevice, null, ImageVectorConverterPainter.Companion.toConverter(imageVector), 0, State.CONNECTED, 367);
+                    builtInDeviceCopy$default.deepCopy(builtInDevice);
+                    arrayList4.add(new Pair(numValueOf, builtInDeviceCopy$default));
                 }
                 int size3 = arrayList4.size();
                 int i4 = 0;
@@ -149,10 +147,10 @@ public final class AuracastDeviceController extends DeviceController {
                     Object obj7 = arrayList6.get(i6);
                     i6++;
                     BluetoothDevice bluetoothDevice = (BluetoothDevice) obj7;
-                    Integer valueOf2 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice));
-                    BluetoothDevice copy$default2 = BluetoothDevice.copy$default(bluetoothDevice, null, null, 0, State.CONNECTED, false, 1919);
-                    copy$default2.deepCopy(bluetoothDevice);
-                    arrayList7.add(new Pair(valueOf2, copy$default2));
+                    Integer numValueOf2 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice));
+                    BluetoothDevice bluetoothDeviceCopy$default = BluetoothDevice.copy$default(bluetoothDevice, null, null, 0, State.CONNECTED, false, 1919);
+                    bluetoothDeviceCopy$default.deepCopy(bluetoothDevice);
+                    arrayList7.add(new Pair(numValueOf2, bluetoothDeviceCopy$default));
                 }
                 int size6 = arrayList7.size();
                 while (i < size6) {
@@ -196,10 +194,10 @@ public final class AuracastDeviceController extends DeviceController {
                 Object obj11 = arrayList10.get(i8);
                 i8++;
                 BuiltInDevice builtInDevice2 = (BuiltInDevice) obj11;
-                Integer valueOf3 = Integer.valueOf(list.indexOf(builtInDevice2));
-                BuiltInDevice copy$default3 = BuiltInDevice.copy$default(builtInDevice2, null, null, 0, State.CONNECTED, 383);
-                copy$default3.deepCopy(builtInDevice2);
-                arrayList11.add(new Pair(valueOf3, copy$default3));
+                Integer numValueOf3 = Integer.valueOf(list.indexOf(builtInDevice2));
+                BuiltInDevice builtInDeviceCopy$default2 = BuiltInDevice.copy$default(builtInDevice2, null, null, 0, State.CONNECTED, 383);
+                builtInDeviceCopy$default2.deepCopy(builtInDevice2);
+                arrayList11.add(new Pair(numValueOf3, builtInDeviceCopy$default2));
             }
             int size9 = arrayList11.size();
             int i9 = 0;
@@ -246,14 +244,14 @@ public final class AuracastDeviceController extends DeviceController {
                 Object obj16 = arrayList14.get(i12);
                 i12++;
                 BluetoothDevice bluetoothDevice2 = (BluetoothDevice) obj16;
-                Integer valueOf4 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice2));
+                Integer numValueOf4 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice2));
                 ImageVectorConverterPainter.Companion companion2 = ImageVectorConverterPainter.Companion;
                 Icons.Badge badge2 = Icons.Badge.INSTANCE;
                 ImageVector imageVector2 = (ImageVector) AuracastKt.Auracast$delegate.getValue();
                 companion2.getClass();
-                BluetoothDevice copy$default4 = BluetoothDevice.copy$default(bluetoothDevice2, null, ImageVectorConverterPainter.Companion.toConverter(imageVector2), 0, State.SELECTED, false, 1903);
-                copy$default4.deepCopy(bluetoothDevice2);
-                arrayList15.add(new Pair(valueOf4, copy$default4));
+                BluetoothDevice bluetoothDeviceCopy$default2 = BluetoothDevice.copy$default(bluetoothDevice2, null, ImageVectorConverterPainter.Companion.toConverter(imageVector2), 0, State.SELECTED, false, 1903);
+                bluetoothDeviceCopy$default2.deepCopy(bluetoothDevice2);
+                arrayList15.add(new Pair(numValueOf4, bluetoothDeviceCopy$default2));
             }
             int size13 = arrayList15.size();
             z = false;
@@ -317,14 +315,14 @@ public final class AuracastDeviceController extends DeviceController {
                 Object obj21 = arrayList18.get(i16);
                 i16++;
                 BluetoothDevice bluetoothDevice3 = (BluetoothDevice) obj21;
-                Integer valueOf5 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice3));
+                Integer numValueOf5 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice3));
                 ImageVectorConverterPainter.Companion companion3 = ImageVectorConverterPainter.Companion;
                 Icons.Badge badge3 = Icons.Badge.INSTANCE;
                 ImageVector imageVector3 = (ImageVector) AuracastKt.Auracast$delegate.getValue();
                 companion3.getClass();
-                BluetoothDevice copy$default5 = BluetoothDevice.copy$default(bluetoothDevice3, null, ImageVectorConverterPainter.Companion.toConverter(imageVector3), 0, State.SELECTED, false, 1903);
-                copy$default5.deepCopy(bluetoothDevice3);
-                arrayList19.add(new Pair(valueOf5, copy$default5));
+                BluetoothDevice bluetoothDeviceCopy$default3 = BluetoothDevice.copy$default(bluetoothDevice3, null, ImageVectorConverterPainter.Companion.toConverter(imageVector3), 0, State.SELECTED, false, 1903);
+                bluetoothDeviceCopy$default3.deepCopy(bluetoothDevice3);
+                arrayList19.add(new Pair(numValueOf5, bluetoothDeviceCopy$default3));
             }
             int size17 = arrayList19.size();
             z = false;
@@ -362,10 +360,10 @@ public final class AuracastDeviceController extends DeviceController {
                 Object obj25 = arrayList21.get(i19);
                 i19++;
                 BluetoothDevice bluetoothDevice4 = (BluetoothDevice) obj25;
-                Integer valueOf6 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice4));
-                BluetoothDevice copy$default6 = BluetoothDevice.copy$default(bluetoothDevice4, null, null, 0, null, false, 1791);
-                copy$default6.deepCopy(bluetoothDevice4);
-                arrayList22.add(new Pair(valueOf6, copy$default6));
+                Integer numValueOf6 = Integer.valueOf(((ArrayList) list2).indexOf(bluetoothDevice4));
+                BluetoothDevice bluetoothDeviceCopy$default4 = BluetoothDevice.copy$default(bluetoothDevice4, null, null, 0, null, false, 1791);
+                bluetoothDeviceCopy$default4.deepCopy(bluetoothDevice4);
+                arrayList22.add(new Pair(numValueOf6, bluetoothDeviceCopy$default4));
             }
             int size20 = arrayList22.size();
             while (i < size20) {

@@ -12,11 +12,14 @@ import androidx.compose.runtime.PrimitiveSnapshotStateKt;
 import androidx.compose.runtime.SnapshotIntStateKt;
 import androidx.compose.runtime.SnapshotMutableFloatStateImpl;
 import androidx.compose.runtime.SnapshotMutableIntStateImpl;
+import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.ui.util.MathHelpersKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
@@ -24,9 +27,9 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.ClosedFloatRange;
 import kotlin.ranges.ClosedFloatingPointRange;
 import kotlin.ranges.RangesKt___RangesKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SliderState implements DraggableState {
     public final SliderState$dragScope$1 dragScope;
@@ -51,58 +54,107 @@ public final class SliderState implements DraggableState {
     public final ClosedFloatingPointRange valueRange;
     public final MutableFloatState valueState$delegate;
 
+    /* renamed from: androidx.compose.material3.SliderState$drag$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Function2 $block;
+        final /* synthetic */ MutatePriority $dragPriority;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
+            super(2, continuation);
+            this.$dragPriority = mutatePriority;
+            this.$block = function2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SliderState.this.new AnonymousClass2(this.$dragPriority, this.$block, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ((SnapshotMutableStateImpl) SliderState.this.isDragging$delegate).setValue(Boolean.TRUE);
+                SliderState sliderState = SliderState.this;
+                MutatorMutex mutatorMutex = sliderState.scrollMutex;
+                MutatePriority mutatePriority = this.$dragPriority;
+                Function2 function2 = this.$block;
+                this.label = 1;
+                if (mutatorMutex.mutateWith(sliderState.dragScope, mutatePriority, function2, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            ((SnapshotMutableStateImpl) SliderState.this.isDragging$delegate).setValue(Boolean.FALSE);
+            return Unit.INSTANCE;
+        }
+    }
+
     public SliderState() {
         this(0.0f, 0, null, null, 15, null);
     }
 
     public final void dispatchRawDelta(float f) {
-        float max;
-        float min;
+        float fMax;
+        float fMin;
         if (this.orientation == Orientation.Vertical) {
             float intValue = ((SnapshotMutableIntStateImpl) this.totalHeight$delegate).getIntValue();
             MutableIntState mutableIntState = this.thumbHeight$delegate;
-            max = Math.max(intValue - (((SnapshotMutableIntStateImpl) mutableIntState).getIntValue() / 2.0f), 0.0f);
-            min = Math.min(((SnapshotMutableIntStateImpl) mutableIntState).getIntValue() / 2.0f, max);
+            fMax = Math.max(intValue - (((SnapshotMutableIntStateImpl) mutableIntState).getIntValue() / 2.0f), 0.0f);
+            fMin = Math.min(((SnapshotMutableIntStateImpl) mutableIntState).getIntValue() / 2.0f, fMax);
         } else {
             float intValue2 = ((SnapshotMutableIntStateImpl) this.totalWidth$delegate).getIntValue();
             MutableIntState mutableIntState2 = this.thumbWidth$delegate;
-            max = Math.max(intValue2 - (((SnapshotMutableIntStateImpl) mutableIntState2).getIntValue() / 2.0f), 0.0f);
-            min = Math.min(((SnapshotMutableIntStateImpl) mutableIntState2).getIntValue() / 2.0f, max);
+            fMax = Math.max(intValue2 - (((SnapshotMutableIntStateImpl) mutableIntState2).getIntValue() / 2.0f), 0.0f);
+            fMin = Math.min(((SnapshotMutableIntStateImpl) mutableIntState2).getIntValue() / 2.0f, fMax);
         }
         SnapshotMutableFloatStateImpl snapshotMutableFloatStateImpl = (SnapshotMutableFloatStateImpl) this.rawOffset$delegate;
         float floatValue = snapshotMutableFloatStateImpl.getFloatValue() + f;
         MutableFloatState mutableFloatState = this.pressOffset$delegate;
         snapshotMutableFloatStateImpl.setFloatValue(((SnapshotMutableFloatStateImpl) mutableFloatState).getFloatValue() + floatValue);
         ((SnapshotMutableFloatStateImpl) mutableFloatState).setFloatValue(0.0f);
-        float access$snapValueToTick = SliderKt.access$snapValueToTick(snapshotMutableFloatStateImpl.getFloatValue(), min, max, this.tickFractions);
+        float fAccess$snapValueToTick = SliderKt.access$snapValueToTick(snapshotMutableFloatStateImpl.getFloatValue(), fMin, fMax, this.tickFractions);
         ClosedFloatRange closedFloatRange = (ClosedFloatRange) this.valueRange;
-        float f2 = max - min;
-        float lerp = MathHelpersKt.lerp(closedFloatRange._start, closedFloatRange._endInclusive, RangesKt___RangesKt.coerceIn(f2 == 0.0f ? 0.0f : (access$snapValueToTick - min) / f2, 0.0f, 1.0f));
-        if (lerp == getValue()) {
+        float f2 = fMax - fMin;
+        float fLerp = MathHelpersKt.lerp(closedFloatRange._start, closedFloatRange._endInclusive, RangesKt___RangesKt.coerceIn(f2 == 0.0f ? 0.0f : (fAccess$snapValueToTick - fMin) / f2, 0.0f, 1.0f));
+        if (fLerp == getValue()) {
             return;
         }
         Function1 function1 = this.onValueChange;
         if (function1 != null) {
-            function1.mo779invoke(Float.valueOf(lerp));
+            function1.mo781invoke(Float.valueOf(fLerp));
         } else {
-            setValue(lerp);
+            setValue(fLerp);
         }
     }
 
     @Override // androidx.compose.foundation.gestures.DraggableState
     public final Object drag(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
-        Object coroutineScope = CoroutineScopeKt.coroutineScope(new SliderState$drag$2(this, mutatePriority, function2, null), continuation);
-        return coroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? coroutineScope : Unit.INSTANCE;
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new AnonymousClass2(mutatePriority, function2, null), continuation);
+        return objCoroutineScope == CoroutineSingletons.COROUTINE_SUSPENDED ? objCoroutineScope : Unit.INSTANCE;
     }
 
     public final float getCoercedValueAsFraction() {
         ClosedFloatRange closedFloatRange = (ClosedFloatRange) this.valueRange;
         float f = closedFloatRange._start;
         float f2 = closedFloatRange._endInclusive;
-        float coerceIn = RangesKt___RangesKt.coerceIn(getValue(), closedFloatRange._start, closedFloatRange._endInclusive);
+        float fCoerceIn = RangesKt___RangesKt.coerceIn(getValue(), closedFloatRange._start, closedFloatRange._endInclusive);
         float f3 = SliderKt.TrackHeight;
         float f4 = f2 - f;
-        return RangesKt___RangesKt.coerceIn(f4 == 0.0f ? 0.0f : (coerceIn - f) / f4, 0.0f, 1.0f);
+        return RangesKt___RangesKt.coerceIn(f4 == 0.0f ? 0.0f : (fCoerceIn - f) / f4, 0.0f, 1.0f);
     }
 
     public final float getValue() {
@@ -154,7 +206,7 @@ public final class SliderState implements DraggableState {
         this.dragScope = new DragScope() { // from class: androidx.compose.material3.SliderState$dragScope$1
             @Override // androidx.compose.foundation.gestures.DragScope
             public final void dragBy(float f5) {
-                SliderState.this.dispatchRawDelta(f5);
+                this.this$0.dispatchRawDelta(f5);
             }
         };
         this.scrollMutex = new MutatorMutex();

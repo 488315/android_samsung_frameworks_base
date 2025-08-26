@@ -10,7 +10,6 @@ import java.util.List;
 import kotlin.KotlinNothingValueException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MeasuredPage implements PageInfo {
     public final int crossAxisSize;
@@ -91,12 +90,12 @@ public final class MeasuredPage implements PageInfo {
         this.reverseLayout = z;
         this.isVertical = orientation == Orientation.Vertical;
         int size = list.size();
-        int i3 = 0;
-        for (int i4 = 0; i4 < size; i4++) {
-            Placeable placeable = list.get(i4);
-            i3 = Math.max(i3, !this.isVertical ? placeable.height : placeable.width);
+        int iMax = 0;
+        for (int i3 = 0; i3 < size; i3++) {
+            Placeable placeable = list.get(i3);
+            iMax = Math.max(iMax, !this.isVertical ? placeable.height : placeable.width);
         }
-        this.crossAxisSize = i3;
+        this.crossAxisSize = iMax;
         this.placeableOffsets = new int[this.placeables.size() * 2];
         this.mainAxisLayoutSize = Integer.MIN_VALUE;
     }

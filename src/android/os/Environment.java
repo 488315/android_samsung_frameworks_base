@@ -480,6 +480,10 @@ public class Environment {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0019  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static int classifyExternalStorageDirectory(File file) {
         int i = 0;
         for (File file2 : FileUtils.listFilesOrEmpty(file)) {
@@ -510,12 +514,11 @@ public class Environment {
                         i |= 1024;
                     } else if (DIRECTORY_RECORDINGS.equals(name)) {
                         i |= 2048;
-                    } else if ("Android".equals(name)) {
-                        i |= 65536;
+                    } else {
+                        i = "Android".equals(name) ? i | 65536 : i | 131072;
                     }
                 }
             }
-            i |= 131072;
         }
         return i;
     }
@@ -665,12 +668,12 @@ public class Environment {
             }
         } catch (PackageManager.NameNotFoundException unused) {
         }
-        boolean isChangeEnabled = Compatibility.isChangeEnabled(DEFAULT_SCOPED_STORAGE);
-        boolean isChangeEnabled2 = Compatibility.isChangeEnabled(FORCE_ENABLE_SCOPED_STORAGE);
-        if (isScopedStorageEnforced(isChangeEnabled, isChangeEnabled2)) {
+        boolean zIsChangeEnabled = Compatibility.isChangeEnabled(DEFAULT_SCOPED_STORAGE);
+        boolean zIsChangeEnabled2 = Compatibility.isChangeEnabled(FORCE_ENABLE_SCOPED_STORAGE);
+        if (isScopedStorageEnforced(zIsChangeEnabled, zIsChangeEnabled2)) {
             return false;
         }
-        if (isScopedStorageDisabled(isChangeEnabled, isChangeEnabled2)) {
+        if (isScopedStorageDisabled(zIsChangeEnabled, zIsChangeEnabled2)) {
             return true;
         }
         AppOpsManager appOpsManager = (AppOpsManager) initialApplication.getSystemService(AppOpsManager.class);
@@ -695,17 +698,17 @@ public class Environment {
         Context context = (Context) Objects.requireNonNull(AppGlobals.getInitialApplication());
         String str = (String) Objects.requireNonNull(context.getPackageName());
         int i = context.getApplicationInfo().uid;
-        int checkOpNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).checkOpNoThrow(92, i, str);
-        if (checkOpNoThrow == 0) {
+        int iCheckOpNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).checkOpNoThrow(92, i, str);
+        if (iCheckOpNoThrow == 0) {
             return true;
         }
-        if (checkOpNoThrow == 1 || checkOpNoThrow == 2) {
+        if (iCheckOpNoThrow == 1 || iCheckOpNoThrow == 2) {
             return false;
         }
-        if (checkOpNoThrow == 3) {
+        if (iCheckOpNoThrow == 3) {
             return context.checkPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, Process.myPid(), i) == 0;
         }
-        throw new IllegalStateException("Unknown AppOpsManager mode " + checkOpNoThrow);
+        throw new IllegalStateException("Unknown AppOpsManager mode " + iCheckOpNoThrow);
     }
 
     static File getDirectory(String str, String str2) {

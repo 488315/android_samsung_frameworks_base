@@ -19,7 +19,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.MutableStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SavedStateHandle {
     public final Map flows;
@@ -30,7 +29,6 @@ public final class SavedStateHandle {
     public static final Companion Companion = new Companion(null);
     public static final Class[] ACCEPTABLE_CLASSES = {Boolean.TYPE, boolean[].class, Double.TYPE, double[].class, Integer.TYPE, int[].class, Long.TYPE, long[].class, String.class, String[].class, Binder.class, Bundle.class, Byte.TYPE, byte[].class, Character.TYPE, char[].class, CharSequence.class, CharSequence[].class, ArrayList.class, Float.TYPE, float[].class, Parcelable.class, Parcelable[].class, Serializable.class, Short.TYPE, short[].class, SparseArray.class, Size.class, SizeF.class};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,11 +39,11 @@ public final class SavedStateHandle {
                 if (bundle2 == null) {
                     return new SavedStateHandle();
                 }
-                HashMap hashMap = new HashMap();
+                HashMap map = new HashMap();
                 for (String str : bundle2.keySet()) {
-                    hashMap.put(str, bundle2.get(str));
+                    map.put(str, bundle2.get(str));
                 }
-                return new SavedStateHandle(hashMap);
+                return new SavedStateHandle(map);
             }
             ClassLoader classLoader = SavedStateHandle.class.getClassLoader();
             classLoader.getClass();
@@ -71,10 +69,10 @@ public final class SavedStateHandle {
         for (Map.Entry entry : MapsKt__MapsKt.toMap(savedStateHandle.savedStateProviders).entrySet()) {
             savedStateHandle.set(((SavedStateRegistry.SavedStateProvider) entry.getValue()).saveState(), (String) entry.getKey());
         }
-        Set<String> keySet = ((LinkedHashMap) savedStateHandle.regular).keySet();
-        ArrayList arrayList = new ArrayList(keySet.size());
+        Set<String> setKeySet = ((LinkedHashMap) savedStateHandle.regular).keySet();
+        ArrayList arrayList = new ArrayList(setKeySet.size());
         ArrayList arrayList2 = new ArrayList(arrayList.size());
-        for (String str : keySet) {
+        for (String str : setKeySet) {
             arrayList.add(str);
             arrayList2.add(((LinkedHashMap) savedStateHandle.regular).get(str));
         }
@@ -90,7 +88,7 @@ public final class SavedStateHandle {
         this.savedStateProvider = new SavedStateRegistry.SavedStateProvider() { // from class: androidx.lifecycle.SavedStateHandle$$ExternalSyntheticLambda0
             @Override // androidx.savedstate.SavedStateRegistry.SavedStateProvider
             public final Bundle saveState() {
-                return SavedStateHandle.$r8$lambda$eeLDsk5Qp_lgSAYrhUViF2PFB0k(SavedStateHandle.this);
+                return SavedStateHandle.$r8$lambda$eeLDsk5Qp_lgSAYrhUViF2PFB0k(this.f$0);
             }
         };
         linkedHashMap.putAll(map);
@@ -138,7 +136,6 @@ public final class SavedStateHandle {
         mutableStateFlow.setValue(obj);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SavingStateLiveData extends MutableLiveData {
         public SavedStateHandle handle;
         public final String key;
@@ -178,7 +175,7 @@ public final class SavedStateHandle {
         this.savedStateProvider = new SavedStateRegistry.SavedStateProvider() { // from class: androidx.lifecycle.SavedStateHandle$$ExternalSyntheticLambda0
             @Override // androidx.savedstate.SavedStateRegistry.SavedStateProvider
             public final Bundle saveState() {
-                return SavedStateHandle.$r8$lambda$eeLDsk5Qp_lgSAYrhUViF2PFB0k(SavedStateHandle.this);
+                return SavedStateHandle.$r8$lambda$eeLDsk5Qp_lgSAYrhUViF2PFB0k(this.f$0);
             }
         };
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="center|left|top" android:background="@drawable/media_panel_popup_background" android:layout_width="96.0dip" android:layout_height="44.0dip"
+<LinearLayout android:gravity="left|top" android:background="@drawable/media_panel_popup_background" android:layout_width="96.0dip" android:layout_height="44.0dip"
   xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/media_popup" android:layout_width="fill_parent" android:layout_height="fill_parent">
         <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/lottie_view" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginStart="10.0dip" />

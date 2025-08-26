@@ -1,34 +1,49 @@
 package com.android.systemui.media;
 
-import android.media.AudioManager;
-import com.android.systemui.media.mediaoutput.ext.AudioManagerExtKt;
-import com.android.systemui.media.mediaoutput.ext.AudioManagerExtKt$volumeKeyHandler$1;
-import kotlin.Lazy;
-import kotlin.jvm.functions.Function0;
+import android.graphics.Rect;
+import android.util.Log;
+import android.view.View;
+import com.android.systemui.media.mediaoutput.compose.common.Feature;
+import kotlin.Pair;
+import kotlin.jvm.functions.Function2;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class MediaOutputView$$ExternalSyntheticLambda2 implements Function0 {
-    public final /* synthetic */ int $r8$classId;
-    public final /* synthetic */ Object f$0;
+public final /* synthetic */ class MediaOutputView$$ExternalSyntheticLambda2 implements Function2 {
+    public final /* synthetic */ MediaOutputView f$0;
 
-    public /* synthetic */ MediaOutputView$$ExternalSyntheticLambda2(Object obj, int i) {
-        this.$r8$classId = i;
-        this.f$0 = obj;
+    public /* synthetic */ MediaOutputView$$ExternalSyntheticLambda2(MediaOutputView mediaOutputView) {
+        this.f$0 = mediaOutputView;
     }
 
-    @Override // kotlin.jvm.functions.Function0
-    public final Object invoke() {
-        Object obj = this.f$0;
-        switch (this.$r8$classId) {
-            case 0:
-                return Integer.valueOf(((MediaOutputView) obj).largeScreenHeaderHelper.getLargeScreenHeaderHeight());
-            case 1:
-                return Integer.valueOf(((Number) ((MediaOutputView) obj).largeScreenShadeHeaderHeight$delegate.getValue()).intValue());
-            default:
-                int i = MediaOutputView.$r8$clinit;
-                Lazy lazy = AudioManagerExtKt.mediaStrategy$delegate;
-                return new AudioManagerExtKt$volumeKeyHandler$1((AudioManager) obj);
+    @Override // kotlin.jvm.functions.Function2
+    public final Object invoke(Object obj, Object obj2) {
+        Integer num = (Integer) obj;
+        int iIntValue = num.intValue();
+        String str = (String) obj2;
+        MediaOutputView mediaOutputView = this.f$0;
+        Feature feature = mediaOutputView.feature;
+        if (feature == null) {
+            feature = null;
         }
+        if (feature.isWindow) {
+            num = null;
+        }
+        if (num != null) {
+            View viewFindViewById = iIntValue > 0 ? mediaOutputView.getRootView().findViewById(num.intValue()) : (str == null || StringsKt__StringsKt.isBlank(str)) ? null : mediaOutputView.getRootView().findViewWithTag(str);
+            if (viewFindViewById != null) {
+                Rect rect = new Rect();
+                viewFindViewById.getGlobalVisibleRect(rect);
+                rect.right = viewFindViewById.getMeasuredWidth() + rect.left;
+                rect.bottom = viewFindViewById.getMeasuredHeight() + rect.top;
+                Rect rect2 = new Rect();
+                ((View) mediaOutputView.getParent()).getGlobalVisibleRect(rect2);
+                Pair pair = new Pair(Integer.valueOf(rect2.left), Integer.valueOf(rect2.top));
+                rect.offset(-((Number) pair.component1()).intValue(), -((Number) pair.component2()).intValue());
+                Log.d("MediaOutputView", "onAttachedToWindow() - rect = " + rect);
+                return rect;
+            }
+        }
+        return null;
     }
 }

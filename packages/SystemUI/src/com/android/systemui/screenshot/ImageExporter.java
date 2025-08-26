@@ -33,7 +33,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ImageExporter {
     public static String mCapturedAppInfo;
@@ -53,7 +52,6 @@ public class ImageExporter {
     public final int mQuality = 100;
     public final ContentResolver mResolver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenshot.ImageExporter$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$android$graphics$Bitmap$CompressFormat;
@@ -84,7 +82,6 @@ public class ImageExporter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ImageExportException extends IOException {
         public ImageExportException(String str) {
             super(str);
@@ -95,7 +92,6 @@ public class ImageExporter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Result {
         public String fileName;
         public Bitmap.CompressFormat format;
@@ -108,7 +104,6 @@ public class ImageExporter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Task {
         public final Bitmap mBitmap;
         public final ZonedDateTime mCaptureTime;
@@ -124,45 +119,45 @@ public class ImageExporter {
         }
 
         public final Result execute() {
-            Uri uri;
+            Uri uriM2940$$Nest$smsemCreateEntry;
             String str = this.mFileName;
             Trace.beginSection("ImageExporter_execute");
             Result result = new Result();
             try {
                 try {
-                    uri = ImageExporter.m2923$$Nest$smsemCreateEntry(this.mResolver, this.mOwner);
-                } catch (ImageExportException e) {
-                    e = e;
-                    uri = null;
+                    uriM2940$$Nest$smsemCreateEntry = ImageExporter.m2940$$Nest$smsemCreateEntry(this.mResolver, this.mOwner);
+                    try {
+                        if (Thread.currentThread().isInterrupted()) {
+                            throw new InterruptedException();
+                        }
+                        ImageExporter.m2942$$Nest$smwriteImage(this.mResolver, this.mBitmap, this.mFormat, this.mQuality, uriM2940$$Nest$smsemCreateEntry);
+                        if (Thread.currentThread().isInterrupted()) {
+                            throw new InterruptedException();
+                        }
+                        ImageExporter.m2941$$Nest$smwriteExif(this.mResolver, uriM2940$$Nest$smsemCreateEntry, this.mRequestId, this.mBitmap.getWidth(), this.mBitmap.getHeight(), this.mCaptureTime);
+                        if (Thread.currentThread().isInterrupted()) {
+                            throw new InterruptedException();
+                        }
+                        ImageExporter.m2939$$Nest$smpublishEntry(this.mResolver, uriM2940$$Nest$smsemCreateEntry, this.mOwner);
+                        result.timestamp = this.mCaptureTime.toInstant().toEpochMilli();
+                        result.requestId = this.mRequestId;
+                        result.uri = uriM2940$$Nest$smsemCreateEntry;
+                        result.fileName = str;
+                        result.format = this.mFormat;
+                        return result;
+                    } catch (ImageExportException e) {
+                        e = e;
+                        if (uriM2940$$Nest$smsemCreateEntry != null) {
+                            this.mResolver.delete(uriM2940$$Nest$smsemCreateEntry, null);
+                        }
+                        throw e;
+                    }
+                } finally {
+                    Trace.endSection();
                 }
-                try {
-                    if (Thread.currentThread().isInterrupted()) {
-                        throw new InterruptedException();
-                    }
-                    ImageExporter.m2925$$Nest$smwriteImage(this.mResolver, this.mBitmap, this.mFormat, this.mQuality, uri);
-                    if (Thread.currentThread().isInterrupted()) {
-                        throw new InterruptedException();
-                    }
-                    ImageExporter.m2924$$Nest$smwriteExif(this.mResolver, uri, this.mRequestId, this.mBitmap.getWidth(), this.mBitmap.getHeight(), this.mCaptureTime);
-                    if (Thread.currentThread().isInterrupted()) {
-                        throw new InterruptedException();
-                    }
-                    ImageExporter.m2922$$Nest$smpublishEntry(this.mResolver, uri, this.mOwner);
-                    result.timestamp = this.mCaptureTime.toInstant().toEpochMilli();
-                    result.requestId = this.mRequestId;
-                    result.uri = uri;
-                    result.fileName = str;
-                    result.format = this.mFormat;
-                    return result;
-                } catch (ImageExportException e2) {
-                    e = e2;
-                    if (uri != null) {
-                        this.mResolver.delete(uri, null);
-                    }
-                    throw e;
-                }
-            } finally {
-                Trace.endSection();
+            } catch (ImageExportException e2) {
+                e = e2;
+                uriM2940$$Nest$smsemCreateEntry = null;
             }
         }
 
@@ -183,7 +178,7 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smpublishEntry, reason: not valid java name */
-    public static void m2922$$Nest$smpublishEntry(ContentResolver contentResolver, Uri uri, UserHandle userHandle) {
+    public static void m2939$$Nest$smpublishEntry(ContentResolver contentResolver, Uri uri, UserHandle userHandle) {
         Trace.beginSection("ImageExporter_publishEntry");
         try {
             ContentValues contentValues = new ContentValues();
@@ -201,38 +196,38 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smsemCreateEntry, reason: not valid java name */
-    public static Uri m2923$$Nest$smsemCreateEntry(ContentResolver contentResolver, UserHandle userHandle) {
+    public static Uri m2940$$Nest$smsemCreateEntry(ContentResolver contentResolver, UserHandle userHandle) {
         Trace.beginSection("ImageExporter_semCreateEntry");
         try {
-            Uri insert = contentResolver.insert(ContentProvider.maybeAddUserId(MediaStore.Images.Media.getContentUri(mVolumeName), userHandle.getIdentifier()), semCreateMetadata());
-            if (insert == null) {
+            Uri uriInsert = contentResolver.insert(ContentProvider.maybeAddUserId(MediaStore.Images.Media.getContentUri(mVolumeName), userHandle.getIdentifier()), semCreateMetadata());
+            if (uriInsert == null) {
                 throw new ImageExportException("ContentResolver#insert returned null.");
             }
-            Log.d("Screenshot", "Inserted new URI: " + insert);
-            return insert;
+            Log.d("Screenshot", "Inserted new URI: " + uriInsert);
+            return uriInsert;
         } finally {
             Trace.endSection();
         }
     }
 
     /* renamed from: -$$Nest$smwriteExif, reason: not valid java name */
-    public static void m2924$$Nest$smwriteExif(ContentResolver contentResolver, Uri uri, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) {
+    public static void m2941$$Nest$smwriteExif(ContentResolver contentResolver, Uri uri, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) {
         Trace.beginSection("ImageExporter_writeExif");
         try {
             try {
-                ParcelFileDescriptor openFile = contentResolver.openFile(uri, "rw", null);
-                if (openFile == null) {
+                ParcelFileDescriptor parcelFileDescriptorOpenFile = contentResolver.openFile(uri, "rw", null);
+                if (parcelFileDescriptorOpenFile == null) {
                     throw new ImageExportException("ContentResolver#openFile returned null.");
                 }
                 try {
-                    ExifInterface exifInterface = new ExifInterface(openFile.getFileDescriptor());
+                    ExifInterface exifInterface = new ExifInterface(parcelFileDescriptorOpenFile.getFileDescriptor());
                     updateExifAttributes(exifInterface, uuid, i, i2, zonedDateTime);
                     try {
                         exifInterface.saveAttributes();
                         Charset charset = StandardCharsets.UTF_8;
-                        SemExtendedFormat.addData(openFile, "Samsung_Capture_Info", "Screenshot".getBytes(charset), 3153, 1);
-                        SemExtendedFormat.addData(openFile, "Captured_App_Info", mCapturedAppInfo.getBytes(charset), 3489, 1);
-                        FileUtils.closeQuietly(openFile);
+                        SemExtendedFormat.addData(parcelFileDescriptorOpenFile, "Samsung_Capture_Info", "Screenshot".getBytes(charset), 3153, 1);
+                        SemExtendedFormat.addData(parcelFileDescriptorOpenFile, "Captured_App_Info", mCapturedAppInfo.getBytes(charset), 3489, 1);
+                        FileUtils.closeQuietly(parcelFileDescriptorOpenFile);
                         Trace.endSection();
                     } catch (IOException e) {
                         throw new ImageExportException("ExifInterface threw an exception writing to the file descriptor.", e);
@@ -240,45 +235,45 @@ public class ImageExporter {
                 } catch (IOException e2) {
                     throw new ImageExportException("ExifInterface threw an exception reading from the file descriptor.", e2);
                 }
-            } catch (FileNotFoundException e3) {
-                throw new ImageExportException("ContentResolver#openFile threw an exception.", e3);
+            } catch (Throwable th) {
+                FileUtils.closeQuietly((AutoCloseable) null);
+                Trace.endSection();
+                throw th;
             }
-        } catch (Throwable th) {
-            FileUtils.closeQuietly((AutoCloseable) null);
-            Trace.endSection();
-            throw th;
+        } catch (FileNotFoundException e3) {
+            throw new ImageExportException("ContentResolver#openFile threw an exception.", e3);
         }
     }
 
     /* renamed from: -$$Nest$smwriteImage, reason: not valid java name */
-    public static void m2925$$Nest$smwriteImage(ContentResolver contentResolver, Bitmap bitmap, Bitmap.CompressFormat compressFormat, int i, Uri uri) {
+    public static void m2942$$Nest$smwriteImage(ContentResolver contentResolver, Bitmap bitmap, Bitmap.CompressFormat compressFormat, int i, Uri uri) {
         Trace.beginSection("ImageExporter_writeImage");
         try {
             try {
-                OutputStream openOutputStream = contentResolver.openOutputStream(uri);
+                OutputStream outputStreamOpenOutputStream = contentResolver.openOutputStream(uri);
                 try {
                     SystemClock.elapsedRealtime();
-                    if (!bitmap.compress(compressFormat, i, openOutputStream)) {
+                    if (!bitmap.compress(compressFormat, i, outputStreamOpenOutputStream)) {
                         throw new ImageExportException("Bitmap.compress returned false. (Failure unknown)");
                     }
-                    if (openOutputStream != null) {
-                        openOutputStream.close();
+                    if (outputStreamOpenOutputStream != null) {
+                        outputStreamOpenOutputStream.close();
                     }
                 } catch (Throwable th) {
-                    if (openOutputStream != null) {
+                    if (outputStreamOpenOutputStream != null) {
                         try {
-                            openOutputStream.close();
+                            outputStreamOpenOutputStream.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }
                     }
                     throw th;
                 }
-            } catch (IOException e) {
-                throw new ImageExportException("ContentResolver#openOutputStream threw an exception.", e);
+            } finally {
+                Trace.endSection();
             }
-        } finally {
-            Trace.endSection();
+        } catch (IOException e) {
+            throw new ImageExportException("ContentResolver#openOutputStream threw an exception.", e);
         }
     }
 
@@ -298,9 +293,9 @@ public class ImageExporter {
     }
 
     public static String createSystemFileDisplayName(String str, Bitmap.CompressFormat compressFormat) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ".");
-        m.append(fileExtension(compressFormat));
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ".");
+        sbM.append(fileExtension(compressFormat));
+        return sbM.toString();
     }
 
     public static String fileExtension(Bitmap.CompressFormat compressFormat) {
@@ -337,11 +332,11 @@ public class ImageExporter {
     public static void semCreateSecmpEntry(ContentResolver contentResolver) {
         Trace.beginSection("ImageExporter_semCreateSecmpEntry");
         try {
-            Uri insert = contentResolver.insert(Uri.parse("content://secmedia/media"), semCreateSecmpMetadata());
-            if (insert == null) {
+            Uri uriInsert = contentResolver.insert(Uri.parse("content://secmedia/media"), semCreateSecmpMetadata());
+            if (uriInsert == null) {
                 throw new ImageExportException("ContentResolver#insert returned null.");
             }
-            Log.d("Screenshot", "Inserted new URI: " + insert);
+            Log.d("Screenshot", "Inserted new URI: " + uriInsert);
         } finally {
             Trace.endSection();
         }
@@ -369,23 +364,23 @@ public class ImageExporter {
         return contentValues;
     }
 
-    public static void updateExifAttributes(ExifInterface exifInterface, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) {
+    public static void updateExifAttributes(ExifInterface exifInterface, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) throws NumberFormatException {
         exifInterface.setAttribute("ImageUniqueID", uuid.toString());
         exifInterface.setAttribute("Software", "Android " + Build.DISPLAY);
         exifInterface.setAttribute("ImageWidth", Integer.toString(i));
         exifInterface.setAttribute("ImageLength", Integer.toString(i2));
-        String format = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss").format(zonedDateTime);
-        String format2 = DateTimeFormatter.ofPattern("SSS").format(zonedDateTime);
-        String format3 = DateTimeFormatter.ofPattern("xxx").format(zonedDateTime);
-        exifInterface.setAttribute("DateTimeOriginal", format);
-        exifInterface.setAttribute("SubSecTimeOriginal", format2);
-        exifInterface.setAttribute("OffsetTimeOriginal", format3);
+        String str = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss").format(zonedDateTime);
+        String str2 = DateTimeFormatter.ofPattern("SSS").format(zonedDateTime);
+        String str3 = DateTimeFormatter.ofPattern("xxx").format(zonedDateTime);
+        exifInterface.setAttribute("DateTimeOriginal", str);
+        exifInterface.setAttribute("SubSecTimeOriginal", str2);
+        exifInterface.setAttribute("OffsetTimeOriginal", str3);
     }
 
     public final CallbackToFutureAdapter.SafeFuture export(Executor executor, UUID uuid, Bitmap bitmap, UserHandle userHandle, int i) {
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+        ZonedDateTime zonedDateTimeNow = ZonedDateTime.now(ZoneId.systemDefault());
         ContentResolver contentResolver = this.mResolver;
         Bitmap.CompressFormat compressFormat = this.mCompressFormat;
-        return CallbackToFutureAdapter.getFuture(new ImageExporter$$ExternalSyntheticLambda0(executor, new Task(contentResolver, uuid, bitmap, now, compressFormat, this.mQuality, userHandle, createFilename(now, compressFormat, i))));
+        return CallbackToFutureAdapter.getFuture(new ImageExporter$$ExternalSyntheticLambda0(executor, new Task(contentResolver, uuid, bitmap, zonedDateTimeNow, compressFormat, this.mQuality, userHandle, createFilename(zonedDateTimeNow, compressFormat, i))));
     }
 }

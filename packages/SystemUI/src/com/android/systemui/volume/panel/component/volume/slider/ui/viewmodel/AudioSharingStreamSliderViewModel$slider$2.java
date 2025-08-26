@@ -15,7 +15,6 @@ import kotlin.ranges.ClosedFloatRange;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioSharingStreamSliderViewModel$slider$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -23,7 +22,6 @@ final class AudioSharingStreamSliderViewModel$slider$2 extends SuspendLambda imp
     int label;
     final /* synthetic */ AudioSharingStreamSliderViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.AudioSharingStreamSliderViewModel$slider$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ String $deviceName;
@@ -56,9 +54,9 @@ final class AudioSharingStreamSliderViewModel$slider$2 extends SuspendLambda imp
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            float intValue = this.$volume.intValue();
+            float fIntValue = this.$volume.intValue();
             this.this$0.audioSharingInteractor.getClass();
-            return new AudioSharingStreamSliderViewModel.State(intValue, new ClosedFloatRange(0, this.this$0.audioSharingInteractor.getVolumeMax()), this.this$0.audioSharingIcon, this.$deviceName);
+            return new AudioSharingStreamSliderViewModel.State(fIntValue, new ClosedFloatRange(0, this.this$0.audioSharingInteractor.getVolumeMax()), this.this$0.audioSharingIcon, this.$deviceName);
         }
     }
 
@@ -77,7 +75,7 @@ final class AudioSharingStreamSliderViewModel$slider$2 extends SuspendLambda imp
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         String name;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;

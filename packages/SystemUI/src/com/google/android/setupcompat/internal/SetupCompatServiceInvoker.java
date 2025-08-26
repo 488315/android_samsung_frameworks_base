@@ -11,7 +11,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SetupCompatServiceInvoker {
     public static final Logger LOG = new Logger("SetupCompatServiceInvoker");
@@ -30,18 +29,14 @@ public class SetupCompatServiceInvoker {
     }
 
     public static synchronized SetupCompatServiceInvoker get(Context context) {
-        SetupCompatServiceInvoker setupCompatServiceInvoker;
-        synchronized (SetupCompatServiceInvoker.class) {
-            try {
-                if (instance == null) {
-                    instance = new SetupCompatServiceInvoker(context.getApplicationContext());
-                }
-                setupCompatServiceInvoker = instance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (instance == null) {
+                instance = new SetupCompatServiceInvoker(context.getApplicationContext());
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return setupCompatServiceInvoker;
+        return instance;
     }
 
     public static void setInstanceForTesting(SetupCompatServiceInvoker setupCompatServiceInvoker) {
@@ -53,7 +48,7 @@ public class SetupCompatServiceInvoker {
             this.loggingExecutor.execute(new Runnable() { // from class: com.google.android.setupcompat.internal.SetupCompatServiceInvoker$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SetupCompatServiceInvoker setupCompatServiceInvoker = SetupCompatServiceInvoker.this;
+                    SetupCompatServiceInvoker setupCompatServiceInvoker = this.f$0;
                     int i2 = i;
                     Bundle bundle2 = bundle;
                     Logger logger = SetupCompatServiceInvoker.LOG;

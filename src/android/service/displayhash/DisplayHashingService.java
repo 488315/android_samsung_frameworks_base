@@ -54,17 +54,17 @@ public abstract class DisplayHashingService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void verifyDisplayHash(byte[] bArr, DisplayHash displayHash, RemoteCallback remoteCallback) {
-        VerifiedDisplayHash onVerifyDisplayHash = onVerifyDisplayHash(bArr, displayHash);
+        VerifiedDisplayHash verifiedDisplayHashOnVerifyDisplayHash = onVerifyDisplayHash(bArr, displayHash);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(EXTRA_VERIFIED_DISPLAY_HASH, onVerifyDisplayHash);
+        bundle.putParcelable(EXTRA_VERIFIED_DISPLAY_HASH, verifiedDisplayHashOnVerifyDisplayHash);
         remoteCallback.sendResult(bundle);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void getDisplayHashAlgorithms(RemoteCallback remoteCallback) {
-        Map<String, DisplayHashParams> onGetDisplayHashAlgorithms = onGetDisplayHashAlgorithms();
+        Map<String, DisplayHashParams> mapOnGetDisplayHashAlgorithms = onGetDisplayHashAlgorithms();
         Bundle bundle = new Bundle();
-        for (Map.Entry<String, DisplayHashParams> entry : onGetDisplayHashAlgorithms.entrySet()) {
+        for (Map.Entry<String, DisplayHashParams> entry : mapOnGetDisplayHashAlgorithms.entrySet()) {
             bundle.putParcelable(entry.getKey(), entry.getValue());
         }
         remoteCallback.sendResult(bundle);
@@ -72,9 +72,9 @@ public abstract class DisplayHashingService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void getDurationBetweenRequestsMillis(RemoteCallback remoteCallback) {
-        int onGetIntervalBetweenRequestsMillis = onGetIntervalBetweenRequestsMillis();
+        int iOnGetIntervalBetweenRequestsMillis = onGetIntervalBetweenRequestsMillis();
         Bundle bundle = new Bundle();
-        bundle.putInt(EXTRA_INTERVAL_BETWEEN_REQUESTS, onGetIntervalBetweenRequestsMillis);
+        bundle.putInt(EXTRA_INTERVAL_BETWEEN_REQUESTS, iOnGetIntervalBetweenRequestsMillis);
         remoteCallback.sendResult(bundle);
     }
 

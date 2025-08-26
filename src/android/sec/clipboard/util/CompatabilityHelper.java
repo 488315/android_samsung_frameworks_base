@@ -31,7 +31,7 @@ public class CompatabilityHelper {
         return "/data/semclipboard/" + str.substring(15);
     }
 
-    public static void migrationClipboard() {
+    public static void migrationClipboard() throws IOException {
         copyClipboardDir(OLD_CLIPBOARD_ROOT_PATH, ClipboardConstants.CLIPBOARD_ROOT_PATH);
         for (int i = 10; i < 200; i++) {
             copyClipboardDir(OLD_CLIPBOARD_ROOT_PATH + i, "/data/semclipboard/" + i);
@@ -39,15 +39,15 @@ public class CompatabilityHelper {
     }
 
     public static void recursiveDelete(File file) {
-        File[] listFiles = file.listFiles();
-        if (listFiles != null) {
-            for (int i = 0; i < listFiles.length; i++) {
-                if (listFiles[i].isFile()) {
-                    if (!listFiles[i].delete()) {
+        File[] fileArrListFiles = file.listFiles();
+        if (fileArrListFiles != null) {
+            for (int i = 0; i < fileArrListFiles.length; i++) {
+                if (fileArrListFiles[i].isFile()) {
+                    if (!fileArrListFiles[i].delete()) {
                         Log.d(TAG, "Failed to delete.");
                     }
                 } else {
-                    recursiveDelete(listFiles[i]);
+                    recursiveDelete(fileArrListFiles[i]);
                 }
             }
         }
@@ -57,11 +57,11 @@ public class CompatabilityHelper {
         Log.d(TAG, "Failed to delete root .");
     }
 
-    private static void copyClipboardDir(String str, String str2) {
-        File[] listFiles;
+    private static void copyClipboardDir(String str, String str2) throws IOException {
+        File[] fileArrListFiles;
         File file = new File(str2);
         File file2 = new File(str);
-        if (!file2.exists() || (listFiles = file2.listFiles()) == null || listFiles.length <= 0) {
+        if (!file2.exists() || (fileArrListFiles = file2.listFiles()) == null || fileArrListFiles.length <= 0) {
             return;
         }
         copyDir(file2, file);
@@ -69,7 +69,7 @@ public class CompatabilityHelper {
         Log.d(TAG, "migration progressed from " + str + " to " + str2);
     }
 
-    private static void copyDir(File file, File file2) {
+    private static void copyDir(File file, File file2) throws IOException {
         if (file.isDirectory()) {
             if (!file2.exists() && file2.mkdir()) {
                 FileUtils.setPermissions(file2, 509, -1, -1);
@@ -90,9 +90,9 @@ public class CompatabilityHelper {
                 try {
                     byte[] bArr = new byte[1024];
                     while (true) {
-                        int read = fileInputStream.read(bArr);
-                        if (read > 0) {
-                            fileOutputStream.write(bArr, 0, read);
+                        int i2 = fileInputStream.read(bArr);
+                        if (i2 > 0) {
+                            fileOutputStream.write(bArr, 0, i2);
                         } else {
                             FileUtils.setPermissions(file2, 509, -1, -1);
                             fileOutputStream.close();

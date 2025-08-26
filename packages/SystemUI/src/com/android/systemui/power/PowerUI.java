@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.IBinder;
@@ -40,7 +41,6 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PowerUI implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public static final boolean DEBUG = Log.isLoggable("PowerUI", 3);
@@ -99,7 +99,6 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Receiver extends BroadcastReceiver {
         public boolean mHasReceivedBattery = false;
 
@@ -134,9 +133,9 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
             powerUI5.mLastBatteryStateSnapshot = powerUI5.mCurrentBatteryStateSnapshot;
             boolean z = powerUI5.mPlugType != 0;
             boolean z2 = i3 != 0;
-            int findBatteryLevelBucket = powerUI5.findBatteryLevelBucket(i);
+            int iFindBatteryLevelBucket = powerUI5.findBatteryLevelBucket(i);
             PowerUI powerUI6 = PowerUI.this;
-            int findBatteryLevelBucket2 = powerUI6.findBatteryLevelBucket(powerUI6.mBatteryLevel);
+            int iFindBatteryLevelBucket2 = powerUI6.findBatteryLevelBucket(powerUI6.mBatteryLevel);
             if (PowerUI.DEBUG) {
                 Slog.d("PowerUI", "buckets   ....." + PowerUI.this.mLowBatteryAlertCloseLevel + " .. " + PowerUI.this.mLowBatteryReminderLevels[0] + " .. " + PowerUI.this.mLowBatteryReminderLevels[1]);
                 StringBuilder sb = new StringBuilder("level          ");
@@ -147,7 +146,7 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
                 Slog.d("PowerUI", "status         " + i2 + " --> " + PowerUI.this.mBatteryStatus);
                 Slog.d("PowerUI", "plugType       " + i3 + " --> " + PowerUI.this.mPlugType);
                 Slog.d("PowerUI", "invalidCharger " + i4 + " --> " + PowerUI.this.mInvalidCharger);
-                Slog.d("PowerUI", "bucket         " + findBatteryLevelBucket + " --> " + findBatteryLevelBucket2);
+                Slog.d("PowerUI", "bucket         " + iFindBatteryLevelBucket + " --> " + iFindBatteryLevelBucket2);
                 Slog.d("PowerUI", "plugged        " + z2 + " --> " + z);
             }
             PowerUI.this.getClass();
@@ -156,7 +155,6 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SkinThermalEventListener extends IThermalEventListener.Stub {
         public SkinThermalEventListener() {
         }
@@ -177,7 +175,6 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UsbThermalEventListener extends IThermalEventListener.Stub {
         public UsbThermalEventListener() {
         }
@@ -193,7 +190,6 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WarningsUI {
     }
 
@@ -235,26 +231,26 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
 
     public synchronized void doSkinThermalEventListenerRegistration() {
         boolean z;
+        boolean zRegisterThermalEventListenerWithType;
         boolean z2;
-        boolean z3;
         try {
             z = this.mEnableSkinTemperatureWarning;
-            z2 = false;
-            z3 = Settings.Global.getInt(this.mContext.getContentResolver(), "show_temperature_warning", this.mContext.getResources().getInteger(R.integer.config_showTemperatureWarning)) != 0;
-            this.mEnableSkinTemperatureWarning = z3;
+            zRegisterThermalEventListenerWithType = false;
+            z2 = Settings.Global.getInt(this.mContext.getContentResolver(), "show_temperature_warning", this.mContext.getResources().getInteger(R.integer.config_showTemperatureWarning)) != 0;
+            this.mEnableSkinTemperatureWarning = z2;
         } catch (RemoteException e) {
             Slog.e("PowerUI", "Exception while (un)registering skin thermal event listener.", e);
         } finally {
         }
-        if (z3 != z) {
+        if (z2 != z) {
             if (this.mSkinThermalEventListener == null) {
                 this.mSkinThermalEventListener = new SkinThermalEventListener();
             }
             if (this.mThermalService == null) {
                 this.mThermalService = IThermalService.Stub.asInterface(ServiceManager.getService("thermalservice"));
             }
-            z2 = this.mEnableSkinTemperatureWarning ? this.mThermalService.registerThermalEventListenerWithType(this.mSkinThermalEventListener, 3) : this.mThermalService.unregisterThermalEventListener(this.mSkinThermalEventListener);
-            if (!z2) {
+            zRegisterThermalEventListenerWithType = this.mEnableSkinTemperatureWarning ? this.mThermalService.registerThermalEventListenerWithType(this.mSkinThermalEventListener, 3) : this.mThermalService.unregisterThermalEventListener(this.mSkinThermalEventListener);
+            if (!zRegisterThermalEventListenerWithType) {
                 this.mEnableSkinTemperatureWarning = !this.mEnableSkinTemperatureWarning;
                 Slog.e("PowerUI", "Failed to register or unregister skin thermal event listener.");
             }
@@ -263,26 +259,26 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
 
     public synchronized void doUsbThermalEventListenerRegistration() {
         boolean z;
+        boolean zRegisterThermalEventListenerWithType;
         boolean z2;
-        boolean z3;
         try {
             z = this.mEnableUsbTemperatureAlarm;
-            z2 = false;
-            z3 = Settings.Global.getInt(this.mContext.getContentResolver(), "show_usb_temperature_alarm", this.mContext.getResources().getInteger(R.integer.config_showUsbPortAlarm)) != 0;
-            this.mEnableUsbTemperatureAlarm = z3;
+            zRegisterThermalEventListenerWithType = false;
+            z2 = Settings.Global.getInt(this.mContext.getContentResolver(), "show_usb_temperature_alarm", this.mContext.getResources().getInteger(R.integer.config_showUsbPortAlarm)) != 0;
+            this.mEnableUsbTemperatureAlarm = z2;
         } catch (RemoteException e) {
             Slog.e("PowerUI", "Exception while (un)registering usb thermal event listener.", e);
         } finally {
         }
-        if (z3 != z) {
+        if (z2 != z) {
             if (this.mUsbThermalEventListener == null) {
                 this.mUsbThermalEventListener = new UsbThermalEventListener();
             }
             if (this.mThermalService == null) {
                 this.mThermalService = IThermalService.Stub.asInterface(ServiceManager.getService("thermalservice"));
             }
-            z2 = this.mEnableUsbTemperatureAlarm ? this.mThermalService.registerThermalEventListenerWithType(this.mUsbThermalEventListener, 4) : this.mThermalService.unregisterThermalEventListener(this.mUsbThermalEventListener);
-            if (!z2) {
+            zRegisterThermalEventListenerWithType = this.mEnableUsbTemperatureAlarm ? this.mThermalService.registerThermalEventListenerWithType(this.mUsbThermalEventListener, 4) : this.mThermalService.unregisterThermalEventListener(this.mUsbThermalEventListener);
+            if (!zRegisterThermalEventListenerWithType) {
                 this.mEnableUsbTemperatureAlarm = !this.mEnableUsbTemperatureAlarm;
                 Slog.e("PowerUI", "Failed to register or unregister usb thermal event listener.");
             }
@@ -417,13 +413,13 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         int i2 = batteryStateSnapshot.batteryLevel;
         boolean z3 = (!z2 && !batteryStateSnapshot.isPowerSaver && i2 <= batteryStateSnapshot.lowLevelThreshold) || (!this.mSevereWarningShownThisChargeCycle && i2 <= batteryStateSnapshot.severeLevelThreshold);
         if (DEBUG) {
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("Enhanced trigger is: ", "\nwith battery snapshot: mLowWarningShownThisChargeCycle: ", z3);
-            m.append(this.mLowWarningShownThisChargeCycle);
-            m.append(" mSevereWarningShownThisChargeCycle: ");
-            m.append(this.mSevereWarningShownThisChargeCycle);
-            m.append("\n");
-            m.append(batteryStateSnapshot.toString());
-            Slog.d("PowerUI", m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("Enhanced trigger is: ", "\nwith battery snapshot: mLowWarningShownThisChargeCycle: ", z3);
+            sbM.append(this.mLowWarningShownThisChargeCycle);
+            sbM.append(" mSevereWarningShownThisChargeCycle: ");
+            sbM.append(this.mSevereWarningShownThisChargeCycle);
+            sbM.append("\n");
+            sbM.append(batteryStateSnapshot.toString());
+            Slog.d("PowerUI", sbM.toString());
         }
         return z3;
     }
@@ -463,14 +459,14 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
     }
 
     @Override // com.android.systemui.CoreStartable
-    public final void start() {
-        Intent registerReceiver;
+    public final void start() throws Resources.NotFoundException, Settings.SettingNotFoundException {
+        Intent intentRegisterReceiver;
         this.mScreenOffTime = this.mPowerManager.isScreenOn() ? -1L : SystemClock.elapsedRealtime();
         this.mLastConfiguration.setTo(this.mContext.getResources().getConfiguration());
         Handler handler = this.mHandler;
         ContentObserver contentObserver = new ContentObserver(handler) { // from class: com.android.systemui.power.PowerUI.4
             @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
+            public final void onChange(boolean z) throws Resources.NotFoundException {
                 PowerUI.this.updateBatteryWarningLevels();
             }
         };
@@ -485,8 +481,8 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         intentFilter.addAction("android.intent.action.BATTERY_CHANGED");
         PowerUI powerUI = PowerUI.this;
         powerUI.mBroadcastDispatcher.registerReceiverWithHandler(receiver, intentFilter, powerUI.mHandler);
-        if (!receiver.mHasReceivedBattery && (registerReceiver = PowerUI.this.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"))) != null) {
-            receiver.onReceive(PowerUI.this.mContext, registerReceiver);
+        if (!receiver.mHasReceivedBattery && (intentRegisterReceiver = PowerUI.this.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"))) != null) {
+            receiver.onReceive(PowerUI.this.mContext, intentRegisterReceiver);
         }
         ((UserTrackerImpl) this.mUserTracker).addCallback(this.mUserChangedCallback, this.mContext.getMainExecutor());
         this.mWakefulnessLifecycle.addObserver(this.mWakefulnessObserver);
@@ -527,7 +523,7 @@ public class PowerUI implements CoreStartable, ConfigurationController.Configura
         }
     }
 
-    public final void updateBatteryWarningLevels() {
+    public final void updateBatteryWarningLevels() throws Resources.NotFoundException {
         int integer = this.mContext.getResources().getInteger(android.R.integer.config_displayWhiteBalanceBrightnessFilterHorizon);
         int integer2 = this.mContext.getResources().getInteger(android.R.integer.config_pinnerHomePinBytes);
         if (integer2 < integer) {

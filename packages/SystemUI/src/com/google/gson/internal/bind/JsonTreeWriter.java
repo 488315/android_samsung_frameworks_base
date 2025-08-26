@@ -13,7 +13,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JsonTreeWriter extends JsonWriter {
     private String pendingName;
@@ -59,11 +58,11 @@ public final class JsonTreeWriter extends JsonWriter {
             this.product = jsonElement;
             return;
         }
-        JsonElement peek = peek();
-        if (!(peek instanceof JsonArray)) {
+        JsonElement jsonElementPeek = peek();
+        if (!(jsonElementPeek instanceof JsonArray)) {
             throw new IllegalStateException();
         }
-        ((JsonArray) peek).add(jsonElement);
+        ((JsonArray) jsonElementPeek).add(jsonElement);
     }
 
     @Override // com.google.gson.stream.JsonWriter
@@ -187,8 +186,8 @@ public final class JsonTreeWriter extends JsonWriter {
             return nullValue();
         }
         if (!isLenient()) {
-            double doubleValue = number.doubleValue();
-            if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {
+            double dDoubleValue = number.doubleValue();
+            if (Double.isNaN(dDoubleValue) || Double.isInfinite(dDoubleValue)) {
                 throw new IllegalArgumentException("JSON forbids NaN and infinities: " + number);
             }
         }

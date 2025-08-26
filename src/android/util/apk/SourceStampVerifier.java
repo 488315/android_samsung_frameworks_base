@@ -50,70 +50,70 @@ public abstract class SourceStampVerifier {
     private SourceStampVerifier() {
     }
 
-    public static SourceStampVerificationResult verify(List<String> list) {
-        List<? extends Certificate> list2 = Collections.EMPTY_LIST;
+    public static SourceStampVerificationResult verify(List<String> list) throws Throwable {
+        List<? extends Certificate> certificateLineage = Collections.EMPTY_LIST;
         Iterator<String> it = list.iterator();
         Certificate certificate = null;
         while (it.hasNext()) {
-            SourceStampVerificationResult verify = verify(it.next());
-            if (!verify.isPresent() || !verify.isVerified()) {
-                return verify;
+            SourceStampVerificationResult sourceStampVerificationResultVerify = verify(it.next());
+            if (!sourceStampVerificationResultVerify.isPresent() || !sourceStampVerificationResultVerify.isVerified()) {
+                return sourceStampVerificationResultVerify;
             }
-            if (certificate != null && (!certificate.equals(verify.getCertificate()) || !list2.equals(verify.getCertificateLineage()))) {
+            if (certificate != null && (!certificate.equals(sourceStampVerificationResultVerify.getCertificate()) || !certificateLineage.equals(sourceStampVerificationResultVerify.getCertificateLineage()))) {
                 return SourceStampVerificationResult.notVerified();
             }
-            certificate = verify.getCertificate();
-            list2 = verify.getCertificateLineage();
+            certificate = sourceStampVerificationResultVerify.getCertificate();
+            certificateLineage = sourceStampVerificationResultVerify.getCertificateLineage();
         }
-        return SourceStampVerificationResult.verified(certificate, list2);
+        return SourceStampVerificationResult.verified(certificate, certificateLineage);
     }
 
-    public static SourceStampVerificationResult verify(String str) {
-        StrictJarFile strictJarFile;
-        StrictJarFile strictJarFile2 = null;
+    public static SourceStampVerificationResult verify(String str) throws Throwable {
+        RandomAccessFile randomAccessFile;
+        StrictJarFile strictJarFile = null;
         try {
             try {
-                RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
+                randomAccessFile = new RandomAccessFile(str, "r");
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (IOException unused) {
+        }
+        try {
+            StrictJarFile strictJarFile2 = new StrictJarFile(str, false, false);
+            try {
+                byte[] sourceStampCertificateDigest = getSourceStampCertificateDigest(strictJarFile2);
                 try {
-                    strictJarFile = new StrictJarFile(str, false, false);
-                } catch (Throwable th) {
-                    th = th;
-                }
-                try {
-                    byte[] sourceStampCertificateDigest = getSourceStampCertificateDigest(strictJarFile);
-                    try {
-                        if (sourceStampCertificateDigest == null) {
-                            SourceStampVerificationResult notPresent = SourceStampVerificationResult.notPresent();
-                            randomAccessFile.close();
-                            closeApkJar(strictJarFile);
-                            return notPresent;
-                        }
-                        SourceStampVerificationResult verify = verify(randomAccessFile, sourceStampCertificateDigest, getManifestBytes(strictJarFile));
+                    if (sourceStampCertificateDigest == null) {
+                        SourceStampVerificationResult sourceStampVerificationResultNotPresent = SourceStampVerificationResult.notPresent();
                         randomAccessFile.close();
-                        closeApkJar(strictJarFile);
-                        return verify;
-                    } catch (IOException unused) {
-                        strictJarFile2 = strictJarFile;
-                        SourceStampVerificationResult notPresent2 = SourceStampVerificationResult.notPresent();
                         closeApkJar(strictJarFile2);
-                        return notPresent2;
-                    } catch (Throwable th2) {
-                        th = th2;
-                        strictJarFile2 = strictJarFile;
-                        closeApkJar(strictJarFile2);
-                        throw th;
+                        return sourceStampVerificationResultNotPresent;
                     }
-                } catch (Throwable th3) {
-                    th = th3;
-                    strictJarFile2 = strictJarFile;
-                    try {
-                        randomAccessFile.close();
-                    } catch (Throwable th4) {
-                        th.addSuppressed(th4);
-                    }
+                    SourceStampVerificationResult sourceStampVerificationResultVerify = verify(randomAccessFile, sourceStampCertificateDigest, getManifestBytes(strictJarFile2));
+                    randomAccessFile.close();
+                    closeApkJar(strictJarFile2);
+                    return sourceStampVerificationResultVerify;
+                } catch (IOException unused2) {
+                    strictJarFile = strictJarFile2;
+                    SourceStampVerificationResult sourceStampVerificationResultNotPresent2 = SourceStampVerificationResult.notPresent();
+                    closeApkJar(strictJarFile);
+                    return sourceStampVerificationResultNotPresent2;
+                } catch (Throwable th2) {
+                    th = th2;
+                    strictJarFile = strictJarFile2;
+                    closeApkJar(strictJarFile);
                     throw th;
                 }
-            } catch (IOException unused2) {
+            } catch (Throwable th3) {
+                th = th3;
+                strictJarFile = strictJarFile2;
+                try {
+                    randomAccessFile.close();
+                } catch (Throwable th4) {
+                    th.addSuppressed(th4);
+                }
+                throw th;
             }
         } catch (Throwable th5) {
             th = th5;
@@ -132,20 +132,20 @@ public abstract class SourceStampVerifier {
         }
     }
 
-    private static SourceStampVerificationResult verify(SignatureInfo signatureInfo, Map<Integer, byte[]> map, byte[] bArr) throws SecurityException, IOException {
+    private static SourceStampVerificationResult verify(SignatureInfo signatureInfo, Map<Integer, byte[]> map, byte[] bArr) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, SecurityException, CertificateException, InvalidAlgorithmParameterException {
         ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(signatureInfo.signatureBlock);
-        X509Certificate verifySourceStampCertificate = verifySourceStampCertificate(lengthPrefixedSlice, bArr);
+        X509Certificate x509CertificateVerifySourceStampCertificate = verifySourceStampCertificate(lengthPrefixedSlice, bArr);
         ByteBuffer lengthPrefixedSlice2 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice);
-        HashMap hashMap = new HashMap();
+        HashMap map2 = new HashMap();
         while (lengthPrefixedSlice2.hasRemaining()) {
             ByteBuffer lengthPrefixedSlice3 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice2);
-            hashMap.put(Integer.valueOf(lengthPrefixedSlice3.getInt()), lengthPrefixedSlice3);
+            map2.put(Integer.valueOf(lengthPrefixedSlice3.getInt()), lengthPrefixedSlice3);
         }
         for (Map.Entry<Integer, byte[]> entry : map.entrySet()) {
-            if (!hashMap.containsKey(entry.getKey())) {
+            if (!map2.containsKey(entry.getKey())) {
                 throw new SecurityException(String.format("No signatures found for signature scheme %d", entry.getKey()));
             }
-            verifySourceStampSignature(entry.getValue(), verifySourceStampCertificate, ApkSigningBlockUtils.getLengthPrefixedSlice((ByteBuffer) hashMap.get(entry.getKey())));
+            verifySourceStampSignature(entry.getValue(), x509CertificateVerifySourceStampCertificate, ApkSigningBlockUtils.getLengthPrefixedSlice((ByteBuffer) map2.get(entry.getKey())));
         }
         List<X509Certificate> list = Collections.EMPTY_LIST;
         if (lengthPrefixedSlice.hasRemaining()) {
@@ -154,25 +154,25 @@ public abstract class SourceStampVerifier {
             byte[] bArr2 = new byte[lengthPrefixedSlice4.remaining()];
             lengthPrefixedSlice4.get(bArr2);
             lengthPrefixedSlice4.flip();
-            verifySourceStampSignature(bArr2, verifySourceStampCertificate, lengthPrefixedSlice5);
-            ApkSigningBlockUtils.VerifiedProofOfRotation verifySourceStampAttributes = verifySourceStampAttributes(lengthPrefixedSlice4, verifySourceStampCertificate);
-            if (verifySourceStampAttributes != null) {
-                list = verifySourceStampAttributes.certs;
+            verifySourceStampSignature(bArr2, x509CertificateVerifySourceStampCertificate, lengthPrefixedSlice5);
+            ApkSigningBlockUtils.VerifiedProofOfRotation verifiedProofOfRotationVerifySourceStampAttributes = verifySourceStampAttributes(lengthPrefixedSlice4, x509CertificateVerifySourceStampCertificate);
+            if (verifiedProofOfRotationVerifySourceStampAttributes != null) {
+                list = verifiedProofOfRotationVerifySourceStampAttributes.certs;
             }
         }
-        return SourceStampVerificationResult.verified(verifySourceStampCertificate, list);
+        return SourceStampVerificationResult.verified(x509CertificateVerifySourceStampCertificate, list);
     }
 
-    private static X509Certificate verifySourceStampCertificate(ByteBuffer byteBuffer, byte[] bArr) throws IOException {
+    private static X509Certificate verifySourceStampCertificate(ByteBuffer byteBuffer, byte[] bArr) throws IOException, CertificateException {
         try {
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-            byte[] readLengthPrefixedByteArray = ApkSigningBlockUtils.readLengthPrefixedByteArray(byteBuffer);
+            byte[] lengthPrefixedByteArray = ApkSigningBlockUtils.readLengthPrefixedByteArray(byteBuffer);
             try {
-                X509Certificate x509Certificate = (X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(readLengthPrefixedByteArray));
-                if (!Arrays.equals(bArr, computeSha256Digest(readLengthPrefixedByteArray))) {
+                X509Certificate x509Certificate = (X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(lengthPrefixedByteArray));
+                if (!Arrays.equals(bArr, computeSha256Digest(lengthPrefixedByteArray))) {
                     throw new SecurityException("Certificate mismatch between APK and signature block");
                 }
-                return new VerbatimX509Certificate(x509Certificate, readLengthPrefixedByteArray);
+                return new VerbatimX509Certificate(x509Certificate, lengthPrefixedByteArray);
             } catch (CertificateException e) {
                 throw new SecurityException("Failed to decode certificate", e);
             }
@@ -181,9 +181,9 @@ public abstract class SourceStampVerifier {
         }
     }
 
-    private static void verifySourceStampSignature(byte[] bArr, X509Certificate x509Certificate, ByteBuffer byteBuffer) throws IOException {
+    private static void verifySourceStampSignature(byte[] bArr, X509Certificate x509Certificate, ByteBuffer byteBuffer) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, IOException, InvalidAlgorithmParameterException {
         int i = 0;
-        byte[] bArr2 = null;
+        byte[] lengthPrefixedByteArray = null;
         int i2 = -1;
         while (byteBuffer.hasRemaining()) {
             i++;
@@ -194,7 +194,7 @@ public abstract class SourceStampVerifier {
                 }
                 int i3 = lengthPrefixedSlice.getInt();
                 if (ApkSigningBlockUtils.isSupportedSignatureAlgorithm(i3) && (i2 == -1 || ApkSigningBlockUtils.compareSignatureAlgorithm(i3, i2) > 0)) {
-                    bArr2 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice);
+                    lengthPrefixedByteArray = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice);
                     i2 = i3;
                 }
             } catch (IOException | BufferUnderflowException e) {
@@ -218,7 +218,7 @@ public abstract class SourceStampVerifier {
                 signature.setParameter(algorithmParameterSpec);
             }
             signature.update(bArr);
-            if (signature.verify(bArr2)) {
+            if (signature.verify(lengthPrefixedByteArray)) {
                 return;
             }
             throw new SecurityException(str + " signature did not verify");
@@ -228,43 +228,43 @@ public abstract class SourceStampVerifier {
     }
 
     private static Map<Integer, Map<Integer, byte[]>> getSignatureSchemeApkContentDigests(RandomAccessFile randomAccessFile, byte[] bArr) throws IOException {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         try {
-            hashMap.put(3, getApkContentDigestsFromSignatureBlock(ApkSigningBlockUtils.findSignature(randomAccessFile, APK_SIGNATURE_SCHEME_V3_BLOCK_ID).signatureBlock));
+            map.put(3, getApkContentDigestsFromSignatureBlock(ApkSigningBlockUtils.findSignature(randomAccessFile, APK_SIGNATURE_SCHEME_V3_BLOCK_ID).signatureBlock));
         } catch (SignatureNotFoundException unused) {
         }
         try {
-            hashMap.put(2, getApkContentDigestsFromSignatureBlock(ApkSigningBlockUtils.findSignature(randomAccessFile, APK_SIGNATURE_SCHEME_V2_BLOCK_ID).signatureBlock));
+            map.put(2, getApkContentDigestsFromSignatureBlock(ApkSigningBlockUtils.findSignature(randomAccessFile, APK_SIGNATURE_SCHEME_V2_BLOCK_ID).signatureBlock));
         } catch (SignatureNotFoundException unused2) {
         }
         if (bArr != null) {
-            HashMap hashMap2 = new HashMap();
-            hashMap2.put(4, computeSha256Digest(bArr));
-            hashMap.put(1, hashMap2);
+            HashMap map2 = new HashMap();
+            map2.put(4, computeSha256Digest(bArr));
+            map.put(1, map2);
         }
-        return hashMap;
+        return map;
     }
 
     private static Map<Integer, byte[]> getApkContentDigestsFromSignatureBlock(ByteBuffer byteBuffer) throws IOException {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(byteBuffer);
         while (lengthPrefixedSlice.hasRemaining()) {
             ByteBuffer lengthPrefixedSlice2 = ApkSigningBlockUtils.getLengthPrefixedSlice(ApkSigningBlockUtils.getLengthPrefixedSlice(ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice)));
             while (lengthPrefixedSlice2.hasRemaining()) {
                 ByteBuffer lengthPrefixedSlice3 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice2);
                 int i = lengthPrefixedSlice3.getInt();
-                hashMap.put(Integer.valueOf(ApkSigningBlockUtils.getSignatureAlgorithmContentDigestAlgorithm(i)), ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice3));
+                map.put(Integer.valueOf(ApkSigningBlockUtils.getSignatureAlgorithmContentDigestAlgorithm(i)), ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice3));
             }
         }
-        return hashMap;
+        return map;
     }
 
     private static Map<Integer, byte[]> getSignatureSchemeDigests(Map<Integer, Map<Integer, byte[]>> map) {
-        HashMap hashMap = new HashMap();
+        HashMap map2 = new HashMap();
         for (Map.Entry<Integer, Map<Integer, byte[]>> entry : map.entrySet()) {
-            hashMap.put(entry.getKey(), encodeApkContentDigests(getApkDigests(entry.getValue())));
+            map2.put(entry.getKey(), encodeApkContentDigests(getApkDigests(entry.getValue())));
         }
-        return hashMap;
+        return map2;
     }
 
     private static List<Pair<Integer, byte[]>> getApkDigests(Map<Integer, byte[]> map) {
@@ -287,53 +287,53 @@ public abstract class SourceStampVerifier {
     }
 
     private static byte[] getSourceStampCertificateDigest(StrictJarFile strictJarFile) throws IOException {
-        ZipEntry findEntry = strictJarFile.findEntry(SOURCE_STAMP_CERTIFICATE_HASH_ZIP_ENTRY_NAME);
-        if (findEntry == null) {
+        ZipEntry zipEntryFindEntry = strictJarFile.findEntry(SOURCE_STAMP_CERTIFICATE_HASH_ZIP_ENTRY_NAME);
+        if (zipEntryFindEntry == null) {
             return null;
         }
-        return Streams.readFully(strictJarFile.getInputStream(findEntry));
+        return Streams.readFully(strictJarFile.getInputStream(zipEntryFindEntry));
     }
 
     private static byte[] getManifestBytes(StrictJarFile strictJarFile) throws IOException {
-        ZipEntry findEntry = strictJarFile.findEntry("META-INF/MANIFEST.MF");
-        if (findEntry == null) {
+        ZipEntry zipEntryFindEntry = strictJarFile.findEntry("META-INF/MANIFEST.MF");
+        if (zipEntryFindEntry == null) {
             return null;
         }
-        return Streams.readFully(strictJarFile.getInputStream(findEntry));
+        return Streams.readFully(strictJarFile.getInputStream(zipEntryFindEntry));
     }
 
     private static byte[] encodeApkContentDigests(List<Pair<Integer, byte[]>> list) {
         Iterator<Pair<Integer, byte[]>> it = list.iterator();
-        int i = 0;
+        int length = 0;
         while (it.hasNext()) {
-            i += it.next().second.length + 12;
+            length += it.next().second.length + 12;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(i);
-        allocate.order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(length);
+        byteBufferAllocate.order(ByteOrder.LITTLE_ENDIAN);
         for (Pair<Integer, byte[]> pair : list) {
             byte[] bArr = pair.second;
-            allocate.putInt(bArr.length + 8);
-            allocate.putInt(pair.first.intValue());
-            allocate.putInt(bArr.length);
-            allocate.put(bArr);
+            byteBufferAllocate.putInt(bArr.length + 8);
+            byteBufferAllocate.putInt(pair.first.intValue());
+            byteBufferAllocate.putInt(bArr.length);
+            byteBufferAllocate.put(bArr);
         }
-        return allocate.array();
+        return byteBufferAllocate.array();
     }
 
-    private static ApkSigningBlockUtils.VerifiedProofOfRotation verifySourceStampAttributes(ByteBuffer byteBuffer, X509Certificate x509Certificate) throws IOException {
+    private static ApkSigningBlockUtils.VerifiedProofOfRotation verifySourceStampAttributes(ByteBuffer byteBuffer, X509Certificate x509Certificate) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, SecurityException, CertificateException, InvalidAlgorithmParameterException {
         try {
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
             ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(byteBuffer);
-            ApkSigningBlockUtils.VerifiedProofOfRotation verifiedProofOfRotation = null;
+            ApkSigningBlockUtils.VerifiedProofOfRotation verifiedProofOfRotationVerifyProofOfRotationStruct = null;
             while (lengthPrefixedSlice.hasRemaining()) {
                 ByteBuffer lengthPrefixedSlice2 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice);
                 if (lengthPrefixedSlice2.getInt() == PROOF_OF_ROTATION_ATTR_ID) {
-                    if (verifiedProofOfRotation != null) {
+                    if (verifiedProofOfRotationVerifyProofOfRotationStruct != null) {
                         throw new SecurityException("Encountered multiple Proof-of-rotation records when verifying source stamp signature");
                     }
-                    verifiedProofOfRotation = ApkSigningBlockUtils.verifyProofOfRotationStruct(lengthPrefixedSlice2, certificateFactory);
+                    verifiedProofOfRotationVerifyProofOfRotationStruct = ApkSigningBlockUtils.verifyProofOfRotationStruct(lengthPrefixedSlice2, certificateFactory);
                     try {
-                        if (verifiedProofOfRotation.certs.size() > 0 && !Arrays.equals(verifiedProofOfRotation.certs.get(verifiedProofOfRotation.certs.size() - 1).getEncoded(), x509Certificate.getEncoded())) {
+                        if (verifiedProofOfRotationVerifyProofOfRotationStruct.certs.size() > 0 && !Arrays.equals(verifiedProofOfRotationVerifyProofOfRotationStruct.certs.get(verifiedProofOfRotationVerifyProofOfRotationStruct.certs.size() - 1).getEncoded(), x509Certificate.getEncoded())) {
                             throw new SecurityException("Terminal certificate in Proof-of-rotation record does not match source stamp certificate");
                         }
                     } catch (CertificateEncodingException e) {
@@ -341,13 +341,13 @@ public abstract class SourceStampVerifier {
                     }
                 }
             }
-            return verifiedProofOfRotation;
+            return verifiedProofOfRotationVerifyProofOfRotationStruct;
         } catch (CertificateException e2) {
             throw new RuntimeException("Failed to obtain X.509 CertificateFactory", e2);
         }
     }
 
-    private static byte[] computeSha256Digest(byte[] bArr) {
+    private static byte[] computeSha256Digest(byte[] bArr) throws NoSuchAlgorithmException {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(bArr);

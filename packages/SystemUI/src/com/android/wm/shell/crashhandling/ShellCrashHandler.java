@@ -1,6 +1,7 @@
 package com.android.wm.shell.crashhandling;
 
 import android.app.ActivityManager;
+import android.content.res.Resources;
 import android.window.DesktopExperienceFlags;
 import android.window.TaskAppearedInfo;
 import android.window.WindowContainerTransaction;
@@ -11,7 +12,6 @@ import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.sysui.ShellInit;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShellCrashHandler {
     public final DesktopState desktopState;
@@ -24,7 +24,7 @@ public final class ShellCrashHandler {
         this.desktopState = desktopState;
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.crashhandling.ShellCrashHandler.1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 ArrayList arrayList;
                 ShellCrashHandler shellCrashHandler = ShellCrashHandler.this;
                 if (!((DesktopStateImpl) shellCrashHandler.desktopState).canEnterDesktopMode || DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {

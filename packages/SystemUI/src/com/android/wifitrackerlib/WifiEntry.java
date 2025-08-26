@@ -44,7 +44,6 @@ import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiEntry {
     public static final Comparator WIFI_PICKER_COMPARATOR;
@@ -77,7 +76,6 @@ public class WifiEntry {
     public int mScanResultLevel = -1;
     public boolean mCalledConnect = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wifitrackerlib.WifiEntry$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$android$net$NetworkInfo$DetailedState;
@@ -116,7 +114,6 @@ public class WifiEntry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectActionListener implements WifiManager.ActionListener {
         public ConnectActionListener() {
         }
@@ -125,7 +122,7 @@ public class WifiEntry {
             WifiEntry.this.mCallbackHandler.post(new Runnable() { // from class: com.android.wifitrackerlib.WifiEntry$ConnectActionListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WifiEntry.ConnectActionListener connectActionListener = WifiEntry.ConnectActionListener.this;
+                    WifiEntry.ConnectActionListener connectActionListener = this.f$0;
                     int i2 = i;
                     WifiEntry.ConnectCallback connectCallback = WifiEntry.this.mConnectCallback;
                     if (connectCallback != null) {
@@ -142,21 +139,19 @@ public class WifiEntry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ConnectCallback {
         void onConnectResult(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WifiEntryCallback {
         void onUpdated();
     }
 
     static {
-        Comparator thenComparing = Comparator.comparing(new WifiEntry$$ExternalSyntheticLambda1(0)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(15)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(1)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(2)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(3)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(4));
+        Comparator comparatorThenComparing = Comparator.comparing(new WifiEntry$$ExternalSyntheticLambda1(0)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(15)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(1)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(2)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(3)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(4));
         WifiEntry$$ExternalSyntheticLambda1 wifiEntry$$ExternalSyntheticLambda1 = new WifiEntry$$ExternalSyntheticLambda1(8);
         Comparator comparator = String.CASE_INSENSITIVE_ORDER;
-        WIFI_PICKER_COMPARATOR = thenComparing.thenComparing(wifiEntry$$ExternalSyntheticLambda1, comparator).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(5));
+        WIFI_PICKER_COMPARATOR = comparatorThenComparing.thenComparing(wifiEntry$$ExternalSyntheticLambda1, comparator).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(5));
         Comparator.comparing(new WifiEntry$$ExternalSyntheticLambda1(8), comparator);
         WIFI_PICKER_COMPARATOR_ALPHABETICAL = Comparator.comparing(new WifiEntry$$ExternalSyntheticLambda1(6)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(8), comparator);
         WIFI_PICKER_COMPARATOR_RSSI = Comparator.comparing(new WifiEntry$$ExternalSyntheticLambda1(9)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(10)).thenComparing(new WifiEntry$$ExternalSyntheticLambda1(11));
@@ -350,6 +345,10 @@ public class WifiEntry {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0011  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized boolean hasInternetAccess() {
         boolean z;
         NetworkCapabilities networkCapabilities = this.mNetworkCapabilities;
@@ -400,44 +399,25 @@ public class WifiEntry {
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0016, code lost:
-    
-        if (r0.isPrimary() != false) goto L17;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x001b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final synchronized boolean isPrimaryNetwork() {
-        /*
-            r2 = this;
-            monitor-enter(r2)
-            int r0 = r2.getConnectedState()     // Catch: java.lang.Throwable -> L19
-            r1 = 0
-            if (r0 != 0) goto La
-            monitor-exit(r2)
-            return r1
-        La:
-            android.net.NetworkInfo r0 = r2.mNetworkInfo     // Catch: java.lang.Throwable -> L19
-            if (r0 != 0) goto L1b
-            android.net.wifi.WifiInfo r0 = r2.mWifiInfo     // Catch: java.lang.Throwable -> L19
-            if (r0 == 0) goto L1c
-            boolean r0 = r0.isPrimary()     // Catch: java.lang.Throwable -> L19
-            if (r0 == 0) goto L1c
-            goto L1b
-        L19:
-            r0 = move-exception
-            goto L1e
-        L1b:
-            r1 = 1
-        L1c:
-            monitor-exit(r2)
-            return r1
-        L1e:
-            monitor-exit(r2)     // Catch: java.lang.Throwable -> L19
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wifitrackerlib.WifiEntry.isPrimaryNetwork():boolean");
+        boolean z = false;
+        if (getConnectedState() == 0) {
+            return false;
+        }
+        if (this.mNetworkInfo != null) {
+            z = true;
+        } else {
+            WifiInfo wifiInfo = this.mWifiInfo;
+            if (wifiInfo != null) {
+                if (wifiInfo.isPrimary()) {
+                }
+            }
+        }
+        return z;
     }
 
     public boolean isSaved() {
@@ -752,7 +732,6 @@ public class WifiEntry {
         updateSecurityTypes();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectedInfo {
         public List dnsServers;
         public List ipv6Addresses;
@@ -777,10 +756,10 @@ public class WifiEntry {
         }
         int wifiStandard = scanResult.getWifiStandard();
         SemWifiEntryFlags semWifiEntryFlags = this.mSemFlags;
-        int max = Math.max(semWifiEntryFlags.wifiStandard, wifiStandard);
-        semWifiEntryFlags.wifiStandard = max;
+        int iMax = Math.max(semWifiEntryFlags.wifiStandard, wifiStandard);
+        semWifiEntryFlags.wifiStandard = iMax;
         if (!semWifiEntryFlags.has6EStandard) {
-            semWifiEntryFlags.has6EStandard = checkWifi6EStandard(scanResult.frequency, max);
+            semWifiEntryFlags.has6EStandard = checkWifi6EStandard(scanResult.frequency, iMax);
         }
         for (ScanResult.InformationElement informationElement : scanResult.getInformationElements()) {
             int id = informationElement.getId();
@@ -795,14 +774,14 @@ public class WifiEntry {
                 if (informationElement.getBytes() == null) {
                     return;
                 }
-                int remaining = informationElement.getBytes().remaining();
-                byte[] bArr = new byte[remaining];
-                if (remaining > 8 || remaining < 1) {
+                int iRemaining = informationElement.getBytes().remaining();
+                byte[] bArr = new byte[iRemaining];
+                if (iRemaining > 8 || iRemaining < 1) {
                     return;
                 }
                 try {
-                    ByteBuffer order = informationElement.getBytes().order(ByteOrder.LITTLE_ENDIAN);
-                    for (int i = 0; i < remaining && (order.get() & Byte.MAX_VALUE) != 123; i++) {
+                    ByteBuffer byteBufferOrder = informationElement.getBytes().order(ByteOrder.LITTLE_ENDIAN);
+                    for (int i = 0; i < iRemaining && (byteBufferOrder.get() & Byte.MAX_VALUE) != 123; i++) {
                     }
                 } catch (BufferUnderflowException unused2) {
                     Log.e("WifiEntry.", logUtils.getPrintableLog(scanResult.BSSID) + " BufferUnderflowException ie:" + id);
@@ -822,9 +801,9 @@ public class WifiEntry {
                 if (informationElement.getBytes() == null) {
                     return;
                 }
-                int remaining2 = informationElement.getBytes().remaining();
-                byte[] bArr2 = new byte[remaining2];
-                if (remaining2 > 8 || remaining2 < 1) {
+                int iRemaining2 = informationElement.getBytes().remaining();
+                byte[] bArr2 = new byte[iRemaining2];
+                if (iRemaining2 > 8 || iRemaining2 < 1) {
                     return;
                 }
                 try {

@@ -136,9 +136,9 @@ public interface ICallEventCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallEventCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallEventCallback)) {
-                return (ICallEventCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallEventCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallEventCallback)) {
+                return (ICallEventCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -192,86 +192,86 @@ public interface ICallEventCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    ICallControl asInterface = ICallControl.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    ICallControl iCallControlAsInterface = ICallControl.Stub.asInterface(parcel.readStrongBinder());
                     CallException callException = (CallException) parcel.readTypedObject(CallException.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onAddCallControl(readString, readInt, asInterface, callException);
+                    onAddCallControl(string, i3, iCallControlAsInterface, callException);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSetActive(readString2, resultReceiver);
+                    onSetActive(string2, resultReceiver);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     ResultReceiver resultReceiver2 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSetInactive(readString3, resultReceiver2);
+                    onSetInactive(string3, resultReceiver2);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i4 = parcel.readInt();
                     ResultReceiver resultReceiver3 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onAnswer(readString4, readInt2, resultReceiver3);
+                    onAnswer(string4, i4, resultReceiver3);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     DisconnectCause disconnectCause = (DisconnectCause) parcel.readTypedObject(DisconnectCause.CREATOR);
                     ResultReceiver resultReceiver4 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onDisconnect(readString5, disconnectCause, resultReceiver4);
+                    onDisconnect(string5, disconnectCause, resultReceiver4);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     ResultReceiver resultReceiver5 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCallStreamingStarted(readString6, resultReceiver5);
+                    onCallStreamingStarted(string6, resultReceiver5);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCallStreamingFailed(readString7, readInt3);
+                    onCallStreamingFailed(string7, i5);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     CallEndpoint callEndpoint = (CallEndpoint) parcel.readTypedObject(CallEndpoint.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCallEndpointChanged(readString8, callEndpoint);
+                    onCallEndpointChanged(string8, callEndpoint);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(CallEndpoint.CREATOR);
+                    String string9 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CallEndpoint.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onAvailableCallEndpointsChanged(readString9, createTypedArrayList);
+                    onAvailableCallEndpointsChanged(string9, arrayListCreateTypedArrayList);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string10 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onMuteStateChanged(readString10, readBoolean);
+                    onMuteStateChanged(string10, z);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVideoStateChanged(readString11, readInt4);
+                    onVideoStateChanged(string11, i6);
                     return true;
                 case 12:
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onEvent(readString12, readString13, bundle);
+                    onEvent(string12, string13, bundle);
                     return true;
                 case 13:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeCallFromTransactionalServiceWrapper(readString14);
+                    removeCallFromTransactionalServiceWrapper(string14);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -296,174 +296,174 @@ public interface ICallEventCallback extends IInterface {
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onAddCallControl(String str, int i, ICallControl iCallControl, CallException callException) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iCallControl);
-                    obtain.writeTypedObject(callException, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iCallControl);
+                    parcelObtain.writeTypedObject(callException, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onSetActive(String str, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onSetInactive(String str, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onAnswer(String str, int i, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onDisconnect(String str, DisconnectCause disconnectCause, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(disconnectCause, 0);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(disconnectCause, 0);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onCallStreamingStarted(String str, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onCallStreamingFailed(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onCallEndpointChanged(String str, CallEndpoint callEndpoint) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(callEndpoint, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(callEndpoint, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onAvailableCallEndpointsChanged(String str, List<CallEndpoint> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onMuteStateChanged(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onVideoStateChanged(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void onEvent(String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
             public void removeCallFromTransactionalServiceWrapper(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

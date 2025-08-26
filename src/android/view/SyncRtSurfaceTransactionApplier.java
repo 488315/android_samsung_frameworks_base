@@ -40,7 +40,7 @@ public class SyncRtSurfaceTransactionApplier {
         this.mTargetViewRootImpl.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: android.view.SyncRtSurfaceTransactionApplier$$ExternalSyntheticLambda0
             @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
             public final void onFrameDraw(long j) {
-                SyncRtSurfaceTransactionApplier.this.lambda$scheduleApply$0(transaction, j);
+                this.f$0.lambda$scheduleApply$0(transaction, j);
             }
         });
         this.mTargetViewRootImpl.getView().invalidate();
@@ -125,8 +125,8 @@ public class SyncRtSurfaceTransactionApplier {
 
                 @Override // android.view.View.OnAttachStateChangeListener
                 public void onViewAttachedToWindow(View view2) {
-                    View.this.removeOnAttachStateChangeListener(this);
-                    consumer.accept(new SyncRtSurfaceTransactionApplier(View.this));
+                    view.removeOnAttachStateChangeListener(this);
+                    consumer.accept(new SyncRtSurfaceTransactionApplier(view));
                 }
             });
         }

@@ -23,7 +23,7 @@ public class XmlParser extends DefaultHandler {
     private WallpaperUser mItem = null;
     private ArrayList<WallpaperUser> mItemsList = new ArrayList<>();
 
-    XmlParser(String str) {
+    XmlParser(String str) throws Throwable {
         FileInputStream fileInputStream = null;
         try {
             try {
@@ -81,15 +81,15 @@ public class XmlParser extends DefaultHandler {
                     if (fileInputStream != null) {
                         fileInputStream.close();
                     }
-                } catch (IOException e5) {
-                    e = e5;
-                } catch (ParserConfigurationException e6) {
-                    e = e6;
-                } catch (SAXException e7) {
-                    e = e7;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (IOException e5) {
+                e = e5;
+            } catch (ParserConfigurationException e6) {
+                e = e6;
+            } catch (SAXException e7) {
+                e = e7;
             }
         } catch (IOException e8) {
             e8.printStackTrace();

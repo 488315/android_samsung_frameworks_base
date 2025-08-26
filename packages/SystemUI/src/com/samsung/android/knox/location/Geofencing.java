@@ -10,7 +10,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.location.IGeofencing;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Geofencing {
     public static final String ACTION_DEVICE_INSIDE_GEOFENCE = "com.samsung.android.knox.intent.action.DEVICE_INSIDE_GEOFENCE";

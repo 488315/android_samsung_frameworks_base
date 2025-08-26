@@ -2,7 +2,6 @@ package androidx.compose.animation.core;
 
 import androidx.compose.animation.core.AnimationVector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedFloatAnimationSpec<V extends AnimationVector> implements VectorizedFiniteAnimationSpec<V> {
     public final Animations anims;
@@ -17,11 +16,11 @@ public final class VectorizedFloatAnimationSpec<V extends AnimationVector> imple
     @Override // androidx.compose.animation.core.VectorizedAnimationSpec
     public final long getDurationNanos(AnimationVector animationVector, AnimationVector animationVector2, AnimationVector animationVector3) {
         int size$animation_core = animationVector.getSize$animation_core();
-        long j = 0;
+        long jMax = 0;
         for (int i = 0; i < size$animation_core; i++) {
-            j = Math.max(j, this.anims.get(i).getDurationNanos(animationVector.get$animation_core(i), animationVector2.get$animation_core(i), animationVector3.get$animation_core(i)));
+            jMax = Math.max(jMax, this.anims.get(i).getDurationNanos(animationVector.get$animation_core(i), animationVector2.get$animation_core(i), animationVector3.get$animation_core(i)));
         }
-        return j;
+        return jMax;
     }
 
     @Override // androidx.compose.animation.core.VectorizedAnimationSpec
@@ -100,7 +99,7 @@ public final class VectorizedFloatAnimationSpec<V extends AnimationVector> imple
         this(new Animations() { // from class: androidx.compose.animation.core.VectorizedFloatAnimationSpec.1
             @Override // androidx.compose.animation.core.Animations
             public final FloatAnimationSpec get(int i) {
-                return FloatAnimationSpec.this;
+                return floatAnimationSpec;
             }
         });
     }

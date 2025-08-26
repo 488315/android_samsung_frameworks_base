@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomFlashLightTurnOffView extends LinearLayout {
     public SubroomFlashLightSettingsActivity mListener;
@@ -34,7 +33,7 @@ public class SubroomFlashLightTurnOffView extends LinearLayout {
         ((Button) findViewById(R.id.turn_off_view)).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.flashlight.SubroomFlashLightTurnOffView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = SubroomFlashLightTurnOffView.this.mListener;
+                SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = this.f$0.mListener;
                 ((FlashlightControllerImpl) subroomFlashLightSettingsActivity.mFlashlightController).setFlashlight(false);
                 Log.d("SubroomFlashLightSettingsActivity", "onTurnOffClick: ");
                 subroomFlashLightSettingsActivity.finishFlashLightActivity();

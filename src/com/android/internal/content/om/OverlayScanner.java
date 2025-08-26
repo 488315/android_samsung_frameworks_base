@@ -68,34 +68,34 @@ public class OverlayScanner {
     }
 
     public void scanDir(File file) {
-        ParsedOverlayInfo parseOverlayManifest;
+        ParsedOverlayInfo overlayManifest;
         if (file.exists() && file.isDirectory()) {
             if (!file.canRead()) {
                 Log.w("OverlayConfig", "Directory " + file + " cannot be read");
                 return;
             }
-            File[] listFiles = file.listFiles();
-            if (listFiles == null) {
+            File[] fileArrListFiles = file.listFiles();
+            if (fileArrListFiles == null) {
                 return;
             }
-            for (File file2 : listFiles) {
+            for (File file2 : fileArrListFiles) {
                 if (file2.isDirectory()) {
                     scanDir(file2);
                 }
-                if (file2.isFile() && file2.getPath().endsWith(".apk") && (parseOverlayManifest = parseOverlayManifest(file2, this.mExcludedOverlayPackages)) != null) {
-                    this.mParsedOverlayInfos.put(parseOverlayManifest.packageName, parseOverlayManifest);
+                if (file2.isFile() && file2.getPath().endsWith(".apk") && (overlayManifest = parseOverlayManifest(file2, this.mExcludedOverlayPackages)) != null) {
+                    this.mParsedOverlayInfos.put(overlayManifest.packageName, overlayManifest);
                 }
             }
         }
     }
 
     public ParsedOverlayInfo parseOverlayManifest(File file, List<Pair<String, File>> list) {
-        ParseResult<ApkLite> parseApkLite = ApkLiteParseUtils.parseApkLite(ParseTypeImpl.forParsingWithoutPlatformCompat().reset(), file, 128);
-        if (parseApkLite.isError()) {
-            Log.w("OverlayConfig", "Got exception loading overlay.", parseApkLite.getException());
+        ParseResult<ApkLite> apkLite = ApkLiteParseUtils.parseApkLite(ParseTypeImpl.forParsingWithoutPlatformCompat().reset(), file, 128);
+        if (apkLite.isError()) {
+            Log.w("OverlayConfig", "Got exception loading overlay.", apkLite.getException());
             return null;
         }
-        ApkLite result = parseApkLite.getResult();
+        ApkLite result = apkLite.getResult();
         if (result.getTargetPackageName() == null) {
             return null;
         }

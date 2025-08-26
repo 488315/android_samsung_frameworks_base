@@ -117,23 +117,23 @@ public final class StrictJarFile {
             return null;
         }
         Certificate[][] certificateChains = this.verifier.getCertificateChains(zipEntry.getName());
-        int i = 0;
+        int length = 0;
         for (Certificate[] certificateArr : certificateChains) {
-            i += certificateArr.length;
+            length += certificateArr.length;
         }
-        Certificate[] certificateArr2 = new Certificate[i];
-        int i2 = 0;
+        Certificate[] certificateArr2 = new Certificate[length];
+        int length2 = 0;
         for (Certificate[] certificateArr3 : certificateChains) {
-            System.arraycopy(certificateArr3, 0, certificateArr2, i2, certificateArr3.length);
-            i2 += certificateArr3.length;
+            System.arraycopy(certificateArr3, 0, certificateArr2, length2, certificateArr3.length);
+            length2 += certificateArr3.length;
         }
         return certificateArr2;
     }
 
     public InputStream getInputStream(ZipEntry zipEntry) {
-        StrictJarVerifier.VerifierEntry initEntry;
+        StrictJarVerifier.VerifierEntry verifierEntryInitEntry;
         InputStream zipInputStream = getZipInputStream(zipEntry);
-        return (!this.isSigned || (initEntry = this.verifier.initEntry(zipEntry.getName())) == null) ? zipInputStream : new JarFileInputStream(zipInputStream, zipEntry.getSize(), initEntry);
+        return (!this.isSigned || (verifierEntryInitEntry = this.verifier.initEntry(zipEntry.getName())) == null) ? zipInputStream : new JarFileInputStream(zipInputStream, zipEntry.getSize(), verifierEntryInitEntry);
     }
 
     public void close() throws IOException {
@@ -191,11 +191,11 @@ public final class StrictJarFile {
             if (this.nextEntry != null) {
                 return true;
             }
-            ZipEntry nativeNextEntry = StrictJarFile.nativeNextEntry(this.iterationHandle);
-            if (nativeNextEntry == null) {
+            ZipEntry zipEntryNativeNextEntry = StrictJarFile.nativeNextEntry(this.iterationHandle);
+            if (zipEntryNativeNextEntry == null) {
                 return false;
             }
-            this.nextEntry = nativeNextEntry;
+            this.nextEntry = zipEntryNativeNextEntry;
             return true;
         }
 
@@ -206,13 +206,13 @@ public final class StrictJarFile {
     }
 
     private HashMap<String, byte[]> getMetaEntries() throws IOException {
-        HashMap<String, byte[]> hashMap = new HashMap<>();
+        HashMap<String, byte[]> map = new HashMap<>();
         EntryIterator entryIterator = new EntryIterator(this.nativeHandle, "META-INF/");
         while (entryIterator.hasNext()) {
             ZipEntry next = entryIterator.next();
-            hashMap.put(next.getName(), Streams.readFully(getInputStream(next)));
+            map.put(next.getName(), Streams.readFully(getInputStream(next)));
         }
-        return hashMap;
+        return map;
     }
 
     static final class JarFileInputStream extends FilterInputStream {
@@ -233,9 +233,9 @@ public final class StrictJarFile {
                 return -1;
             }
             if (this.count > 0) {
-                int read = super.read();
-                if (read != -1) {
-                    this.entry.write(read);
+                int i = super.read();
+                if (i != -1) {
+                    this.entry.write(i);
                     this.count--;
                 } else {
                     this.count = 0L;
@@ -244,7 +244,7 @@ public final class StrictJarFile {
                     this.done = true;
                     this.entry.verify();
                 }
-                return read;
+                return i;
             }
             this.done = true;
             this.entry.verify();
@@ -257,12 +257,12 @@ public final class StrictJarFile {
                 return -1;
             }
             if (this.count > 0) {
-                int read = super.read(bArr, i, i2);
-                if (read != -1) {
+                int i3 = super.read(bArr, i, i2);
+                if (i3 != -1) {
                     long j = this.count;
-                    int i3 = j < ((long) read) ? (int) j : read;
-                    this.entry.write(bArr, i, i3);
-                    this.count -= i3;
+                    int i4 = j < ((long) i3) ? (int) j : i3;
+                    this.entry.write(bArr, i, i4);
+                    this.count -= i4;
                 } else {
                     this.count = 0L;
                 }
@@ -270,7 +270,7 @@ public final class StrictJarFile {
                     this.done = true;
                     this.entry.verify();
                 }
-                return read;
+                return i3;
             }
             this.done = true;
             this.entry.verify();
@@ -305,13 +305,13 @@ public final class StrictJarFile {
         @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream, java.io.InputStream
         public int read(byte[] bArr, int i, int i2) throws IOException {
             try {
-                int read = super.read(bArr, i, i2);
-                if (read != -1) {
-                    this.bytesRead += read;
-                    return read;
+                int i3 = super.read(bArr, i, i2);
+                if (i3 != -1) {
+                    this.bytesRead += i3;
+                    return i3;
                 }
                 if (this.entry.getSize() == this.bytesRead) {
-                    return read;
+                    return i3;
                 }
                 throw new IOException("Size mismatch on inflated file: " + this.bytesRead + " vs " + this.entry.getSize());
             } catch (IOException e) {
@@ -366,12 +366,12 @@ public final class StrictJarFile {
                 }
                 try {
                     Os.lseek(this.fd, j2, OsConstants.SEEK_SET);
-                    int read = IoBridge.read(this.fd, bArr, i, i2);
-                    if (read <= 0) {
+                    int i3 = IoBridge.read(this.fd, bArr, i, i2);
+                    if (i3 <= 0) {
                         return -1;
                     }
-                    this.offset += read;
-                    return read;
+                    this.offset += i3;
+                    return i3;
                 } catch (ErrnoException e) {
                     throw new IOException(e);
                 }

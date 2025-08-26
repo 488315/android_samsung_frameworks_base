@@ -13,13 +13,11 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MoveToDesktopAnimator {
     public boolean allowSurfaceChangesOnMove;
     public final float cornerRadius;
     public final ValueAnimator dragToDesktopAnimator;
-    public SurfaceControl indicatorLeash;
     public final PointF mostRecentInput;
     public final PointF position;
     public final Rect startBounds;
@@ -27,7 +25,6 @@ public final class MoveToDesktopAnimator {
     public final Function0 transactionFactory;
     public final VelocityTracker velocityTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.windowdecor.MoveToDesktopAnimator$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function0 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
@@ -42,7 +39,6 @@ public final class MoveToDesktopAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -85,26 +81,27 @@ public final class MoveToDesktopAnimator {
         duration.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.MoveToDesktopAnimator$dragToDesktopAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                MoveToDesktopAnimator moveToDesktopAnimator = MoveToDesktopAnimator.this;
-                PointF pointF = moveToDesktopAnimator.mostRecentInput;
-                moveToDesktopAnimator.setTaskPosition(pointF.x, pointF.y);
-                SurfaceControl.Transaction transaction2 = transaction;
-                MoveToDesktopAnimator moveToDesktopAnimator2 = MoveToDesktopAnimator.this;
-                SurfaceControl.Transaction scale = transaction2.setScale(moveToDesktopAnimator2.taskSurface, moveToDesktopAnimator2.getScale(), MoveToDesktopAnimator.this.getScale());
-                MoveToDesktopAnimator moveToDesktopAnimator3 = MoveToDesktopAnimator.this;
-                SurfaceControl.Transaction cornerRadius = scale.setCornerRadius(moveToDesktopAnimator3.taskSurface, moveToDesktopAnimator3.cornerRadius);
-                MoveToDesktopAnimator moveToDesktopAnimator4 = MoveToDesktopAnimator.this;
-                SurfaceControl.Transaction frameTimeline = cornerRadius.setScale(moveToDesktopAnimator4.taskSurface, moveToDesktopAnimator4.getScale(), MoveToDesktopAnimator.this.getScale()).setFrameTimeline(Choreographer.getInstance().getVsyncId());
-                MoveToDesktopAnimator moveToDesktopAnimator5 = MoveToDesktopAnimator.this;
-                SurfaceControl surfaceControl2 = moveToDesktopAnimator5.taskSurface;
-                PointF pointF2 = moveToDesktopAnimator5.position;
-                frameTimeline.setPosition(surfaceControl2, pointF2.x, pointF2.y).apply();
+                if (this.this$0.taskSurface.isValid()) {
+                    MoveToDesktopAnimator moveToDesktopAnimator = this.this$0;
+                    PointF pointF = moveToDesktopAnimator.mostRecentInput;
+                    moveToDesktopAnimator.setTaskPosition(pointF.x, pointF.y);
+                    SurfaceControl.Transaction transaction2 = transaction;
+                    MoveToDesktopAnimator moveToDesktopAnimator2 = this.this$0;
+                    SurfaceControl.Transaction scale = transaction2.setScale(moveToDesktopAnimator2.taskSurface, moveToDesktopAnimator2.getScale(), this.this$0.getScale());
+                    MoveToDesktopAnimator moveToDesktopAnimator3 = this.this$0;
+                    SurfaceControl.Transaction cornerRadius = scale.setCornerRadius(moveToDesktopAnimator3.taskSurface, moveToDesktopAnimator3.cornerRadius);
+                    MoveToDesktopAnimator moveToDesktopAnimator4 = this.this$0;
+                    SurfaceControl.Transaction frameTimeline = cornerRadius.setScale(moveToDesktopAnimator4.taskSurface, moveToDesktopAnimator4.getScale(), this.this$0.getScale()).setFrameTimeline(Choreographer.getInstance().getVsyncId());
+                    MoveToDesktopAnimator moveToDesktopAnimator5 = this.this$0;
+                    SurfaceControl surfaceControl2 = moveToDesktopAnimator5.taskSurface;
+                    PointF pointF2 = moveToDesktopAnimator5.position;
+                    frameTimeline.setPosition(surfaceControl2, pointF2.x, pointF2.y).apply();
+                }
             }
         });
         this.dragToDesktopAnimator = duration;
         this.position = new PointF(0.0f, 0.0f);
         this.cornerRadius = context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_dragged_task_radius);
-        this.indicatorLeash = null;
     }
 
     public /* synthetic */ MoveToDesktopAnimator(Context context, Rect rect, ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, Function0 function0, int i, DefaultConstructorMarker defaultConstructorMarker) {

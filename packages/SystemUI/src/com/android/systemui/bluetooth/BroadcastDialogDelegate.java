@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,7 +27,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
     public static final boolean DEBUG = Log.isLoggable("BroadcastDialog", 3);
@@ -45,7 +45,6 @@ public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
     public final Set mDialogs = new HashSet();
     public final AnonymousClass1 mBroadcastCallback = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum BroadcastDialogEvent implements UiEventLogger.UiEventEnum {
         BROADCAST_DIALOG_SHOW(1062);
 
@@ -60,7 +59,6 @@ public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
@@ -100,23 +98,23 @@ public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
     }
 
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
-    public final void onCreate(Dialog dialog, Bundle bundle) {
+    public final void onCreate(Dialog dialog, Bundle bundle) throws PackageManager.NameNotFoundException {
         final SystemUIDialog systemUIDialog = (SystemUIDialog) dialog;
         if (DEBUG) {
             Log.d("BroadcastDialog", "onCreate");
         }
         this.mUiEventLogger.log(BroadcastDialogEvent.BROADCAST_DIALOG_SHOW);
-        View inflate = systemUIDialog.getLayoutInflater().inflate(R.layout.broadcast_dialog, (ViewGroup) null);
-        systemUIDialog.getWindow().setContentView(inflate);
-        TextView textView = (TextView) inflate.requireViewById(R.id.dialog_title);
-        TextView textView2 = (TextView) inflate.requireViewById(R.id.dialog_subtitle);
+        View viewInflate = systemUIDialog.getLayoutInflater().inflate(R.layout.broadcast_dialog, (ViewGroup) null);
+        systemUIDialog.getWindow().setContentView(viewInflate);
+        TextView textView = (TextView) viewInflate.requireViewById(R.id.dialog_title);
+        TextView textView2 = (TextView) viewInflate.requireViewById(R.id.dialog_subtitle);
         textView.setText(this.mContext.getString(R.string.bt_le_audio_broadcast_dialog_title, this.mCurrentBroadcastApp));
         Context context = this.mContext;
         String appLabel = MediaDataUtils.getAppLabel(context, this.mOutputPackageName, context.getString(R.string.bt_le_audio_broadcast_dialog_unknown_name));
         textView2.setText(this.mContext.getString(R.string.bt_le_audio_broadcast_dialog_sub_title, appLabel));
-        this.mSwitchBroadcast = (Button) inflate.requireViewById(R.id.switch_broadcast);
-        Button button = (Button) inflate.requireViewById(R.id.change_output);
-        Button button2 = (Button) inflate.requireViewById(R.id.cancel);
+        this.mSwitchBroadcast = (Button) viewInflate.requireViewById(R.id.switch_broadcast);
+        Button button = (Button) viewInflate.requireViewById(R.id.change_output);
+        Button button2 = (Button) viewInflate.requireViewById(R.id.cancel);
         this.mSwitchBroadcast.setText(this.mContext.getString(R.string.bt_le_audio_broadcast_dialog_switch_app, appLabel), (TextView.BufferType) null);
         final int i = 0;
         this.mSwitchBroadcast.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.bluetooth.BroadcastDialogDelegate$$ExternalSyntheticLambda0
@@ -164,7 +162,7 @@ public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
         button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.bluetooth.BroadcastDialogDelegate$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                BroadcastDialogDelegate broadcastDialogDelegate = BroadcastDialogDelegate.this;
+                BroadcastDialogDelegate broadcastDialogDelegate = this.f$0;
                 SystemUIDialog systemUIDialog2 = systemUIDialog;
                 broadcastDialogDelegate.mMediaOutputDialogManager.createAndShow(broadcastDialogDelegate.mOutputPackageName, true, null, true, null, null);
                 systemUIDialog2.dismiss();
@@ -256,7 +254,6 @@ public class BroadcastDialogDelegate implements SystemUIDialog.Delegate {
         this.mSwitchBroadcast.setEnabled(true);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bluetooth.BroadcastDialogDelegate$1, reason: invalid class name */
     public class AnonymousClass1 implements BluetoothLeBroadcast.Callback {
         public AnonymousClass1() {

@@ -85,7 +85,7 @@ abstract class ThemedResourceCache<T> {
             return longSparseArray;
         }
         LongSparseArray<WeakReference<T>> longSparseArray2 = new LongSparseArray<>(1);
-        this.mThemedEntries.put(key.m1103clone(), longSparseArray2);
+        this.mThemedEntries.put(key.m1107clone(), longSparseArray2);
         return longSparseArray2;
     }
 
@@ -115,8 +115,8 @@ abstract class ThemedResourceCache<T> {
             return true;
         }
         for (int size = longSparseArray.size() - 1; size >= 0; size--) {
-            WeakReference<T> valueAt = longSparseArray.valueAt(size);
-            if (valueAt == null || pruneEntryLocked(valueAt.get(), i)) {
+            WeakReference<T> weakReferenceValueAt = longSparseArray.valueAt(size);
+            if (weakReferenceValueAt == null || pruneEntryLocked(weakReferenceValueAt.get(), i)) {
                 longSparseArray.removeAt(size);
             }
         }

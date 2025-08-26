@@ -19,7 +19,6 @@ import com.android.compose.theme.AndroidColorScheme;
 import com.android.compose.theme.AndroidColorSchemeKt;
 import com.android.systemui.qs.panels.ui.viewmodel.TileUiState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileDefaults {
     public static final float ActiveIconCornerRadius;
@@ -36,7 +35,7 @@ public final class TileDefaults {
     }
 
     /* renamed from: animateShapeAsState-rAjV9yQ, reason: not valid java name */
-    public static MutableState m2890animateShapeAsStaterAjV9yQ(int i, float f, String str, Composer composer, int i2) {
+    public static MutableState m2907animateShapeAsStaterAjV9yQ(int i, float f, String str, Composer composer, int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-2105857704);
         if (ComposerKt.isTraceInProgress()) {
@@ -46,24 +45,24 @@ public final class TileDefaults {
             CommonTileDefaults.INSTANCE.getClass();
             f = CommonTileDefaults.InactiveCornerRadius;
         }
-        final State m8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(f, null, str, composerImpl, 384, 10);
+        final State stateM8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(f, null, str, composerImpl, 384, 10);
         composerImpl.startReplaceGroup(1894065778);
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
+        if (objRememberedValue == Composer.Companion.Empty) {
             CornerSize cornerSize = new CornerSize() { // from class: com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults$animateShapeAsState$1$corner$1
                 @Override // androidx.compose.foundation.shape.CornerSize
                 /* renamed from: toPx-TmRCtEA */
-                public final float mo184toPxTmRCtEA(Density density, long j) {
+                public final float mo185toPxTmRCtEA(Density density, long j) {
                     TileDefaults tileDefaults = TileDefaults.INSTANCE;
-                    return density.mo57toPx0680j_4(((Dp) m8animateDpAsStateAjpBEmI.getValue()).value);
+                    return density.mo58toPx0680j_4(((Dp) stateM8animateDpAsStateAjpBEmI.getValue()).value);
                 }
             };
             RoundedCornerShape roundedCornerShape = RoundedCornerShapeKt.CircleShape;
-            rememberedValue = SnapshotStateKt.mutableStateOf$default(new RoundedCornerShape(cornerSize, cornerSize, cornerSize, cornerSize));
-            composerImpl.updateRememberedValue(rememberedValue);
+            objRememberedValue = SnapshotStateKt.mutableStateOf$default(new RoundedCornerShape(cornerSize, cornerSize, cornerSize, cornerSize));
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
+        MutableState mutableState = (MutableState) objRememberedValue;
         composerImpl.end(false);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
@@ -78,12 +77,12 @@ public final class TileDefaults {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults.animateTileShapeAsState (Tile.kt:479)");
         }
-        MutableState m2890animateShapeAsStaterAjV9yQ = m2890animateShapeAsStaterAjV9yQ(i, ActiveTileCornerRadius, "QSTileIconCornerRadius", composerImpl, 3456);
+        MutableState mutableStateM2907animateShapeAsStaterAjV9yQ = m2907animateShapeAsStaterAjV9yQ(i, ActiveTileCornerRadius, "QSTileIconCornerRadius", composerImpl, 3456);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m2890animateShapeAsStaterAjV9yQ;
+        return mutableStateM2907animateShapeAsStaterAjV9yQ;
     }
 
     public static TileColors getColorForState(TileUiState tileUiState, boolean z, Composer composer, int i) {

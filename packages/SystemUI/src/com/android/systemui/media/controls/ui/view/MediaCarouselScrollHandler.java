@@ -1,5 +1,6 @@
 package com.android.systemui.media.controls.ui.view;
 
+import android.content.res.Resources;
 import android.graphics.Outline;
 import android.util.MathUtils;
 import android.view.GestureDetector;
@@ -21,7 +22,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaCarouselScrollHandler {
     public static final MediaCarouselScrollHandler$Companion$CONTENT_TRANSLATION$1 CONTENT_TRANSLATION;
@@ -51,7 +51,6 @@ public final class MediaCarouselScrollHandler {
     public final TraceStateLogger visibleStateLogger = new TraceStateLogger("MediaCarouselScrollHandler#visibleToUser", false, false, false, 14, null);
     public boolean visibleToUser;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -96,32 +95,32 @@ public final class MediaCarouselScrollHandler {
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
             public final boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
-                final MediaCarouselScrollHandler mediaCarouselScrollHandler = MediaCarouselScrollHandler.this;
+                final MediaCarouselScrollHandler mediaCarouselScrollHandler = this.this$0;
                 if (!mediaCarouselScrollHandler.scrollingDisabled) {
                     float f3 = f * f;
                     double d = f2;
                     if (f3 >= 0.5d * d * d && f3 >= 1000000.0f) {
                         MediaScrollView mediaScrollView2 = mediaCarouselScrollHandler.scrollView;
                         float contentTranslation = mediaScrollView2.getContentTranslation();
-                        float f4 = 0.0f;
+                        float fSignum = 0.0f;
                         DelayableExecutor delayableExecutor2 = mediaCarouselScrollHandler.mainExecutor;
                         if (contentTranslation != 0.0f) {
                             if (Math.signum(f) == Math.signum(contentTranslation) && (!mediaCarouselScrollHandler.falsingProtectionNeeded || !mediaCarouselScrollHandler.falsingManager.isFalseTouch(1))) {
-                                f4 = Math.signum(contentTranslation) * mediaCarouselScrollHandler.getMaxTranslation();
+                                fSignum = Math.signum(contentTranslation) * mediaCarouselScrollHandler.getMaxTranslation();
                                 if (!mediaCarouselScrollHandler.showsSettingsButton) {
                                     delayableExecutor2.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$onFling$1
                                         @Override // java.lang.Runnable
                                         public final void run() {
-                                            MediaCarouselScrollHandler.this.dismissCallback.invoke();
+                                            mediaCarouselScrollHandler.dismissCallback.invoke();
                                         }
                                     }, 100L);
                                 }
                             }
                             PhysicsAnimator.Companion.getClass();
                             PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(mediaCarouselScrollHandler);
-                            companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, f4, f, MediaCarouselScrollHandlerKt.translationConfig);
+                            companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, fSignum, f, MediaCarouselScrollHandlerKt.translationConfig);
                             companion.start();
-                            mediaScrollView2.animationTargetX = f4;
+                            mediaScrollView2.animationTargetX = fSignum;
                             return true;
                         }
                         int scrollX = mediaScrollView2.getScrollX();
@@ -141,7 +140,7 @@ public final class MediaCarouselScrollHandler {
                         delayableExecutor2.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$onFling$2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MediaCarouselScrollHandler.this.scrollView.smoothScrollTo(childAt.getLeft(), MediaCarouselScrollHandler.this.scrollView.getScrollY());
+                                mediaCarouselScrollHandler.scrollView.smoothScrollTo(childAt.getLeft(), mediaCarouselScrollHandler.scrollView.getScrollY());
                             }
                         });
                         return true;
@@ -152,7 +151,7 @@ public final class MediaCarouselScrollHandler {
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
             public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
-                MediaCarouselScrollHandler mediaCarouselScrollHandler = MediaCarouselScrollHandler.this;
+                MediaCarouselScrollHandler mediaCarouselScrollHandler = this.this$0;
                 motionEvent.getClass();
                 if (mediaCarouselScrollHandler.scrollingDisabled) {
                     return false;
@@ -163,27 +162,27 @@ public final class MediaCarouselScrollHandler {
                 if (contentTranslation == 0.0f && mediaScrollView2.canScrollHorizontally((int) (-x))) {
                     return false;
                 }
-                float f3 = contentTranslation - f;
-                float abs = Math.abs(f3);
-                if (abs > mediaCarouselScrollHandler.getMaxTranslation() && Math.signum(f) != Math.signum(contentTranslation)) {
+                float fSignum = contentTranslation - f;
+                float fAbs = Math.abs(fSignum);
+                if (fAbs > mediaCarouselScrollHandler.getMaxTranslation() && Math.signum(f) != Math.signum(contentTranslation)) {
                     if (Math.abs(contentTranslation) > mediaCarouselScrollHandler.getMaxTranslation()) {
-                        f3 = contentTranslation - (f * 0.2f);
+                        fSignum = contentTranslation - (f * 0.2f);
                     } else {
-                        f3 = Math.signum(f3) * (((abs - mediaCarouselScrollHandler.getMaxTranslation()) * 0.2f) + mediaCarouselScrollHandler.getMaxTranslation());
+                        fSignum = Math.signum(fSignum) * (((fAbs - mediaCarouselScrollHandler.getMaxTranslation()) * 0.2f) + mediaCarouselScrollHandler.getMaxTranslation());
                     }
                 }
-                if (Math.signum(f3) != Math.signum(contentTranslation) && contentTranslation != 0.0f && mediaScrollView2.canScrollHorizontally(-((int) f3))) {
-                    f3 = 0.0f;
+                if (Math.signum(fSignum) != Math.signum(contentTranslation) && contentTranslation != 0.0f && mediaScrollView2.canScrollHorizontally(-((int) fSignum))) {
+                    fSignum = 0.0f;
                 }
                 PhysicsAnimator.Companion.getClass();
                 PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(mediaCarouselScrollHandler);
                 if (companion.isRunning()) {
-                    companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, f3, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
+                    companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, fSignum, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
                     companion.start();
                 } else {
-                    mediaCarouselScrollHandler.setContentTranslation(f3);
+                    mediaCarouselScrollHandler.setContentTranslation(fSignum);
                 }
-                mediaScrollView2.animationTargetX = f3;
+                mediaScrollView2.animationTargetX = fSignum;
                 return true;
             }
         };
@@ -192,7 +191,7 @@ public final class MediaCarouselScrollHandler {
         View.OnScrollChangeListener onScrollChangeListener = new View.OnScrollChangeListener() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$scrollChangedListener$1
             @Override // android.view.View.OnScrollChangeListener
             public final void onScrollChange(View view, int i, int i2, int i3, int i4) {
-                MediaCarouselScrollHandler mediaCarouselScrollHandler = MediaCarouselScrollHandler.this;
+                MediaCarouselScrollHandler mediaCarouselScrollHandler = this.this$0;
                 if (mediaCarouselScrollHandler.playerWidthPlusPadding == 0) {
                     return;
                 }
@@ -205,7 +204,7 @@ public final class MediaCarouselScrollHandler {
                     }
                     scrollX = (viewGroup.getWidth() - mediaScrollView2.getWidth()) - scrollX;
                 }
-                MediaCarouselScrollHandler mediaCarouselScrollHandler2 = MediaCarouselScrollHandler.this;
+                MediaCarouselScrollHandler mediaCarouselScrollHandler2 = this.this$0;
                 int i5 = mediaCarouselScrollHandler2.playerWidthPlusPadding;
                 int i6 = scrollX / i5;
                 int i7 = scrollX % i5;
@@ -219,17 +218,17 @@ public final class MediaCarouselScrollHandler {
                     if (i8 != i6 && mediaCarouselScrollHandler2.visibleToUser) {
                         mediaCarouselScrollHandler2.logger.logger.logWithPosition(MediaUiEvent.CAROUSEL_PAGE, 0, (String) null, i6);
                     }
-                    mediaCarouselScrollHandler2.closeGuts.mo779invoke(Boolean.FALSE);
+                    mediaCarouselScrollHandler2.closeGuts.mo781invoke(Boolean.FALSE);
                     mediaCarouselScrollHandler2.updatePlayerVisibilities();
                 }
                 float f = mediaCarouselScrollHandler2.visibleMediaIndex;
                 int i9 = mediaCarouselScrollHandler2.playerWidthPlusPadding;
-                float f2 = f + (i9 > 0 ? i7 / i9 : 0.0f);
+                float childCount = f + (i9 > 0 ? i7 / i9 : 0.0f);
                 MediaScrollView mediaScrollView3 = mediaCarouselScrollHandler2.scrollView;
                 if (mediaScrollView3.isLayoutRtl()) {
-                    f2 = (mediaCarouselScrollHandler2.mediaContent.getChildCount() - f2) - 1;
+                    childCount = (mediaCarouselScrollHandler2.mediaContent.getChildCount() - childCount) - 1;
                 }
-                mediaCarouselScrollHandler2.pageIndicator.setLocation(f2);
+                mediaCarouselScrollHandler2.pageIndicator.setLocation(childCount);
                 if (mediaCarouselScrollHandler2.contentTranslation == 0.0f && mediaCarouselScrollHandler2.scrollIntoCurrentMedia == 0) {
                     z = false;
                 }
@@ -261,7 +260,7 @@ public final class MediaCarouselScrollHandler {
         mediaCarouselScrollHandler.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$scrollToPlayer$1
             @Override // java.lang.Runnable
             public final void run() {
-                MediaCarouselScrollHandler.this.scrollView.smoothScrollTo(childAt.getLeft(), MediaCarouselScrollHandler.this.scrollView.getScrollY());
+                this.this$0.scrollView.smoothScrollTo(childAt.getLeft(), this.this$0.scrollView.getScrollY());
             }
         }, 100L);
     }
@@ -277,7 +276,7 @@ public final class MediaCarouselScrollHandler {
         return view.getWidth();
     }
 
-    public final void onPlayersChanged() {
+    public final void onPlayersChanged() throws Resources.NotFoundException {
         updatePlayerVisibilities();
         int dimensionPixelSize = this.scrollView.getContext().getResources().getDimensionPixelSize(R.dimen.qs_media_padding);
         int childCount = this.mediaContent.getChildCount();
@@ -329,15 +328,15 @@ public final class MediaCarouselScrollHandler {
             }
         }
         if (this.showsSettingsButton) {
-            float signum = Math.signum(-i) * getMaxTranslation();
+            float fSignum = Math.signum(-i) * getMaxTranslation();
             if (mediaScrollView.isLayoutRtl()) {
-                signum = -signum;
+                fSignum = -fSignum;
             }
             PhysicsAnimator.Companion.getClass();
             PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(this);
-            companion.spring(CONTENT_TRANSLATION, signum, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
+            companion.spring(CONTENT_TRANSLATION, fSignum, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
             companion.start();
-            mediaScrollView.animationTargetX = signum;
+            mediaScrollView.animationTargetX = fSignum;
         }
     }
 
@@ -378,49 +377,49 @@ public final class MediaCarouselScrollHandler {
                 if (view2 == null) {
                     view2 = null;
                 }
-                float f2 = (-view2.getWidth()) * f * 0.3f;
+                float width = (-view2.getWidth()) * f * 0.3f;
                 MediaScrollView mediaScrollView = this.scrollView;
                 if (mediaScrollView.isLayoutRtl()) {
                     if (this.contentTranslation > 0.0f) {
-                        float width = mediaScrollView.getWidth() - f2;
+                        float width2 = mediaScrollView.getWidth() - width;
                         View view3 = this.settingsButton;
                         if (view3 == null) {
                             view3 = null;
                         }
-                        f2 = -(width - view3.getWidth());
+                        width = -(width2 - view3.getWidth());
                     } else {
-                        f2 = -f2;
+                        width = -width;
                     }
                 } else if (this.contentTranslation <= 0.0f) {
-                    float width2 = mediaScrollView.getWidth() - f2;
+                    float width3 = mediaScrollView.getWidth() - width;
                     View view4 = this.settingsButton;
                     if (view4 == null) {
                         view4 = null;
                     }
-                    f2 = width2 - view4.getWidth();
+                    width = width3 - view4.getWidth();
                 }
-                float f3 = f * 50;
+                float f2 = f * 50;
                 View view5 = this.settingsButton;
                 if (view5 == null) {
                     view5 = null;
                 }
-                view5.setRotation(f3 * (-Math.signum(this.contentTranslation)));
-                float saturate = MathUtils.saturate(MathUtils.map(0.5f, 1.0f, 0.0f, 1.0f, map));
+                view5.setRotation(f2 * (-Math.signum(this.contentTranslation)));
+                float fSaturate = MathUtils.saturate(MathUtils.map(0.5f, 1.0f, 0.0f, 1.0f, map));
                 View view6 = this.settingsButton;
                 if (view6 == null) {
                     view6 = null;
                 }
-                view6.setAlpha(saturate);
+                view6.setAlpha(fSaturate);
                 View view7 = this.settingsButton;
                 if (view7 == null) {
                     view7 = null;
                 }
-                view7.setVisibility(saturate != 0.0f ? 0 : 4);
+                view7.setVisibility(fSaturate != 0.0f ? 0 : 4);
                 View view8 = this.settingsButton;
                 if (view8 == null) {
                     view8 = null;
                 }
-                view8.setTranslationX(f2);
+                view8.setTranslationX(width);
                 View view9 = this.settingsButton;
                 if (view9 == null) {
                     view9 = null;

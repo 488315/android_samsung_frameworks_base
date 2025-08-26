@@ -39,13 +39,13 @@ public final class ImsSmsMessage {
 
     public static final ArrayList<ImsSmsMessage> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ImsSmsMessage> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ImsSmsMessage imsSmsMessage = new ImsSmsMessage();
-            imsSmsMessage.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            imsSmsMessage.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(imsSmsMessage);
         }
         return arrayList;
@@ -56,19 +56,19 @@ public final class ImsSmsMessage {
         this.retry = hwBlob.getBool(4 + j);
         this.messageRef = hwBlob.getInt32(8 + j);
         int int32 = hwBlob.getInt32(24 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j + 16, true);
         this.cdmaMessage.clear();
         for (int i = 0; i < int32; i++) {
             CdmaSmsMessage cdmaSmsMessage = new CdmaSmsMessage();
-            cdmaSmsMessage.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            cdmaSmsMessage.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             this.cdmaMessage.add(cdmaSmsMessage);
         }
         int int322 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 32, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 32, hwBlob.handle(), j + 32, true);
         this.gsmMessage.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             GsmSmsMessage gsmSmsMessage = new GsmSmsMessage();
-            gsmSmsMessage.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 32);
+            gsmSmsMessage.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 32);
             this.gsmMessage.add(gsmSmsMessage);
         }
     }

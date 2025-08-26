@@ -35,7 +35,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
     public final String a11yAnnounceTextMaximize;
@@ -65,7 +64,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
     public final View openMenuButton;
     public SizeToggleDirection sizeToggleDirection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,11 +73,9 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Header {
         public final Theme appTheme;
         public final boolean isAppearanceCaptionLight;
@@ -88,7 +84,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Type {
             public static final /* synthetic */ Type[] $VALUES;
             public static final Type CUSTOM;
@@ -150,7 +145,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeaderData extends WindowDecorationViewHolder.Data {
         public final boolean enableMaximizeLongClick;
         public final boolean hasGlobalFocus;
@@ -200,15 +194,12 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeaderStyle {
         public final Background background;
         public final Foreground foreground;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class Background {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Opaque extends Background {
                 public final int color;
 
@@ -233,7 +224,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Transparent extends Background {
                 public static final Transparent INSTANCE = new Transparent();
 
@@ -262,7 +252,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Foreground {
             public final int color;
             public final int opacity;
@@ -322,7 +311,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SizeToggleDirection {
         public static final /* synthetic */ SizeToggleDirection[] $VALUES;
         public static final SizeToggleDirection MAXIMIZE;
@@ -350,7 +338,6 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -406,12 +393,12 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         this.minimizeDrawableInsets = new DrawableInsets(this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_minimize_ripple_inset_vertical), this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_minimize_ripple_inset_horizontal));
         this.maximizeDrawableInsets = new DrawableInsets(this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_maximize_ripple_inset_vertical), this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_maximize_ripple_inset_horizontal));
         this.closeDrawableInsets = new DrawableInsets(this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_close_ripple_inset_vertical), this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_header_close_ripple_inset_horizontal));
-        View requireViewById = view.requireViewById(R.id.desktop_mode_caption);
-        this.captionView = requireViewById;
-        View requireViewById2 = view.requireViewById(R.id.caption_handle);
-        this.captionHandle = requireViewById2;
-        View requireViewById3 = view.requireViewById(R.id.open_menu_button);
-        this.openMenuButton = requireViewById3;
+        View viewRequireViewById = view.requireViewById(R.id.desktop_mode_caption);
+        this.captionView = viewRequireViewById;
+        View viewRequireViewById2 = view.requireViewById(R.id.caption_handle);
+        this.captionHandle = viewRequireViewById2;
+        View viewRequireViewById3 = view.requireViewById(R.id.open_menu_button);
+        this.openMenuButton = viewRequireViewById3;
         ImageButton imageButton = (ImageButton) view.requireViewById(R.id.close_window);
         this.closeWindowButton = imageButton;
         this.expandMenuButton = (ImageButton) view.requireViewById(R.id.expand_menu_button);
@@ -425,10 +412,10 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         this.appIconImageView = (ImageView) view.requireViewById(R.id.application_icon);
         this.a11yAnnounceTextMaximize = this.context.getString(R.string.app_header_talkback_action_maximize_button_text);
         this.a11yAnnounceTextRestore = this.context.getString(R.string.app_header_talkback_action_restore_button_text);
-        requireViewById.setOnTouchListener(onTouchListener);
-        requireViewById2.setOnTouchListener(onTouchListener);
-        requireViewById3.setOnClickListener(onClickListener);
-        requireViewById3.setOnTouchListener(onTouchListener);
+        viewRequireViewById.setOnTouchListener(onTouchListener);
+        viewRequireViewById2.setOnTouchListener(onTouchListener);
+        viewRequireViewById3.setOnClickListener(onClickListener);
+        viewRequireViewById3.setOnTouchListener(onTouchListener);
         imageButton.setOnClickListener(onClickListener);
         imageButton2.setOnClickListener(onClickListener);
         imageButton2.setOnTouchListener(onTouchListener);
@@ -441,7 +428,7 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         final AccessibilityNodeInfo.AccessibilityAction accessibilityAction = new AccessibilityNodeInfo.AccessibilityAction(R.id.action_snap_left, this.context.getString(R.string.desktop_mode_a11y_action_snap_left));
         final AccessibilityNodeInfo.AccessibilityAction accessibilityAction2 = new AccessibilityNodeInfo.AccessibilityAction(R.id.action_snap_right, this.context.getString(R.string.desktop_mode_a11y_action_snap_right));
         final AccessibilityNodeInfo.AccessibilityAction accessibilityAction3 = new AccessibilityNodeInfo.AccessibilityAction(R.id.action_maximize_restore, this.context.getString(R.string.desktop_mode_a11y_action_maximize_restore));
-        requireViewById2.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.windowdecor.viewholder.AppHeaderViewHolder.1
+        viewRequireViewById2.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.windowdecor.viewholder.AppHeaderViewHolder.1
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
@@ -546,7 +533,7 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             }
         });
         AccessibilityNodeInfoCompat.AccessibilityActionCompat accessibilityActionCompat = AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK;
-        ViewCompat.replaceAccessibilityAction(requireViewById3, accessibilityActionCompat, this.context.getString(R.string.app_handle_chip_accessibility_announce), null);
+        ViewCompat.replaceAccessibilityAction(viewRequireViewById3, accessibilityActionCompat, this.context.getString(R.string.app_handle_chip_accessibility_announce), null);
         ViewCompat.replaceAccessibilityAction(imageButton3, accessibilityActionCompat, this.context.getString(R.string.app_header_talkback_action_minimize_button_text), null);
         ViewCompat.replaceAccessibilityAction(imageButton, accessibilityActionCompat, this.context.getString(R.string.app_header_talkback_action_close_button_text), null);
     }
@@ -558,11 +545,11 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         HeaderStyle.Foreground foreground;
         ActivityManager.RunningTaskInfo runningTaskInfo = headerData.taskInfo;
         this.currentTaskInfo = runningTaskInfo;
-        boolean isTrue = DesktopModeFlags.ENABLE_THEMED_APP_HEADERS.isTrue();
+        boolean zIsTrue = DesktopModeFlags.ENABLE_THEMED_APP_HEADERS.isTrue();
         boolean z = headerData.hasGlobalFocus;
         boolean z2 = headerData.isCaptionVisible;
         int i = 166;
-        if (!isTrue) {
+        if (!zIsTrue) {
             if (DesktopModeFlags.ENABLE_DESKTOP_APP_HANDLE_ANIMATION.isTrue()) {
                 this.captionView.setVisibility(z2 ? 0 : 8);
             }
@@ -574,9 +561,9 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             }
             view.setBackgroundColor(color);
             Context context = this.context;
-            boolean isTransparentCaptionBarAppearance = TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo);
+            boolean zIsTransparentCaptionBarAppearance = TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo);
             int i2 = android.R.color.search_url_text;
-            if ((!isTransparentCaptionBarAppearance || !TaskInfoKt.isLightCaptionBarAppearance(runningTaskInfo)) && ((TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo) && !TaskInfoKt.isLightCaptionBarAppearance(runningTaskInfo)) || isDarkMode())) {
+            if ((!zIsTransparentCaptionBarAppearance || !TaskInfoKt.isLightCaptionBarAppearance(runningTaskInfo)) && ((TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo) && !TaskInfoKt.isLightCaptionBarAppearance(runningTaskInfo)) || isDarkMode())) {
                 i2 = 17171178;
             }
             int color2 = context.getColor(i2);
@@ -588,28 +575,28 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             if (i != 255) {
                 color2 = Color.argb(i, Color.red(color2), Color.green(color2), Color.blue(color2));
             }
-            int alpha = Color.alpha(color2);
+            int iAlpha = Color.alpha(color2);
             this.closeWindowButton.setImageTintList(ColorStateList.valueOf(color2));
             this.maximizeWindowButton.setImageTintList(ColorStateList.valueOf(color2));
             this.minimizeWindowButton.setImageTintList(ColorStateList.valueOf(color2));
             this.expandMenuButton.setImageTintList(ColorStateList.valueOf(color2));
             this.appNameTextView.setVisibility(!TaskInfoKt.isTransparentCaptionBarAppearance(runningTaskInfo) ? 0 : 8);
             this.appNameTextView.setTextColor(color2);
-            this.appIconImageView.setImageAlpha(alpha);
-            this.maximizeWindowButton.setImageAlpha(alpha);
-            this.minimizeWindowButton.setImageAlpha(alpha);
-            this.closeWindowButton.setImageAlpha(alpha);
-            this.expandMenuButton.setImageAlpha(alpha);
-            TypedArray obtainStyledAttributes = this.context.obtainStyledAttributes(null, new int[]{android.R.attr.selectableItemBackground, android.R.attr.selectableItemBackgroundBorderless}, 0, 0);
-            this.openMenuButton.setBackground(obtainStyledAttributes.getDrawable(0));
-            this.maximizeWindowButton.setBackground(obtainStyledAttributes.getDrawable(1));
-            this.closeWindowButton.setBackground(obtainStyledAttributes.getDrawable(1));
-            this.minimizeWindowButton.setBackground(obtainStyledAttributes.getDrawable(1));
-            obtainStyledAttributes.recycle();
+            this.appIconImageView.setImageAlpha(iAlpha);
+            this.maximizeWindowButton.setImageAlpha(iAlpha);
+            this.minimizeWindowButton.setImageAlpha(iAlpha);
+            this.closeWindowButton.setImageAlpha(iAlpha);
+            this.expandMenuButton.setImageAlpha(iAlpha);
+            TypedArray typedArrayObtainStyledAttributes = this.context.obtainStyledAttributes(null, new int[]{android.R.attr.selectableItemBackground, android.R.attr.selectableItemBackgroundBorderless}, 0, 0);
+            this.openMenuButton.setBackground(typedArrayObtainStyledAttributes.getDrawable(0));
+            this.maximizeWindowButton.setBackground(typedArrayObtainStyledAttributes.getDrawable(1));
+            this.closeWindowButton.setBackground(typedArrayObtainStyledAttributes.getDrawable(1));
+            this.minimizeWindowButton.setBackground(typedArrayObtainStyledAttributes.getDrawable(1));
+            typedArrayObtainStyledAttributes.recycle();
             MaximizeButtonView maximizeButtonView = this.maximizeButtonView;
-            boolean isDarkMode = isDarkMode();
+            boolean zIsDarkMode = isDarkMode();
             int i3 = MaximizeButtonView.$r8$clinit;
-            maximizeButtonView.setAnimationTints(isDarkMode, null, null, null);
+            maximizeButtonView.setAnimationTints(zIsDarkMode, null, null, null);
             this.minimizeWindowButton.setVisibility(!DesktopModeFlags.ENABLE_MINIMIZE_BUTTON.isTrue() ? 8 : 0);
             return;
         }
@@ -623,17 +610,17 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             int i5 = WhenMappings.$EnumSwitchMapping$1[theme.ordinal()];
             if (i5 == 1) {
                 type = type2;
-                opaque = z3 ? new HeaderStyle.Background.Opaque(ColorKt.m467toArgb8_81llA(this.lightColors.secondaryContainer)) : new HeaderStyle.Background.Opaque(ColorKt.m467toArgb8_81llA(this.lightColors.surfaceContainerLow));
+                opaque = z3 ? new HeaderStyle.Background.Opaque(ColorKt.m469toArgb8_81llA(this.lightColors.secondaryContainer)) : new HeaderStyle.Background.Opaque(ColorKt.m469toArgb8_81llA(this.lightColors.surfaceContainerLow));
             } else {
                 if (i5 != 2) {
                     throw new NoWhenBranchMatchedException();
                 }
                 if (z3) {
                     type = type2;
-                    opaque = new HeaderStyle.Background.Opaque(ColorKt.m467toArgb8_81llA(this.darkColors.surfaceContainerHigh));
+                    opaque = new HeaderStyle.Background.Opaque(ColorKt.m469toArgb8_81llA(this.darkColors.surfaceContainerHigh));
                 } else {
                     type = type2;
-                    opaque = new HeaderStyle.Background.Opaque(ColorKt.m467toArgb8_81llA(this.darkColors.surfaceDim));
+                    opaque = new HeaderStyle.Background.Opaque(ColorKt.m469toArgb8_81llA(this.darkColors.surfaceDim));
                 }
             }
         } else {
@@ -647,12 +634,12 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         if (i6 == 1) {
             int i7 = WhenMappings.$EnumSwitchMapping$1[theme.ordinal()];
             if (i7 == 1) {
-                foreground = z3 ? new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.lightColors.onSecondaryContainer), 255) : new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.lightColors.onSecondaryContainer), 166);
+                foreground = z3 ? new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.lightColors.onSecondaryContainer), 255) : new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.lightColors.onSecondaryContainer), 166);
             } else {
                 if (i7 != 2) {
                     throw new NoWhenBranchMatchedException();
                 }
-                foreground = z3 ? new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.darkColors.onSurface), 255) : new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.darkColors.onSurface), 140);
+                foreground = z3 ? new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.darkColors.onSurface), 255) : new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.darkColors.onSurface), 140);
             }
         } else {
             if (i6 != 2) {
@@ -660,16 +647,16 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
             }
             boolean z4 = header.isAppearanceCaptionLight;
             if (z4 && z3) {
-                foreground = new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.lightColors.onSecondaryContainer), 255);
+                foreground = new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.lightColors.onSecondaryContainer), 255);
             } else if (z4 && !z3) {
-                foreground = new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.lightColors.onSecondaryContainer), 166);
+                foreground = new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.lightColors.onSecondaryContainer), 166);
             } else if (!z4 && z3) {
-                foreground = new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.darkColors.onSurface), 255);
+                foreground = new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.darkColors.onSurface), 255);
             } else {
                 if (z4 || z3) {
                     throw new IllegalStateException(("No other combination expected header=" + header).toString());
                 }
-                foreground = new HeaderStyle.Foreground(ColorKt.m467toArgb8_81llA(this.darkColors.onSurface), 140);
+                foreground = new HeaderStyle.Foreground(ColorKt.m469toArgb8_81llA(this.darkColors.onSurface), 140);
             }
         }
         HeaderStyle headerStyle = new HeaderStyle(opaque, foreground);
@@ -687,23 +674,23 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
         HeaderStyle.Foreground foreground2 = headerStyle.foreground;
         int i8 = foreground2.color;
-        ColorStateList valueOf = ColorStateList.valueOf(i8);
+        ColorStateList colorStateListValueOf = ColorStateList.valueOf(i8);
         int i9 = foreground2.opacity;
-        ColorStateList withAlpha = valueOf.withAlpha(i9);
+        ColorStateList colorStateListWithAlpha = colorStateListValueOf.withAlpha(i9);
         View view2 = this.openMenuButton;
         view2.setBackground(ButtonBackgroundDrawableUtilsKt.createBackgroundDrawable(i8, this.headerButtonsRippleRadius, this.appChipDrawableInsets));
-        this.expandMenuButton.setImageTintList(withAlpha);
+        this.expandMenuButton.setImageTintList(colorStateListWithAlpha);
         TextView textView = this.appNameTextView;
         textView.setVisibility(type == Header.Type.DEFAULT ? 0 : 8);
-        textView.setTextColor(withAlpha);
+        textView.setTextColor(colorStateListWithAlpha);
         this.appIconImageView.setImageAlpha(i9);
         view2.setDefaultFocusHighlightEnabled(false);
         ImageButton imageButton = this.minimizeWindowButton;
-        imageButton.setImageTintList(withAlpha);
+        imageButton.setImageTintList(colorStateListWithAlpha);
         imageButton.setBackground(ButtonBackgroundDrawableUtilsKt.createBackgroundDrawable(i8, this.headerButtonsRippleRadius, this.minimizeDrawableInsets));
         this.minimizeWindowButton.setVisibility(!DesktopModeFlags.ENABLE_MINIMIZE_BUTTON.isTrue() ? 8 : 0);
         MaximizeButtonView maximizeButtonView2 = this.maximizeButtonView;
-        maximizeButtonView2.setAnimationTints(theme == Theme.DARK, withAlpha, Integer.valueOf(i8), ButtonBackgroundDrawableUtilsKt.createBackgroundDrawable(i8, this.headerButtonsRippleRadius, this.maximizeDrawableInsets));
+        maximizeButtonView2.setAnimationTints(theme == Theme.DARK, colorStateListWithAlpha, Integer.valueOf(i8), ButtonBackgroundDrawableUtilsKt.createBackgroundDrawable(i8, this.headerButtonsRippleRadius, this.maximizeDrawableInsets));
         int i10 = ((DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue() && headerData.inFullImmersiveState) || headerData.isTaskMaximized) ? R.drawable.decor_desktop_mode_immersive_or_maximize_exit_button_dark : R.drawable.decor_desktop_mode_maximize_button_dark;
         maximizeButtonView2.maximizeWindow.setImageResource(i10);
         if (i10 == R.drawable.decor_desktop_mode_immersive_or_maximize_exit_button_dark) {
@@ -715,7 +702,7 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         }
         updateMaximizeButtonContentDescription();
         ImageButton imageButton2 = this.closeWindowButton;
-        imageButton2.setImageTintList(withAlpha);
+        imageButton2.setImageTintList(colorStateListWithAlpha);
         imageButton2.setBackground(ButtonBackgroundDrawableUtilsKt.createBackgroundDrawable(i8, this.headerButtonsRippleRadius, this.closeDrawableInsets));
         boolean z5 = headerData.enableMaximizeLongClick;
         if (!z5) {
@@ -734,70 +721,37 @@ public final class AppHeaderViewHolder extends WindowDecorationViewHolder {
         return (this.context.getResources().getConfiguration().uiMode & 48) == 32;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0022, code lost:
-    
-        if (r4 == null) goto L23;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0025, code lost:
-    
-        r2 = r4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0031, code lost:
-    
-        r1.setContentDescription(r2);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0034, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x002f, code lost:
-    
-        if (r4 == null) goto L23;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0025 A[PHI: r4
+      0x0025: PHI (r4v2 java.lang.String) = (r4v1 java.lang.String), (r4v4 java.lang.String) binds: [B:22:0x002f, B:16:0x0022] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateMaximizeButtonContentDescription() {
-        /*
-            r4 = this;
-            java.lang.String r0 = r4.a11yTextRestore
-            if (r0 == 0) goto L34
-            java.lang.String r0 = r4.a11yTextMaximize
-            if (r0 == 0) goto L34
-            com.android.wm.shell.windowdecor.viewholder.AppHeaderViewHolder$SizeToggleDirection r0 = r4.sizeToggleDirection
-            if (r0 == 0) goto L34
-            android.widget.ImageButton r1 = r4.maximizeWindowButton
-            r2 = 0
-            if (r0 != 0) goto L12
-            r0 = r2
-        L12:
-            int[] r3 = com.android.wm.shell.windowdecor.viewholder.AppHeaderViewHolder.WhenMappings.$EnumSwitchMapping$0
-            int r0 = r0.ordinal()
-            r0 = r3[r0]
-            r3 = 1
-            if (r0 == r3) goto L2d
-            r3 = 2
-            if (r0 != r3) goto L27
-            java.lang.String r4 = r4.a11yTextRestore
-            if (r4 != 0) goto L25
-            goto L31
-        L25:
-            r2 = r4
-            goto L31
-        L27:
-            kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-            r4.<init>()
-            throw r4
-        L2d:
-            java.lang.String r4 = r4.a11yTextMaximize
-            if (r4 != 0) goto L25
-        L31:
-            r1.setContentDescription(r2)
-        L34:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.viewholder.AppHeaderViewHolder.updateMaximizeButtonContentDescription():void");
+        SizeToggleDirection sizeToggleDirection;
+        String str;
+        if (this.a11yTextRestore == null || this.a11yTextMaximize == null || (sizeToggleDirection = this.sizeToggleDirection) == null) {
+            return;
+        }
+        ImageButton imageButton = this.maximizeWindowButton;
+        String str2 = null;
+        if (sizeToggleDirection == null) {
+            sizeToggleDirection = null;
+        }
+        int i = WhenMappings.$EnumSwitchMapping$0[sizeToggleDirection.ordinal()];
+        if (i == 1) {
+            str = this.a11yTextMaximize;
+            if (str != null) {
+            }
+        } else {
+            if (i != 2) {
+                throw new NoWhenBranchMatchedException();
+            }
+            str = this.a11yTextRestore;
+            if (str != null) {
+                str2 = str;
+            }
+        }
+        imageButton.setContentDescription(str2);
     }
 
     @Override // com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder

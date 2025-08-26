@@ -4,10 +4,10 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IMediaPlayer$ErrorType {
     public static final /* synthetic */ IMediaPlayer$ErrorType[] $VALUES;
+    public static final IMediaPlayer$ErrorType INVALID_STATE;
     public static final IMediaPlayer$ErrorType IO;
     public static final IMediaPlayer$ErrorType LOADING_INTERRUPTED;
     public static final IMediaPlayer$ErrorType MALFORMED;
@@ -35,7 +35,9 @@ public final class IMediaPlayer$ErrorType {
         IMediaPlayer$ErrorType iMediaPlayer$ErrorType8 = new IMediaPlayer$ErrorType("SYSTEM", 7);
         IMediaPlayer$ErrorType iMediaPlayer$ErrorType9 = new IMediaPlayer$ErrorType("LOADING_INTERRUPTED", 8);
         LOADING_INTERRUPTED = iMediaPlayer$ErrorType9;
-        IMediaPlayer$ErrorType[] iMediaPlayer$ErrorTypeArr = {iMediaPlayer$ErrorType, iMediaPlayer$ErrorType2, iMediaPlayer$ErrorType3, iMediaPlayer$ErrorType4, iMediaPlayer$ErrorType5, iMediaPlayer$ErrorType6, iMediaPlayer$ErrorType7, iMediaPlayer$ErrorType8, iMediaPlayer$ErrorType9};
+        IMediaPlayer$ErrorType iMediaPlayer$ErrorType10 = new IMediaPlayer$ErrorType("INVALID_STATE", 9);
+        INVALID_STATE = iMediaPlayer$ErrorType10;
+        IMediaPlayer$ErrorType[] iMediaPlayer$ErrorTypeArr = {iMediaPlayer$ErrorType, iMediaPlayer$ErrorType2, iMediaPlayer$ErrorType3, iMediaPlayer$ErrorType4, iMediaPlayer$ErrorType5, iMediaPlayer$ErrorType6, iMediaPlayer$ErrorType7, iMediaPlayer$ErrorType8, iMediaPlayer$ErrorType9, iMediaPlayer$ErrorType10};
         $VALUES = iMediaPlayer$ErrorTypeArr;
         EnumEntriesKt.enumEntries(iMediaPlayer$ErrorTypeArr);
     }

@@ -3,6 +3,7 @@ package android.os;
 import android.annotation.SystemApi;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
 import android.os.Parcelable;
@@ -59,11 +60,11 @@ public abstract class VibrationEffect implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public VibrationEffect createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 1) {
+            int i = parcel.readInt();
+            if (i == 1) {
                 return new Composed(parcel);
             }
-            if (readInt == 2 && Flags.vendorVibrationEffects()) {
+            if (i == 2 && Flags.vendorVibrationEffects()) {
                 return new VendorEffect(parcel);
             }
             throw new IllegalStateException("Unexpected vibration effect type token in parcel.");
@@ -180,16 +181,16 @@ public abstract class VibrationEffect implements Parcelable {
         return composed;
     }
 
-    public static VibrationEffect get(Uri uri, Context context) {
-        Uri uncanonicalize;
+    public static VibrationEffect get(Uri uri, Context context) throws Resources.NotFoundException {
+        Uri uriUncanonicalize;
         String[] stringArray = context.getResources().getStringArray(R.array.config_ringtoneEffectUris);
         if (stringArray.length == 0) {
             return null;
         }
         ContentResolver contentResolver = context.getContentResolver();
-        Uri uncanonicalize2 = contentResolver.uncanonicalize(uri);
-        if (uncanonicalize2 != null) {
-            uri = uncanonicalize2;
+        Uri uriUncanonicalize2 = contentResolver.uncanonicalize(uri);
+        if (uriUncanonicalize2 != null) {
+            uri = uriUncanonicalize2;
         }
         for (int i = 0; i < stringArray.length; i++) {
             int[] iArr = RINGTONES;
@@ -197,7 +198,7 @@ public abstract class VibrationEffect implements Parcelable {
                 break;
             }
             String str = stringArray[i];
-            if (str != null && (uncanonicalize = contentResolver.uncanonicalize(Uri.parse(str))) != null && uncanonicalize.equals(uri)) {
+            if (str != null && (uriUncanonicalize = contentResolver.uncanonicalize(Uri.parse(str))) != null && uriUncanonicalize.equals(uri)) {
                 return get(iArr[i]);
             }
         }
@@ -213,15 +214,15 @@ public abstract class VibrationEffect implements Parcelable {
     }
 
     public static WaveformBuilder startWaveform(VibrationParameter vibrationParameter) {
-        WaveformBuilder startWaveform = startWaveform();
-        startWaveform.addTransition(Duration.ZERO, vibrationParameter);
-        return startWaveform;
+        WaveformBuilder waveformBuilderStartWaveform = startWaveform();
+        waveformBuilderStartWaveform.addTransition(Duration.ZERO, vibrationParameter);
+        return waveformBuilderStartWaveform;
     }
 
     public static WaveformBuilder startWaveform(VibrationParameter vibrationParameter, VibrationParameter vibrationParameter2) {
-        WaveformBuilder startWaveform = startWaveform();
-        startWaveform.addTransition(Duration.ZERO, vibrationParameter, vibrationParameter2);
-        return startWaveform;
+        WaveformBuilder waveformBuilderStartWaveform = startWaveform();
+        waveformBuilderStartWaveform.addTransition(Duration.ZERO, vibrationParameter, vibrationParameter2);
+        return waveformBuilderStartWaveform;
     }
 
     public long getDuration(VibratorInfo vibratorInfo) {
@@ -232,14 +233,14 @@ public abstract class VibrationEffect implements Parcelable {
         if (Flags.hapticsScaleV2Enabled()) {
             return (Float.compare(f2, 1.0f) <= 0 || Float.compare(f, 0.0f) == 0) ? f2 * f : (f2 * f) / ((((f2 - 1.0f) * f) * f) + 1.0f);
         }
-        float pow = MathUtils.pow(f2, 1.5384616f);
+        float fPow = MathUtils.pow(f2, 1.5384616f);
         if (f2 <= 1.0f) {
-            return f * pow;
+            return f * fPow;
         }
-        float pow2 = MathUtils.pow(f2, 4.0f - f2);
-        float exp = MathUtils.exp(f * pow * pow2);
-        float exp2 = MathUtils.exp(pow * pow2);
-        return MathUtils.constrain(((exp2 + 1.0f) / (exp2 - 1.0f)) * ((exp - 1.0f) / (exp + 1.0f)), 0.0f, 1.0f);
+        float fPow2 = MathUtils.pow(f2, 4.0f - f2);
+        float fExp = MathUtils.exp(f * fPow * fPow2);
+        float fExp2 = MathUtils.exp(fPow * fPow2);
+        return MathUtils.constrain(((fExp2 + 1.0f) / (fExp2 - 1.0f)) * ((fExp - 1.0f) / (fExp + 1.0f)), 0.0f, 1.0f);
     }
 
     public static float scaleLinearly(float f, float f2) {
@@ -339,14 +340,14 @@ public abstract class VibrationEffect implements Parcelable {
             long[] jArr = new long[segments.size() + 1];
             int i = 0;
             for (int i2 = 0; i2 < segments.size(); i2++) {
-                StepSegment castToValidStepSegmentForOffOnTimingsOrNull = castToValidStepSegmentForOffOnTimingsOrNull(segments.get(i2));
-                if (castToValidStepSegmentForOffOnTimingsOrNull == null) {
+                StepSegment stepSegmentCastToValidStepSegmentForOffOnTimingsOrNull = castToValidStepSegmentForOffOnTimingsOrNull(segments.get(i2));
+                if (stepSegmentCastToValidStepSegmentForOffOnTimingsOrNull == null) {
                     return null;
                 }
-                if ((castToValidStepSegmentForOffOnTimingsOrNull.getAmplitude() == 0.0f) != (i % 2 == 0)) {
+                if ((stepSegmentCastToValidStepSegmentForOffOnTimingsOrNull.getAmplitude() == 0.0f) != (i % 2 == 0)) {
                     i++;
                 }
-                jArr[i] = jArr[i] + castToValidStepSegmentForOffOnTimingsOrNull.getDuration();
+                jArr[i] = jArr[i] + stepSegmentCastToValidStepSegmentForOffOnTimingsOrNull.getDuration();
             }
             return Arrays.copyOf(jArr, i + 1);
         }
@@ -401,9 +402,7 @@ public abstract class VibrationEffect implements Parcelable {
             return getDuration(new Function() { // from class: android.os.VibrationEffect$Composed$$ExternalSyntheticLambda2
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Long valueOf;
-                    valueOf = Long.valueOf(((VibrationEffectSegment) obj).getDuration(VibratorInfo.this));
-                    return valueOf;
+                    return Long.valueOf(((VibrationEffectSegment) obj).getDuration(vibratorInfo));
                 }
             });
         }
@@ -415,11 +414,11 @@ public abstract class VibrationEffect implements Parcelable {
             int size = this.mSegments.size();
             long j = 0;
             for (int i = 0; i < size; i++) {
-                long longValue = function.apply(this.mSegments.get(i)).longValue();
-                if (longValue < 0) {
-                    return longValue;
+                long jLongValue = function.apply(this.mSegments.get(i)).longValue();
+                if (jLongValue < 0) {
+                    return jLongValue;
                 }
-                j += longValue;
+                j += jLongValue;
             }
             return j;
         }
@@ -1100,19 +1099,18 @@ public abstract class VibrationEffect implements Parcelable {
             Preconditions.checkNotNull(duration, "Duration is null");
             Preconditions.checkArgument(!duration.isNegative(), "Transition duration must be non-negative");
             int millis = (int) duration.toMillis();
-            if (millis > 0) {
-                if (Math.abs(this.mLastAmplitude - f) < 1.0E-5f && Math.abs(this.mLastFrequencyHz - f2) < 1.0E-5f) {
-                    this.mSegments.add(new StepSegment(f, f2, millis));
-                } else {
-                    f3 = f;
-                    f4 = f2;
-                    this.mSegments.add(new RampSegment(this.mLastAmplitude, f3, this.mLastFrequencyHz, f4, millis));
-                    this.mLastAmplitude = f3;
-                    this.mLastFrequencyHz = f4;
-                }
+            if (millis <= 0) {
+                f3 = f;
+                f4 = f2;
+            } else if (Math.abs(this.mLastAmplitude - f) < 1.0E-5f && Math.abs(this.mLastFrequencyHz - f2) < 1.0E-5f) {
+                this.mSegments.add(new StepSegment(f, f2, millis));
+                f3 = f;
+                f4 = f2;
+            } else {
+                f3 = f;
+                f4 = f2;
+                this.mSegments.add(new RampSegment(this.mLastAmplitude, f3, this.mLastFrequencyHz, f4, millis));
             }
-            f3 = f;
-            f4 = f2;
             this.mLastAmplitude = f3;
             this.mLastFrequencyHz = f4;
         }

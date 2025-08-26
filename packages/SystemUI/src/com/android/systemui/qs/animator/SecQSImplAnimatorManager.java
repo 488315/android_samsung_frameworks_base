@@ -26,7 +26,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import kotlin.Triple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implements Dumpable, LockscreenShadeTransitionController.Callback, PanelTransitionStateListener {
     public final SecQSDetailController mDetailController;
@@ -46,7 +45,6 @@ public class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implements D
     public final ShadeExpansionStateManager mShadeExpansionStateManager;
     public final QsTransitionAnimator mTransitionAnimator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.animator.SecQSImplAnimatorManager$1, reason: invalid class name */
     public class AnonymousClass1 implements Consumer {
         public AnonymousClass1() {
@@ -58,7 +56,6 @@ public class SecQSImplAnimatorManager extends SecQSImplAnimatorBase implements D
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.animator.SecQSImplAnimatorManager$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {

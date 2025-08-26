@@ -18,7 +18,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SystemShortcutsSource implements KeyboardShortcutGroupsSource {
     public final InputManager inputManager;
@@ -34,10 +33,10 @@ public final class SystemShortcutsSource implements KeyboardShortcutGroupsSource
     /* JADX WARN: Type inference failed for: r19v2 */
     /* JADX WARN: Type inference failed for: r19v3 */
     @Override // com.android.systemui.keyboard.shortcut.data.source.KeyboardShortcutGroupsSource
-    public final Object shortcutGroups(int i, Continuation continuation) {
+    public final Object shortcutGroups(int i, Continuation continuation) throws Resources.NotFoundException {
         ?? r19;
         int i2;
-        Iterable iterable;
+        Iterable iterablePlus;
         int i3;
         boolean z = true;
         KeyboardShortcutGroup[] keyboardShortcutGroupArr = new KeyboardShortcutGroup[2];
@@ -97,7 +96,7 @@ public final class SystemShortcutsSource implements KeyboardShortcutGroupsSource
         KeyboardShortcutInfoBuilder keyboardShortcutInfoBuilder11 = new KeyboardShortcutInfoBuilder(this.resources.getString(R.string.group_system_lock_screen));
         keyboardShortcutInfoBuilder11.modifiers = 65536;
         keyboardShortcutInfoBuilder11.keyCode = 40;
-        List asList = Arrays.asList(new KeyboardShortcutInfo(keyboardShortcutInfoBuilder.label, i5, i6), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder2.label, i7, i8), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder3.label, i9, i10), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder4.label, i11, i12), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder5.label, i13, i14), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder6.label, i15, i16), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder7.label, i17, i18), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder8.label, i19, i20), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder9.label, i21, i22), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder10.label, i23, i24), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder11.label, keyboardShortcutInfoBuilder11.keyCode, keyboardShortcutInfoBuilder11.modifiers));
+        List listAsList = Arrays.asList(new KeyboardShortcutInfo(keyboardShortcutInfoBuilder.label, i5, i6), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder2.label, i7, i8), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder3.label, i9, i10), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder4.label, i11, i12), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder5.label, i13, i14), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder6.label, i15, i16), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder7.label, i17, i18), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder8.label, i19, i20), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder9.label, i21, i22), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder10.label, i23, i24), new KeyboardShortcutInfo(keyboardShortcutInfoBuilder11.label, keyboardShortcutInfoBuilder11.keyCode, keyboardShortcutInfoBuilder11.modifiers));
         KeyGlyphMap keyGlyphMap = this.inputManager.getKeyGlyphMap(i);
         if (keyGlyphMap != null) {
             ArrayList arrayList = new ArrayList();
@@ -141,13 +140,13 @@ public final class SystemShortcutsSource implements KeyboardShortcutGroupsSource
                     arrayList2.add(new KeyboardShortcutInfo(keyboardShortcutInfoBuilder13.label, keyboardShortcutInfoBuilder13.keyCode, keyboardShortcutInfoBuilder13.modifiers));
                 }
             }
-            iterable = CollectionsKt___CollectionsKt.plus((Iterable) arrayList2, (Collection) arrayList);
+            iterablePlus = CollectionsKt___CollectionsKt.plus((Iterable) arrayList2, (Collection) arrayList);
         } else {
             r19 = 1;
             i2 = 0;
-            iterable = EmptyList.INSTANCE;
+            iterablePlus = EmptyList.INSTANCE;
         }
-        keyboardShortcutGroupArr[i2] = new KeyboardShortcutGroup(string, CollectionsKt___CollectionsKt.plus(iterable, asList));
+        keyboardShortcutGroupArr[i2] = new KeyboardShortcutGroup(string, CollectionsKt___CollectionsKt.plus(iterablePlus, listAsList));
         String string2 = this.resources.getString(R.string.shortcut_helper_category_system_apps);
         KeyboardShortcutInfo[] keyboardShortcutInfoArr = new KeyboardShortcutInfo[2];
         KeyboardShortcutInfoBuilder keyboardShortcutInfoBuilder14 = new KeyboardShortcutInfoBuilder(this.resources.getString(R.string.group_system_access_system_settings));

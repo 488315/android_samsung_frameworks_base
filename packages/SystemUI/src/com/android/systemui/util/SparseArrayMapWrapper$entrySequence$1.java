@@ -1,12 +1,14 @@
 package com.android.systemui.util;
 
+import com.android.systemui.util.SparseArrayMapWrapper;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SparseArrayMapWrapper$entrySequence$1 extends RestrictedSuspendLambda implements Function2 {
     int I$0;
@@ -28,70 +30,52 @@ final class SparseArrayMapWrapper$entrySequence$1 extends RestrictedSuspendLambd
         return sparseArrayMapWrapper$entrySequence$1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0035  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:8:0x005a -> B:5:0x005d). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x005f  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:11:0x005a -> B:13:0x005d). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-        /*
-            r7 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r7.label
-            r2 = 1
-            if (r1 == 0) goto L1d
-            if (r1 != r2) goto L15
-            int r1 = r7.I$1
-            int r3 = r7.I$0
-            java.lang.Object r4 = r7.L$0
-            kotlin.sequences.SequenceScope r4 = (kotlin.sequences.SequenceScope) r4
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L5d
-        L15:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L1d:
-            kotlin.ResultKt.throwOnFailure(r8)
-            java.lang.Object r8 = r7.L$0
-            kotlin.sequences.SequenceScope r8 = (kotlin.sequences.SequenceScope) r8
-            com.android.systemui.util.SparseArrayMapWrapper<java.lang.Object> r1 = r7.this$0
-            android.util.SparseArray r1 = com.android.systemui.util.SparseArrayMapWrapper.access$getSparseArray$p(r1)
-            int r1 = r1.size()
-            r3 = 0
-            r4 = r3
-            r3 = r1
-            r1 = r4
-            r4 = r8
-        L33:
-            if (r1 >= r3) goto L5f
-            com.android.systemui.util.SparseArrayMapWrapper<java.lang.Object> r8 = r7.this$0
-            android.util.SparseArray r8 = com.android.systemui.util.SparseArrayMapWrapper.access$getSparseArray$p(r8)
-            int r8 = r8.keyAt(r1)
-            com.android.systemui.util.SparseArrayMapWrapper<java.lang.Object> r5 = r7.this$0
-            android.util.SparseArray r5 = com.android.systemui.util.SparseArrayMapWrapper.access$getSparseArray$p(r5)
-            java.lang.Object r5 = r5.get(r8)
-            com.android.systemui.util.SparseArrayMapWrapper$Entry r6 = new com.android.systemui.util.SparseArrayMapWrapper$Entry
-            r6.<init>(r8, r5)
-            r7.L$0 = r4
-            r7.I$0 = r3
-            r7.I$1 = r1
-            r7.label = r2
-            kotlin.coroutines.intrinsics.CoroutineSingletons r8 = r4.yield(r6, r7)
-            if (r8 != r0) goto L5d
-            return r0
-        L5d:
-            int r1 = r1 + r2
-            goto L33
-        L5f:
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.SparseArrayMapWrapper$entrySequence$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        int size;
+        int i;
+        SequenceScope sequenceScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = this.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            SequenceScope sequenceScope2 = (SequenceScope) this.L$0;
+            size = ((SparseArrayMapWrapper) this.this$0).sparseArray.size();
+            i = 0;
+            sequenceScope = sequenceScope2;
+            if (i < size) {
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = this.I$1;
+            size = this.I$0;
+            sequenceScope = (SequenceScope) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            i++;
+            if (i < size) {
+                int iKeyAt = ((SparseArrayMapWrapper) this.this$0).sparseArray.keyAt(i);
+                SparseArrayMapWrapper.Entry entry = new SparseArrayMapWrapper.Entry(iKeyAt, ((SparseArrayMapWrapper) this.this$0).sparseArray.get(iKeyAt));
+                this.L$0 = sequenceScope;
+                this.I$0 = size;
+                this.I$1 = i;
+                this.label = 1;
+                if (sequenceScope.yield(entry, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                i++;
+                if (i < size) {
+                    return Unit.INSTANCE;
+                }
+            }
+        }
     }
 
     @Override // kotlin.jvm.functions.Function2

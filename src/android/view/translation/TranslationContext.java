@@ -144,15 +144,15 @@ public final class TranslationContext implements Parcelable {
         parcel.readByte();
         TranslationSpec translationSpec = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
         TranslationSpec translationSpec2 = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
-        int readInt = parcel.readInt();
-        ActivityId unparcelActivityId = unparcelActivityId(parcel);
+        int i = parcel.readInt();
+        ActivityId activityIdUnparcelActivityId = unparcelActivityId(parcel);
         this.mSourceSpec = translationSpec;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) translationSpec);
         this.mTargetSpec = translationSpec2;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) translationSpec2);
-        this.mTranslationFlags = readInt;
-        Preconditions.checkFlagsArgument(readInt, 7);
-        this.mActivityId = unparcelActivityId;
+        this.mTranslationFlags = i;
+        Preconditions.checkFlagsArgument(i, 7);
+        this.mActivityId = activityIdUnparcelActivityId;
     }
 
     public static final class Builder extends BaseBuilder {

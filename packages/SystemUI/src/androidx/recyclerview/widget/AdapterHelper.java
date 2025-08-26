@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AdapterHelper implements OpReorderer.Callback {
     public final Callback mCallback;
@@ -17,11 +16,9 @@ public final class AdapterHelper implements OpReorderer.Callback {
     public final ArrayList mPostponedList;
     public final Pools$SimplePool mUpdateOpPool;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateOp {
         public int cmd;
         public int itemCount;
@@ -163,7 +160,7 @@ public final class AdapterHelper implements OpReorderer.Callback {
         if (i2 == 1 || i2 == 8) {
             throw new IllegalArgumentException("should not dispatch add or move for pre layout");
         }
-        int updatePositionWithPostponed = updatePositionWithPostponed(updateOp.positionStart, i2);
+        int iUpdatePositionWithPostponed = updatePositionWithPostponed(updateOp.positionStart, i2);
         int i3 = updateOp.positionStart;
         int i4 = updateOp.cmd;
         if (i4 == 2) {
@@ -176,17 +173,17 @@ public final class AdapterHelper implements OpReorderer.Callback {
         }
         int i5 = 1;
         for (int i6 = 1; i6 < updateOp.itemCount; i6++) {
-            int updatePositionWithPostponed2 = updatePositionWithPostponed((i * i6) + updateOp.positionStart, updateOp.cmd);
+            int iUpdatePositionWithPostponed2 = updatePositionWithPostponed((i * i6) + updateOp.positionStart, updateOp.cmd);
             int i7 = updateOp.cmd;
-            if (i7 == 2 ? updatePositionWithPostponed2 != updatePositionWithPostponed : !(i7 == 4 && updatePositionWithPostponed2 == updatePositionWithPostponed + 1)) {
-                UpdateOp obtainUpdateOp = obtainUpdateOp(i7, updatePositionWithPostponed, i5, updateOp.payload);
-                dispatchFirstPassAndUpdateViewHolders(obtainUpdateOp, i3);
-                recycleUpdateOp(obtainUpdateOp);
+            if (i7 == 2 ? iUpdatePositionWithPostponed2 != iUpdatePositionWithPostponed : !(i7 == 4 && iUpdatePositionWithPostponed2 == iUpdatePositionWithPostponed + 1)) {
+                UpdateOp updateOpObtainUpdateOp = obtainUpdateOp(i7, iUpdatePositionWithPostponed, i5, updateOp.payload);
+                dispatchFirstPassAndUpdateViewHolders(updateOpObtainUpdateOp, i3);
+                recycleUpdateOp(updateOpObtainUpdateOp);
                 if (updateOp.cmd == 4) {
                     i3 += i5;
                 }
                 i5 = 1;
-                updatePositionWithPostponed = updatePositionWithPostponed2;
+                iUpdatePositionWithPostponed = iUpdatePositionWithPostponed2;
             } else {
                 i5++;
             }
@@ -194,9 +191,9 @@ public final class AdapterHelper implements OpReorderer.Callback {
         Object obj = updateOp.payload;
         recycleUpdateOp(updateOp);
         if (i5 > 0) {
-            UpdateOp obtainUpdateOp2 = obtainUpdateOp(updateOp.cmd, updatePositionWithPostponed, i5, obj);
-            dispatchFirstPassAndUpdateViewHolders(obtainUpdateOp2, i3);
-            recycleUpdateOp(obtainUpdateOp2);
+            UpdateOp updateOpObtainUpdateOp2 = obtainUpdateOp(updateOp.cmd, iUpdatePositionWithPostponed, i5, obj);
+            dispatchFirstPassAndUpdateViewHolders(updateOpObtainUpdateOp2, i3);
+            recycleUpdateOp(updateOpObtainUpdateOp2);
         }
     }
 
@@ -296,33 +293,388 @@ public final class AdapterHelper implements OpReorderer.Callback {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:179:0x0290  */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x0294  */
-    /* JADX WARN: Removed duplicated region for block: B:187:0x0283  */
-    /* JADX WARN: Removed duplicated region for block: B:189:0x028c  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x009d  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x01b4 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x010b  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x00d0  */
+    /* JADX WARN: Removed duplicated region for block: B:194:0x01b4 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x008e  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00cc  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00d0  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x00f0  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x00f4  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x010b  */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x0118  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void preProcess() {
-        /*
-            Method dump skipped, instructions count: 704
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.recyclerview.widget.AdapterHelper.preProcess():void");
+        int i;
+        UpdateOp updateOpObtainUpdateOp;
+        UpdateOp updateOp;
+        boolean z;
+        char c;
+        UpdateOp updateOp2;
+        boolean z2;
+        boolean z3;
+        int i2;
+        int i3;
+        int i4;
+        UpdateOp updateOpObtainUpdateOp2;
+        int i5;
+        int i6;
+        int i7 = -1;
+        ArrayList arrayList = this.mPendingUpdates;
+        OpReorderer opReorderer = this.mOpReorderer;
+        opReorderer.getClass();
+        while (true) {
+            int size = arrayList.size() - 1;
+            boolean z4 = false;
+            while (true) {
+                i = 8;
+                if (size < 0) {
+                    size = i7;
+                    break;
+                }
+                if (((UpdateOp) arrayList.get(size)).cmd != 8) {
+                    z4 = true;
+                } else if (z4) {
+                    break;
+                }
+                size += i7;
+            }
+            updateOpObtainUpdateOp = null;
+            if (size == i7) {
+                break;
+            }
+            int i8 = size + 1;
+            UpdateOp updateOp3 = (UpdateOp) arrayList.get(size);
+            UpdateOp updateOp4 = (UpdateOp) arrayList.get(i8);
+            int i9 = updateOp4.cmd;
+            if (i9 != 1) {
+                OpReorderer.Callback callback = opReorderer.mCallback;
+                if (i9 == 2) {
+                    int i10 = updateOp3.positionStart;
+                    int i11 = updateOp3.itemCount;
+                    if (i10 < i11) {
+                        if (updateOp4.positionStart == i10 && updateOp4.itemCount == i11 - i10) {
+                            z3 = true;
+                            z2 = false;
+                            i2 = updateOp4.positionStart;
+                            if (i11 >= i2) {
+                            }
+                            i3 = updateOp3.positionStart;
+                            i4 = updateOp4.positionStart;
+                            if (i3 > i4) {
+                            }
+                            if (z3) {
+                            }
+                        } else {
+                            z2 = false;
+                            z3 = false;
+                            i2 = updateOp4.positionStart;
+                            if (i11 >= i2) {
+                                updateOp4.positionStart = i2 - 1;
+                            } else {
+                                int i12 = updateOp4.itemCount;
+                                if (i11 < i2 + i12) {
+                                    updateOp4.itemCount = i12 - 1;
+                                    updateOp3.cmd = 2;
+                                    updateOp3.itemCount = 1;
+                                    if (updateOp4.itemCount == 0) {
+                                        arrayList.remove(i8);
+                                        ((AdapterHelper) callback).recycleUpdateOp(updateOp4);
+                                    }
+                                }
+                            }
+                            i3 = updateOp3.positionStart;
+                            i4 = updateOp4.positionStart;
+                            if (i3 > i4) {
+                                updateOp4.positionStart = i4 + 1;
+                            } else {
+                                int i13 = i4 + updateOp4.itemCount;
+                                if (i3 < i13) {
+                                    updateOpObtainUpdateOp = ((AdapterHelper) callback).obtainUpdateOp(2, i3 + 1, i13 - i3, null);
+                                    updateOp4.itemCount = updateOp3.positionStart - updateOp4.positionStart;
+                                }
+                            }
+                            if (z3) {
+                                if (z2) {
+                                    if (updateOpObtainUpdateOp != null) {
+                                        int i14 = updateOp3.positionStart;
+                                        if (i14 > updateOpObtainUpdateOp.positionStart) {
+                                            updateOp3.positionStart = i14 - updateOpObtainUpdateOp.itemCount;
+                                        }
+                                        int i15 = updateOp3.itemCount;
+                                        if (i15 > updateOpObtainUpdateOp.positionStart) {
+                                            updateOp3.itemCount = i15 - updateOpObtainUpdateOp.itemCount;
+                                        }
+                                    }
+                                    int i16 = updateOp3.positionStart;
+                                    if (i16 > updateOp4.positionStart) {
+                                        updateOp3.positionStart = i16 - updateOp4.itemCount;
+                                    }
+                                    int i17 = updateOp3.itemCount;
+                                    if (i17 > updateOp4.positionStart) {
+                                        updateOp3.itemCount = i17 - updateOp4.itemCount;
+                                    }
+                                } else {
+                                    if (updateOpObtainUpdateOp != null) {
+                                        int i18 = updateOp3.positionStart;
+                                        if (i18 >= updateOpObtainUpdateOp.positionStart) {
+                                            updateOp3.positionStart = i18 - updateOpObtainUpdateOp.itemCount;
+                                        }
+                                        int i19 = updateOp3.itemCount;
+                                        if (i19 >= updateOpObtainUpdateOp.positionStart) {
+                                            updateOp3.itemCount = i19 - updateOpObtainUpdateOp.itemCount;
+                                        }
+                                    }
+                                    int i20 = updateOp3.positionStart;
+                                    if (i20 >= updateOp4.positionStart) {
+                                        updateOp3.positionStart = i20 - updateOp4.itemCount;
+                                    }
+                                    int i21 = updateOp3.itemCount;
+                                    if (i21 >= updateOp4.positionStart) {
+                                        updateOp3.itemCount = i21 - updateOp4.itemCount;
+                                    }
+                                }
+                                arrayList.set(size, updateOp4);
+                                if (updateOp3.positionStart != updateOp3.itemCount) {
+                                    arrayList.set(i8, updateOp3);
+                                } else {
+                                    arrayList.remove(i8);
+                                }
+                                if (updateOpObtainUpdateOp != null) {
+                                    arrayList.add(size, updateOpObtainUpdateOp);
+                                }
+                            } else {
+                                arrayList.set(size, updateOp4);
+                                arrayList.remove(i8);
+                                ((AdapterHelper) callback).recycleUpdateOp(updateOp3);
+                            }
+                        }
+                    } else if (updateOp4.positionStart == i11 + 1 && updateOp4.itemCount == i10 - i11) {
+                        z2 = true;
+                        z3 = true;
+                        i2 = updateOp4.positionStart;
+                        if (i11 >= i2) {
+                        }
+                        i3 = updateOp3.positionStart;
+                        i4 = updateOp4.positionStart;
+                        if (i3 > i4) {
+                        }
+                        if (z3) {
+                        }
+                    } else {
+                        z2 = true;
+                        z3 = false;
+                        i2 = updateOp4.positionStart;
+                        if (i11 >= i2) {
+                        }
+                        i3 = updateOp3.positionStart;
+                        i4 = updateOp4.positionStart;
+                        if (i3 > i4) {
+                        }
+                        if (z3) {
+                        }
+                    }
+                } else if (i9 == 4) {
+                    int i22 = updateOp3.itemCount;
+                    int i23 = updateOp4.positionStart;
+                    if (i22 < i23) {
+                        updateOp4.positionStart = i23 - 1;
+                    } else {
+                        int i24 = updateOp4.itemCount;
+                        if (i22 < i23 + i24) {
+                            updateOp4.itemCount = i24 - 1;
+                            updateOpObtainUpdateOp2 = ((AdapterHelper) callback).obtainUpdateOp(4, updateOp3.positionStart, 1, updateOp4.payload);
+                        }
+                        i5 = updateOp3.positionStart;
+                        i6 = updateOp4.positionStart;
+                        if (i5 > i6) {
+                            updateOp4.positionStart = i6 + 1;
+                        } else {
+                            int i25 = i6 + updateOp4.itemCount;
+                            if (i5 < i25) {
+                                int i26 = i25 - i5;
+                                updateOpObtainUpdateOp = ((AdapterHelper) callback).obtainUpdateOp(4, i5 + 1, i26, updateOp4.payload);
+                                updateOp4.itemCount -= i26;
+                            }
+                        }
+                        arrayList.set(i8, updateOp3);
+                        if (updateOp4.itemCount <= 0) {
+                            arrayList.set(size, updateOp4);
+                        } else {
+                            arrayList.remove(size);
+                            ((AdapterHelper) callback).recycleUpdateOp(updateOp4);
+                        }
+                        if (updateOpObtainUpdateOp2 != null) {
+                            arrayList.add(size, updateOpObtainUpdateOp2);
+                        }
+                        if (updateOpObtainUpdateOp == null) {
+                            arrayList.add(size, updateOpObtainUpdateOp);
+                        }
+                    }
+                    updateOpObtainUpdateOp2 = null;
+                    i5 = updateOp3.positionStart;
+                    i6 = updateOp4.positionStart;
+                    if (i5 > i6) {
+                    }
+                    arrayList.set(i8, updateOp3);
+                    if (updateOp4.itemCount <= 0) {
+                    }
+                    if (updateOpObtainUpdateOp2 != null) {
+                    }
+                    if (updateOpObtainUpdateOp == null) {
+                    }
+                }
+            } else {
+                int i27 = updateOp3.itemCount;
+                int i28 = updateOp4.positionStart;
+                int i29 = i27 < i28 ? -1 : 0;
+                int i30 = updateOp3.positionStart;
+                if (i30 < i28) {
+                    i29++;
+                }
+                if (i28 <= i30) {
+                    updateOp3.positionStart = i30 + updateOp4.itemCount;
+                }
+                int i31 = updateOp4.positionStart;
+                if (i31 <= i27) {
+                    updateOp3.itemCount = i27 + updateOp4.itemCount;
+                }
+                updateOp4.positionStart = i31 + i29;
+                arrayList.set(size, updateOp4);
+                arrayList.set(i8, updateOp3);
+            }
+            i7 = -1;
+        }
+        int size2 = this.mPendingUpdates.size();
+        int i32 = 0;
+        while (i32 < size2) {
+            UpdateOp updateOpObtainUpdateOp3 = (UpdateOp) this.mPendingUpdates.get(i32);
+            int i33 = updateOpObtainUpdateOp3.cmd;
+            if (i33 != 1) {
+                Callback callback2 = this.mCallback;
+                if (i33 == 2) {
+                    int i34 = updateOpObtainUpdateOp3.positionStart;
+                    int i35 = updateOpObtainUpdateOp3.itemCount + i34;
+                    int i36 = i34;
+                    int i37 = 0;
+                    char c2 = 65535;
+                    while (i36 < i35) {
+                        RecyclerView recyclerView = RecyclerView.this;
+                        RecyclerView.ViewHolder viewHolderFindViewHolderForPosition = recyclerView.findViewHolderForPosition(i36, true);
+                        if (viewHolderFindViewHolderForPosition == null) {
+                            viewHolderFindViewHolderForPosition = null;
+                        } else if (recyclerView.mChildHelper.isHidden(viewHolderFindViewHolderForPosition.itemView)) {
+                            int[] iArr = RecyclerView.NESTED_SCROLLING_ATTRS;
+                            viewHolderFindViewHolderForPosition = null;
+                        }
+                        if (viewHolderFindViewHolderForPosition != null || canFindInPreLayout(i36)) {
+                            if (c2 == 0) {
+                                dispatchAndUpdateViewHolders(obtainUpdateOp(2, i34, i37, null));
+                                z = true;
+                            } else {
+                                z = false;
+                            }
+                            c = 1;
+                        } else {
+                            if (c2 == 1) {
+                                postponeAndUpdateViewHolders(obtainUpdateOp(2, i34, i37, null));
+                                z = true;
+                            } else {
+                                z = false;
+                            }
+                            c = 0;
+                        }
+                        if (z) {
+                            i36 -= i37;
+                            i35 -= i37;
+                            i37 = 1;
+                        } else {
+                            i37++;
+                        }
+                        i36++;
+                        c2 = c;
+                    }
+                    if (i37 != updateOpObtainUpdateOp3.itemCount) {
+                        recycleUpdateOp(updateOpObtainUpdateOp3);
+                        updateOp = null;
+                        updateOpObtainUpdateOp3 = obtainUpdateOp(2, i34, i37, null);
+                    } else {
+                        updateOp = null;
+                    }
+                    if (c2 == 0) {
+                        dispatchAndUpdateViewHolders(updateOpObtainUpdateOp3);
+                    } else {
+                        postponeAndUpdateViewHolders(updateOpObtainUpdateOp3);
+                    }
+                } else if (i33 != 4) {
+                    if (i33 == i) {
+                        postponeAndUpdateViewHolders(updateOpObtainUpdateOp3);
+                    }
+                    updateOp = updateOpObtainUpdateOp;
+                } else {
+                    int i38 = updateOpObtainUpdateOp3.positionStart;
+                    int i39 = updateOpObtainUpdateOp3.itemCount + i38;
+                    int i40 = i38;
+                    int i41 = 0;
+                    char c3 = 65535;
+                    while (i38 < i39) {
+                        RecyclerView recyclerView2 = RecyclerView.this;
+                        RecyclerView.ViewHolder viewHolderFindViewHolderForPosition2 = recyclerView2.findViewHolderForPosition(i38, true);
+                        if (viewHolderFindViewHolderForPosition2 == 0) {
+                            updateOp2 = updateOpObtainUpdateOp;
+                        } else {
+                            boolean zIsHidden = recyclerView2.mChildHelper.isHidden(viewHolderFindViewHolderForPosition2.itemView);
+                            updateOp2 = viewHolderFindViewHolderForPosition2;
+                            if (zIsHidden) {
+                                int[] iArr2 = RecyclerView.NESTED_SCROLLING_ATTRS;
+                                updateOp2 = null;
+                            }
+                        }
+                        if (updateOp2 != null || canFindInPreLayout(i38)) {
+                            if (c3 == 0) {
+                                dispatchAndUpdateViewHolders(obtainUpdateOp(4, i40, i41, updateOpObtainUpdateOp3.payload));
+                                i40 = i38;
+                                i41 = 0;
+                            }
+                            c3 = 1;
+                        } else {
+                            if (c3 == 1) {
+                                postponeAndUpdateViewHolders(obtainUpdateOp(4, i40, i41, updateOpObtainUpdateOp3.payload));
+                                i40 = i38;
+                                i41 = 0;
+                            }
+                            c3 = 0;
+                        }
+                        i41++;
+                        i38++;
+                        updateOpObtainUpdateOp = null;
+                    }
+                    if (i41 != updateOpObtainUpdateOp3.itemCount) {
+                        Object obj = updateOpObtainUpdateOp3.payload;
+                        recycleUpdateOp(updateOpObtainUpdateOp3);
+                        updateOpObtainUpdateOp3 = obtainUpdateOp(4, i40, i41, obj);
+                    }
+                    if (c3 == 0) {
+                        dispatchAndUpdateViewHolders(updateOpObtainUpdateOp3);
+                    } else {
+                        postponeAndUpdateViewHolders(updateOpObtainUpdateOp3);
+                    }
+                    updateOp = null;
+                }
+            } else {
+                updateOp = updateOpObtainUpdateOp;
+                postponeAndUpdateViewHolders(updateOpObtainUpdateOp3);
+            }
+            i32++;
+            updateOpObtainUpdateOp = updateOp;
+            i = 8;
+        }
+        this.mPendingUpdates.clear();
     }
 
     public final void recycleUpdateOp(UpdateOp updateOp) {

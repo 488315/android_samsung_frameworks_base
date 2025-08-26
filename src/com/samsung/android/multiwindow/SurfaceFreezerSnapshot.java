@@ -94,12 +94,12 @@ public class SurfaceFreezerSnapshot implements Parcelable {
             Log.e(TAG, "createSnapshotBitmapWithWallpaper: failed, snapshot=" + this.mSnapshotBitmap + ", wallpaper=" + this.mWallpaperBitmap);
             return null;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), this.mSnapshotBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), this.mSnapshotBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         canvas.drawBitmap(this.mWallpaperBitmap, 0.0f, 0.0f, (Paint) null);
         canvas.drawColor(i);
         canvas.drawBitmap(this.mSnapshotBitmap, 0.0f, 0.0f, (Paint) null);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     @Override // android.os.Parcelable

@@ -37,13 +37,13 @@ public final class SimRefreshResult {
 
     public static final ArrayList<SimRefreshResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SimRefreshResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SimRefreshResult simRefreshResult = new SimRefreshResult();
-            simRefreshResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            simRefreshResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(simRefreshResult);
         }
         return arrayList;

@@ -26,7 +26,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelStore implements VolumeObservable, VolumeObserver {
     public boolean isWorking;
@@ -36,7 +35,6 @@ public final class VolumePanelStore implements VolumeObservable, VolumeObserver 
     public VolumePanelState currentState = new VolumePanelState.Builder().build();
     public final VolumePanelReducer reducer = new VolumePanelReducer();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,10 +87,10 @@ public final class VolumePanelStore implements VolumeObservable, VolumeObserver 
         long j2;
         VolumePanelAction volumePanelAction2 = volumePanelAction;
         String str = "VolumePanelStore#onChanged(" + volumePanelAction2.getActionType() + ")";
-        boolean isTagEnabled = Trace.isTagEnabled(4096L);
+        boolean zIsTagEnabled = Trace.isTagEnabled(4096L);
         VolumePanelReducer volumePanelReducer = this.reducer;
         LogWrapper logWrapper = this.logWrapper;
-        boolean z = isTagEnabled;
+        boolean z = zIsTagEnabled;
         if (!z) {
             if (this.isWorking) {
                 throw new DispatchException("use handler!!");
@@ -112,9 +110,9 @@ public final class VolumePanelStore implements VolumeObservable, VolumeObserver 
                     volumePanelAction3 = volumePanelAction2;
                 }
             }
-            VolumePanelState reduce = volumePanelReducer.reduce(volumePanelAction2, this.currentState);
+            VolumePanelState volumePanelStateReduce = volumePanelReducer.reduce(volumePanelAction2, this.currentState);
             if (volumePanelAction3.getActionType() != VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON) {
-                logWrapper.d("VolumePanelStore", "  > New State : [" + reduce.getStateType() + "]");
+                logWrapper.d("VolumePanelStore", "  > New State : [" + volumePanelStateReduce.getStateType() + "]");
             }
             ArrayList arrayList2 = this.middlewares;
             int size2 = arrayList2.size();
@@ -122,72 +120,72 @@ public final class VolumePanelStore implements VolumeObservable, VolumeObserver 
             while (i2 < size2) {
                 Object obj2 = arrayList2.get(i2);
                 i2++;
-                ((VolumeMiddleware) obj2).applyState(reduce);
+                ((VolumeMiddleware) obj2).applyState(volumePanelStateReduce);
             }
-            if (reduce.getStateType() == VolumePanelState.StateType.STATE_NO_DISPATCH) {
-                this.currentState = reduce;
+            if (volumePanelStateReduce.getStateType() == VolumePanelState.StateType.STATE_NO_DISPATCH) {
+                this.currentState = volumePanelStateReduce;
                 return;
             } else {
-                this.currentState = reduce;
-                dispatch(reduce);
+                this.currentState = volumePanelStateReduce;
+                dispatch(volumePanelStateReduce);
                 return;
             }
         }
         Trace.traceBegin(4096L, str);
         try {
-        } catch (Throwable th) {
-            th = th;
-            j = 4096;
-        }
-        try {
-            if (this.isWorking) {
-                throw new DispatchException("use handler!!");
-            }
-            if (volumePanelAction2.getActionType() != VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON) {
-                VolumePanelAction.ActionType actionType = volumePanelAction2.getActionType();
-                VolumePanelState.StateType stateType = this.currentState.getStateType();
-                j2 = 4096;
-                logWrapper.d("VolumePanelStore", "dispatch [" + actionType + " with [" + stateType + "], currentAction={" + volumePanelAction2 + "}, currentState={" + this.currentState + "}");
-            } else {
-                j2 = 4096;
-            }
-            ArrayList arrayList3 = this.middlewares;
-            int size3 = arrayList3.size();
-            VolumePanelAction volumePanelAction4 = volumePanelAction2;
-            int i3 = 0;
-            while (i3 < size3) {
-                Object obj3 = arrayList3.get(i3);
-                i3++;
-                volumePanelAction2 = (VolumePanelAction) ((VolumeMiddleware) obj3).apply(volumePanelAction4);
-                if (!Intrinsics.areEqual(volumePanelAction2, volumePanelAction4)) {
-                    volumePanelAction4 = volumePanelAction2;
+            try {
+                if (this.isWorking) {
+                    throw new DispatchException("use handler!!");
                 }
+                if (volumePanelAction2.getActionType() != VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON) {
+                    VolumePanelAction.ActionType actionType = volumePanelAction2.getActionType();
+                    VolumePanelState.StateType stateType = this.currentState.getStateType();
+                    j2 = 4096;
+                    logWrapper.d("VolumePanelStore", "dispatch [" + actionType + " with [" + stateType + "], currentAction={" + volumePanelAction2 + "}, currentState={" + this.currentState + "}");
+                } else {
+                    j2 = 4096;
+                }
+                ArrayList arrayList3 = this.middlewares;
+                int size3 = arrayList3.size();
+                VolumePanelAction volumePanelAction4 = volumePanelAction2;
+                int i3 = 0;
+                while (i3 < size3) {
+                    Object obj3 = arrayList3.get(i3);
+                    i3++;
+                    volumePanelAction2 = (VolumePanelAction) ((VolumeMiddleware) obj3).apply(volumePanelAction4);
+                    if (!Intrinsics.areEqual(volumePanelAction2, volumePanelAction4)) {
+                        volumePanelAction4 = volumePanelAction2;
+                    }
+                }
+                VolumePanelState volumePanelStateReduce2 = volumePanelReducer.reduce(volumePanelAction2, this.currentState);
+                if (volumePanelAction4.getActionType() != VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON) {
+                    logWrapper.d("VolumePanelStore", "  > New State : [" + volumePanelStateReduce2.getStateType() + "]");
+                }
+                ArrayList arrayList4 = this.middlewares;
+                int size4 = arrayList4.size();
+                int i4 = 0;
+                while (i4 < size4) {
+                    Object obj4 = arrayList4.get(i4);
+                    i4++;
+                    ((VolumeMiddleware) obj4).applyState(volumePanelStateReduce2);
+                }
+                if (volumePanelStateReduce2.getStateType() != VolumePanelState.StateType.STATE_NO_DISPATCH) {
+                    this.currentState = volumePanelStateReduce2;
+                    dispatch(volumePanelStateReduce2);
+                } else {
+                    this.currentState = volumePanelStateReduce2;
+                }
+                Unit unit = Unit.INSTANCE;
+                Trace.traceEnd(j2);
+            } catch (Throwable th) {
+                th = th;
+                j = z;
+                Trace.traceEnd(j);
+                throw th;
             }
-            VolumePanelState reduce2 = volumePanelReducer.reduce(volumePanelAction2, this.currentState);
-            if (volumePanelAction4.getActionType() != VolumePanelAction.ActionType.ACTION_PLAY_SOUND_ON) {
-                logWrapper.d("VolumePanelStore", "  > New State : [" + reduce2.getStateType() + "]");
-            }
-            ArrayList arrayList4 = this.middlewares;
-            int size4 = arrayList4.size();
-            int i4 = 0;
-            while (i4 < size4) {
-                Object obj4 = arrayList4.get(i4);
-                i4++;
-                ((VolumeMiddleware) obj4).applyState(reduce2);
-            }
-            if (reduce2.getStateType() != VolumePanelState.StateType.STATE_NO_DISPATCH) {
-                this.currentState = reduce2;
-                dispatch(reduce2);
-            } else {
-                this.currentState = reduce2;
-            }
-            Unit unit = Unit.INSTANCE;
-            Trace.traceEnd(j2);
         } catch (Throwable th2) {
             th = th2;
-            j = z;
-            Trace.traceEnd(j);
-            throw th;
+            j = 4096;
         }
     }
 }

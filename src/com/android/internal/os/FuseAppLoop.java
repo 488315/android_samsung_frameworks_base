@@ -71,14 +71,14 @@ public class FuseAppLoop implements Handler.Callback {
         this.mMountPointId = i;
         threadFactory = threadFactory == null ? sDefaultThreadFactory : threadFactory;
         this.mInstance = native_new(parcelFileDescriptor.detachFd());
-        Thread newThread = threadFactory.newThread(new Runnable() { // from class: com.android.internal.os.FuseAppLoop$$ExternalSyntheticLambda0
+        Thread threadNewThread = threadFactory.newThread(new Runnable() { // from class: com.android.internal.os.FuseAppLoop$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FuseAppLoop.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
-        this.mThread = newThread;
-        newThread.start();
+        this.mThread = threadNewThread;
+        threadNewThread.start();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -137,112 +137,105 @@ public class FuseAppLoop implements Handler.Callback {
         byte[] bArr = args.data;
         try {
             i = message.what;
-            try {
-            } catch (Exception e) {
-                e = e;
+        } catch (Exception e) {
+            e = e;
+            z = true;
+        }
+        try {
+            if (i != 1) {
+                z = true;
+                if (i == 3) {
+                    long jOnGetSize = callbackEntry.callback.onGetSize();
+                    synchronized (this.mLock) {
+                        long j4 = this.mInstance;
+                        if (j4 != 0) {
+                            native_replyGetAttr(j4, j2, j, jOnGetSize);
+                        }
+                        recycleLocked(args);
+                    }
+                } else if (i == 18) {
+                    callbackEntry.callback.onRelease();
+                    synchronized (this.mLock) {
+                        long j5 = this.mInstance;
+                        if (j5 != 0) {
+                            native_replySimple(j5, j2, 0);
+                        }
+                        this.mCallbackMap.remove(checkInode(j));
+                        this.mBytesMap.stopUsing(j);
+                        recycleLocked(args);
+                    }
+                } else if (i == 20) {
+                    callbackEntry.callback.onFsync();
+                    synchronized (this.mLock) {
+                        long j6 = this.mInstance;
+                        if (j6 != 0) {
+                            native_replySimple(j6, j2, 0);
+                        }
+                        recycleLocked(args);
+                    }
+                } else if (i == 15) {
+                    int iOnRead = callbackEntry.callback.onRead(j3, i2, bArr);
+                    synchronized (this.mLock) {
+                        long j7 = this.mInstance;
+                        if (j7 != 0) {
+                            native_replyRead(j7, j2, iOnRead, bArr);
+                        }
+                        recycleLocked(args);
+                    }
+                } else if (i == 16) {
+                    int iOnWrite = callbackEntry.callback.onWrite(j3, i2, bArr);
+                    synchronized (this.mLock) {
+                        long j8 = this.mInstance;
+                        if (j8 != 0) {
+                            native_replyWrite(j8, j2, iOnWrite);
+                        }
+                        recycleLocked(args);
+                    }
+                } else {
+                    throw new IllegalArgumentException("Unknown FUSE command: " + message.what);
+                }
+            } else {
+                z = true;
+                long jOnGetSize2 = callbackEntry.callback.onGetSize();
                 synchronized (this.mLock) {
-                    Log.e(TAG, "", e);
-                    replySimpleLocked(j2, getError(e));
+                    long j9 = this.mInstance;
+                    if (j9 != 0) {
+                        native_replyLookup(j9, j2, j, jOnGetSize2);
+                    }
                     recycleLocked(args);
                 }
-                return z;
             }
         } catch (Exception e2) {
             e = e2;
-            z = true;
-        }
-        if (i == 1) {
-            z = true;
-            long onGetSize = callbackEntry.callback.onGetSize();
             synchronized (this.mLock) {
-                long j4 = this.mInstance;
-                if (j4 != 0) {
-                    native_replyLookup(j4, j2, j, onGetSize);
-                }
+                Log.e(TAG, "", e);
+                replySimpleLocked(j2, getError(e));
                 recycleLocked(args);
             }
             return z;
         }
-        z = true;
-        if (i == 3) {
-            long onGetSize2 = callbackEntry.callback.onGetSize();
-            synchronized (this.mLock) {
-                long j5 = this.mInstance;
-                if (j5 != 0) {
-                    native_replyGetAttr(j5, j2, j, onGetSize2);
-                }
-                recycleLocked(args);
-            }
-            return z;
-        }
-        if (i == 18) {
-            callbackEntry.callback.onRelease();
-            synchronized (this.mLock) {
-                long j6 = this.mInstance;
-                if (j6 != 0) {
-                    native_replySimple(j6, j2, 0);
-                }
-                this.mCallbackMap.remove(checkInode(j));
-                this.mBytesMap.stopUsing(j);
-                recycleLocked(args);
-            }
-            return z;
-        }
-        if (i == 20) {
-            callbackEntry.callback.onFsync();
-            synchronized (this.mLock) {
-                long j7 = this.mInstance;
-                if (j7 != 0) {
-                    native_replySimple(j7, j2, 0);
-                }
-                recycleLocked(args);
-            }
-            return z;
-        }
-        if (i == 15) {
-            int onRead = callbackEntry.callback.onRead(j3, i2, bArr);
-            synchronized (this.mLock) {
-                long j8 = this.mInstance;
-                if (j8 != 0) {
-                    native_replyRead(j8, j2, onRead, bArr);
-                }
-                recycleLocked(args);
-            }
-            return z;
-        }
-        if (i == 16) {
-            int onWrite = callbackEntry.callback.onWrite(j3, i2, bArr);
-            synchronized (this.mLock) {
-                long j9 = this.mInstance;
-                if (j9 != 0) {
-                    native_replyWrite(j9, j2, onWrite);
-                }
-                recycleLocked(args);
-            }
-            return z;
-        }
-        throw new IllegalArgumentException("Unknown FUSE command: " + message.what);
+        return z;
     }
 
     private void onCommand(int i, long j, long j2, long j3, int i2, byte[] bArr) {
-        Args pop;
+        Args argsPop;
         synchronized (this.mLock) {
             try {
                 if (this.mArgsPool.size() == 0) {
-                    pop = new Args();
+                    argsPop = new Args();
                 } else {
-                    pop = this.mArgsPool.pop();
+                    argsPop = this.mArgsPool.pop();
                 }
-                pop.unique = j;
-                pop.inode = j2;
-                pop.offset = j3;
-                pop.size = i2;
-                pop.data = bArr;
-                pop.entry = getCallbackEntryOrThrowLocked(j2);
+                argsPop.unique = j;
+                argsPop.inode = j2;
+                argsPop.offset = j3;
+                argsPop.size = i2;
+                argsPop.data = bArr;
+                argsPop.entry = getCallbackEntryOrThrowLocked(j2);
             } catch (Exception e) {
                 replySimpleLocked(j, getError(e));
             }
-            if (!pop.entry.handler.sendMessage(Message.obtain(pop.entry.handler, i, 0, 0, pop))) {
+            if (!argsPop.entry.handler.sendMessage(Message.obtain(argsPop.entry.handler, i, 0, 0, argsPop))) {
                 throw new ErrnoException("onCommand", OsConstants.EBADF);
             }
         }
@@ -253,14 +246,14 @@ public class FuseAppLoop implements Handler.Callback {
         synchronized (this.mLock) {
             try {
                 callbackEntryOrThrowLocked = getCallbackEntryOrThrowLocked(j2);
-            } catch (ErrnoException e) {
-                e = e;
-            }
-            try {
+                try {
+                } catch (ErrnoException e) {
+                    e = e;
+                    replySimpleLocked(j, getError(e));
+                    return null;
+                }
             } catch (ErrnoException e2) {
                 e = e2;
-                replySimpleLocked(j, getError(e));
-                return null;
             }
             if (callbackEntryOrThrowLocked.opened) {
                 throw new ErrnoException("onOpen", OsConstants.EMFILE);

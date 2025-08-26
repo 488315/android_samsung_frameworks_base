@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.View;
 import com.android.keyguard.KeyguardPluginControllerImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
@@ -14,14 +15,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import com.samsung.android.multiwindow.MultiWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SnackbarController {
     public final DismissedCallback cb;
     public final Context context;
     public final int displayId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DismissedCallback {
     }
 
@@ -31,7 +30,7 @@ public final class SnackbarController {
         this.cb = dismissedCallback;
     }
 
-    public final void showScreenshotError(final View view, SemScreenshotResult semScreenshotResult) {
+    public final void showScreenshotError(final View view, SemScreenshotResult semScreenshotResult) throws Resources.NotFoundException {
         int i = semScreenshotResult.failedReason;
         if ((i & 16) != 0) {
             String string = this.context.getResources().getString(R.string.disallow_screenshots_security_flag_single_window);
@@ -39,26 +38,26 @@ public final class SnackbarController {
             if (multiWindowModeStates == 1 || multiWindowModeStates == 2) {
                 string = this.context.getResources().getString(R.string.disallow_screenshots_security_flag_multi_window);
             }
-            Snackbar makeInternal = Snackbar.makeInternal(null, view, string, -1, -1);
-            makeInternal.addCallback(new BaseTransientBottomBar.BaseCallback() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarSecurityFlag$1
+            Snackbar snackbarMakeInternal = Snackbar.makeInternal(null, view, string, -1, -1);
+            snackbarMakeInternal.addCallback(new BaseTransientBottomBar.BaseCallback() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarSecurityFlag$1
                 @Override // com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
                 public final void onDismissed(BaseTransientBottomBar baseTransientBottomBar, int i2) {
-                    ScreenshotController.access$detachSemScreenshotLayoutToWindow(((ScreenshotController$showScreenshotErrorMessage$2$1$1) SnackbarController.this.cb).this$0);
+                    ScreenshotController.access$detachSemScreenshotLayoutToWindow(((ScreenshotController$showScreenshotErrorMessage$2$1$1) this.this$0.cb).this$0);
                     ScreenshotController.isSnackBarShowing = false;
                 }
             });
-            makeInternal.show();
+            snackbarMakeInternal.show();
             return;
         }
         if ((i & 32) == 0) {
             ScreenshotController.access$detachSemScreenshotLayoutToWindow(((ScreenshotController$showScreenshotErrorMessage$2$1$1) this.cb).this$0);
             ScreenshotController.isSnackBarShowing = false;
         } else {
-            Snackbar makeInternal2 = Snackbar.makeInternal(null, view, this.context.getResources().getString(R.string.disallow_screenshots_mdm), -1, -1);
-            makeInternal2.setAction(this.context.getResources().getString(R.string.view_admin_apps), new View.OnClickListener() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarMdm$1
+            Snackbar snackbarMakeInternal2 = Snackbar.makeInternal(null, view, this.context.getResources().getString(R.string.disallow_screenshots_mdm), -1, -1);
+            snackbarMakeInternal2.setAction(this.context.getResources().getString(R.string.view_admin_apps), new View.OnClickListener() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarMdm$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    SnackbarController snackbarController = SnackbarController.this;
+                    SnackbarController snackbarController = this.this$0;
                     Context context = view.getContext();
                     snackbarController.getClass();
                     Intent intent = new Intent();
@@ -73,14 +72,14 @@ public final class SnackbarController {
                     }
                 }
             });
-            makeInternal2.addCallback(new BaseTransientBottomBar.BaseCallback() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarMdm$2
+            snackbarMakeInternal2.addCallback(new BaseTransientBottomBar.BaseCallback() { // from class: com.android.systemui.screenshot.sep.SnackbarController$showSnackBarMdm$2
                 @Override // com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
                 public final void onDismissed(BaseTransientBottomBar baseTransientBottomBar, int i2) {
-                    ScreenshotController.access$detachSemScreenshotLayoutToWindow(((ScreenshotController$showScreenshotErrorMessage$2$1$1) SnackbarController.this.cb).this$0);
+                    ScreenshotController.access$detachSemScreenshotLayoutToWindow(((ScreenshotController$showScreenshotErrorMessage$2$1$1) this.this$0.cb).this$0);
                     ScreenshotController.isSnackBarShowing = false;
                 }
             });
-            makeInternal2.show();
+            snackbarMakeInternal2.show();
         }
     }
 }

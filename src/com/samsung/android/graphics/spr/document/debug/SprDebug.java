@@ -39,14 +39,14 @@ public class SprDebug {
         IsDebug = mDebugLevel.intValue() >= 1;
     }
 
-    public void dumpPNG(SprDocument sprDocument, int i, int i2, int i3) {
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-        sprDocument.draw(new Canvas(createBitmap), i, i2, 0, i3);
+    public void dumpPNG(SprDocument sprDocument, int i, int i2, int i3) throws IOException {
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        sprDocument.draw(new Canvas(bitmapCreateBitmap), i, i2, 0, i3);
         try {
             File file = new File("/sdcard/spr_debug");
             if (file.mkdir() || file.isDirectory()) {
                 FileOutputStream fileOutputStream = new FileOutputStream(new File(file, String.valueOf(sprDocument.hashCode() % 10000) + ".png"));
-                createBitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+                bitmapCreateBitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
                 fileOutputStream.close();
             }
         } catch (FileNotFoundException e) {

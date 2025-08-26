@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -68,7 +69,7 @@ abstract class MediaBufferBase implements MediaBuffer {
         this.align = align;
     }
 
-    public MediaBufferBase(Parcel parcel) {
+    public MediaBufferBase(Parcel parcel) throws ClassNotFoundException, IOException {
         this.sharedCount = new AtomicInteger(0);
         this.sharedObj = new HashSet();
         this.flags = 0;
@@ -145,13 +146,13 @@ abstract class MediaBufferBase implements MediaBuffer {
         return Arrays.stream(iArr).allMatch(new IntPredicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda5
             @Override // java.util.function.IntPredicate
             public final boolean test(int i) {
-                return MediaBufferBase.this.m9510x14a22c8(i);
+                return this.f$0.m9523x14a22c8(i);
             }
         });
     }
 
     /* renamed from: lambda$containFlags$0$com-samsung-android-sume-core-buffer-MediaBufferBase, reason: not valid java name */
-    /* synthetic */ boolean m9510x14a22c8(int i) {
+    /* synthetic */ boolean m9523x14a22c8(int i) {
         return (this.flags & i) != 0;
     }
 
@@ -174,29 +175,29 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public void setExtra(Map<String, Object> map) {
-        HashMap<String, Object> hashMap = this.extra;
-        if (hashMap == map) {
+        HashMap<String, Object> map2 = this.extra;
+        if (map2 == map) {
             return;
         }
-        hashMap.putAll(map);
+        map2.putAll(map);
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public void addExtra(Map<String, Object> map) {
-        HashMap<String, Object> hashMap = this.extra;
-        if (hashMap == map) {
+        HashMap<String, Object> map2 = this.extra;
+        if (map2 == map) {
             return;
         }
-        hashMap.putAll((Map) map.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda2
+        map2.putAll((Map) map.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return MediaBufferBase.this.m9509x2f0e598b((Map.Entry) obj);
+                return this.f$0.m9522x2f0e598b((Map.Entry) obj);
             }
         }).collect(Collectors.toMap(new MediaBufferBase$$ExternalSyntheticLambda3(), new MediaBufferBase$$ExternalSyntheticLambda4())));
     }
 
     /* renamed from: lambda$addExtra$1$com-samsung-android-sume-core-buffer-MediaBufferBase, reason: not valid java name */
-    /* synthetic */ boolean m9509x2f0e598b(Map.Entry entry) {
+    /* synthetic */ boolean m9522x2f0e598b(Map.Entry entry) {
         return !this.extra.containsKey(entry.getKey());
     }
 
@@ -225,9 +226,7 @@ abstract class MediaBufferBase implements MediaBuffer {
         return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda7
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(((HashMap) obj).containsKey(str));
-                return valueOf;
+                return Boolean.valueOf(((HashMap) obj).containsKey(str));
             }
         }).orElse(false)).booleanValue();
     }
@@ -237,20 +236,18 @@ abstract class MediaBufferBase implements MediaBuffer {
         return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda1
+                return Boolean.valueOf(Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda1
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj2) {
-                        return MediaBufferBase.lambda$containsAnyExtra$3(r1, (String) obj2);
+                        return MediaBufferBase.lambda$containsAnyExtra$3(map, (String) obj2);
                     }
                 }));
-                return valueOf;
             }
         }).orElse(false)).booleanValue();
     }
 
-    static /* synthetic */ boolean lambda$containsAnyExtra$3(HashMap hashMap, String str) {
-        Stream stream = hashMap.keySet().stream();
+    static /* synthetic */ boolean lambda$containsAnyExtra$3(HashMap map, String str) {
+        Stream stream = map.keySet().stream();
         Objects.requireNonNull(str);
         return stream.anyMatch(new OverlayManagerExt$$ExternalSyntheticLambda4(str));
     }
@@ -260,26 +257,24 @@ abstract class MediaBufferBase implements MediaBuffer {
         return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda10
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Arrays.stream(strArr).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda9
+                return Boolean.valueOf(Arrays.stream(strArr).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda9
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj2) {
-                        return MediaBufferBase.lambda$containsAllExtra$5(r1, (String) obj2);
+                        return MediaBufferBase.lambda$containsAllExtra$5(map, (String) obj2);
                     }
                 }));
-                return valueOf;
             }
         }).orElse(false)).booleanValue();
     }
 
-    static /* synthetic */ boolean lambda$containsAllExtra$5(HashMap hashMap, String str) {
-        Stream stream = hashMap.keySet().stream();
+    static /* synthetic */ boolean lambda$containsAllExtra$5(HashMap map, String str) {
+        Stream stream = map.keySet().stream();
         Objects.requireNonNull(str);
         return stream.anyMatch(new OverlayManagerExt$$ExternalSyntheticLambda4(str));
     }
 
     /* renamed from: lambda$transformDataTo$7$com-samsung-android-sume-core-buffer-MediaBufferBase, reason: not valid java name */
-    /* synthetic */ void m9511x9603d8fd(Object obj) {
+    /* synthetic */ void m9524x9603d8fd(Object obj) {
         this.internalBuffers.add(obj);
     }
 
@@ -288,7 +283,7 @@ abstract class MediaBufferBase implements MediaBuffer {
             BufferExtension.putInternalBufferHandler(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda12
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    MediaBufferBase.this.m9511x9603d8fd(obj);
+                    this.f$0.m9524x9603d8fd(obj);
                 }
             });
             return (V) BufferExtension.transform(getFormat(), t, cls);
@@ -304,9 +299,7 @@ abstract class MediaBufferBase implements MediaBuffer {
         return ((Boolean) Optional.ofNullable(getDataClass()).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda11
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(BufferExtension.isRequiredToRelease((Class) obj));
-                return valueOf;
+                return Boolean.valueOf(BufferExtension.isRequiredToRelease((Class) obj));
             }
         }).orElse(false)).booleanValue();
     }
@@ -321,9 +314,9 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public void release() {
-        HashMap<String, Object> hashMap = this.extra;
-        if (hashMap != null) {
-            hashMap.clear();
+        HashMap<String, Object> map = this.extra;
+        if (map != null) {
+            map.clear();
         }
         this.format = null;
         this.extra = null;
@@ -347,8 +340,8 @@ abstract class MediaBufferBase implements MediaBuffer {
         try {
             MediaBuffer mediaBuffer = (MediaBuffer) clone();
             if (isDataShared()) {
-                int incrementAndGet = this.sharedCount.incrementAndGet();
-                Log.d(TAG, "shared count increased: " + incrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+                int iIncrementAndGet = this.sharedCount.incrementAndGet();
+                Log.d(TAG, "shared count increased: " + iIncrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
             }
             return mediaBuffer;
         } catch (CloneNotSupportedException e) {

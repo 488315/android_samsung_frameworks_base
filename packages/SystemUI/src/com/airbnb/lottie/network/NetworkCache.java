@@ -4,11 +4,11 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import com.airbnb.lottie.L$$ExternalSyntheticLambda0;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NetworkCache {
     public final LottieNetworkCacheProvider cacheProvider;
@@ -17,23 +17,23 @@ public class NetworkCache {
         this.cacheProvider = lottieNetworkCacheProvider;
     }
 
-    public static String filenameForUrl(String str, FileExtension fileExtension, boolean z) {
+    public static String filenameForUrl(String str, FileExtension fileExtension, boolean z) throws NoSuchAlgorithmException {
         String str2 = z ? ".temp" + fileExtension.extension : fileExtension.extension;
-        String replaceAll = str.replaceAll("\\W+", "");
+        String strReplaceAll = str.replaceAll("\\W+", "");
         int length = 242 - str2.length();
-        if (replaceAll.length() > length) {
+        if (strReplaceAll.length() > length) {
             try {
-                byte[] digest = MessageDigest.getInstance("MD5").digest(replaceAll.getBytes());
+                byte[] bArrDigest = MessageDigest.getInstance("MD5").digest(strReplaceAll.getBytes());
                 StringBuilder sb = new StringBuilder();
-                for (byte b : digest) {
+                for (byte b : bArrDigest) {
                     sb.append(String.format("%02x", Byte.valueOf(b)));
                 }
-                replaceAll = sb.toString();
+                strReplaceAll = sb.toString();
             } catch (NoSuchAlgorithmException unused) {
-                replaceAll = replaceAll.substring(0, length);
+                strReplaceAll = strReplaceAll.substring(0, length);
             }
         }
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("lottie_cache_", replaceAll, str2);
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("lottie_cache_", strReplaceAll, str2);
     }
 
     public final File parentDir() {
@@ -47,20 +47,20 @@ public class NetworkCache {
         return file;
     }
 
-    public final File writeTempCacheFile(String str, InputStream inputStream, FileExtension fileExtension) {
+    public final File writeTempCacheFile(String str, InputStream inputStream, FileExtension fileExtension) throws NoSuchAlgorithmException, IOException {
         File file = new File(parentDir(), filenameForUrl(str, fileExtension, true));
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             try {
                 byte[] bArr = new byte[1024];
                 while (true) {
-                    int read = inputStream.read(bArr);
-                    if (read == -1) {
+                    int i = inputStream.read(bArr);
+                    if (i == -1) {
                         fileOutputStream.flush();
                         fileOutputStream.close();
                         return file;
                     }
-                    fileOutputStream.write(bArr, 0, read);
+                    fileOutputStream.write(bArr, 0, i);
                 }
             } catch (Throwable th) {
                 fileOutputStream.close();

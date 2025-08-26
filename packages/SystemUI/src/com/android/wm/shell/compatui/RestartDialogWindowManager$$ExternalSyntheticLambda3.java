@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Pair;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class RestartDialogWindowManager$$ExternalSyntheticLambda3 implements Consumer {
     public final /* synthetic */ RestartDialogWindowManager f$0;
@@ -27,9 +26,9 @@ public final /* synthetic */ class RestartDialogWindowManager$$ExternalSynthetic
             restartDialogWindowManager.mAnimationController.startExitAnimation(restartDialogWindowManager.mLayout, new RestartDialogWindowManager$$ExternalSyntheticLambda0(restartDialogWindowManager, 4));
         }
         if (bool.booleanValue()) {
-            SharedPreferences.Editor edit = restartDialogWindowManager.mCompatUIConfiguration.mCompatUISharedPreferences.edit();
+            SharedPreferences.Editor editorEdit = restartDialogWindowManager.mCompatUIConfiguration.mCompatUISharedPreferences.edit();
             int i = taskInfo.userId;
-            edit.putBoolean(taskInfo.topActivity.getPackageName() + "@" + i, true).apply();
+            editorEdit.putBoolean(taskInfo.topActivity.getPackageName() + "@" + i, true).apply();
         }
         restartDialogWindowManager.mOnRestartCallback.accept(Pair.create(taskInfo, restartDialogWindowManager.mTaskListener));
     }

@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerAbstract {
     public final String TAG;
@@ -60,13 +59,13 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
         int i7;
         int i8;
         ViewGroup.LayoutParams layoutParams;
-        final MultiTaskingAppCompatUILayout inflateLayout = inflateLayout();
-        this.mLayout = inflateLayout;
+        final MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayoutInflateLayout = inflateLayout();
+        this.mLayout = multiTaskingAppCompatUILayoutInflateLayout;
         MultiTaskingAppCompatUIController multiTaskingAppCompatUIController = this.mMultiTaskingAppCompatUIController;
-        inflateLayout.mWindowManager = this;
-        inflateLayout.mController = multiTaskingAppCompatUIController;
-        inflateLayout.mNaviButtonSize = (int) inflateLayout.getResources().getDimension(R.dimen.mt_app_compat_button_size);
-        MultiTaskingAppCompatUIController multiTaskingAppCompatUIController2 = inflateLayout.mController;
+        multiTaskingAppCompatUILayoutInflateLayout.mWindowManager = this;
+        multiTaskingAppCompatUILayoutInflateLayout.mController = multiTaskingAppCompatUIController;
+        multiTaskingAppCompatUILayoutInflateLayout.mNaviButtonSize = (int) multiTaskingAppCompatUILayoutInflateLayout.getResources().getDimension(R.dimen.mt_app_compat_button_size);
+        MultiTaskingAppCompatUIController multiTaskingAppCompatUIController2 = multiTaskingAppCompatUILayoutInflateLayout.mController;
         multiTaskingAppCompatUIController2.getClass();
         try {
             multiTaskingAppCompatUIController2.mOrientationPolicy = multiTaskingAppCompatUIController2.mActivityTaskManager.getOrientationControlPolicy(UserHandle.getCallingUserId(), multiTaskingAppCompatUIController2.mTaskInfo.baseActivity.getPackageName());
@@ -84,12 +83,12 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
         } catch (RemoteException e2) {
             Log.e("MultiTaskingAppCompatUIController", "Failed to retrieve app compat alignment.", e2);
         }
-        MultiTaskingAppCompatUIController multiTaskingAppCompatUIController3 = inflateLayout.mController;
+        MultiTaskingAppCompatUIController multiTaskingAppCompatUIController3 = multiTaskingAppCompatUILayoutInflateLayout.mController;
         multiTaskingAppCompatUIController3.getClass();
         Rect rect = new Rect(multiTaskingAppCompatUIController3.mTaskInfo.appCompatTaskInfo.topActivityBounds);
-        TextView textView = (TextView) inflateLayout.findViewById(R.id.mt_app_compat_ui_main);
+        TextView textView = (TextView) multiTaskingAppCompatUILayoutInflateLayout.findViewById(R.id.mt_app_compat_ui_main);
         if (textView != null && (layoutParams = textView.getLayoutParams()) != null) {
-            if (MultiTaskingAppCompatUIController.isAlignedVertically(inflateLayout.mController.mTaskInfo)) {
+            if (MultiTaskingAppCompatUIController.isAlignedVertically(multiTaskingAppCompatUILayoutInflateLayout.mController.mTaskInfo)) {
                 layoutParams.height = rect.height();
             } else {
                 layoutParams.width = rect.width();
@@ -97,7 +96,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
             textView.setLayoutParams(layoutParams);
         }
         ArrayList arrayList = new ArrayList(Arrays.asList(Integer.valueOf(R.id.mt_app_compat_fixed_aspect_ratio_shortcut_button), Integer.valueOf(R.id.mt_app_compat_restart_button), Integer.valueOf(R.id.mt_app_compat_rotation_on_button), Integer.valueOf(R.id.mt_app_compat_rotation_off_button)));
-        AccessibilityManager accessibilityManager = inflateLayout.mController.mAccessibilityManager;
+        AccessibilityManager accessibilityManager = multiTaskingAppCompatUILayoutInflateLayout.mController.mAccessibilityManager;
         if (accessibilityManager != null ? accessibilityManager.semIsScreenReaderEnabled() : false) {
             Log.d("MultiTaskingAppCompatUILayout", "ScreenReader was enabled, do not show alignment buttons");
             i = R.id.mt_app_compat_align_bottom_button;
@@ -105,29 +104,29 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
             i3 = R.id.mt_app_compat_align_right_button;
             i4 = R.id.mt_app_compat_align_left_button;
         } else {
-            Rect taskBounds = inflateLayout.mWindowManager.getTaskBounds();
-            int dimension = (int) inflateLayout.getResources().getDimension(17106378);
-            MultiTaskingAppCompatUIController multiTaskingAppCompatUIController4 = inflateLayout.mController;
+            Rect taskBounds = multiTaskingAppCompatUILayoutInflateLayout.mWindowManager.getTaskBounds();
+            int dimension = (int) multiTaskingAppCompatUILayoutInflateLayout.getResources().getDimension(17106379);
+            MultiTaskingAppCompatUIController multiTaskingAppCompatUIController4 = multiTaskingAppCompatUILayoutInflateLayout.mController;
             multiTaskingAppCompatUIController4.getClass();
             Rect rect2 = new Rect(multiTaskingAppCompatUIController4.mTaskInfo.appCompatTaskInfo.topActivityBounds);
-            DisplayLayout displayLayout = inflateLayout.mWindowManager.mDisplayLayout;
+            DisplayLayout displayLayout = multiTaskingAppCompatUILayoutInflateLayout.mWindowManager.mDisplayLayout;
             i = R.id.mt_app_compat_align_bottom_button;
-            boolean isAlignedVertically = MultiTaskingAppCompatUIController.isAlignedVertically(inflateLayout.mController.mTaskInfo);
+            boolean zIsAlignedVertically = MultiTaskingAppCompatUIController.isAlignedVertically(multiTaskingAppCompatUILayoutInflateLayout.mController.mTaskInfo);
             i2 = R.id.mt_app_compat_align_top_button;
             i3 = R.id.mt_app_compat_align_right_button;
-            if (isAlignedVertically) {
-                int height = taskBounds.height();
+            if (zIsAlignedVertically) {
+                int iHeight = taskBounds.height();
                 i4 = R.id.mt_app_compat_align_left_button;
-                int height2 = ((((height - displayLayout.mNavBarFrameHeight) - rect2.height()) - dimension) - (inflateLayout.mNaviButtonSize << 1)) >> 2;
-                inflateLayout.mVerticalMarginFromActivityBounds = height2;
-                if (height2 >= 0) {
+                int iHeight2 = ((((iHeight - displayLayout.mNavBarFrameHeight) - rect2.height()) - dimension) - (multiTaskingAppCompatUILayoutInflateLayout.mNaviButtonSize << 1)) >> 2;
+                multiTaskingAppCompatUILayoutInflateLayout.mVerticalMarginFromActivityBounds = iHeight2;
+                if (iHeight2 >= 0) {
                     arrayList.add(Integer.valueOf(R.id.mt_app_compat_align_top_button));
                     arrayList.add(Integer.valueOf(R.id.mt_app_compat_align_bottom_button));
                 } else {
                     StringBuilder sb = new StringBuilder("Not enough space to show alignment buttons vertically. taskBounds=");
                     sb.append(taskBounds);
                     sb.append(", buttonSize=");
-                    sb.append(inflateLayout.mNaviButtonSize);
+                    sb.append(multiTaskingAppCompatUILayoutInflateLayout.mNaviButtonSize);
                     sb.append(", activityBounds=");
                     sb.append(rect2);
                     sb.append(", statusBarHeight=");
@@ -135,17 +134,17 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     sb.append(", navBarFrameHeight=");
                     sb.append(displayLayout.mNavBarFrameHeight);
                     sb.append(", mVerticalMarginFromActivityBounds=");
-                    RecyclerView$$ExternalSyntheticOutline0.m(inflateLayout.mVerticalMarginFromActivityBounds, "MultiTaskingAppCompatUILayout", sb);
+                    RecyclerView$$ExternalSyntheticOutline0.m(multiTaskingAppCompatUILayoutInflateLayout.mVerticalMarginFromActivityBounds, "MultiTaskingAppCompatUILayout", sb);
                 }
             } else {
                 i4 = R.id.mt_app_compat_align_left_button;
-                int width = taskBounds.width() - (rect2.width() + (inflateLayout.mNaviButtonSize << 1));
-                inflateLayout.mHorizontalMarginFromActivityBounds = width;
-                if (width >= 0) {
+                int iWidth = taskBounds.width() - (rect2.width() + (multiTaskingAppCompatUILayoutInflateLayout.mNaviButtonSize << 1));
+                multiTaskingAppCompatUILayoutInflateLayout.mHorizontalMarginFromActivityBounds = iWidth;
+                if (iWidth >= 0) {
                     arrayList.add(Integer.valueOf(R.id.mt_app_compat_align_left_button));
                     arrayList.add(Integer.valueOf(R.id.mt_app_compat_align_right_button));
                 } else {
-                    Log.d("MultiTaskingAppCompatUILayout", "Not enough space to show alignment buttons, taskBounds=" + taskBounds + ", buttonSize=" + inflateLayout.mNaviButtonSize + ", activityBounds=" + rect2);
+                    Log.d("MultiTaskingAppCompatUILayout", "Not enough space to show alignment buttons, taskBounds=" + taskBounds + ", buttonSize=" + multiTaskingAppCompatUILayoutInflateLayout.mNaviButtonSize + ", activityBounds=" + rect2);
                 }
             }
         }
@@ -155,13 +154,13 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
             Object obj = arrayList.get(i9);
             i9++;
             Integer num = (Integer) obj;
-            View findViewById = inflateLayout.findViewById(num.intValue());
-            if (findViewById instanceof ImageButton) {
-                inflateLayout.mButtons.put(num, (ImageButton) findViewById);
+            View viewFindViewById = multiTaskingAppCompatUILayoutInflateLayout.findViewById(num.intValue());
+            if (viewFindViewById instanceof ImageButton) {
+                multiTaskingAppCompatUILayoutInflateLayout.mButtons.put(num, (ImageButton) viewFindViewById);
             }
         }
-        inflateLayout.mSwitchableButtonContainer = (FrameLayout) inflateLayout.findViewById(R.id.mt_app_compat_switchable_button_container);
-        Iterator it = inflateLayout.mButtons.entrySet().iterator();
+        multiTaskingAppCompatUILayoutInflateLayout.mSwitchableButtonContainer = (FrameLayout) multiTaskingAppCompatUILayoutInflateLayout.findViewById(R.id.mt_app_compat_switchable_button_container);
+        Iterator it = multiTaskingAppCompatUILayoutInflateLayout.mButtons.entrySet().iterator();
         while (it.hasNext()) {
             final ImageButton imageButton = (ImageButton) ((Map.Entry) it.next()).getValue();
             int id = imageButton.getId();
@@ -169,7 +168,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                 public final /* synthetic */ ImageButton val$btn;
 
                 public AnonymousClass2(final ImageButton imageButton2) {
-                    r2 = imageButton2;
+                    imageButton = imageButton2;
                 }
 
                 @Override // android.view.View.OnTouchListener
@@ -178,7 +177,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     if (action != 0 && action != 1) {
                         return false;
                     }
-                    r2.startAnimation(AnimationUtils.loadAnimation(((FrameLayout) MultiTaskingAppCompatUILayout.this).mContext, motionEvent.getAction() == 0 ? R.anim.mt_app_compat_ui_btn_press : R.anim.mt_app_compat_ui_btn_release));
+                    imageButton.startAnimation(AnimationUtils.loadAnimation(((FrameLayout) MultiTaskingAppCompatUILayout.this).mContext, motionEvent.getAction() == 0 ? R.anim.mt_app_compat_ui_btn_press : R.anim.mt_app_compat_ui_btn_release));
                     return false;
                 }
             });
@@ -188,7 +187,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i11 = i10;
-                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                         switch (i11) {
                             case 0:
                                 int i12 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -251,7 +250,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i112 = i11;
-                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                         switch (i112) {
                             case 0:
                                 int i12 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -314,7 +313,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i112 = i12;
-                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                         switch (i112) {
                             case 0:
                                 int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -377,7 +376,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         int i112 = i13;
-                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                         switch (i112) {
                             case 0:
                                 int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -442,7 +441,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view) {
                             int i112 = i14;
-                            MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                            MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                             switch (i112) {
                                 case 0:
                                     int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -510,7 +509,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                             @Override // android.view.View.OnClickListener
                             public final void onClick(View view) {
                                 int i112 = i15;
-                                MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                                MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                                 switch (i112) {
                                     case 0:
                                         int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -577,7 +576,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view) {
                                     int i112 = i16;
-                                    MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                                    MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                                     switch (i112) {
                                         case 0:
                                             int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -643,7 +642,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                                     @Override // android.view.View.OnClickListener
                                     public final void onClick(View view) {
                                         int i112 = i17;
-                                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = inflateLayout;
+                                        MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUILayoutInflateLayout;
                                         switch (i112) {
                                             case 0:
                                                 int i122 = MultiTaskingAppCompatUILayout.$r8$clinit;
@@ -718,8 +717,8 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
             i2 = i7;
             i = i8;
         }
-        inflateLayout.refreshButtonVisibility(false);
-        inflateLayout.getRootView().getViewTreeObserver().registerFrameCommitCallback(inflateLayout.mFrameCommitCallback);
+        multiTaskingAppCompatUILayoutInflateLayout.refreshButtonVisibility(false);
+        multiTaskingAppCompatUILayoutInflateLayout.getRootView().getViewTreeObserver().registerFrameCommitCallback(multiTaskingAppCompatUILayoutInflateLayout.mFrameCommitCallback);
         if (!this.mIsRecreating) {
             MultiTaskingAppCompatUIController multiTaskingAppCompatUIController5 = this.mMultiTaskingAppCompatUIController;
             TaskInfo taskInfo = multiTaskingAppCompatUIController5.mTaskInfo;
@@ -792,9 +791,9 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
             release();
             this.mIsRecreating = true;
         }
-        boolean updateCompatInfo = super.updateCompatInfo(taskInfo, taskListener, z);
+        boolean zUpdateCompatInfo = super.updateCompatInfo(taskInfo, taskListener, z);
         this.mIsRecreating = false;
-        return updateCompatInfo;
+        return zUpdateCompatInfo;
     }
 
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract
@@ -820,7 +819,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                 }
                 MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder = new MultiTaskingAppCompatUIUtil$TipPopupBuilder(multiTaskingAppCompatUILayout);
                 multiTaskingAppCompatUIUtil$TipPopupBuilder.mMessage = this.mContext.getResources().getString(R.string.restart_button_guide_onboarding);
-                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3225$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter.INSTANCE, multiTaskingAppCompatUIUtil$TipPopupBuilder).show();
+                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3242$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter.INSTANCE, multiTaskingAppCompatUIUtil$TipPopupBuilder).show();
             }
         }
     }

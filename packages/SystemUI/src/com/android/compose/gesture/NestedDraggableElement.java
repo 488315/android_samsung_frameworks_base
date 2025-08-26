@@ -10,7 +10,6 @@ import com.android.compose.gesture.NestedDraggableNode;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class NestedDraggableElement extends ModifierNodeElement<NestedDraggableRootNode> {
     public final NestedDraggable draggable;
@@ -44,9 +43,9 @@ final class NestedDraggableElement extends ModifierNodeElement<NestedDraggableRo
     }
 
     public final int hashCode() {
-        int hashCode = (this.orientation.hashCode() + (this.draggable.hashCode() * 31)) * 31;
+        int iHashCode = (this.orientation.hashCode() + (this.draggable.hashCode() * 31)) * 31;
         OverscrollEffect overscrollEffect = this.overscrollEffect;
-        return Boolean.hashCode(this.nestedDragsEnabled) + TransitionData$$ExternalSyntheticOutline0.m((hashCode + (overscrollEffect == null ? 0 : overscrollEffect.hashCode())) * 31, 31, this.enabled);
+        return Boolean.hashCode(this.nestedDragsEnabled) + TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (overscrollEffect == null ? 0 : overscrollEffect.hashCode())) * 31, 31, this.enabled);
     }
 
     public final String toString() {

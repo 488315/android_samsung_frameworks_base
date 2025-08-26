@@ -60,9 +60,9 @@ public interface IUsageStatsWatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUsageStatsWatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUsageStatsWatcher)) {
-                return (IUsageStatsWatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUsageStatsWatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUsageStatsWatcher)) {
+                return (IUsageStatsWatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,24 +97,24 @@ public interface IUsageStatsWatcher extends IInterface {
             if (i == 1) {
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                noteResumeComponent(componentName, intent, readInt, readInt2);
+                noteResumeComponent(componentName, intent, i3, i4);
             } else if (i == 2) {
                 ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                notePauseComponent(componentName2, intent2, readInt3, readInt4);
+                notePauseComponent(componentName2, intent2, i5, i6);
             } else if (i == 3) {
                 ComponentName componentName3 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 Intent intent3 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                noteStopComponent(componentName3, intent3, readInt5, readInt6);
+                noteStopComponent(componentName3, intent3, i7, i8);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -139,46 +139,46 @@ public interface IUsageStatsWatcher extends IInterface {
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
             public void noteResumeComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
             public void notePauseComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
             public void noteStopComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

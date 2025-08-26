@@ -14,6 +14,8 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.view.Choreographer;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import com.airbnb.lottie.RenderMode;
@@ -45,7 +47,6 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LottieDrawable extends Drawable implements Drawable.Callback, Animatable {
     public static final Executor setProgressExecutor = new ThreadPoolExecutor(0, 2, 35, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new LottieThreadFactory());
@@ -92,12 +93,10 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
     public final LottieDrawable$$ExternalSyntheticLambda6 updateProgressRunnable;
     public boolean useSoftwareRendering;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface LazyCompositionTask {
         void run();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum OnVisibleAction {
         NONE,
         PLAY,
@@ -125,7 +124,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
         ?? r3 = new ValueAnimator.AnimatorUpdateListener() { // from class: com.airbnb.lottie.LottieDrawable$$ExternalSyntheticLambda5
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                LottieDrawable lottieDrawable = LottieDrawable.this;
+                LottieDrawable lottieDrawable = this.f$0;
                 Executor executor = LottieDrawable.setProgressExecutor;
                 if (lottieDrawable.asyncUpdates == AsyncUpdates.ENABLED) {
                     lottieDrawable.invalidateSelf();
@@ -142,7 +141,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
         this.updateProgressRunnable = new Runnable() { // from class: com.airbnb.lottie.LottieDrawable$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                LottieDrawable lottieDrawable = LottieDrawable.this;
+                LottieDrawable lottieDrawable = this.f$0;
                 CompositionLayer compositionLayer = lottieDrawable.compositionLayer;
                 if (compositionLayer == null) {
                     return;
@@ -172,12 +171,12 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
                 @Override // com.airbnb.lottie.LottieDrawable.LazyCompositionTask
                 public final void run() {
                     Executor executor = LottieDrawable.setProgressExecutor;
-                    LottieDrawable.this.addValueCallback(keyPath, obj, lottieValueCallback);
+                    this.f$0.addValueCallback(keyPath, obj, lottieValueCallback);
                 }
             });
             return;
         }
-        boolean z = true;
+        boolean zIsEmpty = true;
         if (keyPath == KeyPath.COMPOSITION) {
             compositionLayer.addValueCallback(lottieValueCallback, obj);
         } else {
@@ -185,14 +184,14 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
             if (keyPathElement != null) {
                 keyPathElement.addValueCallback(lottieValueCallback, obj);
             } else {
-                List resolveKeyPath = resolveKeyPath(keyPath);
-                for (int i = 0; i < resolveKeyPath.size(); i++) {
-                    ((KeyPath) resolveKeyPath.get(i)).resolvedElement.addValueCallback(lottieValueCallback, obj);
+                List listResolveKeyPath = resolveKeyPath(keyPath);
+                for (int i = 0; i < listResolveKeyPath.size(); i++) {
+                    ((KeyPath) listResolveKeyPath.get(i)).resolvedElement.addValueCallback(lottieValueCallback, obj);
                 }
-                z = true ^ resolveKeyPath.isEmpty();
+                zIsEmpty = true ^ listResolveKeyPath.isEmpty();
             }
         }
-        if (z) {
+        if (zIsEmpty) {
             invalidateSelf();
             if (obj == LottieProperty.TIME_REMAP) {
                 setProgress(this.animator.getAnimatedValueAbsolute());
@@ -440,10 +439,10 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
             if (isVisible()) {
                 LottieValueAnimator lottieValueAnimator = this.animator;
                 lottieValueAnimator.running = true;
-                boolean isReversed = lottieValueAnimator.isReversed();
+                boolean zIsReversed = lottieValueAnimator.isReversed();
                 Iterator it = ((CopyOnWriteArraySet) lottieValueAnimator.listeners).iterator();
                 while (it.hasNext()) {
-                    ((Animator.AnimatorListener) it.next()).onAnimationStart(lottieValueAnimator, isReversed);
+                    ((Animator.AnimatorListener) it.next()).onAnimationStart(lottieValueAnimator, zIsReversed);
                 }
                 lottieValueAnimator.setFrame((int) (lottieValueAnimator.isReversed() ? lottieValueAnimator.getMaxFrame() : lottieValueAnimator.getMinFrame()));
                 lottieValueAnimator.lastFrameTimeNs = 0L;
@@ -471,17 +470,89 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
         this.onVisibleAction = OnVisibleAction.NONE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00ea  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x00d5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void renderAndDrawAsBitmap(android.graphics.Canvas r10, com.airbnb.lottie.model.layer.CompositionLayer r11) {
-        /*
-            Method dump skipped, instructions count: 432
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.airbnb.lottie.LottieDrawable.renderAndDrawAsBitmap(android.graphics.Canvas, com.airbnb.lottie.model.layer.CompositionLayer):void");
+    public final void renderAndDrawAsBitmap(Canvas canvas, CompositionLayer compositionLayer) {
+        boolean z;
+        if (this.composition == null || compositionLayer == null) {
+            return;
+        }
+        if (this.softwareRenderingCanvas == null) {
+            this.softwareRenderingCanvas = new Canvas();
+            this.softwareRenderingTransformedBounds = new RectF();
+            this.softwareRenderingOriginalCanvasMatrix = new Matrix();
+            this.softwareRenderingOriginalCanvasMatrixInverse = new Matrix();
+            this.canvasClipBounds = new Rect();
+            this.canvasClipBoundsRectF = new RectF();
+            this.softwareRenderingPaint = new LPaint();
+            this.softwareRenderingSrcBoundsRect = new Rect();
+            this.softwareRenderingDstBoundsRect = new Rect();
+            this.softwareRenderingDstBoundsRectF = new RectF();
+        }
+        canvas.getMatrix(this.softwareRenderingOriginalCanvasMatrix);
+        canvas.getClipBounds(this.canvasClipBounds);
+        Rect rect = this.canvasClipBounds;
+        this.canvasClipBoundsRectF.set(rect.left, rect.top, rect.right, rect.bottom);
+        this.softwareRenderingOriginalCanvasMatrix.mapRect(this.canvasClipBoundsRectF);
+        convertRect(this.canvasClipBounds, this.canvasClipBoundsRectF);
+        if (this.clipToCompositionBounds) {
+            this.softwareRenderingTransformedBounds.set(0.0f, 0.0f, getIntrinsicWidth(), getIntrinsicHeight());
+        } else {
+            compositionLayer.getBounds(this.softwareRenderingTransformedBounds, null, false);
+        }
+        this.softwareRenderingOriginalCanvasMatrix.mapRect(this.softwareRenderingTransformedBounds);
+        Rect bounds = getBounds();
+        float fWidth = bounds.width() / getIntrinsicWidth();
+        float fHeight = bounds.height() / getIntrinsicHeight();
+        RectF rectF = this.softwareRenderingTransformedBounds;
+        rectF.set(rectF.left * fWidth, rectF.top * fHeight, rectF.right * fWidth, rectF.bottom * fHeight);
+        Drawable.Callback callback = getCallback();
+        if (callback instanceof View) {
+            ViewParent parent = ((View) callback).getParent();
+            if (parent instanceof ViewGroup) {
+                z = !((ViewGroup) parent).getClipChildren();
+            }
+        } else {
+            z = false;
+        }
+        if (!z) {
+            RectF rectF2 = this.softwareRenderingTransformedBounds;
+            Rect rect2 = this.canvasClipBounds;
+            rectF2.intersect(rect2.left, rect2.top, rect2.right, rect2.bottom);
+        }
+        int iCeil = (int) Math.ceil(this.softwareRenderingTransformedBounds.width());
+        int iCeil2 = (int) Math.ceil(this.softwareRenderingTransformedBounds.height());
+        if (iCeil == 0 || iCeil2 == 0) {
+            return;
+        }
+        Bitmap bitmap = this.softwareRenderingBitmap;
+        if (bitmap == null || bitmap.getWidth() < iCeil || this.softwareRenderingBitmap.getHeight() < iCeil2) {
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iCeil, iCeil2, Bitmap.Config.ARGB_8888);
+            this.softwareRenderingBitmap = bitmapCreateBitmap;
+            this.softwareRenderingCanvas.setBitmap(bitmapCreateBitmap);
+            this.isDirty = true;
+        } else if (this.softwareRenderingBitmap.getWidth() > iCeil || this.softwareRenderingBitmap.getHeight() > iCeil2) {
+            Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(this.softwareRenderingBitmap, 0, 0, iCeil, iCeil2);
+            this.softwareRenderingBitmap = bitmapCreateBitmap2;
+            this.softwareRenderingCanvas.setBitmap(bitmapCreateBitmap2);
+            this.isDirty = true;
+        }
+        if (this.isDirty) {
+            this.renderingMatrix.set(this.softwareRenderingOriginalCanvasMatrix);
+            this.renderingMatrix.preScale(fWidth, fHeight);
+            Matrix matrix = this.renderingMatrix;
+            RectF rectF3 = this.softwareRenderingTransformedBounds;
+            matrix.postTranslate(-rectF3.left, -rectF3.top);
+            this.softwareRenderingBitmap.eraseColor(0);
+            compositionLayer.draw(this.softwareRenderingCanvas, this.renderingMatrix, this.alpha);
+            this.softwareRenderingOriginalCanvasMatrix.invert(this.softwareRenderingOriginalCanvasMatrixInverse);
+            this.softwareRenderingOriginalCanvasMatrixInverse.mapRect(this.softwareRenderingDstBoundsRectF, this.softwareRenderingTransformedBounds);
+            convertRect(this.softwareRenderingDstBoundsRect, this.softwareRenderingDstBoundsRectF);
+        }
+        this.softwareRenderingSrcBoundsRect.set(0, 0, iCeil, iCeil2);
+        canvas.drawBitmap(this.softwareRenderingBitmap, this.softwareRenderingSrcBoundsRect, this.softwareRenderingDstBoundsRect, this.softwareRenderingPaint);
     }
 
     public final List resolveKeyPath(KeyPath keyPath) {
@@ -635,14 +706,14 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
                 @Override // com.airbnb.lottie.LottieDrawable.LazyCompositionTask
                 public final void run() {
                     Executor executor = LottieDrawable.setProgressExecutor;
-                    LottieDrawable.this.setMinAndMaxProgress(f, f2);
+                    this.f$0.setMinAndMaxProgress(f, f2);
                 }
             });
             return;
         }
-        int lerp = (int) MiscUtils.lerp(lottieComposition.startFrame, lottieComposition.endFrame, f);
+        int iLerp = (int) MiscUtils.lerp(lottieComposition.startFrame, lottieComposition.endFrame, f);
         LottieComposition lottieComposition2 = this.composition;
-        setMinAndMaxFrame(lerp, (int) MiscUtils.lerp(lottieComposition2.startFrame, lottieComposition2.endFrame, f2));
+        setMinAndMaxFrame(iLerp, (int) MiscUtils.lerp(lottieComposition2.startFrame, lottieComposition2.endFrame, f2));
     }
 
     public final void setMinFrame(int i) {
@@ -664,7 +735,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
 
     @Override // android.graphics.drawable.Drawable
     public final boolean setVisible(boolean z, boolean z2) {
-        boolean isVisible = isVisible();
+        boolean zIsVisible = isVisible();
         boolean visible = super.setVisible(z, z2);
         if (z) {
             OnVisibleAction onVisibleAction = this.onVisibleAction;
@@ -682,7 +753,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
                 this.onVisibleAction = OnVisibleAction.RESUME;
                 return visible;
             }
-            if (isVisible) {
+            if (zIsVisible) {
                 this.onVisibleAction = OnVisibleAction.NONE;
             }
         }
@@ -765,7 +836,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
                 @Override // com.airbnb.lottie.LottieDrawable.LazyCompositionTask
                 public final void run() {
                     Executor executor = LottieDrawable.setProgressExecutor;
-                    LottieDrawable.this.setMinAndMaxFrame(str, str2, z);
+                    this.f$0.setMinAndMaxFrame(str, str2, z);
                 }
             });
             return;
@@ -789,7 +860,7 @@ public class LottieDrawable extends Drawable implements Drawable.Callback, Anima
                 @Override // com.airbnb.lottie.LottieDrawable.LazyCompositionTask
                 public final void run() {
                     Executor executor = LottieDrawable.setProgressExecutor;
-                    LottieDrawable.this.setMinAndMaxFrame(i, i2);
+                    this.f$0.setMinAndMaxFrame(i, i2);
                 }
             });
         } else {

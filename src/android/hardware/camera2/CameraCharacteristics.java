@@ -594,9 +594,9 @@ public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
     }
 
     public CameraCharacteristics(CameraMetadataNative cameraMetadataNative) {
-        CameraMetadataNative move = CameraMetadataNative.move(cameraMetadataNative);
-        this.mProperties = move;
-        setNativeInstance(move);
+        CameraMetadataNative cameraMetadataNativeMove = CameraMetadataNative.move(cameraMetadataNative);
+        this.mProperties = cameraMetadataNativeMove;
+        setNativeInstance(cameraMetadataNativeMove);
     }
 
     public CameraMetadataNative getNativeCopy() {
@@ -660,18 +660,18 @@ public final class CameraCharacteristics extends CameraMetadata<Key<?>> {
         if (iArr == null) {
             throw new AssertionError("android.request.availableCharacteristicsKeys must be non-null in the characteristics");
         }
-        List<Key<?>> unmodifiableList = Collections.unmodifiableList(getKeys(getClass(), getKeyClass(), this, iArr, true));
-        this.mKeys = unmodifiableList;
-        return unmodifiableList;
+        List<Key<?>> listUnmodifiableList = Collections.unmodifiableList(getKeys(getClass(), getKeyClass(), this, iArr, true));
+        this.mKeys = listUnmodifiableList;
+        return listUnmodifiableList;
     }
 
     public List<Key<?>> getKeysNeedingPermission() {
         if (this.mKeysNeedingPermission == null) {
             int[] iArr = (int[]) get(REQUEST_CHARACTERISTIC_KEYS_NEEDING_PERMISSION);
             if (iArr == null) {
-                List<Key<?>> unmodifiableList = Collections.unmodifiableList(new ArrayList());
-                this.mKeysNeedingPermission = unmodifiableList;
-                return unmodifiableList;
+                List<Key<?>> listUnmodifiableList = Collections.unmodifiableList(new ArrayList());
+                this.mKeysNeedingPermission = listUnmodifiableList;
+                return listUnmodifiableList;
             }
             this.mKeysNeedingPermission = getAvailableKeyList(CameraCharacteristics.class, Key.class, iArr, false);
         }

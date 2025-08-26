@@ -366,11 +366,11 @@ public class UserManager {
         if (CompatChanges.isChangeEnabled(ALWAYS_USE_CONTEXT_USER)) {
             return this.mUserId;
         }
-        int myUserId = UserHandle.myUserId();
-        if (myUserId != this.mUserId) {
-            Log.w(TAG, "Using the calling user " + myUserId + ", rather than the specified context user " + this.mUserId + ", because API is only UserHandleAware on higher targetSdkVersions.", new Throwable());
+        int iMyUserId = UserHandle.myUserId();
+        if (iMyUserId != this.mUserId) {
+            Log.w(TAG, "Using the calling user " + iMyUserId + ", rather than the specified context user " + this.mUserId + ", because API is only UserHandleAware on higher targetSdkVersions.", new Throwable());
         }
-        return myUserId;
+        return iMyUserId;
     }
 
     public static UserManager get(Context context) {
@@ -468,9 +468,9 @@ public class UserManager {
     }
 
     public String getUserName() {
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         int i = this.mUserId;
-        if (myUserId == i) {
+        if (iMyUserId == i) {
             try {
                 return this.mService.getUserName();
             } catch (RemoteException e) {
@@ -726,9 +726,9 @@ public class UserManager {
             try {
                 String profileType = this.mService.getProfileType(i);
                 if (profileType != null) {
-                    String intern = profileType.intern();
-                    this.mProfileTypeOfProcessUser = intern;
-                    return intern;
+                    String strIntern = profileType.intern();
+                    this.mProfileTypeOfProcessUser = strIntern;
+                    return strIntern;
                 }
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -856,7 +856,7 @@ public class UserManager {
         return UserManagerCache.isUserUnlocked(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda5
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                return Boolean.valueOf(IUserManager.this.isUserUnlocked(((Integer) obj).intValue()));
+                return Boolean.valueOf(iUserManager.isUserUnlocked(((Integer) obj).intValue()));
             }
         }, Integer.valueOf(i)).booleanValue();
     }
@@ -876,7 +876,7 @@ public class UserManager {
         return UserManagerCache.isUserUnlockingOrUnlocked(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda10
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                return Boolean.valueOf(IUserManager.this.isUserUnlockingOrUnlocked(((Integer) obj).intValue()));
+                return Boolean.valueOf(iUserManager.isUserUnlockingOrUnlocked(((Integer) obj).intValue()));
             }
         }, Integer.valueOf(i)).booleanValue();
     }
@@ -910,7 +910,7 @@ public class UserManager {
             return UserManagerCache.getUserInfo(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda9
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    return IUserManager.this.getUserInfo(((Integer) obj).intValue());
+                    return iUserManager.getUserInfo(((Integer) obj).intValue());
                 }
             }, Integer.valueOf(i));
         }
@@ -935,9 +935,9 @@ public class UserManager {
             }
         }
         int callingUid = Binder.getCallingUid();
-        int myUid = Process.myUid();
-        if (myUid == 1000 && callingUid != myUid) {
-            Log.w(TAG, "The System (uid " + myUid + ") is fetching a copy of UserProperties on behalf of callingUid " + callingUid + ". Possibly it should carefully first clearCallingIdentity or perhaps use UserManagerInternal.getUserProperties() instead?", new Throwable());
+        int iMyUid = Process.myUid();
+        if (iMyUid == 1000 && callingUid != iMyUid) {
+            Log.w(TAG, "The System (uid " + iMyUid + ") is fetching a copy of UserProperties on behalf of callingUid " + callingUid + ". Possibly it should carefully first clearCallingIdentity or perhaps use UserManagerInternal.getUserProperties() instead?", new Throwable());
         }
         return getUserPropertiesFromQuery(new QueryUserId(identifier));
     }
@@ -950,9 +950,7 @@ public class UserManager {
         return UserManagerCache.getUserPropertiesFromQuery(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda6
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                UserProperties lambda$getUserPropertiesFromQuery$0;
-                lambda$getUserPropertiesFromQuery$0 = UserManager.this.lambda$getUserPropertiesFromQuery$0((UserManager.QueryUserId) obj);
-                return lambda$getUserPropertiesFromQuery$0;
+                return this.f$0.lambda$getUserPropertiesFromQuery$0((UserManager.QueryUserId) obj);
             }
         }, queryUserId);
     }
@@ -1066,16 +1064,12 @@ public class UserManager {
         return UserManagerCache.getUserRestrictionFromQuery(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda0
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                Boolean lambda$getUserRestrictionFromQuery$1;
-                lambda$getUserRestrictionFromQuery$1 = UserManager.this.lambda$getUserRestrictionFromQuery$1((Pair) obj);
-                return lambda$getUserRestrictionFromQuery$1;
+                return this.f$0.lambda$getUserRestrictionFromQuery$1((Pair) obj);
             }
         }, new IpcDataCache.BypassCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda1
             @Override // android.os.IpcDataCache.BypassCall
             public final Boolean apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(!Flags.cacheUserRestrictionsReadOnly());
-                return valueOf;
+                return Boolean.valueOf(!Flags.cacheUserRestrictionsReadOnly());
             }
         }, pair).booleanValue();
     }
@@ -1169,12 +1163,12 @@ public class UserManager {
 
     public UserInfo createGuest(Context context) {
         try {
-            UserInfo createUserWithThrow = this.mService.createUserWithThrow(null, USER_TYPE_FULL_GUEST, 0);
-            Settings.Secure.putStringForUser(context.getContentResolver(), Settings.Secure.SKIP_FIRST_USE_HINTS, "1", createUserWithThrow.id);
-            if (isGuestUserAllowEphemeralStateChange() && Settings.Global.getInt(context.getContentResolver(), Settings.Global.REMOVE_GUEST_ON_EXIT, 1) == 1 && !createUserWithThrow.isEphemeral()) {
-                setUserEphemeral(createUserWithThrow.id, true);
+            UserInfo userInfoCreateUserWithThrow = this.mService.createUserWithThrow(null, USER_TYPE_FULL_GUEST, 0);
+            Settings.Secure.putStringForUser(context.getContentResolver(), Settings.Secure.SKIP_FIRST_USE_HINTS, "1", userInfoCreateUserWithThrow.id);
+            if (isGuestUserAllowEphemeralStateChange() && Settings.Global.getInt(context.getContentResolver(), Settings.Global.REMOVE_GUEST_ON_EXIT, 1) == 1 && !userInfoCreateUserWithThrow.isEphemeral()) {
+                setUserEphemeral(userInfoCreateUserWithThrow.id, true);
             }
-            return createUserWithThrow;
+            return userInfoCreateUserWithThrow;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException unused) {
@@ -1246,9 +1240,9 @@ public class UserManager {
     public UserInfo createRestrictedProfile(String str) {
         try {
             int i = this.mUserId;
-            UserInfo createRestrictedProfileWithThrow = this.mService.createRestrictedProfileWithThrow(str, i);
-            AccountManager.get(this.mContext).addSharedAccountsFromParentUser(UserHandle.of(i), UserHandle.of(createRestrictedProfileWithThrow.id));
-            return createRestrictedProfileWithThrow;
+            UserInfo userInfoCreateRestrictedProfileWithThrow = this.mService.createRestrictedProfileWithThrow(str, i);
+            AccountManager.get(this.mContext).addSharedAccountsFromParentUser(UserHandle.of(i), UserHandle.of(userInfoCreateRestrictedProfileWithThrow.id));
+            return userInfoCreateRestrictedProfileWithThrow;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (ServiceSpecificException unused) {
@@ -1534,9 +1528,7 @@ public class UserManager {
             return UserManagerCache.getProfiles(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda3
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    List lambda$getProfiles$3;
-                    lambda$getProfiles$3 = UserManager.this.lambda$getProfiles$3((Integer) obj);
-                    return lambda$getProfiles$3;
+                    return this.f$0.lambda$getProfiles$3((Integer) obj);
                 }
             }, Integer.valueOf(i));
         }
@@ -1626,9 +1618,7 @@ public class UserManager {
             return UserManagerCache.getProfileIdsWithDisabled(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda15
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    int[] lambda$getProfileIdsWithDisabled$4;
-                    lambda$getProfileIdsWithDisabled$4 = UserManager.this.lambda$getProfileIdsWithDisabled$4((Integer) obj);
-                    return lambda$getProfileIdsWithDisabled$4;
+                    return this.f$0.lambda$getProfileIdsWithDisabled$4((Integer) obj);
                 }
             }, Integer.valueOf(i));
         }
@@ -1645,9 +1635,7 @@ public class UserManager {
             return UserManagerCache.getEnabledProfileIds(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda8
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    int[] lambda$getEnabledProfileIds$5;
-                    lambda$getEnabledProfileIds$5 = UserManager.this.lambda$getEnabledProfileIds$5((Integer) obj);
-                    return lambda$getEnabledProfileIds$5;
+                    return this.f$0.lambda$getEnabledProfileIds$5((Integer) obj);
                 }
             }, Integer.valueOf(i));
         }
@@ -1695,9 +1683,7 @@ public class UserManager {
             UserHandle profileParent = UserManagerCache.getProfileParent(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda2
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    UserHandle lambda$getProfileParent$6;
-                    lambda$getProfileParent$6 = UserManager.this.lambda$getProfileParent$6((UserHandle) obj);
-                    return lambda$getProfileParent$6;
+                    return this.f$0.lambda$getProfileParent$6((UserHandle) obj);
                 }
             }, userHandle);
             if (profileParent.getIdentifier() == -10000) {
@@ -1753,9 +1739,7 @@ public class UserManager {
             return ((UserManagerCache) this.mIpcDataCache).isQuietModeEnabled(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda4
                 @Override // android.os.IpcDataCache.RemoteCall
                 public final Object apply(Object obj) {
-                    Boolean lambda$isQuietModeEnabled$7;
-                    lambda$isQuietModeEnabled$7 = UserManager.this.lambda$isQuietModeEnabled$7((UserHandle) obj);
-                    return lambda$isQuietModeEnabled$7;
+                    return this.f$0.lambda$isQuietModeEnabled$7((UserHandle) obj);
                 }
             }, userHandle).booleanValue();
         }
@@ -1851,9 +1835,7 @@ public class UserManager {
             return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getDrawable(DevicePolicyResources.Drawables.WORK_PROFILE_ICON_BADGE, DevicePolicyResources.Drawables.Style.SOLID_COLORED, new Supplier() { // from class: android.os.UserManager$$ExternalSyntheticLambda7
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Drawable lambda$getUserBadge$8;
-                    lambda$getUserBadge$8 = UserManager.this.lambda$getUserBadge$8();
-                    return lambda$getUserBadge$8;
+                    return this.f$0.lambda$getUserBadge$8();
                 }
             });
         }
@@ -1874,9 +1856,7 @@ public class UserManager {
         return !hasBadge(identifier) ? charSequence : ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(getUpdatableUserBadgedLabelId(identifier), new Supplier() { // from class: android.os.UserManager$$ExternalSyntheticLambda11
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getBadgedLabelForUser$9;
-                lambda$getBadgedLabelForUser$9 = UserManager.this.lambda$getBadgedLabelForUser$9(charSequence, identifier);
-                return lambda$getBadgedLabelForUser$9;
+                return this.f$0.lambda$getBadgedLabelForUser$9(charSequence, identifier);
             }
         }, charSequence);
     }
@@ -1901,9 +1881,7 @@ public class UserManager {
             return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.RESOLVER_WORK_TAB, new Supplier() { // from class: android.os.UserManager$$ExternalSyntheticLambda12
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getProfileLabel$10;
-                    lambda$getProfileLabel$10 = UserManager.this.lambda$getProfileLabel$10();
-                    return lambda$getProfileLabel$10;
+                    return this.f$0.lambda$getProfileLabel$10();
                 }
             });
         }
@@ -1938,9 +1916,7 @@ public class UserManager {
             ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.SystemUi.STATUS_BAR_WORK_ICON_ACCESSIBILITY, new Supplier() { // from class: android.os.UserManager$$ExternalSyntheticLambda14
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getProfileAccessibilityString$11;
-                    lambda$getProfileAccessibilityString$11 = UserManager.this.lambda$getProfileAccessibilityString$11(i);
-                    return lambda$getProfileAccessibilityString$11;
+                    return this.f$0.lambda$getProfileAccessibilityString$11(i);
                 }
             });
         }
@@ -2134,7 +2110,7 @@ public class UserManager {
         return userManagerCache.getUserSerialNumber(new IpcDataCache.RemoteCall() { // from class: android.os.UserManager$$ExternalSyntheticLambda13
             @Override // android.os.IpcDataCache.RemoteCall
             public final Object apply(Object obj) {
-                return Integer.valueOf(IUserManager.this.getUserSerialNumber(((Integer) obj).intValue()));
+                return Integer.valueOf(iUserManager.getUserSerialNumber(((Integer) obj).intValue()));
             }
         }, Integer.valueOf(i)).intValue();
     }
@@ -2334,11 +2310,11 @@ public class UserManager {
     }
 
     public SemUserInfo semCreateUser(String str, int i) {
-        UserInfo createUser = createUser(str, UserInfo.getDefaultUserType(i), i);
-        if (createUser == null) {
+        UserInfo userInfoCreateUser = createUser(str, UserInfo.getDefaultUserType(i), i);
+        if (userInfoCreateUser == null) {
             return null;
         }
-        return new SemUserInfo(createUser);
+        return new SemUserInfo(userInfoCreateUser);
     }
 
     public boolean semRemoveUser(int i) {

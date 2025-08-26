@@ -14,7 +14,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ActiveNotificationModel extends ActiveNotificationEntryModel {
     public final Icon aodIcon;
@@ -45,7 +44,6 @@ public final class ActiveNotificationModel extends ActiveNotificationEntryModel 
     public final int uid;
     public final long whenTime;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,23 +104,23 @@ public final class ActiveNotificationModel extends ActiveNotificationEntryModel 
     }
 
     public final int hashCode() {
-        int hashCode = this.key.hashCode() * 31;
+        int iHashCode = this.key.hashCode() * 31;
         String str = this.groupKey;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((hashCode + (str == null ? 0 : str.hashCode())) * 31, 31, this.whenTime), 31, this.isForegroundService), 31, this.isOngoingEvent), 31, this.isAmbient), 31, this.isRowDismissed), 31, this.isSilent), 31, this.isLastMessageFromReply), 31, this.isSuppressedFromStatusBar), 31, this.isPulsing);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((iHashCode + (str == null ? 0 : str.hashCode())) * 31, 31, this.whenTime), 31, this.isForegroundService), 31, this.isOngoingEvent), 31, this.isAmbient), 31, this.isRowDismissed), 31, this.isSilent), 31, this.isLastMessageFromReply), 31, this.isSuppressedFromStatusBar), 31, this.isPulsing);
         Icon icon = this.aodIcon;
-        int hashCode2 = (m + (icon == null ? 0 : icon.hashCode())) * 31;
+        int iHashCode2 = (iM + (icon == null ? 0 : icon.hashCode())) * 31;
         Icon icon2 = this.shelfIcon;
-        int hashCode3 = (hashCode2 + (icon2 == null ? 0 : icon2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (icon2 == null ? 0 : icon2.hashCode())) * 31;
         Icon icon3 = this.statusBarIcon;
-        int hashCode4 = (hashCode3 + (icon3 == null ? 0 : icon3.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (icon3 == null ? 0 : icon3.hashCode())) * 31;
         StatusBarIconView statusBarIconView = this.statusBarChipIconView;
-        int m2 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.uid, (hashCode4 + (statusBarIconView == null ? 0 : statusBarIconView.hashCode())) * 31, 31), 31, this.packageName), 31, this.appName);
+        int iM2 = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.uid, (iHashCode4 + (statusBarIconView == null ? 0 : statusBarIconView.hashCode())) * 31, 31), 31, this.packageName), 31, this.appName);
         PendingIntent pendingIntent = this.contentIntent;
-        int hashCode5 = (m2 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
+        int iHashCode5 = (iM2 + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
         InstanceId instanceId = this.instanceId;
-        int hashCode6 = (this.callType.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.bucket, TransitionData$$ExternalSyntheticOutline0.m((hashCode5 + (instanceId == null ? 0 : instanceId.hashCode())) * 31, 31, this.isGroupSummary), 31)) * 31;
+        int iHashCode6 = (this.callType.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.bucket, TransitionData$$ExternalSyntheticOutline0.m((iHashCode5 + (instanceId == null ? 0 : instanceId.hashCode())) * 31, 31, this.isGroupSummary), 31)) * 31;
         PromotedNotificationContentModels promotedNotificationContentModels = this.promotedContent;
-        return Boolean.hashCode(this.isCallChipNotNeeded) + ReorderTile$$ExternalSyntheticOutline0.m(this.extraVisibleFlag, ReorderTile$$ExternalSyntheticOutline0.m(this.callChipColor, (hashCode6 + (promotedNotificationContentModels != null ? promotedNotificationContentModels.hashCode() : 0)) * 31, 31), 31);
+        return Boolean.hashCode(this.isCallChipNotNeeded) + ReorderTile$$ExternalSyntheticOutline0.m(this.extraVisibleFlag, ReorderTile$$ExternalSyntheticOutline0.m(this.callChipColor, (iHashCode6 + (promotedNotificationContentModels != null ? promotedNotificationContentModels.hashCode() : 0)) * 31, 31), 31);
     }
 
     public final String toString() {

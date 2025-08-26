@@ -19,10 +19,10 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
     public static final Parcelable.Creator<AppUriAuthenticationPolicy> CREATOR = new Parcelable.Creator<AppUriAuthenticationPolicy>() { // from class: android.security.AppUriAuthenticationPolicy.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public AppUriAuthenticationPolicy createFromParcel(Parcel parcel) {
-            HashMap hashMap = new HashMap();
-            parcel.readMap(hashMap, UrisToAliases.class.getClassLoader());
-            return new AppUriAuthenticationPolicy(hashMap);
+        public AppUriAuthenticationPolicy createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
+            HashMap map = new HashMap();
+            parcel.readMap(map, UrisToAliases.class.getClassLoader());
+            return new AppUriAuthenticationPolicy(map);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -80,14 +80,14 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
     }
 
     public Map<String, Map<Uri, String>> getAppAndUriMappings() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (Map.Entry<String, UrisToAliases> entry : this.mAppToUris.entrySet()) {
-            hashMap.put(entry.getKey(), entry.getValue().getUrisToAliases());
+            map.put(entry.getKey(), entry.getValue().getUrisToAliases());
         }
-        return hashMap;
+        return map;
     }
 
-    public static AppUriAuthenticationPolicy readFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public static AppUriAuthenticationPolicy readFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         Builder builder = new Builder();
         int depth = xmlPullParser.getDepth();
         while (true) {
@@ -102,7 +102,7 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
         return builder.build();
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         for (Map.Entry<String, UrisToAliases> entry : this.mAppToUris.entrySet()) {
             xmlSerializer.startTag(null, KEY_AUTHENTICATION_POLICY_APP_TO_URIS);
             xmlSerializer.attribute(null, KEY_AUTHENTICATION_POLICY_APP, entry.getKey());

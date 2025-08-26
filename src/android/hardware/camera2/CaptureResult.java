@@ -438,12 +438,12 @@ public class CaptureResult extends CameraMetadata<Key<?>> {
         if (captureResultExtras == null) {
             throw new IllegalArgumentException("extras was null");
         }
-        CameraMetadataNative move = CameraMetadataNative.move(cameraMetadataNative);
-        this.mResults = move;
-        if (move.isEmpty()) {
+        CameraMetadataNative cameraMetadataNativeMove = CameraMetadataNative.move(cameraMetadataNative);
+        this.mResults = cameraMetadataNativeMove;
+        if (cameraMetadataNativeMove.isEmpty()) {
             throw new AssertionError("Results must not be empty");
         }
-        setNativeInstance(move);
+        setNativeInstance(cameraMetadataNativeMove);
         this.mCameraId = str;
         this.mRequest = captureRequest;
         this.mSequenceId = captureResultExtras.getRequestId();
@@ -457,12 +457,12 @@ public class CaptureResult extends CameraMetadata<Key<?>> {
         if (captureRequest == null) {
             throw new IllegalArgumentException("parent was null");
         }
-        CameraMetadataNative move = CameraMetadataNative.move(cameraMetadataNative);
-        this.mResults = move;
-        if (move.isEmpty()) {
+        CameraMetadataNative cameraMetadataNativeMove = CameraMetadataNative.move(cameraMetadataNative);
+        this.mResults = cameraMetadataNativeMove;
+        if (cameraMetadataNativeMove.isEmpty()) {
             throw new AssertionError("Results must not be empty");
         }
-        setNativeInstance(move);
+        setNativeInstance(cameraMetadataNativeMove);
         this.mCameraId = str;
         this.mRequest = captureRequest;
         this.mSequenceId = i;
@@ -477,12 +477,12 @@ public class CaptureResult extends CameraMetadata<Key<?>> {
         if (cameraMetadataNative == null) {
             throw new IllegalArgumentException("results was null");
         }
-        CameraMetadataNative move = CameraMetadataNative.move(cameraMetadataNative);
-        this.mResults = move;
-        if (move.isEmpty()) {
+        CameraMetadataNative cameraMetadataNativeMove = CameraMetadataNative.move(cameraMetadataNative);
+        this.mResults = cameraMetadataNativeMove;
+        if (cameraMetadataNativeMove.isEmpty()) {
             throw new AssertionError("Results must not be empty");
         }
-        setNativeInstance(move);
+        setNativeInstance(cameraMetadataNativeMove);
         this.mCameraId = "none";
         this.mRequest = null;
         this.mSequenceId = i;

@@ -6,11 +6,9 @@ import java.util.List;
 import kotlin.collections.AbstractList;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface ImmutableList<E> extends List<E>, Collection, KMappedMarker {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SubList<E> extends AbstractList implements ImmutableList<E> {
         public final int _size;
         public final int fromIndex;

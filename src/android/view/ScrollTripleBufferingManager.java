@@ -106,9 +106,9 @@ public final class ScrollTripleBufferingManager {
     }
 
     public static void setFlingStbFlag(boolean z) {
-        ActivityThread currentActivityThread;
+        ActivityThread activityThreadCurrentActivityThread;
         Context baseContext;
-        if (sChoreographer == null || (currentActivityThread = ActivityThread.currentActivityThread()) == null || (baseContext = currentActivityThread.getApplication().getBaseContext()) == null || baseContext.getPackageManager().checkPermission(Manifest.permission.STATUS_BAR_SERVICE, currentActivityThread.getProcessName()) == 0) {
+        if (sChoreographer == null || (activityThreadCurrentActivityThread = ActivityThread.currentActivityThread()) == null || (baseContext = activityThreadCurrentActivityThread.getApplication().getBaseContext()) == null || baseContext.getPackageManager().checkPermission(Manifest.permission.STATUS_BAR_SERVICE, activityThreadCurrentActivityThread.getProcessName()) == 0) {
             return;
         }
         long frameIntervalNanos = sChoreographer.getFrameIntervalNanos() / 1000000;

@@ -7,120 +7,119 @@ import com.android.systemui.kairos.util.These;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MuxDeferredKt$mergeNodes$merged$4 implements Function3 {
     public static final MuxDeferredKt$mergeNodes$merged$4 INSTANCE = new MuxDeferredKt$mergeNodes$merged$4();
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        Object m2573boximpl;
-        Object obj4;
-        Object m2573boximpl2;
-        Object obj5;
-        Object obj6;
+        Object objM2590boximpl;
+        Object objM2590boximpl2;
+        Object objM2590boximpl3;
+        Object objM2590boximpl4;
+        Object objM2590boximpl5;
         Object first;
         EvalScope evalScope = (EvalScope) obj;
         ((Number) obj3).intValue();
         ArrayMapK arrayMapK = (ArrayMapK) ((MapK) obj2);
-        Object obj7 = arrayMapK.get(0);
-        if (obj7 != null || arrayMapK.containsKey(0)) {
+        Object obj4 = arrayMapK.get(0);
+        if (obj4 != null || arrayMapK.containsKey(0)) {
             Maybe.Companion.getClass();
-            m2573boximpl = Maybe.Present.m2573boximpl(obj7);
+            objM2590boximpl = Maybe.Present.m2590boximpl(obj4);
         } else {
             Maybe.Companion.getClass();
-            m2573boximpl = Maybe.Companion.absent;
+            objM2590boximpl = Maybe.Companion.absent;
         }
-        if (m2573boximpl instanceof Maybe.Present) {
-            These these = (These) ((PullNode) ((Maybe.Present) m2573boximpl).value).getPushEvent(evalScope);
+        if (objM2590boximpl instanceof Maybe.Present) {
+            These these = (These) ((PullNode) ((Maybe.Present) objM2590boximpl).value).getPushEvent(evalScope);
             if (these instanceof These.Both) {
                 Maybe.Companion companion = Maybe.Companion;
-                Object obj8 = ((These.Both) these).first;
+                Object obj5 = ((These.Both) these).first;
                 companion.getClass();
-                obj4 = Maybe.Present.m2573boximpl(obj8);
+                objM2590boximpl2 = Maybe.Present.m2590boximpl(obj5);
             } else if (these instanceof These.Second) {
                 Maybe.Companion.getClass();
-                obj4 = Maybe.Companion.absent;
+                objM2590boximpl2 = Maybe.Companion.absent;
             } else {
                 if (!(these instanceof These.First)) {
                     throw new NoWhenBranchMatchedException();
                 }
                 Maybe.Companion companion2 = Maybe.Companion;
-                Object obj9 = ((These.First) these).value;
+                Object obj6 = ((These.First) these).value;
                 companion2.getClass();
-                obj4 = Maybe.Present.m2573boximpl(obj9);
+                objM2590boximpl2 = Maybe.Present.m2590boximpl(obj6);
             }
         } else {
-            if (!(m2573boximpl instanceof Maybe.Absent)) {
+            if (!(objM2590boximpl instanceof Maybe.Absent)) {
                 throw new NoWhenBranchMatchedException();
             }
-            obj4 = Maybe.Absent.INSTANCE;
+            objM2590boximpl2 = Maybe.Absent.INSTANCE;
         }
-        Object obj10 = arrayMapK.get(1);
-        if (obj10 != null || arrayMapK.containsKey(1)) {
+        Object obj7 = arrayMapK.get(1);
+        if (obj7 != null || arrayMapK.containsKey(1)) {
             Maybe.Companion.getClass();
-            m2573boximpl2 = Maybe.Present.m2573boximpl(obj10);
+            objM2590boximpl3 = Maybe.Present.m2590boximpl(obj7);
         } else {
             Maybe.Companion.getClass();
-            m2573boximpl2 = Maybe.Companion.absent;
+            objM2590boximpl3 = Maybe.Companion.absent;
         }
-        if (m2573boximpl2 instanceof Maybe.Present) {
-            These these2 = (These) ((PullNode) ((Maybe.Present) m2573boximpl2).value).getPushEvent(evalScope);
+        if (objM2590boximpl3 instanceof Maybe.Present) {
+            These these2 = (These) ((PullNode) ((Maybe.Present) objM2590boximpl3).value).getPushEvent(evalScope);
             if (these2 instanceof These.Both) {
                 Maybe.Companion companion3 = Maybe.Companion;
-                Object obj11 = ((These.Both) these2).second;
+                Object obj8 = ((These.Both) these2).second;
                 companion3.getClass();
-                obj5 = Maybe.Present.m2573boximpl(obj11);
+                objM2590boximpl4 = Maybe.Present.m2590boximpl(obj8);
             } else if (these2 instanceof These.Second) {
                 Maybe.Companion companion4 = Maybe.Companion;
-                Object obj12 = ((These.Second) these2).value;
+                Object obj9 = ((These.Second) these2).value;
                 companion4.getClass();
-                obj5 = Maybe.Present.m2573boximpl(obj12);
+                objM2590boximpl4 = Maybe.Present.m2590boximpl(obj9);
             } else {
                 if (!(these2 instanceof These.First)) {
                     throw new NoWhenBranchMatchedException();
                 }
                 Maybe.Companion.getClass();
-                obj5 = Maybe.Companion.absent;
+                objM2590boximpl4 = Maybe.Companion.absent;
             }
         } else {
-            if (!(m2573boximpl2 instanceof Maybe.Absent)) {
+            if (!(objM2590boximpl3 instanceof Maybe.Absent)) {
                 throw new NoWhenBranchMatchedException();
             }
-            obj5 = Maybe.Absent.INSTANCE;
+            objM2590boximpl4 = Maybe.Absent.INSTANCE;
         }
-        if (obj4 instanceof Maybe.Present) {
+        if (objM2590boximpl2 instanceof Maybe.Present) {
             Maybe.Companion companion5 = Maybe.Companion;
-            if (obj5 instanceof Maybe.Present) {
+            if (objM2590boximpl4 instanceof Maybe.Present) {
                 These.Companion companion6 = These.Companion;
-                Object obj13 = ((Maybe.Present) obj4).value;
-                Object obj14 = ((Maybe.Present) obj5).value;
+                Object obj10 = ((Maybe.Present) objM2590boximpl2).value;
+                Object obj11 = ((Maybe.Present) objM2590boximpl4).value;
                 companion6.getClass();
-                first = new These.Both(obj13, obj14);
+                first = new These.Both(obj10, obj11);
             } else {
                 These.Companion companion7 = These.Companion;
-                Object obj15 = ((Maybe.Present) obj4).value;
+                Object obj12 = ((Maybe.Present) objM2590boximpl2).value;
                 companion7.getClass();
-                first = new These.First(obj15);
+                first = new These.First(obj12);
             }
             companion5.getClass();
-            obj6 = Maybe.Present.m2573boximpl(first);
-        } else if (obj5 instanceof Maybe.Present) {
+            objM2590boximpl5 = Maybe.Present.m2590boximpl(first);
+        } else if (objM2590boximpl4 instanceof Maybe.Present) {
             Maybe.Companion companion8 = Maybe.Companion;
             These.Companion companion9 = These.Companion;
-            Object obj16 = ((Maybe.Present) obj5).value;
+            Object obj13 = ((Maybe.Present) objM2590boximpl4).value;
             companion9.getClass();
-            These.Second second = new These.Second(obj16);
+            These.Second second = new These.Second(obj13);
             companion8.getClass();
-            obj6 = Maybe.Present.m2573boximpl(second);
+            objM2590boximpl5 = Maybe.Present.m2590boximpl(second);
         } else {
             Maybe.Companion.getClass();
-            obj6 = Maybe.Companion.absent;
+            objM2590boximpl5 = Maybe.Companion.absent;
         }
-        if (obj6 instanceof Maybe.Present) {
-            return (These) ((Maybe.Present) obj6).value;
+        if (objM2590boximpl5 instanceof Maybe.Present) {
+            return (These) ((Maybe.Present) objM2590boximpl5).value;
         }
-        if (obj6 instanceof Maybe.Absent) {
+        if (objM2590boximpl5 instanceof Maybe.Absent) {
             throw new IllegalStateException("unexpected missing merge result");
         }
         throw new NoWhenBranchMatchedException();

@@ -6,14 +6,13 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ShortcutHelperKt$$ExternalSyntheticLambda3 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 break;
@@ -36,14 +35,14 @@ public final /* synthetic */ class ShortcutHelperKt$$ExternalSyntheticLambda3 im
                 break;
             case 7:
                 Role.Companion.getClass();
-                SemanticsPropertiesKt.m717setRolekuIjeqM((SemanticsPropertyReceiver) obj, 0);
+                SemanticsPropertiesKt.m719setRolekuIjeqM((SemanticsPropertyReceiver) obj, 0);
                 break;
             case 8:
                 SemanticsPropertiesKt.hideFromAccessibility((SemanticsPropertyReceiver) obj);
                 break;
             case 9:
                 Role.Companion.getClass();
-                SemanticsPropertiesKt.m717setRolekuIjeqM((SemanticsPropertyReceiver) obj, Role.Tab);
+                SemanticsPropertiesKt.m719setRolekuIjeqM((SemanticsPropertyReceiver) obj, Role.Tab);
                 break;
             case 10:
                 SemanticsPropertiesKt.hideFromAccessibility((SemanticsPropertyReceiver) obj);

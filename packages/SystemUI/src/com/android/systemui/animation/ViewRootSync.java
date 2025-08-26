@@ -5,7 +5,6 @@ import android.window.SurfaceSyncGroup;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewRootSync {
     public static final ViewRootSync INSTANCE = new ViewRootSync();
@@ -19,10 +18,10 @@ public final class ViewRootSync {
             return;
         }
         SurfaceSyncGroup surfaceSyncGroup = new SurfaceSyncGroup("SysUIAnimation");
-        surfaceSyncGroup.addSyncCompleteCallback(view.getContext().getMainExecutor(), new Runnable() { // from class: com.android.systemui.animation.ViewRootSync$synchronizeNextDraw$1
+        surfaceSyncGroup.addSyncCompleteCallback(view.getContext().getMainExecutor(), new Runnable() { // from class: com.android.systemui.animation.ViewRootSync.synchronizeNextDraw.1
             @Override // java.lang.Runnable
             public final void run() {
-                Function0.this.invoke();
+                function0.invoke();
             }
         });
         surfaceSyncGroup.add(view.getRootSurfaceControl(), (Runnable) null);

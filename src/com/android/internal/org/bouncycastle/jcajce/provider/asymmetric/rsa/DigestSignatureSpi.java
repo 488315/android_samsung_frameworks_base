@@ -59,9 +59,9 @@ public class DigestSignatureSpi extends SignatureSpi {
         if (!(publicKey instanceof RSAPublicKey)) {
             throw new InvalidKeyException("Supplied key (" + getType(publicKey) + ") is not a RSAPublicKey instance");
         }
-        RSAKeyParameters generatePublicKeyParameter = RSAUtil.generatePublicKeyParameter((RSAPublicKey) publicKey);
+        RSAKeyParameters rSAKeyParametersGeneratePublicKeyParameter = RSAUtil.generatePublicKeyParameter((RSAPublicKey) publicKey);
         this.digest.reset();
-        this.cipher.init(false, generatePublicKeyParameter);
+        this.cipher.init(false, rSAKeyParametersGeneratePublicKeyParameter);
     }
 
     @Override // java.security.SignatureSpi
@@ -69,9 +69,9 @@ public class DigestSignatureSpi extends SignatureSpi {
         if (!(privateKey instanceof RSAPrivateKey)) {
             throw new InvalidKeyException("Supplied key (" + getType(privateKey) + ") is not a RSAPrivateKey instance");
         }
-        RSAKeyParameters generatePrivateKeyParameter = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey) privateKey);
+        RSAKeyParameters rSAKeyParametersGeneratePrivateKeyParameter = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey) privateKey);
         this.digest.reset();
-        this.cipher.init(true, generatePrivateKeyParameter);
+        this.cipher.init(true, rSAKeyParametersGeneratePrivateKeyParameter);
     }
 
     private String getType(Object obj) {
@@ -96,8 +96,8 @@ public class DigestSignatureSpi extends SignatureSpi {
         byte[] bArr = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr, 0);
         try {
-            byte[] derEncode = derEncode(bArr);
-            return this.cipher.processBlock(derEncode, 0, derEncode.length);
+            byte[] bArrDerEncode = derEncode(bArr);
+            return this.cipher.processBlock(bArrDerEncode, 0, bArrDerEncode.length);
         } catch (ArrayIndexOutOfBoundsException unused) {
             throw new SignatureException("key too small for signature type");
         } catch (Exception e) {
@@ -107,34 +107,34 @@ public class DigestSignatureSpi extends SignatureSpi {
 
     @Override // java.security.SignatureSpi
     protected boolean engineVerify(byte[] bArr) throws SignatureException {
-        byte[] processBlock;
-        byte[] derEncode;
+        byte[] bArrProcessBlock;
+        byte[] bArrDerEncode;
         byte[] bArr2 = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr2, 0);
         try {
-            processBlock = this.cipher.processBlock(bArr, 0, bArr.length);
-            derEncode = derEncode(bArr2);
+            bArrProcessBlock = this.cipher.processBlock(bArr, 0, bArr.length);
+            bArrDerEncode = derEncode(bArr2);
         } catch (Exception unused) {
         }
-        if (processBlock.length == derEncode.length) {
-            return Arrays.constantTimeAreEqual(processBlock, derEncode);
+        if (bArrProcessBlock.length == bArrDerEncode.length) {
+            return Arrays.constantTimeAreEqual(bArrProcessBlock, bArrDerEncode);
         }
-        if (processBlock.length == derEncode.length - 2) {
-            derEncode[1] = (byte) (derEncode[1] - 2);
-            byte b = (byte) (derEncode[3] - 2);
-            derEncode[3] = b;
+        if (bArrProcessBlock.length == bArrDerEncode.length - 2) {
+            bArrDerEncode[1] = (byte) (bArrDerEncode[1] - 2);
+            byte b = (byte) (bArrDerEncode[3] - 2);
+            bArrDerEncode[3] = b;
             int i = b + 4;
             int i2 = b + 6;
             int i3 = 0;
-            for (int i4 = 0; i4 < derEncode.length - i2; i4++) {
-                i3 |= processBlock[i + i4] ^ derEncode[i2 + i4];
+            for (int i4 = 0; i4 < bArrDerEncode.length - i2; i4++) {
+                i3 |= bArrProcessBlock[i + i4] ^ bArrDerEncode[i2 + i4];
             }
             for (int i5 = 0; i5 < i; i5++) {
-                i3 |= processBlock[i5] ^ derEncode[i5];
+                i3 |= bArrProcessBlock[i5] ^ bArrDerEncode[i5];
             }
             return i3 == 0;
         }
-        Arrays.constantTimeAreEqual(derEncode, derEncode);
+        Arrays.constantTimeAreEqual(bArrDerEncode, bArrDerEncode);
         return false;
     }
 

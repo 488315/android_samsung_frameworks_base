@@ -1,13 +1,25 @@
 package androidx.profileinstaller;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.util.Log;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.util.Arrays;
+import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ProfileInstaller {
     public static final String PROFILE_BASE_DIR = "/data/misc/profiles/cur/" + UserInfo.getCurrentUserId();
@@ -22,7 +34,6 @@ public class ProfileInstaller {
     };
     public static final AnonymousClass2 LOG_DIAGNOSTICS = new AnonymousClass2();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.profileinstaller.ProfileInstaller$2, reason: invalid class name */
     public class AnonymousClass2 implements DiagnosticsCallback {
         @Override // androidx.profileinstaller.ProfileInstaller.DiagnosticsCallback
@@ -77,7 +88,6 @@ public class ProfileInstaller {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DiagnosticsCallback {
         void onDiagnosticReceived();
 
@@ -99,55 +109,384 @@ public class ProfileInstaller {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:2|3|4|(3:6|(1:8)(8:13|14|15|16|17|18|(1:20)(1:23)|(1:22))|(2:10|11))|35|(15:(2:37|(5:39|40|(1:46)(1:43)|44|45))(3:256|257|(6:259|40|(0)|46|44|45))|52|(3:203|204|(4:206|207|208|209)(2:213|214))|54|(3:171|172|(3:179|180|(4:182|183|184|(1:178))(2:185|186))(3:(1:175)|176|(0)))|56|(2:58|(5:62|63|64|65|(2:67|68)(3:69|70|71))(2:60|61))|86|(3:91|92|(11:96|97|98|99|100|101|102|103|(3:107|108|(13:110|(2:111|(1:113)(1:114))|115|116|117|118|119|120|(1:90)|(0)|46|44|45))|105|106)(2:94|95))|88|(0)|(0)|46|44|45)|47|48|49|50|51) */
-    /* JADX WARN: Code restructure failed: missing block: B:245:0x00f8, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:246:0x00fe, code lost:
-    
-        r8 = r0.getMessage();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:247:0x0102, code lost:
-    
-        if (r8 == null) goto L51;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:250:0x010c, code lost:
-    
-        r5.onDiagnosticReceived();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:251:0x0113, code lost:
-    
-        r8 = null;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:252:0x0110, code lost:
-    
-        r5.onResultReceived(6, r0);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:253:0x00f5, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:255:0x00fa, code lost:
-    
-        r5.onResultReceived(7, r0);
-     */
-    /* JADX WARN: Removed duplicated region for block: B:171:0x0171 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:178:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:203:0x011a A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x02d3 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x01d4  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x02be  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x0227  */
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:122:0x01cb  */
+    /* JADX WARN: Removed duplicated region for block: B:125:0x01d4  */
+    /* JADX WARN: Removed duplicated region for block: B:154:0x0224  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x0227  */
+    /* JADX WARN: Removed duplicated region for block: B:217:0x02be  */
+    /* JADX WARN: Removed duplicated region for block: B:225:0x02d3 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:227:0x02d7  */
+    /* JADX WARN: Removed duplicated region for block: B:276:0x011a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:277:0x0171 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void writeProfile(android.content.Context r16, java.util.concurrent.Executor r17, androidx.profileinstaller.ProfileInstaller.DiagnosticsCallback r18, boolean r19) {
-        /*
-            Method dump skipped, instructions count: 742
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.profileinstaller.ProfileInstaller.writeProfile(android.content.Context, java.util.concurrent.Executor, androidx.profileinstaller.ProfileInstaller$DiagnosticsCallback, boolean):void");
+    public static void writeProfile(Context context, Executor executor, DiagnosticsCallback diagnosticsCallback, boolean z) throws Throwable {
+        FileInputStream fileInputStreamCreateInputStream;
+        int i;
+        DexProfileData[] profile;
+        DexProfileData[] dexProfileDataArr;
+        DeviceProfileWriter deviceProfileWriter;
+        FileInputStream fileInputStreamCreateInputStream2;
+        DexProfileData[] dexProfileDataArr2;
+        byte[] bArr;
+        ByteArrayInputStream byteArrayInputStream;
+        FileOutputStream fileOutputStream;
+        FileChannel channel;
+        FileLock fileLockTryLock;
+        boolean z2;
+        ByteArrayOutputStream byteArrayOutputStream;
+        boolean z3;
+        Context applicationContext = context.getApplicationContext();
+        String packageName = applicationContext.getPackageName();
+        ApplicationInfo applicationInfo = applicationContext.getApplicationInfo();
+        AssetManager assets = applicationContext.getAssets();
+        String name = new File(applicationInfo.sourceDir).getName();
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+            File filesDir = context.getFilesDir();
+            if (!z) {
+                File file = new File(filesDir, "profileinstaller_profileWrittenFor_lastUpdateTime.dat");
+                if (file.exists()) {
+                    try {
+                        DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file));
+                        try {
+                            long j = dataInputStream.readLong();
+                            dataInputStream.close();
+                            z3 = j == packageInfo.lastUpdateTime;
+                            if (z3) {
+                                diagnosticsCallback.onResultReceived(2, null);
+                            }
+                        } finally {
+                        }
+                    } catch (IOException unused) {
+                        z3 = false;
+                    }
+                } else {
+                    z3 = false;
+                }
+                if (z3) {
+                    Log.d("ProfileInstaller", "Skipping profile installation for " + context.getPackageName());
+                    ProfileVerifier.writeProfileVerification(context, false);
+                    return;
+                }
+            }
+            Log.d("ProfileInstaller", "Installing profile for " + context.getPackageName());
+            DeviceProfileWriter deviceProfileWriter2 = new DeviceProfileWriter(assets, executor, diagnosticsCallback, name, "dexopt/baseline.prof", "dexopt/baseline.profm", new File(new File(PROFILE_BASE_DIR, packageName), "primary.prof"));
+            byte[] bArr2 = deviceProfileWriter2.mDesiredVersion;
+            if (deviceProfileWriter2.mCurProfile.exists()) {
+                if (!deviceProfileWriter2.mCurProfile.canWrite()) {
+                    deviceProfileWriter2.result(4, null);
+                    z2 = false;
+                }
+                deviceProfileWriter2.mDeviceSupportsAotProfile = true;
+                DiagnosticsCallback diagnosticsCallback2 = deviceProfileWriter2.mDiagnostics;
+                byte[] bArr3 = ProfileTranscoder.MAGIC_PROF;
+                try {
+                    try {
+                        fileInputStreamCreateInputStream = deviceProfileWriter2.mAssetManager.openFd(deviceProfileWriter2.mProfileSourceLocation).createInputStream();
+                    } catch (FileNotFoundException e) {
+                        String message = e.getMessage();
+                        if (message == null || !message.contains("compressed")) {
+                            diagnosticsCallback2.onResultReceived(6, e);
+                        } else {
+                            diagnosticsCallback2.onDiagnosticReceived();
+                        }
+                        fileInputStreamCreateInputStream = null;
+                        if (fileInputStreamCreateInputStream != null) {
+                        }
+                        dexProfileDataArr = deviceProfileWriter2.mProfile;
+                        if (dexProfileDataArr != null) {
+                        }
+                        DiagnosticsCallback diagnosticsCallback3 = deviceProfileWriter2.mDiagnostics;
+                        dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                        if (dexProfileDataArr2 != null) {
+                        }
+                        bArr = deviceProfileWriter2.mTranscodedProfile;
+                        if (bArr == null) {
+                        }
+                        ProfileVerifier.writeProfileVerification(context, z2 && z);
+                    } catch (IOException e2) {
+                        diagnosticsCallback2.onResultReceived(7, e2);
+                        fileInputStreamCreateInputStream = null;
+                        if (fileInputStreamCreateInputStream != null) {
+                        }
+                        dexProfileDataArr = deviceProfileWriter2.mProfile;
+                        if (dexProfileDataArr != null) {
+                        }
+                        DiagnosticsCallback diagnosticsCallback32 = deviceProfileWriter2.mDiagnostics;
+                        dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                        if (dexProfileDataArr2 != null) {
+                        }
+                        bArr = deviceProfileWriter2.mTranscodedProfile;
+                        if (bArr == null) {
+                        }
+                        ProfileVerifier.writeProfileVerification(context, z2 && z);
+                    }
+                    if (fileInputStreamCreateInputStream != null) {
+                        try {
+                        } catch (IOException e3) {
+                            i = 7;
+                            diagnosticsCallback2.onResultReceived(7, e3);
+                            try {
+                                fileInputStreamCreateInputStream.close();
+                            } catch (IOException e4) {
+                                e = e4;
+                                diagnosticsCallback2.onResultReceived(i, e);
+                                profile = null;
+                                deviceProfileWriter2.mProfile = profile;
+                                dexProfileDataArr = deviceProfileWriter2.mProfile;
+                                if (dexProfileDataArr != null) {
+                                }
+                                DiagnosticsCallback diagnosticsCallback322 = deviceProfileWriter2.mDiagnostics;
+                                dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                                if (dexProfileDataArr2 != null) {
+                                }
+                                bArr = deviceProfileWriter2.mTranscodedProfile;
+                                if (bArr == null) {
+                                }
+                                ProfileVerifier.writeProfileVerification(context, z2 && z);
+                            }
+                            profile = null;
+                            deviceProfileWriter2.mProfile = profile;
+                            dexProfileDataArr = deviceProfileWriter2.mProfile;
+                            if (dexProfileDataArr != null) {
+                            }
+                            DiagnosticsCallback diagnosticsCallback3222 = deviceProfileWriter2.mDiagnostics;
+                            dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                            if (dexProfileDataArr2 != null) {
+                            }
+                            bArr = deviceProfileWriter2.mTranscodedProfile;
+                            if (bArr == null) {
+                            }
+                            ProfileVerifier.writeProfileVerification(context, z2 && z);
+                        } catch (IllegalStateException e5) {
+                            try {
+                                diagnosticsCallback2.onResultReceived(8, e5);
+                                try {
+                                    fileInputStreamCreateInputStream.close();
+                                } catch (IOException e6) {
+                                    e = e6;
+                                    i = 7;
+                                    diagnosticsCallback2.onResultReceived(i, e);
+                                    profile = null;
+                                    deviceProfileWriter2.mProfile = profile;
+                                    dexProfileDataArr = deviceProfileWriter2.mProfile;
+                                    if (dexProfileDataArr != null) {
+                                    }
+                                    DiagnosticsCallback diagnosticsCallback32222 = deviceProfileWriter2.mDiagnostics;
+                                    dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                                    if (dexProfileDataArr2 != null) {
+                                    }
+                                    bArr = deviceProfileWriter2.mTranscodedProfile;
+                                    if (bArr == null) {
+                                    }
+                                    ProfileVerifier.writeProfileVerification(context, z2 && z);
+                                }
+                                profile = null;
+                                deviceProfileWriter2.mProfile = profile;
+                                dexProfileDataArr = deviceProfileWriter2.mProfile;
+                                if (dexProfileDataArr != null) {
+                                }
+                                DiagnosticsCallback diagnosticsCallback322222 = deviceProfileWriter2.mDiagnostics;
+                                dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                                if (dexProfileDataArr2 != null) {
+                                }
+                                bArr = deviceProfileWriter2.mTranscodedProfile;
+                                if (bArr == null) {
+                                }
+                                ProfileVerifier.writeProfileVerification(context, z2 && z);
+                            } catch (Throwable th) {
+                                th = th;
+                                Throwable th2 = th;
+                                try {
+                                    fileInputStreamCreateInputStream.close();
+                                    throw th2;
+                                } catch (IOException e7) {
+                                    diagnosticsCallback2.onResultReceived(7, e7);
+                                    throw th2;
+                                }
+                            }
+                        }
+                        if (!Arrays.equals(bArr3, Encoding.read(fileInputStreamCreateInputStream, 4))) {
+                            throw new IllegalStateException("Invalid magic");
+                        }
+                        profile = ProfileTranscoder.readProfile(fileInputStreamCreateInputStream, Encoding.read(fileInputStreamCreateInputStream, 4), deviceProfileWriter2.mApkName);
+                        try {
+                            fileInputStreamCreateInputStream.close();
+                        } catch (IOException e8) {
+                            diagnosticsCallback2.onResultReceived(7, e8);
+                        }
+                        deviceProfileWriter2.mProfile = profile;
+                    }
+                    dexProfileDataArr = deviceProfileWriter2.mProfile;
+                    if (dexProfileDataArr != null) {
+                        try {
+                            fileInputStreamCreateInputStream2 = deviceProfileWriter2.mAssetManager.openFd(deviceProfileWriter2.mProfileMetaSourceLocation).createInputStream();
+                        } catch (FileNotFoundException e9) {
+                            diagnosticsCallback2.onResultReceived(9, e9);
+                        } catch (IOException e10) {
+                            diagnosticsCallback2.onResultReceived(7, e10);
+                        } catch (IllegalStateException e11) {
+                            deviceProfileWriter2.mProfile = null;
+                            diagnosticsCallback2.onResultReceived(8, e11);
+                        }
+                        if (fileInputStreamCreateInputStream2 != null) {
+                            try {
+                                if (!Arrays.equals(ProfileTranscoder.MAGIC_PROFM, Encoding.read(fileInputStreamCreateInputStream2, 4))) {
+                                    throw new IllegalStateException("Invalid magic");
+                                }
+                                deviceProfileWriter2.mProfile = ProfileTranscoder.readMeta(fileInputStreamCreateInputStream2, Encoding.read(fileInputStreamCreateInputStream2, 4), bArr2, dexProfileDataArr);
+                                fileInputStreamCreateInputStream2.close();
+                                deviceProfileWriter = deviceProfileWriter2;
+                                if (deviceProfileWriter != null) {
+                                    deviceProfileWriter2 = deviceProfileWriter;
+                                }
+                            } finally {
+                            }
+                        } else {
+                            if (fileInputStreamCreateInputStream2 != null) {
+                                fileInputStreamCreateInputStream2.close();
+                            }
+                            deviceProfileWriter = null;
+                            if (deviceProfileWriter != null) {
+                            }
+                        }
+                    }
+                    DiagnosticsCallback diagnosticsCallback3222222 = deviceProfileWriter2.mDiagnostics;
+                    dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                    if (dexProfileDataArr2 != null) {
+                        byte[] bArr4 = deviceProfileWriter2.mDesiredVersion;
+                        if (!deviceProfileWriter2.mDeviceSupportsAotProfile) {
+                            throw new IllegalStateException("This device doesn't support aot. Did you call deviceSupportsAotProfile()?");
+                        }
+                        try {
+                            byteArrayOutputStream = new ByteArrayOutputStream();
+                            try {
+                                byteArrayOutputStream.write(bArr3);
+                                byteArrayOutputStream.write(bArr4);
+                            } finally {
+                            }
+                        } catch (IOException e12) {
+                            diagnosticsCallback3222222.onResultReceived(7, e12);
+                        } catch (IllegalStateException e13) {
+                            diagnosticsCallback3222222.onResultReceived(8, e13);
+                        }
+                        if (ProfileTranscoder.transcodeAndWriteBody(byteArrayOutputStream, bArr4, dexProfileDataArr2)) {
+                            deviceProfileWriter2.mTranscodedProfile = byteArrayOutputStream.toByteArray();
+                            byteArrayOutputStream.close();
+                            deviceProfileWriter2.mProfile = null;
+                        } else {
+                            diagnosticsCallback3222222.onResultReceived(5, null);
+                            deviceProfileWriter2.mProfile = null;
+                            byteArrayOutputStream.close();
+                        }
+                    }
+                    bArr = deviceProfileWriter2.mTranscodedProfile;
+                    if (bArr == null) {
+                        try {
+                            if (!deviceProfileWriter2.mDeviceSupportsAotProfile) {
+                                throw new IllegalStateException("This device doesn't support aot. Did you call deviceSupportsAotProfile()?");
+                            }
+                            try {
+                                try {
+                                    byteArrayInputStream = new ByteArrayInputStream(bArr);
+                                    try {
+                                        fileOutputStream = new FileOutputStream(deviceProfileWriter2.mCurProfile);
+                                        try {
+                                            channel = fileOutputStream.getChannel();
+                                            try {
+                                                fileLockTryLock = channel.tryLock();
+                                            } finally {
+                                            }
+                                        } finally {
+                                        }
+                                    } finally {
+                                    }
+                                } catch (IOException e14) {
+                                    deviceProfileWriter2.result(7, e14);
+                                    z2 = false;
+                                    if (z2) {
+                                    }
+                                    ProfileVerifier.writeProfileVerification(context, z2 && z);
+                                }
+                            } catch (FileNotFoundException e15) {
+                                deviceProfileWriter2.result(6, e15);
+                                z2 = false;
+                                if (z2) {
+                                }
+                                ProfileVerifier.writeProfileVerification(context, z2 && z);
+                            }
+                            if (fileLockTryLock != null) {
+                                try {
+                                    if (fileLockTryLock.isValid()) {
+                                        byte[] bArr5 = new byte[512];
+                                        while (true) {
+                                            int i2 = byteArrayInputStream.read(bArr5);
+                                            if (i2 <= 0) {
+                                                break;
+                                            } else {
+                                                fileOutputStream.write(bArr5, 0, i2);
+                                            }
+                                        }
+                                        deviceProfileWriter2.result(1, null);
+                                        fileLockTryLock.close();
+                                        channel.close();
+                                        fileOutputStream.close();
+                                        byteArrayInputStream.close();
+                                        deviceProfileWriter2.mTranscodedProfile = null;
+                                        deviceProfileWriter2.mProfile = null;
+                                        z2 = true;
+                                        if (z2) {
+                                        }
+                                    }
+                                } finally {
+                                }
+                            }
+                            throw new IOException("Unable to acquire a lock on the underlying file channel.");
+                        } finally {
+                            deviceProfileWriter2.mTranscodedProfile = null;
+                            deviceProfileWriter2.mProfile = null;
+                        }
+                    }
+                    z2 = false;
+                    if (z2) {
+                        noteProfileWrittenFor(packageInfo, filesDir);
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                }
+            } else {
+                try {
+                } catch (IOException unused2) {
+                    deviceProfileWriter2.result(4, null);
+                }
+                if (!deviceProfileWriter2.mCurProfile.createNewFile()) {
+                    deviceProfileWriter2.result(4, null);
+                    z2 = false;
+                }
+                deviceProfileWriter2.mDeviceSupportsAotProfile = true;
+                DiagnosticsCallback diagnosticsCallback22 = deviceProfileWriter2.mDiagnostics;
+                byte[] bArr32 = ProfileTranscoder.MAGIC_PROF;
+                fileInputStreamCreateInputStream = deviceProfileWriter2.mAssetManager.openFd(deviceProfileWriter2.mProfileSourceLocation).createInputStream();
+                if (fileInputStreamCreateInputStream != null) {
+                }
+                dexProfileDataArr = deviceProfileWriter2.mProfile;
+                if (dexProfileDataArr != null) {
+                }
+                DiagnosticsCallback diagnosticsCallback32222222 = deviceProfileWriter2.mDiagnostics;
+                dexProfileDataArr2 = deviceProfileWriter2.mProfile;
+                if (dexProfileDataArr2 != null) {
+                }
+                bArr = deviceProfileWriter2.mTranscodedProfile;
+                if (bArr == null) {
+                }
+            }
+            ProfileVerifier.writeProfileVerification(context, z2 && z);
+        } catch (PackageManager.NameNotFoundException e16) {
+            diagnosticsCallback.onResultReceived(7, e16);
+            ProfileVerifier.writeProfileVerification(context, false);
+        }
     }
 }

@@ -22,12 +22,12 @@ public final class CustomDescription implements Parcelable {
                 return null;
             }
             Builder builder = new Builder(remoteViews);
-            int[] createIntArray = parcel.createIntArray();
-            if (createIntArray != null) {
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            if (iArrCreateIntArray != null) {
                 InternalTransformation[] internalTransformationArr = (InternalTransformation[]) parcel.readParcelableArray(null, InternalTransformation.class);
-                int length = createIntArray.length;
+                int length = iArrCreateIntArray.length;
                 for (int i = 0; i < length; i++) {
-                    builder.addChild(createIntArray[i], internalTransformationArr[i]);
+                    builder.addChild(iArrCreateIntArray[i], internalTransformationArr[i]);
                 }
             }
             InternalValidator[] internalValidatorArr = (InternalValidator[]) parcel.readParcelableArray(null, InternalValidator.class);
@@ -38,12 +38,12 @@ public final class CustomDescription implements Parcelable {
                     builder.batchUpdate(internalValidatorArr[i2], batchUpdatesArr[i2]);
                 }
             }
-            int[] createIntArray2 = parcel.createIntArray();
-            if (createIntArray2 != null) {
+            int[] iArrCreateIntArray2 = parcel.createIntArray();
+            if (iArrCreateIntArray2 != null) {
                 InternalOnClickAction[] internalOnClickActionArr = (InternalOnClickAction[]) parcel.readParcelableArray(null, InternalOnClickAction.class);
-                int length3 = createIntArray2.length;
+                int length3 = iArrCreateIntArray2.length;
                 for (int i3 = 0; i3 < length3; i3++) {
-                    builder.addOnClickAction(createIntArray2[i3], internalOnClickActionArr[i3]);
+                    builder.addOnClickAction(iArrCreateIntArray2[i3], internalOnClickActionArr[i3]);
                 }
             }
             return builder.build();

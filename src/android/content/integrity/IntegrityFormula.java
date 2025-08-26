@@ -101,23 +101,23 @@ public abstract class IntegrityFormula {
     }
 
     public static IntegrityFormula readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        if (i == 0) {
             return CompoundFormula.CREATOR.createFromParcel(parcel);
         }
-        if (readInt == 1) {
+        if (i == 1) {
             return AtomicFormula.StringAtomicFormula.CREATOR.createFromParcel(parcel);
         }
-        if (readInt == 2) {
+        if (i == 2) {
             return AtomicFormula.LongAtomicFormula.CREATOR.createFromParcel(parcel);
         }
-        if (readInt == 3) {
+        if (i == 3) {
             return AtomicFormula.BooleanAtomicFormula.CREATOR.createFromParcel(parcel);
         }
-        if (readInt == 4) {
+        if (i == 4) {
             return InstallerAllowedByManifestFormula.CREATOR.createFromParcel(parcel);
         }
-        throw new IllegalArgumentException("Unknown formula tag " + readInt);
+        throw new IllegalArgumentException("Unknown formula tag " + i);
     }
 
     public static IntegrityFormula any(IntegrityFormula... integrityFormulaArr) {

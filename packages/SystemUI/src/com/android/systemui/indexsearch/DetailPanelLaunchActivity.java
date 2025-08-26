@@ -7,9 +7,9 @@ import com.android.systemui.Dependency;
 import com.android.systemui.shade.BaseShadeControllerImpl;
 import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda1;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DetailPanelLaunchActivity extends Activity {
     @Override // android.app.Activity
@@ -35,6 +35,14 @@ public class DetailPanelLaunchActivity extends Activity {
             } else {
                 ((BaseShadeControllerImpl) centralSurfacesImpl2.mShadeController).animateExpandQs();
                 centralSurfacesImpl2.mQSPanelController.flipPageWithTile(stringExtra);
+            }
+        } else {
+            CentralSurfacesImpl centralSurfacesImpl3 = (CentralSurfacesImpl) centralSurfaces;
+            if (((KeyguardStateControllerImpl) centralSurfacesImpl3.mKeyguardStateController).mShowing) {
+                centralSurfacesImpl3.mQSPanelController.mCollapseExpandAction.run();
+            } else {
+                centralSurfacesImpl3.mShadeSurface.expandQSForOpenDetail();
+                centralSurfacesImpl3.mMainExecutor.executeDelayed(new CentralSurfacesImpl$$ExternalSyntheticLambda1(0, centralSurfacesImpl3, stringExtra), 500L);
             }
         }
         finish();

@@ -10,6 +10,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -205,9 +206,9 @@ public class GraphicsEnvironment {
     }
 
     private void setupGpuLayers(Context context, Bundle bundle, PackageManager packageManager, String str, ApplicationInfo applicationInfo) {
-        String str2;
+        String gpuControlLayerAppPaths;
         if (debugLayerEnabled(bundle, str, applicationInfo)) {
-            str2 = this.mLibraryPermittedPaths;
+            gpuControlLayerAppPaths = this.mLibraryPermittedPaths;
             String string = bundle.getString(Settings.Global.GPU_DEBUG_LAYERS);
             Log.i(TAG, "Vulkan debug layer list: " + string);
             if (string != null && !string.isEmpty()) {
@@ -219,16 +220,16 @@ public class GraphicsEnvironment {
                 setDebugLayersGLES(string2);
             }
         } else if (applicationInfo.isPrivilegedApp() || ((applicationInfo.isSystemApp() && !applicationInfo.isUpdatedSystemApp()) || !getGlobalSettingsString(context.getContentResolver(), bundle, Settings.Global.GPU_CONTROL_LAYER_APPS).contains(str))) {
-            str2 = "";
+            gpuControlLayerAppPaths = "";
         } else {
-            str2 = getGpuControlLayerAppPaths(packageManager);
-            if (!"".equals(str2)) {
+            gpuControlLayerAppPaths = getGpuControlLayerAppPaths(packageManager);
+            if (!"".equals(gpuControlLayerAppPaths)) {
                 Log.i(TAG, "GPU control app: " + str);
                 setDebugLayers(GPU_CONTROL_LAYER);
                 setDebugLayersGLES(GPU_CONTROL_LAYER_GLES);
             }
         }
-        setLayerPaths(this.mClassLoader, str2 + this.mLibrarySearchPaths);
+        setLayerPaths(this.mClassLoader, gpuControlLayerAppPaths + this.mLibrarySearchPaths);
     }
 
     private static List<String> getGlobalSettingsString(ContentResolver contentResolver, Bundle bundle, String str) {
@@ -261,7 +262,7 @@ public class GraphicsEnvironment {
         }
     }
 
-    private String queryAngleChoice(Context context, Bundle bundle, String str) {
+    private String queryAngleChoice(Context context, Bundle bundle, String str) throws Resources.NotFoundException {
         int i;
         if (TextUtils.isEmpty(str)) {
             Log.v(TAG, "No package name specified; use the system driver");
@@ -314,16 +315,16 @@ public class GraphicsEnvironment {
     }
 
     private String getAnglePackageName(PackageManager packageManager) {
-        List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(new Intent(ACTION_ANGLE_FOR_ANDROID), 1048576);
-        if (queryIntentActivities.isEmpty()) {
+        List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(new Intent(ACTION_ANGLE_FOR_ANDROID), 1048576);
+        if (listQueryIntentActivities.isEmpty()) {
             Log.v(TAG, "No ANGLE packages installed.");
             return "";
         }
-        if (queryIntentActivities.size() > 1) {
-            Log.v(TAG, "Too many ANGLE packages found: " + queryIntentActivities.size());
+        if (listQueryIntentActivities.size() > 1) {
+            Log.v(TAG, "Too many ANGLE packages found: " + listQueryIntentActivities.size());
             return "";
         }
-        return ((ResolveInfo) queryIntentActivities.getFirst()).activityInfo.packageName;
+        return ((ResolveInfo) listQueryIntentActivities.getFirst()).activityInfo.packageName;
     }
 
     private String getAngleDebugPackage(Context context, Bundle bundle) {
@@ -339,13 +340,13 @@ public class GraphicsEnvironment {
         return TextUtils.isEmpty(string) ? "" : string;
     }
 
-    private boolean setupAngle(Context context, Bundle bundle, PackageManager packageManager, String str) {
+    private boolean setupAngle(Context context, Bundle bundle, PackageManager packageManager, String str) throws Resources.NotFoundException {
         if (!SystemProperties.get(PROPERTY_RO_HARDWARE_EGL).equals("angle")) {
-            String queryAngleChoice = queryAngleChoice(context, bundle, str);
-            if (queryAngleChoice.equals("default")) {
+            String strQueryAngleChoice = queryAngleChoice(context, bundle, str);
+            if (strQueryAngleChoice.equals("default")) {
                 return false;
             }
-            if (queryAngleChoice.equals(ANGLE_GL_DRIVER_CHOICE_NATIVE)) {
+            if (strQueryAngleChoice.equals(ANGLE_GL_DRIVER_CHOICE_NATIVE)) {
                 nativeSetAngleInfo("", true, str, null);
                 return false;
             }
@@ -461,13 +462,13 @@ public class GraphicsEnvironment {
                             Log.v(TAG, "Updatable production driver is not supported on the device.");
                             return null;
                         }
-                        boolean contains = getGlobalSettingsString(null, bundle, Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_IN_APPS).contains(str3);
+                        boolean zContains = getGlobalSettingsString(null, bundle, Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_IN_APPS).contains(str3);
                         List<String> globalSettingsString = getGlobalSettingsString(null, bundle, Settings.Global.UPDATABLE_DRIVER_PRODUCTION_ALLOWLIST);
-                        if (!contains && globalSettingsString.indexOf("*") != 0 && !globalSettingsString.contains(str3)) {
+                        if (!zContains && globalSettingsString.indexOf("*") != 0 && !globalSettingsString.contains(str3)) {
                             Log.v(TAG, "App is not on the allowlist for updatable production driver.");
                             return null;
                         }
-                        if (!contains && getGlobalSettingsString(null, bundle, Settings.Global.UPDATABLE_DRIVER_PRODUCTION_DENYLIST).contains(str3)) {
+                        if (!zContains && getGlobalSettingsString(null, bundle, Settings.Global.UPDATABLE_DRIVER_PRODUCTION_DENYLIST).contains(str3)) {
                             Log.v(TAG, "App is on the denylist for updatable production driver.");
                             return null;
                         }
@@ -483,20 +484,20 @@ public class GraphicsEnvironment {
         return null;
     }
 
-    private boolean chooseDriver(Context context, Bundle bundle, PackageManager packageManager, String str, ApplicationInfo applicationInfo) {
-        String chooseAbi;
-        String chooseDriverInternal = chooseDriverInternal(bundle, applicationInfo);
-        if (chooseDriverInternal == null) {
+    private boolean chooseDriver(Context context, Bundle bundle, PackageManager packageManager, String str, ApplicationInfo applicationInfo) throws IOException {
+        String strChooseAbi;
+        String strChooseDriverInternal = chooseDriverInternal(bundle, applicationInfo);
+        if (strChooseDriverInternal == null) {
             return false;
         }
         try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(chooseDriverInternal, 1048704);
+            PackageInfo packageInfo = packageManager.getPackageInfo(strChooseDriverInternal, 1048704);
             ApplicationInfo applicationInfo2 = packageInfo.applicationInfo;
-            if (applicationInfo2.targetSdkVersion < 26 || (chooseAbi = chooseAbi(applicationInfo2)) == null) {
+            if (applicationInfo2.targetSdkVersion < 26 || (strChooseAbi = chooseAbi(applicationInfo2)) == null) {
                 return false;
             }
-            String str2 = applicationInfo2.nativeLibraryDir + File.pathSeparator + applicationInfo2.sourceDir + "!/lib/" + chooseAbi;
-            String sphalLibraries = getSphalLibraries(context, chooseDriverInternal);
+            String str2 = applicationInfo2.nativeLibraryDir + File.pathSeparator + applicationInfo2.sourceDir + "!/lib/" + strChooseAbi;
+            String sphalLibraries = getSphalLibraries(context, strChooseDriverInternal);
             Log.v(TAG, "Updatable driver package search path: " + str2 + ", required sphal libraries: " + sphalLibraries);
             setDriverPathAndSphalLibraries(str2, sphalLibraries);
             if (applicationInfo2.metaData == null) {
@@ -507,10 +508,10 @@ public class GraphicsEnvironment {
                 Log.w(TAG, "com.android.graphics.driver.build_time is not set");
                 string = "L0";
             }
-            setGpuStats(chooseDriverInternal, packageInfo.versionName, applicationInfo2.longVersionCode, Long.parseLong(string.substring(1)), str, 0);
+            setGpuStats(strChooseDriverInternal, packageInfo.versionName, applicationInfo2.longVersionCode, Long.parseLong(string.substring(1)), str, 0);
             return true;
         } catch (PackageManager.NameNotFoundException unused) {
-            Log.w(TAG, "updatable driver package '" + chooseDriverInternal + "' not installed");
+            Log.w(TAG, "updatable driver package '" + strChooseDriverInternal + "' not installed");
             return false;
         }
     }
@@ -526,14 +527,14 @@ public class GraphicsEnvironment {
         return applicationInfo.secondaryCpuAbi;
     }
 
-    private String getSphalLibraries(Context context, String str) {
+    private String getSphalLibraries(Context context, String str) throws IOException {
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.createPackageContext(str, 4).getAssets().open(UPDATABLE_DRIVER_SPHAL_LIBRARIES_FILENAME)));
             ArrayList arrayList = new ArrayList();
             while (true) {
-                String readLine = bufferedReader.readLine();
-                if (readLine != null) {
-                    arrayList.add(readLine);
+                String line = bufferedReader.readLine();
+                if (line != null) {
+                    arrayList.add(line);
                 } else {
                     return String.join(":", arrayList);
                 }

@@ -115,10 +115,10 @@ public abstract class ImsVideoCallProvider {
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
         public void setCamera(String str, int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = i;
-            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(2, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = i;
+            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
@@ -143,10 +143,10 @@ public abstract class ImsVideoCallProvider {
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
         public void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = videoProfile;
-            obtain.arg2 = videoProfile2;
-            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(7, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = videoProfile;
+            someArgsObtain.arg2 = videoProfile2;
+            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(7, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.ims.internal.IImsVideoCallProvider

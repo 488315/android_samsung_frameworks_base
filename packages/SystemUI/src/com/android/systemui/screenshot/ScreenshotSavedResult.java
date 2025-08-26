@@ -10,7 +10,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotSavedResult {
     public final long imageTime;
@@ -18,7 +17,6 @@ public final class ScreenshotSavedResult {
     public final Uri uri;
     public final UserHandle user;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,9 +34,9 @@ public final class ScreenshotSavedResult {
         this.uri = uri;
         this.user = userHandle;
         this.imageTime = j;
-        String format = DateFormat.getDateTimeInstance().format(new Date(j));
+        String str = DateFormat.getDateTimeInstance().format(new Date(j));
         int i = StringCompanionObject.$r8$clinit;
-        this.subject = String.format("Screenshot (%s)", Arrays.copyOf(new Object[]{format}, 1));
+        this.subject = String.format("Screenshot (%s)", Arrays.copyOf(new Object[]{str}, 1));
     }
 
     public final boolean equals(Object obj) {

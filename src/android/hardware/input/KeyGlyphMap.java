@@ -9,6 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.SparseIntArray;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,16 +50,16 @@ public final class KeyGlyphMap implements Parcelable {
         this.mHardwareShortcuts = map;
     }
 
-    public KeyGlyphMap(Parcel parcel) {
+    public KeyGlyphMap(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mComponentName = (ComponentName) parcel.readParcelable(getClass().getClassLoader(), ComponentName.class);
         this.mKeyGlyphs = parcel.readSparseIntArray();
         this.mModifierGlyphs = parcel.readSparseIntArray();
         int[] iArr = new int[parcel.readInt()];
         this.mFunctionRowKeys = iArr;
         parcel.readIntArray(iArr);
-        HashMap hashMap = new HashMap(parcel.readInt());
-        this.mHardwareShortcuts = hashMap;
-        parcel.readMap(hashMap, getClass().getClassLoader(), KeyCombination.class, Integer.class);
+        HashMap map = new HashMap(parcel.readInt());
+        this.mHardwareShortcuts = map;
+        parcel.readMap(map, getClass().getClassLoader(), KeyCombination.class, Integer.class);
     }
 
     @Override // android.os.Parcelable

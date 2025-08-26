@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ShadeInteractorImpl$isShadeTouchable$2 extends SuspendLambda implements Function4 {
     final /* synthetic */ DozeParameters $dozeParams;
@@ -25,13 +24,13 @@ final class ShadeInteractorImpl$isShadeTouchable$2 extends SuspendLambda impleme
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
         ShadeInteractorImpl$isShadeTouchable$2 shadeInteractorImpl$isShadeTouchable$2 = new ShadeInteractorImpl$isShadeTouchable$2(this.$dozeParams, (Continuation) obj4);
-        shadeInteractorImpl$isShadeTouchable$2.Z$0 = booleanValue;
-        shadeInteractorImpl$isShadeTouchable$2.Z$1 = booleanValue2;
-        shadeInteractorImpl$isShadeTouchable$2.Z$2 = booleanValue3;
+        shadeInteractorImpl$isShadeTouchable$2.Z$0 = zBooleanValue;
+        shadeInteractorImpl$isShadeTouchable$2.Z$1 = zBooleanValue2;
+        shadeInteractorImpl$isShadeTouchable$2.Z$2 = zBooleanValue3;
         return shadeInteractorImpl$isShadeTouchable$2.invokeSuspend(Unit.INSTANCE);
     }
 

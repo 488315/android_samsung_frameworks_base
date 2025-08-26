@@ -8,7 +8,6 @@ import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyn
 import com.android.systemui.R;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecCountDownTimer extends CountDownTimer {
     public final int mAttempt;
@@ -32,55 +31,57 @@ public class SecCountDownTimer extends CountDownTimer {
         this.mAttempt = keyguardUpdateMonitor.getFailedUnlockAttempts(selectedUserInteractor.getSelectedUserId());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:25:0x00cd  */
     @Override // android.os.CountDownTimer
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void onTick(long j) {
-        String sb;
+        String string;
         String quantityString;
-        int round = Math.round(j / 1000) % 60;
-        int floor = ((int) Math.floor(j / 60000)) % 60;
-        int floor2 = (int) Math.floor(j / 3600000);
+        int iRound = Math.round(j / 1000) % 60;
+        int iFloor = ((int) Math.floor(j / 60000)) % 60;
+        int iFloor2 = (int) Math.floor(j / 3600000);
         if (this.mAttemptRemainingBeforeWipe <= 0) {
             int i = this.mAttemptRemainingBeforePermanentLock;
             if (3 < i || i <= 0) {
                 if (this.mIsBouncer) {
-                    StringBuilder sb2 = new StringBuilder();
-                    sb2.append(this.mContext.getString(R.string.kg_too_many_failed_attempts_warning));
-                    sb2.append(this.mKeyguardUpdateMonitor.isRemoteLockMode() ? "\n" : "\n\n");
-                    sb = sb2.toString();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(this.mContext.getString(R.string.kg_too_many_failed_attempts_warning));
+                    sb.append(this.mKeyguardUpdateMonitor.isRemoteLockMode() ? "\n" : "\n\n");
+                    string = sb.toString();
+                } else {
+                    string = "";
                 }
-                sb = "";
-            } else {
-                if (this.mIsBouncer) {
-                    StringBuilder sb3 = new StringBuilder();
-                    Resources resources = this.mContext.getResources();
-                    int i2 = this.mAttemptRemainingBeforePermanentLock;
-                    sb3.append(resources.getQuantityString(R.plurals.kg_attempt_left_before_permanent_locking, i2, Integer.valueOf(i2)));
-                    sb3.append(this.mKeyguardUpdateMonitor.isRemoteLockMode() ? "\n" : "\n\n");
-                    sb = sb3.toString();
-                }
-                sb = "";
+            } else if (this.mIsBouncer) {
+                StringBuilder sb2 = new StringBuilder();
+                Resources resources = this.mContext.getResources();
+                int i2 = this.mAttemptRemainingBeforePermanentLock;
+                sb2.append(resources.getQuantityString(R.plurals.kg_attempt_left_before_permanent_locking, i2, Integer.valueOf(i2)));
+                sb2.append(this.mKeyguardUpdateMonitor.isRemoteLockMode() ? "\n" : "\n\n");
+                string = sb2.toString();
             }
         } else if (this.mIsBouncer) {
-            sb = this.mKeyguardTextBuilder.getWarningAutoWipeMessage(this.mAttempt, this.mAttemptRemainingBeforeWipe) + "\n\n";
+            string = this.mKeyguardTextBuilder.getWarningAutoWipeMessage(this.mAttempt, this.mAttemptRemainingBeforeWipe) + "\n\n";
         } else {
-            StringBuilder sb4 = new StringBuilder();
+            StringBuilder sb3 = new StringBuilder();
             Resources resources2 = this.mContext.getResources();
             int i3 = this.mAttemptRemainingBeforeWipe;
-            sb = TransitionKt$$ExternalSyntheticOutline0.m(sb4, resources2.getQuantityString(R.plurals.kg_attempt_left, i3, Integer.valueOf(i3)), "\n");
+            string = TransitionKt$$ExternalSyntheticOutline0.m(sb3, resources2.getQuantityString(R.plurals.kg_attempt_left, i3, Integer.valueOf(i3)), "\n");
         }
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(sb);
-        int i4 = floor + 1;
-        int i5 = round + 1;
-        if (floor2 <= 0) {
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+        int i4 = iFloor + 1;
+        int i5 = iRound + 1;
+        if (iFloor2 <= 0) {
             quantityString = i4 > 1 ? this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_min, i4, Integer.valueOf(i4)) : this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_sec, i5, Integer.valueOf(i5));
         } else if (i4 == 60) {
-            int i6 = floor2 + 1;
+            int i6 = iFloor2 + 1;
             quantityString = this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_hour, i6, Integer.valueOf(i6));
         } else {
-            quantityString = floor2 == 1 ? this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_1_hour_and_min, i4, Integer.valueOf(i4)) : (floor2 <= 1 || i4 != 1) ? this.mContext.getString(R.string.kg_too_many_failed_attempts_countdown_hour_and_min, Integer.valueOf(floor2), Integer.valueOf(i4)) : this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_hour_and_1_min, floor2, Integer.valueOf(floor2));
+            quantityString = iFloor2 == 1 ? this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_1_hour_and_min, i4, Integer.valueOf(i4)) : (iFloor2 <= 1 || i4 != 1) ? this.mContext.getString(R.string.kg_too_many_failed_attempts_countdown_hour_and_min, Integer.valueOf(iFloor2), Integer.valueOf(i4)) : this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_attempts_countdown_hour_and_1_min, iFloor2, Integer.valueOf(iFloor2));
         }
-        m.append(quantityString);
-        this.mTimerText = m.toString();
+        sbM.append(quantityString);
+        this.mTimerText = sbM.toString();
     }
 
     @Override // android.os.CountDownTimer

@@ -465,9 +465,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISamsungDeviceHealthManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISamsungDeviceHealthManager)) {
-                return (ISamsungDeviceHealthManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISamsungDeviceHealthManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISamsungDeviceHealthManager)) {
+                return (ISamsungDeviceHealthManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -599,28 +599,28 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(Bundle.CREATOR);
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    logAction(readString, readInt, createTypedArrayList);
+                    logAction(string, i3, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(Bundle.CREATOR);
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    logActionWithPkg(readString2, readInt2, readString3, createTypedArrayList2);
+                    logActionWithPkg(string2, i4, string3, arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    logActionWithSource(readString4, readInt3, readInt4);
+                    logActionWithSource(string4, i5, i6);
                     parcel2.writeNoException();
                     return true;
                 case 4:
@@ -630,54 +630,54 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendCommand(readString5, readString6);
+                    sendCommand(string5, string6);
                     return true;
                 case 6:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int remainingUsageTime = getRemainingUsageTime(readInt5);
+                    int remainingUsageTime = getRemainingUsageTime(i7);
                     parcel2.writeNoException();
                     parcel2.writeInt(remainingUsageTime);
                     return true;
                 case 7:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int remainingUsageTimeWithSettings = getRemainingUsageTimeWithSettings(readInt6, readInt7);
+                    int remainingUsageTimeWithSettings = getRemainingUsageTimeWithSettings(i8, i9);
                     parcel2.writeNoException();
                     parcel2.writeInt(remainingUsageTimeWithSettings);
                     return true;
                 case 8:
-                    String readString7 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float[] supportVRTemperaturesInformation = supportVRTemperaturesInformation(readString7, readInt8, readInt9);
+                    float[] fArrSupportVRTemperaturesInformation = supportVRTemperaturesInformation(string7, i10, i11);
                     parcel2.writeNoException();
-                    parcel2.writeFloatArray(supportVRTemperaturesInformation);
+                    parcel2.writeFloatArray(fArrSupportVRTemperaturesInformation);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int ssrmStatus = getSsrmStatus(readInt10);
+                    int ssrmStatus = getSsrmStatus(i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(ssrmStatus);
                     return true;
                 case 10:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    initGameSdkMaxlock(readStrongBinder, readStrongBinder2);
+                    initGameSdkMaxlock(strongBinder, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acquireGameSdkMaxlock(readInt11, readInt12);
+                    acquireGameSdkMaxlock(i13, i14);
                     parcel2.writeNoException();
                     return true;
                 case 12:
@@ -694,32 +694,32 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeInt(lRTemperature);
                     return true;
                 case 15:
-                    int readInt13 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<SemBatteryStats> batteryStats = getBatteryStats(readInt13, readLong, readLong2, readBoolean);
+                    List<SemBatteryStats> batteryStats = getBatteryStats(i15, j, j2, z);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(batteryStats, 1);
                     return true;
                 case 16:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isDownLoadingForUid = isDownLoadingForUid(readInt14);
+                    boolean zIsDownLoadingForUid = isDownLoadingForUid(i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDownLoadingForUid);
+                    parcel2.writeBoolean(zIsDownLoadingForUid);
                     return true;
                 case 17:
-                    boolean isGameSupportLRP = isGameSupportLRP();
+                    boolean zIsGameSupportLRP = isGameSupportLRP();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGameSupportLRP);
+                    parcel2.writeBoolean(zIsGameSupportLRP);
                     return true;
                 case 18:
-                    int readInt15 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int rut = getRUT(readInt15, readString8);
+                    int rut = getRUT(i17, string8);
                     parcel2.writeNoException();
                     parcel2.writeInt(rut);
                     return true;
@@ -734,24 +734,24 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeTypedList(temperatures, 1);
                     return true;
                 case 21:
-                    IThermalEventListener asInterface = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalEventListener iThermalEventListenerAsInterface = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface);
+                    registerCallback(iThermalEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int temperature = getTemperature(readInt16);
+                    int temperature = getTemperature(i18);
                     parcel2.writeNoException();
                     parcel2.writeInt(temperature);
                     return true;
                 case 23:
-                    long readLong3 = parcel.readLong();
-                    long readLong4 = parcel.readLong();
-                    int readInt17 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    long j4 = parcel.readLong();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<SemBatteryEventHistory> batteryEventHistory = getBatteryEventHistory(readLong3, readLong4, readInt17);
+                    List<SemBatteryEventHistory> batteryEventHistory = getBatteryEventHistory(j3, j4, i19);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(batteryEventHistory, 1);
                     return true;
@@ -761,41 +761,41 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeInt(supportedHistoryTypes);
                     return true;
                 case 25:
-                    long readLong5 = parcel.readLong();
-                    long readLong6 = parcel.readLong();
+                    long j5 = parcel.readLong();
+                    long j6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    List<SemThermalStats> thermalStats = getThermalStats(readLong5, readLong6);
+                    List<SemThermalStats> thermalStats = getThermalStats(j5, j6);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(thermalStats, 1);
                     return true;
                 case 26:
-                    long readLong7 = parcel.readLong();
-                    long readLong8 = parcel.readLong();
+                    long j7 = parcel.readLong();
+                    long j8 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    List<SemProcessUsageStats> processUsageStats = getProcessUsageStats(readLong7, readLong8);
+                    List<SemProcessUsageStats> processUsageStats = getProcessUsageStats(j7, j8);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(processUsageStats, 1);
                     return true;
                 case 27:
-                    long readLong9 = parcel.readLong();
-                    long readLong10 = parcel.readLong();
+                    long j9 = parcel.readLong();
+                    long j10 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    List<SemNetworkUsageStats> networkUsageStats = getNetworkUsageStats(readLong9, readLong10);
+                    List<SemNetworkUsageStats> networkUsageStats = getNetworkUsageStats(j9, j10);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(networkUsageStats, 1);
                     return true;
                 case 28:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean thermalThrottlingDelta = setThermalThrottlingDelta(readInt18);
+                    boolean thermalThrottlingDelta = setThermalThrottlingDelta(i20);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(thermalThrottlingDelta);
                     return true;
                 case 29:
-                    String readString9 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean thermalThrottlingDeltaWithPackageName = setThermalThrottlingDeltaWithPackageName(readString9, readInt19);
+                    boolean thermalThrottlingDeltaWithPackageName = setThermalThrottlingDeltaWithPackageName(string9, i21);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(thermalThrottlingDeltaWithPackageName);
                     return true;
@@ -810,17 +810,17 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeInt(supportedThermalThrottlingDelta);
                     return true;
                 case 32:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    boolean z2 = parcel.readBoolean();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    updateSpaOperation(readBoolean2, readStrongBinder3);
+                    updateSpaOperation(z2, strongBinder3);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    boolean readBoolean3 = parcel.readBoolean();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    boolean z3 = parcel.readBoolean();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    updateGameSdkOperation(readBoolean3, readStrongBinder4);
+                    updateGameSdkOperation(z3, strongBinder4);
                     parcel2.writeNoException();
                     return true;
                 case 34:
@@ -836,10 +836,10 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeBoolean(anomalyConfig);
                     return true;
                 case 36:
-                    long readLong11 = parcel.readLong();
-                    long readLong12 = parcel.readLong();
+                    long j11 = parcel.readLong();
+                    long j12 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    List<OverheatReasonInternal> overheatReason = getOverheatReason(readLong11, readLong12);
+                    List<OverheatReasonInternal> overheatReason = getOverheatReason(j11, j12);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(overheatReason, 1);
                     return true;
@@ -849,9 +849,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeString(activeSensorList);
                     return true;
                 case 38:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean thermalControlFlag = setThermalControlFlag(readInt20);
+                    boolean thermalControlFlag = setThermalControlFlag(i22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(thermalControlFlag);
                     return true;
@@ -861,11 +861,11 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeInt(thermalControlFlag2);
                     return true;
                 case 40:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addHeavyLoadApps = addHeavyLoadApps(createStringArrayList);
+                    boolean zAddHeavyLoadApps = addHeavyLoadApps(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addHeavyLoadApps);
+                    parcel2.writeBoolean(zAddHeavyLoadApps);
                     return true;
                 case 41:
                     List<String> heavyLoadApps = getHeavyLoadApps();
@@ -873,11 +873,11 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeStringList(heavyLoadApps);
                     return true;
                 case 42:
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addLowModeApps = addLowModeApps(createStringArrayList2);
+                    boolean zAddLowModeApps = addLowModeApps(arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addLowModeApps);
+                    parcel2.writeBoolean(zAddLowModeApps);
                     return true;
                 case 43:
                     List<String> lowModeApps = getLowModeApps();
@@ -885,11 +885,11 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeStringList(lowModeApps);
                     return true;
                 case 44:
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addLowRefreshRateApps = addLowRefreshRateApps(createStringArrayList3);
+                    boolean zAddLowRefreshRateApps = addLowRefreshRateApps(arrayListCreateStringArrayList3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addLowRefreshRateApps);
+                    parcel2.writeBoolean(zAddLowRefreshRateApps);
                     return true;
                 case 45:
                     List<String> lowRefreshRateApps = getLowRefreshRateApps();
@@ -897,40 +897,40 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeStringList(lowRefreshRateApps);
                     return true;
                 case 46:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] allTemperatures = getAllTemperatures(readInt21);
+                    int[] allTemperatures = getAllTemperatures(i23);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(allTemperatures);
                     return true;
                 case 47:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int updateBatteryStatsInfo = updateBatteryStatsInfo(readInt22);
+                    int iUpdateBatteryStatsInfo = updateBatteryStatsInfo(i24);
                     parcel2.writeNoException();
-                    parcel2.writeInt(updateBatteryStatsInfo);
+                    parcel2.writeInt(iUpdateBatteryStatsInfo);
                     return true;
                 case 48:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean updateConfigPart = updateConfigPart(readString10, readString11, readString12);
+                    boolean zUpdateConfigPart = updateConfigPart(string10, string11, string12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateConfigPart);
+                    parcel2.writeBoolean(zUpdateConfigPart);
                     return true;
                 case 49:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeConfigPart = removeConfigPart(readString13, readString14);
+                    boolean zRemoveConfigPart = removeConfigPart(string13, string14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeConfigPart);
+                    parcel2.writeBoolean(zRemoveConfigPart);
                     return true;
                 case 50:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setHighBrightnessMode(readBoolean4);
+                    setHighBrightnessMode(z4);
                     parcel2.writeNoException();
                     return true;
                 case 51:
@@ -939,11 +939,11 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     parcel2.writeBoolean(highBrightnessMode);
                     return true;
                 case 52:
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isGameByGraphic = isGameByGraphic(readString15);
+                    boolean zIsGameByGraphic = isGameByGraphic(string15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGameByGraphic);
+                    parcel2.writeBoolean(zIsGameByGraphic);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -968,830 +968,830 @@ public interface ISamsungDeviceHealthManager extends IInterface {
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void logAction(String str, int i, List<Bundle> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void logActionWithPkg(String str, int i, String str2, List<Bundle> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void logActionWithSource(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void logAnomaly(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void sendCommand(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getRemainingUsageTime(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getRemainingUsageTimeWithSettings(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public float[] supportVRTemperaturesInformation(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getSsrmStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void initGameSdkMaxlock(IBinder iBinder, IBinder iBinder2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void acquireGameSdkMaxlock(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void releaseGameSdkMaxlock() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void destroyGameSdkMaxlock() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getLRTemperature() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<SemBatteryStats> getBatteryStats(int i, long j, long j2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemBatteryStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemBatteryStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean isDownLoadingForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean isGameSupportLRP() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getRUT(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<CoolingDevice> getCoolingDevices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(CoolingDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(CoolingDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<Temperature> getTemperatures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Temperature.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Temperature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void registerCallback(IThermalEventListener iThermalEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalEventListener);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalEventListener);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getTemperature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<SemBatteryEventHistory> getBatteryEventHistory(long j, long j2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemBatteryEventHistory.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemBatteryEventHistory.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getSupportedHistoryTypes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<SemThermalStats> getThermalStats(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemThermalStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemThermalStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<SemProcessUsageStats> getProcessUsageStats(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemProcessUsageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemProcessUsageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<SemNetworkUsageStats> getNetworkUsageStats(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemNetworkUsageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemNetworkUsageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean setThermalThrottlingDelta(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean setThermalThrottlingDeltaWithPackageName(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getThermalThrottlingDelta() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getSupportedThermalThrottlingDelta() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void updateSpaOperation(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void updateGameSdkOperation(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public Bundle getGameSiopInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean setAnomalyConfig(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<OverheatReasonInternal> getOverheatReason(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(OverheatReasonInternal.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(OverheatReasonInternal.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public String getActiveSensorList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean setThermalControlFlag(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int getThermalControlFlag() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean addHeavyLoadApps(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<String> getHeavyLoadApps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean addLowModeApps(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<String> getLowModeApps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean addLowRefreshRateApps(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public List<String> getLowRefreshRateApps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int[] getAllTemperatures(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public int updateBatteryStatsInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean updateConfigPart(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean removeConfigPart(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public void setHighBrightnessMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean getHighBrightnessMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
             public boolean isGameByGraphic(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

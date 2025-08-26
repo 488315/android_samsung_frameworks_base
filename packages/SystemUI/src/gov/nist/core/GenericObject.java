@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class GenericObject implements Serializable, Cloneable {
     protected Match matchExpression;
@@ -82,11 +81,11 @@ public abstract class GenericObject implements Serializable, Cloneable {
         if (obj == null || !getClass().equals(obj.getClass())) {
             return false;
         }
-        Class<?> cls = getClass();
-        Class<?> cls2 = obj.getClass();
+        Class<?> superclass = getClass();
+        Class<?> superclass2 = obj.getClass();
         while (true) {
-            Field[] declaredFields = cls.getDeclaredFields();
-            Field[] declaredFields2 = cls2.getDeclaredFields();
+            Field[] declaredFields = superclass.getDeclaredFields();
+            Field[] declaredFields2 = superclass2.getDeclaredFields();
             for (int i = 0; i < declaredFields.length; i++) {
                 Field field = declaredFields[i];
                 Field field2 = declaredFields2[i];
@@ -96,32 +95,32 @@ public abstract class GenericObject implements Serializable, Cloneable {
                     if (name.compareTo("stringRepresentation") != 0 && name.compareTo("indentation") != 0) {
                         try {
                             if (type.isPrimitive()) {
-                                String cls3 = type.toString();
-                                if (cls3.compareTo("int") == 0) {
+                                String string = type.toString();
+                                if (string.compareTo("int") == 0) {
                                     if (field.getInt(this) != field2.getInt(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("short") == 0) {
+                                } else if (string.compareTo("short") == 0) {
                                     if (field.getShort(this) != field2.getShort(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("char") == 0) {
+                                } else if (string.compareTo("char") == 0) {
                                     if (field.getChar(this) != field2.getChar(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("long") == 0) {
+                                } else if (string.compareTo("long") == 0) {
                                     if (field.getLong(this) != field2.getLong(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("boolean") == 0) {
+                                } else if (string.compareTo("boolean") == 0) {
                                     if (field.getBoolean(this) != field2.getBoolean(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("double") == 0) {
+                                } else if (string.compareTo("double") == 0) {
                                     if (field.getDouble(this) != field2.getDouble(obj)) {
                                         return false;
                                     }
-                                } else if (cls3.compareTo("float") == 0 && field.getFloat(this) != field2.getFloat(obj)) {
+                                } else if (string.compareTo("float") == 0 && field.getFloat(this) != field2.getFloat(obj)) {
                                     return false;
                                 }
                             } else {
@@ -142,11 +141,11 @@ public abstract class GenericObject implements Serializable, Cloneable {
                     }
                 }
             }
-            if (cls.equals(GenericObject.class)) {
+            if (superclass.equals(GenericObject.class)) {
                 return true;
             }
-            cls = cls.getSuperclass();
-            cls2 = cls2.getSuperclass();
+            superclass = superclass.getSuperclass();
+            superclass2 = superclass2.getSuperclass();
         }
     }
 }

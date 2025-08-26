@@ -97,36 +97,36 @@ public class KernelCpuProcStringReader {
         }
         int i = 0;
         this.mSize = 0;
-        int allowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
+        int iAllowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
         try {
             try {
                 try {
-                    BufferedReader newBufferedReader = Files.newBufferedReader(this.mFile);
+                    BufferedReader bufferedReaderNewBufferedReader = Files.newBufferedReader(this.mFile);
                     try {
                         if (this.mBuf == null) {
                             this.mBuf = new char[1024];
                         }
                         while (true) {
                             char[] cArr = this.mBuf;
-                            int read = newBufferedReader.read(cArr, i, cArr.length - i);
-                            if (read < 0) {
+                            int i2 = bufferedReaderNewBufferedReader.read(cArr, i, cArr.length - i);
+                            if (i2 < 0) {
                                 this.mSize = i;
                                 this.mLastReadTime = this.mClock.elapsedRealtime();
                                 this.mReadLock.lock();
                                 ProcFileIterator procFileIterator = new ProcFileIterator(i);
-                                if (newBufferedReader != null) {
-                                    newBufferedReader.close();
+                                if (bufferedReaderNewBufferedReader != null) {
+                                    bufferedReaderNewBufferedReader.close();
                                 }
                                 return procFileIterator;
                             }
-                            i += read;
+                            i += i2;
                             char[] cArr2 = this.mBuf;
                             if (i == cArr2.length) {
                                 if (cArr2.length == 1048576) {
                                     this.mErrors++;
                                     Slog.e(TAG, "Proc file too large: " + this.mFile);
-                                    if (newBufferedReader != null) {
-                                        newBufferedReader.close();
+                                    if (bufferedReaderNewBufferedReader != null) {
+                                        bufferedReaderNewBufferedReader.close();
                                     }
                                     return null;
                                 }
@@ -134,27 +134,27 @@ public class KernelCpuProcStringReader {
                             }
                         }
                     } catch (Throwable th) {
-                        if (newBufferedReader != null) {
+                        if (bufferedReaderNewBufferedReader != null) {
                             try {
-                                newBufferedReader.close();
+                                bufferedReaderNewBufferedReader.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
                         }
                         throw th;
                     }
-                } catch (FileNotFoundException | NoSuchFileException unused) {
+                } catch (IOException e) {
                     this.mErrors++;
-                    Slog.w(TAG, "File not found. It's normal if not implemented: " + this.mFile);
+                    Slog.e(TAG, "Error reading " + this.mFile, e);
                     return null;
                 }
-            } catch (IOException e) {
+            } catch (FileNotFoundException | NoSuchFileException unused) {
                 this.mErrors++;
-                Slog.e(TAG, "Error reading " + this.mFile, e);
+                Slog.w(TAG, "File not found. It's normal if not implemented: " + this.mFile);
                 return null;
             }
         } finally {
-            StrictMode.setThreadPolicyMask(allowThreadDiskReadsMask);
+            StrictMode.setThreadPolicyMask(iAllowThreadDiskReadsMask);
             this.mWriteLock.unlock();
         }
     }
@@ -202,13 +202,13 @@ public class KernelCpuProcStringReader {
         if (charBuffer == null) {
             return -1;
         }
-        int position = charBuffer.position();
+        int iPosition = charBuffer.position();
         int i = 0;
         long j = -1;
         while (charBuffer.remaining() > 0 && i < jArr.length) {
             char c = charBuffer.get();
             if (!isNumber(c) && c != ' ' && c != ':') {
-                charBuffer.position(position);
+                charBuffer.position(iPosition);
                 return -2;
             }
             if (j < 0) {
@@ -218,7 +218,7 @@ public class KernelCpuProcStringReader {
             } else if (isNumber(c)) {
                 j = ((j * 10) + c) - 48;
                 if (j < 0) {
-                    charBuffer.position(position);
+                    charBuffer.position(iPosition);
                     return -3;
                 }
             } else {
@@ -231,7 +231,7 @@ public class KernelCpuProcStringReader {
             jArr[i] = j;
             i++;
         }
-        charBuffer.position(position);
+        charBuffer.position(iPosition);
         return i;
     }
 }

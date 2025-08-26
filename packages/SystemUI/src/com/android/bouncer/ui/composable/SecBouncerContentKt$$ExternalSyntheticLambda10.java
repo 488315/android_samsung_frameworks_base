@@ -7,7 +7,6 @@ import androidx.compose.ui.focus.FocusOwnerImpl;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class SecBouncerContentKt$$ExternalSyntheticLambda10 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -25,7 +24,7 @@ public final /* synthetic */ class SecBouncerContentKt$$ExternalSyntheticLambda1
                 FocusOwnerImpl focusOwnerImpl = (FocusOwnerImpl) ((FocusManager) this.f$0);
                 focusOwnerImpl.getClass();
                 FocusDirection.Companion.getClass();
-                focusOwnerImpl.m370clearFocusI7lrPNg(FocusDirection.Exit, false, true);
+                focusOwnerImpl.m372clearFocusI7lrPNg(FocusDirection.Exit, false, true);
                 break;
             default:
                 ((MutableState) this.f$0).setValue(Boolean.valueOf(!((Boolean) r3.getValue()).booleanValue()));

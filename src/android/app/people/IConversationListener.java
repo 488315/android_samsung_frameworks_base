@@ -44,9 +44,9 @@ public interface IConversationListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IConversationListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IConversationListener)) {
-                return (IConversationListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IConversationListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IConversationListener)) {
+                return (IConversationListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IConversationListener extends IInterface {
 
             @Override // android.app.people.IConversationListener
             public void onConversationUpdate(ConversationChannel conversationChannel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConversationListener.DESCRIPTOR);
-                    obtain.writeTypedObject(conversationChannel, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IConversationListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(conversationChannel, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

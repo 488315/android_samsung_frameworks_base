@@ -55,24 +55,24 @@ public class SQLiteDump {
             return;
         }
         try {
-            String createDumpDir = createDumpDir();
-            this.mDumpDirPath = createDumpDir;
-            boolean createCorruptFile = createCorruptFile(createDumpDir);
-            if (createCorruptFile) {
+            String strCreateDumpDir = createDumpDir();
+            this.mDumpDirPath = strCreateDumpDir;
+            boolean zCreateCorruptFile = createCorruptFile(strCreateDumpDir);
+            if (zCreateCorruptFile) {
                 this.mOutPutStream = new BufferedOutputStream(new FileOutputStream(this.mDumpFile.getAbsoluteFile()));
                 this.mDumpFilePrinter = new PrintStream((OutputStream) this.mOutPutStream, true);
                 LogPrinter logPrinter = new LogPrinter(5, TAG);
-                String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis()));
+                String str = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis()));
                 this.mTeePrinter = new TeePrinter(logPrinter, this.mDumpFilePrinter);
                 PrintStream printStream = this.mDumpFilePrinter;
                 if (printStream != null) {
                     printStream.println("===== corrupt db name: " + new File(this.mDbPath).getName() + " =====");
-                    this.mDumpFilePrinter.println("===== corrupt time:    " + format + " =====");
+                    this.mDumpFilePrinter.println("===== corrupt time:    " + str + " =====");
                     this.mDumpFilePrinter.println("===== dump file name:  " + this.mDumpFile.getName() + " =====");
                 }
             }
             deleteOldDumpFiles();
-            this.isReady.set(createCorruptFile);
+            this.isReady.set(zCreateCorruptFile);
         } catch (Exception e) {
             Log.e(TAG, "prepare dump file failed.", e);
             reset();
@@ -154,37 +154,37 @@ public class SQLiteDump {
                     this.mDumpFilePrinter = null;
                 }
             } catch (Exception unused) {
+            }
+        } catch (Exception unused2) {
+            this.isReady.set(false);
+            this.mTeePrinter = null;
+            BufferedOutputStream bufferedOutputStream3 = this.mOutPutStream;
+            if (bufferedOutputStream3 != null) {
+                bufferedOutputStream3.close();
+                this.mOutPutStream = null;
+            }
+            PrintStream printStream2 = this.mDumpFilePrinter;
+            if (printStream2 != null) {
+                printStream2.close();
+                this.mDumpFilePrinter = null;
+            }
+        } catch (Throwable th) {
+            try {
                 this.isReady.set(false);
                 this.mTeePrinter = null;
-                BufferedOutputStream bufferedOutputStream3 = this.mOutPutStream;
-                if (bufferedOutputStream3 != null) {
-                    bufferedOutputStream3.close();
+                BufferedOutputStream bufferedOutputStream4 = this.mOutPutStream;
+                if (bufferedOutputStream4 != null) {
+                    bufferedOutputStream4.close();
                     this.mOutPutStream = null;
                 }
-                PrintStream printStream2 = this.mDumpFilePrinter;
-                if (printStream2 != null) {
-                    printStream2.close();
+                PrintStream printStream3 = this.mDumpFilePrinter;
+                if (printStream3 != null) {
+                    printStream3.close();
                     this.mDumpFilePrinter = null;
                 }
-            } catch (Throwable th) {
-                try {
-                    this.isReady.set(false);
-                    this.mTeePrinter = null;
-                    BufferedOutputStream bufferedOutputStream4 = this.mOutPutStream;
-                    if (bufferedOutputStream4 != null) {
-                        bufferedOutputStream4.close();
-                        this.mOutPutStream = null;
-                    }
-                    PrintStream printStream3 = this.mDumpFilePrinter;
-                    if (printStream3 != null) {
-                        printStream3.close();
-                        this.mDumpFilePrinter = null;
-                    }
-                } catch (Exception unused2) {
-                }
-                throw th;
+            } catch (Exception unused3) {
             }
-        } catch (Exception unused3) {
+            throw th;
         }
     }
 
@@ -240,21 +240,21 @@ public class SQLiteDump {
     }
 
     private void deleteOldDumpFiles() {
-        File[] listFiles = new File(this.mDumpDirPath).listFiles();
-        if (listFiles == null || listFiles.length <= 5) {
+        File[] fileArrListFiles = new File(this.mDumpDirPath).listFiles();
+        if (fileArrListFiles == null || fileArrListFiles.length <= 5) {
             return;
         }
-        Arrays.sort(listFiles, new Comparator<File>(this) { // from class: android.database.sqlite.SQLiteDump.1
+        Arrays.sort(fileArrListFiles, new Comparator<File>(this) { // from class: android.database.sqlite.SQLiteDump.1
             @Override // java.util.Comparator
             public int compare(File file, File file2) {
-                long lastModified = file.lastModified() - file2.lastModified();
-                if (lastModified > 0) {
+                long jLastModified = file.lastModified() - file2.lastModified();
+                if (jLastModified > 0) {
                     return 1;
                 }
-                return lastModified == 0 ? 0 : -1;
+                return jLastModified == 0 ? 0 : -1;
             }
         });
-        listFiles[0].delete();
+        fileArrListFiles[0].delete();
     }
 
     private void getLogPrefix(StringBuilder sb) {

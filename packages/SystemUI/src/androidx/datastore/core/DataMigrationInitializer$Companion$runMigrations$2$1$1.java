@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataMigrationInitializer$Companion$runMigrations$2$1$1 extends SuspendLambda implements Function1 {
     final /* synthetic */ DataMigration $migration;
@@ -24,7 +23,7 @@ final class DataMigrationInitializer$Companion$runMigrations$2$1$1 extends Suspe
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((DataMigrationInitializer$Companion$runMigrations$2$1$1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 

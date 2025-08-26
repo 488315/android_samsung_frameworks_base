@@ -241,9 +241,9 @@ public interface ISystemUIAdapterCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISystemUIAdapterCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISystemUIAdapterCallback)) {
-                return (ISystemUIAdapterCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISystemUIAdapterCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISystemUIAdapterCallback)) {
+                return (ISystemUIAdapterCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -329,152 +329,152 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setStatusBarHidden(readBoolean);
+                    setStatusBarHidden(z);
                     return true;
                 case 2:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNavigationBarHidden(readBoolean2);
+                    setNavigationBarHidden(z2);
                     return true;
                 case 3:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setKioskModeEnabled(readBoolean3);
+                    setKioskModeEnabled(z3);
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setMaximumFailedPasswordsForDisable(readInt, readString);
+                    setMaximumFailedPasswordsForDisable(i3, string);
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMaximumFailedPasswordsForProfileDisable(readInt2);
+                    setMaximumFailedPasswordsForProfileDisable(i4);
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPwdChangeRequested(readInt3);
+                    setPwdChangeRequested(i5);
                     return true;
                 case 7:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    excludeExternalStorageForFailedPasswordsWipe(readBoolean4);
+                    excludeExternalStorageForFailedPasswordsWipe(z4);
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPasswordLockDelay(readInt4);
+                    setPasswordLockDelay(i6);
                     return true;
                 case 9:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMultifactorAuthEnabled(readBoolean5);
+                    setMultifactorAuthEnabled(z5);
                     return true;
                 case 10:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPasswordVisibilityEnabled(readBoolean6);
+                    setPasswordVisibilityEnabled(z6);
                     return true;
                 case 11:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSettingsChangeAllowed(readBoolean7);
+                    setSettingsChangeAllowed(z7);
                     return true;
                 case 12:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setStatusBarExpansionAllowed(readBoolean8);
+                    setStatusBarExpansionAllowed(z8);
                     return true;
                 case 13:
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAirplaneModeAllowed(readBoolean9);
+                    setAirplaneModeAllowed(z9);
                     return true;
                 case 14:
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCellularDataAllowed(readBoolean10);
+                    setCellularDataAllowed(z10);
                     return true;
                 case 15:
-                    boolean readBoolean11 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setWifiTetheringAllowed(readBoolean11);
+                    setWifiTetheringAllowed(z11);
                     return true;
                 case 16:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCameraAllowed(readBoolean12);
+                    setCameraAllowed(z12);
                     return true;
                 case 17:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setFaceRecognitionEvenCameraBlockedAllowed(readBoolean13);
+                    setFaceRecognitionEvenCameraBlockedAllowed(z13);
                     return true;
                 case 18:
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBluetoothAllowed(readBoolean14);
+                    setBluetoothAllowed(z14);
                     return true;
                 case 19:
-                    boolean readBoolean15 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNFCStateChangeAllowed(readBoolean15);
+                    setNFCStateChangeAllowed(z15);
                     return true;
                 case 20:
-                    boolean readBoolean16 = parcel.readBoolean();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setRoamingAllowed(readBoolean16);
+                    setRoamingAllowed(z16);
                     return true;
                 case 21:
-                    boolean readBoolean17 = parcel.readBoolean();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setWifiStateChangeAllowed(readBoolean17);
+                    setWifiStateChangeAllowed(z17);
                     return true;
                 case 22:
-                    boolean readBoolean18 = parcel.readBoolean();
+                    boolean z18 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setWifiAllowed(readBoolean18);
+                    setWifiAllowed(z18);
                     return true;
                 case 23:
-                    String readString2 = parcel.readString();
-                    boolean readBoolean19 = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    boolean z19 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLocationProviderAllowed(readString2, readBoolean19);
+                    setLocationProviderAllowed(string2, z19);
                     return true;
                 case 24:
-                    boolean readBoolean20 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setGPSStateChangeAllowed(readBoolean20);
+                    setGPSStateChangeAllowed(z20);
                     return true;
                 case 25:
-                    String[] createStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    setLockedIccIds(createStringArray);
+                    setLockedIccIds(strArrCreateStringArray);
                     return true;
                 case 26:
-                    boolean readBoolean21 = parcel.readBoolean();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLockscreenInvisibleOverlay(readBoolean21);
+                    setLockscreenInvisibleOverlay(z21);
                     return true;
                 case 27:
-                    boolean readBoolean22 = parcel.readBoolean();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLockscreenWallpaper(readBoolean22);
+                    setLockscreenWallpaper(z22);
                     return true;
                 case 28:
-                    boolean readBoolean23 = parcel.readBoolean();
+                    boolean z23 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setApplicationNameControlEnabled(readBoolean23);
+                    setApplicationNameControlEnabled(z23);
                     return true;
                 case 29:
-                    boolean readBoolean24 = parcel.readBoolean();
-                    boolean readBoolean25 = parcel.readBoolean();
+                    boolean z24 = parcel.readBoolean();
+                    boolean z25 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAdminLock(readBoolean24, readBoolean25);
+                    setAdminLock(z24, z25);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -499,352 +499,352 @@ public interface ISystemUIAdapterCallback extends IInterface {
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setStatusBarHidden(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setNavigationBarHidden(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setKioskModeEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setMaximumFailedPasswordsForDisable(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setMaximumFailedPasswordsForProfileDisable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setPwdChangeRequested(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void excludeExternalStorageForFailedPasswordsWipe(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setPasswordLockDelay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setMultifactorAuthEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setPasswordVisibilityEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setSettingsChangeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setStatusBarExpansionAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setAirplaneModeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setCellularDataAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setWifiTetheringAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setCameraAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setFaceRecognitionEvenCameraBlockedAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setBluetoothAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setNFCStateChangeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setRoamingAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setWifiStateChangeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setWifiAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setLocationProviderAllowed(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setGPSStateChangeAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setLockedIccIds(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setLockscreenInvisibleOverlay(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setLockscreenWallpaper(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setApplicationNameControlEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
             public void setAdminLock(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

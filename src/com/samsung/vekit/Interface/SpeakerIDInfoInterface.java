@@ -17,5 +17,5 @@ public interface SpeakerIDInfoInterface<T> {
 
     void removeSpeakerIDInfo(String str);
 
-    void setSpeakerIDInfoMap(HashMap<String, SpeakerIDInfo> hashMap);
+    void setSpeakerIDInfoMap(HashMap<String, SpeakerIDInfo> map);
 }

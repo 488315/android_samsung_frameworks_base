@@ -98,9 +98,9 @@ public interface IContentCaptureService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentCaptureService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentCaptureService)) {
-                return (IContentCaptureService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentCaptureService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentCaptureService)) {
+                return (IContentCaptureService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -144,34 +144,34 @@ public interface IContentCaptureService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onConnected(readStrongBinder, readBoolean, readBoolean2);
+                    onConnected(strongBinder, z, z2);
                     return true;
                 case 2:
                     onDisconnected();
                     return true;
                 case 3:
                     ContentCaptureContext contentCaptureContext = (ContentCaptureContext) parcel.readTypedObject(ContentCaptureContext.CREATOR);
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IResultReceiver asInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt3 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSessionStarted(contentCaptureContext, readInt, readInt2, asInterface, readInt3);
+                    onSessionStarted(contentCaptureContext, i3, i4, iResultReceiverAsInterface, i5);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSessionFinished(readInt4);
+                    onSessionFinished(i6);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     SnapshotData snapshotData = (SnapshotData) parcel.readTypedObject(SnapshotData.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onActivitySnapshot(readInt5, snapshotData);
+                    onActivitySnapshot(i7, snapshotData);
                     return true;
                 case 6:
                     DataRemovalRequest dataRemovalRequest = (DataRemovalRequest) parcel.readTypedObject(DataRemovalRequest.CREATOR);
@@ -180,9 +180,9 @@ public interface IContentCaptureService extends IInterface {
                     return true;
                 case 7:
                     DataShareRequest dataShareRequest = (DataShareRequest) parcel.readTypedObject(DataShareRequest.CREATOR);
-                    IDataShareCallback asInterface2 = IDataShareCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDataShareCallback iDataShareCallbackAsInterface = IDataShareCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onDataShared(dataShareRequest, asInterface2);
+                    onDataShared(dataShareRequest, iDataShareCallbackAsInterface);
                     return true;
                 case 8:
                     ActivityEvent activityEvent = (ActivityEvent) parcel.readTypedObject(ActivityEvent.CREATOR);
@@ -212,104 +212,104 @@ public interface IContentCaptureService extends IInterface {
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onConnected(IBinder iBinder, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onSessionStarted(ContentCaptureContext contentCaptureContext, int i, int i2, IResultReceiver iResultReceiver, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeTypedObject(contentCaptureContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contentCaptureContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onSessionFinished(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onActivitySnapshot(int i, SnapshotData snapshotData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(snapshotData, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(snapshotData, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onDataRemovalRequest(DataRemovalRequest dataRemovalRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeTypedObject(dataRemovalRequest, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dataRemovalRequest, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onDataShared(DataShareRequest dataShareRequest, IDataShareCallback iDataShareCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeTypedObject(dataShareRequest, 0);
-                    obtain.writeStrongInterface(iDataShareCallback);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dataShareRequest, 0);
+                    parcelObtain.writeStrongInterface(iDataShareCallback);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
             public void onActivityEvent(ActivityEvent activityEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
-                    obtain.writeTypedObject(activityEvent, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(activityEvent, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

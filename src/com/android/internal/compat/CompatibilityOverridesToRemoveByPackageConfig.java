@@ -32,9 +32,9 @@ public final class CompatibilityOverridesToRemoveByPackageConfig implements Parc
     }
 
     private CompatibilityOverridesToRemoveByPackageConfig(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.packageNameToOverridesToRemove = new HashMap();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.packageNameToOverridesToRemove.put(parcel.readString(), CompatibilityOverridesToRemoveConfig.CREATOR.createFromParcel(parcel));
         }
     }

@@ -13,7 +13,6 @@ import com.android.systemui.CoreStartable;
 import com.android.systemui.R;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SafeUINavigationBar implements CoreStartable {
     public final Context mContext;
@@ -28,15 +27,15 @@ public class SafeUINavigationBar implements CoreStartable {
     public final void start() {
         Log.d("SafeUINavigationBar", NetworkAnalyticsConstants.DataPoints.OPEN_TIME);
         final SafeUINavigationBarView safeUINavigationBarView = new SafeUINavigationBarView(this.mContext, this.mWindowManager);
-        View inflate = LayoutInflater.from(safeUINavigationBarView.mContext).inflate(R.layout.safe_mode_navigation_bar, (ViewGroup) null);
-        safeUINavigationBarView.mView = inflate;
-        inflate.requireViewById(R.id.prev_btn_area).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.navigationbar.SafeUINavigationBarView$$ExternalSyntheticLambda0
+        View viewInflate = LayoutInflater.from(safeUINavigationBarView.mContext).inflate(R.layout.safe_mode_navigation_bar, (ViewGroup) null);
+        safeUINavigationBarView.mView = viewInflate;
+        viewInflate.requireViewById(R.id.prev_btn_area).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.navigationbar.SafeUINavigationBarView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                long uptimeMillis = SystemClock.uptimeMillis();
-                InputManager.getInstance().injectInputEvent(new KeyEvent(uptimeMillis, uptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257), 0);
-                long uptimeMillis2 = SystemClock.uptimeMillis();
-                InputManager.getInstance().injectInputEvent(new KeyEvent(uptimeMillis2, uptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257), 0);
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                InputManager.getInstance().injectInputEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 4, 0, 0, -1, 0, 72, 257), 0);
+                long jUptimeMillis2 = SystemClock.uptimeMillis();
+                InputManager.getInstance().injectInputEvent(new KeyEvent(jUptimeMillis2, jUptimeMillis2, 1, 4, 0, 0, -1, 0, 72, 257), 0);
             }
         });
         try {

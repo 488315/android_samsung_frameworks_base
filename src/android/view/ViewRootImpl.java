@@ -5,6 +5,7 @@ import android.animation.AnimationHandler;
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.ActivityThread;
+import android.app.AppOpsManager;
 import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.app.ResourcesManager;
 import android.app.UiModeManager;
@@ -17,6 +18,7 @@ import android.content.ClipDescription;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
@@ -76,6 +78,7 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.sysprop.DisplayProperties;
 import android.sysprop.ViewProperties;
+import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
 import android.util.DisplayMetrics;
@@ -170,6 +173,7 @@ import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 import com.samsung.android.core.CompatSandbox;
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.rune.CoreRune;
+import com.samsung.android.rune.InputRune;
 import com.samsung.android.rune.ViewRune;
 import com.samsung.android.util.SemViewUtils;
 import com.samsung.android.widget.SemPressGestureDetector;
@@ -560,6 +564,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private boolean mProfileRendering;
     private QueuedInputEvent mQueuedInputEventPool;
     private int mQueuedInputEventPoolSize;
+    private boolean mRelaunching;
     private boolean mRelayoutRequested;
     private final WindowRelayoutResult mRelayoutResult;
     private int mRelayoutSeq;
@@ -877,12 +882,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     return;
                 }
                 ViewRootImpl.sAnrReported = true;
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     ActivityManager.getService().appNotResponding(str);
                 } catch (RemoteException unused) {
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         };
@@ -960,7 +965,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this(context, display, WindowManagerGlobal.getWindowSession(), new WindowLayout());
     }
 
-    public ViewRootImpl(Context context, Display display, IWindowSession iWindowSession, WindowLayout windowLayout) {
+    public ViewRootImpl(Context context, Display display, IWindowSession iWindowSession, WindowLayout windowLayout) throws Resources.NotFoundException {
         this.mTransformHintListeners = new ArrayList<>();
         this.mPreviousTransformHint = 0;
         this.mFlingFrameRateChange = 0;
@@ -1050,25 +1055,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mGestureExclusionTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda21
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                List systemGestureExclusionRects;
-                systemGestureExclusionRects = ((View) obj).getSystemGestureExclusionRects();
-                return systemGestureExclusionRects;
+                return ((View) obj).getSystemGestureExclusionRects();
             }
         });
         this.mKeepClearRectsTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda22
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                List collectPreferKeepClearRects;
-                collectPreferKeepClearRects = ((View) obj).collectPreferKeepClearRects();
-                return collectPreferKeepClearRects;
+                return ((View) obj).collectPreferKeepClearRects();
             }
         });
         this.mUnrestrictedKeepClearRectsTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda23
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                List collectUnrestrictedPreferKeepClearRects;
-                collectUnrestrictedPreferKeepClearRects = ((View) obj).collectUnrestrictedPreferKeepClearRects();
-                return collectUnrestrictedPreferKeepClearRects;
+                return ((View) obj).collectUnrestrictedPreferKeepClearRects();
             }
         });
         this.mPreviousSyncSafeguardLock = new Object();
@@ -1184,7 +1183,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mExecutor = new Executor() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda24
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
-                ViewRootImpl.this.lambda$new$10(runnable);
+                this.f$0.lambda$new$10(runnable);
             }
         };
         this.mIsDragging = false;
@@ -1204,8 +1203,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         String basePackageName = context.getBasePackageName();
         this.mBasePackageName = basePackageName;
-        String orElse = DisplayProperties.debug_vri_package().orElse(null);
-        this.mExtraDisplayListenerLogging = !TextUtils.isEmpty(orElse) && orElse.equals(basePackageName);
+        String strOrElse = DisplayProperties.debug_vri_package().orElse(null);
+        this.mExtraDisplayListenerLogging = !TextUtils.isEmpty(strOrElse) && strOrElse.equals(basePackageName);
         this.mContentResolver = context.getContentResolver();
         this.mThread = Thread.currentThread();
         this.mHCTRelayoutHandler = new HCTRelayoutHandler();
@@ -1273,9 +1272,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mScrollCaptureRequestTimeout = 2500L;
         this.mOnBackInvokedDispatcher = new WindowOnBackInvokedDispatcher(context, Looper.myLooper());
         if (Flags.sensitiveContentAppProtection()) {
-            ISensitiveContentProtectionManager asInterface = ISensitiveContentProtectionManager.Stub.asInterface(ServiceManager.getService(Context.SENSITIVE_CONTENT_PROTECTION_SERVICE));
-            this.mSensitiveContentProtectionService = asInterface;
-            if (asInterface == null) {
+            ISensitiveContentProtectionManager iSensitiveContentProtectionManagerAsInterface = ISensitiveContentProtectionManager.Stub.asInterface(ServiceManager.getService(Context.SENSITIVE_CONTENT_PROTECTION_SERVICE));
+            this.mSensitiveContentProtectionService = iSensitiveContentProtectionManagerAsInterface;
+            if (iSensitiveContentProtectionManagerAsInterface == null) {
                 Log.e(TAG, "SensitiveContentProtectionService shouldn't be null");
             }
         } else {
@@ -1307,6 +1306,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mDesktopMode = false;
         }
         Log.d(this.mTag, "desktopMode is " + this.mDesktopMode);
+    }
+
+    public boolean isRelaunchingRemoved() {
+        return this.mRelaunching && this.mRemoved;
+    }
+
+    public void setRelaunching(boolean z) {
+        this.mRelaunching = z;
     }
 
     public static void addFirstDrawHandler(Runnable runnable) {
@@ -1384,9 +1391,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (callback2 != null) {
                 this.mSurfaceHolder.removeCallback(callback2);
             }
-            SurfaceHolder.Callback2 willYouTakeTheSurface = ((RootViewSurfaceTaker) this.mView).willYouTakeTheSurface();
-            this.mSurfaceHolderCallback = willYouTakeTheSurface;
-            if (willYouTakeTheSurface != null) {
+            SurfaceHolder.Callback2 callback2WillYouTakeTheSurface = ((RootViewSurfaceTaker) this.mView).willYouTakeTheSurface();
+            this.mSurfaceHolderCallback = callback2WillYouTakeTheSurface;
+            if (callback2WillYouTakeTheSurface != null) {
                 TakenSurfaceHolder takenSurfaceHolder = new TakenSurfaceHolder();
                 this.mSurfaceHolder = takenSurfaceHolder;
                 takenSurfaceHolder.setFormat(0);
@@ -1394,10 +1401,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             } else {
                 this.mSurfaceHolder = null;
             }
-            InputQueue.Callback willYouTakeTheInputQueue = ((RootViewSurfaceTaker) this.mView).willYouTakeTheInputQueue();
-            this.mInputQueueCallback = willYouTakeTheInputQueue;
-            if (willYouTakeTheInputQueue != null) {
-                willYouTakeTheInputQueue.onInputQueueCreated(this.mInputQueue);
+            InputQueue.Callback callbackWillYouTakeTheInputQueue = ((RootViewSurfaceTaker) this.mView).willYouTakeTheInputQueue();
+            this.mInputQueueCallback = callbackWillYouTakeTheInputQueue;
+            if (callbackWillYouTakeTheInputQueue != null) {
+                callbackWillYouTakeTheInputQueue.onInputQueueCreated(this.mInputQueue);
             }
         }
         updateLastConfigurationFromResources(getConfiguration());
@@ -1427,48 +1434,352 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x040d A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x04ac A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:181:0x0264  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x023e  */
-    /* JADX WARN: Removed duplicated region for block: B:184:0x0222  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x01a7  */
-    /* JADX WARN: Removed duplicated region for block: B:196:0x019c  */
-    /* JADX WARN: Removed duplicated region for block: B:197:0x0172 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0165  */
-    /* JADX WARN: Removed duplicated region for block: B:199:0x0150  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x0136  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x010d A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0127 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x013c A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x016f  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0178 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x0186 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0196 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x01a5  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x01c6 A[Catch: all -> 0x0622, TRY_LEAVE, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x021a A[Catch: all -> 0x05f4, RemoteException | RuntimeException -> 0x05f6, TryCatch #2 {RemoteException | RuntimeException -> 0x05f6, blocks: (B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247), top: B:72:0x01ce, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x023c  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0244 A[Catch: all -> 0x05f4, RemoteException | RuntimeException -> 0x05f6, TryCatch #2 {RemoteException | RuntimeException -> 0x05f6, blocks: (B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247), top: B:72:0x01ce, outer: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0259 A[Catch: all -> 0x0622, DONT_GENERATE, TRY_ENTER, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x0262  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x02c0 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x02d5 A[Catch: all -> 0x0622, TryCatch #0 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:31:0x00f9, B:33:0x010d, B:36:0x011a, B:38:0x011e, B:40:0x0123, B:42:0x0127, B:43:0x0138, B:45:0x013c, B:46:0x0152, B:49:0x0167, B:52:0x0174, B:54:0x0178, B:55:0x0180, B:57:0x0186, B:58:0x0189, B:60:0x0196, B:61:0x019d, B:64:0x01a9, B:66:0x01b3, B:68:0x01bb, B:69:0x01c0, B:71:0x01c6, B:84:0x0259, B:85:0x025c, B:88:0x0266, B:90:0x02c0, B:92:0x02d5, B:94:0x02e0, B:95:0x02e4, B:96:0x02f0, B:97:0x02f3, B:98:0x03fb, B:99:0x040c, B:101:0x02f7, B:102:0x030f, B:103:0x0310, B:104:0x0328, B:105:0x0329, B:106:0x0341, B:107:0x0342, B:108:0x035a, B:109:0x035b, B:111:0x035d, B:112:0x0381, B:113:0x0382, B:114:0x03a1, B:115:0x03a2, B:116:0x03ba, B:117:0x03bb, B:118:0x03df, B:119:0x03e0, B:120:0x03fa, B:121:0x040d, B:123:0x041e, B:124:0x0444, B:126:0x0448, B:128:0x0453, B:130:0x0457, B:131:0x0463, B:133:0x047b, B:138:0x0485, B:140:0x0489, B:141:0x04a6, B:143:0x04ac, B:144:0x04c6, B:146:0x04cc, B:149:0x04d6, B:152:0x04df, B:154:0x04e5, B:157:0x04ed, B:159:0x04ef, B:161:0x04f3, B:162:0x04fe, B:164:0x0506, B:165:0x050e, B:167:0x0514, B:168:0x0518, B:170:0x051c, B:171:0x0527, B:173:0x05e0, B:174:0x05e3, B:176:0x05ea, B:178:0x05ee, B:187:0x061c, B:188:0x061f, B:197:0x0172, B:202:0x0620, B:73:0x01ce, B:75:0x021a, B:76:0x0224, B:79:0x0240, B:81:0x0244, B:82:0x0247, B:190:0x05f7, B:192:0x05fd, B:193:0x0600, B:194:0x0619), top: B:4:0x0037, inners: #1 }] */
+    /* JADX WARN: Removed duplicated region for block: B:102:0x027e  */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x0280  */
+    /* JADX WARN: Removed duplicated region for block: B:106:0x02dc A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x02f1 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:136:0x0429 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x010d A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0127 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0136  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x013c A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0150  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x0163  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0165  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x016f  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0172 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x0178 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x0186 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0196 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x019c  */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x01a5  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x01a7  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x01c6 A[Catch: all -> 0x063e, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:88:0x0236 A[Catch: all -> 0x0610, RemoteException | RuntimeException -> 0x0612, TryCatch #1 {RemoteException | RuntimeException -> 0x0612, blocks: (B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263), top: B:213:0x01ea, outer: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x023e  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x0258  */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x025a  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0260 A[Catch: all -> 0x0610, RemoteException | RuntimeException -> 0x0612, TryCatch #1 {RemoteException | RuntimeException -> 0x0612, blocks: (B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263), top: B:213:0x01ea, outer: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x0275 A[Catch: all -> 0x063e, DONT_GENERATE, TRY_ENTER, TryCatch #2 {, blocks: (B:5:0x0037, B:7:0x003b, B:9:0x0057, B:10:0x005d, B:12:0x008a, B:14:0x0090, B:16:0x0096, B:17:0x009e, B:19:0x00ae, B:21:0x00b9, B:22:0x00ca, B:24:0x00cf, B:26:0x00d6, B:28:0x00dc, B:30:0x00e2, B:32:0x00f9, B:34:0x010d, B:38:0x011a, B:40:0x011e, B:41:0x0123, B:43:0x0127, B:45:0x0138, B:47:0x013c, B:49:0x0152, B:53:0x0167, B:57:0x0174, B:59:0x0178, B:60:0x0180, B:62:0x0186, B:63:0x0189, B:65:0x0196, B:67:0x019d, B:71:0x01a9, B:73:0x01b3, B:75:0x01bb, B:76:0x01c0, B:78:0x01c6, B:79:0x01ce, B:81:0x01d4, B:83:0x01dc, B:85:0x01e2, B:99:0x0275, B:100:0x0278, B:104:0x0282, B:106:0x02dc, B:108:0x02f1, B:110:0x02fc, B:111:0x0300, B:112:0x030c, B:113:0x030f, B:134:0x0417, B:135:0x0428, B:114:0x0313, B:115:0x032b, B:116:0x032c, B:117:0x0344, B:118:0x0345, B:119:0x035d, B:120:0x035e, B:121:0x0376, B:122:0x0377, B:124:0x0379, B:125:0x039d, B:126:0x039e, B:127:0x03bd, B:128:0x03be, B:129:0x03d6, B:130:0x03d7, B:131:0x03fb, B:132:0x03fc, B:133:0x0416, B:136:0x0429, B:138:0x043a, B:139:0x0460, B:141:0x0464, B:143:0x046f, B:145:0x0473, B:146:0x047f, B:148:0x0497, B:154:0x04a1, B:156:0x04a5, B:157:0x04c2, B:159:0x04c8, B:160:0x04e2, B:161:0x04e8, B:165:0x04f2, B:169:0x04fb, B:171:0x0501, B:175:0x0509, B:176:0x050b, B:178:0x050f, B:179:0x051a, B:181:0x0522, B:182:0x052a, B:184:0x0530, B:185:0x0534, B:187:0x0538, B:188:0x0543, B:190:0x05fc, B:191:0x05ff, B:193:0x0606, B:195:0x060a, B:206:0x0638, B:207:0x063b, B:56:0x0172, B:208:0x063c, B:86:0x01ea, B:88:0x0236, B:90:0x0240, B:94:0x025c, B:96:0x0260, B:97:0x0263, B:200:0x0613, B:202:0x0619, B:203:0x061c, B:204:0x0635), top: B:215:0x0037, inners: #0 }] */
     /* JADX WARN: Type inference failed for: r23v0 */
     /* JADX WARN: Type inference failed for: r23v1 */
     /* JADX WARN: Type inference failed for: r23v2 */
     /* JADX WARN: Type inference failed for: r43v0, types: [android.view.View, java.lang.Object] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setView(android.view.View r43, android.view.WindowManager.LayoutParams r44, android.view.View r45, int r46) {
-        /*
-            Method dump skipped, instructions count: 1600
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.setView(android.view.View, android.view.WindowManager$LayoutParams, android.view.View, int):void");
+    public void setView(View view, WindowManager.LayoutParams layoutParams, View view2, int i) {
+        boolean z;
+        CompatibilityInfo.Translator translator;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        KeyEvent.Callback callback;
+        int iAddToDisplayAsUser;
+        CompatibilityInfo.Translator translator2;
+        PendingInsetsController pendingInsetsControllerProvidePendingInsetsController;
+        synchronized (this) {
+            if (this.mView == null) {
+                this.mView = view;
+                this.mViewLayoutDirectionInitial = view.getRawLayoutDirection();
+                this.mFallbackEventHandler.setView(view);
+                this.mWindowAttributes.copyFrom(layoutParams);
+                if (this.mWindowAttributes.packageName == null) {
+                    this.mWindowAttributes.packageName = this.mBasePackageName;
+                }
+                WindowManager.LayoutParams layoutParams2 = this.mWindowAttributes;
+                setTag();
+                this.mFpsTraceName = "FPS of " + ((Object) getTitle());
+                this.mLargestViewTraceName = "Largest view percentage(per hundred) of " + ((Object) getTitle());
+                if (DEBUG_KEEP_SCREEN_ON && (this.mClientWindowLayoutFlags & 128) != 0 && (layoutParams2.flags & 128) == 0) {
+                    Slog.d(this.mTag, "setView: FLAG_KEEP_SCREEN_ON changed from true to false!");
+                }
+                this.mClientWindowLayoutFlags = layoutParams2.flags;
+                adjustLayoutInDisplayCutoutMode(layoutParams2);
+                setAccessibilityFocus(null, null);
+                if (view instanceof RootViewSurfaceTaker) {
+                    SurfaceHolder.Callback2 callback2WillYouTakeTheSurface = ((RootViewSurfaceTaker) view).willYouTakeTheSurface();
+                    this.mSurfaceHolderCallback = callback2WillYouTakeTheSurface;
+                    if (callback2WillYouTakeTheSurface != null) {
+                        TakenSurfaceHolder takenSurfaceHolder = new TakenSurfaceHolder();
+                        this.mSurfaceHolder = takenSurfaceHolder;
+                        takenSurfaceHolder.setFormat(0);
+                        this.mSurfaceHolder.addCallback(this.mSurfaceHolderCallback);
+                    }
+                }
+                try {
+                    try {
+                        if (!layoutParams2.hasManualSurfaceInsets) {
+                            layoutParams2.setSurfaceInsets(view, false, true);
+                            if (CoreRune.MW_CAPTION_TOOLTIP && (layoutParams2.multiWindowFlags & 8) != 0 && (layoutParams2.gravity & 49) != 0) {
+                                z = 0;
+                                layoutParams2.x -= layoutParams2.surfaceInsets.left;
+                                layoutParams2.y -= layoutParams2.surfaceInsets.top;
+                            }
+                            this.mTranslator = this.mDisplay.getDisplayAdjustments().getCompatibilityInfo().getTranslator();
+                            if (this.mSurfaceHolder == null) {
+                                enableHardwareAcceleration(layoutParams2);
+                                boolean z5 = this.mAttachInfo.mThreadedRenderer != null ? true : z;
+                                if (this.mUseMTRenderer != z5) {
+                                    endDragResizing();
+                                    this.mUseMTRenderer = z5;
+                                }
+                            }
+                            translator = this.mTranslator;
+                            if (translator == null) {
+                                this.mSurface.setCompatibilityTranslator(translator);
+                                layoutParams2.backup();
+                                this.mTranslator.translateWindowLayout(layoutParams2);
+                                z2 = true;
+                            } else {
+                                z2 = z;
+                            }
+                            z3 = DEBUG_LAYOUT;
+                            if (z3) {
+                                z4 = z2;
+                            } else {
+                                z4 = z2;
+                                Log.d(this.mTag, "WindowLayout in setView:" + layoutParams2);
+                            }
+                            this.mSoftInputMode = layoutParams2.softInputMode;
+                            this.mWindowAttributesChanged = true;
+                            this.mAttachInfo.mRootView = view;
+                            this.mAttachInfo.mScalingRequired = this.mTranslator == null ? true : z;
+                            View.AttachInfo attachInfo = this.mAttachInfo;
+                            CompatibilityInfo.Translator translator3 = this.mTranslator;
+                            attachInfo.mApplicationScale = translator3 != null ? 1.0f : translator3.applicationScale;
+                            if (view2 != null) {
+                                this.mAttachInfo.mPanelParentWindowToken = view2.getApplicationWindowToken();
+                            }
+                            if (!com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.fixViewRootCallTrace()) {
+                                this.mAdded = true;
+                            }
+                            requestLayout();
+                            InputChannel inputChannel = (this.mWindowAttributes.inputFeatures & 1) != 0 ? new InputChannel() : null;
+                            this.mForceDecorViewVisibility = (this.mWindowAttributes.privateFlags & 8192) == 0 ? true : z;
+                            callback = this.mView;
+                            if ((callback instanceof RootViewSurfaceTaker) && (pendingInsetsControllerProvidePendingInsetsController = ((RootViewSurfaceTaker) callback).providePendingInsetsController()) != null) {
+                                pendingInsetsControllerProvidePendingInsetsController.replayAndAttach(this.mInsetsController);
+                            }
+                            if (this.mView instanceof DecorView) {
+                                this.mWindowAttributes.privateFlags |= 128;
+                            }
+                            if (com.android.media.projection.flags.Flags.recordingOverlay() && this.mWindowAttributes.type == 2038 && hasSystemApplicationOverlayAppOp()) {
+                                this.mWindowAttributes.privateFlags |= 8;
+                            }
+                            this.mOrigWindowType = this.mWindowAttributes.type;
+                            this.mAttachInfo.mRecomputeGlobalAttributes = true;
+                            collectViewAttributes();
+                            adjustLayoutParamsForCompatibility(this.mWindowAttributes, this.mInsetsController.getAppearanceControlled(), this.mInsetsController.isBehaviorControlled());
+                            controlInsetsForCompatibility(this.mWindowAttributes);
+                            Rect rect = new Rect();
+                            float[] fArr = new float[1];
+                            fArr[z] = 1.0f;
+                            iAddToDisplayAsUser = this.mWindowSession.addToDisplayAsUser(this.mWindow, this.mWindowAttributes, getHostVisibility(), this.mDisplay.getDisplayId(), i, this.mInsetsController.getRequestedVisibleTypes(), inputChannel != null ? new InputChannel() : inputChannel, this.mTempInsets, this.mTempControls, rect, fArr);
+                            Rect rect2 = rect.isValid() ? null : rect;
+                            translator2 = this.mTranslator;
+                            if (translator2 != null) {
+                                translator2.translateRectInScreenToAppWindow(rect2);
+                            }
+                            this.mTmpFrames.attachedFrame = rect2;
+                            this.mTmpFrames.compatScale = fArr[z];
+                            this.mInvCompatScale = 1.0f / fArr[z];
+                            this.mAttachInfo.mAlwaysConsumeSystemBars = (iAddToDisplayAsUser & 4) == 0 ? true : z;
+                            this.mPendingAlwaysConsumeSystemBars = this.mAttachInfo.mAlwaysConsumeSystemBars;
+                            handleInsetsControlChanged(this.mTempInsets, this.mTempControls);
+                            InsetsState state = this.mInsetsController.getState();
+                            Rect rect3 = this.mTempRect;
+                            state.getDisplayCutoutSafe(rect3);
+                            WindowConfiguration compatWindowConfiguration = getCompatWindowConfiguration();
+                            this.mWindowLayout.computeFrames(this.mWindowAttributes, state, rect3, compatWindowConfiguration.getBounds(), compatWindowConfiguration.getWindowingMode(), -1, -1, this.mInsetsController.getRequestedVisibleTypes(), 1.0f, this.mTmpFrames, compatWindowConfiguration.getStageType(), null, false);
+                            setFrame(this.mTmpFrames.frame, true);
+                            registerBackCallbackOnWindow();
+                            if (z3) {
+                                Log.v(this.mTag, "Added window " + this.mWindow);
+                            }
+                            if (iAddToDisplayAsUser >= 0) {
+                                this.mAttachInfo.mRootView = null;
+                                if (!com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.fixViewRootCallTrace()) {
+                                    this.mAdded = z;
+                                }
+                                this.mFallbackEventHandler.setView(null);
+                                unscheduleTraversals();
+                                setAccessibilityFocus(null, null);
+                                switch (iAddToDisplayAsUser) {
+                                    case -11:
+                                        throw new WindowManager.BadTokenException("Unable to add Window " + this.mWindow + " -- requested userId is not valid");
+                                    case -10:
+                                        throw new WindowManager.InvalidDisplayException("Unable to add window " + this.mWindow + " -- the specified window type " + this.mWindowAttributes.type + " is not valid");
+                                    case -9:
+                                        throw new WindowManager.InvalidDisplayException("Unable to add window " + this.mWindow + " -- the specified display can not be found");
+                                    case -8:
+                                        throw new WindowManager.BadTokenException("Unable to add window " + this.mWindow + " -- permission denied for window type " + this.mWindowAttributes.type);
+                                    case -7:
+                                        throw new WindowManager.BadTokenException("Unable to add window " + this.mWindow + " -- another window of type " + this.mWindowAttributes.type + " already exists");
+                                    case -6:
+                                        return;
+                                    case -5:
+                                        throw new WindowManager.BadTokenException("Unable to add window -- window " + this.mWindow + " has already been added");
+                                    case -4:
+                                        throw new WindowManager.BadTokenException("Unable to add window -- app for token " + layoutParams2.token + " is exiting");
+                                    case -3:
+                                        throw new WindowManager.BadTokenException("Unable to add window -- token " + layoutParams2.token + " is not for an application");
+                                    case -2:
+                                    case -1:
+                                        throw new WindowManager.BadTokenException("Unable to add window -- token " + layoutParams2.token + " is not valid; is your activity running?");
+                                    default:
+                                        throw new RuntimeException("Unable to add window -- unknown error code " + iAddToDisplayAsUser);
+                                }
+                            }
+                            registerListeners();
+                            this.mAttachInfo.mDisplayState = this.mDisplay.getState();
+                            if (this.mExtraDisplayListenerLogging) {
+                                Slog.i(this.mTag, NavigationBarInflaterView.KEY_CODE_START + this.mBasePackageName + ") Initial DisplayState: " + this.mAttachInfo.mDisplayState, new Throwable());
+                            }
+                            if (view instanceof RootViewSurfaceTaker) {
+                                this.mInputQueueCallback = ((RootViewSurfaceTaker) view).willYouTakeTheInputQueue();
+                            }
+                            if (inputChannel != null) {
+                                if (this.mInputQueueCallback != null) {
+                                    InputQueue inputQueue = new InputQueue();
+                                    this.mInputQueue = inputQueue;
+                                    this.mInputQueueCallback.onInputQueueCreated(inputQueue);
+                                }
+                                this.mInputEventReceiver = new WindowInputEventReceiver(inputChannel, Looper.myLooper());
+                                ApplicationInfo applicationInfo = this.mContext.getApplicationInfo();
+                                boolean z6 = (applicationInfo.flags & 33554432) != 0 || applicationInfo.category == 0;
+                                if (z6 && this.mInputEventReceiver != null) {
+                                    this.mInputEventReceiver.setImprovementEvent(z6, this.mContext.getResources().getDisplayMetrics().xdpi, this.mContext.getResources().getDisplayMetrics().ydpi);
+                                }
+                                if (this.mAttachInfo.mThreadedRenderer != null) {
+                                    InputMetricsListener inputMetricsListener = new InputMetricsListener();
+                                    this.mHardwareRendererObserver = new HardwareRendererObserver(inputMetricsListener, inputMetricsListener.data, this.mHandler, true);
+                                    this.mAttachInfo.mThreadedRenderer.addObserver(this.mHardwareRendererObserver);
+                                }
+                                this.mUnbufferedInputSource = this.mView.mUnbufferedInputSource;
+                            }
+                            view.assignParent(this);
+                            this.mAddedTouchMode = (iAddToDisplayAsUser & 1) != 0;
+                            this.mAppVisible = (iAddToDisplayAsUser & 2) != 0;
+                            if (CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HRR) {
+                                this.mIsHRR = (16777216 & iAddToDisplayAsUser) != 0;
+                            }
+                            if (CoreRune.FW_ARR_FLING_FLEXIBLE_FRAME_RATE) {
+                                this.mFlingFrameRateChange = Settings.Global.getInt(this.mContentResolver, Settings.Global.FLING_FLEXIBLE_FRAME_RATE, 0);
+                            }
+                            if (this.mAccessibilityManager.isEnabled()) {
+                                this.mAccessibilityInteractionConnectionManager.ensureConnection();
+                                setAccessibilityWindowAttributesIfNeeded();
+                            }
+                            if (view.getImportantForAccessibility() == 0) {
+                                view.setImportantForAccessibility(1);
+                            }
+                            if (CoreRune.BIXBY_TOUCH) {
+                                this.mSemPressGestureDetector = new SemPressGestureDetector(this.mContext, this.mView);
+                            }
+                            Log.i(this.mTag, "setView = " + view.getClass().getName() + '@' + Integer.toHexString(view.hashCode()) + " IsHRR=" + this.mIsHRR + " mFlingFrameRateChange=" + this.mFlingFrameRateChange + " TM=" + this.mAddedTouchMode);
+                            CharSequence title = layoutParams2.getTitle();
+                            this.mSyntheticInputStage = new SyntheticInputStage();
+                            ViewPostImeInputStage viewPostImeInputStage = new ViewPostImeInputStage(this.mSyntheticInputStage);
+                            StringBuilder sb = new StringBuilder("aq:native-post-ime:");
+                            sb.append((Object) title);
+                            EarlyPostImeInputStage earlyPostImeInputStage = new EarlyPostImeInputStage(new NativePostImeInputStage(viewPostImeInputStage, sb.toString()));
+                            StringBuilder sb2 = new StringBuilder("aq:ime:");
+                            sb2.append((Object) title);
+                            this.mFirstInputStage = new NativePreImeInputStage(new ViewPreImeInputStage(new ImeInputStage(earlyPostImeInputStage, sb2.toString())), "aq:native-pre-ime:" + ((Object) title));
+                            this.mFirstPostImeInputStage = earlyPostImeInputStage;
+                            this.mPendingInputEventQueueLengthCounterName = "aq:pending:" + ((Object) title);
+                            if (com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.fixViewRootCallTrace()) {
+                                this.mAdded = true;
+                            }
+                            updateCutoutRemoveNeeded(iAddToDisplayAsUser);
+                            if (!this.mRemoved || !this.mAppVisible) {
+                                AnimationHandler.requestAnimatorsEnabled(this.mAppVisible, this);
+                            }
+                        }
+                        this.mOrigWindowType = this.mWindowAttributes.type;
+                        this.mAttachInfo.mRecomputeGlobalAttributes = true;
+                        collectViewAttributes();
+                        adjustLayoutParamsForCompatibility(this.mWindowAttributes, this.mInsetsController.getAppearanceControlled(), this.mInsetsController.isBehaviorControlled());
+                        controlInsetsForCompatibility(this.mWindowAttributes);
+                        Rect rect4 = new Rect();
+                        float[] fArr2 = new float[1];
+                        fArr2[z] = 1.0f;
+                        iAddToDisplayAsUser = this.mWindowSession.addToDisplayAsUser(this.mWindow, this.mWindowAttributes, getHostVisibility(), this.mDisplay.getDisplayId(), i, this.mInsetsController.getRequestedVisibleTypes(), inputChannel != null ? new InputChannel() : inputChannel, this.mTempInsets, this.mTempControls, rect4, fArr2);
+                        if (rect4.isValid()) {
+                        }
+                        translator2 = this.mTranslator;
+                        if (translator2 != null) {
+                        }
+                        this.mTmpFrames.attachedFrame = rect2;
+                        this.mTmpFrames.compatScale = fArr2[z];
+                        this.mInvCompatScale = 1.0f / fArr2[z];
+                        this.mAttachInfo.mAlwaysConsumeSystemBars = (iAddToDisplayAsUser & 4) == 0 ? true : z;
+                        this.mPendingAlwaysConsumeSystemBars = this.mAttachInfo.mAlwaysConsumeSystemBars;
+                        handleInsetsControlChanged(this.mTempInsets, this.mTempControls);
+                        InsetsState state2 = this.mInsetsController.getState();
+                        Rect rect32 = this.mTempRect;
+                        state2.getDisplayCutoutSafe(rect32);
+                        WindowConfiguration compatWindowConfiguration2 = getCompatWindowConfiguration();
+                        this.mWindowLayout.computeFrames(this.mWindowAttributes, state2, rect32, compatWindowConfiguration2.getBounds(), compatWindowConfiguration2.getWindowingMode(), -1, -1, this.mInsetsController.getRequestedVisibleTypes(), 1.0f, this.mTmpFrames, compatWindowConfiguration2.getStageType(), null, false);
+                        setFrame(this.mTmpFrames.frame, true);
+                        registerBackCallbackOnWindow();
+                        if (z3) {
+                        }
+                        if (iAddToDisplayAsUser >= 0) {
+                        }
+                    } catch (RemoteException | RuntimeException e) {
+                        if (!com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.fixViewRootCallTrace()) {
+                            this.mAdded = false;
+                        }
+                        this.mView = null;
+                        this.mAttachInfo.mRootView = null;
+                        this.mFallbackEventHandler.setView(null);
+                        unscheduleTraversals();
+                        setAccessibilityFocus(null, null);
+                        throw new RuntimeException("Adding window failed", e);
+                    }
+                } finally {
+                    if (z4) {
+                        layoutParams2.restore();
+                    }
+                }
+                z = 0;
+                this.mTranslator = this.mDisplay.getDisplayAdjustments().getCompatibilityInfo().getTranslator();
+                if (this.mSurfaceHolder == null) {
+                }
+                translator = this.mTranslator;
+                if (translator == null) {
+                }
+                z3 = DEBUG_LAYOUT;
+                if (z3) {
+                }
+                this.mSoftInputMode = layoutParams2.softInputMode;
+                this.mWindowAttributesChanged = true;
+                this.mAttachInfo.mRootView = view;
+                this.mAttachInfo.mScalingRequired = this.mTranslator == null ? true : z;
+                View.AttachInfo attachInfo2 = this.mAttachInfo;
+                CompatibilityInfo.Translator translator32 = this.mTranslator;
+                attachInfo2.mApplicationScale = translator32 != null ? 1.0f : translator32.applicationScale;
+                if (view2 != null) {
+                }
+                if (!com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.fixViewRootCallTrace()) {
+                }
+                requestLayout();
+                if ((this.mWindowAttributes.inputFeatures & 1) != 0) {
+                }
+                this.mForceDecorViewVisibility = (this.mWindowAttributes.privateFlags & 8192) == 0 ? true : z;
+                callback = this.mView;
+                if (callback instanceof RootViewSurfaceTaker) {
+                    pendingInsetsControllerProvidePendingInsetsController.replayAndAttach(this.mInsetsController);
+                }
+                if (this.mView instanceof DecorView) {
+                }
+                if (com.android.media.projection.flags.Flags.recordingOverlay()) {
+                    this.mWindowAttributes.privateFlags |= 8;
+                }
+            }
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1538,9 +1849,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void setTag() {
-        String[] split = this.mWindowAttributes.getTitle().toString().split("\\.");
-        if (split.length > 0) {
-            this.mTag = "VRI[" + split[split.length - 1] + NavigationBarInflaterView.SIZE_MOD_END;
+        String[] strArrSplit = this.mWindowAttributes.getTitle().toString().split("\\.");
+        if (strArrSplit.length > 0) {
+            this.mTag = "VRI[" + strArrSplit[strArrSplit.length - 1] + NavigationBarInflaterView.SIZE_MOD_END;
             this.mTag += "@" + Integer.toHexString(this.mWindow.hashCode());
             if (this.mWindowAttributes.type == 2008) {
                 this.mTag += "_2008";
@@ -1583,7 +1894,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mAttachInfo.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda19
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewRootImpl.this.destroyHardwareResources();
+                        this.f$0.destroyHardwareResources();
                     }
                 });
             } else {
@@ -1657,9 +1968,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             Rect rect = layoutParams.surfaceInsets;
             boolean z2 = layoutParams.format != -1 || (rect.left != 0 || rect.right != 0 || rect.top != 0 || rect.bottom != 0);
-            ThreadedRenderer create = ThreadedRenderer.create(this.mContext, z2, layoutParams.getTitle().toString());
-            this.mAttachInfo.mThreadedRenderer = create;
-            create.setSurfaceControl(this.mSurfaceControl, this.mBlastBufferQueue);
+            ThreadedRenderer threadedRendererCreate = ThreadedRenderer.create(this.mContext, z2, layoutParams.getTitle().toString());
+            this.mAttachInfo.mThreadedRenderer = threadedRendererCreate;
+            threadedRendererCreate.setSurfaceControl(this.mSurfaceControl, this.mBlastBufferQueue);
             updateColorModeIfNeeded(layoutParams.getColorMode(), layoutParams.getDesiredHdrHeadroom());
             this.mHdrRenderState.forceUpdateHdrSdrRatio();
             updateForceDarkMode();
@@ -1670,7 +1981,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mAttachInfo.mHardwareAccelerationRequested = true;
             HardwareRendererObserver hardwareRendererObserver = this.mHardwareRendererObserver;
             if (hardwareRendererObserver != null) {
-                create.addObserver(hardwareRendererObserver);
+                threadedRendererCreate.addObserver(hardwareRendererObserver);
             }
         }
     }
@@ -1680,30 +1991,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public int determineForceDarkType() {
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(R.styleable.Theme);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(R.styleable.Theme);
         try {
             if (android.view.accessibility.Flags.forceInvertColor() && shouldApplyForceInvertDark()) {
-                boolean z = obtainStyledAttributes.getBoolean(279, false);
+                boolean z = typedArrayObtainStyledAttributes.getBoolean(279, false);
                 View view = this.mView;
                 if (view != null) {
                     Drawable background = view.getBackground();
                     if (background instanceof ColorDrawable) {
-                        r3 = 1 ^ (ContrastColorUtil.isColorDarkLab(((ColorDrawable) background).getColor()) ? 1 : 0);
+                        i = 1 ^ (ContrastColorUtil.isColorDarkLab(((ColorDrawable) background).getColor()) ? 1 : 0);
                     }
                 }
-                if (!z || r3 == 0) {
+                if (!z || i == 0) {
                     return 0;
                 }
-                obtainStyledAttributes.recycle();
+                typedArrayObtainStyledAttributes.recycle();
                 return 2;
             }
             int i = getNightMode() == 32 ? 1 : 0;
             if (i != 0) {
-                i = (obtainStyledAttributes.getBoolean(279, true) && obtainStyledAttributes.getBoolean(278, SystemProperties.getBoolean(ThreadedRenderer.DEBUG_FORCE_DARK, false))) ? 1 : 0;
+                i = (typedArrayObtainStyledAttributes.getBoolean(279, true) && typedArrayObtainStyledAttributes.getBoolean(278, SystemProperties.getBoolean(ThreadedRenderer.DEBUG_FORCE_DARK, false))) ? 1 : 0;
             }
             return i;
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -1754,21 +2065,24 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             int i7 = this.mWindowAttributes.subtreeSystemUiVisibility;
             int i8 = this.mWindowAttributes.insetsFlags.appearance;
             int i9 = this.mWindowAttributes.insetsFlags.behavior;
-            int adjustLayoutInDisplayCutoutMode = adjustLayoutInDisplayCutoutMode(layoutParams);
-            int copyFrom = this.mWindowAttributes.copyFrom(layoutParams);
-            if ((524288 & copyFrom) != 0) {
+            int iAdjustLayoutInDisplayCutoutMode = adjustLayoutInDisplayCutoutMode(layoutParams);
+            if (shouldKeepSystemApplicationOverlay(this.mWindowAttributes, layoutParams)) {
+                layoutParams.privateFlags |= 8;
+            }
+            int iCopyFrom = this.mWindowAttributes.copyFrom(layoutParams);
+            if ((524288 & iCopyFrom) != 0) {
                 this.mAttachInfo.mRecomputeGlobalAttributes = true;
             }
-            if ((copyFrom & 1) != 0) {
+            if ((iCopyFrom & 1) != 0) {
                 this.mAttachInfo.mNeedsUpdateLightCenter = true;
             }
-            if ((copyFrom & 67108864) != 0) {
+            if ((iCopyFrom & 67108864) != 0) {
                 invalidate();
             }
             if (this.mWindowAttributes.packageName == null) {
                 this.mWindowAttributes.packageName = this.mBasePackageName;
             }
-            layoutParams.layoutInDisplayCutoutMode = adjustLayoutInDisplayCutoutMode;
+            layoutParams.layoutInDisplayCutoutMode = iAdjustLayoutInDisplayCutoutMode;
             this.mWindowAttributes.systemUiVisibility = i6;
             this.mWindowAttributes.subtreeSystemUiVisibility = i7;
             this.mWindowAttributes.insetsFlags.appearance = i8;
@@ -1798,6 +2112,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             scheduleTraversals();
             setAccessibilityWindowAttributesIfNeeded();
         }
+    }
+
+    private boolean shouldKeepSystemApplicationOverlay(WindowManager.LayoutParams layoutParams, WindowManager.LayoutParams layoutParams2) {
+        return com.android.media.projection.flags.Flags.recordingOverlay() && (layoutParams.privateFlags & 8) != 0 && (layoutParams2.privateFlags & 8) == 0 && hasSystemApplicationOverlayAppOp();
+    }
+
+    private boolean hasSystemApplicationOverlayAppOp() {
+        return ((AppOpsManager) this.mContext.getSystemService(AppOpsManager.class)).checkOpRawNoThrow(AppOpsManager.OPSTR_SYSTEM_APPLICATION_OVERLAY, this.mView.mContext.getAttributionSource().getUid(), this.mView.mContext.getPackageName(), null) == 0;
     }
 
     private int adjustLayoutInDisplayCutoutMode(WindowManager.LayoutParams layoutParams) {
@@ -1869,12 +2191,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             onInsetsStateChanged(insetsState);
             float f = clientWindowFrames.compatScale;
-            boolean equals = this.mWinFrame.equals(rect2);
-            boolean z6 = !equals;
+            boolean zEquals = this.mWinFrame.equals(rect2);
+            boolean z6 = !zEquals;
             ActivityWindowInfo activityWindowInfo2 = this.mLastReportedActivityWindowInfo;
             boolean z7 = !this.mLastReportedMergedConfiguration.equals(mergedConfiguration) || (activityWindowInfo2 != null && activityWindowInfo != null && !activityWindowInfo2.equals(activityWindowInfo));
-            boolean equals2 = Objects.equals(this.mTmpFrames.attachedFrame, rect4);
-            boolean z8 = !equals2;
+            boolean zEquals2 = Objects.equals(this.mTmpFrames.attachedFrame, rect4);
+            boolean z8 = !zEquals2;
             boolean z9 = this.mDisplay.getDisplayId() != i;
             boolean z10 = this.mTmpFrames.compatScale != f;
             boolean z11 = this.mPendingDragResizing != z4;
@@ -1887,7 +2209,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 rect = rect4;
             }
             Log.i(this.mTag, "handleResized, frames=" + clientWindowFrames + " displayId=" + i + " dragResizing=" + z4 + " compatScale=" + f + " frameChanged=" + z6 + " attachedFrameChanged=" + z8 + " configChanged=" + z7 + " displayChanged=" + z9 + " compatScaleChanged=" + z10 + " dragResizingChanged=" + z11);
-            if (z || !equals || z7 || !equals2 || z9 || z2 || z10 || z11) {
+            if (z || !zEquals || z7 || !zEquals2 || z9 || z2 || z10 || z11) {
                 this.mPendingDragResizing = z4;
                 this.mTmpFrames.compatScale = f;
                 this.mInvCompatScale = 1.0f / f;
@@ -1906,9 +2228,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mTmpFrames.attachedFrame.set(rect);
                 }
                 if (this.mDragResizing && this.mUseMTRenderer) {
-                    boolean equals3 = rect2.equals(this.mPendingBackDropFrame);
+                    boolean zEquals3 = rect2.equals(this.mPendingBackDropFrame);
                     for (int size = this.mWindowCallbacks.size() - 1; size >= 0; size--) {
-                        this.mWindowCallbacks.get(size).onWindowSizeIsChanging(this.mPendingBackDropFrame, equals3, this.mAttachInfo.mVisibleInsets, this.mAttachInfo.mStableInsets);
+                        this.mWindowCallbacks.get(size).onWindowSizeIsChanging(this.mPendingBackDropFrame, zEquals3, this.mAttachInfo.mVisibleInsets, this.mAttachInfo.mStableInsets);
                     }
                 }
                 this.mForceNextWindowRelayout |= z2;
@@ -1923,7 +2245,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     reportNextDraw("resized");
                 }
                 View view = this.mView;
-                if (view != null && (!equals || z7)) {
+                if (view != null && (!zEquals || z7)) {
                     forceLayout(view);
                 }
                 requestLayout();
@@ -2023,8 +2345,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void notifyInsetsChanged() {
-        InsetsSource peekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
-        if (getConfiguration().windowConfiguration.getWindowingMode() != 5 || peekSource == null || !peekSource.isVisible() || peekSource.getFrame().isEmpty() || peekSource.getFrame().top >= this.mWinFrame.top) {
+        InsetsSource insetsSourcePeekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
+        if (getConfiguration().windowConfiguration.getWindowingMode() != 5 || insetsSourcePeekSource == null || !insetsSourcePeekSource.isVisible() || insetsSourcePeekSource.getFrame().isEmpty() || insetsSourcePeekSource.getFrame().top >= this.mWinFrame.top) {
             this.mApplyInsetsRequested = true;
             requestLayout();
             if (View.sForceLayoutWhenInsetsChanged && this.mView != null && (this.mWindowAttributes.softInputMode & 240) == 16) {
@@ -2148,17 +2470,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Rect rect2 = this.mDirty;
         rect2.union(rect.left, rect.top, rect.right, rect.bottom);
         float f = this.mAttachInfo.mApplicationScale;
-        boolean intersect = rect2.intersect(0, 0, (int) ((this.mWidth * f) + 0.5f), (int) ((this.mHeight * f) + 0.5f));
-        if (!intersect) {
+        boolean zIntersect = rect2.intersect(0, 0, (int) ((this.mWidth * f) + 0.5f), (int) ((this.mHeight * f) + 0.5f));
+        if (!zIntersect) {
             rect2.setEmpty();
         }
         if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [9] mView=" + this.mView + " mWillDrawSoon=" + this.mWillDrawSoon + " intersected=" + intersect + " mIsAnimating=" + this.mIsAnimating);
+            Log.i(this.mTag, "Traversal, [9] mView=" + this.mView + " mWillDrawSoon=" + this.mWillDrawSoon + " intersected=" + zIntersect + " mIsAnimating=" + this.mIsAnimating);
         }
         if (this.mWillDrawSoon) {
             return;
         }
-        if (intersect || this.mIsAnimating) {
+        if (zIntersect || this.mIsAnimating) {
             scheduleTraversals();
         }
     }
@@ -2256,7 +2578,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void updateBlastSurfaceIfNeeded() {
-        Surface createSurface;
+        Surface surfaceCreateSurface;
         if (this.mSurfaceControl.isValid()) {
             BLASTBufferQueue bLASTBufferQueue = this.mBlastBufferQueue;
             if (bLASTBufferQueue != null && bLASTBufferQueue.isSameSurfaceControl(this.mSurfaceControl)) {
@@ -2278,15 +2600,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             bLASTBufferQueue4.setWaitForBufferReleaseCallback(new BLASTBufferQueue.WaitForBufferReleaseCallback() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda17
                 @Override // android.graphics.BLASTBufferQueue.WaitForBufferReleaseCallback
                 public final void onWaitForBufferRelease(long j) {
-                    Choreographer.this.onWaitForBufferRelease(j);
+                    choreographer.onWaitForBufferRelease(j);
                 }
             });
             if (Flags.addSchandleToVriSurface()) {
-                createSurface = this.mBlastBufferQueue.createSurfaceWithHandle();
+                surfaceCreateSurface = this.mBlastBufferQueue.createSurfaceWithHandle();
             } else {
-                createSurface = this.mBlastBufferQueue.createSurface();
+                surfaceCreateSurface = this.mBlastBufferQueue.createSurface();
             }
-            this.mSurface.transferFrom(createSurface);
+            this.mSurface.transferFrom(surfaceCreateSurface);
             this.mTransaction.setRecoverableFromBufferStuffing(this.mSurfaceControl).applyAsyncUnsafe();
         }
     }
@@ -2492,7 +2814,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    void doTraversal() {
+    void doTraversal() throws Throwable {
         if (this.mTraversalScheduled) {
             this.mTraversalScheduled = false;
             this.mHandler.getLooper().getQueue().removeSyncBarrier(this.mTraversalBarrier);
@@ -2634,7 +2956,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         int fitInsetsTypes = layoutParams.getFitInsetsTypes();
-        boolean isFitInsetsIgnoringVisibility = layoutParams.isFitInsetsIgnoringVisibility();
+        boolean zIsFitInsetsIgnoringVisibility = layoutParams.isFitInsetsIgnoringVisibility();
         if ((i2 & 1024) != 0 || (i3 & 256) != 0 || (67108864 & i3) != 0) {
             fitInsetsTypes &= ~WindowInsets.Type.statusBars();
         }
@@ -2649,7 +2971,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     layoutParams.privateFlags |= 1073741824;
                 }
             }
-            z2 = isFitInsetsIgnoringVisibility;
+            z2 = zIsFitInsetsIgnoringVisibility;
         }
         layoutParams.setFitInsetsTypes(fitInsetsTypes);
         layoutParams.setFitInsetsIgnoringVisibility(z2);
@@ -2657,62 +2979,159 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void controlInsetsForCompatibility(WindowManager.LayoutParams layoutParams) {
-        int statusBars;
+        int iStatusBars;
         int i = layoutParams.systemUiVisibility | layoutParams.subtreeSystemUiVisibility;
         int i2 = layoutParams.flags;
         boolean z = true;
-        int i3 = 0;
+        int iCaptionBar = 0;
         boolean z2 = layoutParams.width == -1 && layoutParams.height == -1;
         boolean z3 = layoutParams.type >= 1 && layoutParams.type <= 99;
         boolean z4 = (this.mTypesHiddenByFlags & WindowInsets.Type.statusBars()) != 0;
-        int i4 = i & 4;
-        boolean z5 = i4 != 0 || ((i2 & 1024) != 0 && z2 && z3);
+        int i3 = i & 4;
+        boolean z5 = i3 != 0 || ((i2 & 1024) != 0 && z2 && z3);
         boolean z6 = (this.mTypesHiddenByFlags & WindowInsets.Type.navigationBars()) != 0;
         boolean z7 = (i & 2) != 0;
         boolean z8 = (this.mTypesHiddenByFlags & WindowInsets.Type.captionBar()) != 0;
-        if (i4 == 0 && ((i2 & 1024) == 0 || !z2 || !z3)) {
+        if (i3 == 0 && ((i2 & 1024) == 0 || !z2 || !z3)) {
             z = false;
         }
         if (z5 && !z4) {
-            i3 = WindowInsets.Type.statusBars();
-            statusBars = 0;
+            iCaptionBar = WindowInsets.Type.statusBars();
+            iStatusBars = 0;
         } else {
-            statusBars = (z5 || !z4) ? 0 : WindowInsets.Type.statusBars();
+            iStatusBars = (z5 || !z4) ? 0 : WindowInsets.Type.statusBars();
         }
         if (z7 && !z6) {
-            i3 |= WindowInsets.Type.navigationBars();
+            iCaptionBar |= WindowInsets.Type.navigationBars();
         } else if (!z7 && z6) {
-            statusBars |= WindowInsets.Type.navigationBars();
+            iStatusBars |= WindowInsets.Type.navigationBars();
         }
         if (z && !z8 && DesktopModeFlags.ENABLE_CAPTION_COMPAT_INSET_FORCE_CONSUMPTION.isTrue()) {
-            i3 |= WindowInsets.Type.captionBar();
+            iCaptionBar |= WindowInsets.Type.captionBar();
         } else if (!z && z8 && DesktopModeFlags.ENABLE_CAPTION_COMPAT_INSET_FORCE_CONSUMPTION.isTrue()) {
-            statusBars |= WindowInsets.Type.captionBar();
+            iStatusBars |= WindowInsets.Type.captionBar();
         }
-        if (i3 != 0) {
-            getInsetsController().hide(i3);
+        if (iCaptionBar != 0) {
+            getInsetsController().hide(iCaptionBar);
         }
-        if (statusBars != 0) {
-            getInsetsController().show(statusBars);
+        if (iStatusBars != 0) {
+            getInsetsController().show(iStatusBars);
         }
-        this.mTypesHiddenByFlags = (~statusBars) & (this.mTypesHiddenByFlags | i3);
+        this.mTypesHiddenByFlags = (~iStatusBars) & (this.mTypesHiddenByFlags | iCaptionBar);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x014d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x014e  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0142  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00c0  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x01b8  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean measureHierarchy(android.view.View r18, android.view.WindowManager.LayoutParams r19, android.content.res.Resources r20, int r21, int r22, boolean r23) {
-        /*
-            Method dump skipped, instructions count: 492
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.measureHierarchy(android.view.View, android.view.WindowManager$LayoutParams, android.content.res.Resources, int, int, boolean):boolean");
+    private boolean measureHierarchy(View view, WindowManager.LayoutParams layoutParams, Resources resources, int i, int i2, boolean z) throws Resources.NotFoundException {
+        View view2;
+        boolean z2;
+        int i3;
+        float fraction;
+        boolean z3;
+        if (DEBUG_ORIENTATION || DEBUG_LAYOUT) {
+            String str = this.mTag;
+            StringBuilder sb = new StringBuilder("Measuring ");
+            view2 = view;
+            sb.append(view2);
+            sb.append(" in display ");
+            sb.append(i);
+            sb.append("x");
+            sb.append(i2);
+            sb.append(Session.TRUNCATE_STRING);
+            Log.v(str, sb.toString());
+        } else {
+            view2 = view;
+        }
+        if (layoutParams.width == -2) {
+            DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+            if (this.mIsDeviceDefault) {
+                if (layoutParams.type == 2005) {
+                    resources.getValue(R.dimen.sem_config_prefToastWidth, this.mTmpValue, true);
+                } else {
+                    resources.getValue(R.dimen.sem_config_prefDialogWidth, this.mTmpValue, true);
+                }
+            } else {
+                resources.getValue(R.dimen.config_prefDialogWidth, this.mTmpValue, true);
+            }
+            if (this.mTmpValue.type == 5) {
+                fraction = this.mTmpValue.getDimension(displayMetrics);
+            } else if (this.mTmpValue.type == 6) {
+                if (this.mDesktopMode && layoutParams.type == 2005 && this.mView != null) {
+                    this.mView.getWindowDisplayFrame(new Rect());
+                    fraction = this.mTmpValue.getFraction(r2.width(), r2.width());
+                } else {
+                    fraction = this.mTmpValue.getFraction(displayMetrics.widthPixels, displayMetrics.widthPixels);
+                }
+            } else {
+                i3 = 0;
+                z3 = DEBUG_DIALOG;
+                if (z3) {
+                    Log.v(this.mTag, "Window " + this.mView + ": baseSize=" + i3 + ", desiredWindowWidth=" + i);
+                }
+                if (i3 != 0 || i <= i3) {
+                    z2 = false;
+                } else {
+                    int rootMeasureSpec = getRootMeasureSpec(i3, layoutParams.width, layoutParams.privateFlags);
+                    int rootMeasureSpec2 = getRootMeasureSpec(i2, layoutParams.height, layoutParams.privateFlags);
+                    performMeasure(rootMeasureSpec, rootMeasureSpec2);
+                    if (z3) {
+                        String str2 = this.mTag;
+                        StringBuilder sb2 = new StringBuilder("Window ");
+                        z2 = false;
+                        sb2.append(this.mView);
+                        sb2.append(": measured (");
+                        sb2.append(view2.getMeasuredWidth());
+                        sb2.append(",");
+                        sb2.append(view2.getMeasuredHeight());
+                        sb2.append(") from width spec: ");
+                        sb2.append(View.MeasureSpec.toString(rootMeasureSpec));
+                        sb2.append(" and height spec: ");
+                        sb2.append(View.MeasureSpec.toString(rootMeasureSpec2));
+                        Log.v(str2, sb2.toString());
+                    } else {
+                        z2 = false;
+                    }
+                    if ((view2.getMeasuredWidthAndState() & 16777216) == 0) {
+                        return z2;
+                    }
+                    int i4 = (i3 + i) / 2;
+                    if (z3) {
+                        Log.v(this.mTag, "Window " + this.mView + ": next baseSize=" + i4);
+                    }
+                    performMeasure(getRootMeasureSpec(i4, layoutParams.width, layoutParams.privateFlags), rootMeasureSpec2);
+                    if (z3) {
+                        Log.v(this.mTag, "Window " + this.mView + ": measured (" + view2.getMeasuredWidth() + "," + view2.getMeasuredHeight() + NavigationBarInflaterView.KEY_CODE_END);
+                    }
+                    if ((view2.getMeasuredWidthAndState() & 16777216) == 0) {
+                        if (z3) {
+                            Log.v(this.mTag, "Good!");
+                        }
+                        return z2;
+                    }
+                }
+            }
+            i3 = (int) fraction;
+            z3 = DEBUG_DIALOG;
+            if (z3) {
+            }
+            if (i3 != 0) {
+                z2 = false;
+            }
+        }
+        int rootMeasureSpec3 = getRootMeasureSpec(i, layoutParams.width, layoutParams.privateFlags);
+        int rootMeasureSpec4 = getRootMeasureSpec(i2, layoutParams.height, layoutParams.privateFlags);
+        if (!z || !setMeasuredRootSizeFromSpec(rootMeasureSpec3, rootMeasureSpec4)) {
+            performMeasure(rootMeasureSpec3, rootMeasureSpec4);
+        } else {
+            this.mViewMeasureDeferred = true;
+        }
+        if (this.mWidth == view2.getMeasuredWidth() && this.mHeight == view2.getMeasuredHeight()) {
+            return z2;
+        }
+        return true;
     }
 
     private boolean setMeasuredRootSizeFromSpec(int i, int i2) {
@@ -2741,17 +3160,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     WindowInsets getWindowInsets(boolean z, boolean z2) {
         if (this.mLastWindowInsets == null || z) {
             Configuration configuration = getConfiguration();
-            WindowInsets calculateInsets = this.mInsetsController.calculateInsets(configuration.isScreenRound(), this.mWindowAttributes.type, configuration.windowConfiguration.getActivityType(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags, this.mWindowAttributes.systemUiVisibility | this.mWindowAttributes.subtreeSystemUiVisibility, needStatusbarInsets(configuration.windowConfiguration));
-            this.mLastWindowInsets = calculateInsets;
+            WindowInsets windowInsetsCalculateInsets = this.mInsetsController.calculateInsets(configuration.isScreenRound(), this.mWindowAttributes.type, configuration.windowConfiguration.getActivityType(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags, this.mWindowAttributes.systemUiVisibility | this.mWindowAttributes.subtreeSystemUiVisibility, needStatusbarInsets(configuration.windowConfiguration));
+            this.mLastWindowInsets = windowInsetsCalculateInsets;
             if (this.mIsCutoutRemoveNeeded || z2) {
-                WindowInsets removeCutoutInsets = calculateInsets.removeCutoutInsets(this.mInsetsController.getState().mCanDispatchUdcCutout);
+                WindowInsets windowInsetsRemoveCutoutInsets = windowInsetsCalculateInsets.removeCutoutInsets(this.mInsetsController.getState().mCanDispatchUdcCutout);
                 if (this.mIsCutoutRemoveNeeded) {
-                    this.mLastWindowInsets = removeCutoutInsets;
+                    this.mLastWindowInsets = windowInsetsRemoveCutoutInsets;
                 } else {
-                    this.mAttachInfo.mContentInsets.set(removeCutoutInsets.getSystemWindowInsets().toRect());
-                    this.mAttachInfo.mStableInsets.set(removeCutoutInsets.getStableInsets().toRect());
+                    this.mAttachInfo.mContentInsets.set(windowInsetsRemoveCutoutInsets.getSystemWindowInsets().toRect());
+                    this.mAttachInfo.mStableInsets.set(windowInsetsRemoveCutoutInsets.getStableInsets().toRect());
                     this.mAttachInfo.mVisibleInsets.set(this.mInsetsController.calculateVisibleInsets(this.mWindowAttributes.type, configuration.windowConfiguration.getWindowingMode(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags).toRect());
-                    return removeCutoutInsets;
+                    return windowInsetsRemoveCutoutInsets;
                 }
             }
             this.mAttachInfo.mContentInsets.set(this.mLastWindowInsets.getSystemWindowInsets().toRect());
@@ -2784,8 +3203,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (DEBUG_WINDOW_INSETS) {
             Log.i(this.mTag, "dispatchApplyInsets : " + windowInsets);
         }
-        InsetsSource peekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
-        if (peekSource != null && peekSource.isVisible() && getConfiguration().windowConfiguration.isPopOver()) {
+        InsetsSource insetsSourcePeekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
+        if (insetsSourcePeekSource != null && insetsSourcePeekSource.isVisible() && getConfiguration().windowConfiguration.isPopOver()) {
             this.mForceNextWindowRelayout = true;
         }
         view.dispatchApplyWindowInsets(windowInsets);
@@ -2811,6 +3230,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private Rect getWindowBoundsInsetSystemBars() {
         Rect rect = new Rect(this.mContext.getResources().getConfiguration().windowConfiguration.getBounds());
+        rect.inset(this.mInsetsController.getState().calculateInsets(rect, WindowInsets.Type.systemBars(), false));
+        return rect;
+    }
+
+    private Rect getWindowBoundsInsetSystemBars(WindowManager.LayoutParams layoutParams) {
+        boolean z = true;
+        if (layoutParams.layoutInDisplayCutoutMode != 3 && (layoutParams.layoutInDisplayCutoutMode != 1 || this.mInsetsController.getState().getDisplayCutout().isCutoutOnLongEdge(this.mInsetsController.getState().getDisplayFrame().width(), this.mInsetsController.getState().getDisplayFrame().height()))) {
+            z = false;
+        }
+        Rect rect = new Rect(this.mContext.getResources().getConfiguration().windowConfiguration.getBounds());
+        if (z) {
+            rect.inset(this.mInsetsController.getState().calculateInsets(rect, WindowInsets.Type.systemBars(), false));
+            return rect;
+        }
         rect.inset(this.mInsetsController.getState().calculateInsets(rect, WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout(), false));
         return rect;
     }
@@ -2819,186 +3252,3070 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return (int) ((this.mContext.getResources().getDisplayMetrics().density * i) + 0.5f);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(190:16|(1:956)(1:24)|25|(4:27|(1:29)(1:954)|(1:31)(1:953)|(186:33|34|(6:36|(1:38)(2:939|(1:944)(1:943))|39|(1:41)|42|(1:46))(2:945|(182:949|(1:951)|952|48|(5:50|(2:(1:53)(1:55)|54)|(1:63)|59|(1:62))|64|(1:66)|67|(1:69)|70|(1:938)(1:76)|(3:78|(1:936)(3:84|(1:86)(1:935)|87)|88)(1:937)|89|(1:91)(1:934)|92|(1:94)|95|(2:918|(6:920|(3:922|(2:924|925)(1:927)|926)|928|(1:930)|931|(1:933)))|99|(2:101|(59:103|(1:105)|(1:916)(1:124)|125|(1:915)(1:129)|130|(1:914)(1:134)|135|(1:137)(1:913)|138|(1:140)|(4:142|(1:146)|147|(1:149))|150|(96:468|(3:470|(1:472)(1:911)|473)(1:912)|474|(1:910)(1:478)|479|(1:481)|482|483|484|(9:486|487|488|489|490|491|492|493|494)(1:902)|495|(79:499|500|501|(1:503)(1:885)|504|505|506|507|508|(6:865|866|(1:868)|869|(3:871|872|873)|876)(1:510)|511|(1:513)(1:864)|514|515|(7:834|835|(1:839)|(1:841)(1:860)|(1:859)(4:845|846|847|848)|849|(3:853|(1:855)(1:857)|856))(1:517)|(1:519)|520|521|(1:831)(1:525)|526|(1:829)(6:529|(1:531)|532|(1:534)(1:828)|535|536)|537|538|(6:809|810|811|812|813|814)(1:540)|541|542|(1:544)(1:807)|545|546|547|548|(3:796|797|(47:799|(3:790|791|(43:793|553|554|555|(2:784|(38:786|(9:560|561|562|563|564|565|566|567|568)(1:783)|(2:570|571)(1:774)|(3:766|767|(1:769))|573|574|575|576|577|(4:579|580|581|(28:688|689|691|692|693|694|695|696|697|698|(1:702)|585|(1:(3:588|(1:594)(1:592)|593)(1:595))|596|(1:(1:599)(1:600))|601|(1:603)|604|605|(1:607)|608|(1:687)|612|(7:614|(1:616)|617|(2:619|(3:621|(1:623)|624))|625|(3:679|(3:681|(1:683)|684)|685)(1:630)|(4:632|633|634|635))(1:686)|640|(1:651)|652|(8:662|(1:664)|665|(1:667)(1:676)|668|(1:670)|(2:(1:673)|674)|675))(1:583))(3:728|729|(8:731|(1:733)|734|(1:736)|737|(1:739)|740|(1:742))(1:(3:752|753|754)))|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(1:610)|687|612|(0)(0)|640|(2:642|651)|652|(1:654)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675))|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675))|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675))|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675)|890|891|892|893|500|501|(0)(0)|504|505|506|507|508|(0)(0)|511|(0)(0)|514|515|(0)(0)|(0)|520|521|(1:523)|831|526|(0)|829|537|538|(0)(0)|541|542|(0)(0)|545|546|547|548|(0)|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675)(1:157)|158|(1:160)|161|(6:165|166|167|168|(1:170)|172)|(1:467)|(1:466)(1:189)|(1:465)(1:193)|(2:195|(8:197|(1:212)|201|(1:203)|204|(1:206)|207|(2:209|(1:211))))|(1:214)(1:(1:462)(29:(1:464)|(1:217)|218|(3:220|(5:451|(1:453)(1:459)|454|(1:456)(1:458)|457)(1:224)|225)(1:460)|226|(1:450)(1:230)|231|(10:233|(4:235|(1:237)|238|(1:240))(1:438)|(1:242)(1:437)|243|(1:245)|246|(1:248)(1:(1:436))|249|250|251)(2:439|(3:443|444|445))|252|(4:254|(4:266|(1:268)|269|(2:271|(2:273|(1:275))(1:(1:277))))(2:258|(1:262))|263|(1:265))|(1:428)|281|(1:426)(1:284)|285|(1:287)|(1:425)(1:290)|291|(1:424)(1:296)|(4:298|(1:300)|301|(1:305))|(1:423)(1:308)|309|(1:313)|(5:315|(1:317)|318|(4:322|(2:325|323)|326|327)|328)(2:(4:386|(3:388|(1:394)(1:392)|393)|(1:396)(1:399)|397)(8:400|(1:402)|403|(1:405)|406|(4:410|(2:413|411)|414|415)|416|(1:418))|398)|329|(1:331)|332|(4:334|(1:336)|337|(1:339))|340|(18:342|(1:379)(1:346)|347|(1:351)|352|(1:378)|358|(1:360)|361|(1:363)|364|(3:366|(1:368)|369)|370|(1:372)|373|(1:375)|376|377)(2:380|(2:382|383)(1:384))))|215|(0)|218|(0)(0)|226|(1:228)|450|231|(0)(0)|252|(0)|(1:279)|428|281|(0)|426|285|(0)|(0)|425|291|(1:294)|424|(0)|(0)|419|423|309|(2:311|313)|(0)(0)|329|(0)|332|(0)|340|(0)(0)))|917|(0)|(0)|916|125|(1:127)|915|130|(1:132)|914|135|(0)(0)|138|(0)|(0)|150|(0)|468|(0)(0)|474|(1:476)|910|479|(0)|482|483|484|(0)(0)|495|(129:499|500|501|(0)(0)|504|505|506|507|508|(0)(0)|511|(0)(0)|514|515|(0)(0)|(0)|520|521|(0)|831|526|(0)|829|537|538|(0)(0)|541|542|(0)(0)|545|546|547|548|(0)|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675|158|(0)|161|(7:163|165|166|167|168|(0)|172)|(0)|467|(2:185|187)|466|(1:191)|465|(0)|(0)(0)|215|(0)|218|(0)(0)|226|(0)|450|231|(0)(0)|252|(0)|(0)|428|281|(0)|426|285|(0)|(0)|425|291|(0)|424|(0)|(0)|419|423|309|(0)|(0)(0)|329|(0)|332|(0)|340|(0)(0))|890|891|892|893|500|501|(0)(0)|504|505|506|507|508|(0)(0)|511|(0)(0)|514|515|(0)(0)|(0)|520|521|(0)|831|526|(0)|829|537|538|(0)(0)|541|542|(0)(0)|545|546|547|548|(0)|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675|158|(0)|161|(0)|(0)|467|(0)|466|(0)|465|(0)|(0)(0)|215|(0)|218|(0)(0)|226|(0)|450|231|(0)(0)|252|(0)|(0)|428|281|(0)|426|285|(0)|(0)|425|291|(0)|424|(0)|(0)|419|423|309|(0)|(0)(0)|329|(0)|332|(0)|340|(0)(0)))|47|48|(0)|64|(0)|67|(0)|70|(2:72|74)|938|(0)(0)|89|(0)(0)|92|(0)|95|(1:97)|918|(0)|99|(0)|917|(0)|(0)|916|125|(0)|915|130|(0)|914|135|(0)(0)|138|(0)|(0)|150|(0)|468|(0)(0)|474|(0)|910|479|(0)|482|483|484|(0)(0)|495|(0)|890|891|892|893|500|501|(0)(0)|504|505|506|507|508|(0)(0)|511|(0)(0)|514|515|(0)(0)|(0)|520|521|(0)|831|526|(0)|829|537|538|(0)(0)|541|542|(0)(0)|545|546|547|548|(0)|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675|158|(0)|161|(0)|(0)|467|(0)|466|(0)|465|(0)|(0)(0)|215|(0)|218|(0)(0)|226|(0)|450|231|(0)(0)|252|(0)|(0)|428|281|(0)|426|285|(0)|(0)|425|291|(0)|424|(0)|(0)|419|423|309|(0)|(0)(0)|329|(0)|332|(0)|340|(0)(0)))|955|34|(0)(0)|47|48|(0)|64|(0)|67|(0)|70|(0)|938|(0)(0)|89|(0)(0)|92|(0)|95|(0)|918|(0)|99|(0)|917|(0)|(0)|916|125|(0)|915|130|(0)|914|135|(0)(0)|138|(0)|(0)|150|(0)|468|(0)(0)|474|(0)|910|479|(0)|482|483|484|(0)(0)|495|(0)|890|891|892|893|500|501|(0)(0)|504|505|506|507|508|(0)(0)|511|(0)(0)|514|515|(0)(0)|(0)|520|521|(0)|831|526|(0)|829|537|538|(0)(0)|541|542|(0)(0)|545|546|547|548|(0)|550|(0)|552|553|554|555|(0)|784|(0)|558|(0)(0)|(0)(0)|(0)|573|574|575|576|577|(0)(0)|584|585|(0)|596|(0)|601|(0)|604|605|(0)|608|(0)|687|612|(0)(0)|640|(0)|652|(0)|656|662|(0)|665|(0)(0)|668|(0)|(0)|675|158|(0)|161|(0)|(0)|467|(0)|466|(0)|465|(0)|(0)(0)|215|(0)|218|(0)(0)|226|(0)|450|231|(0)(0)|252|(0)|(0)|428|281|(0)|426|285|(0)|(0)|425|291|(0)|424|(0)|(0)|419|423|309|(0)|(0)(0)|329|(0)|332|(0)|340|(0)(0)) */
-    /* JADX WARN: Code restructure failed: missing block: B:762:0x07fa, code lost:
-    
-        r8 = r35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:770:0x0637, code lost:
-    
-        if (r40.mApplyInsetsRequested != false) goto L923;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:788:0x0806, code lost:
-    
-        r32 = r7;
-        r7 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:805:0x080f, code lost:
-    
-        r32 = r7;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:808:0x080d, code lost:
-    
-        r31 = r4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:821:0x081d, code lost:
-    
-        r29 = r4;
-        r32 = r7;
-        r7 = false;
-        r15 = false;
-        r17 = 8;
-        r21 = false;
-        r24 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:833:0x082e, code lost:
-    
-        r32 = r7;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:863:0x082c, code lost:
-    
-        r28 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:882:0x083d, code lost:
-    
-        r28 = r6;
-        r32 = r7;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:884:0x083b, code lost:
-    
-        r22 = r4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:887:0x0852, code lost:
-    
-        r22 = r4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:904:0x086a, code lost:
-    
-        r25 = r4;
-        r22 = r6;
-        r26 = r7;
-        r17 = 8;
-        r7 = false;
-        r8 = null;
-        r15 = false;
-     */
-    /* JADX WARN: Not initialized variable reg: 35, insn: 0x07fa: MOVE (r8 I:??[OBJECT, ARRAY]) = (r35 I:??[OBJECT, ARRAY]), block:B:762:0x07fa */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0278  */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x0294  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0299 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x02d7  */
-    /* JADX WARN: Removed duplicated region for block: B:132:0x02e9  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x02fb  */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x0302  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x0308  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x0342 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:160:0x0ac3  */
-    /* JADX WARN: Removed duplicated region for block: B:163:0x0adc  */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x0aef A[Catch: RemoteException -> 0x0b05, TRY_LEAVE, TryCatch #23 {RemoteException -> 0x0b05, blocks: (B:168:0x0ae8, B:170:0x0aef), top: B:167:0x0ae8 }] */
-    /* JADX WARN: Removed duplicated region for block: B:177:0x0b09 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:185:0x0b24  */
-    /* JADX WARN: Removed duplicated region for block: B:191:0x0b31  */
-    /* JADX WARN: Removed duplicated region for block: B:195:0x0b3d  */
-    /* JADX WARN: Removed duplicated region for block: B:214:0x0bdb  */
-    /* JADX WARN: Removed duplicated region for block: B:217:0x0bf5  */
-    /* JADX WARN: Removed duplicated region for block: B:220:0x0c04  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x0c78  */
-    /* JADX WARN: Removed duplicated region for block: B:233:0x0c82  */
-    /* JADX WARN: Removed duplicated region for block: B:254:0x0cfd  */
-    /* JADX WARN: Removed duplicated region for block: B:279:0x0d91  */
-    /* JADX WARN: Removed duplicated region for block: B:283:0x0da9 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:287:0x0dbb  */
-    /* JADX WARN: Removed duplicated region for block: B:289:0x0dc2 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:293:0x0dd4 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:298:0x0de0  */
-    /* JADX WARN: Removed duplicated region for block: B:307:0x0e05 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:311:0x0e3a  */
-    /* JADX WARN: Removed duplicated region for block: B:315:0x0e65  */
-    /* JADX WARN: Removed duplicated region for block: B:331:0x0f66  */
-    /* JADX WARN: Removed duplicated region for block: B:334:0x0f6f  */
-    /* JADX WARN: Removed duplicated region for block: B:342:0x0f9b  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:380:0x1027  */
-    /* JADX WARN: Removed duplicated region for block: B:385:0x0eb6  */
-    /* JADX WARN: Removed duplicated region for block: B:439:0x0ce0  */
-    /* JADX WARN: Removed duplicated region for block: B:460:0x0c67  */
-    /* JADX WARN: Removed duplicated region for block: B:461:0x0be1  */
-    /* JADX WARN: Removed duplicated region for block: B:470:0x0370  */
-    /* JADX WARN: Removed duplicated region for block: B:476:0x03ac  */
-    /* JADX WARN: Removed duplicated region for block: B:481:0x03b9  */
-    /* JADX WARN: Removed duplicated region for block: B:486:0x03cb  */
-    /* JADX WARN: Removed duplicated region for block: B:497:0x0410 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:503:0x042a  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x015c  */
-    /* JADX WARN: Removed duplicated region for block: B:510:0x0468  */
-    /* JADX WARN: Removed duplicated region for block: B:513:0x0470  */
-    /* JADX WARN: Removed duplicated region for block: B:517:0x04d9  */
-    /* JADX WARN: Removed duplicated region for block: B:519:0x04df A[Catch: RemoteException -> 0x04d5, all -> 0x085d, TRY_LEAVE, TryCatch #38 {RemoteException -> 0x04d5, blocks: (B:848:0x04a9, B:849:0x04b3, B:853:0x04bd, B:856:0x04c7, B:519:0x04df, B:523:0x050e, B:529:0x0522, B:531:0x0526, B:532:0x0542, B:534:0x0553, B:535:0x055c), top: B:847:0x04a9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:523:0x050e A[Catch: RemoteException -> 0x04d5, all -> 0x085d, TRY_ENTER, TRY_LEAVE, TryCatch #38 {RemoteException -> 0x04d5, blocks: (B:848:0x04a9, B:849:0x04b3, B:853:0x04bd, B:856:0x04c7, B:519:0x04df, B:523:0x050e, B:529:0x0522, B:531:0x0526, B:532:0x0542, B:534:0x0553, B:535:0x055c), top: B:847:0x04a9 }] */
-    /* JADX WARN: Removed duplicated region for block: B:528:0x0520 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:540:0x0593  */
-    /* JADX WARN: Removed duplicated region for block: B:544:0x059e  */
-    /* JADX WARN: Removed duplicated region for block: B:557:0x05e2 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:560:0x05f1  */
-    /* JADX WARN: Removed duplicated region for block: B:570:0x0622 A[Catch: RemoteException -> 0x0615, all -> 0x085d, TRY_LEAVE, TryCatch #37 {RemoteException -> 0x0615, blocks: (B:568:0x060d, B:570:0x0622), top: B:567:0x060d }] */
-    /* JADX WARN: Removed duplicated region for block: B:579:0x0649  */
-    /* JADX WARN: Removed duplicated region for block: B:587:0x079d  */
-    /* JADX WARN: Removed duplicated region for block: B:598:0x07d7  */
-    /* JADX WARN: Removed duplicated region for block: B:603:0x07f3 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:607:0x0896  */
-    /* JADX WARN: Removed duplicated region for block: B:610:0x08c7  */
-    /* JADX WARN: Removed duplicated region for block: B:614:0x08df  */
-    /* JADX WARN: Removed duplicated region for block: B:642:0x09c2  */
-    /* JADX WARN: Removed duplicated region for block: B:654:0x09f2  */
-    /* JADX WARN: Removed duplicated region for block: B:664:0x0a22  */
-    /* JADX WARN: Removed duplicated region for block: B:667:0x0a72  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0191  */
-    /* JADX WARN: Removed duplicated region for block: B:670:0x0a8b  */
-    /* JADX WARN: Removed duplicated region for block: B:672:0x0a9e  */
-    /* JADX WARN: Removed duplicated region for block: B:676:0x0a84  */
-    /* JADX WARN: Removed duplicated region for block: B:686:0x09b8  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01a3  */
-    /* JADX WARN: Removed duplicated region for block: B:710:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:717:0x088b  */
-    /* JADX WARN: Removed duplicated region for block: B:728:0x06ef  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x01b6  */
-    /* JADX WARN: Removed duplicated region for block: B:766:0x062d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:774:0x062a  */
-    /* JADX WARN: Removed duplicated region for block: B:783:0x061a  */
-    /* JADX WARN: Removed duplicated region for block: B:786:0x05ec  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01c3  */
-    /* JADX WARN: Removed duplicated region for block: B:790:0x05c1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:796:0x05b0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:807:0x05a0  */
-    /* JADX WARN: Removed duplicated region for block: B:809:0x0572 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:834:0x047b A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:864:0x0472  */
-    /* JADX WARN: Removed duplicated region for block: B:865:0x0437 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:885:0x042c  */
-    /* JADX WARN: Removed duplicated region for block: B:902:0x0406  */
-    /* JADX WARN: Removed duplicated region for block: B:912:0x03a4  */
-    /* JADX WARN: Removed duplicated region for block: B:913:0x02fd  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x021d  */
-    /* JADX WARN: Removed duplicated region for block: B:920:0x023f  */
-    /* JADX WARN: Removed duplicated region for block: B:934:0x021f  */
-    /* JADX WARN: Removed duplicated region for block: B:937:0x0213  */
-    /* JADX WARN: Removed duplicated region for block: B:945:0x011e  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x0226  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x022f  */
+    /* JADX WARN: Not initialized variable reg: 35, insn: 0x07fa: MOVE (r8 I:??[OBJECT, ARRAY]) = (r35 I:??[OBJECT, ARRAY]), block:B:462:0x07fa */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x01c3  */
+    /* JADX WARN: Removed duplicated region for block: B:113:0x0213  */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x021d  */
+    /* JADX WARN: Removed duplicated region for block: B:117:0x021f  */
+    /* JADX WARN: Removed duplicated region for block: B:120:0x0226  */
+    /* JADX WARN: Removed duplicated region for block: B:125:0x0235  */
+    /* JADX WARN: Removed duplicated region for block: B:127:0x023f  */
+    /* JADX WARN: Removed duplicated region for block: B:140:0x0278  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x0291  */
+    /* JADX WARN: Removed duplicated region for block: B:145:0x0294  */
+    /* JADX WARN: Removed duplicated region for block: B:165:0x02d2  */
+    /* JADX WARN: Removed duplicated region for block: B:171:0x02dd  */
+    /* JADX WARN: Removed duplicated region for block: B:178:0x02f2  */
+    /* JADX WARN: Removed duplicated region for block: B:181:0x02fb  */
+    /* JADX WARN: Removed duplicated region for block: B:182:0x02fd  */
+    /* JADX WARN: Removed duplicated region for block: B:185:0x0302  */
+    /* JADX WARN: Removed duplicated region for block: B:187:0x0308  */
+    /* JADX WARN: Removed duplicated region for block: B:204:0x036a  */
+    /* JADX WARN: Removed duplicated region for block: B:206:0x0370  */
+    /* JADX WARN: Removed duplicated region for block: B:211:0x03a4  */
+    /* JADX WARN: Removed duplicated region for block: B:217:0x03b4  */
+    /* JADX WARN: Removed duplicated region for block: B:220:0x03b9  */
+    /* JADX WARN: Removed duplicated region for block: B:224:0x03cb  */
+    /* JADX WARN: Removed duplicated region for block: B:232:0x0406  */
+    /* JADX WARN: Removed duplicated region for block: B:238:0x0415 A[Catch: RemoteException -> 0x0855, all -> 0x085d, TRY_LEAVE, TryCatch #39 {RemoteException -> 0x0855, blocks: (B:229:0x03d8, B:233:0x040c, B:238:0x0415), top: B:963:0x03d8 }] */
+    /* JADX WARN: Removed duplicated region for block: B:244:0x042a  */
+    /* JADX WARN: Removed duplicated region for block: B:245:0x042c  */
+    /* JADX WARN: Removed duplicated region for block: B:261:0x0468  */
+    /* JADX WARN: Removed duplicated region for block: B:264:0x0470  */
+    /* JADX WARN: Removed duplicated region for block: B:265:0x0472  */
+    /* JADX WARN: Removed duplicated region for block: B:294:0x04d9  */
+    /* JADX WARN: Removed duplicated region for block: B:296:0x04df A[Catch: RemoteException -> 0x04d5, all -> 0x085d, TRY_LEAVE, TryCatch #38 {RemoteException -> 0x04d5, blocks: (B:281:0x04a9, B:283:0x04b3, B:287:0x04bd, B:291:0x04c7, B:296:0x04df, B:299:0x050e, B:307:0x0522, B:309:0x0526, B:310:0x0542, B:312:0x0553, B:314:0x055c), top: B:961:0x04a9 }] */
+    /* JADX WARN: Removed duplicated region for block: B:303:0x051b  */
+    /* JADX WARN: Removed duplicated region for block: B:316:0x0562  */
+    /* JADX WARN: Removed duplicated region for block: B:325:0x0593  */
+    /* JADX WARN: Removed duplicated region for block: B:328:0x059e  */
+    /* JADX WARN: Removed duplicated region for block: B:329:0x05a0  */
+    /* JADX WARN: Removed duplicated region for block: B:338:0x05be  */
+    /* JADX WARN: Removed duplicated region for block: B:345:0x05d7  */
+    /* JADX WARN: Removed duplicated region for block: B:353:0x05ee  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x008a  */
+    /* JADX WARN: Removed duplicated region for block: B:444:0x079d  */
+    /* JADX WARN: Removed duplicated region for block: B:455:0x07d7  */
+    /* JADX WARN: Removed duplicated region for block: B:460:0x07f3 A[DONT_GENERATE] */
+    /* JADX WARN: Removed duplicated region for block: B:493:0x088b  */
+    /* JADX WARN: Removed duplicated region for block: B:496:0x0896  */
+    /* JADX WARN: Removed duplicated region for block: B:499:0x08c7  */
+    /* JADX WARN: Removed duplicated region for block: B:501:0x08cf  */
+    /* JADX WARN: Removed duplicated region for block: B:504:0x08df  */
+    /* JADX WARN: Removed duplicated region for block: B:535:0x09b8  */
+    /* JADX WARN: Removed duplicated region for block: B:560:0x0a22  */
+    /* JADX WARN: Removed duplicated region for block: B:563:0x0a72  */
+    /* JADX WARN: Removed duplicated region for block: B:564:0x0a84  */
+    /* JADX WARN: Removed duplicated region for block: B:567:0x0a8b  */
+    /* JADX WARN: Removed duplicated region for block: B:569:0x0a9e  */
+    /* JADX WARN: Removed duplicated region for block: B:575:0x0ac3  */
+    /* JADX WARN: Removed duplicated region for block: B:578:0x0adc  */
+    /* JADX WARN: Removed duplicated region for block: B:583:0x0aef A[Catch: RemoteException -> 0x0b05, TRY_LEAVE, TryCatch #23 {RemoteException -> 0x0b05, blocks: (B:581:0x0ae8, B:583:0x0aef), top: B:933:0x0ae8 }] */
+    /* JADX WARN: Removed duplicated region for block: B:586:0x0b09 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:593:0x0b17  */
+    /* JADX WARN: Removed duplicated region for block: B:595:0x0b24  */
+    /* JADX WARN: Removed duplicated region for block: B:600:0x0b2e  */
+    /* JADX WARN: Removed duplicated region for block: B:602:0x0b31  */
+    /* JADX WARN: Removed duplicated region for block: B:606:0x0b3a  */
+    /* JADX WARN: Removed duplicated region for block: B:608:0x0b3d  */
+    /* JADX WARN: Removed duplicated region for block: B:627:0x0bdb  */
+    /* JADX WARN: Removed duplicated region for block: B:628:0x0be1  */
+    /* JADX WARN: Removed duplicated region for block: B:634:0x0bf5  */
+    /* JADX WARN: Removed duplicated region for block: B:637:0x0c04  */
+    /* JADX WARN: Removed duplicated region for block: B:653:0x0c67  */
+    /* JADX WARN: Removed duplicated region for block: B:656:0x0c78  */
+    /* JADX WARN: Removed duplicated region for block: B:659:0x0c7e  */
+    /* JADX WARN: Removed duplicated region for block: B:662:0x0c82  */
+    /* JADX WARN: Removed duplicated region for block: B:690:0x0ce0  */
+    /* JADX WARN: Removed duplicated region for block: B:702:0x0cfd  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x015c  */
+    /* JADX WARN: Removed duplicated region for block: B:728:0x0d91  */
+    /* JADX WARN: Removed duplicated region for block: B:730:0x0d95 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:734:0x0da9 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:736:0x0dad  */
+    /* JADX WARN: Removed duplicated region for block: B:739:0x0dbb  */
+    /* JADX WARN: Removed duplicated region for block: B:741:0x0dc2 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:744:0x0dc7  */
+    /* JADX WARN: Removed duplicated region for block: B:747:0x0dd4 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:752:0x0ddd  */
+    /* JADX WARN: Removed duplicated region for block: B:754:0x0de0  */
+    /* JADX WARN: Removed duplicated region for block: B:763:0x0e05 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:766:0x0e0b  */
+    /* JADX WARN: Removed duplicated region for block: B:773:0x0e3a  */
+    /* JADX WARN: Removed duplicated region for block: B:777:0x0e65  */
+    /* JADX WARN: Removed duplicated region for block: B:790:0x0eb6  */
+    /* JADX WARN: Removed duplicated region for block: B:825:0x0f66  */
+    /* JADX WARN: Removed duplicated region for block: B:828:0x0f6f  */
+    /* JADX WARN: Removed duplicated region for block: B:836:0x0f9b  */
+    /* JADX WARN: Removed duplicated region for block: B:873:0x1027  */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x0191  */
+    /* JADX WARN: Removed duplicated region for block: B:895:0x0437 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x01a3  */
+    /* JADX WARN: Removed duplicated region for block: B:915:0x05b0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:919:0x0572 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:923:0x0639 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:947:0x047b A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:977:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:98:0x01c0  */
     /* JADX WARN: Type inference failed for: r11v61 */
     /* JADX WARN: Type inference failed for: r11v62 */
     /* JADX WARN: Type inference failed for: r11v63, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r11v65 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void performTraversals() {
-        /*
-            Method dump skipped, instructions count: 4161
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.performTraversals():void");
+    private void performTraversals() throws Throwable {
+        boolean z;
+        long j;
+        int iWidth;
+        int iHeight;
+        boolean z2;
+        boolean z3;
+        int i;
+        boolean zMeasureHierarchy;
+        int i2;
+        WindowManager.LayoutParams layoutParams;
+        int i3;
+        Rect rect;
+        boolean z4;
+        boolean z5;
+        boolean z6;
+        String str;
+        float f;
+        boolean z7;
+        BaseSurfaceHolder baseSurfaceHolder;
+        boolean z8;
+        boolean z9;
+        boolean z10;
+        long j2;
+        boolean zInitialize;
+        boolean z11;
+        boolean z12;
+        boolean z13;
+        boolean z14;
+        int i4;
+        boolean z15;
+        boolean z16;
+        boolean z17;
+        boolean z18;
+        boolean z19;
+        boolean z20;
+        ThreadedRenderer threadedRenderer;
+        boolean z21;
+        boolean z22;
+        boolean z23;
+        boolean z24;
+        boolean z25;
+        int iRelayoutWindow;
+        boolean z26;
+        int i5;
+        boolean z27;
+        boolean z28;
+        boolean z29;
+        boolean z30;
+        boolean z31;
+        boolean z32;
+        boolean z33;
+        boolean z34;
+        boolean z35;
+        String str2;
+        String str3;
+        long j3;
+        String str4;
+        String str5;
+        StringBuilder sb;
+        boolean z36;
+        boolean z37;
+        int i6;
+        Rect rect2;
+        Rect rect3;
+        Region translatedTouchableArea;
+        boolean z38;
+        Rect rect4;
+        boolean z39;
+        boolean z40;
+        ?? r11;
+        boolean z41;
+        int i7;
+        Region region;
+        Rect rect5;
+        boolean z42;
+        int iWidth2;
+        int iHeight2;
+        String str6 = "relayout";
+        this.mLastPerformTraversalsSkipDrawReason = null;
+        View view = this.mView;
+        if (view == null || !this.mAdded) {
+            this.mLastPerformTraversalsSkipDrawReason = view == null ? "no_host" : "not_added";
+            return;
+        }
+        if (this.mNumPausedForSync > 0) {
+            if (Trace.isTagEnabled(8L)) {
+                Trace.instant(8L, TextUtils.formatSimple("performTraversals#mNumPausedForSync=%d", Integer.valueOf(this.mNumPausedForSync)));
+            }
+            if (DEBUG_BLAST) {
+                Log.d(this.mTag, "Skipping traversal due to sync " + this.mNumPausedForSync);
+            }
+            this.mLastPerformTraversalsSkipDrawReason = "paused_for_sync";
+            return;
+        }
+        this.mIsInTraversal = true;
+        this.mWillDrawSoon = true;
+        WindowManager.LayoutParams layoutParams2 = this.mWindowAttributes;
+        int hostVisibility = getHostVisibility();
+        String hostVisibilityReason = getHostVisibilityReason();
+        boolean z43 = this.mFirst;
+        int i8 = 0;
+        boolean z44 = !z43 && (this.mViewVisibility != hostVisibility || this.mNewSurfaceNeeded || this.mAppVisibilityChanged);
+        this.mAppVisibilityChanged = false;
+        if (z43) {
+            z = false;
+        } else if ((this.mViewVisibility == 0) != (hostVisibility == 0)) {
+            z = true;
+        }
+        boolean zShouldOptimizeMeasure = shouldOptimizeMeasure(layoutParams2);
+        Rect rect6 = this.mWinFrame;
+        if (this.mFirst) {
+            this.mFullRedrawNeeded = true;
+            this.mLayoutRequested = true;
+            Configuration configuration = getConfiguration();
+            if (shouldUseDisplaySize(layoutParams2)) {
+                j = 8;
+                Point point = new Point();
+                this.mDisplay.getRealSize(point);
+                iWidth = point.x;
+                iHeight = point.y;
+            } else {
+                j = 8;
+                if (layoutParams2.width == -2 || layoutParams2.height == -2) {
+                    Rect windowBoundsInsetSystemBars = getWindowBoundsInsetSystemBars(layoutParams2);
+                    iWidth = windowBoundsInsetSystemBars.width();
+                    iHeight = windowBoundsInsetSystemBars.height();
+                } else {
+                    iWidth = rect6.width();
+                    iHeight = rect6.height();
+                }
+            }
+            this.mAttachInfo.mUse32BitDrawingCache = true;
+            this.mAttachInfo.mHasWindowFocus = this.mEarlyHasWindowFocus;
+            this.mAttachInfo.mWindowVisibility = hostVisibility;
+            this.mAttachInfo.mRecomputeGlobalAttributes = false;
+            this.mLastConfigurationFromResources.setTo(configuration);
+            this.mLastSystemUiVisibility = this.mAttachInfo.mSystemUiVisibility;
+            if (this.mViewLayoutDirectionInitial == 2) {
+                view.setLayoutDirection(configuration.getLayoutDirection());
+            }
+            view.dispatchAttachedToWindow(this.mAttachInfo, 0);
+            this.mAttachInfo.mTreeObserver.dispatchOnWindowAttachedChange(true);
+            dispatchApplyInsets(view);
+            if (!this.mOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled() && this.mWindowlessBackKeyCallback == null) {
+                registerCompatOnBackInvokedCallback();
+            }
+        } else {
+            j = 8;
+            iWidth = rect6.width();
+            iHeight = rect6.height();
+            if (iWidth != this.mWidth || iHeight != this.mHeight) {
+                if (DEBUG_ORIENTATION) {
+                    Log.v(this.mTag, "View " + view + " resized to: " + rect6);
+                }
+                this.mFullRedrawNeeded = true;
+                this.mLayoutRequested = true;
+                z2 = true;
+            }
+            if (z44) {
+                this.mAttachInfo.mWindowVisibility = hostVisibility;
+                view.dispatchWindowVisibilityChanged(hostVisibility);
+                this.mAttachInfo.mTreeObserver.dispatchOnWindowVisibilityChange(hostVisibility);
+                if (z) {
+                    view.dispatchVisibilityAggregated(hostVisibility == 0);
+                }
+                if (hostVisibility != 0 || this.mNewSurfaceNeeded) {
+                    endDragResizing();
+                    destroyHardwareResources();
+                }
+                if (shouldEnableDvrr() && hostVisibility == 0) {
+                    boostFrameRate(3000);
+                }
+            }
+            if (this.mAttachInfo.mWindowVisibility != 0) {
+                view.clearAccessibilityFocus();
+            }
+            getRunQueue().executeActions(this.mAttachInfo.mHandler);
+            if (this.mFirst) {
+                this.mAttachInfo.mInTouchMode = !this.mAddedTouchMode;
+                ensureTouchModeLocally(this.mAddedTouchMode);
+            }
+            z3 = !this.mLayoutRequested && (!this.mStopped || this.mReportNextDraw);
+            if (z3) {
+                i = iHeight;
+                zMeasureHierarchy = z2;
+                i2 = iWidth;
+            } else {
+                if (this.mFirst || !(layoutParams2.width == -2 || layoutParams2.height == -2)) {
+                    z42 = z2;
+                    i = iHeight;
+                    i2 = iWidth;
+                } else {
+                    if (shouldUseDisplaySize(layoutParams2)) {
+                        Point point2 = new Point();
+                        this.mDisplay.getRealSize(point2);
+                        iWidth2 = point2.x;
+                        iHeight2 = point2.y;
+                    } else {
+                        Rect windowBoundsInsetSystemBars2 = getWindowBoundsInsetSystemBars(layoutParams2);
+                        iWidth2 = windowBoundsInsetSystemBars2.width();
+                        iHeight2 = windowBoundsInsetSystemBars2.height();
+                    }
+                    i = iHeight2;
+                    i2 = iWidth2;
+                    z42 = true;
+                }
+                rect6 = rect6;
+                zMeasureHierarchy = z42 | measureHierarchy(view, layoutParams2, this.mView.getContext().getResources(), i2, i, zShouldOptimizeMeasure);
+            }
+            layoutParams = !collectViewAttributes() ? layoutParams2 : null;
+            if (this.mAttachInfo.mForceReportNewAttributes) {
+                this.mAttachInfo.mForceReportNewAttributes = false;
+                layoutParams = layoutParams2;
+            }
+            if (!this.mFirst || this.mAttachInfo.mViewVisibilityChanged) {
+                this.mAttachInfo.mViewVisibilityChanged = false;
+                i3 = this.mSoftInputMode & 240;
+                if (i3 == 0) {
+                    int size = this.mAttachInfo.mScrollContainers.size();
+                    while (i8 < size) {
+                        int i9 = size;
+                        if (this.mAttachInfo.mScrollContainers.get(i8).isShown()) {
+                            i3 = 16;
+                        }
+                        i8++;
+                        size = i9;
+                    }
+                    if (i3 == 0) {
+                        i3 = 32;
+                    }
+                    if ((layoutParams2.softInputMode & 240) != i3) {
+                        layoutParams2.softInputMode = (layoutParams2.softInputMode & (-241)) | i3;
+                        layoutParams = layoutParams2;
+                    }
+                }
+            }
+            if (!this.mApplyInsetsRequested) {
+                dispatchApplyInsets(view);
+                if (this.mLayoutRequested) {
+                    rect = rect6;
+                    zMeasureHierarchy |= measureHierarchy(view, layoutParams2, this.mView.getContext().getResources(), i2, i, zShouldOptimizeMeasure);
+                } else {
+                    rect = rect6;
+                }
+            }
+            if (z3) {
+                this.mLayoutRequested = false;
+            }
+            boolean z45 = ((z3 || !zMeasureHierarchy || (this.mWidth == view.getMeasuredWidth() && this.mHeight == view.getMeasuredHeight() && ((layoutParams2.width != -2 || rect.width() >= i2 || rect.width() == this.mWidth) && (layoutParams2.height != -2 || rect.height() >= i || rect.height() == this.mHeight)))) ? false : true) | (!this.mDragResizing && this.mPendingDragResizing);
+            z4 = !this.mAttachInfo.mTreeObserver.hasComputeInternalInsetsListeners() || this.mAttachInfo.mHasNonEmptyGivenInternalInsets;
+            int generationId = this.mSurface.getGenerationId();
+            z5 = hostVisibility != 0;
+            z6 = this.mWindowAttributesChanged;
+            if (z6) {
+                this.mWindowAttributesChanged = false;
+                layoutParams = layoutParams2;
+            }
+            if (layoutParams != null) {
+                if ((view.mPrivateFlags & 512) != 0 && !PixelFormat.formatHasAlpha(layoutParams.format)) {
+                    layoutParams.format = -3;
+                }
+                adjustLayoutParamsForCompatibility(layoutParams, this.mInsetsController.getAppearanceControlled(), this.mInsetsController.isBehaviorControlled());
+                controlInsetsForCompatibility(layoutParams);
+                if (this.mDispatchedSystemBarAppearance != layoutParams.insetsFlags.appearance) {
+                    int i10 = layoutParams.insetsFlags.appearance;
+                    this.mDispatchedSystemBarAppearance = i10;
+                    this.mView.onSystemBarAppearanceChanged(i10);
+                }
+            }
+            if (!this.mFirst || z45 || z44 || layoutParams != null || this.mForceNextWindowRelayout) {
+                if (Trace.isTagEnabled(j)) {
+                    str = hostVisibilityReason;
+                    f = 0.0f;
+                } else {
+                    f = 0.0f;
+                    str = hostVisibilityReason;
+                    Trace.traceBegin(j, TextUtils.formatSimple("%s-relayoutWindow#first=%b/resize=%b/vis=%b/params=%b/force=%b", this.mTag, Boolean.valueOf(this.mFirst), Boolean.valueOf(z45), Boolean.valueOf(z44), Boolean.valueOf(layoutParams != null), Boolean.valueOf(this.mForceNextWindowRelayout)));
+                }
+                this.mForceNextWindowRelayout = false;
+                z7 = !z4 && this.mWindowAttributes.providedInsets == null;
+                baseSurfaceHolder = this.mSurfaceHolder;
+                if (baseSurfaceHolder != null) {
+                    baseSurfaceHolder.mSurfaceLock.lock();
+                    this.mDrawingAllowed = true;
+                }
+                boolean zIsValid = this.mSurface.isValid();
+                try {
+                    try {
+                        z23 = DEBUG_LAYOUT;
+                        if (z23) {
+                            z24 = zIsValid;
+                            z8 = z4;
+                            z10 = z6;
+                        } else {
+                            z24 = zIsValid;
+                            try {
+                                str5 = this.mTag;
+                                z8 = z4;
+                            } catch (RemoteException unused) {
+                                z8 = z4;
+                            }
+                            try {
+                                sb = new StringBuilder();
+                                z10 = z6;
+                            } catch (RemoteException unused2) {
+                                z10 = z6;
+                                z9 = z5;
+                                zInitialize = false;
+                                str6 = null;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z13 = false;
+                                z14 = false;
+                                i4 = 0;
+                                z15 = false;
+                                z16 = false;
+                                z17 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z46 = z15;
+                                boolean z47 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                            try {
+                                sb.append("host=w:");
+                                sb.append(view.getMeasuredWidth());
+                                sb.append(", h:");
+                                sb.append(view.getMeasuredHeight());
+                                sb.append(", params=");
+                                sb.append(layoutParams);
+                                Log.i(str5, sb.toString());
+                            } catch (RemoteException unused3) {
+                                z9 = z5;
+                                zInitialize = false;
+                                str6 = null;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z13 = false;
+                                z14 = false;
+                                i4 = 0;
+                                z15 = false;
+                                z16 = false;
+                                z17 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z462 = z15;
+                                boolean z472 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw2 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw2) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                        }
+                        if (!this.mFirst || z44) {
+                            z25 = z5;
+                            try {
+                                this.mViewFrameInfo.flags |= 1;
+                            } catch (RemoteException unused4) {
+                                z9 = z25;
+                                zInitialize = false;
+                                str6 = null;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z13 = false;
+                                z14 = false;
+                                i4 = 0;
+                                z15 = false;
+                                z16 = false;
+                                z17 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z4622 = z15;
+                                boolean z4722 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw22 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw22) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                        } else {
+                            z25 = z5;
+                        }
+                        iRelayoutWindow = relayoutWindow(layoutParams, hostVisibility, z7);
+                        zInitialize = (iRelayoutWindow & 16) != 16;
+                        try {
+                            z26 = this.mPendingDragResizing;
+                            i5 = this.mSyncSeqId;
+                            z9 = z25;
+                        } catch (RemoteException unused5) {
+                            z9 = z25;
+                        }
+                    } catch (RemoteException unused6) {
+                        z8 = z4;
+                        z9 = z5;
+                        z10 = z6;
+                        j2 = 8;
+                        zInitialize = false;
+                        str6 = null;
+                        z11 = false;
+                    }
+                    try {
+                        if (i5 <= this.mLastSyncSeqId) {
+                            try {
+                                this.mLastSyncSeqId = i5;
+                                if (DEBUG_BLAST) {
+                                    Log.d(this.mTag, "Relayout called with blastSync");
+                                }
+                                reportNextDraw("relayout");
+                                this.mSyncBuffer = true;
+                                if (!zInitialize) {
+                                    try {
+                                        this.mDrewOnceForSync = false;
+                                    } catch (RemoteException unused7) {
+                                        i4 = iRelayoutWindow;
+                                        z17 = zInitialize;
+                                        zInitialize = false;
+                                        z11 = false;
+                                        j2 = 8;
+                                        z12 = false;
+                                        z13 = false;
+                                        z14 = true;
+                                        z15 = false;
+                                        z16 = false;
+                                        z18 = false;
+                                        if (Trace.isTagEnabled(j2)) {
+                                        }
+                                        boolean z46222 = z15;
+                                        boolean z47222 = z18;
+                                        if (DEBUG_ORIENTATION) {
+                                        }
+                                        this.mAttachInfo.mWindowLeft = rect.left;
+                                        this.mAttachInfo.mWindowTop = rect.top;
+                                        if (this.mWidth != rect.width()) {
+                                        }
+                                        if (this.mViewMeasureDeferred) {
+                                        }
+                                        if (!this.mRelayoutRequested) {
+                                        }
+                                        if (!z16) {
+                                        }
+                                        if (z3) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (!z13) {
+                                        }
+                                        applyTransactionOnDraw(this.mTransaction);
+                                        if (z37) {
+                                        }
+                                        if (z8) {
+                                        }
+                                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                        }
+                                        if (this.mFirst) {
+                                        }
+                                        if (z44) {
+                                        }
+                                        this.mFirst = false;
+                                        this.mWillDrawSoon = false;
+                                        this.mNewSurfaceNeeded = false;
+                                        this.mViewVisibility = hostVisibility;
+                                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                        if ((i4 & 1) != 0) {
+                                        }
+                                        this.mCheckIfCanDraw = z14 || z17;
+                                        boolean zDispatchOnPreDraw222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                        if (zDispatchOnPreDraw222) {
+                                        }
+                                        if (!z39) {
+                                        }
+                                        if (z39) {
+                                        }
+                                        if (DEBUG_TRAVERSAL) {
+                                        }
+                                        if (z40) {
+                                        }
+                                        this.mWasLastDrawCanceled = z39;
+                                        this.mLastTraversalWasVisible = z40;
+                                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                        }
+                                        this.mIsInTraversal = r11;
+                                        this.mRelayoutRequested = r11;
+                                        if (!z39) {
+                                        }
+                                        if (!this.mDrawnThisFrame) {
+                                        }
+                                    }
+                                }
+                                z27 = true;
+                            } catch (RemoteException unused8) {
+                                i4 = iRelayoutWindow;
+                                z17 = zInitialize;
+                                zInitialize = false;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z13 = false;
+                                z14 = false;
+                                z15 = false;
+                                z16 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                    Trace.traceEnd(j2);
+                                }
+                                boolean z462222 = z15;
+                                boolean z472222 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw2222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw2222) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                        } else {
+                            z27 = false;
+                        }
+                        z14 = z27;
+                        boolean z48 = (iRelayoutWindow & 2) != 2;
+                        try {
+                            if (this.mSurfaceControl.isValid()) {
+                                z28 = z48;
+                                i4 = iRelayoutWindow;
+                            } else {
+                                try {
+                                    updateOpacity(this.mWindowAttributes, z26, z48);
+                                    if (z48 && this.mDisplayDecorationCached) {
+                                        updateDisplayDecoration();
+                                    }
+                                    if (z48) {
+                                        z28 = z48;
+                                        this.mViewRootSurfaceController.update(this.mTransaction);
+                                    } else {
+                                        z28 = z48;
+                                    }
+                                    if (z28 && this.mWindowAttributes.type == 2000) {
+                                        i4 = iRelayoutWindow;
+                                        try {
+                                            this.mTransaction.setDefaultFrameRateCompatibility(this.mSurfaceControl, 101).apply();
+                                        } catch (RemoteException unused9) {
+                                            z17 = zInitialize;
+                                            zInitialize = false;
+                                            z11 = false;
+                                            j2 = 8;
+                                            z12 = false;
+                                            z13 = false;
+                                            z15 = false;
+                                            z16 = false;
+                                            z18 = false;
+                                            if (Trace.isTagEnabled(j2)) {
+                                            }
+                                            boolean z4622222 = z15;
+                                            boolean z4722222 = z18;
+                                            if (DEBUG_ORIENTATION) {
+                                            }
+                                            this.mAttachInfo.mWindowLeft = rect.left;
+                                            this.mAttachInfo.mWindowTop = rect.top;
+                                            if (this.mWidth != rect.width()) {
+                                            }
+                                            if (this.mViewMeasureDeferred) {
+                                            }
+                                            if (!this.mRelayoutRequested) {
+                                            }
+                                            if (!z16) {
+                                            }
+                                            if (z3) {
+                                            }
+                                            if (z36) {
+                                            }
+                                            if (z36) {
+                                            }
+                                            if (!z13) {
+                                            }
+                                            applyTransactionOnDraw(this.mTransaction);
+                                            if (z37) {
+                                            }
+                                            if (z8) {
+                                            }
+                                            if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                            }
+                                            if (this.mFirst) {
+                                            }
+                                            if (z44) {
+                                            }
+                                            this.mFirst = false;
+                                            this.mWillDrawSoon = false;
+                                            this.mNewSurfaceNeeded = false;
+                                            this.mViewVisibility = hostVisibility;
+                                            this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                            if ((i4 & 1) != 0) {
+                                            }
+                                            this.mCheckIfCanDraw = z14 || z17;
+                                            boolean zDispatchOnPreDraw22222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                            if (zDispatchOnPreDraw22222) {
+                                            }
+                                            if (!z39) {
+                                            }
+                                            if (z39) {
+                                            }
+                                            if (DEBUG_TRAVERSAL) {
+                                            }
+                                            if (z40) {
+                                            }
+                                            this.mWasLastDrawCanceled = z39;
+                                            this.mLastTraversalWasVisible = z40;
+                                            if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                            }
+                                            this.mIsInTraversal = r11;
+                                            this.mRelayoutRequested = r11;
+                                            if (!z39) {
+                                            }
+                                            if (!this.mDrawnThisFrame) {
+                                            }
+                                        }
+                                    } else {
+                                        i4 = iRelayoutWindow;
+                                    }
+                                    if (com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.setScPropertiesInClient() && (z28 || z10)) {
+                                        this.mTransaction.setColorSpaceAgnostic(this.mSurfaceControl, (layoutParams2.privateFlags & 16777216) != 0).apply();
+                                    }
+                                } catch (RemoteException unused10) {
+                                    i4 = iRelayoutWindow;
+                                    z17 = zInitialize;
+                                    zInitialize = false;
+                                    z11 = false;
+                                    j2 = 8;
+                                    z12 = false;
+                                    z13 = false;
+                                    z15 = false;
+                                    z16 = false;
+                                    z18 = false;
+                                    if (Trace.isTagEnabled(j2)) {
+                                    }
+                                    boolean z46222222 = z15;
+                                    boolean z47222222 = z18;
+                                    if (DEBUG_ORIENTATION) {
+                                    }
+                                    this.mAttachInfo.mWindowLeft = rect.left;
+                                    this.mAttachInfo.mWindowTop = rect.top;
+                                    if (this.mWidth != rect.width()) {
+                                    }
+                                    if (this.mViewMeasureDeferred) {
+                                    }
+                                    if (!this.mRelayoutRequested) {
+                                    }
+                                    if (!z16) {
+                                    }
+                                    if (z3) {
+                                    }
+                                    if (z36) {
+                                    }
+                                    if (z36) {
+                                    }
+                                    if (!z13) {
+                                    }
+                                    applyTransactionOnDraw(this.mTransaction);
+                                    if (z37) {
+                                    }
+                                    if (z8) {
+                                    }
+                                    if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                    }
+                                    if (this.mFirst) {
+                                    }
+                                    if (z44) {
+                                    }
+                                    this.mFirst = false;
+                                    this.mWillDrawSoon = false;
+                                    this.mNewSurfaceNeeded = false;
+                                    this.mViewVisibility = hostVisibility;
+                                    this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                    if ((i4 & 1) != 0) {
+                                    }
+                                    this.mCheckIfCanDraw = z14 || z17;
+                                    boolean zDispatchOnPreDraw222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                    if (zDispatchOnPreDraw222222) {
+                                    }
+                                    if (!z39) {
+                                    }
+                                    if (z39) {
+                                    }
+                                    if (DEBUG_TRAVERSAL) {
+                                    }
+                                    if (z40) {
+                                    }
+                                    this.mWasLastDrawCanceled = z39;
+                                    this.mLastTraversalWasVisible = z40;
+                                    if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                    }
+                                    this.mIsInTraversal = r11;
+                                    this.mRelayoutRequested = r11;
+                                    if (!z39) {
+                                    }
+                                    if (!this.mDrawnThisFrame) {
+                                    }
+                                }
+                            }
+                            if (z23) {
+                                Log.v(this.mTag, "relayout: frame=" + rect.toShortString() + " surface=" + this.mSurface);
+                            }
+                        } catch (RemoteException unused11) {
+                            i4 = iRelayoutWindow;
+                        }
+                        try {
+                            boolean z49 = this.mPendingMergedConfiguration.equals(this.mLastReportedMergedConfiguration) || !Objects.equals(this.mPendingActivityWindowInfo, this.mLastReportedActivityWindowInfo);
+                            if (this.mRelayoutRequested || !z49) {
+                                z29 = false;
+                            } else {
+                                if (DEBUG_CONFIGURATION) {
+                                    Log.v(this.mTag, "Visible with new config: " + this.mPendingMergedConfiguration.getMergedConfiguration());
+                                }
+                                performConfigurationChange(new MergedConfiguration(this.mPendingMergedConfiguration), !this.mFirst, -1, this.mPendingActivityWindowInfo != null ? new ActivityWindowInfo(this.mPendingActivityWindowInfo) : null);
+                                z29 = true;
+                            }
+                            try {
+                                z30 = this.mUpdateSurfaceNeeded;
+                                this.mUpdateSurfaceNeeded = false;
+                                if (this.mLastSurfaceSize.equals(this.mSurfaceSize)) {
+                                    try {
+                                        z15 = z29;
+                                    } catch (RemoteException unused12) {
+                                        z15 = z29;
+                                    }
+                                    try {
+                                        this.mLastSurfaceSize.set(this.mSurfaceSize.x, this.mSurfaceSize.y);
+                                        z31 = true;
+                                    } catch (RemoteException unused13) {
+                                        z17 = zInitialize;
+                                        zInitialize = false;
+                                        z11 = false;
+                                        j2 = 8;
+                                        z12 = false;
+                                        z13 = false;
+                                        z16 = true;
+                                        z18 = false;
+                                        if (Trace.isTagEnabled(j2)) {
+                                        }
+                                        boolean z462222222 = z15;
+                                        boolean z472222222 = z18;
+                                        if (DEBUG_ORIENTATION) {
+                                        }
+                                        this.mAttachInfo.mWindowLeft = rect.left;
+                                        this.mAttachInfo.mWindowTop = rect.top;
+                                        if (this.mWidth != rect.width()) {
+                                        }
+                                        if (this.mViewMeasureDeferred) {
+                                        }
+                                        if (!this.mRelayoutRequested) {
+                                        }
+                                        if (!z16) {
+                                        }
+                                        if (z3) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (!z13) {
+                                        }
+                                        applyTransactionOnDraw(this.mTransaction);
+                                        if (z37) {
+                                        }
+                                        if (z8) {
+                                        }
+                                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                        }
+                                        if (this.mFirst) {
+                                        }
+                                        if (z44) {
+                                        }
+                                        this.mFirst = false;
+                                        this.mWillDrawSoon = false;
+                                        this.mNewSurfaceNeeded = false;
+                                        this.mViewVisibility = hostVisibility;
+                                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                        if ((i4 & 1) != 0) {
+                                        }
+                                        this.mCheckIfCanDraw = z14 || z17;
+                                        boolean zDispatchOnPreDraw2222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                        if (zDispatchOnPreDraw2222222) {
+                                        }
+                                        if (!z39) {
+                                        }
+                                        if (z39) {
+                                        }
+                                        if (DEBUG_TRAVERSAL) {
+                                        }
+                                        if (z40) {
+                                        }
+                                        this.mWasLastDrawCanceled = z39;
+                                        this.mLastTraversalWasVisible = z40;
+                                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                        }
+                                        this.mIsInTraversal = r11;
+                                        this.mRelayoutRequested = r11;
+                                        if (!z39) {
+                                        }
+                                        if (!this.mDrawnThisFrame) {
+                                        }
+                                    }
+                                } else {
+                                    z15 = z29;
+                                    z31 = false;
+                                }
+                                try {
+                                    z32 = this.mPendingAlwaysConsumeSystemBars == this.mAttachInfo.mAlwaysConsumeSystemBars;
+                                    z16 = z31;
+                                } catch (RemoteException unused14) {
+                                    z16 = z31;
+                                }
+                            } catch (RemoteException unused15) {
+                                z15 = z29;
+                                z17 = zInitialize;
+                                zInitialize = false;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z13 = false;
+                                z16 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z4622222222 = z15;
+                                boolean z4722222222 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw22222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw22222222) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                        } catch (RemoteException unused16) {
+                            z17 = zInitialize;
+                            zInitialize = false;
+                            z11 = false;
+                            j2 = 8;
+                            z12 = false;
+                            z13 = false;
+                            z15 = false;
+                            z16 = false;
+                            z18 = false;
+                            if (Trace.isTagEnabled(j2)) {
+                            }
+                            boolean z46222222222 = z15;
+                            boolean z47222222222 = z18;
+                            if (DEBUG_ORIENTATION) {
+                            }
+                            this.mAttachInfo.mWindowLeft = rect.left;
+                            this.mAttachInfo.mWindowTop = rect.top;
+                            if (this.mWidth != rect.width()) {
+                            }
+                            if (this.mViewMeasureDeferred) {
+                            }
+                            if (!this.mRelayoutRequested) {
+                            }
+                            if (!z16) {
+                            }
+                            if (z3) {
+                            }
+                            if (z36) {
+                            }
+                            if (z36) {
+                            }
+                            if (!z13) {
+                            }
+                            applyTransactionOnDraw(this.mTransaction);
+                            if (z37) {
+                            }
+                            if (z8) {
+                            }
+                            if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                            }
+                            if (this.mFirst) {
+                            }
+                            if (z44) {
+                            }
+                            this.mFirst = false;
+                            this.mWillDrawSoon = false;
+                            this.mNewSurfaceNeeded = false;
+                            this.mViewVisibility = hostVisibility;
+                            this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                            if ((i4 & 1) != 0) {
+                            }
+                            this.mCheckIfCanDraw = z14 || z17;
+                            boolean zDispatchOnPreDraw222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                            if (zDispatchOnPreDraw222222222) {
+                            }
+                            if (!z39) {
+                            }
+                            if (z39) {
+                            }
+                            if (DEBUG_TRAVERSAL) {
+                            }
+                            if (z40) {
+                            }
+                            this.mWasLastDrawCanceled = z39;
+                            this.mLastTraversalWasVisible = z40;
+                            if (this.mAttachInfo.mContentCaptureEvents != null) {
+                            }
+                            this.mIsInTraversal = r11;
+                            this.mRelayoutRequested = r11;
+                            if (!z39) {
+                            }
+                            if (!this.mDrawnThisFrame) {
+                            }
+                        }
+                    } catch (RemoteException unused17) {
+                        i4 = iRelayoutWindow;
+                        z17 = zInitialize;
+                        zInitialize = false;
+                        z11 = false;
+                        j2 = 8;
+                        z12 = false;
+                        z13 = false;
+                        z14 = false;
+                        z15 = false;
+                        z16 = false;
+                        z18 = false;
+                        if (Trace.isTagEnabled(j2)) {
+                        }
+                        boolean z462222222222 = z15;
+                        boolean z472222222222 = z18;
+                        if (DEBUG_ORIENTATION) {
+                        }
+                        this.mAttachInfo.mWindowLeft = rect.left;
+                        this.mAttachInfo.mWindowTop = rect.top;
+                        if (this.mWidth != rect.width()) {
+                        }
+                        if (this.mViewMeasureDeferred) {
+                        }
+                        if (!this.mRelayoutRequested) {
+                        }
+                        if (!z16) {
+                        }
+                        if (z3) {
+                        }
+                        if (z36) {
+                        }
+                        if (z36) {
+                        }
+                        if (!z13) {
+                        }
+                        applyTransactionOnDraw(this.mTransaction);
+                        if (z37) {
+                        }
+                        if (z8) {
+                        }
+                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                        }
+                        if (this.mFirst) {
+                        }
+                        if (z44) {
+                        }
+                        this.mFirst = false;
+                        this.mWillDrawSoon = false;
+                        this.mNewSurfaceNeeded = false;
+                        this.mViewVisibility = hostVisibility;
+                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                        if ((i4 & 1) != 0) {
+                        }
+                        this.mCheckIfCanDraw = z14 || z17;
+                        boolean zDispatchOnPreDraw2222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                        if (zDispatchOnPreDraw2222222222) {
+                        }
+                        if (!z39) {
+                        }
+                        if (z39) {
+                        }
+                        if (DEBUG_TRAVERSAL) {
+                        }
+                        if (z40) {
+                        }
+                        this.mWasLastDrawCanceled = z39;
+                        this.mLastTraversalWasVisible = z40;
+                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                        }
+                        this.mIsInTraversal = r11;
+                        this.mRelayoutRequested = r11;
+                        if (!z39) {
+                        }
+                        if (!this.mDrawnThisFrame) {
+                        }
+                    }
+                    try {
+                        updateColorModeIfNeeded(layoutParams2.getColorMode(), layoutParams2.getDesiredHdrHeadroom());
+                    } catch (RemoteException unused18) {
+                        z17 = zInitialize;
+                        zInitialize = false;
+                        z11 = false;
+                        j2 = 8;
+                        z12 = false;
+                        z13 = false;
+                        z18 = false;
+                        if (Trace.isTagEnabled(j2)) {
+                        }
+                        boolean z4622222222222 = z15;
+                        boolean z4722222222222 = z18;
+                        if (DEBUG_ORIENTATION) {
+                        }
+                        this.mAttachInfo.mWindowLeft = rect.left;
+                        this.mAttachInfo.mWindowTop = rect.top;
+                        if (this.mWidth != rect.width()) {
+                        }
+                        if (this.mViewMeasureDeferred) {
+                        }
+                        if (!this.mRelayoutRequested) {
+                        }
+                        if (!z16) {
+                        }
+                        if (z3) {
+                        }
+                        if (z36) {
+                        }
+                        if (z36) {
+                        }
+                        if (!z13) {
+                        }
+                        applyTransactionOnDraw(this.mTransaction);
+                        if (z37) {
+                        }
+                        if (z8) {
+                        }
+                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                        }
+                        if (this.mFirst) {
+                        }
+                        if (z44) {
+                        }
+                        this.mFirst = false;
+                        this.mWillDrawSoon = false;
+                        this.mNewSurfaceNeeded = false;
+                        this.mViewVisibility = hostVisibility;
+                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                        if ((i4 & 1) != 0) {
+                        }
+                        this.mCheckIfCanDraw = z14 || z17;
+                        boolean zDispatchOnPreDraw22222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                        if (zDispatchOnPreDraw22222222222) {
+                        }
+                        if (!z39) {
+                        }
+                        if (z39) {
+                        }
+                        if (DEBUG_TRAVERSAL) {
+                        }
+                        if (z40) {
+                        }
+                        this.mWasLastDrawCanceled = z39;
+                        this.mLastTraversalWasVisible = z40;
+                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                        }
+                        this.mIsInTraversal = r11;
+                        this.mRelayoutRequested = r11;
+                        if (!z39) {
+                        }
+                        if (!this.mDrawnThisFrame) {
+                        }
+                    }
+                    if (z24) {
+                        try {
+                            z33 = this.mSurface.isValid();
+                        } catch (RemoteException unused19) {
+                            z17 = zInitialize;
+                            zInitialize = false;
+                            z11 = false;
+                            j2 = 8;
+                            z12 = false;
+                            z13 = false;
+                            z18 = false;
+                            if (Trace.isTagEnabled(j2)) {
+                            }
+                            boolean z46222222222222 = z15;
+                            boolean z47222222222222 = z18;
+                            if (DEBUG_ORIENTATION) {
+                            }
+                            this.mAttachInfo.mWindowLeft = rect.left;
+                            this.mAttachInfo.mWindowTop = rect.top;
+                            if (this.mWidth != rect.width()) {
+                            }
+                            if (this.mViewMeasureDeferred) {
+                            }
+                            if (!this.mRelayoutRequested) {
+                            }
+                            if (!z16) {
+                            }
+                            if (z3) {
+                            }
+                            if (z36) {
+                            }
+                            if (z36) {
+                            }
+                            if (!z13) {
+                            }
+                            applyTransactionOnDraw(this.mTransaction);
+                            if (z37) {
+                            }
+                            if (z8) {
+                            }
+                            if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                            }
+                            if (this.mFirst) {
+                            }
+                            if (z44) {
+                            }
+                            this.mFirst = false;
+                            this.mWillDrawSoon = false;
+                            this.mNewSurfaceNeeded = false;
+                            this.mViewVisibility = hostVisibility;
+                            this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                            if ((i4 & 1) != 0) {
+                            }
+                            this.mCheckIfCanDraw = z14 || z17;
+                            boolean zDispatchOnPreDraw222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                            if (zDispatchOnPreDraw222222222222) {
+                            }
+                            if (!z39) {
+                            }
+                            if (z39) {
+                            }
+                            if (DEBUG_TRAVERSAL) {
+                            }
+                            if (z40) {
+                            }
+                            this.mWasLastDrawCanceled = z39;
+                            this.mLastTraversalWasVisible = z40;
+                            if (this.mAttachInfo.mContentCaptureEvents != null) {
+                            }
+                            this.mIsInTraversal = r11;
+                            this.mRelayoutRequested = r11;
+                            if (!z39) {
+                            }
+                            if (!this.mDrawnThisFrame) {
+                            }
+                        }
+                        if (z24) {
+                            try {
+                                z11 = !this.mSurface.isValid();
+                                z13 = z33;
+                            } catch (RemoteException unused20) {
+                                z13 = z33;
+                                z17 = zInitialize;
+                                zInitialize = false;
+                                z11 = false;
+                                j2 = 8;
+                                z12 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z462222222222222 = z15;
+                                boolean z472222222222222 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw2222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw2222222222222) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                            try {
+                            } catch (RemoteException unused21) {
+                                z17 = zInitialize;
+                                zInitialize = false;
+                                j2 = 8;
+                                z12 = false;
+                                z18 = false;
+                                if (Trace.isTagEnabled(j2)) {
+                                }
+                                boolean z4622222222222222 = z15;
+                                boolean z4722222222222222 = z18;
+                                if (DEBUG_ORIENTATION) {
+                                }
+                                this.mAttachInfo.mWindowLeft = rect.left;
+                                this.mAttachInfo.mWindowTop = rect.top;
+                                if (this.mWidth != rect.width()) {
+                                }
+                                if (this.mViewMeasureDeferred) {
+                                }
+                                if (!this.mRelayoutRequested) {
+                                }
+                                if (!z16) {
+                                }
+                                if (z3) {
+                                }
+                                if (z36) {
+                                }
+                                if (z36) {
+                                }
+                                if (!z13) {
+                                }
+                                applyTransactionOnDraw(this.mTransaction);
+                                if (z37) {
+                                }
+                                if (z8) {
+                                }
+                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                }
+                                if (this.mFirst) {
+                                }
+                                if (z44) {
+                                }
+                                this.mFirst = false;
+                                this.mWillDrawSoon = false;
+                                this.mNewSurfaceNeeded = false;
+                                this.mViewVisibility = hostVisibility;
+                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                if ((i4 & 1) != 0) {
+                                }
+                                this.mCheckIfCanDraw = z14 || z17;
+                                boolean zDispatchOnPreDraw22222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                if (zDispatchOnPreDraw22222222222222) {
+                                }
+                                if (!z39) {
+                                }
+                                if (z39) {
+                                }
+                                if (DEBUG_TRAVERSAL) {
+                                }
+                                if (z40) {
+                                }
+                                this.mWasLastDrawCanceled = z39;
+                                this.mLastTraversalWasVisible = z40;
+                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                }
+                                this.mIsInTraversal = r11;
+                                this.mRelayoutRequested = r11;
+                                if (!z39) {
+                                }
+                                if (!this.mDrawnThisFrame) {
+                                }
+                            }
+                            if (generationId != this.mSurface.getGenerationId() || z28) {
+                                boolean z50 = this.mSurface.isValid();
+                                if (z50) {
+                                    try {
+                                        this.mSurfaceReplaced = true;
+                                        this.mSurfaceSequenceId++;
+                                        z12 = z50;
+                                    } catch (RemoteException unused22) {
+                                        z12 = z50;
+                                    }
+                                    try {
+                                        this.mHandler.removeMessages(43);
+                                        z34 = z30;
+                                        z17 = zInitialize;
+                                    } catch (RemoteException unused23) {
+                                        z17 = zInitialize;
+                                        zInitialize = false;
+                                        j2 = 8;
+                                        z18 = false;
+                                        if (Trace.isTagEnabled(j2)) {
+                                        }
+                                        boolean z46222222222222222 = z15;
+                                        boolean z47222222222222222 = z18;
+                                        if (DEBUG_ORIENTATION) {
+                                        }
+                                        this.mAttachInfo.mWindowLeft = rect.left;
+                                        this.mAttachInfo.mWindowTop = rect.top;
+                                        if (this.mWidth != rect.width()) {
+                                        }
+                                        if (this.mViewMeasureDeferred) {
+                                        }
+                                        if (!this.mRelayoutRequested) {
+                                        }
+                                        if (!z16) {
+                                        }
+                                        if (z3) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (!z13) {
+                                        }
+                                        applyTransactionOnDraw(this.mTransaction);
+                                        if (z37) {
+                                        }
+                                        if (z8) {
+                                        }
+                                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                        }
+                                        if (this.mFirst) {
+                                        }
+                                        if (z44) {
+                                        }
+                                        this.mFirst = false;
+                                        this.mWillDrawSoon = false;
+                                        this.mNewSurfaceNeeded = false;
+                                        this.mViewVisibility = hostVisibility;
+                                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                        if ((i4 & 1) != 0) {
+                                        }
+                                        this.mCheckIfCanDraw = z14 || z17;
+                                        boolean zDispatchOnPreDraw222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                        if (zDispatchOnPreDraw222222222222222) {
+                                        }
+                                        if (!z39) {
+                                        }
+                                        if (z39) {
+                                        }
+                                        if (DEBUG_TRAVERSAL) {
+                                        }
+                                        if (z40) {
+                                        }
+                                        this.mWasLastDrawCanceled = z39;
+                                        this.mLastTraversalWasVisible = z40;
+                                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                        }
+                                        this.mIsInTraversal = r11;
+                                        this.mRelayoutRequested = r11;
+                                        if (!z39) {
+                                        }
+                                        if (!this.mDrawnThisFrame) {
+                                        }
+                                    }
+                                    try {
+                                        this.mHandler.sendEmptyMessageDelayed(43, 3000L);
+                                    } catch (RemoteException unused24) {
+                                        zInitialize = false;
+                                        j2 = 8;
+                                        z18 = false;
+                                        if (Trace.isTagEnabled(j2)) {
+                                        }
+                                        boolean z462222222222222222 = z15;
+                                        boolean z472222222222222222 = z18;
+                                        if (DEBUG_ORIENTATION) {
+                                        }
+                                        this.mAttachInfo.mWindowLeft = rect.left;
+                                        this.mAttachInfo.mWindowTop = rect.top;
+                                        if (this.mWidth != rect.width()) {
+                                        }
+                                        if (this.mViewMeasureDeferred) {
+                                        }
+                                        if (!this.mRelayoutRequested) {
+                                        }
+                                        if (!z16) {
+                                        }
+                                        if (z3) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (!z13) {
+                                        }
+                                        applyTransactionOnDraw(this.mTransaction);
+                                        if (z37) {
+                                        }
+                                        if (z8) {
+                                        }
+                                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                        }
+                                        if (this.mFirst) {
+                                        }
+                                        if (z44) {
+                                        }
+                                        this.mFirst = false;
+                                        this.mWillDrawSoon = false;
+                                        this.mNewSurfaceNeeded = false;
+                                        this.mViewVisibility = hostVisibility;
+                                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                        if ((i4 & 1) != 0) {
+                                        }
+                                        this.mCheckIfCanDraw = z14 || z17;
+                                        boolean zDispatchOnPreDraw2222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                        if (zDispatchOnPreDraw2222222222222222) {
+                                        }
+                                        if (!z39) {
+                                        }
+                                        if (z39) {
+                                        }
+                                        if (DEBUG_TRAVERSAL) {
+                                        }
+                                        if (z40) {
+                                        }
+                                        this.mWasLastDrawCanceled = z39;
+                                        this.mLastTraversalWasVisible = z40;
+                                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                        }
+                                        this.mIsInTraversal = r11;
+                                        this.mRelayoutRequested = r11;
+                                        if (!z39) {
+                                        }
+                                        if (!this.mDrawnThisFrame) {
+                                        }
+                                    }
+                                } else {
+                                    z12 = z50;
+                                    z34 = z30;
+                                    z17 = zInitialize;
+                                }
+                                if (z32) {
+                                    this.mAttachInfo.mAlwaysConsumeSystemBars = this.mPendingAlwaysConsumeSystemBars;
+                                    z35 = true;
+                                } else {
+                                    z35 = false;
+                                }
+                                if (!z35) {
+                                    try {
+                                    } catch (RemoteException unused25) {
+                                        z18 = z35;
+                                        zInitialize = false;
+                                        j2 = 8;
+                                        if (Trace.isTagEnabled(j2)) {
+                                        }
+                                        boolean z4622222222222222222 = z15;
+                                        boolean z4722222222222222222 = z18;
+                                        if (DEBUG_ORIENTATION) {
+                                        }
+                                        this.mAttachInfo.mWindowLeft = rect.left;
+                                        this.mAttachInfo.mWindowTop = rect.top;
+                                        if (this.mWidth != rect.width()) {
+                                        }
+                                        if (this.mViewMeasureDeferred) {
+                                        }
+                                        if (!this.mRelayoutRequested) {
+                                        }
+                                        if (!z16) {
+                                        }
+                                        if (z3) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (z36) {
+                                        }
+                                        if (!z13) {
+                                        }
+                                        applyTransactionOnDraw(this.mTransaction);
+                                        if (z37) {
+                                        }
+                                        if (z8) {
+                                        }
+                                        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                        }
+                                        if (this.mFirst) {
+                                        }
+                                        if (z44) {
+                                        }
+                                        this.mFirst = false;
+                                        this.mWillDrawSoon = false;
+                                        this.mNewSurfaceNeeded = false;
+                                        this.mViewVisibility = hostVisibility;
+                                        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                        if ((i4 & 1) != 0) {
+                                        }
+                                        this.mCheckIfCanDraw = z14 || z17;
+                                        boolean zDispatchOnPreDraw22222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                        if (zDispatchOnPreDraw22222222222222222) {
+                                        }
+                                        if (!z39) {
+                                        }
+                                        if (z39) {
+                                        }
+                                        if (DEBUG_TRAVERSAL) {
+                                        }
+                                        if (z40) {
+                                        }
+                                        this.mWasLastDrawCanceled = z39;
+                                        this.mLastTraversalWasVisible = z40;
+                                        if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                        }
+                                        this.mIsInTraversal = r11;
+                                        this.mRelayoutRequested = r11;
+                                        if (!z39) {
+                                        }
+                                        if (!this.mDrawnThisFrame) {
+                                        }
+                                    }
+                                    if (this.mLastSystemUiVisibility == this.mAttachInfo.mSystemUiVisibility) {
+                                        if (this.mApplyInsetsRequested) {
+                                            try {
+                                                this.mLastSystemUiVisibility = this.mAttachInfo.mSystemUiVisibility;
+                                                dispatchApplyInsets(view);
+                                                z35 = true;
+                                            } catch (RemoteException unused26) {
+                                                z18 = z35;
+                                                zInitialize = false;
+                                                j2 = 8;
+                                                if (Trace.isTagEnabled(j2)) {
+                                                }
+                                                boolean z46222222222222222222 = z15;
+                                                boolean z47222222222222222222 = z18;
+                                                if (DEBUG_ORIENTATION) {
+                                                }
+                                                this.mAttachInfo.mWindowLeft = rect.left;
+                                                this.mAttachInfo.mWindowTop = rect.top;
+                                                if (this.mWidth != rect.width()) {
+                                                }
+                                                if (this.mViewMeasureDeferred) {
+                                                }
+                                                if (!this.mRelayoutRequested) {
+                                                }
+                                                if (!z16) {
+                                                }
+                                                if (z3) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (!z13) {
+                                                }
+                                                applyTransactionOnDraw(this.mTransaction);
+                                                if (z37) {
+                                                }
+                                                if (z8) {
+                                                }
+                                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                                }
+                                                if (this.mFirst) {
+                                                }
+                                                if (z44) {
+                                                }
+                                                this.mFirst = false;
+                                                this.mWillDrawSoon = false;
+                                                this.mNewSurfaceNeeded = false;
+                                                this.mViewVisibility = hostVisibility;
+                                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                                if ((i4 & 1) != 0) {
+                                                }
+                                                this.mCheckIfCanDraw = z14 || z17;
+                                                boolean zDispatchOnPreDraw222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                                if (zDispatchOnPreDraw222222222222222222) {
+                                                }
+                                                if (!z39) {
+                                                }
+                                                if (z39) {
+                                                }
+                                                if (DEBUG_TRAVERSAL) {
+                                                }
+                                                if (z40) {
+                                                }
+                                                this.mWasLastDrawCanceled = z39;
+                                                this.mLastTraversalWasVisible = z40;
+                                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                                }
+                                                this.mIsInTraversal = r11;
+                                                this.mRelayoutRequested = r11;
+                                                if (!z39) {
+                                                }
+                                                if (!this.mDrawnThisFrame) {
+                                                }
+                                            }
+                                        }
+                                        try {
+                                        } catch (RemoteException unused27) {
+                                            str6 = str2;
+                                        }
+                                        if (z13) {
+                                            try {
+                                                this.mFullRedrawNeeded = true;
+                                                this.mPreviousTransparentRegion.setEmpty();
+                                            } catch (RemoteException unused28) {
+                                                z18 = z35;
+                                                zInitialize = false;
+                                                j2 = 8;
+                                                if (Trace.isTagEnabled(j2)) {
+                                                }
+                                                boolean z462222222222222222222 = z15;
+                                                boolean z472222222222222222222 = z18;
+                                                if (DEBUG_ORIENTATION) {
+                                                }
+                                                this.mAttachInfo.mWindowLeft = rect.left;
+                                                this.mAttachInfo.mWindowTop = rect.top;
+                                                if (this.mWidth != rect.width()) {
+                                                }
+                                                if (this.mViewMeasureDeferred) {
+                                                }
+                                                if (!this.mRelayoutRequested) {
+                                                }
+                                                if (!z16) {
+                                                }
+                                                if (z3) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (!z13) {
+                                                }
+                                                applyTransactionOnDraw(this.mTransaction);
+                                                if (z37) {
+                                                }
+                                                if (z8) {
+                                                }
+                                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                                }
+                                                if (this.mFirst) {
+                                                }
+                                                if (z44) {
+                                                }
+                                                this.mFirst = false;
+                                                this.mWillDrawSoon = false;
+                                                this.mNewSurfaceNeeded = false;
+                                                this.mViewVisibility = hostVisibility;
+                                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                                if ((i4 & 1) != 0) {
+                                                }
+                                                this.mCheckIfCanDraw = z14 || z17;
+                                                boolean zDispatchOnPreDraw2222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                                if (zDispatchOnPreDraw2222222222222222222) {
+                                                }
+                                                if (!z39) {
+                                                }
+                                                if (z39) {
+                                                }
+                                                if (DEBUG_TRAVERSAL) {
+                                                }
+                                                if (z40) {
+                                                }
+                                                this.mWasLastDrawCanceled = z39;
+                                                this.mLastTraversalWasVisible = z40;
+                                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                                }
+                                                this.mIsInTraversal = r11;
+                                                this.mRelayoutRequested = r11;
+                                                if (!z39) {
+                                                }
+                                                if (!this.mDrawnThisFrame) {
+                                                }
+                                            }
+                                            if (this.mAttachInfo.mThreadedRenderer != null) {
+                                                try {
+                                                    zInitialize = this.mAttachInfo.mThreadedRenderer.initialize(this.mSurface);
+                                                    try {
+                                                        str4 = this.mTag;
+                                                        z18 = z35;
+                                                    } catch (RemoteException unused29) {
+                                                        z18 = z35;
+                                                    } catch (Surface.OutOfResourcesException e) {
+                                                        e = e;
+                                                    }
+                                                } catch (Surface.OutOfResourcesException e2) {
+                                                    e = e2;
+                                                }
+                                                try {
+                                                    StringBuilder sb2 = new StringBuilder();
+                                                    str3 = "relayout";
+                                                    try {
+                                                        sb2.append("mThreadedRenderer.initialize() mSurface={%s} hwInitialized=");
+                                                        sb2.append(zInitialize);
+                                                        Log.d(str4, String.format(sb2.toString(), "isValid=" + this.mSurface.isValid() + " 0x" + Long.toHexString(this.mSurface.mNativeObject)));
+                                                        if (zInitialize && (view.mPrivateFlags & 512) == 0) {
+                                                            this.mAttachInfo.mThreadedRenderer.allocateBuffers();
+                                                        }
+                                                        if (this.mDragResizing != z26) {
+                                                            if (z26) {
+                                                                startDragResizing(this.mPendingBackDropFrame, !(this.mWinFrame.width() == this.mPendingBackDropFrame.width() && this.mWinFrame.height() == this.mPendingBackDropFrame.height()), this.mAttachInfo.mContentInsets, this.mAttachInfo.mStableInsets);
+                                                            } else {
+                                                                endDragResizing();
+                                                            }
+                                                        }
+                                                        if (!this.mUseMTRenderer) {
+                                                            if (z26) {
+                                                                this.mCanvasOffsetX = this.mWinFrame.left;
+                                                                this.mCanvasOffsetY = this.mWinFrame.top;
+                                                            } else {
+                                                                this.mCanvasOffsetY = 0;
+                                                                this.mCanvasOffsetX = 0;
+                                                            }
+                                                        }
+                                                        str6 = str3;
+                                                    } catch (Surface.OutOfResourcesException e3) {
+                                                        e = e3;
+                                                        handleOutOfResourcesException(e);
+                                                        this.mLastPerformTraversalsSkipDrawReason = "oom_initialize_renderer";
+                                                        j3 = 8;
+                                                        if (!Trace.isTagEnabled(8L)) {
+                                                            return;
+                                                        }
+                                                        Trace.traceEnd(j3);
+                                                        return;
+                                                    }
+                                                } catch (RemoteException unused30) {
+                                                    j2 = 8;
+                                                    if (Trace.isTagEnabled(j2)) {
+                                                    }
+                                                    boolean z4622222222222222222222 = z15;
+                                                    boolean z4722222222222222222222 = z18;
+                                                    if (DEBUG_ORIENTATION) {
+                                                    }
+                                                    this.mAttachInfo.mWindowLeft = rect.left;
+                                                    this.mAttachInfo.mWindowTop = rect.top;
+                                                    if (this.mWidth != rect.width()) {
+                                                    }
+                                                    if (this.mViewMeasureDeferred) {
+                                                    }
+                                                    if (!this.mRelayoutRequested) {
+                                                    }
+                                                    if (!z16) {
+                                                    }
+                                                    if (z3) {
+                                                    }
+                                                    if (z36) {
+                                                    }
+                                                    if (z36) {
+                                                    }
+                                                    if (!z13) {
+                                                    }
+                                                    applyTransactionOnDraw(this.mTransaction);
+                                                    if (z37) {
+                                                    }
+                                                    if (z8) {
+                                                    }
+                                                    if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                                    }
+                                                    if (this.mFirst) {
+                                                    }
+                                                    if (z44) {
+                                                    }
+                                                    this.mFirst = false;
+                                                    this.mWillDrawSoon = false;
+                                                    this.mNewSurfaceNeeded = false;
+                                                    this.mViewVisibility = hostVisibility;
+                                                    this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                                    if ((i4 & 1) != 0) {
+                                                    }
+                                                    this.mCheckIfCanDraw = z14 || z17;
+                                                    boolean zDispatchOnPreDraw22222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                                    if (zDispatchOnPreDraw22222222222222222222) {
+                                                    }
+                                                    if (!z39) {
+                                                    }
+                                                    if (z39) {
+                                                    }
+                                                    if (DEBUG_TRAVERSAL) {
+                                                    }
+                                                    if (z40) {
+                                                    }
+                                                    this.mWasLastDrawCanceled = z39;
+                                                    this.mLastTraversalWasVisible = z40;
+                                                    if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                                    }
+                                                    this.mIsInTraversal = r11;
+                                                    this.mRelayoutRequested = r11;
+                                                    if (!z39) {
+                                                    }
+                                                    if (!this.mDrawnThisFrame) {
+                                                    }
+                                                } catch (Surface.OutOfResourcesException e4) {
+                                                    e = e4;
+                                                    handleOutOfResourcesException(e);
+                                                    this.mLastPerformTraversalsSkipDrawReason = "oom_initialize_renderer";
+                                                    j3 = 8;
+                                                    if (!Trace.isTagEnabled(8L)) {
+                                                    }
+                                                    Trace.traceEnd(j3);
+                                                    return;
+                                                }
+                                                boolean z46222222222222222222222 = z15;
+                                                boolean z47222222222222222222222 = z18;
+                                                if (DEBUG_ORIENTATION) {
+                                                    Log.v(TAG, "Relayout returned: frame=" + rect + ", surface=" + this.mSurface);
+                                                }
+                                                this.mAttachInfo.mWindowLeft = rect.left;
+                                                this.mAttachInfo.mWindowTop = rect.top;
+                                                if (this.mWidth != rect.width() || this.mHeight != rect.height()) {
+                                                    this.mWidth = rect.width();
+                                                    this.mHeight = rect.height();
+                                                }
+                                                if (this.mSurfaceHolder == null) {
+                                                    if (this.mSurface.isValid()) {
+                                                        this.mSurfaceHolder.mSurface = this.mSurface;
+                                                    }
+                                                    this.mSurfaceHolder.setSurfaceFrameSize(this.mWidth, this.mHeight);
+                                                    if (z13) {
+                                                        this.mSurfaceHolder.ungetCallbacks();
+                                                        this.mIsCreating = true;
+                                                        Log.i(this.mTag, "ViewRootImpl >> surfaceCreated");
+                                                        SurfaceHolder.Callback[] callbacks = this.mSurfaceHolder.getCallbacks();
+                                                        if (callbacks != null) {
+                                                            int length = callbacks.length;
+                                                            int i11 = 0;
+                                                            while (i11 < length) {
+                                                                callbacks[i11].surfaceCreated(this.mSurfaceHolder);
+                                                                i11++;
+                                                                z46222222222222222222222 = z46222222222222222222222;
+                                                                callbacks = callbacks;
+                                                            }
+                                                        }
+                                                    }
+                                                    z19 = z46222222222222222222222;
+                                                    if ((z13 || z12 || z16 || z10) && this.mSurface.isValid()) {
+                                                        Log.i(this.mTag, String.format("ViewRootImpl >> surfaceChanged W=%d, H=%d)", Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight)));
+                                                        SurfaceHolder.Callback[] callbacks2 = this.mSurfaceHolder.getCallbacks();
+                                                        if (callbacks2 != null) {
+                                                            int length2 = callbacks2.length;
+                                                            int i12 = 0;
+                                                            while (i12 < length2) {
+                                                                callbacks2[i12].surfaceChanged(this.mSurfaceHolder, layoutParams2.format, this.mWidth, this.mHeight);
+                                                                i12++;
+                                                                callbacks2 = callbacks2;
+                                                                length2 = length2;
+                                                                zInitialize = zInitialize;
+                                                            }
+                                                        }
+                                                        z20 = zInitialize;
+                                                        this.mIsCreating = false;
+                                                    } else {
+                                                        z20 = zInitialize;
+                                                    }
+                                                    if (z11) {
+                                                        Log.i(this.mTag, "ViewRootImpl >> surfaceDestroyed");
+                                                        notifyHolderSurfaceDestroyed();
+                                                        this.mSurfaceHolder.mSurfaceLock.lock();
+                                                        try {
+                                                            this.mSurfaceHolder.mSurface = new Surface();
+                                                        } finally {
+                                                            this.mSurfaceHolder.mSurfaceLock.unlock();
+                                                        }
+                                                    }
+                                                } else {
+                                                    z19 = z46222222222222222222222;
+                                                    z20 = zInitialize;
+                                                }
+                                                threadedRenderer = this.mAttachInfo.mThreadedRenderer;
+                                                if (threadedRenderer != null && threadedRenderer.isEnabled() && (z20 || this.mWidth != threadedRenderer.getWidth() || this.mHeight != threadedRenderer.getHeight() || this.mNeedsRendererSetup)) {
+                                                    threadedRenderer.setup(this.mWidth, this.mHeight, this.mAttachInfo, this.mWindowAttributes.surfaceInsets);
+                                                    this.mNeedsRendererSetup = false;
+                                                }
+                                                if ((this.mStopped || this.mReportNextDraw) && (this.mWidth != view.getMeasuredWidth() || this.mHeight != view.getMeasuredHeight() || z47222222222222222222222 || z19)) {
+                                                    int rootMeasureSpec = getRootMeasureSpec(this.mWidth, layoutParams2.width, layoutParams2.privateFlags);
+                                                    int rootMeasureSpec2 = getRootMeasureSpec(this.mHeight, layoutParams2.height, layoutParams2.privateFlags);
+                                                    z21 = DEBUG_LAYOUT;
+                                                    if (z21) {
+                                                        Log.v(this.mTag, "Ooops, something changed!  mWidth=" + this.mWidth + " measuredWidth=" + view.getMeasuredWidth() + " mHeight=" + this.mHeight + " measuredHeight=" + view.getMeasuredHeight() + " dispatchApplyInsets=" + z47222222222222222222222);
+                                                    }
+                                                    performMeasure(rootMeasureSpec, rootMeasureSpec2);
+                                                    int measuredWidth = view.getMeasuredWidth();
+                                                    int measuredHeight = view.getMeasuredHeight();
+                                                    if (layoutParams2.horizontalWeight > f) {
+                                                        measuredWidth += (int) ((this.mWidth - measuredWidth) * layoutParams2.horizontalWeight);
+                                                        rootMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth, 1073741824);
+                                                        z22 = true;
+                                                    } else {
+                                                        z22 = false;
+                                                    }
+                                                    if (layoutParams2.verticalWeight > f) {
+                                                        measuredHeight += (int) ((this.mHeight - measuredHeight) * layoutParams2.verticalWeight);
+                                                        rootMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(measuredHeight, 1073741824);
+                                                        z22 = true;
+                                                    }
+                                                    if (z22) {
+                                                        if (z21) {
+                                                            Log.v(this.mTag, "And hey let's measure once more: width=" + measuredWidth + " height=" + measuredHeight);
+                                                        }
+                                                        performMeasure(rootMeasureSpec, rootMeasureSpec2);
+                                                    }
+                                                    z3 = true;
+                                                }
+                                            } else {
+                                                z18 = z35;
+                                                str3 = "relayout";
+                                                zInitialize = false;
+                                                if (this.mDragResizing != z26) {
+                                                }
+                                                if (!this.mUseMTRenderer) {
+                                                }
+                                                str6 = str3;
+                                                boolean z462222222222222222222222 = z15;
+                                                boolean z472222222222222222222222 = z18;
+                                                if (DEBUG_ORIENTATION) {
+                                                }
+                                                this.mAttachInfo.mWindowLeft = rect.left;
+                                                this.mAttachInfo.mWindowTop = rect.top;
+                                                if (this.mWidth != rect.width()) {
+                                                    this.mWidth = rect.width();
+                                                    this.mHeight = rect.height();
+                                                    if (this.mSurfaceHolder == null) {
+                                                    }
+                                                    threadedRenderer = this.mAttachInfo.mThreadedRenderer;
+                                                    if (threadedRenderer != null) {
+                                                        threadedRenderer.setup(this.mWidth, this.mHeight, this.mAttachInfo, this.mWindowAttributes.surfaceInsets);
+                                                        this.mNeedsRendererSetup = false;
+                                                    }
+                                                    if (this.mStopped) {
+                                                        int rootMeasureSpec3 = getRootMeasureSpec(this.mWidth, layoutParams2.width, layoutParams2.privateFlags);
+                                                        int rootMeasureSpec22 = getRootMeasureSpec(this.mHeight, layoutParams2.height, layoutParams2.privateFlags);
+                                                        z21 = DEBUG_LAYOUT;
+                                                        if (z21) {
+                                                        }
+                                                        performMeasure(rootMeasureSpec3, rootMeasureSpec22);
+                                                        int measuredWidth2 = view.getMeasuredWidth();
+                                                        int measuredHeight2 = view.getMeasuredHeight();
+                                                        if (layoutParams2.horizontalWeight > f) {
+                                                        }
+                                                        if (layoutParams2.verticalWeight > f) {
+                                                        }
+                                                        if (z22) {
+                                                        }
+                                                        z3 = true;
+                                                    } else {
+                                                        int rootMeasureSpec32 = getRootMeasureSpec(this.mWidth, layoutParams2.width, layoutParams2.privateFlags);
+                                                        int rootMeasureSpec222 = getRootMeasureSpec(this.mHeight, layoutParams2.height, layoutParams2.privateFlags);
+                                                        z21 = DEBUG_LAYOUT;
+                                                        if (z21) {
+                                                        }
+                                                        performMeasure(rootMeasureSpec32, rootMeasureSpec222);
+                                                        int measuredWidth22 = view.getMeasuredWidth();
+                                                        int measuredHeight22 = view.getMeasuredHeight();
+                                                        if (layoutParams2.horizontalWeight > f) {
+                                                        }
+                                                        if (layoutParams2.verticalWeight > f) {
+                                                        }
+                                                        if (z22) {
+                                                        }
+                                                        z3 = true;
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            z18 = z35;
+                                            str3 = "relayout";
+                                            try {
+                                                if (z11) {
+                                                    WeakReference<View> weakReference = this.mLastScrolledFocus;
+                                                    if (weakReference != null) {
+                                                        weakReference.clear();
+                                                    }
+                                                    this.mCurScrollY = 0;
+                                                    this.mScrollY = 0;
+                                                    KeyEvent.Callback callback = this.mView;
+                                                    if (callback instanceof RootViewSurfaceTaker) {
+                                                        ((RootViewSurfaceTaker) callback).onRootViewScrollYChanged(0);
+                                                    }
+                                                    Scroller scroller = this.mScroller;
+                                                    if (scroller != null) {
+                                                        scroller.abortAnimation();
+                                                    }
+                                                    if (isHardwareEnabled()) {
+                                                        this.mAttachInfo.mThreadedRenderer.destroy();
+                                                        Log.d(this.mTag, "mThreadedRenderer.destroy()#3");
+                                                    }
+                                                } else if ((z12 || z16 || z34) && this.mSurfaceHolder == null && this.mAttachInfo.mThreadedRenderer != null && this.mSurface.isValid()) {
+                                                    this.mFullRedrawNeeded = true;
+                                                    try {
+                                                        this.mAttachInfo.mThreadedRenderer.updateSurface(this.mSurface);
+                                                        Log.d(this.mTag, String.format("mThreadedRenderer.updateSurface() mSurface={%s}", "isValid=" + this.mSurface.isValid() + " 0x" + Long.toHexString(this.mSurface.mNativeObject)));
+                                                    } catch (Surface.OutOfResourcesException e5) {
+                                                        handleOutOfResourcesException(e5);
+                                                        this.mLastPerformTraversalsSkipDrawReason = "oom_update_surface";
+                                                        j3 = 8;
+                                                        if (!Trace.isTagEnabled(8L)) {
+                                                            return;
+                                                        }
+                                                        Trace.traceEnd(j3);
+                                                        return;
+                                                    }
+                                                }
+                                                zInitialize = false;
+                                                if (this.mDragResizing != z26) {
+                                                }
+                                                if (!this.mUseMTRenderer) {
+                                                }
+                                                str6 = str3;
+                                            } catch (RemoteException unused31) {
+                                                str6 = str3;
+                                                zInitialize = false;
+                                                j2 = 8;
+                                                if (Trace.isTagEnabled(j2)) {
+                                                }
+                                                boolean z4622222222222222222222222 = z15;
+                                                boolean z4722222222222222222222222 = z18;
+                                                if (DEBUG_ORIENTATION) {
+                                                }
+                                                this.mAttachInfo.mWindowLeft = rect.left;
+                                                this.mAttachInfo.mWindowTop = rect.top;
+                                                if (this.mWidth != rect.width()) {
+                                                }
+                                                if (this.mViewMeasureDeferred) {
+                                                }
+                                                if (!this.mRelayoutRequested) {
+                                                }
+                                                if (!z16) {
+                                                }
+                                                if (z3) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (z36) {
+                                                }
+                                                if (!z13) {
+                                                }
+                                                applyTransactionOnDraw(this.mTransaction);
+                                                if (z37) {
+                                                }
+                                                if (z8) {
+                                                }
+                                                if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+                                                }
+                                                if (this.mFirst) {
+                                                }
+                                                if (z44) {
+                                                }
+                                                this.mFirst = false;
+                                                this.mWillDrawSoon = false;
+                                                this.mNewSurfaceNeeded = false;
+                                                this.mViewVisibility = hostVisibility;
+                                                this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                                                if ((i4 & 1) != 0) {
+                                                }
+                                                this.mCheckIfCanDraw = z14 || z17;
+                                                boolean zDispatchOnPreDraw222222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                                                if (zDispatchOnPreDraw222222222222222222222) {
+                                                }
+                                                if (!z39) {
+                                                }
+                                                if (z39) {
+                                                }
+                                                if (DEBUG_TRAVERSAL) {
+                                                }
+                                                if (z40) {
+                                                }
+                                                this.mWasLastDrawCanceled = z39;
+                                                this.mLastTraversalWasVisible = z40;
+                                                if (this.mAttachInfo.mContentCaptureEvents != null) {
+                                                }
+                                                this.mIsInTraversal = r11;
+                                                this.mRelayoutRequested = r11;
+                                                if (!z39) {
+                                                }
+                                                if (!this.mDrawnThisFrame) {
+                                                }
+                                            }
+                                            boolean z46222222222222222222222222 = z15;
+                                            boolean z47222222222222222222222222 = z18;
+                                            if (DEBUG_ORIENTATION) {
+                                            }
+                                            this.mAttachInfo.mWindowLeft = rect.left;
+                                            this.mAttachInfo.mWindowTop = rect.top;
+                                            if (this.mWidth != rect.width()) {
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } finally {
+                    long j4 = 8;
+                    if (Trace.isTagEnabled(j4)) {
+                        Trace.traceEnd(j4);
+                    }
+                }
+            } else {
+                maybeHandleWindowMove(rect);
+                z8 = z4;
+                z9 = z5;
+                z10 = z6;
+                str = hostVisibilityReason;
+                str6 = null;
+                z7 = false;
+                z11 = false;
+                z12 = false;
+                z13 = false;
+                z14 = false;
+                i4 = 0;
+                f = 0.0f;
+                z16 = false;
+                z17 = false;
+            }
+            if (this.mViewMeasureDeferred) {
+                performMeasure(View.MeasureSpec.makeMeasureSpec(rect.width(), 1073741824), View.MeasureSpec.makeMeasureSpec(rect.height(), 1073741824));
+            }
+            if (!this.mRelayoutRequested && this.mCheckIfCanDraw) {
+                try {
+                    boolean zCancelDraw = this.mWindowSession.cancelDraw(this.mWindow);
+                    try {
+                        str6 = "wm_sync";
+                        if (DEBUG_BLAST) {
+                            Log.d(this.mTag, "cancelDraw returned " + zCancelDraw);
+                        }
+                    } catch (RemoteException unused32) {
+                    }
+                    z17 = zCancelDraw;
+                } catch (RemoteException unused33) {
+                }
+            }
+            if (!z16 || z12 || z13 || z10 || this.mChildBoundingInsetsChanged || this.mForceUpdateBoundsLayer) {
+                prepareSurfaces();
+                this.mChildBoundingInsetsChanged = false;
+                this.mForceUpdateBoundsLayer = false;
+                this.mFullRedrawNeeded = true;
+            }
+            z36 = !z3 && (!this.mStopped || this.mReportNextDraw);
+            z37 = !z36 || this.mAttachInfo.mRecomputeGlobalAttributes;
+            if (z36) {
+                performLayout(layoutParams2, this.mWidth, this.mHeight);
+                if ((view.mPrivateFlags & 512) != 0) {
+                    view.getLocationInWindow(this.mTmpLocation);
+                    Region region2 = this.mTransparentRegion;
+                    int[] iArr = this.mTmpLocation;
+                    int i13 = iArr[0];
+                    region2.set(i13, iArr[1], (view.mRight + i13) - view.mLeft, (this.mTmpLocation[1] + view.mBottom) - view.mTop);
+                    view.gatherTransparentRegion(this.mTransparentRegion);
+                    if (this.mWindowAttributes.surfaceInsets.left > 0 || this.mWindowAttributes.surfaceInsets.top > 0) {
+                        this.mTransparentRegion.translate(this.mWindowAttributes.surfaceInsets.left, this.mWindowAttributes.surfaceInsets.top);
+                    }
+                    if (getAccessibilityFocusedRect(this.mAttachInfo.mTmpInvalRect)) {
+                        view.applyDrawableToTransparentRegion(getAccessibilityFocusedDrawable(), this.mTransparentRegion);
+                    }
+                    CompatibilityInfo.Translator translator = this.mTranslator;
+                    if (translator != null) {
+                        translator.translateRegionInWindowToScreen(this.mTransparentRegion);
+                    }
+                    if (!this.mTransparentRegion.equals(this.mPreviousTransparentRegion)) {
+                        this.mPreviousTransparentRegion.set(this.mTransparentRegion);
+                        this.mFullRedrawNeeded = true;
+                        SurfaceControl surfaceControl = getSurfaceControl();
+                        if (surfaceControl.isValid()) {
+                            this.mTransaction.setTransparentRegionHint(surfaceControl, this.mTransparentRegion).apply();
+                        }
+                    }
+                }
+            }
+            if (!z13) {
+                notifySurfaceCreated(this.mTransaction);
+            } else {
+                if (!z12) {
+                    if (z11) {
+                        notifySurfaceDestroyed();
+                    }
+                    if (z37) {
+                        this.mAttachInfo.mRecomputeGlobalAttributes = false;
+                        this.mAttachInfo.mTreeObserver.dispatchOnGlobalLayout();
+                    }
+                    if (z8) {
+                        ViewTreeObserver.InternalInsetsInfo internalInsetsInfo = this.mAttachInfo.mGivenInternalInsets;
+                        internalInsetsInfo.reset();
+                        this.mAttachInfo.mTreeObserver.dispatchOnComputeInternalInsets(internalInsetsInfo);
+                        this.mAttachInfo.mHasNonEmptyGivenInternalInsets = !internalInsetsInfo.isEmpty();
+                        if (z7 || !this.mLastGivenInsets.equals(internalInsetsInfo)) {
+                            this.mLastGivenInsets.set(internalInsetsInfo);
+                            CompatibilityInfo.Translator translator2 = this.mTranslator;
+                            if (translator2 != null) {
+                                rect2 = translator2.getTranslatedContentInsets(internalInsetsInfo.contentInsets);
+                                rect3 = this.mTranslator.getTranslatedVisibleInsets(internalInsetsInfo.visibleInsets);
+                                translatedTouchableArea = this.mTranslator.getTranslatedTouchableArea(internalInsetsInfo.touchableRegion);
+                            } else {
+                                rect2 = internalInsetsInfo.contentInsets;
+                                rect3 = internalInsetsInfo.visibleInsets;
+                                translatedTouchableArea = internalInsetsInfo.touchableRegion;
+                            }
+                            rect5 = CoreRune.FW_MINIMIZED_IME_INSET_ANIM ? internalInsetsInfo.minimizedInsets : new Rect();
+                            z38 = true;
+                        } else {
+                            rect2 = null;
+                            rect3 = null;
+                            translatedTouchableArea = null;
+                            rect5 = null;
+                            z38 = false;
+                        }
+                        i6 = internalInsetsInfo.mTouchableInsets;
+                        rect4 = rect5;
+                    } else {
+                        i6 = 3;
+                        rect2 = null;
+                        rect3 = null;
+                        translatedTouchableArea = null;
+                        z38 = false;
+                        rect4 = null;
+                    }
+                    if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) || z38) {
+                        if (this.mTouchableRegion != null) {
+                            if (this.mPreviousTouchableRegion == null) {
+                                this.mPreviousTouchableRegion = new Region();
+                            }
+                            this.mPreviousTouchableRegion.set(this.mTouchableRegion);
+                            if (i6 != 3) {
+                                Log.e(this.mTag, "Setting touchableInsetMode to non TOUCHABLE_INSETS_REGION from OnComputeInternalInsets, while also using setTouchableRegion causes setTouchableRegion to be ignored");
+                            }
+                        } else {
+                            this.mPreviousTouchableRegion = null;
+                        }
+                        if (rect2 == null) {
+                            i7 = 0;
+                            rect2 = new Rect(0, 0, 0, 0);
+                        } else {
+                            i7 = 0;
+                        }
+                        Rect rect7 = rect2;
+                        if (rect3 == null) {
+                            rect3 = new Rect(i7, i7, i7, i7);
+                        }
+                        Rect rect8 = rect3;
+                        if (translatedTouchableArea == null) {
+                            translatedTouchableArea = this.mTouchableRegion;
+                        } else if (translatedTouchableArea != null && (region = this.mTouchableRegion) != null) {
+                            translatedTouchableArea.op(translatedTouchableArea, region, Region.Op.UNION);
+                        }
+                        try {
+                            this.mWindowSession.setInsets(this.mWindow, i6, rect7, rect8, translatedTouchableArea, rect4);
+                        } catch (RemoteException e6) {
+                            throw e6.rethrowFromSystemServer();
+                        }
+                    } else if (this.mTouchableRegion == null && this.mPreviousTouchableRegion != null) {
+                        this.mPreviousTouchableRegion = null;
+                        try {
+                            this.mWindowSession.clearTouchableRegion(this.mWindow);
+                        } catch (RemoteException e7) {
+                            throw e7.rethrowFromSystemServer();
+                        }
+                    }
+                    if (this.mFirst) {
+                        if (sAlwaysAssignFocus || !isInTouchMode()) {
+                            boolean z51 = DEBUG_INPUT_RESIZE;
+                            if (z51) {
+                                Log.v(this.mTag, "First: mView.hasFocus()=" + this.mView.hasFocus());
+                            }
+                            View view2 = this.mView;
+                            if (view2 != null) {
+                                if (!view2.hasFocus()) {
+                                    this.mView.restoreDefaultFocus();
+                                    if (z51) {
+                                        Log.v(this.mTag, "First: requested focused view=" + this.mView.findFocus());
+                                    }
+                                } else if (z51) {
+                                    Log.v(this.mTag, "First: existing focused view=" + this.mView.findFocus());
+                                }
+                            }
+                        } else {
+                            View viewFindFocus = this.mView.findFocus();
+                            if ((viewFindFocus instanceof ViewGroup) && ((ViewGroup) viewFindFocus).getDescendantFocusability() == 262144) {
+                                viewFindFocus.restoreDefaultFocus();
+                            }
+                        }
+                        if (shouldEnableDvrr()) {
+                            boostFrameRate(3000);
+                        }
+                    }
+                    if ((z44 || this.mFirst) && z9) {
+                        maybeFireAccessibilityWindowStateChangedEvent();
+                    }
+                    this.mFirst = false;
+                    this.mWillDrawSoon = false;
+                    this.mNewSurfaceNeeded = false;
+                    this.mViewVisibility = hostVisibility;
+                    this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+                    if ((i4 & 1) != 0) {
+                        reportNextDraw("first_relayout");
+                    }
+                    this.mCheckIfCanDraw = z14 || z17;
+                    boolean zDispatchOnPreDraw2222222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+                    z39 = zDispatchOnPreDraw2222222222222222222222 || (z17 && this.mDrewOnceForSync);
+                    if (!z39) {
+                        if (this.mActiveSurfaceSyncGroup != null) {
+                            this.mSyncBuffer = true;
+                        }
+                        createSyncIfNeeded();
+                        notifyDrawStarted(isInWMSRequestedSync());
+                        this.mDrewOnceForSync = true;
+                        SurfaceSyncGroup surfaceSyncGroup = this.mActiveSurfaceSyncGroup;
+                        if (surfaceSyncGroup != null && this.mSyncBuffer) {
+                            updateSyncInProgressCount(surfaceSyncGroup);
+                            safeguardOverlappingSyncs(this.mActiveSurfaceSyncGroup);
+                        }
+                    }
+                    if ((z39 || !z9) && (CoreRune.IS_DEBUG_LEVEL_MID || CoreRune.IS_DEBUG_LEVEL_HIGH)) {
+                        String str7 = this.mTag;
+                        StringBuilder sb3 = new StringBuilder("cancelAndRedraw ");
+                        sb3.append(this.mAttachInfo.mTreeObserver.mLog);
+                        sb3.append(" isViewVisible: ");
+                        z40 = z9;
+                        sb3.append(z40);
+                        Log.i(str7, sb3.toString());
+                    } else {
+                        z40 = z9;
+                    }
+                    if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+                        Log.i(this.mTag, "Traversal, [11] mView=" + this.mView + " cancelAndRedraw=" + z39);
+                    }
+                    if (z40) {
+                        if (z39) {
+                            if (!this.mWasLastDrawCanceled) {
+                                StringBuilder sb4 = new StringBuilder("Canceling draw. cancelDueToPreDrawListener=");
+                                sb4.append(zDispatchOnPreDraw2222222222222222222222);
+                                sb4.append(" cancelDueToSync=");
+                                sb4.append(z17 && this.mDrewOnceForSync);
+                                logAndTrace(sb4.toString());
+                            }
+                            this.mLastPerformTraversalsSkipDrawReason = zDispatchOnPreDraw2222222222222222222222 ? "predraw_" + this.mAttachInfo.mTreeObserver.getLastDispatchOnPreDrawCanceledReason() : "cancel_" + str6;
+                            scheduleTraversals();
+                        } else {
+                            if (this.mWasLastDrawCanceled) {
+                                logAndTrace("Draw frame after cancel");
+                            }
+                            if (!this.mLastTraversalWasVisible) {
+                                logAndTrace("Start draw after previous draw not visible");
+                            }
+                            ArrayList<LayoutTransition> arrayList = this.mPendingTransitions;
+                            if (arrayList != null && arrayList.size() > 0) {
+                                for (int i14 = 0; i14 < this.mPendingTransitions.size(); i14++) {
+                                    this.mPendingTransitions.get(i14).startChangingAnimations();
+                                }
+                                this.mPendingTransitions.clear();
+                            }
+                            if (!performDraw(this.mActiveSurfaceSyncGroup)) {
+                                handleSyncRequestWhenNoAsyncDraw(this.mActiveSurfaceSyncGroup, this.mHasPendingTransactions, this.mPendingTransaction, this.mLastPerformDrawSkippedReason);
+                                r11 = 0;
+                                this.mHasPendingTransactions = false;
+                            }
+                        }
+                        r11 = 0;
+                    } else {
+                        if (this.mLastTraversalWasVisible) {
+                            logAndTrace("Not drawing due to not visible. Reason=" + str);
+                        }
+                        this.mLastPerformTraversalsSkipDrawReason = "view_not_visible";
+                        ArrayList<LayoutTransition> arrayList2 = this.mPendingTransitions;
+                        if (arrayList2 != null && arrayList2.size() > 0) {
+                            for (int i15 = 0; i15 < this.mPendingTransitions.size(); i15++) {
+                                this.mPendingTransitions.get(i15).endChangingAnimations();
+                            }
+                            this.mPendingTransitions.clear();
+                        }
+                        handleSyncRequestWhenNoAsyncDraw(this.mActiveSurfaceSyncGroup, this.mHasPendingTransactions, this.mPendingTransaction, "view not visible");
+                        r11 = 0;
+                        this.mHasPendingTransactions = false;
+                    }
+                    this.mWasLastDrawCanceled = z39;
+                    this.mLastTraversalWasVisible = z40;
+                    if (this.mAttachInfo.mContentCaptureEvents != null) {
+                        notifyContentCaptureEvents();
+                    }
+                    this.mIsInTraversal = r11;
+                    this.mRelayoutRequested = r11;
+                    if (!z39) {
+                        this.mReportNextDraw = r11;
+                        this.mLastReportNextDrawReason = null;
+                        this.mActiveSurfaceSyncGroup = null;
+                        if (this.mHasPendingTransactions) {
+                            mergeWithNextTransaction(this.mPendingTransaction, 0L);
+                            this.mHasPendingTransactions = r11;
+                        }
+                        this.mSyncBuffer = r11;
+                        if (isInWMSRequestedSync()) {
+                            this.mWmsRequestSyncGroup.markSyncReady();
+                            this.mWmsRequestSyncGroup = null;
+                            this.mWmsRequestSyncGroupState = r11;
+                        }
+                    }
+                    if (!this.mDrawnThisFrame) {
+                        if (this.mPreferredFrameRate == f) {
+                            setPreferredFrameRate(f);
+                            this.mPreferredFrameRate = -1.0f;
+                            return;
+                        }
+                        return;
+                    }
+                    if (sToolkitInitialTouchBoostFlagValue && this.mIsTouchBoosting) {
+                        z41 = true;
+                        this.mTouchAndDrawn = true;
+                    } else {
+                        z41 = true;
+                    }
+                    this.mDrawnThisFrame = false;
+                    if (!this.mInvalidationIdleMessagePosted && sSurfaceFlingerBugfixFlagValue) {
+                        this.mInvalidationIdleMessagePosted = z41;
+                        this.mHandler.sendEmptyMessageDelayed(40, 750L);
+                    }
+                    setCategoryFromCategoryCounts();
+                    updateInfrequentCount();
+                    updateFrameRateFromThreadedRendererViews();
+                    setPreferredFrameRate(this.mPreferredFrameRate);
+                    setPreferredFrameRateCategory(this.mPreferredFrameRateCategory);
+                    float f2 = this.mPreferredFrameRate;
+                    if (f2 > f || (this.mLastPreferredFrameRate != f && f2 == f)) {
+                        this.mHandler.removeMessages(42);
+                        this.mHandler.sendEmptyMessageDelayed(42, 100L);
+                    }
+                    int i16 = this.mFrameRateCategoryHighCount;
+                    if (i16 > 0) {
+                        i16--;
+                    }
+                    this.mFrameRateCategoryHighCount = i16;
+                    int i17 = this.mFrameRateCategoryHighHintCount;
+                    if (i17 > 0) {
+                        i17--;
+                    }
+                    this.mFrameRateCategoryHighHintCount = i17;
+                    if (CoreRune.FW_ARR_SUPPORT_DIRTY_HINT) {
+                        int i18 = this.mFrameRateCategoryDirtyHintCount;
+                        if (i18 > 0) {
+                            i18--;
+                        }
+                        this.mFrameRateCategoryDirtyHintCount = i18;
+                    }
+                    int i19 = this.mFrameRateCategoryNormalCount;
+                    if (i19 > 0) {
+                        i19--;
+                    }
+                    this.mFrameRateCategoryNormalCount = i19;
+                    int i20 = this.mFrameRateCategoryLowCount;
+                    if (i20 > 0) {
+                        i20--;
+                    }
+                    this.mFrameRateCategoryLowCount = i20;
+                    this.mPreferredFrameRateCategory = 0;
+                    this.mPreferredFrameRate = -1.0f;
+                    this.mIsFrameRateConflicted = false;
+                    this.mFrameRateCategoryChangeReason = 0;
+                    this.mSurfaceReplaced = false;
+                    return;
+                }
+                notifySurfaceReplaced(this.mTransaction);
+            }
+            applyTransactionOnDraw(this.mTransaction);
+            if (z37) {
+            }
+            if (z8) {
+            }
+            if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+            }
+            if (this.mFirst) {
+            }
+            if (z44) {
+                maybeFireAccessibilityWindowStateChangedEvent();
+            } else {
+                maybeFireAccessibilityWindowStateChangedEvent();
+            }
+            this.mFirst = false;
+            this.mWillDrawSoon = false;
+            this.mNewSurfaceNeeded = false;
+            this.mViewVisibility = hostVisibility;
+            this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+            if ((i4 & 1) != 0) {
+            }
+            this.mCheckIfCanDraw = z14 || z17;
+            boolean zDispatchOnPreDraw22222222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+            if (zDispatchOnPreDraw22222222222222222222222) {
+            }
+            if (!z39) {
+            }
+            if (z39) {
+                String str72 = this.mTag;
+                StringBuilder sb32 = new StringBuilder("cancelAndRedraw ");
+                sb32.append(this.mAttachInfo.mTreeObserver.mLog);
+                sb32.append(" isViewVisible: ");
+                z40 = z9;
+                sb32.append(z40);
+                Log.i(str72, sb32.toString());
+            } else {
+                String str722 = this.mTag;
+                StringBuilder sb322 = new StringBuilder("cancelAndRedraw ");
+                sb322.append(this.mAttachInfo.mTreeObserver.mLog);
+                sb322.append(" isViewVisible: ");
+                z40 = z9;
+                sb322.append(z40);
+                Log.i(str722, sb322.toString());
+            }
+            if (DEBUG_TRAVERSAL) {
+                Log.i(this.mTag, "Traversal, [11] mView=" + this.mView + " cancelAndRedraw=" + z39);
+            }
+            if (z40) {
+            }
+            this.mWasLastDrawCanceled = z39;
+            this.mLastTraversalWasVisible = z40;
+            if (this.mAttachInfo.mContentCaptureEvents != null) {
+            }
+            this.mIsInTraversal = r11;
+            this.mRelayoutRequested = r11;
+            if (!z39) {
+            }
+            if (!this.mDrawnThisFrame) {
+            }
+        }
+        z2 = false;
+        if (z44) {
+        }
+        if (this.mAttachInfo.mWindowVisibility != 0) {
+        }
+        getRunQueue().executeActions(this.mAttachInfo.mHandler);
+        if (this.mFirst) {
+        }
+        if (this.mLayoutRequested) {
+        }
+        if (z3) {
+        }
+        if (!collectViewAttributes()) {
+        }
+        if (this.mAttachInfo.mForceReportNewAttributes) {
+        }
+        if (!this.mFirst) {
+            this.mAttachInfo.mViewVisibilityChanged = false;
+            i3 = this.mSoftInputMode & 240;
+            if (i3 == 0) {
+            }
+        }
+        if (!this.mApplyInsetsRequested) {
+        }
+        if (z3) {
+        }
+        boolean z452 = ((z3 || !zMeasureHierarchy || (this.mWidth == view.getMeasuredWidth() && this.mHeight == view.getMeasuredHeight() && ((layoutParams2.width != -2 || rect.width() >= i2 || rect.width() == this.mWidth) && (layoutParams2.height != -2 || rect.height() >= i || rect.height() == this.mHeight)))) ? false : true) | (!this.mDragResizing && this.mPendingDragResizing);
+        if (this.mAttachInfo.mTreeObserver.hasComputeInternalInsetsListeners()) {
+        }
+        int generationId2 = this.mSurface.getGenerationId();
+        if (hostVisibility != 0) {
+        }
+        z6 = this.mWindowAttributesChanged;
+        if (z6) {
+        }
+        if (layoutParams != null) {
+        }
+        if (this.mFirst) {
+            if (Trace.isTagEnabled(j)) {
+            }
+            this.mForceNextWindowRelayout = false;
+            if (z4) {
+                baseSurfaceHolder = this.mSurfaceHolder;
+                if (baseSurfaceHolder != null) {
+                }
+                boolean zIsValid2 = this.mSurface.isValid();
+                z23 = DEBUG_LAYOUT;
+                if (z23) {
+                }
+                if (this.mFirst) {
+                    z25 = z5;
+                    this.mViewFrameInfo.flags |= 1;
+                    iRelayoutWindow = relayoutWindow(layoutParams, hostVisibility, z7);
+                    if ((iRelayoutWindow & 16) != 16) {
+                    }
+                    z26 = this.mPendingDragResizing;
+                    i5 = this.mSyncSeqId;
+                    z9 = z25;
+                    if (i5 <= this.mLastSyncSeqId) {
+                    }
+                    z14 = z27;
+                    if ((iRelayoutWindow & 2) != 2) {
+                    }
+                    if (this.mSurfaceControl.isValid()) {
+                    }
+                    if (z23) {
+                    }
+                    if (this.mPendingMergedConfiguration.equals(this.mLastReportedMergedConfiguration)) {
+                        if (this.mRelayoutRequested) {
+                            z29 = false;
+                            z30 = this.mUpdateSurfaceNeeded;
+                            this.mUpdateSurfaceNeeded = false;
+                            if (this.mLastSurfaceSize.equals(this.mSurfaceSize)) {
+                            }
+                            if (this.mPendingAlwaysConsumeSystemBars == this.mAttachInfo.mAlwaysConsumeSystemBars) {
+                            }
+                            z16 = z31;
+                            updateColorModeIfNeeded(layoutParams2.getColorMode(), layoutParams2.getDesiredHdrHeadroom());
+                            if (z24) {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (this.mViewMeasureDeferred) {
+        }
+        if (!this.mRelayoutRequested) {
+            boolean zCancelDraw2 = this.mWindowSession.cancelDraw(this.mWindow);
+            str6 = "wm_sync";
+            if (DEBUG_BLAST) {
+            }
+            z17 = zCancelDraw2;
+        }
+        if (!z16) {
+            prepareSurfaces();
+            this.mChildBoundingInsetsChanged = false;
+            this.mForceUpdateBoundsLayer = false;
+            this.mFullRedrawNeeded = true;
+        }
+        if (z3) {
+        }
+        if (z36) {
+        }
+        if (z36) {
+        }
+        if (!z13) {
+        }
+        applyTransactionOnDraw(this.mTransaction);
+        if (z37) {
+        }
+        if (z8) {
+        }
+        if (((Objects.equals(this.mPreviousTouchableRegion, this.mTouchableRegion) || this.mTouchableRegion == null) ? false : true) | z38) {
+        }
+        if (this.mFirst) {
+        }
+        if (z44) {
+        }
+        this.mFirst = false;
+        this.mWillDrawSoon = false;
+        this.mNewSurfaceNeeded = false;
+        this.mViewVisibility = hostVisibility;
+        this.mImeFocusController.onTraversal(this.mAttachInfo.mHasWindowFocus && z9, this.mWindowAttributes);
+        if ((i4 & 1) != 0) {
+        }
+        this.mCheckIfCanDraw = z14 || z17;
+        boolean zDispatchOnPreDraw222222222222222222222222 = this.mAttachInfo.mTreeObserver.dispatchOnPreDraw();
+        if (zDispatchOnPreDraw222222222222222222222222) {
+        }
+        if (!z39) {
+        }
+        if (z39) {
+        }
+        if (DEBUG_TRAVERSAL) {
+        }
+        if (z40) {
+        }
+        this.mWasLastDrawCanceled = z39;
+        this.mLastTraversalWasVisible = z40;
+        if (this.mAttachInfo.mContentCaptureEvents != null) {
+        }
+        this.mIsInTraversal = r11;
+        this.mRelayoutRequested = r11;
+        if (!z39) {
+        }
+        if (!this.mDrawnThisFrame) {
+        }
     }
 
     private void createSyncIfNeeded() {
@@ -3010,7 +6327,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mWmsRequestSyncGroup = new SurfaceSyncGroup("wmsSync-" + this.mTag, new Consumer() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda9
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ViewRootImpl.this.lambda$createSyncIfNeeded$4(i, (SurfaceControl.Transaction) obj);
+                this.f$0.lambda$createSyncIfNeeded$4(i, (SurfaceControl.Transaction) obj);
             }
         });
         if (this.mAppStartInfoTimestampsFlagValue && !this.mAppStartTrackingStarted) {
@@ -3047,7 +6364,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.this.lambda$createSyncIfNeeded$3(transaction2, i);
+                    this.f$0.lambda$createSyncIfNeeded$3(transaction2, i);
                 }
             });
             return;
@@ -3100,7 +6417,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         transaction.addTransactionCommittedListener(this.mExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda10
             @Override // android.view.SurfaceControl.TransactionCommittedListener
             public final void onTransactionCommitted() {
-                ViewRootImpl.this.lambda$removeSensitiveContentAppProtection$5();
+                this.f$0.lambda$removeSensitiveContentAppProtection$5();
             }
         });
         applyTransactionOnDraw(transaction);
@@ -3259,56 +6576,56 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void fireAccessibilityFocusEventIfHasFocusedNode() {
-        View findFocus;
-        if (this.mAccessibilityManager.isEnabled() && (findFocus = this.mView.findFocus()) != null) {
-            AccessibilityNodeProvider accessibilityNodeProvider = findFocus.getAccessibilityNodeProvider();
+        View viewFindFocus;
+        if (this.mAccessibilityManager.isEnabled() && (viewFindFocus = this.mView.findFocus()) != null) {
+            AccessibilityNodeProvider accessibilityNodeProvider = viewFindFocus.getAccessibilityNodeProvider();
             if (accessibilityNodeProvider == null) {
-                findFocus.sendAccessibilityEvent(8);
+                viewFindFocus.sendAccessibilityEvent(8);
                 return;
             }
-            AccessibilityNodeInfo findFocusedVirtualNode = findFocusedVirtualNode(accessibilityNodeProvider);
-            if (findFocusedVirtualNode != null) {
-                int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(findFocusedVirtualNode.getSourceNodeId());
-                AccessibilityEvent obtain = AccessibilityEvent.obtain(8);
-                obtain.setSource(findFocus, virtualDescendantId);
-                obtain.setPackageName(findFocusedVirtualNode.getPackageName());
-                obtain.setChecked(findFocusedVirtualNode.isChecked());
-                obtain.setContentDescription(findFocusedVirtualNode.getContentDescription());
-                obtain.setPassword(findFocusedVirtualNode.isPassword());
-                obtain.getText().add(findFocusedVirtualNode.getText());
-                obtain.setEnabled(findFocusedVirtualNode.isEnabled());
-                findFocus.getParent().requestSendAccessibilityEvent(findFocus, obtain);
-                findFocusedVirtualNode.recycle();
+            AccessibilityNodeInfo accessibilityNodeInfoFindFocusedVirtualNode = findFocusedVirtualNode(accessibilityNodeProvider);
+            if (accessibilityNodeInfoFindFocusedVirtualNode != null) {
+                int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(accessibilityNodeInfoFindFocusedVirtualNode.getSourceNodeId());
+                AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(8);
+                accessibilityEventObtain.setSource(viewFindFocus, virtualDescendantId);
+                accessibilityEventObtain.setPackageName(accessibilityNodeInfoFindFocusedVirtualNode.getPackageName());
+                accessibilityEventObtain.setChecked(accessibilityNodeInfoFindFocusedVirtualNode.isChecked());
+                accessibilityEventObtain.setContentDescription(accessibilityNodeInfoFindFocusedVirtualNode.getContentDescription());
+                accessibilityEventObtain.setPassword(accessibilityNodeInfoFindFocusedVirtualNode.isPassword());
+                accessibilityEventObtain.getText().add(accessibilityNodeInfoFindFocusedVirtualNode.getText());
+                accessibilityEventObtain.setEnabled(accessibilityNodeInfoFindFocusedVirtualNode.isEnabled());
+                viewFindFocus.getParent().requestSendAccessibilityEvent(viewFindFocus, accessibilityEventObtain);
+                accessibilityNodeInfoFindFocusedVirtualNode.recycle();
             }
         }
     }
 
     private AccessibilityNodeInfo findFocusedVirtualNode(AccessibilityNodeProvider accessibilityNodeProvider) {
-        AccessibilityNodeInfo createAccessibilityNodeInfo;
-        AccessibilityNodeInfo findFocus = accessibilityNodeProvider.findFocus(1);
-        if (findFocus != null) {
-            return findFocus;
+        AccessibilityNodeInfo accessibilityNodeInfoCreateAccessibilityNodeInfo;
+        AccessibilityNodeInfo accessibilityNodeInfoFindFocus = accessibilityNodeProvider.findFocus(1);
+        if (accessibilityNodeInfoFindFocus != null) {
+            return accessibilityNodeInfoFindFocus;
         }
-        if (!this.mContext.isAutofillCompatibilityEnabled() || (createAccessibilityNodeInfo = accessibilityNodeProvider.createAccessibilityNodeInfo(-1)) == null) {
+        if (!this.mContext.isAutofillCompatibilityEnabled() || (accessibilityNodeInfoCreateAccessibilityNodeInfo = accessibilityNodeProvider.createAccessibilityNodeInfo(-1)) == null) {
             return null;
         }
-        if (createAccessibilityNodeInfo.isFocused()) {
-            return createAccessibilityNodeInfo;
+        if (accessibilityNodeInfoCreateAccessibilityNodeInfo.isFocused()) {
+            return accessibilityNodeInfoCreateAccessibilityNodeInfo;
         }
         ArrayDeque arrayDeque = new ArrayDeque();
-        arrayDeque.offer(createAccessibilityNodeInfo);
+        arrayDeque.offer(accessibilityNodeInfoCreateAccessibilityNodeInfo);
         while (!arrayDeque.isEmpty()) {
             AccessibilityNodeInfo accessibilityNodeInfo = (AccessibilityNodeInfo) arrayDeque.poll();
             LongArray childNodeIds = accessibilityNodeInfo.getChildNodeIds();
             if (childNodeIds != null && childNodeIds.size() > 0) {
                 int size = childNodeIds.size();
                 for (int i = 0; i < size; i++) {
-                    AccessibilityNodeInfo createAccessibilityNodeInfo2 = accessibilityNodeProvider.createAccessibilityNodeInfo(AccessibilityNodeInfo.getVirtualDescendantId(childNodeIds.get(i)));
-                    if (createAccessibilityNodeInfo2 != null) {
-                        if (createAccessibilityNodeInfo2.isFocused()) {
-                            return createAccessibilityNodeInfo2;
+                    AccessibilityNodeInfo accessibilityNodeInfoCreateAccessibilityNodeInfo2 = accessibilityNodeProvider.createAccessibilityNodeInfo(AccessibilityNodeInfo.getVirtualDescendantId(childNodeIds.get(i)));
+                    if (accessibilityNodeInfoCreateAccessibilityNodeInfo2 != null) {
+                        if (accessibilityNodeInfoCreateAccessibilityNodeInfo2.isFocused()) {
+                            return accessibilityNodeInfoCreateAccessibilityNodeInfo2;
                         }
-                        arrayDeque.offer(createAccessibilityNodeInfo2);
+                        arrayDeque.offer(accessibilityNodeInfoCreateAccessibilityNodeInfo2);
                     }
                 }
                 accessibilityNodeInfo.recycle();
@@ -3530,23 +6847,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void trackFPS() {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         if (this.mFpsStartTime < 0) {
-            this.mFpsPrevTime = currentTimeMillis;
-            this.mFpsStartTime = currentTimeMillis;
+            this.mFpsPrevTime = jCurrentTimeMillis;
+            this.mFpsStartTime = jCurrentTimeMillis;
             this.mFpsNumFrames = 0;
             return;
         }
         this.mFpsNumFrames++;
         String hexString = Integer.toHexString(System.identityHashCode(this));
-        long j = currentTimeMillis - this.mFpsPrevTime;
-        long j2 = currentTimeMillis - this.mFpsStartTime;
+        long j = jCurrentTimeMillis - this.mFpsPrevTime;
+        long j2 = jCurrentTimeMillis - this.mFpsStartTime;
         Log.v(this.mTag, "0x" + hexString + "\tFrame time:\t" + j);
-        this.mFpsPrevTime = currentTimeMillis;
+        this.mFpsPrevTime = jCurrentTimeMillis;
         if (j2 > 1000) {
             String str = this.mTag;
             Log.v(str, "0x" + hexString + "\tFPS:\t" + ((this.mFpsNumFrames * 1000.0f) / j2));
-            this.mFpsStartTime = currentTimeMillis;
+            this.mFpsStartTime = jCurrentTimeMillis;
             this.mFpsNumFrames = 0;
         }
     }
@@ -3609,13 +6926,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void addFrameCommitCallbackIfNeeded() {
-        final ArrayList<Runnable> captureFrameCommitCallbacks;
-        if (isHardwareEnabled() && (captureFrameCommitCallbacks = this.mAttachInfo.mTreeObserver.captureFrameCommitCallbacks()) != null && captureFrameCommitCallbacks.size() > 0) {
-            Log.d(this.mTag, "Creating frameCommitCallback commitCallbacks size=" + captureFrameCommitCallbacks.size());
+        final ArrayList<Runnable> arrayListCaptureFrameCommitCallbacks;
+        if (isHardwareEnabled() && (arrayListCaptureFrameCommitCallbacks = this.mAttachInfo.mTreeObserver.captureFrameCommitCallbacks()) != null && arrayListCaptureFrameCommitCallbacks.size() > 0) {
+            Log.d(this.mTag, "Creating frameCommitCallback commitCallbacks size=" + arrayListCaptureFrameCommitCallbacks.size());
             this.mAttachInfo.mThreadedRenderer.setFrameCommitCallback(new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda18
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z) {
-                    ViewRootImpl.this.lambda$addFrameCommitCallbackIfNeeded$7(captureFrameCommitCallbacks, z);
+                    this.f$0.lambda$addFrameCommitCallbackIfNeeded$7(arrayListCaptureFrameCommitCallbacks, z);
                 }
             });
         }
@@ -3671,7 +6988,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$10$$ExternalSyntheticLambda0
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z) {
-                    ViewRootImpl.AnonymousClass10.this.lambda$onFrameDraw$0(j, z);
+                    this.f$0.lambda$onFrameDraw$0(j, z);
                 }
             };
         }
@@ -3685,7 +7002,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    private boolean performDraw(final SurfaceSyncGroup surfaceSyncGroup) {
+    private boolean performDraw(final SurfaceSyncGroup surfaceSyncGroup) throws InterruptedException {
         final SurfaceControl.Transaction transaction;
         this.mLastPerformDrawSkippedReason = null;
         if (!this.mReportNextDraw) {
@@ -3720,8 +7037,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Trace.traceBegin(8L, "draw-" + this.mTag);
         addFrameCommitCallbackIfNeeded();
         try {
-            boolean draw = draw(z, surfaceSyncGroup, this.mSyncBuffer);
-            if (this.mAttachInfo.mThreadedRenderer != null && !draw) {
+            boolean zDraw = draw(z, surfaceSyncGroup, this.mSyncBuffer);
+            if (this.mAttachInfo.mThreadedRenderer != null && !zDraw) {
                 this.mAttachInfo.mThreadedRenderer.setFrameCallback(null);
             }
             this.mIsDrawing = false;
@@ -3733,7 +7050,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 this.mAttachInfo.mPendingAnimatingRenderNodes.clear();
             }
-            if (draw || !this.mHasPendingTransactions) {
+            if (zDraw || !this.mHasPendingTransactions) {
                 transaction = null;
             } else {
                 transaction = new SurfaceControl.Transaction();
@@ -3757,17 +7074,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     new SurfaceCallbackHelper(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda15
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ViewRootImpl.this.lambda$performDraw$8(surfaceSyncGroup, transaction);
+                            this.f$0.lambda$performDraw$8(surfaceSyncGroup, transaction);
                         }
                     }).dispatchSurfaceRedrawNeededAsync(this.mSurfaceHolder, this.mSurfaceHolder.getCallbacks());
-                    draw = true;
-                } else if (!draw && this.mAttachInfo.mThreadedRenderer != null) {
+                    zDraw = true;
+                } else if (!zDraw && this.mAttachInfo.mThreadedRenderer != null) {
                     Trace.traceBegin(8L, "fence");
                     this.mAttachInfo.mThreadedRenderer.fence();
                     Trace.traceEnd(8L);
                 }
             }
-            if (!draw) {
+            if (!zDraw) {
                 handleSyncRequestWhenNoAsyncDraw(surfaceSyncGroup, transaction != null, transaction, "no async report");
             }
             if (this.mPerformContentCapture) {
@@ -3808,9 +7125,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         int i = this.mContentCaptureEnabled;
         boolean z = true;
         if (i == 0) {
-            boolean isContentCaptureReallyEnabled = isContentCaptureReallyEnabled();
-            this.mContentCaptureEnabled = isContentCaptureReallyEnabled ? 1 : 2;
-            return isContentCaptureReallyEnabled;
+            boolean zIsContentCaptureReallyEnabled = isContentCaptureReallyEnabled();
+            this.mContentCaptureEnabled = zIsContentCaptureReallyEnabled ? 1 : 2;
+            return zIsContentCaptureReallyEnabled;
         }
         if (i != 1) {
             z = false;
@@ -3827,7 +7144,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void performContentCaptureInitialReport() {
-        boolean z = false;
+        boolean zIsTagEnabled = false;
         this.mPerformContentCapture = false;
         View view = this.mView;
         if (DEBUG_CONTENT_CAPTURE) {
@@ -3835,8 +7152,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         try {
             if (isContentCaptureEnabled()) {
-                z = Trace.isTagEnabled(8L);
-                if (z) {
+                zIsTagEnabled = Trace.isTagEnabled(8L);
+                if (zIsTagEnabled) {
                     Trace.traceBegin(8L, "dispatchContentCapture() for " + getClass().getSimpleName());
                 }
                 if (this.mAttachInfo.mContentCaptureManager != null) {
@@ -3846,7 +7163,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 view.dispatchInitialProvideContentCaptureStructure();
             }
         } finally {
-            if (z) {
+            if (zIsTagEnabled) {
                 Trace.traceEnd(8L);
             }
         }
@@ -3858,21 +7175,21 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         try {
             if (isContentCaptureEnabled()) {
-                boolean isTagEnabled = Trace.isTagEnabled(8L);
-                if (isTagEnabled) {
+                boolean zIsTagEnabled = Trace.isTagEnabled(8L);
+                if (zIsTagEnabled) {
                     Trace.traceBegin(8L, "flushContentCapture for " + getClass().getSimpleName());
                 }
                 ContentCaptureManager contentCaptureManager = this.mAttachInfo.mContentCaptureManager;
                 if (contentCaptureManager == null) {
                     Log.w(TAG, "No ContentCapture on AttachInfo");
-                    if (isTagEnabled) {
+                    if (zIsTagEnabled) {
                         Trace.traceEnd(8L);
                         return;
                     }
                     return;
                 }
                 contentCaptureManager.flush(2);
-                if (isTagEnabled) {
+                if (zIsTagEnabled) {
                     Trace.traceEnd(8L);
                 }
             }
@@ -3885,7 +7202,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean draw(boolean z, SurfaceSyncGroup surfaceSyncGroup, boolean z2) {
-        int i;
+        int currY;
         boolean z3;
         Scroller scroller;
         Surface surface = this.mSurface;
@@ -3905,8 +7222,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             synchronized (arrayList) {
                 sFirstDrawComplete = true;
                 int size = arrayList.size();
-                for (int i2 = 0; i2 < size; i2++) {
-                    this.mHandler.post(sFirstDrawHandlers.get(i2));
+                for (int i = 0; i < size; i++) {
+                    this.mHandler.post(sFirstDrawHandlers.get(i));
                 }
             }
         }
@@ -3918,15 +7235,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Scroller scroller2 = this.mScroller;
         boolean z5 = scroller2 != null && scroller2.computeScrollOffset();
         if (z5) {
-            i = this.mScroller.getCurrY();
+            currY = this.mScroller.getCurrY();
         } else {
-            i = this.mScrollY;
+            currY = this.mScrollY;
         }
-        if (this.mCurScrollY != i) {
-            this.mCurScrollY = i;
+        if (this.mCurScrollY != currY) {
+            this.mCurScrollY = currY;
             KeyEvent.Callback callback = this.mView;
             if (callback instanceof RootViewSurfaceTaker) {
-                ((RootViewSurfaceTaker) callback).onRootViewScrollYChanged(i);
+                ((RootViewSurfaceTaker) callback).onRootViewScrollYChanged(currY);
             }
             z3 = true;
         } else {
@@ -3949,44 +7266,44 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Log.v(this.mTag, "Draw " + this.mView + "/" + ((Object) this.mWindowAttributes.getTitle()) + ": dirty={" + rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom + "} surface=" + surface + " surface.isValid()=" + surface.isValid() + ", appScale:" + f + ", width=" + this.mWidth + ", height=" + this.mHeight);
         }
         this.mAttachInfo.mTreeObserver.dispatchOnDraw();
-        int i3 = -this.mCanvasOffsetX;
-        int i4 = (-this.mCanvasOffsetY) + i;
+        int i2 = -this.mCanvasOffsetX;
+        int i3 = (-this.mCanvasOffsetY) + currY;
         WindowManager.LayoutParams layoutParams = this.mWindowAttributes;
         Rect rect2 = layoutParams != null ? layoutParams.surfaceInsets : null;
         if (rect2 != null) {
-            i3 -= rect2.left;
-            i4 -= rect2.top;
+            i2 -= rect2.left;
+            i3 -= rect2.top;
             rect.offset(rect2.left, rect2.top);
         }
-        int i5 = i4;
-        boolean isAccessibilityFocusDirty = isAccessibilityFocusDirty();
-        if (isAccessibilityFocusDirty && getAccessibilityFocusedRect(this.mAttachInfo.mTmpInvalRect)) {
+        int i4 = i3;
+        boolean zIsAccessibilityFocusDirty = isAccessibilityFocusDirty();
+        if (zIsAccessibilityFocusDirty && getAccessibilityFocusedRect(this.mAttachInfo.mTmpInvalRect)) {
             requestLayout();
         }
         this.mAttachInfo.mDrawingTime = this.mChoreographer.getFrameTimeNanos() / 1000000;
         boolean z7 = DEBUG_TRAVERSAL;
         if (z7 && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [13] mView=" + this.mView + " dirty.isEmpty=" + rect.isEmpty() + " mIsAnimating=" + this.mIsAnimating + " accessibilityFocusDirty=" + isAccessibilityFocusDirty + " mForceDraw=" + this.mForceDraw);
+            Log.i(this.mTag, "Traversal, [13] mView=" + this.mView + " dirty.isEmpty=" + rect.isEmpty() + " mIsAnimating=" + this.mIsAnimating + " accessibilityFocusDirty=" + zIsAccessibilityFocusDirty + " mForceDraw=" + this.mForceDraw);
         }
-        if (!rect.isEmpty() || this.mIsAnimating || isAccessibilityFocusDirty || this.mForceDraw) {
+        if (!rect.isEmpty() || this.mIsAnimating || zIsAccessibilityFocusDirty || this.mForceDraw) {
             if (isHardwareEnabled()) {
-                boolean z8 = isAccessibilityFocusDirty || this.mInvalidateRootRequested;
+                boolean z8 = zIsAccessibilityFocusDirty || this.mInvalidateRootRequested;
                 this.mInvalidateRootRequested = false;
                 this.mIsAnimating = false;
-                if (this.mHardwareYOffset != i5 || this.mHardwareXOffset != i3) {
-                    this.mHardwareYOffset = i5;
-                    this.mHardwareXOffset = i3;
+                if (this.mHardwareYOffset != i4 || this.mHardwareXOffset != i2) {
+                    this.mHardwareYOffset = i4;
+                    this.mHardwareXOffset = i2;
                     z8 = true;
                 }
                 if (z8) {
                     this.mAttachInfo.mThreadedRenderer.invalidateRoot();
                 }
                 rect.setEmpty();
-                boolean updateContentDrawBounds = updateContentDrawBounds();
+                boolean zUpdateContentDrawBounds = updateContentDrawBounds();
                 if (this.mReportNextDraw) {
                     this.mAttachInfo.mThreadedRenderer.setStopped(false);
                 }
-                if (updateContentDrawBounds) {
+                if (zUpdateContentDrawBounds) {
                     requestDrawWindow();
                 }
                 if (this.mHdrRenderState.updateForFrame(this.mAttachInfo.mDrawingTime)) {
@@ -4006,10 +7323,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     Log.i(this.mTag, "Force to draw even when frame is empty");
                     this.mForceDraw = false;
                 }
-                long uptimeNanos = SystemClock.uptimeNanos();
+                long jUptimeNanos = SystemClock.uptimeNanos();
                 this.mAttachInfo.mThreadedRenderer.draw(this.mView, this.mAttachInfo, this);
                 if (this.mAppStartInfoTimestampsFlagValue && this.mRenderThreadDrawStartTimeNs == -1) {
-                    this.mRenderThreadDrawStartTimeNs = uptimeNanos;
+                    this.mRenderThreadDrawStartTimeNs = jUptimeNanos;
                 }
                 z4 = true;
             } else {
@@ -4036,7 +7353,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         return false;
                     }
                 }
-                if (!drawSoftware(surface, this.mAttachInfo, i3, i5, z6, rect, rect2)) {
+                if (!drawSoftware(surface, this.mAttachInfo, i2, i4, z6, rect, rect2)) {
                     return false;
                 }
             }
@@ -4053,14 +7370,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private boolean drawSoftware(Surface surface, View.AttachInfo attachInfo, int i, int i2, boolean z, Rect rect, Rect rect2) {
         try {
-            Canvas lockCanvas = this.mSurface.lockCanvas(rect);
-            lockCanvas.setDensity(this.mDensity);
+            Canvas canvasLockCanvas = this.mSurface.lockCanvas(rect);
+            canvasLockCanvas.setDensity(this.mDensity);
             try {
                 if (DEBUG_ORIENTATION || DEBUG_DRAW) {
-                    Log.v(this.mTag, "Surface " + surface + " drawing to bitmap w=" + lockCanvas.getWidth() + ", h=" + lockCanvas.getHeight() + ", dirty: " + rect + ", xOff=" + i + ", yOff=" + i2);
+                    Log.v(this.mTag, "Surface " + surface + " drawing to bitmap w=" + canvasLockCanvas.getWidth() + ", h=" + canvasLockCanvas.getHeight() + ", dirty: " + rect + ", xOff=" + i + ", yOff=" + i2);
                 }
-                if (!lockCanvas.isOpaque() || i2 != 0 || i != 0) {
-                    lockCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+                if (!canvasLockCanvas.isOpaque() || i2 != 0 || i != 0) {
+                    canvasLockCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
                 }
                 rect.setEmpty();
                 this.mIsAnimating = false;
@@ -4069,16 +7386,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     Context context = this.mView.getContext();
                     Log.i(this.mTag, "Drawing: package:" + context.getPackageName() + ", metrics=" + context.getResources().getDisplayMetrics() + ", compatibilityInfo=" + context.getResources().getCompatibilityInfo());
                 }
-                lockCanvas.translate(-i, -i2);
+                canvasLockCanvas.translate(-i, -i2);
                 CompatibilityInfo.Translator translator = this.mTranslator;
                 if (translator != null) {
-                    translator.translateCanvas(lockCanvas);
+                    translator.translateCanvas(canvasLockCanvas);
                 }
-                lockCanvas.setScreenDensity(z ? this.mNoncompatDensity : 0);
-                this.mView.draw(lockCanvas);
-                drawAccessibilityFocusedDrawableIfNeeded(lockCanvas);
+                canvasLockCanvas.setScreenDensity(z ? this.mNoncompatDensity : 0);
+                this.mView.draw(canvasLockCanvas);
+                drawAccessibilityFocusedDrawableIfNeeded(canvasLockCanvas);
                 try {
-                    surface.unlockCanvasAndPost(lockCanvas);
+                    surface.unlockCanvasAndPost(canvasLockCanvas);
                     return true;
                 } catch (IllegalArgumentException e) {
                     Log.e(this.mTag, "Could not unlock surface", e);
@@ -4087,7 +7404,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
             } catch (Throwable th) {
                 try {
-                    surface.unlockCanvasAndPost(lockCanvas);
+                    surface.unlockCanvasAndPost(canvasLockCanvas);
                     throw th;
                 } catch (IllegalArgumentException e2) {
                     Log.e(this.mTag, "Could not unlock surface", e2);
@@ -4148,11 +7465,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void drawAccessibilityFocusedBorderOnRoundDisplay(Canvas canvas, Rect rect, int i, Paint paint) {
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.clipRect(rect);
         float f = i;
         canvas.drawCircle(f, f, f - (this.mAccessibilityManager.getAccessibilityFocusStrokeWidth() / 2.0f), paint);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     private boolean getAccessibilityFocusedRect(Rect rect) {
@@ -4217,13 +7534,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void systemGestureExclusionChanged() {
-        List<Rect> computeChangedRects = this.mGestureExclusionTracker.computeChangedRects();
-        if (computeChangedRects == null || this.mView == null) {
+        List<Rect> listComputeChangedRects = this.mGestureExclusionTracker.computeChangedRects();
+        if (listComputeChangedRects == null || this.mView == null) {
             return;
         }
         try {
-            this.mWindowSession.reportSystemGestureExclusionChanged(this.mWindow, computeChangedRects);
-            this.mAttachInfo.mTreeObserver.dispatchOnSystemGestureExclusionRectsChanged(computeChangedRects);
+            this.mWindowSession.reportSystemGestureExclusionChanged(this.mWindow, listComputeChangedRects);
+            this.mAttachInfo.mTreeObserver.dispatchOnSystemGestureExclusionRectsChanged(listComputeChangedRects);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4276,9 +7593,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void keepClearRectsChanged(boolean z) {
-        boolean computeChanges = this.mKeepClearRectsTracker.computeChanges();
-        boolean computeChanges2 = this.mUnrestrictedKeepClearRectsTracker.computeChanges();
-        if ((computeChanges || computeChanges2 || z) && this.mView != null) {
+        boolean zComputeChanges = this.mKeepClearRectsTracker.computeChanges();
+        boolean zComputeChanges2 = this.mUnrestrictedKeepClearRectsTracker.computeChanges();
+        if ((zComputeChanges || zComputeChanges2 || z) && this.mView != null) {
             this.mHasPendingKeepClearAreaChange = true;
             if (this.mHandler.hasMessages(36)) {
                 return;
@@ -4314,8 +7631,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     boolean scrollToRectOrFocus(Rect rect, boolean z) {
         Rect rect2;
-        int i;
-        if (this.mImeBackAnimationController.isAnimationInProgress()) {
+        int height;
+        if (this.mImeBackAnimationController.isAnimationInProgress() || this.mInsetsController.getAnimationType(WindowInsets.Type.ime()) != -1) {
             return false;
         }
         Rect rect3 = this.mAttachInfo.mContentInsets;
@@ -4326,39 +7643,39 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             rect2 = this.mAttachInfo.mVisibleInsets;
         }
         if (rect2.left > rect3.left || rect2.top > rect3.top || rect2.right > rect3.right || rect2.bottom > rect3.bottom) {
-            i = this.mScrollY;
-            View findFocus = this.mView.findFocus();
-            if (findFocus == null) {
+            height = this.mScrollY;
+            View viewFindFocus = this.mView.findFocus();
+            if (viewFindFocus == null) {
                 return false;
             }
             WeakReference<View> weakReference = this.mLastScrolledFocus;
             View view = weakReference != null ? weakReference.get() : null;
-            Rect rect4 = findFocus != view ? null : rect;
+            Rect rect4 = viewFindFocus != view ? null : rect;
             boolean z3 = DEBUG_INPUT_RESIZE;
             if (z3) {
-                Log.v(this.mTag, "Eval scroll: focus=" + findFocus + " rectangle=" + rect4 + " ci=" + rect3 + " vi=" + rect2);
+                Log.v(this.mTag, "Eval scroll: focus=" + viewFindFocus + " rectangle=" + rect4 + " ci=" + rect3 + " vi=" + rect2);
             }
-            if (findFocus != view || this.mScrollMayChange || rect4 != null) {
-                this.mLastScrolledFocus = new WeakReference<>(findFocus);
+            if (viewFindFocus != view || this.mScrollMayChange || rect4 != null) {
+                this.mLastScrolledFocus = new WeakReference<>(viewFindFocus);
                 this.mScrollMayChange = false;
                 if (z3) {
                     Log.v(this.mTag, "Need to scroll?");
                 }
-                if (findFocus.getGlobalVisibleRect(this.mVisRect, null)) {
+                if (viewFindFocus.getGlobalVisibleRect(this.mVisRect, null)) {
                     if (z3) {
                         Log.v(this.mTag, "Root w=" + this.mView.getWidth() + " h=" + this.mView.getHeight() + " ci=" + rect3.toShortString() + " vi=" + rect2.toShortString());
                     }
                     if (rect4 == null) {
-                        findFocus.getFocusedRect(this.mTempRect);
+                        viewFindFocus.getFocusedRect(this.mTempRect);
                         if (z3) {
-                            Log.v(this.mTag, "Focus " + findFocus + ": focusRect=" + this.mTempRect.toShortString());
+                            Log.v(this.mTag, "Focus " + viewFindFocus + ": focusRect=" + this.mTempRect.toShortString());
                         }
                         View view2 = this.mView;
                         if (view2 instanceof ViewGroup) {
                             try {
-                                ((ViewGroup) view2).offsetDescendantRectToMyCoords(findFocus, this.mTempRect);
+                                ((ViewGroup) view2).offsetDescendantRectToMyCoords(viewFindFocus, this.mTempRect);
                             } catch (IllegalArgumentException e) {
-                                Log.e(this.mTag, "offsetDescendantRectToMyCoords() error occurred. focus=" + findFocus + " mTempRect=" + this.mTempRect.toShortString() + " " + e);
+                                Log.e(this.mTag, "offsetDescendantRectToMyCoords() error occurred. focus=" + viewFindFocus + " mTempRect=" + this.mTempRect.toShortString() + " " + e);
                                 e.printStackTrace();
                             }
                         }
@@ -4378,20 +7695,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         }
                         if (this.mTempRect.height() > (this.mView.getHeight() - rect2.top) - rect2.bottom) {
                             if (z4) {
-                                Log.v(this.mTag, "Too tall; leaving scrollY=" + i);
+                                Log.v(this.mTag, "Too tall; leaving scrollY=" + height);
                             }
                         } else if (this.mTempRect.top < rect2.top) {
-                            i = this.mTempRect.top - rect2.top;
+                            height = this.mTempRect.top - rect2.top;
                             if (z4) {
-                                Log.v(this.mTag, "Top covered; scrollY=" + i);
+                                Log.v(this.mTag, "Top covered; scrollY=" + height);
                             }
                         } else if (this.mTempRect.bottom > this.mView.getHeight() - rect2.bottom) {
-                            i = this.mTempRect.bottom - (this.mView.getHeight() - rect2.bottom);
+                            height = this.mTempRect.bottom - (this.mView.getHeight() - rect2.bottom);
                             if (z4) {
-                                Log.v(this.mTag, "Bottom covered; scrollY=" + i);
+                                Log.v(this.mTag, "Bottom covered; scrollY=" + height);
                             }
                         } else {
-                            i = 0;
+                            height = 0;
                         }
                     }
                 }
@@ -4401,26 +7718,26 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             z2 = false;
         } else {
             z2 = false;
-            i = 0;
+            height = 0;
         }
-        if (i != this.mScrollY) {
+        if (height != this.mScrollY) {
             if (DEBUG_INPUT_RESIZE) {
-                Log.v(this.mTag, "Pan scroll changed: old=" + this.mScrollY + " , new=" + i);
+                Log.v(this.mTag, "Pan scroll changed: old=" + this.mScrollY + " , new=" + height);
             }
             if (!z) {
                 if (this.mScroller == null) {
                     this.mScroller = new Scroller(this.mView.getContext());
                 }
                 Scroller scroller = this.mScroller;
-                int i2 = this.mScrollY;
-                scroller.startScroll(0, i2, 0, i - i2);
+                int i = this.mScrollY;
+                scroller.startScroll(0, i, 0, height - i);
             } else {
                 Scroller scroller2 = this.mScroller;
                 if (scroller2 != null) {
                     scroller2.abortAnimation();
                 }
             }
-            this.mScrollY = i;
+            this.mScrollY = height;
         }
         return z2;
     }
@@ -4547,7 +7864,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.ViewParent
-    public void focusableViewAvailable(View view) {
+    public void focusableViewAvailable(View view) throws Resources.NotFoundException {
         checkThread();
         View view2 = this.mView;
         if (view2 != null) {
@@ -4558,8 +7875,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 return;
             }
-            View findFocus = this.mView.findFocus();
-            if ((findFocus instanceof ViewGroup) && ((ViewGroup) findFocus).getDescendantFocusability() == 262144 && isViewDescendantOf(view, findFocus)) {
+            View viewFindFocus = this.mView.findFocus();
+            if ((viewFindFocus instanceof ViewGroup) && ((ViewGroup) viewFindFocus).getDescendantFocusability() == 262144 && isViewDescendantOf(view, viewFindFocus)) {
                 view.requestFocus();
             }
         }
@@ -4576,7 +7893,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewRootImpl.this.lambda$recomputeViewAttributes$9();
+                        this.f$0.lambda$recomputeViewAttributes$9();
                     }
                 });
             } else {
@@ -4899,7 +8216,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
         }
 
-        private void handleMessageImpl(Message message) {
+        private void handleMessageImpl(Message message) throws Throwable {
             int i = message.what;
             switch (i) {
                 case 1:
@@ -4936,11 +8253,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 default:
                     switch (i) {
                         case 11:
-                            KeyEvent keyEvent = (KeyEvent) message.obj;
-                            if ((keyEvent.getFlags() & 8) != 0) {
-                                keyEvent = KeyEvent.changeFlags(keyEvent, keyEvent.getFlags() & (-9));
+                            KeyEvent keyEventChangeFlags = (KeyEvent) message.obj;
+                            if ((keyEventChangeFlags.getFlags() & 8) != 0) {
+                                keyEventChangeFlags = KeyEvent.changeFlags(keyEventChangeFlags, keyEventChangeFlags.getFlags() & (-9));
                             }
-                            ViewRootImpl.this.enqueueInputEvent(keyEvent, null, 1, true);
+                            ViewRootImpl.this.enqueueInputEvent(keyEventChangeFlags, null, 1, true);
                             return;
                         case 12:
                             ViewRootImpl.this.enqueueInputEvent((KeyEvent) message.obj, null, 0, true);
@@ -4978,11 +8295,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                             ViewRootImpl.this.handleDispatchSystemUiVisibilityChanged();
                             return;
                         case 18:
-                            Configuration configuration = (Configuration) message.obj;
-                            if (configuration.isOtherSeqNewer(ViewRootImpl.this.mLastReportedMergedConfiguration.getMergedConfiguration())) {
-                                configuration = ViewRootImpl.this.mLastReportedMergedConfiguration.getGlobalConfiguration();
+                            Configuration globalConfiguration = (Configuration) message.obj;
+                            if (globalConfiguration.isOtherSeqNewer(ViewRootImpl.this.mLastReportedMergedConfiguration.getMergedConfiguration())) {
+                                globalConfiguration = ViewRootImpl.this.mLastReportedMergedConfiguration.getGlobalConfiguration();
                             }
-                            ViewRootImpl.this.mPendingMergedConfiguration.setConfiguration(configuration, ViewRootImpl.this.mLastReportedMergedConfiguration.getOverrideConfiguration());
+                            ViewRootImpl.this.mPendingMergedConfiguration.setConfiguration(globalConfiguration, ViewRootImpl.this.mLastReportedMergedConfiguration.getOverrideConfiguration());
                             if (ViewRootImpl.this.mPendingActivityWindowInfo != null) {
                                 ViewRootImpl.this.mPendingActivityWindowInfo.set(ViewRootImpl.this.mLastReportedActivityWindowInfo);
                             }
@@ -5006,14 +8323,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                                     return;
                                 case 23:
                                     if (ViewRootImpl.this.mAdded) {
-                                        int width = ViewRootImpl.this.mWinFrame.width();
-                                        int height = ViewRootImpl.this.mWinFrame.height();
+                                        int iWidth = ViewRootImpl.this.mWinFrame.width();
+                                        int iHeight = ViewRootImpl.this.mWinFrame.height();
                                         int i2 = message.arg1;
                                         int i3 = message.arg2;
                                         ViewRootImpl.this.mTmpFrames.frame.left = i2;
-                                        ViewRootImpl.this.mTmpFrames.frame.right = i2 + width;
+                                        ViewRootImpl.this.mTmpFrames.frame.right = i2 + iWidth;
                                         ViewRootImpl.this.mTmpFrames.frame.top = i3;
-                                        ViewRootImpl.this.mTmpFrames.frame.bottom = i3 + height;
+                                        ViewRootImpl.this.mTmpFrames.frame.bottom = i3 + iHeight;
                                         ViewRootImpl viewRootImpl2 = ViewRootImpl.this;
                                         viewRootImpl2.setFrame(viewRootImpl2.mTmpFrames.frame, false);
                                         ViewRootImpl viewRootImpl3 = ViewRootImpl.this;
@@ -5093,8 +8410,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                                             ViewRootImpl.this.setPreferredFrameRateCategory(1);
                                             return;
                                         case 40:
-                                            long nanoTime = (ViewRootImpl.this.mIsTouchBoosting || ViewRootImpl.this.mIsFrameRateBoosting || ViewRootImpl.this.mInsetsAnimationRunning) ? 0L : (System.nanoTime() / 1000000) - ViewRootImpl.this.mLastUpdateTimeMillis;
-                                            if (nanoTime >= 750) {
+                                            long jNanoTime = (ViewRootImpl.this.mIsTouchBoosting || ViewRootImpl.this.mIsFrameRateBoosting || ViewRootImpl.this.mInsetsAnimationRunning) ? 0L : (System.nanoTime() / 1000000) - ViewRootImpl.this.mLastUpdateTimeMillis;
+                                            if (jNanoTime >= 750) {
                                                 ViewRootImpl.this.mFrameRateCategoryHighCount = 0;
                                                 ViewRootImpl.this.mFrameRateCategoryHighHintCount = 0;
                                                 ViewRootImpl.this.mFrameRateCategoryNormalCount = 0;
@@ -5114,7 +8431,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                                                 return;
                                             }
                                             ViewRootImpl.this.mInvalidationIdleMessagePosted = true;
-                                            ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(40, 750 - nanoTime);
+                                            ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(40, 750 - jNanoTime);
                                             return;
                                         case 41:
                                             if (ViewRootImpl.this.mPointerIconEvent == null) {
@@ -5204,17 +8521,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    private boolean enterTouchMode() {
-        View findFocus;
+    private boolean enterTouchMode() throws Resources.NotFoundException {
+        View viewFindFocus;
         View view = this.mView;
-        if (view == null || !view.hasFocus() || (findFocus = this.mView.findFocus()) == null || findFocus.isFocusableInTouchMode()) {
+        if (view == null || !view.hasFocus() || (viewFindFocus = this.mView.findFocus()) == null || viewFindFocus.isFocusableInTouchMode()) {
             return false;
         }
-        ViewGroup findAncestorToTakeFocusInTouchMode = findAncestorToTakeFocusInTouchMode(findFocus);
-        if (findAncestorToTakeFocusInTouchMode != null) {
-            return findAncestorToTakeFocusInTouchMode.requestFocus();
+        ViewGroup viewGroupFindAncestorToTakeFocusInTouchMode = findAncestorToTakeFocusInTouchMode(viewFindFocus);
+        if (viewGroupFindAncestorToTakeFocusInTouchMode != null) {
+            return viewGroupFindAncestorToTakeFocusInTouchMode.requestFocus();
         }
-        findFocus.clearFocusInternal(null, true, false);
+        viewFindFocus.clearFocusInternal(null, true, false);
         return true;
     }
 
@@ -5239,8 +8556,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return false;
         }
         if (view.hasFocus()) {
-            View findFocus = this.mView.findFocus();
-            if (!(findFocus instanceof ViewGroup) || ((ViewGroup) findFocus).getDescendantFocusability() != 262144) {
+            View viewFindFocus = this.mView.findFocus();
+            if (!(viewFindFocus instanceof ViewGroup) || ((ViewGroup) viewFindFocus).getDescendantFocusability() != 262144) {
                 return false;
             }
         }
@@ -5249,18 +8566,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private boolean checkPalmRejection(MotionEvent motionEvent) {
         int pointerCount = motionEvent.getPointerCount();
-        int i = 0;
+        int touchMajor = 0;
         boolean z = false;
-        for (int i2 = 0; i2 < pointerCount; i2++) {
-            if (motionEvent.getPalm(i2) == 1.0f || motionEvent.getPalm(i2) == 2.0f || motionEvent.getPalm(i2) == 3.0f) {
+        for (int i = 0; i < pointerCount; i++) {
+            if (motionEvent.getPalm(i) == 1.0f || motionEvent.getPalm(i) == 2.0f || motionEvent.getPalm(i) == 3.0f) {
                 z = true;
             }
-            i += (int) motionEvent.getTouchMajor(i2);
+            touchMajor += (int) motionEvent.getTouchMajor(i);
         }
         if (motionEvent.getPalm() == -2.0f) {
             return false;
         }
-        return i >= 100 || z;
+        return touchMajor >= 100 || z;
     }
 
     private boolean getPalmRejection(MotionEvent motionEvent) {
@@ -5281,37 +8598,37 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             i2 = 0;
         }
         float f = i2 > i ? i : i2;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
-        float f4 = 0.0f;
-        float f5 = 0.0f;
+        float fSqrt = 0.0f;
+        float x = 0.0f;
+        float touchMajor = 0.0f;
+        float touchMinor = 0.0f;
         for (int i3 = 0; i3 < pointerCount; i3++) {
             arrayList.add(Float.valueOf(motionEvent.getX(i3)));
             arrayList2.add(Float.valueOf(motionEvent.getY(i3)));
-            f3 += motionEvent.getX(i3);
+            x += motionEvent.getX(i3);
             motionEvent.getY(i3);
-            f4 += motionEvent.getTouchMajor(i3);
-            f5 += motionEvent.getTouchMinor(i3);
+            touchMajor += motionEvent.getTouchMajor(i3);
+            touchMinor += motionEvent.getTouchMinor(i3);
         }
-        float f6 = pointerCount;
-        float f7 = f3 / f6;
-        float f8 = f4 / f5;
+        float f2 = pointerCount;
+        float f3 = x / f2;
+        float f4 = touchMajor / touchMinor;
         boolean z = false;
         for (int i4 = 0; i4 < pointerCount; i4++) {
-            f2 += (float) Math.sqrt((((Float) arrayList.get(i4)).floatValue() - f7) * (((Float) arrayList.get(i4)).floatValue() - f7));
+            fSqrt += (float) Math.sqrt((((Float) arrayList.get(i4)).floatValue() - f3) * (((Float) arrayList.get(i4)).floatValue() - f3));
             if (motionEvent.getPalm(i4) == 1.0f || motionEvent.getPalm(i4) == 2.0f || motionEvent.getPalm(i4) == 3.0f) {
                 z = true;
             }
         }
-        float f9 = f2 / f6;
+        float f5 = fSqrt / f2;
         if (z && motionEvent.getToolType(0) == 1 && motionEvent.getAction() != 1) {
-            Log.i(TAG, "[ViewRootImpl] action cancel - 1, eccen:" + f8);
+            Log.i(TAG, "[ViewRootImpl] action cancel - 1, eccen:" + f4);
             return true;
         }
-        if (motionEvent.getToolType(0) != 1 || f4 < 100.0f || f8 <= 2.0f || f9 >= f / (pointerCount + 4)) {
+        if (motionEvent.getToolType(0) != 1 || touchMajor < 100.0f || f4 <= 2.0f || f5 >= f / (pointerCount + 4)) {
             return false;
         }
-        Log.i(TAG, "[ViewRootImpl] action cancel - 2, Palm Sweep, SsumMajor:" + f4 + " eccen:" + f8 + " varX:" + f9 + " TILT_TO_ZOOM_XVAR" + f + " N" + pointerCount);
+        Log.i(TAG, "[ViewRootImpl] action cancel - 2, Palm Sweep, SsumMajor:" + touchMajor + " eccen:" + f4 + " varX:" + f5 + " TILT_TO_ZOOM_XVAR" + f + " N" + pointerCount);
         return true;
     }
 
@@ -5341,9 +8658,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             traceEvent(queuedInputEvent, 8L);
             try {
-                int onProcess = onProcess(queuedInputEvent);
+                int iOnProcess = onProcess(queuedInputEvent);
                 Trace.traceEnd(8L);
-                apply(queuedInputEvent, onProcess);
+                apply(queuedInputEvent, iOnProcess);
             } catch (Throwable th) {
                 Trace.traceEnd(8L);
                 throw th;
@@ -5409,11 +8726,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 Slog.e(ViewRootImpl.this.mTag, "mStopped=" + ViewRootImpl.this.mStopped + " mHasWindowFocus=" + ViewRootImpl.this.mAttachInfo.mHasWindowFocus + " mPausedForTransition=" + ViewRootImpl.this.mPausedForTransition);
                 return true;
             }
-            boolean z = ViewRootImpl.this.mAttachInfo.mHasWindowFocus;
+            boolean zHasWindowFocusInTask = ViewRootImpl.this.mAttachInfo.mHasWindowFocus;
             if ((ViewRootImpl.this.mView instanceof DecorView) && (queuedInputEvent.mEvent instanceof KeyEvent) && ((KeyEvent) queuedInputEvent.mEvent).getKeyCode() == 4) {
-                z |= ((DecorView) ViewRootImpl.this.mView).hasWindowFocusInTask();
+                zHasWindowFocusInTask |= ((DecorView) ViewRootImpl.this.mView).hasWindowFocusInTask();
             }
-            if (!z && !isBack(queuedInputEvent.mEvent) && (ViewRootImpl.this.mWindowAttributes.samsungFlags & 65536) == 0 && !queuedInputEvent.mEvent.isFromSource(2) && !ViewRootImpl.this.isAutofillUiShowing()) {
+            if (!zHasWindowFocusInTask && !isBack(queuedInputEvent.mEvent) && (ViewRootImpl.this.mWindowAttributes.samsungFlags & 65536) == 0 && !queuedInputEvent.mEvent.isFromSource(2) && !ViewRootImpl.this.isAutofillUiShowing()) {
                 str = "no window focus";
             } else if (ViewRootImpl.this.mStopped) {
                 str = "window is stopped";
@@ -5682,17 +8999,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         @Override // android.view.ViewRootImpl.InputStage
         protected int onProcess(QueuedInputEvent queuedInputEvent) {
-            int onProcessImeInputStage = ViewRootImpl.this.mImeFocusController.onProcessImeInputStage(queuedInputEvent, queuedInputEvent.mEvent, ViewRootImpl.this.mWindowAttributes, this);
-            if (onProcessImeInputStage == -1) {
+            int iOnProcessImeInputStage = ViewRootImpl.this.mImeFocusController.onProcessImeInputStage(queuedInputEvent, queuedInputEvent.mEvent, ViewRootImpl.this.mWindowAttributes, this);
+            if (iOnProcessImeInputStage == -1) {
                 return 3;
             }
-            if (onProcessImeInputStage == 0) {
+            if (iOnProcessImeInputStage == 0) {
                 return 0;
             }
-            if (onProcessImeInputStage == 1) {
+            if (iOnProcessImeInputStage == 1) {
                 return 1;
             }
-            throw new IllegalStateException("Unexpected result=" + onProcessImeInputStage);
+            throw new IllegalStateException("Unexpected result=" + iOnProcessImeInputStage);
         }
 
         @Override // android.view.inputmethod.InputMethodManager.FinishedInputEventCallback
@@ -5838,73 +9155,69 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0042  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private boolean performFocusNavigation(KeyEvent keyEvent) {
             int i;
             int keyCode = keyEvent.getKeyCode();
             if (keyCode != 61) {
                 switch (keyCode) {
                     case 19:
-                        if (keyEvent.hasNoModifiers()) {
+                        if (!keyEvent.hasNoModifiers()) {
+                            i = 0;
+                            break;
+                        } else {
                             i = 33;
                             break;
                         }
-                        i = 0;
-                        break;
                     case 20:
                         if (keyEvent.hasNoModifiers()) {
                             i = 130;
                             break;
                         }
-                        i = 0;
                         break;
                     case 21:
                         if (keyEvent.hasNoModifiers()) {
                             i = 17;
                             break;
                         }
-                        i = 0;
                         break;
                     case 22:
                         if (keyEvent.hasNoModifiers()) {
                             i = 66;
                             break;
                         }
-                        i = 0;
-                        break;
-                    default:
-                        i = 0;
                         break;
                 }
             } else if (keyEvent.hasNoModifiers()) {
                 i = 2;
-            } else {
-                if (keyEvent.hasModifiers(1)) {
-                    i = 1;
-                }
-                i = 0;
+            } else if (keyEvent.hasModifiers(1)) {
+                i = 1;
             }
             if (i != 0) {
-                View findFocus = ViewRootImpl.this.mView.findFocus();
-                if (findFocus != null) {
+                View viewFindFocus = ViewRootImpl.this.mView.findFocus();
+                if (viewFindFocus != null) {
                     ViewRootImpl.this.mAttachInfo.mNextFocusLooped = false;
-                    View focusSearch = findFocus.focusSearch(i);
-                    if (focusSearch != null && focusSearch != findFocus) {
+                    View viewFocusSearch = viewFindFocus.focusSearch(i);
+                    if (viewFocusSearch != null && viewFocusSearch != viewFindFocus) {
                         if (ViewRootImpl.this.mAttachInfo.mNextFocusLooped) {
                             moveFocusToAdjacentWindow(i);
                         }
-                        findFocus.getFocusedRect(ViewRootImpl.this.mTempRect);
+                        viewFindFocus.getFocusedRect(ViewRootImpl.this.mTempRect);
                         if (ViewRootImpl.this.mView instanceof ViewGroup) {
-                            ((ViewGroup) ViewRootImpl.this.mView).offsetDescendantRectToMyCoords(findFocus, ViewRootImpl.this.mTempRect);
-                            ((ViewGroup) ViewRootImpl.this.mView).offsetRectIntoDescendantCoords(focusSearch, ViewRootImpl.this.mTempRect);
+                            ((ViewGroup) ViewRootImpl.this.mView).offsetDescendantRectToMyCoords(viewFindFocus, ViewRootImpl.this.mTempRect);
+                            ((ViewGroup) ViewRootImpl.this.mView).offsetRectIntoDescendantCoords(viewFocusSearch, ViewRootImpl.this.mTempRect);
                         }
-                        if (focusSearch.requestFocus(i, ViewRootImpl.this.mTempRect)) {
+                        if (viewFocusSearch.requestFocus(i, ViewRootImpl.this.mTempRect)) {
                             ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getConstantForFocusDirection(i, keyEvent.getRepeatCount() > 0));
                             return true;
                         }
                     } else if (moveFocusToAdjacentWindow(i)) {
                         return true;
                     }
-                    if (ViewRootImpl.this.mView.dispatchUnhandledMove(findFocus, i)) {
+                    if (ViewRootImpl.this.mView.dispatchUnhandledMove(viewFindFocus, i)) {
                         return true;
                     }
                 } else if (ViewRootImpl.this.mView.restoreDefaultFocus() || moveFocusToAdjacentWindow(i)) {
@@ -5927,48 +9240,89 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         private boolean performKeyboardGroupNavigation(int i) {
-            View keyboardNavigationClusterSearch;
-            View findFocus = ViewRootImpl.this.mView.findFocus();
-            if (findFocus == null && ViewRootImpl.this.mView.restoreDefaultFocus()) {
+            View viewKeyboardNavigationClusterSearch;
+            View viewFindFocus = ViewRootImpl.this.mView.findFocus();
+            if (viewFindFocus == null && ViewRootImpl.this.mView.restoreDefaultFocus()) {
                 return true;
             }
-            if (findFocus == null) {
-                keyboardNavigationClusterSearch = ViewRootImpl.this.keyboardNavigationClusterSearch(null, i);
+            if (viewFindFocus == null) {
+                viewKeyboardNavigationClusterSearch = ViewRootImpl.this.keyboardNavigationClusterSearch(null, i);
             } else {
-                keyboardNavigationClusterSearch = findFocus.keyboardNavigationClusterSearch(null, i);
+                viewKeyboardNavigationClusterSearch = viewFindFocus.keyboardNavigationClusterSearch(null, i);
             }
             int i2 = (i == 2 || i == 1) ? 130 : i;
-            if (keyboardNavigationClusterSearch != null && keyboardNavigationClusterSearch.isRootNamespace()) {
-                if (keyboardNavigationClusterSearch.restoreFocusNotInCluster()) {
+            if (viewKeyboardNavigationClusterSearch != null && viewKeyboardNavigationClusterSearch.isRootNamespace()) {
+                if (viewKeyboardNavigationClusterSearch.restoreFocusNotInCluster()) {
                     ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getContantForFocusDirection(i));
                     return true;
                 }
-                keyboardNavigationClusterSearch = ViewRootImpl.this.keyboardNavigationClusterSearch(null, i);
+                viewKeyboardNavigationClusterSearch = ViewRootImpl.this.keyboardNavigationClusterSearch(null, i);
             }
-            if (keyboardNavigationClusterSearch == null || !keyboardNavigationClusterSearch.restoreFocusInCluster(i2)) {
+            if (viewKeyboardNavigationClusterSearch == null || !viewKeyboardNavigationClusterSearch.restoreFocusInCluster(i2)) {
                 return false;
             }
             ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getContantForFocusDirection(i));
             return true;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:41:0x00c9 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x00ca  */
-        /* JADX WARN: Removed duplicated region for block: B:47:0x00db A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x00dc  */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x009c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private int processKeyEvent(android.view.ViewRootImpl.QueuedInputEvent r7) {
-            /*
-                Method dump skipped, instructions count: 250
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.ViewPostImeInputStage.processKeyEvent(android.view.ViewRootImpl$QueuedInputEvent):int");
+        private int processKeyEvent(QueuedInputEvent queuedInputEvent) {
+            int i;
+            int keyCode;
+            KeyEvent keyEvent = (KeyEvent) queuedInputEvent.mEvent;
+            if (ViewRootImpl.this.mUnhandledKeyManager.preViewDispatch(keyEvent)) {
+                return 1;
+            }
+            Log.i(ViewRootImpl.this.mTag, "ViewPostIme key " + keyEvent.getAction());
+            if (ViewRootImpl.this.mView.dispatchKeyEvent(keyEvent)) {
+                if (InputRune.KNOX_CAPTURE_XCOVER_OR_TOP_KEY && (((keyCode = keyEvent.getKeyCode()) == 1015 || keyCode == 1079) && SystemProperties.getInt("sys.datawedge.prop", 0) == 1)) {
+                    ViewRootImpl.this.mFallbackEventHandler.dispatchKeyEvent(keyEvent);
+                }
+                return 1;
+            }
+            if (shouldDropInputEvent(queuedInputEvent)) {
+                return 2;
+            }
+            if (ViewRootImpl.this.mUnhandledKeyManager.dispatch(ViewRootImpl.this.mView, keyEvent)) {
+                return 1;
+            }
+            if (keyEvent.getAction() != 0 || keyEvent.getKeyCode() != 61) {
+                i = 0;
+            } else if (KeyEvent.metaStateHasModifiers(keyEvent.getMetaState(), 4096)) {
+                i = 2;
+            } else if (KeyEvent.metaStateHasModifiers(keyEvent.getMetaState(), 4097)) {
+                i = 1;
+            }
+            if (keyEvent.getAction() == 0 && !KeyEvent.metaStateHasNoModifiers(keyEvent.getMetaState()) && keyEvent.getRepeatCount() == 0 && !KeyEvent.isModifierKey(keyEvent.getKeyCode()) && i == 0) {
+                if (ViewRootImpl.this.mView.dispatchKeyShortcutEvent(keyEvent)) {
+                    return 1;
+                }
+                if (shouldDropInputEvent(queuedInputEvent)) {
+                    return 2;
+                }
+            }
+            if (ViewRootImpl.this.mFallbackEventHandler.dispatchKeyEvent(keyEvent)) {
+                return 1;
+            }
+            if (shouldDropInputEvent(queuedInputEvent)) {
+                return 2;
+            }
+            if (keyEvent.getAction() == 0) {
+                if (i != 0) {
+                    if (performKeyboardGroupNavigation(i)) {
+                        return 1;
+                    }
+                } else if (performFocusNavigation(keyEvent)) {
+                    return 1;
+                }
+            }
+            return 0;
         }
 
-        private int processPointerEvent(QueuedInputEvent queuedInputEvent) {
+        private int processPointerEvent(QueuedInputEvent queuedInputEvent) throws Throwable {
             MotionEvent motionEvent = (MotionEvent) queuedInputEvent.mEvent;
             int action = motionEvent.getAction();
             if (action == 1 || action == 3) {
@@ -5977,8 +9331,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (ViewRootImpl.this.mMotionEventMonitor != null) {
                 ViewRootImpl.this.mMotionEventMonitor.dispatchInputEvent(queuedInputEvent.mEvent);
             }
-            boolean onTouchEvent = (com.android.text.flags.Flags.disableHandwritingInitiatorForIme() && ViewRootImpl.this.mWindowAttributes.type == 2011) ? false : ViewRootImpl.this.mHandwritingInitiator.onTouchEvent(motionEvent);
-            if (onTouchEvent) {
+            boolean zOnTouchEvent = (com.android.text.flags.Flags.disableHandwritingInitiatorForIme() && ViewRootImpl.this.mWindowAttributes.type == 2011) ? false : ViewRootImpl.this.mHandwritingInitiator.onTouchEvent(motionEvent);
+            if (zOnTouchEvent) {
                 ViewRootImpl.this.mLastClickToolType = motionEvent.getToolType(motionEvent.getActionIndex());
             }
             if (ViewRootImpl.DEBUG_TOUCH_EVENT) {
@@ -5988,7 +9342,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             ViewRootImpl.this.mAttachInfo.mUnbufferedDispatchRequested = false;
             ViewRootImpl.this.mAttachInfo.mHandlingPointerEvent = true;
-            int i = (onTouchEvent || ViewRootImpl.this.mView.dispatchPointerEvent(motionEvent)) ? 1 : 0;
+            int i = (zOnTouchEvent || ViewRootImpl.this.mView.dispatchPointerEvent(motionEvent)) ? 1 : 0;
             maybeUpdatePointerIcon(motionEvent);
             ViewRootImpl.this.maybeUpdateTooltip(motionEvent);
             ViewRootImpl.this.mAttachInfo.mHandlingPointerEvent = false;
@@ -6089,9 +9443,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mWindowFocusInTaskChanged = true;
             this.mUpcomingWindowFocusInTask = z;
         }
-        Message obtain = Message.obtain();
-        obtain.what = 105;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 105;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -6109,7 +9463,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public boolean updatePointerIcon(MotionEvent motionEvent) {
+    public boolean updatePointerIcon(MotionEvent motionEvent) throws RemoteException {
         float x = motionEvent.getX(0);
         float y = motionEvent.getY(0);
         if (this.mView == null) {
@@ -6125,42 +9479,42 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boolean z2 = toolType == 2;
         boolean z3 = z2 && z;
         InputManagerGlobal.getInstance().setIsStylusFromTouchpad(z3);
-        PointerIcon onResolvePointerIcon = (motionEvent.isStylusPointer() && this.mIsStylusPointerIconEnabled && (!com.android.text.flags.Flags.disableHandwritingInitiatorForIme() || this.mWindowAttributes.type != 2011) && !z3) ? this.mHandwritingInitiator.onResolvePointerIcon(this.mContext, motionEvent) : null;
-        if (onResolvePointerIcon == null) {
-            onResolvePointerIcon = this.mView.onResolvePointerIcon(motionEvent, 0);
+        PointerIcon pointerIconOnResolvePointerIcon = (motionEvent.isStylusPointer() && this.mIsStylusPointerIconEnabled && (!com.android.text.flags.Flags.disableHandwritingInitiatorForIme() || this.mWindowAttributes.type != 2011) && !z3) ? this.mHandwritingInitiator.onResolvePointerIcon(this.mContext, motionEvent) : null;
+        if (pointerIconOnResolvePointerIcon == null) {
+            pointerIconOnResolvePointerIcon = this.mView.onResolvePointerIcon(motionEvent, 0);
         }
-        boolean z4 = onResolvePointerIcon == null;
+        boolean z4 = pointerIconOnResolvePointerIcon == null;
         if (!z4) {
-            int type = onResolvePointerIcon.getType();
+            int type = pointerIconOnResolvePointerIcon.getType();
             if (z2) {
                 if (z) {
                     if (type > 20000) {
-                        int mappingToMousePointer = mappingToMousePointer(type);
-                        onResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, mappingToMousePointer);
-                        Log.d(this.mTag, "mapping pointerIcon because of mIsStylusFromTouchpad (" + type + " => " + mappingToMousePointer + NavigationBarInflaterView.KEY_CODE_END);
+                        int iMappingToMousePointer = mappingToMousePointer(type);
+                        pointerIconOnResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, iMappingToMousePointer);
+                        Log.d(this.mTag, "mapping pointerIcon because of mIsStylusFromTouchpad (" + type + " => " + iMappingToMousePointer + NavigationBarInflaterView.KEY_CODE_END);
                     }
                 } else if (type == 1000) {
-                    onResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 20001);
+                    pointerIconOnResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 20001);
                     z4 = true;
                 }
             } else if (type == 20001) {
-                onResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 1000);
+                pointerIconOnResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 1000);
                 z4 = true;
             }
         }
         if (z4) {
             try {
                 if (this.mInputManagerService.isDefaultPointerIconChanged() && toolType == this.mInputManagerService.getToolTypeForDefaultPointerIcon()) {
-                    onResolvePointerIcon = this.mInputManagerService.getDefaultPointerIcon();
+                    pointerIconOnResolvePointerIcon = this.mInputManagerService.getDefaultPointerIcon();
                 }
             } catch (Exception e) {
                 Log.e(this.mTag, "failed to check default pointer icon", e);
             }
         }
-        if (onResolvePointerIcon == null) {
-            onResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 1);
+        if (pointerIconOnResolvePointerIcon == null) {
+            pointerIconOnResolvePointerIcon = PointerIcon.getSystemIcon(this.mContext, 1);
         }
-        PointerIcon pointerIcon = onResolvePointerIcon;
+        PointerIcon pointerIcon = pointerIconOnResolvePointerIcon;
         if (Objects.equals(this.mResolvedPointerIcon, pointerIcon)) {
             return true;
         }
@@ -6278,52 +9632,52 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void process(MotionEvent motionEvent) {
             int i;
             int i2;
-            int generate;
+            int iGenerate;
             int i3;
-            long uptimeMillis = SystemClock.uptimeMillis();
-            if (this.mLastTime + 250 < uptimeMillis) {
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            if (this.mLastTime + 250 < jUptimeMillis) {
                 this.mX.reset(0);
                 this.mY.reset(0);
-                this.mLastTime = uptimeMillis;
+                this.mLastTime = jUptimeMillis;
             }
             int action = motionEvent.getAction();
             int metaState = motionEvent.getMetaState();
             if (action == 0) {
                 this.mX.reset(2);
                 this.mY.reset(2);
-                ViewRootImpl.this.enqueueInputEvent(new KeyEvent(uptimeMillis, uptimeMillis, 0, 23, 0, metaState, -1, 0, 1024, 257));
+                ViewRootImpl.this.enqueueInputEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 23, 0, metaState, -1, 0, 1024, 257));
             } else if (action == 1) {
                 this.mX.reset(2);
                 this.mY.reset(2);
-                ViewRootImpl.this.enqueueInputEvent(new KeyEvent(uptimeMillis, uptimeMillis, 1, 23, 0, metaState, -1, 0, 1024, 257));
+                ViewRootImpl.this.enqueueInputEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, 1, 23, 0, metaState, -1, 0, 1024, 257));
             }
             if (ViewRootImpl.DEBUG_TRACKBALL) {
                 Log.v(ViewRootImpl.this.mTag, "TB X=" + this.mX.position + " step=" + this.mX.step + " dir=" + this.mX.dir + " acc=" + this.mX.acceleration + " move=" + motionEvent.getX() + " / Y=" + this.mY.position + " step=" + this.mY.step + " dir=" + this.mY.dir + " acc=" + this.mY.acceleration + " move=" + motionEvent.getY());
             }
-            float collect = this.mX.collect(motionEvent.getX(), motionEvent.getEventTime(), GnssSignalType.CODE_TYPE_X);
-            float collect2 = this.mY.collect(motionEvent.getY(), motionEvent.getEventTime(), GnssSignalType.CODE_TYPE_Y);
+            float fCollect = this.mX.collect(motionEvent.getX(), motionEvent.getEventTime(), GnssSignalType.CODE_TYPE_X);
+            float fCollect2 = this.mY.collect(motionEvent.getY(), motionEvent.getEventTime(), GnssSignalType.CODE_TYPE_Y);
             float f = 1.0f;
-            if (collect > collect2) {
-                generate = this.mX.generate();
-                if (generate != 0) {
-                    i3 = generate > 0 ? 22 : 21;
+            if (fCollect > fCollect2) {
+                iGenerate = this.mX.generate();
+                if (iGenerate != 0) {
+                    i3 = iGenerate > 0 ? 22 : 21;
                     f = this.mX.acceleration;
                     this.mY.reset(2);
                     i = i3;
-                    i2 = generate;
+                    i2 = iGenerate;
                 }
-                i2 = generate;
+                i2 = iGenerate;
                 i = 0;
-            } else if (collect2 > 0.0f) {
-                generate = this.mY.generate();
-                if (generate != 0) {
-                    i3 = generate > 0 ? 20 : 19;
+            } else if (fCollect2 > 0.0f) {
+                iGenerate = this.mY.generate();
+                if (iGenerate != 0) {
+                    i3 = iGenerate > 0 ? 20 : 19;
                     f = this.mY.acceleration;
                     this.mX.reset(2);
                     i = i3;
-                    i2 = generate;
+                    i2 = iGenerate;
                 }
-                i2 = generate;
+                i2 = iGenerate;
                 i = 0;
             } else {
                 i = 0;
@@ -6343,7 +9697,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         Log.v(ViewRootImpl.this.mTag, "Delivering fake DPAD: " + i);
                     }
                     int i5 = i2 - 1;
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(uptimeMillis, uptimeMillis, 2, i, i4 - i5, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, 2, i, i4 - i5, metaState, -1, 0, 1024, 257));
                     i2 = i5;
                 }
                 while (i2 > 0) {
@@ -6351,14 +9705,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         Log.v(ViewRootImpl.this.mTag, str + i);
                     }
                     i2--;
-                    long uptimeMillis2 = SystemClock.uptimeMillis();
+                    long jUptimeMillis2 = SystemClock.uptimeMillis();
                     int i6 = i;
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(uptimeMillis2, uptimeMillis2, 0, i6, 0, metaState, -1, 0, 1024, 257));
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(uptimeMillis2, uptimeMillis2, 1, i6, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(jUptimeMillis2, jUptimeMillis2, 0, i6, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(jUptimeMillis2, jUptimeMillis2, 1, i6, 0, metaState, -1, 0, 1024, 257));
                     str = str;
-                    uptimeMillis = uptimeMillis2;
+                    jUptimeMillis = jUptimeMillis2;
                 }
-                this.mLastTime = uptimeMillis;
+                this.mLastTime = jUptimeMillis;
             }
         }
 
@@ -6517,11 +9871,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             int i = message.what;
             if ((i == 1 || i == 2) && ViewRootImpl.this.mAttachInfo.mHasWindowFocus) {
                 KeyEvent keyEvent = (KeyEvent) message.obj;
-                KeyEvent changeTimeRepeat = KeyEvent.changeTimeRepeat(keyEvent, SystemClock.uptimeMillis(), keyEvent.getRepeatCount() + 1);
-                ViewRootImpl.this.enqueueInputEvent(changeTimeRepeat);
-                Message obtainMessage = obtainMessage(message.what, changeTimeRepeat);
-                obtainMessage.setAsynchronous(true);
-                sendMessageDelayed(obtainMessage, ViewConfiguration.getKeyRepeatDelay());
+                KeyEvent keyEventChangeTimeRepeat = KeyEvent.changeTimeRepeat(keyEvent, SystemClock.uptimeMillis(), keyEvent.getRepeatCount() + 1);
+                ViewRootImpl.this.enqueueInputEvent(keyEventChangeTimeRepeat);
+                Message messageObtainMessage = obtainMessage(message.what, keyEventChangeTimeRepeat);
+                messageObtainMessage.setAsynchronous(true);
+                sendMessageDelayed(messageObtainMessage, ViewConfiguration.getKeyRepeatDelay());
             }
         }
 
@@ -6543,9 +9897,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             removeMessages(1);
             removeMessages(2);
             for (int i = 0; i < this.mDeviceKeyEvents.size(); i++) {
-                KeyEvent valueAt = this.mDeviceKeyEvents.valueAt(i);
-                if (valueAt != null) {
-                    ViewRootImpl.this.enqueueInputEvent(KeyEvent.changeTimeRepeat(valueAt, SystemClock.uptimeMillis(), 0));
+                KeyEvent keyEventValueAt = this.mDeviceKeyEvents.valueAt(i);
+                if (keyEventValueAt != null) {
+                    ViewRootImpl.this.enqueueInputEvent(KeyEvent.changeTimeRepeat(keyEventValueAt, SystemClock.uptimeMillis(), 0));
                 }
             }
             this.mDeviceKeyEvents.clear();
@@ -6607,7 +9961,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 char c;
                 int i3;
                 int i4;
-                int joystickAxisAndStateToKeycode;
+                int iJoystickAxisAndStateToKeycode;
                 if (isXAxis(i)) {
                     c = 0;
                     i2 = 1;
@@ -6619,23 +9973,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     i2 = 2;
                     c = 1;
                 }
-                int joystickAxisValueToState = joystickAxisValueToState(f);
+                int iJoystickAxisValueToState = joystickAxisValueToState(f);
                 if (i == 0 || i == 1) {
                     i3 = this.mAxisStatesStick[c];
                 } else {
                     i3 = this.mAxisStatesHat[c];
                 }
-                if (i3 == joystickAxisValueToState) {
+                if (i3 == iJoystickAxisValueToState) {
                     return;
                 }
                 int metaState = motionEvent.getMetaState();
                 int deviceId = motionEvent.getDeviceId();
                 int source = motionEvent.getSource();
                 if (i3 == 1 || i3 == -1) {
-                    int joystickAxisAndStateToKeycode2 = joystickAxisAndStateToKeycode(i, i3);
-                    if (joystickAxisAndStateToKeycode2 != 0) {
+                    int iJoystickAxisAndStateToKeycode2 = joystickAxisAndStateToKeycode(i, i3);
+                    if (iJoystickAxisAndStateToKeycode2 != 0) {
                         i4 = deviceId;
-                        ViewRootImpl.this.enqueueInputEvent(new KeyEvent(j, j, 1, joystickAxisAndStateToKeycode2, 0, metaState, deviceId, 0, 1024, source));
+                        ViewRootImpl.this.enqueueInputEvent(new KeyEvent(j, j, 1, iJoystickAxisAndStateToKeycode2, 0, metaState, deviceId, 0, 1024, source));
                         SyntheticJoystickHandler.this.mDeviceKeyEvents.put(i4, null);
                     } else {
                         i4 = deviceId;
@@ -6644,19 +9998,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 } else {
                     i4 = deviceId;
                 }
-                if ((joystickAxisValueToState == 1 || joystickAxisValueToState == -1) && (joystickAxisAndStateToKeycode = joystickAxisAndStateToKeycode(i, joystickAxisValueToState)) != 0) {
+                if ((iJoystickAxisValueToState == 1 || iJoystickAxisValueToState == -1) && (iJoystickAxisAndStateToKeycode = joystickAxisAndStateToKeycode(i, iJoystickAxisValueToState)) != 0) {
                     int i5 = i4;
-                    KeyEvent keyEvent = new KeyEvent(j, j, 0, joystickAxisAndStateToKeycode, 0, metaState, i5, 0, 1024, source);
+                    KeyEvent keyEvent = new KeyEvent(j, j, 0, iJoystickAxisAndStateToKeycode, 0, metaState, i5, 0, 1024, source);
                     ViewRootImpl.this.enqueueInputEvent(keyEvent);
-                    Message obtainMessage = SyntheticJoystickHandler.this.obtainMessage(i2, keyEvent);
-                    obtainMessage.setAsynchronous(true);
-                    SyntheticJoystickHandler.this.sendMessageDelayed(obtainMessage, ViewConfiguration.getKeyRepeatTimeout());
-                    SyntheticJoystickHandler.this.mDeviceKeyEvents.put(i5, new KeyEvent(j, j, 1, joystickAxisAndStateToKeycode, 0, metaState, i5, 0, 1056, source));
+                    Message messageObtainMessage = SyntheticJoystickHandler.this.obtainMessage(i2, keyEvent);
+                    messageObtainMessage.setAsynchronous(true);
+                    SyntheticJoystickHandler.this.sendMessageDelayed(messageObtainMessage, ViewConfiguration.getKeyRepeatTimeout());
+                    SyntheticJoystickHandler.this.mDeviceKeyEvents.put(i5, new KeyEvent(j, j, 1, iJoystickAxisAndStateToKeycode, 0, metaState, i5, 0, 1056, source));
                 }
                 if (i == 0 || i == 1) {
-                    this.mAxisStatesStick[c] = joystickAxisValueToState;
+                    this.mAxisStatesStick[c] = iJoystickAxisValueToState;
                 } else {
-                    this.mAxisStatesHat[c] = joystickAxisValueToState;
+                    this.mAxisStatesHat[c] = iJoystickAxisValueToState;
                 }
             }
 
@@ -6763,9 +10117,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void process(KeyEvent keyEvent) {
             KeyCharacterMap.FallbackAction fallbackAction;
             if ((keyEvent.getFlags() & 1024) == 0 && (fallbackAction = keyEvent.getKeyCharacterMap().getFallbackAction(keyEvent.getKeyCode(), keyEvent.getMetaState())) != null) {
-                KeyEvent obtain = KeyEvent.obtain(keyEvent.getDownTime(), keyEvent.getEventTime(), keyEvent.getAction(), fallbackAction.keyCode, keyEvent.getRepeatCount(), fallbackAction.metaState, keyEvent.getDeviceId(), keyEvent.getScanCode(), keyEvent.getFlags() | 1024, keyEvent.getSource(), null);
+                KeyEvent keyEventObtain = KeyEvent.obtain(keyEvent.getDownTime(), keyEvent.getEventTime(), keyEvent.getAction(), fallbackAction.keyCode, keyEvent.getRepeatCount(), fallbackAction.metaState, keyEvent.getDeviceId(), keyEvent.getScanCode(), keyEvent.getFlags() | 1024, keyEvent.getSource(), null);
                 fallbackAction.recycle();
-                ViewRootImpl.this.enqueueInputEvent(obtain);
+                ViewRootImpl.this.enqueueInputEvent(keyEventObtain);
             }
         }
     }
@@ -6856,8 +10210,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (i == 3 && dragEvent.mClipData != null) {
                     dragEvent.mClipData.prepareToEnterProcess(this.mView.getContext().getAttributionSource());
                 }
-                boolean dispatchDragEvent = this.mView.dispatchDragEvent(dragEvent);
-                if (!dispatchDragEvent && i == 1 && dragEvent.isStickyEvent()) {
+                boolean zDispatchDragEvent = this.mView.dispatchDragEvent(dragEvent);
+                if (!zDispatchDragEvent && i == 1 && dragEvent.isStickyEvent()) {
                     Log.i(this.mTag, "Save sticky drag event");
                     this.mSavedStickyDragEvent = DragEvent.obtain(dragEvent);
                 }
@@ -6866,8 +10220,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 } else if (i == 4) {
                     InputManagerGlobal.getInstance().clreaDragPointerInfo();
                 }
-                boolean isEavesDrop = dragEvent.isEavesDrop();
-                if (i == 2 && !isEavesDrop) {
+                boolean zIsEavesDrop = dragEvent.isEavesDrop();
+                if (i == 2 && !zIsEavesDrop) {
                     if (dragEvent.mEventHandlerWasCalled) {
                         InputManagerGlobal.getInstance().setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1021));
                     } else {
@@ -6893,8 +10247,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 if (i == 3) {
                     try {
-                        Log.i(this.mTag, "Reporting drop result: " + dispatchDragEvent);
-                        this.mWindowSession.reportDropResult(this.mWindow, dispatchDragEvent);
+                        Log.i(this.mTag, "Reporting drop result: " + zDispatchDragEvent);
+                        this.mWindowSession.reportDropResult(this.mWindow, zDispatchDragEvent);
                     } catch (RemoteException unused2) {
                         Log.e(this.mTag, "Unable to report drop result");
                     }
@@ -7077,21 +10431,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean shouldNotLocalLayout(WindowConfiguration windowConfiguration) {
-        if (windowConfiguration.isOverlappingWithCutout()) {
-            return true;
-        }
-        if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT) {
-            DisplayCutout displayCutout = this.mInsetsController.getState().getDisplayCutout();
-            int max = Math.max(Math.max(displayCutout.getSafeInsetLeft(), displayCutout.getSafeInsetRight()), Math.max(displayCutout.getSafeInsetTop(), displayCutout.getSafeInsetBottom()));
-            return max > 0 && max <= this.mMinimumSizeForOverlappingWithCutoutAsDefault;
-        }
         if ((CoreRune.MW_EMBED_ACTIVITY && shouldNotLocalLayoutEmbedded(windowConfiguration)) || shouldNotLocalLayoutPopOver(windowConfiguration)) {
             return true;
         }
         if (CoreRune.FW_FLIP_FULL_COVER_SCREEN && this.mDisplay.getDisplayId() == 1) {
             return true;
         }
-        return (android.view.inputmethod.Flags.refactorInsetsController() && this.mInsetsController.hasImeOverriddenLocalVisibility()) || this.mInsetsController.hasPendingFrame();
+        if ((android.view.inputmethod.Flags.refactorInsetsController() && this.mInsetsController.hasImeOverriddenLocalVisibility()) || this.mInsetsController.hasPendingFrame() || windowConfiguration.isOverlappingWithCutout()) {
+            return true;
+        }
+        if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT) {
+            DisplayCutout displayCutout = this.mInsetsController.getState().getDisplayCutout();
+            int iMax = Math.max(Math.max(displayCutout.getSafeInsetLeft(), displayCutout.getSafeInsetRight()), Math.max(displayCutout.getSafeInsetTop(), displayCutout.getSafeInsetBottom()));
+            if (iMax > 0 && iMax <= this.mMinimumSizeForOverlappingWithCutoutAsDefault) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean shouldNotLocalLayoutEmbedded(WindowConfiguration windowConfiguration) {
@@ -7099,47 +10455,345 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean shouldNotLocalLayoutPopOver(WindowConfiguration windowConfiguration) {
-        InsetsSource peekSource;
-        return windowConfiguration.isPopOver() && (peekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME)) != null && peekSource.isVisible();
+        InsetsSource insetsSourcePeekSource;
+        return windowConfiguration.isPopOver() && (insetsSourcePeekSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME)) != null && insetsSourcePeekSource.isVisible();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x03b3  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0471  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x0473  */
-    /* JADX WARN: Removed duplicated region for block: B:109:0x0390  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x02d3  */
-    /* JADX WARN: Removed duplicated region for block: B:117:0x02a2  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0200  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x01df  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x02a0  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x02d1  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x02fe  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0349  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0371  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x03ae  */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x02b0  */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x02df  */
+    /* JADX WARN: Removed duplicated region for block: B:104:0x02e1  */
+    /* JADX WARN: Removed duplicated region for block: B:113:0x0303  */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x030c  */
+    /* JADX WARN: Removed duplicated region for block: B:126:0x0357  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x037f  */
+    /* JADX WARN: Removed duplicated region for block: B:135:0x039e  */
+    /* JADX WARN: Removed duplicated region for block: B:142:0x03bc  */
+    /* JADX WARN: Removed duplicated region for block: B:144:0x03c1  */
+    /* JADX WARN: Removed duplicated region for block: B:147:0x047f  */
+    /* JADX WARN: Removed duplicated region for block: B:148:0x0481  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x0175  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x01ed  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x020e  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x02ae  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int relayoutWindow(android.view.WindowManager.LayoutParams r28, int r29, boolean r30) throws android.os.RemoteException {
-        /*
-            Method dump skipped, instructions count: 1161
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.relayoutWindow(android.view.WindowManager$LayoutParams, int, boolean):int");
+    private int relayoutWindow(WindowManager.LayoutParams layoutParams, int i, boolean z) throws RemoteException {
+        int i2;
+        int i3;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        int i4;
+        WindowConfiguration windowConfiguration;
+        int i5;
+        boolean z5;
+        boolean z6;
+        int i6;
+        int iRelayout;
+        ActivityWindowInfo activityWindowInfo;
+        int i7;
+        boolean z7;
+        Rect rect;
+        WindowConfiguration windowConfiguration2 = getConfiguration().windowConfiguration;
+        WindowConfiguration windowConfiguration3 = this.mLastReportedMergedConfiguration.getMergedConfiguration().windowConfiguration;
+        WindowConfiguration compatWindowConfiguration = getCompatWindowConfiguration();
+        int i8 = this.mMeasuredWidth;
+        int i9 = this.mMeasuredHeight;
+        if ((this.mViewFrameInfo.flags & 1) == 0 && this.mWindowAttributes.type != 3 && this.mSyncSeqId <= this.mLastSyncSeqId && windowConfiguration2.diff(windowConfiguration3, false) == 0 && !shouldNotLocalLayout(compatWindowConfiguration)) {
+            InsetsState state = this.mInsetsController.getState();
+            Rect rect2 = this.mTempRect;
+            state.getDisplayCutoutSafe(rect2);
+            this.mTmpAttrs.copyFrom(this.mWindowAttributes.forRotation(compatWindowConfiguration.getRotation()));
+            int i10 = this.mCutoutPolicy;
+            if (i10 == 2) {
+                this.mTmpAttrs.layoutInDisplayCutoutMode = 2;
+            } else if (i10 == 1) {
+                this.mTmpAttrs.layoutInDisplayCutoutMode = 3;
+            }
+            z2 = false;
+            this.mWindowLayout.computeFrames(this.mTmpAttrs, state, rect2, compatWindowConfiguration.getBounds(), compatWindowConfiguration.getWindowingMode(), i8, i9, this.mInsetsController.getRequestedVisibleTypes(), 1.0f, this.mTmpFrames, compatWindowConfiguration.getStageType(), null, false);
+            i2 = i8;
+            i3 = i9;
+            this.mWinFrameInScreen.set(this.mTmpFrames.frame);
+            CompatibilityInfo.Translator translator = this.mTranslator;
+            if (translator != null) {
+                translator.translateRectInAppWindowToScreen(this.mWinFrameInScreen);
+            }
+            Rect rect3 = this.mLastLayoutFrame;
+            Rect rect4 = this.mTmpFrames.frame;
+            Object[] objArr = (rect4.top == rect3.top && rect4.left == rect3.left) ? false : true;
+            Object[] objArr2 = (rect4.width() == rect3.width() && rect4.height() == rect3.height()) ? false : true;
+            z3 = (objArr == true && objArr2 == true) ? false : true;
+            if (z3 && (rect = this.mPendingWinFrame) != null && (rect.width() != rect4.width() || this.mPendingWinFrame.height() != rect4.height())) {
+                Log.i(this.mTag, "Request to relayout frame from wm due to using pendingFrame=" + this.mPendingWinFrame + " instead of newFrame=" + rect4);
+                this.mPendingWinFrame = null;
+                z3 = false;
+            }
+            if (z3 && compatWindowConfiguration.getRotation() == 2 && this.mDisplay.getDisplayId() != 0 && (rect4.width() != this.mWinFrame.width() || rect4.height() != this.mWinFrame.height())) {
+                Log.i(this.mTag, "Request to relayout frame because WindowFrame is changed by handleResized");
+                z3 = false;
+            }
+            if (objArr2 != false && this.mCutoutPolicy == 2) {
+                Log.i(this.mTag, "Window frame is changed and cutout policy is overlap, so should not to request relayout async");
+            }
+            float f = this.mAttachInfo.mApplicationScale;
+            if (layoutParams != null || this.mTranslator == null) {
+                z4 = z2;
+            } else {
+                layoutParams.backup();
+                this.mTranslator.translateWindowLayout(layoutParams);
+                z4 = true;
+            }
+            if (layoutParams != null && this.mOrigWindowType != layoutParams.type && this.mTargetSdkVersion < 14) {
+                Slog.w(this.mTag, "Window type can not be changed after the window is added; ignoring change of " + this.mView);
+                layoutParams.type = this.mOrigWindowType;
+            }
+            StringBuilder sb = new StringBuilder(NavigationBarInflaterView.KEY_CODE_START);
+            sb.append(this.mWinFrame.left);
+            sb.append(',');
+            sb.append(this.mWinFrame.top);
+            sb.append(',');
+            sb.append(this.mWinFrame.right);
+            sb.append(',');
+            sb.append(this.mWinFrame.bottom);
+            sb.append(')');
+            int generationId = this.mSurface.getGenerationId();
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            int i11 = (int) ((i2 * f) + 0.5f);
+            int i12 = (int) ((i3 * f) + 0.5f);
+            int i13 = this.mRelayoutSeq + 1;
+            this.mRelayoutSeq = i13;
+            if (!z3) {
+                windowConfiguration = compatWindowConfiguration;
+                i4 = generationId;
+                i5 = i11;
+                z5 = true;
+                this.mWindowSession.relayoutAsync(this.mWindow, layoutParams, i5, i12, i, z ? 1 : 0, i13, this.mLastSyncSeqId);
+                z6 = z4;
+                iRelayout = 0;
+                i6 = 2;
+            } else {
+                i4 = generationId;
+                windowConfiguration = compatWindowConfiguration;
+                i5 = i11;
+                z5 = true;
+                z6 = z4;
+                i6 = 2;
+                iRelayout = this.mWindowSession.relayout(this.mWindow, layoutParams, i5, i12, i, z ? 1 : 0, i13, this.mLastSyncSeqId, this.mRelayoutResult);
+                this.mRelayoutRequested = true;
+                onClientWindowFramesChanged(this.mTmpFrames);
+                if (this.mPendingActivityWindowInfo != null && (activityWindowInfo = this.mRelayoutResult.activityWindowInfo) != null) {
+                    this.mPendingActivityWindowInfo.set(activityWindowInfo);
+                }
+                int i14 = this.mRelayoutResult.syncSeqId;
+                if (i14 > 0) {
+                    this.mSyncSeqId = i14;
+                }
+                int i15 = this.mRelayoutResult.cutoutPolicy;
+                if (i15 != this.mCutoutPolicy) {
+                    this.mCutoutPolicy = i15;
+                }
+                this.mWinFrameInScreen.set(this.mTmpFrames.frame);
+                CompatibilityInfo.Translator translator2 = this.mTranslator;
+                if (translator2 != null) {
+                    translator2.translateRectInScreenToAppWindow(this.mTmpFrames.frame);
+                    this.mTranslator.translateRectInScreenToAppWindow(this.mTmpFrames.displayFrame);
+                    this.mTranslator.translateRectInScreenToAppWindow(this.mTmpFrames.attachedFrame);
+                }
+                this.mInvCompatScale = 1.0f / this.mTmpFrames.compatScale;
+                CompatibilityInfo.applyOverrideIfNeeded(this.mPendingMergedConfiguration);
+                handleInsetsControlChanged(this.mTempInsets, this.mTempControls);
+                this.mPendingAlwaysConsumeSystemBars = (iRelayout & 8) != 0;
+            }
+            int iRotationToBufferTransform = SurfaceControl.rotationToBufferTransform((this.mDisplay.getInstallOrientation() + this.mDisplay.getRotation()) % 4);
+            boolean z8 = iRotationToBufferTransform == this.mPreviousTransformHint ? z5 : false;
+            this.mPreviousTransformHint = iRotationToBufferTransform;
+            this.mSurfaceControl.setTransformHint(iRotationToBufferTransform);
+            WindowLayout.computeSurfaceSize(this.mWindowAttributes, windowConfiguration.getMaxBounds(), i5, i12, this.mWinFrameInScreen, this.mPendingDragResizing, this.mSurfaceSize);
+            boolean zEquals = this.mLastSurfaceSize.equals(this.mSurfaceSize);
+            boolean z9 = (iRelayout & 2) != i6 ? z5 : false;
+            if (this.mAttachInfo.mThreadedRenderer == null && ((z8 || !zEquals || z9) && this.mAttachInfo.mThreadedRenderer.pause())) {
+                i7 = 0;
+                this.mDirty.set(0, 0, this.mWidth, this.mHeight);
+            } else {
+                i7 = 0;
+            }
+            if (this.mSurfaceControl.isValid()) {
+                if (this.mPendingDragResizing && !this.mSurfaceSize.equals(this.mWinFrameInScreen.width(), this.mWinFrameInScreen.height())) {
+                    this.mTransaction.setWindowCrop(this.mSurfaceControl, this.mWinFrameInScreen.width(), this.mWinFrameInScreen.height());
+                } else if (!HardwareRenderer.isDrawingEnabled()) {
+                    this.mTransaction.setWindowCrop(this.mSurfaceControl, this.mSurfaceSize.x, this.mSurfaceSize.y).apply();
+                }
+            }
+            if (this.mAttachInfo.mContentCaptureManager != null) {
+                ContentCaptureSession mainContentCaptureSession = this.mAttachInfo.mContentCaptureManager.getMainContentCaptureSession();
+                mainContentCaptureSession.notifyWindowBoundsChanged(mainContentCaptureSession.getId(), getConfiguration().windowConfiguration.getBounds());
+            }
+            z7 = z3;
+            long jCurrentTimeMillis2 = System.currentTimeMillis() - jCurrentTimeMillis;
+            if (!this.mSurfaceControl.isValid()) {
+                updateBlastSurfaceIfNeeded();
+                if (this.mAttachInfo.mThreadedRenderer != null) {
+                    this.mAttachInfo.mThreadedRenderer.setSurfaceControl(this.mSurfaceControl, this.mBlastBufferQueue);
+                }
+                this.mHdrRenderState.forceUpdateHdrSdrRatio();
+                if (z8) {
+                    dispatchTransformHintChanged(iRotationToBufferTransform);
+                }
+            } else {
+                if (this.mAttachInfo.mThreadedRenderer != null && this.mAttachInfo.mThreadedRenderer.pause()) {
+                    this.mDirty.set(i7, i7, this.mWidth, this.mHeight);
+                }
+                destroySurface();
+            }
+            if (!z7) {
+                updateCutoutRemoveNeeded(iRelayout);
+            }
+            if (z6) {
+                layoutParams.restore();
+            }
+            setFrame(this.mTmpFrames.frame, true);
+            StringBuilder sb2 = new StringBuilder(NavigationBarInflaterView.KEY_CODE_START);
+            sb2.append(this.mWinFrame.left);
+            sb2.append(',');
+            sb2.append(this.mWinFrame.top);
+            sb2.append(',');
+            sb2.append(this.mWinFrame.right);
+            sb2.append(',');
+            sb2.append(this.mWinFrame.bottom);
+            sb2.append(')');
+            String str = this.mTag;
+            StringBuilder sb3 = new StringBuilder("Relayout returned: old=");
+            sb3.append((CharSequence) sb);
+            sb3.append(" new=");
+            sb3.append((CharSequence) sb2);
+            sb3.append(" relayoutAsync=");
+            sb3.append(z7);
+            sb3.append(" req=(");
+            sb3.append(i5);
+            sb3.append(',');
+            sb3.append(i12);
+            sb3.append(')');
+            sb3.append(i);
+            sb3.append(" dur=");
+            sb3.append(jCurrentTimeMillis2);
+            sb3.append(" res=0x");
+            sb3.append(Integer.toHexString(iRelayout));
+            sb3.append(" s={");
+            sb3.append(this.mSurface.isValid());
+            sb3.append(' ');
+            sb3.append("0x" + Long.toHexString(this.mSurface.mNativeObject));
+            sb3.append("} ch=");
+            sb3.append(i4 == this.mSurface.getGenerationId() ? 1 : i7);
+            sb3.append(" seqId=");
+            sb3.append(this.mSyncSeqId);
+            Log.i(str, sb3.toString());
+            return iRelayout;
+        }
+        i2 = i8;
+        i3 = i9;
+        z2 = false;
+        z3 = z2;
+        float f2 = this.mAttachInfo.mApplicationScale;
+        if (layoutParams != null) {
+            z4 = z2;
+        }
+        if (layoutParams != null) {
+            Slog.w(this.mTag, "Window type can not be changed after the window is added; ignoring change of " + this.mView);
+            layoutParams.type = this.mOrigWindowType;
+        }
+        StringBuilder sb4 = new StringBuilder(NavigationBarInflaterView.KEY_CODE_START);
+        sb4.append(this.mWinFrame.left);
+        sb4.append(',');
+        sb4.append(this.mWinFrame.top);
+        sb4.append(',');
+        sb4.append(this.mWinFrame.right);
+        sb4.append(',');
+        sb4.append(this.mWinFrame.bottom);
+        sb4.append(')');
+        int generationId2 = this.mSurface.getGenerationId();
+        long jCurrentTimeMillis3 = System.currentTimeMillis();
+        int i112 = (int) ((i2 * f2) + 0.5f);
+        int i122 = (int) ((i3 * f2) + 0.5f);
+        int i132 = this.mRelayoutSeq + 1;
+        this.mRelayoutSeq = i132;
+        if (!z3) {
+        }
+        int iRotationToBufferTransform2 = SurfaceControl.rotationToBufferTransform((this.mDisplay.getInstallOrientation() + this.mDisplay.getRotation()) % 4);
+        if (iRotationToBufferTransform2 == this.mPreviousTransformHint) {
+        }
+        this.mPreviousTransformHint = iRotationToBufferTransform2;
+        this.mSurfaceControl.setTransformHint(iRotationToBufferTransform2);
+        WindowLayout.computeSurfaceSize(this.mWindowAttributes, windowConfiguration.getMaxBounds(), i5, i122, this.mWinFrameInScreen, this.mPendingDragResizing, this.mSurfaceSize);
+        boolean zEquals2 = this.mLastSurfaceSize.equals(this.mSurfaceSize);
+        if ((iRelayout & 2) != i6) {
+        }
+        if (this.mAttachInfo.mThreadedRenderer == null) {
+            i7 = 0;
+        }
+        if (this.mSurfaceControl.isValid()) {
+        }
+        if (this.mAttachInfo.mContentCaptureManager != null) {
+        }
+        z7 = z3;
+        long jCurrentTimeMillis22 = System.currentTimeMillis() - jCurrentTimeMillis3;
+        if (!this.mSurfaceControl.isValid()) {
+        }
+        if (!z7) {
+        }
+        if (z6) {
+        }
+        setFrame(this.mTmpFrames.frame, true);
+        StringBuilder sb22 = new StringBuilder(NavigationBarInflaterView.KEY_CODE_START);
+        sb22.append(this.mWinFrame.left);
+        sb22.append(',');
+        sb22.append(this.mWinFrame.top);
+        sb22.append(',');
+        sb22.append(this.mWinFrame.right);
+        sb22.append(',');
+        sb22.append(this.mWinFrame.bottom);
+        sb22.append(')');
+        String str2 = this.mTag;
+        StringBuilder sb32 = new StringBuilder("Relayout returned: old=");
+        sb32.append((CharSequence) sb4);
+        sb32.append(" new=");
+        sb32.append((CharSequence) sb22);
+        sb32.append(" relayoutAsync=");
+        sb32.append(z7);
+        sb32.append(" req=(");
+        sb32.append(i5);
+        sb32.append(',');
+        sb32.append(i122);
+        sb32.append(')');
+        sb32.append(i);
+        sb32.append(" dur=");
+        sb32.append(jCurrentTimeMillis22);
+        sb32.append(" res=0x");
+        sb32.append(Integer.toHexString(iRelayout));
+        sb32.append(" s={");
+        sb32.append(this.mSurface.isValid());
+        sb32.append(' ');
+        sb32.append("0x" + Long.toHexString(this.mSurface.mNativeObject));
+        sb32.append("} ch=");
+        sb32.append(i4 == this.mSurface.getGenerationId() ? 1 : i7);
+        sb32.append(" seqId=");
+        sb32.append(this.mSyncSeqId);
+        Log.i(str2, sb32.toString());
+        return iRelayout;
     }
 
     private void updateOpacity(WindowManager.LayoutParams layoutParams, boolean z, boolean z2) {
-        boolean z3 = !PixelFormat.formatHasAlpha(layoutParams.format) && layoutParams.surfaceInsets.left == 0 && layoutParams.surfaceInsets.top == 0 && layoutParams.surfaceInsets.right == 0 && layoutParams.surfaceInsets.bottom == 0 && !z;
-        if (z2 || this.mIsSurfaceOpaque != z3) {
+        boolean surfaceControlOpaque = !PixelFormat.formatHasAlpha(layoutParams.format) && layoutParams.surfaceInsets.left == 0 && layoutParams.surfaceInsets.top == 0 && layoutParams.surfaceInsets.right == 0 && layoutParams.surfaceInsets.bottom == 0 && !z;
+        if (z2 || this.mIsSurfaceOpaque != surfaceControlOpaque) {
             ThreadedRenderer threadedRenderer = this.mAttachInfo.mThreadedRenderer;
             if (threadedRenderer != null && threadedRenderer.rendererOwnsSurfaceControlOpacity()) {
-                z3 = threadedRenderer.setSurfaceControlOpaque(z3);
+                surfaceControlOpaque = threadedRenderer.setSurfaceControlOpaque(surfaceControlOpaque);
             } else {
-                this.mTransaction.setOpaque(this.mSurfaceControl, z3).apply();
+                this.mTransaction.setOpaque(this.mSurfaceControl, surfaceControlOpaque).apply();
             }
-            this.mIsSurfaceOpaque = z3;
+            this.mIsSurfaceOpaque = surfaceControlOpaque;
         }
     }
 
@@ -7235,11 +10889,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return false;
         }
         try {
-            List<PackageManager.Property> queryApplicationProperty = this.mContext.getPackageManager().queryApplicationProperty(WindowManager.PROPERTY_COMPAT_ALLOW_SANDBOXING_VIEW_BOUNDS_APIS);
-            if (queryApplicationProperty.isEmpty()) {
+            List<PackageManager.Property> listQueryApplicationProperty = this.mContext.getPackageManager().queryApplicationProperty(WindowManager.PROPERTY_COMPAT_ALLOW_SANDBOXING_VIEW_BOUNDS_APIS);
+            if (listQueryApplicationProperty.isEmpty()) {
                 return true;
             }
-            return queryApplicationProperty.get(0).getBoolean();
+            return listQueryApplicationProperty.get(0).getBoolean();
         } catch (RuntimeException unused) {
             return true;
         }
@@ -7323,7 +10977,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, Objects.toString(this.mView));
         protoOutputStream.write(1120986464258L, this.mDisplay.getDisplayId());
         protoOutputStream.write(1133871366147L, this.mAppVisible);
@@ -7340,7 +10994,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         protoOutputStream.write(1120986464271L, this.mCurScrollY);
         protoOutputStream.write(1133871366160L, this.mRemoved);
         this.mWindowAttributes.dumpDebug(protoOutputStream, 1146756268049L);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         this.mInsetsController.dumpDebug(protoOutputStream, 1146756268036L);
         this.mImeFocusController.dumpDebug(protoOutputStream, 1146756268039L);
     }
@@ -7486,6 +11140,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 return;
             }
             this.mRemoved = true;
+            if (this.mAdded && this.mRelaunching && android.view.inputmethod.Flags.refactorInsetsController()) {
+                this.mInsetsController.reportRequestedVisibleTypes(null);
+            }
             this.mOnBackInvokedDispatcher.detachFromWindow();
             removeVrrMessages();
             if (this.mAdded) {
@@ -7528,9 +11185,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (ViewRootImpl.this.mAttachInfo.mThreadedRenderer != null && ViewRootImpl.this.mAttachInfo.mThreadedRenderer.loadSystemProperties()) {
                     ViewRootImpl.this.invalidate();
                 }
-                boolean booleanValue = DisplayProperties.debug_layout().orElse(false).booleanValue();
-                if (booleanValue != ViewRootImpl.this.mAttachInfo.mDebugLayout) {
-                    ViewRootImpl.this.mAttachInfo.mDebugLayout = booleanValue;
+                boolean zBooleanValue = DisplayProperties.debug_layout().orElse(false).booleanValue();
+                if (zBooleanValue != ViewRootImpl.this.mAttachInfo.mDebugLayout) {
+                    ViewRootImpl.this.mAttachInfo.mDebugLayout = zBooleanValue;
                     if (ViewRootImpl.this.mHandler.hasMessages(22)) {
                         return;
                     }
@@ -7565,32 +11222,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchResized(ClientWindowFrames clientWindowFrames, boolean z, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean z2, boolean z3, int i, int i2, boolean z4, ActivityWindowInfo activityWindowInfo) {
-        Message obtainMessage = this.mHandler.obtainMessage(z ? 5 : 4);
-        SomeArgs obtain = SomeArgs.obtain();
+        Message messageObtainMessage = this.mHandler.obtainMessage(z ? 5 : 4);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
         Rect rect = clientWindowFrames.frame;
         Log.i(this.mTag, "Resizing " + this + ": frame = " + rect.toShortString() + " reportDraw = " + z + " forceLayout = " + z2 + " syncSeqId = " + i2);
         if (this.mWindowAttributes.type == 1) {
             this.mPendingWinFrame = clientWindowFrames.frame;
         }
-        obtain.arg1 = clientWindowFrames;
-        obtain.arg2 = mergedConfiguration;
-        obtain.arg3 = insetsState;
-        obtain.arg4 = activityWindowInfo;
-        obtain.argi1 = z2 ? 1 : 0;
-        obtain.argi2 = z3 ? 1 : 0;
-        obtain.argi3 = i;
-        obtain.argi4 = i2;
-        obtain.argi5 = z4 ? 1 : 0;
-        obtainMessage.obj = obtain;
-        this.mHandler.sendMessage(obtainMessage);
+        someArgsObtain.arg1 = clientWindowFrames;
+        someArgsObtain.arg2 = mergedConfiguration;
+        someArgsObtain.arg3 = insetsState;
+        someArgsObtain.arg4 = activityWindowInfo;
+        someArgsObtain.argi1 = z2 ? 1 : 0;
+        someArgsObtain.argi2 = z3 ? 1 : 0;
+        someArgsObtain.argi3 = i;
+        someArgsObtain.argi4 = i2;
+        someArgsObtain.argi5 = z4 ? 1 : 0;
+        messageObtainMessage.obj = someArgsObtain;
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchInsetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array array) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = insetsState;
-        obtain.arg2 = array;
-        this.mHandler.obtainMessage(29, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = insetsState;
+        someArgsObtain.arg2 = array;
+        this.mHandler.obtainMessage(29, someArgsObtain).sendToTarget();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -7716,7 +11373,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (CoreRune.FW_SPEN_HOVER && (inputEvent instanceof KeyEvent) && (((KeyEvent) inputEvent).getFlags() & 33554432) != 0) {
             i |= 1;
         }
-        QueuedInputEvent obtainQueuedInputEvent = obtainQueuedInputEvent(inputEvent, inputEventReceiver, i);
+        QueuedInputEvent queuedInputEventObtainQueuedInputEvent = obtainQueuedInputEvent(inputEvent, inputEventReceiver, i);
         if (inputEvent instanceof MotionEvent) {
             if (((MotionEvent) inputEvent).getAction() == 3) {
                 EventLog.writeEvent(EventLogTags.VIEW_ENQUEUE_INPUT_EVENT, "Motion - Cancel", getTitle().toString());
@@ -7726,21 +11383,21 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         QueuedInputEvent queuedInputEvent = this.mPendingInputEventTail;
         if (queuedInputEvent == null) {
-            this.mPendingInputEventHead = obtainQueuedInputEvent;
-            this.mPendingInputEventTail = obtainQueuedInputEvent;
+            this.mPendingInputEventHead = queuedInputEventObtainQueuedInputEvent;
+            this.mPendingInputEventTail = queuedInputEventObtainQueuedInputEvent;
         } else {
-            queuedInputEvent.mNext = obtainQueuedInputEvent;
-            this.mPendingInputEventTail = obtainQueuedInputEvent;
+            queuedInputEvent.mNext = queuedInputEventObtainQueuedInputEvent;
+            this.mPendingInputEventTail = queuedInputEventObtainQueuedInputEvent;
         }
         int i2 = this.mPendingInputEventCount + 1;
         this.mPendingInputEventCount = i2;
         Trace.traceCounter(4L, this.mPendingInputEventQueueLengthCounterName, i2);
         if (z) {
             doProcessInputEvents();
-            return obtainQueuedInputEvent;
+            return queuedInputEventObtainQueuedInputEvent;
         }
         scheduleProcessInputEvents();
-        return obtainQueuedInputEvent;
+        return queuedInputEventObtainQueuedInputEvent;
     }
 
     private void scheduleProcessInputEvents() {
@@ -7748,9 +11405,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         this.mProcessInputEventsScheduled = true;
-        Message obtainMessage = this.mHandler.obtainMessage(19);
-        obtainMessage.setAsynchronous(true);
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(19);
+        messageObtainMessage.setAsynchronous(true);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     void doProcessInputEvents() {
@@ -7784,32 +11441,85 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00e6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:43:0x00e6, code lost:
     
         r9 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x00ea, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:45:0x00ea, code lost:
     
         throw r9;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:71:0x012d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x012d, code lost:
     
         r9 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x0131, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x0131, code lost:
     
         throw r9;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void deliverInputEvent(android.view.ViewRootImpl.QueuedInputEvent r10) {
-        /*
-            Method dump skipped, instructions count: 306
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.deliverInputEvent(android.view.ViewRootImpl$QueuedInputEvent):void");
+    private void deliverInputEvent(QueuedInputEvent queuedInputEvent) {
+        InputStage inputStage;
+        Trace.asyncTraceBegin(8L, "deliverInputEvent", queuedInputEvent.mEvent.getId());
+        boolean z = queuedInputEvent.mEvent instanceof MotionEvent;
+        if (z) {
+            MotionEvent motionEvent = (MotionEvent) queuedInputEvent.mEvent;
+            if (checkPalmRejection(motionEvent) && getPalmRejection(motionEvent)) {
+                motionEvent.setAction(3);
+            }
+        }
+        if (z && (queuedInputEvent.mEvent.getSource() & 16) == 0) {
+            CompatSandbox.applyMotionEventSandboxingIfNeeded(this.mLastReportedMergedConfiguration.getMergedConfiguration(), (MotionEvent) queuedInputEvent.mEvent);
+        }
+        if (CoreRune.BIXBY_TOUCH && z && this.mSemPressGestureDetector != null) {
+            MotionEvent motionEvent2 = (MotionEvent) queuedInputEvent.mEvent;
+            if (motionEvent2.getAction() == 0) {
+                this.mBixbyTouchTriggered = false;
+                this.mCanTriggerBixbyTouch = true;
+                if (this.mSemPressGestureDetector.isInitFailed()) {
+                    this.mSemPressGestureDetector.init(this.mContext, this.mView);
+                }
+            } else if (this.mBixbyTouchTriggered) {
+                if (motionEvent2.getAction() == 1) {
+                    this.mSemPressGestureDetector.dispatchTouchEvent(motionEvent2);
+                }
+                finishInputEvent(queuedInputEvent);
+                return;
+            }
+            if (this.mCanTriggerBixbyTouch && this.mSemPressGestureDetector.dispatchTouchEvent(motionEvent2)) {
+                motionEvent2.setAction(3);
+                this.mBixbyTouchTriggered = true;
+            }
+        }
+        if (Trace.isTagEnabled(8L)) {
+            Trace.traceBegin(8L, "deliverInputEvent src=0x" + Integer.toHexString(queuedInputEvent.mEvent.getSource()) + " eventTimeNano=" + queuedInputEvent.mEvent.getEventTimeNanos() + " id=0x" + Integer.toHexString(queuedInputEvent.mEvent.getId()));
+        }
+        try {
+            if (this.mInputEventConsistencyVerifier != null) {
+                Trace.traceBegin(8L, "verifyEventConsistency");
+                this.mInputEventConsistencyVerifier.onInputEvent(queuedInputEvent.mEvent, 0);
+                Trace.traceEnd(8L);
+            }
+            if (queuedInputEvent.shouldSendToSynthesizer()) {
+                inputStage = this.mSyntheticInputStage;
+            } else {
+                inputStage = queuedInputEvent.shouldSkipIme() ? this.mFirstPostImeInputStage : this.mFirstInputStage;
+            }
+            if (queuedInputEvent.mEvent instanceof KeyEvent) {
+                Trace.traceBegin(8L, "preDispatchToUnhandledKeyManager");
+                this.mUnhandledKeyManager.preDispatch((KeyEvent) queuedInputEvent.mEvent);
+                Trace.traceEnd(8L);
+            }
+            if (inputStage != null) {
+                handleWindowFocusChanged();
+                inputStage.deliver(queuedInputEvent);
+            } else {
+                finishInputEvent(queuedInputEvent);
+            }
+        } finally {
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -7820,9 +11530,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if ((queuedInputEvent.mFlags & 64) != 0) {
                 Trace.traceBegin(8L, "processInputEventBeforeFinish");
                 try {
-                    InputEvent processInputEventBeforeFinish = this.mInputCompatProcessor.processInputEventBeforeFinish(queuedInputEvent.mEvent);
-                    if (processInputEventBeforeFinish != null) {
-                        queuedInputEvent.mReceiver.finishInputEvent(processInputEventBeforeFinish, z);
+                    InputEvent inputEventProcessInputEventBeforeFinish = this.mInputCompatProcessor.processInputEventBeforeFinish(queuedInputEvent.mEvent);
+                    if (inputEventProcessInputEventBeforeFinish != null) {
+                        queuedInputEvent.mReceiver.finishInputEvent(inputEventProcessInputEventBeforeFinish, z);
                     }
                 } finally {
                     Trace.traceEnd(8L);
@@ -7882,9 +11592,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     boolean doConsumeBatchedInput(long j) {
         WindowInputEventReceiver windowInputEventReceiver = this.mInputEventReceiver;
-        boolean consumeBatchedInputEvents = windowInputEventReceiver != null ? windowInputEventReceiver.consumeBatchedInputEvents(j) : false;
+        boolean zConsumeBatchedInputEvents = windowInputEventReceiver != null ? windowInputEventReceiver.consumeBatchedInputEvents(j) : false;
         doProcessInputEvents();
-        return consumeBatchedInputEvents;
+        return zConsumeBatchedInputEvents;
     }
 
     final class TraversalRunnable implements Runnable {
@@ -7892,7 +11602,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws Throwable {
             ViewRootImpl.this.doTraversal();
         }
     }
@@ -8110,15 +11820,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         String str;
         Trace.traceBegin(8L, "processInputEventForCompatibility");
         try {
-            List<InputEvent> processInputEventForCompatibility = this.mInputCompatProcessor.processInputEventForCompatibility(inputEvent);
+            List<InputEvent> listProcessInputEventForCompatibility = this.mInputCompatProcessor.processInputEventForCompatibility(inputEvent);
             Trace.traceEnd(8L);
-            if (processInputEventForCompatibility != null) {
-                if (processInputEventForCompatibility.isEmpty()) {
+            if (listProcessInputEventForCompatibility != null) {
+                if (listProcessInputEventForCompatibility.isEmpty()) {
                     this.mInputEventReceiver.finishInputEvent(inputEvent, true);
                     return;
                 }
-                for (int i = 0; i < processInputEventForCompatibility.size(); i++) {
-                    enqueueInputEvent(processInputEventForCompatibility.get(i), this.mInputEventReceiver, 64, true);
+                for (int i = 0; i < listProcessInputEventForCompatibility.size(); i++) {
+                    enqueueInputEvent(listProcessInputEventForCompatibility.get(i), this.mInputEventReceiver, 64, true);
                 }
                 return;
             }
@@ -8164,30 +11874,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void dispatchInputEvent(InputEvent inputEvent, InputEventReceiver inputEventReceiver) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = inputEvent;
-        obtain.arg2 = inputEventReceiver;
-        Message obtainMessage = this.mHandler.obtainMessage(7, obtain);
-        obtainMessage.setAsynchronous(true);
-        this.mHandler.sendMessage(obtainMessage);
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = inputEvent;
+        someArgsObtain.arg2 = inputEventReceiver;
+        Message messageObtainMessage = this.mHandler.obtainMessage(7, someArgsObtain);
+        messageObtainMessage.setAsynchronous(true);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     public void synthesizeInputEvent(InputEvent inputEvent) {
-        Message obtainMessage = this.mHandler.obtainMessage(24, inputEvent);
-        obtainMessage.setAsynchronous(true);
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(24, inputEvent);
+        messageObtainMessage.setAsynchronous(true);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     public void dispatchKeyFromIme(KeyEvent keyEvent) {
-        Message obtainMessage = this.mHandler.obtainMessage(11, keyEvent);
-        obtainMessage.setAsynchronous(true);
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(11, keyEvent);
+        messageObtainMessage.setAsynchronous(true);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     public void dispatchKeyFromAutofill(KeyEvent keyEvent) {
-        Message obtainMessage = this.mHandler.obtainMessage(12, keyEvent);
-        obtainMessage.setAsynchronous(true);
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(12, keyEvent);
+        messageObtainMessage.setAsynchronous(true);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     public void dispatchUnhandledInputEvent(InputEvent inputEvent) {
@@ -8200,9 +11910,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public void dispatchAppVisibility(boolean z) {
         this.mSemEarlyAppVisibilityChanged = true;
         this.mSemEarlyAppVisibility = z;
-        Message obtainMessage = this.mHandler.obtainMessage(8);
-        obtainMessage.arg1 = z ? 1 : 0;
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(8);
+        messageObtainMessage.arg1 = z ? 1 : 0;
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     public void dispatchGetNewSurface() {
@@ -8214,18 +11924,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mWindowFocusChanged = true;
             this.mUpcomingWindowFocus = z;
         }
-        Message obtain = Message.obtain();
-        obtain.what = 6;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 6;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     public void touchModeChanged(boolean z) {
         synchronized (this) {
             this.mUpcomingInTouchMode = z;
         }
-        Message obtain = Message.obtain();
-        obtain.what = 34;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 34;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     public void dispatchWindowShown() {
@@ -8233,10 +11943,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void dispatchCloseSystemDialogs(String str) {
-        Message obtain = Message.obtain();
-        obtain.what = 14;
-        obtain.obj = str;
-        this.mHandler.sendMessage(obtain);
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 14;
+        messageObtain.obj = str;
+        this.mHandler.sendMessage(messageObtain);
     }
 
     public void dispatchDragEvent(DragEvent dragEvent) {
@@ -8279,9 +11989,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             offsetX = 0.0f;
             offsetY = 0.0f;
         }
-        DragEvent obtain = DragEvent.obtain(i, x, y, offsetX, offsetY, getDisplayId(), dragEvent.getDragFlags(), dragEvent.mLocalState, dragEvent.getClipDescription(), dragEvent.mClipData, 6 == i ? null : dragEvent.getDragSurface(), dragEvent.mDragAndDropPermissions, dragEvent.mDragResult);
+        DragEvent dragEventObtain = DragEvent.obtain(i, x, y, offsetX, offsetY, getDisplayId(), dragEvent.getDragFlags(), dragEvent.mLocalState, dragEvent.getClipDescription(), dragEvent.mClipData, 6 == i ? null : dragEvent.getDragSurface(), dragEvent.mDragAndDropPermissions, dragEvent.mDragResult);
         ViewRootHandler viewRootHandler = this.mHandler;
-        viewRootHandler.sendMessage(viewRootHandler.obtainMessage(15, obtain));
+        viewRootHandler.sendMessage(viewRootHandler.obtainMessage(15, dragEventObtain));
     }
 
     public void dispatchCheckFocus() {
@@ -8298,9 +12008,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchPointerCaptureChanged(boolean z) {
         this.mHandler.removeMessages(28);
-        Message obtainMessage = this.mHandler.obtainMessage(28);
-        obtainMessage.arg1 = z ? 1 : 0;
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(28);
+        messageObtainMessage.arg1 = z ? 1 : 0;
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     private void postSendWindowContentChangedCallback(View view, int i) {
@@ -8391,16 +12101,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(this.mAccessibilityFocusedVirtualView.getSourceNodeId());
                 Rect rect = this.mTempRect;
                 this.mAccessibilityFocusedVirtualView.getBoundsInScreen(rect);
-                AccessibilityNodeInfo createAccessibilityNodeInfo = accessibilityNodeProvider.createAccessibilityNodeInfo(virtualDescendantId);
-                this.mAccessibilityFocusedVirtualView = createAccessibilityNodeInfo;
-                if (createAccessibilityNodeInfo == null) {
+                AccessibilityNodeInfo accessibilityNodeInfoCreateAccessibilityNodeInfo = accessibilityNodeProvider.createAccessibilityNodeInfo(virtualDescendantId);
+                this.mAccessibilityFocusedVirtualView = accessibilityNodeInfoCreateAccessibilityNodeInfo;
+                if (accessibilityNodeInfoCreateAccessibilityNodeInfo == null) {
                     this.mAccessibilityFocusedHost = null;
                     view.clearAccessibilityFocusNoCallbacks(0);
                     accessibilityNodeProvider.performAction(virtualDescendantId, AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS.getId(), null);
                     invalidateRectOnScreen(rect);
                     return;
                 }
-                Rect boundsInScreen = createAccessibilityNodeInfo.getBoundsInScreen();
+                Rect boundsInScreen = accessibilityNodeInfoCreateAccessibilityNodeInfo.getBoundsInScreen();
                 if (rect.equals(boundsInScreen)) {
                     return;
                 }
@@ -8440,12 +12150,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void checkThread() {
-        Thread currentThread = Thread.currentThread();
-        if (this.mThread == currentThread) {
+        Thread threadCurrentThread = Thread.currentThread();
+        if (this.mThread == threadCurrentThread) {
             return;
         }
         Log.i(this.mTag, "checkThread " + Debug.getCallers(20));
-        throw new CalledFromWrongThreadException("Only the original thread that created a view hierarchy can touch its views. Expected: " + this.mThread.getName() + " Calling: " + currentThread.getName());
+        throw new CalledFromWrongThreadException("Only the original thread that created a view hierarchy can touch its views. Expected: " + this.mThread.getName() + " Calling: " + threadCurrentThread.getName());
     }
 
     @Override // android.view.ViewParent
@@ -8454,7 +12164,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return scrollToRectOrFocus(null, z);
         }
         rect.offset(view.getLeft() - view.getScrollX(), view.getTop() - view.getScrollY());
-        boolean scrollToRectOrFocus = scrollToRectOrFocus(rect, z);
+        boolean zScrollToRectOrFocus = scrollToRectOrFocus(rect, z);
         this.mTempRect.set(rect);
         this.mTempRect.offset(0, -this.mCurScrollY);
         this.mTempRect.offset(this.mAttachInfo.mWindowLeft, this.mAttachInfo.mWindowTop);
@@ -8462,7 +12172,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mWindowSession.onRectangleOnScreenRequested(this.mWindow, this.mTempRect);
         } catch (RemoteException unused) {
         }
-        return scrollToRectOrFocus;
+        return zScrollToRectOrFocus;
     }
 
     public boolean probablyHasInput() {
@@ -8538,13 +12248,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         view.dispatchScrollCaptureSearch(rect, point, new Consumer() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ScrollCaptureSearchResults.this.addTarget((ScrollCaptureTarget) obj);
+                scrollCaptureSearchResults.addTarget((ScrollCaptureTarget) obj);
             }
         });
         scrollCaptureSearchResults.setOnCompleteListener(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                ViewRootImpl.this.lambda$handleScrollCaptureRequest$11(iScrollCaptureResponseListener, scrollCaptureSearchResults);
+                this.f$0.lambda$handleScrollCaptureRequest$11(iScrollCaptureResponseListener, scrollCaptureSearchResults);
             }
         });
         if (scrollCaptureSearchResults.isComplete()) {
@@ -8553,7 +12263,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mHandler.postDelayed(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureSearchResults.this.finish();
+                scrollCaptureSearchResults.finish();
             }
         }, getScrollCaptureRequestTimeout());
     }
@@ -8821,8 +12531,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.IWindow
-        public void executeCommand(String str, String str2, ParcelFileDescriptor parcelFileDescriptor) {
+        public void executeCommand(String str, String str2, ParcelFileDescriptor parcelFileDescriptor) throws Throwable {
             View view;
+            ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream;
             ViewRootImpl viewRootImpl = this.mViewAncestor.get();
             if (viewRootImpl == null || (view = viewRootImpl.mView) == null) {
                 return;
@@ -8830,41 +12541,41 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (checkCallingPermission(Manifest.permission.DUMP) != 0) {
                 throw new SecurityException("Insufficient permissions to invoke executeCommand() from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
             }
-            ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = null;
+            ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = null;
             try {
                 try {
                     try {
-                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream2 = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptor);
-                        try {
-                            ViewDebug.dispatchCommand(view, str, str2, autoCloseOutputStream2);
-                            autoCloseOutputStream2.close();
-                        } catch (IOException e) {
-                            e = e;
-                            autoCloseOutputStream = autoCloseOutputStream2;
-                            e.printStackTrace();
-                            if (autoCloseOutputStream != null) {
-                                autoCloseOutputStream.close();
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            autoCloseOutputStream = autoCloseOutputStream2;
-                            if (autoCloseOutputStream != null) {
-                                try {
-                                    autoCloseOutputStream.close();
-                                } catch (IOException e2) {
-                                    e2.printStackTrace();
-                                }
-                            }
-                            throw th;
-                        }
-                    } catch (IOException e3) {
-                        e = e3;
+                        autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptor);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e4) {
-                    e4.printStackTrace();
+                } catch (IOException e2) {
+                    e = e2;
+                }
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
+                ViewDebug.dispatchCommand(view, str, str2, autoCloseOutputStream);
+                autoCloseOutputStream.close();
+            } catch (IOException e3) {
+                e = e3;
+                autoCloseOutputStream2 = autoCloseOutputStream;
+                e.printStackTrace();
+                if (autoCloseOutputStream2 != null) {
+                    autoCloseOutputStream2.close();
                 }
             } catch (Throwable th2) {
                 th = th2;
+                autoCloseOutputStream2 = autoCloseOutputStream;
+                if (autoCloseOutputStream2 != null) {
+                    try {
+                        autoCloseOutputStream2.close();
+                    } catch (IOException e4) {
+                        e4.printStackTrace();
+                    }
+                }
+                throw th;
             }
         }
 
@@ -8937,20 +12648,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             viewRootImpl.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$W$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.W.lambda$dumpWindow$0(ParcelFileDescriptor.this, viewRootImpl);
+                    ViewRootImpl.W.lambda$dumpWindow$0(parcelFileDescriptor, viewRootImpl);
                 }
             });
         }
 
         static /* synthetic */ void lambda$dumpWindow$0(ParcelFileDescriptor parcelFileDescriptor, ViewRootImpl viewRootImpl) {
-            StrictMode.ThreadPolicy allowThreadDiskWrites = StrictMode.allowThreadDiskWrites();
+            StrictMode.ThreadPolicy threadPolicyAllowThreadDiskWrites = StrictMode.allowThreadDiskWrites();
             try {
                 FastPrintWriter fastPrintWriter = new FastPrintWriter(new FileOutputStream(parcelFileDescriptor.getFileDescriptor()));
                 viewRootImpl.dump("", fastPrintWriter);
                 fastPrintWriter.flush();
             } finally {
                 IoUtils.closeQuietly(parcelFileDescriptor);
-                StrictMode.setThreadPolicy(allowThreadDiskWrites);
+                StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskWrites);
             }
         }
 
@@ -9064,16 +12775,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean updateContentDrawBounds() {
-        boolean z;
+        boolean zOnContentDrawn;
         if (this.mUseMTRenderer) {
-            z = false;
+            zOnContentDrawn = false;
             for (int size = this.mWindowCallbacks.size() - 1; size >= 0; size--) {
-                z |= this.mWindowCallbacks.get(size).onContentDrawn(this.mWindowAttributes.surfaceInsets.left, this.mWindowAttributes.surfaceInsets.top, this.mWidth, this.mHeight);
+                zOnContentDrawn |= this.mWindowCallbacks.get(size).onContentDrawn(this.mWindowAttributes.surfaceInsets.left, this.mWindowAttributes.surfaceInsets.top, this.mWidth, this.mHeight);
             }
         } else {
-            z = false;
+            zOnContentDrawn = false;
         }
-        return z | (this.mDragResizing && this.mReportNextDraw);
+        return zOnContentDrawn | (this.mDragResizing && this.mReportNextDraw);
     }
 
     private void requestDrawWindow() {
@@ -9120,7 +12831,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 executor.execute(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceControl.OnJankDataListener.this.onJankDataAvailable(list);
+                        onJankDataListener.onJankDataAvailable(list);
                     }
                 });
             }
@@ -9140,9 +12851,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 ViewRootImpl.this.setAccessibilityWindowAttributesIfNeeded();
                 if (ViewRootImpl.this.mAttachInfo.mHasWindowFocus && ViewRootImpl.this.mView != null) {
                     ViewRootImpl.this.mView.sendAccessibilityEvent(32);
-                    View findFocus = ViewRootImpl.this.mView.findFocus();
-                    if (findFocus != null && findFocus != ViewRootImpl.this.mView) {
-                        findFocus.sendAccessibilityEvent(8);
+                    View viewFindFocus = ViewRootImpl.this.mView.findFocus();
+                    if (viewFindFocus != null && viewFindFocus != ViewRootImpl.this.mView) {
+                        viewFindFocus.sendAccessibilityEvent(8);
                     }
                 }
                 if (ViewRootImpl.this.mAttachInfo.mLeashedParentToken != null) {
@@ -9409,13 +13120,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             if (ViewRootImpl.this.mAccessibilityManager.isEnabled()) {
                 this.mLastEventTimeMillis = SystemClock.uptimeMillis();
-                AccessibilityEvent obtain = AccessibilityEvent.obtain();
-                obtain.setEventType(2048);
-                obtain.setContentChangeTypes(this.mChangeTypes);
+                AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+                accessibilityEventObtain.setEventType(2048);
+                accessibilityEventObtain.setContentChangeTypes(this.mChangeTypes);
                 if (this.mAction.isPresent()) {
-                    obtain.setAction(this.mAction.getAsInt());
+                    accessibilityEventObtain.setAction(this.mAction.getAsInt());
                 }
-                view.sendAccessibilityEventUnchecked(obtain);
+                view.sendAccessibilityEventUnchecked(accessibilityEventObtain);
             } else {
                 this.mLastEventTimeMillis = 0L;
             }
@@ -9470,12 +13181,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (ViewRootImpl.this.mAccessibilityManager.getPerformingAction() != 0) {
                 this.mAction = OptionalInt.of(ViewRootImpl.this.mAccessibilityManager.getPerformingAction());
             }
-            long uptimeMillis = SystemClock.uptimeMillis() - this.mLastEventTimeMillis;
+            long jUptimeMillis = SystemClock.uptimeMillis() - this.mLastEventTimeMillis;
             long sendRecurringAccessibilityEventsInterval = ViewConfiguration.getSendRecurringAccessibilityEventsInterval();
-            if (uptimeMillis >= sendRecurringAccessibilityEventsInterval) {
+            if (jUptimeMillis >= sendRecurringAccessibilityEventsInterval) {
                 removeCallbacksAndRun();
             } else {
-                ViewRootImpl.this.mHandler.postDelayed(this, sendRecurringAccessibilityEventsInterval - uptimeMillis);
+                ViewRootImpl.this.mHandler.postDelayed(this, sendRecurringAccessibilityEventsInterval - jUptimeMillis);
             }
         }
 
@@ -9511,27 +13222,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             try {
                 Trace.traceBegin(8L, "UnhandledKeyEvent dispatch");
                 this.mDispatched = true;
-                View dispatchUnhandledKeyEvent = view.dispatchUnhandledKeyEvent(keyEvent);
+                View viewDispatchUnhandledKeyEvent = view.dispatchUnhandledKeyEvent(keyEvent);
                 if (keyEvent.getAction() == 0) {
                     int keyCode = keyEvent.getKeyCode();
-                    if (dispatchUnhandledKeyEvent != null && !KeyEvent.isModifierKey(keyCode)) {
-                        this.mCapturedKeys.put(keyCode, new WeakReference<>(dispatchUnhandledKeyEvent));
+                    if (viewDispatchUnhandledKeyEvent != null && !KeyEvent.isModifierKey(keyCode)) {
+                        this.mCapturedKeys.put(keyCode, new WeakReference<>(viewDispatchUnhandledKeyEvent));
                     }
                 }
-                return dispatchUnhandledKeyEvent != null;
+                return viewDispatchUnhandledKeyEvent != null;
             } finally {
                 Trace.traceEnd(8L);
             }
         }
 
         void preDispatch(KeyEvent keyEvent) {
-            int indexOfKey;
+            int iIndexOfKey;
             this.mCurrentReceiver = null;
-            if (keyEvent.getAction() != 1 || (indexOfKey = this.mCapturedKeys.indexOfKey(keyEvent.getKeyCode())) < 0) {
+            if (keyEvent.getAction() != 1 || (iIndexOfKey = this.mCapturedKeys.indexOfKey(keyEvent.getKeyCode())) < 0) {
                 return;
             }
-            this.mCurrentReceiver = this.mCapturedKeys.valueAt(indexOfKey);
-            this.mCapturedKeys.removeAt(indexOfKey);
+            this.mCurrentReceiver = this.mCapturedKeys.valueAt(iIndexOfKey);
+            this.mCapturedKeys.removeAt(iIndexOfKey);
         }
 
         boolean preViewDispatch(KeyEvent keyEvent) {
@@ -9615,14 +13326,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public void mergeWithNextTransaction(SurfaceControl.Transaction transaction, long j) {
         String str = this.mTag;
         StringBuilder sb = new StringBuilder("mWNT: t=0x");
-        String str2 = PerfettoProtoLogImpl.NULL_STRING;
+        String hexString = PerfettoProtoLogImpl.NULL_STRING;
         sb.append(transaction != null ? Long.toHexString(transaction.mNativeObject) : PerfettoProtoLogImpl.NULL_STRING);
         sb.append(" mBlastBufferQueue=0x");
         BLASTBufferQueue bLASTBufferQueue = this.mBlastBufferQueue;
         if (bLASTBufferQueue != null) {
-            str2 = Long.toHexString(bLASTBufferQueue.mNativeObject);
+            hexString = Long.toHexString(bLASTBufferQueue.mNativeObject);
         }
-        sb.append(str2);
+        sb.append(hexString);
         sb.append(" fn= ");
         sb.append(j);
         sb.append(" HdrRenderState mRenderHdrSdrRatio=");
@@ -9729,15 +13440,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean sendBackKeyEvent(int i, boolean z) {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        return (enqueueInputEvent(new KeyEvent(uptimeMillis, uptimeMillis, i, 4, 0, 0, -1, 0, 72, 257), null, z ? 128 : 0, true).mFlags & 8) != 0;
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        return (enqueueInputEvent(new KeyEvent(jUptimeMillis, jUptimeMillis, i, 4, 0, 0, -1, 0, 72, 257), null, z ? 128 : 0, true).mFlags & 8) != 0;
     }
 
     private void registerCompatOnBackInvokedCallback() {
         this.mCompatOnBackInvokedCallback = new CompatOnBackInvokedCallback() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda16
             @Override // android.window.CompatOnBackInvokedCallback, android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                ViewRootImpl.this.lambda$registerCompatOnBackInvokedCallback$14();
+                this.f$0.lambda$registerCompatOnBackInvokedCallback$14();
             }
         };
         if (this.mOnBackInvokedDispatcher.hasImeOnBackInvokedDispatcher()) {
@@ -9823,7 +13534,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (!bLASTBufferQueue.syncNextTransaction(new Consumer() { // from class: android.view.ViewRootImpl$12$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ViewRootImpl.AnonymousClass12.this.lambda$onFrameDraw$2(surfaceSyncGroup, (SurfaceControl.Transaction) obj);
+                        this.f$0.lambda$onFrameDraw$2(surfaceSyncGroup, (SurfaceControl.Transaction) obj);
                     }
                 })) {
                     Log.w(ViewRootImpl.this.mTag, "Unable to syncNextTransaction. Possibly something else is trying to sync?");
@@ -9835,7 +13546,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$12$$ExternalSyntheticLambda1
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z2) {
-                    ViewRootImpl.AnonymousClass12.this.lambda$onFrameDraw$3(j, surfaceSyncGroup2, z, z2);
+                    this.f$0.lambda$onFrameDraw$3(j, surfaceSyncGroup2, z, z2);
                 }
             };
         }
@@ -9849,14 +13560,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             final Runnable runnable = new Runnable() { // from class: android.view.ViewRootImpl$12$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.AnonymousClass12.this.lambda$onFrameDraw$0();
+                    this.f$0.lambda$onFrameDraw$0();
                 }
             };
             ViewRootImpl.this.mHandler.postDelayed(runnable, Build.HW_TIMEOUT_MULTIPLIER * 4000);
             transaction.addTransactionCommittedListener(ViewRootImpl.this.mSimpleExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$12$$ExternalSyntheticLambda3
                 @Override // android.view.SurfaceControl.TransactionCommittedListener
                 public final void onTransactionCommitted() {
-                    ViewRootImpl.AnonymousClass12.this.lambda$onFrameDraw$1(runnable);
+                    this.f$0.lambda$onFrameDraw$1(runnable);
                 }
             });
             surfaceSyncGroup.addTransaction(transaction);
@@ -9902,7 +13613,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mPreviousSyncSafeguard.addSyncCompleteCallback(this.mSimpleExecutor, new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda11
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceSyncGroup.this.toggleTimeout(true);
+                        surfaceSyncGroup.toggleTimeout(true);
                     }
                 });
             }
@@ -9912,7 +13623,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         transaction.addTransactionCommittedListener(this.mSimpleExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda12
             @Override // android.view.SurfaceControl.TransactionCommittedListener
             public final void onTransactionCommitted() {
-                ViewRootImpl.this.lambda$safeguardOverlappingSyncs$16(surfaceSyncGroup2);
+                this.f$0.lambda$safeguardOverlappingSyncs$16(surfaceSyncGroup2);
             }
         });
         surfaceSyncGroup.addTransaction(transaction);
@@ -9944,13 +13655,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             surfaceSyncGroup.setAddedToSyncListener(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda25
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$18();
+                    this.f$0.lambda$getOrCreateSurfaceSyncGroup$18();
                 }
             });
             this.mActiveSurfaceSyncGroup.addSyncCompleteCallback(this.mExecutor, new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda26
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$19();
+                    this.f$0.lambda$getOrCreateSurfaceSyncGroup$19();
                 }
             });
             z = true;
@@ -9980,7 +13691,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Runnable runnable = new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda20
             @Override // java.lang.Runnable
             public final void run() {
-                ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$17();
+                this.f$0.lambda$getOrCreateSurfaceSyncGroup$17();
             }
         };
         if (Thread.currentThread() == this.mThread) {
@@ -10155,108 +13866,97 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x004f, code lost:
-    
-        if (r11.mSurfaceReplaced != false) goto L34;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0051, code lost:
-    
-        r6 = android.os.Trace.isTagEnabled(8);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0055, code lost:
-    
-        if (r6 == false) goto L40;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0084, code lost:
-    
-        if (android.view.ViewRootImpl.sToolkitFrameRateFunctionEnablingReadOnlyFlagValue == false) goto L45;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0086, code lost:
-    
-        android.util.Log.i(r11.mTag, "call setFrameRateCategory category=" + categoryToString(r12) + ", reason=" + reasonToString(r3) + ", vri=" + r11.mTag);
-        r11.mFrameRateTransaction.setFrameRateCategory(r11.mSurfaceControl, r12, false).applyAsyncUnsafe();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x00c0, code lost:
-    
-        if (android.view.ViewRootImpl.sToolkitFrameRateDebugFlagValue == false) goto L45;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x00c2, code lost:
-    
-        android.util.Log.v(r11.mTag, "### ViewRootImpl setFrameRateCategory '" + categoryToString(r12) + "'");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x00dc, code lost:
-    
-        r11.mLastPreferredFrameRateCategory = r12;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x00de, code lost:
-    
-        r2 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00e3, code lost:
-    
-        r12 = e;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00e4, code lost:
-    
-        r2 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00e0, code lost:
-    
-        r11 = th;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00e1, code lost:
-    
-        r2 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x0057, code lost:
-    
-        r8 = reasonToString(r3);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x005b, code lost:
-    
-        if (r7 != null) goto L39;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x005d, code lost:
-    
-        r7 = com.android.internal.content.NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x005f, code lost:
-    
-        android.os.Trace.traceBegin(8, "ViewRootImpl#setFrameRateCategory " + categoryToString(r12) + ", reason " + r8 + ", " + r7);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x00e6, code lost:
-    
-        if (r2 == false) goto L69;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00e8, code lost:
-    
-        android.os.Trace.traceEnd(8);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x00eb, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:?, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x004b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x004b, code lost:
     
         if (r11.mLastPreferredFrameRateCategory == r12) goto L32;
      */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00f8  */
-    /* JADX WARN: Removed duplicated region for block: B:30:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00fe  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001d  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0042  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00f8  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00fe  */
+    /* JADX WARN: Removed duplicated region for block: B:70:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setPreferredFrameRateCategory(int r12) {
-        /*
-            Method dump skipped, instructions count: 258
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.setPreferredFrameRateCategory(int):void");
+    public void setPreferredFrameRateCategory(int i) throws Throwable {
+        Throwable th;
+        if (shouldSetFrameRateCategory()) {
+            int i2 = 150994944;
+            String str = null;
+            if (CoreRune.FW_DVRR_TOOLKIT_PRIORITIZE_HIGH_HINT) {
+                if (this.mIsTouchBoosting && i <= 5) {
+                    i = 5;
+                } else if (this.mIsFrameRateBoosting || this.mInsetsAnimationRunning) {
+                    i2 = 134217728;
+                    i = 6;
+                } else {
+                    i2 = this.mFrameRateCategoryChangeReason;
+                    str = this.mFrameRateCategoryView;
+                }
+            } else if (!this.mIsFrameRateBoosting && !this.mInsetsAnimationRunning) {
+                if (!this.mIsTouchBoosting || i >= 5) {
+                    i2 = this.mFrameRateCategoryChangeReason;
+                    str = this.mFrameRateCategoryView;
+                }
+            }
+            boolean z = false;
+            if (i != 0) {
+                try {
+                    try {
+                    } catch (Exception e) {
+                        e = e;
+                        Log.e(this.mTag, "Unable to set frame rate category", e);
+                        if (z) {
+                            return;
+                        }
+                        Trace.traceEnd(8L);
+                        return;
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    if (z) {
+                        Trace.traceEnd(8L);
+                    }
+                    throw th;
+                }
+            }
+            if (this.mSurfaceReplaced) {
+                boolean zIsTagEnabled = Trace.isTagEnabled(8L);
+                if (zIsTagEnabled) {
+                    try {
+                        String strReasonToString = reasonToString(i2);
+                        if (str == null) {
+                            str = NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
+                        }
+                        Trace.traceBegin(8L, "ViewRootImpl#setFrameRateCategory " + categoryToString(i) + ", reason " + strReasonToString + ", " + str);
+                    } catch (Exception e2) {
+                        e = e2;
+                        z = zIsTagEnabled;
+                        Log.e(this.mTag, "Unable to set frame rate category", e);
+                        if (z) {
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                        z = zIsTagEnabled;
+                        if (z) {
+                        }
+                        throw th;
+                    }
+                }
+                if (sToolkitFrameRateFunctionEnablingReadOnlyFlagValue) {
+                    Log.i(this.mTag, "call setFrameRateCategory category=" + categoryToString(i) + ", reason=" + reasonToString(i2) + ", vri=" + this.mTag);
+                    this.mFrameRateTransaction.setFrameRateCategory(this.mSurfaceControl, i, false).applyAsyncUnsafe();
+                    if (sToolkitFrameRateDebugFlagValue) {
+                        Log.v(this.mTag, "### ViewRootImpl setFrameRateCategory '" + categoryToString(i) + "'");
+                    }
+                }
+                this.mLastPreferredFrameRateCategory = i;
+                z = zIsTagEnabled;
+            }
+            if (z) {
+                Trace.traceEnd(8L);
+            }
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -10340,12 +14040,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (!shouldSetFrameRate() || f < 0.0f) {
             return;
         }
-        boolean z = false;
+        boolean zIsTagEnabled = false;
         try {
             try {
                 if (this.mLastPreferredFrameRate != f || this.mSurfaceReplaced) {
-                    z = Trace.isTagEnabled(8L);
-                    if (z) {
+                    zIsTagEnabled = Trace.isTagEnabled(8L);
+                    if (zIsTagEnabled) {
                         Trace.traceBegin(8L, "ViewRootImpl#setFrameRate " + f + " compatibility " + this.mFrameRateCompatibility);
                     }
                     if (sToolkitFrameRateFunctionEnablingReadOnlyFlagValue) {
@@ -10366,17 +14066,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     }
                     this.mLastPreferredFrameRate = f;
                 }
-                if (z) {
+                if (zIsTagEnabled) {
                     Trace.traceEnd(8L);
                 }
             } catch (Exception e) {
                 Log.e(this.mTag, "Unable to set frame rate", e);
-                if (z) {
+                if (zIsTagEnabled) {
                     Trace.traceEnd(8L);
                 }
             }
         } catch (Throwable th) {
-            if (z) {
+            if (zIsTagEnabled) {
                 Trace.traceEnd(8L);
             }
             throw th;
@@ -10565,11 +14265,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private void updateInfrequentCount() {
         long j = this.mAttachInfo.mDrawingTime;
-        int min = (int) Math.min(2147483647L, j - this.mLastUpdateTimeMillis);
+        int iMin = (int) Math.min(2147483647L, j - this.mLastUpdateTimeMillis);
         this.mMinusTwoFrameIntervalMillis = this.mMinusOneFrameIntervalMillis;
-        this.mMinusOneFrameIntervalMillis = min;
+        this.mMinusOneFrameIntervalMillis = iMin;
         this.mLastUpdateTimeMillis = j;
-        if (this.mThreadedRendererViews.isEmpty() && min + this.mMinusTwoFrameIntervalMillis >= 100) {
+        if (this.mThreadedRendererViews.isEmpty() && iMin + this.mMinusTwoFrameIntervalMillis >= 100) {
             int i = this.mInfrequentUpdateCount;
             if (i != 2) {
                 i++;
@@ -10585,15 +14285,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Log.d(TAG, "Skipping stats log for color mode");
             return;
         }
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         if (z) {
-            HwuiStatsLog.write(946, Process.myUid(), currentTimeMillis - this.mColorModeLastSetMillis, this.mCurrentColorMode);
+            HwuiStatsLog.write(946, Process.myUid(), jCurrentTimeMillis - this.mColorModeLastSetMillis, this.mCurrentColorMode);
             this.mColorModeLastSetMillis = -1L;
         } else {
             if (this.mColorModeLastSetMillis > 0) {
-                HwuiStatsLog.write(946, Process.myUid(), currentTimeMillis - this.mColorModeLastSetMillis, this.mCurrentColorMode);
+                HwuiStatsLog.write(946, Process.myUid(), jCurrentTimeMillis - this.mColorModeLastSetMillis, this.mCurrentColorMode);
             }
-            this.mColorModeLastSetMillis = currentTimeMillis;
+            this.mColorModeLastSetMillis = jCurrentTimeMillis;
         }
         this.mCurrentColorMode = i;
     }
@@ -10812,10 +14512,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     return true;
                 }
                 this.mFlexPanelScrollEnabled = true;
-                MotionEvent copy = motionEvent.copy();
-                copy.setLocation(motionEvent.getX(), this.mFlexPanelScrollY);
-                copy.setAction(0);
-                this.mView.dispatchPointerEvent(copy);
+                MotionEvent motionEventCopy = motionEvent.copy();
+                motionEventCopy.setLocation(motionEvent.getX(), this.mFlexPanelScrollY);
+                motionEventCopy.setAction(0);
+                this.mView.dispatchPointerEvent(motionEventCopy);
                 return this.mView == null;
             }
             if (action != 3) {
@@ -10831,7 +14531,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ViewRootImpl.this.lambda$requestRecomputeViewAttributes$21();
+                    this.f$0.lambda$requestRecomputeViewAttributes$21();
                 }
             });
         } else {
@@ -10849,9 +14549,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void dispatchSPenGestureEvent(InputEvent[] inputEventArr) {
-        Message obtainMessage = this.mHandler.obtainMessage(103);
-        obtainMessage.obj = inputEventArr;
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(103);
+        messageObtainMessage.obj = inputEventArr;
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -10866,7 +14566,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 Runnable runnable = new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewRootImpl.this.lambda$handleDispatchSPenGestureEvent$22(inputEvent);
+                        this.f$0.lambda$handleDispatchSPenGestureEvent$22(inputEvent);
                     }
                 };
                 long eventTime2 = inputEvent.getEventTime() - eventTime;

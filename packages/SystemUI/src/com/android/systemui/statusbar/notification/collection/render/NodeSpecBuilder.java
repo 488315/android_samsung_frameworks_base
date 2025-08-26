@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.collections.EmptySet;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NodeSpecBuilder {
     public final EmptySet lastSections = EmptySet.INSTANCE;
@@ -31,8 +30,8 @@ public final class NodeSpecBuilder {
     }
 
     public final NodeSpecImpl buildNodeSpec(NodeController nodeController, List list) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("NodeSpecBuilder.buildNodeSpec");
         }
         try {
@@ -62,12 +61,12 @@ public final class NodeSpecBuilder {
                 }
                 ((ArrayList) nodeSpecImpl.children).add(buildNotifNode(nodeSpecImpl, pipelineEntry));
             }
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             return nodeSpecImpl;
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

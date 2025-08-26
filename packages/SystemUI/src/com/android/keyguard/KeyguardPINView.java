@@ -1,9 +1,9 @@
 package com.android.keyguard;
 
 import android.animation.ValueAnimator;
-import android.app.FragmentBreadCrumbs;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.View;
@@ -16,7 +16,6 @@ import com.android.keyguard.KeyguardInputView;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPINView extends KeyguardSecPinBasedInputView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -75,7 +74,7 @@ public class KeyguardPINView extends KeyguardSecPinBasedInputView {
             /* JADX WARN: Multi-variable type inference failed */
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardPINView keyguardPINView = KeyguardPINView.this;
+                KeyguardPINView keyguardPINView = this.f$0;
                 int i = KeyguardPINView.$r8$clinit;
                 keyguardPINView.getClass();
                 float animatedFraction = valueAnimator.getAnimatedFraction();
@@ -92,12 +91,12 @@ public class KeyguardPINView extends KeyguardSecPinBasedInputView {
                     if (i2 >= viewArr.length) {
                         return;
                     }
-                    for (FragmentBreadCrumbs fragmentBreadCrumbs : viewArr[i2]) {
-                        if (fragmentBreadCrumbs != 0) {
-                            fragmentBreadCrumbs.setAlpha(((PathInterpolator) interpolator2).getInterpolation(MathUtils.constrain((animatedFraction - (i2 * 0.075f)) / (1.0f - (keyguardPINView.mViews.length * 0.075f)), 0.0f, 1.0f)));
+                    for (GLSurfaceView gLSurfaceView : viewArr[i2]) {
+                        if (gLSurfaceView != 0) {
+                            gLSurfaceView.setAlpha(((PathInterpolator) interpolator2).getInterpolation(MathUtils.constrain((animatedFraction - (i2 * 0.075f)) / (1.0f - (keyguardPINView.mViews.length * 0.075f)), 0.0f, 1.0f)));
                             float f2 = (keyguardPINView.mYTransOffset * i2) + keyguardPINView.mYTrans;
-                            fragmentBreadCrumbs.setTranslationY(f2 - (f2 * interpolation));
-                            if (fragmentBreadCrumbs instanceof NumPadAnimationListener) {
+                            gLSurfaceView.setTranslationY(f2 - (f2 * interpolation));
+                            if (gLSurfaceView instanceof NumPadAnimationListener) {
                             }
                         }
                     }

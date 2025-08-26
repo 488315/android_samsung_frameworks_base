@@ -6,7 +6,6 @@ import com.samsung.android.sdk.moneta.memory.entity.activity.ActivityType;
 import com.samsung.android.sdk.moneta.memory.option.EngramSearchActivityOption;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EngramSearchActivityOptionWrapperV1 implements Parcelable {
     private final int activityType;
@@ -17,7 +16,6 @@ public final class EngramSearchActivityOptionWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<EngramSearchActivityOptionWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,7 +25,6 @@ public final class EngramSearchActivityOptionWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -78,11 +75,11 @@ public final class EngramSearchActivityOptionWrapperV1 implements Parcelable {
         int i = this.limit;
         int i2 = this.offset;
         ActivityType.Companion companion = ActivityType.Companion;
-        Integer valueOf = Integer.valueOf(this.activityType);
+        Integer numValueOf = Integer.valueOf(this.activityType);
         companion.getClass();
-        ActivityType fromInt = ActivityType.Companion.fromInt(valueOf);
-        fromInt.getClass();
-        EngramSearchActivityOption.WrapBuilder wrapBuilder = new EngramSearchActivityOption.WrapBuilder(str, i, i2, fromInt, this.contentFill);
+        ActivityType activityTypeFromInt = ActivityType.Companion.fromInt(numValueOf);
+        activityTypeFromInt.getClass();
+        EngramSearchActivityOption.WrapBuilder wrapBuilder = new EngramSearchActivityOption.WrapBuilder(str, i, i2, activityTypeFromInt, this.contentFill);
         return new EngramSearchActivityOption(wrapBuilder.keywords, wrapBuilder.limit, wrapBuilder.offset, wrapBuilder.activityType, wrapBuilder.contentFill, null);
     }
 

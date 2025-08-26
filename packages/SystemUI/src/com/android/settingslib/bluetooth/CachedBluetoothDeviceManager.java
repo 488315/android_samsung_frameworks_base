@@ -1,11 +1,17 @@
 package com.android.settingslib.bluetooth;
 
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.ParcelUuid;
+import android.provider.Settings;
 import android.util.Log;
+import com.android.internal.util.ArrayUtils;
+import com.samsung.android.settingslib.bluetooth.ManufacturerData;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CachedBluetoothDeviceManager {
     static int sLateBondingTimeoutMillis = 10000;
@@ -55,9 +60,9 @@ public class CachedBluetoothDeviceManager {
                         Log.d("CachedBluetoothDeviceManager", "addDevice :: newDevice is added already");
                         return findDevice(bluetoothDevice);
                     }
-                    boolean addDevice = addDevice(cachedBluetoothDevice);
+                    boolean zAddDevice = addDevice(cachedBluetoothDevice);
                     cachedBluetoothDevice.mSequence = this.mCachedDevices.indexOf(cachedBluetoothDevice);
-                    if (!addDevice) {
+                    if (!zAddDevice) {
                         this.mBtManager.mEventManager.dispatchDeviceAdded(cachedBluetoothDevice);
                     }
                 }
@@ -153,20 +158,91 @@ public class CachedBluetoothDeviceManager {
         return ((HashMap) this.stubInfoMap).get("com.samsung.android.app.watchmanagerstub") != null && ((Integer) ((HashMap) this.stubInfoMap).get("com.samsung.android.app.watchmanagerstub")).intValue() > 100;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0064, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x0064, code lost:
     
         if (r0.getMajorDeviceClass() == 7936) goto L27;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean needListFiltering(com.android.settingslib.bluetooth.CachedBluetoothDevice r9) {
-        /*
-            Method dump skipped, instructions count: 515
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDeviceManager.needListFiltering(com.android.settingslib.bluetooth.CachedBluetoothDevice):boolean");
+    public final boolean needListFiltering(CachedBluetoothDevice cachedBluetoothDevice) {
+        if (cachedBluetoothDevice.mVisible) {
+            if (cachedBluetoothDevice.mBondState != 12 && !cachedBluetoothDevice.mIsRestored) {
+                if (cachedBluetoothDevice.getName().equals(cachedBluetoothDevice.mDevice.getAddress())) {
+                    boolean z = Settings.Global.getInt(this.mContext.getContentResolver(), "is_display_bluetooth_ledevice", 0) == 1;
+                    Log.e("CachedBluetoothDeviceManager", "needListFiltering() isShowLeDevice - " + z);
+                    if (!z) {
+                        int i = cachedBluetoothDevice.mType;
+                        if (i != 2) {
+                            if (i == 3) {
+                                BluetoothClass bluetoothClass = cachedBluetoothDevice.mDevice.getBluetoothClass();
+                                if (cachedBluetoothDevice.mManufacturerData == null) {
+                                    if (bluetoothClass != null) {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ManufacturerData manufacturerData = cachedBluetoothDevice.mManufacturerData;
+                if (manufacturerData != null) {
+                    int i2 = manufacturerData.mManufacturerType;
+                    if (i2 == 1) {
+                        byte[] bArr = manufacturerData.mData.mDeviceId;
+                        if (bArr[0] == 0 && bArr[1] == 1) {
+                            Log.d("CachedBluetoothDeviceManager", "[" + cachedBluetoothDevice.getNameForLog() + "] is Old Format Wearable Device.");
+                            return false;
+                        }
+                    } else if (i2 == 3) {
+                        Log.d("CachedBluetoothDeviceManager", "[" + cachedBluetoothDevice.getNameForLog() + "] is SS Standard Format Wearable Device.");
+                        return false;
+                    }
+                    String upperCase = cachedBluetoothDevice.mDeviceName.toUpperCase();
+                    if (upperCase.contains("GEAR") || upperCase.contains("GALAXY FIT") || upperCase.contains("GALAXY RING") || upperCase.contains("GALAXY WATCH")) {
+                        Log.d("CachedBluetoothDeviceManager", "[" + cachedBluetoothDevice.getNameForLog() + "] has SS Wearable Name.");
+                        return false;
+                    }
+                }
+                Log.d("CachedBluetoothDeviceManager", "[" + cachedBluetoothDevice.getNameForLog() + "] is NOT Wearable Device.");
+                if (cachedBluetoothDevice.mManufacturerData != null && cachedBluetoothDevice.mBondState == 10) {
+                    synchronized (this) {
+                        try {
+                            for (CachedBluetoothDevice cachedBluetoothDevice2 : this.mCachedDevices) {
+                                if (cachedBluetoothDevice2.mType == 2 && BluetoothUtils.compareSameWithGear(cachedBluetoothDevice.mDevice.getAddress(), cachedBluetoothDevice2.mDevice.getAddress())) {
+                                    removeDevice(cachedBluetoothDevice2);
+                                    this.mBtManager.mEventManager.dispatchDeviceRemoved(cachedBluetoothDevice2);
+                                    return false;
+                                }
+                            }
+                        } finally {
+                        }
+                    }
+                }
+                if (Settings.Global.getInt(this.mContext.getContentResolver(), "is_display_bluetooth_le_device_without_interesing_uuids", 0) == 1) {
+                    Log.w("CachedBluetoothDeviceManager", "showLeDeviceWithoutInterestingUuids is true. Just show " + cachedBluetoothDevice.getNameForLog());
+                    return false;
+                }
+                if (cachedBluetoothDevice.mIsRestored) {
+                    Log.d("CachedBluetoothDeviceManager", "needListFiltering() -" + cachedBluetoothDevice.getNameForLog() + " is Restored Device. this must be in the list");
+                    return false;
+                }
+                if (cachedBluetoothDevice.mDevice.getInquiryResultType() == 2) {
+                    ParcelUuid[] leService16BitsUuidData = cachedBluetoothDevice.mDevice.getLeService16BitsUuidData();
+                    if (!ArrayUtils.contains(leService16BitsUuidData, BluetoothUuid.HEARING_AID)) {
+                        ParcelUuid parcelUuid = BluetoothUuid.LE_AUDIO;
+                        if (!ArrayUtils.contains(leService16BitsUuidData, parcelUuid)) {
+                            ParcelUuid[] leComplete16BitsUuidData = cachedBluetoothDevice.mDevice.getLeComplete16BitsUuidData();
+                            if (!ArrayUtils.contains(leComplete16BitsUuidData, BluetoothUuid.HOGP) && !ArrayUtils.contains(leComplete16BitsUuidData, parcelUuid) && !ArrayUtils.contains(cachedBluetoothDevice.mDevice.getLeComplete128BitsUuidData(), ParcelUuid.fromString("7d74f4bd-c74a-4431-862c-cce884371592")) && (cachedBluetoothDevice.mAppearance & 960) != 960) {
+                                Log.w("CachedBluetoothDeviceManager", cachedBluetoothDevice.getNameForLog() + " is Uninteresting LE Device. Filter this device out!");
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     public final synchronized void removeDevice(CachedBluetoothDevice cachedBluetoothDevice) {
@@ -224,28 +300,28 @@ public class CachedBluetoothDeviceManager {
         LocalBluetoothProfileManager localBluetoothProfileManager = localBluetoothManager.mProfileManager;
         synchronized (this) {
             try {
-                CachedBluetoothDevice findDevice = findDevice(bluetoothDevice);
-                if (findDevice == null) {
-                    findDevice = new CachedBluetoothDevice(this.mContext, localBluetoothProfileManager, bluetoothDevice);
-                    if (localBluetoothAdapter.mAdapter.isCustomDeviceAddress(findDevice.mDevice.getAddress())) {
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = findDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceFindDevice == null) {
+                    cachedBluetoothDeviceFindDevice = new CachedBluetoothDevice(this.mContext, localBluetoothProfileManager, bluetoothDevice);
+                    if (localBluetoothAdapter.mAdapter.isCustomDeviceAddress(cachedBluetoothDeviceFindDevice.mDevice.getAddress())) {
                         return null;
                     }
-                    this.mCsipDeviceManager.initCsipDeviceIfNeeded(findDevice);
-                    this.mHearingAidDeviceManager.initHearingAidDeviceIfNeeded(findDevice);
-                    this.mCsipDeviceManager.setMemberDeviceIfNeeded(findDevice);
-                    if (!this.mHearingAidDeviceManager.setSubDeviceIfNeeded(findDevice)) {
-                        if (this.mCachedDevices.contains(findDevice)) {
+                    this.mCsipDeviceManager.initCsipDeviceIfNeeded(cachedBluetoothDeviceFindDevice);
+                    this.mHearingAidDeviceManager.initHearingAidDeviceIfNeeded(cachedBluetoothDeviceFindDevice);
+                    this.mCsipDeviceManager.setMemberDeviceIfNeeded(cachedBluetoothDeviceFindDevice);
+                    if (!this.mHearingAidDeviceManager.setSubDeviceIfNeeded(cachedBluetoothDeviceFindDevice)) {
+                        if (this.mCachedDevices.contains(cachedBluetoothDeviceFindDevice)) {
                             Log.d("CachedBluetoothDeviceManager", "addDevice :: newDevice is added already");
                             return findDevice(bluetoothDevice);
                         }
-                        boolean addDevice = addDevice(findDevice);
-                        findDevice.mSequence = this.mCachedDevices.indexOf(findDevice);
-                        if (!addDevice) {
-                            this.mBtManager.mEventManager.dispatchDeviceAdded(findDevice);
+                        boolean zAddDevice = addDevice(cachedBluetoothDeviceFindDevice);
+                        cachedBluetoothDeviceFindDevice.mSequence = this.mCachedDevices.indexOf(cachedBluetoothDeviceFindDevice);
+                        if (!zAddDevice) {
+                            this.mBtManager.mEventManager.dispatchDeviceAdded(cachedBluetoothDeviceFindDevice);
                         }
                     }
                 }
-                return findDevice;
+                return cachedBluetoothDeviceFindDevice;
             } catch (Throwable th) {
                 throw th;
             }

@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Shape;
 import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.LayoutDirection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class CornerBasedShape implements Shape {
     public final CornerSize bottomEnd;
@@ -37,36 +36,36 @@ public abstract class CornerBasedShape implements Shape {
     public abstract RoundedCornerShape copy(CornerSize cornerSize, CornerSize cornerSize2, CornerSize cornerSize3, CornerSize cornerSize4);
 
     /* renamed from: createOutline-LjSzlW0, reason: not valid java name */
-    public abstract Outline mo183createOutlineLjSzlW0(long j, float f, float f2, float f3, float f4, LayoutDirection layoutDirection);
+    public abstract Outline mo184createOutlineLjSzlW0(long j, float f, float f2, float f3, float f4, LayoutDirection layoutDirection);
 
     @Override // androidx.compose.ui.graphics.Shape
     /* renamed from: createOutline-Pq9zytI */
-    public final Outline mo40createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
-        float mo184toPxTmRCtEA = this.topStart.mo184toPxTmRCtEA(density, j);
-        float mo184toPxTmRCtEA2 = this.topEnd.mo184toPxTmRCtEA(density, j);
-        float mo184toPxTmRCtEA3 = this.bottomEnd.mo184toPxTmRCtEA(density, j);
-        float mo184toPxTmRCtEA4 = this.bottomStart.mo184toPxTmRCtEA(density, j);
-        float m416getMinDimensionimpl = Size.m416getMinDimensionimpl(j);
-        float f = mo184toPxTmRCtEA + mo184toPxTmRCtEA4;
-        if (f > m416getMinDimensionimpl) {
-            float f2 = m416getMinDimensionimpl / f;
-            mo184toPxTmRCtEA *= f2;
-            mo184toPxTmRCtEA4 *= f2;
+    public final Outline mo41createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
+        float fMo185toPxTmRCtEA = this.topStart.mo185toPxTmRCtEA(density, j);
+        float fMo185toPxTmRCtEA2 = this.topEnd.mo185toPxTmRCtEA(density, j);
+        float fMo185toPxTmRCtEA3 = this.bottomEnd.mo185toPxTmRCtEA(density, j);
+        float fMo185toPxTmRCtEA4 = this.bottomStart.mo185toPxTmRCtEA(density, j);
+        float fM418getMinDimensionimpl = Size.m418getMinDimensionimpl(j);
+        float f = fMo185toPxTmRCtEA + fMo185toPxTmRCtEA4;
+        if (f > fM418getMinDimensionimpl) {
+            float f2 = fM418getMinDimensionimpl / f;
+            fMo185toPxTmRCtEA *= f2;
+            fMo185toPxTmRCtEA4 *= f2;
         }
-        float f3 = mo184toPxTmRCtEA2 + mo184toPxTmRCtEA3;
-        if (f3 > m416getMinDimensionimpl) {
-            float f4 = m416getMinDimensionimpl / f3;
-            mo184toPxTmRCtEA2 *= f4;
-            mo184toPxTmRCtEA3 *= f4;
+        float f3 = fMo185toPxTmRCtEA2 + fMo185toPxTmRCtEA3;
+        if (f3 > fM418getMinDimensionimpl) {
+            float f4 = fM418getMinDimensionimpl / f3;
+            fMo185toPxTmRCtEA2 *= f4;
+            fMo185toPxTmRCtEA3 *= f4;
         }
-        if (mo184toPxTmRCtEA < 0.0f || mo184toPxTmRCtEA2 < 0.0f || mo184toPxTmRCtEA3 < 0.0f || mo184toPxTmRCtEA4 < 0.0f) {
-            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("Corner size in Px can't be negative(topStart = ", mo184toPxTmRCtEA, ", topEnd = ", mo184toPxTmRCtEA2, ", bottomEnd = ");
-            m.append(mo184toPxTmRCtEA3);
-            m.append(", bottomStart = ");
-            m.append(mo184toPxTmRCtEA4);
-            m.append(")!");
-            InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+        if (fMo185toPxTmRCtEA < 0.0f || fMo185toPxTmRCtEA2 < 0.0f || fMo185toPxTmRCtEA3 < 0.0f || fMo185toPxTmRCtEA4 < 0.0f) {
+            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("Corner size in Px can't be negative(topStart = ", fMo185toPxTmRCtEA, ", topEnd = ", fMo185toPxTmRCtEA2, ", bottomEnd = ");
+            sbM.append(fMo185toPxTmRCtEA3);
+            sbM.append(", bottomStart = ");
+            sbM.append(fMo185toPxTmRCtEA4);
+            sbM.append(")!");
+            InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
         }
-        return mo183createOutlineLjSzlW0(j, mo184toPxTmRCtEA, mo184toPxTmRCtEA2, mo184toPxTmRCtEA3, mo184toPxTmRCtEA4, layoutDirection);
+        return mo184createOutlineLjSzlW0(j, fMo185toPxTmRCtEA, fMo185toPxTmRCtEA2, fMo185toPxTmRCtEA3, fMo185toPxTmRCtEA4, layoutDirection);
     }
 }

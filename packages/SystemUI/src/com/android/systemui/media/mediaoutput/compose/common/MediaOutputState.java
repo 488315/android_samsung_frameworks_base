@@ -8,16 +8,13 @@ import androidx.compose.runtime.State;
 import com.android.systemui.media.mediaoutput.compose.ext.CompositionExtKt;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface MediaOutputState {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -50,13 +47,13 @@ public interface MediaOutputState {
             }
             MediaOutputState mediaOutputState = (MediaOutputState) composerImpl.consume(CompositionExtKt.LocalMediaOutputState);
             composerImpl.startReplaceGroup(1632614873);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
-                rememberedValue = ((Feature) mediaOutputState).state;
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = ((Feature) mediaOutputState).state;
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            State state = (State) rememberedValue;
+            State state = (State) objRememberedValue;
             composerImpl.end(false);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -71,15 +68,15 @@ public interface MediaOutputState {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.common.MediaOutputState.Companion.rememberShownState (Feature.kt:156)");
             }
-            State rememberMediaOutputState = rememberMediaOutputState(composerImpl);
+            State stateRememberMediaOutputState = rememberMediaOutputState(composerImpl);
             composerImpl.startReplaceGroup(-1425750220);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
-                rememberedValue = SnapshotStateKt.derivedStateOf(new MediaOutputState$Companion$$ExternalSyntheticLambda0(rememberMediaOutputState, 0));
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = SnapshotStateKt.derivedStateOf(new MediaOutputState$Companion$$ExternalSyntheticLambda0(stateRememberMediaOutputState, 0));
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            State state = (State) rememberedValue;
+            State state = (State) objRememberedValue;
             composerImpl.end(false);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -91,7 +88,6 @@ public interface MediaOutputState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateInfo {
         public static final /* synthetic */ StateInfo[] $VALUES;
         public static final StateInfo Dismissed;

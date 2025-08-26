@@ -9,12 +9,10 @@ import androidx.compose.runtime.snapshots.StateRecord;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SnapshotMutableIntStateImpl extends StateObjectImpl implements MutableIntState, SnapshotMutableState<Integer> {
     public IntStateStateRecord next;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class IntStateStateRecord extends StateRecord {
         public int value;
 
@@ -40,9 +38,9 @@ public class SnapshotMutableIntStateImpl extends StateObjectImpl implements Muta
     }
 
     public SnapshotMutableIntStateImpl(int i) {
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        IntStateStateRecord intStateStateRecord = new IntStateStateRecord(currentSnapshot.getSnapshotId(), i);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        IntStateStateRecord intStateStateRecord = new IntStateStateRecord(snapshotCurrentSnapshot.getSnapshotId(), i);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             intStateStateRecord.next = new IntStateStateRecord(1, i);
         }
         this.next = intStateStateRecord;
@@ -55,14 +53,10 @@ public class SnapshotMutableIntStateImpl extends StateObjectImpl implements Muta
 
     @Override // androidx.compose.runtime.MutableState
     public final Function1 component2() {
-        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableIntStateImpl$component2$1
-            {
-                super(1);
-            }
-
+        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableIntStateImpl.component2.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SnapshotMutableIntStateImpl.this.setIntValue(((Number) obj).intValue());
                 return Unit.INSTANCE;
             }
@@ -97,17 +91,17 @@ public class SnapshotMutableIntStateImpl extends StateObjectImpl implements Muta
     }
 
     public final void setIntValue(int i) {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         IntStateStateRecord intStateStateRecord = (IntStateStateRecord) SnapshotKt.current(this.next);
         if (intStateStateRecord.value != i) {
             IntStateStateRecord intStateStateRecord2 = this.next;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                ((IntStateStateRecord) SnapshotKt.overwritableRecord(intStateStateRecord2, this, currentSnapshot, intStateStateRecord)).value = i;
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                ((IntStateStateRecord) SnapshotKt.overwritableRecord(intStateStateRecord2, this, snapshotCurrentSnapshot, intStateStateRecord)).value = i;
                 Unit unit = Unit.INSTANCE;
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
         }
     }
 

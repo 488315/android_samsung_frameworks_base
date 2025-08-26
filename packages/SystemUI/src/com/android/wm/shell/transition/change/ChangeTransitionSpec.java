@@ -13,7 +13,6 @@ import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ChangeTransitionSpec {
     public Animation mBoundsChangeAnimation;
@@ -30,7 +29,6 @@ public abstract class ChangeTransitionSpec {
     public final Rect mEndBounds = new Rect();
     public final Rect mEndOutsets = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationAttributePolicy {
         public static final Interpolator ONE_EASING;
         public static final int SNAPSHOT_ALPHA_ANIM_START_OFFSET;

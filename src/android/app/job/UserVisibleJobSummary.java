@@ -85,12 +85,12 @@ public class UserVisibleJobSummary implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = (((((this.mCallingUid * 31) + this.mCallingPackageName.hashCode()) * 31) + this.mSourceUserId) * 31) + this.mSourcePackageName.hashCode();
+        int iHashCode = (((((this.mCallingUid * 31) + this.mCallingPackageName.hashCode()) * 31) + this.mSourceUserId) * 31) + this.mSourcePackageName.hashCode();
         String str = this.mNamespace;
         if (str != null) {
-            hashCode = (hashCode * 31) + str.hashCode();
+            iHashCode = (iHashCode * 31) + str.hashCode();
         }
-        return (hashCode * 31) + this.mJobId;
+        return (iHashCode * 31) + this.mJobId;
     }
 
     public String toString() {

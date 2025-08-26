@@ -7,12 +7,17 @@ import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
 import com.android.systemui.util.DeviceState;
 import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.feature.SemCscFeature;
+import com.samsung.android.feature.SemFloatingFeature;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.zt.devicetrust.cert.CertProvisionProfile;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
+import kotlin.collections.ArraysKt___ArraysKt;
+import kotlin.collections.CollectionsKt__CollectionsKt;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dumpable {
     public final CarrierInfoUtil carrierInfoUtil;
@@ -21,7 +26,6 @@ public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dum
     public final MobileRoamingUtil roamingUtil;
     public final MobileSignalUtil signalUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -259,10 +263,10 @@ public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dum
         printWriter.println("  multiSims=" + z + ", numSlot=" + i);
         for (int i2 = 0; i2 < i; i2++) {
             printWriter.println("  - SIM " + i2 + " -----");
-            CarrierInfraMediator.Conditions[] values = CarrierInfraMediator.Conditions.values();
-            int length = values.length;
+            CarrierInfraMediator.Conditions[] conditionsArrValues = CarrierInfraMediator.Conditions.values();
+            int length = conditionsArrValues.length;
             for (int i3 = 0; i3 < length; i3++) {
-                CarrierInfraMediator.Conditions conditions = values[i3];
+                CarrierInfraMediator.Conditions conditions = conditionsArrValues[i3];
                 printWriter.print("    " + conditions + "=");
                 try {
                     printWriter.print(isEnabled(conditions, i2, new Object[0]));
@@ -270,9 +274,9 @@ public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dum
                 }
                 printWriter.println();
             }
-            for (CarrierInfraMediator.Values values2 : CarrierInfraMediator.Values.values()) {
-                printWriter.print("    " + values2 + "=");
-                printWriter.println(get(values2, i2, new Object[0]));
+            for (CarrierInfraMediator.Values values : CarrierInfraMediator.Values.values()) {
+                printWriter.print("    " + values + "=");
+                printWriter.println(get(values, i2, new Object[0]));
             }
         }
     }
@@ -315,18 +319,212 @@ public final class CarrierInfraMediatorImpl implements CarrierInfraMediator, Dum
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    /* JADX WARN: Removed duplicated region for block: B:135:0x04a5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x04a6 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:150:0x04a5 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:151:0x04a6 A[RETURN] */
     @Override // com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isEnabled(com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator.Conditions r28, int r29, java.lang.Object... r30) {
-        /*
-            Method dump skipped, instructions count: 1320
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediatorImpl.isEnabled(com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator$Conditions, int, java.lang.Object[]):boolean");
+    public final boolean isEnabled(CarrierInfraMediator.Conditions conditions, int i, Object... objArr) {
+        String string;
+        int i2 = WhenMappings.$EnumSwitchMapping$0[conditions.ordinal()];
+        MobileRoamingUtil mobileRoamingUtil = this.roamingUtil;
+        CarrierInfoUtil carrierInfoUtil = this.carrierInfoUtil;
+        MobileSignalUtil mobileSignalUtil = this.signalUtil;
+        MobileDataUtil mobileDataUtil = this.mobileDataUtil;
+        CommonUtil commonUtil = this.commonUtil;
+        switch (i2) {
+            case 1:
+                return commonUtil.supportTSS20();
+            case 2:
+                CommonUtil commonUtil2 = mobileSignalUtil.commonUtil;
+                return "DE".equals(commonUtil2.countryISO) || "ICE".equalsIgnoreCase(commonUtil2.salesCode);
+            case 3:
+                mobileSignalUtil.getClass();
+                return SemCarrierFeature.getInstance().getBoolean(i, "CarrierFeature_RIL_DisplayAntennaLimited", false, false);
+            case 4:
+                return Intrinsics.areEqual(mobileSignalUtil.commonUtil.countryISO, "KR");
+            case 5:
+                return "ZVV".equals(carrierInfoUtil.commonUtil.salesCode);
+            case 6:
+                CommonUtil commonUtil3 = mobileDataUtil.commonUtil;
+                if (!commonUtil3.supportTSS20()) {
+                    Intrinsics.areEqual(commonUtil3.countryISO, "CA");
+                }
+                return "LTE".equals(SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigOverrideDataIcon", "", false));
+            case 7:
+                return "DCM".equals(mobileDataUtil.commonUtil.getIconBranding(i));
+            case 8:
+                mobileDataUtil.commonUtil.supportTSS20();
+                String string2 = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigOpBrandingLTEWideBandIcon", "", false);
+                string2.getClass();
+                return "4.5G".equals(string2);
+            case 9:
+                CommonUtil commonUtil4 = mobileDataUtil.commonUtil;
+                commonUtil4.getClass();
+                if (CollectionsKt__CollectionsKt.arrayListOf("SKT", "KTT", "LGT", "KOO").contains(commonUtil4.getIconBranding(i)) || CollectionsKt__CollectionsKt.arrayListOf("OYB", "VID", "OYA").contains(commonUtil4.getIconBranding(i))) {
+                }
+                break;
+            case 10:
+                mobileDataUtil.commonUtil.supportTSS20();
+                SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigOpBrandingLTEWideBandIcon", "", false).getClass();
+                return !PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE.equals(r0);
+            case 11:
+                return StringsKt__StringsKt.contains(mobileDataUtil.get5gIconConfig(i), "UseOneShapedIcon", false);
+            case 12:
+                if (StringsKt__StringsKt.contains(mobileDataUtil.get5gIconConfig(i), "UseEnlargedIcon", false) || ArraysKt___ArraysKt.indexOf(new String[]{"XSP", "SIN", "MM1", "STH", "S12"}, commonUtil.salesCode) >= 0) {
+                }
+                break;
+            case 13:
+                commonUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("CHC", "CHM", "CHU", "CTC").contains(commonUtil.getIconBranding(i));
+            case 14:
+                return Intrinsics.areEqual(commonUtil.countryISO, "CN");
+            case 15:
+                commonUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("SPR", "VMU", "BST", "XAS").contains(commonUtil.getIconBranding(i));
+            case 16:
+                mobileRoamingUtil.commonUtil.supportTSS20();
+                String string3 = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigRoamingIconType", "", false);
+                string3.getClass();
+                if (PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE.equals(string3) || "USC".equals(mobileRoamingUtil.commonUtil.getIconBranding(i))) {
+                }
+                break;
+            case 17:
+                mobileRoamingUtil.commonUtil.supportTSS20();
+                String string4 = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigRoamingIconType", "", false);
+                string4.getClass();
+                return "CDMA".equals(string4);
+            case 18:
+                String iconBranding = mobileRoamingUtil.commonUtil.getIconBranding(i);
+                switch (iconBranding.hashCode()) {
+                    case -2072127113:
+                        if (iconBranding.equals("TMK_OPEN")) {
+                        }
+                        break;
+                    case 64807:
+                        if (!iconBranding.equals("AIO")) {
+                        }
+                        break;
+                    case 65120:
+                        if (!iconBranding.equals("ASR")) {
+                        }
+                        break;
+                    case 65153:
+                        if (!iconBranding.equals("ATT")) {
+                        }
+                        break;
+                    case 83177:
+                        if (!iconBranding.equals("TMB")) {
+                        }
+                        break;
+                    case 83186:
+                        if (!iconBranding.equals("TMK")) {
+                        }
+                        break;
+                    case 1965177824:
+                        if (!iconBranding.equals("TMB_OPEN")) {
+                        }
+                        break;
+                }
+            case 19:
+                return "TMB".equals(commonUtil.getIconBranding(i));
+            case 20:
+                commonUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("TMK", "TMB", "ASR").contains(commonUtil.getIconBranding(i));
+            case 21:
+                String[] strArr = {"TMB", "TMK", "ASR"};
+                if (!Intrinsics.areEqual(commonUtil.countryISO, "US") || ArraysKt___ArraysKt.indexOf(strArr, commonUtil.salesCode) < 0) {
+                }
+                break;
+            case 22:
+                String[] strArr2 = {"ATT", "APP", "AIO"};
+                if (!Intrinsics.areEqual(commonUtil.countryISO, "US") || ArraysKt___ArraysKt.indexOf(strArr2, commonUtil.salesCode) < 0) {
+                }
+                break;
+            case 23:
+                commonUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("CDR", "AMX", "PCT", "CHL", "TCE").contains(commonUtil.getIconBranding(i));
+            case 24:
+                return "VZW".equals(commonUtil.getIconBranding(i));
+            case 25:
+                return Intrinsics.areEqual(commonUtil.getIconBranding(i), "DOR");
+            case 26:
+                mobileDataUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("CHC", "CHM", "CHU", "BRI", "TGY", "VZW", "ZVV", "ZTM").contains(mobileDataUtil.commonUtil.getIconBranding(i));
+            case 27:
+                mobileDataUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("CHC", "CHM", "CHU").contains(mobileDataUtil.commonUtil.getIconBranding(i));
+            case 28:
+                mobileDataUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("BRI", "TGY").contains(mobileDataUtil.commonUtil.getIconBranding(i));
+            case 29:
+                mobileDataUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("ZVV", "ZTM").contains(mobileDataUtil.commonUtil.getIconBranding(i));
+            case 30:
+                carrierInfoUtil.getClass();
+                boolean zIsTestModeIndicatorGarden = DeviceState.isTestModeIndicatorGarden();
+                String string5 = "HOME";
+                CommonUtil commonUtil5 = carrierInfoUtil.commonUtil;
+                if (zIsTestModeIndicatorGarden) {
+                    string = "HOME";
+                } else {
+                    commonUtil5.supportTSS20();
+                    string = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigPolicyDisplayOpLogo", "", false);
+                    string.getClass();
+                }
+                if (!string.equals("HOME")) {
+                    if (!DeviceState.isTestModeIndicatorGarden()) {
+                        commonUtil5.supportTSS20();
+                        string5 = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigPolicyDisplayOpLogo", "", false);
+                        string5.getClass();
+                    }
+                    if (string5.equals("BOTH")) {
+                    }
+                }
+            case 31:
+                return Intrinsics.areEqual(commonUtil.getIconBranding(i), "KTT");
+            case 32:
+                carrierInfoUtil.getClass();
+                return SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService");
+            case 33:
+                mobileSignalUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("XFA", "TMB").contains(mobileSignalUtil.commonUtil.getIconBranding(i));
+            case 34:
+                CommonUtil commonUtil6 = carrierInfoUtil.commonUtil;
+                commonUtil6.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("AR", "BO", "BS", "BR", "CL", "CO", "CR", "DM", "DO", CertProvisionProfile.KEY_TYPE_EC, "GT", "HN", "JM", "MX", "NI", "PA", "PR", "PE", "PY", "SV", "TT", "UY").contains(commonUtil6.countryISO);
+            case 35:
+                return "ZTA".equals(carrierInfoUtil.commonUtil.salesCode);
+            case 36:
+                return Intrinsics.areEqual(commonUtil.getIconBranding(i), "LGT");
+            case 37:
+                return Intrinsics.areEqual(commonUtil.countryISO, "US");
+            case 38:
+                commonUtil.getClass();
+                return SemCarrierFeature.getInstance().getString(i, "CarrierFeature_SystemUI_ConfigOpBrandingForIndicatorIcon", "", false).endsWith("_OPEN");
+            case 39:
+                mobileSignalUtil.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("ATT", "AIO", "TFN", "XAR").contains(mobileSignalUtil.commonUtil.getIconBranding(i));
+            case 40:
+                commonUtil.getClass();
+                if (!StringsKt__StringsKt.contains(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY"), "WATCHFACE", false) || !Intrinsics.areEqual(commonUtil.getIconBranding(i), "ATT")) {
+                }
+                break;
+            case 41:
+                CommonUtil commonUtil7 = mobileSignalUtil.commonUtil;
+                commonUtil7.getClass();
+                return CollectionsKt__CollectionsKt.arrayListOf("KDI", "DCM", "RKT", "XJP", "SBM").contains(commonUtil7.getIconBranding(i));
+            case 42:
+                return mobileSignalUtil.isVoiceCapable;
+            case 43:
+                commonUtil.getClass();
+                return StringsKt__StringsKt.contains(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY"), "WATCHFACE", false);
+            case 44:
+                commonUtil.getClass();
+                return SemCarrierFeature.getInstance().getBoolean(i, "CarrierFeature_Common_Support_Satellite", false, false);
+            case 45:
+                return StringsKt__StringsKt.contains("KDI", commonUtil.salesCode, false);
+        }
     }
 }

@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SubscriptionState extends ParametersHeader implements Header {
     private static final long serialVersionUID = -6673833053927258745L;
@@ -25,7 +24,7 @@ public class SubscriptionState extends ParametersHeader implements Header {
         return stringBuffer.toString();
     }
 
-    public final void setExpires(int i) {
+    public final void setExpires(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException("JAIN-SIP Exception, SubscriptionState, setExpires(), the expires parameter is  < 0");
         }
@@ -39,7 +38,7 @@ public class SubscriptionState extends ParametersHeader implements Header {
         this.reasonCode = str;
     }
 
-    public final void setRetryAfter(int i) {
+    public final void setRetryAfter(int i) throws InvalidArgumentException {
         if (i <= 0) {
             throw new InvalidArgumentException("JAIN-SIP Exception, SubscriptionState, setRetryAfter(), the retryAfter parameter is <=0");
         }

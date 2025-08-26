@@ -1,12 +1,18 @@
 package com.android.systemui.flags;
 
 import android.provider.DeviceConfig;
+import android.util.Log;
+import com.android.systemui.flags.FeatureFlagsClassicRelease;
 import com.android.systemui.util.DeviceConfigProxy;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
+import kotlin.Pair;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ServerFlagReaderImpl implements ServerFlagReader {
     public final DeviceConfigProxy deviceConfig;
@@ -21,24 +27,73 @@ public final class ServerFlagReaderImpl implements ServerFlagReader {
         this.executor = executor;
         this.isTestHarness = z;
         new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.flags.ServerFlagReaderImpl$onPropertiesChangedListener$1
-            /* JADX WARN: Code restructure failed: missing block: B:24:0x009e, code lost:
-            
-                if (((java.lang.Boolean) ((java.util.HashMap) r4.mBooleanCache).get(r8.getName())).booleanValue() != (r3 == null ? false : java.lang.Boolean.parseBoolean(r3))) goto L43;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:43:0x00f0, code lost:
-            
-                if (((java.lang.Integer) ((java.util.HashMap) r4.mIntCache).get(r8.getName())).intValue() == r3) goto L42;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:42:0x00f3  */
+            /* JADX WARN: Removed duplicated region for block: B:51:0x00f6 A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:54:0x002a A[SYNTHETIC] */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onPropertiesChanged(android.provider.DeviceConfig.Properties r11) {
-                /*
-                    Method dump skipped, instructions count: 284
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.flags.ServerFlagReaderImpl$onPropertiesChangedListener$1.onPropertiesChanged(android.provider.DeviceConfig$Properties):void");
+            public final void onPropertiesChanged(DeviceConfig.Properties properties) throws NumberFormatException {
+                int i;
+                if (this.this$0.isTestHarness) {
+                    Log.w("ServerFlagReader", "Ignore server flag changes in Test Harness mode.");
+                    return;
+                }
+                if (Intrinsics.areEqual(properties.getNamespace(), this.this$0.namespace)) {
+                    ArrayList arrayList = (ArrayList) this.this$0.listeners;
+                    int size = arrayList.size();
+                    int i2 = 0;
+                    while (i2 < size) {
+                        Object obj = arrayList.get(i2);
+                        i2++;
+                        Pair pair = (Pair) obj;
+                        FeatureFlagsClassicRelease.AnonymousClass1 anonymousClass1 = (FeatureFlagsClassicRelease.AnonymousClass1) pair.component1();
+                        Collection<Flag> collection = (Collection) pair.component2();
+                        Iterator it = properties.getKeyset().iterator();
+                        while (true) {
+                            if (it.hasNext()) {
+                                String str2 = (String) it.next();
+                                for (Flag flag : collection) {
+                                    if (Intrinsics.areEqual(str2, flag.getName())) {
+                                        String string = properties.getString(str2, (String) null);
+                                        FeatureFlagsClassicRelease featureFlagsClassicRelease = anonymousClass1.this$0;
+                                        boolean zEquals = true;
+                                        if (((HashMap) featureFlagsClassicRelease.mBooleanCache).containsKey(flag.getName())) {
+                                            if (((Boolean) ((HashMap) featureFlagsClassicRelease.mBooleanCache).get(flag.getName())).booleanValue() == (string == null ? false : Boolean.parseBoolean(string))) {
+                                                zEquals = false;
+                                            }
+                                            if (!zEquals) {
+                                                featureFlagsClassicRelease.mRestarter.restartSystemUI("Server flag change: " + flag.getNamespace() + "." + flag.getName());
+                                            }
+                                        } else {
+                                            if (((HashMap) featureFlagsClassicRelease.mStringCache).containsKey(flag.getName())) {
+                                                if (string == null) {
+                                                    string = "";
+                                                }
+                                                zEquals = true ^ ((String) ((HashMap) featureFlagsClassicRelease.mStringCache).get(flag.getName())).equals(string);
+                                            } else if (((HashMap) featureFlagsClassicRelease.mIntCache).containsKey(flag.getName())) {
+                                                if (string == null) {
+                                                    i = 0;
+                                                    if (((Integer) ((HashMap) featureFlagsClassicRelease.mIntCache).get(flag.getName())).intValue() == i) {
+                                                    }
+                                                } else {
+                                                    try {
+                                                        i = Integer.parseInt(string);
+                                                    } catch (NumberFormatException unused) {
+                                                    }
+                                                    if (((Integer) ((HashMap) featureFlagsClassicRelease.mIntCache).get(flag.getName())).intValue() == i) {
+                                                    }
+                                                }
+                                            }
+                                            if (!zEquals) {
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         };
     }

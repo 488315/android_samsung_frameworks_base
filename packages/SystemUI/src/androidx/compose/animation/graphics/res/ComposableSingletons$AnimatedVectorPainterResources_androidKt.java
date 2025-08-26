@@ -9,7 +9,6 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposableSingletons$AnimatedVectorPainterResources_androidKt {
     public static final ComposableSingletons$AnimatedVectorPainterResources_androidKt INSTANCE = new ComposableSingletons$AnimatedVectorPainterResources_androidKt();
@@ -21,11 +20,11 @@ public final class ComposableSingletons$AnimatedVectorPainterResources_androidKt
             VectorGroup vectorGroup = (VectorGroup) obj;
             Map map = (Map) obj2;
             Composer composer = (Composer) obj3;
-            int intValue = ((Number) obj4).intValue();
+            int iIntValue = ((Number) obj4).intValue();
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.compose.animation.graphics.res.ComposableSingletons$AnimatedVectorPainterResources_androidKt.lambda-1.<anonymous> (AnimatedVectorPainterResources.android.kt:46)");
             }
-            VectorPainterKt.RenderVectorGroup(vectorGroup, map, composer, intValue & 126, 0);
+            VectorPainterKt.RenderVectorGroup(vectorGroup, map, composer, iIntValue & 126, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }

@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.hardware.input.InputManager;
+import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -31,7 +32,7 @@ import android.view.WindowInsets;
 import android.view.WindowManagerGlobal;
 import android.view.WindowManagerPolicyConstants;
 import com.android.internal.content.NativeLibraryHelper;
-import com.android.internal.widget.PointerLocationView;
+import com.samsung.android.ims.settings.SemImsProfile;
 
 /* loaded from: classes6.dex */
 public class PointerLocationView extends View implements InputManager.InputDeviceListener, WindowManagerPolicyConstants.PointerEventListener {
@@ -187,7 +188,7 @@ public class PointerLocationView extends View implements InputManager.InputDevic
 
     @Override // android.view.View
     public WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
-        Insets insets = Insets.NONE;
+        Insets waterfallInsets = Insets.NONE;
         RoundedCorner roundedCorner = windowInsets.getRoundedCorner(0);
         int radius = roundedCorner != null ? roundedCorner.getRadius() : 0;
         RoundedCorner roundedCorner2 = windowInsets.getRoundedCorner(1);
@@ -196,10 +197,10 @@ public class PointerLocationView extends View implements InputManager.InputDevic
         }
         if (windowInsets.getDisplayCutout() != null) {
             radius = Math.max(radius, windowInsets.getDisplayCutout().getSafeInsetTop());
-            insets = windowInsets.getDisplayCutout().getWaterfallInsets();
+            waterfallInsets = windowInsets.getDisplayCutout().getWaterfallInsets();
         }
         this.mHeaderPaddingTop = radius;
-        this.mWaterfallInsets = insets;
+        this.mWaterfallInsets = waterfallInsets;
         return super.onApplyWindowInsets(windowInsets);
     }
 
@@ -249,45 +250,45 @@ public class PointerLocationView extends View implements InputManager.InputDevic
         rotateCanvasToUnrotatedDisplay(canvas);
         int i = 0;
         while (i < size) {
-            PointerState valueAt = pointerLocationView2.mPointers.valueAt(i);
-            float f = valueAt.mCurrentX;
-            float f2 = valueAt.mCurrentY;
+            PointerState pointerStateValueAt = pointerLocationView2.mPointers.valueAt(i);
+            float f = pointerStateValueAt.mCurrentX;
+            float f2 = pointerStateValueAt.mCurrentY;
             if (!Float.isNaN(f) && !Float.isNaN(f2)) {
                 pointerLocationView2.mPaint.setARGB(255, 255, 64, 128);
-                canvas3.drawLine(f, f2, (valueAt.mXVelocity * 16.0f) + f, (valueAt.mYVelocity * 16.0f) + f2, pointerLocationView2.mPaint);
+                canvas3.drawLine(f, f2, (pointerStateValueAt.mXVelocity * 16.0f) + f, (pointerStateValueAt.mYVelocity * 16.0f) + f2, pointerLocationView2.mPaint);
                 if (pointerLocationView2.mAltVelocity != null) {
                     pointerLocationView2.mPaint.setARGB(255, 64, 255, 128);
-                    canvas.drawLine(f, f2, (valueAt.mAltXVelocity * 16.0f) + f, f2 + (valueAt.mAltYVelocity * 16.0f), pointerLocationView2.mPaint);
+                    canvas.drawLine(f, f2, (pointerStateValueAt.mAltXVelocity * 16.0f) + f, f2 + (pointerStateValueAt.mAltYVelocity * 16.0f), pointerLocationView2.mPaint);
                 }
             }
-            if (pointerLocationView2.mCurDown && valueAt.mCurDown) {
-                canvas.drawLine(0.0f, valueAt.mCoords.y, pointerLocationView2.getWidth(), valueAt.mCoords.y, pointerLocationView2.mTargetPaint);
-                canvas.drawLine(valueAt.mCoords.x, -pointerLocationView2.getHeight(), valueAt.mCoords.x, Math.max(pointerLocationView2.getHeight(), pointerLocationView2.getWidth()), pointerLocationView2.mTargetPaint);
-                int i2 = (int) (valueAt.mCoords.pressure * 255.0f);
+            if (pointerLocationView2.mCurDown && pointerStateValueAt.mCurDown) {
+                canvas.drawLine(0.0f, pointerStateValueAt.mCoords.y, pointerLocationView2.getWidth(), pointerStateValueAt.mCoords.y, pointerLocationView2.mTargetPaint);
+                canvas.drawLine(pointerStateValueAt.mCoords.x, -pointerLocationView2.getHeight(), pointerStateValueAt.mCoords.x, Math.max(pointerLocationView2.getHeight(), pointerLocationView2.getWidth()), pointerLocationView2.mTargetPaint);
+                int i2 = (int) (pointerStateValueAt.mCoords.pressure * 255.0f);
                 int i3 = 255 - i2;
                 pointerLocationView2.mPaint.setARGB(255, i2, 255, i3);
-                canvas.drawPoint(valueAt.mCoords.x, valueAt.mCoords.y, pointerLocationView2.mPaint);
+                canvas.drawPoint(pointerStateValueAt.mCoords.x, pointerStateValueAt.mCoords.y, pointerLocationView2.mPaint);
                 pointerLocationView2.mPaint.setARGB(255, i2, i3, 128);
-                pointerLocationView2.drawOval(canvas, valueAt.mCoords.x, valueAt.mCoords.y, valueAt.mCoords.touchMajor, valueAt.mCoords.touchMinor, valueAt.mCoords.orientation, pointerLocationView2.mPaint);
+                pointerLocationView2.drawOval(canvas, pointerStateValueAt.mCoords.x, pointerStateValueAt.mCoords.y, pointerStateValueAt.mCoords.touchMajor, pointerStateValueAt.mCoords.touchMinor, pointerStateValueAt.mCoords.orientation, pointerLocationView2.mPaint);
                 pointerLocationView2.mPaint.setARGB(255, i2, 128, i3);
-                pointerLocationView2.drawOval(canvas, valueAt.mCoords.x, valueAt.mCoords.y, valueAt.mCoords.toolMajor, valueAt.mCoords.toolMinor, valueAt.mCoords.orientation, pointerLocationView2.mPaint);
+                pointerLocationView2.drawOval(canvas, pointerStateValueAt.mCoords.x, pointerStateValueAt.mCoords.y, pointerStateValueAt.mCoords.toolMajor, pointerStateValueAt.mCoords.toolMinor, pointerStateValueAt.mCoords.orientation, pointerLocationView2.mPaint);
                 pointerLocationView = pointerLocationView2;
-                float max = Math.max(valueAt.mCoords.toolMajor * 0.7f, pointerLocationView.mDensity * 24.0f);
+                float fMax = Math.max(pointerStateValueAt.mCoords.toolMajor * 0.7f, pointerLocationView.mDensity * 24.0f);
                 pointerLocationView.mPaint.setARGB(255, i2, 255, 0);
-                double d = max;
-                float sin = (float) (Math.sin(valueAt.mCoords.orientation) * d);
-                float f3 = (float) ((-Math.cos(valueAt.mCoords.orientation)) * d);
-                if (valueAt.mToolType == 2 || valueAt.mToolType == 4) {
-                    canvas.drawLine(valueAt.mCoords.x, valueAt.mCoords.y, valueAt.mCoords.x + sin, valueAt.mCoords.y + f3, pointerLocationView.mPaint);
+                double d = fMax;
+                float fSin = (float) (Math.sin(pointerStateValueAt.mCoords.orientation) * d);
+                float f3 = (float) ((-Math.cos(pointerStateValueAt.mCoords.orientation)) * d);
+                if (pointerStateValueAt.mToolType == 2 || pointerStateValueAt.mToolType == 4) {
+                    canvas.drawLine(pointerStateValueAt.mCoords.x, pointerStateValueAt.mCoords.y, pointerStateValueAt.mCoords.x + fSin, pointerStateValueAt.mCoords.y + f3, pointerLocationView.mPaint);
                     canvas2 = canvas;
                 } else {
-                    canvas.drawLine(valueAt.mCoords.x - sin, valueAt.mCoords.y - f3, valueAt.mCoords.x + sin, valueAt.mCoords.y + f3, pointerLocationView.mPaint);
+                    canvas.drawLine(pointerStateValueAt.mCoords.x - fSin, pointerStateValueAt.mCoords.y - f3, pointerStateValueAt.mCoords.x + fSin, pointerStateValueAt.mCoords.y + f3, pointerLocationView.mPaint);
                     canvas2 = canvas;
                 }
-                float sin2 = (float) Math.sin(valueAt.mCoords.getAxisValue(25));
-                canvas2.drawCircle(valueAt.mCoords.x + (sin * sin2), valueAt.mCoords.y + (f3 * sin2), pointerLocationView.mDensity * 3.0f, pointerLocationView.mPaint);
-                if (valueAt.mHasBoundingBox) {
-                    canvas.drawRect(valueAt.mBoundingLeft, valueAt.mBoundingTop, valueAt.mBoundingRight, valueAt.mBoundingBottom, pointerLocationView.mPaint);
+                float fSin2 = (float) Math.sin(pointerStateValueAt.mCoords.getAxisValue(25));
+                canvas2.drawCircle(pointerStateValueAt.mCoords.x + (fSin * fSin2), pointerStateValueAt.mCoords.y + (f3 * fSin2), pointerLocationView.mDensity * 3.0f, pointerLocationView.mPaint);
+                if (pointerStateValueAt.mHasBoundingBox) {
+                    canvas.drawRect(pointerStateValueAt.mBoundingLeft, pointerStateValueAt.mBoundingTop, pointerStateValueAt.mBoundingRight, pointerStateValueAt.mBoundingBottom, pointerLocationView.mPaint);
                 }
             } else {
                 pointerLocationView = pointerLocationView2;
@@ -364,24 +365,56 @@ public class PointerLocationView extends View implements InputManager.InputDevic
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0030, code lost:
-    
-        if (r10 == ((r9 & 65280) >> 8)) goto L18;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x002a, code lost:
-    
-        if (r10 == ((r9 & 65280) >> 8)) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void logCoords(java.lang.String r8, int r9, int r10, android.view.MotionEvent.PointerCoords r11, int r12, android.view.MotionEvent r13) {
-        /*
-            Method dump skipped, instructions count: 426
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.PointerLocationView.logCoords(java.lang.String, int, int, android.view.MotionEvent$PointerCoords, int, android.view.MotionEvent):void");
+    private void logCoords(String str, int i, int i2, MotionEvent.PointerCoords pointerCoords, int i3, MotionEvent motionEvent) {
+        int toolType = motionEvent.getToolType(i2);
+        int buttonState = motionEvent.getButtonState();
+        int i4 = i & 255;
+        String string = SemImsProfile.RcsProfileType.RCS_PROFILE_TYPE_UP;
+        switch (i4) {
+            case 0:
+                string = "DOWN";
+                break;
+            case 1:
+                break;
+            case 2:
+                string = "MOVE";
+                break;
+            case 3:
+                string = "CANCEL";
+                break;
+            case 4:
+                string = "OUTSIDE";
+                break;
+            case 5:
+                if (i2 == ((i & 65280) >> 8)) {
+                }
+                break;
+            case 6:
+                if (i2 != ((i & 65280) >> 8)) {
+                }
+                break;
+            case 7:
+                string = "HOVER MOVE";
+                break;
+            case 8:
+                string = "SCROLL";
+                break;
+            case 9:
+                string = "HOVER ENTER";
+                break;
+            case 10:
+                string = "HOVER EXIT";
+                break;
+            default:
+                string = Integer.toString(i);
+                break;
+        }
+        Log.i(TAG, this.mText.clear().append(str).append(" id ").append(i3 + 1).append(": ").append(string).append(" (").append(pointerCoords.x, 3).append(", ").append(pointerCoords.y, 3).append(") Pressure=").append(pointerCoords.pressure, 3).append(" Size=").append(pointerCoords.size, 3).append(" TouchMajor=").append(pointerCoords.touchMajor, 3).append(" TouchMinor=").append(pointerCoords.touchMinor, 3).append(" ToolMajor=").append(pointerCoords.toolMajor, 3).append(" ToolMinor=").append(pointerCoords.toolMinor, 3).append(" Orientation=").append((float) ((pointerCoords.orientation * 180.0f) / 3.141592653589793d), 1).append("deg").append(" Tilt=").append((float) ((pointerCoords.getAxisValue(25) * 180.0f) / 3.141592653589793d), 1).append("deg").append(" Distance=").append(pointerCoords.getAxisValue(24), 1).append(" VScroll=").append(pointerCoords.getAxisValue(9), 1).append(" HScroll=").append(pointerCoords.getAxisValue(10), 1).append(" BoundingBox=[(").append(motionEvent.getAxisValue(32), 3).append(", ").append(motionEvent.getAxisValue(33), 3).append(NavigationBarInflaterView.KEY_CODE_END).append(", (").append(motionEvent.getAxisValue(34), 3).append(", ").append(motionEvent.getAxisValue(35), 3).append(")]").append(" ToolType=").append(MotionEvent.toolTypeToString(toolType)).append(" ButtonState=").append(MotionEvent.buttonStateToString(buttonState)).toString());
     }
 
     @Override // android.view.WindowManagerPolicyConstants.PointerEventListener
@@ -588,9 +621,9 @@ public class PointerLocationView extends View implements InputManager.InputDevic
         if (shouldShowSystemGestureExclusion()) {
             try {
                 WindowManagerGlobal.getWindowManagerService().registerSystemGestureExclusionListener(this.mSystemGestureExclusionListener, this.mContext.getDisplayId());
-                int systemGestureExclusionOpacity = systemGestureExclusionOpacity();
-                this.mSystemGestureExclusionPaint.setAlpha(systemGestureExclusionOpacity);
-                this.mSystemGestureExclusionRejectedPaint.setAlpha(systemGestureExclusionOpacity);
+                int iSystemGestureExclusionOpacity = systemGestureExclusionOpacity();
+                this.mSystemGestureExclusionPaint.setAlpha(iSystemGestureExclusionOpacity);
+                this.mSystemGestureExclusionRejectedPaint.setAlpha(iSystemGestureExclusionOpacity);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -681,16 +714,16 @@ public class PointerLocationView extends View implements InputManager.InputDevic
                 append("-2147483648");
                 return this;
             }
-            int reserve = reserve(11);
+            int iReserve = reserve(11);
             char[] cArr = this.mChars;
             if (i == 0) {
-                cArr[reserve] = '0';
+                cArr[iReserve] = '0';
                 this.mLength++;
                 return this;
             }
             if (z) {
-                cArr[reserve] = '-';
-                reserve++;
+                cArr[iReserve] = '-';
+                iReserve++;
             }
             int i3 = 1000000000;
             int i4 = 10;
@@ -698,21 +731,21 @@ public class PointerLocationView extends View implements InputManager.InputDevic
                 i3 /= 10;
                 i4--;
                 if (i4 < i2) {
-                    cArr[reserve] = '0';
-                    reserve++;
+                    cArr[iReserve] = '0';
+                    iReserve++;
                 }
             }
             while (true) {
                 int i5 = i / i3;
                 i -= i5 * i3;
                 i3 /= 10;
-                int i6 = reserve + 1;
-                cArr[reserve] = (char) (i5 + 48);
+                int i6 = iReserve + 1;
+                cArr[iReserve] = (char) (i5 + 48);
                 if (i3 == 0) {
                     this.mLength = i6;
                     return this;
                 }
-                reserve = i6;
+                iReserve = i6;
             }
         }
 
@@ -722,16 +755,16 @@ public class PointerLocationView extends View implements InputManager.InputDevic
                 i2 *= 10;
             }
             float f2 = i2;
-            float rint = (float) (Math.rint(f * f2) / i2);
-            int i4 = (int) rint;
-            if (i4 == 0 && rint < 0.0f) {
+            float fRint = (float) (Math.rint(f * f2) / i2);
+            int i4 = (int) fRint;
+            if (i4 == 0 && fRint < 0.0f) {
                 append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
             }
             append(i4);
             if (i != 0) {
                 append(MediaMetrics.SEPARATOR);
-                double abs = Math.abs(rint);
-                append((int) (((float) (abs - Math.floor(abs))) * f2), i);
+                double dAbs = Math.abs(fRint);
+                append((int) (((float) (dAbs - Math.floor(dAbs))) * f2), i);
             }
             return this;
         }
@@ -761,18 +794,18 @@ public class PointerLocationView extends View implements InputManager.InputDevic
 
         @Override // android.view.ISystemGestureExclusionListener
         public void onSystemGestureExclusionChanged(int i, Region region, Region region2) {
-            final Region obtain = Region.obtain(region);
-            final Region obtain2 = Region.obtain();
+            final Region regionObtain = Region.obtain(region);
+            final Region regionObtain2 = Region.obtain();
             if (region2 != null) {
-                obtain2.set(region2);
-                obtain2.op(obtain, Region.Op.DIFFERENCE);
+                regionObtain2.set(region2);
+                regionObtain2.op(regionObtain, Region.Op.DIFFERENCE);
             }
             Handler handler = PointerLocationView.this.getHandler();
             if (handler != null) {
                 handler.post(new Runnable() { // from class: com.android.internal.widget.PointerLocationView$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PointerLocationView.AnonymousClass1.this.lambda$onSystemGestureExclusionChanged$0(obtain, obtain2);
+                        this.f$0.lambda$onSystemGestureExclusionChanged$0(regionObtain, regionObtain2);
                     }
                 });
             }
@@ -820,9 +853,9 @@ public class PointerLocationView extends View implements InputManager.InputDevic
             height = 100;
             width = 100;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(height, width, Bitmap.Config.ARGB_8888);
-        this.mTraceBitmap = createBitmap;
-        this.mTraceCanvas.setBitmap(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(height, width, Bitmap.Config.ARGB_8888);
+        this.mTraceBitmap = bitmapCreateBitmap;
+        this.mTraceCanvas.setBitmap(bitmapCreateBitmap);
     }
 
     private static int inverseRotation(int i) {
@@ -843,15 +876,15 @@ public class PointerLocationView extends View implements InputManager.InputDevic
     }
 
     private void rotateCanvasToUnrotatedDisplay(Canvas canvas) {
-        int inverseRotation = inverseRotation(this.mContext.getDisplay().getRotation());
-        if (inverseRotation == 1) {
+        int iInverseRotation = inverseRotation(this.mContext.getDisplay().getRotation());
+        if (iInverseRotation == 1) {
             canvas.rotate(90.0f);
             canvas.translate(0.0f, -this.mTraceBitmap.getHeight());
-        } else if (inverseRotation == 2) {
+        } else if (iInverseRotation == 2) {
             canvas.rotate(180.0f);
             canvas.translate(-this.mTraceBitmap.getWidth(), -this.mTraceBitmap.getHeight());
         } else {
-            if (inverseRotation != 3) {
+            if (iInverseRotation != 3) {
                 return;
             }
             canvas.rotate(270.0f);

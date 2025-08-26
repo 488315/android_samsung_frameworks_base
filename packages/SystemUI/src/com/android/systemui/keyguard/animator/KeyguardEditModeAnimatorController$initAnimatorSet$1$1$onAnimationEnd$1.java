@@ -1,6 +1,7 @@
 package com.android.systemui.keyguard.animator;
 
 import com.android.systemui.keyguard.KeyguardEditModeControllerImpl;
+import java.io.IOException;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -10,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEnd$1 extends SuspendLambda implements Function2 {
     int label;
@@ -33,7 +33,7 @@ final class KeyguardEditModeAnimatorController$initAnimatorSet$1$1$onAnimationEn
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws IOException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {

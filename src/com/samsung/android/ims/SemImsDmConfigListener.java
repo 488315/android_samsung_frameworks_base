@@ -44,9 +44,9 @@ public interface SemImsDmConfigListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(SemImsDmConfigListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof SemImsDmConfigListener)) {
-                return (SemImsDmConfigListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(SemImsDmConfigListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof SemImsDmConfigListener)) {
+                return (SemImsDmConfigListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface SemImsDmConfigListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                String string = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onChangeDmValue(readString, readBoolean);
+                onChangeDmValue(string, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface SemImsDmConfigListener extends IInterface {
 
             @Override // com.samsung.android.ims.SemImsDmConfigListener
             public void onChangeDmValue(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(SemImsDmConfigListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(SemImsDmConfigListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

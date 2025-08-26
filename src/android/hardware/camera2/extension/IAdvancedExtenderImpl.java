@@ -141,9 +141,9 @@ public interface IAdvancedExtenderImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAdvancedExtenderImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAdvancedExtenderImpl)) {
-                return (IAdvancedExtenderImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAdvancedExtenderImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAdvancedExtenderImpl)) {
+                return (IAdvancedExtenderImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -186,7 +186,7 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
         @Override // android.os.Binder
         public boolean onTransact(int i, final Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
-            final HashMap hashMap;
+            final HashMap map;
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IAdvancedExtenderImpl.DESCRIPTOR);
             }
@@ -196,54 +196,56 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    hashMap = readInt >= 0 ? new HashMap() : null;
-                    IntStream.range(0, readInt).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda0
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    map = i3 >= 0 ? new HashMap() : null;
+                    IntStream.range(0, i3).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i3) {
-                            hashMap.put(r0.readString(), (CameraMetadataNative) Parcel.this.readTypedObject(CameraMetadataNative.CREATOR));
+                        public final void accept(int i4) {
+                            Parcel parcel3 = parcel;
+                            map.put(parcel3.readString(), (CameraMetadataNative) parcel3.readTypedObject(CameraMetadataNative.CREATOR));
                         }
                     });
                     parcel.enforceNoDataAvail();
-                    boolean isExtensionAvailable = isExtensionAvailable(readString, hashMap);
+                    boolean zIsExtensionAvailable = isExtensionAvailable(string, map);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isExtensionAvailable);
+                    parcel2.writeBoolean(zIsExtensionAvailable);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    hashMap = readInt2 >= 0 ? new HashMap() : null;
-                    IntStream.range(0, readInt2).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda1
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    map = i4 >= 0 ? new HashMap() : null;
+                    IntStream.range(0, i4).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda1
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i3) {
-                            hashMap.put(r0.readString(), (CameraMetadataNative) Parcel.this.readTypedObject(CameraMetadataNative.CREATOR));
+                        public final void accept(int i5) {
+                            Parcel parcel3 = parcel;
+                            map.put(parcel3.readString(), (CameraMetadataNative) parcel3.readTypedObject(CameraMetadataNative.CREATOR));
                         }
                     });
                     parcel.enforceNoDataAvail();
-                    init(readString2, hashMap);
+                    init(string2, map);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     Size size = (Size) parcel.readTypedObject(Size.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    LatencyRange estimatedCaptureLatencyRange = getEstimatedCaptureLatencyRange(readString3, size, readInt3);
+                    LatencyRange estimatedCaptureLatencyRange = getEstimatedCaptureLatencyRange(string3, size, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(estimatedCaptureLatencyRange, 1);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<SizeList> supportedPreviewOutputResolutions = getSupportedPreviewOutputResolutions(readString4);
+                    List<SizeList> supportedPreviewOutputResolutions = getSupportedPreviewOutputResolutions(string4);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(supportedPreviewOutputResolutions, 1);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<SizeList> supportedCaptureOutputResolutions = getSupportedCaptureOutputResolutions(readString5);
+                    List<SizeList> supportedCaptureOutputResolutions = getSupportedCaptureOutputResolutions(string5);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(supportedCaptureOutputResolutions, 1);
                     return true;
@@ -260,33 +262,33 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     parcel2.writeStrongInterface(sessionProcessor);
                     return true;
                 case 8:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative availableCaptureRequestKeys = getAvailableCaptureRequestKeys(readString6);
+                    CameraMetadataNative availableCaptureRequestKeys = getAvailableCaptureRequestKeys(string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(availableCaptureRequestKeys, 1);
                     return true;
                 case 9:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative availableCaptureResultKeys = getAvailableCaptureResultKeys(readString7);
+                    CameraMetadataNative availableCaptureResultKeys = getAvailableCaptureResultKeys(string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(availableCaptureResultKeys, 1);
                     return true;
                 case 10:
-                    boolean isCaptureProcessProgressAvailable = isCaptureProcessProgressAvailable();
+                    boolean zIsCaptureProcessProgressAvailable = isCaptureProcessProgressAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCaptureProcessProgressAvailable);
+                    parcel2.writeBoolean(zIsCaptureProcessProgressAvailable);
                     return true;
                 case 11:
-                    boolean isPostviewAvailable = isPostviewAvailable();
+                    boolean zIsPostviewAvailable = isPostviewAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPostviewAvailable);
+                    parcel2.writeBoolean(zIsPostviewAvailable);
                     return true;
                 case 12:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative availableCharacteristicsKeyValues = getAvailableCharacteristicsKeyValues(readString8);
+                    CameraMetadataNative availableCharacteristicsKeyValues = getAvailableCharacteristicsKeyValues(string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(availableCharacteristicsKeyValues, 1);
                     return true;
@@ -314,28 +316,28 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public boolean isExtensionAvailable(String str, Map<String, CameraMetadataNative> map) throws RemoteException {
-                final Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                final Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
                     if (map == null) {
-                        obtain.writeInt(-1);
+                        parcelObtain.writeInt(-1);
                     } else {
-                        obtain.writeInt(map.size());
+                        parcelObtain.writeInt(map.size());
                         map.forEach(new BiConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IAdvancedExtenderImpl.Stub.Proxy.lambda$isExtensionAvailable$0(Parcel.this, (String) obj, (CameraMetadataNative) obj2);
+                                IAdvancedExtenderImpl.Stub.Proxy.lambda$isExtensionAvailable$0(parcelObtain, (String) obj, (CameraMetadataNative) obj2);
                             }
                         });
                     }
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -346,27 +348,27 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public void init(String str, Map<String, CameraMetadataNative> map) throws RemoteException {
-                final Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                final Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
                     if (map == null) {
-                        obtain.writeInt(-1);
+                        parcelObtain.writeInt(-1);
                     } else {
-                        obtain.writeInt(map.size());
+                        parcelObtain.writeInt(map.size());
                         map.forEach(new BiConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda1
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IAdvancedExtenderImpl.Stub.Proxy.lambda$init$1(Parcel.this, (String) obj, (CameraMetadataNative) obj2);
+                                IAdvancedExtenderImpl.Stub.Proxy.lambda$init$1(parcelObtain, (String) obj, (CameraMetadataNative) obj2);
                             }
                         });
                     }
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -377,160 +379,160 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public LatencyRange getEstimatedCaptureLatencyRange(String str, Size size, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(size, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LatencyRange) obtain2.readTypedObject(LatencyRange.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(size, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LatencyRange) parcelObtain2.readTypedObject(LatencyRange.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public List<SizeList> getSupportedPreviewOutputResolutions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SizeList.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SizeList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public List<SizeList> getSupportedCaptureOutputResolutions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SizeList.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SizeList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public List<SizeList> getSupportedPostviewResolutions(Size size) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(size, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SizeList.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(size, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SizeList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public ISessionProcessorImpl getSessionProcessor() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISessionProcessorImpl.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISessionProcessorImpl.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public CameraMetadataNative getAvailableCaptureRequestKeys(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public CameraMetadataNative getAvailableCaptureResultKeys(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public boolean isCaptureProcessProgressAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public boolean isPostviewAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
             public CameraMetadataNative getAvailableCharacteristicsKeyValues(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

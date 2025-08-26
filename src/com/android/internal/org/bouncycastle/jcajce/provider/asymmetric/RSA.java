@@ -15,10 +15,10 @@ public class RSA {
     private static final Map<String, String> generalRsaAttributes;
 
     static {
-        HashMap hashMap = new HashMap();
-        generalRsaAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "java.security.interfaces.RSAPublicKey|java.security.interfaces.RSAPrivateKey");
-        hashMap.put("SupportedKeyFormats", "PKCS#8|X.509");
+        HashMap map = new HashMap();
+        generalRsaAttributes = map;
+        map.put("SupportedKeyClasses", "java.security.interfaces.RSAPublicKey|java.security.interfaces.RSAPrivateKey");
+        map.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 
     public static class Mappings extends AsymmetricAlgorithmProvider {

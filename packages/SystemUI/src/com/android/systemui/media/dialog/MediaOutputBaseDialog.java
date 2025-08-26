@@ -54,7 +54,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaOutputBaseDialog extends SystemUIDialog implements MediaSwitchingController.Callback, Window.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -85,7 +84,6 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
     public boolean mShouldLaunchLeBroadcastDialog;
     public Button mStopButton;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutManagerWrapper extends LinearLayoutManager {
         public LayoutManagerWrapper(Context context) {
             super(context);
@@ -264,7 +262,7 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
                         NotificationEntry notificationEntry = (NotificationEntry) it.next();
                         Notification notification2 = notificationEntry.mSbn.getNotification();
                         if (notification2.isMediaNotification() && TextUtils.equals(notificationEntry.mSbn.getPackageName(), mediaSwitchingController.mPackageName)) {
-                            r2 = new MediaController(mediaSwitchingController.mContext, (MediaSession.Token) notification2.extras.getParcelable("android.mediaSession", MediaSession.Token.class));
+                            mediaController = new MediaController(mediaSwitchingController.mContext, (MediaSession.Token) notification2.extras.getParcelable("android.mediaSession", MediaSession.Token.class));
                             break;
                         }
                     } else {
@@ -366,18 +364,18 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
         mediaSwitchingController.mIsRefreshing = true;
         IconCompat headerIcon = getHeaderIcon();
         IconCompat appSourceIcon = getAppSourceIcon();
-        Drawable drawable = null;
+        Drawable applicationIcon = null;
         if (headerIcon != null) {
             Icon icon$1 = headerIcon.toIcon$1();
             if (icon$1.getType() == 1 || icon$1.getType() == 5) {
                 boolean z3 = (this.mContext.getResources().getConfiguration().uiMode & 48) == 32;
-                WallpaperColors fromBitmap = WallpaperColors.fromBitmap(icon$1.getBitmap());
-                boolean equals = fromBitmap.equals(null);
-                z2 = !equals;
-                if (!equals) {
+                WallpaperColors wallpaperColorsFromBitmap = WallpaperColors.fromBitmap(icon$1.getBitmap());
+                boolean zEquals = wallpaperColorsFromBitmap.equals(null);
+                z2 = !zEquals;
+                if (!zEquals) {
                     MediaSwitchingController mediaSwitchingController2 = this.mMediaSwitchingController;
                     mediaSwitchingController2.getClass();
-                    ColorScheme colorScheme = new ColorScheme(fromBitmap, z3);
+                    ColorScheme colorScheme = new ColorScheme(wallpaperColorsFromBitmap, z3);
                     MediaOutputColorScheme.Factory.getClass();
                     mediaSwitchingController2.mMediaOutputColorScheme = new MediaOutputColorSchemeDynamic(colorScheme);
                     MediaOutputColorSchemeLegacy.Factory.getClass();
@@ -409,13 +407,13 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
             if (!TextUtils.isEmpty(mediaSwitchingController3.mPackageName)) {
                 try {
                     Log.d("MediaSwitchingController", "try to get app icon");
-                    drawable = mediaSwitchingController3.mContext.getPackageManager().getApplicationIcon(mediaSwitchingController3.mPackageName);
+                    applicationIcon = mediaSwitchingController3.mContext.getPackageManager().getApplicationIcon(mediaSwitchingController3.mPackageName);
                 } catch (PackageManager.NameNotFoundException unused) {
                     Log.d("MediaSwitchingController", "icon not found");
                 }
             }
-            if (drawable != null) {
-                this.mAppResourceIcon.setImageDrawable(drawable);
+            if (applicationIcon != null) {
+                this.mAppResourceIcon.setImageDrawable(applicationIcon);
             } else {
                 this.mAppResourceIcon.setVisibility(8);
             }
@@ -465,9 +463,9 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
         MediaSwitchingController mediaSwitchingController5 = mediaOutputAdapterLegacy2.mController;
         mediaSwitchingController5.getClass();
         ArrayList arrayList = new ArrayList(mediaSwitchingController5.mOutputMediaItemListProxy.getOutputMediaItemList());
-        MediaItem createPairNewDeviceMediaItem = (mediaSwitchingController5.isCurrentConnectedDeviceRemote() || !(((ArrayList) mediaSwitchingController5.mLocalMediaManager.getSelectedMediaDevice()).size() == 1)) ? null : MediaItem.createPairNewDeviceMediaItem();
-        if (createPairNewDeviceMediaItem != null) {
-            arrayList.add(createPairNewDeviceMediaItem);
+        MediaItem mediaItemCreatePairNewDeviceMediaItem = (mediaSwitchingController5.isCurrentConnectedDeviceRemote() || !(((ArrayList) mediaSwitchingController5.mLocalMediaManager.getSelectedMediaDevice()).size() == 1)) ? null : MediaItem.createPairNewDeviceMediaItem();
+        if (mediaItemCreatePairNewDeviceMediaItem != null) {
+            arrayList.add(mediaItemCreatePairNewDeviceMediaItem);
         }
         ((CopyOnWriteArrayList) list).addAll(arrayList);
         if (mediaOutputAdapterLegacy2.mShouldGroupSelectedMediaItems && ((ArrayList) mediaSwitchingController5.mLocalMediaManager.getSelectedMediaDevice()).size() == 1) {
@@ -479,7 +477,6 @@ public abstract class MediaOutputBaseDialog extends SystemUIDialog implements Me
     public void onBroadcastIconClick() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.dialog.MediaOutputBaseDialog$1, reason: invalid class name */
     public class AnonymousClass1 implements BluetoothLeBroadcast.Callback {
         public AnonymousClass1() {

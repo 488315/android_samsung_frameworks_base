@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitcherRepositoryImpl implements UserSwitcherRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,7 +30,6 @@ public final class UserSwitcherRepositoryImpl implements UserSwitcherRepository 
     public final Flow userSwitcherStatus;
     public final boolean userSwitchingMustGoThroughLoginScreen;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,10 +53,10 @@ public final class UserSwitcherRepositoryImpl implements UserSwitcherRepository 
         this.userRepository = userRepository;
         this.showUserSwitcherForSingleUser = context.getResources().getBoolean(R.bool.qs_show_user_switcher_for_single_user);
         this.userSwitchingMustGoThroughLoginScreen = context.getResources().getBoolean(R.bool.config_userSwitchingMustGoThroughLoginScreen);
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new UserSwitcherRepositoryImpl$isEnabled$1(this, null));
-        this.isEnabled = conflatedCallbackFlow;
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new UserSwitcherRepositoryImpl$isEnabled$1(this, null));
+        this.isEnabled = flowConflatedCallbackFlow;
         this.currentUserName = FlowConflatedKt.conflatedCallbackFlow(new UserSwitcherRepositoryImpl$currentUserName$1(this, null));
         this.currentUserInfo = FlowConflatedKt.conflatedCallbackFlow(new UserSwitcherRepositoryImpl$currentUserInfo$1(this, null));
-        this.userSwitcherStatus = FlowKt.distinctUntilChanged(FlowKt.transformLatest(conflatedCallbackFlow, new UserSwitcherRepositoryImpl$special$$inlined$flatMapLatest$1(null, this)));
+        this.userSwitcherStatus = FlowKt.distinctUntilChanged(FlowKt.transformLatest(flowConflatedCallbackFlow, new UserSwitcherRepositoryImpl$special$$inlined$flatMapLatest$1(null, this)));
     }
 }

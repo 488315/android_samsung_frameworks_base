@@ -6,7 +6,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DisappearAnimationUtils extends AppearAnimationUtils {
     public static final AnonymousClass1 ROW_TRANSLATION_SCALER = new AppearAnimationUtils.RowTranslationScaler() { // from class: com.android.settingslib.animation.DisappearAnimationUtils.1

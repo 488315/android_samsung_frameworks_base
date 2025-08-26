@@ -74,9 +74,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         this.mTmpRect = new Rect();
         this.mTmpOutRect = new Rect();
         this.mTmpContainer = new Rect();
-        LayerState createConstantState = createConstantState(layerState, resources);
-        this.mLayerState = createConstantState;
-        if (createConstantState.mNumChildren > 0) {
+        LayerState layerStateCreateConstantState = createConstantState(layerState, resources);
+        this.mLayerState = layerStateCreateConstantState;
+        if (layerStateCreateConstantState.mNumChildren > 0) {
             ensurePadding();
             refreshPadding();
         }
@@ -90,15 +90,15 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         LayerState layerState = this.mLayerState;
-        int resolveDensity = Drawable.resolveDensity(resources, 0);
-        layerState.setDensity(resolveDensity);
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.LayerDrawable);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        int iResolveDensity = Drawable.resolveDensity(resources, 0);
+        layerState.setDensity(iResolveDensity);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.LayerDrawable);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         ChildDrawable[] childDrawableArr = layerState.mChildren;
         int i = layerState.mNumChildren;
         for (int i2 = 0; i2 < i; i2++) {
-            childDrawableArr[i2].setDensity(resolveDensity);
+            childDrawableArr[i2].setDensity(iResolveDensity);
         }
         inflateLayers(resources, xmlPullParser, attributeSet, theme);
         ensurePadding();
@@ -109,22 +109,22 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     public void applyTheme(Resources.Theme theme) {
         super.applyTheme(theme);
         LayerState layerState = this.mLayerState;
-        int resolveDensity = Drawable.resolveDensity(theme.getResources(), 0);
-        layerState.setDensity(resolveDensity);
+        int iResolveDensity = Drawable.resolveDensity(theme.getResources(), 0);
+        layerState.setDensity(iResolveDensity);
         if (layerState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(layerState.mThemeAttrs, R.styleable.LayerDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(layerState.mThemeAttrs, R.styleable.LayerDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         ChildDrawable[] childDrawableArr = layerState.mChildren;
         int i = layerState.mNumChildren;
         for (int i2 = 0; i2 < i; i2++) {
             ChildDrawable childDrawable = childDrawableArr[i2];
-            childDrawable.setDensity(resolveDensity);
+            childDrawable.setDensity(iResolveDensity);
             if (childDrawable.mThemeAttrs != null) {
-                TypedArray resolveAttributes2 = theme.resolveAttributes(childDrawable.mThemeAttrs, R.styleable.LayerDrawableItem);
-                updateLayerFromTypedArray(childDrawable, resolveAttributes2);
-                resolveAttributes2.recycle();
+                TypedArray typedArrayResolveAttributes2 = theme.resolveAttributes(childDrawable.mThemeAttrs, R.styleable.LayerDrawableItem);
+                updateLayerFromTypedArray(childDrawable, typedArrayResolveAttributes2);
+                typedArrayResolveAttributes2.recycle();
             }
             Drawable drawable = childDrawable.mDrawable;
             if (drawable != null && drawable.canApplyTheme()) {
@@ -149,9 +149,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             }
             if (next2 == 2 && depth2 <= depth && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
                 ChildDrawable childDrawable = new ChildDrawable(layerState.mDensity);
-                TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.LayerDrawableItem);
-                updateLayerFromTypedArray(childDrawable, obtainAttributes);
-                obtainAttributes.recycle();
+                TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.LayerDrawableItem);
+                updateLayerFromTypedArray(childDrawable, typedArrayObtainAttributes);
+                typedArrayObtainAttributes.recycle();
                 if (childDrawable.mDrawable == null && (childDrawable.mThemeAttrs == null || childDrawable.mThemeAttrs[4] == 0)) {
                     do {
                         next = xmlPullParser.next();
@@ -297,18 +297,18 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     }
 
     ChildDrawable addLayer(Drawable drawable, int[] iArr, int i, int i2, int i3, int i4, int i5) {
-        ChildDrawable createLayer = createLayer(drawable);
-        createLayer.mId = i;
-        createLayer.mThemeAttrs = iArr;
-        createLayer.mDrawable.setAutoMirrored(isAutoMirrored());
-        createLayer.mInsetL = i2;
-        createLayer.mInsetT = i3;
-        createLayer.mInsetR = i4;
-        createLayer.mInsetB = i5;
-        addLayer(createLayer);
+        ChildDrawable childDrawableCreateLayer = createLayer(drawable);
+        childDrawableCreateLayer.mId = i;
+        childDrawableCreateLayer.mThemeAttrs = iArr;
+        childDrawableCreateLayer.mDrawable.setAutoMirrored(isAutoMirrored());
+        childDrawableCreateLayer.mInsetL = i2;
+        childDrawableCreateLayer.mInsetT = i3;
+        childDrawableCreateLayer.mInsetR = i4;
+        childDrawableCreateLayer.mInsetB = i5;
+        addLayer(childDrawableCreateLayer);
         this.mLayerState.mChildrenChangingConfigurations |= drawable.getChangingConfigurations();
         drawable.setCallback(this);
-        return createLayer;
+        return childDrawableCreateLayer;
     }
 
     private ChildDrawable createLayer(Drawable drawable) {
@@ -318,11 +318,11 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     }
 
     public int addLayer(Drawable drawable) {
-        ChildDrawable createLayer = createLayer(drawable);
-        int addLayer = addLayer(createLayer);
+        ChildDrawable childDrawableCreateLayer = createLayer(drawable);
+        int iAddLayer = addLayer(childDrawableCreateLayer);
         ensurePadding();
-        refreshChildPadding(addLayer, createLayer);
-        return addLayer;
+        refreshChildPadding(iAddLayer, childDrawableCreateLayer);
+        return iAddLayer;
     }
 
     public Drawable findDrawableByLayerId(int i) {
@@ -351,11 +351,11 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     }
 
     public boolean setDrawableByLayerId(int i, Drawable drawable) {
-        int findIndexByLayerId = findIndexByLayerId(i);
-        if (findIndexByLayerId < 0) {
+        int iFindIndexByLayerId = findIndexByLayerId(i);
+        if (iFindIndexByLayerId < 0) {
             return false;
         }
-        setDrawable(findIndexByLayerId, drawable);
+        setDrawable(iFindIndexByLayerId, drawable);
         return true;
     }
 
@@ -955,7 +955,7 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
                 int intrinsicHeight = drawable.getIntrinsicHeight();
                 int i17 = childDrawable.mWidth;
                 int i18 = childDrawable.mHeight;
-                int resolveGravity = resolveGravity(childDrawable.mGravity, i17, i18, intrinsicWidth, intrinsicHeight);
+                int iResolveGravity = resolveGravity(childDrawable.mGravity, i17, i18, intrinsicWidth, intrinsicHeight);
                 if (i17 >= 0) {
                     intrinsicWidth = i17;
                 }
@@ -963,7 +963,7 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
                     intrinsicHeight = i18;
                 }
                 rect3 = rect5;
-                Gravity.apply(resolveGravity, intrinsicWidth, intrinsicHeight, rect4, rect3, i16);
+                Gravity.apply(iResolveGravity, intrinsicWidth, intrinsicHeight, rect4, rect3, i16);
                 i = i16;
                 drawable.setBounds(rect3);
                 if (z2) {
@@ -1098,9 +1098,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     @Override // android.graphics.drawable.Drawable
     public Drawable mutate() {
         if (!this.mMutated && super.mutate() == this) {
-            LayerState createConstantState = createConstantState(this.mLayerState, null);
-            this.mLayerState = createConstantState;
-            ChildDrawable[] childDrawableArr = createConstantState.mChildren;
+            LayerState layerStateCreateConstantState = createConstantState(this.mLayerState, null);
+            this.mLayerState = layerStateCreateConstantState;
+            ChildDrawable[] childDrawableArr = layerStateCreateConstantState.mChildren;
             int i = this.mLayerState.mNumChildren;
             for (int i2 = 0; i2 < i; i2++) {
                 Drawable drawable = childDrawableArr[i2].mDrawable;
@@ -1131,15 +1131,15 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     public boolean onLayoutDirectionChanged(int i) {
         ChildDrawable[] childDrawableArr = this.mLayerState.mChildren;
         int i2 = this.mLayerState.mNumChildren;
-        boolean z = false;
+        boolean layoutDirection = false;
         for (int i3 = 0; i3 < i2; i3++) {
             Drawable drawable = childDrawableArr[i3].mDrawable;
             if (drawable != null) {
-                z |= drawable.setLayoutDirection(i);
+                layoutDirection |= drawable.setLayoutDirection(i);
             }
         }
         updateLayerBounds(getBounds());
-        return z;
+        return layoutDirection;
     }
 
     static class ChildDrawable {
@@ -1168,7 +1168,7 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         }
 
         ChildDrawable(ChildDrawable childDrawable, LayerDrawable layerDrawable, Resources resources) {
-            Drawable drawable;
+            Drawable drawableNewDrawable;
             this.mDensity = 160;
             this.mInsetS = Integer.MIN_VALUE;
             this.mInsetE = Integer.MIN_VALUE;
@@ -1176,27 +1176,27 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             this.mHeight = -1;
             this.mGravity = 0;
             this.mId = -1;
-            Drawable drawable2 = childDrawable.mDrawable;
-            if (drawable2 != null) {
-                Drawable.ConstantState constantState = drawable2.getConstantState();
+            Drawable drawable = childDrawable.mDrawable;
+            if (drawable != null) {
+                Drawable.ConstantState constantState = drawable.getConstantState();
                 if (constantState == null) {
-                    if (drawable2.getCallback() != null) {
+                    if (drawable.getCallback() != null) {
                         Log.w(LayerDrawable.LOG_TAG, "Invalid drawable added to LayerDrawable! Drawable already belongs to another owner but does not expose a constant state.", new RuntimeException());
                     }
-                    drawable = drawable2;
+                    drawableNewDrawable = drawable;
                 } else if (resources != null) {
-                    drawable = constantState.newDrawable(resources);
+                    drawableNewDrawable = constantState.newDrawable(resources);
                 } else {
-                    drawable = constantState.newDrawable();
+                    drawableNewDrawable = constantState.newDrawable();
                 }
-                drawable.setLayoutDirection(drawable2.getLayoutDirection());
-                drawable.setBounds(drawable2.getBounds());
-                drawable.setLevel(drawable2.getLevel());
-                drawable.setCallback(layerDrawable);
+                drawableNewDrawable.setLayoutDirection(drawable.getLayoutDirection());
+                drawableNewDrawable.setBounds(drawable.getBounds());
+                drawableNewDrawable.setLevel(drawable.getLevel());
+                drawableNewDrawable.setCallback(layerDrawable);
             } else {
-                drawable = null;
+                drawableNewDrawable = null;
             }
-            this.mDrawable = drawable;
+            this.mDrawable = drawableNewDrawable;
             this.mThemeAttrs = childDrawable.mThemeAttrs;
             this.mInsetL = childDrawable.mInsetL;
             this.mInsetT = childDrawable.mInsetT;
@@ -1208,11 +1208,11 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             this.mHeight = childDrawable.mHeight;
             this.mGravity = childDrawable.mGravity;
             this.mId = childDrawable.mId;
-            int resolveDensity = Drawable.resolveDensity(resources, childDrawable.mDensity);
-            this.mDensity = resolveDensity;
+            int iResolveDensity = Drawable.resolveDensity(resources, childDrawable.mDensity);
+            this.mDensity = iResolveDensity;
             int i = childDrawable.mDensity;
-            if (i != resolveDensity) {
-                applyDensityScaling(i, resolveDensity);
+            if (i != iResolveDensity) {
+                applyDensityScaling(i, iResolveDensity);
             }
         }
 

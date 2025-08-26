@@ -192,20 +192,20 @@ public class DateUtils {
     public static String semFormatElapsedTime(StringBuilder sb, long j, boolean z, int i) {
         long j2;
         long j3;
-        String str;
+        String strReplace;
         StringBuilder sb2 = sb;
         boolean z2 = j < 0;
-        long abs = (long) ((Math.abs(j) / Math.pow(10.0d, 3 - i)) % Math.pow(10.0d, i));
-        long abs2 = Math.abs(j) / 1000;
-        if (abs2 >= 3600) {
-            j2 = abs2 / 3600;
-            abs2 -= 3600 * j2;
+        long jAbs = (long) ((Math.abs(j) / Math.pow(10.0d, 3 - i)) % Math.pow(10.0d, i));
+        long jAbs2 = Math.abs(j) / 1000;
+        if (jAbs2 >= 3600) {
+            j2 = jAbs2 / 3600;
+            jAbs2 -= 3600 * j2;
         } else {
             j2 = 0;
         }
-        if (abs2 >= 60) {
-            j3 = abs2 / 60;
-            abs2 -= 60 * j3;
+        if (jAbs2 >= 60) {
+            j3 = jAbs2 / 60;
+            jAbs2 -= 60 * j3;
         } else {
             j3 = 0;
         }
@@ -217,27 +217,27 @@ public class DateUtils {
         java.util.Formatter formatter = new java.util.Formatter(sb2, Locale.getDefault());
         initFormatStrings();
         if (!z && j2 <= 0) {
-            String str2 = sElapsedFormatMMSS;
+            String str = sElapsedFormatMMSS;
             if (z2) {
-                str2 = NativeLibraryHelper.CLEAR_ABI_OVERRIDE + str2;
+                str = NativeLibraryHelper.CLEAR_ABI_OVERRIDE + str;
             }
             if (i > 0) {
-                return formatter.format(str2 + ".%3$0" + i + XmlTags.ATTR_DESCRIPTION, Long.valueOf(j3), Long.valueOf(abs2), Long.valueOf(abs)).toString();
+                return formatter.format(str + ".%3$0" + i + XmlTags.ATTR_DESCRIPTION, Long.valueOf(j3), Long.valueOf(jAbs2), Long.valueOf(jAbs)).toString();
             }
-            return formatter.format(str2, Long.valueOf(j3), Long.valueOf(abs2)).toString();
+            return formatter.format(str, Long.valueOf(j3), Long.valueOf(jAbs2)).toString();
         }
         if (z) {
-            str = sElapsedFormatHMMSS.replace("%1$d", "%1$02d");
+            strReplace = sElapsedFormatHMMSS.replace("%1$d", "%1$02d");
         } else {
-            str = sElapsedFormatHMMSS;
+            strReplace = sElapsedFormatHMMSS;
         }
         if (z2) {
-            str = NativeLibraryHelper.CLEAR_ABI_OVERRIDE + str;
+            strReplace = NativeLibraryHelper.CLEAR_ABI_OVERRIDE + strReplace;
         }
         if (i > 0) {
-            return formatter.format(str + ".%4$0" + i + XmlTags.ATTR_DESCRIPTION, Long.valueOf(j2), Long.valueOf(j3), Long.valueOf(abs2), Long.valueOf(abs)).toString();
+            return formatter.format(strReplace + ".%4$0" + i + XmlTags.ATTR_DESCRIPTION, Long.valueOf(j2), Long.valueOf(j3), Long.valueOf(jAbs2), Long.valueOf(jAbs)).toString();
         }
-        return formatter.format(str, Long.valueOf(j2), Long.valueOf(j3), Long.valueOf(abs2)).toString();
+        return formatter.format(strReplace, Long.valueOf(j2), Long.valueOf(j3), Long.valueOf(jAbs2)).toString();
     }
 
     public static String formatElapsedTime(long j) {
@@ -292,10 +292,10 @@ public class DateUtils {
     }
 
     private static boolean isSameDate(long j, long j2) {
-        ZoneId systemDefault = ZoneId.systemDefault();
-        LocalDateTime ofInstant = LocalDateTime.ofInstant(Instant.ofEpochMilli(j), systemDefault);
-        LocalDateTime ofInstant2 = LocalDateTime.ofInstant(Instant.ofEpochMilli(j2), systemDefault);
-        return ofInstant.getYear() == ofInstant2.getYear() && ofInstant.getMonthValue() == ofInstant2.getMonthValue() && ofInstant.getDayOfMonth() == ofInstant2.getDayOfMonth();
+        ZoneId zoneIdSystemDefault = ZoneId.systemDefault();
+        LocalDateTime localDateTimeOfInstant = LocalDateTime.ofInstant(Instant.ofEpochMilli(j), zoneIdSystemDefault);
+        LocalDateTime localDateTimeOfInstant2 = LocalDateTime.ofInstant(Instant.ofEpochMilli(j2), zoneIdSystemDefault);
+        return localDateTimeOfInstant.getYear() == localDateTimeOfInstant2.getYear() && localDateTimeOfInstant.getMonthValue() == localDateTimeOfInstant2.getMonthValue() && localDateTimeOfInstant.getDayOfMonth() == localDateTimeOfInstant2.getDayOfMonth();
     }
 
     public static String formatDateRange(Context context, long j, long j2, int i) {
@@ -306,7 +306,7 @@ public class DateUtils {
         return formatDateRange(context, formatter, j, j2, i, null);
     }
 
-    public static java.util.Formatter formatDateRange(Context context, java.util.Formatter formatter, long j, long j2, int i, String str) {
+    public static java.util.Formatter formatDateRange(Context context, java.util.Formatter formatter, long j, long j2, int i, String str) throws IOException {
         if ((i & 193) == 1) {
             i |= DateFormat.is24HourFormat(context) ? 128 : 64;
         }
@@ -324,10 +324,10 @@ public class DateUtils {
 
     public static CharSequence getRelativeTimeSpanString(Context context, long j, boolean z) {
         Context context2;
-        String formatDateRange;
+        String dateRange;
         int i;
-        long currentTimeMillis = System.currentTimeMillis();
-        long abs = Math.abs(currentTimeMillis - j);
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        long jAbs = Math.abs(jCurrentTimeMillis - j);
         synchronized (DateUtils.class) {
             if (sNowTime == null) {
                 sNowTime = new Time();
@@ -335,26 +335,26 @@ public class DateUtils {
             if (sThenTime == null) {
                 sThenTime = new Time();
             }
-            sNowTime.set(currentTimeMillis);
+            sNowTime.set(jCurrentTimeMillis);
             sThenTime.set(j);
-            if (abs < 86400000 && sNowTime.weekDay == sThenTime.weekDay) {
+            if (jAbs < 86400000 && sNowTime.weekDay == sThenTime.weekDay) {
                 context2 = context;
-                formatDateRange = formatDateRange(context2, j, j, 1);
+                dateRange = formatDateRange(context2, j, j, 1);
                 i = R.string.preposition_for_time;
             } else {
                 context2 = context;
                 if (sNowTime.year != sThenTime.year) {
-                    formatDateRange = formatDateRange(context2, j, j, 131092);
+                    dateRange = formatDateRange(context2, j, j, 131092);
                 } else {
-                    formatDateRange = formatDateRange(context2, j, j, IntegerExpressionEvaluator.I_ABS);
+                    dateRange = formatDateRange(context2, j, j, IntegerExpressionEvaluator.I_ABS);
                 }
-                i = 17042587;
+                i = 17042591;
             }
             if (z) {
-                formatDateRange = context2.getResources().getString(i, formatDateRange);
+                dateRange = context2.getResources().getString(i, dateRange);
             }
         }
-        return formatDateRange;
+        return dateRange;
     }
 
     public static CharSequence getRelativeTimeSpanString(Context context, long j) {

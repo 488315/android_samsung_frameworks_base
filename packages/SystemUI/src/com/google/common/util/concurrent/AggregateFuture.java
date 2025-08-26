@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AggregateFuture extends AggregateFutureState {
     public static final LazyLogger logger = new LazyLogger(AggregateFuture.class);
@@ -19,7 +18,6 @@ public abstract class AggregateFuture extends AggregateFutureState {
     public final boolean collectsValues;
     public ImmutableCollection futures;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ReleaseResourcesReason {
         OUTPUT_FUTURE_DONE,
         ALL_INPUT_FUTURES_PROCESSED
@@ -37,10 +35,10 @@ public abstract class AggregateFuture extends AggregateFutureState {
         ImmutableCollection immutableCollection = this.futures;
         releaseResources(ReleaseResourcesReason.OUTPUT_FUTURE_DONE);
         if ((this.value instanceof AbstractFuture.Cancellation) && (immutableCollection != null)) {
-            boolean wasInterrupted = wasInterrupted();
+            boolean zWasInterrupted = wasInterrupted();
             UnmodifiableIterator it = immutableCollection.iterator();
             while (it.hasNext()) {
-                ((Future) it.next()).cancel(wasInterrupted);
+                ((Future) it.next()).cancel(zWasInterrupted);
             }
         }
     }
@@ -48,12 +46,12 @@ public abstract class AggregateFuture extends AggregateFutureState {
     public abstract void collectOneValue(int i, Object obj);
 
     public final void decrementCountAndMaybeComplete(ImmutableCollection immutableCollection) {
-        int decrementAndGetRemainingCount = AggregateFutureState.ATOMIC_HELPER.decrementAndGetRemainingCount(this);
+        int iDecrementAndGetRemainingCount = AggregateFutureState.ATOMIC_HELPER.decrementAndGetRemainingCount(this);
         int i = 0;
-        if (!(decrementAndGetRemainingCount >= 0)) {
+        if (!(iDecrementAndGetRemainingCount >= 0)) {
             throw new IllegalStateException("Less than 0 remaining futures");
         }
-        if (decrementAndGetRemainingCount == 0) {
+        if (iDecrementAndGetRemainingCount == 0) {
             if (immutableCollection != null) {
                 UnmodifiableIterator it = immutableCollection.iterator();
                 while (it.hasNext()) {
@@ -83,22 +81,22 @@ public abstract class AggregateFuture extends AggregateFutureState {
         if (this.allMustSucceed && !setException(th)) {
             Set set = this.seenExceptions;
             if (set == null) {
-                Set newSetFromMap = Collections.newSetFromMap(new ConcurrentHashMap());
-                newSetFromMap.getClass();
+                Set setNewSetFromMap = Collections.newSetFromMap(new ConcurrentHashMap());
+                setNewSetFromMap.getClass();
                 if (!(this.value instanceof AbstractFuture.Cancellation)) {
-                    Throwable tryInternalFastPathGetFailure = tryInternalFastPathGetFailure();
-                    Objects.requireNonNull(tryInternalFastPathGetFailure);
-                    while (tryInternalFastPathGetFailure != null && newSetFromMap.add(tryInternalFastPathGetFailure)) {
-                        tryInternalFastPathGetFailure = tryInternalFastPathGetFailure.getCause();
+                    Throwable thTryInternalFastPathGetFailure = tryInternalFastPathGetFailure();
+                    Objects.requireNonNull(thTryInternalFastPathGetFailure);
+                    while (thTryInternalFastPathGetFailure != null && setNewSetFromMap.add(thTryInternalFastPathGetFailure)) {
+                        thTryInternalFastPathGetFailure = thTryInternalFastPathGetFailure.getCause();
                     }
                 }
-                AggregateFutureState.ATOMIC_HELPER.compareAndSetSeenExceptions(this, newSetFromMap);
+                AggregateFutureState.ATOMIC_HELPER.compareAndSetSeenExceptions(this, setNewSetFromMap);
                 Set set2 = this.seenExceptions;
                 Objects.requireNonNull(set2);
                 set = set2;
             }
-            for (Throwable th2 = th; th2 != null; th2 = th2.getCause()) {
-                if (set.add(th2)) {
+            for (Throwable cause = th; cause != null; cause = cause.getCause()) {
+                if (set.add(cause)) {
                 }
             }
             logger.get().log(Level.SEVERE, th instanceof Error ? "Input Future failed with Error" : "Got more than one input Future failure. Logging failures after the first", th);

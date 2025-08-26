@@ -8,7 +8,6 @@ import java.util.List;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.collections.builders.SetBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DownstreamSet {
     public final HashSet outputs = new HashSet();
@@ -69,9 +68,9 @@ public final class DownstreamSet {
         Iterator it2 = this.muxMovers.iterator();
         while (it2.hasNext()) {
             MuxDeferredNode muxDeferredNode = (MuxDeferredNode) it2.next();
-            boolean updateIndirectRoots$default = DepthTracker.updateIndirectRoots$default(muxDeferredNode.depthTracker, null, setBuilder, null, 5);
+            boolean zUpdateIndirectRoots$default = DepthTracker.updateIndirectRoots$default(muxDeferredNode.depthTracker, null, setBuilder, null, 5);
             DepthTracker depthTracker = muxDeferredNode.depthTracker;
-            if (updateIndirectRoots$default | depthTracker.removeIndirectUpstream(i) | depthTracker.setIsIndirectRoot(true)) {
+            if (zUpdateIndirectRoots$default | depthTracker.removeIndirectUpstream(i) | depthTracker.setIsIndirectRoot(true)) {
                 depthTracker.schedule(schedulerImpl, muxDeferredNode);
             }
         }
@@ -121,9 +120,9 @@ public final class DownstreamSet {
         Iterator it2 = this.muxMovers.iterator();
         while (it2.hasNext()) {
             MuxDeferredNode muxDeferredNode = (MuxDeferredNode) it2.next();
-            boolean updateIndirectRoots$default = DepthTracker.updateIndirectRoots$default(muxDeferredNode.depthTracker, null, setBuilder, null, 5);
+            boolean zUpdateIndirectRoots$default = DepthTracker.updateIndirectRoots$default(muxDeferredNode.depthTracker, null, setBuilder, null, 5);
             DepthTracker depthTracker = muxDeferredNode.depthTracker;
-            if (updateIndirectRoots$default | depthTracker.removeIndirectUpstream(i)) {
+            if (zUpdateIndirectRoots$default | depthTracker.removeIndirectUpstream(i)) {
                 depthTracker.schedule(schedulerImpl, muxDeferredNode);
             }
             muxDeferredNode.patches = null;

@@ -45,9 +45,9 @@ public interface IBiometricServiceLockoutResetCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBiometricServiceLockoutResetCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBiometricServiceLockoutResetCallback)) {
-                return (IBiometricServiceLockoutResetCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBiometricServiceLockoutResetCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBiometricServiceLockoutResetCallback)) {
+                return (IBiometricServiceLockoutResetCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IBiometricServiceLockoutResetCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onLockoutReset(readInt, asInterface);
+                onLockoutReset(i3, iRemoteCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IBiometricServiceLockoutResetCallback extends IInterface {
 
             @Override // android.hardware.biometrics.IBiometricServiceLockoutResetCallback
             public void onLockoutReset(int i, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBiometricServiceLockoutResetCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBiometricServiceLockoutResetCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

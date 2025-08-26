@@ -57,7 +57,7 @@ public class Volume {
         this.ref = str;
     }
 
-    static Volume read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Volume read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         Volume volume = new Volume();
         String attributeValue = xmlPullParser.getAttributeValue(null, "stream");

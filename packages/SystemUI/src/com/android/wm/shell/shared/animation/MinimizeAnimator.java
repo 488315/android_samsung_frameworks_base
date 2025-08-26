@@ -17,7 +17,6 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.wm.shell.shared.animation.WindowAnimator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MinimizeAnimator {
     public static final WindowAnimator.BoundsAnimationParams minimizeBoundsAnimationDef;
@@ -38,15 +37,15 @@ public final class MinimizeAnimator {
         final WindowAnimator.BoundsAnimationParams boundsAnimationParams = minimizeBoundsAnimationDef;
         PointF position = WindowAnimator.getPosition(displayMetrics, endAbsBounds, boundsAnimationParams.startScale, boundsAnimationParams.startOffsetYDp);
         final SurfaceControl leash = change.getLeash();
-        ValueAnimator ofObject = ValueAnimator.ofObject(new PointFEvaluator(), position, WindowAnimator.getPosition(displayMetrics, change.getEndAbsBounds(), boundsAnimationParams.endScale, boundsAnimationParams.endOffsetYDp));
-        ofObject.setDuration(boundsAnimationParams.durationMs);
-        ofObject.setInterpolator(boundsAnimationParams.interpolator);
-        ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.animation.WindowAnimator$createBoundsAnimator$1$1
+        ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new PointFEvaluator(), position, WindowAnimator.getPosition(displayMetrics, change.getEndAbsBounds(), boundsAnimationParams.endScale, boundsAnimationParams.endOffsetYDp));
+        valueAnimatorOfObject.setDuration(boundsAnimationParams.durationMs);
+        valueAnimatorOfObject.setInterpolator(boundsAnimationParams.interpolator);
+        valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.animation.WindowAnimator$createBoundsAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 PointF pointF = (PointF) valueAnimator.getAnimatedValue();
                 WindowAnimator windowAnimator2 = WindowAnimator.INSTANCE;
-                WindowAnimator.BoundsAnimationParams boundsAnimationParams2 = WindowAnimator.BoundsAnimationParams.this;
+                WindowAnimator.BoundsAnimationParams boundsAnimationParams2 = boundsAnimationParams;
                 float f = boundsAnimationParams2.startScale;
                 float f2 = boundsAnimationParams2.endScale;
                 float animatedFraction = valueAnimator.getAnimatedFraction();
@@ -54,14 +53,14 @@ public final class MinimizeAnimator {
                 if (0.0f > animatedFraction || animatedFraction > 1.0f) {
                     throw new IllegalArgumentException("Failed requirement.");
                 }
-                float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f, animatedFraction, f);
-                transaction.setPosition(leash, pointF.x, pointF.y).setScale(leash, m$1, m$1).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
+                float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f, animatedFraction, f);
+                transaction.setPosition(leash, pointF.x, pointF.y).setScale(leash, fM$1, fM$1).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
             }
         });
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(100L);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.animation.MinimizeAnimator$create$alphaAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(100L);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.animation.MinimizeAnimator$create$alphaAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 transaction.setAlpha(change.getLeash(), ((Float) valueAnimator.getAnimatedValue()).floatValue()).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
@@ -76,7 +75,7 @@ public final class MinimizeAnimator {
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 interactionJankMonitor.end(109);
-                function1.mo779invoke(animator);
+                function1.mo781invoke(animator);
             }
 
             @Override // android.animation.Animator.AnimatorListener
@@ -89,7 +88,7 @@ public final class MinimizeAnimator {
             }
         };
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofObject, ofFloat);
+        animatorSet.playTogether(valueAnimatorOfObject, valueAnimatorOfFloat);
         animatorSet.addListener(animatorListener);
         return animatorSet;
     }

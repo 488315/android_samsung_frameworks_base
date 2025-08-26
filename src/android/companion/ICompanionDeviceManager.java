@@ -355,9 +355,9 @@ public interface ICompanionDeviceManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICompanionDeviceManager)) {
-                return (ICompanionDeviceManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICompanionDeviceManager)) {
+                return (ICompanionDeviceManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -466,305 +466,305 @@ public interface ICompanionDeviceManager extends IInterface {
             switch (i) {
                 case 1:
                     AssociationRequest associationRequest = (AssociationRequest) parcel.readTypedObject(AssociationRequest.CREATOR);
-                    IAssociationRequestCallback asInterface = IAssociationRequestCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    IAssociationRequestCallback iAssociationRequestCallbackAsInterface = IAssociationRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    associate(associationRequest, asInterface, readString, readInt);
+                    associate(associationRequest, iAssociationRequestCallbackAsInterface, string, i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AssociationInfo> associations = getAssociations(readString2, readInt2);
+                    List<AssociationInfo> associations = getAssociations(string2, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(associations, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AssociationInfo> allAssociationsForUser = getAllAssociationsForUser(readInt3);
+                    List<AssociationInfo> allAssociationsForUser = getAllAssociationsForUser(i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(allAssociationsForUser, 1);
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    legacyDisassociate(readString3, readString4, readInt4);
+                    legacyDisassociate(string3, string4, i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disassociate(readInt5);
+                    disassociate(i7);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasNotificationAccess = hasNotificationAccess(componentName);
+                    boolean zHasNotificationAccess = hasNotificationAccess(componentName);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasNotificationAccess);
+                    parcel2.writeBoolean(zHasNotificationAccess);
                     return true;
                 case 7:
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PendingIntent requestNotificationAccess = requestNotificationAccess(componentName2, readInt6);
+                    PendingIntent pendingIntentRequestNotificationAccess = requestNotificationAccess(componentName2, i8);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(requestNotificationAccess, 1);
+                    parcel2.writeTypedObject(pendingIntentRequestNotificationAccess, 1);
                     return true;
                 case 8:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isDeviceAssociatedForWifiConnection = isDeviceAssociatedForWifiConnection(readString5, readString6, readInt7);
+                    boolean zIsDeviceAssociatedForWifiConnection = isDeviceAssociatedForWifiConnection(string5, string6, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceAssociatedForWifiConnection);
+                    parcel2.writeBoolean(zIsDeviceAssociatedForWifiConnection);
                     return true;
                 case 9:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    legacyStartObservingDevicePresence(readString7, readString8, readInt8);
+                    legacyStartObservingDevicePresence(string7, string8, i10);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    legacyStopObservingDevicePresence(readString9, readString10, readInt9);
+                    legacyStopObservingDevicePresence(string9, string10, i11);
                     parcel2.writeNoException();
                     return true;
                 case 11:
                     ObservingDevicePresenceRequest observingDevicePresenceRequest = (ObservingDevicePresenceRequest) parcel.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
-                    String readString11 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startObservingDevicePresence(observingDevicePresenceRequest, readString11, readInt10);
+                    startObservingDevicePresence(observingDevicePresenceRequest, string11, i12);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     ObservingDevicePresenceRequest observingDevicePresenceRequest2 = (ObservingDevicePresenceRequest) parcel.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
-                    String readString12 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopObservingDevicePresence(observingDevicePresenceRequest2, readString12, readInt11);
+                    stopObservingDevicePresence(observingDevicePresenceRequest2, string12, i13);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt12 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean canPairWithoutPrompt = canPairWithoutPrompt(readString13, readString14, readInt12);
+                    boolean zCanPairWithoutPrompt = canPairWithoutPrompt(string13, string14, i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canPairWithoutPrompt);
+                    parcel2.writeBoolean(zCanPairWithoutPrompt);
                     return true;
                 case 14:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    int readInt13 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    createAssociation(readString15, readString16, readInt13, createByteArray);
+                    createAssociation(string15, string16, i15, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    IOnAssociationsChangedListener asInterface2 = IOnAssociationsChangedListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt14 = parcel.readInt();
+                    IOnAssociationsChangedListener iOnAssociationsChangedListenerAsInterface = IOnAssociationsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addOnAssociationsChangedListener(asInterface2, readInt14);
+                    addOnAssociationsChangedListener(iOnAssociationsChangedListenerAsInterface, i16);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    IOnAssociationsChangedListener asInterface3 = IOnAssociationsChangedListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt15 = parcel.readInt();
+                    IOnAssociationsChangedListener iOnAssociationsChangedListenerAsInterface2 = IOnAssociationsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeOnAssociationsChangedListener(asInterface3, readInt15);
+                    removeOnAssociationsChangedListener(iOnAssociationsChangedListenerAsInterface2, i17);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    IOnTransportsChangedListener asInterface4 = IOnTransportsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOnTransportsChangedListener iOnTransportsChangedListenerAsInterface = IOnTransportsChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnTransportsChangedListener(asInterface4);
+                    addOnTransportsChangedListener(iOnTransportsChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    IOnTransportsChangedListener asInterface5 = IOnTransportsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOnTransportsChangedListener iOnTransportsChangedListenerAsInterface2 = IOnTransportsChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeOnTransportsChangedListener(asInterface5);
+                    removeOnTransportsChangedListener(iOnTransportsChangedListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt16 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int[] createIntArray = parcel.createIntArray();
+                    int i18 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    sendMessage(readInt16, createByteArray2, createIntArray);
+                    sendMessage(i18, bArrCreateByteArray2, iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt17 = parcel.readInt();
-                    IOnMessageReceivedListener asInterface6 = IOnMessageReceivedListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i19 = parcel.readInt();
+                    IOnMessageReceivedListener iOnMessageReceivedListenerAsInterface = IOnMessageReceivedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnMessageReceivedListener(readInt17, asInterface6);
+                    addOnMessageReceivedListener(i19, iOnMessageReceivedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt18 = parcel.readInt();
-                    IOnMessageReceivedListener asInterface7 = IOnMessageReceivedListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
+                    IOnMessageReceivedListener iOnMessageReceivedListenerAsInterface2 = IOnMessageReceivedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeOnMessageReceivedListener(readInt18, asInterface7);
+                    removeOnMessageReceivedListener(i20, iOnMessageReceivedListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifySelfManagedDeviceAppeared(readInt19);
+                    notifySelfManagedDeviceAppeared(i21);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifySelfManagedDeviceDisappeared(readInt20);
+                    notifySelfManagedDeviceDisappeared(i22);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    String readString17 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PendingIntent buildPermissionTransferUserConsentIntent = buildPermissionTransferUserConsentIntent(readString17, readInt21, readInt22);
+                    PendingIntent pendingIntentBuildPermissionTransferUserConsentIntent = buildPermissionTransferUserConsentIntent(string17, i23, i24);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(buildPermissionTransferUserConsentIntent, 1);
+                    parcel2.writeTypedObject(pendingIntentBuildPermissionTransferUserConsentIntent, 1);
                     return true;
                 case 25:
-                    String readString18 = parcel.readString();
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPermissionTransferUserConsented = isPermissionTransferUserConsented(readString18, readInt23, readInt24);
+                    boolean zIsPermissionTransferUserConsented = isPermissionTransferUserConsented(string18, i25, i26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPermissionTransferUserConsented);
+                    parcel2.writeBoolean(zIsPermissionTransferUserConsented);
                     return true;
                 case 26:
-                    String readString19 = parcel.readString();
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
-                    ISystemDataTransferCallback asInterface8 = ISystemDataTransferCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string19 = parcel.readString();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
+                    ISystemDataTransferCallback iSystemDataTransferCallbackAsInterface = ISystemDataTransferCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startSystemDataTransfer(readString19, readInt25, readInt26, asInterface8);
+                    startSystemDataTransfer(string19, i27, i28, iSystemDataTransferCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    String readString20 = parcel.readString();
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    attachSystemDataTransport(readString20, readInt27, readInt28, parcelFileDescriptor, readInt29);
+                    attachSystemDataTransport(string20, i29, i30, parcelFileDescriptor, i31);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString21 = parcel.readString();
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    detachSystemDataTransport(readString21, readInt30, readInt31);
+                    detachSystemDataTransport(string21, i32, i33);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    String readString22 = parcel.readString();
-                    int readInt32 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCompanionApplicationBound = isCompanionApplicationBound(readString22, readInt32);
+                    boolean zIsCompanionApplicationBound = isCompanionApplicationBound(string22, i34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCompanionApplicationBound);
+                    parcel2.writeBoolean(zIsCompanionApplicationBound);
                     return true;
                 case 30:
-                    String readString23 = parcel.readString();
-                    int readInt33 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PendingIntent buildAssociationCancellationIntent = buildAssociationCancellationIntent(readString23, readInt33);
+                    PendingIntent pendingIntentBuildAssociationCancellationIntent = buildAssociationCancellationIntent(string23, i35);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(buildAssociationCancellationIntent, 1);
+                    parcel2.writeTypedObject(pendingIntentBuildAssociationCancellationIntent, 1);
                     return true;
                 case 31:
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableSystemDataSync(readInt34, readInt35);
+                    enableSystemDataSync(i36, i37);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    int readInt36 = parcel.readInt();
-                    int readInt37 = parcel.readInt();
+                    int i38 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableSystemDataSync(readInt36, readInt37);
+                    disableSystemDataSync(i38, i39);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    int readInt38 = parcel.readInt();
+                    int i40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enablePermissionsSync(readInt38);
+                    enablePermissionsSync(i40);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disablePermissionsSync(readInt39);
+                    disablePermissionsSync(i41);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PermissionSyncRequest permissionSyncRequest = getPermissionSyncRequest(readInt40);
+                    PermissionSyncRequest permissionSyncRequest = getPermissionSyncRequest(i42);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(permissionSyncRequest, 1);
                     return true;
                 case 36:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    enableSecureTransport(readBoolean);
+                    enableSecureTransport(z);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     DeviceId deviceId = (DeviceId) parcel.readTypedObject(DeviceId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setDeviceId(readInt41, deviceId);
+                    setDeviceId(i43, deviceId);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt42 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] backupPayload = getBackupPayload(readInt42);
+                    byte[] backupPayload = getBackupPayload(i44);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(backupPayload);
                     return true;
                 case 39:
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    int readInt43 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    applyRestoredPayload(createByteArray3, readInt43);
+                    applyRestoredPayload(bArrCreateByteArray3, i45);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    int readInt44 = parcel.readInt();
-                    String readString24 = parcel.readString();
-                    int readInt45 = parcel.readInt();
+                    int i46 = parcel.readInt();
+                    String string24 = parcel.readString();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeBond = removeBond(readInt44, readString24, readInt45);
+                    boolean zRemoveBond = removeBond(i46, string24, i47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeBond);
+                    parcel2.writeBoolean(zRemoveBond);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -789,663 +789,663 @@ public interface ICompanionDeviceManager extends IInterface {
 
             @Override // android.companion.ICompanionDeviceManager
             public void associate(AssociationRequest associationRequest, IAssociationRequestCallback iAssociationRequestCallback, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(associationRequest, 0);
-                    obtain.writeStrongInterface(iAssociationRequestCallback);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(associationRequest, 0);
+                    parcelObtain.writeStrongInterface(iAssociationRequestCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public List<AssociationInfo> getAssociations(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AssociationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AssociationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public List<AssociationInfo> getAllAssociationsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AssociationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AssociationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void legacyDisassociate(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void disassociate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean hasNotificationAccess(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public PendingIntent requestNotificationAccess(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PendingIntent) obtain2.readTypedObject(PendingIntent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PendingIntent) parcelObtain2.readTypedObject(PendingIntent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean isDeviceAssociatedForWifiConnection(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void legacyStartObservingDevicePresence(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void legacyStopObservingDevicePresence(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void startObservingDevicePresence(ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(observingDevicePresenceRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(observingDevicePresenceRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void stopObservingDevicePresence(ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(observingDevicePresenceRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(observingDevicePresenceRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean canPairWithoutPrompt(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void createAssociation(String str, String str2, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void addOnAssociationsChangedListener(IOnAssociationsChangedListener iOnAssociationsChangedListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnAssociationsChangedListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnAssociationsChangedListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void removeOnAssociationsChangedListener(IOnAssociationsChangedListener iOnAssociationsChangedListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnAssociationsChangedListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnAssociationsChangedListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void addOnTransportsChangedListener(IOnTransportsChangedListener iOnTransportsChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnTransportsChangedListener);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnTransportsChangedListener);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void removeOnTransportsChangedListener(IOnTransportsChangedListener iOnTransportsChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnTransportsChangedListener);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnTransportsChangedListener);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void sendMessage(int i, byte[] bArr, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void addOnMessageReceivedListener(int i, IOnMessageReceivedListener iOnMessageReceivedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iOnMessageReceivedListener);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iOnMessageReceivedListener);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void removeOnMessageReceivedListener(int i, IOnMessageReceivedListener iOnMessageReceivedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iOnMessageReceivedListener);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iOnMessageReceivedListener);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void notifySelfManagedDeviceAppeared(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void notifySelfManagedDeviceDisappeared(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public PendingIntent buildPermissionTransferUserConsentIntent(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PendingIntent) obtain2.readTypedObject(PendingIntent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PendingIntent) parcelObtain2.readTypedObject(PendingIntent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean isPermissionTransferUserConsented(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void startSystemDataTransfer(String str, int i, int i2, ISystemDataTransferCallback iSystemDataTransferCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iSystemDataTransferCallback);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iSystemDataTransferCallback);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void attachSystemDataTransport(String str, int i, int i2, ParcelFileDescriptor parcelFileDescriptor, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void detachSystemDataTransport(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean isCompanionApplicationBound(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public PendingIntent buildAssociationCancellationIntent(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PendingIntent) obtain2.readTypedObject(PendingIntent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PendingIntent) parcelObtain2.readTypedObject(PendingIntent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void enableSystemDataSync(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void disableSystemDataSync(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void enablePermissionsSync(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void disablePermissionsSync(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public PermissionSyncRequest getPermissionSyncRequest(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PermissionSyncRequest) obtain2.readTypedObject(PermissionSyncRequest.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PermissionSyncRequest) parcelObtain2.readTypedObject(PermissionSyncRequest.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void enableSecureTransport(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void setDeviceId(int i, DeviceId deviceId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(deviceId, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(deviceId, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public byte[] getBackupPayload(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public void applyRestoredPayload(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceManager
             public boolean removeBond(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

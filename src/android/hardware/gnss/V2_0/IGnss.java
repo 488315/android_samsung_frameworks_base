@@ -85,9 +85,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IGnss)) {
-            return (IGnss) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IGnss)) {
+            return (IGnss) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -727,13 +727,13 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -895,16 +895,16 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     return;
                 case 2:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    boolean start = start();
+                    boolean zStart = start();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(start);
+                    hwParcel2.writeBool(zStart);
                     hwParcel2.send();
                     return;
                 case 3:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    boolean stop = stop();
+                    boolean zStop = stop();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(stop);
+                    hwParcel2.writeBool(zStop);
                     hwParcel2.send();
                     return;
                 case 4:
@@ -915,16 +915,16 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    boolean injectTime = injectTime(hwParcel.readInt64(), hwParcel.readInt64(), hwParcel.readInt32());
+                    boolean zInjectTime = injectTime(hwParcel.readInt64(), hwParcel.readInt64(), hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(injectTime);
+                    hwParcel2.writeBool(zInjectTime);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    boolean injectLocation = injectLocation(hwParcel.readDouble(), hwParcel.readDouble(), hwParcel.readFloat());
+                    boolean zInjectLocation = injectLocation(hwParcel.readDouble(), hwParcel.readDouble(), hwParcel.readFloat());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(injectLocation);
+                    hwParcel2.writeBool(zInjectLocation);
                     hwParcel2.send();
                     return;
                 case 7:
@@ -1042,9 +1042,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     hwParcel.enforceInterface(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
                     android.hardware.gnss.V1_0.GnssLocation gnssLocation = new android.hardware.gnss.V1_0.GnssLocation();
                     gnssLocation.readFromParcel(hwParcel);
-                    boolean injectBestLocation = injectBestLocation(gnssLocation);
+                    boolean zInjectBestLocation = injectBestLocation(gnssLocation);
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(injectBestLocation);
+                    hwParcel2.writeBool(zInjectBestLocation);
                     hwParcel2.send();
                     return;
                 case 24:
@@ -1114,18 +1114,18 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     hwParcel.enforceInterface(IGnss.kInterfaceName);
                     GnssLocation gnssLocation2 = new GnssLocation();
                     gnssLocation2.readFromParcel(hwParcel);
-                    boolean injectBestLocation_2_0 = injectBestLocation_2_0(gnssLocation2);
+                    boolean zInjectBestLocation_2_0 = injectBestLocation_2_0(gnssLocation2);
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(injectBestLocation_2_0);
+                    hwParcel2.writeBool(zInjectBestLocation_2_0);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -1136,9 +1136,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

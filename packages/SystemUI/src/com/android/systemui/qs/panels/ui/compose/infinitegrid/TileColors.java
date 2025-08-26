@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileColors {
     public final float alpha;
@@ -31,7 +30,7 @@ public final class TileColors {
         TileColors tileColors = (TileColors) obj;
         long j = tileColors.background;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.background, j) && ULong.m3427equalsimpl0(this.iconBackground, tileColors.iconBackground) && ULong.m3427equalsimpl0(this.label, tileColors.label) && ULong.m3427equalsimpl0(this.secondaryLabel, tileColors.secondaryLabel) && ULong.m3427equalsimpl0(this.icon, tileColors.icon) && Float.compare(this.alpha, tileColors.alpha) == 0;
+        return ULong.m3447equalsimpl0(this.background, j) && ULong.m3447equalsimpl0(this.iconBackground, tileColors.iconBackground) && ULong.m3447equalsimpl0(this.label, tileColors.label) && ULong.m3447equalsimpl0(this.secondaryLabel, tileColors.secondaryLabel) && ULong.m3447equalsimpl0(this.icon, tileColors.icon) && Float.compare(this.alpha, tileColors.alpha) == 0;
     }
 
     public final int hashCode() {
@@ -41,16 +40,16 @@ public final class TileColors {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.background);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.iconBackground);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.label);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.secondaryLabel);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.icon);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("TileColors(background=", m462toStringimpl, ", iconBackground=", m462toStringimpl2, ", label=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", secondaryLabel=", m462toStringimpl4, ", icon=");
-        m.append(m462toStringimpl5);
-        m.append(", alpha=");
-        return DpCornerSize$$ExternalSyntheticOutline0.m(this.alpha, ")", m);
+        String strM464toStringimpl = Color.m464toStringimpl(this.background);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.iconBackground);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.label);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.secondaryLabel);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.icon);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("TileColors(background=", strM464toStringimpl, ", iconBackground=", strM464toStringimpl2, ", label=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", secondaryLabel=", strM464toStringimpl4, ", icon=");
+        sbM.append(strM464toStringimpl5);
+        sbM.append(", alpha=");
+        return DpCornerSize$$ExternalSyntheticOutline0.m(this.alpha, ")", sbM);
     }
 
     private TileColors(long j, long j2, long j3, long j4, long j5, float f) {

@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleTileKey {
     public static final Pattern KEY_PATTERN = Pattern.compile("(.+)/(-?\\d+)/(\\p{L}.*)");
@@ -22,7 +21,7 @@ public class PeopleTileKey {
         this.mPackageName = str2;
     }
 
-    public static PeopleTileKey fromString(String str) {
+    public static PeopleTileKey fromString(String str) throws NumberFormatException {
         if (str == null) {
             return null;
         }
@@ -65,14 +64,14 @@ public class PeopleTileKey {
     }
 
     public PeopleTileKey(NotificationEntry notificationEntry) {
-        String str;
+        String id;
         NotificationListenerService.Ranking ranking = notificationEntry.mRanking;
         if (ranking != null && ranking.getConversationShortcutInfo() != null) {
-            str = notificationEntry.mRanking.getConversationShortcutInfo().getId();
+            id = notificationEntry.mRanking.getConversationShortcutInfo().getId();
         } else {
-            str = "";
+            id = "";
         }
-        this.mShortcutId = str;
+        this.mShortcutId = id;
         this.mUserId = notificationEntry.mSbn.getUser() != null ? notificationEntry.mSbn.getUser().getIdentifier() : -1;
         this.mPackageName = notificationEntry.mSbn.getPackageName();
     }

@@ -270,7 +270,7 @@ public class StateMachine {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            State processMsg;
+            State stateProcessMsg;
             StateMachine stateMachine;
             if (this.mHasQuit) {
                 return;
@@ -281,19 +281,19 @@ public class StateMachine {
             if (this.mDbg) {
                 this.mSm.log("handleMessage: E msg.what=" + message.what);
             }
-            Message obtainMessage = obtainMessage();
-            this.mMsg = obtainMessage;
-            obtainMessage.copyFrom(message);
+            Message messageObtainMessage = obtainMessage();
+            this.mMsg = messageObtainMessage;
+            messageObtainMessage.copyFrom(message);
             if (this.mIsConstructionCompleted || message.what == -1) {
-                processMsg = processMsg(message);
+                stateProcessMsg = processMsg(message);
             } else if (message.what == -2 && message.obj == mSmHandlerObj) {
                 this.mIsConstructionCompleted = true;
                 invokeEnterMethods(0);
-                processMsg = null;
+                stateProcessMsg = null;
             } else {
                 throw new RuntimeException("StateMachine.handleMessage: The start method not called, received msg: " + message);
             }
-            performTransitions(processMsg, message);
+            performTransitions(stateProcessMsg, message);
             if (this.mDbg && (stateMachine = this.mSm) != null) {
                 stateMachine.log("handleMessage: X");
             }
@@ -546,23 +546,23 @@ public class StateMachine {
                 sb.append(state2 == null ? "" : state2.getName());
                 stateMachine.log(sb.toString());
             }
-            StateInfo stateInfo = null;
+            StateInfo stateInfoAddState = null;
             if (state2 != null) {
-                StateInfo stateInfo2 = this.mStateInfo.get(state2);
-                stateInfo = stateInfo2 == null ? addState(state2, null) : stateInfo2;
+                StateInfo stateInfo = this.mStateInfo.get(state2);
+                stateInfoAddState = stateInfo == null ? addState(state2, null) : stateInfo;
             }
-            StateInfo stateInfo3 = this.mStateInfo.get(state);
-            if (stateInfo3 == null) {
-                stateInfo3 = new StateInfo(state, stateInfo);
-                this.mStateInfo.put(state, stateInfo3);
+            StateInfo stateInfo2 = this.mStateInfo.get(state);
+            if (stateInfo2 == null) {
+                stateInfo2 = new StateInfo(state, stateInfoAddState);
+                this.mStateInfo.put(state, stateInfo2);
             }
-            if (stateInfo3.parentStateInfo != null && stateInfo3.parentStateInfo != stateInfo) {
+            if (stateInfo2.parentStateInfo != null && stateInfo2.parentStateInfo != stateInfoAddState) {
                 throw new RuntimeException("state already added");
             }
             if (this.mDbg) {
-                this.mSm.log("addStateInternal: X stateInfo: " + stateInfo3);
+                this.mSm.log("addStateInternal: X stateInfo: " + stateInfo2);
             }
-            return stateInfo3;
+            return stateInfo2;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -571,7 +571,7 @@ public class StateMachine {
             if (stateInfo == null || stateInfo.active || this.mStateInfo.values().stream().anyMatch(new Predicate() { // from class: com.android.internal.util.StateMachine$SmHandler$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return StateMachine.SmHandler.lambda$removeState$0(StateMachine.SmHandler.StateInfo.this, (StateMachine.SmHandler.StateInfo) obj);
+                    return StateMachine.SmHandler.lambda$removeState$0(stateInfo, (StateMachine.SmHandler.StateInfo) obj);
                 }
             })) {
                 return;
@@ -625,9 +625,9 @@ public class StateMachine {
             if (this.mDbg) {
                 this.mSm.log("deferMessage: msg=" + message.what);
             }
-            Message obtainMessage = obtainMessage();
-            obtainMessage.copyFrom(message);
-            this.mDeferredMessages.add(obtainMessage);
+            Message messageObtainMessage = obtainMessage();
+            messageObtainMessage.copyFrom(message);
+            this.mDeferredMessages.add(messageObtainMessage);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1080,13 +1080,13 @@ public class StateMachine {
     }
 
     public String toString() {
-        String str;
+        String string;
         try {
-            str = this.mSmHandler.getCurrentState().getName().toString();
+            string = this.mSmHandler.getCurrentState().getName().toString();
         } catch (ArrayIndexOutOfBoundsException | NullPointerException unused) {
-            str = PerfettoProtoLogImpl.NULL_STRING;
+            string = PerfettoProtoLogImpl.NULL_STRING;
         }
-        return "name=" + this.mName + " state=" + str;
+        return "name=" + this.mName + " state=" + string;
     }
 
     protected void logAndAddLogRec(String str) {

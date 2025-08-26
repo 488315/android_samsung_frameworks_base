@@ -65,9 +65,9 @@ public final class PlaybackParams implements Parcelable {
         this.mSet = parcel.readInt();
         this.mAudioFallbackMode = parcel.readInt();
         this.mAudioStretchMode = parcel.readInt();
-        float readFloat = parcel.readFloat();
-        this.mPitch = readFloat;
-        if (readFloat < 0.0f) {
+        float f = parcel.readFloat();
+        this.mPitch = f;
+        if (f < 0.0f) {
             this.mPitch = 0.0f;
         }
         this.mSpeed = parcel.readFloat();

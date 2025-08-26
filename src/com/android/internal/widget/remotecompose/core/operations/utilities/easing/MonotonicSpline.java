@@ -67,9 +67,9 @@ public class MonotonicSpline {
                 float f3 = fArr5[i5] / f2;
                 int i6 = i5 + 1;
                 float f4 = fArr5[i6] / f2;
-                float hypot = (float) Math.hypot(f3, f4);
-                if (hypot > 9.0d) {
-                    float f5 = 3.0f / hypot;
+                float fHypot = (float) Math.hypot(f3, f4);
+                if (fHypot > 9.0d) {
+                    float f5 = 3.0f / fHypot;
                     fArr5[i5] = f3 * f5 * fArr4[i5];
                     fArr5[i6] = f5 * f4 * fArr4[i5];
                 }

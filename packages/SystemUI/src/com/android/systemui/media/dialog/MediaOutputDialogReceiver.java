@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaOutputDialogReceiver extends BroadcastReceiver {
     public final MediaOutputDialogManager mediaOutputDialogManager;
@@ -18,8 +17,8 @@ public final class MediaOutputDialogReceiver extends BroadcastReceiver {
     public final void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action != null) {
-            int hashCode = action.hashCode();
-            if (hashCode == -2095758866) {
+            int iHashCode = action.hashCode();
+            if (iHashCode == -2095758866) {
                 if (action.equals("com.android.systemui.action.LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG")) {
                     MediaOutputDialogManager mediaOutputDialogManager = this.mediaOutputDialogManager;
                     int i = MediaOutputDialogManager.$r8$clinit;
@@ -28,8 +27,8 @@ public final class MediaOutputDialogReceiver extends BroadcastReceiver {
                 }
                 return;
             }
-            if (hashCode != 1575256440) {
-                if (hashCode != 2052997846) {
+            if (iHashCode != 1575256440) {
+                if (iHashCode != 2052997846) {
                     return;
                 }
                 action.equals("com.android.systemui.action.LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG");

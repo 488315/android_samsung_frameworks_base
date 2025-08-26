@@ -5,11 +5,10 @@ import androidx.compose.ui.layout.HorizontalAlignmentLine;
 import androidx.compose.ui.platform.InspectableValueKt;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AlignmentLineKt {
     /* renamed from: paddingFrom-4j6BHR0$default, reason: not valid java name */
-    public static Modifier m90paddingFrom4j6BHR0$default(Modifier.Companion companion, HorizontalAlignmentLine horizontalAlignmentLine, float f, float f2, int i) {
+    public static Modifier m91paddingFrom4j6BHR0$default(Modifier.Companion companion, HorizontalAlignmentLine horizontalAlignmentLine, float f, float f2, int i) {
         if ((i & 2) != 0) {
             Dp.Companion.getClass();
             f = Dp.Unspecified;

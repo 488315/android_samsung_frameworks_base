@@ -102,6 +102,7 @@ import com.samsung.telephony.SemNetworkQualityInfo;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.file.Files;
@@ -134,6 +135,7 @@ import java.util.stream.IntStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -1381,9 +1383,9 @@ public class TelephonyManager {
             }
         };
         this.mSubId = i;
-        Context mergeAttributionAndRenouncedPermissions = mergeAttributionAndRenouncedPermissions(context.getApplicationContext(), context);
-        this.mContext = mergeAttributionAndRenouncedPermissions;
-        this.mSubscriptionManager = SubscriptionManager.from(mergeAttributionAndRenouncedPermissions);
+        Context contextMergeAttributionAndRenouncedPermissions = mergeAttributionAndRenouncedPermissions(context.getApplicationContext(), context);
+        this.mContext = contextMergeAttributionAndRenouncedPermissions;
+        this.mSubscriptionManager = SubscriptionManager.from(contextMergeAttributionAndRenouncedPermissions);
     }
 
     private TelephonyManager() {
@@ -1415,15 +1417,15 @@ public class TelephonyManager {
         if (context == null) {
             return context2;
         }
-        Context createAttributionContext = !Objects.equals(context2.getAttributionTag(), context.getAttributionTag()) ? context.createAttributionContext(context2.getAttributionTag()) : context;
+        Context contextCreateAttributionContext = !Objects.equals(context2.getAttributionTag(), context.getAttributionTag()) ? context.createAttributionContext(context2.getAttributionTag()) : context;
         Set<String> renouncedPermissions = context2.getAttributionSource().getRenouncedPermissions();
         if (renouncedPermissions.isEmpty()) {
-            return createAttributionContext;
+            return contextCreateAttributionContext;
         }
         if (context.getParams() != null) {
-            return createAttributionContext.createContext(new ContextParams.Builder(context.getParams()).setRenouncedPermissions(renouncedPermissions).build());
+            return contextCreateAttributionContext.createContext(new ContextParams.Builder(context.getParams()).setRenouncedPermissions(renouncedPermissions).build());
         }
-        return createAttributionContext.createContext(new ContextParams.Builder().setRenouncedPermissions(renouncedPermissions).build());
+        return contextCreateAttributionContext.createContext(new ContextParams.Builder().setRenouncedPermissions(renouncedPermissions).build());
     }
 
     private String getOpPackageName() {
@@ -1467,14 +1469,14 @@ public class TelephonyManager {
     }
 
     public MultiSimVariants getMultiSimConfiguration() {
-        String orElse = TelephonyProperties.multi_sim_config().orElse("");
-        if (orElse.equals("dsds")) {
+        String strOrElse = TelephonyProperties.multi_sim_config().orElse("");
+        if (strOrElse.equals("dsds")) {
             return MultiSimVariants.DSDS;
         }
-        if (orElse.equals("dsda")) {
+        if (strOrElse.equals("dsda")) {
             return MultiSimVariants.DSDA;
         }
-        if (orElse.equals("tsts")) {
+        if (strOrElse.equals("tsts")) {
             return MultiSimVariants.TSTS;
         }
         return MultiSimVariants.UNKNOWN;
@@ -1486,14 +1488,14 @@ public class TelephonyManager {
     }
 
     public int getActiveModemCount() {
-        int ordinal = getMultiSimConfiguration().ordinal();
-        if (ordinal == 0 || ordinal == 1) {
+        int iOrdinal = getMultiSimConfiguration().ordinal();
+        if (iOrdinal == 0 || iOrdinal == 1) {
             return 2;
         }
-        if (ordinal == 2) {
+        if (iOrdinal == 2) {
             return 3;
         }
-        if (ordinal != 3) {
+        if (iOrdinal != 3) {
             return 1;
         }
         int i = (isDeviceVoiceCapable() || isSmsCapable() || isDataCapable()) ? 1 : 0;
@@ -1696,9 +1698,9 @@ public class TelephonyManager {
                 com.android.telephony.Rlog.d(TAG, "getCellLocation returning null because telephony is null");
                 return null;
             }
-            CellLocation asCellLocation = iTelephony.getCellLocation(this.mContext.getOpPackageName(), this.mContext.getAttributionTag()).asCellLocation();
-            if (asCellLocation != null && !asCellLocation.isEmpty()) {
-                return asCellLocation;
+            CellLocation cellLocationAsCellLocation = iTelephony.getCellLocation(this.mContext.getOpPackageName(), this.mContext.getAttributionTag()).asCellLocation();
+            if (cellLocationAsCellLocation != null && !cellLocationAsCellLocation.isEmpty()) {
+                return cellLocationAsCellLocation;
             }
             com.android.telephony.Rlog.d(TAG, "getCellLocation returning null because CellLocation is empty or phone type doesn't match CellLocation type");
             return null;
@@ -1716,9 +1718,9 @@ public class TelephonyManager {
                 com.android.telephony.Rlog.d(TAG, "getCellLocationBySubId returning null because SemTelephonyService is null");
                 return null;
             }
-            CellLocation asCellLocation = iSemTelephony.getCellLocationBySubId(i, this.mContext.getOpPackageName(), getAttributionTag()).asCellLocation();
-            if (asCellLocation != null && !asCellLocation.isEmpty()) {
-                return asCellLocation;
+            CellLocation cellLocationAsCellLocation = iSemTelephony.getCellLocationBySubId(i, this.mContext.getOpPackageName(), getAttributionTag()).asCellLocation();
+            if (cellLocationAsCellLocation != null && !cellLocationAsCellLocation.isEmpty()) {
+                return cellLocationAsCellLocation;
             }
             com.android.telephony.Rlog.d(TAG, "getCellLocationBySubId returning null because CellLocation is empty or phone type doesn't match CellLocation type");
             return null;
@@ -1736,9 +1738,9 @@ public class TelephonyManager {
                 com.android.telephony.Rlog.d(TAG, "getCellLocationForPhone returning null because SemTelephonyService is null");
                 return null;
             }
-            CellLocation asCellLocation = iSemTelephony.getCellLocationForPhone(i, this.mContext.getOpPackageName(), getAttributionTag()).asCellLocation();
-            if (asCellLocation != null && !asCellLocation.isEmpty()) {
-                return asCellLocation;
+            CellLocation cellLocationAsCellLocation = iSemTelephony.getCellLocationForPhone(i, this.mContext.getOpPackageName(), getAttributionTag()).asCellLocation();
+            if (cellLocationAsCellLocation != null && !cellLocationAsCellLocation.isEmpty()) {
+                return cellLocationAsCellLocation;
             }
             com.android.telephony.Rlog.d(TAG, "getCellLocationForPhone returning null because CellLocation is empty or phone type doesn't match CellLocation type");
             return null;
@@ -2142,20 +2144,20 @@ public class TelephonyManager {
     }
 
     public String getSimOperatorNumeric() {
-        int i = this.mSubId;
-        if (!SubscriptionManager.isUsableSubIdValue(i)) {
-            i = SubscriptionManager.getDefaultDataSubscriptionId();
-            if (!SubscriptionManager.isUsableSubIdValue(i)) {
-                i = SubscriptionManager.getDefaultSmsSubscriptionId();
-                if (!SubscriptionManager.isUsableSubIdValue(i)) {
-                    i = SubscriptionManager.getDefaultVoiceSubscriptionId();
-                    if (!SubscriptionManager.isUsableSubIdValue(i)) {
-                        i = SubscriptionManager.getDefaultSubscriptionId();
+        int defaultDataSubscriptionId = this.mSubId;
+        if (!SubscriptionManager.isUsableSubIdValue(defaultDataSubscriptionId)) {
+            defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
+            if (!SubscriptionManager.isUsableSubIdValue(defaultDataSubscriptionId)) {
+                defaultDataSubscriptionId = SubscriptionManager.getDefaultSmsSubscriptionId();
+                if (!SubscriptionManager.isUsableSubIdValue(defaultDataSubscriptionId)) {
+                    defaultDataSubscriptionId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+                    if (!SubscriptionManager.isUsableSubIdValue(defaultDataSubscriptionId)) {
+                        defaultDataSubscriptionId = SubscriptionManager.getDefaultSubscriptionId();
                     }
                 }
             }
         }
-        return getSimOperatorNumeric(i);
+        return getSimOperatorNumeric(defaultDataSubscriptionId);
     }
 
     public String getSimOperatorNumeric(int i) {
@@ -2299,9 +2301,8 @@ public class TelephonyManager {
         Iterator it2 = ((Map) collection.stream().collect(Collectors.groupingBy(new Function() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda15
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                List asList;
-                asList = Arrays.asList(Integer.valueOf(r1.getPhysicalSlotIndex()), Integer.valueOf(((UiccSlotMapping) obj).getPortIndex()));
-                return asList;
+                UiccSlotMapping uiccSlotMapping = (UiccSlotMapping) obj;
+                return Arrays.asList(Integer.valueOf(uiccSlotMapping.getPhysicalSlotIndex()), Integer.valueOf(uiccSlotMapping.getPortIndex()));
             }
         }))).entrySet().iterator();
         while (it2.hasNext()) {
@@ -2334,18 +2335,18 @@ public class TelephonyManager {
     @SystemApi
     @Deprecated
     public Map<Integer, Integer> getLogicalToPhysicalSlotMapping() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
                 for (UiccSlotMapping uiccSlotMapping : iTelephony.getSlotsMapping(this.mContext.getOpPackageName())) {
-                    hashMap.put(Integer.valueOf(uiccSlotMapping.getLogicalSlotIndex()), Integer.valueOf(uiccSlotMapping.getPhysicalSlotIndex()));
+                    map.put(Integer.valueOf(uiccSlotMapping.getLogicalSlotIndex()), Integer.valueOf(uiccSlotMapping.getPhysicalSlotIndex()));
                 }
             }
         } catch (RemoteException e) {
             Log.e(TAG, "getSlotsMapping RemoteException", e);
         }
-        return hashMap;
+        return map;
     }
 
     @SystemApi
@@ -2478,14 +2479,14 @@ public class TelephonyManager {
         }
         executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
-            public final void run() {
-                TelephonyManager.this.lambda$uploadCallComposerPicture$1(path, outcomeReceiver, str, executor);
+            public final void run() throws IOException {
+                this.f$0.lambda$uploadCallComposerPicture$1(path, outcomeReceiver, str, executor);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$uploadCallComposerPicture$1(Path path, final OutcomeReceiver outcomeReceiver, String str, Executor executor) {
+    public /* synthetic */ void lambda$uploadCallComposerPicture$1(Path path, final OutcomeReceiver outcomeReceiver, String str, Executor executor) throws IOException {
         try {
             if (Looper.getMainLooper().isCurrentThread()) {
                 Log.w(TAG, "Uploading call composer picture on main thread! hic sunt dracones!");
@@ -2494,13 +2495,13 @@ public class TelephonyManager {
                 outcomeReceiver.onError(new CallComposerException(2, null));
                 return;
             }
-            final InputStream newInputStream = Files.newInputStream(path, new OpenOption[0]);
+            final InputStream inputStreamNewInputStream = Files.newInputStream(path, new OpenOption[0]);
             try {
-                uploadCallComposerPicture(newInputStream, str, executor, new OutcomeReceiver<ParcelUuid, CallComposerException>(this) { // from class: android.telephony.TelephonyManager.2
+                uploadCallComposerPicture(inputStreamNewInputStream, str, executor, new OutcomeReceiver<ParcelUuid, CallComposerException>(this) { // from class: android.telephony.TelephonyManager.2
                     @Override // android.os.OutcomeReceiver
-                    public void onResult(ParcelUuid parcelUuid) {
+                    public void onResult(ParcelUuid parcelUuid) throws IOException {
                         try {
-                            newInputStream.close();
+                            inputStreamNewInputStream.close();
                         } catch (IOException unused) {
                             Log.e(TelephonyManager.TAG, "Error closing file input stream when uploading call composer pic");
                         }
@@ -2508,9 +2509,9 @@ public class TelephonyManager {
                     }
 
                     @Override // android.os.OutcomeReceiver
-                    public void onError(CallComposerException callComposerException) {
+                    public void onError(CallComposerException callComposerException) throws IOException {
                         try {
-                            newInputStream.close();
+                            inputStreamNewInputStream.close();
                         } catch (IOException unused) {
                             Log.e(TelephonyManager.TAG, "Error closing file input stream when uploading call composer pic");
                         }
@@ -2520,7 +2521,7 @@ public class TelephonyManager {
             } catch (Exception e) {
                 Log.e(TAG, "Got exception calling into stream-version of uploadCallComposerPicture: " + e);
                 try {
-                    newInputStream.close();
+                    inputStreamNewInputStream.close();
                 } catch (IOException unused) {
                     Log.e(TAG, "Error closing file input stream when uploading call composer pic");
                 }
@@ -2540,9 +2541,9 @@ public class TelephonyManager {
             throw new IllegalStateException("Telephony service not available.");
         }
         try {
-            ParcelFileDescriptor[] createReliablePipe = ParcelFileDescriptor.createReliablePipe();
-            final ParcelFileDescriptor parcelFileDescriptor = createReliablePipe[1];
-            ParcelFileDescriptor parcelFileDescriptor2 = createReliablePipe[0];
+            ParcelFileDescriptor[] parcelFileDescriptorArrCreateReliablePipe = ParcelFileDescriptor.createReliablePipe();
+            final ParcelFileDescriptor parcelFileDescriptor = parcelFileDescriptorArrCreateReliablePipe[1];
+            ParcelFileDescriptor parcelFileDescriptor2 = parcelFileDescriptorArrCreateReliablePipe[0];
             final ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptor);
             try {
                 iTelephony.uploadCallComposerPicture(getSubId(), this.mContext.getOpPackageName(), str, parcelFileDescriptor2, new AnonymousClass3(this, null, executor, outcomeReceiver));
@@ -2552,7 +2553,7 @@ public class TelephonyManager {
             }
             executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda23
                 @Override // java.lang.Runnable
-                public final void run() {
+                public final void run() throws IOException {
                     TelephonyManager.lambda$uploadCallComposerPicture$3(inputStream, outcomeReceiver, parcelFileDescriptor, autoCloseOutputStream);
                 }
             });
@@ -2560,7 +2561,7 @@ public class TelephonyManager {
             executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda22
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new TelephonyManager.CallComposerException(5, e2));
+                    outcomeReceiver.onError(new TelephonyManager.CallComposerException(5, e2));
                 }
             });
         }
@@ -2586,7 +2587,7 @@ public class TelephonyManager {
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new TelephonyManager.CallComposerException(i, null));
+                        outcomeReceiver.onError(new TelephonyManager.CallComposerException(i, null));
                     }
                 });
                 return;
@@ -2599,7 +2600,7 @@ public class TelephonyManager {
                 executor2.execute(new Runnable() { // from class: android.telephony.TelephonyManager$3$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new TelephonyManager.CallComposerException(0, null));
+                        outcomeReceiver2.onError(new TelephonyManager.CallComposerException(0, null));
                     }
                 });
                 return;
@@ -2609,139 +2610,79 @@ public class TelephonyManager {
             executor3.execute(new Runnable() { // from class: android.telephony.TelephonyManager$3$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onResult(parcelUuid);
+                    outcomeReceiver3.onResult(parcelUuid);
                 }
             });
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x002b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:12:0x002b, code lost:
     
         android.util.Log.e(android.telephony.TelephonyManager.TAG, "Read too many bytes from call composer pic stream: " + r4);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x003f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:13:0x003f, code lost:
     
         r11.onError(new android.telephony.TelephonyManager.CallComposerException(2, null));
         r12.closeWithError("too large");
      */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0051, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x0051, code lost:
     
         r10 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0052, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x0052, code lost:
     
         android.util.Log.e(android.telephony.TelephonyManager.TAG, "Error closing fd pipe: " + r10);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    static /* synthetic */ void lambda$uploadCallComposerPicture$3(java.io.InputStream r10, android.os.OutcomeReceiver r11, android.os.ParcelFileDescriptor r12, java.io.OutputStream r13) {
-        /*
-            java.lang.String r0 = "Error closing fd pipe: "
-            android.os.Looper r1 = android.os.Looper.getMainLooper()
-            boolean r1 = r1.isCurrentThread()
-            java.lang.String r2 = "TelephonyManager"
-            if (r1 == 0) goto L13
-            java.lang.String r1 = "Uploading call composer picture on main thread! hic sunt dracones!"
-            android.util.Log.w(r2, r1)
-        L13:
-            r1 = 16384(0x4000, float:2.2959E-41)
-            byte[] r1 = new byte[r1]
-            r3 = 0
-            r4 = r3
-        L19:
-            int r5 = r10.read(r1)     // Catch: java.lang.Throwable -> L8e java.io.IOException -> L90
-            if (r5 >= 0) goto L21
-            goto Lc7
-        L21:
-            int r4 = r4 + r5
-            long r6 = (long) r4
-            long r8 = getMaximumCallComposerPictureSize()     // Catch: java.lang.Throwable -> L8e
-            int r6 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r6 <= 0) goto L65
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L8e
-            r10.<init>()     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r1 = "Read too many bytes from call composer pic stream: "
-            r10.append(r1)     // Catch: java.lang.Throwable -> L8e
-            r10.append(r4)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = r10.toString()     // Catch: java.lang.Throwable -> L8e
-            android.util.Log.e(r2, r10)     // Catch: java.lang.Throwable -> L8e
-            android.telephony.TelephonyManager$CallComposerException r10 = new android.telephony.TelephonyManager$CallComposerException     // Catch: java.io.IOException -> L51 java.lang.Throwable -> L8e
-            r1 = 2
-            r3 = 0
-            r10.<init>(r1, r3)     // Catch: java.io.IOException -> L51 java.lang.Throwable -> L8e
-            r11.onError(r10)     // Catch: java.io.IOException -> L51 java.lang.Throwable -> L8e
-            java.lang.String r10 = "too large"
-            r12.closeWithError(r10)     // Catch: java.io.IOException -> L51 java.lang.Throwable -> L8e
-            goto Lc7
-        L51:
-            r10 = move-exception
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L8e
-            r11.<init>()     // Catch: java.lang.Throwable -> L8e
-            r11.append(r0)     // Catch: java.lang.Throwable -> L8e
-            r11.append(r10)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = r11.toString()     // Catch: java.lang.Throwable -> L8e
-            android.util.Log.e(r2, r10)     // Catch: java.lang.Throwable -> L8e
-            goto Lc7
-        L65:
-            r13.write(r1, r3, r5)     // Catch: java.io.IOException -> L69 java.lang.Throwable -> L8e
-            goto L19
-        L69:
-            r10 = move-exception
-            android.telephony.TelephonyManager$CallComposerException r1 = new android.telephony.TelephonyManager$CallComposerException     // Catch: java.lang.Throwable -> L8e
-            r3 = 1
-            r1.<init>(r3, r10)     // Catch: java.lang.Throwable -> L8e
-            r11.onError(r1)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = "remote end closed"
-            r12.closeWithError(r10)     // Catch: java.io.IOException -> L7a java.lang.Throwable -> L8e
-            goto Lc7
-        L7a:
-            r10 = move-exception
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L8e
-            r11.<init>()     // Catch: java.lang.Throwable -> L8e
-            r11.append(r0)     // Catch: java.lang.Throwable -> L8e
-            r11.append(r10)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = r11.toString()     // Catch: java.lang.Throwable -> L8e
-            android.util.Log.e(r2, r10)     // Catch: java.lang.Throwable -> L8e
-            goto Lc7
-        L8e:
-            r10 = move-exception
-            goto Lcb
-        L90:
-            r10 = move-exception
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L8e
-            r1.<init>()     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r3 = "IOException reading from input while uploading pic: "
-            r1.append(r3)     // Catch: java.lang.Throwable -> L8e
-            r1.append(r10)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r1 = r1.toString()     // Catch: java.lang.Throwable -> L8e
-            android.util.Log.e(r2, r1)     // Catch: java.lang.Throwable -> L8e
-            android.telephony.TelephonyManager$CallComposerException r1 = new android.telephony.TelephonyManager$CallComposerException     // Catch: java.lang.Throwable -> L8e
-            r3 = 4
-            r1.<init>(r3, r10)     // Catch: java.lang.Throwable -> L8e
-            r11.onError(r1)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = "input closed"
-            r12.closeWithError(r10)     // Catch: java.lang.Throwable -> L8e java.io.IOException -> Lb4
-            goto Lc7
-        Lb4:
-            r10 = move-exception
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L8e
-            r11.<init>()     // Catch: java.lang.Throwable -> L8e
-            r11.append(r0)     // Catch: java.lang.Throwable -> L8e
-            r11.append(r10)     // Catch: java.lang.Throwable -> L8e
-            java.lang.String r10 = r11.toString()     // Catch: java.lang.Throwable -> L8e
-            android.util.Log.e(r2, r10)     // Catch: java.lang.Throwable -> L8e
-        Lc7:
-            r13.close()     // Catch: java.io.IOException -> Lca
-        Lca:
-            return
-        Lcb:
-            r13.close()     // Catch: java.io.IOException -> Lce
-        Lce:
-            throw r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.TelephonyManager.lambda$uploadCallComposerPicture$3(java.io.InputStream, android.os.OutcomeReceiver, android.os.ParcelFileDescriptor, java.io.OutputStream):void");
+    static /* synthetic */ void lambda$uploadCallComposerPicture$3(InputStream inputStream, OutcomeReceiver outcomeReceiver, ParcelFileDescriptor parcelFileDescriptor, OutputStream outputStream) throws IOException {
+        if (Looper.getMainLooper().isCurrentThread()) {
+            Log.w(TAG, "Uploading call composer picture on main thread! hic sunt dracones!");
+        }
+        byte[] bArr = new byte[16384];
+        int i = 0;
+        while (true) {
+            try {
+                try {
+                    int i2 = inputStream.read(bArr);
+                    if (i2 >= 0) {
+                        i += i2;
+                        if (i > getMaximumCallComposerPictureSize()) {
+                            break;
+                        }
+                        try {
+                            outputStream.write(bArr, 0, i2);
+                        } catch (IOException e) {
+                            outcomeReceiver.onError(new CallComposerException(1, e));
+                            try {
+                                parcelFileDescriptor.closeWithError("remote end closed");
+                            } catch (IOException e2) {
+                                Log.e(TAG, "Error closing fd pipe: " + e2);
+                            }
+                        }
+                    }
+                } catch (IOException e3) {
+                    Log.e(TAG, "IOException reading from input while uploading pic: " + e3);
+                    outcomeReceiver.onError(new CallComposerException(4, e3));
+                    try {
+                        parcelFileDescriptor.closeWithError("input closed");
+                    } catch (IOException e4) {
+                        Log.e(TAG, "Error closing fd pipe: " + e4);
+                    }
+                }
+            } catch (Throwable th) {
+                try {
+                    outputStream.close();
+                } catch (IOException unused) {
+                }
+                throw th;
+            }
+        }
+        try {
+            outputStream.close();
+        } catch (IOException unused2) {
+        }
     }
 
     public String getGroupIdLevel1() {
@@ -2786,44 +2727,25 @@ public class TelephonyManager {
         return getLine1Number(getSubId());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x001b A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x001c A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.lang.String getLine1Number(int r5) {
-        /*
-            r4 = this;
-            r0 = 0
-            com.android.internal.telephony.ITelephony r1 = getITelephony()     // Catch: java.lang.Throwable -> L18
-            if (r1 == 0) goto L18
-            android.content.Context r2 = r4.mContext     // Catch: java.lang.Throwable -> L18
-            java.lang.String r2 = r2.getOpPackageName()     // Catch: java.lang.Throwable -> L18
-            android.content.Context r3 = r4.mContext     // Catch: java.lang.Throwable -> L18
-            java.lang.String r3 = r3.getAttributionTag()     // Catch: java.lang.Throwable -> L18
-            java.lang.String r1 = r1.getLine1NumberForDisplay(r5, r2, r3)     // Catch: java.lang.Throwable -> L18
-            goto L19
-        L18:
-            r1 = r0
-        L19:
-            if (r1 == 0) goto L1c
-            return r1
-        L1c:
-            com.android.internal.telephony.IPhoneSubInfo r1 = getSubscriberInfoService()     // Catch: java.lang.Throwable -> L34
-            if (r1 != 0) goto L23
-            return r0
-        L23:
-            android.content.Context r2 = r4.mContext     // Catch: java.lang.Throwable -> L34
-            java.lang.String r2 = r2.getOpPackageName()     // Catch: java.lang.Throwable -> L34
-            android.content.Context r4 = r4.mContext     // Catch: java.lang.Throwable -> L34
-            java.lang.String r4 = r4.getAttributionTag()     // Catch: java.lang.Throwable -> L34
-            java.lang.String r4 = r1.getLine1NumberForSubscriber(r5, r2, r4)     // Catch: java.lang.Throwable -> L34
-            return r4
-        L34:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.TelephonyManager.getLine1Number(int):java.lang.String");
+    public String getLine1Number(int i) {
+        ITelephony iTelephony;
+        try {
+            iTelephony = getITelephony();
+        } catch (RemoteException | NullPointerException unused) {
+        }
+        String line1NumberForDisplay = iTelephony != null ? iTelephony.getLine1NumberForDisplay(i, this.mContext.getOpPackageName(), this.mContext.getAttributionTag()) : null;
+        if (line1NumberForDisplay != null) {
+            return line1NumberForDisplay;
+        }
+        try {
+            IPhoneSubInfo subscriberInfoService = getSubscriberInfoService();
+            if (subscriberInfoService == null) {
+                return null;
+            }
+            return subscriberInfoService.getLine1NumberForSubscriber(i, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+        } catch (RemoteException | NullPointerException unused2) {
+            return null;
+        }
     }
 
     @Deprecated
@@ -2848,40 +2770,25 @@ public class TelephonyManager {
         return getLine1AlphaTag(getSubId());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0017 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0018 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.lang.String getLine1AlphaTag(int r5) {
-        /*
-            r4 = this;
-            r0 = 0
-            com.android.internal.telephony.ITelephony r1 = getITelephony()     // Catch: java.lang.Throwable -> L14
-            if (r1 == 0) goto L14
-            java.lang.String r2 = r4.getOpPackageName()     // Catch: java.lang.Throwable -> L14
-            java.lang.String r3 = r4.getAttributionTag()     // Catch: java.lang.Throwable -> L14
-            java.lang.String r1 = r1.getLine1AlphaTagForDisplay(r5, r2, r3)     // Catch: java.lang.Throwable -> L14
-            goto L15
-        L14:
-            r1 = r0
-        L15:
-            if (r1 == 0) goto L18
-            return r1
-        L18:
-            com.android.internal.telephony.IPhoneSubInfo r1 = getSubscriberInfoService()     // Catch: java.lang.Throwable -> L2c
-            if (r1 != 0) goto L1f
-            return r0
-        L1f:
-            java.lang.String r2 = r4.getOpPackageName()     // Catch: java.lang.Throwable -> L2c
-            java.lang.String r4 = r4.getAttributionTag()     // Catch: java.lang.Throwable -> L2c
-            java.lang.String r4 = r1.getLine1AlphaTagForSubscriber(r5, r2, r4)     // Catch: java.lang.Throwable -> L2c
-            return r4
-        L2c:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.TelephonyManager.getLine1AlphaTag(int):java.lang.String");
+    public String getLine1AlphaTag(int i) {
+        ITelephony iTelephony;
+        try {
+            iTelephony = getITelephony();
+        } catch (RemoteException | NullPointerException unused) {
+        }
+        String line1AlphaTagForDisplay = iTelephony != null ? iTelephony.getLine1AlphaTagForDisplay(i, getOpPackageName(), getAttributionTag()) : null;
+        if (line1AlphaTagForDisplay != null) {
+            return line1AlphaTagForDisplay;
+        }
+        try {
+            IPhoneSubInfo subscriberInfoService = getSubscriberInfoService();
+            if (subscriberInfoService == null) {
+                return null;
+            }
+            return subscriberInfoService.getLine1AlphaTagForSubscriber(i, getOpPackageName(), getAttributionTag());
+        } catch (RemoteException | NullPointerException unused2) {
+            return null;
+        }
     }
 
     @Deprecated
@@ -3328,12 +3235,12 @@ public class TelephonyManager {
             return ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
         }
         if (sITelephony == null) {
-            ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+            ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
             synchronized (sCacheLock) {
-                if (sITelephony == null && asInterface != null) {
+                if (sITelephony == null && iTelephonyAsInterface != null) {
                     try {
-                        sITelephony = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sITelephony = iTelephonyAsInterface;
+                        iTelephonyAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sITelephony = null;
                     }
@@ -3348,12 +3255,12 @@ public class TelephonyManager {
             return ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
         }
         if (sISemTelephony == null) {
-            ISemTelephony asInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+            ISemTelephony iSemTelephonyAsInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
             synchronized (sCacheLock) {
-                if (sISemTelephony == null && asInterface != null) {
+                if (sISemTelephony == null && iSemTelephonyAsInterface != null) {
                     try {
-                        sISemTelephony = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISemTelephony = iSemTelephonyAsInterface;
+                        iSemTelephonyAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISemTelephony = null;
                     }
@@ -3471,40 +3378,40 @@ public class TelephonyManager {
         return hasCapability(PackageManager.FEATURE_TELEPHONY_CALLING, R.bool.config_voice_capable);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00df  */
     @Deprecated
-    public boolean isSmsCapable() {
-        boolean z;
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public boolean isSmsCapable() throws SecurityException {
+        boolean zContains;
         ActivityManager activityManager;
         ComponentName componentName;
         String simOperator;
-        if (TelephonyFeatures.IS_TABLET) {
-            if ("XAA".equals(SystemProperties.get("ro.boot.carrierid", "")) || "N14".equals(SystemProperties.get("ro.boot.carrierid", "")) || "VZW".equals(TelephonyFeatures.getSalesCode()) || "USC".equals(TelephonyFeatures.getSalesCode()) || "ATT".equals(TelephonyFeatures.getSalesCode()) || "CHA".equals(TelephonyFeatures.getSalesCode()) || "CCT".equals(TelephonyFeatures.getSalesCode()) || "DSA".equals(TelephonyFeatures.getSalesCode()) || "DSG".equals(TelephonyFeatures.getSalesCode()) || "DSH".equals(TelephonyFeatures.getSalesCode()) || "TFN".equals(TelephonyFeatures.getSalesCode())) {
-                z = true;
-            } else if (TelephonyFeatures.isSubOperatorSpecific(getPhoneId(), "VZW", "USC", "ATT", "CHA", "CCT", "DSA", "DSG", "DSH", "TFN") && (simOperator = getSimOperator()) != null && simOperator.length() > 4) {
-                z = Arrays.asList("310", "311", "312", "313", "314", "315", "316").contains(simOperator.substring(0, 3));
+        if (!TelephonyFeatures.IS_TABLET) {
+            zContains = false;
+        } else if ("XAA".equals(SystemProperties.get("ro.boot.carrierid", "")) || "N14".equals(SystemProperties.get("ro.boot.carrierid", "")) || "VZW".equals(TelephonyFeatures.getSalesCode()) || "USC".equals(TelephonyFeatures.getSalesCode()) || "ATT".equals(TelephonyFeatures.getSalesCode()) || "CHA".equals(TelephonyFeatures.getSalesCode()) || "CCT".equals(TelephonyFeatures.getSalesCode()) || "DSA".equals(TelephonyFeatures.getSalesCode()) || "DSG".equals(TelephonyFeatures.getSalesCode()) || "DSH".equals(TelephonyFeatures.getSalesCode()) || "TFN".equals(TelephonyFeatures.getSalesCode())) {
+            zContains = true;
+        } else if (TelephonyFeatures.isSubOperatorSpecific(getPhoneId(), "VZW", "USC", "ATT", "CHA", "CCT", "DSA", "DSG", "DSH", "TFN") && (simOperator = getSimOperator()) != null && simOperator.length() > 4) {
+            zContains = Arrays.asList("310", "311", "312", "313", "314", "315", "316").contains(simOperator.substring(0, 3));
+        }
+        if (zContains && this.mContext != null) {
+            if ("VZW".equals(TelephonyFeatures.getSalesCode()) && "SM-X117U".equalsIgnoreCase(SystemProperties.get("ro.product.model", ""))) {
+                com.android.telephony.Rlog.d(TAG, "SMS support Tablet Model");
+                return true;
             }
-            if (!z && this.mContext != null) {
-                if ("VZW".equals(TelephonyFeatures.getSalesCode()) && "SM-X117U".equalsIgnoreCase(SystemProperties.get("ro.product.model", ""))) {
-                    com.android.telephony.Rlog.d(TAG, "SMS support Tablet Model");
+            com.android.telephony.Rlog.d(TAG, "US No SMS Tablet Model");
+            if ("ATT".equals(TelephonyFeatures.getSubOperatorName(getPhoneId())) && (activityManager = (ActivityManager) this.mContext.getSystemService("activity")) != null && ActivityManager.isSystemReady()) {
+                List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
+                if (runningTasks.isEmpty() || (componentName = runningTasks.get(0).topActivity) == null) {
+                    return false;
+                }
+                com.android.telephony.Rlog.d(TAG, "getTopPackageName = " + componentName.getPackageName());
+                if ("com.android.vending".equals(componentName.getPackageName())) {
                     return true;
                 }
-                com.android.telephony.Rlog.d(TAG, "US No SMS Tablet Model");
-                if ("ATT".equals(TelephonyFeatures.getSubOperatorName(getPhoneId())) && (activityManager = (ActivityManager) this.mContext.getSystemService("activity")) != null && ActivityManager.isSystemReady()) {
-                    List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
-                    if (runningTasks.isEmpty() || (componentName = runningTasks.get(0).topActivity) == null) {
-                        return false;
-                    }
-                    com.android.telephony.Rlog.d(TAG, "getTopPackageName = " + componentName.getPackageName());
-                    if ("com.android.vending".equals(componentName.getPackageName())) {
-                        return true;
-                    }
-                }
-                return false;
             }
-            return hasCapability(PackageManager.FEATURE_TELEPHONY_MESSAGING, R.bool.config_sms_capable);
-        }
-        z = false;
-        if (!z) {
+            return false;
         }
         return hasCapability(PackageManager.FEATURE_TELEPHONY_MESSAGING, R.bool.config_sms_capable);
     }
@@ -3612,7 +3519,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda25
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TelephonyManager.CellInfoCallback.this.onError(2, r2);
+                            cellInfoCallback.onError(2, remoteException);
                         }
                     });
                 }
@@ -3632,35 +3539,35 @@ public class TelephonyManager {
 
         @Override // android.telephony.ICellInfoCallback
         public void onCellInfo(final List<CellInfo> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CellInfoCallback cellInfoCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$4$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.CellInfoCallback.this.onCellInfo(list);
+                        cellInfoCallback.onCellInfo(list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ICellInfoCallback
         public void onError(final int i, final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CellInfoCallback cellInfoCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.CellInfoCallback.this.onError(i, TelephonyManager.createThrowableByClassName(str, str2));
+                        cellInfoCallback.onError(i, TelephonyManager.createThrowableByClassName(str, str2));
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -3684,7 +3591,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda24
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TelephonyManager.CellInfoCallback.this.onError(2, r2);
+                            cellInfoCallback.onError(2, remoteException);
                         }
                     });
                 }
@@ -3704,35 +3611,35 @@ public class TelephonyManager {
 
         @Override // android.telephony.ICellInfoCallback
         public void onCellInfo(final List<CellInfo> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CellInfoCallback cellInfoCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$5$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.CellInfoCallback.this.onCellInfo(list);
+                        cellInfoCallback.onCellInfo(list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ICellInfoCallback
         public void onError(final int i, final String str, final String str2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CellInfoCallback cellInfoCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$5$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.CellInfoCallback.this.onError(i, TelephonyManager.createThrowableByClassName(str, str2));
+                        cellInfoCallback.onError(i, TelephonyManager.createThrowableByClassName(str, str2));
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -3759,7 +3666,7 @@ public class TelephonyManager {
         }
     }
 
-    public String getMmsUserAgent() {
+    public String getMmsUserAgent() throws DOMException {
         String str = "SAMSUNG-ANDROID-MMS/" + Build.MODEL;
         SemCarrierFeature semCarrierFeature = SemCarrierFeature.getInstance();
         int phoneId = SubscriptionManager.getPhoneId(getSubId());
@@ -3821,7 +3728,7 @@ public class TelephonyManager {
         return null;
     }
 
-    public String getMmsUAProfUrl() {
+    public String getMmsUAProfUrl() throws DOMException {
         SemCarrierFeature semCarrierFeature = SemCarrierFeature.getInstance();
         int phoneId = SubscriptionManager.getPhoneId(getSubId());
         String upperCase = SmsManager.getSmsManagerForContextAndSubscriptionId(this.mContext, getSubId()).getMnoName().toUpperCase();
@@ -3858,16 +3765,14 @@ public class TelephonyManager {
         if (uiccSlotsInfo == null || i < 0 || i >= uiccSlotsInfo.length || (uiccSlotInfo = uiccSlotsInfo[i]) == null) {
             return -1;
         }
-        Optional<UiccPortInfo> findFirst = uiccSlotInfo.getPorts().stream().filter(new Predicate() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda21
+        Optional<UiccPortInfo> optionalFindFirst = uiccSlotInfo.getPorts().stream().filter(new Predicate() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda21
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isActive;
-                isActive = ((UiccPortInfo) obj).isActive();
-                return isActive;
+                return ((UiccPortInfo) obj).isActive();
             }
         }).findFirst();
-        if (findFirst.isPresent()) {
-            return findFirst.get().getPortIndex();
+        if (optionalFindFirst.isPresent()) {
+            return optionalFindFirst.get().getPortIndex();
         }
         return -1;
     }
@@ -4298,35 +4203,35 @@ public class TelephonyManager {
 
         @Override // com.android.internal.telephony.INumberVerificationCallback
         public void onCallReceived(final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final NumberVerificationCallback numberVerificationCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$6$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NumberVerificationCallback.this.onCallReceived(str);
+                        numberVerificationCallback.onCallReceived(str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // com.android.internal.telephony.INumberVerificationCallback
         public void onVerificationFailed(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final NumberVerificationCallback numberVerificationCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$6$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NumberVerificationCallback.this.onVerificationFailed(i);
+                        numberVerificationCallback.onVerificationFailed(i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -4357,7 +4262,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda11
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NumberVerificationCallback.this.onVerificationFailed(0);
+                            numberVerificationCallback.onVerificationFailed(0);
                         }
                     });
                 }
@@ -4378,8 +4283,8 @@ public class TelephonyManager {
         String str2;
         String string = Settings.Global.getString(contentResolver, str);
         if (string != null) {
-            String[] split = string.split(",");
-            if (i >= 0 && i < split.length && (str2 = split[i]) != null) {
+            String[] strArrSplit = string.split(",");
+            if (i >= 0 && i < strArrSplit.length && (str2 = strArrSplit[i]) != null) {
                 try {
                     return Integer.parseInt(str2);
                 } catch (NumberFormatException unused) {
@@ -4398,60 +4303,44 @@ public class TelephonyManager {
         if (i < 0) {
             throw new IllegalArgumentException("putIntAtIndex index < 0 index=" + i);
         }
-        String[] split = string != null ? string.split(",") : null;
+        String[] strArrSplit = string != null ? string.split(",") : null;
         String str3 = "";
         for (int i3 = 0; i3 < i; i3++) {
-            if (split == null || i3 >= split.length) {
+            if (strArrSplit == null || i3 >= strArrSplit.length) {
                 str2 = "";
             } else {
-                str2 = split[i3];
+                str2 = strArrSplit[i3];
             }
             str3 = str3 + str2 + ",";
         }
         String str4 = str3 + i2;
-        if (split != null) {
+        if (strArrSplit != null) {
             while (true) {
                 i++;
-                if (i >= split.length) {
+                if (i >= strArrSplit.length) {
                     break;
                 }
-                str4 = str4 + "," + split[i];
+                str4 = str4 + "," + strArrSplit[i];
             }
         }
         return Settings.Global.putString(contentResolver, str, str4);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0019, code lost:
-    
-        if (r1 != null) goto L14;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getTelephonyProperty(int r1, java.lang.String r2, java.lang.String r3) {
-        /*
-            java.lang.String r2 = android.os.SystemProperties.get(r2)
-            if (r2 == 0) goto L1c
-            int r0 = r2.length()
-            if (r0 <= 0) goto L1c
-            java.lang.String r0 = ","
-            java.lang.String[] r2 = r2.split(r0)
-            if (r1 < 0) goto L1c
-            int r0 = r2.length
-            if (r1 >= r0) goto L1c
-            r1 = r2[r1]
-            if (r1 == 0) goto L1c
-            goto L1d
-        L1c:
-            r1 = 0
-        L1d:
-            if (r1 != 0) goto L20
-            return r3
-        L20:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.TelephonyManager.getTelephonyProperty(int, java.lang.String, java.lang.String):java.lang.String");
+    public static String getTelephonyProperty(int i, String str, String str2) {
+        String str3;
+        String str4 = SystemProperties.get(str);
+        if (str4 == null || str4.length() <= 0) {
+            str3 = null;
+        } else {
+            String[] strArrSplit = str4.split(",");
+            if (i < 0 || i >= strArrSplit.length || (str3 = strArrSplit[i]) == null) {
+            }
+        }
+        return str3 == null ? str2 : str3;
     }
 
     public static String semGetTelephonyProperty(int i, String str, String str2) {
@@ -4602,7 +4491,7 @@ public class TelephonyManager {
             executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda26
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new RuntimeException("getSimServiceTable: Subscriber Info is null"));
+                    outcomeReceiver.onError(new RuntimeException("getSimServiceTable: Subscriber Info is null"));
                 }
             });
             return;
@@ -4617,15 +4506,15 @@ public class TelephonyManager {
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda27
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult(new byte[0]);
+                        outcomeReceiver.onResult(new byte[0]);
                     }
                 });
             } else {
-                final byte[] hexStringToBytes = IccUtils.hexStringToBytes(simServiceTable);
+                final byte[] bArrHexStringToBytes = IccUtils.hexStringToBytes(simServiceTable);
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda28
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult(hexStringToBytes);
+                        outcomeReceiver.onResult(bArrHexStringToBytes);
                     }
                 });
             }
@@ -4633,7 +4522,7 @@ public class TelephonyManager {
             executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda29
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(e);
+                    outcomeReceiver.onError(e);
                 }
             });
         }
@@ -4949,9 +4838,7 @@ public class TelephonyManager {
         }).mapToObj(new IntFunction() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda5
             @Override // java.util.function.IntFunction
             public final Object apply(int i) {
-                String networkTypeName;
-                networkTypeName = TelephonyManager.getNetworkTypeName(i);
-                return networkTypeName;
+                return TelephonyManager.getNetworkTypeName(i);
             }
         }).collect(Collectors.joining(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER));
         return TextUtils.isEmpty(str) ? "UNKNOWN" : str;
@@ -5405,8 +5292,8 @@ public class TelephonyManager {
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
-                int[] supplyPinReportResultForSubscriber = iTelephony.supplyPinReportResultForSubscriber(getSubId(), str);
-                return new PinResult(supplyPinReportResultForSubscriber[0], supplyPinReportResultForSubscriber[1]);
+                int[] iArrSupplyPinReportResultForSubscriber = iTelephony.supplyPinReportResultForSubscriber(getSubId(), str);
+                return new PinResult(iArrSupplyPinReportResultForSubscriber[0], iArrSupplyPinReportResultForSubscriber[1]);
             }
             throw new IllegalStateException("telephony service is null.");
         } catch (RemoteException e) {
@@ -5421,8 +5308,8 @@ public class TelephonyManager {
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
-                int[] supplyPukReportResultForSubscriber = iTelephony.supplyPukReportResultForSubscriber(getSubId(), str, str2);
-                return new PinResult(supplyPukReportResultForSubscriber[0], supplyPukReportResultForSubscriber[1]);
+                int[] iArrSupplyPukReportResultForSubscriber = iTelephony.supplyPukReportResultForSubscriber(getSubId(), str, str2);
+                return new PinResult(iArrSupplyPukReportResultForSubscriber[0], iArrSupplyPukReportResultForSubscriber[1]);
             }
             throw new IllegalStateException("telephony service is null.");
         } catch (RemoteException e) {
@@ -5722,20 +5609,20 @@ public class TelephonyManager {
     }
 
     public boolean isOpportunisticSubscription() {
-        SubscriptionInfo subscriptionInfo;
-        SubscriptionInfo subscriptionInfo2;
+        SubscriptionInfo activeSubscriptionInfo;
+        SubscriptionInfo activeSubscriptionInfo2;
         SubscriptionManager subscriptionManager = this.mSubscriptionManager;
         if (subscriptionManager != null && subscriptionManager.getActiveSubscriptionInfoCount() == 2) {
             int[] subId = SubscriptionManager.getSubId(0);
             int[] subId2 = SubscriptionManager.getSubId(1);
             if (ArrayUtils.isEmpty(subId) || ArrayUtils.isEmpty(subId2)) {
-                subscriptionInfo = null;
-                subscriptionInfo2 = null;
+                activeSubscriptionInfo = null;
+                activeSubscriptionInfo2 = null;
             } else {
-                subscriptionInfo = this.mSubscriptionManager.getActiveSubscriptionInfo(subId[0]);
-                subscriptionInfo2 = this.mSubscriptionManager.getActiveSubscriptionInfo(subId2[0]);
+                activeSubscriptionInfo = this.mSubscriptionManager.getActiveSubscriptionInfo(subId[0]);
+                activeSubscriptionInfo2 = this.mSubscriptionManager.getActiveSubscriptionInfo(subId2[0]);
             }
-            if (subscriptionInfo != null && subscriptionInfo2 != null && subscriptionInfo.getGroupUuid() != null && subscriptionInfo.getGroupUuid().equals(subscriptionInfo2.getGroupUuid()) && (subscriptionInfo2.isOpportunistic() || subscriptionInfo.isOpportunistic())) {
+            if (activeSubscriptionInfo != null && activeSubscriptionInfo2 != null && activeSubscriptionInfo.getGroupUuid() != null && activeSubscriptionInfo.getGroupUuid().equals(activeSubscriptionInfo2.getGroupUuid()) && (activeSubscriptionInfo2.isOpportunistic() || activeSubscriptionInfo.isOpportunistic())) {
                 Log.d(TAG, "isOpportunisticSubscription true");
                 return true;
             }
@@ -6179,7 +6066,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda8
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.accept(2);
+                            consumer.accept(2);
                         }
                     });
                 }
@@ -6209,7 +6096,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$8$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -6279,20 +6166,20 @@ public class TelephonyManager {
 
     public void setNetworkOperatorNameForPhone(int i, String str) {
         if (SubscriptionManager.isValidPhoneId(i)) {
-            List updateTelephonyProperty = updateTelephonyProperty(TelephonyProperties.operator_alpha(), i, str);
+            List listUpdateTelephonyProperty = updateTelephonyProperty(TelephonyProperties.operator_alpha(), i, str);
             try {
-                TelephonyProperties.operator_alpha(updateTelephonyProperty);
+                TelephonyProperties.operator_alpha(listUpdateTelephonyProperty);
             } catch (IllegalArgumentException e) {
                 Log.e(TAG, "setNetworkOperatorNameForPhone: ", e);
-                int size = updateTelephonyProperty.size();
+                int size = listUpdateTelephonyProperty.size();
                 int i2 = (91 - size) / size;
-                for (int i3 = 0; i3 < updateTelephonyProperty.size(); i3++) {
-                    if (updateTelephonyProperty.get(i3) != null) {
-                        updateTelephonyProperty.set(i3, TextUtils.truncateStringForUtf8Storage((String) updateTelephonyProperty.get(i3), i2));
+                for (int i3 = 0; i3 < listUpdateTelephonyProperty.size(); i3++) {
+                    if (listUpdateTelephonyProperty.get(i3) != null) {
+                        listUpdateTelephonyProperty.set(i3, TextUtils.truncateStringForUtf8Storage((String) listUpdateTelephonyProperty.get(i3), i2));
                     }
                 }
-                TelephonyProperties.operator_alpha(updateTelephonyProperty);
-                Log.e(TAG, "successfully truncated operator_alpha: " + updateTelephonyProperty);
+                TelephonyProperties.operator_alpha(listUpdateTelephonyProperty);
+                Log.e(TAG, "successfully truncated operator_alpha: " + listUpdateTelephonyProperty);
             }
         }
     }
@@ -6452,7 +6339,7 @@ public class TelephonyManager {
         executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda13
             @Override // java.lang.Runnable
             public final void run() {
-                OutcomeReceiver.this.onError(new TelephonyManager.ModemActivityInfoException(1));
+                outcomeReceiver.onError(new TelephonyManager.ModemActivityInfoException(1));
             }
         });
     }
@@ -6511,7 +6398,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$9$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onResult(r2);
+                            outcomeReceiver.onResult(modemActivityInfo);
                         }
                     });
                 }
@@ -6528,7 +6415,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$9$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onError(r2);
+                            outcomeReceiver.onError(modemActivityInfoException);
                         }
                     });
                 }
@@ -6559,12 +6446,12 @@ public class TelephonyManager {
                     AnomalyReporter.reportAnomaly(UUID.fromString("e2bed88e-def9-476e-bd71-3e572a8de6d1"), "getServiceStateForSlot " + i2 + " NPE");
                     return null;
                 }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Error calling ITelephony#getServiceStateForSlot", e);
-                return null;
+            } catch (NullPointerException unused2) {
+                i2 = i;
             }
-        } catch (NullPointerException unused2) {
-            i2 = i;
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error calling ITelephony#getServiceStateForSlot", e);
+            return null;
         }
     }
 
@@ -6698,16 +6585,16 @@ public class TelephonyManager {
         }
     }
 
-    public List<String> getCertsFromCarrierPrivilegeAccessRules() {
-        List<String> list = null;
+    public List<String> getCertsFromCarrierPrivilegeAccessRules() throws RemoteException {
+        List<String> certsFromCarrierPrivilegeAccessRules = null;
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
-                list = iTelephony.getCertsFromCarrierPrivilegeAccessRules(getSubId());
+                certsFromCarrierPrivilegeAccessRules = iTelephony.getCertsFromCarrierPrivilegeAccessRules(getSubId());
             }
         } catch (RemoteException unused) {
         }
-        return list == null ? Collections.EMPTY_LIST : list;
+        return certsFromCarrierPrivilegeAccessRules == null ? Collections.EMPTY_LIST : certsFromCarrierPrivilegeAccessRules;
     }
 
     @SystemApi
@@ -6872,7 +6759,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$10$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -7241,7 +7128,7 @@ public class TelephonyManager {
     }
 
     public Map<Integer, List<EmergencyNumber>> getEmergencyNumberList() {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
@@ -7251,12 +7138,12 @@ public class TelephonyManager {
         } catch (RemoteException e) {
             Log.e(TAG, "getEmergencyNumberList RemoteException", e);
             e.rethrowAsRuntimeException();
-            return hashMap;
+            return map;
         }
     }
 
     public Map<Integer, List<EmergencyNumber>> getEmergencyNumberList(int i) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
@@ -7266,12 +7153,12 @@ public class TelephonyManager {
         } catch (RemoteException e) {
             Log.e(TAG, "getEmergencyNumberList with Categories RemoteException", e);
             e.rethrowAsRuntimeException();
-            return hashMap;
+            return map;
         }
     }
 
     public Map<Integer, List<EmergencyNumber>> filterEmergencyNumbersByCategories(Map<Integer, List<EmergencyNumber>> map, int i) {
-        HashMap hashMap = new HashMap();
+        HashMap map2 = new HashMap();
         if (map != null) {
             for (Integer num : map.keySet()) {
                 List<EmergencyNumber> list = map.get(num);
@@ -7281,10 +7168,10 @@ public class TelephonyManager {
                         arrayList.add(emergencyNumber);
                     }
                 }
-                hashMap.put(num, arrayList);
+                map2.put(num, arrayList);
             }
         }
-        return hashMap;
+        return map2;
     }
 
     public boolean isEmergencyNumber(String str) {
@@ -7361,7 +7248,7 @@ public class TelephonyManager {
         }
     }
 
-    public void setPreferredOpportunisticDataSubscription(int i, boolean z, final Executor executor, final Consumer<Integer> consumer) {
+    public void setPreferredOpportunisticDataSubscription(int i, boolean z, final Executor executor, final Consumer<Integer> consumer) throws RemoteException {
         Context context = this.mContext;
         String opPackageName = context != null ? context.getOpPackageName() : "<unknown>";
         try {
@@ -7384,7 +7271,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda7
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TelephonyManager.lambda$setPreferredOpportunisticDataSubscription$20(r1);
+                            TelephonyManager.lambda$setPreferredOpportunisticDataSubscription$20(consumer);
                         }
                     });
                 }
@@ -7407,7 +7294,7 @@ public class TelephonyManager {
             if (this.val$executor == null || this.val$callback == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
@@ -7418,7 +7305,7 @@ public class TelephonyManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -7448,7 +7335,7 @@ public class TelephonyManager {
         }
     }
 
-    public void updateAvailableNetworks(List<AvailableNetworkInfo> list, final Executor executor, final Consumer<Integer> consumer) {
+    public void updateAvailableNetworks(List<AvailableNetworkInfo> list, final Executor executor, final Consumer<Integer> consumer) throws RemoteException {
         Context context = this.mContext;
         String opPackageName = context != null ? context.getOpPackageName() : "<unknown>";
         Objects.requireNonNull(list, "availableNetworks must not be null.");
@@ -7472,7 +7359,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TelephonyManager.lambda$updateAvailableNetworks$22(r1);
+                            TelephonyManager.lambda$updateAvailableNetworks$22(consumer);
                         }
                     });
                 }
@@ -7503,7 +7390,7 @@ public class TelephonyManager {
                     executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$12$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -7641,30 +7528,30 @@ public class TelephonyManager {
     }
 
     public List<ApnSetting> getDevicePolicyOverrideApns(Context context) {
-        Cursor query = context.getContentResolver().query(Telephony.Carriers.DPC_URI, null, null, null, null);
+        Cursor cursorQuery = context.getContentResolver().query(Telephony.Carriers.DPC_URI, null, null, null, null);
         try {
-            if (query == null) {
+            if (cursorQuery == null) {
                 List<ApnSetting> list = Collections.EMPTY_LIST;
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 return list;
             }
             ArrayList arrayList = new ArrayList();
-            query.moveToPosition(-1);
-            while (query.moveToNext()) {
-                arrayList.add(ApnSetting.makeApnSetting(query));
+            cursorQuery.moveToPosition(-1);
+            while (cursorQuery.moveToNext()) {
+                arrayList.add(ApnSetting.makeApnSetting(cursorQuery));
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return arrayList;
         } catch (Throwable th) {
-            if (query == null) {
+            if (cursorQuery == null) {
                 throw th;
             }
             try {
-                query.close();
+                cursorQuery.close();
                 throw th;
             } catch (Throwable th2) {
                 th.addSuppressed(th2);
@@ -7674,14 +7561,14 @@ public class TelephonyManager {
     }
 
     public int addDevicePolicyOverrideApn(Context context, ApnSetting apnSetting) {
-        Uri insert = context.getContentResolver().insert(Telephony.Carriers.DPC_URI, apnSetting.toContentValues());
-        if (insert == null) {
+        Uri uriInsert = context.getContentResolver().insert(Telephony.Carriers.DPC_URI, apnSetting.toContentValues());
+        if (uriInsert == null) {
             return -1;
         }
         try {
-            return Integer.parseInt(insert.getLastPathSegment());
+            return Integer.parseInt(uriInsert.getLastPathSegment());
         } catch (NumberFormatException unused) {
-            com.android.telephony.Rlog.e(TAG, "Failed to parse inserted override APN id: " + insert.getLastPathSegment());
+            com.android.telephony.Rlog.e(TAG, "Failed to parse inserted override APN id: " + uriInsert.getLastPathSegment());
             return -1;
         }
     }
@@ -7746,7 +7633,7 @@ public class TelephonyManager {
 
         @Override // com.android.internal.telephony.IBooleanConsumer
         public void accept(final boolean z) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
@@ -7757,7 +7644,7 @@ public class TelephonyManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -7821,7 +7708,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$14$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            TelephonyManager.CallForwardingInfoCallback.this.onCallForwardingInfoAvailable(r2);
+                            callForwardingInfoCallback.onCallForwardingInfoAvailable(callForwardingInfo);
                         }
                     });
                 }
@@ -7838,7 +7725,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$14$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            TelephonyManager.CallForwardingInfoCallback.this.onError(r2);
+                            callForwardingInfoCallback.onError(i);
                         }
                     });
                 }
@@ -7918,7 +7805,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$15$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -7965,7 +7852,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$16$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -8013,7 +7900,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$17$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -8092,14 +7979,14 @@ public class TelephonyManager {
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
-                int changeIccLockPassword = iTelephony.changeIccLockPassword(getSubId(), str, str2);
-                if (changeIccLockPassword == Integer.MAX_VALUE) {
+                int iChangeIccLockPassword = iTelephony.changeIccLockPassword(getSubId(), str, str2);
+                if (iChangeIccLockPassword == Integer.MAX_VALUE) {
                     return new PinResult(0, 0);
                 }
-                if (changeIccLockPassword < 0) {
+                if (iChangeIccLockPassword < 0) {
                     return PinResult.getDefaultFailedResult();
                 }
-                return new PinResult(1, changeIccLockPassword);
+                return new PinResult(1, iChangeIccLockPassword);
             }
             throw new IllegalStateException("telephony service is null.");
         } catch (RemoteException e) {
@@ -8202,12 +8089,12 @@ public class TelephonyManager {
             return IPhoneSubInfo.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getPhoneSubServiceRegisterer().get());
         }
         if (sIPhoneSubInfo == null) {
-            IPhoneSubInfo asInterface = IPhoneSubInfo.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getPhoneSubServiceRegisterer().get());
+            IPhoneSubInfo iPhoneSubInfoAsInterface = IPhoneSubInfo.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getPhoneSubServiceRegisterer().get());
             synchronized (sCacheLock) {
-                if (sIPhoneSubInfo == null && asInterface != null) {
+                if (sIPhoneSubInfo == null && iPhoneSubInfoAsInterface != null) {
                     try {
-                        sIPhoneSubInfo = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sIPhoneSubInfo = iPhoneSubInfoAsInterface;
+                        iPhoneSubInfoAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sIPhoneSubInfo = null;
                     }
@@ -8222,12 +8109,12 @@ public class TelephonyManager {
             return ISemPhoneSubInfo.Stub.asInterface(ServiceManager.getService("isemphonesubinfo"));
         }
         if (sISemPhoneSubInfo == null) {
-            ISemPhoneSubInfo asInterface = ISemPhoneSubInfo.Stub.asInterface(ServiceManager.getService("isemphonesubinfo"));
+            ISemPhoneSubInfo iSemPhoneSubInfoAsInterface = ISemPhoneSubInfo.Stub.asInterface(ServiceManager.getService("isemphonesubinfo"));
             synchronized (sCacheLock) {
-                if (sISemPhoneSubInfo == null && asInterface != null) {
+                if (sISemPhoneSubInfo == null && iSemPhoneSubInfoAsInterface != null) {
                     try {
-                        sISemPhoneSubInfo = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISemPhoneSubInfo = iSemPhoneSubInfoAsInterface;
+                        iSemPhoneSubInfoAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISemPhoneSubInfo = null;
                     }
@@ -8242,12 +8129,12 @@ public class TelephonyManager {
             return ISub.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSubscriptionServiceRegisterer().get());
         }
         if (sISub == null) {
-            ISub asInterface = ISub.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSubscriptionServiceRegisterer().get());
+            ISub iSubAsInterface = ISub.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSubscriptionServiceRegisterer().get());
             synchronized (sCacheLock) {
-                if (sISub == null && asInterface != null) {
+                if (sISub == null && iSubAsInterface != null) {
                     try {
-                        sISub = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISub = iSubAsInterface;
+                        iSubAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISub = null;
                     }
@@ -8262,12 +8149,12 @@ public class TelephonyManager {
             return ISms.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSmsServiceRegisterer().get());
         }
         if (sISms == null) {
-            ISms asInterface = ISms.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSmsServiceRegisterer().get());
+            ISms iSmsAsInterface = ISms.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getSmsServiceRegisterer().get());
             synchronized (sCacheLock) {
-                if (sISms == null && asInterface != null) {
+                if (sISms == null && iSmsAsInterface != null) {
                     try {
-                        sISms = asInterface;
-                        asInterface.asBinder().linkToDeath(sServiceDeath, 0);
+                        sISms = iSmsAsInterface;
+                        iSmsAsInterface.asBinder().linkToDeath(sServiceDeath, 0);
                     } catch (Exception unused) {
                         sISms = null;
                     }
@@ -8368,12 +8255,12 @@ public class TelephonyManager {
     }
 
     private int getLocationData() {
-        boolean contains = getRenouncedPermissions().contains(Manifest.permission.ACCESS_COARSE_LOCATION);
-        boolean contains2 = getRenouncedPermissions().contains(Manifest.permission.ACCESS_FINE_LOCATION);
-        if (contains) {
+        boolean zContains = getRenouncedPermissions().contains(Manifest.permission.ACCESS_COARSE_LOCATION);
+        boolean zContains2 = getRenouncedPermissions().contains(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (zContains) {
             return 0;
         }
-        return contains2 ? 1 : 2;
+        return zContains2 ? 1 : 2;
     }
 
     public void registerTelephonyCallback(int i, Executor executor, TelephonyCallback telephonyCallback) {
@@ -8425,7 +8312,7 @@ public class TelephonyManager {
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.BootstrapAuthenticationCallback.this.onAuthenticationFailure(2);
+                        bootstrapAuthenticationCallback.onAuthenticationFailure(2);
                     }
                 });
             } else {
@@ -8436,7 +8323,7 @@ public class TelephonyManager {
             executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TelephonyManager.BootstrapAuthenticationCallback.this.onAuthenticationFailure(2);
+                    bootstrapAuthenticationCallback.onAuthenticationFailure(2);
                 }
             });
         }
@@ -8454,35 +8341,35 @@ public class TelephonyManager {
 
         @Override // android.telephony.IBootstrapAuthenticationCallback
         public void onKeysAvailable(int i, final byte[] bArr, final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$e;
                 final BootstrapAuthenticationCallback bootstrapAuthenticationCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$18$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.BootstrapAuthenticationCallback.this.onKeysAvailable(bArr, str);
+                        bootstrapAuthenticationCallback.onKeysAvailable(bArr, str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.IBootstrapAuthenticationCallback
         public void onAuthenticationFailure(int i, final int i2) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$e;
                 final BootstrapAuthenticationCallback bootstrapAuthenticationCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$18$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.BootstrapAuthenticationCallback.this.onAuthenticationFailure(i2);
+                        bootstrapAuthenticationCallback.onAuthenticationFailure(i2);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -8621,7 +8508,7 @@ public class TelephonyManager {
                 executor.execute(new Runnable() { // from class: android.telephony.TelephonyManager$19$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.AnonymousClass19.this.lambda$onReceiveResult$0(outcomeReceiver, i);
+                        this.f$0.lambda$onReceiveResult$0(outcomeReceiver, i);
                     }
                 });
             } else if (i == 2) {
@@ -8630,7 +8517,7 @@ public class TelephonyManager {
                 executor2.execute(new Runnable() { // from class: android.telephony.TelephonyManager$19$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TelephonyManager.AnonymousClass19.this.lambda$onReceiveResult$1(outcomeReceiver2, i);
+                        this.f$0.lambda$onReceiveResult$1(outcomeReceiver2, i);
                     }
                 });
             } else {
@@ -8640,7 +8527,7 @@ public class TelephonyManager {
                 executor3.execute(new Runnable() { // from class: android.telephony.TelephonyManager$19$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult(networkSlicingConfig);
+                        outcomeReceiver3.onResult(networkSlicingConfig);
                     }
                 });
             }
@@ -8910,9 +8797,9 @@ public class TelephonyManager {
     @SystemApi
     public void persistEmergencyCallDiagnosticData(String str, EmergencyCallDiagnosticData emergencyCallDiagnosticData) {
         try {
-            ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
-            if (asInterface != null) {
-                asInterface.persistEmergencyCallDiagnosticData(str, emergencyCallDiagnosticData.isLogcatCollectionEnabled(), emergencyCallDiagnosticData.getLogcatCollectionStartTimeMillis(), emergencyCallDiagnosticData.isTelecomDumpsysCollectionEnabled(), emergencyCallDiagnosticData.isTelephonyDumpsysCollectionEnabled());
+            ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+            if (iTelephonyAsInterface != null) {
+                iTelephonyAsInterface.persistEmergencyCallDiagnosticData(str, emergencyCallDiagnosticData.isLogcatCollectionEnabled(), emergencyCallDiagnosticData.getLogcatCollectionStartTimeMillis(), emergencyCallDiagnosticData.isTelecomDumpsysCollectionEnabled(), emergencyCallDiagnosticData.isTelephonyDumpsysCollectionEnabled());
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Error while persistEmergencyCallDiagnosticData: " + e);
@@ -9033,7 +8920,7 @@ public class TelephonyManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
@@ -9044,7 +8931,7 @@ public class TelephonyManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -9380,20 +9267,20 @@ public class TelephonyManager {
         }
     }
 
-    public boolean semIsVideoCall() {
-        boolean z = false;
+    public boolean semIsVideoCall() throws RemoteException {
+        boolean zIsVideoCall = false;
         try {
             ISemTelephony iSemTelephony = getISemTelephony();
             if (iSemTelephony != null) {
-                z = iSemTelephony.isVideoCall();
+                zIsVideoCall = iSemTelephony.isVideoCall();
             }
         } catch (RemoteException e) {
             com.android.telephony.Rlog.e(TAG, "semIsVideoCall is fail due to RemoteException. " + e);
         } catch (NullPointerException e2) {
             com.android.telephony.Rlog.e(TAG, "semIsVideoCall is fail due to NullPointerException. " + e2);
         }
-        com.android.telephony.Rlog.d(TAG, "semIsVideoCall - retVal: " + z);
-        return z;
+        com.android.telephony.Rlog.d(TAG, "semIsVideoCall - retVal: " + zIsVideoCall);
+        return zIsVideoCall;
     }
 
     public boolean semIsInEmergencyCallbackMode() {
@@ -9426,11 +9313,11 @@ public class TelephonyManager {
         SemNetworkQualityInfo semNetworkQualityInfo = new SemNetworkQualityInfo();
         try {
             String mobileQualityInformation = getISemTelephony().getMobileQualityInformation(i, this.mContext.getOpPackageName(), getAttributionTag());
-            String[] split = mobileQualityInformation.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+            String[] strArrSplit = mobileQualityInformation.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
             try {
                 String ipAddressFromLinkProp = getISemTelephony().getIpAddressFromLinkProp("MOBILE");
                 if (!SemTelephonyUtils.SHIP_BUILD) {
-                    com.android.telephony.Rlog.d(TAG, "mobileInfo[" + mobileQualityInformation + "] length(" + split.length + NavigationBarInflaterView.KEY_CODE_END);
+                    com.android.telephony.Rlog.d(TAG, "mobileInfo[" + mobileQualityInformation + "] length(" + strArrSplit.length + NavigationBarInflaterView.KEY_CODE_END);
                     StringBuilder sb = new StringBuilder("mobileIP[");
                     sb.append(ipAddressFromLinkProp);
                     sb.append(NavigationBarInflaterView.SIZE_MOD_END);
@@ -9441,20 +9328,20 @@ public class TelephonyManager {
                 } else if (TelephonyFeatures.isMainOperatorSpecific(i, "KTT")) {
                     semNetworkQualityInfo.put("internet_ip", ipAddressFromLinkProp, "2");
                 }
-                for (String str : split) {
-                    String[] split2 = str.split(":");
+                for (String str : strArrSplit) {
+                    String[] strArrSplit2 = str.split(":");
                     if (SemTelephonyUtils.SHIP_BUILD) {
                         c = 0;
                     } else {
                         c = 0;
-                        com.android.telephony.Rlog.d(TAG, "getMobileQualityInfo elements[" + split2[0] + ":" + split2[1] + ":" + split2[2] + NavigationBarInflaterView.SIZE_MOD_END);
+                        com.android.telephony.Rlog.d(TAG, "getMobileQualityInfo elements[" + strArrSplit2[0] + ":" + strArrSplit2[1] + ":" + strArrSplit2[2] + NavigationBarInflaterView.SIZE_MOD_END);
                     }
                     if (TelephonyFeatures.isMainOperatorSpecific(i, "SKT") || (TelephonyFeatures.isMainOperatorSpecific(i, "KOO") && simOperatorNumericForPhone.equals("45005"))) {
-                        split2[c] = changeNetworkInformationString(split2[c]);
+                        strArrSplit2[c] = changeNetworkInformationString(strArrSplit2[c]);
                     } else {
-                        split2[2] = "2";
+                        strArrSplit2[2] = "2";
                     }
-                    semNetworkQualityInfo.put(split2[c], split2[1], split2[2]);
+                    semNetworkQualityInfo.put(strArrSplit2[c], strArrSplit2[1], strArrSplit2[2]);
                 }
                 return semNetworkQualityInfo;
             } catch (RemoteException e) {
@@ -9542,8 +9429,8 @@ public class TelephonyManager {
         }
     }
 
-    private String getValuefromCSC(String str, String str2, String str3, int i) {
-        Node search;
+    private String getValuefromCSC(String str, String str2, String str3, int i) throws DOMException {
+        Node nodeSearch;
         String value;
         String value2;
         if (this.mDocument == null) {
@@ -9551,78 +9438,82 @@ public class TelephonyManager {
         }
         String networkName = getNetworkName(str2, str3);
         com.android.telephony.Rlog.i(TAG, "getValuefromCSC : type = " + str + ", NetworkName = " + networkName);
-        Node search2 = search("Settings.Messages.MMS");
-        if (search2 == null) {
+        Node nodeSearch2 = search("Settings.Messages.MMS");
+        if (nodeSearch2 == null) {
             com.android.telephony.Rlog.d(TAG, "getValuefromCSC : return null by not found Settings.Messages.MMS");
             return null;
         }
-        NodeList searchList = searchList(search2, "MMSView");
-        if (searchList == null) {
+        NodeList nodeListSearchList = searchList(nodeSearch2, "MMSView");
+        if (nodeListSearchList == null) {
             com.android.telephony.Rlog.d(TAG, "getValuefromCSC : return null by not found MMSView");
             return null;
         }
         if (networkName != null && !TextUtils.isEmpty(networkName)) {
-            for (int i2 = 0; i2 < searchList.getLength(); i2++) {
-                if (networkName.equals(getValue(search(searchList.item(i2), "NetworkName"))) && (value2 = getValue(search(searchList.item(i2), str))) != null && !TextUtils.isEmpty(value2)) {
+            for (int i2 = 0; i2 < nodeListSearchList.getLength(); i2++) {
+                if (networkName.equals(getValue(search(nodeListSearchList.item(i2), "NetworkName"))) && (value2 = getValue(search(nodeListSearchList.item(i2), str))) != null && !TextUtils.isEmpty(value2)) {
                     com.android.telephony.Rlog.d(TAG, "getValuefromCSC : Found " + str + " = " + value2);
                     return value2;
                 }
             }
         }
-        for (int i3 = 0; i3 < searchList.getLength(); i3++) {
-            if ("Network Name".equals(getValue(search(searchList.item(i3), "NetworkName"))) && (value = getValue(search(searchList.item(i3), str))) != null && !TextUtils.isEmpty(value)) {
+        for (int i3 = 0; i3 < nodeListSearchList.getLength(); i3++) {
+            if ("Network Name".equals(getValue(search(nodeListSearchList.item(i3), "NetworkName"))) && (value = getValue(search(nodeListSearchList.item(i3), str))) != null && !TextUtils.isEmpty(value)) {
                 com.android.telephony.Rlog.d(TAG, "getValuefromCSC : Default Found " + str + " = " + value);
                 return value;
             }
         }
-        if (searchList.getLength() < 1 || searchList.item(0) == null || (search = search(searchList.item(0), str)) == null) {
+        if (nodeListSearchList.getLength() < 1 || nodeListSearchList.item(0) == null || (nodeSearch = search(nodeListSearchList.item(0), str)) == null) {
             return null;
         }
-        String value3 = getValue(search);
+        String value3 = getValue(nodeSearch);
         com.android.telephony.Rlog.d(TAG, "getValuefromCSC: " + str + " = " + value3);
         return value3;
     }
 
-    private String getNetworkName(String str, String str2) {
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0093  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private String getNetworkName(String str, String str2) throws DOMException {
         boolean z;
         com.android.telephony.Rlog.d(TAG, "getNetworkName: MCCMNC = " + str + "  gid1 = " + str2);
         if (TextUtils.isEmpty(str)) {
             com.android.telephony.Rlog.d(TAG, "getNetworkName: MCCMNC is null");
             return null;
         }
-        Node search = search("GeneralInfo");
-        if (search == null) {
+        Node nodeSearch = search("GeneralInfo");
+        if (nodeSearch == null) {
             com.android.telephony.Rlog.d(TAG, "getNetworkName: No GenralInfo node");
             return null;
         }
-        NodeList searchList = searchList(search, "NetworkInfo");
-        if (searchList == null || searchList.getLength() == 0) {
+        NodeList nodeListSearchList = searchList(nodeSearch, "NetworkInfo");
+        if (nodeListSearchList == null || nodeListSearchList.getLength() == 0) {
             com.android.telephony.Rlog.d(TAG, "getNetworkName: No NetworkInfo node");
             return null;
         }
-        for (int i = 0; i < searchList.getLength(); i++) {
-            if (str.equals(getValue(search(searchList.item(i), "MCCMNC")))) {
-                Node search2 = !TextUtils.isEmpty(str2) ? search(searchList.item(i), "SubsetCode") : null;
-                if (search2 != null) {
-                    String value = getValue(search2);
+        for (int i = 0; i < nodeListSearchList.getLength(); i++) {
+            if (str.equals(getValue(search(nodeListSearchList.item(i), "MCCMNC")))) {
+                Node nodeSearch2 = !TextUtils.isEmpty(str2) ? search(nodeListSearchList.item(i), "SubsetCode") : null;
+                if (nodeSearch2 == null) {
+                    z = false;
+                    if (nodeSearch2 != null || z) {
+                        com.android.telephony.Rlog.d(TAG, "getNetworkName: Found matched network name by " + str);
+                        return getValue(search(nodeListSearchList.item(i), "NetworkName"));
+                    }
+                } else {
+                    String value = getValue(nodeSearch2);
                     if (value != null) {
                         int length = value.length();
                         if (str2.length() >= length && str2.substring(0, length).equalsIgnoreCase(value)) {
                             z = true;
-                            if (search2 != null || z) {
-                                com.android.telephony.Rlog.d(TAG, "getNetworkName: Found matched network name by " + str);
-                                return getValue(search(searchList.item(i), "NetworkName"));
-                            }
                         }
-                    } else {
-                        continue;
+                        if (nodeSearch2 != null) {
+                        }
+                        com.android.telephony.Rlog.d(TAG, "getNetworkName: Found matched network name by " + str);
+                        return getValue(search(nodeListSearchList.item(i), "NetworkName"));
                     }
+                    continue;
                 }
-                z = false;
-                if (search2 != null) {
-                }
-                com.android.telephony.Rlog.d(TAG, "getNetworkName: Found matched network name by " + str);
-                return getValue(search(searchList.item(i), "NetworkName"));
             }
         }
         return null;
@@ -9636,11 +9527,11 @@ public class TelephonyManager {
         Node documentElement = document.getDocumentElement();
         StringTokenizer stringTokenizer = new StringTokenizer(str, MediaMetrics.SEPARATOR);
         while (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
+            String strNextToken = stringTokenizer.nextToken();
             if (documentElement == null) {
                 return null;
             }
-            documentElement = search(documentElement, nextToken);
+            documentElement = search(documentElement, strNextToken);
         }
         return documentElement;
     }
@@ -9650,35 +9541,35 @@ public class TelephonyManager {
         if (node != null && (childNodes = node.getChildNodes()) != null) {
             int length = childNodes.getLength();
             for (int i = 0; i < length; i++) {
-                Node item = childNodes.item(i);
-                if (item.getNodeName().equals(str)) {
-                    return item;
+                Node nodeItem = childNodes.item(i);
+                if (nodeItem.getNodeName().equals(str)) {
+                    return nodeItem;
                 }
             }
         }
         return null;
     }
 
-    private NodeList searchList(Node node, String str) {
+    private NodeList searchList(Node node, String str) throws DOMException {
         Document document;
         if (node != null && (document = this.mDocument) != null) {
             try {
-                Element createElement = document.createElement(node.getNodeName());
+                Element elementCreateElement = document.createElement(node.getNodeName());
                 NodeList childNodes = node.getChildNodes();
                 if (childNodes != null) {
                     int length = childNodes.getLength();
                     for (int i = 0; i < length; i++) {
-                        Node item = childNodes.item(i);
-                        if (item.getNodeName().equals(str)) {
+                        Node nodeItem = childNodes.item(i);
+                        if (nodeItem.getNodeName().equals(str)) {
                             try {
-                                createElement.appendChild(item.cloneNode(true));
+                                elementCreateElement.appendChild(nodeItem.cloneNode(true));
                             } catch (Exception e) {
                                 com.android.telephony.Rlog.e(TAG, "Exception : " + e.getMessage());
                             }
                         }
                     }
                 }
-                return createElement.getChildNodes();
+                return elementCreateElement.getChildNodes();
             } catch (Exception unused) {
             }
         }
@@ -9712,18 +9603,18 @@ public class TelephonyManager {
         }
     }
 
-    private Document load(String str) {
+    private Document load(String str) throws ParserConfigurationException, SAXException, IOException {
         try {
-            DocumentBuilder newDocumentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            DocumentBuilder documentBuilderNewDocumentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             File file = new File(str);
             if (!file.exists()) {
                 com.android.telephony.Rlog.e(TAG, "File didn't exist");
                 return null;
             }
             try {
-                Document parse = newDocumentBuilder.parse(file);
+                Document document = documentBuilderNewDocumentBuilder.parse(file);
                 com.android.telephony.Rlog.d(TAG, "load done form : " + str);
-                return parse;
+                return document;
             } catch (IOException | SAXException e) {
                 com.android.telephony.Rlog.e(TAG, "Exception : " + e.getMessage());
                 return null;
@@ -10058,7 +9949,7 @@ public class TelephonyManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda9
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(2);
+                                consumer.accept(2);
                             }
                         });
                     }
@@ -10074,7 +9965,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$$ExternalSyntheticLambda30
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(2);
+                            consumer.accept(2);
                         }
                     });
                 }
@@ -10102,7 +9993,7 @@ public class TelephonyManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyManager$22$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }

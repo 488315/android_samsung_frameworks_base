@@ -396,9 +396,9 @@ public class RemoteControlClient {
                     PlaybackState.Builder builder = new PlaybackState.Builder(this.mSessionPlaybackState);
                     builder.setState(stateFromRccState, j2, f, SystemClock.elapsedRealtime());
                     builder.setErrorMessage(null);
-                    PlaybackState build = builder.build();
-                    this.mSessionPlaybackState = build;
-                    this.mSession.setPlaybackState(build);
+                    PlaybackState playbackStateBuild = builder.build();
+                    this.mSessionPlaybackState = playbackStateBuild;
+                    this.mSession.setPlaybackState(playbackStateBuild);
                 }
             }
         }
@@ -410,9 +410,9 @@ public class RemoteControlClient {
             if (this.mSession != null) {
                 PlaybackState.Builder builder = new PlaybackState.Builder(this.mSessionPlaybackState);
                 builder.setActions(getActionsFromRccControlFlags(i));
-                PlaybackState build = builder.build();
-                this.mSessionPlaybackState = build;
-                this.mSession.setPlaybackState(build);
+                PlaybackState playbackStateBuild = builder.build();
+                this.mSessionPlaybackState = playbackStateBuild;
+                this.mSession.setPlaybackState(playbackStateBuild);
             }
         }
     }
@@ -465,26 +465,26 @@ public class RemoteControlClient {
 
     private static long getActionsFromRccControlFlags(int i) {
         long j = 1;
-        long j2 = 0;
+        long actionForRccFlag = 0;
         while (true) {
-            long j3 = i;
-            if (j > j3) {
-                return j2;
+            long j2 = i;
+            if (j > j2) {
+                return actionForRccFlag;
             }
-            if ((j3 & j) != 0) {
-                j2 |= getActionForRccFlag((int) j);
+            if ((j2 & j) != 0) {
+                actionForRccFlag |= getActionForRccFlag((int) j);
             }
             j <<= 1;
         }
     }
 
     static int getRccControlFlagsFromActions(long j) {
-        int i = 0;
+        int rccFlagForAction = 0;
         for (long j2 = 1; j2 <= j && j2 < 2147483647L; j2 <<= 1) {
             if ((j2 & j) != 0) {
-                i |= getRccFlagForAction(j2);
+                rccFlagForAction |= getRccFlagForAction(j2);
             }
         }
-        return i;
+        return rccFlagForAction;
     }
 }

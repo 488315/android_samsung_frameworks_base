@@ -2,7 +2,6 @@ package com.google.zxing.oned;
 
 import com.google.zxing.FormatException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class UPCEANReader extends OneDReader {
     public static final int[][] L_AND_G_PATTERNS;
@@ -41,23 +40,23 @@ public abstract class UPCEANReader extends OneDReader {
         return getStandardUPCEANChecksum(charSequence.subSequence(0, i)) == Character.digit(charSequence.charAt(i), 10);
     }
 
-    public static int getStandardUPCEANChecksum(CharSequence charSequence) {
+    public static int getStandardUPCEANChecksum(CharSequence charSequence) throws FormatException {
         int length = charSequence.length();
         int i = 0;
         for (int i2 = length - 1; i2 >= 0; i2 -= 2) {
-            int charAt = charSequence.charAt(i2) - '0';
-            if (charAt < 0 || charAt > 9) {
+            int iCharAt = charSequence.charAt(i2) - '0';
+            if (iCharAt < 0 || iCharAt > 9) {
                 throw FormatException.getFormatInstance();
             }
-            i += charAt;
+            i += iCharAt;
         }
         int i3 = i * 3;
         for (int i4 = length - 2; i4 >= 0; i4 -= 2) {
-            int charAt2 = charSequence.charAt(i4) - '0';
-            if (charAt2 < 0 || charAt2 > 9) {
+            int iCharAt2 = charSequence.charAt(i4) - '0';
+            if (iCharAt2 < 0 || iCharAt2 > 9) {
                 throw FormatException.getFormatInstance();
             }
-            i3 += charAt2;
+            i3 += iCharAt2;
         }
         return (1000 - i3) % 10;
     }

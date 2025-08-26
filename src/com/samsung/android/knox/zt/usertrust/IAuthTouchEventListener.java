@@ -45,9 +45,9 @@ public interface IAuthTouchEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuthTouchEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAuthTouchEventListener)) {
-                return (IAuthTouchEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuthTouchEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAuthTouchEventListener)) {
+                return (IAuthTouchEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IAuthTouchEventListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener
             public void onPointerEvent(MotionEvent motionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthTouchEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(motionEvent, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuthTouchEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(motionEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

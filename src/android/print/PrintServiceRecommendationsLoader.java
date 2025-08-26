@@ -28,9 +28,9 @@ public class PrintServiceRecommendationsLoader extends Loader<List<Recommendatio
 
     /* JADX INFO: Access modifiers changed from: private */
     public void queueNewResult() {
-        Message obtainMessage = this.mHandler.obtainMessage(0);
-        obtainMessage.obj = this.mPrintManager.getPrintServiceRecommendations();
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(0);
+        messageObtainMessage.obj = this.mPrintManager.getPrintServiceRecommendations();
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     @Override // android.content.Loader

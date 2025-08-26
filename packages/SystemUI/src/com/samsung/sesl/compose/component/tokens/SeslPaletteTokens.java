@@ -2,20 +2,19 @@ package com.samsung.sesl.compose.component.tokens;
 
 import androidx.compose.ui.graphics.ColorKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslPaletteTokens {
-    public static final long Common_White;
     public static final long Functional_Orange_Dark;
     public static final long Functional_Orange_Light;
     public static final long GRAYSCALE_D1;
     public static final long GRAYSCALE_D3;
+    public static final long GRAYSCALE_D4;
     public static final long GRAYSCALE_D5;
+    public static final long GRAYSCALE_D6;
     public static final long GRAYSCALE_D7;
     public static final long GRAYSCALE_D9;
     public static final long GRAYSCALE_L1;
     public static final long GRAYSCALE_L3;
-    public static final long GRAYSCALE_L5;
     public static final long GRAYSCALE_L6;
     public static final long GRAYSCALE_L7;
     public static final long GRAYSCALE_L8;
@@ -31,19 +30,11 @@ public final class SeslPaletteTokens {
     public static final long GRAY_TEXT_L5;
     public static final SeslPaletteTokens INSTANCE = new SeslPaletteTokens();
     public static final long Primary_Blue = ColorKt.Color(4281891583L);
-    public static final long Primary_Blue_Point_Dark;
-    public static final long Primary_Blue_Point_Light;
-    public static final long Primary_Blue_Text_Dark;
-    public static final long Primary_Blue_Text_Light;
+    public static final long Primary_Blue_Point_Light = ColorKt.Color(4281823198L);
+    public static final long Primary_Blue_Point_Dark = ColorKt.Color(4284059647L);
+    public static final long Common_White = ColorKt.Color(4294638330L);
 
     static {
-        long Color = ColorKt.Color(4281823198L);
-        Primary_Blue_Point_Light = Color;
-        long Color2 = ColorKt.Color(4284059647L);
-        Primary_Blue_Point_Dark = Color2;
-        Primary_Blue_Text_Light = Color;
-        Primary_Blue_Text_Dark = Color2;
-        Common_White = ColorKt.Color(4294638330L);
         ColorKt.Color(4280624421L);
         ColorKt.Color(4292427318L);
         ColorKt.Color(4294732901L);
@@ -57,9 +48,9 @@ public final class SeslPaletteTokens {
         GRAYSCALE_D1 = ColorKt.Color(4278255874L);
         ColorKt.Color(4279242771L);
         GRAYSCALE_D3 = ColorKt.Color(4279703322L);
-        ColorKt.Color(4281150768L);
+        GRAYSCALE_D4 = ColorKt.Color(4281150768L);
         GRAYSCALE_D5 = ColorKt.Color(4282006077L);
-        ColorKt.Color(4282861386L);
+        GRAYSCALE_D6 = ColorKt.Color(4282861386L);
         GRAYSCALE_D7 = ColorKt.Color(4284111453L);
         ColorKt.Color(4285098348L);
         GRAYSCALE_D9 = ColorKt.Color(4286019450L);
@@ -68,7 +59,7 @@ public final class SeslPaletteTokens {
         ColorKt.Color(4294375160L);
         GRAYSCALE_L3 = ColorKt.Color(4294046195L);
         ColorKt.Color(4293848816L);
-        GRAYSCALE_L5 = ColorKt.Color(4293519852L);
+        ColorKt.Color(4293519852L);
         GRAYSCALE_L6 = ColorKt.Color(4293190887L);
         GRAYSCALE_L7 = ColorKt.Color(4292796129L);
         GRAYSCALE_L8 = ColorKt.Color(4291414476L);

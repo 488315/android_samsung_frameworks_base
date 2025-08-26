@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes2.dex */
+/* loaded from: classes3.dex */
 public final class MediaBrowser {
     private static final int CONNECT_STATE_CONNECTED = 3;
     private static final int CONNECT_STATE_CONNECTING = 2;
@@ -103,7 +103,7 @@ public final class MediaBrowser {
         this.mHandler.post(new Runnable() { // from class: android.media.browse.MediaBrowser.1
             @Override // java.lang.Runnable
             public void run() {
-                boolean z;
+                boolean zBindService;
                 if (MediaBrowser.this.mState == 0) {
                     return;
                 }
@@ -118,12 +118,12 @@ public final class MediaBrowser {
                 intent.setComponent(MediaBrowser.this.mServiceComponent);
                 MediaBrowser.this.mServiceConnection = new MediaServiceConnection();
                 try {
-                    z = MediaBrowser.this.mContext.bindService(intent, MediaBrowser.this.mServiceConnection, 4097);
+                    zBindService = MediaBrowser.this.mContext.bindService(intent, MediaBrowser.this.mServiceConnection, 4097);
                 } catch (Exception unused) {
                     Log.e(MediaBrowser.TAG, "Failed binding to service " + MediaBrowser.this.mServiceComponent);
-                    z = false;
+                    zBindService = false;
                 }
-                if (z) {
+                if (zBindService) {
                     return;
                 }
                 MediaBrowser.this.forceCloseConnection();
@@ -438,7 +438,7 @@ public final class MediaBrowser {
         this.mHandler.post(new Runnable() { // from class: android.media.browse.MediaBrowser$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                MediaBrowser.this.lambda$onDisconnectRequested$0(serviceCallbacks);
+                this.f$0.lambda$onDisconnectRequested$0(serviceCallbacks);
             }
         });
     }

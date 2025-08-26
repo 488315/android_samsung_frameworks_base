@@ -9,7 +9,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ViewAnimationController {
     public final KeyguardTouchAnimator keyguardTouchAnimator;
@@ -27,12 +26,12 @@ public abstract class ViewAnimationController {
     }
 
     public final void setViewAlphaAnimation(AnimatorSet animatorSet, View view, float f, long j, long j2) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f);
-        ofFloat.setInterpolator(this.alphaPathInterpolator);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(j2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f);
+        objectAnimatorOfFloat.setInterpolator(this.alphaPathInterpolator);
+        objectAnimatorOfFloat.setDuration(j);
+        objectAnimatorOfFloat.setStartDelay(j2);
         Unit unit = Unit.INSTANCE;
-        animatorSet.playTogether(ofFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat);
     }
 
     public final void setViewAnimation(AnimatorSet animatorSet, View view, float f, float f2) {
@@ -46,30 +45,30 @@ public abstract class ViewAnimationController {
         if (f2 == -1.0f) {
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, view.getAlpha(), f2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, view.getAlpha(), f2);
         KeyguardTouchAnimator keyguardTouchAnimator = this.keyguardTouchAnimator;
         if (keyguardTouchAnimator != null && keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1) && view.equals(keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1))) {
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.animator.ViewAnimationController$setViewAnimation$2
+            objectAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.animator.ViewAnimationController.setViewAnimation.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     ViewAnimationController.this.keyguardTouchAnimator.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
                 }
             });
         }
-        animatorSet.playTogether(ofFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat);
     }
 
     public final void setViewScaleAnimation(AnimatorSet animatorSet, View view, float f, long j, long j2) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f);
-        ofFloat.setInterpolator(this.scalePathInterpolator);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(j2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f);
+        objectAnimatorOfFloat.setInterpolator(this.scalePathInterpolator);
+        objectAnimatorOfFloat.setDuration(j);
+        objectAnimatorOfFloat.setStartDelay(j2);
         Unit unit = Unit.INSTANCE;
-        animatorSet.playTogether(ofFloat);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f);
-        ofFloat2.setInterpolator(this.scalePathInterpolator);
-        ofFloat2.setDuration(j);
-        ofFloat2.setStartDelay(j2);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f);
+        objectAnimatorOfFloat2.setInterpolator(this.scalePathInterpolator);
+        objectAnimatorOfFloat2.setDuration(j);
+        objectAnimatorOfFloat2.setStartDelay(j2);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
     }
 }

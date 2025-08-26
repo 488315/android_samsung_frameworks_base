@@ -3,7 +3,6 @@ package com.android.systemui.wallpaper.engines.multipack;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.wallpaper.engines.multipack.MultipackEngine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MultipackEngine$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;

@@ -11,7 +11,6 @@ import kotlin.collections.builders.SetBuilder;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class InvalidationTracker$implementation$1 extends FunctionReferenceImpl implements Function1 {
     public InvalidationTracker$implementation$1(Object obj) {
@@ -20,9 +19,9 @@ final /* synthetic */ class InvalidationTracker$implementation$1 extends Functio
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
-        Set set;
-        Set set2 = (Set) obj;
+    public final Object mo781invoke(Object obj) {
+        Set setBuild;
+        Set set = (Set) obj;
         InvalidationTracker invalidationTracker = (InvalidationTracker) this.receiver;
         ReentrantLock reentrantLock = invalidationTracker.observerMapLock;
         reentrantLock.lock();
@@ -40,21 +39,21 @@ final /* synthetic */ class InvalidationTracker$implementation$1 extends Functio
                         int i2 = 0;
                         while (i < length2) {
                             int i3 = i2 + 1;
-                            if (set2.contains(Integer.valueOf(iArr[i]))) {
+                            if (set.contains(Integer.valueOf(iArr[i]))) {
                                 setBuilder.add(observerWrapper.tableNames[i2]);
                             }
                             i++;
                             i2 = i3;
                         }
-                        set = setBuilder.build();
+                        setBuild = setBuilder.build();
                     } else {
-                        set = set2.contains(Integer.valueOf(iArr[0])) ? observerWrapper.singleTableSet : EmptySet.INSTANCE;
+                        setBuild = set.contains(Integer.valueOf(iArr[0])) ? observerWrapper.singleTableSet : EmptySet.INSTANCE;
                     }
                 } else {
-                    set = EmptySet.INSTANCE;
+                    setBuild = EmptySet.INSTANCE;
                 }
-                if (!set.isEmpty()) {
-                    observerWrapper.observer.onInvalidated(set);
+                if (!setBuild.isEmpty()) {
+                    observerWrapper.observer.onInvalidated(setBuild);
                 }
             }
             return Unit.INSTANCE;

@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRepositoryImpl$isDreamingWithOverlay$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -45,9 +44,9 @@ final class KeyguardRepositoryImpl$isDreamingWithOverlay$1 extends SuspendLambda
             KeyguardRepositoryImpl$isDreamingWithOverlay$1$callback$1 keyguardRepositoryImpl$isDreamingWithOverlay$1$callback$1 = new KeyguardRepositoryImpl$isDreamingWithOverlay$1$callback$1(producerScope);
             this.this$0.dreamOverlayCallbackController.callbacks.add(keyguardRepositoryImpl$isDreamingWithOverlay$1$callback$1);
             ChannelExt channelExt = ChannelExt.INSTANCE;
-            Boolean valueOf = Boolean.valueOf(this.this$0.dreamOverlayCallbackController.isDreaming);
+            Boolean boolValueOf = Boolean.valueOf(this.this$0.dreamOverlayCallbackController.isDreaming);
             channelExt.getClass();
-            ChannelExt.trySendWithFailureLogging(producerScope, valueOf, "KeyguardRepositoryImpl", "initial isDreamingWithOverlay");
+            ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "KeyguardRepositoryImpl", "initial isDreamingWithOverlay");
             KeyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0 keyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0 = new KeyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0(4, this.this$0, keyguardRepositoryImpl$isDreamingWithOverlay$1$callback$1);
             this.label = 1;
             if (ProduceKt.awaitClose(producerScope, keyguardRepositoryImpl$statusBarState$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

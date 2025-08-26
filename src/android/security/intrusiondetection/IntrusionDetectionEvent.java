@@ -77,22 +77,22 @@ public final class IntrusionDetectionEvent implements Parcelable {
     }
 
     private IntrusionDetectionEvent(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mType = readInt;
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        this.mType = i;
+        if (i == 0) {
             this.mSecurityEvent = SecurityLog.SecurityEvent.CREATOR.createFromParcel(parcel);
             this.mNetworkEventDns = null;
             this.mNetworkEventConnect = null;
-        } else if (readInt == 1) {
+        } else if (i == 1) {
             this.mNetworkEventDns = DnsEvent.CREATOR.createFromParcel(parcel);
             this.mSecurityEvent = null;
             this.mNetworkEventConnect = null;
-        } else if (readInt == 2) {
+        } else if (i == 2) {
             this.mNetworkEventConnect = ConnectEvent.CREATOR.createFromParcel(parcel);
             this.mSecurityEvent = null;
             this.mNetworkEventDns = null;
         } else {
-            throw new IllegalArgumentException("Invalid event type: " + readInt);
+            throw new IllegalArgumentException("Invalid event type: " + i);
         }
     }
 

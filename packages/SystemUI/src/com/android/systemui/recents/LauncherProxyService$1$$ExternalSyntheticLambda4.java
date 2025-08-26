@@ -1,5 +1,6 @@
 package com.android.systemui.recents;
 
+import android.content.res.Resources;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 import com.android.systemui.qs.FgsManagerControllerImpl;
@@ -8,7 +9,6 @@ import com.android.systemui.statusbar.CommandQueue;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class LauncherProxyService$1$$ExternalSyntheticLambda4 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +20,7 @@ public final /* synthetic */ class LauncherProxyService$1$$ExternalSyntheticLamb
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         int i = this.$r8$classId;
         LauncherProxyService.AnonymousClass1 anonymousClass1 = this.f$0;
         switch (i) {

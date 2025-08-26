@@ -52,9 +52,9 @@ public interface ISemInsSensorCollectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInsSensorCollectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInsSensorCollectionService)) {
-                return (ISemInsSensorCollectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInsSensorCollectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInsSensorCollectionService)) {
+                return (ISemInsSensorCollectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface ISemInsSensorCollectionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISemInsSensorCallback asInterface = ISemInsSensorCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISemInsSensorCallback iSemInsSensorCallbackAsInterface = ISemInsSensorCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                start(asInterface);
+                start(iSemInsSensorCallbackAsInterface);
             } else if (i == 2) {
                 stop();
             } else {
@@ -113,24 +113,24 @@ public interface ISemInsSensorCollectionService extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsSensorCollectionService
             public void start(ISemInsSensorCallback iSemInsSensorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsSensorCollectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemInsSensorCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsSensorCollectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemInsSensorCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsSensorCollectionService
             public void stop() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsSensorCollectionService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsSensorCollectionService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

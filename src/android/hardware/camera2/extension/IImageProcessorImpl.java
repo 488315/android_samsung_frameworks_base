@@ -44,9 +44,9 @@ public interface IImageProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImageProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImageProcessorImpl)) {
-                return (IImageProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImageProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImageProcessorImpl)) {
+                return (IImageProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IImageProcessorImpl extends IInterface {
             if (i == 1) {
                 OutputConfigId outputConfigId = (OutputConfigId) parcel.readTypedObject(OutputConfigId.CREATOR);
                 ParcelImage parcelImage = (ParcelImage) parcel.readTypedObject(ParcelImage.CREATOR);
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onNextImageAvailable(outputConfigId, parcelImage, readString);
+                onNextImageAvailable(outputConfigId, parcelImage, string);
                 parcel2.writeNoException();
                 return true;
             }
@@ -102,18 +102,18 @@ public interface IImageProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IImageProcessorImpl
             public void onNextImageAvailable(OutputConfigId outputConfigId, ParcelImage parcelImage, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImageProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(outputConfigId, 0);
-                    obtain.writeTypedObject(parcelImage, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImageProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(outputConfigId, 0);
+                    parcelObtain.writeTypedObject(parcelImage, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

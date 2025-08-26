@@ -1,17 +1,16 @@
 package com.android.systemui;
 
+import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.view.ContextThemeWrapper;
 import com.android.settingslib.Utils;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DualToneHandler {
     public Color darkColor;
     public Color lightColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Color {
         public final int background;
         public final int fill;
@@ -50,6 +49,16 @@ public final class DualToneHandler {
 
     public DualToneHandler(Context context) {
         setColorsFromContext(context);
+    }
+
+    public final int getSingleColor() {
+        Color color = this.lightColor;
+        if (color == null) {
+            color = null;
+        }
+        int i = color.single;
+        Color color2 = this.darkColor;
+        return ((Integer) ArgbEvaluator.getInstance().evaluate(0.0f, Integer.valueOf(i), Integer.valueOf((color2 != null ? color2 : null).single))).intValue();
     }
 
     public final void setColorsFromContext(Context context) {

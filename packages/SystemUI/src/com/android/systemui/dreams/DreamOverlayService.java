@@ -59,7 +59,6 @@ import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamOverlayService extends android.service.dreams.DreamOverlayService implements LifecycleOwner {
     public static final boolean DEBUG = Log.isLoggable("DreamOverlayService", 3);
@@ -106,7 +105,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
     public final WindowManager mWindowManager;
     public final String mWindowTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$1, reason: invalid class name */
     class AnonymousClass1 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass1() {
@@ -117,7 +115,7 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
             DreamOverlayService.this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.dreams.DreamOverlayService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DreamOverlayService.AnonymousClass1 anonymousClass1 = DreamOverlayService.AnonymousClass1.this;
+                    DreamOverlayService.AnonymousClass1 anonymousClass1 = this.f$0;
                     boolean z2 = z;
                     DreamOverlayService dreamOverlayService = DreamOverlayService.this;
                     if (dreamOverlayService.mShadeExpanded == z2) {
@@ -131,7 +129,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$2, reason: invalid class name */
     public class AnonymousClass2 implements Consumer {
         public AnonymousClass2() {
@@ -143,7 +140,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$3, reason: invalid class name */
     public class AnonymousClass3 implements Consumer {
         public AnonymousClass3() {
@@ -155,7 +151,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$4, reason: invalid class name */
     public class AnonymousClass4 implements Consumer {
         public AnonymousClass4() {
@@ -167,7 +162,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayService$5, reason: invalid class name */
     public class AnonymousClass5 implements Consumer {
         public AnonymousClass5() {
@@ -179,7 +173,6 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DreamOverlayEvent implements UiEventLogger.UiEventEnum {
         DREAM_OVERLAY_ENTER_START(989),
         DREAM_OVERLAY_COMPLETE_START(990);
@@ -195,17 +188,14 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetHandler {
         public final ArrayList mPendingCallbacks;
         public final DreamOverlayStateController.Callback mStateCallback;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Callback {
             void onComplete();
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Info extends Record {
             public final Callback callback;
             public final String source;
@@ -233,15 +223,15 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
             @Override // java.lang.Record
             public final String toString() {
                 Object[] objArr = {this.callback, this.source};
-                String[] split = "callback;source".length() == 0 ? new String[0] : "callback;source".split(";");
+                String[] strArrSplit = "callback;source".length() == 0 ? new String[0] : "callback;source".split(";");
                 StringBuilder sb = new StringBuilder();
                 sb.append(Info.class.getSimpleName());
                 sb.append("[");
-                for (int i = 0; i < split.length; i++) {
-                    sb.append(split[i]);
+                for (int i = 0; i < strArrSplit.length; i++) {
+                    sb.append(strArrSplit[i]);
                     sb.append("=");
                     sb.append(objArr[i]);
-                    if (i != split.length - 1) {
+                    if (i != strArrSplit.length - 1) {
                         sb.append(", ");
                     }
                 }
@@ -320,9 +310,9 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
             Info info = new Info(callback, str, 0);
             this.mPendingCallbacks.add(info);
             process(false);
-            boolean contains = this.mPendingCallbacks.contains(info);
-            boolean z = !contains;
-            if (contains) {
+            boolean zContains = this.mPendingCallbacks.contains(info);
+            boolean z = !zContains;
+            if (zContains) {
                 Log.d("DreamOverlayService", "delayed resetting from: ".concat(str));
             }
             return z;
@@ -355,7 +345,7 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         ?? r5 = new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayService$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                DreamOverlayService dreamOverlayService = DreamOverlayService.this;
+                DreamOverlayService dreamOverlayService = this.f$0;
                 boolean z = DreamOverlayService.DEBUG;
                 dreamOverlayService.mCommunalAvailable = ((Boolean) obj).booleanValue();
                 if (dreamOverlayService.mStarted) {
@@ -463,13 +453,13 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
         View containerView;
         ViewGroup viewGroup;
         DaggerReferenceGlobalRootComponent.ComplicationComponentImpl complicationComponentImpl = (DaggerReferenceGlobalRootComponent.ComplicationComponentImpl) this.mComplicationComponentFactory.create(this.mLifecycleOwner, new DreamOverlayService$$ExternalSyntheticLambda2(), new ViewModelStore(), this.mTouchInsetManager);
-        DreamComplicationComponent create = this.mDreamComplicationComponentFactory.create(complicationComponentImpl.getVisibilityController(), this.mTouchInsetManager);
-        DreamOverlayComponent create2 = this.mDreamOverlayComponentFactory.create(this.mLifecycleOwner, complicationComponentImpl.getComplicationHostViewController(), this.mTouchInsetManager);
-        ArrayList arrayList = new ArrayList(List.of(((DaggerReferenceGlobalRootComponent.DreamComplicationComponentImpl) create).getHideComplicationTouchHandler()));
+        DreamComplicationComponent dreamComplicationComponentCreate = this.mDreamComplicationComponentFactory.create(complicationComponentImpl.getVisibilityController(), this.mTouchInsetManager);
+        DreamOverlayComponent dreamOverlayComponentCreate = this.mDreamOverlayComponentFactory.create(this.mLifecycleOwner, complicationComponentImpl.getComplicationHostViewController(), this.mTouchInsetManager);
+        ArrayList arrayList = new ArrayList(List.of(((DaggerReferenceGlobalRootComponent.DreamComplicationComponentImpl) dreamComplicationComponentCreate).getHideComplicationTouchHandler()));
         this.mCommunalSettingsInteractor.isV2FlagEnabled();
-        DaggerReferenceGlobalRootComponent.DreamOverlayComponentImpl dreamOverlayComponentImpl = (DaggerReferenceGlobalRootComponent.DreamOverlayComponentImpl) create2;
+        DaggerReferenceGlobalRootComponent.DreamOverlayComponentImpl dreamOverlayComponentImpl = (DaggerReferenceGlobalRootComponent.DreamOverlayComponentImpl) dreamOverlayComponentCreate;
         arrayList.add(dreamOverlayComponentImpl.getCommunalTouchHandler());
-        AmbientTouchComponent create3 = this.mAmbientTouchComponentFactory.create(this.mLifecycleOwner, new HashSet(arrayList), "DreamOverlayService");
+        AmbientTouchComponent ambientTouchComponentCreate = this.mAmbientTouchComponentFactory.create(this.mLifecycleOwner, new HashSet(arrayList), "DreamOverlayService");
         this.mLifecycleRegistry.setCurrentState(Lifecycle.State.STARTED);
         this.mUiEventLogger.log(DreamOverlayEvent.DREAM_OVERLAY_ENTER_START);
         if (this.mDestroyed) {
@@ -480,26 +470,26 @@ public class DreamOverlayService extends android.service.dreams.DreamOverlayServ
             public final void onComplete() {
                 WindowManager.LayoutParams layoutParams2 = layoutParams;
                 boolean z = DreamOverlayService.DEBUG;
-                DreamOverlayService.this.onStartDream(layoutParams2);
+                this.f$0.onStartDream(layoutParams2);
             }
         }, "starting with dream already started")) {
             this.mDreamOverlayContainerViewController = dreamOverlayComponentImpl.getDreamOverlayContainerViewController();
-            TouchMonitor touchMonitor = ((DaggerReferenceGlobalRootComponent.AmbientTouchComponentImpl) create3).getTouchMonitor();
+            TouchMonitor touchMonitor = ((DaggerReferenceGlobalRootComponent.AmbientTouchComponentImpl) ambientTouchComponentCreate).getTouchMonitor();
             this.mTouchMonitor = touchMonitor;
             touchMonitor.init();
             final DreamOverlayStateController dreamOverlayStateController = this.mStateController;
-            final boolean shouldShowComplications = shouldShowComplications();
+            final boolean zShouldShowComplications = shouldShowComplications();
             dreamOverlayStateController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.dreams.DreamOverlayStateController$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DreamOverlayStateController dreamOverlayStateController2 = DreamOverlayStateController.this;
-                    boolean z = shouldShowComplications;
+                    DreamOverlayStateController dreamOverlayStateController2 = dreamOverlayStateController;
+                    boolean z = zShouldShowComplications;
                     DreamLogger dreamLogger = dreamOverlayStateController2.mLogger;
                     dreamLogger.getClass();
                     DreamLogger$$ExternalSyntheticLambda0 dreamLogger$$ExternalSyntheticLambda0 = new DreamLogger$$ExternalSyntheticLambda0(6);
-                    LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, dreamLogger$$ExternalSyntheticLambda0, null);
-                    obtain.setBool1(z);
-                    dreamLogger.getBuffer().commit(obtain);
+                    LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, dreamLogger$$ExternalSyntheticLambda0, null);
+                    logMessageObtain.setBool1(z);
+                    dreamLogger.getBuffer().commit(logMessageObtain);
                     dreamOverlayStateController2.mShouldShowComplications = z;
                     dreamOverlayStateController2.notifyCallbacksLocked(new DreamOverlayStateController$$ExternalSyntheticLambda0(1));
                 }

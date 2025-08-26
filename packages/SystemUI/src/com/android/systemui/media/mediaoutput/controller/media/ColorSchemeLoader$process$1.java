@@ -14,7 +14,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ColorSchemeLoader$process$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Bitmap $bitmap;
@@ -46,17 +45,17 @@ final class ColorSchemeLoader$process$1 extends SuspendLambda implements Functio
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            WallpaperColors fromBitmap = WallpaperColors.fromBitmap(this.$bitmap);
+            WallpaperColors wallpaperColorsFromBitmap = WallpaperColors.fromBitmap(this.$bitmap);
             try {
                 int i2 = Result.$r8$clinit;
-                failure = new ColorScheme(fromBitmap, true, 6);
+                failure = new ColorScheme(wallpaperColorsFromBitmap, true, 6);
             } catch (Throwable th) {
                 int i3 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
             if (failure instanceof Result.Failure) {
                 failure = null;

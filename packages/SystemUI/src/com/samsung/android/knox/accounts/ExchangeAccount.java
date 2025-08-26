@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExchangeAccount implements Parcelable {
     public static final Parcelable.Creator<ExchangeAccount> CREATOR = new Parcelable.Creator<ExchangeAccount>() { // from class: com.samsung.android.knox.accounts.ExchangeAccount.1

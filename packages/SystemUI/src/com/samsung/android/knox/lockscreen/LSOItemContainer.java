@@ -5,7 +5,6 @@ import android.os.ParcelFormatException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LSOItemContainer extends LSOItemData {
     public static final int LSO_FIELD_BG = 256;
@@ -14,7 +13,6 @@ public class LSOItemContainer extends LSOItemData {
     public List<LSOItemData> childObj;
     public ORIENTATION orientation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ORIENTATION {
         VERTICAL,
         HORIZONTAL
@@ -51,13 +49,13 @@ public class LSOItemContainer extends LSOItemData {
         super.readFromParcel(parcel);
         this.orientation = readByteFromParcel(parcel, 128) == 0 ? ORIENTATION.VERTICAL : ORIENTATION.HORIZONTAL;
         this.bgImagePath = readStringFromParcel(parcel, 256);
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            LSOItemData createFromParcel = LSOItemData.CREATOR.createFromParcel(parcel);
-            if (createFromParcel == null) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            LSOItemData lSOItemDataCreateFromParcel = LSOItemData.CREATOR.createFromParcel(parcel);
+            if (lSOItemDataCreateFromParcel == null) {
                 throw new ParcelFormatException("Parcel format exception");
             }
-            this.childObj.add(createFromParcel);
+            this.childObj.add(lSOItemDataCreateFromParcel);
         }
     }
 

@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +80,7 @@ public final class PublishAttributes implements Parcelable {
         parcel.writeParcelable(this.mSipDetails, 0);
     }
 
-    private PublishAttributes(Parcel parcel) {
+    private PublishAttributes(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mPublishState = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         this.mPresenceTuples = arrayList;

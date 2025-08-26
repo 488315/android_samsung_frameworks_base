@@ -46,9 +46,9 @@ public interface IContainerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContainerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContainerService)) {
-                return (IContainerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContainerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContainerService)) {
+                return (IContainerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,12 +75,12 @@ public interface IContainerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle onMessage = onMessage(readString, bundle);
+                Bundle bundleOnMessage = onMessage(string, bundle);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(onMessage, 1);
+                parcel2.writeTypedObject(bundleOnMessage, 1);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,18 +104,18 @@ public interface IContainerService extends IInterface {
 
             @Override // com.samsung.android.knox.IContainerService
             public Bundle onMessage(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IContainerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

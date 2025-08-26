@@ -33,7 +33,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation.AnimationListener, KeyPathElement {
     public final List animations;
@@ -65,7 +64,6 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
     public final Matrix canvasMatrix = new Matrix();
     public final LPaint contentPaint = new LPaint(1);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.model.layer.BaseLayer$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$airbnb$lottie$model$content$Mask$MaskMode;
@@ -191,7 +189,7 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
         floatKeyframeAnimation.addUpdateListener(new BaseKeyframeAnimation.AnimationListener() { // from class: com.airbnb.lottie.model.layer.BaseLayer$$ExternalSyntheticLambda0
             @Override // com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation.AnimationListener
             public final void onValueChanged() {
-                BaseLayer baseLayer = BaseLayer.this;
+                BaseLayer baseLayer = this.f$0;
                 boolean z = baseLayer.inOutAnimation.getFloatValue() == 1.0f;
                 if (z != baseLayer.visible) {
                     baseLayer.visible = z;
@@ -255,10 +253,10 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
             }
             TransformKeyframeAnimation transformKeyframeAnimation = this.transform;
             BaseKeyframeAnimation baseKeyframeAnimation = transformKeyframeAnimation.opacity;
-            int intValue = (int) ((((i / 255.0f) * ((baseKeyframeAnimation == null || (num = (Integer) baseKeyframeAnimation.getValue()) == null) ? 100 : num.intValue())) / 100.0f) * 255.0f);
+            int iIntValue = (int) ((((i / 255.0f) * ((baseKeyframeAnimation == null || (num = (Integer) baseKeyframeAnimation.getValue()) == null) ? 100 : num.intValue())) / 100.0f) * 255.0f);
             if (!(this.matteLayer != null) && !hasMasksOnThisLayer()) {
                 this.matrix.preConcat(transformKeyframeAnimation.getMatrix());
-                drawLayer(canvas, this.matrix, intValue);
+                drawLayer(canvas, this.matrix, iIntValue);
                 recordRenderTime();
                 return;
             }
@@ -277,12 +275,12 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
             RectF rectF2 = this.rect;
             Matrix matrix2 = this.matrix;
             this.maskBoundsRect.set(0.0f, 0.0f, 0.0f, 0.0f);
-            boolean hasMasksOnThisLayer = hasMasksOnThisLayer();
+            boolean zHasMasksOnThisLayer = hasMasksOnThisLayer();
             MaskKeyframeAnimation maskKeyframeAnimation = this.mask;
             int i4 = 4;
             int i5 = 3;
             int i6 = 2;
-            if (hasMasksOnThisLayer) {
+            if (zHasMasksOnThisLayer) {
                 int size2 = maskKeyframeAnimation.masks.size();
                 int i7 = 0;
                 while (true) {
@@ -341,7 +339,7 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
                 float f7 = rectF5.bottom + 1.0f;
                 LPaint lPaint3 = this.clearPaint;
                 canvas.drawRect(f4, f5, f6, f7, lPaint3);
-                drawLayer(canvas, this.matrix, intValue);
+                drawLayer(canvas, this.matrix, iIntValue);
                 if (hasMasksOnThisLayer()) {
                     Matrix matrix4 = this.matrix;
                     RectF rectF6 = this.rect;
@@ -428,10 +426,10 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
                                 c = 255;
                                 lPaint2.setAlpha(255);
                                 canvas.drawRect(this.rect, lPaint2);
-                                i9++;
-                                i3 = i2;
-                                f3 = f8;
                             }
+                            i9++;
+                            i3 = i2;
+                            f3 = f8;
                         }
                         c = 255;
                         i9++;
@@ -447,7 +445,7 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
                     canvas.saveLayer(this.rect, this.mattePaint);
                     RectF rectF11 = this.rect;
                     canvas.drawRect(rectF11.left - f2, rectF11.top - f2, rectF11.right + f2, rectF11.bottom + f2, lPaint3);
-                    this.matteLayer.draw(canvas, matrix, intValue);
+                    this.matteLayer.draw(canvas, matrix, iIntValue);
                     canvas.restore();
                 }
                 canvas.restore();
@@ -541,12 +539,12 @@ public abstract class BaseLayer implements DrawingContent, BaseKeyframeAnimation
         BaseLayer baseLayer = this.matteLayer;
         Layer layer = this.layerModel;
         if (baseLayer != null) {
-            KeyPath addKey = keyPath2.addKey(baseLayer.layerModel.layerName);
+            KeyPath keyPathAddKey = keyPath2.addKey(baseLayer.layerModel.layerName);
             if (keyPath.fullyResolvesTo(i, this.matteLayer.layerModel.layerName)) {
-                ((ArrayList) list).add(addKey.resolve(this.matteLayer));
+                ((ArrayList) list).add(keyPathAddKey.resolve(this.matteLayer));
             }
             if (keyPath.propagateToChildren(i, layer.layerName)) {
-                this.matteLayer.resolveChildKeyPath(keyPath, keyPath.incrementDepthBy(i, this.matteLayer.layerModel.layerName) + i, list, addKey);
+                this.matteLayer.resolveChildKeyPath(keyPath, keyPath.incrementDepthBy(i, this.matteLayer.layerModel.layerName) + i, list, keyPathAddKey);
             }
         }
         if (keyPath.matches(i, layer.layerName)) {

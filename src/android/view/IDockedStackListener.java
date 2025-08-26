@@ -72,9 +72,9 @@ public interface IDockedStackListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDockedStackListener)) {
-                return (IDockedStackListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDockedStackListener)) {
+                return (IDockedStackListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,28 +113,28 @@ public interface IDockedStackListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onDividerVisibilityChanged(readBoolean);
+                onDividerVisibilityChanged(z);
             } else if (i == 2) {
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onDockedStackExistsChanged(readBoolean2);
+                onDockedStackExistsChanged(z2);
             } else if (i == 3) {
-                boolean readBoolean3 = parcel.readBoolean();
-                long readLong = parcel.readLong();
-                boolean readBoolean4 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
+                long j = parcel.readLong();
+                boolean z4 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onDockedStackMinimizedChanged(readBoolean3, readLong, readBoolean4);
+                onDockedStackMinimizedChanged(z3, j, z4);
             } else if (i == 4) {
-                boolean readBoolean5 = parcel.readBoolean();
-                long readLong2 = parcel.readLong();
+                boolean z5 = parcel.readBoolean();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onAdjustedForImeChanged(readBoolean5, readLong2);
+                onAdjustedForImeChanged(z5, j2);
             } else if (i == 5) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onDockSideChanged(readInt);
+                onDockSideChanged(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -159,64 +159,64 @@ public interface IDockedStackListener extends IInterface {
 
             @Override // android.view.IDockedStackListener
             public void onDividerVisibilityChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDockedStackListener
             public void onDockedStackExistsChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDockedStackListener
             public void onDockedStackMinimizedChanged(boolean z, long j, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDockedStackListener
             public void onAdjustedForImeChanged(boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDockedStackListener
             public void onDockSideChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

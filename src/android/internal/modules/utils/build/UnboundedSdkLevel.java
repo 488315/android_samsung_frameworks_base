@@ -60,39 +60,39 @@ public final class UnboundedSdkLevel {
     }
 
     boolean isAtLeastInternal(String str) {
-        String removeFingerprint = removeFingerprint(str);
+        String strRemoveFingerprint = removeFingerprint(str);
         if (this.mIsReleaseBuild) {
-            if (!isCodename(removeFingerprint)) {
-                return this.mSdkInt >= Integer.parseInt(removeFingerprint);
+            if (!isCodename(strRemoveFingerprint)) {
+                return this.mSdkInt >= Integer.parseInt(strRemoveFingerprint);
             }
-            if (!this.mKnownCodenames.contains(removeFingerprint)) {
+            if (!this.mKnownCodenames.contains(strRemoveFingerprint)) {
                 return false;
             }
-            throw new IllegalArgumentException("Artifact with a known codename " + removeFingerprint + " must be recompiled with a finalized integer version.");
+            throw new IllegalArgumentException("Artifact with a known codename " + strRemoveFingerprint + " must be recompiled with a finalized integer version.");
         }
-        if (isCodename(removeFingerprint)) {
-            return this.mKnownCodenames.contains(removeFingerprint);
+        if (isCodename(strRemoveFingerprint)) {
+            return this.mKnownCodenames.contains(strRemoveFingerprint);
         }
-        return this.mSdkInt >= Integer.parseInt(removeFingerprint);
+        return this.mSdkInt >= Integer.parseInt(strRemoveFingerprint);
     }
 
     boolean isAtMostInternal(String str) {
-        String removeFingerprint = removeFingerprint(str);
+        String strRemoveFingerprint = removeFingerprint(str);
         if (!this.mIsReleaseBuild) {
-            return isCodename(removeFingerprint) ? !this.mKnownCodenames.contains(removeFingerprint) || this.mCodename.equals(removeFingerprint) : this.mSdkInt < Integer.parseInt(removeFingerprint);
+            return isCodename(strRemoveFingerprint) ? !this.mKnownCodenames.contains(strRemoveFingerprint) || this.mCodename.equals(strRemoveFingerprint) : this.mSdkInt < Integer.parseInt(strRemoveFingerprint);
         }
-        if (!isCodename(removeFingerprint)) {
-            return this.mSdkInt <= Integer.parseInt(removeFingerprint);
+        if (!isCodename(strRemoveFingerprint)) {
+            return this.mSdkInt <= Integer.parseInt(strRemoveFingerprint);
         }
-        if (!this.mKnownCodenames.contains(removeFingerprint)) {
+        if (!this.mKnownCodenames.contains(strRemoveFingerprint)) {
             return true;
         }
-        throw new IllegalArgumentException("Artifact with a known codename " + removeFingerprint + " must be recompiled with a finalized integer version.");
+        throw new IllegalArgumentException("Artifact with a known codename " + strRemoveFingerprint + " must be recompiled with a finalized integer version.");
     }
 
     String removeFingerprint(String str) {
-        int indexOf;
-        return (!isCodename(str) || (indexOf = str.indexOf(46)) == -1) ? str : str.substring(0, indexOf);
+        int iIndexOf;
+        return (!isCodename(str) || (iIndexOf = str.indexOf(46)) == -1) ? str : str.substring(0, iIndexOf);
     }
 
     private boolean isCodename(String str) {

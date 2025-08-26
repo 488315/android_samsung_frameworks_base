@@ -126,7 +126,7 @@ public final class Condition implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.id.toString());
         protoOutputStream.write(1138166333442L, this.summary);
         protoOutputStream.write(1138166333443L, this.line1);
@@ -134,7 +134,7 @@ public final class Condition implements Parcelable {
         protoOutputStream.write(1120986464261L, this.icon);
         protoOutputStream.write(1159641169926L, this.state);
         protoOutputStream.write(1120986464263L, this.flags);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static String stateToString(int i) {
@@ -197,13 +197,13 @@ public final class Condition implements Parcelable {
     }
 
     public Condition copy() {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            return new Condition(obtain);
+            writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return new Condition(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

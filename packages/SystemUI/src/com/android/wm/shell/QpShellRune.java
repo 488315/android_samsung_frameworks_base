@@ -1,9 +1,15 @@
 package com.android.wm.shell;
 
 import android.os.SemSystemProperties;
+import com.samsung.android.feature.SemFloatingFeature;
+import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QpShellRune {
+    public static final boolean NOTI_BUBBLE_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT;
     public static final boolean NOTI_BUBBLE_STYLE_TABLET = SemSystemProperties.get("ro.build.characteristics").contains("tablet");
+
+    static {
+        NOTI_BUBBLE_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FOLD") && CoreRune.FW_SET_DEFAULT_CUTOUT_POLICY_TO_ALWAYS;
+    }
 }

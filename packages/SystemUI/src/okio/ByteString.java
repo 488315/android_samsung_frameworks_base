@@ -1,6 +1,7 @@
 package okio;
 
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import java.io.EOFException;
 import java.io.IOException;
@@ -9,11 +10,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import kotlin.Unit;
 import kotlin.collections.ArraysKt__ArraysJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.Charsets;
+import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ByteString implements Serializable, Comparable<ByteString> {
     public static final Companion Companion = new Companion(null);
@@ -23,7 +25,6 @@ public class ByteString implements Serializable, Comparable<ByteString> {
     public transient int hashCode;
     public transient String utf8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,20 +55,20 @@ public class ByteString implements Serializable, Comparable<ByteString> {
         return byteString.lastIndexOf(i, byteString2.data);
     }
 
-    private final void readObject(ObjectInputStream objectInputStream) throws IOException {
-        int readInt = objectInputStream.readInt();
+    private final void readObject(ObjectInputStream objectInputStream) throws IllegalAccessException, NoSuchFieldException, IOException, IllegalArgumentException {
+        int i = objectInputStream.readInt();
         Companion.getClass();
-        if (readInt < 0) {
-            throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(readInt, "byteCount < 0: ").toString());
+        if (i < 0) {
+            throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "byteCount < 0: ").toString());
         }
-        byte[] bArr = new byte[readInt];
-        int i = 0;
-        while (i < readInt) {
-            int read = objectInputStream.read(bArr, i, readInt - i);
-            if (read == -1) {
+        byte[] bArr = new byte[i];
+        int i2 = 0;
+        while (i2 < i) {
+            int i3 = objectInputStream.read(bArr, i2, i - i2);
+            if (i3 == -1) {
                 throw new EOFException();
             }
-            i += read;
+            i2 += i3;
         }
         ByteString byteString = new ByteString(bArr);
         Field declaredField = ByteString.class.getDeclaredField("data");
@@ -118,9 +119,9 @@ public class ByteString implements Serializable, Comparable<ByteString> {
         if (i != 0) {
             return i;
         }
-        int hashCode = Arrays.hashCode(this.data);
-        this.hashCode = hashCode;
-        return hashCode;
+        int iHashCode = Arrays.hashCode(this.data);
+        this.hashCode = iHashCode;
+        return iHashCode;
     }
 
     public String hex() {
@@ -139,17 +140,17 @@ public class ByteString implements Serializable, Comparable<ByteString> {
 
     public int indexOf(int i, byte[] bArr) {
         int length = this.data.length - bArr.length;
-        int max = Math.max(i, 0);
-        if (max > length) {
+        int iMax = Math.max(i, 0);
+        if (iMax > length) {
             return -1;
         }
-        while (!SegmentedByteString.arrayRangeEquals(this.data, max, 0, bArr, bArr.length)) {
-            if (max == length) {
+        while (!SegmentedByteString.arrayRangeEquals(this.data, iMax, 0, bArr, bArr.length)) {
+            if (iMax == length) {
                 return -1;
             }
-            max++;
+            iMax++;
         }
-        return max;
+        return iMax;
     }
 
     public byte[] internalArray$external__okio__android_common__okio_lib() {
@@ -164,9 +165,9 @@ public class ByteString implements Serializable, Comparable<ByteString> {
         if (i == SegmentedByteString.DEFAULT__ByteString_size) {
             i = getSize$external__okio__android_common__okio_lib();
         }
-        for (int min = Math.min(i, this.data.length - bArr.length); -1 < min; min--) {
-            if (SegmentedByteString.arrayRangeEquals(this.data, min, 0, bArr, bArr.length)) {
-                return min;
+        for (int iMin = Math.min(i, this.data.length - bArr.length); -1 < iMin; iMin--) {
+            if (SegmentedByteString.arrayRangeEquals(this.data, iMin, 0, bArr, bArr.length)) {
+                return iMin;
             }
         }
         return -1;
@@ -201,84 +202,189 @@ public class ByteString implements Serializable, Comparable<ByteString> {
         return new ByteString(Arrays.copyOfRange(bArr, i, i2));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:100:0x01c3, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:113:0x0105, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:139:0x00fd, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:141:0x013b, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:143:0x013f, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:145:0x00dd, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:173:0x0099, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:175:0x00cb, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:177:0x0088, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:217:0x007a, code lost:
-    
-        r1 = kotlin.Unit.INSTANCE;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x017e, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:88:0x0185, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:90:0x0177, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:92:0x01ba, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:94:0x01bd, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:96:0x01c0, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:98:0x014b, code lost:
-    
-        if (r8 == 64) goto L184;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.lang.String toString() {
-        /*
-            Method dump skipped, instructions count: 642
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: okio.ByteString.toString():java.lang.String");
+    public String toString() {
+        byte b;
+        int i;
+        ByteString byteString = this;
+        byte[] bArr = byteString.data;
+        if (bArr.length == 0) {
+            return "[size=0]";
+        }
+        int length = bArr.length;
+        int i2 = 0;
+        int i3 = 0;
+        int i4 = 0;
+        loop0: while (true) {
+            if (i2 >= length) {
+                break;
+            }
+            byte b2 = bArr[i2];
+            if (b2 >= 0) {
+                int i5 = i4 + 1;
+                if (i4 == 64) {
+                    break;
+                }
+                if ((b2 != 10 && b2 != 13 && ((b2 >= 0 && b2 < 32) || (Byte.MAX_VALUE <= b2 && b2 < 160))) || b2 == 65533) {
+                    break;
+                }
+                i3 += b2 < 65536 ? 1 : 2;
+                i2++;
+                while (true) {
+                    i4 = i5;
+                    if (i2 < length && (b = bArr[i2]) >= 0) {
+                        i2++;
+                        i5 = i4 + 1;
+                        if (i4 == 64) {
+                            break loop0;
+                        }
+                        if ((b != 10 && b != 13 && ((b >= 0 && b < 32) || (Byte.MAX_VALUE <= b && b < 160))) || b == 65533) {
+                            break loop0;
+                        }
+                        i3 += b < 65536 ? 1 : 2;
+                    } else {
+                        break;
+                    }
+                }
+                Unit unit = Unit.INSTANCE;
+            } else if ((b2 >> 5) == -2) {
+                int i6 = i2 + 1;
+                if (length > i6) {
+                    byte b3 = bArr[i6];
+                    if ((b3 & 192) == 128) {
+                        int i7 = (b3 ^ 3968) ^ (b2 << 6);
+                        if (i7 >= 128) {
+                            i = i4 + 1;
+                            if (i4 == 64) {
+                                break;
+                            }
+                            if ((i7 != 10 && i7 != 13 && ((i7 >= 0 && i7 < 32) || (127 <= i7 && i7 < 160))) || i7 == 65533) {
+                                break;
+                            }
+                            i3 += i7 < 65536 ? 1 : 2;
+                            Unit unit2 = Unit.INSTANCE;
+                            i2 += 2;
+                            i4 = i;
+                        } else if (i4 != 64) {
+                            break;
+                        }
+                    } else if (i4 != 64) {
+                        break;
+                    }
+                } else if (i4 != 64) {
+                    break;
+                }
+            } else if ((b2 >> 4) == -2) {
+                int i8 = i2 + 2;
+                if (length > i8) {
+                    byte b4 = bArr[i2 + 1];
+                    if ((b4 & 192) == 128) {
+                        byte b5 = bArr[i8];
+                        if ((b5 & 192) == 128) {
+                            int i9 = ((b5 ^ (-123008)) ^ (b4 << 6)) ^ (b2 << 12);
+                            if (i9 < 2048) {
+                                if (i4 != 64) {
+                                    break;
+                                }
+                            } else if (55296 > i9 || i9 >= 57344) {
+                                i = i4 + 1;
+                                if (i4 == 64) {
+                                    break;
+                                }
+                                if ((i9 != 10 && i9 != 13 && ((i9 >= 0 && i9 < 32) || (127 <= i9 && i9 < 160))) || i9 == 65533) {
+                                    break;
+                                }
+                                i3 += i9 < 65536 ? 1 : 2;
+                                Unit unit3 = Unit.INSTANCE;
+                                i2 += 3;
+                                i4 = i;
+                            } else if (i4 != 64) {
+                                break;
+                            }
+                        } else if (i4 != 64) {
+                            break;
+                        }
+                    } else if (i4 != 64) {
+                        break;
+                    }
+                } else if (i4 != 64) {
+                    break;
+                }
+            } else if ((b2 >> 3) == -2) {
+                int i10 = i2 + 3;
+                if (length > i10) {
+                    byte b6 = bArr[i2 + 1];
+                    if ((b6 & 192) == 128) {
+                        byte b7 = bArr[i2 + 2];
+                        if ((b7 & 192) == 128) {
+                            byte b8 = bArr[i10];
+                            if ((b8 & 192) == 128) {
+                                int i11 = (((b8 ^ 3678080) ^ (b7 << 6)) ^ (b6 << 12)) ^ (b2 << 18);
+                                if (i11 > 1114111) {
+                                    if (i4 != 64) {
+                                        break;
+                                    }
+                                } else if (55296 > i11 || i11 >= 57344) {
+                                    if (i11 >= 65536) {
+                                        int i12 = i4 + 1;
+                                        if (i4 == 64) {
+                                            break;
+                                        }
+                                        if ((i11 != 10 && i11 != 13 && ((i11 >= 0 && i11 < 32) || (127 <= i11 && i11 < 160))) || i11 == 65533) {
+                                            break;
+                                        }
+                                        i3 += i11 < 65536 ? 1 : 2;
+                                        Unit unit4 = Unit.INSTANCE;
+                                        i2 += 4;
+                                        i4 = i12;
+                                    } else if (i4 != 64) {
+                                        break;
+                                    }
+                                } else if (i4 != 64) {
+                                    break;
+                                }
+                            } else if (i4 != 64) {
+                                break;
+                            }
+                        } else if (i4 != 64) {
+                            break;
+                        }
+                    } else if (i4 != 64) {
+                        break;
+                    }
+                } else if (i4 != 64) {
+                    break;
+                }
+            } else if (i4 != 64) {
+                break;
+            }
+        }
+        i3 = -1;
+        if (i3 != -1) {
+            String strUtf8 = byteString.utf8();
+            String strReplace$default = StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(strUtf8.substring(0, i3), "\\", "\\\\"), "\n", "\\n"), "\r", "\\r");
+            if (i3 >= strUtf8.length()) {
+                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[text=", strReplace$default, "]");
+            }
+            return "[size=" + byteString.data.length + " text=" + strReplace$default + "…]";
+        }
+        byte[] bArr2 = byteString.data;
+        if (bArr2.length <= 64) {
+            return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[hex=", byteString.hex(), "]");
+        }
+        int length2 = bArr2.length;
+        int size$external__okio__android_common__okio_lib = 64 == SegmentedByteString.DEFAULT__ByteString_size ? byteString.getSize$external__okio__android_common__okio_lib() : 64;
+        byte[] bArr3 = byteString.data;
+        if (size$external__okio__android_common__okio_lib > bArr3.length) {
+            throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(bArr3.length, "endIndex > length(", ")").toString());
+        }
+        if (size$external__okio__android_common__okio_lib < 0) {
+            throw new IllegalArgumentException("endIndex < beginIndex");
+        }
+        if (size$external__okio__android_common__okio_lib != bArr3.length) {
+            ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(size$external__okio__android_common__okio_lib, bArr3.length);
+            byteString = new ByteString(Arrays.copyOfRange(bArr3, 0, size$external__okio__android_common__okio_lib));
+        }
+        return "[size=" + length2 + " hex=" + byteString.hex() + "…]";
     }
 
     public final String utf8() {
@@ -299,12 +405,12 @@ public class ByteString implements Serializable, Comparable<ByteString> {
     public final int compareTo(ByteString byteString) {
         int size$external__okio__android_common__okio_lib = getSize$external__okio__android_common__okio_lib();
         int size$external__okio__android_common__okio_lib2 = byteString.getSize$external__okio__android_common__okio_lib();
-        int min = Math.min(size$external__okio__android_common__okio_lib, size$external__okio__android_common__okio_lib2);
-        for (int i = 0; i < min; i++) {
-            int internalGet$external__okio__android_common__okio_lib = internalGet$external__okio__android_common__okio_lib(i) & 255;
-            int internalGet$external__okio__android_common__okio_lib2 = byteString.internalGet$external__okio__android_common__okio_lib(i) & 255;
-            if (internalGet$external__okio__android_common__okio_lib != internalGet$external__okio__android_common__okio_lib2) {
-                return internalGet$external__okio__android_common__okio_lib < internalGet$external__okio__android_common__okio_lib2 ? -1 : 1;
+        int iMin = Math.min(size$external__okio__android_common__okio_lib, size$external__okio__android_common__okio_lib2);
+        for (int i = 0; i < iMin; i++) {
+            int iInternalGet$external__okio__android_common__okio_lib = internalGet$external__okio__android_common__okio_lib(i) & 255;
+            int iInternalGet$external__okio__android_common__okio_lib2 = byteString.internalGet$external__okio__android_common__okio_lib(i) & 255;
+            if (iInternalGet$external__okio__android_common__okio_lib != iInternalGet$external__okio__android_common__okio_lib2) {
+                return iInternalGet$external__okio__android_common__okio_lib < iInternalGet$external__okio__android_common__okio_lib2 ? -1 : 1;
             }
         }
         if (size$external__okio__android_common__okio_lib == size$external__okio__android_common__okio_lib2) {

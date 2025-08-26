@@ -3,14 +3,12 @@ package com.android.systemui.plugins;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = SensorManagerPlugin.ACTION, version = 1)
 /* loaded from: classes2.dex */
 public interface SensorManagerPlugin extends Plugin {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_SENSOR_MANAGER";
     public static final int VERSION = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Sensor {
         public static final int TYPE_SKIP_STATUS = 4;
         public static final int TYPE_SWIPE = 3;
@@ -31,7 +29,6 @@ public interface SensorManagerPlugin extends Plugin {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SensorEvent {
         Sensor mSensor;
         float[] mValues;
@@ -60,7 +57,6 @@ public interface SensorManagerPlugin extends Plugin {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SensorEventListener {
         void onSensorChanged(SensorEvent sensorEvent);
     }

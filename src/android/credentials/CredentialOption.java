@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -59,7 +60,7 @@ public final class CredentialOption implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString8(this.mType);
         parcel.writeBundle(this.mCredentialRetrievalData);
         parcel.writeBundle(this.mCandidateQueryData);
@@ -84,20 +85,20 @@ public final class CredentialOption implements Parcelable {
     }
 
     private CredentialOption(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        Bundle readBundle = parcel.readBundle();
-        Bundle readBundle2 = parcel.readBundle();
-        boolean readBoolean = parcel.readBoolean();
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mCredentialRetrievalData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mCandidateQueryData = readBundle2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle2);
-        this.mIsSystemProviderRequired = readBoolean;
-        ArraySet readArraySet = parcel.readArraySet(null);
-        this.mAllowedProviders = readArraySet;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readArraySet);
+        String string8 = parcel.readString8();
+        Bundle bundle = parcel.readBundle();
+        Bundle bundle2 = parcel.readBundle();
+        boolean z = parcel.readBoolean();
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mCredentialRetrievalData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mCandidateQueryData = bundle2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle2);
+        this.mIsSystemProviderRequired = z;
+        ArraySet arraySet = parcel.readArraySet(null);
+        this.mAllowedProviders = arraySet;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arraySet);
     }
 
     public static final class Builder {

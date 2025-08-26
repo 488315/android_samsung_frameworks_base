@@ -2,6 +2,7 @@ package com.android.systemui.navigationbar;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.os.Binder;
 import android.view.InsetsFrameProvider;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SafeUINavigationBarView {
     public final Context mContext;
@@ -22,9 +22,9 @@ public class SafeUINavigationBarView {
         this.mWindowManager = windowManager;
     }
 
-    public final WindowManager.LayoutParams getBarLayoutParamsForRotation() {
-        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
-        int dimensionPixelSize2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_left_edge_size);
+    public final WindowManager.LayoutParams getBarLayoutParamsForRotation() throws Resources.NotFoundException {
+        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size);
+        int dimensionPixelSize2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.secondary_waterfall_display_right_edge_size);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, dimensionPixelSize, 2019, 545521768, -3);
         layoutParams.gravity = 80;
         Context context = this.mContext;

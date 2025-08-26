@@ -12,9 +12,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -31,9 +33,11 @@ import android.window.TaskSnapshot;
 import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.keyguard.KeyguardCarrierViewController$2$$ExternalSyntheticOutline0;
@@ -43,6 +47,7 @@ import com.android.systemui.R;
 import com.android.wm.shell.RootTaskDisplayAreaOrganizer;
 import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayController;
+import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.common.HandlerExecutor;
 import com.android.wm.shell.common.ScreenshotUtils;
 import com.android.wm.shell.common.ShellExecutor;
@@ -55,8 +60,12 @@ import com.android.wm.shell.common.pip.PipMenuController;
 import com.android.wm.shell.common.pip.PipPerfHintController;
 import com.android.wm.shell.common.pip.PipUiEventLogger;
 import com.android.wm.shell.common.pip.PipUtils;
+import com.android.wm.shell.desktopmode.DesktopModeUtils;
 import com.android.wm.shell.desktopmode.DesktopRepository;
+import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.desktopmode.DesktopUserRepositories;
+import com.android.wm.shell.desktopmode.multidesks.DesksOrganizer;
+import com.android.wm.shell.desktopmode.multidesks.RootTaskDesksOrganizer;
 import com.android.wm.shell.pip.PipAnimationController;
 import com.android.wm.shell.pip.PipSurfaceTransactionHelper;
 import com.android.wm.shell.pip.PipTaskOrganizer;
@@ -92,7 +101,6 @@ import java.util.StringJoiner;
 import java.util.WeakHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, DisplayController.OnDisplaysChangedListener {
     public static final int EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS = SystemProperties.getInt("persist.wm.debug.extra_content_overlay_fade_out_delay_ms", 400);
@@ -102,6 +110,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     public int mCurrentRotation;
     public SurfaceControl.Transaction mDeferredAnimEndTransaction;
     public ActivityManager.RunningTaskInfo mDeferredTaskInfo;
+    public final DesksOrganizer mDesksOrganizer;
     public final Optional mDesktopUserRepositoriesOptional;
     public final DisplayController mDisplayController;
     public final int mEnterAnimationDuration;
@@ -133,7 +142,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
     public final PipSurfaceTransactionHelper mSurfaceTransactionHelper;
     public Rect mSwipeSourceRectHint;
-    public final PipTaskOrganizer$$ExternalSyntheticLambda0 mSwipingPipTimeout;
+    public final PipTaskOrganizer$$ExternalSyntheticLambda2 mSwipingPipTimeout;
     public final SyncTransactionQueue mSyncTransactionQueue;
     public ActivityManager.RunningTaskInfo mTaskInfo;
     public final ShellTaskOrganizer mTaskOrganizer;
@@ -145,9 +154,9 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     public final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public boolean mNeedToCheckRotation = false;
     public int mSwipingPipTaskId = -1;
+    public int mTransitionDirection = 0;
     public final AnonymousClass1 mPipAnimationCallback = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip.PipTaskOrganizer$1, reason: invalid class name */
     public class AnonymousClass1 extends PipAnimationController.PipAnimationCallback {
         public boolean mIsCancelled;
@@ -163,12 +172,13 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             this.mIsCancelled = true;
             int i = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
             Log.d("PipTaskOrganizer", "onPipAnimationCancel direction=" + transitionDirection);
-            boolean isInPipDirection = PipAnimationController.isInPipDirection(transitionDirection);
+            boolean zIsInPipDirection = PipAnimationController.isInPipDirection(transitionDirection);
             PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
-            if (isInPipDirection && (surfaceControl = pipTaskOrganizer.mPipOverlay) != null) {
+            if (zIsInPipDirection && (surfaceControl = pipTaskOrganizer.mPipOverlay) != null) {
                 pipTaskOrganizer.fadeOutAndRemoveOverlay(surfaceControl, true, -1);
             }
             pipTaskOrganizer.mPipTransitionController.sendOnPipTransitionCancelled$1(transitionDirection);
+            pipTaskOrganizer.mTransitionDirection = transitionDirection;
         }
 
         @Override // com.android.wm.shell.pip.PipAnimationController.PipAnimationCallback
@@ -196,9 +206,9 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             final int animationType = pipTransitionAnimator.getAnimationType();
             final Rect rect = pipTransitionAnimator.mDestinationBounds;
             int i2 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(transitionDirection, animationType, "onPipAnimationEnd direction=", " type", " mState=");
-            m.append(pipTaskOrganizer.mPipTransitionState.mState);
-            Log.d("PipTaskOrganizer", m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(transitionDirection, animationType, "onPipAnimationEnd direction=", " type", " mState=");
+            sbM.append(pipTaskOrganizer.mPipTransitionState.mState);
+            Log.d("PipTaskOrganizer", sbM.toString());
             if (PipAnimationController.isInPipDirection(transitionDirection) && (surfaceControl = pipTaskOrganizer.mPipOverlay) != null) {
                 pipTaskOrganizer.fadeOutAndRemoveOverlay(surfaceControl, true, -1);
             }
@@ -215,7 +225,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                 transaction.addTransactionCommittedListener(pipTaskOrganizer.mMainExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$1$$ExternalSyntheticLambda1
                     @Override // android.view.SurfaceControl.TransactionCommittedListener
                     public final void onTransactionCommitted() {
-                        PipTaskOrganizer pipTaskOrganizer2 = PipTaskOrganizer.this;
+                        PipTaskOrganizer pipTaskOrganizer2 = pipTaskOrganizer;
                         int i3 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
                         PipResizeGestureHandler$$ExternalSyntheticLambda1 pipResizeGestureHandler$$ExternalSyntheticLambda12 = pipTaskOrganizer2.mPipFinishResizeWCTRunnable;
                         if (pipResizeGestureHandler$$ExternalSyntheticLambda12 != null) {
@@ -227,7 +237,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                 Runnable runnable = new Runnable() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipTaskOrganizer.AnonymousClass1 anonymousClass1 = PipTaskOrganizer.AnonymousClass1.this;
+                        PipTaskOrganizer.AnonymousClass1 anonymousClass1 = this.f$0;
                         SurfaceControl.Transaction transaction2 = transaction;
                         Rect rect2 = rect;
                         int i3 = transitionDirection;
@@ -252,7 +262,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
             PipPerfHintController pipPerfHintController = pipTaskOrganizer.mPipPerfHintController;
             if (pipPerfHintController != null) {
-                this.mPipHighPerfSession = pipPerfHintController.startSession(new PipTaskOrganizer$$ExternalSyntheticLambda3(this, 1), "PipTaskOrganizer::mPipAnimationCallback");
+                this.mPipHighPerfSession = pipPerfHintController.startSession(new PipTaskOrganizer$$ExternalSyntheticLambda0(this, 1), "PipTaskOrganizer::mPipAnimationCallback");
             }
             int transitionDirection = pipTransitionAnimator.getTransitionDirection();
             this.mIsCancelled = false;
@@ -262,14 +272,15 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                 pipTaskOrganizer.mPipTransitionState.setTransitionState(3);
             }
             pipTaskOrganizer.mPipTransitionController.sendOnPipTransitionStarted$1(transitionDirection);
+            pipTaskOrganizer.mTransitionDirection = transitionDirection;
         }
     }
 
-    /* JADX WARN: Type inference failed for: r4v5, types: [com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda0] */
-    /* JADX WARN: Type inference failed for: r6v0, types: [com.android.wm.shell.pip.PipTaskOrganizer$3] */
-    public PipTaskOrganizer(Context context, SyncTransactionQueue syncTransactionQueue, PipTransitionState pipTransitionState, PipBoundsState pipBoundsState, PipDisplayLayoutState pipDisplayLayoutState, PipBoundsAlgorithm pipBoundsAlgorithm, PipMenuController pipMenuController, PipAnimationController pipAnimationController, PipSurfaceTransactionHelper pipSurfaceTransactionHelper, PipTransitionController pipTransitionController, PipParamsChangedForwarder pipParamsChangedForwarder, Optional<SplitScreenController> optional, Optional<PipPerfHintController> optional2, Optional<DesktopUserRepositories> optional3, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DisplayController displayController, PipUiEventLogger pipUiEventLogger, ShellTaskOrganizer shellTaskOrganizer, ShellExecutor shellExecutor) {
+    /* JADX WARN: Type inference failed for: r5v1, types: [com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda2] */
+    /* JADX WARN: Type inference failed for: r6v1, types: [com.android.wm.shell.pip.PipTaskOrganizer$3] */
+    public PipTaskOrganizer(Context context, SyncTransactionQueue syncTransactionQueue, PipTransitionState pipTransitionState, PipBoundsState pipBoundsState, PipDisplayLayoutState pipDisplayLayoutState, PipBoundsAlgorithm pipBoundsAlgorithm, PipMenuController pipMenuController, PipAnimationController pipAnimationController, PipSurfaceTransactionHelper pipSurfaceTransactionHelper, PipTransitionController pipTransitionController, PipParamsChangedForwarder pipParamsChangedForwarder, Optional<SplitScreenController> optional, Optional<PipPerfHintController> optional2, Optional<DesktopUserRepositories> optional3, DesksOrganizer desksOrganizer, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DisplayController displayController, PipUiEventLogger pipUiEventLogger, ShellTaskOrganizer shellTaskOrganizer, ShellExecutor shellExecutor) {
         final int i = 0;
-        this.mSwipingPipTimeout = new Runnable(this) { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda0
+        this.mSwipingPipTimeout = new Runnable(this) { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda2
             public final /* synthetic */ PipTaskOrganizer f$0;
 
             {
@@ -318,7 +329,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         };
         PipTransitionController.PipTransitionCallback pipTransitionCallback = new PipTransitionController.PipTransitionCallback() { // from class: com.android.wm.shell.pip.PipTaskOrganizer.2
             @Override // com.android.wm.shell.pip.PipTransitionController.PipTransitionCallback
-            public final void onPipTransitionFinished(int i2) {
+            public final void onPipTransitionFinished(int i2) throws Resources.NotFoundException {
                 PipTaskOrganizer pipTaskOrganizer;
                 ActivityManager.RunningTaskInfo runningTaskInfo;
                 if (i2 != 2 || (runningTaskInfo = (pipTaskOrganizer = PipTaskOrganizer.this).mDeferredTaskInfo) == null) {
@@ -374,7 +385,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         this.mMainExecutor = shellExecutor;
         if (!PipUtils.isPip2ExperimentEnabled()) {
             final int i2 = 1;
-            shellExecutor.execute(new Runnable(this) { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda0
+            shellExecutor.execute(new Runnable(this) { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda2
                 public final /* synthetic */ PipTaskOrganizer f$0;
 
                 {
@@ -425,16 +436,15 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             displayController.addDisplayWindowListener(this, -1);
             ((HashMap) pipTransitionController.mPipTransitionCallbacks).put(pipTransitionCallback, shellExecutor);
         }
-        ShellTaskOrganizer.MultiWindowCoreStateChangeListener multiWindowCoreStateChangeListener = new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda2
+        shellTaskOrganizer.registerMultiWindowCoreStateListener(new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda4
             @Override // com.android.wm.shell.ShellTaskOrganizer.MultiWindowCoreStateChangeListener
             public final boolean onMultiWindowCoreStateChanged(int i3) {
                 int i4 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-                return (!PipTaskOrganizer.this.isInPip() || (i3 & 1) == 0 || MultiWindowCoreState.MW_ENABLED) ? false : true;
+                return (!this.f$0.isInPip() || (i3 & 1) == 0 || MultiWindowCoreState.MW_ENABLED) ? false : true;
             }
-        };
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.remove(multiWindowCoreStateChangeListener);
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.add(multiWindowCoreStateChangeListener);
+        });
         pipBoundsState.mPipTransitionState = pipTransitionState;
+        this.mDesksOrganizer = desksOrganizer;
     }
 
     public static boolean isHomeVisible() {
@@ -449,16 +459,16 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     public static void logRemoteActions$1(PictureInPictureParams pictureInPictureParams) {
         StringJoiner stringJoiner = new StringJoiner("|", "[", "]");
         if (pictureInPictureParams.hasSetActions()) {
-            pictureInPictureParams.getActions().forEach(new PipTaskOrganizer$$ExternalSyntheticLambda3(stringJoiner, 0));
+            pictureInPictureParams.getActions().forEach(new PipTaskOrganizer$$ExternalSyntheticLambda0(stringJoiner, 0));
         }
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -348090866542953596L, 0, "PipTaskOrganizer", String.valueOf(stringJoiner.toString()));
         }
     }
 
-    public final PipAnimationController.PipTransitionAnimator animateResizePip(Rect rect, Rect rect2, Rect rect3, int i, int i2, float f) {
+    public final PipAnimationController.PipTransitionAnimator animateResizePip(Rect rect, Rect rect2, Rect rect3, int i, int i2, float f) throws Resources.NotFoundException {
+        Rect validSourceHintRect;
         Rect rect4;
-        Rect rect5;
         if (this.mToken == null || this.mLeash == null) {
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[3]) {
                 ProtoLogImpl_1771455215.w(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 5014614599801648599L, 0, "PipTaskOrganizer");
@@ -466,32 +476,32 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             return null;
         }
         if (PipAnimationController.isInPipDirection(i)) {
-            rect4 = rect3;
-            if (!PipBoundsAlgorithm.isSourceRectHintValidForEnterPip(rect4, rect2)) {
-                rect4 = null;
+            validSourceHintRect = rect3;
+            if (!PipBoundsAlgorithm.isSourceRectHintValidForEnterPip(validSourceHintRect, rect2)) {
+                validSourceHintRect = null;
             }
         } else {
-            rect4 = rect3;
+            validSourceHintRect = rect3;
         }
-        int deltaRotation = this.mWaitForFixedRotation ? RotationUtils.deltaRotation(this.mCurrentRotation, this.mNextRotation) : 0;
+        int iDeltaRotation = this.mWaitForFixedRotation ? RotationUtils.deltaRotation(this.mCurrentRotation, this.mNextRotation) : 0;
         PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
         PipBoundsState pipBoundsState = this.mPipBoundsState;
-        if (deltaRotation != 0) {
+        if (iDeltaRotation != 0) {
             if (i == 2) {
                 this.mPipDisplayLayoutState.rotateTo(this.mNextRotation);
                 Rect displayBounds = pipBoundsState.mPipDisplayLayoutState.getDisplayBounds();
                 rect2.set(pipBoundsAlgorithm.getEntryDestinationBounds());
                 RotationUtils.rotateBounds(rect2, displayBounds, this.mNextRotation, this.mCurrentRotation);
-                if (rect4 != null && (rect5 = this.mTaskInfo.displayCutoutInsets) != null && deltaRotation == 3) {
-                    rect4.offset(rect5.left, rect5.top);
+                if (validSourceHintRect != null && (rect4 = this.mTaskInfo.displayCutoutInsets) != null && iDeltaRotation == 3) {
+                    validSourceHintRect.offset(rect4.left, rect4.top);
                 }
             } else if (i == 3) {
-                Rect rect6 = new Rect(rect2);
-                RotationUtils.rotateBounds(rect6, pipBoundsState.mPipDisplayLayoutState.getDisplayBounds(), deltaRotation);
-                rect4 = PipBoundsAlgorithm.getValidSourceHintRect(this.mPictureInPictureParams, rect6);
+                Rect rect5 = new Rect(rect2);
+                RotationUtils.rotateBounds(rect5, pipBoundsState.mPipDisplayLayoutState.getDisplayBounds(), iDeltaRotation);
+                validSourceHintRect = PipBoundsAlgorithm.getValidSourceHintRect(this.mPictureInPictureParams, rect5);
             }
         }
-        Rect rect7 = rect4;
+        Rect rect6 = validSourceHintRect;
         Rect bounds = i == 6 ? pipBoundsState.getBounds() : rect;
         PipAnimationController pipAnimationController = this.mPipAnimationController;
         PipAnimationController.PipTransitionAnimator pipTransitionAnimator = pipAnimationController.mCurrentAnimator;
@@ -503,7 +513,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             pipAnimationController.mCurrentAnimator.cancel();
         }
         PipAnimationController.PipAnimationCallback pipAnimationCallback2 = pipAnimationCallback;
-        PipAnimationController.PipTransitionAnimator animator = this.mPipAnimationController.getAnimator(this.mTaskInfo, this.mLeash, bounds, rect, rect2, rect7, i, f, deltaRotation, true, pipBoundsAlgorithm.getDefaultBounds());
+        PipAnimationController.PipTransitionAnimator animator = this.mPipAnimationController.getAnimator(this.mTaskInfo, this.mLeash, bounds, rect, rect2, rect6, i, f, iDeltaRotation, true, pipBoundsAlgorithm.getDefaultBounds());
         PipAnimationController.PipTransitionAnimator transitionDirection2 = animator.setTransitionDirection(i);
         transitionDirection2.mPipTransactionHandler = this.mPipTransactionHandler;
         transitionDirection2.setDuration(i2);
@@ -521,7 +531,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             }
         }
         if (PipAnimationController.isInPipDirection(i)) {
-            if (rect7 == null) {
+            if (rect6 == null) {
                 ActivityInfo activityInfo = this.mTaskInfo.topActivityInfo;
                 if (activityInfo != null) {
                     Context context = this.mContext;
@@ -535,12 +545,12 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             } else {
                 TaskSnapshot taskSnapshot = PipUtils.getTaskSnapshot(this.mTaskInfo.launchIntoPipHostTaskId);
                 if (taskSnapshot != null) {
-                    animator.reattachContentOverlay(new PipContentOverlay.PipSnapshotOverlay(taskSnapshot, rect7));
+                    animator.reattachContentOverlay(new PipContentOverlay.PipSnapshotOverlay(taskSnapshot, rect6));
                 }
             }
             PipContentOverlay pipContentOverlay = animator.mContentOverlay;
             this.mPipOverlay = pipContentOverlay == null ? null : pipContentOverlay.mLeash;
-            if (deltaRotation != 0) {
+            if (iDeltaRotation != 0) {
                 animator.setDestinationBounds(pipBoundsAlgorithm.getEntryDestinationBounds());
             }
         }
@@ -566,7 +576,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             this.mSplitScreenOptional.ifPresent(new Consumer() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda10
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
+                    PipTaskOrganizer pipTaskOrganizer = this.f$0;
                     boolean z2 = z;
                     ((SplitScreenController) obj).moveToStage(pipTaskOrganizer.mTaskInfo.taskId, !z2 ? 1 : 0, windowContainerTransaction);
                 }
@@ -630,42 +640,42 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
     public final void dump$2(PrintWriter printWriter, String str) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         printWriter.println(str + "PipTaskOrganizer");
-        printWriter.println(m + "mTaskInfo=" + this.mTaskInfo);
+        printWriter.println(strM + "mTaskInfo=" + this.mTaskInfo);
         StringBuilder sb = new StringBuilder();
-        sb.append(m);
+        sb.append(strM);
         sb.append("mToken=");
         sb.append(this.mToken);
         sb.append(" binder=");
         WindowContainerToken windowContainerToken = this.mToken;
         sb.append(windowContainerToken != null ? windowContainerToken.asBinder() : null);
         printWriter.println(sb.toString());
-        printWriter.println(m + "mLeash=" + this.mLeash);
-        printWriter.println(m + "mPipOverlay=" + this.mPipOverlay);
+        printWriter.println(strM + "mLeash=" + this.mLeash);
+        printWriter.println(strM + "mPipOverlay=" + this.mPipOverlay);
         StringBuilder sb2 = new StringBuilder();
-        sb2.append(m);
+        sb2.append(strM);
         sb2.append("mState=");
         PipTransitionState pipTransitionState = this.mPipTransitionState;
         sb2.append(pipTransitionState.mState);
         printWriter.println(sb2.toString());
-        printWriter.println(m + "mPictureInPictureParams=" + this.mPictureInPictureParams);
-        this.mPipTransitionController.dump$2(printWriter, m);
+        printWriter.println(strM + "mPictureInPictureParams=" + this.mPictureInPictureParams);
+        this.mPipTransitionController.dump$2(printWriter, strM);
         if (this.mPipPerfHintController != null) {
-            String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "  ");
-            printWriter.println(m + "PipPerfHintController");
-            printWriter.println(m2 + "activeSessionCount=" + ((WeakHashMap) PipPerfHintController.PipHighPerfSession.sActiveSessions).size());
+            String strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "  ");
+            printWriter.println(strM + "PipPerfHintController");
+            printWriter.println(strM2 + "activeSessionCount=" + ((WeakHashMap) PipPerfHintController.PipHighPerfSession.sActiveSessions).size());
         }
         long j = pipTransitionState.mTaskAppearedTime;
         if (j > 0) {
-            StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, "mTaskAppearedTime=");
-            m3.append(System.currentTimeMillis() - j);
-            m3.append("ms");
-            printWriter.println(m3.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, "mTaskAppearedTime=");
+            sbM.append(System.currentTimeMillis() - j);
+            sbM.append("ms");
+            printWriter.println(sbM.toString());
         }
-        StringBuilder m4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m, "mPipLogHistory=");
-        m4.append(this.mPipLogHistory);
-        printWriter.println(m4.toString());
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, "mPipLogHistory=");
+        sbM2.append(this.mPipLogHistory);
+        printWriter.println(sbM2.toString());
     }
 
     public void enterPipWithAlphaAnimation(final Rect rect, final long j) {
@@ -681,7 +691,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         applyEnterPipSyncTransaction(rect, new Runnable() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
+                PipTaskOrganizer pipTaskOrganizer = this.f$0;
                 Rect rect2 = rect;
                 long j2 = j;
                 PipAnimationController.PipTransitionAnimator pipAnimationCallback = pipTaskOrganizer.mPipAnimationController.getAnimator(pipTaskOrganizer.mTaskInfo, pipTaskOrganizer.mLeash, rect2, 0.0f, 1.0f).setTransitionDirection(2).setPipAnimationCallback(pipTaskOrganizer.mPipAnimationCallback);
@@ -692,21 +702,250 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         }, transaction2);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0176  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x01e2  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x02ce  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x032f  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x01f7  */
+    /* JADX WARN: Removed duplicated region for block: B:112:0x0218  */
+    /* JADX WARN: Removed duplicated region for block: B:115:0x021e  */
+    /* JADX WARN: Removed duplicated region for block: B:117:0x0233  */
+    /* JADX WARN: Removed duplicated region for block: B:140:0x030f  */
+    /* JADX WARN: Removed duplicated region for block: B:159:0x0370  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x01b1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void exitPip(final int r31, boolean r32) {
-        /*
-            Method dump skipped, instructions count: 935
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.pip.PipTaskOrganizer.exitPip(int, boolean):void");
+    public final void exitPip(final int i, boolean z) {
+        int i2;
+        boolean z2;
+        Rect displayBounds;
+        int i3;
+        final int i4;
+        boolean z3;
+        int i5;
+        PipBoundsState pipBoundsState;
+        boolean z4;
+        Rect rect;
+        SurfaceControl.Transaction transaction;
+        final Rect rect2;
+        int i6;
+        int i7;
+        int i8;
+        ActivityManager.RunningTaskInfo runningTaskInfo;
+        PipTransitionState pipTransitionState = this.mPipTransitionState;
+        if (!PipTransitionState.isInPip(pipTransitionState.mState) || (i2 = pipTransitionState.mState) == 5 || (z2 = pipTransitionState.mInSwipePipToHomeTransition) || this.mToken == null) {
+            Log.wtf("PipTaskOrganizer", "Not allowed to exitPip in current state mState=" + pipTransitionState.mState + " mToken=" + this.mToken + " mLeash=" + this.mLeash);
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[5]) {
+                ProtoLogImpl_1771455215.wtf(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 3348915206862418870L, 4, "PipTaskOrganizer", Long.valueOf(pipTransitionState.mState), String.valueOf(this.mToken));
+                return;
+            }
+            return;
+        }
+        boolean z5 = i2 == 3;
+        PipTransitionController pipTransitionController = this.mPipTransitionController;
+        if (z5 && !z2) {
+            pipTransitionController.end(new PipTaskOrganizer$$ExternalSyntheticLambda8(this, i, z));
+            return;
+        }
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
+            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 782274582501407908L, 0, String.valueOf(this.mTaskInfo.topActivity), String.valueOf(pipTransitionState));
+        }
+        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+        PictureInPictureParams pictureInPictureParams = this.mPictureInPictureParams;
+        boolean z6 = pictureInPictureParams != null && pictureInPictureParams.isLaunchIntoPip();
+        ShellTaskOrganizer shellTaskOrganizer = this.mTaskOrganizer;
+        if (z6) {
+            windowContainerTransaction.startTask(this.mTaskInfo.launchIntoPipHostTaskId, (Bundle) null);
+            shellTaskOrganizer.applyTransaction(windowContainerTransaction);
+            removePip();
+            return;
+        }
+        if (this.mLeash == null) {
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
+                ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 2329284483158324524L, 0, null);
+                return;
+            }
+            return;
+        }
+        boolean zIsPipExitingToDesktopMode = isPipExitingToDesktopMode();
+        PipBoundsState pipBoundsState2 = this.mPipBoundsState;
+        if (zIsPipExitingToDesktopMode) {
+            displayBounds = (Rect) getCurrentRepo().boundsBeforeMinimizeByTaskId.removeReturnOld(this.mTaskInfo.taskId);
+            if (displayBounds == null && this.mTaskInfo.lastParentTaskIdBeforePip != -1) {
+                displayBounds = (Rect) getCurrentRepo().boundsBeforeMinimizeByTaskId.removeReturnOld(this.mTaskInfo.lastParentTaskIdBeforePip);
+                StringBuilder sb = new StringBuilder("getExitDestinationBounds freeformBounds=");
+                sb.append(displayBounds);
+                sb.append(" taskId=");
+                sb.append(this.mTaskInfo.taskId);
+                sb.append(" lastParentTaskIdBeforePip=");
+                TooltipPopup$$ExternalSyntheticOutline0.m(this.mTaskInfo.lastParentTaskIdBeforePip, "PipTaskOrganizer", sb);
+            }
+            if (displayBounds == null) {
+                DisplayLayout displayLayout = this.mDisplayController.getDisplayLayout(this.mTaskInfo.displayId);
+                ActivityManager.RunningTaskInfo runningTaskInfo2 = this.mTaskInfo;
+                DesktopTasksController.Companion companion = DesktopTasksController.Companion;
+                displayBounds = DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo2, 0, null, 24);
+            }
+        } else {
+            displayBounds = pipBoundsState2.mPipDisplayLayoutState.getDisplayBounds();
+        }
+        Rect rect3 = new Rect(displayBounds);
+        if (!this.mSplitScreenOptional.isEmpty()) {
+            SplitScreenController splitScreenController = (SplitScreenController) this.mSplitScreenOptional.get();
+            int i9 = this.mTaskInfo.lastParentTaskIdBeforePip;
+            int splitPosition = i9 > 0 ? splitScreenController.getSplitPosition(i9) : -1;
+            boolean z7 = CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER;
+            i3 = 0;
+            int stageOfTask = z7 ? splitScreenController.getStageOfTask(this.mTaskInfo.lastParentTaskIdBeforePip) : -1;
+            if (splitPosition != -1 || z || (z7 && stageOfTask != -1 && splitScreenController.isSplitScreenVisible())) {
+                Rect rect4 = new Rect();
+                Rect rect5 = new Rect();
+                splitScreenController.getStageBounds(rect4, rect5);
+                if (z) {
+                    if (!this.mSplitScreenOptional.isPresent() || ((SplitScreenController) this.mSplitScreenOptional.get()).getActivateSplitPosition(this.mTaskInfo) != 0) {
+                        rect4 = rect5;
+                    }
+                    rect3.set(rect4);
+                } else {
+                    if (splitPosition != 0) {
+                        rect4 = rect5;
+                    }
+                    rect3.set(rect4);
+                    if (z7 && stageOfTask != -1) {
+                        rect3.set(splitScreenController.getStageBounds(stageOfTask));
+                    }
+                }
+                i4 = 4;
+            }
+            if (!z && i4 == 4) {
+                ((SplitScreenController) this.mSplitScreenOptional.get()).onPipToSplitRequested(this.mTaskInfo, isHomeVisible(), 0, false, pipBoundsState2.getBounds(), false);
+                return;
+            }
+            z3 = CoreRune.MW_PIP_SHELL_TRANSITION;
+            if (z3) {
+                if (!isPipExitingToDesktopMode()) {
+                    ActivityManager.RunningTaskInfo runningTaskInfo3 = this.mTaskInfo;
+                    if (runningTaskInfo3 != null && (i8 = runningTaskInfo3.lastParentTaskIdBeforePip) != -1 && (runningTaskInfo = shellTaskOrganizer.getRunningTaskInfo(i8)) != null && runningTaskInfo.isFreeform()) {
+                        Rect bounds = runningTaskInfo.getConfiguration().windowConfiguration.getBounds();
+                        if (bounds.isEmpty()) {
+                            Log.w("PipTaskOrganizer", "syncWithFreeformTaskBounds: invalid bounds, " + bounds);
+                        } else {
+                            rect3.set(bounds);
+                            StringBuilder sb2 = new StringBuilder("syncWithFreeformTaskBounds: ");
+                            sb2.append(bounds);
+                            sb2.append(", lastParent t#");
+                            sb2.append(runningTaskInfo.taskId);
+                            sb2.append(", exitingPip t#");
+                            RecyclerView$$ExternalSyntheticOutline0.m(this.mTaskInfo.taskId, "PipTaskOrganizer", sb2);
+                        }
+                    }
+                    i5 = i3;
+                }
+                i5 = 1;
+            } else {
+                i5 = i3;
+            }
+            if (Transitions.SHELL_TRANSITIONS_ROTATION) {
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[i3]) {
+                    pipBoundsState = pipBoundsState2;
+                    z4 = z3;
+                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 7638765887972195355L, i3, String.valueOf(this.mTaskInfo.topActivity), String.valueOf(rect3));
+                } else {
+                    pipBoundsState = pipBoundsState2;
+                    z4 = z3;
+                }
+                SurfaceControl.Transaction transaction2 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
+                PipSurfaceTransactionHelper pipSurfaceTransactionHelper = this.mSurfaceTransactionHelper;
+                if (z4 && pipBoundsState.getBounds().isEmpty()) {
+                    Log.w("PipTaskOrganizer", "exitPip: pipBounds=" + pipBoundsState.getBounds() + ", destinationBounds=" + rect3);
+                    SurfaceControl surfaceControl = this.mLeash;
+                    pipSurfaceTransactionHelper.mTmpDestinationRectF.set(rect3);
+                    rect = rect3;
+                    pipSurfaceTransactionHelper.scale(transaction2, surfaceControl, rect, pipSurfaceTransactionHelper.mTmpDestinationRectF, 0.0f, true);
+                    transaction = transaction2;
+                } else {
+                    rect = rect3;
+                    SurfaceControl surfaceControl2 = this.mLeash;
+                    pipSurfaceTransactionHelper.mTmpDestinationRectF.set(pipBoundsState.getBounds());
+                    transaction = transaction2;
+                    pipSurfaceTransactionHelper.scale(transaction, surfaceControl2, rect, pipSurfaceTransactionHelper.mTmpDestinationRectF, 0.0f, true);
+                }
+                rect2 = rect;
+                transaction.setWindowCrop(this.mLeash, rect2.width(), rect2.height());
+                int i10 = this.mTaskInfo.displayId;
+                DesktopStateImpl.Companion.getClass();
+                if (DesktopStateImpl.Companion.inDesktopWindowing(i10) && i5 != 0) {
+                    applyWindowingModeChangeOnExit(windowContainerTransaction);
+                } else if (i4 == 4) {
+                    windowContainerTransaction.setActivityWindowingMode(this.mToken, 6);
+                } else {
+                    windowContainerTransaction.setActivityWindowingMode(this.mToken, 1);
+                    i6 = 1;
+                    windowContainerTransaction.setBounds(this.mToken, rect2);
+                    windowContainerTransaction.setBoundsChangeTransaction(this.mToken, transaction);
+                    i7 = i6;
+                }
+                i6 = 0;
+                windowContainerTransaction.setBounds(this.mToken, rect2);
+                windowContainerTransaction.setBoundsChangeTransaction(this.mToken, transaction);
+                i7 = i6;
+            } else {
+                windowContainerTransaction.setWindowingMode(this.mToken, getOutPipWindowingMode());
+                windowContainerTransaction.setBounds(this.mToken, (Rect) null);
+                rect2 = rect3;
+                i7 = i3;
+            }
+            pipTransitionState.setTransitionState(5);
+            if (Transitions.ENABLE_SHELL_TRANSITIONS) {
+                if (this.mSplitScreenOptional.isPresent()) {
+                    SplitScreenController splitScreenController2 = (SplitScreenController) this.mSplitScreenOptional.get();
+                    if (splitScreenController2.isTaskInSplitScreen$1(this.mTaskInfo.lastParentTaskIdBeforePip)) {
+                        splitScreenController2.exitSplitScreen(-1, 2);
+                    }
+                }
+                SyncTransactionQueue syncTransactionQueue = this.mSyncTransactionQueue;
+                syncTransactionQueue.queue(windowContainerTransaction);
+                syncTransactionQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda9
+                    @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
+                    public final void runWithTransaction(SurfaceControl.Transaction transaction3) throws Resources.NotFoundException {
+                        Rect rect6 = rect2;
+                        PipTaskOrganizer pipTaskOrganizer = this.f$0;
+                        PipAnimationController.PipTransitionAnimator pipTransitionAnimatorAnimateResizePip = pipTaskOrganizer.animateResizePip(pipTaskOrganizer.mPipBoundsState.getBounds(), rect6, PipBoundsAlgorithm.getValidSourceHintRect(pipTaskOrganizer.mPictureInPictureParams, rect6), i4, i, 0.0f);
+                        if (pipTransitionAnimatorAnimateResizePip != null) {
+                            pipTransitionAnimatorAnimateResizePip.applySurfaceControlTransaction(pipTaskOrganizer.mLeash, transaction3, 0.0f);
+                        }
+                    }
+                });
+                return;
+            }
+            if (z && this.mSplitScreenOptional.isPresent()) {
+                windowContainerTransaction.setWindowingMode(this.mToken, 0);
+                ((SplitScreenController) this.mSplitScreenOptional.get()).onPipExpandToSplit(windowContainerTransaction, this.mTaskInfo);
+                pipTransitionController.startExitTransition(1002, windowContainerTransaction, rect2);
+                return;
+            }
+            if (this.mSplitScreenOptional.isPresent()) {
+                SplitScreenController splitScreenController3 = (SplitScreenController) this.mSplitScreenOptional.get();
+                if (splitScreenController3.isTaskInSplitScreen$1(this.mTaskInfo.lastParentTaskIdBeforePip)) {
+                    if (i4 != 4) {
+                        splitScreenController3.prepareExitSplitScreen(splitScreenController3.getStageOfTask(this.mTaskInfo.lastParentTaskIdBeforePip), 2, windowContainerTransaction);
+                    }
+                } else if (splitScreenController3.isSplitScreenVisible() && i7 != 0) {
+                    splitScreenController3.setSplitInvisible();
+                    splitScreenController3.setReparentLeafTaskIfRelaunch();
+                }
+            }
+            pipTransitionController.startExitTransition(1001, windowContainerTransaction, rect2);
+            return;
+        }
+        i3 = 0;
+        i4 = 3;
+        if (!z) {
+        }
+        z3 = CoreRune.MW_PIP_SHELL_TRANSITION;
+        if (z3) {
+        }
+        if (Transitions.SHELL_TRANSITIONS_ROTATION) {
+        }
+        pipTransitionState.setTransitionState(5);
+        if (Transitions.ENABLE_SHELL_TRANSITIONS) {
+        }
     }
 
     public final void fadeExistingPip(boolean z) {
@@ -727,12 +966,12 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         if (surfaceControl == null || !surfaceControl.isValid()) {
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(this.mCrossFadeAnimationDuration);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda12
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(this.mCrossFadeAnimationDuration);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda12
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
+                PipTaskOrganizer pipTaskOrganizer = this.f$0;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 if (pipTaskOrganizer.mPipTransitionState.mState == 0) {
                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
@@ -740,26 +979,26 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                     }
                     PipAnimationController.quietCancel(valueAnimator);
                 } else if (surfaceControl2.isValid()) {
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                     SurfaceControl.Transaction transaction = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) pipTaskOrganizer.mSurfaceControlTransactionFactory).getTransaction();
-                    transaction.setAlpha(surfaceControl2, floatValue);
+                    transaction.setAlpha(surfaceControl2, fFloatValue);
                     transaction.apply();
                 }
             }
         });
         final Runnable runnable = null;
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.pip.PipTaskOrganizer.4
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.pip.PipTaskOrganizer.4
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 PipTaskOrganizer.this.removeContentOverlay(surfaceControl, runnable);
             }
         });
         if (CoreRune.MW_PIP_SHELL_TRANSITION && z && i != -1) {
-            ofFloat.setStartDelay(i);
+            valueAnimatorOfFloat.setStartDelay(i);
         } else {
-            ofFloat.setStartDelay(z ? 500L : EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS);
+            valueAnimatorOfFloat.setStartDelay(z ? 500L : EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS);
         }
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public final SurfaceControl findTaskSurface$2(int i) {
@@ -828,17 +1067,17 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             final Rect rect3 = new Rect(0, 0, rect.width(), rect.height());
             SurfaceControl.Transaction transaction2 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
             SurfaceControl surfaceControl = this.mLeash;
-            final SurfaceControl takeScreenshot = ScreenshotUtils.takeScreenshot(transaction2, surfaceControl, surfaceControl, rect2, 2147483645);
-            if (takeScreenshot != null) {
+            final SurfaceControl surfaceControlTakeScreenshot = ScreenshotUtils.takeScreenshot(transaction2, surfaceControl, surfaceControl, rect2, 2147483645);
+            if (surfaceControlTakeScreenshot != null) {
                 syncTransactionQueue.queue(windowContainerTransaction3);
                 syncTransactionQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.pip.PipTaskOrganizer$$ExternalSyntheticLambda13
                     @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
                     public final void runWithTransaction(SurfaceControl.Transaction transaction3) {
-                        SurfaceControl surfaceControl2 = takeScreenshot;
+                        SurfaceControl surfaceControl2 = surfaceControlTakeScreenshot;
                         Rect rect4 = rect2;
                         Rect rect5 = rect3;
                         int i3 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-                        PipTaskOrganizer pipTaskOrganizer = PipTaskOrganizer.this;
+                        PipTaskOrganizer pipTaskOrganizer = this.f$0;
                         PipResizeGestureHandler$$ExternalSyntheticLambda1 pipResizeGestureHandler$$ExternalSyntheticLambda1 = pipTaskOrganizer.mPipFinishResizeWCTRunnable;
                         if (pipResizeGestureHandler$$ExternalSyntheticLambda1 != null) {
                             pipResizeGestureHandler$$ExternalSyntheticLambda1.run();
@@ -866,18 +1105,18 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     }
 
     public final DesktopRepository getCurrentRepo() {
-        return (DesktopRepository) this.mDesktopUserRepositoriesOptional.map(new PipTaskOrganizer$$ExternalSyntheticLambda4()).orElse(null);
+        return (DesktopRepository) this.mDesktopUserRepositoriesOptional.map(new PipTaskOrganizer$$ExternalSyntheticLambda1()).orElse(null);
     }
 
     public final String getDebuggingString() {
         String str;
-        String m;
+        String strM;
         StringBuilder sb = new StringBuilder("PipTaskOrganizer{mState=");
         PipTransitionState pipTransitionState = this.mPipTransitionState;
         sb.append(pipTransitionState.mState);
         sb.append(", mTaskInfo=");
         if (this.mTaskInfo == null) {
-            m = "null";
+            strM = "null";
         } else {
             StringBuilder sb2 = new StringBuilder("TaskInfo(taskId=");
             sb2.append(this.mTaskInfo.taskId);
@@ -888,9 +1127,9 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             } else {
                 str = "";
             }
-            m = TransitionKt$$ExternalSyntheticOutline0.m(sb2, str, ")");
+            strM = TransitionKt$$ExternalSyntheticOutline0.m(sb2, str, ")");
         }
-        sb.append(m);
+        sb.append(strM);
         sb.append(", mLeash=");
         sb.append(this.mLeash);
         sb.append(", mWaitForFixedRotation=");
@@ -1003,9 +1242,9 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         this.mNextRotation = i2;
         this.mWaitForFixedRotation = true;
         this.mNeedToCheckRotation = false;
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onFixedRotationStarted: rot=", ", ");
-        m.append(getDebuggingString());
-        Log.d("PipTaskOrganizer", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onFixedRotationStarted: rot=", ", ");
+        sbM.append(getDebuggingString());
+        Log.d("PipTaskOrganizer", sbM.toString());
         if (Transitions.ENABLE_SHELL_TRANSITIONS) {
             this.mPipTransitionController.onFixedRotationStarted();
         } else if (PipTransitionState.isInPip(pipTransitionState.mState)) {
@@ -1014,7 +1253,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     }
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
-    public final void onTaskAppeared(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl) {
+    public final void onTaskAppeared(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl) throws Resources.NotFoundException {
         PipController$$ExternalSyntheticLambda8 pipController$$ExternalSyntheticLambda8;
         Objects.requireNonNull(runningTaskInfo, "Requires RunningTaskInfo");
         this.mTaskInfo = runningTaskInfo;
@@ -1153,7 +1392,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     }
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
-    public final void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {
+    public final void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws Resources.NotFoundException {
         Objects.requireNonNull(this.mToken, "onTaskInfoChanged requires valid existing mToken");
         PipTransitionState pipTransitionState = this.mPipTransitionState;
         int i = pipTransitionState.mState;
@@ -1202,18 +1441,18 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                     PipController pipController = PipController.this;
                     pipController.mPipBoundsState.setAspectRatio(aspectRatioFloat3);
                     PipBoundsState pipBoundsState2 = pipController.mPipBoundsState;
-                    Rect transformBoundsToAspectRatioIfValid = pipController.mPipBoundsAlgorithm.transformBoundsToAspectRatioIfValid(pipBoundsState2.mAspectRatio, pipBoundsState2.getBounds(), true, false);
-                    boolean equals = transformBoundsToAspectRatioIfValid.equals(pipBoundsState2.getBounds());
+                    Rect rectTransformBoundsToAspectRatioIfValid = pipController.mPipBoundsAlgorithm.transformBoundsToAspectRatioIfValid(pipBoundsState2.mAspectRatio, pipBoundsState2.getBounds(), true, false);
+                    boolean zEquals = rectTransformBoundsToAspectRatioIfValid.equals(pipBoundsState2.getBounds());
                     PipTouchHandler pipTouchHandler = pipController.mTouchHandler;
-                    if (equals) {
+                    if (zEquals) {
                         pipTouchHandler.updatePipSizeConstraints(pipTouchHandler.mPipBoundsState.mNormalBounds, aspectRatioFloat3);
                     } else {
-                        pipController.mPipTaskOrganizer.scheduleAnimateResizePip(pipController.mEnterAnimationDuration, 0, transformBoundsToAspectRatioIfValid);
+                        pipController.mPipTaskOrganizer.scheduleAnimateResizePip(pipController.mEnterAnimationDuration, 0, rectTransformBoundsToAspectRatioIfValid);
                         PhonePipMenuController phonePipMenuController = pipController.mMenuController;
                         PipMenuView pipMenuView = phonePipMenuController.mPipMenuView;
                         if (pipMenuView != null) {
                             List list = phonePipMenuController.mAppActions;
-                            pipMenuView.setActions(transformBoundsToAspectRatioIfValid, (list == null || list.size() <= 0) ? phonePipMenuController.mMediaActions : phonePipMenuController.mAppActions, phonePipMenuController.mCloseAction);
+                            pipMenuView.setActions(rectTransformBoundsToAspectRatioIfValid, (list == null || list.size() <= 0) ? phonePipMenuController.mMediaActions : phonePipMenuController.mAppActions, phonePipMenuController.mCloseAction);
                         }
                         pipTouchHandler.mPipResizeGestureHandler.mUserResizeBounds.setEmpty();
                         PipController.this.updateMovementBounds(null, false, false, false, null);
@@ -1356,7 +1595,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         transaction.reparent(surfaceControl, findTaskSurface$2(i));
     }
 
-    public final void scheduleAnimateResizePip(Rect rect, Rect rect2, float f, Rect rect3, int i, int i2, PipResizeGestureHandler$$ExternalSyntheticLambda0 pipResizeGestureHandler$$ExternalSyntheticLambda0) {
+    public final void scheduleAnimateResizePip(Rect rect, Rect rect2, float f, Rect rect3, int i, int i2, PipResizeGestureHandler$$ExternalSyntheticLambda0 pipResizeGestureHandler$$ExternalSyntheticLambda0) throws Resources.NotFoundException {
         if (PipTransitionState.isInPip(this.mPipTransitionState.mState)) {
             animateResizePip(rect, rect2, rect3, i, i2, f);
             if (pipResizeGestureHandler$$ExternalSyntheticLambda0 != null) {
@@ -1428,6 +1667,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             this.mPipTransitionState.setTransitionState(4);
         }
         this.mPipTransitionController.sendOnPipTransitionFinished(i);
+        this.mTransitionDirection = i;
     }
 
     public final void setPipVisibility(boolean z) {
@@ -1456,7 +1696,7 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         if (this.mStashDimOverlay == null && this.mLeash != null) {
             clearStashDimOverlay();
             this.mStashDimOverlay = new PipContentOverlay.PipColorOverlay(this.mContext);
-            Color valueOf = Color.valueOf(this.mContext.getColor(R.color.pip_stash_dim_overlay));
+            Color colorValueOf = Color.valueOf(this.mContext.getColor(R.color.pip_stash_dim_overlay));
             PipContentOverlay.PipColorOverlay pipColorOverlay = this.mStashDimOverlay;
             SurfaceControl.Transaction transaction = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
             SurfaceControl surfaceControl = this.mLeash;
@@ -1464,8 +1704,8 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             Log.d("PipTaskOrganizer", "attachDimOverlay");
             transaction.show(pipColorOverlay.mLeash);
             transaction.setLayer(pipColorOverlay.mLeash, Integer.MAX_VALUE);
-            transaction.setColor(pipColorOverlay.mLeash, valueOf.getComponents());
-            transaction.setAlpha(pipColorOverlay.mLeash, valueOf.alpha());
+            transaction.setColor(pipColorOverlay.mLeash, colorValueOf.getComponents());
+            transaction.setAlpha(pipColorOverlay.mLeash, colorValueOf.alpha());
             transaction.reparent(pipColorOverlay.mLeash, surfaceControl);
             transaction.apply();
         }
@@ -1486,35 +1726,42 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
             this.mSwipingPipTaskId = i;
             KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(i, "setSwipingPipTaskId: ", ", reason=", str, "PipTaskOrganizer");
             HandlerExecutor handlerExecutor = (HandlerExecutor) this.mMainExecutor;
-            PipTaskOrganizer$$ExternalSyntheticLambda0 pipTaskOrganizer$$ExternalSyntheticLambda0 = this.mSwipingPipTimeout;
-            handlerExecutor.removeCallbacks(pipTaskOrganizer$$ExternalSyntheticLambda0);
+            PipTaskOrganizer$$ExternalSyntheticLambda2 pipTaskOrganizer$$ExternalSyntheticLambda2 = this.mSwipingPipTimeout;
+            handlerExecutor.removeCallbacks(pipTaskOrganizer$$ExternalSyntheticLambda2);
             if (i != -1) {
-                handlerExecutor.executeDelayed(pipTaskOrganizer$$ExternalSyntheticLambda0, 5000L);
+                handlerExecutor.executeDelayed(pipTaskOrganizer$$ExternalSyntheticLambda2, 5000L);
             }
         }
     }
 
-    public final boolean shouldShowSplitMenu() {
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0014  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final boolean shouldShowSplitMenu() throws Resources.NotFoundException {
         ActivityManager.RunningTaskInfo runningTaskInfo;
+        int i;
         ActivityManager.RunningTaskInfo runningTaskInfo2;
-        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.pip_min_width);
-        float f = this.mPipBoundsState.mAspectRatio;
-        PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
-        Size sizeForAspectRatio = ((PhoneSizeSpecSource) pipBoundsAlgorithm.mSizeSpecSource).getSizeForAspectRatio(f, ((PhoneSizeSpecSource) pipBoundsAlgorithm.mSizeSpecSource).getDefaultSize(f));
-        if (sizeForAspectRatio.getWidth() < dimensionPixelSize) {
-            Log.d("PipTaskOrganizer", "PIP split menu does not show. estimatedSize w=" + sizeForAspectRatio.getWidth() + " h=" + sizeForAspectRatio.getHeight());
-            return false;
-        }
-        for (ActivityManager.RunningTaskInfo runningTaskInfo3 : MultiWindowManager.getInstance().getVisibleTasks()) {
-            if (runningTaskInfo3.supportsMultiWindow && (runningTaskInfo3.getWindowingMode() == 1 || runningTaskInfo3.isSplitScreen())) {
-                if ((this.mSplitScreenOptional.isPresent() && ((SplitScreenController) this.mSplitScreenOptional.get()).mSplitState.isSplitStashed()) || (runningTaskInfo = this.mTaskInfo) == null || runningTaskInfo.launchIntoPipHostTaskId != -1) {
+        ActivityManager.RunningTaskInfo runningTaskInfo3 = this.mTaskInfo;
+        if (runningTaskInfo3 != null) {
+            int i2 = runningTaskInfo3.displayId;
+            DesktopStateImpl.Companion.getClass();
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(i2)) {
+                int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.pip_min_width);
+                float f = this.mPipBoundsState.mAspectRatio;
+                PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
+                Size sizeForAspectRatio = ((PhoneSizeSpecSource) pipBoundsAlgorithm.mSizeSpecSource).getSizeForAspectRatio(f, ((PhoneSizeSpecSource) pipBoundsAlgorithm.mSizeSpecSource).getDefaultSize(f));
+                if (sizeForAspectRatio.getWidth() < dimensionPixelSize) {
+                    Log.d("PipTaskOrganizer", "PIP split menu does not show. estimatedSize w=" + sizeForAspectRatio.getWidth() + " h=" + sizeForAspectRatio.getHeight());
                     return false;
                 }
-                int i = runningTaskInfo.lastParentTaskIdBeforePip;
-                if (i == -1 || (runningTaskInfo2 = this.mTaskOrganizer.getRunningTaskInfo(i)) == null || (!runningTaskInfo2.isVisible && ((!runningTaskInfo2.isFreeform() && runningTaskInfo2.supportsMultiWindow) || runningTaskInfo2.isVisible))) {
-                    return !this.mTaskInfo.supportsPipOnly;
+                for (ActivityManager.RunningTaskInfo runningTaskInfo4 : MultiWindowManager.getInstance().getVisibleTasks()) {
+                    if (runningTaskInfo4.supportsMultiWindow && (runningTaskInfo4.getWindowingMode() == 1 || runningTaskInfo4.isSplitScreen())) {
+                        if ((!this.mSplitScreenOptional.isPresent() || !((SplitScreenController) this.mSplitScreenOptional.get()).mSplitState.isSplitStashed()) && (runningTaskInfo = this.mTaskInfo) != null && runningTaskInfo.launchIntoPipHostTaskId == -1 && ((i = runningTaskInfo.lastParentTaskIdBeforePip) == -1 || (runningTaskInfo2 = this.mTaskOrganizer.getRunningTaskInfo(i)) == null || (!runningTaskInfo2.isVisible && ((!runningTaskInfo2.isFreeform() && runningTaskInfo2.supportsMultiWindow) || runningTaskInfo2.isVisible)))) {
+                            return !this.mTaskInfo.supportsPipOnly;
+                        }
+                    }
                 }
-                return false;
             }
         }
         return false;
@@ -1553,6 +1800,10 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
     public final void onExitPipFinished(TaskInfo taskInfo, boolean z) {
         SurfaceControl surfaceControl;
         PipController$$ExternalSyntheticLambda8 pipController$$ExternalSyntheticLambda8;
+        DesksOrganizer desksOrganizer;
+        int i;
+        ActivityManager.RunningTaskInfo runningTaskInfo;
+        Integer deskIdForTask;
         PipController$$ExternalSyntheticLambda8 pipController$$ExternalSyntheticLambda82;
         SurfaceControl surfaceControl2;
         SurfaceControl surfaceControl3 = this.mLeash;
@@ -1596,10 +1847,12 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
         if (this.mLeash == null) {
             return;
         }
-        if ((!taskInfo.isVisible || ((taskInfo.configuration.windowConfiguration.getWindowingMode() != 2 && taskInfo.configuration.windowConfiguration.getWindowingMode() != 5) || taskInfo.displayId != 0)) && (surfaceControl = this.mLeash) != null && surfaceControl.isValid() && !taskInfo.configuration.isDesktopModeEnabled()) {
-            int i = taskInfo.displayId;
+        boolean z2 = taskInfo.isVisible;
+        ShellTaskOrganizer shellTaskOrganizer = this.mTaskOrganizer;
+        if ((!z2 || ((taskInfo.configuration.windowConfiguration.getWindowingMode() != 2 && taskInfo.configuration.windowConfiguration.getWindowingMode() != 5) || taskInfo.displayId != 0)) && (surfaceControl = this.mLeash) != null && surfaceControl.isValid() && this.mToken != null && !taskInfo.configuration.isDesktopModeEnabled()) {
+            int i2 = taskInfo.displayId;
             DesktopStateImpl.Companion.getClass();
-            if (!DesktopStateImpl.Companion.inDesktopWindowing(i)) {
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(i2)) {
                 Log.d("PipTaskOrganizer", "onExitPipFinished: reset surface state with WCT");
                 SurfaceControl.Transaction transaction2 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) this.mSurfaceControlTransactionFactory).getTransaction();
                 transaction2.setCornerRadius(this.mLeash, 0.0f);
@@ -1609,21 +1862,44 @@ public class PipTaskOrganizer implements ShellTaskOrganizer.TaskListener, Displa
                 WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
                 windowContainerTransaction.setBounds(this.mToken, (Rect) null);
                 windowContainerTransaction.setBoundsChangeTransaction(this.mToken, transaction2);
-                this.mTaskOrganizer.applyTransaction(windowContainerTransaction);
+                shellTaskOrganizer.applyTransaction(windowContainerTransaction);
             }
         }
         this.mLeash = null;
         if (taskInfo.displayId != 0 && (pipController$$ExternalSyntheticLambda82 = this.mOnDisplayIdChangeCallback) != null) {
             pipController$$ExternalSyntheticLambda82.accept(0);
-        } else {
-            if (this.mPipDisplayLayoutState.mDisplayId == 0 || (pipController$$ExternalSyntheticLambda8 = this.mOnDisplayIdChangeCallback) == null) {
+        } else if (this.mPipDisplayLayoutState.mDisplayId != 0 && (pipController$$ExternalSyntheticLambda8 = this.mOnDisplayIdChangeCallback) != null) {
+            pipController$$ExternalSyntheticLambda8.accept(0);
+        }
+        int i3 = taskInfo.displayId;
+        if (i3 == 0) {
+            DesktopStateImpl.Companion.getClass();
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(i3) || getCurrentRepo() == null || (desksOrganizer = this.mDesksOrganizer) == null) {
                 return;
             }
-            pipController$$ExternalSyntheticLambda8.accept(0);
+            int i4 = taskInfo.lastParentTaskIdBeforePip;
+            if (i4 != -1) {
+                runningTaskInfo = shellTaskOrganizer.getRunningTaskInfo(i4);
+                i = runningTaskInfo != null ? runningTaskInfo.taskId : -1;
+            } else {
+                i = taskInfo.taskId;
+                runningTaskInfo = (ActivityManager.RunningTaskInfo) taskInfo;
+            }
+            if (i != -1 && runningTaskInfo != null && this.mTransitionDirection != 5 && (deskIdForTask = getCurrentRepo().getDeskIdForTask(i)) != null) {
+                Log.d("PipTaskOrganizer", "addChildToDeskRoot deskId=" + deskIdForTask + " taskId=" + i);
+                int iIntValue = deskIdForTask.intValue();
+                RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) desksOrganizer;
+                WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+                rootTaskDesksOrganizer.moveTaskToDesk(windowContainerTransaction2, iIntValue, runningTaskInfo);
+                rootTaskDesksOrganizer.addChildToDesk(runningTaskInfo.taskId, iIntValue);
+                rootTaskDesksOrganizer.reorderTaskToFront(windowContainerTransaction2, iIntValue, runningTaskInfo);
+                rootTaskDesksOrganizer.shellTaskOrganizer.applyTransaction(windowContainerTransaction2);
+            }
+            this.mTransitionDirection = 0;
         }
     }
 
-    public final void scheduleAnimateResizePip(int i, int i2, Rect rect) {
+    public final void scheduleAnimateResizePip(int i, int i2, Rect rect) throws Resources.NotFoundException {
         if (this.mWaitForFixedRotation) {
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
                 ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 3575265343742099329L, 0, "PipTaskOrganizer");

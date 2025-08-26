@@ -82,24 +82,24 @@ public class Metadata {
         this.mKeyToPosMap.clear();
         int i2 = 0;
         while (i > 12) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
-            if (readInt <= 12) {
+            int iDataPosition = parcel.dataPosition();
+            int i3 = parcel.readInt();
+            if (i3 <= 12) {
                 Log.e(TAG, "Record is too short");
             } else {
-                int readInt2 = parcel.readInt();
-                if (checkMetadataId(readInt2)) {
-                    if (this.mKeyToPosMap.containsKey(Integer.valueOf(readInt2))) {
+                int i4 = parcel.readInt();
+                if (checkMetadataId(i4)) {
+                    if (this.mKeyToPosMap.containsKey(Integer.valueOf(i4))) {
                         Log.e(TAG, "Duplicate metadata ID found");
                     } else {
-                        this.mKeyToPosMap.put(Integer.valueOf(readInt2), Integer.valueOf(parcel.dataPosition()));
-                        int readInt3 = parcel.readInt();
-                        if (readInt3 <= 0 || readInt3 > 7) {
-                            Log.e(TAG, "Invalid metadata type " + readInt3);
+                        this.mKeyToPosMap.put(Integer.valueOf(i4), Integer.valueOf(parcel.dataPosition()));
+                        int i5 = parcel.readInt();
+                        if (i5 <= 0 || i5 > 7) {
+                            Log.e(TAG, "Invalid metadata type " + i5);
                         } else {
                             try {
-                                parcel.setDataPosition(MathUtils.addOrThrow(dataPosition, readInt));
-                                i -= readInt;
+                                parcel.setDataPosition(MathUtils.addOrThrow(iDataPosition, i3));
+                                i -= i3;
                                 i2++;
                             } catch (IllegalArgumentException e) {
                                 Log.e(TAG, "Invalid size: " + e.getMessage());
@@ -124,21 +124,21 @@ public class Metadata {
             Log.e(TAG, "Not enough data " + parcel.dataAvail());
             return false;
         }
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
-        if (parcel.dataAvail() + 4 < readInt || readInt < 8) {
-            Log.e(TAG, "Bad size " + readInt + " avail " + parcel.dataAvail() + " position " + dataPosition);
-            parcel.setDataPosition(dataPosition);
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
+        if (parcel.dataAvail() + 4 < i || i < 8) {
+            Log.e(TAG, "Bad size " + i + " avail " + parcel.dataAvail() + " position " + iDataPosition);
+            parcel.setDataPosition(iDataPosition);
             return false;
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 != kMetaMarker) {
-            Log.e(TAG, "Marker missing " + Integer.toHexString(readInt2));
-            parcel.setDataPosition(dataPosition);
+        int i2 = parcel.readInt();
+        if (i2 != kMetaMarker) {
+            Log.e(TAG, "Marker missing " + Integer.toHexString(i2));
+            parcel.setDataPosition(iDataPosition);
             return false;
         }
-        if (!scanAllRecords(parcel, readInt - 8)) {
-            parcel.setDataPosition(dataPosition);
+        if (!scanAllRecords(parcel, i - 8)) {
+            parcel.setDataPosition(iDataPosition);
             return false;
         }
         this.mParcel = parcel;
@@ -188,13 +188,13 @@ public class Metadata {
 
     public Date getDate(int i) {
         checkType(i, 6);
-        long readLong = this.mParcel.readLong();
-        String readString = this.mParcel.readString();
-        if (readString.length() == 0) {
-            return new Date(readLong);
+        long j = this.mParcel.readLong();
+        String string = this.mParcel.readString();
+        if (string.length() == 0) {
+            return new Date(j);
         }
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(readString));
-        calendar.setTimeInMillis(readLong);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(string));
+        calendar.setTimeInMillis(j);
         return calendar.getTime();
     }
 
@@ -208,10 +208,10 @@ public class Metadata {
 
     private void checkType(int i, int i2) {
         this.mParcel.setDataPosition(this.mKeyToPosMap.get(Integer.valueOf(i)).intValue());
-        int readInt = this.mParcel.readInt();
-        if (readInt == i2) {
+        int i3 = this.mParcel.readInt();
+        if (i3 == i2) {
             return;
         }
-        throw new IllegalStateException("Wrong type " + i2 + " but got " + readInt);
+        throw new IllegalStateException("Wrong type " + i2 + " but got " + i3);
     }
 }

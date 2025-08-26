@@ -327,14 +327,14 @@ public class Matrix {
     }
 
     public static void perspectiveM(float[] fArr, int i, float f, float f2, float f3, float f4) {
-        float tan = 1.0f / ((float) Math.tan(f * 0.008726646259971648d));
+        float fTan = 1.0f / ((float) Math.tan(f * 0.008726646259971648d));
         float f5 = 1.0f / (f3 - f4);
-        fArr[i] = tan / f2;
+        fArr[i] = fTan / f2;
         fArr[i + 1] = 0.0f;
         fArr[i + 2] = 0.0f;
         fArr[i + 3] = 0.0f;
         fArr[i + 4] = 0.0f;
-        fArr[i + 5] = tan;
+        fArr[i + 5] = fTan;
         fArr[i + 6] = 0.0f;
         fArr[i + 7] = 0.0f;
         fArr[i + 8] = 0.0f;
@@ -419,13 +419,13 @@ public class Matrix {
         fArr[i + 14] = 0.0f;
         fArr[i + 15] = 1.0f;
         double d = f * 0.017453292f;
-        float sin = (float) Math.sin(d);
-        float cos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
         if (1.0f == f2 && 0.0f == f3 && 0.0f == f4) {
-            fArr[i + 5] = cos;
-            fArr[i + 10] = cos;
-            fArr[i + 6] = sin;
-            fArr[i + 9] = -sin;
+            fArr[i + 5] = fCos;
+            fArr[i + 10] = fCos;
+            fArr[i + 6] = fSin;
+            fArr[i + 9] = -fSin;
             fArr[i + 1] = 0.0f;
             fArr[i + 2] = 0.0f;
             fArr[i + 4] = 0.0f;
@@ -434,10 +434,10 @@ public class Matrix {
             return;
         }
         if (0.0f == f2 && 1.0f == f3 && 0.0f == f4) {
-            fArr[i] = cos;
-            fArr[i + 10] = cos;
-            fArr[i + 8] = sin;
-            fArr[i + 2] = -sin;
+            fArr[i] = fCos;
+            fArr[i + 10] = fCos;
+            fArr[i + 8] = fSin;
+            fArr[i + 2] = -fSin;
             fArr[i + 1] = 0.0f;
             fArr[i + 4] = 0.0f;
             fArr[i + 6] = 0.0f;
@@ -446,10 +446,10 @@ public class Matrix {
             return;
         }
         if (0.0f == f2 && 0.0f == f3 && 1.0f == f4) {
-            fArr[i] = cos;
-            fArr[i + 5] = cos;
-            fArr[i + 1] = sin;
-            fArr[i + 4] = -sin;
+            fArr[i] = fCos;
+            fArr[i + 5] = fCos;
+            fArr[i + 1] = fSin;
+            fArr[i + 4] = -fSin;
             fArr[i + 2] = 0.0f;
             fArr[i + 6] = 0.0f;
             fArr[i + 8] = 0.0f;
@@ -464,48 +464,48 @@ public class Matrix {
             f3 *= f5;
             f4 *= f5;
         }
-        float f6 = 1.0f - cos;
-        float f7 = f2 * sin;
-        float f8 = f3 * sin;
-        float f9 = sin * f4;
-        fArr[i] = (f2 * f2 * f6) + cos;
+        float f6 = 1.0f - fCos;
+        float f7 = f2 * fSin;
+        float f8 = f3 * fSin;
+        float f9 = fSin * f4;
+        fArr[i] = (f2 * f2 * f6) + fCos;
         float f10 = f2 * f3 * f6;
         fArr[i + 4] = f10 - f9;
         float f11 = f4 * f2 * f6;
         fArr[i + 8] = f11 + f8;
         fArr[i + 1] = f10 + f9;
-        fArr[i + 5] = (f3 * f3 * f6) + cos;
+        fArr[i + 5] = (f3 * f3 * f6) + fCos;
         float f12 = f3 * f4 * f6;
         fArr[i + 9] = f12 - f7;
         fArr[i + 2] = f11 - f8;
         fArr[i + 6] = f12 + f7;
-        fArr[i + 10] = (f4 * f4 * f6) + cos;
+        fArr[i + 10] = (f4 * f4 * f6) + fCos;
     }
 
     @Deprecated
     public static void setRotateEulerM(float[] fArr, int i, float f, float f2, float f3) {
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
         double d2 = f2 * 0.017453292f;
-        float cos2 = (float) Math.cos(d2);
-        float sin2 = (float) Math.sin(d2);
+        float fCos2 = (float) Math.cos(d2);
+        float fSin2 = (float) Math.sin(d2);
         double d3 = f3 * 0.017453292f;
-        float cos3 = (float) Math.cos(d3);
-        float sin3 = (float) Math.sin(d3);
-        float f4 = cos * sin2;
-        float f5 = sin * sin2;
-        fArr[i] = cos2 * cos3;
-        fArr[i + 1] = (-cos2) * sin3;
-        fArr[i + 2] = sin2;
+        float fCos3 = (float) Math.cos(d3);
+        float fSin3 = (float) Math.sin(d3);
+        float f4 = fCos * fSin2;
+        float f5 = fSin * fSin2;
+        fArr[i] = fCos2 * fCos3;
+        fArr[i + 1] = (-fCos2) * fSin3;
+        fArr[i + 2] = fSin2;
         fArr[i + 3] = 0.0f;
-        fArr[i + 4] = (f4 * cos3) + (cos * sin3);
-        fArr[i + 5] = ((-f4) * sin3) + (cos * cos3);
-        fArr[i + 6] = (-sin) * cos2;
+        fArr[i + 4] = (f4 * fCos3) + (fCos * fSin3);
+        fArr[i + 5] = ((-f4) * fSin3) + (fCos * fCos3);
+        fArr[i + 6] = (-fSin) * fCos2;
         fArr[i + 7] = 0.0f;
-        fArr[i + 8] = ((-f5) * cos3) + (sin * sin3);
-        fArr[i + 9] = (f5 * sin3) + (sin * cos3);
-        fArr[i + 10] = cos * cos2;
+        fArr[i + 8] = ((-f5) * fCos3) + (fSin * fSin3);
+        fArr[i + 9] = (f5 * fSin3) + (fSin * fCos3);
+        fArr[i + 10] = fCos * fCos2;
         fArr[i + 11] = 0.0f;
         fArr[i + 12] = 0.0f;
         fArr[i + 13] = 0.0f;
@@ -524,27 +524,27 @@ public class Matrix {
             throw new IllegalArgumentException("rm.length < rmOffset + 16");
         }
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
         double d2 = f2 * 0.017453292f;
-        float cos2 = (float) Math.cos(d2);
-        float sin2 = (float) Math.sin(d2);
+        float fCos2 = (float) Math.cos(d2);
+        float fSin2 = (float) Math.sin(d2);
         double d3 = f3 * 0.017453292f;
-        float cos3 = (float) Math.cos(d3);
-        float sin3 = (float) Math.sin(d3);
-        float f4 = cos * sin2;
-        float f5 = sin * sin2;
-        fArr[i] = cos2 * cos3;
-        fArr[i + 1] = (-cos2) * sin3;
-        fArr[i + 2] = sin2;
+        float fCos3 = (float) Math.cos(d3);
+        float fSin3 = (float) Math.sin(d3);
+        float f4 = fCos * fSin2;
+        float f5 = fSin * fSin2;
+        fArr[i] = fCos2 * fCos3;
+        fArr[i + 1] = (-fCos2) * fSin3;
+        fArr[i + 2] = fSin2;
         fArr[i + 3] = 0.0f;
-        fArr[i + 4] = (f5 * cos3) + (cos * sin3);
-        fArr[i + 5] = ((-f5) * sin3) + (cos * cos3);
-        fArr[i + 6] = (-sin) * cos2;
+        fArr[i + 4] = (f5 * fCos3) + (fCos * fSin3);
+        fArr[i + 5] = ((-f5) * fSin3) + (fCos * fCos3);
+        fArr[i + 6] = (-fSin) * fCos2;
         fArr[i + 7] = 0.0f;
-        fArr[i + 8] = ((-f4) * cos3) + (sin * sin3);
-        fArr[i + 9] = (f4 * sin3) + (sin * cos3);
-        fArr[i + 10] = cos * cos2;
+        fArr[i + 8] = ((-f4) * fCos3) + (fSin * fSin3);
+        fArr[i + 9] = (f4 * fSin3) + (fSin * fCos3);
+        fArr[i + 10] = fCos * fCos2;
         fArr[i + 11] = 0.0f;
         fArr[i + 12] = 0.0f;
         fArr[i + 13] = 0.0f;

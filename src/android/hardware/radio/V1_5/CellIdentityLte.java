@@ -38,13 +38,13 @@ public final class CellIdentityLte {
 
     public static final ArrayList<CellIdentityLte> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentityLte> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 160, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 160, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityLte cellIdentityLte = new CellIdentityLte();
-            cellIdentityLte.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 160);
+            cellIdentityLte.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 160);
             arrayList.add(cellIdentityLte);
         }
         return arrayList;
@@ -53,21 +53,21 @@ public final class CellIdentityLte {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.base.readEmbeddedFromParcel(hwParcel, hwBlob, j);
         int int32 = hwBlob.getInt32(96 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 88, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 88, true);
         this.additionalPlmns.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.additionalPlmns.add(string);
         }
         this.optionalCsgInfo.readEmbeddedFromParcel(hwParcel, hwBlob, 104 + j);
         int int322 = hwBlob.getInt32(152 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 144, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 144, true);
         this.bands.clear();
         for (int i3 = 0; i3 < int322; i3++) {
-            this.bands.add(Integer.valueOf(readEmbeddedBuffer2.getInt32(i3 * 4)));
+            this.bands.add(Integer.valueOf(embeddedBuffer2.getInt32(i3 * 4)));
         }
     }
 

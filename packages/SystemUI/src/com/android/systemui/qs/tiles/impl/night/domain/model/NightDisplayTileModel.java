@@ -5,11 +5,9 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.time.LocalTime;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface NightDisplayTileModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AutoModeCustom implements NightDisplayTileModel {
         public final LocalTime endTime;
         public final boolean is24HourFormat;
@@ -37,11 +35,11 @@ public interface NightDisplayTileModel {
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.isActivated) * 31, 31, this.isEnrolledInForcedNightDisplayAutoMode);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.isActivated) * 31, 31, this.isEnrolledInForcedNightDisplayAutoMode);
             LocalTime localTime = this.startTime;
-            int hashCode = (m + (localTime == null ? 0 : localTime.hashCode())) * 31;
+            int iHashCode = (iM + (localTime == null ? 0 : localTime.hashCode())) * 31;
             LocalTime localTime2 = this.endTime;
-            return Boolean.hashCode(this.is24HourFormat) + ((hashCode + (localTime2 != null ? localTime2.hashCode() : 0)) * 31);
+            return Boolean.hashCode(this.is24HourFormat) + ((iHashCode + (localTime2 != null ? localTime2.hashCode() : 0)) * 31);
         }
 
         @Override // com.android.systemui.qs.tiles.impl.night.domain.model.NightDisplayTileModel
@@ -70,7 +68,6 @@ public interface NightDisplayTileModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AutoModeOff implements NightDisplayTileModel {
         public final boolean isActivated;
         public final boolean isEnrolledInForcedNightDisplayAutoMode;
@@ -110,7 +107,6 @@ public interface NightDisplayTileModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AutoModeTwilight implements NightDisplayTileModel {
         public final boolean isActivated;
         public final boolean isEnrolledInForcedNightDisplayAutoMode;

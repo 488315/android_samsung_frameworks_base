@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class AndroidComposeView$focusOwner$4 extends FunctionReferenceImpl implements Function0 {
     public AndroidComposeView$focusOwner$4(Object obj) {
@@ -21,9 +20,9 @@ final /* synthetic */ class AndroidComposeView$focusOwner$4 extends FunctionRefe
         if (androidComposeView.isFocused() || (!ComposeUiFlags.isViewFocusFixEnabled && androidComposeView.hasFocus())) {
             androidComposeView.clearFocus();
         } else if (androidComposeView.hasFocus()) {
-            View findFocus = androidComposeView.findFocus();
-            if (findFocus != null) {
-                findFocus.clearFocus();
+            View viewFindFocus = androidComposeView.findFocus();
+            if (viewFindFocus != null) {
+                viewFindFocus.clearFocus();
             }
             androidComposeView.clearFocus();
         }

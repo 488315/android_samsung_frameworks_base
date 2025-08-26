@@ -38,11 +38,11 @@ final class RequiredValidators extends InternalValidator {
     @Override // android.service.autofill.InternalValidator
     public boolean isValid(ValueFinder valueFinder) {
         for (InternalValidator internalValidator : this.mValidators) {
-            boolean isValid = internalValidator.isValid(valueFinder);
+            boolean zIsValid = internalValidator.isValid(valueFinder);
             if (Helper.sDebug) {
-                Log.d(TAG, "isValid(" + internalValidator + "): " + isValid);
+                Log.d(TAG, "isValid(" + internalValidator + "): " + zIsValid);
             }
-            if (!isValid) {
+            if (!zIsValid) {
                 return false;
             }
         }

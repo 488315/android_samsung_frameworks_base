@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.util.Comparator;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WifiEntry$$ExternalSyntheticLambda1 implements Function {
     public final /* synthetic */ int $r8$classId;
@@ -13,8 +12,8 @@ public final /* synthetic */ class WifiEntry$$ExternalSyntheticLambda1 implement
     @Override // java.util.function.Function
     public final Object apply(Object obj) {
         int i;
-        r2 = 0;
-        r2 = 0;
+        i = 0;
+        i = 0;
         int i2 = 0;
         switch (this.$r8$classId) {
             case 0:

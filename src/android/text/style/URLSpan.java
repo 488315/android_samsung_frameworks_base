@@ -50,9 +50,9 @@ public class URLSpan extends ClickableSpan implements ParcelableSpan {
 
     @Override // android.text.style.ClickableSpan
     public void onClick(View view) {
-        Uri parse = Uri.parse(getURL());
+        Uri uri = Uri.parse(getURL());
         Context context = view.getContext();
-        Intent intent = new Intent("android.intent.action.VIEW", parse);
+        Intent intent = new Intent("android.intent.action.VIEW", uri);
         if (!(context instanceof Activity)) {
             intent.setFlags(268435456);
         }

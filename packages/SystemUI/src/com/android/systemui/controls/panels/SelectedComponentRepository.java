@@ -5,11 +5,9 @@ import com.android.systemui.controls.ui.SelectedItem;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface SelectedComponentRepository {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SelectedComponent {
         public final ComponentName componentName;
         public final boolean isPanel;
@@ -33,9 +31,9 @@ public interface SelectedComponentRepository {
         }
 
         public final int hashCode() {
-            int hashCode = this.name.hashCode() * 31;
+            int iHashCode = this.name.hashCode() * 31;
             ComponentName componentName = this.componentName;
-            return Boolean.hashCode(this.isPanel) + ((hashCode + (componentName == null ? 0 : componentName.hashCode())) * 31);
+            return Boolean.hashCode(this.isPanel) + ((iHashCode + (componentName == null ? 0 : componentName.hashCode())) * 31);
         }
 
         public final String toString() {

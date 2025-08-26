@@ -32,16 +32,15 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LargeTileView extends QSTileView implements LaunchableView {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final SecQSCommonTileView commonTileView;
     public final FrameLayout iconFrame;
     public final QSIconViewImpl iconView;
+    public final boolean isNoBgTile;
     public final LaunchableViewDelegate launchableViewDelegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,20 +78,20 @@ public final class LargeTileView extends QSTileView implements LaunchableView {
         this.commonTileView.init(qSTile, this);
         this.iconFrame.setBackground(null);
         this.iconView.setBackground(null);
-        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.LargeTileView$init$1
+        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.LargeTileView.init.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSTile qSTile2 = QSTile.this;
+                QSTile qSTile2 = qSTile;
                 Expandable.Companion companion = Expandable.Companion;
                 LargeTileView largeTileView = this;
                 companion.getClass();
                 qSTile2.secondaryClick(new Expandable$Companion$fromView$1(largeTileView));
             }
         });
-        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.LargeTileView$init$2
+        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.LargeTileView.init.2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSTile qSTile2 = QSTile.this;
+                QSTile qSTile2 = qSTile;
                 Expandable.Companion companion = Expandable.Companion;
                 LargeTileView largeTileView = this;
                 companion.getClass();
@@ -100,6 +99,13 @@ public final class LargeTileView extends QSTileView implements LaunchableView {
                 return true;
             }
         });
+        if (this.isNoBgTile) {
+            for (ViewGroup viewGroup : Arrays.asList(this.iconView, this.iconFrame)) {
+                viewGroup.setClickable(false);
+                viewGroup.setFocusable(false);
+                viewGroup.setLongClickable(false);
+            }
+        }
     }
 
     @Override // android.view.View
@@ -120,7 +126,7 @@ public final class LargeTileView extends QSTileView implements LaunchableView {
 
     @Override // com.android.systemui.plugins.qs.QSTileView
     public final void onStateChanged(final QSTile.State state) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.LargeTileView$onStateChanged$1
+        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.LargeTileView.onStateChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 SecQSCommonTileView secQSCommonTileView = LargeTileView.this.commonTileView;
@@ -137,7 +143,7 @@ public final class LargeTileView extends QSTileView implements LaunchableView {
     }
 
     @Override // android.view.View
-    public final String toString() {
+    public final String toString() throws Resources.NotFoundException {
         TextView textView = (TextView) findViewById(R.id.tile_label);
         if (textView == null) {
             return super.toString();
@@ -148,22 +154,23 @@ public final class LargeTileView extends QSTileView implements LaunchableView {
         String idSting3 = viewUtil.toIdSting(this.iconFrame);
         String idSting4 = viewUtil.toIdSting(this.iconView);
         String shortIdSting = viewUtil.toShortIdSting(this.commonTileView);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LargeTileView{", idSting, ", label = ", idSting2, ", iconFrame = ");
-        MoveResult$$ExternalSyntheticOutline0.m(m, idSting3, ", icon = ", idSting4, ", common = ");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, shortIdSting, "}");
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("LargeTileView{", idSting, ", label = ", idSting2, ", iconFrame = ");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, idSting3, ", icon = ", idSting4, ", common = ");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, shortIdSting, "}");
     }
 
     public LargeTileView(Context context, SecQSPanelResourcePicker secQSPanelResourcePicker, boolean z) {
         super(context);
+        this.isNoBgTile = z;
         QSIconViewImpl qSIconViewImpl = new QSIconViewImpl(context, z);
         this.iconView = qSIconViewImpl;
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.qs.tileimpl.LargeTileView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
                 int i = LargeTileView.$r8$clinit;
-                LargeTileView.this.setVisibility(intValue);
+                this.f$0.setVisibility(iIntValue);
                 return Unit.INSTANCE;
             }
         });

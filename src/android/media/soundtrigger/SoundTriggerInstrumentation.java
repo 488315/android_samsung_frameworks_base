@@ -299,7 +299,7 @@ public final class SoundTriggerInstrumentation {
                 SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundTriggerInstrumentation.Injection.this.lambda$onSoundModelLoaded$0(modelSession);
+                        this.f$0.lambda$onSoundModelLoaded$0(modelSession);
                     }
                 });
             }
@@ -338,7 +338,7 @@ public final class SoundTriggerInstrumentation {
                 modelSession.wrap(new Consumer() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ((SoundTriggerInstrumentation.ModelCallback) obj).onRecognitionStarted(SoundTriggerInstrumentation.RecognitionSession.this);
+                        ((SoundTriggerInstrumentation.ModelCallback) obj).onRecognitionStarted(recognitionSession);
                     }
                 });
             }
@@ -387,7 +387,7 @@ public final class SoundTriggerInstrumentation {
                 SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundTriggerInstrumentation.Injection.this.lambda$onRestarted$5();
+                        this.f$0.lambda$onRestarted$5();
                     }
                 });
             }
@@ -407,7 +407,7 @@ public final class SoundTriggerInstrumentation {
                 SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundTriggerInstrumentation.Injection.this.lambda$onFrameworkDetached$6();
+                        this.f$0.lambda$onFrameworkDetached$6();
                     }
                 });
             }
@@ -428,7 +428,7 @@ public final class SoundTriggerInstrumentation {
                 SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundTriggerInstrumentation.Injection.this.lambda$onClientAttached$7();
+                        this.f$0.lambda$onClientAttached$7();
                     }
                 });
             }
@@ -449,7 +449,7 @@ public final class SoundTriggerInstrumentation {
                 SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SoundTriggerInstrumentation.Injection.this.lambda$onClientDetached$8();
+                        this.f$0.lambda$onClientDetached$8();
                     }
                 });
             }
@@ -470,7 +470,7 @@ public final class SoundTriggerInstrumentation {
             SoundTriggerInstrumentation.this.mGlobalCallbackExecutor.execute(new Runnable() { // from class: android.media.soundtrigger.SoundTriggerInstrumentation$Injection$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SoundTriggerInstrumentation.Injection.this.lambda$onPreempted$9();
+                    this.f$0.lambda$onPreempted$9();
                 }
             });
         }

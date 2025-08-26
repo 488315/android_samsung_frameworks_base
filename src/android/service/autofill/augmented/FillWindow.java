@@ -61,9 +61,7 @@ public final class FillWindow implements AutoCloseable {
             view.setOnTouchListener(new View.OnTouchListener() { // from class: android.service.autofill.augmented.FillWindow$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view2, MotionEvent motionEvent) {
-                    boolean lambda$update$0;
-                    lambda$update$0 = FillWindow.this.lambda$update$0(view2, motionEvent);
-                    return lambda$update$0;
+                    return this.f$0.lambda$update$0(view2, motionEvent);
                 }
             });
             this.mShowing = false;
@@ -150,14 +148,14 @@ public final class FillWindow implements AutoCloseable {
                         } else {
                             this.mWm.updateViewLayout(this.mFillView, layoutParams);
                         }
-                    } catch (IllegalStateException unused) {
+                    } catch (WindowManager.BadTokenException unused) {
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(TAG, "Exception showing window.");
+                            Log.d(TAG, "Filed with token " + layoutParams.token + " gone.");
                         }
                     }
-                } catch (WindowManager.BadTokenException unused2) {
+                } catch (IllegalStateException unused2) {
                     if (AugmentedAutofillService.sDebug) {
-                        Log.d(TAG, "Filed with token " + layoutParams.token + " gone.");
+                        Log.d(TAG, "Exception showing window.");
                     }
                 }
             }

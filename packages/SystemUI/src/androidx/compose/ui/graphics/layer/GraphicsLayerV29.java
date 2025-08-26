@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GraphicsLayerV29 implements GraphicsLayerImpl {
     public float alpha;
@@ -66,7 +65,7 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
         renderNode.setClipToBounds(false);
         CompositingStrategy.Companion companion = CompositingStrategy.Companion;
         companion.getClass();
-        m560applyCompositingStrategyZ1X6vPc(renderNode, 0);
+        m562applyCompositingStrategyZ1X6vPc(renderNode, 0);
         this.alpha = 1.0f;
         BlendMode.Companion.getClass();
         this.blendMode = BlendMode.SrcOver;
@@ -102,7 +101,7 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
     }
 
     /* renamed from: applyCompositingStrategy-Z1X6vPc, reason: not valid java name */
-    public final void m560applyCompositingStrategyZ1X6vPc(RenderNode renderNode, int i) {
+    public final void m562applyCompositingStrategyZ1X6vPc(RenderNode renderNode, int i) {
         CompositingStrategy.Companion companion = CompositingStrategy.Companion;
         companion.getClass();
         if (i == CompositingStrategy.Offscreen) {
@@ -149,13 +148,13 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: getAmbientShadowColor-0d7_KjU */
-    public final long mo549getAmbientShadowColor0d7_KjU() {
+    public final long mo551getAmbientShadowColor0d7_KjU() {
         return this.ambientShadowColor;
     }
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: getBlendMode-0nO6VwU */
-    public final int mo550getBlendMode0nO6VwU() {
+    public final int mo552getBlendMode0nO6VwU() {
         return this.blendMode;
     }
 
@@ -171,7 +170,7 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: getCompositingStrategy-ke2Ky5w */
-    public final int mo551getCompositingStrategyke2Ky5w() {
+    public final int mo553getCompositingStrategyke2Ky5w() {
         return this.compositingStrategy;
     }
 
@@ -217,7 +216,7 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: getSpotShadowColor-0d7_KjU */
-    public final long mo552getSpotShadowColor0d7_KjU() {
+    public final long mo554getSpotShadowColor0d7_KjU() {
         return this.spotShadowColor;
     }
 
@@ -234,19 +233,19 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     public final void record(Density density, LayoutDirection layoutDirection, GraphicsLayer graphicsLayer, Function1 function1) {
         CanvasDrawScope canvasDrawScope = this.canvasDrawScope;
-        RecordingCanvas beginRecording = this.renderNode.beginRecording();
+        RecordingCanvas recordingCanvasBeginRecording = this.renderNode.beginRecording();
         try {
             CanvasHolder canvasHolder = this.canvasHolder;
             AndroidCanvas androidCanvas = canvasHolder.androidCanvas;
             android.graphics.Canvas canvas = androidCanvas.internalCanvas;
-            androidCanvas.internalCanvas = beginRecording;
+            androidCanvas.internalCanvas = recordingCanvasBeginRecording;
             CanvasDrawScope$drawContext$1 canvasDrawScope$drawContext$1 = canvasDrawScope.drawContext;
             canvasDrawScope$drawContext$1.setDensity(density);
             canvasDrawScope$drawContext$1.setLayoutDirection(layoutDirection);
             canvasDrawScope$drawContext$1.graphicsLayer = graphicsLayer;
-            canvasDrawScope$drawContext$1.m527setSizeuvyYCjk(this.size);
+            canvasDrawScope$drawContext$1.m529setSizeuvyYCjk(this.size);
             canvasDrawScope$drawContext$1.setCanvas(androidCanvas);
-            ((GraphicsLayer$clipDrawBlock$1) function1).mo779invoke(canvasDrawScope);
+            ((GraphicsLayer$clipDrawBlock$1) function1).mo781invoke(canvasDrawScope);
             canvasHolder.androidCanvas.internalCanvas = canvas;
         } finally {
             this.renderNode.endRecording();
@@ -261,21 +260,21 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setAmbientShadowColor-8_81llA */
-    public final void mo553setAmbientShadowColor8_81llA(long j) {
+    public final void mo555setAmbientShadowColor8_81llA(long j) {
         this.ambientShadowColor = j;
-        this.renderNode.setAmbientShadowColor(ColorKt.m467toArgb8_81llA(j));
+        this.renderNode.setAmbientShadowColor(ColorKt.m469toArgb8_81llA(j));
     }
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setBlendMode-s9anfk8 */
-    public final void mo554setBlendModes9anfk8(int i) {
+    public final void mo556setBlendModes9anfk8(int i) {
         this.blendMode = i;
         Paint paint = this.layerPaint;
         if (paint == null) {
             paint = new Paint();
             this.layerPaint = paint;
         }
-        paint.setBlendMode(AndroidBlendMode_androidKt.m422toAndroidBlendModes9anfk8(i));
+        paint.setBlendMode(AndroidBlendMode_androidKt.m424toAndroidBlendModes9anfk8(i));
         updateLayerProperties$1();
     }
 
@@ -305,14 +304,14 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setCompositingStrategy-Wpw9cng */
-    public final void mo555setCompositingStrategyWpw9cng(int i) {
+    public final void mo557setCompositingStrategyWpw9cng(int i) {
         this.compositingStrategy = i;
         updateLayerProperties$1();
     }
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setOutline-O0kMr_c */
-    public final void mo556setOutlineO0kMr_c(Outline outline, long j) {
+    public final void mo558setOutlineO0kMr_c(Outline outline, long j) {
         this.renderNode.setOutline(outline);
         this.outlineIsProvided = outline != null;
         applyClip$1();
@@ -320,7 +319,7 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setPivotOffset-k-4lQ0M */
-    public final void mo557setPivotOffsetk4lQ0M(long j) {
+    public final void mo559setPivotOffsetk4lQ0M(long j) {
         if ((9223372034707292159L & j) == 9205357640488583168L) {
             this.renderNode.resetPivot();
         } else {
@@ -331,9 +330,9 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setPosition-H0pRuoY */
-    public final void mo558setPositionH0pRuoY(int i, int i2, long j) {
+    public final void mo560setPositionH0pRuoY(int i, int i2, long j) {
         this.renderNode.setPosition(i, i2, ((int) (j >> 32)) + i, ((int) (4294967295L & j)) + i2);
-        this.size = IntSizeKt.m864toSizeozmzZPI(j);
+        this.size = IntSizeKt.m866toSizeozmzZPI(j);
     }
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
@@ -383,9 +382,9 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
     /* renamed from: setSpotShadowColor-8_81llA */
-    public final void mo559setSpotShadowColor8_81llA(long j) {
+    public final void mo561setSpotShadowColor8_81llA(long j) {
         this.spotShadowColor = j;
-        this.renderNode.setSpotShadowColor(ColorKt.m467toArgb8_81llA(j));
+        this.renderNode.setSpotShadowColor(ColorKt.m469toArgb8_81llA(j));
     }
 
     @Override // androidx.compose.ui.graphics.layer.GraphicsLayerImpl
@@ -409,13 +408,13 @@ public final class GraphicsLayerV29 implements GraphicsLayerImpl {
             int i3 = this.blendMode;
             BlendMode.Companion.getClass();
             if (i3 == BlendMode.SrcOver && this.colorFilter == null && this.renderEffect == null) {
-                m560applyCompositingStrategyZ1X6vPc(this.renderNode, this.compositingStrategy);
+                m562applyCompositingStrategyZ1X6vPc(this.renderNode, this.compositingStrategy);
                 return;
             }
         }
         RenderNode renderNode = this.renderNode;
         companion.getClass();
-        m560applyCompositingStrategyZ1X6vPc(renderNode, i2);
+        m562applyCompositingStrategyZ1X6vPc(renderNode, i2);
     }
 
     public /* synthetic */ GraphicsLayerV29(long j, CanvasHolder canvasHolder, CanvasDrawScope canvasDrawScope, int i, DefaultConstructorMarker defaultConstructorMarker) {

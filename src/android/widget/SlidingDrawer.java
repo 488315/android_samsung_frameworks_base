@@ -2,6 +2,7 @@ package android.widget;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -95,18 +96,18 @@ public class SlidingDrawer extends ViewGroup {
                 SlidingDrawer.this.doAnimation();
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SlidingDrawer, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.SlidingDrawer, attributeSet, obtainStyledAttributes, i, i2);
-        this.mVertical = obtainStyledAttributes.getInt(0, 1) == 1;
-        this.mBottomOffset = (int) obtainStyledAttributes.getDimension(1, 0.0f);
-        this.mTopOffset = (int) obtainStyledAttributes.getDimension(2, 0.0f);
-        this.mAllowSingleTap = obtainStyledAttributes.getBoolean(3, true);
-        this.mAnimateOnClick = obtainStyledAttributes.getBoolean(6, true);
-        int resourceId = obtainStyledAttributes.getResourceId(4, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SlidingDrawer, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.SlidingDrawer, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mVertical = typedArrayObtainStyledAttributes.getInt(0, 1) == 1;
+        this.mBottomOffset = (int) typedArrayObtainStyledAttributes.getDimension(1, 0.0f);
+        this.mTopOffset = (int) typedArrayObtainStyledAttributes.getDimension(2, 0.0f);
+        this.mAllowSingleTap = typedArrayObtainStyledAttributes.getBoolean(3, true);
+        this.mAnimateOnClick = typedArrayObtainStyledAttributes.getBoolean(6, true);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(4, 0);
         if (resourceId == 0) {
             throw new IllegalArgumentException("The handle attribute is required and must refer to a valid child.");
         }
-        int resourceId2 = obtainStyledAttributes.getResourceId(5, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(5, 0);
         if (resourceId2 == 0) {
             throw new IllegalArgumentException("The content attribute is required and must refer to a valid child.");
         }
@@ -122,24 +123,24 @@ public class SlidingDrawer extends ViewGroup {
         this.mMaximumMajorVelocity = (int) ((200.0f * f) + 0.5f);
         this.mMaximumAcceleration = (int) ((MAXIMUM_ACCELERATION * f) + 0.5f);
         this.mVelocityUnits = (int) ((f * 1000.0f) + 0.5f);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setAlwaysDrawnWithCacheEnabled(false);
     }
 
     @Override // android.view.View
     protected void onFinishInflate() {
-        View findViewById = findViewById(this.mHandleId);
-        this.mHandle = findViewById;
-        if (findViewById == null) {
+        View viewFindViewById = findViewById(this.mHandleId);
+        this.mHandle = viewFindViewById;
+        if (viewFindViewById == null) {
             throw new IllegalArgumentException("The handle attribute is must refer to an existing child.");
         }
-        findViewById.setOnClickListener(new DrawerToggler());
-        View findViewById2 = findViewById(this.mContentId);
-        this.mContent = findViewById2;
-        if (findViewById2 == null) {
+        viewFindViewById.setOnClickListener(new DrawerToggler());
+        View viewFindViewById2 = findViewById(this.mContentId);
+        this.mContent = viewFindViewById2;
+        if (viewFindViewById2 == null) {
             throw new IllegalArgumentException("The content attribute is must refer to an existing child.");
         }
-        findViewById2.setVisibility(8);
+        viewFindViewById2.setVisibility(8);
     }
 
     @Override // android.view.View
@@ -190,7 +191,7 @@ public class SlidingDrawer extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int i5;
         int i6;
         if (this.mTracking) {
@@ -218,7 +219,7 @@ public class SlidingDrawer extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup
-    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         if (this.mLocked) {
             return false;
         }
@@ -253,21 +254,90 @@ public class SlidingDrawer extends ViewGroup {
         return true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001a, code lost:
-    
-        if (r0 != 3) goto L85;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0034  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onTouchEvent(android.view.MotionEvent r12) {
-        /*
-            Method dump skipped, instructions count: 272
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SlidingDrawer.onTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        boolean z;
+        if (this.mLocked) {
+            return true;
+        }
+        if (this.mTracking) {
+            this.mVelocityTracker.addMovement(motionEvent);
+            int action = motionEvent.getAction();
+            if (action == 1) {
+                VelocityTracker velocityTracker = this.mVelocityTracker;
+                velocityTracker.computeCurrentVelocity(this.mVelocityUnits);
+                float yVelocity = velocityTracker.getYVelocity();
+                float xVelocity = velocityTracker.getXVelocity();
+                boolean z2 = this.mVertical;
+                if (z2) {
+                    z = yVelocity < 0.0f;
+                    if (xVelocity < 0.0f) {
+                        xVelocity = -xVelocity;
+                    }
+                    int i = this.mMaximumMinorVelocity;
+                    if (xVelocity > i) {
+                        xVelocity = i;
+                    }
+                } else {
+                    z = xVelocity < 0.0f;
+                    if (yVelocity < 0.0f) {
+                        yVelocity = -yVelocity;
+                    }
+                    int i2 = this.mMaximumMinorVelocity;
+                    if (yVelocity > i2) {
+                        yVelocity = i2;
+                    }
+                }
+                float fHypot = (float) Math.hypot(xVelocity, yVelocity);
+                if (z) {
+                    fHypot = -fHypot;
+                }
+                int top = this.mHandle.getTop();
+                int left = this.mHandle.getLeft();
+                if (Math.abs(fHypot) < this.mMaximumTapVelocity) {
+                    boolean z3 = this.mExpanded;
+                    if (!z2 ? !((!z3 || left >= this.mTapThreshold + this.mTopOffset) && (z3 || left <= (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - this.mTapThreshold)) : !((!z3 || top >= this.mTapThreshold + this.mTopOffset) && (z3 || top <= (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight) - this.mTapThreshold))) {
+                        if (this.mAllowSingleTap) {
+                            playSoundEffect(0);
+                            if (this.mExpanded) {
+                                if (!z2) {
+                                    top = left;
+                                }
+                                animateClose(top, true);
+                            } else {
+                                if (!z2) {
+                                    top = left;
+                                }
+                                animateOpen(top, true);
+                            }
+                        } else {
+                            if (!z2) {
+                                top = left;
+                            }
+                            performFling(top, fHypot, false, true);
+                        }
+                    } else {
+                        if (!z2) {
+                            top = left;
+                        }
+                        performFling(top, fHypot, false, true);
+                    }
+                } else {
+                    if (!z2) {
+                        top = left;
+                    }
+                    performFling(top, fHypot, false, true);
+                }
+            } else if (action == 2) {
+                moveHandle(((int) (this.mVertical ? motionEvent.getY() : motionEvent.getX())) - this.mTouchDelta);
+            } else if (action == 3) {
+            }
+        }
+        return this.mTracking || this.mAnimating || super.onTouchEvent(motionEvent);
     }
 
     private void animateClose(int i, boolean z) {
@@ -280,112 +350,52 @@ public class SlidingDrawer extends ViewGroup {
         performFling(i, -this.mMaximumAcceleration, true, z);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x0061, code lost:
-    
-        if (r5 > (-r3.mMaximumMajorVelocity)) goto L33;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x006f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void performFling(int r4, float r5, boolean r6, boolean r7) {
-        /*
-            r3 = this;
-            float r0 = (float) r4
-            r3.mAnimationPosition = r0
-            r3.mAnimatedVelocity = r5
-            boolean r0 = r3.mExpanded
-            r1 = 0
-            if (r0 == 0) goto L41
-            if (r6 != 0) goto L35
-            int r6 = r3.mMaximumMajorVelocity
-            float r0 = (float) r6
-            int r0 = (r5 > r0 ? 1 : (r5 == r0 ? 0 : -1))
-            if (r0 > 0) goto L35
-            int r0 = r3.mTopOffset
-            boolean r2 = r3.mVertical
-            if (r2 == 0) goto L1c
-            int r2 = r3.mHandleHeight
-            goto L1e
-        L1c:
-            int r2 = r3.mHandleWidth
-        L1e:
-            int r0 = r0 + r2
-            if (r4 <= r0) goto L28
-            int r4 = -r6
-            float r4 = (float) r4
-            int r4 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r4 <= 0) goto L28
-            goto L35
-        L28:
-            int r4 = r3.mMaximumAcceleration
-            int r4 = -r4
-            float r4 = (float) r4
-            r3.mAnimatedAcceleration = r4
-            int r4 = (r5 > r1 ? 1 : (r5 == r1 ? 0 : -1))
-            if (r4 <= 0) goto L7b
-            r3.mAnimatedVelocity = r1
-            goto L7b
-        L35:
-            int r4 = r3.mMaximumAcceleration
-            float r4 = (float) r4
-            r3.mAnimatedAcceleration = r4
-            int r4 = (r5 > r1 ? 1 : (r5 == r1 ? 0 : -1))
-            if (r4 >= 0) goto L7b
-            r3.mAnimatedVelocity = r1
-            goto L7b
-        L41:
-            if (r6 != 0) goto L6f
-            int r6 = r3.mMaximumMajorVelocity
-            float r6 = (float) r6
-            int r6 = (r5 > r6 ? 1 : (r5 == r6 ? 0 : -1))
-            if (r6 > 0) goto L63
-            boolean r6 = r3.mVertical
-            if (r6 == 0) goto L53
-            int r6 = r3.getHeight()
-            goto L57
-        L53:
-            int r6 = r3.getWidth()
-        L57:
-            int r6 = r6 / 2
-            if (r4 <= r6) goto L6f
-            int r4 = r3.mMaximumMajorVelocity
-            int r4 = -r4
-            float r4 = (float) r4
-            int r4 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r4 <= 0) goto L6f
-        L63:
-            int r4 = r3.mMaximumAcceleration
-            float r4 = (float) r4
-            r3.mAnimatedAcceleration = r4
-            int r4 = (r5 > r1 ? 1 : (r5 == r1 ? 0 : -1))
-            if (r4 >= 0) goto L7b
-            r3.mAnimatedVelocity = r1
-            goto L7b
-        L6f:
-            int r4 = r3.mMaximumAcceleration
-            int r4 = -r4
-            float r4 = (float) r4
-            r3.mAnimatedAcceleration = r4
-            int r4 = (r5 > r1 ? 1 : (r5 == r1 ? 0 : -1))
-            if (r4 <= 0) goto L7b
-            r3.mAnimatedVelocity = r1
-        L7b:
-            long r4 = android.os.SystemClock.uptimeMillis()
-            r3.mAnimationLastTime = r4
-            r0 = 16
-            long r4 = r4 + r0
-            r3.mCurrentAnimationTime = r4
-            r4 = 1
-            r3.mAnimating = r4
-            java.lang.Runnable r4 = r3.mSlidingRunnable
-            r3.removeCallbacks(r4)
-            java.lang.Runnable r4 = r3.mSlidingRunnable
-            r3.postDelayed(r4, r0)
-            r3.stopTracking(r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SlidingDrawer.performFling(int, float, boolean, boolean):void");
+    private void performFling(int i, float f, boolean z, boolean z2) {
+        this.mAnimationPosition = i;
+        this.mAnimatedVelocity = f;
+        if (this.mExpanded) {
+            if (!z) {
+                if (f <= this.mMaximumMajorVelocity) {
+                    if (i > this.mTopOffset + (this.mVertical ? this.mHandleHeight : this.mHandleWidth) && f > (-r6)) {
+                        this.mAnimatedAcceleration = this.mMaximumAcceleration;
+                        if (f < 0.0f) {
+                            this.mAnimatedVelocity = 0.0f;
+                        }
+                    } else {
+                        this.mAnimatedAcceleration = -this.mMaximumAcceleration;
+                        if (f > 0.0f) {
+                            this.mAnimatedVelocity = 0.0f;
+                        }
+                    }
+                }
+            }
+        } else if (!z) {
+            if (f <= this.mMaximumMajorVelocity) {
+                if (i <= (this.mVertical ? getHeight() : getWidth()) / 2 || f <= (-this.mMaximumMajorVelocity)) {
+                }
+            }
+            this.mAnimatedAcceleration = this.mMaximumAcceleration;
+            if (f < 0.0f) {
+                this.mAnimatedVelocity = 0.0f;
+            }
+        } else {
+            this.mAnimatedAcceleration = -this.mMaximumAcceleration;
+            if (f > 0.0f) {
+                this.mAnimatedVelocity = 0.0f;
+            }
+        }
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        this.mAnimationLastTime = jUptimeMillis;
+        this.mCurrentAnimationTime = jUptimeMillis + 16;
+        this.mAnimating = true;
+        removeCallbacks(this.mSlidingRunnable);
+        postDelayed(this.mSlidingRunnable, 16L);
+        stopTracking(z2);
     }
 
     private void prepareTracking(int i) {
@@ -409,9 +419,9 @@ public class SlidingDrawer extends ViewGroup {
             moveHandle((int) f);
             this.mAnimating = true;
             removeCallbacks(this.mSlidingRunnable);
-            long uptimeMillis = SystemClock.uptimeMillis();
-            this.mAnimationLastTime = uptimeMillis;
-            this.mCurrentAnimationTime = uptimeMillis + 16;
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            this.mAnimationLastTime = jUptimeMillis;
+            this.mCurrentAnimationTime = jUptimeMillis + 16;
             this.mAnimating = true;
             return;
         }
@@ -481,7 +491,7 @@ public class SlidingDrawer extends ViewGroup {
         invalidate(rect4);
     }
 
-    private void prepareContent() {
+    private void prepareContent() throws Resources.NotFoundException {
         if (this.mAnimating) {
             return;
         }
@@ -541,14 +551,14 @@ public class SlidingDrawer extends ViewGroup {
     }
 
     private void incrementAnimation() {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        float f = (uptimeMillis - this.mAnimationLastTime) / 1000.0f;
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        float f = (jUptimeMillis - this.mAnimationLastTime) / 1000.0f;
         float f2 = this.mAnimationPosition;
         float f3 = this.mAnimatedVelocity;
         float f4 = this.mAnimatedAcceleration;
         this.mAnimationPosition = f2 + (f3 * f) + (0.5f * f4 * f * f);
         this.mAnimatedVelocity = f3 + (f4 * f);
-        this.mAnimationLastTime = uptimeMillis;
+        this.mAnimationLastTime = jUptimeMillis;
     }
 
     public void toggle() {
@@ -561,7 +571,7 @@ public class SlidingDrawer extends ViewGroup {
         requestLayout();
     }
 
-    public void animateToggle() {
+    public void animateToggle() throws Resources.NotFoundException {
         if (!this.mExpanded) {
             animateOpen();
         } else {
@@ -582,7 +592,7 @@ public class SlidingDrawer extends ViewGroup {
         requestLayout();
     }
 
-    public void animateClose() {
+    public void animateClose() throws Resources.NotFoundException {
         prepareContent();
         OnDrawerScrollListener onDrawerScrollListener = this.mOnDrawerScrollListener;
         if (onDrawerScrollListener != null) {
@@ -594,7 +604,7 @@ public class SlidingDrawer extends ViewGroup {
         }
     }
 
-    public void animateOpen() {
+    public void animateOpen() throws Resources.NotFoundException {
         prepareContent();
         OnDrawerScrollListener onDrawerScrollListener = this.mOnDrawerScrollListener;
         if (onDrawerScrollListener != null) {
@@ -679,7 +689,7 @@ public class SlidingDrawer extends ViewGroup {
         }
 
         @Override // android.view.View.OnClickListener
-        public void onClick(View view) {
+        public void onClick(View view) throws Resources.NotFoundException {
             if (SlidingDrawer.this.mLocked) {
                 return;
             }

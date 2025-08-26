@@ -71,36 +71,36 @@ public class EncoderCapabilities {
     }
 
     public static int[] getOutputFileFormats() {
-        int native_get_num_file_formats = native_get_num_file_formats();
-        if (native_get_num_file_formats == 0) {
+        int iNative_get_num_file_formats = native_get_num_file_formats();
+        if (iNative_get_num_file_formats == 0) {
             return null;
         }
-        int[] iArr = new int[native_get_num_file_formats];
-        for (int i = 0; i < native_get_num_file_formats; i++) {
+        int[] iArr = new int[iNative_get_num_file_formats];
+        for (int i = 0; i < iNative_get_num_file_formats; i++) {
             iArr[i] = native_get_file_format(i);
         }
         return iArr;
     }
 
     public static List<VideoEncoderCap> getVideoEncoders() {
-        int native_get_num_video_encoders = native_get_num_video_encoders();
-        if (native_get_num_video_encoders == 0) {
+        int iNative_get_num_video_encoders = native_get_num_video_encoders();
+        if (iNative_get_num_video_encoders == 0) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < native_get_num_video_encoders; i++) {
+        for (int i = 0; i < iNative_get_num_video_encoders; i++) {
             arrayList.add(native_get_video_encoder_cap(i));
         }
         return arrayList;
     }
 
     public static List<AudioEncoderCap> getAudioEncoders() {
-        int native_get_num_audio_encoders = native_get_num_audio_encoders();
-        if (native_get_num_audio_encoders == 0) {
+        int iNative_get_num_audio_encoders = native_get_num_audio_encoders();
+        if (iNative_get_num_audio_encoders == 0) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < native_get_num_audio_encoders; i++) {
+        for (int i = 0; i < iNative_get_num_audio_encoders; i++) {
             arrayList.add(native_get_audio_encoder_cap(i));
         }
         return arrayList;

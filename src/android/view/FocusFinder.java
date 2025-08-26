@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.util.ArrayMap;
 import android.util.ArraySet;
-import android.view.FocusFinder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -87,18 +86,18 @@ public class FocusFinder {
 
     private View findNextFocus(ViewGroup viewGroup, View view, Rect rect, int i) {
         ViewGroup effectiveRoot = getEffectiveRoot(viewGroup, view);
-        View findNextUserSpecifiedFocus = view != null ? findNextUserSpecifiedFocus(effectiveRoot, view, i) : null;
-        if (findNextUserSpecifiedFocus != null) {
-            return findNextUserSpecifiedFocus;
+        View viewFindNextUserSpecifiedFocus = view != null ? findNextUserSpecifiedFocus(effectiveRoot, view, i) : null;
+        if (viewFindNextUserSpecifiedFocus != null) {
+            return viewFindNextUserSpecifiedFocus;
         }
         ArrayList<View> arrayList = this.mTempList;
         try {
             arrayList.clear();
             effectiveRoot.addFocusables(arrayList, i);
             if (!arrayList.isEmpty()) {
-                findNextUserSpecifiedFocus = findNextFocus(effectiveRoot, view, rect, i, arrayList);
+                viewFindNextUserSpecifiedFocus = findNextFocus(effectiveRoot, view, rect, i, arrayList);
             }
-            return findNextUserSpecifiedFocus;
+            return viewFindNextUserSpecifiedFocus;
         } finally {
             arrayList.clear();
         }
@@ -127,47 +126,47 @@ public class FocusFinder {
     }
 
     public View findNextKeyboardNavigationCluster(View view, View view2, int i) {
-        View view3;
+        View viewFindNextKeyboardNavigationCluster;
         if (view2 != null) {
-            view3 = findNextUserSpecifiedKeyboardNavigationCluster(view, view2, i);
-            if (view3 != null) {
-                return view3;
+            viewFindNextKeyboardNavigationCluster = findNextUserSpecifiedKeyboardNavigationCluster(view, view2, i);
+            if (viewFindNextKeyboardNavigationCluster != null) {
+                return viewFindNextKeyboardNavigationCluster;
             }
         } else {
-            view3 = null;
+            viewFindNextKeyboardNavigationCluster = null;
         }
         ArrayList<View> arrayList = this.mTempList;
         try {
             arrayList.clear();
             view.addKeyboardNavigationClusters(arrayList, i);
             if (!arrayList.isEmpty()) {
-                view3 = findNextKeyboardNavigationCluster(view, view2, arrayList, i);
+                viewFindNextKeyboardNavigationCluster = findNextKeyboardNavigationCluster(view, view2, arrayList, i);
             }
-            return view3;
+            return viewFindNextKeyboardNavigationCluster;
         } finally {
             arrayList.clear();
         }
     }
 
     private View findNextUserSpecifiedKeyboardNavigationCluster(View view, View view2, int i) {
-        View findUserSetNextKeyboardNavigationCluster = view2.findUserSetNextKeyboardNavigationCluster(view, i);
-        if (findUserSetNextKeyboardNavigationCluster == null || !findUserSetNextKeyboardNavigationCluster.hasFocusable()) {
+        View viewFindUserSetNextKeyboardNavigationCluster = view2.findUserSetNextKeyboardNavigationCluster(view, i);
+        if (viewFindUserSetNextKeyboardNavigationCluster == null || !viewFindUserSetNextKeyboardNavigationCluster.hasFocusable()) {
             return null;
         }
-        return findUserSetNextKeyboardNavigationCluster;
+        return viewFindUserSetNextKeyboardNavigationCluster;
     }
 
     private View findNextUserSpecifiedFocus(ViewGroup viewGroup, View view, int i) {
-        View findUserSetNextFocus = view.findUserSetNextFocus(viewGroup, i);
+        View viewFindUserSetNextFocus = view.findUserSetNextFocus(viewGroup, i);
         boolean z = true;
-        View view2 = findUserSetNextFocus;
-        while (findUserSetNextFocus != null) {
-            if (findUserSetNextFocus.isFocusable() && findUserSetNextFocus.getVisibility() == 0 && (!findUserSetNextFocus.isInTouchMode() || findUserSetNextFocus.isFocusableInTouchMode())) {
-                return findUserSetNextFocus;
+        View viewFindUserSetNextFocus2 = viewFindUserSetNextFocus;
+        while (viewFindUserSetNextFocus != null) {
+            if (viewFindUserSetNextFocus.isFocusable() && viewFindUserSetNextFocus.getVisibility() == 0 && (!viewFindUserSetNextFocus.isInTouchMode() || viewFindUserSetNextFocus.isFocusableInTouchMode())) {
+                return viewFindUserSetNextFocus;
             }
-            findUserSetNextFocus = findUserSetNextFocus.findUserSetNextFocus(viewGroup, i);
+            viewFindUserSetNextFocus = viewFindUserSetNextFocus.findUserSetNextFocus(viewGroup, i);
             boolean z2 = !z;
-            if (!z && (view2 = view2.findUserSetNextFocus(viewGroup, i)) == findUserSetNextFocus) {
+            if (!z && (viewFindUserSetNextFocus2 = viewFindUserSetNextFocus2.findUserSetNextFocus(viewGroup, i)) == viewFindUserSetNextFocus) {
                 return null;
             }
             z = z2;
@@ -240,20 +239,20 @@ public class FocusFinder {
             Collections.sort(arrayList, this.mUserSpecifiedFocusComparator);
             this.mUserSpecifiedFocusComparator.recycle();
             int size = arrayList.size();
-            View view2 = null;
+            View previousFocusable = null;
             if (size < 2) {
                 return null;
             }
             boolean[] zArr = new boolean[1];
             if (i == 1) {
-                view2 = getPreviousFocusable(view, arrayList, size, zArr);
+                previousFocusable = getPreviousFocusable(view, arrayList, size, zArr);
             } else if (i == 2) {
-                view2 = getNextFocusable(view, arrayList, size, zArr);
+                previousFocusable = getNextFocusable(view, arrayList, size, zArr);
             }
             if (viewGroup != null && viewGroup.mAttachInfo != null && viewGroup == viewGroup.getRootView()) {
                 viewGroup.mAttachInfo.mNextFocusLooped = zArr[0];
             }
-            return view2 != null ? view2 : arrayList.get(size - 1);
+            return previousFocusable != null ? previousFocusable : arrayList.get(size - 1);
         } catch (Throwable th) {
             this.mUserSpecifiedFocusComparator.recycle();
             throw th;
@@ -300,12 +299,12 @@ public class FocusFinder {
     }
 
     private static View getNextFocusable(View view, ArrayList<View> arrayList, int i, boolean[] zArr) {
-        int lastIndexOf;
+        int iLastIndexOf;
         int i2;
         if (i < 2) {
             return null;
         }
-        if (view != null && (lastIndexOf = arrayList.lastIndexOf(view)) >= 0 && (i2 = lastIndexOf + 1) < i) {
+        if (view != null && (iLastIndexOf = arrayList.lastIndexOf(view)) >= 0 && (i2 = iLastIndexOf + 1) < i) {
             return arrayList.get(i2);
         }
         zArr[0] = true;
@@ -313,12 +312,12 @@ public class FocusFinder {
     }
 
     private static View getPreviousFocusable(View view, ArrayList<View> arrayList, int i, boolean[] zArr) {
-        int indexOf;
+        int iIndexOf;
         if (i < 2) {
             return null;
         }
-        if (view != null && (indexOf = arrayList.indexOf(view)) > 0) {
-            return arrayList.get(indexOf - 1);
+        if (view != null && (iIndexOf = arrayList.indexOf(view)) > 0) {
+            return arrayList.get(iIndexOf - 1);
         }
         zArr[0] = true;
         return arrayList.get(i - 1);
@@ -329,16 +328,16 @@ public class FocusFinder {
         if (view2 == null) {
             return list.get(0);
         }
-        int lastIndexOf = list.lastIndexOf(view2);
-        return (lastIndexOf < 0 || (i2 = lastIndexOf + 1) >= i) ? view : list.get(i2);
+        int iLastIndexOf = list.lastIndexOf(view2);
+        return (iLastIndexOf < 0 || (i2 = iLastIndexOf + 1) >= i) ? view : list.get(i2);
     }
 
     private static View getPreviousKeyboardNavigationCluster(View view, View view2, List<View> list, int i) {
         if (view2 == null) {
             return list.get(i - 1);
         }
-        int indexOf = list.indexOf(view2);
-        return indexOf > 0 ? list.get(indexOf - 1) : view;
+        int iIndexOf = list.indexOf(view2);
+        return iIndexOf > 0 ? list.get(iIndexOf - 1) : view;
     }
 
     boolean isBetterCandidate(int i, Rect rect, Rect rect2, Rect rect3) {
@@ -352,8 +351,8 @@ public class FocusFinder {
     }
 
     boolean beamBeats(int i, Rect rect, Rect rect2, Rect rect3) {
-        boolean beamsOverlap = beamsOverlap(i, rect, rect2);
-        if (beamsOverlap(i, rect, rect3) || !beamsOverlap) {
+        boolean zBeamsOverlap = beamsOverlap(i, rect, rect2);
+        if (beamsOverlap(i, rect, rect3) || !zBeamsOverlap) {
             return false;
         }
         return !isToDirectionOf(i, rect, rect3) || i == 17 || i == 66 || majorAxisDistance(i, rect, rect2) < majorAxisDistanceToFarEdge(i, rect, rect3);
@@ -469,111 +468,52 @@ public class FocusFinder {
         return Math.abs((rect.top + (rect.height() / 2)) - (rect2.top + (rect2.height() / 2)));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0098  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public android.view.View findNearestTouchable(android.view.ViewGroup r20, int r21, int r22, int r23, int[] r24) {
-        /*
-            r19 = this;
-            r0 = r19
-            r1 = r20
-            r2 = r21
-            r3 = r22
-            r4 = r23
-            java.util.ArrayList r5 = r1.getTouchables()
-            int r6 = r5.size()
-            android.content.Context r7 = r1.mContext
-            android.view.ViewConfiguration r7 = android.view.ViewConfiguration.get(r7)
-            int r7 = r7.getScaledEdgeSlop()
-            android.graphics.Rect r8 = new android.graphics.Rect
-            r8.<init>()
-            android.graphics.Rect r9 = r0.mOtherRect
-            r11 = 0
-            r13 = 0
-            r14 = 2147483647(0x7fffffff, float:NaN)
-        L28:
-            if (r13 >= r6) goto La0
-            java.lang.Object r15 = r5.get(r13)
-            android.view.View r15 = (android.view.View) r15
-            r15.getDrawingRect(r9)
-            r10 = 1
-            r1.offsetRectBetweenParentAndChild(r15, r9, r10, r10)
-            boolean r16 = r0.isTouchCandidate(r2, r3, r9, r4)
-            if (r16 != 0) goto L41
-            r17 = 0
-            goto L9d
-        L41:
-            r16 = r10
-            r17 = 0
-            r10 = 33
-            r12 = 17
-            if (r4 == r12) goto L64
-            if (r4 == r10) goto L5f
-            r10 = 66
-            if (r4 == r10) goto L5c
-            r10 = 130(0x82, float:1.82E-43)
-            if (r4 == r10) goto L59
-            r10 = 2147483647(0x7fffffff, float:NaN)
-            goto L6a
-        L59:
-            int r10 = r9.top
-            goto L6a
-        L5c:
-            int r10 = r9.left
-            goto L6a
-        L5f:
-            int r10 = r9.bottom
-            int r10 = r3 - r10
-            goto L68
-        L64:
-            int r10 = r9.right
-            int r10 = r2 - r10
-        L68:
-            int r10 = r10 + 1
-        L6a:
-            if (r10 >= r7) goto L9d
-            if (r11 == 0) goto L7c
-            boolean r18 = r8.contains(r9)
-            if (r18 != 0) goto L7c
-            boolean r18 = r9.contains(r8)
-            if (r18 != 0) goto L9d
-            if (r10 >= r14) goto L9d
-        L7c:
-            r8.set(r9)
-            if (r4 == r12) goto L98
-            r11 = 33
-            if (r4 == r11) goto L94
-            r11 = 66
-            if (r4 == r11) goto L91
-            r11 = 130(0x82, float:1.82E-43)
-            if (r4 == r11) goto L8e
-            goto L9b
-        L8e:
-            r24[r16] = r10
-            goto L9b
-        L91:
-            r24[r17] = r10
-            goto L9b
-        L94:
-            int r11 = -r10
-            r24[r16] = r11
-            goto L9b
-        L98:
-            int r11 = -r10
-            r24[r17] = r11
-        L9b:
-            r14 = r10
-            r11 = r15
-        L9d:
-            int r13 = r13 + 1
-            goto L28
-        La0:
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.FocusFinder.findNearestTouchable(android.view.ViewGroup, int, int, int, int[]):android.view.View");
+    public View findNearestTouchable(ViewGroup viewGroup, int i, int i2, int i3, int[] iArr) {
+        int i4;
+        int i5;
+        ArrayList<View> touchables = viewGroup.getTouchables();
+        int size = touchables.size();
+        int scaledEdgeSlop = ViewConfiguration.get(viewGroup.mContext).getScaledEdgeSlop();
+        Rect rect = new Rect();
+        Rect rect2 = this.mOtherRect;
+        View view = null;
+        int i6 = Integer.MAX_VALUE;
+        for (int i7 = 0; i7 < size; i7++) {
+            View view2 = touchables.get(i7);
+            view2.getDrawingRect(rect2);
+            viewGroup.offsetRectBetweenParentAndChild(view2, rect2, true, true);
+            if (isTouchCandidate(i, i2, rect2, i3)) {
+                if (i3 == 17) {
+                    i4 = i - rect2.right;
+                } else if (i3 == 33) {
+                    i4 = i2 - rect2.bottom;
+                } else {
+                    if (i3 == 66) {
+                        i5 = rect2.left;
+                    } else {
+                        i5 = i3 != 130 ? Integer.MAX_VALUE : rect2.top;
+                    }
+                    if (i5 >= scaledEdgeSlop && (view == null || rect.contains(rect2) || (!rect2.contains(rect) && i5 < i6))) {
+                        rect.set(rect2);
+                        if (i3 == 17) {
+                            iArr[0] = -i5;
+                        } else if (i3 == 33) {
+                            iArr[1] = -i5;
+                        } else if (i3 == 66) {
+                            iArr[0] = i5;
+                        } else if (i3 == 130) {
+                            iArr[1] = i5;
+                        }
+                        i6 = i5;
+                        view = view2;
+                    }
+                }
+                i5 = i4 + 1;
+                if (i5 >= scaledEdgeSlop) {
+                }
+            }
+        }
+        return view;
     }
 
     private boolean isTouchCandidate(int i, int i2, Rect rect, int i3) {
@@ -600,17 +540,13 @@ public class FocusFinder {
         private Comparator<View> mTopsComparator = new Comparator() { // from class: android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int lambda$new$0;
-                lambda$new$0 = FocusFinder.FocusSorter.this.lambda$new$0((View) obj, (View) obj2);
-                return lambda$new$0;
+                return this.f$0.lambda$new$0((View) obj, (View) obj2);
             }
         };
         private Comparator<View> mSidesComparator = new Comparator() { // from class: android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int lambda$new$1;
-                lambda$new$1 = FocusFinder.FocusSorter.this.lambda$new$1((View) obj, (View) obj2);
-                return lambda$new$1;
+                return this.f$0.lambda$new$1((View) obj, (View) obj2);
             }
         };
 
@@ -664,23 +600,23 @@ public class FocusFinder {
                 this.mRectByView.put(viewArr[i4], rect);
             }
             Arrays.sort(viewArr, i, i3, this.mTopsComparator);
-            int i6 = this.mRectByView.get(viewArr[i]).bottom;
-            int i7 = i + 1;
-            while (i7 < i2) {
-                Rect rect2 = this.mRectByView.get(viewArr[i7]);
-                if (rect2.top >= i6) {
-                    if (i7 - i > 1) {
-                        Arrays.sort(viewArr, i, i7, this.mSidesComparator);
+            int iMax = this.mRectByView.get(viewArr[i]).bottom;
+            int i6 = i + 1;
+            while (i6 < i2) {
+                Rect rect2 = this.mRectByView.get(viewArr[i6]);
+                if (rect2.top >= iMax) {
+                    if (i6 - i > 1) {
+                        Arrays.sort(viewArr, i, i6, this.mSidesComparator);
                     }
-                    i6 = rect2.bottom;
-                    i = i7;
+                    iMax = rect2.bottom;
+                    i = i6;
                 } else {
-                    i6 = Math.max(i6, rect2.bottom);
+                    iMax = Math.max(iMax, rect2.bottom);
                 }
-                i7++;
+                i6++;
             }
-            if (i7 - i > 1) {
-                Arrays.sort(viewArr, i, i7, this.mSidesComparator);
+            if (i6 - i > 1) {
+                Arrays.sort(viewArr, i, i6, this.mSidesComparator);
             }
             this.mLastPoolRect = 0;
             this.mRectByView.clear();

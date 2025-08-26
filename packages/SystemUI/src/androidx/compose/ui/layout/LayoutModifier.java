@@ -5,29 +5,28 @@ import androidx.compose.ui.layout.MeasuringIntrinsics;
 import androidx.compose.ui.node.LookaheadCapablePlaceable;
 import androidx.compose.ui.unit.ConstraintsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface LayoutModifier extends Modifier.Element {
     default int maxIntrinsicHeight(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
         MeasuringIntrinsics.INSTANCE.getClass();
-        return mo108measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Max, MeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
+        return mo109measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Max, MeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
     }
 
     default int maxIntrinsicWidth(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
         MeasuringIntrinsics.INSTANCE.getClass();
-        return mo108measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Max, MeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
+        return mo109measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Max, MeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
     }
 
     /* renamed from: measure-3p2s80s */
-    MeasureResult mo108measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j);
+    MeasureResult mo109measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j);
 
     default int minIntrinsicHeight(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
         MeasuringIntrinsics.INSTANCE.getClass();
-        return mo108measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Min, MeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
+        return mo109measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Min, MeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
     }
 
     default int minIntrinsicWidth(LookaheadCapablePlaceable lookaheadCapablePlaceable, IntrinsicMeasurable intrinsicMeasurable, int i) {
         MeasuringIntrinsics.INSTANCE.getClass();
-        return mo108measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Min, MeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
+        return mo109measure3p2s80s(new IntrinsicsMeasureScope(lookaheadCapablePlaceable, lookaheadCapablePlaceable.getLayoutDirection()), new MeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, MeasuringIntrinsics.IntrinsicMinMax.Min, MeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
     }
 }

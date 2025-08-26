@@ -105,9 +105,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
             if (cancellationSignal != null) {
                 try {
                     cancellationSignal.throwIfCanceled();
-                    ICancellationSignal createCancellationSignal = this.mContentProvider.createCancellationSignal();
-                    cancellationSignal.setRemote(createCancellationSignal);
-                    iCancellationSignal = createCancellationSignal;
+                    ICancellationSignal iCancellationSignalCreateCancellationSignal = this.mContentProvider.createCancellationSignal();
+                    cancellationSignal.setRemote(iCancellationSignalCreateCancellationSignal);
+                    iCancellationSignal = iCancellationSignalCreateCancellationSignal;
                 } catch (DeadObjectException e) {
                     if (!this.mStable) {
                         this.mContentResolver.unstableProviderDied(this.mContentProvider);
@@ -118,9 +118,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
             } else {
                 iCancellationSignal = null;
             }
-            Cursor query = this.mContentProvider.query(this.mAttributionSource, uri, strArr, bundle, iCancellationSignal);
-            if (query != null) {
-                CursorWrapperInner cursorWrapperInner = new CursorWrapperInner(this, query);
+            Cursor cursorQuery = this.mContentProvider.query(this.mAttributionSource, uri, strArr, bundle, iCancellationSignal);
+            if (cursorQuery != null) {
+                CursorWrapperInner cursorWrapperInner = new CursorWrapperInner(this, cursorQuery);
                 afterRemote();
                 return cursorWrapperInner;
             }
@@ -207,15 +207,15 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
 
     @Override // android.content.ContentInterface
     public boolean refresh(Uri uri, Bundle bundle, CancellationSignal cancellationSignal) throws RemoteException {
-        ICancellationSignal createCancellationSignal;
+        ICancellationSignal iCancellationSignalCreateCancellationSignal;
         Objects.requireNonNull(uri, "url");
         beforeRemote();
         try {
             if (cancellationSignal != null) {
                 try {
                     cancellationSignal.throwIfCanceled();
-                    createCancellationSignal = this.mContentProvider.createCancellationSignal();
-                    cancellationSignal.setRemote(createCancellationSignal);
+                    iCancellationSignalCreateCancellationSignal = this.mContentProvider.createCancellationSignal();
+                    cancellationSignal.setRemote(iCancellationSignalCreateCancellationSignal);
                 } catch (DeadObjectException e) {
                     if (!this.mStable) {
                         this.mContentResolver.unstableProviderDied(this.mContentProvider);
@@ -223,9 +223,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
                     throw e;
                 }
             } else {
-                createCancellationSignal = null;
+                iCancellationSignalCreateCancellationSignal = null;
             }
-            return this.mContentProvider.refresh(this.mAttributionSource, uri, bundle, createCancellationSignal);
+            return this.mContentProvider.refresh(this.mAttributionSource, uri, bundle, iCancellationSignalCreateCancellationSignal);
         } finally {
             afterRemote();
         }
@@ -340,7 +340,7 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
 
     @Override // android.content.ContentInterface
     public ParcelFileDescriptor openFile(Uri uri, String str, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException {
-        ICancellationSignal createCancellationSignal;
+        ICancellationSignal iCancellationSignalCreateCancellationSignal;
         Objects.requireNonNull(uri, "url");
         Objects.requireNonNull(str, "mode");
         beforeRemote();
@@ -348,8 +348,8 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
             try {
                 try {
                     cancellationSignal.throwIfCanceled();
-                    createCancellationSignal = this.mContentProvider.createCancellationSignal();
-                    cancellationSignal.setRemote(createCancellationSignal);
+                    iCancellationSignalCreateCancellationSignal = this.mContentProvider.createCancellationSignal();
+                    cancellationSignal.setRemote(iCancellationSignalCreateCancellationSignal);
                 } catch (DeadObjectException e) {
                     if (!this.mStable) {
                         this.mContentResolver.unstableProviderDied(this.mContentProvider);
@@ -360,9 +360,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
                 afterRemote();
             }
         } else {
-            createCancellationSignal = null;
+            iCancellationSignalCreateCancellationSignal = null;
         }
-        return this.mContentProvider.openFile(this.mAttributionSource, uri, str, createCancellationSignal);
+        return this.mContentProvider.openFile(this.mAttributionSource, uri, str, iCancellationSignalCreateCancellationSignal);
     }
 
     public AssetFileDescriptor openAssetFile(Uri uri, String str) throws RemoteException, FileNotFoundException {
@@ -371,7 +371,7 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
 
     @Override // android.content.ContentInterface
     public AssetFileDescriptor openAssetFile(Uri uri, String str, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException {
-        ICancellationSignal createCancellationSignal;
+        ICancellationSignal iCancellationSignalCreateCancellationSignal;
         Objects.requireNonNull(uri, "url");
         Objects.requireNonNull(str, "mode");
         beforeRemote();
@@ -379,8 +379,8 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
             try {
                 try {
                     cancellationSignal.throwIfCanceled();
-                    createCancellationSignal = this.mContentProvider.createCancellationSignal();
-                    cancellationSignal.setRemote(createCancellationSignal);
+                    iCancellationSignalCreateCancellationSignal = this.mContentProvider.createCancellationSignal();
+                    cancellationSignal.setRemote(iCancellationSignalCreateCancellationSignal);
                 } catch (DeadObjectException e) {
                     if (!this.mStable) {
                         this.mContentResolver.unstableProviderDied(this.mContentProvider);
@@ -391,9 +391,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
                 afterRemote();
             }
         } else {
-            createCancellationSignal = null;
+            iCancellationSignalCreateCancellationSignal = null;
         }
-        return this.mContentProvider.openAssetFile(this.mAttributionSource, uri, str, createCancellationSignal);
+        return this.mContentProvider.openAssetFile(this.mAttributionSource, uri, str, iCancellationSignalCreateCancellationSignal);
     }
 
     public final AssetFileDescriptor openTypedAssetFileDescriptor(Uri uri, String str, Bundle bundle) throws RemoteException, FileNotFoundException {
@@ -406,7 +406,7 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
 
     @Override // android.content.ContentInterface
     public final AssetFileDescriptor openTypedAssetFile(Uri uri, String str, Bundle bundle, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException {
-        ICancellationSignal createCancellationSignal;
+        ICancellationSignal iCancellationSignalCreateCancellationSignal;
         Objects.requireNonNull(uri, "uri");
         Objects.requireNonNull(str, "mimeTypeFilter");
         beforeRemote();
@@ -414,8 +414,8 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
             try {
                 try {
                     cancellationSignal.throwIfCanceled();
-                    createCancellationSignal = this.mContentProvider.createCancellationSignal();
-                    cancellationSignal.setRemote(createCancellationSignal);
+                    iCancellationSignalCreateCancellationSignal = this.mContentProvider.createCancellationSignal();
+                    cancellationSignal.setRemote(iCancellationSignalCreateCancellationSignal);
                 } catch (DeadObjectException e) {
                     if (!this.mStable) {
                         this.mContentResolver.unstableProviderDied(this.mContentProvider);
@@ -428,11 +428,11 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
                 throw th;
             }
         } else {
-            createCancellationSignal = null;
+            iCancellationSignalCreateCancellationSignal = null;
         }
-        AssetFileDescriptor openTypedAssetFile = this.mContentProvider.openTypedAssetFile(this.mAttributionSource, uri, str, bundle, createCancellationSignal);
+        AssetFileDescriptor assetFileDescriptorOpenTypedAssetFile = this.mContentProvider.openTypedAssetFile(this.mAttributionSource, uri, str, bundle, iCancellationSignalCreateCancellationSignal);
         afterRemote();
-        return openTypedAssetFile;
+        return assetFileDescriptorOpenTypedAssetFile;
     }
 
     public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> arrayList) throws RemoteException, OperationApplicationException {
@@ -468,9 +468,9 @@ public class ContentProviderClient implements ContentInterface, AutoCloseable {
         beforeRemote();
         try {
             try {
-                Bundle call = this.mContentProvider.call(this.mAttributionSource, str, str2, str3, bundle);
+                Bundle bundleCall = this.mContentProvider.call(this.mAttributionSource, str, str2, str3, bundle);
                 afterRemote();
-                return call;
+                return bundleCall;
             } catch (DeadObjectException e) {
                 if (!this.mStable) {
                     this.mContentResolver.unstableProviderDied(this.mContentProvider);

@@ -107,17 +107,15 @@ public class CrossProfileApps {
 
     public CharSequence getProfileSwitchingLabel(UserHandle userHandle) {
         verifyCanAccessUser(userHandle);
-        final boolean isManagedProfile = this.mUserManager.isManagedProfile(userHandle.getIdentifier());
+        final boolean zIsManagedProfile = this.mUserManager.isManagedProfile(userHandle.getIdentifier());
         DevicePolicyManager devicePolicyManager = (DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class);
-        final String charSequence = getCallingApplicationLabel().toString();
-        return devicePolicyManager.getResources().getString(getUpdatableProfileSwitchingLabelId(isManagedProfile), new Supplier() { // from class: android.content.pm.CrossProfileApps$$ExternalSyntheticLambda1
+        final String string = getCallingApplicationLabel().toString();
+        return devicePolicyManager.getResources().getString(getUpdatableProfileSwitchingLabelId(zIsManagedProfile), new Supplier() { // from class: android.content.pm.CrossProfileApps$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getProfileSwitchingLabel$0;
-                lambda$getProfileSwitchingLabel$0 = CrossProfileApps.this.lambda$getProfileSwitchingLabel$0(isManagedProfile, charSequence);
-                return lambda$getProfileSwitchingLabel$0;
+                return this.f$0.lambda$getProfileSwitchingLabel$0(zIsManagedProfile, string);
             }
-        }, charSequence);
+        }, string);
     }
 
     private CharSequence getCallingApplicationLabel() {
@@ -126,9 +124,9 @@ public class CrossProfileApps {
         if (launchIntentForPackage == null) {
             return getDefaultCallingApplicationLabel();
         }
-        List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(launchIntentForPackage, PackageManager.ResolveInfoFlags.of(65536L));
-        if (queryIntentActivities.size() > 0) {
-            return queryIntentActivities.get(0).loadLabel(packageManager);
+        List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(launchIntentForPackage, PackageManager.ResolveInfoFlags.of(65536L));
+        if (listQueryIntentActivities.size() > 0) {
+            return listQueryIntentActivities.get(0).loadLabel(packageManager);
         }
         return getDefaultCallingApplicationLabel();
     }

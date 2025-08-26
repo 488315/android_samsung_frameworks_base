@@ -4,7 +4,6 @@ import android.os.RemoteException;
 import android.util.Log;
 import com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl$attach$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KeyguardWallpaperController$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -34,10 +33,10 @@ public final /* synthetic */ class KeyguardWallpaperController$$ExternalSyntheti
                 keyguardWallpaperController.mPluginWallpaperManager.onLockWallpaperChanged(1);
                 break;
             default:
-                boolean isNoSensorRequired = WallpaperUtils.isNoSensorRequired(keyguardWallpaperController.mContext);
+                boolean zIsNoSensorRequired = WallpaperUtils.isNoSensorRequired(keyguardWallpaperController.mContext);
                 SecNotificationShadeWindowControllerHelperImpl$attach$2 secNotificationShadeWindowControllerHelperImpl$attach$2 = keyguardWallpaperController.mNoSensorConsumer;
                 if (secNotificationShadeWindowControllerHelperImpl$attach$2 != null) {
-                    secNotificationShadeWindowControllerHelperImpl$attach$2.accept(Boolean.valueOf(isNoSensorRequired));
+                    secNotificationShadeWindowControllerHelperImpl$attach$2.accept(Boolean.valueOf(zIsNoSensorRequired));
                     break;
                 }
                 break;

@@ -7,7 +7,6 @@ import com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper
 import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.android.systemui.wallpapers.ImageWallpaper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -58,7 +57,7 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
             default:
                 ImageWallpaper.CanvasEngine canvasEngine3 = ImageWallpaper.CanvasEngine.this;
                 if (canvasEngine3.mIsEngineAlive) {
-                    ImageWallpaper.CanvasEngine.m3213$$Nest$mupdatePluginWallpaper(canvasEngine3);
+                    ImageWallpaper.CanvasEngine.m3230$$Nest$mupdatePluginWallpaper(canvasEngine3);
                     return;
                 } else {
                     Log.w(canvasEngine3.TAG, " mPluginWallpaperConsumer, skip, engine is destroyed");

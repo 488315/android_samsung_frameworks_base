@@ -11,14 +11,12 @@ import com.samsung.systemui.splugins.volume.VolumePanelState;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SmartViewInteractor implements VolumeMiddleware {
     public final VolumeInfraMediator infraMediator;
     public final LogWrapper log;
     public boolean panelShowing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,6 @@ public final class SmartViewInteractor implements VolumeMiddleware {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -69,24 +66,24 @@ public final class SmartViewInteractor implements VolumeMiddleware {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeMiddleware
     public final Object apply(Object obj) {
-        boolean z;
+        boolean zIsSupportTvVolumeSync;
         VolumePanelAction volumePanelAction = (VolumePanelAction) obj;
         int i = WhenMappings.$EnumSwitchMapping$0[volumePanelAction.getActionType().ordinal()];
         if (i != 1) {
             if (i == 2) {
                 VolumePanelAction.Builder builder = new VolumePanelAction.Builder(volumePanelAction);
                 VolumeInfraMediator volumeInfraMediator = this.infraMediator;
-                String m = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isSmartView=", volumeInfraMediator.isSmartView());
+                String strM = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isSmartView=", volumeInfraMediator.isSmartView());
                 LogWrapper logWrapper = this.log;
-                logWrapper.d("SmartViewInteractor", m);
+                logWrapper.d("SmartViewInteractor", strM);
                 if (volumeInfraMediator.isSmartView()) {
-                    z = volumeInfraMediator.isSupportTvVolumeSync();
-                    logWrapper.d("SmartViewInteractor", "isSupportTvVolumeSync=" + z);
-                    builder.setStringValue(VolumePanelAction.StringStateKey.SMART_VIEW_DEVICE_NAME, volumeInfraMediator.getSmartViewDeviceName()).isSupportTvVolumeSync(z);
+                    zIsSupportTvVolumeSync = volumeInfraMediator.isSupportTvVolumeSync();
+                    logWrapper.d("SmartViewInteractor", "isSupportTvVolumeSync=" + zIsSupportTvVolumeSync);
+                    builder.setStringValue(VolumePanelAction.StringStateKey.SMART_VIEW_DEVICE_NAME, volumeInfraMediator.getSmartViewDeviceName()).isSupportTvVolumeSync(zIsSupportTvVolumeSync);
                 } else {
-                    z = false;
+                    zIsSupportTvVolumeSync = false;
                 }
-                if (z) {
+                if (zIsSupportTvVolumeSync) {
                     List<Integer> importantStreamList = volumePanelAction.getImportantStreamList();
                     importantStreamList.add(20);
                     return builder.setImportantStreamList(importantStreamList).build();

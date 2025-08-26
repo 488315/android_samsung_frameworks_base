@@ -227,8 +227,8 @@ public abstract class Item implements Parcelable {
             if (this.mFilepath.startsWith("content:")) {
                 return new BuilderGeneratedItem(ItemCreator.ConstructorType.LOCAL_CONTENT, this.mFilepath, this.mTitle, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mMimetype);
             }
-            int ordinal = Item.convertItemTypeFromMimeType(this.mMimetype).ordinal();
-            if (ordinal == 1 || ordinal == 2 || ordinal == 3) {
+            int iOrdinal = Item.convertItemTypeFromMimeType(this.mMimetype).ordinal();
+            if (iOrdinal == 1 || iOrdinal == 2 || iOrdinal == 3) {
                 return new BuilderGeneratedItem(ItemCreator.ConstructorType.LOCAL_CONTENT, this.mFilepath, this.mTitle, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mMimetype);
             }
             DLog.e_api("Item", "build error!");
@@ -377,10 +377,10 @@ public abstract class Item implements Parcelable {
                 return null;
             }
             try {
-                Uri parse = Uri.parse(str);
-                String scheme = parse.getScheme();
+                Uri uri = Uri.parse(str);
+                String scheme = uri.getScheme();
                 if (scheme != null && !scheme.isEmpty()) {
-                    return parse;
+                    return uri;
                 }
                 return Uri.fromFile(new File(this.mItemFilepath));
             } catch (Exception unused) {
@@ -471,11 +471,11 @@ public abstract class Item implements Parcelable {
             this.mItemFilepath = parcel.readString();
             this.mItemMimetype = parcel.readString();
             this.mItemTitle = parcel.readString();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             this.mSubtitlePath = parcel.readString();
-            this.mConType = ItemCreator.ConstructorType.stringToEnum(readString);
-            this.mDeliveryMode = WebContentBuilder.DeliveryMode.stringToEnum(readString2);
+            this.mConType = ItemCreator.ConstructorType.stringToEnum(string);
+            this.mDeliveryMode = WebContentBuilder.DeliveryMode.stringToEnum(string2);
         }
 
         private BuilderGeneratedItem(Parcel parcel) {
@@ -670,8 +670,8 @@ public abstract class Item implements Parcelable {
                 DLog.e_api("Item", "build error! scheme == null || scheme.contains(content) || scheme.contains(file)");
                 return null;
             }
-            int ordinal = Item.convertItemTypeFromMimeType(this.mMimetype).ordinal();
-            if (ordinal == 1 || ordinal == 2 || ordinal == 3) {
+            int iOrdinal = Item.convertItemTypeFromMimeType(this.mMimetype).ordinal();
+            if (iOrdinal == 1 || iOrdinal == 2 || iOrdinal == 3) {
                 return new BuilderGeneratedItem(ItemCreator.ConstructorType.WEB_CONTENT, this.mUri, this.mTitle, this.mMimetype, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mDeliveryMode, this.mArtist, this.mAlbumTitle, this.mGenre, this.mDate, this.mDuration);
             }
             return null;
@@ -720,14 +720,14 @@ public abstract class Item implements Parcelable {
         }
         StringTokenizer stringTokenizer = new StringTokenizer(str, "/");
         if (stringTokenizer.hasMoreTokens()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (nextToken.equals("video")) {
+            String strNextToken = stringTokenizer.nextToken();
+            if (strNextToken.equals("video")) {
                 return MediaType.ITEM_VIDEO;
             }
-            if (nextToken.equals("audio")) {
+            if (strNextToken.equals("audio")) {
                 return MediaType.ITEM_AUDIO;
             }
-            if (nextToken.equals("image")) {
+            if (strNextToken.equals("image")) {
                 return MediaType.ITEM_IMAGE;
             }
             if (str.startsWith("application/x-dtcp1")) {

@@ -6,20 +6,19 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ViewLifecycleOwner implements LifecycleOwner {
     public final View view;
     public final ViewLifecycleOwner$windowVisibleListener$1 windowVisibleListener = new ViewTreeObserver.OnWindowVisibilityChangeListener() { // from class: com.android.systemui.lifecycle.ViewLifecycleOwner$windowVisibleListener$1
         @Override // android.view.ViewTreeObserver.OnWindowVisibilityChangeListener
         public final void onWindowVisibilityChanged(int i) {
-            ViewLifecycleOwner.this.updateState$1();
+            this.this$0.updateState$1();
         }
     };
     public final ViewLifecycleOwner$windowFocusListener$1 windowFocusListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.android.systemui.lifecycle.ViewLifecycleOwner$windowFocusListener$1
         @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
         public final void onWindowFocusChanged(boolean z) {
-            ViewLifecycleOwner.this.updateState$1();
+            this.this$0.updateState$1();
         }
     };
     public final LifecycleRegistry registry = new LifecycleRegistry(this);

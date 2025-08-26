@@ -19,7 +19,6 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DejankUtils {
     public static final boolean STRICT_MODE_ENABLED;
@@ -51,7 +50,7 @@ public class DejankUtils {
                 return null;
             }
 
-            public final Object onTransactStarted(IBinder iBinder, int i, int i2) {
+            public final Object onTransactStarted(IBinder iBinder, int i, int i2) throws RemoteException {
                 String interfaceDescriptor;
                 Object obj = DejankUtils.sLock;
                 synchronized (obj) {
@@ -98,12 +97,12 @@ public class DejankUtils {
             return;
         }
         if (Trace.isTagEnabled(4096L)) {
-            final int nextInt = sRandom.nextInt();
-            Trace.asyncTraceForTrackBegin(4096L, "DejankUtils", ContentInViewNode$Request$$ExternalSyntheticOutline0.m("notifyRendererOfExpensiveFrame (", str, ")"), nextInt);
+            final int iNextInt = sRandom.nextInt();
+            Trace.asyncTraceForTrackBegin(4096L, "DejankUtils", ContentInViewNode$Request$$ExternalSyntheticOutline0.m("notifyRendererOfExpensiveFrame (", str, ")"), iNextInt);
             postAfterTraversal(new Runnable() { // from class: com.android.systemui.DejankUtils$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    int i = nextInt;
+                    int i = iNextInt;
                     boolean z = DejankUtils.STRICT_MODE_ENABLED;
                     Trace.asyncTraceForTrackEnd(4096L, "DejankUtils", i);
                 }

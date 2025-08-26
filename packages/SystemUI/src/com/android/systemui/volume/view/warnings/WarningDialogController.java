@@ -15,7 +15,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WarningDialogController {
     public final Lazy displayManagerWrapper$delegate;
@@ -71,9 +70,9 @@ public final class WarningDialogController {
             StoreInteractor storeInteractor = volumeCSD100WarningDialog.storeInteractor;
             storeInteractor.store = store$1;
             storeInteractor.observeStore();
-            boolean isCoverClosed = panelState$1.isCoverClosed();
+            boolean zIsCoverClosed = panelState$1.isCoverClosed();
             volumeCSD100WarningDialog.getWindow().setGravity(80);
-            if (isCoverClosed) {
+            if (zIsCoverClosed) {
                 volumeCSD100WarningDialog.getWindow().getDecorView().post(new VolumeWarningDialog$initWindow$1(volumeCSD100WarningDialog));
             }
             volumeCSD100WarningDialog.show();
@@ -167,9 +166,9 @@ public final class WarningDialogController {
             StoreInteractor storeInteractor = volumeSafetyWarningDialog.storeInteractor;
             storeInteractor.store = store$1;
             storeInteractor.observeStore();
-            boolean isCoverClosed = panelState$1.isCoverClosed();
+            boolean zIsCoverClosed = panelState$1.isCoverClosed();
             volumeSafetyWarningDialog.getWindow().setGravity(80);
-            if (isCoverClosed) {
+            if (zIsCoverClosed) {
                 volumeSafetyWarningDialog.getWindow().getDecorView().post(new VolumeWarningDialog$initWindow$1(volumeSafetyWarningDialog));
             }
             volumeSafetyWarningDialog.initButtons();

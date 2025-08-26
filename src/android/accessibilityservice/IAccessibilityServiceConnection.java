@@ -499,9 +499,9 @@ public interface IAccessibilityServiceConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccessibilityServiceConnection)) {
-                return (IAccessibilityServiceConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccessibilityServiceConnection)) {
+                return (IAccessibilityServiceConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -651,89 +651,89 @@ public interface IAccessibilityServiceConnection extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setAttributionTag(readString);
+                    setAttributionTag(string);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    int readInt2 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt3 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i4 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    long j2 = parcel.readLong();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    String[] findAccessibilityNodeInfoByAccessibilityId = findAccessibilityNodeInfoByAccessibilityId(readInt, readLong, readInt2, asInterface, readInt3, readLong2, bundle);
+                    String[] strArrFindAccessibilityNodeInfoByAccessibilityId = findAccessibilityNodeInfoByAccessibilityId(i3, j, i4, iAccessibilityInteractionConnectionCallbackAsInterface, i5, j2, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(findAccessibilityNodeInfoByAccessibilityId);
+                    parcel2.writeStringArray(strArrFindAccessibilityNodeInfoByAccessibilityId);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
-                    String readString2 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface2 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong4 = parcel.readLong();
+                    int i6 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    String string2 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface2 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String[] findAccessibilityNodeInfosByText = findAccessibilityNodeInfosByText(readInt4, readLong3, readString2, readInt5, asInterface2, readLong4);
+                    String[] strArrFindAccessibilityNodeInfosByText = findAccessibilityNodeInfosByText(i6, j3, string2, i7, iAccessibilityInteractionConnectionCallbackAsInterface2, j4);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(findAccessibilityNodeInfosByText);
+                    parcel2.writeStringArray(strArrFindAccessibilityNodeInfosByText);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    long readLong5 = parcel.readLong();
-                    String readString3 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface3 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong6 = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    long j5 = parcel.readLong();
+                    String string3 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface3 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String[] findAccessibilityNodeInfosByViewId = findAccessibilityNodeInfosByViewId(readInt6, readLong5, readString3, readInt7, asInterface3, readLong6);
+                    String[] strArrFindAccessibilityNodeInfosByViewId = findAccessibilityNodeInfosByViewId(i8, j5, string3, i9, iAccessibilityInteractionConnectionCallbackAsInterface3, j6);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(findAccessibilityNodeInfosByViewId);
+                    parcel2.writeStringArray(strArrFindAccessibilityNodeInfosByViewId);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    long readLong7 = parcel.readLong();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface4 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong8 = parcel.readLong();
+                    int i10 = parcel.readInt();
+                    long j7 = parcel.readLong();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface4 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j8 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String[] findFocus = findFocus(readInt8, readLong7, readInt9, readInt10, asInterface4, readLong8);
+                    String[] strArrFindFocus = findFocus(i10, j7, i11, i12, iAccessibilityInteractionConnectionCallbackAsInterface4, j8);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(findFocus);
+                    parcel2.writeStringArray(strArrFindFocus);
                     return true;
                 case 7:
-                    int readInt11 = parcel.readInt();
-                    long readLong9 = parcel.readLong();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface5 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong10 = parcel.readLong();
+                    int i13 = parcel.readInt();
+                    long j9 = parcel.readLong();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface5 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j10 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String[] focusSearch = focusSearch(readInt11, readLong9, readInt12, readInt13, asInterface5, readLong10);
+                    String[] strArrFocusSearch = focusSearch(i13, j9, i14, i15, iAccessibilityInteractionConnectionCallbackAsInterface5, j10);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(focusSearch);
+                    parcel2.writeStringArray(strArrFocusSearch);
                     return true;
                 case 8:
-                    int readInt14 = parcel.readInt();
-                    long readLong11 = parcel.readLong();
-                    int readInt15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    long j11 = parcel.readLong();
+                    int i17 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt16 = parcel.readInt();
-                    IAccessibilityInteractionConnectionCallback asInterface6 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong12 = parcel.readLong();
+                    int i18 = parcel.readInt();
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface6 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j12 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean performAccessibilityAction = performAccessibilityAction(readInt14, readLong11, readInt15, bundle2, readInt16, asInterface6, readLong12);
+                    boolean zPerformAccessibilityAction = performAccessibilityAction(i16, j11, i17, bundle2, i18, iAccessibilityInteractionConnectionCallbackAsInterface6, j12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(performAccessibilityAction);
+                    parcel2.writeBoolean(zPerformAccessibilityAction);
                     return true;
                 case 9:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    AccessibilityWindowInfo window = getWindow(readInt17);
+                    AccessibilityWindowInfo window = getWindow(i19);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(window, 1);
                     return true;
@@ -748,18 +748,18 @@ public interface IAccessibilityServiceConnection extends IInterface {
                     parcel2.writeTypedObject(serviceInfo, 1);
                     return true;
                 case 12:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AccessibilityWindowInfo> windowsMainDisplay = getWindowsMainDisplay(readInt18);
+                    List<AccessibilityWindowInfo> windowsMainDisplay = getWindowsMainDisplay(i20);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(windowsMainDisplay, 1);
                     return true;
                 case 13:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean performGlobalAction = performGlobalAction(readInt19);
+                    boolean zPerformGlobalAction = performGlobalAction(i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(performGlobalAction);
+                    parcel2.writeBoolean(zPerformGlobalAction);
                     return true;
                 case 14:
                     List<AccessibilityNodeInfo.AccessibilityAction> systemActions = getSystemActions();
@@ -771,89 +771,89 @@ public interface IAccessibilityServiceConnection extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt20 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setOnKeyEventResult(readBoolean, readInt20);
+                    setOnKeyEventResult(z, i22);
                     return true;
                 case 17:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    MagnificationConfig magnificationConfig = getMagnificationConfig(readInt21);
+                    MagnificationConfig magnificationConfig = getMagnificationConfig(i23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(magnificationConfig, 1);
                     return true;
                 case 18:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float magnificationScale = getMagnificationScale(readInt22);
+                    float magnificationScale = getMagnificationScale(i24);
                     parcel2.writeNoException();
                     parcel2.writeFloat(magnificationScale);
                     return true;
                 case 19:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float magnificationCenterX = getMagnificationCenterX(readInt23);
+                    float magnificationCenterX = getMagnificationCenterX(i25);
                     parcel2.writeNoException();
                     parcel2.writeFloat(magnificationCenterX);
                     return true;
                 case 20:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float magnificationCenterY = getMagnificationCenterY(readInt24);
+                    float magnificationCenterY = getMagnificationCenterY(i26);
                     parcel2.writeNoException();
                     parcel2.writeFloat(magnificationCenterY);
                     return true;
                 case 21:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Region magnificationRegion = getMagnificationRegion(readInt25);
+                    Region magnificationRegion = getMagnificationRegion(i27);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(magnificationRegion, 1);
                     return true;
                 case 22:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Region currentMagnificationRegion = getCurrentMagnificationRegion(readInt26);
+                    Region currentMagnificationRegion = getCurrentMagnificationRegion(i28);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(currentMagnificationRegion, 1);
                     return true;
                 case 23:
-                    int readInt27 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i29 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean resetMagnification = resetMagnification(readInt27, readBoolean2);
+                    boolean zResetMagnification = resetMagnification(i29, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetMagnification);
+                    parcel2.writeBoolean(zResetMagnification);
                     return true;
                 case 24:
-                    int readInt28 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i30 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean resetCurrentMagnification = resetCurrentMagnification(readInt28, readBoolean3);
+                    boolean zResetCurrentMagnification = resetCurrentMagnification(i30, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetCurrentMagnification);
+                    parcel2.writeBoolean(zResetCurrentMagnification);
                     return true;
                 case 25:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     MagnificationConfig magnificationConfig2 = (MagnificationConfig) parcel.readTypedObject(MagnificationConfig.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean magnificationConfig3 = setMagnificationConfig(readInt29, magnificationConfig2, readBoolean4);
+                    boolean magnificationConfig3 = setMagnificationConfig(i31, magnificationConfig2, z4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(magnificationConfig3);
                     return true;
                 case 26:
-                    int readInt30 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i32 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMagnificationCallbackEnabled(readInt30, readBoolean5);
+                    setMagnificationCallbackEnabled(i32, z5);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean softKeyboardShowMode = setSoftKeyboardShowMode(readInt31);
+                    boolean softKeyboardShowMode = setSoftKeyboardShowMode(i33);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(softKeyboardShowMode);
                     return true;
@@ -863,168 +863,168 @@ public interface IAccessibilityServiceConnection extends IInterface {
                     parcel2.writeInt(softKeyboardShowMode2);
                     return true;
                 case 29:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSoftKeyboardCallbackEnabled(readBoolean6);
+                    setSoftKeyboardCallbackEnabled(z6);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean switchToInputMethod = switchToInputMethod(readString4);
+                    boolean zSwitchToInputMethod = switchToInputMethod(string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(switchToInputMethod);
+                    parcel2.writeBoolean(zSwitchToInputMethod);
                     return true;
                 case 31:
-                    String readString5 = parcel.readString();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    String string5 = parcel.readString();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int inputMethodEnabled = setInputMethodEnabled(readString5, readBoolean7);
+                    int inputMethodEnabled = setInputMethodEnabled(string5, z7);
                     parcel2.writeNoException();
                     parcel2.writeInt(inputMethodEnabled);
                     return true;
                 case 32:
-                    boolean isAccessibilityButtonAvailable = isAccessibilityButtonAvailable();
+                    boolean zIsAccessibilityButtonAvailable = isAccessibilityButtonAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAccessibilityButtonAvailable);
+                    parcel2.writeBoolean(zIsAccessibilityButtonAvailable);
                     return true;
                 case 33:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendGesture(readInt32, parceledListSlice);
+                    sendGesture(i34, parceledListSlice);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     ParceledListSlice parceledListSlice2 = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    dispatchGesture(readInt33, parceledListSlice2, readInt34);
+                    dispatchGesture(i35, parceledListSlice2, i36);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    boolean isFingerprintGestureDetectionAvailable = isFingerprintGestureDetectionAvailable();
+                    boolean zIsFingerprintGestureDetectionAvailable = isFingerprintGestureDetectionAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFingerprintGestureDetectionAvailable);
+                    parcel2.writeBoolean(zIsFingerprintGestureDetectionAvailable);
                     return true;
                 case 36:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IBinder overlayWindowToken = getOverlayWindowToken(readInt35);
+                    IBinder overlayWindowToken = getOverlayWindowToken(i37);
                     parcel2.writeNoException();
                     parcel2.writeStrongBinder(overlayWindowToken);
                     return true;
                 case 37:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int windowIdForLeashToken = getWindowIdForLeashToken(readStrongBinder);
+                    int windowIdForLeashToken = getWindowIdForLeashToken(strongBinder);
                     parcel2.writeNoException();
                     parcel2.writeInt(windowIdForLeashToken);
                     return true;
                 case 38:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    takeScreenshot(readInt36, remoteCallback);
+                    takeScreenshot(i38, remoteCallback);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    int readInt37 = parcel.readInt();
-                    int readInt38 = parcel.readInt();
+                    int i39 = parcel.readInt();
+                    int i40 = parcel.readInt();
                     ScreenCapture.ScreenCaptureListener screenCaptureListener = (ScreenCapture.ScreenCaptureListener) parcel.readTypedObject(ScreenCapture.ScreenCaptureListener.CREATOR);
-                    IAccessibilityInteractionConnectionCallback asInterface7 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface7 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    takeScreenshotOfWindow(readInt37, readInt38, screenCaptureListener, asInterface7);
+                    takeScreenshotOfWindow(i39, i40, screenCaptureListener, iAccessibilityInteractionConnectionCallbackAsInterface7);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     Region region = (Region) parcel.readTypedObject(Region.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setGestureDetectionPassthroughRegion(readInt39, region);
+                    setGestureDetectionPassthroughRegion(i41, region);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     Region region2 = (Region) parcel.readTypedObject(Region.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setTouchExplorationPassthroughRegion(readInt40, region2);
+                    setTouchExplorationPassthroughRegion(i42, region2);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    int readInt41 = parcel.readInt();
-                    int readInt42 = parcel.readInt();
+                    int i43 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setFocusAppearance(readInt41, readInt42);
+                    setFocusAppearance(i43, i44);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCacheEnabled(readBoolean8);
+                    setCacheEnabled(z8);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    long readLong13 = parcel.readLong();
-                    String readString6 = parcel.readString();
-                    long readLong14 = parcel.readLong();
-                    String readString7 = parcel.readString();
-                    int readInt43 = parcel.readInt();
-                    long readLong15 = parcel.readLong();
-                    int readInt44 = parcel.readInt();
+                    long j13 = parcel.readLong();
+                    String string6 = parcel.readString();
+                    long j14 = parcel.readLong();
+                    String string7 = parcel.readString();
+                    int i45 = parcel.readInt();
+                    long j15 = parcel.readLong();
+                    int i46 = parcel.readInt();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    logTrace(readLong13, readString6, readLong14, readString7, readInt43, readLong15, readInt44, bundle3);
+                    logTrace(j13, string6, j14, string7, i45, j15, i46, bundle3);
                     return true;
                 case 45:
-                    int readInt45 = parcel.readInt();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    int i47 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setServiceDetectsGesturesEnabled(readInt45, readBoolean9);
+                    setServiceDetectsGesturesEnabled(i47, z9);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt46 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestTouchExploration(readInt46);
+                    requestTouchExploration(i48);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    int readInt47 = parcel.readInt();
-                    int readInt48 = parcel.readInt();
+                    int i49 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestDragging(readInt47, readInt48);
+                    requestDragging(i49, i50);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    int readInt49 = parcel.readInt();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestDelegating(readInt49);
+                    requestDelegating(i51);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    int readInt50 = parcel.readInt();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDoubleTap(readInt50);
+                    onDoubleTap(i52);
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    int readInt51 = parcel.readInt();
+                    int i53 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDoubleTapAndHold(readInt51);
+                    onDoubleTapAndHold(i53);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setAnimationScale(readFloat);
+                    setAnimationScale(f);
                     parcel2.writeNoException();
                     return true;
                 case 52:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setInstalledAndEnabledServices(createTypedArrayList);
+                    setInstalledAndEnabledServices(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 53:
@@ -1033,41 +1033,41 @@ public interface IAccessibilityServiceConnection extends IInterface {
                     parcel2.writeTypedList(installedAndEnabledServices, 1);
                     return true;
                 case 54:
-                    int readInt52 = parcel.readInt();
-                    int readInt53 = parcel.readInt();
+                    int i54 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     SurfaceControl surfaceControl = (SurfaceControl) parcel.readTypedObject(SurfaceControl.CREATOR);
-                    IAccessibilityInteractionConnectionCallback asInterface8 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface8 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    attachAccessibilityOverlayToDisplay(readInt52, readInt53, surfaceControl, asInterface8);
+                    attachAccessibilityOverlayToDisplay(i54, i55, surfaceControl, iAccessibilityInteractionConnectionCallbackAsInterface8);
                     parcel2.writeNoException();
                     return true;
                 case 55:
-                    int readInt54 = parcel.readInt();
-                    int readInt55 = parcel.readInt();
+                    int i56 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     SurfaceControl surfaceControl2 = (SurfaceControl) parcel.readTypedObject(SurfaceControl.CREATOR);
-                    IAccessibilityInteractionConnectionCallback asInterface9 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallbackAsInterface9 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    attachAccessibilityOverlayToWindow(readInt54, readInt55, surfaceControl2, asInterface9);
+                    attachAccessibilityOverlayToWindow(i56, i57, surfaceControl2, iAccessibilityInteractionConnectionCallbackAsInterface9);
                     parcel2.writeNoException();
                     return true;
                 case 56:
-                    String readString8 = parcel.readString();
-                    IBrailleDisplayController asInterface10 = IBrailleDisplayController.Stub.asInterface(parcel.readStrongBinder());
+                    String string8 = parcel.readString();
+                    IBrailleDisplayController iBrailleDisplayControllerAsInterface = IBrailleDisplayController.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    connectBluetoothBrailleDisplay(readString8, asInterface10);
+                    connectBluetoothBrailleDisplay(string8, iBrailleDisplayControllerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 57:
                     UsbDevice usbDevice = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    IBrailleDisplayController asInterface11 = IBrailleDisplayController.Stub.asInterface(parcel.readStrongBinder());
+                    IBrailleDisplayController iBrailleDisplayControllerAsInterface2 = IBrailleDisplayController.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    connectUsbBrailleDisplay(usbDevice, asInterface11);
+                    connectUsbBrailleDisplay(usbDevice, iBrailleDisplayControllerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 58:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(Bundle.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setTestBrailleDisplayData(createTypedArrayList2);
+                    setTestBrailleDisplayData(arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1093,953 +1093,953 @@ public interface IAccessibilityServiceConnection extends IInterface {
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setServiceInfo(AccessibilityServiceInfo accessibilityServiceInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(accessibilityServiceInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(accessibilityServiceInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setAttributionTag(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public String[] findAccessibilityNodeInfoByAccessibilityId(int i, long j, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i3, long j2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public String[] findAccessibilityNodeInfosByText(int i, long j, String str, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public String[] findAccessibilityNodeInfosByViewId(int i, long j, String str, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public String[] findFocus(int i, long j, int i2, int i3, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public String[] focusSearch(int i, long j, int i2, int i3, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean performAccessibilityAction(int i, long j, int i2, Bundle bundle, int i3, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public AccessibilityWindowInfo getWindow(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AccessibilityWindowInfo) obtain2.readTypedObject(AccessibilityWindowInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AccessibilityWindowInfo) parcelObtain2.readTypedObject(AccessibilityWindowInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public AccessibilityWindowInfo.WindowListSparseArray getWindows() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AccessibilityWindowInfo.WindowListSparseArray) obtain2.readTypedObject(AccessibilityWindowInfo.WindowListSparseArray.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AccessibilityWindowInfo.WindowListSparseArray) parcelObtain2.readTypedObject(AccessibilityWindowInfo.WindowListSparseArray.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public AccessibilityServiceInfo getServiceInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AccessibilityServiceInfo) obtain2.readTypedObject(AccessibilityServiceInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AccessibilityServiceInfo) parcelObtain2.readTypedObject(AccessibilityServiceInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public List<AccessibilityWindowInfo> getWindowsMainDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccessibilityWindowInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccessibilityWindowInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean performGlobalAction(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public List<AccessibilityNodeInfo.AccessibilityAction> getSystemActions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccessibilityNodeInfo.AccessibilityAction.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccessibilityNodeInfo.AccessibilityAction.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void disableSelf() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setOnKeyEventResult(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public MagnificationConfig getMagnificationConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (MagnificationConfig) obtain2.readTypedObject(MagnificationConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (MagnificationConfig) parcelObtain2.readTypedObject(MagnificationConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public float getMagnificationScale(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public float getMagnificationCenterX(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public float getMagnificationCenterY(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public Region getMagnificationRegion(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Region) obtain2.readTypedObject(Region.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Region) parcelObtain2.readTypedObject(Region.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public Region getCurrentMagnificationRegion(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Region) obtain2.readTypedObject(Region.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Region) parcelObtain2.readTypedObject(Region.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean resetMagnification(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean resetCurrentMagnification(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean setMagnificationConfig(int i, MagnificationConfig magnificationConfig, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(magnificationConfig, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(magnificationConfig, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setMagnificationCallbackEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean setSoftKeyboardShowMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public int getSoftKeyboardShowMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setSoftKeyboardCallbackEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean switchToInputMethod(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public int setInputMethodEnabled(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean isAccessibilityButtonAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void sendGesture(int i, ParceledListSlice parceledListSlice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void dispatchGesture(int i, ParceledListSlice parceledListSlice, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public boolean isFingerprintGestureDetectionAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public IBinder getOverlayWindowToken(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public int getWindowIdForLeashToken(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void takeScreenshot(int i, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void takeScreenshotOfWindow(int i, int i2, ScreenCapture.ScreenCaptureListener screenCaptureListener, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(screenCaptureListener, 0);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(screenCaptureListener, 0);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setGestureDetectionPassthroughRegion(int i, Region region) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(region, 0);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(region, 0);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setTouchExplorationPassthroughRegion(int i, Region region) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(region, 0);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(region, 0);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setFocusAppearance(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setCacheEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void logTrace(long j, String str, long j2, String str2, int i, long j3, int i2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j3);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(44, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j3);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(44, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setServiceDetectsGesturesEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void requestTouchExploration(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void requestDragging(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void requestDelegating(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void onDoubleTap(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void onDoubleTapAndHold(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setAnimationScale(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setInstalledAndEnabledServices(List<AccessibilityServiceInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public List<AccessibilityServiceInfo> getInstalledAndEnabledServices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void attachAccessibilityOverlayToDisplay(int i, int i2, SurfaceControl surfaceControl, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(surfaceControl, 0);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(surfaceControl, 0);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void attachAccessibilityOverlayToWindow(int i, int i2, SurfaceControl surfaceControl, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(surfaceControl, 0);
-                    obtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(surfaceControl, 0);
+                    parcelObtain.writeStrongInterface(iAccessibilityInteractionConnectionCallback);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void connectBluetoothBrailleDisplay(String str, IBrailleDisplayController iBrailleDisplayController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iBrailleDisplayController);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iBrailleDisplayController);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void connectUsbBrailleDisplay(UsbDevice usbDevice, IBrailleDisplayController iBrailleDisplayController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeStrongInterface(iBrailleDisplayController);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeStrongInterface(iBrailleDisplayController);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceConnection
             public void setTestBrailleDisplayData(List<Bundle> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

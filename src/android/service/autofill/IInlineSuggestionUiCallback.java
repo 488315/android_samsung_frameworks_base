@@ -82,9 +82,9 @@ public interface IInlineSuggestionUiCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionUiCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineSuggestionUiCallback)) {
-                return (IInlineSuggestionUiCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineSuggestionUiCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineSuggestionUiCallback)) {
+                return (IInlineSuggestionUiCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,21 +130,21 @@ public interface IInlineSuggestionUiCallback extends IInterface {
                     onLongClick();
                     return true;
                 case 3:
-                    IInlineSuggestionUi asInterface = IInlineSuggestionUi.Stub.asInterface(parcel.readStrongBinder());
+                    IInlineSuggestionUi iInlineSuggestionUiAsInterface = IInlineSuggestionUi.Stub.asInterface(parcel.readStrongBinder());
                     SurfaceControlViewHost.SurfacePackage surfacePackage = (SurfaceControlViewHost.SurfacePackage) parcel.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onContent(asInterface, surfacePackage, readInt, readInt2);
+                    onContent(iInlineSuggestionUiAsInterface, surfacePackage, i3, i4);
                     return true;
                 case 4:
                     onError();
                     return true;
                 case 5:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTransferTouchFocusToImeWindow(readStrongBinder, readInt3);
+                    onTransferTouchFocusToImeWindow(strongBinder, i5);
                     return true;
                 case 6:
                     IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
@@ -174,74 +174,74 @@ public interface IInlineSuggestionUiCallback extends IInterface {
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onClick() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onLongClick() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onContent(IInlineSuggestionUi iInlineSuggestionUi, SurfaceControlViewHost.SurfacePackage surfacePackage, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInlineSuggestionUi);
-                    obtain.writeTypedObject(surfacePackage, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInlineSuggestionUi);
+                    parcelObtain.writeTypedObject(surfacePackage, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onError() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onTransferTouchFocusToImeWindow(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
             public void onStartIntentSender(IntentSender intentSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(intentSender, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

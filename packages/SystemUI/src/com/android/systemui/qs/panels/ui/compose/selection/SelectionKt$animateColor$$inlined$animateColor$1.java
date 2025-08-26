@@ -8,7 +8,6 @@ import androidx.compose.runtime.ComposerKt;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SelectionKt$animateColor$$inlined$animateColor$1 extends Lambda implements Function3 {
     public static final SelectionKt$animateColor$$inlined$animateColor$1 INSTANCE = new SelectionKt$animateColor$$inlined$animateColor$1();
@@ -25,11 +24,11 @@ public final class SelectionKt$animateColor$$inlined$animateColor$1 extends Lamb
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.animation.animateColor.<anonymous> (Transition.kt:62)");
         }
-        SpringSpec spring$default = AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7);
+        SpringSpec springSpecSpring$default = AnimationSpecKt.spring$default(0.0f, 0.0f, null, 7);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return spring$default;
+        return springSpecSpring$default;
     }
 }

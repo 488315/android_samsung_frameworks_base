@@ -205,6 +205,7 @@ public final class AssetManager implements AutoCloseable {
             return this;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public AssetManager build() {
             boolean z;
             ApkAssets[] apkAssets = AssetManager.getSystem().getApkAssets();
@@ -462,26 +463,26 @@ public final class AssetManager implements AutoCloseable {
             }
             ArrayList arrayList = new ArrayList(list.size());
             int size = list.size();
-            int i2 = -1;
-            for (int i3 = 0; i3 < size; i3++) {
-                ResourcesManager.ApkKey apkKey = list.get(i3);
+            int iIntValue = -1;
+            for (int i2 = 0; i2 < size; i2++) {
+                ResourcesManager.ApkKey apkKey = list.get(i2);
                 Integer num = (Integer) arrayMap.get(apkKey.path);
                 if (num == null) {
                     arrayList.add(apkKey);
                 } else {
-                    i2 = num.intValue();
+                    iIntValue = num.intValue();
                 }
             }
             if (arrayList.isEmpty()) {
-                return i2 + 1;
+                return iIntValue + 1;
             }
-            ArrayList<ApkAssets> loadAssets = loadAssets(arrayList);
-            if (loadAssets.isEmpty()) {
+            ArrayList<ApkAssets> arrayListLoadAssets = loadAssets(arrayList);
+            if (arrayListLoadAssets.isEmpty()) {
                 return 0;
             }
-            ApkAssets[] makeNewAssetsArrayLocked = makeNewAssetsArrayLocked(loadAssets);
-            this.mApkAssets = makeNewAssetsArrayLocked;
-            nativeSetApkAssets(this.mObject, makeNewAssetsArrayLocked, true, z);
+            ApkAssets[] apkAssetsArrMakeNewAssetsArrayLocked = makeNewAssetsArrayLocked(arrayListLoadAssets);
+            this.mApkAssets = apkAssetsArrMakeNewAssetsArrayLocked;
+            nativeSetApkAssets(this.mObject, apkAssetsArrMakeNewAssetsArrayLocked, true, z);
             invalidateCachesLocked(-1);
             return length + 1;
         }
@@ -561,13 +562,13 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(typedValue, "outValue");
         synchronized (this) {
             ensureValidLocked();
-            int nativeGetResourceValue = nativeGetResourceValue(this.mObject, i, (short) i2, typedValue, z);
-            if (nativeGetResourceValue <= 0) {
+            int iNativeGetResourceValue = nativeGetResourceValue(this.mObject, i, (short) i2, typedValue, z);
+            if (iNativeGetResourceValue <= 0) {
                 return false;
             }
             typedValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(typedValue.changingConfigurations);
             if (typedValue.type == 3) {
-                CharSequence pooledStringForCookie = getPooledStringForCookie(nativeGetResourceValue, typedValue.data);
+                CharSequence pooledStringForCookie = getPooledStringForCookie(iNativeGetResourceValue, typedValue.data);
                 typedValue.string = pooledStringForCookie;
                 if (pooledStringForCookie == null) {
                     return false;
@@ -591,60 +592,60 @@ public final class AssetManager implements AutoCloseable {
         synchronized (this) {
             ensureValidLocked();
             TypedValue typedValue = this.mValue;
-            int nativeGetResourceBagValue = nativeGetResourceBagValue(this.mObject, i, i2, typedValue);
-            if (nativeGetResourceBagValue <= 0) {
+            int iNativeGetResourceBagValue = nativeGetResourceBagValue(this.mObject, i, i2, typedValue);
+            if (iNativeGetResourceBagValue <= 0) {
                 return null;
             }
             typedValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(typedValue.changingConfigurations);
             if (typedValue.type == 3) {
-                return getPooledStringForCookie(nativeGetResourceBagValue, typedValue.data);
+                return getPooledStringForCookie(iNativeGetResourceBagValue, typedValue.data);
             }
             return typedValue.coerceToString();
         }
     }
 
     int getResourceArraySize(int i) {
-        int nativeGetResourceArraySize;
+        int iNativeGetResourceArraySize;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceArraySize = nativeGetResourceArraySize(this.mObject, i);
+            iNativeGetResourceArraySize = nativeGetResourceArraySize(this.mObject, i);
         }
-        return nativeGetResourceArraySize;
+        return iNativeGetResourceArraySize;
     }
 
     int getResourceArray(int i, int[] iArr) {
-        int nativeGetResourceArray;
+        int iNativeGetResourceArray;
         Objects.requireNonNull(iArr, "outData");
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceArray = nativeGetResourceArray(this.mObject, i, iArr);
+            iNativeGetResourceArray = nativeGetResourceArray(this.mObject, i, iArr);
         }
-        return nativeGetResourceArray;
+        return iNativeGetResourceArray;
     }
 
     String[] getResourceStringArray(int i) {
-        String[] nativeGetResourceStringArray;
+        String[] strArrNativeGetResourceStringArray;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceStringArray = nativeGetResourceStringArray(this.mObject, i);
+            strArrNativeGetResourceStringArray = nativeGetResourceStringArray(this.mObject, i);
         }
-        return nativeGetResourceStringArray;
+        return strArrNativeGetResourceStringArray;
     }
 
     CharSequence[] getResourceTextArray(int i) {
         synchronized (this) {
             ensureValidLocked();
-            int[] nativeGetResourceStringArrayInfo = nativeGetResourceStringArrayInfo(this.mObject, i);
-            if (nativeGetResourceStringArrayInfo == null) {
+            int[] iArrNativeGetResourceStringArrayInfo = nativeGetResourceStringArrayInfo(this.mObject, i);
+            if (iArrNativeGetResourceStringArrayInfo == null) {
                 return null;
             }
-            int length = nativeGetResourceStringArrayInfo.length;
+            int length = iArrNativeGetResourceStringArrayInfo.length;
             CharSequence[] charSequenceArr = new CharSequence[length / 2];
             int i2 = 0;
             int i3 = 0;
             while (i2 < length) {
-                int i4 = nativeGetResourceStringArrayInfo[i2];
-                int i5 = nativeGetResourceStringArrayInfo[i2 + 1];
+                int i4 = iArrNativeGetResourceStringArrayInfo[i2];
+                int i5 = iArrNativeGetResourceStringArrayInfo[i2 + 1];
                 charSequenceArr[i3] = (i5 < 0 || i4 <= 0) ? null : getPooledStringForCookie(i4, i5);
                 i2 += 2;
                 i3++;
@@ -654,34 +655,34 @@ public final class AssetManager implements AutoCloseable {
     }
 
     int[] getResourceIntArray(int i) {
-        int[] nativeGetResourceIntArray;
+        int[] iArrNativeGetResourceIntArray;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceIntArray = nativeGetResourceIntArray(this.mObject, i);
+            iArrNativeGetResourceIntArray = nativeGetResourceIntArray(this.mObject, i);
         }
-        return nativeGetResourceIntArray;
+        return iArrNativeGetResourceIntArray;
     }
 
     int[] getStyleAttributes(int i) {
-        int[] nativeGetStyleAttributes;
+        int[] iArrNativeGetStyleAttributes;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetStyleAttributes = nativeGetStyleAttributes(this.mObject, i);
+            iArrNativeGetStyleAttributes = nativeGetStyleAttributes(this.mObject, i);
         }
-        return nativeGetStyleAttributes;
+        return iArrNativeGetStyleAttributes;
     }
 
     boolean getThemeValue(long j, int i, TypedValue typedValue, boolean z) {
         Objects.requireNonNull(typedValue, "outValue");
         synchronized (this) {
             ensureValidLocked();
-            int nativeThemeGetAttributeValue = nativeThemeGetAttributeValue(this.mObject, j, i, typedValue, z);
-            if (nativeThemeGetAttributeValue <= 0) {
+            int iNativeThemeGetAttributeValue = nativeThemeGetAttributeValue(this.mObject, j, i, typedValue, z);
+            if (iNativeThemeGetAttributeValue <= 0) {
                 return false;
             }
             typedValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(typedValue.changingConfigurations);
             if (typedValue.type == 3) {
-                CharSequence pooledStringForCookie = getPooledStringForCookie(nativeThemeGetAttributeValue, typedValue.data);
+                CharSequence pooledStringForCookie = getPooledStringForCookie(iNativeThemeGetAttributeValue, typedValue.data);
                 typedValue.string = pooledStringForCookie;
                 if (pooledStringForCookie == null) {
                     return false;
@@ -699,57 +700,57 @@ public final class AssetManager implements AutoCloseable {
     }
 
     String getResourceName(int i) {
-        String nativeGetResourceName;
+        String strNativeGetResourceName;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceName = nativeGetResourceName(this.mObject, i);
+            strNativeGetResourceName = nativeGetResourceName(this.mObject, i);
         }
-        return nativeGetResourceName;
+        return strNativeGetResourceName;
     }
 
     String getResourcePackageName(int i) {
-        String nativeGetResourcePackageName;
+        String strNativeGetResourcePackageName;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourcePackageName = nativeGetResourcePackageName(this.mObject, i);
+            strNativeGetResourcePackageName = nativeGetResourcePackageName(this.mObject, i);
         }
-        return nativeGetResourcePackageName;
+        return strNativeGetResourcePackageName;
     }
 
     String getResourceTypeName(int i) {
-        String nativeGetResourceTypeName;
+        String strNativeGetResourceTypeName;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceTypeName = nativeGetResourceTypeName(this.mObject, i);
+            strNativeGetResourceTypeName = nativeGetResourceTypeName(this.mObject, i);
         }
-        return nativeGetResourceTypeName;
+        return strNativeGetResourceTypeName;
     }
 
     String getResourceEntryName(int i) {
-        String nativeGetResourceEntryName;
+        String strNativeGetResourceEntryName;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceEntryName = nativeGetResourceEntryName(this.mObject, i);
+            strNativeGetResourceEntryName = nativeGetResourceEntryName(this.mObject, i);
         }
-        return nativeGetResourceEntryName;
+        return strNativeGetResourceEntryName;
     }
 
     int getResourceIdentifier(String str, String str2, String str3) {
-        int nativeGetResourceIdentifier;
+        int iNativeGetResourceIdentifier;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceIdentifier = nativeGetResourceIdentifier(this.mObject, str, str2, str3);
+            iNativeGetResourceIdentifier = nativeGetResourceIdentifier(this.mObject, str, str2, str3);
         }
-        return nativeGetResourceIdentifier;
+        return iNativeGetResourceIdentifier;
     }
 
     int getParentThemeIdentifier(int i) {
-        int nativeGetParentThemeIdentifier;
+        int iNativeGetParentThemeIdentifier;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetParentThemeIdentifier = nativeGetParentThemeIdentifier(this.mObject, i);
+            iNativeGetParentThemeIdentifier = nativeGetParentThemeIdentifier(this.mObject, i);
         }
-        return nativeGetParentThemeIdentifier;
+        return iNativeGetParentThemeIdentifier;
     }
 
     public void setResourceResolutionLoggingEnabled(boolean z) {
@@ -760,21 +761,21 @@ public final class AssetManager implements AutoCloseable {
     }
 
     public String getLastResourceResolution() {
-        String nativeGetLastResourceResolution;
+        String strNativeGetLastResourceResolution;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetLastResourceResolution = nativeGetLastResourceResolution(this.mObject);
+            strNativeGetLastResourceResolution = nativeGetLastResourceResolution(this.mObject);
         }
-        return nativeGetLastResourceResolution;
+        return strNativeGetLastResourceResolution;
     }
 
     public boolean containsAllocatedTable() {
-        boolean nativeContainsAllocatedTable;
+        boolean zNativeContainsAllocatedTable;
         synchronized (this) {
             ensureValidLocked();
-            nativeContainsAllocatedTable = nativeContainsAllocatedTable(this.mObject);
+            zNativeContainsAllocatedTable = nativeContainsAllocatedTable(this.mObject);
         }
-        return nativeContainsAllocatedTable;
+        return zNativeContainsAllocatedTable;
     }
 
     CharSequence getPooledStringForCookie(int i, int i2) {
@@ -794,11 +795,11 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            long nativeOpenAsset = nativeOpenAsset(this.mObject, str, i);
-            if (nativeOpenAsset == 0) {
+            long jNativeOpenAsset = nativeOpenAsset(this.mObject, str, i);
+            if (jNativeOpenAsset == 0) {
                 throw new FileNotFoundException("Asset file: " + str);
             }
-            assetInputStream = new AssetInputStream(nativeOpenAsset);
+            assetInputStream = new AssetInputStream(jNativeOpenAsset);
             incRefsLocked(assetInputStream.hashCode());
         }
         return assetInputStream;
@@ -809,24 +810,24 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            ParcelFileDescriptor nativeOpenAssetFd = nativeOpenAssetFd(this.mObject, str, this.mOffsets);
-            if (nativeOpenAssetFd == null) {
+            ParcelFileDescriptor parcelFileDescriptorNativeOpenAssetFd = nativeOpenAssetFd(this.mObject, str, this.mOffsets);
+            if (parcelFileDescriptorNativeOpenAssetFd == null) {
                 throw new FileNotFoundException("Asset file: " + str);
             }
             long[] jArr = this.mOffsets;
-            assetFileDescriptor = new AssetFileDescriptor(nativeOpenAssetFd, jArr[0], jArr[1]);
+            assetFileDescriptor = new AssetFileDescriptor(parcelFileDescriptorNativeOpenAssetFd, jArr[0], jArr[1]);
         }
         return assetFileDescriptor;
     }
 
     public String[] list(String str) throws IOException {
-        String[] nativeList;
+        String[] strArrNativeList;
         Objects.requireNonNull(str, "path");
         synchronized (this) {
             ensureValidLocked();
-            nativeList = nativeList(this.mObject, str);
+            strArrNativeList = nativeList(this.mObject, str);
         }
-        return nativeList;
+        return strArrNativeList;
     }
 
     public InputStream openNonAsset(String str) throws IOException {
@@ -846,11 +847,11 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            long nativeOpenNonAsset = nativeOpenNonAsset(this.mObject, i, str, i2);
-            if (nativeOpenNonAsset == 0) {
+            long jNativeOpenNonAsset = nativeOpenNonAsset(this.mObject, i, str, i2);
+            if (jNativeOpenNonAsset == 0) {
                 throw new FileNotFoundException("Asset absolute file: " + str);
             }
-            assetInputStream = new AssetInputStream(nativeOpenNonAsset);
+            assetInputStream = new AssetInputStream(jNativeOpenNonAsset);
             incRefsLocked(assetInputStream.hashCode());
         }
         return assetInputStream;
@@ -865,12 +866,12 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            ParcelFileDescriptor nativeOpenNonAssetFd = nativeOpenNonAssetFd(this.mObject, i, str, this.mOffsets);
-            if (nativeOpenNonAssetFd == null) {
+            ParcelFileDescriptor parcelFileDescriptorNativeOpenNonAssetFd = nativeOpenNonAssetFd(this.mObject, i, str, this.mOffsets);
+            if (parcelFileDescriptorNativeOpenNonAssetFd == null) {
                 throw new FileNotFoundException("Asset absolute file: " + str);
             }
             long[] jArr = this.mOffsets;
-            assetFileDescriptor = new AssetFileDescriptor(nativeOpenNonAssetFd, jArr[0], jArr[1]);
+            assetFileDescriptor = new AssetFileDescriptor(parcelFileDescriptorNativeOpenNonAssetFd, jArr[0], jArr[1]);
         }
         return assetFileDescriptor;
     }
@@ -880,20 +881,20 @@ public final class AssetManager implements AutoCloseable {
     }
 
     public XmlResourceParser openXmlResourceParser(int i, String str) throws IOException {
-        XmlBlock openXmlBlockAsset = openXmlBlockAsset(i, str, true);
+        XmlBlock xmlBlockOpenXmlBlockAsset = openXmlBlockAsset(i, str, true);
         try {
-            XmlResourceParser newParser = openXmlBlockAsset.newParser(0, new Validator());
-            if (newParser == null) {
+            XmlResourceParser xmlResourceParserNewParser = xmlBlockOpenXmlBlockAsset.newParser(0, new Validator());
+            if (xmlResourceParserNewParser == null) {
                 throw new AssertionError("block.newParser() returned a null parser");
             }
-            if (openXmlBlockAsset != null) {
-                openXmlBlockAsset.close();
+            if (xmlBlockOpenXmlBlockAsset != null) {
+                xmlBlockOpenXmlBlockAsset.close();
             }
-            return newParser;
+            return xmlResourceParserNewParser;
         } catch (Throwable th) {
-            if (openXmlBlockAsset != null) {
+            if (xmlBlockOpenXmlBlockAsset != null) {
                 try {
-                    openXmlBlockAsset.close();
+                    xmlBlockOpenXmlBlockAsset.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -911,11 +912,11 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            long nativeOpenXmlAsset = nativeOpenXmlAsset(this.mObject, i, str);
-            if (nativeOpenXmlAsset == 0) {
+            long jNativeOpenXmlAsset = nativeOpenXmlAsset(this.mObject, i, str);
+            if (jNativeOpenXmlAsset == 0) {
                 throw new FileNotFoundException("Asset XML file: " + str);
             }
-            xmlBlock = new XmlBlock(this, nativeOpenXmlAsset, z);
+            xmlBlock = new XmlBlock(this, jNativeOpenXmlAsset, z);
             incRefsLocked(xmlBlock.hashCode());
         }
         return xmlBlock;
@@ -934,47 +935,47 @@ public final class AssetManager implements AutoCloseable {
     }
 
     int[] getAttributeResolutionStack(long j, int i, int i2, int i3) {
-        int[] nativeAttributeResolutionStack;
+        int[] iArrNativeAttributeResolutionStack;
         synchronized (this) {
             ensureValidLocked();
-            nativeAttributeResolutionStack = nativeAttributeResolutionStack(this.mObject, j, i3, i, i2);
+            iArrNativeAttributeResolutionStack = nativeAttributeResolutionStack(this.mObject, j, i3, i, i2);
         }
-        return nativeAttributeResolutionStack;
+        return iArrNativeAttributeResolutionStack;
     }
 
     boolean resolveAttrs(long j, int i, int i2, int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4) {
-        boolean nativeResolveAttrs;
+        boolean zNativeResolveAttrs;
         Objects.requireNonNull(iArr2, "inAttrs");
         Objects.requireNonNull(iArr3, "outValues");
         Objects.requireNonNull(iArr4, "outIndices");
         synchronized (this) {
             ensureValidLocked();
-            nativeResolveAttrs = nativeResolveAttrs(this.mObject, j, i, i2, iArr, iArr2, iArr3, iArr4);
+            zNativeResolveAttrs = nativeResolveAttrs(this.mObject, j, i, i2, iArr, iArr2, iArr3, iArr4);
         }
-        return nativeResolveAttrs;
+        return zNativeResolveAttrs;
     }
 
     boolean retrieveAttributes(XmlBlock.Parser parser, int[] iArr, int[] iArr2, int[] iArr3) {
-        boolean nativeRetrieveAttributes;
+        boolean zNativeRetrieveAttributes;
         Objects.requireNonNull(parser, "parser");
         Objects.requireNonNull(iArr, "inAttrs");
         Objects.requireNonNull(iArr2, "outValues");
         Objects.requireNonNull(iArr3, "outIndices");
         synchronized (this) {
             ensureValidLocked();
-            nativeRetrieveAttributes = nativeRetrieveAttributes(this.mObject, parser.mParseState, iArr, iArr2, iArr3);
+            zNativeRetrieveAttributes = nativeRetrieveAttributes(this.mObject, parser.mParseState, iArr, iArr2, iArr3);
         }
-        return nativeRetrieveAttributes;
+        return zNativeRetrieveAttributes;
     }
 
     long createTheme() {
-        long nativeThemeCreate;
+        long jNativeThemeCreate;
         synchronized (this) {
             ensureValidLocked();
-            nativeThemeCreate = nativeThemeCreate(this.mObject);
-            incRefsLocked(nativeThemeCreate);
+            jNativeThemeCreate = nativeThemeCreate(this.mObject);
+            incRefsLocked(jNativeThemeCreate);
         }
-        return nativeThemeCreate;
+        return jNativeThemeCreate;
     }
 
     void releaseTheme(long j) {
@@ -1080,11 +1081,11 @@ public final class AssetManager implements AutoCloseable {
         @Override // java.io.InputStream
         public final long skip(long j) throws IOException {
             ensureOpen();
-            long nativeAssetSeek = AssetManager.nativeAssetSeek(this.mAssetNativePtr, 0L, 0);
-            long j2 = nativeAssetSeek + j;
+            long jNativeAssetSeek = AssetManager.nativeAssetSeek(this.mAssetNativePtr, 0L, 0);
+            long j2 = jNativeAssetSeek + j;
             long j3 = this.mLength;
             if (j2 > j3) {
-                j = j3 - nativeAssetSeek;
+                j = j3 - jNativeAssetSeek;
             }
             if (j > 0) {
                 AssetManager.nativeAssetSeek(this.mAssetNativePtr, j, 0);
@@ -1095,11 +1096,11 @@ public final class AssetManager implements AutoCloseable {
         @Override // java.io.InputStream
         public final int available() throws IOException {
             ensureOpen();
-            long nativeAssetGetRemainingLength = AssetManager.nativeAssetGetRemainingLength(this.mAssetNativePtr);
-            if (nativeAssetGetRemainingLength > 2147483647L) {
+            long jNativeAssetGetRemainingLength = AssetManager.nativeAssetGetRemainingLength(this.mAssetNativePtr);
+            if (jNativeAssetGetRemainingLength > 2147483647L) {
                 return Integer.MAX_VALUE;
             }
-            return (int) nativeAssetGetRemainingLength;
+            return (int) jNativeAssetGetRemainingLength;
         }
 
         @Override // java.io.InputStream
@@ -1157,39 +1158,39 @@ public final class AssetManager implements AutoCloseable {
     }
 
     public String[] getLocales() {
-        String[] nativeGetLocales;
+        String[] strArrNativeGetLocales;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetLocales = nativeGetLocales(this.mObject, false);
+            strArrNativeGetLocales = nativeGetLocales(this.mObject, false);
         }
-        return nativeGetLocales;
+        return strArrNativeGetLocales;
     }
 
     public String[] getNonSystemLocales() {
-        String[] nativeGetLocales;
+        String[] strArrNativeGetLocales;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetLocales = nativeGetLocales(this.mObject, true);
+            strArrNativeGetLocales = nativeGetLocales(this.mObject, true);
         }
-        return nativeGetLocales;
+        return strArrNativeGetLocales;
     }
 
     Configuration[] getSizeConfigurations() {
-        Configuration[] nativeGetSizeConfigurations;
+        Configuration[] configurationArrNativeGetSizeConfigurations;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetSizeConfigurations = nativeGetSizeConfigurations(this.mObject);
+            configurationArrNativeGetSizeConfigurations = nativeGetSizeConfigurations(this.mObject);
         }
-        return nativeGetSizeConfigurations;
+        return configurationArrNativeGetSizeConfigurations;
     }
 
     Configuration[] getSizeAndUiModeConfigurations() {
-        Configuration[] nativeGetSizeAndUiModeConfigurations;
+        Configuration[] configurationArrNativeGetSizeAndUiModeConfigurations;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetSizeAndUiModeConfigurations = nativeGetSizeAndUiModeConfigurations(this.mObject);
+            configurationArrNativeGetSizeAndUiModeConfigurations = nativeGetSizeAndUiModeConfigurations(this.mObject);
         }
-        return nativeGetSizeAndUiModeConfigurations;
+        return configurationArrNativeGetSizeAndUiModeConfigurations;
     }
 
     public void setConfiguration(int i, int i2, String str, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18) {
@@ -1225,30 +1226,30 @@ public final class AssetManager implements AutoCloseable {
     }
 
     public SparseArray<String> getAssignedPackageIdentifiers(boolean z, boolean z2) {
-        SparseArray<String> nativeGetAssignedPackageIdentifiers;
+        SparseArray<String> sparseArrayNativeGetAssignedPackageIdentifiers;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetAssignedPackageIdentifiers = nativeGetAssignedPackageIdentifiers(this.mObject, z, z2);
+            sparseArrayNativeGetAssignedPackageIdentifiers = nativeGetAssignedPackageIdentifiers(this.mObject, z, z2);
         }
-        return nativeGetAssignedPackageIdentifiers;
+        return sparseArrayNativeGetAssignedPackageIdentifiers;
     }
 
     public Map<String, String> getOverlayableMap(String str) {
-        Map<String, String> nativeGetOverlayableMap;
+        Map<String, String> mapNativeGetOverlayableMap;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetOverlayableMap = nativeGetOverlayableMap(this.mObject, str);
+            mapNativeGetOverlayableMap = nativeGetOverlayableMap(this.mObject, str);
         }
-        return nativeGetOverlayableMap;
+        return mapNativeGetOverlayableMap;
     }
 
     public String getOverlayablesToString(String str) {
-        String nativeGetOverlayablesToString;
+        String strNativeGetOverlayablesToString;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetOverlayablesToString = nativeGetOverlayablesToString(this.mObject, str);
+            strNativeGetOverlayablesToString = nativeGetOverlayablesToString(this.mObject, str);
         }
-        return nativeGetOverlayablesToString;
+        return strNativeGetOverlayablesToString;
     }
 
     private void incRefsLocked(long j) {

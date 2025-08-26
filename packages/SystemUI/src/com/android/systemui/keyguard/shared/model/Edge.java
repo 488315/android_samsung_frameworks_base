@@ -8,13 +8,11 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class Edge {
     public static final Companion Companion = new Companion(null);
     public static final StateToState INVALID;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ContentToState extends Edge {
         public final ContentKey from;
         public final KeyguardState to;
@@ -62,9 +59,9 @@ public abstract class Edge {
         }
 
         public final int hashCode() {
-            int hashCode = this.from.identity.hashCode() * 31;
+            int iHashCode = this.from.identity.hashCode() * 31;
             KeyguardState keyguardState = this.to;
-            return hashCode + (keyguardState == null ? 0 : keyguardState.hashCode());
+            return iHashCode + (keyguardState == null ? 0 : keyguardState.hashCode());
         }
 
         public final String toString() {
@@ -76,7 +73,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateToContent extends Edge {
         public final KeyguardState from;
         public final ContentKey to;
@@ -112,7 +108,6 @@ public abstract class Edge {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateToState extends Edge {
         public final KeyguardState from;
         public final KeyguardState to;
@@ -139,9 +134,9 @@ public abstract class Edge {
 
         public final int hashCode() {
             KeyguardState keyguardState = this.from;
-            int hashCode = (keyguardState == null ? 0 : keyguardState.hashCode()) * 31;
+            int iHashCode = (keyguardState == null ? 0 : keyguardState.hashCode()) * 31;
             KeyguardState keyguardState2 = this.to;
-            return hashCode + (keyguardState2 != null ? keyguardState2.hashCode() : 0);
+            return iHashCode + (keyguardState2 != null ? keyguardState2.hashCode() : 0);
         }
 
         public final String toString() {

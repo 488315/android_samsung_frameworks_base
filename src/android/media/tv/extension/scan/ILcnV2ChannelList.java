@@ -63,9 +63,9 @@ public interface ILcnV2ChannelList extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ILcnV2ChannelList");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILcnV2ChannelList)) {
-                return (ILcnV2ChannelList) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ILcnV2ChannelList");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILcnV2ChannelList)) {
+                return (ILcnV2ChannelList) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,9 +108,9 @@ public interface ILcnV2ChannelList extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeInt(lcnV2ChannelList);
             } else if (i == 3) {
-                ILcnV2ChannelListListener asInterface = ILcnV2ChannelListListener.Stub.asInterface(parcel.readStrongBinder());
+                ILcnV2ChannelListListener iLcnV2ChannelListListenerAsInterface = ILcnV2ChannelListListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int listener = setListener(asInterface);
+                int listener = setListener(iLcnV2ChannelListListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(listener);
             } else {
@@ -137,48 +137,48 @@ public interface ILcnV2ChannelList extends IInterface {
 
             @Override // android.media.tv.extension.scan.ILcnV2ChannelList
             public Bundle[] getLcnV2ChannelLists() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ILcnV2ChannelList
             public int setLcnV2ChannelList(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ILcnV2ChannelList
             public int setListener(ILcnV2ChannelListListener iLcnV2ChannelListListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
-                    obtain.writeStrongInterface(iLcnV2ChannelListListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnV2ChannelList");
+                    parcelObtain.writeStrongInterface(iLcnV2ChannelListListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

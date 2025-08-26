@@ -9,11 +9,9 @@ import android.os.Process;
 import androidx.profileinstaller.ProfileInstaller;
 import java.io.File;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ProfileInstallReceiver extends BroadcastReceiver {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResultDiagnostics implements ProfileInstaller.DiagnosticsCallback {
         public ResultDiagnostics() {
         }
@@ -31,7 +29,7 @@ public class ProfileInstallReceiver extends BroadcastReceiver {
     }
 
     @Override // android.content.BroadcastReceiver
-    public final void onReceive(Context context, Intent intent) {
+    public final void onReceive(Context context, Intent intent) throws Throwable {
         Bundle extras;
         if (intent == null) {
             return;

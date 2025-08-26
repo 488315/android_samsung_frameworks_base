@@ -3,7 +3,6 @@ package com.samsung.android.knox.keystore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public class CMPProfile extends EnrollmentProfile implements Parcelable {
@@ -83,9 +82,9 @@ public class CMPProfile extends EnrollmentProfile implements Parcelable {
         this.profileType = parcel.readString();
         this.cmpServerURL = parcel.readString();
         this.userName = parcel.readString();
-        long readLong = parcel.readLong();
-        this.iakLength = readLong;
-        byte[] bArr = new byte[(int) readLong];
+        long j = parcel.readLong();
+        this.iakLength = j;
+        byte[] bArr = new byte[(int) j];
         this.initialAuthenticationKey = bArr;
         parcel.readByteArray(bArr);
         this.subjectDN = parcel.readString();

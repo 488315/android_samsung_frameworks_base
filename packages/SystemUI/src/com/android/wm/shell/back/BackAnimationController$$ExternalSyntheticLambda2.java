@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BackAnimationController$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +31,7 @@ public final /* synthetic */ class BackAnimationController$$ExternalSyntheticLam
                 Supplier supplier = new Supplier() { // from class: com.android.wm.shell.back.BackAnimationController$$ExternalSyntheticLambda4
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        BackAnimationController backAnimationController2 = BackAnimationController.this;
+                        BackAnimationController backAnimationController2 = backAnimationController;
                         backAnimationController2.getClass();
                         return new BackAnimationController.IBackAnimationImpl(backAnimationController2, backAnimationController2);
                     }
@@ -42,16 +41,16 @@ public final /* synthetic */ class BackAnimationController$$ExternalSyntheticLam
                 backAnimationController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.back.BackAnimationController$$ExternalSyntheticLambda5
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        BackAnimationController backAnimationController2 = BackAnimationController.this;
+                        BackAnimationController backAnimationController2 = backAnimationController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
                         printWriter.println(str + "BackAnimationController state:");
                         StringBuilder sb = new StringBuilder();
                         sb.append(str);
                         sb.append("  mBackGestureStarted=");
-                        StringBuilder m = BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(sb, backAnimationController2.mBackGestureStarted, printWriter, str, "  mPostCommitAnimationInProgress="), backAnimationController2.mPostCommitAnimationInProgress, printWriter, str, "  mShouldStartOnNextMoveEvent="), backAnimationController2.mShouldStartOnNextMoveEvent, printWriter, str, "  mPointerPilfered="), backAnimationController2.mThresholdCrossed, printWriter, str, "  mRequirePointerPilfer=");
-                        m.append(backAnimationController2.mRequirePointerPilfer);
-                        printWriter.println(m.toString());
+                        StringBuilder sbM = BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(sb, backAnimationController2.mBackGestureStarted, printWriter, str, "  mPostCommitAnimationInProgress="), backAnimationController2.mPostCommitAnimationInProgress, printWriter, str, "  mShouldStartOnNextMoveEvent="), backAnimationController2.mShouldStartOnNextMoveEvent, printWriter, str, "  mPointerPilfered="), backAnimationController2.mThresholdCrossed, printWriter, str, "  mRequirePointerPilfer=");
+                        sbM.append(backAnimationController2.mRequirePointerPilfer);
+                        printWriter.println(sbM.toString());
                         printWriter.println(str + "  mCurrentTracker state:");
                         backAnimationController2.mCurrentTracker.dump(printWriter, str + "    ");
                         StringBuilder sb2 = new StringBuilder();

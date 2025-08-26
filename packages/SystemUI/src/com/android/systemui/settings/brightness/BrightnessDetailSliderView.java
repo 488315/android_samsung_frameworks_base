@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
@@ -30,7 +31,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessDetailSliderView extends FrameLayout implements ToggleSlider {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -67,7 +67,7 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
         this.mIsThumbShowing = false;
         this.mSeekListener = new SeekBar.OnSeekBarChangeListener() { // from class: com.android.systemui.settings.brightness.BrightnessDetailSliderView.2
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public final void onProgressChanged(SeekBar seekBar, int i, boolean z) {
+            public final void onProgressChanged(SeekBar seekBar, int i, boolean z) throws Resources.NotFoundException {
                 ToggleSeekBar toggleSeekBar;
                 BrightnessDetailSliderView brightnessDetailSliderView = BrightnessDetailSliderView.this;
                 int i2 = BrightnessDetailSliderView.$r8$clinit;
@@ -102,7 +102,7 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
                                 brightnessDetailSliderView2.mUsingHighBrightnessDialog.setPositiveButton(com.android.systemui.R.string.sec_brightness_using_high_brightness_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.settings.brightness.BrightnessDetailSliderView$$ExternalSyntheticLambda1
                                     @Override // android.content.DialogInterface.OnClickListener
                                     public final void onClick(DialogInterface dialogInterface, int i3) {
-                                        Settings.System.semPutIntForUser(BrightnessDetailSliderView.this.mContext.getContentResolver(), "screen_brightness_mode", 1, -2);
+                                        Settings.System.semPutIntForUser(brightnessDetailSliderView2.mContext.getContentResolver(), "screen_brightness_mode", 1, -2);
                                     }
                                 });
                                 brightnessDetailSliderView2.mUsingHighBrightnessDialog.setNegativeButton(com.android.systemui.R.string.sec_brightness_using_high_brightness_dialog_negative_button, new BrightnessDetailSliderView$$ExternalSyntheticLambda2());
@@ -218,6 +218,13 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
     @Override // android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
+        if (this.mSlider == null) {
+            return;
+        }
+        this.mSlider.setProgress(Settings.System.getIntForUser(this.mContext.getContentResolver(), "screen_brightness", 210, -2));
+        if (this.mSlider.getProgress() >= this.mDualSeekBarThreshold) {
+            ((TransitionDrawable) ((LayerDrawable) this.mSlider.getProgressDrawable()).getDrawable(1)).startTransition(200);
+        }
         this.mSlider.setOnSeekBarChangeListener(this.mSeekListener);
     }
 
@@ -233,7 +240,7 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
     /* JADX WARN: Type inference failed for: r0v48, types: [java.lang.CharSequence] */
     /* JADX WARN: Type inference failed for: r4v12, types: [android.content.pm.PackageManager] */
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws PackageManager.NameNotFoundException {
         ApplicationInfo applicationInfo;
         super.onFinishInflate();
         this.mBrightnessIcon = new BrightnessAnimationIcon((LottieAnimationView) requireViewById(com.android.systemui.R.id.brightness_icon));
@@ -245,13 +252,13 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
         Drawable drawable = this.mContext.getDrawable(com.android.systemui.R.drawable.sec_qs_slider_transparent_thumb);
         this.mTransparentThumb = drawable;
         this.mSlider.setThumb(drawable);
-        ValueAnimator ofInt = ValueAnimator.ofInt(0, 255);
-        this.mThumbAnimator = ofInt;
-        ofInt.setDuration(200L);
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, 255);
+        this.mThumbAnimator = valueAnimatorOfInt;
+        valueAnimatorOfInt.setDuration(200L);
         this.mThumbAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.settings.brightness.BrightnessDetailSliderView$$ExternalSyntheticLambda3
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                BrightnessDetailSliderView.this.mSlider.getThumb().setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                this.f$0.mSlider.getThumb().setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
             }
         });
         this.mThumbAnimator.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.settings.brightness.BrightnessDetailSliderView.1
@@ -285,24 +292,24 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
         BrightnessInfo brightnessInfo = this.mContext.getDisplay().getBrightnessInfo();
         if (brightnessInfo != null) {
             this.mSliderEnabled = !brightnessInfo.isBrightnessOverrideByWindow;
-            ?? r0 = brightnessInfo.screenBrightnessOverridePackageByWindow;
+            ?? applicationLabel = brightnessInfo.screenBrightnessOverridePackageByWindow;
             try {
-                applicationInfo = this.mPackageManager.getApplicationInfo(r0, 0);
+                applicationInfo = this.mPackageManager.getApplicationInfo(applicationLabel, 0);
             } catch (PackageManager.NameNotFoundException unused) {
                 applicationInfo = null;
             }
             if (applicationInfo != null) {
-                r0 = this.mPackageManager.getApplicationLabel(applicationInfo);
+                applicationLabel = this.mPackageManager.getApplicationLabel(applicationInfo);
             }
-            String str = (String) r0;
+            String str = (String) applicationLabel;
             this.mAppUsingBrightness = str;
-            boolean isEmpty = TextUtils.isEmpty(str);
-            this.mSystemBrightnessEnabled = isEmpty;
-            if (this.mSliderEnabled != isEmpty) {
-                this.mSliderEnabled = isEmpty;
+            boolean zIsEmpty = TextUtils.isEmpty(str);
+            this.mSystemBrightnessEnabled = zIsEmpty;
+            if (this.mSliderEnabled != zIsEmpty) {
+                this.mSliderEnabled = zIsEmpty;
                 ToggleSeekBar toggleSeekBar2 = this.mSlider;
                 if (toggleSeekBar2 != null) {
-                    toggleSeekBar2.setOnSeekBarChangeListener(isEmpty ? this.mSeekListener : null);
+                    toggleSeekBar2.setOnSeekBarChangeListener(zIsEmpty ? this.mSeekListener : null);
                 }
             }
         }
@@ -332,7 +339,7 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
         this.mSlider.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.settings.brightness.BrightnessDetailSliderView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                BrightnessDetailSliderView brightnessDetailSliderView = BrightnessDetailSliderView.this;
+                BrightnessDetailSliderView brightnessDetailSliderView = this.f$0;
                 if (brightnessDetailSliderView.mSystemBrightnessEnabled) {
                     if (brightnessDetailSliderView.mHighBrightnessModeEnter && brightnessDetailSliderView.isAutoChecked$1() && motionEvent.getAction() == 0) {
                         if (brightnessDetailSliderView.mHighBrightnessModeToast == null) {
@@ -351,9 +358,9 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
                     toast.cancel();
                 }
                 Context context2 = brightnessDetailSliderView.mContext;
-                Toast makeText = Toast.makeText(context2, context2.getString(com.android.systemui.R.string.sec_brightness_app_usage_toast, brightnessDetailSliderView.mAppUsingBrightness), 0);
-                brightnessDetailSliderView.mSliderDisableToast = makeText;
-                makeText.show();
+                Toast toastMakeText = Toast.makeText(context2, context2.getString(com.android.systemui.R.string.sec_brightness_app_usage_toast, brightnessDetailSliderView.mAppUsingBrightness), 0);
+                brightnessDetailSliderView.mSliderDisableToast = toastMakeText;
+                toastMakeText.show();
                 return true;
             }
         });
@@ -366,7 +373,7 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
     }
 
     @Override // com.android.systemui.settings.brightness.ToggleSlider
-    public final void setMax(int i) {
+    public final void setMax(int i) throws Resources.NotFoundException {
         this.mSlider.setMax(i);
         this.mDualSeekBarThreshold = (int) Math.floor((this.mSlider.getMax() * this.mContext.getResources().getInteger(com.android.systemui.R.integer.sec_brightness_slider_warning_percent)) / 100.0d);
     }
@@ -380,8 +387,5 @@ public class BrightnessDetailSliderView extends FrameLayout implements ToggleSli
     public final void setValue(int i) {
         this.mSlider.setProgress(i);
         this.mBrightnessIcon.play(i, this.mSlider.getMax());
-        if (i >= this.mDualSeekBarThreshold) {
-            ((TransitionDrawable) ((LayerDrawable) this.mSlider.getProgressDrawable()).getDrawable(1)).startTransition(200);
-        }
     }
 }

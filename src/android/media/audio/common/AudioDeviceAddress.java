@@ -150,25 +150,25 @@ public final class AudioDeviceAddress implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, parcel.readString());
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, parcel.readString());
             return;
         }
-        if (readInt == 1) {
-            _set(readInt, parcel.createByteArray());
+        if (i == 1) {
+            _set(i, parcel.createByteArray());
             return;
         }
-        if (readInt == 2) {
-            _set(readInt, parcel.createByteArray());
+        if (i == 2) {
+            _set(i, parcel.createByteArray());
             return;
         }
-        if (readInt == 3) {
-            _set(readInt, parcel.createIntArray());
-        } else if (readInt == 4) {
-            _set(readInt, parcel.createIntArray());
+        if (i == 3) {
+            _set(i, parcel.createIntArray());
+        } else if (i == 4) {
+            _set(i, parcel.createIntArray());
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

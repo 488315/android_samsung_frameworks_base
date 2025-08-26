@@ -18,7 +18,6 @@ import android.graphics.drawable.DrawableWrapper;
 import androidx.core.graphics.ColorUtils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class UserBadgeDrawable extends DrawableWrapper {
     static final int SHADOW_COLOR = 285212672;
@@ -37,7 +36,7 @@ public class UserBadgeDrawable extends DrawableWrapper {
     public final void draw(Canvas canvas) {
         if (this.mShouldDrawBackground) {
             Rect bounds = getBounds();
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.translate(bounds.left, bounds.top);
             canvas.scale(bounds.width() / 24.0f, bounds.height() / 24.0f);
             this.mPaint.setColor(ColorUtils.setAlphaComponent(SHADOW_COLOR, (int) (Color.valueOf(SHADOW_COLOR).alpha() * getAlpha())));
@@ -56,7 +55,7 @@ public class UserBadgeDrawable extends DrawableWrapper {
             } else {
                 canvas.drawCircle(12.0f, 12.0f, 11.0f, this.mPaint);
             }
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
         super.draw(canvas);
     }
@@ -75,9 +74,9 @@ public class UserBadgeDrawable extends DrawableWrapper {
         if (!(colorFilter instanceof ColorMatrixColorFilter)) {
             Paint paint = new Paint();
             paint.setColorFilter(colorFilter);
-            Bitmap createBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-            new Canvas(createBitmap).drawPaint(paint);
-            super.setTint(createBitmap.getPixel(0, 0));
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            new Canvas(bitmapCreateBitmap).drawPaint(paint);
+            super.setTint(bitmapCreateBitmap.getPixel(0, 0));
             return;
         }
         ColorMatrix colorMatrix = new ColorMatrix();
@@ -92,7 +91,6 @@ public class UserBadgeDrawable extends DrawableWrapper {
         super.setColorFilter(new ColorMatrixColorFilter(colorMatrix2));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MyConstantState extends Drawable.ConstantState {
         public final Drawable.ConstantState mBase;
         public final int mBaseColor;

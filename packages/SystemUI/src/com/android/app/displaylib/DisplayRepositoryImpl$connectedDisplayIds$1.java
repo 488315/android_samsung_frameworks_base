@@ -23,7 +23,6 @@ import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Handler $backgroundHandler;
@@ -62,8 +61,8 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
             DisplayRepositoryImpl displayRepositoryImpl = this.this$0;
             DisplayRepositoryImpl.Companion companion = DisplayRepositoryImpl.Companion;
             displayRepositoryImpl.getClass();
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DisplayRepository#getInitialConnectedDisplays");
             }
             try {
@@ -76,7 +75,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                 if (DisplayRepositoryImpl.DEBUG) {
                     Log.d("DisplayRepository", "getInitialConnectedDisplays: " + set);
                 }
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 final Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(set);
@@ -90,7 +89,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                         mutableSet.add(Integer.valueOf(i2));
                         StateFlowImpl stateFlowImpl = displayRepositoryImpl2._ignoredDisplayIds;
                         stateFlowImpl.updateState(null, SetsKt___SetsKt.minus((Set) stateFlowImpl.getValue(), Integer.valueOf(i2)));
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                     }
 
                     public final void onDisplayDisconnected(int i2) {
@@ -101,7 +100,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                         }
                         StateFlowImpl stateFlowImpl = displayRepositoryImpl2._ignoredDisplayIds;
                         stateFlowImpl.updateState(null, SetsKt___SetsKt.minus((Set) stateFlowImpl.getValue(), Integer.valueOf(i2)));
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                     }
 
                     @Override // android.hardware.display.DisplayManager.DisplayListener
@@ -116,7 +115,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                     public final void onDisplayRemoved(int i2) {
                     }
                 };
-                ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                 this.this$0.displayManager.registerDisplayListener(r4, this.$backgroundHandler, 0L, 4L);
                 DisplayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0 displayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0 = new DisplayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0(this.this$0, (DisplayRepositoryImpl$connectedDisplayIds$1$callback$1) r4);
                 this.label = 1;

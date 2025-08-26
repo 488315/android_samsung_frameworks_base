@@ -20,7 +20,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlarmTileMapper implements QSTileDataToStateMapper {
     public static final DateTimeFormatter formatter12Hour;
@@ -30,7 +29,6 @@ public final class AlarmTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
     public final Resources.Theme theme;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,20 +61,20 @@ public final class AlarmTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.alarm.ui.mapper.AlarmTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
                 DateTimeFormatter dateTimeFormatter = AlarmTileMapper.formatter12Hour;
-                AlarmTileModel alarmTileModel2 = AlarmTileModel.this;
+                AlarmTileModel alarmTileModel2 = alarmTileModel;
                 boolean z = alarmTileModel2 instanceof AlarmTileModel.NextAlarmSet;
                 AlarmTileMapper alarmTileMapper = this;
                 if (z) {
                     builder.activationState = QSTileState.ActivationState.ACTIVE;
                     AlarmTileModel.NextAlarmSet nextAlarmSet = (AlarmTileModel.NextAlarmSet) alarmTileModel2;
-                    LocalDateTime ofInstant = LocalDateTime.ofInstant(Instant.ofEpochMilli(nextAlarmSet.alarmClockInfo.getTriggerTime()), TimeZone.getDefault().toZoneId());
-                    if (ofInstant.compareTo((ChronoLocalDateTime<?>) LocalDateTime.ofInstant(Instant.ofEpochMilli(alarmTileMapper.clock.currentTimeMillis()), TimeZone.getDefault().toZoneId()).plusWeeks(1L).withSecond(0).withNano(0)) >= 0) {
-                        builder.secondaryLabel = AlarmTileMapper.formatterDateOnly.format(ofInstant);
+                    LocalDateTime localDateTimeOfInstant = LocalDateTime.ofInstant(Instant.ofEpochMilli(nextAlarmSet.alarmClockInfo.getTriggerTime()), TimeZone.getDefault().toZoneId());
+                    if (localDateTimeOfInstant.compareTo((ChronoLocalDateTime<?>) LocalDateTime.ofInstant(Instant.ofEpochMilli(alarmTileMapper.clock.currentTimeMillis()), TimeZone.getDefault().toZoneId()).plusWeeks(1L).withSecond(0).withNano(0)) >= 0) {
+                        builder.secondaryLabel = AlarmTileMapper.formatterDateOnly.format(localDateTimeOfInstant);
                     } else {
-                        builder.secondaryLabel = nextAlarmSet.is24HourFormat ? AlarmTileMapper.formatter24Hour.format(ofInstant) : AlarmTileMapper.formatter12Hour.format(ofInstant);
+                        builder.secondaryLabel = nextAlarmSet.is24HourFormat ? AlarmTileMapper.formatter24Hour.format(localDateTimeOfInstant) : AlarmTileMapper.formatter12Hour.format(localDateTimeOfInstant);
                     }
                 } else {
                     if (!(alarmTileModel2 instanceof AlarmTileModel.NoAlarmSet)) {

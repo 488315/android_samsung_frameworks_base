@@ -14,7 +14,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RenderInfo {
     public final int enabledBackground;
@@ -25,7 +24,6 @@ public final class RenderInfo {
     public static final SparseArray iconMap = new SparseArray();
     public static final ArrayMap appIconMap = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,10 +36,10 @@ public final class RenderInfo {
             }
             SecRenderInfo.Companion.getClass();
             Pair pair = (Pair) MapsKt__MapsKt.getValue(Integer.valueOf(i), SecRenderInfoKt.secDeviceColorMap);
-            int intValue = ((Number) pair.component1()).intValue();
-            int intValue2 = ((Number) pair.component2()).intValue();
-            int intValue3 = ((Number) MapsKt__MapsKt.getValue(Integer.valueOf(i), RenderInfoKt.deviceIconMap)).intValue();
-            if (intValue3 == -1) {
+            int iIntValue = ((Number) pair.component1()).intValue();
+            int iIntValue2 = ((Number) pair.component2()).intValue();
+            int iIntValue3 = ((Number) MapsKt__MapsKt.getValue(Integer.valueOf(i), RenderInfoKt.deviceIconMap)).intValue();
+            if (iIntValue3 == -1) {
                 ArrayMap arrayMap = RenderInfo.appIconMap;
                 drawable = (Drawable) arrayMap.get(componentName);
                 if (drawable == null) {
@@ -50,23 +48,23 @@ public final class RenderInfo {
                 }
             } else {
                 SparseArray sparseArray = RenderInfo.iconMap;
-                drawable = (Drawable) sparseArray.get(intValue3);
+                drawable = (Drawable) sparseArray.get(iIntValue3);
                 if (drawable == null) {
-                    drawable = context.getResources().getDrawable(intValue3, null);
-                    sparseArray.put(intValue3, drawable);
+                    drawable = context.getResources().getDrawable(iIntValue3, null);
+                    sparseArray.put(iIntValue3, drawable);
                 }
             }
             Drawable.ConstantState constantState = drawable != null ? drawable.getConstantState() : null;
             if (constantState == null) {
                 throw new IllegalStateException("Required value was null.");
             }
-            RenderInfo renderInfo = new RenderInfo(constantState.newDrawable(context.getResources()), intValue, intValue2);
-            int intValue4 = ((Number) MapsKt__MapsKt.getValue(Integer.valueOf(i), SecRenderInfoKt.defaultActionIconMap)).intValue();
+            RenderInfo renderInfo = new RenderInfo(constantState.newDrawable(context.getResources()), iIntValue, iIntValue2);
+            int iIntValue4 = ((Number) MapsKt__MapsKt.getValue(Integer.valueOf(i), SecRenderInfoKt.defaultActionIconMap)).intValue();
             SparseArray sparseArray2 = SecRenderInfo.actionIconMap;
-            Drawable drawable2 = (Drawable) sparseArray2.get(intValue4);
+            Drawable drawable2 = (Drawable) sparseArray2.get(iIntValue4);
             if (drawable2 == null) {
-                drawable2 = context.getResources().getDrawable(intValue4, null);
-                sparseArray2.set(intValue4, drawable2);
+                drawable2 = context.getResources().getDrawable(iIntValue4, null);
+                sparseArray2.set(iIntValue4, drawable2);
             }
             SecRenderInfo secRenderInfo = (SecRenderInfo) renderInfo.secRenderInfo$delegate.getValue();
             Drawable.ConstantState constantState2 = drawable2.getConstantState();

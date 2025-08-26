@@ -44,9 +44,9 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWirelessKeyboardShareChangedListener)) {
-                return (IWirelessKeyboardShareChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWirelessKeyboardShareChangedListener)) {
+                return (IWirelessKeyboardShareChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onWirelessKeyboardShareChanged(readLong, readInt, readString);
+                onWirelessKeyboardShareChanged(j, i3, string);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
 
             @Override // android.hardware.input.IWirelessKeyboardShareChangedListener
             public void onWirelessKeyboardShareChanged(long j, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

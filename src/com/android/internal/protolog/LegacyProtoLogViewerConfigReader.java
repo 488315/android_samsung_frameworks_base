@@ -14,7 +14,7 @@ import java.util.zip.GZIPInputStream;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class LegacyProtoLogViewerConfigReader {
     private static final String TAG = "ProtoLogViewerConfigReader";
     private Map<Long, String> mLogMessageMap = null;
@@ -33,40 +33,40 @@ public class LegacyProtoLogViewerConfigReader {
                 try {
                     loadViewerConfig(new GZIPInputStream(new FileInputStream(str)));
                     iLogger.log("Loaded " + this.mLogMessageMap.size() + " log definitions from " + str);
-                } catch (IOException e) {
-                    iLogger.log("Unable to load log definitions: IOException while reading " + str + ". " + e);
+                } catch (JSONException e) {
+                    iLogger.log("Unable to load log definitions: JSON parsing exception while reading " + str + ". " + e);
                 }
             } catch (FileNotFoundException e2) {
                 iLogger.log("Unable to load log definitions: File " + str + " not found." + e2);
             }
-        } catch (JSONException e3) {
-            iLogger.log("Unable to load log definitions: JSON parsing exception while reading " + str + ". " + e3);
+        } catch (IOException e3) {
+            iLogger.log("Unable to load log definitions: IOException while reading " + str + ". " + e3);
         }
     }
 
-    public synchronized void loadViewerConfig(InputStream inputStream) throws IOException, JSONException {
+    public synchronized void loadViewerConfig(InputStream inputStream) throws JSONException, IOException {
         if (this.mLogMessageMap != null) {
             return;
         }
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
         while (true) {
-            String readLine = bufferedReader.readLine();
-            if (readLine == null) {
+            String line = bufferedReader.readLine();
+            if (line == null) {
                 break;
             }
-            sb.append(readLine);
+            sb.append(line);
             sb.append('\n');
         }
         bufferedReader.close();
         JSONObject jSONObject = new JSONObject(sb.toString()).getJSONObject("messages");
         this.mLogMessageMap = new TreeMap();
-        Iterator<String> keys = jSONObject.keys();
-        while (keys.hasNext()) {
-            String next = keys.next();
+        Iterator<String> itKeys = jSONObject.keys();
+        while (itKeys.hasNext()) {
+            String next = itKeys.next();
             try {
-                long parseLong = Long.parseLong(next);
-                this.mLogMessageMap.put(Long.valueOf(parseLong), jSONObject.getJSONObject(next).getString("message"));
+                long j = Long.parseLong(next);
+                this.mLogMessageMap.put(Long.valueOf(j), jSONObject.getJSONObject(next).getString("message"));
             } catch (NumberFormatException unused) {
             }
         }

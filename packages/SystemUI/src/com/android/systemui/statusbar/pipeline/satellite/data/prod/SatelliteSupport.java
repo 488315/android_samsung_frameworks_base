@@ -5,12 +5,10 @@ import com.android.systemui.bixby2.actionresult.ActionResults;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SatelliteSupport {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -18,7 +16,6 @@ public interface SatelliteSupport {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotSupported implements SatelliteSupport {
         public static final NotSupported INSTANCE = new NotSupported();
 
@@ -38,7 +35,6 @@ public interface SatelliteSupport {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Supported implements SatelliteSupport {
         public final SatelliteManager satelliteManager;
 
@@ -62,7 +58,6 @@ public interface SatelliteSupport {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unknown implements SatelliteSupport {
         public static final Unknown INSTANCE = new Unknown();
 

@@ -49,14 +49,14 @@ public class DdmHandleAppName extends DdmHandle {
     }
 
     private static void sendAPNM(String str, String str2, int i) {
-        ByteBuffer allocate = ByteBuffer.allocate((str.length() * 2) + 12 + (str2.length() * 2));
-        allocate.order(ChunkHandler.CHUNK_ORDER);
-        allocate.putInt(str.length());
-        putString(allocate, str);
-        allocate.putInt(i);
-        allocate.putInt(str2.length());
-        putString(allocate, str2);
-        DdmServer.sendChunk(new Chunk(CHUNK_APNM, allocate));
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate((str.length() * 2) + 12 + (str2.length() * 2));
+        byteBufferAllocate.order(ChunkHandler.CHUNK_ORDER);
+        byteBufferAllocate.putInt(str.length());
+        putString(byteBufferAllocate, str);
+        byteBufferAllocate.putInt(i);
+        byteBufferAllocate.putInt(str2.length());
+        putString(byteBufferAllocate, str2);
+        DdmServer.sendChunk(new Chunk(CHUNK_APNM, byteBufferAllocate));
     }
 
     static final class Names {

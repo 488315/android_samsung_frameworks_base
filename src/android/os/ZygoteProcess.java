@@ -194,7 +194,7 @@ public class ZygoteProcess {
         return this.attemptZygoteSendArgsAndGetResult(zygoteState, str);
     }
 
-    private Process.ProcessStartResult attemptZygoteSendArgsAndGetResult(ZygoteState zygoteState, String str) throws ZygoteStartFailedEx {
+    private Process.ProcessStartResult attemptZygoteSendArgsAndGetResult(ZygoteState zygoteState, String str) throws ZygoteStartFailedEx, IOException {
         try {
             BufferedWriter bufferedWriter = zygoteState.mZygoteOutputWriter;
             DataInputStream dataInputStream = zygoteState.mZygoteInputStream;
@@ -264,8 +264,8 @@ public class ZygoteProcess {
     }
 
     private Process.ProcessStartResult startViaZygote(String str, String str2, int i, int i2, int[] iArr, int i3, int i4, int i5, String str3, String str4, String str5, String str6, String str7, boolean z, String str8, int i6, boolean z2, long[] jArr, Map<String, Pair<String, Long>> map, Map<String, Pair<String, Long>> map2, boolean z3, boolean z4, boolean z5, String[] strArr) throws ZygoteStartFailedEx {
-        byte[] bArr;
-        Process.ProcessStartResult zygoteSendArgsAndGetResult;
+        byte[] sEInfo;
+        Process.ProcessStartResult processStartResultZygoteSendArgsAndGetResult;
         char c;
         char c2;
         ArrayList<String> arrayList = new ArrayList<>();
@@ -391,20 +391,20 @@ public class ZygoteProcess {
             }
             if (ASKSManager.isRestrictedTarget(str2, ASKSManager.TYPE_DENY)) {
                 try {
-                    bArr = ASKSManager.getASKSManager().getSEInfo(str2);
+                    sEInfo = ASKSManager.getASKSManager().getSEInfo(str2);
                 } catch (RemoteException unused) {
-                    bArr = null;
+                    sEInfo = null;
                 }
-                if (bArr != null && "aasa_blocked".equals(new String(bArr))) {
+                if (sEInfo != null && "aasa_blocked".equals(new String(sEInfo))) {
                     throw new ZygoteStartFailedEx("should be restricted by signaficant reasons - " + str8);
                 }
             }
-            zygoteSendArgsAndGetResult = zygoteSendArgsAndGetResult(openZygoteSocketIfNeeded(str4), i6, arrayList);
+            processStartResultZygoteSendArgsAndGetResult = zygoteSendArgsAndGetResult(openZygoteSocketIfNeeded(str4), i6, arrayList);
             if (ASKSManager.isRestrictedTarget(str2, ASKSManager.TYPE_REVOKE)) {
-                ASKSManager.addPackageWithPid(zygoteSendArgsAndGetResult.pid, str2);
+                ASKSManager.addPackageWithPid(processStartResultZygoteSendArgsAndGetResult.pid, str2);
             }
         }
-        return zygoteSendArgsAndGetResult;
+        return processStartResultZygoteSendArgsAndGetResult;
     }
 
     private boolean fetchUsapPoolEnabledProp() {
@@ -422,12 +422,12 @@ public class ZygoteProcess {
         if (!this.mUsapPoolSupported) {
             return false;
         }
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (!this.mIsFirstPropCheck && elapsedRealtime - this.mLastPropCheckTimestamp < 60000) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (!this.mIsFirstPropCheck && jElapsedRealtime - this.mLastPropCheckTimestamp < 60000) {
             return false;
         }
         this.mIsFirstPropCheck = false;
-        this.mLastPropCheckTimestamp = elapsedRealtime;
+        this.mLastPropCheckTimestamp = jElapsedRealtime;
         return fetchUsapPoolEnabledProp();
     }
 
@@ -453,20 +453,20 @@ public class ZygoteProcess {
     }
 
     public int getZygotePid(String str) {
-        int parseInt;
+        int i;
         try {
             synchronized (this.mLock) {
-                ZygoteState openZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write("1");
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write("--get-pid");
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
-                byte[] bArr = new byte[openZygoteSocketIfNeeded.mZygoteInputStream.readInt()];
-                openZygoteSocketIfNeeded.mZygoteInputStream.readFully(bArr);
-                parseInt = Integer.parseInt(new String(bArr, StandardCharsets.US_ASCII));
+                ZygoteState zygoteStateOpenZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("1");
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("--get-pid");
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
+                byte[] bArr = new byte[zygoteStateOpenZygoteSocketIfNeeded.mZygoteInputStream.readInt()];
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteInputStream.readFully(bArr);
+                i = Integer.parseInt(new String(bArr, StandardCharsets.US_ASCII));
             }
-            return parseInt;
+            return i;
         } catch (Exception e) {
             throw new RuntimeException("Failure retrieving pid", e);
         }
@@ -484,10 +484,10 @@ public class ZygoteProcess {
     private void bootCompleted(String str) {
         try {
             synchronized (this.mLock) {
-                ZygoteState openZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write("1\n--boot-completed\n");
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
-                openZygoteSocketIfNeeded.mZygoteInputStream.readInt();
+                ZygoteState zygoteStateOpenZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("1\n--boot-completed\n");
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteInputStream.readInt();
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to inform zygote of boot_completed", e);
@@ -495,15 +495,15 @@ public class ZygoteProcess {
     }
 
     public boolean setApiDenylistExemptions(List<String> list) {
-        boolean maybeSetApiDenylistExemptions;
+        boolean zMaybeSetApiDenylistExemptions;
         synchronized (this.mLock) {
             this.mApiDenylistExemptions = list;
-            maybeSetApiDenylistExemptions = maybeSetApiDenylistExemptions(this.primaryZygoteState, true);
-            if (maybeSetApiDenylistExemptions) {
-                maybeSetApiDenylistExemptions = maybeSetApiDenylistExemptions(this.secondaryZygoteState, true);
+            zMaybeSetApiDenylistExemptions = maybeSetApiDenylistExemptions(this.primaryZygoteState, true);
+            if (zMaybeSetApiDenylistExemptions) {
+                zMaybeSetApiDenylistExemptions = maybeSetApiDenylistExemptions(this.secondaryZygoteState, true);
             }
         }
-        return maybeSetApiDenylistExemptions;
+        return zMaybeSetApiDenylistExemptions;
     }
 
     public void setHiddenApiAccessLogSampleRate(int i) {
@@ -522,7 +522,7 @@ public class ZygoteProcess {
         }
     }
 
-    private boolean maybeSetApiDenylistExemptions(ZygoteState zygoteState, boolean z) {
+    private boolean maybeSetApiDenylistExemptions(ZygoteState zygoteState, boolean z) throws IOException {
         if (zygoteState == null || zygoteState.isClosed()) {
             Slog.e(LOG_TAG, "Can't set API denylist exemptions: no zygote connection");
             return false;
@@ -547,9 +547,9 @@ public class ZygoteProcess {
                 zygoteState.mZygoteOutputWriter.newLine();
             }
             zygoteState.mZygoteOutputWriter.flush();
-            int readInt = zygoteState.mZygoteInputStream.readInt();
-            if (readInt != 0) {
-                Slog.e(LOG_TAG, "Failed to set API denylist exemptions; status " + readInt);
+            int i2 = zygoteState.mZygoteInputStream.readInt();
+            if (i2 != 0) {
+                Slog.e(LOG_TAG, "Failed to set API denylist exemptions; status " + i2);
             }
             return true;
         } catch (IOException e) {
@@ -559,7 +559,7 @@ public class ZygoteProcess {
         }
     }
 
-    private void maybeSetHiddenApiAccessLogSampleRate(ZygoteState zygoteState) {
+    private void maybeSetHiddenApiAccessLogSampleRate(ZygoteState zygoteState) throws IOException {
         if (zygoteState == null || zygoteState.isClosed() || this.mHiddenApiAccessLogSampleRate == -1) {
             return;
         }
@@ -569,16 +569,16 @@ public class ZygoteProcess {
             zygoteState.mZygoteOutputWriter.write("--hidden-api-log-sampling-rate=" + this.mHiddenApiAccessLogSampleRate);
             zygoteState.mZygoteOutputWriter.newLine();
             zygoteState.mZygoteOutputWriter.flush();
-            int readInt = zygoteState.mZygoteInputStream.readInt();
-            if (readInt != 0) {
-                Slog.e(LOG_TAG, "Failed to set hidden API log sampling rate; status " + readInt);
+            int i = zygoteState.mZygoteInputStream.readInt();
+            if (i != 0) {
+                Slog.e(LOG_TAG, "Failed to set hidden API log sampling rate; status " + i);
             }
         } catch (IOException e) {
             Slog.e(LOG_TAG, "Failed to set hidden API log sampling rate", e);
         }
     }
 
-    private void maybeSetHiddenApiAccessStatslogSampleRate(ZygoteState zygoteState) {
+    private void maybeSetHiddenApiAccessStatslogSampleRate(ZygoteState zygoteState) throws IOException {
         if (zygoteState == null || zygoteState.isClosed() || this.mHiddenApiAccessStatslogSampleRate == -1) {
             return;
         }
@@ -588,9 +588,9 @@ public class ZygoteProcess {
             zygoteState.mZygoteOutputWriter.write("--hidden-api-statslog-sampling-rate=" + this.mHiddenApiAccessStatslogSampleRate);
             zygoteState.mZygoteOutputWriter.newLine();
             zygoteState.mZygoteOutputWriter.flush();
-            int readInt = zygoteState.mZygoteInputStream.readInt();
-            if (readInt != 0) {
-                Slog.e(LOG_TAG, "Failed to set hidden API statslog sampling rate; status " + readInt);
+            int i = zygoteState.mZygoteInputStream.readInt();
+            if (i != 0) {
+                Slog.e(LOG_TAG, "Failed to set hidden API statslog sampling rate; status " + i);
             }
         } catch (IOException e) {
             Slog.e(LOG_TAG, "Failed to set hidden API statslog sampling rate", e);
@@ -600,9 +600,9 @@ public class ZygoteProcess {
     private void attemptConnectionToPrimaryZygote() throws IOException {
         ZygoteState zygoteState = this.primaryZygoteState;
         if (zygoteState == null || zygoteState.isClosed()) {
-            ZygoteState connect = ZygoteState.connect(this.mZygoteSocketAddress, this.mUsapPoolSocketAddress);
-            this.primaryZygoteState = connect;
-            maybeSetApiDenylistExemptions(connect, false);
+            ZygoteState zygoteStateConnect = ZygoteState.connect(this.mZygoteSocketAddress, this.mUsapPoolSocketAddress);
+            this.primaryZygoteState = zygoteStateConnect;
+            maybeSetApiDenylistExemptions(zygoteStateConnect, false);
             maybeSetHiddenApiAccessLogSampleRate(this.primaryZygoteState);
         }
     }
@@ -610,9 +610,9 @@ public class ZygoteProcess {
     private void attemptConnectionToSecondaryZygote() throws IOException {
         ZygoteState zygoteState = this.secondaryZygoteState;
         if (zygoteState == null || zygoteState.isClosed()) {
-            ZygoteState connect = ZygoteState.connect(this.mZygoteSecondarySocketAddress, this.mUsapPoolSecondarySocketAddress);
-            this.secondaryZygoteState = connect;
-            maybeSetApiDenylistExemptions(connect, false);
+            ZygoteState zygoteStateConnect = ZygoteState.connect(this.mZygoteSecondarySocketAddress, this.mUsapPoolSecondarySocketAddress);
+            this.secondaryZygoteState = zygoteStateConnect;
+            maybeSetApiDenylistExemptions(zygoteStateConnect, false);
             maybeSetHiddenApiAccessLogSampleRate(this.secondaryZygoteState);
         }
     }
@@ -643,24 +643,24 @@ public class ZygoteProcess {
     public boolean preloadApp(ApplicationInfo applicationInfo, String str) throws ZygoteStartFailedEx, IOException {
         boolean z;
         synchronized (this.mLock) {
-            ZygoteState openZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
-            int soTimeout = openZygoteSocketIfNeeded.mZygoteSessionSocket.getSoTimeout();
+            ZygoteState zygoteStateOpenZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
+            int soTimeout = zygoteStateOpenZygoteSocketIfNeeded.mZygoteSessionSocket.getSoTimeout();
             try {
-                openZygoteSocketIfNeeded.mZygoteSessionSocket.setSoTimeout(sAppZygotePreloadTimeoutMs);
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write("2");
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write("--preload-app");
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-                Parcel obtain = Parcel.obtain();
-                applicationInfo.writeToParcel(obtain, 0);
-                String encodeToString = Base64.getEncoder().encodeToString(obtain.marshall());
-                obtain.recycle();
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.write(encodeToString);
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-                openZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
-                z = openZygoteSocketIfNeeded.mZygoteInputStream.readInt() == 0;
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteSessionSocket.setSoTimeout(sAppZygotePreloadTimeoutMs);
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("2");
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("--preload-app");
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+                Parcel parcelObtain = Parcel.obtain();
+                applicationInfo.writeToParcel(parcelObtain, 0);
+                String strEncodeToString = Base64.getEncoder().encodeToString(parcelObtain.marshall());
+                parcelObtain.recycle();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write(strEncodeToString);
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
+                z = zygoteStateOpenZygoteSocketIfNeeded.mZygoteInputStream.readInt() == 0;
             } finally {
-                openZygoteSocketIfNeeded.mZygoteSessionSocket.setSoTimeout(soTimeout);
+                zygoteStateOpenZygoteSocketIfNeeded.mZygoteSessionSocket.setSoTimeout(soTimeout);
             }
         }
         return z;
@@ -669,22 +669,22 @@ public class ZygoteProcess {
     public boolean preloadDefault(String str) throws ZygoteStartFailedEx, IOException {
         boolean z;
         synchronized (this.mLock) {
-            ZygoteState openZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
-            openZygoteSocketIfNeeded.mZygoteOutputWriter.write("1");
-            openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-            openZygoteSocketIfNeeded.mZygoteOutputWriter.write("--preload-default");
-            openZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
-            openZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
-            z = openZygoteSocketIfNeeded.mZygoteInputStream.readInt() == 0;
+            ZygoteState zygoteStateOpenZygoteSocketIfNeeded = openZygoteSocketIfNeeded(str);
+            zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("1");
+            zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+            zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.write("--preload-default");
+            zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.newLine();
+            zygoteStateOpenZygoteSocketIfNeeded.mZygoteOutputWriter.flush();
+            z = zygoteStateOpenZygoteSocketIfNeeded.mZygoteInputStream.readInt() == 0;
         }
         return z;
     }
 
-    public static void waitForConnectionToZygote(String str) {
+    public static void waitForConnectionToZygote(String str) throws InterruptedException {
         waitForConnectionToZygote(new LocalSocketAddress(str, LocalSocketAddress.Namespace.RESERVED));
     }
 
-    public static void waitForConnectionToZygote(LocalSocketAddress localSocketAddress) {
+    public static void waitForConnectionToZygote(LocalSocketAddress localSocketAddress) throws InterruptedException {
         for (int i = 1200; i >= 0; i--) {
             try {
                 ZygoteState.connect(localSocketAddress, null).close();

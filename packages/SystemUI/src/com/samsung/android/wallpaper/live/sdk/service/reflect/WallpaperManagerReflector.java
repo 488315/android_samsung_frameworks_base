@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkReflectUtils;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WallpaperManagerReflector {
     public static final Method sMethodGetLidState;

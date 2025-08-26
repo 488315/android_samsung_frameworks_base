@@ -98,9 +98,9 @@ public abstract class Spline {
                     if (f3 < 0.0f || f4 < 0.0f) {
                         throw new IllegalArgumentException("The control points must have monotonic Y values.");
                     }
-                    float hypot = (float) Math.hypot(f3, f4);
-                    if (hypot > 3.0f) {
-                        float f5 = 3.0f / hypot;
+                    float fHypot = (float) Math.hypot(f3, f4);
+                    if (fHypot > 3.0f) {
+                        float f5 = 3.0f / fHypot;
                         fArr4[i5] = fArr4[i5] * f5;
                         fArr4[i6] = fArr4[i6] * f5;
                     }

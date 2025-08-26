@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import com.android.systemui.media.controls.domain.resume.ResumeMediaBrowser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaResumeListener$getResumeAction$1 implements Runnable {
     public final /* synthetic */ ComponentName $componentName;
@@ -44,10 +43,10 @@ public final class MediaResumeListener$getResumeAction$1 implements Runnable {
                         ResumeMediaBrowser.this.disconnect();
                         return;
                     }
-                    MediaController createMediaController = ResumeMediaBrowser.this.createMediaController(ResumeMediaBrowser.this.mMediaBrowser.getSessionToken());
-                    createMediaController.getTransportControls();
-                    createMediaController.getTransportControls().prepare();
-                    createMediaController.getTransportControls().play();
+                    MediaController mediaControllerCreateMediaController = ResumeMediaBrowser.this.createMediaController(ResumeMediaBrowser.this.mMediaBrowser.getSessionToken());
+                    mediaControllerCreateMediaController.getTransportControls();
+                    mediaControllerCreateMediaController.getTransportControls().prepare();
+                    mediaControllerCreateMediaController.getTransportControls().play();
                     Callback callback2 = ResumeMediaBrowser.this.mCallback;
                     if (callback2 != null) {
                         callback2.onConnected();

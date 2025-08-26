@@ -68,13 +68,13 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
 
     @Override // com.android.internal.util.ObservableServiceConnection
     public boolean bind() {
-        boolean bindInternalLocked;
+        boolean zBindInternalLocked;
         synchronized (this.mLock) {
             addCallback(this.mConnectionCallback);
             this.mReconnectAttempts = 0;
-            bindInternalLocked = bindInternalLocked();
+            zBindInternalLocked = bindInternalLocked();
         }
-        return bindInternalLocked;
+        return zBindInternalLocked;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -106,10 +106,10 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
         if (i >= this.mMaxReconnectAttempts) {
             return;
         }
-        long scalb = (long) Math.scalb(this.mBaseReconnectDelayMs, i);
+        long jScalb = (long) Math.scalb(this.mBaseReconnectDelayMs, i);
         Object obj = new Object();
         this.mCancelToken = obj;
-        this.mHandler.postDelayed(this.mConnectRunnable, obj, scalb);
+        this.mHandler.postDelayed(this.mConnectRunnable, obj, jScalb);
         this.mReconnectAttempts++;
     }
 

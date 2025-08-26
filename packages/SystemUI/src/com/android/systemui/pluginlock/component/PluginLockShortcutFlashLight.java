@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 import com.android.systemui.util.LogUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockShortcutFlashLight extends PluginLockShortcutTask implements FlashlightController.FlashlightListener {
     private static final String TAG = "PluginLockShortcutFlashLight";
@@ -41,9 +40,9 @@ public class PluginLockShortcutFlashLight extends PluginLockShortcutTask impleme
 
     @Override // com.android.systemui.pluginlock.component.PluginLockShortcutTask
     public boolean isEnabled() {
-        boolean isEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
-        LogUtil.d(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isEnabled [isEnabled] ", isEnabled), new Object[0]);
-        return isEnabled;
+        boolean zIsEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
+        LogUtil.d(TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isEnabled [isEnabled] ", zIsEnabled), new Object[0]);
+        return zIsEnabled;
     }
 
     @Override // com.android.systemui.statusbar.policy.FlashlightController.FlashlightListener

@@ -32,18 +32,18 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: resize, reason: merged with bridge method [inline-methods] */
-    public MutableMediaBuffer m9604xd2768214(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer m9617xd2768214(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
         Log.d(TAG, "try to simgp resize: " + mediaBuffer);
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
             if (mutableMediaBuffer.getFormat().contains("scale")) {
-                float floatValue = ((Float) mutableMediaBuffer.getFormat().get("scale")).floatValue();
-                copy.setCols((int) (mediaBuffer.getCols() * floatValue));
-                copy.setRows((int) (mediaBuffer.getRows() * floatValue));
+                float fFloatValue = ((Float) mutableMediaBuffer.getFormat().get("scale")).floatValue();
+                mutableMediaFormatCopy.setCols((int) (mediaBuffer.getCols() * fFloatValue));
+                mutableMediaFormatCopy.setRows((int) (mediaBuffer.getRows() * fFloatValue));
             } else {
-                copy.setShape(mutableMediaBuffer.getFormat().getShape());
+                mutableMediaFormatCopy.setShape(mutableMediaBuffer.getFormat().getShape());
             }
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         JSONObject jSONObject = new JSONObject();
         try {
@@ -62,12 +62,12 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: cvtColor, reason: merged with bridge method [inline-methods] */
-    public MutableMediaBuffer m9606xb5c9ce52(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer m9619xb5c9ce52(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException, JSONException {
         Log.d(TAG, "try to simgp cvtColor: " + mediaBuffer + " => " + mutableMediaBuffer.getFormat());
         if (mutableMediaBuffer.isEmpty()) {
-            MutableMediaFormat copy = mediaBuffer.getFormat().toMutableFormat().copy();
-            copy.setColorFormat(mutableMediaBuffer.getFormat().getColorFormat());
-            mutableMediaBuffer.put(MediaBuffer.of(copy));
+            MutableMediaFormat mutableMediaFormatCopy = mediaBuffer.getFormat().toMutableFormat().copy();
+            mutableMediaFormatCopy.setColorFormat(mutableMediaBuffer.getFormat().getColorFormat());
+            mutableMediaBuffer.put(MediaBuffer.of(mutableMediaFormatCopy));
         }
         JSONObject jSONObject = new JSONObject();
         try {
@@ -85,7 +85,7 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: rotate, reason: merged with bridge method [inline-methods] */
-    public MutableMediaBuffer m9605xc4202833(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
+    public MutableMediaBuffer m9618xc4202833(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
         Log.d(TAG, "try to simgp rotate: " + mediaBuffer);
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -105,19 +105,19 @@ public class SimgpPlugin implements Plugin<ImgpPlugin> {
         imgpPlugin.setImgProcessor(ImgpType.RESIZE, new Operator() { // from class: com.samsung.android.sume.core.plugin.SimgpPlugin$$ExternalSyntheticLambda1
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return SimgpPlugin.this.m9604xd2768214(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.m9617xd2768214(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.ROTATE, new Operator() { // from class: com.samsung.android.sume.core.plugin.SimgpPlugin$$ExternalSyntheticLambda2
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return SimgpPlugin.this.m9605xc4202833(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.m9618xc4202833(mediaBuffer, mutableMediaBuffer);
             }
         });
         imgpPlugin.setImgProcessor(ImgpType.CVT_COLOR, new Operator() { // from class: com.samsung.android.sume.core.plugin.SimgpPlugin$$ExternalSyntheticLambda3
             @Override // com.samsung.android.sume.core.functional.Operator
             public final MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
-                return SimgpPlugin.this.m9606xb5c9ce52(mediaBuffer, mutableMediaBuffer);
+                return this.f$0.m9619xb5c9ce52(mediaBuffer, mutableMediaBuffer);
             }
         });
     }

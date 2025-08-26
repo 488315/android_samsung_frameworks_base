@@ -4,16 +4,44 @@ import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RingBuffer implements Iterable, KMappedMarker {
     public final List buffer;
     public final Function0 factory;
     public final int maxSize;
     public long omega;
+
+    /* renamed from: com.android.systemui.common.buffer.RingBuffer$iterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Iterator, KMappedMarker {
+        public int position;
+
+        public AnonymousClass1() {
+        }
+
+        @Override // java.util.Iterator
+        public final boolean hasNext() {
+            return this.position < RingBuffer.this.getSize();
+        }
+
+        @Override // java.util.Iterator
+        public final Object next() {
+            if (this.position >= RingBuffer.this.getSize()) {
+                throw new NoSuchElementException();
+            }
+            Object obj = RingBuffer.this.get(this.position);
+            this.position++;
+            return obj;
+        }
+
+        @Override // java.util.Iterator
+        public final void remove() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+    }
 
     public RingBuffer(int i, Function0 function0) {
         this.maxSize = i;
@@ -33,9 +61,9 @@ public final class RingBuffer implements Iterable, KMappedMarker {
         if (obj != null) {
             return obj;
         }
-        Object invoke = this.factory.invoke();
-        ((ArrayList) this.buffer).set(i, invoke);
-        return invoke;
+        Object objInvoke = this.factory.invoke();
+        ((ArrayList) this.buffer).set(i, objInvoke);
+        return objInvoke;
     }
 
     public final Object get(int i) {
@@ -55,6 +83,6 @@ public final class RingBuffer implements Iterable, KMappedMarker {
 
     @Override // java.lang.Iterable
     public final Iterator iterator() {
-        return new RingBuffer$iterator$1(this);
+        return new AnonymousClass1();
     }
 }

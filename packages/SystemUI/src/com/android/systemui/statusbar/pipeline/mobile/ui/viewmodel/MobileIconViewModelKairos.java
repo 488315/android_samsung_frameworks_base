@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconViewModelKairos implements MobileIconViewModelKairosCommon, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -58,7 +57,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
@@ -72,9 +71,9 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 BuildScope buildScope2 = (BuildScope) obj2;
-                                boolean booleanValue = ((Boolean) obj3).booleanValue();
-                                MobileIconViewModelKairos mobileIconViewModelKairos2 = MobileIconViewModelKairos.this;
-                                if (booleanValue) {
+                                boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                                MobileIconViewModelKairos mobileIconViewModelKairos2 = mobileIconViewModelKairos;
+                                if (zBooleanValue) {
                                     return (CarrierBasedSatelliteViewModelKairosImpl) mobileIconViewModelKairos2.satelliteProvider$delegate.getValue();
                                 }
                                 MobileIconViewModelKairos mobileIconViewModelKairos3 = new MobileIconViewModelKairos$vmProvider$1$1$1(mobileIconViewModelKairos2).this$0;
@@ -89,12 +88,12 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
         this.satelliteProvider$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                MobileIconViewModelKairos mobileIconViewModelKairos = MobileIconViewModelKairos.this;
+                MobileIconViewModelKairos mobileIconViewModelKairos = this.f$0;
                 return new CarrierBasedSatelliteViewModelKairosImpl(mobileIconViewModelKairos.subscriptionId, mobileIconViewModelKairos.iconInteractor, mobileIconViewModelKairos.isAirplaneMode);
             }
         });
         final int i3 = 1;
-        State buildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda0
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda0
             public final /* synthetic */ MobileIconViewModelKairos f$0;
 
             {
@@ -103,7 +102,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
@@ -117,9 +116,9 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 BuildScope buildScope2 = (BuildScope) obj2;
-                                boolean booleanValue = ((Boolean) obj3).booleanValue();
-                                MobileIconViewModelKairos mobileIconViewModelKairos2 = MobileIconViewModelKairos.this;
-                                if (booleanValue) {
+                                boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                                MobileIconViewModelKairos mobileIconViewModelKairos2 = mobileIconViewModelKairos;
+                                if (zBooleanValue) {
                                     return (CarrierBasedSatelliteViewModelKairosImpl) mobileIconViewModelKairos2.satelliteProvider$delegate.getValue();
                                 }
                                 MobileIconViewModelKairos mobileIconViewModelKairos3 = new MobileIconViewModelKairos$vmProvider$1$1$1(mobileIconViewModelKairos2).this$0;
@@ -132,7 +131,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i4 = 4;
-        this.isVisible = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.isVisible = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -159,7 +158,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i5 = 5;
-        this.icon = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.icon = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -186,7 +185,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i6 = 6;
-        this.contentDescription = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.contentDescription = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -213,7 +212,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i7 = 7;
-        this.roaming = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.roaming = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -240,7 +239,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i8 = 8;
-        this.networkTypeIcon = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.networkTypeIcon = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -267,7 +266,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i9 = 1;
-        this.networkTypeBackground = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.networkTypeBackground = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -294,7 +293,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i10 = 2;
-        this.activityInVisible = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.activityInVisible = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -321,7 +320,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i11 = 0;
-        this.activityOutVisible = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.activityOutVisible = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;
@@ -348,7 +347,7 @@ public final class MobileIconViewModelKairos implements MobileIconViewModelKairo
             }
         });
         final int i12 = 3;
-        this.activityContainerVisible = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
+        this.activityContainerVisible = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileIconViewModelKairosCommon mobileIconViewModelKairosCommon = (MobileIconViewModelKairosCommon) obj2;

@@ -39,9 +39,9 @@ public interface ISpegHelperService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpegHelperService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpegHelperService)) {
-                return (ISpegHelperService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpegHelperService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpegHelperService)) {
+                return (ISpegHelperService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -68,13 +68,13 @@ public interface ISpegHelperService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean storePrimaryProf = storePrimaryProf(readString, readString2, readInt);
+                boolean zStorePrimaryProf = storePrimaryProf(string, string2, i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(storePrimaryProf);
+                parcel2.writeBoolean(zStorePrimaryProf);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -98,19 +98,19 @@ public interface ISpegHelperService extends IInterface {
 
             @Override // android.os.ISpegHelperService
             public boolean storePrimaryProf(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpegHelperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISpegHelperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

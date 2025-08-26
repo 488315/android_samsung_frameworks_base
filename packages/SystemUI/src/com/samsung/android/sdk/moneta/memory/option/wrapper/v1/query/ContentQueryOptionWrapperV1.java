@@ -8,7 +8,6 @@ import com.samsung.android.sdk.moneta.memory.option.ContentQueryType;
 import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ContentQueryOptionWrapperV1 implements Parcelable {
     private final Integer contentType;
@@ -19,7 +18,6 @@ public final class ContentQueryOptionWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<ContentQueryOptionWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,7 +27,6 @@ public final class ContentQueryOptionWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -72,50 +69,50 @@ public final class ContentQueryOptionWrapperV1 implements Parcelable {
     }
 
     public final ContentQueryOption toOption() {
-        Object obj;
+        Object next;
         String str = this.engramId;
         int i = this.limit;
         int i2 = this.offset;
         ContentType.Companion companion = ContentType.Companion;
         Integer num = this.contentType;
         companion.getClass();
-        ContentType fromInt = ContentType.Companion.fromInt(num);
+        ContentType contentTypeFromInt = ContentType.Companion.fromInt(num);
         ContentQueryType.Companion companion2 = ContentQueryType.Companion;
         int i3 = this.queryType;
         companion2.getClass();
         Iterator<E> it = ContentQueryType.getEntries().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((ContentQueryType) obj).getValue() == i3) {
+            next = it.next();
+            if (((ContentQueryType) next).getValue() == i3) {
                 break;
             }
         }
-        ContentQueryType contentQueryType = (ContentQueryType) obj;
+        ContentQueryType contentQueryType = (ContentQueryType) next;
         if (contentQueryType == null) {
             contentQueryType = ContentQueryType.BY_ENGRAM_ID;
         }
-        ContentQueryOption.WrapBuilder wrapBuilder = new ContentQueryOption.WrapBuilder(str, i, i2, fromInt, contentQueryType);
+        ContentQueryOption.WrapBuilder wrapBuilder = new ContentQueryOption.WrapBuilder(str, i, i2, contentTypeFromInt, contentQueryType);
         return new ContentQueryOption(wrapBuilder.activityId, wrapBuilder.limit, wrapBuilder.offset, wrapBuilder.contentType, wrapBuilder.queryType, null);
     }
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        int intValue;
+        int iIntValue;
         parcel.writeString(this.engramId);
         parcel.writeInt(this.limit);
         parcel.writeInt(this.offset);
         Integer num = this.contentType;
         if (num == null) {
-            intValue = 0;
+            iIntValue = 0;
         } else {
             parcel.writeInt(1);
-            intValue = num.intValue();
+            iIntValue = num.intValue();
         }
-        parcel.writeInt(intValue);
+        parcel.writeInt(iIntValue);
         parcel.writeInt(this.queryType);
     }
 

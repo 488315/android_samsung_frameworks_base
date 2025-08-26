@@ -330,15 +330,15 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
         if (allocation.getType().getY() > 1) {
             throw new RSRuntimeException("Ap must have a Y dimension of 0 or 1");
         }
-        int sqrt = (int) Math.sqrt(allocation.getType().getX() * 2.0d);
-        if (allocation.getType().getX() != ((sqrt + 1) * sqrt) / 2) {
+        int iSqrt = (int) Math.sqrt(allocation.getType().getX() * 2.0d);
+        if (allocation.getType().getX() != ((iSqrt + 1) * iSqrt) / 2) {
             throw new RSRuntimeException("Invalid dimension for Ap");
         }
         if (i4 <= 0) {
             throw new RSRuntimeException("Vector increments must be greater than 0");
         }
-        if (allocation2.getType().getX() == ((sqrt - 1) * i4) + 1) {
-            return sqrt;
+        if (allocation2.getType().getX() == ((iSqrt - 1) * i4) + 1) {
+            return iSqrt;
         }
         throw new RSRuntimeException("Incorrect vector dimensions for TPMV");
     }
@@ -519,19 +519,19 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
         if (allocation.getType().getY() > 1) {
             throw new RSRuntimeException("Ap must have a Y dimension of 0 or 1");
         }
-        int sqrt = (int) Math.sqrt(allocation.getType().getX() * 2.0d);
-        if (allocation.getType().getX() != ((sqrt + 1) * sqrt) / 2) {
+        int iSqrt = (int) Math.sqrt(allocation.getType().getX() * 2.0d);
+        if (allocation.getType().getX() != ((iSqrt + 1) * iSqrt) / 2) {
             throw new RSRuntimeException("Invalid dimension for Ap");
         }
         if (i2 <= 0 || i3 <= 0) {
             throw new RSRuntimeException("Vector increments must be greater than 0");
         }
-        int i4 = sqrt - 1;
+        int i4 = iSqrt - 1;
         if (allocation2.getType().getX() != (i2 * i4) + 1) {
             throw new RSRuntimeException("Incorrect vector dimensions for SPMV");
         }
         if (allocation3.getType().getX() == (i4 * i3) + 1) {
-            return sqrt;
+            return iSqrt;
         }
         throw new RSRuntimeException("Incorrect vector dimensions for SPMV");
     }
@@ -591,15 +591,15 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
         if (allocation2.getType().getY() > 1) {
             throw new RSRuntimeException("Ap must have a Y dimension of 0 or 1");
         }
-        int sqrt = (int) Math.sqrt(allocation2.getType().getX() * 2.0d);
-        if (allocation2.getType().getX() != ((sqrt + 1) * sqrt) / 2) {
+        int iSqrt = (int) Math.sqrt(allocation2.getType().getX() * 2.0d);
+        if (allocation2.getType().getX() != ((iSqrt + 1) * iSqrt) / 2) {
             throw new RSRuntimeException("Invalid dimension for Ap");
         }
         if (i2 <= 0) {
             throw new RSRuntimeException("Vector increments must be greater than 0");
         }
-        if (allocation.getType().getX() == ((sqrt - 1) * i2) + 1) {
-            return sqrt;
+        if (allocation.getType().getX() == ((iSqrt - 1) * i2) + 1) {
+            return iSqrt;
         }
         throw new RSRuntimeException("Incorrect vector dimensions for SPR");
     }
@@ -639,18 +639,18 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
         if (allocation3.getType().getY() > 1) {
             throw new RSRuntimeException("Ap must have a Y dimension of 0 or 1");
         }
-        int sqrt = (int) Math.sqrt(allocation3.getType().getX() * 2.0d);
-        if (allocation3.getType().getX() != ((sqrt + 1) * sqrt) / 2) {
+        int iSqrt = (int) Math.sqrt(allocation3.getType().getX() * 2.0d);
+        if (allocation3.getType().getX() != ((iSqrt + 1) * iSqrt) / 2) {
             throw new RSRuntimeException("Invalid dimension for Ap");
         }
         if (i2 <= 0 || i3 <= 0) {
             throw new RSRuntimeException("Vector increments must be greater than 0");
         }
-        int i4 = sqrt - 1;
+        int i4 = iSqrt - 1;
         int i5 = (i2 * i4) + 1;
         int i6 = (i4 * i3) + 1;
         if (allocation.getType().getX() == i5 && allocation2.getType().getX() == i6) {
-            return sqrt;
+            return iSqrt;
         }
         throw new RSRuntimeException("Incorrect vector dimensions for SPR2");
     }
@@ -756,11 +756,11 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
     }
 
     public void CHBMV(int i, int i2, Float2 float2, Allocation allocation, Allocation allocation2, int i3, Float2 float22, Allocation allocation3, int i4) {
-        int validateSYR2 = validateSYR2(Element.F32_2(this.mRS), i, allocation2, i3, allocation3, i4, allocation);
+        int iValidateSYR2 = validateSYR2(Element.F32_2(this.mRS), i, allocation2, i3, allocation3, i4, allocation);
         if (i2 < 0) {
             throw new RSRuntimeException("K must be 0 or greater for HBMV");
         }
-        this.mRS.nScriptIntrinsicBLAS_Complex(getID(this.mRS), 96, 0, 0, 0, i, 0, 0, validateSYR2, i2, float2.x, float2.y, allocation.getID(this.mRS), allocation2.getID(this.mRS), float22.x, float22.y, allocation3.getID(this.mRS), i3, i4, 0, 0);
+        this.mRS.nScriptIntrinsicBLAS_Complex(getID(this.mRS), 96, 0, 0, 0, i, 0, 0, iValidateSYR2, i2, float2.x, float2.y, allocation.getID(this.mRS), allocation2.getID(this.mRS), float22.x, float22.y, allocation3.getID(this.mRS), i3, i4, 0, 0);
     }
 
     public void CHPMV(int i, Float2 float2, Allocation allocation, Allocation allocation2, int i2, Float2 float22, Allocation allocation3, int i3) {
@@ -798,11 +798,11 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
     }
 
     public void ZHBMV(int i, int i2, Double2 double2, Allocation allocation, Allocation allocation2, int i3, Double2 double22, Allocation allocation3, int i4) {
-        int validateSYR2 = validateSYR2(Element.F64_2(this.mRS), i, allocation2, i3, allocation3, i4, allocation);
+        int iValidateSYR2 = validateSYR2(Element.F64_2(this.mRS), i, allocation2, i3, allocation3, i4, allocation);
         if (i2 < 0) {
             throw new RSRuntimeException("K must be 0 or greater for HBMV");
         }
-        this.mRS.nScriptIntrinsicBLAS_Z(getID(this.mRS), 105, 0, 0, 0, i, 0, 0, validateSYR2, i2, double2.x, double2.y, allocation.getID(this.mRS), allocation2.getID(this.mRS), double22.x, double22.y, allocation3.getID(this.mRS), i3, i4, 0, 0);
+        this.mRS.nScriptIntrinsicBLAS_Z(getID(this.mRS), 105, 0, 0, 0, i, 0, 0, iValidateSYR2, i2, double2.x, double2.y, allocation.getID(this.mRS), allocation2.getID(this.mRS), double22.x, double22.y, allocation3.getID(this.mRS), i3, i4, 0, 0);
     }
 
     public void ZHPMV(int i, Double2 double2, Allocation allocation, Allocation allocation2, int i2, Double2 double22, Allocation allocation3, int i3) {
@@ -836,84 +836,84 @@ public final class ScriptIntrinsicBLAS extends ScriptIntrinsic {
     }
 
     static void validateL3(Element element, int i, int i2, int i3, Allocation allocation, Allocation allocation2, Allocation allocation3) {
-        int i4;
-        int i5;
-        int i6;
-        int i7;
-        int i8;
-        int i9;
+        int x;
+        int y;
+        int y2;
+        int x2;
+        int x3;
+        int x4;
         if ((allocation != null && !allocation.getType().getElement().isCompatible(element)) || ((allocation2 != null && !allocation2.getType().getElement().isCompatible(element)) || (allocation3 != null && !allocation3.getType().getElement().isCompatible(element)))) {
             throw new RSRuntimeException("Called BLAS with wrong Element type");
         }
         if (allocation3 == null) {
             throw new RSRuntimeException("Allocation C cannot be null");
         }
-        int y = allocation3.getType().getY();
-        int x = allocation3.getType().getX();
-        int i10 = -1;
+        int y3 = allocation3.getType().getY();
+        int x5 = allocation3.getType().getX();
+        int x6 = -1;
         if (i3 != 142) {
             if (allocation == null) {
-                i4 = -1;
-                i5 = -1;
+                x = -1;
+                y = -1;
             } else if (i == 112 || i == 113) {
-                i5 = allocation.getType().getY();
-                i4 = allocation.getType().getX();
+                y = allocation.getType().getY();
+                x = allocation.getType().getX();
             } else {
-                i4 = allocation.getType().getY();
-                i5 = allocation.getType().getX();
+                x = allocation.getType().getY();
+                y = allocation.getType().getX();
             }
             if (allocation2 == null) {
-                i6 = i4;
-                i7 = -1;
-                i8 = -1;
+                y2 = x;
+                x2 = -1;
+                x3 = -1;
             } else if (i2 == 112 || i2 == 113) {
-                int y2 = allocation2.getType().getY();
-                i6 = i4;
-                i7 = allocation2.getType().getX();
-                i8 = y2;
+                int y4 = allocation2.getType().getY();
+                y2 = x;
+                x2 = allocation2.getType().getX();
+                x3 = y4;
             } else {
-                int y3 = allocation2.getType().getY();
-                i8 = allocation2.getType().getX();
-                i6 = i4;
-                i7 = y3;
+                int y5 = allocation2.getType().getY();
+                x3 = allocation2.getType().getX();
+                y2 = x;
+                x2 = y5;
             }
-            i10 = i5;
+            x6 = y;
         } else {
             if ((allocation == null && allocation2 != null) || (allocation != null && allocation2 == null)) {
                 throw new RSRuntimeException("Provided Matrix A without Matrix B, or vice versa");
             }
             if (allocation2 != null) {
-                i7 = allocation.getType().getY();
-                i9 = allocation.getType().getX();
+                x2 = allocation.getType().getY();
+                x4 = allocation.getType().getX();
             } else {
-                i7 = -1;
-                i9 = -1;
+                x2 = -1;
+                x4 = -1;
             }
             if (allocation != null) {
-                i8 = i9;
-                i6 = allocation2.getType().getY();
-                i10 = allocation2.getType().getX();
+                x3 = x4;
+                y2 = allocation2.getType().getY();
+                x6 = allocation2.getType().getX();
             } else {
-                i8 = i9;
-                i6 = -1;
+                x3 = x4;
+                y2 = -1;
             }
         }
         if (allocation != null && allocation2 != null && allocation3 != null) {
-            if (i10 != i7 || i6 != y || i8 != x) {
+            if (x6 != x2 || y2 != y3 || x3 != x5) {
                 throw new RSRuntimeException("Called BLAS with invalid dimensions");
             }
             return;
         }
         if (allocation == null || allocation3 == null) {
-            if (allocation != null && allocation2 != null && i10 != i7) {
+            if (allocation != null && allocation2 != null && x6 != x2) {
                 throw new RSRuntimeException("Called BLAS with invalid dimensions");
             }
             return;
         }
-        if (y != x) {
+        if (y3 != x5) {
             throw new RSRuntimeException("Matrix C is not symmetric");
         }
-        if (i6 != y) {
+        if (y2 != y3) {
             throw new RSRuntimeException("Called BLAS with invalid dimensions");
         }
     }

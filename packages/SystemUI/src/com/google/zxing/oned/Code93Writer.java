@@ -6,7 +6,6 @@ import com.google.zxing.BarcodeFormat;
 import java.util.Collection;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Code93Writer extends OneDimensionalCodeWriter {
     public static void appendPattern(boolean[] zArr, int i, int i2) {
@@ -21,16 +20,16 @@ public class Code93Writer extends OneDimensionalCodeWriter {
     }
 
     public static int computeChecksumIndex(int i, String str) {
-        int i2 = 0;
-        int i3 = 1;
+        int iIndexOf = 0;
+        int i2 = 1;
         for (int length = str.length() - 1; length >= 0; length--) {
-            i2 += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".indexOf(str.charAt(length)) * i3;
-            i3++;
-            if (i3 > i) {
-                i3 = 1;
+            iIndexOf += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".indexOf(str.charAt(length)) * i2;
+            i2++;
+            if (i2 > i) {
+                i2 = 1;
             }
         }
-        return i2 % 47;
+        return iIndexOf % 47;
     }
 
     @Override // com.google.zxing.oned.OneDimensionalCodeWriter
@@ -38,65 +37,65 @@ public class Code93Writer extends OneDimensionalCodeWriter {
         int length = str.length();
         StringBuilder sb = new StringBuilder(length * 2);
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt == 0) {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == 0) {
                 sb.append("bU");
-            } else if (charAt <= 26) {
+            } else if (cCharAt <= 26) {
                 sb.append('a');
-                sb.append((char) (charAt + '@'));
-            } else if (charAt <= 31) {
+                sb.append((char) (cCharAt + '@'));
+            } else if (cCharAt <= 31) {
                 sb.append('b');
-                sb.append((char) (charAt + '&'));
-            } else if (charAt == ' ' || charAt == '$' || charAt == '%' || charAt == '+') {
-                sb.append(charAt);
-            } else if (charAt <= ',') {
+                sb.append((char) (cCharAt + '&'));
+            } else if (cCharAt == ' ' || cCharAt == '$' || cCharAt == '%' || cCharAt == '+') {
+                sb.append(cCharAt);
+            } else if (cCharAt <= ',') {
                 sb.append('c');
-                sb.append((char) (charAt + ' '));
-            } else if (charAt <= '9') {
-                sb.append(charAt);
-            } else if (charAt == ':') {
+                sb.append((char) (cCharAt + ' '));
+            } else if (cCharAt <= '9') {
+                sb.append(cCharAt);
+            } else if (cCharAt == ':') {
                 sb.append("cZ");
-            } else if (charAt <= '?') {
+            } else if (cCharAt <= '?') {
                 sb.append('b');
-                sb.append((char) (charAt + 11));
-            } else if (charAt == '@') {
+                sb.append((char) (cCharAt + 11));
+            } else if (cCharAt == '@') {
                 sb.append("bV");
-            } else if (charAt <= 'Z') {
-                sb.append(charAt);
-            } else if (charAt <= '_') {
+            } else if (cCharAt <= 'Z') {
+                sb.append(cCharAt);
+            } else if (cCharAt <= '_') {
                 sb.append('b');
-                sb.append((char) (charAt - 16));
-            } else if (charAt == '`') {
+                sb.append((char) (cCharAt - 16));
+            } else if (cCharAt == '`') {
                 sb.append("bW");
-            } else if (charAt <= 'z') {
+            } else if (cCharAt <= 'z') {
                 sb.append('d');
-                sb.append((char) (charAt - ' '));
+                sb.append((char) (cCharAt - ' '));
             } else {
-                if (charAt > 127) {
-                    throw new IllegalArgumentException("Requested content contains a non-encodable character: '" + charAt + "'");
+                if (cCharAt > 127) {
+                    throw new IllegalArgumentException("Requested content contains a non-encodable character: '" + cCharAt + "'");
                 }
                 sb.append('b');
-                sb.append((char) (charAt - '+'));
+                sb.append((char) (cCharAt - '+'));
             }
         }
-        String sb2 = sb.toString();
-        int length2 = sb2.length();
+        String string = sb.toString();
+        int length2 = string.length();
         if (length2 > 80) {
             throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(length2, "Requested contents should be less than 80 digits long after converting to extended encoding, but got "));
         }
         int i2 = 9;
-        boolean[] zArr = new boolean[((sb2.length() + 4) * 9) + 1];
+        boolean[] zArr = new boolean[((string.length() + 4) * 9) + 1];
         appendPattern(zArr, 0, Code93Reader.ASTERISK_ENCODING);
         for (int i3 = 0; i3 < length2; i3++) {
-            appendPattern(zArr, i2, Code93Reader.CHARACTER_ENCODINGS["0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".indexOf(sb2.charAt(i3))]);
+            appendPattern(zArr, i2, Code93Reader.CHARACTER_ENCODINGS["0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".indexOf(string.charAt(i3))]);
             i2 += 9;
         }
-        int computeChecksumIndex = computeChecksumIndex(20, sb2);
+        int iComputeChecksumIndex = computeChecksumIndex(20, string);
         int[] iArr = Code93Reader.CHARACTER_ENCODINGS;
-        appendPattern(zArr, i2, iArr[computeChecksumIndex]);
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(sb2);
-        m.append("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".charAt(computeChecksumIndex));
-        appendPattern(zArr, i2 + 9, iArr[computeChecksumIndex(15, m.toString())]);
+        appendPattern(zArr, i2, iArr[iComputeChecksumIndex]);
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+        sbM.append("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*".charAt(iComputeChecksumIndex));
+        appendPattern(zArr, i2 + 9, iArr[computeChecksumIndex(15, sbM.toString())]);
         appendPattern(zArr, i2 + 18, Code93Reader.ASTERISK_ENCODING);
         zArr[i2 + 27] = true;
         return zArr;

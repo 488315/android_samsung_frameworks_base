@@ -157,9 +157,9 @@ public interface IPrintSpooler extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPrintSpooler)) {
-                return (IPrintSpooler) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPrintSpooler)) {
+                return (IPrintSpooler) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -222,21 +222,21 @@ public interface IPrintSpooler extends IInterface {
                     removeObsoletePrintJobs();
                     return true;
                 case 2:
-                    IPrintSpoolerCallbacks asInterface = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getPrintJobInfos(asInterface, componentName, readInt, readInt2, readInt3);
+                    getPrintJobInfos(iPrintSpoolerCallbacksAsInterface, componentName, i3, i4, i5);
                     return true;
                 case 3:
                     PrintJobId printJobId = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    IPrintSpoolerCallbacks asInterface2 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface2 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getPrintJobInfo(printJobId, asInterface2, readInt4, readInt5);
+                    getPrintJobInfo(printJobId, iPrintSpoolerCallbacksAsInterface2, i6, i7);
                     return true;
                 case 4:
                     PrintJobInfo printJobInfo = (PrintJobInfo) parcel.readTypedObject(PrintJobInfo.CREATOR);
@@ -245,18 +245,18 @@ public interface IPrintSpooler extends IInterface {
                     return true;
                 case 5:
                     PrintJobId printJobId2 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    String readString = parcel.readString();
-                    IPrintSpoolerCallbacks asInterface3 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    String string = parcel.readString();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface3 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrintJobState(printJobId2, readInt6, readString, asInterface3, readInt7);
+                    setPrintJobState(printJobId2, i8, string, iPrintSpoolerCallbacksAsInterface3, i9);
                     return true;
                 case 6:
                     PrintJobId printJobId3 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setProgress(printJobId3, readFloat);
+                    setProgress(printJobId3, f);
                     return true;
                 case 7:
                     PrintJobId printJobId4 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
@@ -266,39 +266,39 @@ public interface IPrintSpooler extends IInterface {
                     return true;
                 case 8:
                     PrintJobId printJobId5 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     CharSequence charSequence2 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     parcel.enforceNoDataAvail();
-                    setStatusRes(printJobId5, readInt8, charSequence2);
+                    setStatusRes(printJobId5, i10, charSequence2);
                     return true;
                 case 9:
                     PrinterId printerId = (PrinterId) parcel.readTypedObject(PrinterId.CREATOR);
                     Icon icon = (Icon) parcel.readTypedObject(Icon.CREATOR);
-                    IPrintSpoolerCallbacks asInterface4 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt9 = parcel.readInt();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface4 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCustomPrinterIconLoaded(printerId, icon, asInterface4, readInt9);
+                    onCustomPrinterIconLoaded(printerId, icon, iPrintSpoolerCallbacksAsInterface4, i11);
                     return true;
                 case 10:
                     PrinterId printerId2 = (PrinterId) parcel.readTypedObject(PrinterId.CREATOR);
-                    IPrintSpoolerCallbacks asInterface5 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt10 = parcel.readInt();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface5 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCustomPrinterIcon(printerId2, asInterface5, readInt10);
+                    getCustomPrinterIcon(printerId2, iPrintSpoolerCallbacksAsInterface5, i12);
                     return true;
                 case 11:
-                    IPrintSpoolerCallbacks asInterface6 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt11 = parcel.readInt();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface6 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearCustomPrinterIconCache(asInterface6, readInt11);
+                    clearCustomPrinterIconCache(iPrintSpoolerCallbacksAsInterface6, i13);
                     return true;
                 case 12:
                     PrintJobId printJobId6 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    String readString2 = parcel.readString();
-                    IPrintSpoolerCallbacks asInterface7 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt12 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    IPrintSpoolerCallbacks iPrintSpoolerCallbacksAsInterface7 = IPrintSpoolerCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrintJobTag(printJobId6, readString2, asInterface7, readInt12);
+                    setPrintJobTag(printJobId6, string2, iPrintSpoolerCallbacksAsInterface7, i14);
                     return true;
                 case 13:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
@@ -307,20 +307,20 @@ public interface IPrintSpooler extends IInterface {
                     writePrintJobData(parcelFileDescriptor, printJobId7);
                     return true;
                 case 14:
-                    IPrintSpoolerClient asInterface8 = IPrintSpoolerClient.Stub.asInterface(parcel.readStrongBinder());
+                    IPrintSpoolerClient iPrintSpoolerClientAsInterface = IPrintSpoolerClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setClient(asInterface8);
+                    setClient(iPrintSpoolerClientAsInterface);
                     return true;
                 case 15:
                     PrintJobId printJobId8 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPrintJobCancelling(printJobId8, readBoolean);
+                    setPrintJobCancelling(printJobId8, z);
                     return true;
                 case 16:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    pruneApprovedPrintServices(createTypedArrayList);
+                    pruneApprovedPrintServices(arrayListCreateTypedArrayList);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -345,228 +345,228 @@ public interface IPrintSpooler extends IInterface {
 
             @Override // android.print.IPrintSpooler
             public void removeObsoletePrintJobs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void getPrintJobInfos(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, ComponentName componentName, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void getPrintJobInfo(PrintJobId printJobId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void createPrintJob(PrintJobInfo printJobInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setPrintJobState(PrintJobId printJobId, int i, String str, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setProgress(PrintJobId printJobId, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setStatus(PrintJobId printJobId, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(7, obtain, null, 1);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setStatusRes(PrintJobId printJobId, int i, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInt(i);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(8, obtain, null, 1);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printerId, 0);
-                    obtain.writeTypedObject(icon, 0);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printerId, 0);
+                    parcelObtain.writeTypedObject(icon, 0);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void getCustomPrinterIcon(PrinterId printerId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printerId, 0);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printerId, 0);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void clearCustomPrinterIconCache(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setPrintJobTag(PrintJobId printJobId, String str, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPrintSpoolerCallbacks);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerCallbacks);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(printJobId, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setClient(IPrintSpoolerClient iPrintSpoolerClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintSpoolerClient);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintSpoolerClient);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void setPrintJobCancelling(PrintJobId printJobId, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintSpooler
             public void pruneApprovedPrintServices(List<ComponentName> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -41,16 +41,16 @@ public class SQLiteCompatibilityWalFlags {
         if (sInitialized || sCallingGlobalSettings) {
             return;
         }
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        String str = null;
-        Application application = currentActivityThread == null ? null : currentActivityThread.getApplication();
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        String string = null;
+        Application application = activityThreadCurrentActivityThread == null ? null : activityThreadCurrentActivityThread.getApplication();
         if (application == null) {
             Log.w(TAG, "Cannot read global setting sqlite_compatibility_wal_flags - Application state not available");
         } else {
             try {
                 try {
                     sCallingGlobalSettings = true;
-                    str = Settings.Global.getString(application.getContentResolver(), Settings.Global.SQLITE_COMPATIBILITY_WAL_FLAGS);
+                    string = Settings.Global.getString(application.getContentResolver(), Settings.Global.SQLITE_COMPATIBILITY_WAL_FLAGS);
                 } catch (Exception e) {
                     Log.w(TAG, "Cannot read global setting sqlite_compatibility_wal_flags - " + e.toString());
                 }
@@ -58,7 +58,7 @@ public class SQLiteCompatibilityWalFlags {
                 sCallingGlobalSettings = false;
             }
         }
-        init(str);
+        init(string);
     }
 
     public static void init(String str) {

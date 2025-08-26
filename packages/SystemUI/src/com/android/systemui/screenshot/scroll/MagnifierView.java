@@ -16,7 +16,6 @@ import com.android.internal.graphics.ColorUtils;
 import com.android.systemui.res.R$styleable;
 import com.android.systemui.screenshot.scroll.CropView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MagnifierView extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -78,10 +77,10 @@ public class MagnifierView extends View {
         this.mInnerCircle = path2;
         path2.addCircle(f, f, f - this.mBorderPx, direction);
         Path path3 = new Path();
-        int ceil = (int) Math.ceil(getWidth() / this.mCheckerboardBoxSize);
-        int ceil2 = (int) Math.ceil(getHeight() / this.mCheckerboardBoxSize);
-        for (int i5 = 0; i5 < ceil2; i5++) {
-            for (int i6 = i5 % 2 == 0 ? 0 : 1; i6 < ceil; i6 += 2) {
+        int iCeil = (int) Math.ceil(getWidth() / this.mCheckerboardBoxSize);
+        int iCeil2 = (int) Math.ceil(getHeight() / this.mCheckerboardBoxSize);
+        for (int i5 = 0; i5 < iCeil2; i5++) {
+            for (int i6 = i5 % 2 == 0 ? 0 : 1; i6 < iCeil; i6 += 2) {
                 float f2 = this.mCheckerboardBoxSize;
                 path3.addRect(i6 * f2, i5 * f2, (i6 + 1) * f2, (i5 + 1) * f2, Path.Direction.CW);
             }
@@ -105,17 +104,17 @@ public class MagnifierView extends View {
                 MagnifierView.this.mTranslationAnimator = null;
             }
         };
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.MagnifierView, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.MagnifierView, 0, 0);
         Paint paint = new Paint();
         this.mShadePaint = paint;
-        paint.setColor(ColorUtils.setAlphaComponent(obtainStyledAttributes.getColor(5, 0), obtainStyledAttributes.getInteger(4, 255)));
+        paint.setColor(ColorUtils.setAlphaComponent(typedArrayObtainStyledAttributes.getColor(5, 0), typedArrayObtainStyledAttributes.getInteger(4, 255)));
         Paint paint2 = new Paint();
         this.mHandlePaint = paint2;
-        paint2.setColor(obtainStyledAttributes.getColor(2, -16777216));
-        paint2.setStrokeWidth(obtainStyledAttributes.getDimensionPixelSize(3, 20));
-        this.mBorderPx = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        this.mBorderColor = obtainStyledAttributes.getColor(0, -1);
-        obtainStyledAttributes.recycle();
+        paint2.setColor(typedArrayObtainStyledAttributes.getColor(2, -16777216));
+        paint2.setStrokeWidth(typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 20));
+        this.mBorderPx = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        this.mBorderColor = typedArrayObtainStyledAttributes.getColor(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
         Paint paint3 = new Paint();
         this.mCheckerboardPaint = paint3;
         paint3.setColor(-7829368);

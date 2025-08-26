@@ -1,13 +1,46 @@
 package kotlin.sequences;
 
 import java.util.Iterator;
+import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TransformingIndexedSequence implements Sequence {
     public final Sequence sequence;
     public final Function2 transformer;
+
+    /* renamed from: kotlin.sequences.TransformingIndexedSequence$iterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Iterator, KMappedMarker {
+        public int index;
+        public final Iterator iterator;
+
+        public AnonymousClass1() {
+            this.iterator = TransformingIndexedSequence.this.sequence.iterator();
+        }
+
+        @Override // java.util.Iterator
+        public final boolean hasNext() {
+            return this.iterator.hasNext();
+        }
+
+        @Override // java.util.Iterator
+        public final Object next() {
+            Function2 function2 = TransformingIndexedSequence.this.transformer;
+            int i = this.index;
+            this.index = i + 1;
+            if (i >= 0) {
+                return function2.invoke(Integer.valueOf(i), this.iterator.next());
+            }
+            CollectionsKt__CollectionsKt.throwIndexOverflow();
+            throw null;
+        }
+
+        @Override // java.util.Iterator
+        public final void remove() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+    }
 
     public TransformingIndexedSequence(Sequence sequence, Function2 function2) {
         this.sequence = sequence;
@@ -16,6 +49,6 @@ public final class TransformingIndexedSequence implements Sequence {
 
     @Override // kotlin.sequences.Sequence
     public final Iterator iterator() {
-        return new TransformingIndexedSequence$iterator$1(this);
+        return new AnonymousClass1();
     }
 }

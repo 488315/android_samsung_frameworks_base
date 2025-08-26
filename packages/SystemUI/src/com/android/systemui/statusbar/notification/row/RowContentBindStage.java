@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.notification.row.NotificationRowContentBin
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RowContentBindStage extends BindStage {
     public final NotificationRowContentBinder mBinder;
@@ -36,9 +35,9 @@ public class RowContentBindStage extends BindStage {
             LogLevel logLevel = LogLevel.INFO;
             RowContentBindStageLogger$$ExternalSyntheticLambda0 rowContentBindStageLogger$$ExternalSyntheticLambda0 = new RowContentBindStageLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = rowContentBindStageLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("RowContentBindStage", logLevel, rowContentBindStageLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(notificationEntry);
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("RowContentBindStage", logLevel, rowContentBindStageLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(notificationEntry);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
@@ -52,11 +51,11 @@ public class RowContentBindStage extends BindStage {
         LogLevel logLevel = LogLevel.INFO;
         RowContentBindStageLogger$$ExternalSyntheticLambda0 rowContentBindStageLogger$$ExternalSyntheticLambda0 = new RowContentBindStageLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = rowContentBindStageLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("RowContentBindStage", logLevel, rowContentBindStageLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("RowContentBindStage", logLevel, rowContentBindStageLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         logMessageImpl.str2 = rowContentBindParams.toString();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         int i = rowContentBindParams.mContentViews;
         int i2 = rowContentBindParams.mDirtyContentViews & i;
         NotificationRowContentBinder notificationRowContentBinder = this.mBinder;
@@ -103,11 +102,11 @@ public class RowContentBindStage extends BindStage {
                 LogLevel logLevel2 = LogLevel.INFO;
                 NotifBindPipelineLogger$$ExternalSyntheticLambda0 notifBindPipelineLogger$$ExternalSyntheticLambda0 = new NotifBindPipelineLogger$$ExternalSyntheticLambda0(4);
                 LogBuffer logBuffer2 = notifBindPipelineLogger.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("NotifBindPipeline", logLevel2, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("NotifBindPipeline", logLevel2, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
                 logMessageImpl2.int1 = size;
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
                 bindEntry.invalidated = false;
                 ((ArrayList) notifBindPipeline.mScratchCallbacksList).addAll(arraySet);
                 arraySet.clear();

@@ -1,6 +1,7 @@
 package com.android.systemui.qs.bar.micmode;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MicModeDetailItems extends FrameLayout {
     public final Adapter adapter;
@@ -36,7 +36,6 @@ public final class MicModeDetailItems extends FrameLayout {
     public final List items;
     public int selectedMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Adapter extends BaseAdapter {
         public Adapter() {
         }
@@ -57,7 +56,7 @@ public final class MicModeDetailItems extends FrameLayout {
         }
 
         @Override // android.widget.Adapter
-        public final View getView(int i, View view, ViewGroup viewGroup) {
+        public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             final Item item = (Item) ((ArrayList) MicModeDetailItems.this.items).get(i);
             if (view == null) {
                 view = LayoutInflater.from(MicModeDetailItems.this.context).inflate(R.layout.sec_qs_detail_mic_mode_item, viewGroup, false);
@@ -76,8 +75,8 @@ public final class MicModeDetailItems extends FrameLayout {
             final MicModeDetailItems micModeDetailItems2 = MicModeDetailItems.this;
             view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.micmode.MicModeDetailItems$Adapter$getView$3
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view2) {
-                    MicModeDetailItems.Callback callback2 = MicModeDetailItems.this.callback;
+                public final void onClick(View view2) throws Resources.NotFoundException {
+                    MicModeDetailItems.Callback callback2 = micModeDetailItems2.callback;
                     if (callback2 != null) {
                         MicModeDetailItems.Item item3 = item;
                         MicModeDetailAdapter micModeDetailAdapter = (MicModeDetailAdapter) callback2;
@@ -91,14 +90,14 @@ public final class MicModeDetailItems extends FrameLayout {
                         }
                         micModeDetailAdapter.updateDetailItem(item3, true);
                     }
-                    if (MicModeDetailItems.this.selectedMode != item.getMicMode()) {
-                        MicModeDetailItems.this.selectedMode = item.getMicMode();
-                        MicModeDetailItems micModeDetailItems3 = MicModeDetailItems.this;
+                    if (micModeDetailItems2.selectedMode != item.getMicMode()) {
+                        micModeDetailItems2.selectedMode = item.getMicMode();
+                        MicModeDetailItems micModeDetailItems3 = micModeDetailItems2;
                         int micMode = item.getMicMode();
                         micModeDetailItems3.getClass();
                         Log.d("MicModeDetailItems", "set mic mode to " + micMode);
                         micModeDetailItems3.audioManager.setMicInputControlMode(micMode);
-                        MicModeDetailItems micModeDetailItems4 = MicModeDetailItems.this;
+                        MicModeDetailItems micModeDetailItems4 = micModeDetailItems2;
                         String loggingId = item.getLoggingId();
                         String loggingValue = item.getLoggingValue();
                         micModeDetailItems4.context.getSharedPreferences(SystemUIAnalytics.MIC_MODE_PREF_NAME, 0).edit().putString(loggingId, loggingValue).apply();
@@ -114,11 +113,9 @@ public final class MicModeDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -128,7 +125,6 @@ public final class MicModeDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H() {
             super(Looper.getMainLooper());
@@ -158,7 +154,6 @@ public final class MicModeDetailItems extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Item {
         public CheckedTextView ctv;
 

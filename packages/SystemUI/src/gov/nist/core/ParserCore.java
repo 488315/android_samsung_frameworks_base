@@ -2,7 +2,6 @@ package gov.nist.core;
 
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ParserCore {
     public static int nesting_level;
@@ -38,14 +37,14 @@ public abstract class ParserCore {
         }
     }
 
-    public final NameValue nameValue() {
+    public final NameValue nameValue() throws ParseException {
         boolean z;
         this.lexer.match(4095);
         LexerCore lexerCore = this.lexer;
         Token token = lexerCore.currentMatch;
         lexerCore.SPorHT();
         try {
-            String str = "";
+            String strQuotedString = "";
             boolean z2 = true;
             if (this.lexer.lookAhead(0) != '=') {
                 return new NameValue(token.tokenValue, "", true);
@@ -53,21 +52,21 @@ public abstract class ParserCore {
             this.lexer.consume(1);
             this.lexer.SPorHT();
             if (this.lexer.lookAhead(0) == '\"') {
-                str = this.lexer.quotedString();
+                strQuotedString = this.lexer.quotedString();
                 z = true;
                 z2 = false;
             } else {
                 this.lexer.match(4095);
-                String str2 = this.lexer.currentMatch.tokenValue;
-                if (str2 == null) {
+                String str = this.lexer.currentMatch.tokenValue;
+                if (str == null) {
                     z = false;
                 } else {
-                    str = str2;
+                    strQuotedString = str;
                     z = false;
                     z2 = false;
                 }
             }
-            NameValue nameValue = new NameValue(token.tokenValue, str, z2);
+            NameValue nameValue = new NameValue(token.tokenValue, strQuotedString, z2);
             if (z) {
                 nameValue.setQuotedValue();
             }

@@ -10,12 +10,10 @@ import com.samsung.android.knox.zt.config.IResultListener;
 import com.samsung.android.knox.zt.config.ITrustFactorListener;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ITrustFactorService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.config.ITrustFactorService";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ITrustFactorService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +51,6 @@ public interface ITrustFactorService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static <T> T readTypedObject(Parcel parcel, Parcelable.Creator<T> creator) {
             if (parcel.readInt() != 0) {
@@ -84,7 +81,6 @@ public interface ITrustFactorService extends IInterface {
 
     int stop() throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ITrustFactorService {
         public static final int TRANSACTION_getTrustScore = 6;
         public static final int TRANSACTION_getType = 5;
@@ -93,7 +89,6 @@ public interface ITrustFactorService extends IInterface {
         public static final int TRANSACTION_start = 2;
         public static final int TRANSACTION_stop = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ITrustFactorService {
             public IBinder mRemote;
 
@@ -112,94 +107,94 @@ public interface ITrustFactorService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public long getTrustScore() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public TrustFactorType getType() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TrustFactorType) _Parcel.readTypedObject(obtain2, TrustFactorType.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TrustFactorType) _Parcel.readTypedObject(parcelObtain2, TrustFactorType.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public int init(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public boolean isStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public int start(Map map, ITrustFactorListener iTrustFactorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    obtain.writeMap(map);
-                    obtain.writeStrongInterface(iTrustFactorListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    parcelObtain.writeMap(map);
+                    parcelObtain.writeStrongInterface(iTrustFactorListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.config.ITrustFactorService
             public int stop() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ITrustFactorService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -212,8 +207,8 @@ public interface ITrustFactorService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITrustFactorService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ITrustFactorService)) ? new Proxy(iBinder) : (ITrustFactorService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITrustFactorService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ITrustFactorService)) ? new Proxy(iBinder) : (ITrustFactorService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -227,24 +222,24 @@ public interface ITrustFactorService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int init = init(IResultListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iInit = init(IResultListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(init);
+                    parcel2.writeInt(iInit);
                     return true;
                 case 2:
-                    int start = start(parcel.readHashMap(getClass().getClassLoader()), ITrustFactorListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iStart = start(parcel.readHashMap(getClass().getClassLoader()), ITrustFactorListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(start);
+                    parcel2.writeInt(iStart);
                     return true;
                 case 3:
-                    int stop = stop();
+                    int iStop = stop();
                     parcel2.writeNoException();
-                    parcel2.writeInt(stop);
+                    parcel2.writeInt(iStop);
                     return true;
                 case 4:
-                    boolean isStarted = isStarted();
+                    boolean zIsStarted = isStarted();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isStarted ? 1 : 0);
+                    parcel2.writeInt(zIsStarted ? 1 : 0);
                     return true;
                 case 5:
                     TrustFactorType type = getType();

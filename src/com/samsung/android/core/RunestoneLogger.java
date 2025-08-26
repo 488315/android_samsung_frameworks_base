@@ -67,9 +67,9 @@ public class RunestoneLogger {
     }
 
     private static void sendPairMultiWindow(Context context, String str) {
-        String[] split = str.substring(1, str.length() - 1).split(", ");
+        String[] strArrSplit = str.substring(1, str.length() - 1).split(", ");
         ArrayList arrayList = new ArrayList();
-        for (String str2 : split) {
+        for (String str2 : strArrSplit) {
             arrayList.add(str2);
         }
         sendMultiWindowState(context, arrayList);
@@ -92,7 +92,7 @@ public class RunestoneLogger {
     }
 
     public static void sendRunestoneLogging(Context context, int i, int i2, ArrayList<String> arrayList) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_SCREEN_TYPE, i);
         if (i == ScreenType.FOLD.getValue()) {
@@ -106,7 +106,7 @@ public class RunestoneLogger {
             Log.d(TAG, "Send failed. it's MULTI_WINDOW Type, but package list is null");
             return;
         }
-        bundle.putLong("timestamp", currentTimeMillis);
+        bundle.putLong("timestamp", jCurrentTimeMillis);
         Intent intent = new Intent(ACTION_SCREEN_LOGGING);
         intent.setPackage("com.sec.android.diagmonagent");
         intent.putExtras(bundle);

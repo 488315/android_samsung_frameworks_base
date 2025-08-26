@@ -14,11 +14,11 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.ranging.flags");
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.ranging.flags");
             rangingCsEnabled = true;
-            rangingRttEnabled = load.getBooleanFlagValue("ranging_rtt_enabled", false);
+            rangingRttEnabled = aconfigPackageLoad.getBooleanFlagValue("ranging_rtt_enabled", false);
             rangingStackEnabled = true;
-            rangingStackUpdates25q4 = load.getBooleanFlagValue("ranging_stack_updates_25q4", false);
+            rangingStackUpdates25q4 = aconfigPackageLoad.getBooleanFlagValue("ranging_stack_updates_25q4", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

@@ -2,7 +2,6 @@ package androidx.constraintlayout.core.motion.utils;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Oscillator {
     public double[] mArea;
@@ -13,17 +12,17 @@ public class Oscillator {
 
     public final void addPoint(double d, float f) {
         int length = this.mPeriod.length + 1;
-        int binarySearch = Arrays.binarySearch(this.mPosition, d);
-        if (binarySearch < 0) {
-            binarySearch = (-binarySearch) - 1;
+        int iBinarySearch = Arrays.binarySearch(this.mPosition, d);
+        if (iBinarySearch < 0) {
+            iBinarySearch = (-iBinarySearch) - 1;
         }
         this.mPosition = Arrays.copyOf(this.mPosition, length);
         this.mPeriod = Arrays.copyOf(this.mPeriod, length);
         this.mArea = new double[length];
         double[] dArr = this.mPosition;
-        System.arraycopy(dArr, binarySearch, dArr, binarySearch + 1, (length - binarySearch) - 1);
-        this.mPosition[binarySearch] = d;
-        this.mPeriod[binarySearch] = f;
+        System.arraycopy(dArr, iBinarySearch, dArr, iBinarySearch + 1, (length - iBinarySearch) - 1);
+        this.mPosition[iBinarySearch] = d;
+        this.mPeriod[iBinarySearch] = f;
     }
 
     public final double getP(double d) {
@@ -33,17 +32,17 @@ public class Oscillator {
         if (d >= 1.0d) {
             return 1.0d;
         }
-        int binarySearch = Arrays.binarySearch(this.mPosition, d);
-        if (binarySearch < 0) {
-            binarySearch = (-binarySearch) - 1;
+        int iBinarySearch = Arrays.binarySearch(this.mPosition, d);
+        if (iBinarySearch < 0) {
+            iBinarySearch = (-iBinarySearch) - 1;
         }
         float[] fArr = this.mPeriod;
-        float f = fArr[binarySearch];
-        int i = binarySearch - 1;
+        float f = fArr[iBinarySearch];
+        int i = iBinarySearch - 1;
         float f2 = fArr[i];
         double d2 = f - f2;
         double[] dArr = this.mPosition;
-        double d3 = dArr[binarySearch];
+        double d3 = dArr[iBinarySearch];
         double d4 = dArr[i];
         double d5 = d2 / (d3 - d4);
         return ((((d * d) - (d4 * d4)) * d5) / 2.0d) + ((d - d4) * (f2 - (d5 * d4))) + this.mArea[i];
@@ -63,8 +62,8 @@ public class Oscillator {
             case 5:
                 return Math.cos((d2 + p) * 6.283185307179586d);
             case 6:
-                double abs = 1.0d - Math.abs(((p * 4.0d) % 4.0d) - 2.0d);
-                return 1.0d - (abs * abs);
+                double dAbs = 1.0d - Math.abs(((p * 4.0d) % 4.0d) - 2.0d);
+                return 1.0d - (dAbs * dAbs);
             case 7:
                 return this.mCustomCurve.getPos(p % 1.0d);
             default:

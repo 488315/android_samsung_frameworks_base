@@ -35,34 +35,34 @@ public class DnsSvcbPacket extends DnsPacket {
     }
 
     public String getTargetName(String str) {
-        DnsSvcbRecord findSvcbRecord = findSvcbRecord(str);
-        if (findSvcbRecord != null) {
-            return findSvcbRecord.getTargetName();
+        DnsSvcbRecord dnsSvcbRecordFindSvcbRecord = findSvcbRecord(str);
+        if (dnsSvcbRecordFindSvcbRecord != null) {
+            return dnsSvcbRecordFindSvcbRecord.getTargetName();
         }
         return null;
     }
 
     public int getPort(String str) {
-        DnsSvcbRecord findSvcbRecord = findSvcbRecord(str);
-        if (findSvcbRecord != null) {
-            return findSvcbRecord.getPort();
+        DnsSvcbRecord dnsSvcbRecordFindSvcbRecord = findSvcbRecord(str);
+        if (dnsSvcbRecordFindSvcbRecord != null) {
+            return dnsSvcbRecordFindSvcbRecord.getPort();
         }
         return -1;
     }
 
     public List<InetAddress> getAddresses(String str) {
-        DnsSvcbRecord findSvcbRecord = findSvcbRecord(str);
-        if (findSvcbRecord == null) {
+        DnsSvcbRecord dnsSvcbRecordFindSvcbRecord = findSvcbRecord(str);
+        if (dnsSvcbRecordFindSvcbRecord == null) {
             return Collections.EMPTY_LIST;
         }
         List<InetAddress> addressesFromAdditionalSection = getAddressesFromAdditionalSection();
-        return addressesFromAdditionalSection.size() > 0 ? addressesFromAdditionalSection : findSvcbRecord.getAddresses();
+        return addressesFromAdditionalSection.size() > 0 ? addressesFromAdditionalSection : dnsSvcbRecordFindSvcbRecord.getAddresses();
     }
 
     public String getDohPath(String str) {
-        DnsSvcbRecord findSvcbRecord = findSvcbRecord(str);
-        if (findSvcbRecord != null) {
-            return findSvcbRecord.getDohPath();
+        DnsSvcbRecord dnsSvcbRecordFindSvcbRecord = findSvcbRecord(str);
+        if (dnsSvcbRecordFindSvcbRecord != null) {
+            return dnsSvcbRecordFindSvcbRecord.getDohPath();
         }
         return null;
     }

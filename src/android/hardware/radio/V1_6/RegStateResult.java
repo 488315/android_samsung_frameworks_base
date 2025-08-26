@@ -198,13 +198,13 @@ public final class RegStateResult {
 
         public static final ArrayList<AccessTechnologySpecificInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<AccessTechnologySpecificInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 AccessTechnologySpecificInfo accessTechnologySpecificInfo = new AccessTechnologySpecificInfo();
-                accessTechnologySpecificInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 20);
+                accessTechnologySpecificInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 20);
                 arrayList.add(accessTechnologySpecificInfo);
             }
             return arrayList;
@@ -312,13 +312,13 @@ public final class RegStateResult {
 
     public static final ArrayList<RegStateResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<RegStateResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 224, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 224, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             RegStateResult regStateResult = new RegStateResult();
-            regStateResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 224);
+            regStateResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 224);
             arrayList.add(regStateResult);
         }
         return arrayList;

@@ -85,10 +85,10 @@ final class VoiceInteractionWindow extends Dialog {
         if (motionEvent.isWithinBoundsNoHistory(this.mBounds.left, this.mBounds.top, this.mBounds.right - 1, this.mBounds.bottom - 1)) {
             return super.dispatchTouchEvent(motionEvent);
         }
-        MotionEvent clampNoHistory = motionEvent.clampNoHistory(this.mBounds.left, this.mBounds.top, this.mBounds.right - 1, this.mBounds.bottom - 1);
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(clampNoHistory);
-        clampNoHistory.recycle();
-        return dispatchTouchEvent;
+        MotionEvent motionEventClampNoHistory = motionEvent.clampNoHistory(this.mBounds.left, this.mBounds.top, this.mBounds.right - 1, this.mBounds.bottom - 1);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEventClampNoHistory);
+        motionEventClampNoHistory.recycle();
+        return zDispatchTouchEvent;
     }
 
     private void updateWidthHeight(WindowManager.LayoutParams layoutParams) {

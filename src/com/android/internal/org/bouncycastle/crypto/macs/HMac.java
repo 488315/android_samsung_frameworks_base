@@ -93,9 +93,9 @@ public class HMac implements Mac {
         xorPad(this.outputBuf, this.blockLength, OPAD);
         Digest digest = this.digest;
         if (digest instanceof Memoable) {
-            Memoable copy = ((Memoable) digest).copy();
-            this.opadState = copy;
-            ((Digest) copy).update(this.outputBuf, 0, this.blockLength);
+            Memoable memoableCopy = ((Memoable) digest).copy();
+            this.opadState = memoableCopy;
+            ((Digest) memoableCopy).update(this.outputBuf, 0, this.blockLength);
         }
         Digest digest2 = this.digest;
         byte[] bArr2 = this.inputPad;
@@ -134,7 +134,7 @@ public class HMac implements Mac {
             byte[] bArr2 = this.outputBuf;
             digest2.update(bArr2, 0, bArr2.length);
         }
-        int doFinal = this.digest.doFinal(bArr, i);
+        int iDoFinal = this.digest.doFinal(bArr, i);
         int i2 = this.blockLength;
         while (true) {
             byte[] bArr3 = this.outputBuf;
@@ -147,12 +147,12 @@ public class HMac implements Mac {
         Memoable memoable2 = this.ipadState;
         if (memoable2 != null) {
             ((Memoable) this.digest).reset(memoable2);
-            return doFinal;
+            return iDoFinal;
         }
         Digest digest3 = this.digest;
         byte[] bArr4 = this.inputPad;
         digest3.update(bArr4, 0, bArr4.length);
-        return doFinal;
+        return iDoFinal;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.Mac

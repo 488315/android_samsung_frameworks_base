@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RetryAfter extends ParametersHeader implements Header {
     private static final long serialVersionUID = -1029458515616146140L;
@@ -39,14 +38,14 @@ public class RetryAfter extends ParametersHeader implements Header {
         this.comment = str;
     }
 
-    public final void setDuration(int i) {
+    public final void setDuration(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException("the duration parameter is <0");
         }
         this.parameters.set(Integer.valueOf(i), "duration");
     }
 
-    public final void setRetryAfter(int i) {
+    public final void setRetryAfter(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "invalid parameter "));
         }

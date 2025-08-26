@@ -14,7 +14,6 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.util.ExceptionUtils;
 import android.util.Slog;
-import java.io.IOException;
 import java.util.Collection;
 import libcore.io.IoUtils;
 
@@ -132,7 +131,7 @@ public abstract class DataLoaderService extends Service {
             this.mNativeInstance = j;
         }
 
-        public void writeData(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws IOException {
+        public void writeData(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws Throwable {
             try {
                 DataLoaderService.nativeWriteData(this.mNativeInstance, str, j, j2, parcelFileDescriptor);
             } catch (RuntimeException e) {

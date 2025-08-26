@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.spec.AlgorithmParameterSpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KeyAgreement {
     public static final String SERVICE = "KeyAgreement";
@@ -37,7 +36,7 @@ public class KeyAgreement {
         throw new NullPointerException("spi == null");
     }
 
-    public void doPhase(Key key) throws InvalidKeyException {
+    public void doPhase(Key key) throws IllegalStateException, InvalidKeyException {
         this.spiImpl.engineDoPhase(key, true);
     }
 
@@ -49,7 +48,7 @@ public class KeyAgreement {
         return this.spiImpl.getErrorCode();
     }
 
-    public void init(Key key, AlgorithmParameterSpec algorithmParameterSpec) throws InvalidAlgorithmParameterException, InvalidKeyException {
+    public void init(Key key, AlgorithmParameterSpec algorithmParameterSpec) throws InvalidKeyException, InvalidAlgorithmParameterException {
         this.spiImpl.engineInit(key, algorithmParameterSpec, null);
     }
 

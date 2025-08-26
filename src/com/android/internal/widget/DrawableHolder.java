@@ -59,12 +59,12 @@ public class DrawableHolder implements Animator.AnimatorListener {
         if (z) {
             removeAnimationFor(str);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, str, f);
-        ofFloat.setDuration(j);
-        ofFloat.setStartDelay(j2);
-        ofFloat.setInterpolator(EASE_OUT_INTERPOLATOR);
-        addAnimation(ofFloat, z);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, str, f);
+        objectAnimatorOfFloat.setDuration(j);
+        objectAnimatorOfFloat.setStartDelay(j2);
+        objectAnimatorOfFloat.setInterpolator(EASE_OUT_INTERPOLATOR);
+        addAnimation(objectAnimatorOfFloat, z);
+        return objectAnimatorOfFloat;
     }
 
     public void removeAnimationFor(String str) {

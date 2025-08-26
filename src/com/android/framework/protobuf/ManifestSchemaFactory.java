@@ -27,14 +27,14 @@ final class ManifestSchemaFactory implements SchemaFactory {
     @Override // com.android.framework.protobuf.SchemaFactory
     public <T> Schema<T> createSchema(Class<T> cls) {
         SchemaUtil.requireGeneratedMessage(cls);
-        MessageInfo messageInfoFor = this.messageInfoFactory.messageInfoFor(cls);
-        if (messageInfoFor.isMessageSetWireFormat()) {
+        MessageInfo messageInfoMessageInfoFor = this.messageInfoFactory.messageInfoFor(cls);
+        if (messageInfoMessageInfoFor.isMessageSetWireFormat()) {
             if (GeneratedMessageLite.class.isAssignableFrom(cls)) {
-                return MessageSetSchema.newSchema(SchemaUtil.unknownFieldSetLiteSchema(), ExtensionSchemas.lite(), messageInfoFor.getDefaultInstance());
+                return MessageSetSchema.newSchema(SchemaUtil.unknownFieldSetLiteSchema(), ExtensionSchemas.lite(), messageInfoMessageInfoFor.getDefaultInstance());
             }
-            return MessageSetSchema.newSchema(SchemaUtil.proto2UnknownFieldSetSchema(), ExtensionSchemas.full(), messageInfoFor.getDefaultInstance());
+            return MessageSetSchema.newSchema(SchemaUtil.proto2UnknownFieldSetSchema(), ExtensionSchemas.full(), messageInfoMessageInfoFor.getDefaultInstance());
         }
-        return newSchema(cls, messageInfoFor);
+        return newSchema(cls, messageInfoMessageInfoFor);
     }
 
     private static <T> Schema<T> newSchema(Class<T> cls, MessageInfo messageInfo) {

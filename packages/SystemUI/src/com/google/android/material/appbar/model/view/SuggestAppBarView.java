@@ -1,6 +1,7 @@
 package com.google.android.material.appbar.model.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -29,7 +30,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SuggestAppBarView extends AppBarView {
     private ViewGroup bottomLayout;
@@ -38,6 +38,7 @@ public class SuggestAppBarView extends AppBarView {
     private SuggestAppBarModel<? extends SuggestAppBarView> model;
     private TextView titleView;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SuggestAppBarView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -109,10 +110,10 @@ public class SuggestAppBarView extends AppBarView {
         return this.titleView;
     }
 
-    public void inflate() {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_suggest, (ViewGroup) this, false);
+    public void inflate() throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_suggest, (ViewGroup) this, false);
         ImageButton imageButton = null;
-        ViewGroup viewGroup = inflate instanceof ViewGroup ? (ViewGroup) inflate : null;
+        ViewGroup viewGroup = viewInflate instanceof ViewGroup ? (ViewGroup) viewInflate : null;
         if (viewGroup == null) {
             return;
         }
@@ -147,17 +148,17 @@ public class SuggestAppBarView extends AppBarView {
                 throw null;
             }
             ButtonModel buttonModel = (ButtonModel) obj;
-            boolean isLightTheme = SeslMisc.isLightTheme(getContext());
+            boolean zIsLightTheme = SeslMisc.isLightTheme(getContext());
             ButtonStyle buttonStyle = buttonListModel.buttonStyle;
-            Button generateButton = generateButton(buttonModel, isLightTheme ? buttonStyle.defStyleRes : buttonStyle.defStyleResDark);
-            generateButton.setMaxWidth(generateButton.getResources().getDimensionPixelSize(list.size() > 1 ? R.dimen.sesl_appbar_button_max_width : R.dimen.sesl_appbar_button_max_width_multi));
+            Button buttonGenerateButton = generateButton(buttonModel, zIsLightTheme ? buttonStyle.defStyleRes : buttonStyle.defStyleResDark);
+            buttonGenerateButton.setMaxWidth(buttonGenerateButton.getResources().getDimensionPixelSize(list.size() > 1 ? R.dimen.sesl_appbar_button_max_width : R.dimen.sesl_appbar_button_max_width_multi));
             if (i != 0) {
                 addMargin();
             }
-            this.buttons.add(generateButton);
+            this.buttons.add(buttonGenerateButton);
             ViewGroup viewGroup2 = this.bottomLayout;
             if (viewGroup2 != null) {
-                viewGroup2.addView(generateButton);
+                viewGroup2.addView(buttonGenerateButton);
             }
             i = i2;
         }
@@ -192,7 +193,7 @@ public class SuggestAppBarView extends AppBarView {
     }
 
     @Override // com.google.android.material.appbar.model.view.AppBarView
-    public void updateResource(Context context) {
+    public void updateResource(Context context) throws Resources.NotFoundException {
         SeslMisc.isLightTheme(context);
         TextView textView = this.titleView;
         if (textView != null) {
@@ -211,7 +212,7 @@ public class SuggestAppBarView extends AppBarView {
         this(context, (i & 2) != 0 ? null : attributeSet);
     }
 
-    public SuggestAppBarView(Context context, AttributeSet attributeSet) {
+    public SuggestAppBarView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.buttons = new ArrayList();
         inflate();

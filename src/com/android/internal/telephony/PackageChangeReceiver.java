@@ -73,16 +73,12 @@ public abstract class PackageChangeReceiver extends BroadcastReceiver {
     }
 
     private static synchronized Looper getStaticLooper() {
-        Looper looper;
-        synchronized (PackageChangeReceiver.class) {
-            if (sHandlerThread == null) {
-                HandlerThread handlerThread = new HandlerThread("PackageChangeReceiver");
-                sHandlerThread = handlerThread;
-                handlerThread.start();
-            }
-            looper = sHandlerThread.getLooper();
+        if (sHandlerThread == null) {
+            HandlerThread handlerThread = new HandlerThread("PackageChangeReceiver");
+            sHandlerThread = handlerThread;
+            handlerThread.start();
         }
-        return looper;
+        return sHandlerThread.getLooper();
     }
 
     @Override // android.content.BroadcastReceiver

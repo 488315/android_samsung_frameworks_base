@@ -146,10 +146,10 @@ public final class DumpUtils {
     }
 
     public static void printProcStateDurationProto(ProtoOutputStream protoOutputStream, long j, int i, long j2) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         printProto(protoOutputStream, 1159641169923L, STATE_PROTO_ENUMS, i, 1);
         protoOutputStream.write(1112396529668L, j2);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public static void printProcStateTagAndValue(PrintWriter printWriter, int i, long j) {

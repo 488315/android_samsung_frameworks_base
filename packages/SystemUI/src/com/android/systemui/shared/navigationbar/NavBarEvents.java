@@ -10,7 +10,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NavBarEvents implements Parcelable {
     public static final CREATOR CREATOR = new CREATOR(null);
@@ -28,7 +27,6 @@ public final class NavBarEvents implements Parcelable {
     public boolean rotationLocked;
     public boolean transientShowing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CREATOR implements Parcelable.Creator {
         public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,7 +48,6 @@ public final class NavBarEvents implements Parcelable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EventType {
         public static final /* synthetic */ EventType[] $VALUES;
         public static final EventType ON_APPEARANCE_CHANGED;
@@ -98,7 +95,6 @@ public final class NavBarEvents implements Parcelable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconType {
         public static final /* synthetic */ IconType[] $VALUES;
         public static final IconType TYPE_GESTURE_HANDLE_HINT;
@@ -168,17 +164,17 @@ public final class NavBarEvents implements Parcelable {
 
     public final int hashCode() {
         EventType eventType = this.eventType;
-        int hashCode = (eventType == null ? 0 : eventType.hashCode()) * 31;
+        int iHashCode = (eventType == null ? 0 : eventType.hashCode()) * 31;
         IconType iconType = this.iconType;
-        int hashCode2 = (hashCode + (iconType == null ? 0 : iconType.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (iconType == null ? 0 : iconType.hashCode())) * 31;
         Bundle bundle = this.remoteViewBundle;
-        int hashCode3 = (hashCode2 + (bundle == null ? 0 : bundle.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (bundle == null ? 0 : bundle.hashCode())) * 31;
         Bundle bundle2 = this.iconBitmapBundle;
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.appearance, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.position, TransitionData$$ExternalSyntheticOutline0.m((hashCode3 + (bundle2 == null ? 0 : bundle2.hashCode())) * 31, 31, this.orderDefault), 31), 31, this.rotationLocked), 31, this.transientShowing), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.appearance, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.position, TransitionData$$ExternalSyntheticOutline0.m((iHashCode3 + (bundle2 == null ? 0 : bundle2.hashCode())) * 31, 31, this.orderDefault), 31), 31, this.rotationLocked), 31, this.transientShowing), 31);
         Bundle bundle3 = this.pluginBundle;
-        int m2 = TransitionData$$ExternalSyntheticOutline0.m((m + (bundle3 == null ? 0 : bundle3.hashCode())) * 31, 31, this.hiddenByKnox);
+        int iM2 = TransitionData$$ExternalSyntheticOutline0.m((iM + (bundle3 == null ? 0 : bundle3.hashCode())) * 31, 31, this.hiddenByKnox);
         Bundle bundle4 = this.insetsBundle;
-        return Integer.hashCode(this.displayId) + ((m2 + (bundle4 != null ? bundle4.hashCode() : 0)) * 31);
+        return Integer.hashCode(this.displayId) + ((iM2 + (bundle4 != null ? bundle4.hashCode() : 0)) * 31);
     }
 
     public final String toString() {
@@ -260,51 +256,10 @@ public final class NavBarEvents implements Parcelable {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public NavBarEvents(android.os.Parcel r17) {
-        /*
-            r16 = this;
-            java.lang.String r0 = r17.readString()
-            r1 = 0
-            if (r0 == 0) goto Ld
-            com.android.systemui.shared.navigationbar.NavBarEvents$EventType r0 = com.android.systemui.shared.navigationbar.NavBarEvents.EventType.valueOf(r0)
-            r3 = r0
-            goto Le
-        Ld:
-            r3 = r1
-        Le:
-            java.lang.String r0 = r17.readString()
-            if (r0 == 0) goto L18
-            com.android.systemui.shared.navigationbar.NavBarEvents$IconType r1 = com.android.systemui.shared.navigationbar.NavBarEvents.IconType.valueOf(r0)
-        L18:
-            r4 = r1
-            android.os.Bundle r5 = r17.readBundle()
-            android.os.Bundle r6 = r17.readBundle()
-            byte r0 = r17.readByte()
-            if (r0 == 0) goto L2a
-            r0 = 1
-        L28:
-            r7 = r0
-            goto L2c
-        L2a:
-            r0 = 0
-            goto L28
-        L2c:
-            int r8 = r17.readInt()
-            boolean r9 = r17.readBoolean()
-            boolean r10 = r17.readBoolean()
-            int r11 = r17.readInt()
-            android.os.Bundle r12 = r17.readBundle()
-            boolean r13 = r17.readBoolean()
-            android.os.Bundle r14 = r17.readBundle()
-            int r15 = r17.readInt()
-            r2 = r16
-            r2.<init>(r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shared.navigationbar.NavBarEvents.<init>(android.os.Parcel):void");
+    public NavBarEvents(Parcel parcel) {
+        String string = parcel.readString();
+        EventType eventTypeValueOf = string != null ? EventType.valueOf(string) : null;
+        String string2 = parcel.readString();
+        this(eventTypeValueOf, string2 != null ? IconType.valueOf(string2) : null, parcel.readBundle(), parcel.readBundle(), parcel.readByte() != 0, parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), parcel.readInt(), parcel.readBundle(), parcel.readBoolean(), parcel.readBundle(), parcel.readInt());
     }
 }

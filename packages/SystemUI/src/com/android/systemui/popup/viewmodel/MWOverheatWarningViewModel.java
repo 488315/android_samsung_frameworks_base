@@ -8,7 +8,6 @@ import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.popup.view.PopupUIAlertDialog;
 import com.android.systemui.popup.view.PopupUIAlertDialogFactory;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MWOverheatWarningViewModel implements PopupUIViewModel {
     private static final String TAG = "MWOverheatWarningViewModel";
@@ -43,9 +42,9 @@ public class MWOverheatWarningViewModel implements PopupUIViewModel {
             boolean booleanExtra = this.mIntentWrapper.getBooleanExtra(intent, PopupUIUtil.EXTRA_MULTI_WINDOW_ENABLED, true);
             boolean booleanExtra2 = this.mIntentWrapper.getBooleanExtra(intent, PopupUIUtil.EXTRA_IN_MULTI_WINDOW_MODE, false);
             LogWrapper logWrapper = this.mLogWrapper;
-            StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("show : ", stringExtra, ", ", ", ", booleanExtra);
-            m.append(booleanExtra2);
-            logWrapper.d(TAG, m.toString());
+            StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("show : ", stringExtra, ", ", ", ", booleanExtra);
+            sbM.append(booleanExtra2);
+            logWrapper.d(TAG, sbM.toString());
             PopupUIAlertDialog overheatWarningDialog = this.mDialogFactory.getOverheatWarningDialog(stringExtra, booleanExtra, booleanExtra2);
             this.mMWOverheatWarningDialog = overheatWarningDialog;
             if (overheatWarningDialog != null) {

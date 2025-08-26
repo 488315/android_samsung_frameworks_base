@@ -21,7 +21,7 @@ import java.util.List;
 public class MbmsUtils {
     private static final String LOG_TAG = "MbmsUtils";
 
-    public static boolean isContainedIn(File file, File file2) {
+    public static boolean isContainedIn(File file, File file2) throws IOException {
         try {
             return file2.getCanonicalPath().startsWith(file.getCanonicalPath());
         } catch (IOException e) {
@@ -66,26 +66,26 @@ public class MbmsUtils {
     }
 
     public static android.content.pm.ServiceInfo getMiddlewareServiceInfo(Context context, String str) {
-        List<ResolveInfo> queryIntentServices;
+        List<ResolveInfo> listQueryIntentServices;
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent();
         intent.setAction(str);
         ComponentName overrideServiceName = getOverrideServiceName(context, str);
         if (overrideServiceName == null) {
-            queryIntentServices = packageManager.queryIntentServices(intent, 1048576);
+            listQueryIntentServices = packageManager.queryIntentServices(intent, 1048576);
         } else {
             intent.setComponent(overrideServiceName);
-            queryIntentServices = packageManager.queryIntentServices(intent, 131072);
+            listQueryIntentServices = packageManager.queryIntentServices(intent, 131072);
         }
-        if (queryIntentServices == null || queryIntentServices.size() == 0) {
+        if (listQueryIntentServices == null || listQueryIntentServices.size() == 0) {
             Log.w(LOG_TAG, "No MBMS services found, cannot get service info");
             return null;
         }
-        if (queryIntentServices.size() > 1) {
+        if (listQueryIntentServices.size() > 1) {
             Log.w(LOG_TAG, "More than one MBMS service found, cannot get unique service");
             return null;
         }
-        return queryIntentServices.get(0).serviceInfo;
+        return listQueryIntentServices.get(0).serviceInfo;
     }
 
     public static int startBinding(Context context, String str, ServiceConnection serviceConnection) {

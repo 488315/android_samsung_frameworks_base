@@ -3,7 +3,6 @@ package com.android.systemui.wallpaper.theme.particle;
 import android.graphics.Bitmap;
 import com.android.systemui.wallpaper.theme.SpriteModifier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Sprite {
     public int currentFrame;
@@ -17,7 +16,6 @@ public class Sprite {
     public final float x;
     public final float y;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SimpleModifier extends SpriteModifier {
         public int mCurrentFrameIndex;
 

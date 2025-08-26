@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
@@ -31,7 +32,7 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         this.mAdvancedByHost = false;
         this.mFlipRunnable = new Runnable() { // from class: android.widget.AdapterViewFlipper.1
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws Resources.NotFoundException {
                 if (AdapterViewFlipper.this.mRunning) {
                     AdapterViewFlipper.this.showNext();
                 }
@@ -57,18 +58,18 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         this.mAdvancedByHost = false;
         this.mFlipRunnable = new Runnable() { // from class: android.widget.AdapterViewFlipper.1
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws Resources.NotFoundException {
                 if (AdapterViewFlipper.this.mRunning) {
                     AdapterViewFlipper.this.showNext();
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AdapterViewFlipper, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AdapterViewFlipper, attributeSet, obtainStyledAttributes, i, i2);
-        this.mFlipInterval = obtainStyledAttributes.getInt(0, 10000);
-        this.mAutoStart = obtainStyledAttributes.getBoolean(1, false);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AdapterViewFlipper, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.AdapterViewFlipper, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mFlipInterval = typedArrayObtainStyledAttributes.getInt(0, 10000);
+        this.mAutoStart = typedArrayObtainStyledAttributes.getBoolean(1, false);
         this.mLoopViews = true;
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -94,7 +95,7 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
     }
 
     @Override // android.widget.AdapterViewAnimator, android.widget.AdapterView
-    public void setAdapter(Adapter adapter) {
+    public void setAdapter(Adapter adapter) throws Resources.NotFoundException {
         super.setAdapter(adapter);
         updateRunning();
     }
@@ -119,7 +120,7 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
 
     @Override // android.widget.AdapterViewAnimator
     @RemotableViewMethod
-    public void showNext() {
+    public void showNext() throws Resources.NotFoundException {
         if (this.mRunning) {
             removeCallbacks(this.mFlipRunnable);
             postDelayed(this.mFlipRunnable, this.mFlipInterval);
@@ -129,7 +130,7 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
 
     @Override // android.widget.AdapterViewAnimator
     @RemotableViewMethod
-    public void showPrevious() {
+    public void showPrevious() throws Resources.NotFoundException {
         if (this.mRunning) {
             removeCallbacks(this.mFlipRunnable);
             postDelayed(this.mFlipRunnable, this.mFlipInterval);

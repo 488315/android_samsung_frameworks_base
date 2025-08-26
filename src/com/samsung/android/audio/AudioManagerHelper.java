@@ -31,37 +31,13 @@ public class AudioManagerHelper {
         return str2;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x002d, code lost:
-    
-        if (android.os.SystemProperties.getBoolean("ro.product_ship", true) != false) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0030  */
     static {
-        /*
-            java.util.ArrayList r0 = new java.util.ArrayList
-            java.lang.String r1 = "com.android.systemui"
-            java.lang.String r2 = "com.android.settings"
-            java.lang.String r3 = "android"
-            java.lang.String[] r1 = new java.lang.String[]{r3, r1, r2}
-            java.util.List r1 = java.util.Arrays.asList(r1)
-            r0.<init>(r1)
-            com.samsung.android.audio.AudioManagerHelper.mLoggingPackages = r0
-            java.lang.String r0 = "ro.build.type"
-            java.lang.String r1 = "user"
-            java.lang.String r0 = android.os.SystemProperties.get(r0, r1)
-            boolean r0 = r1.equals(r0)
-            if (r0 == 0) goto L30
-            java.lang.String r0 = "ro.product_ship"
-            r1 = 1
-            boolean r0 = android.os.SystemProperties.getBoolean(r0, r1)
-            if (r0 == 0) goto L30
-            goto L31
-        L30:
-            r1 = 0
-        L31:
-            com.samsung.android.audio.AudioManagerHelper.USER_SHIP = r1
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.audio.AudioManagerHelper.<clinit>():void");
+        boolean z;
+        if ("user".equals(SystemProperties.get("ro.build.type", "user"))) {
+            z = SystemProperties.getBoolean("ro.product_ship", true);
+        }
+        USER_SHIP = z;
     }
 
     public static void setMusicShareSyncDelay(int i) {
@@ -95,8 +71,8 @@ public class AudioManagerHelper {
         if (str.length() != 17 || !USER_SHIP) {
             return str;
         }
-        String replaceAll = str.replaceAll(":", "");
-        return replaceAll.substring(0, 6) + Session.SESSION_SEPARATION_CHAR_CHILD + replaceAll.substring(11);
+        String strReplaceAll = str.replaceAll(":", "");
+        return strReplaceAll.substring(0, 6) + Session.SESSION_SEPARATION_CHAR_CHILD + strReplaceAll.substring(11);
     }
 
     public static String getAddressForLog(BluetoothDevice bluetoothDevice) {
@@ -153,9 +129,7 @@ public class AudioManagerHelper {
         return (String) List.of((Object[]) stackTraceElementArr).subList(5, Math.min(i + 5, stackTraceElementArr.length)).stream().map(new Function() { // from class: com.samsung.android.audio.AudioManagerHelper$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String makeMethodString;
-                makeMethodString = AudioManagerHelper.makeMethodString((StackTraceElement) obj);
-                return makeMethodString;
+                return AudioManagerHelper.makeMethodString((StackTraceElement) obj);
             }
         }).collect(Collectors.joining("<-"));
     }
@@ -178,8 +152,8 @@ public class AudioManagerHelper {
         if (str == null || !str.startsWith("/product/media/audio/ui/")) {
             return str;
         }
-        String replaceFirst = str.replaceFirst("/product", "/system");
-        Log.e(TAG, "convert starting path: " + replaceFirst);
-        return replaceFirst;
+        String strReplaceFirst = str.replaceFirst("/product", "/system");
+        Log.e(TAG, "convert starting path: " + strReplaceFirst);
+        return strReplaceFirst;
     }
 }

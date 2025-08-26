@@ -6,11 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ApkAssets;
+import android.content.res.Resources;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -40,8 +43,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.Executor;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NavigationModeController implements Dumpable {
     public final Context mContext;
@@ -58,12 +62,10 @@ public class NavigationModeController implements Dumpable {
     public final ArrayList mListeners = new ArrayList();
     public final ArrayList mOverlayHistoryList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ModeChangedListener {
         void onNavigationModeChanged(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ModeOverlayReason {
         UPDATE_INTERACTION_MODE_AS_OWNER_USER,
         UPDATE_INTERACTION_MODE_DEVICE_PROVISIONED_COMPLETE,
@@ -77,7 +79,7 @@ public class NavigationModeController implements Dumpable {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.navigationbar.NavigationModeController$1, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r3v0, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.NavigationModeController$3] */
-    public NavigationModeController(Context context, ConfigurationController configurationController, UserTracker userTracker, Executor executor, Executor executor2, DumpManager dumpManager, NavBarStore navBarStore, DeviceProvisionedController deviceProvisionedController) {
+    public NavigationModeController(Context context, ConfigurationController configurationController, UserTracker userTracker, Executor executor, Executor executor2, DumpManager dumpManager, NavBarStore navBarStore, DeviceProvisionedController deviceProvisionedController) throws Resources.NotFoundException {
         ?? r0 = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.navigationbar.NavigationModeController.1
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onDeviceProvisionedChanged() {
@@ -105,7 +107,7 @@ public class NavigationModeController implements Dumpable {
         this.mDeviceProvisionedCallback = r0;
         UserTracker.Callback callback = new UserTracker.Callback() { // from class: com.android.systemui.navigationbar.NavigationModeController.2
             @Override // com.android.systemui.settings.UserTracker.Callback
-            public final void onUserChanged(int i, Context context2) {
+            public final void onUserChanged(int i, Context context2) throws Resources.NotFoundException {
                 ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onUserChanged: ", "NavigationModeController");
                 NavigationModeController navigationModeController = NavigationModeController.this;
                 navigationModeController.updateCurrentInteractionMode(true);
@@ -118,7 +120,7 @@ public class NavigationModeController implements Dumpable {
         this.mUserTrackerCallback = callback;
         ?? r3 = new BroadcastReceiver() { // from class: com.android.systemui.navigationbar.NavigationModeController.3
             @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
+            public final void onReceive(Context context2, Intent intent) throws Resources.NotFoundException {
                 Log.d("NavigationModeController", "ACTION_OVERLAY_CHANGED");
                 NavigationModeController.this.updateCurrentInteractionMode(true);
             }
@@ -147,7 +149,7 @@ public class NavigationModeController implements Dumpable {
         }
         ((ConfigurationControllerImpl) configurationController).addCallback(new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.navigationbar.NavigationModeController.4
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onThemeChanged() {
+            public final void onThemeChanged() throws Resources.NotFoundException {
                 Log.d("NavigationModeController", "onOverlayChanged");
                 NavigationModeController.this.updateCurrentInteractionMode(true);
             }
@@ -155,11 +157,11 @@ public class NavigationModeController implements Dumpable {
         updateCurrentInteractionMode(false);
     }
 
-    public static int getCurrentInteractionMode(Context context) {
+    public static int getCurrentInteractionMode(Context context) throws Resources.NotFoundException {
         int integer = context.getResources().getInteger(R.integer.config_screenTimeoutOverride);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(integer, "getCurrentInteractionMode: mode=", " contextUser=");
-        m.append(context.getUserId());
-        Log.d("NavigationModeController", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(integer, "getCurrentInteractionMode: mode=", " contextUser=");
+        sbM.append(context.getUserId());
+        Log.d("NavigationModeController", sbM.toString());
         return integer;
     }
 
@@ -174,16 +176,16 @@ public class NavigationModeController implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        String str;
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NavigationModeController:", "  mode=");
-        m.append(getCurrentInteractionMode(this.mCurrentUserContext));
-        printWriter.println(m.toString());
+        String strJoin;
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NavigationModeController:", "  mode=");
+        sbM.append(getCurrentInteractionMode(this.mCurrentUserContext));
+        printWriter.println(sbM.toString());
         try {
-            str = String.join(", ", this.mOverlayManager.getDefaultOverlayPackages());
+            strJoin = String.join(", ", this.mOverlayManager.getDefaultOverlayPackages());
         } catch (RemoteException unused) {
-            str = "failed_to_fetch";
+            strJoin = "failed_to_fetch";
         }
-        ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "  defaultOverlays=", str);
+        ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "  defaultOverlays=", strJoin);
         if (BasicRune.NAVBAR_ENABLED) {
             printWriter.println("    contextUser=" + this.mCurrentUserContext.getUserId());
             printWriter.println("    assetPaths=");
@@ -256,7 +258,7 @@ public class NavigationModeController implements Dumpable {
             this.mUiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.navigationbar.NavigationModeController$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NavigationModeController navigationModeController = NavigationModeController.this;
+                    NavigationModeController navigationModeController = this.f$0;
                     String str2 = str;
                     int i2 = i;
                     navigationModeController.getClass();
@@ -280,19 +282,95 @@ public class NavigationModeController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00e7 A[Catch: Exception -> 0x0083, TryCatch #1 {Exception -> 0x0083, blocks: (B:12:0x003a, B:14:0x007e, B:15:0x0086, B:17:0x0091, B:21:0x00a5, B:24:0x00b8, B:26:0x00d4, B:28:0x00da, B:30:0x00e7, B:32:0x00ef, B:34:0x00f7, B:36:0x0133, B:38:0x00ff, B:41:0x0127), top: B:11:0x003a }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00b7  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void updateCurrentInteractionMode(boolean r11) {
-        /*
-            Method dump skipped, instructions count: 447
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.NavigationModeController.updateCurrentInteractionMode(boolean):void");
+    public final void updateCurrentInteractionMode(boolean z) throws Resources.NotFoundException {
+        boolean z2 = BasicRune.NAVBAR_ENABLED;
+        if (z2 && this.mContext.getUserId() != 0) {
+            Log.d("NavigationModeController", "Skip updateCurrentInteractionMode for userId=" + this.mContext.getUserId());
+            return;
+        }
+        Trace.beginSection("NMC#updateCurrentInteractionMode");
+        this.mCurrentUserContext = getCurrentUserContext();
+        if (z2) {
+            try {
+                final int i = 0;
+                Stream streamFilter = this.mOverlayManager.getOverlayInfosForTarget("android", this.mContext.getUserId()).stream().filter(new Predicate() { // from class: com.android.systemui.navigationbar.NavigationModeController$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        OverlayInfo overlayInfo = (OverlayInfo) obj;
+                        switch (i) {
+                            case 0:
+                                return "com.android.internal.navigation_bar_mode".equals(overlayInfo.getCategory());
+                            default:
+                                return overlayInfo.isEnabled();
+                        }
+                    }
+                });
+                final int i2 = 1;
+                OverlayInfo overlayInfo = (OverlayInfo) streamFilter.filter(new Predicate() { // from class: com.android.systemui.navigationbar.NavigationModeController$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        OverlayInfo overlayInfo2 = (OverlayInfo) obj;
+                        switch (i2) {
+                            case 0:
+                                return "com.android.internal.navigation_bar_mode".equals(overlayInfo2.getCategory());
+                            default:
+                                return overlayInfo2.isEnabled();
+                        }
+                    }
+                }).findFirst().orElse(null);
+                Log.d("NavigationModeController", "migrateNavigationBarIfNecessary currentOverlayInfo=" + overlayInfo);
+                String packageName = overlayInfo != null ? overlayInfo.getPackageName() : "";
+                int userId = this.mContext.getUserId();
+                boolean z3 = (BasicRune.NAVBAR_SIMPLIFIED_GESTURE && (Settings.Global.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATIONBAR_SPLUGIN_FLAGS, 0) & 4) == 0) ? false : true;
+                boolean zIsGestureDefault = isGestureDefault();
+                StringBuilder sb = new StringBuilder("migrateNavBar: currentPackageName=");
+                sb.append(packageName.isEmpty() ? "empty" : packageName);
+                sb.append(", isSupportLegacyGestureOptions=");
+                sb.append(z3);
+                sb.append(", isChinaModel=");
+                sb.append(zIsGestureDefault);
+                Log.d("NavigationModeController", sb.toString());
+                if (zIsGestureDefault && packageName.isEmpty()) {
+                    setModeOverlay(userId, ModeOverlayReason.UPDATE_INTERACTION_MODE_GESTURE_BY_DEFAULT, NavigationModeUtil.getOverlayPackage(this.mContext));
+                }
+                if (!z3) {
+                    if ("com.samsung.internal.systemui.navbar.sec_gestural".equals(packageName) || "com.samsung.internal.systemui.navbar.sec_gestural_no_hint".equals(packageName) || "com.samsung.internal.systemui.navbar.gestural_no_hint".equals(packageName)) {
+                        Settings.Global.putInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATION_BAR_GESTURE_WHILE_HIDDEN, zIsGestureDefault ? 1 : 0);
+                        Settings.Global.putInt(this.mContext.getContentResolver(), "navigation_bar_gesture_detail_type", 1);
+                        Settings.Global.putInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATIONBAR_GESTURE_HINT, 1);
+                        String str = zIsGestureDefault ? "com.android.internal.systemui.navbar.gestural" : "com.android.internal.systemui.navbar.threebutton";
+                        setModeOverlay(userId, ModeOverlayReason.UPDATE_INTERACTION_MODE_SIMPLIFIED_GESTURE, str);
+                        Log.d("NavigationModeController", "migrateNavBar: targetPackage=".concat(str));
+                    }
+                    Settings.Global.putInt(this.mContext.getContentResolver(), "sem_bottom_gesture_restored", 0);
+                }
+            } catch (Exception e) {
+                Log.d("NavigationModeController", "Failed to migrate navigation bar overlay package:");
+                e.printStackTrace();
+            }
+            if (this.mContext.getUserId() != this.mCurrentUserContext.getUserId()) {
+                Log.d("NavigationModeController", "updateCurrentInteractionMode() : Overlay guest's package as owner's package");
+                try {
+                    setModeOverlay(this.mCurrentUserContext.getUserId(), ModeOverlayReason.UPDATE_INTERACTION_MODE_AS_OWNER_USER, NavigationModeUtil.getOverlayPackage(this.mContext));
+                } catch (Exception unused) {
+                    Log.e("NavigationModeController", "unexpected error while running updateCurrentInteractionMode()");
+                }
+            }
+        }
+        final int currentInteractionMode = getCurrentInteractionMode(BasicRune.NAVBAR_ENABLED ? this.mContext : this.mCurrentUserContext);
+        this.mUiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.navigationbar.NavigationModeController$$ExternalSyntheticLambda0
+            @Override // java.lang.Runnable
+            public final void run() {
+                Settings.Secure.putString(this.f$0.mCurrentUserContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATION_MODE, String.valueOf(currentInteractionMode));
+            }
+        });
+        Log.d("NavigationModeController", "updateCurrentInteractionMode: mode=" + currentInteractionMode);
+        dumpAssetPaths(this.mCurrentUserContext);
+        if (z) {
+            for (int i3 = 0; i3 < this.mListeners.size(); i3++) {
+                ((ModeChangedListener) this.mListeners.get(i3)).onNavigationModeChanged(currentInteractionMode);
+            }
+        }
+        Trace.endSection();
     }
 }

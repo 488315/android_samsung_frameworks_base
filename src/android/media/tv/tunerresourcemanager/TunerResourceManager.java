@@ -1,7 +1,6 @@
 package android.media.tv.tunerresourcemanager;
 
 import android.media.tv.tunerresourcemanager.IResourcesReclaimListener;
-import android.media.tv.tunerresourcemanager.TunerResourceManager;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -50,18 +49,18 @@ public class TunerResourceManager {
 
         @Override // android.media.tv.tunerresourcemanager.IResourcesReclaimListener
         public void onReclaimResources() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResourcesReclaimListener resourcesReclaimListener = this.val$listener;
                 executor.execute(new Runnable() { // from class: android.media.tv.tunerresourcemanager.TunerResourceManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TunerResourceManager.ResourcesReclaimListener.this.onReclaimResources();
+                        resourcesReclaimListener.onReclaimResources();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

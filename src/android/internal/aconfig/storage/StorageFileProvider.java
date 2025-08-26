@@ -1,6 +1,7 @@
 package android.internal.aconfig.storage;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -40,9 +41,9 @@ public class StorageFileProvider {
         try {
             Iterator<Path> it = Files.newDirectoryStream(Paths.get(this.mMapPath, new String[0]), "*.package.map").iterator();
             while (it.hasNext()) {
-                String substring = it.next().getFileName().toString().substring(0, r3.length() - 12);
-                if (!hashSet.contains(substring)) {
-                    arrayList.add(substring);
+                String strSubstring = it.next().getFileName().toString().substring(0, r3.length() - 12);
+                if (!hashSet.contains(strSubstring)) {
+                    arrayList.add(strSubstring);
                 }
             }
         } catch (NoSuchFileException unused) {
@@ -64,34 +65,35 @@ public class StorageFileProvider {
         return FlagValueList.fromBytes(mapStorageFile(Paths.get(this.mBootPath, str + VAL_FILE_EXT), FileType.FLAG_VAL));
     }
 
-    private static MappedByteBuffer mapStorageFile(Path path, FileType fileType) {
+    private static MappedByteBuffer mapStorageFile(Path path, FileType fileType) throws Throwable {
         Throwable th;
+        FileChannel fileChannelOpen;
         FileChannel fileChannel = null;
         try {
             try {
-                FileChannel open = FileChannel.open(path, StandardOpenOption.READ);
-                try {
-                    MappedByteBuffer map = open.map(FileChannel.MapMode.READ_ONLY, 0L, open.size());
-                    quietlyDispose(open);
-                    return map;
-                } catch (Exception e) {
-                    e = e;
-                    throw new AconfigStorageException(4, String.format("Fail to mmap storage %s file %s", fileType.toString(), path), e);
-                } catch (Throwable th2) {
-                    th = th2;
-                    fileChannel = open;
-                    quietlyDispose(fileChannel);
-                    throw th;
-                }
-            } catch (Exception e2) {
-                e = e2;
+                fileChannelOpen = FileChannel.open(path, StandardOpenOption.READ);
+            } catch (Throwable th2) {
+                th = th2;
             }
+        } catch (Exception e) {
+            e = e;
+        }
+        try {
+            MappedByteBuffer map = fileChannelOpen.map(FileChannel.MapMode.READ_ONLY, 0L, fileChannelOpen.size());
+            quietlyDispose(fileChannelOpen);
+            return map;
+        } catch (Exception e2) {
+            e = e2;
+            throw new AconfigStorageException(4, String.format("Fail to mmap storage %s file %s", fileType.toString(), path), e);
         } catch (Throwable th3) {
             th = th3;
+            fileChannel = fileChannelOpen;
+            quietlyDispose(fileChannel);
+            throw th;
         }
     }
 
-    private static void quietlyDispose(Closeable closeable) {
+    private static void quietlyDispose(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();

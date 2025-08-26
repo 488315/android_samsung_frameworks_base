@@ -40,7 +40,7 @@ final class SerializedPredefinedEffect implements SerializedComposedEffect.Seria
         Parser() {
         }
 
-        static SerializedPredefinedEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws XmlParserException, IOException {
+        static SerializedPredefinedEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_PREDEFINED_EFFECT);
             boolean z = (i & 1) != 0;
             if (z) {
@@ -52,11 +52,11 @@ final class SerializedPredefinedEffect implements SerializedComposedEffect.Seria
             if (attributeValue == null) {
                 throw new XmlParserException("Missing predefined effect name");
             }
-            XmlConstants.PredefinedEffectName findByName = XmlConstants.PredefinedEffectName.findByName(attributeValue, i);
-            if (findByName != null) {
+            XmlConstants.PredefinedEffectName predefinedEffectNameFindByName = XmlConstants.PredefinedEffectName.findByName(attributeValue, i);
+            if (predefinedEffectNameFindByName != null) {
                 boolean attributeBoolean = z ? typedXmlPullParser.getAttributeBoolean(XmlConstants.NAMESPACE, XmlConstants.ATTRIBUTE_FALLBACK, true) : true;
                 XmlReader.readEndTag(typedXmlPullParser);
-                return new SerializedPredefinedEffect(findByName, attributeBoolean);
+                return new SerializedPredefinedEffect(predefinedEffectNameFindByName, attributeBoolean);
             }
             throw new XmlParserException("Unexpected predefined effect name " + attributeValue);
         }

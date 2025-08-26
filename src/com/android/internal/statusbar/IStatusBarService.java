@@ -774,9 +774,9 @@ public interface IStatusBarService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStatusBarService)) {
-                return (IStatusBarService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStatusBarService)) {
+                return (IStatusBarService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -1014,114 +1014,114 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    disable(readInt, readStrongBinder, readString);
+                    disable(i3, strongBinder, string);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableForUser(readInt2, readStrongBinder2, readString2, readInt3);
+                    disableForUser(i4, strongBinder2, string2, i5);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    String readString3 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    disable2(readInt4, readStrongBinder3, readString3);
+                    disable2(i6, strongBinder3, string3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt5 = parcel.readInt();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disable2ForUser(readInt5, readStrongBinder4, readString4, readInt6);
+                    disable2ForUser(i7, strongBinder4, string4, i8);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    int readInt7 = parcel.readInt();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] disableFlags = getDisableFlags(readStrongBinder5, readInt7);
+                    int[] disableFlags = getDisableFlags(strongBinder5, i9);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(disableFlags);
                     return true;
                 case 9:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setIcon(readString5, readString6, readInt8, readInt9, readString7);
+                    setIcon(string5, string6, i10, i11, string7);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString8 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string8 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setIconVisibility(readString8, readBoolean);
+                    setIconVisibility(string8, z);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeIcon(readString9);
+                    removeIcon(string9);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setImeWindowStatus(readInt10, readInt11, readInt12, readBoolean2);
+                    setImeWindowStatus(i12, i13, i14, z2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    expandSettingsPanel(readString10);
+                    expandSettingsPanel(string10);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    IStatusBar asInterface = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBar iStatusBarAsInterface = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    RegisterStatusBarResult registerStatusBar = registerStatusBar(asInterface);
+                    RegisterStatusBarResult registerStatusBarResultRegisterStatusBar = registerStatusBar(iStatusBarAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerStatusBar, 1);
+                    parcel2.writeTypedObject(registerStatusBarResultRegisterStatusBar, 1);
                     return true;
                 case 15:
-                    IStatusBar asInterface2 = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBar iStatusBarAsInterface2 = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    Map<String, RegisterStatusBarResult> registerStatusBarForAllDisplays = registerStatusBarForAllDisplays(asInterface2);
+                    Map<String, RegisterStatusBarResult> mapRegisterStatusBarForAllDisplays = registerStatusBarForAllDisplays(iStatusBarAsInterface2);
                     parcel2.writeNoException();
-                    if (registerStatusBarForAllDisplays == null) {
+                    if (mapRegisterStatusBarForAllDisplays == null) {
                         parcel2.writeInt(-1);
                     } else {
-                        parcel2.writeInt(registerStatusBarForAllDisplays.size());
-                        registerStatusBarForAllDisplays.forEach(new BiConsumer() { // from class: com.android.internal.statusbar.IStatusBarService$Stub$$ExternalSyntheticLambda0
+                        parcel2.writeInt(mapRegisterStatusBarForAllDisplays.size());
+                        mapRegisterStatusBarForAllDisplays.forEach(new BiConsumer() { // from class: com.android.internal.statusbar.IStatusBarService$Stub$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IStatusBarService.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (RegisterStatusBarResult) obj2);
+                                IStatusBarService.Stub.lambda$onTransact$0(parcel2, (String) obj, (RegisterStatusBarResult) obj2);
                             }
                         });
                     }
                     return true;
                 case 16:
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt13 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPanelRevealed(readBoolean3, readInt13);
+                    onPanelRevealed(z3, i15);
                     parcel2.writeNoException();
                     return true;
                 case 17:
@@ -1132,50 +1132,50 @@ public interface IStatusBarService extends IInterface {
                     clearNotificationEffects();
                     return true;
                 case 19:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     NotificationVisibility notificationVisibility = (NotificationVisibility) parcel.readTypedObject(NotificationVisibility.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationClick(readString11, notificationVisibility);
+                    onNotificationClick(string11, notificationVisibility);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString12 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i16 = parcel.readInt();
                     Notification.Action action = (Notification.Action) parcel.readTypedObject(Notification.Action.CREATOR);
                     NotificationVisibility notificationVisibility2 = (NotificationVisibility) parcel.readTypedObject(NotificationVisibility.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onNotificationActionClick(readString12, readInt14, action, notificationVisibility2, readBoolean4);
+                    onNotificationActionClick(string12, i16, action, notificationVisibility2, z4);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
-                    String readString15 = parcel.readString();
-                    int readInt18 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    String string15 = parcel.readString();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationError(readString13, readString14, readInt15, readInt16, readInt17, readString15, readInt18);
+                    onNotificationError(string13, string14, i17, i18, i19, string15, i20);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt19 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i21 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onClearAllNotifications(readInt19, readBoolean5);
+                    onClearAllNotifications(i21, z5);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    String readString16 = parcel.readString();
-                    int readInt20 = parcel.readInt();
-                    String readString17 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     NotificationVisibility notificationVisibility3 = (NotificationVisibility) parcel.readTypedObject(NotificationVisibility.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationClear(readString16, readInt20, readString17, readInt21, readInt22, notificationVisibility3);
+                    onNotificationClear(string16, i22, string17, i23, i24, notificationVisibility3);
                     parcel2.writeNoException();
                     return true;
                 case 24:
@@ -1186,86 +1186,86 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    String readString18 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    boolean readBoolean7 = parcel.readBoolean();
-                    int readInt23 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationExpansionChanged(readString18, readBoolean6, readBoolean7, readInt23);
+                    onNotificationExpansionChanged(string18, z6, z7, i25);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationDirectReplied(readString19);
+                    onNotificationDirectReplied(string19);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    String readString20 = parcel.readString();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    String string20 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onNotificationSmartSuggestionsAdded(readString20, readInt24, readInt25, readBoolean8, readBoolean9);
+                    onNotificationSmartSuggestionsAdded(string20, i26, i27, z8, z9);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString21 = parcel.readString();
-                    int readInt26 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i28 = parcel.readInt();
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    int readInt27 = parcel.readInt();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    int i29 = parcel.readInt();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onNotificationSmartReplySent(readString21, readInt26, charSequence, readInt27, readBoolean10);
+                    onNotificationSmartReplySent(string21, i28, charSequence, i29, z10);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationSettingsViewed(readString22);
+                    onNotificationSettingsViewed(string22);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    String readString23 = parcel.readString();
-                    boolean readBoolean11 = parcel.readBoolean();
-                    int readInt28 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    boolean z11 = parcel.readBoolean();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationBubbleChanged(readString23, readBoolean11, readInt28);
+                    onNotificationBubbleChanged(string23, z11, i30);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    String readString24 = parcel.readString();
-                    int readInt29 = parcel.readInt();
+                    String string24 = parcel.readString();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onBubbleMetadataFlagChanged(readString24, readInt29);
+                    onBubbleMetadataFlagChanged(string24, i31);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    hideCurrentInputMethodForBubbles(readInt30);
+                    hideCurrentInputMethodForBubbles(i32);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    grantInlineReplyUriPermission(readString25, uri, userHandle, readString26);
+                    grantInlineReplyUriPermission(string25, uri, userHandle, string26);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearInlineReplyUriPermissions(readString27);
+                    clearInlineReplyUriPermissions(string27);
                     return true;
                 case 35:
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationFeedbackReceived(readString28, bundle);
+                    onNotificationFeedbackReceived(string28, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 36:
@@ -1281,15 +1281,15 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reboot(readBoolean12);
+                    reboot(z12);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    boolean isFOTAAvailableForGlobalActions = isFOTAAvailableForGlobalActions();
+                    boolean zIsFOTAAvailableForGlobalActions = isFOTAAvailableForGlobalActions();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFOTAAvailableForGlobalActions);
+                    parcel2.writeBoolean(zIsFOTAAvailableForGlobalActions);
                     return true;
                 case 41:
                     restart();
@@ -1325,9 +1325,9 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeInt(lastSystemKey);
                     return true;
                 case 47:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    showPinningEnterExitToast(readBoolean13);
+                    showPinningEnterExitToast(z13);
                     parcel2.writeNoException();
                     return true;
                 case 48:
@@ -1336,55 +1336,55 @@ public interface IStatusBarService extends IInterface {
                     return true;
                 case 49:
                     PromptInfo promptInfo = (PromptInfo) parcel.readTypedObject(PromptInfo.CREATOR);
-                    IBiometricSysuiReceiver asInterface3 = IBiometricSysuiReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int[] createIntArray = parcel.createIntArray();
-                    boolean readBoolean14 = parcel.readBoolean();
-                    boolean readBoolean15 = parcel.readBoolean();
-                    int readInt31 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    String readString29 = parcel.readString();
-                    long readLong2 = parcel.readLong();
+                    IBiometricSysuiReceiver iBiometricSysuiReceiverAsInterface = IBiometricSysuiReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    boolean z14 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
+                    int i33 = parcel.readInt();
+                    long j = parcel.readLong();
+                    String string29 = parcel.readString();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    showAuthenticationDialog(promptInfo, asInterface3, createIntArray, readBoolean14, readBoolean15, readInt31, readLong, readString29, readLong2);
+                    showAuthenticationDialog(promptInfo, iBiometricSysuiReceiverAsInterface, iArrCreateIntArray, z14, z15, i33, j, string29, j2);
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onBiometricAuthenticated(readInt32);
+                    onBiometricAuthenticated(i34);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    int readInt33 = parcel.readInt();
-                    String readString30 = parcel.readString();
+                    int i35 = parcel.readInt();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onBiometricHelp(readInt33, readString30);
+                    onBiometricHelp(i35, string30);
                     parcel2.writeNoException();
                     return true;
                 case 52:
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
-                    int readInt36 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onBiometricError(readInt34, readInt35, readInt36);
+                    onBiometricError(i36, i37, i38);
                     parcel2.writeNoException();
                     return true;
                 case 53:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    hideAuthenticationDialog(readLong3);
+                    hideAuthenticationDialog(j3);
                     parcel2.writeNoException();
                     return true;
                 case 54:
-                    IBiometricContextListener asInterface4 = IBiometricContextListener.Stub.asInterface(parcel.readStrongBinder());
+                    IBiometricContextListener iBiometricContextListenerAsInterface = IBiometricContextListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setBiometicContextListener(asInterface4);
+                    setBiometicContextListener(iBiometricContextListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 55:
-                    IUdfpsRefreshRateRequestCallback asInterface5 = IUdfpsRefreshRateRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IUdfpsRefreshRateRequestCallback iUdfpsRefreshRateRequestCallbackAsInterface = IUdfpsRefreshRateRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setUdfpsRefreshRateCallback(asInterface5);
+                    setUdfpsRefreshRateCallback(iUdfpsRefreshRateRequestCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 56:
@@ -1392,9 +1392,9 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 57:
-                    boolean readBoolean16 = parcel.readBoolean();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    dismissInattentiveSleepWarning(readBoolean16);
+                    dismissInattentiveSleepWarning(z16);
                     parcel2.writeNoException();
                     return true;
                 case 58:
@@ -1406,43 +1406,43 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 60:
-                    boolean isTracing = isTracing();
+                    boolean zIsTracing = isTracing();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTracing);
+                    parcel2.writeBoolean(zIsTracing);
                     return true;
                 case 61:
-                    boolean readBoolean17 = parcel.readBoolean();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    suppressAmbientDisplay(readBoolean17);
+                    suppressAmbientDisplay(z17);
                     parcel2.writeNoException();
                     return true;
                 case 62:
                     ComponentName componentName4 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestTileServiceListeningState(componentName4, readInt37);
+                    requestTileServiceListeningState(componentName4, i39);
                     parcel2.writeNoException();
                     return true;
                 case 63:
                     ComponentName componentName5 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     CharSequence charSequence2 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     Icon icon = (Icon) parcel.readTypedObject(Icon.CREATOR);
-                    int readInt38 = parcel.readInt();
-                    IAddTileResultCallback asInterface6 = IAddTileResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i40 = parcel.readInt();
+                    IAddTileResultCallback iAddTileResultCallbackAsInterface = IAddTileResultCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestAddTile(componentName5, charSequence2, icon, readInt38, asInterface6);
+                    requestAddTile(componentName5, charSequence2, icon, i40, iAddTileResultCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 64:
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelRequestAddTile(readString31);
+                    cancelRequestAddTile(string31);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNavBarMode(readInt39);
+                    setNavBarMode(i41);
                     parcel2.writeNoException();
                     return true;
                 case 66:
@@ -1451,182 +1451,182 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeInt(navBarMode);
                     return true;
                 case 67:
-                    int readInt40 = parcel.readInt();
-                    ISessionListener asInterface7 = ISessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i42 = parcel.readInt();
+                    ISessionListener iSessionListenerAsInterface = ISessionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSessionListener(readInt40, asInterface7);
+                    registerSessionListener(i42, iSessionListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 68:
-                    int readInt41 = parcel.readInt();
-                    ISessionListener asInterface8 = ISessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i43 = parcel.readInt();
+                    ISessionListener iSessionListenerAsInterface2 = ISessionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSessionListener(readInt41, asInterface8);
+                    unregisterSessionListener(i43, iSessionListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 69:
-                    int readInt42 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     InstanceId instanceId = (InstanceId) parcel.readTypedObject(InstanceId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSessionStarted(readInt42, instanceId);
+                    onSessionStarted(i44, instanceId);
                     parcel2.writeNoException();
                     return true;
                 case 70:
-                    int readInt43 = parcel.readInt();
+                    int i45 = parcel.readInt();
                     InstanceId instanceId2 = (InstanceId) parcel.readTypedObject(InstanceId.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSessionEnded(readInt43, instanceId2);
+                    onSessionEnded(i45, instanceId2);
                     parcel2.writeNoException();
                     return true;
                 case 71:
-                    int readInt44 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     MediaRoute2Info mediaRoute2Info = (MediaRoute2Info) parcel.readTypedObject(MediaRoute2Info.CREATOR);
-                    IUndoMediaTransferCallback asInterface9 = IUndoMediaTransferCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IUndoMediaTransferCallback iUndoMediaTransferCallbackAsInterface = IUndoMediaTransferCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateMediaTapToTransferSenderDisplay(readInt44, mediaRoute2Info, asInterface9);
+                    updateMediaTapToTransferSenderDisplay(i46, mediaRoute2Info, iUndoMediaTransferCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 72:
-                    int readInt45 = parcel.readInt();
+                    int i47 = parcel.readInt();
                     MediaRoute2Info mediaRoute2Info2 = (MediaRoute2Info) parcel.readTypedObject(MediaRoute2Info.CREATOR);
                     Icon icon2 = (Icon) parcel.readTypedObject(Icon.CREATOR);
                     CharSequence charSequence3 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateMediaTapToTransferReceiverDisplay(readInt45, mediaRoute2Info2, icon2, charSequence3);
+                    updateMediaTapToTransferReceiverDisplay(i47, mediaRoute2Info2, icon2, charSequence3);
                     parcel2.writeNoException();
                     return true;
                 case 73:
-                    INearbyMediaDevicesProvider asInterface10 = INearbyMediaDevicesProvider.Stub.asInterface(parcel.readStrongBinder());
+                    INearbyMediaDevicesProvider iNearbyMediaDevicesProviderAsInterface = INearbyMediaDevicesProvider.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerNearbyMediaDevicesProvider(asInterface10);
+                    registerNearbyMediaDevicesProvider(iNearbyMediaDevicesProviderAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 74:
-                    INearbyMediaDevicesProvider asInterface11 = INearbyMediaDevicesProvider.Stub.asInterface(parcel.readStrongBinder());
+                    INearbyMediaDevicesProvider iNearbyMediaDevicesProviderAsInterface2 = INearbyMediaDevicesProvider.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterNearbyMediaDevicesProvider(asInterface11);
+                    unregisterNearbyMediaDevicesProvider(iNearbyMediaDevicesProviderAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 75:
-                    int readInt46 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showRearDisplayDialog(readInt46);
+                    showRearDisplayDialog(i48);
                     parcel2.writeNoException();
                     return true;
                 case 76:
-                    int readInt47 = parcel.readInt();
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    String readString32 = parcel.readString();
-                    int readInt48 = parcel.readInt();
+                    int i49 = parcel.readInt();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    String string32 = parcel.readString();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableToType(readInt47, readStrongBinder6, readString32, readInt48);
+                    disableToType(i49, strongBinder6, string32, i50);
                     parcel2.writeNoException();
                     return true;
                 case 77:
-                    int readInt49 = parcel.readInt();
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    String readString33 = parcel.readString();
-                    int readInt50 = parcel.readInt();
-                    int readInt51 = parcel.readInt();
+                    int i51 = parcel.readInt();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    String string33 = parcel.readString();
+                    int i52 = parcel.readInt();
+                    int i53 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableForUserToType(readInt49, readStrongBinder7, readString33, readInt50, readInt51);
+                    disableForUserToType(i51, strongBinder7, string33, i52, i53);
                     parcel2.writeNoException();
                     return true;
                 case 78:
-                    int readInt52 = parcel.readInt();
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
-                    String readString34 = parcel.readString();
-                    int readInt53 = parcel.readInt();
+                    int i54 = parcel.readInt();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
+                    String string34 = parcel.readString();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disable2ToType(readInt52, readStrongBinder8, readString34, readInt53);
+                    disable2ToType(i54, strongBinder8, string34, i55);
                     parcel2.writeNoException();
                     return true;
                 case 79:
-                    int readInt54 = parcel.readInt();
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
-                    String readString35 = parcel.readString();
-                    int readInt55 = parcel.readInt();
-                    int readInt56 = parcel.readInt();
+                    int i56 = parcel.readInt();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
+                    String string35 = parcel.readString();
+                    int i57 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disable2ForUserToType(readInt54, readStrongBinder9, readString35, readInt55, readInt56);
+                    disable2ForUserToType(i56, strongBinder9, string35, i57, i58);
                     parcel2.writeNoException();
                     return true;
                 case 80:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
-                    int readInt57 = parcel.readInt();
-                    int readInt58 = parcel.readInt();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
+                    int i59 = parcel.readInt();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int[] disableFlagsToType = getDisableFlagsToType(readStrongBinder10, readInt57, readInt58);
+                    int[] disableFlagsToType = getDisableFlagsToType(strongBinder10, i59, i60);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(disableFlagsToType);
                     return true;
                 case 81:
-                    IStatusBar asInterface12 = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt59 = parcel.readInt();
+                    IStatusBar iStatusBarAsInterface3 = IStatusBar.Stub.asInterface(parcel.readStrongBinder());
+                    int i61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    RegisterStatusBarResult registerStatusBarAsType = registerStatusBarAsType(asInterface12, readInt59);
+                    RegisterStatusBarResult registerStatusBarResultRegisterStatusBarAsType = registerStatusBarAsType(iStatusBarAsInterface3, i61);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerStatusBarAsType, 1);
+                    parcel2.writeTypedObject(registerStatusBarResultRegisterStatusBarAsType, 1);
                     return true;
                 case 82:
-                    boolean readBoolean18 = parcel.readBoolean();
-                    int readInt60 = parcel.readInt();
+                    boolean z18 = parcel.readBoolean();
+                    int i62 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPanelExpandStateToType(readBoolean18, readInt60);
+                    setPanelExpandStateToType(z18, i62);
                     parcel2.writeNoException();
                     return true;
                 case 83:
-                    int readInt61 = parcel.readInt();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean panelExpandStateToType = getPanelExpandStateToType(readInt61);
+                    boolean panelExpandStateToType = getPanelExpandStateToType(i63);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(panelExpandStateToType);
                     return true;
                 case 84:
-                    int readInt62 = parcel.readInt();
+                    int i64 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean quickSettingPanelExpandStateToType = getQuickSettingPanelExpandStateToType(readInt62);
+                    boolean quickSettingPanelExpandStateToType = getQuickSettingPanelExpandStateToType(i64);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(quickSettingPanelExpandStateToType);
                     return true;
                 case 85:
-                    int readInt63 = parcel.readInt();
+                    int i65 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    expandNotificationsPanelToType(readInt63);
+                    expandNotificationsPanelToType(i65);
                     parcel2.writeNoException();
                     return true;
                 case 86:
-                    int readInt64 = parcel.readInt();
+                    int i66 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    collapsePanelsToType(readInt64);
+                    collapsePanelsToType(i66);
                     parcel2.writeNoException();
                     return true;
                 case 87:
-                    String readString36 = parcel.readString();
-                    int readInt65 = parcel.readInt();
+                    String string36 = parcel.readString();
+                    int i67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    expandSettingsPanelToType(readString36, readInt65);
+                    expandSettingsPanelToType(string36, i67);
                     parcel2.writeNoException();
                     return true;
                 case 88:
-                    int readInt66 = parcel.readInt();
+                    int i68 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    togglePanelForDisplay(readInt66);
+                    togglePanelForDisplay(i68);
                     parcel2.writeNoException();
                     return true;
                 case 89:
-                    int readInt67 = parcel.readInt();
+                    int i69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    expandSettingsPanelForDisplay(readInt67);
+                    expandSettingsPanelForDisplay(i69);
                     parcel2.writeNoException();
                     return true;
                 case 90:
-                    String readString37 = parcel.readString();
+                    String string37 = parcel.readString();
                     RemoteViews remoteViews = (RemoteViews) parcel.readTypedObject(RemoteViews.CREATOR);
-                    int readInt68 = parcel.readInt();
-                    int readInt69 = parcel.readInt();
+                    int i70 = parcel.readInt();
+                    int i71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNavigationBarShortcut(readString37, remoteViews, readInt68, readInt69);
+                    setNavigationBarShortcut(string37, remoteViews, i70, i71);
                     parcel2.writeNoException();
                     return true;
                 case 91:
@@ -1634,37 +1634,37 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 92:
-                    int readInt70 = parcel.readInt();
+                    int i72 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setIndicatorBgColor(readInt70);
+                    setIndicatorBgColor(i72);
                     parcel2.writeNoException();
                     return true;
                 case 93:
-                    boolean readBoolean19 = parcel.readBoolean();
-                    int readInt71 = parcel.readInt();
+                    boolean z19 = parcel.readBoolean();
+                    int i73 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBlueLightFilter(readBoolean19, readInt71);
+                    setBlueLightFilter(z19, i73);
                     parcel2.writeNoException();
                     return true;
                 case 94:
-                    boolean isSysUiSafeModeEnabled = isSysUiSafeModeEnabled();
+                    boolean zIsSysUiSafeModeEnabled = isSysUiSafeModeEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSysUiSafeModeEnabled);
+                    parcel2.writeBoolean(zIsSysUiSafeModeEnabled);
                     return true;
                 case 95:
                     shutdownByBixby();
                     parcel2.writeNoException();
                     return true;
                 case 96:
-                    boolean readBoolean20 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    rebootByBixby(readBoolean20);
+                    rebootByBixby(z20);
                     parcel2.writeNoException();
                     return true;
                 case 97:
-                    IStatusBarCarLife asInterface13 = IStatusBarCarLife.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBarCarLife iStatusBarCarLifeAsInterface = IStatusBarCarLife.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerStatusBarForCarLife(asInterface13);
+                    registerStatusBarForCarLife(iStatusBarCarLifeAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 98:
@@ -1674,9 +1674,9 @@ public interface IStatusBarService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 99:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    onNotificationDataUpdateFromPDC(createStringArrayList);
+                    onNotificationDataUpdateFromPDC(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1708,1599 +1708,1600 @@ public interface IStatusBarService extends IInterface {
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void expandNotificationsPanel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void collapsePanels() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void togglePanel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disable(int i, IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disableForUser(int i, IBinder iBinder, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disable2(int i, IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disable2ForUser(int i, IBinder iBinder, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public int[] getDisableFlags(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setIcon(String str, String str2, int i, int i2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setIconVisibility(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void removeIcon(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setImeWindowStatus(int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void expandSettingsPanel(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public RegisterStatusBarResult registerStatusBar(IStatusBar iStatusBar) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBar);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RegisterStatusBarResult) obtain2.readTypedObject(RegisterStatusBarResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBar);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RegisterStatusBarResult) parcelObtain2.readTypedObject(RegisterStatusBarResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public Map<String, RegisterStatusBarResult> registerStatusBarForAllDisplays(IStatusBar iStatusBar) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                final Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                final Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBar);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    final HashMap hashMap = readInt < 0 ? null : new HashMap();
-                    IntStream.range(0, readInt).forEach(new IntConsumer() { // from class: com.android.internal.statusbar.IStatusBarService$Stub$Proxy$$ExternalSyntheticLambda0
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBar);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    final HashMap map = i < 0 ? null : new HashMap();
+                    IntStream.range(0, i).forEach(new IntConsumer() { // from class: com.android.internal.statusbar.IStatusBarService$Stub$Proxy$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            hashMap.put(r0.readString(), (RegisterStatusBarResult) Parcel.this.readTypedObject(RegisterStatusBarResult.CREATOR));
+                        public final void accept(int i2) {
+                            Parcel parcel = parcelObtain2;
+                            map.put(parcel.readString(), (RegisterStatusBarResult) parcel.readTypedObject(RegisterStatusBarResult.CREATOR));
                         }
                     });
-                    return hashMap;
+                    return map;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onPanelRevealed(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onPanelHidden() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void clearNotificationEffects() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationClick(String str, NotificationVisibility notificationVisibility) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(notificationVisibility, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(notificationVisibility, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationActionClick(String str, int i, Notification.Action action, NotificationVisibility notificationVisibility, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(action, 0);
-                    obtain.writeTypedObject(notificationVisibility, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(action, 0);
+                    parcelObtain.writeTypedObject(notificationVisibility, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationError(String str, String str2, int i, int i2, int i3, String str3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onClearAllNotifications(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationClear(String str, int i, String str2, int i2, int i3, NotificationVisibility notificationVisibility) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(notificationVisibility, 0);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(notificationVisibility, 0);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationVisibilityChanged(NotificationVisibility[] notificationVisibilityArr, NotificationVisibility[] notificationVisibilityArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(notificationVisibilityArr, 0);
-                    obtain.writeTypedArray(notificationVisibilityArr2, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(notificationVisibilityArr, 0);
+                    parcelObtain.writeTypedArray(notificationVisibilityArr2, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationExpansionChanged(String str, boolean z, boolean z2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationDirectReplied(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationSmartSuggestionsAdded(String str, int i, int i2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationSmartReplySent(String str, int i, CharSequence charSequence, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationSettingsViewed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationBubbleChanged(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onBubbleMetadataFlagChanged(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void hideCurrentInputMethodForBubbles(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void grantInlineReplyUriPermission(String str, Uri uri, UserHandle userHandle, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void clearInlineReplyUriPermissions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationFeedbackReceived(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onGlobalActionsShown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onGlobalActionsHidden() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void shutdown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void reboot(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public boolean isFOTAAvailableForGlobalActions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void restart() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void addTile(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void remTile(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void clickTile(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void handleSystemKey(KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public int getLastSystemKey() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void showPinningEnterExitToast(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void showPinningEscapeToast() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void showAuthenticationDialog(PromptInfo promptInfo, IBiometricSysuiReceiver iBiometricSysuiReceiver, int[] iArr, boolean z, boolean z2, int i, long j, String str, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(promptInfo, 0);
-                    obtain.writeStrongInterface(iBiometricSysuiReceiver);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(promptInfo, 0);
+                    parcelObtain.writeStrongInterface(iBiometricSysuiReceiver);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onBiometricAuthenticated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onBiometricHelp(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onBiometricError(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void hideAuthenticationDialog(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setBiometicContextListener(IBiometricContextListener iBiometricContextListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBiometricContextListener);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBiometricContextListener);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback iUdfpsRefreshRateRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUdfpsRefreshRateRequestCallback);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUdfpsRefreshRateRequestCallback);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void showInattentiveSleepWarning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void dismissInattentiveSleepWarning(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void startTracing() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void stopTracing() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public boolean isTracing() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void suppressAmbientDisplay(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void requestTileServiceListeningState(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void requestAddTile(ComponentName componentName, CharSequence charSequence, Icon icon, int i, IAddTileResultCallback iAddTileResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeTypedObject(icon, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAddTileResultCallback);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeTypedObject(icon, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAddTileResultCallback);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void cancelRequestAddTile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setNavBarMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public int getNavBarMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void registerSessionListener(int i, ISessionListener iSessionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSessionListener);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSessionListener);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void unregisterSessionListener(int i, ISessionListener iSessionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSessionListener);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSessionListener);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onSessionStarted(int i, InstanceId instanceId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(instanceId, 0);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(instanceId, 0);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onSessionEnded(int i, InstanceId instanceId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(instanceId, 0);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(instanceId, 0);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void updateMediaTapToTransferSenderDisplay(int i, MediaRoute2Info mediaRoute2Info, IUndoMediaTransferCallback iUndoMediaTransferCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(mediaRoute2Info, 0);
-                    obtain.writeStrongInterface(iUndoMediaTransferCallback);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(mediaRoute2Info, 0);
+                    parcelObtain.writeStrongInterface(iUndoMediaTransferCallback);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void updateMediaTapToTransferReceiverDisplay(int i, MediaRoute2Info mediaRoute2Info, Icon icon, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(mediaRoute2Info, 0);
-                    obtain.writeTypedObject(icon, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(mediaRoute2Info, 0);
+                    parcelObtain.writeTypedObject(icon, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider iNearbyMediaDevicesProvider) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iNearbyMediaDevicesProvider);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iNearbyMediaDevicesProvider);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider iNearbyMediaDevicesProvider) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iNearbyMediaDevicesProvider);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iNearbyMediaDevicesProvider);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void showRearDisplayDialog(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disableToType(int i, IBinder iBinder, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disableForUserToType(int i, IBinder iBinder, String str, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disable2ToType(int i, IBinder iBinder, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void disable2ForUserToType(int i, IBinder iBinder, String str, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public int[] getDisableFlagsToType(IBinder iBinder, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public RegisterStatusBarResult registerStatusBarAsType(IStatusBar iStatusBar, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBar);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RegisterStatusBarResult) obtain2.readTypedObject(RegisterStatusBarResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBar);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RegisterStatusBarResult) parcelObtain2.readTypedObject(RegisterStatusBarResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setPanelExpandStateToType(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public boolean getPanelExpandStateToType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public boolean getQuickSettingPanelExpandStateToType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void expandNotificationsPanelToType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void collapsePanelsToType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void expandSettingsPanelToType(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void togglePanelForDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void expandSettingsPanelForDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setNavigationBarShortcut(String str, RemoteViews remoteViews, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteViews, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteViews, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void resetScheduleAutoHide() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setIndicatorBgColor(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void setBlueLightFilter(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public boolean isSysUiSafeModeEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void shutdownByBixby() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void rebootByBixby(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void registerStatusBarForCarLife(IStatusBarCarLife iStatusBarCarLife) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBarCarLife);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBarCarLife);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void sendKeyEventToDesktopTaskbar(KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
             public void onNotificationDataUpdateFromPDC(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

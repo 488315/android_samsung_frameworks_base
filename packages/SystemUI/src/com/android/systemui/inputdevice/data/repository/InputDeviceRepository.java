@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InputDeviceRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -19,7 +18,6 @@ public final class InputDeviceRepository {
     public final ReadonlySharedFlow deviceChange;
     public final InputManager inputManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,7 +27,6 @@ public final class InputDeviceRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeviceAdded implements DeviceChange {
         public final int deviceId;
 
@@ -53,11 +50,9 @@ public final class InputDeviceRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DeviceChange {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeviceRemoved implements DeviceChange {
         public final int deviceId;
 
@@ -81,7 +76,6 @@ public final class InputDeviceRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FreshStart implements DeviceChange {
         public static final FreshStart INSTANCE = new FreshStart();
 
@@ -108,8 +102,8 @@ public final class InputDeviceRepository {
     public InputDeviceRepository(Handler handler, CoroutineScope coroutineScope, InputManager inputManager) {
         this.backgroundHandler = handler;
         this.inputManager = inputManager;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new InputDeviceRepository$deviceChange$1(this, null));
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new InputDeviceRepository$deviceChange$1(this, null));
         SharingStarted.Companion.getClass();
-        this.deviceChange = FlowKt.shareIn(conflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Lazily, 1);
+        this.deviceChange = FlowKt.shareIn(flowConflatedCallbackFlow, coroutineScope, SharingStarted.Companion.Lazily, 1);
     }
 }

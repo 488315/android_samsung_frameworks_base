@@ -40,10 +40,10 @@ public final class AppIdToPackageMap {
 
     public String mapUid(int i) {
         String str = this.mAppIdToPackageMap.get(UserHandle.getAppId(i));
-        String formatUid = UserHandle.formatUid(i);
+        String uid = UserHandle.formatUid(i);
         if (str == null) {
-            return formatUid;
+            return uid;
         }
-        return str + '/' + formatUid;
+        return str + '/' + uid;
     }
 }

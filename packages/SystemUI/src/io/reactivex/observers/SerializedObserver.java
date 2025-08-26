@@ -7,7 +7,6 @@ import io.reactivex.internal.util.AppendOnlyLinkedArrayList;
 import io.reactivex.internal.util.NotificationLite;
 import io.reactivex.plugins.RxJavaPlugins;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SerializedObserver implements Observer, Disposable {
     public final boolean delayError;
@@ -71,11 +70,11 @@ public final class SerializedObserver implements Observer, Disposable {
                             appendOnlyLinkedArrayList = new AppendOnlyLinkedArrayList(4);
                             this.queue = appendOnlyLinkedArrayList;
                         }
-                        Object error = NotificationLite.error(th);
+                        Object objError = NotificationLite.error(th);
                         if (this.delayError) {
-                            appendOnlyLinkedArrayList.add(error);
+                            appendOnlyLinkedArrayList.add(objError);
                         } else {
-                            appendOnlyLinkedArrayList.head[0] = error;
+                            appendOnlyLinkedArrayList.head[0] = objError;
                         }
                         return;
                     }

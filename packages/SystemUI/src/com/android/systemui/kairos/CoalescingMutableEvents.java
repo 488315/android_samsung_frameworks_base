@@ -3,19 +3,27 @@ package com.android.systemui.kairos;
 import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.systemui.kairos.internal.CompletableLazy;
+import com.android.systemui.kairos.internal.EvalScope;
+import com.android.systemui.kairos.internal.GraphKt;
 import com.android.systemui.kairos.internal.InputNode;
 import com.android.systemui.kairos.internal.Network;
+import com.android.systemui.kairos.internal.TransactionCache;
 import com.android.systemui.kairos.internal.util.UtilKt;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Pair;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoalescingMutableEvents extends Events {
     public final Function2 coalesce;
@@ -25,35 +33,60 @@ public final class CoalescingMutableEvents extends Events {
     public final Network network;
     public final AtomicReference storage;
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ CoalescingMutableEvents(java.lang.String r7, kotlin.jvm.functions.Function2 r8, com.android.systemui.kairos.internal.Network r9, kotlin.jvm.functions.Function0 r10, com.android.systemui.kairos.internal.InputNode r11, int r12, kotlin.jvm.internal.DefaultConstructorMarker r13) {
-        /*
-            r6 = this;
-            r12 = r12 & 16
-            if (r12 == 0) goto Lb
-            com.android.systemui.kairos.internal.InputNode r11 = new com.android.systemui.kairos.internal.InputNode
-            r12 = 3
-            r13 = 0
-            r11.<init>(r13, r13, r12, r13)
-        Lb:
-            r0 = r6
-            r1 = r7
-            r2 = r8
-            r3 = r9
-            r4 = r10
-            r5 = r11
-            r0.<init>(r1, r2, r3, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.kairos.CoalescingMutableEvents.<init>(java.lang.String, kotlin.jvm.functions.Function2, com.android.systemui.kairos.internal.Network, kotlin.jvm.functions.Function0, com.android.systemui.kairos.internal.InputNode, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    /* renamed from: com.android.systemui.kairos.CoalescingMutableEvents$emit$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass3 anonymousClass3 = CoalescingMutableEvents.this.new AnonymousClass3(continuation);
+            anonymousClass3.L$0 = obj;
+            return anonymousClass3;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass3) create((EvalScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            EvalScope evalScope = (EvalScope) this.L$0;
+            CoalescingMutableEvents coalescingMutableEvents = CoalescingMutableEvents.this;
+            Lazy lazy = (Lazy) ((Pair) coalescingMutableEvents.storage.getAndSet(new Pair(Boolean.FALSE, LazyKt__LazyJVMKt.lazy(new CoalescingMutableEvents$$ExternalSyntheticLambda0(coalescingMutableEvents, 1))))).component2();
+            InputNode inputNode = CoalescingMutableEvents.this.impl;
+            Object value = lazy.getValue();
+            TransactionCache transactionCache = inputNode.transactionCache;
+            transactionCache.getClass();
+            transactionCache.epoch = evalScope.getEpoch();
+            evalScope.getTransactionStore().set(transactionCache.key, value);
+            if (!GraphKt.scheduleAll(inputNode.downstreamSet, evalScope)) {
+                evalScope.scheduleDeactivation(inputNode);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    public /* synthetic */ CoalescingMutableEvents(String str, Function2 function2, Network network, Function0 function0, InputNode inputNode, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 16) != 0) {
+            inputNode = new InputNode(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
+        }
+        this(str, function2, network, function0, inputNode);
     }
 
     public final void emit(final Object obj) {
-        if (((Boolean) ((Pair) this.storage.getAndUpdate(new UnaryOperator() { // from class: com.android.systemui.kairos.CoalescingMutableEvents$emit$1
+        if (((Boolean) ((Pair) this.storage.getAndUpdate(new UnaryOperator() { // from class: com.android.systemui.kairos.CoalescingMutableEvents.emit.1
             @Override // java.util.function.Function
             public final Object apply(Object obj2) {
                 return new Pair(Boolean.TRUE, new CompletableLazy(CoalescingMutableEvents.this.coalesce.invoke((Lazy) ((Pair) obj2).component2(), obj), null, 2, null));
@@ -62,11 +95,11 @@ public final class CoalescingMutableEvents extends Events {
             return;
         }
         String str = this.name;
-        String m = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", str, ")") : null;
-        if (m == null) {
-            m = "";
+        String strM = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", str, ")") : null;
+        if (strM == null) {
+            strM = "";
         }
-        this.network.transaction(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CoalescingMutableEvents", m, ".emit"), new CoalescingMutableEvents$emit$3(this, null));
+        this.network.transaction(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("CoalescingMutableEvents", strM, ".emit"), new AnonymousClass3(null));
     }
 
     public final String toString() {

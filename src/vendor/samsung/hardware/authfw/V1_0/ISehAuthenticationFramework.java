@@ -70,9 +70,9 @@ public interface ISehAuthenticationFramework extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ISehAuthenticationFramework)) {
-            return (ISehAuthenticationFramework) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof ISehAuthenticationFramework)) {
+            return (ISehAuthenticationFramework) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -246,13 +246,13 @@ public interface ISehAuthenticationFramework extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -406,17 +406,17 @@ public interface ISehAuthenticationFramework extends IBase {
         public void onTransact(int i, HwParcel hwParcel, final HwParcel hwParcel2, int i2) throws RemoteException {
             if (i == 1) {
                 hwParcel.enforceInterface(ISehAuthenticationFramework.kInterfaceName);
-                boolean load = load(hwParcel.readInt32(), hwParcel.readInt8Vector());
+                boolean zLoad = load(hwParcel.readInt32(), hwParcel.readInt8Vector());
                 hwParcel2.writeStatus(0);
-                hwParcel2.writeBool(load);
+                hwParcel2.writeBool(zLoad);
                 hwParcel2.send();
                 return;
             }
             if (i == 2) {
                 hwParcel.enforceInterface(ISehAuthenticationFramework.kInterfaceName);
-                boolean terminate = terminate(hwParcel.readInt32());
+                boolean zTerminate = terminate(hwParcel.readInt32());
                 hwParcel2.writeStatus(0);
-                hwParcel2.writeBool(terminate);
+                hwParcel2.writeBool(zTerminate);
                 hwParcel2.send();
                 return;
             }
@@ -436,9 +436,9 @@ public interface ISehAuthenticationFramework extends IBase {
             switch (i) {
                 case 256067662:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    ArrayList<String> interfaceChain = interfaceChain();
+                    ArrayList<String> arrayListInterfaceChain = interfaceChain();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeStringVector(interfaceChain);
+                    hwParcel2.writeStringVector(arrayListInterfaceChain);
                     hwParcel2.send();
                     return;
                 case 256131655:
@@ -449,9 +449,9 @@ public interface ISehAuthenticationFramework extends IBase {
                     return;
                 case 256136003:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
-                    String interfaceDescriptor = interfaceDescriptor();
+                    String strInterfaceDescriptor = interfaceDescriptor();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeString(interfaceDescriptor);
+                    hwParcel2.writeString(strInterfaceDescriptor);
                     hwParcel2.send();
                     return;
                 case 256398152:

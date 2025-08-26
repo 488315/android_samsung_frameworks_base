@@ -2,6 +2,7 @@ package com.android.internal.app;
 
 import android.app.LocaleManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.LocaleList;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -12,9 +13,9 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodSubtype;
 import com.android.internal.R;
 import com.android.internal.app.LocalePicker;
-import com.android.internal.app.LocaleStore;
 import com.android.internal.content.NativeLibraryHelper;
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,8 +30,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /* loaded from: classes5.dex */
 public class LocaleStore {
@@ -206,9 +213,9 @@ public class LocaleStore {
         }
 
         public String getSecFullNameNative() {
-            String locale = this.mLocale.toString();
+            String string = this.mLocale.toString();
             String country = this.mLocale.getCountry();
-            if (!LocaleStore.isChina() && LocaleStore.LANGUAGE_NAME_CHINESE.equals(locale) && LocaleStore.COUNTRY_NAME_CHINESE.equals(country)) {
+            if (!LocaleStore.isChina() && LocaleStore.LANGUAGE_NAME_CHINESE.equals(string) && LocaleStore.COUNTRY_NAME_CHINESE.equals(country)) {
                 return "简体中文(中国大陆)";
             }
             return getFullNameNative();
@@ -226,7 +233,7 @@ public class LocaleStore {
             return this.mFullNameNative;
         }
 
-        public String getFullNameNative(Context context) {
+        public String getFullNameNative(Context context) throws Resources.NotFoundException {
             String fullNameFromSpecialLocale = getFullNameFromSpecialLocale(context);
             return !fullNameFromSpecialLocale.isEmpty() ? fullNameFromSpecialLocale : getFullNameNative();
         }
@@ -247,17 +254,17 @@ public class LocaleStore {
             return LocaleHelper.getDisplayName(this.mLocale.stripExtensions(), true);
         }
 
-        public String getFullNameInUiLanguage(Context context) {
+        public String getFullNameInUiLanguage(Context context) throws Resources.NotFoundException {
             String fullNameFromSpecialLocale = getFullNameFromSpecialLocale(context);
             return !fullNameFromSpecialLocale.isEmpty() ? fullNameFromSpecialLocale : getFullNameInUiLanguage();
         }
 
-        private String getFullNameFromSpecialLocale(Context context) {
+        private String getFullNameFromSpecialLocale(Context context) throws Resources.NotFoundException {
             String[] stringArray = context.getResources().getStringArray(R.array.special_locale_codes);
             String[] stringArray2 = context.getResources().getStringArray(R.array.special_locale_names);
-            String locale = this.mLocale.toString();
+            String string = this.mLocale.toString();
             for (int i = 0; i < stringArray.length; i++) {
-                if (stringArray[i].equals(locale)) {
+                if (stringArray[i].equals(string)) {
                     return stringArray2[i];
                 }
             }
@@ -437,7 +444,7 @@ public class LocaleStore {
         }
     }
 
-    public static void fillCache(Context context) {
+    public static void fillCache(Context context) throws SAXException, IOException {
         fillCacheManaged(context, true);
     }
 
@@ -447,7 +454,13 @@ public class LocaleStore {
         }
     }
 
-    public static void fillCacheManaged(Context context, boolean z) {
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x0161  */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x0168 A[SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static void fillCacheManaged(Context context, boolean z) throws SAXException, IOException {
         String str;
         LocaleInfo localeInfo;
         int i = Settings.System.getInt(context.getContentResolver(), SHOW_DESIGN_ID_LOCALE, 0);
@@ -510,9 +523,10 @@ public class LocaleStore {
                         localeInfo2.mSuggestionFlags |= 16;
                     }
                 }
-            }
-            if (z) {
-                hashSet.add(localeInfo3.getLangScriptKey());
+                if (!z) {
+                    hashSet.add(localeInfo3.getLangScriptKey());
+                }
+            } else if (!z) {
             }
         }
         if (z) {
@@ -524,127 +538,77 @@ public class LocaleStore {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00ac A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0071  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static void buildLocaleCache(android.content.Context r12, java.lang.String[] r13, int r14) {
-        /*
-            r0 = 0
-            r1 = 2
-            r2 = 1
-            java.lang.String r3 = ""
-            if (r14 == 0) goto L1a
-            if (r14 == r2) goto L15
-            if (r14 == r1) goto L10
-            java.lang.String[] r4 = new java.lang.String[r2]
-            r4[r0] = r3
-            goto L1e
-        L10:
-            java.lang.String[] r4 = com.android.internal.app.LocalePicker.getDIDLocale(r12)
-            goto L1e
-        L15:
-            java.lang.String[] r4 = com.android.internal.app.LocalePicker.getSpecificCustomerSupportedLocales(r12)
-            goto L1e
-        L1a:
-            java.lang.String[] r4 = com.android.internal.app.LocalePicker.getSupportedLocales(r12)
-        L1e:
-            if (r14 == r1) goto L29
-            if (r13 == 0) goto L29
-            r3 = r13[r0]
-            r5 = r13[r2]
-            r13 = r13[r1]
-            goto L2b
-        L29:
-            r13 = r3
-            r5 = r13
-        L2b:
-            java.util.Set r12 = getSimCountries(r12)
-            int r6 = r4.length
-        L30:
-            if (r0 >= r6) goto Lb7
-            r7 = r4[r0]
-            boolean r8 = r7.isEmpty()
-            if (r8 != 0) goto Laf
-            com.android.internal.app.LocaleStore$LocaleInfo r8 = new com.android.internal.app.LocaleStore$LocaleInfo
-            r9 = 0
-            r8.<init>(r7)
-            java.lang.String r7 = r8.toString()
-            if (r7 != 0) goto L47
-            goto Lac
-        L47:
-            if (r14 != r2) goto L50
-            boolean r10 = r3.contains(r7)
-            if (r10 != 0) goto L71
-            goto Lac
-        L50:
-            if (r14 != 0) goto L6a
-            boolean r10 = r13.contains(r7)
-            if (r10 == 0) goto L63
-            int r10 = r8.mSuggestionFlags
-            r10 = r10 | r2
-            r8.mSuggestionFlags = r10
-            int r10 = r8.mSuggestionFlags
-            r10 = r10 | 32
-            r8.mSuggestionFlags = r10
-        L63:
-            boolean r10 = r5.contains(r7)
-            if (r10 == 0) goto L71
-            goto Lac
-        L6a:
-            if (r14 != r1) goto L71
-            int r10 = com.android.internal.app.LocaleStore.sPreIsDIDLocaleOn
-            if (r10 != 0) goto L71
-            goto Lac
-        L71:
-            java.util.Locale r10 = r8.getLocale()
-            java.lang.String r10 = r10.getCountry()
-            boolean r10 = r12.contains(r10)
-            if (r10 == 0) goto L84
-            int r10 = r8.mSuggestionFlags
-            r10 = r10 | r2
-            r8.mSuggestionFlags = r10
-        L84:
-            java.util.concurrent.ConcurrentHashMap<java.lang.String, com.android.internal.app.LocaleStore$LocaleInfo> r10 = com.android.internal.app.LocaleStore.sLocaleCache
-            r10.put(r7, r8)
-            java.util.Locale r7 = r8.getParent()
-            if (r7 == 0) goto Lac
-            java.lang.String r8 = r7.toLanguageTag()
-            if (r8 == 0) goto La4
-            boolean r11 = r10.containsKey(r8)
-            if (r11 != 0) goto Lac
-            com.android.internal.app.LocaleStore$LocaleInfo r11 = new com.android.internal.app.LocaleStore$LocaleInfo
-            r11.<init>(r7)
-            r10.put(r8, r11)
-            goto Lac
-        La4:
-            java.lang.String r7 = "LocaleStore"
-            java.lang.String r8 = "put null key to sLocaleCache #2"
-            android.util.Log.d(r7, r8)
-        Lac:
-            int r0 = r0 + 1
-            goto L30
-        Laf:
-            java.util.IllformedLocaleException r12 = new java.util.IllformedLocaleException
-            java.lang.String r13 = "Bad locale entry in locale_config.xml"
-            r12.<init>(r13)
-            throw r12
-        Lb7:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.LocaleStore.buildLocaleCache(android.content.Context, java.lang.String[], int):void");
+    private static void buildLocaleCache(Context context, String[] strArr, int i) {
+        String[] supportedLocales;
+        String str;
+        String str2;
+        String str3 = "";
+        if (i == 0) {
+            supportedLocales = LocalePicker.getSupportedLocales(context);
+        } else if (i == 1) {
+            supportedLocales = LocalePicker.getSpecificCustomerSupportedLocales(context);
+        } else if (i == 2) {
+            supportedLocales = LocalePicker.getDIDLocale(context);
+        } else {
+            supportedLocales = new String[]{""};
+        }
+        if (i == 2 || strArr == null) {
+            str = "";
+            str2 = str;
+        } else {
+            str3 = strArr[0];
+            str2 = strArr[1];
+            str = strArr[2];
+        }
+        Set<String> simCountries = getSimCountries(context);
+        for (String str4 : supportedLocales) {
+            if (str4.isEmpty()) {
+                throw new IllformedLocaleException("Bad locale entry in locale_config.xml");
+            }
+            LocaleInfo localeInfo = new LocaleInfo(str4);
+            String string = localeInfo.toString();
+            if (string != null) {
+                if (i == 1) {
+                    if (str3.contains(string)) {
+                        if (simCountries.contains(localeInfo.getLocale().getCountry())) {
+                            localeInfo.mSuggestionFlags |= 1;
+                        }
+                        ConcurrentHashMap<String, LocaleInfo> concurrentHashMap = sLocaleCache;
+                        concurrentHashMap.put(string, localeInfo);
+                        Locale parent = localeInfo.getParent();
+                        if (parent != null) {
+                            String languageTag = parent.toLanguageTag();
+                            if (languageTag != null) {
+                                if (!concurrentHashMap.containsKey(languageTag)) {
+                                    concurrentHashMap.put(languageTag, new LocaleInfo(parent));
+                                }
+                            } else {
+                                Log.d(TAG, "put null key to sLocaleCache #2");
+                            }
+                        }
+                    }
+                } else if (i == 0) {
+                    if (str.contains(string)) {
+                        localeInfo.mSuggestionFlags |= 1;
+                        localeInfo.mSuggestionFlags |= 32;
+                    }
+                    if (str2.contains(string)) {
+                    }
+                } else if (i != 2 || sPreIsDIDLocaleOn != 0) {
+                }
+            }
+        }
     }
 
     private static boolean isShallIgnore(Set<String> set, final LocaleInfo localeInfo, boolean z) {
         if (set.stream().anyMatch(new Predicate() { // from class: com.android.internal.app.LocaleStore$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = Locale.forLanguageTag((String) obj).stripExtensions().equals(LocaleStore.LocaleInfo.this.getLocale().stripExtensions());
-                return equals;
+                return Locale.forLanguageTag((String) obj).stripExtensions().equals(localeInfo.getLocale().stripExtensions());
             }
         })) {
             return true;
@@ -666,8 +630,8 @@ public class LocaleStore {
         return getLevelLocales(context, set, localeInfo, z, null);
     }
 
-    public static Set<LocaleInfo> getLevelLocales(Context context, Set<String> set, LocaleInfo localeInfo, boolean z, LocaleList localeList) {
-        ConcurrentHashMap<String, LocaleInfo> convertExplicitLocales;
+    public static Set<LocaleInfo> getLevelLocales(Context context, Set<String> set, LocaleInfo localeInfo, boolean z, LocaleList localeList) throws SAXException, IOException {
+        ConcurrentHashMap<String, LocaleInfo> concurrentHashMapConvertExplicitLocales;
         sCountryMode = localeInfo != null;
         if (context != null) {
             fillCache(context);
@@ -677,11 +641,11 @@ public class LocaleStore {
         }
         new HashSet();
         if (localeList == null) {
-            convertExplicitLocales = sLocaleCache;
+            concurrentHashMapConvertExplicitLocales = sLocaleCache;
         } else {
-            convertExplicitLocales = convertExplicitLocales(localeList, sLocaleCache.values());
+            concurrentHashMapConvertExplicitLocales = convertExplicitLocales(localeList, sLocaleCache.values());
         }
-        return getTierLocales(set, localeInfo, z, convertExplicitLocales);
+        return getTierLocales(set, localeInfo, z, concurrentHashMapConvertExplicitLocales);
     }
 
     private static Set<LocaleInfo> getTierLocales(Set<String> set, LocaleInfo localeInfo, boolean z, ConcurrentHashMap<String, LocaleInfo> concurrentHashMap) {
@@ -715,10 +679,10 @@ public class LocaleStore {
     }
 
     public static ConcurrentHashMap<String, LocaleInfo> convertExplicitLocales(LocaleList localeList, Collection<LocaleInfo> collection) {
-        LocaleList matchLocaleFromSupportedLocaleList = matchLocaleFromSupportedLocaleList(localeList, collection);
+        LocaleList localeListMatchLocaleFromSupportedLocaleList = matchLocaleFromSupportedLocaleList(localeList, collection);
         ConcurrentHashMap<String, LocaleInfo> concurrentHashMap = new ConcurrentHashMap<>();
-        for (int i = 0; i < matchLocaleFromSupportedLocaleList.size(); i++) {
-            Locale locale = matchLocaleFromSupportedLocaleList.get(i);
+        for (int i = 0; i < localeListMatchLocaleFromSupportedLocaleList.size(); i++) {
+            Locale locale = localeListMatchLocaleFromSupportedLocaleList.get(i);
             if (locale.toString().isEmpty()) {
                 throw new IllformedLocaleException("Bad locale entry");
             }
@@ -789,14 +753,14 @@ public class LocaleStore {
         return concurrentHashMap.get(languageTag);
     }
 
-    public static List<LocalePicker.LocaleInfo> getAllLocaleInfos(Context context) {
-        Locale forLanguageTag;
+    public static List<LocalePicker.LocaleInfo> getAllLocaleInfos(Context context) throws SAXException, IOException {
+        Locale localeForLanguageTag;
         fillCacheManaged(context, false);
         ConcurrentHashMap<String, LocaleInfo> concurrentHashMap = sLocaleCache;
         ArrayList arrayList = new ArrayList(concurrentHashMap.size());
         for (LocaleInfo localeInfo : concurrentHashMap.values()) {
-            if ((localeInfo.mSuggestionFlags & 16) != 0 && localeInfo.getParent() != null && (forLanguageTag = Locale.forLanguageTag(localeInfo.toString())) != null) {
-                arrayList.add(new LocalePicker.LocaleInfo(toTitleCase(forLanguageTag.getDisplayName(forLanguageTag)), forLanguageTag));
+            if ((localeInfo.mSuggestionFlags & 16) != 0 && localeInfo.getParent() != null && (localeForLanguageTag = Locale.forLanguageTag(localeInfo.toString())) != null) {
+                arrayList.add(new LocalePicker.LocaleInfo(toTitleCase(localeForLanguageTag.getDisplayName(localeForLanguageTag)), localeForLanguageTag));
             }
         }
         arrayList.trimToSize();
@@ -837,73 +801,34 @@ public class LocaleStore {
         return Character.toUpperCase(str.charAt(0)) + str.substring(1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0038 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0039  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static java.lang.String[] getLocaleListFromXML(java.lang.String r5) {
-        /*
-            java.lang.String r0 = "LocaleStore"
-            r1 = 0
-            javax.xml.parsers.DocumentBuilderFactory r2 = javax.xml.parsers.DocumentBuilderFactory.newInstance()     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            javax.xml.parsers.DocumentBuilder r2 = r2.newDocumentBuilder()     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            java.io.File r3 = new java.io.File     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            r3.<init>(r5)     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            org.w3c.dom.Document r5 = r2.parse(r3)     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            if (r5 == 0) goto L35
-            org.w3c.dom.Element r5 = r5.getDocumentElement()     // Catch: java.io.IOException -> L1b org.xml.sax.SAXException -> L24 javax.xml.parsers.ParserConfigurationException -> L2d
-            goto L36
-        L1b:
-            r5 = move-exception
-            java.lang.String r5 = r5.toString()
-            android.util.Log.d(r0, r5)
-            goto L35
-        L24:
-            r5 = move-exception
-            java.lang.String r5 = r5.toString()
-            android.util.Log.d(r0, r5)
-            goto L35
-        L2d:
-            r5 = move-exception
-            java.lang.String r5 = r5.toString()
-            android.util.Log.d(r0, r5)
-        L35:
-            r5 = r1
-        L36:
-            if (r5 != 0) goto L39
-            return r1
-        L39:
-            java.lang.String r0 = "Display"
-            java.lang.String r1 = "LanguageSet"
-            java.lang.String[] r0 = new java.lang.String[]{r1, r0}
-            java.lang.String r2 = "NonDisplay"
-            java.lang.String[] r2 = new java.lang.String[]{r1, r2}
-            java.lang.String r3 = "Suggested"
-            java.lang.String[] r3 = new java.lang.String[]{r1, r3}
-            java.lang.String r4 = "NonSuggested"
-            java.lang.String[] r1 = new java.lang.String[]{r1, r4}
-            java.lang.String r0 = findTagValue(r0, r5)
-            java.lang.String r2 = findTagValue(r2, r5)
-            java.lang.String r3 = findTagValue(r3, r5)
-            java.lang.String r5 = findTagValue(r1, r5)
-            java.lang.String[] r5 = new java.lang.String[]{r0, r2, r3, r5}
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.LocaleStore.getLocaleListFromXML(java.lang.String):java.lang.String[]");
+    private static String[] getLocaleListFromXML(String str) throws SAXException, IOException {
+        Document document;
+        try {
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(str));
+        } catch (IOException e) {
+            Log.d(TAG, e.toString());
+        } catch (ParserConfigurationException e2) {
+            Log.d(TAG, e2.toString());
+        } catch (SAXException e3) {
+            Log.d(TAG, e3.toString());
+        }
+        Element documentElement = document != null ? document.getDocumentElement() : null;
+        if (documentElement == null) {
+            return null;
+        }
+        return new String[]{findTagValue(new String[]{TAG_LANGUAGE, TAG_DISPLAY}, documentElement), findTagValue(new String[]{TAG_LANGUAGE, TAG_NOT_DISPLAY}, documentElement), findTagValue(new String[]{TAG_LANGUAGE, TAG_SUGGESTED}, documentElement), findTagValue(new String[]{TAG_LANGUAGE, TAG_NONSUGGESTED}, documentElement)};
     }
 
-    private static String findTagValue(String[] strArr, Node node) {
-        String str;
+    private static String findTagValue(String[] strArr, Node node) throws DOMException {
+        String nodeValue;
         NodeList childNodes;
-        for (String str2 : strArr) {
+        for (String str : strArr) {
             if (node != null && (childNodes = node.getChildNodes()) != null) {
                 int length = childNodes.getLength();
                 for (int i = 0; i < length; i++) {
-                    Node item = childNodes.item(i);
-                    if (item != null && str2.equals(item.getNodeName())) {
-                        node = item;
+                    Node nodeItem = childNodes.item(i);
+                    if (nodeItem != null && str.equals(nodeItem.getNodeName())) {
+                        node = nodeItem;
                     }
                 }
             }
@@ -913,11 +838,11 @@ public class LocaleStore {
         }
         Node firstChild = node.getFirstChild();
         if (firstChild == null) {
-            str = "";
+            nodeValue = "";
         } else {
-            str = firstChild.getNodeValue();
+            nodeValue = firstChild.getNodeValue();
         }
-        return str.replaceAll("\\s", "").replaceAll(Session.SESSION_SEPARATION_CHAR_CHILD, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+        return nodeValue.replaceAll("\\s", "").replaceAll(Session.SESSION_SEPARATION_CHAR_CHILD, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
     }
 
     /* JADX INFO: Access modifiers changed from: private */

@@ -149,9 +149,9 @@ final class SoftInputWindow extends Dialog {
     }
 
     void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464262L, this.mWindowState);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     @Override // android.app.Dialog, android.view.Window.Callback

@@ -21,7 +21,6 @@ import androidx.leanback.widget.SearchBar;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SearchOrbView extends FrameLayout implements View.OnClickListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -43,7 +42,6 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
     public final float mUnfocusedZ;
     public final SearchOrbView$$ExternalSyntheticLambda0 mUpdateListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Colors {
         public final int brightColor;
         public final int color;
@@ -76,9 +74,9 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
         this.mRootView.animate().scaleX(f).scaleY(f).setDuration(this.mScaleDurationMs).start();
         int i = this.mScaleDurationMs;
         if (this.mShadowFocusAnimator == null) {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mShadowFocusAnimator = ofFloat;
-            ofFloat.addUpdateListener(this.mFocusUpdateListener);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mShadowFocusAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(this.mFocusUpdateListener);
         }
         if (z) {
             this.mShadowFocusAnimator.start();
@@ -143,9 +141,9 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
             this.mColorAnimator = null;
         }
         if (this.mColorAnimationEnabled && this.mAttachedToWindow) {
-            ValueAnimator ofObject = ValueAnimator.ofObject(this.mColorEvaluator, Integer.valueOf(this.mColors.color), Integer.valueOf(this.mColors.brightColor), Integer.valueOf(this.mColors.color));
-            this.mColorAnimator = ofObject;
-            ofObject.setRepeatCount(-1);
+            ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(this.mColorEvaluator, Integer.valueOf(this.mColors.color), Integer.valueOf(this.mColors.brightColor), Integer.valueOf(this.mColors.color));
+            this.mColorAnimator = valueAnimatorOfObject;
+            valueAnimatorOfObject.setRepeatCount(-1);
             this.mColorAnimator.setDuration(this.mPulseDurationMs * 2);
             this.mColorAnimator.addUpdateListener(this.mUpdateListener);
             this.mColorAnimator.start();
@@ -176,9 +174,9 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
                 switch (i3) {
                     case 0:
                         int i4 = SearchOrbView.$r8$clinit;
-                        int intValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        int iIntValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                         if (searchOrbView.mSearchOrbView.getBackground() instanceof GradientDrawable) {
-                            ((GradientDrawable) searchOrbView.mSearchOrbView.getBackground()).setColor(intValue);
+                            ((GradientDrawable) searchOrbView.mSearchOrbView.getBackground()).setColor(iIntValue);
                             break;
                         }
                         break;
@@ -187,9 +185,9 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
                         float animatedFraction = valueAnimator.getAnimatedFraction();
                         View view = searchOrbView.mSearchOrbView;
                         float f = searchOrbView.mUnfocusedZ;
-                        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(searchOrbView.mFocusedZ, f, animatedFraction, f);
+                        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(searchOrbView.mFocusedZ, f, animatedFraction, f);
                         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                        ViewCompat.Api21Impl.setZ(view, m$1);
+                        ViewCompat.Api21Impl.setZ(view, fM$1);
                         break;
                 }
             }
@@ -209,9 +207,9 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
                 switch (i32) {
                     case 0:
                         int i4 = SearchOrbView.$r8$clinit;
-                        int intValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        int iIntValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                         if (searchOrbView.mSearchOrbView.getBackground() instanceof GradientDrawable) {
-                            ((GradientDrawable) searchOrbView.mSearchOrbView.getBackground()).setColor(intValue);
+                            ((GradientDrawable) searchOrbView.mSearchOrbView.getBackground()).setColor(iIntValue);
                             break;
                         }
                         break;
@@ -220,19 +218,19 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
                         float animatedFraction = valueAnimator.getAnimatedFraction();
                         View view = searchOrbView.mSearchOrbView;
                         float f = searchOrbView.mUnfocusedZ;
-                        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(searchOrbView.mFocusedZ, f, animatedFraction, f);
+                        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(searchOrbView.mFocusedZ, f, animatedFraction, f);
                         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                        ViewCompat.Api21Impl.setZ(view, m$1);
+                        ViewCompat.Api21Impl.setZ(view, fM$1);
                         break;
                 }
             }
         };
         Resources resources = context.getResources();
-        View inflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(getLayoutResourceId(), (ViewGroup) this, true);
-        this.mRootView = inflate;
-        View findViewById = inflate.findViewById(R.id.search_orb);
-        this.mSearchOrbView = findViewById;
-        ImageView imageView = (ImageView) inflate.findViewById(R.id.icon);
+        View viewInflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(getLayoutResourceId(), (ViewGroup) this, true);
+        this.mRootView = viewInflate;
+        View viewFindViewById = viewInflate.findViewById(R.id.search_orb);
+        this.mSearchOrbView = viewFindViewById;
+        ImageView imageView = (ImageView) viewInflate.findViewById(R.id.icon);
         this.mIcon = imageView;
         this.mFocusedZoom = context.getResources().getFraction(R.fraction.lb_search_orb_focused_zoom, 1, 1);
         this.mPulseDurationMs = context.getResources().getInteger(R.integer.lb_search_orb_pulse_duration_ms);
@@ -242,19 +240,19 @@ public class SearchOrbView extends FrameLayout implements View.OnClickListener {
         float dimensionPixelSize2 = context.getResources().getDimensionPixelSize(R.dimen.lb_search_orb_unfocused_z);
         this.mUnfocusedZ = dimensionPixelSize2;
         int[] iArr = androidx.leanback.R$styleable.lbSearchOrbView;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, obtainStyledAttributes, i, 0);
-        Drawable drawable = obtainStyledAttributes.getDrawable(2);
+        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, 0);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(2);
         imageView.setImageDrawable(drawable == null ? resources.getDrawable(R.drawable.lb_ic_in_app_search) : drawable);
-        int color = obtainStyledAttributes.getColor(1, resources.getColor(R.color.lb_default_search_color));
-        setOrbColors(new Colors(color, obtainStyledAttributes.getColor(0, color), obtainStyledAttributes.getColor(3, 0)));
-        obtainStyledAttributes.recycle();
+        int color = typedArrayObtainStyledAttributes.getColor(1, resources.getColor(R.color.lb_default_search_color));
+        setOrbColors(new Colors(color, typedArrayObtainStyledAttributes.getColor(0, color), typedArrayObtainStyledAttributes.getColor(3, 0)));
+        typedArrayObtainStyledAttributes.recycle();
         setFocusable(true);
         setClipChildren(false);
         setOnClickListener(this);
         setSoundEffectsEnabled(false);
-        ViewCompat.Api21Impl.setZ(findViewById, ((dimensionPixelSize - dimensionPixelSize2) * 0.0f) + dimensionPixelSize2);
+        ViewCompat.Api21Impl.setZ(viewFindViewById, ((dimensionPixelSize - dimensionPixelSize2) * 0.0f) + dimensionPixelSize2);
         ViewCompat.Api21Impl.setZ(imageView, dimensionPixelSize);
     }
 }

@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.view.View;
 import android.view.animation.Interpolator;
 import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.SpringForce;
 import com.android.systemui.R;
 import com.android.wm.shell.bubbles.BadgedImageView;
 import com.android.wm.shell.bubbles.BubblePositioner;
@@ -22,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsAnimationController {
     public BubbleStackView$$ExternalSyntheticLambda5 mAfterCollapse;
@@ -74,48 +74,25 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
         return 0.0f;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0022  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0026  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x001a  */
     @Override // com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsAnimationController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final androidx.dynamicanimation.animation.SpringForce getSpringForce(android.view.View r1) {
-        /*
-            r0 = this;
-            boolean r0 = r1 instanceof com.android.wm.shell.bubbles.BadgedImageView
-            if (r0 == 0) goto L1a
-            com.android.wm.shell.bubbles.BadgedImageView r1 = (com.android.wm.shell.bubbles.BadgedImageView) r1
-            com.android.wm.shell.bubbles.BubbleViewProvider r0 = r1.mBubble
-            if (r0 == 0) goto Lf
-            java.lang.String r0 = r0.getKey()
-            goto L10
-        Lf:
-            r0 = 0
-        L10:
-            java.lang.String r1 = "Overflow"
-            boolean r0 = r1.equals(r0)
-            if (r0 == 0) goto L1a
-            r0 = 1
-            goto L1b
-        L1a:
-            r0 = 0
-        L1b:
-            androidx.dynamicanimation.animation.SpringForce r1 = new androidx.dynamicanimation.animation.SpringForce
-            r1.<init>()
-            if (r0 == 0) goto L26
-            r0 = 1063675494(0x3f666666, float:0.9)
-            goto L29
-        L26:
-            r0 = 1059481190(0x3f266666, float:0.65)
-        L29:
-            r1.setDampingRatio(r0)
-            r0 = 1128792064(0x43480000, float:200.0)
-            r1.setStiffness(r0)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.animation.ExpandedAnimationController.getSpringForce(android.view.View):androidx.dynamicanimation.animation.SpringForce");
+    public final SpringForce getSpringForce(View view) {
+        boolean z;
+        if (view instanceof BadgedImageView) {
+            BubbleViewProvider bubbleViewProvider = ((BadgedImageView) view).mBubble;
+            if ("Overflow".equals(bubbleViewProvider != null ? bubbleViewProvider.getKey() : null)) {
+                z = true;
+            }
+        } else {
+            z = false;
+        }
+        SpringForce springForce = new SpringForce();
+        springForce.setDampingRatio(z ? 0.9f : 0.65f);
+        springForce.setStiffness(200.0f);
+        return springForce;
     }
 
     @Override // com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsAnimationController
@@ -137,7 +114,7 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
         }
         PointF pointF = this.mCollapsePoint;
         BubblePositioner bubblePositioner = this.mPositioner;
-        boolean isStackOnLeft = bubblePositioner.isStackOnLeft(pointF);
+        boolean zIsStackOnLeft = bubblePositioner.isStackOnLeft(pointF);
         PointF expandedBubbleXY = bubblePositioner.getExpandedBubbleXY(i, this.mBubbleStackView.getState());
         if (bubblePositioner.showBubblesVertically()) {
             view.setTranslationY(expandedBubbleXY.y);
@@ -148,20 +125,20 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
             return;
         }
         if (bubblePositioner.showBubblesVertically()) {
-            float f = isStackOnLeft ? expandedBubbleXY.x - (this.mBubbleSizePx * 4.0f) : expandedBubbleXY.x + (this.mBubbleSizePx * 4.0f);
-            PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = animationForChild(view);
-            Map map = animationForChild.mInitialPropertyValues;
+            float f = zIsStackOnLeft ? expandedBubbleXY.x - (this.mBubbleSizePx * 4.0f) : expandedBubbleXY.x + (this.mBubbleSizePx * 4.0f);
+            PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = animationForChild(view);
+            Map map = physicsPropertyAnimatorAnimationForChild.mInitialPropertyValues;
             DynamicAnimation.AnonymousClass1 anonymousClass1 = DynamicAnimation.TRANSLATION_X;
             ((HashMap) map).put(anonymousClass1, Float.valueOf(f));
-            animationForChild.mPathAnimator = null;
-            animationForChild.property(anonymousClass1, expandedBubbleXY.x, new Runnable[0]);
-            animationForChild.start(new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
+            physicsPropertyAnimatorAnimationForChild.property(anonymousClass1, expandedBubbleXY.x, new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
         } else {
             float f2 = expandedBubbleXY.y - (this.mBubbleSizePx * 4.0f);
-            PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild2 = animationForChild(view);
-            ((HashMap) animationForChild2.mInitialPropertyValues).put(DynamicAnimation.TRANSLATION_Y, Float.valueOf(f2));
-            animationForChild2.translationY(expandedBubbleXY.y, new Runnable[0]);
-            animationForChild2.start(new Runnable[0]);
+            PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild2 = animationForChild(view);
+            ((HashMap) physicsPropertyAnimatorAnimationForChild2.mInitialPropertyValues).put(DynamicAnimation.TRANSLATION_Y, Float.valueOf(f2));
+            physicsPropertyAnimatorAnimationForChild2.translationY(expandedBubbleXY.y, new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild2.start(new Runnable[0]);
         }
         updateBubblePositions();
     }
@@ -204,37 +181,41 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
         if (physicsAnimationLayout == null) {
             return;
         }
-        int indexOfChild = physicsAnimationLayout.indexOfChild(view);
+        int iIndexOfChild = physicsAnimationLayout.indexOfChild(view);
         BubbleStackView.StackViewState state = this.mBubbleStackView.getState();
         BubblePositioner bubblePositioner = this.mPositioner;
-        PointF expandedBubbleXY = bubblePositioner.getExpandedBubbleXY(indexOfChild, state);
-        float f3 = bubblePositioner.mMaxBubbles - indexOfChild;
-        PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = animationForChild(this.mLayout.getChildAt(indexOfChild));
+        PointF expandedBubbleXY = bubblePositioner.getExpandedBubbleXY(iIndexOfChild, state);
+        float f3 = bubblePositioner.mMaxBubbles - iIndexOfChild;
+        PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = animationForChild(this.mLayout.getChildAt(iIndexOfChild));
         float f4 = expandedBubbleXY.x;
         float f5 = expandedBubbleXY.y;
-        animationForChild.mPositionEndActions = new Runnable[0];
-        animationForChild.mPathAnimator = null;
+        physicsPropertyAnimatorAnimationForChild.mPositionEndActions = new Runnable[0];
+        physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
         DynamicAnimation.AnonymousClass1 anonymousClass1 = DynamicAnimation.TRANSLATION_X;
-        animationForChild.property(anonymousClass1, f4, new Runnable[0]);
-        animationForChild.translationY(f5, new Runnable[0]);
-        animationForChild.mPathAnimator = null;
-        animationForChild.property(DynamicAnimation.TRANSLATION_Z, f3, new Runnable[0]);
-        ((HashMap) animationForChild.mPositionStartVelocities).put(anonymousClass1, Float.valueOf(f));
-        ((HashMap) animationForChild.mPositionStartVelocities).put(DynamicAnimation.TRANSLATION_Y, Float.valueOf(f2));
-        animationForChild.start(new Runnable[0]);
+        physicsPropertyAnimatorAnimationForChild.property(anonymousClass1, f4, new Runnable[0]);
+        physicsPropertyAnimatorAnimationForChild.translationY(f5, new Runnable[0]);
+        physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
+        physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.TRANSLATION_Z, f3, new Runnable[0]);
+        ((HashMap) physicsPropertyAnimatorAnimationForChild.mPositionStartVelocities).put(anonymousClass1, Float.valueOf(f));
+        ((HashMap) physicsPropertyAnimatorAnimationForChild.mPositionStartVelocities).put(DynamicAnimation.TRANSLATION_Y, Float.valueOf(f2));
+        physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
         this.mMagnetizedBubbleDraggingOut = null;
         updateBubblePositions();
     }
 
     public final void startOrUpdatePathAnimation(final boolean z) {
         ExpandedAnimationController$$ExternalSyntheticLambda1 expandedAnimationController$$ExternalSyntheticLambda1 = z ? new ExpandedAnimationController$$ExternalSyntheticLambda1(this, 0) : new ExpandedAnimationController$$ExternalSyntheticLambda1(this, 1);
-        final boolean showBubblesVertically = this.mPositioner.showBubblesVertically();
+        final boolean zShowBubblesVertically = this.mPositioner.showBubblesVertically();
         final boolean z2 = this.mLayout.getContext().getResources().getConfiguration().getLayoutDirection() == 1;
         animationsForChildrenFromIndex(this.mFadeBubblesDuringCollapse, new PhysicsAnimationLayout.PhysicsAnimationController.ChildAnimationConfigurator() { // from class: com.android.wm.shell.bubbles.animation.ExpandedAnimationController$$ExternalSyntheticLambda3
+            /* JADX WARN: Removed duplicated region for block: B:14:0x005f  */
             @Override // com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsAnimationController.ChildAnimationConfigurator
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final void configureAnimationForChildAtIndex(int i, PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimator) {
-                float min;
-                ExpandedAnimationController expandedAnimationController = ExpandedAnimationController.this;
+                float fMin;
+                ExpandedAnimationController expandedAnimationController = this.f$0;
                 View childAt = expandedAnimationController.mLayout.getChildAt(i);
                 Path path = new Path();
                 path.moveTo(childAt.getTranslationX(), childAt.getTranslationY());
@@ -249,14 +230,15 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
                     if (childAt instanceof BadgedImageView) {
                         BubbleViewProvider bubbleViewProvider = ((BadgedImageView) childAt).mBubble;
                         if ("Overflow".equals(bubbleViewProvider != null ? bubbleViewProvider.getKey() : null)) {
-                            min = 0.0f;
-                            path.lineTo(f, expandedAnimationController.mCollapsePoint.y + min);
+                            fMin = 0.0f;
                         }
+                        path.lineTo(f, expandedAnimationController.mCollapsePoint.y + fMin);
+                    } else {
+                        fMin = Math.min(i, 1) * expandedAnimationController.mStackOffsetPx;
+                        path.lineTo(f, expandedAnimationController.mCollapsePoint.y + fMin);
                     }
-                    min = Math.min(i, 1) * expandedAnimationController.mStackOffsetPx;
-                    path.lineTo(f, expandedAnimationController.mCollapsePoint.y + min);
                 }
-                boolean z4 = showBubblesVertically || !z2 ? !((!z3 || expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(childAt.getTranslationX())) && (z3 || !expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(expandedAnimationController.mCollapsePoint.x))) : !(!(z3 && expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(childAt.getTranslationX())) && (z3 || expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(expandedAnimationController.mCollapsePoint.x)));
+                boolean z4 = zShowBubblesVertically || !z2 ? !((!z3 || expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(childAt.getTranslationX())) && (z3 || !expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(expandedAnimationController.mCollapsePoint.x))) : !(!(z3 && expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(childAt.getTranslationX())) && (z3 || expandedAnimationController.mLayout.isFirstChildXLeftOfCenter(expandedAnimationController.mCollapsePoint.x)));
                 int childCount = z4 ? i * 10 : (expandedAnimationController.mLayout.getChildCount() - i) * 10;
                 if ((!z4 || i != 0) && !z4) {
                     expandedAnimationController.mLayout.getChildCount();
@@ -267,9 +249,9 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
                 if (objectAnimator != null) {
                     objectAnimator.cancel();
                 }
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(physicsPropertyAnimator, physicsPropertyAnimator.mCurrentPointOnPathXProperty, physicsPropertyAnimator.mCurrentPointOnPathYProperty, path);
-                physicsPropertyAnimator.mPathAnimator = ofFloat;
-                ofFloat.addListener(new AnimatorListenerAdapter(physicsPropertyAnimator, runnableArr) { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsPropertyAnimator.3
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(physicsPropertyAnimator, physicsPropertyAnimator.mCurrentPointOnPathXProperty, physicsPropertyAnimator.mCurrentPointOnPathYProperty, path);
+                physicsPropertyAnimator.mPathAnimator = objectAnimatorOfFloat;
+                objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(physicsPropertyAnimator, runnableArr) { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsPropertyAnimator.3
                     public final /* synthetic */ Runnable[] val$pathAnimEndActions;
 
                     public AnonymousClass3(PhysicsPropertyAnimator physicsPropertyAnimator2, Runnable[] runnableArr2) {
@@ -320,11 +302,11 @@ public class ExpandedAnimationController extends PhysicsAnimationLayout.PhysicsA
                 return;
             }
             PointF expandedBubbleXY = this.mPositioner.getExpandedBubbleXY(i, this.mBubbleStackView.getState());
-            PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = animationForChild(childAt);
-            animationForChild.mPathAnimator = null;
-            animationForChild.property(DynamicAnimation.TRANSLATION_X, expandedBubbleXY.x, new Runnable[0]);
-            animationForChild.translationY(expandedBubbleXY.y, new Runnable[0]);
-            animationForChild.start(new Runnable[0]);
+            PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = animationForChild(childAt);
+            physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
+            physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.TRANSLATION_X, expandedBubbleXY.x, new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild.translationY(expandedBubbleXY.y, new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
         }
     }
 

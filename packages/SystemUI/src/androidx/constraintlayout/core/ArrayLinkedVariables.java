@@ -5,7 +5,6 @@ import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyn
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ArrayLinkedVariables {
     public final Cache mCache;
@@ -84,51 +83,51 @@ public class ArrayLinkedVariables {
                 }
                 i = this.mArrayNextIndices[i];
             }
-            int i7 = this.mLast;
-            int i8 = i7 + 1;
+            int length = this.mLast;
+            int i7 = length + 1;
             if (this.mDidFillOnce) {
                 int[] iArr3 = this.mArrayIndices;
-                if (iArr3[i7] != -1) {
-                    i7 = iArr3.length;
+                if (iArr3[length] != -1) {
+                    length = iArr3.length;
                 }
             } else {
-                i7 = i8;
+                length = i7;
             }
             int[] iArr4 = this.mArrayIndices;
-            if (i7 >= iArr4.length && this.mCurrentSize < iArr4.length) {
-                int i9 = 0;
+            if (length >= iArr4.length && this.mCurrentSize < iArr4.length) {
+                int i8 = 0;
                 while (true) {
                     int[] iArr5 = this.mArrayIndices;
-                    if (i9 >= iArr5.length) {
+                    if (i8 >= iArr5.length) {
                         break;
                     }
-                    if (iArr5[i9] == -1) {
-                        i7 = i9;
+                    if (iArr5[i8] == -1) {
+                        length = i8;
                         break;
                     }
-                    i9++;
+                    i8++;
                 }
             }
             int[] iArr6 = this.mArrayIndices;
-            if (i7 >= iArr6.length) {
-                i7 = iArr6.length;
-                int i10 = this.mRowSize * 2;
-                this.mRowSize = i10;
+            if (length >= iArr6.length) {
+                length = iArr6.length;
+                int i9 = this.mRowSize * 2;
+                this.mRowSize = i9;
                 this.mDidFillOnce = false;
-                this.mLast = i7 - 1;
-                this.mArrayValues = Arrays.copyOf(this.mArrayValues, i10);
+                this.mLast = length - 1;
+                this.mArrayValues = Arrays.copyOf(this.mArrayValues, i9);
                 this.mArrayIndices = Arrays.copyOf(this.mArrayIndices, this.mRowSize);
                 this.mArrayNextIndices = Arrays.copyOf(this.mArrayNextIndices, this.mRowSize);
             }
-            this.mArrayIndices[i7] = solverVariable.id;
-            this.mArrayValues[i7] = f;
+            this.mArrayIndices[length] = solverVariable.id;
+            this.mArrayValues[length] = f;
             if (i3 != -1) {
                 int[] iArr7 = this.mArrayNextIndices;
-                iArr7[i7] = iArr7[i3];
-                iArr7[i3] = i7;
+                iArr7[length] = iArr7[i3];
+                iArr7[i3] = length;
             } else {
-                this.mArrayNextIndices[i7] = this.mHead;
-                this.mHead = i7;
+                this.mArrayNextIndices[length] = this.mHead;
+                this.mHead = length;
             }
             solverVariable.usageInRowCount++;
             solverVariable.addToRow(arrayRow);
@@ -136,9 +135,9 @@ public class ArrayLinkedVariables {
             if (!this.mDidFillOnce) {
                 this.mLast++;
             }
-            int i11 = this.mLast;
+            int i10 = this.mLast;
             int[] iArr8 = this.mArrayIndices;
-            if (i11 >= iArr8.length) {
+            if (i10 >= iArr8.length) {
                 this.mDidFillOnce = true;
                 this.mLast = iArr8.length - 1;
             }
@@ -238,61 +237,61 @@ public class ArrayLinkedVariables {
             }
             i = this.mArrayNextIndices[i];
         }
-        int i7 = this.mLast;
-        int i8 = i7 + 1;
+        int length = this.mLast;
+        int i7 = length + 1;
         if (this.mDidFillOnce) {
             int[] iArr2 = this.mArrayIndices;
-            if (iArr2[i7] != -1) {
-                i7 = iArr2.length;
+            if (iArr2[length] != -1) {
+                length = iArr2.length;
             }
         } else {
-            i7 = i8;
+            length = i7;
         }
         int[] iArr3 = this.mArrayIndices;
-        if (i7 >= iArr3.length && this.mCurrentSize < iArr3.length) {
-            int i9 = 0;
+        if (length >= iArr3.length && this.mCurrentSize < iArr3.length) {
+            int i8 = 0;
             while (true) {
                 int[] iArr4 = this.mArrayIndices;
-                if (i9 >= iArr4.length) {
+                if (i8 >= iArr4.length) {
                     break;
                 }
-                if (iArr4[i9] == -1) {
-                    i7 = i9;
+                if (iArr4[i8] == -1) {
+                    length = i8;
                     break;
                 }
-                i9++;
+                i8++;
             }
         }
         int[] iArr5 = this.mArrayIndices;
-        if (i7 >= iArr5.length) {
-            i7 = iArr5.length;
-            int i10 = this.mRowSize * 2;
-            this.mRowSize = i10;
+        if (length >= iArr5.length) {
+            length = iArr5.length;
+            int i9 = this.mRowSize * 2;
+            this.mRowSize = i9;
             this.mDidFillOnce = false;
-            this.mLast = i7 - 1;
-            this.mArrayValues = Arrays.copyOf(this.mArrayValues, i10);
+            this.mLast = length - 1;
+            this.mArrayValues = Arrays.copyOf(this.mArrayValues, i9);
             this.mArrayIndices = Arrays.copyOf(this.mArrayIndices, this.mRowSize);
             this.mArrayNextIndices = Arrays.copyOf(this.mArrayNextIndices, this.mRowSize);
         }
-        this.mArrayIndices[i7] = solverVariable.id;
-        this.mArrayValues[i7] = f;
+        this.mArrayIndices[length] = solverVariable.id;
+        this.mArrayValues[length] = f;
         if (i3 != -1) {
             int[] iArr6 = this.mArrayNextIndices;
-            iArr6[i7] = iArr6[i3];
-            iArr6[i3] = i7;
+            iArr6[length] = iArr6[i3];
+            iArr6[i3] = length;
         } else {
-            this.mArrayNextIndices[i7] = this.mHead;
-            this.mHead = i7;
+            this.mArrayNextIndices[length] = this.mHead;
+            this.mHead = length;
         }
         solverVariable.usageInRowCount++;
         solverVariable.addToRow(arrayRow);
-        int i11 = this.mCurrentSize + 1;
-        this.mCurrentSize = i11;
+        int i10 = this.mCurrentSize + 1;
+        this.mCurrentSize = i10;
         if (!this.mDidFillOnce) {
             this.mLast++;
         }
         int[] iArr7 = this.mArrayIndices;
-        if (i11 >= iArr7.length) {
+        if (i10 >= iArr7.length) {
             this.mDidFillOnce = true;
         }
         if (this.mLast >= iArr7.length) {
@@ -336,13 +335,13 @@ public class ArrayLinkedVariables {
 
     public final String toString() {
         int i = this.mHead;
-        String str = "";
+        String string = "";
         for (int i2 = 0; i != -1 && i2 < this.mCurrentSize; i2++) {
-            StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(DpCornerSize$$ExternalSyntheticOutline0.m(this.mArrayValues[i], " : ", PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, " -> "))));
-            m.append(this.mCache.mIndexedVariables[this.mArrayIndices[i]]);
-            str = m.toString();
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(DpCornerSize$$ExternalSyntheticOutline0.m(this.mArrayValues[i], " : ", PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, " -> "))));
+            sbM.append(this.mCache.mIndexedVariables[this.mArrayIndices[i]]);
+            string = sbM.toString();
             i = this.mArrayNextIndices[i];
         }
-        return str;
+        return string;
     }
 }

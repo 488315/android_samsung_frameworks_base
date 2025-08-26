@@ -162,14 +162,14 @@ public abstract class PlayerBase {
     }
 
     void baseSetPan(float f) {
-        float min = Math.min(Math.max(-1.0f, f), 1.0f);
+        float fMin = Math.min(Math.max(-1.0f, f), 1.0f);
         synchronized (this.mLock) {
-            if (min >= 0.0f) {
-                this.mPanMultiplierL = 1.0f - min;
+            if (fMin >= 0.0f) {
+                this.mPanMultiplierL = 1.0f - fMin;
                 this.mPanMultiplierR = 1.0f;
             } else {
                 this.mPanMultiplierL = 1.0f;
-                this.mPanMultiplierR = min + 1.0f;
+                this.mPanMultiplierR = fMin + 1.0f;
             }
         }
         updatePlayerVolume();
@@ -238,9 +238,9 @@ public abstract class PlayerBase {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 
     public void setStartDelayMs(int i) {
@@ -360,8 +360,8 @@ public abstract class PlayerBase {
         private PlayerIdCard(Parcel parcel) {
             this.mPlayerType = parcel.readInt();
             this.mAttributes = AudioAttributes.CREATOR.createFromParcel(parcel);
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            this.mIPlayer = readStrongBinder == null ? null : IPlayer.Stub.asInterface(readStrongBinder);
+            IBinder strongBinder = parcel.readStrongBinder();
+            this.mIPlayer = strongBinder == null ? null : IPlayer.Stub.asInterface(strongBinder);
             this.mSessionId = parcel.readInt();
         }
 

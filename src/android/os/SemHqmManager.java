@@ -15,14 +15,14 @@ public class SemHqmManager {
     }
 
     public boolean sendHWParamServer(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7) {
-        boolean sendHWParamServer;
+        boolean zSendHWParamServer;
         if (this.mService == null) {
             return false;
         }
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamServer = this.mService.sendHWParamServer(i, str, str2, str3, str4, str5, str6, str7);
+                    zSendHWParamServer = this.mService.sendHWParamServer(i, str, str2, str3, str4, str5, str6, str7);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -31,18 +31,18 @@ public class SemHqmManager {
                 throw th;
             }
         }
-        return sendHWParamServer;
+        return zSendHWParamServer;
     }
 
     public boolean sendHWParamToHQM(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8) {
-        boolean sendHWParamToHQM;
+        boolean zSendHWParamToHQM;
         if (this.mService == null) {
             return false;
         }
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQM = this.mService.sendHWParamToHQM(i, str, str2, str3, str4, str5, str6, str7, str8);
+                    zSendHWParamToHQM = this.mService.sendHWParamToHQM(i, str, str2, str3, str4, str5, str6, str7, str8);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -51,18 +51,18 @@ public class SemHqmManager {
                 throw th;
             }
         }
-        return sendHWParamToHQM;
+        return zSendHWParamToHQM;
     }
 
     public boolean sendHWParamToHQMwithAppId(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9) {
-        boolean sendHWParamToHQMwithAppId;
+        boolean zSendHWParamToHQMwithAppId;
         if (this.mService == null) {
             return false;
         }
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQMwithAppId = this.mService.sendHWParamToHQMwithAppId(i, str, str2, str3, str4, str5, str6, str7, str8, str9);
+                    zSendHWParamToHQMwithAppId = this.mService.sendHWParamToHQMwithAppId(i, str, str2, str3, str4, str5, str6, str7, str8, str9);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -71,18 +71,18 @@ public class SemHqmManager {
                 throw th;
             }
         }
-        return sendHWParamToHQMwithAppId;
+        return zSendHWParamToHQMwithAppId;
     }
 
     public boolean sendHWParamToHQMwithFile(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10) {
-        boolean sendHWParamToHQMwithFile;
+        boolean zSendHWParamToHQMwithFile;
         if (this.mService == null) {
             return false;
         }
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQMwithFile = this.mService.sendHWParamToHQMwithFile(i, str, str2, str3, str4, str5, str6, str7, str8, str9, str10);
+                    zSendHWParamToHQMwithFile = this.mService.sendHWParamToHQMwithFile(i, str, str2, str3, str4, str5, str6, str7, str8, str9, str10);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -91,7 +91,7 @@ public class SemHqmManager {
                 throw th;
             }
         }
-        return sendHWParamToHQMwithFile;
+        return zSendHWParamToHQMwithFile;
     }
 
     public void sendSystemInfoToHQM(int i, String str, String str2) {

@@ -11,7 +11,6 @@ import com.android.wm.shell.shared.handles.RegionSamplingHelper;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RegionSamplingHelper implements View.OnAttachStateChangeListener, View.OnLayoutChangeListener {
     public final Executor mBackgroundExecutor;
@@ -36,7 +35,6 @@ public class RegionSamplingHelper implements View.OnAttachStateChangeListener, V
     public boolean mWindowVisible;
     public SurfaceControl mWrappedStopLayer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SysuiCompositionSamplingListener {
     }
 
@@ -107,7 +105,7 @@ public class RegionSamplingHelper implements View.OnAttachStateChangeListener, V
             this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.wm.shell.shared.handles.RegionSamplingHelper$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RegionSamplingHelper regionSamplingHelper = RegionSamplingHelper.this;
+                    RegionSamplingHelper regionSamplingHelper = this.f$0;
                     SurfaceControl surfaceControl2 = surfaceControl;
                     RegionSamplingHelper.SysuiCompositionSamplingListener sysuiCompositionSamplingListener = regionSamplingHelper.mCompositionSamplingListener;
                     RegionSamplingHelper.AnonymousClass3 anonymousClass3 = regionSamplingHelper.mSamplingListener;
@@ -140,13 +138,13 @@ public class RegionSamplingHelper implements View.OnAttachStateChangeListener, V
             if (!this.mSamplingRequestBounds.equals(this.mRegisteredSamplingBounds) || this.mRegisteredStopLayer != surfaceControl) {
                 unregisterSamplingListener();
                 this.mSamplingListenerRegistered = true;
-                final SurfaceControl wrap = wrap(surfaceControl);
+                final SurfaceControl surfaceControlWrap = wrap(surfaceControl);
                 final Rect rect = new Rect(this.mSamplingRequestBounds);
                 this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.wm.shell.shared.handles.RegionSamplingHelper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RegionSamplingHelper regionSamplingHelper = RegionSamplingHelper.this;
-                        SurfaceControl surfaceControl3 = wrap;
+                        RegionSamplingHelper regionSamplingHelper = this.f$0;
+                        SurfaceControl surfaceControl3 = surfaceControlWrap;
                         Rect rect2 = rect;
                         if (surfaceControl3 != null) {
                             regionSamplingHelper.getClass();
@@ -162,7 +160,7 @@ public class RegionSamplingHelper implements View.OnAttachStateChangeListener, V
                 });
                 this.mRegisteredSamplingBounds.set(this.mSamplingRequestBounds);
                 this.mRegisteredStopLayer = surfaceControl;
-                this.mWrappedStopLayer = wrap;
+                this.mWrappedStopLayer = surfaceControlWrap;
             }
             this.mFirstSamplingAfterStart = false;
         } else {
@@ -240,7 +238,6 @@ public class RegionSamplingHelper implements View.OnAttachStateChangeListener, V
         this.mCallback = samplingCallback;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SamplingCallback {
         Rect getSampledRegion();
 

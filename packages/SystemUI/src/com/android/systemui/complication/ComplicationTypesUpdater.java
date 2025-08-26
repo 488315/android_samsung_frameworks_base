@@ -14,7 +14,6 @@ import com.android.systemui.util.condition.ConditionalCoreStartable;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ComplicationTypesUpdater extends ConditionalCoreStartable {
     public final DreamBackend mDreamBackend;
@@ -22,7 +21,6 @@ public class ComplicationTypesUpdater extends ConditionalCoreStartable {
     public final Executor mExecutor;
     public final SecureSettings mSecureSettings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.complication.ComplicationTypesUpdater$1, reason: invalid class name */
     public class AnonymousClass1 extends ContentObserver {
         public AnonymousClass1(Handler handler) {
@@ -43,18 +41,18 @@ public class ComplicationTypesUpdater extends ConditionalCoreStartable {
                     } else if (dreamBackend.mSupportedComplications.contains(6)) {
                         arraySet.add(6);
                     }
-                    final int reduce = arraySet.stream().mapToInt(new ComplicationUtils$$ExternalSyntheticLambda0()).reduce(0, new ComplicationUtils$$ExternalSyntheticLambda1());
+                    final int iReduce = arraySet.stream().mapToInt(new ComplicationUtils$$ExternalSyntheticLambda0()).reduce(0, new ComplicationUtils$$ExternalSyntheticLambda1());
                     dreamOverlayStateController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.dreams.DreamOverlayStateController$$ExternalSyntheticLambda11
                         @Override // java.lang.Runnable
                         public final void run() {
-                            DreamOverlayStateController dreamOverlayStateController2 = DreamOverlayStateController.this;
-                            int i = reduce;
+                            DreamOverlayStateController dreamOverlayStateController2 = dreamOverlayStateController;
+                            int i = iReduce;
                             DreamLogger dreamLogger = dreamOverlayStateController2.mLogger;
                             dreamLogger.getClass();
                             DreamLogger$$ExternalSyntheticLambda0 dreamLogger$$ExternalSyntheticLambda0 = new DreamLogger$$ExternalSyntheticLambda0(8);
-                            LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, dreamLogger$$ExternalSyntheticLambda0, null);
-                            obtain.setInt1(i);
-                            dreamLogger.getBuffer().commit(obtain);
+                            LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, dreamLogger$$ExternalSyntheticLambda0, null);
+                            logMessageObtain.setInt1(i);
+                            dreamLogger.getBuffer().commit(logMessageObtain);
                             dreamOverlayStateController2.mAvailableComplicationTypes = i;
                             dreamOverlayStateController2.notifyCallbacksLocked(new DreamOverlayStateController$$ExternalSyntheticLambda0(1));
                         }
@@ -75,9 +73,9 @@ public class ComplicationTypesUpdater extends ConditionalCoreStartable {
     @Override // com.android.systemui.util.condition.ConditionalCoreStartable
     public final void onStart() {
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(null);
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         SecureSettings secureSettings = this.mSecureSettings;
-        secureSettings.registerContentObserverForUserSync("screensaver_complications_enabled", anonymousClass1, myUserId);
+        secureSettings.registerContentObserverForUserSync("screensaver_complications_enabled", anonymousClass1, iMyUserId);
         secureSettings.registerContentObserverForUserSync("screensaver_home_controls_enabled", anonymousClass1, UserHandle.myUserId());
         secureSettings.registerContentObserverForUserSync("lockscreen_show_controls", anonymousClass1, UserHandle.myUserId());
         anonymousClass1.onChange(false);

@@ -2,13 +2,11 @@ package androidx.recyclerview.widget;
 
 import android.view.View;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ViewBoundsCheck {
     public final BoundFlags mBoundFlags = new BoundFlags();
     public final Callback mCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BoundFlags {
         public int mBoundFlags = 0;
         public int mChildEnd;
@@ -56,7 +54,6 @@ public class ViewBoundsCheck {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         View getChildAt(int i);
 

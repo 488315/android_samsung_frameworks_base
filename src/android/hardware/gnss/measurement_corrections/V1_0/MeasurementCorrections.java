@@ -42,13 +42,13 @@ public final class MeasurementCorrections {
 
     public static final ArrayList<MeasurementCorrections> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<MeasurementCorrections> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             MeasurementCorrections measurementCorrections = new MeasurementCorrections();
-            measurementCorrections.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 64);
+            measurementCorrections.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 64);
             arrayList.add(measurementCorrections);
         }
         return arrayList;
@@ -63,11 +63,11 @@ public final class MeasurementCorrections {
         this.toaGpsNanosecondsOfWeek = hwBlob.getInt64(40 + j);
         long j2 = j + 48;
         int int32 = hwBlob.getInt32(j + 56);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j2, true);
         this.satCorrections.clear();
         for (int i = 0; i < int32; i++) {
             SingleSatCorrection singleSatCorrection = new SingleSatCorrection();
-            singleSatCorrection.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 56);
+            singleSatCorrection.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 56);
             this.satCorrections.add(singleSatCorrection);
         }
     }

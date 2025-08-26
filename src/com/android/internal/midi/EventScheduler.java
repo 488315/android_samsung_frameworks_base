@@ -82,9 +82,9 @@ public class EventScheduler {
         synchronized (lock) {
             FastEventQueue fastEventQueue = this.mEventBuffer.get(Long.valueOf(schedulableEvent.getTimestamp()));
             if (fastEventQueue == null) {
-                long longValue = this.mEventBuffer.isEmpty() ? Long.MAX_VALUE : this.mEventBuffer.firstKey().longValue();
+                long jLongValue = this.mEventBuffer.isEmpty() ? Long.MAX_VALUE : this.mEventBuffer.firstKey().longValue();
                 this.mEventBuffer.put(Long.valueOf(schedulableEvent.getTimestamp()), new FastEventQueue(schedulableEvent));
-                if (schedulableEvent.getTimestamp() < longValue) {
+                if (schedulableEvent.getTimestamp() < jLongValue) {
                     lock.notify();
                 }
             } else {
@@ -101,35 +101,39 @@ public class EventScheduler {
         return fastEventQueue.remove();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public SchedulableEvent getNextEvent(long j) {
-        SchedulableEvent removeNextEventLocked;
+        SchedulableEvent schedulableEventRemoveNextEventLocked;
         synchronized (getLock()) {
             if (!this.mEventBuffer.isEmpty()) {
-                long longValue = this.mEventBuffer.firstKey().longValue();
-                removeNextEventLocked = longValue <= j ? removeNextEventLocked(longValue) : null;
+                long jLongValue = this.mEventBuffer.firstKey().longValue();
+                schedulableEventRemoveNextEventLocked = jLongValue <= j ? removeNextEventLocked(jLongValue) : null;
             }
         }
-        return removeNextEventLocked;
+        return schedulableEventRemoveNextEventLocked;
     }
 
     public SchedulableEvent waitNextEvent() throws InterruptedException {
-        SchedulableEvent schedulableEvent;
+        SchedulableEvent schedulableEventRemoveNextEventLocked;
         Object lock = getLock();
         synchronized (lock) {
             while (true) {
                 if (this.mClosed) {
-                    schedulableEvent = null;
+                    schedulableEventRemoveNextEventLocked = null;
                     break;
                 }
                 long j = 2147483647L;
                 if (!this.mEventBuffer.isEmpty()) {
-                    long nanoTime = System.nanoTime();
-                    long longValue = this.mEventBuffer.firstKey().longValue();
-                    if (longValue <= nanoTime) {
-                        schedulableEvent = removeNextEventLocked(longValue);
+                    long jNanoTime = System.nanoTime();
+                    long jLongValue = this.mEventBuffer.firstKey().longValue();
+                    if (jLongValue <= jNanoTime) {
+                        schedulableEventRemoveNextEventLocked = removeNextEventLocked(jLongValue);
                         break;
                     }
-                    long j2 = ((longValue - nanoTime) / 1000000) + 1;
+                    long j2 = ((jLongValue - jNanoTime) / 1000000) + 1;
                     if (j2 <= 2147483647L) {
                         j = j2;
                     }
@@ -137,7 +141,7 @@ public class EventScheduler {
                 lock.wait((int) j);
             }
         }
-        return schedulableEvent;
+        return schedulableEventRemoveNextEventLocked;
     }
 
     protected void flush() {

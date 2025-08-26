@@ -5,7 +5,6 @@ import androidx.compose.runtime.GroupSourceInformation;
 import androidx.compose.runtime.SlotReader;
 import androidx.compose.runtime.SlotTable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ReaderTraceBuilder extends ComposeStackTraceBuilder {
     public final SlotReader reader;

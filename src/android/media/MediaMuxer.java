@@ -34,7 +34,7 @@ public final class MediaMuxer {
 
     private static native void nativeSetOrientationHint(long j, int i);
 
-    private static native long nativeSetup(FileDescriptor fileDescriptor, int i) throws IllegalArgumentException, IOException;
+    private static native long nativeSetup(FileDescriptor fileDescriptor, int i) throws IOException, IllegalArgumentException;
 
     private static native void nativeStart(long j);
 
@@ -75,28 +75,27 @@ public final class MediaMuxer {
         return "UNKNOWN";
     }
 
-    public MediaMuxer(String str, int i) throws IOException {
-        RandomAccessFile randomAccessFile;
+    public MediaMuxer(String str, int i) throws Throwable {
         if (str == null) {
             throw new IllegalArgumentException("path must not be null");
         }
-        RandomAccessFile randomAccessFile2 = null;
+        RandomAccessFile randomAccessFile = null;
         try {
-            randomAccessFile = new RandomAccessFile(str, "rws");
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            randomAccessFile.setLength(0L);
-            setUpMediaMuxer(randomAccessFile.getFD(), i);
-            randomAccessFile.close();
+            RandomAccessFile randomAccessFile2 = new RandomAccessFile(str, "rws");
+            try {
+                randomAccessFile2.setLength(0L);
+                setUpMediaMuxer(randomAccessFile2.getFD(), i);
+                randomAccessFile2.close();
+            } catch (Throwable th) {
+                th = th;
+                randomAccessFile = randomAccessFile2;
+                if (randomAccessFile != null) {
+                    randomAccessFile.close();
+                }
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            randomAccessFile2 = randomAccessFile;
-            if (randomAccessFile2 != null) {
-                randomAccessFile2.close();
-            }
-            throw th;
         }
     }
 
@@ -125,18 +124,18 @@ public final class MediaMuxer {
     }
 
     public void setLocation(float f, float f2) {
-        int round = Math.round(f * 10000.0f);
-        int round2 = Math.round(10000.0f * f2);
-        if (round > 900000 || round < -900000) {
+        int iRound = Math.round(f * 10000.0f);
+        int iRound2 = Math.round(10000.0f * f2);
+        if (iRound > 900000 || iRound < -900000) {
             throw new IllegalArgumentException("Latitude: " + f + " out of range.");
         }
-        if (round2 > 1800000 || round2 < -1800000) {
+        if (iRound2 > 1800000 || iRound2 < -1800000) {
             throw new IllegalArgumentException("Longitude: " + f2 + " out of range");
         }
         if (this.mState == 0) {
             long j = this.mNativeObject;
             if (j != 0) {
-                nativeSetLocation(j, round, round2);
+                nativeSetLocation(j, iRound, iRound2);
                 return;
             }
         }
@@ -209,12 +208,12 @@ public final class MediaMuxer {
                 objArr[i] = entry.getValue();
                 i++;
             }
-            int nativeAddTrack = nativeAddTrack(this.mNativeObject, strArr, objArr);
-            if (this.mLastTrackIndex >= nativeAddTrack) {
+            int iNativeAddTrack = nativeAddTrack(this.mNativeObject, strArr, objArr);
+            if (this.mLastTrackIndex >= iNativeAddTrack) {
                 throw new IllegalArgumentException("Invalid format.");
             }
-            this.mLastTrackIndex = nativeAddTrack;
-            return nativeAddTrack;
+            this.mLastTrackIndex = iNativeAddTrack;
+            return iNativeAddTrack;
         }
         throw new IllegalArgumentException("format must not be empty.");
     }

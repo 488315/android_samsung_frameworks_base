@@ -65,7 +65,6 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub implements KeyguardWallpaper {
     public static KeyguardWallpaperController sController;
@@ -90,7 +89,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
     public final AnonymousClass3 mWorkHandler;
 
     /* renamed from: -$$Nest$mhandleWallpaperMessage, reason: not valid java name */
-    public static void m3205$$Nest$mhandleWallpaperMessage(final KeyguardWallpaperController keyguardWallpaperController, Message message) {
+    public static void m3222$$Nest$mhandleWallpaperMessage(final KeyguardWallpaperController keyguardWallpaperController, Message message) {
         keyguardWallpaperController.getClass();
         int i = message.what;
         if (i == 607) {
@@ -99,7 +98,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             keyguardWallpaperController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardWallpaperController keyguardWallpaperController2 = KeyguardWallpaperController.this;
+                    KeyguardWallpaperController keyguardWallpaperController2 = this.f$0;
                     SemWallpaperColors semWallpaperColors = wallpaperColors;
                     int i3 = i2;
                     keyguardWallpaperController2.mWallpaperEventNotifier.update(WhichChecker.isWatchFace(i3) || WhichChecker.isVirtualDisplay(i3), keyguardWallpaperController2.mWallpaperEventNotifier.mKeyguardWallpaperColors.setSemWallpaperColors(semWallpaperColors, i3), semWallpaperColors);
@@ -131,7 +130,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                 keyguardWallpaperController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardWallpaperController keyguardWallpaperController2 = KeyguardWallpaperController.this;
+                        KeyguardWallpaperController keyguardWallpaperController2 = this.f$0;
                         SemWallpaperColors semWallpaperColors = parcelable;
                         int i32 = i3;
                         keyguardWallpaperController2.mWallpaperEventNotifier.update(WhichChecker.isWatchFace(i32) || WhichChecker.isVirtualDisplay(i32), keyguardWallpaperController2.mWallpaperEventNotifier.mKeyguardWallpaperColors.setSemWallpaperColors(semWallpaperColors, i32), semWallpaperColors);
@@ -145,9 +144,9 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         }
         if (i == 721) {
             int i5 = message.arg1;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i5, "onUserSwitchComplete userId = ", " , selectedUserId = ");
-            m.append(keyguardWallpaperController.mSelectedUserInteractor.getSelectedUserId());
-            Log.d("KeyguardWallpaperController", m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i5, "onUserSwitchComplete userId = ", " , selectedUserId = ");
+            sbM.append(keyguardWallpaperController.mSelectedUserInteractor.getSelectedUserId());
+            Log.d("KeyguardWallpaperController", sbM.toString());
             WallpaperUtils.loadDeviceState(i5, keyguardWallpaperController.mContext);
             WallpaperEventNotifier wallpaperEventNotifier = keyguardWallpaperController.mWallpaperEventNotifier;
             WallpaperManager wallpaperManager = wallpaperEventNotifier.mWallpaperManager;
@@ -164,9 +163,9 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             return;
         }
         if (i == 724) {
-            boolean booleanValue = ((Boolean) message.obj).booleanValue();
+            boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
             Bundle bundle = new Bundle();
-            bundle.putBoolean("visible", booleanValue);
+            bundle.putBoolean("visible", zBooleanValue);
             keyguardWallpaperController.broadcastEvent(724, bundle);
             return;
         }
@@ -204,7 +203,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                 keyguardWallpaperController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardWallpaperController keyguardWallpaperController2 = KeyguardWallpaperController.this;
+                        KeyguardWallpaperController keyguardWallpaperController2 = this.f$0;
                         SemWallpaperColors semWallpaperColors = wallpaperColors2;
                         int i32 = i7;
                         keyguardWallpaperController2.mWallpaperEventNotifier.update(WhichChecker.isWatchFace(i32) || WhichChecker.isVirtualDisplay(i32), keyguardWallpaperController2.mWallpaperEventNotifier.mKeyguardWallpaperColors.setSemWallpaperColors(semWallpaperColors, i32), semWallpaperColors);
@@ -226,7 +225,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                         keyguardWallpaperController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda4
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardWallpaperController keyguardWallpaperController2 = KeyguardWallpaperController.this;
+                                KeyguardWallpaperController keyguardWallpaperController2 = this.f$0;
                                 SemWallpaperColors semWallpaperColors = wallpaperColors3;
                                 int i32 = i8;
                                 keyguardWallpaperController2.mWallpaperEventNotifier.update(WhichChecker.isWatchFace(i32) || WhichChecker.isVirtualDisplay(i32), keyguardWallpaperController2.mWallpaperEventNotifier.mKeyguardWallpaperColors.setSemWallpaperColors(semWallpaperColors, i32), semWallpaperColors);
@@ -240,7 +239,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                         keyguardWallpaperController.mExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda4
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardWallpaperController keyguardWallpaperController2 = KeyguardWallpaperController.this;
+                                KeyguardWallpaperController keyguardWallpaperController2 = this.f$0;
                                 SemWallpaperColors semWallpaperColors = wallpaperColors4;
                                 int i32 = i9;
                                 keyguardWallpaperController2.mWallpaperEventNotifier.update(WhichChecker.isWatchFace(i32) || WhichChecker.isVirtualDisplay(i32), keyguardWallpaperController2.mWallpaperEventNotifier.mKeyguardWallpaperColors.setSemWallpaperColors(semWallpaperColors, i32), semWallpaperColors);
@@ -347,7 +346,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         final ?? r6 = new Handler(handlerThread.getLooper()) { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController.3
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
-                KeyguardWallpaperController.m3205$$Nest$mhandleWallpaperMessage(KeyguardWallpaperController.this, message);
+                KeyguardWallpaperController.m3222$$Nest$mhandleWallpaperMessage(KeyguardWallpaperController.this, message);
             }
         };
         this.mWorkHandler = r6;
@@ -357,8 +356,8 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         WallpaperUtils.loadDeviceState(context.getUserId(), context);
         this.mWallpaperEventNotifier = wallpaperEventNotifier;
         this.mSystemWallpaperColors = systemWallpaperColors;
-        IWallpaperManager asInterface = IWallpaperManager.Stub.asInterface(ServiceManager.getService("wallpaper"));
-        this.mService = asInterface;
+        IWallpaperManager iWallpaperManagerAsInterface = IWallpaperManager.Stub.asInterface(ServiceManager.getService("wallpaper"));
+        this.mService = iWallpaperManagerAsInterface;
         this.mWallpaperChangeNotifier = wallpaperChangeNotifier;
         WallpaperAnalytics wallpaperAnalytics = new WallpaperAnalytics(context, pluginWallpaperManager, settingsHelper);
         this.mWallpaperAnalytics = wallpaperAnalytics;
@@ -372,9 +371,9 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                 wallpaperAnalytics.updateWallpaperStatus(18);
                 wallpaperAnalytics.updateWallpaperStatus(17);
             }
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putInt("version", 1);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putInt("version", 1);
+            editorEdit.apply();
         }
         context.registerReceiver(new BroadcastReceiver() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController.4
             @Override // android.content.BroadcastReceiver
@@ -383,14 +382,14 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                 KeyguardWallpaperController keyguardWallpaperController = KeyguardWallpaperController.sController;
                 ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(intExtra, "onReceive: system wallpaper has been changed. which = ", "KeyguardWallpaperController");
                 if (intExtra > 0) {
-                    Message obtainMessage = obtainMessage(1003);
-                    obtainMessage.arg1 = intExtra;
-                    sendMessage(obtainMessage);
+                    Message messageObtainMessage = obtainMessage(1003);
+                    messageObtainMessage.arg1 = intExtra;
+                    sendMessage(messageObtainMessage);
                 }
             }
         }, new IntentFilter("android.intent.action.WALLPAPER_CHANGED"));
         this.mOldTransparentType = settingsHelper.getLockscreenWallpaperTransparent();
-        if (asInterface == null) {
+        if (iWallpaperManagerAsInterface == null) {
             Log.e("KeyguardWallpaperController", "WallpaperManagerService is not ready yet! Just return here!");
             return;
         }
@@ -410,7 +409,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             ((KeyguardFoldControllerImpl) keyguardFoldController).addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController$$ExternalSyntheticLambda2
                 @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                 public final void onFoldStateChanged(boolean z3) {
-                    KeyguardWallpaperController keyguardWallpaperController = KeyguardWallpaperController.this;
+                    KeyguardWallpaperController keyguardWallpaperController = this.f$0;
                     keyguardWallpaperController.getClass();
                     keyguardWallpaperController.printLognAddHistory("onFolderStateChanged: isOpened = " + z3);
                     boolean z4 = LsRune.WALLPAPER_SUB_DISPLAY_MODE;
@@ -429,9 +428,9 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             z = false;
         }
         try {
-            boolean z3 = asInterface.semGetWallpaperType(6) == 3 ? true : z;
+            boolean z3 = iWallpaperManagerAsInterface.semGetWallpaperType(6) == 3 ? true : z;
             if (!z3 && z2 && !LsRune.WALLPAPER_SUB_WATCHFACE) {
-                z3 = asInterface.semGetWallpaperType(18) == 3 ? true : z;
+                z3 = iWallpaperManagerAsInterface.semGetWallpaperType(18) == 3 ? true : z;
             }
             if (!z3 || MultiPackDispatcher.enableDlsIfDisabled(context)) {
                 return;
@@ -523,6 +522,11 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         return SemWallpaperColors.getBlankWallpaperColors();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00ee  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int getLockWallpaperType(boolean z) {
         int i = WallpaperUtils.sCurrentWhich;
         int i2 = 8;
@@ -532,22 +536,22 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         if (LsRune.WALLPAPER_SUB_WATCHFACE) {
             i = 6;
         }
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("\n - isIncludePluginLock: ", "\n - mService: ", z);
-        m.append(this.mService);
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("\n - isIncludePluginLock: ", "\n - mService: ", z);
+        sbM.append(this.mService);
         IWallpaperManager iWallpaperManager = this.mService;
-        int i3 = -1;
+        int iSemGetWallpaperType = -1;
         if (iWallpaperManager != null) {
             try {
                 if (z) {
-                    boolean isDynamicWallpaperEnabled = this.mPluginWallpaperManager.isDynamicWallpaperEnabled();
-                    m.append("\n - isDlsWallpaperEnabled: ");
-                    m.append(isDynamicWallpaperEnabled);
+                    boolean zIsDynamicWallpaperEnabled = this.mPluginWallpaperManager.isDynamicWallpaperEnabled();
+                    sbM.append("\n - isDlsWallpaperEnabled: ");
+                    sbM.append(zIsDynamicWallpaperEnabled);
                     if (this.mPluginWallpaperManager.isDynamicWallpaperEnabled()) {
-                        i3 = this.mPluginWallpaperManager.getWallpaperType();
-                        m.append("\n - type[DLS]: ");
-                        m.append(i3);
+                        iSemGetWallpaperType = this.mPluginWallpaperManager.getWallpaperType();
+                        sbM.append("\n - type[DLS]: ");
+                        sbM.append(iSemGetWallpaperType);
                     } else {
-                        i3 = this.mService.semGetWallpaperType(i);
+                        iSemGetWallpaperType = this.mService.semGetWallpaperType(i);
                         boolean z2 = true;
                         try {
                             if (this.mSelectedUserInteractor.getSelectedUserId() == 0 && !this.mUpdateMonitor.mUserManager.isUserUnlocked(0)) {
@@ -561,59 +565,57 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                                             if (!this.mPluginWallpaperManager.isFbeWallpaperVideo(screenId)) {
                                                 i2 = 0;
                                             }
-                                            m.append("\n - type[from FBE]: ");
-                                            m.append(i2);
                                         }
+                                        sbM.append("\n - type[from FBE]: ");
+                                        sbM.append(i2);
                                     }
+                                } else {
+                                    i2 = iSemGetWallpaperType;
+                                    sbM.append("\n - type[from FBE]: ");
+                                    sbM.append(i2);
                                 }
-                                i2 = i3;
-                                m.append("\n - type[from FBE]: ");
-                                m.append(i2);
-                            } else if (this.mPluginWallpaperManager.isDynamicWallpaperEnabled(0) || i3 != 3) {
-                                m.append("\n - type[from WMS]: ");
-                                m.append(i3);
+                            } else if (this.mPluginWallpaperManager.isDynamicWallpaperEnabled(0) || iSemGetWallpaperType != 3) {
+                                sbM.append("\n - type[from WMS]: ");
+                                sbM.append(iSemGetWallpaperType);
                             } else {
                                 if (this.mSelectedUserInteractor.getSelectedUserId() != 0) {
                                     z2 = false;
                                 }
                                 if (z2) {
                                     int screenId2 = PluginWallpaperManager.getScreenId(WallpaperUtils.sCurrentWhich);
-                                    if (this.mPluginWallpaperManager.isFbeWallpaperAvailable(screenId2)) {
-                                        if (!this.mPluginWallpaperManager.isFbeWallpaperVideo(screenId2)) {
-                                            i2 = 0;
-                                        }
-                                        m.append("\n - type[force FBE]: ");
-                                        m.append(i2);
+                                    if (!this.mPluginWallpaperManager.isFbeWallpaperAvailable(screenId2)) {
+                                        i2 = iSemGetWallpaperType;
+                                    } else if (!this.mPluginWallpaperManager.isFbeWallpaperVideo(screenId2)) {
+                                        i2 = 0;
                                     }
+                                    sbM.append("\n - type[force FBE]: ");
+                                    sbM.append(i2);
                                 }
-                                i2 = i3;
-                                m.append("\n - type[force FBE]: ");
-                                m.append(i2);
                             }
-                            i3 = i2;
+                            iSemGetWallpaperType = i2;
                         } catch (RemoteException e) {
                             e = e;
-                            i3 = i2;
+                            iSemGetWallpaperType = i2;
                             Log.e("KeyguardWallpaperController", "System dead?" + e);
-                            m.append("\n - WallpaperUtils.getCurrentWhich(): ");
-                            m.append(WallpaperUtils.sCurrentWhich);
-                            Log.d("KeyguardWallpaperController", "getLockWallpaperType: " + m.toString());
-                            return i3;
+                            sbM.append("\n - WallpaperUtils.getCurrentWhich(): ");
+                            sbM.append(WallpaperUtils.sCurrentWhich);
+                            Log.d("KeyguardWallpaperController", "getLockWallpaperType: " + sbM.toString());
+                            return iSemGetWallpaperType;
                         }
                     }
                 } else {
-                    i3 = iWallpaperManager.semGetWallpaperType(i);
-                    m.append("\n - type[from WMS]: ");
-                    m.append(i3);
+                    iSemGetWallpaperType = iWallpaperManager.semGetWallpaperType(i);
+                    sbM.append("\n - type[from WMS]: ");
+                    sbM.append(iSemGetWallpaperType);
                 }
             } catch (RemoteException e2) {
                 e = e2;
             }
         }
-        m.append("\n - WallpaperUtils.getCurrentWhich(): ");
-        m.append(WallpaperUtils.sCurrentWhich);
-        Log.d("KeyguardWallpaperController", "getLockWallpaperType: " + m.toString());
-        return i3;
+        sbM.append("\n - WallpaperUtils.getCurrentWhich(): ");
+        sbM.append(WallpaperUtils.sCurrentWhich);
+        Log.d("KeyguardWallpaperController", "getLockWallpaperType: " + sbM.toString());
+        return iSemGetWallpaperType;
     }
 
     public final SemWallpaperColors getWallpaperColors(boolean z) {
@@ -630,8 +632,8 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
 
     public final void handleAdaptiveColorModeChanged(boolean z) {
         boolean z2 = z ? WallpaperUtils.mIsAdaptiveColorModeSub : WallpaperUtils.mIsAdaptiveColorMode;
-        boolean isAdaptiveColorMode = this.mSettingsHelper.isAdaptiveColorMode(z);
-        if (z2 != isAdaptiveColorMode) {
+        boolean zIsAdaptiveColorMode = this.mSettingsHelper.isAdaptiveColorMode(z);
+        if (z2 != zIsAdaptiveColorMode) {
             if (!z) {
                 Context context = this.mContext;
                 if (this.mSettingsHelper.isAdaptiveColorMode()) {
@@ -642,16 +644,16 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             wallpaperEventNotifier.update(z, 2L, wallpaperEventNotifier.mKeyguardWallpaperColors.getSemWallpaperColors(wallpaperEventNotifier.mSelectedUserInteractor.getSelectedUserId(), z));
         }
         if (z) {
-            WallpaperUtils.mIsAdaptiveColorModeSub = isAdaptiveColorMode;
+            WallpaperUtils.mIsAdaptiveColorModeSub = zIsAdaptiveColorMode;
         } else {
-            WallpaperUtils.mIsAdaptiveColorMode = isAdaptiveColorMode;
+            WallpaperUtils.mIsAdaptiveColorMode = zIsAdaptiveColorMode;
         }
     }
 
     public final void handleColorThemeStateChanged(boolean z) {
-        boolean isColorThemeEnabled = this.mSettingsHelper.isColorThemeEnabled();
+        boolean zIsColorThemeEnabled = this.mSettingsHelper.isColorThemeEnabled();
         int adaptiveColorMode = this.mSettingsHelper.getAdaptiveColorMode(z);
-        if (isColorThemeEnabled) {
+        if (zIsColorThemeEnabled) {
             if ((adaptiveColorMode & 2) == 0) {
                 this.mSettingsHelper.setAdaptiveColorMode(z, adaptiveColorMode | 2);
             }
@@ -662,12 +664,12 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
     }
 
     public final Bundle notifyEvent(int i) {
-        Bundle bundle = null;
+        Bundle bundleOnEventReceived = null;
         if (((ImageWallpaper.IntegratedEngine.AnonymousClass1) ((HashMap) this.mEventListeners).get(Integer.valueOf(WhichChecker.isFlagEnabled(WallpaperUtils.sCurrentWhich, 16) ? 1 : 0))) != null) {
-            bundle = ((ImageWallpaper.IntegratedEngine.AnonymousClass1) ((HashMap) this.mEventListeners).get(Integer.valueOf(WhichChecker.isFlagEnabled(WallpaperUtils.sCurrentWhich, 16) ? 1 : 0))).onEventReceived(i, null);
+            bundleOnEventReceived = ((ImageWallpaper.IntegratedEngine.AnonymousClass1) ((HashMap) this.mEventListeners).get(Integer.valueOf(WhichChecker.isFlagEnabled(WallpaperUtils.sCurrentWhich, 16) ? 1 : 0))).onEventReceived(i, null);
         }
-        Log.d("KeyguardWallpaperController", "notifyEvent: event = " + i + ", result = " + bundle);
-        return bundle;
+        Log.d("KeyguardWallpaperController", "notifyEvent: event = " + i + ", result = " + bundleOnEventReceived);
+        return bundleOnEventReceived;
     }
 
     public final void onSemWallpaperChanged(int i, int i2, Bundle bundle) {
@@ -694,7 +696,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         wallpaperChangeNotifier.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.wallpaper.WallpaperChangeNotifier$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                Settings.System.getInt(WallpaperChangeNotifier.this.mContext.getContentResolver(), "dls_state", 0);
+                Settings.System.getInt(wallpaperChangeNotifier.mContext.getContentResolver(), "dls_state", 0);
             }
         }, 500L);
         if (WhichChecker.isFlagEnabled(i2, 2)) {
@@ -733,12 +735,12 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
 
     public final void onSemWallpaperColorsAnalysisRequested(int i, int i2) {
         removeMessages(906);
-        Message obtainMessage = obtainMessage(906);
+        Message messageObtainMessage = obtainMessage(906);
         Bundle bundle = new Bundle();
         bundle.putInt("which", i);
         bundle.putInt("userid", i2);
-        obtainMessage.setData(bundle);
-        sendMessage(obtainMessage);
+        messageObtainMessage.setData(bundle);
+        sendMessage(messageObtainMessage);
     }
 
     public final void onSemWallpaperColorsChanged(SemWallpaperColors semWallpaperColors, int i, int i2) {
@@ -749,9 +751,9 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         }
         int i3 = i & 2;
         if (i3 == 0) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "set system color which = ", ", opacity = ");
-            m.append(semWallpaperColors.getDarkModeDimOpacity());
-            Log.i("KeyguardWallpaperController", m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "set system color which = ", ", opacity = ");
+            sbM.append(semWallpaperColors.getDarkModeDimOpacity());
+            Log.i("KeyguardWallpaperController", sbM.toString());
             SystemWallpaperColors systemWallpaperColors = this.mSystemWallpaperColors;
             systemWallpaperColors.getClass();
             Log.d("SystemWallpaperColors", "setColor: which = " + i);
@@ -802,20 +804,20 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
             printLognAddHistory("onSemWallpaperColorsChanged: We are in UPSM or EM. We don't need this event for now.");
             return;
         }
-        StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onSemWallpaperColorsChanged: which = ", ", userId = ", ", colors = ");
-        m2.append(semWallpaperColors.toSimpleString());
-        printLognAddHistory(m2.toString());
+        StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onSemWallpaperColorsChanged: which = ", ", userId = ", ", colors = ");
+        sbM2.append(semWallpaperColors.toSimpleString());
+        printLognAddHistory(sbM2.toString());
         removeMessages(608);
-        Message obtainMessage = obtainMessage(608);
+        Message messageObtainMessage = obtainMessage(608);
         Bundle bundle = new Bundle();
         bundle.putParcelable("wallpaper_colors", semWallpaperColors);
         bundle.putInt("which", i);
         bundle.putInt("userid", i2);
-        obtainMessage.setData(bundle);
+        messageObtainMessage.setData(bundle);
         if (!z4 || z5) {
-            sendMessage(obtainMessage);
+            sendMessage(messageObtainMessage);
         } else {
-            sendMessageDelayed(obtainMessage, 10L);
+            sendMessageDelayed(messageObtainMessage, 10L);
         }
     }
 
@@ -826,7 +828,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
     public final void sendUpdateWallpaperMessage(int i, Bundle bundle) {
         AnonymousClass3 anonymousClass3 = this.mWorkHandler;
         if (anonymousClass3 != null) {
-            Message obtainMessage = anonymousClass3.obtainMessage(i);
+            Message messageObtainMessage = anonymousClass3.obtainMessage(i);
             if (i != 609 && hasMessages(i)) {
                 printLognAddHistory("sendUpdateWallpaperMessage: remove message what = " + i);
                 removeMessages(i);
@@ -835,12 +837,12 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
                 sendEmptyMessage(i);
                 return;
             }
-            obtainMessage.setData(bundle);
+            messageObtainMessage.setData(bundle);
             long j = bundle.getLong("delay", 0L);
             if (j == 0) {
-                sendMessage(obtainMessage);
+                sendMessage(messageObtainMessage);
             } else {
-                sendMessageDelayed(obtainMessage, j);
+                sendMessageDelayed(messageObtainMessage, j);
             }
         }
     }

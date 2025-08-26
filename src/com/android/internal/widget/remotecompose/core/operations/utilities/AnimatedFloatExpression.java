@@ -210,8 +210,8 @@ public class AnimatedFloatExpression {
 
     public static boolean isMathOperator(float f) {
         if (Float.isNaN(f)) {
-            int fromNaN = fromNaN(f);
-            if (!NanMap.isDataVariable(f) && fromNaN > 3211264 && fromNaN <= 3211314) {
+            int iFromNaN = fromNaN(f);
+            if (!NanMap.isDataVariable(f) && iFromNaN > 3211264 && iFromNaN <= 3211314) {
                 return true;
             }
         }
@@ -221,21 +221,21 @@ public class AnimatedFloatExpression {
     public float eval(float[] fArr, float... fArr2) {
         this.mStack = fArr;
         this.mVar = fArr2;
-        int i = -1;
-        int i2 = 0;
+        int iOpEval = -1;
+        int i = 0;
         while (true) {
             float[] fArr3 = this.mStack;
-            if (i2 < fArr3.length) {
-                float f = fArr3[i2];
+            if (i < fArr3.length) {
+                float f = fArr3[i];
                 if (Float.isNaN(f)) {
-                    i = opEval(i, fromNaN(f));
+                    iOpEval = opEval(iOpEval, fromNaN(f));
                 } else {
-                    i++;
-                    this.mStack[i] = f;
+                    iOpEval++;
+                    this.mStack[iOpEval] = f;
                 }
-                i2++;
+                i++;
             } else {
-                return fArr3[i];
+                return fArr3[iOpEval];
             }
         }
     }
@@ -246,26 +246,26 @@ public class AnimatedFloatExpression {
         this.mStack = this.mLocalStack;
         this.mVar = fArr2;
         this.mCollectionsAccess = collectionsAccess;
-        int i3 = -1;
+        int iOpEval = -1;
         while (true) {
             float[] fArr3 = this.mStack;
             if (i2 < fArr3.length) {
                 float f = fArr3[i2];
                 if (Float.isNaN(f)) {
-                    int fromNaN = fromNaN(f);
-                    if ((7340032 & fromNaN) != 2097152) {
-                        i3 = opEval(i3, fromNaN);
+                    int iFromNaN = fromNaN(f);
+                    if ((7340032 & iFromNaN) != 2097152) {
+                        iOpEval = opEval(iOpEval, iFromNaN);
                     } else {
-                        i3++;
-                        this.mStack[i3] = f;
+                        iOpEval++;
+                        this.mStack[iOpEval] = f;
                     }
                 } else {
-                    i3++;
-                    this.mStack[i3] = f;
+                    iOpEval++;
+                    this.mStack[iOpEval] = f;
                 }
                 i2++;
             } else {
-                return fArr3[i3];
+                return fArr3[iOpEval];
             }
         }
     }
@@ -274,23 +274,23 @@ public class AnimatedFloatExpression {
         System.arraycopy(fArr, 0, this.mLocalStack, 0, i);
         this.mStack = this.mLocalStack;
         this.mCollectionsAccess = collectionsAccess;
-        int i2 = -1;
-        for (int i3 = 0; i3 < i; i3++) {
-            float f = this.mStack[i3];
+        int iOpEval = -1;
+        for (int i2 = 0; i2 < i; i2++) {
+            float f = this.mStack[i2];
             if (Float.isNaN(f)) {
-                int fromNaN = fromNaN(f);
-                if ((7340032 & fromNaN) != 2097152) {
-                    i2 = opEval(i2, fromNaN);
+                int iFromNaN = fromNaN(f);
+                if ((7340032 & iFromNaN) != 2097152) {
+                    iOpEval = opEval(iOpEval, iFromNaN);
                 } else {
-                    i2++;
-                    this.mStack[i2] = f;
+                    iOpEval++;
+                    this.mStack[iOpEval] = f;
                 }
             } else {
-                i2++;
-                this.mStack[i2] = f;
+                iOpEval++;
+                this.mStack[iOpEval] = f;
             }
         }
-        return this.mStack[i2];
+        return this.mStack[iOpEval];
     }
 
     private int dereference(CollectionsAccess collectionsAccess, int i, int i2) {
@@ -303,33 +303,33 @@ public class AnimatedFloatExpression {
         System.arraycopy(fArr, 0, this.mLocalStack, 0, i);
         this.mStack = this.mLocalStack;
         this.mVar = fArr2;
-        int i2 = -1;
-        for (int i3 = 0; i3 < i; i3++) {
-            float f = this.mStack[i3];
+        int iOpEval = -1;
+        for (int i2 = 0; i2 < i; i2++) {
+            float f = this.mStack[i2];
             if (Float.isNaN(f)) {
-                i2 = opEval(i2, fromNaN(f));
+                iOpEval = opEval(iOpEval, fromNaN(f));
             } else {
-                i2++;
-                this.mStack[i2] = f;
+                iOpEval++;
+                this.mStack[iOpEval] = f;
             }
         }
-        return this.mStack[i2];
+        return this.mStack[iOpEval];
     }
 
     public float evalDB(float[] fArr, float... fArr2) {
         this.mStack = fArr;
         this.mVar = fArr2;
-        int i = -1;
+        int iOpEval = -1;
         for (float f : fArr) {
             if (Float.isNaN(f)) {
-                i = opEval(i, fromNaN(f));
+                iOpEval = opEval(iOpEval, fromNaN(f));
             } else {
                 System.out.print(" " + f);
-                i++;
-                this.mStack[i] = f;
+                iOpEval++;
+                this.mStack[iOpEval] = f;
             }
         }
-        return this.mStack[i];
+        return this.mStack[iOpEval];
     }
 
     public static String toMathName(float f) {
@@ -346,17 +346,17 @@ public class AnimatedFloatExpression {
                 if (isMathOperator(f)) {
                     sb2.append(toMathName(f));
                 } else {
-                    int fromNaN = fromNaN(f);
-                    if (fromNaN > 2097152) {
+                    int iFromNaN = fromNaN(f);
+                    if (iFromNaN > 2097152) {
                         sb = new StringBuilder("A_");
-                        fromNaN &= 1048575;
+                        iFromNaN &= 1048575;
                     } else {
                         sb = new StringBuilder("");
                     }
-                    sb.append(fromNaN);
-                    String sb3 = sb.toString();
+                    sb.append(iFromNaN);
+                    String string = sb.toString();
                     sb2.append(NavigationBarInflaterView.SIZE_MOD_START);
-                    sb2.append(sb3);
+                    sb2.append(string);
                     sb2.append(NavigationBarInflaterView.SIZE_MOD_END);
                 }
             } else if (strArr != null && (str = strArr[i]) != null) {
@@ -374,25 +374,25 @@ public class AnimatedFloatExpression {
 
     static String toString(float[] fArr, int i) {
         if (Float.isNaN(fArr[i])) {
-            int fromNaN = fromNaN(fArr[i]) - OFFSET;
-            int i2 = NO_OF_OPS[fromNaN];
+            int iFromNaN = fromNaN(fArr[i]) - OFFSET;
+            int i2 = NO_OF_OPS[iFromNaN];
             if (i2 == -1) {
                 return "nop";
             }
             if (i2 == 1) {
-                return sNames.get(fromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ") ";
+                return sNames.get(iFromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ") ";
             }
             if (i2 == 2) {
-                if (infix(fromNaN)) {
-                    return NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + sNames.get(fromNaN) + " " + toString(fArr, i + 2) + ") ";
+                if (infix(iFromNaN)) {
+                    return NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + sNames.get(iFromNaN) + " " + toString(fArr, i + 2) + ") ";
                 }
-                return sNames.get(fromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ", " + toString(fArr, i + 2) + NavigationBarInflaterView.KEY_CODE_END;
+                return sNames.get(iFromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ", " + toString(fArr, i + 2) + NavigationBarInflaterView.KEY_CODE_END;
             }
             if (i2 == 3) {
-                if (infix(fromNaN)) {
+                if (infix(iFromNaN)) {
                     return "((" + toString(fArr, i + 1) + ") ? " + toString(fArr, i + 2) + ":" + toString(fArr, i + 3) + NavigationBarInflaterView.KEY_CODE_END;
                 }
-                return sNames.get(fromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ", " + toString(fArr, i + 2) + ", " + toString(fArr, i + 3) + NavigationBarInflaterView.KEY_CODE_END;
+                return sNames.get(iFromNaN) + NavigationBarInflaterView.KEY_CODE_START + toString(fArr, i + 1) + ", " + toString(fArr, i + 2) + ", " + toString(fArr, i + 3) + NavigationBarInflaterView.KEY_CODE_END;
             }
         }
         return Float.toString(fArr[i]);
@@ -535,28 +535,28 @@ public class AnimatedFloatExpression {
                 return i;
             case OP_A_DEREF /* 3211296 */:
                 int i18 = i - 1;
-                int fromNaN = fromNaN(this.mStack[i18]);
+                int iFromNaN = fromNaN(this.mStack[i18]);
                 float[] fArr16 = this.mStack;
-                fArr16[i18] = this.mCollectionsAccess.getFloatValue(fromNaN, (int) fArr16[i]);
+                fArr16[i18] = this.mCollectionsAccess.getFloatValue(iFromNaN, (int) fArr16[i]);
                 return i18;
             case OP_A_MAX /* 3211297 */:
                 float[] floats = this.mCollectionsAccess.getFloats(fromNaN(this.mStack[i]));
-                float f2 = floats[0];
+                float fMax = floats[0];
                 while (i4 < floats.length) {
-                    f2 = Math.max(f2, floats[i4]);
+                    fMax = Math.max(fMax, floats[i4]);
                     i4++;
                 }
-                this.mStack[i] = f2;
+                this.mStack[i] = fMax;
                 return i;
             case OP_A_MIN /* 3211298 */:
                 float[] floats2 = this.mCollectionsAccess.getFloats(fromNaN(this.mStack[i]));
                 if (floats2.length != 0) {
-                    float f3 = floats2[0];
+                    float fMin = floats2[0];
                     while (i4 < floats2.length) {
-                        f3 = Math.min(f3, floats2[i4]);
+                        fMin = Math.min(fMin, floats2[i4]);
                         i4++;
                     }
-                    this.mStack[i] = f3;
+                    this.mStack[i] = fMin;
                     return i;
                 }
                 return i;
@@ -581,9 +581,9 @@ public class AnimatedFloatExpression {
                 return i;
             case OP_A_SPLINE /* 3211302 */:
                 int i19 = i - 1;
-                int fromNaN2 = fromNaN(this.mStack[i19]);
+                int iFromNaN2 = fromNaN(this.mStack[i19]);
                 float[] fArr17 = this.mStack;
-                fArr17[i19] = getSplineValue(fromNaN2, fArr17[i]);
+                fArr17[i19] = getSplineValue(iFromNaN2, fArr17[i]);
                 return i19;
             case OP_RAND /* 3211303 */:
                 if (sRandom == null) {
@@ -605,8 +605,8 @@ public class AnimatedFloatExpression {
                 }
                 return i - 1;
             case OP_NOISE_FROM /* 3211305 */:
-                int floatToRawIntBits = Float.floatToRawIntBits(this.mStack[i]);
-                int i21 = floatToRawIntBits ^ (floatToRawIntBits << 13);
+                int iFloatToRawIntBits = Float.floatToRawIntBits(this.mStack[i]);
+                int i21 = iFloatToRawIntBits ^ (iFloatToRawIntBits << 13);
                 this.mStack[i] = 1.0f - ((((i21 * (((i21 * i21) * 15731) + 789221)) + 1376312589) & Integer.MAX_VALUE) / 1.0737418E9f);
                 return i;
             case OP_RAND_IN_RANGE /* 3211306 */:
@@ -614,18 +614,18 @@ public class AnimatedFloatExpression {
                     sRandom = new Random();
                 }
                 float[] fArr18 = this.mStack;
-                float nextFloat = sRandom.nextFloat();
+                float fNextFloat = sRandom.nextFloat();
                 float[] fArr19 = this.mStack;
-                float f4 = fArr19[i];
-                float f5 = fArr19[i - 1];
-                fArr18[i] = (nextFloat * (f4 - f5)) + f5;
+                float f2 = fArr19[i];
+                float f3 = fArr19[i - 1];
+                fArr18[i] = (fNextFloat * (f2 - f3)) + f3;
                 return i;
             case OP_SQUARE_SUM /* 3211307 */:
                 float[] fArr20 = this.mStack;
                 int i22 = i - 1;
-                float f6 = fArr20[i22];
-                float f7 = fArr20[i];
-                fArr20[i22] = (f6 * f6) + (f7 * f7);
+                float f4 = fArr20[i22];
+                float f5 = fArr20[i];
+                fArr20[i22] = (f4 * f4) + (f5 * f5);
                 return i22;
             case OP_STEP /* 3211308 */:
                 PrintStream printStream = System.out;
@@ -640,8 +640,8 @@ public class AnimatedFloatExpression {
                 return i23;
             case OP_SQUARE /* 3211309 */:
                 float[] fArr22 = this.mStack;
-                float f8 = fArr22[i];
-                fArr22[i] = f8 * f8;
+                float f6 = fArr22[i];
+                fArr22[i] = f6 * f6;
                 return i;
             case OP_DUP /* 3211310 */:
                 float[] fArr23 = this.mStack;
@@ -655,33 +655,33 @@ public class AnimatedFloatExpression {
             case OP_SWAP /* 3211312 */:
                 float[] fArr24 = this.mStack;
                 int i26 = i - 1;
-                float f9 = fArr24[i26];
+                float f7 = fArr24[i26];
                 fArr24[i26] = fArr24[i];
-                fArr24[i] = f9;
+                fArr24[i] = f7;
                 return i;
             case OP_LERP /* 3211313 */:
                 float[] fArr25 = this.mStack;
                 int i27 = i - 2;
-                float f10 = fArr25[i27];
-                fArr25[i27] = f10 + ((fArr25[i - 1] - f10) * fArr25[i]);
+                float f8 = fArr25[i27];
+                fArr25[i27] = f8 + ((fArr25[i - 1] - f8) * fArr25[i]);
                 return i27;
             case 3211314:
                 float[] fArr26 = this.mStack;
                 int i28 = i - 2;
-                float f11 = fArr26[i28];
-                float f12 = fArr26[i - 1];
-                float f13 = fArr26[i];
-                System.out.println("val3 = " + f11 + " min1 = " + f13 + " max2 = " + f12);
-                if (f11 < f13) {
+                float f9 = fArr26[i28];
+                float f10 = fArr26[i - 1];
+                float f11 = fArr26[i];
+                System.out.println("val3 = " + f9 + " min1 = " + f11 + " max2 = " + f10);
+                if (f9 < f11) {
                     this.mStack[i28] = 0.0f;
                     System.out.println("below min ");
-                } else if (f11 > f12) {
+                } else if (f9 > f10) {
                     this.mStack[i28] = 1.0f;
                     System.out.println("above max ");
                 } else {
-                    float f14 = (f11 - f13) / (f12 - f13);
-                    System.out.println("v = " + f14);
-                    this.mStack[i28] = f14 * f14 * (3.0f - (f14 * 2.0f));
+                    float f12 = (f9 - f11) / (f10 - f11);
+                    System.out.println("v = " + f12);
+                    this.mStack[i28] = f12 * f12 * (3.0f - (f12 * 2.0f));
                 }
                 return i28;
             case OP_FIRST_VAR /* 3211315 */:

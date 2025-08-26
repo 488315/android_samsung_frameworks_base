@@ -217,11 +217,11 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
     }
 
     private SemSatelliteRegistrationStateResult copy() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        SemSatelliteRegistrationStateResult semSatelliteRegistrationStateResult = new SemSatelliteRegistrationStateResult(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        SemSatelliteRegistrationStateResult semSatelliteRegistrationStateResult = new SemSatelliteRegistrationStateResult(parcelObtain);
+        parcelObtain.recycle();
         return semSatelliteRegistrationStateResult;
     }
 

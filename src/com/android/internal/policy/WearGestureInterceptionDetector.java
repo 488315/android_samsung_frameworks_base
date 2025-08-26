@@ -32,18 +32,18 @@ public class WearGestureInterceptionDetector {
         if (!context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             return false;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843763});
-        boolean z = obtainStyledAttributes.getIndexCount() > 0 ? obtainStyledAttributes.getBoolean(0, true) : true;
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843763});
+        boolean z = typedArrayObtainStyledAttributes.getIndexCount() > 0 ? typedArrayObtainStyledAttributes.getBoolean(0, true) : true;
+        typedArrayObtainStyledAttributes.recycle();
         return z;
     }
 
     private int getIndexForValidPointer(MotionEvent motionEvent) {
-        int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-        if (findPointerIndex == -1) {
+        int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+        if (iFindPointerIndex == -1) {
             this.mDiscardIntercept = true;
         }
-        return findPointerIndex;
+        return iFindPointerIndex;
     }
 
     private void updateSwiping(MotionEvent motionEvent) {
@@ -78,6 +78,10 @@ public class WearGestureInterceptionDetector {
         return !this.mDiscardIntercept && this.mSwiping;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x004c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
         int indexForValidPointer;
         int actionMasked = motionEvent.getActionMasked();
@@ -86,25 +90,22 @@ public class WearGestureInterceptionDetector {
             this.mDownX = motionEvent.getRawX();
             this.mDownY = motionEvent.getRawY();
             this.mActivePointerId = motionEvent.getPointerId(0);
-        } else {
-            if (actionMasked != 1) {
-                if (actionMasked != 2) {
-                    if (actionMasked != 3) {
-                        if (actionMasked == 5) {
-                            this.mActivePointerId = motionEvent.getPointerId(motionEvent.getActionIndex());
-                        } else if (actionMasked == 6) {
-                            int actionIndex = motionEvent.getActionIndex();
-                            if (motionEvent.getPointerId(actionIndex) == this.mActivePointerId) {
-                                this.mActivePointerId = motionEvent.getPointerId(actionIndex == 0 ? 1 : 0);
-                            }
-                        }
+        } else if (actionMasked == 1) {
+            resetMembers();
+        } else if (actionMasked != 2) {
+            if (actionMasked != 3) {
+                if (actionMasked == 5) {
+                    this.mActivePointerId = motionEvent.getPointerId(motionEvent.getActionIndex());
+                } else if (actionMasked == 6) {
+                    int actionIndex = motionEvent.getActionIndex();
+                    if (motionEvent.getPointerId(actionIndex) == this.mActivePointerId) {
+                        this.mActivePointerId = motionEvent.getPointerId(actionIndex == 0 ? 1 : 0);
                     }
-                } else if (!this.mDiscardIntercept && (indexForValidPointer = getIndexForValidPointer(motionEvent)) != -1) {
-                    updateSwiping(motionEvent);
-                    updateDiscardIntercept(motionEvent, indexForValidPointer);
                 }
             }
-            resetMembers();
+        } else if (!this.mDiscardIntercept && (indexForValidPointer = getIndexForValidPointer(motionEvent)) != -1) {
+            updateSwiping(motionEvent);
+            updateDiscardIntercept(motionEvent, indexForValidPointer);
         }
         return isIntercepting();
     }

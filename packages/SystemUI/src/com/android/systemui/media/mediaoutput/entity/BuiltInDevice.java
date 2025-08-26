@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BuiltInDevice implements AudioDevice {
     public static final Companion Companion = new Companion(null);
@@ -35,7 +34,6 @@ public final class BuiltInDevice implements AudioDevice {
     public final int volume;
     public final int volumeMax;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -90,9 +88,9 @@ public final class BuiltInDevice implements AudioDevice {
 
     @Override // com.android.systemui.media.mediaoutput.entity.AudioDevice
     public final AudioDevice clone() {
-        BuiltInDevice copy$default = copy$default(this, null, null, 0, null, 511);
-        copy$default.deepCopy(this);
-        return copy$default;
+        BuiltInDevice builtInDeviceCopy$default = copy$default(this, null, null, 0, null, 511);
+        builtInDeviceCopy$default.deepCopy(this);
+        return builtInDeviceCopy$default;
     }
 
     public final void deepCopy(BuiltInDevice builtInDevice) {
@@ -199,11 +197,11 @@ public final class BuiltInDevice implements AudioDevice {
     }
 
     public final int hashCode() {
-        int m = ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
+        int iM = ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
         CharSequence charSequence = this.description;
-        int hashCode = (this.icon.hashCode() + ((m + (charSequence == null ? 0 : charSequence.hashCode())) * 31)) * 31;
+        int iM2 = AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, (iM + (charSequence == null ? 0 : charSequence.hashCode())) * 31, 31);
         Painter painter = this.badge;
-        return Boolean.hashCode(this.force) + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (hashCode + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31);
+        return Boolean.hashCode(this.force) + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (iM2 + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31);
     }
 
     public final String toString() {

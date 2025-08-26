@@ -34,7 +34,7 @@ public class LongSparseArray<E> implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public LongSparseArray<E> m5513clone() {
+    public LongSparseArray<E> m5520clone() {
         try {
             LongSparseArray<E> longSparseArray = (LongSparseArray) super.clone();
             try {
@@ -55,18 +55,18 @@ public class LongSparseArray<E> implements Cloneable {
 
     public E get(long j, E e) {
         E e2;
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        return (binarySearch < 0 || (e2 = (E) this.mValues[binarySearch]) == DELETED) ? e : e2;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        return (iBinarySearch < 0 || (e2 = (E) this.mValues[iBinarySearch]) == DELETED) ? e : e2;
     }
 
     public void delete(long j) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        if (binarySearch >= 0) {
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        if (iBinarySearch >= 0) {
             Object[] objArr = this.mValues;
-            Object obj = objArr[binarySearch];
+            Object obj = objArr[iBinarySearch];
             Object obj2 = DELETED;
             if (obj != obj2) {
-                objArr[binarySearch] = obj2;
+                objArr[iBinarySearch] = obj2;
                 this.mGarbage = true;
             }
         }
@@ -125,22 +125,22 @@ public class LongSparseArray<E> implements Cloneable {
         if (this.mGarbage) {
             gc();
         }
-        int binarySearch = Arrays.binarySearch(this.mKeys, 0, size(), j);
-        return binarySearch >= 0 ? binarySearch : (-binarySearch) - 1;
+        int iBinarySearch = Arrays.binarySearch(this.mKeys, 0, size(), j);
+        return iBinarySearch >= 0 ? iBinarySearch : (-iBinarySearch) - 1;
     }
 
     public int lastIndexOnOrBefore(long j) {
-        int firstIndexOnOrAfter = firstIndexOnOrAfter(j);
-        return (firstIndexOnOrAfter >= size() || keyAt(firstIndexOnOrAfter) != j) ? firstIndexOnOrAfter - 1 : firstIndexOnOrAfter;
+        int iFirstIndexOnOrAfter = firstIndexOnOrAfter(j);
+        return (iFirstIndexOnOrAfter >= size() || keyAt(iFirstIndexOnOrAfter) != j) ? iFirstIndexOnOrAfter - 1 : iFirstIndexOnOrAfter;
     }
 
     public void put(long j, E e) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = e;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, j);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = e;
             return;
         }
-        int i = ~binarySearch;
+        int i = ~iBinarySearch;
         int i2 = this.mSize;
         if (i < i2) {
             Object[] objArr = this.mValues;
@@ -269,9 +269,9 @@ public class LongSparseArray<E> implements Cloneable {
             }
             sb.append(keyAt(i));
             sb.append('=');
-            E valueAt = valueAt(i);
-            if (valueAt != this) {
-                sb.append(valueAt);
+            E eValueAt = valueAt(i);
+            if (eValueAt != this) {
+                sb.append(eValueAt);
             } else {
                 sb.append("(this Map)");
             }
@@ -296,20 +296,20 @@ public class LongSparseArray<E> implements Cloneable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.util.Parcelling
         public LongSparseArray<String> unparcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 return null;
             }
             LongSparseArray<String> longSparseArray = new LongSparseArray<>(0);
-            ((LongSparseArray) longSparseArray).mSize = readInt;
+            ((LongSparseArray) longSparseArray).mSize = i;
             ((LongSparseArray) longSparseArray).mKeys = parcel.createLongArray();
             ((LongSparseArray) longSparseArray).mValues = parcel.createStringArray();
-            Preconditions.checkArgument(((LongSparseArray) longSparseArray).mKeys.length >= readInt);
-            Preconditions.checkArgument(((LongSparseArray) longSparseArray).mValues.length >= readInt);
-            if (readInt > 0) {
+            Preconditions.checkArgument(((LongSparseArray) longSparseArray).mKeys.length >= i);
+            Preconditions.checkArgument(((LongSparseArray) longSparseArray).mValues.length >= i);
+            if (i > 0) {
                 long j = ((LongSparseArray) longSparseArray).mKeys[0];
-                for (int i = 1; i < readInt; i++) {
-                    Preconditions.checkArgument(j < ((LongSparseArray) longSparseArray).mKeys[i]);
+                for (int i2 = 1; i2 < i; i2++) {
+                    Preconditions.checkArgument(j < ((LongSparseArray) longSparseArray).mKeys[i2]);
                 }
             }
             return longSparseArray;

@@ -4,14 +4,12 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.atomicfu.TraceBase;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AtomicInt {
     public static final AtomicIntegerFieldUpdater FU;
     public final TraceBase trace;
     public volatile int value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,35 +30,35 @@ public final class AtomicInt {
     }
 
     public final boolean compareAndSet(int i, int i2) {
-        boolean compareAndSet = FU.compareAndSet(this, i, i2);
-        if (compareAndSet) {
+        boolean zCompareAndSet = FU.compareAndSet(this, i, i2);
+        if (zCompareAndSet) {
             TraceBase.None none = TraceBase.None.INSTANCE;
             TraceBase traceBase = this.trace;
             if (traceBase != none) {
                 traceBase.getClass();
             }
         }
-        return compareAndSet;
+        return zCompareAndSet;
     }
 
     public final int decrementAndGet() {
-        int decrementAndGet = FU.decrementAndGet(this);
+        int iDecrementAndGet = FU.decrementAndGet(this);
         TraceBase.None none = TraceBase.None.INSTANCE;
         TraceBase traceBase = this.trace;
         if (traceBase != none) {
             traceBase.getClass();
         }
-        return decrementAndGet;
+        return iDecrementAndGet;
     }
 
     public final int incrementAndGet() {
-        int incrementAndGet = FU.incrementAndGet(this);
+        int iIncrementAndGet = FU.incrementAndGet(this);
         TraceBase.None none = TraceBase.None.INSTANCE;
         TraceBase traceBase = this.trace;
         if (traceBase != none) {
             traceBase.getClass();
         }
-        return incrementAndGet;
+        return iIncrementAndGet;
     }
 
     public final String toString() {

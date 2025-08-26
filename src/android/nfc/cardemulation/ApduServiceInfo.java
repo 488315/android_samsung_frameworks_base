@@ -4,14 +4,22 @@ import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+import android.nfc.Flags;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Xml;
 import android.util.proto.ProtoOutputStream;
+import com.android.internal.R;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +32,7 @@ import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -54,10 +63,10 @@ public final class ApduServiceInfo implements Parcelable {
     public static final Parcelable.Creator<ApduServiceInfo> CREATOR = new Parcelable.Creator<ApduServiceInfo>() { // from class: android.nfc.cardemulation.ApduServiceInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public ApduServiceInfo createFromParcel(Parcel parcel) {
+        public ApduServiceInfo createFromParcel(Parcel parcel) throws ClassNotFoundException, IOException {
             boolean z;
-            ResolveInfo createFromParcel = ResolveInfo.CREATOR.createFromParcel(parcel);
-            String readString = parcel.readString();
+            ResolveInfo resolveInfoCreateFromParcel = ResolveInfo.CREATOR.createFromParcel(parcel);
+            String string = parcel.readString();
             boolean z2 = false;
             if (parcel.readInt() != 0) {
                 z = false;
@@ -65,8 +74,8 @@ public final class ApduServiceInfo implements Parcelable {
             } else {
                 z = false;
             }
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
             ArrayList arrayList = new ArrayList();
             if (parcel.readInt() > 0) {
                 parcel.readTypedList(arrayList, AidGroup.CREATOR);
@@ -77,17 +86,17 @@ public final class ApduServiceInfo implements Parcelable {
             }
             boolean z3 = parcel.readInt() != 0 ? true : z;
             boolean z4 = parcel.readInt() != 0 ? true : z;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            String readString4 = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            String string4 = parcel.readString();
             boolean z5 = parcel.readInt() != 0 ? true : z;
-            int readInt3 = parcel.readInt();
-            HashMap hashMap = new HashMap(readInt3);
-            parcel.readMap(hashMap, getClass().getClassLoader(), String.class, Boolean.class);
+            int i3 = parcel.readInt();
+            HashMap map = new HashMap(i3);
+            parcel.readMap(map, getClass().getClassLoader(), String.class, Boolean.class);
             parcel.readInt();
-            HashMap hashMap2 = new HashMap(readInt3);
-            parcel.readMap(hashMap2, getClass().getClassLoader(), Pattern.class, Boolean.class);
-            return new ApduServiceInfo(createFromParcel, z2, readString, arrayList, arrayList2, z3, z4, readInt, readInt2, readString4, readString2, readString3, z5, hashMap, hashMap2);
+            HashMap map2 = new HashMap(i3);
+            parcel.readMap(map2, getClass().getClassLoader(), Pattern.class, Boolean.class);
+            return new ApduServiceInfo(resolveInfoCreateFromParcel, z2, string, arrayList, arrayList2, z3, z4, i, i2, string4, string2, string3, z5, map, map2);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -145,27 +154,309 @@ public final class ApduServiceInfo implements Parcelable {
         this.mCategoryOtherServiceEnabled = z4;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x005b, code lost:
-    
-        if ("offhost-apdu-service".equals(r7) == false) goto L29;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0065, code lost:
-    
-        throw new org.xmlpull.v1.XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
-     */
-    /* JADX WARN: Not initialized variable reg: 6, insn: 0x03da: MOVE (r5 I:??[OBJECT, ARRAY]) = (r6 I:??[OBJECT, ARRAY]), block:B:183:0x03da */
-    /* JADX WARN: Not initialized variable reg: 6, insn: 0x03dc: MOVE (r5 I:??[OBJECT, ARRAY]) = (r6 I:??[OBJECT, ARRAY]), block:B:181:0x03dc */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x0405  */
+    /* JADX WARN: Not initialized variable reg: 6, insn: 0x03da: MOVE (r5 I:??[OBJECT, ARRAY]) = (r6 I:??[OBJECT, ARRAY]), block:B:156:0x03da */
+    /* JADX WARN: Not initialized variable reg: 6, insn: 0x03dc: MOVE (r5 I:??[OBJECT, ARRAY]) = (r6 I:??[OBJECT, ARRAY]), block:B:157:0x03dc */
+    /* JADX WARN: Removed duplicated region for block: B:107:0x0288  */
+    /* JADX WARN: Removed duplicated region for block: B:119:0x02d7  */
+    /* JADX WARN: Removed duplicated region for block: B:136:0x0351  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x0381 A[Catch: all -> 0x03d9, NameNotFoundException -> 0x03dc, TRY_ENTER, TryCatch #5 {NameNotFoundException -> 0x03dc, all -> 0x03d9, blocks: (B:7:0x0019, B:8:0x0020, B:13:0x002c, B:17:0x0036, B:18:0x003b, B:20:0x0041, B:23:0x004a, B:24:0x0051, B:26:0x0054, B:29:0x005e, B:30:0x0065, B:31:0x0066, B:33:0x0077, B:35:0x00ad, B:36:0x00b4, B:49:0x011e, B:50:0x014a, B:52:0x0150, B:55:0x0158, B:58:0x0162, B:61:0x016a, B:65:0x0185, B:67:0x018f, B:69:0x0195, B:71:0x01b6, B:70:0x01b0, B:73:0x01bd, B:76:0x01c5, B:78:0x01cf, B:80:0x01db, B:81:0x01e5, B:86:0x01f2, B:89:0x01fc, B:91:0x0210, B:93:0x021a, B:95:0x0234, B:94:0x0222, B:97:0x023b, B:100:0x0245, B:102:0x025f, B:104:0x0269, B:106:0x0283, B:105:0x0271, B:108:0x028a, B:111:0x0294, B:113:0x02ae, B:115:0x02b8, B:117:0x02d2, B:116:0x02c0, B:121:0x02db, B:124:0x02e6, B:127:0x0308, B:129:0x030f, B:132:0x0315, B:135:0x034c, B:133:0x032b, B:134:0x0335, B:137:0x0353, B:140:0x035e, B:143:0x0381, B:149:0x03c2, B:144:0x0399, B:147:0x039f, B:148:0x03b5, B:37:0x00b8, B:39:0x00ef, B:41:0x00f7, B:42:0x00fc, B:44:0x0106, B:45:0x010a, B:47:0x0114, B:48:0x011b, B:158:0x03de, B:159:0x03e5), top: B:174:0x000e }] */
+    /* JADX WARN: Removed duplicated region for block: B:144:0x0399 A[Catch: all -> 0x03d9, NameNotFoundException -> 0x03dc, TryCatch #5 {NameNotFoundException -> 0x03dc, all -> 0x03d9, blocks: (B:7:0x0019, B:8:0x0020, B:13:0x002c, B:17:0x0036, B:18:0x003b, B:20:0x0041, B:23:0x004a, B:24:0x0051, B:26:0x0054, B:29:0x005e, B:30:0x0065, B:31:0x0066, B:33:0x0077, B:35:0x00ad, B:36:0x00b4, B:49:0x011e, B:50:0x014a, B:52:0x0150, B:55:0x0158, B:58:0x0162, B:61:0x016a, B:65:0x0185, B:67:0x018f, B:69:0x0195, B:71:0x01b6, B:70:0x01b0, B:73:0x01bd, B:76:0x01c5, B:78:0x01cf, B:80:0x01db, B:81:0x01e5, B:86:0x01f2, B:89:0x01fc, B:91:0x0210, B:93:0x021a, B:95:0x0234, B:94:0x0222, B:97:0x023b, B:100:0x0245, B:102:0x025f, B:104:0x0269, B:106:0x0283, B:105:0x0271, B:108:0x028a, B:111:0x0294, B:113:0x02ae, B:115:0x02b8, B:117:0x02d2, B:116:0x02c0, B:121:0x02db, B:124:0x02e6, B:127:0x0308, B:129:0x030f, B:132:0x0315, B:135:0x034c, B:133:0x032b, B:134:0x0335, B:137:0x0353, B:140:0x035e, B:143:0x0381, B:149:0x03c2, B:144:0x0399, B:147:0x039f, B:148:0x03b5, B:37:0x00b8, B:39:0x00ef, B:41:0x00f7, B:42:0x00fc, B:44:0x0106, B:45:0x010a, B:47:0x0114, B:48:0x011b, B:158:0x03de, B:159:0x03e5), top: B:174:0x000e }] */
+    /* JADX WARN: Removed duplicated region for block: B:152:0x03cc  */
+    /* JADX WARN: Removed duplicated region for block: B:166:0x0405  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0077 A[Catch: all -> 0x03d9, NameNotFoundException -> 0x03dc, TryCatch #5 {NameNotFoundException -> 0x03dc, all -> 0x03d9, blocks: (B:7:0x0019, B:8:0x0020, B:13:0x002c, B:17:0x0036, B:18:0x003b, B:20:0x0041, B:23:0x004a, B:24:0x0051, B:26:0x0054, B:29:0x005e, B:30:0x0065, B:31:0x0066, B:33:0x0077, B:35:0x00ad, B:36:0x00b4, B:49:0x011e, B:50:0x014a, B:52:0x0150, B:55:0x0158, B:58:0x0162, B:61:0x016a, B:65:0x0185, B:67:0x018f, B:69:0x0195, B:71:0x01b6, B:70:0x01b0, B:73:0x01bd, B:76:0x01c5, B:78:0x01cf, B:80:0x01db, B:81:0x01e5, B:86:0x01f2, B:89:0x01fc, B:91:0x0210, B:93:0x021a, B:95:0x0234, B:94:0x0222, B:97:0x023b, B:100:0x0245, B:102:0x025f, B:104:0x0269, B:106:0x0283, B:105:0x0271, B:108:0x028a, B:111:0x0294, B:113:0x02ae, B:115:0x02b8, B:117:0x02d2, B:116:0x02c0, B:121:0x02db, B:124:0x02e6, B:127:0x0308, B:129:0x030f, B:132:0x0315, B:135:0x034c, B:133:0x032b, B:134:0x0335, B:137:0x0353, B:140:0x035e, B:143:0x0381, B:149:0x03c2, B:144:0x0399, B:147:0x039f, B:148:0x03b5, B:37:0x00b8, B:39:0x00ef, B:41:0x00f7, B:42:0x00fc, B:44:0x0106, B:45:0x010a, B:47:0x0114, B:48:0x011b, B:158:0x03de, B:159:0x03e5), top: B:174:0x000e }] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00b8 A[Catch: all -> 0x03d9, NameNotFoundException -> 0x03dc, TryCatch #5 {NameNotFoundException -> 0x03dc, all -> 0x03d9, blocks: (B:7:0x0019, B:8:0x0020, B:13:0x002c, B:17:0x0036, B:18:0x003b, B:20:0x0041, B:23:0x004a, B:24:0x0051, B:26:0x0054, B:29:0x005e, B:30:0x0065, B:31:0x0066, B:33:0x0077, B:35:0x00ad, B:36:0x00b4, B:49:0x011e, B:50:0x014a, B:52:0x0150, B:55:0x0158, B:58:0x0162, B:61:0x016a, B:65:0x0185, B:67:0x018f, B:69:0x0195, B:71:0x01b6, B:70:0x01b0, B:73:0x01bd, B:76:0x01c5, B:78:0x01cf, B:80:0x01db, B:81:0x01e5, B:86:0x01f2, B:89:0x01fc, B:91:0x0210, B:93:0x021a, B:95:0x0234, B:94:0x0222, B:97:0x023b, B:100:0x0245, B:102:0x025f, B:104:0x0269, B:106:0x0283, B:105:0x0271, B:108:0x028a, B:111:0x0294, B:113:0x02ae, B:115:0x02b8, B:117:0x02d2, B:116:0x02c0, B:121:0x02db, B:124:0x02e6, B:127:0x0308, B:129:0x030f, B:132:0x0315, B:135:0x034c, B:133:0x032b, B:134:0x0335, B:137:0x0353, B:140:0x035e, B:143:0x0381, B:149:0x03c2, B:144:0x0399, B:147:0x039f, B:148:0x03b5, B:37:0x00b8, B:39:0x00ef, B:41:0x00f7, B:42:0x00fc, B:44:0x0106, B:45:0x010a, B:47:0x0114, B:48:0x011b, B:158:0x03de, B:159:0x03e5), top: B:174:0x000e }] */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x0162 A[Catch: all -> 0x03d9, NameNotFoundException -> 0x03dc, TRY_ENTER, TryCatch #5 {NameNotFoundException -> 0x03dc, all -> 0x03d9, blocks: (B:7:0x0019, B:8:0x0020, B:13:0x002c, B:17:0x0036, B:18:0x003b, B:20:0x0041, B:23:0x004a, B:24:0x0051, B:26:0x0054, B:29:0x005e, B:30:0x0065, B:31:0x0066, B:33:0x0077, B:35:0x00ad, B:36:0x00b4, B:49:0x011e, B:50:0x014a, B:52:0x0150, B:55:0x0158, B:58:0x0162, B:61:0x016a, B:65:0x0185, B:67:0x018f, B:69:0x0195, B:71:0x01b6, B:70:0x01b0, B:73:0x01bd, B:76:0x01c5, B:78:0x01cf, B:80:0x01db, B:81:0x01e5, B:86:0x01f2, B:89:0x01fc, B:91:0x0210, B:93:0x021a, B:95:0x0234, B:94:0x0222, B:97:0x023b, B:100:0x0245, B:102:0x025f, B:104:0x0269, B:106:0x0283, B:105:0x0271, B:108:0x028a, B:111:0x0294, B:113:0x02ae, B:115:0x02b8, B:117:0x02d2, B:116:0x02c0, B:121:0x02db, B:124:0x02e6, B:127:0x0308, B:129:0x030f, B:132:0x0315, B:135:0x034c, B:133:0x032b, B:134:0x0335, B:137:0x0353, B:140:0x035e, B:143:0x0381, B:149:0x03c2, B:144:0x0399, B:147:0x039f, B:148:0x03b5, B:37:0x00b8, B:39:0x00ef, B:41:0x00f7, B:42:0x00fc, B:44:0x0106, B:45:0x010a, B:47:0x0114, B:48:0x011b, B:158:0x03de, B:159:0x03e5), top: B:174:0x000e }] */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x01bb  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x0239  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ApduServiceInfo(android.content.pm.PackageManager r18, android.content.pm.ResolveInfo r19, boolean r20) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 1033
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.nfc.cardemulation.ApduServiceInfo.<init>(android.content.pm.PackageManager, android.content.pm.ResolveInfo, boolean):void");
+    public ApduServiceInfo(PackageManager packageManager, ResolveInfo resolveInfo, boolean z) throws Throwable {
+        XmlResourceParser xmlResourceParser;
+        XmlResourceParser xmlResourceParser2;
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
+        int eventType;
+        int i;
+        Resources resourcesForApplication;
+        AttributeSet attributeSetAsAttributeSet;
+        int i2;
+        int next;
+        String upperCase;
+        ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+        XmlResourceParser xmlResourceParser3 = null;
+        try {
+            if (z) {
+                try {
+                    try {
+                        xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, "android.nfc.cardemulation.host_apdu_service");
+                        if (xmlResourceParserLoadXmlMetaData == null) {
+                            throw new XmlPullParserException("No android.nfc.cardemulation.host_apdu_service meta-data");
+                        }
+                        eventType = xmlResourceParserLoadXmlMetaData.getEventType();
+                        while (true) {
+                            i = 1;
+                            if (eventType == 2 || eventType == 1) {
+                                break;
+                            } else {
+                                eventType = xmlResourceParserLoadXmlMetaData.next();
+                            }
+                        }
+                        String name = xmlResourceParserLoadXmlMetaData.getName();
+                        if (z && !"host-apdu-service".equals(name)) {
+                            throw new XmlPullParserException("Meta-data does not start with <host-apdu-service> tag");
+                        }
+                        if (!z && !"offhost-apdu-service".equals(name)) {
+                            throw new XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
+                        }
+                        resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
+                        attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                        i2 = 3;
+                        if (!z) {
+                            TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.HostApduService);
+                            this.mService = resolveInfo;
+                            this.mDescription = typedArrayObtainAttributes.getString(0);
+                            this.mRequiresDeviceUnlock = typedArrayObtainAttributes.getBoolean(2, false);
+                            this.mRequiresDeviceScreenOn = typedArrayObtainAttributes.getBoolean(4, true);
+                            this.mBannerResourceId = typedArrayObtainAttributes.getResourceId(3, -1);
+                            this.mSettingsActivityName = typedArrayObtainAttributes.getString(1);
+                            this.mOffHostName = null;
+                            this.mStaticOffHostName = null;
+                            this.mShouldDefaultToObserveMode = typedArrayObtainAttributes.getBoolean(5, false);
+                            if (Flags.nfcAssociatedRoleServices()) {
+                                this.mWantsRoleHolderPriority = typedArrayObtainAttributes.getBoolean(6, false);
+                            }
+                            typedArrayObtainAttributes.recycle();
+                        } else {
+                            TypedArray typedArrayObtainAttributes2 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.OffHostApduService);
+                            this.mService = resolveInfo;
+                            this.mDescription = typedArrayObtainAttributes2.getString(0);
+                            this.mRequiresDeviceUnlock = typedArrayObtainAttributes2.getBoolean(2, false);
+                            this.mRequiresDeviceScreenOn = typedArrayObtainAttributes2.getBoolean(5, false);
+                            this.mBannerResourceId = typedArrayObtainAttributes2.getResourceId(3, -1);
+                            this.mSettingsActivityName = typedArrayObtainAttributes2.getString(1);
+                            this.mOffHostName = typedArrayObtainAttributes2.getString(4);
+                            this.mShouldDefaultToObserveMode = typedArrayObtainAttributes2.getBoolean(6, false);
+                            String str = this.mOffHostName;
+                            if (str != null) {
+                                if (str.equals("eSE")) {
+                                    this.mOffHostName = "eSE1";
+                                } else if (this.mOffHostName.equals("SIM")) {
+                                    this.mOffHostName = "SIM1";
+                                }
+                            }
+                            this.mStaticOffHostName = this.mOffHostName;
+                            if (Flags.nfcAssociatedRoleServices()) {
+                                this.mWantsRoleHolderPriority = typedArrayObtainAttributes2.getBoolean(7, false);
+                            }
+                            typedArrayObtainAttributes2.recycle();
+                        }
+                        this.mStaticAidGroups = new HashMap<>();
+                        this.mDynamicAidGroups = new HashMap<>();
+                        this.mAutoTransact = new HashMap();
+                        this.mAutoTransactPatterns = new TreeMap(Comparator.comparing(new Function() { // from class: android.nfc.cardemulation.ApduServiceInfo$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return ((Pattern) obj).toString();
+                            }
+                        }));
+                        this.mOnHost = z;
+                        int depth = xmlResourceParserLoadXmlMetaData.getDepth();
+                        AidGroup aidGroup = null;
+                        while (true) {
+                            next = xmlResourceParserLoadXmlMetaData.next();
+                            if ((next != i2 && xmlResourceParserLoadXmlMetaData.getDepth() <= depth) || next == i) {
+                                break;
+                            }
+                            String name2 = xmlResourceParserLoadXmlMetaData.getName();
+                            if (next == 2 && "aid-group".equals(name2) && aidGroup == null) {
+                                TypedArray typedArrayObtainAttributes3 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.AidGroup);
+                                String string = typedArrayObtainAttributes3.getString(i);
+                                String string2 = typedArrayObtainAttributes3.getString(0);
+                                string = "payment".equals(string) ? string : "other";
+                                AidGroup aidGroup2 = this.mStaticAidGroups.get(string);
+                                if (aidGroup2 != null) {
+                                    if (!"other".equals(string)) {
+                                        Log.e(TAG, "Not allowing multiple aid-groups in the " + string + " category");
+                                        aidGroup2 = null;
+                                    }
+                                } else {
+                                    aidGroup2 = new AidGroup(string, string2);
+                                }
+                                typedArrayObtainAttributes3.recycle();
+                                aidGroup = aidGroup2;
+                            } else if (next == i2 || !"aid-group".equals(name2) || aidGroup == null) {
+                                if (next != 2 && "aid-filter".equals(name2) && aidGroup != null) {
+                                    TypedArray typedArrayObtainAttributes4 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.AidFilter);
+                                    String upperCase2 = typedArrayObtainAttributes4.getString(0).toUpperCase();
+                                    if (isValidAid(upperCase2) && !aidGroup.getAids().contains(upperCase2)) {
+                                        aidGroup.getAids().add(upperCase2);
+                                    } else {
+                                        Log.e(TAG, "Ignoring invalid or duplicate aid: " + upperCase2);
+                                    }
+                                    typedArrayObtainAttributes4.recycle();
+                                } else if (next != 2 && "aid-prefix-filter".equals(name2) && aidGroup != null) {
+                                    TypedArray typedArrayObtainAttributes5 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.AidFilter);
+                                    String strConcat = typedArrayObtainAttributes5.getString(0).toUpperCase().concat("*");
+                                    if (isValidAid(strConcat) && !aidGroup.getAids().contains(strConcat)) {
+                                        aidGroup.getAids().add(strConcat);
+                                    } else {
+                                        Log.e(TAG, "Ignoring invalid or duplicate aid: " + strConcat);
+                                    }
+                                    typedArrayObtainAttributes5.recycle();
+                                } else if (next != 2 && name2.equals("aid-suffix-filter") && aidGroup != null) {
+                                    TypedArray typedArrayObtainAttributes6 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.AidFilter);
+                                    String strConcat2 = typedArrayObtainAttributes6.getString(0).toUpperCase().concat("#");
+                                    if (isValidAid(strConcat2) && !aidGroup.getAids().contains(strConcat2)) {
+                                        aidGroup.getAids().add(strConcat2);
+                                    } else {
+                                        Log.e(TAG, "Ignoring invalid or duplicate aid: " + strConcat2);
+                                    }
+                                    typedArrayObtainAttributes6.recycle();
+                                } else if (next != 2 && "polling-loop-filter".equals(name2) && aidGroup == null) {
+                                    TypedArray typedArrayObtainAttributes7 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.PollingLoopFilter);
+                                    String upperCase3 = typedArrayObtainAttributes7.getString(0).toUpperCase(Locale.ROOT);
+                                    boolean z2 = typedArrayObtainAttributes7.getBoolean(i, false);
+                                    if (!PLF_PATTERN.matcher(upperCase3).matches() || upperCase3.length() % 2 != 0) {
+                                        Log.e(TAG, "Ignoring polling-loop-filter " + upperCase3 + " it is not a valid filter");
+                                    } else if (!this.mOnHost && !z2) {
+                                        Log.e(TAG, "Ignoring polling-loop-filter " + upperCase3 + " for offhost service that isn't autoTransact");
+                                    } else {
+                                        this.mAutoTransact.put(upperCase3, Boolean.valueOf(z2));
+                                    }
+                                    typedArrayObtainAttributes7.recycle();
+                                } else if (next == 2 && "polling-loop-pattern-filter".equals(name2) && aidGroup == null) {
+                                    TypedArray typedArrayObtainAttributes8 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.PollingLoopPatternFilter);
+                                    upperCase = typedArrayObtainAttributes8.getString(0).toUpperCase(Locale.ROOT);
+                                    boolean z3 = typedArrayObtainAttributes8.getBoolean(1, false);
+                                    if (PLPF_PATTERN.matcher(upperCase).matches()) {
+                                        Log.e(TAG, "Ignoring polling-loop-pattern-filter " + upperCase + " it is not a valid pattern filter");
+                                    } else if (!this.mOnHost && !z3) {
+                                        Log.e(TAG, "Ignoring polling-loop-pattern-filter " + upperCase + " for offhost service that isn't autoTransact");
+                                    } else {
+                                        this.mAutoTransactPatterns.put(Pattern.compile(upperCase), Boolean.valueOf(z3));
+                                    }
+                                    typedArrayObtainAttributes8.recycle();
+                                }
+                                i = 1;
+                                i2 = 3;
+                            } else {
+                                if (aidGroup.getAids().size() > 0) {
+                                    if (!this.mStaticAidGroups.containsKey(aidGroup.getCategory())) {
+                                        this.mStaticAidGroups.put(aidGroup.getCategory(), aidGroup);
+                                    }
+                                } else {
+                                    Log.e(TAG, "Not adding <aid-group> with empty or invalid AIDs");
+                                }
+                                aidGroup = null;
+                            }
+                        }
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        this.mUid = serviceInfo.applicationInfo.uid;
+                        this.mCategoryOtherServiceEnabled = true;
+                    } catch (PackageManager.NameNotFoundException unused) {
+                        throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);
+                    }
+                } catch (Throwable th) {
+                    th = th;
+                    if (xmlResourceParser3 != null) {
+                        xmlResourceParser3.close();
+                    }
+                    throw th;
+                }
+            }
+            try {
+                xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, "android.nfc.cardemulation.off_host_apdu_service");
+                if (xmlResourceParserLoadXmlMetaData == null) {
+                    throw new XmlPullParserException("No android.nfc.cardemulation.off_host_apdu_service meta-data");
+                }
+                eventType = xmlResourceParserLoadXmlMetaData.getEventType();
+                while (true) {
+                    i = 1;
+                    if (eventType == 2) {
+                        break;
+                    }
+                    break;
+                    break;
+                    eventType = xmlResourceParserLoadXmlMetaData.next();
+                }
+                String name3 = xmlResourceParserLoadXmlMetaData.getName();
+                if (z) {
+                    throw new XmlPullParserException("Meta-data does not start with <host-apdu-service> tag");
+                }
+                if (!z) {
+                    throw new XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
+                }
+                resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
+                attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                i2 = 3;
+                if (!z) {
+                }
+                this.mStaticAidGroups = new HashMap<>();
+                this.mDynamicAidGroups = new HashMap<>();
+                this.mAutoTransact = new HashMap();
+                this.mAutoTransactPatterns = new TreeMap(Comparator.comparing(new Function() { // from class: android.nfc.cardemulation.ApduServiceInfo$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        return ((Pattern) obj).toString();
+                    }
+                }));
+                this.mOnHost = z;
+                int depth2 = xmlResourceParserLoadXmlMetaData.getDepth();
+                AidGroup aidGroup3 = null;
+                while (true) {
+                    next = xmlResourceParserLoadXmlMetaData.next();
+                    if (next != i2) {
+                        String name22 = xmlResourceParserLoadXmlMetaData.getName();
+                        if (next == 2) {
+                            if (next == i2) {
+                            }
+                            if (next != 2) {
+                                if (next != 2) {
+                                    if (next != 2) {
+                                        if (next != 2) {
+                                            if (next == 2) {
+                                                TypedArray typedArrayObtainAttributes82 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.PollingLoopPatternFilter);
+                                                upperCase = typedArrayObtainAttributes82.getString(0).toUpperCase(Locale.ROOT);
+                                                boolean z32 = typedArrayObtainAttributes82.getBoolean(1, false);
+                                                if (PLPF_PATTERN.matcher(upperCase).matches()) {
+                                                }
+                                                typedArrayObtainAttributes82.recycle();
+                                            }
+                                            i = 1;
+                                            i2 = 3;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        String name222 = xmlResourceParserLoadXmlMetaData.getName();
+                        if (next == 2) {
+                        }
+                    }
+                }
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                }
+                this.mUid = serviceInfo.applicationInfo.uid;
+                this.mCategoryOtherServiceEnabled = true;
+            } catch (PackageManager.NameNotFoundException unused2) {
+                xmlResourceParser3 = null;
+                throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);
+            } catch (Throwable th2) {
+                th = th2;
+                xmlResourceParser3 = null;
+                if (xmlResourceParser3 != null) {
+                }
+                throw th;
+            }
+        } catch (PackageManager.NameNotFoundException unused3) {
+            xmlResourceParser3 = xmlResourceParser2;
+        } catch (Throwable th3) {
+            th = th3;
+            xmlResourceParser3 = xmlResourceParser;
+        }
     }
 
     public ComponentName getComponent() {
@@ -491,29 +782,29 @@ public final class ApduServiceInfo implements Parcelable {
             protoOutputStream.write(1138166333445L, this.mStaticOffHostName);
         }
         for (AidGroup aidGroup : this.mStaticAidGroups.values()) {
-            long start = protoOutputStream.start(2246267895814L);
+            long jStart = protoOutputStream.start(2246267895814L);
             aidGroup.dump(protoOutputStream);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
         for (AidGroup aidGroup2 : this.mDynamicAidGroups.values()) {
-            long start2 = protoOutputStream.start(2246267895814L);
+            long jStart2 = protoOutputStream.start(2246267895814L);
             aidGroup2.dump(protoOutputStream);
-            protoOutputStream.end(start2);
+            protoOutputStream.end(jStart2);
         }
         protoOutputStream.write(1138166333448L, this.mSettingsActivityName);
         protoOutputStream.write(1133871366153L, this.mShouldDefaultToObserveMode);
-        long start3 = protoOutputStream.start(2246267895818L);
+        long jStart3 = protoOutputStream.start(2246267895818L);
         for (Map.Entry<String, Boolean> entry : this.mAutoTransact.entrySet()) {
             protoOutputStream.write(1138166333441L, entry.getKey());
             protoOutputStream.write(1133871366146L, entry.getValue().booleanValue());
         }
-        protoOutputStream.end(start3);
-        long start4 = protoOutputStream.start(2246267895819L);
+        protoOutputStream.end(jStart3);
+        long jStart4 = protoOutputStream.start(2246267895819L);
         for (Map.Entry<Pattern, Boolean> entry2 : this.mAutoTransactPatterns.entrySet()) {
             protoOutputStream.write(1138166333441L, entry2.getKey().pattern());
             protoOutputStream.write(1133871366146L, entry2.getValue().booleanValue());
         }
-        protoOutputStream.end(start4);
+        protoOutputStream.end(jStart4);
     }
 
     private static boolean isValidAid(String str) {

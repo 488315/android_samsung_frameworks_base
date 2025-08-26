@@ -348,9 +348,9 @@ public interface IMediaQualityManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMediaQualityManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaQualityManager)) {
-                return (IMediaQualityManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMediaQualityManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaQualityManager)) {
+                return (IMediaQualityManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -367,307 +367,307 @@ public interface IMediaQualityManager extends IInterface {
             switch (i) {
                 case 1:
                     PictureProfile pictureProfile = (PictureProfile) parcel.readTypedObject(PictureProfile.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    createPictureProfile(pictureProfile, readInt);
+                    createPictureProfile(pictureProfile, i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     PictureProfile pictureProfile2 = (PictureProfile) parcel.readTypedObject(PictureProfile.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updatePictureProfile(readString, pictureProfile2, readInt2);
+                    updatePictureProfile(string, pictureProfile2, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removePictureProfile(readString2, readInt3);
+                    removePictureProfile(string2, i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean defaultPictureProfile = setDefaultPictureProfile(readString3, readInt4);
+                    boolean defaultPictureProfile = setDefaultPictureProfile(string3, i6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(defaultPictureProfile);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PictureProfile pictureProfile3 = getPictureProfile(readInt5, readString4, readBoolean, readInt6);
+                    PictureProfile pictureProfile3 = getPictureProfile(i7, string4, z, i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(pictureProfile3, 1);
                     return true;
                 case 6:
-                    String readString5 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt7 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PictureProfile> pictureProfilesByPackage = getPictureProfilesByPackage(readString5, readBoolean2, readInt7);
+                    List<PictureProfile> pictureProfilesByPackage = getPictureProfilesByPackage(string5, z2, i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(pictureProfilesByPackage, 1);
                     return true;
                 case 7:
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt8 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PictureProfile> availablePictureProfiles = getAvailablePictureProfiles(readBoolean3, readInt8);
+                    List<PictureProfile> availablePictureProfiles = getAvailablePictureProfiles(z3, i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(availablePictureProfiles, 1);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> pictureProfilePackageNames = getPictureProfilePackageNames(readInt9);
+                    List<String> pictureProfilePackageNames = getPictureProfilePackageNames(i11);
                     parcel2.writeNoException();
                     parcel2.writeStringList(pictureProfilePackageNames);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> pictureProfileAllowList = getPictureProfileAllowList(readInt10);
+                    List<String> pictureProfileAllowList = getPictureProfileAllowList(i12);
                     parcel2.writeNoException();
                     parcel2.writeStringList(pictureProfileAllowList);
                     return true;
                 case 10:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt11 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPictureProfileAllowList(createStringArrayList, readInt11);
+                    setPictureProfileAllowList(arrayListCreateStringArrayList, i13);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt12 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PictureProfileHandle> pictureProfileHandle = getPictureProfileHandle(createStringArray, readInt12);
+                    List<PictureProfileHandle> pictureProfileHandle = getPictureProfileHandle(strArrCreateStringArray, i14);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(pictureProfileHandle, 1);
                     return true;
                 case 12:
-                    String readString6 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long pictureProfileHandleValue = getPictureProfileHandleValue(readString6, readInt13);
+                    long pictureProfileHandleValue = getPictureProfileHandleValue(string6, i15);
                     parcel2.writeNoException();
                     parcel2.writeLong(pictureProfileHandleValue);
                     return true;
                 case 13:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long defaultPictureProfileHandleValue = getDefaultPictureProfileHandleValue(readInt14);
+                    long defaultPictureProfileHandleValue = getDefaultPictureProfileHandleValue(i16);
                     parcel2.writeNoException();
                     parcel2.writeLong(defaultPictureProfileHandleValue);
                     return true;
                 case 14:
-                    long readLong = parcel.readLong();
-                    int readInt15 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyPictureProfileHandleSelection(readLong, readInt15);
+                    notifyPictureProfileHandleSelection(j, i17);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    String readString7 = parcel.readString();
-                    int readInt16 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long pictureProfileForTvInput = getPictureProfileForTvInput(readString7, readInt16);
+                    long pictureProfileForTvInput = getPictureProfileForTvInput(string7, i18);
                     parcel2.writeNoException();
                     parcel2.writeLong(pictureProfileForTvInput);
                     return true;
                 case 16:
                     SoundProfile soundProfile = (SoundProfile) parcel.readTypedObject(SoundProfile.CREATOR);
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    createSoundProfile(soundProfile, readInt17);
+                    createSoundProfile(soundProfile, i19);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     SoundProfile soundProfile2 = (SoundProfile) parcel.readTypedObject(SoundProfile.CREATOR);
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateSoundProfile(readString8, soundProfile2, readInt18);
+                    updateSoundProfile(string8, soundProfile2, i20);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    String readString9 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeSoundProfile(readString9, readInt19);
+                    removeSoundProfile(string9, i21);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    String readString10 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean defaultSoundProfile = setDefaultSoundProfile(readString10, readInt20);
+                    boolean defaultSoundProfile = setDefaultSoundProfile(string10, i22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(defaultSoundProfile);
                     return true;
                 case 20:
-                    int readInt21 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int readInt22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    boolean z4 = parcel.readBoolean();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SoundProfile soundProfile3 = getSoundProfile(readInt21, readString11, readBoolean4, readInt22);
+                    SoundProfile soundProfile3 = getSoundProfile(i23, string11, z4, i24);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(soundProfile3, 1);
                     return true;
                 case 21:
-                    String readString12 = parcel.readString();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int readInt23 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    boolean z5 = parcel.readBoolean();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<SoundProfile> soundProfilesByPackage = getSoundProfilesByPackage(readString12, readBoolean5, readInt23);
+                    List<SoundProfile> soundProfilesByPackage = getSoundProfilesByPackage(string12, z5, i25);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(soundProfilesByPackage, 1);
                     return true;
                 case 22:
-                    boolean readBoolean6 = parcel.readBoolean();
-                    int readInt24 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<SoundProfile> availableSoundProfiles = getAvailableSoundProfiles(readBoolean6, readInt24);
+                    List<SoundProfile> availableSoundProfiles = getAvailableSoundProfiles(z6, i26);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(availableSoundProfiles, 1);
                     return true;
                 case 23:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> soundProfilePackageNames = getSoundProfilePackageNames(readInt25);
+                    List<String> soundProfilePackageNames = getSoundProfilePackageNames(i27);
                     parcel2.writeNoException();
                     parcel2.writeStringList(soundProfilePackageNames);
                     return true;
                 case 24:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> soundProfileAllowList = getSoundProfileAllowList(readInt26);
+                    List<String> soundProfileAllowList = getSoundProfileAllowList(i28);
                     parcel2.writeNoException();
                     parcel2.writeStringList(soundProfileAllowList);
                     return true;
                 case 25:
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    int readInt27 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSoundProfileAllowList(createStringArrayList2, readInt27);
+                    setSoundProfileAllowList(arrayListCreateStringArrayList2, i29);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    String[] createStringArray2 = parcel.createStringArray();
-                    int readInt28 = parcel.readInt();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<SoundProfileHandle> soundProfileHandle = getSoundProfileHandle(createStringArray2, readInt28);
+                    List<SoundProfileHandle> soundProfileHandle = getSoundProfileHandle(strArrCreateStringArray2, i30);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(soundProfileHandle, 1);
                     return true;
                 case 27:
-                    IPictureProfileCallback asInterface = IPictureProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IPictureProfileCallback iPictureProfileCallbackAsInterface = IPictureProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerPictureProfileCallback(asInterface);
+                    registerPictureProfileCallback(iPictureProfileCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    ISoundProfileCallback asInterface2 = ISoundProfileCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISoundProfileCallback iSoundProfileCallbackAsInterface = ISoundProfileCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSoundProfileCallback(asInterface2);
+                    registerSoundProfileCallback(iSoundProfileCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    IAmbientBacklightCallback asInterface3 = IAmbientBacklightCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAmbientBacklightCallback iAmbientBacklightCallbackAsInterface = IAmbientBacklightCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAmbientBacklightCallback(asInterface3);
+                    registerAmbientBacklightCallback(iAmbientBacklightCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    IActiveProcessingPictureListener asInterface4 = IActiveProcessingPictureListener.Stub.asInterface(parcel.readStrongBinder());
+                    IActiveProcessingPictureListener iActiveProcessingPictureListenerAsInterface = IActiveProcessingPictureListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerActiveProcessingPictureListener(asInterface4);
+                    registerActiveProcessingPictureListener(iActiveProcessingPictureListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
-                    int readInt29 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<ParameterCapability> parameterCapabilities = getParameterCapabilities(createStringArrayList3, readInt29);
+                    List<ParameterCapability> parameterCapabilities = getParameterCapabilities(arrayListCreateStringArrayList3, i31);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(parameterCapabilities, 1);
                     return true;
                 case 32:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSupported = isSupported(readInt30);
+                    boolean zIsSupported = isSupported(i32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupported);
+                    parcel2.writeBoolean(zIsSupported);
                     return true;
                 case 33:
-                    boolean readBoolean7 = parcel.readBoolean();
-                    int readInt31 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAutoPictureQualityEnabled(readBoolean7, readInt31);
+                    setAutoPictureQualityEnabled(z7, i33);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAutoPictureQualityEnabled = isAutoPictureQualityEnabled(readInt32);
+                    boolean zIsAutoPictureQualityEnabled = isAutoPictureQualityEnabled(i34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAutoPictureQualityEnabled);
+                    parcel2.writeBoolean(zIsAutoPictureQualityEnabled);
                     return true;
                 case 35:
-                    boolean readBoolean8 = parcel.readBoolean();
-                    int readInt33 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSuperResolutionEnabled(readBoolean8, readInt33);
+                    setSuperResolutionEnabled(z8, i35);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSuperResolutionEnabled = isSuperResolutionEnabled(readInt34);
+                    boolean zIsSuperResolutionEnabled = isSuperResolutionEnabled(i36);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSuperResolutionEnabled);
+                    parcel2.writeBoolean(zIsSuperResolutionEnabled);
                     return true;
                 case 37:
-                    boolean readBoolean9 = parcel.readBoolean();
-                    int readInt35 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAutoSoundQualityEnabled(readBoolean9, readInt35);
+                    setAutoSoundQualityEnabled(z9, i37);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAutoSoundQualityEnabled = isAutoSoundQualityEnabled(readInt36);
+                    boolean zIsAutoSoundQualityEnabled = isAutoSoundQualityEnabled(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAutoSoundQualityEnabled);
+                    parcel2.writeBoolean(zIsAutoSoundQualityEnabled);
                     return true;
                 case 39:
                     AmbientBacklightSettings ambientBacklightSettings = (AmbientBacklightSettings) parcel.readTypedObject(AmbientBacklightSettings.CREATOR);
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAmbientBacklightSettings(ambientBacklightSettings, readInt37);
+                    setAmbientBacklightSettings(ambientBacklightSettings, i39);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    boolean readBoolean10 = parcel.readBoolean();
-                    int readInt38 = parcel.readInt();
+                    boolean z10 = parcel.readBoolean();
+                    int i40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAmbientBacklightEnabled(readBoolean10, readInt38);
+                    setAmbientBacklightEnabled(z10, i40);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAmbientBacklightEnabled = isAmbientBacklightEnabled(readInt39);
+                    boolean zIsAmbientBacklightEnabled = isAmbientBacklightEnabled(i41);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAmbientBacklightEnabled);
+                    parcel2.writeBoolean(zIsAmbientBacklightEnabled);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -692,674 +692,674 @@ public interface IMediaQualityManager extends IInterface {
 
             @Override // android.media.quality.IMediaQualityManager
             public void createPictureProfile(PictureProfile pictureProfile, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeTypedObject(pictureProfile, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pictureProfile, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void updatePictureProfile(String str, PictureProfile pictureProfile, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pictureProfile, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pictureProfile, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void removePictureProfile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean setDefaultPictureProfile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public PictureProfile getPictureProfile(int i, String str, boolean z, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PictureProfile) obtain2.readTypedObject(PictureProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PictureProfile) parcelObtain2.readTypedObject(PictureProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<PictureProfile> getPictureProfilesByPackage(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PictureProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PictureProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<PictureProfile> getAvailablePictureProfiles(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PictureProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PictureProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<String> getPictureProfilePackageNames(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<String> getPictureProfileAllowList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setPictureProfileAllowList(List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<PictureProfileHandle> getPictureProfileHandle(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PictureProfileHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PictureProfileHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public long getPictureProfileHandleValue(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public long getDefaultPictureProfileHandleValue(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void notifyPictureProfileHandleSelection(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public long getPictureProfileForTvInput(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void createSoundProfile(SoundProfile soundProfile, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeTypedObject(soundProfile, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(soundProfile, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void updateSoundProfile(String str, SoundProfile soundProfile, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(soundProfile, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(soundProfile, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void removeSoundProfile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean setDefaultSoundProfile(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public SoundProfile getSoundProfile(int i, String str, boolean z, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SoundProfile) obtain2.readTypedObject(SoundProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SoundProfile) parcelObtain2.readTypedObject(SoundProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<SoundProfile> getSoundProfilesByPackage(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SoundProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SoundProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<SoundProfile> getAvailableSoundProfiles(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SoundProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SoundProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<String> getSoundProfilePackageNames(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<String> getSoundProfileAllowList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setSoundProfileAllowList(List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<SoundProfileHandle> getSoundProfileHandle(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SoundProfileHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SoundProfileHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void registerPictureProfileCallback(IPictureProfileCallback iPictureProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPictureProfileCallback);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPictureProfileCallback);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void registerSoundProfileCallback(ISoundProfileCallback iSoundProfileCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSoundProfileCallback);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSoundProfileCallback);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void registerAmbientBacklightCallback(IAmbientBacklightCallback iAmbientBacklightCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAmbientBacklightCallback);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAmbientBacklightCallback);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void registerActiveProcessingPictureListener(IActiveProcessingPictureListener iActiveProcessingPictureListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iActiveProcessingPictureListener);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iActiveProcessingPictureListener);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public List<ParameterCapability> getParameterCapabilities(List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ParameterCapability.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ParameterCapability.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean isSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setAutoPictureQualityEnabled(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean isAutoPictureQualityEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setSuperResolutionEnabled(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean isSuperResolutionEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setAutoSoundQualityEnabled(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean isAutoSoundQualityEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setAmbientBacklightSettings(AmbientBacklightSettings ambientBacklightSettings, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientBacklightSettings, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientBacklightSettings, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public void setAmbientBacklightEnabled(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.quality.IMediaQualityManager
             public boolean isAmbientBacklightEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMediaQualityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

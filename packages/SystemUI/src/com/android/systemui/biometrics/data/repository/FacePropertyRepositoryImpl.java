@@ -1,6 +1,7 @@
 package com.android.systemui.biometrics.data.repository;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.hardware.camera2.CameraManager;
 import android.hardware.face.FaceManager;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -26,7 +28,6 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransfo
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FacePropertyRepositoryImpl implements FacePropertyRepository {
     public final Context applicationContext;
@@ -40,7 +41,7 @@ public final class FacePropertyRepositoryImpl implements FacePropertyRepository 
     public final ReadonlyStateFlow sensorInfo;
     public final ReadonlyStateFlow sensorLocation;
 
-    public FacePropertyRepositoryImpl(Context context, Executor executor, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, FaceManager faceManager, CameraManager cameraManager, DisplayStateRepository displayStateRepository, ConfigurationRepository configurationRepository) {
+    public FacePropertyRepositoryImpl(Context context, Executor executor, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, FaceManager faceManager, CameraManager cameraManager, DisplayStateRepository displayStateRepository, ConfigurationRepository configurationRepository) throws Resources.NotFoundException {
         this.applicationContext = context;
         this.backgroundDispatcher = coroutineDispatcher;
         this.faceManager = faceManager;
@@ -51,20 +52,20 @@ public final class FacePropertyRepositoryImpl implements FacePropertyRepository 
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowConflatedKt.conflatedCallbackFlow(facePropertyRepositoryImpl$sensorInfo$1), new FacePropertyRepositoryImpl$sensorInfo$2(null));
         SharingStarted.Companion companion = SharingStarted.Companion;
         companion.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.Eagerly, null);
-        this.sensorInfo = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, coroutineScope, SharingStarted.Companion.Eagerly, null);
+        this.sensorInfo = readonlyStateFlowStateIn;
         ArrayList arrayList = new ArrayList();
-        CameraInfo loadCameraInfo = loadCameraInfo(R.string.config_protectedCameraId, R.string.config_protectedPhysicalCameraId, R.array.config_face_auth_props);
-        if (loadCameraInfo != null) {
-            arrayList.add(loadCameraInfo);
+        CameraInfo cameraInfoLoadCameraInfo = loadCameraInfo(R.string.config_protectedCameraId, R.string.config_protectedPhysicalCameraId, R.array.config_face_auth_props);
+        if (cameraInfoLoadCameraInfo != null) {
+            arrayList.add(cameraInfoLoadCameraInfo);
         }
-        CameraInfo loadCameraInfo2 = loadCameraInfo(R.string.config_protectedInnerCameraId, R.string.config_protectedInnerPhysicalCameraId, R.array.config_inner_face_auth_props);
-        if (loadCameraInfo2 != null) {
-            arrayList.add(loadCameraInfo2);
+        CameraInfo cameraInfoLoadCameraInfo2 = loadCameraInfo(R.string.config_protectedInnerCameraId, R.string.config_protectedInnerPhysicalCameraId, R.array.config_inner_face_auth_props);
+        if (cameraInfoLoadCameraInfo2 != null) {
+            arrayList.add(cameraInfoLoadCameraInfo2);
         }
         this.cameraInfoList = arrayList;
-        final ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowConflatedKt.conflatedCallbackFlow(new FacePropertyRepositoryImpl$cameraInfo$1(this, executor, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), !arrayList.isEmpty() ? (CameraInfo) arrayList.get(0) : null);
-        this.cameraInfo = stateIn2;
+        final ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowConflatedKt.conflatedCallbackFlow(new FacePropertyRepositoryImpl$cameraInfo$1(this, executor, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), !arrayList.isEmpty() ? (CameraInfo) arrayList.get(0) : null);
+        this.cameraInfo = readonlyStateFlowStateIn2;
         int integer = context.getResources().getInteger(R.integer.config_face_auth_supported_posture);
         if (integer == 0) {
             DevicePosture.Companion companion2 = DevicePosture.Companion;
@@ -74,7 +75,6 @@ public final class FacePropertyRepositoryImpl implements FacePropertyRepository 
         }
         this.defaultSensorLocation = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -101,76 +101,53 @@ public final class FacePropertyRepositoryImpl implements FacePropertyRepository 
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.biometrics.data.repository.CameraInfo r5 = (com.android.systemui.biometrics.data.repository.CameraInfo) r5
-                        if (r5 == 0) goto L39
-                        android.graphics.Point r5 = r5.cameraLocation
-                        goto L3a
-                    L39:
-                        r5 = 0
-                    L3a:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        CameraInfo cameraInfo = (CameraInfo) obj;
+                        Point point = cameraInfo != null ? cameraInfo.cameraLocation : null;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(point, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.sensorLocation = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1(null, this, displayStateRepository, configurationRepository)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.sensorLocation = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new FacePropertyRepositoryImpl$special$$inlined$flatMapLatest$1(null, this, displayStateRepository, configurationRepository)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
     }
 
-    public final CameraInfo loadCameraInfo(int i, int i2, int i3) {
+    public final CameraInfo loadCameraInfo(int i, int i2, int i3) throws Resources.NotFoundException {
         String string = this.applicationContext.getString(i);
         if (string.length() == 0) {
             return null;

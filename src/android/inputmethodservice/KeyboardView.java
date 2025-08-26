@@ -175,55 +175,55 @@ public class KeyboardView extends View implements View.OnClickListener {
         this.mDistances = new int[MAX_NEARBY_KEYS];
         this.mPreviewLabel = new StringBuilder(1);
         this.mDirtyRect = new Rect();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, android.R.styleable.KeyboardView, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, android.R.styleable.KeyboardView, i, i2);
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        int indexCount = obtainStyledAttributes.getIndexCount();
-        int i3 = 0;
-        for (int i4 = 0; i4 < indexCount; i4++) {
-            int index = obtainStyledAttributes.getIndex(i4);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
+        int resourceId = 0;
+        for (int i3 = 0; i3 < indexCount; i3++) {
+            int index = typedArrayObtainStyledAttributes.getIndex(i3);
             switch (index) {
                 case 0:
-                    this.mShadowColor = obtainStyledAttributes.getColor(index, 0);
+                    this.mShadowColor = typedArrayObtainStyledAttributes.getColor(index, 0);
                     break;
                 case 1:
-                    this.mShadowRadius = obtainStyledAttributes.getFloat(index, 0.0f);
+                    this.mShadowRadius = typedArrayObtainStyledAttributes.getFloat(index, 0.0f);
                     break;
                 case 2:
-                    this.mKeyBackground = obtainStyledAttributes.getDrawable(index);
+                    this.mKeyBackground = typedArrayObtainStyledAttributes.getDrawable(index);
                     break;
                 case 3:
-                    this.mKeyTextSize = obtainStyledAttributes.getDimensionPixelSize(index, 18);
+                    this.mKeyTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 18);
                     break;
                 case 4:
-                    this.mLabelTextSize = obtainStyledAttributes.getDimensionPixelSize(index, 14);
+                    this.mLabelTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 14);
                     break;
                 case 5:
-                    this.mKeyTextColor = obtainStyledAttributes.getColor(index, -16777216);
+                    this.mKeyTextColor = typedArrayObtainStyledAttributes.getColor(index, -16777216);
                     break;
                 case 6:
-                    i3 = obtainStyledAttributes.getResourceId(index, 0);
+                    resourceId = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 7:
-                    this.mPreviewOffset = obtainStyledAttributes.getDimensionPixelOffset(index, 0);
+                    this.mPreviewOffset = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, 0);
                     break;
                 case 8:
-                    this.mPreviewHeight = obtainStyledAttributes.getDimensionPixelSize(index, 80);
+                    this.mPreviewHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 80);
                     break;
                 case 9:
-                    this.mVerticalCorrection = obtainStyledAttributes.getDimensionPixelOffset(index, 0);
+                    this.mVerticalCorrection = typedArrayObtainStyledAttributes.getDimensionPixelOffset(index, 0);
                     break;
                 case 10:
-                    this.mPopupLayout = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mPopupLayout = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
             }
         }
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = this.mContext.obtainStyledAttributes(R.styleable.Theme);
-        this.mBackgroundDimAmount = obtainStyledAttributes2.getFloat(2, 0.5f);
-        obtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = this.mContext.obtainStyledAttributes(R.styleable.Theme);
+        this.mBackgroundDimAmount = typedArrayObtainStyledAttributes2.getFloat(2, 0.5f);
+        typedArrayObtainStyledAttributes2.recycle();
         this.mPreviewPopup = new PopupWindow(context);
-        if (i3 != 0) {
-            TextView textView = (TextView) layoutInflater.inflate(i3, (ViewGroup) null);
+        if (resourceId != 0) {
+            TextView textView = (TextView) layoutInflater.inflate(resourceId, (ViewGroup) null);
             this.mPreviewText = textView;
             this.mPreviewTextSizeLarge = (int) textView.getTextSize();
             this.mPreviewPopup.setContentView(this.mPreviewText);
@@ -290,8 +290,8 @@ public class KeyboardView extends View implements View.OnClickListener {
                     if (KeyboardView.this.mPossiblePoly) {
                         return false;
                     }
-                    float abs = Math.abs(f);
-                    float abs2 = Math.abs(f2);
+                    float fAbs = Math.abs(f);
+                    float fAbs2 = Math.abs(f2);
                     float x = motionEvent2.getX() - motionEvent.getX();
                     float y = motionEvent2.getY() - motionEvent.getY();
                     int width = KeyboardView.this.getWidth() / 2;
@@ -299,10 +299,10 @@ public class KeyboardView extends View implements View.OnClickListener {
                     KeyboardView.this.mSwipeTracker.computeCurrentVelocity(1000);
                     float xVelocity = KeyboardView.this.mSwipeTracker.getXVelocity();
                     float yVelocity = KeyboardView.this.mSwipeTracker.getYVelocity();
-                    if (f <= KeyboardView.this.mSwipeThreshold || abs2 >= abs || x <= width) {
-                        if (f >= (-KeyboardView.this.mSwipeThreshold) || abs2 >= abs || x >= (-width)) {
-                            if (f2 >= (-KeyboardView.this.mSwipeThreshold) || abs >= abs2 || y >= (-height)) {
-                                if (f2 > KeyboardView.this.mSwipeThreshold && abs < abs2 / 2.0f && y > height) {
+                    if (f <= KeyboardView.this.mSwipeThreshold || fAbs2 >= fAbs || x <= width) {
+                        if (f >= (-KeyboardView.this.mSwipeThreshold) || fAbs2 >= fAbs || x >= (-width)) {
+                            if (f2 >= (-KeyboardView.this.mSwipeThreshold) || fAbs >= fAbs2 || y >= (-height)) {
+                                if (f2 > KeyboardView.this.mSwipeThreshold && fAbs < fAbs2 / 2.0f && y > height) {
                                     if (!KeyboardView.this.mDisambiguateSwipe || yVelocity >= f2 / 4.0f) {
                                         KeyboardView.this.swipeDown();
                                         return true;
@@ -434,15 +434,15 @@ public class KeyboardView extends View implements View.OnClickListener {
             return;
         }
         int length = keyArr.length;
-        int i = 0;
+        int iMin = 0;
         for (Keyboard.Key key : keyArr) {
-            i += Math.min(key.width, key.height) + key.gap;
+            iMin += Math.min(key.width, key.height) + key.gap;
         }
-        if (i < 0 || length == 0) {
+        if (iMin < 0 || length == 0) {
             return;
         }
-        int i2 = (int) ((i * 1.4f) / length);
-        this.mProximityThreshold = i2 * i2;
+        int i = (int) ((iMin * 1.4f) / length);
+        this.mProximityThreshold = i * i;
     }
 
     @Override // android.view.View
@@ -500,7 +500,7 @@ public class KeyboardView extends View implements View.OnClickListener {
             Keyboard.Key key2 = keyArr[i3];
             if (!z2 || key == key2) {
                 drawable2.setState(key2.getCurrentDrawableState());
-                String charSequence = key2.label == null ? null : adjustCase(key2.label).toString();
+                String string = key2.label == null ? null : adjustCase(key2.label).toString();
                 Rect bounds = drawable2.getBounds();
                 z = z2;
                 if (key2.width != bounds.right || key2.height != bounds.bottom) {
@@ -508,8 +508,8 @@ public class KeyboardView extends View implements View.OnClickListener {
                 }
                 canvas.translate(key2.x + i, key2.y + i2);
                 drawable2.draw(canvas);
-                if (charSequence != null) {
-                    if (charSequence.length() > 1 && key2.codes.length < 2) {
+                if (string != null) {
+                    if (string.length() > 1 && key2.codes.length < 2) {
                         paint.setTextSize(this.mLabelTextSize);
                         paint.setTypeface(Typeface.DEFAULT_BOLD);
                     } else {
@@ -517,15 +517,17 @@ public class KeyboardView extends View implements View.OnClickListener {
                         paint.setTypeface(Typeface.DEFAULT);
                     }
                     paint.setShadowLayer(this.mShadowRadius, 0.0f, 0.0f, this.mShadowColor);
-                    canvas.drawText(charSequence, (((key2.width - rect3.left) - rect3.right) / 2) + rect3.left, (((key2.height - rect3.top) - rect3.bottom) / 2) + ((paint.getTextSize() - paint.descent()) / 2.0f) + rect3.top, paint);
+                    canvas.drawText(string, (((key2.width - rect3.left) - rect3.right) / 2) + rect3.left, (((key2.height - rect3.top) - rect3.bottom) / 2) + ((paint.getTextSize() - paint.descent()) / 2.0f) + rect3.top, paint);
                     paint.setShadowLayer(0.0f, 0.0f, 0.0f, 0);
-                } else if (key2.icon != null) {
-                    canvas.translate(((((key2.width - rect3.left) - rect3.right) - key2.icon.getIntrinsicWidth()) / 2) + rect3.left, ((((key2.height - rect3.top) - rect3.bottom) - key2.icon.getIntrinsicHeight()) / 2) + rect3.top);
-                    drawable = drawable2;
-                    rect = rect3;
-                    key2.icon.setBounds(0, 0, key2.icon.getIntrinsicWidth(), key2.icon.getIntrinsicHeight());
-                    key2.icon.draw(canvas);
-                    canvas.translate(-r2, -r3);
+                } else {
+                    if (key2.icon != null) {
+                        canvas.translate(((((key2.width - rect3.left) - rect3.right) - key2.icon.getIntrinsicWidth()) / 2) + rect3.left, ((((key2.height - rect3.top) - rect3.bottom) - key2.icon.getIntrinsicHeight()) / 2) + rect3.top);
+                        drawable = drawable2;
+                        rect = rect3;
+                        key2.icon.setBounds(0, 0, key2.icon.getIntrinsicWidth(), key2.icon.getIntrinsicHeight());
+                        key2.icon.draw(canvas);
+                        canvas.translate(-r2, -r3);
+                    }
                     canvas.translate((-key2.x) - i, (-key2.y) - i2);
                 }
                 drawable = drawable2;
@@ -551,112 +553,78 @@ public class KeyboardView extends View implements View.OnClickListener {
         this.mDirtyRect.setEmpty();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x003a, code lost:
-    
-        if (r15 >= r17.mProximityThreshold) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0043 A[PHI: r15 r16
+      0x0043: PHI (r15v3 int) = (r15v2 int), (r15v4 int) binds: [B:13:0x0041, B:10:0x003a] A[DONT_GENERATE, DONT_INLINE]
+      0x0043: PHI (r16v2 int) = (r16v1 int), (r16v3 int) binds: [B:13:0x0041, B:10:0x003a] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int getKeyIndices(int r18, int r19, int[] r20) {
-        /*
-            r17 = this;
-            r0 = r17
-            r1 = r18
-            r2 = r19
-            r3 = r20
-            android.inputmethodservice.Keyboard$Key[] r4 = r0.mKeys
-            int r5 = r0.mProximityThreshold
-            int r5 = r5 + 1
-            int[] r6 = r0.mDistances
-            r7 = 2147483647(0x7fffffff, float:NaN)
-            java.util.Arrays.fill(r6, r7)
-            android.inputmethodservice.Keyboard r6 = r0.mKeyboard
-            int[] r6 = r6.getNearestKeys(r1, r2)
-            int r7 = r6.length
-            r10 = 0
-            r11 = -1
-            r12 = -1
-        L20:
-            if (r10 >= r7) goto L90
-            r13 = r6[r10]
-            r13 = r4[r13]
-            boolean r14 = r13.isInside(r1, r2)
-            if (r14 == 0) goto L2e
-            r11 = r6[r10]
-        L2e:
-            boolean r15 = r0.mProximityCorrectOn
-            if (r15 == 0) goto L3d
-            int r15 = r13.squaredDistanceFrom(r1, r2)
-            r16 = 0
-            int r9 = r0.mProximityThreshold
-            if (r15 < r9) goto L43
-            goto L41
-        L3d:
-            r16 = 0
-            r15 = r16
-        L41:
-            if (r14 == 0) goto L89
-        L43:
-            int[] r9 = r13.codes
-            r9 = r9[r16]
-            r14 = 32
-            if (r9 <= r14) goto L89
-            int[] r9 = r13.codes
-            int r9 = r9.length
-            if (r15 >= r5) goto L53
-            r12 = r6[r10]
-            r5 = r15
-        L53:
-            if (r3 != 0) goto L56
-            goto L89
-        L56:
-            r14 = r16
-        L58:
-            int[] r8 = r0.mDistances
-            int r1 = r8.length
-            if (r14 >= r1) goto L89
-            r1 = r8[r14]
-            if (r1 <= r15) goto L82
-            int r1 = r14 + r9
-            int r2 = r8.length
-            int r2 = r2 - r14
-            int r2 = r2 - r9
-            java.lang.System.arraycopy(r8, r14, r8, r1, r2)
-            int r2 = r3.length
-            int r2 = r2 - r14
-            int r2 = r2 - r9
-            java.lang.System.arraycopy(r3, r14, r3, r1, r2)
-            r1 = r16
-        L71:
-            if (r1 >= r9) goto L89
-            int r2 = r14 + r1
-            int[] r8 = r13.codes
-            r8 = r8[r1]
-            r3[r2] = r8
-            int[] r8 = r0.mDistances
-            r8[r2] = r15
-            int r1 = r1 + 1
-            goto L71
-        L82:
-            int r14 = r14 + 1
-            r1 = r18
-            r2 = r19
-            goto L58
-        L89:
-            int r10 = r10 + 1
-            r1 = r18
-            r2 = r19
-            goto L20
-        L90:
-            r1 = -1
-            if (r11 != r1) goto L94
-            return r12
-        L94:
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.inputmethodservice.KeyboardView.getKeyIndices(int, int, int[]):int");
+    private int getKeyIndices(int i, int i2, int[] iArr) {
+        int i3;
+        int iSquaredDistanceFrom;
+        int i4 = i;
+        int i5 = i2;
+        Keyboard.Key[] keyArr = this.mKeys;
+        int i6 = this.mProximityThreshold + 1;
+        Arrays.fill(this.mDistances, Integer.MAX_VALUE);
+        int[] nearestKeys = this.mKeyboard.getNearestKeys(i4, i5);
+        int length = nearestKeys.length;
+        int i7 = 0;
+        int i8 = -1;
+        int i9 = -1;
+        while (i7 < length) {
+            Keyboard.Key key = keyArr[nearestKeys[i7]];
+            boolean zIsInside = key.isInside(i4, i5);
+            if (zIsInside) {
+                i8 = nearestKeys[i7];
+            }
+            if (this.mProximityCorrectOn) {
+                iSquaredDistanceFrom = key.squaredDistanceFrom(i4, i5);
+                i3 = 0;
+                if (iSquaredDistanceFrom < this.mProximityThreshold) {
+                    if (key.codes[i3] > 32) {
+                        int length2 = key.codes.length;
+                        if (iSquaredDistanceFrom < i6) {
+                            i9 = nearestKeys[i7];
+                            i6 = iSquaredDistanceFrom;
+                        }
+                        if (iArr != null) {
+                            int i10 = i3;
+                            while (true) {
+                                int[] iArr2 = this.mDistances;
+                                if (i10 >= iArr2.length) {
+                                    break;
+                                }
+                                if (iArr2[i10] > iSquaredDistanceFrom) {
+                                    int i11 = i10 + length2;
+                                    System.arraycopy(iArr2, i10, iArr2, i11, (iArr2.length - i10) - length2);
+                                    System.arraycopy(iArr, i10, iArr, i11, (iArr.length - i10) - length2);
+                                    for (int i12 = i3; i12 < length2; i12++) {
+                                        int i13 = i10 + i12;
+                                        iArr[i13] = key.codes[i12];
+                                        this.mDistances[i13] = iSquaredDistanceFrom;
+                                    }
+                                } else {
+                                    i10++;
+                                }
+                            }
+                        }
+                    }
+                }
+                i7++;
+                i4 = i;
+                i5 = i2;
+            } else {
+                i3 = 0;
+                iSquaredDistanceFrom = 0;
+            }
+            if (zIsInside) {
+            }
+            i7++;
+            i4 = i;
+            i5 = i2;
+        }
+        return i8 == -1 ? i9 : i8;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -767,11 +735,11 @@ public class KeyboardView extends View implements View.OnClickListener {
             }
         }
         this.mPreviewText.measure(View.MeasureSpec.makeMeasureSpec(0, 0), View.MeasureSpec.makeMeasureSpec(0, 0));
-        int max = Math.max(this.mPreviewText.getMeasuredWidth(), key.width + this.mPreviewText.getPaddingLeft() + this.mPreviewText.getPaddingRight());
+        int iMax = Math.max(this.mPreviewText.getMeasuredWidth(), key.width + this.mPreviewText.getPaddingLeft() + this.mPreviewText.getPaddingRight());
         int i2 = this.mPreviewHeight;
         ViewGroup.LayoutParams layoutParams = this.mPreviewText.getLayoutParams();
         if (layoutParams != null) {
-            layoutParams.width = max;
+            layoutParams.width = iMax;
             layoutParams.height = i2;
         }
         if (!this.mPreviewCentered) {
@@ -801,9 +769,9 @@ public class KeyboardView extends View implements View.OnClickListener {
             this.mPopupPreviewY += i2;
         }
         if (popupWindow.isShowing()) {
-            popupWindow.update(this.mPopupPreviewX, this.mPopupPreviewY, max, i2);
+            popupWindow.update(this.mPopupPreviewX, this.mPopupPreviewY, iMax, i2);
         } else {
-            popupWindow.setWidth(max);
+            popupWindow.setWidth(iMax);
             popupWindow.setHeight(i2);
             popupWindow.showAtLocation(this.mPopupParent, 0, this.mPopupPreviewX, this.mPopupPreviewY);
         }
@@ -813,8 +781,8 @@ public class KeyboardView extends View implements View.OnClickListener {
     private void sendAccessibilityEventForUnicodeCharacter(int i, int i2) {
         String string;
         if (this.mAccessibilityManager.isEnabled()) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain(i);
-            onInitializeAccessibilityEvent(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(i);
+            onInitializeAccessibilityEvent(accessibilityEventObtain);
             if (i2 != 10) {
                 switch (i2) {
                     case -6:
@@ -842,8 +810,8 @@ public class KeyboardView extends View implements View.OnClickListener {
             } else {
                 string = this.mContext.getString(R.string.keyboardview_keycode_enter);
             }
-            obtain.getText().add(string);
-            this.mAccessibilityManager.sendAccessibilityEvent(obtain);
+            accessibilityEventObtain.getText().add(string);
+            this.mAccessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
         }
     }
 
@@ -870,12 +838,12 @@ public class KeyboardView extends View implements View.OnClickListener {
         if (this.mPopupLayout != 0 && (i = this.mCurrentKey) >= 0) {
             Keyboard.Key[] keyArr = this.mKeys;
             if (i < keyArr.length) {
-                boolean onLongPress = onLongPress(keyArr[i]);
-                if (onLongPress) {
+                boolean zOnLongPress = onLongPress(keyArr[i]);
+                if (zOnLongPress) {
                     this.mAbortKey = true;
                     showPreview(-1);
                 }
-                return onLongPress;
+                return zOnLongPress;
             }
         }
         return false;
@@ -890,12 +858,12 @@ public class KeyboardView extends View implements View.OnClickListener {
         View view = this.mMiniKeyboardCache.get(key);
         this.mMiniKeyboardContainer = view;
         if (view == null) {
-            View inflate = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(this.mPopupLayout, (ViewGroup) null);
-            this.mMiniKeyboardContainer = inflate;
-            this.mMiniKeyboard = (KeyboardView) inflate.findViewById(16908326);
-            View findViewById = this.mMiniKeyboardContainer.findViewById(16908327);
-            if (findViewById != null) {
-                findViewById.setOnClickListener(this);
+            View viewInflate = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(this.mPopupLayout, (ViewGroup) null);
+            this.mMiniKeyboardContainer = viewInflate;
+            this.mMiniKeyboard = (KeyboardView) viewInflate.findViewById(16908326);
+            View viewFindViewById = this.mMiniKeyboardContainer.findViewById(16908327);
+            if (viewFindViewById != null) {
+                viewFindViewById.setOnClickListener(this);
             }
             this.mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() { // from class: android.inputmethodservice.KeyboardView.3
                 @Override // android.inputmethodservice.KeyboardView.OnKeyboardActionListener
@@ -987,38 +955,171 @@ public class KeyboardView extends View implements View.OnClickListener {
         int pointerCount = motionEvent.getPointerCount();
         int action = motionEvent.getAction();
         long eventTime = motionEvent.getEventTime();
-        boolean z = true;
+        boolean zOnModifiedTouchEvent = true;
         if (pointerCount != this.mOldPointerCount) {
             if (pointerCount == 1) {
-                MotionEvent obtain = MotionEvent.obtain(eventTime, eventTime, 0, motionEvent.getX(), motionEvent.getY(), motionEvent.getMetaState());
-                boolean onModifiedTouchEvent = onModifiedTouchEvent(obtain, false);
-                obtain.recycle();
-                z = action == 1 ? onModifiedTouchEvent(motionEvent, true) : onModifiedTouchEvent;
+                MotionEvent motionEventObtain = MotionEvent.obtain(eventTime, eventTime, 0, motionEvent.getX(), motionEvent.getY(), motionEvent.getMetaState());
+                boolean zOnModifiedTouchEvent2 = onModifiedTouchEvent(motionEventObtain, false);
+                motionEventObtain.recycle();
+                zOnModifiedTouchEvent = action == 1 ? onModifiedTouchEvent(motionEvent, true) : zOnModifiedTouchEvent2;
             } else {
-                MotionEvent obtain2 = MotionEvent.obtain(eventTime, eventTime, 1, this.mOldPointerX, this.mOldPointerY, motionEvent.getMetaState());
-                z = onModifiedTouchEvent(obtain2, true);
-                obtain2.recycle();
+                MotionEvent motionEventObtain2 = MotionEvent.obtain(eventTime, eventTime, 1, this.mOldPointerX, this.mOldPointerY, motionEvent.getMetaState());
+                zOnModifiedTouchEvent = onModifiedTouchEvent(motionEventObtain2, true);
+                motionEventObtain2.recycle();
             }
         } else if (pointerCount == 1) {
-            z = onModifiedTouchEvent(motionEvent, false);
+            zOnModifiedTouchEvent = onModifiedTouchEvent(motionEvent, false);
             this.mOldPointerX = motionEvent.getX();
             this.mOldPointerY = motionEvent.getY();
         }
         this.mOldPointerCount = pointerCount;
-        return z;
+        return zOnModifiedTouchEvent;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00c8  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00c8  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0196  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean onModifiedTouchEvent(android.view.MotionEvent r16, boolean r17) {
-        /*
-            Method dump skipped, instructions count: 433
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.inputmethodservice.KeyboardView.onModifiedTouchEvent(android.view.MotionEvent, boolean):boolean");
+    private boolean onModifiedTouchEvent(MotionEvent motionEvent, boolean z) {
+        boolean z2;
+        int i;
+        int x = ((int) motionEvent.getX()) - this.mPaddingLeft;
+        int y = ((int) motionEvent.getY()) - this.mPaddingTop;
+        int i2 = this.mVerticalCorrection;
+        if (y >= (-i2)) {
+            y += i2;
+        }
+        int action = motionEvent.getAction();
+        long eventTime = motionEvent.getEventTime();
+        int keyIndices = getKeyIndices(x, y, null);
+        this.mPossiblePoly = z;
+        if (action == 0) {
+            this.mSwipeTracker.clear();
+        }
+        this.mSwipeTracker.addMovement(motionEvent);
+        if (this.mAbortKey && action != 0 && action != 3) {
+            return true;
+        }
+        if (this.mGestureDetector.onTouchEvent(motionEvent)) {
+            showPreview(-1);
+            this.mHandler.removeMessages(3);
+            this.mHandler.removeMessages(4);
+            return true;
+        }
+        if (this.mMiniKeyboardOnScreen && action != 3) {
+            return true;
+        }
+        if (action == 0) {
+            z2 = true;
+            this.mAbortKey = false;
+            this.mStartX = x;
+            this.mStartY = y;
+            this.mLastCodeX = x;
+            this.mLastCodeY = y;
+            this.mLastKeyTime = 0L;
+            this.mCurrentKeyTime = 0L;
+            this.mLastKey = -1;
+            this.mCurrentKey = keyIndices;
+            this.mDownKey = keyIndices;
+            long eventTime2 = motionEvent.getEventTime();
+            this.mDownTime = eventTime2;
+            this.mLastMoveTime = eventTime2;
+            checkMultiTap(eventTime, keyIndices);
+            this.mKeyboardActionListener.onPress(keyIndices != -1 ? this.mKeys[keyIndices].codes[0] : 0);
+            int i3 = this.mCurrentKey;
+            if (i3 >= 0 && this.mKeys[i3].repeatable) {
+                this.mRepeatKeyIndex = this.mCurrentKey;
+                this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(3), 400L);
+                repeatKey();
+                if (this.mAbortKey) {
+                    this.mRepeatKeyIndex = -1;
+                }
+            } else {
+                if (this.mCurrentKey != -1) {
+                    this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(4, motionEvent), LONGPRESS_TIMEOUT);
+                }
+                showPreview(keyIndices);
+            }
+        } else if (action == 1) {
+            z2 = true;
+            removeMessages();
+            if (keyIndices == this.mCurrentKey) {
+                this.mCurrentKeyTime += eventTime - this.mLastMoveTime;
+            } else {
+                resetMultiTap();
+                this.mLastKey = this.mCurrentKey;
+                this.mLastKeyTime = (this.mCurrentKeyTime + eventTime) - this.mLastMoveTime;
+                this.mCurrentKey = keyIndices;
+                this.mCurrentKeyTime = 0L;
+            }
+            long j = this.mCurrentKeyTime;
+            if (j < this.mLastKeyTime && j < 70 && (i = this.mLastKey) != -1) {
+                this.mCurrentKey = i;
+                x = this.mLastCodeX;
+                y = this.mLastCodeY;
+            }
+            showPreview(-1);
+            Arrays.fill(this.mKeyIndices, -1);
+            if (this.mRepeatKeyIndex == -1 && !this.mMiniKeyboardOnScreen && !this.mAbortKey) {
+                detectAndSendKey(this.mCurrentKey, x, y, eventTime);
+            }
+            invalidateKey(keyIndices);
+            this.mRepeatKeyIndex = -1;
+        } else if (action != 2) {
+            if (action == 3) {
+                removeMessages();
+                dismissPopupKeyboard();
+                this.mAbortKey = true;
+                showPreview(-1);
+                invalidateKey(this.mCurrentKey);
+            }
+            z2 = true;
+        } else if (keyIndices != -1) {
+            int i4 = this.mCurrentKey;
+            if (i4 == -1) {
+                this.mCurrentKey = keyIndices;
+                this.mCurrentKeyTime = eventTime - this.mDownTime;
+            } else if (keyIndices == i4) {
+                this.mCurrentKeyTime += eventTime - this.mLastMoveTime;
+                z2 = true;
+                showPreview(this.mCurrentKey);
+                this.mLastMoveTime = eventTime;
+            } else {
+                if (this.mRepeatKeyIndex == -1) {
+                    resetMultiTap();
+                    this.mLastKey = this.mCurrentKey;
+                    this.mLastCodeX = this.mLastX;
+                    this.mLastCodeY = this.mLastY;
+                    z2 = true;
+                    this.mLastKeyTime = (this.mCurrentKeyTime + eventTime) - this.mLastMoveTime;
+                    this.mCurrentKey = keyIndices;
+                    this.mCurrentKeyTime = 0L;
+                }
+                this.mHandler.removeMessages(4);
+                if (keyIndices != -1) {
+                }
+                showPreview(this.mCurrentKey);
+                this.mLastMoveTime = eventTime;
+            }
+            z2 = true;
+            this.mHandler.removeMessages(4);
+            if (keyIndices != -1) {
+            }
+            showPreview(this.mCurrentKey);
+            this.mLastMoveTime = eventTime;
+        } else {
+            z2 = true;
+            this.mHandler.removeMessages(4);
+            if (keyIndices != -1) {
+                this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(4, motionEvent), LONGPRESS_TIMEOUT);
+            }
+            showPreview(this.mCurrentKey);
+            this.mLastMoveTime = eventTime;
+        }
+        this.mLastX = x;
+        this.mLastY = y;
+        return z2;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1186,8 +1287,8 @@ public class KeyboardView extends View implements View.OnClickListener {
         }
 
         public void computeCurrentVelocity(int i, float f) {
-            float min;
-            float min2;
+            float fMin;
+            float fMin2;
             float[] fArr;
             float[] fArr2 = this.mPastX;
             float[] fArr3 = this.mPastY;
@@ -1220,17 +1321,17 @@ public class KeyboardView extends View implements View.OnClickListener {
                 fArr2 = fArr;
             }
             if (f4 < 0.0f) {
-                min = Math.max(f4, -f);
+                fMin = Math.max(f4, -f);
             } else {
-                min = Math.min(f4, f);
+                fMin = Math.min(f4, f);
             }
-            this.mXVelocity = min;
+            this.mXVelocity = fMin;
             if (f5 < 0.0f) {
-                min2 = Math.max(f5, -f);
+                fMin2 = Math.max(f5, -f);
             } else {
-                min2 = Math.min(f5, f);
+                fMin2 = Math.min(f5, f);
             }
-            this.mYVelocity = min2;
+            this.mYVelocity = fMin2;
         }
 
         public float getXVelocity() {

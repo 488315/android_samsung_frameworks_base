@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaInRowInLandscapeViewModel$isMediaVisible$3 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -44,9 +43,9 @@ final class MediaInRowInLandscapeViewModel$isMediaVisible$3 extends SuspendLambd
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             MediaInRowInLandscapeViewModel mediaInRowInLandscapeViewModel = this.this$0;
             MediaHostState mediaHostState = (MediaHostState) ((LinkedHashMap) mediaInRowInLandscapeViewModel.mediaHostStatesManager.mediaHostStates).get(new Integer(mediaInRowInLandscapeViewModel.inLocation));
-            Boolean valueOf = Boolean.valueOf(mediaHostState != null ? mediaHostState.getVisible() : false);
+            Boolean boolValueOf = Boolean.valueOf(mediaHostState != null ? mediaHostState.getVisible() : false);
             this.label = 1;
-            if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+            if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

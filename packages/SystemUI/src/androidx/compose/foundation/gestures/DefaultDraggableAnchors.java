@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DefaultDraggableAnchors<T> implements DraggableAnchors<T> {
     public final float[] anchors;
@@ -39,10 +38,10 @@ public final class DefaultDraggableAnchors<T> implements DraggableAnchors<T> {
         int i3 = 0;
         while (i2 < length) {
             int i4 = i3 + 1;
-            float abs = Math.abs(f - fArr[i2]);
-            if (abs <= f2) {
+            float fAbs = Math.abs(f - fArr[i2]);
+            if (fAbs <= f2) {
                 i = i3;
-                f2 = abs;
+                f2 = fAbs;
             }
             i2++;
             i3 = i4;
@@ -75,126 +74,104 @@ public final class DefaultDraggableAnchors<T> implements DraggableAnchors<T> {
 
     @Override // androidx.compose.foundation.gestures.DraggableAnchors
     public final float maxPosition() {
-        Float valueOf;
+        Float fValueOf;
         float[] fArr = this.anchors;
         if (fArr.length == 0) {
-            valueOf = null;
+            fValueOf = null;
         } else {
-            float f = fArr[0];
+            float fMax = fArr[0];
             int i = 1;
             int length = fArr.length - 1;
             if (1 <= length) {
                 while (true) {
-                    f = Math.max(f, fArr[i]);
+                    fMax = Math.max(fMax, fArr[i]);
                     if (i == length) {
                         break;
                     }
                     i++;
                 }
             }
-            valueOf = Float.valueOf(f);
+            fValueOf = Float.valueOf(fMax);
         }
-        if (valueOf != null) {
-            return valueOf.floatValue();
+        if (fValueOf != null) {
+            return fValueOf.floatValue();
         }
         return Float.NaN;
     }
 
     @Override // androidx.compose.foundation.gestures.DraggableAnchors
     public final float minPosition() {
-        Float valueOf;
+        Float fValueOf;
         float[] fArr = this.anchors;
         if (fArr.length == 0) {
-            valueOf = null;
+            fValueOf = null;
         } else {
-            float f = fArr[0];
+            float fMin = fArr[0];
             int i = 1;
             int length = fArr.length - 1;
             if (1 <= length) {
                 while (true) {
-                    f = Math.min(f, fArr[i]);
+                    fMin = Math.min(fMin, fArr[i]);
                     if (i == length) {
                         break;
                     }
                     i++;
                 }
             }
-            valueOf = Float.valueOf(f);
+            fValueOf = Float.valueOf(fMin);
         }
-        if (valueOf != null) {
-            return valueOf.floatValue();
+        if (fValueOf != null) {
+            return fValueOf.floatValue();
         }
         return Float.NaN;
     }
 
     public final float positionOf(Object obj) {
-        int indexOf = this.keys.indexOf(obj);
+        int iIndexOf = this.keys.indexOf(obj);
         Function1 function1 = AnchoredDraggableKt.GetOrNan;
-        if (indexOf >= 0) {
+        if (iIndexOf >= 0) {
             float[] fArr = this.anchors;
-            if (indexOf <= fArr.length - 1) {
-                return fArr[indexOf];
+            if (iIndexOf <= fArr.length - 1) {
+                return fArr[iIndexOf];
             }
         }
-        return ((Number) ((AnchoredDraggableKt$GetOrNan$1) function1).mo779invoke(Integer.valueOf(indexOf))).floatValue();
+        return ((Number) ((AnchoredDraggableKt$GetOrNan$1) function1).mo781invoke(Integer.valueOf(iIndexOf))).floatValue();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0053 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x002d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String toString() {
-        /*
-            r7 = this;
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "DraggableAnchors(anchors={"
-            r0.<init>(r1)
-            r1 = 0
-        L8:
-            int r2 = r7.size
-            if (r1 >= r2) goto L56
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            r3.<init>()
-            java.util.List r4 = r7.keys
-            java.lang.Object r4 = kotlin.collections.CollectionsKt___CollectionsKt.getOrNull(r1, r4)
-            r3.append(r4)
-            r4 = 61
-            r3.append(r4)
-            kotlin.jvm.functions.Function1 r4 = androidx.compose.foundation.gestures.AnchoredDraggableKt.GetOrNan
-            if (r1 < 0) goto L2d
-            float[] r5 = r7.anchors
-            int r6 = r5.length
-            int r6 = r6 + (-1)
-            if (r1 > r6) goto L2d
-            r4 = r5[r1]
-            goto L40
-        L2d:
-            java.lang.Integer r5 = java.lang.Integer.valueOf(r1)
-            androidx.compose.foundation.gestures.AnchoredDraggableKt$GetOrNan$1 r4 = (androidx.compose.foundation.gestures.AnchoredDraggableKt$GetOrNan$1) r4
-            r4.mo779invoke(r5)
-            r4 = 2143289344(0x7fc00000, float:NaN)
-            java.lang.Float r4 = java.lang.Float.valueOf(r4)
-            float r4 = r4.floatValue()
-        L40:
-            r3.append(r4)
-            java.lang.String r3 = r3.toString()
-            r0.append(r3)
-            int r2 = r2 + (-1)
-            if (r1 >= r2) goto L53
-            java.lang.String r2 = ", "
-            r0.append(r2)
-        L53:
-            int r1 = r1 + 1
-            goto L8
-        L56:
-            java.lang.String r7 = "})"
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.DefaultDraggableAnchors.toString():java.lang.String");
+    public final String toString() {
+        float fFloatValue;
+        StringBuilder sb = new StringBuilder("DraggableAnchors(anchors={");
+        int i = 0;
+        while (true) {
+            int i2 = this.size;
+            if (i >= i2) {
+                sb.append("})");
+                return sb.toString();
+            }
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(CollectionsKt___CollectionsKt.getOrNull(i, this.keys));
+            sb2.append('=');
+            Function1 function1 = AnchoredDraggableKt.GetOrNan;
+            if (i >= 0) {
+                float[] fArr = this.anchors;
+                if (i <= fArr.length - 1) {
+                    fFloatValue = fArr[i];
+                } else {
+                    ((AnchoredDraggableKt$GetOrNan$1) function1).mo781invoke(Integer.valueOf(i));
+                    fFloatValue = Float.valueOf(Float.NaN).floatValue();
+                }
+            }
+            sb2.append(fFloatValue);
+            sb.append(sb2.toString());
+            if (i < i2 - 1) {
+                sb.append(", ");
+            }
+            i++;
+        }
     }
 
     public final Object closestAnchor(float f, boolean z) {

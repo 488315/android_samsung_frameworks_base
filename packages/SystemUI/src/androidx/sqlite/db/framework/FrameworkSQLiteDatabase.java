@@ -1,6 +1,7 @@
 package androidx.sqlite.db.framework;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQuery;
@@ -11,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import androidx.sqlite.db.framework.FrameworkSQLiteDatabase;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
@@ -18,7 +20,6 @@ import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
     public static final Companion Companion = new Companion(null);
@@ -27,7 +28,6 @@ public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
     public static final Lazy getThreadSessionMethod$delegate;
     public final SQLiteDatabase delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -118,7 +118,7 @@ public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
     }
 
     @Override // androidx.sqlite.db.SupportSQLiteDatabase
-    public final void beginTransactionReadOnly() {
+    public final void beginTransactionReadOnly() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Companion.getClass();
         Lazy lazy = beginTransactionMethod$delegate;
         if (((Method) lazy.getValue()) != null) {
@@ -128,11 +128,11 @@ public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
                 method.getClass();
                 Method method2 = (Method) lazy2.getValue();
                 method2.getClass();
-                Object invoke = method2.invoke(this.delegate, null);
-                if (invoke == null) {
+                Object objInvoke = method2.invoke(this.delegate, null);
+                if (objInvoke == null) {
                     throw new IllegalStateException("Required value was null.");
                 }
-                method.invoke(invoke, 0, null, 0, null);
+                method.invoke(objInvoke, 0, null, 0, null);
                 return;
             }
         }
@@ -155,7 +155,7 @@ public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
     }
 
     @Override // androidx.sqlite.db.SupportSQLiteDatabase
-    public final void execSQL(String str) {
+    public final void execSQL(String str) throws SQLException {
         this.delegate.execSQL(str);
     }
 
@@ -185,7 +185,7 @@ public final class FrameworkSQLiteDatabase implements SupportSQLiteDatabase {
         return this.delegate.rawQueryWithFactory(new SQLiteDatabase.CursorFactory() { // from class: androidx.sqlite.db.framework.FrameworkSQLiteDatabase$$ExternalSyntheticLambda1
             @Override // android.database.sqlite.SQLiteDatabase.CursorFactory
             public final Cursor newCursor(SQLiteDatabase sQLiteDatabase, SQLiteCursorDriver sQLiteCursorDriver, String str, SQLiteQuery sQLiteQuery) {
-                FrameworkSQLiteDatabase$$ExternalSyntheticLambda0 frameworkSQLiteDatabase$$ExternalSyntheticLambda02 = FrameworkSQLiteDatabase$$ExternalSyntheticLambda0.this;
+                FrameworkSQLiteDatabase$$ExternalSyntheticLambda0 frameworkSQLiteDatabase$$ExternalSyntheticLambda02 = frameworkSQLiteDatabase$$ExternalSyntheticLambda0;
                 FrameworkSQLiteDatabase.Companion companion = FrameworkSQLiteDatabase.Companion;
                 return (Cursor) frameworkSQLiteDatabase$$ExternalSyntheticLambda02.invoke(sQLiteDatabase, sQLiteCursorDriver, str, sQLiteQuery);
             }

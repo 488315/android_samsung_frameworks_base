@@ -60,9 +60,9 @@ public interface IBeginCreateCredentialCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBeginCreateCredentialCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBeginCreateCredentialCallback)) {
-                return (IBeginCreateCredentialCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBeginCreateCredentialCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBeginCreateCredentialCallback)) {
+                return (IBeginCreateCredentialCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,14 +99,14 @@ public interface IBeginCreateCredentialCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onSuccess(beginCreateCredentialResponse);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 parcel.enforceNoDataAvail();
-                onFailure(readString, charSequence);
+                onFailure(string, charSequence);
             } else if (i == 3) {
-                ICancellationSignal asInterface = ICancellationSignal.Stub.asInterface(parcel.readStrongBinder());
+                ICancellationSignal iCancellationSignalAsInterface = ICancellationSignal.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCancellable(asInterface);
+                onCancellable(iCancellationSignalAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -131,43 +131,43 @@ public interface IBeginCreateCredentialCallback extends IInterface {
 
             @Override // android.service.credentials.IBeginCreateCredentialCallback
             public void onSuccess(BeginCreateCredentialResponse beginCreateCredentialResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(beginCreateCredentialResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(beginCreateCredentialResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.credentials.IBeginCreateCredentialCallback
             public void onFailure(String str, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(2, obtain, null, 1);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.credentials.IBeginCreateCredentialCallback
             public void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCancellationSignal);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBeginCreateCredentialCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCancellationSignal);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

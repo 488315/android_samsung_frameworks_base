@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -43,9 +42,8 @@ public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$1 e
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         String str;
-        String substring;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -55,29 +53,36 @@ public final class InternetTileDataInteractor$special$$inlined$flatMapLatest$1 e
             WifiIcon.Companion companion = WifiIcon.Companion;
             Context context = this.this$0.context;
             companion.getClass();
-            WifiIcon fromModel = WifiIcon.Companion.fromModel(wifiNetworkModel, context, true, null);
-            if ((wifiNetworkModel instanceof WifiNetworkModel.Active) && (fromModel instanceof WifiIcon.Visible)) {
+            String strSubstring = null;
+            WifiIcon wifiIconFromModel = WifiIcon.Companion.fromModel(wifiNetworkModel, context, true, null);
+            if ((wifiNetworkModel instanceof WifiNetworkModel.Active) && (wifiIconFromModel instanceof WifiIcon.Visible)) {
                 InternetTileDataInteractor.Companion companion2 = InternetTileDataInteractor.Companion;
                 String str2 = ((WifiNetworkModel.Active) wifiNetworkModel).ssid;
                 companion2.getClass();
                 if (str2 != null) {
-                    Character valueOf = str2.length() == 0 ? null : Character.valueOf(str2.charAt(0));
-                    if (valueOf != null && valueOf.charValue() == '\"') {
-                        Character valueOf2 = str2.length() != 0 ? Character.valueOf(str2.charAt(str2.length() - 1)) : null;
-                        substring = (valueOf2 != null && valueOf2.charValue() == '\"') ? str2.substring(1, str2.length() - 1) : null;
+                    Character chValueOf = str2.length() == 0 ? null : Character.valueOf(str2.charAt(0));
+                    if (chValueOf != null && chValueOf.charValue() == '\"') {
+                        Character chValueOf2 = str2.length() != 0 ? Character.valueOf(str2.charAt(str2.length() - 1)) : null;
+                        if (chValueOf2 != null && chValueOf2.charValue() == '\"') {
+                            strSubstring = str2.substring(1, str2.length() - 1);
+                            str = strSubstring;
+                            WifiIcon.Visible visible = (WifiIcon.Visible) wifiIconFromModel;
+                            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(str, null, new InternetTileIconModel.ResourceId(visible.icon.res), visible.contentDescription, new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.this$0.internetLabel, ",", str)), 2, null));
+                        }
                     }
                     str = str2;
-                    WifiIcon.Visible visible = (WifiIcon.Visible) fromModel;
-                    flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(str, null, new InternetTileIconModel.ResourceId(visible.icon.res), visible.contentDescription, new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.this$0.internetLabel, ",", str)), 2, null));
+                    WifiIcon.Visible visible2 = (WifiIcon.Visible) wifiIconFromModel;
+                    flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(str, null, new InternetTileIconModel.ResourceId(visible2.icon.res), visible2.contentDescription, new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.this$0.internetLabel, ",", str)), 2, null));
+                } else {
+                    str = strSubstring;
+                    WifiIcon.Visible visible22 = (WifiIcon.Visible) wifiIconFromModel;
+                    flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(str, null, new InternetTileIconModel.ResourceId(visible22.icon.res), visible22.contentDescription, new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.this$0.internetLabel, ",", str)), 2, null));
                 }
-                str = substring;
-                WifiIcon.Visible visible2 = (WifiIcon.Visible) fromModel;
-                flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new InternetTileModel.Active(str, null, new InternetTileIconModel.ResourceId(visible2.icon.res), visible2.contentDescription, new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.this$0.internetLabel, ",", str)), 2, null));
             } else {
-                flow = this.this$0.notConnectedFlow;
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = this.this$0.notConnectedFlow;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

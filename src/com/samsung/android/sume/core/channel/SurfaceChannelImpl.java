@@ -31,6 +31,7 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import org.json.JSONException;
 
 /* loaded from: classes6.dex */
 public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
@@ -73,13 +74,13 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
             this.receiveHandler = new Supplier() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda6
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    return BufferChannel.this.receive();
+                    return bufferChannel.receive();
                 }
             };
             this.onImageAvailableListener = new ImageReader.OnImageAvailableListener() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda7
                 @Override // android.media.ImageReader.OnImageAvailableListener
                 public final void onImageAvailable(ImageReader imageReader) {
-                    SurfaceChannelImpl.this.onImageReceive(imageReader);
+                    this.f$0.onImageReceive(imageReader);
                 }
             };
             return;
@@ -87,8 +88,8 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         if (i == 3) {
             this.sendHandler = new Consumer() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda8
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    SurfaceChannelImpl.this.writeToSurface((MediaBuffer) obj);
+                public final void accept(Object obj) throws JSONException {
+                    this.f$0.writeToSurface((MediaBuffer) obj);
                 }
             };
             this.receiveHandler = new Supplier() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda9
@@ -108,19 +109,19 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
                 this.sendHandler = new Consumer() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda2
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        SurfaceChannelImpl.this.m9524xaa413ced((MediaBuffer) obj);
+                        this.f$0.m9537xaa413ced((MediaBuffer) obj);
                     }
                 };
                 this.receiveHandler = new Supplier() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda3
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        return SurfaceChannelImpl.this.m9525x372e540c();
+                        return this.f$0.m9538x372e540c();
                     }
                 };
                 this.onImageAvailableListener = new ImageReader.OnImageAvailableListener() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda4
                     @Override // android.media.ImageReader.OnImageAvailableListener
                     public final void onImageAvailable(ImageReader imageReader) {
-                        SurfaceChannelImpl.this.onImageTransit(imageReader);
+                        this.f$0.onImageTransit(imageReader);
                     }
                 };
                 return;
@@ -130,12 +131,12 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-channel-SurfaceChannelImpl, reason: not valid java name */
-    /* synthetic */ void m9524xaa413ced(MediaBuffer mediaBuffer) {
+    /* synthetic */ void m9537xaa413ced(MediaBuffer mediaBuffer) {
         signal();
     }
 
     /* renamed from: lambda$new$1$com-samsung-android-sume-core-channel-SurfaceChannelImpl, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9525x372e540c() {
+    /* synthetic */ MediaBuffer m9538x372e540c() {
         waitUntilSignaled("receive buffer");
         return MediaBuffer.mutableOf(MediaFormat.mutableImageOf(new Object[0]));
     }
@@ -154,9 +155,9 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         HandlerThread handlerThread = new HandlerThread("surface-receive-thread");
         this.receiveThread = handlerThread;
         handlerThread.start();
-        ImageReader newInstance = ImageReader.newInstance(i, i2, i3, this.channelType == 4 ? 1 + this.capacity : 1);
-        this.reader = newInstance;
-        newInstance.setOnImageAvailableListener(this.onImageAvailableListener, new Handler(this.receiveThread.getLooper()));
+        ImageReader imageReaderNewInstance = ImageReader.newInstance(i, i2, i3, this.channelType == 4 ? 1 + this.capacity : 1);
+        this.reader = imageReaderNewInstance;
+        imageReaderNewInstance.setOnImageAvailableListener(this.onImageAvailableListener, new Handler(this.receiveThread.getLooper()));
     }
 
     @Override // com.samsung.android.sume.core.channel.SurfaceChannel
@@ -200,36 +201,34 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
         if (this.writer == null) {
             waitUntilSignaled("writer is given");
         }
-        Image acquireNextImage = imageReader.acquireNextImage();
+        Image imageAcquireNextImage = imageReader.acquireNextImage();
         String str = TAG;
         StringBuilder sb = new StringBuilder("received image=");
-        sb.append(acquireNextImage);
+        sb.append(imageAcquireNextImage);
         sb.append(", # of processed frames: ");
         int i = this.processedFrames + 1;
         this.processedFrames = i;
         sb.append(i);
         Log.d(str, sb.toString());
-        this.writer.queueInputImage(acquireNextImage);
+        this.writer.queueInputImage(imageAcquireNextImage);
         signal();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onImageReceive(ImageReader imageReader) {
-        Image acquireLatestImage = imageReader.acquireLatestImage();
-        final HardwareBuffer hardwareBuffer = acquireLatestImage.getHardwareBuffer();
+        Image imageAcquireLatestImage = imageReader.acquireLatestImage();
+        final HardwareBuffer hardwareBuffer = imageAcquireLatestImage.getHardwareBuffer();
         if (hardwareBuffer != null) {
             if (this.pixelFormat == ColorFormat.NONE) {
                 this.pixelFormat = (ColorFormat) vendorSpecificColorFormat.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda11
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean anyMatch;
-                        anyMatch = Arrays.stream((int[]) ((Map.Entry) obj).getValue()).anyMatch(new IntPredicate() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda0
+                        return Arrays.stream((int[]) ((Map.Entry) obj).getValue()).anyMatch(new IntPredicate() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda0
                             @Override // java.util.function.IntPredicate
                             public final boolean test(int i) {
-                                return SurfaceChannelImpl.lambda$onImageReceive$4(HardwareBuffer.this, i);
+                                return SurfaceChannelImpl.lambda$onImageReceive$4(hardwareBuffer, i);
                             }
                         });
-                        return anyMatch;
                     }
                 }).map(new Function() { // from class: com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda12
                     @Override // java.util.function.Function
@@ -239,20 +238,20 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
                 }).findFirst().orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
             }
             Log.d(TAG, "fmt=" + Integer.toHexString(hardwareBuffer.getFormat()) + NavigationBarInflaterView.SIZE_MOD_START + this.pixelFormat + "], usage=" + Long.toHexString(hardwareBuffer.getUsage()));
-            MediaBuffer convertTo = MediaBuffer.of(MediaFormat.mutableImageOf(DataType.U8, Shape.rectOf(acquireLatestImage.getWidth(), acquireLatestImage.getHeight()), this.pixelFormat), hardwareBuffer).convertTo(ByteBuffer.class);
-            convertTo.setExtra("timestampNs", Long.valueOf(acquireLatestImage.getTimestamp()));
-            convertTo.setExtra(Message.KEY_BLOCK_ID, Integer.valueOf(this.processedFrames));
-            send(convertTo);
+            MediaBuffer mediaBufferConvertTo = MediaBuffer.of(MediaFormat.mutableImageOf(DataType.U8, Shape.rectOf(imageAcquireLatestImage.getWidth(), imageAcquireLatestImage.getHeight()), this.pixelFormat), hardwareBuffer).convertTo(ByteBuffer.class);
+            mediaBufferConvertTo.setExtra("timestampNs", Long.valueOf(imageAcquireLatestImage.getTimestamp()));
+            mediaBufferConvertTo.setExtra(Message.KEY_BLOCK_ID, Integer.valueOf(this.processedFrames));
+            send(mediaBufferConvertTo);
         }
         String str = TAG;
         StringBuilder sb = new StringBuilder("received image=");
-        sb.append(acquireLatestImage);
+        sb.append(imageAcquireLatestImage);
         sb.append(", # of processed frames: ");
         int i = this.processedFrames + 1;
         this.processedFrames = i;
         sb.append(i);
         Log.d(str, sb.toString());
-        acquireLatestImage.close();
+        imageAcquireLatestImage.close();
     }
 
     static /* synthetic */ boolean lambda$onImageReceive$4(HardwareBuffer hardwareBuffer, int i) {
@@ -260,26 +259,26 @@ public final class SurfaceChannelImpl implements BufferChannel, SurfaceChannel {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void writeToSurface(MediaBuffer mediaBuffer) {
+    public void writeToSurface(MediaBuffer mediaBuffer) throws JSONException {
         String str = TAG;
         Log.d(str, "writeToSurface: " + mediaBuffer);
         if (this.writer == null) {
             waitUntilSignaled("writer given");
         }
-        long longValue = ((Long) mediaBuffer.getExtra("timestampNs")).longValue();
-        Image dequeueInputImage = this.writer.dequeueInputImage();
-        dequeueInputImage.setTimestamp(longValue);
-        SharedBufferManager.copyFromBuffer(mediaBuffer, dequeueInputImage.getHardwareBuffer());
+        long jLongValue = ((Long) mediaBuffer.getExtra("timestampNs")).longValue();
+        Image imageDequeueInputImage = this.writer.dequeueInputImage();
+        imageDequeueInputImage.setTimestamp(jLongValue);
+        SharedBufferManager.copyFromBuffer(mediaBuffer, imageDequeueInputImage.getHardwareBuffer());
         mediaBuffer.release();
-        this.writer.queueInputImage(dequeueInputImage);
+        this.writer.queueInputImage(imageDequeueInputImage);
         StringBuilder sb = new StringBuilder("send image=");
-        sb.append(dequeueInputImage);
+        sb.append(imageDequeueInputImage);
         sb.append(", # of processed frames: ");
         int i = this.processedFrames + 1;
         this.processedFrames = i;
         sb.append(i);
         sb.append(NavigationBarInflaterView.SIZE_MOD_START);
-        sb.append(longValue / 1000);
+        sb.append(jLongValue / 1000);
         sb.append(NavigationBarInflaterView.SIZE_MOD_END);
         Log.d(str, sb.toString());
     }

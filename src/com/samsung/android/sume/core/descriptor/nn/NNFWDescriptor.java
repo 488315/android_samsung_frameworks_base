@@ -48,7 +48,7 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
         this.loadTypeSupplier = new Supplier() { // from class: com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
-                return NNFWDescriptor.lambda$new$0(LoadType.this);
+                return NNFWDescriptor.lambda$new$0(loadType);
             }
         };
     }
@@ -89,7 +89,7 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
         this.loadTypeSupplier = new Supplier() { // from class: com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                return NNDescriptor.this.getLoadingType();
+                return nNDescriptor.getLoadingType();
             }
         };
     }
@@ -137,7 +137,7 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NNFWDescriptor m9534clone() {
+    public NNFWDescriptor m9547clone() {
         try {
             return (NNFWDescriptor) super.clone();
         } catch (CloneNotSupportedException unused) {

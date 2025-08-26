@@ -35,19 +35,19 @@ public class ECDHBasicAgreement implements BasicAgreement {
             throw new IllegalStateException("ECDH public key has wrong domain parameters");
         }
         BigInteger d = this.key.getD();
-        ECPoint cleanPoint = ECAlgorithms.cleanPoint(parameters.getCurve(), eCPublicKeyParameters.getQ());
-        if (cleanPoint.isInfinity()) {
+        ECPoint eCPointCleanPoint = ECAlgorithms.cleanPoint(parameters.getCurve(), eCPublicKeyParameters.getQ());
+        if (eCPointCleanPoint.isInfinity()) {
             throw new IllegalStateException("Infinity is not a valid public key for ECDH");
         }
         BigInteger h = parameters.getH();
         if (!h.equals(ECConstants.ONE)) {
             d = parameters.getHInv().multiply(d).mod(parameters.getN());
-            cleanPoint = ECAlgorithms.referenceMultiply(cleanPoint, h);
+            eCPointCleanPoint = ECAlgorithms.referenceMultiply(eCPointCleanPoint, h);
         }
-        ECPoint normalize = cleanPoint.multiply(d).normalize();
-        if (normalize.isInfinity()) {
+        ECPoint eCPointNormalize = eCPointCleanPoint.multiply(d).normalize();
+        if (eCPointNormalize.isInfinity()) {
             throw new IllegalStateException("Infinity is not a valid agreement value for ECDH");
         }
-        return normalize.getAffineXCoord().toBigInteger();
+        return eCPointNormalize.getAffineXCoord().toBigInteger();
     }
 }

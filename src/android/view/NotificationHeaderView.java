@@ -200,15 +200,15 @@ public class NotificationHeaderView extends RelativeLayout {
     }
 
     @RemotableViewMethod
-    public void styleTextAsTitle(boolean z) {
+    public void styleTextAsTitle(boolean z) throws Resources.NotFoundException {
         int i = z ? R.style.TextAppearance_DeviceDefault_Notification_Title : R.style.TextAppearance_DeviceDefault_Notification_Info;
-        View findViewById = findViewById(R.id.header_text);
-        if (findViewById instanceof TextView) {
-            ((TextView) findViewById).setTextAppearance(i);
+        View viewFindViewById = findViewById(R.id.header_text);
+        if (viewFindViewById instanceof TextView) {
+            ((TextView) viewFindViewById).setTextAppearance(i);
         }
-        View findViewById2 = findViewById(R.id.app_name_text);
-        if (findViewById2 instanceof TextView) {
-            ((TextView) findViewById2).setTextAppearance(i);
+        View viewFindViewById2 = findViewById(R.id.app_name_text);
+        if (viewFindViewById2 instanceof TextView) {
+            ((TextView) viewFindViewById2).setTextAppearance(i);
         }
     }
 
@@ -252,18 +252,18 @@ public class NotificationHeaderView extends RelativeLayout {
 
         private Rect getRectAroundView(View view) {
             float f = NotificationHeaderView.this.getResources().getDisplayMetrics().density * 48.0f;
-            float max = Math.max(f, view.getWidth());
-            float max2 = Math.max(f, view.getHeight());
+            float fMax = Math.max(f, view.getWidth());
+            float fMax2 = Math.max(f, view.getHeight());
             Rect rect = new Rect();
             if (view.getVisibility() == 8) {
                 view = NotificationHeaderView.this.getFirstChildNotGone();
-                rect.left = (int) (view.getLeft() - (max / 2.0f));
+                rect.left = (int) (view.getLeft() - (fMax / 2.0f));
             } else {
-                rect.left = (int) (((view.getLeft() + view.getRight()) / 2.0f) - (max / 2.0f));
+                rect.left = (int) (((view.getLeft() + view.getRight()) / 2.0f) - (fMax / 2.0f));
             }
-            rect.top = (int) (((view.getTop() + view.getBottom()) / 2.0f) - (max2 / 2.0f));
-            rect.bottom = (int) (rect.top + max2);
-            rect.right = (int) (rect.left + max);
+            rect.top = (int) (((view.getTop() + view.getBottom()) / 2.0f) - (fMax2 / 2.0f));
+            rect.bottom = (int) (rect.top + fMax2);
+            rect.right = (int) (rect.left + fMax);
             return rect;
         }
 

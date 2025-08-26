@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TransitioningIconDrawable extends Drawable {
     public int alpha = 255;
@@ -18,12 +17,12 @@ public final class TransitioningIconDrawable extends Drawable {
     public final ValueAnimator transitionAnimator;
 
     public TransitioningIconDrawable() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.getClass();
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.TransitioningIconDrawable$transitionAnimator$lambda$1$$inlined$doOnEnd$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.getClass();
+        valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.screenshot.ui.TransitioningIconDrawable$transitionAnimator$lambda$1$$inlined$doOnEnd$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                TransitioningIconDrawable transitioningIconDrawable = TransitioningIconDrawable.this;
+                TransitioningIconDrawable transitioningIconDrawable = this.this$0;
                 transitioningIconDrawable.drawable = transitioningIconDrawable.enteringDrawable;
                 transitioningIconDrawable.enteringDrawable = null;
                 transitioningIconDrawable.invalidateSelf();
@@ -41,7 +40,7 @@ public final class TransitioningIconDrawable extends Drawable {
             public final void onAnimationStart(Animator animator) {
             }
         });
-        this.transitionAnimator = ofFloat;
+        this.transitionAnimator = valueAnimatorOfFloat;
     }
 
     @Override // android.graphics.drawable.Drawable

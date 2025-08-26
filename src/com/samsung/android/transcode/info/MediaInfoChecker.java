@@ -66,15 +66,15 @@ public class MediaInfoChecker {
         return mediaFileInfo.HDR10 ? 1 : 0;
     }
 
-    public static boolean isSupportedResolution(MediaFormat mediaFormat, int i, int i2, int i3, int i4) {
+    public static boolean isSupportedResolution(MediaFormat mediaFormat, int i, int i2, int i3, int i4) throws IllegalStateException {
         LogS.d("TranscodeLib", "isSupportedResolution\tinputwidth: " + i + ", inputheight: " + i2 + ", outputwidth: " + i3 + ", outputheight : " + i4);
         if (i < 0 || i2 < 0 || i3 < 0 || i4 < 0) {
             return false;
         }
-        SemMediaResourceHelper createInstance = SemMediaResourceHelper.createInstance(2, false);
-        int remainedVideoCapacity = createInstance.getRemainedVideoCapacity();
+        SemMediaResourceHelper semMediaResourceHelperCreateInstance = SemMediaResourceHelper.createInstance(2, false);
+        int remainedVideoCapacity = semMediaResourceHelperCreateInstance.getRemainedVideoCapacity();
         int i5 = (i * i2) + (i3 * i4);
-        if (remainedVideoCapacity == NOT_SUPPORT_VC && (remainedVideoCapacity = createInstance.getMaxVideoCapacity()) <= i5) {
+        if (remainedVideoCapacity == NOT_SUPPORT_VC && (remainedVideoCapacity = semMediaResourceHelperCreateInstance.getMaxVideoCapacity()) <= i5) {
             remainedVideoCapacity = remainedVideoCapacity > FOUR_K_VIDEO_RESOULTION_SIZE ? remainedVideoCapacity + FOUR_K_VIDEO_RESOULTION_SIZE : remainedVideoCapacity * 2;
         }
         return remainedVideoCapacity >= i5;
@@ -87,8 +87,8 @@ public class MediaInfoChecker {
             return false;
         }
         MediaCodecList allCodecList = getAllCodecList();
-        String findDecoderForFormat = allCodecList.findDecoderForFormat(mediaFormat);
-        if (findDecoderForFormat == null) {
+        String strFindDecoderForFormat = allCodecList.findDecoderForFormat(mediaFormat);
+        if (strFindDecoderForFormat == null) {
             for (MediaCodecInfo mediaCodecInfo : allCodecList.getCodecInfos()) {
                 if (!mediaCodecInfo.isEncoder()) {
                     String[] supportedTypes = mediaCodecInfo.getSupportedTypes();
@@ -99,19 +99,19 @@ public class MediaInfoChecker {
                             break;
                         }
                         if (supportedTypes[i].equalsIgnoreCase(string)) {
-                            findDecoderForFormat = mediaCodecInfo.getName();
+                            strFindDecoderForFormat = mediaCodecInfo.getName();
                             break;
                         }
                         i++;
                     }
                 }
             }
-            if (findDecoderForFormat == null) {
+            if (strFindDecoderForFormat == null) {
                 LogS.e("TranscodeLib", "isSupportedCodecType not support mime : " + string);
                 return false;
             }
         }
-        LogS.e("TranscodeLib", "isSupportedCodecType support codec  : " + findDecoderForFormat + ", mime : " + string);
+        LogS.e("TranscodeLib", "isSupportedCodecType support codec  : " + strFindDecoderForFormat + ", mime : " + string);
         return true;
     }
 

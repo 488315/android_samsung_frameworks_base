@@ -8,10 +8,10 @@ public interface ValueFinder {
     AutofillValue findRawValueByAutofillId(AutofillId autofillId);
 
     default String findByAutofillId(AutofillId autofillId) {
-        AutofillValue findRawValueByAutofillId = findRawValueByAutofillId(autofillId);
-        if (findRawValueByAutofillId == null || !findRawValueByAutofillId.isText()) {
+        AutofillValue autofillValueFindRawValueByAutofillId = findRawValueByAutofillId(autofillId);
+        if (autofillValueFindRawValueByAutofillId == null || !autofillValueFindRawValueByAutofillId.isText()) {
             return null;
         }
-        return findRawValueByAutofillId.getTextValue().toString();
+        return autofillValueFindRawValueByAutofillId.getTextValue().toString();
     }
 }

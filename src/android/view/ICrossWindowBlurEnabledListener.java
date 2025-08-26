@@ -44,9 +44,9 @@ public interface ICrossWindowBlurEnabledListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICrossWindowBlurEnabledListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICrossWindowBlurEnabledListener)) {
-                return (ICrossWindowBlurEnabledListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICrossWindowBlurEnabledListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICrossWindowBlurEnabledListener)) {
+                return (ICrossWindowBlurEnabledListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ICrossWindowBlurEnabledListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onCrossWindowBlurEnabledChanged(readBoolean);
+                onCrossWindowBlurEnabledChanged(z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ICrossWindowBlurEnabledListener extends IInterface {
 
             @Override // android.view.ICrossWindowBlurEnabledListener
             public void onCrossWindowBlurEnabledChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICrossWindowBlurEnabledListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICrossWindowBlurEnabledListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -66,13 +66,13 @@ public final class IncidentReportArgs implements Parcelable {
     public void readFromParcel(Parcel parcel) {
         this.mAll = parcel.readInt() != 0;
         this.mSections.clear();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mSections.add(parcel.readInt());
         }
         this.mHeaders.clear();
-        int readInt2 = parcel.readInt();
-        for (int i2 = 0; i2 < readInt2; i2++) {
+        int i3 = parcel.readInt();
+        for (int i4 = 0; i4 < i3; i4++) {
             this.mHeaders.add(parcel.createByteArray());
         }
         this.mPrivacyPolicy = parcel.readInt();

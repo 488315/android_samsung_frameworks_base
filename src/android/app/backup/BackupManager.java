@@ -128,9 +128,9 @@ public class BackupManager {
         IBackupManager iBackupManager = sService;
         if (iBackupManager != null) {
             try {
-                IRestoreSession beginRestoreSessionForUser = iBackupManager.beginRestoreSessionForUser(this.mContext.getUserId(), null, null);
-                if (beginRestoreSessionForUser != null) {
-                    return new RestoreSession(this.mContext, beginRestoreSessionForUser);
+                IRestoreSession iRestoreSessionBeginRestoreSessionForUser = iBackupManager.beginRestoreSessionForUser(this.mContext.getUserId(), null, null);
+                if (iRestoreSessionBeginRestoreSessionForUser != null) {
+                    return new RestoreSession(this.mContext, iRestoreSessionBeginRestoreSessionForUser);
                 }
             } catch (RemoteException unused) {
                 Log.e(TAG, "beginRestoreSession() couldn't connect");

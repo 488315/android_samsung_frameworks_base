@@ -13,23 +13,23 @@ public enum Event {
 
     @Override // java.lang.Enum
     public String toString() {
-        int ordinal = ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = ordinal();
+        if (iOrdinal == 0) {
             return "DDAR_WORKSPACE_CREATED";
         }
-        if (ordinal == 1) {
+        if (iOrdinal == 1) {
             return "DEVICE_AUTH_SUCCESS";
         }
-        if (ordinal == 2) {
+        if (iOrdinal == 2) {
             return "DEVICE_LOCKED";
         }
-        if (ordinal == 3) {
+        if (iOrdinal == 3) {
             return "DATALOCK_TIMEOUT";
         }
-        if (ordinal == 4) {
+        if (iOrdinal == 4) {
             return "DDAR_WORKSPACE_AUTH_SUCCESS";
         }
-        if (ordinal == 5) {
+        if (iOrdinal == 5) {
             return "DDAR_WORKSPACE_REMOVED";
         }
         return NativeLibraryHelper.CLEAR_ABI_OVERRIDE;

@@ -129,9 +129,8 @@ public final class Request extends Message {
                     Log.d(TAG, "send request: " + this);
                     this.receiver.send(toAndroidMessage());
                     return this;
-                } catch (Exception e) {
-                    Log.w(TAG, "Exception: " + e.getMessage());
-                    e.printStackTrace();
+                } catch (RemoteException e) {
+                    Log.w(TAG, "fail to send request: " + e.getMessage());
                     List<MediaBuffer> list2 = this.inputBufferList;
                     if (list2 != null) {
                         list2.forEach(new MediaBufferGroup$$ExternalSyntheticLambda2());
@@ -145,8 +144,9 @@ public final class Request extends Message {
                     this.outputBufferList = null;
                     return this;
                 }
-            } catch (RemoteException e2) {
-                Log.w(TAG, "fail to send request: " + e2.getMessage());
+            } catch (Exception e2) {
+                Log.w(TAG, "Exception: " + e2.getMessage());
+                e2.printStackTrace();
                 List<MediaBuffer> list3 = this.inputBufferList;
                 if (list3 != null) {
                     list3.forEach(new MediaBufferGroup$$ExternalSyntheticLambda2());
@@ -220,9 +220,7 @@ public final class Request extends Message {
         return (ContentValues) Optional.ofNullable(getContentValuesList()).flatMap(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Optional findFirst;
-                findFirst = ((List) obj).stream().findFirst();
-                return findFirst;
+                return ((List) obj).stream().findFirst();
             }
         }).orElse(null);
     }

@@ -56,7 +56,7 @@ public final class PackageUtils {
         return computeSha256Digest(byteArrayOutputStream.toByteArray(), null);
     }
 
-    public static byte[] computeSha256DigestBytes(byte[] bArr) {
+    public static byte[] computeSha256DigestBytes(byte[] bArr) throws NoSuchAlgorithmException {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
             messageDigest.update(bArr);
@@ -70,18 +70,18 @@ public final class PackageUtils {
         return computeSha256Digest(bArr, null);
     }
 
-    public static String computeSha256Digest(byte[] bArr, String str) {
-        byte[] computeSha256DigestBytes = computeSha256DigestBytes(bArr);
-        if (computeSha256DigestBytes == null) {
+    public static String computeSha256Digest(byte[] bArr, String str) throws NoSuchAlgorithmException {
+        byte[] bArrComputeSha256DigestBytes = computeSha256DigestBytes(bArr);
+        if (bArrComputeSha256DigestBytes == null) {
             return null;
         }
         if (str == null) {
-            return HexEncoding.encodeToString(computeSha256DigestBytes, true);
+            return HexEncoding.encodeToString(bArrComputeSha256DigestBytes, true);
         }
-        int length = computeSha256DigestBytes.length;
+        int length = bArrComputeSha256DigestBytes.length;
         String[] strArr = new String[length];
         for (int i = 0; i < length; i++) {
-            strArr[i] = HexEncoding.encodeToString(computeSha256DigestBytes[i], true);
+            strArr[i] = HexEncoding.encodeToString(bArrComputeSha256DigestBytes[i], true);
         }
         return TextUtils.join(str, strArr);
     }
@@ -90,25 +90,24 @@ public final class PackageUtils {
         return new byte[ActivityManager.isLowRamDeviceStatic() ? 1000 : 1000000];
     }
 
-    public static byte[] computeSha256DigestForLargeFileAsBytes(String str, byte[] bArr) {
-        MessageDigest messageDigest;
+    public static byte[] computeSha256DigestForLargeFileAsBytes(String str, byte[] bArr) throws NoSuchAlgorithmException {
         try {
-            messageDigest = MessageDigest.getInstance("SHA256");
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
             messageDigest.reset();
+            try {
+                DigestInputStream digestInputStream = new DigestInputStream(new FileInputStream(new File(str)), messageDigest);
+                do {
+                    try {
+                    } finally {
+                    }
+                } while (digestInputStream.read(bArr) != -1);
+                digestInputStream.close();
+                return messageDigest.digest();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         } catch (NoSuchAlgorithmException unused) {
-        }
-        try {
-            DigestInputStream digestInputStream = new DigestInputStream(new FileInputStream(new File(str)), messageDigest);
-            do {
-                try {
-                } finally {
-                }
-            } while (digestInputStream.read(bArr) != -1);
-            digestInputStream.close();
-            return messageDigest.digest();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 
@@ -116,15 +115,15 @@ public final class PackageUtils {
         return computeSha256DigestForLargeFile(str, bArr, null);
     }
 
-    public static String computeSha256DigestForLargeFile(String str, byte[] bArr, String str2) {
-        byte[] computeSha256DigestForLargeFileAsBytes = computeSha256DigestForLargeFileAsBytes(str, bArr);
+    public static String computeSha256DigestForLargeFile(String str, byte[] bArr, String str2) throws NoSuchAlgorithmException {
+        byte[] bArrComputeSha256DigestForLargeFileAsBytes = computeSha256DigestForLargeFileAsBytes(str, bArr);
         if (str2 == null) {
-            return HexEncoding.encodeToString(computeSha256DigestForLargeFileAsBytes, false);
+            return HexEncoding.encodeToString(bArrComputeSha256DigestForLargeFileAsBytes, false);
         }
-        int length = computeSha256DigestForLargeFileAsBytes.length;
+        int length = bArrComputeSha256DigestForLargeFileAsBytes.length;
         String[] strArr = new String[length];
         for (int i = 0; i < length; i++) {
-            strArr[i] = HexEncoding.encodeToString(computeSha256DigestForLargeFileAsBytes[i], true);
+            strArr[i] = HexEncoding.encodeToString(bArrComputeSha256DigestForLargeFileAsBytes[i], true);
         }
         return TextUtils.join(str2, strArr);
     }

@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.media.MediaMetadata;
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaControllerExtKt {
     public static final String toLogText(MediaMetadata mediaMetadata) {
@@ -23,12 +22,12 @@ public abstract class MediaControllerExtKt {
             bitmap = mediaMetadata.getBitmap("android.media.metadata.DISPLAY_ICON");
         }
         boolean z = bitmap != null;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("MediaMetadata {title=", string, ", artist=", string2, ", duration=");
-        m.append(j);
-        m.append(", thumb=");
-        m.append(z);
-        m.append("}");
-        String sb = m.toString();
-        return sb == null ? "null" : sb;
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("MediaMetadata {title=", string, ", artist=", string2, ", duration=");
+        sbM.append(j);
+        sbM.append(", thumb=");
+        sbM.append(z);
+        sbM.append("}");
+        String string3 = sbM.toString();
+        return string3 == null ? "null" : string3;
     }
 }

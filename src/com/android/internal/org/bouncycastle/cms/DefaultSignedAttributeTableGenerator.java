@@ -32,24 +32,24 @@ public class DefaultSignedAttributeTableGenerator implements CMSAttributeTableGe
 
     protected Hashtable createStandardAttributeTable(Map map) {
         ASN1ObjectIdentifier aSN1ObjectIdentifier;
-        Hashtable copyHashTable = copyHashTable(this.table);
-        if (!copyHashTable.containsKey(CMSAttributes.contentType) && (aSN1ObjectIdentifier = ASN1ObjectIdentifier.getInstance(map.get("contentType"))) != null) {
+        Hashtable hashtableCopyHashTable = copyHashTable(this.table);
+        if (!hashtableCopyHashTable.containsKey(CMSAttributes.contentType) && (aSN1ObjectIdentifier = ASN1ObjectIdentifier.getInstance(map.get("contentType"))) != null) {
             Attribute attribute = new Attribute(CMSAttributes.contentType, new DERSet(aSN1ObjectIdentifier));
-            copyHashTable.put(attribute.getAttrType(), attribute);
+            hashtableCopyHashTable.put(attribute.getAttrType(), attribute);
         }
-        if (!copyHashTable.containsKey(CMSAttributes.signingTime)) {
+        if (!hashtableCopyHashTable.containsKey(CMSAttributes.signingTime)) {
             Attribute attribute2 = new Attribute(CMSAttributes.signingTime, new DERSet(new Time(new Date())));
-            copyHashTable.put(attribute2.getAttrType(), attribute2);
+            hashtableCopyHashTable.put(attribute2.getAttrType(), attribute2);
         }
-        if (!copyHashTable.containsKey(CMSAttributes.messageDigest)) {
+        if (!hashtableCopyHashTable.containsKey(CMSAttributes.messageDigest)) {
             Attribute attribute3 = new Attribute(CMSAttributes.messageDigest, new DERSet(new DEROctetString((byte[]) map.get(CMSAttributeTableGenerator.DIGEST))));
-            copyHashTable.put(attribute3.getAttrType(), attribute3);
+            hashtableCopyHashTable.put(attribute3.getAttrType(), attribute3);
         }
-        if (!copyHashTable.contains(CMSAttributes.cmsAlgorithmProtect)) {
+        if (!hashtableCopyHashTable.contains(CMSAttributes.cmsAlgorithmProtect)) {
             Attribute attribute4 = new Attribute(CMSAttributes.cmsAlgorithmProtect, new DERSet(new CMSAlgorithmProtection((AlgorithmIdentifier) map.get(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER), 1, (AlgorithmIdentifier) map.get(CMSAttributeTableGenerator.SIGNATURE_ALGORITHM_IDENTIFIER))));
-            copyHashTable.put(attribute4.getAttrType(), attribute4);
+            hashtableCopyHashTable.put(attribute4.getAttrType(), attribute4);
         }
-        return copyHashTable;
+        return hashtableCopyHashTable;
     }
 
     @Override // com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator
@@ -59,10 +59,10 @@ public class DefaultSignedAttributeTableGenerator implements CMSAttributeTableGe
 
     private static Hashtable copyHashTable(Hashtable hashtable) {
         Hashtable hashtable2 = new Hashtable();
-        Enumeration keys = hashtable.keys();
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            hashtable2.put(nextElement, hashtable.get(nextElement));
+        Enumeration enumerationKeys = hashtable.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            Object objNextElement = enumerationKeys.nextElement();
+            hashtable2.put(objNextElement, hashtable.get(objNextElement));
         }
         return hashtable2;
     }

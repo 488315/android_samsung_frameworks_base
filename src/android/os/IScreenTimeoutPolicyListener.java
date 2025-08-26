@@ -38,9 +38,9 @@ public interface IScreenTimeoutPolicyListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IScreenTimeoutPolicyListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScreenTimeoutPolicyListener)) {
-                return (IScreenTimeoutPolicyListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IScreenTimeoutPolicyListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScreenTimeoutPolicyListener)) {
+                return (IScreenTimeoutPolicyListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,9 +67,9 @@ public interface IScreenTimeoutPolicyListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onScreenTimeoutPolicyChanged(readInt);
+                onScreenTimeoutPolicyChanged(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -93,13 +93,13 @@ public interface IScreenTimeoutPolicyListener extends IInterface {
 
             @Override // android.os.IScreenTimeoutPolicyListener
             public void onScreenTimeoutPolicyChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScreenTimeoutPolicyListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScreenTimeoutPolicyListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

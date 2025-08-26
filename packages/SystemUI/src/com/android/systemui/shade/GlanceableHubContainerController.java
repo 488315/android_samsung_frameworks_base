@@ -53,7 +53,6 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GlanceableHubContainerController implements LifecycleOwner {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -91,20 +90,19 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
     public final GlanceableHubContainerController$touchLifecycleLogger$1 touchLifecycleLogger = new LifecycleEventObserver() { // from class: com.android.systemui.shade.GlanceableHubContainerController$touchLifecycleLogger$1
         @Override // androidx.lifecycle.LifecycleEventObserver
         public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
-            GlanceableHubContainerController glanceableHubContainerController = GlanceableHubContainerController.this;
+            GlanceableHubContainerController glanceableHubContainerController = this.this$0;
             Logger logger = glanceableHubContainerController.logger;
             GlanceableHubContainerController$$ExternalSyntheticLambda0 glanceableHubContainerController$$ExternalSyntheticLambda0 = new GlanceableHubContainerController$$ExternalSyntheticLambda0(5);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, glanceableHubContainerController$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(event.toString());
-            obtain.setBool1(glanceableHubContainerController.hubShowing);
-            obtain.setBool2(glanceableHubContainerController.shadeShowingAndConsumingTouches);
-            obtain.setBool3(glanceableHubContainerController.anyBouncerShowing);
-            obtain.setBool4(glanceableHubContainerController.inEditModeTransition);
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, glanceableHubContainerController$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(event.toString());
+            logMessageObtain.setBool1(glanceableHubContainerController.hubShowing);
+            logMessageObtain.setBool2(glanceableHubContainerController.shadeShowingAndConsumingTouches);
+            logMessageObtain.setBool3(glanceableHubContainerController.anyBouncerShowing);
+            logMessageObtain.setBool4(glanceableHubContainerController.inEditModeTransition);
+            logger.getBuffer().commit(logMessageObtain);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CommunalWrapper extends FrameLayout {
         public final CommunalSettingsInteractor communalSettingsInteractor;
         public final Set consumers;
@@ -131,7 +129,6 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -206,16 +203,16 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 Boolean bool = (Boolean) obj;
-                GlanceableHubContainerController.this.anyBouncerShowing = bool.booleanValue();
-                GlanceableHubContainerController glanceableHubContainerController = GlanceableHubContainerController.this;
+                this.this$0.anyBouncerShowing = bool.booleanValue();
+                GlanceableHubContainerController glanceableHubContainerController = this.this$0;
                 if (glanceableHubContainerController.hubShowing) {
                     Logger logger = glanceableHubContainerController.logger;
                     GlanceableHubContainerController$$ExternalSyntheticLambda0 glanceableHubContainerController$$ExternalSyntheticLambda0 = new GlanceableHubContainerController$$ExternalSyntheticLambda0(4);
-                    LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, glanceableHubContainerController$$ExternalSyntheticLambda0, null);
-                    obtain.setBool1(bool.booleanValue());
-                    logger.getBuffer().commit(obtain);
+                    LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, glanceableHubContainerController$$ExternalSyntheticLambda0, null);
+                    logMessageObtain.setBool1(bool.booleanValue());
+                    logger.getBuffer().commit(logMessageObtain);
                 }
-                GlanceableHubContainerController.access$updateTouchHandlingState(GlanceableHubContainerController.this);
+                GlanceableHubContainerController.access$updateTouchHandlingState(this.this$0);
             }
         }, null, null, 24, null);
         KeyguardState keyguardState = KeyguardState.LOCKSCREEN;
@@ -223,15 +220,15 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
         JavaAdapterKt.collectFlow$default(view, keyguardTransitionInteractor.isFinishedIn$1(keyguardState), new Consumer() { // from class: com.android.systemui.shade.GlanceableHubContainerController$initView$5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlanceableHubContainerController.this.onLockscreen = ((Boolean) obj).booleanValue();
+                this.this$0.onLockscreen = ((Boolean) obj).booleanValue();
             }
         }, null, null, 24, null);
         CommunalInteractor communalInteractor = this.communalInteractor;
         JavaAdapterKt.collectFlow$default(view, communalInteractor.isCommunalVisible, new Consumer() { // from class: com.android.systemui.shade.GlanceableHubContainerController$initView$6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlanceableHubContainerController.this.hubShowing = ((Boolean) obj).booleanValue();
-                GlanceableHubContainerController.access$updateTouchHandlingState(GlanceableHubContainerController.this);
+                this.this$0.hubShowing = ((Boolean) obj).booleanValue();
+                GlanceableHubContainerController.access$updateTouchHandlingState(this.this$0);
             }
         }, null, null, 24, null);
         Edge.Companion companion = Edge.Companion;
@@ -241,8 +238,8 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
         JavaAdapterKt.collectFlow$default(view, booleanFlowOperators.anyOf(communalInteractor.editActivityShowing, keyguardTransitionInteractor.isInTransition(new Edge.StateToState(keyguardState2, keyguardState3), null)), new Consumer() { // from class: com.android.systemui.shade.GlanceableHubContainerController$initView$7
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlanceableHubContainerController.this.inEditModeTransition = ((Boolean) obj).booleanValue();
-                GlanceableHubContainerController.access$updateTouchHandlingState(GlanceableHubContainerController.this);
+                this.this$0.inEditModeTransition = ((Boolean) obj).booleanValue();
+                GlanceableHubContainerController.access$updateTouchHandlingState(this.this$0);
             }
         }, null, null, 24, null);
         ShadeInteractorImpl shadeInteractorImpl = (ShadeInteractorImpl) this.shadeInteractor;
@@ -250,40 +247,40 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 Quad quad = (Quad) obj;
-                boolean booleanValue = ((Boolean) quad.component1()).booleanValue();
-                boolean booleanValue2 = ((Boolean) quad.component2()).booleanValue();
-                boolean booleanValue3 = ((Boolean) quad.component3()).booleanValue();
-                boolean booleanValue4 = ((Boolean) quad.component4()).booleanValue();
-                GlanceableHubContainerController glanceableHubContainerController = GlanceableHubContainerController.this;
-                glanceableHubContainerController.shadeConsumingTouches = booleanValue2;
+                boolean zBooleanValue = ((Boolean) quad.component1()).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) quad.component2()).booleanValue();
+                boolean zBooleanValue3 = ((Boolean) quad.component3()).booleanValue();
+                boolean zBooleanValue4 = ((Boolean) quad.component4()).booleanValue();
+                GlanceableHubContainerController glanceableHubContainerController = this.this$0;
+                glanceableHubContainerController.shadeConsumingTouches = zBooleanValue2;
                 boolean z = true;
-                glanceableHubContainerController.shadeShowing = booleanValue4 || !booleanValue3;
-                boolean z2 = booleanValue && !booleanValue2;
-                boolean z3 = !booleanValue3 && (glanceableHubContainerController.userNotInteractiveAtShadeFullyExpanded || z2);
+                glanceableHubContainerController.shadeShowing = zBooleanValue4 || !zBooleanValue3;
+                boolean z2 = zBooleanValue && !zBooleanValue2;
+                boolean z3 = !zBooleanValue3 && (glanceableHubContainerController.userNotInteractiveAtShadeFullyExpanded || z2);
                 glanceableHubContainerController.userNotInteractiveAtShadeFullyExpanded = z3;
                 if (!z3 && !z2) {
                     z = false;
                 }
                 if (z != glanceableHubContainerController.shadeShowingAndConsumingTouches && glanceableHubContainerController.hubShowing) {
                     Logger logger = glanceableHubContainerController.logger;
-                    LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(3), null);
-                    obtain.setBool1(z);
-                    logger.getBuffer().commit(obtain);
+                    LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(3), null);
+                    logMessageObtain.setBool1(z);
+                    logger.getBuffer().commit(logMessageObtain);
                 }
                 glanceableHubContainerController.shadeShowingAndConsumingTouches = z;
-                GlanceableHubContainerController.access$updateTouchHandlingState(GlanceableHubContainerController.this);
+                GlanceableHubContainerController.access$updateTouchHandlingState(this.this$0);
             }
         }, null, null, 24, null);
         JavaAdapterKt.collectFlow$default(view, keyguardInteractor.isDreaming, new Consumer() { // from class: com.android.systemui.shade.GlanceableHubContainerController$initView$12
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlanceableHubContainerController.this.isDreaming = ((Boolean) obj).booleanValue();
+                this.this$0.isDreaming = ((Boolean) obj).booleanValue();
             }
         }, null, null, 24, null);
         JavaAdapterKt.collectFlow$default(view, (Flow) this.communalViewModel.swipeToHubEnabled$delegate.getValue(), new Consumer() { // from class: com.android.systemui.shade.GlanceableHubContainerController$initView$13
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                GlanceableHubContainerController.this.swipeToHubEnabled = ((Boolean) obj).booleanValue();
+                this.this$0.swipeToHubEnabled = ((Boolean) obj).booleanValue();
             }
         }, null, null, 24, null);
         CommunalWrapper communalWrapper = new CommunalWrapper(view.getContext(), this.communalSettingsInteractor);
@@ -305,8 +302,8 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
             float y = motionEvent.getY();
             NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.notificationStackScrollLayoutController;
             notificationStackScrollLayoutController.getClass();
-            boolean isBelowLastNotification = notificationStackScrollLayoutController.mView.isBelowLastNotification(x, y);
-            boolean z2 = !isBelowLastNotification;
+            boolean zIsBelowLastNotification = notificationStackScrollLayoutController.mView.isBelowLastNotification(x, y);
+            boolean z2 = !zIsBelowLastNotification;
             int x2 = (int) motionEvent.getX();
             int y2 = (int) motionEvent.getY();
             KeyguardMediaController keyguardMediaController = this.keyguardMediaController;
@@ -317,7 +314,7 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
                 uniqueObjectHostView = null;
             }
             uniqueObjectHostView.getBoundsOnScreen(rect);
-            boolean contains = rect.contains(x2, y2);
+            boolean zContains = rect.contains(x2, y2);
             int x3 = (int) motionEvent.getX();
             int y3 = (int) motionEvent.getY();
             Iterator it = this.lockscreenSmartspaceController.smartspaceViews.iterator();
@@ -337,13 +334,13 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
             this.communalSettingsInteractor.isV2FlagEnabled();
             boolean z3 = this.hubShowing;
             Logger logger = this.logger;
-            if (!z3 && (!isBelowLastNotification || contains || z || !this.swipeToHubEnabled)) {
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(0), null);
-                obtain.setBool1(z2);
-                obtain.setBool2(contains);
-                obtain.setBool3(z);
-                obtain.setBool4(false);
-                logger.getBuffer().commit(obtain);
+            if (!z3 && (!zIsBelowLastNotification || zContains || z || !this.swipeToHubEnabled)) {
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(0), null);
+                logMessageObtain.setBool1(z2);
+                logMessageObtain.setBool2(zContains);
+                logMessageObtain.setBool3(z);
+                logMessageObtain.setBool4(false);
+                logger.getBuffer().commit(logMessageObtain);
                 return false;
             }
             boolean z4 = motionEvent.getActionMasked() == 0;
@@ -353,13 +350,13 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
             boolean z8 = this.anyBouncerShowing || this.shadeConsumingTouches || this.shadeShowing;
             if ((z4 || z6) && !z8) {
                 if (z4) {
-                    LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(1), null);
-                    obtain2.setInt1((int) motionEvent.getX());
-                    obtain2.setInt2((int) motionEvent.getY());
-                    obtain2.setBool1(this.hubShowing);
-                    obtain2.setBool2(this.isDreaming);
-                    obtain2.setBool3(this.onLockscreen);
-                    logger.getBuffer().commit(obtain2);
+                    LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(1), null);
+                    logMessageObtain2.setInt1((int) motionEvent.getX());
+                    logMessageObtain2.setInt2((int) motionEvent.getY());
+                    logMessageObtain2.setBool1(this.hubShowing);
+                    logMessageObtain2.setBool2(this.isDreaming);
+                    logMessageObtain2.setBool3(this.onLockscreen);
+                    logger.getBuffer().commit(logMessageObtain2);
                 }
                 this.isTrackingHubTouch = true;
             }
@@ -370,13 +367,13 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
                 }
                 this.touchTakenByKeyguardGesture = z9;
                 if (z5 || z7) {
-                    LogMessage obtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(2), null);
-                    obtain3.setInt1((int) motionEvent.getX());
-                    obtain3.setInt2((int) motionEvent.getY());
-                    obtain3.setBool1(z5);
-                    obtain3.setBool2(this.shadeConsumingTouches);
-                    obtain3.setBool3(this.anyBouncerShowing);
-                    logger.getBuffer().commit(obtain3);
+                    LogMessage logMessageObtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new GlanceableHubContainerController$$ExternalSyntheticLambda0(2), null);
+                    logMessageObtain3.setInt1((int) motionEvent.getX());
+                    logMessageObtain3.setInt2((int) motionEvent.getY());
+                    logMessageObtain3.setBool1(z5);
+                    logMessageObtain3.setBool2(this.shadeConsumingTouches);
+                    logMessageObtain3.setBool3(this.anyBouncerShowing);
+                    logger.getBuffer().commit(logMessageObtain3);
                     this.isTrackingHubTouch = false;
                     this.touchTakenByKeyguardGesture = false;
                 }
@@ -392,7 +389,7 @@ public final class GlanceableHubContainerController implements LifecycleOwner {
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj2) {
                                 if (((Boolean) obj2).booleanValue()) {
-                                    Ref$BooleanRef.this.element = true;
+                                    ref$BooleanRef.element = true;
                                 }
                             }
                         });

@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SimpleInflater {
     public final Resources resources;
@@ -27,10 +26,10 @@ public abstract class SimpleInflater {
         }
     }
 
-    public final Object inflate(XmlPullParser xmlPullParser) {
+    public final Object inflate(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int next;
         int next2;
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
         do {
             try {
                 next = xmlPullParser.next();
@@ -46,15 +45,15 @@ public abstract class SimpleInflater {
         if (next != 2) {
             throw new InflateException(xmlPullParser.getPositionDescription() + ": No start tag found!");
         }
-        Object createItemFromTag = createItemFromTag(xmlPullParser.getName(), asAttributeSet);
+        Object objCreateItemFromTag = createItemFromTag(xmlPullParser.getName(), attributeSetAsAttributeSet);
         int depth = xmlPullParser.getDepth();
         do {
             next2 = xmlPullParser.next();
             if ((next2 == 3 && xmlPullParser.getDepth() <= depth) || next2 == 1) {
-                return createItemFromTag;
+                return objCreateItemFromTag;
             }
         } while (next2 != 2);
-        onAddChildItem(createItemFromTag, createItemFromTag(xmlPullParser.getName(), asAttributeSet));
+        onAddChildItem(objCreateItemFromTag, createItemFromTag(xmlPullParser.getName(), attributeSetAsAttributeSet));
         throw null;
     }
 

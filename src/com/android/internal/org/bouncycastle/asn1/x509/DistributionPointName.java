@@ -64,17 +64,17 @@ public class DistributionPointName extends ASN1Object implements ASN1Choice {
     }
 
     public String toString() {
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("DistributionPointName: [");
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         if (this.type == 0) {
-            appendObject(stringBuffer, lineSeparator, "fullName", this.name.toString());
+            appendObject(stringBuffer, strLineSeparator, "fullName", this.name.toString());
         } else {
-            appendObject(stringBuffer, lineSeparator, "nameRelativeToCRLIssuer", this.name.toString());
+            appendObject(stringBuffer, strLineSeparator, "nameRelativeToCRLIssuer", this.name.toString());
         }
         stringBuffer.append(NavigationBarInflaterView.SIZE_MOD_END);
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         return stringBuffer.toString();
     }
 

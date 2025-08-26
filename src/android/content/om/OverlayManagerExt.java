@@ -3,7 +3,6 @@ package android.content.om;
 import android.app.ActivityThread;
 import android.content.Context;
 import android.content.om.IOverlayManager;
-import android.content.om.OverlayManagerExt;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ApkAssets;
@@ -59,9 +58,7 @@ public class OverlayManagerExt {
         return Arrays.stream(context.getResources().getAssets().getApkAssets()).anyMatch(new Predicate() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda5
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean startsWith;
-                startsWith = ((ApkAssets) obj).getAssetPath().startsWith(OverlayManagerExt.CATEGORY_PATH[i]);
-                return startsWith;
+                return ((ApkAssets) obj).getAssetPath().startsWith(OverlayManagerExt.CATEGORY_PATH[i]);
             }
         });
     }
@@ -73,9 +70,7 @@ public class OverlayManagerExt {
         List<OverlayInfoExt> list = (List) ((List) ((Stream) Arrays.stream(overlayStateChangeRequest.paths).filter(new OverlayManagerExt$$ExternalSyntheticLambda0()).parallel()).map(new Function() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda7
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                OverlayInfoExt lambda$replaceOverlays$1;
-                lambda$replaceOverlays$1 = OverlayManagerExt.this.lambda$replaceOverlays$1(overlayStateChangeRequest, (String) obj);
-                return lambda$replaceOverlays$1;
+                return this.f$0.lambda$replaceOverlays$1(overlayStateChangeRequest, (String) obj);
             }
         }).collect(Collectors.toList())).stream().filter(new OverlayManagerExt$$ExternalSyntheticLambda2()).collect(Collectors.toList());
         String[] strArr = overlayStateChangeRequest.paths;
@@ -86,15 +81,15 @@ public class OverlayManagerExt {
                 break;
             }
             String str = strArr[i];
-            final String replaceAll = str != null ? str.replaceAll("/+", "/") : null;
+            final String strReplaceAll = str != null ? str.replaceAll("/+", "/") : null;
             if (!list.stream().anyMatch(new Predicate() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda8
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return OverlayManagerExt.lambda$replaceOverlays$2(replaceAll, (OverlayInfoExt) obj);
+                    return OverlayManagerExt.lambda$replaceOverlays$2(strReplaceAll, (OverlayInfoExt) obj);
                 }
             }) && overlayStateChangeRequest.callback != null) {
                 try {
-                    overlayStateChangeRequest.callback.onOverlayStateChanged(replaceAll, "", -1);
+                    overlayStateChangeRequest.callback.onOverlayStateChanged(strReplaceAll, "", -1);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -103,10 +98,10 @@ public class OverlayManagerExt {
         }
         OverlayInfoExt[] allOverlays = getAllOverlays(overlayStateChangeRequest.category, overlayStateChangeRequest.userId);
         ArrayList arrayList = new ArrayList();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (OverlayInfoExt overlayInfoExt : allOverlays) {
             if (overlayInfoExt != null && overlayInfoExt.info != null) {
-                hashMap.put(overlayInfoExt.info.baseCodePath, overlayInfoExt);
+                map.put(overlayInfoExt.info.baseCodePath, overlayInfoExt);
             }
         }
         if (overlayStateChangeRequest.pathsToRemove == null) {
@@ -116,16 +111,16 @@ public class OverlayManagerExt {
         int length2 = strArr2.length;
         for (int i2 = 0; i2 < length2; i2++) {
             String str2 = strArr2[i2];
-            String replaceAll2 = str2 != null ? str2.replaceAll("/+", "/") : null;
-            if (hashMap.containsKey(replaceAll2)) {
-                arrayList.add((OverlayInfoExt) hashMap.get(replaceAll2));
+            String strReplaceAll2 = str2 != null ? str2.replaceAll("/+", "/") : null;
+            if (map.containsKey(strReplaceAll2)) {
+                arrayList.add((OverlayInfoExt) map.get(strReplaceAll2));
             } else {
                 OverlayInfoExt overlay = getOverlay(str2, overlayStateChangeRequest.userId);
                 if (overlay != null) {
                     arrayList.add(overlay);
                 } else if (overlayStateChangeRequest.callback != null) {
                     try {
-                        overlayStateChangeRequest.callback.onOverlayStateChanged(replaceAll2, "", -1);
+                        overlayStateChangeRequest.callback.onOverlayStateChanged(strReplaceAll2, "", -1);
                     } catch (RemoteException e2) {
                         e2.printStackTrace();
                     }
@@ -159,9 +154,7 @@ public class OverlayManagerExt {
         List<OverlayInfoExt> list = (List) ((Stream) Arrays.stream(overlayStateChangeRequest.paths).filter(new OverlayManagerExt$$ExternalSyntheticLambda0()).parallel()).map(new Function() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                OverlayInfoExt lambda$addOverlayPaths$3;
-                lambda$addOverlayPaths$3 = OverlayManagerExt.this.lambda$addOverlayPaths$3(overlayStateChangeRequest, (String) obj);
-                return lambda$addOverlayPaths$3;
+                return this.f$0.lambda$addOverlayPaths$3(overlayStateChangeRequest, (String) obj);
             }
         }).filter(new OverlayManagerExt$$ExternalSyntheticLambda2()).collect(Collectors.toList());
         if (overlayStateChangeRequest.callback != null) {
@@ -169,15 +162,15 @@ public class OverlayManagerExt {
             int length = strArr.length;
             for (int i = 0; i < length; i++) {
                 String str = strArr[i];
-                final String replaceAll = str != null ? str.replaceAll("/+", "/") : null;
+                final String strReplaceAll = str != null ? str.replaceAll("/+", "/") : null;
                 if (!list.stream().anyMatch(new Predicate() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda3
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        return OverlayManagerExt.lambda$addOverlayPaths$4(replaceAll, (OverlayInfoExt) obj);
+                        return OverlayManagerExt.lambda$addOverlayPaths$4(strReplaceAll, (OverlayInfoExt) obj);
                     }
                 })) {
                     try {
-                        overlayStateChangeRequest.callback.onOverlayStateChanged(replaceAll, "", -1);
+                        overlayStateChangeRequest.callback.onOverlayStateChanged(strReplaceAll, "", -1);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -217,7 +210,7 @@ public class OverlayManagerExt {
             this.mService.removeOverlays((List) Arrays.stream(allOverlays).filter(new Predicate() { // from class: android.content.om.OverlayManagerExt$$ExternalSyntheticLambda6
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return OverlayManagerExt.lambda$removeOverlayPaths$5(OverlayManagerExt.OverlayStateChangeRequest.this, (OverlayInfoExt) obj);
+                    return OverlayManagerExt.lambda$removeOverlayPaths$5(overlayStateChangeRequest, (OverlayInfoExt) obj);
                 }
             }).collect(Collectors.toList()), overlayStateChangeRequest.callback, overlayStateChangeRequest.userId);
         } catch (RemoteException e) {
@@ -284,13 +277,13 @@ public class OverlayManagerExt {
             }
         } else {
             Slog.e(TAG, "ActivityThread was " + ActivityThread.currentActivityThread() + " app " + ActivityThread.currentApplication());
-            OverlayScanner.ParsedOverlayInfo parseOverlayManifest = this.mOverlayScanner.parseOverlayManifest(new File(str), new ArrayList());
-            if (parseOverlayManifest != null) {
-                String str3 = parseOverlayManifest.targetPackageName;
-                if ((i == 0 || i == 2) && SamsungThemeConstants.overlayTargetMap.containsKey(parseOverlayManifest.targetPackageName)) {
-                    str3 = SamsungThemeConstants.overlayTargetMap.get(parseOverlayManifest.targetPackageName);
+            OverlayScanner.ParsedOverlayInfo overlayManifest = this.mOverlayScanner.parseOverlayManifest(new File(str), new ArrayList());
+            if (overlayManifest != null) {
+                String str3 = overlayManifest.targetPackageName;
+                if ((i == 0 || i == 2) && SamsungThemeConstants.overlayTargetMap.containsKey(overlayManifest.targetPackageName)) {
+                    str3 = SamsungThemeConstants.overlayTargetMap.get(overlayManifest.targetPackageName);
                 }
-                return new OverlayInfoExt(i, i2, new OverlayInfo(parseOverlayManifest.packageName, null, str3, null, OverlayInfoExt.getFormattedCategory("", i, i2), parseOverlayManifest.path.getAbsolutePath(), -1, i3, parseOverlayManifest.priority, true, false));
+                return new OverlayInfoExt(i, i2, new OverlayInfo(overlayManifest.packageName, null, str3, null, OverlayInfoExt.getFormattedCategory("", i, i2), overlayManifest.path.getAbsolutePath(), -1, i3, overlayManifest.priority, true, false));
             }
         }
         return null;

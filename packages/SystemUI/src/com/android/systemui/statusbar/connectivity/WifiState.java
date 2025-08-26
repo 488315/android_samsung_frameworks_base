@@ -12,7 +12,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WifiState extends ConnectivityState {
     public boolean isCarrierMerged;
@@ -54,11 +53,11 @@ public final class WifiState extends ConnectivityState {
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
     public final int hashCode() {
-        int hashCode = super.hashCode() * 31;
+        int iHashCode = super.hashCode() * 31;
         String str = this.ssid;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (str != null ? str.hashCode() : 0)) * 31, 31, this.isTransient), 31, this.isDefault);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (str != null ? str.hashCode() : 0)) * 31, 31, this.isTransient), 31, this.isDefault);
         String str2 = this.statusLabel;
-        return TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((m + (str2 != null ? str2.hashCode() : 0)) * 31, 31, this.isCarrierMerged), 31, this.isDefaultConnectionValidated) + this.subId;
+        return TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iM + (str2 != null ? str2.hashCode() : 0)) * 31, 31, this.isCarrierMerged), 31, this.isDefaultConnectionValidated) + this.subId;
     }
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
@@ -68,9 +67,9 @@ public final class WifiState extends ConnectivityState {
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
     public final List tableData() {
-        List asList = Arrays.asList(this.ssid, Boolean.valueOf(this.isTransient), Boolean.valueOf(this.isDefault), this.statusLabel, Boolean.valueOf(this.isCarrierMerged), Boolean.valueOf(this.isDefaultConnectionValidated), Integer.valueOf(this.subId));
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-        Iterator it = asList.iterator();
+        List listAsList = Arrays.asList(this.ssid, Boolean.valueOf(this.isTransient), Boolean.valueOf(this.isDefault), this.statusLabel, Boolean.valueOf(this.isCarrierMerged), Boolean.valueOf(this.isDefaultConnectionValidated), Integer.valueOf(this.subId));
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+        Iterator it = listAsList.iterator();
         while (it.hasNext()) {
             arrayList.add(String.valueOf(it.next()));
         }

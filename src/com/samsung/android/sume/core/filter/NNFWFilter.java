@@ -57,30 +57,30 @@ public abstract class NNFWFilter implements MediaFilter {
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
         if (mutableMediaBuffer.isEmpty()) {
             MediaFormat format = mediaBuffer.getFormat();
-            MutableMediaFormat mutableMediaFormat = (MutableMediaFormat) Optional.ofNullable(this.descriptor.getOutputFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda0
+            MutableMediaFormat mutableFormat = (MutableMediaFormat) Optional.ofNullable(this.descriptor.getOutputFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     return ((MutableMediaFormat) obj).copy();
                 }
             }).orElse(null);
-            Def.require((format == null && mutableMediaFormat == null) ? false : true);
-            if (format == null || mutableMediaFormat == null) {
-                if (mutableMediaFormat == null) {
-                    mutableMediaFormat = ((MediaFormat) Objects.requireNonNull(format)).toMutableFormat();
+            Def.require((format == null && mutableFormat == null) ? false : true);
+            if (format == null || mutableFormat == null) {
+                if (mutableFormat == null) {
+                    mutableFormat = ((MediaFormat) Objects.requireNonNull(format)).toMutableFormat();
                 }
-            } else if (mutableMediaFormat.getShape() == null || mutableMediaFormat.getShape().isEmpty()) {
-                mutableMediaFormat.setShape(format.getShape());
+            } else if (mutableFormat.getShape() == null || mutableFormat.getShape().isEmpty()) {
+                mutableFormat.setShape(format.getShape());
             }
-            mutableMediaBuffer.setFormat(mutableMediaFormat.toMediaFormat());
+            mutableMediaBuffer.setFormat(mutableFormat.toMediaFormat());
         }
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         try {
             ExecuteDelegator executeDelegator = this.executeDelegator;
             if (executeDelegator != null) {
                 executeDelegator.execute(mediaBuffer, mutableMediaBuffer, new BiBufferProcessor() { // from class: com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda1
                     @Override // com.samsung.android.sume.core.functional.BiBufferProcessor
                     public final void process(MediaBuffer mediaBuffer2, MediaBuffer mediaBuffer3) {
-                        NNFWFilter.this.runAdapter(mediaBuffer2, mediaBuffer3);
+                        this.f$0.runAdapter(mediaBuffer2, mediaBuffer3);
                     }
                 });
             } else {
@@ -98,7 +98,7 @@ public abstract class NNFWFilter implements MediaFilter {
                 Log.d(TAG, "convert to target-format: " + this.targetFormat);
                 mutableMediaBuffer.put((MediaBuffer) UniImgp.ofCvtData().run((MediaBuffer) mutableMediaBuffer, MediaBuffer.mutableOf(this.targetFormat)));
             }
-            Log.d(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.descriptor.getFw() + "] processing nn ts: " + (System.currentTimeMillis() - currentTimeMillis) + "ms");
+            Log.d(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.descriptor.getFw() + "] processing nn ts: " + (System.currentTimeMillis() - jCurrentTimeMillis) + "ms");
             return mutableMediaBuffer;
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,7 +13,6 @@ import kotlin.Pair;
 import kotlin.Result;
 import kotlin.collections.MapsKt__MapsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ViewModelFactory implements ViewModelProvider.Factory {
     public final Map creators;
@@ -25,9 +24,9 @@ public final class ViewModelFactory implements ViewModelProvider.Factory {
     @Override // androidx.lifecycle.ViewModelProvider.Factory
     public final ViewModel create(Class cls, CreationExtras creationExtras) {
         Object failure;
-        Object obj = getCreator(cls).get();
-        if (obj instanceof SavedStateHandleAssisted) {
-            SavedStateHandleAssisted savedStateHandleAssisted = (SavedStateHandleAssisted) obj;
+        Object objCreate = getCreator(cls).get();
+        if (objCreate instanceof SavedStateHandleAssisted) {
+            SavedStateHandleAssisted savedStateHandleAssisted = (SavedStateHandleAssisted) objCreate;
             try {
                 int i = Result.$r8$clinit;
                 failure = SavedStateHandleSupport.createSavedStateHandle(creationExtras);
@@ -38,13 +37,13 @@ public final class ViewModelFactory implements ViewModelProvider.Factory {
             if (failure instanceof Result.Failure) {
                 failure = null;
             }
-            obj = savedStateHandleAssisted.create((SavedStateHandle) failure);
+            objCreate = savedStateHandleAssisted.create((SavedStateHandle) failure);
         }
-        return (ViewModel) obj;
+        return (ViewModel) objCreate;
     }
 
     public final Provider getCreator(Class cls) {
-        Object obj;
+        Object next;
         Provider provider = (Provider) this.creators.get(cls);
         if (provider != null) {
             return provider;
@@ -52,15 +51,15 @@ public final class ViewModelFactory implements ViewModelProvider.Factory {
         Iterator it = this.creators.entrySet().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (cls.isAssignableFrom((Class) ((Map.Entry) obj).getKey())) {
+            next = it.next();
+            if (cls.isAssignableFrom((Class) ((Map.Entry) next).getKey())) {
                 break;
             }
         }
-        Map.Entry entry = (Map.Entry) obj;
+        Map.Entry entry = (Map.Entry) next;
         Provider provider2 = entry != null ? (Provider) entry.getValue() : null;
         if (provider2 != null) {
             return provider2;

@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMutableMap {
     public final Set entries;
@@ -17,7 +16,6 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
     public final Set keys;
     public final Collection values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateMapStateRecord<K, V> extends StateRecord {
         public PersistentMap map;
         public int modification;
@@ -51,9 +49,9 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
     public SnapshotStateMap() {
         PersistentHashMap.Companion.getClass();
         PersistentHashMap persistentHashMap = PersistentHashMap.EMPTY;
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        StateMapStateRecord stateMapStateRecord = new StateMapStateRecord(currentSnapshot.getSnapshotId(), persistentHashMap);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        StateMapStateRecord stateMapStateRecord = new StateMapStateRecord(snapshotCurrentSnapshot.getSnapshotId(), persistentHashMap);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             stateMapStateRecord.next = new StateMapStateRecord(1, persistentHashMap);
         }
         this.firstStateRecord = stateMapStateRecord;
@@ -80,7 +78,7 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
 
     @Override // java.util.Map
     public final void clear() {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         StateMapStateRecord stateMapStateRecord = (StateMapStateRecord) SnapshotKt.current(this.firstStateRecord);
         PersistentHashMap.Companion.getClass();
         PersistentHashMap persistentHashMap = PersistentHashMap.EMPTY;
@@ -88,14 +86,14 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
             StateMapStateRecord stateMapStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                StateMapStateRecord stateMapStateRecord3 = (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, currentSnapshot);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                StateMapStateRecord stateMapStateRecord3 = (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, snapshotCurrentSnapshot);
                 synchronized (SnapshotStateMapKt.sync) {
                     stateMapStateRecord3.map = persistentHashMap;
                     stateMapStateRecord3.modification++;
                 }
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
         }
     }
 
@@ -147,9 +145,9 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
     public final Object put(Object obj, Object obj2) {
         PersistentMap persistentMap;
         int i;
-        V put;
-        Snapshot currentSnapshot;
-        boolean access$attemptUpdate;
+        V vPut;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAccess$attemptUpdate;
         do {
             synchronized (SnapshotStateMapKt.sync) {
                 StateMapStateRecord stateMapStateRecord = (StateMapStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -159,28 +157,28 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
             }
             persistentMap.getClass();
             PersistentMap.Builder builder = persistentMap.builder();
-            put = builder.put(obj, obj2);
-            PersistentMap build = builder.build();
-            if (Intrinsics.areEqual(build, persistentMap)) {
+            vPut = builder.put(obj, obj2);
+            PersistentMap persistentMapBuild = builder.build();
+            if (Intrinsics.areEqual(persistentMapBuild, persistentMap)) {
                 break;
             }
             StateMapStateRecord stateMapStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                access$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, currentSnapshot), i, build);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAccess$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, snapshotCurrentSnapshot), i, persistentMapBuild);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!access$attemptUpdate);
-        return put;
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAccess$attemptUpdate);
+        return vPut;
     }
 
     @Override // java.util.Map
     public final void putAll(Map map) {
         PersistentMap persistentMap;
         int i;
-        Snapshot currentSnapshot;
-        boolean access$attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAccess$attemptUpdate;
         do {
             synchronized (SnapshotStateMapKt.sync) {
                 StateMapStateRecord stateMapStateRecord = (StateMapStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -191,27 +189,27 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
             persistentMap.getClass();
             PersistentMap.Builder builder = persistentMap.builder();
             builder.putAll(map);
-            PersistentMap build = builder.build();
-            if (Intrinsics.areEqual(build, persistentMap)) {
+            PersistentMap persistentMapBuild = builder.build();
+            if (Intrinsics.areEqual(persistentMapBuild, persistentMap)) {
                 return;
             }
             StateMapStateRecord stateMapStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                access$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, currentSnapshot), i, build);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAccess$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, snapshotCurrentSnapshot), i, persistentMapBuild);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!access$attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAccess$attemptUpdate);
     }
 
     @Override // java.util.Map
     public final Object remove(Object obj) {
         PersistentMap persistentMap;
         int i;
-        V remove;
-        Snapshot currentSnapshot;
-        boolean access$attemptUpdate;
+        V vRemove;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAccess$attemptUpdate;
         do {
             synchronized (SnapshotStateMapKt.sync) {
                 StateMapStateRecord stateMapStateRecord = (StateMapStateRecord) SnapshotKt.current(this.firstStateRecord);
@@ -221,20 +219,20 @@ public final class SnapshotStateMap<K, V> implements StateObject, Map<K, V>, KMu
             }
             persistentMap.getClass();
             PersistentMap.Builder builder = persistentMap.builder();
-            remove = builder.remove(obj);
-            PersistentMap build = builder.build();
-            if (Intrinsics.areEqual(build, persistentMap)) {
+            vRemove = builder.remove(obj);
+            PersistentMap persistentMapBuild = builder.build();
+            if (Intrinsics.areEqual(persistentMapBuild, persistentMap)) {
                 break;
             }
             StateMapStateRecord stateMapStateRecord2 = this.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                access$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, currentSnapshot), i, build);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAccess$attemptUpdate = access$attemptUpdate(this, (StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, this, snapshotCurrentSnapshot), i, persistentMapBuild);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
-        } while (!access$attemptUpdate);
-        return remove;
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
+        } while (!zAccess$attemptUpdate);
+        return vRemove;
     }
 
     @Override // java.util.Map

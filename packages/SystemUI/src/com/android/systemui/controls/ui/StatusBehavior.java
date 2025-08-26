@@ -12,13 +12,12 @@ import android.view.Window;
 import com.android.systemui.R;
 import com.android.systemui.popup.util.PopupUIUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StatusBehavior implements Behavior, SecBehavior {
     public ControlViewHolder cvh;
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void bind(final ControlWithState controlWithState, int i) {
+    public final void bind(final ControlWithState controlWithState, int i) throws Resources.NotFoundException {
         int i2;
         final Control control = controlWithState.control;
         if (control != null) {
@@ -29,13 +28,13 @@ public final class StatusBehavior implements Behavior, SecBehavior {
             controlViewHolder.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.StatusBehavior$bind$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ControlViewHolder controlViewHolder2 = StatusBehavior.this.cvh;
+                    ControlViewHolder controlViewHolder2 = this.this$0.cvh;
                     if (controlViewHolder2 == null) {
                         controlViewHolder2 = null;
                     }
                     SecControlActionCoordinator secControlActionCoordinator = controlViewHolder2.getSecControlViewHolder().secControlActionCoordinator;
                     if (secControlActionCoordinator != null) {
-                        ControlViewHolder controlViewHolder3 = StatusBehavior.this.cvh;
+                        ControlViewHolder controlViewHolder3 = this.this$0.cvh;
                         ((ControlActionCoordinatorImpl) secControlActionCoordinator).touchCard(controlViewHolder3 != null ? controlViewHolder3 : null, control.getControlTemplate().getTemplateId(), control);
                     }
                 }
@@ -51,7 +50,7 @@ public final class StatusBehavior implements Behavior, SecBehavior {
             controlViewHolder2.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.StatusBehavior$bind$msg$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    StatusBehavior statusBehavior = StatusBehavior.this;
+                    StatusBehavior statusBehavior = this.this$0;
                     final ControlViewHolder controlViewHolder3 = statusBehavior.cvh;
                     if (controlViewHolder3 == null) {
                         controlViewHolder3 = null;
@@ -66,10 +65,10 @@ public final class StatusBehavior implements Behavior, SecBehavior {
                     builder.setMessage(resources.getString(R.string.sec_controls_error_removed_message, applicationLabel));
                     builder.setPositiveButton(R.string.sec_controls_open_app, new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.ui.StatusBehavior$showSecNotFoundDialog$builder$1$1
                         @Override // android.content.DialogInterface.OnClickListener
-                        public final void onClick(DialogInterface dialogInterface, int i3) {
+                        public final void onClick(DialogInterface dialogInterface, int i3) throws Resources.NotFoundException, PendingIntent.CanceledException {
                             PendingIntent appIntent;
                             try {
-                                Control control3 = ControlWithState.this.control;
+                                Control control3 = controlWithState2.control;
                                 if (control3 != null && (appIntent = control3.getAppIntent()) != null) {
                                     appIntent.send();
                                 }
@@ -86,22 +85,22 @@ public final class StatusBehavior implements Behavior, SecBehavior {
                             dialogInterface.cancel();
                         }
                     });
-                    final AlertDialog create = builder.create();
-                    create.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.controls.ui.StatusBehavior$showSecNotFoundDialog$1$1
+                    final AlertDialog alertDialogCreate = builder.create();
+                    alertDialogCreate.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.controls.ui.StatusBehavior$showSecNotFoundDialog$1$1
                         @Override // android.content.DialogInterface.OnShowListener
-                        public final void onShow(DialogInterface dialogInterface) {
-                            int color = create.getContext().getResources().getColor(R.color.basic_interaction_dialog_button, create.getContext().getTheme());
-                            AlertDialog alertDialog = create;
+                        public final void onShow(DialogInterface dialogInterface) throws Resources.NotFoundException {
+                            int color = alertDialogCreate.getContext().getResources().getColor(R.color.basic_interaction_dialog_button, alertDialogCreate.getContext().getTheme());
+                            AlertDialog alertDialog = alertDialogCreate;
                             alertDialog.getButton(-1).setTextColor(color);
                             alertDialog.getButton(-2).setTextColor(color);
                         }
                     });
-                    Window window = create.getWindow();
+                    Window window = alertDialogCreate.getWindow();
                     if (window != null) {
                         window.setType(2020);
-                        create.show();
+                        alertDialogCreate.show();
                     }
-                    controlViewHolder3.visibleDialog = create;
+                    controlViewHolder3.visibleDialog = alertDialogCreate;
                 }
             });
             i2 = R.string.sec_controls_error_removed;

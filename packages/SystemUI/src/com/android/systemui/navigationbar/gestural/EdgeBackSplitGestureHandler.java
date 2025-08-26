@@ -28,7 +28,6 @@ import java.util.function.Function;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EdgeBackSplitGestureHandler {
     public static final Companion Companion = new Companion(null);
@@ -46,12 +45,11 @@ public final class EdgeBackSplitGestureHandler {
     private SettingsHelper.OnChangedCallback settingsCallBack = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.gestural.EdgeBackSplitGestureHandler$settingsCallBack$1
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
-            EdgeBackSplitGestureHandler edgeBackSplitGestureHandler = EdgeBackSplitGestureHandler.this;
+            EdgeBackSplitGestureHandler edgeBackSplitGestureHandler = this.this$0;
             edgeBackSplitGestureHandler.setEnabled(edgeBackSplitGestureHandler.getSettingsHelper().isSplitGestureEnabled());
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -96,7 +94,7 @@ public final class EdgeBackSplitGestureHandler {
                         if (EdgeBackSplitGestureHandler.SAFE_DEBUG) {
                             Log.d("EdgeBackSplitGestureHandler", "onCanceled SplitGestureHandler");
                         }
-                        EdgeBackSplitGestureHandler.this.gestureDetected = false;
+                        edgeBackSplitGestureHandler.gestureDetected = false;
                     }
 
                     public final void onCommitted(int i2) {
@@ -104,7 +102,7 @@ public final class EdgeBackSplitGestureHandler {
                         if (EdgeBackSplitGestureHandler.SAFE_DEBUG) {
                             ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "onCommitted SplitGestureHandler , getureFrom = ", "EdgeBackSplitGestureHandler");
                         }
-                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler2 = EdgeBackSplitGestureHandler.this;
+                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler2 = edgeBackSplitGestureHandler;
                         edgeBackSplitGestureHandler2.gestureDetected = false;
                         SplitScreenController splitScreenController2 = edgeBackSplitGestureHandler2.splitScreenController;
                         if (splitScreenController2 == null) {
@@ -121,12 +119,12 @@ public final class EdgeBackSplitGestureHandler {
                         if (EdgeBackSplitGestureHandler.SAFE_DEBUG) {
                             Log.d("EdgeBackSplitGestureHandler", "onDetected SplitGestureHandler");
                         }
-                        InputMonitorCompat inputMonitorCompat = EdgeBackSplitGestureHandler.this.inputMonitor;
+                        InputMonitorCompat inputMonitorCompat = edgeBackSplitGestureHandler.inputMonitor;
                         if (inputMonitorCompat == null) {
                             inputMonitorCompat = null;
                         }
                         inputMonitorCompat.mInputMonitor.pilferPointers();
-                        EdgeBackSplitGestureHandler.this.gestureDetected = true;
+                        edgeBackSplitGestureHandler.gestureDetected = true;
                     }
 
                     public final void onDetecting() {
@@ -137,13 +135,13 @@ public final class EdgeBackSplitGestureHandler {
                         if (EdgeBackSplitGestureHandler.SAFE_DEBUG) {
                             Log.d("EdgeBackSplitGestureHandler", "onDetecting in SplitGestureHandler");
                         }
-                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler2 = EdgeBackSplitGestureHandler.this;
+                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler2 = edgeBackSplitGestureHandler;
                         DisplayController displayController2 = edgeBackSplitGestureHandler2.displayController;
                         if (displayController2 == null || (displayLayout = displayController2.getDisplayLayout(edgeBackSplitGestureHandler2.displayId)) == null) {
                             Log.e("EdgeBackSplitGestureHandler", "gesture detecting but display frame is null");
                             return;
                         }
-                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler3 = EdgeBackSplitGestureHandler.this;
+                        EdgeBackSplitGestureHandler edgeBackSplitGestureHandler3 = edgeBackSplitGestureHandler;
                         TwoFingerSwipeGestureDetector twoFingerSwipeGestureDetector2 = twoFingerSwipeGestureDetector;
                         displayLayout.getDisplayBounds(edgeBackSplitGestureHandler3.tmpBounds);
                         int i2 = 5;
@@ -158,7 +156,7 @@ public final class EdgeBackSplitGestureHandler {
                         if (EdgeBackSplitGestureHandler.SAFE_DEBUG) {
                             Log.d("EdgeBackSplitGestureHandler", "onCanceled SplitGestureHandler");
                         }
-                        EdgeBackSplitGestureHandler.this.gestureDetected = false;
+                        edgeBackSplitGestureHandler.gestureDetected = false;
                     }
                 };
             }
@@ -178,9 +176,9 @@ public final class EdgeBackSplitGestureHandler {
     }
 
     public final void setEnabled(boolean z) {
-        boolean isSplitGestureEnabled = z & this.settingsHelper.isSplitGestureEnabled();
-        if (this.enabled != isSplitGestureEnabled) {
-            this.enabled = isSplitGestureEnabled;
+        boolean zIsSplitGestureEnabled = z & this.settingsHelper.isSplitGestureEnabled();
+        if (this.enabled != zIsSplitGestureEnabled) {
+            this.enabled = zIsSplitGestureEnabled;
         }
     }
 }

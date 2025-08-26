@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardBlueprintViewModel {
     public final StateFlowImpl _currentTransition;
@@ -51,19 +50,19 @@ public final class KeyguardBlueprintViewModel {
         this.logger = new Logger(logBuffer, "KeyguardBlueprintViewModel");
         this.blueprint = keyguardBlueprintInteractor.blueprint;
         this.refreshTransition = keyguardBlueprintInteractor.refreshTransition;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this._currentTransition = MutableStateFlow;
-        this.currentTransition = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this._currentTransition = stateFlowImplMutableStateFlow;
+        this.currentTransition = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.runningTransitions = new LinkedHashSet();
         this.transitionListener = new Transition.TransitionListener() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$transitionListener$1
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionCancel(Transition transition) {
-                Logger logger = KeyguardBlueprintViewModel.this.logger;
+                Logger logger = this.this$0.logger;
                 KeyguardBlueprintViewModel$$ExternalSyntheticLambda0 keyguardBlueprintViewModel$$ExternalSyntheticLambda0 = new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(6);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
-                logger.getBuffer().commit(obtain);
-                KeyguardBlueprintViewModel keyguardBlueprintViewModel = KeyguardBlueprintViewModel.this;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
+                logger.getBuffer().commit(logMessageObtain);
+                KeyguardBlueprintViewModel keyguardBlueprintViewModel = this.this$0;
                 keyguardBlueprintViewModel.runningTransitions.remove(transition);
                 Unit unit = Unit.INSTANCE;
                 if (keyguardBlueprintViewModel.runningTransitions.size() <= 0) {
@@ -73,12 +72,12 @@ public final class KeyguardBlueprintViewModel {
 
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionEnd(Transition transition) {
-                Logger logger = KeyguardBlueprintViewModel.this.logger;
+                Logger logger = this.this$0.logger;
                 KeyguardBlueprintViewModel$$ExternalSyntheticLambda0 keyguardBlueprintViewModel$$ExternalSyntheticLambda0 = new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(3);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
-                logger.getBuffer().commit(obtain);
-                KeyguardBlueprintViewModel keyguardBlueprintViewModel = KeyguardBlueprintViewModel.this;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
+                logger.getBuffer().commit(logMessageObtain);
+                KeyguardBlueprintViewModel keyguardBlueprintViewModel = this.this$0;
                 keyguardBlueprintViewModel.runningTransitions.remove(transition);
                 Unit unit = Unit.INSTANCE;
                 if (keyguardBlueprintViewModel.runningTransitions.size() <= 0) {
@@ -88,12 +87,12 @@ public final class KeyguardBlueprintViewModel {
 
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionPause(Transition transition) {
-                Logger logger = KeyguardBlueprintViewModel.this.logger;
+                Logger logger = this.this$0.logger;
                 KeyguardBlueprintViewModel$$ExternalSyntheticLambda0 keyguardBlueprintViewModel$$ExternalSyntheticLambda0 = new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(2);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
-                logger.getBuffer().commit(obtain);
-                KeyguardBlueprintViewModel keyguardBlueprintViewModel = KeyguardBlueprintViewModel.this;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
+                logger.getBuffer().commit(logMessageObtain);
+                KeyguardBlueprintViewModel keyguardBlueprintViewModel = this.this$0;
                 keyguardBlueprintViewModel.runningTransitions.remove(transition);
                 Unit unit = Unit.INSTANCE;
                 if (keyguardBlueprintViewModel.runningTransitions.size() <= 0) {
@@ -103,12 +102,12 @@ public final class KeyguardBlueprintViewModel {
 
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionResume(Transition transition) {
-                Logger logger = KeyguardBlueprintViewModel.this.logger;
+                Logger logger = this.this$0.logger;
                 KeyguardBlueprintViewModel$$ExternalSyntheticLambda0 keyguardBlueprintViewModel$$ExternalSyntheticLambda0 = new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(4);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
-                logger.getBuffer().commit(obtain);
-                KeyguardBlueprintViewModel keyguardBlueprintViewModel = KeyguardBlueprintViewModel.this;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
+                logger.getBuffer().commit(logMessageObtain);
+                KeyguardBlueprintViewModel keyguardBlueprintViewModel = this.this$0;
                 keyguardBlueprintViewModel.runningTransitions.add(transition);
                 Unit unit = Unit.INSTANCE;
                 if (keyguardBlueprintViewModel.runningTransitions.size() <= 0) {
@@ -118,12 +117,12 @@ public final class KeyguardBlueprintViewModel {
 
             @Override // android.transition.Transition.TransitionListener
             public final void onTransitionStart(Transition transition) {
-                Logger logger = KeyguardBlueprintViewModel.this.logger;
+                Logger logger = this.this$0.logger;
                 KeyguardBlueprintViewModel$$ExternalSyntheticLambda0 keyguardBlueprintViewModel$$ExternalSyntheticLambda0 = new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(5);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
-                logger.getBuffer().commit(obtain);
-                KeyguardBlueprintViewModel keyguardBlueprintViewModel = KeyguardBlueprintViewModel.this;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, keyguardBlueprintViewModel$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(transition.getClass()).getSimpleName());
+                logger.getBuffer().commit(logMessageObtain);
+                KeyguardBlueprintViewModel keyguardBlueprintViewModel = this.this$0;
                 keyguardBlueprintViewModel.runningTransitions.add(transition);
                 Unit unit = Unit.INSTANCE;
                 if (keyguardBlueprintViewModel.runningTransitions.size() <= 0) {
@@ -139,11 +138,11 @@ public final class KeyguardBlueprintViewModel {
         boolean z = config.checkPriority;
         Logger logger = this.logger;
         if (z && config.type.getPriority() < priority) {
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(0), null);
-            obtain.setStr1(Reflection.getOrCreateKotlinClass(IntraBlueprintTransition.class).getSimpleName());
-            obtain.setInt1(priority);
-            obtain.setStr2(String.valueOf(config));
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(0), null);
+            logMessageObtain.setStr1(Reflection.getOrCreateKotlinClass(IntraBlueprintTransition.class).getSimpleName());
+            logMessageObtain.setInt1(priority);
+            logMessageObtain.setStr2(String.valueOf(config));
+            logger.getBuffer().commit(logMessageObtain);
             function0.invoke();
             return;
         }
@@ -151,11 +150,11 @@ public final class KeyguardBlueprintViewModel {
             config = IntraBlueprintTransition.Config.copy$default(config, IntraBlueprintTransition.Type.Init);
         }
         final IntraBlueprintTransition.Config config2 = config;
-        LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(1), null);
-        obtain2.setStr1(Reflection.getOrCreateKotlinClass(IntraBlueprintTransition.class).getSimpleName());
-        obtain2.setInt1(priority);
-        obtain2.setStr2(String.valueOf(config2));
-        logger.getBuffer().commit(obtain2);
+        LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new KeyguardBlueprintViewModel$$ExternalSyntheticLambda0(1), null);
+        logMessageObtain2.setStr1(Reflection.getOrCreateKotlinClass(IntraBlueprintTransition.class).getSimpleName());
+        logMessageObtain2.setInt1(priority);
+        logMessageObtain2.setStr2(String.valueOf(config2));
+        logger.getBuffer().commit(logMessageObtain2);
         TransitionData transitionData2 = new TransitionData(config2, 0L, 2, null);
         this.runningTransitions.add(intraBlueprintTransition);
         Unit unit = Unit.INSTANCE;
@@ -167,10 +166,10 @@ public final class KeyguardBlueprintViewModel {
             stateFlowImpl.updateState(null, transitionData2);
         }
         intraBlueprintTransition.addListener((Transition.TransitionListener) this.transitionListener);
-        this.handler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$runTransition$6
+        this.handler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel.runTransition.6
             @Override // java.lang.Runnable
             public final void run() {
-                if (IntraBlueprintTransition.Config.this.terminatePrevious) {
+                if (config2.terminatePrevious) {
                     TransitionManager.endTransitions(constraintLayout);
                 }
                 TransitionManager.beginDelayedTransition(constraintLayout, intraBlueprintTransition);
@@ -178,10 +177,10 @@ public final class KeyguardBlueprintViewModel {
                 final KeyguardBlueprintViewModel keyguardBlueprintViewModel = this;
                 Handler handler = keyguardBlueprintViewModel.handler;
                 final Transition transition = intraBlueprintTransition;
-                handler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel$runTransition$6.1
+                handler.post(new Runnable() { // from class: com.android.systemui.keyguard.ui.viewmodel.KeyguardBlueprintViewModel.runTransition.6.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardBlueprintViewModel keyguardBlueprintViewModel2 = KeyguardBlueprintViewModel.this;
+                        KeyguardBlueprintViewModel keyguardBlueprintViewModel2 = keyguardBlueprintViewModel;
                         keyguardBlueprintViewModel2.runningTransitions.remove(transition);
                         Unit unit2 = Unit.INSTANCE;
                         if (keyguardBlueprintViewModel2.runningTransitions.size() <= 0) {

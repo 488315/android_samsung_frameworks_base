@@ -228,9 +228,9 @@ public final class Log {
         if (z) {
             th = terribleFailure;
         }
-        int printlns = printlns(i, 6, str, str2, th);
+        int iPrintlns = printlns(i, 6, str, str2, th);
         sWtfHandler.onTerribleFailure(str, terribleFailure, z2);
-        return printlns;
+        return iPrintlns;
     }
 
     static void wtfQuiet(int i, String str, String str2, boolean z) {
@@ -250,8 +250,8 @@ public final class Log {
         if (th == null) {
             return "";
         }
-        for (Throwable th2 = th; th2 != null; th2 = th2.getCause()) {
-            if (th2 instanceof UnknownHostException) {
+        for (Throwable cause = th; cause != null; cause = cause.getCause()) {
+            if (cause instanceof UnknownHostException) {
                 return "";
             }
         }
@@ -276,18 +276,18 @@ public final class Log {
         LineBreakBufferedWriter lineBreakBufferedWriter = new LineBreakBufferedWriter(immediateLogWriter, Math.max(((PreloadHolder.LOGGER_ENTRY_MAX_PAYLOAD - 2) - (str != null ? str.length() : 0)) - 32, 100));
         lineBreakBufferedWriter.println(str2);
         if (th != null) {
-            Throwable th2 = th;
+            Throwable cause = th;
             while (true) {
-                if (th2 == null || (th2 instanceof UnknownHostException)) {
+                if (cause == null || (cause instanceof UnknownHostException)) {
                     break;
                 }
-                if (th2 instanceof DeadSystemException) {
+                if (cause instanceof DeadSystemException) {
                     lineBreakBufferedWriter.println("DeadSystemException: The system died; earlier logs will point to the root cause");
                     break;
                 }
-                th2 = th2.getCause();
+                cause = cause.getCause();
             }
-            if (th2 == null) {
+            if (cause == null) {
                 th.printStackTrace(lineBreakBufferedWriter);
             }
         }

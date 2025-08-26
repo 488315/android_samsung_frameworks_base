@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CustomAnimationSet {
     public final Function0 onAnimationEnd;
@@ -26,7 +25,7 @@ public final class CustomAnimationSet {
         this.onAnimationEnd = function0;
     }
 
-    public final void add(View view, DynamicAnimation.ViewProperty viewProperty, float f, float f2, float f3, long j) {
+    public final void add(View view, DynamicAnimation.ViewProperty viewProperty, float f, float f2, float f3, long j, CardStackView$swipeItemToHorizontal$1$1 cardStackView$swipeItemToHorizontal$1$1) {
         final SpringAnimation springAnimation = new SpringAnimation(view, viewProperty);
         SpringForce springForce = new SpringForce();
         springForce.mFinalPosition = f;
@@ -36,33 +35,36 @@ public final class CustomAnimationSet {
         springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet$add$springAnimation$1$2
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f4, float f5) {
-                CustomAnimationSet customAnimationSet = CustomAnimationSet.this;
+                CustomAnimationSet customAnimationSet = this.this$0;
                 if (customAnimationSet.endCount.incrementAndGet() == ((ArrayList) customAnimationSet.data).size()) {
                     customAnimationSet.tryFinish();
                 }
             }
         });
+        if (cardStackView$swipeItemToHorizontal$1$1 != null) {
+            springAnimation.addUpdateListener(cardStackView$swipeItemToHorizontal$1$1);
+        }
         if (j == 0) {
             ((ArrayList) this.data).add(springAnimation);
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(j);
-        ofFloat.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet$add$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet.add.1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                Log.i("{OngoingCustomAnimationSet}", "[CJH] Spring animator delay is end. Run spring animation");
-                SpringAnimation.this.start();
+                Log.i("{OngoingCustomAnimationSet}", "Spring animator delay is end. Run spring animation");
+                springAnimation.start();
             }
 
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
             }
         });
-        ((ArrayList) this.data).add(ofFloat);
+        ((ArrayList) this.data).add(valueAnimatorOfFloat);
     }
 
-    public final void clear() {
+    public final void clear() throws Exception {
         Log.d("{OngoingCustomAnimationSet}", "clear()");
         ArrayList arrayList = new ArrayList(this.data);
         int size = arrayList.size();
@@ -82,7 +84,7 @@ public final class CustomAnimationSet {
         tryFinish();
     }
 
-    public final void start() {
+    public final void start() throws Exception {
         Log.d("{OngoingCustomAnimationSet}", "start()");
         this.isFinished.set(false);
         for (Object obj : this.data) {
@@ -109,7 +111,7 @@ public final class CustomAnimationSet {
     }
 
     public final void add(long j, final ValueAnimator valueAnimator) {
-        valueAnimator.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet$add$2
+        valueAnimator.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet.add.2
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 if (CustomAnimationSet.this.endCount.incrementAndGet() == ((ArrayList) CustomAnimationSet.this.data).size()) {
@@ -125,9 +127,9 @@ public final class CustomAnimationSet {
             ((ArrayList) this.data).add(valueAnimator);
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(j);
-        ofFloat.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet$add$3
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.addListener(new AnimatorListener() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet.add.3
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 valueAnimator.start();
@@ -137,6 +139,6 @@ public final class CustomAnimationSet {
             public final void onAnimationCancel(Animator animator) {
             }
         });
-        ((ArrayList) this.data).add(ofFloat);
+        ((ArrayList) this.data).add(valueAnimatorOfFloat);
     }
 }

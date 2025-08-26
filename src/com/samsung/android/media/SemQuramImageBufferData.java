@@ -61,8 +61,8 @@ public class SemQuramImageBufferData {
     }
 
     public boolean isEmpty() {
-        int ordinal = this.type.ordinal();
-        return ordinal != 0 ? ordinal != 1 ? ordinal != 2 || this.handle == 0 : this.buffer == null : this.bitmap == null;
+        int iOrdinal = this.type.ordinal();
+        return iOrdinal != 0 ? iOrdinal != 1 ? iOrdinal != 2 || this.handle == 0 : this.buffer == null : this.bitmap == null;
     }
 
     public boolean isUseBitmap() {
@@ -94,8 +94,8 @@ public class SemQuramImageBufferData {
     }
 
     public void recycle() {
-        int ordinal = this.type.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = this.type.ordinal();
+        if (iOrdinal == 0) {
             Bitmap bitmap = this.bitmap;
             if (bitmap != null) {
                 bitmap.recycle();
@@ -104,7 +104,7 @@ public class SemQuramImageBufferData {
             }
             return;
         }
-        if (ordinal != 2) {
+        if (iOrdinal != 2) {
             return;
         }
         long j = this.handle;

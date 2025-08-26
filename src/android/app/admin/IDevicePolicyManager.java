@@ -3484,9 +3484,9 @@ public interface IDevicePolicyManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDevicePolicyManager)) {
-                return (IDevicePolicyManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDevicePolicyManager)) {
+                return (IDevicePolicyManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -4444,10 +4444,10 @@ public interface IDevicePolicyManager extends IInterface {
                 case 16:
                     return onTransact$getPasswordMinimumNonLetter$(parcel, parcel2);
                 case 17:
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    PasswordMetrics passwordMinimumMetrics = getPasswordMinimumMetrics(readInt, readBoolean);
+                    PasswordMetrics passwordMinimumMetrics = getPasswordMinimumMetrics(i3, z);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(passwordMinimumMetrics, 1);
                     return true;
@@ -4464,64 +4464,64 @@ public interface IDevicePolicyManager extends IInterface {
                 case 23:
                     return onTransact$isActivePasswordSufficient$(parcel, parcel2);
                 case 24:
-                    boolean isActivePasswordSufficientForDeviceRequirement = isActivePasswordSufficientForDeviceRequirement();
+                    boolean zIsActivePasswordSufficientForDeviceRequirement = isActivePasswordSufficientForDeviceRequirement();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isActivePasswordSufficientForDeviceRequirement);
+                    parcel2.writeBoolean(zIsActivePasswordSufficientForDeviceRequirement);
                     return true;
                 case 25:
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPasswordSufficientAfterProfileUnification = isPasswordSufficientAfterProfileUnification(readInt2, readInt3);
+                    boolean zIsPasswordSufficientAfterProfileUnification = isPasswordSufficientAfterProfileUnification(i4, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPasswordSufficientAfterProfileUnification);
+                    parcel2.writeBoolean(zIsPasswordSufficientAfterProfileUnification);
                     return true;
                 case 26:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int passwordComplexity = getPasswordComplexity(readBoolean2);
+                    int passwordComplexity = getPasswordComplexity(z2);
                     parcel2.writeNoException();
                     parcel2.writeInt(passwordComplexity);
                     return true;
                 case 27:
                     return onTransact$setRequiredPasswordComplexity$(parcel, parcel2);
                 case 28:
-                    String readString = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int requiredPasswordComplexity = getRequiredPasswordComplexity(readString, readBoolean3);
+                    int requiredPasswordComplexity = getRequiredPasswordComplexity(string, z3);
                     parcel2.writeNoException();
                     parcel2.writeInt(requiredPasswordComplexity);
                     return true;
                 case 29:
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int aggregatedPasswordComplexityForUser = getAggregatedPasswordComplexityForUser(readInt4, readBoolean4);
+                    int aggregatedPasswordComplexityForUser = getAggregatedPasswordComplexityForUser(i6, z4);
                     parcel2.writeNoException();
                     parcel2.writeInt(aggregatedPasswordComplexityForUser);
                     return true;
                 case 30:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUsingUnifiedPassword = isUsingUnifiedPassword(componentName);
+                    boolean zIsUsingUnifiedPassword = isUsingUnifiedPassword(componentName);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsingUnifiedPassword);
+                    parcel2.writeBoolean(zIsUsingUnifiedPassword);
                     return true;
                 case 31:
                     return onTransact$getCurrentFailedPasswordAttempts$(parcel, parcel2);
                 case 32:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int currentFailedBiometricAttempts = getCurrentFailedBiometricAttempts(readInt5);
+                    int currentFailedBiometricAttempts = getCurrentFailedBiometricAttempts(i7);
                     parcel2.writeNoException();
                     parcel2.writeInt(currentFailedBiometricAttempts);
                     return true;
                 case 33:
-                    int readInt6 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int profileWithMinimumFailedPasswordsForWipe = getProfileWithMinimumFailedPasswordsForWipe(readInt6, readBoolean5);
+                    int profileWithMinimumFailedPasswordsForWipe = getProfileWithMinimumFailedPasswordsForWipe(i8, z5);
                     parcel2.writeNoException();
                     parcel2.writeInt(profileWithMinimumFailedPasswordsForWipe);
                     return true;
@@ -4530,12 +4530,12 @@ public interface IDevicePolicyManager extends IInterface {
                 case 35:
                     return onTransact$getMaximumFailedPasswordsForWipe$(parcel, parcel2);
                 case 36:
-                    String readString2 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean resetPassword = resetPassword(readString2, readInt7);
+                    boolean zResetPassword = resetPassword(string2, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetPassword);
+                    parcel2.writeBoolean(zResetPassword);
                     return true;
                 case 37:
                     return onTransact$setMaximumTimeToLock$(parcel, parcel2);
@@ -4559,9 +4559,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeTypedObject(factoryResetProtectionPolicy, 1);
                     return true;
                 case 45:
-                    boolean isFactoryResetProtectionPolicySupported = isFactoryResetProtectionPolicySupported();
+                    boolean zIsFactoryResetProtectionPolicySupported = isFactoryResetProtectionPolicySupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFactoryResetProtectionPolicySupported);
+                    parcel2.writeBoolean(zIsFactoryResetProtectionPolicySupported);
                     return true;
                 case 46:
                     AndroidFuture<Boolean> androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -4572,9 +4572,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 47:
                     return onTransact$setGlobalProxy$(parcel, parcel2);
                 case 48:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName globalProxyAdmin = getGlobalProxyAdmin(readInt8);
+                    ComponentName globalProxyAdmin = getGlobalProxyAdmin(i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(globalProxyAdmin, 1);
                     return true;
@@ -4587,34 +4587,34 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 50:
                     ComponentName componentName4 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int storageEncryption = setStorageEncryption(componentName4, readBoolean6);
+                    int storageEncryption = setStorageEncryption(componentName4, z6);
                     parcel2.writeNoException();
                     parcel2.writeInt(storageEncryption);
                     return true;
                 case 51:
                     ComponentName componentName5 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean storageEncryption2 = getStorageEncryption(componentName5, readInt9);
+                    boolean storageEncryption2 = getStorageEncryption(componentName5, i11);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(storageEncryption2);
                     return true;
                 case 52:
-                    String readString3 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int storageEncryptionStatus = getStorageEncryptionStatus(readString3, readInt10);
+                    int storageEncryptionStatus = getStorageEncryptionStatus(string3, i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(storageEncryptionStatus);
                     return true;
                 case 53:
                     ComponentName componentName6 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean requestBugreport = requestBugreport(componentName6);
+                    boolean zRequestBugreport = requestBugreport(componentName6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestBugreport);
+                    parcel2.writeBoolean(zRequestBugreport);
                     return true;
                 case 54:
                     return onTransact$setCameraDisabled$(parcel, parcel2);
@@ -4625,28 +4625,28 @@ public interface IDevicePolicyManager extends IInterface {
                 case 57:
                     return onTransact$getScreenCaptureDisabled$(parcel, parcel2);
                 case 58:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNearbyNotificationStreamingPolicy(readInt11);
+                    setNearbyNotificationStreamingPolicy(i13);
                     parcel2.writeNoException();
                     return true;
                 case 59:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int nearbyNotificationStreamingPolicy = getNearbyNotificationStreamingPolicy(readInt12);
+                    int nearbyNotificationStreamingPolicy = getNearbyNotificationStreamingPolicy(i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(nearbyNotificationStreamingPolicy);
                     return true;
                 case 60:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNearbyAppStreamingPolicy(readInt13);
+                    setNearbyAppStreamingPolicy(i15);
                     parcel2.writeNoException();
                     return true;
                 case 61:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int nearbyAppStreamingPolicy = getNearbyAppStreamingPolicy(readInt14);
+                    int nearbyAppStreamingPolicy = getNearbyAppStreamingPolicy(i16);
                     parcel2.writeNoException();
                     parcel2.writeInt(nearbyAppStreamingPolicy);
                     return true;
@@ -4658,109 +4658,109 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setActiveAdmin$(parcel, parcel2);
                 case 65:
                     ComponentName componentName7 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAdminActive = isAdminActive(componentName7, readInt15);
+                    boolean zIsAdminActive = isAdminActive(componentName7, i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAdminActive);
+                    parcel2.writeBoolean(zIsAdminActive);
                     return true;
                 case 66:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<ComponentName> activeAdmins = getActiveAdmins(readInt16);
+                    List<ComponentName> activeAdmins = getActiveAdmins(i18);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(activeAdmins, 1);
                     return true;
                 case 67:
-                    String readString4 = parcel.readString();
-                    int readInt17 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean packageHasActiveAdmins = packageHasActiveAdmins(readString4, readInt17);
+                    boolean zPackageHasActiveAdmins = packageHasActiveAdmins(string4, i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(packageHasActiveAdmins);
+                    parcel2.writeBoolean(zPackageHasActiveAdmins);
                     return true;
                 case 68:
                     return onTransact$getRemoveWarning$(parcel, parcel2);
                 case 69:
                     ComponentName componentName8 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeActiveAdmin(componentName8, readInt18);
+                    removeActiveAdmin(componentName8, i20);
                     parcel2.writeNoException();
                     return true;
                 case 70:
                     ComponentName componentName9 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    forceRemoveActiveAdmin(componentName9, readInt19);
+                    forceRemoveActiveAdmin(componentName9, i21);
                     parcel2.writeNoException();
                     return true;
                 case 71:
                     return onTransact$hasGrantedPolicy$(parcel, parcel2);
                 case 72:
                     PasswordMetrics passwordMetrics = (PasswordMetrics) parcel.readTypedObject(PasswordMetrics.CREATOR);
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportPasswordChanged(passwordMetrics, readInt20);
+                    reportPasswordChanged(passwordMetrics, i22);
                     parcel2.writeNoException();
                     return true;
                 case 73:
-                    int readInt21 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i23 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reportFailedPasswordAttempt(readInt21, readBoolean7);
+                    reportFailedPasswordAttempt(i23, z7);
                     parcel2.writeNoException();
                     return true;
                 case 74:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportSuccessfulPasswordAttempt(readInt22);
+                    reportSuccessfulPasswordAttempt(i24);
                     parcel2.writeNoException();
                     return true;
                 case 75:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportFailedBiometricAttempt(readInt23);
+                    reportFailedBiometricAttempt(i25);
                     parcel2.writeNoException();
                     return true;
                 case 76:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportSuccessfulBiometricAttempt(readInt24);
+                    reportSuccessfulBiometricAttempt(i26);
                     parcel2.writeNoException();
                     return true;
                 case 77:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportKeyguardDismissed(readInt25);
+                    reportKeyguardDismissed(i27);
                     parcel2.writeNoException();
                     return true;
                 case 78:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportKeyguardSecured(readInt26);
+                    reportKeyguardSecured(i28);
                     parcel2.writeNoException();
                     return true;
                 case 79:
                     return onTransact$setDeviceOwner$(parcel, parcel2);
                 case 80:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    ComponentName deviceOwnerComponent = getDeviceOwnerComponent(readBoolean8);
+                    ComponentName deviceOwnerComponent = getDeviceOwnerComponent(z8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(deviceOwnerComponent, 1);
                     return true;
                 case 81:
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName deviceOwnerComponentOnUser = getDeviceOwnerComponentOnUser(readInt27);
+                    ComponentName deviceOwnerComponentOnUser = getDeviceOwnerComponentOnUser(i29);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(deviceOwnerComponentOnUser, 1);
                     return true;
                 case 82:
-                    boolean hasDeviceOwner = hasDeviceOwner();
+                    boolean zHasDeviceOwner = hasDeviceOwner();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasDeviceOwner);
+                    parcel2.writeBoolean(zHasDeviceOwner);
                     return true;
                 case 83:
                     String deviceOwnerName = getDeviceOwnerName();
@@ -4768,9 +4768,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeString(deviceOwnerName);
                     return true;
                 case 84:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearDeviceOwner(readString5);
+                    clearDeviceOwner(string5);
                     parcel2.writeNoException();
                     return true;
                 case 85:
@@ -4780,16 +4780,16 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 86:
                     ComponentName componentName10 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean profileOwner = setProfileOwner(componentName10, readInt28);
+                    boolean profileOwner = setProfileOwner(componentName10, i30);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(profileOwner);
                     return true;
                 case 87:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName profileOwnerAsUser = getProfileOwnerAsUser(readInt29);
+                    ComponentName profileOwnerAsUser = getProfileOwnerAsUser(i31);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(profileOwnerAsUser, 1);
                     return true;
@@ -4803,14 +4803,14 @@ public interface IDevicePolicyManager extends IInterface {
                 case 89:
                     ComponentName componentName11 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSupervisionComponent = isSupervisionComponent(componentName11);
+                    boolean zIsSupervisionComponent = isSupervisionComponent(componentName11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupervisionComponent);
+                    parcel2.writeBoolean(zIsSupervisionComponent);
                     return true;
                 case 90:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String profileOwnerName = getProfileOwnerName(readInt30);
+                    String profileOwnerName = getProfileOwnerName(i32);
                     parcel2.writeNoException();
                     parcel2.writeString(profileOwnerName);
                     return true;
@@ -4822,9 +4822,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 92:
                     ComponentName componentName13 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setProfileName(componentName13, readString6);
+                    setProfileName(componentName13, string6);
                     parcel2.writeNoException();
                     return true;
                 case 93:
@@ -4834,14 +4834,14 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 94:
-                    boolean hasUserSetupCompleted = hasUserSetupCompleted();
+                    boolean zHasUserSetupCompleted = hasUserSetupCompleted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasUserSetupCompleted);
+                    parcel2.writeBoolean(zHasUserSetupCompleted);
                     return true;
                 case 95:
-                    boolean isOrganizationOwnedDeviceWithManagedProfile = isOrganizationOwnedDeviceWithManagedProfile();
+                    boolean zIsOrganizationOwnedDeviceWithManagedProfile = isOrganizationOwnedDeviceWithManagedProfile();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOrganizationOwnedDeviceWithManagedProfile);
+                    parcel2.writeBoolean(zIsOrganizationOwnedDeviceWithManagedProfile);
                     return true;
                 case 96:
                     return onTransact$checkDeviceIdentifierAccess$(parcel, parcel2);
@@ -4867,9 +4867,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 100:
                     return onTransact$isPackageSuspended$(parcel, parcel2);
                 case 101:
-                    List<String> listPolicyExemptApps = listPolicyExemptApps();
+                    List<String> listListPolicyExemptApps = listPolicyExemptApps();
                     parcel2.writeNoException();
-                    parcel2.writeStringList(listPolicyExemptApps);
+                    parcel2.writeStringList(listListPolicyExemptApps);
                     return true;
                 case 102:
                     return onTransact$installCaCert$(parcel, parcel2);
@@ -4877,32 +4877,32 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$uninstallCaCerts$(parcel, parcel2);
                 case 104:
                     ComponentName componentName16 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    enforceCanManageCaCerts(componentName16, readString7);
+                    enforceCanManageCaCerts(componentName16, string7);
                     parcel2.writeNoException();
                     return true;
                 case 105:
                     return onTransact$approveCaCert$(parcel, parcel2);
                 case 106:
-                    String readString8 = parcel.readString();
-                    int readInt31 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCaCertApproved = isCaCertApproved(readString8, readInt31);
+                    boolean zIsCaCertApproved = isCaCertApproved(string8, i33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCaCertApproved);
+                    parcel2.writeBoolean(zIsCaCertApproved);
                     return true;
                 case 107:
                     return onTransact$installKeyPair$(parcel, parcel2);
                 case 108:
                     return onTransact$removeKeyPair$(parcel, parcel2);
                 case 109:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasKeyPair = hasKeyPair(readString9, readString10);
+                    boolean zHasKeyPair = hasKeyPair(string9, string10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasKeyPair);
+                    parcel2.writeBoolean(zHasKeyPair);
                     return true;
                 case 110:
                     return onTransact$generateKeyPair$(parcel, parcel2);
@@ -4914,25 +4914,25 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setDelegatedScopes$(parcel, parcel2);
                 case 114:
                     ComponentName componentName17 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> delegatedScopes = getDelegatedScopes(componentName17, readString11);
+                    List<String> delegatedScopes = getDelegatedScopes(componentName17, string11);
                     parcel2.writeNoException();
                     parcel2.writeStringList(delegatedScopes);
                     return true;
                 case 115:
                     ComponentName componentName18 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> delegatePackages = getDelegatePackages(componentName18, readString12);
+                    List<String> delegatePackages = getDelegatePackages(componentName18, string12);
                     parcel2.writeNoException();
                     parcel2.writeStringList(delegatePackages);
                     return true;
                 case 116:
                     ComponentName componentName19 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setCertInstallerPackage(componentName19, readString13);
+                    setCertInstallerPackage(componentName19, string13);
                     parcel2.writeNoException();
                     return true;
                 case 117:
@@ -4952,25 +4952,25 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeString(alwaysOnVpnPackage);
                     return true;
                 case 120:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String alwaysOnVpnPackageForUser = getAlwaysOnVpnPackageForUser(readInt32);
+                    String alwaysOnVpnPackageForUser = getAlwaysOnVpnPackageForUser(i34);
                     parcel2.writeNoException();
                     parcel2.writeString(alwaysOnVpnPackageForUser);
                     return true;
                 case 121:
                     ComponentName componentName22 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isAlwaysOnVpnLockdownEnabled = isAlwaysOnVpnLockdownEnabled(componentName22);
+                    boolean zIsAlwaysOnVpnLockdownEnabled = isAlwaysOnVpnLockdownEnabled(componentName22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAlwaysOnVpnLockdownEnabled);
+                    parcel2.writeBoolean(zIsAlwaysOnVpnLockdownEnabled);
                     return true;
                 case 122:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAlwaysOnVpnLockdownEnabledForUser = isAlwaysOnVpnLockdownEnabledForUser(readInt33);
+                    boolean zIsAlwaysOnVpnLockdownEnabledForUser = isAlwaysOnVpnLockdownEnabledForUser(i35);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAlwaysOnVpnLockdownEnabledForUser);
+                    parcel2.writeBoolean(zIsAlwaysOnVpnLockdownEnabledForUser);
                     return true;
                 case 123:
                     ComponentName componentName23 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
@@ -4986,9 +4986,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 126:
                     return onTransact$setDefaultSmsApplication$(parcel, parcel2);
                 case 127:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setDefaultDialerApplication(readString14);
+                    setDefaultDialerApplication(string14);
                     parcel2.writeNoException();
                     return true;
                 case 128:
@@ -4997,9 +4997,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$getApplicationRestrictions$(parcel, parcel2);
                 case 130:
                     ComponentName componentName24 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean applicationRestrictionsManagingPackage = setApplicationRestrictionsManagingPackage(componentName24, readString15);
+                    boolean applicationRestrictionsManagingPackage = setApplicationRestrictionsManagingPackage(componentName24, string15);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationRestrictionsManagingPackage);
                     return true;
@@ -5011,11 +5011,11 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeString(applicationRestrictionsManagingPackage2);
                     return true;
                 case 132:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isCallerApplicationRestrictionsManagingPackage = isCallerApplicationRestrictionsManagingPackage(readString16);
+                    boolean zIsCallerApplicationRestrictionsManagingPackage = isCallerApplicationRestrictionsManagingPackage(string16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallerApplicationRestrictionsManagingPackage);
+                    parcel2.writeBoolean(zIsCallerApplicationRestrictionsManagingPackage);
                     return true;
                 case 133:
                     ComponentName componentName26 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
@@ -5025,9 +5025,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 134:
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName restrictionsProvider = getRestrictionsProvider(readInt34);
+                    ComponentName restrictionsProvider = getRestrictionsProvider(i36);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(restrictionsProvider, 1);
                     return true;
@@ -5036,10 +5036,10 @@ public interface IDevicePolicyManager extends IInterface {
                 case 136:
                     return onTransact$setUserRestrictionForUser$(parcel, parcel2);
                 case 137:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setUserRestrictionGlobally(readString17, readString18);
+                    setUserRestrictionGlobally(string17, string18);
                     parcel2.writeNoException();
                     return true;
                 case 138:
@@ -5047,9 +5047,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 139:
                     return onTransact$getUserRestrictions$(parcel, parcel2);
                 case 140:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle userRestrictionsGlobally = getUserRestrictionsGlobally(readString19);
+                    Bundle userRestrictionsGlobally = getUserRestrictionsGlobally(string19);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(userRestrictionsGlobally, 1);
                     return true;
@@ -5057,16 +5057,16 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$addCrossProfileIntentFilter$(parcel, parcel2);
                 case 142:
                     ComponentName componentName28 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearCrossProfileIntentFilters(componentName28, readString20);
+                    clearCrossProfileIntentFilters(componentName28, string20);
                     parcel2.writeNoException();
                     return true;
                 case 143:
                     ComponentName componentName29 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean permittedAccessibilityServices = setPermittedAccessibilityServices(componentName29, createStringArrayList);
+                    boolean permittedAccessibilityServices = setPermittedAccessibilityServices(componentName29, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(permittedAccessibilityServices);
                     return true;
@@ -5078,9 +5078,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(permittedAccessibilityServices2);
                     return true;
                 case 145:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> permittedAccessibilityServicesForUser = getPermittedAccessibilityServicesForUser(readInt35);
+                    List<String> permittedAccessibilityServicesForUser = getPermittedAccessibilityServicesForUser(i37);
                     parcel2.writeNoException();
                     parcel2.writeStringList(permittedAccessibilityServicesForUser);
                     return true;
@@ -5091,9 +5091,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 148:
                     return onTransact$getPermittedInputMethods$(parcel, parcel2);
                 case 149:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> permittedInputMethodsAsUser = getPermittedInputMethodsAsUser(readInt36);
+                    List<String> permittedInputMethodsAsUser = getPermittedInputMethodsAsUser(i38);
                     parcel2.writeNoException();
                     parcel2.writeStringList(permittedInputMethodsAsUser);
                     return true;
@@ -5101,9 +5101,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$isInputMethodPermittedByAdmin$(parcel, parcel2);
                 case 151:
                     ComponentName componentName31 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean permittedCrossProfileNotificationListeners = setPermittedCrossProfileNotificationListeners(componentName31, createStringArrayList2);
+                    boolean permittedCrossProfileNotificationListeners = setPermittedCrossProfileNotificationListeners(componentName31, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(permittedCrossProfileNotificationListeners);
                     return true;
@@ -5115,41 +5115,41 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(permittedCrossProfileNotificationListeners2);
                     return true;
                 case 153:
-                    String readString21 = parcel.readString();
-                    int readInt37 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isNotificationListenerServicePermitted = isNotificationListenerServicePermitted(readString21, readInt37);
+                    boolean zIsNotificationListenerServicePermitted = isNotificationListenerServicePermitted(string21, i39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNotificationListenerServicePermitted);
+                    parcel2.writeBoolean(zIsNotificationListenerServicePermitted);
                     return true;
                 case 154:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Intent createAdminSupportIntent = createAdminSupportIntent(readString22);
+                    Intent intentCreateAdminSupportIntent = createAdminSupportIntent(string22);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createAdminSupportIntent, 1);
+                    parcel2.writeTypedObject(intentCreateAdminSupportIntent, 1);
                     return true;
                 case 155:
-                    int readInt38 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    int i40 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle enforcingAdminAndUserDetails = getEnforcingAdminAndUserDetails(readInt38, readString23);
+                    Bundle enforcingAdminAndUserDetails = getEnforcingAdminAndUserDetails(i40, string23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(enforcingAdminAndUserDetails, 1);
                     return true;
                 case 156:
-                    int readInt39 = parcel.readInt();
-                    String readString24 = parcel.readString();
+                    int i41 = parcel.readInt();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnforcingAdmin enforcingAdmin = getEnforcingAdmin(readInt39, readString24);
+                    EnforcingAdmin enforcingAdmin = getEnforcingAdmin(i41, string24);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(enforcingAdmin, 1);
                     return true;
                 case 157:
-                    int readInt40 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    int i42 = parcel.readInt();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<EnforcingAdmin> enforcingAdminsForRestriction = getEnforcingAdminsForRestriction(readInt40, readString25);
+                    List<EnforcingAdmin> enforcingAdminsForRestriction = getEnforcingAdminsForRestriction(i42, string25);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(enforcingAdminsForRestriction, 1);
                     return true;
@@ -5163,45 +5163,45 @@ public interface IDevicePolicyManager extends IInterface {
                     ComponentName componentName33 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean removeUser = removeUser(componentName33, userHandle2);
+                    boolean zRemoveUser = removeUser(componentName33, userHandle2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeUser);
+                    parcel2.writeBoolean(zRemoveUser);
                     return true;
                 case 162:
                     ComponentName componentName34 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean switchUser = switchUser(componentName34, userHandle3);
+                    boolean zSwitchUser = switchUser(componentName34, userHandle3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(switchUser);
+                    parcel2.writeBoolean(zSwitchUser);
                     return true;
                 case 163:
                     ComponentName componentName35 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     UserHandle userHandle4 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int startUserInBackground = startUserInBackground(componentName35, userHandle4);
+                    int iStartUserInBackground = startUserInBackground(componentName35, userHandle4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startUserInBackground);
+                    parcel2.writeInt(iStartUserInBackground);
                     return true;
                 case 164:
                     ComponentName componentName36 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     UserHandle userHandle5 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int stopUser = stopUser(componentName36, userHandle5);
+                    int iStopUser = stopUser(componentName36, userHandle5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopUser);
+                    parcel2.writeInt(iStopUser);
                     return true;
                 case 165:
                     ComponentName componentName37 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int logoutUser = logoutUser(componentName37);
+                    int iLogoutUser = logoutUser(componentName37);
                     parcel2.writeNoException();
-                    parcel2.writeInt(logoutUser);
+                    parcel2.writeInt(iLogoutUser);
                     return true;
                 case 166:
-                    int logoutUserInternal = logoutUserInternal();
+                    int iLogoutUserInternal = logoutUserInternal();
                     parcel2.writeNoException();
-                    parcel2.writeInt(logoutUserInternal);
+                    parcel2.writeInt(iLogoutUserInternal);
                     return true;
                 case 167:
                     int logoutUserId = getLogoutUserId();
@@ -5216,17 +5216,17 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeTypedList(secondaryUsers, 1);
                     return true;
                 case 169:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acknowledgeNewUserDisclaimer(readInt41);
+                    acknowledgeNewUserDisclaimer(i43);
                     parcel2.writeNoException();
                     return true;
                 case 170:
-                    int readInt42 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isNewUserDisclaimerAcknowledged = isNewUserDisclaimerAcknowledged(readInt42);
+                    boolean zIsNewUserDisclaimerAcknowledged = isNewUserDisclaimerAcknowledged(i44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNewUserDisclaimerAcknowledged);
+                    parcel2.writeBoolean(zIsNewUserDisclaimerAcknowledged);
                     return true;
                 case 171:
                     return onTransact$enableSystemApp$(parcel, parcel2);
@@ -5237,9 +5237,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 174:
                     return onTransact$setAccountManagementDisabled$(parcel, parcel2);
                 case 175:
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String[] accountTypesWithManagementDisabled = getAccountTypesWithManagementDisabled(readString26);
+                    String[] accountTypesWithManagementDisabled = getAccountTypesWithManagementDisabled(string26);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(accountTypesWithManagementDisabled);
                     return true;
@@ -5250,14 +5250,14 @@ public interface IDevicePolicyManager extends IInterface {
                 case 178:
                     UserHandle userHandle6 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSecondaryLockscreenEnabled = isSecondaryLockscreenEnabled(userHandle6);
+                    boolean zIsSecondaryLockscreenEnabled = isSecondaryLockscreenEnabled(userHandle6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSecondaryLockscreenEnabled);
+                    parcel2.writeBoolean(zIsSecondaryLockscreenEnabled);
                     return true;
                 case 179:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setPreferentialNetworkServiceConfigs(createTypedArrayList);
+                    setPreferentialNetworkServiceConfigs(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 180:
@@ -5269,26 +5269,26 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setLockTaskPackages$(parcel, parcel2);
                 case 182:
                     ComponentName componentName39 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String[] lockTaskPackages = getLockTaskPackages(componentName39, readString27);
+                    String[] lockTaskPackages = getLockTaskPackages(componentName39, string27);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(lockTaskPackages);
                     return true;
                 case 183:
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isLockTaskPermitted = isLockTaskPermitted(readString28);
+                    boolean zIsLockTaskPermitted = isLockTaskPermitted(string28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLockTaskPermitted);
+                    parcel2.writeBoolean(zIsLockTaskPermitted);
                     return true;
                 case 184:
                     return onTransact$setLockTaskFeatures$(parcel, parcel2);
                 case 185:
                     ComponentName componentName40 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString29 = parcel.readString();
+                    String string29 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int lockTaskFeatures = getLockTaskFeatures(componentName40, readString29);
+                    int lockTaskFeatures = getLockTaskFeatures(componentName40, string29);
                     parcel2.writeNoException();
                     parcel2.writeInt(lockTaskFeatures);
                     return true;
@@ -5303,15 +5303,15 @@ public interface IDevicePolicyManager extends IInterface {
                 case 190:
                     ComponentName componentName41 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasLockdownAdminConfiguredNetworks = hasLockdownAdminConfiguredNetworks(componentName41);
+                    boolean zHasLockdownAdminConfiguredNetworks = hasLockdownAdminConfiguredNetworks(componentName41);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasLockdownAdminConfiguredNetworks);
+                    parcel2.writeBoolean(zHasLockdownAdminConfiguredNetworks);
                     return true;
                 case 191:
                     ComponentName componentName42 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLocationEnabled(componentName42, readBoolean9);
+                    setLocationEnabled(componentName42, z9);
                     parcel2.writeNoException();
                     return true;
                 case 192:
@@ -5320,34 +5320,34 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setTimeZone$(parcel, parcel2);
                 case 194:
                     ComponentName componentName43 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMasterVolumeMuted(componentName43, readBoolean10);
+                    setMasterVolumeMuted(componentName43, z10);
                     parcel2.writeNoException();
                     return true;
                 case 195:
                     ComponentName componentName44 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isMasterVolumeMuted = isMasterVolumeMuted(componentName44);
+                    boolean zIsMasterVolumeMuted = isMasterVolumeMuted(componentName44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMasterVolumeMuted);
+                    parcel2.writeBoolean(zIsMasterVolumeMuted);
                     return true;
                 case 196:
                     return onTransact$notifyLockTaskModeChanged$(parcel, parcel2);
                 case 197:
                     return onTransact$setUninstallBlocked$(parcel, parcel2);
                 case 198:
-                    String readString30 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isUninstallBlocked = isUninstallBlocked(readString30);
+                    boolean zIsUninstallBlocked = isUninstallBlocked(string30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUninstallBlocked);
+                    parcel2.writeBoolean(zIsUninstallBlocked);
                     return true;
                 case 199:
                     ComponentName componentName45 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean11 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCrossProfileCallerIdDisabled(componentName45, readBoolean11);
+                    setCrossProfileCallerIdDisabled(componentName45, z11);
                     parcel2.writeNoException();
                     return true;
                 case 200:
@@ -5358,17 +5358,17 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeBoolean(crossProfileCallerIdDisabled);
                     return true;
                 case 201:
-                    int readInt43 = parcel.readInt();
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean crossProfileCallerIdDisabledForUser = getCrossProfileCallerIdDisabledForUser(readInt43);
+                    boolean crossProfileCallerIdDisabledForUser = getCrossProfileCallerIdDisabledForUser(i45);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(crossProfileCallerIdDisabledForUser);
                     return true;
                 case 202:
                     ComponentName componentName47 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCrossProfileContactsSearchDisabled(componentName47, readBoolean12);
+                    setCrossProfileContactsSearchDisabled(componentName47, z12);
                     parcel2.writeNoException();
                     return true;
                 case 203:
@@ -5379,9 +5379,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeBoolean(crossProfileContactsSearchDisabled);
                     return true;
                 case 204:
-                    int readInt44 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean crossProfileContactsSearchDisabledForUser = getCrossProfileContactsSearchDisabledForUser(readInt44);
+                    boolean crossProfileContactsSearchDisabledForUser = getCrossProfileContactsSearchDisabledForUser(i46);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(crossProfileContactsSearchDisabledForUser);
                     return true;
@@ -5399,12 +5399,12 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeTypedObject(managedProfileCallerIdAccessPolicy, 1);
                     return true;
                 case 208:
-                    int readInt45 = parcel.readInt();
-                    String readString31 = parcel.readString();
+                    int i47 = parcel.readInt();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasManagedProfileCallerIdAccess = hasManagedProfileCallerIdAccess(readInt45, readString31);
+                    boolean zHasManagedProfileCallerIdAccess = hasManagedProfileCallerIdAccess(i47, string31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasManagedProfileCallerIdAccess);
+                    parcel2.writeBoolean(zHasManagedProfileCallerIdAccess);
                     return true;
                 case 209:
                     PackagePolicy packagePolicy2 = (PackagePolicy) parcel.readTypedObject(PackagePolicy.CREATOR);
@@ -5413,9 +5413,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 210:
-                    int readInt46 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PackagePolicy credentialManagerPolicy = getCredentialManagerPolicy(readInt46);
+                    PackagePolicy credentialManagerPolicy = getCredentialManagerPolicy(i48);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(credentialManagerPolicy, 1);
                     return true;
@@ -5431,18 +5431,18 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeTypedObject(managedProfileContactsAccessPolicy, 1);
                     return true;
                 case 213:
-                    int readInt47 = parcel.readInt();
-                    String readString32 = parcel.readString();
+                    int i49 = parcel.readInt();
+                    String string32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasManagedProfileContactsAccess = hasManagedProfileContactsAccess(readInt47, readString32);
+                    boolean zHasManagedProfileContactsAccess = hasManagedProfileContactsAccess(i49, string32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasManagedProfileContactsAccess);
+                    parcel2.writeBoolean(zHasManagedProfileContactsAccess);
                     return true;
                 case 214:
                     ComponentName componentName49 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBluetoothContactSharingDisabled(componentName49, readBoolean13);
+                    setBluetoothContactSharingDisabled(componentName49, z13);
                     parcel2.writeNoException();
                     return true;
                 case 215:
@@ -5453,9 +5453,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeBoolean(bluetoothContactSharingDisabled);
                     return true;
                 case 216:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean bluetoothContactSharingDisabledForUser = getBluetoothContactSharingDisabledForUser(readInt48);
+                    boolean bluetoothContactSharingDisabledForUser = getBluetoothContactSharingDisabledForUser(i50);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(bluetoothContactSharingDisabledForUser);
                     return true;
@@ -5469,17 +5469,17 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$removeCrossProfileWidgetProvider$(parcel, parcel2);
                 case 221:
                     ComponentName componentName51 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString33 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> crossProfileWidgetProviders = getCrossProfileWidgetProviders(componentName51, readString33);
+                    List<String> crossProfileWidgetProviders = getCrossProfileWidgetProviders(componentName51, string33);
                     parcel2.writeNoException();
                     parcel2.writeStringList(crossProfileWidgetProviders);
                     return true;
                 case 222:
                     ComponentName componentName52 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAutoTimeRequired(componentName52, readBoolean14);
+                    setAutoTimeRequired(componentName52, z14);
                     parcel2.writeNoException();
                     return true;
                 case 223:
@@ -5491,23 +5491,23 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setAutoTimeEnabled$(parcel, parcel2);
                 case 225:
                     ComponentName componentName53 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString34 = parcel.readString();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean autoTimeEnabled = getAutoTimeEnabled(componentName53, readString34);
+                    boolean autoTimeEnabled = getAutoTimeEnabled(componentName53, string34);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(autoTimeEnabled);
                     return true;
                 case 226:
-                    String readString35 = parcel.readString();
-                    int readInt49 = parcel.readInt();
+                    String string35 = parcel.readString();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAutoTimePolicy(readString35, readInt49);
+                    setAutoTimePolicy(string35, i51);
                     parcel2.writeNoException();
                     return true;
                 case 227:
-                    String readString36 = parcel.readString();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int autoTimePolicy = getAutoTimePolicy(readString36);
+                    int autoTimePolicy = getAutoTimePolicy(string36);
                     parcel2.writeNoException();
                     parcel2.writeInt(autoTimePolicy);
                     return true;
@@ -5515,31 +5515,31 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setAutoTimeZoneEnabled$(parcel, parcel2);
                 case 229:
                     ComponentName componentName54 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString37 = parcel.readString();
+                    String string37 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean autoTimeZoneEnabled = getAutoTimeZoneEnabled(componentName54, readString37);
+                    boolean autoTimeZoneEnabled = getAutoTimeZoneEnabled(componentName54, string37);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(autoTimeZoneEnabled);
                     return true;
                 case 230:
-                    String readString38 = parcel.readString();
-                    int readInt50 = parcel.readInt();
+                    String string38 = parcel.readString();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAutoTimeZonePolicy(readString38, readInt50);
+                    setAutoTimeZonePolicy(string38, i52);
                     parcel2.writeNoException();
                     return true;
                 case 231:
-                    String readString39 = parcel.readString();
+                    String string39 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int autoTimeZonePolicy = getAutoTimeZonePolicy(readString39);
+                    int autoTimeZonePolicy = getAutoTimeZonePolicy(string39);
                     parcel2.writeNoException();
                     parcel2.writeInt(autoTimeZonePolicy);
                     return true;
                 case 232:
                     ComponentName componentName55 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean15 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setForceEphemeralUsers(componentName55, readBoolean15);
+                    setForceEphemeralUsers(componentName55, z15);
                     parcel2.writeNoException();
                     return true;
                 case 233:
@@ -5551,11 +5551,11 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 234:
                     ComponentName componentName57 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt51 = parcel.readInt();
+                    int i53 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isRemovingAdmin = isRemovingAdmin(componentName57, readInt51);
+                    boolean zIsRemovingAdmin = isRemovingAdmin(componentName57, i53);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRemovingAdmin);
+                    parcel2.writeBoolean(zIsRemovingAdmin);
                     return true;
                 case 235:
                     ComponentName componentName58 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
@@ -5577,20 +5577,20 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 239:
                     ComponentName componentName59 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean16 = parcel.readBoolean();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean keyguardDisabled = setKeyguardDisabled(componentName59, readBoolean16);
+                    boolean keyguardDisabled = setKeyguardDisabled(componentName59, z16);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(keyguardDisabled);
                     return true;
                 case 240:
                     return onTransact$setStatusBarDisabled$(parcel, parcel2);
                 case 241:
-                    String readString40 = parcel.readString();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isStatusBarDisabled = isStatusBarDisabled(readString40);
+                    boolean zIsStatusBarDisabled = isStatusBarDisabled(string40);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStatusBarDisabled);
+                    parcel2.writeBoolean(zIsStatusBarDisabled);
                     return true;
                 case 242:
                     boolean doNotAskCredentialsOnBoot = getDoNotAskCredentialsOnBoot();
@@ -5605,9 +5605,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 244:
                     ComponentName componentName60 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString41 = parcel.readString();
+                    String string41 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SystemUpdateInfo pendingSystemUpdate = getPendingSystemUpdate(componentName60, readString41);
+                    SystemUpdateInfo pendingSystemUpdate = getPendingSystemUpdate(componentName60, string41);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(pendingSystemUpdate, 1);
                     return true;
@@ -5625,43 +5625,43 @@ public interface IDevicePolicyManager extends IInterface {
                 case 248:
                     return onTransact$getPermissionGrantState$(parcel, parcel2);
                 case 249:
-                    String readString42 = parcel.readString();
-                    String readString43 = parcel.readString();
+                    String string42 = parcel.readString();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProvisioningAllowed = isProvisioningAllowed(readString42, readString43);
+                    boolean zIsProvisioningAllowed = isProvisioningAllowed(string42, string43);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProvisioningAllowed);
+                    parcel2.writeBoolean(zIsProvisioningAllowed);
                     return true;
                 case 250:
-                    String readString44 = parcel.readString();
-                    String readString45 = parcel.readString();
+                    String string44 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int checkProvisioningPrecondition = checkProvisioningPrecondition(readString44, readString45);
+                    int iCheckProvisioningPrecondition = checkProvisioningPrecondition(string44, string45);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkProvisioningPrecondition);
+                    parcel2.writeInt(iCheckProvisioningPrecondition);
                     return true;
                 case 251:
                     return onTransact$setKeepUninstalledPackages$(parcel, parcel2);
                 case 252:
                     ComponentName componentName62 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString46 = parcel.readString();
+                    String string46 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> keepUninstalledPackages = getKeepUninstalledPackages(componentName62, readString46);
+                    List<String> keepUninstalledPackages = getKeepUninstalledPackages(componentName62, string46);
                     parcel2.writeNoException();
                     parcel2.writeStringList(keepUninstalledPackages);
                     return true;
                 case 253:
                     ComponentName componentName63 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isManagedProfile = isManagedProfile(componentName63);
+                    boolean zIsManagedProfile = isManagedProfile(componentName63);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isManagedProfile);
+                    parcel2.writeBoolean(zIsManagedProfile);
                     return true;
                 case 254:
                     ComponentName componentName64 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString47 = parcel.readString();
+                    String string47 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String wifiMacAddress = getWifiMacAddress(componentName64, readString47);
+                    String wifiMacAddress = getWifiMacAddress(componentName64, string47);
                     parcel2.writeNoException();
                     parcel2.writeString(wifiMacAddress);
                     return true;
@@ -5675,9 +5675,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setShortSupportMessage$(parcel, parcel2);
                 case 257:
                     ComponentName componentName66 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString48 = parcel.readString();
+                    String string48 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CharSequence shortSupportMessage = getShortSupportMessage(componentName66, readString48);
+                    CharSequence shortSupportMessage = getShortSupportMessage(componentName66, string48);
                     parcel2.writeNoException();
                     if (shortSupportMessage != null) {
                         parcel2.writeInt(1);
@@ -5707,9 +5707,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 260:
                     ComponentName componentName69 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt52 = parcel.readInt();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence shortSupportMessageForUser = getShortSupportMessageForUser(componentName69, readInt52);
+                    CharSequence shortSupportMessageForUser = getShortSupportMessageForUser(componentName69, i54);
                     parcel2.writeNoException();
                     if (shortSupportMessageForUser != null) {
                         parcel2.writeInt(1);
@@ -5720,9 +5720,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 261:
                     ComponentName componentName70 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt53 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence longSupportMessageForUser = getLongSupportMessageForUser(componentName70, readInt53);
+                    CharSequence longSupportMessageForUser = getLongSupportMessageForUser(componentName70, i55);
                     parcel2.writeNoException();
                     if (longSupportMessageForUser != null) {
                         parcel2.writeInt(1);
@@ -5733,22 +5733,22 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 262:
                     ComponentName componentName71 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt54 = parcel.readInt();
+                    int i56 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setOrganizationColor(componentName71, readInt54);
+                    setOrganizationColor(componentName71, i56);
                     parcel2.writeNoException();
                     return true;
                 case 263:
-                    int readInt55 = parcel.readInt();
-                    int readInt56 = parcel.readInt();
+                    int i57 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setOrganizationColorForUser(readInt55, readInt56);
+                    setOrganizationColorForUser(i57, i58);
                     parcel2.writeNoException();
                     return true;
                 case 264:
-                    int readInt57 = parcel.readInt();
+                    int i59 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearOrganizationIdForUser(readInt57);
+                    clearOrganizationIdForUser(i59);
                     parcel2.writeNoException();
                     return true;
                 case 265:
@@ -5759,9 +5759,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeInt(organizationColor);
                     return true;
                 case 266:
-                    int readInt58 = parcel.readInt();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int organizationColorForUser = getOrganizationColorForUser(readInt58);
+                    int organizationColorForUser = getOrganizationColorForUser(i60);
                     parcel2.writeNoException();
                     parcel2.writeInt(organizationColorForUser);
                     return true;
@@ -5769,9 +5769,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setOrganizationName$(parcel, parcel2);
                 case 268:
                     ComponentName componentName73 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString49 = parcel.readString();
+                    String string49 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CharSequence organizationName = getOrganizationName(componentName73, readString49);
+                    CharSequence organizationName = getOrganizationName(componentName73, string49);
                     parcel2.writeNoException();
                     if (organizationName != null) {
                         parcel2.writeInt(1);
@@ -5791,9 +5791,9 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 270:
-                    int readInt59 = parcel.readInt();
+                    int i61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CharSequence organizationNameForUser = getOrganizationNameForUser(readInt59);
+                    CharSequence organizationNameForUser = getOrganizationNameForUser(i61);
                     parcel2.writeNoException();
                     if (organizationNameForUser != null) {
                         parcel2.writeInt(1);
@@ -5803,24 +5803,24 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 271:
-                    int readInt60 = parcel.readInt();
+                    int i62 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int userProvisioningState = getUserProvisioningState(readInt60);
+                    int userProvisioningState = getUserProvisioningState(i62);
                     parcel2.writeNoException();
                     parcel2.writeInt(userProvisioningState);
                     return true;
                 case 272:
-                    int readInt61 = parcel.readInt();
-                    int readInt62 = parcel.readInt();
+                    int i63 = parcel.readInt();
+                    int i64 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setUserProvisioningState(readInt61, readInt62);
+                    setUserProvisioningState(i63, i64);
                     parcel2.writeNoException();
                     return true;
                 case 273:
                     ComponentName componentName74 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    setAffiliationIds(componentName74, createStringArrayList3);
+                    setAffiliationIds(componentName74, arrayListCreateStringArrayList3);
                     parcel2.writeNoException();
                     return true;
                 case 274:
@@ -5831,130 +5831,130 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(affiliationIds);
                     return true;
                 case 275:
-                    boolean isCallingUserAffiliated = isCallingUserAffiliated();
+                    boolean zIsCallingUserAffiliated = isCallingUserAffiliated();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallingUserAffiliated);
+                    parcel2.writeBoolean(zIsCallingUserAffiliated);
                     return true;
                 case 276:
-                    int readInt63 = parcel.readInt();
+                    int i65 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAffiliatedUser = isAffiliatedUser(readInt63);
+                    boolean zIsAffiliatedUser = isAffiliatedUser(i65);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAffiliatedUser);
+                    parcel2.writeBoolean(zIsAffiliatedUser);
                     return true;
                 case 277:
                     return onTransact$setSecurityLoggingEnabled$(parcel, parcel2);
                 case 278:
                     ComponentName componentName76 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString50 = parcel.readString();
+                    String string50 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSecurityLoggingEnabled = isSecurityLoggingEnabled(componentName76, readString50);
+                    boolean zIsSecurityLoggingEnabled = isSecurityLoggingEnabled(componentName76, string50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSecurityLoggingEnabled);
+                    parcel2.writeBoolean(zIsSecurityLoggingEnabled);
                     return true;
                 case 279:
                     ComponentName componentName77 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString51 = parcel.readString();
+                    String string51 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice retrieveSecurityLogs = retrieveSecurityLogs(componentName77, readString51);
+                    ParceledListSlice parceledListSliceRetrieveSecurityLogs = retrieveSecurityLogs(componentName77, string51);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(retrieveSecurityLogs, 1);
+                    parcel2.writeTypedObject(parceledListSliceRetrieveSecurityLogs, 1);
                     return true;
                 case 280:
                     ComponentName componentName78 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString52 = parcel.readString();
+                    String string52 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice retrievePreRebootSecurityLogs = retrievePreRebootSecurityLogs(componentName78, readString52);
+                    ParceledListSlice parceledListSliceRetrievePreRebootSecurityLogs = retrievePreRebootSecurityLogs(componentName78, string52);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(retrievePreRebootSecurityLogs, 1);
+                    parcel2.writeTypedObject(parceledListSliceRetrievePreRebootSecurityLogs, 1);
                     return true;
                 case 281:
-                    long forceNetworkLogs = forceNetworkLogs();
+                    long jForceNetworkLogs = forceNetworkLogs();
                     parcel2.writeNoException();
-                    parcel2.writeLong(forceNetworkLogs);
+                    parcel2.writeLong(jForceNetworkLogs);
                     return true;
                 case 282:
-                    long forceSecurityLogs = forceSecurityLogs();
+                    long jForceSecurityLogs = forceSecurityLogs();
                     parcel2.writeNoException();
-                    parcel2.writeLong(forceSecurityLogs);
+                    parcel2.writeLong(jForceSecurityLogs);
                     return true;
                 case 283:
-                    String readString53 = parcel.readString();
-                    boolean readBoolean17 = parcel.readBoolean();
+                    String string53 = parcel.readString();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAuditLogEnabled(readString53, readBoolean17);
+                    setAuditLogEnabled(string53, z17);
                     parcel2.writeNoException();
                     return true;
                 case 284:
-                    String readString54 = parcel.readString();
+                    String string54 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAuditLogEnabled = isAuditLogEnabled(readString54);
+                    boolean zIsAuditLogEnabled = isAuditLogEnabled(string54);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAuditLogEnabled);
+                    parcel2.writeBoolean(zIsAuditLogEnabled);
                     return true;
                 case 285:
-                    String readString55 = parcel.readString();
-                    IAuditLogEventsCallback asInterface = IAuditLogEventsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string55 = parcel.readString();
+                    IAuditLogEventsCallback iAuditLogEventsCallbackAsInterface = IAuditLogEventsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setAuditLogEventsCallback(readString55, asInterface);
+                    setAuditLogEventsCallback(string55, iAuditLogEventsCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 286:
-                    String readString56 = parcel.readString();
+                    String string56 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isUninstallInQueue = isUninstallInQueue(readString56);
+                    boolean zIsUninstallInQueue = isUninstallInQueue(string56);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUninstallInQueue);
+                    parcel2.writeBoolean(zIsUninstallInQueue);
                     return true;
                 case 287:
-                    String readString57 = parcel.readString();
+                    String string57 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    uninstallPackageWithActiveAdmins(readString57);
+                    uninstallPackageWithActiveAdmins(string57);
                     parcel2.writeNoException();
                     return true;
                 case 288:
-                    boolean isDeviceProvisioned = isDeviceProvisioned();
+                    boolean zIsDeviceProvisioned = isDeviceProvisioned();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceProvisioned);
+                    parcel2.writeBoolean(zIsDeviceProvisioned);
                     return true;
                 case 289:
-                    boolean isDeviceProvisioningConfigApplied = isDeviceProvisioningConfigApplied();
+                    boolean zIsDeviceProvisioningConfigApplied = isDeviceProvisioningConfigApplied();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceProvisioningConfigApplied);
+                    parcel2.writeBoolean(zIsDeviceProvisioningConfigApplied);
                     return true;
                 case 290:
                     setDeviceProvisioningConfigApplied();
                     parcel2.writeNoException();
                     return true;
                 case 291:
-                    int readInt64 = parcel.readInt();
+                    int i66 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    forceUpdateUserSetupComplete(readInt64);
+                    forceUpdateUserSetupComplete(i66);
                     parcel2.writeNoException();
                     return true;
                 case 292:
                     ComponentName componentName79 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean18 = parcel.readBoolean();
+                    boolean z18 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBackupServiceEnabled(componentName79, readBoolean18);
+                    setBackupServiceEnabled(componentName79, z18);
                     parcel2.writeNoException();
                     return true;
                 case 293:
                     ComponentName componentName80 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isBackupServiceEnabled = isBackupServiceEnabled(componentName80);
+                    boolean zIsBackupServiceEnabled = isBackupServiceEnabled(componentName80);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupServiceEnabled);
+                    parcel2.writeBoolean(zIsBackupServiceEnabled);
                     return true;
                 case 294:
                     return onTransact$setNetworkLoggingEnabled$(parcel, parcel2);
                 case 295:
                     ComponentName componentName81 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString58 = parcel.readString();
+                    String string58 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isNetworkLoggingEnabled = isNetworkLoggingEnabled(componentName81, readString58);
+                    boolean zIsNetworkLoggingEnabled = isNetworkLoggingEnabled(componentName81, string58);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNetworkLoggingEnabled);
+                    parcel2.writeBoolean(zIsNetworkLoggingEnabled);
                     return true;
                 case 296:
                     return onTransact$retrieveNetworkLogs$(parcel, parcel2);
@@ -5970,9 +5970,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 299:
                     ComponentName componentName83 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isEphemeralUser = isEphemeralUser(componentName83);
+                    boolean zIsEphemeralUser = isEphemeralUser(componentName83);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEphemeralUser);
+                    parcel2.writeBoolean(zIsEphemeralUser);
                     return true;
                 case 300:
                     long lastSecurityLogRetrievalTime = getLastSecurityLogRetrievalTime();
@@ -5993,26 +5993,26 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setResetPasswordToken$(parcel, parcel2);
                 case 304:
                     ComponentName componentName84 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString59 = parcel.readString();
+                    String string59 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearResetPasswordToken = clearResetPasswordToken(componentName84, readString59);
+                    boolean zClearResetPasswordToken = clearResetPasswordToken(componentName84, string59);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearResetPasswordToken);
+                    parcel2.writeBoolean(zClearResetPasswordToken);
                     return true;
                 case 305:
                     ComponentName componentName85 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString60 = parcel.readString();
+                    String string60 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isResetPasswordTokenActive = isResetPasswordTokenActive(componentName85, readString60);
+                    boolean zIsResetPasswordTokenActive = isResetPasswordTokenActive(componentName85, string60);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isResetPasswordTokenActive);
+                    parcel2.writeBoolean(zIsResetPasswordTokenActive);
                     return true;
                 case 306:
                     return onTransact$resetPasswordWithToken$(parcel, parcel2);
                 case 307:
-                    boolean isCurrentInputMethodSetByOwner = isCurrentInputMethodSetByOwner();
+                    boolean zIsCurrentInputMethodSetByOwner = isCurrentInputMethodSetByOwner();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCurrentInputMethodSetByOwner);
+                    parcel2.writeBoolean(zIsCurrentInputMethodSetByOwner);
                     return true;
                 case 308:
                     UserHandle userHandle7 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
@@ -6025,15 +6025,15 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$clearApplicationUserData$(parcel, parcel2);
                 case 310:
                     ComponentName componentName86 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean19 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLogoutEnabled(componentName86, readBoolean19);
+                    setLogoutEnabled(componentName86, z19);
                     parcel2.writeNoException();
                     return true;
                 case 311:
-                    boolean isLogoutEnabled = isLogoutEnabled();
+                    boolean zIsLogoutEnabled = isLogoutEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLogoutEnabled);
+                    parcel2.writeBoolean(zIsLogoutEnabled);
                     return true;
                 case 312:
                     return onTransact$getDisallowedSystemApps$(parcel, parcel2);
@@ -6084,9 +6084,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 319:
                     ComponentName componentName91 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    List<String> meteredDataDisabledPackages = setMeteredDataDisabledPackages(componentName91, createStringArrayList4);
+                    List<String> meteredDataDisabledPackages = setMeteredDataDisabledPackages(componentName91, arrayListCreateStringArrayList4);
                     parcel2.writeNoException();
                     parcel2.writeStringList(meteredDataDisabledPackages);
                     return true;
@@ -6101,19 +6101,19 @@ public interface IDevicePolicyManager extends IInterface {
                     ComponentName componentName93 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     ApnSetting apnSetting = (ApnSetting) parcel.readTypedObject(ApnSetting.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addOverrideApn = addOverrideApn(componentName93, apnSetting);
+                    int iAddOverrideApn = addOverrideApn(componentName93, apnSetting);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addOverrideApn);
+                    parcel2.writeInt(iAddOverrideApn);
                     return true;
                 case 322:
                     return onTransact$updateOverrideApn$(parcel, parcel2);
                 case 323:
                     ComponentName componentName94 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt65 = parcel.readInt();
+                    int i67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeOverrideApn = removeOverrideApn(componentName94, readInt65);
+                    boolean zRemoveOverrideApn = removeOverrideApn(componentName94, i67);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeOverrideApn);
+                    parcel2.writeBoolean(zRemoveOverrideApn);
                     return true;
                 case 324:
                     ComponentName componentName95 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
@@ -6124,17 +6124,17 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 325:
                     ComponentName componentName96 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean20 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setOverrideApnsEnabled(componentName96, readBoolean20);
+                    setOverrideApnsEnabled(componentName96, z20);
                     parcel2.writeNoException();
                     return true;
                 case 326:
                     ComponentName componentName97 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isOverrideApnEnabled = isOverrideApnEnabled(componentName97);
+                    boolean zIsOverrideApnEnabled = isOverrideApnEnabled(componentName97);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOverrideApnEnabled);
+                    parcel2.writeBoolean(zIsOverrideApnEnabled);
                     return true;
                 case 327:
                     return onTransact$isMeteredDataDisabledPackageForUser$(parcel, parcel2);
@@ -6162,9 +6162,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$installUpdateFromFile$(parcel, parcel2);
                 case 334:
                     ComponentName componentName100 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList5 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList5 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    setCrossProfileCalendarPackages(componentName100, createStringArrayList5);
+                    setCrossProfileCalendarPackages(componentName100, arrayListCreateStringArrayList5);
                     parcel2.writeNoException();
                     return true;
                 case 335:
@@ -6175,25 +6175,25 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(crossProfileCalendarPackages);
                     return true;
                 case 336:
-                    String readString61 = parcel.readString();
-                    int readInt66 = parcel.readInt();
+                    String string61 = parcel.readString();
+                    int i68 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageAllowedToAccessCalendarForUser = isPackageAllowedToAccessCalendarForUser(readString61, readInt66);
+                    boolean zIsPackageAllowedToAccessCalendarForUser = isPackageAllowedToAccessCalendarForUser(string61, i68);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageAllowedToAccessCalendarForUser);
+                    parcel2.writeBoolean(zIsPackageAllowedToAccessCalendarForUser);
                     return true;
                 case 337:
-                    int readInt67 = parcel.readInt();
+                    int i69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> crossProfileCalendarPackagesForUser = getCrossProfileCalendarPackagesForUser(readInt67);
+                    List<String> crossProfileCalendarPackagesForUser = getCrossProfileCalendarPackagesForUser(i69);
                     parcel2.writeNoException();
                     parcel2.writeStringList(crossProfileCalendarPackagesForUser);
                     return true;
                 case 338:
                     ComponentName componentName102 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    ArrayList<String> createStringArrayList6 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList6 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    setCrossProfilePackages(componentName102, createStringArrayList6);
+                    setCrossProfilePackages(componentName102, arrayListCreateStringArrayList6);
                     parcel2.writeNoException();
                     return true;
                 case 339:
@@ -6204,9 +6204,9 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(crossProfilePackages);
                     return true;
                 case 340:
-                    int readInt68 = parcel.readInt();
+                    int i70 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> allCrossProfilePackages = getAllCrossProfilePackages(readInt68);
+                    List<String> allCrossProfilePackages = getAllCrossProfilePackages(i70);
                     parcel2.writeNoException();
                     parcel2.writeStringList(allCrossProfilePackages);
                     return true;
@@ -6216,44 +6216,44 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeStringList(defaultCrossProfilePackages);
                     return true;
                 case 342:
-                    boolean isManagedKiosk = isManagedKiosk();
+                    boolean zIsManagedKiosk = isManagedKiosk();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isManagedKiosk);
+                    parcel2.writeBoolean(zIsManagedKiosk);
                     return true;
                 case 343:
-                    boolean isUnattendedManagedKiosk = isUnattendedManagedKiosk();
+                    boolean zIsUnattendedManagedKiosk = isUnattendedManagedKiosk();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUnattendedManagedKiosk);
+                    parcel2.writeBoolean(zIsUnattendedManagedKiosk);
                     return true;
                 case 344:
                     return onTransact$startViewCalendarEventInManagedProfile$(parcel, parcel2);
                 case 345:
                     return onTransact$setKeyGrantForApp$(parcel, parcel2);
                 case 346:
-                    String readString62 = parcel.readString();
-                    String readString63 = parcel.readString();
+                    String string62 = parcel.readString();
+                    String string63 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParcelableGranteeMap keyPairGrants = getKeyPairGrants(readString62, readString63);
+                    ParcelableGranteeMap keyPairGrants = getKeyPairGrants(string62, string63);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyPairGrants, 1);
                     return true;
                 case 347:
                     return onTransact$setKeyGrantToWifiAuth$(parcel, parcel2);
                 case 348:
-                    String readString64 = parcel.readString();
-                    String readString65 = parcel.readString();
+                    String string64 = parcel.readString();
+                    String string65 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isKeyPairGrantedToWifiAuth = isKeyPairGrantedToWifiAuth(readString64, readString65);
+                    boolean zIsKeyPairGrantedToWifiAuth = isKeyPairGrantedToWifiAuth(string64, string65);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKeyPairGrantedToWifiAuth);
+                    parcel2.writeBoolean(zIsKeyPairGrantedToWifiAuth);
                     return true;
                 case 349:
                     return onTransact$setUserControlDisabledPackages$(parcel, parcel2);
                 case 350:
                     ComponentName componentName104 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString66 = parcel.readString();
+                    String string66 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> userControlDisabledPackages = getUserControlDisabledPackages(componentName104, readString66);
+                    List<String> userControlDisabledPackages = getUserControlDisabledPackages(componentName104, string66);
                     parcel2.writeNoException();
                     parcel2.writeStringList(userControlDisabledPackages);
                     return true;
@@ -6262,9 +6262,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 352:
                     ComponentName componentName105 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isCommonCriteriaModeEnabled = isCommonCriteriaModeEnabled(componentName105);
+                    boolean zIsCommonCriteriaModeEnabled = isCommonCriteriaModeEnabled(componentName105);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCommonCriteriaModeEnabled);
+                    parcel2.writeBoolean(zIsCommonCriteriaModeEnabled);
                     return true;
                 case 353:
                     ComponentName componentName106 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
@@ -6275,9 +6275,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 354:
                     ComponentName componentName107 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean21 = parcel.readBoolean();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPersonalAppsSuspended(componentName107, readBoolean21);
+                    setPersonalAppsSuspended(componentName107, z21);
                     parcel2.writeNoException();
                     return true;
                 case 355:
@@ -6289,9 +6289,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 356:
                     ComponentName componentName109 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setManagedProfileMaximumTimeOff(componentName109, readLong);
+                    setManagedProfileMaximumTimeOff(componentName109, j);
                     parcel2.writeNoException();
                     return true;
                 case 357:
@@ -6299,35 +6299,35 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 358:
-                    boolean isComplianceAcknowledgementRequired = isComplianceAcknowledgementRequired();
+                    boolean zIsComplianceAcknowledgementRequired = isComplianceAcknowledgementRequired();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isComplianceAcknowledgementRequired);
+                    parcel2.writeBoolean(zIsComplianceAcknowledgementRequired);
                     return true;
                 case 359:
-                    int readInt69 = parcel.readInt();
+                    int i71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean canProfileOwnerResetPasswordWhenLocked = canProfileOwnerResetPasswordWhenLocked(readInt69);
+                    boolean zCanProfileOwnerResetPasswordWhenLocked = canProfileOwnerResetPasswordWhenLocked(i71);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canProfileOwnerResetPasswordWhenLocked);
+                    parcel2.writeBoolean(zCanProfileOwnerResetPasswordWhenLocked);
                     return true;
                 case 360:
-                    int readInt70 = parcel.readInt();
-                    int readInt71 = parcel.readInt();
+                    int i72 = parcel.readInt();
+                    int i73 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNextOperationSafety(readInt70, readInt71);
+                    setNextOperationSafety(i72, i73);
                     parcel2.writeNoException();
                     return true;
                 case 361:
-                    int readInt72 = parcel.readInt();
+                    int i74 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSafeOperation = isSafeOperation(readInt72);
+                    boolean zIsSafeOperation = isSafeOperation(i74);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSafeOperation);
+                    parcel2.writeBoolean(zIsSafeOperation);
                     return true;
                 case 362:
-                    String readString67 = parcel.readString();
+                    String string67 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String enrollmentSpecificId = getEnrollmentSpecificId(readString67);
+                    String enrollmentSpecificId = getEnrollmentSpecificId(string67);
                     parcel2.writeNoException();
                     parcel2.writeString(enrollmentSpecificId);
                     return true;
@@ -6335,19 +6335,19 @@ public interface IDevicePolicyManager extends IInterface {
                     return onTransact$setOrganizationIdForUser$(parcel, parcel2);
                 case 364:
                     ManagedProfileProvisioningParams managedProfileProvisioningParams = (ManagedProfileProvisioningParams) parcel.readTypedObject(ManagedProfileProvisioningParams.CREATOR);
-                    String readString68 = parcel.readString();
+                    String string68 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UserHandle createAndProvisionManagedProfile = createAndProvisionManagedProfile(managedProfileProvisioningParams, readString68);
+                    UserHandle userHandleCreateAndProvisionManagedProfile = createAndProvisionManagedProfile(managedProfileProvisioningParams, string68);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createAndProvisionManagedProfile, 1);
+                    parcel2.writeTypedObject(userHandleCreateAndProvisionManagedProfile, 1);
                     return true;
                 case 365:
                     ManagedProfileProvisioningParams managedProfileProvisioningParams2 = (ManagedProfileProvisioningParams) parcel.readTypedObject(ManagedProfileProvisioningParams.CREATOR);
-                    String readString69 = parcel.readString();
+                    String string69 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UserHandle createManagedProfile = createManagedProfile(managedProfileProvisioningParams2, readString69);
+                    UserHandle userHandleCreateManagedProfile = createManagedProfile(managedProfileProvisioningParams2, string69);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createManagedProfile, 1);
+                    parcel2.writeTypedObject(userHandleCreateManagedProfile, 1);
                     return true;
                 case 366:
                     ManagedProfileProvisioningParams managedProfileProvisioningParams3 = (ManagedProfileProvisioningParams) parcel.readTypedObject(ManagedProfileProvisioningParams.CREATOR);
@@ -6358,9 +6358,9 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 367:
                     FullyManagedDeviceProvisioningParams fullyManagedDeviceProvisioningParams = (FullyManagedDeviceProvisioningParams) parcel.readTypedObject(FullyManagedDeviceProvisioningParams.CREATOR);
-                    String readString70 = parcel.readString();
+                    String string70 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    provisionFullyManagedDevice(fullyManagedDeviceProvisioningParams, readString70);
+                    provisionFullyManagedDevice(fullyManagedDeviceProvisioningParams, string70);
                     parcel2.writeNoException();
                     return true;
                 case 368:
@@ -6371,11 +6371,11 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 369:
-                    int readInt73 = parcel.readInt();
+                    int i75 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeManagedProfile = removeManagedProfile(readInt73);
+                    boolean zRemoveManagedProfile = removeManagedProfile(i75);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeManagedProfile);
+                    parcel2.writeBoolean(zRemoveManagedProfile);
                     return true;
                 case 370:
                     return onTransact$setDeviceOwnerType$(parcel, parcel2);
@@ -6387,29 +6387,29 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeInt(deviceOwnerType);
                     return true;
                 case 372:
-                    int readInt74 = parcel.readInt();
+                    int i76 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetDefaultCrossProfileIntentFilters(readInt74);
+                    resetDefaultCrossProfileIntentFilters(i76);
                     parcel2.writeNoException();
                     return true;
                 case 373:
-                    boolean canAdminGrantSensorsPermissions = canAdminGrantSensorsPermissions();
+                    boolean zCanAdminGrantSensorsPermissions = canAdminGrantSensorsPermissions();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canAdminGrantSensorsPermissions);
+                    parcel2.writeBoolean(zCanAdminGrantSensorsPermissions);
                     return true;
                 case 374:
                     return onTransact$setUsbDataSignalingEnabled$(parcel, parcel2);
                 case 375:
-                    String readString71 = parcel.readString();
+                    String string71 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbDataSignalingEnabled = isUsbDataSignalingEnabled(readString71);
+                    boolean zIsUsbDataSignalingEnabled = isUsbDataSignalingEnabled(string71);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbDataSignalingEnabled);
+                    parcel2.writeBoolean(zIsUsbDataSignalingEnabled);
                     return true;
                 case 376:
-                    boolean canUsbDataSignalingBeDisabled = canUsbDataSignalingBeDisabled();
+                    boolean zCanUsbDataSignalingBeDisabled = canUsbDataSignalingBeDisabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canUsbDataSignalingBeDisabled);
+                    parcel2.writeBoolean(zCanUsbDataSignalingBeDisabled);
                     return true;
                 case 377:
                     return onTransact$setMinimumRequiredWifiSecurityLevel$(parcel, parcel2);
@@ -6421,76 +6421,76 @@ public interface IDevicePolicyManager extends IInterface {
                 case 379:
                     return onTransact$setWifiSsidPolicy$(parcel, parcel2);
                 case 380:
-                    String readString72 = parcel.readString();
+                    String string72 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    WifiSsidPolicy wifiSsidPolicy = getWifiSsidPolicy(readString72);
+                    WifiSsidPolicy wifiSsidPolicy = getWifiSsidPolicy(string72);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(wifiSsidPolicy, 1);
                     return true;
                 case 381:
-                    String readString73 = parcel.readString();
+                    String string73 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isDevicePotentiallyStolen = isDevicePotentiallyStolen(readString73);
+                    boolean zIsDevicePotentiallyStolen = isDevicePotentiallyStolen(string73);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDevicePotentiallyStolen);
+                    parcel2.writeBoolean(zIsDevicePotentiallyStolen);
                     return true;
                 case 382:
-                    List<UserHandle> listForegroundAffiliatedUsers = listForegroundAffiliatedUsers();
+                    List<UserHandle> listListForegroundAffiliatedUsers = listForegroundAffiliatedUsers();
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(listForegroundAffiliatedUsers, 1);
+                    parcel2.writeTypedList(listListForegroundAffiliatedUsers, 1);
                     return true;
                 case 383:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(DevicePolicyDrawableResource.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(DevicePolicyDrawableResource.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setDrawables(createTypedArrayList2);
+                    setDrawables(arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
                     return true;
                 case 384:
-                    ArrayList<String> createStringArrayList7 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList7 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    resetDrawables(createStringArrayList7);
+                    resetDrawables(arrayListCreateStringArrayList7);
                     parcel2.writeNoException();
                     return true;
                 case 385:
                     return onTransact$getDrawable$(parcel, parcel2);
                 case 386:
-                    boolean isDpcDownloaded = isDpcDownloaded();
+                    boolean zIsDpcDownloaded = isDpcDownloaded();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDpcDownloaded);
+                    parcel2.writeBoolean(zIsDpcDownloaded);
                     return true;
                 case 387:
-                    boolean readBoolean22 = parcel.readBoolean();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDpcDownloaded(readBoolean22);
+                    setDpcDownloaded(z22);
                     parcel2.writeNoException();
                     return true;
                 case 388:
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(DevicePolicyStringResource.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(DevicePolicyStringResource.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setStrings(createTypedArrayList3);
+                    setStrings(arrayListCreateTypedArrayList3);
                     parcel2.writeNoException();
                     return true;
                 case 389:
-                    ArrayList<String> createStringArrayList8 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList8 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    resetStrings(createStringArrayList8);
+                    resetStrings(arrayListCreateStringArrayList8);
                     parcel2.writeNoException();
                     return true;
                 case 390:
-                    String readString74 = parcel.readString();
+                    String string74 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParcelableResource string = getString(readString74);
+                    ParcelableResource string75 = getString(string74);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(string, 1);
+                    parcel2.writeTypedObject(string75, 1);
                     return true;
                 case 391:
                     resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState();
                     parcel2.writeNoException();
                     return true;
                 case 392:
-                    boolean shouldAllowBypassingDevicePolicyManagementRoleQualification = shouldAllowBypassingDevicePolicyManagementRoleQualification();
+                    boolean zShouldAllowBypassingDevicePolicyManagementRoleQualification = shouldAllowBypassingDevicePolicyManagementRoleQualification();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldAllowBypassingDevicePolicyManagementRoleQualification);
+                    parcel2.writeBoolean(zShouldAllowBypassingDevicePolicyManagementRoleQualification);
                     return true;
                 case 393:
                     UserHandle userHandle10 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
@@ -6514,11 +6514,11 @@ public interface IDevicePolicyManager extends IInterface {
                 case 400:
                     return onTransact$semSetPasswordExpirationTimeout$(parcel, parcel2);
                 case 401:
-                    int readInt75 = parcel.readInt();
+                    int i77 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean semIsActivePasswordSufficient = semIsActivePasswordSufficient(readInt75);
+                    boolean zSemIsActivePasswordSufficient = semIsActivePasswordSufficient(i77);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(semIsActivePasswordSufficient);
+                    parcel2.writeBoolean(zSemIsActivePasswordSufficient);
                     return true;
                 case 402:
                     return onTransact$semSetSimplePasswordEnabled$(parcel, parcel2);
@@ -6571,9 +6571,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 426:
                     return onTransact$setApplicationExemptions$(parcel, parcel2);
                 case 427:
-                    String readString75 = parcel.readString();
+                    String string76 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int[] applicationExemptions = getApplicationExemptions(readString75);
+                    int[] applicationExemptions = getApplicationExemptions(string76);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(applicationExemptions);
                     return true;
@@ -6582,9 +6582,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 429:
                     return onTransact$setMtePolicyBySystem$(parcel, parcel2);
                 case 430:
-                    String readString76 = parcel.readString();
+                    String string77 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int mtePolicy = getMtePolicy(readString76);
+                    int mtePolicy = getMtePolicy(string77);
                     parcel2.writeNoException();
                     parcel2.writeInt(mtePolicy);
                     return true;
@@ -6605,23 +6605,23 @@ public interface IDevicePolicyManager extends IInterface {
                     parcel2.writeTypedObject(devicePolicyState, 1);
                     return true;
                 case 434:
-                    boolean readBoolean23 = parcel.readBoolean();
+                    boolean z23 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean triggerDevicePolicyEngineMigration = triggerDevicePolicyEngineMigration(readBoolean23);
+                    boolean zTriggerDevicePolicyEngineMigration = triggerDevicePolicyEngineMigration(z23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(triggerDevicePolicyEngineMigration);
+                    parcel2.writeBoolean(zTriggerDevicePolicyEngineMigration);
                     return true;
                 case 435:
-                    String readString77 = parcel.readString();
+                    String string78 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isDeviceFinanced = isDeviceFinanced(readString77);
+                    boolean zIsDeviceFinanced = isDeviceFinanced(string78);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceFinanced);
+                    parcel2.writeBoolean(zIsDeviceFinanced);
                     return true;
                 case 436:
-                    String readString78 = parcel.readString();
+                    String string79 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String financedDeviceKioskRoleHolder = getFinancedDeviceKioskRoleHolder(readString78);
+                    String financedDeviceKioskRoleHolder = getFinancedDeviceKioskRoleHolder(string79);
                     parcel2.writeNoException();
                     parcel2.writeString(financedDeviceKioskRoleHolder);
                     return true;
@@ -6638,9 +6638,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 441:
                     return onTransact$getContentProtectionPolicy$(parcel, parcel2);
                 case 442:
-                    String readString79 = parcel.readString();
+                    String string80 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int[] subscriptionIds = getSubscriptionIds(readString79);
+                    int[] subscriptionIds = getSubscriptionIds(string80);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(subscriptionIds);
                     return true;
@@ -6649,18 +6649,18 @@ public interface IDevicePolicyManager extends IInterface {
                 case 444:
                     return onTransact$forceSetMaxPolicyStorageLimit$(parcel, parcel2);
                 case 445:
-                    String readString80 = parcel.readString();
+                    String string81 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int maxPolicyStorageLimit = getMaxPolicyStorageLimit(readString80);
+                    int maxPolicyStorageLimit = getMaxPolicyStorageLimit(string81);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxPolicyStorageLimit);
                     return true;
                 case 446:
                     return onTransact$getPolicySizeForAdmin$(parcel, parcel2);
                 case 447:
-                    String readString81 = parcel.readString();
+                    String string82 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int headlessDeviceOwnerMode = getHeadlessDeviceOwnerMode(readString81);
+                    int headlessDeviceOwnerMode = getHeadlessDeviceOwnerMode(string82);
                     parcel2.writeNoException();
                     parcel2.writeInt(headlessDeviceOwnerMode);
                     return true;
@@ -6691,7494 +6691,7494 @@ public interface IDevicePolicyManager extends IInterface {
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordQuality(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordQuality(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumLength(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumLength(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumLetters(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumLetters(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumNumeric(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumNumeric(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumSymbols(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumSymbols(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public PasswordMetrics getPasswordMinimumMetrics(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PasswordMetrics) obtain2.readTypedObject(PasswordMetrics.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PasswordMetrics) parcelObtain2.readTypedObject(PasswordMetrics.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordHistoryLength(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordHistoryLength(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPasswordExpirationTimeout(ComponentName componentName, String str, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getPasswordExpirationTimeout(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getPasswordExpiration(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isActivePasswordSufficient(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isActivePasswordSufficientForDeviceRequirement() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isPasswordSufficientAfterProfileUnification(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPasswordComplexity(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setRequiredPasswordComplexity(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getRequiredPasswordComplexity(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getAggregatedPasswordComplexityForUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isUsingUnifiedPassword(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getCurrentFailedPasswordAttempts(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getCurrentFailedBiometricAttempts(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getProfileWithMinimumFailedPasswordsForWipe(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMaximumFailedPasswordsForWipe(ComponentName componentName, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getMaximumFailedPasswordsForWipe(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean resetPassword(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMaximumTimeToLock(ComponentName componentName, String str, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getMaximumTimeToLock(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setRequiredStrongAuthTimeout(ComponentName componentName, String str, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getRequiredStrongAuthTimeout(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void lockNow(int i, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void wipeDataWithReason(String str, int i, String str2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setFactoryResetProtectionPolicy(ComponentName componentName, String str, FactoryResetProtectionPolicy factoryResetProtectionPolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(factoryResetProtectionPolicy, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(factoryResetProtectionPolicy, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FactoryResetProtectionPolicy) obtain2.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FactoryResetProtectionPolicy) parcelObtain2.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isFactoryResetProtectionPolicySupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void sendLostModeLocationUpdate(AndroidFuture<Boolean> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName setGlobalProxy(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getGlobalProxyAdmin(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setRecommendedGlobalProxy(ComponentName componentName, ProxyInfo proxyInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(proxyInfo, 0);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(proxyInfo, 0);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int setStorageEncryption(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getStorageEncryption(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getStorageEncryptionStatus(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean requestBugreport(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCameraDisabled(ComponentName componentName, String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getCameraDisabled(ComponentName componentName, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setScreenCaptureDisabled(ComponentName componentName, String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getScreenCaptureDisabled(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setNearbyNotificationStreamingPolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getNearbyNotificationStreamingPolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setNearbyAppStreamingPolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getNearbyAppStreamingPolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setKeyguardDisabledFeatures(ComponentName componentName, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getKeyguardDisabledFeatures(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setActiveAdmin(ComponentName componentName, boolean z, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAdminActive(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<ComponentName> getActiveAdmins(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean packageHasActiveAdmins(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void getRemoveWarning(ComponentName componentName, RemoteCallback remoteCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void removeActiveAdmin(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void forceRemoveActiveAdmin(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasGrantedPolicy(ComponentName componentName, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportPasswordChanged(PasswordMetrics passwordMetrics, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(passwordMetrics, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(passwordMetrics, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportFailedPasswordAttempt(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportSuccessfulPasswordAttempt(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportFailedBiometricAttempt(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportSuccessfulBiometricAttempt(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportKeyguardDismissed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportKeyguardSecured(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setDeviceOwner(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getDeviceOwnerComponent(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getDeviceOwnerComponentOnUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasDeviceOwner() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getDeviceOwnerName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearDeviceOwner(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getDeviceOwnerUserId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setProfileOwner(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getProfileOwnerAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isSupervisionComponent(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getProfileOwnerName(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setProfileEnabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setProfileName(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearProfileOwner(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasUserSetupCompleted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isOrganizationOwnedDeviceWithManagedProfile() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean checkDeviceIdentifierAccess(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDeviceOwnerLockScreenInfo(ComponentName componentName, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getDeviceOwnerLockScreenInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String[] setPackagesSuspended(ComponentName componentName, String str, String[] strArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isPackageSuspended(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> listPolicyExemptApps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean installCaCert(ComponentName componentName, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void uninstallCaCerts(ComponentName componentName, String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void enforceCanManageCaCerts(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean approveCaCert(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isCaCertApproved(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(106, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(106, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean installKeyPair(ComponentName componentName, String str, byte[] bArr, byte[] bArr2, byte[] bArr3, String str2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean removeKeyPair(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasKeyPair(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean generateKeyPair(ComponentName componentName, String str, String str2, ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec, int i, KeymasterCertificateChain keymasterCertificateChain) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(parcelableKeyGenParameterSpec, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
-                    boolean readBoolean = obtain2.readBoolean();
-                    if (obtain2.readInt() != 0) {
-                        keymasterCertificateChain.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(parcelableKeyGenParameterSpec, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    boolean z = parcelObtain2.readBoolean();
+                    if (parcelObtain2.readInt() != 0) {
+                        keymasterCertificateChain.readFromParcel(parcelObtain2);
                     }
-                    return readBoolean;
+                    return z;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setKeyPairCertificate(ComponentName componentName, String str, String str2, byte[] bArr, byte[] bArr2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void choosePrivateKeyAlias(int i, Uri uri, String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDelegatedScopes(ComponentName componentName, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getDelegatedScopes(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(114, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(114, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getDelegatePackages(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCertInstallerPackage(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(116, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(116, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getCertInstallerPackage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(117, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(117, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setAlwaysOnVpnPackage(ComponentName componentName, String str, boolean z, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(118, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(118, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getAlwaysOnVpnPackage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(119, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(119, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getAlwaysOnVpnPackageForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(120, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(120, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAlwaysOnVpnLockdownEnabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(121, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(121, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAlwaysOnVpnLockdownEnabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(122, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(122, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(123, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(123, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void addPersistentPreferredActivity(ComponentName componentName, String str, IntentFilter intentFilter, ComponentName componentName2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeTypedObject(componentName2, 0);
-                    this.mRemote.transact(124, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    this.mRemote.transact(124, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearPackagePersistentPreferredActivities(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(125, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(125, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDefaultSmsApplication(ComponentName componentName, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(126, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(126, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDefaultDialerApplication(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(127, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(127, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setApplicationRestrictions(ComponentName componentName, String str, String str2, Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(128, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(128, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public Bundle getApplicationRestrictions(ComponentName componentName, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(129, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(129, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setApplicationRestrictionsManagingPackage(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(130, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(130, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getApplicationRestrictionsManagingPackage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(131, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(131, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isCallerApplicationRestrictionsManagingPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(132, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(132, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setRestrictionsProvider(ComponentName componentName, ComponentName componentName2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(componentName2, 0);
-                    this.mRemote.transact(133, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    this.mRemote.transact(133, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ComponentName getRestrictionsProvider(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(134, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(134, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserRestriction(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(135, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(135, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserRestrictionForUser(String str, String str2, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(136, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(136, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserRestrictionGlobally(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(137, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(137, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserRestrictionGloballyFromSystem(String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(138, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(138, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public Bundle getUserRestrictions(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(139, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(139, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public Bundle getUserRestrictionsGlobally(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(140, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(140, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void addCrossProfileIntentFilter(ComponentName componentName, String str, IntentFilter intentFilter, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(141, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(141, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearCrossProfileIntentFilters(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(142, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(142, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setPermittedAccessibilityServices(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(143, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(143, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getPermittedAccessibilityServices(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(144, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(144, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getPermittedAccessibilityServicesForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(145, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(145, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAccessibilityServicePermittedByAdmin(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(146, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(146, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setPermittedInputMethods(ComponentName componentName, String str, List<String> list, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(147, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(147, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getPermittedInputMethods(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(148, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(148, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getPermittedInputMethodsAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(149, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(149, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isInputMethodPermittedByAdmin(ComponentName componentName, String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(150, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(150, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setPermittedCrossProfileNotificationListeners(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(151, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(151, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getPermittedCrossProfileNotificationListeners(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(152, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(152, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isNotificationListenerServicePermitted(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(153, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(153, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public Intent createAdminSupportIntent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(154, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(154, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public Bundle getEnforcingAdminAndUserDetails(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(155, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(155, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public EnforcingAdmin getEnforcingAdmin(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(156, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnforcingAdmin) obtain2.readTypedObject(EnforcingAdmin.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(156, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnforcingAdmin) parcelObtain2.readTypedObject(EnforcingAdmin.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<EnforcingAdmin> getEnforcingAdminsForRestriction(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(157, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(EnforcingAdmin.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(157, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(EnforcingAdmin.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setApplicationHidden(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(158, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(158, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isApplicationHidden(ComponentName componentName, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(159, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(159, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public UserHandle createAndManageUser(ComponentName componentName, String str, ComponentName componentName2, PersistableBundle persistableBundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName2, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(160, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UserHandle) obtain2.readTypedObject(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(160, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UserHandle) parcelObtain2.readTypedObject(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean removeUser(ComponentName componentName, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(161, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(161, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean switchUser(ComponentName componentName, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(162, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(162, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int startUserInBackground(ComponentName componentName, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(163, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(163, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int stopUser(ComponentName componentName, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(164, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(164, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int logoutUser(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(165, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(165, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int logoutUserInternal() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(166, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(166, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getLogoutUserId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(167, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(167, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<UserHandle> getSecondaryUsers(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(168, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(168, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void acknowledgeNewUserDisclaimer(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(169, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(169, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isNewUserDisclaimerAcknowledged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(170, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(170, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void enableSystemApp(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(171, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(171, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int enableSystemAppWithIntent(ComponentName componentName, String str, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(172, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(172, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean installExistingPackage(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(173, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(173, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAccountManagementDisabled(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(174, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(174, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String[] getAccountTypesWithManagementDisabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(175, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(175, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String[] getAccountTypesWithManagementDisabledAsUser(int i, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(176, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(176, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setSecondaryLockscreenEnabled(ComponentName componentName, boolean z, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(177, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(177, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isSecondaryLockscreenEnabled(UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(178, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(178, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPreferentialNetworkServiceConfigs(List<PreferentialNetworkServiceConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(179, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(179, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(180, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(180, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setLockTaskPackages(ComponentName componentName, String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(181, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(181, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String[] getLockTaskPackages(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(182, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(182, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isLockTaskPermitted(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(183, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(183, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setLockTaskFeatures(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(184, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(184, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getLockTaskFeatures(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(185, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(185, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setGlobalSetting(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(186, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(186, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setSystemSetting(ComponentName componentName, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(187, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(187, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setSecureSetting(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(188, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(188, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setConfiguredNetworksLockdownState(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(189, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(189, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasLockdownAdminConfiguredNetworks(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(190, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(190, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setLocationEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(191, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(191, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setTime(ComponentName componentName, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(192, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(192, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setTimeZone(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(193, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(193, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMasterVolumeMuted(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(194, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(194, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isMasterVolumeMuted(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(195, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(195, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void notifyLockTaskModeChanged(boolean z, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(196, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(196, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUninstallBlocked(ComponentName componentName, String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(197, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(197, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isUninstallBlocked(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(198, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(198, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCrossProfileCallerIdDisabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(199, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(199, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getCrossProfileCallerIdDisabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(200, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(200, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getCrossProfileCallerIdDisabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(201, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(201, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCrossProfileContactsSearchDisabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(202, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(202, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getCrossProfileContactsSearchDisabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(203, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(203, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getCrossProfileContactsSearchDisabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(204, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(204, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void startManagedQuickContact(String str, long j, boolean z, long j2, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(205, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(205, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setManagedProfileCallerIdAccessPolicy(PackagePolicy packagePolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packagePolicy, 0);
-                    this.mRemote.transact(206, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packagePolicy, 0);
+                    this.mRemote.transact(206, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public PackagePolicy getManagedProfileCallerIdAccessPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(207, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PackagePolicy) obtain2.readTypedObject(PackagePolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(207, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PackagePolicy) parcelObtain2.readTypedObject(PackagePolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasManagedProfileCallerIdAccess(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(208, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(208, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCredentialManagerPolicy(PackagePolicy packagePolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packagePolicy, 0);
-                    this.mRemote.transact(209, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packagePolicy, 0);
+                    this.mRemote.transact(209, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public PackagePolicy getCredentialManagerPolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(210, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PackagePolicy) obtain2.readTypedObject(PackagePolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(210, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PackagePolicy) parcelObtain2.readTypedObject(PackagePolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setManagedProfileContactsAccessPolicy(PackagePolicy packagePolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(packagePolicy, 0);
-                    this.mRemote.transact(211, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(packagePolicy, 0);
+                    this.mRemote.transact(211, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public PackagePolicy getManagedProfileContactsAccessPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(212, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PackagePolicy) obtain2.readTypedObject(PackagePolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(212, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PackagePolicy) parcelObtain2.readTypedObject(PackagePolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean hasManagedProfileContactsAccess(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(213, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(213, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setBluetoothContactSharingDisabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(214, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(214, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getBluetoothContactSharingDisabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(215, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(215, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getBluetoothContactSharingDisabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(216, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(216, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setTrustAgentConfiguration(ComponentName componentName, String str, ComponentName componentName2, PersistableBundle persistableBundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(componentName2, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(217, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(217, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<PersistableBundle> getTrustAgentConfiguration(ComponentName componentName, ComponentName componentName2, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(componentName2, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(218, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PersistableBundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(218, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PersistableBundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean addCrossProfileWidgetProvider(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(219, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(219, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean removeCrossProfileWidgetProvider(ComponentName componentName, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(220, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(220, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getCrossProfileWidgetProviders(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(221, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(221, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAutoTimeRequired(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(222, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(222, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getAutoTimeRequired() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(223, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(223, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAutoTimeEnabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(224, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(224, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getAutoTimeEnabled(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(225, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(225, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAutoTimePolicy(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(226, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(226, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getAutoTimePolicy(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(227, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(227, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAutoTimeZoneEnabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(228, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(228, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getAutoTimeZoneEnabled(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(229, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(229, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAutoTimeZonePolicy(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(230, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(230, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getAutoTimeZonePolicy(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(231, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(231, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setForceEphemeralUsers(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(232, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(232, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getForceEphemeralUsers(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(233, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(233, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isRemovingAdmin(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(234, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(234, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserIcon(ComponentName componentName, Bitmap bitmap) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(bitmap, 0);
-                    this.mRemote.transact(235, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(bitmap, 0);
+                    this.mRemote.transact(235, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setSystemUpdatePolicy(ComponentName componentName, String str, SystemUpdatePolicy systemUpdatePolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(systemUpdatePolicy, 0);
-                    this.mRemote.transact(236, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(systemUpdatePolicy, 0);
+                    this.mRemote.transact(236, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public SystemUpdatePolicy getSystemUpdatePolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(237, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SystemUpdatePolicy) obtain2.readTypedObject(SystemUpdatePolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(237, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SystemUpdatePolicy) parcelObtain2.readTypedObject(SystemUpdatePolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearSystemUpdatePolicyFreezePeriodRecord() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(238, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(238, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setKeyguardDisabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(239, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(239, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setStatusBarDisabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(240, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(240, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isStatusBarDisabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(241, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(241, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getDoNotAskCredentialsOnBoot() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(242, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(242, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void notifyPendingSystemUpdate(SystemUpdateInfo systemUpdateInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(systemUpdateInfo, 0);
-                    this.mRemote.transact(243, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(systemUpdateInfo, 0);
+                    this.mRemote.transact(243, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public SystemUpdateInfo getPendingSystemUpdate(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(244, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SystemUpdateInfo) obtain2.readTypedObject(SystemUpdateInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(244, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SystemUpdateInfo) parcelObtain2.readTypedObject(SystemUpdateInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPermissionPolicy(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(245, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(245, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPermissionPolicy(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(246, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(246, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPermissionGrantState(ComponentName componentName, String str, String str2, String str3, int i, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(247, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(247, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPermissionGrantState(ComponentName componentName, String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(248, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(248, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isProvisioningAllowed(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(249, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(249, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int checkProvisioningPrecondition(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(250, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(250, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setKeepUninstalledPackages(ComponentName componentName, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(251, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(251, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getKeepUninstalledPackages(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(252, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(252, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isManagedProfile(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(253, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(253, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getWifiMacAddress(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(254, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(254, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reboot(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(255, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(255, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setShortSupportMessage(ComponentName componentName, String str, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(256, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(256, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getShortSupportMessage(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(257, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(257, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setLongSupportMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(258, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(258, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getLongSupportMessage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(259, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(259, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getShortSupportMessageForUser(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(260, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(260, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getLongSupportMessageForUser(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(261, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(261, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setOrganizationColor(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(262, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(262, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setOrganizationColorForUser(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(263, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(263, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearOrganizationIdForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(264, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(264, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getOrganizationColor(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(265, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(265, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getOrganizationColorForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(266, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(266, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setOrganizationName(ComponentName componentName, String str, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(267, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(267, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getOrganizationName(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(268, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(268, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getDeviceOwnerOrganizationName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(269, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(269, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getOrganizationNameForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(270, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(270, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getUserProvisioningState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(271, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(271, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserProvisioningState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(272, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(272, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAffiliationIds(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(273, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(273, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getAffiliationIds(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(274, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(274, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isCallingUserAffiliated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(275, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(275, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAffiliatedUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(276, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(276, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setSecurityLoggingEnabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(277, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(277, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isSecurityLoggingEnabled(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(278, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(278, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ParceledListSlice retrieveSecurityLogs(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(279, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(279, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ParceledListSlice retrievePreRebootSecurityLogs(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(280, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(280, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long forceNetworkLogs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(281, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(281, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long forceSecurityLogs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(282, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(282, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAuditLogEnabled(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(283, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(283, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isAuditLogEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(284, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(284, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAuditLogEventsCallback(String str, IAuditLogEventsCallback iAuditLogEventsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iAuditLogEventsCallback);
-                    this.mRemote.transact(285, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iAuditLogEventsCallback);
+                    this.mRemote.transact(285, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isUninstallInQueue(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(286, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(286, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void uninstallPackageWithActiveAdmins(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(287, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(287, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isDeviceProvisioned() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(288, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(288, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isDeviceProvisioningConfigApplied() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(289, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(289, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDeviceProvisioningConfigApplied() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(290, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(290, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void forceUpdateUserSetupComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(291, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(291, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setBackupServiceEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(292, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(292, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isBackupServiceEnabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(293, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(293, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setNetworkLoggingEnabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(294, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(294, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isNetworkLoggingEnabled(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(295, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(295, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<NetworkEvent> retrieveNetworkLogs(ComponentName componentName, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(296, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(NetworkEvent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(296, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(NetworkEvent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean bindDeviceAdminServiceAsUser(ComponentName componentName, IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, IServiceConnection iServiceConnection, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStrongInterface(iApplicationThread);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeStrongInterface(iServiceConnection);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(297, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStrongInterface(iApplicationThread);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeStrongInterface(iServiceConnection);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(297, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(298, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(298, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isEphemeralUser(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(299, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(299, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getLastSecurityLogRetrievalTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(300, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(300, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getLastBugReportRequestTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(301, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(301, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getLastNetworkLogRetrievalTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(302, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(302, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setResetPasswordToken(ComponentName componentName, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(303, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(303, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean clearResetPasswordToken(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(304, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(304, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isResetPasswordTokenActive(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(305, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(305, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean resetPasswordWithToken(ComponentName componentName, String str, String str2, byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(306, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(306, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isCurrentInputMethodSetByOwner() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(307, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(307, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public StringParceledListSlice getOwnerInstalledCaCerts(UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(308, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StringParceledListSlice) obtain2.readTypedObject(StringParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(308, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StringParceledListSlice) parcelObtain2.readTypedObject(StringParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void clearApplicationUserData(ComponentName componentName, String str, IPackageDataObserver iPackageDataObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPackageDataObserver);
-                    this.mRemote.transact(309, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPackageDataObserver);
+                    this.mRemote.transact(309, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setLogoutEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(310, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(310, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isLogoutEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(311, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(311, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getDisallowedSystemApps(ComponentName componentName, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(312, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(312, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void transferOwnership(ComponentName componentName, ComponentName componentName2, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(componentName2, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(313, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(componentName2, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(313, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public PersistableBundle getTransferOwnershipBundle() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(314, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PersistableBundle) obtain2.readTypedObject(PersistableBundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(314, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PersistableBundle) parcelObtain2.readTypedObject(PersistableBundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setStartUserSessionMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(315, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(315, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setEndUserSessionMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(316, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(316, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getStartUserSessionMessage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(317, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(317, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public CharSequence getEndUserSessionMessage(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(318, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(318, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> setMeteredDataDisabledPackages(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(319, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(319, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getMeteredDataDisabledPackages(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(320, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(320, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int addOverrideApn(ComponentName componentName, ApnSetting apnSetting) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(apnSetting, 0);
-                    this.mRemote.transact(321, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(apnSetting, 0);
+                    this.mRemote.transact(321, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean updateOverrideApn(ComponentName componentName, int i, ApnSetting apnSetting) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(apnSetting, 0);
-                    this.mRemote.transact(322, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(apnSetting, 0);
+                    this.mRemote.transact(322, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean removeOverrideApn(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(323, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(323, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<ApnSetting> getOverrideApns(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(324, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ApnSetting.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(324, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ApnSetting.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setOverrideApnsEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(325, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(325, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isOverrideApnEnabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(326, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(326, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isMeteredDataDisabledPackageForUser(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(327, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(327, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void reportFailedPasswordAttemptWithFailureCount(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(328, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(328, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int setGlobalPrivateDns(ComponentName componentName, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(329, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(329, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getGlobalPrivateDnsMode(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(330, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(330, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getGlobalPrivateDnsHost(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(331, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(331, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setProfileOwnerOnOrganizationOwnedDevice(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(332, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(332, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void installUpdateFromFile(ComponentName componentName, String str, ParcelFileDescriptor parcelFileDescriptor, StartInstallingUpdateCallback startInstallingUpdateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(startInstallingUpdateCallback);
-                    this.mRemote.transact(333, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(startInstallingUpdateCallback);
+                    this.mRemote.transact(333, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCrossProfileCalendarPackages(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(334, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(334, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getCrossProfileCalendarPackages(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(335, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(335, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isPackageAllowedToAccessCalendarForUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(336, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(336, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getCrossProfileCalendarPackagesForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(337, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(337, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCrossProfilePackages(ComponentName componentName, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(338, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(338, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getCrossProfilePackages(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(339, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(339, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getAllCrossProfilePackages(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(340, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(340, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getDefaultCrossProfilePackages() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(341, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(341, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isManagedKiosk() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(342, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(342, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isUnattendedManagedKiosk() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(343, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(343, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean startViewCalendarEventInManagedProfile(String str, long j, long j2, long j3, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeLong(j3);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(344, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeLong(j3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(344, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setKeyGrantForApp(ComponentName componentName, String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(345, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(345, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ParcelableGranteeMap getKeyPairGrants(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(346, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelableGranteeMap) obtain2.readTypedObject(ParcelableGranteeMap.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(346, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelableGranteeMap) parcelObtain2.readTypedObject(ParcelableGranteeMap.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean setKeyGrantToWifiAuth(String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(347, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(347, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isKeyPairGrantedToWifiAuth(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(348, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(348, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUserControlDisabledPackages(ComponentName componentName, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(349, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(349, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<String> getUserControlDisabledPackages(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(350, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(350, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCommonCriteriaModeEnabled(ComponentName componentName, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(351, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(351, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isCommonCriteriaModeEnabled(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(352, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(352, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPersonalAppsSuspendedReasons(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(353, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(353, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setPersonalAppsSuspended(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(354, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(354, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public long getManagedProfileMaximumTimeOff(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(355, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(355, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setManagedProfileMaximumTimeOff(ComponentName componentName, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(356, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(356, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void acknowledgeDeviceCompliant() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(357, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(357, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isComplianceAcknowledgementRequired() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(358, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(358, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean canProfileOwnerResetPasswordWhenLocked(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(359, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(359, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setNextOperationSafety(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(360, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(360, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isSafeOperation(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(361, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(361, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getEnrollmentSpecificId(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(362, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(362, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setOrganizationIdForUser(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(363, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(363, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public UserHandle createAndProvisionManagedProfile(ManagedProfileProvisioningParams managedProfileProvisioningParams, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(managedProfileProvisioningParams, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(364, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UserHandle) obtain2.readTypedObject(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(managedProfileProvisioningParams, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(364, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UserHandle) parcelObtain2.readTypedObject(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public UserHandle createManagedProfile(ManagedProfileProvisioningParams managedProfileProvisioningParams, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(managedProfileProvisioningParams, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(365, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UserHandle) obtain2.readTypedObject(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(managedProfileProvisioningParams, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(365, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UserHandle) parcelObtain2.readTypedObject(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void finalizeCreateManagedProfile(ManagedProfileProvisioningParams managedProfileProvisioningParams, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(managedProfileProvisioningParams, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(366, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(managedProfileProvisioningParams, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(366, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void provisionFullyManagedDevice(FullyManagedDeviceProvisioningParams fullyManagedDeviceProvisioningParams, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fullyManagedDeviceProvisioningParams, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(367, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fullyManagedDeviceProvisioningParams, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(367, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void finalizeWorkProfileProvisioning(UserHandle userHandle, Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(368, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(368, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean removeManagedProfile(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(369, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(369, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDeviceOwnerType(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(370, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(370, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getDeviceOwnerType(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(371, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(371, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void resetDefaultCrossProfileIntentFilters(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(372, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(372, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean canAdminGrantSensorsPermissions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(373, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(373, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setUsbDataSignalingEnabled(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(374, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(374, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isUsbDataSignalingEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(375, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(375, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean canUsbDataSignalingBeDisabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(376, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(376, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMinimumRequiredWifiSecurityLevel(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(377, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(377, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getMinimumRequiredWifiSecurityLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(378, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(378, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setWifiSsidPolicy(String str, WifiSsidPolicy wifiSsidPolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(wifiSsidPolicy, 0);
-                    this.mRemote.transact(379, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(wifiSsidPolicy, 0);
+                    this.mRemote.transact(379, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public WifiSsidPolicy getWifiSsidPolicy(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(380, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (WifiSsidPolicy) obtain2.readTypedObject(WifiSsidPolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(380, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (WifiSsidPolicy) parcelObtain2.readTypedObject(WifiSsidPolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isDevicePotentiallyStolen(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(381, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(381, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<UserHandle> listForegroundAffiliatedUsers() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(382, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(382, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDrawables(List<DevicePolicyDrawableResource> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(383, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(383, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void resetDrawables(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(384, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(384, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ParcelableResource getDrawable(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(385, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelableResource) obtain2.readTypedObject(ParcelableResource.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(385, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelableResource) parcelObtain2.readTypedObject(ParcelableResource.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isDpcDownloaded() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(386, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(386, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setDpcDownloaded(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(387, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(387, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setStrings(List<DevicePolicyStringResource> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(388, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(388, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void resetStrings(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(389, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(389, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ParcelableResource getString(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(390, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelableResource) obtain2.readTypedObject(ParcelableResource.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(390, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelableResource) parcelObtain2.readTypedObject(ParcelableResource.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(391, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(391, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean shouldAllowBypassingDevicePolicyManagementRoleQualification() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(392, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(392, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public List<UserHandle> getPolicyManagedProfiles(UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(393, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(UserHandle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(393, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(UserHandle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordQuality(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(394, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(394, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordMinimumLength(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(395, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(395, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordMinimumUpperCase(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(396, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(396, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordMinimumLowerCase(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(397, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(397, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordMinimumNonLetter(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(398, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(398, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordHistoryLength(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(399, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(399, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetPasswordExpirationTimeout(ComponentName componentName, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(400, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(400, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semIsActivePasswordSufficient(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(401, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(401, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetSimplePasswordEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(402, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(402, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semIsSimplePasswordEnabled(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(403, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(403, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetKeyguardDisabledFeatures(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(404, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(404, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowStorageCard(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(405, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(405, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowStorageCard(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(406, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(406, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowWifi(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(407, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(407, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowWifi(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(408, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(408, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowTextMessaging(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(409, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(409, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowTextMessaging(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(410, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(410, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowPopImapEmail(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(411, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(411, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowPopImapEmail(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(412, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(412, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowBrowser(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(413, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(413, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowBrowser(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(414, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(414, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowInternetSharing(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(415, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(415, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowInternetSharing(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(416, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(416, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowBluetoothMode(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(417, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(417, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int semGetAllowBluetoothMode(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(418, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(418, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowDesktopSync(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(419, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(419, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowDesktopSync(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(420, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(420, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetAllowIrda(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(421, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(421, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetAllowIrda(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(422, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(422, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetRequireStorageCardEncryption(ComponentName componentName, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(423, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(423, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean semGetRequireStorageCardEncryption(ComponentName componentName, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(424, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(424, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void semSetChangeNotificationEnabled(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(425, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(425, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setApplicationExemptions(String str, String str2, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(426, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(426, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int[] getApplicationExemptions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(427, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(427, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMtePolicy(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(428, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(428, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMtePolicyBySystem(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(429, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(429, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getMtePolicy(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(430, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(430, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy managedSubscriptionsPolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(managedSubscriptionsPolicy, 0);
-                    this.mRemote.transact(431, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(managedSubscriptionsPolicy, 0);
+                    this.mRemote.transact(431, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public ManagedSubscriptionsPolicy getManagedSubscriptionsPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(432, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ManagedSubscriptionsPolicy) obtain2.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(432, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ManagedSubscriptionsPolicy) parcelObtain2.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public DevicePolicyState getDevicePolicyState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(433, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DevicePolicyState) obtain2.readTypedObject(DevicePolicyState.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(433, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DevicePolicyState) parcelObtain2.readTypedObject(DevicePolicyState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean triggerDevicePolicyEngineMigration(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(434, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(434, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean isDeviceFinanced(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(435, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(435, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public String getFinancedDeviceKioskRoleHolder(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(436, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(436, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setCrossProfileAppToIgnored(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(437, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(437, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public boolean getSamsungSDcardEncryptionStatus(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(438, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(438, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void calculateHasIncompatibleAccounts() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(439, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(439, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setContentProtectionPolicy(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(440, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(440, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getContentProtectionPolicy(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(441, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(441, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int[] getSubscriptionIds(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(442, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(442, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setMaxPolicyStorageLimit(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(443, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(443, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void forceSetMaxPolicyStorageLimit(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(444, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(444, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getMaxPolicyStorageLimit(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(445, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(445, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getPolicySizeForAdmin(String str, EnforcingAdmin enforcingAdmin) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(enforcingAdmin, 0);
-                    this.mRemote.transact(446, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(enforcingAdmin, 0);
+                    this.mRemote.transact(446, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getHeadlessDeviceOwnerMode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(447, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(447, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public void setAppFunctionsPolicy(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(448, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(448, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.admin.IDevicePolicyManager
             public int getAppFunctionsPolicy(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(449, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(449, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
 
         private boolean onTransact$setPasswordQuality$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordQuality(componentName, readInt, readBoolean);
+            setPasswordQuality(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordQuality$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordQuality = getPasswordQuality(componentName, readInt, readBoolean);
+            int passwordQuality = getPasswordQuality(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordQuality);
             return true;
@@ -14186,20 +14186,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumLength(componentName, readInt, readBoolean);
+            setPasswordMinimumLength(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumLength = getPasswordMinimumLength(componentName, readInt, readBoolean);
+            int passwordMinimumLength = getPasswordMinimumLength(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumLength);
             return true;
@@ -14207,20 +14207,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumUpperCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumUpperCase(componentName, readInt, readBoolean);
+            setPasswordMinimumUpperCase(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumUpperCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumUpperCase = getPasswordMinimumUpperCase(componentName, readInt, readBoolean);
+            int passwordMinimumUpperCase = getPasswordMinimumUpperCase(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumUpperCase);
             return true;
@@ -14228,20 +14228,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumLowerCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumLowerCase(componentName, readInt, readBoolean);
+            setPasswordMinimumLowerCase(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumLowerCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumLowerCase = getPasswordMinimumLowerCase(componentName, readInt, readBoolean);
+            int passwordMinimumLowerCase = getPasswordMinimumLowerCase(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumLowerCase);
             return true;
@@ -14249,20 +14249,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumLetters$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumLetters(componentName, readInt, readBoolean);
+            setPasswordMinimumLetters(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumLetters$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumLetters = getPasswordMinimumLetters(componentName, readInt, readBoolean);
+            int passwordMinimumLetters = getPasswordMinimumLetters(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumLetters);
             return true;
@@ -14270,20 +14270,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumNumeric$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumNumeric(componentName, readInt, readBoolean);
+            setPasswordMinimumNumeric(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumNumeric$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumNumeric = getPasswordMinimumNumeric(componentName, readInt, readBoolean);
+            int passwordMinimumNumeric = getPasswordMinimumNumeric(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumNumeric);
             return true;
@@ -14291,20 +14291,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumSymbols$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumSymbols(componentName, readInt, readBoolean);
+            setPasswordMinimumSymbols(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumSymbols$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumSymbols = getPasswordMinimumSymbols(componentName, readInt, readBoolean);
+            int passwordMinimumSymbols = getPasswordMinimumSymbols(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumSymbols);
             return true;
@@ -14312,20 +14312,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordMinimumNonLetter$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordMinimumNonLetter(componentName, readInt, readBoolean);
+            setPasswordMinimumNonLetter(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordMinimumNonLetter$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordMinimumNonLetter = getPasswordMinimumNonLetter(componentName, readInt, readBoolean);
+            int passwordMinimumNonLetter = getPasswordMinimumNonLetter(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordMinimumNonLetter);
             return true;
@@ -14333,20 +14333,20 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordHistoryLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordHistoryLength(componentName, readInt, readBoolean);
+            setPasswordHistoryLength(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordHistoryLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int passwordHistoryLength = getPasswordHistoryLength(componentName, readInt, readBoolean);
+            int passwordHistoryLength = getPasswordHistoryLength(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(passwordHistoryLength);
             return true;
@@ -14354,21 +14354,21 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPasswordExpirationTimeout$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            long j = parcel.readLong();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setPasswordExpirationTimeout(componentName, readString, readLong, readBoolean);
+            setPasswordExpirationTimeout(componentName, string, j, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPasswordExpirationTimeout$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            long passwordExpirationTimeout = getPasswordExpirationTimeout(componentName, readInt, readBoolean);
+            long passwordExpirationTimeout = getPasswordExpirationTimeout(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeLong(passwordExpirationTimeout);
             return true;
@@ -14376,42 +14376,42 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$getPasswordExpiration$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            long passwordExpiration = getPasswordExpiration(componentName, readInt, readBoolean);
+            long passwordExpiration = getPasswordExpiration(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeLong(passwordExpiration);
             return true;
         }
 
         private boolean onTransact$isActivePasswordSufficient$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean isActivePasswordSufficient = isActivePasswordSufficient(readString, readInt, readBoolean);
+            boolean zIsActivePasswordSufficient = isActivePasswordSufficient(string, i, z);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isActivePasswordSufficient);
+            parcel2.writeBoolean(zIsActivePasswordSufficient);
             return true;
         }
 
         private boolean onTransact$setRequiredPasswordComplexity$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setRequiredPasswordComplexity(readString, readInt, readBoolean);
+            setRequiredPasswordComplexity(string, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getCurrentFailedPasswordAttempts$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int currentFailedPasswordAttempts = getCurrentFailedPasswordAttempts(readString, readInt, readBoolean);
+            int currentFailedPasswordAttempts = getCurrentFailedPasswordAttempts(string, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(currentFailedPasswordAttempts);
             return true;
@@ -14419,21 +14419,21 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setMaximumFailedPasswordsForWipe$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setMaximumFailedPasswordsForWipe(componentName, readString, readInt, readBoolean);
+            setMaximumFailedPasswordsForWipe(componentName, string, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getMaximumFailedPasswordsForWipe$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int maximumFailedPasswordsForWipe = getMaximumFailedPasswordsForWipe(componentName, readInt, readBoolean);
+            int maximumFailedPasswordsForWipe = getMaximumFailedPasswordsForWipe(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(maximumFailedPasswordsForWipe);
             return true;
@@ -14441,21 +14441,21 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setMaximumTimeToLock$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            long j = parcel.readLong();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setMaximumTimeToLock(componentName, readString, readLong, readBoolean);
+            setMaximumTimeToLock(componentName, string, j, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getMaximumTimeToLock$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            long maximumTimeToLock = getMaximumTimeToLock(componentName, readInt, readBoolean);
+            long maximumTimeToLock = getMaximumTimeToLock(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeLong(maximumTimeToLock);
             return true;
@@ -14463,64 +14463,64 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setRequiredStrongAuthTimeout$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            long j = parcel.readLong();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setRequiredStrongAuthTimeout(componentName, readString, readLong, readBoolean);
+            setRequiredStrongAuthTimeout(componentName, string, j, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getRequiredStrongAuthTimeout$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            long requiredStrongAuthTimeout = getRequiredStrongAuthTimeout(componentName, readInt, readBoolean);
+            long requiredStrongAuthTimeout = getRequiredStrongAuthTimeout(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeLong(requiredStrongAuthTimeout);
             return true;
         }
 
         private boolean onTransact$lockNow$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            lockNow(readInt, readString, readBoolean);
+            lockNow(i, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$wipeDataWithReason$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            wipeDataWithReason(readString, readInt, readString2, readBoolean, readBoolean2);
+            wipeDataWithReason(string, i, string2, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setFactoryResetProtectionPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             FactoryResetProtectionPolicy factoryResetProtectionPolicy = (FactoryResetProtectionPolicy) parcel.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
             parcel.enforceNoDataAvail();
-            setFactoryResetProtectionPolicy(componentName, readString, factoryResetProtectionPolicy);
+            setFactoryResetProtectionPolicy(componentName, string, factoryResetProtectionPolicy);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setGlobalProxy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            ComponentName globalProxy = setGlobalProxy(componentName, readString, readString2);
+            ComponentName globalProxy = setGlobalProxy(componentName, string, string2);
             parcel2.writeNoException();
             parcel2.writeTypedObject(globalProxy, 1);
             return true;
@@ -14528,22 +14528,22 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setCameraDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setCameraDisabled(componentName, readString, readBoolean, readBoolean2);
+            setCameraDisabled(componentName, string, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getCameraDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean cameraDisabled = getCameraDisabled(componentName, readString, readInt, readBoolean);
+            boolean cameraDisabled = getCameraDisabled(componentName, string, i, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(cameraDisabled);
             return true;
@@ -14551,21 +14551,21 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setScreenCaptureDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setScreenCaptureDisabled(componentName, readString, readBoolean, readBoolean2);
+            setScreenCaptureDisabled(componentName, string, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getScreenCaptureDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean screenCaptureDisabled = getScreenCaptureDisabled(componentName, readInt, readBoolean);
+            boolean screenCaptureDisabled = getScreenCaptureDisabled(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(screenCaptureDisabled);
             return true;
@@ -14573,21 +14573,21 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setKeyguardDisabledFeatures$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setKeyguardDisabledFeatures(componentName, readString, readInt, readBoolean);
+            setKeyguardDisabledFeatures(componentName, string, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getKeyguardDisabledFeatures$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int keyguardDisabledFeatures = getKeyguardDisabledFeatures(componentName, readInt, readBoolean);
+            int keyguardDisabledFeatures = getKeyguardDisabledFeatures(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeInt(keyguardDisabledFeatures);
             return true;
@@ -14595,11 +14595,11 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setActiveAdmin$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            boolean z = parcel.readBoolean();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setActiveAdmin(componentName, readBoolean, readInt, readString);
+            setActiveAdmin(componentName, z, i, string);
             parcel2.writeNoException();
             return true;
         }
@@ -14607,53 +14607,53 @@ public interface IDevicePolicyManager extends IInterface {
         private boolean onTransact$getRemoveWarning$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            getRemoveWarning(componentName, remoteCallback, readInt);
+            getRemoveWarning(componentName, remoteCallback, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$hasGrantedPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean hasGrantedPolicy = hasGrantedPolicy(componentName, readInt, readInt2);
+            boolean zHasGrantedPolicy = hasGrantedPolicy(componentName, i, i2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(hasGrantedPolicy);
+            parcel2.writeBoolean(zHasGrantedPolicy);
             return true;
         }
 
         private boolean onTransact$setDeviceOwner$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean deviceOwner = setDeviceOwner(componentName, readInt, readBoolean);
+            boolean deviceOwner = setDeviceOwner(componentName, i, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(deviceOwner);
             return true;
         }
 
         private boolean onTransact$checkDeviceIdentifierAccess$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean checkDeviceIdentifierAccess = checkDeviceIdentifierAccess(readString, readInt, readInt2);
+            boolean zCheckDeviceIdentifierAccess = checkDeviceIdentifierAccess(string, i, i2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(checkDeviceIdentifierAccess);
+            parcel2.writeBoolean(zCheckDeviceIdentifierAccess);
             return true;
         }
 
         private boolean onTransact$setPackagesSuspended$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String[] createStringArray = parcel.createStringArray();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String[] strArrCreateStringArray = parcel.createStringArray();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            String[] packagesSuspended = setPackagesSuspended(componentName, readString, createStringArray, readBoolean);
+            String[] packagesSuspended = setPackagesSuspended(componentName, string, strArrCreateStringArray, z);
             parcel2.writeNoException();
             parcel2.writeStringArray(packagesSuspended);
             return true;
@@ -14661,131 +14661,131 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$isPackageSuspended$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean isPackageSuspended = isPackageSuspended(componentName, readString, readString2);
+            boolean zIsPackageSuspended = isPackageSuspended(componentName, string, string2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isPackageSuspended);
+            parcel2.writeBoolean(zIsPackageSuspended);
             return true;
         }
 
         private boolean onTransact$installCaCert$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            byte[] createByteArray = parcel.createByteArray();
+            String string = parcel.readString();
+            byte[] bArrCreateByteArray = parcel.createByteArray();
             parcel.enforceNoDataAvail();
-            boolean installCaCert = installCaCert(componentName, readString, createByteArray);
+            boolean zInstallCaCert = installCaCert(componentName, string, bArrCreateByteArray);
             parcel2.writeNoException();
-            parcel2.writeBoolean(installCaCert);
+            parcel2.writeBoolean(zInstallCaCert);
             return true;
         }
 
         private boolean onTransact$uninstallCaCerts$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String[] createStringArray = parcel.createStringArray();
+            String string = parcel.readString();
+            String[] strArrCreateStringArray = parcel.createStringArray();
             parcel.enforceNoDataAvail();
-            uninstallCaCerts(componentName, readString, createStringArray);
+            uninstallCaCerts(componentName, string, strArrCreateStringArray);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$approveCaCert$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean approveCaCert = approveCaCert(readString, readInt, readBoolean);
+            boolean zApproveCaCert = approveCaCert(string, i, z);
             parcel2.writeNoException();
-            parcel2.writeBoolean(approveCaCert);
+            parcel2.writeBoolean(zApproveCaCert);
             return true;
         }
 
         private boolean onTransact$installKeyPair$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            byte[] createByteArray = parcel.createByteArray();
-            byte[] createByteArray2 = parcel.createByteArray();
-            byte[] createByteArray3 = parcel.createByteArray();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            byte[] bArrCreateByteArray = parcel.createByteArray();
+            byte[] bArrCreateByteArray2 = parcel.createByteArray();
+            byte[] bArrCreateByteArray3 = parcel.createByteArray();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean installKeyPair = installKeyPair(componentName, readString, createByteArray, createByteArray2, createByteArray3, readString2, readBoolean, readBoolean2);
+            boolean zInstallKeyPair = installKeyPair(componentName, string, bArrCreateByteArray, bArrCreateByteArray2, bArrCreateByteArray3, string2, z, z2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(installKeyPair);
+            parcel2.writeBoolean(zInstallKeyPair);
             return true;
         }
 
         private boolean onTransact$removeKeyPair$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean removeKeyPair = removeKeyPair(componentName, readString, readString2);
+            boolean zRemoveKeyPair = removeKeyPair(componentName, string, string2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(removeKeyPair);
+            parcel2.writeBoolean(zRemoveKeyPair);
             return true;
         }
 
         private boolean onTransact$generateKeyPair$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec = (ParcelableKeyGenParameterSpec) parcel.readTypedObject(ParcelableKeyGenParameterSpec.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             KeymasterCertificateChain keymasterCertificateChain = new KeymasterCertificateChain();
             parcel.enforceNoDataAvail();
-            boolean generateKeyPair = generateKeyPair(componentName, readString, readString2, parcelableKeyGenParameterSpec, readInt, keymasterCertificateChain);
+            boolean zGenerateKeyPair = generateKeyPair(componentName, string, string2, parcelableKeyGenParameterSpec, i, keymasterCertificateChain);
             parcel2.writeNoException();
-            parcel2.writeBoolean(generateKeyPair);
+            parcel2.writeBoolean(zGenerateKeyPair);
             parcel2.writeTypedObject(keymasterCertificateChain, 1);
             return true;
         }
 
         private boolean onTransact$setKeyPairCertificate$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            byte[] createByteArray = parcel.createByteArray();
-            byte[] createByteArray2 = parcel.createByteArray();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            byte[] bArrCreateByteArray = parcel.createByteArray();
+            byte[] bArrCreateByteArray2 = parcel.createByteArray();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean keyPairCertificate = setKeyPairCertificate(componentName, readString, readString2, createByteArray, createByteArray2, readBoolean);
+            boolean keyPairCertificate = setKeyPairCertificate(componentName, string, string2, bArrCreateByteArray, bArrCreateByteArray2, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(keyPairCertificate);
             return true;
         }
 
         private boolean onTransact$choosePrivateKeyAlias$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-            String readString = parcel.readString();
-            IBinder readStrongBinder = parcel.readStrongBinder();
+            String string = parcel.readString();
+            IBinder strongBinder = parcel.readStrongBinder();
             parcel.enforceNoDataAvail();
-            choosePrivateKeyAlias(readInt, uri, readString, readStrongBinder);
+            choosePrivateKeyAlias(i, uri, string, strongBinder);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setDelegatedScopes$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            String string = parcel.readString();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             parcel.enforceNoDataAvail();
-            setDelegatedScopes(componentName, readString, createStringArrayList);
+            setDelegatedScopes(componentName, string, arrayListCreateStringArrayList);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setAlwaysOnVpnPackage$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             parcel.enforceNoDataAvail();
-            boolean alwaysOnVpnPackage = setAlwaysOnVpnPackage(componentName, readString, readBoolean, createStringArrayList);
+            boolean alwaysOnVpnPackage = setAlwaysOnVpnPackage(componentName, string, z, arrayListCreateStringArrayList);
             parcel2.writeNoException();
             parcel2.writeBoolean(alwaysOnVpnPackage);
             return true;
@@ -14793,55 +14793,55 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$addPersistentPreferredActivity$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
             ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             parcel.enforceNoDataAvail();
-            addPersistentPreferredActivity(componentName, readString, intentFilter, componentName2);
+            addPersistentPreferredActivity(componentName, string, intentFilter, componentName2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$clearPackagePersistentPreferredActivities$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            clearPackagePersistentPreferredActivities(componentName, readString, readString2);
+            clearPackagePersistentPreferredActivities(componentName, string, string2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setDefaultSmsApplication$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setDefaultSmsApplication(componentName, readString, readString2, readBoolean);
+            setDefaultSmsApplication(componentName, string, string2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setApplicationRestrictions$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setApplicationRestrictions(componentName, readString, readString2, bundle, readBoolean);
+            setApplicationRestrictions(componentName, string, string2, bundle, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getApplicationRestrictions$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            Bundle applicationRestrictions = getApplicationRestrictions(componentName, readString, readString2, readBoolean);
+            Bundle applicationRestrictions = getApplicationRestrictions(componentName, string, string2, z);
             parcel2.writeNoException();
             parcel2.writeTypedObject(applicationRestrictions, 1);
             return true;
@@ -14849,43 +14849,43 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setUserRestriction$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setUserRestriction(componentName, readString, readString2, readBoolean, readBoolean2);
+            setUserRestriction(componentName, string, string2, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setUserRestrictionForUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setUserRestrictionForUser(readString, readString2, readBoolean, readInt);
+            setUserRestrictionForUser(string, string2, z, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setUserRestrictionGloballyFromSystem$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setUserRestrictionGloballyFromSystem(readString, readString2, readBoolean);
+            setUserRestrictionGloballyFromSystem(string, string2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getUserRestrictions$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            Bundle userRestrictions = getUserRestrictions(componentName, readString, readBoolean);
+            Bundle userRestrictions = getUserRestrictions(componentName, string, z);
             parcel2.writeNoException();
             parcel2.writeTypedObject(userRestrictions, 1);
             return true;
@@ -14893,33 +14893,33 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$addCrossProfileIntentFilter$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            addCrossProfileIntentFilter(componentName, readString, intentFilter, readInt);
+            addCrossProfileIntentFilter(componentName, string, intentFilter, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$isAccessibilityServicePermittedByAdmin$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean isAccessibilityServicePermittedByAdmin = isAccessibilityServicePermittedByAdmin(componentName, readString, readInt);
+            boolean zIsAccessibilityServicePermittedByAdmin = isAccessibilityServicePermittedByAdmin(componentName, string, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isAccessibilityServicePermittedByAdmin);
+            parcel2.writeBoolean(zIsAccessibilityServicePermittedByAdmin);
             return true;
         }
 
         private boolean onTransact$setPermittedInputMethods$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean permittedInputMethods = setPermittedInputMethods(componentName, readString, createStringArrayList, readBoolean);
+            boolean permittedInputMethods = setPermittedInputMethods(componentName, string, arrayListCreateStringArrayList, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(permittedInputMethods);
             return true;
@@ -14927,10 +14927,10 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$getPermittedInputMethods$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            List<String> permittedInputMethods = getPermittedInputMethods(componentName, readString, readBoolean);
+            List<String> permittedInputMethods = getPermittedInputMethods(componentName, string, z);
             parcel2.writeNoException();
             parcel2.writeStringList(permittedInputMethods);
             return true;
@@ -14938,24 +14938,24 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$isInputMethodPermittedByAdmin$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean isInputMethodPermittedByAdmin = isInputMethodPermittedByAdmin(componentName, readString, readInt, readBoolean);
+            boolean zIsInputMethodPermittedByAdmin = isInputMethodPermittedByAdmin(componentName, string, i, z);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isInputMethodPermittedByAdmin);
+            parcel2.writeBoolean(zIsInputMethodPermittedByAdmin);
             return true;
         }
 
         private boolean onTransact$setApplicationHidden$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean applicationHidden = setApplicationHidden(componentName, readString, readString2, readBoolean, readBoolean2);
+            boolean applicationHidden = setApplicationHidden(componentName, string, string2, z, z2);
             parcel2.writeNoException();
             parcel2.writeBoolean(applicationHidden);
             return true;
@@ -14963,79 +14963,79 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$isApplicationHidden$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean isApplicationHidden = isApplicationHidden(componentName, readString, readString2, readBoolean);
+            boolean zIsApplicationHidden = isApplicationHidden(componentName, string, string2, z);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isApplicationHidden);
+            parcel2.writeBoolean(zIsApplicationHidden);
             return true;
         }
 
         private boolean onTransact$createAndManageUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            UserHandle createAndManageUser = createAndManageUser(componentName, readString, componentName2, persistableBundle, readInt);
+            UserHandle userHandleCreateAndManageUser = createAndManageUser(componentName, string, componentName2, persistableBundle, i);
             parcel2.writeNoException();
-            parcel2.writeTypedObject(createAndManageUser, 1);
+            parcel2.writeTypedObject(userHandleCreateAndManageUser, 1);
             return true;
         }
 
         private boolean onTransact$enableSystemApp$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            enableSystemApp(componentName, readString, readString2);
+            enableSystemApp(componentName, string, string2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$enableSystemAppWithIntent$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
             parcel.enforceNoDataAvail();
-            int enableSystemAppWithIntent = enableSystemAppWithIntent(componentName, readString, intent);
+            int iEnableSystemAppWithIntent = enableSystemAppWithIntent(componentName, string, intent);
             parcel2.writeNoException();
-            parcel2.writeInt(enableSystemAppWithIntent);
+            parcel2.writeInt(iEnableSystemAppWithIntent);
             return true;
         }
 
         private boolean onTransact$installExistingPackage$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean installExistingPackage = installExistingPackage(componentName, readString, readString2);
+            boolean zInstallExistingPackage = installExistingPackage(componentName, string, string2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(installExistingPackage);
+            parcel2.writeBoolean(zInstallExistingPackage);
             return true;
         }
 
         private boolean onTransact$setAccountManagementDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setAccountManagementDisabled(componentName, readString, readString2, readBoolean, readBoolean2);
+            setAccountManagementDisabled(componentName, string, string2, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getAccountTypesWithManagementDisabledAsUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            String[] accountTypesWithManagementDisabledAsUser = getAccountTypesWithManagementDisabledAsUser(readInt, readString, readBoolean);
+            String[] accountTypesWithManagementDisabledAsUser = getAccountTypesWithManagementDisabledAsUser(i, string, z);
             parcel2.writeNoException();
             parcel2.writeStringArray(accountTypesWithManagementDisabledAsUser);
             return true;
@@ -15043,81 +15043,81 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setSecondaryLockscreenEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
             parcel.enforceNoDataAvail();
-            setSecondaryLockscreenEnabled(componentName, readBoolean, persistableBundle);
+            setSecondaryLockscreenEnabled(componentName, z, persistableBundle);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setLockTaskPackages$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String[] createStringArray = parcel.createStringArray();
+            String string = parcel.readString();
+            String[] strArrCreateStringArray = parcel.createStringArray();
             parcel.enforceNoDataAvail();
-            setLockTaskPackages(componentName, readString, createStringArray);
+            setLockTaskPackages(componentName, string, strArrCreateStringArray);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setLockTaskFeatures$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setLockTaskFeatures(componentName, readString, readInt);
+            setLockTaskFeatures(componentName, string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setGlobalSetting$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setGlobalSetting(componentName, readString, readString2);
+            setGlobalSetting(componentName, string, string2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setSystemSetting$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setSystemSetting(componentName, readString, readString2, readBoolean);
+            setSystemSetting(componentName, string, string2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setSecureSetting$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setSecureSetting(componentName, readString, readString2);
+            setSecureSetting(componentName, string, string2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setConfiguredNetworksLockdownState$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setConfiguredNetworksLockdownState(componentName, readString, readBoolean);
+            setConfiguredNetworksLockdownState(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setTime$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
+            String string = parcel.readString();
+            long j = parcel.readLong();
             parcel.enforceNoDataAvail();
-            boolean time = setTime(componentName, readString, readLong);
+            boolean time = setTime(componentName, string, j);
             parcel2.writeNoException();
             parcel2.writeBoolean(time);
             return true;
@@ -15125,56 +15125,56 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setTimeZone$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean timeZone = setTimeZone(componentName, readString, readString2);
+            boolean timeZone = setTimeZone(componentName, string, string2);
             parcel2.writeNoException();
             parcel2.writeBoolean(timeZone);
             return true;
         }
 
         private boolean onTransact$notifyLockTaskModeChanged$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            boolean readBoolean = parcel.readBoolean();
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            boolean z = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            notifyLockTaskModeChanged(readBoolean, readString, readInt);
+            notifyLockTaskModeChanged(z, string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setUninstallBlocked$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setUninstallBlocked(componentName, readString, readString2, readBoolean);
+            setUninstallBlocked(componentName, string, string2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$startManagedQuickContact$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
-            boolean readBoolean = parcel.readBoolean();
-            long readLong2 = parcel.readLong();
+            String string = parcel.readString();
+            long j = parcel.readLong();
+            boolean z = parcel.readBoolean();
+            long j2 = parcel.readLong();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
             parcel.enforceNoDataAvail();
-            startManagedQuickContact(readString, readLong, readBoolean, readLong2, intent);
+            startManagedQuickContact(string, j, z, j2, intent);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setTrustAgentConfiguration$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setTrustAgentConfiguration(componentName, readString, componentName2, persistableBundle, readBoolean);
+            setTrustAgentConfiguration(componentName, string, componentName2, persistableBundle, z);
             parcel2.writeNoException();
             return true;
         }
@@ -15182,10 +15182,10 @@ public interface IDevicePolicyManager extends IInterface {
         private boolean onTransact$getTrustAgentConfiguration$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
             ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            List<PersistableBundle> trustAgentConfiguration = getTrustAgentConfiguration(componentName, componentName2, readInt, readBoolean);
+            List<PersistableBundle> trustAgentConfiguration = getTrustAgentConfiguration(componentName, componentName2, i, z);
             parcel2.writeNoException();
             parcel2.writeTypedList(trustAgentConfiguration, 1);
             return true;
@@ -15193,62 +15193,62 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$addCrossProfileWidgetProvider$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean addCrossProfileWidgetProvider = addCrossProfileWidgetProvider(componentName, readString, readString2);
+            boolean zAddCrossProfileWidgetProvider = addCrossProfileWidgetProvider(componentName, string, string2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(addCrossProfileWidgetProvider);
+            parcel2.writeBoolean(zAddCrossProfileWidgetProvider);
             return true;
         }
 
         private boolean onTransact$removeCrossProfileWidgetProvider$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean removeCrossProfileWidgetProvider = removeCrossProfileWidgetProvider(componentName, readString, readString2);
+            boolean zRemoveCrossProfileWidgetProvider = removeCrossProfileWidgetProvider(componentName, string, string2);
             parcel2.writeNoException();
-            parcel2.writeBoolean(removeCrossProfileWidgetProvider);
+            parcel2.writeBoolean(zRemoveCrossProfileWidgetProvider);
             return true;
         }
 
         private boolean onTransact$setAutoTimeEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setAutoTimeEnabled(componentName, readString, readBoolean);
+            setAutoTimeEnabled(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setAutoTimeZoneEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setAutoTimeZoneEnabled(componentName, readString, readBoolean);
+            setAutoTimeZoneEnabled(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setSystemUpdatePolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             SystemUpdatePolicy systemUpdatePolicy = (SystemUpdatePolicy) parcel.readTypedObject(SystemUpdatePolicy.CREATOR);
             parcel.enforceNoDataAvail();
-            setSystemUpdatePolicy(componentName, readString, systemUpdatePolicy);
+            setSystemUpdatePolicy(componentName, string, systemUpdatePolicy);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setStatusBarDisabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean statusBarDisabled = setStatusBarDisabled(componentName, readString, readBoolean);
+            boolean statusBarDisabled = setStatusBarDisabled(componentName, string, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(statusBarDisabled);
             return true;
@@ -15256,34 +15256,34 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setPermissionPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setPermissionPolicy(componentName, readString, readInt);
+            setPermissionPolicy(componentName, string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setPermissionGrantState$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            int i = parcel.readInt();
             RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
             parcel.enforceNoDataAvail();
-            setPermissionGrantState(componentName, readString, readString2, readString3, readInt, remoteCallback);
+            setPermissionGrantState(componentName, string, string2, string3, i, remoteCallback);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPermissionGrantState$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
             parcel.enforceNoDataAvail();
-            int permissionGrantState = getPermissionGrantState(componentName, readString, readString2, readString3);
+            int permissionGrantState = getPermissionGrantState(componentName, string, string2, string3);
             parcel2.writeNoException();
             parcel2.writeInt(permissionGrantState);
             return true;
@@ -15291,86 +15291,86 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setKeepUninstalledPackages$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            String string = parcel.readString();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             parcel.enforceNoDataAvail();
-            setKeepUninstalledPackages(componentName, readString, createStringArrayList);
+            setKeepUninstalledPackages(componentName, string, arrayListCreateStringArrayList);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setShortSupportMessage$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
             parcel.enforceNoDataAvail();
-            setShortSupportMessage(componentName, readString, charSequence);
+            setShortSupportMessage(componentName, string, charSequence);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setOrganizationName$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
             parcel.enforceNoDataAvail();
-            setOrganizationName(componentName, readString, charSequence);
+            setOrganizationName(componentName, string, charSequence);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setSecurityLoggingEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setSecurityLoggingEnabled(componentName, readString, readBoolean);
+            setSecurityLoggingEnabled(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setNetworkLoggingEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setNetworkLoggingEnabled(componentName, readString, readBoolean);
+            setNetworkLoggingEnabled(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$retrieveNetworkLogs$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
+            String string = parcel.readString();
+            long j = parcel.readLong();
             parcel.enforceNoDataAvail();
-            List<NetworkEvent> retrieveNetworkLogs = retrieveNetworkLogs(componentName, readString, readLong);
+            List<NetworkEvent> listRetrieveNetworkLogs = retrieveNetworkLogs(componentName, string, j);
             parcel2.writeNoException();
-            parcel2.writeTypedList(retrieveNetworkLogs, 1);
+            parcel2.writeTypedList(listRetrieveNetworkLogs, 1);
             return true;
         }
 
         private boolean onTransact$bindDeviceAdminServiceAsUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            IApplicationThread asInterface = IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
-            IBinder readStrongBinder = parcel.readStrongBinder();
+            IApplicationThread iApplicationThreadAsInterface = IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
+            IBinder strongBinder = parcel.readStrongBinder();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-            IServiceConnection asInterface2 = IServiceConnection.Stub.asInterface(parcel.readStrongBinder());
-            long readLong = parcel.readLong();
-            int readInt = parcel.readInt();
+            IServiceConnection iServiceConnectionAsInterface = IServiceConnection.Stub.asInterface(parcel.readStrongBinder());
+            long j = parcel.readLong();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean bindDeviceAdminServiceAsUser = bindDeviceAdminServiceAsUser(componentName, asInterface, readStrongBinder, intent, asInterface2, readLong, readInt);
+            boolean zBindDeviceAdminServiceAsUser = bindDeviceAdminServiceAsUser(componentName, iApplicationThreadAsInterface, strongBinder, intent, iServiceConnectionAsInterface, j, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(bindDeviceAdminServiceAsUser);
+            parcel2.writeBoolean(zBindDeviceAdminServiceAsUser);
             return true;
         }
 
         private boolean onTransact$setResetPasswordToken$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            byte[] createByteArray = parcel.createByteArray();
+            String string = parcel.readString();
+            byte[] bArrCreateByteArray = parcel.createByteArray();
             parcel.enforceNoDataAvail();
-            boolean resetPasswordToken = setResetPasswordToken(componentName, readString, createByteArray);
+            boolean resetPasswordToken = setResetPasswordToken(componentName, string, bArrCreateByteArray);
             parcel2.writeNoException();
             parcel2.writeBoolean(resetPasswordToken);
             return true;
@@ -15378,33 +15378,33 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$resetPasswordWithToken$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            byte[] createByteArray = parcel.createByteArray();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            byte[] bArrCreateByteArray = parcel.createByteArray();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean resetPasswordWithToken = resetPasswordWithToken(componentName, readString, readString2, createByteArray, readInt);
+            boolean zResetPasswordWithToken = resetPasswordWithToken(componentName, string, string2, bArrCreateByteArray, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(resetPasswordWithToken);
+            parcel2.writeBoolean(zResetPasswordWithToken);
             return true;
         }
 
         private boolean onTransact$clearApplicationUserData$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            IPackageDataObserver asInterface = IPackageDataObserver.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
+            IPackageDataObserver iPackageDataObserverAsInterface = IPackageDataObserver.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            clearApplicationUserData(componentName, readString, asInterface);
+            clearApplicationUserData(componentName, string, iPackageDataObserverAsInterface);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getDisallowedSystemApps$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            List<String> disallowedSystemApps = getDisallowedSystemApps(componentName, readInt, readString);
+            List<String> disallowedSystemApps = getDisallowedSystemApps(componentName, i, string);
             parcel2.writeNoException();
             parcel2.writeStringList(disallowedSystemApps);
             return true;
@@ -15422,42 +15422,42 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$updateOverrideApn$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             ApnSetting apnSetting = (ApnSetting) parcel.readTypedObject(ApnSetting.CREATOR);
             parcel.enforceNoDataAvail();
-            boolean updateOverrideApn = updateOverrideApn(componentName, readInt, apnSetting);
+            boolean zUpdateOverrideApn = updateOverrideApn(componentName, i, apnSetting);
             parcel2.writeNoException();
-            parcel2.writeBoolean(updateOverrideApn);
+            parcel2.writeBoolean(zUpdateOverrideApn);
             return true;
         }
 
         private boolean onTransact$isMeteredDataDisabledPackageForUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean isMeteredDataDisabledPackageForUser = isMeteredDataDisabledPackageForUser(componentName, readString, readInt);
+            boolean zIsMeteredDataDisabledPackageForUser = isMeteredDataDisabledPackageForUser(componentName, string, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(isMeteredDataDisabledPackageForUser);
+            parcel2.writeBoolean(zIsMeteredDataDisabledPackageForUser);
             return true;
         }
 
         private boolean onTransact$reportFailedPasswordAttemptWithFailureCount$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            reportFailedPasswordAttemptWithFailureCount(readInt, readInt2, readBoolean);
+            reportFailedPasswordAttemptWithFailureCount(i, i2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setGlobalPrivateDns$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            int globalPrivateDns = setGlobalPrivateDns(componentName, readInt, readString);
+            int globalPrivateDns = setGlobalPrivateDns(componentName, i, string);
             parcel2.writeNoException();
             parcel2.writeInt(globalPrivateDns);
             return true;
@@ -15465,58 +15465,58 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setProfileOwnerOnOrganizationOwnedDevice$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setProfileOwnerOnOrganizationOwnedDevice(componentName, readInt, readBoolean);
+            setProfileOwnerOnOrganizationOwnedDevice(componentName, i, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$installUpdateFromFile$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-            StartInstallingUpdateCallback asInterface = StartInstallingUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
+            StartInstallingUpdateCallback startInstallingUpdateCallbackAsInterface = StartInstallingUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            installUpdateFromFile(componentName, readString, parcelFileDescriptor, asInterface);
+            installUpdateFromFile(componentName, string, parcelFileDescriptor, startInstallingUpdateCallbackAsInterface);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$startViewCalendarEventInManagedProfile$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            long readLong = parcel.readLong();
-            long readLong2 = parcel.readLong();
-            long readLong3 = parcel.readLong();
-            boolean readBoolean = parcel.readBoolean();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            long j = parcel.readLong();
+            long j2 = parcel.readLong();
+            long j3 = parcel.readLong();
+            boolean z = parcel.readBoolean();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean startViewCalendarEventInManagedProfile = startViewCalendarEventInManagedProfile(readString, readLong, readLong2, readLong3, readBoolean, readInt);
+            boolean zStartViewCalendarEventInManagedProfile = startViewCalendarEventInManagedProfile(string, j, j2, j3, z, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(startViewCalendarEventInManagedProfile);
+            parcel2.writeBoolean(zStartViewCalendarEventInManagedProfile);
             return true;
         }
 
         private boolean onTransact$setKeyGrantForApp$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean keyGrantForApp = setKeyGrantForApp(componentName, readString, readString2, readString3, readBoolean);
+            boolean keyGrantForApp = setKeyGrantForApp(componentName, string, string2, string3, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(keyGrantForApp);
             return true;
         }
 
         private boolean onTransact$setKeyGrantToWifiAuth$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean keyGrantToWifiAuth = setKeyGrantToWifiAuth(readString, readString2, readBoolean);
+            boolean keyGrantToWifiAuth = setKeyGrantToWifiAuth(string, string2, z);
             parcel2.writeNoException();
             parcel2.writeBoolean(keyGrantToWifiAuth);
             return true;
@@ -15524,76 +15524,76 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setUserControlDisabledPackages$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            String string = parcel.readString();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             parcel.enforceNoDataAvail();
-            setUserControlDisabledPackages(componentName, readString, createStringArrayList);
+            setUserControlDisabledPackages(componentName, string, arrayListCreateStringArrayList);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setCommonCriteriaModeEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setCommonCriteriaModeEnabled(componentName, readString, readBoolean);
+            setCommonCriteriaModeEnabled(componentName, string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setOrganizationIdForUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setOrganizationIdForUser(readString, readString2, readInt);
+            setOrganizationIdForUser(string, string2, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setDeviceOwnerType$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setDeviceOwnerType(componentName, readInt);
+            setDeviceOwnerType(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setUsbDataSignalingEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setUsbDataSignalingEnabled(readString, readBoolean);
+            setUsbDataSignalingEnabled(string, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setMinimumRequiredWifiSecurityLevel$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setMinimumRequiredWifiSecurityLevel(readString, readInt);
+            setMinimumRequiredWifiSecurityLevel(string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setWifiSsidPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
+            String string = parcel.readString();
             WifiSsidPolicy wifiSsidPolicy = (WifiSsidPolicy) parcel.readTypedObject(WifiSsidPolicy.CREATOR);
             parcel.enforceNoDataAvail();
-            setWifiSsidPolicy(readString, wifiSsidPolicy);
+            setWifiSsidPolicy(string, wifiSsidPolicy);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getDrawable$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
             parcel.enforceNoDataAvail();
-            ParcelableResource drawable = getDrawable(readString, readString2, readString3);
+            ParcelableResource drawable = getDrawable(string, string2, string3);
             parcel2.writeNoException();
             parcel2.writeTypedObject(drawable, 1);
             return true;
@@ -15601,338 +15601,338 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$semSetPasswordQuality$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordQuality(componentName, readInt);
+            semSetPasswordQuality(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordMinimumLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordMinimumLength(componentName, readInt);
+            semSetPasswordMinimumLength(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordMinimumUpperCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordMinimumUpperCase(componentName, readInt);
+            semSetPasswordMinimumUpperCase(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordMinimumLowerCase$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordMinimumLowerCase(componentName, readInt);
+            semSetPasswordMinimumLowerCase(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordMinimumNonLetter$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordMinimumNonLetter(componentName, readInt);
+            semSetPasswordMinimumNonLetter(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordHistoryLength$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetPasswordHistoryLength(componentName, readInt);
+            semSetPasswordHistoryLength(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetPasswordExpirationTimeout$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            long readLong = parcel.readLong();
+            long j = parcel.readLong();
             parcel.enforceNoDataAvail();
-            semSetPasswordExpirationTimeout(componentName, readLong);
+            semSetPasswordExpirationTimeout(componentName, j);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetSimplePasswordEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetSimplePasswordEnabled(componentName, readBoolean);
+            semSetSimplePasswordEnabled(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semIsSimplePasswordEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semIsSimplePasswordEnabled = semIsSimplePasswordEnabled(componentName, readInt);
+            boolean zSemIsSimplePasswordEnabled = semIsSimplePasswordEnabled(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semIsSimplePasswordEnabled);
+            parcel2.writeBoolean(zSemIsSimplePasswordEnabled);
             return true;
         }
 
         private boolean onTransact$semSetKeyguardDisabledFeatures$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetKeyguardDisabledFeatures(componentName, readInt);
+            semSetKeyguardDisabledFeatures(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semSetAllowStorageCard$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowStorageCard(componentName, readBoolean);
+            semSetAllowStorageCard(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowStorageCard$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowStorageCard = semGetAllowStorageCard(componentName, readInt);
+            boolean zSemGetAllowStorageCard = semGetAllowStorageCard(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowStorageCard);
+            parcel2.writeBoolean(zSemGetAllowStorageCard);
             return true;
         }
 
         private boolean onTransact$semSetAllowWifi$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowWifi(componentName, readBoolean);
+            semSetAllowWifi(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowWifi$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowWifi = semGetAllowWifi(componentName, readInt);
+            boolean zSemGetAllowWifi = semGetAllowWifi(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowWifi);
+            parcel2.writeBoolean(zSemGetAllowWifi);
             return true;
         }
 
         private boolean onTransact$semSetAllowTextMessaging$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowTextMessaging(componentName, readBoolean);
+            semSetAllowTextMessaging(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowTextMessaging$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowTextMessaging = semGetAllowTextMessaging(componentName, readInt);
+            boolean zSemGetAllowTextMessaging = semGetAllowTextMessaging(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowTextMessaging);
+            parcel2.writeBoolean(zSemGetAllowTextMessaging);
             return true;
         }
 
         private boolean onTransact$semSetAllowPopImapEmail$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowPopImapEmail(componentName, readBoolean);
+            semSetAllowPopImapEmail(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowPopImapEmail$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowPopImapEmail = semGetAllowPopImapEmail(componentName, readInt);
+            boolean zSemGetAllowPopImapEmail = semGetAllowPopImapEmail(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowPopImapEmail);
+            parcel2.writeBoolean(zSemGetAllowPopImapEmail);
             return true;
         }
 
         private boolean onTransact$semSetAllowBrowser$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowBrowser(componentName, readBoolean);
+            semSetAllowBrowser(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowBrowser$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowBrowser = semGetAllowBrowser(componentName, readInt);
+            boolean zSemGetAllowBrowser = semGetAllowBrowser(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowBrowser);
+            parcel2.writeBoolean(zSemGetAllowBrowser);
             return true;
         }
 
         private boolean onTransact$semSetAllowInternetSharing$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowInternetSharing(componentName, readBoolean);
+            semSetAllowInternetSharing(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowInternetSharing$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowInternetSharing = semGetAllowInternetSharing(componentName, readInt);
+            boolean zSemGetAllowInternetSharing = semGetAllowInternetSharing(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowInternetSharing);
+            parcel2.writeBoolean(zSemGetAllowInternetSharing);
             return true;
         }
 
         private boolean onTransact$semSetAllowBluetoothMode$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            semSetAllowBluetoothMode(componentName, readInt);
+            semSetAllowBluetoothMode(componentName, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowBluetoothMode$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int semGetAllowBluetoothMode = semGetAllowBluetoothMode(componentName, readInt);
+            int iSemGetAllowBluetoothMode = semGetAllowBluetoothMode(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeInt(semGetAllowBluetoothMode);
+            parcel2.writeInt(iSemGetAllowBluetoothMode);
             return true;
         }
 
         private boolean onTransact$semSetAllowDesktopSync$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowDesktopSync(componentName, readBoolean);
+            semSetAllowDesktopSync(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowDesktopSync$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowDesktopSync = semGetAllowDesktopSync(componentName, readInt);
+            boolean zSemGetAllowDesktopSync = semGetAllowDesktopSync(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowDesktopSync);
+            parcel2.writeBoolean(zSemGetAllowDesktopSync);
             return true;
         }
 
         private boolean onTransact$semSetAllowIrda$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetAllowIrda(componentName, readBoolean);
+            semSetAllowIrda(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetAllowIrda$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean semGetAllowIrda = semGetAllowIrda(componentName, readInt);
+            boolean zSemGetAllowIrda = semGetAllowIrda(componentName, i);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetAllowIrda);
+            parcel2.writeBoolean(zSemGetAllowIrda);
             return true;
         }
 
         private boolean onTransact$semSetRequireStorageCardEncryption$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetRequireStorageCardEncryption(componentName, readBoolean, readBoolean2);
+            semSetRequireStorageCardEncryption(componentName, z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$semGetRequireStorageCardEncryption$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            boolean semGetRequireStorageCardEncryption = semGetRequireStorageCardEncryption(componentName, readInt, readBoolean);
+            boolean zSemGetRequireStorageCardEncryption = semGetRequireStorageCardEncryption(componentName, i, z);
             parcel2.writeNoException();
-            parcel2.writeBoolean(semGetRequireStorageCardEncryption);
+            parcel2.writeBoolean(zSemGetRequireStorageCardEncryption);
             return true;
         }
 
         private boolean onTransact$semSetChangeNotificationEnabled$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            semSetChangeNotificationEnabled(componentName, readBoolean);
+            semSetChangeNotificationEnabled(componentName, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setApplicationExemptions$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            int[] createIntArray = parcel.createIntArray();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            int[] iArrCreateIntArray = parcel.createIntArray();
             parcel.enforceNoDataAvail();
-            setApplicationExemptions(readString, readString2, createIntArray);
+            setApplicationExemptions(string, string2, iArrCreateIntArray);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setMtePolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setMtePolicy(readInt, readString);
+            setMtePolicy(i, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setMtePolicyBySystem$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setMtePolicyBySystem(readString, readInt);
+            setMtePolicyBySystem(string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setCrossProfileAppToIgnored$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setCrossProfileAppToIgnored(readInt, readString);
+            setCrossProfileAppToIgnored(i, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getSamsungSDcardEncryptionStatus$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            boolean samsungSDcardEncryptionStatus = getSamsungSDcardEncryptionStatus(componentName, readInt);
+            boolean samsungSDcardEncryptionStatus = getSamsungSDcardEncryptionStatus(componentName, i);
             parcel2.writeNoException();
             parcel2.writeBoolean(samsungSDcardEncryptionStatus);
             return true;
@@ -15940,67 +15940,67 @@ public interface IDevicePolicyManager extends IInterface {
 
         private boolean onTransact$setContentProtectionPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setContentProtectionPolicy(componentName, readString, readInt);
+            setContentProtectionPolicy(componentName, string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getContentProtectionPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int contentProtectionPolicy = getContentProtectionPolicy(componentName, readString, readInt);
+            int contentProtectionPolicy = getContentProtectionPolicy(componentName, string, i);
             parcel2.writeNoException();
             parcel2.writeInt(contentProtectionPolicy);
             return true;
         }
 
         private boolean onTransact$setMaxPolicyStorageLimit$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setMaxPolicyStorageLimit(readString, readInt);
+            setMaxPolicyStorageLimit(string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$forceSetMaxPolicyStorageLimit$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            forceSetMaxPolicyStorageLimit(readString, readInt);
+            forceSetMaxPolicyStorageLimit(string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getPolicySizeForAdmin$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
+            String string = parcel.readString();
             EnforcingAdmin enforcingAdmin = (EnforcingAdmin) parcel.readTypedObject(EnforcingAdmin.CREATOR);
             parcel.enforceNoDataAvail();
-            int policySizeForAdmin = getPolicySizeForAdmin(readString, enforcingAdmin);
+            int policySizeForAdmin = getPolicySizeForAdmin(string, enforcingAdmin);
             parcel2.writeNoException();
             parcel2.writeInt(policySizeForAdmin);
             return true;
         }
 
         private boolean onTransact$setAppFunctionsPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setAppFunctionsPolicy(readString, readInt);
+            setAppFunctionsPolicy(string, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getAppFunctionsPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int appFunctionsPolicy = getAppFunctionsPolicy(readString, readInt);
+            int appFunctionsPolicy = getAppFunctionsPolicy(string, i);
             parcel2.writeNoException();
             parcel2.writeInt(appFunctionsPolicy);
             return true;

@@ -8,12 +8,10 @@ import com.android.systemui.PowerUiRune;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TipsManager {
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,34 +33,34 @@ public final class TipsManager {
         String stringExtra;
         String action = intent.getAction();
         SharedPreferences sharedPreferences = this.context.getSharedPreferences("com.android.systemui.power_tips_notification", 0);
-        SharedPreferences.Editor edit = sharedPreferences != null ? sharedPreferences.edit() : null;
-        if (!PowerUiRune.TIPS_NOTIFICATION || edit == null || action == null) {
+        SharedPreferences.Editor editorEdit = sharedPreferences != null ? sharedPreferences.edit() : null;
+        if (!PowerUiRune.TIPS_NOTIFICATION || editorEdit == null || action == null) {
             return;
         }
-        int hashCode = action.hashCode();
-        if (hashCode == -2069161002) {
+        int iHashCode = action.hashCode();
+        if (iHashCode == -2069161002) {
             if (action.equals("com.samsung.android.sm.IGNORE_RUT_TIPS_NOTI")) {
-                edit.putBoolean("ignoreRUT", true);
-                edit.commit();
+                editorEdit.putBoolean("ignoreRUT", true);
+                editorEdit.commit();
                 return;
             }
             return;
         }
-        if (hashCode == -2015668905) {
+        if (iHashCode == -2015668905) {
             if (action.equals("com.samsung.android.sm.CLEAR_TIPS_NOTI")) {
-                edit.putBoolean("tipsNotiConfirmed", false);
-                edit.putBoolean("ignoreRUT", false);
-                edit.putInt("tipsNotiRegisteredCount", 0);
-                edit.putLong("tipsNotiLastTime", 0L);
-                edit.commit();
+                editorEdit.putBoolean("tipsNotiConfirmed", false);
+                editorEdit.putBoolean("ignoreRUT", false);
+                editorEdit.putInt("tipsNotiRegisteredCount", 0);
+                editorEdit.putLong("tipsNotiLastTime", 0L);
+                editorEdit.commit();
                 return;
             }
             return;
         }
-        if (hashCode == 420653048 && action.equals("android.intent.action.tips.noti.confirmed") && (stringExtra = intent.getStringExtra("tips_action_confirmed_id")) != null && StringsKt__StringsKt.contains(stringExtra, "120999", false)) {
+        if (iHashCode == 420653048 && action.equals("android.intent.action.tips.noti.confirmed") && (stringExtra = intent.getStringExtra("tips_action_confirmed_id")) != null && StringsKt__StringsKt.contains(stringExtra, "120999", false)) {
             Log.i("PowerUI.TipsManager", "TIPS_NOTI_HIGH_REFRESH was clicked, so we set preference !!");
-            edit.putBoolean("tipsNotiConfirmed", true);
-            edit.commit();
+            editorEdit.putBoolean("tipsNotiConfirmed", true);
+            editorEdit.commit();
         }
     }
 }

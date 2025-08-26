@@ -132,9 +132,9 @@ public interface ISemMobileWipsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemMobileWipsService)) {
-                return (ISemMobileWipsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemMobileWipsService)) {
+                return (ISemMobileWipsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -186,45 +186,45 @@ public interface ISemMobileWipsService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ISemMobileWipsFramework asInterface = ISemMobileWipsFramework.Stub.asInterface(parcel.readStrongBinder());
+                    ISemMobileWipsFramework iSemMobileWipsFrameworkAsInterface = ISemMobileWipsFramework.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerCallback = registerCallback(asInterface);
+                    boolean zRegisterCallback = registerCallback(iSemMobileWipsFrameworkAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerCallback);
+                    parcel2.writeBoolean(zRegisterCallback);
                     return true;
                 case 2:
-                    ISemMobileWipsFramework asInterface2 = ISemMobileWipsFramework.Stub.asInterface(parcel.readStrongBinder());
+                    ISemMobileWipsFramework iSemMobileWipsFrameworkAsInterface2 = ISemMobileWipsFramework.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterCallback = unregisterCallback(asInterface2);
+                    boolean zUnregisterCallback = unregisterCallback(iSemMobileWipsFrameworkAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterCallback);
+                    parcel2.writeBoolean(zUnregisterCallback);
                     return true;
                 case 3:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    broadcastBcnIntervalEvent(readString, readString2, readString3, readInt, readInt2, readLong, readLong2);
+                    broadcastBcnIntervalEvent(string, string2, string3, i3, i4, j, j2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    broadcastBcnEventAbort(readString4, readInt3);
+                    broadcastBcnEventAbort(string4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkMWIPS = checkMWIPS(readString5, readInt4);
+                    boolean zCheckMWIPS = checkMWIPS(string5, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkMWIPS);
+                    parcel2.writeBoolean(zCheckMWIPS);
                     return true;
                 case 6:
                     Message message = (Message) parcel.readTypedObject(Message.CREATOR);
@@ -233,49 +233,49 @@ public interface ISemMobileWipsService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateWifiChipInfo(readString6, readString7);
+                    updateWifiChipInfo(string6, string7);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean currentBss = setCurrentBss(readString8, readString9, readString10, readInt5, createByteArray);
+                    boolean currentBss = setCurrentBss(string8, string9, string10, i7, bArrCreateByteArray);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(currentBss);
                     return true;
                 case 9:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onScanResults(createTypedArrayList);
+                    onScanResults(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    String readString11 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onDnsResponses(createStringArrayList, readString11);
+                    onDnsResponses(arrayListCreateStringArrayList, string11);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    ISemMobileWipsPacketSender asInterface3 = ISemMobileWipsPacketSender.Stub.asInterface(parcel.readStrongBinder());
+                    ISemMobileWipsPacketSender iSemMobileWipsPacketSenderAsInterface = ISemMobileWipsPacketSender.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerPacketSender = registerPacketSender(asInterface3);
+                    boolean zRegisterPacketSender = registerPacketSender(iSemMobileWipsPacketSenderAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerPacketSender);
+                    parcel2.writeBoolean(zRegisterPacketSender);
                     return true;
                 case 12:
-                    ISemMobileWipsPacketSender asInterface4 = ISemMobileWipsPacketSender.Stub.asInterface(parcel.readStrongBinder());
+                    ISemMobileWipsPacketSender iSemMobileWipsPacketSenderAsInterface2 = ISemMobileWipsPacketSender.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterPacketSender = unregisterPacketSender(asInterface4);
+                    boolean zUnregisterPacketSender = unregisterPacketSender(iSemMobileWipsPacketSenderAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterPacketSender);
+                    parcel2.writeBoolean(zUnregisterPacketSender);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -300,201 +300,201 @@ public interface ISemMobileWipsService extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean registerCallback(ISemMobileWipsFramework iSemMobileWipsFramework) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemMobileWipsFramework);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemMobileWipsFramework);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean unregisterCallback(ISemMobileWipsFramework iSemMobileWipsFramework) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemMobileWipsFramework);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemMobileWipsFramework);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void broadcastBcnIntervalEvent(String str, String str2, String str3, int i, int i2, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void broadcastBcnEventAbort(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean checkMWIPS(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void sendMessage(Message message) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeTypedObject(message, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(message, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void updateWifiChipInfo(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean setCurrentBss(String str, String str2, String str3, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void onScanResults(List<SemMobileWipsScanResult> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public void onDnsResponses(List<String> list, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean registerPacketSender(ISemMobileWipsPacketSender iSemMobileWipsPacketSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemMobileWipsPacketSender);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemMobileWipsPacketSender);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsService
             public boolean unregisterPacketSender(ISemMobileWipsPacketSender iSemMobileWipsPacketSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemMobileWipsPacketSender);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemMobileWipsPacketSender);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

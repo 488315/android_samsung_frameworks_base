@@ -51,11 +51,11 @@ public class DateKeyListener extends NumberKeyListener {
     public static DateKeyListener getInstance(Locale locale) {
         DateKeyListener dateKeyListener;
         synchronized (sLock) {
-            HashMap<Locale, DateKeyListener> hashMap = sInstanceCache;
-            dateKeyListener = hashMap.get(locale);
+            HashMap<Locale, DateKeyListener> map = sInstanceCache;
+            dateKeyListener = map.get(locale);
             if (dateKeyListener == null) {
                 dateKeyListener = new DateKeyListener(locale);
-                hashMap.put(locale, dateKeyListener);
+                map.put(locale, dateKeyListener);
             }
         }
         return dateKeyListener;

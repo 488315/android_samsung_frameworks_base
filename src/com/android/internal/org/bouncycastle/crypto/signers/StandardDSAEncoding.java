@@ -26,10 +26,10 @@ public class StandardDSAEncoding implements DSAEncoding {
     public BigInteger[] decode(BigInteger bigInteger, byte[] bArr) throws IOException {
         ASN1Sequence aSN1Sequence = (ASN1Sequence) ASN1Primitive.fromByteArray(bArr);
         if (aSN1Sequence.size() == 2) {
-            BigInteger decodeValue = decodeValue(bigInteger, aSN1Sequence, 0);
-            BigInteger decodeValue2 = decodeValue(bigInteger, aSN1Sequence, 1);
-            if (Arrays.areEqual(encode(bigInteger, decodeValue, decodeValue2), bArr)) {
-                return new BigInteger[]{decodeValue, decodeValue2};
+            BigInteger bigIntegerDecodeValue = decodeValue(bigInteger, aSN1Sequence, 0);
+            BigInteger bigIntegerDecodeValue2 = decodeValue(bigInteger, aSN1Sequence, 1);
+            if (Arrays.areEqual(encode(bigInteger, bigIntegerDecodeValue, bigIntegerDecodeValue2), bArr)) {
+                return new BigInteger[]{bigIntegerDecodeValue, bigIntegerDecodeValue2};
             }
         }
         throw new IllegalArgumentException("Malformed signature");

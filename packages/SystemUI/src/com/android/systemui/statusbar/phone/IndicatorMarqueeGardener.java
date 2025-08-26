@@ -4,7 +4,6 @@ import android.content.Context;
 import com.android.systemui.R;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorMarqueeGardener {
     public final Context context;
@@ -15,20 +14,16 @@ public final class IndicatorMarqueeGardener {
     public final IndicatorMarqueeGardener$wakefulnessLifecycleObserver$1 wakefulnessLifecycleObserver = new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.IndicatorMarqueeGardener$wakefulnessLifecycleObserver$1
         @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
         public final void onFinishedGoingToSleep() {
-            IndicatorMarqueeGardener.this.updateMarqueeValues();
+            this.this$0.updateMarqueeValues();
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MarqueeModel {
         public int direction = 1;
         public int horizontalShift;
         public final int maxShift;
-        public int shiftBottom;
         public int shiftLeft;
         public int shiftRight;
-        public int shiftTop;
-        public int verticalShift;
 
         public MarqueeModel(int i) {
             this.maxShift = i;
@@ -52,21 +47,14 @@ public final class IndicatorMarqueeGardener {
         if (i3 > i4 || i3 < (-i4)) {
             marqueeModel.direction = i2 * (-1);
         }
-        int i5 = (marqueeModel.verticalShift + 1) % 4;
-        marqueeModel.verticalShift = i5;
-        int i6 = (i5 - 1) % 2;
-        int i7 = i6 * (-1);
         MarqueeModel marqueeModel2 = new MarqueeModel(i4);
         marqueeModel2.shiftLeft = marqueeModel.shiftLeft;
-        marqueeModel2.shiftTop = marqueeModel.shiftTop;
         marqueeModel2.shiftRight = marqueeModel.shiftRight;
-        marqueeModel2.shiftBottom = marqueeModel.shiftBottom;
-        int i8 = marqueeModel.horizontalShift;
-        marqueeModel.shiftLeft = i8;
-        marqueeModel.shiftTop = i6;
-        marqueeModel.shiftRight = i8;
-        marqueeModel.shiftBottom = i7;
-        if (marqueeModel2.shiftLeft == i8 && marqueeModel2.shiftTop == i6 && marqueeModel2.shiftRight == i8 && marqueeModel2.shiftBottom == i7) {
+        int i5 = marqueeModel.horizontalShift;
+        marqueeModel.shiftLeft = i5;
+        int i6 = i5 * (-1);
+        marqueeModel.shiftRight = i6;
+        if (marqueeModel2.shiftLeft == i5 && marqueeModel2.shiftRight == i6) {
             return;
         }
         this.hasSomethingChanged = true;

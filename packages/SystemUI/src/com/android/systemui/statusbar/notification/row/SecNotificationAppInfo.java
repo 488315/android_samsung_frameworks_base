@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.metrics.LogMaker;
@@ -45,7 +46,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.List;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecNotificationAppInfo extends FrameLayout implements NotificationGuts.GutsContent, GutContentInitializer {
     public int mActualHeight;
@@ -87,7 +87,6 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
     public TextView mTurnOffConFirmButton;
     public UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UpdateAppLevelSettingRunnable implements Runnable {
         public final int mAppUid;
         public final boolean mCurrentAlertAllowed;
@@ -128,7 +127,7 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         this.mOnCancelSettings = new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.SecNotificationAppInfo$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SecNotificationAppInfo secNotificationAppInfo = SecNotificationAppInfo.this;
+                SecNotificationAppInfo secNotificationAppInfo = this.f$0;
                 secNotificationAppInfo.mPressedApply = false;
                 secNotificationAppInfo.updateBottomButtonContainer(true);
                 secNotificationAppInfo.mGutsContainer.closeControls(view, false);
@@ -228,7 +227,7 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         this.mTurnOffButton.setVisibility(this.mIsNonblockable ? 8 : 0);
         this.mTurnOffButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.SecNotificationAppInfo.3
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 SecNotificationAppInfo.this.mToggleButtonContainer.setVisibility(8);
                 SecNotificationAppInfo.this.mContentContainer.setVisibility(0);
                 SecNotificationAppInfo.this.updateIconNameVisibility(true);
@@ -263,7 +262,7 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
     }
 
     public final void bindNotification(PackageManager packageManager, INotificationManager iNotificationManager, String str, NotificationChannel notificationChannel, NotificationEntry notificationEntry, GutContentInitializer.OnSettingsClickListener onSettingsClickListener, UiEventLogger uiEventLogger, boolean z, boolean z2, AssistantFeedbackController assistantFeedbackController, Icon icon, String str2, GutContentInitializer.OnSettingsClickListener onSettingsClickListener2, PendingIntent pendingIntent) {
-        boolean z3;
+        boolean notificationAlertsEnabledForPackage;
         this.mINotificationManager = iNotificationManager;
         this.mMetricsLogger = (MetricsLogger) Dependency.sDependency.getDependencyInner(MetricsLogger.class);
         this.mAssistantFeedbackController = assistantFeedbackController;
@@ -309,12 +308,12 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
             int i3 = this.mNumTotalChannels;
         }
         try {
-            z3 = this.mINotificationManager.getNotificationAlertsEnabledForPackage(this.mPackageName, this.mSbn.getUid());
+            notificationAlertsEnabledForPackage = this.mINotificationManager.getNotificationAlertsEnabledForPackage(this.mPackageName, this.mSbn.getUid());
         } catch (RemoteException e) {
             Log.e("InfoGuts", "Unable to getNotificationAlertsEnabledForPackage", e);
-            z3 = true;
+            notificationAlertsEnabledForPackage = true;
         }
-        this.mAlertAllowed = z3;
+        this.mAlertAllowed = notificationAlertsEnabledForPackage;
         this.mToggleButtonContainer = findViewById(R.id.notification_guts_toggle_container);
         this.mContentContainer = findViewById(R.id.notification_guts_content_container);
         ((TextView) findViewById(R.id.notification_guts_content_title)).setText(R.string.sec_notification_app_info_off_description);
@@ -368,7 +367,7 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         this.mMetricsLogger.write(notificationControlsLogMaker$1());
     }
 
-    public final void checkGoogleSports() {
+    public final void checkGoogleSports() throws PackageManager.NameNotFoundException {
         if (this.mPackageName.equals("com.samsung.android.app.aodservice") && this.mSingleNotificationChannel.getId().equals("google_sports_nowbar_ongoing_channel")) {
             try {
                 ApplicationInfo applicationInfo = this.mPm.getApplicationInfo("com.google.android.googlequicksearchbox", 795136);
@@ -406,13 +405,20 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         GutContentInitializer.OnSettingsClickListener onSettingsClickListener;
         PendingIntent pendingIntent;
         String str2;
+        INotificationManager iNotificationManager;
+        NotificationChannel channel;
+        NotificationEntry notificationEntry;
         NotificationGutsManager$$ExternalSyntheticLambda2 notificationGutsManager$$ExternalSyntheticLambda2;
+        UiEventLogger uiEventLogger;
+        boolean z;
+        boolean isNonPackageBlockable;
+        AssistantFeedbackController assistantFeedbackController;
         StatusBarNotification statusBarNotification = expandableNotificationRow.mEntry.mSbn;
         String packageName = statusBarNotification.getPackageName();
         PackageManager packageManagerForUser = CentralSurfaces.getPackageManagerForUser(statusBarNotification.getUser().getIdentifier(), getContext());
         NotificationGutsManager notificationGutsManager = (NotificationGutsManager) Dependency.sDependency.getDependencyInner(NotificationGutsManager.class);
         CharSequence charSequence = statusBarNotification.getNotification().extras.getCharSequence("android.ongoingActivityNoti.aodRemoteAppName");
-        String charSequence2 = charSequence != null ? charSequence.toString() : null;
+        String string = charSequence != null ? charSequence.toString() : null;
         Icon icon2 = (Icon) statusBarNotification.getNotification().extras.getParcelable("android.ongoingActivityNoti.aodRemoteAppIcon", Icon.class);
         PendingIntent pendingIntent2 = (PendingIntent) statusBarNotification.getNotification().extras.getParcelable("android.ongoingActivityNoti.aodRemoteAppPendingIntent", PendingIntent.class);
         GutContentInitializer.OnSettingsClickListener onSettingsClickListener2 = new GutContentInitializer.OnSettingsClickListener(this) { // from class: com.android.systemui.statusbar.notification.row.SecNotificationAppInfo.6
@@ -420,61 +426,49 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
             public final void onClick() {
             }
         };
-        if (charSequence2 == null || charSequence2.isEmpty() || icon2 == null || pendingIntent2 == null) {
+        if (string == null || string.isEmpty() || icon2 == null || pendingIntent2 == null) {
             icon = null;
             str = null;
             onSettingsClickListener = null;
             pendingIntent = null;
         } else {
-            Log.i("InfoGuts", "AOD guts information is used. ongoingAppName:".concat(charSequence2));
+            Log.i("InfoGuts", "AOD guts information is used. ongoingAppName:".concat(string));
             pendingIntent = pendingIntent2;
-            str = charSequence2;
+            str = string;
             icon = icon2;
             onSettingsClickListener = onSettingsClickListener2;
         }
         try {
-            INotificationManager iNotificationManager = (INotificationManager) Dependency.sDependency.getDependencyInner(INotificationManager.class);
-            NotificationChannel channel = expandableNotificationRow.mEntry.mRanking.getChannel();
-            NotificationEntry notificationEntry = expandableNotificationRow.mEntry;
+            iNotificationManager = (INotificationManager) Dependency.sDependency.getDependencyInner(INotificationManager.class);
+            channel = expandableNotificationRow.mEntry.mRanking.getChannel();
+            notificationEntry = expandableNotificationRow.mEntry;
             notificationGutsManager.getClass();
             NotificationGuts notificationGuts = expandableNotificationRow.mGuts;
             StatusBarNotification statusBarNotification2 = expandableNotificationRow.mEntry.mSbn;
+            notificationGutsManager$$ExternalSyntheticLambda2 = (!statusBarNotification2.getUser().equals(UserHandle.ALL) || ((NotificationLockscreenUserManagerImpl) notificationGutsManager.mLockscreenUserManager).mCurrentUserId == 0) ? new NotificationGutsManager$$ExternalSyntheticLambda2(notificationGutsManager, notificationGuts, statusBarNotification2, expandableNotificationRow) : null;
+            uiEventLogger = (UiEventLogger) Dependency.sDependency.getDependencyInner(UiEventLogger.class);
+            z = ((DeviceProvisionedControllerImpl) ((DeviceProvisionedController) Dependency.sDependency.getDependencyInner(DeviceProvisionedController.class))).deviceProvisioned.get();
             try {
-                try {
-                    if (statusBarNotification2.getUser().equals(UserHandle.ALL) && ((NotificationLockscreenUserManagerImpl) notificationGutsManager.mLockscreenUserManager).mCurrentUserId != 0) {
-                        notificationGutsManager$$ExternalSyntheticLambda2 = null;
-                        UiEventLogger uiEventLogger = (UiEventLogger) Dependency.sDependency.getDependencyInner(UiEventLogger.class);
-                        boolean z = ((DeviceProvisionedControllerImpl) ((DeviceProvisionedController) Dependency.sDependency.getDependencyInner(DeviceProvisionedController.class))).deviceProvisioned.get();
-                        boolean isNonPackageBlockable = expandableNotificationRow.getIsNonPackageBlockable();
-                        ((HighPriorityProvider) Dependency.sDependency.getDependencyInner(HighPriorityProvider.class)).isHighPriority(expandableNotificationRow.mEntry, true);
-                        AssistantFeedbackController assistantFeedbackController = (AssistantFeedbackController) Dependency.sDependency.getDependencyInner(AssistantFeedbackController.class);
-                        notificationGutsManager.isFavoriteNotif(packageName);
-                        str2 = "InfoGuts";
-                        bindNotification(packageManagerForUser, iNotificationManager, packageName, channel, notificationEntry, notificationGutsManager$$ExternalSyntheticLambda2, uiEventLogger, z, isNonPackageBlockable, assistantFeedbackController, icon, str, onSettingsClickListener, pendingIntent);
-                        return true;
-                    }
-                    bindNotification(packageManagerForUser, iNotificationManager, packageName, channel, notificationEntry, notificationGutsManager$$ExternalSyntheticLambda2, uiEventLogger, z, isNonPackageBlockable, assistantFeedbackController, icon, str, onSettingsClickListener, pendingIntent);
-                    return true;
-                } catch (Exception e) {
-                    e = e;
-                    Log.e(str2, "error binding guts", e);
-                    return false;
-                }
-                boolean isNonPackageBlockable2 = expandableNotificationRow.getIsNonPackageBlockable();
+                isNonPackageBlockable = expandableNotificationRow.getIsNonPackageBlockable();
                 ((HighPriorityProvider) Dependency.sDependency.getDependencyInner(HighPriorityProvider.class)).isHighPriority(expandableNotificationRow.mEntry, true);
-                AssistantFeedbackController assistantFeedbackController2 = (AssistantFeedbackController) Dependency.sDependency.getDependencyInner(AssistantFeedbackController.class);
+                assistantFeedbackController = (AssistantFeedbackController) Dependency.sDependency.getDependencyInner(AssistantFeedbackController.class);
                 notificationGutsManager.isFavoriteNotif(packageName);
                 str2 = "InfoGuts";
-            } catch (Exception e2) {
-                e = e2;
+            } catch (Exception e) {
+                e = e;
                 str2 = "InfoGuts";
             }
-            notificationGutsManager$$ExternalSyntheticLambda2 = new NotificationGutsManager$$ExternalSyntheticLambda2(notificationGutsManager, notificationGuts, statusBarNotification2, expandableNotificationRow);
-            UiEventLogger uiEventLogger2 = (UiEventLogger) Dependency.sDependency.getDependencyInner(UiEventLogger.class);
-            boolean z2 = ((DeviceProvisionedControllerImpl) ((DeviceProvisionedController) Dependency.sDependency.getDependencyInner(DeviceProvisionedController.class))).deviceProvisioned.get();
+        } catch (Exception e2) {
+            e = e2;
+            str2 = "InfoGuts";
+        }
+        try {
+            bindNotification(packageManagerForUser, iNotificationManager, packageName, channel, notificationEntry, notificationGutsManager$$ExternalSyntheticLambda2, uiEventLogger, z, isNonPackageBlockable, assistantFeedbackController, icon, str, onSettingsClickListener, pendingIntent);
+            return true;
         } catch (Exception e3) {
             e = e3;
-            str2 = "InfoGuts";
+            Log.e(str2, "error binding guts", e);
+            return false;
         }
     }
 
@@ -573,7 +567,7 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         this.mContentNameContainer.setVisibility(z ? 0 : 8);
     }
 
-    public final void updateTextColorOnOpenThemeOrColoring() {
+    public final void updateTextColorOnOpenThemeOrColoring() throws Resources.NotFoundException {
         NotificationColorPicker notificationColorPicker = (NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class);
         int gutsTextColor = notificationColorPicker.getGutsTextColor();
         int gutsTextColor2 = notificationColorPicker.getGutsTextColor();
@@ -613,9 +607,9 @@ public class SecNotificationAppInfo extends FrameLayout implements NotificationG
         }
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.notification_guts_button_container);
         if (linearLayout != null) {
-            Drawable mutate = ((FrameLayout) this).mContext.getDrawable(R.drawable.notification_guts_button_divider).mutate();
-            mutate.setTint(gutsTextColor);
-            linearLayout.setDividerDrawable(mutate);
+            Drawable drawableMutate = ((FrameLayout) this).mContext.getDrawable(R.drawable.notification_guts_button_divider).mutate();
+            drawableMutate.setTint(gutsTextColor);
+            linearLayout.setDividerDrawable(drawableMutate);
         }
     }
 

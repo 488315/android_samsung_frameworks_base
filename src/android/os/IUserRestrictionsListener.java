@@ -38,9 +38,9 @@ public interface IUserRestrictionsListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUserRestrictionsListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUserRestrictionsListener)) {
-                return (IUserRestrictionsListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUserRestrictionsListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUserRestrictionsListener)) {
+                return (IUserRestrictionsListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,11 +67,11 @@ public interface IUserRestrictionsListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onUserRestrictionsChanged(readInt, bundle, bundle2);
+                onUserRestrictionsChanged(i3, bundle, bundle2);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -95,15 +95,15 @@ public interface IUserRestrictionsListener extends IInterface {
 
             @Override // android.os.IUserRestrictionsListener
             public void onUserRestrictionsChanged(int i, Bundle bundle, Bundle bundle2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUserRestrictionsListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(bundle2, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUserRestrictionsListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(bundle2, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

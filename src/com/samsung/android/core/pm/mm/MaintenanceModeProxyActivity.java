@@ -19,15 +19,15 @@ public class MaintenanceModeProxyActivity extends Activity {
     private Resources mResources;
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         Context applicationContext = getApplicationContext();
         this.mContext = applicationContext;
         this.mResources = applicationContext.getResources();
         this.mIsTablet = MaintenanceModeUtils.isTablet();
-        int checkRequiredConditions = MaintenanceModeUtils.checkRequiredConditions(this.mContext, false);
-        if (checkRequiredConditions != 0) {
-            showToast(checkRequiredConditions);
+        int iCheckRequiredConditions = MaintenanceModeUtils.checkRequiredConditions(this.mContext, false);
+        if (iCheckRequiredConditions != 0) {
+            showToast(iCheckRequiredConditions);
             finish();
         } else {
             startIntroActivity();
@@ -35,7 +35,7 @@ public class MaintenanceModeProxyActivity extends Activity {
         }
     }
 
-    private void showToast(int i) {
+    private void showToast(int i) throws Resources.NotFoundException {
         String string;
         if (i == 1) {
             string = this.mResources.getString(this.mIsTablet ? R.string.maintenance_mode_proxy_isnt_supported_toast_message_tablet : R.string.maintenance_mode_proxy_isnt_supported_toast_message_phone);

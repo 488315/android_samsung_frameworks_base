@@ -1,6 +1,7 @@
 package androidx.compose.ui.text.input;
 
 import android.graphics.Rect;
+import android.view.Choreographer;
 import android.view.View;
 import android.view.inputmethod.BaseInputConnection;
 import androidx.compose.runtime.collection.MutableVector;
@@ -26,7 +27,6 @@ import kotlin.jvm.internal.Lambda;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextInputServiceAndroid implements PlatformTextInputService {
     public final Lazy baseInputConnection$delegate;
@@ -46,7 +46,6 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TextInputCommand {
         public static final /* synthetic */ TextInputCommand[] $VALUES;
         public static final TextInputCommand HideKeyboard;
@@ -80,7 +79,6 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -113,14 +111,14 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
         this.onEditCommand = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid$onEditCommand$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Unit.INSTANCE;
             }
         };
         this.onImeActionPerformed = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid$onImeActionPerformed$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* synthetic */ Object mo781invoke(Object obj) {
                 int i = ((ImeAction) obj).value;
                 return Unit.INSTANCE;
             }
@@ -137,7 +135,7 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return new BaseInputConnection(TextInputServiceAndroid.this.view, false);
+                return new BaseInputConnection(this.this$0.view, false);
             }
         });
         this.cursorAnchorInfoController = new CursorAnchorInfoController(matrixPositionCalculator, inputMethodManager);
@@ -171,12 +169,12 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
                 /* JADX WARN: Type inference failed for: r8v6, types: [T, java.lang.Boolean] */
                 @Override // java.lang.Runnable
                 public final void run() {
-                    View findFocus;
-                    TextInputServiceAndroid textInputServiceAndroid = TextInputServiceAndroid.this;
+                    View viewFindFocus;
+                    TextInputServiceAndroid textInputServiceAndroid = this.f$0;
                     textInputServiceAndroid.frameCallback = null;
-                    boolean isFocused = textInputServiceAndroid.view.isFocused();
+                    boolean zIsFocused = textInputServiceAndroid.view.isFocused();
                     MutableVector mutableVector = textInputServiceAndroid.textInputCommandQueue;
-                    if (!isFocused && (findFocus = textInputServiceAndroid.view.getRootView().findFocus()) != null && findFocus.onCheckIsTextEditor()) {
+                    if (!zIsFocused && (viewFindFocus = textInputServiceAndroid.view.getRootView().findFocus()) != null && viewFindFocus.onCheckIsTextEditor()) {
                         mutableVector.clear();
                         return;
                     }
@@ -200,9 +198,9 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
                         }
                     }
                     mutableVector.clear();
-                    boolean areEqual = Intrinsics.areEqual(ref$ObjectRef.element, Boolean.TRUE);
+                    boolean zAreEqual = Intrinsics.areEqual(ref$ObjectRef.element, Boolean.TRUE);
                     InputMethodManager inputMethodManager = textInputServiceAndroid.inputMethodManager;
-                    if (areEqual) {
+                    if (zAreEqual) {
                         InputMethodManagerImpl inputMethodManagerImpl = (InputMethodManagerImpl) inputMethodManager;
                         ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl.imm$delegate.getValue()).restartInput(inputMethodManagerImpl.view);
                     }
@@ -244,17 +242,17 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
     @Override // androidx.compose.ui.text.input.PlatformTextInputService
     public final void stopInput() {
         this.editorHasFocus = false;
-        this.onEditCommand = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid$stopInput$1
+        this.onEditCommand = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid.stopInput.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Unit.INSTANCE;
             }
         };
-        this.onImeActionPerformed = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid$stopInput$2
+        this.onImeActionPerformed = new Function1() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid.stopInput.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* synthetic */ Object mo781invoke(Object obj) {
                 int i = ((ImeAction) obj).value;
                 return Unit.INSTANCE;
             }
@@ -265,7 +263,7 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
 
     @Override // androidx.compose.ui.text.input.PlatformTextInputService
     public final void updateState(TextFieldValue textFieldValue, TextFieldValue textFieldValue2) {
-        boolean z = (TextRange.m746equalsimpl0(this.state.selection, textFieldValue2.selection) && Intrinsics.areEqual(this.state.composition, textFieldValue2.composition)) ? false : true;
+        boolean z = (TextRange.m748equalsimpl0(this.state.selection, textFieldValue2.selection) && Intrinsics.areEqual(this.state.composition, textFieldValue2.composition)) ? false : true;
         this.state = textFieldValue2;
         int size = ((ArrayList) this.ics).size();
         for (int i = 0; i < size; i++) {
@@ -282,7 +280,7 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
             cursorAnchorInfoController.textFieldToRootTransform = new Function1() { // from class: androidx.compose.ui.text.input.CursorAnchorInfoController$invalidate$1$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final /* synthetic */ Object mo779invoke(Object obj) {
+                public final /* synthetic */ Object mo781invoke(Object obj) {
                     float[] fArr = ((Matrix) obj).values;
                     return Unit.INSTANCE;
                 }
@@ -294,18 +292,18 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
         if (Intrinsics.areEqual(textFieldValue, textFieldValue2)) {
             if (z) {
                 InputMethodManager inputMethodManager = this.inputMethodManager;
-                int m750getMinimpl = TextRange.m750getMinimpl(textFieldValue2.selection);
-                int m749getMaximpl = TextRange.m749getMaximpl(textFieldValue2.selection);
+                int iM752getMinimpl = TextRange.m752getMinimpl(textFieldValue2.selection);
+                int iM751getMaximpl = TextRange.m751getMaximpl(textFieldValue2.selection);
                 TextRange textRange = this.state.composition;
-                int m750getMinimpl2 = textRange != null ? TextRange.m750getMinimpl(textRange.packedValue) : -1;
+                int iM752getMinimpl2 = textRange != null ? TextRange.m752getMinimpl(textRange.packedValue) : -1;
                 TextRange textRange2 = this.state.composition;
                 InputMethodManagerImpl inputMethodManagerImpl = (InputMethodManagerImpl) inputMethodManager;
-                ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl.imm$delegate.getValue()).updateSelection(inputMethodManagerImpl.view, m750getMinimpl, m749getMaximpl, m750getMinimpl2, textRange2 != null ? TextRange.m749getMaximpl(textRange2.packedValue) : -1);
+                ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl.imm$delegate.getValue()).updateSelection(inputMethodManagerImpl.view, iM752getMinimpl, iM751getMaximpl, iM752getMinimpl2, textRange2 != null ? TextRange.m751getMaximpl(textRange2.packedValue) : -1);
                 return;
             }
             return;
         }
-        if (textFieldValue != null && (!Intrinsics.areEqual(textFieldValue.annotatedString.text, textFieldValue2.annotatedString.text) || (TextRange.m746equalsimpl0(textFieldValue.selection, textFieldValue2.selection) && !Intrinsics.areEqual(textFieldValue.composition, textFieldValue2.composition)))) {
+        if (textFieldValue != null && (!Intrinsics.areEqual(textFieldValue.annotatedString.text, textFieldValue2.annotatedString.text) || (TextRange.m748equalsimpl0(textFieldValue.selection, textFieldValue2.selection) && !Intrinsics.areEqual(textFieldValue.composition, textFieldValue2.composition)))) {
             InputMethodManagerImpl inputMethodManagerImpl2 = (InputMethodManagerImpl) this.inputMethodManager;
             ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl2.imm$delegate.getValue()).restartInput(inputMethodManagerImpl2.view);
             return;
@@ -323,12 +321,12 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
                         ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl3.imm$delegate.getValue()).updateExtractedText(inputMethodManagerImpl3.view, recordingInputConnection2.currentExtractedTextRequestToken, InputState_androidKt.toExtractedText(textFieldValue3));
                     }
                     TextRange textRange3 = textFieldValue3.composition;
-                    int m750getMinimpl3 = textRange3 != null ? TextRange.m750getMinimpl(textRange3.packedValue) : -1;
+                    int iM752getMinimpl3 = textRange3 != null ? TextRange.m752getMinimpl(textRange3.packedValue) : -1;
                     TextRange textRange4 = textFieldValue3.composition;
-                    int m749getMaximpl2 = textRange4 != null ? TextRange.m749getMaximpl(textRange4.packedValue) : -1;
+                    int iM751getMaximpl2 = textRange4 != null ? TextRange.m751getMaximpl(textRange4.packedValue) : -1;
                     long j = textFieldValue3.selection;
                     InputMethodManagerImpl inputMethodManagerImpl4 = (InputMethodManagerImpl) inputMethodManager2;
-                    ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl4.imm$delegate.getValue()).updateSelection(inputMethodManagerImpl4.view, TextRange.m750getMinimpl(j), TextRange.m749getMaximpl(j), m750getMinimpl3, m749getMaximpl2);
+                    ((android.view.inputmethod.InputMethodManager) inputMethodManagerImpl4.imm$delegate.getValue()).updateSelection(inputMethodManagerImpl4.view, TextRange.m752getMinimpl(j), TextRange.m751getMaximpl(j), iM752getMinimpl3, iM751getMaximpl2);
                 }
             }
         }
@@ -346,13 +344,10 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
                 cursorAnchorInfoController.textFieldToRootTransform = (Lambda) function1;
                 cursorAnchorInfoController.innerTextFieldBounds = rect;
                 cursorAnchorInfoController.decorationBoxBounds = rect2;
-                if (!cursorAnchorInfoController.hasPendingImmediateRequest) {
-                    if (cursorAnchorInfoController.monitorEnabled) {
-                    }
-                    Unit unit = Unit.INSTANCE;
+                if (cursorAnchorInfoController.hasPendingImmediateRequest || cursorAnchorInfoController.monitorEnabled) {
+                    cursorAnchorInfoController.updateCursorAnchorInfo();
                 }
-                cursorAnchorInfoController.updateCursorAnchorInfo();
-                Unit unit2 = Unit.INSTANCE;
+                Unit unit = Unit.INSTANCE;
             } catch (Throwable th) {
                 throw th;
             }
@@ -364,25 +359,22 @@ public final class TextInputServiceAndroid implements PlatformTextInputService {
         sendInputCommand(TextInputCommand.StartInput);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TextInputServiceAndroid(android.view.View r1, androidx.compose.ui.input.pointer.MatrixPositionCalculator r2, androidx.compose.ui.text.input.InputMethodManager r3, java.util.concurrent.Executor r4, int r5, kotlin.jvm.internal.DefaultConstructorMarker r6) {
-        /*
-            r0 = this;
-            r5 = r5 & 8
-            if (r5 == 0) goto Le
-            android.view.Choreographer r4 = android.view.Choreographer.getInstance()
-            androidx.compose.ui.text.input.TextInputServiceAndroid_androidKt$$ExternalSyntheticLambda0 r5 = new androidx.compose.ui.text.input.TextInputServiceAndroid_androidKt$$ExternalSyntheticLambda0
-            r5.<init>()
-            r4 = r5
-        Le:
-            r0.<init>(r1, r2, r3, r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.input.TextInputServiceAndroid.<init>(android.view.View, androidx.compose.ui.input.pointer.MatrixPositionCalculator, androidx.compose.ui.text.input.InputMethodManager, java.util.concurrent.Executor, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public TextInputServiceAndroid(View view, MatrixPositionCalculator matrixPositionCalculator, InputMethodManager inputMethodManager, Executor executor, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 8) != 0) {
+            final Choreographer choreographer = Choreographer.getInstance();
+            executor = new Executor() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid_androidKt$$ExternalSyntheticLambda0
+                @Override // java.util.concurrent.Executor
+                public final void execute(final Runnable runnable) {
+                    choreographer.postFrameCallback(new Choreographer.FrameCallback() { // from class: androidx.compose.ui.text.input.TextInputServiceAndroid_androidKt$$ExternalSyntheticLambda1
+                        @Override // android.view.Choreographer.FrameCallback
+                        public final void doFrame(long j) {
+                            runnable.run();
+                        }
+                    });
+                }
+            };
+        }
+        this(view, matrixPositionCalculator, inputMethodManager, executor);
     }
 
     public TextInputServiceAndroid(View view, MatrixPositionCalculator matrixPositionCalculator) {

@@ -31,11 +31,11 @@ public class DelegatingCertPathValidatorHelper {
 
     public static boolean isRevocationCheckEnabled() {
         CertificatePolicy certificatePolicy = EnterpriseDeviceManager.getInstance().getCertificatePolicy();
-        boolean isRevocationCheckEnabled = certificatePolicy != null ? certificatePolicy.isRevocationCheckEnabled() : false;
+        boolean zIsRevocationCheckEnabled = certificatePolicy != null ? certificatePolicy.isRevocationCheckEnabled() : false;
         if (DEBUG) {
-            Log.d(TAG, "isRevocationCheckEnabled " + isRevocationCheckEnabled);
+            Log.d(TAG, "isRevocationCheckEnabled " + zIsRevocationCheckEnabled);
         }
-        return isRevocationCheckEnabled;
+        return zIsRevocationCheckEnabled;
     }
 
     public static boolean isOcspCheckEnabled() {
@@ -69,25 +69,25 @@ public class DelegatingCertPathValidatorHelper {
     }
 
     public static boolean isChainTrustedByMdm(List<X509Certificate> list) {
-        boolean z = true;
+        boolean zIsCaCertificateTrustedAsUser = true;
         try {
             CertificatePolicy certificatePolicy = EnterpriseDeviceManager.getInstance().getCertificatePolicy();
-            int myUserId = UserHandle.myUserId();
-            if (certificatePolicy != null ? certificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(myUserId) : false) {
+            int iMyUserId = UserHandle.myUserId();
+            if (certificatePolicy != null ? certificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(iMyUserId) : false) {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 for (X509Certificate x509Certificate : list) {
                     byteArrayOutputStream.write(PEM_CERT_BEGIN.getBytes());
                     byteArrayOutputStream.write(java.util.Base64.getEncoder().encode(x509Certificate.getEncoded()));
                     byteArrayOutputStream.write(PEM_CERT_END.getBytes());
                 }
-                z = certificatePolicy.isCaCertificateTrustedAsUser(byteArrayOutputStream.toByteArray(), false, false, myUserId);
+                zIsCaCertificateTrustedAsUser = certificatePolicy.isCaCertificateTrustedAsUser(byteArrayOutputStream.toByteArray(), false, false, iMyUserId);
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to call isCaCertificateTrustedAsUser() " + e.getMessage());
         }
         if (DEBUG) {
-            Log.d(TAG, "isChainTrustedByMdm: " + z);
+            Log.d(TAG, "isChainTrustedByMdm: " + zIsCaCertificateTrustedAsUser);
         }
-        return z;
+        return zIsCaCertificateTrustedAsUser;
     }
 }

@@ -223,7 +223,7 @@ public final class DownloadRequest implements Parcelable {
         }
     }
 
-    public byte[] toByteArray() {
+    public byte[] toByteArray() throws IOException {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
@@ -240,7 +240,7 @@ public final class DownloadRequest implements Parcelable {
         return this.version;
     }
 
-    public String getHash() {
+    public String getHash() throws NoSuchAlgorithmException {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             if (this.version >= 1) {

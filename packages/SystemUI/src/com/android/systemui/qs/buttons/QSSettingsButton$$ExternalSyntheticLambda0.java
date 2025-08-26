@@ -2,13 +2,13 @@ package com.android.systemui.qs.buttons;
 
 import android.view.MotionEvent;
 import android.view.View;
+import com.android.settingslib.applications.InterestingConfigChanges;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class QSSettingsButton$$ExternalSyntheticLambda0 implements View.OnHoverListener {
     @Override // android.view.View.OnHoverListener
     public final boolean onHover(View view, MotionEvent motionEvent) {
-        int i = QSSettingsButton.$r8$clinit;
+        InterestingConfigChanges interestingConfigChanges = QSSettingsButton.configChanges;
         int action = motionEvent.getAction();
         if (action == 9) {
             view.sendAccessibilityEvent(128);

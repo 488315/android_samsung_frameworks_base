@@ -28,13 +28,11 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecCapturedBlurInfoInteractor {
     public final SharedFlowImpl blurInfoData = SharedFlowKt.MutableSharedFlow$default(1, 0, BufferOverflow.DROP_OLDEST, 2);
     public final CapturedBlurBlurInfoProvider capturedBlurBlurInfoProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.blur.domain.interactor.SecCapturedBlurInfoInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ PowerInteractor $powerInteractor;
@@ -43,9 +41,8 @@ public final class SecCapturedBlurInfoInteractor {
         int label;
         final /* synthetic */ SecCapturedBlurInfoInteractor this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.domain.interactor.SecCapturedBlurInfoInteractor$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00531 extends SuspendLambda implements Function2 {
+        final class C01061 extends SuspendLambda implements Function2 {
             final /* synthetic */ PowerInteractor $powerInteractor;
             final /* synthetic */ PrimaryBouncerInteractor $primaryBouncerInteractor;
             /* synthetic */ Object L$0;
@@ -53,7 +50,7 @@ public final class SecCapturedBlurInfoInteractor {
             final /* synthetic */ SecCapturedBlurInfoInteractor this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00531(PowerInteractor powerInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, SecCapturedBlurInfoInteractor secCapturedBlurInfoInteractor, Continuation continuation) {
+            public C01061(PowerInteractor powerInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, SecCapturedBlurInfoInteractor secCapturedBlurInfoInteractor, Continuation continuation) {
                 super(2, continuation);
                 this.$powerInteractor = powerInteractor;
                 this.$primaryBouncerInteractor = primaryBouncerInteractor;
@@ -62,14 +59,14 @@ public final class SecCapturedBlurInfoInteractor {
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C00531 c00531 = new C00531(this.$powerInteractor, this.$primaryBouncerInteractor, this.this$0, continuation);
-                c00531.L$0 = obj;
-                return c00531;
+                C01061 c01061 = new C01061(this.$powerInteractor, this.$primaryBouncerInteractor, this.this$0, continuation);
+                c01061.L$0 = obj;
+                return c01061;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00531) create((SecPanelBlurBinding.BlurType) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01061) create((SecPanelBlurBinding.BlurType) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -90,12 +87,12 @@ public final class SecCapturedBlurInfoInteractor {
                     ReadonlyStateFlow readonlyStateFlow = this.$powerInteractor.detailedWakefulness;
                     this.L$0 = blurType2;
                     this.label = 1;
-                    Object first = FlowKt.first(readonlyStateFlow, this);
-                    if (first == coroutineSingletons) {
+                    Object objFirst = FlowKt.first(readonlyStateFlow, this);
+                    if (objFirst == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                     blurType = blurType2;
-                    obj = first;
+                    obj = objFirst;
                 } else {
                     if (i != 1) {
                         throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -143,9 +140,9 @@ public final class SecCapturedBlurInfoInteractor {
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 SharedFlowImpl sharedFlowImpl = this.$secCapturedBlurInteractor.requestCaptureBlur;
-                C00531 c00531 = new C00531(this.$powerInteractor, this.$primaryBouncerInteractor, this.this$0, null);
+                C01061 c01061 = new C01061(this.$powerInteractor, this.$primaryBouncerInteractor, this.this$0, null);
                 this.label = 1;
-                if (FlowKt.collectLatest(sharedFlowImpl, c00531, this) == coroutineSingletons) {
+                if (FlowKt.collectLatest(sharedFlowImpl, c01061, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -158,7 +155,6 @@ public final class SecCapturedBlurInfoInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

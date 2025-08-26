@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.content.Context;
 import android.graphics.PointF;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.DisplayInfo;
@@ -12,8 +13,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -35,9 +38,10 @@ import com.android.systemui.shade.NotificationPanelViewController;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
 import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
-import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.wallpaper.KeyguardWallpaper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import java.io.PrintWriter;
@@ -54,7 +58,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Gefingerpoken, Dumpable {
     public final Map actionHandlerTypes;
@@ -85,7 +88,6 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
     public NotificationPanelViewController viewInjector;
     public final SparseArray views;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -115,7 +117,7 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
         this.parentView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.animator.KeyguardTouchAnimator$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                NotificationPanelViewController notificationPanelViewController = KeyguardTouchAnimator.this.viewInjector;
+                NotificationPanelViewController notificationPanelViewController = this.f$0.viewInjector;
                 if (notificationPanelViewController == null) {
                     notificationPanelViewController = null;
                 }
@@ -156,101 +158,59 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                 return true;
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:23:0x008d  */
+            /* JADX WARN: Removed duplicated region for block: B:26:0x008d  */
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final boolean onDoubleTapEvent(android.view.MotionEvent r10) {
-                /*
-                    r9 = this;
-                    int r0 = r10.getAction()
-                    r1 = 0
-                    r2 = 1
-                    if (r0 != r2) goto La5
-                    com.android.systemui.keyguard.animator.KeyguardTouchAnimator r0 = com.android.systemui.keyguard.animator.KeyguardTouchAnimator.this
-                    android.view.MotionEvent r3 = r0.doubleTapDownEvent
-                    java.lang.String r4 = "KeyguardTouchAnimator"
-                    if (r3 == 0) goto L85
-                    long r5 = r10.getEventTime()
-                    long r7 = r3.getEventTime()
-                    long r5 = r5 - r7
-                    r7 = 300(0x12c, double:1.48E-321)
-                    int r7 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
-                    if (r7 <= 0) goto L31
-                    java.lang.StringBuilder r10 = new java.lang.StringBuilder
-                    java.lang.String r0 = "isConsideredDoubleTap: time out deltaTime="
-                    r10.<init>(r0)
-                    r10.append(r5)
-                    java.lang.String r10 = r10.toString()
-                    android.util.Log.d(r4, r10)
-                    goto L85
-                L31:
-                    float r5 = r3.getX()
-                    int r5 = (int) r5
-                    float r6 = r10.getX()
-                    int r6 = (int) r6
-                    int r5 = r5 - r6
-                    float r6 = r3.getY()
-                    int r6 = (int) r6
-                    float r7 = r10.getY()
-                    int r7 = (int) r7
-                    int r6 = r6 - r7
-                    int r3 = r3.getFlags()
-                    r3 = r3 & 8
-                    if (r3 == 0) goto L51
-                    r0 = r1
-                    goto L54
-                L51:
-                    int r0 = r0.doubleTapSlop
-                    int r0 = r0 * r0
-                L54:
-                    int r3 = r5 * r5
-                    int r7 = r6 * r6
-                    int r7 = r7 + r3
-                    if (r7 < r0) goto L69
-                    java.lang.String r10 = "isConsideredDoubleTap: over slop="
-                    java.lang.String r0 = ", deltaX="
-                    java.lang.String r3 = ", deltaY="
-                    java.lang.StringBuilder r10 = androidx.collection.MutableObjectList$$ExternalSyntheticOutline0.m(r7, r5, r10, r0, r3)
-                    androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0.m(r6, r4, r10)
-                    goto L85
-                L69:
-                    com.android.systemui.keyguard.animator.KeyguardTouchAnimator r0 = com.android.systemui.keyguard.animator.KeyguardTouchAnimator.this
-                    com.android.systemui.statusbar.policy.KeyguardStateController r3 = r0.keyguardStateController
-                    com.android.systemui.statusbar.policy.KeyguardStateControllerImpl r3 = (com.android.systemui.statusbar.policy.KeyguardStateControllerImpl) r3
-                    boolean r3 = r3.mKeyguardGoingAway
-                    if (r3 != 0) goto L85
-                    com.android.systemui.keyguard.animator.KeyguardTouchSecurityInjector r0 = r0.securityInjector
-                    boolean r10 = r0.isFingerprintArea(r10)
-                    if (r10 == 0) goto L83
-                    com.android.keyguard.KeyguardUpdateMonitor r10 = r2
-                    boolean r10 = r10.isFingerprintDetectionRunning()
-                    if (r10 != 0) goto L85
-                L83:
-                    r10 = r2
-                    goto L86
-                L85:
-                    r10 = r1
-                L86:
-                    java.lang.String r0 = "onDoubleTapEvent executeDoubleTap="
-                    com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0.m(r0, r4, r10)
-                    if (r10 == 0) goto La5
-                    android.os.PowerManager r10 = r3
-                    long r3 = android.os.SystemClock.uptimeMillis()
-                    r0 = 23
-                    r10.goToSleep(r3, r0, r1)
-                    com.android.systemui.keyguard.animator.KeyguardTouchAnimator r9 = com.android.systemui.keyguard.animator.KeyguardTouchAnimator.this
-                    r9.getClass()
-                    java.lang.String r9 = "101"
-                    java.lang.String r10 = "LSE1012"
-                    com.android.systemui.util.SystemUIAnalytics.sendEventLog(r9, r10)
-                    return r2
-                La5:
-                    return r1
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.animator.KeyguardTouchAnimator.AnonymousClass2.onDoubleTapEvent(android.view.MotionEvent):boolean");
+            public final boolean onDoubleTapEvent(MotionEvent motionEvent) {
+                boolean z;
+                int i;
+                if (motionEvent.getAction() == 1) {
+                    KeyguardTouchAnimator keyguardTouchAnimator = KeyguardTouchAnimator.this;
+                    MotionEvent motionEvent2 = keyguardTouchAnimator.doubleTapDownEvent;
+                    if (motionEvent2 != null) {
+                        long eventTime = motionEvent.getEventTime() - motionEvent2.getEventTime();
+                        if (eventTime > 300) {
+                            Log.d("KeyguardTouchAnimator", "isConsideredDoubleTap: time out deltaTime=" + eventTime);
+                        } else {
+                            int x = ((int) motionEvent2.getX()) - ((int) motionEvent.getX());
+                            int y = ((int) motionEvent2.getY()) - ((int) motionEvent.getY());
+                            if ((motionEvent2.getFlags() & 8) != 0) {
+                                i = 0;
+                            } else {
+                                int i2 = keyguardTouchAnimator.doubleTapSlop;
+                                i = i2 * i2;
+                            }
+                            int i3 = (y * y) + (x * x);
+                            if (i3 >= i) {
+                                RecyclerView$$ExternalSyntheticOutline0.m(y, "KeyguardTouchAnimator", MutableObjectList$$ExternalSyntheticOutline0.m(i3, x, "isConsideredDoubleTap: over slop=", ", deltaX=", ", deltaY="));
+                            } else {
+                                KeyguardTouchAnimator keyguardTouchAnimator2 = KeyguardTouchAnimator.this;
+                                if (!((KeyguardStateControllerImpl) keyguardTouchAnimator2.keyguardStateController).mKeyguardGoingAway && (!keyguardTouchAnimator2.securityInjector.isFingerprintArea(motionEvent) || !keyguardUpdateMonitor.isFingerprintDetectionRunning())) {
+                                    z = true;
+                                }
+                                EmergencyButtonController$$ExternalSyntheticOutline0.m("onDoubleTapEvent executeDoubleTap=", "KeyguardTouchAnimator", z);
+                                if (z) {
+                                    powerManager.goToSleep(SystemClock.uptimeMillis(), 23, 0);
+                                    KeyguardTouchAnimator.this.getClass();
+                                    SystemUIAnalytics.sendEventLog("101", SystemUIAnalytics.EID_DOUBLE_TAP_TO_SLEEP);
+                                    return true;
+                                }
+                            }
+                        }
+                        z = false;
+                        EmergencyButtonController$$ExternalSyntheticOutline0.m("onDoubleTapEvent executeDoubleTap=", "KeyguardTouchAnimator", z);
+                        if (z) {
+                        }
+                    } else {
+                        z = false;
+                        EmergencyButtonController$$ExternalSyntheticOutline0.m("onDoubleTapEvent executeDoubleTap=", "KeyguardTouchAnimator", z);
+                        if (z) {
+                        }
+                    }
+                }
+                return false;
             }
         });
         lockscreenShadeTransitionController.addCallback(new LockscreenShadeTransitionController.Callback() { // from class: com.android.systemui.keyguard.animator.KeyguardTouchAnimator.3
@@ -278,7 +238,7 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                 keyguardTouchAnimator.userActivityForMove(new Runnable() { // from class: com.android.systemui.keyguard.animator.KeyguardTouchAnimator$3$setTransitionToFullShadeAmount$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationPanelViewController.AnonymousClass4 anonymousClass4 = KeyguardTouchAnimator.this.callback;
+                        NotificationPanelViewController.AnonymousClass4 anonymousClass4 = keyguardTouchAnimator.callback;
                         if (anonymousClass4 == null) {
                             anonymousClass4 = null;
                         }
@@ -305,67 +265,69 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
         return (View) this.views.get(i);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0038 A[PHI: r2
+      0x0038: PHI (r2v20 android.view.View) = (r2v2 android.view.View), (r2v23 android.view.View) binds: [B:83:0x00d6, B:22:0x002d] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(int i) {
         View view;
-        List list;
         if (this.views.indexOfKey(i) >= 0) {
             return true;
         }
-        View view2 = null;
-        view2 = null;
-        view2 = null;
-        view2 = null;
-        view2 = null;
-        view2 = null;
-        view2 = null;
-        view2 = null;
+        View iconContainer = null;
+        iconContainer = null;
+        iconContainer = null;
+        iconContainer = null;
+        iconContainer = null;
         switch (i) {
             case 0:
                 NotificationPanelViewController notificationPanelViewController = this.viewInjector;
-                view2 = (notificationPanelViewController != null ? notificationPanelViewController : null).mKeyguardStatusBar;
+                iconContainer = (notificationPanelViewController != null ? notificationPanelViewController : null).mKeyguardStatusBar;
                 break;
             case 1:
                 NotificationPanelViewController notificationPanelViewController2 = this.viewInjector;
                 FaceWidgetContainerWrapper faceWidgetContainerWrapper = (notificationPanelViewController2 != null ? notificationPanelViewController2 : null).mKeyguardStatusBase;
                 view = faceWidgetContainerWrapper.mClockContainer;
                 if (view == null) {
-                    view2 = faceWidgetContainerWrapper.mFaceWidgetContainer;
+                    iconContainer = faceWidgetContainerWrapper.mFaceWidgetContainer;
+                    break;
+                } else {
+                    iconContainer = view;
                     break;
                 }
-                view2 = view;
-                break;
             case 2:
                 NotificationPanelViewController notificationPanelViewController3 = this.viewInjector;
-                view2 = (notificationPanelViewController3 != null ? notificationPanelViewController3 : null).mNotificationStackScrollLayoutController.mView;
+                iconContainer = (notificationPanelViewController3 != null ? notificationPanelViewController3 : null).mNotificationStackScrollLayoutController.mView;
                 break;
             case 3:
                 NotificationPanelViewController notificationPanelViewController4 = this.viewInjector;
-                view2 = (notificationPanelViewController4 != null ? notificationPanelViewController4 : null).mLockscreenNotificationIconsOnlyController.getIconContainer();
+                iconContainer = (notificationPanelViewController4 != null ? notificationPanelViewController4 : null).mLockscreenNotificationIconsOnlyController.getIconContainer();
                 break;
             case 4:
                 NotificationPanelViewController notificationPanelViewController5 = this.viewInjector;
-                view2 = (notificationPanelViewController5 != null ? notificationPanelViewController5 : null).mKeyguardSecBottomArea.getLeftView();
+                iconContainer = (notificationPanelViewController5 != null ? notificationPanelViewController5 : null).mKeyguardSecBottomArea.getLeftView();
                 break;
             case 5:
                 NotificationPanelViewController notificationPanelViewController6 = this.viewInjector;
-                view2 = (notificationPanelViewController6 != null ? notificationPanelViewController6 : null).mKeyguardSecBottomArea.getRightView();
+                iconContainer = (notificationPanelViewController6 != null ? notificationPanelViewController6 : null).mKeyguardSecBottomArea.getRightView();
                 break;
             case 6:
                 NotificationPanelViewController notificationPanelViewController7 = this.viewInjector;
-                view2 = (ViewGroup) (notificationPanelViewController7 != null ? notificationPanelViewController7 : null).mKeyguardSecBottomArea.indicationArea$delegate.getValue();
+                iconContainer = (ViewGroup) (notificationPanelViewController7 != null ? notificationPanelViewController7 : null).mKeyguardSecBottomArea.indicationArea$delegate.getValue();
                 break;
             case 7:
                 NotificationPanelViewController notificationPanelViewController8 = this.viewInjector;
-                view2 = (notificationPanelViewController8 != null ? notificationPanelViewController8 : null).mStatusBarKeyguardViewManager.getLockIconContainer();
+                iconContainer = (notificationPanelViewController8 != null ? notificationPanelViewController8 : null).mStatusBarKeyguardViewManager.getLockIconContainer();
                 break;
             case 8:
                 NotificationPanelViewController notificationPanelViewController9 = this.viewInjector;
                 if (notificationPanelViewController9 == null) {
                     notificationPanelViewController9 = null;
                 }
-                List list2 = notificationPanelViewController9.mKeyguardStatusBase.mContentsContainerList;
-                if (list2 != null && !list2.isEmpty()) {
-                    view2 = (View) list2.get(1);
+                List list = notificationPanelViewController9.mKeyguardStatusBase.mContentsContainerList;
+                if (list != null && !list.isEmpty()) {
+                    iconContainer = (View) list.get(1);
                     break;
                 }
                 break;
@@ -378,11 +340,11 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                 break;
             case 10:
                 NotificationPanelViewController notificationPanelViewController11 = this.viewInjector;
-                view2 = (notificationPanelViewController11 != null ? notificationPanelViewController11 : null).mPluginLockStarContainer;
+                iconContainer = (notificationPanelViewController11 != null ? notificationPanelViewController11 : null).mPluginLockStarContainer;
                 break;
             case 11:
                 NotificationPanelViewController notificationPanelViewController12 = this.viewInjector;
-                view2 = (notificationPanelViewController12 != null ? notificationPanelViewController12 : null).mView.findViewById(R.id.keyguard_edit_mode_blur_effect);
+                iconContainer = (notificationPanelViewController12 != null ? notificationPanelViewController12 : null).mView.findViewById(R.id.keyguard_edit_mode_blur_effect);
                 break;
             case 12:
                 NotificationPanelViewController notificationPanelViewController13 = this.viewInjector;
@@ -394,28 +356,20 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                     Log.e("NotificationPanelView", "provideFaceWidgetNowBarContainer nowbarRootView is null");
                     break;
                 }
-                view2 = view;
                 break;
             case 13:
                 NotificationPanelViewController notificationPanelViewController14 = this.viewInjector;
-                view2 = (notificationPanelViewController14 != null ? notificationPanelViewController14 : null).mContinuityLockScreenContainer;
+                iconContainer = (notificationPanelViewController14 != null ? notificationPanelViewController14 : null).mContinuityLockScreenContainer;
                 break;
             case 14:
                 NotificationPanelViewController notificationPanelViewController15 = this.viewInjector;
-                if (notificationPanelViewController15 == null) {
-                    notificationPanelViewController15 = null;
-                }
-                notificationPanelViewController15.getClass();
-                if (DeviceState.isTablet() && (list = notificationPanelViewController15.mKeyguardStatusBase.mContentsContainerList) != null && list.size() > 2) {
-                    view2 = (View) list.get(2);
-                    break;
-                }
+                iconContainer = (notificationPanelViewController15 != null ? notificationPanelViewController15 : null).provideComplication();
                 break;
         }
-        if (view2 == null) {
+        if (iconContainer == null) {
             return false;
         }
-        this.views.put(i, view2);
+        this.views.put(i, iconContainer);
         return true;
     }
 
@@ -432,6 +386,10 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
         return this.intercepting;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0085  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         if (!this.intercepting) {
             return false;
@@ -452,32 +410,29 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
             this.keyguardWallpaper.getClass();
         }
         Map map = this.actionHandlerTypes;
-        Integer valueOf = Integer.valueOf(motionEvent.getActionMasked());
+        Integer numValueOf = Integer.valueOf(motionEvent.getActionMasked());
         LinkedHashMap linkedHashMap = (LinkedHashMap) map;
-        Object obj = linkedHashMap.get(valueOf);
-        if (obj == null) {
+        Object actionDownHandler = linkedHashMap.get(numValueOf);
+        if (actionDownHandler == null) {
             ActionHandlerType.Companion companion = ActionHandlerType.Companion;
             int actionMasked = motionEvent.getActionMasked();
             companion.getClass();
-            if (actionMasked != 0) {
-                if (actionMasked != 1) {
-                    if (actionMasked == 2) {
-                        obj = new ActionMoveHandler(this);
-                    } else if (actionMasked != 3) {
-                        if (actionMasked == 5) {
-                            obj = new ActionPointerDownHandler(this);
-                        } else if (actionMasked != 6) {
-                            obj = new ActionDefaultHandler(this);
-                        }
-                    }
+            if (actionMasked == 0) {
+                actionDownHandler = new ActionDownHandler(this);
+            } else if (actionMasked == 1) {
+                actionDownHandler = new ActionUpOrCancelHandler(this);
+            } else if (actionMasked == 2) {
+                actionDownHandler = new ActionMoveHandler(this);
+            } else if (actionMasked != 3) {
+                if (actionMasked == 5) {
+                    actionDownHandler = new ActionPointerDownHandler(this);
+                } else if (actionMasked != 6) {
+                    actionDownHandler = new ActionDefaultHandler(this);
                 }
-                obj = new ActionUpOrCancelHandler(this);
-            } else {
-                obj = new ActionDownHandler(this);
             }
-            linkedHashMap.put(valueOf, obj);
+            linkedHashMap.put(numValueOf, actionDownHandler);
         }
-        return ((ActionHandlerType) obj).handleMotionEvent(motionEvent);
+        return ((ActionHandlerType) actionDownHandler).handleMotionEvent(motionEvent);
     }
 
     public final void reset(boolean z) {
@@ -562,6 +517,10 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
         pointF.y = -1.0f;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0072  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void resetChildViewVI$frameworks__base__packages__SystemUI__android_common__SystemUI_core(float f) {
         Log.d("KeyguardTouchAnimator", "resetChildViewVI(): isUnlockExecuted=" + this.isUnlockExecuted + " scale=" + f);
         KeyguardTouchBase.Companion.getClass();
@@ -582,16 +541,14 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                 showViewState(view);
             }
             if (f == 0.95f) {
-                int keyAt = this.views.keyAt(i);
+                int iKeyAt = this.views.keyAt(i);
                 this.screenOnViewController.getClass();
-                if (keyAt != 0) {
-                    if (keyAt == 3) {
-                    }
+                if (iKeyAt != 0 && iKeyAt != 3) {
+                    view.setScaleY(f);
+                    view.setScaleX(f);
+                    view.setAlpha(1.0f);
                 }
             }
-            view.setScaleY(f);
-            view.setScaleX(f);
-            view.setAlpha(1.0f);
         }
         this.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(1.0f);
     }
@@ -605,14 +562,14 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
         }
         final DragViewController dragViewController = this.dragViewController;
         dragViewController.getClass();
-        AnimatorSet createAnimatorSet$default = DragViewController.createAnimatorSet$default(dragViewController, 1);
+        AnimatorSet animatorSetCreateAnimatorSet$default = DragViewController.createAnimatorSet$default(dragViewController, 1);
         List list = dragViewController.dragViews;
         ArrayList arrayList = new ArrayList();
         Iterator it = list.iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             keyguardTouchAnimator = dragViewController.keyguardTouchAnimator;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             Object next = it.next();
@@ -657,7 +614,7 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
                     springAnimation3.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.keyguard.animator.ViewAnimationController$setViewAnimationRestoreDrag$1
                         @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
                         public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                            ViewAnimationController.this.keyguardTouchAnimator.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(f);
+                            dragViewController.keyguardTouchAnimator.keyguardStatusViewAlphaChangeControllerWrapper.updateAlpha(f);
                         }
                     });
                 }
@@ -665,9 +622,9 @@ public final class KeyguardTouchAnimator extends KeyguardTouchBase implements Ge
             }
         }
         if (keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0)) {
-            dragViewController.setViewAnimation(createAnimatorSet$default, keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0), -1.0f, 1.0f);
+            dragViewController.setViewAnimation(animatorSetCreateAnimatorSet$default, keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(0), -1.0f, 1.0f);
         }
-        createAnimatorSet$default.start();
+        animatorSetCreateAnimatorSet$default.start();
     }
 
     @Override // com.android.systemui.keyguard.animator.KeyguardTouchBase

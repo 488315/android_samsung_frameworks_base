@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccelerateInterpolator implements Interpolator {
     public final double mDoubleFactor;
@@ -31,15 +30,15 @@ public class AccelerateInterpolator implements Interpolator {
     }
 
     public AccelerateInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         int[] iArr = AndroidResources.STYLEABLE_ACCELERATE_INTERPOLATOR;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, iArr, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, iArr, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, iArr);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, iArr);
         }
-        this.mFactor = obtainAttributes.getFloat(0, 1.0f);
+        this.mFactor = typedArrayObtainAttributes.getFloat(0, 1.0f);
         this.mDoubleFactor = r4 * 2.0f;
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
     }
 }

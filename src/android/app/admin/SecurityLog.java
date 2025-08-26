@@ -304,9 +304,9 @@ public class SecurityLog {
         }
         int i2 = 0;
         for (int i3 = 0; i3 < arrayList.size(); i3++) {
-            SecurityEvent redact = arrayList.get(i3).redact(i);
-            if (redact != null) {
-                arrayList.set(i2, redact);
+            SecurityEvent securityEventRedact = arrayList.get(i3).redact(i);
+            if (securityEventRedact != null) {
+                arrayList.set(i2, securityEventRedact);
                 i2++;
             }
         }

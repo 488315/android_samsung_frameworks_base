@@ -34,29 +34,29 @@ public final class SystemZenRules {
     }
 
     private static void upgradeSystemProviderRule(Context context, ZenModeConfig.ZenRule zenRule) {
-        ZenModeConfig.ScheduleInfo tryParseScheduleConditionId = ZenModeConfig.tryParseScheduleConditionId(zenRule.conditionId);
-        if (tryParseScheduleConditionId != null) {
+        ZenModeConfig.ScheduleInfo scheduleInfoTryParseScheduleConditionId = ZenModeConfig.tryParseScheduleConditionId(zenRule.conditionId);
+        if (scheduleInfoTryParseScheduleConditionId != null) {
             zenRule.type = 1;
-            zenRule.triggerDescription = getTriggerDescriptionForScheduleTime(context, tryParseScheduleConditionId);
+            zenRule.triggerDescription = getTriggerDescriptionForScheduleTime(context, scheduleInfoTryParseScheduleConditionId);
             return;
         }
-        ZenModeConfig.EventInfo tryParseEventConditionId = ZenModeConfig.tryParseEventConditionId(zenRule.conditionId);
-        if (tryParseEventConditionId != null) {
+        ZenModeConfig.EventInfo eventInfoTryParseEventConditionId = ZenModeConfig.tryParseEventConditionId(zenRule.conditionId);
+        if (eventInfoTryParseEventConditionId != null) {
             zenRule.type = 2;
-            zenRule.triggerDescription = getTriggerDescriptionForScheduleEvent(context, tryParseEventConditionId);
+            zenRule.triggerDescription = getTriggerDescriptionForScheduleEvent(context, eventInfoTryParseEventConditionId);
         } else {
             Log.wtf(TAG, "Couldn't determine type of system-owned ZenRule " + zenRule);
         }
     }
 
     public static boolean updateTriggerDescription(Context context, ZenModeConfig.ZenRule zenRule) {
-        ZenModeConfig.ScheduleInfo tryParseScheduleConditionId = ZenModeConfig.tryParseScheduleConditionId(zenRule.conditionId);
-        if (tryParseScheduleConditionId != null) {
-            return updateTriggerDescription(zenRule, getTriggerDescriptionForScheduleTime(context, tryParseScheduleConditionId));
+        ZenModeConfig.ScheduleInfo scheduleInfoTryParseScheduleConditionId = ZenModeConfig.tryParseScheduleConditionId(zenRule.conditionId);
+        if (scheduleInfoTryParseScheduleConditionId != null) {
+            return updateTriggerDescription(zenRule, getTriggerDescriptionForScheduleTime(context, scheduleInfoTryParseScheduleConditionId));
         }
-        ZenModeConfig.EventInfo tryParseEventConditionId = ZenModeConfig.tryParseEventConditionId(zenRule.conditionId);
-        if (tryParseEventConditionId != null) {
-            return updateTriggerDescription(zenRule, getTriggerDescriptionForScheduleEvent(context, tryParseEventConditionId));
+        ZenModeConfig.EventInfo eventInfoTryParseEventConditionId = ZenModeConfig.tryParseEventConditionId(zenRule.conditionId);
+        if (eventInfoTryParseEventConditionId != null) {
+            return updateTriggerDescription(zenRule, getTriggerDescriptionForScheduleEvent(context, eventInfoTryParseEventConditionId));
         }
         Log.wtf(TAG, "Couldn't determine type of system-owned ZenRule " + zenRule);
         return false;
@@ -135,7 +135,6 @@ public final class SystemZenRules {
                     calendar.set(7, daysOfWeekForLocale[i3]);
                     calendar2.set(7, daysOfWeekForLocale[i2]);
                     sb.append(context.getString(i, simpleDateFormat.format(calendar.getTime()), simpleDateFormat.format(calendar2.getTime())));
-                    i4++;
                 }
             }
             i4++;

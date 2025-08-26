@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ReduceBrightColorsTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
@@ -33,7 +32,7 @@ public final class ReduceBrightColorsTileMapper implements QSTileDataToStateMapp
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.reducebrightness.ui.mapper.ReduceBrightColorsTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) throws Resources.NotFoundException {
                 int i;
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
                 boolean z2 = z;
@@ -48,7 +47,7 @@ public final class ReduceBrightColorsTileMapper implements QSTileDataToStateMapp
                     i = R.drawable.qs_extra_dim_icon_off;
                 }
                 builder.icon = new Icon.Loaded(reduceBrightColorsTileMapper.resources.getDrawable(i, reduceBrightColorsTileMapper.theme), null, Integer.valueOf(i));
-                String string = reduceBrightColorsTileMapper.resources.getString(17042657);
+                String string = reduceBrightColorsTileMapper.resources.getString(17042661);
                 builder.label = string;
                 builder.contentDescription = string;
                 builder.supportedActions = ArraysKt___ArraysKt.toSet(new QSTileState.UserAction[]{QSTileState.UserAction.CLICK, QSTileState.UserAction.LONG_CLICK});

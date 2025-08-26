@@ -101,15 +101,15 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Cannot have two active instances");
         }
         MbmsDownloadSession mbmsDownloadSession = new MbmsDownloadSession(context, executor, i, mbmsDownloadSessionCallback);
-        final int bindAndInitialize = mbmsDownloadSession.bindAndInitialize();
-        if (bindAndInitialize == 0) {
+        final int iBindAndInitialize = mbmsDownloadSession.bindAndInitialize();
+        if (iBindAndInitialize == 0) {
             return mbmsDownloadSession;
         }
         sIsInitialized.set(false);
         executor.execute(new Runnable() { // from class: android.telephony.MbmsDownloadSession.2
             @Override // java.lang.Runnable
             public void run() {
-                MbmsDownloadSessionCallback.this.onError(bindAndInitialize, null);
+                mbmsDownloadSessionCallback.onError(iBindAndInitialize, null);
             }
         });
         return null;
@@ -119,21 +119,21 @@ public class MbmsDownloadSession implements AutoCloseable {
         ServiceConnection serviceConnection = new ServiceConnection() { // from class: android.telephony.MbmsDownloadSession.3
             @Override // android.content.ServiceConnection
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                IMbmsDownloadService asInterface = IMbmsDownloadService.Stub.asInterface(iBinder);
+                IMbmsDownloadService iMbmsDownloadServiceAsInterface = IMbmsDownloadService.Stub.asInterface(iBinder);
                 try {
-                    int initialize = asInterface.initialize(MbmsDownloadSession.this.mSubscriptionId, MbmsDownloadSession.this.mInternalCallback);
-                    if (initialize == -1) {
+                    int iInitialize = iMbmsDownloadServiceAsInterface.initialize(MbmsDownloadSession.this.mSubscriptionId, MbmsDownloadSession.this.mInternalCallback);
+                    if (iInitialize == -1) {
                         MbmsDownloadSession.this.close();
                         throw new IllegalStateException("Middleware must not return an unknown error code");
                     }
-                    if (initialize != 0) {
-                        MbmsDownloadSession.this.sendErrorToApp(initialize, "Error returned during initialization");
+                    if (iInitialize != 0) {
+                        MbmsDownloadSession.this.sendErrorToApp(iInitialize, "Error returned during initialization");
                         MbmsDownloadSession.sIsInitialized.set(false);
                         return;
                     }
                     try {
-                        asInterface.asBinder().linkToDeath(MbmsDownloadSession.this.mDeathRecipient, 0);
-                        MbmsDownloadSession.this.mService.set(asInterface);
+                        iMbmsDownloadServiceAsInterface.asBinder().linkToDeath(MbmsDownloadSession.this.mDeathRecipient, 0);
+                        MbmsDownloadSession.this.mService.set(iMbmsDownloadServiceAsInterface);
                     } catch (RemoteException unused) {
                         MbmsDownloadSession.this.sendErrorToApp(3, "Middleware lost during initialization");
                         MbmsDownloadSession.sIsInitialized.set(false);
@@ -174,13 +174,13 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int requestUpdateFileServices = iMbmsDownloadService.requestUpdateFileServices(this.mSubscriptionId, list);
-            if (requestUpdateFileServices == -1) {
+            int iRequestUpdateFileServices = iMbmsDownloadService.requestUpdateFileServices(this.mSubscriptionId, list);
+            if (iRequestUpdateFileServices == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (requestUpdateFileServices != 0) {
-                sendErrorToApp(requestUpdateFileServices, null);
+            if (iRequestUpdateFileServices != 0) {
+                sendErrorToApp(iRequestUpdateFileServices, null);
             }
         } catch (RemoteException unused) {
             Log.w(LOG_TAG, "Remote process died");
@@ -199,13 +199,13 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalArgumentException("File too large");
         }
         try {
-            int addServiceAnnouncement = iMbmsDownloadService.addServiceAnnouncement(this.mSubscriptionId, bArr);
-            if (addServiceAnnouncement == -1) {
+            int iAddServiceAnnouncement = iMbmsDownloadService.addServiceAnnouncement(this.mSubscriptionId, bArr);
+            if (iAddServiceAnnouncement == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (addServiceAnnouncement != 0) {
-                sendErrorToApp(addServiceAnnouncement, null);
+            if (iAddServiceAnnouncement != 0) {
+                sendErrorToApp(iAddServiceAnnouncement, null);
             }
         } catch (RemoteException unused) {
             Log.w(LOG_TAG, "Remote process died");
@@ -215,7 +215,7 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
     }
 
-    public void setTempFileRootDirectory(File file) {
+    public void setTempFileRootDirectory(File file) throws IOException {
         IMbmsDownloadService iMbmsDownloadService = this.mService.get();
         if (iMbmsDownloadService == null) {
             throw new IllegalStateException("Middleware not yet bound");
@@ -275,7 +275,7 @@ public class MbmsDownloadSession implements AutoCloseable {
         return null;
     }
 
-    public void download(DownloadRequest downloadRequest) {
+    public void download(DownloadRequest downloadRequest) throws IOException {
         IMbmsDownloadService iMbmsDownloadService = this.mService.get();
         if (iMbmsDownloadService == null) {
             throw new IllegalStateException("Middleware not yet bound");
@@ -287,15 +287,15 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
         checkDownloadRequestDestination(downloadRequest);
         try {
-            int download = iMbmsDownloadService.download(downloadRequest);
-            if (download == 0) {
+            int iDownload = iMbmsDownloadService.download(downloadRequest);
+            if (iDownload == 0) {
                 writeDownloadRequestToken(downloadRequest);
             } else {
-                if (download == -1) {
+                if (iDownload == -1) {
                     close();
                     throw new IllegalStateException("Middleware must not return an unknown error code");
                 }
-                sendErrorToApp(download, null);
+                sendErrorToApp(iDownload, null);
             }
         } catch (RemoteException unused) {
             this.mService.set(null);
@@ -326,18 +326,18 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
         InternalDownloadStatusListener internalDownloadStatusListener = new InternalDownloadStatusListener(downloadStatusListener, executor);
         try {
-            int addStatusListener = iMbmsDownloadService.addStatusListener(downloadRequest, internalDownloadStatusListener);
-            if (addStatusListener == -1) {
+            int iAddStatusListener = iMbmsDownloadService.addStatusListener(downloadRequest, internalDownloadStatusListener);
+            if (iAddStatusListener == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (addStatusListener == 0) {
+            if (iAddStatusListener == 0) {
                 this.mInternalDownloadStatusListeners.put(downloadStatusListener, internalDownloadStatusListener);
             } else {
-                if (addStatusListener == 402) {
+                if (iAddStatusListener == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                sendErrorToApp(addStatusListener, null);
+                sendErrorToApp(iAddStatusListener, null);
             }
         } catch (RemoteException unused) {
             this.mService.set(null);
@@ -357,40 +357,40 @@ public class MbmsDownloadSession implements AutoCloseable {
                 throw new IllegalArgumentException("Provided listener was never registered");
             }
             try {
-                int removeStatusListener = iMbmsDownloadService.removeStatusListener(downloadRequest, internalDownloadStatusListener);
-                if (removeStatusListener == -1) {
+                int iRemoveStatusListener = iMbmsDownloadService.removeStatusListener(downloadRequest, internalDownloadStatusListener);
+                if (iRemoveStatusListener == -1) {
                     close();
                     throw new IllegalStateException("Middleware must not return an unknown error code");
                 }
-                if (removeStatusListener == 0) {
-                    InternalDownloadStatusListener remove = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
-                    if (remove != null) {
-                        remove.stop();
+                if (iRemoveStatusListener == 0) {
+                    InternalDownloadStatusListener internalDownloadStatusListenerRemove = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
+                    if (internalDownloadStatusListenerRemove != null) {
+                        internalDownloadStatusListenerRemove.stop();
                         return;
                     }
                     return;
                 }
-                if (removeStatusListener == 402) {
+                if (iRemoveStatusListener == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                sendErrorToApp(removeStatusListener, null);
-                InternalDownloadStatusListener remove2 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
-                if (remove2 != null) {
-                    remove2.stop();
+                sendErrorToApp(iRemoveStatusListener, null);
+                InternalDownloadStatusListener internalDownloadStatusListenerRemove2 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
+                if (internalDownloadStatusListenerRemove2 != null) {
+                    internalDownloadStatusListenerRemove2.stop();
                 }
             } catch (RemoteException unused) {
                 this.mService.set(null);
                 sIsInitialized.set(false);
                 sendErrorToApp(3, null);
-                InternalDownloadStatusListener remove3 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
-                if (remove3 != null) {
-                    remove3.stop();
+                InternalDownloadStatusListener internalDownloadStatusListenerRemove3 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
+                if (internalDownloadStatusListenerRemove3 != null) {
+                    internalDownloadStatusListenerRemove3.stop();
                 }
             }
         } catch (Throwable th) {
-            InternalDownloadStatusListener remove4 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
-            if (remove4 != null) {
-                remove4.stop();
+            InternalDownloadStatusListener internalDownloadStatusListenerRemove4 = this.mInternalDownloadStatusListeners.remove(downloadStatusListener);
+            if (internalDownloadStatusListenerRemove4 != null) {
+                internalDownloadStatusListenerRemove4.stop();
             }
             throw th;
         }
@@ -403,18 +403,18 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
         InternalDownloadProgressListener internalDownloadProgressListener = new InternalDownloadProgressListener(downloadProgressListener, executor);
         try {
-            int addProgressListener = iMbmsDownloadService.addProgressListener(downloadRequest, internalDownloadProgressListener);
-            if (addProgressListener == -1) {
+            int iAddProgressListener = iMbmsDownloadService.addProgressListener(downloadRequest, internalDownloadProgressListener);
+            if (iAddProgressListener == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (addProgressListener == 0) {
+            if (iAddProgressListener == 0) {
                 this.mInternalDownloadProgressListeners.put(downloadProgressListener, internalDownloadProgressListener);
             } else {
-                if (addProgressListener == 402) {
+                if (iAddProgressListener == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                sendErrorToApp(addProgressListener, null);
+                sendErrorToApp(iAddProgressListener, null);
             }
         } catch (RemoteException unused) {
             this.mService.set(null);
@@ -434,40 +434,40 @@ public class MbmsDownloadSession implements AutoCloseable {
                 throw new IllegalArgumentException("Provided listener was never registered");
             }
             try {
-                int removeProgressListener = iMbmsDownloadService.removeProgressListener(downloadRequest, internalDownloadProgressListener);
-                if (removeProgressListener == -1) {
+                int iRemoveProgressListener = iMbmsDownloadService.removeProgressListener(downloadRequest, internalDownloadProgressListener);
+                if (iRemoveProgressListener == -1) {
                     close();
                     throw new IllegalStateException("Middleware must not return an unknown error code");
                 }
-                if (removeProgressListener == 0) {
-                    InternalDownloadProgressListener remove = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
-                    if (remove != null) {
-                        remove.stop();
+                if (iRemoveProgressListener == 0) {
+                    InternalDownloadProgressListener internalDownloadProgressListenerRemove = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
+                    if (internalDownloadProgressListenerRemove != null) {
+                        internalDownloadProgressListenerRemove.stop();
                         return;
                     }
                     return;
                 }
-                if (removeProgressListener == 402) {
+                if (iRemoveProgressListener == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                sendErrorToApp(removeProgressListener, null);
-                InternalDownloadProgressListener remove2 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
-                if (remove2 != null) {
-                    remove2.stop();
+                sendErrorToApp(iRemoveProgressListener, null);
+                InternalDownloadProgressListener internalDownloadProgressListenerRemove2 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
+                if (internalDownloadProgressListenerRemove2 != null) {
+                    internalDownloadProgressListenerRemove2.stop();
                 }
             } catch (RemoteException unused) {
                 this.mService.set(null);
                 sIsInitialized.set(false);
                 sendErrorToApp(3, null);
-                InternalDownloadProgressListener remove3 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
-                if (remove3 != null) {
-                    remove3.stop();
+                InternalDownloadProgressListener internalDownloadProgressListenerRemove3 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
+                if (internalDownloadProgressListenerRemove3 != null) {
+                    internalDownloadProgressListenerRemove3.stop();
                 }
             }
         } catch (Throwable th) {
-            InternalDownloadProgressListener remove4 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
-            if (remove4 != null) {
-                remove4.stop();
+            InternalDownloadProgressListener internalDownloadProgressListenerRemove4 = this.mInternalDownloadProgressListeners.remove(downloadProgressListener);
+            if (internalDownloadProgressListenerRemove4 != null) {
+                internalDownloadProgressListenerRemove4.stop();
             }
             throw th;
         }
@@ -479,13 +479,13 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int cancelDownload = iMbmsDownloadService.cancelDownload(downloadRequest);
-            if (cancelDownload == -1) {
+            int iCancelDownload = iMbmsDownloadService.cancelDownload(downloadRequest);
+            if (iCancelDownload == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (cancelDownload != 0) {
-                sendErrorToApp(cancelDownload, null);
+            if (iCancelDownload != 0) {
+                sendErrorToApp(iCancelDownload, null);
             } else {
                 deleteDownloadRequestToken(downloadRequest);
             }
@@ -502,19 +502,19 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int requestDownloadState = iMbmsDownloadService.requestDownloadState(downloadRequest, fileInfo);
-            if (requestDownloadState == -1) {
+            int iRequestDownloadState = iMbmsDownloadService.requestDownloadState(downloadRequest, fileInfo);
+            if (iRequestDownloadState == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (requestDownloadState != 0) {
-                if (requestDownloadState == 402) {
+            if (iRequestDownloadState != 0) {
+                if (iRequestDownloadState == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                if (requestDownloadState == 403) {
+                if (iRequestDownloadState == 403) {
                     throw new IllegalArgumentException("Unknown file.");
                 }
-                sendErrorToApp(requestDownloadState, null);
+                sendErrorToApp(iRequestDownloadState, null);
             }
         } catch (RemoteException unused) {
             this.mService.set(null);
@@ -529,16 +529,16 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int resetDownloadKnowledge = iMbmsDownloadService.resetDownloadKnowledge(downloadRequest);
-            if (resetDownloadKnowledge == -1) {
+            int iResetDownloadKnowledge = iMbmsDownloadService.resetDownloadKnowledge(downloadRequest);
+            if (iResetDownloadKnowledge == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (resetDownloadKnowledge != 0) {
-                if (resetDownloadKnowledge == 402) {
+            if (iResetDownloadKnowledge != 0) {
+                if (iResetDownloadKnowledge == 402) {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
-                sendErrorToApp(resetDownloadKnowledge, null);
+                sendErrorToApp(iResetDownloadKnowledge, null);
             }
         } catch (RemoteException unused) {
             this.mService.set(null);
@@ -551,11 +551,12 @@ public class MbmsDownloadSession implements AutoCloseable {
     public void close() {
         try {
             IMbmsDownloadService iMbmsDownloadService = this.mService.get();
-            if (iMbmsDownloadService != null && this.mServiceConnection != null) {
+            if (iMbmsDownloadService == null || this.mServiceConnection == null) {
+                Log.i(LOG_TAG, "Service already dead");
+            } else {
                 iMbmsDownloadService.dispose(this.mSubscriptionId);
                 this.mContext.unbindService(this.mServiceConnection);
             }
-            Log.i(LOG_TAG, "Service already dead");
         } catch (RemoteException unused) {
             Log.i(LOG_TAG, "Remote exception while disposing of service");
         } finally {

@@ -34,7 +34,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSysDumpTrigger {
     public static final int[] KEY;
@@ -53,7 +52,6 @@ public final class KeyguardSysDumpTrigger {
     public final UserManager userManager;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,26 +86,26 @@ public final class KeyguardSysDumpTrigger {
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 Uri data;
-                String str = null;
+                String schemeSpecificPart = null;
                 String action = intent != null ? intent.getAction() : null;
                 if (intent != null && (data = intent.getData()) != null) {
-                    str = data.getSchemeSpecificPart();
+                    schemeSpecificPart = data.getSchemeSpecificPart();
                 }
-                if (action == null || !"com.salab.issuetracker".equals(str)) {
+                if (action == null || !"com.salab.issuetracker".equals(schemeSpecificPart)) {
                     return;
                 }
                 if (action.equals("android.intent.action.PACKAGE_ADDED")) {
-                    KeyguardSysDumpTrigger.this.isEnabled = true;
+                    this.this$0.isEnabled = true;
                 } else if (action.equals("android.intent.action.PACKAGE_REMOVED")) {
-                    KeyguardSysDumpTrigger.this.isEnabled = false;
+                    this.this$0.isEnabled = false;
                 }
-                EmergencyButtonController$$ExternalSyntheticOutline0.m("pkg receiver ", "KeyguardSysDumpTrigger", KeyguardSysDumpTrigger.this.isEnabled());
+                EmergencyButtonController$$ExternalSyntheticOutline0.m("pkg receiver ", "KeyguardSysDumpTrigger", this.this$0.isEnabled());
             }
         };
         this.isDebug = DeviceType.getDebugLevel() == DeviceType.DEBUG_LEVEL_MID;
         delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger.1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws PackageManager.NameNotFoundException {
                 KeyguardSysDumpTrigger keyguardSysDumpTrigger = KeyguardSysDumpTrigger.this;
                 boolean z = false;
                 try {
@@ -145,7 +143,7 @@ public final class KeyguardSysDumpTrigger {
             final int selectedUserId = this.selectedUserInteractor.getSelectedUserId();
             Log.d("KeyguardSysDumpTrigger", "sendIntent reason=" + i + " currentUser=" + selectedUserId);
             this.powerManager.userActivity(SystemClock.uptimeMillis(), false);
-            this.bgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger$sendIssueReportIntent$1
+            this.bgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger.sendIssueReportIntent.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     int i2 = selectedUserId;
@@ -187,15 +185,15 @@ public final class KeyguardSysDumpTrigger {
     public final void sendIntent(final int i, final long j) {
         if (isEnabled()) {
             final int selectedUserId = this.selectedUserInteractor.getSelectedUserId();
-            final boolean isUserUnlocked = this.userManager.isUserUnlocked(0);
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, selectedUserId, "sendIntent reason=", " currentUser=", " userUnlocked=");
-            m.append(isUserUnlocked);
-            Log.d("KeyguardSysDumpTrigger", m.toString());
+            final boolean zIsUserUnlocked = this.userManager.isUserUnlocked(0);
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, selectedUserId, "sendIntent reason=", " currentUser=", " userUnlocked=");
+            sbM.append(zIsUserUnlocked);
+            Log.d("KeyguardSysDumpTrigger", sbM.toString());
             this.powerManager.userActivity(SystemClock.uptimeMillis(), false);
-            this.bgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger$sendIntent$1
+            this.bgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger.sendIntent.1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    boolean z = selectedUserId == 0 && isUserUnlocked;
+                    boolean z = selectedUserId == 0 && zIsUserUnlocked;
                     if (z) {
                         KeyguardSysDumpTrigger.access$sendBroadcastToIssueTracker(this, i, j);
                         return;
@@ -219,16 +217,16 @@ public final class KeyguardSysDumpTrigger {
 
     public final synchronized void start(final int i, long j, final long j2) {
         cancel();
-        this.cancelExecToken = this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger$start$1
+        this.cancelExecToken = this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger.start.1
             @Override // java.lang.Runnable
             public final void run() {
                 KeyguardSysDumpTrigger keyguardSysDumpTrigger = KeyguardSysDumpTrigger.this;
                 int i2 = i;
-                long j3 = j2;
-                if (j3 <= 0) {
-                    j3 = System.currentTimeMillis();
+                long jCurrentTimeMillis = j2;
+                if (jCurrentTimeMillis <= 0) {
+                    jCurrentTimeMillis = System.currentTimeMillis();
                 }
-                keyguardSysDumpTrigger.sendIntent(i2, j3);
+                keyguardSysDumpTrigger.sendIntent(i2, jCurrentTimeMillis);
             }
         }, j);
         android.util.Log.d("KeyguardSysDumpTrigger", "start " + j);

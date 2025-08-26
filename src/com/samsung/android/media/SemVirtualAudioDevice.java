@@ -38,14 +38,14 @@ public class SemVirtualAudioDevice {
             }
         }
         targetMixRole.voiceCommunicationCaptureAllowed(true);
-        AudioMix build = new AudioMix.Builder(targetMixRole.build()).setFormat(audioFormat).setRouteFlags(i).build();
+        AudioMix audioMixBuild = new AudioMix.Builder(targetMixRole.build()).setFormat(audioFormat).setRouteFlags(i).build();
         resetAudioPolicy();
-        AudioPolicy build2 = new AudioPolicy.Builder(this.mContext).addMix(build).build();
-        this.mAudioPolicy = build2;
-        if (this.mAudioManager.registerAudioPolicy(build2) == -1) {
+        AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this.mContext).addMix(audioMixBuild).build();
+        this.mAudioPolicy = audioPolicyBuild;
+        if (this.mAudioManager.registerAudioPolicy(audioPolicyBuild) == -1) {
             return null;
         }
-        return this.mAudioPolicy.createAudioRecordSink(build);
+        return this.mAudioPolicy.createAudioRecordSink(audioMixBuild);
     }
 
     public synchronized AudioTrack connectVirtualAudioInputDevice(AudioFormat audioFormat, int[] iArr, int[] iArr2) {
@@ -61,14 +61,14 @@ public class SemVirtualAudioDevice {
                 targetMixRole.addMixRule(2, new AudioAttributes.Builder().setCapturePreset(i2).build());
             }
         }
-        AudioMix build = new AudioMix.Builder(targetMixRole.build()).setFormat(audioFormat).setRouteFlags(2).build();
+        AudioMix audioMixBuild = new AudioMix.Builder(targetMixRole.build()).setFormat(audioFormat).setRouteFlags(2).build();
         resetAudioPolicy();
-        AudioPolicy build2 = new AudioPolicy.Builder(this.mContext).addMix(build).build();
-        this.mAudioPolicy = build2;
-        if (this.mAudioManager.registerAudioPolicy(build2) == -1) {
+        AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this.mContext).addMix(audioMixBuild).build();
+        this.mAudioPolicy = audioPolicyBuild;
+        if (this.mAudioManager.registerAudioPolicy(audioPolicyBuild) == -1) {
             return null;
         }
-        return this.mAudioPolicy.createAudioTrackSource(build);
+        return this.mAudioPolicy.createAudioTrackSource(audioMixBuild);
     }
 
     public synchronized void disconnectVirtualAudioDevice() {

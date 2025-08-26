@@ -7,12 +7,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractTable {
     public transient CellSet cellSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CellSet extends AbstractSet {
         public CellSet() {
         }
@@ -24,20 +22,20 @@ public abstract class AbstractTable {
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public final boolean contains(Object obj) {
-            boolean z;
+            boolean zContains;
             if (obj instanceof Tables.AbstractCell) {
                 Tables.AbstractCell abstractCell = (Tables.AbstractCell) obj;
                 Map map = (Map) Maps.safeGet(abstractCell.getRowKey(), AbstractTable.this.rowMap());
                 if (map != null) {
-                    Set entrySet = map.entrySet();
+                    Set setEntrySet = map.entrySet();
                     ImmutableEntry immutableEntry = new ImmutableEntry(abstractCell.getColumnKey(), abstractCell.getValue());
-                    entrySet.getClass();
+                    setEntrySet.getClass();
                     try {
-                        z = entrySet.contains(immutableEntry);
+                        zContains = setEntrySet.contains(immutableEntry);
                     } catch (ClassCastException | NullPointerException unused) {
-                        z = false;
+                        zContains = false;
                     }
-                    if (z) {
+                    if (zContains) {
                         return true;
                     }
                 }
@@ -52,7 +50,7 @@ public abstract class AbstractTable {
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public final boolean remove(Object obj) {
-            boolean z;
+            boolean zRemove;
             if (!(obj instanceof Tables.AbstractCell)) {
                 return false;
             }
@@ -61,15 +59,15 @@ public abstract class AbstractTable {
             if (map == null) {
                 return false;
             }
-            Set entrySet = map.entrySet();
+            Set setEntrySet = map.entrySet();
             ImmutableEntry immutableEntry = new ImmutableEntry(abstractCell.getColumnKey(), abstractCell.getValue());
-            entrySet.getClass();
+            setEntrySet.getClass();
             try {
-                z = entrySet.remove(immutableEntry);
+                zRemove = setEntrySet.remove(immutableEntry);
             } catch (ClassCastException | NullPointerException unused) {
-                z = false;
+                zRemove = false;
             }
-            return z;
+            return zRemove;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomFlashLightTurnOnView extends LinearLayout {
     public SubroomFlashLightSettingsActivity mListener;
@@ -33,7 +32,7 @@ public class SubroomFlashLightTurnOnView extends LinearLayout {
         this.mTurnOnView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.flashlight.SubroomFlashLightTurnOnView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = SubroomFlashLightTurnOnView.this.mListener;
+                SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = this.f$0.mListener;
                 if (!((FlashlightControllerImpl) subroomFlashLightSettingsActivity.mFlashlightController).isAvailable()) {
                     subroomFlashLightSettingsActivity.mSecFlashlightController.showUnavailableMessage();
                 } else {

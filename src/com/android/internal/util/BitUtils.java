@@ -109,10 +109,10 @@ public final class BitUtils {
     }
 
     public static void put(ByteBuffer byteBuffer, int i, byte[] bArr) {
-        int position = byteBuffer.position();
+        int iPosition = byteBuffer.position();
         byteBuffer.position(i);
         byteBuffer.put(bArr);
-        byteBuffer.position(position);
+        byteBuffer.position(iPosition);
     }
 
     public static boolean isBitSet(long j, int i) {
@@ -123,12 +123,12 @@ public final class BitUtils {
         StringBuilder sb = new StringBuilder();
         int i2 = 0;
         while (i != 0) {
-            int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-            i &= ~numberOfTrailingZeros;
+            int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+            i &= ~iNumberOfTrailingZeros;
             if (i2 > 0) {
                 sb.append(", ");
             }
-            sb.append(intFunction.apply(numberOfTrailingZeros));
+            sb.append(intFunction.apply(iNumberOfTrailingZeros));
             i2++;
         }
         TextUtils.wrap(sb, NavigationBarInflaterView.SIZE_MOD_START, NavigationBarInflaterView.SIZE_MOD_END);

@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $appWidgetId;
@@ -60,18 +59,18 @@ final class GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConf
             }
             ResultKt.throwOnFailure(obj);
         }
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         try {
             IGlanceableHubWidgetManagerService.IConfigureWidgetCallback.IResultReceiver iResultReceiver = this.$resultReceiver;
             if (iResultReceiver != null) {
-                iResultReceiver.onResult(booleanValue);
+                iResultReceiver.onResult(zBooleanValue);
             }
         } catch (RemoteException e) {
             Logger logger = this.this$0.logger;
             GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1$$ExternalSyntheticLambda0 glanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1$$ExternalSyntheticLambda0();
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(e.getLocalizedMessage());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManager$createIConfigureWidgetCallback$1$1$onConfigureWidget$1$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(e.getLocalizedMessage());
+            logger.getBuffer().commit(logMessageObtain);
         }
         return Unit.INSTANCE;
     }

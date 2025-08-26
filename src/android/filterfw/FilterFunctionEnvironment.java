@@ -17,8 +17,8 @@ public class FilterFunctionEnvironment extends MffEnvironment {
     }
 
     public FilterFunction createFunction(Class cls, Object... objArr) {
-        Filter createFilterByClass = FilterFactory.sharedFactory().createFilterByClass(cls, "FilterFunction(" + cls.getSimpleName() + NavigationBarInflaterView.KEY_CODE_END);
-        createFilterByClass.initWithAssignmentList(objArr);
-        return new FilterFunction(getContext(), createFilterByClass);
+        Filter filterCreateFilterByClass = FilterFactory.sharedFactory().createFilterByClass(cls, "FilterFunction(" + cls.getSimpleName() + NavigationBarInflaterView.KEY_CODE_END);
+        filterCreateFilterByClass.initWithAssignmentList(objArr);
+        return new FilterFunction(getContext(), filterCreateFilterByClass);
     }
 }

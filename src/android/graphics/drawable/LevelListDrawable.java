@@ -1,8 +1,11 @@
 package android.graphics.drawable;
 
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.DrawableContainer;
 import android.util.AttributeSet;
+import com.android.ims.ImsConfig;
+import com.android.internal.R;
 import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -32,100 +35,56 @@ public class LevelListDrawable extends DrawableContainer {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         updateDensity(resources);
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0098, code lost:
-    
-        return;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0091, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x0091, code lost:
     
         onLevelChange(getLevel());
      */
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x0098, code lost:
+    
+        return;
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void inflateChildElements(android.content.res.Resources r8, org.xmlpull.v1.XmlPullParser r9, android.util.AttributeSet r10, android.content.res.Resources.Theme r11) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            r7 = this;
-            int r0 = r9.getDepth()
-            r1 = 1
-            int r0 = r0 + r1
-        L6:
-            int r2 = r9.next()
-            if (r2 == r1) goto L91
-            int r3 = r9.getDepth()
-            if (r3 >= r0) goto L15
-            r4 = 3
-            if (r2 == r4) goto L91
-        L15:
-            r4 = 2
-            if (r2 == r4) goto L19
-            goto L6
-        L19:
-            if (r3 > r0) goto L6
-            java.lang.String r2 = r9.getName()
-            java.lang.String r3 = "item"
-            boolean r2 = r2.equals(r3)
-            if (r2 != 0) goto L28
-            goto L6
-        L28:
-            int[] r2 = com.android.internal.R.styleable.LevelListDrawableItem
-            android.content.res.TypedArray r2 = obtainAttributes(r8, r11, r10, r2)
-            r3 = 0
-            int r5 = r2.getInt(r1, r3)
-            int r6 = r2.getInt(r4, r3)
-            int r3 = r2.getResourceId(r3, r3)
-            r2.recycle()
-            if (r6 < 0) goto L76
-            if (r3 == 0) goto L47
-            android.graphics.drawable.Drawable r2 = r8.getDrawable(r3, r11)
-            goto L55
-        L47:
-            int r2 = r9.next()
-            r3 = 4
-            if (r2 != r3) goto L4f
-            goto L47
-        L4f:
-            if (r2 != r4) goto L5b
-            android.graphics.drawable.Drawable r2 = android.graphics.drawable.Drawable.createFromXmlInner(r8, r9, r10, r11)
-        L55:
-            android.graphics.drawable.LevelListDrawable$LevelListState r3 = r7.mLevelListState
-            r3.addLevel(r5, r6, r2)
-            goto L6
-        L5b:
-            org.xmlpull.v1.XmlPullParserException r7 = new org.xmlpull.v1.XmlPullParserException
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            r8.<init>()
-            java.lang.String r9 = r9.getPositionDescription()
-            r8.append(r9)
-            java.lang.String r9 = ": <item> tag requires a 'drawable' attribute or child tag defining a drawable"
-            r8.append(r9)
-            java.lang.String r8 = r8.toString()
-            r7.<init>(r8)
-            throw r7
-        L76:
-            org.xmlpull.v1.XmlPullParserException r7 = new org.xmlpull.v1.XmlPullParserException
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            r8.<init>()
-            java.lang.String r9 = r9.getPositionDescription()
-            r8.append(r9)
-            java.lang.String r9 = ": <item> tag requires a 'maxLevel' attribute"
-            r8.append(r9)
-            java.lang.String r8 = r8.toString()
-            r7.<init>(r8)
-            throw r7
-        L91:
-            int r8 = r7.getLevel()
-            r7.onLevelChange(r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.LevelListDrawable.inflateChildElements(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.content.res.Resources$Theme):void");
+    private void inflateChildElements(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
+        int depth;
+        int next;
+        Drawable drawableCreateFromXmlInner;
+        int depth2 = xmlPullParser.getDepth() + 1;
+        while (true) {
+            int next2 = xmlPullParser.next();
+            if (next2 == 1 || ((depth = xmlPullParser.getDepth()) < depth2 && next2 == 3)) {
+                break;
+            }
+            if (next2 == 2 && depth <= depth2 && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+                TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.LevelListDrawableItem);
+                int i = typedArrayObtainAttributes.getInt(1, 0);
+                int i2 = typedArrayObtainAttributes.getInt(2, 0);
+                int resourceId = typedArrayObtainAttributes.getResourceId(0, 0);
+                typedArrayObtainAttributes.recycle();
+                if (i2 < 0) {
+                    throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": <item> tag requires a 'maxLevel' attribute");
+                }
+                if (resourceId != 0) {
+                    drawableCreateFromXmlInner = resources.getDrawable(resourceId, theme);
+                } else {
+                    do {
+                        next = xmlPullParser.next();
+                    } while (next == 4);
+                    if (next != 2) {
+                        throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or child tag defining a drawable");
+                    }
+                    drawableCreateFromXmlInner = Drawable.createFromXmlInner(resources, xmlPullParser, attributeSet, theme);
+                }
+                this.mLevelListState.addLevel(i, i2, drawableCreateFromXmlInner);
+            }
+        }
     }
 
     @Override // android.graphics.drawable.DrawableContainer, android.graphics.drawable.Drawable
@@ -171,9 +130,9 @@ public class LevelListDrawable extends DrawableContainer {
         }
 
         public void addLevel(int i, int i2, Drawable drawable) {
-            int addChild = addChild(drawable);
-            this.mLows[addChild] = i;
-            this.mHighs[addChild] = i2;
+            int iAddChild = addChild(drawable);
+            this.mLows[iAddChild] = i;
+            this.mHighs[iAddChild] = i2;
         }
 
         public int indexOfLevel(int i) {
@@ -188,6 +147,7 @@ public class LevelListDrawable extends DrawableContainer {
             return -1;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new LevelListDrawable(this, null);

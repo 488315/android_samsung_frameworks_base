@@ -33,31 +33,31 @@ public class InputStreamSource extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        int readTargetString = FrameFormat.readTargetString(this.mTarget);
+        int targetString = FrameFormat.readTargetString(this.mTarget);
         if (this.mOutputFormat == null) {
-            this.mOutputFormat = PrimitiveFormat.createByteFormat(readTargetString);
+            this.mOutputFormat = PrimitiveFormat.createByteFormat(targetString);
         }
         addOutputPort("data", this.mOutputFormat);
     }
 
     @Override // android.filterfw.core.Filter
-    public void process(FilterContext filterContext) {
+    public void process(FilterContext filterContext) throws IOException {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] bArr = new byte[1024];
             int i = 0;
             while (true) {
-                int read = this.mInputStream.read(bArr);
-                if (read > 0) {
-                    byteArrayOutputStream.write(bArr, 0, read);
-                    i += read;
+                int i2 = this.mInputStream.read(bArr);
+                if (i2 > 0) {
+                    byteArrayOutputStream.write(bArr, 0, i2);
+                    i += i2;
                 } else {
-                    ByteBuffer wrap = ByteBuffer.wrap(byteArrayOutputStream.toByteArray());
+                    ByteBuffer byteBufferWrap = ByteBuffer.wrap(byteArrayOutputStream.toByteArray());
                     this.mOutputFormat.setDimensions(i);
-                    Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-                    newFrame.setData(wrap);
-                    pushOutput("data", newFrame);
-                    newFrame.release();
+                    Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+                    frameNewFrame.setData(byteBufferWrap);
+                    pushOutput("data", frameNewFrame);
+                    frameNewFrame.release();
                     closeOutputPort("data");
                     return;
                 }

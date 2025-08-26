@@ -7,21 +7,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Task$TaskKey implements Parcelable {
     public static final Parcelable.Creator<Task$TaskKey> CREATOR = new Parcelable.Creator() { // from class: com.android.systemui.shared.recents.model.Task$TaskKey.1
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             Parcelable.Creator<Task$TaskKey> creator = Task$TaskKey.CREATOR;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-            int readInt3 = parcel.readInt();
-            long readLong = parcel.readLong();
-            int readInt4 = parcel.readInt();
+            int i3 = parcel.readInt();
+            long j = parcel.readLong();
+            int i4 = parcel.readInt();
             Parcelable.Creator creator2 = ComponentName.CREATOR;
-            return new Task$TaskKey(readInt, readInt2, intent, (ComponentName) parcel.readTypedObject(creator2), readInt3, readLong, readInt4, (ComponentName) parcel.readTypedObject(creator2), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean());
+            return new Task$TaskKey(i, i2, intent, (ComponentName) parcel.readTypedObject(creator2), i3, j, i4, (ComponentName) parcel.readTypedObject(creator2), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean());
         }
 
         @Override // android.os.Parcelable.Creator

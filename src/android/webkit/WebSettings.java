@@ -394,13 +394,13 @@ public abstract class WebSettings {
         TextSize textSize = null;
         int i = Integer.MAX_VALUE;
         for (TextSize textSize2 : TextSize.values()) {
-            int abs = Math.abs(textZoom - textSize2.value);
-            if (abs == 0) {
+            int iAbs = Math.abs(textZoom - textSize2.value);
+            if (iAbs == 0) {
                 return textSize2;
             }
-            if (abs < i) {
+            if (iAbs < i) {
                 textSize = textSize2;
-                i = abs;
+                i = iAbs;
             }
         }
         if (textSize == null) {

@@ -1,6 +1,7 @@
 package com.android.keyguard;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -35,7 +36,6 @@ import com.android.systemui.util.ViewController;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPatternViewController extends KeyguardInputViewController {
     public final AnonymousClass2 mCancelPatternRunnable;
@@ -70,7 +70,7 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         this.mPostureCallback = new DevicePostureController.Callback() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
             public final void onPostureChanged(int i) {
-                ((KeyguardPatternView) KeyguardPatternViewController.this.mView).getClass();
+                ((KeyguardPatternView) this.f$0.mView).getClass();
             }
         };
         this.mEmergencyButtonCallback = new EmergencyButtonController.EmergencyButtonCallback() { // from class: com.android.keyguard.KeyguardPatternViewController.1
@@ -81,7 +81,7 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         };
         this.mExternalHapticsPlayer = new LockPatternView.ExternalHapticsPlayer() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda1
             public final void performCellAddedFeedback() {
-                KeyguardPatternViewController.$r8$lambda$FgupMdr3AbxGzAK_j5aWC6K_wXY(KeyguardPatternViewController.this);
+                KeyguardPatternViewController.$r8$lambda$FgupMdr3AbxGzAK_j5aWC6K_wXY(this.f$0);
             }
         };
         this.mCancelPatternRunnable = new Runnable() { // from class: com.android.keyguard.KeyguardPatternViewController.2
@@ -111,9 +111,9 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
     public void handleAttemptLockout(long j) {
         this.mLockPatternView.clearPattern();
         this.mLockPatternView.setEnabled(false);
-        long ceil = (long) Math.ceil((j - SystemClock.elapsedRealtime()) / 1000.0d);
-        getKeyguardSecurityCallback().onAttemptLockoutStart(ceil);
-        this.mCountdownTimer = new CountDownTimer(ceil * 1000, 1000L) { // from class: com.android.keyguard.KeyguardPatternViewController.3
+        long jCeil = (long) Math.ceil((j - SystemClock.elapsedRealtime()) / 1000.0d);
+        getKeyguardSecurityCallback().onAttemptLockoutStart(jCeil);
+        this.mCountdownTimer = new CountDownTimer(jCeil * 1000, 1000L) { // from class: com.android.keyguard.KeyguardPatternViewController.3
             @Override // android.os.CountDownTimer
             public final void onFinish() {
                 KeyguardPatternViewController.this.mLockPatternView.setEnabled(true);
@@ -122,11 +122,11 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
 
             @Override // android.os.CountDownTimer
             public final void onTick(long j2) {
-                int round = (int) Math.round(j2 / 1000.0d);
-                HashMap hashMap = new HashMap();
-                hashMap.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(round));
+                int iRound = (int) Math.round(j2 / 1000.0d);
+                HashMap map = new HashMap();
+                map.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(iRound));
                 KeyguardPatternViewController keyguardPatternViewController = KeyguardPatternViewController.this;
-                keyguardPatternViewController.mMessageAreaController.setMessage(PluralsMessageFormatter.format(((KeyguardPatternView) ((ViewController) keyguardPatternViewController).mView).getResources(), hashMap, R.string.kg_too_many_failed_attempts_countdown), false);
+                keyguardPatternViewController.mMessageAreaController.setMessage(PluralsMessageFormatter.format(((KeyguardPatternView) ((ViewController) keyguardPatternViewController).mView).getResources(), map, R.string.kg_too_many_failed_attempts_countdown), false);
             }
         }.start();
     }
@@ -167,7 +167,7 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         this.mLockPatternView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                KeyguardPatternViewController keyguardPatternViewController = KeyguardPatternViewController.this;
+                KeyguardPatternViewController keyguardPatternViewController = this.f$0;
                 keyguardPatternViewController.getClass();
                 if (motionEvent.getActionMasked() != 0) {
                     return false;
@@ -177,12 +177,12 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
             }
         });
         this.mEmergencyButtonController.mEmergencyButtonCallback = this.mEmergencyButtonCallback;
-        View findViewById = ((KeyguardPatternView) this.mView).findViewById(R.id.cancel_button);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda3
+        View viewFindViewById = ((KeyguardPatternView) this.mView).findViewById(R.id.cancel_button);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardPatternViewController$$ExternalSyntheticLambda3
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    KeyguardPatternViewController keyguardPatternViewController = KeyguardPatternViewController.this;
+                    KeyguardPatternViewController keyguardPatternViewController = this.f$0;
                     keyguardPatternViewController.getKeyguardSecurityCallback().reset();
                     keyguardPatternViewController.getKeyguardSecurityCallback().onCancelClicked();
                 }
@@ -206,9 +206,9 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         this.mLockPatternView.setOnPatternListener((LockPatternView.OnPatternListener) null);
         this.mLockPatternView.setOnTouchListener((View.OnTouchListener) null);
         this.mEmergencyButtonController.mEmergencyButtonCallback = null;
-        View findViewById = ((KeyguardPatternView) this.mView).findViewById(R.id.cancel_button);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(null);
+        View viewFindViewById = ((KeyguardPatternView) this.mView).findViewById(R.id.cancel_button);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(null);
         }
         ((DevicePostureControllerImpl) this.mPostureController).removeCallback(this.mPostureCallback);
         this.mLockPatternView.setExternalHapticsPlayer((LockPatternView.ExternalHapticsPlayer) null);
@@ -236,7 +236,7 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
     }
 
     @Override // com.android.keyguard.KeyguardInputViewController
-    public void showPromptReason(int i) {
+    public void showPromptReason(int i) throws Resources.NotFoundException {
         int i2;
         if (i == 0) {
             i2 = 0;
@@ -281,7 +281,7 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         (z ? keyguardPatternView.mDisappearAnimationUtilsLocked : keyguardPatternView.mDisappearAnimationUtils).startAnimation2d(keyguardPatternView.mLockPatternView.getCellStates(), new Runnable() { // from class: com.android.keyguard.KeyguardPatternView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardPatternView keyguardPatternView2 = KeyguardPatternView.this;
+                KeyguardPatternView keyguardPatternView2 = keyguardPatternView;
                 Runnable runnable2 = runnable;
                 int i = KeyguardPatternView.$r8$clinit;
                 keyguardPatternView2.getClass();
@@ -298,7 +298,6 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
         return true;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UnlockPatternListener implements LockPatternView.OnPatternListener {
         public UnlockPatternListener() {
         }
@@ -343,8 +342,8 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
             if (asyncTask != null) {
                 asyncTask.cancel(false);
             }
-            boolean isForgotPasswordView = KeyguardPatternViewController.this.mKeyguardUpdateMonitor.isForgotPasswordView();
-            final int selectedUserId = isForgotPasswordView ? -9899 : KeyguardPatternViewController.this.mSelectedUserInteractor.getSelectedUserId();
+            boolean zIsForgotPasswordView = KeyguardPatternViewController.this.mKeyguardUpdateMonitor.isForgotPasswordView();
+            final int selectedUserId = zIsForgotPasswordView ? -9899 : KeyguardPatternViewController.this.mSelectedUserInteractor.getSelectedUserId();
             if (LsRune.SECURITY_UNPACK) {
                 Log.e("KeyguardPatternViewController", "just for UNPACK device. Always match success");
             } else if (list.size() < 4) {
@@ -357,15 +356,15 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
             }
             KeyguardPatternViewController.this.mLatencyTracker.onActionStart(3);
             KeyguardPatternViewController.this.mLatencyTracker.onActionStart(4);
-            final LockscreenCredential createPattern = LockscreenCredential.createPattern(list);
-            if (isForgotPasswordView) {
-                KeyguardPatternViewController.this.mPrevCredential = createPattern;
+            final LockscreenCredential lockscreenCredentialCreatePattern = LockscreenCredential.createPattern(list);
+            if (zIsForgotPasswordView) {
+                KeyguardPatternViewController.this.mPrevCredential = lockscreenCredentialCreatePattern;
             }
             KeyguardPatternViewController keyguardPatternViewController = KeyguardPatternViewController.this;
-            keyguardPatternViewController.mPendingLockCheck = LockPatternChecker.checkCredential(keyguardPatternViewController.mLockPatternUtils, isForgotPasswordView ? keyguardPatternViewController.mPrevCredential : createPattern, selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardPatternViewController.UnlockPatternListener.1
+            keyguardPatternViewController.mPendingLockCheck = LockPatternChecker.checkCredential(keyguardPatternViewController.mLockPatternUtils, zIsForgotPasswordView ? keyguardPatternViewController.mPrevCredential : lockscreenCredentialCreatePattern, selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardPatternViewController.UnlockPatternListener.1
                 public final void onCancelled() {
                     KeyguardPatternViewController.this.mLatencyTracker.onActionEnd(4);
-                    createPattern.zeroize();
+                    lockscreenCredentialCreatePattern.zeroize();
                 }
 
                 public final void onChecked(boolean z, int i) {
@@ -377,13 +376,13 @@ public class KeyguardPatternViewController extends KeyguardInputViewController {
                     if (!z) {
                         unlockPatternListener.onPatternChecked(selectedUserId, i, false, true);
                     }
-                    createPattern.zeroize();
+                    lockscreenCredentialCreatePattern.zeroize();
                 }
 
                 public final void onEarlyMatched() {
                     KeyguardPatternViewController.this.mLatencyTracker.onActionEnd(3);
                     UnlockPatternListener.this.onPatternChecked(selectedUserId, 0, true, true);
-                    createPattern.zeroize();
+                    lockscreenCredentialCreatePattern.zeroize();
                 }
             });
             if (list.size() > 2) {

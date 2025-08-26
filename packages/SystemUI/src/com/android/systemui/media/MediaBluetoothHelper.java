@@ -11,14 +11,12 @@ import com.android.keyguard.KeyguardSecSimPinViewController$$ExternalSyntheticOu
 import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaBluetoothHelper {
     public BluetoothA2dp a2dp;
     public final Context context;
     public Pair lastBudsDrawable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,7 @@ public final class MediaBluetoothHelper {
                 if (i != 2) {
                     NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "onServiceConnected: ", " is not supported", "MediaBluetoothHelper");
                 } else {
-                    MediaBluetoothHelper.this.a2dp = (BluetoothA2dp) bluetoothProfile;
+                    this.this$0.a2dp = (BluetoothA2dp) bluetoothProfile;
                 }
             }
 
@@ -49,7 +47,7 @@ public final class MediaBluetoothHelper {
             public final void onServiceDisconnected(int i) {
                 Log.d("MediaBluetoothHelper", "onServiceDisconnected");
                 if (i == 2) {
-                    MediaBluetoothHelper.this.a2dp = null;
+                    this.this$0.a2dp = null;
                 } else {
                     NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(i, "onServiceDisconnected: ", " is not supported", "MediaBluetoothHelper");
                 }
@@ -63,12 +61,12 @@ public final class MediaBluetoothHelper {
     }
 
     public static short semIconIndex(BluetoothDevice bluetoothDevice) {
-        byte[] semGetManufacturerDeviceIconIndex = bluetoothDevice.semGetManufacturerDeviceIconIndex();
-        if (semGetManufacturerDeviceIconIndex == null) {
+        byte[] bArrSemGetManufacturerDeviceIconIndex = bluetoothDevice.semGetManufacturerDeviceIconIndex();
+        if (bArrSemGetManufacturerDeviceIconIndex == null) {
             return (short) -1;
         }
         try {
-            return (short) (semGetManufacturerDeviceIconIndex[1] | (semGetManufacturerDeviceIconIndex[0] << 8));
+            return (short) (bArrSemGetManufacturerDeviceIconIndex[1] | (bArrSemGetManufacturerDeviceIconIndex[0] << 8));
         } catch (Exception e) {
             KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("Fail to get iconIndex ", e, "MediaBluetoothHelper");
             return (short) -1;

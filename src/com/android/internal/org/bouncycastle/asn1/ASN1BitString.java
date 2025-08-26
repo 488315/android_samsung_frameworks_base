@@ -175,16 +175,16 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String,
     }
 
     public int intValue() {
-        int min = Math.min(5, this.contents.length - 1);
+        int iMin = Math.min(5, this.contents.length - 1);
         int i = 0;
-        for (int i2 = 1; i2 < min; i2++) {
+        for (int i2 = 1; i2 < iMin; i2++) {
             i |= (255 & this.contents[i2]) << ((i2 - 1) * 8);
         }
-        if (1 > min || min >= 5) {
+        if (1 > iMin || iMin >= 5) {
             return i;
         }
         byte[] bArr = this.contents;
-        return ((((byte) (bArr[min] & (255 << (bArr[0] & 255)))) & 255) << ((min - 1) * 8)) | i;
+        return ((((byte) (bArr[iMin] & (255 << (bArr[0] & 255)))) & 255) << ((iMin - 1) * 8)) | i;
     }
 
     public byte[] getOctets() {
@@ -201,10 +201,10 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String,
             return ASN1OctetString.EMPTY_OCTETS;
         }
         int i = bArr[0] & 255;
-        byte[] copyOfRange = Arrays.copyOfRange(bArr, 1, bArr.length);
-        int length = copyOfRange.length - 1;
-        copyOfRange[length] = (byte) (((byte) (255 << i)) & copyOfRange[length]);
-        return copyOfRange;
+        byte[] bArrCopyOfRange = Arrays.copyOfRange(bArr, 1, bArr.length);
+        int length = bArrCopyOfRange.length - 1;
+        bArrCopyOfRange[length] = (byte) (((byte) (255 << i)) & bArrCopyOfRange[length]);
+        return bArrCopyOfRange;
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitStringParser

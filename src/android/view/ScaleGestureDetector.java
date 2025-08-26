@@ -122,18 +122,143 @@ public class ScaleGestureDetector {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0107  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x0100  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x0107  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onTouchEvent(android.view.MotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 422
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ScaleGestureDetector.onTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        float f;
+        float f2;
+        float f3;
+        this.mCurrTime = motionEvent.getEventTime();
+        int actionMasked = motionEvent.getActionMasked();
+        if (this.mQuickScaleEnabled) {
+            this.mGestureDetector.onTouchEvent(motionEvent);
+        }
+        boolean z = (motionEvent.getButtonState() & 32) != 0;
+        boolean z2 = this.mAnchoredScaleMode == 2 && !z;
+        boolean z3 = actionMasked == 1 || actionMasked == 3 || z2;
+        if (actionMasked == 0 || z3) {
+            if (this.mInProgress) {
+                this.mListener.onScaleEnd(this);
+                this.mInProgress = false;
+                this.mAnchoredScaleMode = 0;
+            } else if (inAnchoredScaleMode() && z3) {
+                this.mInProgress = false;
+                this.mAnchoredScaleMode = 0;
+            }
+            if (z3) {
+                return true;
+            }
+        }
+        if (!this.mInProgress) {
+            if (actionMasked == 1 || actionMasked == 3 || motionEvent.getPointerCount() == 4) {
+                reset();
+            } else {
+                if (this.mStylusScaleEnabled && !inAnchoredScaleMode() && !z3 && z) {
+                    this.mAnchoredScaleStartX = motionEvent.getX();
+                    this.mAnchoredScaleStartY = motionEvent.getY();
+                    this.mAnchoredScaleMode = 2;
+                }
+                getArea(motionEvent);
+                if (actionMasked == 0 || actionMasked == 6 || actionMasked == 5 || z2) {
+                    this.mCurrSpanX = this.mStateCurrent.mSpanX;
+                    this.mCurrSpanY = this.mStateCurrent.mSpanY;
+                    this.mCurrLenBeforeSqrt = this.mStateCurrent.mLenBeforeSqrt;
+                }
+                if (this.mStateCurrent.mLenBeforeSqrt > this.mAreaThreshold) {
+                    if (!this.mAreaRateCalculating && !this.mUseTwoFingerSweep) {
+                        this.mTempLenBeforeSqrt = this.mStateCurrent.mLenBeforeSqrt;
+                        this.mAreaRateCalculating = true;
+                    }
+                    if (this.mUseTwoFingerSweep) {
+                        this.mPrevLenBeforeSqrt = this.mStateCurrent.mLenBeforeSqrt;
+                    }
+                    if (this.mAreaRateCalculating) {
+                        float f4 = this.mStateCurrent.mLenBeforeSqrt;
+                        float f5 = this.mTempLenBeforeSqrt;
+                        if (f4 > f5) {
+                            f2 = this.mStateCurrent.mLenBeforeSqrt;
+                            f3 = this.mTempLenBeforeSqrt;
+                            f = f2 / f3;
+                            if (this.mUseTwoFingerSweep ? !(!this.mAreaRateCalculating || f <= this.mAreaRateThreshold) : f >= this.mAreaRateThreshold) {
+                                float f6 = this.mStateCurrent.mSpanX;
+                                this.mCurrSpanX = f6;
+                                this.mPrevSpanX = f6;
+                                float f7 = this.mStateCurrent.mSpanY;
+                                this.mCurrSpanY = f7;
+                                this.mPrevSpanY = f7;
+                                this.mPrevTime = this.mCurrTime;
+                                float f8 = this.mStateCurrent.mLenBeforeSqrt;
+                                this.mCurrLenBeforeSqrt = f8;
+                                this.mPrevLenBeforeSqrt = f8;
+                                this.mInProgress = this.mListener.onScaleBegin(this);
+                                Log.i(TAG, "TwScaleGestureDetector");
+                                this.mAreaRateCalculating = false;
+                            }
+                        } else {
+                            f = f5 / this.mStateCurrent.mLenBeforeSqrt;
+                            if (this.mUseTwoFingerSweep) {
+                                float f62 = this.mStateCurrent.mSpanX;
+                                this.mCurrSpanX = f62;
+                                this.mPrevSpanX = f62;
+                                float f72 = this.mStateCurrent.mSpanY;
+                                this.mCurrSpanY = f72;
+                                this.mPrevSpanY = f72;
+                                this.mPrevTime = this.mCurrTime;
+                                float f82 = this.mStateCurrent.mLenBeforeSqrt;
+                                this.mCurrLenBeforeSqrt = f82;
+                                this.mPrevLenBeforeSqrt = f82;
+                                this.mInProgress = this.mListener.onScaleBegin(this);
+                                Log.i(TAG, "TwScaleGestureDetector");
+                                this.mAreaRateCalculating = false;
+                            }
+                        }
+                    } else {
+                        float f9 = this.mStateCurrent.mLenBeforeSqrt;
+                        float f10 = this.mPrevLenBeforeSqrt;
+                        if (f9 > f10) {
+                            f2 = this.mStateCurrent.mLenBeforeSqrt;
+                            f3 = this.mPrevLenBeforeSqrt;
+                            f = f2 / f3;
+                            if (this.mUseTwoFingerSweep) {
+                            }
+                        } else {
+                            f = f10 / this.mStateCurrent.mLenBeforeSqrt;
+                            if (this.mUseTwoFingerSweep) {
+                            }
+                        }
+                    }
+                } else if (this.mUpdatePrevious && (actionMasked == 2 || actionMasked == 213)) {
+                    this.mPrevSpanX = this.mCurrSpanX;
+                    this.mPrevSpanY = this.mCurrSpanY;
+                    this.mPrevLenBeforeSqrt = this.mCurrLenBeforeSqrt;
+                    this.mPrevTime = this.mCurrTime;
+                }
+            }
+        } else {
+            if (actionMasked == 2 || actionMasked == 213) {
+                getArea(motionEvent);
+                if (this.mStateCurrent.mLenBeforeSqrt <= 0.0f) {
+                    return true;
+                }
+                this.mCurrSpanX = this.mStateCurrent.mSpanX;
+                this.mCurrSpanY = this.mStateCurrent.mSpanY;
+                this.mCurrLenBeforeSqrt = this.mStateCurrent.mLenBeforeSqrt;
+                this.mUpdatePrevious = this.mListener.onScale(this);
+            } else {
+                this.mListener.onScaleEnd(this);
+                reset();
+            }
+            if (this.mUpdatePrevious) {
+                this.mPrevSpanX = this.mCurrSpanX;
+                this.mPrevSpanY = this.mCurrSpanY;
+                this.mPrevLenBeforeSqrt = this.mCurrLenBeforeSqrt;
+                this.mPrevTime = this.mCurrTime;
+            }
+        }
+        return true;
     }
 
     private void getArea(MotionEvent motionEvent) {
@@ -290,16 +415,16 @@ public class ScaleGestureDetector {
         if (inAnchoredScaleMode()) {
             boolean z = this.mEventBeforeOrAboveStartingGestureEvent;
             boolean z2 = (z && this.mCurrLenBeforeSqrt < this.mPrevLenBeforeSqrt) || (!z && this.mCurrLenBeforeSqrt > this.mPrevLenBeforeSqrt);
-            float abs = Math.abs(1.0f - ((float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt))) * 0.5f;
+            float fAbs = Math.abs(1.0f - ((float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt))) * 0.5f;
             if (this.mPrevLenBeforeSqrt <= 0.0f) {
                 return 1.0f;
             }
-            return z2 ? abs + 1.0f : 1.0f - abs;
+            return z2 ? fAbs + 1.0f : 1.0f - fAbs;
         }
-        float sqrt = (float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt);
-        if (!Float.isNaN(sqrt)) {
+        float fSqrt = (float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt);
+        if (!Float.isNaN(fSqrt)) {
             if (this.mPrevLenBeforeSqrt > 0.0f) {
-                return sqrt;
+                return fSqrt;
             }
             return 1.0f;
         }

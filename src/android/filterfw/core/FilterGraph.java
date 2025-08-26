@@ -208,18 +208,18 @@ public class FilterGraph {
                     Log.v(this.TAG, "Checking " + sourceFormat + " against " + portFormat + MediaMetrics.SEPARATOR);
                 }
                 int i = this.mTypeCheckMode;
-                boolean z = true;
+                boolean zIsCompatibleWith = true;
                 if (i == 0) {
                     inputPort.setChecksType(false);
                 } else if (i == 1) {
-                    boolean mayBeCompatibleWith = sourceFormat.mayBeCompatibleWith(portFormat);
+                    boolean zMayBeCompatibleWith = sourceFormat.mayBeCompatibleWith(portFormat);
                     inputPort.setChecksType(true);
-                    z = mayBeCompatibleWith;
+                    zIsCompatibleWith = zMayBeCompatibleWith;
                 } else if (i == 2) {
-                    z = sourceFormat.isCompatibleWith(portFormat);
+                    zIsCompatibleWith = sourceFormat.isCompatibleWith(portFormat);
                     inputPort.setChecksType(false);
                 }
-                if (!z) {
+                if (!zIsCompatibleWith) {
                     throw new RuntimeException("Type mismatch: Filter " + filter + " expects a format of type " + portFormat + " but got a format of type " + sourceFormat + "!");
                 }
             }

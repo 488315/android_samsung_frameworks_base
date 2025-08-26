@@ -79,15 +79,15 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         this.mFlags = 1;
         putAll(arrayMap);
         for (int size = this.mMap.size() - 1; size >= 0; size--) {
-            Object valueAt = this.mMap.valueAt(size);
-            if (valueAt instanceof ArrayMap) {
-                this.mMap.setValueAt(size, new PersistableBundle((ArrayMap<String, Object>) valueAt, z));
-            } else if (valueAt instanceof Bundle) {
-                this.mMap.setValueAt(size, new PersistableBundle((Bundle) valueAt, z));
-            } else if (isValidType(valueAt)) {
+            Object objValueAt = this.mMap.valueAt(size);
+            if (objValueAt instanceof ArrayMap) {
+                this.mMap.setValueAt(size, new PersistableBundle((ArrayMap<String, Object>) objValueAt, z));
+            } else if (objValueAt instanceof Bundle) {
+                this.mMap.setValueAt(size, new PersistableBundle((Bundle) objValueAt, z));
+            } else if (isValidType(objValueAt)) {
                 continue;
             } else {
-                String str = "Bad value in PersistableBundle key=" + this.mMap.keyAt(size) + " value=" + valueAt;
+                String str = "Bad value in PersistableBundle key=" + this.mMap.keyAt(size) + " value=" + objValueAt;
                 if (z) {
                     throw new IllegalArgumentException(str);
                 }
@@ -151,16 +151,16 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         throw new XmlPullParserException("Unknown Object o=" + obj);
     }
 
-    public void saveToXml(XmlSerializer xmlSerializer) throws IOException, XmlPullParserException {
+    public void saveToXml(XmlSerializer xmlSerializer) throws XmlPullParserException, IOException {
         saveToXml(XmlUtils.makeTyped(xmlSerializer));
     }
 
-    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IOException, XmlPullParserException {
+    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws XmlPullParserException, IOException {
         unparcel();
         for (int size = this.mMap.size() - 1; size >= 0; size--) {
-            Object valueAt = this.mMap.valueAt(size);
-            if (!isValidType(valueAt)) {
-                Slog.e(TAG, "Dropping bad data before persisting: " + this.mMap.keyAt(size) + "=" + valueAt);
+            Object objValueAt = this.mMap.valueAt(size);
+            if (!isValidType(objValueAt)) {
+                Slog.e(TAG, "Dropping bad data before persisting: " + this.mMap.keyAt(size) + "=" + objValueAt);
                 this.mMap.removeAt(size);
             }
         }
@@ -176,17 +176,17 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
             if (this.mMap.keyAt(i2) != null && this.mMap.keyAt(i2).length() > i) {
                 return false;
             }
-            Object valueAt = this.mMap.valueAt(i2);
-            if ((valueAt instanceof String) && ((String) valueAt).length() > i) {
+            Object objValueAt = this.mMap.valueAt(i2);
+            if ((objValueAt instanceof String) && ((String) objValueAt).length() > i) {
                 return false;
             }
-            if (valueAt instanceof String[]) {
-                for (String str : (String[]) valueAt) {
+            if (objValueAt instanceof String[]) {
+                for (String str : (String[]) objValueAt) {
                     if (str != null && str.length() > i) {
                         return false;
                     }
                 }
-            } else if ((valueAt instanceof PersistableBundle) && !((PersistableBundle) valueAt).isBundleContentsWithinLengthLimit(i)) {
+            } else if ((objValueAt instanceof PersistableBundle) && !((PersistableBundle) objValueAt).isBundleContentsWithinLengthLimit(i)) {
                 return false;
             }
         }
@@ -208,19 +208,19 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        boolean pushAllowFds = parcel.pushAllowFds(false);
+        boolean zPushAllowFds = parcel.pushAllowFds(false);
         try {
             writeToParcelInner(parcel, i);
         } finally {
-            parcel.restoreAllowFds(pushAllowFds);
+            parcel.restoreAllowFds(zPushAllowFds);
         }
     }
 
-    public static PersistableBundle restoreFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public static PersistableBundle restoreFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         return restoreFromXml(XmlUtils.makeTyped(xmlPullParser));
     }
 
-    public static PersistableBundle restoreFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public static PersistableBundle restoreFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         int next;
         int depth = typedXmlPullParser.getDepth();
         String name = typedXmlPullParser.getName();
@@ -255,7 +255,7 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         if (this.mParcelledData != null) {
             if (isEmptyParcel()) {
                 protoOutputStream.write(1120986464257L, 0);
@@ -265,17 +265,17 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         } else {
             protoOutputStream.write(1138166333442L, this.mMap.toString());
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void writeToStream(OutputStream outputStream) throws IOException {
-        TypedXmlSerializer newFastSerializer = Xml.newFastSerializer();
-        newFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
-        newFastSerializer.startTag(null, SliceItem.FORMAT_BUNDLE);
+        TypedXmlSerializer typedXmlSerializerNewFastSerializer = Xml.newFastSerializer();
+        typedXmlSerializerNewFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
+        typedXmlSerializerNewFastSerializer.startTag(null, SliceItem.FORMAT_BUNDLE);
         try {
-            saveToXml(newFastSerializer);
-            newFastSerializer.endTag(null, SliceItem.FORMAT_BUNDLE);
-            newFastSerializer.flush();
+            saveToXml(typedXmlSerializerNewFastSerializer);
+            typedXmlSerializerNewFastSerializer.endTag(null, SliceItem.FORMAT_BUNDLE);
+            typedXmlSerializerNewFastSerializer.flush();
         } catch (XmlPullParserException e) {
             throw new IOException(e);
         }
@@ -283,10 +283,10 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
 
     public static PersistableBundle readFromStream(InputStream inputStream) throws IOException {
         try {
-            TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-            newFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-            newFastPullParser.next();
-            return restoreFromXml(newFastPullParser);
+            TypedXmlPullParser typedXmlPullParserNewFastPullParser = Xml.newFastPullParser();
+            typedXmlPullParserNewFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+            typedXmlPullParserNewFastPullParser.next();
+            return restoreFromXml(typedXmlPullParserNewFastPullParser);
         } catch (XmlPullParserException e) {
             throw new IOException(e);
         }

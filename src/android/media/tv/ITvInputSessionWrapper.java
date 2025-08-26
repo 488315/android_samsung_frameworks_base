@@ -88,7 +88,7 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
             return;
         }
         if (z || this.mTvInputSessionImpl != null) {
-            long nanoTime = System.nanoTime();
+            long jNanoTime = System.nanoTime();
             switch (message.what) {
                 case 1:
                     if (this.mIsRecordingSession) {
@@ -248,16 +248,16 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                     Log.w(TAG, "Unhandled message code: " + message.what);
                     break;
             }
-            long nanoTime2 = (System.nanoTime() - nanoTime) / 1000000;
-            if (nanoTime2 > 50) {
-                Log.w(TAG, "Handling message (" + message.what + ") took too long time (duration=" + nanoTime2 + "ms)");
-                if (message.what == 6 && nanoTime2 > 2000) {
-                    throw new RuntimeException("Too much time to handle tune request. (" + nanoTime2 + "ms > 2000ms) Consider handling the tune request in a separate thread.");
+            long jNanoTime2 = (System.nanoTime() - jNanoTime) / 1000000;
+            if (jNanoTime2 > 50) {
+                Log.w(TAG, "Handling message (" + message.what + ") took too long time (duration=" + jNanoTime2 + "ms)");
+                if (message.what == 6 && jNanoTime2 > 2000) {
+                    throw new RuntimeException("Too much time to handle tune request. (" + jNanoTime2 + "ms > 2000ms) Consider handling the tune request in a separate thread.");
                 }
-                if (nanoTime2 <= 5000) {
+                if (jNanoTime2 <= 5000) {
                     return;
                 }
-                throw new RuntimeException("Too much time to handle a request. (type=" + message.what + ", " + nanoTime2 + "ms > 5000ms).");
+                throw new RuntimeException("Too much time to handle a request. (type=" + message.what + ", " + jNanoTime2 + "ms > 5000ms).");
             }
         }
     }
@@ -493,9 +493,9 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 finishInputEvent(inputEvent, false);
                 return;
             }
-            int dispatchInputEvent = ITvInputSessionWrapper.this.mTvInputSessionImpl.dispatchInputEvent(inputEvent, this);
-            if (dispatchInputEvent != -1) {
-                finishInputEvent(inputEvent, dispatchInputEvent == 1);
+            int iDispatchInputEvent = ITvInputSessionWrapper.this.mTvInputSessionImpl.dispatchInputEvent(inputEvent, this);
+            if (iDispatchInputEvent != -1) {
+                finishInputEvent(inputEvent, iDispatchInputEvent == 1);
             }
         }
     }

@@ -4,9 +4,9 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockSettings {
     private final ClockAxisStyle axes;
@@ -20,32 +20,32 @@ public final class ClockSettings {
     private static final String KEY_METADATA = "metadata";
     private static final String KEY_AXIS_LIST = "axes";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public final ClockSettings fromJson(JSONObject jSONObject) {
             Function1 function1 = null;
-            byte b = 0;
+            Object[] objArr = 0;
             String string = !jSONObject.isNull(ClockSettings.KEY_CLOCK_ID) ? jSONObject.getString(ClockSettings.KEY_CLOCK_ID) : null;
-            Integer valueOf = !jSONObject.isNull(ClockSettings.KEY_SEED_COLOR) ? Integer.valueOf(jSONObject.getInt(ClockSettings.KEY_SEED_COLOR)) : null;
-            JSONArray optJSONArray = jSONObject.optJSONArray(ClockSettings.KEY_AXIS_LIST);
-            ClockAxisStyle fromJson = optJSONArray != null ? ClockAxisStyle.Companion.fromJson(optJSONArray) : null;
-            if (fromJson == null) {
-                fromJson = new ClockAxisStyle(function1, 1, b == true ? 1 : 0);
+            Integer numValueOf = !jSONObject.isNull(ClockSettings.KEY_SEED_COLOR) ? Integer.valueOf(jSONObject.getInt(ClockSettings.KEY_SEED_COLOR)) : null;
+            JSONArray jSONArrayOptJSONArray = jSONObject.optJSONArray(ClockSettings.KEY_AXIS_LIST);
+            ClockAxisStyle clockAxisStyleFromJson = jSONArrayOptJSONArray != null ? ClockAxisStyle.Companion.fromJson(jSONArrayOptJSONArray) : null;
+            if (clockAxisStyleFromJson == null) {
+                clockAxisStyleFromJson = new ClockAxisStyle(function1, 1, objArr == true ? 1 : 0);
             }
-            ClockSettings clockSettings = new ClockSettings(string, valueOf, fromJson);
-            JSONObject optJSONObject = jSONObject.optJSONObject(ClockSettings.KEY_METADATA);
-            if (optJSONObject == null) {
-                optJSONObject = new JSONObject();
+            ClockSettings clockSettings = new ClockSettings(string, numValueOf, clockAxisStyleFromJson);
+            JSONObject jSONObjectOptJSONObject = jSONObject.optJSONObject(ClockSettings.KEY_METADATA);
+            if (jSONObjectOptJSONObject == null) {
+                jSONObjectOptJSONObject = new JSONObject();
             }
-            clockSettings.setMetadata(optJSONObject);
+            clockSettings.setMetadata(jSONObjectOptJSONObject);
             return clockSettings;
         }
 
-        public final JSONObject toJson(ClockSettings clockSettings) {
+        public final JSONObject toJson(ClockSettings clockSettings) throws JSONException {
             JSONObject jSONObject = new JSONObject();
             jSONObject.put(ClockSettings.KEY_CLOCK_ID, clockSettings.getClockId());
             jSONObject.put(ClockSettings.KEY_SEED_COLOR, clockSettings.getSeedColor());
@@ -120,9 +120,9 @@ public final class ClockSettings {
 
     public int hashCode() {
         String str = this.clockId;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         Integer num = this.seedColor;
-        return this.axes.hashCode() + ((hashCode + (num != null ? num.hashCode() : 0)) * 31);
+        return this.axes.hashCode() + ((iHashCode + (num != null ? num.hashCode() : 0)) * 31);
     }
 
     public final void setMetadata(JSONObject jSONObject) {
@@ -140,6 +140,7 @@ public final class ClockSettings {
         this.metadata = new JSONObject();
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public /* synthetic */ ClockSettings(String str, Integer num, ClockAxisStyle clockAxisStyle, int i, DefaultConstructorMarker defaultConstructorMarker) {
         this((i & 1) != 0 ? null : str, (i & 2) != 0 ? null : num, (i & 4) != 0 ? new ClockAxisStyle(null, 1, 0 == true ? 1 : 0) : clockAxisStyle);
     }

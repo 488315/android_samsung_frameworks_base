@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.LauncherApps;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.internal.R;
-import com.android.internal.app.ChooserTargetActionsDialogFragment;
 import com.android.internal.app.ResolverListAdapter;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.widget.RecyclerView;
@@ -51,7 +51,7 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
     protected UserHandle mUserHandle;
 
     @Override // android.app.DialogFragment, android.app.Fragment
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         if (bundle != null) {
             setStateFromBundle(bundle);
@@ -81,7 +81,7 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
     }
 
     @Override // android.app.Fragment
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) throws Resources.NotFoundException {
         if (bundle != null) {
             setStateFromBundle(bundle);
         } else {
@@ -101,20 +101,18 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
         List list = (List) this.mTargetInfos.stream().map(new Function() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Pair lambda$onCreateView$1;
-                lambda$onCreateView$1 = ChooserTargetActionsDialogFragment.this.lambda$onCreateView$1((DisplayResolveInfo) obj);
-                return lambda$onCreateView$1;
+                return this.f$0.lambda$onCreateView$1((DisplayResolveInfo) obj);
             }
         }).collect(Collectors.toList());
-        View inflate = layoutInflater.inflate(R.layout.chooser_dialog, viewGroup, false);
-        TextView textView = (TextView) inflate.findViewById(16908310);
-        ImageView imageView = (ImageView) inflate.findViewById(16908294);
-        RecyclerView recyclerView = (RecyclerView) inflate.findViewById(R.id.listContainer);
+        View viewInflate = layoutInflater.inflate(R.layout.chooser_dialog, viewGroup, false);
+        TextView textView = (TextView) viewInflate.findViewById(16908310);
+        ImageView imageView = (ImageView) viewInflate.findViewById(16908294);
+        RecyclerView recyclerView = (RecyclerView) viewInflate.findViewById(R.id.listContainer);
         ResolverListAdapter.ResolveInfoPresentationGetter providingAppPresentationGetter = getProvidingAppPresentationGetter();
         textView.lambda$setTextAsync$0(isShortcutTarget() ? this.mShortcutTitle : providingAppPresentationGetter.getLabel());
-        imageView.lambda$setImageURIAsync$0(providingAppPresentationGetter.getIcon(this.mUserHandle));
+        imageView.lambda$setImageURIAsync$2(providingAppPresentationGetter.getIcon(this.mUserHandle));
         recyclerView.setAdapter(new VHAdapter(list));
-        return inflate;
+        return viewInflate;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -129,7 +127,6 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
             this.mItems = list;
         }
 
-        /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.widget.RecyclerView.Adapter
         public VH onCreateViewHolder(ViewGroup viewGroup, int i) {
             return ChooserTargetActionsDialogFragment.this.new VH(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chooser_dialog_item, viewGroup, false));
@@ -162,12 +159,12 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
                 this.mIcon.setVisibility(8);
             } else {
                 this.mIcon.setVisibility(0);
-                this.mIcon.lambda$setImageURIAsync$0(pair.first);
+                this.mIcon.lambda$setImageURIAsync$2(pair.first);
             }
             this.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$VH$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ChooserTargetActionsDialogFragment.VH.this.lambda$bind$0(i, view);
+                    this.f$0.lambda$bind$0(i, view);
                 }
             });
         }
@@ -227,11 +224,11 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
 
     private void pinComponent(ComponentName componentName) {
         SharedPreferences pinnedSharedPrefs = ChooserActivity.getPinnedSharedPrefs(getContext());
-        String flattenToString = componentName.flattenToString();
+        String strFlattenToString = componentName.flattenToString();
         if (pinnedSharedPrefs.getBoolean(componentName.flattenToString(), false)) {
-            pinnedSharedPrefs.edit().remove(flattenToString).apply();
+            pinnedSharedPrefs.edit().remove(strFlattenToString).apply();
         } else {
-            pinnedSharedPrefs.edit().putBoolean(flattenToString, true).apply();
+            pinnedSharedPrefs.edit().putBoolean(strFlattenToString, true).apply();
         }
     }
 

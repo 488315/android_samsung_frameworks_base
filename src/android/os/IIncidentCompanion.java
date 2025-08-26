@@ -108,9 +108,9 @@ public interface IIncidentCompanion extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIncidentCompanion.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncidentCompanion)) {
-                return (IIncidentCompanion) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIncidentCompanion.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncidentCompanion)) {
+                return (IIncidentCompanion) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -158,25 +158,25 @@ public interface IIncidentCompanion extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    IIncidentAuthListener asInterface = IIncidentAuthListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    IIncidentAuthListener iIncidentAuthListenerAsInterface = IIncidentAuthListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    authorizeReport(readInt, readString, readString2, readString3, readInt2, asInterface);
+                    authorizeReport(i3, string, string2, string3, i4, iIncidentAuthListenerAsInterface);
                     return true;
                 case 2:
-                    IIncidentAuthListener asInterface2 = IIncidentAuthListener.Stub.asInterface(parcel.readStrongBinder());
+                    IIncidentAuthListener iIncidentAuthListenerAsInterface2 = IIncidentAuthListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    cancelAuthorization(asInterface2);
+                    cancelAuthorization(iIncidentAuthListenerAsInterface2);
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendReportReadyBroadcast(readString4, readString5);
+                    sendReportReadyBroadcast(string4, string5);
                     return true;
                 case 4:
                     List<String> pendingReports = getPendingReports();
@@ -184,46 +184,46 @@ public interface IIncidentCompanion extends IInterface {
                     parcel2.writeStringList(pendingReports);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    approveReport(readString6);
+                    approveReport(string6);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    denyReport(readString7);
+                    denyReport(string7);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> incidentReportList = getIncidentReportList(readString8, readString9);
+                    List<String> incidentReportList = getIncidentReportList(string8, string9);
                     parcel2.writeNoException();
                     parcel2.writeStringList(incidentReportList);
                     return true;
                 case 8:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IncidentManager.IncidentReport incidentReport = getIncidentReport(readString10, readString11, readString12);
+                    IncidentManager.IncidentReport incidentReport = getIncidentReport(string10, string11, string12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(incidentReport, 1);
                     return true;
                 case 9:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteIncidentReports(readString13, readString14, readString15);
+                    deleteIncidentReports(string13, string14, string15);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteAllIncidentReports(readString16);
+                    deleteAllIncidentReports(string16);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -249,155 +249,155 @@ public interface IIncidentCompanion extends IInterface {
 
             @Override // android.os.IIncidentCompanion
             public void authorizeReport(int i, String str, String str2, String str3, int i2, IIncidentAuthListener iIncidentAuthListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iIncidentAuthListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iIncidentAuthListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void cancelAuthorization(IIncidentAuthListener iIncidentAuthListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIncidentAuthListener);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIncidentAuthListener);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void sendReportReadyBroadcast(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public List<String> getPendingReports() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void approveReport(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void denyReport(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public List<String> getIncidentReportList(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IncidentManager.IncidentReport) obtain2.readTypedObject(IncidentManager.IncidentReport.CREATOR);
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IncidentManager.IncidentReport) parcelObtain2.readTypedObject(IncidentManager.IncidentReport.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void deleteIncidentReports(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentCompanion
             public void deleteAllIncidentReports(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.notification.dagger;
 import com.android.systemui.dagger.DaggerReferenceGlobalRootComponent;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationSectionHeadersModule_ProvidesPromoHeaderSubcomponentFactory implements Provider {
     public final Provider builderProvider;
@@ -17,7 +16,7 @@ public final class NotificationSectionHeadersModule_ProvidesPromoHeaderSubcompon
         DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentBuilder sectionHeaderControllerSubcomponentBuilder = (DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentBuilder) provider.get();
         sectionHeaderControllerSubcomponentBuilder.getClass();
         sectionHeaderControllerSubcomponentBuilder.nodeLabel = "promo header";
-        sectionHeaderControllerSubcomponentBuilder.headerText = 17042631;
+        sectionHeaderControllerSubcomponentBuilder.headerText = 17042635;
         sectionHeaderControllerSubcomponentBuilder.clickIntentAction = "android.settings.NOTIFICATION_SETTINGS";
         return (DaggerReferenceGlobalRootComponent.SectionHeaderControllerSubcomponentImpl) sectionHeaderControllerSubcomponentBuilder.build();
     }

@@ -9,7 +9,6 @@ import com.android.wm.shell.sysui.ShellInit;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RootDisplayAreaOrganizer extends DisplayAreaOrganizer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,11 +22,11 @@ public class RootDisplayAreaOrganizer extends DisplayAreaOrganizer {
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.RootDisplayAreaOrganizer$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                RootDisplayAreaOrganizer rootDisplayAreaOrganizer = RootDisplayAreaOrganizer.this;
+                RootDisplayAreaOrganizer rootDisplayAreaOrganizer = this.f$0;
                 int i = RootDisplayAreaOrganizer.$r8$clinit;
-                List registerOrganizer = rootDisplayAreaOrganizer.registerOrganizer(0);
-                for (int size = registerOrganizer.size() - 1; size >= 0; size--) {
-                    rootDisplayAreaOrganizer.onDisplayAreaAppeared(((DisplayAreaAppearedInfo) registerOrganizer.get(size)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) registerOrganizer.get(size)).getLeash());
+                List listRegisterOrganizer = rootDisplayAreaOrganizer.registerOrganizer(0);
+                for (int size = listRegisterOrganizer.size() - 1; size >= 0; size--) {
+                    rootDisplayAreaOrganizer.onDisplayAreaAppeared(((DisplayAreaAppearedInfo) listRegisterOrganizer.get(size)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) listRegisterOrganizer.get(size)).getLeash());
                 }
             }
         }, this);

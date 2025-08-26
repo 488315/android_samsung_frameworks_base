@@ -7,7 +7,7 @@ import java.util.Objects;
 /* loaded from: classes6.dex */
 public final class InlinePresentationStyleUtils {
     public static boolean bundleEquals(Bundle bundle, Bundle bundle2) {
-        boolean equals;
+        boolean zEquals;
         if (bundle == bundle2) {
             return true;
         }
@@ -18,11 +18,11 @@ public final class InlinePresentationStyleUtils {
             Object obj = bundle.get(str);
             Object obj2 = bundle2.get(str);
             if ((obj instanceof Bundle) && (obj2 instanceof Bundle)) {
-                equals = bundleEquals((Bundle) obj, (Bundle) obj2);
+                zEquals = bundleEquals((Bundle) obj, (Bundle) obj2);
             } else {
-                equals = Objects.equals(obj, obj2);
+                zEquals = Objects.equals(obj, obj2);
             }
-            if (!equals) {
+            if (!zEquals) {
                 return false;
             }
         }

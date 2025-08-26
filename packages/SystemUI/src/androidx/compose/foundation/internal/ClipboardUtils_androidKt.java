@@ -29,7 +29,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ClipboardUtils_androidKt {
     public static final AnnotatedString readAnnotatedString(ClipEntry clipEntry) {
@@ -65,99 +64,97 @@ public abstract class ClipboardUtils_androidKt {
                     DecodeHelper decodeHelper = new DecodeHelper(annotation.getValue());
                     MutableSpanStyle mutableSpanStyle = new MutableSpanStyle(0L, 0L, null, null, null, null, null, 0L, null, null, null, 0L, null, null, 16383, null);
                     while (decodeHelper.parcel.dataAvail() > b3) {
-                        byte readByte = decodeHelper.parcel.readByte();
-                        if (readByte == b3) {
+                        byte b6 = decodeHelper.parcel.readByte();
+                        if (b6 == b3) {
                             if (decodeHelper.parcel.dataAvail() < 8) {
                                 break;
                             }
-                            long readLong = decodeHelper.parcel.readLong();
+                            long j = decodeHelper.parcel.readLong();
                             int i6 = ULong.$r8$clinit;
                             Color.Companion companion = Color.Companion;
-                            mutableSpanStyle.color = readLong;
-                        } else if (readByte != b5) {
+                            mutableSpanStyle.color = j;
+                        } else if (b6 != b5) {
                             b2 = b4;
-                            if (readByte == 3) {
+                            if (b6 == 3) {
                                 if (decodeHelper.parcel.dataAvail() < 4) {
                                     b = b3;
                                     break;
                                 }
                                 mutableSpanStyle.fontWeight = new FontWeight(decodeHelper.parcel.readInt());
                                 b4 = b2;
-                            } else if (readByte == 4) {
+                            } else if (b6 == 4) {
                                 if (decodeHelper.parcel.dataAvail() < b3) {
                                     b = b3;
                                     break;
                                 }
-                                byte readByte2 = decodeHelper.parcel.readByte();
-                                if (readByte2 == 0) {
-                                    FontStyle.Companion.getClass();
-                                } else if (readByte2 == b3) {
+                                byte b7 = decodeHelper.parcel.readByte();
+                                if (b7 != 0 && b7 == b3) {
                                     FontStyle.Companion.getClass();
                                     i2 = FontStyle.Italic;
-                                    mutableSpanStyle.fontStyle = FontStyle.m764boximpl(i2);
+                                    mutableSpanStyle.fontStyle = FontStyle.m766boximpl(i2);
                                     b4 = b2;
                                 } else {
                                     FontStyle.Companion.getClass();
+                                    i2 = b2;
+                                    mutableSpanStyle.fontStyle = FontStyle.m766boximpl(i2);
+                                    b4 = b2;
                                 }
-                                i2 = b2;
-                                mutableSpanStyle.fontStyle = FontStyle.m764boximpl(i2);
-                                b4 = b2;
-                            } else if (readByte != 5) {
-                                if (readByte == 6) {
+                            } else if (b6 != 5) {
+                                if (b6 == 6) {
                                     mutableSpanStyle.fontFeatureSettings = decodeHelper.parcel.readString();
-                                } else if (readByte == 7) {
+                                } else if (b6 == 7) {
                                     if (decodeHelper.parcel.dataAvail() < 5) {
                                         b = b3;
                                         break;
                                     }
-                                    mutableSpanStyle.letterSpacing = decodeHelper.m88decodeTextUnitXSAIIZE();
-                                } else if (readByte != 8) {
-                                    if (readByte != 9) {
-                                        if (readByte != 10) {
-                                            if (readByte != 11) {
+                                    mutableSpanStyle.letterSpacing = decodeHelper.m89decodeTextUnitXSAIIZE();
+                                } else if (b6 != 8) {
+                                    if (b6 != 9) {
+                                        if (b6 != 10) {
+                                            if (b6 != 11) {
                                                 b = b3;
-                                                if (readByte == 12) {
+                                                if (b6 == 12) {
                                                     if (decodeHelper.parcel.dataAvail() < 20) {
                                                         break;
                                                     }
-                                                    long readLong2 = decodeHelper.parcel.readLong();
+                                                    long j2 = decodeHelper.parcel.readLong();
                                                     int i7 = ULong.$r8$clinit;
                                                     Color.Companion companion2 = Color.Companion;
                                                     Offset.Companion companion3 = Offset.Companion;
-                                                    mutableSpanStyle.shadow = new Shadow(readLong2, (Float.floatToRawIntBits(decodeHelper.parcel.readFloat()) << 32) | (Float.floatToRawIntBits(decodeHelper.parcel.readFloat()) & 4294967295L), decodeHelper.parcel.readFloat(), null);
+                                                    mutableSpanStyle.shadow = new Shadow(j2, (Float.floatToRawIntBits(decodeHelper.parcel.readFloat()) << 32) | (Float.floatToRawIntBits(decodeHelper.parcel.readFloat()) & 4294967295L), decodeHelper.parcel.readFloat(), null);
                                                     b4 = b2;
                                                     length = length;
                                                     b3 = b;
                                                     b5 = 2;
                                                 }
                                             } else if (decodeHelper.parcel.dataAvail() >= 4) {
-                                                int readInt = decodeHelper.parcel.readInt();
+                                                int i8 = decodeHelper.parcel.readInt();
                                                 TextDecoration.Companion.getClass();
                                                 TextDecoration textDecoration = TextDecoration.LineThrough;
-                                                byte b6 = (textDecoration.mask & readInt) != 0 ? b3 : b2;
+                                                byte b8 = (textDecoration.mask & i8) != 0 ? b3 : b2;
                                                 TextDecoration textDecoration2 = TextDecoration.Underline;
                                                 b = b3;
-                                                byte b7 = (textDecoration2.mask & readInt) != 0 ? b : b2;
-                                                if (b6 != 0 && b7 != 0) {
-                                                    List asList = Arrays.asList(textDecoration, textDecoration2);
-                                                    Integer valueOf = Integer.valueOf(b2);
-                                                    int size = asList.size();
-                                                    for (int i8 = b2; i8 < size; i8++) {
-                                                        valueOf = Integer.valueOf(valueOf.intValue() | ((TextDecoration) asList.get(i8)).mask);
+                                                byte b9 = (textDecoration2.mask & i8) != 0 ? b : b2;
+                                                if (b8 != 0 && b9 != 0) {
+                                                    List listAsList = Arrays.asList(textDecoration, textDecoration2);
+                                                    Integer numValueOf = Integer.valueOf(b2);
+                                                    int size = listAsList.size();
+                                                    for (int i9 = b2; i9 < size; i9++) {
+                                                        numValueOf = Integer.valueOf(numValueOf.intValue() | ((TextDecoration) listAsList.get(i9)).mask);
                                                     }
-                                                    textDecoration = new TextDecoration(valueOf.intValue());
-                                                } else if (b6 == 0) {
-                                                    textDecoration = b7 != 0 ? textDecoration2 : TextDecoration.None;
+                                                    textDecoration = new TextDecoration(numValueOf.intValue());
+                                                } else if (b8 == 0) {
+                                                    textDecoration = b9 != 0 ? textDecoration2 : TextDecoration.None;
                                                 }
                                                 mutableSpanStyle.textDecoration = textDecoration;
                                             }
                                             b4 = b2;
                                             b3 = b;
                                         } else if (decodeHelper.parcel.dataAvail() >= 8) {
-                                            long readLong3 = decodeHelper.parcel.readLong();
-                                            int i9 = ULong.$r8$clinit;
+                                            long j3 = decodeHelper.parcel.readLong();
+                                            int i10 = ULong.$r8$clinit;
                                             Color.Companion companion4 = Color.Companion;
-                                            mutableSpanStyle.background = readLong3;
+                                            mutableSpanStyle.background = j3;
                                         }
                                         b = b3;
                                         break;
@@ -172,7 +169,7 @@ public abstract class ClipboardUtils_androidKt {
                                         b = b3;
                                         break;
                                     }
-                                    mutableSpanStyle.baselineShift = BaselineShift.m791boximpl(decodeHelper.parcel.readFloat());
+                                    mutableSpanStyle.baselineShift = BaselineShift.m793boximpl(decodeHelper.parcel.readFloat());
                                 }
                                 b4 = b2;
                             } else {
@@ -180,34 +177,34 @@ public abstract class ClipboardUtils_androidKt {
                                     b = b3;
                                     break;
                                 }
-                                byte readByte3 = decodeHelper.parcel.readByte();
-                                if (readByte3 == 0) {
+                                byte b10 = decodeHelper.parcel.readByte();
+                                if (b10 == 0) {
                                     FontSynthesis.Companion.getClass();
                                 } else {
-                                    if (readByte3 == b3) {
+                                    if (b10 == b3) {
                                         FontSynthesis.Companion.getClass();
                                         i3 = FontSynthesis.All;
-                                    } else if (readByte3 == 3) {
+                                    } else if (b10 == 3) {
                                         FontSynthesis.Companion.getClass();
                                         i3 = FontSynthesis.Style;
-                                    } else if (readByte3 == b5) {
+                                    } else if (b10 == b5) {
                                         FontSynthesis.Companion.getClass();
                                         i3 = FontSynthesis.Weight;
                                     } else {
                                         FontSynthesis.Companion.getClass();
                                     }
-                                    mutableSpanStyle.fontSynthesis = FontSynthesis.m766boximpl(i3);
+                                    mutableSpanStyle.fontSynthesis = FontSynthesis.m768boximpl(i3);
                                     b4 = b2;
                                 }
                                 i3 = b2;
-                                mutableSpanStyle.fontSynthesis = FontSynthesis.m766boximpl(i3);
+                                mutableSpanStyle.fontSynthesis = FontSynthesis.m768boximpl(i3);
                                 b4 = b2;
                             }
                         } else {
                             if (decodeHelper.parcel.dataAvail() < 5) {
                                 break;
                             }
-                            mutableSpanStyle.fontSize = decodeHelper.m88decodeTextUnitXSAIIZE();
+                            mutableSpanStyle.fontSize = decodeHelper.m89decodeTextUnitXSAIIZE();
                         }
                     }
                     b = b3;
@@ -237,10 +234,13 @@ public abstract class ClipboardUtils_androidKt {
         return new AnnotatedString(charSequence.toString(), arrayList, null, 4, null);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00be  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final ClipEntry toClipEntry(AnnotatedString annotatedString) {
         CharSequence charSequence;
-        byte b;
-        byte b2 = 1;
+        byte b = 1;
         int i = ClipboardUtils.$r8$clinit;
         List list = annotatedString.spanStylesOrNull;
         if (list == null) {
@@ -262,20 +262,20 @@ public abstract class ClipboardUtils_androidKt {
                 SpanStyle spanStyle = (SpanStyle) range.item;
                 encodeHelper.parcel.recycle();
                 encodeHelper.parcel = Parcel.obtain();
-                long mo792getColor0d7_KjU = spanStyle.textForegroundStyle.mo792getColor0d7_KjU();
+                long jMo794getColor0d7_KjU = spanStyle.textForegroundStyle.mo794getColor0d7_KjU();
                 Color.Companion.getClass();
                 long j = Color.Unspecified;
-                if (!ULong.m3427equalsimpl0(mo792getColor0d7_KjU, j)) {
-                    encodeHelper.encode(b2);
-                    encodeHelper.parcel.writeLong(spanStyle.textForegroundStyle.mo792getColor0d7_KjU());
+                if (!ULong.m3447equalsimpl0(jMo794getColor0d7_KjU, j)) {
+                    encodeHelper.encode(b);
+                    encodeHelper.parcel.writeLong(spanStyle.textForegroundStyle.mo794getColor0d7_KjU());
                 }
                 TextUnit.Companion.getClass();
                 long j2 = TextUnit.Unspecified;
                 long j3 = spanStyle.fontSize;
-                byte b3 = b2;
-                if (!TextUnit.m866equalsimpl0(j3, j2)) {
+                byte b2 = b;
+                if (!TextUnit.m868equalsimpl0(j3, j2)) {
                     encodeHelper.encode((byte) 2);
-                    encodeHelper.m89encodeR2X_6o(j3);
+                    encodeHelper.m90encodeR2X_6o(j3);
                 }
                 FontWeight fontWeight = spanStyle.fontWeight;
                 if (fontWeight != null) {
@@ -287,7 +287,7 @@ public abstract class ClipboardUtils_androidKt {
                     encodeHelper.encode((byte) 4);
                     FontStyle.Companion.getClass();
                     int i3 = fontStyle.value;
-                    encodeHelper.encode((i3 != 0 && i3 == FontStyle.Italic) ? b3 : (byte) 0);
+                    encodeHelper.encode((i3 != 0 && i3 == FontStyle.Italic) ? b2 : (byte) 0);
                 }
                 FontSynthesis fontSynthesis = spanStyle.fontSynthesis;
                 if (fontSynthesis != null) {
@@ -295,17 +295,9 @@ public abstract class ClipboardUtils_androidKt {
                     FontSynthesis.Companion.getClass();
                     int i4 = fontSynthesis.value;
                     if (i4 != 0) {
-                        if (i4 == FontSynthesis.All) {
-                            b = b3;
-                        } else if (i4 == FontSynthesis.Weight) {
-                            b = 2;
-                        } else if (i4 == FontSynthesis.Style) {
-                            b = 3;
-                        }
-                        encodeHelper.encode(b);
+                        byte b3 = i4 == FontSynthesis.All ? b2 : i4 == FontSynthesis.Weight ? (byte) 2 : i4 == FontSynthesis.Style ? (byte) 3 : (byte) 0;
+                        encodeHelper.encode(b3);
                     }
-                    b = 0;
-                    encodeHelper.encode(b);
                 }
                 String str = spanStyle.fontFeatureSettings;
                 if (str != null) {
@@ -313,9 +305,9 @@ public abstract class ClipboardUtils_androidKt {
                     encodeHelper.parcel.writeString(str);
                 }
                 long j4 = spanStyle.letterSpacing;
-                if (!TextUnit.m866equalsimpl0(j4, j2)) {
+                if (!TextUnit.m868equalsimpl0(j4, j2)) {
                     encodeHelper.encode((byte) 7);
-                    encodeHelper.m89encodeR2X_6o(j4);
+                    encodeHelper.m90encodeR2X_6o(j4);
                 }
                 BaselineShift baselineShift = spanStyle.baselineShift;
                 if (baselineShift != null) {
@@ -329,7 +321,7 @@ public abstract class ClipboardUtils_androidKt {
                     encodeHelper.encode(textGeometricTransform.skewX);
                 }
                 long j5 = spanStyle.background;
-                if (!ULong.m3427equalsimpl0(j5, j)) {
+                if (!ULong.m3447equalsimpl0(j5, j)) {
                     encodeHelper.encode((byte) 10);
                     encodeHelper.parcel.writeLong(j5);
                 }
@@ -349,7 +341,7 @@ public abstract class ClipboardUtils_androidKt {
                 }
                 spannableString.setSpan(new Annotation("androidx.compose.text.SpanStyle", Base64.encodeToString(encodeHelper.parcel.marshall(), 0)), range.start, range.end, 33);
                 i2++;
-                b2 = b3;
+                b = b2;
             }
             charSequence = spannableString;
         }

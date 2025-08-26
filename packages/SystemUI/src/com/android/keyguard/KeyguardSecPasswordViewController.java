@@ -34,7 +34,9 @@ import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.keyguard.KeyguardFoldController;
 import com.android.systemui.keyguard.KeyguardFoldControllerImpl;
+import com.android.systemui.knox.EdmMonitor;
 import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DevicePostureController;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
@@ -47,7 +49,6 @@ import com.android.systemui.widget.SystemUITextView;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecPasswordViewController extends KeyguardPasswordViewController {
     public boolean mIsShownSIP;
@@ -67,7 +68,7 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
                 ((KeyguardSecPasswordView) keyguardSecPasswordViewController.mView).postDelayed(new Runnable() { // from class: com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSecPasswordViewController keyguardSecPasswordViewController2 = KeyguardSecPasswordViewController.this;
+                        KeyguardSecPasswordViewController keyguardSecPasswordViewController2 = this.f$0;
                         keyguardSecPasswordViewController2.mInputMethodManager.showSoftInput(keyguardSecPasswordViewController2.mPasswordEntry, 1);
                     }
                 }, 100L);
@@ -81,8 +82,8 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
         super(keyguardSecPasswordView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, inputMethodManager, emergencyButtonController, delayableExecutor, resources, falsingCollector, keyguardViewController, devicePostureController, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor, bouncerHapticPlayer, userActivityNotifier);
         this.mOnLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLayoutChangeListener
-            public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                KeyguardSecPasswordViewController keyguardSecPasswordViewController = KeyguardSecPasswordViewController.this;
+            public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) throws Resources.NotFoundException {
+                KeyguardSecPasswordViewController keyguardSecPasswordViewController = this.f$0;
                 if (i4 == i8 && keyguardSecPasswordViewController.mInputMethodManager.semIsInputMethodShown() == keyguardSecPasswordViewController.mIsShownSIP) {
                     return;
                 }
@@ -104,7 +105,7 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
         this.mOnWindowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticLambda2
             @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
             public final void onWindowFocusChanged(boolean z) {
-                KeyguardSecPasswordViewController keyguardSecPasswordViewController = KeyguardSecPasswordViewController.this;
+                KeyguardSecPasswordViewController keyguardSecPasswordViewController = this.f$0;
                 keyguardSecPasswordViewController.getClass();
                 if (z && ((KeyguardFoldControllerImpl) ((KeyguardFoldController) Dependency.sDependency.getDependencyInner(KeyguardFoldController.class))).isBouncerOnFoldOpened()) {
                     keyguardSecPasswordViewController.showKeyboard(0);
@@ -199,14 +200,14 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
             Log.e("KeyguardSecPasswordViewController", "enableHidingPassword() view is null");
             return;
         }
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
         if (z) {
             this.mPasswordEntry.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            systemUIImageView.setImageResource(isWhiteKeyguardWallpaper ? R.drawable.lock_whitebg_password_hide_btn : R.drawable.lock_password_hide_btn);
+            systemUIImageView.setImageResource(zIsWhiteKeyguardWallpaper ? R.drawable.lock_whitebg_password_hide_btn : R.drawable.lock_password_hide_btn);
             systemUIImageView.setStateDescription(getResources().getString(R.string.kg_show_password_accessibility_off));
         } else {
             this.mPasswordEntry.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            systemUIImageView.setImageResource(isWhiteKeyguardWallpaper ? R.drawable.lock_whitebg_password_show_btn : R.drawable.lock_password_show_btn);
+            systemUIImageView.setImageResource(zIsWhiteKeyguardWallpaper ? R.drawable.lock_whitebg_password_show_btn : R.drawable.lock_password_show_btn);
             systemUIImageView.setStateDescription(getResources().getString(R.string.kg_show_password_accessibility_on));
         }
     }
@@ -279,83 +280,41 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
         this.mInputMethodManager.forceHideSoftInput();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x006a, code lost:
-    
-        if (r0.mPasswordVisibilityEnabled != false) goto L30;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x006d  */
     @Override // com.android.keyguard.KeyguardPasswordViewController, com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onResume(int r5) {
-        /*
-            r4 = this;
-            super.onResume(r5)
-            android.view.ViewGroup r0 = r4.mPasswordEntryBoxLayout
-            if (r0 == 0) goto L1b
-            java.lang.String r0 = "background"
-            boolean r0 = com.android.systemui.wallpaper.WallpaperUtils.isWhiteKeyguardWallpaper(r0)
-            android.view.ViewGroup r1 = r4.mPasswordEntryBoxLayout
-            if (r0 == 0) goto L15
-            r0 = 2131233767(0x7f080be7, float:1.808368E38)
-            goto L18
-        L15:
-            r0 = 2131233766(0x7f080be6, float:1.8083679E38)
-        L18:
-            r1.setBackgroundResource(r0)
-        L1b:
-            android.widget.EditText r0 = r4.mPasswordEntry
-            if (r0 == 0) goto L4a
-            android.content.res.Resources r0 = r4.getResources()
-            android.content.res.Configuration r0 = r0.getConfiguration()
-            int r0 = r0.getLayoutDirection()
-            r1 = 1
-            if (r0 != r1) goto L4a
-            android.widget.EditText r0 = r4.mPasswordEntry
-            android.content.res.Resources r1 = r4.getResources()
-            r2 = 2131166841(0x7f070679, float:1.7947939E38)
-            int r1 = r1.getDimensionPixelSize(r2)
-            android.content.res.Resources r2 = r4.getResources()
-            r3 = 2131166843(0x7f07067b, float:1.7947943E38)
-            int r2 = r2.getDimensionPixelSize(r3)
-            r3 = 0
-            r0.setPaddingRelative(r1, r3, r2, r3)
-        L4a:
-            boolean r0 = r4.isHideKeyboardByDefault()
-            r1 = 8
-            if (r0 == 0) goto L57
-            android.widget.ImageView r0 = r4.mSwitchImeButton
-            r0.setVisibility(r1)
-        L57:
-            com.android.systemui.knox.KnoxStateMonitor r0 = r4.mKnoxStateMonitor
-            if (r0 == 0) goto L86
-            com.android.systemui.knox.KnoxStateMonitorImpl r0 = (com.android.systemui.knox.KnoxStateMonitorImpl) r0
-            com.android.systemui.knox.EdmMonitor r0 = r0.mEdmMonitor
-            if (r0 == 0) goto L6d
-            java.lang.String r2 = "EdmMonitor"
-            java.lang.String r3 = "isPasswordVisibilityEnabled "
-            android.util.Log.d(r2, r3)
-            boolean r0 = r0.mPasswordVisibilityEnabled
-            if (r0 == 0) goto L6d
-            goto L86
-        L6d:
-            java.lang.String r0 = "KeyguardSecPasswordViewController"
-            java.lang.String r2 = "<<<--->>> hide button"
-            android.util.Log.d(r0, r2)
-            com.android.systemui.widget.SystemUIImageView r0 = r4.mShowPasswordButton
-            if (r0 == 0) goto L7b
-            r0.setVisibility(r1)
-        L7b:
-            android.widget.EditText r0 = r4.mPasswordEntry
-            if (r0 == 0) goto L86
-            android.text.method.PasswordTransformationMethod r1 = android.text.method.PasswordTransformationMethod.getInstance()
-            r0.setTransformationMethod(r1)
-        L86:
-            r4.showKeyboard(r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecPasswordViewController.onResume(int):void");
+    public final void onResume(int i) {
+        super.onResume(i);
+        if (this.mPasswordEntryBoxLayout != null) {
+            this.mPasswordEntryBoxLayout.setBackgroundResource(WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY) ? R.drawable.keyguard_security_input_box_whitebg : R.drawable.keyguard_security_input_box);
+        }
+        if (this.mPasswordEntry != null && getResources().getConfiguration().getLayoutDirection() == 1) {
+            this.mPasswordEntry.setPaddingRelative(getResources().getDimensionPixelSize(R.dimen.kg_security_input_box_padding_left), 0, getResources().getDimensionPixelSize(R.dimen.kg_security_input_box_padding_right), 0);
+        }
+        if (isHideKeyboardByDefault()) {
+            this.mSwitchImeButton.setVisibility(8);
+        }
+        KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
+        if (knoxStateMonitor != null) {
+            EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) knoxStateMonitor).mEdmMonitor;
+            if (edmMonitor != null) {
+                Log.d("EdmMonitor", "isPasswordVisibilityEnabled ");
+                if (!edmMonitor.mPasswordVisibilityEnabled) {
+                    Log.d("KeyguardSecPasswordViewController", "<<<--->>> hide button");
+                    SystemUIImageView systemUIImageView = this.mShowPasswordButton;
+                    if (systemUIImageView != null) {
+                        systemUIImageView.setVisibility(8);
+                    }
+                    EditText editText = this.mPasswordEntry;
+                    if (editText != null) {
+                        editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                }
+            }
+        }
+        showKeyboard(i);
     }
 
     @Override // com.android.keyguard.KeyguardPasswordViewController, com.android.keyguard.KeyguardSecurityView
@@ -443,7 +402,7 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
-    public void reset$1() {
+    public void reset$1() throws Resources.NotFoundException {
         super.reset$1();
         enableHidingPassword(true);
     }
@@ -470,7 +429,7 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
         ((KeyguardSecPasswordView) this.mView).postDelayed(new Runnable() { // from class: com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSecPasswordViewController.$r8$lambda$rzhao_6IpdekoE8DgYOjovE2sYI(KeyguardSecPasswordViewController.this, i);
+                KeyguardSecPasswordViewController.$r8$lambda$rzhao_6IpdekoE8DgYOjovE2sYI(this.f$0, i);
             }
         }, 100L);
     }
@@ -521,13 +480,13 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
         if (keyguardUpdateMonitor.isDualDisplayPolicyAllowed()) {
             return;
         }
-        int i = 0;
+        int dimensionPixelSize = 0;
         boolean z = keyguardUpdateMonitor.getLockoutBiometricAttemptDeadline() > 0 || SecurityUtils.getStrongAuthPrompt(this.mSelectedUserInteractor.getSelectedUserId()) != 0;
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) systemUITextView.getLayoutParams();
         if (this.mIsShownSIP && z && getResources().getConfiguration().orientation == 2) {
-            i = (getResources().getDimensionPixelSize(R.dimen.kg_message_area_font_size) * 4) + getResources().getDimensionPixelSize(R.dimen.kg_biometric_view_height);
+            dimensionPixelSize = (getResources().getDimensionPixelSize(R.dimen.kg_message_area_font_size) * 4) + getResources().getDimensionPixelSize(R.dimen.kg_biometric_view_height);
         }
-        marginLayoutParams.topMargin = i;
+        marginLayoutParams.topMargin = dimensionPixelSize;
         systemUITextView.setLayoutParams(marginLayoutParams);
     }
 
@@ -540,15 +499,15 @@ public class KeyguardSecPasswordViewController extends KeyguardPasswordViewContr
     }
 
     @Override // com.android.keyguard.KeyguardPasswordViewController
-    public final void updateSwitchImeButton() {
+    public final void updateSwitchImeButton() throws Resources.NotFoundException {
         if (this.mSwitchImeButton == null) {
             Log.e("KeyguardSecPasswordViewController", "mSwitchImeButton is null");
             return;
         }
-        boolean hasMultipleEnabledIMEsOrSubtypes = hasMultipleEnabledIMEsOrSubtypes(this.mInputMethodManager);
+        boolean zHasMultipleEnabledIMEsOrSubtypes = hasMultipleEnabledIMEsOrSubtypes(this.mInputMethodManager);
         boolean z = this.mSwitchImeButton.getVisibility() == 0;
-        boolean z2 = this.mIsShownSIP && hasMultipleEnabledIMEsOrSubtypes;
-        KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("updateSwitchImeButton, wasVisible = ", ", shouldBeVisible = ", ", needImeBtn = ", z, z2), hasMultipleEnabledIMEsOrSubtypes, "KeyguardSecPasswordViewController");
+        boolean z2 = this.mIsShownSIP && zHasMultipleEnabledIMEsOrSubtypes;
+        KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("updateSwitchImeButton, wasVisible = ", ", shouldBeVisible = ", ", needImeBtn = ", z, z2), zHasMultipleEnabledIMEsOrSubtypes, "KeyguardSecPasswordViewController");
         if (z != z2) {
             this.mSwitchImeButton.setVisibility(z2 ? 0 : 8);
         }

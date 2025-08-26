@@ -1,7 +1,6 @@
 package android.app;
 
 import android.Manifest;
-import android.app.ContextImpl;
 import android.app.LoadedApk;
 import android.app.wearsettings.WearSettingsEnums;
 import android.companion.virtual.VirtualDeviceManager;
@@ -53,6 +52,7 @@ import android.os.StrictMode;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.permission.PermissionControllerManager;
 import android.permission.PermissionManager;
 import android.sec.enterprise.EnterpriseDeviceManager;
@@ -359,7 +359,7 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public SharedPreferences getSharedPreferences(String str, int i) {
-        File file;
+        File sharedPreferencesPath;
         if (this.mPackageInfo.getApplicationInfo().targetSdkVersion < 19 && str == null) {
             str = PerfettoProtoLogImpl.NULL_STRING;
         }
@@ -367,13 +367,13 @@ public class ContextImpl extends Context {
             if (this.mSharedPrefsPaths == null) {
                 this.mSharedPrefsPaths = new ArrayMap<>();
             }
-            file = this.mSharedPrefsPaths.get(str);
-            if (file == null) {
-                file = getSharedPreferencesPath(str);
-                this.mSharedPrefsPaths.put(str, file);
+            sharedPreferencesPath = this.mSharedPrefsPaths.get(str);
+            if (sharedPreferencesPath == null) {
+                sharedPreferencesPath = getSharedPreferencesPath(str);
+                this.mSharedPrefsPaths.put(str, sharedPreferencesPath);
             }
         }
-        return getSharedPreferences(file, i);
+        return getSharedPreferences(sharedPreferencesPath, i);
     }
 
     @Override // android.content.Context
@@ -425,9 +425,9 @@ public class ContextImpl extends Context {
         synchronized (ContextImpl.class) {
             ArrayMap<File, SharedPreferencesImpl> sharedPreferencesCacheLocked = getSharedPreferencesCacheLocked();
             for (int i2 = 0; i2 < sharedPreferencesCacheLocked.size(); i2++) {
-                SharedPreferencesImpl valueAt = sharedPreferencesCacheLocked.valueAt(i2);
-                if (valueAt != null) {
-                    arrayList.add(valueAt);
+                SharedPreferencesImpl sharedPreferencesImplValueAt = sharedPreferencesCacheLocked.valueAt(i2);
+                if (sharedPreferencesImplValueAt != null) {
+                    arrayList.add(sharedPreferencesImplValueAt);
                 }
             }
         }
@@ -436,7 +436,7 @@ public class ContextImpl extends Context {
         }
     }
 
-    private static int moveFiles(File file, File file2, final String str) {
+    private static int moveFiles(File file, File file2, final String str) throws IOException, ErrnoException {
         int i = 0;
         for (File file3 : FileUtils.listFilesOrEmpty(file, new FilenameFilter() { // from class: android.app.ContextImpl.1
             @Override // java.io.FilenameFilter
@@ -469,13 +469,13 @@ public class ContextImpl extends Context {
         synchronized (ContextImpl.class) {
             File sharedPreferencesPath = context.getSharedPreferencesPath(str);
             File sharedPreferencesPath2 = getSharedPreferencesPath(str);
-            int moveFiles = moveFiles(sharedPreferencesPath.getParentFile(), sharedPreferencesPath2.getParentFile(), sharedPreferencesPath.getName());
-            if (moveFiles > 0) {
+            int iMoveFiles = moveFiles(sharedPreferencesPath.getParentFile(), sharedPreferencesPath2.getParentFile(), sharedPreferencesPath.getName());
+            if (iMoveFiles > 0) {
                 ArrayMap<File, SharedPreferencesImpl> sharedPreferencesCacheLocked = getSharedPreferencesCacheLocked();
                 sharedPreferencesCacheLocked.remove(sharedPreferencesPath);
                 sharedPreferencesCacheLocked.remove(sharedPreferencesPath2);
             }
-            z = moveFiles != -1;
+            z = iMoveFiles != -1;
         }
         return z;
     }
@@ -485,24 +485,24 @@ public class ContextImpl extends Context {
         boolean z;
         synchronized (ContextImpl.class) {
             File sharedPreferencesPath = getSharedPreferencesPath(str);
-            File makeBackupFile = SharedPreferencesImpl.makeBackupFile(sharedPreferencesPath);
+            File fileMakeBackupFile = SharedPreferencesImpl.makeBackupFile(sharedPreferencesPath);
             getSharedPreferencesCacheLocked().remove(sharedPreferencesPath);
             sharedPreferencesPath.delete();
-            makeBackupFile.delete();
-            z = (sharedPreferencesPath.exists() || makeBackupFile.exists()) ? false : true;
+            fileMakeBackupFile.delete();
+            z = (sharedPreferencesPath.exists() || fileMakeBackupFile.exists()) ? false : true;
         }
         return z;
     }
 
     private File getPreferencesDir() {
-        File ensurePrivateDirExists;
+        File fileEnsurePrivateDirExists;
         synchronized (this.mPreferencesDirLock) {
             if (this.mPreferencesDir == null) {
                 this.mPreferencesDir = new File(getDataDir(), "shared_prefs");
             }
-            ensurePrivateDirExists = ensurePrivateDirExists(this.mPreferencesDir);
+            fileEnsurePrivateDirExists = ensurePrivateDirExists(this.mPreferencesDir);
         }
-        return ensurePrivateDirExists;
+        return fileEnsurePrivateDirExists;
     }
 
     @Override // android.content.Context
@@ -511,20 +511,20 @@ public class ContextImpl extends Context {
     }
 
     @Override // android.content.Context
-    public FileOutputStream openFileOutput(String str, int i) throws FileNotFoundException {
+    public FileOutputStream openFileOutput(String str, int i) throws ErrnoException, FileNotFoundException {
         checkMode(i);
         boolean z = (32768 & i) != 0;
-        File makeFilename = makeFilename(getFilesDir(), str);
+        File fileMakeFilename = makeFilename(getFilesDir(), str);
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(makeFilename, z);
-            setFilePermissionsFromMode(makeFilename.getPath(), i, 0);
+            FileOutputStream fileOutputStream = new FileOutputStream(fileMakeFilename, z);
+            setFilePermissionsFromMode(fileMakeFilename.getPath(), i, 0);
             return fileOutputStream;
         } catch (FileNotFoundException unused) {
-            File parentFile = makeFilename.getParentFile();
+            File parentFile = fileMakeFilename.getParentFile();
             parentFile.mkdir();
             FileUtils.setPermissions(parentFile.getPath(), 505, -1, -1);
-            FileOutputStream fileOutputStream2 = new FileOutputStream(makeFilename, z);
-            setFilePermissionsFromMode(makeFilename.getPath(), i, 0);
+            FileOutputStream fileOutputStream2 = new FileOutputStream(fileMakeFilename, z);
+            setFilePermissionsFromMode(fileMakeFilename.getPath(), i, 0);
             return fileOutputStream2;
         }
     }
@@ -542,7 +542,7 @@ public class ContextImpl extends Context {
         return ensurePrivateDirExists(file, MetricsProto.MetricsEvent.FIELD_PROCESS_RECORD_PROCESS_NAME, UserHandle.getCacheAppGid(Process.myUid()), str);
     }
 
-    private static File ensurePrivateDirExists(File file, int i, int i2, String str) {
+    private static File ensurePrivateDirExists(File file, int i, int i2, String str) throws ErrnoException {
         if (!file.exists()) {
             String absolutePath = file.getAbsolutePath();
             try {
@@ -571,40 +571,40 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public File getFilesDir() {
-        File ensurePrivateDirExists;
+        File fileEnsurePrivateDirExists;
         synchronized (this.mFilesDirLock) {
             if (this.mFilesDir == null) {
                 this.mFilesDir = new File(getDataDir(), "files");
             }
-            ensurePrivateDirExists = ensurePrivateDirExists(this.mFilesDir);
+            fileEnsurePrivateDirExists = ensurePrivateDirExists(this.mFilesDir);
         }
-        return ensurePrivateDirExists;
+        return fileEnsurePrivateDirExists;
     }
 
     @Override // android.content.Context
     public File getCrateDir(String str) {
         Preconditions.checkArgument(FileUtils.isValidExtFilename(str), "invalidated crateId");
-        Path resolve = getDataDir().toPath().resolve("crates");
-        Path normalize = resolve.resolve(str).toAbsolutePath().normalize();
+        Path pathResolve = getDataDir().toPath().resolve("crates");
+        Path pathNormalize = pathResolve.resolve(str).toAbsolutePath().normalize();
         synchronized (this.mCratesDirLock) {
             if (this.mCratesDir == null) {
-                this.mCratesDir = resolve.toFile();
+                this.mCratesDir = pathResolve.toFile();
             }
             ensurePrivateDirExists(this.mCratesDir);
         }
-        return ensurePrivateDirExists(normalize.toFile());
+        return ensurePrivateDirExists(pathNormalize.toFile());
     }
 
     @Override // android.content.Context
     public File getNoBackupFilesDir() {
-        File ensurePrivateDirExists;
+        File fileEnsurePrivateDirExists;
         synchronized (this.mNoBackupFilesDirLock) {
             if (this.mNoBackupFilesDir == null) {
                 this.mNoBackupFilesDir = new File(getDataDir(), "no_backup");
             }
-            ensurePrivateDirExists = ensurePrivateDirExists(this.mNoBackupFilesDir);
+            fileEnsurePrivateDirExists = ensurePrivateDirExists(this.mNoBackupFilesDir);
         }
-        return ensurePrivateDirExists;
+        return fileEnsurePrivateDirExists;
     }
 
     @Override // android.content.Context
@@ -618,15 +618,15 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public File[] getExternalFilesDirs(String str) {
-        File[] ensureExternalDirsExistOrFilter;
+        File[] fileArrEnsureExternalDirsExistOrFilter;
         synchronized (this.mMiscDirsLock) {
-            File[] buildExternalStorageAppFilesDirs = Environment.buildExternalStorageAppFilesDirs(getPackageName());
+            File[] fileArrBuildExternalStorageAppFilesDirs = Environment.buildExternalStorageAppFilesDirs(getPackageName());
             if (str != null) {
-                buildExternalStorageAppFilesDirs = Environment.buildPaths(buildExternalStorageAppFilesDirs, str);
+                fileArrBuildExternalStorageAppFilesDirs = Environment.buildPaths(fileArrBuildExternalStorageAppFilesDirs, str);
             }
-            ensureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(buildExternalStorageAppFilesDirs, true);
+            fileArrEnsureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(fileArrBuildExternalStorageAppFilesDirs, true);
         }
-        return ensureExternalDirsExistOrFilter;
+        return fileArrEnsureExternalDirsExistOrFilter;
     }
 
     @Override // android.content.Context
@@ -640,35 +640,35 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public File[] getObbDirs() {
-        File[] ensureExternalDirsExistOrFilter;
+        File[] fileArrEnsureExternalDirsExistOrFilter;
         synchronized (this.mMiscDirsLock) {
-            ensureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppObbDirs(getPackageName()), true);
+            fileArrEnsureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppObbDirs(getPackageName()), true);
         }
-        return ensureExternalDirsExistOrFilter;
+        return fileArrEnsureExternalDirsExistOrFilter;
     }
 
     @Override // android.content.Context
     public File getCacheDir() {
-        File ensurePrivateCacheDirExists;
+        File fileEnsurePrivateCacheDirExists;
         synchronized (this.mCacheDirLock) {
             if (this.mCacheDir == null) {
                 this.mCacheDir = new File(getDataDir(), "cache");
             }
-            ensurePrivateCacheDirExists = ensurePrivateCacheDirExists(this.mCacheDir, XATTR_INODE_CACHE);
+            fileEnsurePrivateCacheDirExists = ensurePrivateCacheDirExists(this.mCacheDir, XATTR_INODE_CACHE);
         }
-        return ensurePrivateCacheDirExists;
+        return fileEnsurePrivateCacheDirExists;
     }
 
     @Override // android.content.Context
     public File getCodeCacheDir() {
-        File ensurePrivateCacheDirExists;
+        File fileEnsurePrivateCacheDirExists;
         synchronized (this.mCodeCacheDirLock) {
             if (this.mCodeCacheDir == null) {
                 this.mCodeCacheDir = getCodeCacheDirBeforeBind(getDataDir());
             }
-            ensurePrivateCacheDirExists = ensurePrivateCacheDirExists(this.mCodeCacheDir, XATTR_INODE_CODE_CACHE);
+            fileEnsurePrivateCacheDirExists = ensurePrivateCacheDirExists(this.mCodeCacheDir, XATTR_INODE_CODE_CACHE);
         }
-        return ensurePrivateCacheDirExists;
+        return fileEnsurePrivateCacheDirExists;
     }
 
     static File getCodeCacheDirBeforeBind(File file) {
@@ -686,20 +686,20 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public File[] getExternalCacheDirs() {
-        File[] ensureExternalDirsExistOrFilter;
+        File[] fileArrEnsureExternalDirsExistOrFilter;
         synchronized (this.mMiscDirsLock) {
-            ensureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppCacheDirs(getPackageName()), false);
+            fileArrEnsureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppCacheDirs(getPackageName()), false);
         }
-        return ensureExternalDirsExistOrFilter;
+        return fileArrEnsureExternalDirsExistOrFilter;
     }
 
     @Override // android.content.Context
     public File[] getExternalMediaDirs() {
-        File[] ensureExternalDirsExistOrFilter;
+        File[] fileArrEnsureExternalDirsExistOrFilter;
         synchronized (this.mMiscDirsLock) {
-            ensureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppMediaDirs(getPackageName()), true);
+            fileArrEnsureExternalDirsExistOrFilter = ensureExternalDirsExistOrFilter(Environment.buildExternalStorageAppMediaDirs(getPackageName()), true);
         }
-        return ensureExternalDirsExistOrFilter;
+        return fileArrEnsureExternalDirsExistOrFilter;
     }
 
     @Override // android.content.Context
@@ -714,15 +714,15 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public File getSharedPreferencesPath(String str) {
-        File makeFilename;
+        File fileMakeFilename;
         if ("android".equals(getPackageName()) && MultiWindowCoreState.MW_SHARED_PREF_NAME.equals(str)) {
             synchronized (this.mSync) {
                 if (this.mPreferencesDir == null) {
                     this.mPreferencesDir = new File(this.mPackageInfo.getApplicationInfo().dataDir, "shared_prefs");
                 }
-                makeFilename = makeFilename(ensurePrivateDirExists(this.mPreferencesDir), str + ".xml");
+                fileMakeFilename = makeFilename(ensurePrivateDirExists(this.mPreferencesDir), str + ".xml");
             }
-            return makeFilename;
+            return fileMakeFilename;
         }
         return makeFilename(getPreferencesDir(), str + ".xml");
     }
@@ -738,16 +738,16 @@ public class ContextImpl extends Context {
     }
 
     @Override // android.content.Context
-    public SQLiteDatabase openOrCreateDatabase(String str, int i, SQLiteDatabase.CursorFactory cursorFactory, DatabaseErrorHandler databaseErrorHandler) {
+    public SQLiteDatabase openOrCreateDatabase(String str, int i, SQLiteDatabase.CursorFactory cursorFactory, DatabaseErrorHandler databaseErrorHandler) throws ErrnoException {
         checkMode(i);
         File databasePath = getDatabasePath(str);
         int i2 = (i & 8) != 0 ? 805306368 : 268435456;
         if ((i & 16) != 0) {
             i2 |= 16;
         }
-        SQLiteDatabase openDatabase = SQLiteDatabase.openDatabase(databasePath.getPath(), cursorFactory, i2, databaseErrorHandler);
+        SQLiteDatabase sQLiteDatabaseOpenDatabase = SQLiteDatabase.openDatabase(databasePath.getPath(), cursorFactory, i2, databaseErrorHandler);
         setFilePermissionsFromMode(databasePath.getPath(), i, 0);
-        return openDatabase;
+        return sQLiteDatabaseOpenDatabase;
     }
 
     @Override // android.content.Context
@@ -770,7 +770,7 @@ public class ContextImpl extends Context {
     }
 
     @Override // android.content.Context
-    public File getDatabasePath(String str) {
+    public File getDatabasePath(String str) throws ErrnoException {
         if (str.charAt(0) == File.separatorChar) {
             File file = new File(str.substring(0, str.lastIndexOf(File.separatorChar)));
             File file2 = new File(file, str.substring(str.lastIndexOf(File.separatorChar)));
@@ -788,7 +788,7 @@ public class ContextImpl extends Context {
     }
 
     private File getDatabasesDir() {
-        File ensurePrivateDirExists;
+        File fileEnsurePrivateDirExists;
         synchronized (this.mDatabasesDirLock) {
             if (this.mDatabasesDir == null) {
                 if ("android".equals(getPackageName())) {
@@ -797,9 +797,9 @@ public class ContextImpl extends Context {
                     this.mDatabasesDir = new File(getDataDir(), "databases");
                 }
             }
-            ensurePrivateDirExists = ensurePrivateDirExists(this.mDatabasesDir);
+            fileEnsurePrivateDirExists = ensurePrivateDirExists(this.mDatabasesDir);
         }
-        return ensurePrivateDirExists;
+        return fileEnsurePrivateDirExists;
     }
 
     @Override // android.content.Context
@@ -902,71 +902,59 @@ public class ContextImpl extends Context {
         this.mMainThread.getInstrumentation().execStartActivities(getOuterContext(), this.mMainThread.getApplicationThread(), null, null, intentArr, applyLaunchDisplayIfNeeded(bundle));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x0011, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:7:0x0011, code lost:
     
         if (android.app.ActivityOptions.hasLaunchTargetContainer(r0) != false) goto L8;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.os.Bundle applyLaunchDisplayIfNeeded(android.os.Bundle r3) {
-        /*
-            r2 = this;
-            boolean r0 = r2.isAssociatedWithDisplay()
-            if (r0 != 0) goto L7
-            goto L13
-        L7:
-            if (r3 == 0) goto L14
-            android.app.ActivityOptions r0 = android.app.ActivityOptions.fromBundle(r3)
-            boolean r1 = android.app.ActivityOptions.hasLaunchTargetContainer(r0)
-            if (r1 == 0) goto L18
-        L13:
-            return r3
-        L14:
-            android.app.ActivityOptions r0 = android.app.ActivityOptions.makeBasic()
-        L18:
-            int r2 = r2.getAssociatedDisplayId()
-            android.app.ActivityOptions r2 = r0.setLaunchDisplayId(r2)
-            android.os.Bundle r2 = r2.toBundle()
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ContextImpl.applyLaunchDisplayIfNeeded(android.os.Bundle):android.os.Bundle");
+    private Bundle applyLaunchDisplayIfNeeded(Bundle bundle) {
+        ActivityOptions activityOptionsMakeBasic;
+        if (isAssociatedWithDisplay()) {
+            if (bundle != null) {
+                activityOptionsMakeBasic = ActivityOptions.fromBundle(bundle);
+            } else {
+                activityOptionsMakeBasic = ActivityOptions.makeBasic();
+            }
+            return activityOptionsMakeBasic.setLaunchDisplayId(getAssociatedDisplayId()).toBundle();
+        }
+        return bundle;
     }
 
     @Override // android.content.Context
-    public void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3) throws IntentSender.SendIntentException {
+    public void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3) throws IntentSender.SendIntentException, IOException {
         startIntentSender(intentSender, intent, i, i2, i3, null);
     }
 
     @Override // android.content.Context
-    public void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3, Bundle bundle) throws IntentSender.SendIntentException {
-        String resolveTypeIfNeeded;
+    public void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3, Bundle bundle) throws IntentSender.SendIntentException, IOException {
+        String strResolveTypeIfNeeded;
         if (intent != null) {
             try {
                 intent.migrateExtraStreamToClipData(this);
                 intent.prepareToLeaveProcess(this);
-                resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+                strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         } else {
-            resolveTypeIfNeeded = null;
+            strResolveTypeIfNeeded = null;
         }
-        int startActivityIntentSender = ActivityTaskManager.getService().startActivityIntentSender(this.mMainThread.getApplicationThread(), intentSender != null ? intentSender.getTarget() : null, intentSender != null ? intentSender.getWhitelistToken() : null, intent, resolveTypeIfNeeded, null, null, 0, i, i2, bundle);
-        if (startActivityIntentSender == -96) {
+        int iStartActivityIntentSender = ActivityTaskManager.getService().startActivityIntentSender(this.mMainThread.getApplicationThread(), intentSender != null ? intentSender.getTarget() : null, intentSender != null ? intentSender.getWhitelistToken() : null, intent, strResolveTypeIfNeeded, null, null, 0, i, i2, bundle);
+        if (iStartActivityIntentSender == -96) {
             throw new IntentSender.SendIntentException();
         }
-        Instrumentation.checkStartActivityResult(startActivityIntentSender, null);
+        Instrumentation.checkStartActivityResult(iStartActivityIntentSender, null);
     }
 
     @Override // android.content.Context
     public void sendBroadcastMultiplePermissionsAsUser(Intent intent, String[] strArr, UserHandle userHandle) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManagerNative.getDefault().broadcastIntent(this.mMainThread.getApplicationThread(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, -1, null, false, false, userHandle.getIdentifier());
+            ActivityManagerNative.getDefault().broadcastIntent(this.mMainThread.getApplicationThread(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, -1, null, false, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
         }
@@ -975,10 +963,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcast(Intent intent) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -987,11 +975,11 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcast(Intent intent, String str) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str == null ? null : new String[]{str};
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1000,10 +988,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcastMultiplePermissions(Intent intent, String[] strArr) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1012,10 +1000,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcastMultiplePermissions(Intent intent, String[] strArr, Bundle bundle) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1023,10 +1011,10 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public void sendBroadcastAsUserMultiplePermissions(Intent intent, UserHandle userHandle, String[] strArr) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, null, false, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1035,10 +1023,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcastMultiplePermissions(Intent intent, String[] strArr, String[] strArr2, String[] strArr3, BroadcastOptions broadcastOptions) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, strArr2, strArr3, -1, broadcastOptions == null ? null : broadcastOptions.toBundle(), false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, strArr2, strArr3, -1, broadcastOptions == null ? null : broadcastOptions.toBundle(), false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1047,21 +1035,21 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcast(Intent intent, String str, Bundle bundle) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
-        String[] strArr = null;
-        String[] strArr2 = str == null ? null : new String[]{str};
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String[] stringArray = null;
+        String[] strArr = str == null ? null : new String[]{str};
         if (bundle != null) {
-            String[] stringArray = bundle.getStringArray(BroadcastOptions.KEY_REQUIRE_ALL_OF_PERMISSIONS);
-            if (stringArray != null) {
-                strArr2 = stringArray;
+            String[] stringArray2 = bundle.getStringArray(BroadcastOptions.KEY_REQUIRE_ALL_OF_PERMISSIONS);
+            if (stringArray2 != null) {
+                strArr = stringArray2;
             }
-            strArr = bundle.getStringArray(BroadcastOptions.KEY_REQUIRE_NONE_OF_PERMISSIONS);
+            stringArray = bundle.getStringArray(BroadcastOptions.KEY_REQUIRE_NONE_OF_PERMISSIONS);
         }
+        String[] strArr2 = stringArray;
         String[] strArr3 = strArr;
-        String[] strArr4 = strArr2;
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr4, strArr3, null, -1, bundle, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr3, strArr2, null, -1, bundle, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1070,11 +1058,11 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendBroadcast(Intent intent, String str, int i) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str == null ? null : new String[]{str};
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, i, null, false, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, i, null, false, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1088,11 +1076,11 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     public void sendOrderedBroadcast(Intent intent, String str, Bundle bundle) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str == null ? null : new String[]{str};
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, true, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, true, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1127,11 +1115,11 @@ public class ContextImpl extends Context {
         } else {
             iIntentReceiver = null;
         }
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str != null ? new String[]{str} : null;
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, iIntentReceiver, i2, str2, bundle, strArr, null, null, i, bundle2, true, false, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, iIntentReceiver, i2, str2, bundle, strArr, null, null, i, bundle2, true, false, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1139,10 +1127,10 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public void sendBroadcastAsUser(Intent intent, UserHandle userHandle) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, false, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1155,11 +1143,11 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public void sendBroadcastAsUser(Intent intent, UserHandle userHandle, String str, Bundle bundle) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str == null ? null : new String[]{str};
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, false, false, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, -1, bundle, false, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1167,11 +1155,11 @@ public class ContextImpl extends Context {
 
     @Override // android.content.Context
     public void sendBroadcastAsUser(Intent intent, UserHandle userHandle, String str, int i) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         String[] strArr = str == null ? null : new String[]{str};
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, strArr, null, null, i, null, false, false, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, strArr, null, null, i, null, false, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1203,10 +1191,10 @@ public class ContextImpl extends Context {
             iIntentReceiver = new LoadedApk.ReceiverDispatcher(this.mMainThread.getApplicationThread(), broadcastReceiver, getOuterContext(), handler == null ? this.mMainThread.getHandler() : handler, null, false).getIIntentReceiver();
         }
         IIntentReceiver iIntentReceiver2 = iIntentReceiver;
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, iIntentReceiver2, i2, str, bundle2, strArr, null, null, i, bundle, true, false, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, iIntentReceiver2, i2, str, bundle2, strArr, null, null, i, bundle, true, false, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1231,10 +1219,10 @@ public class ContextImpl extends Context {
     @Deprecated
     public void sendStickyBroadcast(Intent intent) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, true, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, true, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1244,10 +1232,10 @@ public class ContextImpl extends Context {
     @Deprecated
     public void sendStickyBroadcast(Intent intent, Bundle bundle) {
         warnIfCallingFromSystemProcess();
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, bundle, false, true, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, bundle, false, true, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1266,10 +1254,10 @@ public class ContextImpl extends Context {
             iIntentReceiver = new LoadedApk.ReceiverDispatcher(this.mMainThread.getApplicationThread(), broadcastReceiver, getOuterContext(), handler == null ? this.mMainThread.getHandler() : handler, null, false).getIIntentReceiver();
         }
         IIntentReceiver iIntentReceiver2 = iIntentReceiver;
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, iIntentReceiver2, i, str, bundle, null, null, null, -1, null, true, true, getUserId());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, iIntentReceiver2, i, str, bundle, null, null, null, -1, null, true, true, getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1278,10 +1266,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     @Deprecated
     public void removeStickyBroadcast(Intent intent) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
-        if (resolveTypeIfNeeded != null) {
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        if (strResolveTypeIfNeeded != null) {
             Intent intent2 = new Intent(intent);
-            intent2.setDataAndType(intent2.getData(), resolveTypeIfNeeded);
+            intent2.setDataAndType(intent2.getData(), strResolveTypeIfNeeded);
             intent = intent2;
         }
         try {
@@ -1295,10 +1283,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     @Deprecated
     public void sendStickyBroadcastAsUser(Intent intent, UserHandle userHandle) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, true, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, null, false, true, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1307,10 +1295,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     @Deprecated
     public void sendStickyBroadcastAsUser(Intent intent, UserHandle userHandle, Bundle bundle) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, bundle, false, true, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, null, -1, null, null, null, null, null, -1, bundle, false, true, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1328,10 +1316,10 @@ public class ContextImpl extends Context {
             iIntentReceiver = new LoadedApk.ReceiverDispatcher(this.mMainThread.getApplicationThread(), broadcastReceiver, getOuterContext(), handler == null ? this.mMainThread.getHandler() : handler, null, false).getIIntentReceiver();
         }
         IIntentReceiver iIntentReceiver2 = iIntentReceiver;
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
         try {
             intent.prepareToLeaveProcess(this);
-            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, resolveTypeIfNeeded, iIntentReceiver2, i, str, bundle, null, null, null, -1, null, true, true, userHandle.getIdentifier());
+            ActivityManager.getService().broadcastIntentWithFeature(this.mMainThread.getApplicationThread(), getAttributionTag(), intent, strResolveTypeIfNeeded, iIntentReceiver2, i, str, bundle, null, null, null, -1, null, true, true, userHandle.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1340,10 +1328,10 @@ public class ContextImpl extends Context {
     @Override // android.content.Context
     @Deprecated
     public void removeStickyBroadcastAsUser(Intent intent, UserHandle userHandle) {
-        String resolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
-        if (resolveTypeIfNeeded != null) {
+        String strResolveTypeIfNeeded = intent.resolveTypeIfNeeded(getContentResolver());
+        if (strResolveTypeIfNeeded != null) {
             Intent intent2 = new Intent(intent);
-            intent2.setDataAndType(intent2.getData(), resolveTypeIfNeeded);
+            intent2.setDataAndType(intent2.getData(), strResolveTypeIfNeeded);
             intent = intent2;
         }
         try {
@@ -1394,98 +1382,37 @@ public class ContextImpl extends Context {
         return registerReceiverInternal(broadcastReceiver, userHandle.getIdentifier(), intentFilter, str, handler, getOuterContext(), i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0085 A[Catch: RemoteException -> 0x0098, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0098, blocks: (B:20:0x004a, B:22:0x0050, B:12:0x0085, B:10:0x0066), top: B:19:0x004a }] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0066 A[Catch: RemoteException -> 0x0098, TryCatch #0 {RemoteException -> 0x0098, blocks: (B:17:0x004a, B:19:0x0050, B:22:0x0085, B:20:0x0066), top: B:27:0x004a }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.Intent registerReceiverInternal(android.content.BroadcastReceiver r12, int r13, android.content.IntentFilter r14, java.lang.String r15, android.os.Handler r16, android.content.Context r17, int r18) {
-        /*
-            r11 = this;
-            if (r12 == 0) goto L46
-            android.app.LoadedApk r0 = r11.mPackageInfo
-            if (r0 == 0) goto L25
-            if (r17 == 0) goto L25
-            if (r16 != 0) goto L12
-            android.app.ActivityThread r0 = r11.mMainThread
-            android.os.Handler r0 = r0.getHandler()
-            r4 = r0
-            goto L14
-        L12:
-            r4 = r16
-        L14:
-            android.app.LoadedApk r1 = r11.mPackageInfo
-            android.app.ActivityThread r0 = r11.mMainThread
-            android.app.Instrumentation r5 = r0.getInstrumentation()
-            r6 = 1
-            r2 = r12
-            r3 = r17
-            android.content.IIntentReceiver r0 = r1.getReceiverDispatcher(r2, r3, r4, r5, r6)
-            goto L47
-        L25:
-            if (r16 != 0) goto L2f
-            android.app.ActivityThread r0 = r11.mMainThread
-            android.os.Handler r0 = r0.getHandler()
-            r5 = r0
-            goto L31
-        L2f:
-            r5 = r16
-        L31:
-            android.app.LoadedApk$ReceiverDispatcher r1 = new android.app.LoadedApk$ReceiverDispatcher
-            android.app.ActivityThread r0 = r11.mMainThread
-            android.app.ActivityThread$ApplicationThread r2 = r0.getApplicationThread()
-            r6 = 0
-            r7 = 1
-            r3 = r12
-            r4 = r17
-            r1.<init>(r2, r3, r4, r5, r6, r7)
-            android.content.IIntentReceiver r0 = r1.getIIntentReceiver()
-            goto L47
-        L46:
-            r0 = 0
-        L47:
-            r6 = r0
-            if (r12 != 0) goto L66
-            boolean r0 = android.app.BroadcastStickyCache.useCache(r14)     // Catch: android.os.RemoteException -> L98
-            if (r0 == 0) goto L66
-            android.app.ActivityThread r12 = r11.mMainThread     // Catch: android.os.RemoteException -> L98
-            android.app.ActivityThread$ApplicationThread r0 = r12.getApplicationThread()     // Catch: android.os.RemoteException -> L98
-            java.lang.String r1 = r11.mBasePackageName     // Catch: android.os.RemoteException -> L98
-            java.lang.String r2 = r11.getAttributionTag()     // Catch: android.os.RemoteException -> L98
-            r5 = r13
-            r3 = r14
-            r4 = r15
-            r6 = r18
-            android.content.Intent r12 = android.app.BroadcastStickyCache.getIntent(r0, r1, r2, r3, r4, r5, r6)     // Catch: android.os.RemoteException -> L98
-            goto L83
-        L66:
-            android.app.IActivityManager r1 = android.app.ActivityManager.getService()     // Catch: android.os.RemoteException -> L98
-            android.app.ActivityThread r0 = r11.mMainThread     // Catch: android.os.RemoteException -> L98
-            android.app.ActivityThread$ApplicationThread r2 = r0.getApplicationThread()     // Catch: android.os.RemoteException -> L98
-            java.lang.String r3 = r11.mBasePackageName     // Catch: android.os.RemoteException -> L98
-            java.lang.String r4 = r11.getAttributionTag()     // Catch: android.os.RemoteException -> L98
-            java.lang.String r5 = android.app.AppOpsManager.toReceiverId(r12)     // Catch: android.os.RemoteException -> L98
-            r9 = r13
-            r7 = r14
-            r8 = r15
-            r10 = r18
-            android.content.Intent r12 = r1.registerReceiverWithFeature(r2, r3, r4, r5, r6, r7, r8, r9, r10)     // Catch: android.os.RemoteException -> L98
-        L83:
-            if (r12 == 0) goto L97
-            java.lang.ClassLoader r13 = r11.getClassLoader()     // Catch: android.os.RemoteException -> L98
-            r12.setExtrasClassLoader(r13)     // Catch: android.os.RemoteException -> L98
-            boolean r13 = android.app.ActivityThread.isProtectedBroadcast(r12)     // Catch: android.os.RemoteException -> L98
-            android.content.AttributionSource r11 = r11.getAttributionSource()     // Catch: android.os.RemoteException -> L98
-            r12.prepareToEnterProcess(r13, r11)     // Catch: android.os.RemoteException -> L98
-        L97:
-            return r12
-        L98:
-            r0 = move-exception
-            r11 = r0
-            java.lang.RuntimeException r11 = r11.rethrowFromSystemServer()
-            throw r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ContextImpl.registerReceiverInternal(android.content.BroadcastReceiver, int, android.content.IntentFilter, java.lang.String, android.os.Handler, android.content.Context, int):android.content.Intent");
+    private Intent registerReceiverInternal(BroadcastReceiver broadcastReceiver, int i, IntentFilter intentFilter, String str, Handler handler, Context context, int i2) {
+        IIntentReceiver iIntentReceiver;
+        Intent intent;
+        if (broadcastReceiver == null) {
+            iIntentReceiver = null;
+        } else if (this.mPackageInfo != null && context != null) {
+            iIntentReceiver = this.mPackageInfo.getReceiverDispatcher(broadcastReceiver, context, handler == null ? this.mMainThread.getHandler() : handler, this.mMainThread.getInstrumentation(), true);
+        } else {
+            iIntentReceiver = new LoadedApk.ReceiverDispatcher(this.mMainThread.getApplicationThread(), broadcastReceiver, context, handler == null ? this.mMainThread.getHandler() : handler, null, true).getIIntentReceiver();
+        }
+        IIntentReceiver iIntentReceiver2 = iIntentReceiver;
+        if (broadcastReceiver == null) {
+            try {
+                if (BroadcastStickyCache.useCache(intentFilter)) {
+                    intent = BroadcastStickyCache.getIntent(this.mMainThread.getApplicationThread(), this.mBasePackageName, getAttributionTag(), intentFilter, str, i, i2);
+                } else {
+                    intent = ActivityManager.getService().registerReceiverWithFeature(this.mMainThread.getApplicationThread(), this.mBasePackageName, getAttributionTag(), AppOpsManager.toReceiverId(broadcastReceiver), iIntentReceiver2, intentFilter, str, i, i2);
+                }
+            } catch (RemoteException e) {
+                throw e.rethrowFromSystemServer();
+            }
+        }
+        if (intent != null) {
+            intent.setExtrasClassLoader(getClassLoader());
+            intent.prepareToEnterProcess(ActivityThread.isProtectedBroadcast(intent), getAttributionSource());
+        }
+        return intent;
     }
 
     @Override // android.content.Context
@@ -1561,22 +1488,22 @@ public class ContextImpl extends Context {
             }
             validateServiceIntent(intent);
             intent.prepareToLeaveProcess(this);
-            ComponentName startService = ActivityManager.getService().startService(this.mMainThread.getApplicationThread(), intent, intent.resolveTypeIfNeeded(getContentResolver()), z, getOpPackageName(), getAttributionTag(), userHandle.getIdentifier());
-            if (startService != null) {
-                if (startService.getPackageName().equals("!")) {
-                    throw new SecurityException("Not allowed to start service " + intent + " without permission " + startService.getClassName());
+            ComponentName componentNameStartService = ActivityManager.getService().startService(this.mMainThread.getApplicationThread(), intent, intent.resolveTypeIfNeeded(getContentResolver()), z, getOpPackageName(), getAttributionTag(), userHandle.getIdentifier());
+            if (componentNameStartService != null) {
+                if (componentNameStartService.getPackageName().equals("!")) {
+                    throw new SecurityException("Not allowed to start service " + intent + " without permission " + componentNameStartService.getClassName());
                 }
-                if (startService.getPackageName().equals("!!")) {
-                    throw new SecurityException("Unable to start service " + intent + ": " + startService.getClassName());
+                if (componentNameStartService.getPackageName().equals("!!")) {
+                    throw new SecurityException("Unable to start service " + intent + ": " + componentNameStartService.getClassName());
                 }
-                if (startService.getPackageName().equals("?")) {
-                    throw ServiceStartNotAllowedException.newInstance(z, "Not allowed to start service " + intent + ": " + startService.getClassName());
+                if (componentNameStartService.getPackageName().equals("?")) {
+                    throw ServiceStartNotAllowedException.newInstance(z, "Not allowed to start service " + intent + ": " + componentNameStartService.getClassName());
                 }
             }
-            if (startService != null && z && startService.getPackageName().equals(getOpPackageName())) {
-                Service.setStartForegroundServiceStackTrace(startService.getClassName(), new StackTrace("Last startServiceCommon() call for this service was made here"));
+            if (componentNameStartService != null && z && componentNameStartService.getPackageName().equals(getOpPackageName())) {
+                Service.setStartForegroundServiceStackTrace(componentNameStartService.getClassName(), new StackTrace("Last startServiceCommon() call for this service was made here"));
             }
-            return startService;
+            return componentNameStartService;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1591,9 +1518,9 @@ public class ContextImpl extends Context {
         try {
             validateServiceIntent(intent);
             intent.prepareToLeaveProcess(this);
-            int stopService = ActivityManager.getService().stopService(this.mMainThread.getApplicationThread(), intent, intent.resolveTypeIfNeeded(getContentResolver()), userHandle.getIdentifier());
-            if (stopService >= 0) {
-                return stopService != 0;
+            int iStopService = ActivityManager.getService().stopService(this.mMainThread.getApplicationThread(), intent, intent.resolveTypeIfNeeded(getContentResolver()), userHandle.getIdentifier());
+            if (iStopService >= 0) {
+                return iStopService != 0;
             }
             throw new SecurityException("Not allowed to stop service " + intent);
         } catch (RemoteException e) {
@@ -1710,9 +1637,9 @@ public class ContextImpl extends Context {
         try {
             long j2 = (getActivityToken() != null || (1 & j) != 0 || (loadedApk = this.mPackageInfo) == null || loadedApk.getApplicationInfo().targetSdkVersion >= 14) ? j : 32 | j;
             intent.prepareToLeaveProcess(this);
-            int bindServiceInstance = ActivityManager.getService().bindServiceInstance(this.mMainThread.getApplicationThread(), getActivityToken(), intent, intent.resolveTypeIfNeeded(getContentResolver()), iServiceConnection, j2, str, getOpPackageName(), userHandle.getIdentifier());
-            if (bindServiceInstance >= 0) {
-                return bindServiceInstance != 0;
+            int iBindServiceInstance = ActivityManager.getService().bindServiceInstance(this.mMainThread.getApplicationThread(), getActivityToken(), intent, intent.resolveTypeIfNeeded(getContentResolver()), iServiceConnection, j2, str, getOpPackageName(), userHandle.getIdentifier());
+            if (iBindServiceInstance >= 0) {
+                return iBindServiceInstance != 0;
             }
             throw new SecurityException("Not allowed to bind to service " + intent);
         } catch (RemoteException e) {
@@ -1727,12 +1654,12 @@ public class ContextImpl extends Context {
         }
         LoadedApk loadedApk = this.mPackageInfo;
         if (loadedApk != null) {
-            IServiceConnection lookupServiceDispatcher = loadedApk.lookupServiceDispatcher(serviceConnection, getOuterContext());
-            if (lookupServiceDispatcher == null) {
+            IServiceConnection iServiceConnectionLookupServiceDispatcher = loadedApk.lookupServiceDispatcher(serviceConnection, getOuterContext());
+            if (iServiceConnectionLookupServiceDispatcher == null) {
                 throw new IllegalArgumentException("ServiceConnection not currently bound: " + serviceConnection);
             }
             try {
-                ActivityManager.getService().updateServiceGroup(lookupServiceDispatcher, i, i2);
+                ActivityManager.getService().updateServiceGroup(iServiceConnectionLookupServiceDispatcher, i, i2);
                 return;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -2268,9 +2195,9 @@ public class ContextImpl extends Context {
 
     private WindowContext createWindowContextInternal(Display display, int i, Bundle bundle) {
         WindowTokenClient windowTokenClient = new WindowTokenClient();
-        ContextImpl createWindowContextBase = createWindowContextBase(windowTokenClient, display.getDisplayId());
-        WindowContext windowContext = new WindowContext(createWindowContextBase, i, bundle);
-        createWindowContextBase.setOuterContext(windowContext);
+        ContextImpl contextImplCreateWindowContextBase = createWindowContextBase(windowTokenClient, display.getDisplayId());
+        WindowContext windowContext = new WindowContext(contextImplCreateWindowContextBase, i, bundle);
+        contextImplCreateWindowContextBase.setOuterContext(windowContext);
         windowTokenClient.attachContext(windowContext);
         windowContext.attachToDisplayArea();
         return windowContext;
@@ -2288,9 +2215,9 @@ public class ContextImpl extends Context {
         ContextImpl contextImpl = new ContextImpl(this, this.mMainThread, this.mPackageInfo, this.mParams, this.mAttributionSource.getAttributionTag(), this.mAttributionSource.getNext(), this.mSplitName, iBinder, this.mUser, this.mFlags, this.mClassLoader, null, this.mDeviceId, this.mIsExplicitDeviceId);
         contextImpl.mForceDisplayOverrideInResources = false;
         contextImpl.mContextType = 3;
-        Resources createWindowContextResources = createWindowContextResources(contextImpl);
-        contextImpl.setResources(createWindowContextResources);
-        contextImpl.setDisplay(ResourcesManager.getInstance().getAdjustedDisplay(i, createWindowContextResources));
+        Resources resourcesCreateWindowContextResources = createWindowContextResources(contextImpl);
+        contextImpl.setResources(resourcesCreateWindowContextResources);
+        contextImpl.setDisplay(ResourcesManager.getInstance().getAdjustedDisplay(i, resourcesCreateWindowContextResources));
         return contextImpl;
     }
 
@@ -2496,7 +2423,7 @@ public class ContextImpl extends Context {
                     next.mExecutor.execute(new Runnable() { // from class: android.app.ContextImpl$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ContextImpl.DeviceIdChangeListenerDelegate.this.mListener.accept(i);
+                            next.mListener.accept(i);
                         }
                     });
                 }
@@ -2532,14 +2459,14 @@ public class ContextImpl extends Context {
     }
 
     @Override // android.content.Context
-    public File getDir(String str, int i) {
+    public File getDir(String str, int i) throws ErrnoException {
         checkMode(i);
-        File makeFilename = makeFilename(getDataDir(), "app_" + str);
-        if (!makeFilename.exists()) {
-            makeFilename.mkdir();
-            setFilePermissionsFromMode(makeFilename.getPath(), i, 505);
+        File fileMakeFilename = makeFilename(getDataDir(), "app_" + str);
+        if (!fileMakeFilename.exists()) {
+            fileMakeFilename.mkdir();
+            setFilePermissionsFromMode(fileMakeFilename.getPath(), i, 505);
         }
-        return makeFilename;
+        return fileMakeFilename;
     }
 
     @Override // android.content.Context
@@ -2599,20 +2526,20 @@ public class ContextImpl extends Context {
     }
 
     static Context createSystemUiContext(ContextImpl contextImpl, int i) {
-        Context context;
+        Context systemUiContext;
         WindowTokenClient windowTokenClient = new WindowTokenClient();
-        ContextImpl createWindowContextBase = contextImpl.createWindowContextBase(windowTokenClient, i);
+        ContextImpl contextImplCreateWindowContextBase = contextImpl.createWindowContextBase(windowTokenClient, i);
         if (com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags.trackSystemUiContextBeforeWms()) {
-            context = new SystemUiContext(createWindowContextBase);
-            createWindowContextBase.setOuterContext(context);
+            systemUiContext = new SystemUiContext(contextImplCreateWindowContextBase);
+            contextImplCreateWindowContextBase.setOuterContext(systemUiContext);
         } else {
-            context = createWindowContextBase;
+            systemUiContext = contextImplCreateWindowContextBase;
         }
-        windowTokenClient.attachContext(context);
+        windowTokenClient.attachContext(systemUiContext);
         WindowTokenClientController.getInstance().attachToDisplayContent(windowTokenClient, i);
-        createWindowContextBase.mContextType = 4;
-        createWindowContextBase.mOwnsToken = true;
-        return context;
+        contextImplCreateWindowContextBase.mContextType = 4;
+        contextImplCreateWindowContextBase.mOwnsToken = true;
+        return systemUiContext;
     }
 
     static ContextImpl createAppContext(ActivityThread activityThread, LoadedApk loadedApk) {
@@ -2666,20 +2593,64 @@ public class ContextImpl extends Context {
         return contextImpl;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0104  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0095  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private ContextImpl(android.app.ContextImpl r4, android.app.ActivityThread r5, android.app.LoadedApk r6, android.content.ContextParams r7, java.lang.String r8, android.content.AttributionSource r9, java.lang.String r10, android.os.IBinder r11, android.os.UserHandle r12, int r13, java.lang.ClassLoader r14, java.lang.String r15, int r16, boolean r17) {
-        /*
-            Method dump skipped, instructions count: 301
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ContextImpl.<init>(android.app.ContextImpl, android.app.ActivityThread, android.app.LoadedApk, android.content.ContextParams, java.lang.String, android.content.AttributionSource, java.lang.String, android.os.IBinder, android.os.UserHandle, int, java.lang.ClassLoader, java.lang.String, int, boolean):void");
+    private ContextImpl(ContextImpl contextImpl, ActivityThread activityThread, LoadedApk loadedApk, ContextParams contextParams, String str, AttributionSource attributionSource, String str2, IBinder iBinder, UserHandle userHandle, int i, ClassLoader classLoader, String str3, int i2, boolean z) {
+        int i3;
+        String strCurrentPackageName;
+        this.mDeviceId = 0;
+        this.mIsExplicitDeviceId = false;
+        this.mSplitName = null;
+        this.mContentCaptureOptions = null;
+        Object[] objArrCreateServiceCache = SystemServiceRegistry.createServiceCache();
+        this.mServiceCache = objArrCreateServiceCache;
+        this.mServiceInitializationStateArray = new int[objArrCreateServiceCache.length];
+        this.mDeviceIdListenerLock = new Object();
+        this.mOuterContext = this;
+        if ((i & 24) == 0) {
+            File dataDirFile = loadedApk.getDataDirFile();
+            if (Objects.equals(dataDirFile, loadedApk.getCredentialProtectedDataDirFile())) {
+                i3 = i | 16;
+            } else {
+                i3 = Objects.equals(dataDirFile, loadedApk.getDeviceProtectedDataDirFile()) ? i | 8 : i;
+            }
+        }
+        this.mMainThread = activityThread;
+        this.mToken = iBinder;
+        this.mFlags = i3;
+        this.mUser = userHandle == null ? Process.myUserHandle() : userHandle;
+        this.mPackageInfo = loadedApk;
+        this.mSplitName = str2;
+        this.mClassLoader = classLoader;
+        this.mResourcesManager = ResourcesManager.getInstance();
+        this.mDeviceId = i2;
+        this.mIsExplicitDeviceId = z;
+        if (contextImpl != null) {
+            this.mBasePackageName = contextImpl.mBasePackageName;
+            strCurrentPackageName = contextImpl.mOpPackageName;
+            setResources(contextImpl.mResources);
+            this.mDisplay = contextImpl.mDisplay;
+            if (!z) {
+                this.mIsExplicitDeviceId = contextImpl.mIsExplicitDeviceId;
+                this.mDeviceId = contextImpl.mDeviceId;
+            }
+            this.mForceDisplayOverrideInResources = contextImpl.mForceDisplayOverrideInResources;
+            this.mIsConfigurationBasedContext = contextImpl.mIsConfigurationBasedContext;
+            this.mContextType = contextImpl.mContextType;
+            this.mContentCaptureOptions = contextImpl.mContentCaptureOptions;
+            this.mAutofillOptions = contextImpl.mAutofillOptions;
+        } else {
+            String str4 = loadedApk.mPackageName;
+            this.mBasePackageName = str4;
+            ApplicationInfo applicationInfo = loadedApk.getApplicationInfo();
+            strCurrentPackageName = (applicationInfo.uid != 1000 || applicationInfo.uid == Process.myUid()) ? str4 : ActivityThread.currentPackageName();
+        }
+        this.mOpPackageName = str3 != null ? str3 : strCurrentPackageName;
+        this.mParams = (ContextParams) Objects.requireNonNull(contextParams);
+        this.mAttributionSource = createAttributionSource(str, attributionSource, contextParams.getRenouncedPermissions(), contextParams.shouldRegisterAttributionSource(), this.mDeviceId);
+        this.mContentResolver = new ApplicationContentResolver(this, activityThread);
     }
 
     private AttributionSource createAttributionSource(String str, AttributionSource attributionSource, Set<String> set, boolean z, int i) {
@@ -2766,7 +2737,7 @@ public class ContextImpl extends Context {
         }
     }
 
-    static void setFilePermissionsFromMode(String str, int i, int i2) {
+    static void setFilePermissionsFromMode(String str, int i, int i2) throws ErrnoException {
         int i3 = i2 | 432;
         if ((i & 1) != 0) {
             i3 = i2 | WearSettingsEnums.DIVIDER_PREFERENCE;
@@ -2786,63 +2757,35 @@ public class ContextImpl extends Context {
         throw new IllegalArgumentException("File " + str + " contains a path separator");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001d, code lost:
-    
-        if (r2.mkdirs() == false) goto L10;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001f A[Catch: Exception -> 0x0029, TryCatch #0 {Exception -> 0x0029, blocks: (B:8:0x0019, B:10:0x001f, B:12:0x0025), top: B:22:0x0019 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.io.File[] ensureExternalDirsExistOrFilter(java.io.File[] r7, boolean r8) {
-        /*
-            r6 = this;
-            java.lang.Class<android.os.storage.StorageManager> r0 = android.os.storage.StorageManager.class
-            java.lang.Object r6 = r6.getSystemService(r0)
-            android.os.storage.StorageManager r6 = (android.os.storage.StorageManager) r6
-            int r0 = r7.length
-            java.io.File[] r0 = new java.io.File[r0]
-            r1 = 0
-        Lc:
-            int r2 = r7.length
-            if (r1 >= r2) goto L56
-            r2 = r7[r1]
-            boolean r3 = r2.exists()
-            if (r3 != 0) goto L46
-            if (r8 == 0) goto L1f
-            boolean r3 = r2.mkdirs()     // Catch: java.lang.Exception -> L29
-            if (r3 != 0) goto L46
-        L1f:
-            boolean r3 = r2.exists()     // Catch: java.lang.Exception -> L29
-            if (r3 != 0) goto L46
-            r6.mkdirs(r2)     // Catch: java.lang.Exception -> L29
-            goto L46
-        L29:
-            r3 = move-exception
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "Failed to ensure "
-            r4.<init>(r5)
-            r4.append(r2)
-            java.lang.String r2 = ": "
-            r4.append(r2)
-            r4.append(r3)
-            java.lang.String r2 = r4.toString()
-            java.lang.String r3 = "ContextImpl"
-            android.util.Log.w(r3, r2)
-            r2 = 0
-        L46:
-            if (r2 == 0) goto L51
-            boolean r3 = r2.canWrite()
-            if (r3 != 0) goto L51
-            r6.fixupAppDir(r2)
-        L51:
-            r0[r1] = r2
-            int r1 = r1 + 1
-            goto Lc
-        L56:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ContextImpl.ensureExternalDirsExistOrFilter(java.io.File[], boolean):java.io.File[]");
+    private File[] ensureExternalDirsExistOrFilter(File[] fileArr, boolean z) {
+        StorageManager storageManager = (StorageManager) getSystemService(StorageManager.class);
+        File[] fileArr2 = new File[fileArr.length];
+        for (int i = 0; i < fileArr.length; i++) {
+            File file = fileArr[i];
+            if (!file.exists()) {
+                if (z) {
+                    try {
+                        if (!file.mkdirs()) {
+                            if (!file.exists()) {
+                                storageManager.mkdirs(file);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.w(TAG, "Failed to ensure " + file + ": " + e);
+                        file = null;
+                    }
+                }
+            }
+            if (file != null && !file.canWrite()) {
+                storageManager.fixupAppDir(file);
+            }
+            fileArr2[i] = file;
+        }
+        return fileArr2;
     }
 
     @Override // android.content.Context

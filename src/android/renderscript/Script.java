@@ -24,16 +24,16 @@ public class Script extends BaseObj {
         }
     }
 
-    protected KernelID createKernelID(int i, int i2, Element element, Element element2) {
+    protected KernelID createKernelID(int i, int i2, Element element, Element element2) throws Throwable {
         KernelID kernelID = this.mKIDs.get(i);
         if (kernelID != null) {
             return kernelID;
         }
-        long nScriptKernelIDCreate = this.mRS.nScriptKernelIDCreate(getID(this.mRS), i, i2);
-        if (nScriptKernelIDCreate == 0) {
+        long jNScriptKernelIDCreate = this.mRS.nScriptKernelIDCreate(getID(this.mRS), i, i2);
+        if (jNScriptKernelIDCreate == 0) {
             throw new RSDriverException("Failed to create KernelID");
         }
-        KernelID kernelID2 = new KernelID(nScriptKernelIDCreate, this.mRS, this, i, i2);
+        KernelID kernelID2 = new KernelID(jNScriptKernelIDCreate, this.mRS, this, i, i2);
         this.mKIDs.put(i, kernelID2);
         return kernelID2;
     }
@@ -49,16 +49,16 @@ public class Script extends BaseObj {
         }
     }
 
-    protected InvokeID createInvokeID(int i) {
+    protected InvokeID createInvokeID(int i) throws Throwable {
         InvokeID invokeID = this.mIIDs.get(i);
         if (invokeID != null) {
             return invokeID;
         }
-        long nScriptInvokeIDCreate = this.mRS.nScriptInvokeIDCreate(getID(this.mRS), i);
-        if (nScriptInvokeIDCreate == 0) {
+        long jNScriptInvokeIDCreate = this.mRS.nScriptInvokeIDCreate(getID(this.mRS), i);
+        if (jNScriptInvokeIDCreate == 0) {
             throw new RSDriverException("Failed to create KernelID");
         }
-        InvokeID invokeID2 = new InvokeID(nScriptInvokeIDCreate, this.mRS, this, i);
+        InvokeID invokeID2 = new InvokeID(jNScriptInvokeIDCreate, this.mRS, this, i);
         this.mIIDs.put(i, invokeID2);
         return invokeID2;
     }
@@ -74,25 +74,25 @@ public class Script extends BaseObj {
         }
     }
 
-    protected FieldID createFieldID(int i, Element element) {
+    protected FieldID createFieldID(int i, Element element) throws Throwable {
         FieldID fieldID = this.mFIDs.get(i);
         if (fieldID != null) {
             return fieldID;
         }
-        long nScriptFieldIDCreate = this.mRS.nScriptFieldIDCreate(getID(this.mRS), i);
-        if (nScriptFieldIDCreate == 0) {
+        long jNScriptFieldIDCreate = this.mRS.nScriptFieldIDCreate(getID(this.mRS), i);
+        if (jNScriptFieldIDCreate == 0) {
             throw new RSDriverException("Failed to create FieldID");
         }
-        FieldID fieldID2 = new FieldID(nScriptFieldIDCreate, this.mRS, this, i);
+        FieldID fieldID2 = new FieldID(jNScriptFieldIDCreate, this.mRS, this, i);
         this.mFIDs.put(i, fieldID2);
         return fieldID2;
     }
 
-    protected void invoke(int i) {
+    protected void invoke(int i) throws Throwable {
         this.mRS.nScriptInvoke(getID(this.mRS), i);
     }
 
-    protected void invoke(int i, FieldPacker fieldPacker) {
+    protected void invoke(int i, FieldPacker fieldPacker) throws Throwable {
         if (fieldPacker != null) {
             this.mRS.nScriptInvokeV(getID(this.mRS), i, fieldPacker.getData());
         } else {
@@ -177,7 +177,7 @@ public class Script extends BaseObj {
         this.guard.open("destroy");
     }
 
-    public void bindAllocation(Allocation allocation, int i) {
+    public void bindAllocation(Allocation allocation, int i) throws Throwable {
         this.mRS.validate();
         this.mRS.validateObject(allocation);
         if (allocation != null) {
@@ -193,7 +193,7 @@ public class Script extends BaseObj {
         this.mRS.nScriptBindAllocation(getID(this.mRS), 0L, i);
     }
 
-    public void setVar(int i, float f) {
+    public void setVar(int i, float f) throws Throwable {
         this.mRS.nScriptSetVarF(getID(this.mRS), i, f);
     }
 
@@ -201,7 +201,7 @@ public class Script extends BaseObj {
         return this.mRS.nScriptGetVarF(getID(this.mRS), i);
     }
 
-    public void setVar(int i, double d) {
+    public void setVar(int i, double d) throws Throwable {
         this.mRS.nScriptSetVarD(getID(this.mRS), i, d);
     }
 
@@ -209,7 +209,7 @@ public class Script extends BaseObj {
         return this.mRS.nScriptGetVarD(getID(this.mRS), i);
     }
 
-    public void setVar(int i, int i2) {
+    public void setVar(int i, int i2) throws Throwable {
         this.mRS.nScriptSetVarI(getID(this.mRS), i, i2);
     }
 
@@ -217,7 +217,7 @@ public class Script extends BaseObj {
         return this.mRS.nScriptGetVarI(getID(this.mRS), i);
     }
 
-    public void setVar(int i, long j) {
+    public void setVar(int i, long j) throws Throwable {
         this.mRS.nScriptSetVarJ(getID(this.mRS), i, j);
     }
 
@@ -225,7 +225,7 @@ public class Script extends BaseObj {
         return this.mRS.nScriptGetVarJ(getID(this.mRS), i);
     }
 
-    public void setVar(int i, boolean z) {
+    public void setVar(int i, boolean z) throws Throwable {
         this.mRS.nScriptSetVarI(getID(this.mRS), i, z ? 1 : 0);
     }
 
@@ -233,13 +233,13 @@ public class Script extends BaseObj {
         return this.mRS.nScriptGetVarI(getID(this.mRS), i) > 0;
     }
 
-    public void setVar(int i, BaseObj baseObj) {
+    public void setVar(int i, BaseObj baseObj) throws Throwable {
         this.mRS.validate();
         this.mRS.validateObject(baseObj);
         this.mRS.nScriptSetVarObj(getID(this.mRS), i, baseObj == null ? 0L : baseObj.getID(this.mRS));
     }
 
-    public void setVar(int i, FieldPacker fieldPacker) {
+    public void setVar(int i, FieldPacker fieldPacker) throws Throwable {
         this.mRS.nScriptSetVarV(getID(this.mRS), i, fieldPacker.getData());
     }
 
@@ -247,11 +247,11 @@ public class Script extends BaseObj {
         this.mRS.nScriptSetVarVE(getID(this.mRS), i, fieldPacker.getData(), element.getID(this.mRS), iArr);
     }
 
-    public void getVarV(int i, FieldPacker fieldPacker) {
+    public void getVarV(int i, FieldPacker fieldPacker) throws Throwable {
         this.mRS.nScriptGetVarV(getID(this.mRS), i, fieldPacker.getData());
     }
 
-    public void setTimeZone(String str) {
+    public void setTimeZone(String str) throws Throwable {
         this.mRS.validate();
         try {
             this.mRS.nScriptSetTimeZone(getID(this.mRS), str.getBytes("UTF-8"));

@@ -19,7 +19,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InternetDialogManager {
     public static SystemUIDialog dialog;
@@ -29,7 +28,6 @@ public final class InternetDialogManager {
     public final DialogTransitionAnimator dialogTransitionAnimator;
     public final ShadeModeInteractor shadeModeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,14 +64,14 @@ public final class InternetDialogManager {
         EmptyCoroutineContext emptyCoroutineContext = EmptyCoroutineContext.INSTANCE;
         CoroutineDispatcher coroutineDispatcher = this.bgDispatcher;
         coroutineDispatcher.getClass();
-        ContextScope CoroutineScope = CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(coroutineDispatcher, emptyCoroutineContext));
-        this.coroutineScope = CoroutineScope;
-        dialog = this.dialogFactory.create(true, z, z2, CoroutineScope).createDialog();
-        DialogTransitionAnimator.Controller dialogTransitionController = expandable != null ? expandable.dialogTransitionController(new DialogCuj(58, ImsProfile.PDN_INTERNET)) : null;
-        if (dialogTransitionController != null) {
+        ContextScope contextScopeCoroutineScope = CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(coroutineDispatcher, emptyCoroutineContext));
+        this.coroutineScope = contextScopeCoroutineScope;
+        dialog = this.dialogFactory.create(true, z, z2, contextScopeCoroutineScope).createDialog();
+        DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable != null ? expandable.dialogTransitionController(new DialogCuj(58, ImsProfile.PDN_INTERNET)) : null;
+        if (controllerDialogTransitionController != null) {
             SystemUIDialog systemUIDialog = dialog;
             systemUIDialog.getClass();
-            this.dialogTransitionAnimator.show(systemUIDialog, dialogTransitionController, true);
+            this.dialogTransitionAnimator.show(systemUIDialog, controllerDialogTransitionController, true);
         } else {
             SystemUIDialog systemUIDialog2 = dialog;
             if (systemUIDialog2 != null) {

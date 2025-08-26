@@ -28,7 +28,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslRoundedCornerShape implements Shape {
     public final CornerSize bottomEnd;
@@ -46,24 +45,24 @@ public final class SeslRoundedCornerShape implements Shape {
     }
 
     /* renamed from: getSmoothCornerPathNodes-1ivO6K8, reason: not valid java name */
-    public static List m3337getSmoothCornerPathNodes1ivO6K8(float f, long j, float f2, long j2) {
+    public static List m3355getSmoothCornerPathNodes1ivO6K8(float f, long j, float f2, long j2) {
         Iterable iterable;
-        if (Size.m418isEmptyimpl(j)) {
+        if (Size.m420isEmptyimpl(j)) {
             iterable = EmptyList.INSTANCE;
         } else {
-            float m416getMinDimensionimpl = Size.m416getMinDimensionimpl(j) / 2.0f;
-            float coerceIn = RangesKt___RangesKt.coerceIn(f, 0.0f, m416getMinDimensionimpl);
-            float f3 = coerceIn / m416getMinDimensionimpl;
-            float min = f3 > 0.5f ? 1.0f - (Math.min(1.0f, (f3 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
-            float min2 = ((double) f3) > 0.6d ? (Math.min(1.0f, (f3 - 0.6f) / 0.3f) * 0.042454004f) + 1 : 1.0f;
-            float m416getMinDimensionimpl2 = ((Size.m416getMinDimensionimpl(j) / 2.0f) / coerceIn) * 100.0f;
-            float f4 = min * 128.19f;
-            float f5 = min2 * 83.62f;
-            List asList = Arrays.asList(new PathNode.LineTo(0.0f, Math.min(m416getMinDimensionimpl2, f4)), new PathNode.CurveTo(0.0f, f5, 4.64f, 67.45f, 13.36f, 51.16f), new PathNode.CurveTo(22.07f, 34.86f, 34.86f, 22.07f, 51.16f, 13.36f), new PathNode.CurveTo(67.45f, 4.64f, f5, 0.0f, Math.min(m416getMinDimensionimpl2, f4), 0.0f), new PathNode.LineTo(Math.min(m416getMinDimensionimpl2, f4), 0.0f));
+            float fM418getMinDimensionimpl = Size.m418getMinDimensionimpl(j) / 2.0f;
+            float fCoerceIn = RangesKt___RangesKt.coerceIn(f, 0.0f, fM418getMinDimensionimpl);
+            float f3 = fCoerceIn / fM418getMinDimensionimpl;
+            float fMin = f3 > 0.5f ? 1.0f - (Math.min(1.0f, (f3 - 0.5f) / 0.4f) * 0.13877845f) : 1.0f;
+            float fMin2 = ((double) f3) > 0.6d ? (Math.min(1.0f, (f3 - 0.6f) / 0.3f) * 0.042454004f) + 1 : 1.0f;
+            float fM418getMinDimensionimpl2 = ((Size.m418getMinDimensionimpl(j) / 2.0f) / fCoerceIn) * 100.0f;
+            float f4 = fMin * 128.19f;
+            float f5 = fMin2 * 83.62f;
+            List listAsList = Arrays.asList(new PathNode.LineTo(0.0f, Math.min(fM418getMinDimensionimpl2, f4)), new PathNode.CurveTo(0.0f, f5, 4.64f, 67.45f, 13.36f, 51.16f), new PathNode.CurveTo(22.07f, 34.86f, 34.86f, 22.07f, 51.16f, 13.36f), new PathNode.CurveTo(67.45f, 4.64f, f5, 0.0f, Math.min(fM418getMinDimensionimpl2, f4), 0.0f), new PathNode.LineTo(Math.min(fM418getMinDimensionimpl2, f4), 0.0f));
             Matrix matrix = new Matrix();
-            float f6 = coerceIn / 100.0f;
+            float f6 = fCoerceIn / 100.0f;
             matrix.setScale(f6, f6);
-            List list = asList;
+            List list = listAsList;
             ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
             Iterator it = list.iterator();
             while (it.hasNext()) {
@@ -78,7 +77,7 @@ public final class SeslRoundedCornerShape implements Shape {
         float f8 = f / 2.0f;
         matrix2.postTranslate(f8, f8);
         Matrix matrix3 = new Matrix();
-        matrix3.setTranslate(Offset.m398getXimpl(j2), Offset.m399getYimpl(j2));
+        matrix3.setTranslate(Offset.m400getXimpl(j2), Offset.m401getYimpl(j2));
         Iterable iterable2 = iterable;
         ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable2, 10));
         Iterator it2 = iterable2.iterator();
@@ -98,65 +97,63 @@ public final class SeslRoundedCornerShape implements Shape {
 
     @Override // androidx.compose.ui.graphics.Shape
     /* renamed from: createOutline-Pq9zytI */
-    public final Outline mo40createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
-        List singletonList;
+    public final Outline mo41createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
+        List listSingletonList;
         float f;
-        List singletonList2;
-        AndroidPath path;
-        Path path2;
-        float mo184toPxTmRCtEA = this.topStart.mo184toPxTmRCtEA(density, j);
+        List listSingletonList2;
+        float fMo185toPxTmRCtEA = this.topStart.mo185toPxTmRCtEA(density, j);
         float f2 = 2;
-        float min = Math.min(Size.m417getWidthimpl(j), Size.m415getHeightimpl(j)) / f2;
-        if (mo184toPxTmRCtEA > min) {
-            mo184toPxTmRCtEA = min;
+        float fMin = Math.min(Size.m419getWidthimpl(j), Size.m417getHeightimpl(j)) / f2;
+        if (fMo185toPxTmRCtEA > fMin) {
+            fMo185toPxTmRCtEA = fMin;
         }
-        float mo184toPxTmRCtEA2 = this.topEnd.mo184toPxTmRCtEA(density, j);
-        float min2 = Math.min(Size.m417getWidthimpl(j), Size.m415getHeightimpl(j)) / f2;
-        if (mo184toPxTmRCtEA2 <= min2) {
-            min2 = mo184toPxTmRCtEA2;
+        float fMo185toPxTmRCtEA2 = this.topEnd.mo185toPxTmRCtEA(density, j);
+        float fMin2 = Math.min(Size.m419getWidthimpl(j), Size.m417getHeightimpl(j)) / f2;
+        if (fMo185toPxTmRCtEA2 <= fMin2) {
+            fMin2 = fMo185toPxTmRCtEA2;
         }
-        float mo184toPxTmRCtEA3 = this.bottomStart.mo184toPxTmRCtEA(density, j);
-        float min3 = Math.min(Size.m417getWidthimpl(j), Size.m415getHeightimpl(j)) / f2;
-        if (mo184toPxTmRCtEA3 <= min3) {
-            min3 = mo184toPxTmRCtEA3;
+        float fMo185toPxTmRCtEA3 = this.bottomStart.mo185toPxTmRCtEA(density, j);
+        float fMin3 = Math.min(Size.m419getWidthimpl(j), Size.m417getHeightimpl(j)) / f2;
+        if (fMo185toPxTmRCtEA3 <= fMin3) {
+            fMin3 = fMo185toPxTmRCtEA3;
         }
-        float mo184toPxTmRCtEA4 = this.bottomEnd.mo184toPxTmRCtEA(density, j);
-        float min4 = Math.min(Size.m417getWidthimpl(j), Size.m415getHeightimpl(j)) / f2;
-        float f3 = mo184toPxTmRCtEA4 > min4 ? min4 : mo184toPxTmRCtEA4;
-        float m417getWidthimpl = Size.m417getWidthimpl(j);
-        float m415getHeightimpl = Size.m415getHeightimpl(j);
+        float fMo185toPxTmRCtEA4 = this.bottomEnd.mo185toPxTmRCtEA(density, j);
+        float fMin4 = Math.min(Size.m419getWidthimpl(j), Size.m417getHeightimpl(j)) / f2;
+        float f3 = fMo185toPxTmRCtEA4 > fMin4 ? fMin4 : fMo185toPxTmRCtEA4;
+        float fM419getWidthimpl = Size.m419getWidthimpl(j);
+        float fM417getHeightimpl = Size.m417getHeightimpl(j);
         List[] listArr = new List[9];
-        listArr[0] = Collections.singletonList(new PathNode.MoveTo(0.0f, mo184toPxTmRCtEA));
-        if (mo184toPxTmRCtEA > 0.0f) {
+        listArr[0] = Collections.singletonList(new PathNode.MoveTo(0.0f, fMo185toPxTmRCtEA));
+        if (fMo185toPxTmRCtEA > 0.0f) {
             Offset.Companion.getClass();
-            singletonList = m3337getSmoothCornerPathNodes1ivO6K8(mo184toPxTmRCtEA, j, 0.0f, 0L);
+            listSingletonList = m3355getSmoothCornerPathNodes1ivO6K8(fMo185toPxTmRCtEA, j, 0.0f, 0L);
         } else {
-            singletonList = Collections.singletonList(new PathNode.LineTo(0.0f, 0.0f));
+            listSingletonList = Collections.singletonList(new PathNode.LineTo(0.0f, 0.0f));
         }
-        listArr[1] = singletonList;
-        float f4 = m417getWidthimpl - min2;
+        listArr[1] = listSingletonList;
+        float f4 = fM419getWidthimpl - fMin2;
         listArr[2] = Collections.singletonList(new PathNode.LineTo(f4, 0.0f));
-        listArr[3] = min2 > 0.0f ? m3337getSmoothCornerPathNodes1ivO6K8(min2, j, 90.0f, OffsetKt.Offset(f4, 0.0f)) : Collections.singletonList(new PathNode.LineTo(m417getWidthimpl, 0.0f));
-        float f5 = m415getHeightimpl - f3;
-        listArr[4] = Collections.singletonList(new PathNode.LineTo(m417getWidthimpl, f5));
-        listArr[5] = f3 > 0.0f ? m3337getSmoothCornerPathNodes1ivO6K8(f3, j, 180.0f, OffsetKt.Offset(m417getWidthimpl - f3, f5)) : Collections.singletonList(new PathNode.LineTo(m417getWidthimpl, m415getHeightimpl));
-        listArr[6] = Collections.singletonList(new PathNode.LineTo(min3, m415getHeightimpl));
-        if (min3 > 0.0f) {
-            f = min3;
-            singletonList2 = m3337getSmoothCornerPathNodes1ivO6K8(f, j, 270.0f, OffsetKt.Offset(0.0f, m415getHeightimpl - min3));
+        listArr[3] = fMin2 > 0.0f ? m3355getSmoothCornerPathNodes1ivO6K8(fMin2, j, 90.0f, OffsetKt.Offset(f4, 0.0f)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, 0.0f));
+        float f5 = fM417getHeightimpl - f3;
+        listArr[4] = Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, f5));
+        listArr[5] = f3 > 0.0f ? m3355getSmoothCornerPathNodes1ivO6K8(f3, j, 180.0f, OffsetKt.Offset(fM419getWidthimpl - f3, f5)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, fM417getHeightimpl));
+        listArr[6] = Collections.singletonList(new PathNode.LineTo(fMin3, fM417getHeightimpl));
+        if (fMin3 > 0.0f) {
+            f = fMin3;
+            listSingletonList2 = m3355getSmoothCornerPathNodes1ivO6K8(f, j, 270.0f, OffsetKt.Offset(0.0f, fM417getHeightimpl - fMin3));
         } else {
-            f = min3;
-            singletonList2 = Collections.singletonList(new PathNode.LineTo(0.0f, m415getHeightimpl));
+            f = fMin3;
+            listSingletonList2 = Collections.singletonList(new PathNode.LineTo(0.0f, fM417getHeightimpl));
         }
-        listArr[7] = singletonList2;
+        listArr[7] = listSingletonList2;
         PathNode.LineTo lineTo = new PathNode.LineTo(0.0f, f);
         PathNode.Close close = PathNode.Close.INSTANCE;
         listArr[8] = Arrays.asList(lineTo, close);
-        path = PathParserKt.toPath(CollectionsKt__IterablesKt.flatten(Arrays.asList(listArr)), AndroidPath_androidKt.Path());
+        AndroidPath path = PathParserKt.toPath(CollectionsKt__IterablesKt.flatten(Arrays.asList(listArr)), AndroidPath_androidKt.Path());
         if (this.inverse) {
-            path2 = PathParserKt.toPath(Arrays.asList(new PathNode.MoveTo(0.0f, 0.0f), new PathNode.LineTo(m417getWidthimpl, 0.0f), new PathNode.LineTo(m417getWidthimpl, m415getHeightimpl), new PathNode.LineTo(0.0f, m415getHeightimpl), new PathNode.LineTo(0.0f, 0.0f), close), AndroidPath_androidKt.Path());
+            Path path2 = PathParserKt.toPath(Arrays.asList(new PathNode.MoveTo(0.0f, 0.0f), new PathNode.LineTo(fM419getWidthimpl, 0.0f), new PathNode.LineTo(fM419getWidthimpl, fM417getHeightimpl), new PathNode.LineTo(0.0f, fM417getHeightimpl), new PathNode.LineTo(0.0f, 0.0f), close), AndroidPath_androidKt.Path());
             PathOperation.Companion.getClass();
-            path.m443opN5in7k0(path2, path, 0);
+            path.m445opN5in7k0(path2, path, 0);
         }
         return new Outline.Generic(path);
     }

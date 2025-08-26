@@ -1,13 +1,18 @@
 package androidx.core.view;
 
 import android.view.View;
+import android.view.ViewGroup;
+import java.util.Iterator;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.sequences.Sequence;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ViewKt$allViews$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ View $this_allViews;
@@ -32,81 +37,65 @@ final class ViewKt$allViews$1 extends RestrictedSuspendLambda implements Functio
         return ((ViewKt$allViews$1) create((SequenceScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0057, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0057, code lost:
     
         if (r4 == r0) goto L20;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0059, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0032, code lost:
-    
-        if (r1.yield(r5, r4) == r0) goto L20;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r5) {
-        /*
-            r4 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r4.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L20
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L5a
-        L10:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L18:
-            java.lang.Object r1 = r4.L$0
-            kotlin.sequences.SequenceScope r1 = (kotlin.sequences.SequenceScope) r1
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L35
-        L20:
-            kotlin.ResultKt.throwOnFailure(r5)
-            java.lang.Object r5 = r4.L$0
-            r1 = r5
-            kotlin.sequences.SequenceScope r1 = (kotlin.sequences.SequenceScope) r1
-            android.view.View r5 = r4.$this_allViews
-            r4.L$0 = r1
-            r4.label = r3
-            kotlin.coroutines.intrinsics.CoroutineSingletons r5 = r1.yield(r5, r4)
-            if (r5 != r0) goto L35
-            goto L59
-        L35:
-            android.view.View r5 = r4.$this_allViews
-            boolean r3 = r5 instanceof android.view.ViewGroup
-            if (r3 == 0) goto L5a
-            android.view.ViewGroup r5 = (android.view.ViewGroup) r5
-            androidx.core.view.ViewGroupKt$special$$inlined$Sequence$1 r3 = new androidx.core.view.ViewGroupKt$special$$inlined$Sequence$1
-            r3.<init>()
-            r5 = 0
-            r4.L$0 = r5
-            r4.label = r2
-            r1.getClass()
-            java.util.Iterator r5 = r3.iterator()
-            java.lang.Object r4 = r1.yieldAll(r5, r4)
-            if (r4 != r0) goto L55
-            goto L57
-        L55:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-        L57:
-            if (r4 != r0) goto L5a
-        L59:
-            return r0
-        L5a:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.core.view.ViewKt$allViews$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        SequenceScope sequenceScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            sequenceScope = (SequenceScope) this.L$0;
+            View view = this.$this_allViews;
+            this.L$0 = sequenceScope;
+            this.label = 1;
+            if (sequenceScope.yield(view, this) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        sequenceScope = (SequenceScope) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        View view2 = this.$this_allViews;
+        if (view2 instanceof ViewGroup) {
+            final ViewGroup viewGroup = (ViewGroup) view2;
+            Sequence sequence = new Sequence() { // from class: androidx.core.view.ViewGroupKt$special$$inlined$Sequence$1
+                @Override // kotlin.sequences.Sequence
+                public final Iterator iterator() {
+                    return new TreeIterator(new ViewGroupKt$children$1(viewGroup).iterator(), new Function1() { // from class: androidx.core.view.ViewGroupKt$descendants$1$1
+                        @Override // kotlin.jvm.functions.Function1
+                        /* renamed from: invoke */
+                        public final Object mo781invoke(Object obj2) {
+                            View view3 = (View) obj2;
+                            ViewGroup viewGroup2 = view3 instanceof ViewGroup ? (ViewGroup) view3 : null;
+                            if (viewGroup2 != null) {
+                                return new ViewGroupKt$children$1(viewGroup2).iterator();
+                            }
+                            return null;
+                        }
+                    });
+                }
+            };
+            this.L$0 = null;
+            this.label = 2;
+            sequenceScope.getClass();
+            Object objYieldAll = sequenceScope.yieldAll(sequence.iterator(), this);
+            if (objYieldAll != coroutineSingletons) {
+                objYieldAll = Unit.INSTANCE;
+            }
+        }
+        return Unit.INSTANCE;
     }
 }

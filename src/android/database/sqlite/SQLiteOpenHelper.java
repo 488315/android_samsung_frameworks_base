@@ -5,6 +5,7 @@ import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.FileUtils;
+import android.system.ErrnoException;
 import android.util.Log;
 import java.io.File;
 import java.util.Objects;
@@ -218,83 +219,83 @@ public abstract class SQLiteOpenHelper implements AutoCloseable {
         if (this.mIsInitializing) {
             throw new IllegalStateException("getDatabase called recursively");
         }
-        SQLiteDatabase sQLiteDatabase2 = this.mDatabase;
+        SQLiteDatabase sQLiteDatabaseOpenDatabase = this.mDatabase;
         try {
             synchronized (this.mLock) {
                 this.mIsInitializing = true;
-                if (sQLiteDatabase2 != null) {
-                    if (z && sQLiteDatabase2.isReadOnly()) {
-                        sQLiteDatabase2.reopenReadWrite();
+                if (sQLiteDatabaseOpenDatabase != null) {
+                    if (z && sQLiteDatabaseOpenDatabase.isReadOnly()) {
+                        sQLiteDatabaseOpenDatabase.reopenReadWrite();
                     }
                 } else {
                     String str = this.mName;
                     if (str == null) {
-                        sQLiteDatabase2 = SQLiteDatabase.createInMemory(this.mOpenParamsBuilder.build());
+                        sQLiteDatabaseOpenDatabase = SQLiteDatabase.createInMemory(this.mOpenParamsBuilder.build());
                     } else {
                         File databasePath = this.mContext.getDatabasePath(str);
-                        SQLiteDatabase.OpenParams build = this.mOpenParamsBuilder.build();
+                        SQLiteDatabase.OpenParams openParamsBuild = this.mOpenParamsBuilder.build();
                         try {
-                            sQLiteDatabase2 = SQLiteDatabase.openDatabase(databasePath.getPath(), build, this.mContext);
+                            sQLiteDatabaseOpenDatabase = SQLiteDatabase.openDatabase(databasePath.getPath(), openParamsBuild, this.mContext);
                             setFilePermissionsForDb(databasePath.getPath());
                         } catch (SQLException e) {
                             if (z) {
                                 throw e;
                             }
                             Log.e(TAG, "Couldn't open database for writing (will try read-only):", e);
-                            sQLiteDatabase2 = SQLiteDatabase.openDatabase(databasePath.getPath(), build.toBuilder().addOpenFlags(1).build(), this.mContext);
+                            sQLiteDatabaseOpenDatabase = SQLiteDatabase.openDatabase(databasePath.getPath(), openParamsBuild.toBuilder().addOpenFlags(1).build(), this.mContext);
                         }
                     }
                 }
-                onConfigure(sQLiteDatabase2);
-                int version = sQLiteDatabase2.getVersion();
+                onConfigure(sQLiteDatabaseOpenDatabase);
+                int version = sQLiteDatabaseOpenDatabase.getVersion();
                 if (version != this.mNewVersion) {
-                    if (sQLiteDatabase2.isReadOnly()) {
-                        throw new SQLiteException("Can't upgrade read-only database from version " + sQLiteDatabase2.getVersion() + " to " + this.mNewVersion + ": " + this.mName);
+                    if (sQLiteDatabaseOpenDatabase.isReadOnly()) {
+                        throw new SQLiteException("Can't upgrade read-only database from version " + sQLiteDatabaseOpenDatabase.getVersion() + " to " + this.mNewVersion + ": " + this.mName);
                     }
                     if (version > 0 && version < this.mMinimumSupportedVersion) {
-                        File file = new File(sQLiteDatabase2.getPath());
-                        onBeforeDelete(sQLiteDatabase2);
-                        sQLiteDatabase2.close();
+                        File file = new File(sQLiteDatabaseOpenDatabase.getPath());
+                        onBeforeDelete(sQLiteDatabaseOpenDatabase);
+                        sQLiteDatabaseOpenDatabase.close();
                         if (SQLiteDatabase.deleteDatabase(file)) {
                             this.mIsInitializing = false;
                             return getDatabaseLocked(z);
                         }
                         throw new IllegalStateException("Unable to delete obsolete database " + this.mName + " with version " + version);
                     }
-                    sQLiteDatabase2.beginTransaction();
+                    sQLiteDatabaseOpenDatabase.beginTransaction();
                     try {
                         if (version == 0) {
-                            onCreate(sQLiteDatabase2);
+                            onCreate(sQLiteDatabaseOpenDatabase);
                         } else if (version > this.mNewVersion) {
                             Log.i(TAG, "DB version downgrading from " + version + " to " + this.mNewVersion);
-                            onDowngrade(sQLiteDatabase2, version, this.mNewVersion);
+                            onDowngrade(sQLiteDatabaseOpenDatabase, version, this.mNewVersion);
                         } else {
                             Log.i(TAG, "DB version upgrading from " + version + " to " + this.mNewVersion);
-                            onUpgrade(sQLiteDatabase2, version, this.mNewVersion);
+                            onUpgrade(sQLiteDatabaseOpenDatabase, version, this.mNewVersion);
                         }
-                        sQLiteDatabase2.setVersion(this.mNewVersion);
-                        sQLiteDatabase2.setTransactionSuccessful();
-                        sQLiteDatabase2.endTransaction();
+                        sQLiteDatabaseOpenDatabase.setVersion(this.mNewVersion);
+                        sQLiteDatabaseOpenDatabase.setTransactionSuccessful();
+                        sQLiteDatabaseOpenDatabase.endTransaction();
                     } catch (Throwable th) {
-                        sQLiteDatabase2.endTransaction();
+                        sQLiteDatabaseOpenDatabase.endTransaction();
                         throw th;
                     }
                 }
-                sQLiteDatabase2.setReserveSpace();
-                onOpen(sQLiteDatabase2);
-                this.mDatabase = sQLiteDatabase2;
+                sQLiteDatabaseOpenDatabase.setReserveSpace();
+                onOpen(sQLiteDatabaseOpenDatabase);
+                this.mDatabase = sQLiteDatabaseOpenDatabase;
                 this.mIsInitializing = false;
-                return sQLiteDatabase2;
+                return sQLiteDatabaseOpenDatabase;
             }
         } finally {
             this.mIsInitializing = false;
-            if (sQLiteDatabase2 != null && sQLiteDatabase2 != this.mDatabase) {
-                sQLiteDatabase2.close();
+            if (sQLiteDatabaseOpenDatabase != null && sQLiteDatabaseOpenDatabase != this.mDatabase) {
+                sQLiteDatabaseOpenDatabase.close();
             }
         }
     }
 
-    private static void setFilePermissionsForDb(String str) {
+    private static void setFilePermissionsForDb(String str) throws ErrnoException {
         FileUtils.setPermissions(str, 432, -1, -1);
     }
 

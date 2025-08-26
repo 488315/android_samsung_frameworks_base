@@ -1,6 +1,7 @@
 package com.android.wm.shell.transition;
 
 import android.R;
+import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
 import android.app.AppGlobals;
 import android.app.IApplicationThread;
@@ -21,6 +22,7 @@ import android.tracing.perfetto.TracingContext;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Slog;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
@@ -31,6 +33,7 @@ import android.window.TransitionFilter;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowAnimationState;
+import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import com.android.internal.jank.InteractionJankMonitor;
@@ -49,6 +52,8 @@ import com.android.wm.shell.common.RemoteCallable;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.desktopmode.DesktopModeTransitionTypes;
+import com.android.wm.shell.desktopmode.DesktopWallpaperActivity;
+import com.android.wm.shell.keyguard.KeyguardTransitionHandler;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.FocusTransitionListener;
 import com.android.wm.shell.shared.IShellTransitions;
@@ -64,6 +69,7 @@ import com.android.wm.shell.transition.change.ChangeTransitionProvider;
 import com.android.wm.shell.transition.tracing.PerfettoTransitionTracer;
 import com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda4;
 import com.samsung.android.knox.EnterpriseContainerCallback;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import com.sec.ims.volte2.data.VolteConstants;
@@ -71,8 +77,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
+import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCommandActionHandler {
     public static final boolean DEBUG_START_TRANSITION;
@@ -105,7 +111,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
     public float mTransitionAnimationScaleSetting;
     public final PerfettoTransitionTracer mTransitionTracer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActiveTransition {
         public boolean mAborted;
         public boolean mApplyStartTransactionOnMerged;
@@ -145,16 +150,16 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
 
         public final String toString() {
             TransitionInfo transitionInfo = this.mInfo;
-            String str = "";
+            String timeoutInfo = "";
             if (transitionInfo == null || transitionInfo.getDebugId() < 0) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(this.mToken.toString());
                 sb.append("@");
                 sb.append(getTrack());
                 if (CoreRune.MW_SHELL_TRANSITION_TIMEOUT && isTimeout()) {
-                    str = getTimeoutInfo();
+                    timeoutInfo = getTimeoutInfo();
                 }
-                sb.append(str);
+                sb.append(timeoutInfo);
                 return sb.toString();
             }
             StringBuilder sb2 = new StringBuilder("(#");
@@ -164,14 +169,13 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
             sb2.append("@");
             sb2.append(getTrack());
             if (CoreRune.MW_SHELL_TRANSITION_TIMEOUT && isTimeout()) {
-                str = getTimeoutInfo();
+                timeoutInfo = getTimeoutInfo();
             }
-            sb2.append(str);
+            sb2.append(timeoutInfo);
             return sb2.toString();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IShellTransitionsImpl extends IShellTransitions.Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public Transitions mTransitions;
@@ -194,7 +198,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettingsObserver extends ContentObserver {
         public SettingsObserver() {
             super(null);
@@ -210,7 +213,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShellTransitionImpl implements ShellTransitions {
         public /* synthetic */ ShellTransitionImpl(Transitions transitions, int i) {
             this();
@@ -240,7 +242,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Track {
         public ActiveTransition mActiveTransition;
         public final ArrayList mReadyTransitions;
@@ -255,15 +256,17 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionFinishCallback {
         void onTransitionFinished(WindowContainerTransaction windowContainerTransaction);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionHandler {
         default boolean canMergeAbortedTransition(TransitionInfo transitionInfo) {
             return false;
+        }
+
+        default TransitionHandler getHandlerForHandover(IBinder iBinder, TransitionInfo transitionInfo, Function function) {
+            return null;
         }
 
         default TransitionHandler getHandlerForTakeover(IBinder iBinder, TransitionInfo transitionInfo) {
@@ -301,7 +304,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TransitionPlayerImpl extends ITransitionPlayer.Stub {
         public /* synthetic */ TransitionPlayerImpl(Transitions transitions, int i) {
             this();
@@ -314,7 +316,7 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
             Transitions.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Transitions.TransitionPlayerImpl transitionPlayerImpl = Transitions.TransitionPlayerImpl.this;
+                    Transitions.TransitionPlayerImpl transitionPlayerImpl = this.f$0;
                     Transitions.this.onTransitionReady(iBinder, transitionInfo, transaction, transaction2);
                 }
             });
@@ -333,20 +335,14 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
     }
 
     static {
-        boolean z;
         DEBUG_START_TRANSITION = Build.IS_DEBUGGABLE && SystemProperties.getBoolean("persist.wm.debug.start_shell_transition", false);
         try {
         } catch (RemoteException unused) {
             Log.w("ShellTransitions", "Error getting system features");
         }
-        if (AppGlobals.getPackageManager().hasSystemFeature("android.hardware.type.automotive", 0)) {
-            z = SystemProperties.getBoolean("persist.wm.debug.shell_transit", true);
-            ENABLE_SHELL_TRANSITIONS = z;
-            SHELL_TRANSITIONS_ROTATION = !z && SystemProperties.getBoolean("persist.wm.debug.shell_transit_rotate", false);
-        }
-        z = true;
+        boolean z = AppGlobals.getPackageManager().hasSystemFeature("android.hardware.type.automotive", 0) ? SystemProperties.getBoolean("persist.wm.debug.shell_transit", true) : true;
         ENABLE_SHELL_TRANSITIONS = z;
-        SHELL_TRANSITIONS_ROTATION = !z && SystemProperties.getBoolean("persist.wm.debug.shell_transit_rotate", false);
+        SHELL_TRANSITIONS_ROTATION = z && SystemProperties.getBoolean("persist.wm.debug.shell_transit_rotate", false);
     }
 
     public Transitions(Context context, ShellInit shellInit, ShellController shellController, ShellTaskOrganizer shellTaskOrganizer, TransactionPool transactionPool, DisplayController displayController, DisplayInsetsController displayInsetsController, ShellExecutor shellExecutor, Handler handler, ShellExecutor shellExecutor2, Handler handler2, HomeTransitionObserver homeTransitionObserver, FocusTransitionObserver focusTransitionObserver) {
@@ -355,21 +351,21 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
 
     public static int calculateAnimLayer(TransitionInfo.Change change, int i, int i2, int i3) {
         int i4 = i2 + 1;
-        boolean isOpeningType = TransitionUtil.isOpeningType(i3);
-        boolean isClosingType = TransitionUtil.isClosingType(i3);
+        boolean zIsOpeningType = TransitionUtil.isOpeningType(i3);
+        boolean zIsClosingType = TransitionUtil.isClosingType(i3);
         int mode = change.getMode();
         if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX && (change.getFlags() & 2) != 0) {
             return ((mode == 1 || mode == 3) ? (-i4) + i2 : -i4) - i;
         }
         if (mode == 1 || mode == 3) {
-            if (!isOpeningType && (isClosingType || (CoreRune.MW_SPLIT_SHELL_TRANSITION && i3 == 1104 && TransitionUtil.isHomeOrRecents(change)))) {
+            if (!zIsOpeningType && (zIsClosingType || (CoreRune.MW_SPLIT_SHELL_TRANSITION && i3 == 1104 && TransitionUtil.isHomeOrRecents(change)))) {
                 return i4 - i;
             }
         } else if (mode == 2 || mode == 4) {
-            if (isOpeningType) {
+            if (zIsOpeningType) {
                 return i4 - i;
             }
-        } else if (isClosingType || TransitionUtil.isOrderOnly(change)) {
+        } else if (zIsClosingType || TransitionUtil.isOrderOnly(change)) {
             return i4 - i;
         }
         return (i4 + i2) - i;
@@ -380,8 +376,8 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
             return false;
         }
         SparseIntArray sparseIntArray = new SparseIntArray();
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (TransitionUtil.isOpeningType(change.getMode()) && change.getConfiguration().windowConfiguration.isSplitScreen()) {
                 sparseIntArray.put(change.getConfiguration().windowConfiguration.getStageType(), 1);
             }
@@ -490,10 +486,10 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
             }
             str = str2;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "(FIRST_CUSTOM+");
-        m.append(i - 1000);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "(FIRST_CUSTOM+");
+        sbM.append(i - 1000);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public final void addHandler(TransitionHandler transitionHandler) {
@@ -507,29 +503,282 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:136:0x031c, code lost:
-    
-        if (r9.getTaskInfo().isForceHidden != false) goto L172;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x037b  */
-    /* JADX WARN: Removed duplicated region for block: B:190:0x0479  */
+    /* JADX WARN: Removed duplicated region for block: B:183:0x0374  */
+    /* JADX WARN: Removed duplicated region for block: B:187:0x037d  */
+    /* JADX WARN: Removed duplicated region for block: B:255:0x04d1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean dispatchReady(com.android.wm.shell.transition.Transitions.ActiveTransition r25) {
-        /*
-            Method dump skipped, instructions count: 1267
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.transition.Transitions.dispatchReady(com.android.wm.shell.transition.Transitions$ActiveTransition):boolean");
+    public final boolean dispatchReady(ActiveTransition activeTransition) {
+        char c;
+        char c2;
+        float f;
+        boolean z;
+        char c3;
+        SurfaceControl surfaceControl;
+        SurfaceControl surfaceControl2;
+        TransitionInfo.Change change;
+        TransitionInfo transitionInfo;
+        ActiveTransition activeTransition2;
+        TransitionHandler transitionHandler;
+        TransitionInfo transitionInfo2 = activeTransition.mInfo;
+        int i = 0;
+        int i2 = 1;
+        if (transitionInfo2.getType() == 12 || (activeTransition.mInfo.getFlags() & 2097152) != 0) {
+            this.mReadyDuringSync.add(0, activeTransition);
+            boolean z2 = false;
+            for (int i3 = 0; i3 < this.mTracks.size(); i3++) {
+                Track track = (Track) this.mTracks.get(i3);
+                if (track.mActiveTransition != null || !track.mReadyTransitions.isEmpty()) {
+                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7942742606586919691L, 1, Long.valueOf(i3));
+                    }
+                    finishForSync(activeTransition.mToken, i3, null);
+                    z2 = true;
+                }
+            }
+            if (z2) {
+                return false;
+            }
+            this.mReadyDuringSync.remove(activeTransition);
+        }
+        for (TransitionInfo.Change change2 : transitionInfo2.getChanges()) {
+            if (change2.getTaskInfo() != null) {
+                ActivityManager.RunningTaskInfo taskInfo = change2.getTaskInfo();
+                DesktopWallpaperActivity.Companion.getClass();
+                if (DesktopWallpaperActivity.Companion.isWallpaperTask(taskInfo)) {
+                    change2.setFlags(67108864);
+                }
+            }
+        }
+        int track2 = transitionInfo2.getTrack();
+        while (track2 >= this.mTracks.size()) {
+            this.mTracks.add(new Track(i));
+        }
+        Track track3 = (Track) this.mTracks.get(track2);
+        track3.mReadyTransitions.add(activeTransition);
+        if (CoreRune.FW_SHELL_TRANSITION_MERGE_TRANSFER && (transitionHandler = activeTransition.mHandler) != null) {
+            transitionHandler.transitionReady(activeTransition.mToken, transitionInfo2);
+        }
+        for (int i4 = 0; i4 < this.mObservers.size(); i4++) {
+            boolean zIsTagEnabled = Trace.isTagEnabled(32L);
+            if (zIsTagEnabled) {
+                Trace.traceBegin(32L, ((TransitionObserver) this.mObservers.get(i4)).getClass().getSimpleName() + "#onTransitionReady: " + transitTypeToString(transitionInfo2.getType()));
+            }
+            ((TransitionObserver) this.mObservers.get(i4)).onTransitionReady(activeTransition.mToken, transitionInfo2, activeTransition.mStartT, activeTransition.mFinishT);
+            if (zIsTagEnabled) {
+                Trace.traceEnd(32L);
+            }
+        }
+        if (transitionInfo2.getRootCount() == 0 && !KeyguardTransitionHandler.handles(transitionInfo2)) {
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 3980123572601110375L, 0, String.valueOf(activeTransition));
+            }
+            onAbort(activeTransition);
+            return true;
+        }
+        int size = transitionInfo2.getChanges().size();
+        boolean z3 = size > 0;
+        int i5 = size - 1;
+        boolean z4 = false;
+        boolean zHasFlags = false;
+        int i6 = 0;
+        int i7 = 0;
+        while (true) {
+            c = '\b';
+            if (i5 < 0) {
+                break;
+            }
+            TransitionInfo.Change change3 = (TransitionInfo.Change) transitionInfo2.getChanges().get(i5);
+            z4 |= change3.getTaskInfo() != null;
+            zHasFlags |= change3.hasFlags(8);
+            if ((change3.hasAllFlags(278528) || change3.hasAllFlags(16896)) && (!CoreRune.MW_EMBED_ACTIVITY || !change3.hasAllFlags(1536))) {
+                i6++;
+                if (CoreRune.MW_EMBED_ACTIVITY_PERFORMANCE && change3.hasAllFlags(16896)) {
+                    i7++;
+                }
+            }
+            if (!change3.hasFlags(NetworkAnalyticsConstants.DataPoints.FLAG_UID)) {
+                z3 = false;
+            } else if (change3.hasAllFlags(294912)) {
+                transitionInfo2.getChanges().remove(i5);
+            }
+            i5--;
+        }
+        int i8 = 3;
+        char c4 = 4;
+        if ((!z4 && ((zHasFlags || i6 == size) && size >= 1)) || ((transitionInfo2.getType() == 4 || transitionInfo2.getType() == 3) && z3)) {
+            if (!CoreRune.FW_SHELL_TRANSITION_RECENTS_BUG_FIX || (activeTransition2 = track3.mActiveTransition) == null || !activeTransition2.mHandler.canMergeAbortedTransition(transitionInfo2)) {
+                if (CoreRune.MW_EMBED_ACTIVITY_PERFORMANCE && !z4 && size >= 1 && i6 == size && i6 == i7) {
+                    boolean z5 = transitionInfo2.getType() == 1;
+                    ActiveTransition activeTransition3 = track3.mActiveTransition;
+                    boolean z6 = (activeTransition3 == null || (transitionInfo = activeTransition3.mInfo) == null || transitionInfo.getType() != 1) ? false : true;
+                    if (z5 && z6) {
+                        activeTransition.mApplyStartTransactionOnMerged = true;
+                        activeTransition.mApplyStartTransactionReason = "remove_embedded_starting";
+                    }
+                }
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -8508011197847096775L, 0, String.valueOf(activeTransition));
+                }
+                onAbort(activeTransition);
+                return true;
+            }
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -3471930938420019766L, 0, String.valueOf(track3.mActiveTransition), String.valueOf(activeTransition));
+            }
+        }
+        TransitionInfo transitionInfo3 = activeTransition.mInfo;
+        SurfaceControl.Transaction transaction = activeTransition.mStartT;
+        SurfaceControl.Transaction transaction2 = activeTransition.mFinishT;
+        boolean zIsOpeningType = TransitionUtil.isOpeningType(transitionInfo3.getType());
+        int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo3, 1);
+        while (iM >= 0) {
+            TransitionInfo.Change change4 = (TransitionInfo.Change) transitionInfo3.getChanges().get(iM);
+            if (change4.hasFlags(65792)) {
+                c3 = c4;
+                c2 = c;
+            } else {
+                change4.hasFlags(2);
+                SurfaceControl leash = change4.getLeash();
+                int mode = ((TransitionInfo.Change) transitionInfo3.getChanges().get(iM)).getMode();
+                c2 = c;
+                if (change4.hasFlags(Integer.MIN_VALUE) && (mode == i2 || mode == i8 || mode == 6)) {
+                    transaction.show(leash);
+                    transaction.setAlpha(leash, 1.0f);
+                } else if (!CoreRune.MW_SPLIT_SHELL_TRANSITION || transitionInfo3.getType() != 1105 || (change4.getFlags() & 8388608) == 0) {
+                    if (mode == i8 && !change4.getPopOverAnimationNeeded()) {
+                        transaction.setPosition(leash, change4.getEndRelOffset().x, change4.getEndRelOffset().y);
+                        if (change4.getContainer() != null) {
+                            transaction.setWindowCrop(leash, change4.getEndAbsBounds().width(), change4.getEndAbsBounds().height());
+                        }
+                    }
+                    boolean z7 = CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION;
+                    if (z7) {
+                        ArrayList arrayList = MultiTaskingTransitionProvider.sForceHidingAnimators;
+                        if (change4.getForceHidingTransit() == 0) {
+                            if (change4.getTaskInfo() != null) {
+                                f = 0.0f;
+                                if (change4.getTaskInfo().isForceHidden) {
+                                }
+                                if (TransitionInfo.isIndependent(change4, transitionInfo3)) {
+                                    if (mode != 1) {
+                                        i8 = 3;
+                                        if (mode != 3) {
+                                            if (mode != 2) {
+                                                c3 = 4;
+                                                if (mode != 4) {
+                                                    if (zIsOpeningType && mode == 6) {
+                                                        transaction.show(leash);
+                                                        transaction2.show(leash);
+                                                    }
+                                                }
+                                            } else {
+                                                c3 = 4;
+                                            }
+                                            transaction2.hide(leash);
+                                            if (MultiTaskingTransitionProvider.isMovingBackFromRemovingDesktopDisplay(change4)) {
+                                                transaction.setAlpha(leash, 0.0f);
+                                            }
+                                        }
+                                    } else {
+                                        i8 = 3;
+                                    }
+                                    c3 = 4;
+                                    transaction.show(leash);
+                                    transaction.setMatrix(leash, 1.0f, 0.0f, 0.0f, 1.0f);
+                                    if (CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION && transitionInfo3.hasCustomDisplayChangeTransition()) {
+                                        transaction.setAlpha(leash, 1.0f);
+                                        transaction2.show(leash);
+                                    } else {
+                                        if (zIsOpeningType && (change4.getFlags() & 8) == 0) {
+                                            transaction.setAlpha(leash, 0.0f);
+                                        }
+                                        transaction2.show(leash);
+                                    }
+                                } else {
+                                    if (mode == 1 || mode == 3 || mode == 6) {
+                                        transaction.show(leash);
+                                        if (!CoreRune.MW_CAPTION_FREEFORM_STASH || change4.getFreeformStashScale() <= f || change4.getFreeformStashScale() >= 1.0f) {
+                                            if (CoreRune.MW_SHELL_TRANSITION && change4.hasValidInitialScale()) {
+                                                surfaceControl = leash;
+                                                transaction.setMatrix(surfaceControl, change4.getInitialScale().x, 0.0f, 0.0f, change4.getInitialScale().y);
+                                            } else {
+                                                SurfaceControl.Transaction transaction3 = transaction;
+                                                surfaceControl = leash;
+                                                transaction3.setMatrix(surfaceControl, 1.0f, 0.0f, 0.0f, 1.0f);
+                                                transaction = transaction3;
+                                            }
+                                            surfaceControl2 = surfaceControl;
+                                        } else {
+                                            surfaceControl2 = leash;
+                                        }
+                                        if (!z7 || !z) {
+                                            transaction.setAlpha(surfaceControl2, 1.0f);
+                                        }
+                                        transaction.setPosition(surfaceControl2, change4.getEndRelOffset().x, change4.getEndRelOffset().y);
+                                        if (change4.getContainer() != null) {
+                                            if (CoreRune.MW_SHELL_TRANSITION) {
+                                                ArrayList arrayList2 = MultiTaskingTransitionProvider.sForceHidingAnimators;
+                                                if (CoreRune.MW_MULTI_SPLIT_SHELL_TRANSITION && transitionInfo3.getType() == 6 && (transitionInfo3.getFlags() & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 && transitionInfo3.findChange(new MultiTaskingTransitionProvider$$ExternalSyntheticLambda1()) != null && change4.getTaskInfo() != null && change4.getParent() != null && change4.getTaskInfo().isSplitScreen() && (change = transitionInfo3.getChange(change4.getParent())) != null && change.getTaskInfo() != null && change.getTaskInfo().isSplitScreen()) {
+                                                    Slog.d("MultiTaskingTransitionProvider", "shouldSkipSetupCrop: " + change4 + ", reason=split_child(folding)");
+                                                    i8 = 3;
+                                                }
+                                            }
+                                            transaction.setWindowCrop(surfaceControl2, change4.getEndAbsBounds().width(), change4.getEndAbsBounds().height());
+                                        }
+                                    } else {
+                                        surfaceControl2 = leash;
+                                    }
+                                    if (change4.hasFlags(64) && TransitionUtil.isClosingMode(change4.getMode()) && change4.getStartDisplayId() != change4.getEndDisplayId()) {
+                                        WindowContainerToken parent = change4.getParent();
+                                        TransitionInfo.Change change5 = parent != null ? transitionInfo3.getChange(parent) : null;
+                                        if (change5 != null && TransitionUtil.isOpeningMode(change5.getMode())) {
+                                            Slog.d("ShellTransitions", "setupStartState: closing activity but in opening task. it can be shown like opening. so hide here. change=" + change4);
+                                            float f2 = f;
+                                            transaction.setAlpha(surfaceControl2, f2);
+                                            transaction2.setAlpha(surfaceControl2, f2);
+                                        }
+                                    }
+                                    i8 = 3;
+                                }
+                            } else {
+                                f = 0.0f;
+                            }
+                            z = false;
+                            if (TransitionInfo.isIndependent(change4, transitionInfo3)) {
+                            }
+                        } else {
+                            f = 0.0f;
+                        }
+                        SurfaceControl leash2 = change4.getLeash();
+                        float f3 = (!change4.isForceHidingWithoutAnimation() && ((CoreRune.MW_CAPTION_FREEFORM_STASH && change4.getFreeformStashScale() != 1.0f) || change4.getForceHidingTransit() != i2)) ? f : 1.0f;
+                        transaction.setAlpha(leash2, f3);
+                        Log.d("MultiTaskingTransitionProvider", "applyForceHideAlpha: leash=" + leash2 + ", startAlpha=" + f3 + ", transit=" + MultiWindowManager.forceHidingTransitToString(change4.getForceHidingTransit()));
+                        z = true;
+                        if (TransitionInfo.isIndependent(change4, transitionInfo3)) {
+                        }
+                    }
+                }
+                c3 = 4;
+            }
+            iM--;
+            c4 = c3;
+            c = c2;
+            i2 = 1;
+        }
+        if (track3.mReadyTransitions.size() > 1) {
+            return true;
+        }
+        processReadyQueue(track3);
+        return true;
     }
 
     public final Pair dispatchRequest(IBinder iBinder, TransitionRequestInfo transitionRequestInfo, DefaultMixedHandler defaultMixedHandler) {
-        WindowContainerTransaction handleRequest;
+        WindowContainerTransaction windowContainerTransactionHandleRequest;
         for (int size = this.mHandlers.size() - 1; size >= 0; size--) {
-            if (this.mHandlers.get(size) != defaultMixedHandler && (handleRequest = ((TransitionHandler) this.mHandlers.get(size)).handleRequest(iBinder, transitionRequestInfo)) != null) {
-                return new Pair((TransitionHandler) this.mHandlers.get(size), handleRequest);
+            if (this.mHandlers.get(size) != defaultMixedHandler && (windowContainerTransactionHandleRequest = ((TransitionHandler) this.mHandlers.get(size)).handleRequest(iBinder, transitionRequestInfo)) != null) {
+                return new Pair((TransitionHandler) this.mHandlers.get(size), windowContainerTransactionHandleRequest);
             }
         }
         return null;
@@ -537,9 +786,11 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
 
     public final TransitionHandler dispatchTransition(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, TransitionFinishCallback transitionFinishCallback, TransitionHandler transitionHandler, TransitionHandler transitionHandler2) {
         for (int size = this.mHandlers.size() - 1; size >= 0; size--) {
-            if (this.mHandlers.get(size) != transitionHandler) {
-                if (CoreRune.MW_PIP_SHELL_TRANSITION && this.mHandlers.get(size) == transitionHandler2) {
+            if (this.mHandlers.get(size) == transitionHandler) {
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 8716556112614799549L, 0, String.valueOf(this.mHandlers.get(size)));
                 }
+            } else if (!CoreRune.MW_PIP_SHELL_TRANSITION || this.mHandlers.get(size) != transitionHandler2) {
                 if (((TransitionHandler) this.mHandlers.get(size)).startAnimation(iBinder, transitionInfo, transaction, transaction2, transitionFinishCallback)) {
                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
                         ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 5292399587644158186L, 0, String.valueOf(this.mHandlers.get(size)));
@@ -550,8 +801,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
                     }
                     return (TransitionHandler) this.mHandlers.get(size);
                 }
-            } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 8716556112614799549L, 0, String.valueOf(this.mHandlers.get(size)));
             }
         }
         throw new IllegalStateException("This shouldn't happen, maybe the default handler is broken.");
@@ -602,7 +851,7 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
                 ((HandlerExecutor) this.mMainExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.transition.Transitions$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Transitions transitions = Transitions.this;
+                        Transitions transitions = this.f$0;
                         IBinder iBinder2 = iBinder;
                         int i2 = i;
                         Transitions.ActiveTransition activeTransition5 = activeTransition3;
@@ -637,11 +886,11 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
                 perfettoTransitionTracer.mDataSource.trace(new TraceFunction() { // from class: com.android.wm.shell.transition.tracing.PerfettoTransitionTracer$$ExternalSyntheticLambda0
                     public final void trace(TracingContext tracingContext) {
                         int i = debugId;
-                        ProtoOutputStream newTracePacket = tracingContext.newTracePacket();
-                        long start = newTracePacket.start(1146756268128L);
-                        newTracePacket.write(1120986464257L, i);
-                        newTracePacket.write(1112396529671L, SystemClock.elapsedRealtimeNanos());
-                        newTracePacket.end(start);
+                        ProtoOutputStream protoOutputStreamNewTracePacket = tracingContext.newTracePacket();
+                        long jStart = protoOutputStreamNewTracePacket.start(1146756268128L);
+                        protoOutputStreamNewTracePacket.write(1120986464257L, i);
+                        protoOutputStreamNewTracePacket.write(1112396529671L, SystemClock.elapsedRealtimeNanos());
+                        protoOutputStreamNewTracePacket.end(jStart);
                     }
                 });
             } finally {
@@ -840,7 +1089,7 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
     }
 
     public final void onMerged(IBinder iBinder, IBinder iBinder2) {
-        int indexOf;
+        int iIndexOf;
         ((HandlerExecutor) this.mMainExecutor).assertCurrentThread();
         ActiveTransition activeTransition = (ActiveTransition) this.mKnownTransitions.get(iBinder);
         if (activeTransition == null) {
@@ -861,15 +1110,15 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
         if (track.mReadyTransitions.isEmpty() || track.mReadyTransitions.get(0) != activeTransition2) {
             Log.e("ShellTransitions", "Merged transition out-of-order? " + activeTransition2);
-            indexOf = track.mReadyTransitions.indexOf(activeTransition2);
-            if (indexOf < 0) {
+            iIndexOf = track.mReadyTransitions.indexOf(activeTransition2);
+            if (iIndexOf < 0) {
                 Log.e("ShellTransitions", "Merged a transition that is no-longer queued? " + activeTransition2);
                 return;
             }
         } else {
-            indexOf = 0;
+            iIndexOf = 0;
         }
-        track.mReadyTransitions.remove(indexOf);
+        track.mReadyTransitions.remove(iIndexOf);
         if (activeTransition.mMerged == null) {
             activeTransition.mMerged = new ArrayList();
         }
@@ -965,12 +1214,27 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:100:0x01f3  */
+    /* JADX WARN: Removed duplicated region for block: B:106:0x0202  */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x0206  */
+    /* JADX WARN: Removed duplicated region for block: B:111:0x020a  */
+    /* JADX WARN: Removed duplicated region for block: B:119:0x0233  */
+    /* JADX WARN: Removed duplicated region for block: B:120:0x0235  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x0185  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x0187  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x01bd  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x01c8  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void playTransition(ActiveTransition activeTransition) {
         final IBinder iBinder;
         boolean z;
+        boolean z2;
+        boolean z3;
         TransitionInfo transitionInfo;
         int i;
-        boolean z2 = true;
+        boolean z4 = true;
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7933815964243868580L, 0, String.valueOf(activeTransition));
         }
@@ -989,96 +1253,112 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         if (CoreRune.MW_SHELL_CHANGE_TRANSITION) {
             int size = transitionInfo2.getChanges().size();
             int i6 = size + 1;
-            int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo2, 1);
+            int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo2, 1);
             while (true) {
-                if (m < 0) {
+                if (iM < 0) {
                     break;
                 }
-                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo2.getChanges().get(m);
+                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo2.getChanges().get(iM);
                 if (change.getChangeLeash() != null && change.getChangeTransitMode() == 2) {
-                    i4 = (size + i6) - m;
+                    i4 = (size + i6) - iM;
                     break;
                 }
-                m--;
+                iM--;
             }
         }
         int size2 = transitionInfo2.getChanges().size();
         int i7 = size2 - 1;
-        boolean z3 = false;
+        boolean z5 = false;
         while (i7 >= 0) {
             TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo2.getChanges().get(i7);
             SurfaceControl leash = change2.getLeash();
             if (!CoreRune.MW_SHELL_CHANGE_TRANSITION || change2.getChangeLeash() == null) {
                 int i8 = i5;
-                if ((!CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION || change2.getParent() == null || ((change2.getMode() != 6 && !TransitionUtil.isOpeningType(change2.getMode())) || !transitionInfo2.hasCustomDisplayChangeTransition())) && (!CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION || change2.getForceHidingTransit() == 0)) {
+                if (!CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION || change2.getForceHidingTransit() == 0) {
                     if (CoreRune.MW_EMBED_ACTIVITY && (type == 6 || type == 1007)) {
                         int mode = change2.getMode();
-                        if ((mode != 3 && mode != 4 && !z3) || !change2.hasFlags(512)) {
+                        if ((mode != 3 && mode != 4 && !z5) || !change2.hasFlags(512)) {
                             if (change2.hasFlags(32) && mode == 6) {
-                                z3 = z2;
+                                z5 = z4;
+                            }
+                            if (!change2.shouldSkipSetupAnimHierarchy()) {
+                                if (change2.getParent() == null) {
+                                }
+                                TransitionInfo.Root root = transitionInfo2.getRoot(TransitionUtil.rootIndexFor(change2, transitionInfo2));
+                                int windowingMode = change2.getConfiguration().windowConfiguration.getWindowingMode();
+                                z2 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
+                                if (z2) {
+                                    z3 = z;
+                                    if (CoreRune.MW_FREEFORM_SHELL_TRANSITION) {
+                                    }
+                                    if (type == 1) {
+                                        if (type != 1019) {
+                                        }
+                                        if (z2) {
+                                            if (!z3) {
+                                            }
+                                            transaction.setLayer(leash, calculateAnimLayer(change2, i7, size2, type));
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
-                    if (!change2.shouldSkipSetupAnimHierarchy() && TransitionInfo.isIndependent(change2, transitionInfo2)) {
-                        boolean z4 = change2.getParent() != null ? z2 : false;
-                        TransitionInfo.Root root = transitionInfo2.getRoot(TransitionUtil.rootIndexFor(change2, transitionInfo2));
-                        int windowingMode = change2.getConfiguration().windowConfiguration.getWindowingMode();
-                        boolean z5 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
-                        if (!z5 || (change2.getFlags() & 2) == 0) {
-                            z = z4;
+                    } else if (!change2.shouldSkipSetupAnimHierarchy() && TransitionInfo.isIndependent(change2, transitionInfo2)) {
+                        z = change2.getParent() == null ? z4 : false;
+                        TransitionInfo.Root root2 = transitionInfo2.getRoot(TransitionUtil.rootIndexFor(change2, transitionInfo2));
+                        int windowingMode2 = change2.getConfiguration().windowConfiguration.getWindowingMode();
+                        z2 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
+                        if (z2 || (change2.getFlags() & 2) == 0) {
+                            z3 = z;
                         } else {
-                            z = z4;
-                            if (root.getConfiguration().windowConfiguration.isSplitScreen()) {
+                            z3 = z;
+                            if (root2.getConfiguration().windowConfiguration.isSplitScreen()) {
                                 Log.d("ShellTransitions", "setupAnimHierarchy: skip to reparent wallpaper, rootLeash is split");
                             }
                         }
                         if (CoreRune.MW_FREEFORM_SHELL_TRANSITION) {
                             transitionInfo = transitionInfo2;
-                            if (windowingMode == 5 && (change2.getFlags() & 33554432) != 0 && !root.isActivityRootLeash()) {
-                                Log.d("ShellTransitions", "setupAnimHierarchy: skip to reparent " + change2 + ", reason=non_activity_root_leash");
-                                i7--;
-                                transitionInfo2 = transitionInfo;
-                                z2 = true;
-                                i5 = 2;
-                            }
                         } else {
                             transitionInfo = transitionInfo2;
+                            if (windowingMode2 == 5 && (change2.getFlags() & 64) != 0 && !root2.isActivityRootLeash()) {
+                                Log.d("ShellTransitions", "setupAnimHierarchy: skip to reparent " + change2 + ", reason=non_activity_root_leash");
+                            }
                         }
-                        if (type != 1 || windowingMode != i8 || change2.isEnteringPinnedMode()) {
-                            if (type == 1019) {
+                        if (type == 1 || windowingMode2 != i8 || change2.isEnteringPinnedMode()) {
+                            if (type != 1019) {
                                 i = 1;
-                                if (windowingMode == 1) {
+                                if (windowingMode2 == 1) {
                                 }
                             } else {
                                 i = 1;
                             }
-                            if (z5 && type == i && (transitionInfo.getFlags() & 262144) != 0 && TransitionUtil.isHomeTask(change2)) {
-                                Log.d("ShellTransitions", "setupAnimHierarchy: skip to reparent " + change2 + ", reason=finger_lock");
-                            } else {
-                                if (!z) {
-                                    transaction.reparent(leash, root.getLeash());
-                                    transaction.setPosition(leash, change2.getStartAbsBounds().left - root.getOffset().x, change2.getStartAbsBounds().top - root.getOffset().y);
+                            if (z2 || type != i || (transitionInfo.getFlags() & 262144) == 0 || !TransitionUtil.isHomeTask(change2)) {
+                                if (!z3) {
+                                    transaction.reparent(leash, root2.getLeash());
+                                    transaction.setPosition(leash, change2.getStartAbsBounds().left - root2.getOffset().x, change2.getStartAbsBounds().top - root2.getOffset().y);
                                 }
                                 transaction.setLayer(leash, calculateAnimLayer(change2, i7, size2, type));
+                            } else {
+                                Log.d("ShellTransitions", "setupAnimHierarchy: skip to reparent " + change2 + ", reason=finger_lock");
                             }
                         }
-                        i7--;
-                        transitionInfo2 = transitionInfo;
-                        z2 = true;
-                        i5 = 2;
                     }
                 }
+                i7--;
+                transitionInfo2 = transitionInfo;
+                z4 = true;
+                i5 = 2;
             } else {
                 int i9 = size2 + 1;
                 int i10 = change2.getChangeTransitMode() == 6 ? i9 + size2 : (i9 + size2) - i7;
-                if (i10 < i4 && change2.getChangeTransitMode() == z2) {
+                if (i10 < i4 && change2.getChangeTransitMode() == z4) {
                     i10 += i4;
                 }
                 SurfaceControl changeLeash = change2.getChangeLeash();
-                int rootIndexFor = TransitionUtil.rootIndexFor(change2, transitionInfo2);
-                boolean z6 = (!ChangeTransitionProvider.isDisplayRotating(transitionInfo2) || (CoreRune.MW_SPLIT_SHELL_TRANSITION && change2.getTaskInfo() != null && change2.getTaskInfo().isSplitScreen())) ? z2 : false;
+                int iRootIndexFor = TransitionUtil.rootIndexFor(change2, transitionInfo2);
+                boolean z6 = (!ChangeTransitionProvider.isDisplayRotating(transitionInfo2) || (CoreRune.MW_SPLIT_SHELL_TRANSITION && change2.getTaskInfo() != null && change2.getTaskInfo().isSplitScreen())) ? z4 : false;
                 if (z6) {
-                    transaction.reparent(changeLeash, transitionInfo2.getRoot(rootIndexFor).getLeash());
+                    transaction.reparent(changeLeash, transitionInfo2.getRoot(iRootIndexFor).getLeash());
                 }
                 transaction.setLayer(change2.getChangeLeash(), i10);
                 Log.d("ChangeTransitionProvider", "assignChangeLeashLayer: z=" + i10 + ", leash=" + change2.getChangeLeash() + ", reparent=" + z6 + ", " + MultiWindowManager.changeTransitModeToString(change2.getChangeTransitMode()));
@@ -1086,7 +1366,7 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
             transitionInfo = transitionInfo2;
             i7--;
             transitionInfo2 = transitionInfo;
-            z2 = true;
+            z4 = true;
             i5 = 2;
         }
         TransitionHandler transitionHandler = activeTransition.mHandler;
@@ -1206,12 +1486,12 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
                 onFinish(activeTransition.mToken, null);
                 return;
             }
-            boolean isTagEnabled = Trace.isTagEnabled(32L);
-            if (isTagEnabled) {
+            boolean zIsTagEnabled = Trace.isTagEnabled(32L);
+            if (zIsTagEnabled) {
                 Trace.traceBegin(32L, "playTransition: " + transitTypeToString(activeTransition.mInfo.getType()));
             }
             playTransition(activeTransition);
-            if (isTagEnabled) {
+            if (zIsTagEnabled) {
             }
             processReadyQueue(track);
             return;
@@ -1242,11 +1522,11 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         activeTransition2.mHandler.mergeAnimation(activeTransition.mToken, activeTransition.mInfo, activeTransition.mStartT, activeTransition.mFinishT, activeTransition2.mToken, new TransitionFinishCallback() { // from class: com.android.wm.shell.transition.Transitions$$ExternalSyntheticLambda2
             @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
             public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                int indexOf;
+                int iIndexOf;
                 IBinder iBinder3 = iBinder;
                 IBinder iBinder4 = iBinder2;
                 boolean z = Transitions.DEBUG_START_TRANSITION;
-                Transitions transitions = Transitions.this;
+                Transitions transitions = this.f$0;
                 if (!CoreRune.FW_SHELL_TRANSITION_MERGE_TRANSFER || !activeTransition.mInfo.canTransferAnimation()) {
                     transitions.onMerged(iBinder3, iBinder4);
                     return;
@@ -1274,15 +1554,15 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
                 }
                 if (track3.mReadyTransitions.isEmpty() || track3.mReadyTransitions.get(0) != activeTransition4) {
                     Log.e("ShellTransitions", "Transfer transition out-of-order? " + activeTransition4);
-                    indexOf = track3.mReadyTransitions.indexOf(activeTransition4);
-                    if (indexOf < 0) {
+                    iIndexOf = track3.mReadyTransitions.indexOf(activeTransition4);
+                    if (iIndexOf < 0) {
                         Log.e("ShellTransitions", "Transfer a transition that is no-longer queued? " + activeTransition4);
                         return;
                     }
                 } else {
-                    indexOf = 0;
+                    iIndexOf = 0;
                 }
-                track3.mReadyTransitions.remove(indexOf);
+                track3.mReadyTransitions.remove(iIndexOf);
                 if (activeTransition4.mTransfer == null) {
                     activeTransition4.mTransfer = new ArrayList();
                 }
@@ -1308,11 +1588,11 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
     }
 
     public final void runOnIdle(Runnable runnable) {
-        int i;
         if (this.mPendingTransitions.isEmpty() && this.mReadyDuringSync.isEmpty()) {
-            while (i < this.mTracks.size()) {
+            for (int i = 0; i < this.mTracks.size(); i++) {
                 Track track = (Track) this.mTracks.get(i);
-                i = (track.mActiveTransition == null && track.mReadyTransitions.isEmpty()) ? i + 1 : 0;
+                if (track.mActiveTransition == null && track.mReadyTransitions.isEmpty()) {
+                }
             }
             runnable.run();
             return;
@@ -1399,7 +1679,6 @@ public class Transitions implements RemoteCallable, ShellCommandHandler.ShellCom
         this.mTransitionTracer = new PerfettoTransitionTracer();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionObserver {
         default void onTransitionStarting(IBinder iBinder) {
         }

@@ -31,18 +31,18 @@ public class DSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
     @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
     public AsymmetricCipherKeyPair generateKeyPair() {
         DSAParameters parameters = this.param.getParameters();
-        BigInteger generatePrivateKey = generatePrivateKey(parameters.getQ(), this.param.getRandom());
-        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DSAPublicKeyParameters(calculatePublicKey(parameters.getP(), parameters.getG(), generatePrivateKey), parameters), (AsymmetricKeyParameter) new DSAPrivateKeyParameters(generatePrivateKey, parameters));
+        BigInteger bigIntegerGeneratePrivateKey = generatePrivateKey(parameters.getQ(), this.param.getRandom());
+        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DSAPublicKeyParameters(calculatePublicKey(parameters.getP(), parameters.getG(), bigIntegerGeneratePrivateKey), parameters), (AsymmetricKeyParameter) new DSAPrivateKeyParameters(bigIntegerGeneratePrivateKey, parameters));
     }
 
     private static BigInteger generatePrivateKey(BigInteger bigInteger, SecureRandom secureRandom) {
-        BigInteger createRandomInRange;
-        int bitLength = bigInteger.bitLength() >>> 2;
+        BigInteger bigIntegerCreateRandomInRange;
+        int iBitLength = bigInteger.bitLength() >>> 2;
         do {
             BigInteger bigInteger2 = ONE;
-            createRandomInRange = BigIntegers.createRandomInRange(bigInteger2, bigInteger.subtract(bigInteger2), secureRandom);
-        } while (WNafUtil.getNafWeight(createRandomInRange) < bitLength);
-        return createRandomInRange;
+            bigIntegerCreateRandomInRange = BigIntegers.createRandomInRange(bigInteger2, bigInteger.subtract(bigInteger2), secureRandom);
+        } while (WNafUtil.getNafWeight(bigIntegerCreateRandomInRange) < iBitLength);
+        return bigIntegerCreateRandomInRange;
     }
 
     private static BigInteger calculatePublicKey(BigInteger bigInteger, BigInteger bigInteger2, BigInteger bigInteger3) {

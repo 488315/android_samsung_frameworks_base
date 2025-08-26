@@ -4,12 +4,14 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.ImageDecoder;
 import android.graphics.Insets;
+import android.graphics.NinePatch;
 import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -302,11 +304,11 @@ public abstract class Drawable {
             return;
         }
         this.mSetTintModeInvoked = true;
-        BlendMode fromValue = mode != null ? BlendMode.fromValue(mode.nativeInt) : null;
-        if (fromValue == null) {
-            fromValue = DEFAULT_BLEND_MODE;
+        BlendMode blendModeFromValue = mode != null ? BlendMode.fromValue(mode.nativeInt) : null;
+        if (blendModeFromValue == null) {
+            blendModeFromValue = DEFAULT_BLEND_MODE;
         }
-        setTintBlendMode(fromValue);
+        setTintBlendMode(blendModeFromValue);
         this.mSetTintModeInvoked = false;
     }
 
@@ -315,11 +317,11 @@ public abstract class Drawable {
             return;
         }
         this.mSetBlendModeInvoked = true;
-        PorterDuff.Mode blendModeToPorterDuffMode = BlendMode.blendModeToPorterDuffMode(blendMode);
-        if (blendModeToPorterDuffMode == null) {
-            blendModeToPorterDuffMode = DEFAULT_TINT_MODE;
+        PorterDuff.Mode modeBlendModeToPorterDuffMode = BlendMode.blendModeToPorterDuffMode(blendMode);
+        if (modeBlendModeToPorterDuffMode == null) {
+            modeBlendModeToPorterDuffMode = DEFAULT_TINT_MODE;
         }
-        setTintMode(blendModeToPorterDuffMode);
+        setTintMode(modeBlendModeToPorterDuffMode);
         this.mSetBlendModeInvoked = false;
     }
 
@@ -416,116 +418,62 @@ public abstract class Drawable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x001b, code lost:
-    
-        if (r12.endsWith(".spr") == false) goto L31;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001d A[Catch: Exception -> 0x0077, TryCatch #0 {Exception -> 0x0077, blocks: (B:7:0x0007, B:9:0x000d, B:11:0x0015, B:13:0x001d, B:15:0x0023, B:17:0x0032, B:19:0x0039, B:21:0x0040, B:23:0x0044, B:24:0x004c, B:26:0x0050, B:27:0x0068), top: B:46:0x0007 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.drawable.Drawable createFromResourceStream(android.content.res.Resources r9, android.util.TypedValue r10, java.io.InputStream r11, java.lang.String r12, android.graphics.BitmapFactory.Options r13) {
-        /*
-            r1 = 0
-            if (r11 != 0) goto L4
-            return r1
-        L4:
-            r2 = 0
-            if (r12 == 0) goto L1d
-            boolean r0 = r12.isEmpty()     // Catch: java.lang.Exception -> L77
-            if (r0 != 0) goto L1d
-            java.lang.String r0 = ".bmp"
-            boolean r0 = r12.endsWith(r0)     // Catch: java.lang.Exception -> L77
-            if (r0 != 0) goto L1d
-            java.lang.String r0 = ".spr"
-            boolean r0 = r12.endsWith(r0)     // Catch: java.lang.Exception -> L77
-            if (r0 == 0) goto L7b
-        L1d:
-            boolean r0 = r11.markSupported()     // Catch: java.lang.Exception -> L77
-            if (r0 == 0) goto L7b
-            r0 = 3
-            byte[] r3 = new byte[r0]     // Catch: java.lang.Exception -> L77
-            r11.read(r3, r2, r0)     // Catch: java.lang.Exception -> L77
-            r11.reset()     // Catch: java.lang.Exception -> L77
-            r4 = r3[r2]     // Catch: java.lang.Exception -> L77
-            r5 = 83
-            if (r4 != r5) goto L7b
-            r4 = 1
-            r5 = r3[r4]     // Catch: java.lang.Exception -> L77
-            r6 = 80
-            if (r5 != r6) goto L7b
-            r5 = 2
-            r3 = r3[r5]     // Catch: java.lang.Exception -> L77
-            r6 = 82
-            if (r3 != r6) goto L7b
-            java.lang.Class<?> r3 = android.graphics.drawable.Drawable.SprClass     // Catch: java.lang.Exception -> L77
-            if (r3 != 0) goto L4c
-            java.lang.String r3 = "com.samsung.android.graphics.spr.SemPathRenderingDrawable"
-            java.lang.Class r3 = java.lang.Class.forName(r3)     // Catch: java.lang.Exception -> L77
-            android.graphics.drawable.Drawable.SprClass = r3     // Catch: java.lang.Exception -> L77
-        L4c:
-            java.lang.reflect.Method r3 = android.graphics.drawable.Drawable.SprCreateFromStream     // Catch: java.lang.Exception -> L77
-            if (r3 != 0) goto L68
-            java.lang.Class<?> r3 = android.graphics.drawable.Drawable.SprClass     // Catch: java.lang.Exception -> L77
-            java.lang.String r6 = "createFromStream"
-            java.lang.Class[] r0 = new java.lang.Class[r0]     // Catch: java.lang.Exception -> L77
-            java.lang.Class<java.lang.String> r7 = java.lang.String.class
-            r0[r2] = r7     // Catch: java.lang.Exception -> L77
-            java.lang.Class<java.io.InputStream> r7 = java.io.InputStream.class
-            r0[r4] = r7     // Catch: java.lang.Exception -> L77
-            java.lang.Class<android.content.res.Resources> r4 = android.content.res.Resources.class
-            r0[r5] = r4     // Catch: java.lang.Exception -> L77
-            java.lang.reflect.Method r0 = r3.getMethod(r6, r0)     // Catch: java.lang.Exception -> L77
-            android.graphics.drawable.Drawable.SprCreateFromStream = r0     // Catch: java.lang.Exception -> L77
-        L68:
-            java.lang.reflect.Method r0 = android.graphics.drawable.Drawable.SprCreateFromStream     // Catch: java.lang.Exception -> L77
-            java.lang.Class<?> r3 = android.graphics.drawable.Drawable.SprClass     // Catch: java.lang.Exception -> L77
-            java.lang.Object[] r4 = new java.lang.Object[]{r12, r11, r9}     // Catch: java.lang.Exception -> L77
-            java.lang.Object r0 = r0.invoke(r3, r4)     // Catch: java.lang.Exception -> L77
-            android.graphics.drawable.Drawable r0 = (android.graphics.drawable.Drawable) r0     // Catch: java.lang.Exception -> L77
-            return r0
-        L77:
-            r0 = move-exception
-            r0.printStackTrace()
-        L7b:
-            if (r13 != 0) goto L82
-            android.graphics.drawable.Drawable r9 = getBitmapDrawable(r9, r10, r11)
-            return r9
-        L82:
-            android.graphics.Rect r0 = new android.graphics.Rect
-            r0.<init>()
-            int r2 = resolveDensity(r9, r2)
-            r13.inScreenDensity = r2
-            android.graphics.Bitmap r4 = android.graphics.BitmapFactory.decodeResourceStream(r9, r10, r11, r0, r13)
-            if (r4 == 0) goto Lb4
-            byte[] r10 = r4.getNinePatchChunk()
-            if (r10 == 0) goto La3
-            boolean r11 = android.graphics.NinePatch.isNinePatchChunk(r10)
-            if (r11 != 0) goto La0
-            goto La3
-        La0:
-            r5 = r10
-            r6 = r0
-            goto La5
-        La3:
-            r5 = r1
-            r6 = r5
-        La5:
-            android.graphics.Rect r7 = new android.graphics.Rect
-            r7.<init>()
-            r4.getOpticalInsets(r7)
-            r3 = r9
-            r8 = r12
-            android.graphics.drawable.Drawable r9 = drawableFromBitmap(r3, r4, r5, r6, r7, r8)
-            return r9
-        Lb4:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.Drawable.createFromResourceStream(android.content.res.Resources, android.util.TypedValue, java.io.InputStream, java.lang.String, android.graphics.BitmapFactory$Options):android.graphics.drawable.Drawable");
+    public static Drawable createFromResourceStream(Resources resources, TypedValue typedValue, InputStream inputStream, String str, BitmapFactory.Options options) throws IOException {
+        byte[] bArr;
+        Rect rect;
+        if (inputStream == null) {
+            return null;
+        }
+        if (str != null) {
+            try {
+                if (str.isEmpty() || str.endsWith(".bmp") || str.endsWith(".spr")) {
+                    if (inputStream.markSupported()) {
+                        byte[] bArr2 = new byte[3];
+                        inputStream.read(bArr2, 0, 3);
+                        inputStream.reset();
+                        if (bArr2[0] == 83 && bArr2[1] == 80 && bArr2[2] == 82) {
+                            if (SprClass == null) {
+                                SprClass = Class.forName("com.samsung.android.graphics.spr.SemPathRenderingDrawable");
+                            }
+                            if (SprCreateFromStream == null) {
+                                SprCreateFromStream = SprClass.getMethod("createFromStream", String.class, InputStream.class, Resources.class);
+                            }
+                            return (Drawable) SprCreateFromStream.invoke(SprClass, str, inputStream, resources);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (options == null) {
+            return getBitmapDrawable(resources, typedValue, inputStream);
+        }
+        Rect rect2 = new Rect();
+        options.inScreenDensity = resolveDensity(resources, 0);
+        Bitmap bitmapDecodeResourceStream = BitmapFactory.decodeResourceStream(resources, typedValue, inputStream, rect2, options);
+        if (bitmapDecodeResourceStream == null) {
+            return null;
+        }
+        byte[] ninePatchChunk = bitmapDecodeResourceStream.getNinePatchChunk();
+        if (ninePatchChunk == null || !NinePatch.isNinePatchChunk(ninePatchChunk)) {
+            bArr = null;
+            rect = null;
+        } else {
+            bArr = ninePatchChunk;
+            rect = rect2;
+        }
+        Rect rect3 = new Rect();
+        bitmapDecodeResourceStream.getOpticalInsets(rect3);
+        return drawableFromBitmap(resources, bitmapDecodeResourceStream, bArr, rect, rect3, str);
     }
 
     private static Drawable getBitmapDrawable(Resources resources, TypedValue typedValue, InputStream inputStream) {
-        ImageDecoder.Source createSource;
+        ImageDecoder.Source sourceCreateSource;
         int i;
         try {
             if (typedValue != null) {
@@ -534,11 +482,11 @@ public abstract class Drawable {
                 } else {
                     i = typedValue.density != 65535 ? typedValue.density : 0;
                 }
-                createSource = ImageDecoder.createSource(resources, inputStream, i);
+                sourceCreateSource = ImageDecoder.createSource(resources, inputStream, i);
             } else {
-                createSource = ImageDecoder.createSource(resources, inputStream);
+                sourceCreateSource = ImageDecoder.createSource(resources, inputStream);
             }
-            return ImageDecoder.decodeDrawable(createSource, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.Drawable$$ExternalSyntheticLambda0
+            return ImageDecoder.decodeDrawable(sourceCreateSource, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.Drawable$$ExternalSyntheticLambda0
                 @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                 public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
                     Drawable.lambda$getBitmapDrawable$1(imageDecoder, imageInfo, source);
@@ -574,7 +522,7 @@ public abstract class Drawable {
 
     public static Drawable createFromXmlForDensity(Resources resources, XmlPullParser xmlPullParser, int i, Resources.Theme theme) throws XmlPullParserException, IOException {
         int next;
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
         do {
             next = xmlPullParser.next();
             if (next == 2) {
@@ -584,9 +532,9 @@ public abstract class Drawable {
         if (next != 2) {
             throw new XmlPullParserException("No start tag found");
         }
-        Drawable createFromXmlInnerForDensity = createFromXmlInnerForDensity(resources, xmlPullParser, asAttributeSet, i, theme);
-        if (createFromXmlInnerForDensity != null) {
-            return createFromXmlInnerForDensity;
+        Drawable drawableCreateFromXmlInnerForDensity = createFromXmlInnerForDensity(resources, xmlPullParser, attributeSetAsAttributeSet, i, theme);
+        if (drawableCreateFromXmlInnerForDensity != null) {
+            return drawableCreateFromXmlInnerForDensity;
         }
         throw new RuntimeException("Unknown initial tag: " + xmlPullParser.getName());
     }
@@ -634,9 +582,9 @@ public abstract class Drawable {
     }
 
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.Drawable);
-        this.mVisible = obtainAttributes.getBoolean(0, this.mVisible);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.Drawable);
+        this.mVisible = typedArrayObtainAttributes.getBoolean(0, this.mVisible);
+        typedArrayObtainAttributes.recycle();
     }
 
     void inflateWithAttributes(Resources resources, XmlPullParser xmlPullParser, TypedArray typedArray, int i) throws XmlPullParserException, IOException {
@@ -703,8 +651,8 @@ public abstract class Drawable {
         if (!z) {
             return (int) f;
         }
-        int round = Math.round(f);
-        return round != 0 ? round : i > 0 ? 1 : -1;
+        int iRound = Math.round(f);
+        return iRound != 0 ? iRound : i > 0 ? 1 : -1;
     }
 
     static int resolveDensity(Resources resources, int i) {

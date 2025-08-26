@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FragmentService implements Dumpable {
     public final AnonymousClass1 mConfigurationListener;
@@ -24,7 +23,6 @@ public class FragmentService implements Dumpable {
     public final ArrayMap mInjectionMap = new ArrayMap();
     public final Handler mHandler = new Handler();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FragmentHostState {
         public final FragmentHostManager mFragmentHostManager;
         public final View mView;
@@ -45,7 +43,7 @@ public class FragmentService implements Dumpable {
                     FragmentService.this.mHandler.post(new Runnable() { // from class: com.android.systemui.fragments.FragmentService$FragmentHostState$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            FragmentService.FragmentHostState fragmentHostState2 = FragmentService.FragmentHostState.this;
+                            FragmentService.FragmentHostState fragmentHostState2 = fragmentHostState;
                             Configuration configuration2 = configuration;
                             FragmentHostManager fragmentHostManager = fragmentHostState2.mFragmentHostManager;
                             if (fragmentHostManager.mConfigChanges.applyNewConfig(fragmentHostManager.mContext.getResources())) {

@@ -2044,7 +2044,7 @@ Ouvir em volume alto por longos períodos pode danificar sua audição."</string
     <string name="satellite_notification_manual_title">Usar mensagens via satélite?</string>
     <string name="satellite_notification_open_message">Abrir o app Mensagens</string>
     <string name="satellite_notification_summary">Você pode enviar e receber mensagens sem um dispositivo móvel ou uma rede Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">É possível enviar e receber mensagens e usar dados limitados via satélite</string>
+    <string name="satellite_notification_summary_with_data">Você pode trocar mensagens e usar alguns apps via satélite</string>
     <string name="satellite_notification_title">Conectado automaticamente ao satélite</string>
     <string name="satellite_sos_available_notification_summary">Você poderá enviar uma mensagem para serviços de emergência se não houver uma rede móvel ou Wi-Fi. O Google Mensagens precisa ser seu app de mensagens padrão.</string>
     <string name="satellite_sos_available_notification_title">O SOS via satélite já está disponível</string>

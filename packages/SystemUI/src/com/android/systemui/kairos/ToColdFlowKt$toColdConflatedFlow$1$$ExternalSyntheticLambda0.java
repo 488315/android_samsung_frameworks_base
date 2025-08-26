@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,7 +22,7 @@ public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalS
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         BuildScope buildScope = (BuildScope) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -34,10 +33,10 @@ public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalS
                     public final Object invoke(Object obj2, Object obj3) {
                         switch (i) {
                             case 0:
-                                ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(obj3);
                                 break;
                             default:
-                                ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(obj3);
                                 break;
                         }
                         return Unit.INSTANCE;
@@ -51,10 +50,10 @@ public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalS
                     public final Object invoke(Object obj2, Object obj3) {
                         switch (i2) {
                             case 0:
-                                ((ChannelCoroutine) producerScope2).mo3456trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(obj3);
                                 break;
                             default:
-                                ((ChannelCoroutine) producerScope2).mo3456trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(obj3);
                                 break;
                         }
                         return Unit.INSTANCE;

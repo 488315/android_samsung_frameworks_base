@@ -8,7 +8,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenCaptureDevicePolicyResolver {
     public final DevicePolicyManager devicePolicyManager;
@@ -102,9 +101,9 @@ public final class ScreenCaptureDevicePolicyResolver {
     }
 
     public final boolean isScreenCaptureAllowed(UserHandle userHandle, UserHandle userHandle2) {
-        boolean areEqual = Intrinsics.areEqual(userHandle2, this.workProfileUserHandle);
+        boolean zAreEqual = Intrinsics.areEqual(userHandle2, this.workProfileUserHandle);
         Lazy lazy = this.workProfileScreenCaptureDisabled$delegate;
-        if (areEqual && ((Boolean) lazy.getValue()).booleanValue()) {
+        if (zAreEqual && ((Boolean) lazy.getValue()).booleanValue()) {
             return false;
         }
         Lazy lazy2 = this.personalProfileScreenCaptureDisabled$delegate;

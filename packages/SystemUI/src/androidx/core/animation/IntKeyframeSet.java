@@ -4,7 +4,6 @@ import androidx.core.animation.Keyframe;
 import androidx.core.animation.Keyframes;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class IntKeyframeSet extends KeyframeSet implements Keyframes.IntKeyframes {
     public IntKeyframeSet(Keyframe.IntKeyframe... intKeyframeArr) {
@@ -69,12 +68,12 @@ public class IntKeyframeSet extends KeyframeSet implements Keyframes.IntKeyframe
 
     @Override // androidx.core.animation.KeyframeSet
     /* renamed from: clone */
-    public final IntKeyframeSet mo892clone() {
+    public final IntKeyframeSet mo894clone() {
         List list = this.mKeyframes;
         int size = list.size();
         Keyframe.IntKeyframe[] intKeyframeArr = new Keyframe.IntKeyframe[size];
         for (int i = 0; i < size; i++) {
-            intKeyframeArr[i] = (Keyframe.IntKeyframe) ((Keyframe) list.get(i)).mo893clone();
+            intKeyframeArr[i] = (Keyframe.IntKeyframe) ((Keyframe) list.get(i)).mo895clone();
         }
         return new IntKeyframeSet(intKeyframeArr);
     }

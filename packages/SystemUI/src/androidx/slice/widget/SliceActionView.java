@@ -22,7 +22,6 @@ import androidx.slice.SliceItem;
 import androidx.slice.core.SliceActionImpl;
 import com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceActionView extends FrameLayout implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     public static final int[] CHECKED_STATE_SET = {R.attr.state_checked};
@@ -35,7 +34,6 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
     public SliceActionImpl mSliceAction;
     public final int mTextActionPadding;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImageToggle extends ImageView implements Checkable, View.OnClickListener {
         public boolean mIsChecked;
         public View.OnClickListener mListener;
@@ -57,11 +55,11 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
 
         @Override // android.widget.ImageView, android.view.View
         public final int[] onCreateDrawableState(int i) {
-            int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+            int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
             if (this.mIsChecked) {
-                ImageView.mergeDrawableStates(onCreateDrawableState, SliceActionView.CHECKED_STATE_SET);
+                ImageView.mergeDrawableStates(iArrOnCreateDrawableState, SliceActionView.CHECKED_STATE_SET);
             }
-            return onCreateDrawableState;
+            return iArrOnCreateDrawableState;
         }
 
         @Override // android.widget.Checkable
@@ -118,7 +116,7 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
 
     /* JADX WARN: Multi-variable type inference failed */
     public final void sendActionInternal() {
-        Intent intent;
+        Intent intentPutExtra;
         EventInfo eventInfo;
         SliceActionImpl sliceActionImpl = this.mSliceAction;
         if (sliceActionImpl == null || sliceActionImpl.mActionItem == null) {
@@ -126,16 +124,16 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
         }
         try {
             if (sliceActionImpl.isToggle()) {
-                boolean isChecked = ((Checkable) this.mActionView).isChecked();
-                intent = new Intent().addFlags(268435456).putExtra("android.app.slice.extra.TOGGLE_STATE", isChecked);
+                boolean zIsChecked = ((Checkable) this.mActionView).isChecked();
+                intentPutExtra = new Intent().addFlags(268435456).putExtra("android.app.slice.extra.TOGGLE_STATE", zIsChecked);
                 EventInfo eventInfo2 = this.mEventInfo;
                 if (eventInfo2 != null) {
-                    eventInfo2.state = isChecked ? 1 : 0;
+                    eventInfo2.state = zIsChecked ? 1 : 0;
                 }
             } else {
-                intent = null;
+                intentPutExtra = null;
             }
-            this.mSliceAction.mActionItem.fireActionInternal(getContext(), intent);
+            this.mSliceAction.mActionItem.fireActionInternal(getContext(), intentPutExtra);
             VolumePanelDialog$$ExternalSyntheticLambda5 volumePanelDialog$$ExternalSyntheticLambda5 = this.mObserver;
             if (volumePanelDialog$$ExternalSyntheticLambda5 == null || (eventInfo = this.mEventInfo) == null) {
                 return;
@@ -166,10 +164,10 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
         this.mEventInfo = eventInfo;
         this.mObserver = volumePanelDialog$$ExternalSyntheticLambda5;
         this.mActionView = null;
-        boolean isDefaultToggle = sliceActionImpl.isDefaultToggle();
+        boolean zIsDefaultToggle = sliceActionImpl.isDefaultToggle();
         boolean z = sliceActionImpl.mIsChecked;
         int i2 = 0;
-        if (isDefaultToggle) {
+        if (zIsDefaultToggle) {
             Switch r5 = (Switch) LayoutInflater.from(getContext()).inflate(com.android.systemui.R.layout.abc_slice_switch, (ViewGroup) this, false);
             r5.setChecked(z);
             r5.setOnCheckedChangeListener(this);
@@ -217,10 +215,10 @@ public class SliceActionView extends FrameLayout implements View.OnClickListener
                     this.mActionView = new ImageView(getContext());
                 }
                 addView(this.mActionView);
-                Drawable loadDrawable = this.mSliceAction.mIcon.loadDrawable(getContext());
-                ((ImageView) this.mActionView).setImageDrawable(loadDrawable);
-                if (i != -1 && this.mSliceAction.mImageMode == 0 && loadDrawable != null) {
-                    loadDrawable.setTint(i);
+                Drawable drawableLoadDrawable = this.mSliceAction.mIcon.loadDrawable(getContext());
+                ((ImageView) this.mActionView).setImageDrawable(drawableLoadDrawable);
+                if (i != -1 && this.mSliceAction.mImageMode == 0 && drawableLoadDrawable != null) {
+                    drawableLoadDrawable.setTint(i);
                 }
                 FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) this.mActionView.getLayoutParams();
                 int i5 = this.mImageSize;

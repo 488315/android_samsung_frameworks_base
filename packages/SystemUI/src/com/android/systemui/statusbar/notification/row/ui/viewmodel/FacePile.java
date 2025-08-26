@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FacePile extends ConversationAvatar {
     public final int bottomBackgroundColor;
@@ -31,9 +30,9 @@ public final class FacePile extends ConversationAvatar {
 
     public final int hashCode() {
         Drawable drawable = this.topIconDrawable;
-        int hashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
+        int iHashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
         Drawable drawable2 = this.bottomIconDrawable;
-        return Integer.hashCode(this.bottomBackgroundColor) + ((hashCode + (drawable2 != null ? drawable2.hashCode() : 0)) * 31);
+        return Integer.hashCode(this.bottomBackgroundColor) + ((iHashCode + (drawable2 != null ? drawable2.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

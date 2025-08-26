@@ -9,12 +9,10 @@ import androidx.compose.runtime.snapshots.StateRecord;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SnapshotMutableLongStateImpl extends StateObjectImpl implements MutableLongState, SnapshotMutableState<Long> {
     public LongStateStateRecord next;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class LongStateStateRecord extends StateRecord {
         public long value;
 
@@ -40,9 +38,9 @@ public class SnapshotMutableLongStateImpl extends StateObjectImpl implements Mut
     }
 
     public SnapshotMutableLongStateImpl(long j) {
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        LongStateStateRecord longStateStateRecord = new LongStateStateRecord(currentSnapshot.getSnapshotId(), j);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        LongStateStateRecord longStateStateRecord = new LongStateStateRecord(snapshotCurrentSnapshot.getSnapshotId(), j);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             longStateStateRecord.next = new LongStateStateRecord(1, j);
         }
         this.next = longStateStateRecord;
@@ -55,14 +53,10 @@ public class SnapshotMutableLongStateImpl extends StateObjectImpl implements Mut
 
     @Override // androidx.compose.runtime.MutableState
     public final Function1 component2() {
-        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableLongStateImpl$component2$1
-            {
-                super(1);
-            }
-
+        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableLongStateImpl.component2.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SnapshotMutableLongStateImpl.this.setLongValue(((Number) obj).longValue());
                 return Unit.INSTANCE;
             }
@@ -97,17 +91,17 @@ public class SnapshotMutableLongStateImpl extends StateObjectImpl implements Mut
     }
 
     public final void setLongValue(long j) {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         LongStateStateRecord longStateStateRecord = (LongStateStateRecord) SnapshotKt.current(this.next);
         if (longStateStateRecord.value != j) {
             LongStateStateRecord longStateStateRecord2 = this.next;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                ((LongStateStateRecord) SnapshotKt.overwritableRecord(longStateStateRecord2, this, currentSnapshot, longStateStateRecord)).value = j;
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                ((LongStateStateRecord) SnapshotKt.overwritableRecord(longStateStateRecord2, this, snapshotCurrentSnapshot, longStateStateRecord)).value = j;
                 Unit unit = Unit.INSTANCE;
             }
-            SnapshotKt.notifyWrite(currentSnapshot, this);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
         }
     }
 

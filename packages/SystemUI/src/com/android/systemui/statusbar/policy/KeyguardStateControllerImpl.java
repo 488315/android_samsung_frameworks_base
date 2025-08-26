@@ -27,7 +27,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardStateControllerImpl implements KeyguardStateController {
     public final ConcurrentHashMap.KeySetView mCallbacks = ConcurrentHashMap.newKeySet();
@@ -57,7 +56,6 @@ public class KeyguardStateControllerImpl implements KeyguardStateController {
     public final Lazy mUnlockAnimationControllerLazy;
     public final SelectedUserInteractor mUserInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class UpdateMonitorCallback extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ UpdateMonitorCallback(KeyguardStateControllerImpl keyguardStateControllerImpl, int i) {
             this();
@@ -178,13 +176,13 @@ public class KeyguardStateControllerImpl implements KeyguardStateController {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardStateController:", "  mShowing: "), this.mShowing, printWriter, "  mOccluded: "), this.mOccluded, printWriter, "  mSecure: "), this.mSecure, printWriter, "  mCanDismissLockScreen: "), this.mCanDismissLockScreen, printWriter, "  mTrustManaged: "), this.mTrustManaged, printWriter, "  mTrusted: ");
-        m.append(this.mTrusted);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardStateController:", "  mShowing: "), this.mShowing, printWriter, "  mOccluded: "), this.mOccluded, printWriter, "  mSecure: "), this.mSecure, printWriter, "  mCanDismissLockScreen: "), this.mCanDismissLockScreen, printWriter, "  mTrustManaged: "), this.mTrustManaged, printWriter, "  mTrusted: ");
+        sbM.append(this.mTrusted);
+        printWriter.println(sbM.toString());
         printWriter.println("  mDebugUnlocked: false");
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mFaceEnrolled: "), this.mFaceEnrolledAndEnabled, printWriter, "  mFingerprintEnabled: "), this.mFingerprintEnabled, printWriter, "  isKeyguardFadingAway: "), this.mKeyguardFadingAway, printWriter, "  isKeyguardGoingAway: ");
-        m2.append(this.mKeyguardGoingAway);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mFaceEnrolled: "), this.mFaceEnrolledAndEnabled, printWriter, "  mFingerprintEnabled: "), this.mFingerprintEnabled, printWriter, "  isKeyguardFadingAway: "), this.mKeyguardFadingAway, printWriter, "  isKeyguardGoingAway: ");
+        sbM2.append(this.mKeyguardGoingAway);
+        printWriter.println(sbM2.toString());
         printWriter.println("  isLaunchTransitionFadingAway: false");
     }
 
@@ -232,8 +230,8 @@ public class KeyguardStateControllerImpl implements KeyguardStateController {
         Trace.beginSection("KeyguardStateController#update");
         int selectedUserId = this.mUserInteractor.getSelectedUserId();
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
-        boolean isSecure = keyguardUpdateMonitor.isSecure(selectedUserId);
-        if (!isSecure || keyguardUpdateMonitor.getUserCanSkipBouncer(selectedUserId)) {
+        boolean zIsSecure = keyguardUpdateMonitor.isSecure(selectedUserId);
+        if (!zIsSecure || keyguardUpdateMonitor.getUserCanSkipBouncer(selectedUserId)) {
             z2 = true;
         } else {
             boolean z3 = Build.IS_DEBUGGABLE;
@@ -241,27 +239,27 @@ public class KeyguardStateControllerImpl implements KeyguardStateController {
         }
         boolean userTrustIsManaged = keyguardUpdateMonitor.getUserTrustIsManaged(selectedUserId);
         boolean userHasTrust = keyguardUpdateMonitor.getUserHasTrust(selectedUserId);
-        boolean isFaceEnabledAndEnrolled = keyguardUpdateMonitor.isFaceEnabledAndEnrolled();
-        boolean isFingerprintOptionEnabled = keyguardUpdateMonitor.isFingerprintOptionEnabled();
-        if (isSecure != this.mSecure || z2 != this.mCanDismissLockScreen || userTrustIsManaged != this.mTrustManaged || this.mTrusted != userHasTrust || this.mFaceEnrolledAndEnabled != isFaceEnabledAndEnrolled || this.mFingerprintEnabled != isFingerprintOptionEnabled || z) {
-            this.mSecure = isSecure;
+        boolean zIsFaceEnabledAndEnrolled = keyguardUpdateMonitor.isFaceEnabledAndEnrolled();
+        boolean zIsFingerprintOptionEnabled = keyguardUpdateMonitor.isFingerprintOptionEnabled();
+        if (zIsSecure != this.mSecure || z2 != this.mCanDismissLockScreen || userTrustIsManaged != this.mTrustManaged || this.mTrusted != userHasTrust || this.mFaceEnrolledAndEnabled != zIsFaceEnabledAndEnrolled || this.mFingerprintEnabled != zIsFingerprintOptionEnabled || z) {
+            this.mSecure = zIsSecure;
             this.mCanDismissLockScreen = z2;
             this.mTrusted = userHasTrust;
             this.mTrustManaged = userTrustIsManaged;
-            this.mFaceEnrolledAndEnabled = isFaceEnabledAndEnrolled;
-            this.mFingerprintEnabled = isFingerprintOptionEnabled;
+            this.mFaceEnrolledAndEnabled = zIsFaceEnabledAndEnrolled;
+            this.mFingerprintEnabled = zIsFingerprintOptionEnabled;
             KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
             keyguardUpdateMonitorLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(19);
             LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardState", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-            logMessageImpl.bool1 = isSecure;
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardState", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.bool1 = zIsSecure;
             logMessageImpl.bool2 = z2;
             logMessageImpl.bool3 = userHasTrust;
             logMessageImpl.bool4 = userTrustIsManaged;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             Trace.beginSection("KeyguardStateController#notifyUnlockedChanged");
             invokeForEachCallback(new KeyguardStateControllerImpl$$ExternalSyntheticLambda0(3));
             Trace.endSection();

@@ -1,6 +1,7 @@
 package com.android.internal.globalactions;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -50,11 +51,11 @@ public abstract class SinglePressAction implements Action {
     }
 
     @Override // com.android.internal.globalactions.Action
-    public View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-        View inflate = layoutInflater.inflate(R.layout.global_actions_item, viewGroup, false);
-        ImageView imageView = (ImageView) inflate.findViewById(16908294);
-        TextView textView = (TextView) inflate.findViewById(16908299);
-        TextView textView2 = (TextView) inflate.findViewById(R.id.status);
+    public View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) throws Resources.NotFoundException {
+        View viewInflate = layoutInflater.inflate(R.layout.global_actions_item, viewGroup, false);
+        ImageView imageView = (ImageView) viewInflate.findViewById(16908294);
+        TextView textView = (TextView) viewInflate.findViewById(16908299);
+        TextView textView2 = (TextView) viewInflate.findViewById(R.id.status);
         String status = getStatus();
         if (textView2 != null) {
             if (!TextUtils.isEmpty(status)) {
@@ -66,12 +67,12 @@ public abstract class SinglePressAction implements Action {
         if (imageView != null) {
             Drawable drawable = this.mIcon;
             if (drawable != null) {
-                imageView.lambda$setImageURIAsync$0(drawable);
+                imageView.lambda$setImageURIAsync$2(drawable);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } else {
                 int i = this.mIconResId;
                 if (i != 0) {
-                    imageView.lambda$setImageURIAsync$0(context.getDrawable(i));
+                    imageView.lambda$setImageURIAsync$2(context.getDrawable(i));
                 }
             }
         }
@@ -79,10 +80,10 @@ public abstract class SinglePressAction implements Action {
             CharSequence charSequence = this.mMessage;
             if (charSequence != null) {
                 textView.lambda$setTextAsync$0(charSequence);
-                return inflate;
+                return viewInflate;
             }
             textView.setText(this.mMessageResId);
         }
-        return inflate;
+        return viewInflate;
     }
 }

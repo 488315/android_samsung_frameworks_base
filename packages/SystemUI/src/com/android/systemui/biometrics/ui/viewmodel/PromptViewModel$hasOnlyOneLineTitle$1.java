@@ -1,5 +1,6 @@
 package com.android.systemui.biometrics.ui.viewmodel;
 
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.hardware.biometrics.PromptContentView;
 import android.text.TextPaint;
@@ -11,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$hasOnlyOneLineTitle$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -38,7 +38,7 @@ final class PromptViewModel$hasOnlyOneLineTitle$1 extends SuspendLambda implemen
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -51,12 +51,12 @@ final class PromptViewModel$hasOnlyOneLineTitle$1 extends SuspendLambda implemen
         boolean z = false;
         if (str2.length() <= 0 && promptContentView == null && str3.length() <= 0) {
             int dimensionPixelSize = this.this$0.context.getResources().getDimensionPixelSize(R.dimen.biometric_prompt_two_pane_udfps_shorter_content_width);
-            TypedArray obtainStyledAttributes = this.this$0.context.obtainStyledAttributes(R.style.TextAppearance_AuthCredential_Title, new int[]{android.R.attr.textSize});
+            TypedArray typedArrayObtainStyledAttributes = this.this$0.context.obtainStyledAttributes(R.style.TextAppearance_AuthCredential_Title, new int[]{android.R.attr.textSize});
             TextPaint textPaint = new TextPaint();
-            textPaint.setTextSize(obtainStyledAttributes.getDimensionPixelSize(0, 0));
-            float measureText = textPaint.measureText(str);
-            obtainStyledAttributes.recycle();
-            if (measureText / dimensionPixelSize <= 1.0f) {
+            textPaint.setTextSize(typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0));
+            float fMeasureText = textPaint.measureText(str);
+            typedArrayObtainStyledAttributes.recycle();
+            if (fMeasureText / dimensionPixelSize <= 1.0f) {
                 z = true;
             }
         }

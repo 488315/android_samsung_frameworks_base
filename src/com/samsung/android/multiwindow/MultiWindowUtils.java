@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.DisplayMetrics;
@@ -21,6 +23,7 @@ import android.util.TypedValue;
 import android.view.RoundedCorners;
 import com.android.internal.R;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
+import com.android.internal.policy.SystemBarUtils;
 import com.samsung.android.core.CoreSaConstant;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.CoreRune;
@@ -29,10 +32,12 @@ import java.util.List;
 
 /* loaded from: classes6.dex */
 public class MultiWindowUtils {
+    public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER = "android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER";
     public static final int ADD_APP_PAIR_SHORTCUT_EDGE_PANEL = 2;
     public static final int ADD_APP_PAIR_SHORTCUT_HOME = 1;
     public static final int ADD_APP_PAIR_SHORTCUT_TASKBAR = 0;
     private static final String AI_ASSIST_ACTION = "com.samsung.android.intent.action.AI_ASSIST";
+    private static final String CTS_PACKAGE_NAME = "android.systemui.cts";
     private static final int DENSITY_FREEFORM = 4;
     private static final int DENSITY_NONE = 0;
     private static final int DENSITY_SPLIT = 2;
@@ -58,8 +63,10 @@ public class MultiWindowUtils {
     public static final String HONEY_SPACE_EDGE_PANEL_PROVIDER = "com.samsung.app.honeyspace.edge.appsedge.ui.panel.AppsEdgePanelProvider";
     private static final String HONEY_SPACE_EDGE_PKG_NAME = "com.sec.android.app.launcher";
     private static final String HONEY_SPACE_OVERLAY_ALLAPPS_SERVICE_CLS = "com.sec.android.app.launcher.overlayapps.OverlayAppsService";
+    public static final String KNOX_SECURE_FOLDER_PACAKGE = "com.samsung.knox.securefolder";
     public static final int MAX_ACTIVE_TASKS_LIMIT = 15;
     public static final int MAX_BOUNDS_CONFLICT_COUNT = 200;
+    public static final String MULTI_WINDOW_DISABLED_OVERHEAT_REQUESTER = "SSRM";
     private static final String PERMISSION_CONTROLLER_PACKAGE = "com.google.android.permissioncontroller";
     private static final String SCREEN_CAPTURE_PACKAGE = "com.samsung.android.app.smartcapture";
     private static final String SEC_LAUNCHER_PACKAGE_NAME = "com.sec.android.app.launcher";
@@ -70,10 +77,12 @@ public class MultiWindowUtils {
     private static final String VISION_INTELLIGENCE = "com.samsung.android.visionintelligence";
     public static final String FLEX_PANEL_CLASS_NAME = "com.android.wm.shell.controlpanel.activity.FlexPanelActivity";
     public static final ComponentName FLEX_PANEL_COMPONENT_NAME = new ComponentName("com.android.systemui", FLEX_PANEL_CLASS_NAME);
+    private static final String TAG = "MultiWindowUtils";
     private static final boolean sIsTablet = checkIsTablet();
     public static final PointF DEX_DEFAULT_SIZE_RATIO = new PointF(0.42f, 0.56f);
     public static final PointF DEX_DEFAULT_SIZE_RATIO_FOR_STANDALONE = new PointF(0.55f, 0.66f);
     public static final PointF DEX_DEFAULT_SIZE_RATIO_FOR_NEW_DEX = new PointF(0.541f, 0.65f);
+    public static final float DESKTOP_MODE_INITIAL_BOUNDS_SCALE = SystemProperties.getInt("persist.wm.debug.desktop_mode_initial_bounds_scale", 75) / 100.0f;
 
     private static int getDensityBucket(int i) {
         if (i <= 120) {
@@ -135,6 +144,32 @@ public class MultiWindowUtils {
         return "android.server.wm.app".equals(str);
     }
 
+    public static boolean isSamsungCameraPackage(String str) {
+        return "com.sec.android.app.camera".equals(str);
+    }
+
+    public static boolean isPermissionControllerPackage(String str) {
+        return PERMISSION_CONTROLLER_PACKAGE.equals(str);
+    }
+
+    public static String rectToString(Rect rect) {
+        StringBuilder sb = new StringBuilder(32);
+        sb.append("Position(");
+        sb.append(rect.left);
+        sb.append(",");
+        sb.append(rect.top);
+        sb.append("),Size(");
+        sb.append(rect.width());
+        sb.append(",");
+        sb.append(rect.height());
+        sb.append(NavigationBarInflaterView.KEY_CODE_END);
+        return sb.toString();
+    }
+
+    public static boolean isCtsPackage(String str) {
+        return CTS_PACKAGE_NAME.equals(str);
+    }
+
     public static boolean isDefaultLauncher(Context context) {
         String str;
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -153,9 +188,9 @@ public class MultiWindowUtils {
         float f2;
         int i;
         int i2;
-        int width = rect.width();
-        int height = rect.height();
-        boolean z = width > height;
+        int iWidth = rect.width();
+        int iHeight = rect.height();
+        boolean z = iWidth > iHeight;
         if (isTablet()) {
             f = FREEFORM_DEFAULT_SHORT_SIZE_RATIO_FOR_TABLET;
             f2 = FREEFORM_DEFAULT_LONG_SIZE_RATIO_FOR_TABLET;
@@ -176,12 +211,12 @@ public class MultiWindowUtils {
             }
         }
         if (!isTablet() || z) {
-            int i3 = (int) ((width * f) + 0.5f);
-            i = (int) ((height * f2) + 0.5f);
+            int i3 = (int) ((iWidth * f) + 0.5f);
+            i = (int) ((iHeight * f2) + 0.5f);
             i2 = i3;
         } else {
-            i2 = (int) ((height * f2) + 0.5f);
-            i = (int) ((width * f) + 0.5f);
+            i2 = (int) ((iHeight * f2) + 0.5f);
+            i = (int) ((iWidth * f) + 0.5f);
         }
         rect3.set(0, 0, Math.min(rect2.width(), Math.max(i2, windowLayout == null ? -1 : windowLayout.minWidth)), Math.min(rect2.height(), Math.max(i, windowLayout != null ? windowLayout.minHeight : -1)));
     }
@@ -197,18 +232,32 @@ public class MultiWindowUtils {
         return new ActivityInfo.WindowLayout(windowLayout.width < 0 ? -1 : (int) ((windowLayout.width * f3) + 0.5f), windowLayout.widthFraction, windowLayout.height < 0 ? -1 : (int) ((windowLayout.height * f3) + 0.5f), windowLayout.heightFraction, windowLayout.gravity, windowLayout.minWidth < 0 ? -1 : (int) ((windowLayout.minWidth * f3) + 0.5f), windowLayout.minHeight >= 0 ? (int) ((windowLayout.minHeight * f3) + 0.5f) : -1);
     }
 
+    public static void scaleBounds(Rect rect, Rect rect2, Rect rect3, Rect rect4) {
+        float fWidth = rect2.width() / rect.width();
+        float fHeight = rect2.height() / rect.height();
+        if (fWidth >= 0.9f && fWidth <= 1.1f && fHeight >= 0.9f && fHeight <= 1.1f) {
+            Slog.d(TAG, "scaleBounds: skip. prev=" + rect + " next=" + rect2);
+            rect4.set(rect3);
+            return;
+        }
+        rect4.left = (int) ((rect3.left * fWidth) + 0.5f);
+        rect4.right = (int) ((rect3.right * fWidth) + 0.5f);
+        rect4.top = (int) ((rect3.top * fHeight) + 0.5f);
+        rect4.bottom = (int) ((rect3.bottom * fHeight) + 0.5f);
+    }
+
     public static int getRoundedCornerColor(Context context) {
         return context.getResources().getColor(R.color.split_divider_background, null);
     }
 
-    public static int getRoundedCornerRadius(Context context) {
+    public static int getRoundedCornerRadius(Context context) throws Resources.NotFoundException {
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.rounded_corner_radius_for_multiwindow);
         if (MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED) {
             Resources resources = context.getResources();
             String uniqueId = context.getDisplayNoVerify().getUniqueId();
-            int min = Math.min(RoundedCorners.getRoundedCornerTopRadius(resources, uniqueId), RoundedCorners.getRoundedCornerBottomRadius(resources, uniqueId));
-            if (min < dimensionPixelSize) {
-                return min;
+            int iMin = Math.min(RoundedCorners.getRoundedCornerTopRadius(resources, uniqueId), RoundedCorners.getRoundedCornerBottomRadius(resources, uniqueId));
+            if (iMin < dimensionPixelSize) {
+                return iMin;
             }
         }
         return dimensionPixelSize;
@@ -247,11 +296,51 @@ public class MultiWindowUtils {
         return (int) TypedValue.applyDimension(1, i, displayMetrics);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x001f  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0026  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static void fitInDisplayBounds(Rect rect, Rect rect2) {
+        int i;
+        int i2;
+        int i3;
+        int i4;
+        int i5;
+        int i6 = 0;
+        if (rect.left < rect2.left) {
+            i2 = rect2.left;
+            i3 = rect.left;
+        } else if (rect.right > rect2.right) {
+            i2 = rect2.right;
+            i3 = rect.right;
+        } else {
+            i = 0;
+            if (rect.top >= rect2.top) {
+                i4 = rect2.top;
+                i5 = rect.top;
+            } else {
+                if (rect.bottom > rect2.bottom) {
+                    i4 = rect2.bottom;
+                    i5 = rect.bottom;
+                }
+                rect.offset(i, i6);
+            }
+            i6 = i4 - i5;
+            rect.offset(i, i6);
+        }
+        i = i2 - i3;
+        if (rect.top >= rect2.top) {
+        }
+        i6 = i4 - i5;
+        rect.offset(i, i6);
+    }
+
     public static boolean isDesktopModeSingleTopActivityTranslucent(TaskInfo taskInfo) {
         return taskInfo != null && taskInfo.isTopActivityTransparent && taskInfo.numActivities == 1;
     }
 
-    public static boolean isSystemUiTask(Context context, TaskInfo taskInfo) {
+    public static boolean isSystemUiTask(Context context, TaskInfo taskInfo) throws Resources.NotFoundException {
         if (context != null && taskInfo != null) {
             String string = context.getResources().getString(17039418);
             if (taskInfo.baseActivity != null && taskInfo.baseActivity.getPackageName().equals(string)) {
@@ -261,6 +350,71 @@ public class MultiWindowUtils {
         return false;
     }
 
+    public static int getDesktopViewAppHeaderHeightPx(Context context, Configuration configuration) {
+        if (configuration == null || !configuration.windowConfiguration.getBounds().isEmpty()) {
+            return SystemBarUtils.getDesktopViewAppHeaderHeightPx(context);
+        }
+        return 0;
+    }
+
+    public static void calculateDesktopCompatInitialBounds(Rect rect, int i, int i2, int i3, int i4) {
+        int i5;
+        int i6;
+        int i7 = 1;
+        int i8 = i2 > i3 ? 2 : 1;
+        if (ActivityInfo.isFixedOrientationLandscape(i)) {
+            i7 = 2;
+        } else if (!ActivityInfo.isFixedOrientationPortrait(i)) {
+            i7 = i8;
+        }
+        if (i8 == 2 && i7 == 2) {
+            float f = DESKTOP_MODE_INITIAL_BOUNDS_SCALE;
+            i6 = (int) ((i2 * f) + 0.5f);
+            i5 = (int) ((i3 * f) + 0.5f);
+        } else {
+            int iMin = Math.min(i2, i3);
+            float desktopCompatContainerAspectRatio = getDesktopCompatContainerAspectRatio(i7, i2, i3);
+            if (i8 == 2) {
+                int i9 = (int) ((iMin * DESKTOP_MODE_INITIAL_BOUNDS_SCALE) + 0.5f);
+                i6 = (int) ((i9 / desktopCompatContainerAspectRatio) + 0.5f);
+                i5 = i9;
+            } else {
+                int i10 = (int) ((iMin * DESKTOP_MODE_INITIAL_BOUNDS_SCALE) + 0.5f);
+                i5 = (int) ((i7 == 2 ? i10 / desktopCompatContainerAspectRatio : i10 * desktopCompatContainerAspectRatio) + 0.5f);
+                i6 = i10;
+            }
+        }
+        rect.set(0, 0, i6, i5 + i4);
+    }
+
+    public static void getDesktopCompatContainerBounds(Rect rect, int i, int i2, int i3) {
+        int iMax = Math.max(i2, i3);
+        int iMin = Math.min(i2, i3);
+        if (i == 1) {
+            iMax = (int) ((iMin / getDesktopCompatContainerAspectRatio(i, iMax, iMin)) + 0.5f);
+        }
+        rect.set(0, 0, iMax, iMin);
+    }
+
+    private static float getDesktopCompatContainerAspectRatio(int i, int i2, int i3) {
+        if (i == 1) {
+            return 1.3333334f;
+        }
+        return getAspectRatio(i2, i3);
+    }
+
+    public static float getAspectRatio(int i, int i2) {
+        return Math.max(i, i2) / Math.min(i, i2);
+    }
+
+    public static boolean isTaskWidthOrHeightGreaterOrEqual(Rect rect, Rect rect2) {
+        return rect.width() >= rect2.width() || rect.height() >= rect2.height();
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:38:0x006a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void logForMultiWindowModeChange(int i, int i2, int i3, int i4) {
         String str;
         if (i == i2) {
@@ -274,11 +428,10 @@ public class MultiWindowUtils {
                     i5 = 1;
                 } else if (i2 == 5) {
                     str = CoreSaConstant.DETAIL_FULLSCREEN_TO_FREEFORM;
+                } else if (i2 == 2) {
+                    i5 = 3;
+                    str = CoreSaConstant.DETAIL_FULLSCREEN_TO_PIP;
                 } else {
-                    if (i2 == 2) {
-                        i5 = 3;
-                        str = CoreSaConstant.DETAIL_FULLSCREEN_TO_PIP;
-                    }
                     i5 = 0;
                     str = null;
                 }
@@ -289,42 +442,32 @@ public class MultiWindowUtils {
                 } else if (i2 == 5) {
                     str = CoreSaConstant.DETAIL_SPLIT_TO_FREEFORM;
                     i5 = 5;
-                } else {
-                    if (i2 == 2) {
-                        str = CoreSaConstant.DETAIL_SPLIT_TO_PIP;
-                        i5 = 6;
-                    }
-                    i5 = 0;
-                    str = null;
+                } else if (i2 == 2) {
+                    str = CoreSaConstant.DETAIL_SPLIT_TO_PIP;
+                    i5 = 6;
                 }
-            } else if (i != 5) {
-                if (i == 2) {
-                    if (i2 == 1) {
-                        i5 = 10;
-                        str = CoreSaConstant.DETAIL_PIP_TO_FULLSCREEN;
-                    } else if (i2 == 6) {
-                        i5 = 11;
-                        str = CoreSaConstant.DETAIL_PIP_TO_SPLIT;
-                    } else if (i2 == 5) {
-                        i5 = 12;
-                        str = CoreSaConstant.DETAIL_PIP_TO_FREEFORM;
-                    }
-                }
-                i5 = 0;
-                str = null;
-            } else if (i2 == 1) {
-                i5 = 7;
-                str = CoreSaConstant.DETAIL_FREEFORM_TO_FULLSCREEN;
-            } else if (i2 == 6) {
-                i5 = 8;
-                str = CoreSaConstant.DETAIL_FREEFORM_TO_SPLIT;
-            } else {
-                if (i2 == 2) {
+            } else if (i == 5) {
+                if (i2 == 1) {
+                    i5 = 7;
+                    str = CoreSaConstant.DETAIL_FREEFORM_TO_FULLSCREEN;
+                } else if (i2 == 6) {
+                    i5 = 8;
+                    str = CoreSaConstant.DETAIL_FREEFORM_TO_SPLIT;
+                } else if (i2 == 2) {
                     i5 = 9;
                     str = CoreSaConstant.DETAIL_FREEFORM_TO_PIP;
                 }
-                i5 = 0;
-                str = null;
+            } else if (i == 2) {
+                if (i2 == 1) {
+                    i5 = 10;
+                    str = CoreSaConstant.DETAIL_PIP_TO_FULLSCREEN;
+                } else if (i2 == 6) {
+                    i5 = 11;
+                    str = CoreSaConstant.DETAIL_PIP_TO_SPLIT;
+                } else if (i2 == 5) {
+                    i5 = 12;
+                    str = CoreSaConstant.DETAIL_PIP_TO_FREEFORM;
+                }
             }
             if (i5 != 0) {
                 CoreSaLogger.logForAdvanced(CoreSaConstant.MULTI_WINDOW_MODE_CHANGE_ID, str, i5);
@@ -438,65 +581,65 @@ public class MultiWindowUtils {
             Slog.d("RotationUtils", "adjustBoundsForScreenRatio: sourceBounds is null or empty.");
             return;
         }
-        int width = rect.width();
-        int height = rect.height();
-        int width2 = rect2.width();
-        int height2 = rect2.height();
-        if (width == width2 && height == height2) {
+        int iWidth = rect.width();
+        int iHeight = rect.height();
+        int iWidth2 = rect2.width();
+        int iHeight2 = rect2.height();
+        if (iWidth == iWidth2 && iHeight == iHeight2) {
             Slog.d("RotationUtils", "adjustBoundsForScreenRatio: Since the screen ratio has not changed, there is no need to calculate new bounds.");
             return;
         }
-        int width3 = rect3.width();
-        int height3 = rect3.height();
+        int iWidth3 = rect3.width();
+        int iHeight3 = rect3.height();
         boolean z2 = true;
-        if (width3 > width2) {
-            width3 = (int) ((width2 * 0.8f) + 0.5f);
+        if (iWidth3 > iWidth2) {
+            iWidth3 = (int) ((iWidth2 * 0.8f) + 0.5f);
             z = true;
         } else {
             z = false;
         }
-        if (height3 > height2) {
-            height3 = (int) ((height2 * 0.8f) + 0.5f);
+        if (iHeight3 > iHeight2) {
+            iHeight3 = (int) ((iHeight2 * 0.8f) + 0.5f);
         } else {
             z2 = false;
         }
         if (rect3.left < 0) {
             i = rect3.right;
         } else {
-            i = rect.right < rect3.right ? rect.right - rect3.left : width3;
+            i = rect.right < rect3.right ? rect.right - rect3.left : iWidth3;
         }
         if (rect3.top < 0) {
             i2 = rect3.bottom;
         } else {
-            i2 = rect.bottom < rect3.bottom ? rect.bottom - rect3.top : height3;
+            i2 = rect.bottom < rect3.bottom ? rect.bottom - rect3.top : iHeight3;
         }
-        float f = rect3.left / (width <= i ? 1.0f : width - i);
-        float f2 = rect3.top / (height > i2 ? height - i2 : 1.0f);
+        float f = rect3.left / (iWidth <= i ? 1.0f : iWidth - i);
+        float f2 = rect3.top / (iHeight > i2 ? iHeight - i2 : 1.0f);
         if (z) {
-            rect4.left = (int) ((width2 * 0.1f) + 0.5f);
-            rect4.right = rect4.left + width3;
+            rect4.left = (int) ((iWidth2 * 0.1f) + 0.5f);
+            rect4.right = rect4.left + iWidth3;
         } else if (rect3.left < 0) {
             rect4.left = rect3.left;
-            rect4.right = rect4.left + width3;
+            rect4.right = rect4.left + iWidth3;
         } else if (rect.right < rect3.right) {
             rect4.right = rect2.right + (rect3.right - rect.right);
-            rect4.left = rect4.right - width3;
+            rect4.left = rect4.right - iWidth3;
         } else {
-            rect4.left = (int) ((width2 - i) * f);
-            rect4.right = rect4.left + width3;
+            rect4.left = (int) ((iWidth2 - i) * f);
+            rect4.right = rect4.left + iWidth3;
         }
         if (z2) {
-            rect4.top = (int) ((height2 * 0.1f) + 0.5f);
-            rect4.bottom = rect4.top + height3;
+            rect4.top = (int) ((iHeight2 * 0.1f) + 0.5f);
+            rect4.bottom = rect4.top + iHeight3;
         } else if (rect3.top < 0) {
             rect4.top = rect3.top;
-            rect4.bottom = rect4.top + height3;
+            rect4.bottom = rect4.top + iHeight3;
         } else if (rect.bottom < rect3.bottom) {
             rect4.bottom = rect2.bottom + (rect3.bottom - rect.bottom);
-            rect4.top = rect4.bottom - height3;
+            rect4.top = rect4.bottom - iHeight3;
         } else {
-            rect4.top = (int) ((height2 - i2) * f2);
-            rect4.bottom = rect4.top + height3;
+            rect4.top = (int) ((iHeight2 - i2) * f2);
+            rect4.bottom = rect4.top + iHeight3;
         }
     }
 

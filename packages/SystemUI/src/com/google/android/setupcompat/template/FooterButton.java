@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import com.android.systemui.qs.QSOnboardingActivity$onCreate$1;
+import com.android.systemui.qs.QSOnboardingActivity;
 import com.google.android.setupcompat.R$styleable;
 import com.google.android.setupcompat.logging.CustomEvent;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
@@ -15,7 +15,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.sec.android.secsetupwizardlib.SuwBaseActivity;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FooterButton implements View.OnClickListener {
     static final String KEY_BUTTON_ON_CLICK_COUNT = "_onClickCount";
@@ -32,10 +31,9 @@ public final class FooterButton implements View.OnClickListener {
     public final int theme;
     public int visibility;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final Context context;
-        public QSOnboardingActivity$onCreate$1 onClickListener = null;
+        public QSOnboardingActivity.AnonymousClass1 onClickListener = null;
         public String textResourceName = "";
 
         public Builder(Context context) {
@@ -51,7 +49,7 @@ public final class FooterButton implements View.OnClickListener {
         String str2;
         PersistableBundle persistableBundle = new PersistableBundle();
         persistableBundle.putString(str.concat(KEY_BUTTON_TEXT), CustomEvent.trimsStringOverMaxLength(this.text.toString()));
-        String concat = str.concat(KEY_BUTTON_TYPE);
+        String strConcat = str.concat(KEY_BUTTON_TYPE);
         switch (this.buttonType) {
             case 1:
                 str2 = "ADD_ANOTHER";
@@ -81,7 +79,7 @@ public final class FooterButton implements View.OnClickListener {
                 str2 = "OTHER";
                 break;
         }
-        persistableBundle.putString(concat, str2);
+        persistableBundle.putString(strConcat, str2);
         persistableBundle.putInt(str.concat(KEY_BUTTON_ON_CLICK_COUNT), this.clickCount);
         String str3 = this.textResourceName;
         if (str3 != null && !str3.equals("")) {
@@ -120,16 +118,16 @@ public final class FooterButton implements View.OnClickListener {
         this.enabled = true;
         this.visibility = 0;
         this.clickCount = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SucFooterButton);
-        this.text = obtainStyledAttributes.getString(1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SucFooterButton);
+        this.text = typedArrayObtainStyledAttributes.getString(1);
         this.onClickListener = null;
-        int i = obtainStyledAttributes.getInt(2, 0);
+        int i = typedArrayObtainStyledAttributes.getInt(2, 0);
         if (i < 0 || i > 8) {
             throw new IllegalArgumentException("Not a ButtonType");
         }
         this.buttonType = i;
-        this.theme = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.recycle();
+        this.theme = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private FooterButton(CharSequence charSequence, View.OnClickListener onClickListener, int i, int i2, Locale locale, int i3, int i4, String str) {

@@ -71,44 +71,44 @@ public class QueuedWork {
 
     public static void waitToFinish() {
         Object obj;
-        Runnable poll;
-        long currentTimeMillis = System.currentTimeMillis();
+        Runnable runnablePoll;
+        long jCurrentTimeMillis = System.currentTimeMillis();
         synchronized (sLock) {
             handlerRemoveMessages(1);
             sCanDelay = false;
         }
-        StrictMode.ThreadPolicy allowThreadDiskWrites = StrictMode.allowThreadDiskWrites();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskWrites = StrictMode.allowThreadDiskWrites();
         try {
             processPendingWork();
             while (true) {
                 try {
                     obj = sLock;
                     synchronized (obj) {
-                        poll = sFinishers.poll();
+                        runnablePoll = sFinishers.poll();
                     }
-                    if (poll == null) {
+                    if (runnablePoll == null) {
                         break;
                     } else {
-                        poll.run();
+                        runnablePoll.run();
                     }
                 } finally {
                     sCanDelay = true;
                 }
             }
             synchronized (obj) {
-                long currentTimeMillis2 = System.currentTimeMillis() - currentTimeMillis;
-                if (currentTimeMillis2 > 0) {
+                long jCurrentTimeMillis2 = System.currentTimeMillis() - jCurrentTimeMillis;
+                if (jCurrentTimeMillis2 > 0) {
                     ExponentiallyBucketedHistogram exponentiallyBucketedHistogram = mWaitTimes;
-                    exponentiallyBucketedHistogram.add(Long.valueOf(currentTimeMillis2).intValue());
+                    exponentiallyBucketedHistogram.add(Long.valueOf(jCurrentTimeMillis2).intValue());
                     int i = mNumWaits + 1;
                     mNumWaits = i;
-                    if (i % 1024 == 0 || currentTimeMillis2 > 512) {
+                    if (i % 1024 == 0 || jCurrentTimeMillis2 > 512) {
                         exponentiallyBucketedHistogram.log(LOG_TAG, "waited: ");
                     }
                 }
             }
         } finally {
-            StrictMode.setThreadPolicy(allowThreadDiskWrites);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskWrites);
         }
     }
 

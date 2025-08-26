@@ -291,15 +291,15 @@ public final class VolumeInfo implements Parcelable {
     }
 
     private VolumeInfo(Parcel parcel) {
-        boolean readBoolean = parcel.readBoolean();
-        this.mUsesStreamType = readBoolean;
+        boolean z = parcel.readBoolean();
+        this.mUsesStreamType = z;
         this.mStreamType = parcel.readInt();
         this.mHasMuteCommand = parcel.readBoolean();
         this.mIsMuted = parcel.readBoolean();
         this.mVolIndex = parcel.readInt();
         this.mMinVolIndex = parcel.readInt();
         this.mMaxVolIndex = parcel.readInt();
-        if (!readBoolean) {
+        if (!z) {
             this.mVolGroup = android.media.audiopolicy.AudioVolumeGroup.CREATOR.createFromParcel(parcel);
         } else {
             this.mVolGroup = null;

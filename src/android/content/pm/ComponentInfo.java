@@ -55,11 +55,11 @@ public class ComponentInfo extends PackageItemInfo {
             if (applicationNameForComponent != null) {
                 Intent intent = new Intent(Intent.ACTION_MAIN, (Uri) null);
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                List<ResolveInfo> queryIntentActivitiesAsUser = packageManager.queryIntentActivitiesAsUser(intent, 0, UserHandle.getUserId(this.applicationInfo.uid));
+                List<ResolveInfo> listQueryIntentActivitiesAsUser = packageManager.queryIntentActivitiesAsUser(intent, 0, UserHandle.getUserId(this.applicationInfo.uid));
                 String str = this.packageName + "/" + this.name;
-                int size = queryIntentActivitiesAsUser.size();
+                int size = listQueryIntentActivitiesAsUser.size();
                 for (int i = 0; i < size; i++) {
-                    if (str.equals(queryIntentActivitiesAsUser.get(i).activityInfo.getComponentName().flattenToString())) {
+                    if (str.equals(listQueryIntentActivitiesAsUser.get(i).activityInfo.getComponentName().flattenToString())) {
                         return applicationNameForComponent;
                     }
                 }

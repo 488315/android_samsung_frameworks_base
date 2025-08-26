@@ -1,6 +1,7 @@
 package androidx.constraintlayout.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -10,7 +11,6 @@ import androidx.constraintlayout.core.widgets.HelperWidget;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Barrier extends ConstraintHelper {
     public static final int BOTTOM = 3;
@@ -68,23 +68,23 @@ public class Barrier extends ConstraintHelper {
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintHelper
-    public void init(AttributeSet attributeSet) {
+    public void init(AttributeSet attributeSet) throws IllegalAccessException, Resources.NotFoundException, IllegalArgumentException {
         super.init(attributeSet);
         this.mBarrier = new androidx.constraintlayout.core.widgets.Barrier();
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_Layout_barrierDirection) {
-                    setType(obtainStyledAttributes.getInt(index, 0));
+                    setType(typedArrayObtainStyledAttributes.getInt(index, 0));
                 } else if (index == R.styleable.ConstraintLayout_Layout_barrierAllowsGoneWidgets) {
-                    this.mBarrier.mAllowsGoneWidget = obtainStyledAttributes.getBoolean(index, true);
+                    this.mBarrier.mAllowsGoneWidget = typedArrayObtainStyledAttributes.getBoolean(index, true);
                 } else if (index == R.styleable.ConstraintLayout_Layout_barrierMargin) {
-                    this.mBarrier.mMargin = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mBarrier.mMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         this.mHelperWidget = this.mBarrier;
         validateParams();

@@ -32,12 +32,12 @@ public abstract class ATCommandChecker {
     }
 
     int checkAllCondition(Device device, ATCommands aTCommands, String str) {
-        int checkAbsoluteCondition = checkAbsoluteCondition(device, aTCommands);
-        if (checkAbsoluteCondition != 1) {
-            return checkAbsoluteCondition;
+        int iCheckAbsoluteCondition = checkAbsoluteCondition(device, aTCommands);
+        if (iCheckAbsoluteCondition != 1) {
+            return iCheckAbsoluteCondition;
         }
-        int checkCommonCondition = checkCommonCondition(device, aTCommands, str);
-        return checkCommonCondition != 1 ? checkCommonCondition : checkAdditionalCondition(str);
+        int iCheckCommonCondition = checkCommonCondition(device, aTCommands, str);
+        return iCheckCommonCondition != 1 ? iCheckCommonCondition : checkAdditionalCondition(str);
     }
 
     int checkAbsoluteCondition(Device device, ATCommands aTCommands) {
@@ -91,20 +91,20 @@ public abstract class ATCommandChecker {
     }
 
     private int checkUserOpenCommand(Device device, ATCommands aTCommands, Packet packet, String str) {
-        int checkAllCondition = checkAllCondition(device, aTCommands, str);
-        if (checkAllCondition != 1) {
-            return checkAllCondition;
+        int iCheckAllCondition = checkAllCondition(device, aTCommands, str);
+        if (iCheckAllCondition != 1) {
+            return iCheckAllCondition;
         }
         Slog.i(TAG, "This Command is USER_OPEN_AT_COMMAND");
-        int checkAttribute = checkAttribute(device, aTCommands, checkAtdDdexe(packet));
-        if (checkAttribute == 195 && device.hasCSTool()) {
+        int iCheckAttribute = checkAttribute(device, aTCommands, checkAtdDdexe(packet));
+        if (iCheckAttribute == 195 && device.hasCSTool()) {
             Slog.i(TAG, "This Command is now open becauese there is Galaxy Diag Tool");
             return 161;
         }
-        if (checkAttribute != 161) {
+        if (iCheckAttribute != 161) {
             Slog.i(TAG, "This Command is not USER_OPEN_AT_COMMAND because of attribute");
         }
-        return checkAttribute;
+        return iCheckAttribute;
     }
 
     private int checkAtdDdexe(Packet packet) {

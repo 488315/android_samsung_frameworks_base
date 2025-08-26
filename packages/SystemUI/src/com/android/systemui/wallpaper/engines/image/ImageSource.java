@@ -2,28 +2,34 @@ package com.android.systemui.wallpaper.engines.image;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.RecordingCanvas;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.util.Log;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.blur.domain.interactor.WallpaperScreenShotProvider$$ExternalSyntheticOutline0;
 import com.android.systemui.knox.EdmMonitor;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.util.DeviceType;
+import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.wallpaper.CoverWallpaper;
 import com.android.systemui.wallpaper.PluginWallpaper;
 import com.android.systemui.wallpaper.PluginWallpaperController;
 import com.android.systemui.wallpaper.utils.WhichChecker;
+import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.live.sdk.utils.BitmapUtils;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImageSource {
     public String TAG;
@@ -40,7 +46,6 @@ public class ImageSource {
     public int mWallpaperType;
     public int mWhich;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ImageSupplier {
         String getFilterData();
 
@@ -51,7 +56,6 @@ public class ImageSource {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WallpaperImage {
         public final Bitmap mBitmap;
         public final ArrayList mCropRects;
@@ -105,21 +109,87 @@ public class ImageSource {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x011f A[ORIG_RETURN, RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00df  */
     /* JADX WARN: Type inference failed for: r5v12 */
     /* JADX WARN: Type inference failed for: r5v2 */
     /* JADX WARN: Type inference failed for: r5v3, types: [int] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isFixedOrientation(boolean r19, com.android.systemui.util.SettingsHelper r20) {
-        /*
-            Method dump skipped, instructions count: 292
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.image.ImageSource.isFixedOrientation(boolean, com.android.systemui.util.SettingsHelper):boolean");
+    public final boolean isFixedOrientation(boolean z, SettingsHelper settingsHelper) {
+        boolean z2;
+        boolean z3;
+        int i;
+        boolean z4;
+        ?? r5;
+        boolean z5;
+        int i2 = this.mWhich;
+        PackageManager packageManager = this.mContext.getPackageManager();
+        boolean z6 = packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet");
+        boolean z7 = Rune.SUPPORT_SUB_DISPLAY_MODE;
+        boolean z8 = (!z7 || Rune.SUPPORT_COVER_DISPLAY_WATCHFACE || WhichChecker.isFlagEnabled(i2, 16)) ? false : true;
+        WallpaperManager wallpaperManager = this.mWallpaperManager;
+        int i3 = this.mWhich;
+        int i4 = this.mUserId;
+        Bundle wallpaperExtras = wallpaperManager.getWallpaperExtras(i3, i4);
+        if (wallpaperExtras != null) {
+            boolean z9 = wallpaperExtras.getBoolean("isFixedOrientation");
+            String str = this.TAG;
+            z2 = false;
+            z3 = true;
+            StringBuilder sb = new StringBuilder("isFixedOrientationWallpaper: extra defines fixedOrientation. which=");
+            ViewPager$$ExternalSyntheticOutline0.m(sb, this.mWhich, ", user=", i4, ", isTablet=");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, z6, ", isFoldMainDisplay=", z8, ", isFixedOrientation=");
+            KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(sb, z9, str);
+            if (z9) {
+                return (z6 || z8) ? false : true;
+            }
+            i = 16;
+        } else {
+            z2 = false;
+            z3 = true;
+            i = 16;
+        }
+        boolean zIsFlagEnabled = WhichChecker.isFlagEnabled(i2, i);
+        if (z7 && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && WhichChecker.isFlagEnabled(i2, i)) {
+            boolean z10 = z3;
+            z4 = z10 ? 1 : 0;
+            r5 = z10;
+        } else {
+            z4 = z2;
+            r5 = z3;
+        }
+        boolean z11 = (!WhichChecker.isFlagEnabled(i2, r5) ? settingsHelper.getLockscreenWallpaperTransparent(zIsFlagEnabled) == 0 : settingsHelper.getHomescreenWallpaperSource(zIsFlagEnabled) == 0) ? z2 : true;
+        boolean z12 = (((i2 & 60) == 4 || z4) && !((!Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER && !z4) || z6 || z11 || z)) ? true : z2;
+        if (WhichChecker.isFlagEnabled(this.mWhich, 2) && this.mWallpaperType == 3) {
+            int i5 = this.mWhich;
+            PluginWallpaper pluginWallpaper = this.mPluginWallpaper;
+            if (((PluginWallpaperController) pluginWallpaper).isPluginWallpaperRequired(i5)) {
+                if (((PluginWallpaperController) pluginWallpaper).containsVideo(this.mWhich)) {
+                    z5 = true;
+                }
+            }
+        } else {
+            z5 = z2;
+        }
+        String str2 = this.TAG;
+        StringBuilder sb2 = new StringBuilder("isFixedOrientationWallpaper:  which=");
+        sb2.append(this.mWhich);
+        sb2.append(", feature=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER, ", isTablet=", z6, ", isFoldMainDisplay=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, z8, ", isFoldSubDisplay=", z4, ", isCustomWallpaper=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb2, z11, ", isPreview=", z, ", isCustompackContainsVideo=");
+        sb2.append(z5);
+        sb2.append(", isFixedOrientation=");
+        sb2.append(z12);
+        Log.i(str2, sb2.toString());
+        if (z12) {
+            return true;
+        }
+        if (!z5 || z8 || z6) {
+            return z2;
+        }
+        return true;
     }
 
     public final boolean isMultipack() {
@@ -175,17 +245,17 @@ public class ImageSource {
 
     public final void useBitmap(Consumer consumer) {
         try {
-            WallpaperImage loadWallpaper = loadWallpaper();
-            if (loadWallpaper == null) {
+            WallpaperImage wallpaperImageLoadWallpaper = loadWallpaper();
+            if (wallpaperImageLoadWallpaper == null) {
                 Log.w(this.TAG, "useBitmap: bitmap not loaded");
                 return;
             }
-            consumer.accept(loadWallpaper);
-            Bitmap bitmap = loadWallpaper.mBitmap;
+            consumer.accept(wallpaperImageLoadWallpaper);
+            Bitmap bitmap = wallpaperImageLoadWallpaper.mBitmap;
             if (bitmap == null || bitmap.isRecycled()) {
                 return;
             }
-            loadWallpaper.mBitmap.recycle();
+            wallpaperImageLoadWallpaper.mBitmap.recycle();
         } catch (Exception e) {
             WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("useBitmap: e=", e, this.TAG, e);
         }

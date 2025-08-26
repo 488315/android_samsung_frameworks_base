@@ -10,7 +10,6 @@ import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileSimpleLogger {
     public boolean connected;
@@ -69,21 +68,21 @@ public final class MobileSimpleLogger {
                 sb.append(")");
             }
         }
-        String sb2 = sb.toString();
+        String string = sb.toString();
         String str = this.simCard;
-        StringBuilder sb3 = new StringBuilder("[");
-        sb3.append(this.slotName);
-        sb3.append("] (");
-        sb3.append(this.slotId);
-        sb3.append("/");
-        sb3.append(this.subId);
-        sb3.append(") connected=");
-        sb3.append(z);
-        sb3.append(" dataConnected=");
-        sb3.append(z2);
-        sb3.append(" dataType=");
-        sb3.append(networkTypeIconModel);
-        sb3.append(" networkType=");
-        return MutablePreferences$$ExternalSyntheticOutline0.m(sb3, sb2, " simCard=", str);
+        StringBuilder sb2 = new StringBuilder("[");
+        sb2.append(this.slotName);
+        sb2.append("] (");
+        sb2.append(this.slotId);
+        sb2.append("/");
+        sb2.append(this.subId);
+        sb2.append(") connected=");
+        sb2.append(z);
+        sb2.append(" dataConnected=");
+        sb2.append(z2);
+        sb2.append(" dataType=");
+        sb2.append(networkTypeIconModel);
+        sb2.append(" networkType=");
+        return MutablePreferences$$ExternalSyntheticOutline0.m(sb2, string, " simCard=", str);
     }
 }

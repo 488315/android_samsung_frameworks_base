@@ -77,9 +77,9 @@ public final class GetCredentialRequest implements Parcelable {
         parcel.readTypedList(arrayList, CredentialOption.CREATOR);
         this.mCredentialOptions = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        Bundle readBundle = parcel.readBundle();
-        this.mData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        Bundle bundle = parcel.readBundle();
+        this.mData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
         this.mAlwaysSendAppInfoToProvider = parcel.readBoolean();
         this.mOrigin = parcel.readString8();
     }

@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TimeCycleSplineSet {
     public int mCount;
@@ -31,8 +30,8 @@ public abstract class TimeCycleSplineSet {
             case 5:
                 return (float) Math.cos(f * 6.2831855f);
             case 6:
-                float abs = 1.0f - Math.abs(((f * 4.0f) % 4.0f) - 2.0f);
-                return 1.0f - (abs * abs);
+                float fAbs = 1.0f - Math.abs(((f * 4.0f) % 4.0f) - 2.0f);
+                return 1.0f - (fAbs * fAbs);
             default:
                 return (float) Math.sin(f * 6.2831855f);
         }
@@ -130,16 +129,16 @@ public abstract class TimeCycleSplineSet {
     }
 
     public final String toString() {
-        String str = this.mType;
+        String string = this.mType;
         DecimalFormat decimalFormat = new DecimalFormat("##.##");
         for (int i = 0; i < this.mCount; i++) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "[");
-            m.append(this.mTimePoints[i]);
-            m.append(" , ");
-            m.append(decimalFormat.format(this.mValues[i]));
-            m.append("] ");
-            str = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "[");
+            sbM.append(this.mTimePoints[i]);
+            sbM.append(" , ");
+            sbM.append(decimalFormat.format(this.mValues[i]));
+            sbM.append("] ");
+            string = sbM.toString();
         }
-        return str;
+        return string;
     }
 }

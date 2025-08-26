@@ -25,17 +25,17 @@ public class IAFDRSAUtils {
     }
 
     public static String decryptFile(String str, String str2) throws Exception {
-        byte[] decrypt = decrypt(fileToByte(str), str2);
+        byte[] bArrDecrypt = decrypt(fileToByte(str), str2);
         String str3 = str + ".dec";
-        byteArrayToFile(decrypt, str3);
+        byteArrayToFile(bArrDecrypt, str3);
         return str3;
     }
 
     public static byte[] decrypt(byte[] bArr, String str) throws Exception {
-        byte[] doFinal;
-        PublicKey generatePublic = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(Base64.decode(str.getBytes(), 2)));
+        byte[] bArrDoFinal;
+        PublicKey publicKeyGeneratePublic = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(Base64.decode(str.getBytes(), 2)));
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        cipher.init(2, generatePublic);
+        cipher.init(2, publicKeyGeneratePublic);
         int length = bArr.length;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         int i = 0;
@@ -44,11 +44,11 @@ public class IAFDRSAUtils {
             int i3 = length - i;
             if (i3 > 0) {
                 if (i3 > 128) {
-                    doFinal = cipher.doFinal(bArr, i, 128);
+                    bArrDoFinal = cipher.doFinal(bArr, i, 128);
                 } else {
-                    doFinal = cipher.doFinal(bArr, i, i3);
+                    bArrDoFinal = cipher.doFinal(bArr, i, i3);
                 }
-                byteArrayOutputStream.write(doFinal, 0, doFinal.length);
+                byteArrayOutputStream.write(bArrDoFinal, 0, bArrDoFinal.length);
                 i2++;
                 i = i2 * 128;
             } else {
@@ -69,9 +69,9 @@ public class IAFDRSAUtils {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(2048);
         byte[] bArr2 = new byte[1024];
         while (true) {
-            int read = fileInputStream.read(bArr2);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr2, 0, read);
+            int i = fileInputStream.read(bArr2);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr2, 0, i);
                 byteArrayOutputStream.flush();
             } else {
                 byteArrayOutputStream.close();
@@ -96,9 +96,9 @@ public class IAFDRSAUtils {
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         byte[] bArr2 = new byte[1024];
         while (true) {
-            int read = byteArrayInputStream.read(bArr2);
-            if (read != -1) {
-                fileOutputStream.write(bArr2, 0, read);
+            int i = byteArrayInputStream.read(bArr2);
+            if (i != -1) {
+                fileOutputStream.write(bArr2, 0, i);
                 fileOutputStream.flush();
             } else {
                 fileOutputStream.close();

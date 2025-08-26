@@ -45,9 +45,9 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPackageInstallerSessionFileSystemConnector)) {
-                return (IPackageInstallerSessionFileSystemConnector) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPackageInstallerSessionFileSystemConnector)) {
+                return (IPackageInstallerSessionFileSystemConnector) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,12 +74,12 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                String string = parcel.readString();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 parcel.enforceNoDataAvail();
-                writeData(readString, readLong, readLong2, parcelFileDescriptor);
+                writeData(string, j, j2, parcelFileDescriptor);
                 parcel2.writeNoException();
                 return true;
             }
@@ -104,19 +104,19 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
 
             @Override // android.content.pm.IPackageInstallerSessionFileSystemConnector
             public void writeData(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

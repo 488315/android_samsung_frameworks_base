@@ -1,7 +1,12 @@
 package com.android.systemui.statusbar.pipeline.satellite.data.demo;
 
+import android.os.Bundle;
+import com.android.systemui.bixby2.actionresult.ActionResults;
 import com.android.systemui.demomode.DemoModeController;
+import com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource;
 import com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState;
+import java.util.Locale;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -15,14 +20,12 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafe
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DemoDeviceBasedSatelliteDataSource {
     public static final DemoSatelliteEvent DEFAULT_VALUE;
     public final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 _satelliteCommands;
     public final ReadonlyStateFlow satelliteEvents;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,7 +35,6 @@ public final class DemoDeviceBasedSatelliteDataSource {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DemoSatelliteEvent {
         public final SatelliteConnectionState connectionState;
         public final int signalStrength;
@@ -68,10 +70,9 @@ public final class DemoDeviceBasedSatelliteDataSource {
     }
 
     public DemoDeviceBasedSatelliteDataSource(DemoModeController demoModeController, CoroutineScope coroutineScope) {
-        final Flow demoFlowForCommand = demoModeController.demoFlowForCommand();
+        final Flow flowDemoFlowForCommand = demoModeController.demoFlowForCommand();
         FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(new Flow() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -100,113 +101,70 @@ public final class DemoDeviceBasedSatelliteDataSource {
                     this.this$0 = demoDeviceBasedSatelliteDataSource;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r9, kotlin.coroutines.Continuation r10) {
-                    /*
-                        r8 = this;
-                        boolean r0 = r10 instanceof com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r10
-                        com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1$2$1
-                        r0.<init>(r10)
-                    L18:
-                        java.lang.Object r10 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L30
-                        if (r2 != r3) goto L28
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        goto La8
-                    L28:
-                        java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-                        java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-                        r8.<init>(r9)
-                        throw r8
-                    L30:
-                        kotlin.ResultKt.throwOnFailure(r10)
-                        android.os.Bundle r9 = (android.os.Bundle) r9
-                        com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$DemoSatelliteEvent r10 = com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource.DEFAULT_VALUE
-                        com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource r10 = r8.this$0
-                        r10.getClass()
-                        java.lang.String r10 = "satellite"
-                        java.lang.String r10 = r9.getString(r10)
-                        if (r10 != 0) goto L46
-                        goto L4f
-                    L46:
-                        java.lang.String r2 = "show"
-                        boolean r10 = r10.equals(r2)
-                        if (r10 != 0) goto L51
-                    L4f:
-                        r9 = 0
-                        goto L9d
-                    L51:
-                        com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$DemoSatelliteEvent r10 = new com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$DemoSatelliteEvent
-                        java.lang.String r2 = "connection"
-                        java.lang.String r2 = r9.getString(r2)
-                        r4 = 0
-                        if (r2 != 0) goto L5f
-                        com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState r2 = com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState.Unknown
-                        goto L8d
-                    L5f:
-                        int r5 = r2.length()     // Catch: java.lang.IllegalArgumentException -> L8b
-                        if (r5 <= 0) goto L86
-                        java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: java.lang.IllegalArgumentException -> L8b
-                        r5.<init>()     // Catch: java.lang.IllegalArgumentException -> L8b
-                        char r6 = r2.charAt(r4)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        java.lang.String r6 = java.lang.String.valueOf(r6)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        java.util.Locale r7 = java.util.Locale.ROOT     // Catch: java.lang.IllegalArgumentException -> L8b
-                        java.lang.String r6 = r6.toUpperCase(r7)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        r5.append(r6)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        java.lang.String r2 = r2.substring(r3)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        r5.append(r2)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        java.lang.String r2 = r5.toString()     // Catch: java.lang.IllegalArgumentException -> L8b
-                    L86:
-                        com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState r2 = com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState.valueOf(r2)     // Catch: java.lang.IllegalArgumentException -> L8b
-                        goto L8d
-                    L8b:
-                        com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState r2 = com.android.systemui.statusbar.pipeline.satellite.shared.model.SatelliteConnectionState.Unknown
-                    L8d:
-                        java.lang.String r5 = "level"
-                        java.lang.String r9 = r9.getString(r5)
-                        if (r9 == 0) goto L99
-                        int r4 = java.lang.Integer.parseInt(r9)
-                    L99:
-                        r10.<init>(r2, r4)
-                        r9 = r10
-                    L9d:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r8 = r8.$this_unsafeFlow
-                        java.lang.Object r8 = r8.emit(r9, r0)
-                        if (r8 != r1) goto La8
-                        return r1
-                    La8:
-                        kotlin.Unit r8 = kotlin.Unit.INSTANCE
-                        return r8
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.satellite.data.demo.DemoDeviceBasedSatelliteDataSource$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    DemoDeviceBasedSatelliteDataSource.DemoSatelliteEvent demoSatelliteEvent;
+                    SatelliteConnectionState satelliteConnectionStateValueOf;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Bundle bundle = (Bundle) obj;
+                        DemoDeviceBasedSatelliteDataSource.DemoSatelliteEvent demoSatelliteEvent2 = DemoDeviceBasedSatelliteDataSource.DEFAULT_VALUE;
+                        this.this$0.getClass();
+                        String string = bundle.getString("satellite");
+                        if (string != null && string.equals("show")) {
+                            String string2 = bundle.getString("connection");
+                            if (string2 == null) {
+                                satelliteConnectionStateValueOf = SatelliteConnectionState.Unknown;
+                            } else {
+                                try {
+                                    if (string2.length() > 0) {
+                                        string2 = ((Object) String.valueOf(string2.charAt(0)).toUpperCase(Locale.ROOT)) + string2.substring(1);
+                                    }
+                                    satelliteConnectionStateValueOf = SatelliteConnectionState.valueOf(string2);
+                                } catch (IllegalArgumentException unused) {
+                                    satelliteConnectionStateValueOf = SatelliteConnectionState.Unknown;
+                                }
+                            }
+                            String string3 = bundle.getString(ActionResults.RESULT_SET_VOLUME_SUCCESS);
+                            demoSatelliteEvent = new DemoDeviceBasedSatelliteDataSource.DemoSatelliteEvent(satelliteConnectionStateValueOf, string3 != null ? Integer.parseInt(string3) : 0);
+                        } else {
+                            demoSatelliteEvent = null;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(demoSatelliteEvent, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowDemoFlowForCommand.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this._satelliteCommands = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1;

@@ -1,7 +1,9 @@
 package com.android.systemui.mediaprojection.appselector.data;
 
+import android.app.ActivityManager;
 import android.app.TaskInfo;
 import android.content.ComponentName;
+import android.content.Intent;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.wm.shell.shared.split.SplitBounds;
@@ -10,7 +12,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RecentTask {
     public final ComponentName baseIntentComponent;
@@ -25,7 +26,6 @@ public final class RecentTask {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UserType {
         public static final /* synthetic */ UserType[] $VALUES;
         public static final UserType CLONED;
@@ -83,15 +83,15 @@ public final class RecentTask {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.userId, ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, Integer.hashCode(this.taskId) * 31, 31), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.userId, ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, Integer.hashCode(this.taskId) * 31, 31), 31);
         ComponentName componentName = this.topActivityComponent;
-        int hashCode = (m + (componentName == null ? 0 : componentName.hashCode())) * 31;
+        int iHashCode = (iM + (componentName == null ? 0 : componentName.hashCode())) * 31;
         ComponentName componentName2 = this.baseIntentComponent;
-        int hashCode2 = (hashCode + (componentName2 == null ? 0 : componentName2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (componentName2 == null ? 0 : componentName2.hashCode())) * 31;
         Integer num = this.colorBackground;
-        int hashCode3 = (this.userType.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (num == null ? 0 : num.hashCode())) * 31, 31, this.isForegroundTask)) * 31;
+        int iHashCode3 = (this.userType.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (num == null ? 0 : num.hashCode())) * 31, 31, this.isForegroundTask)) * 31;
         SplitBounds splitBounds = this.splitBounds;
-        return hashCode3 + (splitBounds != null ? splitBounds.hashCode() : 0);
+        return iHashCode3 + (splitBounds != null ? splitBounds.hashCode() : 0);
     }
 
     public final String toString() {
@@ -103,39 +103,14 @@ public final class RecentTask {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public RecentTask(android.app.TaskInfo r11, boolean r12, com.android.systemui.mediaprojection.appselector.data.RecentTask.UserType r13, com.android.wm.shell.shared.split.SplitBounds r14) {
-        /*
-            r10 = this;
-            int r1 = r11.taskId
-            int r2 = r11.displayId
-            int r3 = r11.userId
-            android.content.ComponentName r4 = r11.topActivity
-            android.content.Intent r0 = r11.baseIntent
-            r5 = 0
-            if (r0 == 0) goto L12
-            android.content.ComponentName r0 = r0.getComponent()
-            goto L13
-        L12:
-            r0 = r5
-        L13:
-            android.app.ActivityManager$TaskDescription r11 = r11.taskDescription
-            if (r11 == 0) goto L1f
-            int r11 = r11.getBackgroundColor()
-            java.lang.Integer r5 = java.lang.Integer.valueOf(r11)
-        L1f:
-            r7 = r12
-            r8 = r13
-            r9 = r14
-            r6 = r5
-            r5 = r0
-            r0 = r10
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.mediaprojection.appselector.data.RecentTask.<init>(android.app.TaskInfo, boolean, com.android.systemui.mediaprojection.appselector.data.RecentTask$UserType, com.android.wm.shell.shared.split.SplitBounds):void");
+    public RecentTask(TaskInfo taskInfo, boolean z, UserType userType, SplitBounds splitBounds) {
+        int i = taskInfo.taskId;
+        int i2 = taskInfo.displayId;
+        int i3 = taskInfo.userId;
+        ComponentName componentName = taskInfo.topActivity;
+        Intent intent = taskInfo.baseIntent;
+        ComponentName component = intent != null ? intent.getComponent() : null;
+        ActivityManager.TaskDescription taskDescription = taskInfo.taskDescription;
+        this(i, i2, i3, componentName, component, taskDescription != null ? Integer.valueOf(taskDescription.getBackgroundColor()) : null, z, userType, splitBounds);
     }
 }

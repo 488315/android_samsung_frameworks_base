@@ -9,7 +9,6 @@ import com.android.systemui.qs.tiles.base.shared.model.QSTileConfig;
 import com.android.systemui.qs.tiles.base.shared.model.QSTileUIConfig;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class QSAccessibilityModule_Companion_ProvideReduceBrightColorsTileConfigFactory implements Provider {
     public final Provider uiEventLoggerProvider;
@@ -21,7 +20,7 @@ public final class QSAccessibilityModule_Companion_ProvideReduceBrightColorsTile
     public static QSTileConfig provideReduceBrightColorsTileConfig(QsEventLogger qsEventLogger) {
         QSAccessibilityModule.Companion.getClass();
         TileSpec.Companion.getClass();
-        return new QSTileConfig(TileSpec.Companion.create("reduce_brightness"), new QSTileUIConfig.Resource(R.drawable.qs_extra_dim_icon_on, 17042657), ((QsEventLoggerImpl) qsEventLogger).sequence.newInstanceId(), TileCategory.DISPLAY, null, null, false, 112, null);
+        return new QSTileConfig(TileSpec.Companion.create("reduce_brightness"), new QSTileUIConfig.Resource(R.drawable.qs_extra_dim_icon_on, 17042661), ((QsEventLoggerImpl) qsEventLogger).sequence.newInstanceId(), TileCategory.DISPLAY, null, null, false, 112, null);
     }
 
     @Override // javax.inject.Provider

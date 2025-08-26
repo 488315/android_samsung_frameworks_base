@@ -12,7 +12,6 @@ import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListPreference extends DialogPreference {
     public CharSequence[] mEntries;
@@ -21,7 +20,6 @@ public class ListPreference extends DialogPreference {
     public String mValue;
     public boolean mValueSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SimpleSummaryProvider implements Preference.SummaryProvider {
         public static SimpleSummaryProvider sSimpleSummaryProvider;
 
@@ -40,34 +38,34 @@ public class ListPreference extends DialogPreference {
             CharSequence[] charSequenceArr;
             CharSequence[] charSequenceArr2;
             ListPreference listPreference = (ListPreference) preference;
-            int findIndexOfValue = listPreference.findIndexOfValue(listPreference.mValue);
-            if (TextUtils.isEmpty((findIndexOfValue < 0 || (charSequenceArr2 = listPreference.mEntries) == null) ? null : charSequenceArr2[findIndexOfValue])) {
+            int iFindIndexOfValue = listPreference.findIndexOfValue(listPreference.mValue);
+            if (TextUtils.isEmpty((iFindIndexOfValue < 0 || (charSequenceArr2 = listPreference.mEntries) == null) ? null : charSequenceArr2[iFindIndexOfValue])) {
                 return listPreference.mContext.getString(R.string.not_set);
             }
-            int findIndexOfValue2 = listPreference.findIndexOfValue(listPreference.mValue);
-            if (findIndexOfValue2 < 0 || (charSequenceArr = listPreference.mEntries) == null) {
+            int iFindIndexOfValue2 = listPreference.findIndexOfValue(listPreference.mValue);
+            if (iFindIndexOfValue2 < 0 || (charSequenceArr = listPreference.mEntries) == null) {
                 return null;
             }
-            return charSequenceArr[findIndexOfValue2];
+            return charSequenceArr[iFindIndexOfValue2];
         }
     }
 
     public ListPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ListPreference, i, i2);
-        CharSequence[] textArray = obtainStyledAttributes.getTextArray(2);
-        this.mEntries = textArray == null ? obtainStyledAttributes.getTextArray(0) : textArray;
-        CharSequence[] textArray2 = obtainStyledAttributes.getTextArray(3);
-        this.mEntryValues = textArray2 == null ? obtainStyledAttributes.getTextArray(1) : textArray2;
-        if (obtainStyledAttributes.getBoolean(4, obtainStyledAttributes.getBoolean(4, false))) {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ListPreference, i, i2);
+        CharSequence[] textArray = typedArrayObtainStyledAttributes.getTextArray(2);
+        this.mEntries = textArray == null ? typedArrayObtainStyledAttributes.getTextArray(0) : textArray;
+        CharSequence[] textArray2 = typedArrayObtainStyledAttributes.getTextArray(3);
+        this.mEntryValues = textArray2 == null ? typedArrayObtainStyledAttributes.getTextArray(1) : textArray2;
+        if (typedArrayObtainStyledAttributes.getBoolean(4, typedArrayObtainStyledAttributes.getBoolean(4, false))) {
             this.mSummaryProvider = SimpleSummaryProvider.getInstance();
             notifyChanged();
         }
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, i2);
-        String string = obtainStyledAttributes2.getString(34);
-        this.mSummary = string == null ? obtainStyledAttributes2.getString(7) : string;
-        obtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, i2);
+        String string = typedArrayObtainStyledAttributes2.getString(34);
+        this.mSummary = string == null ? typedArrayObtainStyledAttributes2.getString(7) : string;
+        typedArrayObtainStyledAttributes2.recycle();
     }
 
     public final int findIndexOfValue(String str) {
@@ -90,18 +88,18 @@ public class ListPreference extends DialogPreference {
         if (summaryProvider != null) {
             return summaryProvider.provideSummary(this);
         }
-        int findIndexOfValue = findIndexOfValue(this.mValue);
-        CharSequence charSequence = (findIndexOfValue < 0 || (charSequenceArr = this.mEntries) == null) ? null : charSequenceArr[findIndexOfValue];
+        int iFindIndexOfValue = findIndexOfValue(this.mValue);
+        CharSequence charSequence = (iFindIndexOfValue < 0 || (charSequenceArr = this.mEntries) == null) ? null : charSequenceArr[iFindIndexOfValue];
         CharSequence summary = super.getSummary();
         String str = this.mSummary;
         if (str != null) {
             if (charSequence == null) {
                 charSequence = "";
             }
-            String format = String.format(str, charSequence);
-            if (!TextUtils.equals(format, summary)) {
+            String str2 = String.format(str, charSequence);
+            if (!TextUtils.equals(str2, summary)) {
                 Log.w("ListPreference", "Setting a summary with a String formatting marker is no longer supported. You should use a SummaryProvider instead.");
-                return format;
+                return str2;
             }
         }
         return summary;
@@ -155,20 +153,19 @@ public class ListPreference extends DialogPreference {
     }
 
     public final void setValue(String str) {
-        boolean equals = TextUtils.equals(this.mValue, str);
-        if (equals && this.mValueSet) {
+        boolean zEquals = TextUtils.equals(this.mValue, str);
+        if (zEquals && this.mValueSet) {
             return;
         }
         this.mValue = str;
         this.mValueSet = true;
         persistString(str);
-        if (equals) {
+        if (zEquals) {
             return;
         }
         notifyChanged();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends Preference.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.preference.ListPreference.SavedState.1
             @Override // android.os.Parcelable.Creator

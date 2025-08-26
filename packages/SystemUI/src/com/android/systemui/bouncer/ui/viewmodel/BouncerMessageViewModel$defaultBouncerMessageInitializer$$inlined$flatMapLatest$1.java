@@ -1,6 +1,13 @@
 package com.android.systemui.bouncer.ui.viewmodel;
 
+import android.content.res.Resources;
+import android.telephony.SubscriptionInfo;
+import android.text.TextUtils;
+import android.util.Log;
+import com.android.systemui.R;
 import com.android.systemui.authentication.shared.model.AuthenticationMethodModel;
+import com.android.systemui.bouncer.data.repository.SimBouncerRepositoryImpl;
+import com.android.systemui.bouncer.domain.interactor.SimBouncerInteractor;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -15,7 +22,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerMessageViewModel$defaultBouncerMessageInitializer$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -39,7 +45,7 @@ public final class BouncerMessageViewModel$defaultBouncerMessageInitializer$$inl
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -49,9 +55,8 @@ public final class BouncerMessageViewModel$defaultBouncerMessageInitializer$$inl
             if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Sim.INSTANCE)) {
                 final BouncerMessageViewModel bouncerMessageViewModel = this.this$0;
                 final SharedFlowImpl sharedFlowImpl = bouncerMessageViewModel.resetToDefault;
-                flow = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$lambda$2$$inlined$map$1
+                flowCombine = new Flow() { // from class: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$lambda$2$$inlined$map$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$lambda$2$$inlined$map$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -80,37 +85,85 @@ public final class BouncerMessageViewModel$defaultBouncerMessageInitializer$$inl
                             this.this$0 = bouncerMessageViewModel;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                        /* JADX WARN: Removed duplicated region for block: B:24:0x010d A[RETURN] */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:48:0x010d A[RETURN] */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r11, kotlin.coroutines.Continuation r12) {
-                            /*
-                                Method dump skipped, instructions count: 273
-                                To view this dump change 'Code comments level' option to 'DEBUG'
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.ui.viewmodel.BouncerMessageViewModel$defaultBouncerMessageInitializer$lambda$2$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        public final Object emit(Object obj, Continuation continuation) throws Resources.NotFoundException {
+                            AnonymousClass1 anonymousClass1;
+                            MessageViewModel messageViewModel;
+                            String str;
+                            String string;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                ((Boolean) obj).getClass();
+                                SimBouncerInteractor simBouncerInteractor = this.this$0.simBouncerInteractor;
+                                SimBouncerRepositoryImpl simBouncerRepositoryImpl = (SimBouncerRepositoryImpl) simBouncerInteractor.repository;
+                                Boolean bool = (Boolean) simBouncerRepositoryImpl.isLockedEsim.$$delegate_0.getValue();
+                                boolean zBooleanValue = bool != null ? bool.booleanValue() : false;
+                                boolean zBooleanValue2 = ((Boolean) simBouncerRepositoryImpl.isSimPukLocked.$$delegate_0.getValue()).booleanValue();
+                                if (((Number) simBouncerRepositoryImpl.subscriptionId.$$delegate_0.getValue()).intValue() == -1) {
+                                    Log.e("BouncerSimInteractor", "Trying to get default message from unknown sub id");
+                                    string = "";
+                                } else {
+                                    int activeModemCount = simBouncerInteractor.telephonyManager.getActiveModemCount();
+                                    SubscriptionInfo subscriptionInfo = (SubscriptionInfo) simBouncerRepositoryImpl.activeSubscriptionInfo.$$delegate_0.getValue();
+                                    CharSequence displayName = subscriptionInfo != null ? subscriptionInfo.getDisplayName() : null;
+                                    String string2 = (activeModemCount >= 2 || !zBooleanValue2) ? activeModemCount < 2 ? simBouncerInteractor.resources.getString(R.string.kg_sim_pin_instructions) : (TextUtils.isEmpty(displayName) || !zBooleanValue2) ? !TextUtils.isEmpty(displayName) ? simBouncerInteractor.resources.getString(R.string.kg_sim_pin_instructions_multi, displayName) : zBooleanValue2 ? simBouncerInteractor.resources.getString(R.string.kg_puk_enter_puk_hint) : simBouncerInteractor.resources.getString(R.string.kg_sim_pin_instructions) : simBouncerInteractor.resources.getString(R.string.kg_puk_enter_puk_hint_multi, displayName) : simBouncerInteractor.resources.getString(R.string.kg_puk_enter_puk_hint);
+                                    if (zBooleanValue) {
+                                        string = simBouncerInteractor.resources.getString(R.string.kg_sim_lock_esim_instructions, string2);
+                                    } else {
+                                        str = string2;
+                                        messageViewModel = new MessageViewModel(str, null, false, 6, null);
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(messageViewModel, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                }
+                                str = string;
+                                messageViewModel = new MessageViewModel(str, null, false, 6, null);
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(messageViewModel, anonymousClass1) == coroutineSingletons) {
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector2, bouncerMessageViewModel), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = sharedFlowImpl.collect(new AnonymousClass2(flowCollector2, bouncerMessageViewModel), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };
             } else if (authenticationMethodModel.isSecure) {
                 BouncerMessageViewModel bouncerMessageViewModel2 = this.this$0;
-                flow = FlowKt.combine(bouncerMessageViewModel2.deviceUnlockedInteractor.deviceEntryRestrictionReason, bouncerMessageViewModel2.lockoutMessage, bouncerMessageViewModel2.deviceEntryBiometricsAllowedInteractor.isFingerprintCurrentlyAllowedOnBouncer, bouncerMessageViewModel2.resetToDefault, bouncerMessageViewModel2.authenticationInteractor.failedAuthenticationAttempts, new BouncerMessageViewModel$defaultBouncerMessageInitializer$2$2(bouncerMessageViewModel2, authenticationMethodModel, null));
+                flowCombine = FlowKt.combine(bouncerMessageViewModel2.deviceUnlockedInteractor.deviceEntryRestrictionReason, bouncerMessageViewModel2.lockoutMessage, bouncerMessageViewModel2.deviceEntryBiometricsAllowedInteractor.isFingerprintCurrentlyAllowedOnBouncer, bouncerMessageViewModel2.resetToDefault, bouncerMessageViewModel2.authenticationInteractor.failedAuthenticationAttempts, new BouncerMessageViewModel$defaultBouncerMessageInitializer$2$2(bouncerMessageViewModel2, authenticationMethodModel, null));
             } else {
-                flow = EmptyFlow.INSTANCE;
+                flowCombine = EmptyFlow.INSTANCE;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

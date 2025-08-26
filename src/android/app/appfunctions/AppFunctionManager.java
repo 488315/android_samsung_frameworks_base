@@ -1,6 +1,5 @@
 package android.app.appfunctions;
 
-import android.app.appfunctions.AppFunctionManager;
 import android.app.appfunctions.AppFunctionManagerHelper;
 import android.app.appfunctions.IAppFunctionEnabledCallback;
 import android.app.appfunctions.IExecuteAppFunctionCallback;
@@ -39,9 +38,9 @@ public final class AppFunctionManager {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(outcomeReceiver);
         try {
-            ICancellationSignal executeAppFunction = this.mService.executeAppFunction(new ExecuteAppFunctionAidlRequest(executeAppFunctionRequest, this.mContext.getUser(), this.mContext.getPackageName(), SystemClock.elapsedRealtime()), new AnonymousClass1(this, executor, outcomeReceiver));
-            if (executeAppFunction != null) {
-                cancellationSignal.setRemote(executeAppFunction);
+            ICancellationSignal iCancellationSignalExecuteAppFunction = this.mService.executeAppFunction(new ExecuteAppFunctionAidlRequest(executeAppFunctionRequest, this.mContext.getUser(), this.mContext.getPackageName(), SystemClock.elapsedRealtime()), new AnonymousClass1(this, executor, outcomeReceiver));
+            if (iCancellationSignalExecuteAppFunction != null) {
+                cancellationSignal.setRemote(iCancellationSignalExecuteAppFunction);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -66,7 +65,7 @@ public final class AppFunctionManager {
                 executor.execute(new Runnable() { // from class: android.app.appfunctions.AppFunctionManager$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult(executeAppFunctionResponse);
+                        outcomeReceiver.onResult(executeAppFunctionResponse);
                     }
                 });
             } catch (RuntimeException e) {
@@ -75,7 +74,7 @@ public final class AppFunctionManager {
                 executor2.execute(new Runnable() { // from class: android.app.appfunctions.AppFunctionManager$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(new AppFunctionException(2000, e.getMessage()));
+                        outcomeReceiver2.onError(new AppFunctionException(2000, e.getMessage()));
                     }
                 });
             }
@@ -88,7 +87,7 @@ public final class AppFunctionManager {
             executor.execute(new Runnable() { // from class: android.app.appfunctions.AppFunctionManager$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(appFunctionException);
+                    outcomeReceiver.onError(appFunctionException);
                 }
             });
         }
@@ -159,7 +158,7 @@ public final class AppFunctionManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.appfunctions.AppFunctionManager$CallbackWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppFunctionManager.CallbackWrapper.this.lambda$onSuccess$0();
+                    this.f$0.lambda$onSuccess$0();
                 }
             });
         }
@@ -169,7 +168,7 @@ public final class AppFunctionManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.appfunctions.AppFunctionManager$CallbackWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppFunctionManager.CallbackWrapper.this.lambda$onError$1(parcelableException);
+                    this.f$0.lambda$onError$1(parcelableException);
                 }
             });
         }

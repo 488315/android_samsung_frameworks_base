@@ -8,9 +8,9 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.EventLog;
 import android.util.Log;
-import com.android.internal.infra.AndroidFuture;
 import com.android.internal.infra.IAndroidFuture;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -97,26 +97,26 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
 
     @Override // java.util.concurrent.CompletableFuture
     public boolean complete(T t) {
-        boolean complete = super.complete(t);
-        if (complete) {
+        boolean zComplete = super.complete(t);
+        if (zComplete) {
             onCompleted(t, null);
         }
-        return complete;
+        return zComplete;
     }
 
     @Override // java.util.concurrent.CompletableFuture
     public boolean completeExceptionally(Throwable th) {
-        boolean completeExceptionally = super.completeExceptionally(th);
-        if (completeExceptionally) {
+        boolean zCompleteExceptionally = super.completeExceptionally(th);
+        if (zCompleteExceptionally) {
             onCompleted(null, th);
         }
-        return completeExceptionally;
+        return zCompleteExceptionally;
     }
 
     @Override // java.util.concurrent.CompletableFuture, java.util.concurrent.Future
     public boolean cancel(boolean z) {
-        boolean cancel = super.cancel(z);
-        if (cancel) {
+        boolean zCancel = super.cancel(z);
+        if (zCancel) {
             try {
                 get();
                 throw new IllegalStateException("Expected CancellationException");
@@ -126,7 +126,7 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
                 throw new IllegalStateException("Expected CancellationException", th);
             }
         }
-        return cancel;
+        return zCancel;
     }
 
     protected void onCompleted(T t, Throwable th) {
@@ -234,7 +234,7 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         this.mTimeoutHandler.postDelayed(new Runnable() { // from class: com.android.internal.infra.AndroidFuture$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                AndroidFuture.this.triggerTimeout();
+                this.f$0.triggerTimeout();
             }
         }, this, timeUnit.toMillis(j));
         return this;
@@ -394,7 +394,7 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
                 this.mSourceU.whenComplete(new BiConsumer() { // from class: com.android.internal.infra.AndroidFuture$ThenCombine$$ExternalSyntheticLambda0
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj2, Object obj3) {
-                        AndroidFuture.ThenCombine.this.lambda$accept$0(obj2, (Throwable) obj3);
+                        this.f$0.lambda$accept$0(obj2, (Throwable) obj3);
                     }
                 });
             } else {
@@ -440,10 +440,10 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
-        boolean isDone = isDone();
-        parcel.writeBoolean(isDone);
-        if (isDone) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
+        boolean zIsDone = isDone();
+        parcel.writeBoolean(zIsDone);
+        if (zIsDone) {
             try {
                 T t = get();
                 parcel.writeBoolean(false);
@@ -458,14 +458,14 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
         parcel.writeStrongBinder(new IAndroidFuture.Stub() { // from class: com.android.internal.infra.AndroidFuture.1
             @Override // com.android.internal.infra.IAndroidFuture
             public void complete(AndroidFuture androidFuture) {
-                boolean completeExceptionally;
+                boolean zCompleteExceptionally;
                 try {
-                    completeExceptionally = AndroidFuture.this.complete(androidFuture.get());
+                    zCompleteExceptionally = AndroidFuture.this.complete(androidFuture.get());
                 } catch (Throwable th2) {
                     AndroidFuture androidFuture2 = AndroidFuture.this;
-                    completeExceptionally = androidFuture2.completeExceptionally(androidFuture2.unwrapExecutionException(th2));
+                    zCompleteExceptionally = androidFuture2.completeExceptionally(androidFuture2.unwrapExecutionException(th2));
                 }
-                if (completeExceptionally) {
+                if (zCompleteExceptionally) {
                     return;
                 }
                 Log.w(AndroidFuture.LOG_TAG, "Remote result " + androidFuture + " ignored, as local future is already completed: " + AndroidFuture.this);
@@ -492,8 +492,8 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
             parcel.writeString(th.getMessage());
             StackTraceElement[] stackTrace = th.getStackTrace();
             StringBuilder sb = new StringBuilder();
-            int min = Math.min(stackTrace != null ? stackTrace.length : 0, 5);
-            for (int i = 0; i < min; i++) {
+            int iMin = Math.min(stackTrace != null ? stackTrace.length : 0, 5);
+            for (int i = 0; i < iMin; i++) {
                 if (i > 0) {
                     sb.append('\n');
                 }
@@ -506,33 +506,33 @@ public class AndroidFuture<T> extends CompletableFuture<T> implements Parcelable
     }
 
     private static Throwable readThrowable(Parcel parcel) {
-        Throwable th;
+        Throwable runtimeException;
         if (!parcel.readBoolean()) {
             return null;
         }
         if (parcel.readBoolean()) {
             return (Throwable) parcel.readParcelable(Parcelable.class.getClassLoader());
         }
-        String readString = parcel.readString();
+        String string = parcel.readString();
         String str = parcel.readString() + '\n' + parcel.readString();
         try {
-            Class<?> cls = Class.forName(readString, true, Parcelable.class.getClassLoader());
+            Class<?> cls = Class.forName(string, true, Parcelable.class.getClassLoader());
             if (Throwable.class.isAssignableFrom(cls)) {
-                th = (Throwable) cls.getConstructor(String.class).newInstance(str);
+                runtimeException = (Throwable) cls.getConstructor(String.class).newInstance(str);
             } else {
                 EventLog.writeEvent(1397638484, "186530450", -1, "");
-                th = new RuntimeException(readString + ": " + str);
+                runtimeException = new RuntimeException(string + ": " + str);
             }
-        } catch (Throwable th2) {
-            RuntimeException runtimeException = new RuntimeException(readString + ": " + str);
-            runtimeException.addSuppressed(th2);
-            th = runtimeException;
+        } catch (Throwable th) {
+            RuntimeException runtimeException2 = new RuntimeException(string + ": " + str);
+            runtimeException2.addSuppressed(th);
+            runtimeException = runtimeException2;
         }
-        th.setStackTrace(EMPTY_STACK_TRACE);
-        Throwable readThrowable = readThrowable(parcel);
-        if (readThrowable != null) {
-            th.initCause(readThrowable);
+        runtimeException.setStackTrace(EMPTY_STACK_TRACE);
+        Throwable throwable = readThrowable(parcel);
+        if (throwable != null) {
+            runtimeException.initCause(throwable);
         }
-        return th;
+        return runtimeException;
     }
 }

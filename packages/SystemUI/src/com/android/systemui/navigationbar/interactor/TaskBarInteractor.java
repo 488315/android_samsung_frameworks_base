@@ -23,12 +23,11 @@ import java.util.concurrent.Executor;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.ExecutorsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TaskBarInteractor {
     public final Handler bgHandler;
     public final BroadcastDispatcher broadcastDispatcher;
-    public TaskBarInteractor$addCallback$2 broadcastReceiver;
+    public AnonymousClass2 broadcastReceiver;
     private SettingsHelper.OnChangedCallback callback;
     public final Context context;
     public final DisplayManager displayManager;
@@ -36,7 +35,7 @@ public final class TaskBarInteractor {
     public final IntentFilter intentFilter;
     public boolean isDefaultHome;
     public final LogWrapper logWrapper;
-    public TaskBarInteractor$addCallback$7 roleCallback;
+    public AnonymousClass7 roleCallback;
     public final RoleManager roleManager;
     private final SettingsHelper settingsHelper;
     public Boolean userUnlocked;
@@ -64,20 +63,20 @@ public final class TaskBarInteractor {
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$7] */
     /* JADX WARN: Type inference failed for: r3v0, types: [android.content.BroadcastReceiver, com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$2] */
     public final void addCallback(final NavBarStoreImpl$initInteractor$7 navBarStoreImpl$initInteractor$7) {
-        TaskBarInteractor$addCallback$2 taskBarInteractor$addCallback$2 = this.broadcastReceiver;
-        if (taskBarInteractor$addCallback$2 != null) {
-            this.broadcastDispatcher.unregisterReceiver(taskBarInteractor$addCallback$2);
+        AnonymousClass2 anonymousClass2 = this.broadcastReceiver;
+        if (anonymousClass2 != null) {
+            this.broadcastDispatcher.unregisterReceiver(anonymousClass2);
         }
-        ?? r3 = new BroadcastReceiver() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$2
+        ?? r3 = new BroadcastReceiver() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor.addCallback.2
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
                 UserManager userManager;
                 String action = intent != null ? intent.getAction() : null;
                 if (action != null) {
-                    int hashCode = action.hashCode();
-                    if (hashCode != 833559602) {
-                        if (hashCode != 959232034) {
-                            if (hashCode == 1974573934 && action.equals("com.samsung.intent.action.SET_SCREEN_RATIO_VALUE")) {
+                    int iHashCode = action.hashCode();
+                    if (iHashCode != 833559602) {
+                        if (iHashCode != 959232034) {
+                            if (iHashCode == 1974573934 && action.equals("com.samsung.intent.action.SET_SCREEN_RATIO_VALUE")) {
                                 TaskBarInteractor taskBarInteractor = TaskBarInteractor.this;
                                 taskBarInteractor.fitToActiveDisplay = taskBarInteractor.displayManager.semIsFitToActiveDisplay();
                                 Runnable runnable = navBarStoreImpl$initInteractor$7;
@@ -98,7 +97,7 @@ public final class TaskBarInteractor {
                 }
                 LogWrapper logWrapper = TaskBarInteractor.this.logWrapper;
                 String action2 = intent != null ? intent.getAction() : null;
-                logWrapper.d("TaskBarInteractor", "Receive " + action2 + " userUnlocked=" + TaskBarInteractor.this.userUnlocked + " for userid=" + ActivityManager.getCurrentUser());
+                logWrapper.e("TaskBarInteractor", "Receive " + action2 + " userUnlocked=" + TaskBarInteractor.this.userUnlocked + " for userid=" + ActivityManager.getCurrentUser());
             }
         };
         IntentFilter intentFilter = this.intentFilter;
@@ -109,7 +108,7 @@ public final class TaskBarInteractor {
         if (onChangedCallback != null) {
             this.settingsHelper.unregisterCallback(onChangedCallback);
         }
-        SettingsHelper.OnChangedCallback onChangedCallback2 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$5
+        SettingsHelper.OnChangedCallback onChangedCallback2 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor.addCallback.5
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
                 Runnable runnable = navBarStoreImpl$initInteractor$7;
@@ -120,11 +119,11 @@ public final class TaskBarInteractor {
         };
         this.callback = onChangedCallback2;
         this.settingsHelper.registerCallback(onChangedCallback2, Settings.Global.getUriFor(SettingsHelper.INDEX_TASK_BAR), Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE), Settings.System.getUriFor(SettingsHelper.INDEX_EASY_MODE_SWITCH), Settings.Secure.getUriFor(SettingsHelper.INDEX_USER_SETUP_COMPLETE));
-        TaskBarInteractor$addCallback$7 taskBarInteractor$addCallback$7 = this.roleCallback;
-        if (taskBarInteractor$addCallback$7 != null) {
-            this.roleManager.removeOnRoleHoldersChangedListenerAsUser(taskBarInteractor$addCallback$7, userHandle);
+        AnonymousClass7 anonymousClass7 = this.roleCallback;
+        if (anonymousClass7 != null) {
+            this.roleManager.removeOnRoleHoldersChangedListenerAsUser(anonymousClass7, userHandle);
         }
-        this.roleCallback = new OnRoleHoldersChangedListener() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor$addCallback$7
+        this.roleCallback = new OnRoleHoldersChangedListener() { // from class: com.android.systemui.navigationbar.interactor.TaskBarInteractor.addCallback.7
             public final void onRoleHoldersChanged(String str, UserHandle userHandle2) {
                 if (str.hashCode() == 854448779 && str.equals("android.app.role.HOME")) {
                     TaskBarInteractor taskBarInteractor = TaskBarInteractor.this;
@@ -139,10 +138,10 @@ public final class TaskBarInteractor {
             }
         };
         RoleManager roleManager = this.roleManager;
-        Executor asExecutor = ExecutorsKt.asExecutor(Dispatchers.Default);
-        TaskBarInteractor$addCallback$7 taskBarInteractor$addCallback$72 = this.roleCallback;
-        taskBarInteractor$addCallback$72.getClass();
-        roleManager.addOnRoleHoldersChangedListenerAsUser(asExecutor, taskBarInteractor$addCallback$72, userHandle);
+        Executor executorAsExecutor = ExecutorsKt.asExecutor(Dispatchers.Default);
+        AnonymousClass7 anonymousClass72 = this.roleCallback;
+        anonymousClass72.getClass();
+        roleManager.addOnRoleHoldersChangedListenerAsUser(executorAsExecutor, anonymousClass72, userHandle);
     }
 
     public final boolean updateHomeStatus() {

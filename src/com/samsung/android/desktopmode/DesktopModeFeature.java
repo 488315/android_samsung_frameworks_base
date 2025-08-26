@@ -94,14 +94,14 @@ public class DesktopModeFeature {
         DEBUG = Debug.semIsProductDev() || Build.IS_DEBUGGABLE || Log.isLoggable("DMS", 3);
         FEATURE_STANDALONE_MODE_WALLPAPER = Build.VERSION.SEM_PLATFORM_INT < 140100;
         IS_TABLET = SystemProperties.get("ro.build.characteristics").contains(BnRConstants.DEVICETYPE_TABLET) || isDebuggableAndSysPropSet(BnRConstants.DEVICETYPE_TABLET);
-        Set<String> unmodifiableSet = Collections.unmodifiableSet(new ArraySet(Arrays.asList(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE").split(","))));
-        SUPPORTED_MODES = unmodifiableSet;
-        SUPPORT_DUAL = unmodifiableSet.contains("dual") || isDebuggableAndSysPropSet("dual");
-        SUPPORT_DEX_ON_PC = unmodifiableSet.contains("dexforpc") || isDebuggableAndSysPropSet("dop");
-        SUPPORT_STANDALONE = unmodifiableSet.contains("standalone") || isDebuggableAndSysPropSet("standalone");
-        boolean z2 = unmodifiableSet.contains(AudioDeviceDescription.CONNECTION_WIRELESS) || isDebuggableAndSysPropSet(AudioDeviceDescription.CONNECTION_WIRELESS);
+        Set<String> setUnmodifiableSet = Collections.unmodifiableSet(new ArraySet(Arrays.asList(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE").split(","))));
+        SUPPORTED_MODES = setUnmodifiableSet;
+        SUPPORT_DUAL = setUnmodifiableSet.contains("dual") || isDebuggableAndSysPropSet("dual");
+        SUPPORT_DEX_ON_PC = setUnmodifiableSet.contains("dexforpc") || isDebuggableAndSysPropSet("dop");
+        SUPPORT_STANDALONE = setUnmodifiableSet.contains("standalone") || isDebuggableAndSysPropSet("standalone");
+        boolean z2 = setUnmodifiableSet.contains(AudioDeviceDescription.CONNECTION_WIRELESS) || isDebuggableAndSysPropSet(AudioDeviceDescription.CONNECTION_WIRELESS);
         SUPPORT_WIRELESS_DEX = z2;
-        if (!unmodifiableSet.contains("newdex") && !isDebuggableAndSysPropSet("newdex")) {
+        if (!setUnmodifiableSet.contains("newdex") && !isDebuggableAndSysPropSet("newdex")) {
             z = false;
         }
         SUPPORT_NEW_DEX = z;

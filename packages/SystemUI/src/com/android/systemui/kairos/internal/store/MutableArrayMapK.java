@@ -12,13 +12,11 @@ import kotlin.collections.builders.ListBuilder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MutableArrayMapK extends AbstractMutableMap implements MutableMapK {
     public final MutableArrayMapK$entries$1 entries;
     public final AtomicReferenceArray storage;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements MutableMapK.Factory {
         @Override // com.android.systemui.kairos.internal.store.MutableMapK.Factory
         public final MutableMapK create(Integer num) {
@@ -61,24 +59,24 @@ public final class MutableArrayMapK extends AbstractMutableMap implements Mutabl
 
     @Override // java.util.AbstractMap, java.util.Map
     public final Object put(Object obj, Object obj2) {
-        int intValue = ((Number) obj).intValue();
-        Map.Entry entry = (Map.Entry) this.storage.get(intValue);
+        int iIntValue = ((Number) obj).intValue();
+        Map.Entry entry = (Map.Entry) this.storage.get(iIntValue);
         Object value = entry != null ? entry.getValue() : null;
-        this.storage.set(intValue, new StoreEntry(Integer.valueOf(intValue), obj2));
+        this.storage.set(iIntValue, new StoreEntry(Integer.valueOf(iIntValue), obj2));
         return value;
     }
 
     @Override // com.android.systemui.kairos.internal.store.MutableMapK
     public final MapK readOnlyCopy() {
         int length = this.storage.length();
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         for (int i = 0; i < length; i++) {
             Map.Entry entry = (Map.Entry) this.storage.get(i);
             if (entry != null) {
-                createListBuilder.add(new StoreEntry(entry.getKey(), entry.getValue()));
+                listBuilderCreateListBuilder.add(new StoreEntry(entry.getKey(), entry.getValue()));
             }
         }
-        return new ArrayMapK(createListBuilder.build(), length);
+        return new ArrayMapK(listBuilderCreateListBuilder.build(), length);
     }
 
     @Override // java.util.AbstractMap, java.util.Map
@@ -96,8 +94,8 @@ public final class MutableArrayMapK extends AbstractMutableMap implements Mutabl
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
             public final boolean add(Object obj) {
                 Map.Entry entry = (Map.Entry) obj;
-                boolean z = MutableArrayMapK.this.storage.get(((Number) entry.getKey()).intValue()) != null;
-                MutableArrayMapK.this.storage.set(((Number) entry.getKey()).intValue(), entry);
+                boolean z = this.this$0.storage.get(((Number) entry.getKey()).intValue()) != null;
+                this.this$0.storage.set(((Number) entry.getKey()).intValue(), entry);
                 return z;
             }
 
@@ -111,7 +109,7 @@ public final class MutableArrayMapK extends AbstractMutableMap implements Mutabl
 
             @Override // kotlin.collections.AbstractMutableSet
             public final int getSize() {
-                MutableArrayMapK mutableArrayMapK = MutableArrayMapK.this;
+                MutableArrayMapK mutableArrayMapK = this.this$0;
                 int length = mutableArrayMapK.storage.length();
                 int i = 0;
                 for (int i2 = 0; i2 < length; i2++) {
@@ -124,7 +122,7 @@ public final class MutableArrayMapK extends AbstractMutableMap implements Mutabl
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
             public final Iterator iterator() {
-                return new MutableArrayMapK$entries$1$iterator$1(MutableArrayMapK.this);
+                return new MutableArrayMapK$entries$1$iterator$1(this.this$0);
             }
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set

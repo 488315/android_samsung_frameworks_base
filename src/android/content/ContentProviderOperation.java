@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -67,22 +68,22 @@ public class ContentProviderOperation implements Parcelable {
         this.mExceptionAllowed = builder.mExceptionAllowed;
     }
 
-    private ContentProviderOperation(Parcel parcel) {
+    private ContentProviderOperation(Parcel parcel) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         this.mType = parcel.readInt();
         this.mUri = Uri.CREATOR.createFromParcel(parcel);
         this.mMethod = parcel.readInt() != 0 ? parcel.readString8() : null;
         this.mArg = parcel.readInt() != 0 ? parcel.readString8() : null;
-        int readInt = parcel.readInt();
-        if (readInt != -1) {
-            ArrayMap<String, Object> arrayMap = new ArrayMap<>(readInt);
+        int i = parcel.readInt();
+        if (i != -1) {
+            ArrayMap<String, Object> arrayMap = new ArrayMap<>(i);
             this.mValues = arrayMap;
             parcel.readArrayMap(arrayMap, null);
         } else {
             this.mValues = null;
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 != -1) {
-            ArrayMap<String, Object> arrayMap2 = new ArrayMap<>(readInt2);
+        int i2 = parcel.readInt();
+        if (i2 != -1) {
+            ArrayMap<String, Object> arrayMap2 = new ArrayMap<>(i2);
             this.mExtras = arrayMap2;
             parcel.readArrayMap(arrayMap2, null);
         } else {
@@ -110,7 +111,7 @@ public class ContentProviderOperation implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mType);
         Uri.writeToParcel(parcel, this.mUri);
         if (this.mMethod != null) {
@@ -234,40 +235,40 @@ public class ContentProviderOperation implements Parcelable {
 
     private ContentProviderResult applyInternal(ContentProvider contentProvider, ContentProviderResult[] contentProviderResultArr, int i) throws OperationApplicationException {
         String[] strArr;
-        int i2;
-        ContentValues resolveValueBackReferences = resolveValueBackReferences(contentProviderResultArr, i);
-        Bundle resolveExtrasBackReferences = resolveExtrasBackReferences(contentProviderResultArr, i);
+        int iUpdate;
+        ContentValues contentValuesResolveValueBackReferences = resolveValueBackReferences(contentProviderResultArr, i);
+        Bundle bundleResolveExtrasBackReferences = resolveExtrasBackReferences(contentProviderResultArr, i);
         if (this.mSelection != null) {
-            if (resolveExtrasBackReferences == null) {
-                resolveExtrasBackReferences = new Bundle();
+            if (bundleResolveExtrasBackReferences == null) {
+                bundleResolveExtrasBackReferences = new Bundle();
             }
-            resolveExtrasBackReferences.putString(ContentResolver.QUERY_ARG_SQL_SELECTION, this.mSelection);
+            bundleResolveExtrasBackReferences.putString(ContentResolver.QUERY_ARG_SQL_SELECTION, this.mSelection);
         }
         if (this.mSelectionArgs != null) {
-            if (resolveExtrasBackReferences == null) {
-                resolveExtrasBackReferences = new Bundle();
+            if (bundleResolveExtrasBackReferences == null) {
+                bundleResolveExtrasBackReferences = new Bundle();
             }
-            resolveExtrasBackReferences.putStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS, resolveSelectionArgsBackReferences(contentProviderResultArr, i));
+            bundleResolveExtrasBackReferences.putStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS, resolveSelectionArgsBackReferences(contentProviderResultArr, i));
         }
-        int i3 = this.mType;
-        if (i3 == 1) {
-            Uri insert = contentProvider.insert(this.mUri, resolveValueBackReferences, resolveExtrasBackReferences);
-            if (insert != null) {
-                return new ContentProviderResult(insert);
+        int i2 = this.mType;
+        if (i2 == 1) {
+            Uri uriInsert = contentProvider.insert(this.mUri, contentValuesResolveValueBackReferences, bundleResolveExtrasBackReferences);
+            if (uriInsert != null) {
+                return new ContentProviderResult(uriInsert);
             }
             throw new OperationApplicationException("Insert into " + this.mUri + " returned no result");
         }
-        if (i3 == 5) {
-            return new ContentProviderResult(contentProvider.call(this.mUri.getAuthority(), this.mMethod, this.mArg, resolveExtrasBackReferences));
+        if (i2 == 5) {
+            return new ContentProviderResult(contentProvider.call(this.mUri.getAuthority(), this.mMethod, this.mArg, bundleResolveExtrasBackReferences));
         }
-        if (i3 == 3) {
-            i2 = contentProvider.delete(this.mUri, resolveExtrasBackReferences);
-        } else if (i3 == 2) {
-            i2 = contentProvider.update(this.mUri, resolveValueBackReferences, resolveExtrasBackReferences);
-        } else if (i3 == 4) {
-            if (resolveValueBackReferences != null) {
+        if (i2 == 3) {
+            iUpdate = contentProvider.delete(this.mUri, bundleResolveExtrasBackReferences);
+        } else if (i2 == 2) {
+            iUpdate = contentProvider.update(this.mUri, contentValuesResolveValueBackReferences, bundleResolveExtrasBackReferences);
+        } else if (i2 == 4) {
+            if (contentValuesResolveValueBackReferences != null) {
                 ArrayList arrayList = new ArrayList();
-                Iterator<Map.Entry<String, Object>> it = resolveValueBackReferences.valueSet().iterator();
+                Iterator<Map.Entry<String, Object>> it = contentValuesResolveValueBackReferences.valueSet().iterator();
                 while (it.hasNext()) {
                     arrayList.add(it.next().getKey());
                 }
@@ -275,34 +276,34 @@ public class ContentProviderOperation implements Parcelable {
             } else {
                 strArr = null;
             }
-            Cursor query = contentProvider.query(this.mUri, strArr, resolveExtrasBackReferences, null);
+            Cursor cursorQuery = contentProvider.query(this.mUri, strArr, bundleResolveExtrasBackReferences, null);
             try {
-                int count = query.getCount();
+                int count = cursorQuery.getCount();
                 if (strArr != null) {
-                    while (query.moveToNext()) {
-                        for (int i4 = 0; i4 < strArr.length; i4++) {
-                            String string = query.getString(i4);
-                            String asString = resolveValueBackReferences.getAsString(strArr[i4]);
+                    while (cursorQuery.moveToNext()) {
+                        for (int i3 = 0; i3 < strArr.length; i3++) {
+                            String string = cursorQuery.getString(i3);
+                            String asString = contentValuesResolveValueBackReferences.getAsString(strArr[i3]);
                             if (!TextUtils.equals(string, asString)) {
-                                throw new OperationApplicationException("Found value " + string + " when expected " + asString + " for column " + strArr[i4]);
+                                throw new OperationApplicationException("Found value " + string + " when expected " + asString + " for column " + strArr[i3]);
                             }
                         }
                     }
                 }
-                query.close();
-                i2 = count;
+                cursorQuery.close();
+                iUpdate = count;
             } catch (Throwable th) {
-                query.close();
+                cursorQuery.close();
                 throw th;
             }
         } else {
             throw new IllegalStateException("bad type, " + this.mType);
         }
         Integer num = this.mExpectedCount;
-        if (num != null && num.intValue() != i2) {
-            throw new OperationApplicationException("Expected " + this.mExpectedCount + " rows but actual " + i2);
+        if (num != null && num.intValue() != iUpdate) {
+            throw new OperationApplicationException("Expected " + this.mExpectedCount + " rows but actual " + iUpdate);
         }
-        return new ContentProviderResult(i2);
+        return new ContentProviderResult(iUpdate);
     }
 
     public ContentValues resolveValueBackReferences(ContentProviderResult[] contentProviderResultArr, int i) {
@@ -311,11 +312,11 @@ public class ContentProviderOperation implements Parcelable {
         }
         ContentValues contentValues = new ContentValues();
         for (int i2 = 0; i2 < this.mValues.size(); i2++) {
-            Object valueAt = this.mValues.valueAt(i2);
-            if (valueAt instanceof BackReference) {
-                valueAt = ((BackReference) valueAt).resolve(contentProviderResultArr, i);
+            Object objValueAt = this.mValues.valueAt(i2);
+            if (objValueAt instanceof BackReference) {
+                objValueAt = ((BackReference) objValueAt).resolve(contentProviderResultArr, i);
             }
-            contentValues.putObject(this.mValues.keyAt(i2), valueAt);
+            contentValues.putObject(this.mValues.keyAt(i2), objValueAt);
         }
         return contentValues;
     }
@@ -326,11 +327,11 @@ public class ContentProviderOperation implements Parcelable {
         }
         Bundle bundle = new Bundle();
         for (int i2 = 0; i2 < this.mExtras.size(); i2++) {
-            Object valueAt = this.mExtras.valueAt(i2);
-            if (valueAt instanceof BackReference) {
-                valueAt = ((BackReference) valueAt).resolve(contentProviderResultArr, i);
+            Object objValueAt = this.mExtras.valueAt(i2);
+            if (objValueAt instanceof BackReference) {
+                objValueAt = ((BackReference) objValueAt).resolve(contentProviderResultArr, i);
             }
-            bundle.putObject(this.mExtras.keyAt(i2), valueAt);
+            bundle.putObject(this.mExtras.keyAt(i2), objValueAt);
         }
         return bundle;
     }
@@ -339,17 +340,17 @@ public class ContentProviderOperation implements Parcelable {
         if (this.mSelectionArgs == null) {
             return null;
         }
-        int i2 = -1;
-        for (int i3 = 0; i3 < this.mSelectionArgs.size(); i3++) {
-            i2 = Math.max(i2, this.mSelectionArgs.keyAt(i3));
+        int iMax = -1;
+        for (int i2 = 0; i2 < this.mSelectionArgs.size(); i2++) {
+            iMax = Math.max(iMax, this.mSelectionArgs.keyAt(i2));
         }
-        String[] strArr = new String[i2 + 1];
-        for (int i4 = 0; i4 < this.mSelectionArgs.size(); i4++) {
-            Object valueAt = this.mSelectionArgs.valueAt(i4);
-            if (valueAt instanceof BackReference) {
-                valueAt = ((BackReference) valueAt).resolve(contentProviderResultArr, i);
+        String[] strArr = new String[iMax + 1];
+        for (int i3 = 0; i3 < this.mSelectionArgs.size(); i3++) {
+            Object objValueAt = this.mSelectionArgs.valueAt(i3);
+            if (objValueAt instanceof BackReference) {
+                objValueAt = ((BackReference) objValueAt).resolve(contentProviderResultArr, i);
             }
-            strArr[this.mSelectionArgs.keyAt(i4)] = String.valueOf(valueAt);
+            strArr[this.mSelectionArgs.keyAt(i3)] = String.valueOf(objValueAt);
         }
         return strArr;
     }
@@ -575,6 +576,7 @@ public class ContentProviderOperation implements Parcelable {
             return this;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Builder withValueBackReferences(ContentValues contentValues) {
             assertValuesAllowed();
             ArrayMap<String, Object> values = contentValues.getValues();
@@ -584,6 +586,7 @@ public class ContentProviderOperation implements Parcelable {
             return this;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Builder withValueBackReference(String str, int i) {
             assertValuesAllowed();
             setValue(str, new BackReference(i, null));
@@ -611,6 +614,7 @@ public class ContentProviderOperation implements Parcelable {
             return this;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Builder withExtraBackReference(String str, int i) {
             assertExtrasAllowed();
             setExtra(str, new BackReference(i, null));
@@ -635,6 +639,7 @@ public class ContentProviderOperation implements Parcelable {
             return this;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Builder withSelectionBackReference(int i, int i2) {
             assertSelectionAllowed();
             setSelectionArg(i, new BackReference(i2, null));

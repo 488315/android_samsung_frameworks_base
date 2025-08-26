@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.util.Log;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LightweightConfigurationType extends KnoxConfigurationType {
     public static final Parcelable.Creator<LightweightConfigurationType> CREATOR = new Parcelable.Creator<LightweightConfigurationType>() { // from class: com.samsung.android.knox.container.LightweightConfigurationType.1
@@ -115,13 +114,13 @@ public class LightweightConfigurationType extends KnoxConfigurationType {
         this.mFolderHeaderTitle = null;
         this.mFolderHeaderIcon = null;
         this.mFolderDisabledChangeLayout = null;
-        String readString = parcel.readString();
-        this.mFolderHeaderIcon = (readString == null || readString.isEmpty()) ? null : readString;
-        String readString2 = parcel.readString();
-        this.mFolderHeaderTitle = (readString2 == null || readString2.isEmpty()) ? null : readString2;
-        String readString3 = parcel.readString();
-        if (readString3 != null && !readString3.isEmpty()) {
-            str = readString3;
+        String string = parcel.readString();
+        this.mFolderHeaderIcon = (string == null || string.isEmpty()) ? null : string;
+        String string2 = parcel.readString();
+        this.mFolderHeaderTitle = (string2 == null || string2.isEmpty()) ? null : string2;
+        String string3 = parcel.readString();
+        if (string3 != null && !string3.isEmpty()) {
+            str = string3;
         }
         this.mFolderDisabledChangeLayout = str;
     }

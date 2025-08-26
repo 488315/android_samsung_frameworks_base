@@ -3,7 +3,6 @@ package androidx.compose.ui.text.style;
 import androidx.compose.animation.AndroidFlingSpline$FlingResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextGeometricTransform {
     public static final Companion Companion = new Companion(null);
@@ -11,7 +10,6 @@ public final class TextGeometricTransform {
     public final float scaleX;
     public final float skewX;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -22,20 +20,9 @@ public final class TextGeometricTransform {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public TextGeometricTransform() {
-        /*
-            r3 = this;
-            r0 = 3
-            r1 = 0
-            r2 = 0
-            r3.<init>(r2, r2, r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.style.TextGeometricTransform.<init>():void");
+        float f = 0.0f;
+        this(f, f, 3, null);
     }
 
     public final boolean equals(Object obj) {

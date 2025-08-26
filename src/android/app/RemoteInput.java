@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -196,22 +197,22 @@ public final class RemoteInput implements Parcelable {
     }
 
     public static Map<String, Uri> getDataResultsFromIntent(Intent intent, String str) {
-        String substring;
+        String strSubstring;
         String string;
         Intent clipDataIntentFromIntent = getClipDataIntentFromIntent(intent);
         if (clipDataIntentFromIntent == null) {
             return null;
         }
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (String str2 : clipDataIntentFromIntent.getExtras().keySet()) {
-            if (str2.startsWith(EXTRA_DATA_TYPE_RESULTS_DATA) && (substring = str2.substring(39)) != null && !substring.isEmpty() && (string = clipDataIntentFromIntent.getBundleExtra(str2).getString(str)) != null && !string.isEmpty()) {
-                hashMap.put(substring, Uri.parse(string));
+            if (str2.startsWith(EXTRA_DATA_TYPE_RESULTS_DATA) && (strSubstring = str2.substring(39)) != null && !strSubstring.isEmpty() && (string = clipDataIntentFromIntent.getBundleExtra(str2).getString(str)) != null && !string.isEmpty()) {
+                map.put(strSubstring, Uri.parse(string));
             }
         }
-        if (hashMap.isEmpty()) {
+        if (map.isEmpty()) {
             return null;
         }
-        return hashMap;
+        return map;
     }
 
     public static Bundle getResultsFromIntent(Intent intent) {
@@ -283,7 +284,7 @@ public final class RemoteInput implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mResultKey);
         parcel.writeCharSequence(this.mLabel);
         parcel.writeCharSequenceArray(this.mChoices);

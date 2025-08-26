@@ -12,14 +12,13 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.FloatCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransitionBuilderImpl extends BaseTransitionBuilderImpl implements BaseTransitionBuilder {
     public final UserActionDistance distance;
     public final Lazy durationMillis$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.compose.animation.scene.TransitionBuilderImpl$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            TweenSpec tweenSpec = TransitionBuilderImpl.this.spec;
+            TweenSpec tweenSpec = this.f$0.spec;
             if (tweenSpec == null) {
                 throw new IllegalStateException("timestampRange {} can only be used with a DurationBasedAnimationSpec");
             }
@@ -45,7 +44,7 @@ public final class TransitionBuilderImpl extends BaseTransitionBuilderImpl imple
         }
         if (num2.intValue() >= 0 && num2.intValue() <= transitionBuilderImpl.getDurationMillis()) {
             transitionBuilderImpl.range = new TransformationRange(num != null ? Float.valueOf(num.intValue() / transitionBuilderImpl.getDurationMillis()) : null, Float.valueOf(num2.intValue() / transitionBuilderImpl.getDurationMillis()), easingKt$$ExternalSyntheticLambda0);
-            function1.mo779invoke(transitionBuilderImpl);
+            function1.mo781invoke(transitionBuilderImpl);
             transitionBuilderImpl.range = null;
         } else {
             throw new IllegalStateException(("invalid end value: endMillis=" + num + " durationMillis=" + transitionBuilderImpl.getDurationMillis()).toString());

@@ -132,11 +132,11 @@ public class ScoredNetwork implements Parcelable {
         Bundle bundle = this.attributes;
         int i2 = bundle != null ? bundle.getInt(ATTRIBUTES_KEY_RANKING_SCORE_OFFSET, 0) : 0;
         RssiCurve rssiCurve = this.rssiCurve;
-        int lookupScore = rssiCurve != null ? rssiCurve.lookupScore(i) << 8 : 0;
+        int iLookupScore = rssiCurve != null ? rssiCurve.lookupScore(i) << 8 : 0;
         try {
-            return Math.addExact(lookupScore, i2);
+            return Math.addExact(iLookupScore, i2);
         } catch (ArithmeticException unused) {
-            return lookupScore < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            return iLookupScore < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         }
     }
 

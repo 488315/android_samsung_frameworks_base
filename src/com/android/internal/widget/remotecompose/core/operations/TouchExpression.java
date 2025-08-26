@@ -198,15 +198,15 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
 
     private float getStopPosition(float f, float f2) {
         float f3;
-        float max;
+        float fMax;
         float f4 = f2 / 2.0f;
         float f5 = f + f4;
         if (this.mWrapMode) {
-            max = wrap(f) + f4;
-            f3 = max;
+            fMax = wrap(f) + f4;
+            f3 = fMax;
         } else {
             f3 = f;
-            max = Math.max(Math.min(f5, this.mOutMax), this.mOutMin);
+            fMax = Math.max(Math.min(f5, this.mOutMax), this.mOutMin);
         }
         float[] fArr = this.mStopSpec;
         float[] fArr2 = new float[fArr.length];
@@ -224,20 +224,20 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
         int i2 = 0;
         if (i == 3) {
             float[] fArr3 = this.mOutStopSpec;
-            float f9 = ((((fArr3.length > 1 ? fArr3[1] : this.mOutMax) - f6) / ((int) fArr3[0])) * ((int) (((max - this.mOutMin) / r11) + 0.5f))) + f6;
+            float f9 = ((((fArr3.length > 1 ? fArr3[1] : this.mOutMax) - f6) / ((int) fArr3[0])) * ((int) (((fMax - this.mOutMin) / r11) + 0.5f))) + f6;
             return !z ? Math.max(Math.min(f9, this.mOutMax), f6) : f9;
         }
         if (i != 4) {
             if (i != 5) {
-                return max;
+                return fMax;
             }
             float f10 = this.mOutMin;
-            float abs = Math.abs(f10 - max);
+            float fAbs = Math.abs(f10 - fMax);
             while (i2 < fArr.length) {
-                float abs2 = Math.abs(fArr[i2] - max);
-                if (abs > abs2) {
+                float fAbs2 = Math.abs(fArr[i2] - fMax);
+                if (fAbs > fAbs2) {
                     f10 = fArr[i2];
-                    abs = abs2;
+                    fAbs = fAbs2;
                 }
                 i2++;
             }
@@ -245,14 +245,14 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
         }
         int length = fArr.length;
         float[] fArr4 = new float[length];
-        float abs3 = Math.abs(this.mOutMin - max);
+        float fAbs3 = Math.abs(this.mOutMin - fMax);
         while (i2 < length) {
             float f11 = this.mOutMin;
             float f12 = f11 + (this.mStopSpec[i2] * (this.mOutMax - f11));
-            float abs4 = Math.abs(f12 - max);
-            if (abs3 > abs4) {
+            float fAbs4 = Math.abs(f12 - fMax);
+            if (fAbs3 > fAbs4) {
                 f6 = f12;
-                abs3 = abs4;
+                fAbs3 = fAbs4;
             }
             i2++;
         }
@@ -261,11 +261,11 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
 
     void haptic(RemoteContext remoteContext) {
         int i = this.mTouchEffects;
-        int i2 = i & 255;
+        int integer = i & 255;
         if ((32768 & i) != 0) {
-            i2 = remoteContext.getInteger(i & 32767);
+            integer = remoteContext.getInteger(i & 32767);
         }
-        remoteContext.hapticEffect(i2);
+        remoteContext.hapticEffect(integer);
     }
 
     void crossNotchCheck(RemoteContext remoteContext) {
@@ -357,8 +357,8 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void apply(RemoteContext remoteContext) {
-        float min;
-        float min2;
+        float fMin;
+        float fMin2;
         updateBounds();
         if (this.mUnmodified) {
             float f = this.mOutDefValue;
@@ -371,11 +371,11 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
             float pos = this.mEasyTouch.getPos(animationTime);
             this.mCurrentValue = pos;
             if (this.mWrapMode) {
-                min2 = wrap(pos);
+                fMin2 = wrap(pos);
             } else {
-                min2 = Math.min(Math.max(pos, this.mOutMin), this.mOutMax);
+                fMin2 = Math.min(Math.max(pos, this.mOutMin), this.mOutMax);
             }
-            remoteContext.loadFloat(this.mId, min2);
+            remoteContext.loadFloat(this.mId, fMin2);
             if (this.mEasyTouch.getDuration() < animationTime) {
                 this.mEasingToStop = false;
             }
@@ -387,16 +387,16 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
             AnimatedFloatExpression animatedFloatExpression = this.mExp;
             CollectionsAccess collectionsAccess = remoteContext.getCollectionsAccess();
             float[] fArr = this.mPreCalcValue;
-            float eval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
+            float fEval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
             if (this.mMode == 0) {
-                eval = (eval - this.mDownTouchValue) + this.mValueAtDown;
+                fEval = (fEval - this.mDownTouchValue) + this.mValueAtDown;
             }
             if (this.mWrapMode) {
-                min = wrap(eval);
+                fMin = wrap(fEval);
             } else {
-                min = Math.min(Math.max(eval, this.mOutMin), this.mOutMax);
+                fMin = Math.min(Math.max(fEval, this.mOutMin), this.mOutMax);
             }
-            this.mCurrentValue = min;
+            this.mCurrentValue = fMin;
         }
         crossNotchCheck(remoteContext);
         remoteContext.loadFloat(this.mId, wrap(this.mCurrentValue));
@@ -434,15 +434,15 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
         AnimatedFloatExpression animatedFloatExpression = this.mExp;
         CollectionsAccess collectionsAccess = remoteContext.getCollectionsAccess();
         float[] fArr = this.mPreCalcValue;
-        float eval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
+        float fEval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
         while (true) {
             float[] fArr2 = this.mSrcExp;
             if (i < fArr2.length) {
                 if (Float.isNaN(fArr2[i])) {
-                    int idFromNan = Utils.idFromNan(this.mSrcExp[i]);
-                    if (idFromNan == 13) {
+                    int iIdFromNan = Utils.idFromNan(this.mSrcExp[i]);
+                    if (iIdFromNan == 13) {
                         this.mPreCalcValue[i] = f + (1.0E-4f * f3);
-                    } else if (idFromNan == 14) {
+                    } else if (iIdFromNan == 14) {
                         this.mPreCalcValue[i] = f2 + (1.0E-4f * f4);
                     }
                 }
@@ -451,11 +451,11 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
                 AnimatedFloatExpression animatedFloatExpression2 = this.mExp;
                 CollectionsAccess collectionsAccess2 = remoteContext.getCollectionsAccess();
                 float[] fArr3 = this.mPreCalcValue;
-                float eval2 = (animatedFloatExpression2.eval(collectionsAccess2, fArr3, fArr3.length) - eval) / 1.0E-4f;
+                float fEval2 = (animatedFloatExpression2.eval(collectionsAccess2, fArr3, fArr3.length) - fEval) / 1.0E-4f;
                 float f5 = remoteContext.getFloat(this.mId);
                 this.mTouchUpTime = remoteContext.getAnimationTime();
-                float stopPosition = getStopPosition(f5, eval2);
-                this.mEasyTouch.config(f5, stopPosition, eval2, Math.min(2.0f, (this.mMaxTime * Math.abs(stopPosition - f5)) / (this.mMaxVelocity * 2.0f)), this.mMaxAcceleration, this.mMaxVelocity, null);
+                float stopPosition = getStopPosition(f5, fEval2);
+                this.mEasyTouch.config(f5, stopPosition, fEval2, Math.min(2.0f, (this.mMaxTime * Math.abs(stopPosition - f5)) / (this.mMaxVelocity * 2.0f)), this.mMaxAcceleration, this.mMaxVelocity, null);
                 this.mEasingToStop = true;
                 remoteContext.needsRepaint();
                 return;
@@ -524,33 +524,33 @@ public class TouchExpression extends Operation implements ComponentData, Variabl
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        float readFloat = wireBuffer.readFloat();
-        float readFloat2 = wireBuffer.readFloat();
-        float readFloat3 = wireBuffer.readFloat();
-        float readFloat4 = wireBuffer.readFloat();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt() & 65535;
-        if (readInt3 > 32) {
+        int i = wireBuffer.readInt();
+        float f = wireBuffer.readFloat();
+        float f2 = wireBuffer.readFloat();
+        float f3 = wireBuffer.readFloat();
+        float f4 = wireBuffer.readFloat();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt() & 65535;
+        if (i3 > 32) {
             throw new RuntimeException("Float expression to long");
         }
-        float[] fArr = new float[readInt3];
-        for (int i = 0; i < readInt3; i++) {
-            fArr[i] = wireBuffer.readFloat();
+        float[] fArr = new float[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            fArr[i4] = wireBuffer.readFloat();
         }
-        int readInt4 = wireBuffer.readInt();
-        int i2 = 65535 & readInt4;
-        int i3 = readInt4 >> 16;
-        float[] fArr2 = new float[i2];
-        for (int i4 = 0; i4 < i2; i4++) {
-            fArr2[i4] = wireBuffer.readFloat();
+        int i5 = wireBuffer.readInt();
+        int i6 = 65535 & i5;
+        int i7 = i5 >> 16;
+        float[] fArr2 = new float[i6];
+        for (int i8 = 0; i8 < i6; i8++) {
+            fArr2[i8] = wireBuffer.readFloat();
         }
-        int readInt5 = wireBuffer.readInt();
-        float[] fArr3 = new float[readInt5];
-        for (int i5 = 0; i5 < readInt5; i5++) {
-            fArr3[i5] = wireBuffer.readFloat();
+        int i9 = wireBuffer.readInt();
+        float[] fArr3 = new float[i9];
+        for (int i10 = 0; i10 < i9; i10++) {
+            fArr3[i10] = wireBuffer.readFloat();
         }
-        list.add(new TouchExpression(readInt, fArr, readFloat, readFloat2, readFloat3, readInt2, readFloat4, i3, fArr2, fArr3));
+        list.add(new TouchExpression(i, fArr, f, f2, f3, i2, f4, i7, fArr2, fArr3));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

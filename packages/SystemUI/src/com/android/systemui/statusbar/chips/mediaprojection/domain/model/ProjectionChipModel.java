@@ -5,13 +5,11 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ProjectionChipModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ContentType {
         public static final /* synthetic */ ContentType[] $VALUES;
         public static final ContentType Audio;
@@ -39,7 +37,6 @@ public abstract class ProjectionChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotProjecting extends ProjectionChipModel {
         public static final NotProjecting INSTANCE = new NotProjecting();
 
@@ -60,7 +57,6 @@ public abstract class ProjectionChipModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Projecting extends ProjectionChipModel {
         public final ContentType contentType;
         public final MediaProjectionState.Projecting projectionState;
@@ -95,7 +91,6 @@ public abstract class ProjectionChipModel {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Receiver {
         public static final /* synthetic */ Receiver[] $VALUES;
         public static final Receiver CastToOtherDevice;

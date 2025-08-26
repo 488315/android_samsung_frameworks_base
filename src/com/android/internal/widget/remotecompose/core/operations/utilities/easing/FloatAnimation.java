@@ -51,48 +51,48 @@ public class FloatAnimation extends Easing implements Serializable {
     }
 
     public static float[] packToFloatArray(float f, int i, float[] fArr, float f2, float f3) {
-        int i2;
-        int i3 = !Float.isNaN(f2) ? 1 : 0;
+        int length;
+        int length2 = !Float.isNaN(f2) ? 1 : 0;
         if (fArr != null) {
-            i3++;
+            length2++;
         }
         if (fArr != null || i != 1) {
-            i3 = i3 + 1 + (fArr == null ? 0 : fArr.length);
+            length2 = length2 + 1 + (fArr == null ? 0 : fArr.length);
         }
         if (!Float.isNaN(f2)) {
-            i3++;
+            length2++;
         }
         if (!Float.isNaN(f3)) {
-            i3++;
+            length2++;
         }
-        if (f != 1.0f || i3 > 0) {
-            i3++;
+        if (f != 1.0f || length2 > 0) {
+            length2++;
         }
         if (!Float.isNaN(f3) || !Float.isNaN(f2)) {
-            i3++;
+            length2++;
         }
-        float[] fArr2 = new float[i3];
-        int length = fArr == null ? 0 : fArr.length;
-        if (i3 > 0) {
+        float[] fArr2 = new float[length2];
+        int length3 = fArr == null ? 0 : fArr.length;
+        if (length2 > 0) {
             fArr2[0] = f;
-            i2 = 1;
+            length = 1;
         } else {
-            i2 = 0;
+            length = 0;
         }
-        if (i3 > 1) {
-            fArr2[i2] = Float.intBitsToFloat(i | (((!Float.isNaN(f3) ? 1 : 0) | (Float.isNaN(f2) ? 0 : 2)) << 8) | (length << 16));
-            i2++;
+        if (length2 > 1) {
+            fArr2[length] = Float.intBitsToFloat(i | (((!Float.isNaN(f3) ? 1 : 0) | (Float.isNaN(f2) ? 0 : 2)) << 8) | (length3 << 16));
+            length++;
         }
-        if (length > 0) {
-            System.arraycopy(fArr, 0, fArr2, i2, fArr.length);
-            i2 += fArr.length;
+        if (length3 > 0) {
+            System.arraycopy(fArr, 0, fArr2, length, fArr.length);
+            length += fArr.length;
         }
         if (!Float.isNaN(f2)) {
-            fArr2[i2] = f2;
-            i2++;
+            fArr2[length] = f2;
+            length++;
         }
         if (!Float.isNaN(f3)) {
-            fArr2[i2] = f3;
+            fArr2[length] = f3;
         }
         return fArr2;
     }
@@ -106,14 +106,14 @@ public class FloatAnimation extends Easing implements Serializable {
         String str;
         float f3 = fArr.length == 0 ? 1.0f : fArr[0];
         if (fArr.length > 1) {
-            int floatToRawIntBits = Float.floatToRawIntBits(fArr[1]);
-            int i4 = floatToRawIntBits & 255;
-            int i5 = floatToRawIntBits >> 8;
+            int iFloatToRawIntBits = Float.floatToRawIntBits(fArr[1]);
+            int i4 = iFloatToRawIntBits & 255;
+            int i5 = iFloatToRawIntBits >> 8;
             boolean z = (i5 & 1) > 0;
             boolean z2 = (i5 & 2) > 0;
-            i2 = (floatToRawIntBits >> 10) & 3;
-            r1 = ((floatToRawIntBits >> 12) & 1) > 0 ? 1 : 0;
-            i = (floatToRawIntBits >> 16) & 65535;
+            i2 = (iFloatToRawIntBits >> 10) & 3;
+            i = ((iFloatToRawIntBits >> 12) & 1) > 0 ? 1 : 0;
+            i = (iFloatToRawIntBits >> 16) & 65535;
             int i6 = i + 2;
             if (z2) {
                 f2 = fArr[i6];
@@ -122,8 +122,8 @@ public class FloatAnimation extends Easing implements Serializable {
                 f2 = Float.NaN;
             }
             f = z ? fArr[i6] : Float.NaN;
-            i3 = r1;
-            r1 = i4;
+            i3 = i;
+            i = i4;
         } else {
             i = 0;
             i2 = 0;
@@ -131,7 +131,7 @@ public class FloatAnimation extends Easing implements Serializable {
             f2 = Float.NaN;
             i3 = 0;
         }
-        switch (r1) {
+        switch (i) {
             case 1:
                 str = "CUBIC_STANDARD";
                 break;
@@ -196,20 +196,20 @@ public class FloatAnimation extends Easing implements Serializable {
         int i = 0;
         this.mDuration = fArr.length == 0 ? 1.0f : fArr[0];
         if (fArr.length > 1) {
-            int floatToRawIntBits = Float.floatToRawIntBits(fArr[1]);
-            this.mType = floatToRawIntBits & 255;
-            int i2 = floatToRawIntBits >> 8;
-            byte b = (i2 & 1) > 0;
-            byte b2 = (i2 & 2) > 0;
-            int i3 = (floatToRawIntBits >> 10) & 3;
-            boolean z = ((floatToRawIntBits >> 12) & 1) > 0;
-            int i4 = (floatToRawIntBits >> 16) & 65535;
+            int iFloatToRawIntBits = Float.floatToRawIntBits(fArr[1]);
+            this.mType = iFloatToRawIntBits & 255;
+            int i2 = iFloatToRawIntBits >> 8;
+            Object[] objArr = (i2 & 1) > 0;
+            Object[] objArr2 = (i2 & 2) > 0;
+            int i3 = (iFloatToRawIntBits >> 10) & 3;
+            boolean z = ((iFloatToRawIntBits >> 12) & 1) > 0;
+            int i4 = (iFloatToRawIntBits >> 16) & 65535;
             int i5 = i4 + 2;
-            if (b2 != false) {
+            if (objArr2 != false) {
                 this.mInitialValue = this.mSpec[i5];
                 i5 = i4 + 3;
             }
-            if (b != false) {
+            if (objArr != false) {
                 this.mWrap = this.mSpec[i5];
             }
             this.mDirectionalSnap = i3;
@@ -257,6 +257,10 @@ public class FloatAnimation extends Easing implements Serializable {
         setScaleOffset();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0047  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setTargetValue(float f) {
         int i;
         this.mTargetValue = f;
@@ -266,27 +270,26 @@ public class FloatAnimation extends Easing implements Serializable {
             if (Float.isNaN(this.mInitialValue)) {
                 this.mInitialValue = this.mTargetValue;
             }
-            float wrapDistance = wrapDistance(this.mWrap, this.mInitialValue, this.mTargetValue);
-            if (wrapDistance > 0.0f) {
+            float fWrapDistance = wrapDistance(this.mWrap, this.mInitialValue, this.mTargetValue);
+            if (fWrapDistance > 0.0f) {
                 float f2 = this.mTargetValue;
                 if (f2 < this.mInitialValue) {
                     this.mTargetValue = f2 + this.mWrap;
-                }
-            }
-            if (wrapDistance < 0.0f && (i = this.mDirectionalSnap) != 0) {
-                if (i == 1) {
-                    float f3 = this.mTargetValue;
-                    if (f3 > this.mInitialValue) {
-                        this.mInitialValue = f3;
+                } else if (fWrapDistance < 0.0f && (i = this.mDirectionalSnap) != 0) {
+                    if (i == 1) {
+                        float f3 = this.mTargetValue;
+                        if (f3 > this.mInitialValue) {
+                            this.mInitialValue = f3;
+                        }
                     }
-                }
-                if (i == 2) {
-                    float f4 = this.mTargetValue;
-                    if (f4 < this.mInitialValue) {
-                        this.mInitialValue = f4;
+                    if (i == 2) {
+                        float f4 = this.mTargetValue;
+                        if (f4 < this.mInitialValue) {
+                            this.mInitialValue = f4;
+                        }
                     }
+                    this.mTargetValue -= this.mWrap;
                 }
-                this.mTargetValue -= this.mWrap;
             }
         }
         setScaleOffset();

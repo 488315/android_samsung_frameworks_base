@@ -1647,24 +1647,24 @@ public abstract class PackageManager {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public Property createFromParcel(Parcel parcel) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
-                if (readInt == 1) {
-                    return new Property(readString, parcel.readBoolean(), readString2, readString3);
+                String string = parcel.readString();
+                int i = parcel.readInt();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
+                if (i == 1) {
+                    return new Property(string, parcel.readBoolean(), string2, string3);
                 }
-                if (readInt == 2) {
-                    return new Property(readString, parcel.readFloat(), readString2, readString3);
+                if (i == 2) {
+                    return new Property(string, parcel.readFloat(), string2, string3);
                 }
-                if (readInt == 3) {
-                    return new Property(readString, parcel.readInt(), false, readString2, readString3);
+                if (i == 3) {
+                    return new Property(string, parcel.readInt(), false, string2, string3);
                 }
-                if (readInt == 4) {
-                    return new Property(readString, parcel.readInt(), true, readString2, readString3);
+                if (i == 4) {
+                    return new Property(string, parcel.readInt(), true, string2, string3);
                 }
-                if (readInt == 5) {
-                    return new Property(readString, parcel.readString(), readString2, readString3);
+                if (i == 5) {
+                    return new Property(string, parcel.readString(), string2, string3);
                 }
                 return null;
             }
@@ -1848,29 +1848,26 @@ public abstract class PackageManager {
 
         public int hashCode() {
             int i;
-            int hashCode;
-            int hash = Objects.hash(this.mName, Integer.valueOf(this.mType), this.mClassName, this.mPackageName);
+            int iHashCode;
+            int iHash = Objects.hash(this.mName, Integer.valueOf(this.mType), this.mClassName, this.mPackageName);
             int i2 = this.mType;
             if (i2 == 1) {
-                return (hash * 31) + (this.mBooleanValue ? 1 : 0);
+                return (iHash * 31) + (this.mBooleanValue ? 1 : 0);
             }
             if (i2 == 2) {
-                i = hash * 31;
-                hashCode = Float.floatToIntBits(this.mFloatValue);
-            } else if (i2 == 3) {
-                i = hash * 31;
-                hashCode = this.mIntegerValue;
-            } else if (i2 == 4) {
-                i = hash * 31;
-                hashCode = this.mIntegerValue;
+                i = iHash * 31;
+                iHashCode = Float.floatToIntBits(this.mFloatValue);
+            } else if (i2 == 3 || i2 == 4) {
+                i = iHash * 31;
+                iHashCode = this.mIntegerValue;
             } else {
                 if (i2 != 5) {
-                    return hash;
+                    return iHash;
                 }
-                i = hash * 31;
-                hashCode = this.mStringValue.hashCode();
+                i = iHash * 31;
+                iHashCode = this.mStringValue.hashCode();
             }
-            return i + hashCode;
+            return i + iHashCode;
         }
     }
 
@@ -1966,17 +1963,17 @@ public abstract class PackageManager {
         }
 
         ComponentEnabledSetting(Parcel parcel) {
-            byte readByte = parcel.readByte();
-            String readString = (readByte & 1) == 0 ? null : parcel.readString();
-            ComponentName componentName = (readByte & 2) == 0 ? null : (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            this.mPackageName = readString;
+            byte b = parcel.readByte();
+            String string = (b & 1) == 0 ? null : parcel.readString();
+            ComponentName componentName = (b & 2) == 0 ? null : (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            this.mPackageName = string;
             this.mComponentName = componentName;
-            this.mEnabledState = readInt;
-            AnnotationValidations.validate((Class<? extends Annotation>) EnabledState.class, (Annotation) null, readInt);
-            this.mEnabledFlags = readInt2;
-            AnnotationValidations.validate((Class<? extends Annotation>) EnabledFlags.class, (Annotation) null, readInt2);
+            this.mEnabledState = i;
+            AnnotationValidations.validate((Class<? extends Annotation>) EnabledState.class, (Annotation) null, i);
+            this.mEnabledFlags = i2;
+            AnnotationValidations.validate((Class<? extends Annotation>) EnabledFlags.class, (Annotation) null, i2);
         }
     }
 
@@ -1992,6 +1989,7 @@ public abstract class PackageManager {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
         sCacheAutoCorker = PropertyInvalidatedCache.separatePermissionNotificationsEnabled() ? null : new PropertyInvalidatedCache.AutoCorker(PermissionManager.CACHE_KEY_PACKAGE_INFO_CACHE);
     }
@@ -2097,14 +2095,14 @@ public abstract class PackageManager {
         if (str == null) {
             return false;
         }
-        int indexOf = str.indexOf(":");
-        if (indexOf > 0) {
-            str = str.substring(0, indexOf);
+        int iIndexOf = str.indexOf(":");
+        if (iIndexOf > 0) {
+            str = str.substring(0, iIndexOf);
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             ApplicationInfo applicationInfoAsUser = getApplicationInfoAsUser(str, 0, i);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             String codePath = applicationInfoAsUser.getCodePath();
             if (codePath == null) {
                 return false;
@@ -2116,10 +2114,10 @@ public abstract class PackageManager {
                 return false;
             }
         } catch (NameNotFoundException | AbstractMethodError | IllegalArgumentException unused2) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return false;
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }
@@ -2415,9 +2413,9 @@ public abstract class PackageManager {
             }
         });
         try {
-            ParsedPackage parsePackage = packageParser2.parsePackage(file, i, false);
-            parsePackage.hideAsFinal();
-            return PackageInfoCommonUtils.generate(parsePackage, value, UserHandle.myUserId());
+            ParsedPackage parsedPackage = packageParser2.parsePackage(file, i, false);
+            parsedPackage.hideAsFinal();
+            return PackageInfoCommonUtils.generate(parsedPackage, value, UserHandle.myUserId());
         } catch (PackageParserException unused) {
             Log.w(TAG, "Failure to parse package archive apkFile= " + file);
             return null;
@@ -2543,11 +2541,11 @@ public abstract class PackageManager {
     }
 
     public static String installStatusToString(int i, String str) {
-        String installStatusToString = installStatusToString(i);
+        String strInstallStatusToString = installStatusToString(i);
         if (str == null) {
-            return installStatusToString;
+            return strInstallStatusToString;
         }
-        return installStatusToString + ": " + str;
+        return strInstallStatusToString + ": " + str;
     }
 
     public static String installStatusToString(int i) {
@@ -2671,11 +2669,11 @@ public abstract class PackageManager {
     }
 
     public static String deleteStatusToString(int i, String str) {
-        String deleteStatusToString = deleteStatusToString(i);
+        String strDeleteStatusToString = deleteStatusToString(i);
         if (str == null) {
-            return deleteStatusToString;
+            return strDeleteStatusToString;
         }
-        return deleteStatusToString + ": " + str;
+        return strDeleteStatusToString + ": " + str;
     }
 
     public static String deleteStatusToString(int i) {
@@ -2860,7 +2858,7 @@ public abstract class PackageManager {
         throw new UnsupportedOperationException("hasSigningCertificate not implemented in subclass");
     }
 
-    public void requestChecksums(String str, boolean z, int i, List<Certificate> list, OnChecksumsReadyListener onChecksumsReadyListener) throws CertificateEncodingException, NameNotFoundException {
+    public void requestChecksums(String str, boolean z, int i, List<Certificate> list, OnChecksumsReadyListener onChecksumsReadyListener) throws NameNotFoundException, CertificateEncodingException {
         throw new UnsupportedOperationException("requestChecksums not implemented in subclass");
     }
 
@@ -3174,11 +3172,11 @@ public abstract class PackageManager {
     }
 
     public static SigningInfo getVerifiedSigningInfo(String str, int i) throws SigningInfoException {
-        ParseResult<SigningDetails> verify = ApkSignatureVerifier.verify(ParseTypeImpl.forDefaultParsing(), str, i);
-        if (verify.isError()) {
-            throw new SigningInfoException(verify.getErrorCode(), verify.getErrorMessage(), verify.getException());
+        ParseResult<SigningDetails> parseResultVerify = ApkSignatureVerifier.verify(ParseTypeImpl.forDefaultParsing(), str, i);
+        if (parseResultVerify.isError()) {
+            throw new SigningInfoException(parseResultVerify.getErrorCode(), parseResultVerify.getErrorMessage(), parseResultVerify.getException());
         }
-        return new SigningInfo(verify.getResult());
+        return new SigningInfo(parseResultVerify.getResult());
     }
 
     public static int maybeGetSdkFeatureIndex(String str) {
@@ -3266,7 +3264,7 @@ public abstract class PackageManager {
     }
 
     public String[] semSetPackagesSuspended(String[] strArr, boolean z, PersistableBundle persistableBundle, PersistableBundle persistableBundle2, SemSuspendDialogInfo semSuspendDialogInfo) {
-        SuspendDialogInfo suspendDialogInfo;
+        SuspendDialogInfo suspendDialogInfoBuild;
         if (semSuspendDialogInfo != null) {
             SuspendDialogInfo.Builder builder = new SuspendDialogInfo.Builder();
             if (semSuspendDialogInfo.getTitleResId() != 0) {
@@ -3281,11 +3279,11 @@ public abstract class PackageManager {
             if (semSuspendDialogInfo.getNeutralButtonTextResId() != 0) {
                 builder.setNeutralButtonText(semSuspendDialogInfo.getNeutralButtonTextResId());
             }
-            suspendDialogInfo = builder.build();
+            suspendDialogInfoBuild = builder.build();
         } else {
-            suspendDialogInfo = null;
+            suspendDialogInfoBuild = null;
         }
-        return setPackagesSuspended(strArr, z, persistableBundle, persistableBundle2, suspendDialogInfo);
+        return setPackagesSuspended(strArr, z, persistableBundle, persistableBundle2, suspendDialogInfoBuild);
     }
 
     public String[] semGetUnsuspendablePackages(String[] strArr) {

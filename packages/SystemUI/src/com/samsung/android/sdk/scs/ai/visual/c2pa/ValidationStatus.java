@@ -3,7 +3,6 @@ package com.samsung.android.sdk.scs.ai.visual.c2pa;
 import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ValidationStatus {
     private final String code;
@@ -70,11 +69,11 @@ public final class ValidationStatus {
 
     public int hashCode() {
         String str = this.code;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         String str2 = this.url;
-        int hashCode2 = (hashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.explanation;
-        return hashCode2 + (str3 != null ? str3.hashCode() : 0);
+        return iHashCode2 + (str3 != null ? str3.hashCode() : 0);
     }
 
     public String toString() {

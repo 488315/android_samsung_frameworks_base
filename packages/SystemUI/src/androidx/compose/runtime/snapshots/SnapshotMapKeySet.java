@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SnapshotMapKeySet<K, V> extends SnapshotMapSet<K, V, K> {
     public SnapshotMapKeySet(SnapshotStateMap<K, V> snapshotStateMap) {
@@ -79,8 +78,8 @@ final class SnapshotMapKeySet<K, V> extends SnapshotMapSet<K, V, K> {
     public final boolean retainAll(Collection collection) {
         PersistentMap persistentMap;
         int i;
-        Snapshot currentSnapshot;
-        boolean access$attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAccess$attemptUpdate;
         Set set = CollectionsKt___CollectionsKt.toSet(collection);
         SnapshotStateMap snapshotStateMap = this.map;
         boolean z = false;
@@ -102,18 +101,18 @@ final class SnapshotMapKeySet<K, V> extends SnapshotMapSet<K, V, K> {
                 }
             }
             Unit unit2 = Unit.INSTANCE;
-            PersistentMap build = builder.build();
-            if (Intrinsics.areEqual(build, persistentMap)) {
+            PersistentMap persistentMapBuild = builder.build();
+            if (Intrinsics.areEqual(persistentMapBuild, persistentMap)) {
                 break;
             }
             SnapshotStateMap.StateMapStateRecord stateMapStateRecord2 = snapshotStateMap.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                access$attemptUpdate = SnapshotStateMap.access$attemptUpdate(snapshotStateMap, (SnapshotStateMap.StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, snapshotStateMap, currentSnapshot), i, build);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAccess$attemptUpdate = SnapshotStateMap.access$attemptUpdate(snapshotStateMap, (SnapshotStateMap.StateMapStateRecord) SnapshotKt.writableRecord(stateMapStateRecord2, snapshotStateMap, snapshotCurrentSnapshot), i, persistentMapBuild);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, snapshotStateMap);
-        } while (!access$attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, snapshotStateMap);
+        } while (!zAccess$attemptUpdate);
         return z;
     }
 }

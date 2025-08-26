@@ -99,9 +99,9 @@ public class SemContextAttribute implements Parcelable {
     }
 
     public Bundle getAttribute(int i) {
-        String num = Integer.toString(i);
-        if (this.mAttribute.containsKey(num)) {
-            return this.mAttribute.getBundle(num);
+        String string = Integer.toString(i);
+        if (this.mAttribute.containsKey(string)) {
+            return this.mAttribute.getBundle(string);
         }
         return null;
     }

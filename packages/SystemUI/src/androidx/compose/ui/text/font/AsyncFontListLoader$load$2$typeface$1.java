@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AsyncFontListLoader$load$2$typeface$1 extends SuspendLambda implements Function1 {
     final /* synthetic */ Font $font;
@@ -28,7 +27,7 @@ final class AsyncFontListLoader$load$2$typeface$1 extends SuspendLambda implemen
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((AsyncFontListLoader$load$2$typeface$1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
@@ -47,7 +46,7 @@ final class AsyncFontListLoader$load$2$typeface$1 extends SuspendLambda implemen
         AsyncFontListLoader asyncFontListLoader = this.this$0;
         Font font = this.$font;
         this.label = 1;
-        Object loadWithTimeoutOrNull$ui_text_release = asyncFontListLoader.loadWithTimeoutOrNull$ui_text_release(font, this);
-        return loadWithTimeoutOrNull$ui_text_release == coroutineSingletons ? coroutineSingletons : loadWithTimeoutOrNull$ui_text_release;
+        Object objLoadWithTimeoutOrNull$ui_text_release = asyncFontListLoader.loadWithTimeoutOrNull$ui_text_release(font, this);
+        return objLoadWithTimeoutOrNull$ui_text_release == coroutineSingletons ? coroutineSingletons : objLoadWithTimeoutOrNull$ui_text_release;
     }
 }

@@ -149,9 +149,9 @@ public interface IThermal extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IThermal)) {
-                return (IThermal) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IThermal)) {
+                return (IThermal) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -226,9 +226,9 @@ public interface IThermal extends IInterface {
                     parcel2.writeTypedArray(coolingDevices, 1);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CoolingDevice[] coolingDevicesWithType = getCoolingDevicesWithType(readInt);
+                    CoolingDevice[] coolingDevicesWithType = getCoolingDevicesWithType(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(coolingDevicesWithType, 1);
                     return true;
@@ -238,9 +238,9 @@ public interface IThermal extends IInterface {
                     parcel2.writeTypedArray(temperatures, 1);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Temperature[] temperaturesWithType = getTemperaturesWithType(readInt2);
+                    Temperature[] temperaturesWithType = getTemperaturesWithType(i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(temperaturesWithType, 1);
                     return true;
@@ -250,50 +250,50 @@ public interface IThermal extends IInterface {
                     parcel2.writeTypedArray(temperatureThresholds, 1);
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    TemperatureThreshold[] temperatureThresholdsWithType = getTemperatureThresholdsWithType(readInt3);
+                    TemperatureThreshold[] temperatureThresholdsWithType = getTemperatureThresholdsWithType(i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(temperatureThresholdsWithType, 1);
                     return true;
                 case 7:
-                    IThermalChangedCallback asInterface = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalChangedCallback iThermalChangedCallbackAsInterface = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerThermalChangedCallback(asInterface);
+                    registerThermalChangedCallback(iThermalChangedCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IThermalChangedCallback asInterface2 = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt4 = parcel.readInt();
+                    IThermalChangedCallback iThermalChangedCallbackAsInterface2 = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerThermalChangedCallbackWithType(asInterface2, readInt4);
+                    registerThermalChangedCallbackWithType(iThermalChangedCallbackAsInterface2, i6);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IThermalChangedCallback asInterface3 = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalChangedCallback iThermalChangedCallbackAsInterface3 = IThermalChangedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterThermalChangedCallback(asInterface3);
+                    unregisterThermalChangedCallback(iThermalChangedCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    ICoolingDeviceChangedCallback asInterface4 = ICoolingDeviceChangedCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt5 = parcel.readInt();
+                    ICoolingDeviceChangedCallback iCoolingDeviceChangedCallbackAsInterface = ICoolingDeviceChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerCoolingDeviceChangedCallbackWithType(asInterface4, readInt5);
+                    registerCoolingDeviceChangedCallbackWithType(iCoolingDeviceChangedCallbackAsInterface, i7);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    ICoolingDeviceChangedCallback asInterface5 = ICoolingDeviceChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICoolingDeviceChangedCallback iCoolingDeviceChangedCallbackAsInterface2 = ICoolingDeviceChangedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCoolingDeviceChangedCallback(asInterface5);
+                    unregisterCoolingDeviceChangedCallback(iCoolingDeviceChangedCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float forecastSkinTemperature = forecastSkinTemperature(readInt6);
+                    float fForecastSkinTemperature = forecastSkinTemperature(i8);
                     parcel2.writeNoException();
-                    parcel2.writeFloat(forecastSkinTemperature);
+                    parcel2.writeFloat(fForecastSkinTemperature);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -320,227 +320,227 @@ public interface IThermal extends IInterface {
 
             @Override // android.hardware.thermal.IThermal
             public CoolingDevice[] getCoolingDevices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCoolingDevices is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (CoolingDevice[]) obtain2.createTypedArray(CoolingDevice.CREATOR);
+                    parcelObtain2.readException();
+                    return (CoolingDevice[]) parcelObtain2.createTypedArray(CoolingDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public CoolingDevice[] getCoolingDevicesWithType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getCoolingDevicesWithType is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (CoolingDevice[]) obtain2.createTypedArray(CoolingDevice.CREATOR);
+                    parcelObtain2.readException();
+                    return (CoolingDevice[]) parcelObtain2.createTypedArray(CoolingDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public Temperature[] getTemperatures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getTemperatures is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (Temperature[]) obtain2.createTypedArray(Temperature.CREATOR);
+                    parcelObtain2.readException();
+                    return (Temperature[]) parcelObtain2.createTypedArray(Temperature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public Temperature[] getTemperaturesWithType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getTemperaturesWithType is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (Temperature[]) obtain2.createTypedArray(Temperature.CREATOR);
+                    parcelObtain2.readException();
+                    return (Temperature[]) parcelObtain2.createTypedArray(Temperature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public TemperatureThreshold[] getTemperatureThresholds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getTemperatureThresholds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (TemperatureThreshold[]) obtain2.createTypedArray(TemperatureThreshold.CREATOR);
+                    parcelObtain2.readException();
+                    return (TemperatureThreshold[]) parcelObtain2.createTypedArray(TemperatureThreshold.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public TemperatureThreshold[] getTemperatureThresholdsWithType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getTemperatureThresholdsWithType is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (TemperatureThreshold[]) obtain2.createTypedArray(TemperatureThreshold.CREATOR);
+                    parcelObtain2.readException();
+                    return (TemperatureThreshold[]) parcelObtain2.createTypedArray(TemperatureThreshold.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public void registerThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalChangedCallback);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalChangedCallback);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method registerThermalChangedCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public void registerThermalChangedCallbackWithType(IThermalChangedCallback iThermalChangedCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalChangedCallback);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalChangedCallback);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method registerThermalChangedCallbackWithType is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public void unregisterThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalChangedCallback);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalChangedCallback);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method unregisterThermalChangedCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public void registerCoolingDeviceChangedCallbackWithType(ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iCoolingDeviceChangedCallback);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCoolingDeviceChangedCallback);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method registerCoolingDeviceChangedCallbackWithType is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public void unregisterCoolingDeviceChangedCallback(ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iCoolingDeviceChangedCallback);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCoolingDeviceChangedCallback);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method unregisterCoolingDeviceChangedCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public float forecastSkinTemperature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method forecastSkinTemperature is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.thermal.IThermal
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -549,18 +549,18 @@ public interface IThermal extends IInterface {
             @Override // android.hardware.thermal.IThermal
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

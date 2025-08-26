@@ -153,10 +153,10 @@ public class EdgeEffect {
                 EdgeEffect.this.mHandler.sendEmptyMessageDelayed(1, 700L);
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.EdgeEffect);
-        int color = obtainStyledAttributes.getColor(0, -10066330);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.EdgeEffect);
+        int color = typedArrayObtainStyledAttributes.getColor(0, -10066330);
         this.mEdgeEffectType = Compatibility.isChangeEnabled(USE_STRETCH_EDGE_EFFECT_BY_DEFAULT) ? 1 : 0;
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         paint.setAntiAlias(true);
         paint.setColor((16777215 & color) | Enums.AUDIO_FORMAT_DTS_UHD_P2);
         paint.setStyle(Paint.Style.FILL);
@@ -222,10 +222,10 @@ public class EdgeEffect {
             finish();
             return;
         }
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
         this.mTargetDisplacement = f2;
         int i = this.mState;
-        if (i == 4 && currentAnimationTimeMillis - this.mStartTime < this.mDuration && this.mEdgeEffectType == 0) {
+        if (i == 4 && jCurrentAnimationTimeMillis - this.mStartTime < this.mDuration && this.mEdgeEffectType == 0) {
             return;
         }
         if (i != 1) {
@@ -236,7 +236,7 @@ public class EdgeEffect {
             }
         }
         this.mState = 1;
-        this.mStartTime = currentAnimationTimeMillis;
+        this.mStartTime = jCurrentAnimationTimeMillis;
         this.mDuration = 167.0f;
         float f3 = this.mPullDistance + f;
         this.mPullDistance = f3;
@@ -251,12 +251,12 @@ public class EdgeEffect {
             this.mGlowAlphaStart = 0.0f;
             this.mGlowAlpha = 0.0f;
         } else {
-            float min = Math.min(MAX_ALPHA, this.mGlowAlpha + (Math.abs(f) * 0.8f));
-            this.mGlowAlphaStart = min;
-            this.mGlowAlpha = min;
-            float max = (float) (Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (1.0d - (1.0d / Math.sqrt(Math.abs(this.mPullDistance) * this.mBounds.height()))) - 0.3d) / 0.7d);
-            this.mGlowScaleYStart = max;
-            this.mGlowScaleY = max;
+            float fMin = Math.min(MAX_ALPHA, this.mGlowAlpha + (Math.abs(f) * 0.8f));
+            this.mGlowAlphaStart = fMin;
+            this.mGlowAlpha = fMin;
+            float fMax = (float) (Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (1.0d - (1.0d / Math.sqrt(Math.abs(this.mPullDistance) * this.mBounds.height()))) - 0.3d) / 0.7d);
+            this.mGlowScaleYStart = fMax;
+            this.mGlowScaleY = fMax;
         }
         this.mGlowAlphaFinish = this.mGlowAlpha;
         this.mGlowScaleYFinish = this.mGlowScaleY;
@@ -270,9 +270,9 @@ public class EdgeEffect {
         if (currentEdgeEffectBehavior == -1) {
             return 0.0f;
         }
-        float max = Math.max(0.0f, f + this.mDistance);
+        float fMax = Math.max(0.0f, f + this.mDistance);
         float f3 = this.mDistance;
-        float f4 = max - f3;
+        float f4 = fMax - f3;
         if (f4 == 0.0f && f3 == 0.0f) {
             return 0.0f;
         }
@@ -314,13 +314,13 @@ public class EdgeEffect {
             if (currentEdgeEffectBehavior == 0) {
                 this.mState = 2;
                 this.mVelocity = 0.0f;
-                int min = Math.min(Math.max(100, Math.abs(i)), 10000);
+                int iMin = Math.min(Math.max(100, Math.abs(i)), 10000);
                 this.mStartTime = AnimationUtils.currentAnimationTimeMillis();
-                this.mDuration = (min * 0.02f) + MAX_ALPHA;
+                this.mDuration = (iMin * 0.02f) + MAX_ALPHA;
                 this.mGlowAlphaStart = GLOW_ALPHA_START;
                 this.mGlowScaleYStart = Math.max(this.mGlowScaleY, 0.0f);
-                this.mGlowScaleYFinish = Math.min(((((min / 100) * min) * 1.5E-4f) / 2.0f) + 0.025f, 1.0f);
-                this.mGlowAlphaFinish = Math.max(this.mGlowAlphaStart, Math.min(min * 6 * 1.0E-5f, MAX_ALPHA));
+                this.mGlowScaleYFinish = Math.min(((((iMin / 100) * iMin) * 1.5E-4f) / 2.0f) + 0.025f, 1.0f);
+                this.mGlowAlphaFinish = Math.max(this.mGlowAlphaStart, Math.min(iMin * 6 * 1.0E-5f, MAX_ALPHA));
                 this.mTargetDisplacement = 0.5f;
                 return;
             }
@@ -344,22 +344,26 @@ public class EdgeEffect {
         return this.mPaint.getBlendMode();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:41:0x01a1  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean draw(Canvas canvas) {
         boolean z;
         boolean z2;
         int currentEdgeEffectBehavior = getCurrentEdgeEffectBehavior();
         if (currentEdgeEffectBehavior == 0) {
             update();
-            int save = canvas.save();
-            float centerX = this.mBounds.centerX();
-            float height = this.mBounds.height() - this.mRadius;
-            canvas.scale(1.0f, Math.min(this.mGlowScaleY, 1.0f) * this.mBaseGlowScale, centerX, 0.0f);
-            float width = (this.mBounds.width() * (Math.max(0.0f, Math.min(this.mDisplacement, 1.0f)) - 0.5f)) / 2.0f;
+            int iSave = canvas.save();
+            float fCenterX = this.mBounds.centerX();
+            float fHeight = this.mBounds.height() - this.mRadius;
+            canvas.scale(1.0f, Math.min(this.mGlowScaleY, 1.0f) * this.mBaseGlowScale, fCenterX, 0.0f);
+            float fWidth = (this.mBounds.width() * (Math.max(0.0f, Math.min(this.mDisplacement, 1.0f)) - 0.5f)) / 2.0f;
             canvas.clipRect(this.mBounds);
-            canvas.translate(width, 0.0f);
+            canvas.translate(fWidth, 0.0f);
             this.mPaint.setAlpha((int) (this.mGlowAlpha * 255.0f));
-            canvas.drawCircle(centerX, height, this.mRadius, this.mPaint);
-            canvas.restoreToCount(save);
+            canvas.drawCircle(fCenterX, fHeight, this.mRadius, this.mPaint);
+            canvas.restoreToCount(iSave);
         } else {
             if (currentEdgeEffectBehavior == 1 && (canvas instanceof RecordingCanvas)) {
                 if (this.mState == 3) {
@@ -393,27 +397,27 @@ public class EdgeEffect {
                     float left = renderNode.getLeft();
                     float[] fArr2 = this.mTmpPoints;
                     z = true;
-                    float min = left + min(fArr2[0], fArr2[2], fArr2[4], fArr2[6]);
+                    float fMin = left + min(fArr2[0], fArr2[2], fArr2[4], fArr2[6]);
                     float top = renderNode.getTop();
                     float[] fArr3 = this.mTmpPoints;
-                    float min2 = top + min(fArr3[1], fArr3[3], fArr3[5], fArr3[7]);
+                    float fMin2 = top + min(fArr3[1], fArr3[3], fArr3[5], fArr3[7]);
                     float left2 = renderNode.getLeft();
                     float[] fArr4 = this.mTmpPoints;
-                    float max = left2 + max(fArr4[0], fArr4[2], fArr4[4], fArr4[6]);
+                    float fMax = left2 + max(fArr4[0], fArr4[2], fArr4[4], fArr4[6]);
                     float top2 = renderNode.getTop();
                     float[] fArr5 = this.mTmpPoints;
-                    float max2 = top2 + max(fArr5[1], fArr5[3], fArr5[5], fArr5[7]);
+                    float fMax2 = top2 + max(fArr5[1], fArr5[3], fArr5[5], fArr5[7]);
                     float[] fArr6 = this.mTmpPoints;
-                    float dampStretchVector = dampStretchVector(Math.max(-1.0f, Math.min(1.0f, (fArr6[10] - fArr6[8]) / (max - min))));
+                    float fDampStretchVector = dampStretchVector(Math.max(-1.0f, Math.min(1.0f, (fArr6[10] - fArr6[8]) / (fMax - fMin))));
                     float[] fArr7 = this.mTmpPoints;
-                    float dampStretchVector2 = dampStretchVector(Math.max(-1.0f, Math.min(1.0f, (fArr7[11] - fArr7[9]) / (max2 - min2))));
-                    boolean z3 = Float.isFinite(dampStretchVector) && Float.isFinite(dampStretchVector2);
-                    if (max > min && max2 > min2) {
+                    float fDampStretchVector2 = dampStretchVector(Math.max(-1.0f, Math.min(1.0f, (fArr7[11] - fArr7[9]) / (fMax2 - fMin2))));
+                    boolean z3 = Float.isFinite(fDampStretchVector) && Float.isFinite(fDampStretchVector2);
+                    if (fMax > fMin && fMax2 > fMin2) {
                         float f4 = this.mWidth;
                         if (f4 > 0.0f) {
                             float f5 = this.mHeight;
                             if (f5 > 0.0f && z3) {
-                                renderNode.stretch(dampStretchVector, dampStretchVector2, f4, f5);
+                                renderNode.stretch(fDampStretchVector, fDampStretchVector2, f4, f5);
                             }
                         }
                     }
@@ -437,8 +441,8 @@ public class EdgeEffect {
         }
         z = true;
         if (this.mState != 3) {
+            z2 = false;
         }
-        z2 = false;
         if (this.mState == 0) {
         }
         return z;
@@ -457,8 +461,8 @@ public class EdgeEffect {
     }
 
     private void update() {
-        float min = Math.min((AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / this.mDuration, 1.0f);
-        float interpolation = this.mInterpolator.getInterpolation(min);
+        float fMin = Math.min((AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / this.mDuration, 1.0f);
+        float interpolation = this.mInterpolator.getInterpolation(fMin);
         float f = this.mGlowAlphaStart;
         float f2 = f + ((this.mGlowAlphaFinish - f) * interpolation);
         this.mGlowAlpha = f2;
@@ -469,7 +473,7 @@ public class EdgeEffect {
             this.mDistance = calculateDistanceFromGlowValues(f4, f2);
         }
         this.mDisplacement = (this.mDisplacement + this.mTargetDisplacement) / 2.0f;
-        if (min >= 0.999f) {
+        if (fMin >= 0.999f) {
             int i = this.mState;
             if (i == 1) {
                 this.mState = 4;
@@ -505,16 +509,16 @@ public class EdgeEffect {
 
     private void updateSpring() {
         float f;
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
-        float f2 = (currentAnimationTimeMillis - this.mStartTime) / 1000.0f;
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        float f2 = (jCurrentAnimationTimeMillis - this.mStartTime) / 1000.0f;
         if (f2 < 0.001f) {
             return;
         }
-        this.mStartTime = currentAnimationTimeMillis;
+        this.mStartTime = jCurrentAnimationTimeMillis;
         if (Math.abs(this.mVelocity) <= 200.0f && Math.abs(this.mDistance * this.mHeight) < LINEAR_DISTANCE_TAKE_OVER && Math.signum(this.mVelocity) == (-Math.signum(this.mDistance))) {
-            float signum = Math.signum(this.mVelocity) * 200.0f;
-            this.mVelocity = signum;
-            float f3 = this.mDistance + ((signum * f2) / this.mHeight);
+            float fSignum = Math.signum(this.mVelocity) * 200.0f;
+            this.mVelocity = fSignum;
+            float f3 = this.mDistance + ((fSignum * f2) / this.mHeight);
             if (Math.signum(f3) != Math.signum(this.mDistance)) {
                 this.mDistance = 0.0f;
                 this.mVelocity = 0.0f;
@@ -524,19 +528,19 @@ public class EdgeEffect {
                 return;
             }
         }
-        double sqrt = Math.sqrt(0.03960000000000008d) * NATURAL_FREQUENCY;
+        double dSqrt = Math.sqrt(0.03960000000000008d) * NATURAL_FREQUENCY;
         float f4 = this.mDistance;
         float f5 = this.mHeight;
         double d = f4 * f5;
-        double d2 = (1.0d / sqrt) * ((f4 * 24.16386d * f5) + this.mVelocity);
+        double d2 = (1.0d / dSqrt) * ((f4 * 24.16386d * f5) + this.mVelocity);
         double d3 = f2;
         double d4 = (-24.16386d) * d3;
-        double d5 = d3 * sqrt;
-        double pow = Math.pow(2.718281828459045d, d4) * ((Math.cos(d5) * d) + (Math.sin(d5) * d2));
-        double pow2 = ((-24.657d) * pow * DAMPING_RATIO) + (Math.pow(2.718281828459045d, d4) * (((-sqrt) * d * Math.sin(d5)) + (sqrt * d2 * Math.cos(d5))));
-        float f6 = ((float) pow) / this.mHeight;
+        double d5 = d3 * dSqrt;
+        double dPow = Math.pow(2.718281828459045d, d4) * ((Math.cos(d5) * d) + (Math.sin(d5) * d2));
+        double dPow2 = ((-24.657d) * dPow * DAMPING_RATIO) + (Math.pow(2.718281828459045d, d4) * (((-dSqrt) * d * Math.sin(d5)) + (dSqrt * d2 * Math.cos(d5))));
+        float f6 = ((float) dPow) / this.mHeight;
         this.mDistance = f6;
-        this.mVelocity = (float) pow2;
+        this.mVelocity = (float) dPow2;
         if (f6 > 1.0f) {
             this.mDistance = 1.0f;
             f = 0.0f;
@@ -551,18 +555,18 @@ public class EdgeEffect {
     }
 
     private float calculateDistanceFromGlowValues(float f, float f2) {
-        float f3;
+        float fHeight;
         if (f >= 1.0f) {
             return 1.0f;
         }
         if (f > 0.0f) {
-            float f4 = 1.4285715f / (this.mGlowScaleY - 1.0f);
-            f2 = f4 * f4;
-            f3 = this.mBounds.height();
+            float f3 = 1.4285715f / (this.mGlowScaleY - 1.0f);
+            f2 = f3 * f3;
+            fHeight = this.mBounds.height();
         } else {
-            f3 = 0.8f;
+            fHeight = 0.8f;
         }
-        return f2 / f3;
+        return f2 / fHeight;
     }
 
     private boolean isAtEquilibrium() {
@@ -576,7 +580,7 @@ public class EdgeEffect {
 
     private float dampStretchVector(float f) {
         float f2 = f > 0.0f ? 1.0f : -1.0f;
-        float abs = Math.abs(f);
-        return f2 * ((float) ((0.016f * abs) + ((1.0d - Math.exp((-abs) * 8.237217334679498d)) * 0.01600000075995922d)));
+        float fAbs = Math.abs(f);
+        return f2 * ((float) ((0.016f * fAbs) + ((1.0d - Math.exp((-fAbs) * 8.237217334679498d)) * 0.01600000075995922d)));
     }
 }

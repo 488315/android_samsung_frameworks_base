@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.android.settingslib.widget.preference.barchart.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BarView extends LinearLayout {
     public TextView mBarSummary;
@@ -43,9 +42,9 @@ public class BarView extends LinearLayout {
         super(context, attributeSet);
         init();
         int color = context.obtainStyledAttributes(new int[]{android.R.attr.colorAccent}).getColor(0, 0);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SettingsBarView);
-        int color2 = obtainStyledAttributes.getColor(0, color);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SettingsBarView);
+        int color2 = typedArrayObtainStyledAttributes.getColor(0, color);
+        typedArrayObtainStyledAttributes.recycle();
         this.mBarView.setBackgroundColor(color2);
     }
 }

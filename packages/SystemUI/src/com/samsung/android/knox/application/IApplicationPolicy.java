@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IApplicationPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.application.IApplicationPolicy";
@@ -435,7 +434,6 @@ public interface IApplicationPolicy extends IInterface {
 
     boolean wipeApplicationData(ContextInfo contextInfo, String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IApplicationPolicy {
         @Override // com.samsung.android.knox.application.IApplicationPolicy
         public boolean addAppNotificationBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
@@ -1463,7 +1461,6 @@ public interface IApplicationPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IApplicationPolicy {
         public static final int TRANSACTION_addAppNotificationBlackList = 60;
         public static final int TRANSACTION_addAppNotificationWhiteList = 63;
@@ -1672,7 +1669,6 @@ public interface IApplicationPolicy extends IInterface {
         public static final int TRANSACTION_verifyRuntimePermissionPackageSignature = 156;
         public static final int TRANSACTION_wipeApplicationData = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IApplicationPolicy {
             public IBinder mRemote;
 
@@ -1682,515 +1678,515 @@ public interface IApplicationPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppNotificationBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppNotificationWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppPackageNameToBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppPackageNameToWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppPermissionToBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppSignatureToBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addAppSignatureToWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int addApplicationToCameraAllowList(ContextInfo contextInfo, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(183, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(183, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addHomeShortcut(ContextInfo contextInfo, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int addPackageToBatteryOptimizationWhiteList(ContextInfo contextInfo, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(159, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(159, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int addPackageToBlackList(ContextInfo contextInfo, int i, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(170, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(170, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int addPackageToWhiteList(ContextInfo contextInfo, int i, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(167, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(167, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToClearCacheBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToClearCacheWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToClearDataBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToClearDataWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToDisableClipboardBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(126, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(126, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToDisableClipboardWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(130, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(130, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToDisableUpdateBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToDisableUpdateWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToFocusMonitoringList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(137, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(137, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToForceStopBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToForceStopWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> addPackagesToPreventStartBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(121, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(121, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToWidgetBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addPackagesToWidgetWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean addUsbDevicesForDefaultAccess(ContextInfo contextInfo, String str, List<UsbDeviceConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(146, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(146, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void applicationUsageAppLaunchCount(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(193, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(193, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void applicationUsageAppPauseTime(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(194, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(194, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int applyRuntimePermissions(ContextInfo contextInfo, AppIdentity appIdentity, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(154, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(154, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -2201,1145 +2197,1145 @@ public interface IApplicationPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean changeApplicationIcon(ContextInfo contextInfo, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean changeApplicationName(ContextInfo contextInfo, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearDisableClipboardBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(134, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(134, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearDisableClipboardWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(135, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(135, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearDisableUpdateBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(119, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(119, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearDisableUpdateWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(120, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(120, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearFocusMonitoringList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(140, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(140, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int clearPackagesFromExternalStorageWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(166, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(166, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearPreventStartBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(124, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(124, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean clearUsbDevicesForDefaultAccess(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(147, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(147, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public IntentFilter createIntentFilter(Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(201, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IntentFilter) obtain2.readTypedObject(IntentFilter.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(201, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IntentFilter) parcelObtain2.readTypedObject(IntentFilter.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean deleteHomeShortcut(ContextInfo contextInfo, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean deleteManagedAppInfo(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(177, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(177, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void doSelfUninstall(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(206, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(206, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean enableOcspCheck(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean enableRevocationCheck(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getAddHomeShorcutRequested() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    this.mRemote.transact(151, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    this.mRemote.transact(151, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public AppInfoLastUsage[] getAllAppLastUsage(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AppInfoLastUsage[]) obtain2.createTypedArray(AppInfoLastUsage.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AppInfoLastUsage[]) parcelObtain2.createTypedArray(AppInfoLastUsage.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<DefaultAppConfiguration> getAllDefaultApplications(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(198, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DefaultAppConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(198, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DefaultAppConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<DefaultAppConfiguration> getAllDefaultApplicationsInternal(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(188, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DefaultAppConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(188, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DefaultAppConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getAllPackagesFromBatteryOptimizationWhiteList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    this.mRemote.transact(162, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    this.mRemote.transact(162, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public Map getAllWidgets(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getAppInstallToSdCard(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(179, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(179, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getAppInstallationMode(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getAppNotificationBlackList(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getAppNotificationWhiteList(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppControlInfo> getAppPackageNamesAllBlackLists(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppControlInfo> getAppPackageNamesAllWhiteLists(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppControlInfo> getAppPermissionsAllBlackLists(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getAppPermissionsBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getAppSignatureBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppControlInfo> getAppSignaturesAllBlackLists(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppControlInfo> getAppSignaturesAllWhiteLists(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppControlInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppControlInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getAppSignaturesWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationCacheSize(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationCodeSize(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationComponentState(ContextInfo contextInfo, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationCpuUsage(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationDataSize(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getApplicationGrantedPermissions(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(163, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(163, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public byte[] getApplicationIconFromDb(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationInstallationEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationMemoryUsage(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String getApplicationName(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String getApplicationNameFromDb(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getApplicationNotificationMode(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getApplicationNotificationModeAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getApplicationPackagesFromCameraAllowList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(184, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(184, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public Bundle getApplicationRestrictions(ComponentName componentName, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(205, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(205, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationStateEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationStateEnabledAsUser(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(189, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(189, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getApplicationStateList(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public long getApplicationTotalSize(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getApplicationUid(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationUninstallationEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getApplicationUninstallationEnabledAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(192, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(192, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getApplicationUninstallationMode(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String getApplicationVersion(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int getApplicationVersionCode(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public ManagedAppInfo[] getApplicationsList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(181, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ManagedAppInfo[]) obtain2.createTypedArray(ManagedAppInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(181, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ManagedAppInfo[]) parcelObtain2.createTypedArray(ManagedAppInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getAuthorizedScopes(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(153, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(153, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public AppInfoLastUsage[] getAvgNoAppUsagePerMonth(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AppInfoLastUsage[]) obtain2.createTypedArray(AppInfoLastUsage.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AppInfoLastUsage[]) parcelObtain2.createTypedArray(AppInfoLastUsage.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean getConcentrationMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    this.mRemote.transact(203, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    this.mRemote.transact(203, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public ComponentName getDefaultApplication(ContextInfo contextInfo, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(196, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(196, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public ComponentName getDefaultApplicationInternal(Intent intent, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(197, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(197, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getDisabledPackages(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(150, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(150, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<ComponentName> getHomeShortcuts(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(142, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(142, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getInstalledApplicationsIDList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] getInstalledManagedApplicationsList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(180, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(180, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -3349,1825 +3345,1825 @@ public interface IApplicationPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<NetworkStats> getNetworkStats(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(NetworkStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(NetworkStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackageSignaturesFromExternalStorageWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(165, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(165, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromBatteryOptimizationWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(161, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(161, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromBlackList(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(171, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(171, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromClearCacheBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromClearCacheWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromClearDataBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromClearDataWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableClipboardBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(128, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(128, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableClipboardBlackListAsUserInternal(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(129, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(129, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableClipboardWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(132, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(132, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableClipboardWhiteListAsUserInternal(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(133, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(133, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableUpdateBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(114, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(114, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromDisableUpdateWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(116, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(116, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromFocusMonitoringList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(138, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(138, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromForceStopBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromForceStopWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromPreventStartBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(122, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(122, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromWhiteList(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(168, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(168, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromWidgetBlackList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getPackagesFromWidgetWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getRuntimePermissions(ContextInfo contextInfo, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(158, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(158, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> getRuntimePermissionsEnforced(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(155, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(155, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppInfo> getTopNCPUUsageApp(ContextInfo contextInfo, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppInfo> getTopNDataUsageApp(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<AppInfo> getTopNMemoryUsageApp(ContextInfo contextInfo, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AppInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AppInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<UsbDeviceConfig> getUsbDevicesForDefaultAccess(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(144, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(UsbDeviceConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(144, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(UsbDeviceConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean handleStatusBarNotificationNotAllowedAsUser(String str, int i, Notification notification2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(notification2, 0);
-                    this.mRemote.transact(187, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(notification2, 0);
+                    this.mRemote.transact(187, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean installApplication(ContextInfo contextInfo, String str, boolean z, ParcelFileDescriptor parcelFileDescriptor, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean installExistingApplication(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(148, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(148, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isAnyApplicationIconChangedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isAnyApplicationNameChangedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationClearCacheDisabled(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(106, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(106, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationClearDataDisabled(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationExternalStorageBlacklisted(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(176, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(176, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationExternalStorageWhitelisted(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(175, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(175, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationFocusMonitoredAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(141, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(141, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationForceStopDisabled(String str, int i, String str2, String str3, String str4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationInstallationEnabled(String str, List<String> list, List<String> list2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(190, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(190, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationInstalled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationRunning(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationSetToDefault(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(200, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(200, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isApplicationStartDisabledAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(125, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(125, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isCameraAllowlistedApp(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(186, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(186, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isFromApprovedInstaller(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(191, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(191, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isIntentDisabled(Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isOcspCheckEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isPackageClipboardAllowed(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(136, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(136, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isPackageInApprovedInstallerWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isPackageInBlacklistInternal(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(174, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(174, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isPackageInWhitelistInternal(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(173, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(173, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isPackageUpdateAllowed(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(118, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(118, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isRevocationCheckEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isStatusBarNotificationAllowedAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isUsbDevicePermittedForPackage(int i, UsbDevice usbDevice, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(usbDevice, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(145, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(usbDevice, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(145, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean isWidgetAllowed(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void reapplyRuntimePermissions(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(157, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(157, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppNotificationBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppNotificationWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppPackageNameFromBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppPackageNameFromWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppPermissionFromBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppSignatureFromBlackList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeAppSignatureFromWhiteList(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int removeApplicationFromCameraAllowList(ContextInfo contextInfo, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(185, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(185, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removeDefaultApplication(ContextInfo contextInfo, Intent intent, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(199, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(199, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public List<String> removeManagedApplications(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int removePackageFromBatteryOptimizationWhiteList(ContextInfo contextInfo, AppIdentity appIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    this.mRemote.transact(160, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    this.mRemote.transact(160, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int removePackageFromBlackList(ContextInfo contextInfo, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(172, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(172, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int removePackageFromWhiteList(ContextInfo contextInfo, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(169, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(169, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromClearCacheBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromClearCacheWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromClearDataBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromClearDataWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromDisableClipboardBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(127, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(127, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromDisableClipboardWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(131, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(131, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromDisableUpdateBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromDisableUpdateWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(117, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(117, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromFocusMonitoringList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(139, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(139, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromForceStopBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromForceStopWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromPreventStartBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(123, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(123, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromWidgetBlackList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean removePackagesFromWidgetWhiteList(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void setAndroidMarketState(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(164, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(164, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setAppInstallToSdCard(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(178, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(178, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setAppInstallationMode(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setApplicationComponentState(ContextInfo contextInfo, ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void setApplicationInstallationDisabled(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setApplicationNotificationMode(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void setApplicationRestrictions(ComponentName componentName, String str, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(204, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(204, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setApplicationState(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public String[] setApplicationStateList(ContextInfo contextInfo, String[] strArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void setApplicationUninstallationDisabled(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setApplicationUninstallationMode(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setAsManagedApp(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(182, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(182, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public int setAuthorizedScopes(AppIdentity appIdentity, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(appIdentity, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(152, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appIdentity, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(152, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setConcentrationMode(ContextInfo contextInfo, List<String> list, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(202, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(202, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean setDefaultApplication(ContextInfo contextInfo, Intent intent, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(195, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(195, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean startApp(ContextInfo contextInfo, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean stopApp(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean uninstallApplication(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean updateApplicationTable(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(149, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(149, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void updateDataUsageDb() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public void updateWidgetStatus(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(143, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(143, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean verifyRuntimePermissionPackageSignature(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(156, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(156, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.application.IApplicationPolicy
             public boolean wipeApplicationData(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApplicationPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -5180,8 +5176,8 @@ public interface IApplicationPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApplicationPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IApplicationPolicy)) ? new Proxy(iBinder) : (IApplicationPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApplicationPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IApplicationPolicy)) ? new Proxy(iBinder) : (IApplicationPolicy) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -5623,102 +5619,102 @@ public interface IApplicationPolicy extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    List<String> removeManagedApplications = removeManagedApplications(contextInfo, createStringArrayList);
+                    List<String> listRemoveManagedApplications = removeManagedApplications(contextInfo, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeStringList(removeManagedApplications);
+                    parcel2.writeStringList(listRemoveManagedApplications);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean wipeApplicationData = wipeApplicationData(contextInfo2, readString);
+                    boolean zWipeApplicationData = wipeApplicationData(contextInfo2, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(wipeApplicationData);
+                    parcel2.writeBoolean(zWipeApplicationData);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationInstalled = isApplicationInstalled(contextInfo3, readString2);
+                    boolean zIsApplicationInstalled = isApplicationInstalled(contextInfo3, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationInstalled);
+                    parcel2.writeBoolean(zIsApplicationInstalled);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationRunning = isApplicationRunning(contextInfo4, readString3);
+                    boolean zIsApplicationRunning = isApplicationRunning(contextInfo4, string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationRunning);
+                    parcel2.writeBoolean(zIsApplicationRunning);
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString4 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean installApplication = installApplication(contextInfo5, readString4, readBoolean, parcelFileDescriptor, readBoolean2);
+                    boolean zInstallApplication = installApplication(contextInfo5, string4, z, parcelFileDescriptor, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(installApplication);
+                    parcel2.writeBoolean(zInstallApplication);
                     return true;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString5 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string5 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean uninstallApplication = uninstallApplication(contextInfo6, readString5, readBoolean3);
+                    boolean zUninstallApplication = uninstallApplication(contextInfo6, string5, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(uninstallApplication);
+                    parcel2.writeBoolean(zUninstallApplication);
                     return true;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString6 = parcel.readString();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    String string6 = parcel.readString();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean applicationState = setApplicationState(contextInfo7, readString6, readBoolean4);
+                    boolean applicationState = setApplicationState(contextInfo7, string6, z4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationState);
                     return true;
                 case 8:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString7 = parcel.readString();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    String string7 = parcel.readString();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setApplicationInstallationDisabled(contextInfo8, readString7, readBoolean5);
+                    setApplicationInstallationDisabled(contextInfo8, string7, z5);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString8 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    String string8 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setApplicationUninstallationDisabled(contextInfo9, readString8, readBoolean6);
+                    setApplicationUninstallationDisabled(contextInfo9, string8, z6);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean applicationStateEnabled = getApplicationStateEnabled(contextInfo10, readString9);
+                    boolean applicationStateEnabled = getApplicationStateEnabled(contextInfo10, string9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationStateEnabled);
                     return true;
                 case 11:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean applicationInstallationEnabled = getApplicationInstallationEnabled(contextInfo11, readString10);
+                    boolean applicationInstallationEnabled = getApplicationInstallationEnabled(contextInfo11, string10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationInstallationEnabled);
                     return true;
                 case 12:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean applicationUninstallationEnabled = getApplicationUninstallationEnabled(contextInfo12, readString11);
+                    boolean applicationUninstallationEnabled = getApplicationUninstallationEnabled(contextInfo12, string11);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationUninstallationEnabled);
                     return true;
@@ -5731,107 +5727,107 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 14:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String applicationName = getApplicationName(contextInfo14, readString12);
+                    String applicationName = getApplicationName(contextInfo14, string12);
                     parcel2.writeNoException();
                     parcel2.writeString(applicationName);
                     return true;
                 case 15:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int applicationUid = getApplicationUid(contextInfo15, readString13);
+                    int applicationUid = getApplicationUid(contextInfo15, string13);
                     parcel2.writeNoException();
                     parcel2.writeInt(applicationUid);
                     return true;
                 case 16:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String applicationVersion = getApplicationVersion(contextInfo16, readString14);
+                    String applicationVersion = getApplicationVersion(contextInfo16, string14);
                     parcel2.writeNoException();
                     parcel2.writeString(applicationVersion);
                     return true;
                 case 17:
                     ContextInfo contextInfo17 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int applicationVersionCode = getApplicationVersionCode(contextInfo17, readString15);
+                    int applicationVersionCode = getApplicationVersionCode(contextInfo17, string15);
                     parcel2.writeNoException();
                     parcel2.writeInt(applicationVersionCode);
                     return true;
                 case 18:
                     ContextInfo contextInfo18 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationTotalSize = getApplicationTotalSize(contextInfo18, readString16);
+                    long applicationTotalSize = getApplicationTotalSize(contextInfo18, string16);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationTotalSize);
                     return true;
                 case 19:
                     ContextInfo contextInfo19 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationCodeSize = getApplicationCodeSize(contextInfo19, readString17);
+                    long applicationCodeSize = getApplicationCodeSize(contextInfo19, string17);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationCodeSize);
                     return true;
                 case 20:
                     ContextInfo contextInfo20 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationDataSize = getApplicationDataSize(contextInfo20, readString18);
+                    long applicationDataSize = getApplicationDataSize(contextInfo20, string18);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationDataSize);
                     return true;
                 case 21:
                     ContextInfo contextInfo21 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationCacheSize = getApplicationCacheSize(contextInfo21, readString19);
+                    long applicationCacheSize = getApplicationCacheSize(contextInfo21, string19);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationCacheSize);
                     return true;
                 case 22:
                     ContextInfo contextInfo22 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationMemoryUsage = getApplicationMemoryUsage(contextInfo22, readString20);
+                    long applicationMemoryUsage = getApplicationMemoryUsage(contextInfo22, string20);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationMemoryUsage);
                     return true;
                 case 23:
                     ContextInfo contextInfo23 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long applicationCpuUsage = getApplicationCpuUsage(contextInfo23, readString21);
+                    long applicationCpuUsage = getApplicationCpuUsage(contextInfo23, string21);
                     parcel2.writeNoException();
                     parcel2.writeLong(applicationCpuUsage);
                     return true;
                 case 24:
                     ContextInfo contextInfo24 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<AppInfo> topNMemoryUsageApp = getTopNMemoryUsageApp(contextInfo24, readInt, readBoolean7);
+                    List<AppInfo> topNMemoryUsageApp = getTopNMemoryUsageApp(contextInfo24, i3, z7);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(topNMemoryUsageApp, 1);
                     return true;
                 case 25:
                     ContextInfo contextInfo25 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AppInfo> topNDataUsageApp = getTopNDataUsageApp(contextInfo25, readInt2);
+                    List<AppInfo> topNDataUsageApp = getTopNDataUsageApp(contextInfo25, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(topNDataUsageApp, 1);
                     return true;
                 case 26:
                     ContextInfo contextInfo26 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    int i5 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<AppInfo> topNCPUUsageApp = getTopNCPUUsageApp(contextInfo26, readInt3, readBoolean8);
+                    List<AppInfo> topNCPUUsageApp = getTopNCPUUsageApp(contextInfo26, i5, z8);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(topNCPUUsageApp, 1);
                     return true;
@@ -5862,43 +5858,43 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 31:
                     ContextInfo contextInfo30 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString22 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
+                    String string22 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean changeApplicationIcon = changeApplicationIcon(contextInfo30, readString22, createByteArray);
+                    boolean zChangeApplicationIcon = changeApplicationIcon(contextInfo30, string22, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeApplicationIcon);
+                    parcel2.writeBoolean(zChangeApplicationIcon);
                     return true;
                 case 32:
                     ContextInfo contextInfo31 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString23 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] applicationIconFromDb = getApplicationIconFromDb(contextInfo31, readString23);
+                    byte[] applicationIconFromDb = getApplicationIconFromDb(contextInfo31, string23);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(applicationIconFromDb);
                     return true;
                 case 33:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAnyApplicationIconChangedAsUser = isAnyApplicationIconChangedAsUser(readInt4);
+                    boolean zIsAnyApplicationIconChangedAsUser = isAnyApplicationIconChangedAsUser(i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAnyApplicationIconChangedAsUser);
+                    parcel2.writeBoolean(zIsAnyApplicationIconChangedAsUser);
                     return true;
                 case 34:
                     ContextInfo contextInfo32 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAppPermissionToBlackList = addAppPermissionToBlackList(contextInfo32, readString24);
+                    boolean zAddAppPermissionToBlackList = addAppPermissionToBlackList(contextInfo32, string24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppPermissionToBlackList);
+                    parcel2.writeBoolean(zAddAppPermissionToBlackList);
                     return true;
                 case 35:
                     ContextInfo contextInfo33 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppPermissionFromBlackList = removeAppPermissionFromBlackList(contextInfo33, readString25);
+                    boolean zRemoveAppPermissionFromBlackList = removeAppPermissionFromBlackList(contextInfo33, string25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppPermissionFromBlackList);
+                    parcel2.writeBoolean(zRemoveAppPermissionFromBlackList);
                     return true;
                 case 36:
                     ContextInfo contextInfo34 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -5909,19 +5905,19 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 37:
                     ContextInfo contextInfo35 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAppSignatureToBlackList = addAppSignatureToBlackList(contextInfo35, readString26);
+                    boolean zAddAppSignatureToBlackList = addAppSignatureToBlackList(contextInfo35, string26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppSignatureToBlackList);
+                    parcel2.writeBoolean(zAddAppSignatureToBlackList);
                     return true;
                 case 38:
                     ContextInfo contextInfo36 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppSignatureFromBlackList = removeAppSignatureFromBlackList(contextInfo36, readString27);
+                    boolean zRemoveAppSignatureFromBlackList = removeAppSignatureFromBlackList(contextInfo36, string27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppSignatureFromBlackList);
+                    parcel2.writeBoolean(zRemoveAppSignatureFromBlackList);
                     return true;
                 case 39:
                     ContextInfo contextInfo37 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -5932,60 +5928,60 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 40:
                     ContextInfo contextInfo38 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean stopApp = stopApp(contextInfo38, readString28);
+                    boolean zStopApp = stopApp(contextInfo38, string28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(stopApp);
+                    parcel2.writeBoolean(zStopApp);
                     return true;
                 case 41:
                     ContextInfo contextInfo39 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean startApp = startApp(contextInfo39, readString29, readString30);
+                    boolean zStartApp = startApp(contextInfo39, string29, string30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startApp);
+                    parcel2.writeBoolean(zStartApp);
                     return true;
                 case 42:
                     ContextInfo contextInfo40 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    String[] applicationStateList = getApplicationStateList(contextInfo40, readBoolean9);
+                    String[] applicationStateList = getApplicationStateList(contextInfo40, z9);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(applicationStateList);
                     return true;
                 case 43:
                     ContextInfo contextInfo41 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    String[] applicationStateList2 = setApplicationStateList(contextInfo41, createStringArray, readBoolean10);
+                    String[] applicationStateList2 = setApplicationStateList(contextInfo41, strArrCreateStringArray, z10);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(applicationStateList2);
                     return true;
                 case 44:
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isIntentDisabled = isIntentDisabled(intent);
+                    boolean zIsIntentDisabled = isIntentDisabled(intent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIntentDisabled);
+                    parcel2.writeBoolean(zIsIntentDisabled);
                     return true;
                 case 45:
                     ContextInfo contextInfo42 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAppPackageNameToBlackList = addAppPackageNameToBlackList(contextInfo42, readString31);
+                    boolean zAddAppPackageNameToBlackList = addAppPackageNameToBlackList(contextInfo42, string31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppPackageNameToBlackList);
+                    parcel2.writeBoolean(zAddAppPackageNameToBlackList);
                     return true;
                 case 46:
                     ContextInfo contextInfo43 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString32 = parcel.readString();
+                    String string32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppPackageNameFromBlackList = removeAppPackageNameFromBlackList(contextInfo43, readString32);
+                    boolean zRemoveAppPackageNameFromBlackList = removeAppPackageNameFromBlackList(contextInfo43, string32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppPackageNameFromBlackList);
+                    parcel2.writeBoolean(zRemoveAppPackageNameFromBlackList);
                     return true;
                 case 47:
                     ContextInfo contextInfo44 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -5996,19 +5992,19 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 48:
                     ContextInfo contextInfo45 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString33 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAppPackageNameToWhiteList = addAppPackageNameToWhiteList(contextInfo45, readString33);
+                    boolean zAddAppPackageNameToWhiteList = addAppPackageNameToWhiteList(contextInfo45, string33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppPackageNameToWhiteList);
+                    parcel2.writeBoolean(zAddAppPackageNameToWhiteList);
                     return true;
                 case 49:
                     ContextInfo contextInfo46 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString34 = parcel.readString();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppPackageNameFromWhiteList = removeAppPackageNameFromWhiteList(contextInfo46, readString34);
+                    boolean zRemoveAppPackageNameFromWhiteList = removeAppPackageNameFromWhiteList(contextInfo46, string34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppPackageNameFromWhiteList);
+                    parcel2.writeBoolean(zRemoveAppPackageNameFromWhiteList);
                     return true;
                 case 50:
                     ContextInfo contextInfo47 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6033,9 +6029,9 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 53:
                     ContextInfo contextInfo50 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean appInstallationMode = setAppInstallationMode(contextInfo50, readInt5);
+                    boolean appInstallationMode = setAppInstallationMode(contextInfo50, i7);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(appInstallationMode);
                     return true;
@@ -6048,31 +6044,31 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 55:
                     ContextInfo contextInfo52 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean applicationUninstallationMode = setApplicationUninstallationMode(contextInfo52, readInt6);
+                    boolean applicationUninstallationMode = setApplicationUninstallationMode(contextInfo52, i8);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationUninstallationMode);
                     return true;
                 case 56:
                     ContextInfo contextInfo53 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToForceStopBlackList = addPackagesToForceStopBlackList(contextInfo53, createStringArrayList2);
+                    boolean zAddPackagesToForceStopBlackList = addPackagesToForceStopBlackList(contextInfo53, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToForceStopBlackList);
+                    parcel2.writeBoolean(zAddPackagesToForceStopBlackList);
                     return true;
                 case 57:
-                    String readString35 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    String readString36 = parcel.readString();
-                    String readString37 = parcel.readString();
-                    String readString38 = parcel.readString();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    String string35 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string36 = parcel.readString();
+                    String string37 = parcel.readString();
+                    String string38 = parcel.readString();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationForceStopDisabled = isApplicationForceStopDisabled(readString35, readInt7, readString36, readString37, readString38, readBoolean11);
+                    boolean zIsApplicationForceStopDisabled = isApplicationForceStopDisabled(string35, i9, string36, string37, string38, z11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationForceStopDisabled);
+                    parcel2.writeBoolean(zIsApplicationForceStopDisabled);
                     return true;
                 case 58:
                     ContextInfo contextInfo54 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6083,114 +6079,114 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 59:
                     ContextInfo contextInfo55 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString39 = parcel.readString();
+                    String string39 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isWidgetAllowed = isWidgetAllowed(contextInfo55, readString39);
+                    boolean zIsWidgetAllowed = isWidgetAllowed(contextInfo55, string39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWidgetAllowed);
+                    parcel2.writeBoolean(zIsWidgetAllowed);
                     return true;
                 case 60:
                     ContextInfo contextInfo56 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAppNotificationBlackList = addAppNotificationBlackList(contextInfo56, createStringArrayList3);
+                    boolean zAddAppNotificationBlackList = addAppNotificationBlackList(contextInfo56, arrayListCreateStringArrayList3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppNotificationBlackList);
+                    parcel2.writeBoolean(zAddAppNotificationBlackList);
                     return true;
                 case 61:
                     ContextInfo contextInfo57 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppNotificationBlackList = removeAppNotificationBlackList(contextInfo57, createStringArrayList4);
+                    boolean zRemoveAppNotificationBlackList = removeAppNotificationBlackList(contextInfo57, arrayListCreateStringArrayList4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppNotificationBlackList);
+                    parcel2.writeBoolean(zRemoveAppNotificationBlackList);
                     return true;
                 case 62:
                     ContextInfo contextInfo58 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<String> appNotificationBlackList = getAppNotificationBlackList(contextInfo58, readBoolean12);
+                    List<String> appNotificationBlackList = getAppNotificationBlackList(contextInfo58, z12);
                     parcel2.writeNoException();
                     parcel2.writeStringList(appNotificationBlackList);
                     return true;
                 case 63:
                     ContextInfo contextInfo59 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList5 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList5 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addAppNotificationWhiteList = addAppNotificationWhiteList(contextInfo59, createStringArrayList5);
+                    boolean zAddAppNotificationWhiteList = addAppNotificationWhiteList(contextInfo59, arrayListCreateStringArrayList5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppNotificationWhiteList);
+                    parcel2.writeBoolean(zAddAppNotificationWhiteList);
                     return true;
                 case 64:
                     ContextInfo contextInfo60 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList6 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList6 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppNotificationWhiteList = removeAppNotificationWhiteList(contextInfo60, createStringArrayList6);
+                    boolean zRemoveAppNotificationWhiteList = removeAppNotificationWhiteList(contextInfo60, arrayListCreateStringArrayList6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppNotificationWhiteList);
+                    parcel2.writeBoolean(zRemoveAppNotificationWhiteList);
                     return true;
                 case 65:
                     ContextInfo contextInfo61 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<String> appNotificationWhiteList = getAppNotificationWhiteList(contextInfo61, readBoolean13);
+                    List<String> appNotificationWhiteList = getAppNotificationWhiteList(contextInfo61, z13);
                     parcel2.writeNoException();
                     parcel2.writeStringList(appNotificationWhiteList);
                     return true;
                 case 66:
                     ContextInfo contextInfo62 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean applicationNotificationMode = setApplicationNotificationMode(contextInfo62, readInt8);
+                    boolean applicationNotificationMode = setApplicationNotificationMode(contextInfo62, i10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationNotificationMode);
                     return true;
                 case 67:
                     ContextInfo contextInfo63 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int applicationNotificationMode2 = getApplicationNotificationMode(contextInfo63, readBoolean14);
+                    int applicationNotificationMode2 = getApplicationNotificationMode(contextInfo63, z14);
                     parcel2.writeNoException();
                     parcel2.writeInt(applicationNotificationMode2);
                     return true;
                 case 68:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int applicationNotificationModeAsUser = getApplicationNotificationModeAsUser(readInt9);
+                    int applicationNotificationModeAsUser = getApplicationNotificationModeAsUser(i11);
                     parcel2.writeNoException();
                     parcel2.writeInt(applicationNotificationModeAsUser);
                     return true;
                 case 69:
-                    String readString40 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string40 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStatusBarNotificationAllowedAsUser = isStatusBarNotificationAllowedAsUser(readString40, readInt10);
+                    boolean zIsStatusBarNotificationAllowedAsUser = isStatusBarNotificationAllowedAsUser(string40, i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStatusBarNotificationAllowedAsUser);
+                    parcel2.writeBoolean(zIsStatusBarNotificationAllowedAsUser);
                     return true;
                 case 70:
                     ContextInfo contextInfo64 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString41 = parcel.readString();
-                    String readString42 = parcel.readString();
+                    String string41 = parcel.readString();
+                    String string42 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addHomeShortcut = addHomeShortcut(contextInfo64, readString41, readString42);
+                    boolean zAddHomeShortcut = addHomeShortcut(contextInfo64, string41, string42);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addHomeShortcut);
+                    parcel2.writeBoolean(zAddHomeShortcut);
                     return true;
                 case 71:
                     ContextInfo contextInfo65 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString43 = parcel.readString();
-                    String readString44 = parcel.readString();
+                    String string43 = parcel.readString();
+                    String string44 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteHomeShortcut = deleteHomeShortcut(contextInfo65, readString43, readString44);
+                    boolean zDeleteHomeShortcut = deleteHomeShortcut(contextInfo65, string43, string44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteHomeShortcut);
+                    parcel2.writeBoolean(zDeleteHomeShortcut);
                     return true;
                 case 72:
                     ContextInfo contextInfo66 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString45 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Map allWidgets = getAllWidgets(contextInfo66, readString45);
+                    Map allWidgets = getAllWidgets(contextInfo66, string45);
                     parcel2.writeNoException();
                     parcel2.writeMap(allWidgets);
                     return true;
@@ -6210,11 +6206,11 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 75:
                     ContextInfo contextInfo69 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList7 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList7 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToForceStopWhiteList = addPackagesToForceStopWhiteList(contextInfo69, createStringArrayList7);
+                    boolean zAddPackagesToForceStopWhiteList = addPackagesToForceStopWhiteList(contextInfo69, arrayListCreateStringArrayList7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToForceStopWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToForceStopWhiteList);
                     return true;
                 case 76:
                     ContextInfo contextInfo70 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6232,101 +6228,101 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 78:
                     ContextInfo contextInfo72 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList8 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList8 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToWidgetWhiteList = addPackagesToWidgetWhiteList(contextInfo72, createStringArrayList8);
+                    boolean zAddPackagesToWidgetWhiteList = addPackagesToWidgetWhiteList(contextInfo72, arrayListCreateStringArrayList8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToWidgetWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToWidgetWhiteList);
                     return true;
                 case 79:
                     ContextInfo contextInfo73 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList9 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList9 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromWidgetWhiteList = removePackagesFromWidgetWhiteList(contextInfo73, createStringArrayList9);
+                    boolean zRemovePackagesFromWidgetWhiteList = removePackagesFromWidgetWhiteList(contextInfo73, arrayListCreateStringArrayList9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromWidgetWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromWidgetWhiteList);
                     return true;
                 case 80:
                     ContextInfo contextInfo74 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList10 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList10 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToWidgetBlackList = addPackagesToWidgetBlackList(contextInfo74, createStringArrayList10);
+                    boolean zAddPackagesToWidgetBlackList = addPackagesToWidgetBlackList(contextInfo74, arrayListCreateStringArrayList10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToWidgetBlackList);
+                    parcel2.writeBoolean(zAddPackagesToWidgetBlackList);
                     return true;
                 case 81:
                     ContextInfo contextInfo75 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList11 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList11 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromWidgetBlackList = removePackagesFromWidgetBlackList(contextInfo75, createStringArrayList11);
+                    boolean zRemovePackagesFromWidgetBlackList = removePackagesFromWidgetBlackList(contextInfo75, arrayListCreateStringArrayList11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromWidgetBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromWidgetBlackList);
                     return true;
                 case 82:
                     ContextInfo contextInfo76 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList12 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList12 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromForceStopWhiteList = removePackagesFromForceStopWhiteList(contextInfo76, createStringArrayList12);
+                    boolean zRemovePackagesFromForceStopWhiteList = removePackagesFromForceStopWhiteList(contextInfo76, arrayListCreateStringArrayList12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromForceStopWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromForceStopWhiteList);
                     return true;
                 case 83:
                     ContextInfo contextInfo77 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList13 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList13 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromForceStopBlackList = removePackagesFromForceStopBlackList(contextInfo77, createStringArrayList13);
+                    boolean zRemovePackagesFromForceStopBlackList = removePackagesFromForceStopBlackList(contextInfo77, arrayListCreateStringArrayList13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromForceStopBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromForceStopBlackList);
                     return true;
                 case 84:
                     ContextInfo contextInfo78 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString46 = parcel.readString();
-                    boolean readBoolean15 = parcel.readBoolean();
+                    String string46 = parcel.readString();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableRevocationCheck = enableRevocationCheck(contextInfo78, readString46, readBoolean15);
+                    boolean zEnableRevocationCheck = enableRevocationCheck(contextInfo78, string46, z15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableRevocationCheck);
+                    parcel2.writeBoolean(zEnableRevocationCheck);
                     return true;
                 case 85:
                     ContextInfo contextInfo79 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString47 = parcel.readString();
+                    String string47 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isRevocationCheckEnabled = isRevocationCheckEnabled(contextInfo79, readString47);
+                    boolean zIsRevocationCheckEnabled = isRevocationCheckEnabled(contextInfo79, string47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRevocationCheckEnabled);
+                    parcel2.writeBoolean(zIsRevocationCheckEnabled);
                     return true;
                 case 86:
                     ContextInfo contextInfo80 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString48 = parcel.readString();
-                    boolean readBoolean16 = parcel.readBoolean();
+                    String string48 = parcel.readString();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableOcspCheck = enableOcspCheck(contextInfo80, readString48, readBoolean16);
+                    boolean zEnableOcspCheck = enableOcspCheck(contextInfo80, string48, z16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableOcspCheck);
+                    parcel2.writeBoolean(zEnableOcspCheck);
                     return true;
                 case 87:
                     ContextInfo contextInfo81 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString49 = parcel.readString();
+                    String string49 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isOcspCheckEnabled = isOcspCheckEnabled(contextInfo81, readString49);
+                    boolean zIsOcspCheckEnabled = isOcspCheckEnabled(contextInfo81, string49);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOcspCheckEnabled);
+                    parcel2.writeBoolean(zIsOcspCheckEnabled);
                     return true;
                 case 88:
                     ContextInfo contextInfo82 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString50 = parcel.readString();
+                    String string50 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addAppSignatureToWhiteList = addAppSignatureToWhiteList(contextInfo82, readString50);
+                    boolean zAddAppSignatureToWhiteList = addAppSignatureToWhiteList(contextInfo82, string50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addAppSignatureToWhiteList);
+                    parcel2.writeBoolean(zAddAppSignatureToWhiteList);
                     return true;
                 case 89:
                     ContextInfo contextInfo83 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString51 = parcel.readString();
+                    String string51 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeAppSignatureFromWhiteList = removeAppSignatureFromWhiteList(contextInfo83, readString51);
+                    boolean zRemoveAppSignatureFromWhiteList = removeAppSignatureFromWhiteList(contextInfo83, string51);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeAppSignatureFromWhiteList);
+                    parcel2.writeBoolean(zRemoveAppSignatureFromWhiteList);
                     return true;
                 case 90:
                     ContextInfo contextInfo84 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6344,27 +6340,27 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 92:
                     ContextInfo contextInfo86 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString52 = parcel.readString();
+                    String string52 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageInApprovedInstallerWhiteList = isPackageInApprovedInstallerWhiteList(contextInfo86, readString52);
+                    boolean zIsPackageInApprovedInstallerWhiteList = isPackageInApprovedInstallerWhiteList(contextInfo86, string52);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageInApprovedInstallerWhiteList);
+                    parcel2.writeBoolean(zIsPackageInApprovedInstallerWhiteList);
                     return true;
                 case 93:
                     ContextInfo contextInfo87 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList14 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList14 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToClearDataBlackList = addPackagesToClearDataBlackList(contextInfo87, createStringArrayList14);
+                    boolean zAddPackagesToClearDataBlackList = addPackagesToClearDataBlackList(contextInfo87, arrayListCreateStringArrayList14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToClearDataBlackList);
+                    parcel2.writeBoolean(zAddPackagesToClearDataBlackList);
                     return true;
                 case 94:
                     ContextInfo contextInfo88 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList15 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList15 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromClearDataBlackList = removePackagesFromClearDataBlackList(contextInfo88, createStringArrayList15);
+                    boolean zRemovePackagesFromClearDataBlackList = removePackagesFromClearDataBlackList(contextInfo88, arrayListCreateStringArrayList15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromClearDataBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromClearDataBlackList);
                     return true;
                 case 95:
                     ContextInfo contextInfo89 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6375,11 +6371,11 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 96:
                     ContextInfo contextInfo90 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList16 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList16 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToClearDataWhiteList = addPackagesToClearDataWhiteList(contextInfo90, createStringArrayList16);
+                    boolean zAddPackagesToClearDataWhiteList = addPackagesToClearDataWhiteList(contextInfo90, arrayListCreateStringArrayList16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToClearDataWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToClearDataWhiteList);
                     return true;
                 case 97:
                     ContextInfo contextInfo91 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6390,36 +6386,36 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 98:
                     ContextInfo contextInfo92 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList17 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList17 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromClearDataWhiteList = removePackagesFromClearDataWhiteList(contextInfo92, createStringArrayList17);
+                    boolean zRemovePackagesFromClearDataWhiteList = removePackagesFromClearDataWhiteList(contextInfo92, arrayListCreateStringArrayList17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromClearDataWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromClearDataWhiteList);
                     return true;
                 case 99:
-                    String readString53 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    boolean readBoolean17 = parcel.readBoolean();
+                    String string53 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationClearDataDisabled = isApplicationClearDataDisabled(readString53, readInt11, readBoolean17);
+                    boolean zIsApplicationClearDataDisabled = isApplicationClearDataDisabled(string53, i13, z17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationClearDataDisabled);
+                    parcel2.writeBoolean(zIsApplicationClearDataDisabled);
                     return true;
                 case 100:
                     ContextInfo contextInfo93 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList18 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList18 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToClearCacheBlackList = addPackagesToClearCacheBlackList(contextInfo93, createStringArrayList18);
+                    boolean zAddPackagesToClearCacheBlackList = addPackagesToClearCacheBlackList(contextInfo93, arrayListCreateStringArrayList18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToClearCacheBlackList);
+                    parcel2.writeBoolean(zAddPackagesToClearCacheBlackList);
                     return true;
                 case 101:
                     ContextInfo contextInfo94 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList19 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList19 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromClearCacheBlackList = removePackagesFromClearCacheBlackList(contextInfo94, createStringArrayList19);
+                    boolean zRemovePackagesFromClearCacheBlackList = removePackagesFromClearCacheBlackList(contextInfo94, arrayListCreateStringArrayList19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromClearCacheBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromClearCacheBlackList);
                     return true;
                 case 102:
                     ContextInfo contextInfo95 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6430,11 +6426,11 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 103:
                     ContextInfo contextInfo96 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList20 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList20 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToClearCacheWhiteList = addPackagesToClearCacheWhiteList(contextInfo96, createStringArrayList20);
+                    boolean zAddPackagesToClearCacheWhiteList = addPackagesToClearCacheWhiteList(contextInfo96, arrayListCreateStringArrayList20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToClearCacheWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToClearCacheWhiteList);
                     return true;
                 case 104:
                     ContextInfo contextInfo97 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6445,51 +6441,51 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 105:
                     ContextInfo contextInfo98 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList21 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList21 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromClearCacheWhiteList = removePackagesFromClearCacheWhiteList(contextInfo98, createStringArrayList21);
+                    boolean zRemovePackagesFromClearCacheWhiteList = removePackagesFromClearCacheWhiteList(contextInfo98, arrayListCreateStringArrayList21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromClearCacheWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromClearCacheWhiteList);
                     return true;
                 case 106:
-                    String readString54 = parcel.readString();
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean18 = parcel.readBoolean();
+                    String string54 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    boolean z18 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationClearCacheDisabled = isApplicationClearCacheDisabled(readString54, readInt12, readBoolean18);
+                    boolean zIsApplicationClearCacheDisabled = isApplicationClearCacheDisabled(string54, i14, z18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationClearCacheDisabled);
+                    parcel2.writeBoolean(zIsApplicationClearCacheDisabled);
                     return true;
                 case 107:
                     ContextInfo contextInfo99 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString55 = parcel.readString();
-                    String readString56 = parcel.readString();
+                    String string55 = parcel.readString();
+                    String string56 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean changeApplicationName = changeApplicationName(contextInfo99, readString55, readString56);
+                    boolean zChangeApplicationName = changeApplicationName(contextInfo99, string55, string56);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(changeApplicationName);
+                    parcel2.writeBoolean(zChangeApplicationName);
                     return true;
                 case 108:
-                    String readString57 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string57 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String applicationNameFromDb = getApplicationNameFromDb(readString57, readInt13);
+                    String applicationNameFromDb = getApplicationNameFromDb(string57, i15);
                     parcel2.writeNoException();
                     parcel2.writeString(applicationNameFromDb);
                     return true;
                 case 109:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAnyApplicationNameChangedAsUser = isAnyApplicationNameChangedAsUser(readInt14);
+                    boolean zIsAnyApplicationNameChangedAsUser = isAnyApplicationNameChangedAsUser(i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAnyApplicationNameChangedAsUser);
+                    parcel2.writeBoolean(zIsAnyApplicationNameChangedAsUser);
                     return true;
                 case 110:
                     ContextInfo contextInfo100 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean19 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean applicationComponentState = setApplicationComponentState(contextInfo100, componentName, readBoolean19);
+                    boolean applicationComponentState = setApplicationComponentState(contextInfo100, componentName, z19);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationComponentState);
                     return true;
@@ -6503,19 +6499,19 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 112:
                     ContextInfo contextInfo102 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList22 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList22 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToDisableUpdateBlackList = addPackagesToDisableUpdateBlackList(contextInfo102, createStringArrayList22);
+                    boolean zAddPackagesToDisableUpdateBlackList = addPackagesToDisableUpdateBlackList(contextInfo102, arrayListCreateStringArrayList22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToDisableUpdateBlackList);
+                    parcel2.writeBoolean(zAddPackagesToDisableUpdateBlackList);
                     return true;
                 case 113:
                     ContextInfo contextInfo103 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList23 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList23 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromDisableUpdateBlackList = removePackagesFromDisableUpdateBlackList(contextInfo103, createStringArrayList23);
+                    boolean zRemovePackagesFromDisableUpdateBlackList = removePackagesFromDisableUpdateBlackList(contextInfo103, arrayListCreateStringArrayList23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromDisableUpdateBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromDisableUpdateBlackList);
                     return true;
                 case 114:
                     ContextInfo contextInfo104 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6526,11 +6522,11 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 115:
                     ContextInfo contextInfo105 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList24 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList24 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToDisableUpdateWhiteList = addPackagesToDisableUpdateWhiteList(contextInfo105, createStringArrayList24);
+                    boolean zAddPackagesToDisableUpdateWhiteList = addPackagesToDisableUpdateWhiteList(contextInfo105, arrayListCreateStringArrayList24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToDisableUpdateWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToDisableUpdateWhiteList);
                     return true;
                 case 116:
                     ContextInfo contextInfo106 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6541,41 +6537,41 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 117:
                     ContextInfo contextInfo107 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList25 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList25 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromDisableUpdateWhiteList = removePackagesFromDisableUpdateWhiteList(contextInfo107, createStringArrayList25);
+                    boolean zRemovePackagesFromDisableUpdateWhiteList = removePackagesFromDisableUpdateWhiteList(contextInfo107, arrayListCreateStringArrayList25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromDisableUpdateWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromDisableUpdateWhiteList);
                     return true;
                 case 118:
-                    String readString58 = parcel.readString();
-                    boolean readBoolean20 = parcel.readBoolean();
+                    String string58 = parcel.readString();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageUpdateAllowed = isPackageUpdateAllowed(readString58, readBoolean20);
+                    boolean zIsPackageUpdateAllowed = isPackageUpdateAllowed(string58, z20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageUpdateAllowed);
+                    parcel2.writeBoolean(zIsPackageUpdateAllowed);
                     return true;
                 case 119:
                     ContextInfo contextInfo108 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearDisableUpdateBlackList = clearDisableUpdateBlackList(contextInfo108);
+                    boolean zClearDisableUpdateBlackList = clearDisableUpdateBlackList(contextInfo108);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearDisableUpdateBlackList);
+                    parcel2.writeBoolean(zClearDisableUpdateBlackList);
                     return true;
                 case 120:
                     ContextInfo contextInfo109 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearDisableUpdateWhiteList = clearDisableUpdateWhiteList(contextInfo109);
+                    boolean zClearDisableUpdateWhiteList = clearDisableUpdateWhiteList(contextInfo109);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearDisableUpdateWhiteList);
+                    parcel2.writeBoolean(zClearDisableUpdateWhiteList);
                     return true;
                 case 121:
                     ContextInfo contextInfo110 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList26 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList26 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    List<String> addPackagesToPreventStartBlackList = addPackagesToPreventStartBlackList(contextInfo110, createStringArrayList26);
+                    List<String> listAddPackagesToPreventStartBlackList = addPackagesToPreventStartBlackList(contextInfo110, arrayListCreateStringArrayList26);
                     parcel2.writeNoException();
-                    parcel2.writeStringList(addPackagesToPreventStartBlackList);
+                    parcel2.writeStringList(listAddPackagesToPreventStartBlackList);
                     return true;
                 case 122:
                     ContextInfo contextInfo111 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6586,42 +6582,42 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 123:
                     ContextInfo contextInfo112 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList27 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList27 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromPreventStartBlackList = removePackagesFromPreventStartBlackList(contextInfo112, createStringArrayList27);
+                    boolean zRemovePackagesFromPreventStartBlackList = removePackagesFromPreventStartBlackList(contextInfo112, arrayListCreateStringArrayList27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromPreventStartBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromPreventStartBlackList);
                     return true;
                 case 124:
                     ContextInfo contextInfo113 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearPreventStartBlackList = clearPreventStartBlackList(contextInfo113);
+                    boolean zClearPreventStartBlackList = clearPreventStartBlackList(contextInfo113);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearPreventStartBlackList);
+                    parcel2.writeBoolean(zClearPreventStartBlackList);
                     return true;
                 case 125:
-                    String readString59 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    String string59 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationStartDisabledAsUser = isApplicationStartDisabledAsUser(readString59, readInt15);
+                    boolean zIsApplicationStartDisabledAsUser = isApplicationStartDisabledAsUser(string59, i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationStartDisabledAsUser);
+                    parcel2.writeBoolean(zIsApplicationStartDisabledAsUser);
                     return true;
                 case 126:
                     ContextInfo contextInfo114 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList28 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList28 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToDisableClipboardBlackList = addPackagesToDisableClipboardBlackList(contextInfo114, createStringArrayList28);
+                    boolean zAddPackagesToDisableClipboardBlackList = addPackagesToDisableClipboardBlackList(contextInfo114, arrayListCreateStringArrayList28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToDisableClipboardBlackList);
+                    parcel2.writeBoolean(zAddPackagesToDisableClipboardBlackList);
                     return true;
                 case 127:
                     ContextInfo contextInfo115 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList29 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList29 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromDisableClipboardBlackList = removePackagesFromDisableClipboardBlackList(contextInfo115, createStringArrayList29);
+                    boolean zRemovePackagesFromDisableClipboardBlackList = removePackagesFromDisableClipboardBlackList(contextInfo115, arrayListCreateStringArrayList29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromDisableClipboardBlackList);
+                    parcel2.writeBoolean(zRemovePackagesFromDisableClipboardBlackList);
                     return true;
                 case 128:
                     ContextInfo contextInfo116 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6632,27 +6628,27 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 129:
                     ContextInfo contextInfo117 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> packagesFromDisableClipboardBlackListAsUserInternal = getPackagesFromDisableClipboardBlackListAsUserInternal(contextInfo117, readInt16);
+                    List<String> packagesFromDisableClipboardBlackListAsUserInternal = getPackagesFromDisableClipboardBlackListAsUserInternal(contextInfo117, i18);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packagesFromDisableClipboardBlackListAsUserInternal);
                     return true;
                 case 130:
                     ContextInfo contextInfo118 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList30 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList30 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToDisableClipboardWhiteList = addPackagesToDisableClipboardWhiteList(contextInfo118, createStringArrayList30);
+                    boolean zAddPackagesToDisableClipboardWhiteList = addPackagesToDisableClipboardWhiteList(contextInfo118, arrayListCreateStringArrayList30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToDisableClipboardWhiteList);
+                    parcel2.writeBoolean(zAddPackagesToDisableClipboardWhiteList);
                     return true;
                 case 131:
                     ContextInfo contextInfo119 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList31 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList31 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromDisableClipboardWhiteList = removePackagesFromDisableClipboardWhiteList(contextInfo119, createStringArrayList31);
+                    boolean zRemovePackagesFromDisableClipboardWhiteList = removePackagesFromDisableClipboardWhiteList(contextInfo119, arrayListCreateStringArrayList31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromDisableClipboardWhiteList);
+                    parcel2.writeBoolean(zRemovePackagesFromDisableClipboardWhiteList);
                     return true;
                 case 132:
                     ContextInfo contextInfo120 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6663,41 +6659,41 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 133:
                     ContextInfo contextInfo121 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> packagesFromDisableClipboardWhiteListAsUserInternal = getPackagesFromDisableClipboardWhiteListAsUserInternal(contextInfo121, readInt17);
+                    List<String> packagesFromDisableClipboardWhiteListAsUserInternal = getPackagesFromDisableClipboardWhiteListAsUserInternal(contextInfo121, i19);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packagesFromDisableClipboardWhiteListAsUserInternal);
                     return true;
                 case 134:
                     ContextInfo contextInfo122 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearDisableClipboardBlackList = clearDisableClipboardBlackList(contextInfo122);
+                    boolean zClearDisableClipboardBlackList = clearDisableClipboardBlackList(contextInfo122);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearDisableClipboardBlackList);
+                    parcel2.writeBoolean(zClearDisableClipboardBlackList);
                     return true;
                 case 135:
                     ContextInfo contextInfo123 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearDisableClipboardWhiteList = clearDisableClipboardWhiteList(contextInfo123);
+                    boolean zClearDisableClipboardWhiteList = clearDisableClipboardWhiteList(contextInfo123);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearDisableClipboardWhiteList);
+                    parcel2.writeBoolean(zClearDisableClipboardWhiteList);
                     return true;
                 case 136:
-                    String readString60 = parcel.readString();
-                    int readInt18 = parcel.readInt();
+                    String string60 = parcel.readString();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageClipboardAllowed = isPackageClipboardAllowed(readString60, readInt18);
+                    boolean zIsPackageClipboardAllowed = isPackageClipboardAllowed(string60, i20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageClipboardAllowed);
+                    parcel2.writeBoolean(zIsPackageClipboardAllowed);
                     return true;
                 case 137:
                     ContextInfo contextInfo124 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList32 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList32 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean addPackagesToFocusMonitoringList = addPackagesToFocusMonitoringList(contextInfo124, createStringArrayList32);
+                    boolean zAddPackagesToFocusMonitoringList = addPackagesToFocusMonitoringList(contextInfo124, arrayListCreateStringArrayList32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addPackagesToFocusMonitoringList);
+                    parcel2.writeBoolean(zAddPackagesToFocusMonitoringList);
                     return true;
                 case 138:
                     ContextInfo contextInfo125 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6708,99 +6704,99 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 139:
                     ContextInfo contextInfo126 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList33 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList33 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean removePackagesFromFocusMonitoringList = removePackagesFromFocusMonitoringList(contextInfo126, createStringArrayList33);
+                    boolean zRemovePackagesFromFocusMonitoringList = removePackagesFromFocusMonitoringList(contextInfo126, arrayListCreateStringArrayList33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removePackagesFromFocusMonitoringList);
+                    parcel2.writeBoolean(zRemovePackagesFromFocusMonitoringList);
                     return true;
                 case 140:
                     ContextInfo contextInfo127 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearFocusMonitoringList = clearFocusMonitoringList(contextInfo127);
+                    boolean zClearFocusMonitoringList = clearFocusMonitoringList(contextInfo127);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearFocusMonitoringList);
+                    parcel2.writeBoolean(zClearFocusMonitoringList);
                     return true;
                 case 141:
-                    String readString61 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string61 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationFocusMonitoredAsUser = isApplicationFocusMonitoredAsUser(readString61, readInt19);
+                    boolean zIsApplicationFocusMonitoredAsUser = isApplicationFocusMonitoredAsUser(string61, i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationFocusMonitoredAsUser);
+                    parcel2.writeBoolean(zIsApplicationFocusMonitoredAsUser);
                     return true;
                 case 142:
                     ContextInfo contextInfo128 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString62 = parcel.readString();
-                    boolean readBoolean21 = parcel.readBoolean();
+                    String string62 = parcel.readString();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    List<ComponentName> homeShortcuts = getHomeShortcuts(contextInfo128, readString62, readBoolean21);
+                    List<ComponentName> homeShortcuts = getHomeShortcuts(contextInfo128, string62, z21);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(homeShortcuts, 1);
                     return true;
                 case 143:
                     ComponentName componentName3 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateWidgetStatus(componentName3, readInt20);
+                    updateWidgetStatus(componentName3, i22);
                     parcel2.writeNoException();
                     return true;
                 case 144:
                     ContextInfo contextInfo129 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString63 = parcel.readString();
+                    String string63 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<UsbDeviceConfig> usbDevicesForDefaultAccess = getUsbDevicesForDefaultAccess(contextInfo129, readString63);
+                    List<UsbDeviceConfig> usbDevicesForDefaultAccess = getUsbDevicesForDefaultAccess(contextInfo129, string63);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(usbDevicesForDefaultAccess, 1);
                     return true;
                 case 145:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     UsbDevice usbDevice = (UsbDevice) parcel.readTypedObject(UsbDevice.CREATOR);
-                    String readString64 = parcel.readString();
+                    String string64 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isUsbDevicePermittedForPackage = isUsbDevicePermittedForPackage(readInt21, usbDevice, readString64);
+                    boolean zIsUsbDevicePermittedForPackage = isUsbDevicePermittedForPackage(i23, usbDevice, string64);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsbDevicePermittedForPackage);
+                    parcel2.writeBoolean(zIsUsbDevicePermittedForPackage);
                     return true;
                 case 146:
                     ContextInfo contextInfo130 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString65 = parcel.readString();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(UsbDeviceConfig.CREATOR);
+                    String string65 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(UsbDeviceConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean addUsbDevicesForDefaultAccess = addUsbDevicesForDefaultAccess(contextInfo130, readString65, createTypedArrayList);
+                    boolean zAddUsbDevicesForDefaultAccess = addUsbDevicesForDefaultAccess(contextInfo130, string65, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addUsbDevicesForDefaultAccess);
+                    parcel2.writeBoolean(zAddUsbDevicesForDefaultAccess);
                     return true;
                 case 147:
                     ContextInfo contextInfo131 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString66 = parcel.readString();
+                    String string66 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearUsbDevicesForDefaultAccess = clearUsbDevicesForDefaultAccess(contextInfo131, readString66);
+                    boolean zClearUsbDevicesForDefaultAccess = clearUsbDevicesForDefaultAccess(contextInfo131, string66);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearUsbDevicesForDefaultAccess);
+                    parcel2.writeBoolean(zClearUsbDevicesForDefaultAccess);
                     return true;
                 case 148:
                     ContextInfo contextInfo132 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString67 = parcel.readString();
-                    boolean readBoolean22 = parcel.readBoolean();
+                    String string67 = parcel.readString();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean installExistingApplication = installExistingApplication(contextInfo132, readString67, readBoolean22);
+                    boolean zInstallExistingApplication = installExistingApplication(contextInfo132, string67, z22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(installExistingApplication);
+                    parcel2.writeBoolean(zInstallExistingApplication);
                     return true;
                 case 149:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean updateApplicationTable = updateApplicationTable(readInt22, readInt23, readInt24);
+                    boolean zUpdateApplicationTable = updateApplicationTable(i24, i25, i26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateApplicationTable);
+                    parcel2.writeBoolean(zUpdateApplicationTable);
                     return true;
                 case 150:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> disabledPackages = getDisabledPackages(readInt25);
+                    List<String> disabledPackages = getDisabledPackages(i27);
                     parcel2.writeNoException();
                     parcel2.writeStringList(disabledPackages);
                     return true;
@@ -6811,57 +6807,57 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 152:
                     AppIdentity appIdentity = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
-                    ArrayList<String> createStringArrayList34 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList34 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int authorizedScopes = setAuthorizedScopes(appIdentity, createStringArrayList34);
+                    int authorizedScopes = setAuthorizedScopes(appIdentity, arrayListCreateStringArrayList34);
                     parcel2.writeNoException();
                     parcel2.writeInt(authorizedScopes);
                     return true;
                 case 153:
-                    String readString68 = parcel.readString();
+                    String string68 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> authorizedScopes2 = getAuthorizedScopes(readString68);
+                    List<String> authorizedScopes2 = getAuthorizedScopes(string68);
                     parcel2.writeNoException();
                     parcel2.writeStringList(authorizedScopes2);
                     return true;
                 case 154:
                     ContextInfo contextInfo133 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     AppIdentity appIdentity2 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
-                    ArrayList<String> createStringArrayList35 = parcel.createStringArrayList();
-                    int readInt26 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList35 = parcel.createStringArrayList();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int applyRuntimePermissions = applyRuntimePermissions(contextInfo133, appIdentity2, createStringArrayList35, readInt26);
+                    int iApplyRuntimePermissions = applyRuntimePermissions(contextInfo133, appIdentity2, arrayListCreateStringArrayList35, i28);
                     parcel2.writeNoException();
-                    parcel2.writeInt(applyRuntimePermissions);
+                    parcel2.writeInt(iApplyRuntimePermissions);
                     return true;
                 case 155:
-                    int readInt27 = parcel.readInt();
-                    String readString69 = parcel.readString();
-                    int readInt28 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    String string69 = parcel.readString();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> runtimePermissionsEnforced = getRuntimePermissionsEnforced(readInt27, readString69, readInt28);
+                    List<String> runtimePermissionsEnforced = getRuntimePermissionsEnforced(i29, string69, i30);
                     parcel2.writeNoException();
                     parcel2.writeStringList(runtimePermissionsEnforced);
                     return true;
                 case 156:
-                    String readString70 = parcel.readString();
+                    String string70 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean verifyRuntimePermissionPackageSignature = verifyRuntimePermissionPackageSignature(readString70);
+                    boolean zVerifyRuntimePermissionPackageSignature = verifyRuntimePermissionPackageSignature(string70);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(verifyRuntimePermissionPackageSignature);
+                    parcel2.writeBoolean(zVerifyRuntimePermissionPackageSignature);
                     return true;
                 case 157:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reapplyRuntimePermissions(readInt29);
+                    reapplyRuntimePermissions(i31);
                     parcel2.writeNoException();
                     return true;
                 case 158:
                     ContextInfo contextInfo134 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString71 = parcel.readString();
-                    int readInt30 = parcel.readInt();
+                    String string71 = parcel.readString();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> runtimePermissions = getRuntimePermissions(contextInfo134, readString71, readInt30);
+                    List<String> runtimePermissions = getRuntimePermissions(contextInfo134, string71, i32);
                     parcel2.writeNoException();
                     parcel2.writeStringList(runtimePermissions);
                     return true;
@@ -6869,17 +6865,17 @@ public interface IApplicationPolicy extends IInterface {
                     ContextInfo contextInfo135 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     AppIdentity appIdentity3 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addPackageToBatteryOptimizationWhiteList = addPackageToBatteryOptimizationWhiteList(contextInfo135, appIdentity3);
+                    int iAddPackageToBatteryOptimizationWhiteList = addPackageToBatteryOptimizationWhiteList(contextInfo135, appIdentity3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addPackageToBatteryOptimizationWhiteList);
+                    parcel2.writeInt(iAddPackageToBatteryOptimizationWhiteList);
                     return true;
                 case 160:
                     ContextInfo contextInfo136 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     AppIdentity appIdentity4 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int removePackageFromBatteryOptimizationWhiteList = removePackageFromBatteryOptimizationWhiteList(contextInfo136, appIdentity4);
+                    int iRemovePackageFromBatteryOptimizationWhiteList = removePackageFromBatteryOptimizationWhiteList(contextInfo136, appIdentity4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removePackageFromBatteryOptimizationWhiteList);
+                    parcel2.writeInt(iRemovePackageFromBatteryOptimizationWhiteList);
                     return true;
                 case 161:
                     ContextInfo contextInfo137 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -6895,133 +6891,133 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 163:
                     ContextInfo contextInfo138 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString72 = parcel.readString();
+                    String string72 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> applicationGrantedPermissions = getApplicationGrantedPermissions(contextInfo138, readString72);
+                    List<String> applicationGrantedPermissions = getApplicationGrantedPermissions(contextInfo138, string72);
                     parcel2.writeNoException();
                     parcel2.writeStringList(applicationGrantedPermissions);
                     return true;
                 case 164:
                     ContextInfo contextInfo139 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean23 = parcel.readBoolean();
+                    boolean z23 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAndroidMarketState(contextInfo139, readBoolean23);
+                    setAndroidMarketState(contextInfo139, z23);
                     parcel2.writeNoException();
                     return true;
                 case 165:
                     ContextInfo contextInfo140 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString73 = parcel.readString();
+                    String string73 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> packageSignaturesFromExternalStorageWhiteList = getPackageSignaturesFromExternalStorageWhiteList(contextInfo140, readString73);
+                    List<String> packageSignaturesFromExternalStorageWhiteList = getPackageSignaturesFromExternalStorageWhiteList(contextInfo140, string73);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packageSignaturesFromExternalStorageWhiteList);
                     return true;
                 case 166:
                     ContextInfo contextInfo141 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int clearPackagesFromExternalStorageWhiteList = clearPackagesFromExternalStorageWhiteList(contextInfo141);
+                    int iClearPackagesFromExternalStorageWhiteList = clearPackagesFromExternalStorageWhiteList(contextInfo141);
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearPackagesFromExternalStorageWhiteList);
+                    parcel2.writeInt(iClearPackagesFromExternalStorageWhiteList);
                     return true;
                 case 167:
                     ContextInfo contextInfo142 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     AppIdentity appIdentity5 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addPackageToWhiteList = addPackageToWhiteList(contextInfo142, readInt31, appIdentity5);
+                    int iAddPackageToWhiteList = addPackageToWhiteList(contextInfo142, i33, appIdentity5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addPackageToWhiteList);
+                    parcel2.writeInt(iAddPackageToWhiteList);
                     return true;
                 case 168:
                     ContextInfo contextInfo143 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> packagesFromWhiteList = getPackagesFromWhiteList(contextInfo143, readInt32);
+                    List<String> packagesFromWhiteList = getPackagesFromWhiteList(contextInfo143, i34);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packagesFromWhiteList);
                     return true;
                 case 169:
                     ContextInfo contextInfo144 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt33 = parcel.readInt();
-                    String readString74 = parcel.readString();
+                    int i35 = parcel.readInt();
+                    String string74 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int removePackageFromWhiteList = removePackageFromWhiteList(contextInfo144, readInt33, readString74);
+                    int iRemovePackageFromWhiteList = removePackageFromWhiteList(contextInfo144, i35, string74);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removePackageFromWhiteList);
+                    parcel2.writeInt(iRemovePackageFromWhiteList);
                     return true;
                 case 170:
                     ContextInfo contextInfo145 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     AppIdentity appIdentity6 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addPackageToBlackList = addPackageToBlackList(contextInfo145, readInt34, appIdentity6);
+                    int iAddPackageToBlackList = addPackageToBlackList(contextInfo145, i36, appIdentity6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addPackageToBlackList);
+                    parcel2.writeInt(iAddPackageToBlackList);
                     return true;
                 case 171:
                     ContextInfo contextInfo146 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> packagesFromBlackList = getPackagesFromBlackList(contextInfo146, readInt35);
+                    List<String> packagesFromBlackList = getPackagesFromBlackList(contextInfo146, i37);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packagesFromBlackList);
                     return true;
                 case 172:
                     ContextInfo contextInfo147 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt36 = parcel.readInt();
-                    String readString75 = parcel.readString();
+                    int i38 = parcel.readInt();
+                    String string75 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int removePackageFromBlackList = removePackageFromBlackList(contextInfo147, readInt36, readString75);
+                    int iRemovePackageFromBlackList = removePackageFromBlackList(contextInfo147, i38, string75);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removePackageFromBlackList);
+                    parcel2.writeInt(iRemovePackageFromBlackList);
                     return true;
                 case 173:
-                    int readInt37 = parcel.readInt();
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
+                    int i39 = parcel.readInt();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageInWhitelistInternal = isPackageInWhitelistInternal(readInt37, readInt38, readInt39);
+                    boolean zIsPackageInWhitelistInternal = isPackageInWhitelistInternal(i39, i40, i41);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageInWhitelistInternal);
+                    parcel2.writeBoolean(zIsPackageInWhitelistInternal);
                     return true;
                 case 174:
-                    int readInt40 = parcel.readInt();
-                    int readInt41 = parcel.readInt();
-                    int readInt42 = parcel.readInt();
+                    int i42 = parcel.readInt();
+                    int i43 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageInBlacklistInternal = isPackageInBlacklistInternal(readInt40, readInt41, readInt42);
+                    boolean zIsPackageInBlacklistInternal = isPackageInBlacklistInternal(i42, i43, i44);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageInBlacklistInternal);
+                    parcel2.writeBoolean(zIsPackageInBlacklistInternal);
                     return true;
                 case 175:
-                    int readInt43 = parcel.readInt();
-                    String readString76 = parcel.readString();
+                    int i45 = parcel.readInt();
+                    String string76 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationExternalStorageWhitelisted = isApplicationExternalStorageWhitelisted(readInt43, readString76);
+                    boolean zIsApplicationExternalStorageWhitelisted = isApplicationExternalStorageWhitelisted(i45, string76);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationExternalStorageWhitelisted);
+                    parcel2.writeBoolean(zIsApplicationExternalStorageWhitelisted);
                     return true;
                 case 176:
-                    int readInt44 = parcel.readInt();
-                    String readString77 = parcel.readString();
+                    int i46 = parcel.readInt();
+                    String string77 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationExternalStorageBlacklisted = isApplicationExternalStorageBlacklisted(readInt44, readString77);
+                    boolean zIsApplicationExternalStorageBlacklisted = isApplicationExternalStorageBlacklisted(i46, string77);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationExternalStorageBlacklisted);
+                    parcel2.writeBoolean(zIsApplicationExternalStorageBlacklisted);
                     return true;
                 case 177:
                     ContextInfo contextInfo148 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString78 = parcel.readString();
+                    String string78 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteManagedAppInfo = deleteManagedAppInfo(contextInfo148, readString78);
+                    boolean zDeleteManagedAppInfo = deleteManagedAppInfo(contextInfo148, string78);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteManagedAppInfo);
+                    parcel2.writeBoolean(zDeleteManagedAppInfo);
                     return true;
                 case 178:
                     ContextInfo contextInfo149 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean24 = parcel.readBoolean();
+                    boolean z24 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean appInstallToSdCard = setAppInstallToSdCard(contextInfo149, readBoolean24);
+                    boolean appInstallToSdCard = setAppInstallToSdCard(contextInfo149, z24);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(appInstallToSdCard);
                     return true;
@@ -7041,17 +7037,17 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 181:
                     ContextInfo contextInfo152 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString79 = parcel.readString();
+                    String string79 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ManagedAppInfo[] applicationsList = getApplicationsList(contextInfo152, readString79);
+                    ManagedAppInfo[] applicationsList = getApplicationsList(contextInfo152, string79);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(applicationsList, 1);
                     return true;
                 case 182:
                     ContextInfo contextInfo153 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString80 = parcel.readString();
+                    String string80 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean asManagedApp = setAsManagedApp(contextInfo153, readString80);
+                    boolean asManagedApp = setAsManagedApp(contextInfo153, string80);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(asManagedApp);
                     return true;
@@ -7059,9 +7055,9 @@ public interface IApplicationPolicy extends IInterface {
                     ContextInfo contextInfo154 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     AppIdentity appIdentity7 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int addApplicationToCameraAllowList = addApplicationToCameraAllowList(contextInfo154, appIdentity7);
+                    int iAddApplicationToCameraAllowList = addApplicationToCameraAllowList(contextInfo154, appIdentity7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addApplicationToCameraAllowList);
+                    parcel2.writeInt(iAddApplicationToCameraAllowList);
                     return true;
                 case 184:
                     ContextInfo contextInfo155 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -7074,81 +7070,81 @@ public interface IApplicationPolicy extends IInterface {
                     ContextInfo contextInfo156 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     AppIdentity appIdentity8 = (AppIdentity) parcel.readTypedObject(AppIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int removeApplicationFromCameraAllowList = removeApplicationFromCameraAllowList(contextInfo156, appIdentity8);
+                    int iRemoveApplicationFromCameraAllowList = removeApplicationFromCameraAllowList(contextInfo156, appIdentity8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeApplicationFromCameraAllowList);
+                    parcel2.writeInt(iRemoveApplicationFromCameraAllowList);
                     return true;
                 case 186:
-                    int readInt45 = parcel.readInt();
-                    int readInt46 = parcel.readInt();
+                    int i47 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCameraAllowlistedApp = isCameraAllowlistedApp(readInt45, readInt46);
+                    boolean zIsCameraAllowlistedApp = isCameraAllowlistedApp(i47, i48);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCameraAllowlistedApp);
+                    parcel2.writeBoolean(zIsCameraAllowlistedApp);
                     return true;
                 case 187:
-                    String readString81 = parcel.readString();
-                    int readInt47 = parcel.readInt();
+                    String string81 = parcel.readString();
+                    int i49 = parcel.readInt();
                     Notification notification2 = (Notification) parcel.readTypedObject(Notification.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean handleStatusBarNotificationNotAllowedAsUser = handleStatusBarNotificationNotAllowedAsUser(readString81, readInt47, notification2);
+                    boolean zHandleStatusBarNotificationNotAllowedAsUser = handleStatusBarNotificationNotAllowedAsUser(string81, i49, notification2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(handleStatusBarNotificationNotAllowedAsUser);
+                    parcel2.writeBoolean(zHandleStatusBarNotificationNotAllowedAsUser);
                     return true;
                 case 188:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<DefaultAppConfiguration> allDefaultApplicationsInternal = getAllDefaultApplicationsInternal(readInt48);
+                    List<DefaultAppConfiguration> allDefaultApplicationsInternal = getAllDefaultApplicationsInternal(i50);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(allDefaultApplicationsInternal, 1);
                     return true;
                 case 189:
-                    String readString82 = parcel.readString();
-                    boolean readBoolean25 = parcel.readBoolean();
-                    int readInt49 = parcel.readInt();
+                    String string82 = parcel.readString();
+                    boolean z25 = parcel.readBoolean();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean applicationStateEnabledAsUser = getApplicationStateEnabledAsUser(readString82, readBoolean25, readInt49);
+                    boolean applicationStateEnabledAsUser = getApplicationStateEnabledAsUser(string82, z25, i51);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationStateEnabledAsUser);
                     return true;
                 case 190:
-                    String readString83 = parcel.readString();
-                    ArrayList<String> createStringArrayList36 = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList37 = parcel.createStringArrayList();
-                    int readInt50 = parcel.readInt();
+                    String string83 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList36 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList37 = parcel.createStringArrayList();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationInstallationEnabled = isApplicationInstallationEnabled(readString83, createStringArrayList36, createStringArrayList37, readInt50);
+                    boolean zIsApplicationInstallationEnabled = isApplicationInstallationEnabled(string83, arrayListCreateStringArrayList36, arrayListCreateStringArrayList37, i52);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationInstallationEnabled);
+                    parcel2.writeBoolean(zIsApplicationInstallationEnabled);
                     return true;
                 case 191:
-                    int readInt51 = parcel.readInt();
-                    int readInt52 = parcel.readInt();
+                    int i53 = parcel.readInt();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isFromApprovedInstaller = isFromApprovedInstaller(readInt51, readInt52);
+                    boolean zIsFromApprovedInstaller = isFromApprovedInstaller(i53, i54);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFromApprovedInstaller);
+                    parcel2.writeBoolean(zIsFromApprovedInstaller);
                     return true;
                 case 192:
-                    String readString84 = parcel.readString();
-                    int readInt53 = parcel.readInt();
+                    String string84 = parcel.readString();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean applicationUninstallationEnabledAsUser = getApplicationUninstallationEnabledAsUser(readString84, readInt53);
+                    boolean applicationUninstallationEnabledAsUser = getApplicationUninstallationEnabledAsUser(string84, i55);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(applicationUninstallationEnabledAsUser);
                     return true;
                 case 193:
-                    String readString85 = parcel.readString();
-                    int readInt54 = parcel.readInt();
+                    String string85 = parcel.readString();
+                    int i56 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    applicationUsageAppLaunchCount(readString85, readInt54);
+                    applicationUsageAppLaunchCount(string85, i56);
                     parcel2.writeNoException();
                     return true;
                 case 194:
-                    String readString86 = parcel.readString();
-                    int readInt55 = parcel.readInt();
+                    String string86 = parcel.readString();
+                    int i57 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    applicationUsageAppPauseTime(readString86, readInt55);
+                    applicationUsageAppPauseTime(string86, i57);
                     parcel2.writeNoException();
                     return true;
                 case 195:
@@ -7170,9 +7166,9 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 197:
                     Intent intent4 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    int readInt56 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName defaultApplicationInternal = getDefaultApplicationInternal(intent4, readInt56);
+                    ComponentName defaultApplicationInternal = getDefaultApplicationInternal(intent4, i58);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(defaultApplicationInternal, 1);
                     return true;
@@ -7188,31 +7184,31 @@ public interface IApplicationPolicy extends IInterface {
                     Intent intent5 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     ComponentName componentName5 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean removeDefaultApplication = removeDefaultApplication(contextInfo160, intent5, componentName5);
+                    boolean zRemoveDefaultApplication = removeDefaultApplication(contextInfo160, intent5, componentName5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeDefaultApplication);
+                    parcel2.writeBoolean(zRemoveDefaultApplication);
                     return true;
                 case 200:
-                    String readString87 = parcel.readString();
-                    int readInt57 = parcel.readInt();
+                    String string87 = parcel.readString();
+                    int i59 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isApplicationSetToDefault = isApplicationSetToDefault(readString87, readInt57);
+                    boolean zIsApplicationSetToDefault = isApplicationSetToDefault(string87, i59);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isApplicationSetToDefault);
+                    parcel2.writeBoolean(zIsApplicationSetToDefault);
                     return true;
                 case 201:
                     Intent intent6 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IntentFilter createIntentFilter = createIntentFilter(intent6);
+                    IntentFilter intentFilterCreateIntentFilter = createIntentFilter(intent6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createIntentFilter, 1);
+                    parcel2.writeTypedObject(intentFilterCreateIntentFilter, 1);
                     return true;
                 case 202:
                     ContextInfo contextInfo161 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList38 = parcel.createStringArrayList();
-                    boolean readBoolean26 = parcel.readBoolean();
+                    ArrayList<String> arrayListCreateStringArrayList38 = parcel.createStringArrayList();
+                    boolean z26 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean concentrationMode = setConcentrationMode(contextInfo161, createStringArrayList38, readBoolean26);
+                    boolean concentrationMode = setConcentrationMode(contextInfo161, arrayListCreateStringArrayList38, z26);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(concentrationMode);
                     return true;
@@ -7223,19 +7219,19 @@ public interface IApplicationPolicy extends IInterface {
                     return true;
                 case 204:
                     ComponentName componentName6 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString88 = parcel.readString();
+                    String string88 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt58 = parcel.readInt();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setApplicationRestrictions(componentName6, readString88, bundle, readInt58);
+                    setApplicationRestrictions(componentName6, string88, bundle, i60);
                     parcel2.writeNoException();
                     return true;
                 case 205:
                     ComponentName componentName7 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString89 = parcel.readString();
-                    int readInt59 = parcel.readInt();
+                    String string89 = parcel.readString();
+                    int i61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle applicationRestrictions = getApplicationRestrictions(componentName7, readString89, readInt59);
+                    Bundle applicationRestrictions = getApplicationRestrictions(componentName7, string89, i61);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(applicationRestrictions, 1);
                     return true;

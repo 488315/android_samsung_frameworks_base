@@ -19,12 +19,12 @@ public class SyncContext {
     }
 
     private void updateHeartbeat() {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (elapsedRealtime < this.mLastHeartbeatSendTime + 1000) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (jElapsedRealtime < this.mLastHeartbeatSendTime + 1000) {
             return;
         }
         try {
-            this.mLastHeartbeatSendTime = elapsedRealtime;
+            this.mLastHeartbeatSendTime = jElapsedRealtime;
             ISyncContext iSyncContext = this.mSyncContext;
             if (iSyncContext != null) {
                 iSyncContext.sendHeartbeat();

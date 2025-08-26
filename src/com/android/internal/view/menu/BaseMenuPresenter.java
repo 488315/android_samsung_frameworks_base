@@ -1,6 +1,7 @@
 package com.android.internal.view.menu;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,7 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
         ((ViewGroup) this.mMenuView).addView(view, i);
     }
 
-    protected boolean filterLeftoverView(ViewGroup viewGroup, int i) {
+    protected boolean filterLeftoverView(ViewGroup viewGroup, int i) throws Resources.NotFoundException {
         viewGroup.removeViewAt(i);
         return true;
     }
@@ -134,14 +135,14 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
 
     /* JADX WARN: Multi-variable type inference failed */
     public View getItemView(MenuItemImpl menuItemImpl, View view, ViewGroup viewGroup) {
-        MenuView.ItemView itemView;
+        MenuView.ItemView itemViewCreateItemView;
         if (view instanceof MenuView.ItemView) {
-            itemView = (MenuView.ItemView) view;
+            itemViewCreateItemView = (MenuView.ItemView) view;
         } else {
-            itemView = createItemView(viewGroup);
+            itemViewCreateItemView = createItemView(viewGroup);
         }
-        bindItemView(menuItemImpl, itemView);
-        return (View) itemView;
+        bindItemView(menuItemImpl, itemViewCreateItemView);
+        return (View) itemViewCreateItemView;
     }
 
     @Override // com.android.internal.view.menu.MenuPresenter

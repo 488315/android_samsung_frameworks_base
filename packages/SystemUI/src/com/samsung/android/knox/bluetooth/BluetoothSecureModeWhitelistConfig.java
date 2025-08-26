@@ -3,7 +3,6 @@ package com.samsung.android.knox.bluetooth;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BluetoothSecureModeWhitelistConfig implements Parcelable {
     public static final Parcelable.Creator<BluetoothSecureModeWhitelistConfig> CREATOR = new Parcelable.Creator<BluetoothSecureModeWhitelistConfig>() { // from class: com.samsung.android.knox.bluetooth.BluetoothSecureModeWhitelistConfig.1
@@ -38,12 +37,12 @@ public class BluetoothSecureModeWhitelistConfig implements Parcelable {
         }
         this.name = parcel.readString();
         this.cod = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt <= 0) {
+        int i = parcel.readInt();
+        if (i <= 0) {
             this.uuids = null;
             return;
         }
-        String[] strArr = new String[readInt];
+        String[] strArr = new String[i];
         this.uuids = strArr;
         parcel.readStringArray(strArr);
     }

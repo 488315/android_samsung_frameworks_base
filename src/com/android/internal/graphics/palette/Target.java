@@ -124,13 +124,13 @@ public final class Target {
         }
 
         public Builder setContrastRatio(float f, float f2) {
-            float darkerY;
+            float fDarkerY;
             if (Contrast.yToLstar(f2) < 50.0f) {
-                darkerY = Contrast.lighterY(f2, f);
+                fDarkerY = Contrast.lighterY(f2, f);
             } else {
-                darkerY = Contrast.darkerY(f2, f);
+                fDarkerY = Contrast.darkerY(f2, f);
             }
-            this.mTarget.mTargetRelativeLuminance = darkerY;
+            this.mTarget.mTargetRelativeLuminance = fDarkerY;
             return this;
         }
 

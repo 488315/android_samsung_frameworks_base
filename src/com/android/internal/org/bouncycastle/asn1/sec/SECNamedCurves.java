@@ -26,9 +26,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("00F50B028E4D696E676875615175290472783FB1");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("00F50B028E4D696E676875615175290472783FB1");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0409487239995A5EE76B55F9C2F098A89CE5AF8724C0A23E0E0FF77500"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0409487239995A5EE76B55F9C2F098A89CE5AF8724C0A23E0E0FF77500"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp112r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.2
@@ -39,9 +39,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("002757A1114D696E6768756151755316C05E0BD4");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("002757A1114D696E6768756151755316C05E0BD4");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "044BA30AB5E892B4E1649DD0928643ADCD46F5882E3747DEF36E956E97"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "044BA30AB5E892B4E1649DD0928643ADCD46F5882E3747DEF36E956E97"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp128r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.3
@@ -52,9 +52,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("000E0D4D696E6768756151750CC03A4473D03679");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("000E0D4D696E6768756151750CC03A4473D03679");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04161FF7528B899B2D0C28607CA52C5B86CF5AC8395BAFEB13C02DA292DDED7A83"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04161FF7528B899B2D0C28607CA52C5B86CF5AC8395BAFEB13C02DA292DDED7A83"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp128r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.4
@@ -65,9 +65,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("004D696E67687561517512D8F03431FCE63B88F4");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("004D696E67687561517512D8F03431FCE63B88F4");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "047B6AA5D85E572983E6FB32A7CDEBC14027B6916A894D3AEE7106FE805FC34B44"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "047B6AA5D85E572983E6FB32A7CDEBC14027B6916A894D3AEE7106FE805FC34B44"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp160k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.5
@@ -90,9 +90,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("1053CDE42C14D696E67687561517533BF3F83345");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("1053CDE42C14D696E67687561517533BF3F83345");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "044A96B5688EF573284664698968C38BB913CBFC8223A628553168947D59DCC912042351377AC5FB32"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "044A96B5688EF573284664698968C38BB913CBFC8223A628553168947D59DCC912042351377AC5FB32"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp160r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.7
@@ -103,9 +103,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("B99B99B099B323E02709A4D696E6768756151751");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("B99B99B099B323E02709A4D696E6768756151751");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0452DCB034293A117E1F4FF11B30F7199D3144CE6DFEAFFEF2E331F296E071FA0DF9982CFEA7D43F2E"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0452DCB034293A117E1F4FF11B30F7199D3144CE6DFEAFFEF2E331F296E071FA0DF9982CFEA7D43F2E"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp192k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.8
@@ -128,9 +128,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("3045AE6FC8422F64ED579528D38120EAE12196D5");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("3045AE6FC8422F64ED579528D38120EAE12196D5");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF101207192B95FFC8DA78631011ED6B24CDD573F977A11E794811"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF101207192B95FFC8DA78631011ED6B24CDD573F977A11E794811"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp224k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.10
@@ -153,9 +153,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04B70E0CBD6BB4BF7F321390B94A03C1D356C21122343280D6115C1D21BD376388B5F723FB4C22DFE6CD4375A05A07476444D5819985007E34"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04B70E0CBD6BB4BF7F321390B94A03C1D356C21122343280D6115C1D21BD376388B5F723FB4C22DFE6CD4375A05A07476444D5819985007E34"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp256k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.12
@@ -178,9 +178,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("C49D360886E704936A6678E1139D26B7819F7E90");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("C49D360886E704936A6678E1139D26B7819F7E90");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "046B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C2964FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "046B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C2964FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp384r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.14
@@ -191,9 +191,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("A335926AA319A27A1D00896A6773A4827ACDAC73");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("A335926AA319A27A1D00896A6773A4827ACDAC73");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB73617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB73617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder secp521r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.15
@@ -204,9 +204,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("D09E8800291CB85396CC6717393284AAA0DA64BA");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("D09E8800291CB85396CC6717393284AAA0DA64BA");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect113r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.16
@@ -217,9 +217,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("10E723AB14D696E6768756151756FEBF8FCB49A9");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("10E723AB14D696E6768756151756FEBF8FCB49A9");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04009D73616F35F4AB1407D73562C10F00A52830277958EE84D1315ED31886"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04009D73616F35F4AB1407D73562C10F00A52830277958EE84D1315ED31886"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect113r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.17
@@ -230,9 +230,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("10C0FB15760860DEF1EEF4D696E676875615175D");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("10C0FB15760860DEF1EEF4D696E676875615175D");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0401A57A6A7B26CA5EF52FCDB816479700B3ADC94ED1FE674C06E695BABA1D"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0401A57A6A7B26CA5EF52FCDB816479700B3ADC94ED1FE674C06E695BABA1D"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect131r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.18
@@ -243,9 +243,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("4D696E676875615175985BD3ADBADA21B43A97E2");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("4D696E676875615175985BD3ADBADA21B43A97E2");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040081BAF91FDF9833C40F9C181343638399078C6E7EA38C001F73C8134B1B4EF9E150"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040081BAF91FDF9833C40F9C181343638399078C6E7EA38C001F73C8134B1B4EF9E150"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect131r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.19
@@ -256,9 +256,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("985BD3ADBAD4D696E676875615175A21B43A97E3");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("985BD3ADBAD4D696E676875615175A21B43A97E3");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040356DCD8F2F95031AD652D23951BB366A80648F06D867940A5366D9E265DE9EB240F"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040356DCD8F2F95031AD652D23951BB366A80648F06D867940A5366D9E265DE9EB240F"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect163k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.20
@@ -281,9 +281,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("24B7B137C8A14D696E6768756151756FD0DA2E5C");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("24B7B137C8A14D696E6768756151756FD0DA2E5C");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040369979697AB43897789566789567F787A7876A65400435EDB42EFAFB2989D51FEFCE3C80988F41FF883"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040369979697AB43897789566789567F787A7876A65400435EDB42EFAFB2989D51FEFCE3C80988F41FF883"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect163r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.22
@@ -294,9 +294,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("85E25BFE5C86226CDB12016F7553F9D0E693A268");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("85E25BFE5C86226CDB12016F7553F9D0E693A268");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0403F0EBA16286A2D57EA0991168D4994637E8343E3600D51FBC6C71A0094FA2CDD545B11C5C0C797324F1"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0403F0EBA16286A2D57EA0991168D4994637E8343E3600D51FBC6C71A0094FA2CDD545B11C5C0C797324F1"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect193r1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.23
@@ -307,9 +307,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("103FAEC74D696E676875615175777FC5B191EF30");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("103FAEC74D696E676875615175777FC5B191EF30");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0401F481BC5F0FF84A74AD6CDF6FDEF4BF6179625372D8C0C5E10025E399F2903712CCF3EA9E3A1AD17FB0B3201B6AF7CE1B05"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0401F481BC5F0FF84A74AD6CDF6FDEF4BF6179625372D8C0C5E10025E399F2903712CCF3EA9E3A1AD17FB0B3201B6AF7CE1B05"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect193r2 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.24
@@ -320,9 +320,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("10B7B4D696E676875615175137C8A16FD0DA2211");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("10B7B4D696E676875615175137C8A16FD0DA2211");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400D9B67D192E0367C803F39E1A7E82CA14A651350AAE617E8F01CE94335607C304AC29E7DEFBD9CA01F596F927224CDECF6C"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400D9B67D192E0367C803F39E1A7E82CA14A651350AAE617E8F01CE94335607C304AC29E7DEFBD9CA01F596F927224CDECF6C"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect233k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.25
@@ -345,9 +345,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("74D59FF07F6B413D0EA14B344B20A2DB049B50C3");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("74D59FF07F6B413D0EA14B344B20A2DB049B50C3");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400FAC9DFCBAC8313BB2139F1BB755FEF65BC391F8B36F8F8EB7371FD558B01006A08A41903350678E58528BEBF8A0BEFF867A7CA36716F7E01F81052"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0400FAC9DFCBAC8313BB2139F1BB755FEF65BC391F8B36F8F8EB7371FD558B01006A08A41903350678E58528BEBF8A0BEFF867A7CA36716F7E01F81052"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect239k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.27
@@ -382,9 +382,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0405F939258DB7DD90E1934F8C70B0DFEC2EED25B8557EAC9C80E2E198F8CDBECD86B1205303676854FE24141CB98FE6D4B20D02B4516FF702350EDDB0826779C813F0DF45BE8112F4"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "0405F939258DB7DD90E1934F8C70B0DFEC2EED25B8557EAC9C80E2E198F8CDBECD86B1205303676854FE24141CB98FE6D4B20D02B4516FF702350EDDB0826779C813F0DF45BE8112F4"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect409k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.30
@@ -407,9 +407,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("4099B5A457F9D69F79213D094C4BCD4D4262210B");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("4099B5A457F9D69F79213D094C4BCD4D4262210B");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04015D4860D088DDB3496B0C6064756260441CDE4AF1771D4DB01FFE5B34E59703DC255A868A1180515603AEAB60794E54BB7996A70061B1CFAB6BE5F32BBFA78324ED106A7636B9C5A7BD198D0158AA4F5488D08F38514F1FDF4B4F40D2181B3681C364BA0273C706"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "04015D4860D088DDB3496B0C6064756260441CDE4AF1771D4DB01FFE5B34E59703DC255A868A1180515603AEAB60794E54BB7996A70061B1CFAB6BE5F32BBFA78324ED106A7636B9C5A7BD198D0158AA4F5488D08F38514F1FDF4B4F40D2181B3681C364BA0273C706"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static X9ECParametersHolder sect571k1 = new X9ECParametersHolder() { // from class: com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.32
@@ -432,9 +432,9 @@ public class SECNamedCurves {
 
         @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
-            byte[] decodeStrict = Hex.decodeStrict("2AA058F73A0E33AB486B0F610410C53A7F132310");
+            byte[] bArrDecodeStrict = Hex.decodeStrict("2AA058F73A0E33AB486B0F610410C53A7F132310");
             ECCurve curve = getCurve();
-            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040303001D34B856296C16C0D40D3CD7750A93D1D2955FA80AA5F40FC8DB7B2ABDBDE53950F4C0D293CDD711A35B67FB1499AE60038614F1394ABFA3B4C850D927E1E7769C8EEC2D19037BF27342DA639B6DCCFFFEB73D69D78C6C27A6009CBBCA1980F8533921E8A684423E43BAB08A576291AF8F461BB2A8B3531D2F0485C19B16E2F1516E23DD3C1A4827AF1B8AC15B"), curve.getOrder(), curve.getCofactor(), decodeStrict);
+            return new X9ECParameters(curve, SECNamedCurves.configureBasepoint(curve, "040303001D34B856296C16C0D40D3CD7750A93D1D2955FA80AA5F40FC8DB7B2ABDBDE53950F4C0D293CDD711A35B67FB1499AE60038614F1394ABFA3B4C850D927E1E7769C8EEC2D19037BF27342DA639B6DCCFFFEB73D69D78C6C27A6009CBBCA1980F8533921E8A684423E43BAB08A576291AF8F461BB2A8B3531D2F0485C19B16E2F1516E23DD3C1A4827AF1B8AC15B"), curve.getOrder(), curve.getCofactor(), bArrDecodeStrict);
         }
     };
     static final Hashtable objIds = new Hashtable();

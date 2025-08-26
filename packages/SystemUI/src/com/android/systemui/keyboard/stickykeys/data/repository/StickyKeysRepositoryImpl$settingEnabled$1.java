@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class StickyKeysRepositoryImpl$settingEnabled$1 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -53,9 +52,9 @@ final class StickyKeysRepositoryImpl$settingEnabled$1 extends SuspendLambda impl
         LogLevel logLevel = LogLevel.INFO;
         StickyKeysLogger$$ExternalSyntheticLambda0 stickyKeysLogger$$ExternalSyntheticLambda0 = new StickyKeysLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = stickyKeysLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("stickyKeys", logLevel, stickyKeysLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("stickyKeys", logLevel, stickyKeysLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

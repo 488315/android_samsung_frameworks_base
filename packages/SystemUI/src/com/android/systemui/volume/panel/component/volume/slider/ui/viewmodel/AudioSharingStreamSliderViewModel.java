@@ -36,7 +36,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioSharingStreamSliderViewModel implements SliderViewModel {
     public final Icon.Loaded audioSharingIcon;
@@ -48,7 +47,6 @@ public final class AudioSharingStreamSliderViewModel implements SliderViewModel 
     public final StateFlowImpl volumeChanges;
     public final VolumePanelLogger volumePanelLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.AudioSharingStreamSliderViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ int I$0;
@@ -83,20 +81,18 @@ public final class AudioSharingStreamSliderViewModel implements SliderViewModel 
             LogLevel logLevel = LogLevel.DEBUG;
             VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = volumePanelLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             AudioSharingStreamSliderViewModel.this.audioSharingInteractor.setStreamVolume(i);
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         AudioSharingStreamSliderViewModel create(CoroutineScope coroutineScope);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State implements SliderState {
         public final Icon.Loaded icon;
         public final String label;
@@ -167,9 +163,9 @@ public final class AudioSharingStreamSliderViewModel implements SliderViewModel 
         }
 
         public final int hashCode() {
-            int hashCode = (this.valueRange.hashCode() + (Float.hashCode(this.value) * 31)) * 31;
+            int iHashCode = (this.valueRange.hashCode() + (Float.hashCode(this.value) * 31)) * 31;
             Icon.Loaded loaded = this.icon;
-            return this.label.hashCode() + ((hashCode + (loaded == null ? 0 : loaded.hashCode())) * 31);
+            return this.label.hashCode() + ((iHashCode + (loaded == null ? 0 : loaded.hashCode())) * 31);
         }
 
         @Override // com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderState
@@ -193,15 +189,15 @@ public final class AudioSharingStreamSliderViewModel implements SliderViewModel 
         this.uiEventLogger = uiEventLogger;
         this.hapticsViewModelFactory = factory;
         this.volumePanelLogger = volumePanelLogger;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.volumeChanges = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.volumeChanges = stateFlowImplMutableStateFlow;
         Drawable drawable = context.getDrawable(R.drawable.ic_volume_media_bt);
         drawable.getClass();
         this.audioSharingIcon = new Icon.Loaded(drawable, null, Integer.valueOf(R.drawable.ic_volume_media_bt));
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(audioSharingInteractor.getVolume()), new AudioSharingStreamSliderViewModel$slider$1(this, null)), audioSharingInteractor.getSecondaryDevice(), new AudioSharingStreamSliderViewModel$slider$2(this, null));
         SharingStarted.Companion.getClass();
         this.slider = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, SharingStarted.Companion.Eagerly, SliderState.Empty.INSTANCE);
-        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow), new AnonymousClass1(null)), coroutineScope);
+        FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow), new AnonymousClass1(null)), coroutineScope);
     }
 
     @Override // com.android.systemui.volume.panel.component.volume.slider.ui.viewmodel.SliderViewModel

@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.Color;
 import androidx.compose.ui.layout.LayoutIdKt;
 import androidx.compose.ui.layout.LayoutModifierKt;
 import androidx.compose.ui.layout.Measurable;
-import androidx.compose.ui.layout.MeasureResult;
 import androidx.compose.ui.layout.MeasureScope;
 import androidx.compose.ui.layout.Placeable;
 import androidx.compose.ui.node.ComposeUiNode;
@@ -48,7 +47,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class VolumeSliderContentKt {
     public static final void VolumeSliderContent(final String str, final boolean z, final String str2, final Modifier modifier, Composer composer, final int i) {
@@ -66,65 +64,63 @@ public abstract class VolumeSliderContentKt {
                 ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.animateContentHeight (VolumeSliderContent.kt:141)");
             }
             composerImpl.startReplaceGroup(-518649456);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(null);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(null);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            final MutableState mutableState = (MutableState) rememberedValue;
+            final MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl.end(false);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl);
-                composerImpl.updateRememberedValue(rememberedValue2);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl);
+                composerImpl.updateRememberedValue(objRememberedValue2);
             }
-            final CoroutineScope coroutineScope = (CoroutineScope) rememberedValue2;
+            final CoroutineScope coroutineScope = (CoroutineScope) objRememberedValue2;
             composerImpl.startReplaceGroup(-518644557);
-            boolean changedInstance = composerImpl.changedInstance(coroutineScope);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue3 == composer$Companion$Empty$1) {
-                rememberedValue3 = new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda1
+            boolean zChangedInstance = composerImpl.changedInstance(coroutineScope);
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue3 == composer$Companion$Empty$1) {
+                objRememberedValue3 = new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj, Object obj2, Object obj3) {
-                        MeasureResult layout$1;
                         MeasureScope measureScope = (MeasureScope) obj;
-                        final Placeable mo608measureBRTryo0 = ((Measurable) obj2).mo608measureBRTryo0(((Constraints) obj3).value);
+                        final Placeable placeableMo610measureBRTryo0 = ((Measurable) obj2).mo610measureBRTryo0(((Constraints) obj3).value);
                         MutableState mutableState2 = mutableState;
                         Animatable animatable = (Animatable) mutableState2.getValue();
                         if (animatable == null) {
-                            Integer valueOf = Integer.valueOf(mo608measureBRTryo0.height);
+                            Integer numValueOf = Integer.valueOf(placeableMo610measureBRTryo0.height);
                             int i3 = IntCompanionObject.$r8$clinit;
-                            Animatable animatable2 = new Animatable(valueOf, VectorConvertersKt.IntToVector, null, null, 12, null);
+                            Animatable animatable2 = new Animatable(numValueOf, VectorConvertersKt.IntToVector, null, null, 12, null);
                             mutableState2.setValue(animatable2);
                             animatable = animatable2;
                         } else {
-                            BuildersKt.launch$default(CoroutineScope.this, null, null, new VolumeSliderContentKt$animateContentHeight$1$1$anim$2(animatable, mo608measureBRTryo0, null), 3);
+                            BuildersKt.launch$default(coroutineScope, null, null, new VolumeSliderContentKt$animateContentHeight$1$1$anim$2(animatable, placeableMo610measureBRTryo0, null), 3);
                         }
-                        layout$1 = measureScope.layout$1(mo608measureBRTryo0.width, ((Number) animatable.internalState.getValue()).intValue(), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda2
+                        return measureScope.layout$1(placeableMo610measureBRTryo0.width, ((Number) animatable.internalState.getValue()).intValue(), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj4) {
-                                ((Placeable.PlacementScope) obj4).place(Placeable.this, 0, 0, 0.0f);
+                            public final Object mo781invoke(Object obj4) {
+                                ((Placeable.PlacementScope) obj4).place(placeableMo610measureBRTryo0, 0, 0, 0.0f);
                                 return Unit.INSTANCE;
                             }
                         });
-                        return layout$1;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue3);
+                composerImpl.updateRememberedValue(objRememberedValue3);
             }
             composerImpl.end(false);
-            Modifier layout = LayoutModifierKt.layout(modifier, (Function3) rememberedValue3);
+            Modifier modifierLayout = LayoutModifierKt.layout(modifier, (Function3) objRememberedValue3);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
             composerImpl.end(false);
             VolumeSliderContentMeasurePolicy volumeSliderContentMeasurePolicy = new VolumeSliderContentMeasurePolicy(z);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, layout);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierLayout);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -137,24 +133,24 @@ public abstract class VolumeSliderContentKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, volumeSliderContentMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, volumeSliderContentMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             Modifier.Companion companion = Modifier.Companion;
-            Modifier m27basicMarquee1Mj1MLw$default = BasicMarqueeKt.m27basicMarquee1Mj1MLw$default(LayoutIdKt.layoutId(companion, VolumeSliderContentComponent.Label), 0, 63);
+            Modifier modifierM27basicMarquee1Mj1MLw$default = BasicMarqueeKt.m27basicMarquee1Mj1MLw$default(LayoutIdKt.layoutId(companion, VolumeSliderContentComponent.Label), 0, 63);
             MaterialTheme.INSTANCE.getClass();
-            TextKt.m316Text4IGK_g(str, m27basicMarquee1Mj1MLw$default, ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value, 0L, null, null, null, 0L, null, null, 0L, 0, false, 1, 0, null, MaterialTheme.getTypography(composerImpl).titleMedium, composerImpl, (i2 & 14) | 48, 3072, 57336);
+            TextKt.m317Text4IGK_g(str, modifierM27basicMarquee1Mj1MLw$default, ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value, 0L, null, null, null, 0L, null, null, 0L, 0, false, 1, 0, null, MaterialTheme.getTypography(composerImpl).titleMedium, composerImpl, (i2 & 14) | 48, 3072, 57336);
             composerImpl = composerImpl;
             composerImpl.startReplaceGroup(-814747478);
             if (str2 != null) {
-                Modifier layoutId = LayoutIdKt.layoutId(companion, VolumeSliderContentComponent.DisabledMessage);
+                Modifier modifierLayoutId = LayoutIdKt.layoutId(companion, VolumeSliderContentComponent.DisabledMessage);
                 Alignment.Companion.getClass();
                 BiasAlignment.Vertical vertical = Alignment.Companion.Top;
-                AnimatedVisibilityKt.AnimatedVisibility(!z, layoutId, EnterExitTransitionKt.expandVertically$default(null, vertical, null, 13).plus(EnterExitTransitionKt.fadeIn$default(null, 3)), EnterExitTransitionKt.shrinkVertically$default(null, vertical, null, 13).plus(EnterExitTransitionKt.fadeOut$default(null, 3)), null, ComposableLambdaKt.rememberComposableLambda(1284708907, new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$VolumeSliderContent$1$1$1
+                AnimatedVisibilityKt.AnimatedVisibility(!z, modifierLayoutId, EnterExitTransitionKt.expandVertically$default(null, vertical, null, 13).plus(EnterExitTransitionKt.fadeIn$default(null, 3)), EnterExitTransitionKt.shrinkVertically$default(null, vertical, null, 13).plus(EnterExitTransitionKt.fadeOut$default(null, 3)), null, ComposableLambdaKt.rememberComposableLambda(1284708907, new Function3() { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$VolumeSliderContent$1$1$1
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj, Object obj2, Object obj3) {
                         Composer composer2 = (Composer) obj2;
@@ -162,11 +158,11 @@ public abstract class VolumeSliderContentKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContent.<anonymous>.<anonymous>.<anonymous> (VolumeSliderContent.kt:81)");
                         }
-                        Modifier m27basicMarquee1Mj1MLw$default2 = BasicMarqueeKt.m27basicMarquee1Mj1MLw$default(Modifier.Companion, 0, 63);
+                        Modifier modifierM27basicMarquee1Mj1MLw$default2 = BasicMarqueeKt.m27basicMarquee1Mj1MLw$default(Modifier.Companion, 0, 63);
                         MaterialTheme.INSTANCE.getClass();
                         TextStyle textStyle = MaterialTheme.getTypography(composer2).bodySmall;
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                        TextKt.m316Text4IGK_g(str2, m27basicMarquee1Mj1MLw$default2, ((Color) composerImpl2.consume(ContentColorKt.LocalContentColor)).value, 0L, null, null, null, 0L, null, null, 0L, 0, false, 1, 0, null, textStyle, composerImpl2, 48, 3072, 57336);
+                        TextKt.m317Text4IGK_g(str2, modifierM27basicMarquee1Mj1MLw$default2, ((Color) composerImpl2.consume(ContentColorKt.LocalContentColor)).value, 0L, null, null, null, 0L, null, null, 0L, 0, false, 1, 0, null, textStyle, composerImpl2, 48, 3072, 57336);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -178,9 +174,9 @@ public abstract class VolumeSliderContentKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(str, z, str2, modifier, i) { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(str, z, str2, modifier, i) { // from class: com.android.systemui.volume.panel.component.volume.ui.composable.VolumeSliderContentKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ String f$0;
                 public final /* synthetic */ boolean f$1;
                 public final /* synthetic */ String f$2;
@@ -189,10 +185,10 @@ public abstract class VolumeSliderContentKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(3073);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(3073);
                     String str3 = this.f$2;
                     Modifier modifier2 = this.f$3;
-                    VolumeSliderContentKt.VolumeSliderContent(this.f$0, this.f$1, str3, modifier2, (Composer) obj, updateChangedFlags);
+                    VolumeSliderContentKt.VolumeSliderContent(this.f$0, this.f$1, str3, modifier2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

@@ -86,23 +86,23 @@ final class RemoteConnectionService {
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
             public void handleCreateConnectionComplete(String str, ConnectionRequest connectionRequest, ParcelableConnection parcelableConnection, Session.Info info) {
-                RemoteConnection findConnectionForAction = RemoteConnectionService.this.findConnectionForAction(str, "handleCreateConnectionSuccessful");
-                if (findConnectionForAction == RemoteConnectionService.NULL_CONNECTION || !RemoteConnectionService.this.mPendingConnections.contains(findConnectionForAction)) {
+                RemoteConnection remoteConnectionFindConnectionForAction = RemoteConnectionService.this.findConnectionForAction(str, "handleCreateConnectionSuccessful");
+                if (remoteConnectionFindConnectionForAction == RemoteConnectionService.NULL_CONNECTION || !RemoteConnectionService.this.mPendingConnections.contains(remoteConnectionFindConnectionForAction)) {
                     return;
                 }
-                RemoteConnectionService.this.mPendingConnections.remove(findConnectionForAction);
-                findConnectionForAction.setConnectionCapabilities(parcelableConnection.getConnectionCapabilities());
-                findConnectionForAction.setConnectionProperties(parcelableConnection.getConnectionProperties());
+                RemoteConnectionService.this.mPendingConnections.remove(remoteConnectionFindConnectionForAction);
+                remoteConnectionFindConnectionForAction.setConnectionCapabilities(parcelableConnection.getConnectionCapabilities());
+                remoteConnectionFindConnectionForAction.setConnectionProperties(parcelableConnection.getConnectionProperties());
                 if (parcelableConnection.getHandle() != null || parcelableConnection.getState() != 6) {
-                    findConnectionForAction.setAddress(parcelableConnection.getHandle(), parcelableConnection.getHandlePresentation());
+                    remoteConnectionFindConnectionForAction.setAddress(parcelableConnection.getHandle(), parcelableConnection.getHandlePresentation());
                 }
                 if (parcelableConnection.getCallerDisplayName() != null || parcelableConnection.getState() != 6) {
-                    findConnectionForAction.setCallerDisplayName(parcelableConnection.getCallerDisplayName(), parcelableConnection.getCallerDisplayNamePresentation());
+                    remoteConnectionFindConnectionForAction.setCallerDisplayName(parcelableConnection.getCallerDisplayName(), parcelableConnection.getCallerDisplayNamePresentation());
                 }
                 if (parcelableConnection.getState() == 6) {
-                    findConnectionForAction.setDisconnected(parcelableConnection.getDisconnectCause());
+                    remoteConnectionFindConnectionForAction.setDisconnected(parcelableConnection.getDisconnectCause());
                 } else {
-                    findConnectionForAction.setState(parcelableConnection.getState());
+                    remoteConnectionFindConnectionForAction.setState(parcelableConnection.getState());
                 }
                 ArrayList arrayList = new ArrayList();
                 for (String str2 : parcelableConnection.getConferenceableConnectionIds()) {
@@ -110,15 +110,15 @@ final class RemoteConnectionService {
                         arrayList.add((RemoteConnection) RemoteConnectionService.this.mConnectionById.get(str2));
                     }
                 }
-                findConnectionForAction.setConferenceableConnections(arrayList);
-                findConnectionForAction.setVideoState(parcelableConnection.getVideoState());
-                if (findConnectionForAction.getState() == 6) {
-                    findConnectionForAction.setDestroyed();
+                remoteConnectionFindConnectionForAction.setConferenceableConnections(arrayList);
+                remoteConnectionFindConnectionForAction.setVideoState(parcelableConnection.getVideoState());
+                if (remoteConnectionFindConnectionForAction.getState() == 6) {
+                    remoteConnectionFindConnectionForAction.setDestroyed();
                 }
-                findConnectionForAction.setStatusHints(parcelableConnection.getStatusHints());
-                findConnectionForAction.setIsVoipAudioMode(parcelableConnection.getIsVoipAudioMode());
-                findConnectionForAction.setRingbackRequested(parcelableConnection.isRingbackRequested());
-                findConnectionForAction.putExtras(parcelableConnection.getExtras());
+                remoteConnectionFindConnectionForAction.setStatusHints(parcelableConnection.getStatusHints());
+                remoteConnectionFindConnectionForAction.setIsVoipAudioMode(parcelableConnection.getIsVoipAudioMode());
+                remoteConnectionFindConnectionForAction.setRingbackRequested(parcelableConnection.isRingbackRequested());
+                remoteConnectionFindConnectionForAction.putExtras(parcelableConnection.getExtras());
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -188,16 +188,16 @@ final class RemoteConnectionService {
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
             public void setIsConferenced(String str, String str2, Session.Info info) {
-                RemoteConnection findConnectionForAction = RemoteConnectionService.this.findConnectionForAction(str, "setIsConferenced");
-                if (findConnectionForAction != RemoteConnectionService.NULL_CONNECTION) {
+                RemoteConnection remoteConnectionFindConnectionForAction = RemoteConnectionService.this.findConnectionForAction(str, "setIsConferenced");
+                if (remoteConnectionFindConnectionForAction != RemoteConnectionService.NULL_CONNECTION) {
                     if (str2 == null) {
-                        if (findConnectionForAction.getConference() != null) {
-                            findConnectionForAction.getConference().removeConnection(findConnectionForAction);
+                        if (remoteConnectionFindConnectionForAction.getConference() != null) {
+                            remoteConnectionFindConnectionForAction.getConference().removeConnection(remoteConnectionFindConnectionForAction);
                         }
                     } else {
-                        RemoteConference findConferenceForAction = RemoteConnectionService.this.findConferenceForAction(str2, "setIsConferenced");
-                        if (findConferenceForAction != RemoteConnectionService.NULL_CONFERENCE) {
-                            findConferenceForAction.addConnection(findConnectionForAction);
+                        RemoteConference remoteConferenceFindConferenceForAction = RemoteConnectionService.this.findConferenceForAction(str2, "setIsConferenced");
+                        if (remoteConferenceFindConferenceForAction != RemoteConnectionService.NULL_CONFERENCE) {
+                            remoteConferenceFindConferenceForAction.addConnection(remoteConnectionFindConnectionForAction);
                         }
                     }
                 }
@@ -424,25 +424,25 @@ final class RemoteConnectionService {
     }
 
     final RemoteConnection createRemoteConnection(PhoneAccountHandle phoneAccountHandle, ConnectionRequest connectionRequest, boolean z) {
-        final String uuid = UUID.randomUUID().toString();
+        final String string = UUID.randomUUID().toString();
         Bundle bundle = new Bundle();
         if (connectionRequest.getExtras() != null) {
             bundle.putAll(connectionRequest.getExtras());
         }
         bundle.putString(Connection.EXTRA_REMOTE_CONNECTION_ORIGINATING_PACKAGE_NAME, this.mOurConnectionServiceImpl.getApplicationContext().getOpPackageName());
-        ConnectionRequest build = new ConnectionRequest.Builder().setAccountHandle(connectionRequest.getAccountHandle()).setAddress(connectionRequest.getAddress()).setExtras(bundle).setVideoState(connectionRequest.getVideoState()).setRttPipeFromInCall(connectionRequest.getRttPipeFromInCall()).setRttPipeToInCall(connectionRequest.getRttPipeToInCall()).setTelecomCallId(connectionRequest.getTelecomCallId()).setShouldShowIncomingCallUi(this.mTelecomFeatureFlags.setRemoteConnectionCallId() ? connectionRequest.shouldShowIncomingCallUi() : false).build();
+        ConnectionRequest connectionRequestBuild = new ConnectionRequest.Builder().setAccountHandle(connectionRequest.getAccountHandle()).setAddress(connectionRequest.getAddress()).setExtras(bundle).setVideoState(connectionRequest.getVideoState()).setRttPipeFromInCall(connectionRequest.getRttPipeFromInCall()).setRttPipeToInCall(connectionRequest.getRttPipeToInCall()).setTelecomCallId(connectionRequest.getTelecomCallId()).setShouldShowIncomingCallUi(this.mTelecomFeatureFlags.setRemoteConnectionCallId() ? connectionRequest.shouldShowIncomingCallUi() : false).build();
         try {
             if (this.mConnectionById.isEmpty()) {
                 this.mOutgoingConnectionServiceRpc.addConnectionServiceAdapter(this.mServant.getStub(), null);
             }
-            RemoteConnection remoteConnection = new RemoteConnection(uuid, this.mOutgoingConnectionServiceRpc, build);
+            RemoteConnection remoteConnection = new RemoteConnection(string, this.mOutgoingConnectionServiceRpc, connectionRequestBuild);
             this.mPendingConnections.add(remoteConnection);
-            this.mConnectionById.put(uuid, remoteConnection);
-            this.mOutgoingConnectionServiceRpc.createConnection(phoneAccountHandle, uuid, build, z, false, null);
+            this.mConnectionById.put(string, remoteConnection);
+            this.mOutgoingConnectionServiceRpc.createConnection(phoneAccountHandle, string, connectionRequestBuild, z, false, null);
             remoteConnection.registerCallback(new RemoteConnection.Callback() { // from class: android.telecom.RemoteConnectionService.3
                 @Override // android.telecom.RemoteConnection.Callback
                 public void onDestroyed(RemoteConnection remoteConnection2) {
-                    RemoteConnectionService.this.mConnectionById.remove(uuid);
+                    RemoteConnectionService.this.mConnectionById.remove(string);
                     RemoteConnectionService.this.maybeDisconnectAdapter();
                 }
             });
@@ -453,22 +453,22 @@ final class RemoteConnectionService {
     }
 
     RemoteConference createRemoteConference(PhoneAccountHandle phoneAccountHandle, ConnectionRequest connectionRequest, boolean z) {
-        final String uuid = UUID.randomUUID().toString();
+        final String string = UUID.randomUUID().toString();
         try {
             if (this.mConferenceById.isEmpty()) {
                 this.mOutgoingConnectionServiceRpc.addConnectionServiceAdapter(this.mServant.getStub(), null);
             }
-            ConnectionRequest build = new ConnectionRequest.Builder().setAccountHandle(connectionRequest.getAccountHandle()).setAddress(connectionRequest.getAddress()).setExtras(connectionRequest.getExtras()).setVideoState(connectionRequest.getVideoState()).setShouldShowIncomingCallUi(connectionRequest.shouldShowIncomingCallUi()).setRttPipeFromInCall(connectionRequest.getRttPipeFromInCall()).setRttPipeToInCall(connectionRequest.getRttPipeToInCall()).setParticipants(connectionRequest.getParticipants()).setIsAdhocConferenceCall(connectionRequest.isAdhocConferenceCall()).setTelecomCallId(this.mTelecomFeatureFlags.setRemoteConnectionCallId() ? uuid : connectionRequest.getTelecomCallId()).build();
-            RemoteConference remoteConference = new RemoteConference(uuid, this.mOutgoingConnectionServiceRpc);
-            this.mOutgoingConnectionServiceRpc.createConference(phoneAccountHandle, uuid, build, z, false, null);
+            ConnectionRequest connectionRequestBuild = new ConnectionRequest.Builder().setAccountHandle(connectionRequest.getAccountHandle()).setAddress(connectionRequest.getAddress()).setExtras(connectionRequest.getExtras()).setVideoState(connectionRequest.getVideoState()).setShouldShowIncomingCallUi(connectionRequest.shouldShowIncomingCallUi()).setRttPipeFromInCall(connectionRequest.getRttPipeFromInCall()).setRttPipeToInCall(connectionRequest.getRttPipeToInCall()).setParticipants(connectionRequest.getParticipants()).setIsAdhocConferenceCall(connectionRequest.isAdhocConferenceCall()).setTelecomCallId(this.mTelecomFeatureFlags.setRemoteConnectionCallId() ? string : connectionRequest.getTelecomCallId()).build();
+            RemoteConference remoteConference = new RemoteConference(string, this.mOutgoingConnectionServiceRpc);
+            this.mOutgoingConnectionServiceRpc.createConference(phoneAccountHandle, string, connectionRequestBuild, z, false, null);
             remoteConference.registerCallback(new RemoteConference.Callback() { // from class: android.telecom.RemoteConnectionService.4
                 @Override // android.telecom.RemoteConference.Callback
                 public void onDestroyed(RemoteConference remoteConference2) {
-                    RemoteConnectionService.this.mConferenceById.remove(uuid);
+                    RemoteConnectionService.this.mConferenceById.remove(string);
                     RemoteConnectionService.this.maybeDisconnectAdapter();
                 }
             });
-            remoteConference.putExtras(build.getExtras());
+            remoteConference.putExtras(connectionRequestBuild.getExtras());
             return remoteConference;
         } catch (RemoteException e) {
             return RemoteConference.failure(new DisconnectCause(1, e.toString()));

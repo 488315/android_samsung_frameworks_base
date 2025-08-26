@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ExifInterfaceUtils {
     private ExifInterfaceUtils() {
@@ -52,11 +51,11 @@ public class ExifInterfaceUtils {
     public static void copy(InputStream inputStream, OutputStream outputStream) {
         byte[] bArr = new byte[8192];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read == -1) {
+            int i = inputStream.read(bArr);
+            if (i == -1) {
                 return;
             } else {
-                outputStream.write(bArr, 0, read);
+                outputStream.write(bArr, 0, i);
             }
         }
     }
@@ -75,11 +74,11 @@ public class ExifInterfaceUtils {
     public static void copy(ExifInterface.ByteOrderedDataInputStream byteOrderedDataInputStream, ExifInterface.ByteOrderedDataOutputStream byteOrderedDataOutputStream, int i) {
         byte[] bArr = new byte[8192];
         while (i > 0) {
-            int min = Math.min(i, 8192);
-            int read = byteOrderedDataInputStream.read(bArr, 0, min);
-            if (read == min) {
-                i -= read;
-                byteOrderedDataOutputStream.write(bArr, 0, read);
+            int iMin = Math.min(i, 8192);
+            int i2 = byteOrderedDataInputStream.read(bArr, 0, iMin);
+            if (i2 == iMin) {
+                i -= i2;
+                byteOrderedDataOutputStream.write(bArr, 0, i2);
             } else {
                 throw new IOException("Failed to copy the given amount of bytes from the inputstream to the output stream.");
             }

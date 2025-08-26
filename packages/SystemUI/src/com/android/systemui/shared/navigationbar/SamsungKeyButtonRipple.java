@@ -15,7 +15,6 @@ import com.android.systemui.navigationbar.BasicRuneWrapper;
 import com.android.systemui.shared.navigationbar.KeyButtonRipple;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SamsungKeyButtonRipple extends KeyButtonRipple {
     public static final Interpolator FADE_IN_INTERPOLATOR;
@@ -23,7 +22,6 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
     public static final Interpolator SCALE_OUT_INTERPOLATOR;
     public boolean isHover;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,12 +51,12 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
             } else {
                 ripplePaint.setAlpha((int) (this.mGlowAlpha * 255.0f));
             }
-            float width = getBounds().width();
-            float height = getBounds().height();
-            boolean z = width > height;
+            float fWidth = getBounds().width();
+            float fHeight = getBounds().height();
+            boolean z = fWidth > fHeight;
             float rippleSize = getRippleSize() * this.mGlowScale * 0.5f;
-            float f = width * 0.5f;
-            float f2 = height * 0.5f;
+            float f = fWidth * 0.5f;
+            float f2 = fHeight * 0.5f;
             float f3 = z ? rippleSize : f;
             if (z) {
                 rippleSize = f2;
@@ -71,9 +69,9 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
             }
             canvas.save();
             canvas.translate(f, f2);
-            float min = (float) Math.min(f3, rippleSize);
-            float f6 = -min;
-            canvas.drawOval(f6, f6, min, min, ripplePaint);
+            float fMin = (float) Math.min(f3, rippleSize);
+            float f6 = -fMin;
+            canvas.drawOval(f6, f6, fMin, fMin, ripplePaint);
             canvas.restore();
         }
     }
@@ -91,11 +89,11 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
         float extendSize = (getExtendSize() / 2) - ((this.GLOW_MAX_SCALE_FACTOR * getRippleSize()) / f);
         float rippleSize = ((this.GLOW_MAX_SCALE_FACTOR * getRippleSize()) / f) + (getExtendSize() / 2);
         float f2 = this.isHover ? 153.0f : 255.0f;
-        CanvasProperty createFloat = CanvasProperty.createFloat(extendSize);
+        CanvasProperty canvasPropertyCreateFloat = CanvasProperty.createFloat(extendSize);
         if (isHorizontal()) {
-            this.mLeftProp = createFloat;
+            this.mLeftProp = canvasPropertyCreateFloat;
         } else {
-            this.mTopProp = createFloat;
+            this.mTopProp = canvasPropertyCreateFloat;
         }
         RenderNodeAnimator renderNodeAnimator = new RenderNodeAnimator(isHorizontal() ? this.mLeftProp : this.mTopProp, extendSize);
         renderNodeAnimator.setDuration(100L);
@@ -105,11 +103,11 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
             renderNodeAnimator.addListener(this.mAnimatorListener);
         }
         renderNodeAnimator.setTarget(this.mTargetView);
-        CanvasProperty createFloat2 = CanvasProperty.createFloat(rippleSize);
+        CanvasProperty canvasPropertyCreateFloat2 = CanvasProperty.createFloat(rippleSize);
         if (isHorizontal()) {
-            this.mRightProp = createFloat2;
+            this.mRightProp = canvasPropertyCreateFloat2;
         } else {
-            this.mBottomProp = createFloat2;
+            this.mBottomProp = canvasPropertyCreateFloat2;
         }
         RenderNodeAnimator renderNodeAnimator2 = new RenderNodeAnimator(isHorizontal() ? this.mRightProp : this.mBottomProp, rippleSize);
         renderNodeAnimator2.setDuration(100L);
@@ -147,19 +145,19 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
     }
 
     public final void enterScaleAnimation() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_X, 1.0f, 0.96f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_X, 1.0f, 0.96f);
         Interpolator interpolator = FADE_IN_INTERPOLATOR;
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.setDuration(100L);
-        ofFloat.addListener(this.mAnimatorListener);
-        ofFloat.start();
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_Y, 1.0f, 0.96f);
-        ofFloat2.setInterpolator(interpolator);
-        ofFloat2.setDuration(100L);
-        ofFloat2.addListener(this.mAnimatorListener);
-        ofFloat2.start();
-        this.mRunningAnimations.add(ofFloat);
-        this.mRunningAnimations.add(ofFloat2);
+        objectAnimatorOfFloat.setInterpolator(interpolator);
+        objectAnimatorOfFloat.setDuration(100L);
+        objectAnimatorOfFloat.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat.start();
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_Y, 1.0f, 0.96f);
+        objectAnimatorOfFloat2.setInterpolator(interpolator);
+        objectAnimatorOfFloat2.setDuration(100L);
+        objectAnimatorOfFloat2.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat2.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
+        this.mRunningAnimations.add(objectAnimatorOfFloat2);
     }
 
     @Override // com.android.systemui.shared.navigationbar.KeyButtonRipple
@@ -172,24 +170,24 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
         this.mVisible = true;
         this.mGlowAlpha = this.mLastDark ? 0.1f : 0.2f;
         float f = this.GLOW_MAX_SCALE_FACTOR;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "glowScale", f, f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "glowScale", f, f);
         Interpolator interpolator = FADE_IN_INTERPOLATOR;
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.setDuration(100L);
+        objectAnimatorOfFloat.setInterpolator(interpolator);
+        objectAnimatorOfFloat.setDuration(100L);
         if (!this.isHover) {
-            ofFloat.addListener(this.mAnimatorListener);
+            objectAnimatorOfFloat.addListener(this.mAnimatorListener);
         }
-        ofFloat.start();
-        this.mRunningAnimations.add(ofFloat);
+        objectAnimatorOfFloat.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
         if (BasicRuneWrapper.NAVBAR_ENABLED) {
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, "glowAlpha", 0.0f, this.mLastDark ? 0.1f : 0.2f);
-            ofFloat2.setInterpolator(interpolator);
-            ofFloat2.setDuration(100L);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, "glowAlpha", 0.0f, this.mLastDark ? 0.1f : 0.2f);
+            objectAnimatorOfFloat2.setInterpolator(interpolator);
+            objectAnimatorOfFloat2.setDuration(100L);
             if (!this.isHover) {
-                ofFloat2.addListener(this.mAnimatorListener);
+                objectAnimatorOfFloat2.addListener(this.mAnimatorListener);
             }
-            ofFloat2.start();
-            this.mRunningAnimations.add(ofFloat2);
+            objectAnimatorOfFloat2.start();
+            this.mRunningAnimations.add(objectAnimatorOfFloat2);
         }
         if (this.isHover) {
             return;
@@ -224,19 +222,19 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
     }
 
     public final void exitScaleAnimation() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_X, 0.96f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_X, 0.96f, 1.0f);
         Interpolator interpolator = SCALE_OUT_INTERPOLATOR;
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.setDuration(100L);
-        ofFloat.addListener(this.mAnimatorListener);
-        ofFloat.start();
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_Y, 0.96f, 1.0f);
-        ofFloat2.setInterpolator(interpolator);
-        ofFloat2.setDuration(100L);
-        ofFloat2.addListener(this.mAnimatorListener);
-        ofFloat2.start();
-        this.mRunningAnimations.add(ofFloat);
-        this.mRunningAnimations.add(ofFloat2);
+        objectAnimatorOfFloat.setInterpolator(interpolator);
+        objectAnimatorOfFloat.setDuration(100L);
+        objectAnimatorOfFloat.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat.start();
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mTargetView, (Property<View, Float>) View.SCALE_Y, 0.96f, 1.0f);
+        objectAnimatorOfFloat2.setInterpolator(interpolator);
+        objectAnimatorOfFloat2.setDuration(100L);
+        objectAnimatorOfFloat2.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat2.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
+        this.mRunningAnimations.add(objectAnimatorOfFloat2);
     }
 
     @Override // com.android.systemui.shared.navigationbar.KeyButtonRipple
@@ -245,12 +243,12 @@ public final class SamsungKeyButtonRipple extends KeyButtonRipple {
             endAnimations("exitSoftware", true);
         }
         this.isHover = false;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
-        ofFloat.setInterpolator(FADE_OUT_INTERPOLATOR);
-        ofFloat.setDuration(350L);
-        ofFloat.addListener(this.mAnimatorListener);
-        ofFloat.start();
-        this.mRunningAnimations.add(ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
+        objectAnimatorOfFloat.setInterpolator(FADE_OUT_INTERPOLATOR);
+        objectAnimatorOfFloat.setDuration(350L);
+        objectAnimatorOfFloat.addListener(this.mAnimatorListener);
+        objectAnimatorOfFloat.start();
+        this.mRunningAnimations.add(objectAnimatorOfFloat);
         exitScaleAnimation();
     }
 

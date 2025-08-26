@@ -246,16 +246,16 @@ public class ResolverListAdapter extends BaseAdapter {
         if (firstNonCurrentUserResolvedComponentInfo != null) {
             initialRebuiltResolveList.remove(firstNonCurrentUserResolvedComponentInfo);
         }
-        List<ResolverActivity.ResolvedComponentInfo> performSecondaryResolveListFiltering = performSecondaryResolveListFiltering(initialRebuiltResolveList, this.mUnfilteredResolveList == initialRebuiltResolveList);
-        if (performSecondaryResolveListFiltering != null) {
-            this.mUnfilteredResolveList = performSecondaryResolveListFiltering;
+        List<ResolverActivity.ResolvedComponentInfo> listPerformSecondaryResolveListFiltering = performSecondaryResolveListFiltering(initialRebuiltResolveList, this.mUnfilteredResolveList == initialRebuiltResolveList);
+        if (listPerformSecondaryResolveListFiltering != null) {
+            this.mUnfilteredResolveList = listPerformSecondaryResolveListFiltering;
         }
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         ArrayList arrayList = new ArrayList();
         for (ResolverActivity.ResolvedComponentInfo resolvedComponentInfo : initialRebuiltResolveList) {
             String packageName = resolvedComponentInfo.name.getPackageName();
-            if (hashMap.containsKey(packageName)) {
-                ResolverActivity.ResolvedComponentInfo resolvedComponentInfo2 = (ResolverActivity.ResolvedComponentInfo) hashMap.get(packageName);
+            if (map.containsKey(packageName)) {
+                ResolverActivity.ResolvedComponentInfo resolvedComponentInfo2 = (ResolverActivity.ResolvedComponentInfo) map.get(packageName);
                 ResolveInfo resolveInfoAt = resolvedComponentInfo.getResolveInfoAt(0);
                 ResolveInfo resolveInfoAt2 = resolvedComponentInfo2.getResolveInfoAt(0);
                 if (resolveInfoAt != null && resolveInfoAt2 != null) {
@@ -266,11 +266,11 @@ public class ResolverListAdapter extends BaseAdapter {
             }
             arrayList.add(resolvedComponentInfo);
             resolvedComponentInfo.getSimilarList().add(resolvedComponentInfo);
-            hashMap.put(packageName, resolvedComponentInfo);
+            map.put(packageName, resolvedComponentInfo);
         }
-        boolean finishRebuildingListWithFilteredResults = finishRebuildingListWithFilteredResults(arrayList, z);
+        boolean zFinishRebuildingListWithFilteredResults = finishRebuildingListWithFilteredResults(arrayList, z);
         Trace.endSection();
-        return finishRebuildingListWithFilteredResults;
+        return zFinishRebuildingListWithFilteredResults;
     }
 
     List<ResolverActivity.ResolvedComponentInfo> getInitialRebuiltResolveList() {
@@ -283,8 +283,8 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     List<ResolverActivity.ResolvedComponentInfo> performPrimaryResolveListFiltering(List<ResolverActivity.ResolvedComponentInfo> list) {
-        ArrayList<ResolverActivity.ResolvedComponentInfo> filterIneligibleActivities;
-        return (this.mBaseResolveList != null || list == null || (filterIneligibleActivities = this.mResolverListController.filterIneligibleActivities(list, true)) == null) ? list : filterIneligibleActivities;
+        ArrayList<ResolverActivity.ResolvedComponentInfo> arrayListFilterIneligibleActivities;
+        return (this.mBaseResolveList != null || list == null || (arrayListFilterIneligibleActivities = this.mResolverListController.filterIneligibleActivities(list, true)) == null) ? list : arrayListFilterIneligibleActivities;
     }
 
     List<ResolverActivity.ResolvedComponentInfo> performSecondaryResolveListFiltering(List<ResolverActivity.ResolvedComponentInfo> list, boolean z) {
@@ -377,12 +377,12 @@ public class ResolverListAdapter extends BaseAdapter {
                     }
                     Intent intent = intentArr[i];
                     if (intent != null) {
-                        ActivityInfo resolveActivityInfo = (intent.getClass() == Intent.class ? intent : new Intent(intent)).resolveActivityInfo(this.mPm, 0);
-                        if (resolveActivityInfo == null) {
+                        ActivityInfo activityInfoResolveActivityInfo = (intent.getClass() == Intent.class ? intent : new Intent(intent)).resolveActivityInfo(this.mPm, 0);
+                        if (activityInfoResolveActivityInfo == null) {
                             Log.w(TAG, "No activity found for " + intent);
                         } else {
                             ResolveInfo resolveInfo = new ResolveInfo();
-                            resolveInfo.activityInfo = resolveActivityInfo;
+                            resolveInfo.activityInfo = activityInfoResolveActivityInfo;
                             UserManager userManager = (UserManager) this.mContext.getSystemService("user");
                             if (intent instanceof LabeledIntent) {
                                 LabeledIntent labeledIntent = (LabeledIntent) intent;
@@ -505,9 +505,9 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     public ResolveInfo resolveInfoForPosition(int i, boolean z) {
-        TargetInfo targetInfoForPosition = targetInfoForPosition(i, z);
-        if (targetInfoForPosition != null) {
-            return targetInfoForPosition.getResolveInfo();
+        TargetInfo targetInfoTargetInfoForPosition = targetInfoForPosition(i, z);
+        if (targetInfoTargetInfoForPosition != null) {
+            return targetInfoTargetInfoForPosition.getResolveInfo();
         }
         return null;
     }
@@ -552,7 +552,7 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     @Override // android.widget.Adapter
-    public final View getView(int i, View view, ViewGroup viewGroup) {
+    public final View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (view == null) {
             view = createView(viewGroup);
         }
@@ -561,12 +561,12 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     public final View createView(ViewGroup viewGroup) {
-        View onCreateView = onCreateView(viewGroup);
-        ViewHolder viewHolder = new ViewHolder(onCreateView);
+        View viewOnCreateView = onCreateView(viewGroup);
+        ViewHolder viewHolder = new ViewHolder(viewOnCreateView);
         semSetTextSizeByMaxFontScale(viewHolder.text, R.dimen.sem_resolver_item_text_size);
         semSetTextSizeByMaxFontScale(viewHolder.text2, R.dimen.sem_resolver_item_text_size_secondary);
-        onCreateView.setTag(viewHolder);
-        return onCreateView;
+        viewOnCreateView.setTag(viewHolder);
+        return viewOnCreateView;
     }
 
     View onCreateView(ViewGroup viewGroup) {
@@ -577,11 +577,11 @@ public class ResolverListAdapter extends BaseAdapter {
         return this.mInflater.inflate(R.layout.sem_resolver_grid_item, viewGroup, false);
     }
 
-    public final void bindView(int i, View view) {
+    public final void bindView(int i, View view) throws Resources.NotFoundException {
         onBindView(view, getItem(i), i);
     }
 
-    protected void onBindView(View view, TargetInfo targetInfo, int i) {
+    protected void onBindView(View view, TargetInfo targetInfo, int i) throws Resources.NotFoundException {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
         if (targetInfo == null) {
             viewHolder.icon.setImageDrawable(this.mContext.getDrawable(R.drawable.resolver_icon_placeholder));
@@ -631,9 +631,9 @@ public class ResolverListAdapter extends BaseAdapter {
 
     private void loadLabel(DisplayResolveInfo displayResolveInfo) {
         if (this.mLabelLoaders.get(displayResolveInfo) == null) {
-            LoadLabelTask createLoadLabelTask = createLoadLabelTask(displayResolveInfo);
-            this.mLabelLoaders.put(displayResolveInfo, createLoadLabelTask);
-            createLoadLabelTask.execute(new Void[0]);
+            LoadLabelTask loadLabelTaskCreateLoadLabelTask = createLoadLabelTask(displayResolveInfo);
+            this.mLabelLoaders.put(displayResolveInfo, loadLabelTaskCreateLoadLabelTask);
+            loadLabelTaskCreateLoadLabelTask.execute(new Void[0]);
         }
     }
 
@@ -771,7 +771,7 @@ public class ResolverListAdapter extends BaseAdapter {
             this.badge = (ImageView) view.findViewById(R.id.target_badge);
         }
 
-        public void bindLabel(CharSequence charSequence, CharSequence charSequence2, boolean z) {
+        public void bindLabel(CharSequence charSequence, CharSequence charSequence2, boolean z) throws Resources.NotFoundException {
             this.text.lambda$setTextAsync$0(charSequence);
             if (TextUtils.equals(charSequence, charSequence2)) {
                 charSequence2 = null;
@@ -787,7 +787,7 @@ public class ResolverListAdapter extends BaseAdapter {
             this.itemView.setContentDescription(null);
         }
 
-        public void updateContentDescription(String str) {
+        public void updateContentDescription(String str) throws Resources.NotFoundException {
             this.itemView.setContentDescription(str);
         }
 
@@ -817,14 +817,14 @@ public class ResolverListAdapter extends BaseAdapter {
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
         public CharSequence[] doInBackground(Void... voidArr) {
-            ResolveInfoPresentationGetter makePresentationGetter = ResolverListAdapter.this.makePresentationGetter(this.mDisplayResolveInfo.getResolveInfo());
+            ResolveInfoPresentationGetter resolveInfoPresentationGetterMakePresentationGetter = ResolverListAdapter.this.makePresentationGetter(this.mDisplayResolveInfo.getResolveInfo());
             if (ResolverListAdapter.this.mIsAudioCaptureDevice) {
                 ActivityInfo activityInfo = this.mDisplayResolveInfo.getResolveInfo().activityInfo;
                 if (PermissionChecker.checkPermissionForPreflight(ResolverListAdapter.this.mContext, Manifest.permission.RECORD_AUDIO, -1, activityInfo.applicationInfo.uid, activityInfo.packageName) != 0) {
-                    return new CharSequence[]{makePresentationGetter.getLabel(), ResolverListAdapter.this.mContext.getString(R.string.usb_device_resolve_prompt_warn)};
+                    return new CharSequence[]{resolveInfoPresentationGetterMakePresentationGetter.getLabel(), ResolverListAdapter.this.mContext.getString(R.string.usb_device_resolve_prompt_warn)};
                 }
             }
-            return new CharSequence[]{makePresentationGetter.getLabel(), makePresentationGetter.getSubLabel()};
+            return new CharSequence[]{resolveInfoPresentationGetterMakePresentationGetter.getLabel(), resolveInfoPresentationGetterMakePresentationGetter.getSubLabel()};
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
@@ -901,15 +901,15 @@ public class ResolverListAdapter extends BaseAdapter {
 
         @Override // com.android.internal.app.ResolverListAdapter.ActivityInfoPresentationGetter, com.android.internal.app.ResolverListAdapter.TargetPresentationGetter
         Drawable getIconSubstituteInternal() {
-            Drawable drawable = null;
+            Drawable drawableLoadIconFromResource = null;
             try {
                 if (this.mRi.resolvePackageName != null && this.mRi.icon != 0) {
-                    drawable = loadIconFromResource(this.mPm.getResourcesForApplication(this.mRi.resolvePackageName), this.mRi.icon);
+                    drawableLoadIconFromResource = loadIconFromResource(this.mPm.getResourcesForApplication(this.mRi.resolvePackageName), this.mRi.icon);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(ResolverListAdapter.TAG, "SUBSTITUTE_SHARE_TARGET_APP_NAME_AND_ICON permission granted but couldn't find resources for package", e);
             }
-            return drawable == null ? super.getIconSubstituteInternal() : drawable;
+            return drawableLoadIconFromResource == null ? super.getIconSubstituteInternal() : drawableLoadIconFromResource;
         }
 
         @Override // com.android.internal.app.ResolverListAdapter.ActivityInfoPresentationGetter, com.android.internal.app.ResolverListAdapter.TargetPresentationGetter
@@ -1073,11 +1073,11 @@ public class ResolverListAdapter extends BaseAdapter {
             if (drawable instanceof BitmapDrawable) {
                 return ((BitmapDrawable) drawable).getBitmap();
             }
-            Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
     }
 

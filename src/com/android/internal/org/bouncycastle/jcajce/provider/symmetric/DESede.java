@@ -87,9 +87,9 @@ public final class DESede {
                 this.uninitialised = false;
             }
             if (!this.keySizeSet) {
-                byte[] generateKey = this.engine.generateKey();
-                System.arraycopy(generateKey, 0, generateKey, 16, 8);
-                return new SecretKeySpec(generateKey, this.algName);
+                byte[] bArrGenerateKey = this.engine.generateKey();
+                System.arraycopy(bArrGenerateKey, 0, bArrGenerateKey, 16, 8);
+                return new SecretKeySpec(bArrGenerateKey, this.algName);
             }
             return new SecretKeySpec(this.engine.generateKey(), this.algName);
         }
